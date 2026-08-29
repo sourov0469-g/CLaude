@@ -63,12 +63,15 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
 .zone-rule{position:absolute;left:96px;width:1728px;height:1px;background:var(--muted);opacity:.55;}
 .slide--t1 .zone-rule{top:240px;}
 .slide--t2 .zone-rule{top:296px;}
+/* safety net: a 3-line title must never be struck through by the rule */
+.slide--t3 .zone-rule{top:352px;}
 .zone-rule--bottom{position:absolute;left:96px;top:936px;width:1728px;height:1px;
   background:var(--muted);opacity:.35;}
 
 .zone-body{position:absolute;left:96px;width:1728px;}
 .slide--t1 .zone-body{top:288px;height:648px;}
 .slide--t2 .zone-body{top:344px;height:592px;}
+.slide--t3 .zone-body{top:400px;height:536px;}
 
 .zone-foot{position:absolute;left:96px;top:984px;width:1728px;height:32px;
   font:500 20px/32px Manrope,system-ui,sans-serif;color:var(--muted);}
@@ -107,14 +110,16 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
    it is a flex column the same height as the media, with the cost block
    pushed to the bottom. This closes the ~450px lower-left void that ran on
    five consecutive slides. */
-/* t2 body zone is 592px: 504 photo + 24 gap + 64 two-line caption = 592 exact */
+/* t2 body zone is 592px: 504 photo + 24 gap + 64 two-line caption = 592 exact.
+   Three blocks distributed across the column height, so the interval between
+   them is an even rhythm rather than one large hole. */
 .a2-text{position:absolute;left:0;top:0;width:1032px;height:504px;
-  display:flex;flex-direction:column;}
+  display:flex;flex-direction:column;justify-content:space-between;}
 .a2-p{width:1032px;font:400 32px/40px Manrope,system-ui,sans-serif;color:var(--ink);
   text-wrap:pretty;}
-.a2-cost{margin-top:auto;}
+.a2-blk .a2-p{font-size:30px;line-height:40px;}
 .a2-tag{font:600 16px/24px Manrope,system-ui,sans-serif;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+  text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
 .a2-photo{position:absolute;left:1128px;top:0;width:600px;height:504px;border:1px solid var(--edge);}
 .a2-photo img,.a2-photo video{width:598px;height:502px;}
 .a2-cap{position:absolute;left:1128px;top:528px;width:600px;height:64px;
@@ -146,13 +151,13 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
 /* ==========================  A6 — TWO-UP EVIDENCE  =================== */
 /* FIX 3 — two tiles on the 2x2 column origins; both directly evidence a
    claim in the title. Every image now carries a containing edge. */
-.a6-cell{position:absolute;top:0;width:840px;}
-.a6-1{left:0;} .a6-2{left:888px;}
+.a6-cell{position:absolute;top:0;}
+.a6-1{left:0;width:1080px;} .a6-2{left:1128px;width:600px;}
 /* t2 body zone is 592px: 496 media + 24 gap + 64 two-line caption = 584 */
-.a6-media{position:absolute;top:0;width:840px;height:496px;border:1px solid var(--edge);
+.a6-media{position:absolute;top:0;left:0;right:0;height:496px;border:1px solid var(--edge);
   background:var(--panel);}
-.a6-media img,.a6-media video{width:838px;height:494px;}
-.a6-cap{position:absolute;top:520px;width:840px;height:64px;
+.a6-media img,.a6-media video{width:100%;height:494px;}
+.a6-cap{position:absolute;top:520px;left:0;right:0;height:64px;
   font:400 21px/32px Manrope,system-ui,sans-serif;color:var(--muted);text-wrap:pretty;}
 
 /* ==========================  A7 — ZERO TRIO  ========================= */
@@ -165,22 +170,25 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
 .a7-lab{position:absolute;top:256px;width:560px;height:64px;
   font:600 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);}
-.a7-sub{position:absolute;left:0;top:400px;width:1032px;
+/* spans the full three-column measure so the lower right is not left bare */
+.a7-sub{position:absolute;left:0;top:392px;width:1728px;
   font:400 32px/40px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
 
 /* ==========================  A8 — TEAM LIST + MEDIA  ================= */
 /* FIX 2/3 — the 3x2 card grid read as a photo grid whose images failed to
    load. It is now a six-row list beside the site-visit video, which is what
    the headline actually claims. */
-.a8-list{position:absolute;left:0;top:0;width:1032px;}
-.a8-row{position:absolute;left:0;width:1032px;height:88px;}
+.a8-list{position:absolute;left:0;top:0;width:1224px;}
+.a8-row{position:absolute;left:0;width:1224px;height:88px;}
 .a8-name{position:absolute;left:0;top:20px;font:600 30px/40px Fraunces,Georgia,serif;color:var(--ink);}
 .a8-id{position:absolute;right:0;top:26px;font:500 20px/32px Manrope,system-ui,sans-serif;
   color:var(--muted);letter-spacing:.04em;}
-.a8-hr{position:absolute;left:0;top:87px;width:1032px;height:1px;background:var(--muted);opacity:.22;}
-.a8-media{position:absolute;left:1128px;top:0;width:600px;height:496px;border:1px solid var(--edge);}
-.a8-media video{width:598px;height:494px;}
-.a8-cap{position:absolute;left:1128px;top:520px;width:600px;height:32px;
+.a8-hr{position:absolute;left:0;top:87px;width:1224px;height:1px;background:var(--muted);opacity:.22;}
+/* video shown at its native 380px width — upscaling phone footage is what
+   made it read as the worst asset in the deck */
+.a8-media{position:absolute;left:1348px;top:0;width:380px;height:496px;border:1px solid var(--edge);}
+.a8-media video{width:378px;height:494px;}
+.a8-cap{position:absolute;left:1348px;top:520px;width:380px;height:64px;
   font:400 21px/32px Manrope,system-ui,sans-serif;color:var(--muted);}
 
 /* ==========================  A9 — COMPARISON TABLE  ================== */

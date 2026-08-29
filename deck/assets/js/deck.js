@@ -30,8 +30,9 @@
       var t = s.querySelector(".zone-title");
       if (!t) return;
       var lines = Math.max(1, Math.round(t.scrollHeight / 56));
-      s.classList.toggle("slide--t2", lines >= 2);
-      s.classList.toggle("slide--t1", lines < 2);
+      s.classList.toggle("slide--t1", lines <= 1);
+      s.classList.toggle("slide--t2", lines === 2);
+      s.classList.toggle("slide--t3", lines >= 3);
     });
   }
 
