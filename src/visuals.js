@@ -48,28 +48,34 @@ const ptitle = function (t) { return el('p', { class: 'ptitle', text: t }); };
 
 const VIS = {};
 
-/* ---------------------------------------------------------------- photo -- */
+/* ---------------------------------------------------------------- media --
+   Every picture in the deck is the group's own, and they were taken on
+   several different phones in several different lights. The .frame wrapper
+   carries one warm grade so they read as a single set. */
 
-VIS.photo = function (v) {
-  return el('figure', { class: 'shot rv' }, [
-    el('img', { src: Media.src(v.src), alt: v.caption || '', loading: 'eager', decoding: 'async' }),
-    v.caption ? el('figcaption', { text: v.caption }) : null,
-  ]);
-};
+function buildMedia(m, small) {
+  if (!m) return null;
+  const cls = 'shot rv' + (small ? ' small' : '') + (m.fit === 'contain' ? ' contain' : '');
+  const url = m.kind === 'video' ? Media.video(m.src) : '';
 
-VIS.video = function (v) {
-  const url = Media.video(v.src);
-  if (!url) return VIS.photo({ src: v.poster, caption: v.caption });
-  const vid = el('video', {
-    src: url, poster: v.poster ? Media.src(v.poster) : null,
-    muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto',
-  });
-  vid.muted = true;
-  return el('figure', { class: 'shot phone rv' }, [
-    el('div', { class: 'phonebody' }, vid),
-    v.caption ? el('figcaption', { text: v.caption }) : null,
+  let inner;
+  if (m.kind === 'video' && url) {
+    const vid = el('video', {
+      src: url, poster: m.poster ? Media.src(m.poster) : null,
+      muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto',
+    });
+    vid.muted = true;
+    inner = vid;
+  } else {
+    const src = m.kind === 'video' ? m.poster : m.src;
+    inner = el('img', { src: Media.src(src), alt: m.caption || '', loading: 'eager', decoding: 'async' });
+  }
+
+  return el('figure', { class: cls }, [
+    el('div', { class: 'frame' }, inner),
+    m.caption ? el('figcaption', { text: m.caption }) : null,
   ]);
-};
+}
 
 /* --------------------------------------------------------------- outlets -- */
 
@@ -168,21 +174,10 @@ VIS.recs = function () {
 
 VIS.team = function () {
   /* the pan across the whole group, shot at the end of the interview */
-  const url = Media.video('team-pan-12s');
-  let head;
-  if (url) {
-    const v = el('video', { src: url, poster: Media.src('pb-team-office'), muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto' });
-    v.muted = true;
-    head = el('figure', { class: 'shot phone' }, [
-      el('div', { class: 'phonebody' }, v),
-      el('figcaption', { text: 'Group NEXIX at PizzaBurg head office' }),
-    ]);
-  } else {
-    head = el('figure', { class: 'shot' }, [
-      el('img', { src: Media.src('pb-team-office'), alt: 'Group NEXIX at PizzaBurg head office' }),
-      el('figcaption', { text: 'Group NEXIX at PizzaBurg head office' }),
-    ]);
-  }
+  const head = buildMedia({
+    kind: 'video', src: 'team-pan-12s', poster: 'pb-team-office',
+    caption: 'Group NEXIX at PizzaBurg head office',
+  });
   return el('div', { class: 'teamwrap panel rv' }, [
     head,
     el('ul', { class: 'teamlist' }, PRESENTERS.map(function (p) {

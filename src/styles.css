@@ -157,25 +157,34 @@ body { overflow: hidden; }
 
 .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 54ch; min-width: 0; }
 
-/* the aside sits low on the right, so the pizza owns the upper right */
+/* the right column: their photograph leads, the panel supports it, and the
+   bench shows above and around both */
 .col-aside {
-  grid-column: 2; grid-row: 2; align-self: end; justify-self: end;
-  width: 100%; max-width: 520px; min-width: 0;
-  padding-bottom: clamp(2px, 1vh, 12px);
+  grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
+  width: 100%; max-width: 540px; min-width: 0;
+  display: grid; gap: clamp(10px, 1.4vh, 18px); align-content: center;
+  padding-bottom: clamp(2px, 1vh, 10px);
 }
+.col-aside.stacked { align-content: center; }
+.col-aside .panel { align-self: start; }
 
 /* cover and closing centre everything and let the bench sit behind */
-.lay-cover .slide, .lay-closing .slide {
+.lay-cover .slide {
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr) auto;
   justify-items: start; align-content: center;
 }
-.lay-cover .col-text, .lay-closing .col-text { grid-column: 1; max-width: 30ch; align-self: center; }
-.lay-closing .col-text { max-width: 34ch; }
-.lay-cover .col-aside, .lay-closing .col-aside {
+.lay-cover .col-text { grid-column: 1; max-width: 30ch; align-self: center; }
+.lay-cover .col-aside {
   grid-column: 1; grid-row: 2; justify-self: end; max-width: min(460px, 40vw);
 }
-.lay-closing .col-aside { max-width: min(560px, 46vw); }
+/* the closing reads as a farewell on the left and the group on the right */
+.lay-closing .slide { grid-template-columns: minmax(0, 46%) minmax(0, 54%); }
+.lay-closing .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 30ch; }
+.lay-closing .col-aside {
+  grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
+  max-width: min(600px, 47vw);
+}
 
 /* --------------------------------------------------------------------- type */
 

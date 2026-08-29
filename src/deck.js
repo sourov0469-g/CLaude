@@ -83,8 +83,16 @@ const Deck = (function () {
       })));
     }
 
-    const asideNode = buildAside(s.aside);
-    const aside = el('div', { class: 'col-aside' }, asideNode);
+    /* the right column is a stack: their photograph on top, the panel under
+       it, so the picture leads and the data supports it */
+    const stack = [];
+    const media = buildMedia(s.photo);
+    if (media) stack.push(media);
+    const panelNode = buildAside(s.aside);
+    if (panelNode) stack.push(panelNode);
+    const second = buildMedia(s.photo2, true);
+    if (second) stack.push(second);
+    const aside = el('div', { class: 'col-aside' + (stack.length > 1 ? ' stacked' : '') }, stack);
 
     const node = el('section', {
       class: 'slide', id: 'sl-' + s.id, 'aria-label': s.title, 'data-i': i, hidden: 'hidden',
@@ -283,8 +291,8 @@ const Deck = (function () {
     const ahead = SLIDES[idx + 1];
     if (ahead) {
       const names = [];
-      if (ahead.aside && ahead.aside.src) names.push(ahead.aside.src);
-      if (ahead.aside && ahead.aside.poster) names.push(ahead.aside.poster);
+      if (ahead.photo) { names.push(ahead.photo.src); if (ahead.photo.poster) names.push(ahead.photo.poster); }
+      if (ahead.photo2) names.push(ahead.photo2.src);
       if (BACKDROPS[ahead.id]) names.push(BACKDROPS[ahead.id]);
       Media.preload(names);
     }

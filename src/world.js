@@ -299,6 +299,42 @@ const World = (function () {
     return tex(c);
   }
 
+  /* The backlit roundel that hangs in a PizzaBurg outlet: BEWARE ·
+     PIZZABURG · IS ADDICTIVE! Drawn once, then lit from behind. */
+  function roundelTexture() {
+    const c = canvas(512), g = c.getContext('2d');
+    g.clearRect(0, 0, 512, 512);
+    const cx = 256, cy = 256;
+
+    g.fillStyle = '#c62a1c';
+    g.beginPath(); g.arc(cx, cy, 246, 0, 7); g.fill();
+    g.globalCompositeOperation = 'destination-out';
+    g.beginPath(); g.arc(cx, cy, 198, 0, 7); g.fill();
+    g.globalCompositeOperation = 'source-over';
+
+    /* the banner across the middle */
+    g.fillStyle = '#c62a1c';
+    g.fillRect(24, 214, 464, 84);
+
+    /* the dashes in the ring */
+    g.strokeStyle = '#c62a1c'; g.lineWidth = 30; g.lineCap = 'butt';
+    for (let i = 0; i < 2; i++) {
+      const base = i ? Math.PI * 0.16 : Math.PI * 1.16;
+      g.beginPath(); g.arc(cx, cy, 222, base, base + Math.PI * 0.2); g.stroke();
+      g.beginPath(); g.arc(cx, cy, 222, base + Math.PI * 0.46, base + Math.PI * 0.66); g.stroke();
+    }
+
+    g.fillStyle = '#fdf6e6';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '800 74px Poppins, Inter, system-ui, sans-serif';
+    g.fillText('PIZZABURG', cx, cy + 4);
+    g.fillStyle = '#c62a1c';
+    g.font = '700 40px Inter, system-ui, sans-serif';
+    g.fillText('BEWARE', cx, cy - 150);
+    g.fillText('IS ADDICTIVE!', cx, cy + 158);
+    return tex(c);
+  }
+
   function moteTexture() {
     const c = canvas(64), g = c.getContext('2d');
     const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
@@ -330,6 +366,7 @@ const World = (function () {
     scene.add(top);
     scene.add(box(78, 9, 34, 0xe6dbc7, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
     scene.add(box(80, 0.4, 0.7, STEEL, { pos: [-8, 0.15, 18.1], rough: 0.26, metal: 0.7 }));
+    scene.add(box(80, 1.5, 0.5, BRAND, { pos: [-8, -0.85, 18.3], rough: 0.6 }));
 
     /* the tiled backsplash and a shelf of jars */
     const wall = new T.Mesh(new T.PlaneGeometry(104, 30), mat(0xffffff, { rough: 0.5, map: tileTexture() }));
@@ -353,6 +390,35 @@ const World = (function () {
       j.position.set(x, 12.45, -18.8);
       scene.add(j);
     }
+
+    /* the roundel, backlit, exactly where it hangs in their outlet */
+    const roundel = new T.Mesh(
+      new T.PlaneGeometry(10.5, 10.5),
+      new T.MeshStandardMaterial({
+        map: roundelTexture(), transparent: true,
+        emissive: 0xff5a3a, emissiveIntensity: 0.55, roughness: 0.5,
+      })
+    );
+    roundel.position.set(-26.5, 19.4, -21.2);
+    scene.add(roundel);
+    /* the halo it throws on the tiles behind it */
+    const halo = new T.Mesh(
+      new T.CircleGeometry(8.0, 40),
+      new T.MeshBasicMaterial({ color: 0xffb27a, transparent: true, opacity: 0.3, depthWrite: false })
+    );
+    halo.position.set(-26.5, 19.4, -21.35);
+    scene.add(halo);
+    const roundelLight = new T.PointLight(0xff7a48, 16, 46, 2);
+    roundelLight.position.set(-26.5, 19.4, -16);
+    scene.add(roundelLight);
+
+    /* the wordmark, on a panel beside it */
+    const mark = new T.Mesh(
+      new T.PlaneGeometry(12.5, 6.2),
+      mat(0xffffff, { rough: 0.7, map: wordmarkTexture('#f7f1e3', true) })
+    );
+    mark.position.set(2.5, 20.6, -21.2);
+    scene.add(mark);
 
     /* a menu board, in the brand's own red and cream */
     const board = box(15, 9, 0.5, CREAM, { pos: [-44, 15, -21], rough: 0.85 });
@@ -511,6 +577,20 @@ const World = (function () {
     scene.add(cup);
     const band = cyl(1.35, 1.24, 1.1, 26, BRAND, { pos: [12, 1.4, -12], rough: 0.5 });
     scene.add(band, contact(12, -12, 2.4, 0.34));
+
+    /* an apron on a hook by the oven */
+    const apron = box(5.4, 7.4, 0.3, BRAND, { pos: [-45, 13, -20.6], rot: [0.04, 0, 0.05], rough: 0.86 });
+    scene.add(apron);
+    scene.add(cyl(0.22, 0.22, 1.2, 8, 0x8b8378, { pos: [-45, 17.2, -20.2], rot: [Math.PI / 2, 0, 0] }));
+
+    /* a red stool tucked under the counter lip */
+    const stool = new T.Group();
+    stool.add(cyl(2.2, 2.0, 0.7, 24, BRAND, { pos: [0, 6.2, 0], rough: 0.6 }));
+    [[-1.3, -1.3], [1.3, -1.3], [-1.3, 1.3], [1.3, 1.3]].forEach(function (a) {
+      stool.add(cyl(0.18, 0.24, 6, 8, 0x6f665c, { pos: [a[0], 3, a[1]], rough: 0.5, metal: 0.4 }));
+    });
+    stool.position.set(6, -8, 15);
+    scene.add(stool);
 
     /* a rolling pin, resting where the dough gets worked */
     const pinProfile = [
@@ -808,7 +888,7 @@ const World = (function () {
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.94;
+    renderer.toneMappingExposure = 1.0;
     renderer.outputColorSpace = T.SRGBColorSpace;
 
     scene = new T.Scene();

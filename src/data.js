@@ -47,6 +47,7 @@ const SLIDES = [
   },
   {
     id: 'intro', by: 'ratul', layout: 'split', stage: 'dough',
+    photo: { src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
     kicker: 'Introduction & Objectives',
     title: 'About the company, and our objectives',
     lede: 'A local chain competing with foreign brands in the same cities, growing fast enough for the strain to show.',
@@ -61,13 +62,13 @@ const SLIDES = [
       'Compare those practices with the **Bangladesh Labour Act 2006**',
       'Identify strengths, concerns and practical recommendations',
     ],
-    aside: { kind: 'photo', src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
     notes: 'PizzaBurg runs twenty-two outlets, employs close to a thousand people and sells over four thousand pizzas a day. Our aim was to examine how it manages those people, to compare what we found against the Bangladesh Labour Act of 2006, and to end with practical recommendations. Aditto will explain how we collected the information.',
   },
 
   /* ===== ADITTO — slides 3 and 4 ========================================= */
   {
     id: 'method', by: 'aditto', layout: 'split', stage: 'stretch', handover: true,
+    photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
     kicker: 'Methodology',
     title: 'How we collected our information',
     lede: 'A qualitative case study of a single company, built on one interview at PizzaBurg head office.',
@@ -79,12 +80,12 @@ const SLIDES = [
       'Prepared questions with follow-ups; handwritten notes, at his request',
       'Secondary sources used only for background and the law',
     ],
-    aside: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
     note: { tone: 'concern', title: 'Limitation', body: 'One interviewee, one meeting. No documents seen, no employees interviewed. Where we say something was not evidenced, we mean it was not described to us — not that it does not exist.' },
     notes: 'This is a qualitative case study of one company, and our primary data is a single face-to-face interview with Mr. Ranjan Datta, the General Manager of Human Resource, on the twenty-sixth of August at their head office in Dhaka. We used prepared questions but allowed ourselves follow-ups, and we took handwritten notes because he preferred that to a recording. One limitation, honestly, up front: one interviewee, one meeting, no documents, no employees. So where we say something was not evidenced, we mean it was not described to us.',
   },
   {
     id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
+    photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
     lede: 'Each outlet gets a set headcount, and it is not adjusted for how busy a shop is.',
@@ -103,6 +104,8 @@ const SLIDES = [
   /* ===== LIYA — slides 5 and 6 =========================================== */
   {
     id: 'recruit', by: 'liya', layout: 'split', stage: 'sauce', handover: true,
+    photo: { src: 'pb-dough-hands', caption: 'Candidates demonstrate the actual task' },
+    photo2: { src: 'pb-hiring-poster', fit: 'contain', caption: 'PizzaBurg also advertises roles publicly' },
     kicker: 'Recruitment & Selection',
     title: 'Hired in one day',
     lede: 'The moment a cook leaves the station is empty, so speed here is not carelessness. It is the only option.',
@@ -113,13 +116,13 @@ const SLIDES = [
       'Candidates may be asked to **demonstrate their ability** on the job',
       'How candidates are **sourced** was not described to us',
     ],
-    aside: { kind: 'photo', src: 'pb-hiring-poster', caption: 'PizzaBurg advertises roles publicly' },
     note: { tone: 'strength', title: 'Strength', body: 'Better job-fit assessment. Watching a cook actually cook predicts performance far more reliably than an interview or a certificate.' },
     note2: { tone: 'rec', title: 'Recommendation', body: 'Standardise the test with a one-page scoring sheet — the tasks, what to look for, and the minimum score that gets an offer — so all 22 outlets hire to the same standard.' },
     notes: 'Hiring for kitchen and floor staff is done in one day, from interview to decision. Practical experience is checked, and candidates may be asked to demonstrate their ability on the job. That last part is the strongest thing in the system — watching a cook actually cook predicts performance far more reliably than an interview or a certificate. Our recommendation is to standardise it with a one-page scoring sheet, so all twenty-two outlets hire to the same standard.',
   },
   {
     id: 'turnover', by: 'liya', layout: 'split', stage: 'cheese',
+    photo: { src: 'pb-dhaka-street', caption: 'Dhaka — where a cook can walk to another job' },
     kicker: 'Turnover & Resignation',
     title: 'Turnover and the notice period',
     lede: 'Two words of answer, and a rule that quietly matches the statute.',
@@ -137,6 +140,7 @@ const SLIDES = [
   /* ===== SOUVO — slides 7 and 8 ========================================== */
   {
     id: 'welfare', by: 'souvo', layout: 'split', stage: 'toppings', handover: true,
+    photo: { src: 'pb-pizzas-table-a', caption: 'Food support is provided on shift' },
     kicker: 'Employee Welfare',
     title: 'What employees receive',
     lede: 'Housing and food are the two biggest costs a low-paid worker in Dhaka carries. PizzaBurg helps with both.',
@@ -151,6 +155,7 @@ const SLIDES = [
   },
   {
     id: 'performance', by: 'souvo', layout: 'split', stage: 'peel',
+    photo: { src: 'pb-interview-e', caption: 'Asking how reviews are used' },
     kicker: 'Performance & Training',
     title: 'Reviewed monthly, linked to training',
     lede: 'Most companies this size review once a year. Monthly means a problem shows up in weeks.',
@@ -168,6 +173,7 @@ const SLIDES = [
   /* ===== SOUROV — slides 9 and 10 ======================================== */
   {
     id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
+    photo: { src: 'pb-interview-b', caption: 'Measured against the Labour Act 2006' },
     kicker: 'Discipline & Termination',
     title: 'Grounds for termination',
     lede: 'The grounds are fair and broadly match the Act. The procedure behind them is what is missing.',
@@ -178,13 +184,13 @@ const SLIDES = [
       'Other **serious misconduct**',
       'No warning or inquiry procedure was described to us',
     ],
-    aside: { kind: 'photo', src: 'pb-justice', caption: 'Measured against the Labour Act 2006' },
     note: { tone: 'strength', title: 'Strength', body: 'Clear standards, broadly matching the misconduct list in §23(4). Naming sexual harassment explicitly is uncommon in this trade.' },
     note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — allegations in writing, at least 7 days to explain, a hearing, a finding on enquiry — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
     notes: 'An employee can be dismissed for violating rules and regulations, for sexual harassment, for dishonesty, and for other serious misconduct. Those grounds are fair, they broadly match the misconduct list in Section twenty-three, and naming sexual harassment explicitly is uncommon in this trade. But no warning or inquiry procedure was described. Section twenty-four requires the allegations in writing, at least seven days to explain, a hearing, and a finding on enquiry. And the 2009 High Court directive requires every workplace to have a harassment complaint committee with outside members. Those two are the most urgent things in our report, and both are close to free.',
   },
   {
     id: 'findings', by: 'sourov', layout: 'split', stage: 'bake',
+    photo: { src: 'pb-file-stack', caption: 'The records are what is missing' },
     cam: { p: [-1, 13, 37], t: [-31, 4.8, 3], fov: 43 },
     kicker: 'Major Findings',
     title: 'Major findings',
@@ -214,10 +220,12 @@ const SLIDES = [
       'The most urgent item is also **one of the cheapest**',
       'Central records come early because **everything else needs somewhere to live**',
     ],
+    note: { tone: 'rec', title: 'What it costs', body: 'Nothing on the first list needs a budget line. A committee, a written procedure and one file per employee are decisions, not spending.' },
     notes: 'Three things we would do first, and they are urgent and close to free. Establish the sexual harassment complaint committee with outside members. Write down the Section twenty-four disciplinary procedure and issue it to every outlet manager. And keep one central record per employee. After that: add a scoring sheet to the practical test, use a one-page monthly review form, count turnover monthly and use the sixty-day notice for handover and exit interviews, review each outlet’s headcount twice a year, explain welfare eligibility and open a promotion ladder, and add induction and supervisor training plus a yearly Labour Act check.',
   },
   {
     id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
+    photo: { src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
     kicker: 'Conclusion',
     title: 'HRM built around operational continuity',
     lede: 'A business the owner watched himself ran on judgement. A thousand workers in ten towns cannot.',
@@ -228,7 +236,6 @@ const SLIDES = [
       'In every area we asked about, the **method was sound and the paperwork was missing**',
       'The next task is to **write the system down** without losing the speed',
     ],
-    aside: { kind: 'photo', src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
     notes: 'Our conclusion is that PizzaBurg’s HRM is built around operational continuity. Every practice serves one goal — keeping twenty-two outlets open and running. Fixed staffing creates consistency. The notice rule turns a sudden loss into a planned one. Practical selection supports job fit, and monthly reviews catch problems in weeks rather than months. In every area we asked about, the method was sound and the paperwork was missing. The next task is to write the system down without losing the speed that got them here.',
   },
   {

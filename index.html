@@ -166,25 +166,34 @@ body { overflow: hidden; }
 
 .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 54ch; min-width: 0; }
 
-/* the aside sits low on the right, so the pizza owns the upper right */
+/* the right column: their photograph leads, the panel supports it, and the
+   bench shows above and around both */
 .col-aside {
-  grid-column: 2; grid-row: 2; align-self: end; justify-self: end;
-  width: 100%; max-width: 520px; min-width: 0;
-  padding-bottom: clamp(2px, 1vh, 12px);
+  grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
+  width: 100%; max-width: 540px; min-width: 0;
+  display: grid; gap: clamp(10px, 1.4vh, 18px); align-content: center;
+  padding-bottom: clamp(2px, 1vh, 10px);
 }
+.col-aside.stacked { align-content: center; }
+.col-aside .panel { align-self: start; }
 
 /* cover and closing centre everything and let the bench sit behind */
-.lay-cover .slide, .lay-closing .slide {
+.lay-cover .slide {
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr) auto;
   justify-items: start; align-content: center;
 }
-.lay-cover .col-text, .lay-closing .col-text { grid-column: 1; max-width: 30ch; align-self: center; }
-.lay-closing .col-text { max-width: 34ch; }
-.lay-cover .col-aside, .lay-closing .col-aside {
+.lay-cover .col-text { grid-column: 1; max-width: 30ch; align-self: center; }
+.lay-cover .col-aside {
   grid-column: 1; grid-row: 2; justify-self: end; max-width: min(460px, 40vw);
 }
-.lay-closing .col-aside { max-width: min(560px, 46vw); }
+/* the closing reads as a farewell on the left and the group on the right */
+.lay-closing .slide { grid-template-columns: minmax(0, 46%) minmax(0, 54%); }
+.lay-closing .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 30ch; }
+.lay-closing .col-aside {
+  grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
+  max-width: min(600px, 47vw);
+}
 
 /* --------------------------------------------------------------------- type */
 
@@ -445,24 +454,57 @@ html[data-contrast="high"] .rgroup { background: rgba(255,254,251,0.97); }
   font-size: 11px; color: var(--ink-4); font-style: italic;
 }
 
-/* --- photography ---------------------------------------------------------- */
-figure.shot { margin: 0; }
-figure.shot img, figure.shot video { display: block; width: 100%; height: auto; }
-figure.shot > img {
-  border-radius: 14px; max-height: 34vh; object-fit: cover;
-  box-shadow: 0 26px 54px -30px rgba(58,38,20,0.8);
+/* --- photography ----------------------------------------------------------
+   The group shot these on several phones in several lights. One grade and one
+   warm overlay on .frame make them read as a single set beside the cream. */
+figure.shot { margin: 0; display: grid; gap: 9px; }
+
+.frame {
+  position: relative; overflow: hidden;
+  border-radius: 16px;
+  background: #efe6d6;
+  box-shadow:
+    0 28px 56px -32px rgba(52, 32, 16, 0.85),
+    0 0 0 1px rgba(120, 92, 60, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  aspect-ratio: 16 / 10;
 }
+.frame img, .frame video {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 42%;
+  filter: saturate(1.08) contrast(1.06) brightness(1.03);
+}
+figure.shot.contain .frame { background: #f7f1e4; }
+figure.shot.contain .frame img { object-fit: contain; }
+
+/* the grade: a warm wash, a cool lift in the shadows, and a soft edge */
+.frame::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(255, 236, 200, 0.26) 0%, rgba(255, 236, 200, 0) 62%),
+    linear-gradient(184deg, rgba(216, 64, 47, 0.06) 0%, rgba(58, 34, 14, 0.16) 100%);
+  mix-blend-mode: soft-light;
+}
+.frame::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  box-shadow: inset 0 0 46px rgba(60, 36, 16, 0.22);
+  border-radius: 16px;
+}
+
 figure.shot figcaption {
-  margin-top: 10px; font-size: 10.5px; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--ink-4); font-weight: 600;
+  font-size: 10.5px; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--ink-4); font-weight: 620;
 }
-figure.shot.phone { text-align: center; }
-.phonebody {
-  display: inline-block; padding: 8px; border-radius: 24px;
-  background: linear-gradient(160deg, #fbf6ec, #d9cdb9);
-  box-shadow: 0 28px 56px -30px rgba(58,38,20,0.85), inset 0 0 0 1px rgba(0,0,0,0.06);
-}
-.phonebody video { border-radius: 17px; max-height: 30vh; width: auto; }
+figure.shot.small .frame { aspect-ratio: 21 / 9; border-radius: 13px; }
+/* a photograph sharing the column with a panel takes a cinematic band, so
+   neither of them ends up squeezed */
+.col-aside.stacked figure.shot .frame { aspect-ratio: 2 / 1; }
+.col-aside.stacked figure.shot.small .frame { aspect-ratio: 24 / 9; }
+figure.shot.small figcaption { font-size: 9.5px; }
+
+/* the portrait clips keep their shape inside the same frame language */
+figure.shot .frame:has(video) { aspect-ratio: 16 / 10; }
+figure.shot .frame video { object-position: center 34%; }
 
 /* --- outlets -------------------------------------------------------------- */
 .dots { display: grid; grid-template-columns: repeat(11, 1fr); gap: 8px; }
@@ -532,7 +574,7 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
 .lcol.no li::before { content: '\25CB'; color: var(--red); }
 
 /* --- recommendations ------------------------------------------------------ */
-.recs { display: grid; gap: 10px; align-items: start; }
+.recs { display: grid; gap: 12px; align-items: start; }
 .rgroup {
   padding: 16px 17px; border-radius: 14px; border: 1px solid var(--rule);
   background: var(--card); box-shadow: var(--lift);
@@ -548,9 +590,9 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
   padding: 4px 9px; border-radius: 999px; background: var(--red); color: #fff;
 }
 .pill.alt { background: var(--ink-4); }
-.rgroup ol { margin: 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 6px; }
+.rgroup ol { margin: 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 8px; }
 .rgroup li {
-  font-size: clamp(10.5px, calc(0.5 * var(--u) + 5.5px), 13px); line-height: 1.34; color: var(--ink-2);
+  font-size: clamp(11px, calc(0.55 * var(--u) + 5.5px), 14px); line-height: 1.38; color: var(--ink-2);
   padding-left: 20px; position: relative;
 }
 .rgroup li::before {
@@ -562,9 +604,8 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
 .rgroup li b { color: var(--ink); font-weight: 650; }
 
 /* --- team ----------------------------------------------------------------- */
-.teamwrap { display: grid; gap: 14px; justify-items: center; }
-.teamwrap figure.shot > img { max-height: 30vh; width: auto; border-radius: 12px; }
-.teamwrap .phonebody video { max-height: 26vh; }
+.teamwrap { display: grid; gap: 13px; }
+.teamwrap .frame { aspect-ratio: 16 / 9; }
 .teamlist {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(3, auto); gap: 7px 30px; justify-content: center;
@@ -756,6 +797,7 @@ const SLIDES = [
   },
   {
     id: 'intro', by: 'ratul', layout: 'split', stage: 'dough',
+    photo: { src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
     kicker: 'Introduction & Objectives',
     title: 'About the company, and our objectives',
     lede: 'A local chain competing with foreign brands in the same cities, growing fast enough for the strain to show.',
@@ -770,13 +812,13 @@ const SLIDES = [
       'Compare those practices with the **Bangladesh Labour Act 2006**',
       'Identify strengths, concerns and practical recommendations',
     ],
-    aside: { kind: 'photo', src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
     notes: 'PizzaBurg runs twenty-two outlets, employs close to a thousand people and sells over four thousand pizzas a day. Our aim was to examine how it manages those people, to compare what we found against the Bangladesh Labour Act of 2006, and to end with practical recommendations. Aditto will explain how we collected the information.',
   },
 
   /* ===== ADITTO — slides 3 and 4 ========================================= */
   {
     id: 'method', by: 'aditto', layout: 'split', stage: 'stretch', handover: true,
+    photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
     kicker: 'Methodology',
     title: 'How we collected our information',
     lede: 'A qualitative case study of a single company, built on one interview at PizzaBurg head office.',
@@ -788,12 +830,12 @@ const SLIDES = [
       'Prepared questions with follow-ups; handwritten notes, at his request',
       'Secondary sources used only for background and the law',
     ],
-    aside: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
     note: { tone: 'concern', title: 'Limitation', body: 'One interviewee, one meeting. No documents seen, no employees interviewed. Where we say something was not evidenced, we mean it was not described to us — not that it does not exist.' },
     notes: 'This is a qualitative case study of one company, and our primary data is a single face-to-face interview with Mr. Ranjan Datta, the General Manager of Human Resource, on the twenty-sixth of August at their head office in Dhaka. We used prepared questions but allowed ourselves follow-ups, and we took handwritten notes because he preferred that to a recording. One limitation, honestly, up front: one interviewee, one meeting, no documents, no employees. So where we say something was not evidenced, we mean it was not described to us.',
   },
   {
     id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
+    photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
     lede: 'Each outlet gets a set headcount, and it is not adjusted for how busy a shop is.',
@@ -812,6 +854,8 @@ const SLIDES = [
   /* ===== LIYA — slides 5 and 6 =========================================== */
   {
     id: 'recruit', by: 'liya', layout: 'split', stage: 'sauce', handover: true,
+    photo: { src: 'pb-dough-hands', caption: 'Candidates demonstrate the actual task' },
+    photo2: { src: 'pb-hiring-poster', fit: 'contain', caption: 'PizzaBurg also advertises roles publicly' },
     kicker: 'Recruitment & Selection',
     title: 'Hired in one day',
     lede: 'The moment a cook leaves the station is empty, so speed here is not carelessness. It is the only option.',
@@ -822,13 +866,13 @@ const SLIDES = [
       'Candidates may be asked to **demonstrate their ability** on the job',
       'How candidates are **sourced** was not described to us',
     ],
-    aside: { kind: 'photo', src: 'pb-hiring-poster', caption: 'PizzaBurg advertises roles publicly' },
     note: { tone: 'strength', title: 'Strength', body: 'Better job-fit assessment. Watching a cook actually cook predicts performance far more reliably than an interview or a certificate.' },
     note2: { tone: 'rec', title: 'Recommendation', body: 'Standardise the test with a one-page scoring sheet — the tasks, what to look for, and the minimum score that gets an offer — so all 22 outlets hire to the same standard.' },
     notes: 'Hiring for kitchen and floor staff is done in one day, from interview to decision. Practical experience is checked, and candidates may be asked to demonstrate their ability on the job. That last part is the strongest thing in the system — watching a cook actually cook predicts performance far more reliably than an interview or a certificate. Our recommendation is to standardise it with a one-page scoring sheet, so all twenty-two outlets hire to the same standard.',
   },
   {
     id: 'turnover', by: 'liya', layout: 'split', stage: 'cheese',
+    photo: { src: 'pb-dhaka-street', caption: 'Dhaka — where a cook can walk to another job' },
     kicker: 'Turnover & Resignation',
     title: 'Turnover and the notice period',
     lede: 'Two words of answer, and a rule that quietly matches the statute.',
@@ -846,6 +890,7 @@ const SLIDES = [
   /* ===== SOUVO — slides 7 and 8 ========================================== */
   {
     id: 'welfare', by: 'souvo', layout: 'split', stage: 'toppings', handover: true,
+    photo: { src: 'pb-pizzas-table-a', caption: 'Food support is provided on shift' },
     kicker: 'Employee Welfare',
     title: 'What employees receive',
     lede: 'Housing and food are the two biggest costs a low-paid worker in Dhaka carries. PizzaBurg helps with both.',
@@ -860,6 +905,7 @@ const SLIDES = [
   },
   {
     id: 'performance', by: 'souvo', layout: 'split', stage: 'peel',
+    photo: { src: 'pb-interview-e', caption: 'Asking how reviews are used' },
     kicker: 'Performance & Training',
     title: 'Reviewed monthly, linked to training',
     lede: 'Most companies this size review once a year. Monthly means a problem shows up in weeks.',
@@ -877,6 +923,7 @@ const SLIDES = [
   /* ===== SOUROV — slides 9 and 10 ======================================== */
   {
     id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
+    photo: { src: 'pb-interview-b', caption: 'Measured against the Labour Act 2006' },
     kicker: 'Discipline & Termination',
     title: 'Grounds for termination',
     lede: 'The grounds are fair and broadly match the Act. The procedure behind them is what is missing.',
@@ -887,13 +934,13 @@ const SLIDES = [
       'Other **serious misconduct**',
       'No warning or inquiry procedure was described to us',
     ],
-    aside: { kind: 'photo', src: 'pb-justice', caption: 'Measured against the Labour Act 2006' },
     note: { tone: 'strength', title: 'Strength', body: 'Clear standards, broadly matching the misconduct list in §23(4). Naming sexual harassment explicitly is uncommon in this trade.' },
     note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — allegations in writing, at least 7 days to explain, a hearing, a finding on enquiry — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
     notes: 'An employee can be dismissed for violating rules and regulations, for sexual harassment, for dishonesty, and for other serious misconduct. Those grounds are fair, they broadly match the misconduct list in Section twenty-three, and naming sexual harassment explicitly is uncommon in this trade. But no warning or inquiry procedure was described. Section twenty-four requires the allegations in writing, at least seven days to explain, a hearing, and a finding on enquiry. And the 2009 High Court directive requires every workplace to have a harassment complaint committee with outside members. Those two are the most urgent things in our report, and both are close to free.',
   },
   {
     id: 'findings', by: 'sourov', layout: 'split', stage: 'bake',
+    photo: { src: 'pb-file-stack', caption: 'The records are what is missing' },
     cam: { p: [-1, 13, 37], t: [-31, 4.8, 3], fov: 43 },
     kicker: 'Major Findings',
     title: 'Major findings',
@@ -923,10 +970,12 @@ const SLIDES = [
       'The most urgent item is also **one of the cheapest**',
       'Central records come early because **everything else needs somewhere to live**',
     ],
+    note: { tone: 'rec', title: 'What it costs', body: 'Nothing on the first list needs a budget line. A committee, a written procedure and one file per employee are decisions, not spending.' },
     notes: 'Three things we would do first, and they are urgent and close to free. Establish the sexual harassment complaint committee with outside members. Write down the Section twenty-four disciplinary procedure and issue it to every outlet manager. And keep one central record per employee. After that: add a scoring sheet to the practical test, use a one-page monthly review form, count turnover monthly and use the sixty-day notice for handover and exit interviews, review each outlet’s headcount twice a year, explain welfare eligibility and open a promotion ladder, and add induction and supervisor training plus a yearly Labour Act check.',
   },
   {
     id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
+    photo: { src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
     kicker: 'Conclusion',
     title: 'HRM built around operational continuity',
     lede: 'A business the owner watched himself ran on judgement. A thousand workers in ten towns cannot.',
@@ -937,7 +986,6 @@ const SLIDES = [
       'In every area we asked about, the **method was sound and the paperwork was missing**',
       'The next task is to **write the system down** without losing the speed',
     ],
-    aside: { kind: 'photo', src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
     notes: 'Our conclusion is that PizzaBurg’s HRM is built around operational continuity. Every practice serves one goal — keeping twenty-two outlets open and running. Fixed staffing creates consistency. The notice rule turns a sudden loss into a planned one. Practical selection supports job fit, and monthly reviews catch problems in weeks rather than months. In every area we asked about, the method was sound and the paperwork was missing. The next task is to write the system down without losing the speed that got them here.',
   },
   {
@@ -1104,28 +1152,34 @@ const ptitle = function (t) { return el('p', { class: 'ptitle', text: t }); };
 
 const VIS = {};
 
-/* ---------------------------------------------------------------- photo -- */
+/* ---------------------------------------------------------------- media --
+   Every picture in the deck is the group's own, and they were taken on
+   several different phones in several different lights. The .frame wrapper
+   carries one warm grade so they read as a single set. */
 
-VIS.photo = function (v) {
-  return el('figure', { class: 'shot rv' }, [
-    el('img', { src: Media.src(v.src), alt: v.caption || '', loading: 'eager', decoding: 'async' }),
-    v.caption ? el('figcaption', { text: v.caption }) : null,
-  ]);
-};
+function buildMedia(m, small) {
+  if (!m) return null;
+  const cls = 'shot rv' + (small ? ' small' : '') + (m.fit === 'contain' ? ' contain' : '');
+  const url = m.kind === 'video' ? Media.video(m.src) : '';
 
-VIS.video = function (v) {
-  const url = Media.video(v.src);
-  if (!url) return VIS.photo({ src: v.poster, caption: v.caption });
-  const vid = el('video', {
-    src: url, poster: v.poster ? Media.src(v.poster) : null,
-    muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto',
-  });
-  vid.muted = true;
-  return el('figure', { class: 'shot phone rv' }, [
-    el('div', { class: 'phonebody' }, vid),
-    v.caption ? el('figcaption', { text: v.caption }) : null,
+  let inner;
+  if (m.kind === 'video' && url) {
+    const vid = el('video', {
+      src: url, poster: m.poster ? Media.src(m.poster) : null,
+      muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto',
+    });
+    vid.muted = true;
+    inner = vid;
+  } else {
+    const src = m.kind === 'video' ? m.poster : m.src;
+    inner = el('img', { src: Media.src(src), alt: m.caption || '', loading: 'eager', decoding: 'async' });
+  }
+
+  return el('figure', { class: cls }, [
+    el('div', { class: 'frame' }, inner),
+    m.caption ? el('figcaption', { text: m.caption }) : null,
   ]);
-};
+}
 
 /* --------------------------------------------------------------- outlets -- */
 
@@ -1224,21 +1278,10 @@ VIS.recs = function () {
 
 VIS.team = function () {
   /* the pan across the whole group, shot at the end of the interview */
-  const url = Media.video('team-pan-12s');
-  let head;
-  if (url) {
-    const v = el('video', { src: url, poster: Media.src('pb-team-office'), muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto' });
-    v.muted = true;
-    head = el('figure', { class: 'shot phone' }, [
-      el('div', { class: 'phonebody' }, v),
-      el('figcaption', { text: 'Group NEXIX at PizzaBurg head office' }),
-    ]);
-  } else {
-    head = el('figure', { class: 'shot' }, [
-      el('img', { src: Media.src('pb-team-office'), alt: 'Group NEXIX at PizzaBurg head office' }),
-      el('figcaption', { text: 'Group NEXIX at PizzaBurg head office' }),
-    ]);
-  }
+  const head = buildMedia({
+    kind: 'video', src: 'team-pan-12s', poster: 'pb-team-office',
+    caption: 'Group NEXIX at PizzaBurg head office',
+  });
   return el('div', { class: 'teamwrap panel rv' }, [
     head,
     el('ul', { class: 'teamlist' }, PRESENTERS.map(function (p) {
@@ -1558,6 +1601,42 @@ const World = (function () {
     return tex(c);
   }
 
+  /* The backlit roundel that hangs in a PizzaBurg outlet: BEWARE ·
+     PIZZABURG · IS ADDICTIVE! Drawn once, then lit from behind. */
+  function roundelTexture() {
+    const c = canvas(512), g = c.getContext('2d');
+    g.clearRect(0, 0, 512, 512);
+    const cx = 256, cy = 256;
+
+    g.fillStyle = '#c62a1c';
+    g.beginPath(); g.arc(cx, cy, 246, 0, 7); g.fill();
+    g.globalCompositeOperation = 'destination-out';
+    g.beginPath(); g.arc(cx, cy, 198, 0, 7); g.fill();
+    g.globalCompositeOperation = 'source-over';
+
+    /* the banner across the middle */
+    g.fillStyle = '#c62a1c';
+    g.fillRect(24, 214, 464, 84);
+
+    /* the dashes in the ring */
+    g.strokeStyle = '#c62a1c'; g.lineWidth = 30; g.lineCap = 'butt';
+    for (let i = 0; i < 2; i++) {
+      const base = i ? Math.PI * 0.16 : Math.PI * 1.16;
+      g.beginPath(); g.arc(cx, cy, 222, base, base + Math.PI * 0.2); g.stroke();
+      g.beginPath(); g.arc(cx, cy, 222, base + Math.PI * 0.46, base + Math.PI * 0.66); g.stroke();
+    }
+
+    g.fillStyle = '#fdf6e6';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '800 74px Poppins, Inter, system-ui, sans-serif';
+    g.fillText('PIZZABURG', cx, cy + 4);
+    g.fillStyle = '#c62a1c';
+    g.font = '700 40px Inter, system-ui, sans-serif';
+    g.fillText('BEWARE', cx, cy - 150);
+    g.fillText('IS ADDICTIVE!', cx, cy + 158);
+    return tex(c);
+  }
+
   function moteTexture() {
     const c = canvas(64), g = c.getContext('2d');
     const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
@@ -1589,6 +1668,7 @@ const World = (function () {
     scene.add(top);
     scene.add(box(78, 9, 34, 0xe6dbc7, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
     scene.add(box(80, 0.4, 0.7, STEEL, { pos: [-8, 0.15, 18.1], rough: 0.26, metal: 0.7 }));
+    scene.add(box(80, 1.5, 0.5, BRAND, { pos: [-8, -0.85, 18.3], rough: 0.6 }));
 
     /* the tiled backsplash and a shelf of jars */
     const wall = new T.Mesh(new T.PlaneGeometry(104, 30), mat(0xffffff, { rough: 0.5, map: tileTexture() }));
@@ -1612,6 +1692,35 @@ const World = (function () {
       j.position.set(x, 12.45, -18.8);
       scene.add(j);
     }
+
+    /* the roundel, backlit, exactly where it hangs in their outlet */
+    const roundel = new T.Mesh(
+      new T.PlaneGeometry(10.5, 10.5),
+      new T.MeshStandardMaterial({
+        map: roundelTexture(), transparent: true,
+        emissive: 0xff5a3a, emissiveIntensity: 0.55, roughness: 0.5,
+      })
+    );
+    roundel.position.set(-26.5, 19.4, -21.2);
+    scene.add(roundel);
+    /* the halo it throws on the tiles behind it */
+    const halo = new T.Mesh(
+      new T.CircleGeometry(8.0, 40),
+      new T.MeshBasicMaterial({ color: 0xffb27a, transparent: true, opacity: 0.3, depthWrite: false })
+    );
+    halo.position.set(-26.5, 19.4, -21.35);
+    scene.add(halo);
+    const roundelLight = new T.PointLight(0xff7a48, 16, 46, 2);
+    roundelLight.position.set(-26.5, 19.4, -16);
+    scene.add(roundelLight);
+
+    /* the wordmark, on a panel beside it */
+    const mark = new T.Mesh(
+      new T.PlaneGeometry(12.5, 6.2),
+      mat(0xffffff, { rough: 0.7, map: wordmarkTexture('#f7f1e3', true) })
+    );
+    mark.position.set(2.5, 20.6, -21.2);
+    scene.add(mark);
 
     /* a menu board, in the brand's own red and cream */
     const board = box(15, 9, 0.5, CREAM, { pos: [-44, 15, -21], rough: 0.85 });
@@ -1770,6 +1879,20 @@ const World = (function () {
     scene.add(cup);
     const band = cyl(1.35, 1.24, 1.1, 26, BRAND, { pos: [12, 1.4, -12], rough: 0.5 });
     scene.add(band, contact(12, -12, 2.4, 0.34));
+
+    /* an apron on a hook by the oven */
+    const apron = box(5.4, 7.4, 0.3, BRAND, { pos: [-45, 13, -20.6], rot: [0.04, 0, 0.05], rough: 0.86 });
+    scene.add(apron);
+    scene.add(cyl(0.22, 0.22, 1.2, 8, 0x8b8378, { pos: [-45, 17.2, -20.2], rot: [Math.PI / 2, 0, 0] }));
+
+    /* a red stool tucked under the counter lip */
+    const stool = new T.Group();
+    stool.add(cyl(2.2, 2.0, 0.7, 24, BRAND, { pos: [0, 6.2, 0], rough: 0.6 }));
+    [[-1.3, -1.3], [1.3, -1.3], [-1.3, 1.3], [1.3, 1.3]].forEach(function (a) {
+      stool.add(cyl(0.18, 0.24, 6, 8, 0x6f665c, { pos: [a[0], 3, a[1]], rough: 0.5, metal: 0.4 }));
+    });
+    stool.position.set(6, -8, 15);
+    scene.add(stool);
 
     /* a rolling pin, resting where the dough gets worked */
     const pinProfile = [
@@ -2067,7 +2190,7 @@ const World = (function () {
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.94;
+    renderer.toneMappingExposure = 1.0;
     renderer.outputColorSpace = T.SRGBColorSpace;
 
     scene = new T.Scene();
@@ -2334,8 +2457,16 @@ const Deck = (function () {
       })));
     }
 
-    const asideNode = buildAside(s.aside);
-    const aside = el('div', { class: 'col-aside' }, asideNode);
+    /* the right column is a stack: their photograph on top, the panel under
+       it, so the picture leads and the data supports it */
+    const stack = [];
+    const media = buildMedia(s.photo);
+    if (media) stack.push(media);
+    const panelNode = buildAside(s.aside);
+    if (panelNode) stack.push(panelNode);
+    const second = buildMedia(s.photo2, true);
+    if (second) stack.push(second);
+    const aside = el('div', { class: 'col-aside' + (stack.length > 1 ? ' stacked' : '') }, stack);
 
     const node = el('section', {
       class: 'slide', id: 'sl-' + s.id, 'aria-label': s.title, 'data-i': i, hidden: 'hidden',
@@ -2534,8 +2665,8 @@ const Deck = (function () {
     const ahead = SLIDES[idx + 1];
     if (ahead) {
       const names = [];
-      if (ahead.aside && ahead.aside.src) names.push(ahead.aside.src);
-      if (ahead.aside && ahead.aside.poster) names.push(ahead.aside.poster);
+      if (ahead.photo) { names.push(ahead.photo.src); if (ahead.photo.poster) names.push(ahead.photo.poster); }
+      if (ahead.photo2) names.push(ahead.photo2.src);
       if (BACKDROPS[ahead.id]) names.push(BACKDROPS[ahead.id]);
       Media.preload(names);
     }
