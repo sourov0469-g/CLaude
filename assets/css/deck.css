@@ -107,7 +107,7 @@ img,video{ max-width:100%; display:block; }
 .slide-pad{
   position:relative; z-index:2; height:100%;
   padding: clamp(34px,5.2vh,64px) clamp(48px,6vw,104px) clamp(92px,11vh,120px);
-  display:flex; flex-direction:column;
+  display:flex; flex-direction:column; justify-content:center;
 }
 
 .kicker{
@@ -462,3 +462,19 @@ ul.points.two-col li.tier{ column-span:all; }
   background:var(--accent-soft); color:var(--accent-deep); }
 .wcard .ico svg{ width:21px; height:21px; }
 .wcard .wt{ font-family:var(--display); font-weight:600; font-size:clamp(14px,1.15vw,18px); line-height:1.15; }
+
+/* Thank You — group photos, contained not cropped */
+.gstrip{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,1.6vw,26px); flex:1; min-height:0; }
+.gstrip figure{ margin:0; display:flex; flex-direction:column; min-height:0; }
+.gstrip figure img{
+  width:100%; flex:1; min-height:0; object-fit:contain; object-position:center;
+  background:var(--bg-deep); border-radius:var(--r-lg); box-shadow:var(--sh-2);
+}
+.gstrip figcaption{ margin-top:10px; font-family:var(--mono); font-size:var(--t-label); color:var(--ink-soft); text-align:center; }
+
+/* keep subjects in frame on split panels instead of centre-cropping heads off */
+.panel img{ object-position:center 38%; }
+.mosaic .ph img{ object-position:center 38%; }
+
+/* posters and documents must never be cropped — letterbox them instead */
+.panel img.fit{ object-fit:contain; background:var(--bg-deep); padding:clamp(10px,1vw,18px); }
