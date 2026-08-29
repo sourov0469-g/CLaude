@@ -1,0 +1,142 @@
+[
+  {
+    "design": "dossier",
+    "designName": "The Dossier",
+    "page": 1,
+    "label": "Title",
+    "file": "pages/design-dossier-page-1.html"
+  },
+  {
+    "design": "dossier",
+    "designName": "The Dossier",
+    "page": 2,
+    "label": "Current CSR: Community",
+    "file": "pages/design-dossier-page-2.html"
+  },
+  {
+    "design": "dossier",
+    "designName": "The Dossier",
+    "page": 3,
+    "label": "Suggestion: Green PizzaBurg",
+    "file": "pages/design-dossier-page-3.html"
+  },
+  {
+    "design": "dossier",
+    "designName": "The Dossier",
+    "page": 4,
+    "label": "Impact & ROI Summary",
+    "file": "pages/design-dossier-page-4.html"
+  },
+  {
+    "design": "radius",
+    "designName": "Radius",
+    "page": 1,
+    "label": "Title",
+    "file": "pages/design-radius-page-1.html"
+  },
+  {
+    "design": "radius",
+    "designName": "Radius",
+    "page": 2,
+    "label": "Current CSR: Community",
+    "file": "pages/design-radius-page-2.html"
+  },
+  {
+    "design": "radius",
+    "designName": "Radius",
+    "page": 3,
+    "label": "Suggestion: Green PizzaBurg",
+    "file": "pages/design-radius-page-3.html"
+  },
+  {
+    "design": "radius",
+    "designName": "Radius",
+    "page": 4,
+    "label": "Impact & ROI Summary",
+    "file": "pages/design-radius-page-4.html"
+  },
+  {
+    "design": "ledger",
+    "designName": "Ledger",
+    "page": 1,
+    "label": "Title",
+    "file": "pages/design-ledger-page-1.html"
+  },
+  {
+    "design": "ledger",
+    "designName": "Ledger",
+    "page": 2,
+    "label": "Current CSR: Community",
+    "file": "pages/design-ledger-page-2.html"
+  },
+  {
+    "design": "ledger",
+    "designName": "Ledger",
+    "page": 3,
+    "label": "Suggestion: Green PizzaBurg",
+    "file": "pages/design-ledger-page-3.html"
+  },
+  {
+    "design": "ledger",
+    "designName": "Ledger",
+    "page": 4,
+    "label": "Impact & ROI Summary",
+    "file": "pages/design-ledger-page-4.html"
+  },
+  {
+    "design": "loopline",
+    "designName": "Loopline",
+    "page": 1,
+    "label": "Title",
+    "file": "pages/design-loopline-page-1.html"
+  },
+  {
+    "design": "loopline",
+    "designName": "Loopline",
+    "page": 2,
+    "label": "Current CSR: Community",
+    "file": "pages/design-loopline-page-2.html"
+  },
+  {
+    "design": "loopline",
+    "designName": "Loopline",
+    "page": 3,
+    "label": "Suggestion: Green PizzaBurg",
+    "file": "pages/design-loopline-page-3.html"
+  },
+  {
+    "design": "loopline",
+    "designName": "Loopline",
+    "page": 4,
+    "label": "Impact & ROI Summary",
+    "file": "pages/design-loopline-page-4.html"
+  },
+  {
+    "design": "csrline",
+    "designName": "The CSR Line",
+    "page": 1,
+    "label": "Title",
+    "file": "pages/design-csrline-page-1.html"
+  },
+  {
+    "design": "csrline",
+    "designName": "The CSR Line",
+    "page": 2,
+    "label": "Current CSR: Community",
+    "file": "pages/design-csrline-page-2.html"
+  },
+  {
+    "design": "csrline",
+    "designName": "The CSR Line",
+    "page": 3,
+    "label": "Suggestion: Green PizzaBurg",
+    "file": "pages/design-csrline-page-3.html"
+  },
+  {
+    "design": "csrline",
+    "designName": "The CSR Line",
+    "page": 4,
+    "label": "Impact & ROI Summary",
+    "file": "pages/design-csrline-page-4.html"
+  }
+]

@@ -1,0 +1,581 @@
+<section class="design-radius">
+<style>
+.design-radius{
+  --bg:#12181D;
+  --bg-panel:#1C262D;
+  --paper:#F3F0E8;
+  --paper-ink:#171F1D;
+  --ink:#F3F0E8;
+  --ink-dim:#A9B4B7;
+  --ink-faint:#67757C;
+  --hairline:rgba(243,240,232,.16);
+  --hairline-strong:rgba(243,240,232,.32);
+  --accent:#E4544E;
+  --accent-glow:rgba(228,84,78,.30);
+  --strength:#4FA184;
+  --gap-clr:#D9A441;
+  --font-display:'Space Grotesk','Arial Narrow',sans-serif;
+  --font-body:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Courier New',monospace;
+  --fs-hero:clamp(32px,4.3cqw,54px);
+  --fs-h2:clamp(24px,2.7cqw,36px);
+  --fs-lede:clamp(18px,1.75cqw,25px);
+  --fs-body:clamp(16px,1.28cqw,19px);
+  --fs-small:clamp(16px,1.1cqw,18px);
+  --fs-tag:clamp(16px,1.0cqw,17px);
+  display:block;
+}
+.design-radius, .design-radius *{ box-sizing:border-box; }
+.design-radius .d-page{
+  width:100%; aspect-ratio:16/9; position:relative; overflow:hidden;
+  container-type:inline-size;
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-body);
+}
+.design-radius .d-page h1,
+.design-radius .d-page h2,
+.design-radius .d-page p{ margin:0; padding:0; }
+.design-radius .d-page svg{ display:block; overflow:visible; }
+.design-radius .d-page video,
+.design-radius .d-page img{ display:block; }
+
+/* ---------- instrument rail ---------- */
+.design-radius .rail{
+  position:absolute; top:0; right:0; bottom:0; width:15%;
+  background:var(--bg-panel); border-left:1px solid var(--hairline);
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  padding:8% 0;
+}
+.design-radius .rail-brand{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--font-mono); font-weight:500; font-size:var(--fs-tag);
+  letter-spacing:.22em; color:var(--ink-faint); text-transform:uppercase; text-align:center;
+}
+.design-radius .rail-locator{ display:flex; flex-direction:column; align-items:center; gap:.7em; }
+.design-radius .rail-locator .loc{ width:clamp(34px,5.6cqw,56px); height:auto; }
+.design-radius .loc-ring{ fill:none; stroke:var(--hairline-strong); stroke-width:2; }
+.design-radius .loc-ring--active{ stroke:var(--accent); stroke-width:4; }
+.design-radius .loc-dot{ fill:var(--accent); }
+.design-radius .rail-index{
+  font-family:var(--font-mono); font-size:var(--fs-tag); letter-spacing:.05em;
+  color:var(--ink-faint); display:flex; gap:.2em;
+}
+.design-radius .rail-index .idx-current{ color:var(--ink); font-weight:600; }
+.design-radius .rail-tag{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--font-mono); font-weight:500; font-size:var(--fs-tag);
+  letter-spacing:.16em; color:var(--ink-faint); text-transform:uppercase;
+}
+
+/* ---------- generic stage (centered content column) ---------- */
+.design-radius .stage{
+  position:absolute; inset:0; right:15%;
+  display:grid; place-items:center;
+  padding:clamp(22px,3.2cqw,38px) clamp(26px,3.6cqw,44px);
+}
+.design-radius .stage > .layout{ width:100%; height:100%; }
+
+/* ---------- typography helpers ---------- */
+.design-radius .kicker{
+  font-family:var(--font-mono); font-weight:500; font-size:var(--fs-tag);
+  letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint);
+  margin-bottom:.7em;
+}
+.design-radius .headline2{
+  font-family:var(--font-display); font-weight:700; font-size:var(--fs-h2);
+  line-height:1.08; letter-spacing:-.01em; color:var(--ink); margin-bottom:.5em;
+}
+.design-radius .tag{
+  display:inline-flex; align-items:center; gap:.5em;
+  border:1px solid var(--hairline-strong); padding:.3em .7em;
+  font-family:var(--font-mono); font-weight:500; font-size:var(--fs-tag);
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ink-dim); white-space:nowrap;
+}
+.design-radius .tag::before{ content:''; width:.55em; height:.55em; background:var(--ink-faint); flex:none; }
+.design-radius .tag--strength{ border-color:var(--strength); color:var(--strength); }
+.design-radius .tag--strength::before{ background:var(--strength); border-radius:50%; }
+.design-radius .tag--accent{ border-color:var(--accent); color:var(--accent); }
+.design-radius .tag--accent::before{ background:var(--accent); border-radius:50%; }
+.design-radius .tag--gap{ border-color:var(--gap-clr); color:var(--gap-clr); }
+.design-radius .tag--gap::before{ background:var(--gap-clr); border-radius:50%; }
+
+/* ---------- reach diagram (signature motif) ---------- */
+.design-radius .reach{ position:relative; aspect-ratio:1/1; }
+.design-radius .reach svg{ position:absolute; inset:0; width:100%; height:100%; }
+.design-radius .ring{ fill:none; stroke:var(--hairline); stroke-width:2; }
+.design-radius .ring--accent{ stroke:var(--accent); stroke-width:2.6; }
+.design-radius .ring-dot{ fill:var(--accent); }
+.design-radius .tick{ stroke:var(--hairline); stroke-width:2; }
+.design-radius .stop-glow{ stop-color:var(--accent-glow); }
+.design-radius .stop-clear{ stop-color:var(--accent-glow); stop-opacity:0; }
+.design-radius .arc--strength{ fill:none; stroke:var(--strength); stroke-width:7; stroke-linecap:butt; }
+.design-radius .ring-tag{
+  position:absolute; font-family:var(--font-mono); font-weight:500; font-size:var(--fs-tag);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--strength);
+  border:1px solid var(--strength); padding:.25em .6em; background:var(--bg); white-space:nowrap;
+}
+
+/* ---------- frames (hard rectangles, hairline border, no shadow) ---------- */
+.design-radius .frame{ position:relative; border:1px solid var(--hairline-strong); overflow:hidden; background:#000; }
+.design-radius .frame img{ width:100%; height:100%; object-fit:cover; }
+.design-radius .frame .cap{
+  position:absolute; left:0; bottom:0; background:rgba(18,24,29,.85);
+  color:var(--ink-dim); font-family:var(--font-mono); font-weight:500; font-size:var(--fs-tag);
+  letter-spacing:.06em; padding:.22em .6em; text-transform:uppercase;
+  border-top:1px solid var(--hairline); border-right:1px solid var(--hairline);
+}
+
+/* ---------- paper callout (used sparingly) ---------- */
+.design-radius .paper-panel{
+  background:var(--paper); color:var(--paper-ink); border:1px solid var(--hairline-strong);
+  padding:.85em 1em;
+}
+.design-radius .paper-panel .paper-label{
+  font-family:var(--font-mono); font-weight:600; font-size:var(--fs-tag);
+  letter-spacing:.12em; text-transform:uppercase; color:#4B5A52; margin-bottom:.35em;
+}
+.design-radius .paper-panel .paper-body{ font-family:var(--font-body); font-size:var(--fs-body); line-height:1.35; }
+.design-radius .paper-panel .paper-body strong{ color:var(--accent); }
+
+/* ================= PAGE 1 — TITLE ================= */
+.design-radius .stage--title{
+  position:absolute; inset:0; right:15%;
+  display:grid; grid-template-columns:1.15fr 1fr; grid-template-rows:1fr auto;
+  align-items:center; column-gap:clamp(20px,3.4cqw,40px);
+  padding:clamp(26px,3.6cqw,42px) clamp(30px,4cqw,48px) clamp(18px,2.6cqw,28px);
+}
+.design-radius .title-left{ grid-column:1; grid-row:1; align-self:center; }
+.design-radius .title-right{ grid-column:2; grid-row:1; align-self:center; justify-self:end; width:92%; }
+.design-radius .title-foot{
+  grid-column:1 / span 2; grid-row:2; border-top:1px solid var(--hairline);
+  padding-top:clamp(10px,1.6cqw,16px);
+}
+.design-radius .eyebrow-row{ display:flex; flex-wrap:wrap; gap:.5em; margin-bottom:1.1em; }
+.design-radius .hero-headline{
+  font-family:var(--font-display); font-weight:700; font-size:var(--fs-hero);
+  line-height:1.04; letter-spacing:-.015em; color:var(--ink);
+}
+.design-radius .hero-sub{
+  font-family:var(--font-body); font-weight:500; font-size:var(--fs-lede);
+  color:var(--ink-dim); margin-top:.9em; max-width:30ch; line-height:1.35;
+}
+.design-radius .team-line{
+  font-family:var(--font-mono); font-weight:500; font-size:var(--fs-small);
+  letter-spacing:.02em; color:var(--ink-faint);
+}
+.design-radius .mask-photo{ clip-path:url(#rd-clip-photo); }
+.design-radius .video-badge{
+  position:absolute; left:2%; top:64%; width:26%; height:26%;
+  border-radius:50%; border:1px solid var(--accent); padding:4px;
+}
+.design-radius .video-badge video{
+  width:100%; height:100%; border-radius:50%; object-fit:cover;
+}
+
+/* ================= PAGE 2 — COMMUNITY ================= */
+.design-radius .layout--split{
+  display:grid; grid-template-columns:1.2fr 1fr; column-gap:clamp(22px,3.4cqw,40px);
+  align-items:center;
+}
+.design-radius .fact-row{ display:flex; gap:.9em; align-items:flex-start; padding:.65em 0; border-top:1px solid var(--hairline); }
+.design-radius .fact-row:first-of-type{ border-top:none; padding-top:0; }
+.design-radius .fact-row .dot{ width:.6em; height:.6em; border-radius:50%; background:var(--strength); margin-top:.5em; flex:none; }
+.design-radius .fact-row .txt .fact-name{
+  font-family:var(--font-mono); font-weight:600; font-size:var(--fs-small);
+  letter-spacing:.08em; text-transform:uppercase; color:var(--strength);
+}
+.design-radius .fact-row .txt .fact-body{
+  font-family:var(--font-body); font-size:var(--fs-body); color:var(--ink-dim);
+  line-height:1.35; margin-top:.3em;
+}
+.design-radius .col--visual{ display:flex; flex-direction:column; align-items:center; }
+.design-radius .reach--strength{ width:66%; }
+.design-radius .photo-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(8px,1.2cqw,14px);
+  width:88%; margin-top:clamp(10px,1.6cqw,18px);
+}
+.design-radius .frame--thumb{ aspect-ratio:4/3; }
+.design-radius .ring-tag--top{ top:6%; left:60%; }
+.design-radius .ring-tag--bottom{ top:82%; left:10%; }
+
+/* ================= PAGE 3 — GREEN PIZZABURG ================= */
+.design-radius .layout--green{
+  display:grid; grid-template-rows:1.05fr 1fr; height:100%; width:100%; row-gap:clamp(14px,2.2cqw,22px);
+  min-height:0; overflow:hidden;
+}
+.design-radius .layout--green > *{ min-height:0; }
+.design-radius .green-top{
+  display:grid; grid-template-columns:1.3fr 1fr; column-gap:clamp(20px,3cqw,36px); align-items:center;
+}
+.design-radius .green-lede{
+  font-family:var(--font-body); font-weight:500; font-size:var(--fs-lede);
+  color:var(--ink); line-height:1.35; margin-top:.6em; max-width:34ch;
+}
+.design-radius .green-visual{ display:grid; grid-template-columns:auto 1fr; column-gap:clamp(12px,1.8cqw,20px); align-items:center; height:100%; }
+.design-radius .badge{ position:relative; width:clamp(96px,15cqw,150px); aspect-ratio:1/1; }
+.design-radius .badge svg{ position:absolute; inset:0; width:100%; height:100%; }
+.design-radius .badge .badge-label{
+  position:absolute; inset:0; display:grid; place-items:center; text-align:center;
+  font-family:var(--font-mono); font-weight:600; font-size:var(--fs-tag);
+  letter-spacing:.08em; color:var(--accent); text-transform:uppercase; line-height:1.2;
+}
+.design-radius .green-photo{ height:100%; }
+.design-radius .spec-sheet{
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:clamp(12px,1.8cqw,20px); height:100%; min-height:0;
+}
+.design-radius .spec-col{ border:1px solid var(--hairline-strong); padding:.8em 1em; display:flex; flex-direction:column; gap:.5em; min-height:0; overflow:hidden; }
+.design-radius .spec-col .spec-label{
+  font-family:var(--font-mono); font-weight:600; font-size:var(--fs-tag);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--gap-clr);
+}
+.design-radius .spec-col .spec-value{ font-family:var(--font-body); font-size:var(--fs-body); color:var(--ink-dim); line-height:1.32; }
+
+/* ================= PAGE 4 — IMPACT & ROI ================= */
+.design-radius .layout--impact{
+  display:grid; grid-template-rows:auto 1fr auto; height:100%; width:100%; row-gap:clamp(10px,1.6cqw,16px);
+}
+.design-radius .impact-mid{
+  display:grid; grid-template-columns:1fr 1.35fr; column-gap:clamp(20px,3cqw,36px); align-items:center; min-height:0;
+}
+.design-radius .impact-diagram{ display:grid; grid-template-rows:1fr auto; justify-items:center; align-items:center; height:100%; row-gap:.4em; min-height:0; }
+.design-radius .reach--impact{ width:82%; align-self:center; }
+.design-radius .node{ position:absolute; width:14px; height:14px; border-radius:50%; transform:translate(-50%,-50%); }
+.design-radius .node--strength{ background:var(--strength); }
+.design-radius .node--gap{ background:var(--gap-clr); }
+.design-radius .node--marked::after{
+  content:''; position:absolute; inset:-7px; border:2px solid var(--accent); border-radius:50%;
+}
+.design-radius .node-label{
+  position:absolute; font-family:var(--font-mono); font-weight:600; font-size:var(--fs-tag);
+  letter-spacing:.06em; color:var(--ink-dim); text-transform:uppercase; white-space:nowrap;
+  transform:translateY(-50%);
+}
+.design-radius .axis-caption{
+  font-family:var(--font-mono); font-size:var(--fs-tag); color:var(--ink-faint);
+  letter-spacing:.03em; text-align:center; max-width:26ch;
+}
+.design-radius .impact-table{ width:100%; border-collapse:collapse; }
+.design-radius .impact-table th{
+  text-align:left; font-family:var(--font-mono); font-weight:600; font-size:var(--fs-tag);
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);
+  padding:.3em .6em .5em; border-bottom:1px solid var(--hairline-strong);
+}
+.design-radius .impact-table td{
+  padding:.5em .6em; border-bottom:1px solid var(--hairline);
+  font-family:var(--font-body); font-size:var(--fs-small); color:var(--ink-dim); vertical-align:top; line-height:1.3;
+}
+.design-radius .impact-table td:first-child{ color:var(--ink); font-weight:600; border-left:3px solid transparent; padding-left:.55em; }
+.design-radius .impact-table tr.row--accent td:first-child{ border-left-color:var(--accent); color:var(--accent); }
+.design-radius .impact-foot{
+  border-top:1px solid var(--hairline); padding-top:clamp(8px,1.3cqw,12px);
+  display:flex; align-items:center; gap:.6em;
+  font-family:var(--font-body); font-weight:500; font-size:var(--fs-body); color:var(--ink-dim);
+}
+.design-radius .impact-foot::before{ content:''; width:.6em; height:.6em; background:var(--accent); flex:none; }
+</style>
+
+<!-- PAGE 1 — TITLE -->
+<div class="d-page" data-page="1" data-label="Title">
+  <div class="stage--title">
+    <div class="title-left">
+      <div class="eyebrow-row">
+        <span class="tag">Group NEXIX</span>
+        <span class="tag">Bangladesh University</span>
+        <span class="tag">Business Ethics</span>
+      </div>
+      <h1 class="hero-headline">Corporate Social Responsibility at PizzaBurg</h1>
+      <p class="hero-sub">A Business Ethics case review — Group NEXIX, Bangladesh University</p>
+    </div>
+    <div class="title-right">
+      <div class="reach">
+        <svg viewBox="0 0 640 640">
+          <defs>
+            <radialGradient id="rd-glow-1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" class="stop-glow"/>
+              <stop offset="100%" class="stop-clear"/>
+            </radialGradient>
+            <clipPath id="rd-clip-photo"><circle cx="320" cy="320" r="160"/></clipPath>
+          </defs>
+          <circle cx="320" cy="320" r="150" fill="url(#rd-glow-1)"/>
+          <g class="tick">
+            <line x1="620" y1="320" x2="635" y2="320"/>
+            <line x1="320" y1="620" x2="320" y2="635"/>
+            <line x1="20" y1="320" x2="5" y2="320"/>
+            <line x1="320" y1="20" x2="320" y2="5"/>
+          </g>
+          <circle class="ring" cx="320" cy="320" r="300"/>
+          <circle class="ring" cx="320" cy="320" r="230"/>
+          <image class="mask-photo" href="../assets/img/team-group.jpg" x="160" y="160" width="320" height="320" preserveAspectRatio="xMidYMid slice"/>
+          <circle class="ring" cx="320" cy="320" r="160"/>
+          <circle class="ring" cx="320" cy="320" r="90"/>
+          <circle class="ring-dot" cx="320" cy="320" r="16"/>
+        </svg>
+        <div class="video-badge">
+          <video src="../assets/video/v-team-1.mp4" muted loop autoplay playsinline poster="../assets/img/poster-v-team-1.jpg"></video>
+        </div>
+      </div>
+    </div>
+    <div class="title-foot">
+      <span class="team-line">Aditya Tripura &middot; Shuvo Chandra Roy &middot; Asiful Islam Sourov &middot; Raiyan Ahmed Ratul &middot; Fabliha Mubarrat Kabir &middot; Liya Akter</span>
+    </div>
+  </div>
+  <div class="rail">
+    <div class="rail-brand">PizzaBurg &middot; CSR</div>
+    <div class="rail-locator">
+      <svg class="loc" viewBox="0 0 100 100">
+        <circle class="loc-ring" cx="50" cy="50" r="46"/>
+        <circle class="loc-ring" cx="50" cy="50" r="36"/>
+        <circle class="loc-ring" cx="50" cy="50" r="25"/>
+        <circle class="loc-ring loc-ring--active" cx="50" cy="50" r="14"/>
+        <circle class="loc-dot" cx="50" cy="50" r="3.2"/>
+      </svg>
+      <div class="rail-index"><span class="idx-current">01</span><span>/</span><span>04</span></div>
+    </div>
+    <div class="rail-tag">Title</div>
+  </div>
+</div>
+
+<!-- PAGE 2 — CURRENT CSR: COMMUNITY -->
+<div class="d-page" data-page="2" data-label="Current CSR: Community">
+  <div class="stage">
+    <div class="layout layout--split">
+      <div class="col col--text">
+        <p class="kicker">02 — Existing Practice</p>
+        <h2 class="headline2">Current CSR: Community &amp; Philanthropy</h2>
+
+        <div class="fact-row">
+          <span class="dot"></span>
+          <div class="txt">
+            <span class="fact-name">Ramadan &middot; Strength</span>
+            <p class="fact-body">PizzaBurg has provided pizzas to mosques for iftar, reported by Dhaka Tribune.</p>
+          </div>
+        </div>
+        <div class="fact-row">
+          <span class="dot"></span>
+          <div class="txt">
+            <span class="fact-name">Christmas &middot; Strength</span>
+            <p class="fact-body">Employees dress as Santa Claus and distribute free pizzas to disadvantaged children, reported by Dhaka Tribune.</p>
+          </div>
+        </div>
+
+        <div class="paper-panel">
+          <p class="paper-label">Reading — Carroll's CSR Pyramid</p>
+          <p class="paper-body">Both fall under Carroll's <strong>philanthropic responsibility</strong> — voluntary contributions tied to a specific occasion.</p>
+        </div>
+      </div>
+
+      <div class="col col--visual">
+        <div class="reach reach--strength">
+          <svg viewBox="0 0 640 640">
+            <defs>
+              <radialGradient id="rd-glow-2" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" class="stop-glow"/>
+                <stop offset="100%" class="stop-clear"/>
+              </radialGradient>
+            </defs>
+            <circle cx="320" cy="320" r="140" fill="url(#rd-glow-2)"/>
+            <g class="tick">
+              <line x1="620" y1="320" x2="635" y2="320"/>
+              <line x1="320" y1="620" x2="320" y2="635"/>
+              <line x1="20" y1="320" x2="5" y2="320"/>
+              <line x1="320" y1="20" x2="320" y2="5"/>
+            </g>
+            <circle class="ring" cx="320" cy="320" r="300"/>
+            <circle class="arc--strength" cx="320" cy="320" r="230" transform="rotate(-90 320 320)" stroke-dasharray="562 1445"/>
+            <circle class="arc--strength" cx="320" cy="320" r="230" transform="rotate(90 320 320)" stroke-dasharray="562 1445"/>
+            <circle class="ring" cx="320" cy="320" r="230"/>
+            <circle class="ring" cx="320" cy="320" r="160"/>
+            <circle class="ring" cx="320" cy="320" r="90"/>
+            <circle class="ring-dot" cx="320" cy="320" r="16"/>
+          </svg>
+          <span class="ring-tag ring-tag--top">Ramadan</span>
+          <span class="ring-tag ring-tag--bottom">Christmas</span>
+        </div>
+        <div class="photo-row">
+          <div class="frame frame--thumb"><img src="../assets/img/csr-community.jpg" alt=""><span class="cap">Illustrative</span></div>
+          <div class="frame frame--thumb"><img src="../assets/img/csr-food-donation.jpg" alt=""><span class="cap">Illustrative</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rail">
+    <div class="rail-brand">PizzaBurg &middot; CSR</div>
+    <div class="rail-locator">
+      <svg class="loc" viewBox="0 0 100 100">
+        <circle class="loc-ring" cx="50" cy="50" r="46"/>
+        <circle class="loc-ring" cx="50" cy="50" r="36"/>
+        <circle class="loc-ring loc-ring--active" cx="50" cy="50" r="25"/>
+        <circle class="loc-ring" cx="50" cy="50" r="14"/>
+        <circle class="loc-dot" cx="50" cy="50" r="3.2"/>
+      </svg>
+      <div class="rail-index"><span class="idx-current">02</span><span>/</span><span>04</span></div>
+    </div>
+    <div class="rail-tag">Community</div>
+  </div>
+</div>
+
+<!-- PAGE 3 — SUGGESTION: GREEN PIZZABURG -->
+<div class="d-page" data-page="3" data-label="Suggestion: Green PizzaBurg">
+  <div class="stage">
+    <div class="layout layout--green">
+      <div class="green-top">
+        <div class="green-text">
+          <div class="eyebrow-row">
+            <span class="tag">Suggestion 02</span>
+            <span class="tag tag--accent">Recommended</span>
+          </div>
+          <h2 class="headline2">Suggestion 2: Green PizzaBurg</h2>
+          <p class="green-lede">100% biodegradable packaging, with a box return/recycling incentive.</p>
+        </div>
+        <div class="green-visual">
+          <div class="badge">
+            <svg viewBox="0 0 200 200">
+              <defs>
+                <radialGradient id="rd-glow-3" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" class="stop-glow"/>
+                  <stop offset="100%" class="stop-clear"/>
+                </radialGradient>
+              </defs>
+              <circle cx="100" cy="100" r="46" fill="url(#rd-glow-3)"/>
+              <circle class="ring ring--accent" cx="100" cy="100" r="90"/>
+              <circle class="ring" cx="100" cy="100" r="62"/>
+              <circle class="ring-dot" cx="100" cy="100" r="9"/>
+            </svg>
+            <div class="badge-label">New<br>Proposal</div>
+          </div>
+          <div class="frame green-photo">
+            <img src="../assets/img/web-outlet-recycle-bin.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-sheet">
+        <div class="spec-col">
+          <span class="spec-label">Cost</span>
+          <p class="spec-value">Moderate upfront — packaging changeover plus incentive design.</p>
+        </div>
+        <div class="spec-col">
+          <span class="spec-label">Market Fit</span>
+          <p class="spec-value">Over half of Bangladesh's population is under 25 — a segment that responds to visible sustainability moves.</p>
+        </div>
+        <div class="spec-col">
+          <span class="spec-label">Regulation</span>
+          <p class="spec-value">Bangladesh has signaled a clear policy direction against single-use plastics — moving early positions PizzaBurg ahead of that trend.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rail">
+    <div class="rail-brand">PizzaBurg &middot; CSR</div>
+    <div class="rail-locator">
+      <svg class="loc" viewBox="0 0 100 100">
+        <circle class="loc-ring" cx="50" cy="50" r="46"/>
+        <circle class="loc-ring loc-ring--active" cx="50" cy="50" r="36"/>
+        <circle class="loc-ring" cx="50" cy="50" r="25"/>
+        <circle class="loc-ring" cx="50" cy="50" r="14"/>
+        <circle class="loc-dot" cx="50" cy="50" r="3.2"/>
+      </svg>
+      <div class="rail-index"><span class="idx-current">03</span><span>/</span><span>04</span></div>
+    </div>
+    <div class="rail-tag">Green PizzaBurg</div>
+  </div>
+</div>
+
+<!-- PAGE 4 — IMPACT & ROI SUMMARY -->
+<div class="d-page" data-page="4" data-label="Impact & ROI Summary">
+  <div class="stage">
+    <div class="layout layout--impact">
+      <div>
+        <p class="kicker">04 — Recommendation Set</p>
+        <h2 class="headline2" style="margin-bottom:0;">Impact &amp; ROI Summary</h2>
+      </div>
+
+      <div class="impact-mid">
+        <div class="impact-diagram">
+          <div class="reach reach--impact">
+            <svg viewBox="0 0 640 640">
+              <defs>
+                <radialGradient id="rd-glow-4" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" class="stop-glow"/>
+                  <stop offset="100%" class="stop-clear"/>
+                </radialGradient>
+              </defs>
+              <circle cx="320" cy="320" r="130" fill="url(#rd-glow-4)"/>
+              <g class="tick">
+                <line x1="620" y1="320" x2="635" y2="320"/>
+                <line x1="320" y1="620" x2="320" y2="635"/>
+                <line x1="20" y1="320" x2="5" y2="320"/>
+                <line x1="320" y1="20" x2="320" y2="5"/>
+              </g>
+              <circle class="ring" cx="320" cy="320" r="300"/>
+              <circle class="ring" cx="320" cy="320" r="230"/>
+              <circle class="ring" cx="320" cy="320" r="160"/>
+              <circle class="ring" cx="320" cy="320" r="90"/>
+              <circle class="ring-dot" cx="320" cy="320" r="16"/>
+            </svg>
+            <div class="node node--strength" style="left:63.5%; top:45.2%;"></div>
+            <div class="node-label" style="left:65.5%; top:45.2%;">B1G1</div>
+            <div class="node node--strength" style="left:63.5%; top:54.8%;"></div>
+            <div class="node-label" style="left:65.5%; top:54.8%;">Food</div>
+            <div class="node node--gap node--marked" style="left:16.2%; top:37.7%;"></div>
+            <div class="node-label" style="right:85.8%; top:37.7%;">Green</div>
+            <div class="node node--gap" style="left:16.2%; top:62.3%;"></div>
+            <div class="node-label" style="right:85.8%; top:62.3%;">Student</div>
+          </div>
+          <p class="axis-caption">Closer = lower cost, higher priority</p>
+        </div>
+
+        <table class="impact-table">
+          <thead>
+            <tr><th>Initiative</th><th>Cost</th><th>Primary Benefit</th><th>Priority</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Buy 1, Give 1</td>
+              <td>Self-funding, scales with sales</td>
+              <td>Converts seasonal goodwill into an always-on program</td>
+              <td><span class="tag tag--strength">High</span></td>
+            </tr>
+            <tr class="row--accent">
+              <td>Green PizzaBurg</td>
+              <td>Moderate upfront</td>
+              <td>Youth-market appeal; ahead of tightening plastic regulation</td>
+              <td><span class="tag tag--gap">Medium</span></td>
+            </tr>
+            <tr>
+              <td>Student Support</td>
+              <td>Low, scalable</td>
+              <td>Builds a talent pipeline and employer branding</td>
+              <td><span class="tag tag--gap">Medium</span></td>
+            </tr>
+            <tr>
+              <td>Food Rescue</td>
+              <td>Near-zero</td>
+              <td>Reduces disposal cost; strong reputational story</td>
+              <td><span class="tag tag--strength">High</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="impact-foot">4 initiatives &middot; near-zero to moderate cost &middot; compounding brand + community return</div>
+    </div>
+  </div>
+  <div class="rail">
+    <div class="rail-brand">PizzaBurg &middot; CSR</div>
+    <div class="rail-locator">
+      <svg class="loc" viewBox="0 0 100 100">
+        <circle class="loc-ring loc-ring--active" cx="50" cy="50" r="46"/>
+        <circle class="loc-ring" cx="50" cy="50" r="36"/>
+        <circle class="loc-ring" cx="50" cy="50" r="25"/>
+        <circle class="loc-ring" cx="50" cy="50" r="14"/>
+        <circle class="loc-dot" cx="50" cy="50" r="3.2"/>
+      </svg>
+      <div class="rail-index"><span class="idx-current">04</span><span>/</span><span>04</span></div>
+    </div>
+    <div class="rail-tag">Impact &amp; ROI</div>
+  </div>
+</div>
+
+</section>
+<!-- FONTS: Space Grotesk:wght@500;600;700, Archivo:wght@400;500;600;700, IBM Plex Mono:wght@500;600 -->
