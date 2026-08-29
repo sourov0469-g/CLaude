@@ -63,7 +63,8 @@ figure.shot.contain .frame img { object-fit: contain; }
 figure.shot figcaption {
   line-height: 1.3;
   font-size: 10.5px; letter-spacing: 0.09em;
-  text-transform: uppercase; color: var(--ink-4); font-weight: 620;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 252, 246, 0.85);
 }
 figure.shot.small .frame { aspect-ratio: 21 / 9; border-radius: 13px; }
 /* a photograph sharing the column with a panel takes a cinematic band, so

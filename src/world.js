@@ -514,7 +514,7 @@ const World = (function () {
       [8.60, 0.00], [8.60, 1.90], [8.30, 2.30], [8.05, 3.60], [7.60, 5.20],
       [6.70, 6.90], [5.40, 8.35], [3.70, 9.45], [1.90, 10.05], [0.90, 10.20], [0.00, 10.25],
     ];
-    const dome = lathe(domeProfile, 44, 0xc08d5f, { rough: 0.93, map: brick });
+    const dome = lathe(domeProfile, 44, 0xa9714a, { rough: 0.93, map: brick });
     oven.add(dome);
     /* the plinth it stands on */
     oven.add(cyl(9.1, 9.6, 1.6, 34, 0x8e6c4a, { pos: [0, 0.8, 0], rough: 0.9 }));
@@ -533,7 +533,7 @@ const World = (function () {
     arch.closePath();
     face.holes.push(arch);
     const faceGeo = new T.ExtrudeGeometry(face, { depth: 1.5, bevelEnabled: true, bevelSize: 0.18, bevelThickness: 0.18, bevelSegments: 2, curveSegments: 24 });
-    const faceMesh = new T.Mesh(faceGeo, mat(0xc9a87f, { rough: 0.9 }));
+    const faceMesh = new T.Mesh(faceGeo, mat(0xb08a63, { rough: 0.9 }));
     faceMesh.position.set(0, 0, 7.2);
     oven.add(faceMesh);
 
