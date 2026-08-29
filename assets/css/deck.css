@@ -132,7 +132,8 @@ h1.headline em{ font-style:italic; color: var(--accent-deep); }
   max-width: 60ch; margin: 0 0 .5em;
 }
 
-.body-area{ position:relative; z-index:2; flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; gap: clamp(16px,2.2vh,28px); }
+.body-area{ position:relative; z-index:2; flex:0 1 auto; min-height:0; display:flex; flex-direction:column; justify-content:center; gap: clamp(16px,2.2vh,28px); }
+.body-area:has(.mosaic), .body-area:has(.gstrip), .body-area:has(.steps.tall){ flex:1; }
 
 .grid{ display:grid; gap: clamp(16px,1.8vw,28px); }
 
