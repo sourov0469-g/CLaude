@@ -23,7 +23,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'src')
 ASSETS = os.path.join(ROOT, 'assets')
 
-TITLE = 'PizzaBurg HRM'
+TITLE = 'PizzaBurg HRM Practices'
 DESCRIPTION = (
     'An immersive 3D presentation on the human resource practices of PizzaBurg, '
     'by Group NEXIX, Bangladesh University.'
