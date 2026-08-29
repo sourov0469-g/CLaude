@@ -1,0 +1,97 @@
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="vignette" aria-hidden="true"></div>
+<div id="scrim" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+
+<main id="deck">
+  <header id="topbar">
+    <span class="wordmark">PizzaBurg</span>
+    <span class="sep"></span>
+    <span class="crumb long">HRM Practices</span>
+    <span class="sep long"></span>
+    <span class="crumb" id="crumb">&nbsp;</span>
+    <span class="spacer"></span>
+    <div class="tools">
+      <button class="iconbtn" id="btn-prev" title="Previous slide (←)" aria-label="Previous slide">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>
+      </button>
+      <button class="iconbtn" id="btn-next" title="Next slide (→)" aria-label="Next slide">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+      <button class="iconbtn" id="btn-grid" title="All slides (O)" aria-label="All slides">
+        <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1.5" y="1.5" width="5" height="5" rx="1"/><rect x="9.5" y="1.5" width="5" height="5" rx="1"/><rect x="1.5" y="9.5" width="5" height="5" rx="1"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg>
+      </button>
+      <button class="iconbtn" id="btn-notes" title="Speaker notes (N)" aria-label="Speaker notes">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 2.5h10v11H3z"/><path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>
+      </button>
+      <button class="iconbtn" id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg>
+      </button>
+      <button class="iconbtn" id="btn-help" title="Keyboard help (?)" aria-label="Keyboard help">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="8" cy="8" r="6.2"/><path d="M6.3 6.2a1.8 1.8 0 1 1 2.4 1.7c-.5.2-.7.6-.7 1.1"/><circle cx="8" cy="11.4" r=".7" fill="currentColor" stroke="none"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="slidewrap"></div>
+
+  <footer id="rail">
+    <div id="segments"></div>
+    <div id="counter"></div>
+  </footer>
+</main>
+
+<div id="handover" aria-hidden="true">
+  <div class="who" id="ho-who"></div>
+  <div class="role" id="ho-role"></div>
+</div>
+
+<section class="panel" id="panel-grid" aria-label="All slides">
+  <button class="iconbtn close" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  <h2>All slides</h2>
+  <p class="sub">Click any slide to jump. Keys <kbd>1</kbd>–<kbd>6</kbd> jump to each presenter’s first slide.</p>
+  <div id="grid"></div>
+</section>
+
+<section class="panel" id="panel-notes" aria-label="Speaker notes">
+  <button class="iconbtn close" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  <div id="notes">
+    <p class="nwho" id="notes-who"></p>
+    <h2 class="nslide" id="notes-slide"></h2>
+    <p class="nbody" id="notes-body"></p>
+    <p class="nnext" id="notes-next"></p>
+  </div>
+</section>
+
+<section class="panel" id="panel-help" aria-label="Keyboard help">
+  <button class="iconbtn close" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  <div id="help">
+    <h2>Driving the deck</h2>
+    <p class="sub">A presentation clicker sends Page Up and Page Down, so both are wired.</p>
+    <dl>
+      <dt><kbd>→</kbd> <kbd>↓</kbd> <kbd>Space</kbd> <kbd>Page Down</kbd></dt><dd>Next slide</dd>
+      <dt><kbd>←</kbd> <kbd>↑</kbd> <kbd>Page Up</kbd></dt><dd>Previous slide</dd>
+      <dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>First and last slide</dd>
+      <dt><kbd>1</kbd>–<kbd>6</kbd></dt><dd>Jump to a presenter’s first slide</dd>
+      <dt><kbd>O</kbd></dt><dd>Overview of every slide</dd>
+      <dt><kbd>N</kbd></dt><dd>Speaker notes for the current slide</dd>
+      <dt><kbd>F</kbd></dt><dd>Fullscreen — use this before you present</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Close any panel</dd>
+      <dt>Scroll / swipe</dt><dd>Also moves between slides</dd>
+      <dt>Mouse</dt><dd>Moving it shifts the camera slightly. It is meant to.</dd>
+    </dl>
+    <p class="sub" style="margin-top:26px">
+      The address bar updates as you go, so you can reload straight back to where you were.
+    </p>
+  </div>
+</section>
+
+<div id="entry">
+  <div>
+    <span class="em">PizzaBurg</span>
+    <h1 class="t2">Human Resource Management Practices</h1>
+    <p class="t3">An analytical presentation by Group NEXIX · Bangladesh University · BUS-2204. Built from a face-to-face interview with the General Manager of Human Resource, 26 August 2026.</p>
+    <button class="go" id="entry-go">Enter the presentation</button>
+    <p class="load" id="entry-load">loading</p>
+  </div>
+</div>
