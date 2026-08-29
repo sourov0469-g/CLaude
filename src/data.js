@@ -68,6 +68,7 @@ const SLIDES = [
   /* ===== ADITTO — slides 3 and 4 ========================================= */
   {
     id: 'method', by: 'aditto', layout: 'split', stage: 'stretch', handover: true,
+    photo2: { src: 'pb-interview-a', caption: 'Head office, Dhaka' },
     photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
     kicker: 'Methodology',
     title: 'How we collected our information',
@@ -85,6 +86,7 @@ const SLIDES = [
   },
   {
     id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
+    photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
     photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
@@ -173,7 +175,7 @@ const SLIDES = [
   /* ===== SOUROV — slides 9 and 10 ======================================== */
   {
     id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
-    photo: { src: 'pb-interview-b', caption: 'Measured against the Labour Act 2006' },
+    photo: { src: 'pb-justice', tone: 'warm', caption: 'Measured against the Labour Act 2006' },
     kicker: 'Discipline & Termination',
     title: 'Grounds for termination',
     lede: 'The grounds are fair and broadly match the Act. The procedure behind them is what is missing.',
@@ -226,6 +228,7 @@ const SLIDES = [
   {
     id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
     photo: { src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
+    photo2: { src: 'pb-pizza-closeup', caption: 'What all of it is for' },
     kicker: 'Conclusion',
     title: 'HRM built around operational continuity',
     lede: 'A business the owner watched himself ran on judgement. A thousand workers in ten towns cannot.',

@@ -42,6 +42,8 @@ figure.shot { margin: 0; display: grid; gap: 9px; }
   filter: saturate(1.08) contrast(1.06) brightness(1.03);
 }
 figure.shot.contain .frame { background: #f7f1e4; }
+/* a cool stock frame pulled into the same warmth as the kitchen photographs */
+figure.shot.warm .frame img { filter: sepia(0.3) saturate(1.35) contrast(1.05) brightness(1.06) hue-rotate(-8deg); }
 figure.shot.contain .frame img { object-fit: contain; }
 
 /* the grade: a warm wash, a cool lift in the shadows, and a soft edge */

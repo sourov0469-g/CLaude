@@ -20,8 +20,8 @@ const Deck = (function () {
     welfare: 'pb-pizzas-table-a',
     performance: 'pb-interview-e',
     discipline: 'pb-justice',
-    findings: 'pb-file-stack',
-    recommendations: 'pb-team-office',
+    findings: 'pb-desk-calendar',
+    recommendations: 'pb-interview-d',
     conclusion: 'pb-brand-salman',
     thanks: 'pb-team-selfie',
   };

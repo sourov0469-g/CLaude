@@ -55,7 +55,8 @@ const VIS = {};
 
 function buildMedia(m, small) {
   if (!m) return null;
-  const cls = 'shot rv' + (small ? ' small' : '') + (m.fit === 'contain' ? ' contain' : '');
+  const cls = 'shot rv' + (small ? ' small' : '') + (m.fit === 'contain' ? ' contain' : '')
+    + (m.tone ? ' ' + m.tone : '');
   const url = m.kind === 'video' ? Media.video(m.src) : '';
 
   let inner;

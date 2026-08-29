@@ -214,7 +214,7 @@ h1.title {
   margin: 0; color: var(--ink); text-wrap: balance;
 }
 .lay-cover h1.title { font-size: clamp(50px, calc(9.4 * var(--u)), 158px); font-weight: 700; letter-spacing: -0.04em; }
-.lay-closing h1.title { font-size: clamp(44px, calc(7.4 * var(--u)), 124px); font-weight: 700; letter-spacing: -0.035em; }
+.lay-closing h1.title { font-size: clamp(40px, calc(6.1 * var(--u)), 102px); font-weight: 700; letter-spacing: -0.035em; }
 
 .title-sub {
   font-family: var(--serif); font-variation-settings: 'opsz' 40;
@@ -475,6 +475,8 @@ figure.shot { margin: 0; display: grid; gap: 9px; }
   filter: saturate(1.08) contrast(1.06) brightness(1.03);
 }
 figure.shot.contain .frame { background: #f7f1e4; }
+/* a cool stock frame pulled into the same warmth as the kitchen photographs */
+figure.shot.warm .frame img { filter: sepia(0.3) saturate(1.35) contrast(1.05) brightness(1.06) hue-rotate(-8deg); }
 figure.shot.contain .frame img { object-fit: contain; }
 
 /* the grade: a warm wash, a cool lift in the shadows, and a soft edge */
@@ -818,6 +820,7 @@ const SLIDES = [
   /* ===== ADITTO — slides 3 and 4 ========================================= */
   {
     id: 'method', by: 'aditto', layout: 'split', stage: 'stretch', handover: true,
+    photo2: { src: 'pb-interview-a', caption: 'Head office, Dhaka' },
     photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
     kicker: 'Methodology',
     title: 'How we collected our information',
@@ -835,6 +838,7 @@ const SLIDES = [
   },
   {
     id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
+    photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
     photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
@@ -923,7 +927,7 @@ const SLIDES = [
   /* ===== SOUROV — slides 9 and 10 ======================================== */
   {
     id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
-    photo: { src: 'pb-interview-b', caption: 'Measured against the Labour Act 2006' },
+    photo: { src: 'pb-justice', tone: 'warm', caption: 'Measured against the Labour Act 2006' },
     kicker: 'Discipline & Termination',
     title: 'Grounds for termination',
     lede: 'The grounds are fair and broadly match the Act. The procedure behind them is what is missing.',
@@ -976,6 +980,7 @@ const SLIDES = [
   {
     id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
     photo: { src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
+    photo2: { src: 'pb-pizza-closeup', caption: 'What all of it is for' },
     kicker: 'Conclusion',
     title: 'HRM built around operational continuity',
     lede: 'A business the owner watched himself ran on judgement. A thousand workers in ten towns cannot.',
@@ -1159,7 +1164,8 @@ const VIS = {};
 
 function buildMedia(m, small) {
   if (!m) return null;
-  const cls = 'shot rv' + (small ? ' small' : '') + (m.fit === 'contain' ? ' contain' : '');
+  const cls = 'shot rv' + (small ? ' small' : '') + (m.fit === 'contain' ? ' contain' : '')
+    + (m.tone ? ' ' + m.tone : '');
   const url = m.kind === 'video' ? Media.video(m.src) : '';
 
   let inner;
@@ -2394,8 +2400,8 @@ const Deck = (function () {
     welfare: 'pb-pizzas-table-a',
     performance: 'pb-interview-e',
     discipline: 'pb-justice',
-    findings: 'pb-file-stack',
-    recommendations: 'pb-team-office',
+    findings: 'pb-desk-calendar',
+    recommendations: 'pb-interview-d',
     conclusion: 'pb-brand-salman',
     thanks: 'pb-team-selfie',
   };

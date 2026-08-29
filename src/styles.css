@@ -205,7 +205,7 @@ h1.title {
   margin: 0; color: var(--ink); text-wrap: balance;
 }
 .lay-cover h1.title { font-size: clamp(50px, calc(9.4 * var(--u)), 158px); font-weight: 700; letter-spacing: -0.04em; }
-.lay-closing h1.title { font-size: clamp(44px, calc(7.4 * var(--u)), 124px); font-weight: 700; letter-spacing: -0.035em; }
+.lay-closing h1.title { font-size: clamp(40px, calc(6.1 * var(--u)), 102px); font-weight: 700; letter-spacing: -0.035em; }
 
 .title-sub {
   font-family: var(--serif); font-variation-settings: 'opsz' 40;
