@@ -1,8 +1,7 @@
 /* ============================================================
-   PizzaBurg HRM — Deck Engine
-   Navigation, smooth fade/slide transitions, overview grid,
-   presenter notes, micro-interactions (tilt, spotlight, counters,
-   SVG draw-on, mini-timeline, flip cards, quadrants).
+   PizzaBurg HRM — Presentation Engine
+   Arrow keys / click / swipe to advance. Everything on a slide
+   appears on arrival — no click-to-reveal anywhere.
    ============================================================ */
 (function(){
   "use strict";
@@ -10,7 +9,6 @@
   const stageEl   = document.querySelector(".slides");
   const slideEls  = Array.from(document.querySelectorAll(".slide"));
   const total     = slideEls.length;
-  const dotsWrap  = document.getElementById("dots");
   const overview  = document.getElementById("overview");
   const ovGrid    = document.getElementById("ov-grid");
   const notesDraw = document.getElementById("notes-drawer");
@@ -21,30 +19,21 @@
   const sectionLabel = document.getElementById("section-label-text");
   const speakerAvatar = document.getElementById("speaker-avatar");
   const speakerWho = document.getElementById("speaker-who");
-  const sweepEl = document.getElementById("sweep");
 
   let idx = 0;
   let animating = false;
-  const deepLinkIdx = parseInt((location.hash||"").replace("#",""),10);
-  if(!isNaN(deepLinkIdx) && deepLinkIdx>=1 && deepLinkIdx<=total){ idx = deepLinkIdx-1; }
+  const deepLink = parseInt((location.hash||"").replace("#",""),10);
+  if(!isNaN(deepLink) && deepLink>=1 && deepLink<=total){ idx = deepLink-1; }
 
-  slideEls.forEach((s,i)=>{
-    const b=document.createElement("button");
-    b.setAttribute("aria-label","Go to slide "+(i+1));
-    b.addEventListener("click",()=>goTo(i));
-    dotsWrap.appendChild(b);
-  });
-  const dotEls = Array.from(dotsWrap.children);
-
+  // overview cards
   slideEls.forEach((s,i)=>{
     const card=document.createElement("div");
     card.className="ov-card";
-    const swatch=document.createElement("div");
-    swatch.className="swatch";
-    swatch.style.background = s.dataset.swatch ? s.dataset.swatch : "var(--accent)";
-    const num=document.createElement("div"); num.className="num"; num.textContent = String(i+1).padStart(2,"0");
-    const ttl=document.createElement("div"); ttl.className="ttl"; ttl.textContent = s.dataset.title || ("Slide "+(i+1));
-    card.appendChild(swatch); card.appendChild(num); card.appendChild(ttl);
+    const sw=document.createElement("div"); sw.className="swatch";
+    sw.style.background = s.dataset.swatch || "var(--accent)";
+    const num=document.createElement("div"); num.className="num"; num.textContent=String(i+1).padStart(2,"0");
+    const ttl=document.createElement("div"); ttl.className="ttl"; ttl.textContent=s.dataset.title||("Slide "+(i+1));
+    card.append(sw,num,ttl);
     card.addEventListener("click",()=>{ goTo(i); closeOverview(); });
     ovGrid.appendChild(card);
   });
@@ -52,162 +41,120 @@
 
   function applyPositions(){
     slideEls.forEach((s,i)=>{
-      let pos;
       const d = i - idx;
-      if(d===0) pos="active";
-      else if(d===1) pos="next";
-      else if(d===-1) pos="prev";
-      else pos="hidden";
-      s.dataset.pos = pos;
+      s.dataset.pos = d===0 ? "active" : d===1 ? "next" : d===-1 ? "prev" : "hidden";
       s.classList.toggle("is-active", d===0);
     });
   }
 
+  function animateBars(root){
+    root.querySelectorAll(".bfill:not(.done)").forEach((el,i)=>{
+      el.classList.add("done");
+      const w = el.dataset.w || "0";
+      setTimeout(()=>{ el.style.width = w+"%"; }, 150+i*90);
+    });
+  }
   function animateCounters(root){
     root.querySelectorAll(".counter-num:not(.done)").forEach(el=>{
       el.classList.add("done");
       const to = parseFloat(el.dataset.to||"0");
       const suffix = el.dataset.suffix||"";
-      const dur = 1300, start=performance.now();
-      const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals,10):0;
-      function step(t){
-        const p = Math.min(1,(t-start)/dur);
-        const eased = 1-Math.pow(1-p,3);
-        el.textContent = (to*eased).toFixed(decimals) + suffix;
+      const dur=1100, start=performance.now();
+      (function step(t){
+        const p=Math.min(1,(t-start)/dur), e=1-Math.pow(1-p,3);
+        el.textContent = Math.round(to*e) + suffix;
         if(p<1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
+      })(start);
     });
   }
   function drawPaths(root){
     root.querySelectorAll(".draw-path:not(.done)").forEach(p=>{
       p.classList.add("done");
-      const len = p.getTotalLength();
-      p.style.strokeDasharray = len;
-      p.style.strokeDashoffset = len;
+      const len=p.getTotalLength();
+      p.style.strokeDasharray=len; p.style.strokeDashoffset=len;
       p.getBoundingClientRect();
-      p.style.transition = "stroke-dashoffset 1300ms cubic-bezier(.16,1,.3,1)";
-      requestAnimationFrame(()=> p.style.strokeDashoffset = 0);
+      p.style.transition="stroke-dashoffset 1100ms cubic-bezier(.16,1,.3,1)";
+      requestAnimationFrame(()=> p.style.strokeDashoffset=0);
     });
-  }
-  function animateBars(root){
-    root.querySelectorAll(".bar-fill:not(.done)").forEach((el,i)=>{
-      el.classList.add("done");
-      const w = el.dataset.w || "0";
-      setTimeout(()=>{ el.style.width = w+"%"; }, 100+i*80);
-    });
-  }
-  function selectMtNode(node){
-    const mt = node.closest(".mt");
-    mt.querySelectorAll(".mt-node").forEach(n=> n.classList.remove("active"));
-    node.classList.add("active");
-    const out = mt.querySelector(".mt-detail");
-    if(out) out.innerHTML = node.dataset.detail || "";
-    const meanEl = mt.querySelector(".mt-meaning");
-    if(meanEl) meanEl.innerHTML = node.dataset.meaning || "";
   }
 
-  function triggerReveals(slide){
-    const items = slide.querySelectorAll(".reveal");
+  // everything lands together, fast — a slide is fully readable within ~half a second
+  function reveal(slide){
+    const items = slide.querySelectorAll(".rv");
     items.forEach(el=> el.classList.remove("in"));
     void slide.offsetWidth;
-    items.forEach((el,i)=>{
-      const delay = el.dataset.delay ? parseInt(el.dataset.delay,10) : i*60;
-      setTimeout(()=> el.classList.add("in"), 50+delay);
-    });
+    items.forEach((el,i)=> setTimeout(()=> el.classList.add("in"), 30 + i*28));
     document.querySelectorAll("video[data-autoplay]").forEach(v=>{
-      if(slide.contains(v)){ v.currentTime=0; v.play().catch(()=>{}); }
-      else { v.pause(); }
+      if(slide.contains(v)){ v.currentTime=0; v.play().catch(()=>{}); } else { v.pause(); }
     });
-    setTimeout(()=>{ animateCounters(slide); drawPaths(slide); animateBars(slide); }, 200);
-    slide.querySelectorAll(".mt").forEach(mt=>{
-      const node = mt.querySelector(".mt-node.active") || mt.querySelector(".mt-node");
-      if(node) selectMtNode(node);
-    });
+    setTimeout(()=>{ animateBars(slide); animateCounters(slide); drawPaths(slide); }, 160);
   }
 
   function updateChrome(){
-    dotEls.forEach((d,i)=> d.classList.toggle("active", i===idx));
     ovCards.forEach((c,i)=> c.classList.toggle("current", i===idx));
     progressFill.style.width = ((idx)/(total-1)*100).toFixed(2)+"%";
     counterEl.innerHTML = "<b>"+String(idx+1).padStart(2,"0")+"</b> / "+String(total).padStart(2,"0");
     const s = slideEls[idx];
     sectionLabel.textContent = s.dataset.section || "";
-    const notes = s.dataset.notes || "No notes for this slide.";
-    notesBody.textContent = notes;
+    notesBody.textContent = s.dataset.notes || "No notes for this slide.";
     const presenter = s.dataset.presenter || "";
+    const chip = speakerAvatar.parentElement;
     if(presenter){
       speakerAvatar.textContent = presenter.split(" ").map(w=>w[0]).slice(0,2).join("");
       speakerWho.innerHTML = "Presented by<b>"+presenter+"</b>";
-      speakerAvatar.parentElement.style.display="flex";
-    } else {
-      speakerAvatar.parentElement.style.display="none";
-    }
+      chip.style.display="flex";
+    } else { chip.style.display="none"; }
     history.replaceState(null,"","#"+(idx+1));
-  }
-
-  function fireSweep(dir){
-    sweepEl.classList.remove("go","rev");
-    void sweepEl.offsetWidth;
-    sweepEl.classList.add("go");
-    if(dir<0) sweepEl.classList.add("rev");
   }
 
   function goTo(n){
     if(animating || n===idx || n<0 || n>=total) return;
-    const dir = n > idx ? 1 : -1;
     idx = n;
     applyPositions();
     updateChrome();
-    fireSweep(dir);
     animating = true;
-    setTimeout(()=>{ animating=false; triggerReveals(slideEls[idx]); }, 60);
+    setTimeout(()=>{ animating=false; reveal(slideEls[idx]); }, 50);
   }
-  function next(){ goTo(Math.min(idx+1,total-1)); }
-  function prev(){ goTo(Math.max(idx-1,0)); }
+  const next = ()=> goTo(Math.min(idx+1,total-1));
+  const prev = ()=> goTo(Math.max(idx-1,0));
 
   document.getElementById("btn-next").addEventListener("click", next);
   document.getElementById("btn-prev").addEventListener("click", prev);
 
   window.addEventListener("keydown",(e)=>{
-    if(overview.classList.contains("open")){
-      if(e.key==="Escape") closeOverview();
-      return;
-    }
-    if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"){ e.preventDefault(); next(); }
-    else if(e.key==="ArrowLeft"||e.key==="PageUp"){ e.preventDefault(); prev(); }
+    if(overview.classList.contains("open")){ if(e.key==="Escape") closeOverview(); return; }
+    const k=e.key.toLowerCase();
+    if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"||e.key==="ArrowDown"||e.key==="Enter"){ e.preventDefault(); next(); }
+    else if(e.key==="ArrowLeft"||e.key==="PageUp"||e.key==="ArrowUp"||e.key==="Backspace"){ e.preventDefault(); prev(); }
     else if(e.key==="Home"){ goTo(0); }
     else if(e.key==="End"){ goTo(total-1); }
-    else if(e.key.toLowerCase()==="g"){ toggleOverview(); }
-    else if(e.key.toLowerCase()==="n"){ toggleNotes(); }
-    else if(e.key.toLowerCase()==="f"){ toggleFullscreen(); }
+    else if(k==="g"){ toggleOverview(); }
+    else if(k==="n"){ toggleNotes(); }
+    else if(k==="f"){ toggleFullscreen(); }
+  });
+
+  // click anywhere advances; click the left sixth goes back
+  stageEl.addEventListener("click",(e)=>{
+    if(e.target.closest("video")) return;
+    (e.clientX < window.innerWidth*0.16) ? prev() : next();
   });
 
   let tsx=0,tsy=0;
   stageEl.addEventListener("touchstart",(e)=>{ tsx=e.touches[0].clientX; tsy=e.touches[0].clientY; },{passive:true});
   stageEl.addEventListener("touchend",(e)=>{
     const dx=e.changedTouches[0].clientX-tsx, dy=e.changedTouches[0].clientY-tsy;
-    if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)){ dx<0? next():prev(); }
+    if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)){ dx<0? next():prev(); }
   },{passive:true});
 
   let wheelLock=false;
   window.addEventListener("wheel",(e)=>{
     if(overview.classList.contains("open")) return;
-    if(Math.abs(e.deltaY) < 42) return;
-    if(wheelLock) return;
-    wheelLock=true;
-    e.deltaY>0 ? next() : prev();
-    setTimeout(()=> wheelLock=false, 650);
+    if(Math.abs(e.deltaY)<40 || wheelLock) return;
+    wheelLock=true; e.deltaY>0 ? next() : prev();
+    setTimeout(()=> wheelLock=false, 620);
   },{passive:true});
 
-  stageEl.addEventListener("click",(e)=>{
-    const w = window.innerWidth;
-    if(e.clientX < w*0.06) prev();
-    else if(e.clientX > w*0.94) next();
-  });
-
-  function toggleOverview(){ overview.classList.contains("open") ? closeOverview() : openOverview(); }
-  function openOverview(){ overview.classList.add("open"); }
+  function toggleOverview(){ overview.classList.toggle("open"); }
   function closeOverview(){ overview.classList.remove("open"); }
   document.getElementById("btn-overview").addEventListener("click", toggleOverview);
   overview.addEventListener("click",(e)=>{ if(e.target===overview) closeOverview(); });
@@ -216,38 +163,12 @@
   notesBtn.addEventListener("click", toggleNotes);
 
   function toggleFullscreen(){
-    if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); }
-    else{ document.exitFullscreen?.(); }
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
   }
   document.getElementById("btn-fs").addEventListener("click", toggleFullscreen);
 
   applyPositions();
   updateChrome();
-  setTimeout(()=> triggerReveals(slideEls[idx]), 120);
-
-  /* ---- micro-interactions ---- */
-  document.querySelectorAll(".tilt-card").forEach(card=>{
-    card.addEventListener("mousemove",(e)=>{
-      const r=card.getBoundingClientRect();
-      const px=(e.clientX-r.left)/r.width-0.5, py=(e.clientY-r.top)/r.height-0.5;
-      card.style.transform = `rotateY(${px*8}deg) rotateX(${-py*8}deg) translateZ(6px)`;
-    });
-    card.addEventListener("mouseleave",()=>{ card.style.transform="rotateY(0) rotateX(0)"; });
-  });
-  document.querySelectorAll(".spotlit").forEach(el=>{
-    el.addEventListener("mousemove",(e)=>{
-      const r=el.getBoundingClientRect();
-      el.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");
-      el.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%");
-    });
-  });
-  document.addEventListener("click",(e)=>{
-    const node = e.target.closest(".mt-node");
-    if(node){ selectMtNode(node); }
-    const quad = e.target.closest(".quad-cell");
-    if(quad){ quad.classList.toggle("open"); }
-    const flip = e.target.closest(".flip3d");
-    if(flip){ flip.classList.toggle("flipped"); }
-  });
-
+  setTimeout(()=> reveal(slideEls[idx]), 100);
 })();
