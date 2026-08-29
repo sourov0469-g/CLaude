@@ -131,7 +131,7 @@ const World = (function () {
 
   function marbleTexture() {
     const c = canvas(512), g = c.getContext('2d');
-    g.fillStyle = '#f4efe6'; g.fillRect(0, 0, 512, 512);
+    g.fillStyle = '#eae2d4'; g.fillRect(0, 0, 512, 512);
     for (let i = 0; i < 40; i++) {
       g.strokeStyle = 'rgba(148,138,124,' + (0.04 + Math.random() * 0.08) + ')';
       g.lineWidth = 0.6 + Math.random() * 2.6;
@@ -552,6 +552,7 @@ const World = (function () {
       mat(WOOD, { rough: 0.66 })
     ), [0, 0, 0], [-Math.PI / 2, 0, 0]).translateZ(-0.78));
     P.board.children[1].position.set(0, 0, 8.2);
+    P.board.position.y = -0.78;   /* its top surface is the pizza's ground */
     P.board.visible = false;
     P.group.add(P.board);
 
@@ -566,7 +567,7 @@ const World = (function () {
     const peelGeo = new T.ExtrudeGeometry(peelShape, { depth: 0.3, bevelEnabled: true, bevelSize: 0.08, bevelThickness: 0.08, bevelSegments: 1, curveSegments: 30 });
     peelGeo.rotateX(-Math.PI / 2);
     P.peel = new T.Mesh(peelGeo, mat(STEEL, { rough: 0.3, metal: 0.62 }));
-    P.peel.position.y = 0.02;
+    P.peel.position.y = -0.34;    /* likewise: the blade sits under the base */
     P.peel.visible = false;
     P.group.add(P.peel);
 
@@ -754,8 +755,8 @@ const World = (function () {
 
     P.lifted.visible = anim.lift > 0.02;
     if (P.lifted.visible) {
-      P.lifted.position.set(0, fieldY + 0.3 + anim.lift * 5.6, 0);
-      P.lifted.rotation.set(-anim.lift * 0.4, 0.34, 0);
+      P.lifted.position.set(anim.lift * 2.4, fieldY + 0.3 + anim.lift * 7.2, anim.lift * 1.2);
+      P.lifted.rotation.set(-anim.lift * 0.62, 0.28, anim.lift * 0.2);
       P.lifted.scale.setScalar(R / 8);
     }
 
@@ -807,14 +808,14 @@ const World = (function () {
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.02;
+    renderer.toneMappingExposure = 0.94;
     renderer.outputColorSpace = T.SRGBColorSpace;
 
     scene = new T.Scene();
     camera = new T.PerspectiveCamera(rig.fov, window.innerWidth / window.innerHeight, 0.4, 400);
     scene.environment = environment();
 
-    scene.add(new T.HemisphereLight(0xfff6e8, 0xb59a7c, 0.75));
+    scene.add(new T.HemisphereLight(0xfff6e8, 0xa88f70, 0.62));
     sun = new T.DirectionalLight(0xfff1d8, 2.0);
     sun.position.set(26, 44, 24);
     scene.add(sun);
@@ -849,20 +850,23 @@ const World = (function () {
 
   /* ---------------------------------------------------------------- moving */
 
+  /* The text column owns the left half, so every vantage aims about nine
+     units left of the subject: that puts the pizza — or the oven — in the
+     upper right, clear of the type and above the aside card. */
   const VANTAGE = {
-    flour:    { p: [-6, 19, 42], t: [-33, 3.5, -4], fov: 40 },
-    dough:    { p: [4, 14, 33], t: [-7.5, 1.8, 0], fov: 40 },
-    stretch:  { p: [2, 10, 27], t: [-6.5, 1.2, 0], fov: 42 },
-    base:     { p: [6, 18, 34], t: [-7.0, 0.9, 0], fov: 40 },
-    sauce:    { p: [1, 13, 29], t: [-6.5, 0.9, 0], fov: 42 },
-    cheese:   { p: [4, 11, 27], t: [-6.5, 1.0, 0], fov: 42 },
-    toppings: { p: [-1, 17, 31], t: [-7.0, 0.9, 0], fov: 40 },
-    peel:     { p: [2, 12, 31], t: [-13.5, 3.0, 0], fov: 42 },
-    oven:     { p: [-2, 15, 40], t: [-31, 5.6, 2], fov: 42 },
-    bake:     { p: [-8, 13, 36], t: [-31, 5.4, 2], fov: 42 },
-    out:      { p: [6, 17, 34], t: [-7.0, 1.0, 0], fov: 40 },
-    slice:    { p: [2, 13, 29], t: [-6.5, 1.0, 0], fov: 42 },
-    served:   { p: [3, 10, 30], t: [-6.5, 2.8, 0], fov: 42 },
+    flour:    { p: [-1, 16, 39], t: [-47, 5.0, 0], fov: 40 },
+    dough:    { p: [3, 12, 30], t: [-9.0, 2.0, 0], fov: 41 },
+    stretch:  { p: [1, 10, 26], t: [-8.5, 1.6, 0], fov: 42 },
+    base:     { p: [4, 15, 31], t: [-9.0, 1.4, 0], fov: 41 },
+    sauce:    { p: [0, 12, 27], t: [-8.5, 1.4, 0], fov: 42 },
+    cheese:   { p: [3, 11, 26], t: [-8.5, 1.5, 0], fov: 42 },
+    toppings: { p: [-1, 14, 29], t: [-9.0, 1.4, 0], fov: 41 },
+    peel:     { p: [1, 12, 29], t: [-15.0, 3.4, 0], fov: 42 },
+    oven:     { p: [-1, 13, 36], t: [-40, 5.4, 3], fov: 42 },
+    bake:     { p: [-1, 12, 34], t: [-40, 5.2, 3], fov: 42 },
+    out:      { p: [4, 14, 31], t: [-9.0, 1.6, 0], fov: 41 },
+    slice:    { p: [1, 12, 27], t: [-8.5, 1.6, 0], fov: 42 },
+    served:   { p: [2, 10, 27], t: [-8.5, 3.2, 0], fov: 42 },
   };
 
   function goTo(slide, instant) {
@@ -879,7 +883,7 @@ const World = (function () {
       sun.position.set(lx, ly, lz);
     }
 
-    const v = VANTAGE[slide.stage] || VANTAGE.flour;
+    const v = slide.cam || VANTAGE[slide.stage] || VANTAGE.flour;
     const target = { px: v.p[0], py: v.p[1], pz: v.p[2], tx: v.t[0], ty: v.t[1], tz: v.t[2], fov: slide.fov || v.fov || 42 };
 
     if (instant || reduced || !window.gsap) {

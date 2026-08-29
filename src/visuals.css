@@ -78,7 +78,7 @@ figure.shot.phone { text-align: center; }
 }
 .welic { width: 22px; height: 22px; color: var(--red); }
 .wel b { font-size: clamp(12.5px, 1vw, 15px); color: var(--ink); }
-.wel span { font-size: 11.5px; color: var(--ink-3); line-height: 1.36; }
+.wel span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px); color: var(--ink-3); line-height: 1.36; }
 
 /* --- the review loop ------------------------------------------------------ */
 ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
@@ -88,10 +88,10 @@ ol.steps .sn {
   font-weight: 700; font-size: 16px; color: var(--red); letter-spacing: -0.02em;
 }
 ol.steps b { display: block; font-size: 13px; color: var(--ink); }
-ol.steps span { font-size: 11.5px; color: var(--ink-3); line-height: 1.34; }
+ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px); color: var(--ink-3); line-height: 1.34; }
 
 /* --- the ledger ----------------------------------------------------------- */
-.ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
 .lcol {
   padding: 15px 16px; border-radius: 14px; border: 1px solid var(--rule);
   background: var(--card); box-shadow: var(--lift);
@@ -101,14 +101,14 @@ ol.steps span { font-size: 11.5px; color: var(--ink-3); line-height: 1.34; }
 .lcol.yes h4 { color: var(--basil); }
 .lcol.no h4 { color: var(--red-deep); }
 .lcol ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
-.lcol li { font-size: 11.5px; line-height: 1.34; color: var(--ink-2); padding-left: 16px; position: relative; }
+.lcol li { font-size: clamp(10px, calc(0.42 * var(--u) + 5.2px), 12px); line-height: 1.34; color: var(--ink-2); padding-left: 16px; position: relative; }
 .lcol li::before { position: absolute; left: 0; top: 0; font-weight: 700; }
 .lcol.yes li::before { content: '\2713'; color: var(--basil); }
 .lcol.no li { color: var(--ink-3); }
 .lcol.no li::before { content: '\25CB'; color: var(--red); }
 
 /* --- recommendations ------------------------------------------------------ */
-.recs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+.recs { display: grid; gap: 10px; align-items: start; }
 .rgroup {
   padding: 16px 17px; border-radius: 14px; border: 1px solid var(--rule);
   background: var(--card); box-shadow: var(--lift);
@@ -116,7 +116,7 @@ ol.steps span { font-size: 11.5px; color: var(--ink-3); line-height: 1.34; }
 }
 .rgroup.first { background: rgba(253,236,232,0.86); border-color: rgba(168,36,24,0.24); }
 .rgroup h4 {
-  margin: 0 0 11px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
+  margin: 0 0 9px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
   font-size: 11px; font-weight: 500; color: var(--ink-3); letter-spacing: 0.01em;
 }
 .pill {
@@ -124,9 +124,9 @@ ol.steps span { font-size: 11.5px; color: var(--ink-3); line-height: 1.34; }
   padding: 4px 9px; border-radius: 999px; background: var(--red); color: #fff;
 }
 .pill.alt { background: var(--ink-4); }
-.rgroup ol { margin: 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 8px; }
+.rgroup ol { margin: 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 6px; }
 .rgroup li {
-  font-size: clamp(11.5px, 0.88vw, 13.5px); line-height: 1.38; color: var(--ink-2);
+  font-size: clamp(10.5px, calc(0.5 * var(--u) + 5.5px), 13px); line-height: 1.34; color: var(--ink-2);
   padding-left: 20px; position: relative;
 }
 .rgroup li::before {
@@ -138,8 +138,9 @@ ol.steps span { font-size: 11.5px; color: var(--ink-3); line-height: 1.34; }
 .rgroup li b { color: var(--ink); font-weight: 650; }
 
 /* --- team ----------------------------------------------------------------- */
-.teamwrap { display: grid; gap: 16px; justify-items: center; }
-.teamwrap figure.shot > img { max-height: 38vh; width: auto; }
+.teamwrap { display: grid; gap: 14px; justify-items: center; }
+.teamwrap figure.shot > img { max-height: 30vh; width: auto; border-radius: 12px; }
+.teamwrap .phonebody video { max-height: 26vh; }
 .teamlist {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(3, auto); gap: 7px 30px; justify-content: center;
@@ -148,7 +149,7 @@ ol.steps span { font-size: 11.5px; color: var(--ink-3); line-height: 1.34; }
 .teamlist .tn { font-size: 12.5px; font-weight: 620; color: var(--ink); }
 .teamlist .ti { font-size: 10px; color: var(--ink-4); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
 
-@media (max-width: 1000px) {
-  .welgrid, .ledger, .recs, .twogrid { grid-template-columns: 1fr; }
+@media (max-width: 1080px) {
+  .welgrid, .ledger, .twogrid { grid-template-columns: 1fr; }
   .teamlist { grid-template-columns: repeat(2, auto); }
 }

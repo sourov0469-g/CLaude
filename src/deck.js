@@ -11,19 +11,19 @@ const Deck = (function () {
 
   /* which photograph sits, heavily blurred, behind the bench */
   const BACKDROPS = {
-    cover: 'stock-chefs-kitchen-modern',
-    intro: 'stock-storefront-pizzeria-sunny',
-    method: 'interview-wide',
-    planning: 'stock-counter-cashier-restaurant',
-    recruit: 'stock-cooks-preparing-dough-team',
-    turnover: 'stock-sous-chefs-kitchen',
-    welfare: 'stock-canteen-group-eating',
-    performance: 'stock-pizza-peel-oven-baked',
-    discipline: 'stock-pizza-in-oven',
-    findings: 'stock-archive-stacks-paper-string',
-    recommendations: 'stock-whiteboard-presenting-team',
-    conclusion: 'pizzaburg-dailyasianage-feature',
-    thanks: 'hero-pizzas',
+    cover: 'pb-neon-sign',
+    intro: 'pb-two-pizzas',
+    method: 'pb-interview-c',
+    planning: 'pb-pizza-pan',
+    recruit: 'pb-dough-hands',
+    turnover: 'pb-dhaka-street',
+    welfare: 'pb-pizzas-table-a',
+    performance: 'pb-interview-e',
+    discipline: 'pb-justice',
+    findings: 'pb-file-stack',
+    recommendations: 'pb-team-office',
+    conclusion: 'pb-brand-salman',
+    thanks: 'pb-team-selfie',
   };
 
   let idx = 0, prevIdx = -1, started = false, animating = null, reduced = false;

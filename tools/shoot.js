@@ -31,7 +31,7 @@ const H = Number(process.env.SHOT_H || 900);
   const list = want.length ? want : [0];
   for (const i of list) {
     await page.evaluate((n) => window.Deck.go(n, true), i);
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2700);
     const id = await page.evaluate(() => SLIDES[Deck.current()].id);
     await page.screenshot({ path: path.join(OUT, String(i).padStart(2, '0') + '-' + id + '.png') });
   }

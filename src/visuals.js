@@ -167,11 +167,24 @@ VIS.recs = function () {
 /* ------------------------------------------------------------------ team -- */
 
 VIS.team = function () {
-  return el('div', { class: 'teamwrap rv' }, [
-    el('figure', { class: 'shot' }, [
-      el('img', { src: Media.src('team-group'), alt: 'Group NEXIX at PizzaBurg head office' }),
+  /* the pan across the whole group, shot at the end of the interview */
+  const url = Media.video('team-pan-12s');
+  let head;
+  if (url) {
+    const v = el('video', { src: url, poster: Media.src('pb-team-office'), muted: 'muted', loop: 'loop', playsinline: 'playsinline', autoplay: 'autoplay', preload: 'auto' });
+    v.muted = true;
+    head = el('figure', { class: 'shot phone' }, [
+      el('div', { class: 'phonebody' }, v),
       el('figcaption', { text: 'Group NEXIX at PizzaBurg head office' }),
-    ]),
+    ]);
+  } else {
+    head = el('figure', { class: 'shot' }, [
+      el('img', { src: Media.src('pb-team-office'), alt: 'Group NEXIX at PizzaBurg head office' }),
+      el('figcaption', { text: 'Group NEXIX at PizzaBurg head office' }),
+    ]);
+  }
+  return el('div', { class: 'teamwrap panel rv' }, [
+    head,
     el('ul', { class: 'teamlist' }, PRESENTERS.map(function (p) {
       return el('li', {}, [
         el('span', { class: 'tn', text: p.name }),
