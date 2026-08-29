@@ -1,0 +1,174 @@
+/* ==========================================================================
+   PizzaBurg CSR — "Reported / Proposed" (The Evidence Deck)
+   Built to the locked spec. Fixed 1920x1080 stage, transform-scaled.
+   Every position/margin/gap is a multiple of 8. Nothing is centre-aligned.
+   ========================================================================== */
+
+@font-face{font-family:'Fraunces';src:url('../fonts/fraunces-600.woff2') format('woff2');
+           font-weight:600;font-style:normal;font-display:block;}
+@font-face{font-family:'Manrope';src:url('../fonts/manrope-var.woff2') format('woff2');
+           font-weight:200 800;font-style:normal;font-display:block;}
+
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;background:#0B0A09;}
+#viewport{position:fixed;inset:0;overflow:hidden;background:#0B0A09;}
+
+.stage{
+  --paper:#FAF7F1; --ink:#221E1A; --muted:#6B5F51; --accent:#B5182A; --panel:#EDE4D5;
+  position:absolute; left:50%; top:50%;
+  width:1920px; height:1080px;
+  transform:translate(-50%,-50%) scale(var(--s,1));
+  transform-origin:center center;
+  background:var(--paper);
+  overflow:hidden;
+  visibility:hidden;
+}
+.fonts-ready .stage{visibility:visible;}
+
+/* --- defensive resets (spec rules 1, 5, 6, 13) --- */
+.stage *{box-sizing:border-box;min-width:0;min-height:0;border-radius:0;}
+.stage img,.stage video{display:block;max-width:none;object-fit:cover;object-position:50% 45%;}
+.fullbleed img,.fullbleed video{object-position:50% 40%;}
+
+/* ==========================  SLIDES  ================================== */
+.slides{position:absolute;inset:0;}
+.slide{
+  position:absolute;inset:0;background:var(--paper);
+  visibility:hidden;opacity:0;pointer-events:none;
+  transition:opacity 620ms cubic-bezier(.16,1,.3,1);
+}
+.slide.is-active{visibility:visible;opacity:1;pointer-events:auto;}
+@media (prefers-reduced-motion: reduce){ .slide{transition:opacity 200ms linear;} }
+
+/* ==========================  FIXED ZONES  ============================= */
+.zone-eyebrow{position:absolute;left:96px;top:80px;width:1728px;height:32px;
+  font:500 22px/32px Manrope,system-ui,sans-serif;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--muted);}
+.zone-eyebrow.is-proposal{color:var(--accent);}
+.zone-accentrule{position:absolute;left:96px;top:112px;width:96px;height:4px;background:var(--accent);}
+.zone-title{position:absolute;left:96px;top:120px;width:1728px;height:112px;
+  font:600 44px/56px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.005em;}
+.zone-rule{position:absolute;left:96px;top:247px;width:1728px;height:2px;background:rgba(34,30,26,.55);}
+.zone-body{position:absolute;left:96px;top:264px;width:1728px;height:672px;}
+.zone-foot{position:absolute;left:96px;top:984px;width:1728px;height:32px;
+  font:500 20px/32px Manrope,system-ui,sans-serif;color:var(--muted);}
+.foot-page{position:absolute;left:0;top:0;}
+.foot-src{position:absolute;left:584px;top:0;width:720px;white-space:nowrap;overflow:hidden;}
+.foot-tag{position:absolute;right:0;top:0;letter-spacing:.10em;text-transform:uppercase;}
+.fullbleed .zone-eyebrow,.fullbleed .zone-foot{color:var(--paper);}
+
+/* ==========================  A1 — FULL BLEED  ========================= */
+.fullbleed .bg{position:absolute;inset:0;width:1920px;height:1080px;}
+.fullbleed .scrim{position:absolute;inset:0;background:linear-gradient(to bottom,
+  rgba(34,30,26,0) 0px, rgba(34,30,26,0) 232px,
+  rgba(34,30,26,.86) 488px, rgba(34,30,26,.86) 1080px);}
+.fb-text{position:absolute;left:96px;color:var(--paper);}
+.cover-title{top:760px;width:1728px;height:80px;font:600 64px/80px Fraunces,Georgia,serif;}
+.cover-sub{top:856px;width:1728px;height:40px;font:400 28px/40px Manrope,system-ui,sans-serif;letter-spacing:.02em;}
+.cover-disc{top:904px;width:1728px;height:32px;font:400 22px/32px Manrope,system-ui,sans-serif;}
+.close-s{width:1440px;font:600 40px/56px Fraunces,Georgia,serif;}
+.close-s1{top:496px;height:112px;}
+.close-s2{top:624px;height:112px;}
+.close-s3{top:752px;height:56px;}
+.close-ty{top:832px;height:48px;width:1440px;font:600 40px/48px Fraunces,Georgia,serif;}
+.close-attr{top:904px;height:32px;width:1440px;font:500 22px/32px Manrope,system-ui,sans-serif;}
+
+/* ==========================  A2 — TWO COLUMN  ========================= */
+.a2-text{position:absolute;left:0;top:0;width:1080px;}
+.a2-p{position:absolute;left:0;width:1080px;font:400 32px/40px Manrope,system-ui,sans-serif;color:var(--ink);}
+.a2-p1{top:0;height:120px;}
+.a2-p2{top:144px;height:120px;}
+.a2-photo{position:absolute;left:1128px;top:0;width:600px;height:616px;}
+.a2-photo img,.a2-photo video{width:600px;height:616px;}
+.a2-cap{position:absolute;left:1128px;top:640px;width:600px;height:32px;
+  font:400 22px/32px Manrope,system-ui,sans-serif;color:var(--muted);white-space:nowrap;overflow:hidden;}
+
+/* ==========================  A3 — STAT TRIO  ========================== */
+.a3-col{position:absolute;top:0;width:560px;}
+.a3-c1{left:0;} .a3-c2{left:584px;} .a3-c3{left:1168px;}
+.a3-num{position:absolute;top:0;width:560px;height:168px;
+  font:600 144px/168px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.02em;}
+.a3-lab{position:absolute;top:192px;width:560px;height:64px;
+  font:500 22px/32px Manrope,system-ui,sans-serif;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--muted);}
+.a3-det{position:absolute;top:288px;width:560px;height:108px;
+  font:400 28px/36px Manrope,system-ui,sans-serif;color:var(--ink);}
+
+/* ==========================  A4 — 2x2 QUADRANT  ====================== */
+.a4-cell{position:absolute;width:840px;height:320px;}
+.a4-q1{left:0;top:0;} .a4-q2{left:888px;top:0;}
+.a4-q3{left:0;top:352px;} .a4-q4{left:888px;top:352px;}
+.a4-eb{position:absolute;top:0;width:840px;height:32px;
+  font:500 22px/32px Manrope,system-ui,sans-serif;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--muted);}
+.a4-name{position:absolute;top:48px;width:840px;height:40px;
+  font:600 32px/40px Fraunces,Georgia,serif;color:var(--ink);}
+.a4-body{position:absolute;top:104px;width:840px;height:144px;
+  font:400 28px/36px Manrope,system-ui,sans-serif;color:var(--ink);}
+
+/* ==========================  A6 — THREE-UP SQUARES  ================== */
+.a6-cell{position:absolute;top:0;width:560px;}
+.a6-1{left:0;} .a6-2{left:584px;} .a6-3{left:1168px;}
+.a6-media{position:absolute;top:0;width:560px;height:560px;background:var(--panel);}
+.a6-media img,.a6-media video{width:560px;height:560px;}
+.a6-cap{position:absolute;top:584px;width:560px;height:64px;
+  font:400 22px/32px Manrope,system-ui,sans-serif;color:var(--muted);}
+
+/* ==========================  A7 — HERO STATEMENT  ==================== */
+.a7-stat{position:absolute;left:0;top:0;width:1440px;height:160px;
+  font:600 64px/80px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.01em;}
+.a7-sub{position:absolute;left:0;top:208px;width:1440px;height:120px;
+  font:400 32px/40px Manrope,system-ui,sans-serif;color:var(--ink);}
+
+/* ==========================  A8 — 3x2 PERSON CARDS  ================== */
+.a8-cell{position:absolute;width:560px;height:320px;}
+.a8-c1{left:0;top:0;} .a8-c2{left:584px;top:0;} .a8-c3{left:1168px;top:0;}
+.a8-c4{left:0;top:352px;} .a8-c5{left:584px;top:352px;} .a8-c6{left:1168px;top:352px;}
+.a8-rule{position:absolute;left:0;top:0;width:96px;height:4px;background:var(--ink);}
+.a8-name{position:absolute;left:0;top:32px;width:560px;height:80px;
+  font:600 32px/40px Fraunces,Georgia,serif;color:var(--ink);}
+.a8-id{position:absolute;left:0;top:120px;width:560px;height:32px;
+  font:500 22px/32px Manrope,system-ui,sans-serif;color:var(--muted);letter-spacing:.04em;}
+
+/* ==========================  A9 — COMPARISON TABLE  ================== */
+.a9-band{position:absolute;left:-96px;width:1920px;height:112px;background:var(--panel);}
+.a9-head{position:absolute;left:0;top:0;width:1728px;height:56px;}
+.a9-h{position:absolute;top:0;font:500 22px/32px Manrope,system-ui,sans-serif;
+  letter-spacing:.10em;text-transform:uppercase;color:var(--muted);}
+.a9-h1{left:0;width:560px;} .a9-h2{left:584px;width:560px;} .a9-h3{left:1168px;width:560px;}
+.a9-row{position:absolute;left:0;width:1728px;height:112px;}
+/* All three cells are 80px boxes at top:16 so their optical centre is the
+   row centre (56px) whether the text runs to one line or two. */
+.a9-name{position:absolute;left:0;top:16px;width:560px;height:80px;
+  display:flex;align-items:center;
+  font:600 32px/40px Fraunces,Georgia,serif;color:var(--ink);}
+.a9-ball{position:absolute;left:584px;top:40px;width:32px;height:32px;}
+.a9-cost{position:absolute;left:632px;top:16px;width:512px;height:80px;
+  display:flex;align-items:center;
+  font:400 28px/40px Manrope,system-ui,sans-serif;color:var(--ink);}
+.a9-need{position:absolute;left:1168px;top:16px;width:560px;height:80px;
+  display:flex;align-items:center;
+  font:400 28px/40px Manrope,system-ui,sans-serif;color:var(--ink);}
+
+/* ==========================  CHROME  ================================= */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.03;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:180px 180px;}
+
+/* Presenter chrome: sits clear of the slide footer and fades out while idle
+   so it never competes with the projected slide. */
+.nav{position:fixed;right:20px;bottom:20px;z-index:9100;display:flex;gap:8px;align-items:center;
+  font:500 13px/1 Manrope,system-ui,sans-serif;color:#EDE4D5;
+  opacity:0;transition:opacity 260ms ease;}
+.nav:hover,body.ui-awake .nav{opacity:1;}
+.nav button{width:34px;height:34px;border:1px solid rgba(237,228,213,.35);background:rgba(11,10,9,.72);
+  color:#EDE4D5;cursor:pointer;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;}
+.nav button:hover{border-color:#B5182A;}
+.nav .ctr{padding:0 8px;letter-spacing:.08em;opacity:.85;}
+
+.notes{position:fixed;left:0;right:0;bottom:0;z-index:9200;background:#141210;color:#EDE4D5;
+  border-top:1px solid rgba(237,228,213,.2);padding:18px 28px;max-height:32vh;overflow:auto;
+  transform:translateY(100%);transition:transform 320ms cubic-bezier(.16,1,.3,1);}
+.notes.open{transform:translateY(0);}
+.notes h4{margin:0 0 8px;font:500 12px/1 Manrope,system-ui,sans-serif;letter-spacing:.14em;
+  text-transform:uppercase;color:#B5182A;}
+.notes p{margin:0;font:400 15px/1.6 Manrope,system-ui,sans-serif;max-width:110ch;}
