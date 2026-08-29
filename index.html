@@ -175,7 +175,7 @@ body { overflow: hidden; }
 .col-aside {
   grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
   width: 100%; max-width: 540px; min-width: 0;
-  display: grid; gap: clamp(10px, 1.4vh, 18px); align-content: center;
+  display: grid; gap: clamp(16px, 2.2vh, 26px); align-content: center;
   padding-bottom: clamp(2px, 1vh, 10px);
 }
 .col-aside.stacked { align-content: center; }
@@ -481,7 +481,7 @@ html[data-contrast="high"] .rgroup { background: rgba(255,254,251,0.97); }
 /* --- photography ----------------------------------------------------------
    The group shot these on several phones in several lights. One grade and one
    warm overlay on .frame make them read as a single set beside the cream. */
-figure.shot { margin: 0; display: grid; gap: 9px; }
+figure.shot { margin: 0; display: grid; gap: 10px; align-content: start; }
 
 .frame {
   position: relative; overflow: hidden;
@@ -518,6 +518,7 @@ figure.shot.contain .frame img { object-fit: contain; }
 }
 
 figure.shot figcaption {
+  line-height: 1.3;
   font-size: 10.5px; letter-spacing: 0.09em;
   text-transform: uppercase; color: var(--ink-4); font-weight: 620;
 }
@@ -1680,7 +1681,7 @@ const World = (function () {
     scene.add(box(78, 9, 34, 0xc2ad8c, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
     scene.add(box(78, 2.6, 34.4, 0xa8916d, { pos: [-8, -10.0, -0.4], rough: 0.94 }));
     scene.add(box(80, 0.4, 0.7, STEEL, { pos: [-8, 0.15, 18.1], rough: 0.26, metal: 0.7 }));
-    scene.add(box(80, 1.5, 0.5, BRAND, { pos: [-8, -0.85, 18.3], rough: 0.6 }));
+    scene.add(box(80, 0.5, 0.34, BRAND_DEEP, { pos: [-8, -1.15, 18.32], rough: 0.72 }));
 
     /* the floor the whole room stands on — without it the counter floats */
     const floor = new T.Mesh(

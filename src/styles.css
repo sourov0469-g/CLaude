@@ -166,7 +166,7 @@ body { overflow: hidden; }
 .col-aside {
   grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
   width: 100%; max-width: 540px; min-width: 0;
-  display: grid; gap: clamp(10px, 1.4vh, 18px); align-content: center;
+  display: grid; gap: clamp(16px, 2.2vh, 26px); align-content: center;
   padding-bottom: clamp(2px, 1vh, 10px);
 }
 .col-aside.stacked { align-content: center; }

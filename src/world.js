@@ -388,7 +388,7 @@ const World = (function () {
     scene.add(box(78, 9, 34, 0xc2ad8c, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
     scene.add(box(78, 2.6, 34.4, 0xa8916d, { pos: [-8, -10.0, -0.4], rough: 0.94 }));
     scene.add(box(80, 0.4, 0.7, STEEL, { pos: [-8, 0.15, 18.1], rough: 0.26, metal: 0.7 }));
-    scene.add(box(80, 1.5, 0.5, BRAND, { pos: [-8, -0.85, 18.3], rough: 0.6 }));
+    scene.add(box(80, 0.5, 0.34, BRAND_DEEP, { pos: [-8, -1.15, 18.32], rough: 0.72 }));
 
     /* the floor the whole room stands on — without it the counter floats */
     const floor = new T.Mesh(

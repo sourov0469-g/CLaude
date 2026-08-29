@@ -24,7 +24,7 @@
 /* --- photography ----------------------------------------------------------
    The group shot these on several phones in several lights. One grade and one
    warm overlay on .frame make them read as a single set beside the cream. */
-figure.shot { margin: 0; display: grid; gap: 9px; }
+figure.shot { margin: 0; display: grid; gap: 10px; align-content: start; }
 
 .frame {
   position: relative; overflow: hidden;
@@ -61,6 +61,7 @@ figure.shot.contain .frame img { object-fit: contain; }
 }
 
 figure.shot figcaption {
+  line-height: 1.3;
   font-size: 10.5px; letter-spacing: 0.09em;
   text-transform: uppercase; color: var(--ink-4); font-weight: 620;
 }
