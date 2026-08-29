@@ -1,0 +1,108 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{ margin:0; padding:0; width:1600px; height:900px; overflow:hidden; }
+</style>
+</head><body>
+<div class="design-bold" style="display:contents">
+<style>
+.design-bold{
+  --cream:#FFF3DE; --white:#FFFDF8; --red:#E4544E; --red-deep:#B93B36; --cheese:#F6B93B; --cheese-deep:#DE9A1D;
+  --ink:#2B160E; --ink-soft:#6B4A3A;
+  --display:'Fredoka',sans-serif; --sans:'Plus Jakarta Sans',sans-serif;
+  font-family:var(--sans); color:var(--ink);
+}
+.design-bold *{ box-sizing:border-box; }
+.design-bold .d-page{ width:100%; aspect-ratio:16/9; position:relative; overflow:hidden; background:var(--cream); }
+.design-bold b{ font-weight:700; }
+.design-bold .pill{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:999px;
+  font-family:var(--sans); font-weight:700; font-size:16px; letter-spacing:.01em;
+}
+.design-bold .sticker{
+  display:inline-flex; align-items:center; justify-content:center; text-align:center;
+  border-radius:999px; font-family:var(--display); font-weight:600; text-transform:uppercase;
+  letter-spacing:.03em; transform:rotate(-6deg); box-shadow:0 6px 0 rgba(43,22,14,.12);
+}
+
+/* ============ PAGE 1 — TITLE ============ */
+.design-bold .p1{ display:grid; grid-template-columns:1fr 1.05fr; height:100%; }
+.design-bold .p1-left{ display:flex; flex-direction:column; justify-content:center; padding:0 0 0 72px; gap:22px; min-height:0; }
+.design-bold .p1-kicker{ background:var(--cheese); color:var(--ink); width:fit-content; padding:9px 20px; border-radius:999px; font-weight:700; font-size:17px; letter-spacing:.04em; text-transform:uppercase; }
+.design-bold .p1-h1{ font-family:var(--display); font-weight:700; font-size:56px; line-height:1.05; margin:0; max-width:600px; overflow-wrap:break-word; }
+.design-bold .p1-h1 em{ font-style:normal; color:var(--red); }
+.design-bold .p1-sub{ font-size:22px; color:var(--ink-soft); font-weight:500; max-width:38ch; line-height:1.4; }
+.design-bold .p1-tags{ display:flex; gap:10px; flex-wrap:wrap; }
+.design-bold .p1-tags .pill{ background:var(--white); border:2px solid var(--ink); font-size:16px; padding:7px 16px; }
+.design-bold .p1-names{ font-size:16px; color:var(--ink-soft); font-weight:600; margin-top:4px; }
+.design-bold .p1-right{ position:relative; padding:28px 28px 28px 0; }
+.design-bold .p1-photo{ position:relative; width:100%; height:100%; border-radius:32px; overflow:hidden; }
+.design-bold .p1-photo img{ width:100%; height:100%; object-fit:cover; }
+.design-bold .p1-sticker{ position:absolute; top:36px; left:-30px; width:132px; height:132px; background:var(--red); color:var(--white); font-size:16px; line-height:1.15; padding:10px; z-index:3; }
+
+/* ============ PAGE 2 — CURRENT CSR: COMMUNITY (bold red ground) ============ */
+.design-bold .p2{ background:var(--red); color:var(--white); }
+.design-bold .p2-grid{ display:grid; grid-template-columns:1fr 1fr; height:100%; gap:0; }
+.design-bold .p2-left{ padding:0 24px 0 72px; display:flex; flex-direction:column; justify-content:center; gap:20px; height:100%; min-height:0; }
+.design-bold .p2-eyebrow{ font-weight:700; font-size:17px; text-transform:uppercase; letter-spacing:.05em; color:var(--cheese); }
+.design-bold .p2-h1{ font-family:var(--display); font-weight:700; font-size:46px; line-height:1.05; margin:0; color:var(--white); }
+.design-bold .p2-fact{ background:rgba(255,253,248,.12); border-radius:20px; padding:18px 22px; display:flex; gap:14px; align-items:flex-start; }
+.design-bold .p2-fact .dot{ width:34px; height:34px; border-radius:50%; background:var(--cheese); flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:700; color:var(--ink); font-size:16px; }
+.design-bold .p2-fact p{ margin:0; font-size:19px; line-height:1.4; }
+.design-bold .p2-fact p b{ color:var(--cheese); }
+.design-bold .p2-read{ font-size:16px; color:rgba(255,253,248,.82); line-height:1.4; }
+.design-bold .p2-photo{ position:relative; height:100%; margin-right:56px; padding:76px 0; min-height:0; }
+.design-bold .p2-photo-inner{ position:relative; width:100%; height:100%; border-radius:32px; overflow:hidden; }
+.design-bold .p2-photo img{ width:100%; height:100%; object-fit:cover; }
+.design-bold .p2-cap{ position:absolute; left:16px; bottom:16px; background:var(--ink); color:var(--white); font-size:16px; font-weight:700; padding:7px 14px; border-radius:999px; text-transform:uppercase; letter-spacing:.03em; }
+
+/* ============ PAGE 3 — SUGGESTION: GREEN PIZZABURG (cheese ground) ============ */
+.design-bold .p3{ background:var(--cheese); }
+.design-bold .p3-grid{ display:grid; grid-template-columns:1.05fr 1fr; height:100%; }
+.design-bold .p3-photo{ position:relative; height:100%; margin-left:56px; padding:60px 0; min-height:0; }
+.design-bold .p3-photo img{ width:100%; height:100%; object-fit:cover; border-radius:32px; overflow:hidden; display:block; }
+.design-bold .p3-badge{ position:absolute; top:38px; right:-22px; width:118px; height:118px; background:var(--red); color:var(--white); font-size:16px; z-index:3; }
+.design-bold .p3-right{ padding:0 72px 0 24px; display:flex; flex-direction:column; justify-content:center; gap:16px; height:100%; min-height:0; }
+.design-bold .p3-eyebrow{ font-weight:700; font-size:17px; text-transform:uppercase; letter-spacing:.05em; color:var(--red-deep); }
+.design-bold .p3-h1{ font-family:var(--display); font-weight:700; font-size:44px; line-height:1.05; margin:0; }
+.design-bold .p3-lede{ font-size:19px; color:var(--ink); font-weight:600; line-height:1.4; max-width:32ch; }
+.design-bold .p3-row{ display:flex; gap:14px; align-items:flex-start; background:rgba(255,253,248,.55); border-radius:16px; padding:12px 16px; }
+.design-bold .p3-row .k{ font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.03em; color:var(--red-deep); min-width:118px; flex:0 0 auto; }
+.design-bold .p3-row .v{ font-size:17px; line-height:1.35; }
+
+/* ============ PAGE 4 — IMPACT & ROI SUMMARY (cream ground) ============ */
+.design-bold .p4-wrap{ height:100%; display:flex; flex-direction:column; justify-content:center; padding:0 72px; gap:18px; min-height:0; }
+.design-bold .p4-eyebrow{ font-weight:700; font-size:17px; text-transform:uppercase; letter-spacing:.05em; color:var(--red-deep); }
+.design-bold .p4-h1{ font-family:var(--display); font-weight:700; font-size:46px; margin:0; }
+.design-bold .p4-list{ display:flex; flex-direction:column; gap:12px; }
+.design-bold .p4-card{ display:grid; grid-template-columns:210px 1fr 150px; align-items:center; gap:18px; background:var(--white); border-radius:18px; padding:14px 22px; border-left:10px solid var(--red); }
+.design-bold .p4-card.cheese{ border-left-color:var(--cheese-deep); }
+.design-bold .p4-card .name{ font-family:var(--display); font-weight:600; font-size:20px; }
+.design-bold .p4-card .benefit{ font-size:16px; color:var(--ink-soft); line-height:1.3; }
+.design-bold .p4-card .prio{ justify-self:end; }
+.design-bold .p4-card .prio.high{ background:var(--red); color:var(--white); }
+.design-bold .p4-card .prio.med{ background:var(--cheese); color:var(--ink); }
+.design-bold .p4-foot{ font-size:16px; font-weight:700; color:var(--ink-soft); }
+</style>
+<div class="d-page p2" data-label="Current CSR: Community" data-page="2">
+<div class="p2-grid">
+<div class="p2-left">
+<div class="p2-eyebrow">Already Doing This</div>
+<h1 class="p2-h1">Community &amp; Philanthropy</h1>
+<div class="p2-fact"><div class="dot">🌙</div><p><b>Ramadan</b> — PizzaBurg has provided pizzas to mosques for iftar, reported by Dhaka Tribune.</p></div>
+<div class="p2-fact"><div class="dot">🎁</div><p><b>Christmas</b> — employees dress as Santa Claus and distribute free pizzas to disadvantaged children, reported by Dhaka Tribune.</p></div>
+<p class="p2-read">Both fall under Carroll's philanthropic responsibility — voluntary giving tied to a specific occasion.</p>
+</div>
+<div class="p2-photo">
+<div class="p2-photo-inner">
+<img alt="Community food distribution, illustrative" src="../../assets/img/csr-community.jpg"/>
+<div class="p2-cap">Illustrative</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>
