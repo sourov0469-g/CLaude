@@ -67,6 +67,17 @@ const Deck = (function () {
       })));
     }
 
+    if (s.roster) {
+      text.appendChild(el('ul', { class: 'roster rv' }, PRESENTERS.map(function (p) {
+        return el('li', {}, [
+          el('span', { class: 'rn', text: p.name }),
+          el('span', { class: 'ri', text: p.id }),
+        ]);
+      })));
+    }
+
+    if (s.bulletsTitle) text.appendChild(el('p', { class: 'blist-title rv', text: s.bulletsTitle }));
+
     if (s.bullets) {
       text.appendChild(el('ul', { class: 'points' }, s.bullets.map(function (b) {
         return el('li', { class: 'rv' }, el('span', {}, rich(b)));
@@ -167,7 +178,7 @@ const Deck = (function () {
       ? 'Next — ' + next.title + (next.by !== s.by ? '   ·   hand over to ' + byKey[next.by].short : '')
       : 'Last slide. Open the floor for questions.';
 
-    document.body.className = 'lay-' + s.layout;
+    document.body.className = 'lay-' + s.layout + (s.wide ? ' aside-wide' : '');
 
     const bd = BACKDROPS[s.id];
     if (bd && Media.has(bd)) {

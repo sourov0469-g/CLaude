@@ -145,17 +145,6 @@ VIS.loop = function () {
   ], 'rv');
 };
 
-/* ---------------------------------------------------------------- ledger -- */
-
-VIS.ledger = function () {
-  return el('div', { class: 'ledger rv' }, LEDGER.map(function (c) {
-    return el('div', { class: 'lcol ' + c.tone }, [
-      el('h4', { text: c.t }),
-      el('ul', {}, c.items.map(function (i) { return el('li', { text: i }); })),
-    ]);
-  }));
-};
-
 /* ------------------------------------------------------------------ recs -- */
 
 VIS.recs = function () {
@@ -177,7 +166,7 @@ VIS.team = function () {
   /* the pan across the whole group, shot at the end of the interview */
   const head = buildMedia({
     kind: 'video', src: 'team-pan-12s', poster: 'pb-team-office',
-    caption: 'Group NEXIX at PizzaBurg head office',
+    caption: 'Group NEXIX with Mr. Ranjan Datta · after the interview',
   });
   return el('div', { class: 'teamwrap panel rv' }, [
     head,

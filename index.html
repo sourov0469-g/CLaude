@@ -164,6 +164,10 @@ body { overflow: hidden; }
 }
 .slide[hidden] { display: none; }
 
+/* a slide whose substance lives in the panel gives the panel the wider half */
+.aside-wide .slide { grid-template-columns: minmax(0, 40%) minmax(0, 60%); }
+.aside-wide .col-aside { max-width: 660px; }
+
 .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 54ch; min-width: 0; }
 
 /* the right column: their photograph leads, the panel supports it, and the
@@ -254,6 +258,15 @@ h1.title {
 
 /* ---------------------------------------------------------------- bullets */
 
+/* their deck puts a small heading over the objectives list */
+.blist-title {
+  margin: clamp(18px, 2.4vh, 28px) 0 0;
+  font-size: clamp(10px, calc(0.36 * var(--u) + 6px), 12.5px);
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-4);
+}
+.blist-title + ul.points { margin-top: clamp(8px, 1.1vh, 13px); }
+
 ul.points { list-style: none; margin: clamp(16px, 2.2vh, 26px) 0 0; padding: 0; display: grid; gap: clamp(8px, 1.1vh, 14px); }
 ul.points li {
   display: grid; grid-template-columns: 7px minmax(0, 1fr); gap: 13px; align-items: baseline;
@@ -272,6 +285,17 @@ ul.points b { color: var(--ink); font-weight: 650; }
 .meta div { display: grid; gap: 2px; }
 .meta .k { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--ink-4); }
 .meta .v { font-size: 13px; font-weight: 560; color: var(--ink-2); }
+
+/* the six names, as their title slide carries them */
+ul.roster {
+  list-style: none; margin: clamp(20px, 2.8vh, 32px) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px clamp(20px, 2.4vw, 38px);
+  border-top: 1px solid var(--rule); padding-top: clamp(14px, 1.8vh, 20px);
+}
+ul.roster li { display: grid; gap: 1px; }
+ul.roster .rn { font-size: clamp(11.5px, calc(0.42 * var(--u) + 6px), 14px); font-weight: 620; color: var(--ink-2); }
+ul.roster .ri { font-size: 9.5px; color: var(--ink-4); letter-spacing: 0.05em; font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------------------------ notes */
 
@@ -754,22 +778,22 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
    PIZZABURG · HRM PRACTICES — deck data
    Group NEXIX · Bangladesh University · BUS-2204
 
-   Thirteen slides, in the order the group presents them. The copy follows the
-   group's own deck; the report behind it rests on one face-to-face interview
-   with Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg, on
-   26 August 2026, checked against the Bangladesh Labour Act 2006.
+   The copy on these thirteen slides is the group's own, taken line for line
+   from the deck they wrote, and the speaker notes are theirs too. Nothing
+   here adds a claim the group did not make.
 
-   Where the report says something was "not evidenced", the wording keeps that
-   distinction: it was not described to us, which is not the same as absent.
+   Behind it all: one face-to-face interview with Mr. Ranjan Datta, General
+   Manager of Human Resource at PizzaBurg, on 26 August 2026, checked against
+   the Bangladesh Labour Act 2006.
    ========================================================================== */
 
 const PRESENTERS = [
-  { key: 'ratul',  name: 'Raiyan Ahmed Ratul',     short: 'Ratul',  id: '202511170047', hue: 8   },
-  { key: 'aditto', name: 'Aditya Tripura',         short: 'Aditto', id: '202511170006', hue: 26  },
-  { key: 'liya',   name: 'Liya Akter',             short: 'Liya',   id: '202511170072', hue: 42  },
-  { key: 'souvo',  name: 'Shuvo Chandra Roy',      short: 'Souvo',  id: '202511170023', hue: 150 },
-  { key: 'sourov', name: 'Asiful Islam Sourov',    short: 'Sourov', id: '202511170026', hue: 205 },
-  { key: 'esha',   name: 'Fabliha Mubarrat Kabir', short: 'Esha',   id: '202511170060', hue: 268 },
+  { key: 'ratul',  name: 'Raiyan Ahmed Ratul',     short: 'Raiyan',  id: '202511170047', hue: 8   },
+  { key: 'aditya', name: 'Aditya Tripura',         short: 'Aditya',  id: '202511170006', hue: 26  },
+  { key: 'liya',   name: 'Liya Akter',             short: 'Liya',    id: '202511170072', hue: 42  },
+  { key: 'shuvo',  name: 'Shuvo Chandra Roy',      short: 'Shuvo',   id: '202511170023', hue: 150 },
+  { key: 'sourov', name: 'Asiful Islam Sourov',    short: 'Sourov',  id: '202511170026', hue: 205 },
+  { key: 'esha',   name: 'Fabliha Mubarrat Kabir', short: 'Fabliha', id: '202511170060', hue: 268 },
 ];
 
 /* One pizza gets made across the deck. `stage` is where the bench has got to
@@ -783,7 +807,7 @@ const STAGE_ORDER = [
 
 const SLIDES = [
 
-  /* ===== RATUL — slides 1 and 2 ========================================== */
+  /* ===== RAIYAN — slides 1 and 2 ========================================= */
   {
     id: 'cover', by: 'ratul', layout: 'cover', stage: 'flour', fov: 38,
     kicker: 'Human Resource Management · BUS-2204',
@@ -795,64 +819,63 @@ const SLIDES = [
       { k: 'Institution', v: 'Bangladesh University' },
       { k: 'Submitted', v: '28 August 2026' },
     ],
-    notes: 'Good afternoon. We are Group NEXIX, and our report is on the human resource practices of PizzaBurg — a Bangladeshi pizza and burger chain that has grown from one shop to twenty-two in eight years. Everything here comes out of one face-to-face meeting with their General Manager of Human Resource, which we then checked against the Bangladesh Labour Act.',
+    roster: true,
+    notes: 'Good morning. We are Group NEXIX. Our report studies the Human Resource Management practices of PizzaBurg, a local pizza and burger chain, based on a face-to-face interview with their General Manager of Human Resource.',
   },
   {
     id: 'intro', by: 'ratul', layout: 'split', stage: 'dough',
-    photo: { src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
+    photo: { src: 'pb-neon-sign', caption: 'A PizzaBurg outlet, Dhaka' },
     photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
     kicker: 'Introduction & Objectives',
     title: 'About the company, and our objectives',
-    lede: 'A local chain competing with foreign brands in the same cities, growing fast enough for the strain to show.',
     stats: [
       { value: '22', label: 'outlets' },
       { value: '~1,000', label: 'employees' },
-      { value: '4,000+', label: 'pizzas a day' },
+      { value: '4,000+', label: 'pizzas / day' },
     ],
+    bulletsTitle: 'Objectives of the study',
     bullets: [
       'Examine PizzaBurg’s Human Resource Management practices',
       'Cover workforce planning, recruitment, turnover, welfare, performance, training and discipline',
       'Compare those practices with the **Bangladesh Labour Act 2006**',
       'Identify strengths, concerns and practical recommendations',
     ],
-    notes: 'PizzaBurg runs twenty-two outlets, employs close to a thousand people and sells over four thousand pizzas a day. Our aim was to examine how it manages those people, to compare what we found against the Bangladesh Labour Act of 2006, and to end with practical recommendations. Aditto will explain how we collected the information.',
+    notes: 'PizzaBurg is a local pizza and burger chain founded in January 2018 in Mirpur-2, Dhaka. It now runs 22 outlets with close to a thousand employees and sells over four thousand pizzas a day. Our objective was to study how a company that grew this fast manages its people — covering staffing, recruitment, turnover, welfare, performance, training and discipline — and to identify its strengths and areas for improvement.',
   },
 
-  /* ===== ADITTO — slides 3 and 4 ========================================= */
+  /* ===== ADITYA — slides 3 and 4 ========================================= */
   {
-    id: 'method', by: 'aditto', layout: 'split', stage: 'stretch', handover: true,
-    photo2: { src: 'pb-interview-a', caption: 'Head office, Dhaka' },
+    id: 'method', by: 'aditya', layout: 'split', stage: 'stretch', handover: true,
     photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
+    photo2: { src: 'pb-interview-a', caption: 'PizzaBurg head office, Dhaka' },
     kicker: 'Methodology',
     title: 'How we collected our information',
-    lede: 'A qualitative case study of a single company, built on one interview at PizzaBurg head office.',
     bullets: [
       '**Qualitative case study** of a single company',
       'Primary data: **one face-to-face interview**',
-      '**Mr. Ranjan Datta**, General Manager of Human Resource',
+      'Interviewee: **Mr. Ranjan Datta**, General Manager of Human Resource',
       '**26 August 2026**, Dhaka',
       'Prepared questions with follow-ups; handwritten notes, at his request',
       'Secondary sources used only for background and the law',
     ],
     note: { tone: 'concern', title: 'Limitation', body: 'One interviewee, one meeting. No documents seen, no employees interviewed. Where we say something was not evidenced, we mean it was not described to us — not that it does not exist.' },
-    notes: 'This is a qualitative case study of one company, and our primary data is a single face-to-face interview with Mr. Ranjan Datta, the General Manager of Human Resource, on the twenty-sixth of August at their head office in Dhaka. We used prepared questions but allowed ourselves follow-ups, and we took handwritten notes because he preferred that to a recording. One limitation, honestly, up front: one interviewee, one meeting, no documents, no employees. So where we say something was not evidenced, we mean it was not described to us.',
+    notes: 'We used a qualitative case-study approach. Our primary data came from a face-to-face interview with Mr. Ranjan Datta, General Manager of Human Resource, held on 26 August 2026 in Dhaka. We used prepared questions with room for follow-ups and took handwritten notes, as he preferred. An important limitation: our findings are based on the information of one HR representative — we did not see company documents or interview workers.',
   },
   {
-    id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
-    photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
+    id: 'planning', by: 'aditya', layout: 'split', stage: 'base',
+    photo: { src: 'pb-pizzas-table-b', caption: 'A PizzaBurg outlet floor' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
-    lede: 'Each outlet gets a set headcount, and it is not adjusted for how busy a shop is.',
     bullets: [
       'PizzaBurg operates **22 outlets** across ten cities and towns',
       'Each outlet has a **fixed number of employees**',
       'Staffing is **not** determined through a supply-and-demand policy',
       'About **12 outlets are in Dhaka**; the rest across nine other towns',
     ],
-    aside: { kind: 'outlets' },
     note: { tone: 'strength', title: 'Strength', body: 'Consistency and straightforward planning. Labour cost per outlet is predictable, rosters stay simple, and the same team works together.' },
-    note2: { tone: 'concern', title: 'Concern', body: 'Less flexibility when workload changes, and no periodic review of the fixed numbers was described to us — so a headcount set on opening day can drift out of date.' },
-    notes: 'PizzaBurg runs twenty-two outlets across ten cities and towns, and each one has a fixed number of employees. Mr. Datta was clear this is not set by supply and demand. About twelve of those outlets are in Dhaka and the rest are spread across nine other towns. The strength is consistency — labour cost per outlet is predictable and rosters stay simple. The concern is that nothing appears to review those numbers. Liya will take recruitment.',
+    note2: { tone: 'concern', title: 'Concern', body: 'Less flexibility when workload changes. No periodic review of the fixed numbers was described to us, so a headcount set on opening day can drift out of date.' },
+    aside: { kind: 'outlets' },
+    notes: 'PizzaBurg operates 22 outlets, and each outlet is given a fixed number of employees. The company does not set staffing through a supply-and-demand policy. The strength of this is consistency and straightforward planning — labour cost is predictable and the same team works together. The concern is less flexibility when an outlet’s workload changes.',
   },
 
   /* ===== LIYA — slides 5 and 6 =========================================== */
@@ -862,93 +885,79 @@ const SLIDES = [
     photo2: { src: 'pb-hiring-poster', fit: 'contain', caption: 'PizzaBurg also advertises roles publicly' },
     kicker: 'Recruitment & Selection',
     title: 'Hired in one day',
-    lede: 'The moment a cook leaves the station is empty, so speed here is not carelessness. It is the only option.',
     bullets: [
       'Applies to **kitchen and floor staff** (blue-collar roles)',
       '**One-day** process from interview to decision',
-      'Practical **experience** is checked',
+      '**Practical experience** is checked',
       'Candidates may be asked to **demonstrate their ability** on the job',
       'How candidates are **sourced** was not described to us',
     ],
     note: { tone: 'strength', title: 'Strength', body: 'Better job-fit assessment. Watching a cook actually cook predicts performance far more reliably than an interview or a certificate.' },
     note2: { tone: 'rec', title: 'Recommendation', body: 'Standardise the test with a one-page scoring sheet — the tasks, what to look for, and the minimum score that gets an offer — so all 22 outlets hire to the same standard.' },
-    notes: 'Hiring for kitchen and floor staff is done in one day, from interview to decision. Practical experience is checked, and candidates may be asked to demonstrate their ability on the job. That last part is the strongest thing in the system — watching a cook actually cook predicts performance far more reliably than an interview or a certificate. Our recommendation is to standardise it with a one-page scoring sheet, so all twenty-two outlets hire to the same standard.',
+    notes: 'For blue-collar employees — kitchen and floor staff — recruitment is a one-day interview process. Practical experience is considered, and candidates may be asked to demonstrate their practical ability. The strength here is better job-fit assessment: watching someone do the actual work tells you more than a certificate. Our recommendation is to standardise the practical assessment criteria so every outlet applies the same standard.',
   },
   {
     id: 'turnover', by: 'liya', layout: 'split', stage: 'cheese',
-    photo: { src: 'pb-dhaka-street', caption: 'Dhaka — where a cook can walk to another job' },
+    photo: { src: 'pb-dhaka-street', caption: 'Continuity keeps every kitchen running' },
+    photo2: { src: 'pb-interview-c', caption: 'Asking about notice and turnover' },
     kicker: 'Turnover & Resignation',
     title: 'Turnover and the notice period',
-    lede: 'Two words of answer, and a rule that quietly matches the statute.',
     bullets: [
       'Every employee must give **two months’ notice** before resigning',
       'It gives HR time to **recruit a replacement**',
-      'Two months matches the **60 days Section 27** asks of a permanent worker',
+      'Two months matches the **60 days Section 27** requires of a permanent worker',
       'Turnover is **never counted**, and leavers are not asked why they go',
     ],
     aside: { kind: 'turnover' },
-    note: { tone: 'concern', title: 'No figures were given', body: 'Very low and medium are the manager’s own words, not a measurement. The payroll already holds everything needed to count it properly.' },
-    notes: 'On turnover, Mr. Datta answered in two words. Office staff, very low. Floor and kitchen staff, medium. No figures — those are his words, not a measurement. Every employee must give two months notice before resigning, which gives HR time to recruit a replacement, and it happens to match exactly the sixty days Section 27 asks of a permanent worker. The gap is that turnover is never counted and nobody asks leavers why they are going. Souvo will take welfare.',
+    notes: 'White-collar turnover is very low; blue-collar turnover is medium. Employees must give two months’ notice before resigning, which gives HR time to recruit a replacement. That two-month requirement aligns exactly with Section 27 of the Bangladesh Labour Act, which asks a permanent worker for sixty days’ notice. Overall it supports workforce continuity and reduces disruption in the kitchen.',
   },
 
-  /* ===== SOUVO — slides 7 and 8 ========================================== */
+  /* ===== SHUVO — slides 7 and 8 ========================================== */
   {
-    id: 'welfare', by: 'souvo', layout: 'split', stage: 'toppings', handover: true,
+    id: 'welfare', by: 'shuvo', layout: 'split', stage: 'toppings', handover: true, wide: true,
     photo: { src: 'pb-pizzas-table-a', caption: 'Food support is provided on shift' },
     kicker: 'Employee Welfare',
     title: 'What employees receive',
-    lede: 'Housing and food are the two biggest costs a low-paid worker in Dhaka carries. PizzaBurg helps with both.',
-    aside: { kind: 'welfare' },
-    bullets: [
-      'Worth more to a low-paid worker than a pay rise of the same cost',
-      'Maternity care engages **Sections 45–50** of the Labour Act',
-      'Benefits like these reduce dissatisfaction — a **promotion path** is what creates drive',
-    ],
     note: { tone: 'concern', title: 'Concern', body: 'Eligibility conditions were not explained, so applicants cannot count a benefit and staff may not know they qualify.' },
-    notes: 'Employees who qualify get accommodation support, food support during working hours, health checkups, and maternity care. These are not small gestures — housing and food are the two biggest costs a low-paid worker in Dhaka carries, so help with both is worth more than a pay rise costing the company the same money. Maternity care also engages Sections forty-five to fifty. Our concern is that eligibility was never explained, so applicants cannot count a benefit and staff may not know they qualify.',
+    aside: { kind: 'welfare' },
+    notes: 'Eligible employees receive accommodation support and food support. Health checkups are provided, and that includes maternity-related care, which is consistent with Sections 45 to 50 of the Labour Act. Housing and food are the two largest costs a low-paid worker in Dhaka carries, so this support contributes directly to employee well-being and retention.',
   },
   {
-    id: 'performance', by: 'souvo', layout: 'split', stage: 'peel',
+    id: 'performance', by: 'shuvo', layout: 'split', stage: 'peel', wide: true,
     photo: { src: 'pb-interview-e', caption: 'Asking how reviews are used' },
     kicker: 'Performance & Training',
     title: 'Reviewed monthly, linked to training',
-    lede: 'Most companies this size review once a year. Monthly means a problem shows up in weeks.',
+    lede: 'Reviews feed directly into training.',
+    note: { tone: 'rec', title: 'Recommendation', body: 'Use clear, measurable indicators and document review outcomes.' },
     aside: { kind: 'loop' },
-    bullets: [
-      'Performance is assessed **every month**, not annually',
-      'The review decides **who gets training** — the step most companies skip',
-      'The next review then **tests whether the training worked**',
-      'No fixed measures, and no written record, were described to us',
-    ],
-    note: { tone: 'rec', title: 'Recommendation', body: 'Use clear, measurable indicators and document review outcomes, so two months can be compared and training can be shown to have worked.' },
-    notes: 'Performance is reviewed every month rather than once a year, and what the review finds decides who gets training. That is genuinely clever — it makes the appraisal do the job of finding the training gap, which is the step most companies skip. And because the cycle is monthly, the next review naturally tests whether the training worked. What was not described was any fixed set of measures or any written record. Sourov will take discipline.',
+    notes: 'Performance is reviewed every month, which supports continuous monitoring — most companies of this size review once a year. Importantly, performance results are linked with training: the review identifies a gap, training addresses it, and the next month’s review shows whether it worked. Our recommendation is to use clear measurable indicators and to document the review outcomes so progress can actually be compared.',
   },
 
   /* ===== SOUROV — slides 9 and 10 ======================================== */
   {
     id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
     photo: { src: 'pb-justice', tone: 'warm', caption: 'Measured against the Labour Act 2006' },
+    photo2: { src: 'pb-interview-d', caption: 'Mr. Datta on grounds for dismissal' },
     kicker: 'Discipline & Termination',
     title: 'Grounds for termination',
-    lede: 'The grounds are fair and broadly match the Act. The procedure behind them is what is missing.',
     bullets: [
       'Violation of **rules and regulations**',
       '**Sexual harassment**',
       '**Dishonesty** and integrity violations',
       'Other **serious misconduct**',
-      'No warning or inquiry procedure was described to us',
+      'No warning or inquiry procedure was described',
     ],
     note: { tone: 'strength', title: 'Strength', body: 'Clear standards, broadly matching the misconduct list in §23(4). Naming sexual harassment explicitly is uncommon in this trade.' },
-    note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — allegations in writing, at least 7 days to explain, a hearing, a finding on enquiry — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
-    notes: 'An employee can be dismissed for violating rules and regulations, for sexual harassment, for dishonesty, and for other serious misconduct. Those grounds are fair, they broadly match the misconduct list in Section twenty-three, and naming sexual harassment explicitly is uncommon in this trade. But no warning or inquiry procedure was described. Section twenty-four requires the allegations in writing, at least seven days to explain, a hearing, and a finding on enquiry. And the 2009 High Court directive requires every workplace to have a harassment complaint committee with outside members. Those two are the most urgent things in our report, and both are close to free.',
+    note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — written charge, 7 days to reply, a hearing, and a joint inquiry inside 60 days — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
+    notes: 'Serious misconduct may lead to termination. The grounds given were violation of rules and regulations, sexual harassment, integrity-related violations, and other serious misconduct. These broadly match Section 23 of the Labour Act. Two points on procedure: Section 24 requires a written charge, at least seven days to reply, a hearing and an inquiry before any punishment; and the 2009 High Court directive requires every workplace to have a sexual harassment complaint committee. Neither was described to us, so our recommendation is to document the procedure and establish the committee.',
   },
   {
     id: 'findings', by: 'sourov', layout: 'split', stage: 'bake',
-    photo: { src: 'pb-file-stack', caption: 'The records are what is missing' },
     cam: { p: [-1, 13, 37], t: [-31, 4.8, 3], fov: 43 },
+    photo: { src: 'pb-team-street', caption: 'Group NEXIX on site' },
+    photo2: { src: 'pb-brand-salman', caption: 'PizzaBurg brand reach' },
     kicker: 'Major Findings',
     title: 'Major findings',
-    lede: 'Everything points one way — keeping 22 outlets open and running. What is missing is the writing down.',
     bullets: [
       'Fixed staffing across **22 outlets**, not adjusted for demand',
       'Office turnover very low, floor turnover medium — but **never counted**',
@@ -959,76 +968,67 @@ const SLIDES = [
       'Overall: **the methods are sound, the records are missing**',
       'Two gaps carry legal weight — **no §24 procedure**, **no harassment committee**',
     ],
-    aside: { kind: 'ledger' },
-    notes: 'Putting it together. Fixed staffing across twenty-two outlets, not adjusted for demand. Office turnover very low, floor turnover medium, but never counted. Two months notice, matching the sixty days of Section twenty-seven. One-day hiring with a practical test, but no marking sheet. Monthly reviews linked to training, with no fixed measures described. Overall the methods are sound and the records are missing — and two of those gaps carry real legal weight. Esha will take the recommendations.',
+    notes: 'Bringing it together. Fixed staffing across 22 outlets. Very low white-collar turnover and medium blue-collar turnover. A two-month resignation notice aligned with the Labour Act. Practical, experience-based selection for blue-collar roles. Monthly performance reviews linked to training. Welfare support and clear misconduct standards. The overall pattern: the practices themselves are sound, but documentation is limited.',
   },
 
-  /* ===== ESHA — slides 11, 12 and 13 ===================================== */
+  /* ===== FABLIHA — slides 11, 12 and 13 ================================== */
   {
-    id: 'recommendations', by: 'esha', layout: 'split', stage: 'out', handover: true,
+    id: 'recommendations', by: 'esha', layout: 'split', stage: 'out', handover: true, wide: true,
+    photo: { src: 'pb-file-stack', caption: 'Most fixes are a form, not a budget' },
     kicker: 'Recommendations',
     title: 'What we recommend',
-    lede: 'Almost every fix on this list is a form and a decision, not a budget.',
     aside: { kind: 'recs' },
-    bullets: [
-      'The most urgent item is also **one of the cheapest**',
-      'Central records come early because **everything else needs somewhere to live**',
-    ],
-    note: { tone: 'rec', title: 'What it costs', body: 'Nothing on the first list needs a budget line. A committee, a written procedure and one file per employee are decisions, not spending.' },
-    notes: 'Three things we would do first, and they are urgent and close to free. Establish the sexual harassment complaint committee with outside members. Write down the Section twenty-four disciplinary procedure and issue it to every outlet manager. And keep one central record per employee. After that: add a scoring sheet to the practical test, use a one-page monthly review form, count turnover monthly and use the sixty-day notice for handover and exit interviews, review each outlet’s headcount twice a year, explain welfare eligibility and open a promotion ladder, and add induction and supervisor training plus a yearly Labour Act check.',
+    notes: 'Our recommendations. Review the fixed staffing levels periodically rather than setting them once. Standardise the practical recruitment assessment with a scoring sheet. Use the two-month notice period strategically — for handover and for exit interviews. Strengthen the monthly reviews with measurable indicators. Integrate performance and training records centrally. And maintain clear, consistently documented disciplinary standards, including the complaint committee.',
   },
   {
     id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
-    photo: { src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
+    photo: { src: 'pb-two-pizzas', caption: 'Twenty-two kitchens, one standard' },
     photo2: { src: 'pb-pizza-closeup', caption: 'What all of it is for' },
     kicker: 'Conclusion',
     title: 'HRM built around operational continuity',
-    lede: 'A business the owner watched himself ran on judgement. A thousand workers in ten towns cannot.',
     bullets: [
       'Every practice serves one goal: **keeping 22 outlets open and running**',
       'Fixed staffing creates **consistency**; the notice rule turns a sudden loss into a **planned** one',
       'Practical selection supports **job fit**; monthly reviews catch problems in **weeks, not months**',
-      'In every area we asked about, the **method was sound and the paperwork was missing**',
+      'In every area the **method was sound and the paperwork was missing**',
+      'Two gaps go beyond untidiness — **no §24 procedure**, **no harassment committee**',
       'The next task is to **write the system down** without losing the speed',
     ],
-    notes: 'Our conclusion is that PizzaBurg’s HRM is built around operational continuity. Every practice serves one goal — keeping twenty-two outlets open and running. Fixed staffing creates consistency. The notice rule turns a sudden loss into a planned one. Practical selection supports job fit, and monthly reviews catch problems in weeks rather than months. In every area we asked about, the method was sound and the paperwork was missing. The next task is to write the system down without losing the speed that got them here.',
+    notes: 'In conclusion, PizzaBurg’s HRM is strongly connected to operational continuity — every practice serves the goal of keeping 22 outlets running. Fixed staffing creates consistency, notice periods support replacement planning, practical selection supports job fit, and monthly reviews support continuous monitoring. Further improvement is possible through stronger measurement, documentation and periodic staffing review.',
   },
   {
     id: 'thanks', by: 'esha', layout: 'closing', stage: 'served', fov: 42, arc: 1.3,
     kicker: 'Group NEXIX · Bangladesh University',
-    title: 'Thank you',
+    title: 'Thank you.',
     titleSub: 'Questions & discussion.',
-    lede: 'With thanks to Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg, who answered every question we asked.',
+    lede: 'With thanks to Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg.',
     aside: { kind: 'team' },
-    notes: 'Thank you. Our biggest thanks go to Mr. Ranjan Datta, who gave us his time and answered every question we asked, including the difficult ones. Students do not usually get that kind of access. Thanks also to our course teacher, Md. Hassan Talukdar. We are happy to take questions.',
+    notes: 'Thank you for listening. We are happy to take questions. And our thanks to Mr. Ranjan Datta of PizzaBurg, who gave us his time and answered every question we asked.',
   },
 ];
 
-/* --- supporting data ------------------------------------------------------ */
+/* ------------------------------------------------------------------ panels --
+   The numbers and words the aside panels draw. Every one of them comes off a
+   slide of the group's own deck; nothing here is estimated. */
 
-const OUTLETS = [
-  { city: 'Dhaka', n: 12 }, { city: 'Chattogram', n: 2 }, { city: 'Narayanganj', n: 1 },
-  { city: 'Cumilla', n: 1 }, { city: 'Rajshahi', n: 1 }, { city: 'Feni', n: 1 },
-  { city: 'Khulna', n: 1 }, { city: 'Mymensingh', n: 1 }, { city: 'Barishal', n: 1 },
-  { city: 'Noakhali', n: 1 },
-];
+const OUTLETS = { total: 22, dhaka: 12, towns: 10 };
 
 const TURNOVER = [
-  { grp: 'White-collar', lvl: 'Very low', tone: 'low', body: 'Office staff rarely leave the company.' },
-  { grp: 'Blue-collar', lvl: 'Medium', tone: 'med', body: 'Front-line staff turn over more often.' },
+  { grp: 'White-collar', lvl: 'Very Low', body: 'Office staff rarely leave the company.', tone: 'low' },
+  { grp: 'Blue-collar',  lvl: 'Medium',   body: 'Front-line staff turn over more often.', tone: 'med' },
 ];
 
 const WELFARE = [
-  { icon: 'roof', name: 'Accommodation', body: 'Housing support for employees who qualify.' },
-  { icon: 'bowl', name: 'Food support', body: 'Provided during working hours.' },
-  { icon: 'cross', name: 'Health checkups', body: 'Health checkups are provided.' },
-  { icon: 'cradle', name: 'Maternity care', body: 'Provided. Full §§45–50 entitlement not described.' },
+  { icon: 'roof',   name: 'Accommodation',   body: 'Housing support for employees who qualify.' },
+  { icon: 'bowl',   name: 'Food support',    body: 'Provided during working hours.' },
+  { icon: 'cross',  name: 'Health checkups', body: 'Health checkups are provided.' },
+  { icon: 'cradle', name: 'Maternity care',  body: 'Provided. Full §§45–50 entitlement not described.' },
 ];
 
 const LOOP = [
-  { n: '01', t: 'Monthly review', b: 'Each employee’s performance is assessed.' },
-  { n: '02', t: 'Gap identified', b: 'The review shows where improvement is needed.' },
-  { n: '03', t: 'Training given', b: 'Training targets the identified gap.' },
+  { n: '01', t: 'Monthly review',       b: 'Each employee’s performance is assessed.' },
+  { n: '02', t: 'Gap identified',       b: 'The review shows where improvement is needed.' },
+  { n: '03', t: 'Training given',       b: 'Training targets the identified gap.' },
   { n: '04', t: 'Monitoring continues', b: 'The next review shows the result.' },
 ];
 
@@ -1047,11 +1047,6 @@ const RECS = {
     'Add **induction and supervisor training**, plus a yearly Labour Act check',
   ],
 };
-
-const LEDGER = [
-  { t: 'Described to us', tone: 'yes', items: ['Fixed staffing, 22 outlets', 'One-day hiring with a practical test', 'Two months’ notice', 'Monthly review linked to training', 'Housing, food, health, maternity', 'Four grounds for dismissal'] },
-  { t: 'Not evidenced', tone: 'no', items: ['Any review of the fixed numbers', 'A marking sheet for the test', 'A turnover figure, or exit interviews', 'Fixed measures, or a written record', 'Welfare eligibility rules', 'A §24 procedure or harassment committee'] },
-];
 
 /* ==========================================================================
    MEDIA
@@ -1254,17 +1249,6 @@ VIS.loop = function () {
   ], 'rv');
 };
 
-/* ---------------------------------------------------------------- ledger -- */
-
-VIS.ledger = function () {
-  return el('div', { class: 'ledger rv' }, LEDGER.map(function (c) {
-    return el('div', { class: 'lcol ' + c.tone }, [
-      el('h4', { text: c.t }),
-      el('ul', {}, c.items.map(function (i) { return el('li', { text: i }); })),
-    ]);
-  }));
-};
-
 /* ------------------------------------------------------------------ recs -- */
 
 VIS.recs = function () {
@@ -1286,7 +1270,7 @@ VIS.team = function () {
   /* the pan across the whole group, shot at the end of the interview */
   const head = buildMedia({
     kind: 'video', src: 'team-pan-12s', poster: 'pb-team-office',
-    caption: 'Group NEXIX at PizzaBurg head office',
+    caption: 'Group NEXIX with Mr. Ranjan Datta · after the interview',
   });
   return el('div', { class: 'teamwrap panel rv' }, [
     head,
@@ -1562,7 +1546,28 @@ const World = (function () {
         g.fillStyle = sg; g.fillRect(x + 2, y + 2, w - 4, h - 4);
       }
     }
-    return tex(c, { repeat: [4, 2] });
+    return tex(c, { repeat: [5, 1] });
+  }
+
+  /* The floor: large warm tiles with a grout line and a little speckle, so a
+     wide shot of the room has something under it. */
+  function floorTexture() {
+    const c = canvas(512), g = c.getContext('2d');
+    g.fillStyle = '#9a8b78'; g.fillRect(0, 0, 512, 512);
+    const n = 2, s2 = 512 / n;
+    for (let r = 0; r < n; r++) {
+      for (let i = 0; i < n; i++) {
+        const v = 0.94 + ((r + i) % 2) * 0.08;
+        g.fillStyle = 'rgb(' + Math.round(214 * v) + ',' + Math.round(199 * v) + ',' + Math.round(176 * v) + ')';
+        g.fillRect(i * s2 + 4, r * s2 + 4, s2 - 8, s2 - 8);
+      }
+    }
+    for (let i = 0; i < 5200; i++) {
+      const a = Math.random() * 0.1;
+      g.fillStyle = (Math.random() < 0.5 ? 'rgba(120,98,74,' : 'rgba(255,250,240,') + a + ')';
+      g.fillRect(Math.random() * 512, Math.random() * 512, 2.4, 2.4);
+    }
+    return tex(c, { repeat: [18, 14] });
   }
 
   /* Fired-brick for the oven dome. */
@@ -1669,23 +1674,35 @@ const World = (function () {
 
   function buildKitchen() {
     /* the counter */
-    const top = new T.Mesh(new T.BoxGeometry(80, 1.7, 36), mat(0xffffff, { rough: 0.36, metal: 0.02, map: marbleTexture() }));
+    const top = new T.Mesh(new T.BoxGeometry(80, 1.7, 36), mat(0xc9bda6, { rough: 0.32, metal: 0.02, map: marbleTexture() }));
     top.position.set(-8, -0.85, 0);
     scene.add(top);
-    scene.add(box(78, 9, 34, 0xe6dbc7, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
+    scene.add(box(78, 9, 34, 0xc2ad8c, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
+    scene.add(box(78, 2.6, 34.4, 0xa8916d, { pos: [-8, -10.0, -0.4], rough: 0.94 }));
     scene.add(box(80, 0.4, 0.7, STEEL, { pos: [-8, 0.15, 18.1], rough: 0.26, metal: 0.7 }));
     scene.add(box(80, 1.5, 0.5, BRAND, { pos: [-8, -0.85, 18.3], rough: 0.6 }));
 
-    /* the tiled backsplash and a shelf of jars */
-    const wall = new T.Mesh(new T.PlaneGeometry(104, 30), mat(0xffffff, { rough: 0.5, map: tileTexture() }));
-    wall.position.set(-10, 14, -21.4);
-    scene.add(wall);
-    scene.add(box(104, 34, 1.4, 0xe3d6c0, { pos: [-10, 14, -22.4], rough: 0.96 }));
+    /* the floor the whole room stands on — without it the counter floats */
+    const floor = new T.Mesh(
+      new T.PlaneGeometry(300, 220),
+      mat(0xa2917a, { rough: 0.62, metal: 0.03, map: floorTexture() })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.set(-10, -11.4, 10);
+    scene.add(floor);
+    /* a skirting where the wall meets it */
+    scene.add(box(140, 1.6, 1.2, 0xbca88a, { pos: [-10, -10.6, -21.6], rough: 0.9 }));
 
-    const shelf = box(64, 0.9, 5, WOOD, { pos: [2, 12, -18.8], rough: 0.72 });
+    /* the tiled backsplash and a shelf of jars */
+    const wall = new T.Mesh(new T.PlaneGeometry(140, 26), mat(0xe9ddc6, { rough: 0.52, map: tileTexture() }));
+    wall.position.set(-10, 9, -21.4);
+    scene.add(wall);
+    scene.add(box(180, 70, 1.4, 0xc3b096, { pos: [-10, 18, -22.4], rough: 0.96 }));
+
+    const shelf = box(64, 1.2, 6.4, WOOD, { pos: [2, 12, -18.4], rough: 0.72 });
     scene.add(shelf);
     for (let i = 0; i < 5; i++) {
-      scene.add(box(0.7, 2.4, 4.4, WOOD, { pos: [-28 + i * 15, 11.3, -18.8], rough: 0.72 }));
+      scene.add(box(0.9, 2.8, 5.6, 0x6f4a2d, { pos: [-28 + i * 15, 10.9, -18.6], rough: 0.76 }));
     }
     const jarProfile = [
       [0.00, 0.00], [0.92, 0.00], [1.00, 0.14], [1.00, 2.30], [0.86, 2.62],
@@ -1736,6 +1753,12 @@ const World = (function () {
       scene.add(box(9 - (i % 2) * 2.6, 0.5, 0.6, 0xcfc3ad, { pos: [-45 - (i % 2) * 1.3, 16.6 - i * 1.5, -20.9], rough: 0.9 }));
     }
 
+    /* the ceiling the pendants hang from */
+    const ceil = new T.Mesh(new T.PlaneGeometry(220, 160), mat(0xcdbb9f, { rough: 0.95 }));
+    ceil.rotation.x = Math.PI / 2;
+    ceil.position.set(-10, 30, 6);
+    scene.add(ceil);
+
     /* pendant lamps over the bench */
     const shadeProfile = [
       [0.00, 2.10], [0.22, 2.06], [0.60, 1.72], [1.30, 0.62], [1.86, 0.06],
@@ -1743,7 +1766,8 @@ const World = (function () {
     ];
     [-24, -4, 16].forEach(function (x) {
       const g2 = new T.Group();
-      g2.add(cyl(0.055, 0.055, 9, 6, 0x6f665c, { pos: [0, 26.5, 0], rough: 0.8 }));
+      g2.add(cyl(0.07, 0.07, 9.6, 6, 0x5b544c, { pos: [0, 26.6, 0], rough: 0.8 }));
+      g2.add(cyl(0.75, 0.75, 0.35, 14, 0x5b544c, { pos: [0, 29.8, 0], rough: 0.6, metal: 0.3 }));
       const shade = lathe(shadeProfile, 28, BRAND, { rough: 0.42, side: T.DoubleSide });
       shade.position.y = 20;
       g2.add(shade);
@@ -1782,12 +1806,12 @@ const World = (function () {
       [8.60, 0.00], [8.60, 1.90], [8.30, 2.30], [8.05, 3.60], [7.60, 5.20],
       [6.70, 6.90], [5.40, 8.35], [3.70, 9.45], [1.90, 10.05], [0.90, 10.20], [0.00, 10.25],
     ];
-    const dome = lathe(domeProfile, 44, 0xd9bb96, { rough: 0.93, map: brick });
+    const dome = lathe(domeProfile, 44, 0xc08d5f, { rough: 0.93, map: brick });
     oven.add(dome);
     /* the plinth it stands on */
-    oven.add(cyl(9.1, 9.6, 1.6, 34, 0xb08c66, { pos: [0, 0.8, 0], rough: 0.9 }));
+    oven.add(cyl(9.1, 9.6, 1.6, 34, 0x8e6c4a, { pos: [0, 0.8, 0], rough: 0.9 }));
     /* a chimney */
-    oven.add(cyl(0.95, 1.15, 3.2, 16, 0xb99a76, { pos: [0.4, 11.4, -0.6], rough: 0.9 }));
+    oven.add(cyl(0.95, 1.15, 3.2, 16, 0x9c7d5c, { pos: [0.4, 11.4, -0.6], rough: 0.9 }));
     oven.add(cyl(1.25, 1.05, 0.5, 16, 0x9c8168, { pos: [0.4, 13.2, -0.6], rough: 0.9 }));
 
     /* the front face, with a real arched mouth cut out of it */
@@ -1801,7 +1825,7 @@ const World = (function () {
     arch.closePath();
     face.holes.push(arch);
     const faceGeo = new T.ExtrudeGeometry(face, { depth: 1.5, bevelEnabled: true, bevelSize: 0.18, bevelThickness: 0.18, bevelSegments: 2, curveSegments: 24 });
-    const faceMesh = new T.Mesh(faceGeo, mat(0xdcc3a0, { rough: 0.9 }));
+    const faceMesh = new T.Mesh(faceGeo, mat(0xc9a87f, { rough: 0.9 }));
     faceMesh.position.set(0, 0, 7.2);
     oven.add(faceMesh);
 
@@ -2195,25 +2219,46 @@ const World = (function () {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     renderer.setClearColor(0x000000, 0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T.PCFSoftShadowMap;
     renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 0.80;
     renderer.outputColorSpace = T.SRGBColorSpace;
 
     scene = new T.Scene();
     camera = new T.PerspectiveCamera(rig.fov, window.innerWidth / window.innerHeight, 0.4, 400);
     scene.environment = environment();
+    scene.environmentIntensity = 0.34;
 
-    scene.add(new T.HemisphereLight(0xfff6e8, 0xa88f70, 0.62));
-    sun = new T.DirectionalLight(0xfff1d8, 2.0);
-    sun.position.set(26, 44, 24);
+    scene.add(new T.HemisphereLight(0xffeed6, 0x6f5334, 0.30));
+    sun = new T.DirectionalLight(0xffeccd, 3.3);
+    sun.position.set(34, 62, 40);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -70; sun.shadow.camera.right = 55;
+    sun.shadow.camera.top = 62; sun.shadow.camera.bottom = -30;
+    sun.shadow.camera.near = 6; sun.shadow.camera.far = 190;
+    sun.shadow.bias = -0.0005;
+    sun.shadow.normalBias = 0.7;
     scene.add(sun);
-    const fill = new T.DirectionalLight(0xd8e6ff, 0.32);
-    fill.position.set(-34, 20, -26);
+    const fill = new T.DirectionalLight(0xbdd4f2, 0.26);
+    fill.position.set(-40, 22, -30);
     scene.add(fill);
+
+    /* depth: the far end of the room falls away into the warm paper colour */
+    scene.fog = new T.Fog(0xf2e9db, 96, 210);
 
     buildKitchen();
     buildPizza();
     applyStage();
+
+    scene.traverse(function (o) {
+      if (!o.isMesh || !o.material) return;
+      const m = Array.isArray(o.material) ? o.material[0] : o.material;
+      if (m.isMeshBasicMaterial || m.transparent && m.depthWrite === false) return;
+      o.castShadow = true;
+      o.receiveShadow = true;
+    });
 
     const N = 420;
     const pos = new Float32Array(N * 3);
@@ -2242,19 +2287,19 @@ const World = (function () {
      units left of the subject: that puts the pizza — or the oven — in the
      upper right, clear of the type and above the aside card. */
   const VANTAGE = {
-    flour:    { p: [-1, 16, 39], t: [-47, 5.0, 0], fov: 40 },
-    dough:    { p: [3, 12, 30], t: [-9.0, 2.0, 0], fov: 41 },
-    stretch:  { p: [1, 10, 26], t: [-8.5, 1.6, 0], fov: 42 },
-    base:     { p: [4, 15, 31], t: [-9.0, 1.4, 0], fov: 41 },
-    sauce:    { p: [0, 12, 27], t: [-8.5, 1.4, 0], fov: 42 },
-    cheese:   { p: [3, 11, 26], t: [-8.5, 1.5, 0], fov: 42 },
-    toppings: { p: [-1, 14, 29], t: [-9.0, 1.4, 0], fov: 41 },
-    peel:     { p: [1, 12, 29], t: [-15.0, 3.4, 0], fov: 42 },
-    oven:     { p: [-1, 13, 36], t: [-40, 5.4, 3], fov: 42 },
-    bake:     { p: [-1, 12, 34], t: [-40, 5.2, 3], fov: 42 },
-    out:      { p: [4, 14, 31], t: [-9.0, 1.6, 0], fov: 41 },
-    slice:    { p: [1, 12, 27], t: [-8.5, 1.6, 0], fov: 42 },
-    served:   { p: [2, 10, 27], t: [-8.5, 3.2, 0], fov: 42 },
+    flour:    { p: [16, 22, 66], t: [-10, 5.0, 0], fov: 36 },
+    dough:    { p: [14, 21, 64], t: [-11, 4.5, 0], fov: 36 },
+    stretch:  { p: [10, 20, 62], t: [-12, 4.2, 0], fov: 37 },
+    base:     { p: [13, 22, 64], t: [-11, 4.2, 0], fov: 36 },
+    sauce:    { p: [8, 19, 60],  t: [-12, 4.0, 0], fov: 37 },
+    cheese:   { p: [11, 20, 62], t: [-11, 4.0, 0], fov: 37 },
+    toppings: { p: [6, 21, 63],  t: [-12, 4.0, 0], fov: 36 },
+    peel:     { p: [4, 20, 62],  t: [-17, 5.0, 0], fov: 37 },
+    oven:     { p: [0, 18, 58],  t: [-28, 7.0, 0], fov: 37 },
+    bake:     { p: [-4, 17, 55], t: [-30, 7.0, 0], fov: 37 },
+    out:      { p: [8, 21, 63],  t: [-12, 4.5, 0], fov: 36 },
+    slice:    { p: [11, 19, 58], t: [-10, 4.2, 0], fov: 37 },
+    served:   { p: [13, 17, 54], t: [-8, 5.0, 0],  fov: 38 },
   };
 
   function goTo(slide, instant) {
@@ -2447,6 +2492,17 @@ const Deck = (function () {
       })));
     }
 
+    if (s.roster) {
+      text.appendChild(el('ul', { class: 'roster rv' }, PRESENTERS.map(function (p) {
+        return el('li', {}, [
+          el('span', { class: 'rn', text: p.name }),
+          el('span', { class: 'ri', text: p.id }),
+        ]);
+      })));
+    }
+
+    if (s.bulletsTitle) text.appendChild(el('p', { class: 'blist-title rv', text: s.bulletsTitle }));
+
     if (s.bullets) {
       text.appendChild(el('ul', { class: 'points' }, s.bullets.map(function (b) {
         return el('li', { class: 'rv' }, el('span', {}, rich(b)));
@@ -2547,7 +2603,7 @@ const Deck = (function () {
       ? 'Next — ' + next.title + (next.by !== s.by ? '   ·   hand over to ' + byKey[next.by].short : '')
       : 'Last slide. Open the floor for questions.';
 
-    document.body.className = 'lay-' + s.layout;
+    document.body.className = 'lay-' + s.layout + (s.wide ? ' aside-wide' : '');
 
     const bd = BACKDROPS[s.id];
     if (bd && Media.has(bd)) {

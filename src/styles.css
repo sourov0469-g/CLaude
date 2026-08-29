@@ -155,6 +155,10 @@ body { overflow: hidden; }
 }
 .slide[hidden] { display: none; }
 
+/* a slide whose substance lives in the panel gives the panel the wider half */
+.aside-wide .slide { grid-template-columns: minmax(0, 40%) minmax(0, 60%); }
+.aside-wide .col-aside { max-width: 660px; }
+
 .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 54ch; min-width: 0; }
 
 /* the right column: their photograph leads, the panel supports it, and the
@@ -245,6 +249,15 @@ h1.title {
 
 /* ---------------------------------------------------------------- bullets */
 
+/* their deck puts a small heading over the objectives list */
+.blist-title {
+  margin: clamp(18px, 2.4vh, 28px) 0 0;
+  font-size: clamp(10px, calc(0.36 * var(--u) + 6px), 12.5px);
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-4);
+}
+.blist-title + ul.points { margin-top: clamp(8px, 1.1vh, 13px); }
+
 ul.points { list-style: none; margin: clamp(16px, 2.2vh, 26px) 0 0; padding: 0; display: grid; gap: clamp(8px, 1.1vh, 14px); }
 ul.points li {
   display: grid; grid-template-columns: 7px minmax(0, 1fr); gap: 13px; align-items: baseline;
@@ -263,6 +276,17 @@ ul.points b { color: var(--ink); font-weight: 650; }
 .meta div { display: grid; gap: 2px; }
 .meta .k { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--ink-4); }
 .meta .v { font-size: 13px; font-weight: 560; color: var(--ink-2); }
+
+/* the six names, as their title slide carries them */
+ul.roster {
+  list-style: none; margin: clamp(20px, 2.8vh, 32px) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px clamp(20px, 2.4vw, 38px);
+  border-top: 1px solid var(--rule); padding-top: clamp(14px, 1.8vh, 20px);
+}
+ul.roster li { display: grid; gap: 1px; }
+ul.roster .rn { font-size: clamp(11.5px, calc(0.42 * var(--u) + 6px), 14px); font-weight: 620; color: var(--ink-2); }
+ul.roster .ri { font-size: 9.5px; color: var(--ink-4); letter-spacing: 0.05em; font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------------------------ notes */
 

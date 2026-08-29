@@ -254,7 +254,28 @@ const World = (function () {
         g.fillStyle = sg; g.fillRect(x + 2, y + 2, w - 4, h - 4);
       }
     }
-    return tex(c, { repeat: [4, 2] });
+    return tex(c, { repeat: [5, 1] });
+  }
+
+  /* The floor: large warm tiles with a grout line and a little speckle, so a
+     wide shot of the room has something under it. */
+  function floorTexture() {
+    const c = canvas(512), g = c.getContext('2d');
+    g.fillStyle = '#9a8b78'; g.fillRect(0, 0, 512, 512);
+    const n = 2, s2 = 512 / n;
+    for (let r = 0; r < n; r++) {
+      for (let i = 0; i < n; i++) {
+        const v = 0.94 + ((r + i) % 2) * 0.08;
+        g.fillStyle = 'rgb(' + Math.round(214 * v) + ',' + Math.round(199 * v) + ',' + Math.round(176 * v) + ')';
+        g.fillRect(i * s2 + 4, r * s2 + 4, s2 - 8, s2 - 8);
+      }
+    }
+    for (let i = 0; i < 5200; i++) {
+      const a = Math.random() * 0.1;
+      g.fillStyle = (Math.random() < 0.5 ? 'rgba(120,98,74,' : 'rgba(255,250,240,') + a + ')';
+      g.fillRect(Math.random() * 512, Math.random() * 512, 2.4, 2.4);
+    }
+    return tex(c, { repeat: [18, 14] });
   }
 
   /* Fired-brick for the oven dome. */
@@ -361,23 +382,35 @@ const World = (function () {
 
   function buildKitchen() {
     /* the counter */
-    const top = new T.Mesh(new T.BoxGeometry(80, 1.7, 36), mat(0xffffff, { rough: 0.36, metal: 0.02, map: marbleTexture() }));
+    const top = new T.Mesh(new T.BoxGeometry(80, 1.7, 36), mat(0xc9bda6, { rough: 0.32, metal: 0.02, map: marbleTexture() }));
     top.position.set(-8, -0.85, 0);
     scene.add(top);
-    scene.add(box(78, 9, 34, 0xe6dbc7, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
+    scene.add(box(78, 9, 34, 0xc2ad8c, { pos: [-8, -6.2, -0.4], rough: 0.92 }));
+    scene.add(box(78, 2.6, 34.4, 0xa8916d, { pos: [-8, -10.0, -0.4], rough: 0.94 }));
     scene.add(box(80, 0.4, 0.7, STEEL, { pos: [-8, 0.15, 18.1], rough: 0.26, metal: 0.7 }));
     scene.add(box(80, 1.5, 0.5, BRAND, { pos: [-8, -0.85, 18.3], rough: 0.6 }));
 
-    /* the tiled backsplash and a shelf of jars */
-    const wall = new T.Mesh(new T.PlaneGeometry(104, 30), mat(0xffffff, { rough: 0.5, map: tileTexture() }));
-    wall.position.set(-10, 14, -21.4);
-    scene.add(wall);
-    scene.add(box(104, 34, 1.4, 0xe3d6c0, { pos: [-10, 14, -22.4], rough: 0.96 }));
+    /* the floor the whole room stands on — without it the counter floats */
+    const floor = new T.Mesh(
+      new T.PlaneGeometry(300, 220),
+      mat(0xa2917a, { rough: 0.62, metal: 0.03, map: floorTexture() })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.set(-10, -11.4, 10);
+    scene.add(floor);
+    /* a skirting where the wall meets it */
+    scene.add(box(140, 1.6, 1.2, 0xbca88a, { pos: [-10, -10.6, -21.6], rough: 0.9 }));
 
-    const shelf = box(64, 0.9, 5, WOOD, { pos: [2, 12, -18.8], rough: 0.72 });
+    /* the tiled backsplash and a shelf of jars */
+    const wall = new T.Mesh(new T.PlaneGeometry(140, 26), mat(0xe9ddc6, { rough: 0.52, map: tileTexture() }));
+    wall.position.set(-10, 9, -21.4);
+    scene.add(wall);
+    scene.add(box(180, 70, 1.4, 0xc3b096, { pos: [-10, 18, -22.4], rough: 0.96 }));
+
+    const shelf = box(64, 1.2, 6.4, WOOD, { pos: [2, 12, -18.4], rough: 0.72 });
     scene.add(shelf);
     for (let i = 0; i < 5; i++) {
-      scene.add(box(0.7, 2.4, 4.4, WOOD, { pos: [-28 + i * 15, 11.3, -18.8], rough: 0.72 }));
+      scene.add(box(0.9, 2.8, 5.6, 0x6f4a2d, { pos: [-28 + i * 15, 10.9, -18.6], rough: 0.76 }));
     }
     const jarProfile = [
       [0.00, 0.00], [0.92, 0.00], [1.00, 0.14], [1.00, 2.30], [0.86, 2.62],
@@ -428,6 +461,12 @@ const World = (function () {
       scene.add(box(9 - (i % 2) * 2.6, 0.5, 0.6, 0xcfc3ad, { pos: [-45 - (i % 2) * 1.3, 16.6 - i * 1.5, -20.9], rough: 0.9 }));
     }
 
+    /* the ceiling the pendants hang from */
+    const ceil = new T.Mesh(new T.PlaneGeometry(220, 160), mat(0xcdbb9f, { rough: 0.95 }));
+    ceil.rotation.x = Math.PI / 2;
+    ceil.position.set(-10, 30, 6);
+    scene.add(ceil);
+
     /* pendant lamps over the bench */
     const shadeProfile = [
       [0.00, 2.10], [0.22, 2.06], [0.60, 1.72], [1.30, 0.62], [1.86, 0.06],
@@ -435,7 +474,8 @@ const World = (function () {
     ];
     [-24, -4, 16].forEach(function (x) {
       const g2 = new T.Group();
-      g2.add(cyl(0.055, 0.055, 9, 6, 0x6f665c, { pos: [0, 26.5, 0], rough: 0.8 }));
+      g2.add(cyl(0.07, 0.07, 9.6, 6, 0x5b544c, { pos: [0, 26.6, 0], rough: 0.8 }));
+      g2.add(cyl(0.75, 0.75, 0.35, 14, 0x5b544c, { pos: [0, 29.8, 0], rough: 0.6, metal: 0.3 }));
       const shade = lathe(shadeProfile, 28, BRAND, { rough: 0.42, side: T.DoubleSide });
       shade.position.y = 20;
       g2.add(shade);
@@ -474,12 +514,12 @@ const World = (function () {
       [8.60, 0.00], [8.60, 1.90], [8.30, 2.30], [8.05, 3.60], [7.60, 5.20],
       [6.70, 6.90], [5.40, 8.35], [3.70, 9.45], [1.90, 10.05], [0.90, 10.20], [0.00, 10.25],
     ];
-    const dome = lathe(domeProfile, 44, 0xd9bb96, { rough: 0.93, map: brick });
+    const dome = lathe(domeProfile, 44, 0xc08d5f, { rough: 0.93, map: brick });
     oven.add(dome);
     /* the plinth it stands on */
-    oven.add(cyl(9.1, 9.6, 1.6, 34, 0xb08c66, { pos: [0, 0.8, 0], rough: 0.9 }));
+    oven.add(cyl(9.1, 9.6, 1.6, 34, 0x8e6c4a, { pos: [0, 0.8, 0], rough: 0.9 }));
     /* a chimney */
-    oven.add(cyl(0.95, 1.15, 3.2, 16, 0xb99a76, { pos: [0.4, 11.4, -0.6], rough: 0.9 }));
+    oven.add(cyl(0.95, 1.15, 3.2, 16, 0x9c7d5c, { pos: [0.4, 11.4, -0.6], rough: 0.9 }));
     oven.add(cyl(1.25, 1.05, 0.5, 16, 0x9c8168, { pos: [0.4, 13.2, -0.6], rough: 0.9 }));
 
     /* the front face, with a real arched mouth cut out of it */
@@ -493,7 +533,7 @@ const World = (function () {
     arch.closePath();
     face.holes.push(arch);
     const faceGeo = new T.ExtrudeGeometry(face, { depth: 1.5, bevelEnabled: true, bevelSize: 0.18, bevelThickness: 0.18, bevelSegments: 2, curveSegments: 24 });
-    const faceMesh = new T.Mesh(faceGeo, mat(0xdcc3a0, { rough: 0.9 }));
+    const faceMesh = new T.Mesh(faceGeo, mat(0xc9a87f, { rough: 0.9 }));
     faceMesh.position.set(0, 0, 7.2);
     oven.add(faceMesh);
 
@@ -887,25 +927,46 @@ const World = (function () {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     renderer.setClearColor(0x000000, 0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T.PCFSoftShadowMap;
     renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 0.80;
     renderer.outputColorSpace = T.SRGBColorSpace;
 
     scene = new T.Scene();
     camera = new T.PerspectiveCamera(rig.fov, window.innerWidth / window.innerHeight, 0.4, 400);
     scene.environment = environment();
+    scene.environmentIntensity = 0.34;
 
-    scene.add(new T.HemisphereLight(0xfff6e8, 0xa88f70, 0.62));
-    sun = new T.DirectionalLight(0xfff1d8, 2.0);
-    sun.position.set(26, 44, 24);
+    scene.add(new T.HemisphereLight(0xffeed6, 0x6f5334, 0.30));
+    sun = new T.DirectionalLight(0xffeccd, 3.3);
+    sun.position.set(34, 62, 40);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -70; sun.shadow.camera.right = 55;
+    sun.shadow.camera.top = 62; sun.shadow.camera.bottom = -30;
+    sun.shadow.camera.near = 6; sun.shadow.camera.far = 190;
+    sun.shadow.bias = -0.0005;
+    sun.shadow.normalBias = 0.7;
     scene.add(sun);
-    const fill = new T.DirectionalLight(0xd8e6ff, 0.32);
-    fill.position.set(-34, 20, -26);
+    const fill = new T.DirectionalLight(0xbdd4f2, 0.26);
+    fill.position.set(-40, 22, -30);
     scene.add(fill);
+
+    /* depth: the far end of the room falls away into the warm paper colour */
+    scene.fog = new T.Fog(0xf2e9db, 96, 210);
 
     buildKitchen();
     buildPizza();
     applyStage();
+
+    scene.traverse(function (o) {
+      if (!o.isMesh || !o.material) return;
+      const m = Array.isArray(o.material) ? o.material[0] : o.material;
+      if (m.isMeshBasicMaterial || m.transparent && m.depthWrite === false) return;
+      o.castShadow = true;
+      o.receiveShadow = true;
+    });
 
     const N = 420;
     const pos = new Float32Array(N * 3);
@@ -934,19 +995,19 @@ const World = (function () {
      units left of the subject: that puts the pizza — or the oven — in the
      upper right, clear of the type and above the aside card. */
   const VANTAGE = {
-    flour:    { p: [-1, 16, 39], t: [-47, 5.0, 0], fov: 40 },
-    dough:    { p: [3, 12, 30], t: [-9.0, 2.0, 0], fov: 41 },
-    stretch:  { p: [1, 10, 26], t: [-8.5, 1.6, 0], fov: 42 },
-    base:     { p: [4, 15, 31], t: [-9.0, 1.4, 0], fov: 41 },
-    sauce:    { p: [0, 12, 27], t: [-8.5, 1.4, 0], fov: 42 },
-    cheese:   { p: [3, 11, 26], t: [-8.5, 1.5, 0], fov: 42 },
-    toppings: { p: [-1, 14, 29], t: [-9.0, 1.4, 0], fov: 41 },
-    peel:     { p: [1, 12, 29], t: [-15.0, 3.4, 0], fov: 42 },
-    oven:     { p: [-1, 13, 36], t: [-40, 5.4, 3], fov: 42 },
-    bake:     { p: [-1, 12, 34], t: [-40, 5.2, 3], fov: 42 },
-    out:      { p: [4, 14, 31], t: [-9.0, 1.6, 0], fov: 41 },
-    slice:    { p: [1, 12, 27], t: [-8.5, 1.6, 0], fov: 42 },
-    served:   { p: [2, 10, 27], t: [-8.5, 3.2, 0], fov: 42 },
+    flour:    { p: [16, 22, 66], t: [-10, 5.0, 0], fov: 36 },
+    dough:    { p: [14, 21, 64], t: [-11, 4.5, 0], fov: 36 },
+    stretch:  { p: [10, 20, 62], t: [-12, 4.2, 0], fov: 37 },
+    base:     { p: [13, 22, 64], t: [-11, 4.2, 0], fov: 36 },
+    sauce:    { p: [8, 19, 60],  t: [-12, 4.0, 0], fov: 37 },
+    cheese:   { p: [11, 20, 62], t: [-11, 4.0, 0], fov: 37 },
+    toppings: { p: [6, 21, 63],  t: [-12, 4.0, 0], fov: 36 },
+    peel:     { p: [4, 20, 62],  t: [-17, 5.0, 0], fov: 37 },
+    oven:     { p: [0, 18, 58],  t: [-28, 7.0, 0], fov: 37 },
+    bake:     { p: [-4, 17, 55], t: [-30, 7.0, 0], fov: 37 },
+    out:      { p: [8, 21, 63],  t: [-12, 4.5, 0], fov: 36 },
+    slice:    { p: [11, 19, 58], t: [-10, 4.2, 0], fov: 37 },
+    served:   { p: [13, 17, 54], t: [-8, 5.0, 0],  fov: 38 },
   };
 
   function goTo(slide, instant) {

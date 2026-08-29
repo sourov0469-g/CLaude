@@ -2,22 +2,22 @@
    PIZZABURG · HRM PRACTICES — deck data
    Group NEXIX · Bangladesh University · BUS-2204
 
-   Thirteen slides, in the order the group presents them. The copy follows the
-   group's own deck; the report behind it rests on one face-to-face interview
-   with Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg, on
-   26 August 2026, checked against the Bangladesh Labour Act 2006.
+   The copy on these thirteen slides is the group's own, taken line for line
+   from the deck they wrote, and the speaker notes are theirs too. Nothing
+   here adds a claim the group did not make.
 
-   Where the report says something was "not evidenced", the wording keeps that
-   distinction: it was not described to us, which is not the same as absent.
+   Behind it all: one face-to-face interview with Mr. Ranjan Datta, General
+   Manager of Human Resource at PizzaBurg, on 26 August 2026, checked against
+   the Bangladesh Labour Act 2006.
    ========================================================================== */
 
 const PRESENTERS = [
-  { key: 'ratul',  name: 'Raiyan Ahmed Ratul',     short: 'Ratul',  id: '202511170047', hue: 8   },
-  { key: 'aditto', name: 'Aditya Tripura',         short: 'Aditto', id: '202511170006', hue: 26  },
-  { key: 'liya',   name: 'Liya Akter',             short: 'Liya',   id: '202511170072', hue: 42  },
-  { key: 'souvo',  name: 'Shuvo Chandra Roy',      short: 'Souvo',  id: '202511170023', hue: 150 },
-  { key: 'sourov', name: 'Asiful Islam Sourov',    short: 'Sourov', id: '202511170026', hue: 205 },
-  { key: 'esha',   name: 'Fabliha Mubarrat Kabir', short: 'Esha',   id: '202511170060', hue: 268 },
+  { key: 'ratul',  name: 'Raiyan Ahmed Ratul',     short: 'Raiyan',  id: '202511170047', hue: 8   },
+  { key: 'aditya', name: 'Aditya Tripura',         short: 'Aditya',  id: '202511170006', hue: 26  },
+  { key: 'liya',   name: 'Liya Akter',             short: 'Liya',    id: '202511170072', hue: 42  },
+  { key: 'shuvo',  name: 'Shuvo Chandra Roy',      short: 'Shuvo',   id: '202511170023', hue: 150 },
+  { key: 'sourov', name: 'Asiful Islam Sourov',    short: 'Sourov',  id: '202511170026', hue: 205 },
+  { key: 'esha',   name: 'Fabliha Mubarrat Kabir', short: 'Fabliha', id: '202511170060', hue: 268 },
 ];
 
 /* One pizza gets made across the deck. `stage` is where the bench has got to
@@ -31,7 +31,7 @@ const STAGE_ORDER = [
 
 const SLIDES = [
 
-  /* ===== RATUL — slides 1 and 2 ========================================== */
+  /* ===== RAIYAN — slides 1 and 2 ========================================= */
   {
     id: 'cover', by: 'ratul', layout: 'cover', stage: 'flour', fov: 38,
     kicker: 'Human Resource Management · BUS-2204',
@@ -43,64 +43,63 @@ const SLIDES = [
       { k: 'Institution', v: 'Bangladesh University' },
       { k: 'Submitted', v: '28 August 2026' },
     ],
-    notes: 'Good afternoon. We are Group NEXIX, and our report is on the human resource practices of PizzaBurg — a Bangladeshi pizza and burger chain that has grown from one shop to twenty-two in eight years. Everything here comes out of one face-to-face meeting with their General Manager of Human Resource, which we then checked against the Bangladesh Labour Act.',
+    roster: true,
+    notes: 'Good morning. We are Group NEXIX. Our report studies the Human Resource Management practices of PizzaBurg, a local pizza and burger chain, based on a face-to-face interview with their General Manager of Human Resource.',
   },
   {
     id: 'intro', by: 'ratul', layout: 'split', stage: 'dough',
-    photo: { src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
+    photo: { src: 'pb-neon-sign', caption: 'A PizzaBurg outlet, Dhaka' },
     photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
     kicker: 'Introduction & Objectives',
     title: 'About the company, and our objectives',
-    lede: 'A local chain competing with foreign brands in the same cities, growing fast enough for the strain to show.',
     stats: [
       { value: '22', label: 'outlets' },
       { value: '~1,000', label: 'employees' },
-      { value: '4,000+', label: 'pizzas a day' },
+      { value: '4,000+', label: 'pizzas / day' },
     ],
+    bulletsTitle: 'Objectives of the study',
     bullets: [
       'Examine PizzaBurg’s Human Resource Management practices',
       'Cover workforce planning, recruitment, turnover, welfare, performance, training and discipline',
       'Compare those practices with the **Bangladesh Labour Act 2006**',
       'Identify strengths, concerns and practical recommendations',
     ],
-    notes: 'PizzaBurg runs twenty-two outlets, employs close to a thousand people and sells over four thousand pizzas a day. Our aim was to examine how it manages those people, to compare what we found against the Bangladesh Labour Act of 2006, and to end with practical recommendations. Aditto will explain how we collected the information.',
+    notes: 'PizzaBurg is a local pizza and burger chain founded in January 2018 in Mirpur-2, Dhaka. It now runs 22 outlets with close to a thousand employees and sells over four thousand pizzas a day. Our objective was to study how a company that grew this fast manages its people — covering staffing, recruitment, turnover, welfare, performance, training and discipline — and to identify its strengths and areas for improvement.',
   },
 
-  /* ===== ADITTO — slides 3 and 4 ========================================= */
+  /* ===== ADITYA — slides 3 and 4 ========================================= */
   {
-    id: 'method', by: 'aditto', layout: 'split', stage: 'stretch', handover: true,
-    photo2: { src: 'pb-interview-a', caption: 'Head office, Dhaka' },
+    id: 'method', by: 'aditya', layout: 'split', stage: 'stretch', handover: true,
     photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
+    photo2: { src: 'pb-interview-a', caption: 'PizzaBurg head office, Dhaka' },
     kicker: 'Methodology',
     title: 'How we collected our information',
-    lede: 'A qualitative case study of a single company, built on one interview at PizzaBurg head office.',
     bullets: [
       '**Qualitative case study** of a single company',
       'Primary data: **one face-to-face interview**',
-      '**Mr. Ranjan Datta**, General Manager of Human Resource',
+      'Interviewee: **Mr. Ranjan Datta**, General Manager of Human Resource',
       '**26 August 2026**, Dhaka',
       'Prepared questions with follow-ups; handwritten notes, at his request',
       'Secondary sources used only for background and the law',
     ],
     note: { tone: 'concern', title: 'Limitation', body: 'One interviewee, one meeting. No documents seen, no employees interviewed. Where we say something was not evidenced, we mean it was not described to us — not that it does not exist.' },
-    notes: 'This is a qualitative case study of one company, and our primary data is a single face-to-face interview with Mr. Ranjan Datta, the General Manager of Human Resource, on the twenty-sixth of August at their head office in Dhaka. We used prepared questions but allowed ourselves follow-ups, and we took handwritten notes because he preferred that to a recording. One limitation, honestly, up front: one interviewee, one meeting, no documents, no employees. So where we say something was not evidenced, we mean it was not described to us.',
+    notes: 'We used a qualitative case-study approach. Our primary data came from a face-to-face interview with Mr. Ranjan Datta, General Manager of Human Resource, held on 26 August 2026 in Dhaka. We used prepared questions with room for follow-ups and took handwritten notes, as he preferred. An important limitation: our findings are based on the information of one HR representative — we did not see company documents or interview workers.',
   },
   {
-    id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
-    photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
+    id: 'planning', by: 'aditya', layout: 'split', stage: 'base',
+    photo: { src: 'pb-pizzas-table-b', caption: 'A PizzaBurg outlet floor' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
-    lede: 'Each outlet gets a set headcount, and it is not adjusted for how busy a shop is.',
     bullets: [
       'PizzaBurg operates **22 outlets** across ten cities and towns',
       'Each outlet has a **fixed number of employees**',
       'Staffing is **not** determined through a supply-and-demand policy',
       'About **12 outlets are in Dhaka**; the rest across nine other towns',
     ],
-    aside: { kind: 'outlets' },
     note: { tone: 'strength', title: 'Strength', body: 'Consistency and straightforward planning. Labour cost per outlet is predictable, rosters stay simple, and the same team works together.' },
-    note2: { tone: 'concern', title: 'Concern', body: 'Less flexibility when workload changes, and no periodic review of the fixed numbers was described to us — so a headcount set on opening day can drift out of date.' },
-    notes: 'PizzaBurg runs twenty-two outlets across ten cities and towns, and each one has a fixed number of employees. Mr. Datta was clear this is not set by supply and demand. About twelve of those outlets are in Dhaka and the rest are spread across nine other towns. The strength is consistency — labour cost per outlet is predictable and rosters stay simple. The concern is that nothing appears to review those numbers. Liya will take recruitment.',
+    note2: { tone: 'concern', title: 'Concern', body: 'Less flexibility when workload changes. No periodic review of the fixed numbers was described to us, so a headcount set on opening day can drift out of date.' },
+    aside: { kind: 'outlets' },
+    notes: 'PizzaBurg operates 22 outlets, and each outlet is given a fixed number of employees. The company does not set staffing through a supply-and-demand policy. The strength of this is consistency and straightforward planning — labour cost is predictable and the same team works together. The concern is less flexibility when an outlet’s workload changes.',
   },
 
   /* ===== LIYA — slides 5 and 6 =========================================== */
@@ -110,93 +109,79 @@ const SLIDES = [
     photo2: { src: 'pb-hiring-poster', fit: 'contain', caption: 'PizzaBurg also advertises roles publicly' },
     kicker: 'Recruitment & Selection',
     title: 'Hired in one day',
-    lede: 'The moment a cook leaves the station is empty, so speed here is not carelessness. It is the only option.',
     bullets: [
       'Applies to **kitchen and floor staff** (blue-collar roles)',
       '**One-day** process from interview to decision',
-      'Practical **experience** is checked',
+      '**Practical experience** is checked',
       'Candidates may be asked to **demonstrate their ability** on the job',
       'How candidates are **sourced** was not described to us',
     ],
     note: { tone: 'strength', title: 'Strength', body: 'Better job-fit assessment. Watching a cook actually cook predicts performance far more reliably than an interview or a certificate.' },
     note2: { tone: 'rec', title: 'Recommendation', body: 'Standardise the test with a one-page scoring sheet — the tasks, what to look for, and the minimum score that gets an offer — so all 22 outlets hire to the same standard.' },
-    notes: 'Hiring for kitchen and floor staff is done in one day, from interview to decision. Practical experience is checked, and candidates may be asked to demonstrate their ability on the job. That last part is the strongest thing in the system — watching a cook actually cook predicts performance far more reliably than an interview or a certificate. Our recommendation is to standardise it with a one-page scoring sheet, so all twenty-two outlets hire to the same standard.',
+    notes: 'For blue-collar employees — kitchen and floor staff — recruitment is a one-day interview process. Practical experience is considered, and candidates may be asked to demonstrate their practical ability. The strength here is better job-fit assessment: watching someone do the actual work tells you more than a certificate. Our recommendation is to standardise the practical assessment criteria so every outlet applies the same standard.',
   },
   {
     id: 'turnover', by: 'liya', layout: 'split', stage: 'cheese',
-    photo: { src: 'pb-dhaka-street', caption: 'Dhaka — where a cook can walk to another job' },
+    photo: { src: 'pb-dhaka-street', caption: 'Continuity keeps every kitchen running' },
+    photo2: { src: 'pb-interview-c', caption: 'Asking about notice and turnover' },
     kicker: 'Turnover & Resignation',
     title: 'Turnover and the notice period',
-    lede: 'Two words of answer, and a rule that quietly matches the statute.',
     bullets: [
       'Every employee must give **two months’ notice** before resigning',
       'It gives HR time to **recruit a replacement**',
-      'Two months matches the **60 days Section 27** asks of a permanent worker',
+      'Two months matches the **60 days Section 27** requires of a permanent worker',
       'Turnover is **never counted**, and leavers are not asked why they go',
     ],
     aside: { kind: 'turnover' },
-    note: { tone: 'concern', title: 'No figures were given', body: 'Very low and medium are the manager’s own words, not a measurement. The payroll already holds everything needed to count it properly.' },
-    notes: 'On turnover, Mr. Datta answered in two words. Office staff, very low. Floor and kitchen staff, medium. No figures — those are his words, not a measurement. Every employee must give two months notice before resigning, which gives HR time to recruit a replacement, and it happens to match exactly the sixty days Section 27 asks of a permanent worker. The gap is that turnover is never counted and nobody asks leavers why they are going. Souvo will take welfare.',
+    notes: 'White-collar turnover is very low; blue-collar turnover is medium. Employees must give two months’ notice before resigning, which gives HR time to recruit a replacement. That two-month requirement aligns exactly with Section 27 of the Bangladesh Labour Act, which asks a permanent worker for sixty days’ notice. Overall it supports workforce continuity and reduces disruption in the kitchen.',
   },
 
-  /* ===== SOUVO — slides 7 and 8 ========================================== */
+  /* ===== SHUVO — slides 7 and 8 ========================================== */
   {
-    id: 'welfare', by: 'souvo', layout: 'split', stage: 'toppings', handover: true,
+    id: 'welfare', by: 'shuvo', layout: 'split', stage: 'toppings', handover: true, wide: true,
     photo: { src: 'pb-pizzas-table-a', caption: 'Food support is provided on shift' },
     kicker: 'Employee Welfare',
     title: 'What employees receive',
-    lede: 'Housing and food are the two biggest costs a low-paid worker in Dhaka carries. PizzaBurg helps with both.',
-    aside: { kind: 'welfare' },
-    bullets: [
-      'Worth more to a low-paid worker than a pay rise of the same cost',
-      'Maternity care engages **Sections 45–50** of the Labour Act',
-      'Benefits like these reduce dissatisfaction — a **promotion path** is what creates drive',
-    ],
     note: { tone: 'concern', title: 'Concern', body: 'Eligibility conditions were not explained, so applicants cannot count a benefit and staff may not know they qualify.' },
-    notes: 'Employees who qualify get accommodation support, food support during working hours, health checkups, and maternity care. These are not small gestures — housing and food are the two biggest costs a low-paid worker in Dhaka carries, so help with both is worth more than a pay rise costing the company the same money. Maternity care also engages Sections forty-five to fifty. Our concern is that eligibility was never explained, so applicants cannot count a benefit and staff may not know they qualify.',
+    aside: { kind: 'welfare' },
+    notes: 'Eligible employees receive accommodation support and food support. Health checkups are provided, and that includes maternity-related care, which is consistent with Sections 45 to 50 of the Labour Act. Housing and food are the two largest costs a low-paid worker in Dhaka carries, so this support contributes directly to employee well-being and retention.',
   },
   {
-    id: 'performance', by: 'souvo', layout: 'split', stage: 'peel',
+    id: 'performance', by: 'shuvo', layout: 'split', stage: 'peel', wide: true,
     photo: { src: 'pb-interview-e', caption: 'Asking how reviews are used' },
     kicker: 'Performance & Training',
     title: 'Reviewed monthly, linked to training',
-    lede: 'Most companies this size review once a year. Monthly means a problem shows up in weeks.',
+    lede: 'Reviews feed directly into training.',
+    note: { tone: 'rec', title: 'Recommendation', body: 'Use clear, measurable indicators and document review outcomes.' },
     aside: { kind: 'loop' },
-    bullets: [
-      'Performance is assessed **every month**, not annually',
-      'The review decides **who gets training** — the step most companies skip',
-      'The next review then **tests whether the training worked**',
-      'No fixed measures, and no written record, were described to us',
-    ],
-    note: { tone: 'rec', title: 'Recommendation', body: 'Use clear, measurable indicators and document review outcomes, so two months can be compared and training can be shown to have worked.' },
-    notes: 'Performance is reviewed every month rather than once a year, and what the review finds decides who gets training. That is genuinely clever — it makes the appraisal do the job of finding the training gap, which is the step most companies skip. And because the cycle is monthly, the next review naturally tests whether the training worked. What was not described was any fixed set of measures or any written record. Sourov will take discipline.',
+    notes: 'Performance is reviewed every month, which supports continuous monitoring — most companies of this size review once a year. Importantly, performance results are linked with training: the review identifies a gap, training addresses it, and the next month’s review shows whether it worked. Our recommendation is to use clear measurable indicators and to document the review outcomes so progress can actually be compared.',
   },
 
   /* ===== SOUROV — slides 9 and 10 ======================================== */
   {
     id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
     photo: { src: 'pb-justice', tone: 'warm', caption: 'Measured against the Labour Act 2006' },
+    photo2: { src: 'pb-interview-d', caption: 'Mr. Datta on grounds for dismissal' },
     kicker: 'Discipline & Termination',
     title: 'Grounds for termination',
-    lede: 'The grounds are fair and broadly match the Act. The procedure behind them is what is missing.',
     bullets: [
       'Violation of **rules and regulations**',
       '**Sexual harassment**',
       '**Dishonesty** and integrity violations',
       'Other **serious misconduct**',
-      'No warning or inquiry procedure was described to us',
+      'No warning or inquiry procedure was described',
     ],
     note: { tone: 'strength', title: 'Strength', body: 'Clear standards, broadly matching the misconduct list in §23(4). Naming sexual harassment explicitly is uncommon in this trade.' },
-    note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — allegations in writing, at least 7 days to explain, a hearing, a finding on enquiry — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
-    notes: 'An employee can be dismissed for violating rules and regulations, for sexual harassment, for dishonesty, and for other serious misconduct. Those grounds are fair, they broadly match the misconduct list in Section twenty-three, and naming sexual harassment explicitly is uncommon in this trade. But no warning or inquiry procedure was described. Section twenty-four requires the allegations in writing, at least seven days to explain, a hearing, and a finding on enquiry. And the 2009 High Court directive requires every workplace to have a harassment complaint committee with outside members. Those two are the most urgent things in our report, and both are close to free.',
+    note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — written charge, 7 days to reply, a hearing, and a joint inquiry inside 60 days — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
+    notes: 'Serious misconduct may lead to termination. The grounds given were violation of rules and regulations, sexual harassment, integrity-related violations, and other serious misconduct. These broadly match Section 23 of the Labour Act. Two points on procedure: Section 24 requires a written charge, at least seven days to reply, a hearing and an inquiry before any punishment; and the 2009 High Court directive requires every workplace to have a sexual harassment complaint committee. Neither was described to us, so our recommendation is to document the procedure and establish the committee.',
   },
   {
     id: 'findings', by: 'sourov', layout: 'split', stage: 'bake',
-    photo: { src: 'pb-file-stack', caption: 'The records are what is missing' },
     cam: { p: [-1, 13, 37], t: [-31, 4.8, 3], fov: 43 },
+    photo: { src: 'pb-team-street', caption: 'Group NEXIX on site' },
+    photo2: { src: 'pb-brand-salman', caption: 'PizzaBurg brand reach' },
     kicker: 'Major Findings',
     title: 'Major findings',
-    lede: 'Everything points one way — keeping 22 outlets open and running. What is missing is the writing down.',
     bullets: [
       'Fixed staffing across **22 outlets**, not adjusted for demand',
       'Office turnover very low, floor turnover medium — but **never counted**',
@@ -207,76 +192,67 @@ const SLIDES = [
       'Overall: **the methods are sound, the records are missing**',
       'Two gaps carry legal weight — **no §24 procedure**, **no harassment committee**',
     ],
-    aside: { kind: 'ledger' },
-    notes: 'Putting it together. Fixed staffing across twenty-two outlets, not adjusted for demand. Office turnover very low, floor turnover medium, but never counted. Two months notice, matching the sixty days of Section twenty-seven. One-day hiring with a practical test, but no marking sheet. Monthly reviews linked to training, with no fixed measures described. Overall the methods are sound and the records are missing — and two of those gaps carry real legal weight. Esha will take the recommendations.',
+    notes: 'Bringing it together. Fixed staffing across 22 outlets. Very low white-collar turnover and medium blue-collar turnover. A two-month resignation notice aligned with the Labour Act. Practical, experience-based selection for blue-collar roles. Monthly performance reviews linked to training. Welfare support and clear misconduct standards. The overall pattern: the practices themselves are sound, but documentation is limited.',
   },
 
-  /* ===== ESHA — slides 11, 12 and 13 ===================================== */
+  /* ===== FABLIHA — slides 11, 12 and 13 ================================== */
   {
-    id: 'recommendations', by: 'esha', layout: 'split', stage: 'out', handover: true,
+    id: 'recommendations', by: 'esha', layout: 'split', stage: 'out', handover: true, wide: true,
+    photo: { src: 'pb-file-stack', caption: 'Most fixes are a form, not a budget' },
     kicker: 'Recommendations',
     title: 'What we recommend',
-    lede: 'Almost every fix on this list is a form and a decision, not a budget.',
     aside: { kind: 'recs' },
-    bullets: [
-      'The most urgent item is also **one of the cheapest**',
-      'Central records come early because **everything else needs somewhere to live**',
-    ],
-    note: { tone: 'rec', title: 'What it costs', body: 'Nothing on the first list needs a budget line. A committee, a written procedure and one file per employee are decisions, not spending.' },
-    notes: 'Three things we would do first, and they are urgent and close to free. Establish the sexual harassment complaint committee with outside members. Write down the Section twenty-four disciplinary procedure and issue it to every outlet manager. And keep one central record per employee. After that: add a scoring sheet to the practical test, use a one-page monthly review form, count turnover monthly and use the sixty-day notice for handover and exit interviews, review each outlet’s headcount twice a year, explain welfare eligibility and open a promotion ladder, and add induction and supervisor training plus a yearly Labour Act check.',
+    notes: 'Our recommendations. Review the fixed staffing levels periodically rather than setting them once. Standardise the practical recruitment assessment with a scoring sheet. Use the two-month notice period strategically — for handover and for exit interviews. Strengthen the monthly reviews with measurable indicators. Integrate performance and training records centrally. And maintain clear, consistently documented disciplinary standards, including the complaint committee.',
   },
   {
     id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
-    photo: { src: 'pb-team-street', caption: 'NEXIX, on the way to the interview' },
+    photo: { src: 'pb-two-pizzas', caption: 'Twenty-two kitchens, one standard' },
     photo2: { src: 'pb-pizza-closeup', caption: 'What all of it is for' },
     kicker: 'Conclusion',
     title: 'HRM built around operational continuity',
-    lede: 'A business the owner watched himself ran on judgement. A thousand workers in ten towns cannot.',
     bullets: [
       'Every practice serves one goal: **keeping 22 outlets open and running**',
       'Fixed staffing creates **consistency**; the notice rule turns a sudden loss into a **planned** one',
       'Practical selection supports **job fit**; monthly reviews catch problems in **weeks, not months**',
-      'In every area we asked about, the **method was sound and the paperwork was missing**',
+      'In every area the **method was sound and the paperwork was missing**',
+      'Two gaps go beyond untidiness — **no §24 procedure**, **no harassment committee**',
       'The next task is to **write the system down** without losing the speed',
     ],
-    notes: 'Our conclusion is that PizzaBurg’s HRM is built around operational continuity. Every practice serves one goal — keeping twenty-two outlets open and running. Fixed staffing creates consistency. The notice rule turns a sudden loss into a planned one. Practical selection supports job fit, and monthly reviews catch problems in weeks rather than months. In every area we asked about, the method was sound and the paperwork was missing. The next task is to write the system down without losing the speed that got them here.',
+    notes: 'In conclusion, PizzaBurg’s HRM is strongly connected to operational continuity — every practice serves the goal of keeping 22 outlets running. Fixed staffing creates consistency, notice periods support replacement planning, practical selection supports job fit, and monthly reviews support continuous monitoring. Further improvement is possible through stronger measurement, documentation and periodic staffing review.',
   },
   {
     id: 'thanks', by: 'esha', layout: 'closing', stage: 'served', fov: 42, arc: 1.3,
     kicker: 'Group NEXIX · Bangladesh University',
-    title: 'Thank you',
+    title: 'Thank you.',
     titleSub: 'Questions & discussion.',
-    lede: 'With thanks to Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg, who answered every question we asked.',
+    lede: 'With thanks to Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg.',
     aside: { kind: 'team' },
-    notes: 'Thank you. Our biggest thanks go to Mr. Ranjan Datta, who gave us his time and answered every question we asked, including the difficult ones. Students do not usually get that kind of access. Thanks also to our course teacher, Md. Hassan Talukdar. We are happy to take questions.',
+    notes: 'Thank you for listening. We are happy to take questions. And our thanks to Mr. Ranjan Datta of PizzaBurg, who gave us his time and answered every question we asked.',
   },
 ];
 
-/* --- supporting data ------------------------------------------------------ */
+/* ------------------------------------------------------------------ panels --
+   The numbers and words the aside panels draw. Every one of them comes off a
+   slide of the group's own deck; nothing here is estimated. */
 
-const OUTLETS = [
-  { city: 'Dhaka', n: 12 }, { city: 'Chattogram', n: 2 }, { city: 'Narayanganj', n: 1 },
-  { city: 'Cumilla', n: 1 }, { city: 'Rajshahi', n: 1 }, { city: 'Feni', n: 1 },
-  { city: 'Khulna', n: 1 }, { city: 'Mymensingh', n: 1 }, { city: 'Barishal', n: 1 },
-  { city: 'Noakhali', n: 1 },
-];
+const OUTLETS = { total: 22, dhaka: 12, towns: 10 };
 
 const TURNOVER = [
-  { grp: 'White-collar', lvl: 'Very low', tone: 'low', body: 'Office staff rarely leave the company.' },
-  { grp: 'Blue-collar', lvl: 'Medium', tone: 'med', body: 'Front-line staff turn over more often.' },
+  { grp: 'White-collar', lvl: 'Very Low', body: 'Office staff rarely leave the company.', tone: 'low' },
+  { grp: 'Blue-collar',  lvl: 'Medium',   body: 'Front-line staff turn over more often.', tone: 'med' },
 ];
 
 const WELFARE = [
-  { icon: 'roof', name: 'Accommodation', body: 'Housing support for employees who qualify.' },
-  { icon: 'bowl', name: 'Food support', body: 'Provided during working hours.' },
-  { icon: 'cross', name: 'Health checkups', body: 'Health checkups are provided.' },
-  { icon: 'cradle', name: 'Maternity care', body: 'Provided. Full §§45–50 entitlement not described.' },
+  { icon: 'roof',   name: 'Accommodation',   body: 'Housing support for employees who qualify.' },
+  { icon: 'bowl',   name: 'Food support',    body: 'Provided during working hours.' },
+  { icon: 'cross',  name: 'Health checkups', body: 'Health checkups are provided.' },
+  { icon: 'cradle', name: 'Maternity care',  body: 'Provided. Full §§45–50 entitlement not described.' },
 ];
 
 const LOOP = [
-  { n: '01', t: 'Monthly review', b: 'Each employee’s performance is assessed.' },
-  { n: '02', t: 'Gap identified', b: 'The review shows where improvement is needed.' },
-  { n: '03', t: 'Training given', b: 'Training targets the identified gap.' },
+  { n: '01', t: 'Monthly review',       b: 'Each employee’s performance is assessed.' },
+  { n: '02', t: 'Gap identified',       b: 'The review shows where improvement is needed.' },
+  { n: '03', t: 'Training given',       b: 'Training targets the identified gap.' },
   { n: '04', t: 'Monitoring continues', b: 'The next review shows the result.' },
 ];
 
@@ -295,8 +271,3 @@ const RECS = {
     'Add **induction and supervisor training**, plus a yearly Labour Act check',
   ],
 };
-
-const LEDGER = [
-  { t: 'Described to us', tone: 'yes', items: ['Fixed staffing, 22 outlets', 'One-day hiring with a practical test', 'Two months’ notice', 'Monthly review linked to training', 'Housing, food, health, maternity', 'Four grounds for dismissal'] },
-  { t: 'Not evidenced', tone: 'no', items: ['Any review of the fixed numbers', 'A marking sheet for the test', 'A turnover figure, or exit interviews', 'Fixed measures, or a written record', 'Welfare eligibility rules', 'A §24 procedure or harassment committee'] },
-];
