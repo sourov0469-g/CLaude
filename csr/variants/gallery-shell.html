@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PizzaBurg CSR — 5 Design Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="__FONTS_URL__" rel="stylesheet">
+<style>
+  :root{
+    --gbg:#0B0C0E; --gpanel:#151619; --gline:rgba(255,255,255,.09);
+    --gtext:#EDEDEC; --gsub:#9A9CA3; --gaccent:#E4544E;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; background:var(--gbg); color:var(--gtext); }
+  body{ font-family:'IBM Plex Sans',ui-sans-serif,sans-serif; padding:0 0 80px; }
+  .gwrap{ max-width:1760px; margin:0 auto; padding:0 28px; }
+  header.ghead{ padding:48px 28px 32px; text-align:center; }
+  header.ghead h1{ font-family:'Libre Caslon Display',Georgia,serif; font-weight:400; font-size:clamp(30px,4vw,48px); margin:0 0 12px; }
+  header.ghead p{ font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--gsub); max-width:64ch; margin:0 auto; line-height:1.6; }
+  .gsection{ margin:0 0 56px; }
+  .gsection-head{
+    display:flex; align-items:baseline; gap:14px; padding:0 0 16px; margin-bottom:20px;
+    border-bottom:1px solid var(--gline);
+  }
+  .gsection-head .gnum{ font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--gaccent); }
+  .gsection-head h2{ font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin:0; color:var(--gtext); }
+  .gsection-head .gtag{ font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--gsub); }
+  .grow{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .gcell{ display:flex; flex-direction:column; gap:8px; }
+  .gcell .gframe{
+    border:1px solid var(--gline); background:var(--gpanel); border-radius:2px; overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  .gcell .glabel{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--gsub); text-align:center; }
+  .gcell .glabel b{ color:var(--gtext); }
+  @media (max-width:1100px){ .grow{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:620px){ .grow{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="gwrap">
+<header class="ghead">
+  <h1>Five Directions for One Deck</h1>
+  <p>Same 13-slide CSR/Business Ethics content, four representative pages each, five different visual systems. Pick one outright, or mix — e.g. "Design 3 Page 2 + Design 1 Page 4."</p>
+</header>
+
+<section class="gsection" id="design-1">
+  <div class="gsection-head"><span class="gnum">01</span><h2>The Dossier</h2><span class="gtag">achromatic case-file · Libre Caslon Display + IBM Plex</span></div>
+  <div class="grow" data-design="1">__DESIGN_1__</div>
+</section>
+
+<section class="gsection" id="design-2">
+  <div class="gsection-head"><span class="gnum">02</span><h2>Radius</h2><span class="gtag">concentric-rings systems diagram · Space Grotesk + Archivo + Plex Mono</span></div>
+  <div class="grow" data-design="2">__DESIGN_2__</div>
+</section>
+
+<section class="gsection" id="design-3">
+  <div class="gsection-head"><span class="gnum">03</span><h2>Ledger</h2><span class="gtag">business-case audit ledger · Space Grotesk + IBM Plex</span></div>
+  <div class="grow" data-design="3">__DESIGN_3__</div>
+</section>
+
+<section class="gsection" id="design-4">
+  <div class="gsection-head"><span class="gnum">04</span><h2>Loopline</h2><span class="gtag">closed-loop systems diagram · Space Grotesk + IBM Plex</span></div>
+  <div class="grow" data-design="4">__DESIGN_4__</div>
+</section>
+
+<section class="gsection" id="design-5">
+  <div class="gsection-head"><span class="gnum">05</span><h2>The CSR Line</h2><span class="gtag">transit-map wayfinding signage · Overpass + Public Sans + Plex Mono</span></div>
+  <div class="grow" data-design="5">__DESIGN_5__</div>
+</section>
+
+</div>
+</body>
+</html>

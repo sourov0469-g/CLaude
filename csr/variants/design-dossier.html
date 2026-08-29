@@ -1,0 +1,174 @@
+<section class="design-dossier">
+<style>
+.design-dossier{
+  --ground:#15140F; --paper:#EDEAE0; --ink:#171614; --ink-inv:#F3F1E9;
+  --ink-soft:#5C584E; --ink-soft-inv:#B9B5A8;
+  --hairline:rgba(23,22,20,.18); --hairline-dark:rgba(243,241,233,.18);
+  --accent:#E4544E; --strength:#3F5B44; --gap:#C98A2C; --track:#DAD6C8;
+  --sans:'IBM Plex Sans',ui-sans-serif,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --display:'Libre Caslon Display',Georgia,serif;
+  display:flex; flex-direction:column; gap:28px; font-family:var(--sans); color:var(--ink);
+}
+.design-dossier *{ box-sizing:border-box; }
+.design-dossier .d-page{
+  width:100%; aspect-ratio:16/9; position:relative; overflow:hidden;
+  background:var(--paper);
+}
+.design-dossier .d-tag{
+  position:absolute; top:18px; left:18px; z-index:5;
+  font-family:var(--mono); font-size:13px; letter-spacing:.08em; color:var(--ink-soft-inv);
+  background:var(--ground); padding:5px 10px;
+}
+.design-dossier .rail-mini{
+  position:absolute; left:0; top:0; width:26px; height:100%; background:var(--ground);
+  display:flex; flex-direction:column; align-items:center; padding:14px 0 10px; z-index:4;
+}
+.design-dossier .rail-mini .dot{ width:6px; height:6px; background:var(--accent); }
+.design-dossier .rail-mini .idx{ margin-top:8px; font-family:var(--mono); font-size:10px; color:var(--ink-inv); }
+.design-dossier .rail-mini .track{ flex:1; width:1.5px; background:var(--hairline-dark); margin:10px 0; position:relative; }
+.design-dossier .rail-mini .fill{ position:absolute; left:0; top:0; width:100%; background:var(--accent); }
+.design-dossier .content{ position:absolute; left:26px; top:0; right:0; height:100%; }
+
+/* PAGE 1 — TITLE (Template A: cover) */
+.design-dossier .p1 .cover-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(35%) contrast(1.03); }
+.design-dossier .p1 .scrim{ position:absolute; inset:0; background:linear-gradient(100deg, rgba(21,20,15,.90) 0%, rgba(21,20,15,.66) 36%, rgba(21,20,15,.2) 66%, rgba(21,20,15,.02) 88%); }
+.design-dossier .p1 .content{ display:grid; align-content:center; padding:22px 0; }
+.design-dossier .p1 .panel{
+  position:relative; z-index:2; background:var(--paper); max-width:58%; margin-left:22px;
+  padding:16px 20px; border:1px solid var(--hairline);
+}
+.design-dossier .p1 .kicker{ font-family:var(--mono); font-weight:600; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:6px; margin-bottom:8px; }
+.design-dossier .p1 .kicker::before{ content:""; width:5px; height:5px; background:var(--accent); }
+.design-dossier .p1 h1{ font-family:var(--display); font-weight:400; font-size:26px; line-height:1.08; margin:0; }
+.design-dossier .p1 h1 em{ font-style:italic; color:var(--accent); }
+.design-dossier .p1 .lede{ font-family:var(--sans); font-weight:500; font-size:12.5px; color:var(--ink-soft); margin-top:8px; }
+.design-dossier .p1 .tags{ display:flex; gap:5px; flex-wrap:wrap; margin-top:10px; }
+.design-dossier .p1 .tags span{ font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:3px 6px; border:1px solid var(--hairline); color:var(--ink-soft); }
+.design-dossier .p1 .names{ margin-top:9px; font-family:var(--mono); font-size:9.5px; color:var(--ink-soft); line-height:1.5; }
+
+/* PAGE 2 — Field report (Community) with stacked photo+video */
+.design-dossier .p2 .field{ display:grid; grid-template-columns:2fr 3fr; height:100%; }
+.design-dossier .p2 .bone{ background:var(--paper); display:flex; flex-direction:column; justify-content:center; padding:22px 22px; min-height:0; }
+.design-dossier .p2 .eyebrow{ font-family:var(--mono); font-weight:600; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; }
+.design-dossier .p2 h1{ font-family:var(--display); font-weight:400; font-size:21px; line-height:1.08; margin:0 0 10px; }
+.design-dossier .p2 h1 em{ font-style:italic; color:var(--accent); }
+.design-dossier .p2 .tag{ display:inline-flex; padding:3px 8px; margin-bottom:6px; font-family:var(--mono); font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; background:var(--strength); color:var(--ink-inv); clip-path:polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%); }
+.design-dossier .p2 .fact{ display:flex; gap:7px; margin-top:7px; }
+.design-dossier .p2 .fact .d{ width:4px; height:4px; margin-top:6px; background:var(--ink-soft); flex:0 0 auto; }
+.design-dossier .p2 .fact p{ margin:0; font-size:11.5px; line-height:1.4; }
+.design-dossier .p2 .read{ margin-top:10px; font-size:11px; color:var(--ink-soft); line-height:1.4; }
+.design-dossier .p2 .dual{ position:relative; background:var(--ground); }
+.design-dossier .p2 .dual img{ position:absolute; left:0; right:0; top:0; height:60%; width:100%; object-fit:cover; }
+.design-dossier .p2 .dual video{ position:absolute; left:0; right:0; top:calc(60% + 2px); height:calc(40% - 2px); width:100%; object-fit:cover; }
+.design-dossier .p2 .cap{ position:absolute; left:0; right:0; bottom:0; z-index:2; background:rgba(21,20,15,.72); color:var(--ink-inv); font-family:var(--mono); font-size:9.5px; letter-spacing:.03em; text-transform:uppercase; padding:5px 10px; }
+
+/* PAGE 3 — Suggestion (flip: photo left / bone right) */
+.design-dossier .p3 .field{ display:grid; grid-template-columns:3fr 2fr; height:100%; }
+.design-dossier .p3 .photo{ position:relative; }
+.design-dossier .p3 .photo img{ width:100%; height:100%; object-fit:cover; }
+.design-dossier .p3 .bone{ background:var(--paper); display:flex; flex-direction:column; justify-content:center; padding:20px 20px; min-height:0; }
+.design-dossier .p3 .eyebrow{ font-family:var(--mono); font-weight:600; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px; }
+.design-dossier .p3 .rec{ display:inline-flex; padding:3px 8px; font-family:var(--mono); font-size:9.5px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; background:var(--accent); color:var(--ink-inv); clip-path:polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%); margin-bottom:6px; }
+.design-dossier .p3 h1{ font-family:var(--display); font-weight:400; font-size:18px; margin:0 0 5px; }
+.design-dossier .p3 h1 em{ font-style:italic; color:var(--accent); }
+.design-dossier .p3 .lede{ font-size:10.5px; color:var(--ink-soft); margin:0 0 8px; line-height:1.35; }
+.design-dossier .p3 .spec{ display:flex; flex-direction:column; }
+.design-dossier .p3 .row{ display:flex; gap:8px; padding:6px 0; border-top:1px solid var(--hairline); }
+.design-dossier .p3 .row:first-child{ border-top:none; }
+.design-dossier .p3 .row .k{ font-family:var(--mono); font-size:9px; font-weight:600; text-transform:uppercase; color:var(--ink-soft); min-width:62px; flex:0 0 auto; }
+.design-dossier .p3 .row .v{ font-size:10.5px; line-height:1.3; }
+.design-dossier .p3 .cap{ position:absolute; left:0; right:0; bottom:0; z-index:2; background:rgba(21,20,15,.72); color:var(--ink-inv); font-family:var(--mono); font-size:9.5px; letter-spacing:.03em; text-transform:uppercase; padding:5px 10px; }
+
+/* PAGE 4 — Ledger */
+.design-dossier .p4{ background:var(--paper); }
+.design-dossier .p4 .content{ display:grid; align-content:center; padding:14px 26px; }
+.design-dossier .p4 .eyebrow{ font-family:var(--mono); font-weight:600; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:5px; }
+.design-dossier .p4 h1{ font-family:var(--display); font-weight:400; font-size:22px; margin:0 0 8px; }
+.design-dossier .p4 h1 em{ font-style:italic; color:var(--accent); }
+.design-dossier .p4 table{ width:100%; border-collapse:collapse; }
+.design-dossier .p4 th{ font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; text-align:left; padding:5px 8px; border-bottom:2px solid var(--ink); color:var(--ink-soft); }
+.design-dossier .p4 td{ font-size:11px; padding:7px 8px; border-bottom:1px solid var(--hairline); vertical-align:middle; }
+.design-dossier .p4 .costcell{ width:120px; }
+.design-dossier .p4 .track{ width:100%; height:5px; background:var(--track); position:relative; }
+.design-dossier .p4 .fill{ position:absolute; left:0; top:0; height:100%; background:var(--accent); opacity:.78; }
+.design-dossier .p4 .prio{ display:inline-flex; padding:2px 6px; font-family:var(--mono); font-size:8.5px; font-weight:600; text-transform:uppercase; }
+.design-dossier .p4 .prio.high{ background:var(--accent); color:var(--ink-inv); }
+.design-dossier .p4 .prio.med{ border:1.3px solid var(--gap); color:var(--gap); }
+.design-dossier .p4 .sum{ margin-top:8px; font-family:var(--mono); font-size:9.5px; color:var(--ink-soft); border-top:1px solid var(--hairline); padding-top:8px; }
+</style>
+
+<div class="d-page p1" data-page="1" data-label="Title">
+  <div class="d-tag">DESIGN 1 · THE DOSSIER — PAGE 1</div>
+  <img class="cover-photo" src="../assets/img/web-outlet-aesthetic.jpg" alt="A PizzaBurg outlet interior">
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="panel">
+      <div class="kicker">Case File Open</div>
+      <h1>Corporate Social<br>Responsibility at <em>PizzaBurg</em></h1>
+      <p class="lede">A Business Ethics case review — Group NEXIX, Bangladesh University.</p>
+      <div class="tags"><span>Group NEXIX</span><span>Bangladesh University</span><span>Business Ethics</span></div>
+      <div class="names">Aditya Tripura · Shuvo Chandra Roy · Asiful Islam Sourov · Raiyan Ahmed Ratul · Fabliha Mubarrat Kabir · Liya Akter</div>
+    </div>
+  </div>
+</div>
+
+<div class="d-page p2" data-page="2" data-label="Current CSR: Community">
+  <div class="d-tag">DESIGN 1 · THE DOSSIER — PAGE 2</div>
+  <div class="field">
+    <div class="bone">
+      <div class="eyebrow">Existing Practice</div>
+      <h1>Community &amp; <em>philanthropy</em></h1>
+      <div class="tag">Strength</div>
+      <div class="fact"><span class="d"></span><p><b>Ramadan</b> — PizzaBurg has provided pizzas to mosques for iftar, reported by Dhaka Tribune.</p></div>
+      <div class="fact"><span class="d"></span><p><b>Christmas</b> — employees dress as Santa Claus and distribute free pizzas to disadvantaged children, reported by Dhaka Tribune.</p></div>
+      <p class="read">Reading: both fall under Carroll's <b>philanthropic responsibility</b> — voluntary contributions tied to a specific occasion.</p>
+    </div>
+    <div class="dual">
+      <img src="../assets/img/csr-community.jpg" alt="Community food distribution, illustrative">
+      <video muted loop autoplay playsinline><source src="../assets/video/v-team-1.mp4" type="video/mp4"></video>
+      <div class="cap">Top: illustrative · Bottom: real site-visit footage</div>
+    </div>
+  </div>
+</div>
+
+<div class="d-page p3" data-page="3" data-label="Suggestion: Green PizzaBurg">
+  <div class="d-tag">DESIGN 1 · THE DOSSIER — PAGE 3</div>
+  <div class="field">
+    <div class="photo">
+      <img src="../assets/img/web-outlet-recycle-bin.jpg" alt="A real PizzaBurg-branded recycling bin in-store">
+      <div class="cap">Real PizzaBurg interior — existing recycle signage</div>
+    </div>
+    <div class="bone">
+      <div class="eyebrow">Suggestion 02 / 04</div>
+      <div class="rec">Recommended</div>
+      <h1>Green <em>PizzaBurg</em></h1>
+      <p class="lede">100% biodegradable packaging, with a box return/recycling incentive.</p>
+      <div class="spec">
+        <div class="row"><span class="k">Cost</span><span class="v">Moderate upfront — packaging changeover plus incentive design</span></div>
+        <div class="row"><span class="k">Market</span><span class="v">Over half of Bangladesh's population is under 25 — responsive to visible sustainability moves</span></div>
+        <div class="row"><span class="k">Regulation</span><span class="v">Bangladesh has signaled a clear policy direction against single-use plastics</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-page p4" data-page="4" data-label="Impact & ROI Summary">
+  <div class="d-tag">DESIGN 1 · THE DOSSIER — PAGE 4</div>
+  <div class="content">
+    <div class="eyebrow">Field Assessment, Priority Ranked</div>
+    <h1>Impact &amp; <em>ROI summary</em></h1>
+    <table>
+      <thead><tr><th>Initiative</th><th class="costcell">Cost</th><th>Primary Benefit</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td><b>Buy 1, Give 1</b></td><td class="costcell"><div class="track"><div class="fill" style="width:25%"></div></div></td><td>Converts seasonal goodwill into an always-on program</td><td><span class="prio high">High</span></td></tr>
+        <tr><td><b>Green PizzaBurg</b></td><td class="costcell"><div class="track"><div class="fill" style="width:85%"></div></div></td><td>Youth-market appeal; ahead of tightening plastic regulation</td><td><span class="prio med">Medium</span></td></tr>
+        <tr><td><b>Student Support</b></td><td class="costcell"><div class="track"><div class="fill" style="width:55%"></div></div></td><td>Builds a talent pipeline and employer branding</td><td><span class="prio med">Medium</span></td></tr>
+        <tr><td><b>Food Rescue</b></td><td class="costcell"><div class="track"><div class="fill" style="width:8%"></div></div></td><td>Reduces disposal cost; strong reputational story</td><td><span class="prio high">High</span></td></tr>
+      </tbody>
+    </table>
+    <div class="sum">4 INITIATIVES · NEAR-ZERO TO MODERATE COST · COMPOUNDING BRAND + COMMUNITY RETURN</div>
+  </div>
+</div>
+</section>
+<!-- FONTS: Libre+Caslon+Display, IBM+Plex+Sans:wght@400;500;600;700, IBM+Plex+Mono:wght@500;600 -->

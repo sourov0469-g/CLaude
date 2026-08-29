@@ -1,0 +1,654 @@
+<section class="design-csrline">
+  <style>
+    .design-csrline {
+      --ink:#101A2B;
+      --ink-deep:#0A121C;
+      --platform-white:#F2F4F2;
+      --signal-steel:#7E93AC;
+      --accent:#E4544E;
+      --strength:#5C7A94;
+      --gap:#D98A3D;
+      --muted4:#8B7BA8;
+      font-family:'Public Sans', ui-sans-serif, system-ui, sans-serif;
+      color:var(--platform-white);
+    }
+    .design-csrline .d-page {
+      width:100%;
+      aspect-ratio:16/9;
+      position:relative;
+      overflow:hidden;
+      background:var(--ink);
+    }
+
+    /* ---------- shared type helpers ---------- */
+    .design-csrline .eyebrow {
+      font-family:'Overpass', ui-sans-serif, sans-serif;
+      font-weight:800;
+      font-stretch:expanded;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      font-size:clamp(16px, 1.15vw, 19px);
+    }
+    .design-csrline .headline {
+      font-family:'Overpass', ui-sans-serif, sans-serif;
+      font-weight:800;
+      font-stretch:expanded;
+      text-transform:uppercase;
+      letter-spacing:0.01em;
+      line-height:1.04;
+    }
+    .design-csrline .sentence {
+      font-family:'Overpass', ui-sans-serif, sans-serif;
+      font-weight:700;
+      text-transform:none;
+      line-height:1.2;
+    }
+    .design-csrline .mono {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      letter-spacing:0.02em;
+    }
+    .design-csrline .body-text {
+      font-family:'Public Sans', ui-sans-serif, sans-serif;
+      font-weight:400;
+      line-height:1.42;
+    }
+
+    /* ---------- Route Rail footer (every page) ---------- */
+    .design-csrline .route-rail {
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:80px;
+      background:var(--ink-deep);
+      display:flex;
+      align-items:center;
+      gap:clamp(10px, 1.6vw, 20px);
+      padding:0 clamp(20px, 3vw, 40px);
+      box-sizing:border-box;
+      z-index:5;
+    }
+    .design-csrline .route-rail::before {
+      content:"";
+      position:absolute;
+      left:0; right:0; top:50%;
+      height:3px;
+      background:var(--signal-steel);
+      opacity:0.35;
+      transform:translateY(-50%);
+      z-index:0;
+    }
+    .design-csrline .rail-stop {
+      position:relative;
+      z-index:1;
+      width:16px; height:16px;
+      border-radius:50%;
+      border:2.5px solid var(--signal-steel);
+      background:var(--ink-deep);
+      flex:0 0 auto;
+    }
+    .design-csrline .rail-stop.lit-strength {
+      background:var(--strength);
+      border-color:var(--strength);
+      box-shadow:0 0 0 4px rgba(92,122,148,0.25);
+    }
+    .design-csrline .rail-stop.lit-accent {
+      background:var(--accent);
+      border-color:var(--accent);
+      box-shadow:0 0 0 4px rgba(228,84,78,0.28);
+    }
+    .design-csrline .rail-label {
+      position:relative; z-index:1;
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:clamp(16px, 1vw, 17px);
+      color:var(--signal-steel);
+      white-space:nowrap;
+      margin-right:auto;
+    }
+    .design-csrline .rail-label b { color:var(--platform-white); font-weight:600; }
+    .design-csrline .rail-stopname {
+      position:relative; z-index:1;
+      font-family:'Overpass', ui-sans-serif, sans-serif;
+      font-weight:700;
+      font-stretch:expanded;
+      text-transform:uppercase;
+      font-size:clamp(16px, 0.95vw, 17px);
+      color:var(--signal-steel);
+      white-space:nowrap;
+    }
+    .design-csrline .rail-stopname.current { color:var(--platform-white); }
+
+    /* ---------- generic tag chip ---------- */
+    .design-csrline .tag {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:clamp(16px, 0.95vw, 17px);
+      font-weight:600;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      padding:4px 10px;
+      border:1.5px solid currentColor;
+    }
+    .design-csrline .tag.strength { color:var(--strength); }
+    .design-csrline .tag.accent   { color:var(--accent); background:rgba(228,84,78,0.08); }
+    .design-csrline .tag .dot { width:7px; height:7px; border-radius:50%; background:currentColor; flex:0 0 auto; }
+
+    /* ================= PAGE 1 — TITLE ================= */
+    .design-csrline .p1-photo {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      filter:grayscale(0.55) contrast(1.05) brightness(0.55);
+    }
+    .design-csrline .p1-overlay {
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(10,18,28,0.55) 0%, rgba(16,26,43,0.72) 45%, var(--ink-deep) 100%),
+        linear-gradient(100deg, rgba(10,18,28,0.92) 0%, rgba(16,26,43,0.55) 42%, rgba(16,26,43,0.25) 70%);
+    }
+    .design-csrline .p1-content {
+      position:absolute;
+      left:clamp(28px, 5vw, 64px);
+      top:0; bottom:80px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      max-width:72%;
+      z-index:2;
+    }
+    .design-csrline .p1-linecode {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:16px;
+    }
+    .design-csrline .p1-linecode .chip {
+      width:34px; height:34px;
+      background:var(--accent);
+      color:var(--platform-white);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-weight:700;
+      font-size:16px;
+      flex:0 0 auto;
+    }
+    .design-csrline .p1-linecode .txt {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:clamp(16px, 1vw, 18px);
+      color:var(--signal-steel);
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+    .design-csrline .p1-headline {
+      font-size:clamp(30px, 3.6vw, 50px);
+      color:var(--platform-white);
+      margin:0 0 14px 0;
+    }
+    .design-csrline .p1-sub {
+      font-size:clamp(16px, 1.25vw, 21px);
+      color:var(--signal-steel);
+      font-family:'Public Sans', ui-sans-serif, sans-serif;
+      font-weight:600;
+      margin:0 0 20px 0;
+    }
+    .design-csrline .p1-tags {
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+    .design-csrline .p1-tags .tag { color:var(--signal-steel); }
+    .design-csrline .p1-team {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:clamp(16px, 0.92vw, 17px);
+      color:var(--platform-white);
+      opacity:0.85;
+      letter-spacing:0.01em;
+    }
+    .design-csrline .p1-team .sep { color:var(--accent); margin:0 8px; }
+
+    /* ================= DOCKED PANEL LAYOUT (pages 2-4) ================= */
+    .design-csrline .docked {
+      position:absolute;
+      top:0; left:0; right:0; bottom:80px; /* leave room for rail */
+      display:grid;
+      grid-template-columns:38% 62%;
+      align-content:center;
+    }
+    .design-csrline .panel {
+      background:var(--platform-white);
+      color:var(--ink);
+      box-sizing:border-box;
+      padding:clamp(20px, 2.6vw, 34px) clamp(22px, 2.8vw, 38px);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      height:100%;
+      overflow:hidden;
+    }
+    .design-csrline .media {
+      position:relative;
+      height:100%;
+      overflow:hidden;
+      background:var(--ink-deep);
+    }
+    .design-csrline .media img,
+    .design-csrline .media video {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .design-csrline .media .media-caption {
+      position:absolute;
+      left:0; bottom:0;
+      background:rgba(10,18,28,0.82);
+      color:var(--signal-steel);
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:16px;
+      padding:5px 12px;
+      letter-spacing:0.03em;
+    }
+
+    /* page eyebrow inside panel */
+    .design-csrline .panel .eyebrow {
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+    .design-csrline .panel .p-headline {
+      font-size:clamp(20px, 2.05vw, 29px);
+      color:var(--ink);
+      margin:0 0 clamp(14px, 1.8vw, 22px) 0;
+    }
+
+    /* ---------- Page 2: strength facts ---------- */
+    .design-csrline .fact {
+      border-left:4px solid var(--strength);
+      padding:10px 0 10px 16px;
+      margin-bottom:14px;
+    }
+    .design-csrline .fact:last-of-type { margin-bottom:0; }
+    .design-csrline .fact-head {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:6px;
+    }
+    .design-csrline .fact-stop {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-weight:600;
+      font-size:16px;
+      color:var(--strength);
+    }
+    .design-csrline .fact-title {
+      font-family:'Overpass', ui-sans-serif, sans-serif;
+      font-weight:700;
+      font-stretch:expanded;
+      text-transform:uppercase;
+      font-size:clamp(16px, 1.15vw, 19px);
+      color:var(--ink);
+    }
+    .design-csrline .fact p {
+      font-size:clamp(16px, 1.05vw, 18px);
+      color:#33445c;
+      margin:0;
+    }
+    .design-csrline .reading-strip {
+      margin-top:16px;
+      padding-top:12px;
+      border-top:1.5px dashed var(--signal-steel);
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:16px;
+      color:#4b5d75;
+      line-height:1.5;
+    }
+    .design-csrline .reading-strip b { color:var(--ink); }
+
+    /* ---------- Page 3: suggestion + ROI ticket ---------- */
+    .design-csrline .panel.suggest .eyebrow { color:var(--accent); }
+    .design-csrline .p3-recommend {
+      margin-bottom:14px;
+    }
+    .design-csrline .lede {
+      font-family:'Public Sans', ui-sans-serif, sans-serif;
+      font-weight:600;
+      font-size:clamp(16px, 1.2vw, 20px);
+      color:var(--ink);
+      line-height:1.4;
+      margin:0 0 18px 0;
+      padding-left:14px;
+      border-left:4px solid var(--accent);
+    }
+    .design-csrline .roi-ticket {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      border:1.5px solid var(--ink);
+      position:relative;
+      margin-top:auto;
+    }
+    .design-csrline .roi-cell {
+      padding:10px 12px;
+      position:relative;
+      box-sizing:border-box;
+    }
+    .design-csrline .roi-cell + .roi-cell {
+      border-left:1.5px dashed var(--signal-steel);
+    }
+    .design-csrline .roi-cell::before {
+      content:"";
+      position:absolute;
+      left:-4px; top:-4px;
+      width:7px; height:7px;
+      border-radius:50%;
+      background:var(--ink);
+      display:none;
+    }
+    .design-csrline .roi-k {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-weight:600;
+      font-size:16px;
+      color:var(--accent);
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      margin-bottom:5px;
+    }
+    .design-csrline .roi-v {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:clamp(16px, 0.98vw, 17px);
+      color:var(--ink);
+      line-height:1.32;
+    }
+    .design-csrline .roi-stub-label {
+      position:absolute;
+      top:-11px;
+      left:12px;
+      background:var(--platform-white);
+      padding:0 8px;
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:16px;
+      letter-spacing:0.1em;
+      color:var(--ink);
+      font-weight:600;
+    }
+
+    /* ---------- Page 4: interchange + table ---------- */
+    .design-csrline .p4-wrap {
+      position:absolute;
+      top:0; left:0; right:0; bottom:80px;
+      display:flex;
+      flex-direction:column;
+      padding:clamp(20px, 2.6vw, 32px) clamp(28px, 3.4vw, 46px);
+      box-sizing:border-box;
+      justify-content:center;
+      gap:clamp(12px, 1.6vw, 18px);
+    }
+    .design-csrline .p4-headline {
+      font-size:clamp(22px, 2.3vw, 32px);
+      color:var(--platform-white);
+      margin:0;
+    }
+    .design-csrline .p4-body {
+      display:grid;
+      grid-template-columns:30% 70%;
+      gap:clamp(14px, 2vw, 26px);
+      align-items:center;
+    }
+    .design-csrline .interchange-box {
+      background:var(--ink-deep);
+      border:1.5px solid var(--signal-steel);
+      padding:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .design-csrline .table-box {
+      border-collapse:collapse;
+      width:100%;
+    }
+    .design-csrline .table-box th {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:16px;
+      color:var(--signal-steel);
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      text-align:left;
+      padding:4px 10px 8px 14px;
+      font-weight:600;
+      border-bottom:1.5px solid var(--signal-steel);
+    }
+    .design-csrline .table-box td {
+      font-family:'Public Sans', ui-sans-serif, sans-serif;
+      font-size:clamp(16px, 1.02vw, 18px);
+      color:var(--platform-white);
+      padding:7px 10px 7px 14px;
+      border-bottom:1px solid rgba(126,147,172,0.28);
+      position:relative;
+    }
+    .design-csrline .table-box tr:last-child td { border-bottom:none; }
+    .design-csrline .table-box td.init-cell {
+      font-family:'Overpass', ui-sans-serif, sans-serif;
+      font-weight:700;
+      font-stretch:expanded;
+      text-transform:uppercase;
+      font-size:clamp(16px, 0.98vw, 17px);
+    }
+    .design-csrline .color-tab {
+      position:absolute;
+      left:0; top:0; bottom:0;
+      width:5px;
+    }
+    .design-csrline td { padding-left:14px; }
+    .design-csrline .priority-pill {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:16px;
+      font-weight:600;
+      letter-spacing:0.06em;
+      padding:2px 8px;
+      border:1.5px solid currentColor;
+      display:inline-block;
+    }
+    .design-csrline .priority-high { color:var(--accent); }
+    .design-csrline .priority-medium { color:var(--gap); border-style:dashed; }
+    .design-csrline .p4-closing {
+      font-family:'IBM Plex Mono', ui-monospace, monospace;
+      font-size:clamp(16px, 1.05vw, 18px);
+      color:var(--signal-steel);
+      margin:0;
+      padding-top:8px;
+      border-top:1.5px dashed var(--signal-steel);
+    }
+    .design-csrline .p4-closing b { color:var(--platform-white); font-weight:600; }
+  </style>
+
+  <!-- ============ PAGE 1 — TITLE ============ -->
+  <div class="d-page" data-page="1" data-label="Title">
+    <img class="p1-photo" src="../assets/img/outlet-2.jpg" alt="PizzaBurg outlet" />
+    <div class="p1-overlay"></div>
+    <div class="p1-content">
+      <div class="p1-linecode">
+        <div class="chip">CSR</div>
+        <div class="txt">The CSR Line &middot; Route Map</div>
+      </div>
+      <h1 class="headline p1-headline">Corporate Social Responsibility at PizzaBurg</h1>
+      <p class="p1-sub">A Business Ethics case review &mdash; Group NEXIX, Bangladesh University</p>
+      <div class="p1-tags">
+        <span class="tag"><span class="dot"></span>Group NEXIX</span>
+        <span class="tag"><span class="dot"></span>Bangladesh University</span>
+        <span class="tag"><span class="dot"></span>Business Ethics</span>
+      </div>
+      <div class="p1-team mono">Aditya Tripura<span class="sep">&middot;</span>Shuvo Chandra Roy<span class="sep">&middot;</span>Asiful Islam Sourov<span class="sep">&middot;</span>Raiyan Ahmed Ratul<span class="sep">&middot;</span>Fabliha Mubarrat Kabir<span class="sep">&middot;</span>Liya Akter</div>
+    </div>
+    <!-- Route rail: dormant, all stops hollow -->
+    <div class="route-rail">
+      <div class="rail-label mono">LINE STATUS: <b>DORMANT</b></div>
+      <div class="rail-stop"></div>
+      <div class="rail-stopname">Community</div>
+      <div class="rail-stop"></div>
+      <div class="rail-stopname">Green PizzaBurg</div>
+      <div class="rail-stop"></div>
+      <div class="rail-stopname">Impact Summary</div>
+      <div class="rail-stop"></div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 2 — CURRENT CSR: COMMUNITY ============ -->
+  <div class="d-page" data-page="2" data-label="Current CSR: Community">
+    <div class="docked">
+      <div class="panel">
+        <div class="eyebrow" style="color:var(--strength);">Stop 01 &middot; On the Line Already</div>
+        <h2 class="sentence p-headline">Current CSR: Community &amp; Philanthropy</h2>
+
+        <div class="fact">
+          <div class="fact-head">
+            <span class="fact-stop mono">01A</span>
+            <span class="fact-title">Ramadan Iftar</span>
+            <span class="tag strength"><span class="dot"></span>Strength</span>
+          </div>
+          <p class="body-text">PizzaBurg has provided pizzas to mosques for iftar, reported by Dhaka Tribune.</p>
+        </div>
+
+        <div class="fact">
+          <div class="fact-head">
+            <span class="fact-stop mono">01B</span>
+            <span class="fact-title">Christmas Giving</span>
+            <span class="tag strength"><span class="dot"></span>Strength</span>
+          </div>
+          <p class="body-text">Employees dress as Santa Claus and distribute free pizzas to disadvantaged children, reported by Dhaka Tribune.</p>
+        </div>
+
+        <div class="reading-strip">READING &mdash; both fall under Carroll's <b>philanthropic responsibility</b>: voluntary contributions tied to a specific occasion.</div>
+      </div>
+      <div class="media">
+        <img src="../assets/img/csr-community.jpg" alt="Community food distribution" />
+        <div class="media-caption mono">Illustrative</div>
+      </div>
+    </div>
+    <div class="route-rail">
+      <div class="rail-label mono">LINE STATUS: <b>1 STOP REACHED</b></div>
+      <div class="rail-stop lit-strength"></div>
+      <div class="rail-stopname current">Community</div>
+      <div class="rail-stop"></div>
+      <div class="rail-stopname">Green PizzaBurg</div>
+      <div class="rail-stop"></div>
+      <div class="rail-stopname">Impact Summary</div>
+      <div class="rail-stop"></div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 3 — SUGGESTION: GREEN PIZZABURG ============ -->
+  <div class="d-page" data-page="3" data-label="Suggestion: Green PizzaBurg">
+    <div class="docked">
+      <div class="panel suggest">
+        <div class="p3-recommend">
+          <span class="tag accent"><span class="dot"></span>Recommended &middot; New Spur</span>
+        </div>
+        <h2 class="sentence p-headline">Suggestion 2: Green PizzaBurg</h2>
+        <p class="lede body-text">100% biodegradable packaging, with a box return/recycling incentive.</p>
+
+        <div class="roi-ticket">
+          <span class="roi-stub-label">ROI TICKET</span>
+          <div class="roi-cell">
+            <div class="roi-k">Cost</div>
+            <div class="roi-v">Moderate upfront &mdash; packaging changeover plus incentive design</div>
+          </div>
+          <div class="roi-cell">
+            <div class="roi-k">Market Fit</div>
+            <div class="roi-v">Over half of Bangladesh's population is under 25 &mdash; responds to visible sustainability moves</div>
+          </div>
+          <div class="roi-cell">
+            <div class="roi-k">Regulation</div>
+            <div class="roi-v">Clear policy direction against single-use plastics &mdash; moving early positions PizzaBurg ahead</div>
+          </div>
+        </div>
+      </div>
+      <div class="media">
+        <video src="../assets/video/v-manager-2.mp4" autoplay loop muted playsinline></video>
+        <div class="media-caption mono">B-roll &middot; outlet visit</div>
+      </div>
+    </div>
+    <div class="route-rail">
+      <div class="rail-label mono">LINE STATUS: <b>2 STOPS REACHED</b></div>
+      <div class="rail-stop lit-strength"></div>
+      <div class="rail-stopname">Community</div>
+      <div class="rail-stop lit-accent"></div>
+      <div class="rail-stopname current">Green PizzaBurg</div>
+      <div class="rail-stop"></div>
+      <div class="rail-stopname">Impact Summary</div>
+      <div class="rail-stop"></div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 4 — IMPACT & ROI SUMMARY ============ -->
+  <div class="d-page" data-page="4" data-label="Impact & ROI Summary">
+    <div class="p4-wrap">
+      <div class="eyebrow" style="color:var(--accent);">Terminus &middot; All Spurs Converge</div>
+      <h2 class="headline p4-headline">Impact &amp; ROI Summary</h2>
+
+      <div class="p4-body">
+        <div class="interchange-box">
+          <svg viewBox="0 0 240 200" width="100%" height="100%" style="max-width:220px;">
+            <!-- mainline arriving from left -->
+            <line x1="0" y1="100" x2="95" y2="100" stroke="#7E93AC" stroke-width="5"/>
+            <!-- junction glyph -->
+            <circle cx="100" cy="100" r="8" fill="#F2F4F2" stroke="#7E93AC" stroke-width="3"/>
+            <!-- four spurs fanning out then converging to terminus -->
+            <path d="M100,100 C140,60 170,58 205,40" fill="none" stroke="#5C7A94" stroke-width="4"/>
+            <path d="M100,100 C140,85 170,80 205,75" fill="none" stroke="#E4544E" stroke-width="4"/>
+            <path d="M100,100 C140,115 170,120 205,125" fill="none" stroke="#D98A3D" stroke-width="4" stroke-dasharray="6,5"/>
+            <path d="M100,100 C140,140 170,142 205,160" fill="none" stroke="#8B7BA8" stroke-width="4"/>
+            <!-- terminus circle -->
+            <circle cx="214" cy="100" r="13" fill="#0A121C" stroke="#F2F4F2" stroke-width="3"/>
+            <circle cx="214" cy="100" r="4.5" fill="#F2F4F2"/>
+            <!-- small stop dots at spur ends -->
+            <circle cx="205" cy="40" r="4" fill="#5C7A94"/>
+            <circle cx="205" cy="75" r="4" fill="#E4544E"/>
+            <circle cx="205" cy="125" r="4" fill="#D98A3D"/>
+            <circle cx="205" cy="160" r="4" fill="#8B7BA8"/>
+          </svg>
+        </div>
+
+        <table class="table-box">
+          <thead>
+            <tr><th>Initiative</th><th>Cost</th><th>Primary Benefit</th><th>Priority</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="init-cell"><span class="color-tab" style="background:#8B7BA8;"></span>Buy 1, Give 1</td>
+              <td class="mono">Self-funding, scales with sales</td>
+              <td>Converts seasonal goodwill into an always-on program</td>
+              <td><span class="priority-pill priority-high">HIGH</span></td>
+            </tr>
+            <tr>
+              <td class="init-cell"><span class="color-tab" style="background:var(--accent);"></span>Green PizzaBurg</td>
+              <td class="mono">Moderate upfront</td>
+              <td>Youth-market appeal; ahead of tightening plastic regulation</td>
+              <td><span class="priority-pill priority-medium">MEDIUM</span></td>
+            </tr>
+            <tr>
+              <td class="init-cell"><span class="color-tab" style="background:var(--gap);"></span>Student Support</td>
+              <td class="mono">Low, scalable</td>
+              <td>Builds a talent pipeline and employer branding</td>
+              <td><span class="priority-pill priority-medium">MEDIUM</span></td>
+            </tr>
+            <tr>
+              <td class="init-cell"><span class="color-tab" style="background:var(--strength);"></span>Food Rescue</td>
+              <td class="mono">Near-zero</td>
+              <td>Reduces disposal cost; strong reputational story</td>
+              <td><span class="priority-pill priority-high">HIGH</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="p4-closing"><b>4 initiatives</b> &middot; near-zero to moderate cost &middot; compounding brand + community return</p>
+    </div>
+    <div class="route-rail">
+      <div class="rail-label mono">LINE STATUS: <b>ALL STOPS REACHED</b></div>
+      <div class="rail-stop lit-strength"></div>
+      <div class="rail-stopname">Community</div>
+      <div class="rail-stop lit-accent"></div>
+      <div class="rail-stopname">Green PizzaBurg</div>
+      <div class="rail-stop lit-accent"></div>
+      <div class="rail-stopname current">Impact Summary</div>
+      <div class="rail-stop lit-accent"></div>
+    </div>
+  </div>
+</section>
+<!-- FONTS: Overpass:wght@700;800, Public Sans:wght@400;600, IBM Plex Mono:wght@500;600 -->
