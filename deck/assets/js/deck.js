@@ -21,10 +21,30 @@
   if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
   fit();
 
+  /* ---------- title height decides the header band, measured not guessed ----------
+     The hairline sits a fixed 40px below the title's last line and the body
+     zone a fixed 48px below the rule. Classifying by measurement means a
+     copy edit can never leave the rule striking through a wrapped title. */
+  function layoutTitles() {
+    slides.forEach(function (s) {
+      var t = s.querySelector(".zone-title");
+      if (!t) return;
+      var lines = Math.max(1, Math.round(t.scrollHeight / 56));
+      s.classList.toggle("slide--t2", lines >= 2);
+      s.classList.toggle("slide--t1", lines < 2);
+    });
+  }
+
   /* ---------- fonts: block, never swap (spec) ---------- */
-  function ready() { document.documentElement.classList.add("fonts-ready"); }
+  function ready() {
+    layoutTitles();
+    document.documentElement.classList.add("fonts-ready");
+  }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready);
   setTimeout(ready, 3000);
+
+  /* ---------- ?clean=1 hides presenter chrome (used for screenshots) ---------- */
+  if (/[?&]clean/.test(location.search)) document.body.classList.add("clean");
 
   /* ---------- footer denominator is generated, never typed ---------- */
   slides.forEach(function (s, i) {
