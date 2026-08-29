@@ -180,7 +180,7 @@ body { overflow: hidden; }
 }
 /* the closing reads as a farewell on the left and the group on the right */
 .lay-closing .slide { grid-template-columns: minmax(0, 46%) minmax(0, 54%); }
-.lay-closing .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: 30ch; }
+.lay-closing .col-text { grid-column: 1; grid-row: 1 / -1; align-self: center; max-width: min(100%, 520px); }
 .lay-closing .col-aside {
   grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
   max-width: min(600px, 47vw);
@@ -205,7 +205,7 @@ h1.title {
   margin: 0; color: var(--ink); text-wrap: balance;
 }
 .lay-cover h1.title { font-size: clamp(50px, calc(9.4 * var(--u)), 158px); font-weight: 700; letter-spacing: -0.04em; }
-.lay-closing h1.title { font-size: clamp(40px, calc(6.1 * var(--u)), 102px); font-weight: 700; letter-spacing: -0.035em; }
+.lay-closing h1.title { font-size: clamp(40px, calc(5.6 * var(--u)), 94px); font-weight: 700; letter-spacing: -0.035em; }
 
 .title-sub {
   font-family: var(--serif); font-variation-settings: 'opsz' 40;

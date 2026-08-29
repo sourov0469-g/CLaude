@@ -48,6 +48,7 @@ const SLIDES = [
   {
     id: 'intro', by: 'ratul', layout: 'split', stage: 'dough',
     photo: { src: 'pb-neon-sign', caption: 'Inside a PizzaBurg outlet, Dhaka' },
+    photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
     kicker: 'Introduction & Objectives',
     title: 'About the company, and our objectives',
     lede: 'A local chain competing with foreign brands in the same cities, growing fast enough for the strain to show.',
@@ -86,7 +87,6 @@ const SLIDES = [
   },
   {
     id: 'planning', by: 'aditto', layout: 'split', stage: 'base',
-    photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
     photo: { src: 'pb-pizzas-table-b', caption: 'PizzaBurg, Mirpur · 26 August 2026' },
     kicker: 'Workforce Planning',
     title: 'A fixed number at every outlet',
