@@ -1,8 +1,27 @@
 /* ==========================================================================
-   PizzaBurg CSR — "Reported / Proposed" (The Evidence Deck)
-   Revision 2: applies the 12 ranked fixes from the five-auditor visual review.
+   PizzaBurg CSR — "Reported / Proposed"
+   Revision 3. Rebuilt against a seven-lens design audit of the rendered deck.
+
+   The three faults that made revision 2 read as engineered rather than
+   authored, and what is done about them here:
+
+   1. NO HIERARCHY. Seven text roles rendered inside a 14.4–17.3px optical
+      band and the title reached only 1.23x the body x-height, so every slide
+      arrived as one flat field. The display octave is opened (title 48px,
+      numerals 176/288px) and the label tier is pulled up to 20px bold ink.
+
+   2. COLOUR ABSENT WHERE IT ARGUES. Crimson was 0.00% of slides 03, 04 and
+      07 — the context, the framework and the verdict — and in the cost table
+      it painted all four proposals red, the universal signal for "flagged".
+      Crimson now means one thing: this is Group NEXIX's own claim. It marks
+      the verdict, the proposals, the measurement tags and the sequence.
+
+   3. STRUCTURAL MONOTONY. Five slides shared a pixel-identical skeleton and
+      media sat right on all seven slides that had it. Slides 09 and 11 now
+      mirror, and the numeral slides carry their own architecture.
+
    Fixed 1920x1080 stage, transform-scaled. Every position a multiple of 8.
-   Nothing is centre-aligned.
+   No divider below 2px. Nothing centre-aligned.
    ========================================================================== */
 
 @font-face{font-family:'Fraunces';src:url('../fonts/fraunces-600.woff2') format('woff2');
@@ -14,7 +33,6 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
 #viewport{position:fixed;inset:0;overflow:hidden;background:#0B0A09;}
 
 .stage{
-  /* FIX 12b — ground deepened so it reads as warm paper, not office white */
   --paper:#F4ECDD; --ink:#221E1A; --muted:#6B5F51; --accent:#B5182A;
   --panel:#E6DBC6; --edge:#CFC3AC;
   position:absolute; left:50%; top:50%;
@@ -31,9 +49,10 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
 .stage *{box-sizing:border-box;min-width:0;min-height:0;border-radius:0;}
 .stage img,.stage video{display:block;max-width:none;object-fit:cover;object-position:50% 45%;}
 .fullbleed img,.fullbleed video{object-position:50% 40%;}
-/* FIX 11d — pin the optical-size axis so 44px titles and 200px numerals
-   share one voice instead of drifting into a different-looking face. */
-.stage{font-variation-settings:'opsz' 40;}
+/* Fraunces ships one axis, opsz 9–144. Pinning it at 40 for every size from
+   30px to 288px was the opposite of what the axis is for; let the browser
+   feed each element its own used size. */
+.stage{font-optical-sizing:auto;}
 
 /* ==========================  SLIDES  ================================== */
 .slides{position:absolute;inset:0;}
@@ -46,169 +65,227 @@ html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none;backgrou
 @media (prefers-reduced-motion: reduce){ .slide{transition:opacity 200ms linear;} }
 
 /* ==========================  FIXED ZONES  ============================= */
-/* FIX 12a — the section mark now sits ABOVE the eyebrow at a length no word
-   can have, so it reads as a rule, not as a stray underline. */
 .zone-accentrule{position:absolute;left:96px;top:80px;width:240px;height:6px;background:var(--accent);}
+/* The reported half gets the same mark in muted, so the skeleton is constant
+   and only the colour tells you whose claim you are reading. */
+.zone-accentrule--rep{background:var(--muted);opacity:.55;}
+
 .zone-eyebrow{position:absolute;left:96px;top:104px;width:1728px;height:32px;
-  font:500 22px/32px Manrope,system-ui,sans-serif;letter-spacing:.10em;
+  font:600 22px/32px Manrope,system-ui,sans-serif;letter-spacing:.10em;
   text-transform:uppercase;color:var(--muted);}
 .zone-eyebrow.is-proposal{color:var(--accent);}
-.zone-title{position:absolute;left:96px;top:144px;width:1400px;
-  font:600 44px/56px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.005em;
-  text-wrap:balance;}
 
-/* FIX 4 — the hairline follows the title instead of being pinned, so the
-   title→rule interval is constant instead of swinging 4x; and a closing
-   rule at y=936 gives the body zone a bottom edge on every content slide. */
-.zone-rule{position:absolute;left:96px;width:1728px;height:1px;background:var(--muted);opacity:.55;}
-.slide--t1 .zone-rule{top:240px;}
-.slide--t2 .zone-rule{top:296px;}
-/* safety net: a 3-line title must never be struck through by the rule */
-.slide--t3 .zone-rule{top:352px;}
-.zone-rule--bottom{position:absolute;left:96px;top:936px;width:1728px;height:1px;
-  background:var(--muted);opacity:.35;}
+/* Title up from 44/56 to 48/60: x-height now 1.43x the body instead of 1.23x,
+   which is the difference between a headline and a first paragraph. */
+.zone-title{position:absolute;left:96px;top:144px;width:1440px;
+  font:600 48px/60px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.012em;
+  text-wrap:balance;}
+/* Concede in muted, find in ink — the evidence slides say two things and only
+   the second one is ours. */
+.zone-title .concede{color:var(--muted);}
+
+/* Hairlines were 1.07:1–2.24:1 and three of them vanished under a projector
+   simulation, taking the bottom edge of every slide and the only structure in
+   the cost table with them. Nothing below 2px, nothing below 2.4:1. */
+.zone-rule{position:absolute;left:96px;width:1728px;height:2px;background:rgba(34,30,26,.55);}
+.slide--t1 .zone-rule{top:248px;}
+.slide--t2 .zone-rule{top:304px;}
+.slide--t3 .zone-rule{top:368px;}
+.zone-rule--bottom{position:absolute;left:96px;top:936px;width:1728px;height:2px;
+  background:rgba(34,30,26,.42);}
 
 .zone-body{position:absolute;left:96px;width:1728px;}
-.slide--t1 .zone-body{top:288px;height:648px;}
-.slide--t2 .zone-body{top:344px;height:592px;}
-.slide--t3 .zone-body{top:400px;height:536px;}
+.slide--t1 .zone-body{top:296px;height:640px;}
+.slide--t2 .zone-body{top:352px;height:584px;}
+.slide--t3 .zone-body{top:416px;height:520px;}
 
 .zone-foot{position:absolute;left:96px;top:984px;width:1728px;height:32px;
   font:500 20px/32px Manrope,system-ui,sans-serif;color:var(--muted);}
 .foot-page{position:absolute;left:0;top:0;}
-.foot-src{position:absolute;left:584px;top:0;width:760px;white-space:nowrap;overflow:hidden;}
+.foot-src{position:absolute;left:584px;top:0;width:820px;white-space:nowrap;overflow:hidden;}
+/* The right slot printed "GROUP NEXIX — PIZZABURG CSR" eleven times. It now
+   names who is speaking, which is the one thing that slot can usefully say. */
 .foot-tag{position:absolute;right:0;top:0;letter-spacing:.10em;text-transform:uppercase;}
-/* FIX 1 — the bookends carry their credit line in the body; the footer was
-   a verbatim duplicate of it. */
+.foot-tag b{font-weight:700;color:var(--ink);}
 .fullbleed .zone-foot{display:none;}
 
-/* ==========================  A1 — FULL BLEED  ========================= */
-.fullbleed .bg{position:absolute;inset:0;width:1920px;height:1080px;}
-/* FIX 8 — cover uses a horizontal ramp so the lit sign stays lit;
-   FIX 10 — closing scrim lightened so the street survives. */
-.cover .scrim{position:absolute;inset:0;background:linear-gradient(90deg,
-  rgba(34,30,26,.94) 0%, rgba(34,30,26,.88) 34%, rgba(34,30,26,.42) 62%, rgba(34,30,26,.10) 88%);}
-.closing .scrim{position:absolute;inset:0;background:linear-gradient(to bottom,
-  rgba(34,30,26,.10) 0px, rgba(34,30,26,.18) 380px,
-  rgba(34,30,26,.78) 620px, rgba(34,30,26,.86) 1080px);}
-.fb-text{position:absolute;left:96px;color:#F4ECDD;}
-/* FIX 8 — cover title raised to 88px so it outranks every stat in the deck */
-.cover-title{top:608px;width:1180px;font:600 88px/96px Fraunces,Georgia,serif;letter-spacing:-.015em;}
-.cover-sub{top:824px;width:1180px;height:40px;font:400 26px/40px Manrope,system-ui,sans-serif;letter-spacing:.02em;}
-.cover-disc{top:880px;width:1180px;height:32px;font:400 21px/32px Manrope,system-ui,sans-serif;color:#CFC3AC;}
+/* A shared keyline: one weight, one colour, four jobs. */
+.keyline{position:absolute;height:2px;background:rgba(34,30,26,.22);}
 
+/* ==========================  A1 — BOOKENDS  =========================== */
+.fullbleed .bg{position:absolute;inset:0;width:1920px;height:1080px;}
+.fullbleed .bg{filter:saturate(1.10) contrast(1.03);}
+
+/* --- cover: a split, not a scrim ---------------------------------------
+   The old cover was a 1920x1080 photograph whose leftmost 672 columns were a
+   flat #221E1A slab with a standard deviation of exactly zero — painted-in
+   fill, not a darkened image — with a second CSS scrim laid on top of it. A
+   type panel beside a real photograph is honest about what it is, keeps the
+   image at native resolution, and puts the brand's own colour on frame one. */
+.cover{background:var(--ink);}
+.cover-panel{position:absolute;right:0;top:0;width:800px;height:1080px;}
+.cover-panel img{width:800px;height:1080px;object-position:50% 50%;}
+/* a soft inner edge so the photo meets the panel instead of butting it */
+.cover-seam{position:absolute;right:800px;top:0;width:160px;height:1080px;
+  background:linear-gradient(90deg,rgba(34,30,26,0),rgba(34,30,26,.55));}
+.cover-rule{position:absolute;left:96px;top:80px;width:240px;height:6px;background:var(--accent);}
+.cover-eyebrow{position:absolute;left:96px;top:104px;width:900px;height:32px;
+  font:600 22px/32px Manrope,system-ui,sans-serif;letter-spacing:.10em;
+  text-transform:uppercase;color:#CFC3AC;}
+.fb-text{position:absolute;left:96px;color:#F4ECDD;}
+.cover-title{top:472px;width:960px;height:336px;font:600 96px/108px Fraunces,Georgia,serif;letter-spacing:-.018em;}
+.cover-sub{top:840px;width:960px;height:40px;font:500 26px/40px Manrope,system-ui,sans-serif;letter-spacing:.02em;}
+.cover-disc{top:896px;width:960px;height:32px;font:400 21px/32px Manrope,system-ui,sans-serif;color:#CFC3AC;}
+
+/* --- closing: scrim weighted to where the type actually is ------------- */
+.closing .scrim{position:absolute;inset:0;background:linear-gradient(to bottom,
+  rgba(34,30,26,.12) 0px, rgba(34,30,26,.20) 300px,
+  rgba(34,30,26,.72) 520px, rgba(34,30,26,.88) 1080px);}
+.close-rule{position:absolute;left:96px;top:432px;width:240px;height:6px;background:var(--accent);}
 .close-s{width:1560px;font:600 40px/56px Fraunces,Georgia,serif;}
 .close-s1{top:496px;height:112px;}
 .close-s2{top:624px;height:112px;}
 .close-s3{top:752px;height:56px;}
-/* FIX 10 — the sign-off is demoted out of argument weight */
 .close-ty{top:840px;height:32px;width:1560px;font:400 24px/32px Manrope,system-ui,sans-serif;color:#CFC3AC;}
 .close-attr{top:896px;height:32px;width:1560px;font:500 21px/32px Manrope,system-ui,sans-serif;color:#CFC3AC;}
 
-/* ==========================  A2 — TWO COLUMN  ========================= */
-/* FIX 2 — the text column now has a bottom edge that agrees with the photo:
-   it is a flex column the same height as the media, with the cost block
-   pushed to the bottom. This closes the ~450px lower-left void that ran on
-   five consecutive slides. */
-/* t2 body zone is 592px: 504 photo + 24 gap + 64 two-line caption = 592 exact.
-   Three blocks distributed across the column height, so the interval between
-   them is an even rhythm rather than one large hole. */
-.a2-text{position:absolute;left:0;top:0;width:1032px;height:504px;
+/* ==========================  A2 — TWO COLUMN  =========================
+   t2 body zone is 584: 496 media + 24 gap + 64 two-line caption.
+   .a2--flip mirrors the whole block; applied to slides 09 and 11 so the
+   proposal run reads text-left / image-left / text-left / image-left instead
+   of four consecutive identical silhouettes. */
+.a2-text{position:absolute;left:0;top:0;width:1032px;height:464px;
   display:flex;flex-direction:column;justify-content:space-between;}
-.a2-p{width:1032px;font:400 32px/40px Manrope,system-ui,sans-serif;color:var(--ink);
+.a2-p{width:1032px;font:400 32px/42px Manrope,system-ui,sans-serif;color:var(--ink);
   text-wrap:pretty;}
 .a2-blk .a2-p{font-size:30px;line-height:40px;}
-.a2-tag{font:600 16px/24px Manrope,system-ui,sans-serif;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
-.a2-photo{position:absolute;left:1128px;top:0;width:600px;height:504px;border:1px solid var(--edge);}
-.a2-photo img,.a2-photo video{width:598px;height:502px;}
-.a2-cap{position:absolute;left:1128px;top:528px;width:600px;height:64px;
+/* was 16px muted — a 12-pixel stroke band carrying the entire cost argument */
+.a2-tag{font:700 20px/28px Manrope,system-ui,sans-serif;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);margin-bottom:10px;}
+/* the measurement block is the answer to slide 07's three zeros; it is the
+   only tag that takes the accent */
+.a2-blk--metric .a2-tag{color:var(--accent);}
+.a2-photo{position:absolute;left:1128px;top:0;width:600px;height:464px;border:2px solid var(--edge);}
+.a2-photo img,.a2-photo video{width:596px;height:460px;}
+.a2-cap{position:absolute;left:1128px;top:488px;width:600px;height:96px;
   font:400 21px/32px Manrope,system-ui,sans-serif;color:var(--muted);text-wrap:pretty;}
+.a2-cap b{font-weight:700;color:var(--ink);letter-spacing:.10em;text-transform:uppercase;font-size:16px;}
 
-/* ==========================  A3 — STAT TRIO  ========================== */
+.a2--flip .a2-text{left:696px;}
+.a2--flip .a2-photo,.a2--flip .a2-cap{left:0;}
+
+/* ==========================  A3 — STAT TRIO  ==========================
+   Numerals up 144→176 (capped by the width of "4,000+" in a 560px column),
+   and the commentary is pushed to the foot of the zone behind a full-measure
+   keyline. The band between them is then a shoulder under a display figure
+   rather than the 192px of dead paper that used to sit below everything. */
 .a3-col{position:absolute;top:0;width:560px;}
 .a3-c1{left:0;} .a3-c2{left:584px;} .a3-c3{left:1168px;}
-.a3-num{position:absolute;top:0;width:560px;height:176px;
-  font:600 144px/176px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.02em;}
-.a3-lab{position:absolute;top:200px;width:560px;height:64px;
-  font:600 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.14em;
+.a3-num{position:absolute;top:0;width:560px;height:224px;
+  font:600 176px/224px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.02em;}
+.a3-lab{position:absolute;top:248px;width:560px;height:32px;
+  font:700 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);}
-.a3-det{position:absolute;top:288px;width:560px;height:112px;
-  font:400 28px/36px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
+.a3-rule{position:absolute;left:0;top:400px;width:1728px;}
+.a3-det{position:absolute;top:440px;width:560px;height:96px;
+  font:400 30px/40px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
 
 /* ==========================  A4 — 2x2 QUADRANT  ====================== */
-.a4-cell{position:absolute;width:840px;height:272px;}
-.a4-q1{left:0;top:0;} .a4-q2{left:888px;top:0;}
-.a4-q3{left:0;top:320px;} .a4-q4{left:888px;top:320px;}
-.a4-eb{position:absolute;top:0;width:840px;height:32px;
-  font:600 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.14em;
+.a4-cell{position:absolute;width:816px;height:264px;}
+.a4-q1{left:0;top:0;} .a4-q2{left:912px;top:0;}
+.a4-q3{left:0;top:320px;} .a4-q4{left:912px;top:320px;}
+/* the quadrant cross: the frame the four boxes have always implied */
+.a4-cross-h{position:absolute;left:0;top:288px;width:1728px;}
+.a4-cross-v{position:absolute;left:864px;top:0;width:2px;height:584px;background:rgba(34,30,26,.22);}
+.a4-eb{position:absolute;top:0;width:816px;height:32px;
+  font:700 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);}
-.a4-name{position:absolute;top:48px;width:840px;height:40px;
-  font:600 32px/40px Fraunces,Georgia,serif;color:var(--ink);}
-.a4-body{position:absolute;top:104px;width:840px;height:144px;
-  font:400 28px/36px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
+.a4-name{position:absolute;top:44px;width:816px;height:44px;
+  font:600 34px/44px Fraunces,Georgia,serif;color:var(--ink);}
+.a4-body{position:absolute;top:104px;width:816px;height:160px;
+  font:400 28px/38px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
+/* the deck says "we found no ___" nine times; the phrase is the spine */
+.found{font-weight:700;}
 
-/* ==========================  A6 — TWO-UP EVIDENCE  =================== */
-/* FIX 3 — two tiles on the 2x2 column origins; both directly evidence a
-   claim in the title. Every image now carries a containing edge. */
+/* ==========================  A6 — TWO-UP EVIDENCE  ===================
+   Right tile re-cut to the poster's own 0.927 aspect so it stops being 32.6%
+   letterbox fill; left tile widened to keep the pair on the outer margins. */
 .a6-cell{position:absolute;top:0;}
-.a6-1{left:0;width:1080px;} .a6-2{left:1128px;width:600px;}
-/* t2 body zone is 592px: 496 media + 24 gap + 64 two-line caption = 584 */
-.a6-media{position:absolute;top:0;left:0;right:0;height:496px;border:1px solid var(--edge);
+.a6-1{left:0;width:1180px;} .a6-2{left:1268px;width:460px;}
+.a6-media{position:absolute;top:0;left:0;right:0;height:464px;border:2px solid var(--edge);
   background:var(--panel);}
-.a6-media img,.a6-media video{width:100%;height:494px;}
-.a6-cap{position:absolute;top:520px;left:0;right:0;height:64px;
+.a6-media img,.a6-media video{width:100%;height:460px;}
+.a6-cap{position:absolute;top:488px;left:0;right:0;height:96px;
   font:400 21px/32px Manrope,system-ui,sans-serif;color:var(--muted);text-wrap:pretty;}
+.a6-cap b{font-weight:700;color:var(--ink);letter-spacing:.10em;text-transform:uppercase;font-size:16px;}
 
-/* ==========================  A7 — ZERO TRIO  ========================= */
-/* FIX 5 — the thesis slide now rhymes with slide 03: three numerals the deck
-   does NOT have, at a scale that can actually hold the frame. */
+/* ==========================  A7 — THE VERDICT  =======================
+   This is the hinge of the whole case and it used to be the flattest page in
+   the deck: three black zeros the same colour and near the same optical size
+   as slide 03's solid numerals, saying that "22 / 1,000 / 4,000+" and
+   "0 / 0 / 0" are the same class of fact. They are not. The zeros are now
+   crimson and 288px, and the slide carries the accent rule. */
 .a7-col{position:absolute;top:0;width:560px;}
 .a7-c1{left:0;} .a7-c2{left:584px;} .a7-c3{left:1168px;}
-.a7-zero{position:absolute;top:0;width:560px;height:232px;
-  font:600 192px/232px Fraunces,Georgia,serif;color:var(--ink);letter-spacing:-.02em;}
-.a7-lab{position:absolute;top:256px;width:560px;height:64px;
-  font:600 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.14em;
+.a7-zero{position:absolute;top:0;width:560px;height:360px;
+  font:600 288px/360px Fraunces,Georgia,serif;color:var(--accent);letter-spacing:-.03em;}
+.a7-lab{position:absolute;top:384px;width:560px;height:32px;
+  font:700 20px/32px Manrope,system-ui,sans-serif;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);}
-/* spans the full three-column measure so the lower right is not left bare */
-.a7-sub{position:absolute;left:0;top:392px;width:1728px;
-  font:400 32px/40px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
+.a7-rule{position:absolute;left:0;top:432px;width:1728px;}
+/* was 1728px wide — a 123-character measure for the deck's thesis sentence */
+.a7-sub{position:absolute;left:0;top:452px;width:1280px;height:132px;
+  font:400 32px/44px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
 
-/* ==========================  A8 — TEAM LIST + MEDIA  ================= */
-/* FIX 2/3 — the 3x2 card grid read as a photo grid whose images failed to
-   load. It is now a six-row list beside the site-visit video, which is what
-   the headline actually claims. */
+/* ==========================  A8 — TEAM / RUNNING ORDER  ============== */
 .a8-list{position:absolute;left:0;top:0;width:1224px;}
 .a8-row{position:absolute;left:0;width:1224px;height:88px;}
-.a8-name{position:absolute;left:0;top:20px;font:600 30px/40px Fraunces,Georgia,serif;color:var(--ink);}
-.a8-id{position:absolute;right:0;top:26px;font:500 20px/32px Manrope,system-ui,sans-serif;
+.a8-name{position:absolute;left:0;top:22px;font:600 30px/40px Fraunces,Georgia,serif;color:var(--ink);}
+.a8-id{position:absolute;left:660px;top:28px;font:500 20px/32px Manrope,system-ui,sans-serif;
   color:var(--muted);letter-spacing:.04em;}
-.a8-hr{position:absolute;left:0;top:87px;width:1224px;height:1px;background:var(--muted);opacity:.22;}
-/* video shown at its native 380px width — upscaling phone footage is what
-   made it read as the worst asset in the deck */
-.a8-media{position:absolute;left:1348px;top:0;width:380px;height:496px;border:1px solid var(--edge);}
-.a8-media video{width:378px;height:494px;}
+.a8-slides{position:absolute;right:0;top:28px;font:700 19px/32px Manrope,system-ui,sans-serif;
+  color:var(--accent);letter-spacing:.08em;text-transform:uppercase;}
+.a8-hr{position:absolute;left:0;top:86px;width:1224px;height:2px;background:rgba(34,30,26,.20);}
+.a8-media{position:absolute;left:1348px;top:0;width:380px;height:496px;border:2px solid var(--edge);}
+.a8-media video{width:376px;height:492px;}
 .a8-cap{position:absolute;left:1348px;top:520px;width:380px;height:64px;
   font:400 21px/32px Manrope,system-ui,sans-serif;color:var(--muted);}
 
-/* ==========================  A9 — COMPARISON TABLE  ================== */
-/* FIX 9 — bands respect the 96px margin, rows are baseline-driven on a clean
-   112px pitch, and the table has a closing rule so it no longer evaporates.
-   FIX 7 — Harvey balls deleted; cost is stated in words.
-   FIX 12a — initiative names take the accent (the reserved meaning). */
-.a9-band{position:absolute;left:0;width:1728px;height:112px;background:var(--panel);}
+/* ==========================  A9 — COMPARISON TABLE  ==================
+   The zebra banding was --panel on --paper: 1.16:1 natively and 1.10:1 under
+   a projector, so from the back row this was not a table, it was twelve text
+   fragments on a beige field. Bands out, 2px row rules in. Row pitch 112→128
+   closes the 88px foot. Crimson comes off all four initiative names — red on
+   every row of a cost table reads as "all four are flagged" — and goes to the
+   one cost the headline is actually about. */
 .a9-head{position:absolute;left:0;top:0;width:1728px;height:56px;}
-.a9-h{position:absolute;top:0;font:600 20px/32px Manrope,system-ui,sans-serif;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.a9-h{position:absolute;top:0;font:700 20px/32px Manrope,system-ui,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
 .a9-h1{left:0;width:560px;} .a9-h2{left:584px;width:560px;} .a9-h3{left:1168px;width:560px;}
-.a9-hr{position:absolute;left:0;width:1728px;height:1px;background:var(--muted);opacity:.35;}
-.a9-row{position:absolute;left:0;width:1728px;height:112px;}
-.a9-name{position:absolute;left:0;top:33px;width:560px;
-  font:600 32px/40px Fraunces,Georgia,serif;color:var(--accent);}
-.a9-cost{position:absolute;left:584px;top:36px;width:560px;
-  font:400 28px/40px Manrope,system-ui,sans-serif;color:var(--ink);}
-.a9-need{position:absolute;left:1168px;top:36px;width:560px;
-  font:400 28px/40px Manrope,system-ui,sans-serif;color:var(--ink);text-wrap:pretty;}
+.a9-hr{position:absolute;left:0;width:1728px;}
+.a9-row{position:absolute;left:0;width:1728px;height:128px;}
+.a9-row::before{content:"";position:absolute;left:0;bottom:0;width:1728px;height:2px;
+  background:rgba(34,30,26,.22);}
+.a9-cell{position:absolute;top:0;height:128px;display:flex;align-items:center;}
+.a9-name{left:0;width:560px;font:600 34px/42px Fraunces,Georgia,serif;color:var(--ink);}
+.a9-cost{left:584px;width:560px;font:400 28px/38px Manrope,system-ui,sans-serif;color:var(--ink);}
+.a9-need{left:1168px;width:560px;font:400 28px/38px Manrope,system-ui,sans-serif;color:var(--ink);}
+.a9-row--spend .a9-cost{color:var(--accent);font-weight:700;}
+
+/* ==========================  A10 — THE SEQUENCE  =====================
+   New. The deck compared the four proposals and then stopped; it never said
+   which one to do first. Four rows on a 144px pitch, ordinals in the accent,
+   rhyming deliberately with the table it follows. */
+.a10-row{position:absolute;left:0;width:1728px;height:144px;}
+.a10-row::before{content:"";position:absolute;left:0;top:0;width:1728px;height:2px;
+  background:rgba(34,30,26,.22);}
+.a10-row:first-of-type::before{display:none;}
+.a10-cell{position:absolute;top:0;height:144px;display:flex;align-items:center;}
+.a10-ord{left:0;width:104px;font:600 56px/64px Fraunces,Georgia,serif;color:var(--accent);
+  letter-spacing:-.02em;}
+.a10-name{left:128px;width:496px;font:600 34px/42px Fraunces,Georgia,serif;color:var(--ink);}
+.a10-why{left:664px;width:1064px;font:400 28px/38px Manrope,system-ui,sans-serif;color:var(--ink);
+  text-wrap:pretty;}
 
 /* ==========================  CHROME  ================================= */
 .grain{position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.03;mix-blend-mode:multiply;
@@ -233,3 +310,5 @@ body.clean .nav,body.clean .notes{display:none;}
 .notes h4{margin:0 0 8px;font:500 12px/1 Manrope,system-ui,sans-serif;letter-spacing:.14em;
   text-transform:uppercase;color:#B5182A;}
 .notes p{margin:0;font:400 15px/1.6 Manrope,system-ui,sans-serif;max-width:110ch;}
+.notes .who{display:inline-block;margin-right:10px;padding:2px 8px;background:#B5182A;color:#fff;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;}

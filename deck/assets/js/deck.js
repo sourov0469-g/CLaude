@@ -29,7 +29,7 @@
     slides.forEach(function (s) {
       var t = s.querySelector(".zone-title");
       if (!t) return;
-      var lines = Math.max(1, Math.round(t.scrollHeight / 56));
+      var lines = Math.max(1, Math.round(t.scrollHeight / 60));
       s.classList.toggle("slide--t1", lines <= 1);
       s.classList.toggle("slide--t2", lines === 2);
       s.classList.toggle("slide--t3", lines >= 3);
@@ -47,10 +47,17 @@
   /* ---------- ?clean=1 hides presenter chrome (used for screenshots) ---------- */
   if (/[?&]clean/.test(location.search)) document.body.classList.add("clean");
 
-  /* ---------- footer denominator is generated, never typed ---------- */
+  /* ---------- footer: page number and speaker are both generated ----------
+     The right-hand slot used to print "GROUP NEXIX — PIZZABURG CSR" on every
+     content slide. It now names who is speaking, which is the one thing that
+     slot can usefully say, and it is written from data-speaker so the running
+     order can never drift out of step with the slides. */
   slides.forEach(function (s, i) {
     var p = s.querySelector(".foot-page");
     if (p) p.textContent = String(i + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+    var tag = s.querySelector(".foot-tag");
+    var who = s.getAttribute("data-speaker");
+    if (tag && who) tag.innerHTML = "Presenting &nbsp;<b>" + who + "</b>";
   });
 
   var counter = document.getElementById("counter");
@@ -73,7 +80,12 @@
       });
     });
     if (counter) counter.textContent = String(idx + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0");
-    if (notesBody) notesBody.textContent = slides[idx].getAttribute("data-notes") || "No notes for this slide.";
+    if (notesBody) {
+      var who = slides[idx].getAttribute("data-speaker");
+      var body = slides[idx].getAttribute("data-notes") || "No notes for this slide.";
+      notesBody.innerHTML = (who ? '<span class="who">' + who + "</span>" : "") +
+        body.replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; });
+    }
     history.replaceState(null, "", "#" + (idx + 1));
   }
   var next = function () { show(idx + 1); };
