@@ -28,7 +28,8 @@
   const DUST_GOLD = 0xffd98a;
   const DUST_COOL = 0xb9c4c9;
   const FOG_DUSK = 0x3a2420;
-  const FRAME_WALNUT = 0x6b4a32;
+  const STRAP_LEATHER = 0x6b4a32;  /* the tab a medallion hangs from */
+  const GAUGE_BRONZE = 0x584627;   /* the gauge arc, sunk into the post assembly */
 
   const LEAF_DRY = 0x8a8449;   /* the olive the plants fall toward at gap */
 
@@ -92,13 +93,12 @@
 
   /* Indices into STAGE_ORDER. Each medallion lands on the same stage its own
      weight lands on the pan, so the wall is a second, slower reading of the
-     same tally. hook 4 is the middle of the rail and stays bare — it only
-     carries the dim marker, and only while gap is on screen. */
+     same tally. Hook 4 is the middle of the rail and never mints a medallion:
+     on the gap slide its strap hangs empty, which is the wall's way of saying
+     the thing that is missing rather than omitting it. */
   const ROOM_ITEMS = {
     rail:         { revealAt: 0 },
-    moulding:     { revealAt: 1 },
-    potA:         { revealAt: 0 },
-    potB:         { revealAt: 5 },
+    pot:          { revealAt: 0 },
     medLantern:   { revealAt: 2,  hook: 0, icon: 0 },
     medGift:      { revealAt: 3,  hook: 1, icon: 1 },
     medApron:     { revealAt: 4,  hook: 2, icon: 2 },
@@ -108,28 +108,44 @@
     medGreen:     { revealAt: 8,  hook: 6, icon: 5 },
     medCap:       { revealAt: 9,  hook: 7, icon: 6 },
     medRescue:    { revealAt: 10, hook: 8, icon: 7 },
-    frameCare:    { revealAt: 4,  slot: 0 },
-    frameSapling: { revealAt: 5,  slot: 1 },
-    frameBook:    { revealAt: 9,  slot: 2 },
-    frameClock:   { revealAt: 10, slot: 3 },
     banner:       { revealAt: 11 },
-    glow:         { revealAt: 11 },
   };
 
-  /* the order the hooks fill in, so the bunting's live count is always a
-     prefix of this list no matter how the deck is entered */
+  /* the order the hooks fill in, so what hangs on the rail is always a prefix
+     of this list no matter how the deck is entered */
   const MED_ORDER = ['medLantern', 'medGift', 'medApron', 'medLeaf', 'medMeal', 'medGreen', 'medCap', 'medRescue'];
-  const FRAME_ORDER = ['frameCare', 'frameSapling', 'frameBook', 'frameClock'];
 
   /* the back wall the room already has sits at z = -21.4; everything here
      stands just in front of it, below the shelf line and above the counter */
   const WALL_Z = -20.9;
   const RAIL_Y = 10.4;
-  const MED_Y = 8.4;
   const HOOK_X0 = -12.4;
   const HOOK_DX = 2.6;
-  const FRAME_X = [-22.5, -18.6, 12.6, 16.5];
-  const FRAME_Y = 6.4;
+
+  /* The hanging chain, solved rather than eyeballed. The strap starts inside
+     the peg's eye at STRAP_TOP and ends 0.12 below the disc's top edge, so
+     peg, strap and disc always overlap: there is no camera angle and no point
+     in the tween where a medallion can read as floating. The lean tips the
+     disc's face down toward a camera that sits four units off the counter. */
+  const MED_R = 0.85;
+  const MED_TILT = 0.20;
+  const MED_Y = 8.42;
+  const MED_Z = WALL_Z + 0.22;
+  const STRAP_TOP = RAIL_Y - 0.60;
+  const STRAP_Z = WALL_Z + 0.12;
+  const STRAP_LEN = STRAP_TOP - (MED_Y + MED_R * Math.cos(MED_TILT) - 0.12);
+
+  /* hook slot -> the medallion that hangs there. slot 4 stays undefined, and
+     that hole is the gap marker. */
+  const HOOK_MED = [];
+  MED_ORDER.forEach(function (k) { HOOK_MED[ROOM_ITEMS[k].hook] = k; });
+
+  /* one plant, on the counter to the right of the scale where the text column
+     never reaches. Two read as clutter; one reads as a room. */
+  const POT_X = 7.6;
+  const POT_Z = -13.5;
+  const POT_S = 1.55;
+  const BLADES = 9;
 
   /* --------------------------------------------------------- module state */
 
@@ -150,15 +166,14 @@
   let dustMoteField;
   const dustBands = [];
 
-  let railBar, hookInstances, medallionInstances, medallionIcons;
-  let buntingChain, potInstances, leafInstances;
-  let frameMouldings, frameBoards, frameIcons;
+  let railBar, hookInstances, strapInstances, medallionInstances, medallionIcons;
+  let potMesh, bladeInstances;
   let rollerBanner, rollerDrop;
-  const buntingGlowPoints = [];
-  let gaugeMats = [];
+  const wallGlowPoints = [];
+  let gaugeFaceMats = [], gaugeTickMats = [];
 
   let dummy = null, scratchColor = null, scratchColor2 = null, scratchVec = null, scratchDir = null;
-  let iconBase = null, frameIconBase = null;
+  let iconBase = null;
   let stageNow = 'open';
 
   /* every animatable scalar lives here, tweened as one object the way
@@ -170,7 +185,7 @@
     fogR: 1, fogG: 1, fogB: 1, fogNear: 46, fogFar: 150,
     dust: 0.30, dustR: 1, dustG: 1, dustB: 1,
     skyR: 1, skyG: 1, skyB: 1, shaft: 0.05,
-    exposure: 0.62, roomGrow: 0.18, sag: 0, reveal: 0,
+    exposure: 0.62, roomGrow: 0.18, reveal: 0,
   };
   /* one 0→1 per wall item, keyed by ROOM_ITEMS */
   const grow = {};
@@ -391,72 +406,6 @@
     return ctx.tex(c);
   }
 
-  /* the four framed silhouettes: care, a sapling, an open book, a clock */
-  function drawFrameIcon(g, k, S) {
-    const h = S / 2, R = S * 0.28;
-    g.save();
-    g.translate(h, h);
-    g.fillStyle = '#a82418';
-    g.strokeStyle = '#a82418';
-    g.lineCap = 'round';
-    g.lineJoin = 'round';
-    if (k === 0) {
-      g.beginPath();
-      g.moveTo(0, R * 0.98);
-      g.bezierCurveTo(-R * 1.6, -R * 0.1, -R * 0.72, -R * 1.16, 0, -R * 0.42);
-      g.bezierCurveTo(R * 0.72, -R * 1.16, R * 1.6, -R * 0.1, 0, R * 0.98);
-      g.fill();
-    } else if (k === 1) {
-      g.lineWidth = R * 0.18;
-      g.beginPath(); g.moveTo(0, R); g.lineTo(0, -R * 0.4); g.stroke();
-      g.beginPath();
-      g.moveTo(0, -R * 0.1);
-      g.quadraticCurveTo(-R * 0.9, -R * 0.36, -R * 0.16, -R * 0.98);
-      g.quadraticCurveTo(R * 0.1, -R * 0.5, 0, -R * 0.1);
-      g.fill();
-      g.beginPath();
-      g.moveTo(0, R * 0.22);
-      g.quadraticCurveTo(R * 0.94, -R * 0.04, R * 0.2, -R * 0.68);
-      g.quadraticCurveTo(-R * 0.06, -R * 0.2, 0, R * 0.22);
-      g.fill();
-    } else if (k === 2) {
-      g.lineWidth = R * 0.16;
-      g.beginPath();
-      g.moveTo(-R * 1.1, -R * 0.62);
-      g.quadraticCurveTo(-R * 0.5, -R * 0.86, 0, -R * 0.56);
-      g.lineTo(0, R * 0.72);
-      g.quadraticCurveTo(-R * 0.5, R * 0.42, -R * 1.1, R * 0.66);
-      g.closePath(); g.fill();
-      g.beginPath();
-      g.moveTo(R * 1.1, -R * 0.62);
-      g.quadraticCurveTo(R * 0.5, -R * 0.86, 0, -R * 0.56);
-      g.lineTo(0, R * 0.72);
-      g.quadraticCurveTo(R * 0.5, R * 0.42, R * 1.1, R * 0.66);
-      g.closePath(); g.fill();
-    } else {
-      g.lineWidth = R * 0.2;
-      g.beginPath(); g.arc(0, 0, R * 0.92, 0, 7); g.stroke();
-      g.lineWidth = R * 0.16;
-      g.beginPath();
-      g.moveTo(0, -R * 0.5); g.lineTo(0, 0); g.lineTo(R * 0.5, R * 0.2);
-      g.stroke();
-    }
-    g.restore();
-  }
-
-  function frameAtlas() {
-    const c = ctx.canvas(512), g = c.getContext('2d');
-    g.fillStyle = '#f6f0e2';
-    g.fillRect(0, 0, 512, 512);
-    for (let k = 0; k < 4; k++) {
-      g.save();
-      g.translate((k % 2) * 256, Math.floor(k / 2) * 256);
-      drawFrameIcon(g, k, 256);
-      g.restore();
-    }
-    return ctx.tex(c);
-  }
-
   /* the roller banner's cloth: a deep brand field with a cream band, dark
      enough that the oak beam still silhouettes against it at fullreveal */
   function bannerTexture() {
@@ -508,21 +457,57 @@
     rimLightMood.position.set(-26, 16, -30);
     scene.add(rimLightMood);
 
+    /* two lamps washing the rail, dark until the reveal */
     [[-8.4, 9.4, -19.2], [5.2, 9.4, -19.2]].forEach(function (p) {
       const pl = new T.PointLight(REVEAL_GOLD, 0, 26, 2);
       pl.position.set(p[0], p[1], p[2]);
       scene.add(pl);
-      buntingGlowPoints.push(pl);
+      wallGlowPoints.push(pl);
     });
 
-    /* the gauge is the only existing object this file writes to, and it only
-       writes emissiveIntensity — the arc and tick keep their own geometry */
-    gaugeMats = [];
-    [ctx.anchors.gaugeArc, ctx.anchors.gaugeTick].forEach(function (o) {
-      if (!o) return;
-      o.traverse(function (n) {
-        if (n.isMesh && n.material && n.material.emissive) gaugeMats.push(n.material);
+    /* The gauge is the only geometry this file borrows rather than builds, so
+       it is the only place this file writes to someone else's material. It
+       keeps every vertex world.js gave it; what changes is the read. Left in
+       HOOK_DIM cream the arc is the brightest thing behind the beam at forty
+       units out, and a pale ring attached to nothing reads as a stray shape
+       rather than an instrument. Sunk to bronze it belongs to the post, and
+       the rider — the one part that actually carries the number — becomes the
+       thing that catches the eye. */
+    gaugeFaceMats = [];
+    gaugeTickMats = [];
+    if (ctx.anchors.gaugeArc) {
+      ctx.anchors.gaugeArc.traverse(function (n) {
+        if (n.isMesh && n.material && n.material.color) gaugeFaceMats.push(n.material);
       });
+    }
+    if (ctx.anchors.gaugeTick) {
+      ctx.anchors.gaugeTick.traverse(function (n) {
+        if (n.isMesh && n.material && n.material.color) gaugeTickMats.push(n.material);
+      });
+    }
+    /* the engraved ticks are siblings of the arc rather than children of it
+       and world.js exposes no anchor for them, so they are matched by where
+       they sit and the colour they were given. A miss here costs nothing. */
+    if (ctx.anchors.scale) {
+      ctx.anchors.scale.children.forEach(function (n) {
+        if (!n.isMesh || !n.material || !n.material.color) return;
+        if (n === ctx.anchors.gaugeArc || n === ctx.anchors.gaugeTick) return;
+        if (n.material.color.getHex() !== c.HOOK_DIM) return;
+        if (n.position.z >= 0 || Math.abs(n.position.y - 3.4) > 1.4) return;
+        gaugeFaceMats.push(n.material);
+      });
+    }
+    gaugeFaceMats.forEach(function (m) {
+      m.color.setHex(GAUGE_BRONZE);
+      m.roughness = 0.44;
+      m.metalness = 0.58;
+      if (m.emissive) m.emissive.setHex(c.BRASS);
+    });
+    gaugeTickMats.forEach(function (m) {
+      m.color.setHex(c.BRASS);
+      m.roughness = 0.28;
+      m.metalness = 0.72;
+      if (m.emissive) m.emissive.setHex(c.WARM_GLOW);
     });
   }
 
@@ -623,8 +608,10 @@
     });
     scene.add(railBar);
 
-    /* nine lathed hooks, built once and never rebuilt — only the rail's own
-       reveal scales them */
+    /* nine lathed pegs, built once and never rebuilt — only the rail's own
+       reveal scales them. They arrive with the rail and stay, so a strap
+       always has something to hang from and the slots still waiting on a
+       medallion read as places the wall has left open. */
     const hookProfile = [
       [0.00, 0.00], [0.09, 0.00], [0.09, 0.62], [0.05, 0.72], [0.00, 0.74],
     ];
@@ -635,38 +622,40 @@
     hookInstances.castShadow = false;
     scene.add(hookInstances);
 
-    /* nine discs in one InstancedMesh. slot 4 is the gap hook: it carries a
-       dim HOOK_DIM marker and only while gap is on screen, so the bare hook
-       in the middle of the rail is something the room states, not omits. */
+    /* the straps. Anchored at the top so scale.y reads as length, which is
+       what lets one of them hang empty on the gap slide. */
+    const strapGeo = new T.BoxGeometry(0.11, 1, 0.05);
+    strapGeo.translate(0, -0.5, 0);
+    strapInstances = new T.InstancedMesh(strapGeo, ctx.mat(STRAP_LEATHER, { rough: 0.72 }), 9);
+    strapInstances.castShadow = false;
+    scene.add(strapInstances);
+
+    /* eight discs in one InstancedMesh, one per earned medallion. A slot with
+       nothing earned in it holds no disc at all — a blank one would be the
+       same lie as an empty frame. */
     medallionInstances = new T.InstancedMesh(
-      new T.CircleGeometry(0.85, 28), ctx.mat(0xffffff, { rough: 0.42, metal: 0.5 }), 9
+      new T.CircleGeometry(MED_R, 28), ctx.mat(c.BRASS, { rough: 0.40, metal: 0.55 }), MED_ORDER.length
     );
     medallionInstances.castShadow = false;
-    scratchColor.setHex(c.BRASS);
-    for (let i = 0; i < 9; i++) {
-      if (i === 4) scratchColor.setHex(c.HOOK_DIM);
-      medallionInstances.setColorAt(i, scratchColor);
-      scratchColor.setHex(c.BRASS);
-    }
-    if (medallionInstances.instanceColor) medallionInstances.instanceColor.needsUpdate = true;
     scene.add(medallionInstances);
 
     /* the eight icons, as one merged quad mesh reading one baked atlas. a
        per-instance texture would need a shader patch; a merged mesh gets the
-       same one-extra-draw-call result with plain core three. */
-    const quads = 8;
+       same one-extra-draw-call result with plain core three. The vertices
+       hold offsets from their disc's centre, not world positions, so they can
+       be re-placed with the disc's lean and settle every frame. */
+    const quads = MED_ORDER.length;
     const pos = new Float32Array(quads * 12);
     const uv = new Float32Array(quads * 8);
     const idx = [];
     iconBase = new Float32Array(quads * 12);
     for (let q = 0; q < quads; q++) {
-      const item = ROOM_ITEMS[MED_ORDER[q]];
-      const x = hookX(item.hook), y = MED_Y, s = 0.62;
-      const p = [[-s, -s], [s, -s], [s, s], [-s, s]];
+      const item = ROOM_ITEMS[MED_ORDER[q]], sz = 0.60;
+      const p = [[-sz, -sz], [sz, -sz], [sz, sz], [-sz, sz]];
       for (let v = 0; v < 4; v++) {
-        iconBase[q * 12 + v * 3] = x + p[v][0];
-        iconBase[q * 12 + v * 3 + 1] = y + p[v][1];
-        iconBase[q * 12 + v * 3 + 2] = WALL_Z + 0.06;
+        iconBase[q * 12 + v * 3] = p[v][0];
+        iconBase[q * 12 + v * 3 + 1] = p[v][1];
+        iconBase[q * 12 + v * 3 + 2] = 0;
       }
       const col = item.icon % 3, row = Math.floor(item.icon / 3);
       const u0 = col / 3, v0 = 1 - (row + 1) / 3, d = 1 / 3;
@@ -677,7 +666,6 @@
       }
       idx.push(q * 4, q * 4 + 1, q * 4 + 2, q * 4, q * 4 + 2, q * 4 + 3);
     }
-    pos.set(iconBase);
     const ig = new T.BufferGeometry();
     ig.setAttribute('position', new T.BufferAttribute(pos, 3));
     ig.setAttribute('uv', new T.BufferAttribute(uv, 2));
@@ -688,96 +676,76 @@
     medallionIcons.frustumCulled = false;
     medallionIcons.renderOrder = 3;
     scene.add(medallionIcons);
-
-    /* pennants. one instance per lit hook, alternating brand and deep brand;
-       the string they hang from sags when the room does. */
-    const tri = new T.BufferGeometry();
-    tri.setAttribute('position', new T.BufferAttribute(new Float32Array([
-      -0.26, 0, 0, 0.26, 0, 0, 0, -0.66, 0,
-    ]), 3));
-    tri.setIndex([0, 1, 2]);
-    tri.computeVertexNormals();
-    buntingChain = new T.InstancedMesh(tri, ctx.mat(0xffffff, { rough: 0.78, side: T.DoubleSide }), 8);
-    buntingChain.castShadow = false;
-    buntingChain.count = 0;
-    for (let i = 0; i < 8; i++) {
-      scratchColor.setHex(i % 2 ? c.BRAND_DEEP : c.BRAND);
-      buntingChain.setColorAt(i, scratchColor);
-    }
-    if (buntingChain.instanceColor) buntingChain.instanceColor.needsUpdate = true;
-    scene.add(buntingChain);
   }
 
-  function buildFrames() {
-    const c = ctx.colors;
-
-    frameMouldings = new T.InstancedMesh(
-      new T.BoxGeometry(3.0, 3.6, 0.22), ctx.mat(FRAME_WALNUT, { rough: 0.72 }), 4
-    );
-    frameMouldings.castShadow = false;
-    scene.add(frameMouldings);
-
-    frameBoards = new T.InstancedMesh(
-      new T.PlaneGeometry(2.5, 3.1), ctx.mat(c.CREAM, { rough: 0.86 }), 4
-    );
-    frameBoards.castShadow = false;
-    scene.add(frameBoards);
-
-    /* the four framed icons, same merged-quad trick as the medallions */
-    const pos = new Float32Array(4 * 12);
-    const uv = new Float32Array(4 * 8);
+  /* One leaf blade, built by hand: seven rings of three columns, narrow at
+     the base, widest a third of the way up, arced forward and creased down
+     the spine so the fold catches the key light. The vertex colours are what
+     make it read as a leaf rather than a spike at forty units out — they sink
+     the base into shadow and warm the tip. They multiply the material colour,
+     so the wilt at gap still comes off one scalar. */
+  function bladeGeometry() {
+    const RINGS = 7, ARC = 1.02, R = 1 / ARC;
+    const pos = new Float32Array(RINGS * 9);
+    const col = new Float32Array(RINGS * 9);
     const idx = [];
-    frameIconBase = new Float32Array(4 * 12);
-    for (let q = 0; q < 4; q++) {
-      const x = FRAME_X[q], y = FRAME_Y, sx = 1.05, sy = 1.3;
-      const p = [[-sx, -sy], [sx, -sy], [sx, sy], [-sx, sy]];
-      for (let v = 0; v < 4; v++) {
-        frameIconBase[q * 12 + v * 3] = x + p[v][0];
-        frameIconBase[q * 12 + v * 3 + 1] = y + p[v][1];
-        frameIconBase[q * 12 + v * 3 + 2] = WALL_Z + 0.2;
+    for (let r = 0; r < RINGS; r++) {
+      const t = r / (RINGS - 1), ang = t * ARC;
+      const cy = Math.sin(ang) * R, cz = (1 - Math.cos(ang)) * R;
+      const ny = -Math.sin(ang), nz = Math.cos(ang);
+      const w = Math.sin(Math.pow(t, 0.62) * Math.PI) * 0.34 + 0.015;
+      const crease = w * 0.42;
+      const shade = 0.44 + 0.56 * Math.pow(t, 0.8);
+      const cr = Math.min(1, shade * (0.90 + 0.24 * t));
+      const cb = Math.min(1, shade * (1.02 - 0.26 * t));
+      for (let k = 0; k < 3; k++) {
+        const o = (r * 3 + k) * 3;
+        const mid = k === 1 ? crease : 0;
+        pos[o] = (k - 1) * w;
+        pos[o + 1] = cy + ny * mid;
+        pos[o + 2] = cz + nz * mid;
+        col[o] = cr; col[o + 1] = shade; col[o + 2] = cb;
       }
-      const col = q % 2, row = Math.floor(q / 2);
-      const u0 = col / 2, v0 = 1 - (row + 1) / 2, d = 0.5;
-      const uvs = [[u0, v0], [u0 + d, v0], [u0 + d, v0 + d], [u0, v0 + d]];
-      for (let v = 0; v < 4; v++) {
-        uv[q * 8 + v * 2] = uvs[v][0];
-        uv[q * 8 + v * 2 + 1] = uvs[v][1];
+      if (r < RINGS - 1) {
+        for (let k = 0; k < 2; k++) {
+          const p0 = r * 3 + k;
+          idx.push(p0, p0 + 3, p0 + 4, p0, p0 + 4, p0 + 1);
+        }
       }
-      idx.push(q * 4, q * 4 + 1, q * 4 + 2, q * 4, q * 4 + 2, q * 4 + 3);
     }
-    pos.set(frameIconBase);
-    const fg = new T.BufferGeometry();
-    fg.setAttribute('position', new T.BufferAttribute(pos, 3));
-    fg.setAttribute('uv', new T.BufferAttribute(uv, 2));
-    fg.setIndex(idx);
-    frameIcons = new T.Mesh(fg, new T.MeshBasicMaterial({
-      map: frameAtlas(), transparent: true, depthWrite: false,
-    }));
-    frameIcons.frustumCulled = false;
-    frameIcons.renderOrder = 3;
-    scene.add(frameIcons);
+    const g = new T.BufferGeometry();
+    g.setAttribute('position', new T.BufferAttribute(pos, 3));
+    g.setAttribute('color', new T.BufferAttribute(col, 3));
+    g.setIndex(idx);
+    g.computeVertexNormals();
+    return g;
   }
 
-  function buildPlants() {
+  function buildPlant() {
     const c = ctx.colors;
 
     const potProfile = [
       [0.00, 0.00], [0.52, 0.00], [0.60, 0.10], [0.74, 1.05], [0.86, 1.22],
       [0.86, 1.40], [0.72, 1.44], [0.62, 1.16], [0.48, 0.16], [0.00, 0.12],
     ];
-    const potGeo = new T.LatheGeometry(
-      potProfile.map(function (p) { return new T.Vector2(Math.max(0.0001, p[0]), p[1]); }), 20
-    );
-    potInstances = new T.InstancedMesh(potGeo, ctx.mat(c.PAN_TERRACOTTA, { rough: 0.82 }), 2);
-    scene.add(potInstances);
+    potMesh = ctx.lathe(potProfile, 20, c.PAN_TERRACOTTA, { pos: [POT_X, 0, POT_Z], rough: 0.82 });
 
-    /* nine blades per pot. how many stand up, and how green they are, both
-       come off one roomGrow scalar — so the wall wilts at gap without any
-       new geometry appearing or disappearing. */
-    leafInstances = new T.InstancedMesh(
-      new T.CylinderGeometry(0.015, 0.075, 1.15, 5), ctx.mat(c.LEAF_YOUNG, { rough: 0.74 }), 18
-    );
-    scene.add(leafInstances);
+    /* a disc of soil, or the pot reads as an empty bowl the blades pass
+       through. It rides the pot, so one scale drives both. */
+    const soil = new T.Mesh(new T.CircleGeometry(0.66, 20), ctx.mat(0x3b2a1c, { rough: 0.95 }));
+    soil.rotation.x = -Math.PI / 2;
+    soil.position.y = 1.26;
+    potMesh.add(soil);
+    scene.add(potMesh);
+
+    /* nine blades, fanned on the golden angle so no two overlap the same way.
+       The count never changes: a plant that sheds leaves between stages reads
+       as a bug, so the wilt at gap is length, droop and colour only. */
+    const bladeMat = ctx.mat(c.LEAF_YOUNG, { rough: 0.62, side: T.DoubleSide });
+    bladeMat.vertexColors = true;
+    bladeInstances = new T.InstancedMesh(bladeGeometry(), bladeMat, BLADES);
+    bladeInstances.castShadow = false;
+    scene.add(bladeInstances);
   }
 
   function buildBanner() {
@@ -827,7 +795,7 @@
     lightShaftLeft.material.opacity = live.shaft * 0.55;
     lightShaftRight.material.opacity = live.shaft * 0.42;
 
-    buntingGlowPoints.forEach(function (pl) { pl.intensity = live.reveal * 7; });
+    wallGlowPoints.forEach(function (pl) { pl.intensity = live.reveal * 7; });
   }
 
   function applyWall() {
@@ -839,112 +807,78 @@
     for (let i = 0; i < 9; i++) {
       dummy.position.set(hookX(i), RAIL_Y - 0.66, WALL_Z);
       dummy.rotation.set(0, 0, 0);
-      dummy.scale.setScalar(grow.rail);
+      dummy.scale.setScalar(Math.max(0.0001, grow.rail));
       dummy.updateMatrix();
       hookInstances.setMatrixAt(i, dummy.matrix);
+
+      /* the strap grows out of the peg's eye and shortens by exactly the
+         distance its disc still has left to settle, so the two stay joined
+         through the whole landing */
+      const gs = HOOK_MED[i] ? grow[HOOK_MED[i]] : grow.gapHook;
+      dummy.position.set(hookX(i), STRAP_TOP, STRAP_Z);
+      dummy.scale.set(
+        Math.max(0.0001, gs), Math.max(0.0001, STRAP_LEN - (1 - gs) * 0.55), Math.max(0.0001, gs)
+      );
+      dummy.updateMatrix();
+      strapInstances.setMatrixAt(i, dummy.matrix);
     }
     hookInstances.instanceMatrix.needsUpdate = true;
+    strapInstances.instanceMatrix.needsUpdate = true;
 
     /* medallions settle the last half-unit as they land */
-    for (let i = 0; i < 9; i++) {
-      let g = 0;
-      if (i === 4) g = grow.gapHook;
-      else {
-        const key = MED_ORDER[i < 4 ? i : i - 1];
-        g = grow[key];
-      }
-      dummy.position.set(hookX(i), MED_Y + (1 - g) * 0.55, WALL_Z + 0.03);
-      dummy.rotation.set(0, 0, 0);
+    for (let q = 0; q < MED_ORDER.length; q++) {
+      const g = grow[MED_ORDER[q]];
+      dummy.position.set(hookX(ROOM_ITEMS[MED_ORDER[q]].hook), MED_Y + (1 - g) * 0.55, MED_Z);
+      dummy.rotation.set(MED_TILT, 0, 0);
       dummy.scale.setScalar(Math.max(0.0001, g));
       dummy.updateMatrix();
-      medallionInstances.setMatrixAt(i, dummy.matrix);
+      medallionInstances.setMatrixAt(q, dummy.matrix);
     }
     medallionInstances.instanceMatrix.needsUpdate = true;
 
+    /* the icons ride their discs: same lean, same settle, same growth, and a
+       hair proud of the brass so they never z-fight it */
+    const ct = Math.cos(MED_TILT), st = Math.sin(MED_TILT);
     const ip = medallionIcons.geometry.attributes.position;
-    for (let q = 0; q < 8; q++) {
+    for (let q = 0; q < MED_ORDER.length; q++) {
       const g = grow[MED_ORDER[q]];
-      const cx = iconBase[q * 12] + 0.62, cy = MED_Y;
-      const dy = (1 - g) * 0.55;
+      const x = hookX(ROOM_ITEMS[MED_ORDER[q]].hook), y = MED_Y + (1 - g) * 0.55;
       for (let v = 0; v < 4; v++) {
         const o = q * 12 + v * 3;
-        ip.array[o] = cx + (iconBase[o] - cx) * g;
-        ip.array[o + 1] = cy + dy + (iconBase[o + 1] - cy) * g;
-        ip.array[o + 2] = iconBase[o + 2];
+        const dy = iconBase[o + 1] * g;
+        ip.array[o] = x + iconBase[o] * g;
+        ip.array[o + 1] = y + dy * ct;
+        ip.array[o + 2] = MED_Z + dy * st + 0.014;
       }
     }
     ip.needsUpdate = true;
 
-    /* the string sags between the rail's two ends; live.sag deepens it */
-    const xa = hookX(0), xb = hookX(8), xc = (xa + xb) / 2, half = (xb - xa) / 2;
-    const sag = 0.85 + live.sag * 1.6;
-    let n = 0;
-    for (let j = 0; j < 8; j++) {
-      const g = grow[MED_ORDER[j]];
-      if (g <= 0.02) break;
-      const x = xa + 1.3 + j * HOOK_DX;
-      const u = (x - xc) / half;
-      const y = RAIL_Y - 0.12 - sag * (1 - u * u);
-      const slope = (2 * sag * u) / half;
-      dummy.position.set(x, y - 0.06, WALL_Z + 0.34);
-      dummy.rotation.set(0, 0, -Math.atan(slope));
-      dummy.scale.setScalar(Math.max(0.0001, g));
-      dummy.updateMatrix();
-      buntingChain.setMatrixAt(j, dummy.matrix);
-      n = j + 1;
-    }
-    buntingChain.count = n;
-    if (n) buntingChain.instanceMatrix.needsUpdate = true;
+    potMesh.visible = grow.pot > 0.02;
+    potMesh.scale.setScalar(POT_S * Math.max(0.0001, grow.pot));
 
-    for (let q = 0; q < 4; q++) {
-      dummy.position.set(FRAME_X[q], FRAME_Y, WALL_Z + 0.1);
-      dummy.rotation.set(0, 0, 0);
-      dummy.scale.setScalar(Math.max(0.0001, grow.moulding));
+    /* one vigour scalar drives the whole plant. At gap the blades shorten,
+       flop further out and drain toward olive; the colour only ever travels
+       part of the way, because a plant that goes fully dead upstages the beam
+       it is meant to sit behind. */
+    const vig = live.roomGrow;
+    const pg = Math.max(0.0001, grow.pot);
+    const rim = 0.30 * POT_S, lip = 1.30 * POT_S * pg;
+    for (let k = 0; k < BLADES; k++) {
+      const ang = k * 2.39996;
+      dummy.position.set(POT_X + Math.cos(ang) * rim, lip, POT_Z + Math.sin(ang) * rim);
+      dummy.rotation.set(0, Math.PI / 2 - ang, 0);
+      dummy.scale.set(
+        (1.28 + (k % 3) * 0.20) * pg,
+        (2.05 + (k % 4) * 0.26) * (0.74 + 0.26 * vig) * pg,
+        (1.00 + (k % 3) * 0.22) * (1.46 - 0.46 * vig) * pg
+      );
       dummy.updateMatrix();
-      frameMouldings.setMatrixAt(q, dummy.matrix);
-      dummy.position.z = WALL_Z + 0.22;
-      dummy.updateMatrix();
-      frameBoards.setMatrixAt(q, dummy.matrix);
+      bladeInstances.setMatrixAt(k, dummy.matrix);
     }
-    frameMouldings.instanceMatrix.needsUpdate = true;
-    frameBoards.instanceMatrix.needsUpdate = true;
-
-    const fp = frameIcons.geometry.attributes.position;
-    for (let q = 0; q < 4; q++) {
-      const g = grow[FRAME_ORDER[q]] * grow.moulding;
-      for (let v = 0; v < 4; v++) {
-        const o = q * 12 + v * 3;
-        fp.array[o] = FRAME_X[q] + (frameIconBase[o] - FRAME_X[q]) * g;
-        fp.array[o + 1] = FRAME_Y + (frameIconBase[o + 1] - FRAME_Y) * g;
-        fp.array[o + 2] = frameIconBase[o + 2];
-      }
-    }
-    fp.needsUpdate = true;
-
-    [[-15.5, -13.0, grow.potA], [7.5, -13.5, grow.potB]].forEach(function (p, i) {
-      dummy.position.set(p[0], 0, p[1]);
-      dummy.rotation.set(0, i * 0.6, 0);
-      dummy.scale.setScalar(Math.max(0.0001, p[2]));
-      dummy.updateMatrix();
-      potInstances.setMatrixAt(i, dummy.matrix);
-      for (let k = 0; k < 9; k++) {
-        const s = i * 9 + k;
-        const up = (k + 1) / 9 <= live.roomGrow ? 1 : 0;
-        const on = p[2] * up;
-        const a = k * 2.39996 + i * 1.1;
-        const lean = 0.24 + (k % 3) * 0.14;
-        dummy.position.set(p[0] + Math.cos(a) * 0.22, 1.36 + 0.5 * on, p[1] + Math.sin(a) * 0.22);
-        dummy.rotation.set(Math.sin(a) * lean, a, Math.cos(a) * lean);
-        dummy.scale.set(on, on * (0.7 + live.roomGrow * 0.6), on);
-        dummy.updateMatrix();
-        leafInstances.setMatrixAt(s, dummy.matrix);
-      }
-    });
-    potInstances.instanceMatrix.needsUpdate = true;
-    leafInstances.instanceMatrix.needsUpdate = true;
+    bladeInstances.instanceMatrix.needsUpdate = true;
     scratchColor.setHex(ctx.colors.LEAF_YOUNG);
     scratchColor2.setHex(LEAF_DRY);
-    leafInstances.material.color.copy(scratchColor).lerp(scratchColor2, 1 - live.roomGrow);
+    bladeInstances.material.color.copy(scratchColor).lerp(scratchColor2, (1 - vig) * 0.72);
 
     rollerBanner.visible = grow.banner > 0.02;
     rollerDrop.visible = grow.banner > 0.02;
@@ -977,8 +911,7 @@
     buildLights();
     buildAtmosphere();
     buildRail();
-    buildFrames();
-    buildPlants();
+    buildPlant();
     buildBanner();
 
     built = true;
@@ -1011,7 +944,6 @@
       dust: a.dustDensity, shaft: a.shaftIntensity,
       exposure: m.exposure,
       roomGrow: (0.18 + 0.82 * (lit / MED_ORDER.length)) * (idx === 6 ? 0.62 : 1),
-      sag: idx === 6 ? 1 : 0,
       reveal: idx >= 11 ? 1 : 0,
     };
     scratchColor.setHex(m.keyColor);
@@ -1073,15 +1005,18 @@
     moodKeyLight.intensity = live.keyI * (calm ? 1 : 1 + Math.sin(t * pulse[0]) * pulse[1]);
     lightShaftLeft.material.opacity = live.shaft * 0.55 * (calm ? 1 : 1 + Math.sin(t * 0.24) * 0.16);
     lightShaftRight.material.opacity = live.shaft * 0.42 * (calm ? 1 : 1 + Math.cos(t * 0.19) * 0.16);
-    buntingGlowPoints.forEach(function (pl, i) {
+    wallGlowPoints.forEach(function (pl, i) {
       pl.intensity = live.reveal * 7 * (calm ? 1 : 1 + Math.sin(t * 1.4 + i * 2.1) * 0.14);
     });
 
     /* the gauge burns hotter the further the beam is off level — the one
        place where the lighting rig reads the data rather than decorating it */
     const off = Math.min(1, Math.abs((state && state.beamAngle) || 0) / 0.34);
-    for (let i = 0; i < gaugeMats.length; i++) {
-      gaugeMats[i].emissiveIntensity = 0.22 + off * 1.9;
+    for (let i = 0; i < gaugeFaceMats.length; i++) {
+      gaugeFaceMats[i].emissiveIntensity = 0.03 + off * 0.14;
+    }
+    for (let i = 0; i < gaugeTickMats.length; i++) {
+      gaugeTickMats[i].emissiveIntensity = 0.30 + off * 2.4;
     }
 
     /* the vignette rides just past the near plane, sized to the frustum */
