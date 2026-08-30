@@ -67,9 +67,9 @@ the camera pulls back far enough to read the whole scale at once.
 
 | Slides | Presenter | |
 |---|---|---|
-| 1–2 | Raiyan Ahmed Ratul | Cover · Our team |
-| 3–4 | Aditya Tripura | Why we are studying PizzaBurg's CSR · What CSR means here |
-| 5–8 | Liya Akter | Iftar donations at Ramadan · The Christmas giveaway · A supportive workplace · Eco-friendly packaging |
+| 1–3 | Raiyan Ahmed Ratul | Cover · Our team · Why we are studying PizzaBurg's CSR |
+| 4–5 | Aditya Tripura | What CSR means here · Iftar donations at Ramadan |
+| 6–8 | Liya Akter | The Christmas giveaway · A supportive workplace · Eco-friendly packaging |
 | 9–10 | Shuvo Chandra Roy | Where the CSR can go further · Buy 1, Give 1 |
 | 11–12 | Asiful Islam Sourov | Green PizzaBurg · Student support |
 | 13–16 | Fabliha Mubarrat Kabir | Food rescue · Impact against effort · Where to start · Conclusion and thank you |

@@ -68,7 +68,7 @@ const SLIDES = [
 
   /* ===== ADITYA — slides 3 and 4 ========================================= */
   {
-    id: 'intro', by: 'aditya', layout: 'split', stage: 'open', handover: true,
+    id: 'intro', by: 'ratul', layout: 'split', stage: 'open',
     cam: { p: [18, 14, 57], t: [-6, 4.0, -1], fov: 38 },
     photo: { src: 'pb-neon-sign', caption: 'A PizzaBurg outlet, Dhaka' },
     kicker: 'Introduction & Objectives',
@@ -87,7 +87,7 @@ const SLIDES = [
     notes: 'For anyone who was not in the room for our HRM presentation, a quick recap — we studied how PizzaBurg manages its people. This time we are asking a different question: how does PizzaBurg behave as a corporate citizen? Our objectives are threefold. Lay out what CSR activities PizzaBurg is already reported to run. Judge those against a framework from this course. And put forward four new CSR ideas of our own, with a sense of which are worth doing first.',
   },
   {
-    id: 'framework', by: 'aditya', layout: 'split', stage: 'framework',
+    id: 'framework', by: 'aditya', layout: 'split', stage: 'framework', handover: true,
     kicker: 'Our Analytical Lens',
     title: 'What CSR means here',
     lede: 'We use Carroll’s four-part CSR pyramid — economic, legal, ethical and philanthropic responsibility — to judge what good CSR looks like for a company like PizzaBurg.',
@@ -103,7 +103,7 @@ const SLIDES = [
 
   /* ===== LIYA — slides 5 to 8 ============================================ */
   {
-    id: 'current-community-ramadan', by: 'liya', layout: 'split', stage: 'ramadan', handover: true,
+    id: 'current-community-ramadan', by: 'aditya', layout: 'split', stage: 'ramadan',
     kicker: 'Current CSR · Community Giving',
     title: 'Iftar donations at Ramadan',
     lede: 'PizzaBurg’s first confirmed community gesture is tied to a specific point on the religious calendar.',
@@ -116,7 +116,7 @@ const SLIDES = [
     notes: 'Our first confirmed finding, reported by Dhaka Tribune, is that during Ramadan PizzaBurg has supplied pizzas for iftar meals at mosques. We are presenting this as a reported fact from a news source, not something our group verified in person. In Carroll’s terms it sits in the philanthropic tier — real goodwill, but tied to one point on the calendar rather than running all year.',
   },
   {
-    id: 'current-community-christmas', by: 'liya', layout: 'split', stage: 'christmas',
+    id: 'current-community-christmas', by: 'liya', layout: 'split', stage: 'christmas', handover: true,
     kicker: 'Current CSR · Community Giving',
     title: 'The Christmas giveaway',
     lede: 'A second confirmed gesture, tied to a different date and reaching a different group.',
@@ -158,7 +158,7 @@ const SLIDES = [
 
   /* ===== SHUVO — slides 9 and 10 ========================================= */
   {
-    id: 'gap', by: 'shuvo', layout: 'split', stage: 'gap', handover: true, arc: 0.5,
+    id: 'gap', by: 'shuvo', layout: 'split', stage: 'gap', arc: 0.5, handover: true,
     kicker: 'The Opportunity',
     title: 'Where PizzaBurg’s CSR can go further',
     lede: 'The four existing activities are a good start, but clear gaps appear once we look at what is missing.',
