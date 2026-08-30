@@ -24,7 +24,18 @@
 /* --- photography ----------------------------------------------------------
    The group shot these on several phones in several lights. One grade and one
    warm overlay on .frame make them read as a single set beside the cream. */
-figure.shot { margin: 0; display: grid; gap: 10px; align-content: start; }
+/* The shape of a frame is the media's own: buildMedia writes --ar on the
+   figure once the natural size is known. What the layout decides is the
+   SIZE — --fh, a height budget counted in --u, so the auto-fit steps shrink
+   the pictures along with the type instead of leaving them to overflow. */
+figure.shot {
+  margin: 0; display: grid; gap: 10px; align-content: start;
+  --fh: 30;
+  width: 100%;
+  max-width: calc(var(--fh) * var(--u) * var(--ar, 1.6));
+  justify-self: end;
+}
+figure.shot.small { --fh: 15; }
 
 .frame {
   position: relative; overflow: hidden;
@@ -34,7 +45,7 @@ figure.shot { margin: 0; display: grid; gap: 10px; align-content: start; }
     0 28px 56px -32px rgba(52, 32, 16, 0.85),
     0 0 0 1px rgba(120, 92, 60, 0.14),
     0 1px 0 rgba(255, 255, 255, 0.6) inset;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: var(--ar, 16 / 10);
 }
 .frame img, .frame video {
   display: block; width: 100%; height: 100%;
@@ -60,22 +71,32 @@ figure.shot.contain .frame img { object-fit: contain; }
   border-radius: 16px;
 }
 
+/* the caption falls under the photograph, out where the column wash has already
+   run out, so it stands on raw counter and has to bring its own ground; shrunk
+   to the words so it reads as a label on the picture, not a bar under it */
 figure.shot figcaption {
+  justify-self: start;
   line-height: 1.3;
   font-size: 10.5px; letter-spacing: 0.09em;
   text-transform: uppercase; color: var(--ink-3); font-weight: 700;
-  text-shadow: 0 1px 0 rgba(255, 252, 246, 0.85);
+  padding: 4px 9px 5px; border-radius: 8px;
+  background: rgba(250, 245, 237, 0.93);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-figure.shot.small .frame { aspect-ratio: 21 / 9; border-radius: 13px; }
-/* a photograph sharing the column with a panel takes a cinematic band, so
-   neither of them ends up squeezed */
-.col-aside.stacked figure.shot .frame { aspect-ratio: 2 / 1; }
-.col-aside.stacked figure.shot.small .frame { aspect-ratio: 24 / 9; }
+figure.shot.small .frame { border-radius: 13px; }
 figure.shot.small figcaption { font-size: 9.5px; }
+.frame video { object-position: center 34%; }
 
-/* the portrait clips keep their shape inside the same frame language */
-figure.shot .frame:has(video) { aspect-ratio: 16 / 10; }
-figure.shot .frame video { object-position: center 34%; }
+/* a photograph sharing the column gives up height to whatever sits under it.
+   How much depends on what else is in the column: a pair of photographs
+   splits it, a photograph over a panel keeps the larger share because it is
+   the only picture there, and a column holding all three gives every one of
+   them less rather than letting the auto-fit shrink the whole slide. */
+.col-aside.stacked figure.shot { --fh: 22; }
+.col-aside.stacked figure.shot.small { --fh: 15; }
+.col-aside.stacked:has(.panel):not(:has(figure.shot.small)) figure.shot { --fh: 26; }
+.col-aside.stacked:has(.panel):has(figure.shot.small) figure.shot { --fh: 16; }
+.col-aside.stacked:has(.panel):has(figure.shot.small) figure.shot.small { --fh: 12; }
 
 /* --- outlets -------------------------------------------------------------- */
 .dots { display: grid; grid-template-columns: repeat(11, 1fr); gap: 8px; }
@@ -176,7 +197,7 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
 
 /* --- team ----------------------------------------------------------------- */
 .teamwrap { display: grid; gap: 13px; }
-.teamwrap .frame { aspect-ratio: 16 / 9; }
+.teamwrap figure.shot { --fh: 26; justify-self: center; }
 .teamlist {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(3, auto); gap: 7px 30px; justify-content: center;

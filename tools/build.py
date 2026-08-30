@@ -62,6 +62,8 @@ DECKS = {
             'src/visuals.js',
             'src/csr/visuals.js',
             'src/csr/enrich.js',
+            'src/csr/grove.js',
+            'src/csr/life.js',
             'src/csr/world.js',
             'src/deck.js',
         ],

@@ -51,7 +51,41 @@ const VIS = {};
 /* ---------------------------------------------------------------- media --
    Every picture in the deck is the group's own, and they were taken on
    several different phones in several different lights. The .frame wrapper
-   carries one warm grade so they read as a single set. */
+   carries one warm grade so they read as a single set.
+
+   Eleven of the twenty-two stills, and both clips, were shot with the phone
+   held upright. A fixed landscape frame threw most of those away — the 9:16
+   ones lost about three quarters — so the frame takes its shape FROM the
+   media. Only the extremes are pulled in: a 9:16 shot settles at 0.72, near
+   3:4, which the column can still hold without becoming a chimney. */
+
+const AR_MIN = 0.72;
+const AR_MAX = 1.9;
+
+/* `rank` settles which source gets the last word: a poster only stands in for
+   a clip the browser may refuse to decode, so the clip outranks it. `live` is
+   false for the synchronous read during buildSlide, when there is no layout to
+   disturb yet, and true for the load events that arrive afterwards. */
+function frameRatio(fig, w, h, rank, live) {
+  if (!w || !h || +(fig.dataset.arRank || 0) > rank) return;
+  fig.dataset.arRank = rank;
+  const was = fig.style.getPropertyValue('--ar');
+  fig.style.setProperty('--ar', Math.min(AR_MAX, Math.max(AR_MIN, w / h)).toFixed(4));
+  if (live && was !== fig.style.getPropertyValue('--ar') && window.Deck && Deck.refit) Deck.refit();
+}
+
+/* Every source is an inlined data URI, so an img is often already decoded
+   before it reaches the document; a clip only reports its size on metadata.
+   Both paths have to be covered or the default 16/10 sticks. */
+function sizeFrame(fig, node, rank) {
+  const video = node.tagName === 'VIDEO';
+  const read = function (live) {
+    frameRatio(fig, video ? node.videoWidth : node.naturalWidth,
+      video ? node.videoHeight : node.naturalHeight, rank, live);
+  };
+  read(false);
+  node.addEventListener(video ? 'loadedmetadata' : 'load', function () { read(true); });
+}
 
 function buildMedia(m, small) {
   if (!m) return null;
@@ -72,10 +106,20 @@ function buildMedia(m, small) {
     inner = el('img', { src: Media.src(src), alt: m.caption || '', loading: 'eager', decoding: 'async' });
   }
 
-  return el('figure', { class: cls }, [
+  const fig = el('figure', { class: cls }, [
     el('div', { class: 'frame' }, inner),
     m.caption ? el('figcaption', { text: m.caption }) : null,
   ]);
+  sizeFrame(fig, inner, 2);
+  /* a browser missing the codec shows the poster in place of the clip, and the
+     posters are portrait too, so the poster sizes the frame until (or unless)
+     the clip's own metadata arrives */
+  if (inner.tagName === 'VIDEO' && m.poster) {
+    const probe = new Image();
+    sizeFrame(fig, probe, 1);
+    probe.src = Media.src(m.poster);
+  }
+  return fig;
 }
 
 /* --------------------------------------------------------------- outlets -- */

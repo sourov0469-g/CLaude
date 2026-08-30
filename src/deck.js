@@ -241,14 +241,18 @@ const Deck = (function () {
     });
   }
 
+  /* the cue is a lower third above the rail, so it rises the short distance a
+     caption rises and leaves again; the tint is the presenter's own hue, read
+     back out of the same helper the rail segments use. */
   function handoverCue(p) {
     if (reduced) return;
-    dom.hoWho.textContent = p.short;
-    dom.hoRole.textContent = 'over to ' + p.name;
+    dom.hoRole.textContent = 'over to';
+    dom.hoWho.textContent = p.name;
+    dom.handover.style.setProperty('--hoc', presenterColor(p));
     gsap.killTweensOf(dom.handover);
-    gsap.fromTo(dom.handover, { opacity: 0, scale: 0.94, y: 14 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'power3.out' });
-    gsap.to(dom.handover, { opacity: 0, y: -12, duration: 0.5, ease: 'power2.in', delay: 1.3 });
+    gsap.fromTo(dom.handover, { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.42, ease: 'power3.out' });
+    gsap.to(dom.handover, { opacity: 0, y: -8, duration: 0.45, ease: 'power2.in', delay: 1.35 });
   }
 
   /* --------------------------------------------------------------- moving */
@@ -444,7 +448,13 @@ const Deck = (function () {
     dom.entryLoad.textContent = ok ? 'ready' : 'running without 3d';
   }
 
-  return { init: init, go: go, next: next, prev: prev, current: function () { return idx; } };
+  return {
+    init: init, go: go, next: next, prev: prev,
+    current: function () { return idx; },
+    /* a clip reports its size only once metadata lands, which is after the
+       slide was measured; the frame it sits in has just changed height. */
+    refit: function () { if (started && nodes[idx]) fit(nodes[idx]); },
+  };
 })();
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', Deck.init);

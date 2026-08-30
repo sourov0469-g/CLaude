@@ -1127,32 +1127,46 @@ const World = (function () {
 
     /* the immersive pass layers its lighting, atmosphere and wall on top of
        all of the above. It is optional: without it the room still reads. */
-    if (window.Enrich) {
-      window.Enrich.build({
-        THREE: T, scene: scene, renderer: renderer, camera: camera,
-        colors: {
-          BRAND: BRAND, BRAND_DEEP: BRAND_DEEP, CREAM: CREAM, BRASS: BRASS,
-          STONE_GREY: STONE_GREY, PAN_TERRACOTTA: PAN_TERRACOTTA,
-          LEAF_YOUNG: LEAF_YOUNG, WARM_GLOW: WARM_GLOW, COIN_GOLD: COIN_GOLD,
-          CAP_NAVY: CAP_NAVY, HOOK_DIM: HOOK_DIM,
-        },
-        anchors: {
-          scale: S.group, beamBar: S.beamBar, costPan: S.costPan, goodPan: S.goodPan,
-          gaugeArc: S.gaugeArc, gaugeTick: S.gaugeTick,
-          weights: {
-            lantern: S.lantern, gift: S.gift, apron: S.apron, leaf: S.leaf,
-            meal: S.meal, green: S.green, cap: S.cap, rescue: S.rescue,
-            hook: S.hook,
-          },
-        },
-        mat: mat, box: box, cyl: cyl, lathe: lathe, tex: tex, canvas: canvas,
-      });
+    if (window.Enrich) window.Enrich.build(enrichContext());
+
+    /* Two more optional layers, given the identical context: the grove beyond
+       the window, and the kitchen at work behind the scale. Each is built the
+       same way and each is allowed to be absent. */
+    if (window.Grove || window.Life) {
+      const ctx = enrichContext();
+      if (window.Grove) window.Grove.build(ctx);
+      if (window.Life) window.Life.build(ctx);
     }
 
     ready = true; running = true;
     clock.last = performance.now();
     requestAnimationFrame(frame);
     return true;
+  }
+
+  /* Everything an optional layer needs to build itself into this room. One
+     definition, so the enrichment, the grove and the kitchen all see the same
+     palette, the same helpers and the same anchors on the scale. */
+  function enrichContext() {
+    return {
+      THREE: T, scene: scene, renderer: renderer, camera: camera,
+      colors: {
+        BRAND: BRAND, BRAND_DEEP: BRAND_DEEP, CREAM: CREAM, BRASS: BRASS,
+        STONE_GREY: STONE_GREY, PAN_TERRACOTTA: PAN_TERRACOTTA,
+        LEAF_YOUNG: LEAF_YOUNG, WARM_GLOW: WARM_GLOW, COIN_GOLD: COIN_GOLD,
+        CAP_NAVY: CAP_NAVY, HOOK_DIM: HOOK_DIM,
+      },
+      anchors: {
+        scale: S.group, beamBar: S.beamBar, costPan: S.costPan, goodPan: S.goodPan,
+        gaugeArc: S.gaugeArc, gaugeTick: S.gaugeTick,
+        weights: {
+          lantern: S.lantern, gift: S.gift, apron: S.apron, leaf: S.leaf,
+          meal: S.meal, green: S.green, cap: S.cap, rescue: S.rescue,
+          hook: S.hook,
+        },
+      },
+      mat: mat, box: box, cyl: cyl, lathe: lathe, tex: tex, canvas: canvas,
+    };
   }
 
   /* ---------------------------------------------------------------- moving */
@@ -1188,7 +1202,10 @@ const World = (function () {
     if (!ready) return;
     still = !!slide.still;
     setStage(slide.stage || 'open', instant);
-    if (window.Enrich) window.Enrich.apply(slide.stage || 'open', !!(instant || reduced));
+    const st = slide.stage || 'open', now = !!(instant || reduced);
+    if (window.Enrich) window.Enrich.apply(st, now);
+    if (window.Grove) window.Grove.apply(st, now);
+    if (window.Life) window.Life.apply(st, now);
 
     const prog = Math.max(0, SLIDES.indexOf(slide)) / Math.max(1, SLIDES.length - 1);
     const lx = 26 - prog * 50, ly = 48 - prog * 18, lz = 24 + prog * 8;
@@ -1283,7 +1300,10 @@ const World = (function () {
       dust.material.opacity = 0.32 + Math.sin(t * 0.6) * 0.12;
     }
 
-    if (window.Enrich) window.Enrich.frame(t, dt, { beamAngle: anim.beamAngle, calm: calm });
+    const layerState = { beamAngle: anim.beamAngle, calm: calm };
+    if (window.Enrich) window.Enrich.frame(t, dt, layerState);
+    if (window.Grove) window.Grove.frame(t, dt, layerState);
+    if (window.Life) window.Life.frame(t, dt, layerState);
 
     renderer.render(scene, camera);
   }

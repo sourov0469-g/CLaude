@@ -20,8 +20,10 @@
   --card:       rgba(253, 250, 244, 0.86);
   --ink:        #1b1613;
   --ink-2:      #453d36;
-  --ink-3:      #6a6058;
-  --ink-4:      #948a7f;
+  /* the quiet inks are read over the 3D counter, not over the paper colour, so
+     they carry the warmth of the paper family at counter-safe darkness */
+  --ink-3:      #5a5149;
+  --ink-4:      #6b6257;
   --rule:       #ddd1bf;
   --red:        #d8402f;
   --red-deep:   #a82418;
@@ -99,19 +101,32 @@ body { overflow: hidden; }
 }
 
 /* The plate under the text. One soft wash keyed to the left column — never a
-   grey box, and never a full-screen dimmer that kills the pizza. */
+   grey box, and never a full-screen dimmer that kills the pizza.
+   .col-text is 54ch, which reaches about 39% of frame, so the wash holds its
+   plateau to 38% and only then falls; it is spent by the time it reaches the
+   left pan at ~49%, which is where the 3D has to be read cleanly. */
 #scrim {
   position: fixed; inset: 0; z-index: 3; pointer-events: none;
   background: linear-gradient(94deg,
-    rgba(249, 244, 235, 0.95) 0%,
-    rgba(249, 244, 235, 0.88) 28%,
-    rgba(249, 244, 235, 0.24) 48%,
+    rgba(249, 244, 235, 0.97) 0%,
+    rgba(249, 244, 235, 0.94) 26%,
+    rgba(249, 244, 235, 0.88) 38%,
+    rgba(249, 244, 235, 0.30) 49%,
     rgba(249, 244, 235, 0) 62%);
   transition: background 700ms var(--ease), opacity 700ms var(--ease);
 }
+/* cover and closing put the column low-left, over the counter front, which is
+   the darkest ground in the room — so they keep the same directional wash and
+   add only a slack glow behind it, rather than a wide fog over mid-frame */
 .lay-cover #scrim, .lay-closing #scrim {
   background:
-    radial-gradient(72% 52% at 34% 46%, rgba(249,244,235,0.94) 0%, rgba(249,244,235,0.52) 62%, rgba(249,244,235,0) 100%);
+    radial-gradient(46% 84% at 20% 48%, rgba(249,244,235,0.44) 0%, rgba(249,244,235,0.16) 60%, rgba(249,244,235,0) 100%),
+    linear-gradient(94deg,
+      rgba(249, 244, 235, 0.95) 0%,
+      rgba(249, 244, 235, 0.92) 28%,
+      rgba(249, 244, 235, 0.74) 40%,
+      rgba(249, 244, 235, 0.20) 52%,
+      rgba(249, 244, 235, 0) 64%);
 }
 
 /* ------------------------------------------------------------------- deck */
@@ -321,7 +336,19 @@ ul.roster .ri { font-size: 9.5px; color: var(--ink-4); letter-spacing: 0.05em; f
 
 /* -------------------------------------------------------------------- rail */
 
-#rail { display: flex; align-items: center; gap: 16px; padding: 0 var(--pad-x) var(--pad-y); font-size: 11.5px; color: var(--ink-3); }
+/* the presenter names are the only type that runs the full width of the frame,
+   so they sit on the counter where the column wash has nothing left to give;
+   a shallow fade off the bottom edge grounds the labels and leaves the bars,
+   and everything above them, on the room */
+#rail {
+  display: flex; align-items: center; gap: 16px; padding: 0 var(--pad-x) var(--pad-y);
+  font-size: 11.5px; color: var(--ink-3);
+  background: linear-gradient(to top,
+    rgba(249, 244, 235, 0.95) 0%,
+    rgba(249, 244, 235, 0.90) 46%,
+    rgba(249, 244, 235, 0.34) 74%,
+    rgba(249, 244, 235, 0) 100%);
+}
 #segments { display: flex; gap: 5px; flex: 1; min-width: 0; }
 .seg { flex: 1 1 0; min-width: 0; cursor: pointer; background: none; border: 0; padding: 0; font: inherit; text-align: left; }
 .seg .bar { height: 4px; border-radius: 3px; background: rgba(150,136,118,0.26); overflow: hidden; position: relative; }
@@ -336,17 +363,31 @@ ul.roster .ri { font-size: 9.5px; color: var(--ink-4); letter-spacing: 0.05em; f
 #counter { font-variant-numeric: tabular-nums; font-weight: 620; color: var(--ink-2); letter-spacing: 0.04em; white-space: nowrap; }
 #counter b { color: var(--ink); }
 
-/* handover flash */
+/* handover cue — a lower third, not a title card.
+   Presenter identity already lives in #rail, and the centre of the frame
+   belongs to the scene, so the cue sits in the strip just above the segments
+   it echoes. It takes the card vocabulary of .panel rather than floating as
+   bare type, and --hoc, set by handoverCue(), is the incoming presenter's own
+   hue — the same colour their rail segment fills with. */
 #handover {
-  position: fixed; left: 50%; top: 50%; z-index: 8;
-  transform: translate(-50%, -50%); pointer-events: none; text-align: center; opacity: 0;
+  position: fixed; left: var(--pad-x); bottom: calc(var(--pad-y) + 44px); z-index: 8;
+  pointer-events: none; opacity: 0;
+  display: flex; align-items: baseline; gap: 11px;
+  max-width: calc(100vw - var(--pad-x) * 2); overflow: hidden;
+  padding: 9px 16px 11px 14px;
+  border: 1px solid var(--rule); border-left: 3px solid var(--hoc, var(--red));
+  border-radius: 14px; background: var(--card); box-shadow: var(--lift);
+  backdrop-filter: blur(16px) saturate(1.06); -webkit-backdrop-filter: blur(16px) saturate(1.06);
+}
+#handover .role {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 700; color: var(--hoc, var(--red-deep)); white-space: nowrap;
 }
 #handover .who {
-  font-family: var(--serif); font-variation-settings: 'opsz' 110;
-  font-weight: 700; font-size: clamp(38px, 6vw, 92px); letter-spacing: -0.035em; color: var(--ink); line-height: 1;
-  text-shadow: 0 0 40px rgba(249,244,235,0.9);
+  font-family: var(--serif); font-variation-settings: 'opsz' 40;
+  font-weight: 650; font-size: clamp(15px, 1.5vw, 22px); letter-spacing: -0.018em;
+  line-height: 1.05; color: var(--ink); min-width: 0; white-space: nowrap;
 }
-#handover .role { margin-top: 10px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-deep); font-weight: 660; }
 
 /* --------------------------------------------------------------- overlays */
 
@@ -425,7 +466,7 @@ body.blank #scrim, body.blank #backdrop, body.blank #room { opacity: 0; }
 body.blank { background: #16110d; }
 #deck, #stage { transition: opacity 240ms var(--ease); }
 
-html[data-contrast="high"] { --ink-3: #554d45; --ink-4: #7a7067; --rule: #c2b3a0; --plate: rgba(252,248,241,0.98); }
+html[data-contrast="high"] { --ink-3: #4b433c; --ink-4: #574f45; --rule: #c2b3a0; --plate: rgba(252,248,241,0.98); }
 html[data-contrast="high"] #grain, html[data-contrast="high"] #backdrop { display: none; }
 html[data-contrast="high"] #scrim {
   background: linear-gradient(94deg, rgba(249,244,235,0.99) 0%, rgba(249,244,235,0.96) 40%, rgba(249,244,235,0.6) 62%, rgba(249,244,235,0) 80%);
@@ -481,7 +522,18 @@ html[data-contrast="high"] .rgroup { background: rgba(255,254,251,0.97); }
 /* --- photography ----------------------------------------------------------
    The group shot these on several phones in several lights. One grade and one
    warm overlay on .frame make them read as a single set beside the cream. */
-figure.shot { margin: 0; display: grid; gap: 10px; align-content: start; }
+/* The shape of a frame is the media's own: buildMedia writes --ar on the
+   figure once the natural size is known. What the layout decides is the
+   SIZE — --fh, a height budget counted in --u, so the auto-fit steps shrink
+   the pictures along with the type instead of leaving them to overflow. */
+figure.shot {
+  margin: 0; display: grid; gap: 10px; align-content: start;
+  --fh: 30;
+  width: 100%;
+  max-width: calc(var(--fh) * var(--u) * var(--ar, 1.6));
+  justify-self: end;
+}
+figure.shot.small { --fh: 15; }
 
 .frame {
   position: relative; overflow: hidden;
@@ -491,7 +543,7 @@ figure.shot { margin: 0; display: grid; gap: 10px; align-content: start; }
     0 28px 56px -32px rgba(52, 32, 16, 0.85),
     0 0 0 1px rgba(120, 92, 60, 0.14),
     0 1px 0 rgba(255, 255, 255, 0.6) inset;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: var(--ar, 16 / 10);
 }
 .frame img, .frame video {
   display: block; width: 100%; height: 100%;
@@ -517,22 +569,32 @@ figure.shot.contain .frame img { object-fit: contain; }
   border-radius: 16px;
 }
 
+/* the caption falls under the photograph, out where the column wash has already
+   run out, so it stands on raw counter and has to bring its own ground; shrunk
+   to the words so it reads as a label on the picture, not a bar under it */
 figure.shot figcaption {
+  justify-self: start;
   line-height: 1.3;
   font-size: 10.5px; letter-spacing: 0.09em;
   text-transform: uppercase; color: var(--ink-3); font-weight: 700;
-  text-shadow: 0 1px 0 rgba(255, 252, 246, 0.85);
+  padding: 4px 9px 5px; border-radius: 8px;
+  background: rgba(250, 245, 237, 0.93);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-figure.shot.small .frame { aspect-ratio: 21 / 9; border-radius: 13px; }
-/* a photograph sharing the column with a panel takes a cinematic band, so
-   neither of them ends up squeezed */
-.col-aside.stacked figure.shot .frame { aspect-ratio: 2 / 1; }
-.col-aside.stacked figure.shot.small .frame { aspect-ratio: 24 / 9; }
+figure.shot.small .frame { border-radius: 13px; }
 figure.shot.small figcaption { font-size: 9.5px; }
+.frame video { object-position: center 34%; }
 
-/* the portrait clips keep their shape inside the same frame language */
-figure.shot .frame:has(video) { aspect-ratio: 16 / 10; }
-figure.shot .frame video { object-position: center 34%; }
+/* a photograph sharing the column gives up height to whatever sits under it.
+   How much depends on what else is in the column: a pair of photographs
+   splits it, a photograph over a panel keeps the larger share because it is
+   the only picture there, and a column holding all three gives every one of
+   them less rather than letting the auto-fit shrink the whole slide. */
+.col-aside.stacked figure.shot { --fh: 22; }
+.col-aside.stacked figure.shot.small { --fh: 15; }
+.col-aside.stacked:has(.panel):not(:has(figure.shot.small)) figure.shot { --fh: 26; }
+.col-aside.stacked:has(.panel):has(figure.shot.small) figure.shot { --fh: 16; }
+.col-aside.stacked:has(.panel):has(figure.shot.small) figure.shot.small { --fh: 12; }
 
 /* --- outlets -------------------------------------------------------------- */
 .dots { display: grid; grid-template-columns: repeat(11, 1fr); gap: 8px; }
@@ -633,7 +695,7 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
 
 /* --- team ----------------------------------------------------------------- */
 .teamwrap { display: grid; gap: 13px; }
-.teamwrap .frame { aspect-ratio: 16 / 9; }
+.teamwrap figure.shot { --fh: 26; justify-self: center; }
 .teamlist {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(3, auto); gap: 7px 30px; justify-content: center;
@@ -802,8 +864,8 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
 </main>
 
 <div id="handover" aria-hidden="true">
-  <div class="who" id="ho-who"></div>
   <div class="role" id="ho-role"></div>
+  <div class="who" id="ho-who"></div>
 </div>
 
 <section class="panel-full" id="panel-grid" aria-label="All slides">
@@ -953,7 +1015,7 @@ const SLIDES = [
 
   /* ===== ADITYA — slides 3 and 4 ========================================= */
   {
-    id: 'intro', by: 'aditya', layout: 'split', stage: 'open', handover: true,
+    id: 'intro', by: 'ratul', layout: 'split', stage: 'open',
     cam: { p: [18, 14, 57], t: [-6, 4.0, -1], fov: 38 },
     photo: { src: 'pb-neon-sign', caption: 'A PizzaBurg outlet, Dhaka' },
     kicker: 'Introduction & Objectives',
@@ -972,7 +1034,7 @@ const SLIDES = [
     notes: 'For anyone who was not in the room for our HRM presentation, a quick recap — we studied how PizzaBurg manages its people. This time we are asking a different question: how does PizzaBurg behave as a corporate citizen? Our objectives are threefold. Lay out what CSR activities PizzaBurg is already reported to run. Judge those against a framework from this course. And put forward four new CSR ideas of our own, with a sense of which are worth doing first.',
   },
   {
-    id: 'framework', by: 'aditya', layout: 'split', stage: 'framework',
+    id: 'framework', by: 'aditya', layout: 'split', stage: 'framework', handover: true,
     kicker: 'Our Analytical Lens',
     title: 'What CSR means here',
     lede: 'We use Carroll’s four-part CSR pyramid — economic, legal, ethical and philanthropic responsibility — to judge what good CSR looks like for a company like PizzaBurg.',
@@ -988,7 +1050,7 @@ const SLIDES = [
 
   /* ===== LIYA — slides 5 to 8 ============================================ */
   {
-    id: 'current-community-ramadan', by: 'liya', layout: 'split', stage: 'ramadan', handover: true,
+    id: 'current-community-ramadan', by: 'aditya', layout: 'split', stage: 'ramadan',
     kicker: 'Current CSR · Community Giving',
     title: 'Iftar donations at Ramadan',
     lede: 'PizzaBurg’s first confirmed community gesture is tied to a specific point on the religious calendar.',
@@ -1001,7 +1063,7 @@ const SLIDES = [
     notes: 'Our first confirmed finding, reported by Dhaka Tribune, is that during Ramadan PizzaBurg has supplied pizzas for iftar meals at mosques. We are presenting this as a reported fact from a news source, not something our group verified in person. In Carroll’s terms it sits in the philanthropic tier — real goodwill, but tied to one point on the calendar rather than running all year.',
   },
   {
-    id: 'current-community-christmas', by: 'liya', layout: 'split', stage: 'christmas',
+    id: 'current-community-christmas', by: 'liya', layout: 'split', stage: 'christmas', handover: true,
     kicker: 'Current CSR · Community Giving',
     title: 'The Christmas giveaway',
     lede: 'A second confirmed gesture, tied to a different date and reaching a different group.',
@@ -1043,7 +1105,7 @@ const SLIDES = [
 
   /* ===== SHUVO — slides 9 and 10 ========================================= */
   {
-    id: 'gap', by: 'shuvo', layout: 'split', stage: 'gap', handover: true, arc: 0.5,
+    id: 'gap', by: 'shuvo', layout: 'split', stage: 'gap', arc: 0.5, handover: true,
     kicker: 'The Opportunity',
     title: 'Where PizzaBurg’s CSR can go further',
     lede: 'The four existing activities are a good start, but clear gaps appear once we look at what is missing.',
@@ -1331,7 +1393,41 @@ const VIS = {};
 /* ---------------------------------------------------------------- media --
    Every picture in the deck is the group's own, and they were taken on
    several different phones in several different lights. The .frame wrapper
-   carries one warm grade so they read as a single set. */
+   carries one warm grade so they read as a single set.
+
+   Eleven of the twenty-two stills, and both clips, were shot with the phone
+   held upright. A fixed landscape frame threw most of those away — the 9:16
+   ones lost about three quarters — so the frame takes its shape FROM the
+   media. Only the extremes are pulled in: a 9:16 shot settles at 0.72, near
+   3:4, which the column can still hold without becoming a chimney. */
+
+const AR_MIN = 0.72;
+const AR_MAX = 1.9;
+
+/* `rank` settles which source gets the last word: a poster only stands in for
+   a clip the browser may refuse to decode, so the clip outranks it. `live` is
+   false for the synchronous read during buildSlide, when there is no layout to
+   disturb yet, and true for the load events that arrive afterwards. */
+function frameRatio(fig, w, h, rank, live) {
+  if (!w || !h || +(fig.dataset.arRank || 0) > rank) return;
+  fig.dataset.arRank = rank;
+  const was = fig.style.getPropertyValue('--ar');
+  fig.style.setProperty('--ar', Math.min(AR_MAX, Math.max(AR_MIN, w / h)).toFixed(4));
+  if (live && was !== fig.style.getPropertyValue('--ar') && window.Deck && Deck.refit) Deck.refit();
+}
+
+/* Every source is an inlined data URI, so an img is often already decoded
+   before it reaches the document; a clip only reports its size on metadata.
+   Both paths have to be covered or the default 16/10 sticks. */
+function sizeFrame(fig, node, rank) {
+  const video = node.tagName === 'VIDEO';
+  const read = function (live) {
+    frameRatio(fig, video ? node.videoWidth : node.naturalWidth,
+      video ? node.videoHeight : node.naturalHeight, rank, live);
+  };
+  read(false);
+  node.addEventListener(video ? 'loadedmetadata' : 'load', function () { read(true); });
+}
 
 function buildMedia(m, small) {
   if (!m) return null;
@@ -1352,10 +1448,20 @@ function buildMedia(m, small) {
     inner = el('img', { src: Media.src(src), alt: m.caption || '', loading: 'eager', decoding: 'async' });
   }
 
-  return el('figure', { class: cls }, [
+  const fig = el('figure', { class: cls }, [
     el('div', { class: 'frame' }, inner),
     m.caption ? el('figcaption', { text: m.caption }) : null,
   ]);
+  sizeFrame(fig, inner, 2);
+  /* a browser missing the codec shows the poster in place of the clip, and the
+     posters are portrait too, so the poster sizes the frame until (or unless)
+     the clip's own metadata arrives */
+  if (inner.tagName === 'VIDEO' && m.poster) {
+    const probe = new Image();
+    sizeFrame(fig, probe, 1);
+    probe.src = Media.src(m.poster);
+  }
+  return fig;
 }
 
 /* --------------------------------------------------------------- outlets -- */
@@ -2665,6 +2771,10 @@ VIS.team = function () {
   window.Enrich = { build: build, apply: apply, frame: frame };
 })();
 
+/* placeholder — replaced by the grove layer. world.js no-ops while window.Grove is undefined. */
+
+/* placeholder — replaced by the life layer. world.js no-ops while window.Life is undefined. */
+
 /* ==========================================================================
    THE GIVING SCALE
    The same PizzaBurg kitchen the HRM deck is set in, with one new thing on
@@ -3794,32 +3904,46 @@ const World = (function () {
 
     /* the immersive pass layers its lighting, atmosphere and wall on top of
        all of the above. It is optional: without it the room still reads. */
-    if (window.Enrich) {
-      window.Enrich.build({
-        THREE: T, scene: scene, renderer: renderer, camera: camera,
-        colors: {
-          BRAND: BRAND, BRAND_DEEP: BRAND_DEEP, CREAM: CREAM, BRASS: BRASS,
-          STONE_GREY: STONE_GREY, PAN_TERRACOTTA: PAN_TERRACOTTA,
-          LEAF_YOUNG: LEAF_YOUNG, WARM_GLOW: WARM_GLOW, COIN_GOLD: COIN_GOLD,
-          CAP_NAVY: CAP_NAVY, HOOK_DIM: HOOK_DIM,
-        },
-        anchors: {
-          scale: S.group, beamBar: S.beamBar, costPan: S.costPan, goodPan: S.goodPan,
-          gaugeArc: S.gaugeArc, gaugeTick: S.gaugeTick,
-          weights: {
-            lantern: S.lantern, gift: S.gift, apron: S.apron, leaf: S.leaf,
-            meal: S.meal, green: S.green, cap: S.cap, rescue: S.rescue,
-            hook: S.hook,
-          },
-        },
-        mat: mat, box: box, cyl: cyl, lathe: lathe, tex: tex, canvas: canvas,
-      });
+    if (window.Enrich) window.Enrich.build(enrichContext());
+
+    /* Two more optional layers, given the identical context: the grove beyond
+       the window, and the kitchen at work behind the scale. Each is built the
+       same way and each is allowed to be absent. */
+    if (window.Grove || window.Life) {
+      const ctx = enrichContext();
+      if (window.Grove) window.Grove.build(ctx);
+      if (window.Life) window.Life.build(ctx);
     }
 
     ready = true; running = true;
     clock.last = performance.now();
     requestAnimationFrame(frame);
     return true;
+  }
+
+  /* Everything an optional layer needs to build itself into this room. One
+     definition, so the enrichment, the grove and the kitchen all see the same
+     palette, the same helpers and the same anchors on the scale. */
+  function enrichContext() {
+    return {
+      THREE: T, scene: scene, renderer: renderer, camera: camera,
+      colors: {
+        BRAND: BRAND, BRAND_DEEP: BRAND_DEEP, CREAM: CREAM, BRASS: BRASS,
+        STONE_GREY: STONE_GREY, PAN_TERRACOTTA: PAN_TERRACOTTA,
+        LEAF_YOUNG: LEAF_YOUNG, WARM_GLOW: WARM_GLOW, COIN_GOLD: COIN_GOLD,
+        CAP_NAVY: CAP_NAVY, HOOK_DIM: HOOK_DIM,
+      },
+      anchors: {
+        scale: S.group, beamBar: S.beamBar, costPan: S.costPan, goodPan: S.goodPan,
+        gaugeArc: S.gaugeArc, gaugeTick: S.gaugeTick,
+        weights: {
+          lantern: S.lantern, gift: S.gift, apron: S.apron, leaf: S.leaf,
+          meal: S.meal, green: S.green, cap: S.cap, rescue: S.rescue,
+          hook: S.hook,
+        },
+      },
+      mat: mat, box: box, cyl: cyl, lathe: lathe, tex: tex, canvas: canvas,
+    };
   }
 
   /* ---------------------------------------------------------------- moving */
@@ -3855,7 +3979,10 @@ const World = (function () {
     if (!ready) return;
     still = !!slide.still;
     setStage(slide.stage || 'open', instant);
-    if (window.Enrich) window.Enrich.apply(slide.stage || 'open', !!(instant || reduced));
+    const st = slide.stage || 'open', now = !!(instant || reduced);
+    if (window.Enrich) window.Enrich.apply(st, now);
+    if (window.Grove) window.Grove.apply(st, now);
+    if (window.Life) window.Life.apply(st, now);
 
     const prog = Math.max(0, SLIDES.indexOf(slide)) / Math.max(1, SLIDES.length - 1);
     const lx = 26 - prog * 50, ly = 48 - prog * 18, lz = 24 + prog * 8;
@@ -3950,7 +4077,10 @@ const World = (function () {
       dust.material.opacity = 0.32 + Math.sin(t * 0.6) * 0.12;
     }
 
-    if (window.Enrich) window.Enrich.frame(t, dt, { beamAngle: anim.beamAngle, calm: calm });
+    const layerState = { beamAngle: anim.beamAngle, calm: calm };
+    if (window.Enrich) window.Enrich.frame(t, dt, layerState);
+    if (window.Grove) window.Grove.frame(t, dt, layerState);
+    if (window.Life) window.Life.frame(t, dt, layerState);
 
     renderer.render(scene, camera);
   }
@@ -4218,14 +4348,18 @@ const Deck = (function () {
     });
   }
 
+  /* the cue is a lower third above the rail, so it rises the short distance a
+     caption rises and leaves again; the tint is the presenter's own hue, read
+     back out of the same helper the rail segments use. */
   function handoverCue(p) {
     if (reduced) return;
-    dom.hoWho.textContent = p.short;
-    dom.hoRole.textContent = 'over to ' + p.name;
+    dom.hoRole.textContent = 'over to';
+    dom.hoWho.textContent = p.name;
+    dom.handover.style.setProperty('--hoc', presenterColor(p));
     gsap.killTweensOf(dom.handover);
-    gsap.fromTo(dom.handover, { opacity: 0, scale: 0.94, y: 14 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'power3.out' });
-    gsap.to(dom.handover, { opacity: 0, y: -12, duration: 0.5, ease: 'power2.in', delay: 1.3 });
+    gsap.fromTo(dom.handover, { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.42, ease: 'power3.out' });
+    gsap.to(dom.handover, { opacity: 0, y: -8, duration: 0.45, ease: 'power2.in', delay: 1.35 });
   }
 
   /* --------------------------------------------------------------- moving */
@@ -4421,7 +4555,13 @@ const Deck = (function () {
     dom.entryLoad.textContent = ok ? 'ready' : 'running without 3d';
   }
 
-  return { init: init, go: go, next: next, prev: prev, current: function () { return idx; } };
+  return {
+    init: init, go: go, next: next, prev: prev,
+    current: function () { return idx; },
+    /* a clip reports its size only once metadata lands, which is after the
+       slide was measured; the frame it sits in has just changed height. */
+    refit: function () { if (started && nodes[idx]) fit(nodes[idx]); },
+  };
 })();
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', Deck.init);
