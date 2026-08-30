@@ -3012,9 +3012,1191 @@ VIS.team = function () {
   window.Enrich = { build: build, apply: apply, frame: frame };
 })();
 
-/* placeholder — replaced by the grove layer. world.js no-ops while window.Grove is undefined. */
+/* ==========================================================================
+   ROOTS & RINGS
+   The group's first idea for this deck was a tree that grows as the giving
+   grows. It is a good idea and a bad foreground: a canopy filling out beside
+   a balance beam reads as a second argument, and the beam's tilt is the only
+   argument this deck is making. So the tree is put outside, in daylight, and
+   a window is cut into the back wall to see it through.
 
-/* placeholder — replaced by the life layer. world.js no-ops while window.Life is undefined. */
+   That buys three things at once. The tree is structurally unable to crowd
+   the scale, because a wall stands between them. The depth of the room
+   doubles, because there is now something beyond it. And the two light
+   shafts enrich.js already throws across the counter finally have a source.
+
+   Where the aperture sits was solved against the vantage table rather than
+   eyeballed. Projecting the scale through all twelve cameras onto the plane
+   of the back wall puts its silhouette inside x -18..7.5; the tightest
+   frustum (idea3) reaches x 19.8 on that same plane. So the opening starts
+   at x 10.4 — always clear of the pans — and runs right, off the edge of
+   frame on the close stages, which is what makes it read as a room that
+   continues rather than a picture hung on a wall.
+   ========================================================================== */
+
+(function () {
+  /* a local copy, used only if data.js has not been concatenated ahead of us */
+  const GROVE_STAGES = [
+    'open', 'framework', 'ramadan', 'christmas', 'welfare', 'environment',
+    'gap', 'idea1', 'idea2', 'idea3', 'idea4', 'fullreveal',
+  ];
+
+  /* --------------------------------------------------------- architecture */
+
+  /* the room's own back wall, from world.js: a tiled plane at z -21.4 with a
+     rendered slab behind it, so the reveal is about 1.7 deep */
+  const WALL_Z = -21.4;
+  const REV_FRONT = -21.38;
+  const REV_BACK = -23.14;
+  const REV_MID = (REV_FRONT + REV_BACK) / 2;
+  const REV_DEPTH = REV_FRONT - REV_BACK;
+
+  /* The opening. The head stops at 9.0 because the shelf bracket at x 17
+     hangs down to 9.5 and a bracket cutting across the crown looks like a
+     mistake; the sill sits at 1.2 because the counter top hides the wall
+     below about -0.6 from every vantage, so anything lower is spent. */
+  const AP_X0 = 10.4;
+  const AP_X1 = 29.0;
+  const AP_Y0 = 1.2;
+  const AP_Y1 = 9.0;
+  const MULLION_X = 21.0;   /* right of the tree, so only the transom crosses it */
+  const TRANSOM_Y = 7.4;
+
+  /* -------------------------------------------------------------- outside */
+
+  /* Grade is level with the sill, so the bed reads as pressed up against the
+     glass and the ground plane needs no visible near edge. The tree stands
+     12.6 beyond the wall: near enough to fill its light, far enough that the
+     jambs crop it. */
+  const GRADE = 1.18;
+  const TREE = [15.4, GRADE, -34];
+  const SKY_Z = -62;        /* the plate the ground runs back to meet */
+
+  /* palette. Everything out here is held below the scale in saturation: the
+     brass, the terracotta pan and the brand red are the only fully saturated
+     things in this deck and they all live indoors. */
+  const BARK = 0x6b5a46;
+  const BARK_DARK = 0x574a3a;
+  const LEAF_FULL = 0x7d9c5e;
+  const LEAF_DULL = 0x8e8b6b;   /* where the canopy lands at gap */
+  const FRAME_PAINT = 0xd6cfbc;
+  const REVEAL_LIME = 0xdcd6c6;
+  const SILL_STONE = 0xc4bdac;
+  const CASING_OAK = 0xb9a98c;
+
+  /* one leaf slot per instance; growth never adds or removes the mesh, only
+     how many of these slots are drawn and how big each one is */
+  const MAX_LEAVES = 256;
+  const LEAF_STRIDE = 9;
+  const CROWN_Y = 3.3;                /* the fork, in tree-local */
+  const CANOPY_C = [0, 1.4, 0];       /* crown-local */
+  const CANOPY_R = [3.6, 2.0, 2.9];
+
+  /* One spotlight, and only one. The room already carries thirteen and the
+     sun lights the garden anyway; this exists to pull the tree back toward
+     cool against that warm key. Coned to 24 degrees and capped at 40 units,
+     it cannot reach the post, which sits 47.5 away and 55 degrees off axis. */
+  const KEY_BASE = 58;
+
+  /* ---------------------------------------------------------------- table */
+
+  /* One entry per stage, read straight off the stage name. grow drives the
+     leaf count, the leaf size and the shell radius together; vigour drives
+     only colour. Splitting them is what lets gap stall the tree without
+     stripping it: the canopy loses a little of its fill and most of its
+     green, which is a cold snap, where a bare tree would be a season.
+
+     sky is a multiply over the painted plate, not a replacement for it, so
+     it lives near white: the gradient already carries the colour and a tint
+     down at half value would turn daylight into dusk on every slide. gap is
+     the one entry allowed to pull it properly down and grey. */
+  const GROVE = {
+    open:        { grow: 0.16, vigour: 0.50, light: 0.60, sky: 0xd4dae2 },
+    framework:   { grow: 0.24, vigour: 0.60, light: 0.82, sky: 0xe6ecf2 },
+    ramadan:     { grow: 0.34, vigour: 0.62, light: 0.66, sky: 0xe2dcd8 },
+    christmas:   { grow: 0.44, vigour: 0.60, light: 0.78, sky: 0xdee8f0 },
+    welfare:     { grow: 0.54, vigour: 0.68, light: 0.88, sky: 0xecefec },
+    environment: { grow: 0.68, vigour: 0.82, light: 0.94, sky: 0xe4efe6 },
+    gap:         { grow: 0.64, vigour: 0.26, light: 0.40, sky: 0xb2b8be },
+    idea1:       { grow: 0.74, vigour: 0.62, light: 0.86, sky: 0xf0eade },
+    idea2:       { grow: 0.82, vigour: 0.78, light: 0.92, sky: 0xe2f0e8 },
+    idea3:       { grow: 0.88, vigour: 0.76, light: 0.90, sky: 0xdee6f2 },
+    idea4:       { grow: 0.94, vigour: 0.80, light: 0.96, sky: 0xf2e8dc },
+    fullreveal:  { grow: 1.00, vigour: 0.92, light: 1.05, sky: 0xf8f2e4 },
+  };
+
+  /* --------------------------------------------------------- module state */
+
+  let T = null, ctx = null, built = false;
+  let scene = null;
+
+  let treeGroup, crown, canopy, shadowDecal;
+  let groundMesh, skyPlate, glassPane;
+  let keySpot, keyTarget;
+
+  let leaf = null;
+  let dummy = null, vDir = null, vA = null, vB = null, vD = null;
+  let cA = null, cB = null;
+  let AXIS_X = null, AXIS_Y = null, AXIS_Z = null;
+
+  const live = {
+    grow: 0.16, vigour: 0.50, light: 0.60,
+    skyR: 1, skyG: 1, skyB: 1,
+  };
+
+  /* ---------------------------------------------------------------- utils */
+
+  function order() {
+    return (typeof STAGE_ORDER !== 'undefined' && STAGE_ORDER.length) ? STAGE_ORDER : GROVE_STAGES;
+  }
+
+  function clamp01(v) {
+    return v < 0 ? 0 : (v > 1 ? 1 : v);
+  }
+
+  /* a fixed-seed generator, used only while building. The canopy has to be
+     the same canopy on every load or a deep link would land on a different
+     tree than the one the presenter rehearsed against. */
+  let seed = 0x2f6e2b1;
+  function rnd() {
+    seed = (Math.imul(seed, 1664525) + 1013904223) | 0;
+    return (seed >>> 8) / 16777216;
+  }
+
+  /* Leaf slots are filled in bit-reversed order. A Fibonacci sphere walks
+     its points from one pole to the other, so taking the first N of them
+     would grow the canopy from the bottom up; reversing the index means any
+     prefix is spread over the whole crown, which is what makes a low count
+     read as a sparse tree rather than half a tree. */
+  function bitrev8(i) {
+    let r = 0;
+    for (let b = 0; b < 8; b++) r = (r << 1) | ((i >> b) & 1);
+    return r;
+  }
+
+  /* ------------------------------------------------------------- textures */
+
+  /* Bark, drawn as growth rings. The centre of the rings sits far off the
+     left edge of the canvas, so the arcs crossing it are near-parallel and
+     wrap round the trunk as vertical grain — the rings are literally what is
+     drawn, which is the half of the name the trunk is carrying. */
+  function barkTexture() {
+    const c = ctx.canvas(256), g = c.getContext('2d');
+    g.fillStyle = '#6b5a46';
+    g.fillRect(0, 0, 256, 256);
+    const cx = -520, cy = 128;
+    for (let r = 500; r < 810; r += 2.5 + rnd() * 5) {
+      g.strokeStyle = 'rgba(38,28,20,' + (0.06 + rnd() * 0.18).toFixed(3) + ')';
+      g.lineWidth = 0.7 + rnd() * 2.4;
+      g.beginPath();
+      g.arc(cx, cy, r, -0.52, 0.52);
+      g.stroke();
+      if (rnd() < 0.3) {
+        g.strokeStyle = 'rgba(176,158,132,' + (0.05 + rnd() * 0.10).toFixed(3) + ')';
+        g.lineWidth = 0.6 + rnd() * 1.1;
+        g.beginPath();
+        g.arc(cx, cy - 2, r + 2, -0.52, 0.52);
+        g.stroke();
+      }
+    }
+    for (let i = 0; i < 1400; i++) {
+      g.fillStyle = 'rgba(30,22,16,' + (rnd() * 0.08).toFixed(3) + ')';
+      g.fillRect(rnd() * 256, rnd() * 256, 1.6, 2.6);
+    }
+    return ctx.tex(c, { repeat: [3, 2] });
+  }
+
+  /* The garden floor. One canvas stretched over the whole plane rather than
+     tiled, so the aerial gradient — hazier at the far edge, darker underfoot
+     — survives; a repeat would have printed the same haze four times. */
+  function groundTexture() {
+    const c = ctx.canvas(512), g = c.getContext('2d');
+    const lg = g.createLinearGradient(0, 0, 0, 512);
+    lg.addColorStop(0, '#c6cec6');
+    lg.addColorStop(0.42, '#9dab8d');
+    lg.addColorStop(1, '#79876a');
+    g.fillStyle = lg;
+    g.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 760; i++) {
+      const y = rnd() * 512, s = 3 + (y / 512) * 16;
+      const dark = rnd() < 0.55;
+      g.fillStyle = (dark ? 'rgba(58,68,46,' : 'rgba(198,203,178,') + (0.05 + rnd() * 0.14).toFixed(3) + ')';
+      g.beginPath();
+      g.ellipse(rnd() * 512, y, s, s * 0.55, rnd() * 3, 0, 6.3);
+      g.fill();
+    }
+    /* three bare patches of bed, so the ground is not one flat green */
+    for (let i = 0; i < 3; i++) {
+      g.fillStyle = 'rgba(104,88,66,0.20)';
+      g.beginPath();
+      g.ellipse(90 + rnd() * 330, 300 + rnd() * 190, 60 + rnd() * 60, 26 + rnd() * 24, 0, 0, 6.3);
+      g.fill();
+    }
+    return ctx.tex(c);
+  }
+
+  /* The daylight plate: cooler and a stop brighter than the room, which is
+     the whole reason the window reads as depth rather than as a lamp. It is
+     kept pale and hazy rather than white — a hard bright rectangle beside a
+     dark beam would win the frame, and the beam has to win the frame.
+
+     The band of distant foliage near the horizon is painted, not built. It
+     is the only thing telling the eye the garden has a far side, and it
+     costs no geometry to say so. */
+  function skyTexture() {
+    const c = ctx.canvas(512), g = c.getContext('2d');
+    const lg = g.createLinearGradient(0, 0, 0, 512);
+    lg.addColorStop(0, '#b6cee2');
+    lg.addColorStop(0.40, '#d2dfe7');
+    lg.addColorStop(0.68, '#e6ebe6');
+    lg.addColorStop(1, '#f2ede0');
+    g.fillStyle = lg;
+    g.fillRect(0, 0, 512, 512);
+
+    /* two soft banks of cloud, high enough that the window head crops them */
+    for (let i = 0; i < 22; i++) {
+      g.fillStyle = 'rgba(255,255,255,' + (0.03 + rnd() * 0.05).toFixed(3) + ')';
+      g.beginPath();
+      g.ellipse(rnd() * 512, 40 + rnd() * 130, 60 + rnd() * 110, 12 + rnd() * 18, 0, 0, 6.3);
+      g.fill();
+    }
+    /* the treeline, sitting just above where the ground plane cuts in */
+    for (let i = 0; i < 150; i++) {
+      const x = rnd() * 512, s = 10 + rnd() * 26;
+      g.fillStyle = 'rgba(118,134,128,' + (0.10 + rnd() * 0.16).toFixed(3) + ')';
+      g.beginPath();
+      g.ellipse(x, 276 + rnd() * 16, s, s * 0.62, 0, 0, 6.3);
+      g.fill();
+    }
+    const hz = g.createLinearGradient(0, 240, 0, 300);
+    hz.addColorStop(0, 'rgba(238,240,234,0)');
+    hz.addColorStop(1, 'rgba(238,240,234,0.62)');
+    g.fillStyle = hz;
+    g.fillRect(0, 240, 512, 60);
+    return ctx.tex(c);
+  }
+
+  function shadowTexture() {
+    const c = ctx.canvas(128), g = c.getContext('2d');
+    const rg = g.createRadialGradient(64, 64, 3, 64, 64, 62);
+    rg.addColorStop(0, 'rgba(42,44,34,0.72)');
+    rg.addColorStop(0.48, 'rgba(42,44,34,0.28)');
+    rg.addColorStop(1, 'rgba(42,44,34,0)');
+    g.fillStyle = rg;
+    g.fillRect(0, 0, 128, 128);
+    return new T.CanvasTexture(c);
+  }
+
+  /* ------------------------------------------------------------ the hole */
+
+  /* The back wall is world.js's, and it is two meshes: a tiled plane and the
+     rendered slab standing behind it. Both are re-cut here rather than
+     rebuilt, so the tile texture, the shadow flags and the material all
+     survive; only the outline changes. Missing either one costs nothing —
+     the tree is simply not seen, and nothing throws. */
+  function cutWall() {
+    let tile = null, slab = null;
+    scene.traverse(function (n) {
+      if (!n.isMesh || !n.geometry || !n.geometry.parameters) return;
+      const p = n.geometry.parameters, kind = n.geometry.type;
+      if (!tile && kind === 'PlaneGeometry' && p.width >= 100 && p.height >= 20 &&
+          Math.abs(n.position.z - WALL_Z) < 1.2 && Math.abs(n.rotation.x) < 0.01) tile = n;
+      if (!slab && kind === 'BoxGeometry' && p.width >= 150 && p.height >= 50 &&
+          n.position.z < WALL_Z) slab = n;
+    });
+
+    if (tile) {
+      const p = tile.geometry.parameters, w = p.width, h = p.height;
+      const outline = new T.Shape();
+      outline.moveTo(-w / 2, -h / 2);
+      outline.lineTo(w / 2, -h / 2);
+      outline.lineTo(w / 2, h / 2);
+      outline.lineTo(-w / 2, h / 2);
+      outline.closePath();
+      outline.holes.push(aperturePath(tile.position.x, tile.position.y));
+      const geo = new T.ShapeGeometry(outline, 1);
+      /* ShapeGeometry hands back raw xy as uv; the tile texture is a repeat
+         wrap and expects the plane's own 0..1, so it is recomputed here */
+      const pos = geo.attributes.position, uv = geo.attributes.uv;
+      for (let i = 0; i < pos.count; i++) {
+        uv.setXY(i, (pos.getX(i) + w / 2) / w, (pos.getY(i) + h / 2) / h);
+      }
+      uv.needsUpdate = true;
+      tile.geometry.dispose();
+      tile.geometry = geo;
+    }
+
+    if (slab) {
+      const p = slab.geometry.parameters, w = p.width, h = p.height, d = p.depth;
+      const outline = new T.Shape();
+      outline.moveTo(-w / 2, -h / 2);
+      outline.lineTo(w / 2, -h / 2);
+      outline.lineTo(w / 2, h / 2);
+      outline.lineTo(-w / 2, h / 2);
+      outline.closePath();
+      outline.holes.push(aperturePath(slab.position.x, slab.position.y));
+      const geo = new T.ExtrudeGeometry(outline, {
+        depth: d, bevelEnabled: false, curveSegments: 1,
+      });
+      geo.translate(0, 0, -d / 2);
+      slab.geometry.dispose();
+      slab.geometry = geo;
+    }
+  }
+
+  /* the opening, expressed in a mesh's own local xy */
+  function aperturePath(ox, oy) {
+    const h = new T.Path();
+    h.moveTo(AP_X0 - ox, AP_Y0 - oy);
+    h.lineTo(AP_X1 - ox, AP_Y0 - oy);
+    h.lineTo(AP_X1 - ox, AP_Y1 - oy);
+    h.lineTo(AP_X0 - ox, AP_Y1 - oy);
+    h.closePath();
+    return h;
+  }
+
+  /* --------------------------------------------------------- the joinery */
+
+  /* A hole is not a window. What makes it read as one is the thickness: a
+     lined reveal, a stone sill deep enough to catch light on its top face, a
+     casing standing proud of the tiles, and bars crossing the glass. */
+  function buildOpening() {
+    const w = AP_X1 - AP_X0, h = AP_Y1 - AP_Y0;
+    const cx = (AP_X0 + AP_X1) / 2, cy = (AP_Y0 + AP_Y1) / 2;
+    const g = new T.Group();
+
+    /* the reveal, limewashed a shade cooler than the tile so the daylight
+       read starts before the eye is through the wall */
+    g.add(ctx.box(0.12, h + 0.24, REV_DEPTH, REVEAL_LIME, { pos: [AP_X0 + 0.06, cy, REV_MID], rough: 0.86 }));
+    g.add(ctx.box(0.12, h + 0.24, REV_DEPTH, REVEAL_LIME, { pos: [AP_X1 - 0.06, cy, REV_MID], rough: 0.86 }));
+    g.add(ctx.box(w + 0.24, 0.12, REV_DEPTH, REVEAL_LIME, { pos: [cx, AP_Y1 - 0.06, REV_MID], rough: 0.86 }));
+
+    /* the sill: a stone slab running the full reveal and 0.8 proud into the
+       room, its top face flush with the bottom of the opening so the bed
+       outside carries straight on from it */
+    g.add(ctx.box(w + 0.9, 0.34, 2.70, SILL_STONE, { pos: [cx, AP_Y0 - 0.17, -21.90], rough: 0.66 }));
+
+    /* the casing. The jambs stop on the sill rather than running past it,
+       which is both how a window is trimmed and the only way two pale
+       materials here avoid interpenetrating. */
+    const jy = (AP_Y0 + AP_Y1 + 0.34) / 2, jh = h + 0.34;
+    g.add(ctx.box(0.34, jh, 0.22, CASING_OAK, { pos: [AP_X0 - 0.17, jy, WALL_Z + 0.11], rough: 0.74 }));
+    g.add(ctx.box(0.34, jh, 0.22, CASING_OAK, { pos: [AP_X1 + 0.17, jy, WALL_Z + 0.11], rough: 0.74 }));
+    g.add(ctx.box(w + 0.68, 0.34, 0.22, CASING_OAK, { pos: [cx, AP_Y1 + 0.17, WALL_Z + 0.11], rough: 0.74 }));
+
+    /* One mullion and one transom, and where they fall is deliberate. The
+       mullion stands right of everything the tree ever projects to, so no
+       bar runs down the trunk; the transom crosses the crown, which breaks
+       the canopy silhouette and stops it reading as a second round mass
+       beside the pans. */
+    g.add(ctx.box(0.22, h, 0.34, FRAME_PAINT, { pos: [MULLION_X, cy, REV_FRONT - 0.22], rough: 0.7 }));
+    g.add(ctx.box(w, 0.20, 0.34, FRAME_PAINT, { pos: [cx, TRANSOM_Y, REV_FRONT - 0.22], rough: 0.7 }));
+
+    /* the glass. Barely there — enough for the pane to catch the room, not
+       enough to grey out what is behind it. */
+    glassPane = new T.Mesh(
+      new T.PlaneGeometry(w, h),
+      new T.MeshBasicMaterial({
+        color: 0xcfe2ee, transparent: true, opacity: 0.06,
+        depthWrite: false, side: T.DoubleSide, fog: false,
+      })
+    );
+    glassPane.position.set(cx, cy, REV_FRONT - 0.30);
+    g.add(glassPane);
+
+    scene.add(g);
+  }
+
+  /* ------------------------------------------------------------- outdoors */
+
+  function buildOutside() {
+    /* The ground and the sky plate are unlit on purpose. Every light in this
+       room is warm and stage-driven, and a daylight plate that took the
+       room's colour would stop being daylight; painting them flat is the one
+       reliable way to keep outside cooler than inside on all twelve slides.
+       Both are fully hidden by the wall except through the opening. */
+    groundMesh = new T.Mesh(
+      new T.PlaneGeometry(96, 48),
+      new T.MeshBasicMaterial({ map: groundTexture(), fog: false })
+    );
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.set(20, GRADE, -47.1);
+    scene.add(groundMesh);
+
+    skyPlate = new T.Mesh(
+      new T.PlaneGeometry(64, 40),
+      new T.MeshBasicMaterial({ map: skyTexture(), fog: false })
+    );
+    skyPlate.position.set(22, 4, SKY_Z);
+    scene.add(skyPlate);
+
+    /* The tree does take light, or it would have no form. Decay is 1 rather
+       than 2 so a lamp thirty units from its subject needs a sane number;
+       the cone is tight enough that it lights the crown and the trunk and
+       nothing else in the room. */
+    keyTarget = new T.Object3D();
+    keyTarget.position.set(TREE[0], TREE[1] + 3.4, TREE[2]);
+    keySpot = new T.SpotLight(0xd8e6f0, 0, 40, 0.42, 0.7, 1);
+    keySpot.castShadow = false;
+    keySpot.position.set(34, 22, -30);
+    keySpot.target = keyTarget;
+    scene.add(keySpot, keyTarget);
+  }
+
+  /* ---------------------------------------------------------------- tree */
+
+  /* one blade, five vertices and four triangles, creased down the spine so
+     it does not vanish edge on. At this distance a leaf is six pixels and a
+     clump of foliage rather than a leaf, which is what the width is for. */
+  function leafGeometry() {
+    const pos = new Float32Array([
+      0.00, 0.00, 0.00,
+      -0.30, 0.40, -0.05,
+      0.00, 0.46, 0.07,
+      0.30, 0.40, -0.05,
+      0.00, 1.00, 0.00,
+    ]);
+    const col = new Float32Array([
+      0.62, 0.62, 0.62,
+      0.86, 0.86, 0.86,
+      1.00, 1.00, 1.00,
+      0.86, 0.86, 0.86,
+      1.00, 1.00, 0.96,
+    ]);
+    const g = new T.BufferGeometry();
+    g.setAttribute('position', new T.BufferAttribute(pos, 3));
+    g.setAttribute('color', new T.BufferAttribute(col, 3));
+    g.setIndex([0, 3, 2, 0, 2, 1, 2, 3, 4, 1, 2, 4]);
+    g.computeVertexNormals();
+    return g;
+  }
+
+  /* a tapered limb, aimed between two points the way world.js aims a chain */
+  function limb(mat, ax, ay, az, bx, by, bz, r0, r1) {
+    vA.set(ax, ay, az);
+    vB.set(bx, by, bz);
+    vD.subVectors(vB, vA);
+    const len = vD.length() || 0.0001;
+    const m = new T.Mesh(new T.CylinderGeometry(r1, r0, len, 6), mat);
+    m.position.addVectors(vA, vB).multiplyScalar(0.5);
+    m.quaternion.setFromUnitVectors(AXIS_Y, vD.divideScalar(len));
+    return m;
+  }
+
+  function buildTree() {
+    const bark = ctx.mat(BARK, { rough: 0.92, map: barkTexture() });
+    const barkPlain = ctx.mat(BARK_DARK, { rough: 0.94 });
+
+    treeGroup = new T.Group();
+    treeGroup.position.set(TREE[0], TREE[1], TREE[2]);
+    scene.add(treeGroup);
+
+    /* the trunk, closed at both ends so the buried foot never shows a hole */
+    treeGroup.add(ctx.lathe([
+      [0.00, -0.40], [1.05, -0.30], [0.95, 0.10], [0.76, 0.60], [0.63, 1.40],
+      [0.55, 2.30], [0.49, 3.10], [0.42, 3.70], [0.26, 4.05], [0.00, 4.12],
+    ], 16, BARK, { material: bark }));
+
+    /* five buttresses, each a fin extruded flat and then spun about the
+       trunk. They are 0.3 of the visible height of the tree and they are the
+       only thing that stops the trunk reading as a post pushed into a lawn. */
+    const fin = new T.Shape();
+    fin.moveTo(0.00, 1.55);
+    fin.lineTo(0.62, 0.92);
+    fin.lineTo(1.55, 0.38);
+    fin.lineTo(2.55, 0.04);
+    fin.lineTo(2.55, -0.34);
+    fin.lineTo(0.00, -0.34);
+    fin.closePath();
+    const finGeo = new T.ExtrudeGeometry(fin, { depth: 0.32, bevelEnabled: false, curveSegments: 1 });
+    finGeo.translate(0, 0, -0.16);
+    for (let i = 0; i < 5; i++) {
+      const m = new T.Mesh(finGeo, barkPlain);
+      m.rotation.y = i * 1.2566 + 0.35;
+      m.scale.set(0.82 + (i % 3) * 0.16, 0.86 + (i % 2) * 0.22, 1);
+      treeGroup.add(m);
+    }
+
+    /* Everything above the fork lives in one group so the sway is a single
+       rotation on a single node: a trunk that bends is a rubber tree. */
+    crown = new T.Group();
+    crown.position.set(0, CROWN_Y, 0);
+    treeGroup.add(crown);
+
+    /* two levels, four boughs forking into eight. Any more and the branches
+       start reading through the canopy at full leaf. */
+    for (let i = 0; i < 4; i++) {
+      const a = i * 1.5708 + 0.42;
+      const tx = Math.cos(a) * 1.55, tz = Math.sin(a) * 1.55;
+      crown.add(limb(barkPlain, Math.cos(a) * 0.18, 0.35, Math.sin(a) * 0.18, tx, 1.65, tz, 0.30, 0.17));
+      for (let k = -1; k <= 1; k += 2) {
+        const b = a + k * 0.52;
+        crown.add(limb(barkPlain, tx, 1.65, tz, Math.cos(b) * 2.60, 2.35, Math.sin(b) * 2.60, 0.16, 0.08));
+      }
+    }
+
+    /* one InstancedMesh, built once at full count. Growth moves count, scale
+       and colour; it never swaps a mesh, because a canopy that is replaced
+       between stages cannot survive being jumped into from a grid. */
+    const leafMat = ctx.mat(LEAF_FULL, { rough: 0.80, side: T.DoubleSide });
+    leafMat.vertexColors = true;
+    canopy = new T.InstancedMesh(leafGeometry(), leafMat, MAX_LEAVES);
+    canopy.frustumCulled = false;
+    crown.add(canopy);
+
+    leaf = new Float32Array(MAX_LEAVES * LEAF_STRIDE);
+    for (let i = 0; i < MAX_LEAVES; i++) {
+      const j = bitrev8(i);
+      const yv = 1 - ((j + 0.5) / MAX_LEAVES) * 2;
+      const ring = Math.sqrt(Math.max(0, 1 - yv * yv));
+      const th = j * 2.399963;
+      /* the underside is squashed, so no leaf hangs below the fork it grew
+         from and the crown keeps a flat-bottomed, wind-shaped silhouette */
+      const dy = yv < 0 ? yv * 0.55 : yv;
+      const shell = 0.66 + rnd() * 0.34;
+      const o = i * LEAF_STRIDE;
+      leaf[o] = Math.cos(th) * ring * CANOPY_R[0] * shell + (rnd() - 0.5) * 0.34;
+      leaf[o + 1] = dy * CANOPY_R[1] * shell + (rnd() - 0.5) * 0.26;
+      leaf[o + 2] = Math.sin(th) * ring * CANOPY_R[2] * shell + (rnd() - 0.5) * 0.34;
+      vDir.set(Math.cos(th) * ring, dy + 0.55, Math.sin(th) * ring).normalize();
+      leaf[o + 3] = vDir.x;
+      leaf[o + 4] = vDir.y;
+      leaf[o + 5] = vDir.z;
+      leaf[o + 6] = rnd() * 6.283;
+      leaf[o + 7] = 0.82 + rnd() * 0.46;
+      leaf[o + 8] = rnd() * 6.283;
+      /* per-leaf tone, set once. The stage tint is a material colour on top
+         of this, so one scalar still moves the whole canopy. */
+      const v = 0.80 + rnd() * 0.32;
+      cA.setRGB(v * (0.94 + rnd() * 0.12), v, v * (0.88 + rnd() * 0.10));
+      canopy.setColorAt(i, cA);
+    }
+    if (canopy.instanceColor) canopy.instanceColor.needsUpdate = true;
+
+    /* the tree is not in the sun's shadow map — the ceiling plane covers the
+       garden and would have put the whole thing in shade — so its footing is
+       a decal, laid a hair above the grade */
+    shadowDecal = new T.Mesh(
+      new T.PlaneGeometry(1, 1),
+      new T.MeshBasicMaterial({
+        map: shadowTexture(), transparent: true, opacity: 0.3,
+        depthWrite: false, fog: false,
+      })
+    );
+    shadowDecal.rotation.x = -Math.PI / 2;
+    shadowDecal.position.set(0.5, 0.03, 0.7);
+    treeGroup.add(shadowDecal);
+  }
+
+  /* --------------------------------------------------------------- writing */
+
+  function applyLive() {
+    if (!built) return;
+    const g = clamp01(live.grow);
+
+    canopy.count = Math.max(6, Math.round(MAX_LEAVES * Math.pow(g, 1.3)));
+    cA.setHex(LEAF_DULL);
+    cB.setHex(LEAF_FULL);
+    canopy.material.color.copy(cA).lerp(cB, clamp01(live.vigour));
+
+    keySpot.intensity = KEY_BASE * live.light;
+
+    skyPlate.material.color.setRGB(live.skyR, live.skyG, live.skyB);
+    /* the bed takes the same tint pulled down and toward green, so sky and
+       ground can never drift apart across a tween */
+    groundMesh.material.color.setRGB(live.skyR * 0.86, live.skyG * 0.93, live.skyB * 0.80);
+    glassPane.material.opacity = 0.03 + 0.045 * clamp01(live.light);
+
+    const s = 4.6 * (0.74 + 0.26 * g);
+    shadowDecal.scale.set(s, s, 1);
+    shadowDecal.material.opacity = (0.13 + 0.22 * g) * clamp01(live.light + 0.25);
+  }
+
+  /* Every leaf matrix is rewritten here rather than in apply(), so the pose
+     is only ever a function of live.grow and the absolute clock — a tween, a
+     pause and a jump all land on the same canopy. */
+  function writeCanopy(t, calm) {
+    if (!built) return;
+    const g = clamp01(live.grow);
+    const rf = 0.86 + 0.14 * g;
+    const sf = 0.42 + 0.58 * g;
+    const sh = calm ? 0 : 1;
+
+    crown.rotation.z = sh * (Math.sin(t * 0.29) * 0.016 + Math.sin(t * 0.61 + 1.3) * 0.008);
+    crown.rotation.x = sh * Math.cos(t * 0.23) * 0.012;
+
+    for (let i = 0; i < MAX_LEAVES; i++) {
+      const o = i * LEAF_STRIDE, ph = leaf[o + 8];
+      dummy.position.set(
+        CANOPY_C[0] + leaf[o] * rf,
+        CANOPY_C[1] + leaf[o + 1] * rf,
+        CANOPY_C[2] + leaf[o + 2] * rf
+      );
+      vDir.set(leaf[o + 3], leaf[o + 4], leaf[o + 5]);
+      dummy.quaternion.setFromUnitVectors(AXIS_Y, vDir);
+      dummy.rotateOnAxis(AXIS_Y, leaf[o + 6]);
+      dummy.rotateOnAxis(AXIS_X, sh * Math.sin(t * 1.35 + ph) * 0.20);
+      dummy.rotateOnAxis(AXIS_Z, sh * Math.cos(t * 0.95 + ph) * 0.14);
+      dummy.scale.setScalar(leaf[o + 7] * sf);
+      dummy.updateMatrix();
+      canopy.setMatrixAt(i, dummy.matrix);
+    }
+    canopy.instanceMatrix.needsUpdate = true;
+  }
+
+  /* ------------------------------------------------------------------ api */
+
+  function build(c) {
+    if (built || !c || !c.THREE || !c.scene) return;
+    ctx = c;
+    T = c.THREE;
+    scene = c.scene;
+
+    dummy = new T.Object3D();
+    vDir = new T.Vector3();
+    vA = new T.Vector3();
+    vB = new T.Vector3();
+    vD = new T.Vector3();
+    cA = new T.Color();
+    cB = new T.Color();
+    AXIS_X = new T.Vector3(1, 0, 0);
+    AXIS_Y = new T.Vector3(0, 1, 0);
+    AXIS_Z = new T.Vector3(0, 0, 1);
+
+    cutWall();
+    buildOpening();
+    buildOutside();
+    buildTree();
+
+    built = true;
+    apply('open', true);
+    writeCanopy(0, true);
+  }
+
+  /* a pure lookup, the same shape enrich.js uses: nothing here reads what
+     stage came before, so a deep link into idea3 lands on the right tree on
+     the first frame */
+  function apply(stage, instant) {
+    if (!built) return;
+    const idx = order().indexOf(stage);
+    const name = order()[idx < 0 ? 0 : idx] || 'open';
+    const s = GROVE[name] || GROVE.open;
+
+    const target = { grow: s.grow, vigour: s.vigour, light: s.light };
+    cA.setHex(s.sky);
+    target.skyR = cA.r;
+    target.skyG = cA.g;
+    target.skyB = cA.b;
+
+    if (instant || !window.gsap) {
+      Object.keys(target).forEach(function (k) { live[k] = target[k]; });
+      applyLive();
+      return;
+    }
+
+    window.gsap.killTweensOf(live);
+    /* slower than the room's 1.6: a tree filling out faster than the mood
+       changes would read as an effect rather than a season */
+    target.duration = 2.1;
+    target.ease = 'power2.inOut';
+    target.onUpdate = applyLive;
+    window.gsap.to(live, target);
+  }
+
+  function frame(t, dt, state) {
+    if (!built) return;
+    writeCanopy(t, !!(state && state.calm));
+  }
+
+  window.Grove = { build: build, apply: apply, frame: frame };
+})();
+
+/* ==========================================================================
+   THE KITCHEN AT WORK
+   Small, continuous labour in the room the balance stands in: a peel working
+   the oven mouth, smoke off the chimney, two staff behind the counter, a
+   ticket rail and a stack of boxes that grows as the deck runs.
+
+   Everything here is background. The beam's computed tilt is the argument,
+   so this file obeys three rules without exception. Nothing stands between a
+   camera and the scale — the bench worker sits at x 12, clear right of the
+   pans on every vantage, and the second is pushed out to x -23 where he
+   clears the cost pan by a comfortable margin. Nothing is louder than the
+   tokens: one muted red apron, and no second saturated colour anywhere. And
+   every motion is read straight off the absolute clock, never accumulated,
+   so a deep link into idea3 lands mid-loop rather than at the start of one.
+
+   Two things this file deliberately does not do. There is no third figure at
+   the pass: the window the grove cuts into the back wall runs from x 10.4
+   and the tree stands behind x 15.4, and a body there would be a hard dark
+   silhouette across the one thing that window exists to show. So the worker
+   and the boxes are held left of x 14, where they cover the jamb and the near
+   glass and leave the tree its own light, and the rail hangs above the
+   window's head where it crosses tile rather than sky.
+
+   And there is no customer. Everything in front of the counter is either
+   inside its footprint or close enough to the camera to fill two-thirds of
+   the frame, so the order is told by the props instead: a pad on the counter,
+   slips on the rail, and a stack of boxes that grows as the deck runs.
+   ========================================================================== */
+
+(function () {
+  /* palette additions — kept low in chroma, so the only red that carries is
+     the apron, and even that is sunk two steps below BRAND */
+  const TROUSER = 0x494f58;
+  const SHIRT = 0xd6cbb6;
+  const APRON_RED = 0x9d3325;
+  const SKIN = 0xa8825e;
+  const CAP_SLATE = 0x6f747e;
+  const PEEL_WOOD = 0x8e7355;
+  const PEEL_GRIP = 0x4a4038;
+  const RAIL_STEEL = 0x9aa0a4;
+  const SLIP_CREAM = 0xe4dbc6;
+  const BOX_CREAM = 0xe6ddca;
+
+  /* ------------------------------------------------------------- the oven */
+
+  /* world.js stands the oven at x -30, z -6, turned 0.34 toward the room, so
+     the mouth and the chimney are derived from that turn rather than typed
+     in twice: move the oven and the peel still lines up with the arch. */
+  const OVEN_X = -30, OVEN_Z = -6, OVEN_RY = 0.34;
+  const AX = Math.sin(OVEN_RY), AZ = Math.cos(OVEN_RY);
+  const MOUTH_X = OVEN_X + 8.6 * AX;
+  const MOUTH_Z = OVEN_Z + 8.6 * AZ;
+  const MOUTH_Y = 1.70;                 /* the height a loaded peel rides at */
+  const CHIM_X = OVEN_X + 0.4 * AZ - 0.6 * AX;
+  const CHIM_Z = OVEN_Z - 0.4 * AX - 0.6 * AZ;
+  const CHIM_Y = 13.6;
+
+  /* One full bake, in one loop: dough in, peel back out empty, a long dwell
+     while it cooks, then in again and out with the finished pizza. Twenty-
+     seven seconds is slow enough that a viewer registers it without ever
+     being pulled left toward it. */
+  const PEEL_PERIOD = 27;
+  const PEEL_OUT = 3.4, PEEL_IN = -5.2;
+  const PEEL_REST = 0.45;               /* the phase a stilled deck parks on */
+  const SMOKE_N = 12;
+
+  /* ------------------------------------------------------------- the staff */
+
+  /* The counter top is a slab at y 0 and the floor is 11.4 below it, so a
+     figure standing behind the counter is cut off at the waist by the slab
+     itself from every vantage in the deck. That is the whole reason these two
+     stand where they do: only head, shoulders and the top of an apron ever
+     read, which is a fifth of frame height against the scale's third. Depth
+     is not free either — z -19.3 is the one lane wide enough to clear the
+     counter's back edge in front and the window's stone sill behind. */
+  const FLOOR = -11.4;
+  const STAFF_Z = -19.3;
+  const STAFF = [
+    /* the bench: nearest thing this deck has to a foreground worker, kneading */
+    { x: 12.1, ry: 0.12, bob: [1.45, 0.34], turn: [0.37, 0.10], lean: [1.45, 0.055] },
+    /* the oven: far left, read through the type, so he is a silhouette that
+       turns toward the fire and back and nothing more */
+    { x: -23.0, ry: -0.48, bob: [0.70, 0.12], turn: [0.23, 0.30], lean: [0.70, 0.022] },
+  ];
+
+  /* ----------------------------------------------------------- the service */
+
+  /* the rail hangs off the shelf above the window's head, so the slips flutter
+     against tile rather than against the sky */
+  const RAIL_X = 13.7, RAIL_Y = 10.75, RAIL_Z = -16.2;
+  const TICKETS = 7;
+  const TICKET_X0 = 11.9, TICKET_DX = 0.62;
+
+  /* the free pocket of counter behind the cup and in front of the back edge.
+     Everything else on this side of the room is already spoken for. */
+  const BOX_MAX = 6;
+  const BOX_X = 11.6, BOX_Z = -15.8, BOX_Y0 = 0.36, BOX_STEP = 0.74;
+  /* hand-stacked, not machine-stacked: a little offset and yaw per box */
+  const BOX_JITTER = [
+    [0.00, 0.00, 0.05], [-0.16, 0.12, -0.07], [0.10, -0.14, 0.03],
+    [-0.08, 0.06, -0.04], [0.14, 0.10, 0.08], [-0.05, -0.09, -0.02],
+  ];
+
+  /* --------------------------------------------------------- the per-stage */
+
+  /* One scalar for how hard the kitchen is working, one for how many boxes
+     have gone out. Both are pure lookups on the stage name: the kitchen does
+     the same job all deck, swells a little into the reveal, and all but stops
+     at gap, where the room is meant to feel like it is holding its breath. */
+  const ACTIVITY = {
+    open: 0.55, framework: 0.62, ramadan: 0.70, christmas: 0.74,
+    welfare: 0.70, environment: 0.70, gap: 0.22, idea1: 0.80,
+    idea2: 0.80, idea3: 0.82, idea4: 0.86, fullreveal: 1.00,
+  };
+  const BOXES = {
+    open: 1, framework: 2, ramadan: 2, christmas: 3,
+    welfare: 3, environment: 3, gap: 3, idea1: 4,
+    idea2: 4, idea3: 5, idea4: 5, fullreveal: 6,
+  };
+
+  /* --------------------------------------------------------- module state */
+
+  let T = null, ctx = null, built = false;
+  let scene = null, camera = null;
+
+  let staffFigures, peelGroup, peelPizza, smokePuffs;
+  let ticketStation, ticketSlips, boxStack;
+
+  let dummy = null, scratchColor = null;
+
+  const live = { busy: 0.55, stack: 1 };
+
+  /* ---------------------------------------------------------------- utils */
+
+  function clamp01(v) {
+    return v < 0 ? 0 : (v > 1 ? 1 : v);
+  }
+
+  function smooth(v) {
+    const k = clamp01(v);
+    return k * k * (3 - 2 * k);
+  }
+
+  function lerp(a, b, k) {
+    return a + (b - a) * k;
+  }
+
+  /* three's merge utility is an addon and only the core build is vendored, so
+     the walk is done here: each part is baked into the group's space once and
+     its colour rides along as a vertex colour. A whole figure, or the whole
+     ticket station, is then one geometry and one draw call. */
+  function bake(parts) {
+    let total = 0, i, v;
+    const flat = [];
+    for (i = 0; i < parts.length; i++) {
+      const p = parts[i];
+      const g = p.geo.index ? p.geo.toNonIndexed() : p.geo.clone();
+      const q = p.pos || [0, 0, 0], r = p.rot || [0, 0, 0];
+      dummy.position.set(q[0], q[1], q[2]);
+      dummy.rotation.set(r[0], r[1], r[2]);
+      dummy.scale.set(1, 1, 1);
+      dummy.updateMatrix();
+      g.applyMatrix4(dummy.matrix);
+      flat.push(g);
+      total += g.attributes.position.count;
+    }
+    const pos = new Float32Array(total * 3);
+    const nor = new Float32Array(total * 3);
+    const col = new Float32Array(total * 3);
+    let o = 0;
+    for (i = 0; i < parts.length; i++) {
+      const n = flat[i].attributes.position.count;
+      pos.set(flat[i].attributes.position.array, o * 3);
+      nor.set(flat[i].attributes.normal.array, o * 3);
+      scratchColor.setHex(parts[i].color);
+      for (v = 0; v < n; v++) {
+        const w = (o + v) * 3;
+        col[w] = scratchColor.r; col[w + 1] = scratchColor.g; col[w + 2] = scratchColor.b;
+      }
+      o += n;
+    }
+    const out = new T.BufferGeometry();
+    out.setAttribute('position', new T.BufferAttribute(pos, 3));
+    out.setAttribute('normal', new T.BufferAttribute(nor, 3));
+    out.setAttribute('color', new T.BufferAttribute(col, 3));
+    return out;
+  }
+
+  function vertexMat() {
+    const m = ctx.mat(0xffffff, { rough: 0.78 });
+    m.vertexColors = true;
+    return m;
+  }
+
+  /* ------------------------------------------------------------- textures */
+
+  /* Small enough on screen to be a coin, so it is drawn as one: a rim, a
+     field of sauce kept off the brand red, and four blots of cheese. */
+  function pizzaTexture() {
+    const c = ctx.canvas(128), g = c.getContext('2d');
+    g.clearRect(0, 0, 128, 128);
+    g.fillStyle = '#c9a468';
+    g.beginPath(); g.arc(64, 64, 64, 0, 7); g.fill();
+    g.fillStyle = '#a8542c';
+    g.beginPath(); g.arc(64, 64, 52, 0, 7); g.fill();
+    g.fillStyle = 'rgba(240,207,133,0.85)';
+    [[52, 50, 13], [78, 58, 11], [58, 84, 12], [82, 84, 9]].forEach(function (b) {
+      g.beginPath(); g.arc(b[0], b[1], b[2], 0, 7); g.fill();
+    });
+    return ctx.tex(c);
+  }
+
+  function puffTexture() {
+    const c = ctx.canvas(64), g = c.getContext('2d');
+    const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    rg.addColorStop(0, 'rgba(255,246,232,0.85)');
+    rg.addColorStop(0.45, 'rgba(226,214,198,0.30)');
+    rg.addColorStop(1, 'rgba(200,190,176,0)');
+    g.fillStyle = rg; g.fillRect(0, 0, 64, 64);
+    return new T.CanvasTexture(c);
+  }
+
+  /* --------------------------------------------------------------- builds */
+
+  /* One body, instanced per station. They wear the same uniform because they
+     work in the same kitchen, and the variety that matters at this distance
+     is where they stand and how they move, not what they are made of. */
+  function figureParts() {
+    return [
+      { geo: new T.BoxGeometry(3.2, 8.6, 2.1), color: TROUSER, pos: [0, 4.3, 0] },
+      { geo: new T.BoxGeometry(4.2, 6.6, 2.5), color: SHIRT, pos: [0, 11.9, 0] },
+      { geo: new T.BoxGeometry(3.5, 6.2, 0.3), color: APRON_RED, pos: [0, 11.0, 1.34] },
+      { geo: new T.BoxGeometry(0.9, 4.4, 1.0), color: SHIRT, pos: [-2.05, 12.3, 0.55], rot: [-0.35, 0, 0] },
+      { geo: new T.BoxGeometry(0.9, 4.4, 1.0), color: SHIRT, pos: [2.05, 12.3, 0.55], rot: [-0.35, 0, 0] },
+      { geo: new T.CylinderGeometry(0.42, 0.42, 0.9, 8), color: SKIN, pos: [0, 15.6, 0] },
+      { geo: new T.SphereGeometry(1.28, 10, 8), color: SKIN, pos: [0, 16.9, 0] },
+      { geo: new T.CylinderGeometry(1.36, 1.44, 0.5, 12), color: CAP_SLATE, pos: [0, 17.86, 0] },
+      { geo: new T.BoxGeometry(1.6, 0.16, 0.95), color: CAP_SLATE, pos: [0, 17.66, 1.15] },
+    ];
+  }
+
+  function buildStaff() {
+    staffFigures = new T.InstancedMesh(bake(figureParts()), vertexMat(), STAFF.length);
+    staffFigures.castShadow = false;
+    staffFigures.frustumCulled = false;
+    scene.add(staffFigures);
+  }
+
+  /* The peel runs along the oven's own axis, which puts its handle out past
+     the left edge of frame on every close vantage and behind the text column
+     on the two wide ones — so the hand that works it is never asked for. */
+  function buildOvenWork() {
+    peelGroup = new T.Group();
+    peelGroup.position.set(MOUTH_X, MOUTH_Y, MOUTH_Z);
+    peelGroup.rotation.set(-0.045, OVEN_RY, 0);
+    scene.add(peelGroup);
+
+    peelGroup.add(new T.Mesh(bake([
+      { geo: new T.BoxGeometry(3.6, 0.16, 3.4), color: PEEL_WOOD, pos: [0, 0, 0] },
+      { geo: new T.BoxGeometry(1.1, 0.14, 1.7), color: PEEL_WOOD, pos: [0, 0.02, 2.5] },
+      { geo: new T.CylinderGeometry(0.20, 0.22, 10.4, 8), color: PEEL_WOOD, pos: [0, 0.12, 8.2], rot: [Math.PI / 2, 0, 0] },
+      { geo: new T.CylinderGeometry(0.30, 0.28, 1.2, 8), color: PEEL_GRIP, pos: [0, 0.12, 13.9], rot: [Math.PI / 2, 0, 0] },
+    ]), vertexMat()));
+
+    peelPizza = new T.Mesh(
+      new T.CircleGeometry(1.45, 20),
+      ctx.mat(0xffffff, { rough: 0.84, map: pizzaTexture() })
+    );
+    peelPizza.rotation.x = -Math.PI / 2;
+    peelPizza.position.set(0, 0.13, 0.1);
+    peelGroup.add(peelPizza);
+
+    /* Additive, so the fade is carried by the instance colour and a spent
+       puff costs nothing rather than sitting there as a grey patch. Lit this
+       way it reads as smoke catching the fire under it, which is the only
+       way it would be visible against a dark ceiling at all. */
+    smokePuffs = new T.InstancedMesh(
+      new T.PlaneGeometry(1, 1),
+      new T.MeshBasicMaterial({
+        map: puffTexture(), transparent: true, opacity: 0.5,
+        depthWrite: false, blending: T.AdditiveBlending, fog: false,
+      }),
+      SMOKE_N
+    );
+    smokePuffs.frustumCulled = false;
+    scratchColor.setRGB(0, 0, 0);
+    for (let i = 0; i < SMOKE_N; i++) smokePuffs.setColorAt(i, scratchColor);
+    scene.add(smokePuffs);
+  }
+
+  /* rail, its two droppers off the shelf, the pad and a pencil: one static
+     mesh, because none of it ever moves and all of it is small */
+  function buildService() {
+    ticketStation = new T.Mesh(bake([
+      { geo: new T.CylinderGeometry(0.09, 0.09, 4.6, 8), color: RAIL_STEEL, pos: [RAIL_X, RAIL_Y, RAIL_Z], rot: [0, 0, Math.PI / 2] },
+      { geo: new T.CylinderGeometry(0.06, 0.06, 0.9, 6), color: RAIL_STEEL, pos: [RAIL_X - 2.0, RAIL_Y + 0.45, RAIL_Z] },
+      { geo: new T.CylinderGeometry(0.06, 0.06, 0.9, 6), color: RAIL_STEEL, pos: [RAIL_X + 2.0, RAIL_Y + 0.45, RAIL_Z] },
+      /* the pad, out on the open counter where nothing else stands */
+      { geo: new T.BoxGeometry(1.9, 0.14, 2.5), color: SLIP_CREAM, pos: [12.6, 0.07, -6.5], rot: [0, 0.18, 0] },
+      { geo: new T.CylinderGeometry(0.07, 0.07, 1.5, 6), color: PEEL_GRIP, pos: [12.9, 0.2, -8.0], rot: [0, 0.4, Math.PI / 2] },
+    ]), vertexMat());
+    ticketStation.castShadow = false;
+    scene.add(ticketStation);
+
+    /* anchored at the top edge so the flutter reads as a hinge on the rail */
+    const slip = new T.PlaneGeometry(0.8, 1.5);
+    slip.translate(0, -0.75, 0);
+    ticketSlips = new T.InstancedMesh(
+      slip, ctx.mat(SLIP_CREAM, { rough: 0.9, side: T.DoubleSide }), TICKETS
+    );
+    ticketSlips.castShadow = false;
+    ticketSlips.frustumCulled = false;
+    scene.add(ticketSlips);
+
+    boxStack = new T.InstancedMesh(
+      new T.BoxGeometry(4.2, 0.72, 4.2), ctx.mat(BOX_CREAM, { rough: 0.9 }), BOX_MAX
+    );
+    boxStack.castShadow = false;
+    scene.add(boxStack);
+  }
+
+  /* -------------------------------------------------------------- placing */
+
+  function placeStaff(amp, t) {
+    for (let i = 0; i < STAFF.length; i++) {
+      const f = STAFF[i], ph = i * 1.7;
+      dummy.position.set(
+        f.x,
+        FLOOR + Math.sin(t * f.bob[0] + ph) * f.bob[1] * amp,
+        STAFF_Z
+      );
+      dummy.rotation.set(
+        Math.sin(t * f.lean[0] + ph + 0.5) * f.lean[1] * amp,
+        f.ry + Math.sin(t * f.turn[0] + ph) * f.turn[1] * amp,
+        0
+      );
+      dummy.scale.set(1, 1, 1);
+      dummy.updateMatrix();
+      staffFigures.setMatrixAt(i, dummy.matrix);
+    }
+    staffFigures.instanceMatrix.needsUpdate = true;
+  }
+
+  /* how far the paddle sits past the mouth plane at this point in the bake.
+     Negative is inside the oven. */
+  function peelSlide(p) {
+    if (p < 0.10) return PEEL_OUT;
+    if (p < 0.22) return lerp(PEEL_OUT, PEEL_IN, smooth((p - 0.10) / 0.12));
+    if (p < 0.32) return lerp(PEEL_IN, PEEL_OUT, smooth((p - 0.22) / 0.10));
+    if (p < 0.62) return PEEL_OUT;
+    if (p < 0.72) return lerp(PEEL_OUT, PEEL_IN, smooth((p - 0.62) / 0.10));
+    if (p < 0.84) return lerp(PEEL_IN, PEEL_OUT, smooth((p - 0.72) / 0.12));
+    return PEEL_OUT;
+  }
+
+  function placePeel(amp, t) {
+    /* a stilled deck parks the peel in the dwell, empty and outside; a quiet
+       stage keeps the loop running but shortens its travel, which is cheaper
+       to read than a slowed clock and stays a pure function of t */
+    const p = amp <= 0 ? PEEL_REST : (t / PEEL_PERIOD) % 1;
+    const s = PEEL_OUT + (peelSlide(p) - PEEL_OUT) * (amp <= 0 ? 1 : amp);
+    peelGroup.position.set(MOUTH_X + AX * s, MOUTH_Y, MOUTH_Z + AZ * s);
+
+    /* dough rides in and is left there; the peel comes back for it later and
+       carries the baked one out to the bench */
+    const raw = p < 0.24, done = p >= 0.72 && p < 0.96;
+    peelPizza.visible = amp > 0 && (raw || done);
+    if (peelPizza.visible) {
+      if (raw) peelPizza.material.color.setRGB(0.80, 0.76, 0.66);
+      else peelPizza.material.color.setRGB(1, 0.96, 0.90);
+    }
+  }
+
+  function placeSmoke(amp, t) {
+    for (let i = 0; i < SMOKE_N; i++) {
+      let p = (t * 0.052 + i / SMOKE_N) % 1;
+      if (p < 0) p += 1;
+      const rise = p * 11.5;
+      dummy.position.set(
+        CHIM_X + Math.sin(p * 2.6 + i * 1.9) * 0.8 + rise * 0.16,
+        CHIM_Y + rise,
+        CHIM_Z + Math.cos(p * 2.1 + i * 1.3) * 0.6 - rise * 0.05
+      );
+      if (camera) dummy.quaternion.copy(camera.quaternion);
+      dummy.scale.setScalar(1.5 + p * 5.2);
+      dummy.updateMatrix();
+      smokePuffs.setMatrixAt(i, dummy.matrix);
+
+      /* squared, so a puff arrives soft rather than switching on at the cap */
+      const env = Math.sin(p * Math.PI);
+      const k = env * env * 0.5 * amp;
+      scratchColor.setRGB(k * 0.46, k * 0.40, k * 0.34);
+      smokePuffs.setColorAt(i, scratchColor);
+    }
+    smokePuffs.instanceMatrix.needsUpdate = true;
+    if (smokePuffs.instanceColor) smokePuffs.instanceColor.needsUpdate = true;
+  }
+
+  function placeTickets(amp, t) {
+    for (let i = 0; i < TICKETS; i++) {
+      const ph = i * 0.83;
+      dummy.position.set(TICKET_X0 + i * TICKET_DX, RAIL_Y - 0.05, RAIL_Z);
+      dummy.rotation.set(
+        0.06 + Math.sin(t * 1.15 + ph) * 0.14 * amp,
+        (i % 2 ? 0.06 : -0.05) + Math.sin(t * 0.63 + ph * 1.7) * 0.20 * amp,
+        Math.sin(t * 0.90 + ph) * 0.05 * amp
+      );
+      dummy.scale.set(1, 1, 1);
+      dummy.updateMatrix();
+      ticketSlips.setMatrixAt(i, dummy.matrix);
+    }
+    ticketSlips.instanceMatrix.needsUpdate = true;
+  }
+
+  /* --------------------------------------------------------------- writing */
+
+  function applyLive() {
+    if (!built) return;
+    for (let i = 0; i < BOX_MAX; i++) {
+      const g = clamp01(live.stack - i), j = BOX_JITTER[i];
+      dummy.position.set(
+        BOX_X + j[0], BOX_Y0 + i * BOX_STEP + (1 - g) * 0.6, BOX_Z + j[1]
+      );
+      dummy.rotation.set(0, j[2], 0);
+      dummy.scale.setScalar(Math.max(0.0001, g));
+      dummy.updateMatrix();
+      boxStack.setMatrixAt(i, dummy.matrix);
+    }
+    boxStack.instanceMatrix.needsUpdate = true;
+  }
+
+  /* ------------------------------------------------------------------ api */
+
+  function build(c) {
+    if (built || !c || !c.THREE || !c.scene) return;
+    ctx = c;
+    T = c.THREE;
+    scene = c.scene;
+    camera = c.camera;
+
+    dummy = new T.Object3D();
+    scratchColor = new T.Color();
+
+    buildStaff();
+    buildOvenWork();
+    buildService();
+
+    built = true;
+    apply('open', true);
+    frame(0, 0, null);
+  }
+
+  function apply(stage, instant) {
+    if (!built) return;
+    const target = {
+      busy: ACTIVITY[stage] === undefined ? ACTIVITY.open : ACTIVITY[stage],
+      stack: BOXES[stage] === undefined ? BOXES.open : BOXES[stage],
+    };
+
+    if (instant || !window.gsap) {
+      live.busy = target.busy;
+      live.stack = target.stack;
+      applyLive();
+      return;
+    }
+
+    window.gsap.killTweensOf(live);
+    target.duration = 1.4;
+    target.ease = 'power2.inOut';
+    target.onUpdate = applyLive;
+    window.gsap.to(live, target);
+  }
+
+  function frame(t, dt, state) {
+    if (!built) return;
+    /* one amplitude for the whole kitchen: zero on a stilled deck, a quarter
+       at gap, full into the reveal. Nothing else reads the stage. */
+    const amp = (state && state.calm) ? 0 : live.busy;
+    placeStaff(amp, t);
+    placePeel(amp, t);
+    placeSmoke(amp, t);
+    placeTickets(amp, t);
+  }
+
+  window.Life = { build: build, apply: apply, frame: frame };
+})();
 
 /* ==========================================================================
    THE GIVING SCALE
@@ -4016,9 +5198,10 @@ const World = (function () {
       [0.240, 2.730], [0.280, 2.786], [0.288, 2.840], [0.252, 2.872],
       [0.000, 2.882],
     ], 24, BRASS, { material: brass }));
-    /* two darker mouldings, so the profile has shadow lines in it */
+    /* a darker moulding in the ogee, so the flare has a shadow line in it.
+       The astragal higher up is turned into the profile itself and wants no
+       ring over it. */
     S.group.add(cyl(0.700, 0.700, 0.048, 24, 0xb8901f, { material: brassWarm, pos: [0, 0.352, 0] }));
-    S.group.add(cyl(0.278, 0.278, 0.040, 22, 0xb8901f, { material: brassWarm, pos: [0, 0.880, 0] }));
 
     /* the engraved collar */
     const collar = new T.Mesh(
@@ -4201,9 +5384,11 @@ const World = (function () {
     key.position.set(8, 11, 11);
     scene.add(key);
 
-    /* the plinth is 2.96 units across once the group is scaled, so it wants
-       a tight dark contact under it and a soft one around that */
-    scene.add(contact(0, 0, 4.0, 0.32, 0.045), contact(0, 0, 2.7, 0.5, 0.062));
+    /* Once the group is scaled the plinth is 2.96 units across, and a
+       contact blob only shows outside the thing it sits under — the middle
+       of it is inside the oak. So both of these are drawn well wider than
+       the base: what reads is the ring of them that escapes. */
+    scene.add(contact(0, 0, 5.2, 0.42, 0.045), contact(0, 0, 3.9, 0.5, 0.062));
   }
 
   /* ------------------------------------------------------------- the steps */

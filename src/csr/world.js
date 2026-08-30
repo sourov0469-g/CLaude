@@ -998,9 +998,10 @@ const World = (function () {
       [0.240, 2.730], [0.280, 2.786], [0.288, 2.840], [0.252, 2.872],
       [0.000, 2.882],
     ], 24, BRASS, { material: brass }));
-    /* two darker mouldings, so the profile has shadow lines in it */
+    /* a darker moulding in the ogee, so the flare has a shadow line in it.
+       The astragal higher up is turned into the profile itself and wants no
+       ring over it. */
     S.group.add(cyl(0.700, 0.700, 0.048, 24, 0xb8901f, { material: brassWarm, pos: [0, 0.352, 0] }));
-    S.group.add(cyl(0.278, 0.278, 0.040, 22, 0xb8901f, { material: brassWarm, pos: [0, 0.880, 0] }));
 
     /* the engraved collar */
     const collar = new T.Mesh(
@@ -1183,9 +1184,11 @@ const World = (function () {
     key.position.set(8, 11, 11);
     scene.add(key);
 
-    /* the plinth is 2.96 units across once the group is scaled, so it wants
-       a tight dark contact under it and a soft one around that */
-    scene.add(contact(0, 0, 4.0, 0.32, 0.045), contact(0, 0, 2.7, 0.5, 0.062));
+    /* Once the group is scaled the plinth is 2.96 units across, and a
+       contact blob only shows outside the thing it sits under — the middle
+       of it is inside the oak. So both of these are drawn well wider than
+       the base: what reads is the ring of them that escapes. */
+    scene.add(contact(0, 0, 5.2, 0.42, 0.045), contact(0, 0, 3.9, 0.5, 0.062));
   }
 
   /* ------------------------------------------------------------- the steps */
