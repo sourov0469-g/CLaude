@@ -1692,7 +1692,7 @@ VIS.team = function () {
     'gap', 'idea1', 'idea2', 'idea3', 'idea4', 'fullreveal',
   ];
 
-  /* palette additions — the nine hexes this pass introduces */
+  /* palette additions — the hexes this pass introduces */
   const DUSK_SLATE = 0x232a3d;
   const TASK_WHITE = 0xfff2d9;
   const FROST_TEAL = 0x7fc6c9;
@@ -1700,30 +1700,49 @@ VIS.team = function () {
   const REVEAL_GOLD = 0xffe9b0;
   const DUST_GOLD = 0xffd98a;
   const DUST_COOL = 0xb9c4c9;
-  const FOG_DUSK = 0x3a2420;
+  const FOG_DUSK = 0x241a20;
+  const EMBER = 0xff8a34;          /* the oven fire, the room's only warm practical */
   const STRAP_LEATHER = 0x6b4a32;  /* the tab a medallion hangs from */
   const GAUGE_BRONZE = 0x584627;   /* the gauge arc, sunk into the post assembly */
+  const SOIL_LOAM = 0x3b2a1c;      /* what the blades come out of */
 
   const LEAF_DRY = 0x8a8449;   /* the olive the plants fall toward at gap */
 
   /* ------------------------------------------------------------------ mood */
 
+  /* Lights in three r160 are physical: a spot's contribution falls off as
+     1/distance^decay, so a lamp standing seven units off its subject at
+     intensity 2 delivers almost nothing, which is why the mood key used to
+     be a tint rather than a key. MOOD below keeps its readable 0.3–3.5
+     relative scale and these three gains turn it into candela at the
+     distances the rig actually stands at. Move a gain to shift the whole
+     deck; move a table row to shift one stage. */
+  const KEY_GAIN = 34;    /* moodKeyLight, ~14 units off the pan it rakes */
+  const EDGE_GAIN = 145;  /* beamEdge, ~16 units behind and above the beam */
+  const OVEN_GAIN = 90;   /* the two oven practicals, ~10 units off the brick */
+
   /* MOOD owns the fog colour. It does not touch fog distance — that is
      ATMOS's, and splitting them this way is the whole reason neither table
-     can fight the other. */
+     can fight the other.
+
+     Exposure runs lower here than a lit-from-nowhere room wants, and the key
+     runs higher, because the point is contrast rather than brightness: the
+     scale should be the one thing in frame carrying a highlight. The fog
+     colours are all darker and cooler than the stage's own key, so the back
+     wall falls away from the counter instead of matching it. */
   const MOOD = {
-    open:        { keyColor: 0x8fa2c4, keyIntensity: 0.7, rimColor: DUSK_SLATE,  rimIntensity: 0.55, fogColor: FOG_DUSK,   exposure: 0.62 },
-    framework:   { keyColor: 0xfff0dc, keyIntensity: 1.5, rimColor: 0xcfd8e6,    rimIntensity: 0.55, fogColor: 0xe8dcc8,   exposure: 0.86 },
-    ramadan:     { keyColor: 0xffb35c, keyIntensity: 2.2, rimColor: 0x7a6a92,    rimIntensity: 0.60, fogColor: 0x4a2f22,   exposure: 0.80 },
-    christmas:   { keyColor: 0xffd9a8, keyIntensity: 2.0, rimColor: FROST_TEAL,  rimIntensity: 0.90, fogColor: 0x2f3a3f,   exposure: 0.82 },
-    welfare:     { keyColor: TASK_WHITE, keyIntensity: 2.4, rimColor: 0xb8c2cc,  rimIntensity: 0.60, fogColor: 0x40342a,   exposure: 0.84 },
-    environment: { keyColor: 0xbcd39a, keyIntensity: 2.1, rimColor: 0x8fae6e,    rimIntensity: 0.90, fogColor: 0x2f3a2c,   exposure: 0.84 },
-    gap:         { keyColor: GAP_ASH,  keyIntensity: 0.35, rimColor: GAP_ASH,    rimIntensity: 0.30, fogColor: GAP_ASH,    exposure: 0.54 },
-    idea1:       { keyColor: 0xffc27a, keyIntensity: 2.6, rimColor: 0xffa860,    rimIntensity: 0.70, fogColor: 0x4a3222,   exposure: 0.86 },
-    idea2:       { keyColor: 0x9fd8bc, keyIntensity: 2.4, rimColor: 0x6fb8b0,    rimIntensity: 0.85, fogColor: 0x2c3a34,   exposure: 0.86 },
-    idea3:       { keyColor: 0x9aaad0, keyIntensity: 2.6, rimColor: 0x2b3550,    rimIntensity: 1.00, fogColor: DUSK_SLATE, exposure: 0.82 },
-    idea4:       { keyColor: 0xe23b2e, keyIntensity: 3.2, rimColor: 0xff7a4a,    rimIntensity: 1.10, fogColor: 0x3a1c18,   exposure: 0.88 },
-    fullreveal:  { keyColor: REVEAL_GOLD, keyIntensity: 3.4, rimColor: 0xffb35c, rimIntensity: 1.20, fogColor: 0x5a3a26,   exposure: 0.98 },
+    open:        { keyColor: 0x8fa2c4, keyIntensity: 0.8, rimColor: DUSK_SLATE,  rimIntensity: 0.70, fogColor: FOG_DUSK,   exposure: 0.60, ovenFire: 0.55 },
+    framework:   { keyColor: 0xfff0dc, keyIntensity: 1.6, rimColor: 0xcfd8e6,    rimIntensity: 0.70, fogColor: 0x5f6068,   exposure: 0.78, ovenFire: 0.50 },
+    ramadan:     { keyColor: 0xffb35c, keyIntensity: 2.3, rimColor: 0x7a6a92,    rimIntensity: 0.80, fogColor: 0x2e2130,   exposure: 0.74, ovenFire: 1.00 },
+    christmas:   { keyColor: 0xffd9a8, keyIntensity: 2.1, rimColor: FROST_TEAL,  rimIntensity: 1.10, fogColor: 0x223038,   exposure: 0.75, ovenFire: 0.60 },
+    welfare:     { keyColor: TASK_WHITE, keyIntensity: 2.5, rimColor: 0xb8c2cc,  rimIntensity: 0.80, fogColor: 0x30303a,   exposure: 0.76, ovenFire: 0.60 },
+    environment: { keyColor: 0xbcd39a, keyIntensity: 2.2, rimColor: 0x8fae6e,    rimIntensity: 1.10, fogColor: 0x24322e,   exposure: 0.76, ovenFire: 0.55 },
+    gap:         { keyColor: GAP_ASH,  keyIntensity: 0.40, rimColor: GAP_ASH,    rimIntensity: 0.35, fogColor: 0x2a3240,   exposure: 0.56, ovenFire: 0.22 },
+    idea1:       { keyColor: 0xffc27a, keyIntensity: 2.7, rimColor: 0xffa860,    rimIntensity: 0.90, fogColor: 0x33241c,   exposure: 0.78, ovenFire: 1.00 },
+    idea2:       { keyColor: 0x9fd8bc, keyIntensity: 2.5, rimColor: 0x6fb8b0,    rimIntensity: 1.05, fogColor: 0x1e2c2a,   exposure: 0.78, ovenFire: 0.60 },
+    idea3:       { keyColor: 0x9aaad0, keyIntensity: 2.7, rimColor: 0x2b3550,    rimIntensity: 1.20, fogColor: DUSK_SLATE, exposure: 0.75, ovenFire: 0.50 },
+    idea4:       { keyColor: 0xe23b2e, keyIntensity: 3.3, rimColor: 0xff7a4a,    rimIntensity: 1.30, fogColor: 0x2a1416,   exposure: 0.80, ovenFire: 1.00 },
+    fullreveal:  { keyColor: REVEAL_GOLD, keyIntensity: 3.5, rimColor: 0xffb35c, rimIntensity: 1.40, fogColor: 0x3a2620,   exposure: 0.88, ovenFire: 0.95 },
   };
 
   /* how hard the key light breathes, per stage. idea4 is the fastest and
@@ -1746,20 +1765,31 @@ VIS.team = function () {
 
   /* ------------------------------------------------------------- atmosphere */
 
-  /* ATMOS owns fog near/far. Never the colour. */
+  /* ATMOS owns fog near/far. Never the colour.
+
+     near/far are matched to each stage's own vantage rather than left flat.
+     world.js parks the camera 38–58 units from the beam and the back wall
+     sits another 20 behind that, so a near plane of 90 — which is where these
+     started — put the whole room in front of the fog and the fog did nothing
+     at all. Setting near just past the subject and far a little past the wall
+     is what makes the wall recede while the scale stays clear of it.
+
+     grade is how hard the counter's falloff bites; it is heaviest at gap,
+     where the room should feel like it is closing in, and lightest at the
+     reveal, where the counter is allowed to come back up. */
   const ATMOS = {
-    open:        { fogNear: 72, fogFar: 170, dustDensity: 0.30, dustTint: DUST_COOL, skyTint: 0x5c6478, shaftIntensity: 0.05 },
-    framework:   { fogNear: 66, fogFar: 190, dustDensity: 0.42, dustTint: 0xd6d2c8, skyTint: 0x9aa0a8, shaftIntensity: 0.18 },
-    ramadan:     { fogNear: 72, fogFar: 200, dustDensity: 0.50, dustTint: 0xe8c898, skyTint: 0xb08a6a, shaftIntensity: 0.30 },
-    christmas:   { fogNear: 74, fogFar: 202, dustDensity: 0.55, dustTint: 0xd8d4c4, skyTint: 0x9ab0b4, shaftIntensity: 0.32 },
-    welfare:     { fogNear: 78, fogFar: 206, dustDensity: 0.58, dustTint: 0xe4d6bc, skyTint: 0xb4a892, shaftIntensity: 0.36 },
-    environment: { fogNear: 80, fogFar: 208, dustDensity: 0.60, dustTint: 0xd4dcc0, skyTint: 0xa8b898, shaftIntensity: 0.40 },
-    gap:         { fogNear: 66, fogFar: 160, dustDensity: 0.72, dustTint: DUST_COOL, skyTint: 0x555f70, shaftIntensity: 0.06 },
-    idea1:       { fogNear: 84, fogFar: 214, dustDensity: 0.66, dustTint: DUST_GOLD, skyTint: 0xd0a274, shaftIntensity: 0.55 },
-    idea2:       { fogNear: 88, fogFar: 220, dustDensity: 0.70, dustTint: 0xcfe4cf, skyTint: 0xa8c4b4, shaftIntensity: 0.62 },
-    idea3:       { fogNear: 90, fogFar: 222, dustDensity: 0.72, dustTint: 0xc8cee0, skyTint: 0x8c96b4, shaftIntensity: 0.66 },
-    idea4:       { fogNear: 92, fogFar: 226, dustDensity: 0.80, dustTint: 0xffc39a, skyTint: 0xd08a70, shaftIntensity: 0.78 },
-    fullreveal:  { fogNear: 96, fogFar: 240, dustDensity: 0.92, dustTint: DUST_GOLD, skyTint: 0xe8c48c, shaftIntensity: 1.00 },
+    open:        { fogNear: 60, fogFar: 148, dustDensity: 0.45, dustTint: DUST_COOL, skyTint: 0x5c6478, shaftIntensity: 0.16, grade: 0.62 },
+    framework:   { fogNear: 56, fogFar: 140, dustDensity: 0.60, dustTint: 0xd6d2c8, skyTint: 0x9aa0a8, shaftIntensity: 0.40, grade: 0.70 },
+    ramadan:     { fogNear: 50, fogFar: 124, dustDensity: 0.72, dustTint: 0xe8c898, skyTint: 0xb08a6a, shaftIntensity: 0.52, grade: 0.74 },
+    christmas:   { fogNear: 48, fogFar: 120, dustDensity: 0.76, dustTint: 0xd8d4c4, skyTint: 0x9ab0b4, shaftIntensity: 0.56, grade: 0.74 },
+    welfare:     { fogNear: 47, fogFar: 118, dustDensity: 0.80, dustTint: 0xe4d6bc, skyTint: 0xb4a892, shaftIntensity: 0.60, grade: 0.76 },
+    environment: { fogNear: 45, fogFar: 114, dustDensity: 0.82, dustTint: 0xd4dcc0, skyTint: 0xa8b898, shaftIntensity: 0.64, grade: 0.76 },
+    gap:         { fogNear: 44, fogFar: 104, dustDensity: 0.92, dustTint: DUST_COOL, skyTint: 0x555f70, shaftIntensity: 0.14, grade: 0.86 },
+    idea1:       { fogNear: 43, fogFar: 110, dustDensity: 0.86, dustTint: DUST_GOLD, skyTint: 0xd0a274, shaftIntensity: 0.78, grade: 0.74 },
+    idea2:       { fogNear: 45, fogFar: 112, dustDensity: 0.88, dustTint: 0xcfe4cf, skyTint: 0xa8c4b4, shaftIntensity: 0.82, grade: 0.74 },
+    idea3:       { fogNear: 41, fogFar: 106, dustDensity: 0.90, dustTint: 0xc8cee0, skyTint: 0x8c96b4, shaftIntensity: 0.86, grade: 0.72 },
+    idea4:       { fogNear: 42, fogFar: 108, dustDensity: 0.96, dustTint: 0xffc39a, skyTint: 0xd08a70, shaftIntensity: 0.94, grade: 0.72 },
+    fullreveal:  { fogNear: 57, fogFar: 150, dustDensity: 1.00, dustTint: DUST_GOLD, skyTint: 0xe8c48c, shaftIntensity: 1.00, grade: 0.58 },
   };
 
   /* -------------------------------------------------------------- the wall */
@@ -1835,8 +1865,9 @@ VIS.team = function () {
   let renderer = null, scene = null, camera = null;
 
   let beamSpot, beamSpotTarget, moodKeyLight, moodKeyTarget, rimLightMood;
-  let skyDome, lightShaftLeft, lightShaftRight, vignetteGrainQuad;
-  let dustMoteField;
+  let beamEdge, ovenSpill, ovenWash;
+  let skyDome, lightShaftLeft, lightShaftRight, wallSpill, vignetteGrainQuad;
+  let counterGrade, dustMoteField;
   const dustBands = [];
 
   let railBar, hookInstances, strapInstances, medallionInstances, medallionIcons;
@@ -1855,10 +1886,11 @@ VIS.team = function () {
     keyR: 1, keyG: 1, keyB: 1, keyI: 0.7,
     kx: 0, ky: 10, kz: 6, tx: 0, ty: 3.2, tz: 0,
     rimR: 1, rimG: 1, rimB: 1, rimI: 0.55,
-    fogR: 1, fogG: 1, fogB: 1, fogNear: 46, fogFar: 150,
-    dust: 0.30, dustR: 1, dustG: 1, dustB: 1,
-    skyR: 1, skyG: 1, skyB: 1, shaft: 0.05,
-    exposure: 0.62, roomGrow: 0.18, reveal: 0,
+    fogR: 1, fogG: 1, fogB: 1, fogNear: 60, fogFar: 148,
+    dust: 0.45, dustR: 1, dustG: 1, dustB: 1,
+    skyR: 1, skyG: 1, skyB: 1, shaft: 0.16,
+    oven: 0.55, grade: 0.62,
+    exposure: 0.60, roomGrow: 0.18, reveal: 0,
   };
   /* one 0→1 per wall item, keyed by ROOM_ITEMS */
   const grow = {};
@@ -1893,7 +1925,25 @@ VIS.team = function () {
     return n;
   }
 
+  /* Firelight off the absolute clock. Three sines at unrelated rates read as
+     a flame; anything that accumulates would make the oven's brightness
+     depend on how the deck was navigated, which is the one thing this file
+     is not allowed to do. */
+  function firePulse(t) {
+    return Math.max(0.55,
+      1 + Math.sin(t * 9.1) * 0.17 + Math.sin(t * 3.7 + 1.3) * 0.11 + Math.sin(t * 17.3 + 2.6) * 0.06);
+  }
+
   /* ------------------------------------------------------------- textures */
+
+  /* ctx.canvas only makes squares. The environment probe is equirectangular
+     and the counter grade is nearly three times wider than it is deep, so
+     both want their own aspect or the gradient lands in the wrong place. */
+  function canvasWH(w, h) {
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    return c;
+  }
 
   function moteTexture() {
     const c = ctx.canvas(64), g = c.getContext('2d');
@@ -1909,11 +1959,16 @@ VIS.team = function () {
      the material, never a redraw. */
   function skyTexture() {
     const c = ctx.canvas(256), g = c.getContext('2d');
+    /* cool at the top, warm at the bottom. The room's own light is warm and
+       comes from the left, so the only place a cool note can come from is
+       behind and above — which is also where the eye needs the picture to
+       fall away. */
     const lg = g.createLinearGradient(0, 0, 0, 256);
-    lg.addColorStop(0, '#f6f0e2');
-    lg.addColorStop(0.42, '#d8c3a4');
-    lg.addColorStop(0.78, '#9a5a44');
-    lg.addColorStop(1, '#a82418');
+    lg.addColorStop(0, '#5b6a7e');
+    lg.addColorStop(0.30, '#8f8b8a');
+    lg.addColorStop(0.58, '#c2a184');
+    lg.addColorStop(0.84, '#8c4c39');
+    lg.addColorStop(1, '#5e1d16');
     g.fillStyle = lg; g.fillRect(0, 0, 256, 256);
     return ctx.tex(c);
   }
@@ -1925,13 +1980,17 @@ VIS.team = function () {
     g.clearRect(0, 0, 128, 128);
     const lg = g.createLinearGradient(0, 0, 128, 0);
     lg.addColorStop(0, 'rgba(255,236,200,0)');
-    lg.addColorStop(0.42, 'rgba(255,240,210,0.55)');
-    lg.addColorStop(0.58, 'rgba(255,240,210,0.55)');
+    lg.addColorStop(0.30, 'rgba(255,240,210,0.34)');
+    lg.addColorStop(0.47, 'rgba(255,246,224,0.82)');
+    lg.addColorStop(0.53, 'rgba(255,246,224,0.82)');
+    lg.addColorStop(0.70, 'rgba(255,240,210,0.34)');
     lg.addColorStop(1, 'rgba(255,236,200,0)');
     g.fillStyle = lg; g.fillRect(0, 0, 128, 128);
+    /* a bright core inside the slab, so the shaft has an edge to read by
+       rather than one flat wash of cream */
     const vg = g.createLinearGradient(0, 0, 0, 128);
     vg.addColorStop(0, 'rgba(0,0,0,0)');
-    vg.addColorStop(0.3, 'rgba(0,0,0,0.35)');
+    vg.addColorStop(0.46, 'rgba(0,0,0,0.22)');
     vg.addColorStop(1, 'rgba(0,0,0,1)');
     g.globalCompositeOperation = 'destination-out';
     g.fillStyle = vg; g.fillRect(0, 0, 128, 128);
@@ -1945,11 +2004,18 @@ VIS.team = function () {
   function grainTexture() {
     const c = ctx.canvas(256), g = c.getContext('2d');
     g.clearRect(0, 0, 256, 256);
-    const rg = g.createRadialGradient(128, 128, 60, 128, 128, 190);
+    const rg = g.createRadialGradient(128, 128, 56, 128, 128, 190);
     rg.addColorStop(0, 'rgba(24,16,10,0)');
-    rg.addColorStop(0.62, 'rgba(24,16,10,0.16)');
-    rg.addColorStop(1, 'rgba(18,12,8,0.62)');
+    rg.addColorStop(0.62, 'rgba(24,16,10,0.18)');
+    rg.addColorStop(1, 'rgba(18,12,8,0.66)');
     g.fillStyle = rg; g.fillRect(0, 0, 256, 256);
+    /* weighted toward the bottom of frame, because that is where the counter
+       is: every vantage in the deck puts marble across the lower third and it
+       has no business being the brightest thing on screen */
+    const bg = g.createLinearGradient(0, 148, 0, 256);
+    bg.addColorStop(0, 'rgba(18,12,8,0)');
+    bg.addColorStop(1, 'rgba(18,12,8,0.34)');
+    g.fillStyle = bg; g.fillRect(0, 148, 256, 108);
     for (let i = 0; i < 5200; i++) {
       const a = Math.random() * 0.05;
       g.fillStyle = (Math.random() < 0.5 ? 'rgba(255,244,224,' : 'rgba(20,14,8,') + a + ')';
@@ -2096,6 +2162,80 @@ VIS.team = function () {
     return ctx.tex(c);
   }
 
+  /* The counter is eighty by thirty-six of pale marble filling the bottom of
+     every frame in the deck, and at these exposures it was the brightest
+     thing on screen — the eye went there instead of to the beam. This is the
+     correction: one alpha ramp laid flat on the counter top, clear in a pool
+     around the scale and biting hardest at the front lip, which is the part
+     nearest the camera and the part with least to say. Drawn once; only its
+     opacity is stage-driven, out of ATMOS.grade. */
+  function counterGradeTexture() {
+    const S = 512, c = ctx.canvas(S), g = c.getContext('2d');
+    g.clearRect(0, 0, S, S);
+    /* where world origin — the scale's post — lands on this canvas, given a
+       plane 79.2 x 35.5 centred at x -8, z -0.1 */
+    const CX = 308, CY = 258;
+    /* the pool is uniform in world units, and the plane is more than twice as
+       wide as it is deep, so the ellipse has to be stretched to match */
+    g.save();
+    g.translate(CX, CY);
+    g.scale(1, 2.23);
+    const rg = g.createRadialGradient(0, 0, 0, 0, 0, 310);
+    rg.addColorStop(0.00, 'rgba(18,12,8,0)');
+    rg.addColorStop(0.21, 'rgba(18,12,8,0)');
+    rg.addColorStop(0.62, 'rgba(18,12,8,0.42)');
+    rg.addColorStop(1.00, 'rgba(18,12,8,0.58)');
+    g.fillStyle = rg;
+    g.fillRect(-S, -S, S * 2, S * 2);
+    g.restore();
+    /* the front lip, lowest in frame and closest to the lens */
+    const fg = g.createLinearGradient(0, S * 0.52, 0, S);
+    fg.addColorStop(0, 'rgba(18,12,8,0)');
+    fg.addColorStop(1, 'rgba(18,12,8,0.34)');
+    g.fillStyle = fg; g.fillRect(0, S * 0.52, S, S * 0.48);
+    /* and a seat where the counter runs under the back wall */
+    const bg = g.createLinearGradient(0, 0, 0, S * 0.11);
+    bg.addColorStop(0, 'rgba(18,12,8,0.30)');
+    bg.addColorStop(1, 'rgba(18,12,8,0)');
+    g.fillStyle = bg; g.fillRect(0, 0, S, S * 0.11);
+    return ctx.tex(c);
+  }
+
+  /* A hand-drawn equirectangular probe of this room, run through
+     PMREMGenerator and hung on the scale's metal and nothing else. Without
+     one, a MeshStandardMaterial at metalness 0.7 has nothing to reflect and
+     renders as flat dark paint — which is precisely what the brass post was
+     doing. three maps u 0.25 to -z (the back wall), 0.5 to -x (the oven) and
+     0.75 to +z (the camera), and v 1 to straight up, so the blobs below sit
+     where the room's real light sits. */
+  function envTexture() {
+    const c = canvasWH(256, 128), g = c.getContext('2d');
+    const vg = g.createLinearGradient(0, 0, 0, 128);
+    vg.addColorStop(0.00, '#e2d6ba');   /* the lit ceiling */
+    vg.addColorStop(0.30, '#b6a68a');
+    vg.addColorStop(0.50, '#7d6c56');   /* horizon */
+    vg.addColorStop(0.75, '#3e3122');
+    vg.addColorStop(1.00, '#191108');   /* the floor, well below the counter */
+    g.fillStyle = vg; g.fillRect(0, 0, 256, 128);
+    g.globalCompositeOperation = 'lighter';
+    [
+      [128, 74, 46, '255,150,60', 0.95],   /* the oven mouth */
+      [64, 49, 40, '214,232,255', 0.80],   /* the window wall behind */
+      [200, 36, 34, '255,238,206', 0.62],  /* the room's own lamps, camera side */
+    ].forEach(function (b) {
+      const rg = g.createRadialGradient(b[0], b[1], 0, b[0], b[1], b[2]);
+      rg.addColorStop(0, 'rgba(' + b[3] + ',' + b[4] + ')');
+      rg.addColorStop(1, 'rgba(' + b[3] + ',0)');
+      g.fillStyle = rg;
+      g.fillRect(b[0] - b[2], b[1] - b[2], b[2] * 2, b[2] * 2);
+    });
+    g.globalCompositeOperation = 'source-over';
+    const t = new T.CanvasTexture(c);
+    t.mapping = T.EquirectangularReflectionMapping;
+    t.colorSpace = T.SRGBColorSpace;
+    return t;
+  }
+
   /* ------------------------------------------------------------ the lights */
 
   function buildLights() {
@@ -2105,7 +2245,11 @@ VIS.team = function () {
        recoloured, dimmed or moved; this cannot, because it is what keeps the
        beam's tilt and the grey-vs-terracotta pan read legible under every
        mood the room takes on. */
-    beamSpot = new T.SpotLight(TASK_WHITE, 34, 34, 0.62, 0.5, 1.5);
+    /* A tight cone with a steep decay rather than a wide soft one: the cone
+       is just wide enough to take in both beam ends at the twelve units it
+       stands off, and the wall sits outside it entirely, which is what buys
+       the separation between the beam and the tiles behind it. */
+    beamSpot = new T.SpotLight(TASK_WHITE, 120, 30, 0.58, 0.32, 1.9);
     beamSpot.castShadow = false;
     beamSpotTarget = new T.Object3D();
     scratchVec.set(0, 3.2, 0);
@@ -2115,16 +2259,24 @@ VIS.team = function () {
     beamSpot.target = beamSpotTarget;
     scene.add(beamSpot, beamSpotTarget);
 
-    moodKeyLight = new T.SpotLight(0xffffff, 0, 46, 0.72, 0.62, 1.5);
+    /* the stage's own colour, raking in from high on the camera's left — the
+       far side from beamSpot, so between them the scale is lit from two
+       quarters and has a light side and a shadow side rather than one flat
+       front. It stands far enough back that its cone also lays a pool of
+       light on the counter around the post: the counter is allowed to be
+       bright there and nowhere else. */
+    moodKeyLight = new T.SpotLight(0xffffff, 0, 40, 0.56, 0.62, 1.9);
     moodKeyLight.castShadow = false;
     moodKeyTarget = new T.Object3D();
     moodKeyTarget.position.copy(scratchVec);
     moodKeyLight.target = moodKeyTarget;
-    moodKeyLight.position.set(scratchVec.x - 1.2, scratchVec.y + 6.5, scratchVec.z - 3.2);
+    moodKeyLight.position.set(scratchVec.x - 5, scratchVec.y + 12, scratchVec.z + 5);
     scene.add(moodKeyLight, moodKeyTarget);
 
-    /* opposite the camera, so it edges the beam rather than filling it. kept
-       separate from the room's own neutral fill light. */
+    /* opposite the camera, and now only half of the rim budget: a
+       directional has no falloff at all, so leaning on it is the fastest way
+       back to a flat picture. The other half goes to beamEdge below, which
+       does have falloff and lands on the beam alone. */
     rimLightMood = new T.DirectionalLight(0xffffff, 0);
     rimLightMood.castShadow = false;
     rimLightMood.position.set(-26, 16, -30);
@@ -2162,11 +2314,14 @@ VIS.team = function () {
        and world.js exposes no anchor for them, so they are matched by where
        they sit and the colour they were given. A miss here costs nothing. */
     if (ctx.anchors.scale) {
+      scratchColor.setHex(c.HOOK_DIM);
       ctx.anchors.scale.children.forEach(function (n) {
         if (!n.isMesh || !n.material || !n.material.color) return;
         if (n === ctx.anchors.gaugeArc || n === ctx.anchors.gaugeTick) return;
-        if (n.material.color.getHex() !== c.HOOK_DIM) return;
         if (n.position.z >= 0 || Math.abs(n.position.y - 3.4) > 1.4) return;
+        const col = n.material.color;
+        if (Math.abs(col.r - scratchColor.r) + Math.abs(col.g - scratchColor.g)
+          + Math.abs(col.b - scratchColor.b) > 0.02) return;
         gaugeFaceMats.push(n.material);
       });
     }
@@ -2184,6 +2339,80 @@ VIS.team = function () {
     });
   }
 
+  /* --------------------------------------------------- practicals and edge */
+
+  /* Three lamps that are not part of the mood wash. Kept out of buildLights
+     so the two passes over this file stay in separate functions. */
+  function buildPractical() {
+    /* The oven has a fire in it and was lighting nothing but its own bricks.
+       One lamp at the mouth throws warmth across the near counter, one up by
+       the wall gives the left of frame a warm edge for the rest of the room
+       to fall away from. Between them they are the only warm practical in the
+       room, and warm-left against cool-behind is most of what makes the
+       distance read. */
+    ovenSpill = new T.PointLight(EMBER, 0, 30, 2);
+    ovenSpill.position.set(-26.6, 3.8, 3.2);
+    scene.add(ovenSpill);
+
+    ovenWash = new T.PointLight(0xff7a30, 0, 34, 2);
+    ovenWash.position.set(-27.5, 9.5, -10);
+    scene.add(ovenWash);
+
+    /* The edge on the beam. It stands behind and above the scale pointing
+       back toward the camera on a cone tight enough that only the beam, the
+       chains and the tops of the pans are inside it — which is the whole
+       point. It draws a bright line along the top of the beam; the wall
+       behind stays where the fog left it. It shares beamSpot's target
+       because neither of them ever moves. */
+    scratchVec.set(0, 8.32, 0);
+    if (ctx.anchors.beamBar) ctx.anchors.beamBar.getWorldPosition(scratchVec);
+    beamEdge = new T.SpotLight(0xffffff, 0, 26, 0.50, 0.50, 1.8);
+    beamEdge.castShadow = false;
+    beamEdge.position.set(scratchVec.x - 4.2, scratchVec.y + 7.4, scratchVec.z - 13.5);
+    beamEdge.target = beamSpotTarget;
+    scene.add(beamEdge);
+  }
+
+  /* --------------------------------------------------------------- the metal */
+
+  /* Brass with nothing to reflect is just dark paint, and every metal part of
+     the scale was rendering that way: high metalness, no environment, no
+     highlight anywhere. This hangs one small procedural probe on the metals
+     alone — found by the metalness world.js already gave them, so a part that
+     was never meant to be metal cannot be caught by accident — and nudges
+     them a little harder and a little smoother so they take a specular. The
+     probe is deliberately not scene.environment: the counter and the tiles
+     want no help. */
+  function buildSheen() {
+    if (!renderer || !T.PMREMGenerator || !ctx.anchors.scale) return;
+    let env = null;
+    try {
+      const pmrem = new T.PMREMGenerator(renderer);
+      const src = envTexture();
+      env = pmrem.fromEquirectangular(src).texture;
+      pmrem.dispose();
+      src.dispose();
+    } catch (e) {
+      env = null;   /* a probe is a nicety; the deck must still run without one */
+    }
+    if (!env) return;
+
+    /* the chains share one material across four meshes, so dedupe or the
+       nudge below compounds four times over */
+    const seen = [];
+    ctx.anchors.scale.traverse(function (n) {
+      const m = n.isMesh ? n.material : null;
+      if (!m || m.metalness === undefined || m.metalness < 0.3) return;
+      if (seen.indexOf(m) >= 0) return;
+      seen.push(m);
+      m.envMap = env;
+      m.envMapIntensity = 0.9;
+      m.metalness = Math.min(0.95, m.metalness + 0.14);
+      m.roughness = Math.max(0.16, m.roughness * 0.7);
+      m.needsUpdate = true;
+    });
+  }
+
   /* -------------------------------------------------------- the atmosphere */
 
   function buildAtmosphere() {
@@ -2193,28 +2422,46 @@ VIS.team = function () {
     dustMoteField = new T.Group();
     scene.add(dustMoteField);
 
-    /* three depth bands, same sprite, different size, opacity and speed —
-       the parallax between them is what sells the room's depth */
+    /* Three depth bands; the parallax between them is what sells the room's
+       depth. Bigger and brighter than they were, and lifted clear of the
+       counter: additive motes over blown-out marble are invisible, so the
+       whole field now lives in the upper air between the scale and the back
+       wall, where the fog has left something dark for them to read against.
+
+       LANES is where the two shafts come down. A mote's own brightness is
+       baked into a vertex colour by how near it is to one, so the field is
+       dense inside the light and almost gone outside it, which is how dust
+       behaves and is also the only way it registers at all at forty units. */
+    const LANES = [-20, 8];
     const specs = [
-      { n: 120, size: 0.62, opacity: 0.52, speed: 0.55, spread: [54, 34], y0: -2, span: 30, sway: 0.34 },
-      { n: 170, size: 0.40, opacity: 0.40, speed: 0.36, spread: [96, 62], y0: -4, span: 38, sway: 0.22 },
-      { n: 160, size: 0.26, opacity: 0.26, speed: 0.20, spread: [150, 96], y0: -6, span: 46, sway: 0.13 },
+      { n: 80,  size: 0.85, opacity: 0.62, speed: 0.55, spread: [50, 30], cx: -8,  cz: -2,  y0: 2.0, span: 24, sway: 0.40 },
+      { n: 130, size: 0.58, opacity: 0.44, speed: 0.36, spread: [86, 46], cx: -10, cz: -6,  y0: 1.2, span: 30, sway: 0.26 },
+      { n: 150, size: 0.36, opacity: 0.28, speed: 0.20, spread: [130, 62], cx: -12, cz: -10, y0: 0.6, span: 38, sway: 0.15 },
     ];
     specs.forEach(function (s, bi) {
       const pos = new Float32Array(s.n * 3);
       const base = new Float32Array(s.n * 3);
+      const col = new Float32Array(s.n * 3);
       for (let i = 0; i < s.n; i++) {
-        base[i * 3] = -8 + (Math.random() - 0.5) * s.spread[0];
+        base[i * 3] = s.cx + (Math.random() - 0.5) * s.spread[0];
         base[i * 3 + 1] = Math.random() * s.span;
-        base[i * 3 + 2] = 2 + (Math.random() - 0.5) * s.spread[1];
+        base[i * 3 + 2] = s.cz + (Math.random() - 0.5) * s.spread[1];
         pos[i * 3] = base[i * 3];
         pos[i * 3 + 1] = s.y0 + base[i * 3 + 1];
         pos[i * 3 + 2] = base[i * 3 + 2];
+        let d = Infinity;
+        for (let L = 0; L < LANES.length; L++) {
+          d = Math.min(d, Math.abs(base[i * 3] - LANES[L]));
+        }
+        const w = 0.26 + 0.74 * Math.exp(-(d * d) / 72);
+        col[i * 3] = w; col[i * 3 + 1] = w; col[i * 3 + 2] = w;
       }
       const geo = new T.BufferGeometry();
       geo.setAttribute('position', new T.BufferAttribute(pos, 3));
+      geo.setAttribute('color', new T.BufferAttribute(col, 3));
       const pts = new T.Points(geo, new T.PointsMaterial({
         color: 0xffffff, size: s.size, sizeAttenuation: true, map: sprite,
+        vertexColors: true, fog: false,
         transparent: true, opacity: s.opacity, depthWrite: false, blending: T.AdditiveBlending,
       }));
       pts.frustumCulled = false;
@@ -2229,15 +2476,24 @@ VIS.team = function () {
       new T.SphereGeometry(150, 24, 16),
       new T.MeshBasicMaterial({
         map: skyTexture(), side: T.BackSide, fog: false,
-        transparent: true, opacity: 0.52, depthWrite: false,
+        transparent: true, opacity: 0.44, depthWrite: false,
       })
     );
     skyDome.position.set(-10, 6, 6);
     skyDome.renderOrder = -1;
     scene.add(skyDome);
 
-    /* two slabs of window light. geometry and position are fixed for the
-       life of the deck; only opacity is stage-driven. */
+    /* Two slabs of window light and the patch one of them throws on the back
+       wall. Geometry and position are fixed for the life of the deck; only
+       opacity is stage-driven. Both slabs sit well behind the scale, so the
+       depth buffer keeps them off it — what shows is the part of each shaft
+       that passes to either side of the beam, which is exactly the read that
+       separates the beam from the wall.
+
+       They are larger and considerably brighter than they were. A shaft only
+       registers against something darker than itself, and until the counter
+       came down and the fog started biting there was nothing darker in the
+       room for it to register against. */
     const shaftTex = shaftTexture();
     const shaftMat = function () {
       return new T.MeshBasicMaterial({
@@ -2245,15 +2501,39 @@ VIS.team = function () {
         depthWrite: false, blending: T.AdditiveBlending, side: T.DoubleSide, fog: false,
       });
     };
-    lightShaftLeft = new T.Mesh(new T.PlaneGeometry(13, 40), shaftMat());
-    lightShaftLeft.position.set(-19, 13, -9);
-    lightShaftLeft.rotation.set(0.18, 0.42, 0.40);
+    lightShaftLeft = new T.Mesh(new T.PlaneGeometry(16, 46), shaftMat());
+    lightShaftLeft.position.set(-20, 13, -12);
+    lightShaftLeft.rotation.set(0.16, 0.40, 0.42);
     lightShaftLeft.renderOrder = 4;
-    lightShaftRight = new T.Mesh(new T.PlaneGeometry(10, 38), shaftMat());
-    lightShaftRight.position.set(7, 14, -12);
-    lightShaftRight.rotation.set(0.14, -0.34, 0.30);
+    lightShaftRight = new T.Mesh(new T.PlaneGeometry(12, 42), shaftMat());
+    lightShaftRight.position.set(8, 14, -14);
+    lightShaftRight.rotation.set(0.12, -0.30, 0.30);
     lightShaftRight.renderOrder = 4;
-    scene.add(lightShaftLeft, lightShaftRight);
+    /* the same slab laid flat against the tiles, raking down and to the
+       right. A band of light on the back wall is the cheapest depth in the
+       room: it gives the wall a bright end and a dark end, and the eye reads
+       the two as distance. */
+    wallSpill = new T.Mesh(new T.PlaneGeometry(24, 20), shaftMat());
+    wallSpill.position.set(-19, 14, -21.15);
+    wallSpill.rotation.set(0, 0, -0.40);
+    wallSpill.renderOrder = 3;
+    scene.add(lightShaftLeft, lightShaftRight, wallSpill);
+
+    /* the counter's own falloff, laid on the top face just clear of it. A
+       dimmer rather than a shadow: normal blending against near-black, so it
+       scales whatever the marble is doing at that exposure instead of
+       fighting it. */
+    counterGrade = new T.Mesh(
+      new T.PlaneGeometry(79.2, 35.5),
+      new T.MeshBasicMaterial({
+        map: counterGradeTexture(), color: 0xffffff, transparent: true, opacity: 0.62,
+        depthWrite: false, fog: false,
+      })
+    );
+    counterGrade.rotation.x = -Math.PI / 2;
+    counterGrade.position.set(-8, 0.035, -0.1);
+    counterGrade.renderOrder = 2;
+    scene.add(counterGrade);
 
     /* Kept deliberately faint: the page already lays a static #grain and
        #vignette over the canvas in CSS. This one earns its place only by
@@ -2262,7 +2542,7 @@ VIS.team = function () {
     vignetteGrainQuad = new T.Mesh(
       new T.PlaneGeometry(1, 1),
       new T.MeshBasicMaterial({
-        map: grainTexture(), transparent: true, opacity: 0.28,
+        map: grainTexture(), transparent: true, opacity: 0.34,
         depthWrite: false, depthTest: false, fog: false,
       })
     );
@@ -2297,10 +2577,11 @@ VIS.team = function () {
 
     /* the straps. Anchored at the top so scale.y reads as length, which is
        what lets one of them hang empty on the gap slide. */
-    const strapGeo = new T.BoxGeometry(0.11, 1, 0.05);
+    const strapGeo = new T.BoxGeometry(0.16, 1, 0.06);
     strapGeo.translate(0, -0.5, 0);
     strapInstances = new T.InstancedMesh(strapGeo, ctx.mat(STRAP_LEATHER, { rough: 0.72 }), 9);
     strapInstances.castShadow = false;
+    strapInstances.frustumCulled = false;
     scene.add(strapInstances);
 
     /* eight discs in one InstancedMesh, one per earned medallion. A slot with
@@ -2310,6 +2591,9 @@ VIS.team = function () {
       new T.CircleGeometry(MED_R, 28), ctx.mat(c.BRASS, { rough: 0.40, metal: 0.55 }), MED_ORDER.length
     );
     medallionInstances.castShadow = false;
+    /* an InstancedMesh caches the bounds it computed on its first frame, and
+       these are at their smallest then — so they are never culled at all */
+    medallionInstances.frustumCulled = false;
     scene.add(medallionInstances);
 
     /* the eight icons, as one merged quad mesh reading one baked atlas. a
@@ -2405,7 +2689,7 @@ VIS.team = function () {
 
     /* a disc of soil, or the pot reads as an empty bowl the blades pass
        through. It rides the pot, so one scale drives both. */
-    const soil = new T.Mesh(new T.CircleGeometry(0.66, 20), ctx.mat(0x3b2a1c, { rough: 0.95 }));
+    const soil = new T.Mesh(new T.CircleGeometry(0.66, 20), ctx.mat(SOIL_LOAM, { rough: 0.95 }));
     soil.rotation.x = -Math.PI / 2;
     soil.position.y = 1.26;
     potMesh.add(soil);
@@ -2418,6 +2702,7 @@ VIS.team = function () {
     bladeMat.vertexColors = true;
     bladeInstances = new T.InstancedMesh(bladeGeometry(), bladeMat, BLADES);
     bladeInstances.castShadow = false;
+    bladeInstances.frustumCulled = false;
     scene.add(bladeInstances);
   }
 
@@ -2446,12 +2731,20 @@ VIS.team = function () {
     if (!built) return;
 
     moodKeyLight.color.setRGB(live.keyR, live.keyG, live.keyB);
-    moodKeyLight.intensity = live.keyI;
+    moodKeyLight.intensity = live.keyI * KEY_GAIN;
     moodKeyLight.position.set(live.kx, live.ky, live.kz);
     moodKeyTarget.position.set(live.tx, live.ty, live.tz);
 
+    /* the rim budget, split: half into the flat directional, half into the
+       cone that only the beam is standing in */
     rimLightMood.color.setRGB(live.rimR, live.rimG, live.rimB);
-    rimLightMood.intensity = live.rimI;
+    rimLightMood.intensity = live.rimI * 0.45;
+    beamEdge.color.setRGB(live.rimR, live.rimG, live.rimB);
+    beamEdge.intensity = live.rimI * EDGE_GAIN;
+
+    ovenSpill.intensity = live.oven * OVEN_GAIN;
+    ovenWash.intensity = live.oven * OVEN_GAIN;
+    counterGrade.material.opacity = live.grade;
 
     if (scene.fog) {
       scene.fog.color.setRGB(live.fogR, live.fogG, live.fogB);
@@ -2465,8 +2758,9 @@ VIS.team = function () {
       b.pts.material.color.setRGB(live.dustR, live.dustG, live.dustB);
     });
     skyDome.material.color.setRGB(live.skyR, live.skyG, live.skyB);
-    lightShaftLeft.material.opacity = live.shaft * 0.55;
-    lightShaftRight.material.opacity = live.shaft * 0.42;
+    lightShaftLeft.material.opacity = live.shaft * 0.62;
+    lightShaftRight.material.opacity = live.shaft * 0.46;
+    wallSpill.material.opacity = live.shaft * 0.40;
 
     wallGlowPoints.forEach(function (pl) { pl.intensity = live.reveal * 7; });
   }
@@ -2478,7 +2772,7 @@ VIS.team = function () {
     railBar.scale.set(grow.rail, 1, grow.rail);
 
     for (let i = 0; i < 9; i++) {
-      dummy.position.set(hookX(i), RAIL_Y - 0.66, WALL_Z);
+      dummy.position.set(hookX(i), RAIL_Y - 0.66, WALL_Z + 0.05);
       dummy.rotation.set(0, 0, 0);
       dummy.scale.setScalar(Math.max(0.0001, grow.rail));
       dummy.updateMatrix();
@@ -2582,6 +2876,8 @@ VIS.team = function () {
     Object.keys(ROOM_ITEMS).forEach(function (k) { grow[k] = 0; });
 
     buildLights();
+    buildPractical();
+    buildSheen();
     buildAtmosphere();
     buildRail();
     buildPlant();
@@ -2610,11 +2906,12 @@ VIS.team = function () {
     const lit = litCount(idx);
     const target = {
       keyI: m.keyIntensity,
-      kx: scratchVec.x - 1.2, ky: scratchVec.y + 6.4, kz: scratchVec.z - 3.4,
+      kx: scratchVec.x - 5, ky: scratchVec.y + 12, kz: scratchVec.z + 5,
       tx: scratchVec.x, ty: scratchVec.y, tz: scratchVec.z,
       rimI: m.rimIntensity,
       fogNear: a.fogNear, fogFar: a.fogFar,
       dust: a.dustDensity, shaft: a.shaftIntensity,
+      oven: m.ovenFire, grade: a.grade,
       exposure: m.exposure,
       roomGrow: (0.18 + 0.82 * (lit / MED_ORDER.length)) * (idx === 6 ? 0.62 : 1),
       reveal: idx >= 11 ? 1 : 0,
@@ -2675,9 +2972,18 @@ VIS.team = function () {
     }
 
     const pulse = KEY_PULSE[stageNow] || KEY_PULSE.open;
-    moodKeyLight.intensity = live.keyI * (calm ? 1 : 1 + Math.sin(t * pulse[0]) * pulse[1]);
-    lightShaftLeft.material.opacity = live.shaft * 0.55 * (calm ? 1 : 1 + Math.sin(t * 0.24) * 0.16);
-    lightShaftRight.material.opacity = live.shaft * 0.42 * (calm ? 1 : 1 + Math.cos(t * 0.19) * 0.16);
+    moodKeyLight.intensity = live.keyI * KEY_GAIN * (calm ? 1 : 1 + Math.sin(t * pulse[0]) * pulse[1]);
+    lightShaftLeft.material.opacity = live.shaft * 0.62 * (calm ? 1 : 1 + Math.sin(t * 0.24) * 0.16);
+    lightShaftRight.material.opacity = live.shaft * 0.46 * (calm ? 1 : 1 + Math.cos(t * 0.19) * 0.16);
+    wallSpill.material.opacity = live.shaft * 0.40 * (calm ? 1 : 1 + Math.sin(t * 0.16) * 0.12);
+
+    /* the fire, as a sum of sines rather than a random walk: it has to look
+       the same on frame one whether the deck was opened straight at idea4 or
+       walked there, which rules out anything that remembers its last value.
+       The two lamps run on different rates so the mouth and the wall never
+       flare together. */
+    ovenSpill.intensity = live.oven * OVEN_GAIN * (calm ? 1 : firePulse(t));
+    ovenWash.intensity = live.oven * OVEN_GAIN * (calm ? 1 : firePulse(t * 0.83 + 4.1));
     wallGlowPoints.forEach(function (pl, i) {
       pl.intensity = live.reveal * 7 * (calm ? 1 : 1 + Math.sin(t * 1.4 + i * 2.1) * 0.14);
     });
@@ -2689,7 +2995,7 @@ VIS.team = function () {
       gaugeFaceMats[i].emissiveIntensity = 0.03 + off * 0.14;
     }
     for (let i = 0; i < gaugeTickMats.length; i++) {
-      gaugeTickMats[i].emissiveIntensity = 0.30 + off * 2.4;
+      gaugeTickMats[i].emissiveIntensity = 0.28 + off * 2.0;
     }
 
     /* the vignette rides just past the near plane, sized to the frustum */
@@ -2773,9 +3079,9 @@ const World = (function () {
 
   const PIVOT_Y = 3.2;      /* where the beam crosses the post, in scale units */
   const BEAM_HALF = 2.2;    /* half of the 4.4 beam */
-  const CHAIN_LEN = 1.6;    /* drop from beam end to pan floor */
-  const CHAIN_SPLAY = 0.5;  /* the two strands of a chain part this far in z */
-  const PAN_RIM_Y = 0.20;   /* where a strand meets the pan */
+  const CHAIN_LEN = 1.6;    /* drop from the eye to the pan's own origin */
+  const EYE_DROP = 0.155;   /* how far the eye hangs under the beam's centreline */
+  const PAN_RIM_Y = 0.205;  /* where a cord meets the lug on the pan rim */
 
   const S = {
     group: null, beamBar: null, beamPivot: null,
@@ -3367,136 +3673,208 @@ const World = (function () {
     { key: 'cap',     flag: 'capOn',     w: 1.4 },
     { key: 'rescue',  flag: 'rescueOn',  w: 2.1 },
   ];
-  const TOKEN_Y = 0.07;   /* the pan's inner floor */
+  const TOKEN_Y = 0.055;  /* the pan's inner floor, which is flat out to r0.32 */
 
-  /* Ramadan: a small pierced lantern with a warm core. */
+  /* Every token is read from ten metres of classroom, at maybe twenty pixels
+     across. So each one is built for its silhouette first: a lantern with a
+     domed cap and a ring, a gift with a bow, an apron with a neck strap, a
+     basket with a handle over it. Detail that would not survive the trip
+     down to twenty pixels is left out on purpose. */
+
+  /* Ramadan: an eight-sided pierced lantern with a warm core. */
   function makeLantern() {
     const g = new T.Group();
+    const brass = mat(BRASS, { rough: 0.24, metal: 0.88 });
     g.add(lathe([
-      [0.00, 0.00], [0.070, 0.000], [0.078, 0.012], [0.110, 0.060],
-      [0.098, 0.118], [0.062, 0.150], [0.062, 0.160], [0.000, 0.160],
-    ], 16, CREAM, { rough: 0.5, emissive: WARM_GLOW, ei: 0.85 }));
-    g.add(cyl(0.026, 0.034, 0.030, 10, BRASS, { pos: [0, 0.175, 0], rough: 0.34, metal: 0.7 }));
-    g.add(cyl(0.084, 0.084, 0.016, 12, BRASS, { pos: [0, 0.006, 0], rough: 0.34, metal: 0.7 }));
+      [0.000, 0.000], [0.076, 0.000], [0.092, 0.022], [0.106, 0.078],
+      [0.100, 0.150], [0.078, 0.192], [0.052, 0.206], [0.000, 0.208],
+    ], 8, CREAM, { rough: 0.48, emissive: WARM_GLOW, ei: 0.95 }));
+    /* a spread foot and a shoulder band, both brass, so the body is framed */
+    g.add(cyl(0.082, 0.114, 0.034, 8, BRASS, { material: brass, pos: [0, 0.017, 0] }));
+    g.add(cyl(0.090, 0.090, 0.022, 8, BRASS, { material: brass, pos: [0, 0.150, 0] }));
+    /* the dome, the stem and the carrying ring */
+    const cap = lathe([
+      [0.000, 0.000], [0.088, 0.000], [0.076, 0.038], [0.040, 0.072], [0.000, 0.082],
+    ], 8, BRASS, { material: brass });
+    cap.position.y = 0.204;
+    g.add(cap);
+    g.add(cyl(0.013, 0.013, 0.052, 6, BRASS, { material: brass, pos: [0, 0.310, 0] }));
+    const ring = new T.Mesh(new T.TorusGeometry(0.028, 0.009, 5, 10), brass);
+    ring.position.y = 0.348;
+    g.add(ring);
+    /* four ribs down the corners of the body */
+    for (let i = 0; i < 4; i++) {
+      const a = i * 1.5708 + 0.39;
+      g.add(box(0.016, 0.150, 0.016, BRASS, { material: brass, pos: [Math.cos(a) * 0.096, 0.100, Math.sin(a) * 0.096] }));
+    }
     return g;
   }
 
-  /* Christmas: a wrapped box with a cream cross-ribbon. */
+  /* Christmas: a wrapped box with a cross-ribbon and a proper bow. */
   function makeGift() {
     const g = new T.Group();
-    g.add(box(0.160, 0.140, 0.160, BRAND, { pos: [0, 0.070, 0], rough: 0.62 }));
-    g.add(box(0.170, 0.146, 0.030, CREAM, { pos: [0, 0.070, 0], rough: 0.6 }));
-    g.add(box(0.030, 0.146, 0.170, CREAM, { pos: [0, 0.070, 0], rough: 0.6 }));
-    [-0.36, 0.36].forEach(function (r) {
-      g.add(box(0.052, 0.020, 0.030, CREAM, { pos: [Math.sin(r) * 0.05, 0.148, 0], rot: [0, 0, r], rough: 0.6 }));
+    const ribbon = mat(CREAM, { rough: 0.56 });
+    g.add(box(0.200, 0.170, 0.200, BRAND_DEEP, { pos: [0, 0.085, 0], rough: 0.58 }));
+    g.add(box(0.212, 0.180, 0.046, CREAM, { material: ribbon, pos: [0, 0.085, 0] }));
+    g.add(box(0.046, 0.180, 0.212, CREAM, { material: ribbon, pos: [0, 0.085, 0] }));
+    [-1, 1].forEach(function (s) {
+      const loop = new T.Mesh(new T.TorusGeometry(0.050, 0.015, 5, 12), ribbon);
+      loop.position.set(s * 0.052, 0.186, 0);
+      loop.rotation.set(Math.PI / 2, 0, s * 0.42);
+      loop.scale.set(1, 0.72, 1);
+      g.add(loop);
     });
+    const knot = new T.Mesh(new T.SphereGeometry(0.026, 8, 6), ribbon);
+    knot.position.y = 0.188;
+    g.add(knot);
     return g;
   }
 
-  /* Welfare: a flat apron disc with two neck straps, lying on edge. */
+  /* Welfare: a real apron cut — bib, flare, waist ties, neck strap. Flat
+     shapes go mushy at this size unless they are given an outline, so this
+     one is extruded thick enough to catch its own shadow. */
   function makeApron() {
+    const s = new T.Shape();
+    s.moveTo(-0.054, 0.132);
+    s.lineTo(0.054, 0.132);
+    s.lineTo(0.064, 0.042);
+    s.lineTo(0.108, -0.024);
+    s.lineTo(0.116, -0.152);
+    s.lineTo(-0.116, -0.152);
+    s.lineTo(-0.108, -0.024);
+    s.lineTo(-0.064, 0.042);
+    s.closePath();
     const g = new T.Group();
-    const body = lathe([
-      [0.000, 0.000], [0.060, 0.000], [0.084, 0.006], [0.090, 0.015],
-      [0.084, 0.024], [0.060, 0.030], [0.000, 0.030],
-    ], 22, WOOD_PALE, { rough: 0.78 });
-    /* stand the disc up so it reads as cloth: after the quarter turn the
-       lathe's own z is what runs vertically, so that is the axis to stretch */
-    body.rotation.x = -Math.PI / 2;
-    body.scale.set(1, 1, 1.12);
-    body.position.y = 0.100;
-    g.add(body);
-    [-0.045, 0.045].forEach(function (x) {
-      g.add(box(0.012, 0.070, 0.010, WOOD_PALE, { pos: [x, 0.195, 0], rot: [0, 0, x * 2.4], rough: 0.78 }));
+    const tie = mat(CREAM, { rough: 0.72 });
+    const cloth = extrude(s, 0.022, BRAND, { rough: 0.8, curve: 4 });
+    cloth.position.set(0, 0.164, -0.011);
+    g.add(cloth);
+    const strap = new T.Mesh(new T.TorusGeometry(0.054, 0.009, 5, 12, Math.PI), tie);
+    strap.position.y = 0.296;
+    g.add(strap);
+    [-1, 1].forEach(function (sd) {
+      g.add(box(0.074, 0.015, 0.017, CREAM, { material: tie, pos: [sd * 0.132, 0.206, 0], rot: [0, 0, sd * 0.34] }));
     });
+    /* the pocket, standing a little proud of the cloth */
+    g.add(box(0.112, 0.054, 0.013, CREAM, { material: tie, pos: [0, 0.120, 0.014] }));
     return g;
   }
 
-  /* Environment: one leaf, for the paper wrap that replaced the plastic. */
+  /* Environment: one leaf with a raised midrib, tilted up off the pan. */
   function makeLeaf() {
     const s = new T.Shape();
-    s.moveTo(-0.080, 0);
-    s.quadraticCurveTo(-0.010, 0.060, 0.080, 0);
-    s.quadraticCurveTo(-0.010, -0.060, -0.080, 0);
+    s.moveTo(-0.118, 0);
+    s.quadraticCurveTo(-0.014, 0.092, 0.118, 0);
+    s.quadraticCurveTo(-0.014, -0.092, -0.118, 0);
     const g = new T.Group();
-    const blade = extrude(s, 0.016, LEAF_YOUNG, { rough: 0.66, curve: 14 });
-    blade.rotation.x = -Math.PI / 2.4;
-    blade.position.y = 0.062;
-    g.add(blade);
-    g.add(box(0.008, 0.062, 0.008, 0x6d8a52, { pos: [-0.062, 0.030, 0.020], rot: [0.5, 0, 0.4], rough: 0.7 }));
+    const inner = new T.Group();
+    inner.add(extrude(s, 0.018, LEAF_YOUNG, { rough: 0.62, curve: 14 }));
+    inner.add(box(0.196, 0.012, 0.012, 0x6d8a52, { pos: [0, 0, 0.022], rough: 0.66 }));
+    inner.rotation.set(-Math.PI / 2.5, 0, 0.20);
+    inner.position.set(0.016, 0.100, 0);
+    g.add(inner);
+    g.add(cyl(0.010, 0.015, 0.120, 6, 0x6d8a52, { pos: [-0.088, 0.048, 0.030], rot: [0.42, 0, 0.62], rough: 0.68 }));
     return g;
   }
 
-  /* Idea 1 — buy one give one: two slices, cut apart, facing each other.
-     Extruded sectors rather than partial lathes: a lathe stopped short of a
-     full turn leaves both cut faces open, and at this size the hollow shows. */
+  /* Idea 1 — buy one give one: two slices cut apart, one lying and one
+     tipped up against it, because two flat wedges from above read as one
+     shape and a tipped one does not. */
   function makeMeal() {
     const wedge = new T.Shape();
     wedge.moveTo(0, 0);
-    wedge.absarc(0, 0, 0.120, -Math.PI / 8, Math.PI / 8, false);
+    wedge.absarc(0, 0, 0.158, -Math.PI / 7, Math.PI / 7, false);
     wedge.lineTo(0, 0);
-    const g = new T.Group();
-    [-1, 1].forEach(function (side) {
+
+    function slice() {
       const w = new T.Group();
-      const base = extrude(wedge, 0.026, CREAM, { rough: 0.8, curve: 10 });
+      const base = extrude(wedge, 0.030, CREAM, { rough: 0.78, curve: 10 });
       base.rotation.x = -Math.PI / 2;
       w.add(base);
-      const top = extrude(wedge, 0.012, BRAND, { rough: 0.55, curve: 10 });
+      const top = extrude(wedge, 0.014, BRAND, { rough: 0.52, curve: 10 });
       top.rotation.x = -Math.PI / 2;
       top.scale.set(0.86, 0.86, 1);
-      top.position.y = 0.028;
+      top.position.set(0.008, 0.032, 0);
       w.add(top);
-      w.rotation.y = side > 0 ? 0 : Math.PI;
-      w.position.set(side * 0.052, 0.006, side * 0.030);
-      g.add(w);
-    });
+      /* the crust, across the wide end — the bit that says pizza */
+      w.add(box(0.032, 0.042, 0.140, CHEESE, { pos: [0.150, 0.020, 0], rough: 0.72 }));
+      return w;
+    }
+
+    const g = new T.Group();
+    const flat = slice();
+    flat.rotation.y = 0.30;
+    flat.position.set(-0.062, 0.002, 0.026);
+    g.add(flat);
+    const lift = new T.Group();
+    lift.add(slice());
+    lift.rotation.set(0, Math.PI - 0.45, 0.62);
+    lift.position.set(0.074, 0.014, -0.030);
+    g.add(lift);
     return g;
   }
 
   /* Idea 2 — the green return: a loop that comes back on itself. */
   function makeGreen() {
-    const a0 = Math.PI * 0.18, a1 = Math.PI * 1.72;
+    const a0 = Math.PI * 0.16, a1 = Math.PI * 1.74, ro = 0.118, ri = 0.070;
     const ring = new T.Shape();
-    ring.absarc(0, 0, 0.090, a0, a1, false);
-    ring.absarc(0, 0, 0.062, a1, a0, true);
+    ring.moveTo(Math.cos(a0) * ro, Math.sin(a0) * ro);
+    ring.absarc(0, 0, ro, a0, a1, false);
+    ring.absarc(0, 0, ri, a1, a0, true);
     const g = new T.Group();
     /* the loop stands on its own inner group: the token's own origin has to
        stay on the pan floor, because applyStage drives that y directly */
     const inner = new T.Group();
-    inner.position.y = 0.098;
-    inner.add(extrude(ring, 0.024, LEAF_YOUNG, { rough: 0.5, metal: 0.2, curve: 20 }));
+    inner.position.y = 0.132;
+    inner.add(extrude(ring, 0.032, LEAF_YOUNG, { rough: 0.46, metal: 0.22, curve: 20 }));
     const head = new T.Shape();
-    head.moveTo(0, 0.042);
-    head.lineTo(-0.038, -0.026);
-    head.lineTo(0.038, -0.026);
+    head.moveTo(0, 0.056);
+    head.lineTo(-0.050, -0.034);
+    head.lineTo(0.050, -0.034);
     head.closePath();
-    const tip = extrude(head, 0.024, LEAF_YOUNG, { rough: 0.5, metal: 0.2, curve: 4 });
-    tip.position.set(Math.cos(a1) * 0.076, Math.sin(a1) * 0.076, 0);
+    const tip = extrude(head, 0.032, LEAF_YOUNG, { rough: 0.46, metal: 0.22, curve: 4 });
+    tip.position.set(Math.cos(a1) * 0.094, Math.sin(a1) * 0.094, 0);
     tip.rotation.z = a1;
     inner.add(tip);
     g.add(inner);
     return g;
   }
 
-  /* Idea 3 — the student fund: a mortarboard with a gold tassel button. */
+  /* Idea 3 — the student fund: a mortarboard with a gold tassel. */
   function makeCap() {
     const g = new T.Group();
-    g.add(cyl(0.050, 0.056, 0.052, 14, CAP_NAVY, { pos: [0, 0.026, 0], rough: 0.7 }));
-    g.add(box(0.160, 0.020, 0.160, CAP_NAVY, { pos: [0, 0.062, 0], rot: [0, 0.5, 0], rough: 0.66 }));
-    g.add(cyl(0.014, 0.014, 0.012, 10, COIN_GOLD, { pos: [0, 0.078, 0], rough: 0.34, metal: 0.6 }));
-    g.add(cyl(0.007, 0.007, 0.070, 6, COIN_GOLD, { pos: [0.048, 0.056, 0.030], rot: [0.35, 0, 0.5], rough: 0.5, metal: 0.4 }));
+    const gold = mat(COIN_GOLD, { rough: 0.32, metal: 0.62 });
+    g.add(cyl(0.062, 0.072, 0.062, 14, CAP_NAVY, { pos: [0, 0.031, 0], rough: 0.68 }));
+    g.add(box(0.212, 0.024, 0.212, CAP_NAVY, { pos: [0, 0.076, 0], rot: [0, 0.5, 0], rough: 0.64 }));
+    g.add(cyl(0.019, 0.019, 0.014, 10, COIN_GOLD, { material: gold, pos: [0, 0.095, 0] }));
+    /* the cord runs out to a corner of the board and the tassel falls off it */
+    g.add(box(0.150, 0.009, 0.011, COIN_GOLD, { material: gold, pos: [0.071, 0.092, 0.021], rot: [0, -0.288, 0] }));
+    g.add(cyl(0.016, 0.011, 0.058, 6, COIN_GOLD, { material: gold, pos: [0.140, 0.056, 0.041] }));
     return g;
   }
 
-  /* Idea 4 — food rescue: a basket with the evening's surplus in it. */
+  /* Idea 4 — food rescue: a basket with a handle over it and the evening's
+     surplus in it. The handle is what makes it a basket at a distance. */
   function makeRescue() {
     const g = new T.Group();
+    const cane = mat(WOOD, { rough: 0.8 });
     g.add(lathe([
-      [0.000, 0.000], [0.068, 0.000], [0.074, 0.010], [0.130, 0.140],
-      [0.124, 0.148], [0.066, 0.014], [0.000, 0.012],
-    ], 20, WOOD_PALE, { rough: 0.82 }));
-    [[-0.045, 0.020], [0.040, -0.030], [0.010, 0.048]].forEach(function (p, i) {
-      g.add(box(0.046, 0.042, 0.046, CHEESE, { pos: [p[0], 0.132 + (i % 2) * 0.028, p[1]], rot: [0, i * 0.7, 0.12], rough: 0.7 }));
+      [0.000, 0.000], [0.092, 0.000], [0.100, 0.014], [0.172, 0.152],
+      [0.178, 0.170], [0.164, 0.170], [0.158, 0.152], [0.088, 0.018], [0.000, 0.014],
+    ], 20, WOOD_PALE, { rough: 0.82, side: T.DoubleSide }));
+    /* two weave bands, following the flare */
+    [0.052, 0.108].forEach(function (y) {
+      const r = 0.100 + (y / 0.152) * 0.070;
+      g.add(cyl(r + 0.006, r + 0.006, 0.016, 20, WOOD, { material: cane, pos: [0, y, 0], open: true, side: T.DoubleSide }));
+    });
+    const handle = new T.Mesh(new T.TorusGeometry(0.132, 0.015, 5, 16, Math.PI), cane);
+    handle.position.y = 0.152;
+    g.add(handle);
+    /* what is in it */
+    [[-0.052, 0.024], [0.046, -0.034], [0.012, 0.054]].forEach(function (p, i) {
+      g.add(box(0.052, 0.048, 0.052, i === 1 ? BRAND : CHEESE, {
+        pos: [p[0], 0.146 + (i % 2) * 0.030, p[1]], rot: [0, i * 0.7, 0.12], rough: 0.7,
+      }));
     });
     return g;
   }
@@ -3508,15 +3886,97 @@ const World = (function () {
 
   /* ---------------------------------------------------------- the balance */
 
-  /* the pan: a shallow bowl with a real lip, so the tokens sit in something */
+  /* Oak, drawn once and used on the beam and the plinth. The grain runs
+     along u, which on the extruded beam is the length of the beam. */
+  let oakCanvas = null;
+  function oakGrain() {
+    if (oakCanvas) return oakCanvas;
+    const c = canvas(256), g = c.getContext('2d');
+    g.fillStyle = '#9c6b3e'; g.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 34; i++) {
+      const y0 = Math.random() * 256, dark = Math.random() < 0.55;
+      g.strokeStyle = dark
+        ? 'rgba(84,50,24,' + (0.10 + Math.random() * 0.24) + ')'
+        : 'rgba(208,168,118,' + (0.06 + Math.random() * 0.18) + ')';
+      g.lineWidth = 0.7 + Math.random() * 3.2;
+      g.beginPath();
+      g.moveTo(-6, y0);
+      for (let x = 0; x <= 262; x += 18) {
+        g.lineTo(x, y0 + Math.sin(x * 0.032 + i) * 3.4 + (Math.random() - 0.5) * 1.4);
+      }
+      g.stroke();
+    }
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = 'rgba(72,42,18,' + (Math.random() * 0.15) + ')';
+      g.fillRect(Math.random() * 256, Math.random() * 256, 2.4, 1.1);
+    }
+    oakCanvas = c;
+    return c;
+  }
+  function oakTexture(rx, ry) { return tex(oakGrain(), { repeat: [rx, ry] }); }
+
+  /* The engraved collar around the column. Graduations and a maker's line,
+     etched into a rolled brass band — the one place the object admits it is
+     an instrument. */
+  function engraveTexture() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 128;
+    const g = c.getContext('2d');
+    const lg = g.createLinearGradient(0, 0, 0, 128);
+    lg.addColorStop(0, '#b3861d');
+    lg.addColorStop(0.40, '#e8cb64');
+    lg.addColorStop(1, '#9a731a');
+    g.fillStyle = lg; g.fillRect(0, 0, 512, 128);
+    g.strokeStyle = 'rgba(66,44,10,0.5)';
+    for (let i = 0; i < 64; i++) {
+      const x = i * 8 + 4, long = i % 8 === 0;
+      g.lineWidth = long ? 2.4 : 1.1;
+      g.beginPath();
+      g.moveTo(x, long ? 12 : 20);
+      g.lineTo(x, long ? 40 : 32);
+      g.stroke();
+    }
+    g.fillStyle = 'rgba(62,40,8,0.66)';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '700 30px Inter, system-ui, sans-serif';
+    g.fillText('THE  GIVING  SCALE', 256, 68);
+    g.font = '600 17px Inter, system-ui, sans-serif';
+    g.fillText('PIZZABURG   ·   No 1', 256, 100);
+    const hl = g.createLinearGradient(0, 0, 512, 0);
+    hl.addColorStop(0, 'rgba(255,255,255,0)');
+    hl.addColorStop(0.22, 'rgba(255,250,220,0.34)');
+    hl.addColorStop(0.44, 'rgba(255,255,255,0)');
+    g.fillStyle = hl; g.fillRect(0, 0, 512, 128);
+    return tex(c, { repeat: [2, 1] });
+  }
+
+  /* The pan: a dished shell with a rolled rim and a real wall thickness.
+     Out to r0.32 the inside is flat, which is where the tokens and the cost
+     weights stand. */
   const PAN_PROFILE = [
-    [0.000, 0.060], [0.300, 0.030], [0.550, 0.062], [0.720, 0.180], [0.750, 0.230],
-    [0.750, 0.252], [0.716, 0.206], [0.545, 0.088], [0.298, 0.056], [0.000, 0.086],
+    [0.000, 0.052], [0.320, 0.052], [0.490, 0.072], [0.624, 0.124],
+    [0.702, 0.186], [0.744, 0.232], [0.776, 0.250], [0.782, 0.232],
+    [0.756, 0.212], [0.712, 0.172], [0.620, 0.100], [0.470, 0.046],
+    [0.300, 0.022], [0.000, 0.018],
   ];
 
-  function makePan(color) {
+  /* where the three cords land on a pan, and how long that makes them */
+  const CORD_ANGLES = [Math.PI * 0.5, Math.PI * (7 / 6), Math.PI * (11 / 6)];
+  const CORD_R = 0.70;
+  const CORD_LEN = Math.sqrt(CORD_R * CORD_R + (CHAIN_LEN - PAN_RIM_Y) * (CHAIN_LEN - PAN_RIM_Y));
+
+  function makePan(color, brassMat) {
     const g = new T.Group();
-    g.add(lathe(PAN_PROFILE, 34, color, { rough: 0.68, side: T.DoubleSide }));
+    g.add(lathe(PAN_PROFILE, 30, color, { rough: 0.6, metal: 0.1, side: T.DoubleSide }));
+    /* a brass band round the rim, and three lugs for the cords */
+    g.add(cyl(0.794, 0.794, 0.062, 30, BRASS, { material: brassMat, pos: [0, 0.220, 0], open: true, side: T.DoubleSide }));
+    CORD_ANGLES.forEach(function (ang) {
+      g.add(box(0.050, 0.120, 0.064, BRASS, {
+        material: brassMat,
+        pos: [Math.cos(ang) * CORD_R, 0.210, Math.sin(ang) * CORD_R],
+        rot: [0, -ang, 0],
+      }));
+    });
     return g;
   }
 
@@ -3526,19 +3986,114 @@ const World = (function () {
     S.group.scale.setScalar(SCALE_UP);
     scene.add(S.group);
 
-    /* post and pivot */
-    S.group.add(cyl(0.60, 0.72, 0.14, 26, WOOD, { pos: [0, 0.07, 0], rough: 0.7 }));
-    S.group.add(cyl(0.50, 0.60, 0.30, 24, BRASS, { pos: [0, 0.15, 0], rough: 0.36, metal: 0.7 }));
-    S.group.add(cyl(0.16, 0.22, 3.20, 20, BRASS, { pos: [0, 1.60, 0], rough: 0.34, metal: 0.7 }));
-    S.beamPivot = new T.Mesh(new T.SphereGeometry(0.14, 16, 12), mat(BRASS, { rough: 0.28, metal: 0.8 }));
-    S.beamPivot.position.set(0, PIVOT_Y, 0);
-    S.group.add(S.beamPivot);
+    /* Three brasses: the body of the thing, a warmer one for the mouldings
+       so the profile does not go flat, and a polished one for the pivot and
+       the pan rims, which are the parts a highlight should find. */
+    const brass = mat(BRASS, { rough: 0.26, metal: 0.82 });
+    const brassWarm = mat(0xb8901f, { rough: 0.40, metal: 0.74 });
+    const brassBright = mat(0xdcb844, { rough: 0.18, metal: 0.90 });
+    const oak = mat(WOOD, { rough: 0.58, map: oakTexture(1.6, 1) });
 
-    /* the beam itself — oak, with brass caps at the ends */
-    S.beamBar = box(4.40, 0.16, 0.28, WOOD, { pos: [0, PIVOT_Y, 0], rough: 0.62 });
+    /* the oak plinth: a moulded block with a chamfered edge, cast metal
+       standing on wood rather than a disc standing on nothing */
+    S.group.add(lathe([
+      [0.000, 0.000], [1.140, 0.000], [1.140, 0.086], [1.098, 0.128],
+      [1.020, 0.148], [1.000, 0.204], [0.936, 0.240], [0.000, 0.246],
+    ], 28, WOOD, { rough: 0.6, map: oakTexture(4, 1) }));
+
+    /* the column, in one turned profile: a spread foot, an ogee up into the
+       shaft, a bead, the swell of the shaft, a collar and a spread capital.
+       This is the piece that does the most work — a straight taper reads as
+       a rod, and a rod reads as a placeholder. */
+    S.group.add(lathe([
+      [0.000, 0.200], [0.820, 0.200], [0.820, 0.252], [0.792, 0.300],
+      [0.700, 0.332], [0.664, 0.382], [0.640, 0.432], [0.520, 0.472],
+      [0.470, 0.522], [0.430, 0.590], [0.376, 0.642], [0.300, 0.692],
+      [0.250, 0.762], [0.236, 0.830], [0.268, 0.880], [0.238, 0.930],
+      [0.214, 1.020], [0.228, 1.180], [0.236, 1.340], [0.226, 1.520],
+      [0.204, 1.760], [0.184, 2.020], [0.170, 2.280], [0.164, 2.420],
+      [0.196, 2.480], [0.206, 2.540], [0.176, 2.586], [0.170, 2.650],
+      [0.240, 2.730], [0.280, 2.786], [0.288, 2.840], [0.252, 2.872],
+      [0.000, 2.882],
+    ], 24, BRASS, { material: brass }));
+    /* two darker mouldings, so the profile has shadow lines in it */
+    S.group.add(cyl(0.700, 0.700, 0.048, 24, 0xb8901f, { material: brassWarm, pos: [0, 0.352, 0] }));
+    S.group.add(cyl(0.278, 0.278, 0.040, 22, 0xb8901f, { material: brassWarm, pos: [0, 0.880, 0] }));
+
+    /* the engraved collar */
+    const collar = new T.Mesh(
+      new T.CylinderGeometry(0.252, 0.252, 0.300, 24, 1, true),
+      mat(0xffffff, { rough: 0.3, metal: 0.72, map: engraveTexture(), side: T.DoubleSide })
+    );
+    collar.position.set(0, 1.060, 0);
+    S.group.add(collar);
+    S.group.add(cyl(0.262, 0.262, 0.032, 24, 0xb8901f, { material: brassWarm, pos: [0, 1.222, 0] }));
+    S.group.add(cyl(0.262, 0.262, 0.032, 24, 0xb8901f, { material: brassWarm, pos: [0, 0.898, 0] }));
+
+    /* THE FULCRUM — two cheek plates rising off the capital with the beam
+       pinned between them. This is where the motion is, so it is the one
+       place that gets a mechanism instead of a suggestion. */
+    const cheek = new T.Shape();
+    cheek.moveTo(0.200, 0);
+    cheek.absarc(0, 0, 0.200, 0, Math.PI, false);
+    cheek.lineTo(-0.126, -0.300);
+    cheek.lineTo(-0.164, -0.348);
+    cheek.lineTo(0.164, -0.348);
+    cheek.lineTo(0.126, -0.300);
+    cheek.closePath();
+    [0.150, -0.220].forEach(function (z) {
+      S.group.add(extrude(cheek, 0.070, BRASS, { material: brass, curve: 12, pos: [0, PIVOT_Y, z] }));
+    });
+    /* the yoke that ties the cheeks together over the capital */
+    S.group.add(box(0.300, 0.110, 0.540, BRASS, { material: brassWarm, pos: [0, 2.916, 0] }));
+
+    /* the trunnion the beam turns on, and the caps on its ends */
+    S.beamPivot = cyl(0.060, 0.060, 0.560, 14, BRASS, { material: brassBright, pos: [0, PIVOT_Y, 0], rot: [Math.PI / 2, 0, 0] });
+    S.group.add(S.beamPivot);
+    [0.272, -0.272].forEach(function (z) {
+      S.group.add(lathe([
+        [0.000, 0.000], [0.078, 0.000], [0.074, 0.024], [0.052, 0.044], [0.020, 0.054], [0.000, 0.056],
+      ], 12, BRASS, { material: brassBright, pos: [0, PIVOT_Y, z], rot: [z > 0 ? Math.PI / 2 : -Math.PI / 2, 0, 0] }));
+    });
+
+    /* THE BEAM — an arched, tapering oak bar rather than a plank: 0.24 deep
+       over the pivot and 0.10 at the tips, chamfered all round. */
+    const beamShape = new T.Shape();
+    beamShape.moveTo(-BEAM_HALF, 0.050);
+    beamShape.quadraticCurveTo(-BEAM_HALF * 0.5, 0.134, 0, 0.134);
+    beamShape.quadraticCurveTo(BEAM_HALF * 0.5, 0.134, BEAM_HALF, 0.050);
+    beamShape.lineTo(BEAM_HALF, -0.050);
+    beamShape.quadraticCurveTo(BEAM_HALF * 0.5, -0.108, 0, -0.108);
+    beamShape.quadraticCurveTo(-BEAM_HALF * 0.5, -0.108, -BEAM_HALF, -0.050);
+    beamShape.closePath();
+    S.beamBar = new T.Mesh(
+      new T.ExtrudeGeometry(beamShape, {
+        depth: 0.220, bevelEnabled: true, bevelSize: 0.018, bevelThickness: 0.016,
+        bevelSegments: 1, curveSegments: 10,
+      }),
+      oak
+    );
+    S.beamBar.geometry.translate(0, 0, -0.110);
+    S.beamBar.position.set(0, PIVOT_Y, 0);
     S.group.add(S.beamBar);
+
+    /* the bearing bosses, which turn with the beam against the trunnion */
+    [0.120, -0.120].forEach(function (z) {
+      S.beamBar.add(cyl(0.098, 0.098, 0.048, 14, BRASS, { material: brassBright, pos: [0, 0, z], rot: [Math.PI / 2, 0, 0] }));
+    });
+    /* a saddle over the pivot, tying the beam to the bosses */
+    S.beamBar.add(box(0.340, 0.070, 0.250, BRASS, { material: brassWarm, pos: [0, 0.148, 0] }));
+
+    /* real terminals: a brass ferrule round each tip, an end cap, a link and
+       the eye the cords hang from */
     [-1, 1].forEach(function (side) {
-      S.beamBar.add(box(0.16, 0.20, 0.32, BRASS, { pos: [side * BEAM_HALF, 0, 0], rough: 0.34, metal: 0.7 }));
+      const x = side * BEAM_HALF;
+      S.beamBar.add(box(0.150, 0.140, 0.256, BRASS, { material: brassWarm, pos: [x - side * 0.062, 0, 0] }));
+      S.beamBar.add(box(0.048, 0.116, 0.232, BRASS, { material: brassBright, pos: [x + side * 0.018, 0, 0] }));
+      S.beamBar.add(box(0.034, 0.070, 0.034, BRASS, { material: brassBright, pos: [x, -0.076, 0] }));
+      const eye = new T.Mesh(new T.TorusGeometry(0.052, 0.019, 6, 14), brassBright);
+      eye.position.set(x, -0.116, 0);
+      S.beamBar.add(eye);
     });
 
     /* the empty hook: a bare ring on the good side of the beam, hung there
@@ -3549,32 +4104,38 @@ const World = (function () {
       [0.0700, 0.0000], [0.0744, 0.0106], [0.0850, 0.0150],
     ], 16, HOOK_DIM, { rough: 0.8, transparent: true, opacity: 0.9 });
     S.hook.rotation.x = Math.PI / 2;
-    S.hook.position.set(1.10, -0.17, 0);
+    S.hook.position.set(1.10, -0.185, 0);
     S.beamBar.add(S.hook);
 
-    /* the two chains. Each is two strands; every endpoint is recomputed in
-       applyStage, never fixed here, or the pans tear off the beam ends. */
-    const chainMat = mat(STEEL, { rough: 0.3, metal: 0.65 });
+    /* the cords. Three to a side, converging from the eye under the beam
+       terminal onto three lugs on the pan rim; every endpoint is recomputed
+       in applyStage, never fixed here, or the pans tear off the beam. */
+    const cordMat = mat(0xa89168, { rough: 0.36, metal: 0.55 });
     S.chainL = []; S.chainR = [];
-    for (let i = 0; i < 2; i++) {
-      S.chainL.push(cyl(0.02, 0.02, CHAIN_LEN, 6, STEEL, { material: chainMat }));
-      S.chainR.push(cyl(0.02, 0.02, CHAIN_LEN, 6, STEEL, { material: chainMat }));
+    for (let i = 0; i < 3; i++) {
+      S.chainL.push(cyl(0.021, 0.021, CORD_LEN, 6, 0xa89168, { material: cordMat }));
+      S.chainR.push(cyl(0.021, 0.021, CORD_LEN, 6, 0xa89168, { material: cordMat }));
       S.group.add(S.chainL[i], S.chainR[i]);
     }
 
     /* the pans */
-    S.costPan = makePan(STONE_GREY);
-    S.goodPan = makePan(PAN_TERRACOTTA);
+    S.costPan = makePan(STONE_GREY, brassWarm);
+    S.goodPan = makePan(PAN_TERRACOTTA, brassWarm);
     S.group.add(S.costPan, S.goodPan);
 
-    /* six plain stones, four down and two on top; one lifts off at the
+    /* six cast weights, four down and two on top; one lifts off at the
        environment stage, so the top-right slot is deliberately last */
     S.stoneSlots = [
-      [-0.14, 0.10, -0.14], [0.14, 0.10, -0.14], [-0.14, 0.10, 0.14],
-      [0.14, 0.10, 0.14], [-0.14, 0.28, 0.00], [0.14, 0.28, 0.00],
+      [-0.145, 0.056, -0.145], [0.145, 0.056, -0.145], [-0.145, 0.056, 0.145],
+      [0.145, 0.056, 0.145], [0.000, 0.206, -0.145], [0.000, 0.206, 0.145],
     ];
+    const weightGeo = new T.LatheGeometry([
+      [0.000, 0.000], [0.115, 0.000], [0.118, 0.014], [0.100, 0.072],
+      [0.086, 0.122], [0.084, 0.142], [0.050, 0.150], [0.046, 0.166],
+      [0.030, 0.176], [0.000, 0.178],
+    ].map(function (p) { return V2(Math.max(0.0001, p[0]), p[1]); }), 16);
     S.stones = new T.InstancedMesh(
-      new T.BoxGeometry(0.22, 0.18, 0.22), mat(STONE_GREY, { rough: 0.88 }), S.stoneSlots.length
+      weightGeo, mat(STONE_GREY, { rough: 0.54, metal: 0.3 }), S.stoneSlots.length
     );
     S.stones.count = 0;
     S.costPan.add(S.stones);
@@ -3582,7 +4143,7 @@ const World = (function () {
     /* the eight tokens, laid out on a golden angle so no two crowd */
     TOKENS.forEach(function (tk, i) {
       const a = i * 2.39996;
-      const r = Math.sqrt((i + 0.55) / TOKENS.length) * 0.44;
+      const r = Math.sqrt((i + 1.2) / (TOKENS.length + 1.4)) * 0.44;
       const m = MAKERS[tk.key]();
       m.position.set(Math.cos(a) * r, TOKEN_Y, Math.sin(a) * r);
       /* only a small turn each: three of the tokens are flat shapes and go
@@ -3609,16 +4170,24 @@ const World = (function () {
     const arc = new T.Shape();
     arc.absarc(0, 0, 1.10, Math.PI * 0.24, Math.PI * 0.76, false);
     arc.absarc(0, 0, 1.02, Math.PI * 0.76, Math.PI * 0.24, true);
-    S.gaugeArc = extrude(arc, 0.05, HOOK_DIM, { rough: 0.74, curve: 26, pos: [0, 3.40, -0.30] });
+    S.gaugeArc = extrude(arc, 0.05, HOOK_DIM, { rough: 0.5, metal: 0.24, curve: 26, pos: [0, 3.40, -0.30] });
     S.group.add(S.gaugeArc);
     for (let i = -2; i <= 2; i++) {
       const th = Math.PI / 2 + i * 0.12;
-      S.group.add(box(0.018, 0.10, 0.02, HOOK_DIM, {
+      S.group.add(box(0.020, i === 0 ? 0.15 : 0.10, 0.02, HOOK_DIM, {
         pos: [Math.cos(th) * 0.96, 3.40 + Math.sin(th) * 0.96, -0.235],
         rot: [0, 0, th - Math.PI / 2], rough: 0.74,
       }));
     }
-    S.gaugeTick = box(0.02, 0.18, 0.02, BRASS, { pos: [0, 4.46, -0.20], rough: 0.3, metal: 0.7, emissive: BRASS, ei: 0.2 });
+    /* a bead at each end of the arc, so it reads as a made thing */
+    [Math.PI * 0.24, Math.PI * 0.76].forEach(function (th) {
+      S.group.add(cyl(0.048, 0.048, 0.070, 12, BRASS, {
+        material: brassWarm,
+        pos: [Math.cos(th) * 1.06, 3.40 + Math.sin(th) * 1.06, -0.25],
+        rot: [Math.PI / 2, 0, 0],
+      }));
+    });
+    S.gaugeTick = box(0.026, 0.20, 0.026, BRASS, { pos: [0, 4.46, -0.20], rough: 0.2, metal: 0.85, emissive: BRASS, ei: 0.22 });
     S.group.add(S.gaugeTick);
 
     /* the payoff light, dark until the reveal */
@@ -3626,7 +4195,15 @@ const World = (function () {
     S.glow.position.set(0, 4.5, 1.5);
     S.group.add(S.glow);
 
-    scene.add(contact(0, 0, 3.6, 0.5));
+    /* a small warm key off to the right, so the brass has something to
+       catch. It is weak enough that the room's own light still leads. */
+    const key = new T.PointLight(0xffe6b4, 36, 30, 2);
+    key.position.set(8, 11, 11);
+    scene.add(key);
+
+    /* the plinth is 2.96 units across once the group is scaled, so it wants
+       a tight dark contact under it and a soft one around that */
+    scene.add(contact(0, 0, 4.0, 0.32, 0.045), contact(0, 0, 2.7, 0.5, 0.062));
   }
 
   /* ------------------------------------------------------------- the steps */
@@ -3703,11 +4280,18 @@ const World = (function () {
 
     S.beamBar.rotation.z = a;
 
-    /* both beam ends, then the pans hanging plumb under them */
-    const ca = Math.cos(a) * BEAM_HALF, sa = Math.sin(a) * BEAM_HALF;
-    const rx = ca, ry = PIVOT_Y + sa;      /* good side, +x */
-    const lx = -ca, ly = PIVOT_Y - sa;     /* cost side, −x */
+    /* The two eyes the cords hang from. They are not the beam's corners:
+       each sits EYE_DROP under the beam's centreline at the terminal, so in
+       the beam's own frame the point is (±BEAM_HALF, −EYE_DROP), and it has
+       to be carried through the same rotation the beam just took or the
+       cords come away from the eyes as soon as the beam moves. */
+    const ca = Math.cos(a), sa = Math.sin(a);
+    const rx = ca * BEAM_HALF + sa * EYE_DROP;              /* good side, +x */
+    const ry = PIVOT_Y + sa * BEAM_HALF - ca * EYE_DROP;
+    const lx = -ca * BEAM_HALF + sa * EYE_DROP;             /* cost side, −x */
+    const ly = PIVOT_Y - sa * BEAM_HALF - ca * EYE_DROP;
 
+    /* the pans hang plumb under their eye */
     S.goodPan.position.set(rx, ry - CHAIN_LEN, 0);
     S.costPan.position.set(lx, ly - CHAIN_LEN, 0);
 
@@ -3742,10 +4326,14 @@ const World = (function () {
     S.glow.intensity = anim.revealGlow * 10;
   }
 
-  function hang(pair, ex, ey, panY) {
-    for (let i = 0; i < 2; i++) {
-      const z = i ? CHAIN_SPLAY : -CHAIN_SPLAY;
-      span(pair[i], ex, ey, 0, ex, panY + PAN_RIM_Y, z, CHAIN_LEN);
+  /* three cords a side, from the one eye out to the three lugs on the rim.
+     The pan hangs plumb under the eye, so every cord is the same length at
+     every tilt and span() only ever has to re-aim them. */
+  function hang(trio, ex, ey, panY) {
+    for (let i = 0; i < 3; i++) {
+      const ang = CORD_ANGLES[i];
+      span(trio[i], ex, ey, 0,
+        ex + Math.cos(ang) * CORD_R, panY + PAN_RIM_Y, Math.sin(ang) * CORD_R, CORD_LEN);
     }
   }
 

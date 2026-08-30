@@ -61,9 +61,9 @@ const World = (function () {
 
   const PIVOT_Y = 3.2;      /* where the beam crosses the post, in scale units */
   const BEAM_HALF = 2.2;    /* half of the 4.4 beam */
-  const CHAIN_LEN = 1.6;    /* drop from beam end to pan floor */
-  const CHAIN_SPLAY = 0.5;  /* the two strands of a chain part this far in z */
-  const PAN_RIM_Y = 0.20;   /* where a strand meets the pan */
+  const CHAIN_LEN = 1.6;    /* drop from the eye to the pan's own origin */
+  const EYE_DROP = 0.155;   /* how far the eye hangs under the beam's centreline */
+  const PAN_RIM_Y = 0.205;  /* where a cord meets the lug on the pan rim */
 
   const S = {
     group: null, beamBar: null, beamPivot: null,
@@ -655,136 +655,208 @@ const World = (function () {
     { key: 'cap',     flag: 'capOn',     w: 1.4 },
     { key: 'rescue',  flag: 'rescueOn',  w: 2.1 },
   ];
-  const TOKEN_Y = 0.07;   /* the pan's inner floor */
+  const TOKEN_Y = 0.055;  /* the pan's inner floor, which is flat out to r0.32 */
 
-  /* Ramadan: a small pierced lantern with a warm core. */
+  /* Every token is read from ten metres of classroom, at maybe twenty pixels
+     across. So each one is built for its silhouette first: a lantern with a
+     domed cap and a ring, a gift with a bow, an apron with a neck strap, a
+     basket with a handle over it. Detail that would not survive the trip
+     down to twenty pixels is left out on purpose. */
+
+  /* Ramadan: an eight-sided pierced lantern with a warm core. */
   function makeLantern() {
     const g = new T.Group();
+    const brass = mat(BRASS, { rough: 0.24, metal: 0.88 });
     g.add(lathe([
-      [0.00, 0.00], [0.070, 0.000], [0.078, 0.012], [0.110, 0.060],
-      [0.098, 0.118], [0.062, 0.150], [0.062, 0.160], [0.000, 0.160],
-    ], 16, CREAM, { rough: 0.5, emissive: WARM_GLOW, ei: 0.85 }));
-    g.add(cyl(0.026, 0.034, 0.030, 10, BRASS, { pos: [0, 0.175, 0], rough: 0.34, metal: 0.7 }));
-    g.add(cyl(0.084, 0.084, 0.016, 12, BRASS, { pos: [0, 0.006, 0], rough: 0.34, metal: 0.7 }));
+      [0.000, 0.000], [0.076, 0.000], [0.092, 0.022], [0.106, 0.078],
+      [0.100, 0.150], [0.078, 0.192], [0.052, 0.206], [0.000, 0.208],
+    ], 8, CREAM, { rough: 0.48, emissive: WARM_GLOW, ei: 0.95 }));
+    /* a spread foot and a shoulder band, both brass, so the body is framed */
+    g.add(cyl(0.082, 0.114, 0.034, 8, BRASS, { material: brass, pos: [0, 0.017, 0] }));
+    g.add(cyl(0.090, 0.090, 0.022, 8, BRASS, { material: brass, pos: [0, 0.150, 0] }));
+    /* the dome, the stem and the carrying ring */
+    const cap = lathe([
+      [0.000, 0.000], [0.088, 0.000], [0.076, 0.038], [0.040, 0.072], [0.000, 0.082],
+    ], 8, BRASS, { material: brass });
+    cap.position.y = 0.204;
+    g.add(cap);
+    g.add(cyl(0.013, 0.013, 0.052, 6, BRASS, { material: brass, pos: [0, 0.310, 0] }));
+    const ring = new T.Mesh(new T.TorusGeometry(0.028, 0.009, 5, 10), brass);
+    ring.position.y = 0.348;
+    g.add(ring);
+    /* four ribs down the corners of the body */
+    for (let i = 0; i < 4; i++) {
+      const a = i * 1.5708 + 0.39;
+      g.add(box(0.016, 0.150, 0.016, BRASS, { material: brass, pos: [Math.cos(a) * 0.096, 0.100, Math.sin(a) * 0.096] }));
+    }
     return g;
   }
 
-  /* Christmas: a wrapped box with a cream cross-ribbon. */
+  /* Christmas: a wrapped box with a cross-ribbon and a proper bow. */
   function makeGift() {
     const g = new T.Group();
-    g.add(box(0.160, 0.140, 0.160, BRAND, { pos: [0, 0.070, 0], rough: 0.62 }));
-    g.add(box(0.170, 0.146, 0.030, CREAM, { pos: [0, 0.070, 0], rough: 0.6 }));
-    g.add(box(0.030, 0.146, 0.170, CREAM, { pos: [0, 0.070, 0], rough: 0.6 }));
-    [-0.36, 0.36].forEach(function (r) {
-      g.add(box(0.052, 0.020, 0.030, CREAM, { pos: [Math.sin(r) * 0.05, 0.148, 0], rot: [0, 0, r], rough: 0.6 }));
+    const ribbon = mat(CREAM, { rough: 0.56 });
+    g.add(box(0.200, 0.170, 0.200, BRAND_DEEP, { pos: [0, 0.085, 0], rough: 0.58 }));
+    g.add(box(0.212, 0.180, 0.046, CREAM, { material: ribbon, pos: [0, 0.085, 0] }));
+    g.add(box(0.046, 0.180, 0.212, CREAM, { material: ribbon, pos: [0, 0.085, 0] }));
+    [-1, 1].forEach(function (s) {
+      const loop = new T.Mesh(new T.TorusGeometry(0.050, 0.015, 5, 12), ribbon);
+      loop.position.set(s * 0.052, 0.186, 0);
+      loop.rotation.set(Math.PI / 2, 0, s * 0.42);
+      loop.scale.set(1, 0.72, 1);
+      g.add(loop);
     });
+    const knot = new T.Mesh(new T.SphereGeometry(0.026, 8, 6), ribbon);
+    knot.position.y = 0.188;
+    g.add(knot);
     return g;
   }
 
-  /* Welfare: a flat apron disc with two neck straps, lying on edge. */
+  /* Welfare: a real apron cut — bib, flare, waist ties, neck strap. Flat
+     shapes go mushy at this size unless they are given an outline, so this
+     one is extruded thick enough to catch its own shadow. */
   function makeApron() {
+    const s = new T.Shape();
+    s.moveTo(-0.054, 0.132);
+    s.lineTo(0.054, 0.132);
+    s.lineTo(0.064, 0.042);
+    s.lineTo(0.108, -0.024);
+    s.lineTo(0.116, -0.152);
+    s.lineTo(-0.116, -0.152);
+    s.lineTo(-0.108, -0.024);
+    s.lineTo(-0.064, 0.042);
+    s.closePath();
     const g = new T.Group();
-    const body = lathe([
-      [0.000, 0.000], [0.060, 0.000], [0.084, 0.006], [0.090, 0.015],
-      [0.084, 0.024], [0.060, 0.030], [0.000, 0.030],
-    ], 22, WOOD_PALE, { rough: 0.78 });
-    /* stand the disc up so it reads as cloth: after the quarter turn the
-       lathe's own z is what runs vertically, so that is the axis to stretch */
-    body.rotation.x = -Math.PI / 2;
-    body.scale.set(1, 1, 1.12);
-    body.position.y = 0.100;
-    g.add(body);
-    [-0.045, 0.045].forEach(function (x) {
-      g.add(box(0.012, 0.070, 0.010, WOOD_PALE, { pos: [x, 0.195, 0], rot: [0, 0, x * 2.4], rough: 0.78 }));
+    const tie = mat(CREAM, { rough: 0.72 });
+    const cloth = extrude(s, 0.022, BRAND, { rough: 0.8, curve: 4 });
+    cloth.position.set(0, 0.164, -0.011);
+    g.add(cloth);
+    const strap = new T.Mesh(new T.TorusGeometry(0.054, 0.009, 5, 12, Math.PI), tie);
+    strap.position.y = 0.296;
+    g.add(strap);
+    [-1, 1].forEach(function (sd) {
+      g.add(box(0.074, 0.015, 0.017, CREAM, { material: tie, pos: [sd * 0.132, 0.206, 0], rot: [0, 0, sd * 0.34] }));
     });
+    /* the pocket, standing a little proud of the cloth */
+    g.add(box(0.112, 0.054, 0.013, CREAM, { material: tie, pos: [0, 0.120, 0.014] }));
     return g;
   }
 
-  /* Environment: one leaf, for the paper wrap that replaced the plastic. */
+  /* Environment: one leaf with a raised midrib, tilted up off the pan. */
   function makeLeaf() {
     const s = new T.Shape();
-    s.moveTo(-0.080, 0);
-    s.quadraticCurveTo(-0.010, 0.060, 0.080, 0);
-    s.quadraticCurveTo(-0.010, -0.060, -0.080, 0);
+    s.moveTo(-0.118, 0);
+    s.quadraticCurveTo(-0.014, 0.092, 0.118, 0);
+    s.quadraticCurveTo(-0.014, -0.092, -0.118, 0);
     const g = new T.Group();
-    const blade = extrude(s, 0.016, LEAF_YOUNG, { rough: 0.66, curve: 14 });
-    blade.rotation.x = -Math.PI / 2.4;
-    blade.position.y = 0.062;
-    g.add(blade);
-    g.add(box(0.008, 0.062, 0.008, 0x6d8a52, { pos: [-0.062, 0.030, 0.020], rot: [0.5, 0, 0.4], rough: 0.7 }));
+    const inner = new T.Group();
+    inner.add(extrude(s, 0.018, LEAF_YOUNG, { rough: 0.62, curve: 14 }));
+    inner.add(box(0.196, 0.012, 0.012, 0x6d8a52, { pos: [0, 0, 0.022], rough: 0.66 }));
+    inner.rotation.set(-Math.PI / 2.5, 0, 0.20);
+    inner.position.set(0.016, 0.100, 0);
+    g.add(inner);
+    g.add(cyl(0.010, 0.015, 0.120, 6, 0x6d8a52, { pos: [-0.088, 0.048, 0.030], rot: [0.42, 0, 0.62], rough: 0.68 }));
     return g;
   }
 
-  /* Idea 1 — buy one give one: two slices, cut apart, facing each other.
-     Extruded sectors rather than partial lathes: a lathe stopped short of a
-     full turn leaves both cut faces open, and at this size the hollow shows. */
+  /* Idea 1 — buy one give one: two slices cut apart, one lying and one
+     tipped up against it, because two flat wedges from above read as one
+     shape and a tipped one does not. */
   function makeMeal() {
     const wedge = new T.Shape();
     wedge.moveTo(0, 0);
-    wedge.absarc(0, 0, 0.120, -Math.PI / 8, Math.PI / 8, false);
+    wedge.absarc(0, 0, 0.158, -Math.PI / 7, Math.PI / 7, false);
     wedge.lineTo(0, 0);
-    const g = new T.Group();
-    [-1, 1].forEach(function (side) {
+
+    function slice() {
       const w = new T.Group();
-      const base = extrude(wedge, 0.026, CREAM, { rough: 0.8, curve: 10 });
+      const base = extrude(wedge, 0.030, CREAM, { rough: 0.78, curve: 10 });
       base.rotation.x = -Math.PI / 2;
       w.add(base);
-      const top = extrude(wedge, 0.012, BRAND, { rough: 0.55, curve: 10 });
+      const top = extrude(wedge, 0.014, BRAND, { rough: 0.52, curve: 10 });
       top.rotation.x = -Math.PI / 2;
       top.scale.set(0.86, 0.86, 1);
-      top.position.y = 0.028;
+      top.position.set(0.008, 0.032, 0);
       w.add(top);
-      w.rotation.y = side > 0 ? 0 : Math.PI;
-      w.position.set(side * 0.052, 0.006, side * 0.030);
-      g.add(w);
-    });
+      /* the crust, across the wide end — the bit that says pizza */
+      w.add(box(0.032, 0.042, 0.140, CHEESE, { pos: [0.150, 0.020, 0], rough: 0.72 }));
+      return w;
+    }
+
+    const g = new T.Group();
+    const flat = slice();
+    flat.rotation.y = 0.30;
+    flat.position.set(-0.062, 0.002, 0.026);
+    g.add(flat);
+    const lift = new T.Group();
+    lift.add(slice());
+    lift.rotation.set(0, Math.PI - 0.45, 0.62);
+    lift.position.set(0.074, 0.014, -0.030);
+    g.add(lift);
     return g;
   }
 
   /* Idea 2 — the green return: a loop that comes back on itself. */
   function makeGreen() {
-    const a0 = Math.PI * 0.18, a1 = Math.PI * 1.72;
+    const a0 = Math.PI * 0.16, a1 = Math.PI * 1.74, ro = 0.118, ri = 0.070;
     const ring = new T.Shape();
-    ring.absarc(0, 0, 0.090, a0, a1, false);
-    ring.absarc(0, 0, 0.062, a1, a0, true);
+    ring.moveTo(Math.cos(a0) * ro, Math.sin(a0) * ro);
+    ring.absarc(0, 0, ro, a0, a1, false);
+    ring.absarc(0, 0, ri, a1, a0, true);
     const g = new T.Group();
     /* the loop stands on its own inner group: the token's own origin has to
        stay on the pan floor, because applyStage drives that y directly */
     const inner = new T.Group();
-    inner.position.y = 0.098;
-    inner.add(extrude(ring, 0.024, LEAF_YOUNG, { rough: 0.5, metal: 0.2, curve: 20 }));
+    inner.position.y = 0.132;
+    inner.add(extrude(ring, 0.032, LEAF_YOUNG, { rough: 0.46, metal: 0.22, curve: 20 }));
     const head = new T.Shape();
-    head.moveTo(0, 0.042);
-    head.lineTo(-0.038, -0.026);
-    head.lineTo(0.038, -0.026);
+    head.moveTo(0, 0.056);
+    head.lineTo(-0.050, -0.034);
+    head.lineTo(0.050, -0.034);
     head.closePath();
-    const tip = extrude(head, 0.024, LEAF_YOUNG, { rough: 0.5, metal: 0.2, curve: 4 });
-    tip.position.set(Math.cos(a1) * 0.076, Math.sin(a1) * 0.076, 0);
+    const tip = extrude(head, 0.032, LEAF_YOUNG, { rough: 0.46, metal: 0.22, curve: 4 });
+    tip.position.set(Math.cos(a1) * 0.094, Math.sin(a1) * 0.094, 0);
     tip.rotation.z = a1;
     inner.add(tip);
     g.add(inner);
     return g;
   }
 
-  /* Idea 3 — the student fund: a mortarboard with a gold tassel button. */
+  /* Idea 3 — the student fund: a mortarboard with a gold tassel. */
   function makeCap() {
     const g = new T.Group();
-    g.add(cyl(0.050, 0.056, 0.052, 14, CAP_NAVY, { pos: [0, 0.026, 0], rough: 0.7 }));
-    g.add(box(0.160, 0.020, 0.160, CAP_NAVY, { pos: [0, 0.062, 0], rot: [0, 0.5, 0], rough: 0.66 }));
-    g.add(cyl(0.014, 0.014, 0.012, 10, COIN_GOLD, { pos: [0, 0.078, 0], rough: 0.34, metal: 0.6 }));
-    g.add(cyl(0.007, 0.007, 0.070, 6, COIN_GOLD, { pos: [0.048, 0.056, 0.030], rot: [0.35, 0, 0.5], rough: 0.5, metal: 0.4 }));
+    const gold = mat(COIN_GOLD, { rough: 0.32, metal: 0.62 });
+    g.add(cyl(0.062, 0.072, 0.062, 14, CAP_NAVY, { pos: [0, 0.031, 0], rough: 0.68 }));
+    g.add(box(0.212, 0.024, 0.212, CAP_NAVY, { pos: [0, 0.076, 0], rot: [0, 0.5, 0], rough: 0.64 }));
+    g.add(cyl(0.019, 0.019, 0.014, 10, COIN_GOLD, { material: gold, pos: [0, 0.095, 0] }));
+    /* the cord runs out to a corner of the board and the tassel falls off it */
+    g.add(box(0.150, 0.009, 0.011, COIN_GOLD, { material: gold, pos: [0.071, 0.092, 0.021], rot: [0, -0.288, 0] }));
+    g.add(cyl(0.016, 0.011, 0.058, 6, COIN_GOLD, { material: gold, pos: [0.140, 0.056, 0.041] }));
     return g;
   }
 
-  /* Idea 4 — food rescue: a basket with the evening's surplus in it. */
+  /* Idea 4 — food rescue: a basket with a handle over it and the evening's
+     surplus in it. The handle is what makes it a basket at a distance. */
   function makeRescue() {
     const g = new T.Group();
+    const cane = mat(WOOD, { rough: 0.8 });
     g.add(lathe([
-      [0.000, 0.000], [0.068, 0.000], [0.074, 0.010], [0.130, 0.140],
-      [0.124, 0.148], [0.066, 0.014], [0.000, 0.012],
-    ], 20, WOOD_PALE, { rough: 0.82 }));
-    [[-0.045, 0.020], [0.040, -0.030], [0.010, 0.048]].forEach(function (p, i) {
-      g.add(box(0.046, 0.042, 0.046, CHEESE, { pos: [p[0], 0.132 + (i % 2) * 0.028, p[1]], rot: [0, i * 0.7, 0.12], rough: 0.7 }));
+      [0.000, 0.000], [0.092, 0.000], [0.100, 0.014], [0.172, 0.152],
+      [0.178, 0.170], [0.164, 0.170], [0.158, 0.152], [0.088, 0.018], [0.000, 0.014],
+    ], 20, WOOD_PALE, { rough: 0.82, side: T.DoubleSide }));
+    /* two weave bands, following the flare */
+    [0.052, 0.108].forEach(function (y) {
+      const r = 0.100 + (y / 0.152) * 0.070;
+      g.add(cyl(r + 0.006, r + 0.006, 0.016, 20, WOOD, { material: cane, pos: [0, y, 0], open: true, side: T.DoubleSide }));
+    });
+    const handle = new T.Mesh(new T.TorusGeometry(0.132, 0.015, 5, 16, Math.PI), cane);
+    handle.position.y = 0.152;
+    g.add(handle);
+    /* what is in it */
+    [[-0.052, 0.024], [0.046, -0.034], [0.012, 0.054]].forEach(function (p, i) {
+      g.add(box(0.052, 0.048, 0.052, i === 1 ? BRAND : CHEESE, {
+        pos: [p[0], 0.146 + (i % 2) * 0.030, p[1]], rot: [0, i * 0.7, 0.12], rough: 0.7,
+      }));
     });
     return g;
   }
@@ -796,15 +868,97 @@ const World = (function () {
 
   /* ---------------------------------------------------------- the balance */
 
-  /* the pan: a shallow bowl with a real lip, so the tokens sit in something */
+  /* Oak, drawn once and used on the beam and the plinth. The grain runs
+     along u, which on the extruded beam is the length of the beam. */
+  let oakCanvas = null;
+  function oakGrain() {
+    if (oakCanvas) return oakCanvas;
+    const c = canvas(256), g = c.getContext('2d');
+    g.fillStyle = '#9c6b3e'; g.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 34; i++) {
+      const y0 = Math.random() * 256, dark = Math.random() < 0.55;
+      g.strokeStyle = dark
+        ? 'rgba(84,50,24,' + (0.10 + Math.random() * 0.24) + ')'
+        : 'rgba(208,168,118,' + (0.06 + Math.random() * 0.18) + ')';
+      g.lineWidth = 0.7 + Math.random() * 3.2;
+      g.beginPath();
+      g.moveTo(-6, y0);
+      for (let x = 0; x <= 262; x += 18) {
+        g.lineTo(x, y0 + Math.sin(x * 0.032 + i) * 3.4 + (Math.random() - 0.5) * 1.4);
+      }
+      g.stroke();
+    }
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = 'rgba(72,42,18,' + (Math.random() * 0.15) + ')';
+      g.fillRect(Math.random() * 256, Math.random() * 256, 2.4, 1.1);
+    }
+    oakCanvas = c;
+    return c;
+  }
+  function oakTexture(rx, ry) { return tex(oakGrain(), { repeat: [rx, ry] }); }
+
+  /* The engraved collar around the column. Graduations and a maker's line,
+     etched into a rolled brass band — the one place the object admits it is
+     an instrument. */
+  function engraveTexture() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 128;
+    const g = c.getContext('2d');
+    const lg = g.createLinearGradient(0, 0, 0, 128);
+    lg.addColorStop(0, '#b3861d');
+    lg.addColorStop(0.40, '#e8cb64');
+    lg.addColorStop(1, '#9a731a');
+    g.fillStyle = lg; g.fillRect(0, 0, 512, 128);
+    g.strokeStyle = 'rgba(66,44,10,0.5)';
+    for (let i = 0; i < 64; i++) {
+      const x = i * 8 + 4, long = i % 8 === 0;
+      g.lineWidth = long ? 2.4 : 1.1;
+      g.beginPath();
+      g.moveTo(x, long ? 12 : 20);
+      g.lineTo(x, long ? 40 : 32);
+      g.stroke();
+    }
+    g.fillStyle = 'rgba(62,40,8,0.66)';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '700 30px Inter, system-ui, sans-serif';
+    g.fillText('THE  GIVING  SCALE', 256, 68);
+    g.font = '600 17px Inter, system-ui, sans-serif';
+    g.fillText('PIZZABURG   ·   No 1', 256, 100);
+    const hl = g.createLinearGradient(0, 0, 512, 0);
+    hl.addColorStop(0, 'rgba(255,255,255,0)');
+    hl.addColorStop(0.22, 'rgba(255,250,220,0.34)');
+    hl.addColorStop(0.44, 'rgba(255,255,255,0)');
+    g.fillStyle = hl; g.fillRect(0, 0, 512, 128);
+    return tex(c, { repeat: [2, 1] });
+  }
+
+  /* The pan: a dished shell with a rolled rim and a real wall thickness.
+     Out to r0.32 the inside is flat, which is where the tokens and the cost
+     weights stand. */
   const PAN_PROFILE = [
-    [0.000, 0.060], [0.300, 0.030], [0.550, 0.062], [0.720, 0.180], [0.750, 0.230],
-    [0.750, 0.252], [0.716, 0.206], [0.545, 0.088], [0.298, 0.056], [0.000, 0.086],
+    [0.000, 0.052], [0.320, 0.052], [0.490, 0.072], [0.624, 0.124],
+    [0.702, 0.186], [0.744, 0.232], [0.776, 0.250], [0.782, 0.232],
+    [0.756, 0.212], [0.712, 0.172], [0.620, 0.100], [0.470, 0.046],
+    [0.300, 0.022], [0.000, 0.018],
   ];
 
-  function makePan(color) {
+  /* where the three cords land on a pan, and how long that makes them */
+  const CORD_ANGLES = [Math.PI * 0.5, Math.PI * (7 / 6), Math.PI * (11 / 6)];
+  const CORD_R = 0.70;
+  const CORD_LEN = Math.sqrt(CORD_R * CORD_R + (CHAIN_LEN - PAN_RIM_Y) * (CHAIN_LEN - PAN_RIM_Y));
+
+  function makePan(color, brassMat) {
     const g = new T.Group();
-    g.add(lathe(PAN_PROFILE, 34, color, { rough: 0.68, side: T.DoubleSide }));
+    g.add(lathe(PAN_PROFILE, 30, color, { rough: 0.6, metal: 0.1, side: T.DoubleSide }));
+    /* a brass band round the rim, and three lugs for the cords */
+    g.add(cyl(0.794, 0.794, 0.062, 30, BRASS, { material: brassMat, pos: [0, 0.220, 0], open: true, side: T.DoubleSide }));
+    CORD_ANGLES.forEach(function (ang) {
+      g.add(box(0.050, 0.120, 0.064, BRASS, {
+        material: brassMat,
+        pos: [Math.cos(ang) * CORD_R, 0.210, Math.sin(ang) * CORD_R],
+        rot: [0, -ang, 0],
+      }));
+    });
     return g;
   }
 
@@ -814,19 +968,114 @@ const World = (function () {
     S.group.scale.setScalar(SCALE_UP);
     scene.add(S.group);
 
-    /* post and pivot */
-    S.group.add(cyl(0.60, 0.72, 0.14, 26, WOOD, { pos: [0, 0.07, 0], rough: 0.7 }));
-    S.group.add(cyl(0.50, 0.60, 0.30, 24, BRASS, { pos: [0, 0.15, 0], rough: 0.36, metal: 0.7 }));
-    S.group.add(cyl(0.16, 0.22, 3.20, 20, BRASS, { pos: [0, 1.60, 0], rough: 0.34, metal: 0.7 }));
-    S.beamPivot = new T.Mesh(new T.SphereGeometry(0.14, 16, 12), mat(BRASS, { rough: 0.28, metal: 0.8 }));
-    S.beamPivot.position.set(0, PIVOT_Y, 0);
-    S.group.add(S.beamPivot);
+    /* Three brasses: the body of the thing, a warmer one for the mouldings
+       so the profile does not go flat, and a polished one for the pivot and
+       the pan rims, which are the parts a highlight should find. */
+    const brass = mat(BRASS, { rough: 0.26, metal: 0.82 });
+    const brassWarm = mat(0xb8901f, { rough: 0.40, metal: 0.74 });
+    const brassBright = mat(0xdcb844, { rough: 0.18, metal: 0.90 });
+    const oak = mat(WOOD, { rough: 0.58, map: oakTexture(1.6, 1) });
 
-    /* the beam itself — oak, with brass caps at the ends */
-    S.beamBar = box(4.40, 0.16, 0.28, WOOD, { pos: [0, PIVOT_Y, 0], rough: 0.62 });
+    /* the oak plinth: a moulded block with a chamfered edge, cast metal
+       standing on wood rather than a disc standing on nothing */
+    S.group.add(lathe([
+      [0.000, 0.000], [1.140, 0.000], [1.140, 0.086], [1.098, 0.128],
+      [1.020, 0.148], [1.000, 0.204], [0.936, 0.240], [0.000, 0.246],
+    ], 28, WOOD, { rough: 0.6, map: oakTexture(4, 1) }));
+
+    /* the column, in one turned profile: a spread foot, an ogee up into the
+       shaft, a bead, the swell of the shaft, a collar and a spread capital.
+       This is the piece that does the most work — a straight taper reads as
+       a rod, and a rod reads as a placeholder. */
+    S.group.add(lathe([
+      [0.000, 0.200], [0.820, 0.200], [0.820, 0.252], [0.792, 0.300],
+      [0.700, 0.332], [0.664, 0.382], [0.640, 0.432], [0.520, 0.472],
+      [0.470, 0.522], [0.430, 0.590], [0.376, 0.642], [0.300, 0.692],
+      [0.250, 0.762], [0.236, 0.830], [0.268, 0.880], [0.238, 0.930],
+      [0.214, 1.020], [0.228, 1.180], [0.236, 1.340], [0.226, 1.520],
+      [0.204, 1.760], [0.184, 2.020], [0.170, 2.280], [0.164, 2.420],
+      [0.196, 2.480], [0.206, 2.540], [0.176, 2.586], [0.170, 2.650],
+      [0.240, 2.730], [0.280, 2.786], [0.288, 2.840], [0.252, 2.872],
+      [0.000, 2.882],
+    ], 24, BRASS, { material: brass }));
+    /* two darker mouldings, so the profile has shadow lines in it */
+    S.group.add(cyl(0.700, 0.700, 0.048, 24, 0xb8901f, { material: brassWarm, pos: [0, 0.352, 0] }));
+    S.group.add(cyl(0.278, 0.278, 0.040, 22, 0xb8901f, { material: brassWarm, pos: [0, 0.880, 0] }));
+
+    /* the engraved collar */
+    const collar = new T.Mesh(
+      new T.CylinderGeometry(0.252, 0.252, 0.300, 24, 1, true),
+      mat(0xffffff, { rough: 0.3, metal: 0.72, map: engraveTexture(), side: T.DoubleSide })
+    );
+    collar.position.set(0, 1.060, 0);
+    S.group.add(collar);
+    S.group.add(cyl(0.262, 0.262, 0.032, 24, 0xb8901f, { material: brassWarm, pos: [0, 1.222, 0] }));
+    S.group.add(cyl(0.262, 0.262, 0.032, 24, 0xb8901f, { material: brassWarm, pos: [0, 0.898, 0] }));
+
+    /* THE FULCRUM — two cheek plates rising off the capital with the beam
+       pinned between them. This is where the motion is, so it is the one
+       place that gets a mechanism instead of a suggestion. */
+    const cheek = new T.Shape();
+    cheek.moveTo(0.200, 0);
+    cheek.absarc(0, 0, 0.200, 0, Math.PI, false);
+    cheek.lineTo(-0.126, -0.300);
+    cheek.lineTo(-0.164, -0.348);
+    cheek.lineTo(0.164, -0.348);
+    cheek.lineTo(0.126, -0.300);
+    cheek.closePath();
+    [0.150, -0.220].forEach(function (z) {
+      S.group.add(extrude(cheek, 0.070, BRASS, { material: brass, curve: 12, pos: [0, PIVOT_Y, z] }));
+    });
+    /* the yoke that ties the cheeks together over the capital */
+    S.group.add(box(0.300, 0.110, 0.540, BRASS, { material: brassWarm, pos: [0, 2.916, 0] }));
+
+    /* the trunnion the beam turns on, and the caps on its ends */
+    S.beamPivot = cyl(0.060, 0.060, 0.560, 14, BRASS, { material: brassBright, pos: [0, PIVOT_Y, 0], rot: [Math.PI / 2, 0, 0] });
+    S.group.add(S.beamPivot);
+    [0.272, -0.272].forEach(function (z) {
+      S.group.add(lathe([
+        [0.000, 0.000], [0.078, 0.000], [0.074, 0.024], [0.052, 0.044], [0.020, 0.054], [0.000, 0.056],
+      ], 12, BRASS, { material: brassBright, pos: [0, PIVOT_Y, z], rot: [z > 0 ? Math.PI / 2 : -Math.PI / 2, 0, 0] }));
+    });
+
+    /* THE BEAM — an arched, tapering oak bar rather than a plank: 0.24 deep
+       over the pivot and 0.10 at the tips, chamfered all round. */
+    const beamShape = new T.Shape();
+    beamShape.moveTo(-BEAM_HALF, 0.050);
+    beamShape.quadraticCurveTo(-BEAM_HALF * 0.5, 0.134, 0, 0.134);
+    beamShape.quadraticCurveTo(BEAM_HALF * 0.5, 0.134, BEAM_HALF, 0.050);
+    beamShape.lineTo(BEAM_HALF, -0.050);
+    beamShape.quadraticCurveTo(BEAM_HALF * 0.5, -0.108, 0, -0.108);
+    beamShape.quadraticCurveTo(-BEAM_HALF * 0.5, -0.108, -BEAM_HALF, -0.050);
+    beamShape.closePath();
+    S.beamBar = new T.Mesh(
+      new T.ExtrudeGeometry(beamShape, {
+        depth: 0.220, bevelEnabled: true, bevelSize: 0.018, bevelThickness: 0.016,
+        bevelSegments: 1, curveSegments: 10,
+      }),
+      oak
+    );
+    S.beamBar.geometry.translate(0, 0, -0.110);
+    S.beamBar.position.set(0, PIVOT_Y, 0);
     S.group.add(S.beamBar);
+
+    /* the bearing bosses, which turn with the beam against the trunnion */
+    [0.120, -0.120].forEach(function (z) {
+      S.beamBar.add(cyl(0.098, 0.098, 0.048, 14, BRASS, { material: brassBright, pos: [0, 0, z], rot: [Math.PI / 2, 0, 0] }));
+    });
+    /* a saddle over the pivot, tying the beam to the bosses */
+    S.beamBar.add(box(0.340, 0.070, 0.250, BRASS, { material: brassWarm, pos: [0, 0.148, 0] }));
+
+    /* real terminals: a brass ferrule round each tip, an end cap, a link and
+       the eye the cords hang from */
     [-1, 1].forEach(function (side) {
-      S.beamBar.add(box(0.16, 0.20, 0.32, BRASS, { pos: [side * BEAM_HALF, 0, 0], rough: 0.34, metal: 0.7 }));
+      const x = side * BEAM_HALF;
+      S.beamBar.add(box(0.150, 0.140, 0.256, BRASS, { material: brassWarm, pos: [x - side * 0.062, 0, 0] }));
+      S.beamBar.add(box(0.048, 0.116, 0.232, BRASS, { material: brassBright, pos: [x + side * 0.018, 0, 0] }));
+      S.beamBar.add(box(0.034, 0.070, 0.034, BRASS, { material: brassBright, pos: [x, -0.076, 0] }));
+      const eye = new T.Mesh(new T.TorusGeometry(0.052, 0.019, 6, 14), brassBright);
+      eye.position.set(x, -0.116, 0);
+      S.beamBar.add(eye);
     });
 
     /* the empty hook: a bare ring on the good side of the beam, hung there
@@ -837,32 +1086,38 @@ const World = (function () {
       [0.0700, 0.0000], [0.0744, 0.0106], [0.0850, 0.0150],
     ], 16, HOOK_DIM, { rough: 0.8, transparent: true, opacity: 0.9 });
     S.hook.rotation.x = Math.PI / 2;
-    S.hook.position.set(1.10, -0.17, 0);
+    S.hook.position.set(1.10, -0.185, 0);
     S.beamBar.add(S.hook);
 
-    /* the two chains. Each is two strands; every endpoint is recomputed in
-       applyStage, never fixed here, or the pans tear off the beam ends. */
-    const chainMat = mat(STEEL, { rough: 0.3, metal: 0.65 });
+    /* the cords. Three to a side, converging from the eye under the beam
+       terminal onto three lugs on the pan rim; every endpoint is recomputed
+       in applyStage, never fixed here, or the pans tear off the beam. */
+    const cordMat = mat(0xa89168, { rough: 0.36, metal: 0.55 });
     S.chainL = []; S.chainR = [];
-    for (let i = 0; i < 2; i++) {
-      S.chainL.push(cyl(0.02, 0.02, CHAIN_LEN, 6, STEEL, { material: chainMat }));
-      S.chainR.push(cyl(0.02, 0.02, CHAIN_LEN, 6, STEEL, { material: chainMat }));
+    for (let i = 0; i < 3; i++) {
+      S.chainL.push(cyl(0.021, 0.021, CORD_LEN, 6, 0xa89168, { material: cordMat }));
+      S.chainR.push(cyl(0.021, 0.021, CORD_LEN, 6, 0xa89168, { material: cordMat }));
       S.group.add(S.chainL[i], S.chainR[i]);
     }
 
     /* the pans */
-    S.costPan = makePan(STONE_GREY);
-    S.goodPan = makePan(PAN_TERRACOTTA);
+    S.costPan = makePan(STONE_GREY, brassWarm);
+    S.goodPan = makePan(PAN_TERRACOTTA, brassWarm);
     S.group.add(S.costPan, S.goodPan);
 
-    /* six plain stones, four down and two on top; one lifts off at the
+    /* six cast weights, four down and two on top; one lifts off at the
        environment stage, so the top-right slot is deliberately last */
     S.stoneSlots = [
-      [-0.14, 0.10, -0.14], [0.14, 0.10, -0.14], [-0.14, 0.10, 0.14],
-      [0.14, 0.10, 0.14], [-0.14, 0.28, 0.00], [0.14, 0.28, 0.00],
+      [-0.145, 0.056, -0.145], [0.145, 0.056, -0.145], [-0.145, 0.056, 0.145],
+      [0.145, 0.056, 0.145], [0.000, 0.206, -0.145], [0.000, 0.206, 0.145],
     ];
+    const weightGeo = new T.LatheGeometry([
+      [0.000, 0.000], [0.115, 0.000], [0.118, 0.014], [0.100, 0.072],
+      [0.086, 0.122], [0.084, 0.142], [0.050, 0.150], [0.046, 0.166],
+      [0.030, 0.176], [0.000, 0.178],
+    ].map(function (p) { return V2(Math.max(0.0001, p[0]), p[1]); }), 16);
     S.stones = new T.InstancedMesh(
-      new T.BoxGeometry(0.22, 0.18, 0.22), mat(STONE_GREY, { rough: 0.88 }), S.stoneSlots.length
+      weightGeo, mat(STONE_GREY, { rough: 0.54, metal: 0.3 }), S.stoneSlots.length
     );
     S.stones.count = 0;
     S.costPan.add(S.stones);
@@ -870,7 +1125,7 @@ const World = (function () {
     /* the eight tokens, laid out on a golden angle so no two crowd */
     TOKENS.forEach(function (tk, i) {
       const a = i * 2.39996;
-      const r = Math.sqrt((i + 0.55) / TOKENS.length) * 0.44;
+      const r = Math.sqrt((i + 1.2) / (TOKENS.length + 1.4)) * 0.44;
       const m = MAKERS[tk.key]();
       m.position.set(Math.cos(a) * r, TOKEN_Y, Math.sin(a) * r);
       /* only a small turn each: three of the tokens are flat shapes and go
@@ -897,16 +1152,24 @@ const World = (function () {
     const arc = new T.Shape();
     arc.absarc(0, 0, 1.10, Math.PI * 0.24, Math.PI * 0.76, false);
     arc.absarc(0, 0, 1.02, Math.PI * 0.76, Math.PI * 0.24, true);
-    S.gaugeArc = extrude(arc, 0.05, HOOK_DIM, { rough: 0.74, curve: 26, pos: [0, 3.40, -0.30] });
+    S.gaugeArc = extrude(arc, 0.05, HOOK_DIM, { rough: 0.5, metal: 0.24, curve: 26, pos: [0, 3.40, -0.30] });
     S.group.add(S.gaugeArc);
     for (let i = -2; i <= 2; i++) {
       const th = Math.PI / 2 + i * 0.12;
-      S.group.add(box(0.018, 0.10, 0.02, HOOK_DIM, {
+      S.group.add(box(0.020, i === 0 ? 0.15 : 0.10, 0.02, HOOK_DIM, {
         pos: [Math.cos(th) * 0.96, 3.40 + Math.sin(th) * 0.96, -0.235],
         rot: [0, 0, th - Math.PI / 2], rough: 0.74,
       }));
     }
-    S.gaugeTick = box(0.02, 0.18, 0.02, BRASS, { pos: [0, 4.46, -0.20], rough: 0.3, metal: 0.7, emissive: BRASS, ei: 0.2 });
+    /* a bead at each end of the arc, so it reads as a made thing */
+    [Math.PI * 0.24, Math.PI * 0.76].forEach(function (th) {
+      S.group.add(cyl(0.048, 0.048, 0.070, 12, BRASS, {
+        material: brassWarm,
+        pos: [Math.cos(th) * 1.06, 3.40 + Math.sin(th) * 1.06, -0.25],
+        rot: [Math.PI / 2, 0, 0],
+      }));
+    });
+    S.gaugeTick = box(0.026, 0.20, 0.026, BRASS, { pos: [0, 4.46, -0.20], rough: 0.2, metal: 0.85, emissive: BRASS, ei: 0.22 });
     S.group.add(S.gaugeTick);
 
     /* the payoff light, dark until the reveal */
@@ -914,7 +1177,15 @@ const World = (function () {
     S.glow.position.set(0, 4.5, 1.5);
     S.group.add(S.glow);
 
-    scene.add(contact(0, 0, 3.6, 0.5));
+    /* a small warm key off to the right, so the brass has something to
+       catch. It is weak enough that the room's own light still leads. */
+    const key = new T.PointLight(0xffe6b4, 36, 30, 2);
+    key.position.set(8, 11, 11);
+    scene.add(key);
+
+    /* the plinth is 2.96 units across once the group is scaled, so it wants
+       a tight dark contact under it and a soft one around that */
+    scene.add(contact(0, 0, 4.0, 0.32, 0.045), contact(0, 0, 2.7, 0.5, 0.062));
   }
 
   /* ------------------------------------------------------------- the steps */
@@ -991,11 +1262,18 @@ const World = (function () {
 
     S.beamBar.rotation.z = a;
 
-    /* both beam ends, then the pans hanging plumb under them */
-    const ca = Math.cos(a) * BEAM_HALF, sa = Math.sin(a) * BEAM_HALF;
-    const rx = ca, ry = PIVOT_Y + sa;      /* good side, +x */
-    const lx = -ca, ly = PIVOT_Y - sa;     /* cost side, −x */
+    /* The two eyes the cords hang from. They are not the beam's corners:
+       each sits EYE_DROP under the beam's centreline at the terminal, so in
+       the beam's own frame the point is (±BEAM_HALF, −EYE_DROP), and it has
+       to be carried through the same rotation the beam just took or the
+       cords come away from the eyes as soon as the beam moves. */
+    const ca = Math.cos(a), sa = Math.sin(a);
+    const rx = ca * BEAM_HALF + sa * EYE_DROP;              /* good side, +x */
+    const ry = PIVOT_Y + sa * BEAM_HALF - ca * EYE_DROP;
+    const lx = -ca * BEAM_HALF + sa * EYE_DROP;             /* cost side, −x */
+    const ly = PIVOT_Y - sa * BEAM_HALF - ca * EYE_DROP;
 
+    /* the pans hang plumb under their eye */
     S.goodPan.position.set(rx, ry - CHAIN_LEN, 0);
     S.costPan.position.set(lx, ly - CHAIN_LEN, 0);
 
@@ -1030,10 +1308,14 @@ const World = (function () {
     S.glow.intensity = anim.revealGlow * 10;
   }
 
-  function hang(pair, ex, ey, panY) {
-    for (let i = 0; i < 2; i++) {
-      const z = i ? CHAIN_SPLAY : -CHAIN_SPLAY;
-      span(pair[i], ex, ey, 0, ex, panY + PAN_RIM_Y, z, CHAIN_LEN);
+  /* three cords a side, from the one eye out to the three lugs on the rim.
+     The pan hangs plumb under the eye, so every cord is the same length at
+     every tilt and span() only ever has to re-aim them. */
+  function hang(trio, ex, ey, panY) {
+    for (let i = 0; i < 3; i++) {
+      const ang = CORD_ANGLES[i];
+      span(trio[i], ex, ey, 0,
+        ex + Math.cos(ang) * CORD_R, panY + PAN_RIM_Y, Math.sin(ang) * CORD_R, CORD_LEN);
     }
   }
 
