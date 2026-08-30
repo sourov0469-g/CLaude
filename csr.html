@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<title>PizzaBurg HRM Practices</title>
-<meta name="description" content="An immersive 3D presentation on the human resource practices of PizzaBurg, by Group NEXIX, Bangladesh University.">
+<title>PizzaBurg and Corporate Social Responsibility</title>
+<meta name="description" content="An immersive 3D presentation on the corporate social responsibility of PizzaBurg, by Group NEXIX, Bangladesh University.">
 <style>
 /* ==========================================================================
    PIZZABURG · HRM — the readable layer
@@ -647,6 +647,112 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
   .teamlist { grid-template-columns: repeat(2, auto); }
 }
 
+/* ==========================================================================
+   CSR PANELS
+   Furniture for the three asides the HRM deck had no shape for. Everything
+   else — .panel, .ptitle, .pfoot, .frame, .teamlist — is already in
+   src/visuals.css and is reused here as-is.
+   ========================================================================== */
+
+/* --- Carroll's pyramid -----------------------------------------------------
+   Four trapezoids, each one 7% of the panel wider per side than the one above
+   it, so the sloped edges line up into a single silhouette rather than a
+   staircase. Colour walks from brass at the apex to the deep red at the base. */
+.pyramid { display: grid; gap: 3px; justify-items: center; }
+.tier {
+  display: flex; align-items: baseline; justify-content: center;
+  flex-wrap: wrap; gap: 3px 8px; text-align: center;
+  padding: clamp(9px, 1vh, 13px) 13%;
+  color: var(--paper-2);
+}
+.tier b { font-weight: 650; letter-spacing: 0.01em; font-size: clamp(11.5px, calc(0.5 * var(--u) + 5.4px), 14px); }
+.tier span { opacity: 0.84; font-size: clamp(10px, calc(0.42 * var(--u) + 5.2px), 12px); }
+
+.tier.t1 { width: 58%;  background: #cdb478; color: #2e2410; clip-path: polygon(12.1% 0, 87.9% 0, 100% 100%, 0 100%); }
+.tier.t2 { width: 72%;  background: #b3893c; clip-path: polygon(9.7% 0, 90.3% 0, 100% 100%, 0 100%); }
+.tier.t3 { width: 86%;  background: #9a5b2c; clip-path: polygon(8.1% 0, 91.9% 0, 100% 100%, 0 100%); }
+.tier.t4 { width: 100%; background: #8a2f1f; clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%); }
+.tier.t1 span { opacity: 0.72; }
+
+/* --- described to us / not evidenced ---------------------------------------
+   Same two-card logic as the HRM ledger: basil for what a source actually
+   says, the deep red for what nothing says. */
+.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.cmpcol {
+  padding: 15px 16px; border-radius: 14px; border: 1px solid var(--rule);
+  background: var(--card); box-shadow: var(--lift);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.cmpcol.yes { background: rgba(234, 241, 233, 0.82); border-color: rgba(78, 122, 91, 0.26); }
+.cmpcol.no  { background: rgba(253, 236, 232, 0.84); border-color: rgba(168, 36, 24, 0.22); }
+.cmpcol h4 { margin: 0 0 9px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+.cmpcol.yes h4 { color: var(--basil); }
+.cmpcol.no h4 { color: var(--red-deep); }
+.cmpcol ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.cmpcol li {
+  font-size: clamp(10px, calc(0.42 * var(--u) + 5.2px), 12px); line-height: 1.34;
+  color: var(--ink-2); padding-left: 16px; position: relative;
+}
+.cmpcol li::before { position: absolute; left: 0; top: 0; font-weight: 700; }
+.cmpcol.yes li::before { content: '\2713'; color: var(--basil); }
+.cmpcol.no li { color: var(--ink-3); }
+.cmpcol.no li::before { content: '\25CB'; color: var(--red); }
+/* the ledger has no .panel behind it, so its foot has to carry its own
+   ground — left bare it sits straight on the lit bench and cannot be read */
+.cmp .pfoot {
+  grid-column: 1 / -1; margin: 0; padding: 9px 14px; border-top: 0;
+  border: 1px solid var(--rule); border-radius: 12px;
+  background: var(--card); box-shadow: var(--lift);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+
+/* --- impact against effort -------------------------------------------------
+   The wrapper carries the margin the two axis labels sit in, so the frame
+   itself can stay flush with the numbers it plots. */
+.mtxwrap { padding: 4px 8px 22px 26px; }
+.mtx {
+  position: relative; width: 100%; aspect-ratio: 4 / 3;
+  border-left: 1.5px solid var(--rule); border-bottom: 1.5px solid var(--rule);
+}
+/* the quadrant split, kept faint — it divides, it does not measure */
+.mtx::before, .mtx::after { content: ''; position: absolute; background: var(--rule); opacity: 0.55; }
+.mtx::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+.mtx::after { top: 50%; left: 0; right: 0; height: 1px; }
+
+.maxis {
+  position: absolute; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4);
+}
+.maxis.x { bottom: -18px; left: 50%; transform: translateX(-50%); }
+.maxis.y { left: -6px; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); }
+
+.mquad {
+  position: absolute; top: 9px; font-size: 9px; opacity: 0.7;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);
+}
+.mquad.tl { left: 10px; }
+.mquad.tr { right: 10px; }
+
+/* --x / --y come off the item's own effort and impact; --lx / --ly are the
+   label's offset from its dot, flipped by the builder near an edge */
+.mdot {
+  position: absolute; left: var(--x); bottom: var(--y); transform: translate(-50%, 50%);
+  width: clamp(10px, 1vw, 13px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--red); border: 2px solid var(--paper-2);
+  box-shadow: 0 0 0 1px rgba(168, 36, 24, 0.45), var(--lift);
+}
+.mlbl {
+  position: absolute; left: var(--x); bottom: var(--y);
+  transform: translate(var(--lx, -50%), var(--ly, -14px));
+  white-space: nowrap; font-weight: 650; color: var(--ink-2);
+  font-size: clamp(9.5px, calc(0.38 * var(--u) + 4.8px), 11.5px);
+  text-shadow: 0 1px 0 rgba(255, 252, 246, 0.85);
+}
+
+@media (max-width: 1080px) {
+  .cmp { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -661,7 +767,7 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
   <header id="topbar">
     <span class="wordmark">PizzaBurg</span>
     <span class="sep long"></span>
-    <span class="crumb long">HRM Practices</span>
+    <span class="crumb long">Corporate Social Responsibility</span>
     <span class="sep"></span>
     <span class="crumb" id="crumb">&nbsp;</span>
     <span class="spacer"></span>
@@ -736,7 +842,8 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
       <dt>Scroll / swipe</dt><dd>Also moves between slides</dd>
     </dl>
     <p class="sub" style="margin-top:26px">
-      One pizza is made across the thirteen slides — flour on slide one, a slice lifting on slide thirteen.
+      A balance scale sits on the counter — cost on one pan, good on the other. Each of the sixteen slides
+      sets one more weight on the good pan, and the beam tips a little further that way every time.
       The address bar tracks where you are, so a reload comes back to the same slide.
     </p>
   </div>
@@ -745,8 +852,8 @@ ol.steps span { font-size: clamp(10.5px, calc(0.45 * var(--u) + 5.2px), 12.5px);
 <div id="entry">
   <div>
     <span class="em">PizzaBurg</span>
-    <h1 class="t2">Human Resource Management Practices</h1>
-    <p class="t3">An analytical report by Group NEXIX · Bangladesh University · BUS-2204. Built on a face-to-face interview with the General Manager of Human Resource, 26 August 2026.</p>
+    <h1 class="t2">Corporate Social Responsibility</h1>
+    <p class="t3">A report by Group NEXIX · Bangladesh University · Business Ethics. A review of what PizzaBurg already does for its community, its people and the environment, and four new initiatives we propose.</p>
     <button class="go" id="entry-go">Start the presentation</button>
     <p class="load" id="entry-load">loading</p>
   </div>
@@ -777,34 +884,21 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 </script>
 <script>
 /* ==========================================================================
-   PIZZABURG · HRM PRACTICES — deck data
-   Group NEXIX · Bangladesh University · BUS-2204
+   PIZZABURG · CORPORATE SOCIAL RESPONSIBILITY — deck data
+   Group NEXIX · Bangladesh University · Business Ethics
 
-   The copy on these thirteen slides is the group's own, taken line for line
-   from the deck they wrote, and the speaker notes are theirs too. Nothing
-   here adds a claim the group did not make.
+   Sixteen slides, written by the same six students who prepared the earlier
+   PizzaBurg HRM report. What PizzaBurg is already doing comes from two
+   secondary sources and nothing else: Dhaka Tribune reporting for the two
+   community gestures, and a document hosted on Scribd for the workplace and
+   packaging claims. Neither was verified by us in person, and the slides say
+   so where it matters.
 
-   Behind it all: one face-to-face interview with Mr. Ranjan Datta, General
-   Manager of Human Resource at PizzaBurg, on 26 August 2026, checked against
-   the Bangladesh Labour Act 2006.
+   The four proposals — Buy 1 Give 1, Green PizzaBurg, Student Support and
+   Food Rescue — are the group's own. So is the priority ranking on slide 14.
+   Carroll's CSR Pyramid is used as an organising lens for judging what we
+   found; it is not a source of any PizzaBurg fact.
    ========================================================================== */
-
-/* which photograph sits, heavily blurred, behind the bench on each slide */
-window.BACKDROPS = {
-  cover: 'pb-neon-sign',
-  intro: 'pb-two-pizzas',
-  method: 'pb-interview-c',
-  planning: 'pb-pizza-pan',
-  recruit: 'pb-dough-hands',
-  turnover: 'pb-dhaka-street',
-  welfare: 'pb-pizzas-table-a',
-  performance: 'pb-interview-e',
-  discipline: 'pb-justice',
-  findings: 'pb-desk-calendar',
-  recommendations: 'pb-interview-d',
-  conclusion: 'pb-brand-salman',
-  thanks: 'pb-team-selfie',
-};
 
 const PRESENTERS = [
   { key: 'ratul',  name: 'Raiyan Ahmed Ratul',     short: 'Raiyan',  id: '202511170047', hue: 8   },
@@ -815,257 +909,320 @@ const PRESENTERS = [
   { key: 'esha',   name: 'Fabliha Mubarrat Kabir', short: 'Fabliha', id: '202511170060', hue: 268 },
 ];
 
-/* One pizza gets made across the deck. `stage` is where the bench has got to
-   while a slide is up: the base is stretched while we explain the study, it
-   goes into the oven as discipline begins, and it is sliced and served on the
-   closing slides. */
+/* One balance scale is weighed across the deck. `stage` is how far the beam
+   has tipped while a slide is up: it starts loaded on the cost side, and each
+   stage sets one more token down on the giving pan — a lantern at Ramadan, a
+   gift at Christmas, an apron, a leaf, then the four proposals — so the tilt
+   toward the good side is the argument being made, not a decoration. */
 const STAGE_ORDER = [
-  'flour', 'dough', 'stretch', 'base', 'sauce', 'cheese',
-  'toppings', 'peel', 'oven', 'bake', 'out', 'slice', 'served',
+  'open', 'framework', 'ramadan', 'christmas', 'welfare', 'environment',
+  'gap', 'idea1', 'idea2', 'idea3', 'idea4', 'fullreveal',
 ];
 
 const SLIDES = [
 
   /* ===== RAIYAN — slides 1 and 2 ========================================= */
   {
-    id: 'cover', by: 'ratul', layout: 'cover', stage: 'flour', fov: 38,
-    kicker: 'Human Resource Management · BUS-2204',
+    id: 'cover', by: 'ratul', layout: 'cover', stage: 'open',
+    kicker: 'Business Ethics · Course Project',
     title: 'PizzaBurg',
-    titleSub: 'Human Resource Management Practices',
-    lede: 'An analytical report based on a face-to-face interview with PizzaBurg’s General Manager of Human Resource.',
+    titleSub: 'Corporate Social Responsibility',
+    lede: 'A review of PizzaBurg’s current CSR practices, and four new initiatives proposed by Group NEXIX.',
     meta: [
       { k: 'Group', v: 'NEXIX' },
       { k: 'Institution', v: 'Bangladesh University' },
-      { k: 'Submitted', v: '28 August 2026' },
+      { k: 'Course', v: 'Business Ethics' },
     ],
     roster: true,
-    notes: 'Good morning. We are Group NEXIX. Our report studies the Human Resource Management practices of PizzaBurg, a local pizza and burger chain, based on a face-to-face interview with their General Manager of Human Resource.',
+    notes: 'Good morning. We are Group NEXIX. Some of you will remember our earlier HRM report on PizzaBurg — this presentation continues that same research thread, this time looking at Corporate Social Responsibility. We will walk through what PizzaBurg is already doing for CSR based on published sources, apply a CSR framework from this course to judge how far that goes, and then pitch four new CSR ideas of our own.',
   },
   {
-    id: 'intro', by: 'ratul', layout: 'split', stage: 'dough',
-    photo: { src: 'pb-neon-sign', caption: 'A PizzaBurg outlet, Dhaka' },
-    photo2: { src: 'pb-pizzas-table-c', caption: 'Their menu, photographed on the day' },
-    kicker: 'Introduction & Objectives',
-    title: 'About the company, and our objectives',
-    stats: [
-      { value: '22', label: 'outlets' },
-      { value: '~1,000', label: 'employees' },
-      { value: '4,000+', label: 'pizzas / day' },
-    ],
-    bulletsTitle: 'Objectives of the study',
+    id: 'team', by: 'ratul', layout: 'split', stage: 'open',
+    cam: { p: [13, 11, 50], t: [-11, 3.2, 2], fov: 36 },
+    kicker: 'Meet Group NEXIX',
+    title: 'Our team',
+    lede: 'The same six members who prepared the earlier PizzaBurg HRM report return for this CSR analysis.',
     bullets: [
-      'Examine PizzaBurg’s Human Resource Management practices',
-      'Cover workforce planning, recruitment, turnover, welfare, performance, training and discipline',
-      'Compare those practices with the **Bangladesh Labour Act 2006**',
-      'Identify strengths, concerns and practical recommendations',
+      'Six members, working as **Group NEXIX** for a second time',
+      'We continue the same research line, on a different question',
+      'Each of us takes a block of these **sixteen slides**',
     ],
-    notes: 'PizzaBurg is a local pizza and burger chain founded in January 2018 in Mirpur-2, Dhaka. It now runs 22 outlets with close to a thousand employees and sells over four thousand pizzas a day. Our objective was to study how a company that grew this fast manages its people — covering staffing, recruitment, turnover, welfare, performance, training and discipline — and to identify its strengths and areas for improvement.',
+    aside: { kind: 'team' },
+    notes: 'A quick round of introductions. This is the same six-person group that submitted the earlier PizzaBurg HRM report, so we are continuing as Group NEXIX, and we have split the sixteen slides between the six of us.',
   },
 
   /* ===== ADITYA — slides 3 and 4 ========================================= */
   {
-    id: 'method', by: 'aditya', layout: 'split', stage: 'stretch', handover: true,
-    photo: { kind: 'video', src: 'interview-18s', poster: 'pb-interview-b', caption: 'The interview · 26 August 2026' },
-    photo2: { src: 'pb-interview-a', caption: 'PizzaBurg head office, Dhaka' },
-    kicker: 'Methodology',
-    title: 'How we collected our information',
-    bullets: [
-      '**Qualitative case study** of a single company',
-      'Primary data: **one face-to-face interview**',
-      'Interviewee: **Mr. Ranjan Datta**, General Manager of Human Resource',
-      '**26 August 2026**, Dhaka',
-      'Prepared questions with follow-ups; handwritten notes, at his request',
-      'Secondary sources used only for background and the law',
+    id: 'intro', by: 'aditya', layout: 'split', stage: 'open', handover: true,
+    cam: { p: [18, 14, 57], t: [-6, 4.0, -1], fov: 38 },
+    photo: { src: 'pb-neon-sign', caption: 'A PizzaBurg outlet, Dhaka' },
+    kicker: 'Introduction & Objectives',
+    title: 'Why we are studying PizzaBurg’s CSR',
+    lede: 'Having already studied its HR practices, we now turn to how PizzaBurg behaves as a corporate citizen.',
+    stats: [
+      { value: '4', label: 'practices found' },
+      { value: '4', label: 'ideas proposed' },
     ],
-    note: { tone: 'concern', title: 'Limitation', body: 'One interviewee, one meeting. No documents seen, no employees interviewed. Where we say something was not evidenced, we mean it was not described to us — not that it does not exist.' },
-    notes: 'We used a qualitative case-study approach. Our primary data came from a face-to-face interview with Mr. Ranjan Datta, General Manager of Human Resource, held on 26 August 2026 in Dhaka. We used prepared questions with room for follow-ups and took handwritten notes, as he preferred. An important limitation: our findings are based on the information of one HR representative — we did not see company documents or interview workers.',
+    bulletsTitle: 'Objectives of the study',
+    bullets: [
+      'Document what PizzaBurg is **currently doing** for CSR, from published sources',
+      'Judge whether that goes far enough, using a **CSR framework** from this course',
+      'Propose **four new initiatives**, and say where we would start',
+    ],
+    notes: 'For anyone who was not in the room for our HRM presentation, a quick recap — we studied how PizzaBurg manages its people. This time we are asking a different question: how does PizzaBurg behave as a corporate citizen? Our objectives are threefold. Lay out what CSR activities PizzaBurg is already reported to run. Judge those against a framework from this course. And put forward four new CSR ideas of our own, with a sense of which are worth doing first.',
   },
   {
-    id: 'planning', by: 'aditya', layout: 'split', stage: 'base',
-    photo: { src: 'pb-pizzas-table-b', caption: 'A PizzaBurg outlet floor' },
-    kicker: 'Workforce Planning',
-    title: 'A fixed number at every outlet',
+    id: 'framework', by: 'aditya', layout: 'split', stage: 'framework',
+    kicker: 'Our Analytical Lens',
+    title: 'What CSR means here',
+    lede: 'We use Carroll’s four-part CSR pyramid — economic, legal, ethical and philanthropic responsibility — to judge what good CSR looks like for a company like PizzaBurg.',
     bullets: [
-      'PizzaBurg operates **22 outlets** across ten cities and towns',
-      'Each outlet has a **fixed number of employees**',
-      'Staffing is **not** determined through a supply-and-demand policy',
-      'About **12 outlets are in Dhaka**; the rest across nine other towns',
+      'Each tier rests on the one below it: a company cannot give if it cannot **trade**',
+      'The question the pyramid lets us ask: does CSR sit only at the **top tier**?',
+      'Occasional giving is philanthropic. **Everyday practice** reaches further down',
     ],
-    note: { tone: 'strength', title: 'Strength', body: 'Consistency and straightforward planning. Labour cost per outlet is predictable, rosters stay simple, and the same team works together.' },
-    note2: { tone: 'concern', title: 'Concern', body: 'Less flexibility when workload changes. No periodic review of the fixed numbers was described to us, so a headcount set on opening day can drift out of date.' },
-    aside: { kind: 'outlets' },
-    notes: 'PizzaBurg operates 22 outlets, and each outlet is given a fixed number of employees. The company does not set staffing through a supply-and-demand policy. The strength of this is consistency and straightforward planning — labour cost is predictable and the same team works together. The concern is less flexibility when an outlet’s workload changes.',
+    note: { tone: 'concern', title: 'On the framework', body: 'Carroll (1991) is our own choice of lens, and the tier we assign each activity to is our reading. Neither comes from Dhaka Tribune or from the Scribd document.' },
+    aside: { kind: 'pyramid' },
+    notes: 'Before judging PizzaBurg’s CSR we needed a framework, and as a group we chose Carroll’s CSR Pyramid, since it is the model most commonly taught in Business Ethics courses like ours. Economic responsibility is staying profitable enough to keep operating. Legal is following food-safety, labour and environmental rules. Ethical is doing what is right where the law is silent. Philanthropic is voluntarily giving back. We will use it mainly to ask whether PizzaBurg’s current CSR sits only at the philanthropic tier as occasional giving, or whether it is starting to become part of how the company operates.',
   },
 
-  /* ===== LIYA — slides 5 and 6 =========================================== */
+  /* ===== LIYA — slides 5 to 8 ============================================ */
   {
-    id: 'recruit', by: 'liya', layout: 'split', stage: 'sauce', handover: true,
-    photo: { src: 'pb-dough-hands', caption: 'Candidates demonstrate the actual task' },
-    photo2: { src: 'pb-hiring-poster', fit: 'contain', caption: 'PizzaBurg also advertises roles publicly' },
-    kicker: 'Recruitment & Selection',
-    title: 'Hired in one day',
+    id: 'current-community-ramadan', by: 'liya', layout: 'split', stage: 'ramadan', handover: true,
+    kicker: 'Current CSR · Community Giving',
+    title: 'Iftar donations at Ramadan',
+    lede: 'PizzaBurg’s first confirmed community gesture is tied to a specific point on the religious calendar.',
     bullets: [
-      'Applies to **kitchen and floor staff** (blue-collar roles)',
-      '**One-day** process from interview to decision',
-      '**Practical experience** is checked',
-      'Candidates may be asked to **demonstrate their ability** on the job',
-      'How candidates are **sourced** was not described to us',
+      'During Ramadan, PizzaBurg has supplied **pizzas for iftar meals** at mosques',
+      'The gesture runs **only during Ramadan**, not year-round',
+      'In Carroll’s terms this is **philanthropic** — voluntary goodwill, not yet a structure',
     ],
-    note: { tone: 'strength', title: 'Strength', body: 'Better job-fit assessment. Watching a cook actually cook predicts performance far more reliably than an interview or a certificate.' },
-    note2: { tone: 'rec', title: 'Recommendation', body: 'Standardise the test with a one-page scoring sheet — the tasks, what to look for, and the minimum score that gets an offer — so all 22 outlets hire to the same standard.' },
-    notes: 'For blue-collar employees — kitchen and floor staff — recruitment is a one-day interview process. Practical experience is considered, and candidates may be asked to demonstrate their practical ability. The strength here is better job-fit assessment: watching someone do the actual work tells you more than a certificate. Our recommendation is to standardise the practical assessment criteria so every outlet applies the same standard.',
+    meta: [{ k: 'Source', v: 'Dhaka Tribune reporting' }],
+    notes: 'Our first confirmed finding, reported by Dhaka Tribune, is that during Ramadan PizzaBurg has supplied pizzas for iftar meals at mosques. We are presenting this as a reported fact from a news source, not something our group verified in person. In Carroll’s terms it sits in the philanthropic tier — real goodwill, but tied to one point on the calendar rather than running all year.',
   },
   {
-    id: 'turnover', by: 'liya', layout: 'split', stage: 'cheese',
-    photo: { src: 'pb-dhaka-street', caption: 'Continuity keeps every kitchen running' },
-    photo2: { src: 'pb-interview-c', caption: 'Asking about notice and turnover' },
-    kicker: 'Turnover & Resignation',
-    title: 'Turnover and the notice period',
+    id: 'current-community-christmas', by: 'liya', layout: 'split', stage: 'christmas',
+    kicker: 'Current CSR · Community Giving',
+    title: 'The Christmas giveaway',
+    lede: 'A second confirmed gesture, tied to a different date and reaching a different group.',
     bullets: [
-      'Every employee must give **two months’ notice** before resigning',
-      'It gives HR time to **recruit a replacement**',
-      'Two months matches the **60 days Section 27** requires of a permanent worker',
-      'Turnover is **never counted**, and leavers are not asked why they go',
+      'Around Christmas, staff have dressed as Santa Claus and handed out **complimentary pizzas** to underprivileged children',
+      'Like the Ramadan gesture, this runs **once a year** rather than continuously',
+      'Two real acts of giving — both **dated**, neither yet a programme',
     ],
-    aside: { kind: 'turnover' },
-    notes: 'White-collar turnover is very low; blue-collar turnover is medium. Employees must give two months’ notice before resigning, which gives HR time to recruit a replacement. That two-month requirement aligns exactly with Section 27 of the Bangladesh Labour Act, which asks a permanent worker for sixty days’ notice. Overall it supports workforce continuity and reduces disruption in the kitchen.',
+    meta: [{ k: 'Source', v: 'Dhaka Tribune reporting' }],
+    notes: 'Around Christmas, PizzaBurg staff have dressed as Santa Claus and handed out complimentary pizzas to underprivileged children — also reported by Dhaka Tribune. Together with the Ramadan gesture, that is two confirmed acts of community giving, both real, both tied to a specific date rather than running all year.',
+  },
+  {
+    id: 'current-internal-welfare', by: 'liya', layout: 'split', stage: 'welfare',
+    kicker: 'Current CSR · Employee Welfare',
+    title: 'A supportive workplace',
+    lede: 'Beyond community giving, PizzaBurg is also reported to focus on how it treats its own staff.',
+    bullets: [
+      'The company states it aims to build a **supportive, inclusive** workplace culture',
+      'That leans toward **ethical** responsibility — doing right by staff, beyond the legal minimum',
+      'It is an aim the company describes, not an outcome anyone has measured',
+    ],
+    meta: [{ k: 'Source', v: 'Document hosted on Scribd' }],
+    note: { tone: 'concern', title: 'On this source', body: 'Scribd hosts documents, it does not author them. We could not attribute this one, so we present it as stated intent rather than an independently checked outcome.' },
+    notes: 'Our third finding comes from a Scribd source and looks inward rather than outward: PizzaBurg is described as aiming to build a supportive, inclusive workplace for its employees. We are flagging that this is a secondary, less formal source than a newspaper, so we are treating it as stated intent rather than an independently audited outcome.',
+  },
+  {
+    id: 'current-internal-environment', by: 'liya', layout: 'split', stage: 'environment',
+    kicker: 'Current CSR · Environmental Responsibility',
+    title: 'Eco-friendly packaging',
+    lede: 'The same source also describes a move toward more sustainable packaging.',
+    bullets: [
+      'The company has moved toward **more eco-friendly packaging** for its food',
+      'It has also taken steps to **reduce plastic waste** in its operations',
+      'An early step into environmental responsibility — but **“more eco-friendly” is not defined**',
+    ],
+    meta: [{ k: 'Source', v: 'Document hosted on Scribd' }],
+    notes: 'The same source also describes PizzaBurg moving toward more eco-friendly packaging and taking steps to reduce plastic waste. In our framework this is an early step into environmental responsibility — though we would note that “more eco-friendly” is not defined with any specific target, which is part of what our second new idea addresses.',
   },
 
-  /* ===== SHUVO — slides 7 and 8 ========================================== */
+  /* ===== SHUVO — slides 9 and 10 ========================================= */
   {
-    id: 'welfare', by: 'shuvo', layout: 'split', stage: 'toppings', handover: true, wide: true,
-    photo: { src: 'pb-pizzas-table-a', caption: 'Food support is provided on shift' },
-    kicker: 'Employee Welfare',
-    title: 'What employees receive',
-    note: { tone: 'concern', title: 'Concern', body: 'Eligibility conditions were not explained, so applicants cannot count a benefit and staff may not know they qualify.' },
-    aside: { kind: 'welfare' },
-    notes: 'Eligible employees receive accommodation support and food support. Health checkups are provided, and that includes maternity-related care, which is consistent with Sections 45 to 50 of the Labour Act. Housing and food are the two largest costs a low-paid worker in Dhaka carries, so this support contributes directly to employee well-being and retention.',
+    id: 'gap', by: 'shuvo', layout: 'split', stage: 'gap', handover: true, arc: 0.5,
+    kicker: 'The Opportunity',
+    title: 'Where PizzaBurg’s CSR can go further',
+    lede: 'The four existing activities are a good start, but clear gaps appear once we look at what is missing.',
+    stats: [
+      { value: '4', label: 'CSR areas found' },
+      { value: '4', label: 'gaps identified' },
+    ],
+    bullets: [
+      'Everything confirmed is either **occasional** or a **general statement of intent**',
+      'Nothing reported handles **unsold food** at day’s end, or supports **students**',
+      'Packaging has **no target** and **no return loop** described',
+      'These four gaps are exactly what our four proposals close',
+    ],
+    aside: { kind: 'compare' },
+    notes: 'Putting the last four slides together, PizzaBurg has real CSR activity, but it clusters around either specific holidays or general statements of intent. We want to be fair here — we are not saying PizzaBurg is doing badly, only that there is clear room to turn occasional goodwill into structured, everyday programs. And this is our own analysis, built on the four sourced facts you have just seen.',
   },
   {
-    id: 'performance', by: 'shuvo', layout: 'split', stage: 'peel', wide: true,
-    photo: { src: 'pb-interview-e', caption: 'Asking how reviews are used' },
-    kicker: 'Performance & Training',
-    title: 'Reviewed monthly, linked to training',
-    lede: 'Reviews feed directly into training.',
-    note: { tone: 'rec', title: 'Recommendation', body: 'Use clear, measurable indicators and document review outcomes.' },
-    aside: { kind: 'loop' },
-    notes: 'Performance is reviewed every month, which supports continuous monitoring — most companies of this size review once a year. Importantly, performance results are linked with training: the review identifies a gap, training addresses it, and the next month’s review shows whether it worked. Our recommendation is to use clear measurable indicators and to document the review outcomes so progress can actually be compared.',
+    id: 'idea-buy1give1', by: 'shuvo', layout: 'split', stage: 'idea1',
+    kicker: 'New Idea 1 · Group NEXIX proposal',
+    title: 'Buy 1, Give 1',
+    lede: 'For selected menu items, PizzaBurg donates one meal to someone in need for every meal a customer buys.',
+    bullets: [
+      'Customers choose from a **short list of eligible meals** at checkout',
+      'For every eligible meal sold, PizzaBurg donates **one equivalent meal**',
+      'The customer sees the giving happen, at the moment they order',
+    ],
+    note: { tone: 'strength', title: 'Why it is different', body: 'Unlike the Ramadan and Christmas giveaways, this runs every day of the year and scales automatically with sales.' },
+    note2: { tone: 'concern', title: 'Ours, not theirs', body: 'A new idea from our group. PizzaBurg does not currently run a program like this.' },
+    notes: 'This is where we shift from reporting on PizzaBurg to pitching our own ideas. For selected menu items, every meal a customer buys means one equivalent meal donated to someone in need. The difference from the Ramadan and Christmas examples we just covered is that this runs every day of the year, it scales automatically with sales, and it lets customers feel directly involved in the giving.',
   },
 
-  /* ===== SOUROV — slides 9 and 10 ======================================== */
+  /* ===== SOUROV — slides 11 and 12 ======================================= */
   {
-    id: 'discipline', by: 'sourov', layout: 'split', stage: 'oven', handover: true, arc: 0.45,
-    photo: { src: 'pb-justice', tone: 'warm', caption: 'Measured against the Labour Act 2006' },
-    photo2: { src: 'pb-interview-d', caption: 'Mr. Datta on grounds for dismissal' },
-    kicker: 'Discipline & Termination',
-    title: 'Grounds for termination',
+    id: 'idea-green', by: 'sourov', layout: 'split', stage: 'idea2', handover: true,
+    kicker: 'New Idea 2 · Group NEXIX proposal',
+    title: 'Green PizzaBurg',
+    lede: 'Push the existing packaging effort further: fully biodegradable packaging, plus a box return and recycle system.',
     bullets: [
-      'Violation of **rules and regulations**',
-      '**Sexual harassment**',
-      '**Dishonesty** and integrity violations',
-      'Other **serious misconduct**',
-      'No warning or inquiry procedure was described',
+      'Step 1 — move to **100% biodegradable packaging** across all outlets',
+      'Step 2 — an **in-store return point** so customers bring used boxes back',
+      'Returned boxes go to **recycling or composting**, not landfill',
+      'A small **loyalty incentive** could be what makes people carry the box back',
     ],
-    note: { tone: 'strength', title: 'Strength', body: 'Clear standards, broadly matching the misconduct list in §23(4). Naming sexual harassment explicitly is uncommon in this trade.' },
-    note2: { tone: 'rec', title: 'Recommendation', body: 'Write down the §24 procedure — written charge, 7 days to reply, a hearing, and a joint inquiry inside 60 days — and establish the sexual harassment complaint committee, with outside members, that the 2009 High Court directive requires.' },
-    notes: 'Serious misconduct may lead to termination. The grounds given were violation of rules and regulations, sexual harassment, integrity-related violations, and other serious misconduct. These broadly match Section 23 of the Labour Act. Two points on procedure: Section 24 requires a written charge, at least seven days to reply, a hearing and an inquiry before any punishment; and the 2009 High Court directive requires every workplace to have a sexual harassment complaint committee. Neither was described to us, so our recommendation is to document the procedure and establish the committee.',
+    note: { tone: 'concern', title: 'Ours, not theirs', body: 'This extends the “more eco-friendly packaging” step already reported on slide 8. It goes further than anything PizzaBurg has announced.' },
+    notes: 'Our second proposal takes the packaging step we found and pushes it further than what is currently confirmed. First, move to fully biodegradable packaging across all outlets. Second, set up an in-store system so customers can return used boxes for recycling or composting, possibly with a small loyalty incentive to make that worth doing. We want to be upfront that this is our extension of PizzaBurg’s direction, not a program they have already announced.',
   },
   {
-    id: 'findings', by: 'sourov', layout: 'split', stage: 'bake',
-    cam: { p: [-1, 13, 37], t: [-31, 4.8, 3], fov: 43 },
+    id: 'idea-student', by: 'sourov', layout: 'split', stage: 'idea3',
+    kicker: 'New Idea 3 · Group NEXIX proposal',
+    title: 'Student Support',
+    lede: 'As university students ourselves, our third proposal asks PizzaBurg to invest directly in financially disadvantaged students.',
+    bullets: [
+      '**Scholarships** for financially disadvantaged university students',
+      '**Free or discounted meals** for eligible students',
+      '**Internships** at PizzaBurg, pairing support with work experience',
+      'No equivalent programme appeared anywhere in our research',
+    ],
+    notes: 'Our third idea is close to home for us, since we are university students ourselves. Three components: scholarships for financially disadvantaged students, free or discounted meals for those who qualify, and internship places at PizzaBurg so the support comes with work experience attached. We think this makes sense both ethically and commercially, since students are likely a meaningful part of PizzaBurg’s customer base.',
+  },
+
+  /* ===== FABLIHA — slides 13 to 16 ======================================= */
+  {
+    id: 'idea-rescue', by: 'esha', layout: 'split', stage: 'idea4', handover: true,
+    kicker: 'New Idea 4 · Group NEXIX proposal',
+    title: 'Food Rescue',
+    lede: 'Instead of discarding safe, unsold food at closing time, PizzaBurg donates it to shelters and charitable organisations.',
+    bullets: [
+      'At day’s end, still-safe unsold food is **set aside** instead of thrown away',
+      'Partner with **local shelters** to collect and distribute it the **same day**',
+      'It cuts food waste and feeds people with the **same single change**',
+      'Together with Buy 1 Give 1, donation becomes a **daily habit**, not a holiday event',
+    ],
+    notes: 'Instead of throwing away pizzas and other food that is still safe to eat at closing time, PizzaBurg would set that food aside and partner with local shelters to collect and distribute it the same day. It hits two goals at once — cutting food waste and getting more food to people who need it. This is not part of PizzaBurg’s currently reported CSR activities; it is our proposal.',
+  },
+  {
+    id: 'roi-matrix', by: 'esha', layout: 'split', stage: 'idea4',
+    cam: { p: [13, 12, 42], t: [-3.2, 4.6, 0], fov: 35 },
+    kicker: 'The Business Case',
+    title: 'Impact against effort',
+    lede: 'We placed our four proposals on a simple priority matrix — impact against effort and cost.',
+    bullets: [
+      '**Food Rescue** — low effort, high impact: a process change and one partnership',
+      '**Buy 1, Give 1** — higher effort, but steady year-round visibility',
+      '**Student Support** — moderate effort, and it can start small',
+      '**Green PizzaBurg** — the largest cost, and the widest reach',
+    ],
+    aside: { kind: 'matrix' },
+    notes: 'We tried to be honest about the fact that we do not have real financial data from PizzaBurg to run an actual ROI calculation — so what we are presenting here is our own qualitative reasoning, plotted as impact against effort, not audited numbers. Food Rescue is low effort and high impact: mainly a process change plus a shelter partnership. Buy 1 Give 1 needs a tracking system but offers steady, scalable, year-round visibility. Student Support needs a budget but can start small. Green PizzaBurg raises supply costs and needs new in-store logistics.',
+  },
+  {
+    id: 'roi-order', by: 'esha', layout: 'split', stage: 'fullreveal', arc: 1.3,
+    kicker: 'The Business Case',
+    title: 'Where to start, and why',
+    lede: 'Reading the matrix suggests a rollout order, though all four ideas are complementary.',
+    bulletsTitle: 'Suggested order',
+    bullets: [
+      '**Food Rescue** — costs the least and reuses food already made',
+      '**Buy 1, Give 1** — needs some tracking, then pays back all year',
+      '**Student Support** — can start with a handful of places and grow',
+      '**Green PizzaBurg** — the biggest investment, best planned once the others run',
+      'All four turn existing goodwill into **structured, ongoing** CSR',
+    ],
+    notes: 'This ordering is our own judgement call, not a financial model. On that basis we would start with Food Rescue, since it is mostly a process change at close to zero cost, then Buy 1 Give 1, which needs some tracking but pays off with steady visibility. Student Support can start small. Green PizzaBurg is probably the most expensive, so we see it as the longer-term investment. What ties all four together is that they convert PizzaBurg’s existing goodwill into something structured and ongoing, not just occasional.',
+  },
+  {
+    id: 'closing', by: 'esha', layout: 'closing', stage: 'fullreveal', arc: 1.4,
+    cam: { p: [20, 15, 55], t: [0, 6.0, 0], fov: 39 },
     photo: { src: 'pb-team-street', caption: 'Group NEXIX on site' },
-    photo2: { src: 'pb-brand-salman', caption: 'PizzaBurg brand reach' },
-    kicker: 'Major Findings',
-    title: 'Major findings',
-    bullets: [
-      'Fixed staffing across **22 outlets**, not adjusted for demand',
-      'Office turnover very low, floor turnover medium — but **never counted**',
-      '**Two months’** resignation notice, matching the 60 days of §27',
-      'One-day hiring with a practical test, but **no marking sheet**',
-      '**Monthly** reviews linked to training, with no fixed measures described',
-      'Welfare covering housing, food and health, eligibility unexplained',
-      'Overall: **the methods are sound, the records are missing**',
-      'Two gaps carry legal weight — **no §24 procedure**, **no harassment committee**',
-    ],
-    notes: 'Bringing it together. Fixed staffing across 22 outlets. Very low white-collar turnover and medium blue-collar turnover. A two-month resignation notice aligned with the Labour Act. Practical, experience-based selection for blue-collar roles. Monthly performance reviews linked to training. Welfare support and clear misconduct standards. The overall pattern: the practices themselves are sound, but documentation is limited.',
-  },
-
-  /* ===== FABLIHA — slides 11, 12 and 13 ================================== */
-  {
-    id: 'recommendations', by: 'esha', layout: 'split', stage: 'out', handover: true, wide: true,
-    photo: { src: 'pb-file-stack', caption: 'Most fixes are a form, not a budget' },
-    kicker: 'Recommendations',
-    title: 'What we recommend',
-    aside: { kind: 'recs' },
-    notes: 'Our recommendations. Review the fixed staffing levels periodically rather than setting them once. Standardise the practical recruitment assessment with a scoring sheet. Use the two-month notice period strategically — for handover and for exit interviews. Strengthen the monthly reviews with measurable indicators. Integrate performance and training records centrally. And maintain clear, consistently documented disciplinary standards, including the complaint committee.',
-  },
-  {
-    id: 'conclusion', by: 'esha', layout: 'split', stage: 'slice', arc: 1.4,
-    photo: { src: 'pb-two-pizzas', caption: 'Twenty-two kitchens, one standard' },
-    photo2: { src: 'pb-pizza-closeup', caption: 'What all of it is for' },
-    kicker: 'Conclusion',
-    title: 'HRM built around operational continuity',
-    bullets: [
-      'Every practice serves one goal: **keeping 22 outlets open and running**',
-      'Fixed staffing creates **consistency**; the notice rule turns a sudden loss into a **planned** one',
-      'Practical selection supports **job fit**; monthly reviews catch problems in **weeks, not months**',
-      'In every area the **method was sound and the paperwork was missing**',
-      'Two gaps go beyond untidiness — **no §24 procedure**, **no harassment committee**',
-      'The next task is to **write the system down** without losing the speed',
-    ],
-    notes: 'In conclusion, PizzaBurg’s HRM is strongly connected to operational continuity — every practice serves the goal of keeping 22 outlets running. Fixed staffing creates consistency, notice periods support replacement planning, practical selection supports job fit, and monthly reviews support continuous monitoring. Further improvement is possible through stronger measurement, documentation and periodic staffing review.',
-  },
-  {
-    id: 'thanks', by: 'esha', layout: 'closing', stage: 'served', fov: 42, arc: 1.3,
     kicker: 'Group NEXIX · Bangladesh University',
     title: 'Thank you.',
     titleSub: 'Questions & discussion.',
-    lede: 'With thanks to Mr. Ranjan Datta, General Manager of Human Resource at PizzaBurg.',
-    aside: { kind: 'team' },
-    notes: 'Thank you for listening. We are happy to take questions. And our thanks to Mr. Ranjan Datta of PizzaBurg, who gave us his time and answered every question we asked.',
+    lede: 'PizzaBurg already gives — at Ramadan, at Christmas, and to its own staff. Four structured programs would make that giving daily.',
+    meta: [
+      { k: 'Dhaka Tribune', v: 'Ramadan iftar donations · Christmas giveaway coverage' },
+      { k: 'Scribd', v: 'Employee welfare · packaging and plastic waste' },
+      { k: 'Carroll (1991)', v: 'The Pyramid of Corporate Social Responsibility' },
+    ],
+    notes: 'PizzaBurg already contributes to society through community support and special-day initiatives like the Ramadan iftar donations and the Christmas giveaways, alongside its stated focus on employee welfare and more eco-friendly packaging. Building on that, we have suggested four new CSR activities — Buy 1 Give 1, Green PizzaBurg, Student Support and Food Rescue. Together they span community giving, employee wellbeing, environmental care and student support, and we believe they can benefit both society and the environment without asking PizzaBurg to abandon what it already does well. Thank you all for listening.',
   },
 ];
 
+/* the heavily blurred photograph that sits behind the bench. Read by the deck,
+   so it has to be global; nothing here is meant to be read literally — these
+   are colour and warmth under a scene, not illustrations of the slide. */
+window.BACKDROPS = {
+  'cover': 'pb-neon-sign',
+  'team': 'pb-team-office',
+  'intro': 'pb-two-pizzas',
+  'framework': 'pb-desk-calendar',
+  'current-community-ramadan': 'pb-pizzas-table-a',
+  'current-community-christmas': 'pb-pizzas-table-b',
+  'current-internal-welfare': 'pb-dough-hands',
+  'current-internal-environment': 'pb-pizza-pan',
+  'gap': 'pb-file-stack',
+  'idea-buy1give1': 'pb-two-pizzas',
+  'idea-green': 'pb-pizza-pan',
+  'idea-student': 'pb-pizzas-table-c',
+  'idea-rescue': 'pb-pizza-closeup',
+  'roi-matrix': 'pb-desk-calendar',
+  'roi-order': 'pb-file-stack',
+  'closing': 'pb-team-selfie',
+};
+
 /* ------------------------------------------------------------------ panels --
-   The numbers and words the aside panels draw. Every one of them comes off a
-   slide of the group's own deck; nothing here is estimated. */
+   What the three new aside panels draw. The pyramid is Carroll's, worded for
+   this company; the comparison and the matrix are the group's own reading of
+   the four sourced facts, and are labelled as such on their slides. */
 
-const OUTLETS = { total: 22, dhaka: 12, towns: 10 };
-
-const TURNOVER = [
-  { grp: 'White-collar', lvl: 'Very Low', body: 'Office staff rarely leave the company.', tone: 'low' },
-  { grp: 'Blue-collar',  lvl: 'Medium',   body: 'Front-line staff turn over more often.', tone: 'med' },
+/* top tier first — the panel stacks it downward, widening toward the base */
+const PYRAMID = [
+  { tier: 'Philanthropic', gloss: 'giving back' },
+  { tier: 'Ethical', gloss: 'doing right' },
+  { tier: 'Legal', gloss: 'following the law' },
+  { tier: 'Economic', gloss: 'staying profitable' },
 ];
 
-const WELFARE = [
-  { icon: 'roof',   name: 'Accommodation',   body: 'Housing support for employees who qualify.' },
-  { icon: 'bowl',   name: 'Food support',    body: 'Provided during working hours.' },
-  { icon: 'cross',  name: 'Health checkups', body: 'Health checkups are provided.' },
-  { icon: 'cradle', name: 'Maternity care',  body: 'Provided. Full §§45–50 entitlement not described.' },
-];
-
-const LOOP = [
-  { n: '01', t: 'Monthly review',       b: 'Each employee’s performance is assessed.' },
-  { n: '02', t: 'Gap identified',       b: 'The review shows where improvement is needed.' },
-  { n: '03', t: 'Training given',       b: 'Training targets the identified gap.' },
-  { n: '04', t: 'Monitoring continues', b: 'The next review shows the result.' },
-];
-
-const RECS = {
-  first: [
-    'Establish the **sexual harassment complaint committee**, with outside members',
-    'Write down the **§24 disciplinary procedure** and issue it to every outlet manager',
-    'Keep **one central record per employee** — appointment, reviews, training, discipline, exit',
+const GAPCOMPARE = {
+  has: [
+    'Ramadan iftar donations',
+    'Christmas Santa giveaway',
+    'A supportive workplace culture',
+    '“More eco-friendly” packaging',
   ],
-  then: [
-    'Add a written **scoring sheet** to the practical hiring test',
-    'Use a one-page **monthly review form** with measurable indicators',
-    '**Count turnover monthly**, and use the 60-day notice for handover and exit interviews',
-    'Review each outlet’s **headcount twice a year** against real workload',
-    '**Explain welfare eligibility** and open a promotion ladder to shift supervisor',
-    'Add **induction and supervisor training**, plus a yearly Labour Act check',
+  missing: [
+    'Any ongoing food-rescue program',
+    'Any student-focused program',
+    'Fully biodegradable packaging',
+    'A box return and recycling loop',
   ],
 };
+
+/* effort and impact are 0..1 fractions of the panel's two axes, not scores we
+   measured — they are where the group would place each idea by argument */
+const MATRIX = [
+  { name: 'Food Rescue',     effort: 0.22, impact: 0.78, note: 'A process change plus one shelter partnership.' },
+  { name: 'Buy 1, Give 1',   effort: 0.58, impact: 0.72, note: 'Needs tracking at the till; scales with sales.' },
+  { name: 'Student Support', effort: 0.38, impact: 0.52, note: 'Needs a budget, but can start small and grow.' },
+  { name: 'Green PizzaBurg', effort: 0.82, impact: 0.70, note: 'Raises supply costs and needs in-store logistics.' },
+];
 
 /* ==========================================================================
    MEDIA
@@ -1310,14 +1467,1220 @@ function buildAside(v) {
 }
 
 /* ==========================================================================
-   THE BENCH
-   One pizza, made across the whole deck. Slide one is flour and a resting
-   dough ball; by slide thirteen a slice is lifting off a cut pie. Every slide
-   advances the bench one step and moves the camera, so the room changes under
-   the text without anyone narrating it.
+   CSR PANELS
+   Three shapes the HRM deck never needed — Carroll’s pyramid, the
+   described/not-evidenced ledger, and the impact-against-effort plot — plus a
+   recaptioned roster. VIS is already declared in src/visuals.js; this file
+   only adds to it, and reuses el/svg/rich/panel/ptitle/buildMedia unchanged.
+   ========================================================================== */
 
-   Everything is lathed, extruded or drawn onto a canvas at runtime — no models
-   to load, so the finished page still runs offline from a USB stick.
+/* --------------------------------------------------------------- pyramid --
+   A tier’s place in PYRAMID is its place in the drawing, so the array runs
+   apex first — philanthropic down to economic — and the CSS widens and darkens
+   each step toward the base the model actually rests on. */
+
+VIS.pyramid = function () {
+  return panel([
+    ptitle('Carroll’s four tiers'),
+    el('div', { class: 'pyramid' }, PYRAMID.map(function (t, i) {
+      return el('div', { class: 'tier t' + (i + 1) }, [
+        el('b', { text: t.tier }),
+        t.gloss ? el('span', { text: t.gloss }) : null,
+      ]);
+    })),
+    el('p', { class: 'pfoot', text: 'Carroll (1991) — a lens we chose, not a source of PizzaBurg facts.' }),
+  ], 'rv');
+};
+
+/* --------------------------------------------------------------- compare --
+   The HRM deck’s two-column ledger, re-pointed at the gap: what the sources
+   describe on the left, what none of them evidence on the right. The right
+   column is an absence of reporting, not an accusation, and the foot says so. */
+
+function cmpColumn(tone, head, items) {
+  return el('div', { class: 'cmpcol ' + tone }, [
+    el('h4', { text: head }),
+    el('ul', {}, items.map(function (s) { return el('li', {}, rich(s)); })),
+  ]);
+}
+
+VIS.compare = function () {
+  return el('div', { class: 'cmp rv' }, [
+    cmpColumn('yes', 'Described to us', GAPCOMPARE.has),
+    cmpColumn('no', 'Not evidenced', GAPCOMPARE.missing),
+    el('p', { class: 'pfoot', text: 'Our own reading of the four sourced practices — “not evidenced” means we found no report of it, not that it is absent.' }),
+  ]);
+};
+
+/* ---------------------------------------------------------------- matrix --
+   Placement, not a chart. Each idea carries its own two numbers and the dot is
+   put where they say: left from effort, bottom from impact, both handed to the
+   CSS as custom properties. The label rides above its dot and flips below when
+   the dot sits too high to leave room, or sideways when it hugs an edge. */
+
+VIS.matrix = function () {
+  const plot = el('div', { class: 'mtx' }, [
+    el('span', { class: 'mquad tl', text: 'do first' }),
+    el('span', { class: 'mquad tr', text: 'plan for later' }),
+    el('span', { class: 'maxis y', text: 'Impact →' }),
+    el('span', { class: 'maxis x', text: 'Effort →' }),
+  ]);
+
+  MATRIX.forEach(function (m) {
+    const at = '--x:' + Math.round(m.effort * 100) + '%; --y:' + Math.round(m.impact * 100) + '%;';
+    const lx = m.effort <= 0.16 ? '-8px' : (m.effort >= 0.84 ? 'calc(-100% + 8px)' : '-50%');
+    const ly = m.impact >= 0.82 ? 'calc(100% + 14px)' : '-14px';
+    plot.appendChild(el('i', { class: 'mdot', style: at }));
+    plot.appendChild(el('span', {
+      class: 'mlbl', style: at + ' --lx:' + lx + '; --ly:' + ly + ';', text: m.name,
+    }));
+  });
+
+  return panel([
+    ptitle('Impact against effort'),
+    el('div', { class: 'mtxwrap' }, plot),
+    el('p', { class: 'pfoot', text: 'Our own qualitative ranking — PizzaBurg gave us no financial data to work from.' }),
+  ], 'rv');
+};
+
+/* ------------------------------------------------------------------ team --
+   The HRM deck’s roster panel, recaptioned. The clip was filmed on that
+   earlier site visit and it shows the manager as well as the six of us, so the
+   caption says both rather than letting it read as a photograph taken for this
+   study by a team of seven. */
+
+VIS.team = function () {
+  const head = buildMedia({
+    kind: 'video', src: 'team-pan-12s', poster: 'pb-team-office',
+    caption: 'Group NEXIX with PizzaBurg HR manager Ranjan Datta · from our earlier HRM site visit',
+  });
+  return el('div', { class: 'teamwrap panel rv' }, [
+    head,
+    el('ul', { class: 'teamlist' }, PRESENTERS.map(function (p) {
+      return el('li', {}, [
+        el('span', { class: 'tn', text: p.name }),
+        el('span', { class: 'ti', text: p.id }),
+      ]);
+    })),
+  ]);
+};
+
+/* ==========================================================================
+   THE IMMERSIVE PASS
+   Mood, atmosphere and a growing wall, wrapped around the balance scale but
+   never touching it. The beam's computed tilt is the one read this deck
+   exists to show, so nothing in this file moves the beam, the pans or the
+   weights, and one light — beamSpot — is deliberately held outside the mood
+   system so the tilt stays legible under every colour the room takes on.
+
+   Three stage-keyed lookup tables do the work, shaped exactly like the
+   deck's VANTAGE table: MOOD, ATMOS, ROOM_ITEMS. Every value is derivable
+   from the stage name alone, so a deep link straight into idea3 resolves the
+   right light, fog, dust and wall on the first frame with no history.
+   ========================================================================== */
+
+(function () {
+  /* a local copy, used only if data.js has not been concatenated ahead of us */
+  const ENRICH_STAGES = [
+    'open', 'framework', 'ramadan', 'christmas', 'welfare', 'environment',
+    'gap', 'idea1', 'idea2', 'idea3', 'idea4', 'fullreveal',
+  ];
+
+  /* palette additions — the nine hexes this pass introduces */
+  const DUSK_SLATE = 0x232a3d;
+  const TASK_WHITE = 0xfff2d9;
+  const FROST_TEAL = 0x7fc6c9;
+  const GAP_ASH = 0x4a5568;
+  const REVEAL_GOLD = 0xffe9b0;
+  const DUST_GOLD = 0xffd98a;
+  const DUST_COOL = 0xb9c4c9;
+  const FOG_DUSK = 0x3a2420;
+  const FRAME_WALNUT = 0x6b4a32;
+
+  const LEAF_DRY = 0x8a8449;   /* the olive the plants fall toward at gap */
+
+  /* ------------------------------------------------------------------ mood */
+
+  /* MOOD owns the fog colour. It does not touch fog distance — that is
+     ATMOS's, and splitting them this way is the whole reason neither table
+     can fight the other. */
+  const MOOD = {
+    open:        { keyColor: 0x8fa2c4, keyIntensity: 0.7, rimColor: DUSK_SLATE,  rimIntensity: 0.55, fogColor: FOG_DUSK,   exposure: 0.62 },
+    framework:   { keyColor: 0xfff0dc, keyIntensity: 1.5, rimColor: 0xcfd8e6,    rimIntensity: 0.55, fogColor: 0xe8dcc8,   exposure: 0.86 },
+    ramadan:     { keyColor: 0xffb35c, keyIntensity: 2.2, rimColor: 0x7a6a92,    rimIntensity: 0.60, fogColor: 0x4a2f22,   exposure: 0.80 },
+    christmas:   { keyColor: 0xffd9a8, keyIntensity: 2.0, rimColor: FROST_TEAL,  rimIntensity: 0.90, fogColor: 0x2f3a3f,   exposure: 0.82 },
+    welfare:     { keyColor: TASK_WHITE, keyIntensity: 2.4, rimColor: 0xb8c2cc,  rimIntensity: 0.60, fogColor: 0x40342a,   exposure: 0.84 },
+    environment: { keyColor: 0xbcd39a, keyIntensity: 2.1, rimColor: 0x8fae6e,    rimIntensity: 0.90, fogColor: 0x2f3a2c,   exposure: 0.84 },
+    gap:         { keyColor: GAP_ASH,  keyIntensity: 0.35, rimColor: GAP_ASH,    rimIntensity: 0.30, fogColor: GAP_ASH,    exposure: 0.54 },
+    idea1:       { keyColor: 0xffc27a, keyIntensity: 2.6, rimColor: 0xffa860,    rimIntensity: 0.70, fogColor: 0x4a3222,   exposure: 0.86 },
+    idea2:       { keyColor: 0x9fd8bc, keyIntensity: 2.4, rimColor: 0x6fb8b0,    rimIntensity: 0.85, fogColor: 0x2c3a34,   exposure: 0.86 },
+    idea3:       { keyColor: 0x9aaad0, keyIntensity: 2.6, rimColor: 0x2b3550,    rimIntensity: 1.00, fogColor: DUSK_SLATE, exposure: 0.82 },
+    idea4:       { keyColor: 0xe23b2e, keyIntensity: 3.2, rimColor: 0xff7a4a,    rimIntensity: 1.10, fogColor: 0x3a1c18,   exposure: 0.88 },
+    fullreveal:  { keyColor: REVEAL_GOLD, keyIntensity: 3.4, rimColor: 0xffb35c, rimIntensity: 1.20, fogColor: 0x5a3a26,   exposure: 0.98 },
+  };
+
+  /* how hard the key light breathes, per stage. idea4 is the fastest and
+     widest pulse in the deck; gap barely moves at all. */
+  const KEY_PULSE = {
+    open: [0.30, 0.03], framework: [0.34, 0.02], ramadan: [1.90, 0.16],
+    christmas: [0.70, 0.07], welfare: [0.42, 0.04], environment: [0.50, 0.05],
+    gap: [0.22, 0.02], idea1: [0.62, 0.06], idea2: [0.72, 0.06],
+    idea3: [0.46, 0.04], idea4: [2.60, 0.18], fullreveal: [0.55, 0.07],
+  };
+
+  /* where the roving key light stands over. at gap it hangs over the empty
+     hook instead of a weight, which is what makes the dip read as an absence
+     rather than a dimmer switch. */
+  const KEY_AIM = {
+    open: 'beamBar', framework: 'beamBar', ramadan: 'lantern', christmas: 'gift',
+    welfare: 'apron', environment: 'leaf', gap: 'hook', idea1: 'meal',
+    idea2: 'green', idea3: 'cap', idea4: 'rescue', fullreveal: 'goodPan',
+  };
+
+  /* ------------------------------------------------------------- atmosphere */
+
+  /* ATMOS owns fog near/far. Never the colour. */
+  const ATMOS = {
+    open:        { fogNear: 72, fogFar: 170, dustDensity: 0.30, dustTint: DUST_COOL, skyTint: 0x5c6478, shaftIntensity: 0.05 },
+    framework:   { fogNear: 66, fogFar: 190, dustDensity: 0.42, dustTint: 0xd6d2c8, skyTint: 0x9aa0a8, shaftIntensity: 0.18 },
+    ramadan:     { fogNear: 72, fogFar: 200, dustDensity: 0.50, dustTint: 0xe8c898, skyTint: 0xb08a6a, shaftIntensity: 0.30 },
+    christmas:   { fogNear: 74, fogFar: 202, dustDensity: 0.55, dustTint: 0xd8d4c4, skyTint: 0x9ab0b4, shaftIntensity: 0.32 },
+    welfare:     { fogNear: 78, fogFar: 206, dustDensity: 0.58, dustTint: 0xe4d6bc, skyTint: 0xb4a892, shaftIntensity: 0.36 },
+    environment: { fogNear: 80, fogFar: 208, dustDensity: 0.60, dustTint: 0xd4dcc0, skyTint: 0xa8b898, shaftIntensity: 0.40 },
+    gap:         { fogNear: 66, fogFar: 160, dustDensity: 0.72, dustTint: DUST_COOL, skyTint: 0x555f70, shaftIntensity: 0.06 },
+    idea1:       { fogNear: 84, fogFar: 214, dustDensity: 0.66, dustTint: DUST_GOLD, skyTint: 0xd0a274, shaftIntensity: 0.55 },
+    idea2:       { fogNear: 88, fogFar: 220, dustDensity: 0.70, dustTint: 0xcfe4cf, skyTint: 0xa8c4b4, shaftIntensity: 0.62 },
+    idea3:       { fogNear: 90, fogFar: 222, dustDensity: 0.72, dustTint: 0xc8cee0, skyTint: 0x8c96b4, shaftIntensity: 0.66 },
+    idea4:       { fogNear: 92, fogFar: 226, dustDensity: 0.80, dustTint: 0xffc39a, skyTint: 0xd08a70, shaftIntensity: 0.78 },
+    fullreveal:  { fogNear: 96, fogFar: 240, dustDensity: 0.92, dustTint: DUST_GOLD, skyTint: 0xe8c48c, shaftIntensity: 1.00 },
+  };
+
+  /* -------------------------------------------------------------- the wall */
+
+  /* Indices into STAGE_ORDER. Each medallion lands on the same stage its own
+     weight lands on the pan, so the wall is a second, slower reading of the
+     same tally. hook 4 is the middle of the rail and stays bare — it only
+     carries the dim marker, and only while gap is on screen. */
+  const ROOM_ITEMS = {
+    rail:         { revealAt: 0 },
+    moulding:     { revealAt: 1 },
+    potA:         { revealAt: 0 },
+    potB:         { revealAt: 5 },
+    medLantern:   { revealAt: 2,  hook: 0, icon: 0 },
+    medGift:      { revealAt: 3,  hook: 1, icon: 1 },
+    medApron:     { revealAt: 4,  hook: 2, icon: 2 },
+    medLeaf:      { revealAt: 5,  hook: 3, icon: 3 },
+    gapHook:      { onlyDuring: 6, hook: 4 },
+    medMeal:      { revealAt: 7,  hook: 5, icon: 4 },
+    medGreen:     { revealAt: 8,  hook: 6, icon: 5 },
+    medCap:       { revealAt: 9,  hook: 7, icon: 6 },
+    medRescue:    { revealAt: 10, hook: 8, icon: 7 },
+    frameCare:    { revealAt: 4,  slot: 0 },
+    frameSapling: { revealAt: 5,  slot: 1 },
+    frameBook:    { revealAt: 9,  slot: 2 },
+    frameClock:   { revealAt: 10, slot: 3 },
+    banner:       { revealAt: 11 },
+    glow:         { revealAt: 11 },
+  };
+
+  /* the order the hooks fill in, so the bunting's live count is always a
+     prefix of this list no matter how the deck is entered */
+  const MED_ORDER = ['medLantern', 'medGift', 'medApron', 'medLeaf', 'medMeal', 'medGreen', 'medCap', 'medRescue'];
+  const FRAME_ORDER = ['frameCare', 'frameSapling', 'frameBook', 'frameClock'];
+
+  /* the back wall the room already has sits at z = -21.4; everything here
+     stands just in front of it, below the shelf line and above the counter */
+  const WALL_Z = -20.9;
+  const RAIL_Y = 10.4;
+  const MED_Y = 8.4;
+  const HOOK_X0 = -12.4;
+  const HOOK_DX = 2.6;
+  const FRAME_X = [-22.5, -18.6, 12.6, 16.5];
+  const FRAME_Y = 6.4;
+
+  /* --------------------------------------------------------- module state */
+
+  /* the scale's own palette. ctx.colors supplies these; the fallbacks only
+     exist so a missing key can never reach Color.setHex as undefined. */
+  const COLORS = {
+    BRAND: 0xe23b2e, BRAND_DEEP: 0xa82418, CREAM: 0xf6f0e2,
+    BRASS: 0xc9a227, STONE_GREY: 0x8a8a86, PAN_TERRACOTTA: 0xb5622f,
+    LEAF_YOUNG: 0x8fae6e, WARM_GLOW: 0xffb35c, COIN_GOLD: 0xd8b34a,
+    CAP_NAVY: 0x2b3550, HOOK_DIM: 0xcbb9a0,
+  };
+
+  let T = null, ctx = null, built = false;
+  let renderer = null, scene = null, camera = null;
+
+  let beamSpot, beamSpotTarget, moodKeyLight, moodKeyTarget, rimLightMood;
+  let skyDome, lightShaftLeft, lightShaftRight, vignetteGrainQuad;
+  let dustMoteField;
+  const dustBands = [];
+
+  let railBar, hookInstances, medallionInstances, medallionIcons;
+  let buntingChain, potInstances, leafInstances;
+  let frameMouldings, frameBoards, frameIcons;
+  let rollerBanner, rollerDrop;
+  const buntingGlowPoints = [];
+  let gaugeMats = [];
+
+  let dummy = null, scratchColor = null, scratchColor2 = null, scratchVec = null, scratchDir = null;
+  let iconBase = null, frameIconBase = null;
+  let stageNow = 'open';
+
+  /* every animatable scalar lives here, tweened as one object the way
+     world.js tweens its own anim{} */
+  const live = {
+    keyR: 1, keyG: 1, keyB: 1, keyI: 0.7,
+    kx: 0, ky: 10, kz: 6, tx: 0, ty: 3.2, tz: 0,
+    rimR: 1, rimG: 1, rimB: 1, rimI: 0.55,
+    fogR: 1, fogG: 1, fogB: 1, fogNear: 46, fogFar: 150,
+    dust: 0.30, dustR: 1, dustG: 1, dustB: 1,
+    skyR: 1, skyG: 1, skyB: 1, shaft: 0.05,
+    exposure: 0.62, roomGrow: 0.18, sag: 0, reveal: 0,
+  };
+  /* one 0→1 per wall item, keyed by ROOM_ITEMS */
+  const grow = {};
+
+  /* ---------------------------------------------------------------- utils */
+
+  function order() {
+    return (typeof STAGE_ORDER !== 'undefined' && STAGE_ORDER.length) ? STAGE_ORDER : ENRICH_STAGES;
+  }
+
+  function stageIndex(stage) {
+    const i = order().indexOf(stage);
+    return i < 0 ? 0 : i;
+  }
+
+  function hookX(i) {
+    return HOOK_X0 + i * HOOK_DX;
+  }
+
+  /* is this item showing at this stage index? onlyDuring items appear on
+     exactly one stage and vanish again — the wall's echo of hookOn */
+  function itemAmount(key, idx) {
+    const it = ROOM_ITEMS[key];
+    if (!it) return 0;
+    if (it.onlyDuring !== undefined) return idx === it.onlyDuring ? 1 : 0;
+    return idx >= it.revealAt ? 1 : 0;
+  }
+
+  function litCount(idx) {
+    let n = 0;
+    MED_ORDER.forEach(function (k) { n += itemAmount(k, idx); });
+    return n;
+  }
+
+  /* ------------------------------------------------------------- textures */
+
+  function moteTexture() {
+    const c = ctx.canvas(64), g = c.getContext('2d');
+    const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    rg.addColorStop(0, 'rgba(255,255,255,1)');
+    rg.addColorStop(0.34, 'rgba(255,246,224,0.6)');
+    rg.addColorStop(1, 'rgba(255,246,224,0)');
+    g.fillStyle = rg; g.fillRect(0, 0, 64, 64);
+    return new T.CanvasTexture(c);
+  }
+
+  /* one gradient, generated once. per-stage warmth is a colour multiply on
+     the material, never a redraw. */
+  function skyTexture() {
+    const c = ctx.canvas(256), g = c.getContext('2d');
+    const lg = g.createLinearGradient(0, 0, 0, 256);
+    lg.addColorStop(0, '#f6f0e2');
+    lg.addColorStop(0.42, '#d8c3a4');
+    lg.addColorStop(0.78, '#9a5a44');
+    lg.addColorStop(1, '#a82418');
+    g.fillStyle = lg; g.fillRect(0, 0, 256, 256);
+    return ctx.tex(c);
+  }
+
+  /* a soft-edged slab of light: bright down the middle, gone at the sides,
+     fading out along its length */
+  function shaftTexture() {
+    const c = ctx.canvas(128), g = c.getContext('2d');
+    g.clearRect(0, 0, 128, 128);
+    const lg = g.createLinearGradient(0, 0, 128, 0);
+    lg.addColorStop(0, 'rgba(255,236,200,0)');
+    lg.addColorStop(0.42, 'rgba(255,240,210,0.55)');
+    lg.addColorStop(0.58, 'rgba(255,240,210,0.55)');
+    lg.addColorStop(1, 'rgba(255,236,200,0)');
+    g.fillStyle = lg; g.fillRect(0, 0, 128, 128);
+    const vg = g.createLinearGradient(0, 0, 0, 128);
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(0.3, 'rgba(0,0,0,0.35)');
+    vg.addColorStop(1, 'rgba(0,0,0,1)');
+    g.globalCompositeOperation = 'destination-out';
+    g.fillStyle = vg; g.fillRect(0, 0, 128, 128);
+    g.globalCompositeOperation = 'source-over';
+    return new T.CanvasTexture(c);
+  }
+
+  /* the filmic edge: a darkened border plus a little grain, drawn once and
+     held in front of the camera. no EffectComposer — only three's core is
+     bundled, and a quad costs one draw call. */
+  function grainTexture() {
+    const c = ctx.canvas(256), g = c.getContext('2d');
+    g.clearRect(0, 0, 256, 256);
+    const rg = g.createRadialGradient(128, 128, 60, 128, 128, 190);
+    rg.addColorStop(0, 'rgba(24,16,10,0)');
+    rg.addColorStop(0.62, 'rgba(24,16,10,0.16)');
+    rg.addColorStop(1, 'rgba(18,12,8,0.62)');
+    g.fillStyle = rg; g.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 5200; i++) {
+      const a = Math.random() * 0.05;
+      g.fillStyle = (Math.random() < 0.5 ? 'rgba(255,244,224,' : 'rgba(20,14,8,') + a + ')';
+      g.fillRect(Math.random() * 256, Math.random() * 256, 1.6, 1.6);
+    }
+    return new T.CanvasTexture(c);
+  }
+
+  /* the eight medallion icons, baked flat into one 3x3 atlas so nine discs
+     stay one InstancedMesh and the icons stay one extra quad mesh. Drawn
+     with the canvas 2D api — silhouettes, never photographs. */
+  function drawMedallionIcon(g, k, S) {
+    const h = S / 2, R = S * 0.30;
+    g.save();
+    g.translate(h, h);
+    g.fillStyle = '#f6f0e2';
+    g.strokeStyle = '#f6f0e2';
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    if (k === 0) {
+      /* crescent */
+      g.beginPath(); g.arc(0, 0, R, 0, 7); g.fill();
+      g.globalCompositeOperation = 'destination-out';
+      g.beginPath(); g.arc(R * 0.42, -R * 0.18, R * 0.86, 0, 7); g.fill();
+      g.globalCompositeOperation = 'source-over';
+    } else if (k === 1) {
+      /* gift box */
+      g.fillRect(-R, -R * 0.5, R * 2, R * 1.5);
+      g.fillRect(-R * 1.1, -R * 0.78, R * 2.2, R * 0.4);
+      g.globalCompositeOperation = 'destination-out';
+      g.fillRect(-R * 0.16, -R * 0.78, R * 0.32, R * 1.78);
+      g.globalCompositeOperation = 'source-over';
+      g.lineWidth = R * 0.2;
+      g.beginPath();
+      g.arc(-R * 0.34, -R * 0.98, R * 0.34, 0, 7);
+      g.arc(R * 0.34, -R * 0.98, R * 0.34, 0, 7);
+      g.stroke();
+    } else if (k === 2) {
+      /* apron */
+      g.beginPath();
+      g.moveTo(-R * 0.34, -R * 0.86);
+      g.lineTo(R * 0.34, -R * 0.86);
+      g.lineTo(R * 0.46, -R * 0.2);
+      g.lineTo(R * 0.7, R * 0.16);
+      g.lineTo(R * 0.7, R);
+      g.lineTo(-R * 0.7, R);
+      g.lineTo(-R * 0.7, R * 0.16);
+      g.lineTo(-R * 0.46, -R * 0.2);
+      g.closePath(); g.fill();
+      g.lineWidth = R * 0.14;
+      g.beginPath();
+      g.moveTo(-R * 0.3, -R * 0.86); g.lineTo(0, -R * 1.18); g.lineTo(R * 0.3, -R * 0.86);
+      g.stroke();
+    } else if (k === 3) {
+      /* leaf */
+      g.beginPath();
+      g.moveTo(0, -R * 1.05);
+      g.quadraticCurveTo(R * 0.95, -R * 0.1, 0, R * 1.05);
+      g.quadraticCurveTo(-R * 0.95, -R * 0.1, 0, -R * 1.05);
+      g.fill();
+      g.globalCompositeOperation = 'destination-out';
+      g.lineWidth = R * 0.12;
+      g.beginPath(); g.moveTo(0, -R * 0.9); g.lineTo(0, R * 0.9); g.stroke();
+      g.globalCompositeOperation = 'source-over';
+    } else if (k === 4) {
+      /* a bowl with two curls of steam — the shared meal */
+      g.beginPath();
+      g.moveTo(-R, R * 0.06);
+      g.arc(0, R * 0.06, R, 0, Math.PI, false);
+      g.closePath(); g.fill();
+      g.fillRect(-R * 1.16, -R * 0.14, R * 2.32, R * 0.2);
+      g.lineWidth = R * 0.14;
+      [-R * 0.42, R * 0.42].forEach(function (x) {
+        g.beginPath();
+        g.moveTo(x, -R * 0.4);
+        g.quadraticCurveTo(x + R * 0.28, -R * 0.72, x, -R * 1.04);
+        g.stroke();
+      });
+    } else if (k === 5) {
+      /* a return arrow — the green loop */
+      g.lineWidth = R * 0.26;
+      g.beginPath(); g.arc(0, 0, R * 0.76, Math.PI * 0.72, Math.PI * 2.1); g.stroke();
+      g.beginPath();
+      g.moveTo(-R * 0.28, -R * 0.9);
+      g.lineTo(-R * 0.88, -R * 0.56);
+      g.lineTo(-R * 0.24, -R * 0.18);
+      g.closePath(); g.fill();
+    } else if (k === 6) {
+      /* graduation cap, in the same navy the cap weight uses */
+      g.fillStyle = '#2b3550';
+      g.strokeStyle = '#2b3550';
+      g.beginPath();
+      g.moveTo(0, -R * 0.86); g.lineTo(R * 1.12, -R * 0.28);
+      g.lineTo(0, R * 0.3); g.lineTo(-R * 1.12, -R * 0.28);
+      g.closePath(); g.fill();
+      g.fillRect(-R * 0.56, -R * 0.06, R * 1.12, R * 0.66);
+      g.lineWidth = R * 0.12;
+      g.beginPath();
+      g.moveTo(R * 0.92, -R * 0.2); g.lineTo(R * 0.92, R * 0.62);
+      g.stroke();
+      g.beginPath(); g.arc(R * 0.92, R * 0.74, R * 0.16, 0, 7); g.fill();
+    } else {
+      /* life ring — the rescue basket's wall echo */
+      g.lineWidth = R * 0.42;
+      g.beginPath(); g.arc(0, 0, R * 0.78, 0, 7); g.stroke();
+      g.lineWidth = R * 0.16;
+      for (let i = 0; i < 4; i++) {
+        const a = i * Math.PI / 2 + Math.PI / 4;
+        g.beginPath();
+        g.moveTo(Math.cos(a) * R * 0.5, Math.sin(a) * R * 0.5);
+        g.lineTo(Math.cos(a) * R * 1.06, Math.sin(a) * R * 1.06);
+        g.stroke();
+      }
+    }
+    g.restore();
+  }
+
+  function medallionAtlas() {
+    const c = ctx.canvas(768), g = c.getContext('2d');
+    g.clearRect(0, 0, 768, 768);
+    for (let k = 0; k < 8; k++) {
+      g.save();
+      g.translate((k % 3) * 256, Math.floor(k / 3) * 256);
+      drawMedallionIcon(g, k, 256);
+      g.restore();
+    }
+    return ctx.tex(c);
+  }
+
+  /* the four framed silhouettes: care, a sapling, an open book, a clock */
+  function drawFrameIcon(g, k, S) {
+    const h = S / 2, R = S * 0.28;
+    g.save();
+    g.translate(h, h);
+    g.fillStyle = '#a82418';
+    g.strokeStyle = '#a82418';
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    if (k === 0) {
+      g.beginPath();
+      g.moveTo(0, R * 0.98);
+      g.bezierCurveTo(-R * 1.6, -R * 0.1, -R * 0.72, -R * 1.16, 0, -R * 0.42);
+      g.bezierCurveTo(R * 0.72, -R * 1.16, R * 1.6, -R * 0.1, 0, R * 0.98);
+      g.fill();
+    } else if (k === 1) {
+      g.lineWidth = R * 0.18;
+      g.beginPath(); g.moveTo(0, R); g.lineTo(0, -R * 0.4); g.stroke();
+      g.beginPath();
+      g.moveTo(0, -R * 0.1);
+      g.quadraticCurveTo(-R * 0.9, -R * 0.36, -R * 0.16, -R * 0.98);
+      g.quadraticCurveTo(R * 0.1, -R * 0.5, 0, -R * 0.1);
+      g.fill();
+      g.beginPath();
+      g.moveTo(0, R * 0.22);
+      g.quadraticCurveTo(R * 0.94, -R * 0.04, R * 0.2, -R * 0.68);
+      g.quadraticCurveTo(-R * 0.06, -R * 0.2, 0, R * 0.22);
+      g.fill();
+    } else if (k === 2) {
+      g.lineWidth = R * 0.16;
+      g.beginPath();
+      g.moveTo(-R * 1.1, -R * 0.62);
+      g.quadraticCurveTo(-R * 0.5, -R * 0.86, 0, -R * 0.56);
+      g.lineTo(0, R * 0.72);
+      g.quadraticCurveTo(-R * 0.5, R * 0.42, -R * 1.1, R * 0.66);
+      g.closePath(); g.fill();
+      g.beginPath();
+      g.moveTo(R * 1.1, -R * 0.62);
+      g.quadraticCurveTo(R * 0.5, -R * 0.86, 0, -R * 0.56);
+      g.lineTo(0, R * 0.72);
+      g.quadraticCurveTo(R * 0.5, R * 0.42, R * 1.1, R * 0.66);
+      g.closePath(); g.fill();
+    } else {
+      g.lineWidth = R * 0.2;
+      g.beginPath(); g.arc(0, 0, R * 0.92, 0, 7); g.stroke();
+      g.lineWidth = R * 0.16;
+      g.beginPath();
+      g.moveTo(0, -R * 0.5); g.lineTo(0, 0); g.lineTo(R * 0.5, R * 0.2);
+      g.stroke();
+    }
+    g.restore();
+  }
+
+  function frameAtlas() {
+    const c = ctx.canvas(512), g = c.getContext('2d');
+    g.fillStyle = '#f6f0e2';
+    g.fillRect(0, 0, 512, 512);
+    for (let k = 0; k < 4; k++) {
+      g.save();
+      g.translate((k % 2) * 256, Math.floor(k / 2) * 256);
+      drawFrameIcon(g, k, 256);
+      g.restore();
+    }
+    return ctx.tex(c);
+  }
+
+  /* the roller banner's cloth: a deep brand field with a cream band, dark
+     enough that the oak beam still silhouettes against it at fullreveal */
+  function bannerTexture() {
+    const c = ctx.canvas(512), g = c.getContext('2d');
+    g.fillStyle = '#a82418'; g.fillRect(0, 0, 512, 512);
+    g.fillStyle = '#f6f0e2'; g.fillRect(0, 96, 512, 12);
+    g.fillRect(0, 400, 512, 12);
+    g.fillStyle = '#f6f0e2';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '800 132px Poppins, Inter, system-ui, sans-serif';
+    g.fillText('CSR', 256, 214);
+    g.font = '600 44px Inter, system-ui, sans-serif';
+    g.fillStyle = 'rgba(246,240,226,0.82)';
+    g.fillText('PIZZABURG', 256, 320);
+    return ctx.tex(c);
+  }
+
+  /* ------------------------------------------------------------ the lights */
+
+  function buildLights() {
+    const c = ctx.colors;
+
+    /* The one light that never changes. Everything else in this file can be
+       recoloured, dimmed or moved; this cannot, because it is what keeps the
+       beam's tilt and the grey-vs-terracotta pan read legible under every
+       mood the room takes on. */
+    beamSpot = new T.SpotLight(TASK_WHITE, 34, 34, 0.62, 0.5, 1.5);
+    beamSpot.castShadow = false;
+    beamSpotTarget = new T.Object3D();
+    scratchVec.set(0, 3.2, 0);
+    if (ctx.anchors.beamBar) ctx.anchors.beamBar.getWorldPosition(scratchVec);
+    beamSpotTarget.position.copy(scratchVec);
+    beamSpot.position.set(scratchVec.x + 2.4, scratchVec.y + 9.5, scratchVec.z + 7.5);
+    beamSpot.target = beamSpotTarget;
+    scene.add(beamSpot, beamSpotTarget);
+
+    moodKeyLight = new T.SpotLight(0xffffff, 0, 46, 0.72, 0.62, 1.5);
+    moodKeyLight.castShadow = false;
+    moodKeyTarget = new T.Object3D();
+    moodKeyTarget.position.copy(scratchVec);
+    moodKeyLight.target = moodKeyTarget;
+    moodKeyLight.position.set(scratchVec.x - 1.2, scratchVec.y + 6.5, scratchVec.z - 3.2);
+    scene.add(moodKeyLight, moodKeyTarget);
+
+    /* opposite the camera, so it edges the beam rather than filling it. kept
+       separate from the room's own neutral fill light. */
+    rimLightMood = new T.DirectionalLight(0xffffff, 0);
+    rimLightMood.castShadow = false;
+    rimLightMood.position.set(-26, 16, -30);
+    scene.add(rimLightMood);
+
+    [[-8.4, 9.4, -19.2], [5.2, 9.4, -19.2]].forEach(function (p) {
+      const pl = new T.PointLight(REVEAL_GOLD, 0, 26, 2);
+      pl.position.set(p[0], p[1], p[2]);
+      scene.add(pl);
+      buntingGlowPoints.push(pl);
+    });
+
+    /* the gauge is the only existing object this file writes to, and it only
+       writes emissiveIntensity — the arc and tick keep their own geometry */
+    gaugeMats = [];
+    [ctx.anchors.gaugeArc, ctx.anchors.gaugeTick].forEach(function (o) {
+      if (!o) return;
+      o.traverse(function (n) {
+        if (n.isMesh && n.material && n.material.emissive) gaugeMats.push(n.material);
+      });
+    });
+  }
+
+  /* -------------------------------------------------------- the atmosphere */
+
+  function buildAtmosphere() {
+    const sprite = moteTexture();
+
+    /* the whole mote field, so the three bands share one handle */
+    dustMoteField = new T.Group();
+    scene.add(dustMoteField);
+
+    /* three depth bands, same sprite, different size, opacity and speed —
+       the parallax between them is what sells the room's depth */
+    const specs = [
+      { n: 120, size: 0.62, opacity: 0.52, speed: 0.55, spread: [54, 34], y0: -2, span: 30, sway: 0.34 },
+      { n: 170, size: 0.40, opacity: 0.40, speed: 0.36, spread: [96, 62], y0: -4, span: 38, sway: 0.22 },
+      { n: 160, size: 0.26, opacity: 0.26, speed: 0.20, spread: [150, 96], y0: -6, span: 46, sway: 0.13 },
+    ];
+    specs.forEach(function (s, bi) {
+      const pos = new Float32Array(s.n * 3);
+      const base = new Float32Array(s.n * 3);
+      for (let i = 0; i < s.n; i++) {
+        base[i * 3] = -8 + (Math.random() - 0.5) * s.spread[0];
+        base[i * 3 + 1] = Math.random() * s.span;
+        base[i * 3 + 2] = 2 + (Math.random() - 0.5) * s.spread[1];
+        pos[i * 3] = base[i * 3];
+        pos[i * 3 + 1] = s.y0 + base[i * 3 + 1];
+        pos[i * 3 + 2] = base[i * 3 + 2];
+      }
+      const geo = new T.BufferGeometry();
+      geo.setAttribute('position', new T.BufferAttribute(pos, 3));
+      const pts = new T.Points(geo, new T.PointsMaterial({
+        color: 0xffffff, size: s.size, sizeAttenuation: true, map: sprite,
+        transparent: true, opacity: s.opacity, depthWrite: false, blending: T.AdditiveBlending,
+      }));
+      pts.frustumCulled = false;
+      pts.name = ['dustBandNear', 'dustBandMid', 'dustBandFar'][bi];
+      dustMoteField.add(pts);
+      dustBands.push({ pts: pts, base: base, n: s.n, y0: s.y0, span: s.span, speed: s.speed, sway: s.sway, opacity: s.opacity });
+    });
+
+    /* the sky. big enough that the widest closing vantage still sits inside
+       it, and translucent so the page's own backdrop still reads through. */
+    skyDome = new T.Mesh(
+      new T.SphereGeometry(150, 24, 16),
+      new T.MeshBasicMaterial({
+        map: skyTexture(), side: T.BackSide, fog: false,
+        transparent: true, opacity: 0.52, depthWrite: false,
+      })
+    );
+    skyDome.position.set(-10, 6, 6);
+    skyDome.renderOrder = -1;
+    scene.add(skyDome);
+
+    /* two slabs of window light. geometry and position are fixed for the
+       life of the deck; only opacity is stage-driven. */
+    const shaftTex = shaftTexture();
+    const shaftMat = function () {
+      return new T.MeshBasicMaterial({
+        map: shaftTex, color: 0xffe6bc, transparent: true, opacity: 0,
+        depthWrite: false, blending: T.AdditiveBlending, side: T.DoubleSide, fog: false,
+      });
+    };
+    lightShaftLeft = new T.Mesh(new T.PlaneGeometry(13, 40), shaftMat());
+    lightShaftLeft.position.set(-19, 13, -9);
+    lightShaftLeft.rotation.set(0.18, 0.42, 0.40);
+    lightShaftLeft.renderOrder = 4;
+    lightShaftRight = new T.Mesh(new T.PlaneGeometry(10, 38), shaftMat());
+    lightShaftRight.position.set(7, 14, -12);
+    lightShaftRight.rotation.set(0.14, -0.34, 0.30);
+    lightShaftRight.renderOrder = 4;
+    scene.add(lightShaftLeft, lightShaftRight);
+
+    /* Kept deliberately faint: the page already lays a static #grain and
+       #vignette over the canvas in CSS. This one earns its place only by
+       tracking the 3D camera, so it wants to be felt, not seen — at full
+       strength all three stack and flatten the brand reds out of the room. */
+    vignetteGrainQuad = new T.Mesh(
+      new T.PlaneGeometry(1, 1),
+      new T.MeshBasicMaterial({
+        map: grainTexture(), transparent: true, opacity: 0.28,
+        depthWrite: false, depthTest: false, fog: false,
+      })
+    );
+    vignetteGrainQuad.frustumCulled = false;
+    vignetteGrainQuad.renderOrder = 999;
+    scene.add(vignetteGrainQuad);
+  }
+
+  /* ------------------------------------------------------- the growing wall */
+
+  function buildRail() {
+    const c = ctx.colors;
+
+    railBar = ctx.cyl(0.14, 0.14, 22, 12, c.BRASS, {
+      pos: [hookX(4), RAIL_Y, WALL_Z], rot: [0, 0, Math.PI / 2], rough: 0.34, metal: 0.72,
+    });
+    scene.add(railBar);
+
+    /* nine lathed hooks, built once and never rebuilt — only the rail's own
+       reveal scales them */
+    const hookProfile = [
+      [0.00, 0.00], [0.09, 0.00], [0.09, 0.62], [0.05, 0.72], [0.00, 0.74],
+    ];
+    const hookGeo = new T.LatheGeometry(
+      hookProfile.map(function (p) { return new T.Vector2(Math.max(0.0001, p[0]), p[1]); }), 10
+    );
+    hookInstances = new T.InstancedMesh(hookGeo, ctx.mat(c.BRASS, { rough: 0.36, metal: 0.7 }), 9);
+    hookInstances.castShadow = false;
+    scene.add(hookInstances);
+
+    /* nine discs in one InstancedMesh. slot 4 is the gap hook: it carries a
+       dim HOOK_DIM marker and only while gap is on screen, so the bare hook
+       in the middle of the rail is something the room states, not omits. */
+    medallionInstances = new T.InstancedMesh(
+      new T.CircleGeometry(0.85, 28), ctx.mat(0xffffff, { rough: 0.42, metal: 0.5 }), 9
+    );
+    medallionInstances.castShadow = false;
+    scratchColor.setHex(c.BRASS);
+    for (let i = 0; i < 9; i++) {
+      if (i === 4) scratchColor.setHex(c.HOOK_DIM);
+      medallionInstances.setColorAt(i, scratchColor);
+      scratchColor.setHex(c.BRASS);
+    }
+    if (medallionInstances.instanceColor) medallionInstances.instanceColor.needsUpdate = true;
+    scene.add(medallionInstances);
+
+    /* the eight icons, as one merged quad mesh reading one baked atlas. a
+       per-instance texture would need a shader patch; a merged mesh gets the
+       same one-extra-draw-call result with plain core three. */
+    const quads = 8;
+    const pos = new Float32Array(quads * 12);
+    const uv = new Float32Array(quads * 8);
+    const idx = [];
+    iconBase = new Float32Array(quads * 12);
+    for (let q = 0; q < quads; q++) {
+      const item = ROOM_ITEMS[MED_ORDER[q]];
+      const x = hookX(item.hook), y = MED_Y, s = 0.62;
+      const p = [[-s, -s], [s, -s], [s, s], [-s, s]];
+      for (let v = 0; v < 4; v++) {
+        iconBase[q * 12 + v * 3] = x + p[v][0];
+        iconBase[q * 12 + v * 3 + 1] = y + p[v][1];
+        iconBase[q * 12 + v * 3 + 2] = WALL_Z + 0.06;
+      }
+      const col = item.icon % 3, row = Math.floor(item.icon / 3);
+      const u0 = col / 3, v0 = 1 - (row + 1) / 3, d = 1 / 3;
+      const uvs = [[u0, v0], [u0 + d, v0], [u0 + d, v0 + d], [u0, v0 + d]];
+      for (let v = 0; v < 4; v++) {
+        uv[q * 8 + v * 2] = uvs[v][0];
+        uv[q * 8 + v * 2 + 1] = uvs[v][1];
+      }
+      idx.push(q * 4, q * 4 + 1, q * 4 + 2, q * 4, q * 4 + 2, q * 4 + 3);
+    }
+    pos.set(iconBase);
+    const ig = new T.BufferGeometry();
+    ig.setAttribute('position', new T.BufferAttribute(pos, 3));
+    ig.setAttribute('uv', new T.BufferAttribute(uv, 2));
+    ig.setIndex(idx);
+    medallionIcons = new T.Mesh(ig, new T.MeshBasicMaterial({
+      map: medallionAtlas(), transparent: true, depthWrite: false,
+    }));
+    medallionIcons.frustumCulled = false;
+    medallionIcons.renderOrder = 3;
+    scene.add(medallionIcons);
+
+    /* pennants. one instance per lit hook, alternating brand and deep brand;
+       the string they hang from sags when the room does. */
+    const tri = new T.BufferGeometry();
+    tri.setAttribute('position', new T.BufferAttribute(new Float32Array([
+      -0.26, 0, 0, 0.26, 0, 0, 0, -0.66, 0,
+    ]), 3));
+    tri.setIndex([0, 1, 2]);
+    tri.computeVertexNormals();
+    buntingChain = new T.InstancedMesh(tri, ctx.mat(0xffffff, { rough: 0.78, side: T.DoubleSide }), 8);
+    buntingChain.castShadow = false;
+    buntingChain.count = 0;
+    for (let i = 0; i < 8; i++) {
+      scratchColor.setHex(i % 2 ? c.BRAND_DEEP : c.BRAND);
+      buntingChain.setColorAt(i, scratchColor);
+    }
+    if (buntingChain.instanceColor) buntingChain.instanceColor.needsUpdate = true;
+    scene.add(buntingChain);
+  }
+
+  function buildFrames() {
+    const c = ctx.colors;
+
+    frameMouldings = new T.InstancedMesh(
+      new T.BoxGeometry(3.0, 3.6, 0.22), ctx.mat(FRAME_WALNUT, { rough: 0.72 }), 4
+    );
+    frameMouldings.castShadow = false;
+    scene.add(frameMouldings);
+
+    frameBoards = new T.InstancedMesh(
+      new T.PlaneGeometry(2.5, 3.1), ctx.mat(c.CREAM, { rough: 0.86 }), 4
+    );
+    frameBoards.castShadow = false;
+    scene.add(frameBoards);
+
+    /* the four framed icons, same merged-quad trick as the medallions */
+    const pos = new Float32Array(4 * 12);
+    const uv = new Float32Array(4 * 8);
+    const idx = [];
+    frameIconBase = new Float32Array(4 * 12);
+    for (let q = 0; q < 4; q++) {
+      const x = FRAME_X[q], y = FRAME_Y, sx = 1.05, sy = 1.3;
+      const p = [[-sx, -sy], [sx, -sy], [sx, sy], [-sx, sy]];
+      for (let v = 0; v < 4; v++) {
+        frameIconBase[q * 12 + v * 3] = x + p[v][0];
+        frameIconBase[q * 12 + v * 3 + 1] = y + p[v][1];
+        frameIconBase[q * 12 + v * 3 + 2] = WALL_Z + 0.2;
+      }
+      const col = q % 2, row = Math.floor(q / 2);
+      const u0 = col / 2, v0 = 1 - (row + 1) / 2, d = 0.5;
+      const uvs = [[u0, v0], [u0 + d, v0], [u0 + d, v0 + d], [u0, v0 + d]];
+      for (let v = 0; v < 4; v++) {
+        uv[q * 8 + v * 2] = uvs[v][0];
+        uv[q * 8 + v * 2 + 1] = uvs[v][1];
+      }
+      idx.push(q * 4, q * 4 + 1, q * 4 + 2, q * 4, q * 4 + 2, q * 4 + 3);
+    }
+    pos.set(frameIconBase);
+    const fg = new T.BufferGeometry();
+    fg.setAttribute('position', new T.BufferAttribute(pos, 3));
+    fg.setAttribute('uv', new T.BufferAttribute(uv, 2));
+    fg.setIndex(idx);
+    frameIcons = new T.Mesh(fg, new T.MeshBasicMaterial({
+      map: frameAtlas(), transparent: true, depthWrite: false,
+    }));
+    frameIcons.frustumCulled = false;
+    frameIcons.renderOrder = 3;
+    scene.add(frameIcons);
+  }
+
+  function buildPlants() {
+    const c = ctx.colors;
+
+    const potProfile = [
+      [0.00, 0.00], [0.52, 0.00], [0.60, 0.10], [0.74, 1.05], [0.86, 1.22],
+      [0.86, 1.40], [0.72, 1.44], [0.62, 1.16], [0.48, 0.16], [0.00, 0.12],
+    ];
+    const potGeo = new T.LatheGeometry(
+      potProfile.map(function (p) { return new T.Vector2(Math.max(0.0001, p[0]), p[1]); }), 20
+    );
+    potInstances = new T.InstancedMesh(potGeo, ctx.mat(c.PAN_TERRACOTTA, { rough: 0.82 }), 2);
+    scene.add(potInstances);
+
+    /* nine blades per pot. how many stand up, and how green they are, both
+       come off one roomGrow scalar — so the wall wilts at gap without any
+       new geometry appearing or disappearing. */
+    leafInstances = new T.InstancedMesh(
+      new T.CylinderGeometry(0.015, 0.075, 1.15, 5), ctx.mat(c.LEAF_YOUNG, { rough: 0.74 }), 18
+    );
+    scene.add(leafInstances);
+  }
+
+  function buildBanner() {
+    const c = ctx.colors;
+
+    rollerBanner = ctx.cyl(0.18, 0.18, 7.9, 12, c.BRASS, {
+      pos: [-2, 6.6, WALL_Z - 0.1], rot: [0, 0, Math.PI / 2], rough: 0.36, metal: 0.7,
+    });
+    rollerBanner.visible = false;
+    scene.add(rollerBanner);
+
+    /* anchored at its top edge so scale.y reads as a shade unrolling */
+    const dropGeo = new T.PlaneGeometry(7.6, 4.8);
+    dropGeo.translate(0, -2.4, 0);
+    rollerDrop = new T.Mesh(dropGeo, ctx.mat(0xffffff, { rough: 0.82, map: bannerTexture(), side: T.DoubleSide }));
+    rollerDrop.position.set(-2, 6.6, WALL_Z - 0.04);
+    rollerDrop.scale.y = 0.0001;
+    rollerDrop.visible = false;
+    scene.add(rollerDrop);
+  }
+
+  /* --------------------------------------------------------------- writing */
+
+  function applyLive() {
+    if (!built) return;
+
+    moodKeyLight.color.setRGB(live.keyR, live.keyG, live.keyB);
+    moodKeyLight.intensity = live.keyI;
+    moodKeyLight.position.set(live.kx, live.ky, live.kz);
+    moodKeyTarget.position.set(live.tx, live.ty, live.tz);
+
+    rimLightMood.color.setRGB(live.rimR, live.rimG, live.rimB);
+    rimLightMood.intensity = live.rimI;
+
+    if (scene.fog) {
+      scene.fog.color.setRGB(live.fogR, live.fogG, live.fogB);
+      scene.fog.near = live.fogNear;
+      scene.fog.far = live.fogFar;
+    }
+    if (renderer) renderer.toneMappingExposure = live.exposure;
+
+    dustBands.forEach(function (b) {
+      b.pts.material.opacity = b.opacity * live.dust;
+      b.pts.material.color.setRGB(live.dustR, live.dustG, live.dustB);
+    });
+    skyDome.material.color.setRGB(live.skyR, live.skyG, live.skyB);
+    lightShaftLeft.material.opacity = live.shaft * 0.55;
+    lightShaftRight.material.opacity = live.shaft * 0.42;
+
+    buntingGlowPoints.forEach(function (pl) { pl.intensity = live.reveal * 7; });
+  }
+
+  function applyWall() {
+    if (!built) return;
+
+    railBar.visible = grow.rail > 0.02;
+    railBar.scale.set(grow.rail, 1, grow.rail);
+
+    for (let i = 0; i < 9; i++) {
+      dummy.position.set(hookX(i), RAIL_Y - 0.66, WALL_Z);
+      dummy.rotation.set(0, 0, 0);
+      dummy.scale.setScalar(grow.rail);
+      dummy.updateMatrix();
+      hookInstances.setMatrixAt(i, dummy.matrix);
+    }
+    hookInstances.instanceMatrix.needsUpdate = true;
+
+    /* medallions settle the last half-unit as they land */
+    for (let i = 0; i < 9; i++) {
+      let g = 0;
+      if (i === 4) g = grow.gapHook;
+      else {
+        const key = MED_ORDER[i < 4 ? i : i - 1];
+        g = grow[key];
+      }
+      dummy.position.set(hookX(i), MED_Y + (1 - g) * 0.55, WALL_Z + 0.03);
+      dummy.rotation.set(0, 0, 0);
+      dummy.scale.setScalar(Math.max(0.0001, g));
+      dummy.updateMatrix();
+      medallionInstances.setMatrixAt(i, dummy.matrix);
+    }
+    medallionInstances.instanceMatrix.needsUpdate = true;
+
+    const ip = medallionIcons.geometry.attributes.position;
+    for (let q = 0; q < 8; q++) {
+      const g = grow[MED_ORDER[q]];
+      const cx = iconBase[q * 12] + 0.62, cy = MED_Y;
+      const dy = (1 - g) * 0.55;
+      for (let v = 0; v < 4; v++) {
+        const o = q * 12 + v * 3;
+        ip.array[o] = cx + (iconBase[o] - cx) * g;
+        ip.array[o + 1] = cy + dy + (iconBase[o + 1] - cy) * g;
+        ip.array[o + 2] = iconBase[o + 2];
+      }
+    }
+    ip.needsUpdate = true;
+
+    /* the string sags between the rail's two ends; live.sag deepens it */
+    const xa = hookX(0), xb = hookX(8), xc = (xa + xb) / 2, half = (xb - xa) / 2;
+    const sag = 0.85 + live.sag * 1.6;
+    let n = 0;
+    for (let j = 0; j < 8; j++) {
+      const g = grow[MED_ORDER[j]];
+      if (g <= 0.02) break;
+      const x = xa + 1.3 + j * HOOK_DX;
+      const u = (x - xc) / half;
+      const y = RAIL_Y - 0.12 - sag * (1 - u * u);
+      const slope = (2 * sag * u) / half;
+      dummy.position.set(x, y - 0.06, WALL_Z + 0.34);
+      dummy.rotation.set(0, 0, -Math.atan(slope));
+      dummy.scale.setScalar(Math.max(0.0001, g));
+      dummy.updateMatrix();
+      buntingChain.setMatrixAt(j, dummy.matrix);
+      n = j + 1;
+    }
+    buntingChain.count = n;
+    if (n) buntingChain.instanceMatrix.needsUpdate = true;
+
+    for (let q = 0; q < 4; q++) {
+      dummy.position.set(FRAME_X[q], FRAME_Y, WALL_Z + 0.1);
+      dummy.rotation.set(0, 0, 0);
+      dummy.scale.setScalar(Math.max(0.0001, grow.moulding));
+      dummy.updateMatrix();
+      frameMouldings.setMatrixAt(q, dummy.matrix);
+      dummy.position.z = WALL_Z + 0.22;
+      dummy.updateMatrix();
+      frameBoards.setMatrixAt(q, dummy.matrix);
+    }
+    frameMouldings.instanceMatrix.needsUpdate = true;
+    frameBoards.instanceMatrix.needsUpdate = true;
+
+    const fp = frameIcons.geometry.attributes.position;
+    for (let q = 0; q < 4; q++) {
+      const g = grow[FRAME_ORDER[q]] * grow.moulding;
+      for (let v = 0; v < 4; v++) {
+        const o = q * 12 + v * 3;
+        fp.array[o] = FRAME_X[q] + (frameIconBase[o] - FRAME_X[q]) * g;
+        fp.array[o + 1] = FRAME_Y + (frameIconBase[o + 1] - FRAME_Y) * g;
+        fp.array[o + 2] = frameIconBase[o + 2];
+      }
+    }
+    fp.needsUpdate = true;
+
+    [[-15.5, -13.0, grow.potA], [7.5, -13.5, grow.potB]].forEach(function (p, i) {
+      dummy.position.set(p[0], 0, p[1]);
+      dummy.rotation.set(0, i * 0.6, 0);
+      dummy.scale.setScalar(Math.max(0.0001, p[2]));
+      dummy.updateMatrix();
+      potInstances.setMatrixAt(i, dummy.matrix);
+      for (let k = 0; k < 9; k++) {
+        const s = i * 9 + k;
+        const up = (k + 1) / 9 <= live.roomGrow ? 1 : 0;
+        const on = p[2] * up;
+        const a = k * 2.39996 + i * 1.1;
+        const lean = 0.24 + (k % 3) * 0.14;
+        dummy.position.set(p[0] + Math.cos(a) * 0.22, 1.36 + 0.5 * on, p[1] + Math.sin(a) * 0.22);
+        dummy.rotation.set(Math.sin(a) * lean, a, Math.cos(a) * lean);
+        dummy.scale.set(on, on * (0.7 + live.roomGrow * 0.6), on);
+        dummy.updateMatrix();
+        leafInstances.setMatrixAt(s, dummy.matrix);
+      }
+    });
+    potInstances.instanceMatrix.needsUpdate = true;
+    leafInstances.instanceMatrix.needsUpdate = true;
+    scratchColor.setHex(ctx.colors.LEAF_YOUNG);
+    scratchColor2.setHex(LEAF_DRY);
+    leafInstances.material.color.copy(scratchColor).lerp(scratchColor2, 1 - live.roomGrow);
+
+    rollerBanner.visible = grow.banner > 0.02;
+    rollerDrop.visible = grow.banner > 0.02;
+    rollerDrop.scale.y = Math.max(0.0001, grow.banner);
+  }
+
+  /* ------------------------------------------------------------------ api */
+
+  function build(c) {
+    if (built || !c || !c.THREE || !c.scene) return;
+    /* a shallow copy, so filling in palette defaults below never writes back
+       into world.js's own ctx object */
+    ctx = Object.assign({}, c);
+    T = c.THREE;
+    scene = c.scene;
+    renderer = c.renderer;
+    camera = c.camera;
+    ctx.colors = Object.assign({}, COLORS, c.colors || {});
+    if (!ctx.anchors) ctx.anchors = {};
+    if (!ctx.anchors.weights) ctx.anchors.weights = {};
+
+    dummy = new T.Object3D();
+    scratchColor = new T.Color();
+    scratchColor2 = new T.Color();
+    scratchVec = new T.Vector3();
+    scratchDir = new T.Vector3();
+
+    Object.keys(ROOM_ITEMS).forEach(function (k) { grow[k] = 0; });
+
+    buildLights();
+    buildAtmosphere();
+    buildRail();
+    buildFrames();
+    buildPlants();
+    buildBanner();
+
+    built = true;
+    apply('open', true);
+  }
+
+  /* a pure lookup. nothing here reads what stage came before, which is what
+     lets a deep link into idea3 land on the right room on frame one. */
+  function apply(stage, instant) {
+    if (!built) return;
+    const idx = stageIndex(stage);
+    stageNow = order()[idx] || 'open';
+    const m = MOOD[stageNow] || MOOD.open;
+    const a = ATMOS[stageNow] || ATMOS.open;
+
+    /* where the key light stands: over the good weight that lit most
+       recently, or over the empty hook while gap is on screen */
+    const aimName = KEY_AIM[stageNow] || 'beamBar';
+    let aim = ctx.anchors.weights[aimName] || ctx.anchors[aimName] || ctx.anchors.beamBar;
+    if (!aim) scratchVec.set(0, 3.2, 0);
+    else aim.getWorldPosition(scratchVec);
+
+    const lit = litCount(idx);
+    const target = {
+      keyI: m.keyIntensity,
+      kx: scratchVec.x - 1.2, ky: scratchVec.y + 6.4, kz: scratchVec.z - 3.4,
+      tx: scratchVec.x, ty: scratchVec.y, tz: scratchVec.z,
+      rimI: m.rimIntensity,
+      fogNear: a.fogNear, fogFar: a.fogFar,
+      dust: a.dustDensity, shaft: a.shaftIntensity,
+      exposure: m.exposure,
+      roomGrow: (0.18 + 0.82 * (lit / MED_ORDER.length)) * (idx === 6 ? 0.62 : 1),
+      sag: idx === 6 ? 1 : 0,
+      reveal: idx >= 11 ? 1 : 0,
+    };
+    scratchColor.setHex(m.keyColor);
+    target.keyR = scratchColor.r; target.keyG = scratchColor.g; target.keyB = scratchColor.b;
+    scratchColor.setHex(m.rimColor);
+    target.rimR = scratchColor.r; target.rimG = scratchColor.g; target.rimB = scratchColor.b;
+    scratchColor.setHex(m.fogColor);
+    target.fogR = scratchColor.r; target.fogG = scratchColor.g; target.fogB = scratchColor.b;
+    scratchColor.setHex(a.dustTint);
+    target.dustR = scratchColor.r; target.dustG = scratchColor.g; target.dustB = scratchColor.b;
+    scratchColor.setHex(a.skyTint);
+    target.skyR = scratchColor.r; target.skyG = scratchColor.g; target.skyB = scratchColor.b;
+
+    const wall = {};
+    Object.keys(ROOM_ITEMS).forEach(function (k) { wall[k] = itemAmount(k, idx); });
+
+    if (instant || !window.gsap) {
+      Object.keys(target).forEach(function (k) { live[k] = target[k]; });
+      Object.keys(wall).forEach(function (k) { grow[k] = wall[k]; });
+      applyLive();
+      applyWall();
+      return;
+    }
+
+    window.gsap.killTweensOf(live);
+    window.gsap.killTweensOf(grow);
+    target.duration = 1.6;
+    target.ease = 'power2.inOut';
+    target.onUpdate = applyLive;
+    window.gsap.to(live, target);
+    wall.duration = 1.6;
+    wall.ease = 'power2.out';
+    wall.onUpdate = applyWall;
+    window.gsap.to(grow, wall);
+  }
+
+  function frame(t, dt, state) {
+    if (!built) return;
+    const calm = !!(state && state.calm);
+
+    /* drift is read straight off the absolute clock, so a jump, a pause or a
+       backgrounded tab can never leave the bands out of step with each other */
+    if (!calm) {
+      dustBands.forEach(function (b) {
+        const arr = b.pts.geometry.attributes.position.array;
+        for (let i = 0; i < b.n; i++) {
+          const o = i * 3;
+          let y = (b.base[o + 1] + t * b.speed) % b.span;
+          if (y < 0) y += b.span;
+          arr[o] = b.base[o] + Math.sin(t * 0.21 + b.base[o]) * b.sway;
+          arr[o + 1] = b.y0 + y;
+          arr[o + 2] = b.base[o + 2];
+        }
+        b.pts.geometry.attributes.position.needsUpdate = true;
+      });
+    }
+
+    const pulse = KEY_PULSE[stageNow] || KEY_PULSE.open;
+    moodKeyLight.intensity = live.keyI * (calm ? 1 : 1 + Math.sin(t * pulse[0]) * pulse[1]);
+    lightShaftLeft.material.opacity = live.shaft * 0.55 * (calm ? 1 : 1 + Math.sin(t * 0.24) * 0.16);
+    lightShaftRight.material.opacity = live.shaft * 0.42 * (calm ? 1 : 1 + Math.cos(t * 0.19) * 0.16);
+    buntingGlowPoints.forEach(function (pl, i) {
+      pl.intensity = live.reveal * 7 * (calm ? 1 : 1 + Math.sin(t * 1.4 + i * 2.1) * 0.14);
+    });
+
+    /* the gauge burns hotter the further the beam is off level — the one
+       place where the lighting rig reads the data rather than decorating it */
+    const off = Math.min(1, Math.abs((state && state.beamAngle) || 0) / 0.34);
+    for (let i = 0; i < gaugeMats.length; i++) {
+      gaugeMats[i].emissiveIntensity = 0.22 + off * 1.9;
+    }
+
+    /* the vignette rides just past the near plane, sized to the frustum */
+    if (camera) {
+      const d = 1.2;
+      camera.getWorldDirection(scratchDir);
+      vignetteGrainQuad.position.copy(camera.position).addScaledVector(scratchDir, d);
+      vignetteGrainQuad.quaternion.copy(camera.quaternion);
+      const h = 2 * Math.tan(camera.fov * Math.PI / 360) * d;
+      vignetteGrainQuad.scale.set(h * camera.aspect * 1.02, h * 1.02, 1);
+    }
+  }
+
+  window.Enrich = { build: build, apply: apply, frame: frame };
+})();
+
+/* ==========================================================================
+   THE GIVING SCALE
+   The same PizzaBurg kitchen the HRM deck is set in, with one new thing on
+   the counter: a brass-and-oak market balance. One pan carries plain stone
+   cost weights; the other starts empty. Across sixteen slides small tokens —
+   a lantern, a gift, an apron, a leaf, a split slice, a return loop, a cap,
+   a rescue basket — settle onto the good pan one at a time, and the beam
+   tips further every time.
+
+   The tilt is not keyframed. Every tick applyStage() adds up what is
+   actually sitting on each pan and derives the beam angle from the
+   difference, then hangs the chains and the pans off that angle. The
+   argument the deck is making is the same one the geometry is making.
+
+   Everything is lathed, extruded or drawn onto a canvas at runtime — no
+   models to load, so the finished page still runs offline from a USB stick.
    ========================================================================== */
 
 const World = (function () {
@@ -1329,23 +2692,65 @@ const World = (function () {
   const BRAND_DEEP = 0xa82418;
   const CREAM = 0xf6f0e2;
 
-  const SAUCE = 0xb0301c;
   const CHEESE = 0xf0cf85;
-  const DOUGH = 0xf2e1bd;
-  const DOUGH_BAKED = 0xc07a33;
   const WOOD = 0x8a5f3c;
   const WOOD_PALE = 0xb98a5c;
   const STEEL = 0xc3c8cc;
+
+  /* the scale's own tokens */
+  const BRASS = 0xc9a227;
+  const STONE_GREY = 0x8a8a86;
+  const PAN_TERRACOTTA = 0xb5622f;
+  const LEAF_YOUNG = 0x8fae6e;
+  const WARM_GLOW = 0xffb35c;
+  const COIN_GOLD = 0xd8b34a;
+  const CAP_NAVY = 0x2b3550;
+  const HOOK_DIM = 0xcbb9a0;
 
   let renderer, scene, camera, sun, oven, ovenGlow, fire, dust;
   let running = false, reduced = false, ready = false, still = false;
   const clock = { t: 0, last: 0 };
 
-  const P = {
-    group: null, crust: null, sauce: null, cheese: null,
-    tops: [], board: null, peel: null, lifted: null, flour: null, shadow: null,
+  /* The scale is modelled in its own small units — a beam 4.4 across, pans of
+     r0.75 — because that is the size a real bench balance is drawn at. The
+     room is not: the counter is 80 units wide and the oven 17 across. So the
+     whole group is built at those honest proportions and then scaled once.
+
+     4.4 × 2.6 puts the beam at 11.4 units. At the calibration vantage —
+     ramadan, 46 units out at fov 34 — that lands the beam between 0.47 and
+     0.69 of frame width: right of centre, clear of the 54ch text column,
+     and the same band the pizza deck keeps its own subject in. Going
+     smaller does not buy framing (the leftmost tip only moves 0.02 across a
+     15% shrink, because the tight idea vantages aim right of the post, not
+     at it) and it does cost token legibility: a 0.16-unit token is already
+     only about 20px wide on a 1920 frame at the closest stage. */
+  const SCALE_UP = 2.6;
+
+  const PIVOT_Y = 3.2;      /* where the beam crosses the post, in scale units */
+  const BEAM_HALF = 2.2;    /* half of the 4.4 beam */
+  const CHAIN_LEN = 1.6;    /* drop from beam end to pan floor */
+  const CHAIN_SPLAY = 0.5;  /* the two strands of a chain part this far in z */
+  const PAN_RIM_Y = 0.20;   /* where a strand meets the pan */
+
+  const S = {
+    group: null, beamBar: null, beamPivot: null,
+    costPan: null, goodPan: null, stones: null,
+    chainL: null, chainR: null,
+    gaugeArc: null, gaugeTick: null, plaque: null, hook: null, glow: null,
+    lantern: null, gift: null, apron: null, leaf: null,
+    meal: null, green: null, cap: null, rescue: null,
   };
-  const anim = { grow: 0, sauce: 0, cheese: 0, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 };
+
+  /* one dedicated 0→1 flag per token, plus the two running tallies. Nothing
+     here is ever reused by a second object, which is what makes jumping
+     straight to slide eleven behave exactly like walking there. */
+  const anim = {
+    costWeight: 6,
+    lanternOn: 0, giftOn: 0, apronOn: 0, leafOn: 0,
+    mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0,
+    hookOn: 0, plaqueOn: 0, revealGlow: 0,
+    beamAngle: 0,
+  };
 
   const rig = {
     px: 0, py: 14, pz: 30, tx: 0, ty: 2, tz: 0, fov: 42,
@@ -1396,6 +2801,29 @@ const World = (function () {
     o = o || {};
     const pts = profile.map(function (p) { return V2(Math.max(0.0001, p[0]), p[1]); });
     return put(new T.Mesh(new T.LatheGeometry(pts, seg || 48), o.material || mat(color, o)), o.pos, o.rot);
+  }
+
+  function extrude(shape, depth, color, o) {
+    o = o || {};
+    const g = new T.ExtrudeGeometry(shape, {
+      depth: depth, bevelEnabled: !!o.bevel, bevelSize: o.bevel || 0,
+      bevelThickness: o.bevel || 0, bevelSegments: 1, curveSegments: o.curve || 16,
+    });
+    return put(new T.Mesh(g, o.material || mat(color, o)), o.pos, o.rot);
+  }
+
+  /* A cylinder built h units tall, then stretched and aimed between two
+     points. The chains need this every tick, not once at setup. */
+  const UP = new T.Vector3(0, 1, 0);
+  const vA = new T.Vector3(), vB = new T.Vector3(), vD = new T.Vector3();
+
+  function span(mesh, ax, ay, az, bx, by, bz, unit) {
+    vA.set(ax, ay, az); vB.set(bx, by, bz);
+    vD.subVectors(vB, vA);
+    const len = vD.length() || 0.0001;
+    mesh.position.addVectors(vA, vB).multiplyScalar(0.5);
+    mesh.quaternion.setFromUnitVectors(UP, vD.divideScalar(len));
+    mesh.scale.set(1, len / unit, 1);
   }
 
   let shadowTex = null;
@@ -1460,92 +2888,6 @@ const World = (function () {
       g.fillRect(Math.random() * 512, Math.random() * 512, 1.4, 1.4);
     }
     return tex(c, { repeat: [3, 1.6] });
-  }
-
-  /* Dough: warm, uneven, with the blistered spots that brown in the oven. */
-  function doughTexture() {
-    const c = canvas(512), g = c.getContext('2d');
-    g.fillStyle = '#f4e6c6'; g.fillRect(0, 0, 512, 512);
-    for (let i = 0; i < 260; i++) {
-      const x = Math.random() * 512, y = Math.random() * 512, r = 3 + Math.random() * 16;
-      const rg = g.createRadialGradient(x, y, 0, x, y, r);
-      const dark = Math.random() < 0.4;
-      rg.addColorStop(0, dark ? 'rgba(176,126,62,0.5)' : 'rgba(255,248,224,0.55)');
-      rg.addColorStop(1, 'rgba(255,248,224,0)');
-      g.fillStyle = rg;
-      g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
-    }
-    for (let i = 0; i < 1400; i++) {
-      g.fillStyle = 'rgba(150,110,60,' + (Math.random() * 0.07) + ')';
-      g.fillRect(Math.random() * 512, Math.random() * 512, 1.6, 1.6);
-    }
-    return tex(c, { repeat: [2, 2] });
-  }
-
-  /* Sauce, with a wobbly hand-ladled edge and a spiral of the spoon. */
-  function sauceTexture() {
-    const c = canvas(512), g = c.getContext('2d');
-    const cx = 256, cy = 256;
-    g.clearRect(0, 0, 512, 512);
-    g.beginPath();
-    for (let a = 0; a <= 360; a++) {
-      const r = 232 + Math.sin(a * 0.11) * 7 + Math.sin(a * 0.043) * 9 + Math.sin(a * 0.31) * 3;
-      const rad = a * Math.PI / 180;
-      const x = cx + Math.cos(rad) * r, y = cy + Math.sin(rad) * r;
-      a === 0 ? g.moveTo(x, y) : g.lineTo(x, y);
-    }
-    g.closePath();
-    const rg = g.createRadialGradient(cx - 30, cy - 30, 20, cx, cy, 240);
-    rg.addColorStop(0, '#c8402a');
-    rg.addColorStop(0.65, '#b0301c');
-    rg.addColorStop(1, '#93250f');
-    g.fillStyle = rg; g.fill();
-    /* the spoon spiral */
-    g.strokeStyle = 'rgba(150,52,28,0.5)'; g.lineWidth = 9;
-    g.beginPath();
-    for (let i = 0; i < 260; i++) {
-      const a = i * 0.13, r = 18 + i * 0.82;
-      const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
-      i === 0 ? g.moveTo(x, y) : g.lineTo(x, y);
-    }
-    g.stroke();
-    for (let i = 0; i < 500; i++) {
-      const a = Math.random() * 7, r = Math.random() * 228;
-      g.fillStyle = 'rgba(90,26,12,' + (Math.random() * 0.16) + ')';
-      g.beginPath(); g.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 1 + Math.random() * 4, 0, 7); g.fill();
-    }
-    return tex(c);
-  }
-
-  /* Cheese: overlapping melted pools, not a flat disc of yellow. */
-  function cheeseTexture() {
-    const c = canvas(512), g = c.getContext('2d');
-    g.clearRect(0, 0, 512, 512);
-    const cx = 256, cy = 256;
-    for (let i = 0; i < 190; i++) {
-      const a = i * 2.39996, rr = Math.sqrt(i / 190) * 218;
-      const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr;
-      const r = 22 + Math.random() * 26;
-      const rg = g.createRadialGradient(x - r * 0.25, y - r * 0.3, r * 0.1, x, y, r);
-      rg.addColorStop(0, 'rgba(250,229,168,0.92)');
-      rg.addColorStop(0.68, 'rgba(236,199,120,0.86)');
-      rg.addColorStop(1, 'rgba(228,186,104,0)');
-      g.fillStyle = rg;
-      g.beginPath();
-      g.ellipse(x, y, r, r * (0.72 + Math.random() * 0.4), Math.random() * 7, 0, 7);
-      g.fill();
-    }
-    /* toasted patches */
-    for (let i = 0; i < 34; i++) {
-      const a = Math.random() * 7, rr = Math.random() * 210;
-      const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr, r = 7 + Math.random() * 15;
-      const rg = g.createRadialGradient(x, y, 0, x, y, r);
-      rg.addColorStop(0, 'rgba(184,116,44,0.62)');
-      rg.addColorStop(1, 'rgba(184,116,44,0)');
-      g.fillStyle = rg;
-      g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
-    }
-    return tex(c);
   }
 
   /* Cream subway tile with a PizzaBurg red band — the backsplash. */
@@ -1677,16 +3019,35 @@ const World = (function () {
     return new T.CanvasTexture(c);
   }
 
-  function flourTexture() {
-    const c = canvas(256), g = c.getContext('2d');
-    for (let i = 0; i < 1800; i++) {
-      const x = 128 + (Math.random() - 0.5) * 220, y = 128 + (Math.random() - 0.5) * 220;
-      const d = Math.hypot(x - 128, y - 128) / 128;
-      if (Math.random() < d * d) continue;
-      g.fillStyle = 'rgba(255,252,244,' + (0.2 + Math.random() * 0.6) + ')';
-      g.beginPath(); g.arc(x, y, 0.5 + Math.random() * 2.2, 0, 7); g.fill();
+  /* Carroll's four tiers, engraved on the plaque bolted to the post. It is
+     read at a distance, so the tiers carry the shape and the words are only
+     there for anyone who walks up to the screen. */
+  function plaqueTexture() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 288;
+    const g = c.getContext('2d');
+    g.fillStyle = '#f6f0e2'; g.fillRect(0, 0, 512, 288);
+    g.strokeStyle = 'rgba(168,36,24,0.55)'; g.lineWidth = 6;
+    g.strokeRect(11, 11, 490, 266);
+
+    const tiers = ['PHILANTHROPIC', 'ETHICAL', 'LEGAL', 'ECONOMIC'];
+    const apex = 256, top = 44, h = 52;
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    for (let i = 0; i < 4; i++) {
+      const y0 = top + i * h, y1 = y0 + h - 7;
+      const w0 = 34 + i * 60, w1 = 34 + (i + 1) * 60;
+      g.beginPath();
+      g.moveTo(apex - w0, y0); g.lineTo(apex + w0, y0);
+      g.lineTo(apex + w1, y1); g.lineTo(apex - w1, y1);
+      g.closePath();
+      g.fillStyle = i % 2 ? 'rgba(226,59,46,0.16)' : 'rgba(226,59,46,0.28)';
+      g.fill();
+      g.strokeStyle = '#a82418'; g.lineWidth = 2.4; g.stroke();
+      g.fillStyle = '#8e2016';
+      g.font = '700 ' + (i < 2 ? 17 : 20) + 'px Inter, system-ui, sans-serif';
+      g.fillText(tiers[i], apex, (y0 + y1) / 2 + 1);
     }
-    return new T.CanvasTexture(c);
+    return tex(c);
   }
 
   /* ------------------------------------------------------------- the room */
@@ -1801,15 +3162,6 @@ const World = (function () {
       scene.add(g2);
     });
 
-    /* flour scattered where the dough gets worked */
-    P.flour = new T.Mesh(
-      new T.PlaneGeometry(32, 32),
-      new T.MeshBasicMaterial({ map: flourTexture(), transparent: true, opacity: 0.8, depthWrite: false })
-    );
-    P.flour.rotation.x = -Math.PI / 2;
-    P.flour.position.set(-2, 0.03, 0);
-    scene.add(P.flour);
-
     buildOven();
     buildProps();
   }
@@ -1865,7 +3217,7 @@ const World = (function () {
 
     ovenGlow = new T.Mesh(
       new T.PlaneGeometry(9, 7),
-      new T.MeshBasicMaterial({ color: 0xff8c2a, transparent: true, opacity: 0.55, depthWrite: false })
+      new T.MeshBasicMaterial({ color: 0xff8c2a, transparent: true, opacity: 0.5, depthWrite: false })
     );
     ovenGlow.position.set(0, 3.4, 4.6);
     oven.add(ovenGlow);
@@ -1876,7 +3228,8 @@ const World = (function () {
       oven.add(e);
     }
 
-    fire = new T.PointLight(0xff8830, 0, 56, 2);
+    /* the oven is never the subject in this deck, so it just idles warm */
+    fire = new T.PointLight(0xff8830, 26, 56, 2);
     fire.position.set(-28, 4.5, 0);
     scene.add(fire);
 
@@ -1954,256 +3307,401 @@ const World = (function () {
     scene.add(pin, contact(14, 9, 4.6, 0.34));
   }
 
-  /* ------------------------------------------------------------- the pizza */
+  /* --------------------------------------------------------- the weights */
 
-  /* the cross-section of a pizza: a thin field with a puffed cornicione */
-  const CRUST_PROFILE = [
-    [0.000, 0.055], [0.520, 0.058], [0.720, 0.072], [0.820, 0.130],
-    [0.888, 0.240], [0.940, 0.312], [0.992, 0.298], [1.020, 0.212],
-    [1.018, 0.108], [0.972, 0.032], [0.800, 0.008], [0.440, 0.003], [0.000, 0.000],
+  /* Eight tokens, eight slots, eight flags. The two food weights count for
+     more than the rest — feeding people is the heaviest thing on the pan,
+     and the beam should say so without anyone pointing it out. */
+  const TOKENS = [
+    { key: 'lantern', flag: 'lanternOn', w: 1.4 },
+    { key: 'gift',    flag: 'giftOn',    w: 1.4 },
+    { key: 'apron',   flag: 'apronOn',   w: 1.4 },
+    { key: 'leaf',    flag: 'leafOn',    w: 1.4 },
+    { key: 'meal',    flag: 'mealOn',    w: 2.1 },
+    { key: 'green',   flag: 'greenOn',   w: 1.4 },
+    { key: 'cap',     flag: 'capOn',     w: 1.4 },
+    { key: 'rescue',  flag: 'rescueOn',  w: 2.1 },
   ];
+  const TOKEN_Y = 0.07;   /* the pan's inner floor */
 
-  function buildPizza() {
-    P.group = new T.Group();
-    P.group.position.set(0, 0.06, 0);
-    scene.add(P.group);
+  /* Ramadan: a small pierced lantern with a warm core. */
+  function makeLantern() {
+    const g = new T.Group();
+    g.add(lathe([
+      [0.00, 0.00], [0.070, 0.000], [0.078, 0.012], [0.110, 0.060],
+      [0.098, 0.118], [0.062, 0.150], [0.062, 0.160], [0.000, 0.160],
+    ], 16, CREAM, { rough: 0.5, emissive: WARM_GLOW, ei: 0.85 }));
+    g.add(cyl(0.026, 0.034, 0.030, 10, BRASS, { pos: [0, 0.175, 0], rough: 0.34, metal: 0.7 }));
+    g.add(cyl(0.084, 0.084, 0.016, 12, BRASS, { pos: [0, 0.006, 0], rough: 0.34, metal: 0.7 }));
+    return g;
+  }
 
-    /* the board it lands on after the oven */
-    P.board = new T.Group();
-    const boardProfile = [
-      [0.00, 0.00], [8.20, 0.00], [8.60, 0.22], [8.60, 0.54], [8.20, 0.76], [0.00, 0.78],
-    ];
-    P.board.add(lathe(boardProfile, 44, WOOD, { rough: 0.66 }));
-    const handle = new T.Shape();
-    handle.moveTo(-1.7, 0); handle.lineTo(-1.4, 6.4);
-    handle.absarc(0, 6.4, 1.4, Math.PI, 0, true);
-    handle.lineTo(1.7, 0); handle.closePath();
-    P.board.add(put(new T.Mesh(
-      new T.ExtrudeGeometry(handle, { depth: 0.72, bevelEnabled: false, curveSegments: 12 }),
-      mat(WOOD, { rough: 0.66 })
-    ), [0, 0, 0], [-Math.PI / 2, 0, 0]).translateZ(-0.78));
-    P.board.children[1].position.set(0, 0, 8.2);
-    P.board.position.y = -0.78;   /* its top surface is the pizza's ground */
-    P.board.visible = false;
-    P.group.add(P.board);
-
-    /* the peel: a rounded blade tapering into a long handle */
-    const peelShape = new T.Shape();
-    peelShape.absarc(0, 0, 8.4, -Math.PI * 0.74, Math.PI * 0.74, false);
-    peelShape.lineTo(-7.2, 1.25);
-    peelShape.lineTo(-20, 0.95);
-    peelShape.lineTo(-20, -0.95);
-    peelShape.lineTo(-7.2, -1.25);
-    peelShape.closePath();
-    const peelGeo = new T.ExtrudeGeometry(peelShape, { depth: 0.3, bevelEnabled: true, bevelSize: 0.08, bevelThickness: 0.08, bevelSegments: 1, curveSegments: 30 });
-    peelGeo.rotateX(-Math.PI / 2);
-    P.peel = new T.Mesh(peelGeo, mat(STEEL, { rough: 0.3, metal: 0.62 }));
-    P.peel.position.y = -0.34;    /* likewise: the blade sits under the base */
-    P.peel.visible = false;
-    P.group.add(P.peel);
-
-    /* the crust */
-    P.crust = lathe(CRUST_PROFILE, 76, DOUGH, { rough: 0.9, map: doughTexture() });
-    P.group.add(P.crust);
-
-    /* sauce and cheese, each a textured disc that grows into place */
-    P.sauce = new T.Mesh(new T.CircleGeometry(1, 64), mat(0xffffff, {
-      map: sauceTexture(), transparent: true, rough: 0.56, depthWrite: false,
-    }));
-    P.sauce.rotation.x = -Math.PI / 2;
-    P.sauce.renderOrder = 1;
-    P.sauce.visible = false;
-    P.group.add(P.sauce);
-
-    P.cheese = new T.Mesh(new T.CircleGeometry(1, 64), mat(0xffffff, {
-      map: cheeseTexture(), transparent: true, rough: 0.4, depthWrite: false,
-    }));
-    P.cheese.rotation.x = -Math.PI / 2;
-    P.cheese.renderOrder = 2;
-    P.cheese.visible = false;
-    P.group.add(P.cheese);
-
-    /* toppings, each a proper little object */
-    const pepProfile = [
-      [0.00, 0.115], [0.46, 0.118], [0.70, 0.110], [0.85, 0.086],
-      [0.94, 0.046], [0.96, 0.000], [0.60, 0.000], [0.00, 0.000],
-    ];
-    const pepGeo = new T.LatheGeometry(pepProfile.map(function (p) { return V2(Math.max(0.0001, p[0]), p[1]); }), 20);
-
-    const stripGeo = new T.TorusGeometry(0.42, 0.085, 5, 12, Math.PI * 0.62);
-    stripGeo.scale(1, 1, 0.55); stripGeo.rotateX(Math.PI / 2);
-
-    const ringGeo = new T.TorusGeometry(0.36, 0.05, 5, 18, Math.PI * 1.35);
-    ringGeo.scale(1, 1, 0.5); ringGeo.rotateX(Math.PI / 2);
-
-    const mushGeo = new T.SphereGeometry(0.3, 12, 7, 0, Math.PI * 2, 0, Math.PI / 2);
-    mushGeo.scale(1, 0.62, 1);
-
-    const sets = [
-      { geo: pepGeo, color: 0xa03222, n: 14, rough: 0.46, y: 0.00, s: 1.34 },
-      { geo: stripGeo, color: 0x4a8433, n: 20, rough: 0.58, y: 0.04, s: 1.35 },
-      { geo: ringGeo, color: 0xc27f9c, n: 15, rough: 0.56, y: 0.04, s: 1.4 },
-      { geo: mushGeo, color: 0xd2bd9c, n: 11, rough: 0.8, y: 0.00, s: 1.5 },
-    ];
-    P.tops = sets.map(function (s, si) {
-      const m = new T.InstancedMesh(s.geo, mat(s.color, { rough: s.rough }), s.n);
-      m.count = 0;
-      m.renderOrder = 3;
-      P.group.add(m);
-      const spots = [];
-      for (let i = 0; i < s.n; i++) {
-        const a = i * 2.39996 + si * 1.31;
-        const rr = Math.sqrt((i + 0.6) / s.n) * 0.82;
-        spots.push({ x: Math.cos(a) * rr, z: Math.sin(a) * rr, ry: a * 1.9, y: s.y, s: (s.s || 1) * (0.92 + ((i * 7) % 5) * 0.05) });
-      }
-      return { mesh: m, spots: spots, n: s.n };
+  /* Christmas: a wrapped box with a cream cross-ribbon. */
+  function makeGift() {
+    const g = new T.Group();
+    g.add(box(0.160, 0.140, 0.160, BRAND, { pos: [0, 0.070, 0], rough: 0.62 }));
+    g.add(box(0.170, 0.146, 0.030, CREAM, { pos: [0, 0.070, 0], rough: 0.6 }));
+    g.add(box(0.030, 0.146, 0.170, CREAM, { pos: [0, 0.070, 0], rough: 0.6 }));
+    [-0.36, 0.36].forEach(function (r) {
+      g.add(box(0.052, 0.020, 0.030, CREAM, { pos: [Math.sin(r) * 0.05, 0.148, 0], rot: [0, 0, r], rough: 0.6 }));
     });
+    return g;
+  }
 
-    /* the cut lines */
-    P.cuts = new T.Group();
-    for (let i = 0; i < 8; i++) {
-      P.cuts.add(box(0.075, 0.05, 8.6, 0x93602f, { pos: [0, 0, 0], rot: [0, (i / 8) * Math.PI * 2, 0], transparent: true, opacity: 0 }));
-    }
-    P.cuts.visible = false;
-    P.group.add(P.cuts);
+  /* Welfare: a flat apron disc with two neck straps, lying on edge. */
+  function makeApron() {
+    const g = new T.Group();
+    const body = lathe([
+      [0.000, 0.000], [0.060, 0.000], [0.084, 0.006], [0.090, 0.015],
+      [0.084, 0.024], [0.060, 0.030], [0.000, 0.030],
+    ], 22, WOOD_PALE, { rough: 0.78 });
+    /* stand the disc up so it reads as cloth: after the quarter turn the
+       lathe's own z is what runs vertically, so that is the axis to stretch */
+    body.rotation.x = -Math.PI / 2;
+    body.scale.set(1, 1, 1.12);
+    body.position.y = 0.100;
+    g.add(body);
+    [-0.045, 0.045].forEach(function (x) {
+      g.add(box(0.012, 0.070, 0.010, WOOD_PALE, { pos: [x, 0.195, 0], rot: [0, 0, x * 2.4], rough: 0.78 }));
+    });
+    return g;
+  }
 
-    /* the slice that lifts away at the end */
+  /* Environment: one leaf, for the paper wrap that replaced the plastic. */
+  function makeLeaf() {
+    const s = new T.Shape();
+    s.moveTo(-0.080, 0);
+    s.quadraticCurveTo(-0.010, 0.060, 0.080, 0);
+    s.quadraticCurveTo(-0.010, -0.060, -0.080, 0);
+    const g = new T.Group();
+    const blade = extrude(s, 0.016, LEAF_YOUNG, { rough: 0.66, curve: 14 });
+    blade.rotation.x = -Math.PI / 2.4;
+    blade.position.y = 0.062;
+    g.add(blade);
+    g.add(box(0.008, 0.062, 0.008, 0x6d8a52, { pos: [-0.062, 0.030, 0.020], rot: [0.5, 0, 0.4], rough: 0.7 }));
+    return g;
+  }
+
+  /* Idea 1 — buy one give one: two slices, cut apart, facing each other.
+     Extruded sectors rather than partial lathes: a lathe stopped short of a
+     full turn leaves both cut faces open, and at this size the hollow shows. */
+  function makeMeal() {
     const wedge = new T.Shape();
     wedge.moveTo(0, 0);
-    wedge.absarc(0, 0, 8, -Math.PI / 8.6, Math.PI / 8.6, false);
+    wedge.absarc(0, 0, 0.120, -Math.PI / 8, Math.PI / 8, false);
     wedge.lineTo(0, 0);
-    const wg = new T.ExtrudeGeometry(wedge, { depth: 0.5, bevelEnabled: false, curveSegments: 14 });
-    wg.rotateX(-Math.PI / 2);
-    P.lifted = new T.Group();
-    P.lifted.add(new T.Mesh(wg, mat(DOUGH_BAKED, { rough: 0.84 })));
-    const wgTop = wg.clone();
-    wgTop.scale(0.93, 1, 0.93);
-    const topMesh = new T.Mesh(wgTop, mat(0xffffff, { rough: 0.42, map: P.cheese.material.map, transparent: true }));
-    topMesh.position.y = 0.34;
-    P.lifted.add(topMesh);
-    P.lifted.visible = false;
-    P.group.add(P.lifted);
+    const g = new T.Group();
+    [-1, 1].forEach(function (side) {
+      const w = new T.Group();
+      const base = extrude(wedge, 0.026, CREAM, { rough: 0.8, curve: 10 });
+      base.rotation.x = -Math.PI / 2;
+      w.add(base);
+      const top = extrude(wedge, 0.012, BRAND, { rough: 0.55, curve: 10 });
+      top.rotation.x = -Math.PI / 2;
+      top.scale.set(0.86, 0.86, 1);
+      top.position.y = 0.028;
+      w.add(top);
+      w.rotation.y = side > 0 ? 0 : Math.PI;
+      w.position.set(side * 0.052, 0.006, side * 0.030);
+      g.add(w);
+    });
+    return g;
+  }
 
-    P.shadow = contact(0, 0, 12, 0.5, 0.06);
-    scene.add(P.shadow);
+  /* Idea 2 — the green return: a loop that comes back on itself. */
+  function makeGreen() {
+    const a0 = Math.PI * 0.18, a1 = Math.PI * 1.72;
+    const ring = new T.Shape();
+    ring.absarc(0, 0, 0.090, a0, a1, false);
+    ring.absarc(0, 0, 0.062, a1, a0, true);
+    const g = new T.Group();
+    /* the loop stands on its own inner group: the token's own origin has to
+       stay on the pan floor, because applyStage drives that y directly */
+    const inner = new T.Group();
+    inner.position.y = 0.098;
+    inner.add(extrude(ring, 0.024, LEAF_YOUNG, { rough: 0.5, metal: 0.2, curve: 20 }));
+    const head = new T.Shape();
+    head.moveTo(0, 0.042);
+    head.lineTo(-0.038, -0.026);
+    head.lineTo(0.038, -0.026);
+    head.closePath();
+    const tip = extrude(head, 0.024, LEAF_YOUNG, { rough: 0.5, metal: 0.2, curve: 4 });
+    tip.position.set(Math.cos(a1) * 0.076, Math.sin(a1) * 0.076, 0);
+    tip.rotation.z = a1;
+    inner.add(tip);
+    g.add(inner);
+    return g;
+  }
+
+  /* Idea 3 — the student fund: a mortarboard with a gold tassel button. */
+  function makeCap() {
+    const g = new T.Group();
+    g.add(cyl(0.050, 0.056, 0.052, 14, CAP_NAVY, { pos: [0, 0.026, 0], rough: 0.7 }));
+    g.add(box(0.160, 0.020, 0.160, CAP_NAVY, { pos: [0, 0.062, 0], rot: [0, 0.5, 0], rough: 0.66 }));
+    g.add(cyl(0.014, 0.014, 0.012, 10, COIN_GOLD, { pos: [0, 0.078, 0], rough: 0.34, metal: 0.6 }));
+    g.add(cyl(0.007, 0.007, 0.070, 6, COIN_GOLD, { pos: [0.048, 0.056, 0.030], rot: [0.35, 0, 0.5], rough: 0.5, metal: 0.4 }));
+    return g;
+  }
+
+  /* Idea 4 — food rescue: a basket with the evening's surplus in it. */
+  function makeRescue() {
+    const g = new T.Group();
+    g.add(lathe([
+      [0.000, 0.000], [0.068, 0.000], [0.074, 0.010], [0.130, 0.140],
+      [0.124, 0.148], [0.066, 0.014], [0.000, 0.012],
+    ], 20, WOOD_PALE, { rough: 0.82 }));
+    [[-0.045, 0.020], [0.040, -0.030], [0.010, 0.048]].forEach(function (p, i) {
+      g.add(box(0.046, 0.042, 0.046, CHEESE, { pos: [p[0], 0.132 + (i % 2) * 0.028, p[1]], rot: [0, i * 0.7, 0.12], rough: 0.7 }));
+    });
+    return g;
+  }
+
+  const MAKERS = {
+    lantern: makeLantern, gift: makeGift, apron: makeApron, leaf: makeLeaf,
+    meal: makeMeal, green: makeGreen, cap: makeCap, rescue: makeRescue,
+  };
+
+  /* ---------------------------------------------------------- the balance */
+
+  /* the pan: a shallow bowl with a real lip, so the tokens sit in something */
+  const PAN_PROFILE = [
+    [0.000, 0.060], [0.300, 0.030], [0.550, 0.062], [0.720, 0.180], [0.750, 0.230],
+    [0.750, 0.252], [0.716, 0.206], [0.545, 0.088], [0.298, 0.056], [0.000, 0.086],
+  ];
+
+  function makePan(color) {
+    const g = new T.Group();
+    g.add(lathe(PAN_PROFILE, 34, color, { rough: 0.68, side: T.DoubleSide }));
+    return g;
+  }
+
+  function buildScale() {
+    S.group = new T.Group();
+    S.group.position.set(0, 0, 0);
+    S.group.scale.setScalar(SCALE_UP);
+    scene.add(S.group);
+
+    /* post and pivot */
+    S.group.add(cyl(0.60, 0.72, 0.14, 26, WOOD, { pos: [0, 0.07, 0], rough: 0.7 }));
+    S.group.add(cyl(0.50, 0.60, 0.30, 24, BRASS, { pos: [0, 0.15, 0], rough: 0.36, metal: 0.7 }));
+    S.group.add(cyl(0.16, 0.22, 3.20, 20, BRASS, { pos: [0, 1.60, 0], rough: 0.34, metal: 0.7 }));
+    S.beamPivot = new T.Mesh(new T.SphereGeometry(0.14, 16, 12), mat(BRASS, { rough: 0.28, metal: 0.8 }));
+    S.beamPivot.position.set(0, PIVOT_Y, 0);
+    S.group.add(S.beamPivot);
+
+    /* the beam itself — oak, with brass caps at the ends */
+    S.beamBar = box(4.40, 0.16, 0.28, WOOD, { pos: [0, PIVOT_Y, 0], rough: 0.62 });
+    S.group.add(S.beamBar);
+    [-1, 1].forEach(function (side) {
+      S.beamBar.add(box(0.16, 0.20, 0.32, BRASS, { pos: [side * BEAM_HALF, 0, 0], rough: 0.34, metal: 0.7 }));
+    });
+
+    /* the empty hook: a bare ring on the good side of the beam, hung there
+       on the gap slide and taken away again when the first idea fills it */
+    S.hook = lathe([
+      [0.0850, 0.0000], [0.0956, 0.0106], [0.1000, 0.0000],
+      [0.0956, -0.0106], [0.0850, -0.0150], [0.0744, -0.0106],
+      [0.0700, 0.0000], [0.0744, 0.0106], [0.0850, 0.0150],
+    ], 16, HOOK_DIM, { rough: 0.8, transparent: true, opacity: 0.9 });
+    S.hook.rotation.x = Math.PI / 2;
+    S.hook.position.set(1.10, -0.17, 0);
+    S.beamBar.add(S.hook);
+
+    /* the two chains. Each is two strands; every endpoint is recomputed in
+       applyStage, never fixed here, or the pans tear off the beam ends. */
+    const chainMat = mat(STEEL, { rough: 0.3, metal: 0.65 });
+    S.chainL = []; S.chainR = [];
+    for (let i = 0; i < 2; i++) {
+      S.chainL.push(cyl(0.02, 0.02, CHAIN_LEN, 6, STEEL, { material: chainMat }));
+      S.chainR.push(cyl(0.02, 0.02, CHAIN_LEN, 6, STEEL, { material: chainMat }));
+      S.group.add(S.chainL[i], S.chainR[i]);
+    }
+
+    /* the pans */
+    S.costPan = makePan(STONE_GREY);
+    S.goodPan = makePan(PAN_TERRACOTTA);
+    S.group.add(S.costPan, S.goodPan);
+
+    /* six plain stones, four down and two on top; one lifts off at the
+       environment stage, so the top-right slot is deliberately last */
+    S.stoneSlots = [
+      [-0.14, 0.10, -0.14], [0.14, 0.10, -0.14], [-0.14, 0.10, 0.14],
+      [0.14, 0.10, 0.14], [-0.14, 0.28, 0.00], [0.14, 0.28, 0.00],
+    ];
+    S.stones = new T.InstancedMesh(
+      new T.BoxGeometry(0.22, 0.18, 0.22), mat(STONE_GREY, { rough: 0.88 }), S.stoneSlots.length
+    );
+    S.stones.count = 0;
+    S.costPan.add(S.stones);
+
+    /* the eight tokens, laid out on a golden angle so no two crowd */
+    TOKENS.forEach(function (tk, i) {
+      const a = i * 2.39996;
+      const r = Math.sqrt((i + 0.55) / TOKENS.length) * 0.44;
+      const m = MAKERS[tk.key]();
+      m.position.set(Math.cos(a) * r, TOKEN_Y, Math.sin(a) * r);
+      /* only a small turn each: three of the tokens are flat shapes and go
+         unreadable if they are allowed to face away from the camera */
+      m.rotation.y = ((i % 3) - 1) * 0.34;
+      m.visible = false;
+      S.goodPan.add(m);
+      S[tk.key] = m;
+      tk.slot = m.position.clone();
+    });
+
+    /* the plaque bolted to the post: Carroll's pyramid, the frame the whole
+       argument is hung on */
+    S.plaque = new T.Mesh(
+      new T.PlaneGeometry(0.90, 0.50),
+      mat(0xffffff, { rough: 0.72, map: plaqueTexture(), transparent: true })
+    );
+    S.plaque.position.set(0, 2.20, 0.24);
+    S.plaque.visible = false;
+    S.group.add(S.plaque);
+
+    /* the gauge: an engraved arc behind the post and a tick that rides the
+       beam, so the tilt is readable from the back of a room */
+    const arc = new T.Shape();
+    arc.absarc(0, 0, 1.10, Math.PI * 0.24, Math.PI * 0.76, false);
+    arc.absarc(0, 0, 1.02, Math.PI * 0.76, Math.PI * 0.24, true);
+    S.gaugeArc = extrude(arc, 0.05, HOOK_DIM, { rough: 0.74, curve: 26, pos: [0, 3.40, -0.30] });
+    S.group.add(S.gaugeArc);
+    for (let i = -2; i <= 2; i++) {
+      const th = Math.PI / 2 + i * 0.12;
+      S.group.add(box(0.018, 0.10, 0.02, HOOK_DIM, {
+        pos: [Math.cos(th) * 0.96, 3.40 + Math.sin(th) * 0.96, -0.235],
+        rot: [0, 0, th - Math.PI / 2], rough: 0.74,
+      }));
+    }
+    S.gaugeTick = box(0.02, 0.18, 0.02, BRASS, { pos: [0, 4.46, -0.20], rough: 0.3, metal: 0.7, emissive: BRASS, ei: 0.2 });
+    S.group.add(S.gaugeTick);
+
+    /* the payoff light, dark until the reveal */
+    S.glow = new T.PointLight(WARM_GLOW, 0, 60, 2);
+    S.glow.position.set(0, 4.5, 1.5);
+    S.group.add(S.glow);
+
+    scene.add(contact(0, 0, 3.6, 0.5));
   }
 
   /* ------------------------------------------------------------- the steps */
 
   const TARGETS = {
-    flour:    { grow: 0.09, sauce: 0, cheese: 0, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    dough:    { grow: 0.17, sauce: 0, cheese: 0, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    stretch:  { grow: 0.56, sauce: 0, cheese: 0, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    base:     { grow: 1.00, sauce: 0, cheese: 0, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    sauce:    { grow: 1.00, sauce: 1, cheese: 0, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    cheese:   { grow: 1.00, sauce: 1, cheese: 1, tops: 0, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    toppings: { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 0, cut: 0, lift: 0, travel: 0, rise: 0 },
-    peel:     { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 0, cut: 0, lift: 0, travel: 0.16, rise: 0.62 },
-    oven:     { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 0.2, cut: 0, lift: 0, travel: 0.76, rise: 1 },
-    bake:     { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 1, cut: 0, lift: 0, travel: 0.97, rise: 1 },
-    out:      { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 1, cut: 0, lift: 0, travel: 0, rise: 0 },
-    slice:    { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 1, cut: 1, lift: 0, travel: 0, rise: 0 },
-    served:   { grow: 1.00, sauce: 1, cheese: 1, tops: 1, bake: 1, cut: 1, lift: 1, travel: 0, rise: 0 },
+    open:        { costWeight: 6, lanternOn: 0, giftOn: 0, apronOn: 0, leafOn: 0, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 0, revealGlow: 0 },
+    framework:   { costWeight: 6, lanternOn: 0, giftOn: 0, apronOn: 0, leafOn: 0, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    ramadan:     { costWeight: 6, lanternOn: 1, giftOn: 0, apronOn: 0, leafOn: 0, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    christmas:   { costWeight: 6, lanternOn: 1, giftOn: 1, apronOn: 0, leafOn: 0, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    welfare:     { costWeight: 6, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 0, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    environment: { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    gap:         { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 0, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 1, plaqueOn: 1, revealGlow: 0 },
+    idea1:       { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 1, greenOn: 0, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    idea2:       { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 1, greenOn: 1, capOn: 0, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    idea3:       { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 1, greenOn: 1, capOn: 1, rescueOn: 0, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    idea4:       { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 1, greenOn: 1, capOn: 1, rescueOn: 1, hookOn: 0, plaqueOn: 1, revealGlow: 0 },
+    fullreveal:  { costWeight: 5, lanternOn: 1, giftOn: 1, apronOn: 1, leafOn: 1, mealOn: 1, greenOn: 1, capOn: 1, rescueOn: 1, hookOn: 0, plaqueOn: 1, revealGlow: 1 },
   };
 
+  /* the eight token flags get the bounce; the tallies and the fittings do not */
+  const REVEAL_KEYS = ['lanternOn', 'giftOn', 'apronOn', 'leafOn', 'mealOn', 'greenOn', 'capOn', 'rescueOn'];
+  const STEADY_KEYS = ['costWeight', 'hookOn', 'plaqueOn', 'revealGlow'];
+
   function setStage(name, instant) {
-    const t = TARGETS[name] || TARGETS.flour;
+    const t = TARGETS[name] || TARGETS.open;
     if (instant || reduced || !window.gsap) {
       Object.keys(t).forEach(function (k) { anim[k] = t[k]; });
       applyStage();
       return;
     }
     window.gsap.killTweensOf(anim);
-    window.gsap.to(anim, {
-      grow: t.grow, sauce: t.sauce, cheese: t.cheese, tops: t.tops,
-      bake: t.bake, cut: t.cut, lift: t.lift, travel: t.travel, rise: t.rise,
-      duration: 1.6, ease: 'power2.inOut', onUpdate: applyStage,
-    });
+
+    const steady = { duration: 1.6, ease: 'power2.inOut', onUpdate: applyStage };
+    STEADY_KEYS.forEach(function (k) { steady[k] = t[k]; });
+    window.gsap.to(anim, steady);
+
+    /* a touch of overshoot, so a new token settles onto the pan rather than
+       simply existing there */
+    const reveal = { duration: 1.6, ease: 'back.out(1.7)', onUpdate: applyStage };
+    REVEAL_KEYS.forEach(function (k) { reveal[k] = t[k]; });
+    window.gsap.to(anim, reveal);
   }
 
+  /* The beam is derived, not animated. k and the clamp are picked so the
+     opening reads about −13° (plainly cost-heavy) and the last idea lands
+     just short of the 0.30 rad limit — the clamp is a guard rail, not the
+     shape of the curve. Sign: rotation about +z lifts the +x end, and the
+     cost pan is on −x, so a positive angle is a cost-heavy beam. */
+  const TORQUE_K = 0.039;
+  const TILT_MAX = 0.30;
+
   const dummy = new T.Object3D();
-  const cA = new T.Color(), cB = new T.Color();
 
   function applyStage() {
-    if (!P.crust) return;
-    const g = anim.grow;
+    if (!S.beamBar) return;
 
-    /* a ball at 0.17, a full base at 1: the crust scales wide and settles low */
-    const R = 1.9 + g * 6.4;
-    const H = (2.4 - g * 1.62) / (g < 0.3 ? 1 : 1);
-    P.crust.scale.set(R, H, R);
-    P.crust.visible = g > 0.02;
-
-    /* the field the sauce sits on rises with the crust profile */
-    const fieldY = 0.055 * H;
-
-    cA.setHex(DOUGH); cB.setHex(DOUGH_BAKED);
-    P.crust.material.color.copy(cA).lerp(cB, anim.bake);
-
-    P.sauce.visible = anim.sauce > 0.02;
-    if (P.sauce.visible) {
-      P.sauce.scale.setScalar(R * 0.845 * Math.min(1, anim.sauce * 1.15));
-      P.sauce.position.y = fieldY + 0.025;
-      P.sauce.material.opacity = Math.min(1, anim.sauce * 1.6);
-      P.sauce.material.color.setRGB(1, 1 - anim.bake * 0.12, 1 - anim.bake * 0.16);
-    }
-
-    P.cheese.visible = anim.cheese > 0.02;
-    if (P.cheese.visible) {
-      P.cheese.scale.setScalar(R * 0.795 * (0.94 + anim.cheese * 0.06));
-      P.cheese.position.y = fieldY + 0.07;
-      P.cheese.material.opacity = Math.min(0.88, anim.cheese * 1.35);
-      P.cheese.material.color.setRGB(1, 1 - anim.bake * 0.06, 1 - anim.bake * 0.14);
-      P.cheese.material.roughness = 0.42 - anim.bake * 0.16;
-    }
-
-    P.tops.forEach(function (set) {
-      const n = Math.round(anim.tops * set.n);
-      set.mesh.count = n;
-      for (let i = 0; i < n; i++) {
-        const s = set.spots[i];
-        dummy.position.set(s.x * R * 0.80, fieldY + s.y + 0.16, s.z * R * 0.80);
-        dummy.rotation.set(0, s.ry, 0);
-        dummy.scale.setScalar(s.s * (1 + anim.bake * 0.06));
-        dummy.updateMatrix();
-        set.mesh.setMatrixAt(i, dummy.matrix);
-      }
-      if (n) set.mesh.instanceMatrix.needsUpdate = true;
+    /* what is actually on the good pan. The reveal flags overshoot past 1 on
+       the bounce; the tally clamps them so the beam never bounces with them. */
+    let good = 0;
+    TOKENS.forEach(function (tk) {
+      const f = anim[tk.flag];
+      const clamped = f < 0 ? 0 : (f > 1 ? 1 : f);
+      good += clamped * tk.w;
+      const m = S[tk.key];
+      if (!m) return;
+      m.visible = f > 0.01;
+      m.scale.setScalar(f);
+      m.position.y = tk.slot.y + (1 - clamped) * 0.34;
     });
 
-    P.cuts.visible = anim.cut > 0.02;
-    P.cuts.renderOrder = 4;
-    P.cuts.position.y = fieldY + 0.34;
-    P.cuts.children.forEach(function (c, i) {
-      c.material.opacity = Math.max(0, Math.min(0.85, anim.cut * 8 - i * 0.55));
-      c.scale.z = R / 8.6;
-    });
+    const raw = (anim.costWeight - good) * TORQUE_K;
+    const a = raw < -TILT_MAX ? -TILT_MAX : (raw > TILT_MAX ? TILT_MAX : raw);
+    anim.beamAngle = a;
 
-    P.peel.visible = anim.travel > 0.02 && anim.bake < 0.98;
-    P.board.visible = anim.bake > 0.5 && anim.travel < 0.4;
-    P.shadow.material.opacity = 0.5 * (1 - anim.rise);
-    P.shadow.scale.setScalar(Math.max(0.2, R / 8));
+    S.beamBar.rotation.z = a;
 
-    P.lifted.visible = anim.lift > 0.02;
-    if (P.lifted.visible) {
-      P.lifted.position.set(anim.lift * 2.4, fieldY + 0.3 + anim.lift * 7.2, anim.lift * 1.2);
-      P.lifted.rotation.set(-anim.lift * 0.62, 0.28, anim.lift * 0.2);
-      P.lifted.scale.setScalar(R / 8);
+    /* both beam ends, then the pans hanging plumb under them */
+    const ca = Math.cos(a) * BEAM_HALF, sa = Math.sin(a) * BEAM_HALF;
+    const rx = ca, ry = PIVOT_Y + sa;      /* good side, +x */
+    const lx = -ca, ly = PIVOT_Y - sa;     /* cost side, −x */
+
+    S.goodPan.position.set(rx, ry - CHAIN_LEN, 0);
+    S.costPan.position.set(lx, ly - CHAIN_LEN, 0);
+
+    hang(S.chainR, rx, ry, S.goodPan.position.y);
+    hang(S.chainL, lx, ly, S.costPan.position.y);
+
+    /* the cost stack: whole stones only, so the 6→5 drop is a fact, not a fade */
+    const n = Math.max(0, Math.min(S.stoneSlots.length, Math.round(anim.costWeight)));
+    S.stones.count = n;
+    for (let i = 0; i < n; i++) {
+      const s = S.stoneSlots[i];
+      dummy.position.set(s[0], s[1], s[2]);
+      dummy.rotation.set(0, i * 0.31, 0);
+      dummy.scale.setScalar(1);
+      dummy.updateMatrix();
+      S.stones.setMatrixAt(i, dummy.matrix);
     }
+    if (n) S.stones.instanceMatrix.needsUpdate = true;
 
-    /* the run to the oven mouth and back to the board */
-    const tr = Math.min(1, anim.travel);
-    const wait = Math.max(0, (0.17 - g) / 0.17);
-    P.group.position.x = -28.2 * Math.sin(tr * Math.PI * 0.5) - wait * 16;
-    P.group.position.z = 2.6 * tr;
-    P.group.position.y = 0.06 + anim.rise * 3.6;
-    P.group.rotation.y = tr * 0.34;
+    /* the gauge tick rides the beam: it leans toward whichever pan is low */
+    S.gaugeTick.position.set(-Math.sin(a) * 1.06, 3.40 + Math.cos(a) * 1.06, -0.20);
+    S.gaugeTick.rotation.z = a;
 
-    if (ovenGlow) {
-      ovenGlow.material.opacity = 0.42 + anim.bake * 0.42;
-      fire.intensity = 16 + anim.bake * 48;
+    S.hook.visible = anim.hookOn > 0.01;
+    S.hook.scale.setScalar(Math.max(0.001, anim.hookOn));
+    S.hook.material.opacity = 0.9 * Math.min(1, anim.hookOn);
+
+    S.plaque.visible = anim.plaqueOn > 0.01;
+    S.plaque.scale.set(Math.max(0.001, anim.plaqueOn), Math.max(0.001, anim.plaqueOn), 1);
+    S.plaque.material.opacity = Math.min(1, anim.plaqueOn);
+
+    S.glow.intensity = anim.revealGlow * 10;
+  }
+
+  function hang(pair, ex, ey, panY) {
+    for (let i = 0; i < 2; i++) {
+      const z = i ? CHAIN_SPLAY : -CHAIN_SPLAY;
+      span(pair[i], ex, ey, 0, ex, panY + PAN_RIM_Y, z, CHAIN_LEN);
     }
-    if (P.flour) P.flour.material.opacity = 0.8 - g * 0.36;
   }
 
   /* ------------------------------------------------------------------ init */
@@ -2268,7 +3766,7 @@ const World = (function () {
     scene.fog = new T.Fog(0xf2e9db, 96, 210);
 
     buildKitchen();
-    buildPizza();
+    buildScale();
     applyStage();
 
     scene.traverse(function (o) {
@@ -2294,6 +3792,30 @@ const World = (function () {
     }));
     scene.add(dust);
 
+    /* the immersive pass layers its lighting, atmosphere and wall on top of
+       all of the above. It is optional: without it the room still reads. */
+    if (window.Enrich) {
+      window.Enrich.build({
+        THREE: T, scene: scene, renderer: renderer, camera: camera,
+        colors: {
+          BRAND: BRAND, BRAND_DEEP: BRAND_DEEP, CREAM: CREAM, BRASS: BRASS,
+          STONE_GREY: STONE_GREY, PAN_TERRACOTTA: PAN_TERRACOTTA,
+          LEAF_YOUNG: LEAF_YOUNG, WARM_GLOW: WARM_GLOW, COIN_GOLD: COIN_GOLD,
+          CAP_NAVY: CAP_NAVY, HOOK_DIM: HOOK_DIM,
+        },
+        anchors: {
+          scale: S.group, beamBar: S.beamBar, costPan: S.costPan, goodPan: S.goodPan,
+          gaugeArc: S.gaugeArc, gaugeTick: S.gaugeTick,
+          weights: {
+            lantern: S.lantern, gift: S.gift, apron: S.apron, leaf: S.leaf,
+            meal: S.meal, green: S.green, cap: S.cap, rescue: S.rescue,
+            hook: S.hook,
+          },
+        },
+        mat: mat, box: box, cyl: cyl, lathe: lathe, tex: tex, canvas: canvas,
+      });
+    }
+
     ready = true; running = true;
     clock.last = performance.now();
     requestAnimationFrame(frame);
@@ -2302,29 +3824,38 @@ const World = (function () {
 
   /* ---------------------------------------------------------------- moving */
 
-  /* The text column owns the left half, so every vantage aims about nine
-     units left of the subject: that puts the pizza — or the oven — in the
-     upper right, clear of the type and above the aside card. */
-  const VANTAGE = {
-    flour:    { p: [16, 22, 66], t: [-10, 5.0, 0], fov: 36 },
-    dough:    { p: [14, 21, 64], t: [-11, 4.5, 0], fov: 36 },
-    stretch:  { p: [10, 20, 62], t: [-12, 4.2, 0], fov: 37 },
-    base:     { p: [13, 22, 64], t: [-11, 4.2, 0], fov: 36 },
-    sauce:    { p: [8, 19, 60],  t: [-12, 4.0, 0], fov: 37 },
-    cheese:   { p: [11, 20, 62], t: [-11, 4.0, 0], fov: 37 },
-    toppings: { p: [6, 21, 63],  t: [-12, 4.0, 0], fov: 36 },
-    peel:     { p: [4, 20, 62],  t: [-17, 5.0, 0], fov: 37 },
-    oven:     { p: [0, 18, 58],  t: [-28, 7.0, 0], fov: 37 },
-    bake:     { p: [-4, 17, 55], t: [-30, 7.0, 0], fov: 37 },
-    out:      { p: [8, 21, 63],  t: [-12, 4.5, 0], fov: 36 },
-    slice:    { p: [11, 19, 58], t: [-10, 4.2, 0], fov: 37 },
-    served:   { p: [13, 17, 54], t: [-8, 5.0, 0],  fov: 38 },
+  /* The text column owns the left half, so every vantage aims left of the
+     scale: that puts the beam and both pans in the right third of frame,
+     clear of the type and above the aside card. The deck opens wide and
+     closes wider; the middle stages sit in close on the pans, where the
+     tokens are only a fraction of a metre across.
+
+     The target x values are solved, not eyeballed. Projecting the beam pivot
+     through each camera puts it at a fraction of frame width: 0.61 on a plain
+     slide, 0.66 where an aside card also wants the right column. Aiming only
+     a unit or two left of the post — which is where these vantages started —
+     walks the scale steadily into the type as the deck progresses, until by
+     the idea slides it sits dead centre under the bullets. */
+  const VANTAGE_SCALE = {
+    open:        { p: [16, 13, 54], t: [-8, 3.6, 0],     fov: 37 },
+    framework:   { p: [14, 15, 50], t: [-3.7, 5.2, 0],   fov: 35 },
+    ramadan:     { p: [11, 11, 45], t: [-5.4, 4.6, 1.2], fov: 34 },
+    christmas:   { p: [11, 11, 43], t: [-5.3, 4.6, 0.8], fov: 34 },
+    welfare:     { p: [10, 10, 42], t: [-4.8, 4.2, 1.2], fov: 33 },
+    environment: { p: [10, 10, 40], t: [-4.7, 4.2, 0.8], fov: 33 },
+    gap:         { p: [9, 13, 42],  t: [-3.3, 6.0, -1],  fov: 35 },
+    idea1:       { p: [9, 10, 39],  t: [-4.5, 4.0, 1],   fov: 33 },
+    idea2:       { p: [10, 12, 40], t: [-5.6, 5.4, -1],  fov: 34 },
+    idea3:       { p: [9, 9, 37],   t: [-4.1, 3.8, 1],   fov: 32 },
+    idea4:       { p: [10, 10, 38], t: [-4.8, 4.2, 0],   fov: 33 },
+    fullreveal:  { p: [17, 14, 50], t: [-7.7, 5.5, 0],   fov: 37 },
   };
 
   function goTo(slide, instant) {
     if (!ready) return;
     still = !!slide.still;
-    setStage(slide.stage || 'flour', instant);
+    setStage(slide.stage || 'open', instant);
+    if (window.Enrich) window.Enrich.apply(slide.stage || 'open', !!(instant || reduced));
 
     const prog = Math.max(0, SLIDES.indexOf(slide)) / Math.max(1, SLIDES.length - 1);
     const lx = 26 - prog * 50, ly = 48 - prog * 18, lz = 24 + prog * 8;
@@ -2335,7 +3866,7 @@ const World = (function () {
       sun.position.set(lx, ly, lz);
     }
 
-    const v = slide.cam || VANTAGE[slide.stage] || VANTAGE.flour;
+    const v = slide.cam || VANTAGE_SCALE[slide.stage] || VANTAGE_SCALE.open;
     const target = { px: v.p[0], py: v.p[1], pz: v.p[2], tx: v.t[0], ty: v.t[1], tz: v.t[2], fov: slide.fov || v.fov || 42 };
 
     if (instant || reduced || !window.gsap) {
@@ -2405,7 +3936,7 @@ const World = (function () {
     if (ovenGlow && !calm) {
       const flicker = 1 + Math.sin(t * 9.3) * 0.06 + Math.sin(t * 3.1) * 0.045;
       ovenGlow.scale.set(flicker, 1 + (flicker - 1) * 0.5, 1);
-      fire.intensity = (16 + anim.bake * 48) * flicker;
+      fire.intensity = 26 * flicker;
     }
 
     if (dust) {
@@ -2418,6 +3949,8 @@ const World = (function () {
       p.needsUpdate = true;
       dust.material.opacity = 0.32 + Math.sin(t * 0.6) * 0.12;
     }
+
+    if (window.Enrich) window.Enrich.frame(t, dt, { beamAngle: anim.beamAngle, calm: calm });
 
     renderer.render(scene, camera);
   }

@@ -1,38 +1,85 @@
 #!/usr/bin/env python3
-"""Assemble the presentation into self-contained files.
+"""Assemble the presentations into self-contained files.
 
-Two outputs, both from the same sources in src/:
+Two decks are built from the same sources in src/ — the HRM report and the
+CSR report. They share the engine (media, visuals, deck) and differ in their
+data, their 3D world and their shell. Each deck produces two outputs:
 
   index.html          a complete HTML document. Works from a USB stick, from
-                      file://, or from GitHub Pages, with no network at all —
-                      fonts, libraries, photographs and the video clip are all
-                      inlined.
+  csr.html            file://, or from GitHub Pages, with no network at all —
+                      fonts, libraries, photographs and the video clips are
+                      all inlined.
   dist/artifact.html  the same page as a fragment (no <html>/<head>/<body>),
-                      which is what the Artifact host expects.
+  dist/csr-artifact.html  which is what the Artifact host expects.
 
-Run: python3 tools/build.py
+Run: python3 tools/build.py          both decks
+     python3 tools/build.py csr      one deck
 """
 import base64
 import json
 import mimetypes
 import os
-import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'src')
 ASSETS = os.path.join(ROOT, 'assets')
 
-TITLE = 'PizzaBurg HRM Practices'
-DESCRIPTION = (
-    'An immersive 3D presentation on the human resource practices of PizzaBurg, '
-    'by Group NEXIX, Bangladesh University.'
-)
+# Paths below are repo-relative and slash-separated; rooted() turns them into
+# real paths. The js list is the concatenation order, and it matters: every
+# file lands in one <script>, so a const declared in data.js is visible to
+# world.js and deck.js further down.
+DECKS = {
+    'hrm': {
+        'title': 'PizzaBurg HRM Practices',
+        'description': (
+            'An immersive 3D presentation on the human resource practices of PizzaBurg, '
+            'by Group NEXIX, Bangladesh University.'
+        ),
+        'css': ['src/styles.css', 'src/visuals.css'],
+        'body': 'src/body.html',
+        'js': [
+            'src/data.js',
+            'src/media.js',
+            'src/visuals.js',
+            'src/world.js',
+            'src/deck.js',
+        ],
+        'document': 'index.html',
+        'fragment': 'dist/artifact.html',
+    },
+    'csr': {
+        'title': 'PizzaBurg and Corporate Social Responsibility',
+        'description': (
+            'An immersive 3D presentation on the corporate social responsibility of '
+            'PizzaBurg, by Group NEXIX, Bangladesh University.'
+        ),
+        'css': ['src/styles.css', 'src/visuals.css', 'src/csr/visuals.css'],
+        'body': 'src/csr/body.html',
+        'js': [
+            'src/csr/data.js',
+            'src/media.js',
+            'src/visuals.js',
+            'src/csr/visuals.js',
+            'src/csr/enrich.js',
+            'src/csr/world.js',
+            'src/deck.js',
+        ],
+        'document': 'csr.html',
+        'fragment': 'dist/csr-artifact.html',
+    },
+}
+
+DECK_ORDER = ['hrm', 'csr']
 
 
 def read(*parts):
     with open(os.path.join(*parts), encoding='utf-8') as fh:
         return fh.read()
+
+
+def rooted(relpath):
+    return os.path.join(ROOT, *relpath.split('/'))
 
 
 def data_uri(path):
@@ -81,11 +128,29 @@ def collect_videos():
     return out
 
 
-def build():
+def build_media_js():
+    """src/media.js with the whole asset library baked into it.
+
+    Both decks share this, so it is built once and handed to each of them.
+    """
     images = collect_images()
     videos = collect_videos()
+    js = read(SRC, 'media.js')
+    js = js.replace('/*__IMAGES__*/ {}', json.dumps(images))
+    js = js.replace('/*__VIDEOS__*/ {}', json.dumps(videos))
+    return js, len(images), len(videos)
 
-    css = read(SRC, 'styles.css') + '\n' + read(SRC, 'visuals.css')
+
+def missing_sources(name):
+    deck = DECKS[name]
+    paths = deck['css'] + [deck['body']] + deck['js']
+    return [p for p in paths if not os.path.isfile(rooted(p))]
+
+
+def build_deck(name, media_js, vendor):
+    deck = DECKS[name]
+
+    css = '\n'.join(read(rooted(p)) for p in deck['css'])
     for token, path in (
         ('FONT_FRAUNCES', 'fonts/fraunces-latin.woff2'),
         ('FONT_INTER', 'fonts/inter-latin.woff2'),
@@ -94,27 +159,18 @@ def build():
         # the stylesheet writes url(FONT_X); swap the token for the payload
         css = css.replace(token, data_uri(os.path.join(ASSETS, path)))
 
-    media_js = read(SRC, 'media.js')
-    media_js = media_js.replace('/*__IMAGES__*/ {}', json.dumps(images))
-    media_js = media_js.replace('/*__VIDEOS__*/ {}', json.dumps(videos))
-
-    js = '\n'.join([
-        read(SRC, 'data.js'),
-        media_js,
-        read(SRC, 'visuals.js'),
-        read(SRC, 'world.js'),
-        read(SRC, 'deck.js'),
-    ])
-
-    vendor = read(ASSETS, 'vendor', 'three.min.js') + '\n;\n' + read(ASSETS, 'vendor', 'gsap.min.js')
+    js = '\n'.join(
+        media_js if p == 'src/media.js' else read(rooted(p))
+        for p in deck['js']
+    )
 
     head = (
         '<title>%s</title>\n'
         '<meta name="description" content="%s">\n'
         '<style>\n%s\n</style>\n'
-    ) % (TITLE, DESCRIPTION, css)
+    ) % (deck['title'], deck['description'], css)
 
-    body = read(SRC, 'body.html')
+    body = read(rooted(deck['body']))
 
     fragment = (
         head
@@ -136,21 +192,51 @@ def build():
         + '</body>\n</html>\n'
     )
 
-    with open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8') as fh:
+    doc_path = rooted(deck['document'])
+    frag_path = rooted(deck['fragment'])
+    os.makedirs(os.path.dirname(frag_path), exist_ok=True)
+    with open(doc_path, 'w', encoding='utf-8') as fh:
         fh.write(document)
-    os.makedirs(os.path.join(ROOT, 'dist'), exist_ok=True)
-    with open(os.path.join(ROOT, 'dist', 'artifact.html'), 'w', encoding='utf-8') as fh:
+    with open(frag_path, 'w', encoding='utf-8') as fh:
         fh.write(fragment)
 
     mb = len(document.encode('utf-8')) / 1024 / 1024
-    print('index.html          %6.2f MB' % mb)
-    print('dist/artifact.html  %6.2f MB' % (len(fragment.encode('utf-8')) / 1024 / 1024))
-    print('images inlined      %d' % len(images))
-    print('videos inlined      %d' % len(videos))
+    print('%-22s %6.2f MB' % (deck['document'], mb))
+    print('%-22s %6.2f MB' % (deck['fragment'], len(fragment.encode('utf-8')) / 1024 / 1024))
     if mb > 15.0:
-        print('WARNING: over the 15 MB comfort line for an Artifact', file=sys.stderr)
-    return images, videos
+        print('WARNING: %s is over the 15 MB comfort line for an Artifact' % deck['document'],
+              file=sys.stderr)
+
+
+def build(names=None):
+    """Build each named deck. Returns the decks that could not be built.
+
+    A deck whose sources are not all written yet is reported and skipped
+    rather than taking the other deck down with it.
+    """
+    names = names or DECK_ORDER
+    media_js, n_images, n_videos = build_media_js()
+    vendor = read(ASSETS, 'vendor', 'three.min.js') + '\n;\n' + read(ASSETS, 'vendor', 'gsap.min.js')
+
+    print('images inlined      %d' % n_images)
+    print('videos inlined      %d' % n_videos)
+    failed = []
+    for name in names:
+        print('--- %s' % name)
+        gone = missing_sources(name)
+        if gone:
+            failed.append(name)
+            print('%s: skipped, missing sources — %s' % (name, ', '.join(gone)), file=sys.stderr)
+            continue
+        build_deck(name, media_js, vendor)
+    return failed
 
 
 if __name__ == '__main__':
-    build()
+    wanted = sys.argv[1:]
+    unknown = [n for n in wanted if n not in DECKS]
+    if unknown:
+        print('unknown deck: %s — known decks are %s'
+              % (', '.join(unknown), ', '.join(DECK_ORDER)), file=sys.stderr)
+        sys.exit(2)
+    sys.exit(1 if build(wanted or None) else 0)

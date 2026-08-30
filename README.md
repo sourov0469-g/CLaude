@@ -43,27 +43,65 @@ but it is not a phone layout.
 | 9–10 | Asiful Islam Sourov | Discipline and termination · Major findings |
 | 11–13 | Fabliha Mubarrat Kabir | Recommendations · Conclusion · Thank you |
 
+## The CSR deck
+
+A second deck lives in the same repo: the same six students' review of
+PizzaBurg's corporate social responsibility, for the Business Ethics course.
+Sixteen slides — what the company already does for its community, its people
+and the environment, that record held against a CSR framework, then four new
+initiatives the group proposes and an argument for which one to start with.
+
+Open `csr.html`. It is built the same way as `index.html` and takes the same
+keys, and it is equally self-contained.
+
+Behind the text stands a brass and oak balance scale on the counter. One pan
+carries plain cost weights, the other starts nearly empty. Each slide sets one
+more weight on the good pan — a lantern for the Ramadan iftars, a gift box for
+Christmas, an apron, a leaf, then one token for each proposed idea — and the
+beam tips a little further that way every time, the angle worked out from what
+is actually on the pans rather than posed by hand. An empty hook hangs over
+the gap slide until the first new idea fills it, and on the last two slides
+the camera pulls back far enough to read the whole scale at once.
+
+### Running order
+
+| Slides | Presenter | |
+|---|---|---|
+| 1–2 | Raiyan Ahmed Ratul | Cover · Our team |
+| 3–4 | Aditya Tripura | Why we are studying PizzaBurg's CSR · What CSR means here |
+| 5–8 | Liya Akter | Iftar donations at Ramadan · The Christmas giveaway · A supportive workplace · Eco-friendly packaging |
+| 9–10 | Shuvo Chandra Roy | Where the CSR can go further · Buy 1, Give 1 |
+| 11–12 | Asiful Islam Sourov | Green PizzaBurg · Student support |
+| 13–16 | Fabliha Mubarrat Kabir | Food rescue · Impact against effort · Where to start · Conclusion and thank you |
+
 ## Editing it
 
-Sources live in `src/`; `index.html` and `dist/artifact.html` are built, not
-edited by hand.
+Sources live in `src/`; `index.html`, `csr.html` and the two files in `dist/`
+are built, not edited by hand.
 
-    python3 tools/build.py
+    python3 tools/build.py          both decks
+    python3 tools/build.py csr      one of them
 
 | File | |
 |---|---|
-| `src/data.js` | Every slide's copy, and which step of the pizza it sits on |
+| `src/data.js` | Every HRM slide's copy, and which step of the pizza it sits on |
 | `src/world.js` | The 3D bench: the pizza, the oven, the room, the camera |
 | `src/visuals.js` | The aside panels — outlets, turnover, welfare, the loop, the ledger, the recommendations, the team |
-| `src/deck.js` | Navigation, the reveal choreography, the backdrop for each slide |
-| `src/styles.css`, `src/visuals.css` | Layout and the panel vocabulary |
-| `src/body.html` | The page shell: top bar, rail, panels, entry card |
+| `src/body.html` | The HRM page shell: top bar, rail, panels, entry card |
+| `src/csr/data.js` | Every CSR slide's copy, and which weight the scale has taken on |
+| `src/csr/world.js` | The balance scale: the beam, the two pans, the weights, the camera |
+| `src/csr/enrich.js` | The room around the scale — the light, the air, the things on the shelves |
+| `src/csr/visuals.js`, `src/csr/visuals.css` | The CSR panels — the pyramid, the before-and-after compare, the impact-against-effort matrix |
+| `src/csr/body.html` | The CSR page shell |
+| `src/deck.js` | Navigation, the reveal choreography, the backdrop for each slide — both decks |
+| `src/styles.css`, `src/visuals.css` | Layout and the panel vocabulary — both decks |
 
 Photographs and clips are the group's own, taken at PizzaBurg head office on
 26 August 2026, plus press images of the brand. They sit in `assets/img/pb/`
 and `assets/media/`; the build inlines everything it finds there.
 
 `tools/shoot.js` screenshots any list of slides in a headless browser, which
-is how the layout was checked:
+is how the layout was checked. Name the deck first; it defaults to `hrm`:
 
     node tools/shoot.js 0 4 8 12
+    node tools/shoot.js csr 0 4 8 15

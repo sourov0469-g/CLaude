@@ -1,0 +1,105 @@
+/* ==========================================================================
+   CSR PANELS
+   Furniture for the three asides the HRM deck had no shape for. Everything
+   else — .panel, .ptitle, .pfoot, .frame, .teamlist — is already in
+   src/visuals.css and is reused here as-is.
+   ========================================================================== */
+
+/* --- Carroll's pyramid -----------------------------------------------------
+   Four trapezoids, each one 7% of the panel wider per side than the one above
+   it, so the sloped edges line up into a single silhouette rather than a
+   staircase. Colour walks from brass at the apex to the deep red at the base. */
+.pyramid { display: grid; gap: 3px; justify-items: center; }
+.tier {
+  display: flex; align-items: baseline; justify-content: center;
+  flex-wrap: wrap; gap: 3px 8px; text-align: center;
+  padding: clamp(9px, 1vh, 13px) 13%;
+  color: var(--paper-2);
+}
+.tier b { font-weight: 650; letter-spacing: 0.01em; font-size: clamp(11.5px, calc(0.5 * var(--u) + 5.4px), 14px); }
+.tier span { opacity: 0.84; font-size: clamp(10px, calc(0.42 * var(--u) + 5.2px), 12px); }
+
+.tier.t1 { width: 58%;  background: #cdb478; color: #2e2410; clip-path: polygon(12.1% 0, 87.9% 0, 100% 100%, 0 100%); }
+.tier.t2 { width: 72%;  background: #b3893c; clip-path: polygon(9.7% 0, 90.3% 0, 100% 100%, 0 100%); }
+.tier.t3 { width: 86%;  background: #9a5b2c; clip-path: polygon(8.1% 0, 91.9% 0, 100% 100%, 0 100%); }
+.tier.t4 { width: 100%; background: #8a2f1f; clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%); }
+.tier.t1 span { opacity: 0.72; }
+
+/* --- described to us / not evidenced ---------------------------------------
+   Same two-card logic as the HRM ledger: basil for what a source actually
+   says, the deep red for what nothing says. */
+.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.cmpcol {
+  padding: 15px 16px; border-radius: 14px; border: 1px solid var(--rule);
+  background: var(--card); box-shadow: var(--lift);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.cmpcol.yes { background: rgba(234, 241, 233, 0.82); border-color: rgba(78, 122, 91, 0.26); }
+.cmpcol.no  { background: rgba(253, 236, 232, 0.84); border-color: rgba(168, 36, 24, 0.22); }
+.cmpcol h4 { margin: 0 0 9px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+.cmpcol.yes h4 { color: var(--basil); }
+.cmpcol.no h4 { color: var(--red-deep); }
+.cmpcol ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.cmpcol li {
+  font-size: clamp(10px, calc(0.42 * var(--u) + 5.2px), 12px); line-height: 1.34;
+  color: var(--ink-2); padding-left: 16px; position: relative;
+}
+.cmpcol li::before { position: absolute; left: 0; top: 0; font-weight: 700; }
+.cmpcol.yes li::before { content: '\2713'; color: var(--basil); }
+.cmpcol.no li { color: var(--ink-3); }
+.cmpcol.no li::before { content: '\25CB'; color: var(--red); }
+/* the ledger has no .panel behind it, so its foot has to carry its own
+   ground — left bare it sits straight on the lit bench and cannot be read */
+.cmp .pfoot {
+  grid-column: 1 / -1; margin: 0; padding: 9px 14px; border-top: 0;
+  border: 1px solid var(--rule); border-radius: 12px;
+  background: var(--card); box-shadow: var(--lift);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+
+/* --- impact against effort -------------------------------------------------
+   The wrapper carries the margin the two axis labels sit in, so the frame
+   itself can stay flush with the numbers it plots. */
+.mtxwrap { padding: 4px 8px 22px 26px; }
+.mtx {
+  position: relative; width: 100%; aspect-ratio: 4 / 3;
+  border-left: 1.5px solid var(--rule); border-bottom: 1.5px solid var(--rule);
+}
+/* the quadrant split, kept faint — it divides, it does not measure */
+.mtx::before, .mtx::after { content: ''; position: absolute; background: var(--rule); opacity: 0.55; }
+.mtx::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+.mtx::after { top: 50%; left: 0; right: 0; height: 1px; }
+
+.maxis {
+  position: absolute; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4);
+}
+.maxis.x { bottom: -18px; left: 50%; transform: translateX(-50%); }
+.maxis.y { left: -6px; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); }
+
+.mquad {
+  position: absolute; top: 9px; font-size: 9px; opacity: 0.7;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);
+}
+.mquad.tl { left: 10px; }
+.mquad.tr { right: 10px; }
+
+/* --x / --y come off the item's own effort and impact; --lx / --ly are the
+   label's offset from its dot, flipped by the builder near an edge */
+.mdot {
+  position: absolute; left: var(--x); bottom: var(--y); transform: translate(-50%, 50%);
+  width: clamp(10px, 1vw, 13px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--red); border: 2px solid var(--paper-2);
+  box-shadow: 0 0 0 1px rgba(168, 36, 24, 0.45), var(--lift);
+}
+.mlbl {
+  position: absolute; left: var(--x); bottom: var(--y);
+  transform: translate(var(--lx, -50%), var(--ly, -14px));
+  white-space: nowrap; font-weight: 650; color: var(--ink-2);
+  font-size: clamp(9.5px, calc(0.38 * var(--u) + 4.8px), 11.5px);
+  text-shadow: 0 1px 0 rgba(255, 252, 246, 0.85);
+}
+
+@media (max-width: 1080px) {
+  .cmp { grid-template-columns: 1fr; }
+}

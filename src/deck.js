@@ -9,22 +9,9 @@ const Deck = (function () {
   const byKey = {};
   PRESENTERS.forEach(function (p) { byKey[p.key] = p; });
 
-  /* which photograph sits, heavily blurred, behind the bench */
-  const BACKDROPS = {
-    cover: 'pb-neon-sign',
-    intro: 'pb-two-pizzas',
-    method: 'pb-interview-c',
-    planning: 'pb-pizza-pan',
-    recruit: 'pb-dough-hands',
-    turnover: 'pb-dhaka-street',
-    welfare: 'pb-pizzas-table-a',
-    performance: 'pb-interview-e',
-    discipline: 'pb-justice',
-    findings: 'pb-desk-calendar',
-    recommendations: 'pb-interview-d',
-    conclusion: 'pb-brand-salman',
-    thanks: 'pb-team-selfie',
-  };
+  /* which photograph sits, heavily blurred, behind the bench — each deck's
+     data.js supplies its own map */
+  const BACKDROPS = window.BACKDROPS || {};
 
   let idx = 0, prevIdx = -1, started = false, animating = null, reduced = false;
   const nodes = [];

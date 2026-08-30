@@ -11,6 +11,23 @@
    the Bangladesh Labour Act 2006.
    ========================================================================== */
 
+/* which photograph sits, heavily blurred, behind the bench on each slide */
+window.BACKDROPS = {
+  cover: 'pb-neon-sign',
+  intro: 'pb-two-pizzas',
+  method: 'pb-interview-c',
+  planning: 'pb-pizza-pan',
+  recruit: 'pb-dough-hands',
+  turnover: 'pb-dhaka-street',
+  welfare: 'pb-pizzas-table-a',
+  performance: 'pb-interview-e',
+  discipline: 'pb-justice',
+  findings: 'pb-desk-calendar',
+  recommendations: 'pb-interview-d',
+  conclusion: 'pb-brand-salman',
+  thanks: 'pb-team-selfie',
+};
+
 const PRESENTERS = [
   { key: 'ratul',  name: 'Raiyan Ahmed Ratul',     short: 'Raiyan',  id: '202511170047', hue: 8   },
   { key: 'aditya', name: 'Aditya Tripura',         short: 'Aditya',  id: '202511170006', hue: 26  },
