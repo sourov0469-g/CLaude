@@ -672,9 +672,10 @@ button,input,textarea{font:inherit;color:inherit}
   font-family:var(--serif);font-weight:400;
   font-size:54px;line-height:61px;letter-spacing:-1.4px;color:var(--white);
 }
-.faq-side{padding-top:74px;max-width:360px}
-.faq-side .lead{padding-top:39px;border-top:1px solid var(--dark-rule);font-size:18px;line-height:29px;color:var(--dark-muted)}
-.faq-list{margin-top:39px}
+.faq-answer{margin-top:34px;max-width:560px;font-size:18px;line-height:31px;color:var(--dark-muted)}
+.faq-side{padding-top:74px;max-width:420px}
+.faq-side .faq-list{padding-top:0;border-top:1px solid var(--dark-rule)}
+.faq-list{margin-top:0}
 .faq-item{border-bottom:1px solid rgba(87,96,101,.45)}
 .faq-q{
   display:flex;align-items:flex-start;gap:12px;width:100%;
@@ -926,12 +927,13 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 .has-reveal .svc .shot{transform:scale(1.06);transition:transform 1.15s cubic-bezier(.22,.61,.36,1)}
 .has-reveal .svc.is-in .shot{transform:scale(1)}
 
-.projects-media,.triage-photo,.case-photo{overflow:hidden}
-.has-reveal .projects-media img,
+.media-clip{display:block;position:absolute;inset:0;overflow:hidden}
+.triage-photo,.case-photo{overflow:hidden}
+.has-reveal .media-clip img,
 .has-reveal .triage-photo img,
 .has-reveal .case-photo img{transform:scale(1.07);
   transition:transform 1.3s cubic-bezier(.22,.61,.36,1)}
-.has-reveal .projects-media.is-in img,
+.has-reveal .projects-media.is-in .media-clip img,
 .has-reveal .triage-photo.is-in img,
 .has-reveal .case-photo.is-in img{transform:scale(1)}
 
@@ -971,7 +973,7 @@ html.motion-done .hero-plate{clip-path:none}
     opacity:1!important;transform:none!important;animation:none!important}
   html.hero-ready .hero-plate{clip-path:none!important;animation:none!important}
   html.hero-ready .hero-plate img{transform:none!important;animation:none!important}
-  .has-reveal .svc .shot,.has-reveal .projects-media img,
+  .has-reveal .svc .shot,.has-reveal .media-clip img,
   .has-reveal .triage-photo img,.has-reveal .case-photo img{
     transform:none!important;transition:none!important}
 }
@@ -993,8 +995,10 @@ html.motion-done .hero-plate{clip-path:none}
 /* ---------- above the design width: centre the composition ---------- */
 /* the hero band reads as an immersive edge, so it bleeds like a background */
 .hero-plate{left:0;right:0}
-.triage-photo,.case-photo,.contact-photo{left:var(--gut)}
-.reviews-plane .photo{left:auto;right:0;width:430px}
+/* left-anchored section photography bleeds to the viewport edge; the copy that
+   sits on it stays inside the 1440 frame */
+.triage-photo,.case-photo,.contact-photo{left:0}
+.reviews-plane .photo{left:0;right:0;width:auto}
 /* the slate band and its ridge line are background treatment for the section,
    so they bleed with the background rather than sitting inside the frame */
 .reassure-top,.reassure-ridge{left:0;right:0}
@@ -1126,8 +1130,9 @@ html.motion-done .hero-plate{clip-path:none}
   .faq{min-height:0}
   .faq .wrap{grid-template-columns:minmax(0,542px) minmax(0,1fr);padding-top:70px;padding-bottom:120px;min-height:0}
   .faq h2{font-size:44px;line-height:54px;margin-top:30px}
-  .faq-side{padding-top:78px;max-width:386px}
-  .faq-side .lead{padding-top:32px;font-size:17px;line-height:28px}
+  .faq-side{padding-top:78px;max-width:none}
+  .faq-answer{font-size:17px;line-height:29px}
+
   .faq-divider{display:none}
 
   /* 12 contact */
@@ -1248,7 +1253,7 @@ html.motion-done .hero-plate{clip-path:none}
   /* 11 faq */
   .faq .wrap{grid-template-columns:minmax(0,407px) minmax(0,1fr);padding-bottom:80px}
   .faq h2{font-size:38px;line-height:48px}
-  .faq-side{max-width:290px;padding-top:78px}
+  .faq-side{max-width:none;padding-top:78px}
 
   /* 12 contact */
   .contact-photo{right:calc(100% - var(--gut) - 323px)}
@@ -1407,8 +1412,8 @@ html.motion-done .hero-plate{clip-path:none}
   .faq{min-height:0}
   .faq .wrap{grid-template-columns:1fr;padding:48px 22px 56px;row-gap:0}
   .faq h2{font-size:30px;line-height:38px;max-width:none;margin-top:20px}
-  .faq-side{padding-top:48px;max-width:none}
-  .faq-side .lead{padding-top:0;border-top:0;font-size:15px;line-height:26px}
+  .faq-side{padding-top:34px;max-width:none}
+  .faq-answer{margin-top:22px;font-size:15px;line-height:26px;max-width:none}
   .faq-list{margin-top:34px}
   .faq-q{font-size:15px;padding:15px 0}
   .faq-a p{font-size:14px;line-height:25px;max-width:none}
@@ -1694,7 +1699,7 @@ html.motion-done .hero-plate{clip-path:none}
   </div>
 
   <div class="projects-media">
-    <img src="assets/img/Rectangle_5.jpg" alt="Gable end with exposed roof timbers">
+    <span class="media-clip"><img src="assets/img/Rectangle_5.jpg" alt="Gable end with exposed roof timbers"></span>
     <div class="projects-inset-frame"></div>
     <div class="projects-inset"><img src="assets/img/Rectangle_6.jpg" alt="Scalloped slate roof detail"></div>
   </div>
@@ -1887,9 +1892,9 @@ html.motion-done .hero-plate{clip-path:none}
     <div>
       <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Practical questions</p>
       <h2>&ldquo;What happens if more work is found?&rdquo;</h2>
+      <p class="faq-answer">If something new is uncovered, it should be explained before any extra work goes ahead. You need to understand what was found, why it changes the agreed work and any effect on cost or timing before deciding how to proceed.</p>
     </div>
     <div class="faq-side">
-      <p class="lead">If something new is uncovered, it should be explained before any extra work goes ahead. You need to understand what was found, why it changes the agreed work and any effect on cost or timing before deciding how to proceed.</p>
       <div class="faq-list">
         <div class="faq-item is-open">
           <button class="faq-q" type="button" id="faq-q1" aria-expanded="true" aria-controls="faq-a1">
@@ -1897,9 +1902,7 @@ html.motion-done .hero-plate{clip-path:none}
             <span class="faq-mark" aria-hidden="true">&rarr;</span>
           </button>
           <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
-            <div class="faq-a-in"><p>The work being carried out, what has been assumed, what is
-            excluded and the cost. If access or materials could change the price, that should be
-            set out before you agree to anything.</p></div>
+            <div class="faq-a-in"><p>The work being carried out, what has been assumed, what is excluded and the cost. If access or materials could change the price, that should be set out before you agree to anything.</p></div>
           </div>
         </div>
         <div class="faq-item">
@@ -1908,9 +1911,7 @@ html.motion-done .hero-plate{clip-path:none}
             <span class="faq-mark" aria-hidden="true">&rarr;</span>
           </button>
           <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2">
-            <div class="faq-a-in"><p>Often, yes. Where the fault is isolated and the surrounding
-            covering is still sound, a local repair is usually the sensible option. Replacement
-            makes more sense when wear is widespread or the same defects keep returning.</p></div>
+            <div class="faq-a-in"><p>Often, yes. Where the fault is isolated and the surrounding covering is still sound, a local repair is usually the sensible option. Replacement makes more sense when wear is widespread or the same defects keep returning.</p></div>
           </div>
         </div>
         <div class="faq-item">
@@ -1919,10 +1920,46 @@ html.motion-done .hero-plate{clip-path:none}
             <span class="faq-mark" aria-hidden="true">&rarr;</span>
           </button>
           <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3">
-            <div class="faq-a-in"><p>You receive a written summary of what was found, photographs
-            where they help, the options that are realistic and a quotation for any proposed work.
-            Nothing proceeds until the scope has been agreed.</p></div>
+            <div class="faq-a-in"><p>You receive a written summary of what was found, photographs where they help, the options that are realistic and a quotation for any proposed work. Nothing proceeds until the scope has been agreed.</p></div>
           </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+            <span>How long does the work usually take?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4">
+            <div class="faq-a-in"><p>A contained repair is often a day or less. A full re-roof on a typical house runs to several days, depending on size, access and the weather. You are given an expected duration before work starts.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">
+            <span>Will I need scaffolding?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5">
+            <div class="faq-a-in"><p>Most work above single-storey height does. Where it is needed it is included in the quotation rather than added later, along with how long it will be up and where it will sit.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" id="faq-q6" aria-expanded="false" aria-controls="faq-a6">
+            <span>What happens if the weather turns?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6">
+            <div class="faq-a-in"><p>Open roof work is only started when the forecast allows it, and any exposed area is made watertight at the end of each day. If conditions stop work, you are told the same day and given a revised date.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" id="faq-q7" aria-expanded="false" aria-controls="faq-a7">
+            <span>Is the work guaranteed?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a7" role="region" aria-labelledby="faq-q7">
+            <div class="faq-a-in"><p>Workmanship is guaranteed, and manufacturer warranties on materials are passed on to you. The terms are written into the quotation so you can see what is covered before you commit.</p></div>
+          </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
