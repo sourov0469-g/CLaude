@@ -214,11 +214,12 @@ button,input,textarea{font:inherit;color:inherit}
   font-family:var(--serif);font-weight:500;
   font-size:20px;line-height:24px;letter-spacing:.4px;color:var(--ink);
 }
-.nav-links{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-links{display:flex;align-items:center;gap:26px;margin-left:auto}
 .nav-links a{font-size:15px;line-height:23px;color:var(--ink)}
+.nav-links a.soon,.mobile-nav a.soon{cursor:pointer}
 .nav-cta{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  width:162px;height:44px;margin-left:13px;
+  width:162px;height:44px;margin-left:38px;
   border:1px solid var(--ink);
   font-weight:500;font-size:15px;line-height:19px;color:var(--ink);
 }
@@ -673,6 +674,14 @@ button,input,textarea{font:inherit;color:inherit}
   font-size:54px;line-height:61px;letter-spacing:-1.4px;color:var(--white);
 }
 .faq-answer{margin-top:34px;max-width:560px;font-size:18px;line-height:31px;color:var(--dark-muted)}
+.faq-prompt{margin-top:72px;max-width:460px}
+.faq-prompt-rule{display:block;width:64px;height:1px;background:var(--copper-light);opacity:.7}
+.faq-prompt-q{margin-top:26px;font-family:var(--serif);font-weight:400;
+  font-size:24px;line-height:32px;letter-spacing:-.5px;color:var(--warm-light)}
+.faq-prompt-p{margin-top:14px;font-size:16px;line-height:27px;color:var(--dark-muted)}
+.faq-prompt-link{position:relative;display:inline-flex;align-items:center;gap:9px;margin-top:22px;
+  font-size:16px;line-height:24px;color:var(--copper-light)}
+.faq-prompt-link .arrow{transition:transform .22s cubic-bezier(.22,.61,.36,1)}
 .faq-side{padding-top:74px;max-width:420px}
 .faq-side .faq-list{padding-top:0;border-top:1px solid var(--dark-rule)}
 .faq-list{margin-top:0}
@@ -845,8 +854,21 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .case-link:hover .arrow{transform:translateX(4px)}
 
   /* --- service cards --- */
-  .svc .shot{will-change:opacity}
-  .svc:hover .shot{opacity:.9}
+  .svc{transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+  .svc .shot{will-change:opacity,transform}
+  .svc:hover{transform:translateY(-4px)}
+  .svc:hover .shot{opacity:.92}
+  .has-reveal .svc.is-in:hover .shot{transform:scale(1.045)}
+  .svc:active{transform:translateY(-1px)}
+
+  /* --- form fields lift to meet focus --- */
+  .field input,.field textarea{transition:border-color .2s ease,box-shadow .22s ease}
+  .field input:focus,.field textarea:focus{box-shadow:0 4px 14px rgba(36,46,50,.07)}
+
+  /* --- faq rows --- */
+  .faq-q{transition:color .2s ease}
+  .faq-item:hover .faq-q{color:var(--copper-light)}
+  .faq-prompt-link:hover .arrow{transform:translateX(4px)}
 
   /* --- reviews --- */
   .feed-nav button:hover{border-color:var(--copper-warm);color:var(--copper-warm)}
@@ -876,9 +898,10 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 /* --- touch devices get comfortable hit areas at every width,
        not just below the mobile breakpoint --- */
 @media (pointer:coarse){
-  .brand,.hero-secondary,.reviews-link,.case-link,.reassure-link{position:relative}
+  .brand,.hero-secondary,.reviews-link,.case-link,.reassure-link,
+  .faq-prompt-link{position:relative}
   .brand::after,.hero-secondary::after,.reviews-link::after,
-  .case-link::after{content:"";position:absolute;inset:-12px -8px}
+  .case-link::after,.faq-prompt-link::after{content:"";position:absolute;inset:-12px -8px}
   .reassure-link::after{content:"";position:absolute;inset:-8px -8px 0}
   .nav-burger{width:44px;height:44px;align-items:center;justify-content:center;margin-right:-10px}
   .feed-nav button{width:44px;height:44px;border-radius:22px}
@@ -911,6 +934,21 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 .has-reveal .reveal{opacity:0;transform:translateY(16px);
   transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
 .has-reveal .reveal.is-in{opacity:1;transform:none}
+
+/* ── parallax carrier: drift lives here, the settle scale lives on the img ── */
+.par{position:absolute;inset:-40px 0;display:block;will-change:transform}
+.par img{width:100%;height:100%;object-fit:cover}
+.contact-photo{overflow:hidden}
+
+/* ── kicker rules draw themselves in with the block ── */
+.has-reveal .kicker.reveal .rule{transform:scaleX(0);transform-origin:left;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1) .14s}
+.has-reveal .kicker.reveal.is-in .rule{transform:scaleX(1)}
+
+/* ── section seams draw across as the section arrives ── */
+.has-reveal .sec .seam{transform:scaleX(0);transform-origin:left;
+  transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.has-reveal .sec.seam-in .seam{transform:scaleX(1)}
 @media (prefers-reduced-motion:reduce){
   .has-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}
 }
@@ -976,6 +1014,9 @@ html.motion-done .hero-plate{clip-path:none}
   .has-reveal .svc .shot,.has-reveal .media-clip img,
   .has-reveal .triage-photo img,.has-reveal .case-photo img{
     transform:none!important;transition:none!important}
+  .par{transform:none!important}
+  .has-reveal .kicker.reveal .rule,.has-reveal .sec .seam{
+    transform:none!important;transition:none!important}
 }
 
 /* ============================================================
@@ -1005,6 +1046,9 @@ html.motion-done .hero-plate{clip-path:none}
 
 /* ============================ TABLET 1024 ============================ */
 @media (max-width:1199px){
+  .nav-links{gap:19px}
+  .nav-links a{font-size:14px}
+  .nav-cta{margin-left:26px;width:150px}
   :root{--pad:48px}
   .wrap{padding:0 var(--pad)}
   .survey .wrap,.about .wrap{padding:0 var(--pad)}
@@ -1132,6 +1176,8 @@ html.motion-done .hero-plate{clip-path:none}
   .faq h2{font-size:44px;line-height:54px;margin-top:30px}
   .faq-side{padding-top:78px;max-width:none}
   .faq-answer{font-size:17px;line-height:29px}
+  .faq-prompt{margin-top:52px}
+  .faq-prompt-q{font-size:22px;line-height:30px}
 
   .faq-divider{display:none}
 
@@ -1160,6 +1206,16 @@ html.motion-done .hero-plate{clip-path:none}
 
 /* ============================ TABLET 768 ============================= */
 @media (max-width:1023px){
+  /* the burger appears here, so the panel it opens must exist here too */
+  .mobile-nav{display:block;position:absolute;left:0;right:0;top:100%;z-index:20;
+    background:var(--paper-hero);border-bottom:1px solid var(--line);
+    padding:8px var(--pad) 18px;box-shadow:0 14px 28px rgba(36,46,50,.10)}
+  .mobile-nav[hidden]{display:none}
+  .mobile-nav a{display:block;padding:14px 0;font-size:17px;line-height:22px;
+    color:var(--ink);border-bottom:1px solid rgba(213,208,198,.7)}
+  .mobile-nav a:last-child{border-bottom:0}
+  .mobile-nav-cta{margin-top:10px;color:var(--copper)!important;font-weight:600}
+
   :root{--pad:36px}
 
   .nav-links,.nav-cta{display:none}
@@ -1414,6 +1470,9 @@ html.motion-done .hero-plate{clip-path:none}
   .faq h2{font-size:30px;line-height:38px;max-width:none;margin-top:20px}
   .faq-side{padding-top:34px;max-width:none}
   .faq-answer{margin-top:22px;font-size:15px;line-height:26px;max-width:none}
+  .faq-prompt{margin-top:34px;max-width:none}
+  .faq-prompt-q{font-size:20px;line-height:28px}
+  .faq-prompt-p{font-size:15px;line-height:25px}
   .faq-list{margin-top:34px}
   .faq-q{font-size:15px;padding:15px 0}
   .faq-a p{font-size:14px;line-height:25px;max-width:none}
@@ -1439,15 +1498,7 @@ html.motion-done .hero-plate{clip-path:none}
   .form-note{margin-top:24px}
 
   /* --- mobile menu panel --- */
-  .mobile-nav{display:block;position:absolute;left:0;right:0;top:100%;z-index:20;
-    background:var(--paper-hero);border-bottom:1px solid var(--line);
-    padding:8px 22px 18px;box-shadow:0 14px 28px rgba(36,46,50,.10)}
-  .mobile-nav[hidden]{display:none}
-  .mobile-nav a{display:block;padding:14px 0;font-size:17px;line-height:22px;
-    color:var(--ink);border-bottom:1px solid rgba(213,208,198,.7)}
-  .mobile-nav a:last-child{border-bottom:0}
-  .mobile-nav-cta{margin-top:10px;color:var(--copper)!important;font-weight:600}
-  .nav-burger{width:44px;height:44px;align-items:center;justify-content:center;
+    .nav-burger{width:44px;height:44px;align-items:center;justify-content:center;
     margin-right:-10px;background:none;border:0;cursor:pointer}
 
   /* iOS zooms the page when an input is under 16px */
@@ -1482,7 +1533,10 @@ html.motion-done .hero-plate{clip-path:none}
     </a>
     <div class="nav-links">
       <a href="#services">Services</a>
+      <a class="soon" role="link" aria-disabled="true" tabindex="0">Our work</a>
       <a href="#process">How it works</a>
+      <a class="soon" role="link" aria-disabled="true" tabindex="0">About</a>
+      <a class="soon" role="link" aria-disabled="true" tabindex="0">Areas we cover</a>
       <a href="#faq">FAQs</a>
     </div>
     <a class="nav-cta" href="#contact">Send an enquiry <span class="arrow">&rarr;</span></a>
@@ -1490,7 +1544,10 @@ html.motion-done .hero-plate{clip-path:none}
   </div>
   <div class="mobile-nav" id="mobile-nav" hidden>
     <a href="#services">Services</a>
+    <a class="soon" role="link" aria-disabled="true" tabindex="0">Our work</a>
     <a href="#process">How it works</a>
+    <a class="soon" role="link" aria-disabled="true" tabindex="0">About</a>
+    <a class="soon" role="link" aria-disabled="true" tabindex="0">Areas we cover</a>
     <a href="#faq">FAQs</a>
     <a href="#contact" class="mobile-nav-cta">Send an enquiry <span class="arrow">&rarr;</span></a>
   </div>
@@ -1709,7 +1766,8 @@ html.motion-done .hero-plate{clip-path:none}
 <!-- ═══════════════ 05 · REPAIR OR REPLACEMENT ═══════════════ -->
 <section class="sec triage">
   <div class="triage-photo">
-    <img src="assets/img/IMAGE___stock-49.jpg" alt="Brick house with chimney">
+    <span class="par"><img src="assets/img/IMAGE___stock-49.jpg" alt="Brick house with chimney">
+    </span>
     <span class="wash"></span>
   </div>
   <div class="triage-card">
@@ -1766,7 +1824,8 @@ html.motion-done .hero-plate{clip-path:none}
 <section class="sec case">
   <span class="seam seam-copper"></span>
   <div class="case-photo">
-    <img src="assets/img/Project_image.jpg" alt="Stone cottage with a steep slate roof">
+    <span class="par"><img src="assets/img/Project_image.jpg" alt="Stone cottage with a steep slate roof">
+    </span>
     <span class="shade"></span>
   </div>
   <div class="case-body">
@@ -1893,6 +1952,13 @@ html.motion-done .hero-plate{clip-path:none}
       <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Practical questions</p>
       <h2>&ldquo;What happens if more work is found?&rdquo;</h2>
       <p class="faq-answer">If something new is uncovered, it should be explained before any extra work goes ahead. You need to understand what was found, why it changes the agreed work and any effect on cost or timing before deciding how to proceed.</p>
+
+      <div class="faq-prompt">
+        <span class="faq-prompt-rule"></span>
+        <p class="faq-prompt-q">Not sure which of these applies to your roof?</p>
+        <p class="faq-prompt-p">Describe what you have noticed and we will tell you which of the above is relevant before anything is quoted.</p>
+        <a class="faq-prompt-link" href="#contact">Send an enquiry <span class="arrow">&rarr;</span></a>
+      </div>
     </div>
     <div class="faq-side">
       <div class="faq-list">
@@ -1972,7 +2038,8 @@ html.motion-done .hero-plate{clip-path:none}
 <section class="sec contact" id="contact">
   <span class="seam seam-act"></span>
   <div class="contact-photo">
-    <img src="assets/img/IMAGE___photo-07.webp" alt="Timber and slate gable with apex glazing">
+    <span class="par"><img src="assets/img/IMAGE___photo-07.webp" alt="Timber and slate gable with apex glazing">
+    </span>
     <span class="grad"></span>
   </div>
   <div class="contact-panel"></div>
@@ -2112,6 +2179,26 @@ html.motion-done .hero-plate{clip-path:none}
     }, {rootMargin:'0px 0px -12% 0px', threshold:0.08});
     all.forEach(function(el){ io.observe(el); });
   }
+  /* seams draw across when their section arrives */
+  function seams(){
+    var secs = [].slice.call(document.querySelectorAll('.sec')).filter(function(x){
+      return x.querySelector(':scope > .seam');
+    });
+    if(!secs.length) return;
+    if(reduce || !('IntersectionObserver' in window)){
+      secs.forEach(function(x){ x.classList.add('seam-in'); });
+      return;
+    }
+    var so = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add('seam-in');
+        so.unobserve(e.target);
+      });
+    }, {rootMargin:'0px 0px -6% 0px', threshold:0.01});
+    secs.forEach(function(x){ so.observe(x); });
+  }
+  seams();
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tag);
   else tag();
 })();
@@ -2156,6 +2243,34 @@ html.motion-done .hero-plate{clip-path:none}
       if(willOpen){ item.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); }
     });
   });
+})();
+
+/* Parallax drift on the bleeding photography.
+   transform only, reads batched ahead of writes, one rAF per scroll burst. */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var items = [].slice.call(document.querySelectorAll('.par'));
+  if(!items.length) return;
+  var TRAVEL = 30, ticking = false;
+  function frame(){
+    ticking = false;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var reads = items.map(function(el){
+      return { el: el, r: el.parentElement.getBoundingClientRect() };
+    });
+    for(var i=0;i<reads.length;i++){
+      var o = reads[i];
+      if(o.r.bottom < -200 || o.r.top > vh + 200) continue;
+      var mid = o.r.top + o.r.height / 2;
+      var t = (mid - vh / 2) / (vh / 2 + o.r.height / 2);
+      if(t < -1) t = -1; else if(t > 1) t = 1;
+      o.el.style.transform = 'translate3d(0,' + (t * TRAVEL).toFixed(1) + 'px,0)';
+    }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  frame();
 })();
 
 /* Mobile menu */
