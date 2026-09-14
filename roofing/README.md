@@ -148,6 +148,29 @@ four `.rcard` blocks, the `4.9` score, and the `128 Google reviews` count with
 the prospect's real figures, or drop in a review-widget embed in place of
 `.feed`.
 
+
+## Accessibility & interaction
+
+- Every interactive element has a hover state and a visible `:focus-visible`
+  ring (copper on light surfaces, light copper on dark). 38 tab stops, all
+  reachable and all visibly focused.
+- The burger opens a real mobile menu (`aria-expanded`/`aria-controls`, closes
+  on link tap, outside click, Escape, and on resize past 767px).
+- Form inputs are 16px on phones so iOS Safari does not zoom the page on focus.
+- All tap targets are at least 40px tall on mobile; hit areas are extended with
+  invisible pseudo-elements so the layout never shifts.
+- One `<h1>`, no skipped heading levels, `header`/`nav`/`main`/`footer`
+  landmarks, every image has `alt`, star ratings carry `role="img"` and an
+  `aria-label` with the score.
+- `prefers-reduced-motion` disables smooth scrolling, transitions and the arrow
+  nudges.
+- Text over photography was measured per glyph pixel against the real rendered
+  background: contact copy 6.2-7.1:1, image caption 4.6:1.
+
+Two known contrast exceptions, both deliberate: the gold review stars
+(1.8-2.1:1) match Google's own widget and the Figma, and carry the score in
+text beside them; the "Read more"/"G" marks use Google's accessible blue.
+
 ## Rebuilding the standalone
 
 After editing `index.html`, regenerate the single file with
