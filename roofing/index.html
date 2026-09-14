@@ -1,0 +1,1541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ridgewell Roofing — Roof repairs, re-roofing, leadwork and chimney work</title>
+<meta name="description" content="Roof repairs, re-roofing, leadwork and chimney work for your home. Tell us what you have noticed and we can talk through the most sensible next step.">
+<style>
+/* ---- Self-hosted webfonts (no external requests) ---- */
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url(assets/fonts/playfair-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url(assets/fonts/playfair-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(assets/fonts/sourcesans3-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(assets/fonts/sourcesans3-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url(assets/fonts/inter-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url(assets/fonts/inter-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+
+/* ============================================================
+   RIDGEWELL ROOFING — TEMPLATE
+   ------------------------------------------------------------
+   To re-brand this template for a new client, edit ONLY the
+   token block below, then swap the text + images in the body.
+   Everything else derives from these values.
+   ============================================================ */
+:root{
+  /* ---- BRAND COLOURS (the main re-brand knobs) ---- */
+  --copper:        #985632;   /* primary brand / kickers / rules   */
+  --copper-strong: #A65F36;   /* filled buttons                    */
+  --copper-light:  #D5A07B;   /* brand accent on dark backgrounds  */
+  --copper-warm:   #A55A34;   /* warm brand variant                */
+
+  /* ---- NEUTRALS ---- */
+  --ink:        #242E32;      /* headings + primary text           */
+  --muted:      #576065;      /* body copy                         */
+  --line:       #D5D0C6;      /* hairlines                         */
+  --line-warm:  #D6D2C9;      /* hairlines on warm panels          */
+  --white:      #FFFFFF;
+
+  /* ---- SURFACES ---- */
+  --paper:      #FAF9F6;      /* default light section             */
+  --paper-hero: #F9F7F3;      /* hero                              */
+  --warm-1:     #F6F3EC;      /* services                          */
+  --warm-2:     #F1EEE6;      /* survey                            */
+  --warm-3:     #F3EFE7;      /* about                             */
+  --warm-4:     #E9E2D7;      /* reassurance                       */
+  --warm-5:     #EEEAE1;      /* contact                           */
+  --warm-6:     #F3F0EA;      /* contact form panel                */
+  --warm-light: #F5F3ED;      /* headings on dark                  */
+
+  /* ---- DARK SURFACES ---- */
+  --dark:        #202D32;     /* dark sections + footer            */
+  --dark-2:      #202C30;     /* image washes                      */
+  --dark-3:      #223034;     /* reviews image plane               */
+  --dark-muted:  #C3C9C5;     /* body copy on dark                 */
+  --dark-rule:   #536066;     /* hairlines on dark                 */
+
+  /* ---- REVIEW WIDGET (Google) ---- */
+  --g-blue:  #4285F4;
+  --g-star:  #E6A900;
+  --g-text:  #223034;
+  --g-meta:  #667075;
+  --g-line:  #D9D5CC;
+  --g-chip:  #F2EEE5;
+
+  /* ---- TYPE ---- */
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans:  "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ui:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* ---- LAYOUT ---- */
+  --frame: 1440px;            /* Figma frame width                 */
+  --pad:   64px;              /* default section side padding      */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:400}
+ul{margin:0;padding:0;list-style:none}
+button,input,textarea{font:inherit;color:inherit}
+
+/* ---------- structural helpers ---------- */
+.sec{
+  position:relative;
+  width:100%;
+  /* distance from the viewport edge to the centred 1440 frame */
+  --gut:max(0px,calc((100% - var(--frame)) / 2));
+}
+.wrap{
+  position:relative;
+  max-width:var(--frame);
+  margin:0 auto;
+  padding:0 var(--pad);
+}
+/* chapter seams drawn at the top edge of a section */
+.seam{position:absolute;inset:0 0 auto 0;height:1px;z-index:3}
+.seam-copper{background:rgba(152,86,50,.72)}
+.seam-copper-soft{background:rgba(152,86,50,.38)}
+.seam-copper-mid{background:rgba(152,86,50,.46)}
+.seam-copper-faint{background:rgba(152,86,50,.26)}
+.seam-act{background:rgba(165,90,52,.55);height:2px}
+.seam-prove{background:rgba(165,90,52,.72);height:2px}
+
+/* ---------- shared type ---------- */
+.kicker{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-weight:600;
+  font-size:13px;
+  line-height:18px;
+  letter-spacing:2px;
+  color:var(--copper);
+  text-transform:uppercase;
+}
+.kicker img{flex:none}
+.kicker .rule{flex:none;width:34px;height:1px;background:currentColor}
+.kicker--light{color:var(--copper-light)}
+.kicker--paper{color:var(--paper)}
+
+.h2{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:54px;
+  line-height:58.32px;
+  letter-spacing:-2px;
+  color:var(--ink);
+}
+.lead{font-size:18px;line-height:29px;color:var(--muted)}
+
+/* label / value specification rows */
+.spec{display:grid;grid-template-columns:170px 1fr;gap:0 12px;align-items:start}
+.spec dt{
+  font-weight:600;font-size:12px;line-height:17px;
+  letter-spacing:1px;color:var(--copper);text-transform:uppercase;
+}
+.spec dd{margin:0;font-size:14px;line-height:20px;color:var(--muted)}
+
+/* text link with arrow + underline rule */
+.tlink{display:inline-flex;flex-direction:column;gap:0}
+.tlink .row{display:flex;align-items:center;gap:0;width:200px;font-size:16px;line-height:24px;color:var(--ink)}
+.tlink .row .arrow{font-size:19px;line-height:24px;margin-left:auto}
+.tlink .rule{width:200px;height:1px;background:var(--line);margin-top:7px}
+
+/* filled brand button */
+.btn{
+  display:inline-flex;align-items:center;justify-content:space-between;
+  background:var(--copper-strong);color:var(--white);
+  font-weight:500;font-size:17px;line-height:22px;
+  border:0;cursor:pointer;text-align:left;
+}
+.btn .arrow{font-weight:400}
+
+/* ============================================================
+   01 — HERO
+   ============================================================ */
+.hero{background:var(--paper-hero);overflow:hidden}
+.hero-texture{
+  position:absolute;inset:0;opacity:.09;
+  object-fit:cover;width:100%;height:100%;pointer-events:none;
+}
+.nav{
+  position:relative;z-index:2;
+  display:flex;align-items:center;
+  height:92px;
+  border-bottom:1px solid rgba(213,208,198,.55);
+}
+.nav .wrap{display:flex;align-items:center;width:100%}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:28px;height:23px}
+.brand span{
+  white-space:nowrap;
+  font-family:var(--serif);font-weight:500;
+  font-size:20px;line-height:24px;letter-spacing:.4px;color:var(--ink);
+}
+.nav-links{display:flex;align-items:center;gap:22px;margin-left:auto}
+.nav-links a{font-size:15px;line-height:23px;color:var(--ink)}
+.nav-cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:162px;height:44px;margin-left:13px;
+  border:1px solid var(--ink);
+  font-weight:500;font-size:15px;line-height:19px;color:var(--ink);
+}
+.nav-burger{display:none;flex-direction:column;gap:6px;margin-left:auto}
+.nav-burger span{display:block;width:26px;height:2px;background:var(--ink)}
+
+.hero-body{position:static;min-height:988px}
+.hero-body>.wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:minmax(0,768px) minmax(0,1fr)}
+.hero-copy{padding-top:94px}
+.hero-h1{
+  margin-top:16px;
+  font-family:var(--serif);font-weight:400;
+  font-size:76px;line-height:78.274px;letter-spacing:-2.887px;color:var(--ink);
+}
+.hero-right{padding-top:136px}
+.hero-lead{width:470px;max-width:100%;font-size:20px;line-height:32px;color:var(--muted)}
+.hero-actions{display:flex;align-items:flex-start;gap:26px;margin-top:48px}
+.hero-actions .btn{width:234px;height:54px;padding:0 20px;box-shadow:0 3px 0 rgba(0,0,0,.07)}
+.hero-secondary{padding-top:11px}
+.hero-secondary .row{display:flex;align-items:center;gap:4px}
+.hero-secondary .label{font-size:17px;line-height:26px;color:var(--ink)}
+.hero-secondary .seam{position:static;width:180px;height:7px;margin-top:7px;background:none}
+
+.hero-plate{position:absolute;left:0;right:0;top:510px;height:552px;z-index:1}
+.hero-plate img{width:100%;height:100%;object-fit:cover}
+.hero-detail{
+  position:absolute;z-index:2;
+  top:525px;right:calc(var(--gut) + 138px);
+  width:196px;height:142px;
+}
+.hero-detail img{width:100%;height:100%;object-fit:cover}
+.hero-detail-outline{
+  position:absolute;z-index:1;
+  top:543px;right:calc(var(--gut) + 120px);
+  width:196px;height:142px;
+  border:1.25px solid rgba(165,90,52,.72);
+}
+
+/* ============================================================
+   02 — GOOGLE REVIEWS
+   ============================================================ */
+.reviews{background:var(--paper);min-height:780px;overflow:hidden}
+.reviews-plane{
+  position:absolute;left:0;top:0;bottom:0;
+  right:calc(100% - var(--gut) - 430px);
+  background:var(--dark-3);
+  overflow:hidden;
+}
+.reviews-plane .photo{position:absolute;left:0;right:0;top:0;height:520px}
+.reviews-plane .photo img{width:100%;height:100%;object-fit:cover}
+.reviews-plane .fade{position:absolute;left:0;right:0;top:480px;bottom:0;background:var(--dark-3)}
+.reviews-plane-inner{
+  position:absolute;left:auto;right:0;bottom:0;
+  width:430px;padding:0 38px 8px;
+}
+.reviews-plane .kicker{color:var(--copper-light);letter-spacing:1.4px;font-size:12px;line-height:14px}
+.reviews-plane .kicker .rule{width:26px;background:var(--copper-warm)}
+.reviews-plane h2{
+  margin-top:24px;
+  font-family:var(--serif);font-weight:500;
+  font-size:36px;line-height:41px;color:var(--white);
+}
+.reviews-plane .view{
+  margin-top:44px;
+  font-weight:600;font-size:12px;line-height:14px;color:#CBD3D5;text-transform:uppercase;
+}
+.reviews-plane .ridge{margin-top:16px;width:300px;height:30px}
+
+.reviews-main{
+  position:relative;z-index:2;
+  max-width:var(--frame);margin:0 auto;
+  padding:68px 70px 0 486px;
+  min-height:780px;
+}
+.reviews-head{display:flex;align-items:flex-start;gap:74px}
+.reviews-head .copy{flex:1;min-width:0}
+.reviews-main .kicker{font-size:12px;line-height:14px;letter-spacing:1.4px;color:var(--copper-warm)}
+.reviews-main .kicker .rule{width:26px;background:var(--copper-warm)}
+.reviews-main h2{
+  margin-top:24px;max-width:470px;
+  font-family:var(--serif);font-weight:500;
+  font-size:42px;line-height:46px;color:var(--g-text);
+}
+.reviews-main .intro{margin-top:14px;max-width:560px;font-size:14px;line-height:20px;color:var(--g-meta)}
+
+.score-chip{
+  flex:none;width:250px;height:198px;margin-top:8px;padding:17px 21px;
+  background:var(--g-chip);border:1px solid var(--g-line);border-radius:3px;
+}
+.score-chip .label{font-weight:600;font-size:12px;line-height:14px;color:var(--copper-warm);text-transform:uppercase}
+.score-chip .score{
+  margin-top:8px;
+  font-family:var(--serif);font-weight:500;font-size:58px;line-height:62px;color:var(--g-text);
+}
+.score-chip .stars{font-family:var(--ui);font-size:18px;line-height:20px;color:var(--g-star);letter-spacing:1px}
+.score-chip .count{margin-top:8px;font-size:13px;line-height:18px;color:var(--g-meta)}
+.score-chip .src{display:flex;align-items:center;gap:6px;margin-top:20px}
+
+.gsrc{display:flex;align-items:center;gap:6px}
+.gsrc .mark{
+  display:grid;place-items:center;flex:none;
+  width:24px;height:24px;border-radius:50%;background:#EAF0FD;
+  font-family:var(--ui);font-weight:600;font-size:12px;color:var(--g-blue);
+}
+.gsrc .txt{font-family:var(--ui);font-weight:600;font-size:12px;line-height:15px;color:var(--g-meta)}
+
+.feed{position:relative;margin-top:14px;width:calc(100% + 8px);overflow:hidden}
+.feed::-webkit-scrollbar{display:none}
+.feed-track{display:flex;gap:20px;width:max-content}
+.rcard{
+  flex:none;width:276px;height:360px;padding:17px;
+  background:var(--white);border:1px solid var(--g-line);border-radius:5px;
+  font-family:var(--ui);
+}
+.rcard .top{display:flex;align-items:flex-start;gap:12px}
+.rcard .avatar{
+  display:grid;place-items:center;flex:none;
+  width:36px;height:36px;border-radius:50%;background:#EFEFEF;
+  font-weight:600;font-size:12px;color:var(--g-meta);
+}
+.rcard .name{font-weight:600;font-size:14px;line-height:18px;color:var(--g-text)}
+.rcard .date{font-size:12px;line-height:14px;color:var(--g-meta);margin-top:3px}
+.rcard .rating{display:flex;align-items:center;gap:10px;margin-top:14px}
+.rcard .rating .stars{font-size:17px;line-height:19px;color:var(--g-star);letter-spacing:1px}
+.rcard .rating .num{font-size:12px;line-height:13px;color:var(--g-meta)}
+.rcard .quote{margin-top:16px;font-size:14px;line-height:21px;color:var(--g-text)}
+.rcard .foot{
+  position:absolute;left:17px;right:17px;bottom:17px;
+  display:flex;align-items:center;padding-top:9px;border-top:1px solid var(--g-line);
+}
+.rcard{position:relative}
+.rcard .more{margin-left:auto;font-weight:600;font-size:12px;line-height:14px;color:var(--g-blue)}
+
+.feed-foot{display:flex;align-items:center;gap:24px;margin-top:20px}
+.progress{position:relative;flex:1;max-width:710px;height:2px;background:var(--g-line)}
+.progress i{position:absolute;left:0;top:0;height:2px;width:214px;background:var(--copper-warm)}
+.feed-nav{display:flex;gap:10px;margin-left:auto}
+.feed-nav button{
+  display:grid;place-items:center;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--white);border:1px solid var(--g-line);
+  font-family:var(--ui);font-weight:600;font-size:13px;color:var(--g-text);cursor:pointer;
+}
+.feed-nav button.on{background:var(--copper-warm);border-color:var(--copper-warm);color:var(--white)}
+.reviews-link{
+  margin-top:12px;
+  font-weight:600;font-size:12px;line-height:14px;color:var(--copper-warm);
+}
+
+/* ============================================================
+   03 — SERVICES
+   ============================================================ */
+.services{background:var(--warm-1);padding:96px 0 122px}
+.services-head{display:grid;grid-template-columns:minmax(0,696px) minmax(0,1fr);gap:0}
+.services-head h2{margin-top:30px}
+.services-head .lead{padding-top:68px;max-width:550px}
+.svc-grid{
+  display:grid;margin-top:62px;
+  grid-template-columns:minmax(0,570px) minmax(0,300px) minmax(0,328px);
+  grid-template-rows:auto auto;
+  column-gap:24px;row-gap:0;
+}
+.svc{display:flex;flex-direction:column}
+.svc .shot{width:100%;object-fit:cover}
+.svc h3{margin-top:21px;font-family:var(--serif);font-size:25px;line-height:30px;color:var(--ink)}
+.svc p{margin-top:10px;font-size:14px;line-height:23px;color:var(--muted)}
+.svc .tlink{padding-top:14px}
+.svc--wide .tlink{padding-top:18px}
+.svc--wide{grid-row:1 / span 2}
+.svc--wide .shot{height:441px}
+.svc--a .shot,.svc--b .shot{height:180px}
+.svc--c{grid-column:2 / span 2;grid-row:2;display:grid;grid-template-columns:minmax(0,410px) minmax(0,1fr);column-gap:24px}
+.svc--c .shot{height:180px;grid-row:1 / span 4}
+.svc--c h3{margin-top:4px}
+.svc--c .tlink{padding-top:24px}
+.svc--a,.svc--b{padding-bottom:25px}
+
+/* ============================================================
+   04 — PROJECTS / "A roof has to work as a whole"
+   ============================================================ */
+.projects{background:var(--dark);padding:84px 0 0;min-height:850px;overflow:hidden}
+.projects .wrap{min-height:766px}
+.projects .kicker{color:var(--copper-light)}
+.projects .kicker .rule{background:var(--copper-light)}
+.projects h2{
+  margin-top:38px;max-width:520px;
+  font-family:var(--serif);font-weight:400;
+  font-size:56px;line-height:60.48px;letter-spacing:-2px;color:var(--warm-light);
+}
+.projects .lead{margin-top:59px;max-width:470px;font-size:17px;line-height:29px;color:var(--dark-muted)}
+.projects .facts{margin-top:63px;display:grid;gap:0}
+.projects .facts .row{display:grid;grid-template-columns:minmax(0,136px) minmax(0,340px);gap:0;padding:0 0 23px}
+.projects .facts dt{font-weight:600;font-size:12px;line-height:29px;letter-spacing:1.3px;color:var(--copper-light);text-transform:uppercase}
+.projects .facts dd{margin:0;font-size:14px;line-height:29px;color:var(--dark-muted)}
+.projects .btn{
+  margin-top:24px;width:220px;height:55px;padding:0 22px;gap:4px;
+  color:var(--ink);background:var(--copper-strong);
+}
+.projects .btn .arrow{font-size:21px}
+.projects-media{
+  position:absolute;top:125px;
+  left:calc(var(--gut) + 635px);
+  width:700px;height:530px;
+}
+.projects-media>img{width:100%;height:100%;object-fit:cover}
+.projects-inset{
+  position:absolute;top:450px;left:-55px;
+  width:260px;height:190px;
+}
+.projects-inset img{width:100%;height:100%;object-fit:cover}
+.projects-inset-frame{
+  position:absolute;top:435px;left:-70px;
+  width:290px;height:220px;border:1px solid var(--dark);
+}
+
+/* ============================================================
+   05 — TRIAGE
+   ============================================================ */
+.triage{background:var(--paper);min-height:860px;overflow:hidden}
+.triage-photo{
+  position:absolute;left:0;top:0;bottom:0;
+  right:calc(100% - var(--gut) - 590px);
+}
+.triage-photo img{width:100%;height:100%;object-fit:cover}
+.triage-photo .wash{position:absolute;inset:0;background:var(--dark-2);opacity:.08}
+.triage-card{
+  position:relative;z-index:2;
+  max-width:var(--frame);margin:0 auto;
+}
+.triage-card-inner{
+  margin-left:520px;width:780px;max-width:calc(100% - 520px);
+  height:630px;margin-top:116px;margin-bottom:114px;
+  background:var(--white);border:1px solid var(--line-warm);
+  padding:48px 52px;
+}
+.triage-card h2{
+  margin-top:30px;max-width:610px;
+  font-family:var(--serif);font-weight:500;
+  font-size:44px;line-height:52px;color:var(--ink);
+}
+.triage-card .kicker{letter-spacing:1.8px}
+.triage-rows{margin-top:12px}
+.triage-rows .row{
+  display:grid;grid-template-columns:minmax(0,170px) minmax(0,430px);
+  padding:18px 0 0;min-height:78px;border-top:1px solid var(--line-warm);
+}
+.triage-rows dt{font-weight:600;font-size:12px;line-height:17px;letter-spacing:1.2px;color:var(--copper);text-transform:uppercase}
+.triage-rows dd{margin:0;font-size:14px;line-height:20px;color:var(--muted)}
+.triage-note{
+  margin-top:28px;max-width:620px;
+  font-weight:600;font-size:12px;line-height:18px;letter-spacing:1.1px;
+  color:var(--ink);text-transform:uppercase;
+}
+
+/* ============================================================
+   06 — SURVEY / QUOTE ANATOMY
+   ============================================================ */
+.survey{background:var(--warm-2);padding:70px 0 116px;overflow:hidden}
+.survey .wrap{padding:0 80px;display:grid;grid-template-columns:minmax(0,535px) minmax(0,1fr);gap:0}
+.survey .kicker{letter-spacing:1.55px}
+.survey h2{
+  margin-top:24px;max-width:500px;
+  font-family:var(--serif);font-weight:400;
+  font-size:44px;line-height:48px;letter-spacing:-1.4px;color:var(--ink);
+}
+.survey .lead{margin-top:36px;max-width:430px;font-size:16px;line-height:25px}
+.survey-steps{margin-top:49px;max-width:455px}
+.survey-steps .step{padding:20px 0 16px;border-top:1px solid #D9D7CE}
+.survey-steps .step b,.survey-steps .step span{
+  display:block;font-weight:600;font-size:12px;line-height:17px;letter-spacing:1px;
+}
+.survey-steps .step b{text-transform:uppercase}
+.survey-steps .step--on b,.survey-steps .step--on span{color:var(--copper)}
+.survey-steps .step b,.survey-steps .step span{color:var(--ink)}
+.survey-steps .step--on b,.survey-steps .step--on span{color:var(--copper)}
+
+.survey-paper-wrap{position:relative;margin-top:56px}
+.survey-paper{
+  position:relative;z-index:2;
+  width:706px;max-width:100%;height:508px;
+  background:var(--paper);border:1px solid #D9D7CE;
+  padding:25px 31px 31px;overflow:hidden;
+}
+.survey-paper-back{
+  position:absolute;z-index:1;left:18px;top:18px;
+  width:706px;max-width:100%;height:508px;background:#E5E0D6;
+}
+.survey-paper .corner{position:absolute;right:29px;top:17px;width:74px;height:74px;opacity:.65}
+.survey-paper h3{
+  margin-top:22px;
+  font-family:var(--serif);font-weight:500;font-size:32px;line-height:38px;color:var(--ink);
+}
+.survey-rows{margin-top:31px}
+.survey-rows .row{
+  display:grid;grid-template-columns:minmax(0,178px) minmax(0,1fr);
+  padding:16px 0 0;min-height:70px;border-top:1px solid #D9D7CE;
+}
+.survey-rows dt{font-weight:600;font-size:12px;line-height:17px;letter-spacing:1px;color:var(--copper);text-transform:uppercase}
+.survey-rows dd{margin:0;font-size:15px;line-height:22px;color:var(--muted)}
+
+/* ============================================================
+   07 — CASE STUDY
+   ============================================================ */
+.case{background:var(--dark);min-height:740px;overflow:hidden}
+.case-photo{
+  position:absolute;left:0;top:0;bottom:0;
+  right:calc(100% - var(--gut) - 600px);
+}
+.case-photo img{width:100%;height:100%;object-fit:cover}
+.case-photo .shade{position:absolute;inset:0;background:var(--dark);opacity:.26}
+.case-body{
+  position:relative;z-index:2;
+  max-width:var(--frame);margin:0 auto;
+  padding:76px 130px 64px 690px;
+  min-height:740px;
+}
+.case .kicker{color:var(--copper-light);letter-spacing:1.55px}
+.case h2{
+  margin-top:18px;max-width:620px;
+  font-family:var(--serif);font-weight:400;
+  font-size:48px;line-height:54px;letter-spacing:-1.4px;color:var(--white);
+}
+.case .intro{margin-top:44px;max-width:620px;font-size:14px;line-height:18px;color:#C7CECB}
+.case-rows{margin-top:36px;max-width:620px}
+.case-rows .row{
+  display:grid;grid-template-columns:minmax(0,282px) minmax(0,1fr);
+  padding:16px 0 0;min-height:68px;border-top:1px solid var(--dark-rule);
+}
+.case-rows .row--soft{border-top-color:rgba(255,255,255,.35)}
+.case-rows dt{font-weight:600;font-size:12px;line-height:17px;letter-spacing:1px;color:var(--copper-light);text-transform:uppercase}
+.case-rows dd{margin:0;font-size:17px;line-height:26px;color:var(--white)}
+.case-link{display:flex;align-items:center;gap:84px;margin-top:24px;font-size:16px;line-height:22px;color:var(--white)}
+
+/* ============================================================
+   08 — PROCESS
+   ============================================================ */
+.process{background:var(--paper);padding:84px 0 88px}
+.process-head{display:grid;grid-template-columns:minmax(0,696px) minmax(0,1fr);gap:0}
+.process-head h2{margin-top:32px;max-width:700px}
+.process-head .lead{padding-top:86px;max-width:550px}
+.process-track{
+  display:grid;margin-top:52px;
+  width:1270px;max-width:100%;
+  grid-template-columns:repeat(5,minmax(0,224px));
+  column-gap:30px;
+  border-top:1px solid var(--copper);
+  padding-top:30px;position:relative;
+}
+.process-step{position:relative}
+.process-step::before{
+  content:"";position:absolute;left:0;top:-37px;
+  width:15px;height:15px;background:var(--copper);
+}
+.process-step .num{font-weight:600;font-size:16px;line-height:22px;color:var(--copper)}
+.process-step h3{margin-top:12px;font-family:var(--serif);font-size:25px;line-height:30px;color:var(--ink)}
+.process-step h3 + p{margin-top:28px;font-size:15px;line-height:29px;color:var(--muted)}
+
+/* ============================================================
+   09 — ABOUT / WHAT TO EXPECT
+   ============================================================ */
+.about{background:var(--warm-3);padding:86px 0 90px}
+.about .wrap{padding:0 72px}
+.about .kicker{letter-spacing:1.9px}
+.about h2{
+  margin-top:22px;max-width:620px;
+  font-family:var(--serif);font-weight:500;font-size:52px;line-height:60px;color:var(--ink);
+}
+.about-cols{
+  display:grid;margin-top:14px;padding-top:40px;
+  grid-template-columns:minmax(0,360px) minmax(0,390px) minmax(0,458px);
+  column-gap:44px;
+  border-top:1px solid var(--line-warm);
+}
+.about-col{position:relative;min-height:330px;padding:20px 28px}
+.about-col--one{background:var(--paper)}
+.about-col--two{padding:0;overflow:hidden}
+.about-col--two img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.about-col--three{background:var(--dark-2);padding:20px 32px}
+.tag{
+  position:relative;z-index:2;display:inline-flex;align-items:center;
+  height:36px;padding:0 14px;background:#EEEAE1;
+  font-weight:600;font-size:12px;line-height:17px;letter-spacing:1px;
+  color:var(--ink);text-transform:uppercase;
+}
+.about-col--two .tag{position:absolute;left:28px;top:20px}
+.about-col h3{
+  margin-top:8px;
+  font-family:var(--serif);font-weight:500;font-size:32px;line-height:39px;color:var(--ink);
+}
+.about-col p{margin-top:10px;max-width:300px;font-size:15px;line-height:26px;color:var(--muted)}
+.about-col--three h3{color:var(--white);max-width:350px}
+.about-col--three ul{margin-top:20px}
+.about-col--three li{font-size:16px;line-height:27px;color:#EEEAE1;text-transform:uppercase}
+.about-caption{
+  position:absolute;left:28px;bottom:20px;z-index:2;
+  font-weight:600;font-size:15px;line-height:21px;color:var(--white);text-transform:uppercase;
+}
+
+/* ============================================================
+   10 — REASSURANCE
+   ============================================================ */
+.reassure{background:var(--warm-4);min-height:400px;overflow:hidden}
+.reassure-top{position:absolute;left:0;right:0;top:0;height:126px}
+.reassure-top img{width:100%;height:100%;object-fit:cover}
+.reassure-top .veil{position:absolute;inset:0;background:var(--paper);opacity:.88}
+.reassure-ridge{position:absolute;left:0;right:0;top:102px;height:58px;opacity:.74}
+.reassure-ridge img{width:100%;height:100%;object-fit:fill}
+.reassure .wrap{
+  position:relative;z-index:2;padding:168px 96px 0;
+  display:grid;grid-template-columns:minmax(0,724px) minmax(0,1fr);
+}
+.reassure .kicker{color:#94512F;letter-spacing:1.55px}
+.reassure h2{
+  margin-top:22px;max-width:650px;
+  font-family:var(--serif);font-weight:400;
+  font-size:48px;line-height:55px;letter-spacing:-1.25px;color:var(--ink);
+}
+.reassure .lead{margin-top:23px;max-width:600px;font-size:16px;line-height:24px;color:#384040}
+.reassure-actions{display:flex;align-items:flex-start;gap:36px;padding-top:54px}
+.reassure-actions .btn{width:224px;height:54px;padding:0 20px;font-size:16px}
+.reassure-actions .btn .arrow{font-size:22px}
+.reassure-link{padding-top:12px}
+.reassure-link .row{display:flex;align-items:center;gap:36px;font-size:16px;line-height:22px;color:var(--ink)}
+.reassure-link .rule{width:184px;height:1px;margin-top:8px;background:var(--ink);opacity:.35}
+.reassure-slate{
+  position:absolute;z-index:1;top:278px;
+  left:calc(var(--gut) + 760px);
+  width:min(580px,calc(100% - var(--gut) - 860px));height:56px;opacity:.72;overflow:hidden;
+}
+.reassure-slate img{width:100%;height:100%;object-fit:fill}
+
+/* ============================================================
+   11 — FAQ
+   ============================================================ */
+.faq{background:var(--dark);min-height:660px;overflow:hidden}
+.faq .wrap{padding:74px 96px 0;display:grid;grid-template-columns:minmax(0,834px) minmax(0,1fr);min-height:660px}
+.faq .kicker{color:var(--copper-light);letter-spacing:1.6px}
+.faq h2{
+  margin-top:36px;max-width:760px;
+  font-family:var(--serif);font-weight:400;
+  font-size:54px;line-height:61px;letter-spacing:-1.4px;color:var(--white);
+}
+.faq-side{padding-top:74px;max-width:360px}
+.faq-side .lead{padding-top:39px;border-top:1px solid var(--dark-rule);font-size:18px;line-height:29px;color:var(--dark-muted)}
+.faq-list{margin-top:39px}
+.faq-list a{
+  display:flex;align-items:center;gap:12px;
+  padding:0 0 8px;margin-bottom:30px;
+  border-bottom:1px solid rgba(87,96,101,.45);
+  font-size:16px;line-height:22px;color:var(--white);
+}
+.faq-list a:last-child{margin-bottom:0}
+.faq-divider{
+  position:absolute;left:calc(var(--gut) + 96px);
+  top:560px;width:1248px;max-width:calc(100% - 192px);height:62px;opacity:.75;
+}
+.faq-divider img{width:100%;height:100%;object-fit:fill}
+
+/* ============================================================
+   12 — CONTACT
+   ============================================================ */
+.contact{background:var(--warm-5);min-height:880px;overflow:hidden}
+.contact-photo{
+  position:absolute;left:0;top:0;bottom:0;
+  right:calc(100% - var(--gut) - 650px);
+}
+.contact-photo img{width:100%;height:100%;object-fit:cover}
+.contact-photo .grad{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(20,31,36,.58) 0%,rgba(20,31,36,.34) 68%,rgba(20,31,36,.02) 100%);
+}
+.contact-panel{
+  position:absolute;top:0;bottom:0;
+  left:calc(var(--gut) + 650px);right:0;
+  background:var(--warm-6);
+}
+.contact-inner{
+  position:relative;z-index:2;
+  max-width:var(--frame);margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,650px) minmax(0,1fr);min-height:880px;
+}
+.contact-copy{padding:76px 78px 0 72px}
+.contact-copy .kicker{color:var(--paper);letter-spacing:1.9px}
+.contact-copy .kicker .rule{background:var(--paper)}
+.contact-copy h2{
+  margin-top:34px;max-width:500px;
+  font-family:var(--serif);font-weight:500;font-size:57px;line-height:65px;color:var(--white);
+}
+.contact-copy .lead{margin-top:52px;max-width:455px;font-size:18px;line-height:26px;color:var(--paper)}
+
+.contact-form-wrap{position:relative;padding:69px 72px 97px 44px}
+.form-sheet{
+  position:relative;z-index:3;
+  min-height:714px;padding:20px 42px 42px;
+  background:#FEFDFB;border:1px solid rgba(209,201,184,.55);
+}
+.form-back{position:absolute;z-index:1;width:674px;max-width:100%;height:714px}
+.form-back--1{left:58px;top:83px;background:rgba(229,224,212,.55);z-index:2}
+.form-back--2{left:72px;top:97px;background:rgba(214,209,196,.28);z-index:1}
+.form-sheet .kicker{letter-spacing:1.9px}
+.form-sheet h2{
+  margin-top:26px;max-width:590px;
+  font-family:var(--serif);font-weight:500;font-size:42px;line-height:50px;color:var(--ink);
+}
+.form-grid{display:grid;grid-template-columns:minmax(0,296px) minmax(0,296px);column-gap:18px;row-gap:28px;margin-top:0}
+.field{display:flex;flex-direction:column}
+.field--full{grid-column:1 / -1}
+.field label{
+  font-weight:600;font-size:13px;line-height:18px;color:var(--muted);text-transform:uppercase;
+}
+.field input,.field textarea{
+  margin-top:8px;padding:15px 16px;
+  height:54px;background:var(--white);border:1px solid var(--line-warm);border-radius:0;
+  font-size:15px;line-height:21px;color:var(--ink);
+}
+.field textarea{height:96px;resize:vertical;font-family:var(--sans)}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted);opacity:1}
+.field input:focus,.field textarea:focus{outline:2px solid var(--copper);outline-offset:-2px}
+.form-actions{display:flex;align-items:center;gap:32px;margin-top:30px}
+.form-actions .btn{
+  width:210px;height:54px;padding:0 22px;
+  background:var(--copper);border:1px solid var(--copper);font-size:16px;
+}
+.form-actions .btn .arrow{font-size:20px}
+.form-actions .alt{font-weight:500;font-size:13px;color:#566065}
+.form-note{margin-top:16px;font-size:12px;line-height:17px;color:var(--muted)}
+
+/* ============================================================
+   13 — FOOTER
+   ============================================================ */
+.footer{background:var(--dark);padding:66px 0 0;min-height:430px}
+.footer-seam{position:absolute;left:64px;right:64px;top:0;height:1px;background:var(--copper);opacity:.7}
+.footer-ridge{position:absolute;left:50%;transform:translateX(-50%);top:0;width:180px;height:18px}
+.footer-cols{display:grid;grid-template-columns:minmax(0,436px) minmax(0,260px) minmax(0,260px) minmax(0,1fr);gap:0}
+.footer h2{
+  font-family:var(--serif);font-weight:500;font-size:28px;line-height:34px;color:var(--paper);
+}
+.footer .blurb{margin-top:16px;max-width:340px;font-size:16px;line-height:26px;color:#C9CFCC}
+.footer h3{
+  font-weight:600;font-size:12px;line-height:18px;color:var(--copper-light);text-transform:uppercase;
+}
+.footer li{margin-top:14px}
+.footer li:first-child{margin-top:22px}
+.footer li a,.footer .blurb-2{font-size:16px;line-height:24px;color:#F3F1EB}
+.footer .blurb-2{display:block;margin-top:22px;max-width:260px}
+.footer-bottom{
+  display:flex;align-items:center;margin-top:86px;padding-top:26px;
+  border-top:1px solid rgba(96,112,117,.5);
+}
+.footer-bottom .legal{display:flex;gap:28px}
+.footer-bottom a,.footer-bottom span{font-size:13px;line-height:20px;color:rgba(243,241,235,.82)}
+.footer-bottom .copy{margin-left:auto}
+
+/* ============================================================
+   RESPONSIVE — mirrors the Figma 1024 / 768 / 360 frames
+   ============================================================ */
+@media (max-width:1400px){
+  .hero-grid{grid-template-columns:1fr 520px}
+  .hero-copy{padding-right:40px}
+  .services-head,.process-head{grid-template-columns:1fr 560px}
+  .svc-grid{grid-template-columns:1fr 300px 328px}
+  .projects-media{left:auto;right:calc(var(--gut) + 105px);width:620px}
+  .reviews-main{padding-right:64px}
+  .faq .wrap{grid-template-columns:1fr 400px}
+  .reassure .wrap{grid-template-columns:1fr 520px}
+}
+
+@media (max-width:1200px){
+  .hero-h1{font-size:62px;line-height:66px;letter-spacing:-2px}
+  .hero-body{min-height:auto;padding-bottom:0}
+  .hero-plate{position:relative;top:auto;left:auto;right:auto;margin-top:70px;height:440px}
+  .hero-detail{top:auto;bottom:330px;right:40px}
+  .hero-detail-outline{top:auto;bottom:312px;right:22px}
+  .hero{padding-bottom:0}
+
+  .svc-grid{grid-template-columns:1fr 1fr;row-gap:48px;margin-top:72px}
+  .svc--wide{grid-row:auto;grid-column:1 / -1}
+  .svc--wide .shot{height:380px}
+  .svc--c{grid-column:1 / -1;grid-template-columns:1fr 1fr;margin-top:0}
+  .svc--a,.svc--b{padding-bottom:0}
+
+  .projects .wrap{min-height:0}
+  .projects-media{position:relative;top:auto;left:auto;right:auto;width:100%;max-width:700px;height:420px;margin:56px auto 0}
+  .projects-inset,.projects-inset-frame{display:none}
+  .projects{padding-bottom:80px}
+
+  .triage-photo{position:relative;right:auto;width:100%;height:340px}
+  .triage-card-inner{margin:0;width:100%;max-width:100%;padding:44px 40px}
+  .triage-card{padding:0 var(--pad) 80px;margin-top:-60px}
+  .triage{padding-bottom:0}
+
+  .survey .wrap{grid-template-columns:1fr;padding:0 64px}
+  .survey-paper-wrap{margin-left:0;margin-top:64px}
+  .survey-paper{width:100%;height:auto;min-height:508px}
+  .survey-paper-back{width:100%}
+  .survey-paper-back{left:14px;top:14px}
+
+  .case-photo{position:relative;right:auto;width:100%;height:380px}
+  .case-body{padding:56px 64px 72px;min-height:0}
+  .case-rows .row{grid-template-columns:240px 1fr}
+
+  .process-track{grid-template-columns:repeat(3,1fr);row-gap:48px;column-gap:32px}
+  .process-step:nth-child(n+4)::before{display:none}
+
+  .about-cols{grid-template-columns:1fr 1fr;row-gap:36px;column-gap:32px}
+  .about-col--three{grid-column:1 / -1}
+
+  .reassure .wrap{grid-template-columns:1fr;padding:150px 64px 80px}
+  .reassure-actions{padding-top:36px}
+  .reassure-slate{display:none}
+
+  .faq .wrap{grid-template-columns:1fr;padding:64px 64px 90px;min-height:0}
+  .faq-side{padding-top:48px;max-width:none}
+  .faq-divider{display:none}
+
+  .contact-photo{position:relative;right:auto;width:100%;height:420px}
+  .contact-panel{display:none}
+  .contact-inner{grid-template-columns:1fr;min-height:0;background:var(--warm-6)}
+  .contact-copy{padding:56px 64px 60px;background:none}
+  .contact-copy .kicker,.contact-copy h2,.contact-copy .lead{color:var(--ink)}
+  .contact-copy .kicker{color:var(--copper)}
+  .contact-copy .kicker .rule{background:var(--copper)}
+  .contact-copy .lead{color:var(--muted)}
+  .contact-form-wrap{padding:0 64px 80px}
+  .form-back{display:none}
+  .form-grid{grid-template-columns:1fr 1fr}
+
+  .footer-cols{grid-template-columns:1fr 1fr;row-gap:44px}
+}
+
+/* --- contact copy sits over the photo again once stacked --- */
+@media (max-width:1200px){
+  .contact-inner{position:relative}
+  .contact-copy{position:absolute;left:0;right:0;top:0;height:420px;display:flex;flex-direction:column;justify-content:center;padding:0 64px}
+  .contact-copy .kicker{color:var(--paper)}
+  .contact-copy .kicker .rule{background:var(--paper)}
+  .contact-copy h2{color:var(--white);font-size:44px;line-height:52px;margin-top:22px}
+  .contact-copy .lead{color:var(--paper);margin-top:24px}
+  .contact-form-wrap{padding-top:56px}
+}
+
+@media (max-width:980px){
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+  .hero-detail-outline{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding-right:0;padding-top:64px}
+  .hero-right{padding-top:36px}
+  .hero-h1{font-size:52px;line-height:56px}
+  .hero-lead{width:100%;font-size:18px;line-height:29px}
+
+  .services-head,.process-head{grid-template-columns:1fr;row-gap:28px}
+  .services-head h2,.process-head h2{margin-top:24px}
+  .services-head .lead,.process-head .lead{padding-top:0;max-width:none}
+  .h2{font-size:44px;line-height:48px;letter-spacing:-1.4px}
+  .projects h2{font-size:44px;line-height:50px}
+  .projects .facts .row{grid-template-columns:120px 1fr}
+
+  .reviews-plane{position:relative;right:auto;width:100%;min-height:520px}
+  .reviews-plane .photo{height:340px}
+  .reviews-plane .fade{top:300px}
+  .reviews-plane-inner{position:relative;width:100%;padding:24px 40px 40px}
+  .reviews-main{padding:56px 64px 72px;min-height:0}
+  .reviews-head{flex-direction:column;gap:32px}
+  .score-chip{width:100%;max-width:320px}
+  .reviews-main h2{font-size:36px;line-height:42px}
+
+  .case-rows .row{grid-template-columns:1fr;row-gap:6px}
+  .case-rows dd{font-size:16px;line-height:24px}
+  .case h2{font-size:40px;line-height:46px}
+
+  .triage-rows .row{grid-template-columns:1fr;row-gap:6px}
+  .survey-rows .row{grid-template-columns:1fr;row-gap:4px}
+  .triage-card h2{font-size:36px;line-height:44px}
+  .about h2,.reassure h2,.faq h2{font-size:40px;line-height:46px}
+  .contact-copy h2{font-size:38px;line-height:44px}
+  .form-sheet h2{font-size:34px;line-height:42px}
+}
+
+@media (max-width:760px){
+  :root{--pad:22px}
+  .wrap,.survey .wrap,.about .wrap,.reassure .wrap,.faq .wrap{padding-left:22px;padding-right:22px}
+  .reviews-main,.case-body,.contact-copy,.contact-form-wrap,.triage-card{padding-left:22px;padding-right:22px}
+
+  .hero-h1{font-size:38px;line-height:42px;letter-spacing:-1.2px}
+  .hero-actions{flex-direction:column;gap:24px}
+  .hero-actions .btn{width:203px;height:52px}
+  .hero-plate{height:300px;margin-top:48px}
+  .hero-detail{width:92px;height:76px;bottom:236px;right:22px}
+  .hero-detail-outline{display:none}
+
+  .h2,.projects h2,.about h2,.reassure h2,.faq h2,.case h2,.contact-copy h2{
+    font-size:32px;line-height:38px;letter-spacing:-.8px;
+  }
+  .triage-card h2,.form-sheet h2,.reviews-main h2{font-size:28px;line-height:34px}
+  .survey h2{font-size:30px;line-height:36px}
+
+  .services{padding:56px 0 64px}
+  .svc-grid{grid-template-columns:1fr;row-gap:42px;margin-top:48px}
+  .svc--c{grid-template-columns:1fr;row-gap:16px}
+  .svc--wide .shot,.svc--a .shot,.svc--b .shot,.svc--c .shot{height:200px}
+  .tlink .rule{width:100%}
+  .svc .tlink{align-self:stretch}
+  .svc .tlink .row .arrow{margin-left:auto}
+
+  .projects{padding:56px 0 64px}
+  .projects .facts .row{grid-template-columns:1fr;row-gap:2px;padding-bottom:18px}
+  .projects .facts dt,.projects .facts dd{line-height:24px}
+  .projects-media{height:240px;margin-top:40px}
+
+  .triage-photo{height:220px}
+  .triage-card{margin-top:-40px;padding-bottom:56px}
+  .triage-card-inner{padding:32px 24px}
+
+  .survey{padding:56px 0 64px}
+  .survey-paper{padding:24px;min-height:0}
+  .survey-paper .corner{display:none}
+  .survey-paper-back{display:none}
+
+  .case-photo{height:240px}
+  .case-body{padding-top:48px;padding-bottom:56px}
+  .case-link{gap:20px}
+
+  .process{padding:56px 0 64px}
+  .process-track{grid-template-columns:1fr;row-gap:40px;padding-top:26px}
+  .process-step::before{top:-33px}
+  .process-step h3 + p{margin-top:14px;line-height:26px}
+
+  .about{padding:56px 0 64px}
+  .about-cols{grid-template-columns:1fr;row-gap:24px;margin-top:28px;padding-top:28px}
+  .about-col{min-height:auto;padding:24px}
+  .about-col--two{min-height:300px}
+  .about-col--two .tag{left:24px;top:24px}
+  .about-caption{left:24px;bottom:24px}
+  .about-col h3{font-size:26px;line-height:32px}
+  .about-col p{max-width:none}
+
+  .reassure .wrap{padding-top:140px;padding-bottom:64px}
+  .reassure-actions{flex-direction:column;gap:24px;padding-top:32px}
+  .reassure-link{padding-top:0}
+  .reassure-link .row{gap:16px}
+
+  .faq .wrap{padding-top:56px;padding-bottom:64px}
+  .faq-side .lead{font-size:16px;line-height:26px}
+
+  .contact-photo{height:300px}
+  /* on phones the intro sits below the photo, not over it */
+  .contact-copy{
+    position:static;height:auto;display:block;
+    padding:40px 22px 0;background:none;
+  }
+  .contact-copy .kicker{color:var(--copper)}
+  .contact-copy .kicker .rule{background:var(--copper)}
+  .contact-copy h2{color:var(--ink)}
+  .contact-copy .lead{color:var(--muted);margin-top:20px}
+  .contact-form-wrap{padding-top:36px;padding-bottom:56px}
+  .form-sheet{padding:20px 24px 32px;min-height:0}
+  .form-grid{grid-template-columns:1fr;row-gap:22px}
+  .form-actions{flex-direction:column;align-items:flex-start;gap:18px}
+  .form-actions .btn{width:100%;max-width:260px}
+
+  .footer{padding-top:48px}
+  .footer-cols{grid-template-columns:1fr;row-gap:32px}
+  .footer-seam{left:22px;right:22px}
+  .footer-bottom{margin-top:40px;flex-direction:column;align-items:flex-start;gap:14px}
+  .footer-bottom .copy{margin-left:0}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .feed{scroll-behavior:smooth}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ 01 · HERO ═══════════════ -->
+<header class="sec hero">
+  <img class="hero-texture" src="assets/img/HERO___Continuous_paper_texture.png" alt="">
+
+  <nav class="nav">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <img src="assets/img/A___SVG_Logo_ridge.svg" alt="">
+        <span>Ridgewell Roofing</span>
+      </a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">How it works</a>
+        <a href="#faq">FAQs</a>
+      </div>
+      <a class="nav-cta" href="#contact">Send an enquiry <span class="arrow">&rarr;</span></a>
+      <button class="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="hero-body">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">
+            <img src="assets/img/A___SVG_Kicker_mark.svg" alt="">
+            Roofing for homes
+          </p>
+          <h1 class="hero-h1">For the home<br>you care about.</h1>
+        </div>
+        <div class="hero-right">
+          <p class="hero-lead">Roof repairs, re-roofing, leadwork and chimney work for your home. Tell us what you have noticed and we can talk through the most sensible next step.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#contact">Send a roof enquiry <span class="arrow">&rarr;</span></a>
+            <a class="hero-secondary" href="#services">
+              <span class="row">
+                <span class="label">See roofing services</span>
+                <img src="assets/img/A___SVG_Secondary_arrow.svg" alt="" style="margin-left:24px">
+              </span>
+              <img class="seam" src="assets/img/A___SVG_Secondary_underline_seam.svg" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-plate">
+      <img src="assets/img/HERO___LOCKED_APPROVED_MAIN_IMAGE.png" alt="Roofers working on a pitched roof">
+    </div>
+    <div class="hero-detail-outline"></div>
+    <div class="hero-detail">
+      <img src="assets/img/HERO___LOCKED_APPROVED_SECONDARY_DETAIL.png" alt="Roofer walking a ridge line">
+    </div>
+  </div>
+</header>
+
+
+<!-- ═══════════════ 02 · GOOGLE REVIEWS ═══════════════ -->
+<section class="sec reviews" id="reviews">
+  <div class="reviews-plane">
+    <div class="photo"><img src="assets/img/CONTEXT_PROPERTY_IMAGE___S02_CONTEXT-PROPERTY_B03_stone-country-house.png" alt="Stone country house"></div>
+    <div class="fade"></div>
+    <div class="reviews-plane-inner">
+      <p class="kicker"><span class="rule"></span>Google reviews</p>
+      <h2>See recent feedback<br>from homeowners.</h2>
+      <p class="view">View reviews on Google</p>
+      <img class="ridge" src="assets/img/Ridge_detail.svg" alt="">
+    </div>
+  </div>
+
+  <div class="reviews-main">
+    <div class="reviews-head">
+      <div class="copy">
+        <p class="kicker"><span class="rule"></span>Google reviews</p>
+        <h2>Read what homeowners say on Google.</h2>
+        <p class="intro">For the most up-to-date feedback, open the latest customer comments directly on Google.</p>
+      </div>
+      <div class="score-chip">
+        <p class="label">Google rating</p>
+        <p class="score">4.9</p>
+        <p class="stars">★★★★★</p>
+        <p class="count">Based on 128 Google reviews</p>
+        <div class="src gsrc"><span class="mark">G</span><span class="txt">Google review</span></div>
+      </div>
+    </div>
+
+    <div class="feed">
+      <div class="feed-track">
+        <article class="rcard">
+          <div class="top">
+            <span class="avatar">S</span>
+            <div><p class="name">Sarah M.</p><p class="date">2 weeks ago</p></div>
+          </div>
+          <div class="rating"><span class="stars">★★★★★</span><span class="num">5.0</span></div>
+          <p class="quote">The inspection was clear and unhurried. We were shown what needed attention, what could wait and what the options meant before any work was agreed.</p>
+          <div class="foot gsrc"><span class="mark">G</span><span class="txt">Google review</span><span class="more">Read more</span></div>
+        </article>
+        <article class="rcard">
+          <div class="top">
+            <span class="avatar">D</span>
+            <div><p class="name">David H.</p><p class="date">1 month ago</p></div>
+          </div>
+          <div class="rating"><span class="stars">★★★★★</span><span class="num">5.0</span></div>
+          <p class="quote">Communication stayed straightforward from the first visit through the work itself. The agreed work was explained clearly and the area was left tidy at the end.</p>
+          <div class="foot gsrc"><span class="mark">G</span><span class="txt">Google review</span><span class="more">Read more</span></div>
+        </article>
+        <article class="rcard">
+          <div class="top">
+            <span class="avatar">P</span>
+            <div><p class="name">Priya S.</p><p class="date">2 months ago</p></div>
+          </div>
+          <div class="rating"><span class="stars">★★★★★</span><span class="num">5.0</span></div>
+          <p class="quote">The advice felt measured rather than sales-led. The roof issue was explained properly, the agreed work was carried out carefully and the result was easy to understand.</p>
+          <div class="foot gsrc"><span class="mark">G</span><span class="txt">Google review</span><span class="more">Read more</span></div>
+        </article>
+        <article class="rcard">
+          <div class="top">
+            <span class="avatar">A</span>
+            <div><p class="name">Andrew K.</p><p class="date">3 months ago</p></div>
+          </div>
+          <div class="rating"><span class="stars">★★★★★</span><span class="num">5.0</span></div>
+          <p class="quote">A very straightforward experience from inspection to completion. The options were explained clearly and nothing extra was added without being discussed first.</p>
+          <div class="foot gsrc"><span class="mark">G</span><span class="txt">Google review</span><span class="more">Read more</span></div>
+        </article>
+      </div>
+    </div>
+
+    <div class="feed-foot">
+      <div class="progress"><i></i></div>
+      <div class="feed-nav">
+        <button type="button" aria-label="Previous reviews">&larr;</button>
+        <button type="button" class="on" aria-label="Next reviews">&rarr;</button>
+      </div>
+    </div>
+    <p class="reviews-link">View current reviews on Google</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 03 · SERVICES ═══════════════ -->
+<section class="sec services" id="services">
+  <span class="seam seam-copper-soft"></span>
+  <div class="wrap">
+    <div class="services-head">
+      <div>
+        <p class="kicker"><span class="rule"></span>Roofing services</p>
+        <h2 class="h2">From the first repair<br>to a new roof.</h2>
+      </div>
+      <p class="lead">Whether you are dealing with a leak, damaged roof coverings or an older roof that may need more extensive work, the right starting point depends on the condition. These services cover repairs, re-roofing, leadwork and chimney work.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc svc--wide">
+        <img class="shot" src="assets/img/Rectangle.png" alt="Weathered slate roof with slipped tiles">
+        <h3>Roof repairs</h3>
+        <p>For isolated problems such as slipped tiles or slates, leaks and worn junctions where the surrounding roof may still be serviceable.</p>
+        <a class="tlink" href="#contact">
+          <span class="row">Explore roof repairs <span class="arrow">&rarr;</span></span>
+          <span class="rule"></span>
+        </a>
+      </article>
+
+      <article class="svc svc--a">
+        <img class="shot" src="assets/img/Rectangle_2.png" alt="House with a newly laid roof">
+        <h3>Re-roofing</h3>
+        <p>For roofs where local repairs may no longer be enough and a wider renewal of the roof covering and associated details is being considered.</p>
+        <a class="tlink" href="#contact">
+          <span class="row">See re-roofing options <span class="arrow">&rarr;</span></span>
+          <span class="rule"></span>
+        </a>
+      </article>
+
+      <article class="svc svc--b">
+        <img class="shot" src="assets/img/Rectangle_3.png" alt="Lead valley between slate roof surfaces">
+        <h3>Leadwork</h3>
+        <p>For valleys, roof edges, walls and chimneys where leadwork helps keep water out at the junctions between roof surfaces.</p>
+        <a class="tlink" href="#contact">
+          <span class="row">Ask about leadwork <span class="arrow">&rarr;</span></span>
+          <span class="rule"></span>
+        </a>
+      </article>
+
+      <article class="svc svc--c">
+        <img class="shot" src="assets/img/Rectangle_4.png" alt="Clay tiled roof with brick chimney stacks">
+        <div>
+          <h3>Chimneys</h3>
+          <p>For pointing, weathering and roof junctions around chimney stacks, where defects can affect both the masonry and the roof around it.</p>
+          <a class="tlink" href="#contact">
+            <span class="row">Ask about chimney work <span class="arrow">&rarr;</span></span>
+            <span class="rule"></span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 04 · WHAT GOOD ROOFING INVOLVES ═══════════════ -->
+<section class="sec projects">
+  <span class="seam seam-prove"></span>
+  <div class="wrap">
+    <p class="kicker"><span class="rule"></span>What good roofing involves</p>
+    <h2>A roof has to work<br>as a whole.</h2>
+    <p class="lead">The main covering is only part of the job. Valleys, edges, flashings, ridges and junctions all need to work together to keep water out and move it safely away from the building.</p>
+
+    <dl class="facts">
+      <div class="row"><dt>Covering</dt><dd>Tiles or slates laid and fixed correctly</dd></div>
+      <div class="row"><dt>Junctions</dt><dd>Leadwork and weathering where roof surfaces meet</dd></div>
+      <div class="row"><dt>Finishing</dt><dd>Ridges, edges and details checked as part of the whole roof</dd></div>
+    </dl>
+
+    <a class="btn" href="#survey">How inspections work <span class="arrow">&rarr;</span></a>
+  </div>
+
+  <div class="projects-media">
+    <img src="assets/img/Rectangle_5.png" alt="Gable end with exposed roof timbers">
+    <div class="projects-inset-frame"></div>
+    <div class="projects-inset"><img src="assets/img/Rectangle_6.png" alt="Scalloped slate roof detail"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 05 · REPAIR OR REPLACEMENT ═══════════════ -->
+<section class="sec triage">
+  <div class="triage-photo">
+    <img src="assets/img/IMAGE___stock-49.png" alt="Brick house with chimney">
+    <span class="wash"></span>
+  </div>
+  <div class="triage-card">
+    <div class="triage-card-inner">
+      <p class="kicker"><img src="assets/img/Index_mark.svg" alt="">Repair or replacement?</p>
+      <h2>Not every roof problem needs the same answer.</h2>
+      <dl class="triage-rows">
+        <div class="row"><dt>Repair</dt><dd>A local repair may be enough when the problem is isolated and the surrounding roof is still in reasonable condition.</dd></div>
+        <div class="row"><dt>Maintain</dt><dd>Some wear can be monitored or maintained when wider work is not yet justified.</dd></div>
+        <div class="row"><dt>Investigate</dt><dd>If the visible signs do not explain the problem, further inspection may be needed before deciding what to do.</dd></div>
+        <div class="row"><dt>Replace</dt><dd>Replacement may make more sense when condition, extent of wear or repeated defects make local repairs poor value.</dd></div>
+      </dl>
+      <p class="triage-note">The right recommendation should follow the condition of the roof, not the size of the job.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 06 · WHAT AN INSPECTION SHOULD GIVE YOU ═══════════════ -->
+<section class="sec survey" id="survey">
+  <div class="wrap">
+    <div>
+      <p class="kicker"><img src="assets/img/Kicker_mark.svg" alt="">What an inspection should give you</p>
+      <h2>Know what was found<br>before work begins.</h2>
+      <p class="lead">An inspection should leave you with more than a verbal opinion. You need to know what was found, where the issue is, which options are realistic and what any proposed work includes before you decide.</p>
+
+      <div class="survey-steps">
+        <div class="step step--on"><b>01&nbsp;&nbsp;Inspect + record</b><span>Record the condition, location and visible signs that matter.</span></div>
+        <div class="step"><b>02&nbsp;&nbsp;Explain + compare</b><span>Talk through what was found and which options are realistic.</span></div>
+        <div class="step"><b>03&nbsp;&nbsp;Agree scope + quote</b><span>Set out the work, assumptions, exclusions and cost before work starts.</span></div>
+      </div>
+    </div>
+
+    <div class="survey-paper-wrap">
+      <div class="survey-paper-back"></div>
+      <div class="survey-paper">
+        <img class="corner" src="assets/img/Corner.svg" alt="">
+        <p class="kicker"><img src="assets/img/Kicker_mark_2.svg" alt="">What your quote should explain</p>
+        <h3>A clear written summary.</h3>
+        <dl class="survey-rows">
+          <div class="row"><dt>Finding</dt><dd>What was found and where</dd></div>
+          <div class="row"><dt>Evidence</dt><dd>Relevant photos and condition notes</dd></div>
+          <div class="row"><dt>Options</dt><dd>Practical ways to deal with the issue</dd></div>
+          <div class="row"><dt>Proposed work</dt><dd>The work included in the quotation</dd></div>
+          <div class="row"><dt>Quote</dt><dd>Cost, assumptions and exclusions</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 07 · CASE STUDY ═══════════════ -->
+<section class="sec case">
+  <span class="seam seam-copper"></span>
+  <div class="case-photo">
+    <img src="assets/img/Project_image.png" alt="Stone cottage with a steep slate roof">
+    <span class="shade"></span>
+  </div>
+  <div class="case-body">
+    <p class="kicker"><img src="assets/img/Kicker_mark_3.svg" alt="">A simple repair example</p>
+    <h2>When a repair is enough.</h2>
+    <p class="intro">If an inspection finds an isolated fault and the surrounding roof is still serviceable, the proposed work can stay focused on the affected area rather than widening the job unnecessarily.</p>
+    <dl class="case-rows">
+      <div class="row"><dt>The problem</dt><dd>Water is getting in around a roof junction.</dd></div>
+      <div class="row"><dt>What was found</dt><dd>The defect is local; the surrounding covering is still serviceable.</dd></div>
+      <div class="row"><dt>Recommendation</dt><dd>Repair the junction rather than renew the whole roof.</dd></div>
+      <div class="row row--soft"><dt>Proposed work</dt><dd>Repair the junction and replace only the affected covering.</dd></div>
+      <div class="row row--soft"><dt>Final check</dt><dd>The repaired area is checked against the agreed work before handover.</dd></div>
+    </dl>
+    <a class="case-link" href="#contact">Ask about your roof <span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 08 · PROCESS ═══════════════ -->
+<section class="sec process" id="process">
+  <div class="wrap">
+    <div class="process-head">
+      <div>
+        <p class="kicker"><span class="rule"></span>After you agree the work</p>
+        <h2 class="h2">What happens once you<br>decide to go ahead.</h2>
+      </div>
+      <p class="lead">Once the work is agreed, the next steps should stay clear: confirm the details, prepare the site, carry out the work, check it and hand over.</p>
+    </div>
+
+    <div class="process-track">
+      <div class="process-step">
+        <p class="num">01</p><h3>Plan</h3>
+        <p>Confirm the agreed work, materials, access and timing before anything starts.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">02</p><h3>Prepare</h3>
+        <p>Arrange access and get the working area ready before roofing work begins.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">03</p><h3>Carry out</h3>
+        <p>Complete the agreed work. If something new is uncovered, explain it before any extra work is added.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">04</p><h3>Check</h3>
+        <p>Review the completed work against what was agreed and deal with anything still outstanding.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">05</p><h3>Hand over</h3>
+        <p>Confirm what has been completed and any information you need to keep for the future.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 09 · WHAT YOU CAN EXPECT ═══════════════ -->
+<section class="sec about">
+  <span class="seam seam-copper-faint"></span>
+  <div class="wrap">
+    <p class="kicker"><img src="assets/img/Index_mark_2.svg" alt="">What you can expect</p>
+    <h2>Know what to expect at every stage.</h2>
+
+    <div class="about-cols">
+      <article class="about-col about-col--one">
+        <span class="tag">01 / Before work starts</span>
+        <h3>Know what you’re agreeing to.</h3>
+        <p>Before work begins, you should know what is included, what is not included and how to raise a question if anything is unclear.</p>
+      </article>
+
+      <article class="about-col about-col--two">
+        <img src="assets/img/IMAGE___stock-37.png" alt="Roofer laying tiles behind scaffolding">
+        <span class="tag">02 / During the work</span>
+        <p class="about-caption">Updates if something changes</p>
+      </article>
+
+      <article class="about-col about-col--three">
+        <span class="tag">03 / Before handover</span>
+        <h3>Know what has been completed.</h3>
+        <ul>
+          <li>Work completed</li>
+          <li>Agreed changes</li>
+          <li>Anything outstanding</li>
+          <li>What you need to know</li>
+          <li>Next steps</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 10 · REASSURANCE ═══════════════ -->
+<section class="sec reassure">
+  <span class="seam seam-copper-mid"></span>
+  <div class="reassure-top">
+    <img src="assets/img/Material_texture___surface-14.png" alt="">
+    <span class="veil"></span>
+  </div>
+  <div class="reassure-ridge"><img src="assets/img/Long_ridge.svg" alt=""></div>
+  <div class="reassure-slate"><img src="assets/img/Slate_course.svg" alt=""></div>
+
+  <div class="wrap">
+    <div>
+      <p class="kicker"><img src="assets/img/Kicker_mark_4.svg" alt="">Before you decide</p>
+      <h2>Still have a practical question?</h2>
+      <p class="lead">If you are unsure about timing, access, the quotation or what happens next, ask before you commit. It is better to clear up a question now than make assumptions later.</p>
+    </div>
+    <div class="reassure-actions">
+      <a class="btn" href="#contact">Ask a question <span class="arrow">&rarr;</span></a>
+      <a class="reassure-link" href="#faq">
+        <span class="row">Read practical FAQs <span class="arrow">&rarr;</span></span>
+        <span class="rule"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 11 · FAQ ═══════════════ -->
+<section class="sec faq" id="faq">
+  <span class="seam seam-copper"></span>
+  <div class="wrap">
+    <div>
+      <p class="kicker"><img src="assets/img/Kicker_mark_5.svg" alt="">Practical questions</p>
+      <h2>&ldquo;What happens if more work is found?&rdquo;</h2>
+    </div>
+    <div class="faq-side">
+      <p class="lead">If something new is uncovered, it should be explained before any extra work goes ahead. You need to understand what was found, why it changes the agreed work and any effect on cost or timing before deciding how to proceed.</p>
+      <div class="faq-list">
+        <a href="#contact">What should a quotation include? <span class="arrow">&rarr;</span></a>
+        <a href="#contact">Can a roof be repaired instead? <span class="arrow">&rarr;</span></a>
+        <a href="#contact">What happens after an inspection? <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="faq-divider"><img src="assets/img/Roofline_divider.svg" alt=""></div>
+</section>
+
+
+<!-- ═══════════════ 12 · CONTACT ═══════════════ -->
+<section class="sec contact" id="contact">
+  <span class="seam seam-act"></span>
+  <div class="contact-photo">
+    <img src="assets/img/IMAGE___photo-07.png" alt="Timber and slate gable with apex glazing">
+    <span class="grad"></span>
+  </div>
+  <div class="contact-panel"></div>
+
+  <div class="contact-inner">
+    <div class="contact-copy">
+      <p class="kicker"><img src="assets/img/Section_index_mark.svg" alt="">Start with what you can see</p>
+      <h2>Tell us what<br>you’ve noticed.</h2>
+      <p class="lead">You do not need to diagnose the roof before getting in touch. Tell us what you have noticed, where it is happening and how to reach you. Add a photo if it helps explain the issue.</p>
+    </div>
+
+    <div class="contact-form-wrap">
+      <div class="form-back form-back--1"></div>
+      <div class="form-back form-back--2"></div>
+
+      <form class="form-sheet" action="#" method="post">
+        <p class="kicker"><img src="assets/img/Section_index_mark_2.svg" alt="">Enquiry details</p>
+        <h2>A few details are<br>enough to start.</h2>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="f-postcode">Postcode</label>
+            <input id="f-postcode" name="postcode" type="text" placeholder="Property postcode" autocomplete="postal-code">
+          </div>
+          <div class="field field--full">
+            <label for="f-contact">Email or phone</label>
+            <input id="f-contact" name="contact" type="text" placeholder="Email address or phone number">
+          </div>
+          <div class="field field--full">
+            <label for="f-notes">What have you noticed?</label>
+            <textarea id="f-notes" name="notes" placeholder="Tell us about the leak, damage or work you’re considering."></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">Send enquiry <span class="arrow">&rarr;</span></button>
+          <span class="alt">Add a photo if you have one &nearr;</span>
+        </div>
+        <p class="form-note">Photos are optional. Please do not climb onto the roof to take them.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 13 · FOOTER ═══════════════ -->
+<footer class="sec footer">
+  <span class="footer-seam"></span>
+  <img class="footer-ridge" src="assets/img/FOOTER___Ridge_detail.svg" alt="">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div>
+        <h2>Ridgewell Roofing</h2>
+        <p class="blurb">Roof repairs, re-roofing, leadwork and chimney work for homes.</p>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#services">Roof repairs</a></li>
+          <li><a href="#services">Re-roofing</a></li>
+          <li><a href="#services">Leadwork</a></li>
+          <li><a href="#services">Chimneys</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#survey">Inspections</a></li>
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Enquiries</h3>
+        <ul><li><a href="#contact">Send an enquiry &rarr;</a></li></ul>
+        <span class="blurb-2">Tell us what you’ve noticed and how to reach you.</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+        <a href="#">Terms</a>
+      </div>
+      <span class="copy">© Ridgewell Roofing</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Review carousel — matches the Figma's paged feed + progress bar. */
+(function(){
+  var feed = document.querySelector('.feed');
+  var track = document.querySelector('.feed-track');
+  var bar = document.querySelector('.progress i');
+  var btns = document.querySelectorAll('.feed-nav button');
+  if(!feed || !track) return;
+
+  var page = 0;
+  function step(){
+    var card = track.querySelector('.rcard');
+    return card ? card.offsetWidth + 20 : 296;
+  }
+  function pages(){
+    return Math.max(1, Math.ceil(track.scrollWidth / feed.clientWidth));
+  }
+  function paint(){
+    var max = Math.max(1, track.scrollWidth - feed.clientWidth);
+    var pct = Math.min(1, feed.scrollLeft / max);
+    if(bar) bar.style.width = (30 + pct * 70) + '%';
+  }
+  function go(dir){
+    var per = Math.max(1, Math.floor(feed.clientWidth / step()));
+    page = Math.max(0, Math.min(pages() - 1, page + dir));
+    feed.scrollTo({left: page * per * step(), behavior: 'smooth'});
+  }
+  btns[0] && btns[0].addEventListener('click', function(){ go(-1); });
+  btns[1] && btns[1].addEventListener('click', function(){ go(1); });
+  feed.addEventListener('scroll', paint, {passive:true});
+  window.addEventListener('resize', paint);
+  feed.style.overflowX = 'auto';
+  feed.style.scrollbarWidth = 'none';
+  paint();
+})();
+</script>
+
+</body>
+</html>
