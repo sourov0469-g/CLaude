@@ -179,7 +179,7 @@ button,input,textarea{font:inherit;color:inherit}
 .btn{
   display:inline-flex;align-items:center;justify-content:space-between;
   background:var(--copper-strong);color:var(--white);
-  font-weight:500;font-size:17px;line-height:22px;
+  font-weight:500;font-size:17px;line-height:22px;white-space:nowrap;
   border:0;cursor:pointer;text-align:left;
 }
 .btn .arrow{font-weight:400}
@@ -415,7 +415,7 @@ button,input,textarea{font:inherit;color:inherit}
 .projects .facts dt{font-weight:600;font-size:12px;line-height:29px;letter-spacing:1.3px;color:var(--copper-light);text-transform:uppercase}
 .projects .facts dd{margin:0;font-size:14px;line-height:29px;color:var(--dark-muted)}
 .projects .btn{
-  margin-top:24px;width:220px;height:55px;padding:0 22px;gap:4px;
+  margin-top:24px;width:220px;height:55px;padding:0 20px;gap:6px;
   color:var(--white);background:var(--copper-strong);
 }
 .projects .btn .arrow{font-size:21px}
@@ -688,7 +688,8 @@ button,input,textarea{font:inherit;color:inherit}
 .faq-a p{padding:0 0 20px;max-width:360px;font-size:15px;line-height:26px;color:var(--dark-muted)}
 .faq-divider{
   position:absolute;left:calc(var(--gut) + 96px);
-  top:560px;width:1248px;max-width:calc(100% - 192px);height:62px;opacity:.75;
+  top:auto;bottom:38px;width:min(834px,calc(100% - 192px));height:62px;opacity:.75;
+  pointer-events:none;
 }
 .faq-divider .ico{width:100%;height:100%}
 
@@ -767,7 +768,7 @@ button,input,textarea{font:inherit;color:inherit}
    13 — FOOTER
    ============================================================ */
 .footer{background:var(--dark);padding:66px 0 0;min-height:430px}
-.footer-seam{position:absolute;left:64px;right:64px;top:0;height:1px;background:var(--copper);opacity:.7}
+.footer-seam{position:absolute;left:calc(var(--gut) + 64px);right:calc(var(--gut) + 64px);top:0;height:1px;background:var(--copper);opacity:.7}
 .footer-ridge{position:absolute;left:50%;transform:translateX(-50%);top:0;width:180px;height:18px}
 .footer-cols{display:grid;grid-template-columns:minmax(0,436px) minmax(0,260px) minmax(0,260px) minmax(0,1fr);gap:0}
 .footer h2{
@@ -896,11 +897,16 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
    backgrounds bleed, so wide screens stay symmetrical.
    ============================================================ */
 
+/* below the design width these two decorations have no clear space to sit in */
+@media (max-width:1339px){.faq-divider,.reassure-slate{display:none}}
+
 /* ---------- above the design width: centre the composition ---------- */
 .hero-plate{left:var(--gut);right:var(--gut)}
 .triage-photo,.case-photo,.contact-photo{left:var(--gut)}
 .reviews-plane .photo{left:auto;right:0;width:430px}
-.reassure-top,.reassure-ridge{left:var(--gut);right:var(--gut)}
+/* the slate band and its ridge line are background treatment for the section,
+   so they bleed with the background rather than sitting inside the frame */
+.reassure-top,.reassure-ridge{left:0;right:0}
 
 /* ============================ TABLET 1024 ============================ */
 @media (max-width:1199px){
@@ -1363,7 +1369,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .footer-cols{grid-template-columns:1fr;row-gap:30px}
   .footer h2{font-size:24px;line-height:30px}
   .footer li:first-child{margin-top:18px}
-  .footer-seam{left:22px;right:22px}
+  .footer-seam{left:calc(var(--gut) + 22px);right:calc(var(--gut) + 22px)}
   .footer-bottom{margin-top:40px;flex-direction:column;align-items:flex-start;gap:14px}
   .footer-bottom .copy{margin-left:0}
 }
