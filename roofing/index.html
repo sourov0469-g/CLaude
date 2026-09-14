@@ -244,7 +244,7 @@ button,input,textarea{font:inherit;color:inherit}
 .hero-secondary .seam{position:static;width:180px;height:7px;margin-top:7px;background:none}
 
 .hero-plate{position:absolute;left:0;right:0;top:510px;height:552px;z-index:1}
-.hero-plate img{width:100%;height:100%;object-fit:cover}
+.hero-plate img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .hero-detail{
   position:absolute;z-index:2;
   top:525px;right:calc(var(--gut) + 138px);
@@ -330,7 +330,8 @@ button,input,textarea{font:inherit;color:inherit}
 .feed::-webkit-scrollbar{display:none}
 .feed-track{display:flex;gap:20px;width:max-content}
 .rcard{
-  flex:none;width:276px;height:360px;padding:17px;
+  flex:none;display:flex;flex-direction:column;
+  width:276px;padding:17px;
   background:var(--white);border:1px solid var(--g-line);border-radius:5px;
   font-family:var(--ui);
 }
@@ -347,10 +348,12 @@ button,input,textarea{font:inherit;color:inherit}
 .rcard .rating .num{font-size:12px;line-height:13px;color:var(--g-meta)}
 .rcard .quote{margin-top:16px;font-size:14px;line-height:21px;color:var(--g-text)}
 .rcard .foot{
-  position:absolute;left:17px;right:17px;bottom:17px;
-  display:flex;align-items:center;padding-top:9px;border-top:1px solid var(--g-line);
+  display:flex;align-items:center;margin-top:auto;padding-top:9px;
+  border-top:1px solid var(--g-line);
 }
 .rcard{position:relative}
+.rcard .quote{margin-bottom:20px}
+.feed-track{align-items:stretch}
 .rcard .more{margin-left:auto;font-weight:600;font-size:12px;line-height:14px;color:var(--g-blue)}
 
 .feed-foot{display:flex;align-items:center;gap:24px;margin-top:20px}
@@ -662,7 +665,7 @@ button,input,textarea{font:inherit;color:inherit}
    11 — FAQ
    ============================================================ */
 .faq{background:var(--dark);min-height:660px;overflow:hidden}
-.faq .wrap{padding:74px 96px 0;display:grid;grid-template-columns:minmax(0,834px) minmax(0,1fr);min-height:660px}
+.faq .wrap{padding:74px 96px 96px;display:grid;grid-template-columns:minmax(0,834px) minmax(0,1fr);min-height:0}
 .faq .kicker{color:var(--copper-light);letter-spacing:1.6px}
 .faq h2{
   margin-top:36px;max-width:760px;
@@ -783,7 +786,7 @@ button,input,textarea{font:inherit;color:inherit}
 .footer li a,.footer .blurb-2{font-size:16px;line-height:24px;color:#F3F1EB}
 .footer .blurb-2{display:block;margin-top:22px;max-width:260px}
 .footer-bottom{
-  display:flex;align-items:center;margin-top:86px;padding-top:26px;
+  display:flex;align-items:center;margin-top:60px;padding-top:26px;
   border-top:1px solid rgba(96,112,117,.5);
 }
 .footer-bottom .legal{display:flex;gap:28px}
@@ -869,6 +872,19 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 .footer li a::after,.footer-bottom a::after{content:"";position:absolute;inset:-11px -6px}
 
 
+/* --- touch devices get comfortable hit areas at every width,
+       not just below the mobile breakpoint --- */
+@media (pointer:coarse){
+  .brand,.hero-secondary,.reviews-link,.case-link,.reassure-link{position:relative}
+  .brand::after,.hero-secondary::after,.reviews-link::after,
+  .case-link::after{content:"";position:absolute;inset:-12px -8px}
+  .reassure-link::after{content:"";position:absolute;inset:-8px -8px 0}
+  .nav-burger{width:44px;height:44px;align-items:center;justify-content:center;margin-right:-10px}
+  .feed-nav button{width:44px;height:44px;border-radius:22px}
+  .footer li a::after,.footer-bottom a::after{inset:-13px -8px}
+  .faq-q{padding:18px 0}
+}
+
 /* --- mobile menu --- */
 .mobile-nav{display:none}
 .mobile-nav[hidden]{display:none}
@@ -887,6 +903,80 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
 
 /* ============================================================
+   SCROLL REVEAL
+   A comp is judged as a still; a live page is judged as a scroll.
+   Blocks lift in once, gently, and never move layout.
+   ============================================================ */
+.has-reveal .reveal{opacity:0;transform:translateY(16px);
+  transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
+.has-reveal .reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .has-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}
+}
+
+/* ============================================================
+   CRAFT LAYER
+   Entrance choreography and image treatment — the difference
+   between a page that renders and a page that feels made.
+   ============================================================ */
+
+/* --- media: images settle out of a slight over-scale as they arrive --- */
+.shot-wrap{display:block;overflow:hidden}
+.svc .shot{will-change:transform}
+.has-reveal .svc .shot{transform:scale(1.06);transition:transform 1.15s cubic-bezier(.22,.61,.36,1)}
+.has-reveal .svc.is-in .shot{transform:scale(1)}
+
+.projects-media,.triage-photo,.case-photo{overflow:hidden}
+.has-reveal .projects-media img,
+.has-reveal .triage-photo img,
+.has-reveal .case-photo img{transform:scale(1.07);
+  transition:transform 1.3s cubic-bezier(.22,.61,.36,1)}
+.has-reveal .projects-media.is-in img,
+.has-reveal .triage-photo.is-in img,
+.has-reveal .case-photo.is-in img{transform:scale(1)}
+
+/* --- headings travel a touch further than body copy --- */
+.has-reveal h2.reveal,.has-reveal .h2.reveal{transform:translateY(22px)}
+.has-reveal h2.reveal.is-in,.has-reveal .h2.reveal.is-in{transform:none}
+
+/* --- hero: choreographed on load, not revealed on scroll --- */
+.hero-lead,.hero-actions,.hero-plate,.hero-detail,.hero-detail-outline{will-change:transform,opacity}
+html.hero-ready .hero-copy .kicker,
+html.hero-ready .hero-h1,
+html.hero-ready .hero-lead,
+html.hero-ready .hero-actions{
+  opacity:0;transform:translateY(20px);
+  animation:heroIn .95s cubic-bezier(.22,.61,.36,1) forwards;
+}
+html.hero-ready .hero-copy .kicker{animation-delay:.08s}
+html.hero-ready .hero-h1{animation-delay:.16s}
+html.hero-ready .hero-lead{animation-delay:.26s}
+html.hero-ready .hero-actions{animation-delay:.34s}
+html.hero-ready .hero-plate{clip-path:inset(0 0 100% 0);animation:plateIn 1.15s cubic-bezier(.22,.61,.36,1) .3s forwards}
+html.hero-ready .hero-plate img{transform:scale(1.08);animation:plateImg 1.6s cubic-bezier(.22,.61,.36,1) .3s forwards}
+html.hero-ready .hero-detail,
+html.hero-ready .hero-detail-outline{opacity:0;animation:heroIn .9s cubic-bezier(.22,.61,.36,1) .72s forwards}
+html.motion-done .hero-copy .kicker,html.motion-done .hero-h1,
+html.motion-done .hero-lead,html.motion-done .hero-actions,
+html.motion-done .hero-detail,html.motion-done .hero-detail-outline{opacity:1;transform:none}
+html.motion-done .hero-plate{clip-path:none}
+@keyframes heroIn{to{opacity:1;transform:none}}
+@keyframes plateIn{to{clip-path:inset(0 0 0% 0)}}
+@keyframes plateImg{to{transform:scale(1)}}
+
+@media (prefers-reduced-motion:reduce){
+  html.hero-ready .hero-copy .kicker,html.hero-ready .hero-h1,
+  html.hero-ready .hero-lead,html.hero-ready .hero-actions,
+  html.hero-ready .hero-detail,html.hero-ready .hero-detail-outline{
+    opacity:1!important;transform:none!important;animation:none!important}
+  html.hero-ready .hero-plate{clip-path:none!important;animation:none!important}
+  html.hero-ready .hero-plate img{transform:none!important;animation:none!important}
+  .has-reveal .svc .shot,.has-reveal .projects-media img,
+  .has-reveal .triage-photo img,.has-reveal .case-photo img{
+    transform:none!important;transition:none!important}
+}
+
+/* ============================================================
    RESPONSIVE
    Breakpoints mirror the Figma frames:
      >= 1200   DESKTOP 1440   (pad 64)
@@ -901,7 +991,8 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 @media (max-width:1339px){.faq-divider,.reassure-slate{display:none}}
 
 /* ---------- above the design width: centre the composition ---------- */
-.hero-plate{left:var(--gut);right:var(--gut)}
+/* the hero band reads as an immersive edge, so it bleeds like a background */
+.hero-plate{left:0;right:0}
 .triage-photo,.case-photo,.contact-photo{left:var(--gut)}
 .reviews-plane .photo{left:auto;right:0;width:430px}
 /* the slate band and its ridge line are background treatment for the section,
@@ -1011,7 +1102,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .process-step h3 + p{margin-top:12px;line-height:24px}
 
   /* 09 about — three columns kept */
-  .about{padding:70px 0 104px}
+  .about{padding:70px 0 72px}
   .about h2{font-size:44px;line-height:50px;margin-top:22px}
   .about-cols{grid-template-columns:minmax(0,296px) minmax(0,288px) minmax(0,1fr);
               column-gap:24px;margin-top:12px;padding-top:40px}
@@ -1023,7 +1114,8 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .about-col--three li{font-size:15px;line-height:25px}
 
   /* 10 reassurance */
-  .reassure .wrap{grid-template-columns:minmax(0,602px) minmax(0,1fr);padding-top:150px}
+  .reassure{min-height:0}
+  .reassure .wrap{grid-template-columns:minmax(0,602px) minmax(0,1fr);padding:150px var(--pad) 64px}
   .reassure h2{font-size:42px;line-height:49px;margin-top:20px}
   .reassure .lead{max-width:520px}
   .reassure-actions{padding-top:64px;gap:24px;flex-direction:column;align-items:flex-start}
@@ -1058,7 +1150,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .footer{min-height:0;padding-bottom:44px}
   .footer-cols{grid-template-columns:minmax(0,342px) minmax(0,220px) minmax(0,200px) minmax(0,1fr);row-gap:36px}
   .footer h2{font-size:26px}
-  .footer-bottom{margin-top:86px}
+  .footer-bottom{margin-top:56px}
 }
 
 /* ============================ TABLET 768 ============================= */
@@ -1093,7 +1185,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .score-chip{width:184px;height:auto;min-height:190px;margin-top:0}
   .feed{width:calc(100% + 8px);margin-top:26px}
   .feed-track{gap:20px}
-  .rcard{width:471px;max-width:calc(100vw - 297px);height:294px}
+  .rcard{width:471px;max-width:calc(100vw - 297px)}
   .rcard .quote{margin-top:12px}
   .feed-foot{margin-top:18px}
 
@@ -1215,7 +1307,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .score-chip .score{font-size:48px;line-height:54px}
   .feed{margin-top:30px}
   .feed-track{gap:16px}
-  .rcard{width:316px;max-width:calc(100vw - 44px);height:340px}
+  .rcard{width:316px;max-width:calc(100vw - 44px)}
   .feed-foot,.reviews-link{display:none}
 
   /* 03 services — one column */
@@ -1226,6 +1318,8 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .svc-grid{grid-template-columns:1fr;row-gap:40px;margin-top:44px}
   .svc--a,.svc--b{padding-bottom:0}
   .svc--wide .shot,.svc--a .shot,.svc--b .shot,.svc--c .shot{height:200px}
+  .svc .tlink{display:flex;width:100%}
+  .svc--c > div{display:flex;flex-direction:column}
   .tlink .row{width:100%}
   .tlink .rule{width:100%}
 
@@ -1354,13 +1448,6 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   /* iOS zooms the page when an input is under 16px */
   .field input,.field textarea{font-size:16px}
   .field input::placeholder,.field textarea::placeholder{font-size:16px}
-
-  /* comfortable tap targets */
-  .hero-secondary::after{content:"";position:absolute;inset:-12px -8px}
-  .reviews-link::after,.case-link::after{content:"";position:absolute;inset:-12px -8px}
-  .brand{position:relative}
-  .brand::after{content:"";position:absolute;inset:-12px -8px}
-  .reassure-link::after{content:"";position:absolute;inset:-8px -8px 0}
 
   .tlink .row{min-height:30px;align-items:center}
 
@@ -1544,7 +1631,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
     <div class="svc-grid">
       <article class="svc svc--wide">
-        <img class="shot" src="assets/img/Rectangle.jpg" alt="Weathered slate roof with slipped tiles">
+        <span class="shot-wrap"><img class="shot" src="assets/img/Rectangle.jpg" alt="Weathered slate roof with slipped tiles"></span>
         <h3>Roof repairs</h3>
         <p>For isolated problems such as slipped tiles or slates, leaks and worn junctions where the surrounding roof may still be serviceable.</p>
         <a class="tlink" href="#contact">
@@ -1554,7 +1641,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
       </article>
 
       <article class="svc svc--a">
-        <img class="shot" src="assets/img/Rectangle_2.jpg" alt="House with a newly laid roof">
+        <span class="shot-wrap"><img class="shot" src="assets/img/Rectangle_2.jpg" alt="House with a newly laid roof"></span>
         <h3>Re-roofing</h3>
         <p>For roofs where local repairs may no longer be enough and a wider renewal of the roof covering and associated details is being considered.</p>
         <a class="tlink" href="#contact">
@@ -1564,7 +1651,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
       </article>
 
       <article class="svc svc--b">
-        <img class="shot" src="assets/img/Rectangle_3.jpg" alt="Lead valley between slate roof surfaces">
+        <span class="shot-wrap"><img class="shot" src="assets/img/Rectangle_3.jpg" alt="Lead valley between slate roof surfaces"></span>
         <h3>Leadwork</h3>
         <p>For valleys, roof edges, walls and chimneys where leadwork helps keep water out at the junctions between roof surfaces.</p>
         <a class="tlink" href="#contact">
@@ -1574,7 +1661,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
       </article>
 
       <article class="svc svc--c">
-        <img class="shot" src="assets/img/Rectangle_4.jpg" alt="Clay tiled roof with brick chimney stacks">
+        <span class="shot-wrap"><img class="shot" src="assets/img/Rectangle_4.jpg" alt="Clay tiled roof with brick chimney stacks"></span>
         <div>
           <h3>Chimneys</h3>
           <p>For pointing, weathering and roof junctions around chimney stacks, where defects can affect both the masonry and the roof around it.</p>
@@ -1946,6 +2033,52 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   </div>
 </footer>
 
+<script>
+/* Hero choreography on first paint, with a failsafe so content can never
+   be left invisible if animations do not run for any reason. */
+(function(){
+  var d=document.documentElement;
+  d.classList.add('hero-ready');
+  setTimeout(function(){ d.classList.add('motion-done'); }, 2600);
+})();
+</script>
+
+<script>
+/* Scroll reveal — blocks lift in once as they enter view. */
+(function(){
+  var SEL = [".projects-media",".triage-photo",".case-photo",".kicker", ".h2", ".lead", ".svc", ".process-step", ".about-col", ".projects .facts .row", ".triage-rows .row", ".case-rows .row", ".survey-steps .step", ".survey-paper-wrap", ".triage-card-inner", ".projects-media", ".form-sheet", ".faq-item", ".score-chip", ".footer-cols > div", ".reviews-main h2", ".reviews-main .intro", ".projects h2", ".triage-card h2", ".survey h2", ".case h2", ".case .intro", ".about h2", ".reassure h2", ".reassure .lead", ".faq h2", ".faq-side .lead", ".contact-copy h2", ".contact-copy .lead", ".reassure-actions", ".case-link", ".projects .btn", ".footer h2", ".footer .blurb"];
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('has-reveal');
+  function tag(){
+    var hero = document.querySelector('header.hero');
+    SEL.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        if(hero && hero.contains(el)) return;          // the hero is already in view
+        el.classList.add('reveal');
+      });
+    });
+    var all = [].slice.call(document.querySelectorAll('.reveal'));
+    if(reduce || !('IntersectionObserver' in window)){
+      all.forEach(function(el){ el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el = e.target, sec = el.closest('section,footer,header');
+        var peers = sec ? [].slice.call(sec.querySelectorAll('.reveal')) : [el];
+        var i = Math.max(0, peers.indexOf(el));
+        el.style.transitionDelay = Math.min(i,5)*70 + 'ms';
+        el.classList.add('is-in');
+        io.unobserve(el);
+      });
+    }, {rootMargin:'0px 0px -12% 0px', threshold:0.08});
+    all.forEach(function(el){ io.observe(el); });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tag);
+  else tag();
+})();
+</script>
 <script>
 /* Sticky header: hides on scroll down, returns on scroll up */
 (function(){
