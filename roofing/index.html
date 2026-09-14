@@ -193,11 +193,19 @@ button,input,textarea{font:inherit;color:inherit}
   object-fit:cover;width:100%;height:100%;pointer-events:none;
 }
 .nav{
-  position:relative;z-index:30;
+  position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;
   height:92px;
+  background:var(--paper-hero);
   border-bottom:1px solid rgba(213,208,198,.55);
+  transition:transform .32s cubic-bezier(.4,0,.2,1),box-shadow .28s ease;
+  will-change:transform;
 }
+.nav.is-hidden{transform:translateY(-101%)}
+.nav.is-stuck{box-shadow:0 6px 22px rgba(36,46,50,.07)}
+.hero{padding-top:92px}
+/* anchor targets must clear the fixed header */
+[id]{scroll-margin-top:108px}
 .nav .wrap{display:flex;align-items:center;width:100%}
 .brand{display:flex;align-items:center;gap:12px}
 
@@ -664,13 +672,20 @@ button,input,textarea{font:inherit;color:inherit}
 .faq-side{padding-top:74px;max-width:360px}
 .faq-side .lead{padding-top:39px;border-top:1px solid var(--dark-rule);font-size:18px;line-height:29px;color:var(--dark-muted)}
 .faq-list{margin-top:39px}
-.faq-list a{
-  display:flex;align-items:center;gap:12px;
-  padding:0 0 8px;margin-bottom:30px;
-  border-bottom:1px solid rgba(87,96,101,.45);
-  font-size:16px;line-height:22px;color:var(--white);
+.faq-item{border-bottom:1px solid rgba(87,96,101,.45)}
+.faq-q{
+  display:flex;align-items:flex-start;gap:12px;width:100%;
+  padding:16px 0;background:none;border:0;cursor:pointer;text-align:left;
+  font-family:var(--sans);font-size:16px;line-height:22px;color:var(--white);
 }
-.faq-list a:last-child{margin-bottom:0}
+.faq-q > span:first-child{flex:1}
+.faq-mark{flex:none;font-size:17px;line-height:22px;color:var(--copper-light);
+  transition:transform .28s ease}
+.faq-item.is-open .faq-mark{transform:rotate(90deg)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.faq-item.is-open .faq-a{grid-template-rows:1fr}
+.faq-a-in{overflow:hidden}
+.faq-a p{padding:0 0 20px;max-width:360px;font-size:15px;line-height:26px;color:var(--dark-muted)}
 .faq-divider{
   position:absolute;left:calc(var(--gut) + 96px);
   top:560px;width:1248px;max-width:calc(100% - 192px);height:62px;opacity:.75;
@@ -796,7 +811,6 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
 @media (hover:hover) and (pointer:fine){
   /* --- nav --- */
-  .nav-links a{position:relative;padding:10px 0}
   .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;
     background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
   .nav-links a:hover{color:var(--copper)}
@@ -837,9 +851,8 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .reviews-link:hover,.reviews-plane .view:hover{color:var(--ink)}
 
   /* --- faq + footer links --- */
-  .faq-list a:hover{color:var(--copper-light);border-bottom-color:var(--copper-light)}
-  .faq-list a .arrow{transition:transform .18s ease}
-  .faq-list a:hover .arrow{transform:translateX(4px)}
+  .faq-q:hover{color:var(--copper-light)}
+  .faq-item:not(.is-open) .faq-q:hover .faq-mark{transform:translateX(4px)}
   .footer li a:hover,.footer-bottom a:hover{color:var(--copper-light)}
 
   /* --- form --- */
@@ -849,10 +862,11 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 }
 
 /* --- hit areas: extend invisibly so layout never shifts --- */
-.footer li a,.footer-bottom a,.faq-list a,.nav-links a,
+.nav-links a{padding:10px 0}
+.footer li a,.footer-bottom a,.faq-q,.nav-links a,
 .hero-secondary,.reassure-link,.case-link,.tlink,.reviews-link{position:relative}
 .footer li a::after,.footer-bottom a::after{content:"";position:absolute;inset:-11px -6px}
-.faq-list a::before{content:"";position:absolute;inset:-8px 0 0}
+
 
 /* --- mobile menu --- */
 .mobile-nav{display:none}
@@ -867,7 +881,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
   .btn:hover .arrow,.tlink:hover .arrow,.case-link:hover .arrow,
-  .faq-list a:hover .arrow,.hero-secondary:hover .ico-arrow{transform:none}
+  .hero-secondary:hover .ico-arrow{transform:none}
 }
 
 
@@ -897,7 +911,9 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
   /* 01 hero */
   .hero-grid{grid-template-columns:minmax(0,520px) minmax(0,1fr)}
-  .hero-copy{padding-top:36px;padding-right:32px}
+  .nav{height:86px}
+  .hero{padding-top:86px}
+  .hero-copy{padding-top:42px;padding-right:32px}
   .hero-h1{font-size:56px;line-height:63px;letter-spacing:-2px;margin-top:14px}
   .hero-right{padding-top:84px}
   .hero-lead{width:100%;max-width:390px;font-size:18px;line-height:29px}
@@ -1048,7 +1064,9 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
   /* 01 hero — single column */
   .hero-grid{grid-template-columns:minmax(0,1fr)}
-  .hero-copy{padding-top:20px;padding-right:0}
+  .nav{height:80px}
+  .hero{padding-top:80px}
+  .hero-copy{padding-top:32px;padding-right:0}
   .hero-h1{font-size:50px;line-height:56px;letter-spacing:-1.6px}
   .hero-right{padding-top:30px}
   .hero-lead{max-width:590px}
@@ -1164,7 +1182,9 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .hero-secondary .ico-arrow,.hero-secondary .seam{display:none}
 
   /* 01 hero */
-  .hero-copy{padding-top:26px}
+  .nav{height:72px}
+  .hero{padding-top:72px}
+  .hero-copy{padding-top:46px}
   .hero-h1{font-size:40px;line-height:46px;letter-spacing:-1.2px;margin-top:14px}
   .hero-right{padding-top:32px}
   .hero-lead{font-size:16px;line-height:26px}
@@ -1226,7 +1246,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .triage-note{margin-top:24px}
 
   /* 06 survey */
-  .survey{padding:48px 0 0}
+  .survey{padding:48px 0 64px}
   .survey h2{font-size:30px;line-height:36px;margin-top:18px}
   .survey .lead{margin-top:24px;font-size:15px;line-height:25px}
   .survey-steps{margin-top:38px}
@@ -1290,7 +1310,8 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .faq-side{padding-top:48px;max-width:none}
   .faq-side .lead{padding-top:0;border-top:0;font-size:15px;line-height:26px}
   .faq-list{margin-top:34px}
-  .faq-list a{font-size:15px;margin-bottom:48px}
+  .faq-q{font-size:15px;padding:15px 0}
+  .faq-a p{font-size:14px;line-height:25px;max-width:none}
 
   /* 12 contact — intro sits on the photo, backing sheets kept */
   .contact{min-height:0}
@@ -1334,7 +1355,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .brand{position:relative}
   .brand::after{content:"";position:absolute;inset:-12px -8px}
   .reassure-link::after{content:"";position:absolute;inset:-8px -8px 0}
-  .faq-list a::before{inset:-11px 0 -2px}
+
   .tlink .row{min-height:30px;align-items:center}
 
   /* 13 footer */
@@ -1354,31 +1375,33 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 </head>
 <body>
 
+<!-- ═══════════════ HEADER ═══════════════ -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#main" aria-label="Ridgewell Roofing — home">
+      <svg class="ico ico-logo" viewBox="0 0 28 23" fill="none" aria-hidden="true"><path opacity=".95" d="M1.99932 15.5593C4.53599 15.5593 6.81023 14.4863 9.11947 12.5447C11.0788 10.9097 12.4784 9.27472 14.1578 7.99736C15.8198 9.30026 17.2368 10.9608 19.1961 12.5958C21.5054 14.5119 23.7796 15.5593 26.3163 15.5593" stroke="currentColor" stroke-width="2.999" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".22" d="M2.99899 15.7414C5.79806 15.3838 8.24725 14.1064 10.434 12.1137C11.6586 11.0152 12.7433 9.8656 13.7579 8.99699C14.7726 9.8656 15.8397 10.9897 17.0818 12.1137C19.2686 14.1064 21.7003 15.3838 24.5169 15.7414" stroke="currentColor" stroke-width="1.599" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".48" d="M13.9954 8.48272C14.2578 8.27834 14.4327 8.12506 14.6077 7.99733C14.7826 8.15061 14.9575 8.30389 15.2375 8.53382" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Ridgewell Roofing</span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#faq">FAQs</a>
+    </div>
+    <a class="nav-cta" href="#contact">Send an enquiry <span class="arrow">&rarr;</span></a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <a href="#services">Services</a>
+    <a href="#process">How it works</a>
+    <a href="#faq">FAQs</a>
+    <a href="#contact" class="mobile-nav-cta">Send an enquiry <span class="arrow">&rarr;</span></a>
+  </div>
+</nav>
+
 <!-- ═══════════════ 01 · HERO ═══════════════ -->
 <header class="sec hero">
   <img class="hero-texture" src="assets/img/HERO___Continuous_paper_texture.jpg" alt="">
 
-  <nav class="nav">
-    <div class="wrap">
-      <a class="brand" href="#main" aria-label="Ridgewell Roofing — home">
-        <svg class="ico ico-logo" viewBox="0 0 28 23" fill="none" aria-hidden="true"><path opacity=".95" d="M1.99932 15.5593C4.53599 15.5593 6.81023 14.4863 9.11947 12.5447C11.0788 10.9097 12.4784 9.27472 14.1578 7.99736C15.8198 9.30026 17.2368 10.9608 19.1961 12.5958C21.5054 14.5119 23.7796 15.5593 26.3163 15.5593" stroke="currentColor" stroke-width="2.999" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".22" d="M2.99899 15.7414C5.79806 15.3838 8.24725 14.1064 10.434 12.1137C11.6586 11.0152 12.7433 9.8656 13.7579 8.99699C14.7726 9.8656 15.8397 10.9897 17.0818 12.1137C19.2686 14.1064 21.7003 15.3838 24.5169 15.7414" stroke="currentColor" stroke-width="1.599" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".48" d="M13.9954 8.48272C14.2578 8.27834 14.4327 8.12506 14.6077 7.99733C14.7826 8.15061 14.9575 8.30389 15.2375 8.53382" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Ridgewell Roofing</span>
-      </a>
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#process">How it works</a>
-        <a href="#faq">FAQs</a>
-      </div>
-      <a class="nav-cta" href="#contact">Send an enquiry <span class="arrow">&rarr;</span></a>
-      <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
-    </div>
-    <div class="mobile-nav" id="mobile-nav" hidden>
-      <a href="#services">Services</a>
-      <a href="#process">How it works</a>
-      <a href="#faq">FAQs</a>
-      <a href="#contact" class="mobile-nav-cta">Send an enquiry <span class="arrow">&rarr;</span></a>
-    </div>
-  </nav>
 
   <div class="hero-body">
     <div class="wrap">
@@ -1775,9 +1798,39 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
     <div class="faq-side">
       <p class="lead">If something new is uncovered, it should be explained before any extra work goes ahead. You need to understand what was found, why it changes the agreed work and any effect on cost or timing before deciding how to proceed.</p>
       <div class="faq-list">
-        <a href="#contact">What should a quotation include? <span class="arrow">&rarr;</span></a>
-        <a href="#contact">Can a roof be repaired instead? <span class="arrow">&rarr;</span></a>
-        <a href="#contact">What happens after an inspection? <span class="arrow">&rarr;</span></a>
+        <div class="faq-item is-open">
+          <button class="faq-q" type="button" id="faq-q1" aria-expanded="true" aria-controls="faq-a1">
+            <span>What should a quotation include?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
+            <div class="faq-a-in"><p>The work being carried out, what has been assumed, what is
+            excluded and the cost. If access or materials could change the price, that should be
+            set out before you agree to anything.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+            <span>Can a roof be repaired instead?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2">
+            <div class="faq-a-in"><p>Often, yes. Where the fault is isolated and the surrounding
+            covering is still sound, a local repair is usually the sensible option. Replacement
+            makes more sense when wear is widespread or the same defects keep returning.</p></div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+            <span>What happens after an inspection?</span>
+            <span class="faq-mark" aria-hidden="true">&rarr;</span>
+          </button>
+          <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3">
+            <div class="faq-a-in"><p>You receive a written summary of what was found, photographs
+            where they help, the options that are realistic and a quotation for any proposed work.
+            Nothing proceeds until the scope has been agreed.</p></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1888,6 +1941,47 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 </footer>
 
 <script>
+/* Sticky header: hides on scroll down, returns on scroll up */
+(function(){
+  var nav=document.querySelector('.nav'); if(!nav) return;
+  var last=window.scrollY, ticking=false;
+  function update(){
+    var y=Math.max(0,window.scrollY), h=nav.offsetHeight;
+    nav.classList.toggle('is-stuck', y>4);
+    var menuOpen=document.querySelector('.nav-burger') &&
+                 document.querySelector('.nav-burger').getAttribute('aria-expanded')==='true';
+    if(menuOpen){ nav.classList.remove('is-hidden'); last=y; ticking=false; return; }
+    if(Math.abs(y-last)>6){
+      if(y>last && y>h*1.8) nav.classList.add('is-hidden');
+      else nav.classList.remove('is-hidden');
+      last=y;
+    }
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ ticking=true; window.requestAnimationFrame(update); }
+  },{passive:true});
+  update();
+})();
+
+/* FAQ accordion — one answer open at a time */
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.faq-item'));
+  if(!items.length) return;
+  items.forEach(function(item){
+    var btn=item.querySelector('.faq-q'); if(!btn) return;
+    btn.addEventListener('click',function(){
+      var willOpen=!item.classList.contains('is-open');
+      items.forEach(function(other){
+        other.classList.remove('is-open');
+        var b=other.querySelector('.faq-q');
+        if(b) b.setAttribute('aria-expanded','false');
+      });
+      if(willOpen){ item.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+})();
+
 /* Mobile menu */
 (function(){
   var btn=document.querySelector('.nav-burger'), panel=document.getElementById('mobile-nav');

@@ -149,6 +149,20 @@ the prospect's real figures, or drop in a review-widget embed in place of
 `.feed`.
 
 
+
+## Interactive behaviour
+
+- **Sticky header.** Fixed to the top, hides on scroll down, returns on scroll
+  up, and picks up a shadow once you leave the top of the page. It stays put
+  while the mobile menu is open. The hero reserves the bar's height so the
+  layout at scroll 0 is unchanged from the design.
+- **FAQ accordion.** One answer open at a time — opening another closes the
+  previous; clicking the open one collapses it. Buttons carry
+  `aria-expanded`/`aria-controls`, answers are labelled regions, and the height
+  animates via `grid-template-rows` so it works without a fixed max-height.
+  Answers live in the markup, so edit them like any other copy.
+- **Review carousel.** Swipeable at every size, with arrows on desktop.
+
 ## Accessibility & interaction
 
 - Every interactive element has a hover state and a visible `:focus-visible`
