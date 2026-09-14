@@ -137,6 +137,16 @@ button,input,textarea{font:inherit;color:inherit}
   text-transform:uppercase;
 }
 .kicker img{flex:none}
+
+/* inline SVG details — they take their colour from the tokens above,
+   so changing --copper re-skins every mark, ridge and seam */
+.ico{display:block;flex:none;max-width:100%;color:var(--copper)}
+.ico--ink{color:var(--ink)}
+.ico--warm{color:var(--copper-warm)}
+.ico-logo{width:28px;height:23px}
+.ico-kicker{width:34px;height:14px}
+.ico-index{width:36px;height:12px}
+.ico-arrow{width:26px;height:14px}
 .kicker .rule{flex:none;width:34px;height:1px;background:currentColor}
 .kicker--light{color:var(--copper-light)}
 .kicker--paper{color:var(--paper)}
@@ -190,7 +200,7 @@ button,input,textarea{font:inherit;color:inherit}
 }
 .nav .wrap{display:flex;align-items:center;width:100%}
 .brand{display:flex;align-items:center;gap:12px}
-.brand img{width:28px;height:23px}
+
 .brand span{
   white-space:nowrap;
   font-family:var(--serif);font-weight:500;
@@ -608,7 +618,7 @@ button,input,textarea{font:inherit;color:inherit}
 .reassure-top img{width:100%;height:100%;object-fit:cover}
 .reassure-top .veil{position:absolute;inset:0;background:var(--paper);opacity:.88}
 .reassure-ridge{position:absolute;left:0;right:0;top:102px;height:58px;opacity:.74}
-.reassure-ridge img{width:100%;height:100%;object-fit:fill}
+.reassure-ridge .ico{width:100%;height:100%}
 .reassure .wrap{
   position:relative;z-index:2;padding:168px 96px 0;
   display:grid;grid-template-columns:minmax(0,724px) minmax(0,1fr);
@@ -631,7 +641,7 @@ button,input,textarea{font:inherit;color:inherit}
   left:calc(var(--gut) + 760px);
   width:min(580px,calc(100% - var(--gut) - 860px));height:56px;opacity:.72;overflow:hidden;
 }
-.reassure-slate img{width:100%;height:100%;object-fit:fill}
+.reassure-slate .ico{width:100%;height:100%}
 
 /* ============================================================
    11 — FAQ
@@ -658,7 +668,7 @@ button,input,textarea{font:inherit;color:inherit}
   position:absolute;left:calc(var(--gut) + 96px);
   top:560px;width:1248px;max-width:calc(100% - 192px);height:62px;opacity:.75;
 }
-.faq-divider img{width:100%;height:100%;object-fit:fill}
+.faq-divider .ico{width:100%;height:100%}
 
 /* ============================================================
    12 — CONTACT
@@ -698,9 +708,9 @@ button,input,textarea{font:inherit;color:inherit}
   min-height:714px;padding:20px 42px 42px;
   background:#FEFDFB;border:1px solid rgba(209,201,184,.55);
 }
-.form-back{position:absolute;z-index:1;width:674px;max-width:100%;height:714px}
-.form-back--1{left:58px;top:83px;background:rgba(229,224,212,.55);z-index:2}
-.form-back--2{left:72px;top:97px;background:rgba(214,209,196,.28);z-index:1}
+.form-back{position:absolute;z-index:1;height:714px}
+.form-back--1{left:58px;right:58px;top:83px;background:rgba(229,224,212,.55);z-index:2}
+.form-back--2{left:72px;right:44px;top:97px;background:rgba(214,209,196,.28);z-index:1}
 .form-sheet .kicker{letter-spacing:1.9px}
 .form-sheet h2{
   margin-top:26px;max-width:590px;
@@ -860,10 +870,10 @@ button,input,textarea{font:inherit;color:inherit}
   .projects h2{font-size:44px;line-height:50px}
   .projects .facts .row{grid-template-columns:120px 1fr}
 
-  .reviews-plane{position:relative;right:auto;width:100%;min-height:520px}
-  .reviews-plane .photo{height:340px}
-  .reviews-plane .fade{top:300px}
-  .reviews-plane-inner{position:relative;width:100%;padding:24px 40px 40px}
+  .reviews-plane{position:relative;right:auto;left:auto;top:auto;bottom:auto;width:100%;min-height:0}
+  .reviews-plane .photo{position:relative;left:auto;right:auto;top:auto;height:340px}
+  .reviews-plane .fade{display:none}
+  .reviews-plane-inner{position:relative;right:auto;bottom:auto;width:100%;padding:34px 40px 40px}
   .reviews-main{padding:56px 64px 72px;min-height:0}
   .reviews-head{flex-direction:column;gap:32px}
   .score-chip{width:100%;max-width:320px}
@@ -911,6 +921,7 @@ button,input,textarea{font:inherit;color:inherit}
   .projects .facts .row{grid-template-columns:1fr;row-gap:2px;padding-bottom:18px}
   .projects .facts dt,.projects .facts dd{line-height:24px}
   .projects-media{height:240px;margin-top:40px}
+  .projects .btn{width:auto;max-width:100%;gap:14px}
 
   .triage-photo{height:220px}
   .triage-card{margin-top:-40px;padding-bottom:56px}
@@ -979,12 +990,12 @@ button,input,textarea{font:inherit;color:inherit}
 
 <!-- ═══════════════ 01 · HERO ═══════════════ -->
 <header class="sec hero">
-  <img class="hero-texture" src="assets/img/HERO___Continuous_paper_texture.png" alt="">
+  <img class="hero-texture" src="assets/img/HERO___Continuous_paper_texture.jpg" alt="">
 
   <nav class="nav">
     <div class="wrap">
       <a class="brand" href="#">
-        <img src="assets/img/A___SVG_Logo_ridge.svg" alt="">
+        <svg class="ico ico-logo" viewBox="0 0 28 23" fill="none" aria-hidden="true"><path opacity=".95" d="M1.99932 15.5593C4.53599 15.5593 6.81023 14.4863 9.11947 12.5447C11.0788 10.9097 12.4784 9.27472 14.1578 7.99736C15.8198 9.30026 17.2368 10.9608 19.1961 12.5958C21.5054 14.5119 23.7796 15.5593 26.3163 15.5593" stroke="currentColor" stroke-width="2.999" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".22" d="M2.99899 15.7414C5.79806 15.3838 8.24725 14.1064 10.434 12.1137C11.6586 11.0152 12.7433 9.8656 13.7579 8.99699C14.7726 9.8656 15.8397 10.9897 17.0818 12.1137C19.2686 14.1064 21.7003 15.3838 24.5169 15.7414" stroke="currentColor" stroke-width="1.599" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".48" d="M13.9954 8.48272C14.2578 8.27834 14.4327 8.12506 14.6077 7.99733C14.7826 8.15061 14.9575 8.30389 15.2375 8.53382" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Ridgewell Roofing</span>
       </a>
       <div class="nav-links">
@@ -1002,7 +1013,7 @@ button,input,textarea{font:inherit;color:inherit}
       <div class="hero-grid">
         <div class="hero-copy">
           <p class="kicker">
-            <img src="assets/img/A___SVG_Kicker_mark.svg" alt="">
+            <svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
             Roofing for homes
           </p>
           <h1 class="hero-h1">For the home<br>you care about.</h1>
@@ -1014,9 +1025,9 @@ button,input,textarea{font:inherit;color:inherit}
             <a class="hero-secondary" href="#services">
               <span class="row">
                 <span class="label">See roofing services</span>
-                <img src="assets/img/A___SVG_Secondary_arrow.svg" alt="" style="margin-left:24px">
+                <svg style="margin-left:24px" class="ico ico--ink ico-arrow" viewBox="0 0 26 14" fill="none" aria-hidden="true"><path d="M1.99939 5.99802H21.4929" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.994 0.999695L21.7071 5.66482L17.994 10.3299" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".45" d="M1.99939 11.996H10.3538" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
               </span>
-              <img class="seam" src="assets/img/A___SVG_Secondary_underline_seam.svg" alt="">
+              <svg class="ico ico--ink seam" viewBox="0 0 180 7" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M5.45459 3.74945H77.9546L87.9546 2.00003L97.9546 3.74945H175.455" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.45459 6.00003H55.4546" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
             </a>
           </div>
         </div>
@@ -1024,11 +1035,11 @@ button,input,textarea{font:inherit;color:inherit}
     </div>
 
     <div class="hero-plate">
-      <img src="assets/img/HERO___LOCKED_APPROVED_MAIN_IMAGE.png" alt="Roofers working on a pitched roof">
+      <img src="assets/img/HERO___LOCKED_APPROVED_MAIN_IMAGE.webp" alt="Roofers working on a pitched roof">
     </div>
     <div class="hero-detail-outline"></div>
     <div class="hero-detail">
-      <img src="assets/img/HERO___LOCKED_APPROVED_SECONDARY_DETAIL.png" alt="Roofer walking a ridge line">
+      <img src="assets/img/HERO___LOCKED_APPROVED_SECONDARY_DETAIL.jpg" alt="Roofer walking a ridge line">
     </div>
   </div>
 </header>
@@ -1037,13 +1048,13 @@ button,input,textarea{font:inherit;color:inherit}
 <!-- ═══════════════ 02 · GOOGLE REVIEWS ═══════════════ -->
 <section class="sec reviews" id="reviews">
   <div class="reviews-plane">
-    <div class="photo"><img src="assets/img/CONTEXT_PROPERTY_IMAGE___S02_CONTEXT-PROPERTY_B03_stone-country-house.png" alt="Stone country house"></div>
+    <div class="photo"><img src="assets/img/CONTEXT_PROPERTY_IMAGE___S02_CONTEXT-PROPERTY_B03_stone-country-house.jpg" alt="Stone country house"></div>
     <div class="fade"></div>
     <div class="reviews-plane-inner">
       <p class="kicker"><span class="rule"></span>Google reviews</p>
       <h2>See recent feedback<br>from homeowners.</h2>
       <p class="view">View reviews on Google</p>
-      <img class="ridge" src="assets/img/Ridge_detail.svg" alt="">
+      <svg class="ico ico--warm ridge" viewBox="0 0 300 30" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M0 18H102L120 5L138 18H300" stroke="currentColor" stroke-width="1.2"/></svg>
     </div>
   </div>
 
@@ -1130,7 +1141,7 @@ button,input,textarea{font:inherit;color:inherit}
 
     <div class="svc-grid">
       <article class="svc svc--wide">
-        <img class="shot" src="assets/img/Rectangle.png" alt="Weathered slate roof with slipped tiles">
+        <img class="shot" src="assets/img/Rectangle.jpg" alt="Weathered slate roof with slipped tiles">
         <h3>Roof repairs</h3>
         <p>For isolated problems such as slipped tiles or slates, leaks and worn junctions where the surrounding roof may still be serviceable.</p>
         <a class="tlink" href="#contact">
@@ -1140,7 +1151,7 @@ button,input,textarea{font:inherit;color:inherit}
       </article>
 
       <article class="svc svc--a">
-        <img class="shot" src="assets/img/Rectangle_2.png" alt="House with a newly laid roof">
+        <img class="shot" src="assets/img/Rectangle_2.jpg" alt="House with a newly laid roof">
         <h3>Re-roofing</h3>
         <p>For roofs where local repairs may no longer be enough and a wider renewal of the roof covering and associated details is being considered.</p>
         <a class="tlink" href="#contact">
@@ -1150,7 +1161,7 @@ button,input,textarea{font:inherit;color:inherit}
       </article>
 
       <article class="svc svc--b">
-        <img class="shot" src="assets/img/Rectangle_3.png" alt="Lead valley between slate roof surfaces">
+        <img class="shot" src="assets/img/Rectangle_3.jpg" alt="Lead valley between slate roof surfaces">
         <h3>Leadwork</h3>
         <p>For valleys, roof edges, walls and chimneys where leadwork helps keep water out at the junctions between roof surfaces.</p>
         <a class="tlink" href="#contact">
@@ -1160,7 +1171,7 @@ button,input,textarea{font:inherit;color:inherit}
       </article>
 
       <article class="svc svc--c">
-        <img class="shot" src="assets/img/Rectangle_4.png" alt="Clay tiled roof with brick chimney stacks">
+        <img class="shot" src="assets/img/Rectangle_4.jpg" alt="Clay tiled roof with brick chimney stacks">
         <div>
           <h3>Chimneys</h3>
           <p>For pointing, weathering and roof junctions around chimney stacks, where defects can affect both the masonry and the roof around it.</p>
@@ -1193,9 +1204,9 @@ button,input,textarea{font:inherit;color:inherit}
   </div>
 
   <div class="projects-media">
-    <img src="assets/img/Rectangle_5.png" alt="Gable end with exposed roof timbers">
+    <img src="assets/img/Rectangle_5.jpg" alt="Gable end with exposed roof timbers">
     <div class="projects-inset-frame"></div>
-    <div class="projects-inset"><img src="assets/img/Rectangle_6.png" alt="Scalloped slate roof detail"></div>
+    <div class="projects-inset"><img src="assets/img/Rectangle_6.jpg" alt="Scalloped slate roof detail"></div>
   </div>
 </section>
 
@@ -1203,12 +1214,12 @@ button,input,textarea{font:inherit;color:inherit}
 <!-- ═══════════════ 05 · REPAIR OR REPLACEMENT ═══════════════ -->
 <section class="sec triage">
   <div class="triage-photo">
-    <img src="assets/img/IMAGE___stock-49.png" alt="Brick house with chimney">
+    <img src="assets/img/IMAGE___stock-49.jpg" alt="Brick house with chimney">
     <span class="wash"></span>
   </div>
   <div class="triage-card">
     <div class="triage-card-inner">
-      <p class="kicker"><img src="assets/img/Index_mark.svg" alt="">Repair or replacement?</p>
+      <p class="kicker"><svg class="ico ico-index" viewBox="0 0 36 12" fill="none" aria-hidden="true"><path d="M1.28577 2.66699V9.33366M5.78577 6.00033H34.7143M5.78577 8.00033H13.5001" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Repair or replacement?</p>
       <h2>Not every roof problem needs the same answer.</h2>
       <dl class="triage-rows">
         <div class="row"><dt>Repair</dt><dd>A local repair may be enough when the problem is isolated and the surrounding roof is still in reasonable condition.</dd></div>
@@ -1226,7 +1237,7 @@ button,input,textarea{font:inherit;color:inherit}
 <section class="sec survey" id="survey">
   <div class="wrap">
     <div>
-      <p class="kicker"><img src="assets/img/Kicker_mark.svg" alt="">What an inspection should give you</p>
+      <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>What an inspection should give you</p>
       <h2>Know what was found<br>before work begins.</h2>
       <p class="lead">An inspection should leave you with more than a verbal opinion. You need to know what was found, where the issue is, which options are realistic and what any proposed work includes before you decide.</p>
 
@@ -1240,8 +1251,8 @@ button,input,textarea{font:inherit;color:inherit}
     <div class="survey-paper-wrap">
       <div class="survey-paper-back"></div>
       <div class="survey-paper">
-        <img class="corner" src="assets/img/Corner.svg" alt="">
-        <p class="kicker"><img src="assets/img/Kicker_mark_2.svg" alt="">What your quote should explain</p>
+        <svg class="ico corner" viewBox="0 0 74 74" fill="none" aria-hidden="true"><g opacity=".65"><path d="M9.96155 62.6153V12.8076H59.7692" stroke="currentColor" stroke-width="1.3"/><path opacity=".22" d="M15.6538 62.6154V18.5H65.4615" stroke="currentColor" stroke-width=".8"/></g></svg>
+        <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>What your quote should explain</p>
         <h3>A clear written summary.</h3>
         <dl class="survey-rows">
           <div class="row"><dt>Finding</dt><dd>What was found and where</dd></div>
@@ -1260,11 +1271,11 @@ button,input,textarea{font:inherit;color:inherit}
 <section class="sec case">
   <span class="seam seam-copper"></span>
   <div class="case-photo">
-    <img src="assets/img/Project_image.png" alt="Stone cottage with a steep slate roof">
+    <img src="assets/img/Project_image.jpg" alt="Stone cottage with a steep slate roof">
     <span class="shade"></span>
   </div>
   <div class="case-body">
-    <p class="kicker"><img src="assets/img/Kicker_mark_3.svg" alt="">A simple repair example</p>
+    <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>A simple repair example</p>
     <h2>When a repair is enough.</h2>
     <p class="intro">If an inspection finds an isolated fault and the surrounding roof is still serviceable, the proposed work can stay focused on the affected area rather than widening the job unnecessarily.</p>
     <dl class="case-rows">
@@ -1320,7 +1331,7 @@ button,input,textarea{font:inherit;color:inherit}
 <section class="sec about">
   <span class="seam seam-copper-faint"></span>
   <div class="wrap">
-    <p class="kicker"><img src="assets/img/Index_mark_2.svg" alt="">What you can expect</p>
+    <p class="kicker"><svg class="ico ico-index" viewBox="0 0 36 12" fill="none" aria-hidden="true"><path d="M1.28577 2.66699V9.33366M5.78577 6.00033H34.7143M5.78577 8.00033H13.5001" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>What you can expect</p>
     <h2>Know what to expect at every stage.</h2>
 
     <div class="about-cols">
@@ -1331,7 +1342,7 @@ button,input,textarea{font:inherit;color:inherit}
       </article>
 
       <article class="about-col about-col--two">
-        <img src="assets/img/IMAGE___stock-37.png" alt="Roofer laying tiles behind scaffolding">
+        <img src="assets/img/IMAGE___stock-37.jpg" alt="Roofer laying tiles behind scaffolding">
         <span class="tag">02 / During the work</span>
         <p class="about-caption">Updates if something changes</p>
       </article>
@@ -1356,15 +1367,15 @@ button,input,textarea{font:inherit;color:inherit}
 <section class="sec reassure">
   <span class="seam seam-copper-mid"></span>
   <div class="reassure-top">
-    <img src="assets/img/Material_texture___surface-14.png" alt="">
+    <img src="assets/img/Material_texture___surface-14.jpg" alt="">
     <span class="veil"></span>
   </div>
-  <div class="reassure-ridge"><img src="assets/img/Long_ridge.svg" alt=""></div>
-  <div class="reassure-slate"><img src="assets/img/Slate_course.svg" alt=""></div>
+  <div class="reassure-ridge"><svg class="ico" viewBox="0 0 1440 58" fill="none" preserveAspectRatio="none" aria-hidden="true"><g opacity=".74"><path opacity=".58" d="M0 33.9517H495L558 16.9761L621 33.9517H1440" stroke="currentColor" stroke-width="1.3"/><path opacity=".19" d="M0 41.0249H495L558 24.0493L621 41.0249H1440" stroke="currentColor" stroke-width=".8"/></g></svg></div>
+  <div class="reassure-slate"><svg class="ico" viewBox="0 0 580 56" fill="none" preserveAspectRatio="none" aria-hidden="true"><g opacity=".72"><g opacity=".22"><path d="M0 12.3208H580M0 28.0008H580M0 43.6808H580" stroke="currentColor"/><path d="M58 12.3208V28.0008M181.25 12.3208V28.0008M304.5 12.3208V28.0008M427.75 12.3208V28.0008M119.625 28.0008V43.6808M242.875 28.0008V43.6808M366.125 28.0008V43.6808M489.375 28.0008V43.6808" stroke="currentColor"/></g></g></svg></div>
 
   <div class="wrap">
     <div>
-      <p class="kicker"><img src="assets/img/Kicker_mark_4.svg" alt="">Before you decide</p>
+      <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Before you decide</p>
       <h2>Still have a practical question?</h2>
       <p class="lead">If you are unsure about timing, access, the quotation or what happens next, ask before you commit. It is better to clear up a question now than make assumptions later.</p>
     </div>
@@ -1384,7 +1395,7 @@ button,input,textarea{font:inherit;color:inherit}
   <span class="seam seam-copper"></span>
   <div class="wrap">
     <div>
-      <p class="kicker"><img src="assets/img/Kicker_mark_5.svg" alt="">Practical questions</p>
+      <p class="kicker"><svg class="ico ico-kicker" viewBox="0 0 34 14" fill="none" aria-hidden="true"><path d="M1.2142 3.11182V10.8896" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M5.4642 7.00098H32.7856" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path opacity=".28" d="M5.4642 9.33398H12.7499" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Practical questions</p>
       <h2>&ldquo;What happens if more work is found?&rdquo;</h2>
     </div>
     <div class="faq-side">
@@ -1396,7 +1407,7 @@ button,input,textarea{font:inherit;color:inherit}
       </div>
     </div>
   </div>
-  <div class="faq-divider"><img src="assets/img/Roofline_divider.svg" alt=""></div>
+  <div class="faq-divider"><svg class="ico" viewBox="0 0 1248 62" fill="none" preserveAspectRatio="none" aria-hidden="true"><g opacity=".75"><path opacity=".58" d="M70.2 31H487.5H624" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".94" d="M624 30.9998L669.24 27.5898L714.48 30.9998H1177.8" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".22" d="M592.8 32.2402H644.28" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path opacity=".22" d="M734.76 32.2402H786.24" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div>
 </section>
 
 
@@ -1404,14 +1415,14 @@ button,input,textarea{font:inherit;color:inherit}
 <section class="sec contact" id="contact">
   <span class="seam seam-act"></span>
   <div class="contact-photo">
-    <img src="assets/img/IMAGE___photo-07.png" alt="Timber and slate gable with apex glazing">
+    <img src="assets/img/IMAGE___photo-07.webp" alt="Timber and slate gable with apex glazing">
     <span class="grad"></span>
   </div>
   <div class="contact-panel"></div>
 
   <div class="contact-inner">
     <div class="contact-copy">
-      <p class="kicker"><img src="assets/img/Section_index_mark.svg" alt="">Start with what you can see</p>
+      <p class="kicker"><svg class="ico ico-index" viewBox="0 0 36 12" fill="none" aria-hidden="true"><path d="M1.28577 2.66699V9.33366M5.78577 6.00033H34.7143M5.78577 8.00033H13.5001" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Start with what you can see</p>
       <h2>Tell us what<br>you’ve noticed.</h2>
       <p class="lead">You do not need to diagnose the roof before getting in touch. Tell us what you have noticed, where it is happening and how to reach you. Add a photo if it helps explain the issue.</p>
     </div>
@@ -1421,7 +1432,7 @@ button,input,textarea{font:inherit;color:inherit}
       <div class="form-back form-back--2"></div>
 
       <form class="form-sheet" action="#" method="post">
-        <p class="kicker"><img src="assets/img/Section_index_mark_2.svg" alt="">Enquiry details</p>
+        <p class="kicker"><svg class="ico ico-index" viewBox="0 0 36 12" fill="none" aria-hidden="true"><path d="M1.28577 2.66699V9.33366M5.78577 6.00033H34.7143M5.78577 8.00033H13.5001" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>Enquiry details</p>
         <h2>A few details are<br>enough to start.</h2>
 
         <div class="form-grid">
@@ -1457,7 +1468,7 @@ button,input,textarea{font:inherit;color:inherit}
 <!-- ═══════════════ 13 · FOOTER ═══════════════ -->
 <footer class="sec footer">
   <span class="footer-seam"></span>
-  <img class="footer-ridge" src="assets/img/FOOTER___Ridge_detail.svg" alt="">
+  <svg class="ico footer-ridge" viewBox="0 0 180 18" fill="none" aria-hidden="true"><path d="M0 12H72L90 4L108 12H180" stroke="currentColor" stroke-width="1.4"/></svg>
   <div class="wrap">
     <div class="footer-cols">
       <div>

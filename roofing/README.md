@@ -6,15 +6,21 @@ cold-email previews.
 
 ```
 roofing/
-├── index.html              ← the whole site (one file: markup + CSS + 30-line JS)
+├── ridgewell-roofing.html  ← THE DELIVERABLE: one file, everything embedded
+├── index.html              ← same site, with assets as separate files (source)
 └── assets/
-    ├── img/                ← 15 photos + 19 SVG details, exported from Figma
+    ├── img/                ← 15 photos (jpg/webp)
     └── fonts/              ← Playfair Display, Source Sans 3, Inter (woff2)
 ```
 
-Open `index.html` directly in a browser — no build step, no server, and **no
-external requests**. Fonts are self-hosted, so the page renders identically
-offline and on a prospect's machine.
+**`ridgewell-roofing.html` is the one you want.** Photos, fonts and SVG
+details are all embedded in the file, so it is 1.4 MB and needs nothing
+beside it — double-click it anywhere, on any machine, online or off, and the
+whole site loads. It was verified with the network hard-blocked: zero external
+requests, zero console errors, all 15 images and 6 font faces resolved.
+
+`index.html` is the same site with assets as separate files. Edit that one if
+you prefer working with loose images, then regenerate the standalone.
 
 ## Fidelity
 
@@ -45,7 +51,7 @@ with no horizontal overflow at any width.
 
 ## Re-branding for a new prospect
 
-### 1. Colours — one block, top of `index.html`
+### 1. Colours — one block, top of the file
 
 Everything derives from the `:root` custom properties. For most prospects you
 only need the four copper tokens:
@@ -61,6 +67,10 @@ Swap those four for the prospect's brand colour (use a slightly darker shade
 for `--copper` and a lighter tint for `--copper-light`) and the whole site
 re-skins. `--ink`, `--muted`, `--dark` and the `--warm-*` surfaces are the
 neutral palette; leave them unless the brand is genuinely not warm-neutral.
+
+All the SVG details (kicker marks, ridges, roofline dividers, the logo) are
+inline SVG using `currentColor`, so they re-skin from these tokens too — there
+is nothing to edit by hand.
 
 ### 2. Name
 
@@ -79,30 +89,29 @@ the `<br>`.
 
 ### 4. Images
 
-Replace files in `assets/img/` keeping the same filenames, or repoint the
-`src` attributes. Each slot's intended aspect ratio:
+In `ridgewell-roofing.html` each photo is a `data:` URI on its `<img>`. To
+swap one, replace everything between `src="` and the closing quote with your
+own base64 data URI, or edit `index.html` (which uses ordinary file paths) and
+rebuild. Slot sizes:
 
 | File | Slot | Size |
 |---|---|---|
-| `HERO___LOCKED_APPROVED_MAIN_IMAGE.png` | hero band | 1440×552 |
-| `HERO___LOCKED_APPROVED_SECONDARY_DETAIL.png` | hero inset | 196×142 |
-| `CONTEXT_PROPERTY_IMAGE___…stone-country-house.png` | reviews panel | 430×520 |
-| `Rectangle.png` | roof repairs | 570×441 |
-| `Rectangle_2.png` / `_3` / `_4` | re-roofing / leadwork / chimneys | 300×180 / 328×180 / 410×180 |
-| `Rectangle_5.png` / `_6` | projects main / inset | 700×530 / 260×190 |
-| `IMAGE___stock-49.png` | triage | 590×860 |
-| `Project_image.png` | case study | 600×740 |
-| `IMAGE___stock-37.png` | about, middle column | 390×330 |
-| `Material_texture___surface-14.png` | reassurance top band | 1440×126 |
-| `IMAGE___photo-07.png` | contact | 650×880 |
+| `HERO___LOCKED_APPROVED_MAIN_IMAGE.webp` | hero band | 1440×552 |
+| `HERO___LOCKED_APPROVED_SECONDARY_DETAIL.jpg` | hero inset | 196×142 |
+| `CONTEXT_PROPERTY_IMAGE___…stone-country-house.jpg` | reviews panel | 430×520 |
+| `Rectangle.jpg` | roof repairs | 570×441 |
+| `Rectangle_2/3/4.jpg` | re-roofing / leadwork / chimneys | 300×180 / 328×180 / 410×180 |
+| `Rectangle_5/6.jpg` | projects main / inset | 700×530 / 260×190 |
+| `IMAGE___stock-49.jpg` | triage | 590×860 |
+| `Project_image.jpg` | case study | 600×740 |
+| `IMAGE___stock-37.jpg` | about, middle column | 390×330 |
+| `Material_texture___surface-14.jpg` | reassurance top band | 1440×126 |
+| `IMAGE___photo-07.webp` | contact | 650×880 |
 
-The SVGs (kicker marks, ridge details, roofline dividers) hard-code their
-stroke colours, so they do not follow the CSS tokens. If you change the brand
-colour, find-and-replace across `assets/img/*.svg`:
-
-- `#985632` → your `--copper` (36 occurrences, the kicker and ridge marks)
-- `#A55A34` → your `--copper-warm` (1, the reviews ridge detail)
-- `#242E32` → your `--ink` (5, the hero secondary arrow and seam)
+Two images are WebP rather than JPEG because they carry real transparency —
+the hero band has the roofline notch cut out of it, and the contact photo has
+a soft alpha ramp. Keep transparency if you replace them, or the cut-out will
+fill in solid.
 
 ### 5. Reviews
 
@@ -111,9 +120,17 @@ four `.rcard` blocks, the `4.9` score, and the `128 Google reviews` count with
 the prospect's real figures, or drop in a review-widget embed in place of
 `.feed`.
 
+## Rebuilding the standalone
+
+After editing `index.html`, regenerate the single file with
+`python3 build_standalone.py` (needs Pillow only if you also re-optimise
+images).
+
 ## Notes
 
 - The enquiry form posts nowhere (`action="#"`). Point it at a form handler
   before sending a live link.
 - The review carousel is the only JavaScript; the page is fully readable with
   JS disabled.
+- Text covers Latin-1 plus curly quotes and dashes. Characters outside that
+  (Central/Eastern European accents) fall back to a system font.
