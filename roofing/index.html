@@ -794,57 +794,59 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 }
 .field input:focus-visible,.field textarea:focus-visible{outline-offset:-2px}
 
-/* --- nav --- */
-.nav-links a{position:relative;padding:10px 0}
-.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;
-  background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
-.nav-links a:hover{color:var(--copper)}
-.nav-links a:hover::after{transform:scaleX(1)}
-.nav-cta:hover{background:var(--ink);color:var(--white)}
-.brand:hover span{color:var(--copper)}
+@media (hover:hover) and (pointer:fine){
+  /* --- nav --- */
+  .nav-links a{position:relative;padding:10px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;
+    background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+  .nav-links a:hover{color:var(--copper)}
+  .nav-links a:hover::after{transform:scaleX(1)}
+  .nav-cta:hover{background:var(--ink);color:var(--white)}
+  .brand:hover span{color:var(--copper)}
 
-/* --- buttons --- */
-.btn:hover{background:var(--copper);box-shadow:0 3px 0 rgba(0,0,0,.12)}
-.btn:active{transform:translateY(1px)}
-.projects .btn:hover,.form-actions .btn:hover{background:var(--copper-strong)}
-.btn .arrow{transition:transform .18s ease}
-.btn:hover .arrow{transform:translateX(3px)}
+  /* --- buttons --- */
+  .btn:hover{background:var(--copper);box-shadow:0 3px 0 rgba(0,0,0,.12)}
+  .btn:active{transform:translateY(1px)}
+  .projects .btn:hover,.form-actions .btn:hover{background:var(--copper-strong)}
+  .btn .arrow{transition:transform .18s ease}
+  .btn:hover .arrow{transform:translateX(3px)}
 
-/* --- text links with a rule --- */
-.tlink:hover .row{color:var(--copper)}
-.tlink:hover .rule{background:var(--copper)}
-.tlink .arrow{transition:transform .18s ease}
-.tlink:hover .arrow{transform:translateX(4px)}
-.hero-secondary:hover .label{color:var(--copper)}
-.hero-secondary .ico-arrow{transition:transform .18s ease}
-.hero-secondary:hover .ico-arrow{transform:translateX(4px)}
-.reassure-link:hover .row{color:var(--copper)}
-.reassure-link:hover .rule{background:var(--copper);opacity:.6}
-.case-link:hover{color:var(--copper-light)}
-.case-link .arrow{transition:transform .18s ease}
-.case-link:hover .arrow{transform:translateX(4px)}
+  /* --- text links with a rule --- */
+  .tlink:hover .row{color:var(--copper)}
+  .tlink:hover .rule{background:var(--copper)}
+  .tlink .arrow{transition:transform .18s ease}
+  .tlink:hover .arrow{transform:translateX(4px)}
+  .hero-secondary:hover .label{color:var(--copper)}
+  .hero-secondary .ico-arrow{transition:transform .18s ease}
+  .hero-secondary:hover .ico-arrow{transform:translateX(4px)}
+  .reassure-link:hover .row{color:var(--copper)}
+  .reassure-link:hover .rule{background:var(--copper);opacity:.6}
+  .case-link:hover{color:var(--copper-light)}
+  .case-link .arrow{transition:transform .18s ease}
+  .case-link:hover .arrow{transform:translateX(4px)}
 
-/* --- service cards --- */
-.svc .shot{will-change:opacity}
-.svc:hover .shot{opacity:.9}
+  /* --- service cards --- */
+  .svc .shot{will-change:opacity}
+  .svc:hover .shot{opacity:.9}
 
-/* --- reviews --- */
-.feed-nav button:hover{border-color:var(--copper-warm);color:var(--copper-warm)}
-.feed-nav button.on:hover{background:var(--copper);color:var(--white)}
-.feed-nav button:active{transform:scale(.94)}
-.rcard .more{cursor:pointer}
-.reviews-link:hover,.reviews-plane .view:hover{color:var(--ink)}
+  /* --- reviews --- */
+  .feed-nav button:hover{border-color:var(--copper-warm);color:var(--copper-warm)}
+  .feed-nav button.on:hover{background:var(--copper);color:var(--white)}
+  .feed-nav button:active{transform:scale(.94)}
+  .rcard .more{cursor:pointer}
+  .reviews-link:hover,.reviews-plane .view:hover{color:var(--ink)}
 
-/* --- faq + footer links --- */
-.faq-list a:hover{color:var(--copper-light);border-bottom-color:var(--copper-light)}
-.faq-list a .arrow{transition:transform .18s ease}
-.faq-list a:hover .arrow{transform:translateX(4px)}
-.footer li a:hover,.footer-bottom a:hover{color:var(--copper-light)}
+  /* --- faq + footer links --- */
+  .faq-list a:hover{color:var(--copper-light);border-bottom-color:var(--copper-light)}
+  .faq-list a .arrow{transition:transform .18s ease}
+  .faq-list a:hover .arrow{transform:translateX(4px)}
+  .footer li a:hover,.footer-bottom a:hover{color:var(--copper-light)}
 
-/* --- form --- */
-.field input:hover,.field textarea:hover{border-color:#BDB6A7}
-.form-actions .alt{cursor:pointer}
-.form-actions .alt:hover{color:var(--copper)}
+  /* --- form --- */
+  .field input:hover,.field textarea:hover{border-color:#BDB6A7}
+  .form-actions .alt{cursor:pointer}
+  .form-actions .alt:hover{color:var(--copper)}
+}
 
 /* --- hit areas: extend invisibly so layout never shifts --- */
 .footer li a,.footer-bottom a,.faq-list a,.nav-links a,
@@ -868,11 +870,6 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .faq-list a:hover .arrow,.hero-secondary:hover .ico-arrow{transform:none}
 }
 
-/* --- coarse pointers: drop hover, enlarge targets --- */
-@media (hover:none){
-  .nav-links a::after{display:none}
-  .svc:hover .shot{opacity:1}
-}
 
 /* ============================================================
    RESPONSIVE
@@ -926,7 +923,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .feed{margin-top:20px}
 
   /* 03 services — 2 x 2 */
-  .services{padding:72px 0 157px}
+  .services{padding:72px 0 104px}
   .services-head{grid-template-columns:minmax(0,512px) minmax(0,1fr)}
   .services-head h2{margin-top:22px;font-size:44px;line-height:52px}
   .services-head .lead{padding-top:46px;max-width:416px}
@@ -960,7 +957,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .triage-note{margin-top:24px}
 
   /* 06 survey */
-  .survey{padding:56px 0 244px}
+  .survey{padding:56px 0 120px}
   .survey .wrap{grid-template-columns:minmax(0,352px) minmax(0,1fr)}
   .survey h2{font-size:38px;line-height:44px;margin-top:20px}
   .survey .lead{margin-top:26px}
@@ -985,14 +982,14 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .process-head{grid-template-columns:minmax(0,500px) minmax(0,1fr)}
   .process-head h2{font-size:44px;line-height:50px;margin-top:22px}
   .process-head .lead{padding-top:64px;max-width:420px}
-  .process-track{width:auto;grid-template-columns:1fr 1fr;column-gap:72px;row-gap:96px;
+  .process-track{width:auto;grid-template-columns:1fr 1fr;column-gap:72px;row-gap:60px;
                  border-top:0;padding-top:0;margin-top:52px}
   .process-step::before{display:none}
   .process-step h3{margin-top:10px}
   .process-step h3 + p{margin-top:12px;line-height:24px}
 
   /* 09 about — three columns kept */
-  .about{padding:70px 0 178px}
+  .about{padding:70px 0 104px}
   .about h2{font-size:44px;line-height:50px;margin-top:22px}
   .about-cols{grid-template-columns:minmax(0,296px) minmax(0,288px) minmax(0,1fr);
               column-gap:24px;margin-top:12px;padding-top:40px}
@@ -1012,7 +1009,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .reassure-slate{display:none}
 
   /* 11 faq */
-  .faq{min-height:700px}
+  .faq{min-height:0}
   .faq .wrap{grid-template-columns:minmax(0,542px) minmax(0,1fr);padding-top:70px;padding-bottom:120px;min-height:0}
   .faq h2{font-size:44px;line-height:54px;margin-top:30px}
   .faq-side{padding-top:78px;max-width:386px}
@@ -1036,10 +1033,10 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .form-back--2{transform:translate(24px,24px)}
 
   /* 13 footer */
-  .footer{min-height:560px}
+  .footer{min-height:0;padding-bottom:44px}
   .footer-cols{grid-template-columns:minmax(0,342px) minmax(0,220px) minmax(0,200px) minmax(0,1fr);row-gap:36px}
   .footer h2{font-size:26px}
-  .footer-bottom{margin-top:200px}
+  .footer-bottom{margin-top:86px}
 }
 
 /* ============================ TABLET 768 ============================= */
@@ -1078,7 +1075,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
   /* 03 services */
   .svc-grid{column-gap:36px}
-  .services{padding-bottom:82px}
+  .services{padding-bottom:88px}
   .services-head{grid-template-columns:minmax(0,384px) minmax(0,1fr)}
   .services-head h2{font-size:38px;line-height:46px}
   .svc--wide .shot,.svc--a .shot,.svc--b .shot,.svc--c .shot{height:280px}
@@ -1098,9 +1095,9 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
 
   /* 06 survey — single column */
   .survey .wrap{grid-template-columns:minmax(0,1fr);row-gap:48px}
-  .survey{padding-bottom:20px}
+  .survey{padding-bottom:96px}
   .survey-steps{max-width:none}
-  .survey-paper{height:auto;min-height:508px}
+  .survey-paper{height:auto;min-height:0;padding-bottom:34px}
   .survey-rows .row{grid-template-columns:minmax(0,178px) minmax(0,1fr)}
 
   /* 07 case */
@@ -1112,11 +1109,11 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   /* 08 process */
   .process-head{grid-template-columns:minmax(0,411px) minmax(0,1fr)}
   .process-head h2{font-size:38px;line-height:46px}
-  .process-track{column-gap:54px;row-gap:80px}
+  .process-track{column-gap:54px;row-gap:60px}
 
   /* 09 about — wide intro card, then image + dark side by side */
   .about-cols{grid-template-columns:minmax(0,334px) minmax(0,1fr);column-gap:28px;row-gap:30px}
-  .about{padding-bottom:120px}
+  .about{padding-bottom:96px}
   .about h2{font-size:38px;line-height:46px}
   .about-col--one{grid-column:1 / -1;min-height:220px;display:grid;
                   grid-template-columns:minmax(0,332px) minmax(0,1fr);
@@ -1133,7 +1130,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .reassure-actions .btn{width:158px;font-size:15px}
 
   /* 11 faq */
-  .faq .wrap{grid-template-columns:minmax(0,407px) minmax(0,1fr)}
+  .faq .wrap{grid-template-columns:minmax(0,407px) minmax(0,1fr);padding-bottom:80px}
   .faq h2{font-size:38px;line-height:48px}
   .faq-side{max-width:290px;padding-top:78px}
 
@@ -1196,17 +1193,18 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .feed-foot,.reviews-link{display:none}
 
   /* 03 services — one column */
-  .services{padding:48px 0 100px}
+  .services{padding:48px 0 64px}
   .services-head{grid-template-columns:1fr;row-gap:22px}
   .services-head h2{font-size:32px;line-height:38px;letter-spacing:-.8px;margin-top:18px}
   .services-head .lead{padding-top:0;max-width:none;font-size:16px;line-height:26px}
-  .svc-grid{grid-template-columns:1fr;row-gap:44px;margin-top:44px}
+  .svc-grid{grid-template-columns:1fr;row-gap:40px;margin-top:44px}
+  .svc--a,.svc--b{padding-bottom:0}
   .svc--wide .shot,.svc--a .shot,.svc--b .shot,.svc--c .shot{height:200px}
   .tlink .row{width:100%}
   .tlink .rule{width:100%}
 
   /* 04 projects */
-  .projects{padding:48px 0 180px}
+  .projects{padding:48px 0 72px}
   .projects h2{font-size:32px;line-height:38px;max-width:none;margin-top:20px}
   .projects .lead{max-width:none;margin-top:26px;font-size:15px;line-height:26px}
   .projects .facts{margin-top:36px}
@@ -1221,7 +1219,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .triage{min-height:0}
   .triage-photo{position:relative;left:auto;right:auto;width:100%;height:330px}
   .triage-card{padding:0;margin-top:-30px}
-  .triage-card-inner{margin:0 13px 40px;height:auto;padding:44px 22px 40px}
+  .triage-card-inner{margin:0 13px 48px;height:auto;padding:44px 22px 36px}
   .triage-card h2{font-size:30px;line-height:40px;margin-top:20px}
   .triage-rows{margin-top:26px}
   .triage-rows .row{grid-template-columns:1fr;row-gap:8px;min-height:0;padding:18px 0 22px}
@@ -1232,17 +1230,17 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .survey h2{font-size:30px;line-height:36px;margin-top:18px}
   .survey .lead{margin-top:24px;font-size:15px;line-height:25px}
   .survey-steps{margin-top:38px}
-  .survey-paper-wrap{margin-top:36px}
+  .survey-paper-wrap{margin-top:8px}
   .survey-paper{padding:24px 20px 28px;min-height:0}
   .survey-paper .corner{display:none}
   .survey-paper h3{font-size:28px;line-height:34px}
-  .survey-rows .row{grid-template-columns:minmax(0,109px) minmax(0,1fr);min-height:94px}
+  .survey-rows .row{grid-template-columns:minmax(0,109px) minmax(0,1fr);min-height:0;padding:16px 0 18px}
   .survey-rows dd{font-size:14px;line-height:21px}
 
   /* 07 case */
   .case{min-height:0}
   .case-photo{position:relative;left:auto;right:auto;width:100%;height:320px}
-  .case-body{padding:40px 22px 120px;min-height:0}
+  .case-body{padding:40px 22px 72px;min-height:0}
   .case h2{font-size:32px;line-height:41px;margin-top:18px}
   .case .intro{margin-top:26px;max-width:none}
   .case-rows{margin-top:34px}
@@ -1251,11 +1249,11 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .case-link{margin-top:30px;gap:20px}
 
   /* 08 process — number beside the title */
-  .process{padding:48px 0 120px}
-  .process-head{grid-template-columns:1fr;row-gap:52px}
+  .process{padding:48px 0 72px}
+  .process-head{grid-template-columns:1fr;row-gap:30px}
   .process-head h2{font-size:32px;line-height:38px;margin-top:18px}
   .process-head .lead{padding-top:0;max-width:none;font-size:15px;line-height:26px}
-  .process-track{grid-template-columns:1fr;row-gap:86px;margin-top:66px}
+  .process-track{grid-template-columns:1fr;row-gap:46px;margin-top:52px}
   .process-step{display:grid;grid-template-columns:46px minmax(0,1fr)}
   .process-step .num{grid-column:1;grid-row:1;font-size:15px;line-height:26px}
   .process-step h3{grid-column:2;grid-row:1;margin-top:0;font-size:24px;line-height:26px}
@@ -1266,10 +1264,10 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .about h2{font-size:32px;line-height:40px;margin-top:18px}
   .about-cols{grid-template-columns:1fr;row-gap:34px;margin-top:16px;padding-top:34px}
   .about-col{min-height:0;padding:20px}
-  .about-col--one{grid-column:auto;display:block;min-height:250px;padding:20px 17px}
+  .about-col--one{grid-column:auto;display:block;min-height:0;padding:20px 17px 26px}
   .about-col--one h3,.about-col--one p{grid-column:auto;max-width:none}
   .about-col--two{min-height:300px}
-  .about-col--three{min-height:390px}
+  .about-col--three{min-height:0;padding-bottom:28px}
   .about-col h3{font-size:26px;line-height:33px;margin-top:14px}
   .about-col p{margin-top:16px;max-width:none;font-size:14px;line-height:24px}
   .about-col--two .tag{left:17px;top:20px}
@@ -1278,7 +1276,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   /* 10 reassurance */
   .reassure{min-height:0}
   .reassure-top,.reassure-ridge{display:none}
-  .reassure .wrap{grid-template-columns:1fr;padding:58px 22px 36px}
+  .reassure .wrap{grid-template-columns:1fr;padding:58px 22px 56px}
   .reassure h2{font-size:30px;line-height:38px;max-width:none;margin-top:18px}
   .reassure .lead{max-width:none;margin-top:22px;font-size:15px;line-height:24px}
   .reassure-actions{padding-top:34px;gap:26px}
@@ -1286,7 +1284,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .reassure-link .row{gap:16px}
 
   /* 11 faq */
-  .faq{min-height:660px}
+  .faq{min-height:0}
   .faq .wrap{grid-template-columns:1fr;padding:48px 22px 56px;row-gap:0}
   .faq h2{font-size:30px;line-height:38px;max-width:none;margin-top:20px}
   .faq-side{padding-top:48px;max-width:none}
@@ -1303,7 +1301,7 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .contact-copy .kicker{color:var(--paper)}
   .contact-copy h2{color:var(--white);font-size:34px;line-height:42px;margin-top:22px}
   .contact-copy .lead{color:var(--paper);font-size:15px;line-height:25px;margin-top:36px}
-  .contact-form-wrap{padding:28px 22px 120px;z-index:2}
+  .contact-form-wrap{padding:28px 22px 64px;z-index:2}
   .form-sheet{min-height:0;padding:26px 19px 34px}
   .form-sheet h2{font-size:28px;line-height:36px;margin-top:20px}
   .form-grid{grid-template-columns:1fr;row-gap:24px;margin-top:22px}
@@ -1340,12 +1338,12 @@ a,button,input,textarea,.btn,.tlink .rule,.tlink .arrow,.svc .shot,
   .tlink .row{min-height:30px;align-items:center}
 
   /* 13 footer */
-  .footer{padding-top:44px}
+  .footer{padding:44px 0 40px;min-height:0}
   .footer-cols{grid-template-columns:1fr;row-gap:30px}
   .footer h2{font-size:24px;line-height:30px}
   .footer li:first-child{margin-top:18px}
   .footer-seam{left:22px;right:22px}
-  .footer-bottom{margin-top:44px;flex-direction:column;align-items:flex-start;gap:14px}
+  .footer-bottom{margin-top:40px;flex-direction:column;align-items:flex-start;gap:14px}
   .footer-bottom .copy{margin-left:0}
 }
 
