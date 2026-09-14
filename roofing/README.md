@@ -46,8 +46,36 @@ element lands within 3px of its Figma position.
 
 Total page height 9843px vs the Figma's 9840px.
 
-Responsive breakpoints follow the other Figma frames — 1024, 768 and 360 —
-with no horizontal overflow at any width.
+### Layout behaviour
+
+Every **element** — images, cards, text, the form — stays inside a 1440px
+column centred in the viewport. Only **section backgrounds** bleed to the
+screen edges, so on a 1920 monitor you get the exact Figma composition
+centred, framed by that section's own colour, with no lopsided dead space.
+
+### Breakpoints
+
+The responsive layer implements the Figma's own frames rather than improvising:
+
+| Range | Frame | Side padding |
+|---|---|---|
+| >= 1200 | DESKTOP 1440 | 64px |
+| 1024-1199 | TABLET 1024 | 48px |
+| 768-1023 | TABLET 768 | 36px |
+| < 768 | MOBILE 360 | 22px |
+
+Section heights land within ~20px of the corresponding Figma frame at every
+breakpoint. Structural differences the Figma specifies per frame are honoured:
+kicker marks and the hero link arrow drop below 768; the reviews caption panel
+collapses to a photo band on mobile; the process rail becomes two columns on
+tablet and a number-beside-title list on mobile; label/value rows switch
+between side-by-side and stacked; the contact intro stays on the photo at
+every size.
+
+Two deliberate departures from the QA frames, both for usability: the reviews
+strip stays a swipeable carousel at tablet and mobile (the frames draw 2 then
+1 static card, which would drop reviews), and its section takes its natural
+height rather than padding out empty space.
 
 ## Re-branding for a new prospect
 
