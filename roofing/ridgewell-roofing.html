@@ -455,7 +455,7 @@ button,input,textarea{font:inherit;color:inherit}
 }
 .triage-card-inner{
   margin-left:520px;width:780px;max-width:calc(100% - 520px);
-  height:630px;margin-top:116px;margin-bottom:114px;
+  min-height:560px;margin-top:116px;margin-bottom:114px;
   background:var(--white);border:1px solid var(--line-warm);
   padding:48px 52px;
 }
@@ -465,17 +465,20 @@ button,input,textarea{font:inherit;color:inherit}
   font-size:44px;line-height:52px;color:var(--ink);
 }
 .triage-card .kicker{letter-spacing:1.8px}
-.triage-rows{margin-top:12px}
+.triage-rows{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;
+  column-gap:46px;row-gap:0}
 .triage-rows .row{
-  display:grid;grid-template-columns:minmax(0,170px) minmax(0,430px);
-  padding:18px 0 0;min-height:78px;border-top:1px solid var(--line-warm);
+  display:block;padding:24px 0 26px;min-height:0;
+  border-top:1px solid var(--line-warm);
 }
+.triage-rows .row:nth-child(-n+2){padding-top:22px}
 .triage-rows dt{font-weight:600;font-size:13px;line-height:18px;letter-spacing:1.2px;color:var(--copper);text-transform:uppercase}
-.triage-rows dd{margin:0;font-size:16px;line-height:25px;color:var(--muted)}
+.triage-rows dd{margin:9px 0 0;font-size:16px;line-height:25px;color:var(--muted)}
 .triage-note{
-  margin-top:28px;max-width:620px;
-  font-weight:600;font-size:12px;line-height:18px;letter-spacing:1.1px;
-  color:var(--ink);text-transform:uppercase;
+  margin-top:40px;padding-top:26px;max-width:600px;
+  border-top:1px solid var(--line-warm);
+  font-family:var(--serif);font-weight:400;font-size:21px;line-height:31px;
+  letter-spacing:-.2px;color:var(--ink);
 }
 
 /* ============================================================
@@ -491,14 +494,17 @@ button,input,textarea{font:inherit;color:inherit}
 }
 .survey .lead{margin-top:36px;max-width:430px;font-size:16px;line-height:25px}
 .survey-steps{margin-top:49px;max-width:455px}
-.survey-steps .step{padding:20px 0 16px;border-top:1px solid #D9D7CE}
-.survey-steps .step b,.survey-steps .step span{
-  display:block;font-weight:600;font-size:12px;line-height:17px;letter-spacing:1px;
+.survey-steps .step{padding:24px 0 22px;border-top:1px solid #D9D7CE}
+.survey-steps .step b{
+  display:block;font-weight:600;font-size:13px;line-height:18px;
+  letter-spacing:1px;text-transform:uppercase;color:var(--copper);
 }
-.survey-steps .step b{text-transform:uppercase}
-.survey-steps .step--on b,.survey-steps .step--on span{color:var(--copper)}
-.survey-steps .step b,.survey-steps .step span{color:var(--ink)}
-.survey-steps .step--on b,.survey-steps .step--on span{color:var(--copper)}
+.survey-steps .step span{
+  display:block;margin-top:10px;
+  font-weight:400;font-size:16px;line-height:26px;letter-spacing:0;color:var(--muted);
+}
+.survey-steps .step--on b{color:var(--copper)}
+.survey-steps .step--on span{color:var(--ink)}
 
 .survey-paper-wrap{position:relative;margin-top:56px}
 .survey-paper{
@@ -1159,10 +1165,9 @@ html.motion-done .hero-plate{clip-path:none}
   /* 05 triage */
   .triage-photo{right:calc(100% - var(--gut) - 380px);position:absolute;width:auto;height:auto}
   .triage-card{padding:0;margin-top:0}
-  .triage-card-inner{margin:98px 48px 98px 318px;width:auto;max-width:none;height:664px;padding:46px 42px}
+  .triage-card-inner{margin:98px 48px 98px 318px;width:auto;max-width:none;min-height:0;height:auto;padding:46px 42px}
   .triage-card h2{font-size:36px;line-height:46px;margin-top:24px}
-  .triage-rows{margin-top:14px}
-  .triage-rows .row{grid-template-columns:minmax(0,150px) minmax(0,1fr);min-height:82px;row-gap:0}
+  .triage-rows{margin-top:22px;column-gap:34px}
   .triage-note{margin-top:24px}
 
   /* 06 survey */
@@ -1314,9 +1319,9 @@ html.motion-done .hero-plate{clip-path:none}
 
   /* 05 triage */
   .triage-photo{right:calc(100% - var(--gut) - 285px)}
-  .triage-card-inner{margin:98px 35px 98px 239px;padding:46px 31px}
+  .triage-card-inner{margin:98px 35px 98px 239px;padding:46px 31px;min-height:0;height:auto}
   .triage-card h2{font-size:32px;line-height:42px}
-  .triage-rows .row{grid-template-columns:minmax(0,113px) minmax(0,1fr)}
+  .triage-rows{column-gap:26px}
 
   /* 06 survey — single column */
   .survey .wrap{grid-template-columns:minmax(0,1fr);row-gap:48px}
@@ -1452,10 +1457,11 @@ html.motion-done .hero-plate{clip-path:none}
   .triage{min-height:0}
   .triage-photo{position:relative;left:auto;right:auto;width:100%;height:330px}
   .triage-card{padding:0;margin-top:-30px}
-  .triage-card-inner{margin:0 13px 48px;height:auto;padding:44px 22px 36px}
+  .triage-card-inner{margin:0 13px 48px;height:auto;min-height:0;padding:44px 22px 36px}
   .triage-card h2{font-size:30px;line-height:40px;margin-top:20px}
-  .triage-rows{margin-top:26px}
-  .triage-rows .row{grid-template-columns:1fr;row-gap:8px;min-height:0;padding:18px 0 22px}
+  .triage-rows{margin-top:24px;grid-template-columns:1fr;column-gap:0}
+  .triage-rows .row{padding:18px 0 20px}
+  .triage-rows .row:nth-child(-n+2){padding-top:18px}
   .triage-note{margin-top:24px}
 
   /* 06 survey */
