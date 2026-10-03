@@ -597,6 +597,88 @@
     });
   }
 
+
+  /* "Mark your site": click or drag on a photograph to outline an area; survey points drop at the corners,
+     flight lines are drawn across it and a drone flies them. Illustrative only. Tap, click or the button
+     all work, so it needs no mouse. */
+  function initPlan(root) {
+    var NS = 'http://www.w3.org/2000/svg';
+    qsa('[data-plan]', root).forEach(function (frame) {
+      var svg = doc.createElementNS(NS, 'svg'); svg.setAttribute('class', 'plan-svg'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
+      svg.innerHTML = '<rect class="plan-area" rx="0"/><path class="plan-swath" pathLength="1"/><path class="plan-line" pathLength="1"/>' +
+        '<g class="plan-pt"><rect width="9" height="9"/></g><g class="plan-pt"><rect width="9" height="9"/></g><g class="plan-pt"><rect width="9" height="9"/></g><g class="plan-pt"><rect width="9" height="9"/></g>' +
+        '<g class="plan-drone"><path d="M-8 0h16M0 -8v16"/><circle r="3.2"/></g>';
+      frame.appendChild(svg);
+      var btn = doc.createElement('button'); btn.type = 'button'; btn.className = 'plan-btn';
+      btn.innerHTML = '<span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="4.5" width="13" height="11" stroke-dasharray="2.5 2"/><path d="M6 8h8M6 12h8" /></svg></span><span class="plan-lbl">Mark a survey area</span>';
+      frame.appendChild(btn);
+      var live = doc.createElement('span'); live.className = 'sr-only'; live.setAttribute('role', 'status'); live.setAttribute('aria-live', 'polite'); frame.appendChild(live);
+      var area = qs('.plan-area', svg), swath = qs('.plan-swath', svg), line = qs('.plan-line', svg), pts = qsa('.plan-pt', svg), dr = qs('.plan-drone', svg), lbl = qs('.plan-lbl', btn);
+      var has = false, tl = null, drag = null, preset = 0, track = { p: 0 };
+      var PRE = [[0.16, 0.5, 0.34, 0.3], [0.5, 0.56, 0.38, 0.32], [0.3, 0.3, 0.44, 0.26]];
+      function size() { return { w: frame.clientWidth, h: frame.clientHeight }; }
+      function place(x, y, w, h) {
+        var z = size(), pad = 10;
+        w = clamp(w, 64, z.w - pad * 2); h = clamp(h, 52, z.h - pad * 2);
+        x = clamp(x, pad, z.w - w - pad); y = clamp(y, pad, z.h - h - pad);
+        svg.setAttribute('viewBox', '0 0 ' + z.w + ' ' + z.h);
+        area.setAttribute('x', x); area.setAttribute('y', y); area.setAttribute('width', w); area.setAttribute('height', h);
+        [[x, y], [x + w, y], [x, y + h], [x + w, y + h]].forEach(function (c, i) { pts[i].setAttribute('transform', 'translate(' + (c[0] - 4.5) + ',' + (c[1] - 4.5) + ')'); });
+        var gap = clamp(h / 7, 13, 30), n = Math.max(2, Math.round(h / gap)), step = h / n, d = '', k, yy;
+        for (k = 0; k <= n; k++) { yy = y + k * step; d += (k === 0 ? 'M' : 'L') + (k % 2 ? x + w : x) + ' ' + yy + 'L' + (k % 2 ? x : x + w) + ' ' + yy; }
+        line.setAttribute('d', d); swath.setAttribute('d', d); swath.style.strokeWidth = step.toFixed(1);
+        return n + 1;
+      }
+      function fly(n) {
+        if (tl) tl.kill();
+        has = true; frame.classList.add('has-plan'); lbl.textContent = 'Plan another';
+        live.textContent = 'Sample survey planned: ' + n + ' flight lines across the marked area.';
+        var len = line.getTotalLength();
+        if (reduced()) { line.style.strokeDashoffset = 0; swath.style.strokeDashoffset = 0; area.style.opacity = 1; pts.forEach(function (g) { g.style.opacity = 1; }); var e = line.getPointAtLength(len); dr.setAttribute('transform', 'translate(' + e.x + ',' + e.y + ')'); dr.style.opacity = 1; return; }
+        tl = gsap.timeline();
+        tl.set([line, swath], { strokeDashoffset: 1 }).set(dr, { opacity: 0 }).set(pts, { opacity: 0, scale: 0.4, transformOrigin: '50% 50%' }).set(area, { opacity: 0 });
+        tl.to(area, { opacity: 1, duration: 0.3 }).to(pts, { opacity: 1, scale: 1, duration: 0.45, stagger: 0.07, ease: 'back.out(2.2)' }, 0.05);
+        tl.set(dr, { opacity: 1 }, 0.35);
+        track.p = 0;
+        var dur = clamp(len / 330, 1.6, 4.2);
+        tl.to(track, { p: 1, duration: dur, ease: 'none', onUpdate: function () {
+          var q = line.getPointAtLength(track.p * len); dr.setAttribute('transform', 'translate(' + q.x.toFixed(1) + ',' + q.y.toFixed(1) + ')');
+          line.style.strokeDashoffset = (1 - track.p).toFixed(4); swath.style.strokeDashoffset = (1 - track.p).toFixed(4);
+        } }, 0.35);
+        tl.to(dr, { opacity: 0, duration: 0.5 }, '>+0.35');
+      }
+      function make(x, y, w, h) { fly(place(x, y, w, h)); }
+      function sample() {
+        var z = size(), q = PRE[preset++ % PRE.length];
+        make(q[0] * z.w, q[1] * z.h, q[2] * z.w, q[3] * z.h);
+      }
+      cleanups.push(on(btn, 'click', function (e) { e.stopPropagation(); sample(); }));
+      cleanups.push(on(frame, 'pointerdown', function (e) {
+        if (e.target.closest('.plan-btn') || (e.pointerType === 'mouse' && e.button !== 0)) return;
+        var r = frame.getBoundingClientRect(); drag = { x: e.clientX - r.left, y: e.clientY - r.top, moved: false, id: e.pointerType };
+      }));
+      cleanups.push(on(frame, 'pointermove', function (e) {
+        if (!drag || drag.id !== 'mouse') return;
+        var r = frame.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top;
+        if (!drag.moved && Math.abs(cx - drag.x) + Math.abs(cy - drag.y) < 14) return;
+        drag.moved = true; if (tl) tl.kill();
+        place(Math.min(drag.x, cx), Math.min(drag.y, cy), Math.abs(cx - drag.x), Math.abs(cy - drag.y));
+        line.style.strokeDashoffset = 1; swath.style.strokeDashoffset = 1; dr.style.opacity = 0; area.style.opacity = 1; pts.forEach(function (g) { g.style.opacity = 1; g.style.transform = ''; });
+        frame.classList.add('is-drawing');
+      }));
+      function end(e) {
+        if (!drag) return; var d = drag; drag = null; frame.classList.remove('is-drawing');
+        var r = frame.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top;
+        if (d.moved) { var w = Math.abs(cx - d.x), h = Math.abs(cy - d.y); if (w < 64 || h < 52) { make(Math.min(d.x, cx), Math.min(d.y, cy), Math.max(w, 90), Math.max(h, 70)); } else make(Math.min(d.x, cx), Math.min(d.y, cy), w, h); }
+        else { var z = size(); make(cx - z.w * 0.18, cy - z.h * 0.15, z.w * 0.36, z.h * 0.3); }
+      }
+      cleanups.push(on(frame, 'dragstart', function (e) { e.preventDefault(); }));
+      cleanups.push(on(frame, 'pointerup', end));
+      cleanups.push(on(frame, 'pointercancel', function () { drag = null; frame.classList.remove('is-drawing'); }));
+      cleanups.push(function () { if (tl) tl.kill(); svg.remove(); btn.remove(); live.remove(); frame.classList.remove('has-plan', 'is-drawing'); });
+    });
+  }
+
   /* home hero: the photo is a camera window. A focus reticle hunts between points by itself,
      follows the pointer when it is over the frame, and locks when still. Click (or the button) captures.
      A small drone shadows the pointer across the hero, or patrols when idle. */
@@ -802,7 +884,7 @@
 
   function pageInit(root) {
     pauseOffscreen(root);
-    initAccordion(root); initDeck(root); initDraws(root); initTri(root);
+    initAccordion(root); initDeck(root); initDraws(root); initTri(root); initPlan(root);
     if (reduced()) { initFx(root); return; }                 // static scenes only; reveals fall back to CSS
     initHeadings(root); initStatement(root); initCounters(root); initFx(root); initParallaxImages(root);
     initMarquee(root); initFrames(root); initMeshDemo(root); initStory(root); initTimeline(root); initMagnetic(root); initCards(root); initLens(root); initHero(root);

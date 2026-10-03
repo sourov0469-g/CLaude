@@ -33,7 +33,7 @@ export default function page() {
     title: 'Drone services for roofs, sites and projects.',
     lead: 'Five services, one approach: agree what you need to understand, then capture exactly that. Free quotes across Cheshire.',
     actions: btn('/contact/', 'Request a free quote') + btn('#compare', 'Which service do I need?', 'ghost'),
-    media: `<div class="frame bracket frame--43">${img('services-coverage', { eager: true, priority: true, pos: '50% 55%' })}${stock}</div>`
+    media: `<div class="frame bracket frame--43" data-plan data-cursor="Draw">${img('services-coverage', { eager: true, priority: true, pos: '50% 55%' })}${stock}</div>`
   });
 
   const body = `${hero}

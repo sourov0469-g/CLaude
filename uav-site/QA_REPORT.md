@@ -54,3 +54,8 @@ Run against the deploy build on Chromium (headless) at 320 to 1600px, plus touch
 - Layout scan: remaining flags are decorative off-canvas layers. Smallest real text is 12px (story labels, brief meter); the 9px "Area of interest" tag sits inside an aria-hidden scaled SVG.
 
 Not verified: Safari and Firefox (only Chromium was available), real devices.
+
+## Launch review pass
+- Hero: the inset photograph no longer covers the Photo/Model buttons. Added an automated check that the hero controls never overlap or leave the frame at 15 widths from 320 to 1920px (`tools/qa/`); it also caught and fixed a clipped Model button between 1024 and 1399px.
+- New: "Mark a survey area" interaction on the Services hero (mouse drag, click, tap, and a keyboard-reachable button; reduced motion shows the finished plan). Test `t_plan.js` passes at 1440, 820 and 390px.
+- axe-core after the fixes: see final run below.

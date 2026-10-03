@@ -101,3 +101,8 @@ The organising idea that survived: **the survey layers**. An aerial survey turns
 - Responsive image sources (720px and full) on the deployable site. **BUILT**.
 - Heavy canvases pause offscreen and when the tab is hidden; reduced motion gets stills. **BUILT**.
 - Smooth-scroll library disabled on touch (native momentum). **BUILT** (it only wraps wheel input).
+
+## 9. Added after launch review
+- Hero inset photo moved off the control bar (it covered Photo/Model on desktop and tablet) and made non-interactive. **BUILT**.
+- Hero control bar reflows between 1024 and 1399px and on phones so nothing overlaps. **BUILT**.
+- "Mark a survey area" on the Services hero photograph: click, tap or drag outlines an area, survey points drop at the corners, flight lines are drawn and a drone flies them. Keyboard/touch path through a real button. Illustrative only, no numbers beyond the line count it draws. **BUILT**.
