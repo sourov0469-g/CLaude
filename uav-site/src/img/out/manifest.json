@@ -4,175 +4,307 @@
   "w": 1920,
   "h": 1439,
   "bytes": 160488,
-  "alt": "Aerial view of a commercial roof with a gable ridge and roof lights, photographed by drone"
+  "alt": "Aerial view of a commercial roof with a gable ridge and roof lights, photographed by drone",
+  "sm": {
+   "file": "home-hero-main-sm.webp",
+   "w": 640
+  }
+ },
+ "home-hero-main-model": {
+  "file": "home-hero-main-model.webp",
+  "w": 1000,
+  "h": 749,
+  "bytes": 58052,
+  "alt": "",
+  "layer": true
  },
  "home-hero-inset": {
   "file": "home-hero-inset.webp",
   "w": 800,
   "h": 600,
   "bytes": 37778,
-  "alt": ""
+  "alt": "",
+  "sm": {
+   "file": "home-hero-inset-sm.webp",
+   "w": 640
+  }
  },
  "home-svc-roof": {
   "file": "home-svc-roof.webp",
   "w": 1300,
   "h": 975,
   "bytes": 75918,
-  "alt": "Close drone view of a slate roof and lead flashing"
+  "alt": "Close drone view of a slate roof and lead flashing",
+  "sm": {
+   "file": "home-svc-roof-sm.webp",
+   "w": 640
+  }
  },
  "home-svc-rtk": {
   "file": "home-svc-rtk.webp",
   "w": 900,
   "h": 675,
   "bytes": 31918,
-  "alt": "Top-down aerial view of a large flat roof"
+  "alt": "Top-down aerial view of a large flat roof",
+  "sm": {
+   "file": "home-svc-rtk-sm.webp",
+   "w": 640
+  }
  },
  "home-svc-3d": {
   "file": "home-svc-3d.webp",
   "w": 900,
   "h": 675,
   "bytes": 92816,
-  "alt": "Oblique aerial view across tiled rooftops and chimneys in a city"
+  "alt": "Oblique aerial view across tiled rooftops and chimneys in a city",
+  "sm": {
+   "file": "home-svc-3d-sm.webp",
+   "w": 640
+  }
  },
  "home-svc-monitor": {
   "file": "home-svc-monitor.webp",
   "w": 800,
   "h": 450,
   "bytes": 73026,
-  "alt": "Aerial photograph of an active construction site between existing buildings"
+  "alt": "Aerial photograph of an active construction site between existing buildings",
+  "sm": {
+   "file": "home-svc-monitor-sm.webp",
+   "w": 640
+  }
  },
  "home-svc-photo": {
   "file": "home-svc-photo.webp",
   "w": 1100,
   "h": 825,
   "bytes": 63036,
-  "alt": "Aerial photograph of a rocky coastline with a lighthouse"
+  "alt": "Aerial photograph of a rocky coastline with a lighthouse",
+  "sm": {
+   "file": "home-svc-photo-sm.webp",
+   "w": 640
+  }
  },
  "home-case": {
   "file": "home-case.webp",
   "w": 1300,
   "h": 974,
   "bytes": 100816,
-  "alt": "Flat roof with standing water between two lines of roof lights"
+  "alt": "Flat roof with standing water between two lines of roof lights",
+  "sm": {
+   "file": "home-case-sm.webp",
+   "w": 640
+  }
  },
  "services-coverage": {
   "file": "services-coverage.webp",
   "w": 1200,
   "h": 857,
   "bytes": 176328,
-  "alt": "Aerial photograph of farmland, fields and a village"
+  "alt": "Aerial photograph of farmland, fields and a village",
+  "sm": {
+   "file": "services-coverage-sm.webp",
+   "w": 640
+  }
  },
  "roof-hero": {
   "file": "roof-hero.webp",
   "w": 1300,
   "h": 974,
   "bytes": 72004,
-  "alt": "Aerial view of a flat roof edge with open fields beyond"
+  "alt": "Aerial view of a flat roof edge with open fields beyond",
+  "sm": {
+   "file": "roof-hero-sm.webp",
+   "w": 640
+  }
+ },
+ "roof-hero-model": {
+  "file": "roof-hero-model.webp",
+  "w": 1000,
+  "h": 749,
+  "bytes": 62868,
+  "alt": "",
+  "layer": true
  },
  "roof-g-coverings": {
   "file": "roof-g-coverings.webp",
   "w": 1300,
   "h": 974,
   "bytes": 105772,
-  "alt": "Flat roof covering and upstand wall seen from above"
+  "alt": "Flat roof covering and upstand wall seen from above",
+  "sm": {
+   "file": "roof-g-coverings-sm.webp",
+   "w": 640
+  }
  },
  "roof-g-junctions": {
   "file": "roof-g-junctions.webp",
   "w": 1300,
   "h": 974,
   "bytes": 118336,
-  "alt": "Roof upstand meeting a wall with windows and standing water on the flat roof"
+  "alt": "Roof upstand meeting a wall with windows and standing water on the flat roof",
+  "sm": {
+   "file": "roof-g-junctions-sm.webp",
+   "w": 640
+  }
  },
  "roof-g-drainage": {
   "file": "roof-g-drainage.webp",
   "w": 1300,
   "h": 974,
   "bytes": 190928,
-  "alt": "Roof outlet with debris and standing water at a roof corner"
+  "alt": "Roof outlet with debris and standing water at a roof corner",
+  "sm": {
+   "file": "roof-g-drainage-sm.webp",
+   "w": 640
+  }
  },
  "roof-g-hard": {
   "file": "roof-g-hard.webp",
   "w": 1300,
   "h": 974,
   "bytes": 90336,
-  "alt": "Pipework and an outlet at the edge of a flat roof"
+  "alt": "Pipework and an outlet at the edge of a flat roof",
+  "sm": {
+   "file": "roof-g-hard-sm.webp",
+   "w": 640
+  }
  },
  "roof-commercial": {
   "file": "roof-commercial.webp",
   "w": 900,
   "h": 675,
   "bytes": 84710,
-  "alt": "Black and white aerial photograph of a long industrial roof"
+  "alt": "Black and white aerial photograph of a long industrial roof",
+  "sm": {
+   "file": "roof-commercial-sm.webp",
+   "w": 640
+  }
  },
  "roof-residential": {
   "file": "roof-residential.webp",
   "w": 900,
   "h": 506,
   "bytes": 83950,
-  "alt": "Aerial photograph of a row of houses and their pitched roofs"
+  "alt": "Aerial photograph of a row of houses and their pitched roofs",
+  "sm": {
+   "file": "roof-residential-sm.webp",
+   "w": 640
+  }
  },
  "rtk-hero": {
   "file": "rtk-hero.webp",
   "w": 1500,
   "h": 927,
   "bytes": 71398,
-  "alt": "RTK base station on a tripod in open ground"
+  "alt": "RTK base station on a tripod in open ground",
+  "sm": {
+   "file": "rtk-hero-sm.webp",
+   "w": 640
+  }
  },
  "rtk-ortho": {
   "file": "rtk-ortho.webp",
   "w": 1300,
   "h": 732,
   "bytes": 98546,
-  "alt": "Top-down aerial photograph of a large construction site"
+  "alt": "Top-down aerial photograph of a large construction site",
+  "sm": {
+   "file": "rtk-ortho-sm.webp",
+   "w": 640
+  }
+ },
+ "rtk-ortho-ortho": {
+  "file": "rtk-ortho-ortho.webp",
+  "w": 1000,
+  "h": 563,
+  "bytes": 57394,
+  "alt": "",
+  "layer": true
  },
  "3d-model": {
   "file": "3d-model.webp",
   "w": 1100,
   "h": 825,
   "bytes": 121084,
-  "alt": "Top-down aerial view of commercial roofs and streets"
+  "alt": "Top-down aerial view of commercial roofs and streets",
+  "sm": {
+   "file": "3d-model-sm.webp",
+   "w": 640
+  }
+ },
+ "3d-model-model": {
+  "file": "3d-model-model.webp",
+  "w": 1000,
+  "h": 750,
+  "bytes": 53660,
+  "alt": "",
+  "layer": true
  },
  "mon-1": {
   "file": "mon-1.webp",
   "w": 1100,
   "h": 619,
   "bytes": 168388,
-  "alt": "Cleared building plot with excavators and rubble"
+  "alt": "Cleared building plot with excavators and rubble",
+  "sm": {
+   "file": "mon-1-sm.webp",
+   "w": 640
+  }
  },
  "mon-2": {
   "file": "mon-2.webp",
   "w": 1100,
   "h": 619,
   "bytes": 132790,
-  "alt": "Excavated site with a structure rising in the pit and a tower crane"
+  "alt": "Excavated site with a structure rising in the pit and a tower crane",
+  "sm": {
+   "file": "mon-2-sm.webp",
+   "w": 640
+  }
  },
  "mon-3": {
   "file": "mon-3.webp",
   "w": 1044,
   "h": 783,
   "bytes": 159874,
-  "alt": "Construction site with foundations and a first concrete frame"
+  "alt": "Construction site with foundations and a first concrete frame",
+  "sm": {
+   "file": "mon-3-sm.webp",
+   "w": 640
+  }
  },
  "mon-4": {
   "file": "mon-4.webp",
   "w": 1100,
   "h": 825,
   "bytes": 162192,
-  "alt": "Building frame rising on site beside tower cranes"
+  "alt": "Building frame rising on site beside tower cranes",
+  "sm": {
+   "file": "mon-4-sm.webp",
+   "w": 640
+  }
  },
  "mon-5": {
   "file": "mon-5.webp",
   "w": 1100,
   "h": 825,
   "bytes": 102454,
-  "alt": "Completed building with a finished roof seen from above"
+  "alt": "Completed building with a finished roof seen from above",
+  "sm": {
+   "file": "mon-5-sm.webp",
+   "w": 640
+  }
  },
  "photo-hero": {
   "file": "photo-hero.webp",
   "w": 1500,
   "h": 844,
   "bytes": 116490,
-  "alt": "Aerial photograph of a church tower among trees in Cheshire countryside"
+  "alt": "Aerial photograph of a church tower among trees in Cheshire countryside",
+  "sm": {
+   "file": "photo-hero-sm.webp",
+   "w": 640
+  }
  },
  "photo-inset": {
   "file": "photo-inset.webp",
@@ -186,49 +318,77 @@
   "w": 1100,
   "h": 619,
   "bytes": 67556,
-  "alt": "Aerial photograph of an industrial estate beside open fields"
+  "alt": "Aerial photograph of an industrial estate beside open fields",
+  "sm": {
+   "file": "photo-site-sm.webp",
+   "w": 640
+  }
  },
  "photo-comms": {
   "file": "photo-comms.webp",
   "w": 1100,
   "h": 825,
   "bytes": 53204,
-  "alt": "Photograph of a tower crane over a building under construction"
+  "alt": "Photograph of a tower crane over a building under construction",
+  "sm": {
+   "file": "photo-comms-sm.webp",
+   "w": 640
+  }
  },
  "photo-property": {
   "file": "photo-property.webp",
   "w": 1200,
   "h": 899,
   "bytes": 138082,
-  "alt": "Aerial photograph of a house with a tiled roof and gravel drive"
+  "alt": "Aerial photograph of a house with a tiled roof and gravel drive",
+  "sm": {
+   "file": "photo-property-sm.webp",
+   "w": 640
+  }
  },
  "process-hero": {
   "file": "process-hero.webp",
   "w": 1100,
   "h": 1375,
   "bytes": 49976,
-  "alt": "Photograph of a drone hovering above the roof of a brick building"
+  "alt": "Photograph of a drone hovering above the roof of a brick building",
+  "sm": {
+   "file": "process-hero-sm.webp",
+   "w": 640
+  }
  },
  "process-pre": {
   "file": "process-pre.webp",
   "w": 1000,
   "h": 1249,
   "bytes": 20044,
-  "alt": "Photograph of a hand holding a drone controller"
+  "alt": "Photograph of a hand holding a drone controller",
+  "sm": {
+   "file": "process-pre-sm.webp",
+   "w": 640
+  }
  },
  "about-hero": {
   "file": "about-hero.webp",
   "w": 1500,
   "h": 761,
   "bytes": 117580,
-  "alt": "Drone in flight above an industrial estate and town"
+  "alt": "Drone in flight above an industrial estate and town",
+  "sm": {
+   "file": "about-hero-sm.webp",
+   "w": 640
+  }
  },
  "about-sops": {
   "file": "about-sops.webp",
   "w": 1000,
   "h": 1250,
   "bytes": 37464,
-  "alt": "Photograph of a pilot holding a drone controller with a drone in the sky above"
+  "alt": "Photograph of a pilot holding a drone controller with a drone in the sky above",
+  "sm": {
+   "file": "about-sops-sm.webp",
+   "w": 640
+  }
  },
  "about-matrice": {
   "file": "about-matrice.webp",
@@ -242,7 +402,38 @@
   "w": 810,
   "h": 456,
   "bytes": 13758,
-  "alt": "DJI Mavic 4 Pro drone in flight"
+  "alt": "DJI Mavic 4 Pro drone in flight",
+  "sm": {
+   "file": "about-mavic-sm.webp",
+   "w": 640
+  }
+ },
+ "story-site": {
+  "file": "story-site.webp",
+  "w": 1300,
+  "h": 975,
+  "bytes": 160040,
+  "alt": "Aerial view of a campus of buildings, trees and a pond",
+  "sm": {
+   "file": "story-site-sm.webp",
+   "w": 640
+  }
+ },
+ "story-site-model": {
+  "file": "story-site-model.webp",
+  "w": 1000,
+  "h": 750,
+  "bytes": 61412,
+  "alt": "",
+  "layer": true
+ },
+ "story-site-ortho": {
+  "file": "story-site-ortho.webp",
+  "w": 1000,
+  "h": 750,
+  "bytes": 86576,
+  "alt": "",
+  "layer": true
  },
  "_logo": {
   "file": "logo.webp",

@@ -43,6 +43,7 @@
     gsap.ticker.remove(lenisTick); lenis.destroy(); lenis = null; gsap.ticker.lagSmoothing(500, 33);
   }
   /** Menus lock the page; pause smooth scrolling while they do. */
+  M._lenis = function () { return lenis; };   // handle for tests and profiling
   M.hold = function (on_) { if (!lenis) return; if (on_) lenis.stop(); else lenis.start(); };
   M.scrollTo = function (target, immediate) {
     var top = typeof target === 'number' ? target : target.getBoundingClientRect().top + window.scrollY - headH() - 16;
@@ -205,12 +206,13 @@
     var top = doc.createElement('button'); top.type = 'button'; top.className = 'rail-top'; top.setAttribute('aria-label', 'Back to top');
     top.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4"/></svg>';
     body.appendChild(rail); body.appendChild(top);
-    var dr = qs('.rail-drone', rail), yTo = gsap.quickTo(dr, 'y', { duration: 0.5, ease: 'power3.out' }), H = rail.offsetHeight, lastT = 0;
+    var mvT = 0, dr = qs('.rail-drone', rail), yTo = gsap.quickTo(dr, 'y', { duration: 0.5, ease: 'power3.out' }), H = rail.offsetHeight, lastT = 0;
     function measure() { H = rail.offsetHeight; }
     var st = ST.create({
       start: 0, end: 'max', onRefresh: measure,
       onUpdate: function (self) {
         yTo(self.progress * H);
+        rail.classList.add('is-moving'); clearTimeout(mvT); mvT = setTimeout(function () { rail.classList.remove('is-moving'); }, 260);
         var y = window.scrollY, onNow = y > 60; rail.classList.toggle('is-on', onNow); top.classList.toggle('is-on', y > 700);
         var now = performance.now(); if (now - lastT > 120) { lastT = now; var el = doc.elementFromPoint(window.innerWidth - 28, window.innerHeight / 2); var dk = !!(el && el.closest && el.closest(DARK)); rail.classList.toggle('is-dark', dk); top.classList.toggle('is-dark', dk); }
       }
@@ -386,51 +388,80 @@
     });
   }
 
+  /* story: one real photograph of a site. Brief draws the area of interest, capture zooms in and flies a
+     coverage pass, deliver sweeps the same ground into imagery | map | model. Scroll is the only conductor. */
   function initStory(root) {
     var stories = qsa('[data-story]', root); if (!stories.length) return;
     mm = gsap.matchMedia();
-    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', function () {
+    mm.add('(prefers-reduced-motion: no-preference)', function () {
       stories.forEach(function (story) {
         story.classList.add('is-live');
         var track = qs('.story-track', story), steps = qsa('[data-story-step]', story), fill = qs('[data-story-fill]', story);
-        var s1 = qs('.sv-s1', story), s2 = qs('.sv-s2', story), s3 = qs('.sv-s3', story);
-        var pass = qs('.sv-pass', story), dr = qs('.sv-dr', story), len = pass.getTotalLength(), o = { p: 0 };
-        function setH() { story.style.setProperty('--story-h', Math.round(window.innerHeight * 2.5) + 'px'); }
-        function fly() { var pt = pass.getPointAtLength(o.p * len); dr.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')'); }
+        var sp = qs('[data-sp]', story), cam = qs('[data-sp-cam]', sp), rect = qs('.sp-roi rect', sp), handles = qsa('.sp-h', sp), roiLabel = qs('.sp-roi-label', sp);
+        var box = qs('.sp-box', sp), cells = qsa('.sp-grid i', sp), scan = qs('.sp-scan', sp), dr = qs('.sp-drone', sp), ortho = qs('.layer-img--ortho', sp), model = qs('.layer-img--model', sp);
+        var tabs = qsa('.story-tabs span', story), labels = qsa('.sp-labels b', sp), divs = qsa('.sp-div', sp), grid = qs('.sp-grid', sp);
+        var R = { x: 0.30, y: 0.35, w: 0.50, h: 0.50 }, COLS = 6, ROWS = 4;
+        var o = { zoom: 0, fly: 0, sweep: 0 }, camS = 1, camX = 0, camY = 0, lit = -1, dims = { w: 0, h: 0 };
+        function measure() { dims.w = sp.clientWidth; dims.h = sp.clientHeight; }
+        // lawnmower path through the area of interest, in image fractions
+        var xl = R.x + R.w * 0.04, xr = R.x + R.w * 0.96, ys = [0, 1, 2, 3].map(function (i) { return R.y + R.h * (i + 0.5) / ROWS; });
+        var path = [[xl, ys[0]], [xr, ys[0]], [xr, ys[1]], [xl, ys[1]], [xl, ys[2]], [xr, ys[2]], [xr, ys[3]], [xl, ys[3]]], seg = [], total = 0;
+        for (var i = 1; i < path.length; i++) { var d = Math.hypot(path[i][0] - path[i - 1][0], path[i][1] - path[i - 1][1]); seg.push(d); total += d; }
+        function along(t) {
+          var dist = t * total, k = 0;
+          while (k < seg.length - 1 && dist > seg[k]) { dist -= seg[k]; k++; }
+          var f = seg[k] ? clamp(dist / seg[k], 0, 1) : 0, a = path[k], b = path[k + 1];
+          return { x: a[0] + (b[0] - a[0]) * f, y: a[1] + (b[1] - a[1]) * f, ang: Math.atan2(b[1] - a[1], b[0] - a[0]) };
+        }
+        function render() {
+          var W = dims.w, H = dims.h; if (!W) { measure(); W = dims.w; H = dims.h; if (!W) return; }
+          camS = 1 + (1 / R.w - 1) * o.zoom; camX = -R.x * o.zoom * W * camS; camY = -R.y * o.zoom * H * camS;
+          gsap.set(cam, { x: camX, y: camY, scale: camS });
+          var p = along(o.fly);
+          gsap.set(dr, { x: camX + p.x * W * camS, y: camY + p.y * H * camS, rotation: clamp(Math.sin(p.ang) * 14, -14, 14) + (Math.cos(p.ang) < 0 ? -6 : 6) });
+          var n = Math.floor(o.fly * cells.length + 0.5);
+          if (n !== lit) { cells.forEach(function (c, k) { c.classList.toggle('is-lit', k < n); }); lit = n; }
+          var sx = R.x + o.sweep * R.w, b1 = R.x + R.w / 3, b2 = R.x + R.w * 2 / 3;
+          ortho.style.clipPath = sx > b1 ? 'inset(0 ' + (100 - Math.min(sx, b2) * 100).toFixed(2) + '% 0 ' + (b1 * 100).toFixed(2) + '%)' : 'inset(0 100% 0 0)';
+          model.style.clipPath = sx > b2 ? 'inset(0 ' + (100 - sx * 100).toFixed(2) + '% 0 ' + (b2 * 100).toFixed(2) + '%)' : 'inset(0 100% 0 0)';
+          gsap.set(scan, { x: sx * W, opacity: o.sweep > 0.001 && o.sweep < 0.999 ? 1 : 0 });
+        }
+        function setH() { story.style.setProperty('--story-h', Math.round(window.innerHeight * (window.innerWidth < 1024 ? 2.6 : 2.7)) + 'px'); }
         setH();
-        gsap.set([s2, s3], { autoAlpha: 0 });
-        gsap.set(qsa('.sv-handles rect', story), { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' });
-        gsap.set(qsa('.sv-tiles rect', story), { autoAlpha: 0, scale: 0.86, transformOrigin: '50% 50%', transformBox: 'fill-box' });
-        gsap.set(qsa('.sv-chips g', story), { autoAlpha: 0, y: 10 });
-        gsap.set([qs('.sv-qm', story), qs('.sv-q', story)], { autoAlpha: 0 });
-        fly(); steps[0].classList.add('is-active');
+        gsap.set(rect, { strokeDashoffset: 1 }); gsap.set(handles, { scale: 0 }); gsap.set(roiLabel, { autoAlpha: 0 });
+        gsap.set(grid, { autoAlpha: 0 }); gsap.set(dr, { autoAlpha: 0 }); gsap.set(labels, { autoAlpha: 0, y: 8 }); gsap.set(divs, { autoAlpha: 0 });
+        render(); steps[0].classList.add('is-active');
         var tl = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
-            trigger: track, start: function () { return 'top top+=' + (headH() + 28); }, end: 'bottom bottom-=28',
-            scrub: 0.6, invalidateOnRefresh: true, onRefreshInit: setH,
+            trigger: track, start: function () { return 'top top+=' + (headH() + 12); }, end: 'bottom bottom-=12',
+            scrub: 0.6, invalidateOnRefresh: true, onRefreshInit: function () { setH(); lit = -1; },
+            onRefresh: function () { measure(); render(); },
             onUpdate: function (self) {
               var i = self.progress < 0.34 ? 0 : self.progress < 0.67 ? 1 : 2;
               steps.forEach(function (st, k) { st.classList.toggle('is-active', k === i); });
+              tabs.forEach(function (t, k) { t.classList.toggle('is-on', k === i); });
               if (fill) fill.style.transform = 'scaleX(' + self.progress.toFixed(3) + ')';
             }
           }
         });
-        tl.to(qs('.sv-site', story), { strokeDashoffset: 0, duration: 0.5 }, 0)
-          .to(qsa('.sv-handles rect', story), { scale: 1, duration: 0.2, stagger: 0.07 }, 0.3)
-          .to([qs('.sv-q', story), qs('.sv-qm', story)], { autoAlpha: 1, duration: 0.2 }, 0.55)
-          .to([qs('.sv-q', story), qs('.sv-qm', story)], { autoAlpha: 0, duration: 0.2 }, 0.95)
-          .to(qs('.sv-site', story), { fillOpacity: 0.4, duration: 0.1 }, 1)
-          .to(s2, { autoAlpha: 1, duration: 0.15 }, 1)
-          .to(pass, { strokeDashoffset: 0, duration: 0.85 }, 1.05)
-          .to(o, { p: 1, duration: 0.85, onUpdate: fly }, 1.05)
-          .to(s2, { opacity: 0.35, duration: 0.2 }, 2)
-          .to(s3, { autoAlpha: 1, duration: 0.05 }, 2)
-          .to(qsa('.sv-tiles rect', story), { autoAlpha: 1, scale: 1, duration: 0.25, stagger: 0.06 }, 2.05)
-          .to(qsa('.sv-chips g', story), { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.12 }, 2.6)
-          .to({}, { duration: 0.15 }, 3);
+        tl.to(rect, { strokeDashoffset: 0, duration: 0.55 }, 0.05)
+          .to(handles, { scale: 1, duration: 0.2, stagger: 0.06 }, 0.4)
+          .to(roiLabel, { autoAlpha: 1, duration: 0.2 }, 0.7)
+          .to(o, { zoom: 1, duration: 0.5, ease: 'power2.inOut', onUpdate: render }, 1.0)
+          .to(roiLabel, { autoAlpha: 0, duration: 0.15 }, 1.0)
+          .to(grid, { autoAlpha: 1, duration: 0.2 }, 1.4)
+          .to(dr, { autoAlpha: 1, duration: 0.15 }, 1.4)
+          .to(o, { fly: 1, duration: 0.6, onUpdate: render }, 1.45)
+          .to(dr, { autoAlpha: 0, duration: 0.15 }, 2.05)
+          .to(grid, { autoAlpha: 0, duration: 0.25 }, 2.1)
+          .to(rect, { autoAlpha: 0, duration: 0.2 }, 2.1).to(handles, { autoAlpha: 0, duration: 0.2 }, 2.1)
+          .to(o, { sweep: 1, duration: 0.7, onUpdate: render }, 2.15)
+          .to(divs, { autoAlpha: 1, duration: 0.2, stagger: 0.1 }, 2.65)
+          .to(labels, { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.1 }, 2.7)
+          .to({}, { duration: 0.2 }, 2.95);
       });
-      return function () { stories.forEach(function (st) { st.classList.remove('is-live'); st.style.removeProperty('--story-h'); qsa('[data-story-step]', st).forEach(function (x) { x.classList.remove('is-active'); }); }); };
+      return function () { stories.forEach(function (st) { st.classList.remove('is-live'); st.style.removeProperty('--story-h'); qsa('[data-story-step]', st).forEach(function (x) { x.classList.remove('is-active'); }); qsa('.layer-img--ortho,.layer-img--model', st).forEach(function (x) { x.style.clipPath = ''; }); }); };
     });
   }
 
@@ -479,6 +510,10 @@
     qsa('.kicker', root).forEach(function (k) {
       if (k.closest('.m-menu,.mega')) return;
       gsap.fromTo(k, { '--kl': 0 }, { '--kl': 1, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: k, start: 'top 92%', once: true } });
+    });
+    qsa('.fx--topo', root).forEach(function (t) {
+      var paths = qsa('.fx-topo-p', t); if (!paths.length) return;
+      gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.6, ease: 'power2.inOut', stagger: 0.12, scrollTrigger: { trigger: t.parentNode, start: 'top 82%', once: true } });
     });
     qsa('.seam', root).forEach(function (sm) {
       gsap.fromTo(sm, { '--sk': 0 }, { '--sk': 1, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: sm, start: 'top 94%', once: true } });
@@ -538,17 +573,18 @@
   function initLens(root) {
     if (!fine()) return;
     qsa('[data-lens],.frame,.card-media', root).filter(function (el) { return !el.querySelector('.stage,.mesh,input,button,.lens') && !el.closest('.stage,.mesh,.m-menu'); }).forEach(function (el) {
-      var lens = doc.createElement('i'), ring = doc.createElement('i');
+      var layerImg = qs('.layer-img', el), lens = doc.createElement('i'), ring = doc.createElement('i');
       lens.className = 'lens'; ring.className = 'lens-ring'; lens.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
-      el.appendChild(lens); el.appendChild(ring);
+      if (!layerImg) el.appendChild(lens); el.appendChild(ring);
+      var tgt = layerImg || lens;
       var s = { x: 0, y: 0, tx: 0, ty: 0, r: 0, tr: 0, raf: 0 };
-      function radius() { return clamp(el.clientWidth * 0.2, 110, 170); }
+      function radius() { return clamp(el.clientWidth * (layerImg ? 0.24 : 0.2), 110, layerImg ? 200 : 170); }
       function tick() {
         s.raf = 0;
         s.x += (s.tx - s.x) * 0.16; s.y += (s.ty - s.y) * 0.16; s.r += (s.tr - s.r) * 0.14;
-        lens.style.setProperty('--lx', s.x.toFixed(1) + 'px'); lens.style.setProperty('--ly', s.y.toFixed(1) + 'px'); lens.style.setProperty('--lr', s.r.toFixed(1) + 'px');
+        tgt.style.setProperty('--lx', s.x.toFixed(1) + 'px'); tgt.style.setProperty('--ly', s.y.toFixed(1) + 'px'); tgt.style.setProperty('--lr', s.r.toFixed(1) + 'px');
         ring.style.transform = 'translate3d(' + s.x.toFixed(1) + 'px,' + s.y.toFixed(1) + 'px,0) scale(' + (s.r / 100).toFixed(3) + ')';
-        var onNow = s.r > 3; lens.classList.toggle('is-on', onNow); ring.classList.toggle('is-on', onNow);
+        var onNow = s.r > 3; if (!layerImg) lens.classList.toggle('is-on', onNow); ring.classList.toggle('is-on', onNow);
         if (Math.abs(s.tx - s.x) > 0.2 || Math.abs(s.ty - s.y) > 0.2 || Math.abs(s.tr - s.r) > 0.2) s.raf = requestAnimationFrame(tick);
       }
       function at(e) { var r = el.getBoundingClientRect(); s.tx = e.clientX - r.left; s.ty = e.clientY - r.top; }
@@ -557,7 +593,7 @@
         at(e); if (s.r < 1) { s.x = s.tx; s.y = s.ty; } s.tr = radius(); if (!s.raf) s.raf = requestAnimationFrame(tick);
       }, { passive: true }));
       cleanups.push(on(el, 'pointerleave', function () { s.tr = 0; if (!s.raf) s.raf = requestAnimationFrame(tick); }));
-      cleanups.push(function () { if (s.raf) cancelAnimationFrame(s.raf); lens.remove(); ring.remove(); });
+      cleanups.push(function () { if (s.raf) cancelAnimationFrame(s.raf); lens.remove(); ring.remove(); if (layerImg) layerImg.style.removeProperty('--lr'); });
     });
   }
 
@@ -578,11 +614,28 @@
         var fx = gsap.quickTo(focus, 'x', { duration: 0.6, ease: 'power3.out' }), fy = gsap.quickTo(focus, 'y', { duration: 0.6, ease: 'power3.out' });
         var imX = imgW ? gsap.quickTo(imgW, 'x', { duration: 1, ease: 'power3.out' }) : null, imY = imgW ? gsap.quickTo(imgW, 'y', { duration: 1, ease: 'power3.out' }) : null;
         var thX = thumb ? gsap.quickTo(thumb, 'x', { duration: 1.2, ease: 'power3.out' }) : null, thY = thumb ? gsap.quickTo(thumb, 'y', { duration: 1.2, ease: 'power3.out' }) : null;
-        var lock = function (on_) { focus.classList.toggle('is-lock', on_); vf.classList.toggle('is-lock', on_); };
+        var lock = function (on_) { focus.classList.toggle('is-lock', on_); vf.classList.toggle('is-lock', on_); LR.tr = on_ ? 150 : (mode === 'aim' ? 118 : 96); };
         var place = function (x, y) { fx(x); fy(y); };
+        /* survey-layer reveal: the reticle carries a window onto the model render of the same photo */
+        var layer = qs('.layer-img', vf), imgBox = qs('[data-vf-img]', vf), vring = doc.createElement('i'), LR = { r: 0, tr: 100, sw: 0 };
+        vring.className = 'lens-ring vf-ring'; vring.setAttribute('aria-hidden', 'true'); vf.appendChild(vring);
+        LR.hold = 0;
+        var layerTick = function () {
+          if (!layer || !imgBox || !vis) return;
+          var fr = focus.getBoundingClientRect(), ir = imgBox.getBoundingClientRect(), vr = vf.getBoundingClientRect();
+          var cx = fr.left + fr.width / 2, cy = fr.top + fr.height / 2, diag = Math.sqrt(vr.width * vr.width + vr.height * vr.height) * 1.15;
+          LR.r += (LR.tr - LR.r) * 0.1;
+          var r = LR.r + (diag - LR.r) * LR.sw, lx = cx - ir.left, ly = cy - ir.top;
+          if (LR.k && Math.abs(lx - LR.k[0]) < 0.4 && Math.abs(ly - LR.k[1]) < 0.4 && Math.abs(r - LR.k[2]) < 0.4) return;   // nothing moved: no style writes, no repaint
+          LR.k = [lx, ly, r];
+          layer.style.setProperty('--lx', lx.toFixed(1) + 'px'); layer.style.setProperty('--ly', ly.toFixed(1) + 'px'); layer.style.setProperty('--lr', r.toFixed(1) + 'px');
+          vring.style.transform = 'translate3d(' + (cx - vr.left).toFixed(1) + 'px,' + (cy - vr.top).toFixed(1) + 'px,0) scale(' + (Math.min(r, 400) / 100).toFixed(3) + ')';
+          vring.classList.toggle('is-on', LR.sw < 0.5 && r > 3);
+        };
+        if (layer && !reduced()) { gsap.ticker.add(layerTick); cleanups.push(function () { gsap.ticker.remove(layerTick); }); }
         var seek = function () { var s = vsize(), p = POIS[poi++ % POIS.length]; lock(false); place(p[0] * s.w, p[1] * s.h); clearTimeout(lockT); lockT = setTimeout(function () { lock(true); }, 1000); };
         var s0 = vsize(); gsap.set(focus, { x: s0.w * 0.5, y: s0.h * 0.45 });
-        if (reduced()) { gsap.set(focus, { opacity: 1 }); lock(true); }
+        if (reduced()) { gsap.set(focus, { opacity: 1 }); lock(true); if (layer) { vis = true; LR.r = 130; layerTick(); } }
         else {
           gsap.to(focus, { opacity: 1, duration: 0.7, delay: 1.1 });
           gsap.from(qsa('.vf-br', vf), { scale: 0.4, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.5 });
@@ -600,6 +653,7 @@
           gsap.to(shot, { opacity: 0, duration: 0.5, delay: 0.5, onComplete: function () { shot.remove(); } });
           if (flash) gsap.fromTo(flash, { opacity: 0.5 }, { opacity: 0, duration: 0.5, ease: 'power2.out' });
           gsap.fromTo(focus, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: 'power3.out' });
+          if (layer) gsap.timeline().to(LR, { sw: 1, duration: 1, ease: 'power2.in' }).to(LR, { sw: function () { return LR.hold; }, duration: 0.9, ease: 'power2.out' }, '+=0.55');
           if (d) gsap.fromTo(d, { scale: 1.2 }, { scale: 1, duration: 0.55, ease: 'power3.out' });
         };
         if (!reduced() && fine()) {
@@ -619,6 +673,14 @@
         if (btn) cleanups.push(on(btn, 'click', function () {
           var s = vsize(), r = focus.getBoundingClientRect(); capture(r.left + r.width / 2 - s.l, r.top + r.height / 2 - s.t);
         }));
+        qsa('[data-vf-mode]', vf).forEach(function (m) {
+          cleanups.push(on(m, 'click', function () {
+            var model = m.getAttribute('data-vf-mode') === 'model';
+            qsa('[data-vf-mode]', vf).forEach(function (o) { var on_ = o === m; o.classList.toggle('is-on', on_); o.setAttribute('aria-pressed', on_); });
+            LR.hold = model ? 1 : 0;
+            if (reduced()) { LR.sw = LR.hold; vis = true; layerTick(); } else gsap.to(LR, { sw: LR.hold, duration: model ? 1.1 : 0.8, ease: model ? 'power2.in' : 'power2.out', overwrite: 'auto' });
+          }));
+        });
         cleanups.push(function () { clearInterval(hunting); clearTimeout(lockT); });
       }
       ST.create({ trigger: zone, start: 'top bottom', end: 'bottom top', onToggle: function (st) { vis = st.isActive; } });
@@ -646,11 +708,104 @@
     });
   }
 
+  /* phones: services become a swipe deck with a position indicator (native scroll-snap, no JS needed to swipe) */
+  function initDeck(root) {
+    qsa('[data-acc]', root).forEach(function (acc) {
+      var items = qsa('.svc-p', acc), dots = doc.createElement('div'), raf = 0;
+      dots.className = 'svc-dots'; dots.setAttribute('aria-hidden', 'true');
+      dots.innerHTML = items.map(function () { return '<i></i>'; }).join('');
+      acc.parentNode.insertBefore(dots, acc.nextSibling);
+      var ds = qsa('i', dots);
+      function sync() {
+        raf = 0; var mid = acc.scrollLeft + acc.clientWidth / 2, best = 0, bd = 1e9;
+        items.forEach(function (it, k) { var d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = k; } });
+        ds.forEach(function (d, k) { d.classList.toggle('is-on', k === best); });
+      }
+      cleanups.push(on(acc, 'scroll', function () { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true }));
+      sync(); cleanups.push(function () { if (raf) cancelAnimationFrame(raf); dots.remove(); });
+    });
+  }
+
+  /* triangulation field: drifting survey points joined into a mesh; the pointer pulls nearby points and lights their edges */
+  function initTri(root) {
+    qsa('.cta', root).forEach(function (sec) {
+      if (sec._tri) return;
+      var cv = doc.createElement('canvas'); cv.className = 'tri'; cv.setAttribute('aria-hidden', 'true'); sec.insertBefore(cv, sec.firstChild);
+      var c = cv.getContext('2d'); if (!c) { cv.remove(); return; }
+      var dpr = 1, w = 1, h = 1, N = 0, P = [], vis = false, raf = 0, last = 0, mx = -999, my = -999, t = 0, skip = 0;
+      function seed() { N = window.innerWidth < 720 ? 16 : 34; P = []; for (var i = 0; i < N; i++) P.push({ x: Math.random() * w, y: Math.random() * h, ph: Math.random() * 6.28, sp: 0.15 + Math.random() * 0.25, r: 1.2 + Math.random() * 1.6 }); }
+      function fit() { var r = sec.getBoundingClientRect(); w = Math.max(2, r.width); h = Math.max(2, r.height); cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); c.setTransform(dpr, 0, 0, dpr, 0, 0); seed(); draw(0); }
+      function draw(dt) {
+        t += dt; c.clearRect(0, 0, w, h);
+        var D = Math.min(190, w * 0.28);
+        for (var i = 0; i < N; i++) {
+          var p = P[i]; p.x += Math.cos(t * p.sp + p.ph) * 0.18; p.y += Math.sin(t * p.sp * 1.3 + p.ph) * 0.14;
+          var dx = mx - p.x, dy = my - p.y, d2 = dx * dx + dy * dy; if (d2 < 22000) { var f = (1 - d2 / 22000) * 0.5; p.x += dx * f * 0.02; p.y += dy * f * 0.02; }
+          if (p.x < -20) p.x = w + 20; else if (p.x > w + 20) p.x = -20; if (p.y < -20) p.y = h + 20; else if (p.y > h + 20) p.y = -20;
+        }
+        c.lineWidth = 1;
+        for (var a = 0; a < N; a++) for (var b = a + 1; b < N; b++) {
+          var ex = P[a].x - P[b].x, ey = P[a].y - P[b].y, dd = Math.sqrt(ex * ex + ey * ey); if (dd > D) continue;
+          var mxm = (P[a].x + P[b].x) / 2 - mx, mym = (P[a].y + P[b].y) / 2 - my, near = Math.max(0, 1 - Math.sqrt(mxm * mxm + mym * mym) / 170);
+          c.strokeStyle = 'rgba(223,194,164,' + ((1 - dd / D) * (0.2 + near * 0.55)).toFixed(3) + ')'; c.beginPath(); c.moveTo(P[a].x, P[a].y); c.lineTo(P[b].x, P[b].y); c.stroke();
+        }
+        for (var k = 0; k < N; k++) { c.fillStyle = 'rgba(223,194,164,.55)'; c.beginPath(); c.arc(P[k].x, P[k].y, P[k].r, 0, 6.283); c.fill(); }
+      }
+      function loop(ts) { raf = 0; if (!vis || doc.hidden || reduced()) return; if ((skip++ & 1) === 0) { var dt = last ? Math.min((ts - last) / 1000, 1 / 15) : 1 / 30; last = ts; draw(dt); } raf = requestAnimationFrame(loop); }
+      function sync() { if (vis && !doc.hidden && !reduced() && !raf) { last = 0; raf = requestAnimationFrame(loop); } }
+      var ro = 'ResizeObserver' in window ? new ResizeObserver(fit) : null; if (ro) ro.observe(sec); else fit();
+      var io = new IntersectionObserver(function (en) { vis = en[0].isIntersecting; if (vis) sync(); }); io.observe(sec);
+      var pm = function (e) { var r = sec.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; }, pl = function () { mx = my = -999; };
+      sec.addEventListener('pointermove', pm, { passive: true }); sec.addEventListener('pointerleave', pl);
+      var vc = function () { sync(); }; doc.addEventListener('visibilitychange', vc);
+      sec._tri = true;
+      cleanups.push(function () { if (raf) cancelAnimationFrame(raf); if (ro) ro.disconnect(); io.disconnect(); sec.removeEventListener('pointermove', pm); sec.removeEventListener('pointerleave', pl); doc.removeEventListener('visibilitychange', vc); cv.remove(); sec._tri = false; });
+    });
+  }
+
+  /* the comparison slider demonstrates itself once when it arrives, then belongs to the visitor */
+  function initMeshDemo(root) {
+    if (reduced()) return;
+    qsa('[data-mesh]', root).forEach(function (m) {
+      var r = qs('input[type="range"]', m); if (!r) return;
+      var o = { v: 50 }, tl, stop = false;
+      function put() { r.value = Math.round(o.v); r.dispatchEvent(new Event('input')); }
+      function halt(e) { if (e.isTrusted && tl) { stop = true; tl.kill(); } }
+      cleanups.push(on(m, 'pointerdown', halt), on(r, 'keydown', halt));
+      ST.create({ trigger: m, start: 'top 72%', once: true, onEnter: function () {
+        if (stop) return;
+        tl = gsap.timeline({ delay: 0.3 }).to(o, { v: 96, duration: 1.1, ease: 'power2.inOut', onUpdate: put }).to(o, { v: 6, duration: 1.7, ease: 'power2.inOut', onUpdate: put }).to(o, { v: 50, duration: 1, ease: 'power2.inOut', onUpdate: put });
+      } });
+    });
+  }
+
+  /* photographs below the fold open with a wipe and settle from a slight zoom */
+  function initFrames(root) {
+    if (reduced()) return;
+    qsa('.frame', root).forEach(function (f) {
+      if (f.closest('.stage,.mesh,.m-menu,.viewer') || f.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+      var img = qs('img', f);
+      gsap.fromTo(f, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 1.15, ease: 'power4.out', clearProps: 'clipPath', scrollTrigger: { trigger: f, start: 'top 86%', once: true } });
+      if (img) gsap.fromTo(img, { scale: 1.16 }, { scale: 1, duration: 1.5, ease: 'power3.out', scrollTrigger: { trigger: f, start: 'top 86%', once: true } });
+    });
+  }
+
+  /* continuous SVG animations (rotor blades, search patterns) only run while their section is on screen */
+  function pauseOffscreen(root) {
+    if (!('IntersectionObserver' in window)) return;
+    var els = qsa('.hero,.tl,.story,.nf,.brief,.sec--exp', root);
+    if (!els.length) return;
+    var io = new IntersectionObserver(function (en) { en.forEach(function (e) { e.target.classList.toggle('is-off', !e.isIntersecting); }); });
+    els.forEach(function (el) { io.observe(el); });
+    cleanups.push(function () { io.disconnect(); });
+  }
+
   function pageInit(root) {
-    initAccordion(root); initDraws(root);
+    pauseOffscreen(root);
+    initAccordion(root); initDeck(root); initDraws(root); initTri(root);
     if (reduced()) { initFx(root); return; }                 // static scenes only; reveals fall back to CSS
     initHeadings(root); initStatement(root); initCounters(root); initFx(root); initParallaxImages(root);
-    initMarquee(root); initStory(root); initTimeline(root); initMagnetic(root); initCards(root); initLens(root); initHero(root);
+    initMarquee(root); initFrames(root); initMeshDemo(root); initStory(root); initTimeline(root); initMagnetic(root); initCards(root); initLens(root); initHero(root);
   }
 
   function kill() {
@@ -674,16 +829,23 @@
   };
   M.kill = kill;
 
-  /* route change curtain (single-file edition) */
-  var curtain = null;
+  /* route change (single-file edition): a camera iris closes on the point you pressed, the page swaps, it opens again */
+  var iris = null, lastPt = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  doc.addEventListener('pointerdown', function (e) { lastPt = { x: e.clientX, y: e.clientY }; }, true);
+  doc.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var t = doc.activeElement; if (t && t.getBoundingClientRect) { var r = t.getBoundingClientRect(); lastPt = { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
+  }, true);
   M.leave = function (cb) {
     if (reduced()) { cb(); return; }
-    if (!curtain) { curtain = doc.createElement('div'); curtain.className = 'curtain'; curtain.setAttribute('aria-hidden', 'true'); body.appendChild(curtain); }
-    gsap.killTweensOf(curtain);
-    gsap.set(curtain, { transformOrigin: 'bottom' });
-    gsap.to(curtain, { scaleY: 1, duration: 0.32, ease: 'power3.in', onComplete: function () {
-      cb(); curtain.classList.add('is-up'); gsap.set(curtain, { transformOrigin: 'top' });
-      gsap.to(curtain, { scaleY: 0, duration: 0.55, delay: 0.14, ease: 'power3.out', onComplete: function () { curtain.classList.remove('is-up'); } });
+    if (!iris) { iris = doc.createElement('div'); iris.className = 'iris'; iris.setAttribute('aria-hidden', 'true'); body.appendChild(iris); }
+    var diag = Math.sqrt(window.innerWidth * window.innerWidth + window.innerHeight * window.innerHeight) * 1.05, o = { r: 0 };
+    function paint() { iris.style.setProperty('--r', o.r.toFixed(1) + 'px'); }
+    iris.style.setProperty('--cx', lastPt.x + 'px'); iris.style.setProperty('--cy', lastPt.y + 'px');
+    gsap.killTweensOf(o); iris.className = 'iris is-closing'; paint();
+    gsap.to(o, { r: diag, duration: 0.5, ease: 'power3.in', onUpdate: paint, onComplete: function () {
+      cb(); iris.className = 'iris is-opening'; o.r = 0; paint();
+      gsap.to(o, { r: diag, duration: 0.7, delay: 0.08, ease: 'power3.out', onUpdate: paint, onComplete: function () { iris.className = 'iris'; } });
     } });
   };
 

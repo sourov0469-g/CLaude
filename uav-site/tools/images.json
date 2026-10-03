@@ -3,7 +3,10 @@
     "src": "client/c01-roof-hero.jpg",
     "w": 1920,
     "alt": "Aerial view of a commercial roof with a gable ridge and roof lights, photographed by drone",
-    "q": 72
+    "q": 72,
+    "layers": [
+      "model"
+    ]
   },
   "home-hero-inset": {
     "src": "client/c02-roof-edge.jpg",
@@ -56,7 +59,10 @@
     "src": "client/c06-roof-fields.jpg",
     "w": 1300,
     "alt": "Aerial view of a flat roof edge with open fields beyond",
-    "q": 70
+    "q": 70,
+    "layers": [
+      "model"
+    ]
   },
   "roof-g-coverings": {
     "src": "client/c05-roof-upstand.jpg",
@@ -105,13 +111,19 @@
     "src": "stock/px-25461690.jpg",
     "w": 1300,
     "alt": "Top-down aerial photograph of a large construction site",
-    "q": 68
+    "q": 68,
+    "layers": [
+      "ortho"
+    ]
   },
   "3d-model": {
     "src": "stock/px-2799162.jpg",
     "w": 1100,
     "alt": "Top-down aerial view of commercial roofs and streets",
-    "q": 68
+    "q": 68,
+    "layers": [
+      "model"
+    ]
   },
   "mon-1": {
     "src": "stock/px-12571496.jpg",
@@ -216,5 +228,14 @@
     "src": "client/c17-mavic-4-pro.webp",
     "w": 810,
     "alt": "DJI Mavic 4 Pro drone in flight"
+  },
+  "story-site": {
+    "src": "stock/px-8811576.jpg",
+    "w": 1300,
+    "alt": "Aerial view of a campus of buildings, trees and a pond",
+    "layers": [
+      "model",
+      "ortho"
+    ]
   }
 }

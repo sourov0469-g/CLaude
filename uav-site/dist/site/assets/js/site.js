@@ -198,6 +198,18 @@
         });
         stage.addEventListener('pointercancel', function () { x0 = null; });
       }
+      var play = qs('[data-play]', v), timer = 0;
+      function stopPlay() { if (!timer) return; clearInterval(timer); timer = 0; if (play) { play.setAttribute('aria-pressed', 'false'); play.querySelector('span').textContent = 'Play timelapse'; } }
+      if (play) {
+        play.addEventListener('click', function () {
+          if (timer) { stopPlay(); return; }
+          play.setAttribute('aria-pressed', 'true'); play.querySelector('span').textContent = 'Pause';
+          if (idx === tabs.length - 1) select(0);
+          timer = setInterval(function () { if (idx >= tabs.length - 1) { stopPlay(); return; } select(idx + 1); }, 1500);
+        });
+        [tabs, [prev, next]].forEach(function (g) { g.forEach(function (b) { if (b) b.addEventListener('click', stopPlay); }); });
+        document.addEventListener('visibilitychange', function () { if (document.hidden) stopPlay(); });
+      }
       select(idx);
     });
   }
@@ -307,10 +319,57 @@
     });
   }
 
+  /* ---------- contact: a small flight-plan meter that fills as the brief takes shape ---------- */
+  function initBrief(root) {
+    qsa('[data-brief]', root).forEach(function (br) {
+      var form = br.closest('.form-card') && qs('form[data-contact]', br.closest('.form-card')); if (!form || br._b) return; br._b = true;
+      var status = qs('.form-status', form);
+      function done() {
+        var f = form.elements, svc = qs('input[name="service"]:checked', form);
+        return {
+          site: !!(f.location && f.location.value.trim()),
+          need: !!(svc && svc.value !== 'Not sure yet'),
+          brief: !!(f.message && f.message.value.trim().length >= 12),
+          reply: !!((f.email && f.email.value.trim()) || (f.phone && f.phone.value.trim()))
+        };
+      }
+      function update() {
+        var d = done(), n = 0;
+        qsa('[data-b]', br).forEach(function (li) { var on = d[li.getAttribute('data-b')]; li.classList.toggle('is-done', on); if (on) n++; });
+        br.style.setProperty('--bp', (n / 4).toFixed(2)); br.classList.toggle('is-full', n === 4);
+        if (n < 4) br.classList.remove('is-sent');
+      }
+      form.addEventListener('input', update); form.addEventListener('change', update); update();
+      if (status && 'MutationObserver' in window) new MutationObserver(function () { if (status.dataset.state === 'ok') br.classList.add('is-sent'); }).observe(status, { attributes: true, attributeFilter: ['data-state'] });
+    });
+  }
+
+  /* ---------- services: pick the question, see the output (tabs: arrows, Home/End, Enter) ---------- */
+  function initChooser(root) {
+    qsa('[data-chooser]', root).forEach(function (ch) {
+      if (ch._c) return; ch._c = true;
+      var tabs = qsa('[role="tab"]', ch), panels = qsa('[role="tabpanel"]', ch);
+      function pick(i, focus) {
+        tabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; t.classList.toggle('is-on', on); });
+        panels.forEach(function (p, k) { p.classList.toggle('is-on', k === i); });
+        if (focus) tabs[i].focus();
+      }
+      ch.classList.add('is-live');
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { pick(i); });
+        t.addEventListener('keydown', function (e) {
+          var k = e.key, n = tabs.length, cur = tabs.indexOf(t), to = -1;
+          if (k === 'ArrowDown' || k === 'ArrowRight') to = (cur + 1) % n; else if (k === 'ArrowUp' || k === 'ArrowLeft') to = (cur - 1 + n) % n; else if (k === 'Home') to = 0; else if (k === 'End') to = n - 1;
+          if (to > -1) { e.preventDefault(); pick(to, true); }
+        });
+      });
+    });
+  }
+
   /* ---------- per-page init ---------- */
   function initPage(root) {
     root = root || doc;
-    initReveal(root); initFaq(root); initViewers(root); initMesh(root); initForms(root);
+    initReveal(root); initFaq(root); initViewers(root); initMesh(root); initForms(root); initBrief(root); initChooser(root);
     if (window.UAV.motion && window.UAV.motion.init && root !== doc) window.UAV.motion.init(root);
   }
 

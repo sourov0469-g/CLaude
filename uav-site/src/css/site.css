@@ -323,7 +323,6 @@ main:focus,[tabindex="-1"]:focus{outline:none}
 .index-list .mega-item .go{opacity:.55;transform:none}
 .index-list .mega-item:hover .go{opacity:1;transform:translateX(4px)}
 
-.stock{position:absolute;right:10px;bottom:10px;z-index:3;padding:5px 9px;background:rgba(32,45,50,.8);color:#fff;font:600 .75rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
 
 /* framed photo */
 .frame{position:relative;overflow:hidden;background:var(--warm-3)}
@@ -502,8 +501,6 @@ main:focus,[tabindex="-1"]:focus{outline:none}
 .cta .kicker{color:var(--copper-light);margin-bottom:20px}
 .cta-side{display:grid;gap:14px;align-content:center}
 @media(min-width:900px){.cta-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);align-items:center;gap:clamp(40px,7vw,100px)}}
-.cta-lines{position:absolute;z-index:-1;left:-4%;bottom:-30px;width:min(620px,60vw);opacity:.4;pointer-events:none}
-.cta-lines path{fill:none;stroke:var(--copper);stroke-width:1;vector-effect:non-scaling-stroke}
 
 /* ================= TABLE (which service) ================= */
 .compare{border-top:1px solid var(--line)}
@@ -618,7 +615,7 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
 .mesh{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--dark);--p:50}
 .mesh img{width:100%;height:100%;object-fit:cover}
 .mesh-over{position:absolute;inset:0;clip-path:inset(0 0 0 calc(var(--p)*1%));pointer-events:none}
-.mesh-over::before{content:"";position:absolute;inset:0;background:rgba(20,28,32,.28)}
+.mesh-over img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .mesh-over svg{position:absolute;inset:0;width:100%;height:100%}
 .mesh-over path{stroke:var(--copper-light);stroke-width:.7;fill:none;vector-effect:non-scaling-stroke;opacity:.9}
 .mesh-over circle{fill:#fff;opacity:.9}
@@ -671,7 +668,7 @@ main:empty{min-height:100vh}
 .nav-progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--copper);transform:scaleX(0);transform-origin:left;pointer-events:none}
 
 /* ================= RESPONSIVE TUNING ================= */
-@media(max-width:1023px){.crumbs a{min-height:44px;padding-inline:6px;margin-inline:-6px}}
+@media(max-width:1023px),(pointer:coarse){.crumbs a{min-height:44px;padding-inline:6px;margin-inline:-6px}}
 @media(max-width:719px){
   .btn{width:100%}
   .bar .nav-cta{width:auto}

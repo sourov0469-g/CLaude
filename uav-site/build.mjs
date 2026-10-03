@@ -90,7 +90,7 @@ const metaTags = (p) => {
 const assets = path.join(siteOut, 'assets');
 for (const d of ['css', 'js', 'img', 'fonts', 'og']) fs.mkdirSync(path.join(assets, d), { recursive: true });
 const used = new Set([...Object.keys(imgUse)]);
-for (const k of used) fs.copyFileSync(R('src', 'img', 'out', imgManifest[k].file), path.join(assets, 'img', imgManifest[k].file));
+for (const k of used) { fs.copyFileSync(R('src', 'img', 'out', imgManifest[k].file), path.join(assets, 'img', imgManifest[k].file)); if (imgManifest[k].sm) fs.copyFileSync(R('src', 'img', 'out', imgManifest[k].sm.file), path.join(assets, 'img', imgManifest[k].sm.file)); }
 for (const f of ['logo.webp', 'logo.png', 'favicon-32.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png']) fs.copyFileSync(R('src', 'img', 'out', f), path.join(assets, 'img', f));
 fs.copyFileSync(R('src', 'img', 'out', 'og-home.jpg'), path.join(assets, 'og', 'home.jpg'));
 for (const f of fs.readdirSync(R('src', 'fonts'))) fs.copyFileSync(R('src', 'fonts', f), path.join(assets, 'fonts', f));
@@ -99,7 +99,7 @@ fs.writeFileSync(path.join(assets, 'js', 'site.js'), jsSite);
 fs.writeFileSync(path.join(assets, 'js', 'motion.js'), jsMotion);
 fs.writeFileSync(path.join(assets, 'js', 'vendor.js'), jsVendor);
 
-const deployUrl = (html) => html.replace(/\{\{IMG:([\w-]+)\}\}/g, (m, k) => '/assets/img/' + imgManifest[k].file);
+const deployUrl = (html) => html.replace(/\{\{IMG:([\w-]+)\}\}/g, (m, k) => '/assets/img/' + imgManifest[k].file).replace(/\{\{SRCSET:([\w-]+)\}\}/g, (m, k) => `/assets/img/${imgManifest[k].sm.file} ${imgManifest[k].sm.w}w, /assets/img/${imgManifest[k].file} ${imgManifest[k].w}w`);
 
 function deployDoc(p) {
   const bodyHtml = inertable(markCurrent(deployUrl(header()), p.path)) + `\n<div class="page">\n<main id="main" tabindex="-1" data-inertable>\n${deployUrl(p.body)}\n</main>\n${inertable(deployUrl(footer()))}\n</div>`;
@@ -145,6 +145,7 @@ const imgData = {};
 const dataUri = (k) => (imgData[k] ||= b64(R('src', 'img', 'out', imgManifest[k].file), 'image/webp'));
 const toSingle = (html, route) =>
   html
+    .replace(/ srcset="\{\{SRCSET:[\w-]+\}\}" sizes="[^"]*"/g, '')
     .replace(/\{\{IMG:([\w-]+)\}\}/g, (m, k) => dataUri(k))
     .replace(/href="\/([^"]*)"/g, (m, r) => `href="#/${r}"`)
     .replace(/href="#(?!\/)([^"]+)"/g, (m, a) => (a === 'main' ? m : `href="#${route}#${a}"`));

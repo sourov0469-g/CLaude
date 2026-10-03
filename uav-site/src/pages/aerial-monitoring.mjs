@@ -27,7 +27,7 @@ export default function page() {
     .map((v, i) => `<button class="visit" type="button" role="tab" id="vt-${i}" aria-controls="vs-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" aria-label="Stage ${i + 1}: ${v.label}"><i class="v-w">Stage </i>${i + 1}<span>${v.label}</span></button>`)
     .join('');
   const viewer = `<div class="viewer" data-viewer>
-<div class="stage bracket bracket--light"><div class="stage-slides" style="--ar:4/3">${stage}</div><span class="stage-count" aria-hidden="true">01 / 05</span><div class="stage-nav"><button type="button" data-prev aria-label="Previous stage">${icon.prev}</button><button type="button" data-next aria-label="Next stage">${icon.next}</button></div></div>
+<div class="stage bracket bracket--light"><div class="stage-slides" style="--ar:4/3">${stage}</div><span class="stage-count" aria-hidden="true">01 / 05</span><button class="tl-play" type="button" data-play aria-pressed="false"><i aria-hidden="true"></i><span>Play timelapse</span></button><div class="stage-nav"><button type="button" data-prev aria-label="Previous stage">${icon.prev}</button><button type="button" data-next aria-label="Next stage">${icon.next}</button></div></div>
 <div class="visits" role="tablist" aria-label="Five typical stages of a build">${tabs}</div>
 <p class="viewer-live sr-only" aria-live="polite"></p>
 <p class="note">Illustrative stages of a typical build. On a real project the sequence shows your own site.</p>

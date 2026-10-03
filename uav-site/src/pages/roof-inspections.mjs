@@ -34,7 +34,7 @@ export default function page() {
     title: 'See the roof without the climb.',
     lead: 'Detailed aerial imagery of commercial and residential roofs: coverings, junctions, drainage and the areas that are hard to reach safely.',
     actions: btn('/contact/?service=roof-inspection', 'Request a roof inspection') + btn('#imagery', 'See what the imagery shows', 'ghost'),
-    media: `<div class="frame bracket frame--43">${img('roof-hero', { eager: true, priority: true, pos: '50% 50%' })}</div>`,
+    media: `<div class="frame bracket frame--43">${img('roof-hero', { eager: true, priority: true, pos: '50% 50%', layer: 'model', sizes: '(max-width:999px) 100vw, 52vw' })}</div>`,
     strip: ['Commercial and residential roofs', 'Macclesfield and Cheshire', 'Free quote']
   });
 

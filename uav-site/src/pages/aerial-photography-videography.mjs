@@ -32,7 +32,7 @@ export default function page() {
     title: 'Show the site clearly from above.',
     lead: 'Aerial photography and video for projects, property and site presentation, planned around a clear brief.',
     actions: btn('/contact/?service=aerial-photography-videography', 'Discuss aerial media') + btn('#uses', 'Typical uses', 'ghost'),
-    media: `<div class="duo"><div class="frame bracket frame--43">${img('photo-hero', { eager: true, priority: true, pos: '50% 55%' })}</div><div class="inset">${img('photo-inset', { eager: true, pos: '50% 50%' })}</div></div>`
+    media: `<div class="duo"><div class="frame bracket frame--43">${img('photo-hero', { eager: true, priority: true, pos: '50% 55%' })}<i class="vf-grid"></i></div><div class="inset">${img('photo-inset', { eager: true, pos: '50% 50%' })}</div></div>`
   });
 
   const body = `${hero}

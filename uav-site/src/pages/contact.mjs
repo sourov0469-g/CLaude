@@ -1,6 +1,7 @@
 import { site, services, arrow, crumbLd, businessLd, emailText } from '../lib/site.mjs';
 import { icon } from '../lib/icons.mjs';
 import { crumbs as crumbsHtml } from '../lib/site.mjs';
+import { droneSvg } from '../lib/drone.mjs';
 
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }];
 
@@ -35,7 +36,8 @@ export default function page() {
 
 <div class="form-card" data-reveal style="--d:80ms" id="enquiry">
 <h2 class="h3" id="form-h" style="margin-bottom:6px">Enquiry details</h2>
-<p class="muted small" style="margin-bottom:26px">A few details are enough to start.</p>
+<p class="muted small" style="margin-bottom:22px">A few details are enough to start.</p>
+<div class="brief" data-brief aria-hidden="true"><div class="brief-rail"><i class="brief-line"></i><i class="brief-fill"></i><span class="brief-drone">${droneSvg}</span></div><ol><li data-b="site">Site</li><li data-b="need">Need</li><li data-b="brief">Brief</li><li data-b="reply">Reply</li></ol></div>
 <form class="form" data-contact novalidate aria-labelledby="form-h" action="mailto:${site.email}" method="post" enctype="text/plain">
 <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
 <div class="form-grid">

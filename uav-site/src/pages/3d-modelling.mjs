@@ -1,4 +1,4 @@
-import { site, services, img, arrow, faqSection, cta, serviceLd, crumbLd, faqLd } from '../lib/site.mjs';
+import { site, services, img, layerImg, arrow, faqSection, cta, serviceLd, crumbLd, faqLd } from '../lib/site.mjs';
 import { phero, btn, related, iconCards, secHead } from '../lib/blocks.mjs';
 
 const s = services[2];
@@ -47,20 +47,6 @@ function isoSvg() {
 ${lab(c1, 'AERIAL CAPTURE')}${lab(c2, 'GEOREFERENCED')}${lab(c3, '3D MODEL')}</g></svg>`;
 }
 
-/* ----- procedural mesh overlay (seeded so builds are identical) ----- */
-function meshPath() {
-  let seed = 11; const rnd = () => ((seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296);
-  const cols = 15, rows = 11, pts = [];
-  for (let r = 0; r <= rows; r++) { pts[r] = []; for (let c = 0; c <= cols; c++) { const j = (r === 0 || c === 0 || r === rows || c === cols) ? 0 : 1; pts[r][c] = [(c / cols) * 100 + (rnd() - .5) * 4.2 * j, (r / rows) * 75 + (rnd() - .5) * 4.2 * j]; } }
-  let d = ''; const f = (p) => p[0].toFixed(1) + ' ' + p[1].toFixed(1);
-  for (let r = 0; r <= rows; r++) for (let c = 0; c <= cols; c++) {
-    if (c < cols) d += `M${f(pts[r][c])}L${f(pts[r][c + 1])}`;
-    if (r < rows) d += `M${f(pts[r][c])}L${f(pts[r + 1][c])}`;
-    if (r < rows && c < cols) d += `M${f(pts[r][c])}L${f(pts[r + 1][c + 1])}`;
-  }
-  return d;
-}
-
 const faqs = [
   { q: 'What can a 3D model be used for?', a: 'Our georeferenced 3D models support measurements and calculations, remote inspection and CAD/BIM-related workflows. The exact output is agreed for your project before capture.' },
   { q: 'Is a 3D model the same as an aerial survey?', a: 'They overlap. A model represents a structure or area in 3D; an aerial survey covers a wider site, from construction sites to farmland. We will recommend which suits your brief.' },
@@ -82,12 +68,12 @@ export default function page() {
 
 <section class="sec sec--paper" id="model" aria-labelledby="mod-h"><span class="seam"></span><div class="wrap split split--wide-media">
 <div data-reveal>
-<div class="mesh bracket bracket--light" data-mesh>${img('3d-model', { pos: '50% 50%' })}
-<div class="mesh-over" aria-hidden="true"><svg viewBox="0 0 100 75" preserveAspectRatio="none"><path d="${meshPath()}"/></svg></div>
+<div class="mesh bracket bracket--light" data-mesh data-cursor="Drag">${img('3d-model', { pos: '50% 50%' })}
+<div class="mesh-over" aria-hidden="true">${layerImg('3d-model', 'model', { pos: '50% 50%' })}</div>
 <div class="mesh-line" aria-hidden="true"></div>
 <div class="mesh-labels" aria-hidden="true"><span>Photograph</span><span>3D mesh</span></div>
 <input type="range" min="0" max="100" value="50" aria-label="Drag to compare the photograph with a 3D mesh overlay"></div>
-<p class="cap">Drag to compare. Illustrative mesh overlay on an aerial photograph.</p>
+<p class="cap">Drag to compare the photograph with a mesh render of the same view.</p>
 </div>
 <div data-reveal style="--d:100ms">
 <p class="kicker">From photographs to model</p>

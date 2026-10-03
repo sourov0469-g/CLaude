@@ -78,5 +78,19 @@ function frame() {
   return layer('fx-bg', 0.012, -0.04, bg) + layer('fx-mid', 0.035, -0.09, focus) + layer('fx-fg', 0.05, -0.16, `<g class="fx-brackets"><path class="fx-line fx-line--strong" d="M70 130V70H130M1070 70H1130V130M1130 470V530H1070M130 530H70V470"/></g>`);
 }
 
+import fsx from 'node:fs';
+import pathx from 'node:path';
+import { fileURLToPath as furl } from 'node:url';
+const topoData = JSON.parse(fsx.readFileSync(pathx.join(pathx.dirname(furl(import.meta.url)), 'topo.json'), 'utf8'));
+
+/** Isolines traced from the luminance of a real aerial photograph (tools/topo.py). */
+function topo(name) {
+  const t = topoData[name]; if (!t) throw new Error('Unknown topo ' + name);
+  const paths = t.paths.map(([d, l]) => `<path class="fx-topo-p" pathLength="1" style="--l:${l}" d="${d}"/>`).join('');
+  return `<svg class="fx-l fx-bg" viewBox="0 0 ${t.w} ${t.h}" preserveAspectRatio="xMidYMid slice" data-depth="0.014" data-speed="-0.08" focusable="false"><g class="fx-topo">${paths}</g></svg>`;
+}
+
 const variants = { contours, scan, grid, mesh, time, frame };
-export const fx = (variant = 'contours', cls = '') => `<div class="fx ${cls}" aria-hidden="true" data-fx="${variant}">${(variants[variant] || contours)()}</div>`;
+export const fx = (variant = 'contours', cls = '') => variant.startsWith('topo-')
+  ? `<div class="fx fx--topo ${cls}" aria-hidden="true" data-fx="topo">${topo(variant.slice(5))}</div>`
+  : `<div class="fx ${cls}" aria-hidden="true" data-fx="${variant}">${(variants[variant] || contours)()}</div>`;

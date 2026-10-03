@@ -6,6 +6,7 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path: '/about/' }]
 
 export default function page() {
   const hero = phero({
+    scene: 'topo-town',
     items: crumbs,
     kicker: 'About UAV Aerial Solutions',
     title: 'Practical aerial data for the decisions that follow.',

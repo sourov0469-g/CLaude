@@ -27,6 +27,7 @@ export default function page() {
     .join('');
 
   const hero = phero({
+    scene: 'topo-farm',
     items: [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services/' }],
     kicker: 'Drone services',
     title: 'Drone services for roofs, sites and projects.',
@@ -42,8 +43,11 @@ ${secHead('What we do', 'From a roof question to usable aerial data.', 'Each ser
 </div></section>
 
 <section class="sec sec--warm" id="compare" aria-labelledby="cmp-h"><span class="seam"></span><div class="wrap">
-${secHead('Choose by output', 'Explain the site. We will suggest the output.', 'You do not need to pick a method before you enquire. Tell us the site and what you need to understand.', 'cmp-h')}
-<table class="compare"><caption class="sr-only">Which service answers which question</caption><thead><tr><th scope="col">If you are asking</th><th scope="col">You need</th><th scope="col">Service</th></tr></thead><tbody>${tbl}</tbody></table>
+${secHead('Choose by output', 'Explain the site. We will suggest the output.', 'You do not need to pick a method before you enquire. Start with the question you are asking.', 'cmp-h')}
+<div class="chooser" data-chooser>
+<div class="ch-q" role="tablist" aria-label="What are you asking?" aria-orientation="vertical">${choose.map(([q], i) => `<button class="ch-t${i === 0 ? ' is-on' : ''}" type="button" role="tab" id="ch-t${i}" aria-controls="ch-p${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span class="ch-n">0${i + 1}</span><span class="ch-qt">${q}</span></button>`).join('')}</div>
+<div class="ch-a">${choose.map(([q, i, out], k) => { const r = rows[i]; return `<div class="ch-p${k === 0 ? ' is-on' : ''}" role="tabpanel" id="ch-p${k}" aria-labelledby="ch-t${k}" tabindex="0"><span class="ch-ico" aria-hidden="true">${icon[r.s.icon]()}</span><p class="ch-eyebrow">You need</p><h3 class="ch-title">${out}</h3><p class="ch-text">${r.text}</p><dl class="ch-dl"><div><dt>Best for</dt><dd>${r.best}</dd></div><div><dt>You receive</dt><dd>${r.get}</dd></div></dl><div class="btn-row">${btn(r.s.path, r.s.name)}${btn('/contact/?service=' + r.s.query, 'Get a quote', 'ghost')}</div></div>`; }).join('')}</div>
+</div>
 </div></section>
 
 <section class="sec sec--paper" id="coverage" aria-labelledby="cov-h"><span class="seam"></span><div class="wrap split split--top">

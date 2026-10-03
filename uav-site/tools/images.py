@@ -3,6 +3,7 @@
 and write src/img/out/manifest.json {key:{file,w,h,bytes}}.
 Also makes the logo, favicons and the social share image."""
 import json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageOps, ImageDraw, ImageFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,6 +31,18 @@ for key, s in spec.items():
     path = os.path.join(OUT, key + '.webp')
     save_webp(im, path, s.get('q', 74))
     manifest[key] = {'file': key + '.webp', 'w': im.width, 'h': im.height, 'bytes': os.path.getsize(path), 'alt': s['alt']}
+    # small variant for phones (deploy build serves it through srcset)
+    if im.width > 760:
+        sm = im.resize((720, round(im.height * 720 / im.width)), Image.LANCZOS)
+        save_webp(sm, os.path.join(OUT, key + '-sm.webp'), max(60, s.get('q', 74) - 6))
+        manifest[key]['sm'] = {'file': key + '-sm.webp', 'w': sm.width}
+    # survey layers: model / ortho renders of the same photograph
+    for kind in s.get('layers', []):
+        import layers
+        lim = layers.render(im, kind, min(im.width, 1000))
+        lk = key + '-' + kind
+        save_webp(lim, os.path.join(OUT, lk + '.webp'), 70)
+        manifest[lk] = {'file': lk + '.webp', 'w': lim.width, 'h': lim.height, 'bytes': os.path.getsize(os.path.join(OUT, lk + '.webp')), 'alt': '', 'layer': True}
 
 # logo (keep transparency)
 logo = Image.open(os.path.join(SRC, 'logo-orig.png')).convert('RGBA')

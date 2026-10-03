@@ -1,6 +1,7 @@
 // Site-wide facts and reusable components. Every business fact here comes from the
 // current public site (uavaerialsolutions.co.uk). Nothing else is claimed.
 import { icon } from './icons.mjs';
+import { fx } from './fx.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -46,7 +47,22 @@ export const img = (key, o = {}) => {
   const pos = o.pos ? ` style="object-position:${o.pos}"` : '';
   const cls = o.cls ? ` class="${o.cls}"` : '';
   const alt = o.alt !== undefined ? o.alt : m.alt;
-  return `<img${cls} src="{{IMG:${key}}}" width="${m.w}" height="${m.h}" alt="${alt}"${loading}${fp} decoding="async"${pos}>`;
+  const set = m.sm ? ` srcset="{{SRCSET:${key}}}" sizes="${o.sizes || '(max-width:719px) 100vw, (max-width:1099px) 50vw, 640px'}"` : '';
+  const main = `<img${cls} src="{{IMG:${key}}}"${set} width="${m.w}" height="${m.h}" alt="${alt}"${loading}${fp} decoding="async"${pos}>`;
+  const kinds = o.layers || (o.layer ? [o.layer] : []);
+  return main + kinds.map((kind) => {
+    const lk = `${key}-${kind}`, lm = imgManifest[lk];
+    if (!lm) throw new Error('Unknown layer ' + lk);
+    return `<img class="layer-img layer-img--${kind}" src="{{IMG:${lk}}}" width="${lm.w}" height="${lm.h}" alt="" aria-hidden="true" loading="lazy" decoding="async"${pos}>`;
+  }).join('');
+};
+
+/** Only the survey-layer render of a photograph (for a comparison slider). */
+export const layerImg = (key, kind, o = {}) => {
+  const lk = `${key}-${kind}`, lm = imgManifest[lk];
+  if (!lm) throw new Error('Unknown layer ' + lk);
+  const pos = o.pos ? ` style="object-position:${o.pos}"` : '';
+  return `<img src="{{IMG:${lk}}}" width="${lm.w}" height="${lm.h}" alt="" aria-hidden="true" loading="lazy" decoding="async"${pos}>`;
 };
 
 export const stripTags = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&rsquo;/g, '\u2019').replace(/&lsquo;/g, '\u2018').replace(/&middot;/g, '\u00b7').replace(/\s+/g, ' ').trim();
@@ -112,7 +128,7 @@ export function faqSection({ id, kicker = 'Practical questions', title, lead, it
 
 export function cta({ kicker = 'Start with a brief', title = 'Tell us what you need to see from above.', text = 'Send the site, the question you need answered and how you will use the result. We will reply with a free quote.', query = '', primary = 'Request a free quote' } = {}) {
   const href = '/contact/' + (query ? `?service=${query}` : '');
-  return `<section class="cta" aria-labelledby="cta-h"><svg class="cta-lines" viewBox="0 0 600 220" aria-hidden="true" preserveAspectRatio="none"><path d="M0 170C70 110 120 190 200 140S320 40 420 90 560 70 600 30"/><path d="M0 200C80 150 140 215 230 170S340 80 440 125 570 108 600 74" opacity=".5"/></svg><div class="wrap cta-grid"><div data-reveal><p class="kicker">${kicker}</p><h2 class="h2" id="cta-h">${title}</h2><p style="margin-top:20px">${text}</p></div><div class="cta-side" data-reveal style="--d:90ms"><a class="btn btn--light" href="${href}">${primary} ${arrow}</a><a class="btn btn--ghost-light" href="${site.phoneHref}">Call ${site.phone}</a><a class="tlink" href="mailto:${site.email}" style="align-self:flex-start;color:var(--on-dark)">${emailText}</a></div></div></section>`;
+  return `<section class="cta" aria-labelledby="cta-h">${fx('topo-site')}<div class="wrap cta-grid"><div data-reveal><p class="kicker">${kicker}</p><h2 class="h2" id="cta-h">${title}</h2><p style="margin-top:20px">${text}</p></div><div class="cta-side" data-reveal style="--d:90ms"><a class="btn btn--light" href="${href}">${primary} ${arrow}</a><a class="btn btn--ghost-light" href="${site.phoneHref}">Call ${site.phone}</a><a class="tlink" href="mailto:${site.email}" style="align-self:flex-start;color:var(--on-dark)">${emailText}</a></div></div></section>`;
 }
 
 export function megaMenu() {
