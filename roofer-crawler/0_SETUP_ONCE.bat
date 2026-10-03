@@ -1,24 +1,46 @@
 @echo off
 cd /d "%~dp0"
-title Roofer Lead Crawler - Setup
-where py >nul 2>nul && (set PY=py) || (where python >nul 2>nul && (set PY=python) || goto nopython)
-if not exist ".venv\Scripts\python.exe" (%PY% -m venv .venv || goto fail)
-call .venv\Scripts\python.exe -m pip install --upgrade pip
-call .venv\Scripts\python.exe -m pip install -r requirements.txt || goto fail
-echo Running self-tests...
-call .venv\Scripts\python.exe tests\test_dashboard.py || goto fail
-call .venv\Scripts\python.exe tests\test_integration.py || goto fail
-call .venv\Scripts\python.exe tests\test_qa.py || goto fail
-call .venv\Scripts\python.exe tests\test_enrichment.py || goto fail
+title Roofer Lead Finder - Setup
+set PY=
+where py >nul 2>nul
+if not errorlevel 1 set PY=py
+if "%PY%"=="" (
+  where python >nul 2>nul
+  if not errorlevel 1 set PY=python
+)
+if "%PY%"=="" goto nopython
 echo.
-echo SETUP PASSED. Next: double-click 1_OPEN_DASHBOARD.bat
+echo ==========================================
+echo   ROOFER LEAD FINDER - SETUP (one time)
+echo ==========================================
+echo.
+if not exist ".venv\Scripts\python.exe" (
+  %PY% -m venv .venv
+  if errorlevel 1 goto fail
+)
+".venv\Scripts\python.exe" -m pip install --upgrade pip
+".venv\Scripts\python.exe" -m pip install -r requirements.txt
+if errorlevel 1 goto fail
+echo.
+echo Running self-tests (about 2 minutes)...
+for %%T in (test_dashboard test_integration test_qa test_enrichment) do (
+  ".venv\Scripts\python.exe" tests\%%T.py
+  if errorlevel 1 goto fail
+)
+echo.
+echo ==========================================
+echo   SETUP PASSED
+echo ==========================================
+echo Next: double-click 1_OPEN_DASHBOARD.bat
 pause
 exit /b 0
 :nopython
-echo Python not found. Install Python 3.12 (64-bit) from python.org and tick "Add python.exe to PATH".
+echo Python was not found.
+echo Install Python 3.12 (64-bit) from python.org and tick "Add python.exe to PATH", then run this again.
 pause
 exit /b 1
 :fail
-echo SETUP FAILED - screenshot this window.
+echo.
+echo SETUP FAILED - take a screenshot of this window.
 pause
 exit /b 1

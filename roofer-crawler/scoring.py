@@ -444,7 +444,8 @@ def first_line(p, problems, strengths):
     first = next((o["name"].split()[0] for o in p["people"]["owners"] if o.get("name")), "")
     hi = f"Hi {first}," if first else "Hi there,"
     co = p["company"] or "your company"
-    bits = f"I came across {co}" + (f" ({strengths[0]})" if strengths else "")
+    nice = [x for x in strengths if not x.startswith("est. revenue")]
+    bits = f"I came across {co}" + (f" ({nice[0]})" if nice else "")
     if problems:
         problem = problems[0]
         return f"{hi} {bits} and noticed that {problem}. I put together a free mock-up of a new website for you - want me to send it over?"

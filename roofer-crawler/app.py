@@ -52,6 +52,8 @@ def guard():
 
 @app.after_request
 def headers(r):
+    if request.method == "POST":
+        _FUNNEL["v"] = None                      # any change (import, reset, select, start...) must show immediately
     r.headers.update({"X-Frame-Options": "DENY", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer",
                       "Content-Security-Policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"})
     return r
@@ -101,7 +103,18 @@ def launch(stage, mode, concurrency, auto, limit=0, list_name=None):
 
 
 # ----------------------------------------------------------------------------- data for the page
+_FUNNEL = {"at": 0.0, "v": None}
+
+
 def funnel():
+    """Counting 100k leads across 5 stages is not free: reuse the result for 3 seconds."""
+    if _FUNNEL["v"] is not None and time.time() - _FUNNEL["at"] < 3:
+        return _FUNNEL["v"]
+    _FUNNEL["v"], _FUNNEL["at"] = _funnel(), time.time()
+    return _FUNNEL["v"]
+
+
+def _funnel():
     con = db.connect()
     q = lambda sql, *a: con.execute(sql, a).fetchone()[0]
     out = {
@@ -143,8 +156,13 @@ def leads_page(args):
     if args.get("q"):
         where.append("l.company_name LIKE ?")
         params.append(f"%{args['q']}%")
-    limit = max(1, min(200, int(args.get("limit", 50))))
-    offset = max(0, int(args.get("offset", 0)))
+    def to_int(v, default):
+        try:
+            return int(v)
+        except (TypeError, ValueError):
+            return default
+    limit = max(1, min(200, to_int(args.get("limit"), 50)))
+    offset = max(0, to_int(args.get("offset"), 0))
     con = db.connect()
     total = con.execute(f"SELECT COUNT(*) FROM leads l JOIN scores sc ON sc.lead_key=l.lead_key WHERE {' AND '.join(where)}", params).fetchone()[0]
     rows = con.execute(f"""SELECT l.lead_key,l.company_name,l.city,l.state,l.reviews,l.rating,l.website,sc.priority,sc.need,sc.pay,sc.ease,sc.tier,sc.rank,

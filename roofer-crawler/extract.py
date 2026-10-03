@@ -5,7 +5,6 @@ It measures two families of things:
   * WEBSITE QUALITY  (does this roofer *need* a new website?)
   * BUSINESS STRENGTH (can this roofer *afford* one?)  + contact / owner clues
 """
-import copy
 import json
 import re
 from datetime import datetime, timezone
@@ -557,11 +556,10 @@ def _iso(y, m, d):
     return dt.strftime("%Y-%m-%d")
 
 
-def extract_dates(doc, text, schema_blob):
+def extract_dates(date_attrs, text, schema_blob):
     """Dates that suggest content freshness (posts, projects, modified stamps). Future dates dropped."""
     found = set()
-    for v in doc.xpath("//time/@datetime|//meta[@property='article:published_time']/@content|//meta[@property='article:modified_time']/@content"
-                       "|//meta[@property='og:updated_time']/@content|//meta[@itemprop='datePublished']/@content|//meta[@itemprop='dateModified']/@content"):
+    for v in date_attrs:
         m = ISO_RE.search(v or "")
         if m and _iso(*m.groups()):
             found.add(_iso(*m.groups()))
@@ -595,6 +593,8 @@ def extract_wordpress(html_text, low_html):
 
 # --------------------------------------------------------------------------- main entry
 def analyze_page(body, url, content_type="", elapsed_ms=None, status=200, server_header=""):
+    if "crashme" in url and __import__("config").TEST_MODE:
+        __import__("os")._exit(1)                      # test hook: simulates a parser worker dying (e.g. out of memory)
     try:
         return _analyze(body, url, content_type, elapsed_ms, status, server_header)
     except Exception as e:  # never let one weird page kill a worker
@@ -602,6 +602,9 @@ def analyze_page(body, url, content_type="", elapsed_ms=None, status=200, server
 
 
 def _analyze(body, url, content_type, elapsed_ms, status, server_header):
+    head = (body or b"")[:4000]
+    if head and (b"\x00" in head or sum(1 for c in head if c < 9 or 13 < c < 32) > len(head) * 0.15):
+        return {"url": url, "status": status, "html_bytes": len(body or b""), "page_state": "UNPARSEABLE", "word_count": 0}   # binary, not a web page
     html_text = decode_body(body, content_type)
     html_bytes = len(body or b"")
     if len(html_text) > 1_500_000:
@@ -645,13 +648,16 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
 
     schema = extract_schema(doc, url)
     f["schema"] = schema
-    doc_dates = copy.deepcopy(doc)   # _text_lines() strips the tree in place; keep a pristine copy for later xpaths
+    # _text_lines() strips the tree in place, so gather everything that needs the full tree first (no memory-hungry copy)
+    date_attrs = doc.xpath("//time/@datetime|//meta[@property='article:published_time']/@content|//meta[@property='article:modified_time']/@content"
+                           "|//meta[@property='og:updated_time']/@content|//meta[@itemprop='datePublished']/@content|//meta[@itemprop='dateModified']/@content")[:60]
+    testimonial_blocks = len(doc.xpath("//*[contains(@class,'testimonial') or contains(@class,'review-item') or contains(@class,'reviews-item')]")) + len(doc.xpath("//blockquote"))
 
     # links BEFORE the tree is stripped for text
     socials = {k: set() for k in SOCIAL_HOSTS}
     profiles, manu, links = set(), set(), []
     tel_numbers, mail_addrs = [], []
-    for a in doc.xpath("//a[@href]"):
+    for a in doc.xpath("//a[@href]")[:2500]:
         href = (a.get("href") or "").strip()
         if not href or href.startswith(("#", "javascript:")):
             continue
@@ -828,11 +834,11 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
     f["non_us_signal"] = bool(non_us and not states)
 
     # freshness: dated content, WordPress fingerprint, on-site proof
-    f["dates"] = extract_dates(doc_dates, text, json.dumps(schema)[:8000])
+    f["dates"] = extract_dates(date_attrs, text, json.dumps(schema)[:8000])
     f["latest_date"] = f["dates"][0] if f["dates"] else None
     wp = extract_wordpress(html_text, low_html)
     f["wp"] = wp
-    f["testimonial_blocks"] = len(doc_dates.xpath("//*[contains(@class,'testimonial') or contains(@class,'review-item') or contains(@class,'reviews-item')]")) + len(doc_dates.xpath("//blockquote"))
+    f["testimonial_blocks"] = testimonial_blocks
     f["maps_embed"] = "google.com/maps/embed" in low_html or "maps.google" in low_html
     f["video_embed"] = bool(re.search(r"youtube\.com/embed|player\.vimeo\.com|<video", low_html))
     f["lazy_images"] = sum(1 for i in imgs if (i.get("loading") or "").lower() == "lazy" or i.get("data-src") or i.get("data-lazy-src"))

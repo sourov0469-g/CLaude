@@ -149,11 +149,19 @@ async def fetch(session, url, max_bytes=config.MAX_BODY_BYTES, verify=True, acce
                 r.body = b""
             else:
                 buf = bytearray()
-                async for chunk in resp.content.iter_chunked(65536):
-                    buf += chunk
-                    if len(buf) >= max_bytes:
+                try:
+                    async for chunk in resp.content.iter_chunked(65536):
+                        buf += chunk
+                        if len(buf) >= max_bytes:
+                            r.truncated = True
+                            break
+                except asyncio.CancelledError:
+                    raise
+                except Exception as e:
+                    if len(buf) >= 2000:            # a long-enough partial page is still a page (server cut us off late)
                         r.truncated = True
-                        break
+                    else:
+                        raise                      # tiny/empty partial = a failed fetch, handled as a network error below
                 r.body = bytes(buf)
             r.load_ms = int((time.perf_counter() - t0) * 1000)
             r.ok = 200 <= r.status < 400
@@ -166,6 +174,7 @@ async def fetch(session, url, max_bytes=config.MAX_BODY_BYTES, verify=True, acce
         r.error_class = classify_exception(e)
         r.error = f"{type(e).__name__}: {e}"[:200]
         r.load_ms = int((time.perf_counter() - t0) * 1000)
+        r.status, r.ok, r.body = 0, False, b""        # headers arrived but the body failed: report as a network failure
     return r
 
 

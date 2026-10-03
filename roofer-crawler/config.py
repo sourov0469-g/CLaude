@@ -39,7 +39,7 @@ DEPTHS = {
     "deep": 8,
 }
 DEFAULT_DEPTH = "triage"
-MAX_BODY_BYTES = 2 * 1024 * 1024
+MAX_BODY_BYTES = 1024 * 1024        # real homepages are 50-400 KB; bigger bodies are truncated, not swallowed
 CONNECT_TIMEOUT = float(os.environ.get("ROOFER_CONNECT_TIMEOUT", 10))
 TOTAL_TIMEOUT = float(os.environ.get("ROOFER_TOTAL_TIMEOUT", 25))
 READ_TIMEOUT = float(os.environ.get("ROOFER_READ_TIMEOUT", 15))

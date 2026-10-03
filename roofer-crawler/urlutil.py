@@ -73,6 +73,8 @@ def normalize_start_url(raw):
     if not raw or " " in raw.strip() and "." not in raw:
         return None
     raw = raw.split()[0]
+    if re.match(r"(?i)^(mailto|tel|sms|javascript|ftp|file|data|whatsapp|callto):", raw):
+        return None
     if raw.startswith("//"):
         raw = "https:" + raw
     if not re.match(r"^https?://", raw, re.I):
@@ -80,7 +82,7 @@ def normalize_start_url(raw):
     try:
         p = urlparse(raw)
         host = (p.hostname or "").lower()
-        if not host or not host_allowed(host):
+        if not host or not host_allowed(host) or p.username or p.password:
             return None
         if not re.match(r"^[a-z0-9.-]+$", host) and not config.TEST_MODE:
             try:

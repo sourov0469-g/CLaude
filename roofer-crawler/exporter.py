@@ -1,4 +1,5 @@
 """Lean exports: only what helps decide who to email and what to say."""
+import re
 from pathlib import Path
 
 import db
@@ -8,10 +9,13 @@ import scoring_run
 FORMULA = ("=", "+", "-", "@", "\t", "\r")
 
 
+_ILLEGAL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\ud800-\udfff]")
+
+
 def safe(v):
     if v is None:
         return ""
-    s = str(v).replace("\x00", "")
+    s = _ILLEGAL.sub("", str(v))[:32000]            # control chars make openpyxl raise; Excel cells max out at 32,767
     return "'" + s if s.lstrip().startswith(FORMULA) else s
 
 

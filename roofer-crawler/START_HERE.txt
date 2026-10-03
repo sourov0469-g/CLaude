@@ -1,0 +1,10 @@
+ROOFER LEAD FINDER - START HERE
+===============================
+1. Install Python 3.12 (64-bit) from python.org. Tick "Add python.exe to PATH".
+2. Double-click  0_SETUP_ONCE.bat   (one time, a few minutes, runs self-tests)
+3. Double-click  1_OPEN_DASHBOARD.bat   -> your browser opens the dashboard
+4. On the dashboard: import your leads, run "Test 100 likely roofers", check the results,
+   then follow steps 2-5. Everything can be stopped and resumed; progress is saved.
+
+To stop everything: 2_STOP_EVERYTHING.bat.   Details: README.md
+Your data stays on this PC (data\ folder). Nothing is uploaded anywhere.

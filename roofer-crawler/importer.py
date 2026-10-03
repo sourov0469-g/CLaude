@@ -68,13 +68,39 @@ def _pick(headers, candidates, used=()):
     return best[2] if best else None
 
 
+csv.field_size_limit(20_000_000)
+MAX_FIELD = 4000          # longer cells (scraped essays, pasted HTML) are truncated, never fatal
+
+
+def _clip(v):
+    return v[:MAX_FIELD] if isinstance(v, str) and len(v) > MAX_FIELD else v
+
+
+def _pick_delimiter(first_line):
+    """Delimiter = whichever candidate appears most OUTSIDE quotes in the header line."""
+    best, best_n = ",", -1
+    for d in (",", ";", "\t", "|"):
+        n, inq = 0, False
+        for ch in first_line:
+            if ch == '"':
+                inq = not inq
+            elif ch == d and not inq:
+                n += 1
+        if n > best_n:
+            best, best_n = d, n
+    return best
+
+
 def read_rows(path):
     """Yield (headers, row_iterator). Rows are dicts of str->str."""
     p = Path(path)
     suffix = p.suffix.lower()
     if suffix in {".xlsx", ".xlsm"}:
         import openpyxl
-        wb = openpyxl.load_workbook(p, read_only=True, data_only=True)
+        try:
+            wb = openpyxl.load_workbook(p, read_only=True, data_only=True)
+        except Exception:
+            raise ValueError("This .xlsx file is damaged or is not a real Excel file. Open it in Excel and Save As .xlsx or .csv, then try again.")
         ws = wb.worksheets[0]
         it = ws.iter_rows(values_only=True)
         headers = [str(h).strip() if h is not None else f"col_{i}" for i, h in enumerate(next(it, []))]
@@ -83,7 +109,7 @@ def read_rows(path):
             for r in it:
                 if r is None or all(c is None or str(c).strip() == "" for c in r):
                     continue
-                yield {headers[i]: ("" if c is None else str(c)) for i, c in enumerate(r) if i < len(headers)}
+                yield {headers[i]: ("" if c is None else _clip(str(c))) for i, c in enumerate(r) if i < len(headers)}
             wb.close()
         return headers, gen()
     if suffix == ".xls":
@@ -97,13 +123,11 @@ def read_rows(path):
     except UnicodeDecodeError:
         enc = "cp1252"
     f = open(p, newline="", encoding=enc, errors="replace")
-    sample = f.read(8192)
+    first_line = f.readline()
     f.seek(0)
-    try:
-        dialect = csv.Sniffer().sniff(sample, delimiters=",;\t|")
-    except csv.Error:
-        dialect = csv.excel
-    rd = csv.DictReader(f, dialect=dialect)
+    class _D(csv.excel):
+        delimiter = _pick_delimiter(first_line)
+    rd = csv.DictReader(f, dialect=_D)
     headers = [h.strip() if h else f"col_{i}" for i, h in enumerate(rd.fieldnames or [])]
     rd.fieldnames = headers
 
@@ -113,7 +137,7 @@ def read_rows(path):
                 r.pop(None, None)
                 if not any((v or "").strip() for v in r.values() if isinstance(v, str)):
                     continue
-                yield {k: (v if isinstance(v, str) else "") for k, v in r.items()}
+                yield {k: (_clip(v) if isinstance(v, str) else "") for k, v in r.items()}
         finally:
             f.close()
     return headers, gen()
@@ -321,7 +345,7 @@ def import_dataset(path, replace=False, overrides=None, progress=None):
             n += 1
         used_keys.add(key)
         lead["lead_key"] = key
-        lead["original"] = {k: v for k, v in row.items() if v not in (None, "")}
+        lead["original_z"] = db.pack({k: v for k, v in row.items() if v not in (None, "")})
         stats[{"NONE": "no_website", "SOCIAL_DIRECTORY": "social_only", "FREE_BUILDER": "free_builder", "REAL": "real_website"}[lead["website_kind"]]] += 1
         if lead["maps_extra"].get("permanently_closed"):
             stats["closed"] += 1
@@ -332,9 +356,14 @@ def import_dataset(path, replace=False, overrides=None, progress=None):
     # ---- de-duplicate: same real domain or same phone => keep the row with most reviews
     def rank(l):
         return (l["reviews"] or 0, 1 if l["website"] else 0, -l["source_row"])
+    def phone_key(l):
+        d = re.sub(r"\D", "", l["phone"] or "")
+        if len(d) != 10 or d[:3] in {"800", "833", "844", "855", "866", "877", "888"}:
+            return ""                                   # toll-free / unparseable numbers are shared by unrelated listings
+        return d + "|" + (l["state"] or "")
     by_dom, by_phone = {}, {}
     for l in leads:
-        for table, k in ((by_dom, l["domain"]), (by_phone, re.sub(r"\D", "", l["phone"] or ""))):
+        for table, k in ((by_dom, l["domain"]), (by_phone, phone_key(l))):
             if k and len(k) >= 7:
                 cur = table.get(k)
                 if cur is None or rank(l) > rank(cur):
@@ -342,7 +371,7 @@ def import_dataset(path, replace=False, overrides=None, progress=None):
     dups = 0
     for l in leads:
         primary = None
-        for table, k in ((by_dom, l["domain"]), (by_phone, re.sub(r"\D", "", l["phone"] or ""))):
+        for table, k in ((by_dom, l["domain"]), (by_phone, phone_key(l))):
             if k and len(k) >= 7 and table.get(k) is not l:
                 primary = table[k]
                 break
@@ -357,7 +386,7 @@ def import_dataset(path, replace=False, overrides=None, progress=None):
                rating,reviews,maps_url,lat,lng,maps_extra_json,original_json,prefilter_class,prefilter_reason,crawlable,dup_of,created_at)
                VALUES(:source_row,:lead_key,:company_name,:website,:domain,:website_kind,:phone,:email,:city,:state,:zip,:address,:categories,
                :rating,:reviews,:maps_url,:lat,:lng,:mx,:orig,:prefilter_class,:prefilter_reason,:crawlable,:dup_of,:ts)""",
-            [{**l, "mx": json.dumps(l["maps_extra"], ensure_ascii=False), "orig": db.pack(l["original"]), "ts": ts}
+            [{**l, "mx": json.dumps(l["maps_extra"], ensure_ascii=False), "orig": l["original_z"], "ts": ts}
              for l in leads])
     con.close()
     stats.update({"inserted": len(leads), "duplicates": dups, "mapping": mapping, "crawlable": sum(l["crawlable"] for l in leads),

@@ -17,6 +17,7 @@ import time
 import traceback
 from collections import Counter, deque
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from concurrent.futures.process import BrokenProcessPool
 
 import aiohttp
 import psutil
@@ -44,7 +45,12 @@ def write_control(**updates):
     cur.update(updates)
     tmp = CONTROL_FILE().with_suffix(".tmp")
     tmp.write_text(json.dumps(cur), encoding="utf-8")
-    os.replace(tmp, CONTROL_FILE())
+    for attempt in range(6):                      # Windows refuses os.replace while another process has the file open for a moment
+        try:
+            os.replace(tmp, CONTROL_FILE())
+            break
+        except PermissionError:
+            time.sleep(0.05 * (attempt + 1))
     return cur
 
 
@@ -197,14 +203,44 @@ class Engine:
 
     # ------------------------------------------------------------------ helpers for handlers
     async def parse(self, fn, *args, nbytes=0):
-        """Run a CPU-heavy function in the process pool under the byte budget."""
+        """Run a CPU-heavy function in the process pool under the byte budget.
+        If a worker process dies, innocent in-flight pages are retried on a rebuilt pool; a page that keeps killing workers
+        is run alone in a throw-away process, and if that dies too it is recorded as unparseable (the lead is not lost)."""
         await self.budget.acquire(nbytes)
         self.parse_pending += 1
+        loop = asyncio.get_running_loop()
         try:
-            return await asyncio.get_running_loop().run_in_executor(self.pool, fn, *args)
+            for attempt in range(2):
+                try:
+                    return await loop.run_in_executor(self.pool, fn, *args)
+                except BrokenProcessPool:
+                    self._rebuild_pool()
+                    await asyncio.sleep(0.05 + 0.1 * attempt)
+            solo = ProcessPoolExecutor(max_workers=1)
+            try:
+                return await loop.run_in_executor(solo, fn, *args)
+            except BrokenProcessPool:
+                self.errors["page crashed the parser"] += 1
+                return {"url": args[1] if len(args) > 1 else "", "page_state": "UNPARSEABLE", "word_count": 0, "error": "parser crashed on this page"}
+            finally:
+                solo.shutdown(wait=False, cancel_futures=True)
         finally:
             self.parse_pending -= 1
             await self.budget.release(nbytes)
+
+    def _rebuild_pool(self):
+        if time.monotonic() - getattr(self, "_pool_rebuilt", 0) < 1.0:
+            return                                          # another task already rebuilt it a moment ago
+        self._pool_rebuilt = time.monotonic()
+        self.errors["parser process restarted"] += 1
+        try:
+            self.pool.shutdown(wait=False, cancel_futures=True)
+        except Exception:
+            pass
+        try:
+            self.pool = ProcessPoolExecutor(max_workers=self.parse_workers)
+        except Exception:
+            self.pool = ThreadPoolExecutor(max_workers=self.parse_workers)
 
     def count(self, key, n=1):
         self.stats[key] += n
@@ -412,11 +448,14 @@ class Engine:
                 self._compute_effective(ctl)
             self.effective = target
             workers.difference_update({w for w in workers if w.done()})
-            # slow-start: add at most ~10% of target (min 25) workers per second to avoid DNS/SYN stampedes
-            if not self.feeder_done and not self.stop_requested:
+            # slow-start: add at most ~10% of target (min 25) workers per second to avoid DNS/SYN stampedes.
+            # Keep spawning while there is queued work, even after the feeder has finished loading it (the sentinel doesn't count).
+            if not self.stop_requested:
+                waiting = q.qsize() - (1 if self.feeder_done else 0)
+                if not self.feeder_done:
+                    waiting = max(waiting, 1)
                 room = target - len(workers)
-                backlog = q.qsize() + 1
-                spawn = max(0, min(room, backlog, max(25, target // 8)))
+                spawn = max(0, min(room, waiting, max(25, target // 8)))
                 for _ in range(spawn):
                     workers.add(asyncio.create_task(self._worker(q)))
             self._write_status()

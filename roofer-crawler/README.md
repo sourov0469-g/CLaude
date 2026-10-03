@@ -45,4 +45,4 @@ More power ≠ more speed past ~1,000: throughput is limited by your CPU, router
 * Sizes (100,000 leads): database ≈ 120 MB before crawling, ≈ 250–400 MB fully crawled; full `.xlsx` export ≈ 10–30 MB.
 
 ## Tests
-`python tests/test_integration.py` · `test_enrichment.py` · `test_qa.py` · `test_dashboard.py` · `test_engine_live.py [sites]` · `test_scale.py [rows]`
+`python tests/test_integration.py` · `test_enrichment.py` · `test_qa.py` · `test_dashboard.py` · `test_engine_live.py [sites]` · `test_chaos.py` (hostile servers) · `test_scale.py [rows]`
