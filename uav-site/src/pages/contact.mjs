@@ -6,10 +6,10 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/
 
 const chips = [
   ['Roof inspection', 'Roof inspection'],
-  ['RTK / 2D mapping', 'RTK / 2D mapping'],
-  ['3D modelling / aerial survey', '3D modelling'],
+  ['RTK &amp; 2D mapping', 'RTK &amp; 2D mapping'],
+  ['3D modelling', '3D modelling'],
   ['Aerial monitoring', 'Aerial monitoring'],
-  ['Aerial photography / video', 'Photography / video'],
+  ['Photography &amp; video', 'Photography &amp; video'],
   ['Not sure yet', 'Not sure yet']
 ];
 
@@ -18,7 +18,7 @@ export default function page() {
     .map(([v, label], i) => `<label class="chip"><input type="radio" name="service" value="${v}"${i === chips.length - 1 ? ' checked' : ''}><span>${label}</span></label>`)
     .join('');
 
-  const body = `<section class="phero" aria-labelledby="page-h1"><div class="wrap" style="padding-block:clamp(40px,6vw,80px) clamp(8px,2vw,24px)"><div class="phero-copy" data-reveal="fade" style="max-width:820px">${crumbsHtml(crumbs)}<p class="kicker">Contact</p><h1 class="h1" id="page-h1">Tell us what you need to see from above.</h1><p class="lead">Send the site, the question you need answered and how you will use the result. We will reply with a free quote.</p></div></div></section>
+  const body = `<section class="phero" aria-labelledby="page-h1"><div class="wrap" style="padding-block:clamp(28px,4vw,56px) clamp(4px,1vw,12px)"><div class="phero-copy" data-reveal="fade" style="max-width:820px">${crumbsHtml(crumbs)}<p class="kicker">Contact</p><h1 class="h1" id="page-h1">Tell us what you need to see from above.</h1><p class="lead">Send the site, the question you need answered and how you will use the result. We will reply with a free quote.</p></div></div></section>
 
 <section class="sec sec--paper" style="padding-top:clamp(32px,5vw,64px)" aria-label="Contact details and enquiry form"><div class="wrap contact-grid">
 <div data-reveal>
@@ -36,7 +36,7 @@ export default function page() {
 <div class="form-card" data-reveal style="--d:80ms" id="enquiry">
 <h2 class="h3" id="form-h" style="margin-bottom:6px">Enquiry details</h2>
 <p class="muted small" style="margin-bottom:26px">A few details are enough to start.</p>
-<form class="form" data-contact novalidate aria-labelledby="form-h">
+<form class="form" data-contact novalidate aria-labelledby="form-h" action="mailto:${site.email}" method="post" enctype="text/plain">
 <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
 <div class="form-grid">
 <div class="field"><label for="f-name">Name <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label><input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required aria-required="true"></div>
@@ -46,10 +46,11 @@ export default function page() {
 </div>
 <p class="hint" id="reach-hint" style="margin-top:-6px">Add an email address or a phone number so we can reply. One is enough.</p>
 <fieldset class="field"><legend>What do you need?</legend><div class="chips">${chipHtml}</div></fieldset>
-<div class="field"><label for="f-msg">What do you need to see or understand? <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label><textarea id="f-msg" name="message" maxlength="1500" required aria-required="true" placeholder="Tell us about the site and what you need."></textarea></div>
+<div class="field"><label for="f-msg">What do you need to see or understand? <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label><textarea id="f-msg" name="message" maxlength="1200" required aria-required="true" placeholder="Tell us about the site and what you need."></textarea></div>
+<p class="small muted" style="margin-bottom:-6px">This opens your email app with the enquiry written for you. Prefer to talk? Call <a href="${site.phoneHref}" style="text-decoration:underline">${site.phone}</a>.</p>
 <div><button class="btn" type="submit">Email my enquiry ${arrow}</button></div>
-<div class="form-status" role="status" aria-live="polite" hidden></div>
-<p class="fine">This opens your email app with your details filled in. Nothing is sent until you press Send there. We use what you share only to reply to your enquiry. See <a href="/privacy-cookies/#privacy" style="text-decoration:underline">Privacy</a>.</p>
+<div class="form-status" role="status" aria-live="polite"></div>
+<p class="fine">Nothing is sent until you press Send in your email app. We use what you share to reply to your enquiry. See <a href="/privacy-cookies/#privacy" style="text-decoration:underline">Privacy</a>.</p>
 </form>
 </div>
 </div></section>`;
@@ -57,7 +58,7 @@ export default function page() {
   return {
     path: '/contact/',
     title: 'Contact UAV Aerial Solutions | Request a free drone quote',
-    description: 'Request a free quote for drone roof inspections, mapping, 3D modelling or aerial photography in Cheshire. Call 07780 947875 or email UAV Aerial Solutions in Macclesfield.',
+    description: 'Request a free quote for drone roof inspections, mapping, 3D modelling or aerial photography in Cheshire. Call 07780 947875 or email us.',
     jsonld: [businessLd(), crumbLd(crumbs)],
     body
   };

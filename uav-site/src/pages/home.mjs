@@ -1,4 +1,4 @@
-import { site, services, img, arrow, faqSection, cta, businessLd, faqLd } from '../lib/site.mjs';
+import { site, services, img, arrow, faqSection, cta, businessLd, faqLd, stock } from '../lib/site.mjs';
 
 const faqs = [
   { q: 'What can a drone roof inspection show?', a: 'Detailed imagery of roof coverings, junctions, drainage and other areas that are hard to reach. It gives you clear visual evidence to support maintenance decisions without routine close access to every part of the roof.' },
@@ -11,14 +11,14 @@ const faqs = [
 const cards = [
   { s: services[0], key: 'home-svc-roof', pos: '50% 55%', text: 'Detailed aerial imagery of commercial and residential roofs, including the areas that are hard to reach safely.', link: 'See roof inspections', feature: true },
   { s: services[1], key: 'home-svc-rtk', pos: '50% 40%', text: 'Orthomosaic maps built from RTK-supported capture: a current, accurate view of the whole site.', link: 'See mapping' },
-  { s: services[2], key: 'home-svc-3d', pos: '50% 60%', text: 'Georeferenced 3D models for remote inspection, measurement and CAD/BIM workflows.', link: 'See 3D modelling' },
-  { s: services[3], key: 'home-svc-monitor', pos: '50% 50%', text: 'Repeat capture from agreed viewpoints, so progress and change are easy to compare.', link: 'See monitoring' },
+  { s: services[2], key: 'home-svc-3d', stock: true, pos: '50% 60%', text: 'Georeferenced 3D models for remote inspection, measurement and CAD/BIM workflows.', link: 'See 3D modelling' },
+  { s: services[3], key: 'home-svc-monitor', stock: true, pos: '50% 50%', text: 'Repeat capture from agreed viewpoints, so progress and change are easy to compare.', link: 'See monitoring' },
   { s: services[4], key: 'home-svc-photo', pos: '50% 50%', text: 'Aerial stills and video for project updates, property and site presentation.', link: 'See photo &amp; video' }
 ];
 
 export default function home() {
   const cardHtml = cards
-    .map((c, i) => `<article class="card${c.feature ? ' card--feature' : ''}" data-reveal style="--d:${i * 70}ms"><div class="card-media">${img(c.key, { pos: c.pos })}</div><div class="card-body"><span class="card-num">0${i + 1}</span><h3 class="h3">${c.s.name}</h3><p>${c.text}</p><a class="tlink card-link" href="${c.s.path}">${c.link} ${arrow}</a></div></article>`)
+    .map((c, i) => `<article class="card${c.feature ? ' card--feature' : ''}" data-reveal style="--d:${i * 70}ms"><div class="card-media">${img(c.key, { pos: c.pos })}${c.stock ? stock : ''}</div><div class="card-body"><span class="card-num">0${i + 1}</span><h3 class="h3">${c.s.name}</h3><p>${c.text}</p><a class="tlink card-link" href="${c.s.path}">${c.link} ${arrow}</a></div></article>`)
     .join('');
 
   const body = `<section class="hero hero-load" aria-labelledby="home-h1">
@@ -29,7 +29,7 @@ export default function home() {
 <h1 class="h1" id="home-h1">Clearer answers from above.</h1>
 </div>
 <div class="hero-lead-wrap">
-<p class="lead hero-lead">Roof inspections, RTK mapping, 3D models and project monitoring from a certified, insured drone operator in Macclesfield.</p>
+<p class="lead hero-lead">Roof inspections, RTK mapping, 3D models and project monitoring from certified, insured drone operators in Macclesfield.</p>
 <div class="btn-row hero-actions"><a class="btn" href="/contact/">Request a free quote ${arrow}</a><a class="btn btn--ghost" href="#services">Explore services</a></div>
 </div>
 </div>
@@ -44,7 +44,7 @@ export default function home() {
 <li data-reveal><b>8 years</b><span>flying UAV systems</span></li>
 <li data-reveal style="--d:60ms"><b>35 years</b><span>in Safe Systems of Work and risk assessment</span></li>
 <li data-reveal style="--d:120ms"><b>Certified &amp; insured</b><span>drone operators</span></li>
-<li data-reveal style="--d:180ms"><b>100+ buildings</b><span>in an ongoing roof-maintenance programme</span></li>
+<li data-reveal style="--d:180ms"><b>100+ buildings</b><span>on a client campus we support</span></li>
 </ul></div></section>
 
 <section class="sec sec--warm" id="services" aria-labelledby="services-h"><span class="seam"></span>
@@ -59,19 +59,17 @@ export default function home() {
 </section>
 
 <section class="sec sec--dark" id="how" aria-labelledby="how-h"><span class="seam"></span>
-<div class="wrap split split--wide-media split--rev">
-<div data-reveal>
-<p class="kicker">How it works</p>
-<h2 class="h2" id="how-h">A flight is only useful if the output answers the brief.</h2>
-<p class="lead" style="margin-top:20px">We start with the question you need answered, capture the area that matters and hand over imagery, maps or models your team can use.</p>
-<ol class="steps" style="margin-top:36px">
-<li class="step"><span class="step-n">01</span><h3 class="h3">Brief</h3><p>Agree the site, the question and the output you need.</p></li>
-<li class="step"><span class="step-n">02</span><h3 class="h3">Capture</h3><p>Fly the agreed area at the detail and coverage the job needs.</p></li>
-<li class="step"><span class="step-n">03</span><h3 class="h3">Deliver</h3><p>Process and hand over the files, with anything outstanding made clear.</p></li>
-</ol>
-<a class="tlink" href="/process-deliverables/" style="margin-top:34px">See the full process ${arrow}</a>
+<div class="wrap">
+<div class="sec-head sec-head--split" data-reveal>
+<div><p class="kicker">How it works</p><h2 class="h2" id="how-h" style="margin-top:18px">A flight is only useful if the output answers the brief.</h2></div>
+<p class="lead">We start with the question you need answered, capture the area that matters and hand over imagery, maps or models your team can use.</p>
 </div>
-<div class="frame bracket bracket--light" data-reveal style="--d:100ms;aspect-ratio:4/3.4">${img('home-process', { pos: '50% 50%' })}</div>
+<ol class="steps steps--row" style="--cols:3">
+<li class="step" data-reveal><span class="step-n">01</span><h3 class="h3">Brief</h3><p>Agree the site, the question and the output you need.</p></li>
+<li class="step" data-reveal style="--d:70ms"><span class="step-n">02</span><h3 class="h3">Capture</h3><p>Fly the agreed area at the detail and coverage the job needs.</p></li>
+<li class="step" data-reveal style="--d:140ms"><span class="step-n">03</span><h3 class="h3">Deliver</h3><p>Process and hand over the files you agreed.</p></li>
+</ol>
+<a class="tlink" href="/process-deliverables/" style="margin-top:40px">See the full process ${arrow}</a>
 </div>
 </section>
 
@@ -80,10 +78,10 @@ export default function home() {
 <div class="frame bracket" data-reveal style="aspect-ratio:4/3.3">${img('home-case', { pos: '50% 55%' })}</div>
 <div data-reveal style="--d:100ms">
 <p class="kicker">Commercial experience</p>
-<h2 class="h2" id="exp-h">Roof maintenance across 100+ buildings.</h2>
+<h2 class="h2" id="exp-h">Three years on a 100+ building campus.</h2>
 <div class="prose">
-<p>For the last three years we have supported a large pharmaceutical client in Cheshire with its roof-maintenance strategy, across a campus of more than 100 buildings. The client is not named.</p>
-<p>Flights are planned with site risk in mind, backed by 35 years in Safe Systems of Work and risk assessment.</p>
+<p>For the last three years we have worked for a large pharmaceutical company in Cheshire on roof maintenance across a campus of more than 100 buildings. The client is not named.</p>
+<p>We also bring 35 years in Safe Systems of Work and risk assessment to our drone work.</p>
 </div>
 <a class="tlink" href="/about/">About UAV Aerial Solutions ${arrow}</a>
 </div>
@@ -98,7 +96,7 @@ ${cta()}`;
     path: '/',
     nav: '/',
     title: 'Drone roof inspections & mapping, Cheshire | UAV Aerial Solutions',
-    description: 'Roof inspections, RTK mapping, 3D models, project monitoring and aerial photography from a certified, insured drone operator in Macclesfield, Cheshire.',
+    description: 'Roof inspections, RTK mapping, 3D models, project monitoring and aerial photography from certified, insured drone operators in Macclesfield, Cheshire.',
     jsonld: [businessLd(), faqLd(faqs)],
     body
   };

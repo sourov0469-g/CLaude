@@ -14,9 +14,9 @@ export default function page() {
 <h3>Information you give us</h3>
 <p>If you phone or email us, or use the enquiry form, you may give us your name, email address, telephone number, site location and details of your project.</p>
 <h3>How the enquiry form works</h3>
-<p>The form does not send anything from this website. When you press the button it opens your own email app with your message filled in, addressed to us. Nothing reaches us until you press Send in that app. The message then travels through your email provider and ours, under their own terms and privacy policies.</p>
+<p>The form does not send anything from this website. When you press the button it opens your own email app with your message filled in, addressed to us. This also works if JavaScript is switched off. Nothing reaches us until you press Send in that app. The message then travels through your email provider and ours, under their own terms and privacy policies.</p>
 <h3>How we use it</h3>
-<p>We use it to reply to your enquiry, understand the work you need, prepare a quote and keep ordinary business records. We do this because you have asked us to, and because it is in our legitimate interest to run the business and respond to enquiries.</p>
+<p>We use it to reply to your enquiry, understand the work you need, prepare a quote and keep ordinary business records. We rely on taking steps at your request before a contract is made, and on our legitimate interest in running the business and answering enquiries. We do not sell your information.</p>
 <h3>How long we keep it</h3>
 <p>We keep enquiries for as long as we need them to deal with your request and any work that follows, and for normal business and legal record-keeping.</p>
 <h3>Your rights</h3>

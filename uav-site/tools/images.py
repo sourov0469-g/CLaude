@@ -18,6 +18,12 @@ def save_webp(im, path, q=74):
 for key, s in spec.items():
     im = Image.open(os.path.join(SRC, s['src']))
     im = ImageOps.exif_transpose(im).convert('RGB')
+    if 'crop' in s:
+        x0, y0, x1, y1 = s['crop']
+        im = im.crop((round(x0 * im.width), round(y0 * im.height), round(x1 * im.width), round(y1 * im.height)))
+    if 'sat' in s:
+        from PIL import ImageEnhance
+        im = ImageEnhance.Color(im).enhance(s['sat'])
     w = s['w']
     if im.width > w:
         im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)

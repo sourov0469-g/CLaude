@@ -19,8 +19,10 @@
   }
   function setMeta(sel, attr, val) { var el = doc.querySelector(sel); if (el) el.setAttribute(attr, val); }
   function scrollToAnchor(a) {
-    var el = a && doc.getElementById(decodeURIComponent(a));
-    if (el) { el.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' }); return true; }
+    var id = a; try { id = decodeURIComponent(a); } catch (x) { return false; }
+    var el = a && doc.getElementById(id);
+    if (el) {
+      el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); el.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' }); return true; }
     return false;
   }
   function render(r, initial) {
@@ -40,8 +42,9 @@
     if (src) { var inMain = main.querySelector('script[type="application/ld+json"]'); if (inMain) inMain.remove(); }
     U.query = r.query; U.markActive(r.path); U.closeMenus(); U.initPage(main);
     cur = r;
-    if (!(r.anchor && scrollToAnchor(r.anchor))) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    if (!initial) {
+    var anchored = !!(r.anchor && scrollToAnchor(r.anchor));
+    if (!anchored) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    if (!initial && !anchored) {
       var h1 = main.querySelector('h1');
       if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
       if (announcer) { announcer.textContent = ''; setTimeout(function () { announcer.textContent = 'Page loaded: ' + title; }, 60); }

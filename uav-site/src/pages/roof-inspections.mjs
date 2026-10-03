@@ -1,4 +1,4 @@
-import { site, services, img, arrow, faqSection, cta, serviceLd, crumbLd, faqLd } from '../lib/site.mjs';
+import { site, services, img, arrow, faqSection, cta, serviceLd, crumbLd, faqLd, stock } from '../lib/site.mjs';
 import { icon } from '../lib/icons.mjs';
 import { phero, btn, related, iconCards, steps, secHead } from '../lib/blocks.mjs';
 
@@ -6,14 +6,14 @@ const s = services[0];
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services/' }, { name: 'Roof inspections', path: s.path }];
 
 const slides = [
-  { key: 'roof-g-coverings', pos: '50% 50%', title: 'Roof coverings', text: 'Surface condition across the whole roof: sheeting, membranes, staining and standing water, captured in sequence so nothing is missed.' },
-  { key: 'roof-g-junctions', pos: '50% 45%', title: 'Junctions and upstands', text: 'Where the covering meets walls, upstands and flashings: the details that often decide whether a roof stays watertight.' },
+  { key: 'roof-g-coverings', pos: '50% 50%', title: 'Roof coverings', text: 'Surface condition across the roof: sheeting, membranes, staining and standing water.' },
+  { key: 'roof-g-junctions', pos: '50% 45%', title: 'Junctions and upstands', text: 'Where the covering meets walls, upstands and flashings.' },
   { key: 'roof-g-drainage', pos: '50% 50%', title: 'Drainage', text: 'Outlets, gutters and falls, including debris and standing water around them.' },
-  { key: 'roof-g-hard', pos: '50% 50%', title: 'Hard-to-reach areas', text: 'Pipework, roof-edge details and areas behind plant, photographed without ladders or access equipment.' }
+  { key: 'roof-g-hard', pos: '50% 50%', title: 'Hard-to-reach areas', text: 'Pipework, roof-edge details and areas behind plant, photographed from the air to reduce the need for direct access.' }
 ];
 
 const faqs = [
-  { q: 'What will I receive?', a: 'Detailed photographs of the roof areas agreed beforehand, handed over with a clear note of what was captured and anything still outstanding.' },
+  { q: 'What will I receive?', a: 'Detailed photographs of the roof areas covered by your brief, as image files ready to use or pass on.' },
   { q: 'Does a drone inspection replace a roofing survey?', a: 'No. It gives you clear visual evidence and can reduce the need for close access, but where a specialist roofing, structural or engineering assessment is needed, the imagery supports that work rather than replacing it.' },
   { q: 'Do you inspect commercial and residential roofs?', a: 'Yes, both. Tell us the property type, the location and what you need to understand when you request a quote.' },
   { q: 'What should I include in my enquiry?', a: 'The roof&rsquo;s location, the type of property, any areas of concern and how you plan to use the images. You do not need to choose a technical method first.' }
@@ -30,7 +30,7 @@ export default function page() {
   const hero = phero({
     items: crumbs,
     kicker: 'Drone service &middot; Roof inspections',
-    title: 'See the whole roof without the climb.',
+    title: 'See the roof without the climb.',
     lead: 'Detailed aerial imagery of commercial and residential roofs: coverings, junctions, drainage and the areas that are hard to reach safely.',
     actions: btn('/contact/?service=roof-inspection', 'Request a roof inspection') + btn('#imagery', 'See what the imagery shows', 'ghost'),
     media: `<div class="frame bracket frame--43">${img('roof-hero', { eager: true, priority: true, pos: '50% 50%' })}</div>`,
@@ -53,8 +53,8 @@ ${secHead('What you receive', 'Visual evidence for the next maintenance decision
 ${iconCards([
   { icon: 'eye', title: 'Agreed coverage', text: 'We confirm the roof areas and details that need to be visible before the flight.' },
   { icon: 'camera', title: 'Detailed photographs', text: 'Clear aerial photographs of those areas, including parts that are awkward to reach.' },
-  { icon: 'file', title: 'Clear handover', text: 'The files, with a note of what was captured and anything outstanding.' },
-  { icon: 'check', title: 'A basis for what is next', text: 'Use the images for maintenance planning, contractor briefing or a specialist survey.' }
+  { icon: 'file', title: 'Ready-to-use files', text: 'The image files, ready to use or pass on.' },
+  { icon: 'check', title: 'Next steps', text: 'Use the images for maintenance planning, contractor briefing or a specialist survey.' }
 ])}
 <p class="note" style="margin-top:32px;max-width:70ch" data-reveal>Drone imagery is a visual record. It supports, rather than replaces, a specialist roofing or structural assessment where one is needed.</p>
 </div></section>
@@ -62,8 +62,8 @@ ${iconCards([
 <section class="sec sec--warm" id="suitable" aria-labelledby="suit-h"><span class="seam"></span><div class="wrap">
 ${secHead('Suitable briefs', 'Commercial and residential roofs.', 'We inspect both. The approach is the same: agree what must be seen, then capture it.', 'suit-h')}
 <div class="cards cards--2">
-<article class="card" data-reveal><div class="card-media">${img('roof-commercial', { pos: '50% 50%' })}</div><div class="card-body"><span class="card-num">Commercial</span><h3 class="h3">Large, complex and multi-building roofs</h3><p>Big roof areas, plant and multi-building sites. We currently support roof maintenance across a campus of more than 100 buildings for a Cheshire pharmaceutical client.</p><a class="tlink card-link" href="/contact/?service=roof-inspection">Discuss a commercial roof ${arrow}</a></div></article>
-<article class="card" data-reveal style="--d:80ms"><div class="card-media">${img('roof-residential', { pos: '50% 50%' })}</div><div class="card-body"><span class="card-num">Residential</span><h3 class="h3">Houses and smaller buildings</h3><p>Pitched and flat roofs seen from above, so you can see the whole roof before deciding on repairs.</p><a class="tlink card-link" href="/contact/?service=roof-inspection">Discuss a home roof ${arrow}</a></div></article>
+<article class="card" data-reveal><div class="card-media">${img('roof-commercial', { pos: '50% 50%' })}${stock}</div><div class="card-body"><span class="card-num">Commercial</span><h3 class="h3">Large and complex roofs</h3><p>Big roof areas, plant and multi-building sites. We currently support roof maintenance across a campus of more than 100 buildings for a Cheshire pharmaceutical client.</p><a class="tlink card-link" href="/contact/?service=roof-inspection">Discuss a commercial roof ${arrow}</a></div></article>
+<article class="card" data-reveal style="--d:80ms"><div class="card-media">${img('roof-residential', { pos: '50% 50%' })}${stock}</div><div class="card-body"><span class="card-num">Residential</span><h3 class="h3">Houses and smaller buildings</h3><p>Pitched and flat roofs seen from above, so you can see the whole roof before deciding on repairs.</p><a class="tlink card-link" href="/contact/?service=roof-inspection">Discuss a home roof ${arrow}</a></div></article>
 </div>
 </div></section>
 
@@ -72,8 +72,8 @@ ${secHead('How an inspection runs', 'Agree it, fly it, check it, hand it over.',
 ${steps([
   { title: 'Brief', text: 'The roof, the question and any areas of concern.' },
   { title: 'Fly', text: 'Capture the agreed areas methodically.' },
-  { title: 'Check', text: 'Confirm the required areas have been covered.' },
-  { title: 'Deliver', text: 'Hand over the files and anything outstanding.' }
+  { title: 'Check', text: 'Review the images against the brief.' },
+  { title: 'Deliver', text: 'Hand over the image files.' }
 ], { row: true, cols: 4 })}
 <a class="tlink" href="/process-deliverables/" style="margin-top:44px">See the full process ${arrow}</a>
 </div></section>

@@ -1,19 +1,21 @@
 {
   "home-hero-main": {
     "src": "client/c01-roof-hero.jpg",
-    "w": 1600,
+    "w": 1920,
     "alt": "Aerial view of a commercial roof with a gable ridge and roof lights, photographed by drone",
-    "q": 74
+    "q": 72
   },
   "home-hero-inset": {
     "src": "client/c02-roof-edge.jpg",
-    "w": 720,
-    "alt": "Drone view of a flat roof edge and the neighbouring buildings"
+    "w": 800,
+    "alt": "",
+    "q": 72
   },
   "home-svc-roof": {
     "src": "client/c11-slate-flashing.jpg",
-    "w": 1000,
-    "alt": "Close drone view of a slate roof and lead flashing"
+    "w": 1300,
+    "alt": "Close drone view of a slate roof and lead flashing",
+    "q": 70
   },
   "home-svc-rtk": {
     "src": "client/c04-roof-topdown.jpg",
@@ -21,92 +23,88 @@
     "alt": "Top-down aerial view of a large flat roof"
   },
   "home-svc-3d": {
-    "src": "stock/px-8811576.jpg",
-    "w": 800,
-    "alt": "Oblique aerial view of a group of buildings and surrounding grounds",
-    "q": 70
+    "src": "stock/px-6391896.jpg",
+    "w": 900,
+    "q": 70,
+    "alt": "Oblique aerial view across tiled rooftops and chimneys in a city"
   },
   "home-svc-monitor": {
     "src": "stock/px-18646262.jpg",
     "w": 800,
-    "alt": "Top-down aerial view of an active construction site between existing buildings",
+    "alt": "Stock aerial photograph of an active construction site between existing buildings",
     "q": 68
   },
   "home-svc-photo": {
     "src": "client/c13-coast-lighthouse.jpg",
-    "w": 900,
-    "alt": "Aerial photograph of a rocky coastline with a lighthouse"
-  },
-  "home-process": {
-    "src": "client/c07-roof-rooflights.jpg",
-    "w": 1000,
-    "alt": "Long flat roof between two rows of roof lights, seen from above",
-    "q": 70
+    "w": 1100,
+    "alt": "Aerial photograph of a rocky coastline with a lighthouse",
+    "q": 68
   },
   "home-case": {
     "src": "client/c09-roof-run.jpg",
-    "w": 1000,
+    "w": 1300,
     "alt": "Flat roof with standing water between two lines of roof lights",
-    "q": 70
+    "q": 68
   },
   "services-coverage": {
     "src": "stock/px-32047288.jpg",
-    "w": 1000,
-    "alt": "Aerial view of farmland, fields and a village",
+    "w": 1200,
+    "alt": "Stock aerial photograph of farmland, fields and a village",
     "q": 66
   },
   "roof-hero": {
     "src": "client/c06-roof-fields.jpg",
-    "w": 1100,
+    "w": 1300,
     "alt": "Aerial view of a flat roof edge with open fields beyond",
     "q": 70
   },
   "roof-g-coverings": {
     "src": "client/c05-roof-upstand.jpg",
-    "w": 1100,
+    "w": 1300,
     "alt": "Flat roof covering and upstand wall seen from above",
-    "q": 70
+    "q": 68
   },
   "roof-g-junctions": {
     "src": "client/c10-roof-junction.jpg",
-    "w": 1100,
+    "w": 1300,
     "alt": "Roof upstand meeting a wall with windows and standing water on the flat roof",
-    "q": 70
+    "q": 68
   },
   "roof-g-drainage": {
     "src": "client/c03-roof-outlet.jpg",
-    "w": 1100,
+    "w": 1300,
     "alt": "Roof outlet with debris and standing water at a roof corner",
     "q": 68
   },
   "roof-g-hard": {
     "src": "client/c08-roof-pipe.jpg",
-    "w": 1100,
+    "w": 1300,
     "alt": "Pipework and an outlet at the edge of a flat roof",
-    "q": 70
+    "q": 68
   },
   "roof-commercial": {
     "src": "stock/px-19035388.jpg",
     "w": 900,
-    "alt": "Black and white aerial view of a long industrial roof",
+    "alt": "Stock black and white aerial photograph of a long industrial roof",
     "q": 70
   },
   "roof-residential": {
     "src": "stock/px-3997049.jpg",
     "w": 900,
-    "alt": "Top-down view of a row of houses and their pitched roofs",
-    "q": 68
+    "alt": "Stock aerial photograph of a row of houses and their pitched roofs",
+    "q": 68,
+    "sat": 0.75
   },
   "rtk-hero": {
     "src": "client/c15-rtk-base.jpg",
-    "w": 1300,
+    "w": 1500,
     "alt": "RTK base station on a tripod in open ground",
     "q": 70
   },
   "rtk-ortho": {
     "src": "stock/px-25461690.jpg",
-    "w": 1100,
-    "alt": "Top-down aerial view of a large building under construction, stitched like a map",
+    "w": 1300,
+    "alt": "Stock top-down aerial photograph of a large construction site",
     "q": 68
   },
   "3d-model": {
@@ -131,7 +129,13 @@
     "src": "stock/px-38930449.jpg",
     "w": 1100,
     "alt": "Construction site with foundations and a first concrete frame",
-    "q": 66
+    "q": 70,
+    "crop": [
+      0.12,
+      0.42,
+      0.7,
+      1.0
+    ]
   },
   "mon-4": {
     "src": "stock/px-38930447.jpg",
@@ -147,54 +151,61 @@
   },
   "photo-hero": {
     "src": "client/c14-gawsworth-church.jpg",
-    "w": 1300,
+    "w": 1500,
     "alt": "Aerial photograph of a church tower among trees in Cheshire countryside",
     "q": 70
   },
   "photo-inset": {
     "src": "stock/px-20396714.jpg",
     "w": 560,
-    "alt": "Aerial view of a ruined stone tower on a hill",
+    "alt": "Stock photograph of a ruined stone tower on a hill",
     "q": 68
   },
   "photo-site": {
     "src": "stock/px-7792985.jpg",
     "w": 1100,
-    "alt": "Aerial overview of an industrial estate beside open fields",
+    "alt": "Stock aerial photograph of an industrial estate beside open fields",
     "q": 68
   },
   "photo-comms": {
     "src": "stock/px-12454406.jpg",
-    "w": 800,
-    "alt": "Tower crane over a building under construction",
-    "q": 68
+    "w": 1100,
+    "alt": "Stock photograph of a tower crane over a building under construction",
+    "q": 70,
+    "crop": [
+      0,
+      0.1,
+      1,
+      0.6
+    ]
   },
   "photo-property": {
     "src": "stock/px-16849893.jpg",
-    "w": 1000,
-    "alt": "Aerial view of a house with a tiled roof and gravel drive",
+    "w": 1200,
+    "alt": "Stock aerial photograph of a house with a tiled roof and gravel drive",
     "q": 68
   },
   "process-hero": {
     "src": "stock/px-11748111.jpg",
     "w": 1100,
-    "alt": "Drone hovering above the roof of a brick building"
+    "alt": "Stock photograph of a drone hovering above the roof of a brick building"
   },
   "process-pre": {
     "src": "stock/px-16968728.jpg",
     "w": 1000,
-    "alt": "Hand holding a drone controller with the flight map on screen"
+    "alt": "Stock photograph of a hand holding a drone controller",
+    "q": 78
   },
   "about-hero": {
     "src": "client/c12-drone-over-town.jpg",
-    "w": 1300,
+    "w": 1500,
     "alt": "Drone in flight above an industrial estate and town",
     "q": 70
   },
   "about-sops": {
     "src": "stock/px-4353810.jpg",
     "w": 1000,
-    "alt": "Pilot holding a drone controller with a drone in the sky above"
+    "alt": "Stock photograph of a pilot holding a drone controller with a drone in the sky above"
   },
   "about-matrice": {
     "src": "client/c16-matrice-4e.webp",

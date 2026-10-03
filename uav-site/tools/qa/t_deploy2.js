@@ -1,0 +1,22 @@
+const { chromium } = require('/opt/node22/lib/node_modules/playwright');
+const B='http://127.0.0.1:8765';let fails=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fails++};
+(async()=>{
+ const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+ let ctx=await b.newContext({viewport:{width:1280,height:800}});let p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+ await p.goto(B+'/services/rtk-mapping/');await p.waitForTimeout(800);
+ ok(await p.evaluate(()=>document.querySelector('.has-mega').classList.contains('is-current')),'static+JS: Services current on /services/rtk-mapping/');
+ ok(await p.evaluate(()=>document.querySelector('.mega-item[href="/services/rtk-mapping/"]').getAttribute('aria-current')==='page'),'mega item current');
+ await p.hover('.mega-btn');await p.waitForTimeout(500);await p.click('.mega-item[href="/services/3d-modelling/"]');await p.waitForURL('**/services/3d-modelling/');
+ ok(true,'mega link navigates to real URL '+p.url());ok((await p.title()).includes('3D modelling'),'title '+await p.title());
+ await p.goBack();await p.waitForTimeout(500);ok(p.url().endsWith('/services/rtk-mapping/'),'back works');
+ await p.goto(B+'/privacy-cookies/#terms');await p.waitForTimeout(1200);ok(await p.evaluate(()=>{const r=document.getElementById('terms').getBoundingClientRect();return r.top<250&&r.top>-20}),'deep anchor /privacy-cookies/#terms scrolls to terms');
+ await p.goto(B+'/contact/?service=aerial-monitoring');await p.waitForTimeout(800);ok(await p.evaluate(()=>document.querySelector('input[name=service]:checked').value)==='Aerial monitoring','query preselect on real URL');
+ await ctx.close();
+ ctx=await b.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message));
+ await p.goto(B+'/about/');await p.waitForTimeout(800);await p.tap('.burger');await p.waitForTimeout(700);
+ ok(await p.evaluate(()=>document.querySelector('.m-menu').classList.contains('is-open')&&document.body.classList.contains('is-locked')),'mobile menu opens on deploy build');
+ ok(await p.evaluate(()=>document.querySelector('.m-link[data-nav="/about/"]').getAttribute('aria-current')==='page'),'About marked current in mobile menu');
+ await p.tap('.m-link[data-nav="/process-deliverables/"]');await p.waitForURL('**/process-deliverables/');ok(true,'mobile link navigates');
+ ok(!(await p.evaluate(()=>document.body.classList.contains('is-locked'))),'scroll unlocked after navigation');
+ console.log('errors',errs);console.log(fails?fails+' FAILED':'ALL PASSED');await b.close();
+})();

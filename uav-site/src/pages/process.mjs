@@ -1,13 +1,13 @@
-import { site, services, img, arrow, faqSection, cta, crumbLd, faqLd, businessLd } from '../lib/site.mjs';
+import { site, services, img, arrow, faqSection, cta, crumbLd, faqLd, businessLd, stock } from '../lib/site.mjs';
 import { icon } from '../lib/icons.mjs';
 import { phero, btn, steps, secHead, iconCards } from '../lib/blocks.mjs';
 
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Process & deliverables', path: '/process-deliverables/' }];
 
 const faqs = [
-  { q: 'What will I receive at the end?', a: 'The files agreed in the brief: photographs, video, an orthomosaic map or a 3D model, handed over with a clear note of what was captured and anything still outstanding.' },
-  { q: 'What can delay or change a flight?', a: 'Weather, access, site conditions, airspace and other practical or regulatory considerations. If any of them affects the plan we will tell you and agree what changes.' },
-  { q: 'Can the scope change once we have agreed it?', a: 'Yes. If a site condition materially changes the plan, we will explain it and agree any change with you before carrying on.' },
+  { q: 'What will I receive at the end?', a: 'The files agreed in the brief: photographs, video, an orthomosaic map or a 3D model.' },
+  { q: 'What can delay or change a flight?', a: 'Weather, access, site conditions, airspace and other practical or regulatory considerations. If any of them affects the plan we will tell you.' },
+  { q: 'Can the scope change once we have agreed it?', a: 'Yes. If a site condition changes the plan, we will explain it and discuss any change with you.' },
   { q: 'How do I get a quote?', a: 'Send the site, the question you need answered and how you will use the result. We reply with a free quote.' },
   { q: 'Where do you work?', a: 'We are based in Macclesfield and work across Cheshire. If your site is further afield, send us the location and we will tell you whether we can help.' }
 ];
@@ -27,7 +27,7 @@ export default function page() {
     title: 'From site question to usable output.',
     lead: 'Agree the question and the deliverable first. Then plan, prepare, capture, process and hand over what your project needs.',
     actions: btn('/contact/', 'Start your brief') + btn('#stages', 'See the five stages', 'ghost'),
-    media: `<div class="frame bracket frame--45" style="max-height:620px;margin-inline:auto;max-width:520px">${img('process-hero', { eager: true, priority: true, pos: '50% 60%' })}</div>`
+    media: `<div class="frame bracket frame--45" style="max-height:620px;margin-inline:auto;max-width:520px">${img('process-hero', { eager: true, priority: true, pos: '50% 60%' })}${stock}</div>`
   });
   const tbl = deliverables
     .map(([i, name, text]) => `<tr data-reveal><th scope="row">${name}</th><td>${text}</td><td><a class="tlink" href="${services[i].path}">${services[i].name} ${arrow}</a></td></tr>`)
@@ -40,14 +40,14 @@ export default function page() {
 <p class="kicker">After you agree the brief</p>
 <h2 class="h2" id="st-h">Five stages, in the same order every time.</h2>
 <div class="prose"><p>The technical method changes by project. The sequence does not.</p></div>
-<div class="frame bracket" style="margin-top:36px;aspect-ratio:4/3.2;max-width:520px">${img('process-pre', { pos: '50% 35%' })}</div>
+<div class="frame bracket" style="margin-top:36px;aspect-ratio:4/3.2;max-width:520px">${img('process-pre', { pos: '50% 28%' })}${stock}</div>
 </div>
 <div data-reveal style="--d:80ms">${steps([
   { title: 'Plan', text: 'Confirm the site, purpose, coverage, deliverable and any constraints.' },
   { title: 'Prepare', text: 'Review access, site information and the practical considerations before capture.' },
   { title: 'Capture', text: 'Fly the agreed area and collect the imagery or mapping data the brief needs.' },
-  { title: 'Process', text: 'Prepare the agreed photographs, video, orthomosaic or 3D model and check the output.' },
-  { title: 'Deliver', text: 'Hand over the agreed files and explain anything you need in order to use them.' }
+  { title: 'Process', text: 'Prepare the agreed photographs, video, orthomosaic or 3D model.' },
+  { title: 'Deliver', text: 'Hand over the agreed files.' }
 ])}</div>
 </div></section>
 
@@ -65,12 +65,12 @@ ${secHead('Common deliverables', 'Different formats answer different questions.'
 ${secHead('What to expect', 'Before, during and after capture should stay clear.', 'The flight is one stage in a simple chain: agree the purpose, capture the brief, then hand over the agreed files.', 'exp-h')}
 ${iconCards([
   { icon: 'file', title: 'Agree the brief', text: 'Confirm the site, purpose, coverage, intended use and required deliverable.' },
-  { icon: 'camera', title: 'Capture to the brief', text: 'Collect the agreed imagery or data, and flag any site condition that materially changes the plan.' },
-  { icon: 'check', title: 'Hand over clearly', text: 'Deliver the agreed files and make clear what was captured, what changed and what remains outstanding.' }
+  { icon: 'camera', title: 'Capture to the brief', text: 'Collect the agreed imagery or data, and tell you about any site condition that changes the plan.' },
+  { icon: 'check', title: 'Hand over clearly', text: 'Deliver the agreed files and answer any questions about using them.' }
 ], { cols: 3, dark: true })}
 </div></section>
 
-${faqSection({ id: 'faq', title: 'Straight answers before you request a quote.', lead: 'The technical method can be discussed once the brief is clear.', items: faqs, bg: 'paper' })}
+${faqSection({ id: 'faq', title: 'How a project runs, in short.', lead: 'The technical method can be discussed once the brief is clear.', items: faqs, bg: 'paper' })}
 
 ${cta({ title: 'Ready to start with a brief?', text: 'Tell us the site and what you need to understand. We will reply with a free quote.' })}`;
 

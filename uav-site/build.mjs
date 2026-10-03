@@ -207,6 +207,7 @@ No build step, no third-party requests, no cookies.
 Files: index.html, /services/*, /process-deliverables/, /about/, /contact/, /privacy-cookies/, 404.html,
 sitemap.xml, robots.txt, manifest.webmanifest, /assets (css, js, fonts, images).
 Configure the host to serve 404.html for unknown addresses.
+Before launch, check that the host does not inject its own scripts or cookies (some website builders do). The privacy page says the site sets no cookies and loads nothing from third parties.
 `);
 try {
   execSync(`cd "${siteOut}" && rm -f ../UAV_AERIAL_SOLUTIONS_deploy-package.zip && zip -qr ../UAV_AERIAL_SOLUTIONS_deploy-package.zip .`);

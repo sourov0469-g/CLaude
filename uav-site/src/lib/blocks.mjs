@@ -13,7 +13,7 @@ export const btn = (href, label, kind = '') => `<a class="btn${kind ? ' btn--' +
 export function related(currentSlug, picks, { title = 'Other ways to see the same site.', lead = 'Each service is agreed around the decision you need to make.' } = {}) {
   const list = picks.map((s) => services.find((x) => x.slug === s));
   return `<section class="sec sec--warm2" aria-labelledby="rel-h"><span class="seam"></span><div class="wrap"><div class="sec-head sec-head--split" data-reveal><div><p class="kicker">Other drone services</p><h2 class="h2" id="rel-h" style="margin-top:18px">${title}</h2></div><p class="lead">${lead}</p></div><div class="cards cards--3">${list
-    .map((s, i) => `<article class="icard" data-reveal style="--d:${i * 70}ms"><span class="ico-wrap">${icon[s.icon]()}</span><h3 class="h3">${s.name}</h3><p>${s.short}</p><a class="tlink" href="${s.path}">${s.explore} ${arrow}</a></article>`)
+    .map((s, i) => `<article class="icard icard--link" data-reveal style="--d:${i * 70}ms"><span class="ico-wrap">${icon[s.icon]()}</span><h3 class="h3">${s.name}</h3><p>${s.short}</p><a class="tlink" href="${s.path}">${s.explore} ${arrow}</a></article>`)
     .join('')}</div></div></section>`;
 }
 

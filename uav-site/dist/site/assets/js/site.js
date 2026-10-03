@@ -42,11 +42,12 @@
 
   /* ---------- mega menu ---------- */
   var openT, closeT, hoverOpened = false;
-  function megaOpen() { if (!megaBtn) return; clearTimeout(closeT); megaBtn.setAttribute('aria-expanded', 'true'); megaPanel.classList.add('is-open'); }
+  if (megaPanel) megaPanel.setAttribute('inert', '');
+  function megaOpen() { if (!megaBtn) return; clearTimeout(closeT); megaBtn.setAttribute('aria-expanded', 'true'); megaPanel.removeAttribute('inert'); megaPanel.classList.add('is-open'); }
   function megaClose(returnFocus) {
     if (!megaBtn) return; clearTimeout(openT); hoverOpened = false;
-    megaBtn.setAttribute('aria-expanded', 'false'); megaPanel.classList.remove('is-open');
-    if (returnFocus) megaBtn.focus();
+    megaBtn.setAttribute('aria-expanded', 'false'); megaPanel.classList.remove('is-open'); megaPanel.setAttribute('inert', '');
+    if (returnFocus) megaBtn.focus({ preventScroll: true });
   }
   function megaIsOpen() { return megaBtn && megaBtn.getAttribute('aria-expanded') === 'true'; }
   if (megaBtn) {
@@ -110,7 +111,7 @@
     if (!menu || !menu.classList.contains('is-open')) return;
     menu.classList.remove('is-open'); setInert(false); unlockScroll();
     burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu');
-    if (restoreFocus !== false) (lastFocus && lastFocus.focus ? lastFocus : burger).focus();
+    if (restoreFocus !== false) (lastFocus && lastFocus.focus ? lastFocus : burger).focus({ preventScroll: true });
   }
   if (burger && menu) {
     burger.addEventListener('click', function () { menu.classList.contains('is-open') ? menuClose() : menuOpen(); });
@@ -206,7 +207,7 @@
     qsa('[data-mesh]', root).forEach(function (m) {
       if (m._m) return; m._m = true;
       var r = qs('input[type="range"]', m);
-      function set() { m.style.setProperty('--p', r.value); r.setAttribute('aria-valuetext', r.value + ' per cent of the photo shows the 3D mesh'); }
+      function set() { m.style.setProperty('--p', r.value); r.setAttribute('aria-valuetext', (100 - r.value) + ' per cent 3D mesh, ' + r.value + ' per cent photograph'); }
       r.addEventListener('input', set); set();
     });
   }
@@ -216,26 +217,33 @@
     qsa('form[data-contact]', root).forEach(function (form) {
       if (form._f) return; form._f = true;
       var status = qs('.form-status', form), btn = qs('button[type="submit"]', form), lastKey = '', lastAt = 0;
-      var loaded = Date.now();
+      var HINT = 'Add an email address or a phone number so we can reply. One is enough.';
       var q = (window.UAV && window.UAV.query) || window.location.search || '';
       var key = (new URLSearchParams(q.charAt(0) === '?' ? q : '?' + q)).get('service');
       if (key) {
-        var map = { 'roof-inspection': 'Roof inspection', 'roof-inspections': 'Roof inspection', 'rtk-mapping': 'RTK / 2D mapping', '3d-modelling': '3D modelling / aerial survey', 'aerial-monitoring': 'Aerial monitoring', 'aerial-photography-videography': 'Aerial photography / video' };
+        var map = { 'roof-inspection': 'Roof inspection', 'roof-inspections': 'Roof inspection', 'rtk-mapping': 'RTK & 2D mapping', '3d-modelling': '3D modelling', 'aerial-monitoring': 'Aerial monitoring', 'aerial-photography-videography': 'Photography & video' };
         var want = map[key.replace(/\/+$/, '')];
         if (want) qsa('input[name="service"]', form).forEach(function (r) { r.checked = r.value === want; });
       }
       function field(name) { return form.elements[name]; }
-      function clearErrors() {
-        qsa('.field-err', form).forEach(function (n) { n.remove(); });
-        qsa('[aria-invalid]', form).forEach(function (n) { n.removeAttribute('aria-invalid'); });
+      function dropDescribed(el, id) {
+        var d = (el.getAttribute('aria-describedby') || '').split(' ').filter(function (x) { return x && x !== id; });
+        if (d.length) el.setAttribute('aria-describedby', d.join(' ')); else el.removeAttribute('aria-describedby');
       }
+      function clearField(el) {
+        el.removeAttribute('aria-invalid');
+        var er = qs('#' + el.id + '-err', form); if (er) { er.remove(); dropDescribed(el, el.id + '-err'); }
+      }
+      function clearReach() { var rh = qs('#reach-hint', form); if (rh) { rh.classList.remove('is-err'); rh.textContent = HINT; } }
+      function clearErrors() { qsa('[aria-invalid]', form).forEach(clearField); qsa('.field-err', form).forEach(function (n) { n.remove(); }); clearReach(); }
       function bad(el, msg, list) {
         el.setAttribute('aria-invalid', 'true');
         var id = el.id + '-err', p = doc.createElement('p'); p.className = 'field-err'; p.id = id; p.textContent = msg;
         var d = (el.getAttribute('aria-describedby') || '').split(' ').filter(Boolean); if (d.indexOf(id) < 0) d.push(id); el.setAttribute('aria-describedby', d.join(' '));
         el.closest('.field').appendChild(p); list.push(el);
       }
-      function say(state, html) { status.dataset.state = state; status.innerHTML = html; status.hidden = false; }
+      function say(state, html) { status.dataset.state = state; status.innerHTML = html; }
+      function clearStatus() { status.innerHTML = ''; delete status.dataset.state; }
       function validate() {
         clearErrors(); var errs = [];
         var name = field('name'), email = field('email'), phone = field('phone'), msg = field('message');
@@ -243,9 +251,14 @@
         var e = email.value.trim(), p = phone.value.trim();
         var eOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e), pOk = p.replace(/\D/g, '').length >= 7;
         if (e && !eOk) bad(email, 'That email address does not look right.', errs);
-        else if (p && !pOk) bad(phone, 'Please enter a phone number with at least 7 digits.', errs);
-        else if (!e && !p) { bad(email, 'Please add an email address or a phone number so we can reply.', errs); phone.setAttribute('aria-invalid', 'true'); }
+        if (p && !pOk && !eOk) bad(phone, 'Please enter a phone number with at least 7 digits.', errs);
+        if (!e && !p) {
+          email.setAttribute('aria-invalid', 'true'); phone.setAttribute('aria-invalid', 'true');
+          var rh = qs('#reach-hint', form); if (rh) { rh.classList.add('is-err'); rh.textContent = 'Please add an email address or a phone number so we can reply.'; }
+          errs.push(email);
+        }
         if (!msg.value.trim()) bad(msg, 'Please tell us a little about the site and what you need.', errs);
+        errs.sort(function (a, b) { return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1; });
         return errs[0] || null;
       }
       function compose() {
@@ -260,28 +273,36 @@
         ].filter(function (l, i, a) { return l !== '' || (i > 0 && a[i - 1] !== ''); });
         return { subject: 'Website enquiry: ' + svc + ' (' + field('name').value.trim() + ')', body: lines.join('\n') };
       }
+      function readyHtml() {
+        return '<strong>Your email is ready.</strong> Press Send in your email app to finish. <strong>Nothing has been sent yet.</strong> If nothing opens, copy the enquiry and email it to <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>, or call <a href="tel:+447780947875">07780 947875</a>.<br><button type="button" class="btn btn--ghost" data-copy>Copy enquiry</button>';
+      }
+      function wireCopy(c) {
+        var cb = qs('[data-copy]', status); if (!cb) return;
+        cb.addEventListener('click', function () {
+          var text = 'To: ' + EMAIL + '\nSubject: ' + c.subject + '\n\n' + c.body;
+          function done() { cb.textContent = 'Copied to clipboard'; }
+          function fallback() { var t = doc.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;left:-9999px'; doc.body.appendChild(t); t.select(); try { doc.execCommand('copy'); done(); } catch (x) { cb.textContent = 'Press Ctrl/Cmd+C to copy'; } t.remove(); }
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+        });
+      }
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        if (btn.getAttribute('aria-disabled') === 'true') return;
         var first = validate();
         if (first) { say('error', 'Please check the highlighted fields.'); first.focus(); return; }
         if (field('company_website').value) return;
         var c = compose(), k = c.subject + c.body, now = Date.now();
-        if (k === lastKey && now - lastAt < 60000) { say('ok', 'Your email app was already opened with this enquiry. If it did not appear, use the buttons below.'); }
+        btn.setAttribute('aria-disabled', 'true'); setTimeout(function () { btn.removeAttribute('aria-disabled'); }, 2500);
+        say('ok', readyHtml()); wireCopy(c);
+        if (k === lastKey && now - lastAt < 60000) return;   // same enquiry already handed to the email app
         lastKey = k; lastAt = now;
-        var href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(c.subject) + '&body=' + encodeURIComponent(c.body);
-        btn.disabled = true; setTimeout(function () { btn.disabled = false; }, 2500);
-        say('ok', '<strong>Almost done.</strong> Your email app should now open with this enquiry ready to send. <strong>Nothing has been sent yet:</strong> press Send in your email app. If nothing opens, copy the enquiry and email it to <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>, or call ' + (window.UAV_PHONE || '07780 947875') + '.<br><button type="button" class="btn btn--ghost" data-copy>Copy enquiry</button>');
-        var cb = qs('[data-copy]', status);
-        cb.addEventListener('click', function () {
-          var text = 'To: ' + EMAIL + '\nSubject: ' + c.subject + '\n\n' + c.body;
-          function done() { cb.textContent = 'Copied to clipboard'; }
-          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
-          function fallback() { var t = doc.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;left:-9999px'; doc.body.appendChild(t); t.select(); try { doc.execCommand('copy'); done(); } catch (x) { cb.textContent = 'Press Ctrl/Cmd+C to copy'; } t.remove(); }
-        });
-        window.UAV.openMail(href);
+        window.UAV.openMail('mailto:' + EMAIL + '?subject=' + encodeURIComponent(c.subject) + '&body=' + encodeURIComponent(c.body));
       });
       form.addEventListener('input', function (e) {
-        var t = e.target; if (t.getAttribute && t.getAttribute('aria-invalid')) { t.removeAttribute('aria-invalid'); var er = qs('#' + t.id + '-err', form); if (er) er.remove(); }
+        var t = e.target; if (!t.getAttribute || !t.getAttribute('aria-invalid')) return;
+        clearField(t);
+        if (t.id === 'f-email' || t.id === 'f-phone') { clearReach(); var o = t.id === 'f-email' ? field('phone') : field('email'); clearField(o); }
+        if (!qs('[aria-invalid]', form) && status.dataset.state === 'error') clearStatus();
       });
     });
   }

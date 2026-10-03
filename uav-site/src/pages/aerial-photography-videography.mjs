@@ -29,7 +29,7 @@ export default function page() {
     items: crumbs,
     kicker: 'Drone service &middot; Photography &amp; video',
     title: 'Show the site clearly from above.',
-    lead: 'Aerial photography and video for project communication, property and site presentation, and commercial use, planned around a clear brief.',
+    lead: 'Aerial photography and video for projects, property and site presentation, planned around a clear brief.',
     actions: btn('/contact/?service=aerial-photography-videography', 'Discuss aerial media') + btn('#uses', 'Typical uses', 'ghost'),
     media: `<div class="duo"><div class="frame bracket frame--43">${img('photo-hero', { eager: true, priority: true, pos: '50% 55%' })}</div><div class="inset">${img('photo-inset', { eager: true, pos: '50% 50%' })}</div></div>`
   });
@@ -54,8 +54,8 @@ ${secHead('Typical uses', 'Clear aerial imagery, shaped around how it will be us
 <section class="sec sec--paper" id="formats" aria-labelledby="fmt-h"><span class="seam"></span><div class="wrap">
 ${secHead('Formats', 'Stills, video or both.', 'Tell us which fits the job and we will plan the shot list around it.', 'fmt-h')}
 ${iconCards([
-  { icon: 'camera', title: 'Aerial stills', text: 'Photographs from the agreed viewpoints, for reports, listings and presentations.' },
-  { icon: 'video', title: 'Video clips', text: 'Short aerial clips flown to an agreed shot list, for updates and presentation.' },
+  { icon: 'camera', title: 'Aerial stills', text: 'Photographs from the agreed viewpoints, for reports and presentations.' },
+  { icon: 'video', title: 'Video clips', text: 'Aerial video clips flown to an agreed shot list, for updates and presentation.' },
   { icon: 'layers', title: 'Both', text: 'A combined set when the project needs photographs and video from the same visit.' }
 ], { cols: 3 })}
 </div></section>
@@ -70,7 +70,7 @@ ${cta({ title: 'Need professional aerial photography or video?', text: 'Tell us 
     path: s.path,
     title: 'Aerial photography & video in Cheshire | UAV Aerial Solutions',
     description: 'Aerial photography and video for project communication, property and site presentation across Cheshire. UAV Aerial Solutions, Macclesfield. Free quotes.',
-    jsonld: [serviceLd(s, 'Aerial photography and videography for project communication, property and site presentation, and commercial use.'), crumbLd(crumbs), faqLd(faqs)],
+    jsonld: [serviceLd(s, 'Aerial photography and videography for project communication, and property and site presentation.'), crumbLd(crumbs), faqLd(faqs)],
     body
   };
 }

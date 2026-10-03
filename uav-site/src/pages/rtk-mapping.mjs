@@ -15,7 +15,7 @@ export default function page() {
     items: crumbs,
     dark: true,
     kicker: 'Drone service &middot; RTK &amp; 2D mapping',
-    title: 'A current, accurate map of your site.',
+    title: 'A current, high-detail map of your site.',
     lead: 'High-detail 2D orthomosaic maps from RTK-supported drone capture, for planning, analysis, progress review and CAD overlay.',
     actions: btn('/contact/?service=rtk-mapping', 'Request a mapping quote', 'light') + btn('#map', 'How the map comes together', 'ghost-light'),
     media: `<div class="frame bracket bracket--light frame--54">${img('rtk-hero', { eager: true, priority: true, pos: '50% 55%' })}</div>`,
@@ -36,7 +36,7 @@ ${steps([
   { title: 'Use', text: 'Planning, progress review, infrastructure review or CAD overlay.' }
 ], { cols: 4, mt: 36 })}
 </div>
-<div class="frame bracket gridover" data-reveal style="--d:100ms;aspect-ratio:4/3.2">${img('rtk-ortho', { pos: '50% 50%' })}<span class="tag">Orthomosaic</span></div>
+<div class="frame bracket gridover" data-reveal style="--d:100ms;aspect-ratio:4/3.2">${img('rtk-ortho', { pos: '50% 50%' })}<span class="tag">Stock photo</span></div>
 </div></section>
 
 <section class="sec sec--dark" id="accuracy" aria-labelledby="acc-h"><span class="seam"></span><div class="wrap split">
@@ -55,7 +55,7 @@ ${steps([
 </div></section>
 
 <section class="sec sec--warm" id="uses" aria-labelledby="use-h"><span class="seam"></span><div class="wrap">
-${secHead('What the map is for', 'One current view, many uses.', 'An accurate, up-to-date picture of the site helps teams make decisions faster.', 'use-h')}
+${secHead('What the map is for', 'What the map is used for.', 'An up-to-date picture of the site supports faster decisions.', 'use-h')}
 ${iconCards([
   { icon: 'eye', title: 'Spot mistakes, track progress', text: 'Compare the site against plans and against earlier maps.' },
   { icon: 'ruler', title: 'CAD overlay', text: 'Use the map as a base layer in your CAD drawings.' },

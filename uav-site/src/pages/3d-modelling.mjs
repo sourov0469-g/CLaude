@@ -73,7 +73,7 @@ export default function page() {
     kicker: 'Drone service &middot; 3D modelling',
     title: 'Turn aerial capture into a model you can inspect remotely.',
     lead: 'Interactive, georeferenced 3D models of roofs, buildings and sites, for remote inspection, measurement and CAD/BIM-related work.',
-    actions: btn('/contact/?service=3d-modelling', 'Request a 3D modelling quote') + btn('#model', 'What a model is for', 'ghost'),
+    actions: btn('/contact/?service=3d-modelling', 'Request a 3D modelling quote') + btn('#uses', 'What a model is for', 'ghost'),
     media: isoSvg()
   });
 
@@ -90,7 +90,7 @@ export default function page() {
 </div>
 <div data-reveal style="--d:100ms">
 <p class="kicker">From photographs to model</p>
-<h2 class="h2" id="mod-h">A model you can measure, inspect and share.</h2>
+<h2 class="h2" id="mod-h">A georeferenced model for remote inspection.</h2>
 <div class="prose"><p>Overlapping aerial photographs of a roof, building or site are processed into a 3D representation. Because the model is georeferenced, it supports measurements and calculations, and lets you inspect a structure remotely.</p><p>For larger areas we also capture full aerial surveys, from construction sites to farmland.</p></div>
 <div class="btn-row" style="margin-top:32px">${btn('/contact/?service=3d-modelling', 'Discuss a model')}</div>
 </div>
@@ -99,8 +99,8 @@ export default function page() {
 <section class="sec sec--dark" id="uses" aria-labelledby="use-h"><span class="seam"></span><div class="wrap">
 ${secHead('What a model is for', 'Answers you can get without going back to site.', 'The same model serves several teams, so agree its purpose before capture.', 'use-h')}
 ${iconCards([
-  { icon: 'eye', title: 'Remote inspection', text: 'Review a structure or site from any angle without another visit.' },
-  { icon: 'ruler', title: 'Measurement and calculations', text: 'Take dimensions and run calculations from a georeferenced model.' },
+  { icon: 'eye', title: 'Remote inspection', text: 'Review a structure or site remotely.' },
+  { icon: 'ruler', title: 'Measurement and calculations', text: 'Run calculations from a georeferenced model.' },
   { icon: 'build', title: 'CAD and BIM-related use', text: 'Digitised models can feed CAD and BIM workflows.' },
   { icon: 'layers', title: 'Project record', text: 'A detailed record of how a structure or site stood on the day.' }
 ], { dark: true })}
@@ -119,8 +119,8 @@ ${cta({ title: 'Need a 3D view of a site or structure?', text: 'Tell us the site
 
   return {
     path: s.path,
-    title: '3D modelling and aerial surveys in Cheshire | UAV Aerial Solutions',
-    description: 'Interactive, georeferenced 3D models and aerial surveys for remote inspection, measurement and CAD/BIM-related work. UAV Aerial Solutions, Macclesfield, Cheshire.',
+    title: '3D modelling & aerial surveys, Cheshire | UAV Aerial Solutions',
+    description: 'Georeferenced 3D models and aerial surveys for remote inspection, calculations and CAD/BIM-related work. UAV Aerial Solutions, Macclesfield, Cheshire.',
     jsonld: [serviceLd(s, 'Interactive, georeferenced 3D models and wider aerial surveys for remote inspection, measurement and CAD/BIM-related workflows.'), crumbLd(crumbs), faqLd(faqs)],
     body
   };

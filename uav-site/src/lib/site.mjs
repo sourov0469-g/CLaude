@@ -49,7 +49,8 @@ export const img = (key, o = {}) => {
   return `<img${cls} src="{{IMG:${key}}}" width="${m.w}" height="${m.h}" alt="${alt}"${loading}${fp} decoding="async"${pos}>`;
 };
 
-export const stripTags = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+export const stripTags = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&rsquo;/g, '\u2019').replace(/&lsquo;/g, '\u2018').replace(/&middot;/g, '\u00b7').replace(/\s+/g, ' ').trim();
+export const stock = '<span class="stock">Stock photo</span>';
 
 export const arrow = icon.arrow;
 export const emailText = site.email.replace('@', '@<wbr>');
@@ -119,7 +120,7 @@ export function megaMenu() {
     .map((s) => `<a class="mega-item" href="${s.path}" data-nav="${s.path}"><span class="ico-wrap">${icon[s.icon]()}</span><span><strong>${s.name}</strong><small>${s.short}</small></span><span class="go" aria-hidden="true">→</span></a>`)
     .join('');
   const help = `<a class="mega-item mega-item--help" href="/contact/"><span class="ico-wrap">${icon.help()}</span><span><strong>Not sure which?</strong><small>Describe the site and we will suggest the right output.</small></span><span class="go" aria-hidden="true">→</span></a>`;
-  return `<div class="mega" id="mega-services" data-mega-panel><div class="mega-panel"><div class="mega-intro"><p class="kicker">Drone services</p><h2>Choose the output, not the aircraft.</h2><p>Five services, each agreed around the decision you need to make.</p><svg class="mega-trace" viewBox="0 0 220 90" aria-hidden="true"><path d="M2 70C40 20 80 80 118 42c30-30 62-22 100 6" fill="none" stroke="#CC9865" stroke-width="1"/><circle cx="2" cy="70" r="3" fill="#CC9865"/><circle cx="218" cy="48" r="3" fill="#CC9865"/></svg><a class="mega-all" href="/services/" data-nav="/services/">All services ${arrow}</a></div><div class="mega-list">${items}${help}</div></div></div>`;
+  return `<div class="mega" id="mega-services" data-mega-panel><div class="mega-panel"><div class="mega-intro"><p class="kicker">Drone services</p><p class="mega-title">Choose the output, not the aircraft.</p><p>Five services, each agreed around the decision you need to make.</p><svg class="mega-trace" viewBox="0 0 220 90" aria-hidden="true"><path d="M2 70C40 20 80 80 118 42c30-30 62-22 100 6" fill="none" stroke="#CC9865" stroke-width="1"/><circle cx="2" cy="70" r="3" fill="#CC9865"/><circle cx="218" cy="48" r="3" fill="#CC9865"/></svg><a class="mega-all" href="/services/" data-nav="/services/">All services ${arrow}</a></div><div class="mega-list">${items}${help}</div></div></div>`;
 }
 
 export function header() {
@@ -137,6 +138,7 @@ export function header() {
 <div class="wrap bar">
 <a class="brand" href="/" aria-label="UAV Aerial Solutions, home">${logo}</a>
 <nav class="primary" aria-label="Primary"><ul>${links}</ul></nav>
+<a class="nav-tel" href="${site.phoneHref}" aria-label="Call ${site.phone}">${site.phone}</a>
 <a class="btn nav-cta" href="/contact/" data-nav="/contact/">Get a free quote ${arrow}</a>
 <button class="burger" type="button" aria-expanded="false" aria-controls="m-menu" aria-label="Open menu"><i></i><i></i><i></i></button>
 </div>
