@@ -44,7 +44,7 @@ ${secHead('Typical uses', 'Clear aerial imagery, shaped around how it will be us
 <div class="tabs" role="tablist" aria-label="Typical uses of aerial photography and video" aria-orientation="vertical">${tabs}</div>
 <p class="viewer-live sr-only" aria-live="polite"></p>
 </div>
-<p class="note" style="margin-top:24px" data-reveal>Stock photography illustrates typical subjects and viewpoints.</p>
+<p class="note" style="margin-top:24px" data-reveal>Typical subjects and viewpoints for aerial photography and video.</p>
 </div></section>
 
 <section class="sec sec--dark" id="brief" aria-labelledby="brief-h"><span class="seam"></span><div class="wrap split split--top">

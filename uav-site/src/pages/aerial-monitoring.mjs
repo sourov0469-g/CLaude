@@ -30,7 +30,7 @@ export default function page() {
 <div class="stage bracket bracket--light"><div class="stage-slides" style="--ar:4/3">${stage}</div><span class="stage-count" aria-hidden="true">01 / 05</span><div class="stage-nav"><button type="button" data-prev aria-label="Previous stage">${icon.prev}</button><button type="button" data-next aria-label="Next stage">${icon.next}</button></div></div>
 <div class="visits" role="tablist" aria-label="Five typical stages of a build">${tabs}</div>
 <p class="viewer-live sr-only" aria-live="polite"></p>
-<p class="note">These stock photographs come from different sites and only illustrate typical stages of a build. On a real project the sequence shows your own site.</p>
+<p class="note">Illustrative stages of a typical build. On a real project the sequence shows your own site.</p>
 </div>`;
 
   const hero = phero({

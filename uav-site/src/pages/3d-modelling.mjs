@@ -87,7 +87,7 @@ export default function page() {
 <div class="mesh-line" aria-hidden="true"></div>
 <div class="mesh-labels" aria-hidden="true"><span>Photograph</span><span>3D mesh</span></div>
 <input type="range" min="0" max="100" value="50" aria-label="Drag to compare the photograph with a 3D mesh overlay"></div>
-<p class="cap">Drag to compare. Illustrative mesh overlay on a stock aerial photograph.</p>
+<p class="cap">Drag to compare. Illustrative mesh overlay on an aerial photograph.</p>
 </div>
 <div data-reveal style="--d:100ms">
 <p class="kicker">From photographs to model</p>

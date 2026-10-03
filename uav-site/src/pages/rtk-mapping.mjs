@@ -37,7 +37,7 @@ ${steps([
   { title: 'Use', text: 'Planning, progress review, infrastructure review or CAD overlay.' }
 ], { cols: 4, mt: 36 })}
 </div>
-<div class="frame bracket gridover" data-reveal style="--d:100ms;aspect-ratio:4/3.2">${img('rtk-ortho', { pos: '50% 50%' })}<span class="tag">Stock photo</span></div>
+<div class="frame bracket gridover" data-reveal style="--d:100ms;aspect-ratio:4/3.2">${img('rtk-ortho', { pos: '50% 50%' })}</div>
 </div></section>
 
 <section class="sec sec--dark" id="accuracy" aria-labelledby="acc-h"><span class="seam"></span><div class="wrap split">

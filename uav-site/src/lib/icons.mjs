@@ -18,7 +18,7 @@ export const icon = {
   clock: (c) => wrap('<circle cx="16" cy="16" r="12"/><path d="M16 9v7.5l5 3"/>', undefined, c),
   build: (c) => wrap('<path d="M4 28h24M7 28V12l9-6 9 6v16"/><path d="M12 28v-7h8v7M12 15h2M18 15h2" opacity=".7"/>', undefined, c),
   check: (c) => wrap('<circle cx="16" cy="16" r="12"/><path d="m10.5 16.5 3.8 3.8 7.4-8"/>', undefined, c),
-  arrow: '<span class="arr" aria-hidden="true">→</span>',
+  arrow: '<span class="arr" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>',
   chev: '<svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="m2 4.2 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   phone: (c = 'ico') => wrap('<path d="M7 3h4l2 6-3 2a15 15 0 0 0 8 8l2-3 6 2v4a3 3 0 0 1-3 3A22 22 0 0 1 4 6a3 3 0 0 1 3-3z"/>', '0 0 32 32', c),
   mail: (c = 'ico') => wrap('<rect x="3" y="6" width="26" height="20" rx="2"/><path d="m4 8 12 9 12-9"/>', '0 0 32 32', c),

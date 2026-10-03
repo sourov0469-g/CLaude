@@ -2,6 +2,7 @@
 import { site, services, img, arrow, crumbs } from './site.mjs';
 import { icon } from './icons.mjs';
 import { fx } from './fx.mjs';
+import { droneSvg } from './drone.mjs';
 
 export function phero({ items, kicker, title, lead, actions = '', media = '', dark = false, strip = [], mediaFirst = false, scene = 'contours' }) {
   const stripHtml = strip.length ? `<div class="phero-strip"><div class="wrap"><ul>${strip.map((t, i) => `<li><i>0${i + 1}</i>${t}</li>`).join('')}</ul></div></div>` : '';
@@ -25,10 +26,12 @@ export function iconCards(items, { cols = 4, dark = false } = {}) {
     .join('')}</div>`;
 }
 
-export function steps(items, { row = false, cols = 4, mt = 0 } = {}) {
-  return `<ol class="steps${row ? ' steps--row' : ''}" style="--cols:${cols}${mt ? `;margin-top:${mt}px` : ''}">${items
+export function steps(items, { row = false, cols = 4, mt = 0, timeline = false } = {}) {
+  const list = `<ol class="steps${row ? ' steps--row' : ''}${timeline ? ' steps--tl' : ''}" style="--cols:${cols}${mt ? `;margin-top:${mt}px` : ''}">${items
     .map((it, i) => `<li class="step" data-reveal style="--d:${i * 70}ms"><span class="step-n">0${i + 1}</span><h3 class="h3">${it.title}</h3><p>${it.text}</p></li>`)
     .join('')}</ol>`;
+  const mode = timeline === true ? (row ? 'h' : 'v') : timeline || (row ? 'h' : false);
+  return mode ? `<div class="tl tl--${mode}" data-timeline="${mode}"><span class="tl-rail" aria-hidden="true"><i class="tl-fill"></i><span class="tl-drone">${droneSvg}</span></span>${list}</div>` : list;
 }
 
 export const secHead = (kicker, title, lead, id, split = true) =>

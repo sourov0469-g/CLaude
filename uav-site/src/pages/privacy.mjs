@@ -48,7 +48,7 @@ export default function page() {
 <h3>Site and flight constraints</h3>
 <p>Drone operations can depend on weather, access, site conditions, airspace and other practical or regulatory considerations. A proposed date or method may need to change if those conditions require it.</p>
 <h3>Photography</h3>
-<p>Some photography on this website is licensed stock imagery used to illustrate typical sites and environments. It is not presented as evidence of a particular UAV Aerial Solutions project.</p>
+<p>Some photography on this website is licensed and used to illustrate typical sites and environments. It is not presented as evidence of a particular UAV Aerial Solutions project.</p>
 <h3>Images and models</h3>
 <p>Delivered imagery, maps and models should be used for the purpose agreed in the project scope. Aerial imagery does not by itself replace specialist structural, engineering, surveying or other professional assessment where that is required.</p>
 <h3>Links to other sites</h3>

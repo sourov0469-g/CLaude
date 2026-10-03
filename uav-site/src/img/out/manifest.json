@@ -39,7 +39,7 @@
   "w": 800,
   "h": 450,
   "bytes": 73026,
-  "alt": "Stock aerial photograph of an active construction site between existing buildings"
+  "alt": "Aerial photograph of an active construction site between existing buildings"
  },
  "home-svc-photo": {
   "file": "home-svc-photo.webp",
@@ -60,7 +60,7 @@
   "w": 1200,
   "h": 857,
   "bytes": 176328,
-  "alt": "Stock aerial photograph of farmland, fields and a village"
+  "alt": "Aerial photograph of farmland, fields and a village"
  },
  "roof-hero": {
   "file": "roof-hero.webp",
@@ -102,14 +102,14 @@
   "w": 900,
   "h": 675,
   "bytes": 84710,
-  "alt": "Stock black and white aerial photograph of a long industrial roof"
+  "alt": "Black and white aerial photograph of a long industrial roof"
  },
  "roof-residential": {
   "file": "roof-residential.webp",
   "w": 900,
   "h": 506,
   "bytes": 83950,
-  "alt": "Stock aerial photograph of a row of houses and their pitched roofs"
+  "alt": "Aerial photograph of a row of houses and their pitched roofs"
  },
  "rtk-hero": {
   "file": "rtk-hero.webp",
@@ -123,7 +123,7 @@
   "w": 1300,
   "h": 732,
   "bytes": 98546,
-  "alt": "Stock top-down aerial photograph of a large construction site"
+  "alt": "Top-down aerial photograph of a large construction site"
  },
  "3d-model": {
   "file": "3d-model.webp",
@@ -179,42 +179,42 @@
   "w": 560,
   "h": 840,
   "bytes": 62884,
-  "alt": "Stock photograph of a ruined stone tower on a hill"
+  "alt": "Photograph of a ruined stone tower on a hill"
  },
  "photo-site": {
   "file": "photo-site.webp",
   "w": 1100,
   "h": 619,
   "bytes": 67556,
-  "alt": "Stock aerial photograph of an industrial estate beside open fields"
+  "alt": "Aerial photograph of an industrial estate beside open fields"
  },
  "photo-comms": {
   "file": "photo-comms.webp",
   "w": 1100,
   "h": 825,
   "bytes": 53204,
-  "alt": "Stock photograph of a tower crane over a building under construction"
+  "alt": "Photograph of a tower crane over a building under construction"
  },
  "photo-property": {
   "file": "photo-property.webp",
   "w": 1200,
   "h": 899,
   "bytes": 138082,
-  "alt": "Stock aerial photograph of a house with a tiled roof and gravel drive"
+  "alt": "Aerial photograph of a house with a tiled roof and gravel drive"
  },
  "process-hero": {
   "file": "process-hero.webp",
   "w": 1100,
   "h": 1375,
   "bytes": 49976,
-  "alt": "Stock photograph of a drone hovering above the roof of a brick building"
+  "alt": "Photograph of a drone hovering above the roof of a brick building"
  },
  "process-pre": {
   "file": "process-pre.webp",
   "w": 1000,
   "h": 1249,
   "bytes": 20044,
-  "alt": "Stock photograph of a hand holding a drone controller"
+  "alt": "Photograph of a hand holding a drone controller"
  },
  "about-hero": {
   "file": "about-hero.webp",
@@ -228,7 +228,7 @@
   "w": 1000,
   "h": 1250,
   "bytes": 37464,
-  "alt": "Stock photograph of a pilot holding a drone controller with a drone in the sky above"
+  "alt": "Photograph of a pilot holding a drone controller with a drone in the sky above"
  },
  "about-matrice": {
   "file": "about-matrice.webp",

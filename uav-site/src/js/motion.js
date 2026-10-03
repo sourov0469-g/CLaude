@@ -71,7 +71,9 @@
     function over(e) {
       var t = e.target; if (!t || !t.closest) return;
       var s = '', lab = t.closest('[data-cursor]');
-      if (lab) { s = 'label'; label.textContent = lab.getAttribute('data-cursor'); }
+      if (t.closest('a[href],button') && t.closest('[data-cursor-none]')) s = 'link';
+      else if (t.closest('[data-cursor-none]')) s = 'none';
+      else if (lab) { s = 'label'; label.textContent = lab.getAttribute('data-cursor'); }
       else if (t.closest('input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea')) s = 'text';
       else if (t.closest('a[href],button,[role=tab],summary,label,select,.mesh input')) s = 'link';
       el.setAttribute('data-s', s);
@@ -96,16 +98,16 @@
     var dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
     function size() { W = window.innerWidth; H = window.innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); c.setTransform(dpr, 0, 0, dpr, 0, 0); }
     size();
-    var N = 150, STEP = 15;
+    var N = 64, STEP = 30;
     var X = new Float32Array(N), Y = new Float32Array(N), VX = new Float32Array(N), VY = new Float32Array(N), AGE = new Float32Array(N), LIFE = new Float32Array(N), SZ = new Float32Array(N), PH = new Float32Array(N), DK = new Uint8Array(N);
     for (var i = 0; i < N; i++) { LIFE[i] = 1; AGE[i] = 2; }
     var head = 0, E = { x: 0, y: 0, lx: 0, ly: 0, acc: 0, has: false, idle: 0 }, tx = 0, ty = 0, raf = 0, last = 0, lastMove = 0, now = 0;
     function spawn(x, y, ang, burst) {
       var k = head; head = (head + 1) % N;
-      var a = ang + Math.PI + (Math.random() - 0.5) * 1.7, sp = (burst ? 30 : 12) + Math.random() * (burst ? 50 : 22);
+      var a = ang + Math.PI + (Math.random() - 0.5) * 1.7, sp = (burst ? 22 : 8) + Math.random() * (burst ? 30 : 12);
       X[k] = x + (Math.random() - 0.5) * (burst ? 8 : 12); Y[k] = y + (Math.random() - 0.5) * (burst ? 8 : 12);
       VX[k] = Math.cos(a) * sp; VY[k] = Math.sin(a) * sp;
-      AGE[k] = 0; LIFE[k] = 1.1 + Math.random() * 0.9; SZ[k] = 1.1 + Math.random() * 1.9; PH[k] = Math.random() * 6.283;
+      AGE[k] = 0; LIFE[k] = 0.65 + Math.random() * 0.6; SZ[k] = 0.9 + Math.random() * 0.9; PH[k] = Math.random() * 6.283;
       DK[k] = cursorEl && cursorEl.getAttribute('data-t') === 'dark' ? 1 : 0;
     }
     function ss(a, b, v) { v = clamp((v - a) / (b - a), 0, 1); return v * v * (3 - 2 * v); }
@@ -121,8 +123,6 @@
           while (E.acc >= STEP && g < 14) { E.acc -= STEP; g++; var t = moved > 1e-6 ? Math.min(1, g * STEP / moved) : 0; spawn(E.lx + dx * t, E.ly + dy * t, ang, false); }
           if (g >= 14) E.acc = 0;
           E.lx = E.x; E.ly = E.y; E.idle = 0;
-        } else if (now - lastMove < 6) {
-          E.idle += dt; if (E.idle > 0.42) { E.idle = 0; spawn(E.x, E.y, Math.random() * 6.283, false); }
         }
       }
       c.clearRect(0, 0, W, H);
@@ -132,11 +132,10 @@
         AGE[i] += dt; var u = AGE[i] / LIFE[i]; if (u >= 1) continue; alive++;
         VX[i] = VX[i] * damp + Math.sin(now * 1.3 + PH[i]) * 5 * dt; VY[i] = VY[i] * damp + Math.cos(now * 1.1 + PH[i] * 1.7) * 4 * dt - 7 * dt;
         X[i] += VX[i] * dt; Y[i] += VY[i] * dt;
-        var a = ss(0, 0.12, u) * (1 - ss(0.22, 1, u)) * 0.62, r = SZ[i] * (1 + 0.55 * u), col = DK[i] ? '223,194,164' : '143,98,68';
-        c.fillStyle = 'rgba(' + col + ',' + (a * 0.28).toFixed(3) + ')'; c.beginPath(); c.arc(X[i], Y[i], r * 2.6, 0, 6.283); c.fill();
+        var a = ss(0, 0.12, u) * (1 - ss(0.22, 1, u)) * 0.34, r = SZ[i] * (1 + 0.4 * u), col = DK[i] ? '223,194,164' : '143,98,68';
         c.fillStyle = 'rgba(' + col + ',' + a.toFixed(3) + ')'; c.beginPath(); c.arc(X[i], Y[i], r, 0, 6.283); c.fill();
       }
-      if (alive || now - lastMove < 6) raf = requestAnimationFrame(frame); else last = 0;
+      if (alive || now - lastMove < 0.4) raf = requestAnimationFrame(frame); else last = 0;
     }
     function kick() { if (!raf && !doc.hidden) raf = requestAnimationFrame(frame); }
     function move(e) {
@@ -147,7 +146,7 @@
     }
     function burst(el) {
       var r = el.getBoundingClientRect(); if (!r.width) return;
-      for (var i = 0; i < 16; i++) spawn(r.left + Math.random() * r.width, r.top + Math.random() * r.height, Math.random() * 6.283, true);
+      for (var i = 0; i < 6; i++) spawn(r.left + Math.random() * r.width, r.top + Math.random() * r.height, Math.random() * 6.283, true);
       lastMove = now; kick();
     }
     function focusin(e) { var t = e.target; if (t && t.matches && t.matches(':focus-visible')) burst(t); }
@@ -197,9 +196,32 @@
     return function () { off.forEach(function (f) { f(); }); if (raf) cancelAnimationFrame(raf); qsa('.aura').forEach(function (a) { a.remove(); }); };
   }
 
+  /* scroll rail: a small drone rides a ruler down the right edge as you read (wide screens, fine pointer) */
+  var DRONE = '<svg viewBox="-40 -40 80 80" focusable="false"><g class="dr-arms"><path d="M-17 -17L17 17M17 -17L-17 17"/></g><g class="dr-rotors">' + [[-20, -20], [20, -20], [-20, 20], [20, 20]].map(function (c, i) { return '<g transform="translate(' + c[0] + ' ' + c[1] + ')"><circle class="dr-ring" r="13"/><path class="dr-blade" style="--i:' + i + '" d="M-12 0H12"/></g>'; }).join('') + '</g><rect class="dr-body" x="-9" y="-9" width="18" height="18" rx="4"/><circle class="dr-eye" cx="0" cy="-3" r="2.6"/></svg>';
+  function buildRail() {
+    if (reduced() || !fineMQ.matches || !window.matchMedia('(min-width: 1180px)').matches) return function () {};
+    var rail = doc.createElement('div'); rail.className = 'rail'; rail.setAttribute('aria-hidden', 'true');
+    rail.innerHTML = '<i class="rail-line"></i><span class="rail-drone">' + DRONE + '</span>';
+    var top = doc.createElement('button'); top.type = 'button'; top.className = 'rail-top'; top.setAttribute('aria-label', 'Back to top');
+    top.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4"/></svg>';
+    body.appendChild(rail); body.appendChild(top);
+    var dr = qs('.rail-drone', rail), yTo = gsap.quickTo(dr, 'y', { duration: 0.5, ease: 'power3.out' }), H = rail.offsetHeight, lastT = 0;
+    function measure() { H = rail.offsetHeight; }
+    var st = ST.create({
+      start: 0, end: 'max', onRefresh: measure,
+      onUpdate: function (self) {
+        yTo(self.progress * H);
+        var y = window.scrollY, onNow = y > 60; rail.classList.toggle('is-on', onNow); top.classList.toggle('is-on', y > 700);
+        var now = performance.now(); if (now - lastT > 120) { lastT = now; var el = doc.elementFromPoint(window.innerWidth - 28, window.innerHeight / 2); var dk = !!(el && el.closest && el.closest(DARK)); rail.classList.toggle('is-dark', dk); top.classList.toggle('is-dark', dk); }
+      }
+    });
+    var off = on(top, 'click', function () { M.scrollTo(0); });
+    return function () { st.kill(); off(); rail.remove(); top.remove(); };
+  }
+
   function buildGlobal() {
     if (globalOn) return; globalOn = true;
-    if (fine()) { globalCleanups.push(buildCursor(), buildTrail(), buildAura()); }
+    if (fine()) { globalCleanups.push(buildCursor(), buildTrail(), buildAura(), buildRail()); }
     var bar = qs('.nav-progress');
     if (bar) {
       var set = gsap.quickSetter(bar, 'scaleX');
@@ -341,11 +363,7 @@
     qsa('[data-parallax-img]', root).forEach(function (el) {
       gsap.fromTo(el, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
-    qsa('.hero-plate img', root).forEach(function (img) { gsap.from(img, { scale: 1.14, duration: 2.4, ease: 'power3.out' }); });
-    qsa('[data-parallax-float]', root).forEach(function (el) {
-      gsap.to(el, { yPercent: -16, ease: 'none', scrollTrigger: { trigger: el.closest('.hero'), start: 'top top', end: 'bottom top', scrub: 0.8 } });
-    });
-  }
+      }
 
   function initMarquee(root) {
     if (reduced()) return;
@@ -369,49 +387,110 @@
   }
 
   function initStory(root) {
-    var stages = qsa('[data-story]', root); if (!stages.length) return;
+    var stories = qsa('[data-story]', root); if (!stories.length) return;
     mm = gsap.matchMedia();
     mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', function () {
-      stages.forEach(function (stage) {
-        stage.classList.add('is-live');
-        var steps = qsa('[data-story-step]', stage), fill = qs('[data-story-fill]', stage);
-        var s1 = qs('.sv-s1', stage), s2 = qs('.sv-s2', stage), s3 = qs('.sv-s3', stage);
-        var pass = qs('.sv-pass', stage), dr = qs('.sv-dr', stage), len = pass.getTotalLength(), o = { p: 0 };
+      stories.forEach(function (story) {
+        story.classList.add('is-live');
+        var track = qs('.story-track', story), steps = qsa('[data-story-step]', story), fill = qs('[data-story-fill]', story);
+        var s1 = qs('.sv-s1', story), s2 = qs('.sv-s2', story), s3 = qs('.sv-s3', story);
+        var pass = qs('.sv-pass', story), dr = qs('.sv-dr', story), len = pass.getTotalLength(), o = { p: 0 };
+        function setH() { story.style.setProperty('--story-h', Math.round(window.innerHeight * 2.5) + 'px'); }
         function fly() { var pt = pass.getPointAtLength(o.p * len); dr.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')'); }
+        setH();
         gsap.set([s2, s3], { autoAlpha: 0 });
-        gsap.set(qsa('.sv-handles rect', stage), { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' });
-        gsap.set(qsa('.sv-tiles rect', stage), { autoAlpha: 0, scale: 0.86, transformOrigin: '50% 50%', transformBox: 'fill-box' });
-        gsap.set(qsa('.sv-chips g', stage), { autoAlpha: 0, y: 10 });
-        gsap.set(qs('.sv-qm', stage), { autoAlpha: 0 }); gsap.set(qs('.sv-q', stage), { autoAlpha: 0 });
-        fly();
+        gsap.set(qsa('.sv-handles rect', story), { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' });
+        gsap.set(qsa('.sv-tiles rect', story), { autoAlpha: 0, scale: 0.86, transformOrigin: '50% 50%', transformBox: 'fill-box' });
+        gsap.set(qsa('.sv-chips g', story), { autoAlpha: 0, y: 10 });
+        gsap.set([qs('.sv-qm', story), qs('.sv-q', story)], { autoAlpha: 0 });
+        fly(); steps[0].classList.add('is-active');
         var tl = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
-            trigger: stage, start: function () { return 'center center+=' + Math.round(headH() / 2); }, end: function () { return '+=' + Math.round(window.innerHeight * 2.3); },
-            scrub: 0.8, pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+            trigger: track, start: function () { return 'top top+=' + (headH() + 28); }, end: 'bottom bottom-=28',
+            scrub: 0.6, invalidateOnRefresh: true, onRefreshInit: setH,
             onUpdate: function (self) {
               var i = self.progress < 0.34 ? 0 : self.progress < 0.67 ? 1 : 2;
-              steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+              steps.forEach(function (st, k) { st.classList.toggle('is-active', k === i); });
               if (fill) fill.style.transform = 'scaleX(' + self.progress.toFixed(3) + ')';
             }
           }
         });
-        tl.to(qs('.sv-site', stage), { strokeDashoffset: 0, duration: 0.55 }, 0)
-          .to(qsa('.sv-handles rect', stage), { scale: 1, duration: 0.2, stagger: 0.07 }, 0.35)
-          .to([qs('.sv-q', stage), qs('.sv-qm', stage)], { autoAlpha: 1, duration: 0.2 }, 0.6)
-          .to([qs('.sv-q', stage), qs('.sv-qm', stage)], { autoAlpha: 0, duration: 0.2 }, 0.95)
-          .to(s1.querySelector('.sv-site'), { fillOpacity: 0.4, duration: 0.1 }, 1)
+        tl.to(qs('.sv-site', story), { strokeDashoffset: 0, duration: 0.5 }, 0)
+          .to(qsa('.sv-handles rect', story), { scale: 1, duration: 0.2, stagger: 0.07 }, 0.3)
+          .to([qs('.sv-q', story), qs('.sv-qm', story)], { autoAlpha: 1, duration: 0.2 }, 0.55)
+          .to([qs('.sv-q', story), qs('.sv-qm', story)], { autoAlpha: 0, duration: 0.2 }, 0.95)
+          .to(qs('.sv-site', story), { fillOpacity: 0.4, duration: 0.1 }, 1)
           .to(s2, { autoAlpha: 1, duration: 0.15 }, 1)
           .to(pass, { strokeDashoffset: 0, duration: 0.85 }, 1.05)
           .to(o, { p: 1, duration: 0.85, onUpdate: fly }, 1.05)
           .to(s2, { opacity: 0.35, duration: 0.2 }, 2)
           .to(s3, { autoAlpha: 1, duration: 0.05 }, 2)
-          .to(qsa('.sv-tiles rect', stage), { autoAlpha: 1, scale: 1, duration: 0.25, stagger: 0.06 }, 2.05)
-          .to(qsa('.sv-chips g', stage), { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.12 }, 2.6)
+          .to(qsa('.sv-tiles rect', story), { autoAlpha: 1, scale: 1, duration: 0.25, stagger: 0.06 }, 2.05)
+          .to(qsa('.sv-chips g', story), { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.12 }, 2.6)
           .to({}, { duration: 0.15 }, 3);
-        steps[0].classList.add('is-active');
       });
-      return function () { stages.forEach(function (st) { st.classList.remove('is-live'); qsa('[data-story-step]', st).forEach(function (s) { s.classList.remove('is-active'); }); }); };
+      return function () { stories.forEach(function (st) { st.classList.remove('is-live'); st.style.removeProperty('--story-h'); qsa('[data-story-step]', st).forEach(function (x) { x.classList.remove('is-active'); }); }); };
+    });
+  }
+
+  /* services: hover (with a little intent delay) or focus opens a panel */
+  function initAccordion(root) {
+    qsa('[data-acc]', root).forEach(function (acc) {
+      var items = qsa('.svc-p', acc), t = 0;
+      function set(el) { items.forEach(function (i) { i.classList.toggle('is-active', i === el); }); }
+      items.forEach(function (el) {
+        cleanups.push(on(el, 'pointerenter', function (e) { if (e.pointerType !== 'mouse') return; clearTimeout(t); t = setTimeout(function () { set(el); }, 70); }));
+        cleanups.push(on(el, 'focus', function () { clearTimeout(t); set(el); }));
+      });
+      cleanups.push(function () { clearTimeout(t); });
+    });
+  }
+
+  /* process: a drone travels down a rail as you read the stages */
+  function initTimeline(root) {
+    qsa('[data-timeline]', root).forEach(function (tl) {
+      if (reduced()) return;
+      var horiz = tl.getAttribute('data-timeline') === 'h';
+      if (horiz && !window.matchMedia('(min-width: 900px)').matches) return;
+      var rail = qs('.tl-rail', tl), fill = qs('.tl-fill', tl), dr = qs('.tl-drone', tl), steps = qsa('.step', tl); if (!rail || !dr) return;
+      tl.classList.add('is-live');
+      var move = gsap.quickTo(dr, horiz ? 'x' : 'y', { duration: 0.5, ease: 'power3.out' }), marks = [], L = 1;
+      function measure() {
+        if (horiz) { L = Math.max(1, steps[steps.length - 1].offsetLeft - steps[0].offsetLeft); rail.style.width = L + 'px'; marks = steps.map(function (s) { return (s.offsetLeft - steps[0].offsetLeft) / L; }); }
+        else { L = rail.offsetHeight || 1; marks = steps.map(function (s) { return (s.offsetTop + 22) / L; }); }
+      }
+      measure();
+      var st = ST.create({
+        trigger: tl, start: horiz ? 'top 78%' : 'top 62%', end: horiz ? 'top 30%' : 'bottom 62%', invalidateOnRefresh: true, onRefreshInit: measure,
+        onUpdate: function (self) {
+          var p = self.progress; move(p * L); if (fill) fill.style.transform = (horiz ? 'scaleX(' : 'scaleY(') + p.toFixed(3) + ')';
+          steps.forEach(function (s, i) { s.classList.toggle('is-reached', p >= marks[i] - 0.002); });
+        }
+      });
+      cleanups.push(function () { tl.classList.remove('is-live'); rail.style.width = ''; });
+    });
+  }
+
+  /* small, fitted details: drawn kickers and seams, drifting numerals, icon strokes that redraw on hover */
+  function initDraws(root) {
+    qsa('.ico-wrap svg *,.svc-ico svg *,.mega-item .ico-wrap svg *', root).forEach(function (el) { el.setAttribute('pathLength', '1'); });
+    if (reduced()) return;
+    qsa('.kicker', root).forEach(function (k) {
+      if (k.closest('.m-menu,.mega')) return;
+      gsap.fromTo(k, { '--kl': 0 }, { '--kl': 1, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: k, start: 'top 92%', once: true } });
+    });
+    qsa('.seam', root).forEach(function (sm) {
+      gsap.fromTo(sm, { '--sk': 0 }, { '--sk': 1, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: sm, start: 'top 94%', once: true } });
+    });
+    qsa('[data-parallax-y]', root).forEach(function (el) {
+      gsap.fromTo(el, { yPercent: -8 }, { yPercent: 16, ease: 'none', scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    qsa('.hero-dots', root).forEach(function (el) {
+      gsap.to(el, { yPercent: -7, ease: 'none', scrollTrigger: { trigger: el.closest('.hero'), start: 'top top', end: 'bottom top', scrub: 0.8 } });
+    });
+    qsa('.facts li', root).forEach(function (li) {
+      gsap.fromTo(li, { '--fl': 0 }, { '--fl': 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 94%', once: true } });
     });
   }
 
@@ -458,7 +537,7 @@
   /* inspection lens: a feathered circle through which the same image is shown richer */
   function initLens(root) {
     if (!fine()) return;
-    qsa('[data-lens]', root).forEach(function (el) {
+    qsa('[data-lens],.frame,.card-media', root).filter(function (el) { return !el.querySelector('.stage,.mesh,input,button,.lens') && !el.closest('.stage,.mesh,.m-menu'); }).forEach(function (el) {
       var lens = doc.createElement('i'), ring = doc.createElement('i');
       lens.className = 'lens'; ring.className = 'lens-ring'; lens.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
       el.appendChild(lens); el.appendChild(ring);
@@ -482,53 +561,96 @@
     });
   }
 
-  /* home hero: a small drone shadows the pointer (or patrols when idle); capture a frame */
-  function initDrone(root) {
+  /* home hero: the photo is a camera window. A focus reticle hunts between points by itself,
+     follows the pointer when it is over the frame, and locks when still. Click (or the button) captures.
+     A small drone shadows the pointer across the hero, or patrols when idle. */
+  function initHero(root) {
     qsa('[data-drone-zone]', root).forEach(function (zone) {
-      var d = qs('[data-drone]', zone); if (!d) return;
-      var btn = qs('[data-capture]', zone), count = qs('[data-frames]', zone), live = qs('[data-frames-live]', zone), stage = qs('.hero-stage', zone);
-      var n = 0, mode = 'idle', lastMove = 0, px = 0, t0 = 0, vis = false;
-      function size() { var r = zone.getBoundingClientRect(); return { w: r.width, h: r.height, l: r.left, t: r.top }; }
-      var z = size(); gsap.set(d, { x: z.w * 0.72, y: z.h * 0.52 });
+      var d = qs('[data-drone]', zone), vf = qs('.vf', zone), focus = qs('[data-vf-focus]', zone), imgW = qs('[data-vf-img]', zone), thumb = qs('[data-vf-thumb]', zone);
+      var btn = qs('[data-capture]', zone), count = qs('[data-frames]', zone), live = qs('[data-frames-live]', zone), flash = qs('.vf-flash', zone);
+      var n = 0, vis = false, mode = 'hunt', lockT = 0, poi = 0, hunting = 0;
+      function zsize() { var r = zone.getBoundingClientRect(); return { w: r.width, h: r.height, l: r.left, t: r.top }; }
+      function vsize() { var r = vf.getBoundingClientRect(); return { w: r.width, h: r.height, l: r.left, t: r.top }; }
+      var POIS = [[0.34, 0.42], [0.64, 0.56], [0.5, 0.28], [0.72, 0.4], [0.42, 0.66]];
+
+      /* ----- viewfinder ----- */
+      if (vf && focus) {
+        var fx = gsap.quickTo(focus, 'x', { duration: 0.6, ease: 'power3.out' }), fy = gsap.quickTo(focus, 'y', { duration: 0.6, ease: 'power3.out' });
+        var imX = imgW ? gsap.quickTo(imgW, 'x', { duration: 1, ease: 'power3.out' }) : null, imY = imgW ? gsap.quickTo(imgW, 'y', { duration: 1, ease: 'power3.out' }) : null;
+        var thX = thumb ? gsap.quickTo(thumb, 'x', { duration: 1.2, ease: 'power3.out' }) : null, thY = thumb ? gsap.quickTo(thumb, 'y', { duration: 1.2, ease: 'power3.out' }) : null;
+        var lock = function (on_) { focus.classList.toggle('is-lock', on_); vf.classList.toggle('is-lock', on_); };
+        var place = function (x, y) { fx(x); fy(y); };
+        var seek = function () { var s = vsize(), p = POIS[poi++ % POIS.length]; lock(false); place(p[0] * s.w, p[1] * s.h); clearTimeout(lockT); lockT = setTimeout(function () { lock(true); }, 1000); };
+        var s0 = vsize(); gsap.set(focus, { x: s0.w * 0.5, y: s0.h * 0.45 });
+        if (reduced()) { gsap.set(focus, { opacity: 1 }); lock(true); }
+        else {
+          gsap.to(focus, { opacity: 1, duration: 0.7, delay: 1.1 });
+          gsap.from(qsa('.vf-br', vf), { scale: 0.4, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.5 });
+          if (thumb) gsap.from(thumb, { y: 36, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.9 });
+          if (imgW) gsap.from(imgW, { scale: 1.18, duration: 2.4, ease: 'power3.out' });
+          hunting = setInterval(function () { if (mode === 'hunt' && vis) seek(); }, 3600);
+          setTimeout(function () { if (mode === 'hunt') seek(); }, 1500);
+        }
+        var capture = function (x, y) {
+          n++; if (count) count.textContent = (n < 10 ? '0' : '') + n; if (live) live.textContent = 'Frame ' + n + ' captured';
+          place(x, y);
+          if (reduced()) return;
+          var shot = doc.createElement('i'); shot.className = 'shot'; shot.setAttribute('aria-hidden', 'true'); shot.style.left = x + 'px'; shot.style.top = y + 'px'; vf.appendChild(shot);
+          gsap.fromTo(shot, { scale: 1.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: 'power3.out' });
+          gsap.to(shot, { opacity: 0, duration: 0.5, delay: 0.5, onComplete: function () { shot.remove(); } });
+          if (flash) gsap.fromTo(flash, { opacity: 0.5 }, { opacity: 0, duration: 0.5, ease: 'power2.out' });
+          gsap.fromTo(focus, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: 'power3.out' });
+          if (d) gsap.fromTo(d, { scale: 1.2 }, { scale: 1, duration: 0.55, ease: 'power3.out' });
+        };
+        if (!reduced() && fine()) {
+          cleanups.push(on(vf, 'pointermove', function (e) {
+            if (e.pointerType !== 'mouse') return;
+            var s = vsize(), x = e.clientX - s.l, y = e.clientY - s.t, nx = x / s.w - 0.5, ny = y / s.h - 0.5;
+            mode = 'aim'; lock(false); vf.classList.add('is-aim'); place(x, y);
+            clearTimeout(lockT); lockT = setTimeout(function () { lock(true); }, 650);
+            if (imX) { imX(-nx * 26); imY(-ny * 22); } if (thX) { thX(nx * -18); thY(ny * -14); }
+          }, { passive: true }));
+          cleanups.push(on(vf, 'pointerleave', function () {
+            mode = 'hunt'; vf.classList.remove('is-aim'); if (imX) { imX(0); imY(0); } if (thX) { thX(0); thY(0); }
+            setTimeout(function () { if (mode === 'hunt') seek(); }, 500);
+          }));
+        }
+        cleanups.push(on(vf, 'click', function (e) { if (e.target.closest('a,button')) return; var s = vsize(); capture(e.clientX - s.l, e.clientY - s.t); }));
+        if (btn) cleanups.push(on(btn, 'click', function () {
+          var s = vsize(), r = focus.getBoundingClientRect(); capture(r.left + r.width / 2 - s.l, r.top + r.height / 2 - s.t);
+        }));
+        cleanups.push(function () { clearInterval(hunting); clearTimeout(lockT); });
+      }
+      ST.create({ trigger: zone, start: 'top bottom', end: 'bottom top', onToggle: function (st) { vis = st.isActive; } });
+
+      /* ----- drone ----- */
+      if (!d) return;
+      var px = 0, lastMove = 0, t0 = gsap.ticker.time, dm = 'idle';
+      var z = zsize(); gsap.set(d, { x: z.w * 0.55, y: z.h * 0.72 });
       d.classList.add('is-on');
+      if (reduced()) return;
       var xTo = gsap.quickTo(d, 'x', { duration: 1.1, ease: 'power3.out' }), yTo = gsap.quickTo(d, 'y', { duration: 1.1, ease: 'power3.out' }), rTo = gsap.quickTo(d, 'rotation', { duration: 0.7, ease: 'power3.out' });
       function idleTick(time) {
         if (!vis) return;
-        if (mode === 'follow' && time - lastMove > 3) mode = 'idle';
-        if (mode !== 'idle') return;
-        var r = size(), t = time - t0, x = r.w * 0.64 + Math.sin(t * 0.33) * r.w * 0.2, y = r.h * 0.5 + Math.sin(t * 0.47 + 1) * r.h * 0.17;
+        if (dm === 'follow' && time - lastMove > 3) dm = 'idle';
+        if (dm !== 'idle') return;
+        var r = zsize(), t = time - t0, x = r.w * 0.5 + Math.sin(t * 0.31) * r.w * 0.3, y = r.h * 0.52 + Math.sin(t * 0.47 + 1) * r.h * 0.22;
         rTo(clamp((x - px) * 0.9, -18, 18)); px = x; xTo(x); yTo(y);
       }
-      if (!reduced()) {
-        t0 = gsap.ticker.time;
-        gsap.ticker.add(idleTick); cleanups.push(function () { gsap.ticker.remove(idleTick); });
-        ST.create({ trigger: zone, start: 'top bottom', end: 'bottom top', onToggle: function (s) { vis = s.isActive; } });
-        if (fine()) cleanups.push(on(zone, 'pointermove', function (e) {
-          if (e.pointerType !== 'mouse') return;
-          var r = size(), x = e.clientX - r.l + 44, y = e.clientY - r.t + 34;
-          rTo(clamp((x - px) * 0.7, -22, 22)); px = x; mode = 'follow'; lastMove = gsap.ticker.time; xTo(x); yTo(y);
-        }, { passive: true }));
-      }
-      function capture(x, y) {
-        n++; if (count) count.textContent = (n < 10 ? '0' : '') + n; if (live) live.textContent = 'Frame ' + n + ' captured';
-        if (reduced()) return;
-        var shot = doc.createElement('i'), flash = doc.createElement('i'); shot.className = 'shot'; flash.className = 'flash'; shot.setAttribute('aria-hidden', 'true'); flash.setAttribute('aria-hidden', 'true');
-        shot.style.left = x + 'px'; shot.style.top = y + 'px'; zone.appendChild(flash); zone.appendChild(shot);
-        gsap.fromTo(shot, { scale: 1.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: 'power3.out' });
-        gsap.to(shot, { opacity: 0, duration: 0.5, delay: 0.5, onComplete: function () { shot.remove(); } });
-        gsap.fromTo(flash, { opacity: 0.4 }, { opacity: 0, duration: 0.45, ease: 'power2.out', onComplete: function () { flash.remove(); } });
-        gsap.fromTo(d, { scale: 1.2 }, { scale: 1, duration: 0.55, ease: 'power3.out' });
-        if (trailBurst) trailBurst(shot);
-      }
-      if (stage) cleanups.push(on(stage, 'click', function (e) { if (e.target.closest('a,button')) return; var r = size(); capture(e.clientX - r.l, e.clientY - r.t); }));
-      if (btn) cleanups.push(on(btn, 'click', function () { var r = size(), b = d.getBoundingClientRect(); capture(b.left + b.width / 2 - r.l, b.top + b.height / 2 - r.t); }));
+      gsap.ticker.add(idleTick); cleanups.push(function () { gsap.ticker.remove(idleTick); });
+      if (fine()) cleanups.push(on(zone, 'pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = zsize(), x = e.clientX - r.l + 46, y = e.clientY - r.t + 36;
+        rTo(clamp((x - px) * 0.7, -22, 22)); px = x; dm = 'follow'; lastMove = gsap.ticker.time; xTo(x); yTo(y);
+      }, { passive: true }));
     });
   }
 
   function pageInit(root) {
+    initAccordion(root); initDraws(root);
     if (reduced()) { initFx(root); return; }                 // static scenes only; reveals fall back to CSS
     initHeadings(root); initStatement(root); initCounters(root); initFx(root); initParallaxImages(root);
-    initMarquee(root); initStory(root); initMagnetic(root); initCards(root); initLens(root); initDrone(root);
+    initMarquee(root); initStory(root); initTimeline(root); initMagnetic(root); initCards(root); initLens(root); initHero(root);
   }
 
   function kill() {

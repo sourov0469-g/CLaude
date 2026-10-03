@@ -50,7 +50,7 @@ export const img = (key, o = {}) => {
 };
 
 export const stripTags = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&rsquo;/g, '\u2019').replace(/&lsquo;/g, '\u2018').replace(/&middot;/g, '\u00b7').replace(/\s+/g, ' ').trim();
-export const stock = '<span class="stock">Stock photo</span>';
+export const stock = '';
 
 export const arrow = icon.arrow;
 export const emailText = site.email.replace('@', '@<wbr>');

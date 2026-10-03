@@ -31,7 +31,7 @@
   "home-svc-monitor": {
     "src": "stock/px-18646262.jpg",
     "w": 800,
-    "alt": "Stock aerial photograph of an active construction site between existing buildings",
+    "alt": "Aerial photograph of an active construction site between existing buildings",
     "q": 68
   },
   "home-svc-photo": {
@@ -49,7 +49,7 @@
   "services-coverage": {
     "src": "stock/px-32047288.jpg",
     "w": 1200,
-    "alt": "Stock aerial photograph of farmland, fields and a village",
+    "alt": "Aerial photograph of farmland, fields and a village",
     "q": 66
   },
   "roof-hero": {
@@ -85,13 +85,13 @@
   "roof-commercial": {
     "src": "stock/px-19035388.jpg",
     "w": 900,
-    "alt": "Stock black and white aerial photograph of a long industrial roof",
+    "alt": "Black and white aerial photograph of a long industrial roof",
     "q": 70
   },
   "roof-residential": {
     "src": "stock/px-3997049.jpg",
     "w": 900,
-    "alt": "Stock aerial photograph of a row of houses and their pitched roofs",
+    "alt": "Aerial photograph of a row of houses and their pitched roofs",
     "q": 68,
     "sat": 0.75
   },
@@ -104,7 +104,7 @@
   "rtk-ortho": {
     "src": "stock/px-25461690.jpg",
     "w": 1300,
-    "alt": "Stock top-down aerial photograph of a large construction site",
+    "alt": "Top-down aerial photograph of a large construction site",
     "q": 68
   },
   "3d-model": {
@@ -158,19 +158,19 @@
   "photo-inset": {
     "src": "stock/px-20396714.jpg",
     "w": 560,
-    "alt": "Stock photograph of a ruined stone tower on a hill",
+    "alt": "Photograph of a ruined stone tower on a hill",
     "q": 68
   },
   "photo-site": {
     "src": "stock/px-7792985.jpg",
     "w": 1100,
-    "alt": "Stock aerial photograph of an industrial estate beside open fields",
+    "alt": "Aerial photograph of an industrial estate beside open fields",
     "q": 68
   },
   "photo-comms": {
     "src": "stock/px-12454406.jpg",
     "w": 1100,
-    "alt": "Stock photograph of a tower crane over a building under construction",
+    "alt": "Photograph of a tower crane over a building under construction",
     "q": 70,
     "crop": [
       0,
@@ -182,18 +182,18 @@
   "photo-property": {
     "src": "stock/px-16849893.jpg",
     "w": 1200,
-    "alt": "Stock aerial photograph of a house with a tiled roof and gravel drive",
+    "alt": "Aerial photograph of a house with a tiled roof and gravel drive",
     "q": 68
   },
   "process-hero": {
     "src": "stock/px-11748111.jpg",
     "w": 1100,
-    "alt": "Stock photograph of a drone hovering above the roof of a brick building"
+    "alt": "Photograph of a drone hovering above the roof of a brick building"
   },
   "process-pre": {
     "src": "stock/px-16968728.jpg",
     "w": 1000,
-    "alt": "Stock photograph of a hand holding a drone controller",
+    "alt": "Photograph of a hand holding a drone controller",
     "q": 78
   },
   "about-hero": {
@@ -205,7 +205,7 @@
   "about-sops": {
     "src": "stock/px-4353810.jpg",
     "w": 1000,
-    "alt": "Stock photograph of a pilot holding a drone controller with a drone in the sky above"
+    "alt": "Photograph of a pilot holding a drone controller with a drone in the sky above"
   },
   "about-matrice": {
     "src": "client/c16-matrice-4e.webp",

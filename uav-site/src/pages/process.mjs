@@ -48,7 +48,7 @@ export default function page() {
   { title: 'Capture', text: 'Fly the agreed area and collect the imagery or mapping data the brief needs.' },
   { title: 'Process', text: 'Prepare the agreed photographs, video, orthomosaic or 3D model.' },
   { title: 'Deliver', text: 'Hand over the agreed files.' }
-])}</div>
+], { timeline: true })}</div>
 </div></section>
 
 <section class="sec sec--paper" id="brief" aria-labelledby="brief-h"><span class="seam"></span><div class="wrap split split--top">

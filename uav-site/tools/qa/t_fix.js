@@ -35,9 +35,9 @@ let fails=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fails++};
  ok((await p.evaluate(()=>location.hash)).startsWith('#/services/')&&(await p.evaluate(()=>location.hash))!=='#/services/roof-inspections/','[768] clicking body of related card navigates: '+await p.evaluate(()=>location.hash));
  await p.goto(F+'#/services/roof-inspections/');await p.waitForTimeout(900);
  await p.evaluate(()=>document.querySelector('#receive .icard').scrollIntoView({block:'center'}));await p.waitForTimeout(1200);const bc=await (await p.$('#receive .icard')).boundingBox();const t0=await p.evaluate(()=>getComputedStyle(document.querySelector('#receive .icard')).transform);await p.mouse.move(bc.x+40,bc.y+40);await p.waitForTimeout(500);const t1=await p.evaluate(()=>getComputedStyle(document.querySelector('#receive .icard')).transform);ok(t0===t1,'benefit cards do not lift on hover ('+t0+' / '+t1+')');
- // hero inset hidden on small
+ // hero thumb hidden on small
  p=await (await b.newContext({viewport:{width:390,height:844}})).newPage();await p.goto(F+'#/');await p.waitForTimeout(800);
- ok(await p.evaluate(()=>getComputedStyle(document.querySelector('.hero-inset')).display==='none'),'[390] hero inset hidden');
+ ok(await p.evaluate(()=>getComputedStyle(document.querySelector('.vf-thumb')).display==='none'),'[390] hero thumb hidden');
  // caption contrast sampling on monitoring
  await p.goto(F+'#/services/aerial-monitoring/');await p.waitForTimeout(1200);
  const sheet=await p.evaluate(()=>{const s=document.querySelector('.slide.is-active .slide-cap');const cs=getComputedStyle(s);return cs.backgroundImage.slice(0,200)});console.log('   caption bg:',sheet);
