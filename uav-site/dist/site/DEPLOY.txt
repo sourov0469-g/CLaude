@@ -1,0 +1,9 @@
+UAV Aerial Solutions: deployable site
+=====================================
+Upload the CONTENTS of this folder to the root of the website (https://www.uavaerialsolutions.co.uk/).
+Every page is a real URL (for example /services/roof-inspections/index.html) and works without JavaScript.
+No build step, no third-party requests, no cookies.
+
+Files: index.html, /services/*, /process-deliverables/, /about/, /contact/, /privacy-cookies/, 404.html,
+sitemap.xml, robots.txt, manifest.webmanifest, /assets (css, js, fonts, images).
+Configure the host to serve 404.html for unknown addresses.

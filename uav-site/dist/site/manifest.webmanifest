@@ -1,0 +1,22 @@
+{
+  "name": "UAV Aerial Solutions",
+  "short_name": "UAV Aerial",
+  "description": "Drone roof inspections, mapping, 3D modelling and monitoring in Cheshire.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FAF9F6",
+  "theme_color": "#FAF9F6",
+  "lang": "en-GB",
+  "icons": [
+    {
+      "src": "/assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+ "home-hero-main": {
+  "file": "home-hero-main.webp",
+  "w": 1340,
+  "h": 1004,
+  "bytes": 93164,
+  "alt": "Aerial view of a commercial roof with a gable ridge and roof lights, photographed by drone"
+ },
+ "home-hero-inset": {
+  "file": "home-hero-inset.webp",
+  "w": 720,
+  "h": 539,
+  "bytes": 33348,
+  "alt": "Drone view of a flat roof edge and the neighbouring buildings"
+ },
+ "home-svc-roof": {
+  "file": "home-svc-roof.webp",
+  "w": 1000,
+  "h": 750,
+  "bytes": 49638,
+  "alt": "Close drone view of a slate roof and lead flashing"
+ },
+ "home-svc-rtk": {
+  "file": "home-svc-rtk.webp",
+  "w": 900,
+  "h": 675,
+  "bytes": 31918,
+  "alt": "Top-down aerial view of a large flat roof"
+ },
+ "home-svc-3d": {
+  "file": "home-svc-3d.webp",
+  "w": 800,
+  "h": 600,
+  "bytes": 69792,
+  "alt": "Oblique aerial view of a group of buildings and surrounding grounds"
+ },
+ "home-svc-monitor": {
+  "file": "home-svc-monitor.webp",
+  "w": 800,
+  "h": 450,
+  "bytes": 73026,
+  "alt": "Top-down aerial view of an active construction site between existing buildings"
+ },
+ "home-svc-photo": {
+  "file": "home-svc-photo.webp",
+  "w": 900,
+  "h": 675,
+  "bytes": 47396,
+  "alt": "Aerial photograph of a rocky coastline with a lighthouse"
+ },
+ "home-process": {
+  "file": "home-process.webp",
+  "w": 1000,
+  "h": 749,
+  "bytes": 64712,
+  "alt": "Long flat roof between two rows of roof lights, seen from above"
+ },
+ "home-case": {
+  "file": "home-case.webp",
+  "w": 1000,
+  "h": 749,
+  "bytes": 65474,
+  "alt": "Flat roof with standing water between two lines of roof lights"
+ },
+ "services-coverage": {
+  "file": "services-coverage.webp",
+  "w": 1000,
+  "h": 714,
+  "bytes": 120384,
+  "alt": "Aerial view of farmland, fields and a village"
+ },
+ "roof-hero": {
+  "file": "roof-hero.webp",
+  "w": 1100,
+  "h": 824,
+  "bytes": 52960,
+  "alt": "Aerial view of a flat roof edge with open fields beyond"
+ },
+ "roof-g-coverings": {
+  "file": "roof-g-coverings.webp",
+  "w": 1100,
+  "h": 824,
+  "bytes": 81164,
+  "alt": "Flat roof covering and upstand wall seen from above"
+ },
+ "roof-g-junctions": {
+  "file": "roof-g-junctions.webp",
+  "w": 1100,
+  "h": 824,
+  "bytes": 88158,
+  "alt": "Roof upstand meeting a wall with windows and standing water on the flat roof"
+ },
+ "roof-g-drainage": {
+  "file": "roof-g-drainage.webp",
+  "w": 1100,
+  "h": 824,
+  "bytes": 137112,
+  "alt": "Roof outlet with debris and standing water at a roof corner"
+ },
+ "roof-g-hard": {
+  "file": "roof-g-hard.webp",
+  "w": 1100,
+  "h": 824,
+  "bytes": 68286,
+  "alt": "Pipework and an outlet at the edge of a flat roof"
+ },
+ "roof-commercial": {
+  "file": "roof-commercial.webp",
+  "w": 900,
+  "h": 675,
+  "bytes": 84710,
+  "alt": "Black and white aerial view of a long industrial roof"
+ },
+ "roof-residential": {
+  "file": "roof-residential.webp",
+  "w": 900,
+  "h": 506,
+  "bytes": 85710,
+  "alt": "Top-down view of a row of houses and their pitched roofs"
+ },
+ "rtk-hero": {
+  "file": "rtk-hero.webp",
+  "w": 1300,
+  "h": 804,
+  "bytes": 57562,
+  "alt": "RTK base station on a tripod in open ground"
+ },
+ "rtk-ortho": {
+  "file": "rtk-ortho.webp",
+  "w": 1100,
+  "h": 619,
+  "bytes": 75238,
+  "alt": "Top-down aerial view of a large building under construction, stitched like a map"
+ },
+ "3d-model": {
+  "file": "3d-model.webp",
+  "w": 1100,
+  "h": 825,
+  "bytes": 121084,
+  "alt": "Top-down aerial view of commercial roofs and streets"
+ },
+ "mon-1": {
+  "file": "mon-1.webp",
+  "w": 1100,
+  "h": 619,
+  "bytes": 168388,
+  "alt": "Cleared building plot with excavators and rubble"
+ },
+ "mon-2": {
+  "file": "mon-2.webp",
+  "w": 1100,
+  "h": 619,
+  "bytes": 132790,
+  "alt": "Excavated site with a structure rising in the pit and a tower crane"
+ },
+ "mon-3": {
+  "file": "mon-3.webp",
+  "w": 1100,
+  "h": 825,
+  "bytes": 179020,
+  "alt": "Construction site with foundations and a first concrete frame"
+ },
+ "mon-4": {
+  "file": "mon-4.webp",
+  "w": 1100,
+  "h": 825,
+  "bytes": 162192,
+  "alt": "Building frame rising on site beside tower cranes"
+ },
+ "mon-5": {
+  "file": "mon-5.webp",
+  "w": 1100,
+  "h": 825,
+  "bytes": 102454,
+  "alt": "Completed building with a finished roof seen from above"
+ },
+ "photo-hero": {
+  "file": "photo-hero.webp",
+  "w": 1300,
+  "h": 731,
+  "bytes": 93946,
+  "alt": "Aerial photograph of a church tower among trees in Cheshire countryside"
+ },
+ "photo-inset": {
+  "file": "photo-inset.webp",
+  "w": 560,
+  "h": 840,
+  "bytes": 62884,
+  "alt": "Aerial view of a ruined stone tower on a hill"
+ },
+ "photo-site": {
+  "file": "photo-site.webp",
+  "w": 1100,
+  "h": 619,
+  "bytes": 67556,
+  "alt": "Aerial overview of an industrial estate beside open fields"
+ },
+ "photo-comms": {
+  "file": "photo-comms.webp",
+  "w": 800,
+  "h": 1200,
+  "bytes": 83344,
+  "alt": "Tower crane over a building under construction"
+ },
+ "photo-property": {
+  "file": "photo-property.webp",
+  "w": 1000,
+  "h": 749,
+  "bytes": 98556,
+  "alt": "Aerial view of a house with a tiled roof and gravel drive"
+ },
+ "process-hero": {
+  "file": "process-hero.webp",
+  "w": 1100,
+  "h": 1375,
+  "bytes": 49976,
+  "alt": "Drone hovering above the roof of a brick building"
+ },
+ "process-pre": {
+  "file": "process-pre.webp",
+  "w": 1000,
+  "h": 1249,
+  "bytes": 17166,
+  "alt": "Hand holding a drone controller with the flight map on screen"
+ },
+ "about-hero": {
+  "file": "about-hero.webp",
+  "w": 1300,
+  "h": 660,
+  "bytes": 93804,
+  "alt": "Drone in flight above an industrial estate and town"
+ },
+ "about-sops": {
+  "file": "about-sops.webp",
+  "w": 1000,
+  "h": 1250,
+  "bytes": 37464,
+  "alt": "Pilot holding a drone controller with a drone in the sky above"
+ },
+ "about-matrice": {
+  "file": "about-matrice.webp",
+  "w": 700,
+  "h": 700,
+  "bytes": 10046,
+  "alt": "DJI Matrice 4E drone in flight"
+ },
+ "about-mavic": {
+  "file": "about-mavic.webp",
+  "w": 810,
+  "h": 456,
+  "bytes": 13758,
+  "alt": "DJI Mavic 4 Pro drone in flight"
+ },
+ "_logo": {
+  "file": "logo.webp",
+  "w": 300,
+  "h": 174,
+  "bytes": 25088
+ }
+}

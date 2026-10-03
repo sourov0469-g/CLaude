@@ -1,0 +1,209 @@
+{
+  "home-hero-main": {
+    "src": "client/c01-roof-hero.jpg",
+    "w": 1600,
+    "alt": "Aerial view of a commercial roof with a gable ridge and roof lights, photographed by drone",
+    "q": 74
+  },
+  "home-hero-inset": {
+    "src": "client/c02-roof-edge.jpg",
+    "w": 720,
+    "alt": "Drone view of a flat roof edge and the neighbouring buildings"
+  },
+  "home-svc-roof": {
+    "src": "client/c11-slate-flashing.jpg",
+    "w": 1000,
+    "alt": "Close drone view of a slate roof and lead flashing"
+  },
+  "home-svc-rtk": {
+    "src": "client/c04-roof-topdown.jpg",
+    "w": 900,
+    "alt": "Top-down aerial view of a large flat roof"
+  },
+  "home-svc-3d": {
+    "src": "stock/px-8811576.jpg",
+    "w": 800,
+    "alt": "Oblique aerial view of a group of buildings and surrounding grounds",
+    "q": 70
+  },
+  "home-svc-monitor": {
+    "src": "stock/px-18646262.jpg",
+    "w": 800,
+    "alt": "Top-down aerial view of an active construction site between existing buildings",
+    "q": 68
+  },
+  "home-svc-photo": {
+    "src": "client/c13-coast-lighthouse.jpg",
+    "w": 900,
+    "alt": "Aerial photograph of a rocky coastline with a lighthouse"
+  },
+  "home-process": {
+    "src": "client/c07-roof-rooflights.jpg",
+    "w": 1000,
+    "alt": "Long flat roof between two rows of roof lights, seen from above",
+    "q": 70
+  },
+  "home-case": {
+    "src": "client/c09-roof-run.jpg",
+    "w": 1000,
+    "alt": "Flat roof with standing water between two lines of roof lights",
+    "q": 70
+  },
+  "services-coverage": {
+    "src": "stock/px-32047288.jpg",
+    "w": 1000,
+    "alt": "Aerial view of farmland, fields and a village",
+    "q": 66
+  },
+  "roof-hero": {
+    "src": "client/c06-roof-fields.jpg",
+    "w": 1100,
+    "alt": "Aerial view of a flat roof edge with open fields beyond",
+    "q": 70
+  },
+  "roof-g-coverings": {
+    "src": "client/c05-roof-upstand.jpg",
+    "w": 1100,
+    "alt": "Flat roof covering and upstand wall seen from above",
+    "q": 70
+  },
+  "roof-g-junctions": {
+    "src": "client/c10-roof-junction.jpg",
+    "w": 1100,
+    "alt": "Roof upstand meeting a wall with windows and standing water on the flat roof",
+    "q": 70
+  },
+  "roof-g-drainage": {
+    "src": "client/c03-roof-outlet.jpg",
+    "w": 1100,
+    "alt": "Roof outlet with debris and standing water at a roof corner",
+    "q": 68
+  },
+  "roof-g-hard": {
+    "src": "client/c08-roof-pipe.jpg",
+    "w": 1100,
+    "alt": "Pipework and an outlet at the edge of a flat roof",
+    "q": 70
+  },
+  "roof-commercial": {
+    "src": "stock/px-19035388.jpg",
+    "w": 900,
+    "alt": "Black and white aerial view of a long industrial roof",
+    "q": 70
+  },
+  "roof-residential": {
+    "src": "stock/px-3997049.jpg",
+    "w": 900,
+    "alt": "Top-down view of a row of houses and their pitched roofs",
+    "q": 68
+  },
+  "rtk-hero": {
+    "src": "client/c15-rtk-base.jpg",
+    "w": 1300,
+    "alt": "RTK base station on a tripod in open ground",
+    "q": 70
+  },
+  "rtk-ortho": {
+    "src": "stock/px-25461690.jpg",
+    "w": 1100,
+    "alt": "Top-down aerial view of a large building under construction, stitched like a map",
+    "q": 68
+  },
+  "3d-model": {
+    "src": "stock/px-2799162.jpg",
+    "w": 1100,
+    "alt": "Top-down aerial view of commercial roofs and streets",
+    "q": 68
+  },
+  "mon-1": {
+    "src": "stock/px-12571496.jpg",
+    "w": 1100,
+    "alt": "Cleared building plot with excavators and rubble",
+    "q": 66
+  },
+  "mon-2": {
+    "src": "stock/px-14066336.jpg",
+    "w": 1100,
+    "alt": "Excavated site with a structure rising in the pit and a tower crane",
+    "q": 66
+  },
+  "mon-3": {
+    "src": "stock/px-38930449.jpg",
+    "w": 1100,
+    "alt": "Construction site with foundations and a first concrete frame",
+    "q": 66
+  },
+  "mon-4": {
+    "src": "stock/px-38930447.jpg",
+    "w": 1100,
+    "alt": "Building frame rising on site beside tower cranes",
+    "q": 66
+  },
+  "mon-5": {
+    "src": "stock/px-8811591.jpg",
+    "w": 1100,
+    "alt": "Completed building with a finished roof seen from above",
+    "q": 68
+  },
+  "photo-hero": {
+    "src": "client/c14-gawsworth-church.jpg",
+    "w": 1300,
+    "alt": "Aerial photograph of a church tower among trees in Cheshire countryside",
+    "q": 70
+  },
+  "photo-inset": {
+    "src": "stock/px-20396714.jpg",
+    "w": 560,
+    "alt": "Aerial view of a ruined stone tower on a hill",
+    "q": 68
+  },
+  "photo-site": {
+    "src": "stock/px-7792985.jpg",
+    "w": 1100,
+    "alt": "Aerial overview of an industrial estate beside open fields",
+    "q": 68
+  },
+  "photo-comms": {
+    "src": "stock/px-12454406.jpg",
+    "w": 800,
+    "alt": "Tower crane over a building under construction",
+    "q": 68
+  },
+  "photo-property": {
+    "src": "stock/px-16849893.jpg",
+    "w": 1000,
+    "alt": "Aerial view of a house with a tiled roof and gravel drive",
+    "q": 68
+  },
+  "process-hero": {
+    "src": "stock/px-11748111.jpg",
+    "w": 1100,
+    "alt": "Drone hovering above the roof of a brick building"
+  },
+  "process-pre": {
+    "src": "stock/px-16968728.jpg",
+    "w": 1000,
+    "alt": "Hand holding a drone controller with the flight map on screen"
+  },
+  "about-hero": {
+    "src": "client/c12-drone-over-town.jpg",
+    "w": 1300,
+    "alt": "Drone in flight above an industrial estate and town",
+    "q": 70
+  },
+  "about-sops": {
+    "src": "stock/px-4353810.jpg",
+    "w": 1000,
+    "alt": "Pilot holding a drone controller with a drone in the sky above"
+  },
+  "about-matrice": {
+    "src": "client/c16-matrice-4e.webp",
+    "w": 700,
+    "alt": "DJI Matrice 4E drone in flight"
+  },
+  "about-mavic": {
+    "src": "client/c17-mavic-4-pro.webp",
+    "w": 810,
+    "alt": "DJI Mavic 4 Pro drone in flight"
+  }
+}
