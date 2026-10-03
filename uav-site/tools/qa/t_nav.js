@@ -25,7 +25,7 @@ let fails=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fails++};
  await p.keyboard.press('Escape');await p.waitForTimeout(300);ok(!(await megaOpen()),'Escape closes mega');
  ok(await p.evaluate(()=>document.activeElement.classList.contains('mega-btn')),'focus returns to trigger after Escape');
  // outside click
- await p.click('.mega-btn');await p.waitForTimeout(300);await p.mouse.click(300,600);await p.waitForTimeout(300);ok(!(await megaOpen()),'outside click closes');
+ await p.click('.mega-btn');await p.waitForTimeout(300);await p.mouse.click(24,500);await p.waitForTimeout(300);ok(!(await megaOpen()),'outside click closes');
  // keyboard
  await p.focus('.mega-btn');await p.keyboard.press('ArrowDown');await p.waitForTimeout(300);ok(await megaOpen(),'ArrowDown opens');
  ok(await p.evaluate(()=>document.activeElement.classList.contains('mega-item')),'ArrowDown focuses first item');

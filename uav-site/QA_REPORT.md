@@ -34,3 +34,10 @@ Turnaround times, regulator or operator IDs, insurance cover, testimonials, samp
 - Layers: Lenis smooth scroll on the GSAP ticker; masked word reveals on headings; scrubbed statement; counters; velocity-reactive marquee; pinned three-step story (desktop); layered SVG scenes (back/mid/front) with scroll and pointer depth, one scene per service; atmosphere canvas on dark sections; pointer trail (distance-based emitter); section aura; inspection lens; magnetic buttons; card tilt + spotlight; drone companion with a capture-a-frame control; route curtain.
 - Guards: reduced motion and no-JS render the complete static design; cursor, trail, lens, tilt and magnetic are fine-pointer only; offscreen animation paused; DPR capped at 2.
 - Results: axe 0 violations; nav, interaction, form, regression, layout and deploy suites pass; 59 fps scrolling in headless Chromium; console clean on all 12 routes at desktop, mobile and reduced motion.
+
+## Redesign pass
+- Hero: chamfered viewfinder frame (reticle, thirds grid, capture), clean paper background; roof-gable cutout and roof-outline scene removed.
+- Services: expanding panels (desktop), stacked cards (mobile). Story section: native sticky scene scrubbed by scroll, replacing the pin that went blank under wheel scrolling (`tools/qa/t_blank.js` checks 1280/1366/1920 widths).
+- Process and workflow steps: drone rides a timeline rail. Scroll rail with drone, drawn kickers and seams, hover micro-interactions (arrow swap, lock-on corners, sheen, icon redraw).
+- Cursor trail reduced (64 motes, longer spacing, no idle emission). "Stock photo" labels and wording removed from the UI and alt text.
+- Results: axe 0 violations; nav, interaction, form, regression, deploy and motion suites pass; layout suite flags only clipped decorative layers.
