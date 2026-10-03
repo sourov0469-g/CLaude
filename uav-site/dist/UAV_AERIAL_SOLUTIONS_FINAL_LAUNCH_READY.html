@@ -340,7 +340,6 @@ main:focus,[tabindex="-1"]:focus{outline:none}
 .index-list .mega-item .go{opacity:.55;transform:none}
 .index-list .mega-item:hover .go{opacity:1;transform:translateX(4px)}
 
-.stock{position:absolute;right:10px;bottom:10px;z-index:3;padding:5px 9px;background:rgba(32,45,50,.8);color:#fff;font:600 .75rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
 
 /* framed photo */
 .frame{position:relative;overflow:hidden;background:var(--warm-3)}
@@ -519,8 +518,6 @@ main:focus,[tabindex="-1"]:focus{outline:none}
 .cta .kicker{color:var(--copper-light);margin-bottom:20px}
 .cta-side{display:grid;gap:14px;align-content:center}
 @media(min-width:900px){.cta-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);align-items:center;gap:clamp(40px,7vw,100px)}}
-.cta-lines{position:absolute;z-index:-1;left:-4%;bottom:-30px;width:min(620px,60vw);opacity:.4;pointer-events:none}
-.cta-lines path{fill:none;stroke:var(--copper);stroke-width:1;vector-effect:non-scaling-stroke}
 
 /* ================= TABLE (which service) ================= */
 .compare{border-top:1px solid var(--line)}
@@ -886,7 +883,7 @@ html.motion-on .marquee li:nth-child(even){color:var(--copper-light)}
 .sp-roi rect{fill:rgba(204,152,101,.08);stroke:var(--copper-light);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0}
 .sp-h{position:absolute;width:9px;height:9px;margin:-4.5px;background:var(--dark);border:1.5px solid var(--copper-light)}
 .sp-h--tl{left:0;top:0}.sp-h--tr{left:100%;top:0}.sp-h--bl{left:0;top:100%}.sp-h--br{left:100%;top:100%}
-.sp-roi-label{position:absolute;left:0;top:0;transform:translateY(-130%);font:600 6px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--copper-light);white-space:nowrap;padding-bottom:2px}
+.sp-roi-label{position:absolute;left:0;top:0;transform:translateY(-130%);font:600 9px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--copper-light);white-space:nowrap;padding-bottom:2px}
 .sp-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,1fr)}
 .sp-grid i{border:.5px solid rgba(223,194,164,.55);background:rgba(204,152,101,0);transition:background-color .35s}
 .sp-grid i.is-lit{background:rgba(204,152,101,.3)}
@@ -897,7 +894,7 @@ html.motion-on .marquee li:nth-child(even){color:var(--copper-light)}
 .sp-div{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.42)}
 .sp-div--a{left:33.333%}.sp-div--b{left:66.666%}
 .sp-labels{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);padding:34px 0 14px;background:linear-gradient(to top,rgba(10,15,18,.82),rgba(10,15,18,0))}
-.sp-labels b{padding-inline:clamp(12px,2vw,20px);font:600 .6875rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.sp-labels b{padding-inline:clamp(12px,2vw,20px);font:600 .75rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#fff}
 .story-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.18);z-index:3}
 .story-bar i{display:block;height:100%;background:var(--copper);transform:scaleX(1);transform-origin:left}
 /* live (scrubbed) mode */
@@ -1119,7 +1116,7 @@ html:not(.js) .svc-vtitle{display:none}
 .brief-drone{position:absolute;top:3px;left:calc(12.5% + 75%*var(--bp,0));width:30px;height:30px;margin-left:-15px;transition:left .8s var(--ease-out),opacity .4s}
 .brief-drone svg{width:100%;height:100%;overflow:visible}
 .brief ol{display:grid;grid-template-columns:repeat(4,1fr);margin-top:2px}
-.brief li{position:relative;padding-top:14px;text-align:center;font:600 .6875rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .4s}
+.brief li{position:relative;padding-top:14px;text-align:center;font:600 .75rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .4s}
 .brief li::before{content:"";position:absolute;left:50%;top:-18px;width:11px;height:11px;margin-left:-5.5px;border:1px solid var(--line);background:var(--paper);border-radius:50%;transition:background-color .4s,border-color .4s}
 .brief li.is-done{color:var(--copper-strong)}
 .brief li.is-done::before{background:var(--copper-strong);border-color:var(--copper-strong)}

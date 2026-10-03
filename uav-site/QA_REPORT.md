@@ -41,3 +41,16 @@ Turnaround times, regulator or operator IDs, insurance cover, testimonials, samp
 - Process and workflow steps: drone rides a timeline rail. Scroll rail with drone, drawn kickers and seams, hover micro-interactions (arrow swap, lock-on corners, sheen, icon redraw).
 - Cursor trail reduced (64 motes, longer spacing, no idle emission). "Stock photo" labels and wording removed from the UI and alt text.
 - Results: axe 0 violations; nav, interaction, form, regression, deploy and motion suites pass; layout suite flags only clipped decorative layers.
+
+## Survey-layers pass: final regression
+
+Run against the deploy build on Chromium (headless) at 320 to 1600px, plus touch emulation and 4x CPU throttle.
+
+- Navigation, interaction, forms, regressions: all passed.
+- axe-core: 0 violations on every page.
+- Deploy package and single file: both pass, including hash routing and 404.
+- Motion: ScrollTrigger count returns to baseline after route cycling (no leaks); reduced motion yields stills.
+- Scroll performance: 54 fps average on desktop scroll; 4x CPU throttle on a touch swipe gave a 16.7 ms median frame, p95 about 50 ms.
+- Layout scan: remaining flags are decorative off-canvas layers. Smallest real text is 12px (story labels, brief meter); the 9px "Area of interest" tag sits inside an aria-hidden scaled SVG.
+
+Not verified: Safari and Firefox (only Chromium was available), real devices.
