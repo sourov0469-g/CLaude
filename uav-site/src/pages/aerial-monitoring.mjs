@@ -34,6 +34,7 @@ export default function page() {
 </div>`;
 
   const hero = phero({
+    scene: 'time',
     items: crumbs,
     kicker: 'Drone service &middot; Aerial monitoring',
     title: 'Keep the project visible as it changes.',

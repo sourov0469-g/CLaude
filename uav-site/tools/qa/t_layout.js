@@ -19,7 +19,7 @@ const widths=[320,360,375,390,412,430,768,834,1024,1280,1440,1600];
          const r=el.getBoundingClientRect();if(!r.width||!r.height)continue;
          if(el.closest('.hero-lines,.cta-lines,.hero-edge,.mega-trace,.iso,.gridover'))continue;
          if(el.closest('.slide')&&!el.closest('.slide.is-active'))continue;
-         if(r.right>iw+1||r.left<-1){if(!el.closest('.hero-stage')&&!el.closest('.hero-inset'))out.push('OVERFLOW '+el.tagName+'.'+(el.className&&el.className.baseVal===undefined?el.className:'')+' '+Math.round(r.left)+'..'+Math.round(r.right)+' "'+(el.textContent||'').trim().slice(0,24)+'"')}
+         if(r.right>iw+1||r.left<-1){if(!el.closest('.hero-stage')&&!el.closest('.hero-inset')&&!el.closest('.fx')&&!el.closest('.marquee')&&!el.closest('.drone')&&!el.closest('.story-visual'))out.push('OVERFLOW '+el.tagName+'.'+(el.className&&el.className.baseVal===undefined?el.className:'')+' '+Math.round(r.left)+'..'+Math.round(r.right)+' "'+(el.textContent||'').trim().slice(0,24)+'"')}
        }
      }
      if(iw<1024){

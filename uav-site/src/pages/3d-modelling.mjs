@@ -69,6 +69,7 @@ const faqs = [
 
 export default function page() {
   const hero = phero({
+    scene: 'mesh',
     items: crumbs,
     kicker: 'Drone service &middot; 3D modelling',
     title: 'Turn aerial capture into a model you can inspect remotely.',

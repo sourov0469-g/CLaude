@@ -89,14 +89,14 @@
   /* ---------- mobile menu ---------- */
   var lastFocus = null, lockY = 0;
   function lockScroll() {
-    lockY = window.scrollY;
+    lockY = window.scrollY; if (window.UAV && window.UAV.motion) window.UAV.motion.hold(true);
     html.style.scrollBehavior = 'auto';
     body.style.top = (-lockY) + 'px'; body.classList.add('is-locked');
     body.style.position = 'fixed'; body.style.left = '0'; body.style.right = '0'; body.style.width = '100%';
   }
   function unlockScroll() {
     body.classList.remove('is-locked'); body.style.position = ''; body.style.left = ''; body.style.right = ''; body.style.width = ''; body.style.top = '';
-    window.scrollTo(0, lockY); html.style.scrollBehavior = '';
+    window.scrollTo(0, lockY); html.style.scrollBehavior = ''; if (window.UAV && window.UAV.motion) window.UAV.motion.hold(false);
   }
   function setInert(on) { qsa('[data-inertable]').forEach(function (el) { if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert'); }); }
   function menuOpen() {
@@ -311,6 +311,7 @@
   function initPage(root) {
     root = root || doc;
     initReveal(root); initFaq(root); initViewers(root); initMesh(root); initForms(root);
+    if (window.UAV.motion && window.UAV.motion.init && root !== doc) window.UAV.motion.init(root);
   }
 
   window.UAV = window.UAV || {};

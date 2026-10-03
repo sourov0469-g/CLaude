@@ -66,9 +66,11 @@ for (const p of pages) {
 /* ---------- shared pieces ---------- */
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const attrText = (s) => esc(s.replace(/&amp;/g, '&'));
-const cssRaw = fs.readFileSync(R('src', 'css', 'site.css'), 'utf8');
+const cssRaw = fs.readFileSync(R('src', 'css', 'site.css'), 'utf8') + '\n' + fs.readFileSync(R('src', 'css', 'immersive.css'), 'utf8');
 const jsSite = fs.readFileSync(R('src', 'js', 'site.js'), 'utf8');
 const jsRouter = fs.readFileSync(R('src', 'js', 'router.js'), 'utf8');
+const jsMotion = fs.readFileSync(R('src', 'js', 'motion.js'), 'utf8');
+const jsVendor = ['gsap.min.js', 'ScrollTrigger.min.js', 'lenis.min.js'].map((f) => fs.readFileSync(R('src', 'vendor', f), 'utf8').replace(/\/\/# sourceMappingURL=.*$/gm, '')).join(';\n');
 const ldJson = (items) => items.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
 const ogImage = site.origin + '/assets/og/home.jpg';
 const markCurrent = (html, pth) => html.replace(/(<a [^>]*?data-nav="([^"]+)")/g, (m, a, n) => (n === pth ? a + ' aria-current="page"' : m));
@@ -94,6 +96,8 @@ fs.copyFileSync(R('src', 'img', 'out', 'og-home.jpg'), path.join(assets, 'og', '
 for (const f of fs.readdirSync(R('src', 'fonts'))) fs.copyFileSync(R('src', 'fonts', f), path.join(assets, 'fonts', f));
 fs.writeFileSync(path.join(assets, 'css', 'site.css'), cssRaw.replace(/\{\{FONT:([^}]+)\}\}/g, '../fonts/$1'));
 fs.writeFileSync(path.join(assets, 'js', 'site.js'), jsSite);
+fs.writeFileSync(path.join(assets, 'js', 'motion.js'), jsMotion);
+fs.writeFileSync(path.join(assets, 'js', 'vendor.js'), jsVendor);
 
 const deployUrl = (html) => html.replace(/\{\{IMG:([\w-]+)\}\}/g, (m, k) => '/assets/img/' + imgManifest[k].file);
 
@@ -117,7 +121,9 @@ ${ldJson(p.jsonld || [])}
 </head>
 <body>
 ${bodyHtml}
+<script src="/assets/js/vendor.js" defer></script>
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/motion.js" defer></script>
 </body>
 </html>
 `;
@@ -178,7 +184,13 @@ ${singleFooter}
 ${templates}
 <script>window.UAV={single:true,query:''};</script>
 <script>
+${jsVendor}
+</script>
+<script>
 ${jsSite}
+</script>
+<script>
+${jsMotion}
 </script>
 <script>
 ${jsRouter}

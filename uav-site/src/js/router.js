@@ -22,11 +22,14 @@
     var id = a; try { id = decodeURIComponent(a); } catch (x) { return false; }
     var el = a && doc.getElementById(id);
     if (el) {
-      el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); el.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' }); return true; }
+      el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true });
+      if (U.scrollTo) U.scrollTo(el); else el.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
+      return true; }
     return false;
   }
   function render(r, initial) {
     var is404 = !tpls[r.path], t = tpls[is404 ? '/404/' : r.path];
+    if (U.motion) U.motion.kill();
     main.innerHTML = '';
     main.appendChild(t.content.cloneNode(true));
     main.classList.remove('route-in'); if (!reduce.matches) { void main.offsetWidth; main.classList.add('route-in'); }
@@ -43,7 +46,7 @@
     U.query = r.query; U.markActive(r.path); U.closeMenus(); U.initPage(main);
     cur = r;
     var anchored = !!(r.anchor && scrollToAnchor(r.anchor));
-    if (!anchored) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    if (!anchored) { if (U.scrollTo) U.scrollTo(0, true); else window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); }
     if (!initial && !anchored) {
       var h1 = main.querySelector('h1');
       if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
@@ -53,9 +56,10 @@
   function go(initial) {
     var r = parse(location.hash);
     if (!initial && cur && r.path === cur.path && r.query === cur.query) {
-      if (!(r.anchor && scrollToAnchor(r.anchor))) window.scrollTo({ top: 0, behavior: reduce.matches ? 'auto' : 'smooth' });
+      if (!(r.anchor && scrollToAnchor(r.anchor))) { if (U.scrollTo) U.scrollTo(0); else window.scrollTo({ top: 0, behavior: reduce.matches ? 'auto' : 'smooth' }); }
       U.closeMenus(); return;
     }
+    if (!initial && cur && U.motion && U.motion.leave) { U.motion.leave(function () { render(r, false); }); return; }
     render(r, initial);
   }
   window.addEventListener('hashchange', function () { go(false); });

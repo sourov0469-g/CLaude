@@ -146,7 +146,7 @@ export function header() {
 </header>
 <div class="m-menu" id="m-menu" role="dialog" aria-modal="true" aria-label="Site menu" data-m-menu>
 <div class="m-top"><a class="brand" href="/" aria-label="UAV Aerial Solutions, home">${logo}</a><button class="m-close" type="button" aria-label="Close menu">${icon.close}</button></div>
-<div class="m-scroll">
+<div class="m-scroll" data-lenis-prevent>
 <ul class="m-nav">
 <li class="stagger" style="--i:0"><a class="m-link" href="/" data-nav="/"><span class="num">01</span><span class="label">Home</span></a></li>
 <li class="stagger" style="--i:1"><button class="m-sub-btn" type="button" aria-expanded="false" aria-controls="m-services"><span class="num">02</span><span class="label">Services</span><span class="plus" aria-hidden="true"></span></button><div class="m-sub" id="m-services"><div><ul><li><a class="all" href="/services/" data-nav="/services/"><span>Services overview</span></a></li>${services.map((s) => `<li><a href="${s.path}" data-nav="${s.path}">${icon[s.icon]()}<span>${s.name}</span></a></li>`).join('')}</ul></div></div></li>
@@ -173,6 +173,7 @@ export function footer() {
 <div class="foot-col foot-contact"><h2>Get in touch</h2><a href="${site.phoneHref}">${icon.phone()}<span>${site.phone}</span></a><a href="mailto:${site.email}">${icon.mail()}<span>${emailText}</span></a><p class="foot-contact-area" style="display:flex;gap:12px;align-items:center;min-height:40px;font-size:.9375rem">${icon.pin()}<span>${site.area}</span></p>
 <div class="foot-social"><a href="${site.instagram}" target="_blank" rel="noopener noreferrer" aria-label="UAV Aerial Solutions on Instagram (opens in a new tab)">${icon.instagram}</a><a href="${site.facebook}" target="_blank" rel="noopener noreferrer" aria-label="UAV Aerial Solutions on Facebook (opens in a new tab)">${icon.facebook}</a></div></div>
 </div>
+<p class="foot-mark" aria-hidden="true">UAV Aerial Solutions</p>
 <div class="foot-base"><p>&copy; ${site.year} ${site.name}</p><ul><li><a href="/privacy-cookies/#privacy">Privacy</a></li><li><a href="/privacy-cookies/#cookies">Cookies</a></li><li><a href="/privacy-cookies/#terms">Terms</a></li></ul></div>
 </div></footer>`;
 }

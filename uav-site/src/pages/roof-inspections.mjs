@@ -28,6 +28,7 @@ export default function page() {
     .join('');
 
   const hero = phero({
+    scene: 'scan',
     items: crumbs,
     kicker: 'Drone service &middot; Roof inspections',
     title: 'See the roof without the climb.',

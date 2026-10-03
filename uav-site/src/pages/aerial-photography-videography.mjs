@@ -26,6 +26,7 @@ export default function page() {
     .join('');
 
   const hero = phero({
+    scene: 'frame',
     items: crumbs,
     kicker: 'Drone service &middot; Photography &amp; video',
     title: 'Show the site clearly from above.',

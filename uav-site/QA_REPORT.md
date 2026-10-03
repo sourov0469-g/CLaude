@@ -27,3 +27,10 @@ Rebuild: `python3 tools/images.py && node tools/og.js && node build.mjs`. Test s
 
 ## Not done, because it would need facts that are not public
 Turnaround times, regulator or operator IDs, insurance cover, testimonials, sample deliverables. Add them if and when the business can supply them.
+
+## Immersive pass (GSAP / ScrollTrigger / Lenis restored and rebuilt)
+- Vendored offline in `src/vendor/` (GSAP 3.15, ScrollTrigger, Lenis 1.3), bundled into the deploy package and inlined in the single file. No network requests.
+- Router lifecycle: `UAV.motion.kill()` reverts the page `gsap.context` and `gsap.matchMedia` before content swaps; trigger counts stay flat across route cycling (`tools/qa/t_motion2.js`).
+- Layers: Lenis smooth scroll on the GSAP ticker; masked word reveals on headings; scrubbed statement; counters; velocity-reactive marquee; pinned three-step story (desktop); layered SVG scenes (back/mid/front) with scroll and pointer depth, one scene per service; atmosphere canvas on dark sections; pointer trail (distance-based emitter); section aura; inspection lens; magnetic buttons; card tilt + spotlight; drone companion with a capture-a-frame control; route curtain.
+- Guards: reduced motion and no-JS render the complete static design; cursor, trail, lens, tilt and magnetic are fine-pointer only; offscreen animation paused; DPR capped at 2.
+- Results: axe 0 violations; nav, interaction, form, regression, layout and deploy suites pass; 59 fps scrolling in headless Chromium; console clean on all 12 routes at desktop, mobile and reduced motion.

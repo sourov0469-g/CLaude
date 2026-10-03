@@ -12,6 +12,7 @@ const faqs = [
 
 export default function page() {
   const hero = phero({
+    scene: 'grid',
     items: crumbs,
     dark: true,
     kicker: 'Drone service &middot; RTK &amp; 2D mapping',

@@ -1,10 +1,11 @@
 // Reusable page blocks for inner pages.
 import { site, services, img, arrow, crumbs } from './site.mjs';
 import { icon } from './icons.mjs';
+import { fx } from './fx.mjs';
 
-export function phero({ items, kicker, title, lead, actions = '', media = '', dark = false, strip = [], mediaFirst = false }) {
+export function phero({ items, kicker, title, lead, actions = '', media = '', dark = false, strip = [], mediaFirst = false, scene = 'contours' }) {
   const stripHtml = strip.length ? `<div class="phero-strip"><div class="wrap"><ul>${strip.map((t, i) => `<li><i>0${i + 1}</i>${t}</li>`).join('')}</ul></div></div>` : '';
-  return `<section class="phero${dark ? ' phero--dark' : ''}" aria-labelledby="page-h1"><div class="wrap phero-grid"><div class="phero-copy" data-reveal="fade">${crumbs(items)}<p class="kicker">${kicker}</p><h1 class="h1" id="page-h1">${title}</h1><p class="lead">${lead}</p>${actions ? `<div class="btn-row">${actions}</div>` : ''}</div>${media ? `<div class="phero-media" data-reveal style="--d:120ms">${media}</div>` : ''}</div>${stripHtml}</section>`;
+  return `<section class="phero${dark ? ' phero--dark' : ''}" aria-labelledby="page-h1">${fx(scene)}<div class="wrap phero-grid"><div class="phero-copy" data-reveal="fade">${crumbs(items)}<p class="kicker">${kicker}</p><h1 class="h1" id="page-h1" data-split>${title}</h1><p class="lead">${lead}</p>${actions ? `<div class="btn-row">${actions}</div>` : ''}</div>${media ? `<div class="phero-media" data-reveal style="--d:120ms">${media}</div>` : ''}</div>${stripHtml}</section>`;
 }
 
 export const btn = (href, label, kind = '') => `<a class="btn${kind ? ' btn--' + kind : ''}" href="${href}">${label}${kind === '' || kind === 'light' ? ' ' + arrow : ''}</a>`;
