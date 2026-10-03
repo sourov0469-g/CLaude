@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roofer Lead Finder</title>
+<meta name="csrf" content="{{ csrf() }}">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#111827;--mute:#667085;--line:#e3e8f0;--blue:#2563eb;--green:#0f9d58;--amber:#b45309;--red:#b42318;--chip:#eef2f7}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1420;--card:#171e2e;--ink:#e8ecf4;--mute:#97a3b8;--line:#27324a;--blue:#5b8cff;--green:#3ddc84;--amber:#f5a524;--red:#ff6b5e;--chip:#202a40}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif}
+.wrap{max-width:1240px;margin:auto;padding:18px 16px 60px}h1{font-size:24px;margin:0}h2{font-size:16px;margin:0 0 8px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.sub{color:var(--mute)}
+.badge{padding:6px 12px;border-radius:999px;background:var(--chip);font-weight:700;font-size:12px}.badge.run{background:#0f9d5822;color:var(--green)}.badge.warn{background:#f5a52422;color:var(--amber)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.step{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--card)}
+.step b{display:block;font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}.step .n{font-size:20px;font-weight:800;margin:2px 0}.step.done{border-color:var(--green)}.step.now{border-color:var(--blue);box-shadow:0 0 0 2px #2563eb22}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--chip);border-radius:10px;padding:10px}.stat b{display:block;font-size:20px}.stat span{color:var(--mute);font-size:12px}
+button,.btn{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:9px 14px;font-weight:700;cursor:pointer;font-size:13px;text-decoration:none;display:inline-block}
+button.alt{background:var(--chip);color:var(--ink)}button.red{background:var(--red)}button.green{background:var(--green)}button:disabled{opacity:.45;cursor:not-allowed}
+input,select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px}input[type=range]{width:100%;padding:0}
+.preset{background:var(--chip);color:var(--ink);padding:6px 10px;border-radius:8px;font-weight:600}.preset.on{background:var(--blue);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mute);font-size:11px;text-transform:uppercase}
+tr.lead{cursor:pointer}tr.lead:hover{background:var(--chip)}.tier{display:inline-block;min-width:22px;text-align:center;border-radius:6px;padding:1px 6px;font-weight:800}.tA{background:#0f9d5833;color:var(--green)}.tB{background:#2563eb33;color:var(--blue)}.tC{background:#f5a52433;color:var(--amber)}.tD,.tX{background:var(--chip);color:var(--mute)}
+.msg{padding:10px 12px;border-radius:10px;background:var(--chip);margin:10px 0;display:none}.mute{color:var(--mute)}.small{font-size:12px}
+#drawer{position:fixed;top:0;right:-560px;width:540px;max-width:100%;height:100%;background:var(--card);border-left:1px solid var(--line);padding:18px;overflow:auto;transition:right .2s;z-index:5;box-shadow:-10px 0 30px #0003}#drawer.open{right:0}
+.pill{display:inline-block;background:var(--chip);border-radius:999px;padding:2px 9px;margin:2px 3px 2px 0;font-size:12px}.bar{height:8px;background:var(--chip);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}
+@media(max-width:800px){.steps{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="top"><div><h1>Roofer Lead Finder</h1><div class="sub">Find the roofers who most need a website and can pay for one.</div></div><span id="badge" class="badge">loading…</span></div>
+<div id="msg" class="msg"></div>
+
+<div class="steps" id="steps"></div>
+
+<div class="card" id="importCard">
+  <h2>1 · Import your Google Maps leads</h2>
+  <div class="row"><input type="file" id="file" accept=".csv,.xlsx,.xlsm"><label class="small"><input type="checkbox" id="replace"> replace existing dataset</label><button id="importBtn">Import</button></div>
+  <div class="small mute" id="datasetInfo" style="margin-top:6px"></div>
+</div>
+
+<div class="card" id="qaCard">
+  <h2>QA test <span class="small mute">(run this before the big crawl)</span></h2>
+  <div class="row"><button id="qaRoofers" class="green">▶ Test 100 likely roofers</button><button id="qaRaw" class="alt">▶ Test 100 random leads</button>
+    <span class="small mute">Crawls exactly 100 leads (homepage + deep pages) and nothing else. "Likely roofers" shows whether the research quality is good; "random" checks technical reliability.</span></div>
+  <div id="qaSummary" class="grid" style="margin-top:10px"></div>
+  <div style="overflow:auto;max-height:340px;margin-top:8px"><table id="qaTable" style="display:none"><thead><tr><th>Company</th><th>Site</th><th>Roofing confirmed</th><th>Pages</th><th>Owner</th><th>Email</th><th>Result</th></tr></thead><tbody id="qaRows"></tbody></table></div>
+</div>
+
+<div class="card">
+  <h2>Crawl power <span class="mute small" id="powerNow"></span></h2>
+  <div class="row" id="presets"></div>
+  <div style="margin:10px 0">
+    <div class="row"><input type="range" id="range" min="1" max="1000" value="400" style="flex:1"><input type="number" id="num" min="1" max="1000" value="400" style="width:90px"></div>
+    <div class="row small" style="margin-top:6px"><label><input type="checkbox" id="auto"> Auto (ramps up while the network is healthy, backs off on timeouts)</label>
+      <label><input type="checkbox" id="unlock"> Unlock higher range</label><span id="unlockBtns" style="display:none"></span></div>
+    <div class="small mute" id="powerHint"></div>
+  </div>
+  <div class="row">
+    <button id="startTriage" class="green">▶ Step 2: Check all websites</button>
+    <button id="startDeep">▶ Step 4: Deep-check top leads</button>
+    <button id="startSocial">▶ 4b: Social + domain check</button>
+    <button id="startSearch">▶ 4c: Google search check</button>
+    <button id="applyLive" class="alt">Apply power live</button>
+    <button id="pauseBtn" class="alt">⏸ Pause</button><button id="stopBtn" class="red">■ Stop safely</button>
+  </div>
+  <div class="grid" style="margin-top:12px" id="live"></div>
+  <div class="bar" style="margin-top:10px"><i id="progress" style="width:0"></i></div>
+  <div class="small mute" id="progressText" style="margin-top:4px"></div>
+  <div class="small" id="note" style="color:var(--amber);margin-top:6px"></div>
+</div>
+
+<div class="card">
+  <h2>3 · Pick your shortlist &nbsp;·&nbsp; 5 · Export</h2>
+  <div class="row">Top <input type="number" id="topN" value="20000" min="1" style="width:100px"> leads
+    <input id="selStates" placeholder="states e.g. TX,FL (optional)" style="width:190px"><input type="number" id="selMinRev" placeholder="min Google reviews" style="width:150px">
+    <button id="selectBtn">Select for deep check</button></div>
+  <div class="row" style="margin-top:10px">
+    <a class="btn green" id="exOutreach" href="#">⬇ Outreach list (.xlsx)</a><a class="btn alt" id="exLookup" href="#">⬇ Owner-lookup list (.xlsx)</a><a class="btn alt" href="/export/all">⬇ Everything incl. excluded (.xlsx)</a>
+  </div>
+  <div class="small mute" style="margin-top:6px">Exports are compact .xlsx files (100,000 rows ≈ under 25 MB). Email, phone, website, decision maker, website check, business profile and social links are all included.</div>
+</div>
+
+<div class="card"><h2>Funnel</h2><div class="grid" id="funnel"></div><div class="small mute" id="stateMix" style="margin-top:8px"></div></div>
+
+<div class="card">
+  <h2>Ranked leads</h2>
+  <div class="row"><input id="q" placeholder="search company"><select id="fTier"><option value="">all tiers</option><option>A</option><option>B</option><option>C</option><option>D</option></select>
+    <input id="fState" placeholder="state" style="width:70px"><select id="fAngle"><option value="">all pitch angles</option></select>
+    <label class="small"><input type="checkbox" id="fExcl"> show excluded</label><button class="alt" id="applyF">Filter</button></div>
+  <div style="overflow:auto"><table><thead><tr><th>#</th><th>Tier</th><th>Company</th><th>Where</th><th>Google</th><th>Pitch angle</th><th>Est. revenue</th><th>Score</th></tr></thead><tbody id="rows"></tbody></table></div>
+  <div class="row" style="margin-top:8px"><button class="alt" id="prev">←</button><span class="small mute" id="pageInfo"></span><button class="alt" id="next">→</button></div>
+</div>
+
+<div class="card"><h2>Google search key <span class="small mute">(optional · Step 4c)</span></h2>
+  <div class="row small"><select id="keyProv"><option value="serper">Serper.dev</option><option value="brave">Brave Search</option><option value="serpapi">SerpAPI</option></select>
+    <input id="keyVal" type="password" placeholder="paste API key" style="width:300px" autocomplete="off"><button class="alt" id="saveKey">Save key</button>
+    <span class="mute">Google blocks direct scraping, so a search API is used. About $1 per 1,000 searches; each lead uses ~1 search (+1 shared per city). Finds owner names, local Google ranking, BBB/Yelp/Facebook pages, and websites for leads with none.</span></div></div>
+
+<div class="card"><h2>Settings</h2>
+  <div class="row small">Pages per deep check <input type="number" id="sDeep" min="1" max="12" style="width:60px">
+    <label><input type="checkbox" id="sRobots"> obey robots.txt</label><label><input type="checkbox" id="sNon"> also crawl likely non-roofers</label>
+    Min Google reviews <input type="number" id="sMinRev" min="0" style="width:70px"></div>
+  <div class="row small" style="margin-top:8px">Score weights — need <input type="number" step="0.05" id="wN" style="width:70px"> pay <input type="number" step="0.05" id="wP" style="width:70px"> ease <input type="number" step="0.05" id="wE" style="width:70px">
+    <button class="alt" id="saveSet">Save</button><button class="alt" id="rescore">Re-score all</button><button class="alt" id="retry">Retry failed sites</button><button class="red" id="reset">Reset dataset…</button></div>
+</div>
+</div>
+
+<div id="drawer"></div>
+<script>
+const $=id=>document.getElementById(id), CSRF=document.querySelector('meta[name=csrf]').content;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const n=v=>Number(v||0).toLocaleString();
+let S=null, offset=0, LIM={normal_max:1000,unlocked_max:5000,unlock_steps:[2000,3000,5000],presets:{}}, unlocked=false;
+async function api(path,body){const r=await fetch(path,{method:'POST',headers:{'X-CSRF':CSRF,'Content-Type':'application/json'},body:JSON.stringify(body||{})});return r.json()}
+function say(m,ok=true){const e=$('msg');e.style.display='block';e.textContent=m;e.style.borderLeft='4px solid '+(ok?'var(--green)':'var(--red)')}
+function setPower(v){const max=unlocked?LIM.unlocked_max:LIM.normal_max;v=Math.max(1,Math.min(max,Math.round(Number(v)||1)));$('range').value=v;$('num').value=v;
+  document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('on',Number(b.dataset.v)===v));
+  $('powerHint').textContent=v<=25?'Very light — fine while you use the PC.':v<=300?'Balanced — good default.':v<=1000?'Fast — best when the PC is idle. Beyond ~1,000 most home routers/PCs stop getting faster.':'Very high — the limit is usually your router/ISP and CPU, not this app; use Auto if unsure.'}
+function setUnlock(on){unlocked=on;$('range').max=on?LIM.unlocked_max:LIM.normal_max;$('num').max=$('range').max;$('unlockBtns').style.display=on?'inline':'none';
+  if(!on&&Number($('num').value)>LIM.normal_max)setPower(LIM.normal_max)}
+function buildPower(){const p=$('presets');p.innerHTML='';Object.entries(LIM.presets).sort((a,b)=>a[1]-b[1]).forEach(([k,v])=>{const b=document.createElement('button');b.className='preset';b.dataset.v=v;b.textContent=k[0].toUpperCase()+k.slice(1)+' '+v;b.onclick=()=>setPower(v);p.appendChild(b)});
+  $('unlockBtns').innerHTML=LIM.unlock_steps.map(v=>`<button class="preset" data-v="${v}" onclick="setPower(${v})">${n(v)}</button>`).join(' ')}
+$('range').oninput=e=>setPower(e.target.value);$('num').oninput=e=>setPower(e.target.value);$('unlock').onchange=e=>setUnlock(e.target.checked);
+function renderSteps(f,run){const t=f.triage,d=f.deep;const items=[
+ ['1 · Import',n(f.total)+' leads',f.total>0,f.total===0],['2 · Check websites',`${n(t.done+t.failed)} / ${n(t.total)}`,t.total>0&&t.pending===0,f.total>0&&t.pending>0],
+ ['3 · Shortlist',n(f.selected)+' picked',f.selected>0,f.total>0&&t.pending===0&&f.selected===0],['4 · Deep check',`${n(d.done+d.failed)} / ${n(d.total)}`,d.total>0&&d.pending===0,f.selected>0&&d.pending>0],
+ ['5 · Export','xlsx',false,f.selected>0&&d.total>0&&d.pending===0]];
+ $('steps').innerHTML=items.map(i=>`<div class="step ${i[2]?'done':i[3]?'now':''}"><b>${i[0]}</b><div class="n">${esc(i[1])}</div><span class="small mute">${i[2]?'done ✓':i[3]?'← next':''}</span></div>`).join('')}
+function render(s){S=s;LIM=s.limits;if(!$('presets').children.length){buildPower();setPower(LIM.default_custom)}
+ const r=s.runner||{},f=s.funnel,run=s.running;const b=$('badge');
+ b.textContent=run?(r.paused?'⏸ PAUSED':r.stopping?'■ STOPPING…':`● RUNNING · ${r.stage} · ${n(r.effective)} at once`):'● READY';b.className='badge '+(run?'run':'');
+ $('datasetInfo').textContent=s.dataset?`Dataset: ${s.dataset}`:'No dataset yet.';renderSteps(f,run);
+ $('powerNow').textContent=run?`(requested ${n(r.requested)} · running at ${n(r.effective)}${r.auto?' · auto':''})`:'';
+ $('live').innerHTML=[['Working now',n(r.active)],['Sites/min',n(r.rate_per_min)],['ETA',r.eta_min?(r.eta_min>90?(r.eta_min/60).toFixed(1)+' h':Math.round(r.eta_min)+' min'):'–'],['Done this run',n(r.processed)],['RAM free',s.sys.ram_free_gb+' GB'],['CPU',s.sys.cpu+'%'],['Disk free',s.sys.disk_free_gb+' GB'],['Database',s.sys.db_mb+' MB']].map(x=>`<div class="stat"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');
+ const st=r.stage==='deep'?f.deep:f.triage;const pct=st.total?100*(st.done+st.failed)/st.total:0;$('progress').style.width=pct+'%';
+ $('progressText').textContent=`${n(st.done+st.failed)} / ${n(st.total)} finished · ${n(st.pending)} pending · ${n(st.failed)} need a retry`;
+ $('note').textContent=[r.resource_note,r.status==='NETWORK_OUTAGE'?'Paused: your internet dropped. Start again when it is back; nothing was lost.':''].filter(Boolean).join(' · ');
+ $('qaRoofers').disabled=run||!f.total;$('qaRaw').disabled=run||!f.total;if(run||!window._qa){qaRefresh();window._qa=1}
+ $('startTriage').disabled=run;$('startDeep').disabled=run||!f.selected;$('startSocial').disabled=run||!f.selected;$('startSearch').disabled=run||!f.selected||!(s.search&&s.search.configured);$('startSearch').title=(s.search&&s.search.configured)?'':'Add a search API key in Settings first';$('applyLive').disabled=!run;$('pauseBtn').disabled=!run;$('stopBtn').disabled=!run;$('pauseBtn').textContent=r.paused?'▶ Resume':'⏸ Pause';
+ const tiers=f.tiers||{};$('funnel').innerHTML=[['Total leads',f.total],['No website',f.no_website],['Social page only',f.social_only],['Free-builder site',f.free_builder],['Real website',f.real_site],['Duplicates removed',f.duplicates],['Eligible to email',f.eligible],['Tier A / B',n(tiers.A)+' / '+n(tiers.B)],['Social checked',n(f.social.done)+' / '+n(f.social.total)],['Domains checked',n(f.domain.done)+' / '+n(f.domain.total)],['Google-searched',n(f.search.done)+' / '+n(f.search.total)]].map(x=>`<div class="stat"><b>${typeof x[1]==='number'?n(x[1]):x[1]}</b><span>${x[0]}</span></div>`).join('');
+ $('stateMix').textContent='Website status mix: '+Object.entries(f.states||{}).map(([k,v])=>k.replace(/_/g,' ').toLowerCase()+' '+n(v)).join(' · ')+(Object.keys(f.excluded_reasons||{}).length?'  ||  Excluded: '+Object.entries(f.excluded_reasons).map(([k,v])=>k+' '+n(v)).join(' · '):'');
+ const sel=$('fAngle');if(sel.options.length<=1&&f.angles.length)f.angles.forEach(a=>{const o=document.createElement('option');o.value=a;o.textContent=a;sel.appendChild(o)});
+ if(!document.activeElement||!['sDeep','wN','wP','wE','sMinRev'].includes(document.activeElement.id)){const c=s.config,t=s.settings;$('sDeep').value=t.deep_pages;$('sRobots').checked=t.obey_robots;$('sNon').checked=t.include_nonroofers;$('wN').value=c.w_need;$('wP').value=c.w_pay;$('wE').value=c.w_ease;$('sMinRev').value=c.min_reviews;if(document.activeElement!==$('topN'))$('topN').value=t.top_n}
+ const tn=$('topN').value;$('exOutreach').href='/export/outreach?top_n='+tn;$('exLookup').href='/export/lookup?top_n='+tn}
+async function loadLeads(){const p=new URLSearchParams({offset,limit:25,q:$('q').value,tier:$('fTier').value,state:$('fState').value,angle:$('fAngle').value,show:$('fExcl').checked?'excluded':''});
+ const d=await (await fetch('/api/leads?'+p)).json();$('pageInfo').textContent=`${n(offset+1)}–${n(offset+d.rows.length)} of ${n(d.total)}`;
+ $('rows').innerHTML=d.rows.map(r=>`<tr class="lead" data-k="${esc(r.lead_key)}"><td>${r.rank||''}</td><td><span class="tier t${esc(r.tier||'X')}">${esc(r.tier||'–')}</span></td><td><b>${esc(r.company_name)}</b><div class="small mute">${esc(r.website||'no website')}</div></td><td>${esc(r.city)}, ${esc(r.state)}</td><td>${r.reviews?esc(r.rating)+'★ · '+n(r.reviews):'–'}</td><td>${esc(r.exclude_reason||r.pitch_angle)}</td><td>${esc(r.revenue_band)}</td><td><b>${r.priority}</b><div class="small mute">${r.need}/${r.pay}/${r.ease}</div></td></tr>`).join('')||'<tr><td colspan="8" class="mute">Nothing yet.</td></tr>';
+ document.querySelectorAll('tr.lead').forEach(tr=>tr.onclick=()=>openLead(tr.dataset.k));$('prev').disabled=offset===0;$('next').disabled=offset+25>=d.total}
+async function openLead(k){const d=await (await fetch('/api/lead/'+encodeURIComponent(k))).json();const dr=$('drawer');if(d.error){return}
+ const list=a=>a&&a.length?a.map(x=>`<span class="pill">${esc(x)}</span>`).join(''):'<span class="mute">–</span>';
+ const why=(k)=>(d.why[k]||[]).map(x=>`<div class="small">${x[1]>0?'+':''}${x[1]} · ${esc(x[0])}</div>`).join('');
+ dr.innerHTML=`<div class="row" style="justify-content:space-between"><h2>${esc(d.company)}</h2><button class="alt" onclick="document.getElementById('drawer').classList.remove('open')">✕</button></div>
+ <div class="mute small">${esc(d.city)}, ${esc(d.state)} · ${esc(d.phone)} · <a href="${esc(d.website)}" target="_blank" rel="noopener noreferrer">${esc(d.website||'no website')}</a></div>
+ <p><span class="tier t${esc(d.scores.tier||'X')}">${esc(d.scores.tier||'–')}</span> <b>${d.scores.priority}</b> priority · need ${d.scores.need} · pay ${d.scores.pay} · ease ${d.scores.ease} · rank ${d.scores.rank||'–'}</p>
+ ${d.eligible?'':`<p style="color:var(--red)">Excluded: ${esc(d.excluded_because)}</p>`}
+ <h3>Pitch: ${esc(d.pitch_angle)}</h3><div>${list(d.problems)}</div><h3>Strengths</h3><div>${list(d.strengths)}</div>
+ <h3>Email opener</h3><div class="card small" style="margin:6px 0">${esc(d.first_line)}</div>
+ <h3>People</h3><div>${list(d.owners.map(o=>o.name+(o.title?' ('+o.title+')':'')))}</div><div class="small mute">Team: ${d.team_members.map(o=>esc(o.name+' – '+o.title)).join(', ')||'–'}</div>
+ <h3>Contact</h3><div>${list(d.emails)}</div><div>${list(Object.entries(d.socials).map(([k,v])=>k+': '+v))}</div>
+ <h3>Business</h3><div class="small">Est. revenue ${esc(d.est_revenue||'?')} <span class="mute">(${esc(d.revenue_basis)})</span><br>Team ~${esc(d.team_size||'?')} · ${esc(d.years_in_business||'?')} yrs · Google ${esc(d.google.rating||'?')}★ / ${esc(d.google.reviews||0)}</div>
+ <h3>Website: ${esc(d.site_state)}</h3><div class="small">Built with ${esc(d.built_with||'unknown')}${d.agency?' · agency '+esc(d.agency):''}<br>Last updated ${esc(d.last_updated||'unknown')} <span class="mute">${esc(d.last_updated_source||'')}</span></div>
+ <h3>Why this score</h3><b class="small">Need</b>${why('need')}<b class="small">Pay</b>${why('pay')}<b class="small">Ease</b>${why('ease')}`;dr.classList.add('open')}
+async function qaRefresh(){const d=await (await fetch('/api/qa_report')).json();if(!d.n){$('qaSummary').innerHTML='';$('qaTable').style.display='none';return}
+ const sc=d.stage_counts||{},tr=sc.triage||{},dp=sc.deep||{};
+ $('qaSummary').innerHTML=[['Test size',d.n],['Sites read OK',d.readable_sites],['Roofing confirmed',d.roofing_confirmed],['Owner found',d.owner_found],['Email found',d.email_found],['Avg pages / site',d.avg_pages],['Triage done / failed',(tr.DONE||0)+' / '+(tr.FAILED||0)],['Deep done / failed',(dp.DONE||0)+' / '+(dp.FAILED||0)]].map(x=>`<div class="stat"><b>${esc(x[1])}</b><span>${x[0]}</span></div>`).join('')+
+  `<div class="small mute" style="grid-column:1/-1">Site status: ${Object.entries(d.site_states).map(([k,v])=>k.replace(/_/g,' ').toLowerCase()+' '+v).join(' · ')}${Object.keys(d.excluded_reasons).length?'  ||  excluded: '+Object.entries(d.excluded_reasons).map(([k,v])=>esc(k)+' '+v).join(' · '):''}</div>`;
+ $('qaTable').style.display='table';$('qaRows').innerHTML=d.rows.map(r=>`<tr><td><b>${esc(r.company)}</b><div class="small mute">${esc(r.category)}</div></td><td>${esc(r.site_state.replace(/_/g,' ').toLowerCase())}</td><td>${r.roofing_confirmed?'✔ '+esc(r.roof_terms.slice(0,2).join(', ')):'✘'}</td><td>${r.pages}</td><td>${esc(r.owner)}</td><td>${esc(r.email)}</td><td>${r.eligible?esc(r.pitch):'<span style="color:var(--red)">'+esc(r.excluded_because)+'</span>'}</td></tr>`).join('')}
+const qaStart=kind=>async()=>{if(!confirm('Run a QA test on exactly 100 leads? (previous results for those 100 are reset)'))return;const r=await api('/api/qa_test',{kind,concurrency:Number($('num').value)});say(r.msg,r.ok);qaRefresh()};
+$('qaRoofers').onclick=qaStart('roofers');$('qaRaw').onclick=qaStart('raw');
+async function poll(){try{render(await (await fetch('/api/status',{cache:'no-store'})).json())}catch(e){}setTimeout(poll,2000)}
+$('importBtn').onclick=async()=>{const f=$('file').files[0];if(!f)return say('Choose a file first.',false);const fd=new FormData();fd.append('file',f);if($('replace').checked)fd.append('replace','1');$('importBtn').disabled=true;say('Importing and scoring… (100,000 rows takes about 30 seconds)');
+ const r=await (await fetch('/api/import',{method:'POST',headers:{'X-CSRF':CSRF},body:fd})).json();$('importBtn').disabled=false;say(r.msg,r.ok);loadLeads()};
+const power=()=>({concurrency:Number($('num').value),auto:$('auto').checked});
+$('startTriage').onclick=async()=>{const r=await api('/api/start',{stage:'triage',...power()});say(r.msg,r.ok)};
+$('startDeep').onclick=async()=>{const r=await api('/api/start',{stage:'deep',...power()});say(r.msg,r.ok)};
+$('startSocial').onclick=async()=>{let r=await api('/api/start',{stage:'social',...power()});say(r.msg+' (social profiles first, then domain/SSL checks, in one job)',r.ok)};
+$('startSearch').onclick=async()=>{const r=await api('/api/start',{stage:'search',concurrency:Math.min(Number($('num').value),20),auto:false});say(r.msg,r.ok)};
+$('saveKey').onclick=async()=>{const r=await api('/api/search_key',{provider:$('keyProv').value,key:$('keyVal').value});$('keyVal').value='';say(r.msg,r.ok)};
+$('applyLive').onclick=async()=>{const r=await api('/api/control',power());say(r.msg,r.ok)};
+$('pauseBtn').onclick=async()=>{const r=await api('/api/control',{paused:!(S.runner||{}).paused});say(r.msg,r.ok)};
+$('stopBtn').onclick=async()=>{const r=await api('/api/control',{stop:true});say(r.msg,r.ok)};
+$('selectBtn').onclick=async()=>{const r=await api('/api/select',{top_n:Number($('topN').value),states:$('selStates').value.split(',').map(x=>x.trim()).filter(Boolean),min_reviews:Number($('selMinRev').value||0)});say(r.msg,r.ok);loadLeads()};
+$('saveSet').onclick=async()=>{const r=await api('/api/settings',{deep_pages:Number($('sDeep').value),obey_robots:$('sRobots').checked,include_nonroofers:$('sNon').checked,w_need:Number($('wN').value),w_pay:Number($('wP').value),w_ease:Number($('wE').value),min_reviews:Number($('sMinRev').value)});say(r.msg,r.ok)};
+$('rescore').onclick=async()=>{say('Re-scoring…');const r=await api('/api/rescore');say(r.msg,r.ok);loadLeads()};
+$('retry').onclick=async()=>{const r=await api('/api/retry',{stage:'triage'});say(r.msg,r.ok)};
+$('reset').onclick=async()=>{const c=prompt('This deletes all leads and results (a backup is saved first). Type RESET to confirm:');if(c){const r=await api('/api/reset',{confirm:c});say(r.msg,r.ok);loadLeads()}};
+$('applyF').onclick=()=>{offset=0;loadLeads()};$('prev').onclick=()=>{offset=Math.max(0,offset-25);loadLeads()};$('next').onclick=()=>{offset+=25;loadLeads()};
+$('topN').oninput=()=>{const t=$('topN').value;$('exOutreach').href='/export/outreach?top_n='+t;$('exLookup').href='/export/lookup?top_n='+t};
+poll();loadLeads();setInterval(()=>{if(!document.hidden)loadLeads()},15000);
+</script>
+</body></html>
