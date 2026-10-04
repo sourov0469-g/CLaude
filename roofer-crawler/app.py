@@ -243,13 +243,16 @@ def api_preview():
         except (TypeError, ValueError):
             return default
     offset, limit = max(0, to_int(request.args.get("offset"), 0)), 25
-    q, params = "", []
+    where, params = [], []
     if request.args.get("q"):
-        q, params = "WHERE company_name LIKE ?", [f"%{request.args['q']}%"]
-    only = request.args.get("only")
+        where.append("l.company_name LIKE ?")
+        params.append(f"%{request.args['q']}%")
+    if request.args.get("collected") == "1":                      # only leads whose website has been attempted
+        where.append("EXISTS(SELECT 1 FROM lead_stage s WHERE s.lead_key=l.lead_key AND s.stage='triage')")
+    q = ("WHERE " + " AND ".join(where)) if where else ""
     con = db.connect()
-    total = con.execute(f"SELECT COUNT(*) FROM leads {q}", params).fetchone()[0]
-    keys = [r[0] for r in con.execute(f"SELECT lead_key FROM leads {q} ORDER BY source_row LIMIT ? OFFSET ?", params + [limit, offset])]
+    total = con.execute(f"SELECT COUNT(*) FROM leads l {q}", params).fetchone()[0]
+    keys = [r[0] for r in con.execute(f"SELECT l.lead_key FROM leads l {q} ORDER BY l.source_row LIMIT ? OFFSET ?", params + [limit, offset])]
     out = []
     for k in keys:
         p = scoring_run.load_profile(con, k)

@@ -434,8 +434,20 @@ def extract_schema(doc, base_url):
 
 
 # --------------------------------------------------------------------------- field extractors
+KNOWN_TLDS = {"com", "net", "org", "edu", "gov", "us", "co", "info", "biz", "io", "me", "tv", "pro", "xyz", "online", "site", "services", "roofing", "construction",
+              "contractors", "company", "solutions", "group", "build", "tech", "app", "dev", "ai", "ca", "uk", "mx", "cc", "ws", "name", "mobi", "email", "pw", "club", "shop", "store"}
+
+
 def clean_email(e):
-    e = e.strip().lower().strip(".")
+    from urllib.parse import unquote
+    e = unquote(e).strip().lower().strip(".").split()[0] if unquote(e).strip() else ""
+    m = re.match(r"^(.+@[a-z0-9.-]+?\.)([a-z]{2,15})$", e)
+    if m and m.group(2) not in KNOWN_TLDS:                  # '...comhis' / '...netcall': text glued on after the real TLD
+        tld = next((k for k in sorted(KNOWN_TLDS, key=len, reverse=True) if m.group(2).startswith(k)), None)
+        if tld:
+            e = m.group(1) + tld
+        elif len(m.group(2)) > 6:
+            return None
     if len(e) > 80 or e.count("@") != 1:
         return None
     local, dom = e.split("@")
@@ -462,9 +474,48 @@ TITLE_KW = re.compile(r"(?i)\b(co-?\s?founder|founder|co-?owner|owner|president|
 STRONG_TITLE = r"(?:Co-?\s?Founder|Founder|Co-?Owner|Owner|President|CEO|Chief Executive Officer|Managing Partner|Principal)"
 DECISION_RE = re.compile(r"(?i)owner|founder|president|ceo|principal|managing partner|general manager|partner")
 STATE_WORDS = {w for n in US_STATES for w in n.split()}
+UI_WORDS = {"for", "realtors", "realtor", "foreman", "supervisor", "manager", "director", "estimator", "technician", "installer", "high", "graduates", "graduate", "should", "know", "safety", "first", "program", "programs", "builders", "builder", "pros", "pro", "school", "college", "university", "academy",
+            "download", "pdf", "exec", "staff", "security", "checkpoint", "vercel", "cloudflare", "verify", "human", "access", "denied", "login", "log", "sign", "menu", "search",
+            "cart", "request", "quote", "schedule", "book", "online", "click", "view", "learn", "started", "estimate", "inspection", "shop", "careers", "jobs", "blog", "news",
+            "gallery", "services", "about", "home", "team", "leadership", "management", "board", "directors", "department", "support", "resources", "faq", "faqs", "testimonials",
+            "reviews", "portfolio", "projects", "financing", "warranty", "warranties", "customer", "customers", "client", "clients", "partner", "partners", "affiliate", "brochure",
+            "form", "submit", "send", "email", "phone", "call", "text", "chat", "live", "now", "today", "free", "best", "top", "rated", "award", "awards", "winning", "certified",
+            "accredited", "member", "association", "chamber", "commerce", "better", "business", "bureau", "reward", "rewards", "royal", "treatment", "process", "promise", "mission",
+            "vision", "values", "story", "history", "culture", "company", "companies", "group", "inc", "llc", "ltd", "corp", "co", "services", "solutions", "systems", "supply",
+            "building", "general", "contracting", "contractor", "contractors", "roofing", "roofers", "roofer", "roof", "siding", "gutters", "windows", "exteriors", "restoration",
+            "remodeling", "construction", "repair", "replacement", "installation", "maintenance", "commercial", "residential", "emergency", "storm", "damage", "hail", "wind",
+            "insurance", "claims", "claim", "adjuster", "inspections", "tarping", "leak", "leaks", "metal", "shingle", "shingles", "tile", "flat", "slate", "cedar", "shake",
+            "watch", "video", "videos", "photos", "photo", "image", "images", "before", "after", "recent", "work", "works", "page", "pages", "privacy", "policy", "terms",
+            "conditions", "disclaimer", "accessibility", "sitemap", "powered", "designed", "developed", "website", "web", "site", "marketing", "digital", "agency", "media",
+            "social", "follow", "like", "share", "tweet", "pin", "subscribe", "newsletter", "join", "apply", "hiring", "employment", "opportunities", "open", "positions",
+            "location", "locations", "office", "offices", "branch", "branches", "headquarters", "hours", "monday", "friday", "saturday", "sunday", "welcome", "hello", "thank",
+            "thanks", "please", "wait", "loading", "error", "page", "found", "not", "forbidden", "unauthorized", "blocked", "checking", "browser", "enable", "javascript",
+            "cookies", "cookie", "accept", "decline", "close", "skip", "content", "main", "navigation", "toggle", "previous", "next", "back", "top", "read", "more", "less",
+            "see", "all", "every", "each", "our", "your", "their", "my", "his", "her", "this", "that", "these", "those", "with", "from", "into", "over", "under", "between"}
+NOT_NAME_WORDS |= UI_WORDS
 NOT_NAME_WORDS |= STATE_WORDS | {"operated", "owned", "family", "locally", "serving", "licensed", "insured", "certified", "warranty", "quality", "local",
                                   "trusted", "professional", "professionals", "experts", "expert", "years", "experience", "estimates", "inspection", "inspections",
                                   "storm", "hail", "damage", "metal", "shingle", "flat", "commercial", "residential", "member", "members", "join", "apply", "now"}
+
+
+FIRST_NAMES = set("""james john robert michael william david richard joseph thomas charles christopher daniel matthew anthony mark donald steven paul andrew joshua kenneth kevin brian george timothy
+ronald jason edward jeffrey ryan jacob gary nicholas eric jonathan stephen larry justin scott brandon benjamin samuel gregory alexander patrick frank raymond jack dennis jerry tyler aaron jose
+adam nathan henry zachary douglas peter kyle noah ethan jeremy walter christian keith roger terry austin sean gerald carl harold dylan arthur lawrence jordan jesse bryan billy bruce gabriel joe
+logan albert willie alan eugene russell vincent philip bobby johnny bradley roy ralph randy wayne howard carlos juan luis miguel jorge pedro ricardo mario fernando javier roberto eduardo
+alejandro francisco manuel rafael sergio oscar hector victor cesar armando arturo adrian angel ruben raul salvador santiago marco diego mike tom tim tony steve chris nick dan dave bob bill
+jim jeff greg rick ricky rusty chance blake cody colby clint cade chad brent trey wade dustin travis shane wes jared jake josh matt drew luke mason hunter cole bryce brady garrett grant
+jeremiah caleb levi isaac owen evan connor landon jackson carter colton chase tanner trevor derek jon jay jamie joel craig todd troy darren darrell dale don ron rod rodney tommy tracy kirk
+lance lee leon leroy lloyd marcus marvin max melvin neil norman omar orlando otis perry preston quinn ray reggie rex rick riley rob rocky ross roy ruben sam shawn sidney stanley stuart ted
+terrance theodore tobias todd tristan vernon virgil warren wesley wyatt xavier zane mary patricia jennifer linda elizabeth barbara susan jessica sarah karen lisa nancy betty sandra margaret
+ashley kimberly emily donna michelle carol amanda melissa deborah stephanie dorothy rebecca sharon laura cynthia amy kathleen angela shirley brenda emma anna pamela nicole samantha katherine
+christine helen debra rachel carolyn janet maria catherine heather diane olivia julie joyce victoria ruth virginia lauren kelly christina joan evelyn judith andrea hannah megan cheryl jacqueline
+martha madison teresa gloria sara janice ann kathryn abigail sophia frances jean alice judy isabella julia grace amber denise danielle marilyn beverly charlotte natalie theresa diana brittany doris
+kayla alexis lori marie ana carmen rosa sofia isabel lucia elena gabriela daniela veronica monica claudia silvia adriana alejandra jenny jen jenna jill jody jane janie jamie jodi kristin kristen
+kristina krista kim kate katie kathy kelli kelsey kendra kerry kiara kyla lacey laurie leah leslie lindsey lindsay lynn mandy marcia mariah marisa maureen meg melinda mindy misty molly nina paige
+paula peggy penny phyllis rhonda robin roxanne sabrina sally sandy shannon sheila shelly sherry stacy stacey tamara tammy tara tina tracy trisha valerie vanessa wendy whitney yvonne zoe
+dwayne dwight earl elijah emmanuel enrique ernest felix fred gene glenn gordon greg guy herbert hugh ian ivan jacky jared jeffery jimmy joey jonah julian justus kurt kyle lamar leo lester lewis
+lonnie luther malcolm marc maurice mitchell morgan nelson nolan oliver pablo rene reid ricky rolando ronnie ryder sammy scotty seth shaun spencer sterling steve terrence thad toby tucker ty
+tyrone van wallace ward weston will zack zeke""".split())
 
 
 def _title_line(s):
@@ -477,6 +528,12 @@ def extract_owners(lines):
     Handles real-world layouts: 'Name - Title', 'Title: Name', 'Owner Name is...', and stacked name/title lines (either order, one gap line
     allowed, ALL CAPS names, compound titles such as 'Owner & Sr. Project Manager')."""
     found, seen = [], set()
+    lower_words = set(re.findall(r"\b[a-z]{3,}\b", " ".join(lines[:1200])))
+
+    def clean_title(t):
+        segs = [s.strip() for s in re.split(r"\s*[|·•]\s*", t or "") if s.strip()]
+        keep = [s for s in segs if TITLE_KW.search(s)]
+        return " / ".join(keep or segs)[:60]
 
     def clean_name(n):
         n = re.sub(r"\s+", " ", n).strip(" ,.-|:()")
@@ -485,11 +542,19 @@ def extract_owners(lines):
         return n
 
     def ok_name(n):
-        toks = [t.strip(".").lower() for t in n.split()]
+        raw = n.split()
+        toks = [t.strip(".").lower() for t in raw]
         if not 2 <= len(toks) <= 4 or re.search(r"\d", n):
             return False
         if any(t in NOT_NAME_WORDS for t in toks):
             return False
+        if any(len(t.strip(".")) >= 2 and t.strip(".").isupper() for t in raw[1:]):      # "Download PDF", "Smith LLC": acronyms are not surnames
+            return False
+        if toks[0] not in FIRST_NAMES:
+            if not (len(toks[0]) >= 3 and len(toks[-1]) >= 3) or len(toks) > 3:
+                return False
+            if any(t in lower_words for t in toks):          # unknown first name: every word must never appear in lowercase on the page
+                return False
         return all(len(t) >= 2 or "." in n for t in toks) and re.fullmatch(NAME_RE, n) is not None
 
     def trim(n):
@@ -506,7 +571,7 @@ def extract_owners(lines):
         if key in seen:
             return False
         seen.add(key)
-        ttl = re.sub(r"\s+", " ", title or "").strip().title()[:60]
+        ttl = clean_title(re.sub(r"\s+", " ", title or "").strip()).title()[:60]
         ttl = re.sub(r"\b(Ceo|Cfo|Coo|Cto|Cmo|Vp|Svp|Evp)\b", lambda m: m.group(1).upper(), ttl)
         found.append({"name": name, "title": ttl, "source": src})
         return True
@@ -891,6 +956,10 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
     if state == "OK" and meta_refresh_url and len(words) < 30:
         state = "BOT_BLOCKED" if re.search(r"captcha|challenge|verify|cdn-cgi|sucuri|incapsula", meta_refresh_url, re.I) else "REDIRECT_STUB"
     f["page_state"] = state
+    if state in ("BOT_BLOCKED", "PARKED", "SUSPENDED", "DEFAULT_PAGE"):
+        f.update({"builder": "", "builder_tier": "custom", "agency": "", "stack": {}, "outdated": [], "excerpt": "", "word_count": f["word_count"], "junk_page": True,
+                  "emails": [], "phones": [], "owners": [], "team_members": [], "services": [], "socials": {}, "link_categories": {}, "internal_links": []})
+        return f                                      # a captcha/parked page says nothing about the business: do not extract from it
     cyears = [int(x) for x in COPYRIGHT_RE.findall(text + " " + html_text[-6000:]) if 1995 <= int(x) <= CURRENT_YEAR + 1]
     f["copyright_year"] = max(cyears) if cyears else None
     if not excerpt_main:
@@ -988,3 +1057,16 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
     if f["page_state"] == "OK" and f["word_count"] < 8 and f["internal_link_count"] == 0 and not f["phones"] and not f["emails"] and f["img_count"] < 3 and not js_shell:
         f["page_state"] = "EMPTY"                   # nothing on it at all (no text, links, contacts or images): not a site we could read
     return f
+
+
+def is_plausible_person(name):
+    """Re-check a stored name when a record is read (so improved rules also clean data collected earlier)."""
+    raw = (name or "").split()
+    toks = [t.strip(".").lower() for t in raw]
+    if not 2 <= len(toks) <= 4 or re.search(r"\d", name or ""):
+        return False
+    if any(t in NOT_NAME_WORDS for t in toks):
+        return False
+    if any(len(t.strip(".")) >= 2 and t.strip(".").isupper() for t in raw[1:]):
+        return False
+    return True

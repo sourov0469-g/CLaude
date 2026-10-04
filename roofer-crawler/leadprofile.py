@@ -4,7 +4,7 @@ import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 
-from extract import ROOF_CORE, US_ABBRS, classify_email
+from extract import ROOF_CORE, US_ABBRS, classify_email, is_plausible_person
 
 NOW = lambda: datetime.now(timezone.utc)
 
@@ -191,8 +191,8 @@ def build_profile(lead, pages, data):
             m = re.search(r"\d+", str(e))
             if m:
                 schema_emp.append(int(m.group(0)))
-    owners = _uniq([o for pg in pages for o in (pg.get("owners") or [])], 12)
-    team_members = _uniq([o for pg in pages for o in (pg.get("team_members") or [])], 40)
+    owners = _uniq([o for pg in pages for o in (pg.get("owners") or []) if is_plausible_person(o.get("name"))], 12)
+    team_members = _uniq([o for pg in pages for o in (pg.get("team_members") or []) if is_plausible_person(o.get("name"))], 40)
     if mx.get("owner_name"):
         owners.insert(0, {"name": mx["owner_name"], "title": "Owner (from lead file)", "source": "maps"})
     srch = data.get("search") or {}

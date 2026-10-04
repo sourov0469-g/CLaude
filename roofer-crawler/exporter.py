@@ -318,7 +318,7 @@ def research_row(p, row_of):
         "Row": p["source_row"], "Company": p["company"], "Google category": p["categories"], "City": p["city"], "State": p["state"], "Phone": p["phone"],
         "Website (as listed)": p["website"], "Google Maps URL": p["maps_url"], "Google rating": p["maps"]["rating"] or "", "Google reviews": p["maps"]["reviews"] or "",
         "Website status": status, "Website details": details, "Homepage title": p["titles"]["title"], "Homepage text": ex["homepage"],
-        "Emails found": " | ".join(e["email"] for e in c["emails"][:6]), "Phones on site": " | ".join([x for x in c["phones"] if x != p["phone"]][:4]),
+        "Emails found": " | ".join(e["email"] + ("" if (e["on_site_domain"] or e["free_mail"]) else " (other domain)") for e in c["emails"][:6]), "Phones on site": " | ".join([x for x in c["phones"] if x != p["phone"]][:4]),
         "Social profiles": " | ".join(social), "Owner / decision makers": _people(p["people"]["owners"], 4), "Team members": _people(p["people"]["team_members"], 8),
         "Services & certifications": " | ".join(dict.fromkeys(svc)), "Business facts": business_profile(p), "Recent work": rw, "About / team text": about[:900],
         "Data notes": data_notes(p, row_of),

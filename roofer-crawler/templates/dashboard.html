@@ -58,6 +58,7 @@ details>summary{cursor:pointer;font-weight:700;padding:4px 0}.warn{color:var(--a
   <div class="bar" style="margin-top:10px"><i id="progress" style="width:0"></i></div>
   <div class="small mute" id="progressText" style="margin-top:4px"></div>
   <div class="small warn" id="note" style="margin-top:6px"></div>
+  <div id="resultsBanner" class="card" style="display:none;margin:12px 0 0;border-color:var(--green)"></div>
 </div>
 
 <div class="card">
@@ -67,14 +68,14 @@ details>summary{cursor:pointer;font-weight:700;padding:4px 0}.warn{color:var(--a
   <div class="small mute" style="margin-top:6px">One row per lead, in your original order, nothing ranked, filtered or scored. Blocked or unreadable sites are included with a note saying why. Compact: roughly 0.5–1 KB per lead, so 100,000 leads fit in a file of about 50–100 MB.</div>
 </div>
 
-<div class="card"><h2>What was collected</h2><div class="grid" id="funnel"></div><div class="small mute" id="stateMix" style="margin-top:8px"></div></div>
-
-<div class="card">
+<div class="card" id="preview">
   <h2>Collected data preview <span class="small mute">(your original order, click a row for the full record)</span></h2>
-  <div class="row"><input id="q" placeholder="search company"><button class="alt" id="applyF">Search</button></div>
+  <div class="row"><input id="q" placeholder="search company"><label class="small"><input type="checkbox" id="onlyDone" checked> only leads that were collected</label><button class="alt" id="applyF">Search</button></div>
   <div style="overflow:auto"><table><thead><tr><th>Row</th><th>Company</th><th>Website status</th><th>Pages</th><th>Emails</th><th>Owner</th><th>Social</th><th>Last updated</th></tr></thead><tbody id="rows"></tbody></table></div>
   <div class="row" style="margin-top:8px"><button class="alt" id="prev">←</button><span class="small mute" id="pageInfo"></span><button class="alt" id="next">→</button></div>
 </div>
+
+<div class="card"><h2>What was collected</h2><div class="grid" id="funnel"></div><div class="small mute" id="stateMix" style="margin-top:8px"></div></div>
 
 <div class="card">
 <details><summary>Advanced (optional tools: ranking, shortlist, Google search, settings)</summary>
@@ -124,6 +125,8 @@ function render(s){S=s;LIM=s.limits;if(!$('presets').children.length){buildPower
  $('note').textContent=[r.resource_note,r.status==='NETWORK_OUTAGE'?'Paused: your internet dropped. Start again when it is back; nothing was lost.':''].filter(Boolean).join(' · ');
  $('startCollect').disabled=run||!f.total;$('qaFirst').disabled=run||!f.total;$('qaRaw').disabled=run||!f.total;$('applyLive').disabled=!run;$('pauseBtn').disabled=!run;$('stopBtn').disabled=!run;$('pauseBtn').textContent=r.paused?'▶ Resume':'⏸ Pause';
  $('startDeep').disabled=run||!f.selected;$('startSearch').disabled=run||!f.selected||!(s.search&&s.search.configured);
+ const done=f.collected+f.blocked+f.unreachable;const rb=$('resultsBanner');
+ if(!run&&done>0){rb.style.display='block';rb.innerHTML=`<b>✔ ${n(done)} leads have been collected so far:</b> ${n(f.collected)} read OK · ${n(f.blocked)} blocked by bot protection · ${n(f.unreachable)} down or unreadable. <a href="#preview" style="color:var(--blue);font-weight:700">▼ See them in the table below</a>, click a row for its full record, or <a href="/export/research" style="color:var(--blue);font-weight:700">download the file</a>.`}else{rb.style.display=run?'none':'none'}
  $('funnel').innerHTML=[['Leads in file',f.total],['Have a real website',f.real_site],['No website listed',f.no_website],['Social page only',f.social_only],['Free-builder site',f.free_builder],['Duplicates (labelled)',f.duplicates],
    ['Websites read OK',f.collected],['Blocked by bot protection',f.blocked],['Site down / unreadable',f.unreachable],['Not collected yet',f.not_collected]].map(x=>`<div class="stat"><b>${n(x[1])}</b><span>${x[0]}</span></div>`).join('');
  $('stateMix').textContent='Website status: '+Object.entries(f.states||{}).map(([k,v])=>k.replace(/_/g,' ').toLowerCase()+' '+n(v)).join(' · ');
@@ -134,7 +137,7 @@ function render(s){S=s;LIM=s.limits;if(!$('presets').children.length){buildPower
 async function exportCheck(){try{const d=await (await fetch('/api/export_info')).json();window._nc=d.not_collected||0;const e=$('exportWarn');
  e.style.display=d.not_collected?'block':'none';e.innerHTML=d.not_collected?`⚠ ${n(d.not_collected)} of your leads haven't been collected yet — they will appear in the file with the note "Not collected yet". Run step 2 first for a complete file.`:''}catch(e){}}
 document.addEventListener('click',ev=>{const a=ev.target.closest('a[href="/export/research"]');if(a&&window._nc&&!confirm(`${n(window._nc)} leads haven't been collected yet and will be empty in the file. Download anyway?`))ev.preventDefault()});
-async function loadPreview(){const d=await (await fetch('/api/preview?offset='+offset+'&q='+encodeURIComponent($('q').value))).json();$('pageInfo').textContent=`${n(offset+1)}–${n(offset+d.rows.length)} of ${n(d.total)}`;
+async function loadPreview(){const d=await (await fetch('/api/preview?offset='+offset+'&collected='+($('onlyDone').checked?1:0)+'&q='+encodeURIComponent($('q').value))).json();$('pageInfo').textContent=`${n(offset+1)}–${n(offset+d.rows.length)} of ${n(d.total)}`;
  $('rows').innerHTML=d.rows.map(r=>`<tr class="lead" data-k="${esc(r.lead_key)}"><td>${esc(r.row)}</td><td><b>${esc(r.company)}</b><div class="small mute">${esc(r.website||'no website')}</div></td><td>${esc(r.status)}</td><td>${r.pages||'–'}</td><td>${r.emails||'–'}</td><td>${esc(r.owner)||'–'}</td><td>${r.social||'–'}</td><td>${esc(r.updated)||'–'}</td></tr>`).join('')||'<tr><td colspan="8" class="mute">Nothing yet.</td></tr>';
  document.querySelectorAll('tr.lead').forEach(tr=>tr.onclick=()=>openLead(tr.dataset.k));$('prev').disabled=offset===0;$('next').disabled=offset+25>=d.total}
 async function openLead(k){const d=await (await fetch('/api/lead/'+encodeURIComponent(k))).json();const dr=$('drawer');if(d.error)return;
@@ -167,7 +170,7 @@ $('rescore').onclick=async()=>{say('Re-scoring…');const r=await api('/api/resc
 $('reclass').onclick=async()=>{say('Re-checking…');const r=await api('/api/reclassify');say(r.msg,r.ok)};
 $('retry').onclick=async()=>{const r=await api('/api/retry',{stage:'triage'});say(r.msg+' Then click "Collect everything" again.',r.ok)};
 $('reset').onclick=async()=>{const c=prompt('This deletes all leads and results (a backup is saved first). Type RESET to confirm:');if(c){const r=await api('/api/reset',{confirm:c});say(r.msg,r.ok);window._pv=0}};
-$('applyF').onclick=()=>{offset=0;loadPreview()};$('prev').onclick=()=>{offset=Math.max(0,offset-25);loadPreview()};$('next').onclick=()=>{offset+=25;loadPreview()};
+$('applyF').onclick=()=>{offset=0;loadPreview()};$('onlyDone').onchange=()=>{offset=0;loadPreview()};$('prev').onclick=()=>{offset=Math.max(0,offset-25);loadPreview()};$('next').onclick=()=>{offset+=25;loadPreview()};
 poll();setInterval(()=>{if(!document.hidden)loadPreview()},15000);
 </script>
 </body></html>
