@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 cd /d "%~dp0"
 title Roofer Lead Collector - Setup
 set PY=
@@ -22,15 +23,24 @@ if not exist ".venv\Scripts\python.exe" (
 ".venv\Scripts\python.exe" -m pip install -r requirements.txt
 if errorlevel 1 goto fail
 echo.
-echo Running self-tests (about 2 minutes)...
+echo Installed. Running self-tests (about 2 minutes)...
+set BADTESTS=
 for %%T in (test_research test_dashboard test_integration test_storage test_qa test_enrichment test_real_file) do (
   ".venv\Scripts\python.exe" tests\%%T.py
-  if errorlevel 1 goto fail
+  if errorlevel 1 set BADTESTS=!BADTESTS! %%T
 )
 echo.
-echo ==========================================
-echo   SETUP PASSED
-echo ==========================================
+if "%BADTESTS%"=="" (
+  echo ==========================================
+  echo   SETUP PASSED - everything works
+  echo ==========================================
+) else (
+  echo ==========================================
+  echo   SETUP DONE, but these self-tests failed: %BADTESTS%
+  echo   The program is installed and can still be used.
+  echo   Please screenshot this window and send it to me so I can fix it.
+  echo ==========================================
+)
 echo Next: double-click 1_OPEN_DASHBOARD.bat
 pause
 exit /b 0

@@ -130,12 +130,11 @@ async def handler(request):
     return web.Response(text=MODERN.format(name=host.title(), host=host), content_type="text/html")
 
 
-def make_selfsigned(tmpdir):
-    cert, key = Path(tmpdir) / "c.pem", Path(tmpdir) / "k.pem"
-    subprocess.run(["openssl", "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", str(key), "-out", str(cert), "-days", "30",
-                    "-subj", "/CN=selfsigned.test"], check=True, capture_output=True)
+def make_selfsigned(tmpdir=None):
+    """Self-signed test certificate shipped with the tests (no openssl needed - Windows has none)."""
+    here = Path(__file__).resolve().parent
     ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    ctx.load_cert_chain(cert, key)
+    ctx.load_cert_chain(here / "selfsigned_cert.pem", here / "selfsigned_key.pem")
     return ctx
 
 
@@ -160,7 +159,7 @@ class FakeWeb:
         self.port = site._server.sockets[0].getsockname()[1]
         if self.tls:
             try:
-                ctx = make_selfsigned(tempfile.mkdtemp())
+                ctx = make_selfsigned()
                 s2 = web.TCPSite(runner, "127.0.0.1", 0, ssl_context=ctx)
                 self._loop.run_until_complete(s2.start())
                 self.tls_port = s2._server.sockets[0].getsockname()[1]
