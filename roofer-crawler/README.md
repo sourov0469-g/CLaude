@@ -1,48 +1,48 @@
-# Roofer Lead Finder (v5)
+# Roofer Lead Collector (v5.3)
 
-Takes your Google Maps roofer export (100k rows), finds **who most needs a new website and can pay for one**, and gives you a ranked
-shortlist (e.g. the top 20,000) with owner clues, contact info and a ready-made email opener.
+Takes your Google Maps export (100k rows) and **collects everything it can find about every lead**, then saves it in one compact
+`.xlsx` for you to analyse (e.g. with ChatGPT). It does **not** filter, rank or score anything in that file.
 
 ## Run it (Windows)
 1. `0_SETUP_ONCE.bat` (installs and self-tests), then `1_OPEN_DASHBOARD.bat`.
-2. Follow the five steps on the page. Everything can be stopped and resumed; progress is saved continuously.
+2. **Import** your CSV/XLSX → **Collect everything** → **Download collected data**. Stop/resume any time; progress is saved.
+3. Use **Test on the first 100** before the big run: it crawls exactly 100 leads and shows the results in the preview table.
 
-**Before the big crawl, use the QA test card:** *Test 100 likely roofers* (judges real research quality) and *Test 100 random leads*
-(technical reliability). Each crawls **exactly 100 leads and nothing else** and lists per-lead results so you can check them by eye.
+## What is collected per lead
+* **From your file:** name, Google category, phone, address, city/state, Google rating and review count, Maps link, any email/social columns.
+* **Website:** does it load, or is it down / parked / suspended / blocked; HTTPS and SSL validity; mobile-friendly; last update (page dates,
+  sitemap, Last-Modified, copyright year); what it was built with (WordPress theme, Wix, GoDaddy…), agency footer, legacy tech; page title and
+  **real text from the homepage, about and team pages** (menus and footers removed).
+* **Inner pages:** about / team / contact / reviews / projects / blog / careers / financing / service areas (found from the navigation, or by
+  trying standard addresses when the navigation can't be read).
+* **People & contact:** all emails, phone numbers, **owner / decision-maker names and titles, team members**, social profile links
+  (Facebook, Instagram, LinkedIn, YouTube) with follower counts where the platform shows them.
+* **Business facts:** services, certifications, licence numbers, years in business, team size, financing, storm/insurance work, commercial work,
+  hiring, ads/software in use, recent work with dates.
+* **Domain:** registration year, registrar, expiry date (RDAP).
+* **Data notes column:** says exactly what is missing and why (blocked by bot protection, JavaScript-only site, duplicate of row N, not collected yet).
 
-| Step | What it does |
-|---|---|
-| 1 Import | CSV/XLSX; detects Maps columns; keeps leads with **no website** (best prospects); removes duplicates, closed and non-roofers; first ranking from reviews/category |
-| 2 Check websites | Homepage of every lead: loads? dead/parked/suspended? HTTPS/SSL valid? mobile-friendly? how old (last update, builder, agency)? robots-blocked? |
-| 3 Shortlist | Pick the top N (optionally by state / min reviews) |
-| 4 Deep check | Team/about/contact/reviews/projects/careers pages: owner and team names, direct emails, hiring, certifications, financing, ads/software used, recent work |
-| 4b Social + domain | Public Facebook/Instagram/YouTube/LinkedIn follower counts; domain age, expiry, registrar (RDAP) |
-| 4c Google search *(optional)* | Needs a Serper / Brave / SerpAPI key (~$1 per 1,000 searches). Owner names, BBB, local Google rank for "roofing contractor <city>", and websites for leads that had none |
-| 5 Export | Compact `.xlsx`: outreach list, owner-lookup list, or everything (with the reason anyone was excluded) |
+Duplicates, non-roofers, leads with no website and closed businesses are **kept and labelled**, never dropped.
 
-## What counts as a roofer (evidence order)
-1. **The website (strongest):** a roofer is confirmed only by roof-specific evidence (title/headline says roof, or 2+ of roofing / roof repair / replacement / shingles / reroof…). Gutters, siding, storm damage, hail and insurance never confirm a roofer on their own.
-2. **Business name + Google category (strong):** used for the first pass; only clear other trades (fence, pool, concrete-only…) are skipped, and the website can overrule that.
-3. **Search keyword / notes (weak):** how the lead was found, never a reason to reject a company.
-"Needs a browser" (JS-only site) is flagged only when no page of the site could be read.
-
-## How leads are scored
-* **Need** – no site / dead / parked / invalid SSL / not mobile / outdated / thin / no way to convert…
-* **Pay** – estimated revenue (reviews, team size, years), ads, call tracking, roofing software, certifications, financing…
-* **Ease** – owner-operated, direct email, no agency, DIY site, timely trigger (site down, domain expiring)…
-* **Priority** = need^0.45 × pay^0.35 × ease^0.20 (you need all three). Weights are editable in Settings; click *Re-score*.
-* Every score has a "why" list in the lead detail panel. Revenue is a rough estimate (±50%), labelled as such.
+## Size
+Per lead: ~1.3 KB in the database and ~0.5 KB in the export. **100,000 leads ≈ 240 MB database, ≈ 50 MB export.**
 
 ## Power
-Slider 1–1,000. Tick **Unlock higher range** for 2,000 / 3,000 / 5,000 (hard cap). Power can be changed, paused or stopped **live**.
-*Auto* ramps up while the network is healthy and backs off on timeouts. Low RAM/disk only lowers power, never blocks Start.
-More power ≠ more speed past ~1,000: throughput is limited by your CPU, router and the sites' response times.
+Slider 1–1,000. Tick **Unlock higher range** for 2,000 / 3,000 / 5,000 (hard cap). Change power, pause or stop **live**.
+*Auto* ramps up while the network is healthy and backs off on timeouts. Past ~1,000 more power rarely helps: your CPU, router and the sites' speed limit it.
 
 ## Honest limits
-* Facebook/LinkedIn often show a login wall; those are recorded as "blocked", never guessed. Google cannot be scraped directly (hence the API key).
-* Sites that need JavaScript to render are flagged "could not read" and given a neutral score, not a guess.
-* Only public pages are read; robots.txt is obeyed (switch in Settings). For cold email, include your postal address and an unsubscribe (CAN-SPAM).
-* Sizes (100,000 leads): database ≈ 120 MB before crawling, ≈ 250–400 MB fully crawled; full `.xlsx` export ≈ 10–30 MB.
+* **Bot protection.** Some sites answer with a captcha / "verify you are human" page. The crawler labels them "Blocked by bot protection" and does
+  **not** try to defeat them. In a test from a datacenter network ~25% of real roofing sites did this; from a home connection it should be far
+  fewer. Use **Retry sites that failed** later (or from another network).
+* Facebook/Instagram usually hide follower counts without a login; LinkedIn often shows them. JavaScript-only sites give little text.
+* Owner names are found on ~1/3 of sites (many don't publish them); emails on ~2/3.
+* Only public pages are read, and robots.txt is obeyed (switch in Advanced). Cold-email rules (CAN-SPAM) are your responsibility.
+
+## Optional (Advanced section)
+Heuristic need/pay/ease scoring and ranked exports, a shortlist, and a Google-search stage (needs a Serper/Brave/SerpAPI key, ~$1 per 1,000
+searches: owner names, local rank, BBB/Yelp pages, websites for leads with none). None of this is used by the research export.
 
 ## Tests
-`python tests/test_integration.py` · `test_enrichment.py` · `test_qa.py` · `test_dashboard.py` · `test_engine_live.py [sites]` · `test_chaos.py` (hostile servers) · `test_scale.py [rows]`
+`python tests/test_research.py` (the core promise) · `test_integration.py` · `test_storage.py` · `test_qa.py` · `test_enrichment.py` ·
+`test_dashboard.py` · `test_real_file.py` · `test_engine_live.py [sites]` · `test_chaos.py` (hostile servers) · `test_scale.py [rows]`

@@ -226,28 +226,49 @@ def norm_state(v, address=""):
 
 
 ROOF_NAME_CAT = re.compile(r"roof|shingle")
-NON_ROOFER_TERMS = ("roofing supply", "roofing distributor", "building materials", "hardware store", "lumber", "concrete", "ready mix", "flooring", "foundation",
-                    "paving", "asphalt contractor", "landscap", "swimming pool", "pool ", "fence", "fencing", "masonry", "excavat", "plumb", "electrician",
-                    "electrical", "hvac", "heating", "air conditioning", "painting", "painter", "tree service", "pest control", "garage door", "septic",
-                    "demolition", "cleaning service", "real estate", "insurance agency", "law firm", "restaurant", "church", "school", "turf", "deck builder")
-GENERIC_CONTRACTOR = re.compile(r"general contractor|construction|home improvement|exterior|restoration|siding|gutter|storm|solar|remodel|building contractor|handyman")
+SUPPLIER = re.compile(r"roofing (supply|supplier|distribut|material|wholesale)|building (material|supply)|lumber|hardware store|home improvement store")
+# trades that sit next to roofing: worth crawling because the website can show they also do roofs
+ADJACENT = re.compile(r"general contractor|construction|builder|building|remodel|renovat|home improvement|exterior|siding|gutter|restoration|storm|solar|"
+                      r"handyman|waterproof|insulation|window install|window replace|replacement window|windows? (and|&) doors?|door install|deck|chimney|skylight|stucco|carpent|home service|property maintenance|"
+                      r"weatherproof|contractor and|exteriors|damage")
+NON_ROOFER_TERMS = ("concrete", "ready mix", "flooring", "foundation", "paving", "asphalt contractor", "landscap", "swimming pool", "pool ", "fence", "fencing",
+                    "masonry", "excavat", "plumb", "electrician", "electrical", "hvac", "heating", "air conditioning", "painting", "painter", "tree service",
+                    "pest control", "garage door", "septic", "demolition", "cleaning service", "real estate", "insurance agency", "law firm", "restaurant",
+                    "church", "school", "turf", "tile", "countertop", "cabinet", "granite", "marble", "carpet")
+
+
+def _category_tokens(categories):
+    return [t.strip().lower() for t in re.split(r"[|;,/]", categories or "") if t.strip()]
 
 
 def classify_roofer(name, categories, keyword="", about=""):
     """Pre-crawl triage. Evidence hierarchy: business name + Google categories are strong; the website (crawl) is strongest and
-    can overrule this later; the search keyword and notes only describe HOW the lead was found, so they never reject anyone."""
-    strong = f"{name or ''} | {categories or ''}".lower()
+    can overrule this later; the search keyword and notes only describe HOW the lead was found, so they never decide anything.
+    A lead is only outreach-eligible with POSITIVE roofer evidence: 'unknown' is never assumed to be a roofer."""
+    name_l, cats = (name or "").lower(), _category_tokens(categories)
+    cat_text = " | ".join(cats)
+    strong = f"{name_l} | {cat_text}"
+    if SUPPLIER.search(strong) and not re.search(r"roofing contractor|roofer", strong):
+        return "OBVIOUS_NON_ROOFER", "Supplier/distributor/store, not a roofing contractor."
     if ROOF_NAME_CAT.search(strong):
         return "LIKELY_ROOFER", "Business name or Google category mentions roofing."
-    hits = [t.strip() for t in NON_ROOFER_TERMS if t in strong]
-    if hits and not GENERIC_CONTRACTOR.search(strong):
-        return "OBVIOUS_NON_ROOFER", "Name/category is clearly another trade: " + ", ".join(hits[:3]) + " (the website can still overrule this)"
-    if hits or GENERIC_CONTRACTOR.search(strong):
-        return "RELATED_OR_MIXED", "General/exterior contractor or mixed trades - worth checking the website."
-    if ROOF_NAME_CAT.search(f"{keyword or ''} {about or ''}".lower()):
-        return "UNKNOWN", "Only the search keyword/notes mention roofing (weak evidence)."
-    return "UNKNOWN", "No clear category signal."
+    if cats:
+        # Google's category decides when it exists; the name never overrides it ("Septic, Sewer & Storm" is not an exterior trade)
+        if ADJACENT.search(cat_text) or any(t in ("contractor", "general contractor") for t in cats):
+            return "RELATED_OR_MIXED", "General/exterior contractor or mixed trades - the website must confirm roofing."
+        hits = [t.strip() for t in NON_ROOFER_TERMS if t in cat_text]
+        return "OBVIOUS_NON_ROOFER", (f"Google category '{cats[0][:40]}' is another trade ({', '.join(hits[:2])})" if hits
+                                      else f"Google category '{cats[0][:40]}' is not roofing or an exterior/construction trade.")
+    # no category at all: fall back to the name
+    hits = [t.strip() for t in NON_ROOFER_TERMS if t in name_l]
+    if hits and not ADJACENT.search(name_l):
+        return "OBVIOUS_NON_ROOFER", "Name is clearly another trade: " + ", ".join(hits[:2])
+    if ADJACENT.search(name_l):
+        return "RELATED_OR_MIXED", "Name suggests an exterior/construction trade - the website must confirm roofing."
+    return "UNKNOWN", "No category or roofing signal in the name - the website must confirm roofing."
 
+
+CLASSIFIER_VERSION = "3"      # bump whenever classify_roofer changes: existing databases are re-classified automatically
 
 CLOSED_RE = re.compile(r"(?i)permanently\s+closed|closed_permanently|\bdefunct\b|out of business")
 
@@ -312,7 +333,7 @@ def import_dataset(path, replace=False, overrides=None, progress=None):
         raise ValueError("A dataset is already loaded. Use 'Reset dataset' first, or import into a fresh database.")
     if replace:
         with con:
-            for t in ("pages", "lead_data", "scores", "lead_stage", "selection", "leads", "runs"):
+            for t in ("lead_blob", "scores", "lead_stage", "selection", "leads", "runs"):
                 con.execute(f"DELETE FROM {t}")
     headers, rows = read_rows(path)
     first = []
@@ -395,4 +416,22 @@ def import_dataset(path, replace=False, overrides=None, progress=None):
     # first-pass scores from Maps data + website kind so rankings exist before any crawling
     import scoring_run
     stats["scored"] = scoring_run.rescore_all(progress=progress)
+    db.set_meta("classifier_version", CLASSIFIER_VERSION)
     return stats
+
+
+def reclassify_all(progress=None):
+    """Re-run the roofer classifier on every stored lead (name + Google category) and re-score. Crawl results are kept."""
+    con = db.connect()
+    rows = con.execute("SELECT lead_key,company_name,categories,maps_extra_json FROM leads").fetchall()
+    updates = []
+    for r in rows:
+        mx = db.jloads(r["maps_extra_json"], {})
+        cl, reason = classify_roofer(r["company_name"], r["categories"], mx.get("keyword", ""), mx.get("about", ""))
+        updates.append((cl, reason, r["lead_key"]))
+    with con:
+        con.executemany("UPDATE leads SET prefilter_class=?, prefilter_reason=? WHERE lead_key=?", updates)
+    con.close()
+    db.set_meta("classifier_version", CLASSIFIER_VERSION)
+    import scoring_run
+    return scoring_run.rescore_all(progress=progress)

@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
-title Roofer Lead Finder - Setup
+title Roofer Lead Collector - Setup
 set PY=
 where py >nul 2>nul
 if not errorlevel 1 set PY=py
@@ -11,7 +11,7 @@ if "%PY%"=="" (
 if "%PY%"=="" goto nopython
 echo.
 echo ==========================================
-echo   ROOFER LEAD FINDER - SETUP (one time)
+echo   ROOFER LEAD COLLECTOR - SETUP (one time)
 echo ==========================================
 echo.
 if not exist ".venv\Scripts\python.exe" (
@@ -23,7 +23,7 @@ if not exist ".venv\Scripts\python.exe" (
 if errorlevel 1 goto fail
 echo.
 echo Running self-tests (about 2 minutes)...
-for %%T in (test_dashboard test_integration test_qa test_enrichment) do (
+for %%T in (test_research test_dashboard test_integration test_storage test_qa test_enrichment test_real_file) do (
   ".venv\Scripts\python.exe" tests\%%T.py
   if errorlevel 1 goto fail
 )

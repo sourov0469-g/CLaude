@@ -6,6 +6,8 @@ import threading
 import time
 import traceback
 import zlib
+
+from zdict_data import ZDICT
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -35,17 +37,13 @@ CREATE TABLE IF NOT EXISTS lead_stage(
   lead_key TEXT NOT NULL, stage TEXT NOT NULL, status TEXT NOT NULL,   -- DONE | FAILED | SKIPPED
   attempts INTEGER NOT NULL DEFAULT 1, error TEXT, updated_at TEXT NOT NULL,
   PRIMARY KEY(lead_key, stage)
-);
+) WITHOUT ROWID;
 CREATE INDEX IF NOT EXISTS idx_stage_status ON lead_stage(stage, status);
 
-CREATE TABLE IF NOT EXISTS pages(
-  lead_key TEXT NOT NULL, url TEXT NOT NULL, page_type TEXT, status_code INTEGER,
-  features_json TEXT NOT NULL, fetched_at TEXT NOT NULL,
-  PRIMARY KEY(lead_key, url)
-);
-CREATE TABLE IF NOT EXISTS lead_data(
-  lead_key TEXT NOT NULL, source TEXT NOT NULL, data_json TEXT NOT NULL, updated_at TEXT NOT NULL,
-  PRIMARY KEY(lead_key, source)
+-- everything collected about a lead (all pages + network/domain/social/search facts) as ONE compressed record
+-- (a plain rowid table on purpose: WITHOUT ROWID spills every ~1 KB record into a 4 KB overflow page)
+CREATE TABLE IF NOT EXISTS lead_blob(
+  lead_id INTEGER PRIMARY KEY, data BLOB NOT NULL, updated_at TEXT
 );
 CREATE TABLE IF NOT EXISTS scores(
   lead_key TEXT PRIMARY KEY,
@@ -55,17 +53,17 @@ CREATE TABLE IF NOT EXISTS scores(
   site_state TEXT, pitch_angle TEXT, confidence TEXT,
   revenue_band TEXT, revenue_basis TEXT,
   hooks_json TEXT, breakdown_json TEXT, scored_at TEXT
-);
+) WITHOUT ROWID;
 CREATE INDEX IF NOT EXISTS idx_scores_priority ON scores(eligible, priority DESC);
 CREATE INDEX IF NOT EXISTS idx_scores_rank ON scores(rank);
 CREATE TABLE IF NOT EXISTS selection(
   lead_key TEXT NOT NULL, list_name TEXT NOT NULL, rank INTEGER, selected_at TEXT NOT NULL,
   PRIMARY KEY(lead_key, list_name)
-);
+) WITHOUT ROWID;
 CREATE TABLE IF NOT EXISTS search_cache(
   cache_key TEXT PRIMARY KEY, result_json TEXT NOT NULL, fetched_at TEXT NOT NULL
 );
-CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT) WITHOUT ROWID;
 CREATE TABLE IF NOT EXISTS runs(
   id INTEGER PRIMARY KEY AUTOINCREMENT, started_at TEXT, ended_at TEXT, stage TEXT, mode TEXT,
   concurrency INTEGER, limit_count INTEGER, status TEXT, note TEXT, processed INTEGER DEFAULT 0
@@ -94,7 +92,36 @@ def init_db():
     con = connect()
     con.executescript(SCHEMA)
     con.commit()
+    _migrate_old_tables(con)
     con.close()
+
+
+def _migrate_old_tables(con):
+    """v5.0/5.1 databases stored one row per page / data source. Fold them into one record per lead, then drop the old tables."""
+    have = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    if "pages" not in have and "lead_data" not in have:
+        return
+    blobs = {}
+    if "pages" in have:
+        for r in con.execute("SELECT lead_key,url,page_type,status_code,features_json FROM pages"):
+            b = blobs.setdefault(r["lead_key"], {"pages": {}, "data": {}})
+            b["pages"][r["url"]] = {"t": r["page_type"], "s": r["status_code"], "f": prune_features(jloads(r["features_json"], {}), r["page_type"])}
+    if "lead_data" in have:
+        for r in con.execute("SELECT lead_key,source,data_json FROM lead_data"):
+            blobs.setdefault(r["lead_key"], {"pages": {}, "data": {}})["data"][r["source"]] = jloads(r["data_json"], {})
+    with con:
+        con.executemany("INSERT OR REPLACE INTO lead_blob(lead_id,data,updated_at) SELECT id,?,? FROM leads WHERE lead_key=?", [(pack(b), now(), k) for k, b in blobs.items()])
+        con.execute("DROP TABLE IF EXISTS pages")
+        con.execute("DROP TABLE IF EXISTS lead_data")
+    try:
+        con.execute("VACUUM")
+    except sqlite3.Error:
+        pass
+
+
+def get_blob(con, lead_key):
+    row = con.execute("SELECT data FROM lead_blob WHERE lead_id=(SELECT id FROM leads WHERE lead_key=?)", (lead_key,)).fetchone()
+    return jloads(row[0], {"pages": {}, "data": {}}) if row else {"pages": {}, "data": {}}
 
 
 # --------------------------------------------------------------------------- meta
@@ -128,21 +155,33 @@ def get_meta_all():
 
 
 def pack(obj):
-    """JSON -> zlib blob. Everything bulky in the database is stored this way (about 5-8x smaller)."""
-    return zlib.compress(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str).encode("utf-8"), 6)
+    """JSON -> compressed blob using a frozen preset dictionary (small records compress ~2x better with one). Format byte 0x01."""
+    c = zlib.compressobj(9, zlib.DEFLATED, 15, 9, zlib.Z_DEFAULT_STRATEGY, ZDICT)
+    return b"\x01" + c.compress(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str).encode("utf-8")) + c.flush()
 
 
-PRUNE_KEYS = ("internal_links", "excerpt", "h2", "people_schema", "server", "generator", "lang", "css_count")
+def unpack_bytes(b):
+    b = bytes(b)
+    if b[:1] == b"\x01":
+        dobj = zlib.decompressobj(zdict=ZDICT)
+        return dobj.decompress(b[1:]) + dobj.flush()
+    return zlib.decompress(b)                      # records written by earlier versions (plain zlib)
+
+
+PRUNE_KEYS = ("internal_links", "h2", "people_schema", "server", "generator", "lang", "css_count")
 # inner pages are only mined for people / contact / proof / hiring, so their site-quality fields are dropped
-INNER_DROP = {"link_categories", "internal_link_count", "meta_description", "h1", "has_og", "has_favicon", "has_canonical", "script_count",
+INNER_DROP = {"link_categories", "internal_link_count", "meta_description", "has_og", "has_favicon", "has_canonical", "script_count",
               "img_count", "img_noalt", "outdated", "builder", "builder_tier", "agency", "wp", "lazy_images", "inline_style_bytes", "media_queries",
               "maps_embed", "video_embed", "lorem", "js_shell", "needs_render", "meta_refresh", "form_count", "quote_form_count", "quote_ctas",
-              "has_viewport", "html_bytes", "elapsed_ms", "status", "title", "roof_signal_count", "tel_link_count"}
+              "has_viewport", "html_bytes", "elapsed_ms", "status", "roof_signal_count", "tel_link_count"}
 
 
 def prune_features(f, page_type="homepage"):
     """Drop bulky per-page fields nobody scores on (keeps the database small)."""
     out = {k: v for k, v in f.items() if k not in PRUNE_KEYS and v is not None and v != [] and v != {} and v != ""}
+    cap = {"homepage": 520, "about": 700, "team": 700}.get(page_type, 260)
+    if out.get("excerpt"):
+        out["excerpt"] = out["excerpt"][:cap]
     if page_type != "homepage":
         out = {k: v for k, v in out.items() if k not in INNER_DROP}
         sc = out.get("schema")
@@ -156,7 +195,7 @@ def jloads(v, default):
         if v is None or v == "":
             return default
         if isinstance(v, (bytes, bytearray, memoryview)):
-            return json.loads(zlib.decompress(bytes(v)).decode("utf-8"))
+            return json.loads(unpack_bytes(v).decode("utf-8"))
         return json.loads(v)
     except Exception:
         return default
@@ -220,14 +259,12 @@ def _stage_where(stage, skip_nonroofers):
         w += "AND EXISTS(SELECT 1 FROM lead_stage t WHERE t.lead_key=l.lead_key AND t.stage='triage' AND t.status='DONE') "
     if stage == "domain":
         w += "AND l.domain!='' "
-    if stage in ("social", "domain", "search"):
-        w += "AND COALESCE(sc.eligible,1)=1 "
     if skip_nonroofers:
         w += "AND l.prefilter_class!='OBVIOUS_NON_ROOFER' "
     return w
 
 
-def pending_for_stage(stage, limit=None, selected_list=None, skip_nonroofers=True, exclude=()):
+def pending_for_stage(stage, limit=None, selected_list=None, skip_nonroofers=False, exclude=()):
     """Leads still needing `stage`. Best prospects first so an early Stop still leaves the best done."""
     con = connect()
     params = [stage]
@@ -239,7 +276,7 @@ def pending_for_stage(stage, limit=None, selected_list=None, skip_nonroofers=Tru
         sql += "JOIN selection sel ON sel.lead_key=l.lead_key AND sel.list_name=? "
         params.append(selected_list)
     sql += "WHERE st.lead_key IS NULL AND " + _stage_where(stage, skip_nonroofers)
-    sql += "ORDER BY COALESCE(sc.priority,0) DESC, l.source_row LIMIT ?"
+    sql += "ORDER BY l.source_row LIMIT ?"          # original file order: predictable, resumable, no hidden prioritising
     params.append(int(limit) if limit else -1)
     rows = [dict(r) for r in con.execute(sql, params)]
     con.close()
@@ -249,7 +286,7 @@ def pending_for_stage(stage, limit=None, selected_list=None, skip_nonroofers=Tru
     return rows
 
 
-def stage_counts(stage, selected_list=None, skip_nonroofers=True):
+def stage_counts(stage, selected_list=None, skip_nonroofers=False):
     con = connect()
     base = "FROM leads l LEFT JOIN scores sc ON sc.lead_key=l.lead_key "
     params = []
@@ -293,6 +330,7 @@ class Writer:
         self.batch, self.interval = batch, interval
         self.errors = 0
         self.last_error = ""
+        self._cache, self._dirty = {}, set()
         self.written = 0
         self._stop = threading.Event()
         self.t = threading.Thread(target=self._run, name="db-writer", daemon=True)
@@ -308,21 +346,40 @@ class Writer:
     def stage(self, lead_key, stage, status, error=None, finalize=True):
         self.q.put(("stage", lead_key, stage, status, error, finalize))
 
+    # per-batch cache of lead records: many page/data ops for one lead become a single read + a single write
+    def _blob(self, con, k):
+        b = self._cache.get(k)
+        if b is None:
+            b = get_blob(con, k)
+            b.setdefault("pages", {})
+            b.setdefault("data", {})
+            self._cache[k] = b
+        return b
+
+    def _flush(self, con, only=None):
+        for k in ([only] if only else list(self._dirty)):
+            if k in self._dirty:
+                con.execute("INSERT INTO lead_blob(lead_id,data,updated_at) SELECT id,?,? FROM leads WHERE lead_key=? ON CONFLICT(lead_id) DO UPDATE SET data=excluded.data,updated_at=excluded.updated_at",
+                            (pack(self._cache[k]), now(), k))
+                self._dirty.discard(k)
+
     def _apply(self, con, op):
         kind = op[0]
         if kind == "page":
             _, k, url, ptype, status, feats = op
-            con.execute("""INSERT INTO pages(lead_key,url,page_type,status_code,features_json,fetched_at) VALUES(?,?,?,?,?,?)
-                           ON CONFLICT(lead_key,url) DO UPDATE SET page_type=excluded.page_type,status_code=excluded.status_code,
-                           features_json=excluded.features_json,fetched_at=excluded.fetched_at""",
-                        (k, url, ptype, status, pack(prune_features(feats, ptype)), now()))
+            b = self._blob(con, k)
+            old = b["pages"].get(url)
+            if old and old.get("t") == "homepage" and ptype != "homepage":
+                return                                  # an inner page that redirects to the homepage must never overwrite it
+            b["pages"][url] = {"t": ptype, "s": status, "f": prune_features(feats, ptype)}
+            self._dirty.add(k)
         elif kind == "data":
             _, k, source, payload = op
-            con.execute("""INSERT INTO lead_data(lead_key,source,data_json,updated_at) VALUES(?,?,?,?)
-                           ON CONFLICT(lead_key,source) DO UPDATE SET data_json=excluded.data_json,updated_at=excluded.updated_at""",
-                        (k, source, pack(payload), now()))
+            self._blob(con, k)["data"][source] = payload
+            self._dirty.add(k)
         elif kind == "stage":
             _, k, stage, status, err, finalize = op
+            self._flush(con, k)
             con.execute("""INSERT INTO lead_stage(lead_key,stage,status,attempts,error,updated_at) VALUES(?,?,?,1,?,?)
                            ON CONFLICT(lead_key,stage) DO UPDATE SET status=excluded.status,attempts=attempts+1,error=excluded.error,updated_at=excluded.updated_at""",
                         (k, stage, status, (err or "")[:400] or None, now()))
@@ -350,6 +407,8 @@ class Writer:
                                 self.errors += 1
                                 self.last_error = f"{type(e).__name__}: {e}"
                                 traceback.print_exc()
+                        self._flush(con)
+                    self._cache.clear()
                     self.written += len(pending)
                 except Exception as e:
                     self.errors += 1

@@ -28,10 +28,19 @@ STATE_TEXT = {"OK": "Loads fine", "NOT_CRAWLED": "Not checked yet", "BOT_BLOCKED
 SOCIAL_SHORT = {"facebook": "FB", "instagram": "IG", "linkedin": "LI", "x_twitter": "X", "youtube": "YT"}
 
 
-def website_check(p):
+STATUS_PLAIN = {"OK": "Loads fine", "NOT_CRAWLED": "Not collected yet", "BOT_BLOCKED": "Blocked by bot protection (not read)",
+                "ROBOTS_BLOCKED": "robots.txt forbids crawling", "JS_SHELL": "Needs JavaScript (little text readable)", "EMPTY": "Empty / unreadable page",
+                "NO_WEBSITE": "No website listed", "SOCIAL_ONLY": "Only a social/directory page", "FREE_BUILDER": "Free-builder subdomain",
+                "PARKED": "Domain parked / for sale", "SUSPENDED": "Hosting suspended", "DEFAULT_PAGE": "Server default page", "UNDER_CONSTRUCTION": "Under construction / coming soon",
+                "DEAD_DNS": "Domain does not resolve (site down)", "HTTP_404": "Homepage returns 404", "DEAD_CONNECT": "Server refuses connections", "TIMEOUT": "Site times out",
+                "HTTP_5XX": "Server errors", "HTTP_ERROR": "HTTP error", "UNREACHABLE": "Unreachable", "REDIRECTS_TO_PROFILE": "Redirects to a social/directory profile"}
+
+
+def website_check(p, split=False):
     s = p["site"]
     st = s["state"]
-    bits = [scoring.STATE_LABEL.get(st, STATE_TEXT.get(st, st)).capitalize() if st != "OK" else "Loads fine"]
+    status = STATUS_PLAIN.get(st, scoring.STATE_LABEL.get(st, st))
+    bits = [status]
     if st in ("OK", "JS_SHELL"):
         if s.get("ssl_error"):
             bits.append("INVALID SSL")
@@ -61,15 +70,15 @@ def website_check(p):
         if rd.get("dead_flag"):
             t += ", LAPSED/ON HOLD"
         bits.append(t)
-    return " | ".join(bits)
+    return (status, " | ".join(bits[1:])) if split else " | ".join(bits)
 
 
-def business_profile(p, s):
+def business_profile(p, s=None):
     b, m = p["biz"], p["maps"]
     bits = []
     if m.get("reviews"):
         bits.append(f"Google {m['rating'] or '?'}★ / {m['reviews']} reviews")
-    if s["revenue_band"]:
+    if s and s["revenue_band"]:
         bits.append("est. revenue " + s["revenue_band"])
     if b.get("team_size"):
         bits.append(f"team ~{b['team_size']}")
@@ -249,4 +258,93 @@ def lead_dossier(lead_key):
         "years_in_business": p["biz"]["years_in_business"], "built_with": site.get("builder") or "", "agency": site.get("agency") or "",
         "last_updated": site.get("last_updated"), "last_updated_source": site.get("last_updated_source"),
         "why": {k: [x for x in v if abs(x[1]) >= 4] for k, v in br.items()},
+        "excerpts": {k: v for k, v in p["excerpts"].items() if v}, "data_notes": data_notes(p, {}), "pages_read": p["site"]["pages_crawled"],
     }
+
+
+# ------------------------------------------------------------------------------------------------ research export (no ranking)
+RESEARCH_COLS = ["Row", "Company", "Google category", "City", "State", "Phone", "Website (as listed)", "Google Maps URL", "Google rating", "Google reviews",
+                 "Website status", "Website details", "Homepage title", "Homepage text", "Emails found", "Phones on site", "Social profiles",
+                 "Owner / decision makers", "Team members", "Services & certifications", "Business facts", "Recent work", "About / team text", "Data notes"]
+RESEARCH_WIDTHS = {"Row": 7, "Company": 30, "Google category": 22, "City": 14, "State": 6, "Phone": 15, "Website (as listed)": 30, "Google Maps URL": 24, "Google rating": 8,
+                   "Google reviews": 9, "Website status": 26, "Website details": 60, "Homepage title": 34, "Homepage text": 70, "Emails found": 34, "Phones on site": 20,
+                   "Social profiles": 44, "Owner / decision makers": 34, "Team members": 40, "Services & certifications": 50, "Business facts": 50, "Recent work": 44,
+                   "About / team text": 70, "Data notes": 40}
+
+
+def _people(lst, n):
+    return " | ".join(f"{o['name']}" + (f" ({o['title']})" if o.get("title") else "") for o in lst[:n])
+
+
+def data_notes(p, row_of):
+    st, notes = p["site"]["state"], []
+    if p.get("dup_of"):
+        notes.append(f"Duplicate of row {row_of.get(p['dup_of'], '?')} (same website/phone): not crawled separately")
+    if p["maps"].get("closed"):
+        notes.append("Google lists this business as permanently closed")
+    if st == "BOT_BLOCKED":
+        notes.append("Website blocked the crawler (bot protection); retry from another network or check by hand")
+    elif st == "JS_SHELL":
+        notes.append("Site is built with JavaScript; little text could be read")
+    elif st == "NOT_CRAWLED" and p["website"] and not p.get("dup_of"):
+        notes.append("Not collected yet")
+    elif st == "ROBOTS_BLOCKED":
+        notes.append("robots.txt forbids crawling")
+    elif st in ("TIMEOUT", "DEAD_CONNECT", "UNREACHABLE", "HTTP_5XX", "HTTP_ERROR"):
+        notes.append("Site did not respond properly when crawled; worth a retry")
+    if st == "OK" and p["site"]["pages_crawled"] == 1:
+        notes.append("Only the homepage was read")
+    return " | ".join(notes)
+
+
+def research_row(p, row_of):
+    c, b, ex = p["contact"], p["biz"], p["excerpts"]
+    status, details = website_check(p, split=True)
+    social = []
+    sd = p.get("social") or {}
+    for k, v in c["socials"].items():
+        if v:
+            n = (sd.get(k) or {}).get("followers") or (sd.get(k) or {}).get("likes")
+            social.append(f"{SOCIAL_SHORT.get(k, k)}: {v[0]}" + (f" ({n:,})" if n else ""))
+    for k, u in ((p.get("search") or {}).get("profiles") or {}).items():
+        if k not in c["socials"]:
+            social.append(f"{k.title()}: {u}")
+    svc = list(b["services"])[:12] + list(b["credentials"])[:6] + list(b["license"])[:2]
+    rw = " | ".join(f"{w['title']}" + (f" ({w['date']})" if w["date"] else "") for w in p["recent_work"] if w["title"])
+    if b.get("project_dates"):
+        rw = (rw + " | " if rw else "") + "latest dated content " + b["project_dates"][0]
+    about = (ex["about"] + " " + ex["team"]).strip()
+    return {
+        "Row": p["source_row"], "Company": p["company"], "Google category": p["categories"], "City": p["city"], "State": p["state"], "Phone": p["phone"],
+        "Website (as listed)": p["website"], "Google Maps URL": p["maps_url"], "Google rating": p["maps"]["rating"] or "", "Google reviews": p["maps"]["reviews"] or "",
+        "Website status": status, "Website details": details, "Homepage title": p["titles"]["title"], "Homepage text": ex["homepage"],
+        "Emails found": " | ".join(e["email"] for e in c["emails"][:6]), "Phones on site": " | ".join([x for x in c["phones"] if x != p["phone"]][:4]),
+        "Social profiles": " | ".join(social), "Owner / decision makers": _people(p["people"]["owners"], 4), "Team members": _people(p["people"]["team_members"], 8),
+        "Services & certifications": " | ".join(dict.fromkeys(svc)), "Business facts": business_profile(p), "Recent work": rw, "About / team text": about[:900],
+        "Data notes": data_notes(p, row_of),
+    }
+
+
+def export_research(path, progress=None):
+    """EVERY lead, original file order, everything collected, no ranking / scores / eligibility / estimates."""
+    con = db.connect()
+    row_of = {r[0]: r[1] for r in con.execute("SELECT lead_key, source_row FROM leads")}
+    keys = [r[0] for r in con.execute("SELECT lead_key FROM leads ORDER BY source_row")]
+    con.close()
+
+    def rows():
+        c2 = db.connect()
+        try:
+            for i, k in enumerate(keys):
+                p = scoring_run.load_profile(c2, k)
+                if p is None:
+                    continue
+                p["source_row"] = row_of.get(k)
+                yield research_row(p, row_of)
+                if progress and i % 5000 == 0:
+                    progress(i)
+        finally:
+            c2.close()
+    HEADER_NOTES.update(RESEARCH_WIDTHS)
+    NUMERIC.update({"Row", "Google rating", "Google reviews"})
+    return _write_xlsx(path, RESEARCH_COLS, rows(), "Research data")

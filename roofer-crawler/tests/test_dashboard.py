@@ -20,7 +20,7 @@ check(config.CUSTOM_NORMAL_MAX == 1000 and config.CUSTOM_UNLOCK_STEPS == (2000, 
 import app as A
 c = A.app.test_client()
 html = c.get("/").get_data(as_text=True)
-check("Roofer Lead Finder" in html and "unlock" in html.lower(), "dashboard page renders")
+check("Roofer Lead Collector" in html and "unlock" in html.lower() and "Collect everything" in html, "dashboard page renders (collect-first flow)")
 token = re.search(r'name="csrf" content="([^"]+)"', html).group(1)
 check(c.post("/api/start", json={"stage": "triage"}).status_code == 400, "POST without CSRF token is rejected")
 H = {"X-CSRF": token}

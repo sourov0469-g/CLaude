@@ -19,10 +19,18 @@ env = dict(os.environ, ROOFER_HOME=home, ROOFER_CRAWLER_DB=f"{home}/q.db", ROOFE
            ROOFER_TEST_HOSTMAP=json.dumps({"*": "127.0.0.1"}))
 os.environ.update({k: env[k] for k in ("ROOFER_HOME", "ROOFER_CRAWLER_DB", "ROOFER_TEST_MODE", "ROOFER_TEST_HOSTMAP")})
 from importer import classify_roofer as cl
-check(cl("4 Pillars Constructions", "Foundation contractor", "foundation repair Celina TX")[0] != "OBVIOUS_NON_ROOFER", "search keyword 'foundation repair' can't hard-reject 4 Pillars")
+check(cl("4 Pillars Constructions", "Construction company", "foundation repair Celina TX")[0] != "OBVIOUS_NON_ROOFER", "search keyword 'foundation repair' can't hard-reject 4 Pillars")
 check(cl("Birdieworks", "Construction company", "concrete contractor Celina TX")[0] != "OBVIOUS_NON_ROOFER", "Birdieworks (found via 'concrete' search) is not rejected")
 check(cl("Robinson Fence Company", "Fence contractor")[0] == "OBVIOUS_NON_ROOFER" and cl("Foley Pools", "Swimming pool contractor")[0] == "OBVIOUS_NON_ROOFER", "name+category still reject clear non-roofers")
 check(cl("Mystery LLC", "", "roofing contractor Dallas")[0] == "UNKNOWN", "keyword-only roofing mention is weak (UNKNOWN, not LIKELY)")
+# real examples from the first exported file: none of these are roofers and none may reach the outreach list
+for nm, cat in [("CellFone USA", "Cell phone store"), ("The Green Gate Garden Center", "Garden center"), ("Boland's Ace", "Hardware store"),
+                ("Pro-One Mobile Small Engine Repair", "Small engine repair shop"), ("Carmichael's Pumpkin Patch", "Pumpkin patch"),
+                ("Precision Pointe | Windshield Rock Chip Repair | Auto Glass", "Auto glass shop"), ("MoesKustomz", "Auto customization shop"),
+                ("Katy Tile & Marble", "Tile contractor"), ("John R Plumbing LLC", "Plumber"), ("Delaware Valley Septic, Sewer & Storm", "Septic system service"),
+                ("Gulf Roofing Supply", "Roofing supply store")]:
+    check(cl(nm, cat)[0] == "OBVIOUS_NON_ROOFER", f"'{nm}' ({cat}) is not a roofer")
+check(cl("KLM Roofing & General Contracting", "Roofing contractor")[0] == "LIKELY_ROOFER" and cl("Eagle Exteriors", "Siding contractor")[0] == "RELATED_OR_MIXED", "real roofers stay likely; adjacent trades get website-checked")
 
 rows = [["Business Name", "Website", "Business Categories", "Search Keyword", "State", "Review Count"]]
 for i in range(150):
@@ -55,7 +63,7 @@ check(r.returncode == 0, "chained triage+deep test run")
 con = db.connect()
 touched = con.execute("SELECT COUNT(DISTINCT lead_key) FROM lead_stage").fetchone()[0]
 check(touched == 100, f"exactly 100 leads touched (not {touched}) - nothing beyond the test set was crawled")
-check(con.execute("SELECT COUNT(DISTINCT lead_key) FROM pages").fetchone()[0] == 100, "pages saved for exactly those 100")
+check(sum(1 for r in con.execute("SELECT l.lead_key FROM lead_blob b JOIN leads l ON l.id=b.lead_id") if db.get_blob(con, r[0])["pages"]) == 100, "pages saved for exactly those 100")
 check(con.execute("SELECT COUNT(*) FROM lead_stage WHERE stage='deep'").fetchone()[0] == 100, "deep stage also ran on exactly the test set")
 check(con.execute("SELECT COUNT(*) FROM leads l JOIN selection s ON s.lead_key=l.lead_key AND s.list_name='test' WHERE l.prefilter_class!='LIKELY_ROOFER'").fetchone()[0] == 0, "'likely roofers' test contains only likely roofers")
 rep = qa.report()

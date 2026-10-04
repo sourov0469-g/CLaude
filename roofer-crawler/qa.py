@@ -9,12 +9,11 @@ STAGES = ("triage", "deep", "social", "domain", "search")
 
 
 def select_test(kind="roofers", n=100, seed=None):
-    """kind: 'roofers' = random likely roofers (the useful one); 'raw' = random leads of any kind (technical reliability)."""
+    """kind: 'first' = the first N leads of the file; 'raw' = N random leads; 'roofers' = N random likely roofers."""
     con = db.connect()
     where = "crawlable=1 AND dup_of IS NULL" + (" AND prefilter_class='LIKELY_ROOFER'" if kind == "roofers" else "")
-    keys = [r[0] for r in con.execute(f"SELECT lead_key FROM leads WHERE {where}")]
-    rnd = random.Random(seed)
-    pick = rnd.sample(keys, min(int(n), len(keys)))
+    keys = [r[0] for r in con.execute(f"SELECT lead_key FROM leads WHERE {where} ORDER BY source_row")]
+    pick = keys[: int(n)] if kind == "first" else random.Random(seed).sample(keys, min(int(n), len(keys)))
     ts = db.now()
     with con:
         con.execute("DELETE FROM selection WHERE list_name=?", (TEST_LIST,))
@@ -22,8 +21,7 @@ def select_test(kind="roofers", n=100, seed=None):
         # start these leads from a clean slate so the test measures the real pipeline, and nothing else is touched
         for k in pick:
             con.execute("DELETE FROM lead_stage WHERE lead_key=?", (k,))
-            con.execute("DELETE FROM pages WHERE lead_key=?", (k,))
-            con.execute("DELETE FROM lead_data WHERE lead_key=?", (k,))
+            con.execute("DELETE FROM lead_blob WHERE lead_id=(SELECT id FROM leads WHERE lead_key=?)", (k,))
     con.close()
     return len(pick)
 

@@ -5,7 +5,7 @@ import db
 import leadprofile
 import scoring
 
-LEAD_COLS = ("lead_key,company_name,website,domain,website_kind,phone,email,city,state,zip,address,categories,rating,reviews,"
+LEAD_COLS = ("lead_key,source_row,company_name,website,domain,website_kind,phone,email,city,state,zip,address,categories,rating,reviews,"
              "maps_url,maps_extra_json,prefilter_class,dup_of")
 
 
@@ -14,13 +14,13 @@ def load_profile(con, lead_key):
     if not row:
         return None
     lead = dict(row)
+    blob = db.get_blob(con, lead_key)
     pages = []
-    for r in con.execute("SELECT page_type,features_json FROM pages WHERE lead_key=?", (lead_key,)):
-        f = db.jloads(r["features_json"], {})
-        f["_type"] = r["page_type"]
+    for url, pg in (blob.get("pages") or {}).items():
+        f = dict(pg.get("f") or {})
+        f["_type"], f["_url"] = pg.get("t"), url
         pages.append(f)
-    data = {r["source"]: db.jloads(r["data_json"], {}) for r in con.execute("SELECT source,data_json FROM lead_data WHERE lead_key=?", (lead_key,))}
-    return leadprofile.build_profile(lead, pages, data)
+    return leadprofile.build_profile(lead, pages, blob.get("data") or {})
 
 
 _CFG = {"cfg": None}

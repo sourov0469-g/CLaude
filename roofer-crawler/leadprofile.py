@@ -99,7 +99,7 @@ def derive_site_state(kind, net, home, pages=()):
         return ps
     if net.get("redirected_offsite") and net.get("final_kind") in ("SOCIAL_DIRECTORY", "FREE_BUILDER"):
         return "REDIRECTS_TO_PROFILE"
-    if ps in ("EMPTY", "UNPARSEABLE", "ANALYZE_ERROR"):
+    if ps in ("EMPTY", "UNPARSEABLE", "ANALYZE_ERROR", "REDIRECT_STUB"):
         return "EMPTY"
     if home.get("needs_render") and not any((pg.get("word_count") or 0) >= 150 for pg in pages if pg is not home):
         return "JS_SHELL"          # only when no other page proved the site readable
@@ -111,7 +111,7 @@ def build_profile(lead, pages, data):
     mx = _loads(lead.get("maps_extra_json"), {}) if not isinstance(lead.get("maps_extra"), dict) else lead["maps_extra"]
     net = data.get("net") or {}
     home = next((p for p in pages if p.get("_type") == "homepage"), None)
-    p = {"lead_key": lead["lead_key"], "company": lead.get("company_name") or "", "website": lead.get("website") or "",
+    p = {"lead_key": lead["lead_key"], "source_row": lead.get("source_row"), "company": lead.get("company_name") or "", "website": lead.get("website") or "",
          "domain": lead.get("domain") or "", "city": lead.get("city") or "", "state": lead.get("state") or "",
          "phone": lead.get("phone") or "", "categories": lead.get("categories") or "", "maps_url": lead.get("maps_url") or ""}
     kind = lead.get("website_kind") or "NONE"
@@ -258,6 +258,17 @@ def build_profile(lead, pages, data):
     biz["roofing_confirmed"] = bool(any(pg.get("roof_in_headline") for pg in pages) or len(biz["roof_terms"]) >= 2)
     p["biz"] = biz
     p["people"] = {"owners": owners, "team_members": team_members}
+
+    def excerpt_of(*types):
+        return " ".join(pg.get("excerpt", "") for pg in pages if pg.get("_type") in types and pg.get("excerpt")).strip()
+    recent = []
+    for pg in pages:
+        if pg.get("_type") in ("projects_gallery", "blog_news"):
+            recent.append({"title": (pg.get("title") or "")[:90], "date": (pg.get("dates") or [""])[0], "text": (pg.get("excerpt") or "")[:160]})
+    p["excerpts"] = {"homepage": excerpt_of("homepage"), "about": excerpt_of("about"), "team": excerpt_of("team"), "reviews": excerpt_of("reviews")}
+    p["titles"] = {"title": h.get("title", ""), "meta_description": h.get("meta_description", "")}
+    p["recent_work"] = recent[:4]
+    p["page_types"] = sorted({x.get("_type") for x in pages if x.get("_type")})
 
     # ---------------- contacts
     owner_first = {o["name"].split()[0].lower() for o in owners if o.get("name")}

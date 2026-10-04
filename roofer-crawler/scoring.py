@@ -341,8 +341,12 @@ def fit_gates(p, cfg):
         return 0, "Google lists it as permanently closed", 0
     if p.get("dup_of"):
         return 0, f"Duplicate of {p['dup_of']} (same domain/phone)", 0
-    if p["prefilter"] == "OBVIOUS_NON_ROOFER" and not biz.get("roofing_confirmed"):
+    pf, confirmed = p["prefilter"], biz.get("roofing_confirmed")
+    if pf == "OBVIOUS_NON_ROOFER" and not confirmed:
         return 0, "Not a roofer (name/category; website shows no roofing)", 0
+    if pf in ("UNKNOWN", "RELATED_OR_MIXED") and not confirmed:
+        why = "its website hasn't been checked yet" if p["site"]["state"] == "NOT_CRAWLED" else "no website to confirm it" if p["site"]["state"] in ("NO_WEBSITE", "SOCIAL_ONLY", "FREE_BUILDER") else "its website shows no roof-specific services"
+        return 0, f"Not confirmed as a roofer: category/name don't say roofing and {why}", 0
     if biz["non_us_signal"] or p["state"] in CA_PROVINCES:
         return 0, "Looks like a non-U.S. business", 0
     if cfg["exclude_franchise"] and biz["franchise"]:

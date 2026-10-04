@@ -180,9 +180,12 @@ class Engine:
                                               keepalive_timeout=10, force_close=False)
         timeout = aiohttp.ClientTimeout(total=config.TOTAL_TIMEOUT, connect=config.CONNECT_TIMEOUT, sock_read=config.READ_TIMEOUT)
         self.session = aiohttp.ClientSession(
-            connector=self.connector, timeout=timeout, auto_decompress=True, max_line_size=16384, max_field_size=16384,
+            connector=self.connector, timeout=timeout, auto_decompress=True,
+            trust_env=os.environ.get("ROOFER_USE_SYSTEM_PROXY") == "1",     # honour HTTP(S)_PROXY only when asked (corporate networks) max_line_size=16384, max_field_size=16384,
             headers={"User-Agent": self.settings.get("user_agent") or config.USER_AGENT,
-                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "Accept-Language": "en-US,en;q=0.9"})
+                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", "Accept-Language": "en-US,en;q=0.9",
+                     "Upgrade-Insecure-Requests": "1", "Sec-Fetch-Dest": "document", "Sec-Fetch-Mode": "navigate", "Sec-Fetch-Site": "none", "Sec-Fetch-User": "?1",
+                     "Referer": "https://www.google.com/"})
         self.writer = db.Writer(score_fn=self._score_fn())
 
     @staticmethod
@@ -325,7 +328,7 @@ class Engine:
         status = "COMPLETED"
         await self._setup()
         try:
-            counts = db.stage_counts(self.stage, self.list_name, self.settings.get("skip_nonroofers", True))
+            counts = db.stage_counts(self.stage, self.list_name, self.settings.get("skip_nonroofers", False))
             self.initial_pending = counts["pending"]
             self.monitor_task = asyncio.create_task(self._monitor())
             await self._phase(self._db_batches(), allow_defer=True)
@@ -334,7 +337,7 @@ class Engine:
                 leads = self.deferred
                 self.deferred = []
                 self.stats["rechecked"] = len(leads)
-                await asyncio.sleep(min(15, 3 + len(leads) / 50))      # let the network/DNS settle, then give them a second chance
+                await asyncio.sleep(min(30, 6 + len(leads) / 20))      # let the network/DNS settle, then give them a second chance
                 try:
                     self.connector.clear_dns_cache()
                 except Exception:
@@ -368,7 +371,7 @@ class Engine:
 
     def _db_batches(self):
         """Load the whole pending list once (best prospects first) and serve it from memory."""
-        skip = self.settings.get("skip_nonroofers", True)
+        skip = self.settings.get("skip_nonroofers", False)
         state = {"it": None}
 
         async def gen(n):

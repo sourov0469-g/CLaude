@@ -29,7 +29,7 @@ FREE_BUILDER_SUFFIXES = (
     "sites.google.com", "squarespace.com", "webnode.com", "yolasite.com", "ucoz.com", "tripod.com",
     "angelfire.com", "wix.com", "zyrosite.com", "hostingersite.com", "godaddysites.com",
 )
-MAPS_MARKERS = ("google.com/maps", "maps.google.", "maps.app.goo.gl", "goo.gl/maps", "g.page")
+MAPS_MARKERS = ("google.com/maps", "maps.google.", "maps.app.goo.gl", "goo.gl/maps", "g.page", "google.com/search", "google.com/url?", "g.co/", "share.google")
 
 
 def clean_scalar(v):

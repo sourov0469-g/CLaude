@@ -58,7 +58,8 @@ def main(argv=None):
     ap.add_argument("--deep-pages", type=int, default=6)
     ap.add_argument("--parse-workers", type=int, default=0)
     ap.add_argument("--no-robots", action="store_true")
-    ap.add_argument("--include-nonroofers", action="store_true")
+    ap.add_argument("--skip-nonroofers", action="store_true", help="optional: skip leads whose Google category is clearly another trade")
+    ap.add_argument("--include-nonroofers", action="store_true", help=argparse.SUPPRESS)
     args = ap.parse_args(argv)
 
     config.ensure_dirs()
@@ -71,7 +72,7 @@ def main(argv=None):
     concurrency = args.concurrency or config.POWER_PRESETS.get(args.mode, config.DEFAULT_CUSTOM)
     concurrency = config.clamp_concurrency(concurrency)
     settings = {"obey_robots": not args.no_robots, "deep_pages": args.deep_pages, "parse_workers": args.parse_workers or None,
-                "skip_nonroofers": not args.include_nonroofers}
+                "skip_nonroofers": bool(args.skip_nonroofers)}
     write_control(concurrency=concurrency, paused=False, stop=False, auto=bool(args.auto))
     rid = db.create_run(args.stage, "auto" if args.auto else args.mode, concurrency, args.limit)
     engine = Engine(args.stage, concurrency, auto=args.auto, limit=args.limit, settings=settings, list_name=args.list_name,

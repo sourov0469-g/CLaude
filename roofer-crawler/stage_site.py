@@ -54,9 +54,10 @@ async def triage(eng, lead):
     r, attempts, ssl_error = await fetch_with_fallbacks(session, url)
     if r is None:
         return {"status": "FAILED", "error": "no response", "net_class": "OTHER", "defer": True}
-    transient = (not r.status) and r.error_class in TRANSIENT
-    if transient and not lead.get("_recheck"):
-        return {"status": "FAILED", "error": r.error, "net_class": r.error_class, "defer": True}
+    transient = ((not r.status) and r.error_class in TRANSIENT) or r.status in (429, 503)
+    if (transient or r.status in (401, 403)) and not lead.get("_recheck"):
+        # rate-limited / blocked / temporarily down: come back after the main pass (second opinion) instead of recording a failure
+        return {"status": "FAILED", "error": r.error, "net_class": r.error_class if not r.status else "", "defer": True}
 
     sitemap = None
     if r.status and r.ok and robots and robots["sitemaps"] and eng.settings.get("sitemap_in_triage", True):
@@ -71,11 +72,17 @@ async def triage(eng, lead):
     status = "DONE"
     if r.status and r.body:
         feats = await eng.parse(analyze_page, r.body, r.final_url, r.content_type, r.load_ms, r.status, r.headers.get("server", ""), nbytes=len(r.body))
+        if feats.get("page_state") == "REDIRECT_STUB" and feats.get("meta_refresh_url"):       # old-school <meta refresh> hop: follow it once
+            from urllib.parse import urljoin
+            hop = await fetch(session, urljoin(r.final_url, feats["meta_refresh_url"]))
+            if hop.status and hop.body and hop.status < 400:
+                r = hop
+                feats = await eng.parse(analyze_page, r.body, r.final_url, r.content_type, r.load_ms, r.status, r.headers.get("server", ""), nbytes=len(r.body))
         eng.writer.page(key, canonical_url(r.final_url), "homepage", r.status, feats)
         state = feats.get("page_state", "OK")
         if state not in ("OK",):
             label = f"site: {state.lower().replace('_', ' ')}"
-        if r.status >= 500 or r.error_class == "BLOCKED":
+        if r.status >= 500 or r.error_class == "BLOCKED" or state == "BOT_BLOCKED":
             status = "FAILED"
     elif r.status:
         label = f"HTTP {r.status}"
@@ -92,11 +99,11 @@ async def triage(eng, lead):
 def _home_features(key):
     con = db.connect()
     try:
-        row = con.execute("SELECT url,features_json FROM pages WHERE lead_key=? AND page_type='homepage'", (key,)).fetchone()
-        net = con.execute("SELECT data_json FROM lead_data WHERE lead_key=? AND source='net'", (key,)).fetchone()
+        blob = db.get_blob(con, key)
     finally:
         con.close()
-    return (row["url"], db.jloads(row["features_json"], {})) if row else (None, {}), (db.jloads(net[0], {}) if net else {})
+    home = next(((u, p.get("f") or {}) for u, p in blob.get("pages", {}).items() if p.get("t") == "homepage"), (None, {}))
+    return home, (blob.get("data") or {}).get("net", {})
 
 
 async def deep(eng, lead):
@@ -116,12 +123,19 @@ async def deep(eng, lead):
             seen.add(canonical_url(u))
         if len(chosen) >= n_extra:
             break
+    # sites whose navigation we couldn't read (JS menus etc.): try the standard addresses for the pages that matter most
+    GUESS = {"about": ["/about", "/about-us"], "team": ["/team", "/our-team", "/meet-the-team"], "contact_quote": ["/contact", "/contact-us"]}
+    guessed = []
+    for cat, paths in GUESS.items():
+        if cat not in cats and not any(c == cat for c, _ in chosen):
+            guessed += [(cat, _origin(base_url) + p) for p in paths]
     robots = None
     if eng.settings.get("obey_robots", True):
         robots = await fetch_robots(eng.session, _origin(base_url))
         rp = robots.get("rp")
         if rp:
             chosen = [(c, u) for c, u in chosen if rp.can_fetch("*", u)]
+            guessed = [(c, u) for c, u in guessed if rp.can_fetch("*", u)]
     # sitemap freshness / project counts (probe the usual locations when robots.txt did not advertise one)
     if not net.get("sitemap"):
         try:
@@ -132,21 +146,36 @@ async def deep(eng, lead):
         except Exception:
             pass
 
+    home_urls, got_urls = {canonical_url(base_url), canonical_url(home_url)}, set()
+
     async def one(cat, u):
         r = await fetch(eng.session, u)
         if not (r.status and r.body and r.status < 400):
             return cat, u, None, r
+        cu = canonical_url(r.final_url)
+        if cu in home_urls or cu in got_urls:                          # redirected back to the homepage / a page we already have
+            return cat, u, None, r
+        got_urls.add(cu)
         feats = await eng.parse(analyze_page, r.body, r.final_url, r.content_type, r.load_ms, r.status, r.headers.get("server", ""), nbytes=len(r.body))
         return cat, u, feats, r
 
     results = await asyncio.gather(*[one(c, u) for c, u in chosen], return_exceptions=True)
+    have = {res[0] for res in results if not isinstance(res, Exception) and res[2]}
+    got_guess = set()
+    for cat, u in guessed[:5]:                          # sequential + capped: 404s are cheap, hammering is not
+        if cat in have or cat in got_guess:
+            continue
+        res = await one(cat, u)
+        if res[2] and res[2].get("word_count", 0) >= 40:
+            results.append(res)
+            got_guess.add(cat)
     got = failed = 0
     for res in results:
         if isinstance(res, Exception):
             failed += 1
             continue
         cat, u, feats, r = res
-        if feats and feats.get("page_state") in ("OK", "JS_SHELL", None):
+        if feats and (feats.get("page_state") in ("OK", "JS_SHELL", None) or (feats.get("page_state") == "EMPTY" and feats.get("word_count", 0) >= 3)):
             eng.writer.page(key, canonical_url(r.final_url), cat, r.status, feats)
             got += 1
         else:

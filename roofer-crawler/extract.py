@@ -133,7 +133,8 @@ DEFAULT_PAGE_PATTERNS = ("welcome to nginx", "apache2 ubuntu default page", "apa
 CONSTRUCTION_PATTERNS = ("coming soon", "under construction", "site is under maintenance", "launching soon", "website is currently being built",
                          "we're building something", "we are building a new website", "new website coming", "page under construction",
                          "site is being updated", "website is being updated", "be back soon", "currently undergoing maintenance")
-BOT_BLOCK_PATTERNS = ("just a moment...", "cf-browser-verification", "attention required! | cloudflare", "checking your browser before",
+BOT_BLOCK_PATTERNS = ("sgcaptcha", "bot verification", "altcha", "lsrecaptcha", "security check", "verifying you are human", "please wait while we verify",
+                      "checking if the site connection is secure", "ddos-guard", "human verification", "one more step", "just a moment...", "cf-browser-verification", "attention required! | cloudflare", "checking your browser before",
                       "enable javascript and cookies to continue", "verify you are human", "access denied", "request blocked",
                       "sucuri website firewall", "incapsula incident", "pardon our interruption", "you have been blocked",
                       "ddos protection by", "px-captcha", "are you a robot")
@@ -205,7 +206,7 @@ SCALE_RES = [
     re.compile(r"(?i)\b(\d{1,3}(?:,\d{3})+|\d{2,6})\+?\s+(?:roofs?|roofing projects|roof replacements?|projects?|jobs|homes?|happy customers|customers|homeowners|families)\b"),
 ]
 NAME_TOKEN = r"[A-Z][a-zA-Z'’\-]{1,20}"
-NAME_RE = rf"{NAME_TOKEN}(?:\s+[A-Z]\.)?\s+{NAME_TOKEN}"
+NAME_RE = rf"{NAME_TOKEN}(?:\s+[A-Z]\.)?\s+{NAME_TOKEN}(?:\s+{NAME_TOKEN})?"
 TITLE_RE = r"(?:Co-?\s?Founder|Founder|Owner|Co-?Owner|President|CEO|Chief Executive Officer|Managing Partner|Principal|General Manager|Operations Manager|Vice President|Partner)(?:\s*(?:&|and|/)\s*(?:Founder|Owner|President|CEO|Co-?Owner))?"
 OWNER_PATTERNS = [
     re.compile(rf"\b({NAME_RE})\s*[,\-–—|:(]\s*({TITLE_RE})\b"),
@@ -239,7 +240,17 @@ def _term_re(terms):
 
 
 def matched(lower, terms):
-    return sorted({m.group(0) for m in _term_re(terms).finditer(lower)})
+    base = {t.lower() for t in terms}
+    out = set()
+    for m in _term_re(terms).finditer(lower):
+        g = m.group(0)
+        if g not in base:
+            for suf in ("es", "s"):
+                if g.endswith(suf) and g[: -len(suf)] in base:
+                    g = g[: -len(suf)]
+                    break
+        out.add(g)
+    return sorted(out)
 
 
 def _first_present(lower, patterns):
@@ -289,6 +300,36 @@ def decode_body(body, content_type=""):
         except (LookupError, UnicodeDecodeError):
             continue
     return body.decode("utf-8", "replace")
+
+
+_BAD_ANC = {"nav", "header", "footer", "aside", "form", "noscript", "button", "select"}
+_BAD_CLS = re.compile(r"menu|nav|footer|header|cookie|popup|modal|breadcrumb|sidebar|widget|social|skip|banner|topbar|toolbar", re.I)
+
+
+def content_excerpt(doc, limit=900):
+    """The page's actual words (headings + paragraphs), without navigation menus, headers, footers or cookie banners."""
+    out, total, seen, n = [], 0, set(), 0
+    for el in doc.iter("h1", "h2", "h3", "p", "li"):
+        n += 1
+        if n > 700 or total >= limit:
+            break
+        bad, a = False, el
+        for _ in range(12):
+            a = a.getparent()
+            if a is None:
+                break
+            if a.tag in _BAD_ANC or _BAD_CLS.search((a.get("class") or "") + " " + (a.get("id") or "")):
+                bad = True
+                break
+        if bad:
+            continue
+        t = " ".join(el.text_content().split())
+        if len(t) < (12 if el.tag in ("h1", "h2", "h3") else 45 if el.tag == "li" else 30) or t in seen or t.lower().startswith(("copyright", "©")):
+            continue
+        seen.add(t)
+        out.append(t)
+        total += len(t) + 1
+    return " ".join(out)[:limit]
 
 
 def _text_lines(root):
@@ -414,67 +455,111 @@ def classify_email(email, site_domain=""):
     return {"email": email, "kind": kind, "free_mail": root in FREE_MAIL, "on_site_domain": bool(site_domain) and root == site_domain}
 
 
-ANY_TITLE_RE = (r"(?:Co-?\s?Founder|Founder|Owner|Co-?Owner|President|CEO|Chief Executive Officer|Managing Partner|Principal|General Manager|"
-                r"Operations Manager|Vice President|VP|Partner|Project Manager|Production Manager|Sales Manager|Sales Representative|"
-                r"Sales Rep|Estimator|Office Manager|Crew Leader|Crew Lead|Foreman|Superintendent|Roofer|Roofing Specialist|"
-                r"Service Technician|Customer Service|Marketing Manager|Project Coordinator|Inspector|Account Manager)")
+TITLE_KW = re.compile(r"(?i)\b(co-?\s?founder|founder|co-?owner|owner|president|ceo|chief executive officer|managing partner|principal|general manager|"
+                      r"operations manager|vice president|vp|partner|project manager|production manager|sales manager|sales representative|sales rep|"
+                      r"estimator|office manager|crew leader|crew lead|foreman|superintendent|roofing specialist|service technician|customer service|"
+                      r"marketing|project coordinator|inspector|account manager|director|manager|supervisor|coordinator|adjuster|technician|installer)\b")
+STRONG_TITLE = r"(?:Co-?\s?Founder|Founder|Co-?Owner|Owner|President|CEO|Chief Executive Officer|Managing Partner|Principal)"
 DECISION_RE = re.compile(r"(?i)owner|founder|president|ceo|principal|managing partner|general manager|partner")
+STATE_WORDS = {w for n in US_STATES for w in n.split()}
+NOT_NAME_WORDS |= STATE_WORDS | {"operated", "owned", "family", "locally", "serving", "licensed", "insured", "certified", "warranty", "quality", "local",
+                                  "trusted", "professional", "professionals", "experts", "expert", "years", "experience", "estimates", "inspection", "inspections",
+                                  "storm", "hail", "damage", "metal", "shingle", "flat", "commercial", "residential", "member", "members", "join", "apply", "now"}
+
+
+def _title_line(s):
+    s = s.strip()
+    return bool(s) and len(s) <= 70 and len(s.split()) <= 9 and not re.search(r"[.!?]\s*$", s) and bool(TITLE_KW.search(s))
 
 
 def extract_owners(lines):
-    """Return (decision_makers, other_team_members) as lists of {name,title,source}."""
-    found = []
-    seen = set()
+    """Return (decision_makers, other_team_members) as lists of {name,title,source}.
+    Handles real-world layouts: 'Name - Title', 'Title: Name', 'Owner Name is...', and stacked name/title lines (either order, one gap line
+    allowed, ALL CAPS names, compound titles such as 'Owner & Sr. Project Manager')."""
+    found, seen = [], set()
+
+    def clean_name(n):
+        n = re.sub(r"\s+", " ", n).strip(" ,.-|:()")
+        if n.isupper() and len(n) > 4:
+            n = n.title()
+        return n
 
     def ok_name(n):
         toks = [t.strip(".").lower() for t in n.split()]
-        if len(toks) < 2 or len(toks) > 4:
+        if not 2 <= len(toks) <= 4 or re.search(r"\d", n):
             return False
         if any(t in NOT_NAME_WORDS for t in toks):
             return False
-        return all(len(t) >= 2 or "." in n for t in toks) and not re.search(r"\d", n)
+        return all(len(t) >= 2 or "." in n for t in toks) and re.fullmatch(NAME_RE, n) is not None
+
+    def trim(n):
+        toks = n.split()
+        while len(toks) > 2 and toks[-1].strip(".").lower() in NOT_NAME_WORDS:     # "John Smith Roofing" -> "John Smith"
+            toks.pop()
+        return " ".join(toks)
 
     def add(name, title, src):
-        name = re.sub(r"\s+", " ", name).strip(" ,.-")
+        name = trim(clean_name(name))
         if not ok_name(name):
-            return
-        title = re.sub(r"\s+", " ", title or "").strip().title()
+            return False
         key = name.lower()
         if key in seen:
-            return
+            return False
         seen.add(key)
-        found.append({"name": name, "title": title, "source": src})
+        ttl = re.sub(r"\s+", " ", title or "").strip().title()[:60]
+        ttl = re.sub(r"\b(Ceo|Cfo|Coo|Cto|Cmo|Vp|Svp|Evp)\b", lambda m: m.group(1).upper(), ttl)
+        found.append({"name": name, "title": ttl, "source": src})
+        return True
 
-    for i, ln in enumerate(lines[:900]):
-        if len(ln) > 260:
+    L = [re.sub(r"\s+", " ", x).strip() for x in lines[:1200]]
+    used_title_lines = set()
+    for i, ln in enumerate(L):
+        if not ln or len(ln) > 260:
             continue
-        for pi, pat in enumerate(OWNER_PATTERNS):
-            for m in pat.finditer(ln):
-                if pi == 0:
-                    add(m.group(1), m.group(2), "name-title")
-                elif pi == 1:
-                    add(m.group(2), m.group(1), "title-name")
-                elif pi == 2:
-                    add(m.group(1), "Owner/Founder", "founded-by")
-                else:
-                    ctx = " ".join(lines[max(0, i - 2): i + 4]).lower()
-                    if re.search(r"owner|founder|president|ceo", ctx):
-                        add(m.group(1), "Owner/Founder", "introduction")
-        # name on one line, title on the next
-        if re.fullmatch(NAME_RE, ln) and i + 1 < len(lines) and re.fullmatch(TITLE_RE, lines[i + 1].strip(), re.I):
-            add(ln, lines[i + 1], "stacked")
-        if len(found) >= 10:
-            break
-    # other team members: "Name - Estimator" / stacked name + title lines
-    others = []
-    for i, ln in enumerate(lines[:900]):
-        if len(ln) > 120:
+        if len(ln) <= 120:       # inline forms
+            m = re.fullmatch(rf"({NAME_RE})\s*[,\-–—|:(/]\s*(.{{2,60}}?)\)?", clean_name(ln) if ln.isupper() else ln)
+            if m and TITLE_KW.search(m.group(2)):
+                add(m.group(1), m.group(2), "name-title")
+                continue
+            m = re.fullmatch(rf"(.{{2,50}}?)\s*[:\-–—|]\s*({NAME_RE})", ln)
+            if m and TITLE_KW.search(m.group(1)) and len(m.group(1).split()) <= 5:
+                add(m.group(2), m.group(1), "title-name")
+                continue
+        m = re.search(rf"\b({STRONG_TITLE})\s+({NAME_RE})\b", ln)
+        if m and add(m.group(2), m.group(1), "title-name"):
             continue
-        m = re.fullmatch(rf"({NAME_RE})\s*[,\-–—|:(]\s*({ANY_TITLE_RE})\)?", ln)
+        m = re.search(rf"(?i:founded|owned|started|established|operated|run|led)\s+(?i:and\s+operated\s+)?(?i:by)\s+({NAME_RE})\b", ln)
         if m:
-            add(m.group(1), m.group(2), "team-line")
-        elif re.fullmatch(NAME_RE, ln) and i + 1 < len(lines) and re.fullmatch(ANY_TITLE_RE, lines[i + 1].strip(), re.I):
-            add(ln, lines[i + 1], "team-stacked")
+            add(m.group(1), "Owner/Founder", "founded-by")
+            continue
+        m = re.search(rf"(?i:i['’]m|i am|my name is)\s+({NAME_RE})\b", ln)
+        if m and re.search(r"(?i)owner|founder|president|ceo", " ".join(L[max(0, i - 2): i + 4])):
+            add(m.group(1), "Owner/Founder", "introduction")
+            continue
+        if re.fullmatch(r"(?i)meet (?:the|our) (owner|owners|founder|founders|president)s?", ln):          # "Meet the Owner" heading
+            for j in range(i + 1, min(i + 4, len(L))):
+                if add(L[j], "Owner", "meet-the-owner"):
+                    break
+        # stacked name / title lines
+        nm = clean_name(ln) if len(ln) <= 40 else ""
+        if nm and ok_name(nm):
+            for j in (i + 1, i + 2):                             # title below the name (allow one gap line)
+                if j < len(L) and j not in used_title_lines and _title_line(L[j]) and not ok_name(clean_name(L[j])):
+                    nxt = clean_name(L[j + 1]) if j + 1 < len(L) and len(L[j + 1]) <= 40 else ""
+                    if nxt and ok_name(nxt) and i - 1 >= 0 and _title_line(L[i - 1]) and (i - 1) not in used_title_lines:
+                        break                                    # titles-above-names layout: the line below belongs to the NEXT person
+                    if add(nm, L[j], "stacked"):
+                        used_title_lines.add(j)
+                    break
+            else:
+                if i - 1 >= 0 and (i - 1) not in used_title_lines and _title_line(L[i - 1]) and not ok_name(clean_name(L[i - 1])):
+                    if add(nm, L[i - 1], "stacked-above"):    # title above the name
+                        used_title_lines.add(i - 1)
+            if nm.lower() not in seen and i - 1 >= 0 and (i - 1) not in used_title_lines and _title_line(L[i - 1]) and not ok_name(clean_name(L[i - 1])):
+                if add(nm, L[i - 1], "stacked-above"):
+                    used_title_lines.add(i - 1)
+        if len(found) >= 40:
+            break
     dm = [o for o in found if DECISION_RE.search(o["title"])]
     others = [o for o in found if not DECISION_RE.search(o["title"])]
     return dm[:6], others[:25]
@@ -500,6 +585,11 @@ def extract_states(text, schema):
         if m.group(1) in US_ABBRS:
             states.append(m.group(1))
     return sorted(set(states))
+
+
+def valid_us_phone(d):
+    """10 digits, area code and exchange start with 2-9, not N11 service codes."""
+    return len(d) == 10 and d[0] in "23456789" and d[3] in "23456789" and d[1:3] != "11" and d[:3] not in ("555",) and len(set(d)) > 2
 
 
 def _normalize_phone(m):
@@ -651,6 +741,11 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
     # _text_lines() strips the tree in place, so gather everything that needs the full tree first (no memory-hungry copy)
     date_attrs = doc.xpath("//time/@datetime|//meta[@property='article:published_time']/@content|//meta[@property='article:modified_time']/@content"
                            "|//meta[@property='og:updated_time']/@content|//meta[@itemprop='datePublished']/@content|//meta[@itemprop='dateModified']/@content")[:60]
+    mr = doc.xpath("string(//meta[translate(@http-equiv,'REFSH','refsh')='refresh']/@content)")
+    meta_refresh_url = (re.search(r"url=\s*['\"]?([^'\";]+)|;\s*([^'\";\s]+)", mr or "", re.I) or [None, None, None])
+    meta_refresh_url = ((meta_refresh_url[1] or meta_refresh_url[2]) or "").strip() if mr else ""
+    noscript_text = " ".join(t.strip() for t in doc.xpath("//noscript//text()") if t.strip())[:1500]
+    json_blobs = [(s.text or "") for s in doc.xpath("//script[@type='application/json' or @id='__NEXT_DATA__' or @id='__NUXT_DATA__' or @type='application/ld+json']")][:8]
     testimonial_blocks = len(doc.xpath("//*[contains(@class,'testimonial') or contains(@class,'review-item') or contains(@class,'reviews-item')]")) + len(doc.xpath("//blockquote"))
 
     # links BEFORE the tree is stripped for text
@@ -663,7 +758,7 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
             continue
         if href.lower().startswith("tel:"):
             digits = re.sub(r"\D", "", href)
-            if len(digits) >= 10:
+            if len(digits) >= 10 and valid_us_phone(digits[-10:]):
                 tel_numbers.append(digits[-10:])
             continue
         if href.lower().startswith("mailto:"):
@@ -752,18 +847,63 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
     f["outdated"] = old
 
     # text
+    excerpt_main = content_excerpt(doc)            # before _text_lines() strips the tree
     lines = _text_lines(doc)
     text = "\n".join(lines)[:MAX_TEXT]
     low = text.lower()
     words = re.findall(r"[A-Za-z]{2,}", text)
     f["word_count"] = len(words)
     f["lorem"] = "lorem ipsum" in low
-    f["page_state"] = detect_page_state(low, title.lower(), len(words), f["form_count"], f["internal_link_count"])
+    f["meta_refresh_url"] = meta_refresh_url
+    if len(words) < 60:                          # JS-rendered page: use the text the server did send (noscript + embedded JSON state)
+        embedded = [noscript_text] if noscript_text else []
+        seen_s = set()
+
+        def walk(o, depth=0):
+            if depth > 12 or len(embedded) > 40:
+                return
+            if isinstance(o, str):
+                if 25 <= len(o) <= 500 and len(o.split()) >= 4 and not o.startswith(("http", "{", "<")) and o not in seen_s:
+                    seen_s.add(o)
+                    embedded.append(o)
+            elif isinstance(o, dict):
+                for v in o.values():
+                    walk(v, depth + 1)
+            elif isinstance(o, list):
+                for v in o[:200]:
+                    walk(v, depth + 1)
+        for blob in json_blobs:
+            try:
+                walk(json.loads(blob))
+            except Exception:
+                pass
+        extra = "\n".join(embedded)[:4000]
+        if len(extra.split()) > len(words):
+            lines = lines + [x for x in extra.split("\n") if x.strip()]
+            text = "\n".join(lines)[:MAX_TEXT]
+            low = text.lower()
+            words = re.findall(r"[A-Za-z]{2,}", text)
+            f["word_count"] = len(words)
+            f["text_source"] = "embedded-json/noscript"
     js_shell = len(words) < 80 and bool(re.search(r"id=[\"'](?:root|__next|app)[\"']|ng-app|enable javascript|javascript is required|you need to enable javascript", low_html))
     f["js_shell"] = js_shell
+    state = detect_page_state(low, title.lower(), len(words), f["form_count"], f["internal_link_count"])
+    if state == "OK" and meta_refresh_url and len(words) < 30:
+        state = "BOT_BLOCKED" if re.search(r"captcha|challenge|verify|cdn-cgi|sucuri|incapsula", meta_refresh_url, re.I) else "REDIRECT_STUB"
+    f["page_state"] = state
     cyears = [int(x) for x in COPYRIGHT_RE.findall(text + " " + html_text[-6000:]) if 1995 <= int(x) <= CURRENT_YEAR + 1]
     f["copyright_year"] = max(cyears) if cyears else None
-    f["excerpt"] = text[:700]
+    if not excerpt_main:
+        sent, tot, seen_l = [], 0, set()
+        for ln in lines:
+            if len(ln) >= 45 and len(ln.split()) >= 7 and not re.match(r"(?i)skip to|copyright|©|all rights", ln) and ln not in seen_l and not re.fullmatch(r"[\d\s().+\-|/]+", ln):
+                seen_l.add(ln)
+                sent.append(ln)
+                tot += len(ln) + 1
+                if tot >= 900:
+                    break
+        excerpt_main = " ".join(sent)[:900]
+    f["excerpt"] = excerpt_main or re.sub(r"\s+", " ", text[:400]).strip()
 
     # agency footer
     footer = "\n".join(lines[-25:]) if lines else ""
@@ -813,7 +953,7 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
         if ce:
             emails.add(ce)
     f["emails"] = [classify_email(e, root_domain) for e in sorted(emails)[:15]]
-    phones = list(dict.fromkeys(tel_numbers + [f"{m.group(1)}{m.group(2)}{m.group(3)}" for m in PHONE_RE.finditer(text[:30000])]))
+    phones = list(dict.fromkeys(tel_numbers + [x for x in (f"{m.group(1)}{m.group(2)}{m.group(3)}" for m in PHONE_RE.finditer(text[:30000])) if valid_us_phone(x)]))
     f["phones"] = [f"({p[:3]}) {p[3:6]}-{p[6:]}" for p in phones[:8]]
     f["owners"], f["team_members"] = extract_owners(lines)
     f["people_schema"] = schema["people"][:10]
@@ -845,4 +985,6 @@ def _analyze(body, url, content_type, elapsed_ms, status, server_header):
     f["inline_style_bytes"] = sum(len(x) for x in re.findall(r"<style[^>]*>(.*?)</style>", html_text[:400000], re.S | re.I))
     f["media_queries"] = len(re.findall(r"@media[^{]*(?:max|min)-width", html_text[:400000], re.I)) + len(re.findall(r"@media", low_html)) // 4
     f["needs_render"] = bool(js_shell or (len(words) < 40 and f["script_count"] >= 6))
+    if f["page_state"] == "OK" and f["word_count"] < 8 and f["internal_link_count"] == 0 and not f["phones"] and not f["emails"] and f["img_count"] < 3 and not js_shell:
+        f["page_state"] = "EMPTY"                   # nothing on it at all (no text, links, contacts or images): not a site we could read
     return f

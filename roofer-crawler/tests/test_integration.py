@@ -93,7 +93,7 @@ def main():
     check(rows["good-1"]["pay"] > rows["old-1"]["pay"], "modern business with ads/elite scores higher pay")
     check(rows["slow-1"]["site_state"] == "OK", "slow site (2s) still fetched")
 
-    gnet = db.jloads(con.execute("SELECT data_json FROM lead_data d JOIN leads l USING(lead_key) WHERE l.company_name='good-1 Roofing' AND source='net'").fetchone()[0], {})
+    gnet = db.get_blob(con, con.execute("SELECT lead_key FROM leads WHERE company_name='good-1 Roofing'").fetchone()[0])["data"]["net"]
     check(gnet.get("sitemap", {}).get("latest_lastmod") == "2026-09-01", "sitemap lastmod read from robots.txt hint")
     check(gnet.get("last_modified", "").startswith("Mon, 01 Sep 2026"), "Last-Modified header captured")
     st = {r[0]: r[1] for r in con.execute("SELECT status, COUNT(*) FROM lead_stage WHERE stage='triage' GROUP BY status")}
@@ -108,7 +108,7 @@ def main():
     check(r.returncode == 0, "deep run exits cleanly")
     con = db.connect()
     key = con.execute("SELECT lead_key FROM leads WHERE company_name='good-1 Roofing'").fetchone()[0]
-    pages = {r["page_type"] for r in con.execute("SELECT page_type FROM pages WHERE lead_key=?", (key,))}
+    pages = {p["t"] for p in db.get_blob(con, key)["pages"].values()}
     print("   good-1 pages:", sorted(pages))
     check({"homepage", "team", "about", "contact_quote", "reviews", "projects_gallery", "careers"} <= pages, "deep crawl fetched team/about/contact/reviews/projects/careers")
     prof = scoring_run.load_profile(con, key)

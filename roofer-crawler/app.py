@@ -86,8 +86,8 @@ def launch(stage, mode, concurrency, auto, limit=0, list_name=None):
         cmd += ["--list", list_name]
     if meta.get("obey_robots", "1") == "0":
         cmd.append("--no-robots")
-    if meta.get("include_nonroofers") == "1":
-        cmd.append("--include-nonroofers")
+    if meta.get("skip_nonroofers") == "1":
+        cmd.append("--skip-nonroofers")
     log = open(config.LOGS / "runner.log", "ab", buffering=0)
     kw = {"cwd": str(config.BASE), "stdout": log, "stderr": subprocess.STDOUT}
     if os.name == "nt":
@@ -124,15 +124,22 @@ def _funnel():
         "free_builder": q("SELECT COUNT(*) FROM leads WHERE website_kind='FREE_BUILDER'"),
         "real_site": q("SELECT COUNT(*) FROM leads WHERE website_kind='REAL'"),
         "duplicates": q("SELECT COUNT(*) FROM leads WHERE dup_of IS NOT NULL"),
+        "likely_roofers": q("SELECT COUNT(*) FROM leads WHERE dup_of IS NULL AND prefilter_class='LIKELY_ROOFER'"),
+        "to_verify": q("SELECT COUNT(*) FROM leads WHERE dup_of IS NULL AND prefilter_class IN ('UNKNOWN','RELATED_OR_MIXED')"),
+        "not_roofers": q("SELECT COUNT(*) FROM leads WHERE dup_of IS NULL AND prefilter_class='OBVIOUS_NON_ROOFER'"),
         "eligible": q("SELECT COUNT(*) FROM scores WHERE eligible=1"),
         "excluded": q("SELECT COUNT(*) FROM scores WHERE eligible=0"),
         "tiers": {r[0]: r[1] for r in con.execute("SELECT tier,COUNT(*) FROM scores WHERE eligible=1 GROUP BY tier")},
-        "states": {r[0]: r[1] for r in con.execute("SELECT site_state,COUNT(*) FROM scores WHERE eligible=1 GROUP BY site_state ORDER BY 2 DESC")},
+        "states": {r[0]: r[1] for r in con.execute("SELECT site_state,COUNT(*) FROM scores GROUP BY site_state ORDER BY 2 DESC")},
+        "collected": q("SELECT COUNT(*) FROM scores WHERE site_state='OK'"),
+        "blocked": q("SELECT COUNT(*) FROM scores WHERE site_state='BOT_BLOCKED'"),
+        "unreachable": q("SELECT COUNT(*) FROM scores WHERE site_state IN ('DEAD_DNS','DEAD_CONNECT','TIMEOUT','HTTP_404','HTTP_5XX','HTTP_ERROR','UNREACHABLE','EMPTY','JS_SHELL','ROBOTS_BLOCKED')"),
+        "not_collected": q("SELECT COUNT(*) FROM leads l LEFT JOIN lead_stage s ON s.lead_key=l.lead_key AND s.stage='triage' WHERE l.crawlable=1 AND s.lead_key IS NULL"),
         "angles": [r[0] for r in con.execute("SELECT pitch_angle FROM scores WHERE eligible=1 GROUP BY pitch_angle ORDER BY COUNT(*) DESC LIMIT 12")],
         "excluded_reasons": {r[0]: r[1] for r in con.execute("SELECT exclude_reason,COUNT(*) FROM scores WHERE eligible=0 GROUP BY exclude_reason ORDER BY 2 DESC LIMIT 6")},
     }
     con.close()
-    skip = db.get_meta("include_nonroofers") != "1"
+    skip = db.get_meta("skip_nonroofers") == "1"
     out["triage"] = db.stage_counts("triage", None, skip)
     out["deep"] = db.stage_counts("deep", "deep", skip) if db.selection_count("deep") else {"total": 0, "done": 0, "failed": 0, "pending": 0, "skipped": 0}
     out["selected"] = db.selection_count("deep")
@@ -184,10 +191,25 @@ def status_payload():
                 "normal_max": config.CUSTOM_NORMAL_MAX, "unlocked_max": config.CUSTOM_UNLOCKED_MAX, "unlock_steps": config.CUSTOM_UNLOCK_STEPS,
                 "presets": config.POWER_PRESETS, "default_custom": config.DEFAULT_CUSTOM},
             "settings": {"deep_pages": int(db.get_meta("deep_pages", "6")), "obey_robots": db.get_meta("obey_robots", "1") == "1",
-                         "include_nonroofers": db.get_meta("include_nonroofers") == "1", "top_n": int(db.get_meta("top_n", str(config.DEFAULT_TOP_N)))}}
+                         "skip_nonroofers": db.get_meta("skip_nonroofers") == "1", "top_n": int(db.get_meta("top_n", str(config.DEFAULT_TOP_N)))}}
 
 
 # ----------------------------------------------------------------------------- routes
+def _auto_reclassify():
+    """A newer classifier than the one that built this database: fix the stored labels once, keeping all crawl results."""
+    try:
+        con = db.connect()
+        n = con.execute("SELECT COUNT(*) FROM leads").fetchone()[0]
+        con.close()
+        if n and db.get_meta("classifier_version") != importer.CLASSIFIER_VERSION and not runner_alive():
+            importer.reclassify_all()
+    except Exception as e:                       # never stop the dashboard from opening
+        print("auto-reclassify skipped:", e)
+
+
+_auto_reclassify()
+
+
 @app.get("/")
 def home():
     return render_template("dashboard.html")
@@ -211,6 +233,32 @@ def api_status():
 @app.get("/api/leads")
 def api_leads():
     return jsonify(leads_page(request.args))
+
+
+@app.get("/api/preview")
+def api_preview():
+    def to_int(v, default):
+        try:
+            return int(v)
+        except (TypeError, ValueError):
+            return default
+    offset, limit = max(0, to_int(request.args.get("offset"), 0)), 25
+    q, params = "", []
+    if request.args.get("q"):
+        q, params = "WHERE company_name LIKE ?", [f"%{request.args['q']}%"]
+    only = request.args.get("only")
+    con = db.connect()
+    total = con.execute(f"SELECT COUNT(*) FROM leads {q}", params).fetchone()[0]
+    keys = [r[0] for r in con.execute(f"SELECT lead_key FROM leads {q} ORDER BY source_row LIMIT ? OFFSET ?", params + [limit, offset])]
+    out = []
+    for k in keys:
+        p = scoring_run.load_profile(con, k)
+        status, details = exporter.website_check(p, split=True)
+        out.append({"lead_key": k, "row": p["source_row"], "company": p["company"], "website": p["website"], "status": status, "state": p["site"]["state"],
+                    "pages": p["site"]["pages_crawled"], "emails": len(p["contact"]["emails"]), "owner": (p["people"]["owners"][0]["name"] if p["people"]["owners"] else ""),
+                    "social": len([1 for v in p["contact"]["socials"].values() if v]), "updated": p["site"].get("last_updated") or ""})
+    con.close()
+    return jsonify({"total": total, "rows": out})
 
 
 @app.get("/api/lead/<key>")
@@ -243,11 +291,14 @@ def api_import():
 @app.post("/api/start")
 def api_start():
     d = request.get_json(force=True, silent=True) or {}
-    stage = d.get("stage", "triage")
-    if stage not in ("triage", "deep", "social", "domain", "search"):
+    stage = d.get("stage", "collect")
+    if stage == "collect":
+        stage = "triage+deep+social+domain"          # everything about every lead: homepage, inner pages, social, domain
+    if stage not in ("triage", "deep", "social", "domain", "search", "social", "triage+deep+social+domain"):
         return jsonify({"ok": False, "msg": "unknown stage"})
-    if stage != "triage" and not db.selection_count("deep"):
-        return jsonify({"ok": False, "msg": "Pick your shortlist first (Step 3)."})
+    list_all = stage == "triage+deep+social+domain"
+    if stage not in ("triage",) and not list_all and not db.selection_count("deep"):
+        return jsonify({"ok": False, "msg": "Pick your shortlist first (Advanced)."})
     if stage == "search":
         from stage_search import configured
         if not configured()[1]:
@@ -255,7 +306,7 @@ def api_start():
     if stage == "social":      # one click = social profiles THEN domain/SSL intel (chained inside one background job)
         stage = "social+domain"
     ok, msg = launch(stage, d.get("mode", "custom"), d.get("concurrency", config.DEFAULT_CUSTOM), bool(d.get("auto")), d.get("limit", 0),
-                     None if stage == "triage" else "deep")
+                     None if (stage == "triage" or list_all) else "deep")
     return jsonify({"ok": ok, "msg": msg})
 
 
@@ -279,12 +330,12 @@ def api_qa_test():
     d = request.get_json(force=True, silent=True) or {}
     if runner_alive():
         return jsonify({"ok": False, "msg": "Stop the running crawl first."})
-    kind = "raw" if d.get("kind") == "raw" else "roofers"
+    kind = d.get("kind") if d.get("kind") in ("first", "raw", "roofers") else "first"
     n = qa.select_test(kind, 100)
     if not n:
         return jsonify({"ok": False, "msg": "No matching leads to test (import first)."})
-    ok, msg = launch("triage+deep", "custom", min(config.clamp_concurrency(d.get("concurrency", 100)), 200), False, 0, qa.TEST_LIST)
-    label = "100 likely roofers" if kind == "roofers" else "100 random leads"
+    ok, msg = launch("triage+deep+social+domain", "custom", min(config.clamp_concurrency(d.get("concurrency", 100)), 200), False, 0, qa.TEST_LIST)
+    label = {"first": "the first 100 leads", "raw": "100 random leads", "roofers": "100 likely roofers"}[kind]
     return jsonify({"ok": ok, "msg": f"QA test on exactly {n} leads ({label}). " + msg})
 
 
@@ -321,12 +372,20 @@ def api_settings():
     d = request.get_json(force=True, silent=True) or {}
     db.set_meta("deep_pages", max(1, min(12, int(d.get("deep_pages", 6)))))
     db.set_meta("obey_robots", "1" if d.get("obey_robots", True) else "0")
-    db.set_meta("include_nonroofers", "1" if d.get("include_nonroofers") else "0")
+    db.set_meta("skip_nonroofers", "1" if d.get("skip_nonroofers") else "0")
     upd = {k: d[k] for k in ("w_need", "w_pay", "w_ease", "min_reviews") if k in d}
     if upd:
         scoring.save_config(upd)
         scoring_run._CFG["cfg"] = None
     return jsonify({"ok": True, "msg": "Settings saved. Click 'Re-score' to apply score-weight changes to existing leads."})
+
+
+@app.post("/api/reclassify")
+def api_reclassify():
+    if runner_alive():
+        return jsonify({"ok": False, "msg": "Wait for the crawl to stop."})
+    n = importer.reclassify_all()
+    return jsonify({"ok": True, "msg": f"Re-checked who is a roofer for {n:,} leads (crawl results kept)."})
 
 
 @app.post("/api/rescore")
@@ -341,8 +400,8 @@ def api_rescore():
 def api_retry():
     if runner_alive():
         return jsonify({"ok": False, "msg": "Stop the crawl first."})
-    n = db.retry_failed(request.get_json(force=True, silent=True).get("stage", "triage"))
-    return jsonify({"ok": True, "msg": f"{n:,} failed sites will be retried on the next run."})
+    n = sum(db.retry_failed(st) for st in ("triage", "deep", "social", "domain"))
+    return jsonify({"ok": True, "msg": f"{n:,} failed or blocked steps will be retried on the next run."})
 
 
 @app.post("/api/reset")
@@ -354,10 +413,34 @@ def api_reset():
     db.backup_database(config.BACKUPS / f"before_reset_{time.strftime('%Y%m%d_%H%M%S')}.db")
     con = db.connect()
     with con:
-        for t in ("pages", "lead_data", "scores", "lead_stage", "selection", "leads", "runs", "meta"):
+        for t in ("lead_blob", "scores", "lead_stage", "selection", "leads", "runs", "meta"):
             con.execute(f"DELETE FROM {t}")
     con.close()
     return jsonify({"ok": True, "msg": "Cleared (a backup copy was saved first)."})
+
+
+@app.get("/api/export_info")
+def api_export_info():
+    try:
+        top_n = max(1, int(request.args.get("top_n") or db.get_meta("top_n", str(config.DEFAULT_TOP_N))))
+    except ValueError:
+        top_n = config.DEFAULT_TOP_N
+    con = db.connect()
+    eligible = con.execute("SELECT COUNT(*) FROM scores WHERE eligible=1").fetchone()[0]
+    rows = con.execute("SELECT site_state, pitch_angle FROM scores WHERE eligible=1 ORDER BY priority DESC LIMIT ?", (top_n,)).fetchall()
+    con.close()
+    unchecked = sum(1 for r in rows if r["site_state"] == "NOT_CRAWLED")
+    n = len(rows)
+    msgs = []
+    if eligible < top_n:
+        msgs.append(f"Only {eligible:,} leads qualify as roofers right now (you asked for {top_n:,}). The file will contain {n:,} rows.")
+    if unchecked:
+        msgs.append(f"{unchecked:,} of those {n:,} haven't had their website checked yet, so their ranking is a first guess from Google reviews only. Run Step 2 first for a real ranking.")
+    con = db.connect()
+    not_collected = con.execute("SELECT COUNT(*) FROM leads l LEFT JOIN lead_stage s ON s.lead_key=l.lead_key AND s.stage='triage' WHERE l.crawlable=1 AND s.lead_key IS NULL").fetchone()[0]
+    total = con.execute("SELECT COUNT(*) FROM leads").fetchone()[0]
+    con.close()
+    return jsonify({"requested": top_n, "eligible": eligible, "rows": n, "unchecked": unchecked, "warnings": msgs, "not_collected": not_collected, "total": total})
 
 
 @app.get("/export/<kind>")
@@ -370,6 +453,9 @@ def export(kind):
     elif kind == "lookup":
         p = out / f"owner_lookup_top_{top_n}.xlsx"
         exporter.export_owner_lookup(p, top_n=top_n)
+    elif kind == "research":
+        p = out / "research_data.xlsx"
+        exporter.export_research(p)
     elif kind == "all":
         p = out / "all_leads_scored.xlsx"
         exporter.export_everything(p)
