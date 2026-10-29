@@ -608,6 +608,40 @@
     }
   };
 
+  /* consult v2: a brick is laid on a fresh mortar line along the top edge */
+  R.brick = {
+    art: function (w) {
+      var x = P + w - 46;
+      return '<path class="mo" d="M' + (P + 6) + ' ' + (P - 2) + 'H' + (P + w - 6) + '" stroke="#b9b3a6" stroke-width="3" stroke-linecap="round"/>' +
+        '<g class="bk" opacity="0"><rect x="' + x + '" y="' + (P - 18) + '" width="40" height="15" fill="#8b4a36" stroke="' + INK + '" stroke-width="1.3"/><path d="M' + (x + 6) + ' ' + (P - 13) + 'h6M' + (x + 22) + ' ' + (P - 9) + 'h8" stroke="#b56a52" stroke-width="1.4"/></g>';
+    },
+    hover: function (svg) {
+      return gsap.timeline({ paused: true })
+        .fromTo(one(svg, '.mo'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' }, 0)
+        .fromTo(one(svg, '.bk'), { opacity: 0, y: -18, x: 10 }, { opacity: 1, y: 0, x: 0, duration: .35, ease: 'back.out(2)' }, .18);
+    },
+    click: function (svg) {
+      return gsap.timeline().to(one(svg, '.bk'), { y: 2, duration: .06, yoyo: true, repeat: 3 });
+    }
+  };
+
+  /* consult v3: a ring of keys jingles at the left edge */
+  R.keys = {
+    art: function (w, h) {
+      var cx = P - 14, cy = P + 6;
+      function key(a, col) { return '<g class="ky" transform="rotate(' + a + ' ' + cx + ' ' + cy + ')"><circle cx="' + cx + '" cy="' + (cy + 12) + '" r="4.5" fill="' + col + '" stroke="' + INK + '" stroke-width="1.1"/><path d="M' + cx + ' ' + (cy + 16) + 'v14m0 -4h4m-4 4h3" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/></g>'; }
+      return '<g class="kr" opacity="0"><circle cx="' + cx + '" cy="' + cy + '" r="6" fill="none" stroke="' + STEEL + '" stroke-width="2"/>' + key(-20, YEL) + key(10, STEEL) + key(34, '#c9a46a') + '</g>';
+    },
+    hover: function (svg) {
+      var tl = gsap.timeline({ paused: true }).fromTo(one(svg, '.kr'), { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: .25, ease: 'power3.out' }, 0);
+      q(svg, '.ky').forEach(function (k, i) { tl.fromTo(k, { rotation: 0 }, { rotation: (i - 1) * 16, transformOrigin: '50% 0%', duration: .5, ease: 'elastic.out(1,.3)' }, .1 + i * .04); });
+      return tl;
+    },
+    click: function (svg) {
+      return gsap.timeline().to(q(svg, '.ky'), { rotation: '+=14', transformOrigin: '50% 0%', duration: .07, yoyo: true, repeat: 5, stagger: .02 });
+    }
+  };
+
   EZ.REACTIONS = R;
 
   /* ---------- binding ---------- */
