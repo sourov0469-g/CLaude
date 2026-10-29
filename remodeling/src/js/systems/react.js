@@ -681,7 +681,7 @@
       svg.innerHTML = def.art(w, h);
       hoverTl = def.build ? def.build(svg, w, h) : def.hover(svg, w, h);
       hoverTl.eventCallback('onReverseComplete', rest);
-      if (inside) hoverTl.progress(1);
+      if (inside) hoverTl.progress(1); else rest();   // a redraw while resting never leaves the drawing switched on
     }
     // the drawing is only on stage while it acts: nothing sits beside a resting button
     var clicking = false;

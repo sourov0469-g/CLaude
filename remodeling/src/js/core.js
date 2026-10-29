@@ -192,7 +192,7 @@
     v = EZ.clamp(v | 0, 1, 3);
     if (s.kit) s.kit.dispose();
     if (typeof s.cleanup === 'function') { try { s.cleanup(); } catch (e) { console.error(e); } }
-    if (s.ctx) s.ctx.revert();
+    if (s.ctx) { try { s.ctx.revert(); } catch (e) { console.error('[' + id + '] revert', e); } }
     s.cleanup = null; s.ctx = null; s.kit = null;
 
     var vers = s.el.querySelectorAll(':scope > .ver, :scope > .sec__body > .ver');
@@ -752,7 +752,7 @@
     if (EZ.booted) return;
     EZ.booted = true;
     buildImages();
-    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip, MotionPathPlugin, MorphSVGPlugin);
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip, MotionPathPlugin);
     gsap.defaults({ ease: 'power3.out', duration: .85 });
     ScrollTrigger.config({ ignoreMobileResize: true });
 

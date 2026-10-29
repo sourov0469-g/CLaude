@@ -116,7 +116,7 @@
         [[8, 8, 1, 1], [W - 8, 8, -1, 1], [W - 8, H - 8, -1, -1], [8, H - 8, 1, -1]].forEach(function (p) {
           s += '<path class="corner" d="M' + p[0] + ' ' + (p[1] + c * p[3]) + 'V' + p[1] + 'H' + (p[0] + c * p[2]) + 'M' + (p[0] + 10 * p[2]) + ' ' + (p[1] + 10 * p[3]) + 'm-5 0h10m-5 -5v10"/>';
         });
-        s += '<line class="laser" x1="0" y1="0" x2="0" y2="0"/><circle class="dot" r="4"/>';
+        s += '<line class="laser" x1="0" y1="0" x2="0" y2="0"/><circle class="dot" cx="0" cy="0" r="4"/>';
         svg.innerHTML = s;
         laser = svg.querySelector('.laser'); dot = svg.querySelector('.dot');
         aim(cur, true);

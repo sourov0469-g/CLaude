@@ -111,7 +111,7 @@
           q.style.opacity = o.toFixed(3);
           q.style.filter = reveal[i].r < .99 ? 'blur(' + ((1 - reveal[i].r) * 4).toFixed(2) + 'px)' : '';
         });
-        if (!head) return;
+        if (!head || !head.isConnected) return;
         head.setAttribute('transform', 'translate(' + f(lamp.x) + ' 0)');
         var ang = Math.atan2(lamp.px - lamp.x, Math.max(40, lamp.py - 52)) * 180 / Math.PI;
         head.querySelector('.hd').setAttribute('transform', 'rotate(' + f(-EZ.clamp(ang, -55, 55)) + ' 0 52)');
@@ -119,6 +119,7 @@
         var nx = Math.cos(a) * 24, ny = Math.sin(a) * 24;
         beam.setAttribute('d', 'M' + f(hx - nx) + ' ' + f(hy - ny) + 'L' + f(lamp.px - 150) + ' ' + f(lamp.py + 60) + 'A150 90 0 0 0 ' + f(lamp.px + 150) + ' ' + f(lamp.py + 60) + 'L' + f(hx + nx) + ' ' + f(hy + ny) + 'Z');
         var g = svg.querySelector('#rv3-beam');
+        if (!g) return;
         g.setAttribute('cx', f(lamp.px)); g.setAttribute('cy', f(lamp.py)); g.setAttribute('r', '320');
       }
       k.ro(bench, function () { build(); render(); });
