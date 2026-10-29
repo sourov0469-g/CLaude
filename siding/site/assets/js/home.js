@@ -65,6 +65,7 @@
       lenis = null;
     }
   }
+  function syncFx() { if (window.APFX) { window.APFX.motion = motionOK(); window.APFX.sync(); } }
   function jumpBy(dy) { if (!dy) return; if (lenis) lenis.scrollTo(window.scrollY + dy, { immediate: true, force: true }); else window.scrollBy(0, dy); }
   function goTo(el) {
     const y = el.getBoundingClientRect().top + window.scrollY - hdH();
@@ -93,15 +94,40 @@
     el.dataset.splitDone = '1';
     return $$('.w', el);
   }
+  /* ---------- headings: each section enters its own way (PLAN-HOME-V3 G3); the phrase stays in aria-label ---------- */
+  const once = (el, start = 'top 86%') => ({ trigger: el, start, once: true });
   function heads(rootEl, s) {
     $$('[data-split]', rootEl).forEach(el => {
       if (!motionOK()) { el.classList.add('is-split'); return; }
       const words = splitWords(el);
       el.classList.add('is-split');
-      if (s.key === 'hero' && !s.switched) {
-        G.from(words, { yPercent: 110, duration: 0.9, ease: ease.out, stagger: 0.05, delay: 0.12 });
-      } else {
-        G.from(words, { yPercent: 110, duration: 0.8, ease: ease.out, stagger: 0.035, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+      const first = s.key === 'hero' && !s.switched;
+      const st = first ? undefined : once(el);
+      switch (s.key) {
+        case 'hero':      // S1321 line reveal: rise with blur
+          G.from(words, { yPercent: 100, filter: 'blur(8px)', duration: 1, ease: 'power4.out', stagger: 0.06, delay: first ? 0.12 : 0, scrollTrigger: st, clearProps: 'filter' }); break;
+        case 'services':  // boards hinging up into place
+          G.from(words, { rotationX: -95, yPercent: 30, transformOrigin: '50% 100%', duration: 0.75, ease: 'power3.out', stagger: 0.05, scrollTrigger: st }); break;
+        case 'work':      // words slide in under their mask
+          G.from(words, { xPercent: -110, duration: 0.8, ease: 'expo.out', stagger: 0.045, scrollTrigger: st }); break;
+        case 'built': {   // S0411 drafted: outline first, then the ink fills left to right
+          el.classList.add('is-draft');
+          G.fromTo(el, { '--fill': '0%' }, { '--fill': '100%', duration: 1.3, ease: 'power2.inOut', scrollTrigger: st, onComplete: () => el.classList.remove('is-draft') });
+          break;
+        }
+        case 'colour':    // words arrive in paint and dry to ink
+          G.from(words, { color: '#D42125', yPercent: 40, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.06, scrollTrigger: st }); break;
+        case 'near':      // letters resolve like place names on a survey
+          words.forEach((w, k) => { const t = w.textContent; G.to(w, { scrambleText: { text: t, chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', speed: 0.6, revealDelay: 0.2 }, duration: 0.9, delay: k * 0.08, scrollTrigger: st }); });
+          break;
+        case 'reviews':   // S1329 staggered words: opacity and 12 px, 0.05 s apart
+          G.from(words, { autoAlpha: 0, y: 12, duration: 0.6, ease: 'power2.out', stagger: 0.05, scrollTrigger: st }); break;
+        case 'money':     // figures drop in from above
+          G.from(words, { yPercent: -110, duration: 0.8, ease: 'power3.out', stagger: 0.035, scrollTrigger: st }); break;
+        case 'book':      // S1334: words about 72 ms apart, settling from a little large
+          G.from(words, { scale: 1.18, autoAlpha: 0, duration: 0.7, ease: 'power3.out', stagger: 0.072, transformOrigin: '0% 100%', scrollTrigger: st }); break;
+        default:          // S0451 masked rise
+          G.from(words, { yPercent: 110, duration: 0.8, ease: ease.out, stagger: 0.035, scrollTrigger: st });
       }
     });
   }
@@ -206,67 +232,43 @@
      ======================================================================================== */
   const V = {};
 
-  /* HERO 1: full-bleed photo, auto wipe 15-85% (tastemaker recipe), pointer and drag take over, pause button (WCAG 2.2.2) */
+  /* HERO 1: the after photo installs over the before in lap courses, bottom-up (PLAN.md blind mask: 30 strips,
+     stagger 0.02, 0.9 s power3.out, about 1.5 s); pointer depth from fx.js (S1330); scroll parallax 0.18 (S1321) */
   V.hero1 = (r, b) => {
-    const fr = $('.h1-frame', r), range = $('.h1-range', fr), pause = $('.h1-pause', fr);
-    const st = { v: 50 };
-    const set = v => { st.v = clamp(v, 0, 100); fr.style.setProperty('--wipe', st.v + '%'); range.value = Math.round(st.v); };
-    let auto = null, stopped = false;
-    const stopAuto = () => { if (auto) auto.pause(); };
-    if (!motionOK()) { pause.hidden = true; set(50); }
-    else {
-      set(100);
-      G.from($$('img', fr), { scale: 1.06, duration: 1.6, ease: ease.x });
-      riseIn($$('.lead, .ctas', r), { delay: 0.5 });
-      auto = G.fromTo(st, { v: 15 }, { v: 85, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: 3, paused: true, onUpdate: () => set(st.v),
-        onComplete: () => { G.to(st, { v: 50, duration: 1.2, ease: ease.io, onUpdate: () => set(st.v) }); pause.hidden = true; } });
-      G.to(st, { v: 50, duration: 1.5, ease: ease.io, delay: 0.35, onUpdate: () => set(st.v), onComplete: () => { if (!stopped) auto.time(2).play(); } });
-      b.io(fr, ([en]) => { if (!auto || stopped) return; if (en.isIntersecting) auto.resume(); else auto.pause(); }, { threshold: 0.05 });
-    }
-    const takeOver = () => { stopped = true; stopAuto(); G && G.killTweensOf(st); pause.setAttribute('aria-pressed', 'true'); };
-    b.on(pause, 'click', () => {
-      const on = pause.getAttribute('aria-pressed') !== 'true';
-      pause.setAttribute('aria-pressed', on);
-      pause.setAttribute('aria-label', on ? 'Play the before and after animation' : 'Pause the before and after animation');
-      stopped = on; if (on) stopAuto(); else if (auto) auto.resume();
-    });
-    b.on(range, 'input', () => { takeOver(); set(+range.value); });
-    const toX = e => { const rc = fr.getBoundingClientRect(); return (e.clientX - rc.left) / rc.width * 100; };
-    if (mqFine.matches) {
-      const q = G ? G.quickTo(st, 'v', { duration: 0.45, ease: 'power3', onUpdate: () => set(st.v) }) : v => set(v);
-      b.on(fr, 'pointermove', e => { if (e.pointerType !== 'mouse') return; takeOver(); q(toX(e)); });
-    }
-    hdrag(fr, b, { onMove: e => { if (e.pointerType === 'mouse') return; takeOver(); set(toX(e)); } });
+    const fr = $('.h1-frame', r), crs = $$('.crs', fr), btn = $('.h1-replay', r);
+    const order = crs.slice().reverse();
+    const shut = 'inset(0% 100% 0% 0%)', open = 'inset(0% 0% 0% 0%)';
+    const play = delay => G.fromTo(order, { clipPath: shut }, { clipPath: open, duration: 0.9, ease: 'power3.out', stagger: 0.02, delay, overwrite: true });
+    if (!motionOK()) { btn.hidden = true; return; }
+    G.set(order, { clipPath: shut });
+    play(0.55);
+    G.from($('.h1-b', fr), { scale: 1.06, duration: 1.8, ease: ease.x });
+    riseIn($$('.lead, .ctas', r), { delay: 0.5 });
+    b.on(btn, 'click', () => { G.set(order, { clipPath: shut }); play(0.1); });
+    if (mqDesk.matches && ST) G.to($$('.h1-b, .h1-courses', fr), { yPercent: 9, ease: 'none', scrollTrigger: { trigger: r, start: 'top top', end: 'bottom top', scrub: 1.2 } });
   };
 
-  /* HERO 2: the logo window opens, then scroll grows it to full bleed (opening-window recipe, desktop only) */
+  /* HERO 2: drawn, then built. The traced elevation draws in construction order (S0407: grade, wall, courses
+     bottom-up, trim, windows, roof), a scan line wipes the drawing into the job photo (S0468), and scrolling on
+     desktop runs the scan back up toward the drawing. Line layers float at different depths (S1330). */
   V.hero2 = (r, b) => {
-    const stage = $('.h2-stage', r), layer = $('.h2-layer', r), box = $('.h2-box', r), copy = $('.h2-copy', r), cap = $('.h2-cap', r);
-    const panes = $$('.pane', box), mull = $$('.mull', box);
-    const desk = mqDesk.matches;
-    if (!desk) { layer.appendChild(box); Object.assign(box.style, { inset: '0' }); }
-    const inset = () => { const S = stage.getBoundingClientRect(), B = box.getBoundingClientRect(); return `inset(${B.top - S.top}px ${S.right - B.right}px ${S.bottom - B.bottom}px ${B.left - S.left}px)`; };
-    if (desk && motionOK() && ST) r.classList.add('is-scene');
-    if (desk) layer.style.clipPath = inset();
-    if (!motionOK()) return;
-    G.set(mull, { scale: 0 });
-    const tl = G.timeline({ delay: 0.2 });
-    tl.set(panes, { scale: 1 })
-      .to(mull, { scale: 1, duration: 0.5, ease: 'power4.out', stagger: 0.08 })
-      .to(panes, { scale: 0, duration: 1, ease: ease.io, stagger: { each: 0.06, from: 'center' } }, '-=0.1')
-      .to(mull, { autoAlpha: 0, duration: 0.45, ease: 'power2.out' }, '-=0.35')
-      .from($('img', layer), { scale: 1.14, duration: 1.7, ease: ease.x }, 0.45);
-    riseIn($$('.lead, .ctas', copy), { delay: 0.55 });
-    if (desk && ST) {
-      const scene = $('.h2-scene', r);
-      G.timeline({ scrollTrigger: { trigger: scene, start: () => `top ${hdH()}`, end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } })
-        .fromTo(layer, { clipPath: () => inset() }, { clipPath: 'inset(0px 0px 0px 0px)', ease: 'none', duration: 1 }, 0)
-        .to(copy, { autoAlpha: 0, y: -60, ease: 'none', duration: 0.45 }, 0)
-        .fromTo(cap, { autoAlpha: 0 }, { autoAlpha: 1, ease: 'none', duration: 0.2 }, 0.8);
-      b.ro(stage, () => ST.refresh());
-    }
+    const fig = $('.h2-fig', r), svg = $('svg', fig);
+    const set = p => { fig.style.setProperty('--scan', (p * 100).toFixed(2) + '%'); fig.classList.toggle('is-scan', p > 0.002 && p < 0.998); };
+    riseIn($$('.lead, .ctas', r), { delay: 0.5 });
+    if (!motionOK() || !window.DrawSVGPlugin) { set(1); return; }
+    set(0);
+    const tl = G.timeline({ delay: 0.25 });
+    ['grade', 'wall', 'siding', 'wingc', 'trim', 'windows', 'gable', 'roof', 'wing', 'doors', 'deck'].forEach((n, i) => {
+      const g = $(`[data-g="${n}"]`, svg); if (!g) return;
+      let paths = $$('path', g);
+      if (n === 'siding' || n === 'wingc') paths = paths.slice();        // generated bottom-up already
+      tl.from(paths, { drawSVG: '0%', duration: n === 'siding' ? 0.35 : 0.55, ease: 'power2.inOut', stagger: n === 'siding' || n === 'wingc' ? 0.03 : 0.04 }, i === 0 ? 0 : '-=0.42');
+    });
+    const st = { p: 0 };
+    tl.to(st, { p: 1, duration: 1.4, ease: 'power2.inOut', onUpdate: () => set(st.p) }, '+=0.25');
+    ['roof', 'gable', 'windows', 'trim'].forEach((n, k) => { const g = $(`[data-g="${n}"]`, svg); if (g) g.dataset.depth = [0.6, 0.45, 0.3, 0.2][k]; });
+    if (mqDesk.matches && ST) ST.create({ trigger: r, start: 'top top', end: 'bottom top', onUpdate: self => { if (tl.progress() === 1) set(1 - self.progress * 0.9); } });
   };
-
   /* HERO 3: WebGL brush paints the after photo over the before; tap button for touch, keyboard and fallback */
   V.hero3 = (r, b) => {
     const fig = $('.h3-stage', r), cv = $('.h3-gl', fig), imgB = $('.h3-b', fig), imgA = $('.h3-a', fig), btn = $('.h3-toggle', fig);
@@ -364,27 +366,100 @@
     };
   }
 
-  /* PROOF */
-  V.proof1 = r => { $$('.roll', r).forEach((el, k) => rollIn(el, k * 0.08)); };
-  V.proof2 = r => {
-    const tiles = $$('.wt', r).filter(t => t.offsetParent !== null);
-    if (motionOK()) G.from(tiles, { autoAlpha: 0, scale: 0.9, duration: 0.7, ease: ease.out, stagger: { each: 0.014, from: 'center', grid: 'auto' }, scrollTrigger: { trigger: r, start: 'top 75%', once: true } });
+  /* PROOF 1: the record resolves (S0184 ScrambleText digits, revealDelay 0.3); 4.9 as a ring drawn to 98 % (S0197:
+     r 40, stroke 8, round cap, -90 deg); credentials rise like dominoes 0.1 s apart (S0222) */
+  V.proof1 = (r, b) => {
+    const nums = $$('[data-scr]', r), ring = $('.r49-v', r), ghost = $('.p1-ghost', r);
+    nums.forEach(el => { const sr = d.createElement('span'); sr.className = 'sr-only'; sr.textContent = el.dataset.scr + ' '; el.before(sr); el.setAttribute('aria-hidden', 'true'); });
+    if (!motionOK()) return;
+    nums.forEach((el, k) => {
+      const final = el.dataset.scr;
+      el.textContent = final.replace(/\d/g, '0');
+      G.to(el, { scrambleText: { text: final, chars: '0123456789', revealDelay: 0.3, speed: 0.5 }, duration: 1.3, delay: k * 0.12, scrollTrigger: once(el, 'top 92%') });
+    });
+    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: ease.x, scrollTrigger: once(ring, 'top 92%') });
+    G.from($$('.creds li, .p1-foot .btn-alt', r), { y: 24, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
+    if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   };
-  V.proof3 = r => {
+  /* PROOF 2: the wall of jobs is a field: tiles near the pointer lift and turn toward it, under 4 deg (S1321
+     magnetic cards); credentials on an isometric plane rotateX(60) rotateZ(-45) that lift on hover (S0222) */
+  V.proof2 = (r, b) => {
+    const tiles = $$('.wt', r).filter(t => t.offsetParent !== null), wall = $('.wall', r);
+    if (motionOK()) {
+      G.from(tiles, { autoAlpha: 0, scale: 0.9, duration: 0.7, ease: ease.out, stagger: { each: 0.014, from: 'center', grid: 'auto' }, scrollTrigger: once(r, 'top 75%') });
+      G.from($$('.creds-iso li', r), { y: -40, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.cred-iso', r), 'top 90%') });
+    }
+    if (!mqFine.matches || !motionOK()) return;
+    const Q = tiles.map(t => ({ t, rx: G.quickTo(t, 'rotationX', { duration: 0.5, ease: 'power3' }), ry: G.quickTo(t, 'rotationY', { duration: 0.5, ease: 'power3' }), z: G.quickTo(t, 'z', { duration: 0.5, ease: 'power3' }) }));
+    let rects = [];
+    const measure = () => { rects = Q.map(q => { const rc = q.t.getBoundingClientRect(); return [rc.left + rc.width / 2, rc.top + rc.height / 2]; }); };
+    let raf = 0, px = 0, py = 0;
+    b.on(wall, 'pointerenter', measure);
+    b.on(wall, 'pointermove', e => { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(() => { raf = 0; Q.forEach((q, i) => { const [cx, cy] = rects[i] || [0, 0]; const dx = px - cx, dy = py - cy, k = Math.max(0, 1 - Math.hypot(dx, dy) / 280); q.ry(clamp(dx / 280, -1, 1) * 4 * k); q.rx(clamp(-dy / 280, -1, 1) * 4 * k); q.z(36 * k); }); }); });
+    b.on(wall, 'pointerleave', () => Q.forEach(q => { q.rx(0); q.ry(0); q.z(0); }));
+    b.on(window, 'scroll', () => { rects = []; }, { passive: true });
+    b.add(() => cancelAnimationFrame(raf));
+  };
+  /* PROOF 3: one sentence lit word by word on scroll (S1327), then the credentials press in like stamps */
+  V.proof3 = (r, b) => {
     const p = $('.statement', r);
     if (!motionOK()) return;
     const walker = d.createTreeWalker(p, NodeFilter.SHOW_TEXT);
     const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => { const f = d.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.appendChild(d.createTextNode(t)); else { const s = d.createElement('span'); s.className = 't'; s.textContent = t; f.appendChild(s); } }); n.replaceWith(f); });
-    const bits = $$('.t, .ipill', p);
-    G.fromTo(bits, { opacity: 0.18 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: p, start: 'top 82%', end: 'bottom 50%', scrub: 0.4 } });
+    G.fromTo($$('.t, .ipill', p), { opacity: 0.18 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: p, start: 'top 82%', end: 'bottom 50%', scrub: 0.4 } });
+    G.from($$('.creds-stamp li', r), { scale: 1.5, rotation: -6, autoAlpha: 0, duration: 0.32, ease: 'power4.out', stagger: 0.12, scrollTrigger: once($('.stamps', r), 'top 88%') });
+  };
+  /* SERVICES 1: point at the house. Each part of the traced Rob Roy elevation opens its trade; the part becomes the
+     one lit red part and the rest steps down (S0526 selection). Hover previews, press commits; the radio buttons are
+     the DOM mirror of every hit area (S1334, 44 px). */
+  V.services1 = (r, b) => {
+    const svg = $('.pt-el', r), card = $('.pt-card', r), D = JSON.parse($('.pt-data', r).textContent), seg = $('.pt-parts', r);
+    const out = k => $(`[data-pt="${k}"]`, card), book = $('.pt-book', card);
+    let committed = 'siding', shown = '';
+    const show = (part, anim) => {
+      const d0 = D[part]; if (!d0 || part === shown) return;
+      shown = part;
+      svg.dataset.on = part;
+      $$('[data-part]', svg).forEach(g => g.classList.toggle('is-on', g.dataset.part === part));
+      out('trade').textContent = d0.trade; out('med').textContent = d0.med; out('cnt').textContent = d0.cnt;
+      const ex = out('extra'); ex.hidden = !d0.extra; ex.textContent = d0.extra;
+      const im = out('img'), ph = im.parentElement;
+      if (d0.img) { im.src = d0.img; im.alt = d0.cap; ph.hidden = false; if (window.__apAsset) window.__apAsset(ph); } else ph.hidden = true;
+      book.dataset.trade = d0.trade; book.textContent = `Book a ${d0.trade.toLowerCase()} inspection`;
+      if (anim && motionOK()) {
+        G.fromTo([out('trade'), out('med')], { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.35, ease: ease.out, stagger: 0.05, overwrite: true });
+        if (window.DrawSVGPlugin) G.fromTo($$(`g[data-part="${part}"] path`, svg), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.6, ease: 'power2.inOut', stagger: 0.01, overwrite: true });
+      }
+    };
+    const pick = radios(seg, b, it => { committed = it.dataset.part; show(committed, true); });
+    $$('[data-hit]', svg).forEach(h => {
+      b.on(h, 'pointerenter', e => { if (e.pointerType === 'mouse') show(h.dataset.hit, true); });
+      b.on(h, 'click', () => { const it = $(`[data-part="${h.dataset.hit}"]`, seg); if (it) pick(it, false); });
+    });
+    b.on(svg, 'pointerleave', e => { if (e.pointerType === 'mouse') show(committed, true); });
+    show('siding', false);
+    if (motionOK() && window.DrawSVGPlugin) G.from($$('[data-g] path', svg), { drawSVG: '0%', duration: 0.9, ease: 'power2.inOut', stagger: 0.004, scrollTrigger: once(svg, 'top 80%') });
   };
 
-  /* SERVICES */
-  V.services1 = (r, b) => {
+  /* SERVICES 2: the index. Trade names answer the cursor on Mona Sans's weight and width axes, letter by letter
+     (S0184 split + variable axes); a photo follows the pointer (S1321 hover: zoom 1 to 1.06 in 0.7 s). */
+  V.services2 = (r, b) => {
     const list = $('.ix', r), rows = $$('.ix-row', r);
-    if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.04, scrollTrigger: { trigger: list, start: 'top 85%', once: true } });
-    if (!(mqFine.matches && mqDesk.matches) || !G) return;
+    if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
+    if (!(mqFine.matches && mqDesk.matches) || !G || !motionOK()) return;
+    const names = $$('[data-chars]', r);
+    names.forEach(n => {
+      if (n.dataset.done) return;
+      n.dataset.done = '1';
+      n.innerHTML = [...n.textContent].map(c => c === ' ' ? ' ' : `<span class="ch" aria-hidden="true">${esc(c)}</span>`).join('');
+    });
+    let raf = 0, px = -999, py = -999;
+    const chars = () => $$('.ch', list);
+    const field = () => { raf = 0; chars().forEach(ch => { const rc = ch.getBoundingClientRect(); const k = Math.max(0, 1 - Math.hypot(px - (rc.left + rc.width / 2), py - (rc.top + rc.height / 2)) / 150); ch.style.setProperty('--k', k.toFixed(3)); }); };
+    b.on(list, 'pointermove', e => { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(field); });
+    b.on(list, 'pointerleave', () => { px = py = -999; if (!raf) raf = requestAnimationFrame(field); });
+    b.add(() => cancelAnimationFrame(raf));
     const peek = $('.ix-peek', r), pim = $('img', peek);
     const qx = G.quickTo(peek, 'x', { duration: 0.45, ease: 'power3' }), qy = G.quickTo(peek, 'y', { duration: 0.45, ease: 'power3' });
     let src = '';
@@ -392,58 +467,57 @@
     rows.forEach(row => b.on(row, 'pointerenter', () => {
       const s = row.dataset.img;
       if (!s) { G.to(peek, { autoAlpha: 0, duration: 0.2 }); return; }
-      if (s !== src) { pim.src = s; src = s; }
+      if (s !== src) { pim.src = window.__apUrl ? window.__apUrl(s) : s; src = s; }
+      G.fromTo(pim, { scale: 1 }, { scale: 1.06, duration: 0.7, ease: ease.out });
       G.to(peek, { autoAlpha: 1, scale: 1, duration: 0.3, ease: ease.out });
     }));
     b.on(list, 'pointerleave', () => G.to(peek, { autoAlpha: 0, scale: 0.96, duration: 0.2 }));
   };
 
-  V.services2 = (r, b) => {
-    const wrap = $('.slices', r), items = $$('.sl', r);
-    let on = 0, timer = 0;
-    const clip = () => mqDesk.matches && !!G;
-    function lay(anim) {
-      items.forEach((it, k) => { it.classList.toggle('is-on', k === on); $('.sl-btn', it).setAttribute('aria-expanded', k === on); });
-      if (!clip()) { wrap.classList.remove('is-clip'); items.forEach(it => G && G.set([it, $('.sl-img', it), $('.sl-btn', it), $('.sl-body', it)], { clearProps: 'clipPath,x' })); return; }
-      wrap.classList.add('is-clip');
-      const W = wrap.clientWidth, gap = 4, n = items.length, wOn = W * 0.52, wOff = (W - wOn - gap * (n - 1)) / (n - 1);
-      let x = 0;
-      items.forEach((it, k) => {
-        const w = k === on ? wOn : wOff, L = x, R = W - x - w, cx = L + w / 2 - W / 2;
-        const parts = [[it, { clipPath: `inset(0px ${R}px 0px ${L}px)` }], [$('.sl-img', it), { x: cx }], [$('.sl-btn', it), { x: L }], [$('.sl-body', it), { x: L }]];
-        parts.forEach(([el, v]) => (anim && motionOK()) ? G.to(el, Object.assign({ duration: 0.7, ease: ease.io, overwrite: 'auto' }, v)) : G.set(el, v));
-        x += w + gap;
-      });
-    }
-    const pick = (k, anim = true) => { if (k === on && clip()) return; on = k; lay(anim); };
-    items.forEach((it, k) => {
-      const btn = $('.sl-btn', it);
-      b.on(btn, 'click', () => pick(k));
-      b.on(btn, 'focus', () => { if (clip()) pick(k); });
-      if (mqFine.matches) {
-        b.on(it, 'pointerenter', () => { clearTimeout(timer); timer = setTimeout(() => clip() && pick(k), 80); });
-        b.on(it, 'pointerleave', () => clearTimeout(timer));
-      }
-    });
-    b.add(() => clearTimeout(timer));
-    lay(false);
-    b.ro(wrap, () => lay(false));
-    if (motionOK() && clip()) G.from(items, { autoAlpha: 0, duration: 0.8, ease: ease.out, stagger: 0.07, scrollTrigger: { trigger: wrap, start: 'top 80%', once: true } });
-  };
-
+  /* SERVICES 3: a tape measure from $0 to $50k. Pull it (Draggable x with Inertia, snapping to $500, S0184; edge
+     resistance 0.85), keys step $500 (Shift $5,000); trades whose middle half covers the mark light up. */
   V.services3 = (r, b) => {
-    const inp = $('#bud-in', r), out = $('.bud-out', r), say = $('.bud-say', r), cards = $$('.bc', r);
-    const upd = () => {
-      const v = +inp.value, f = usd.format(v);
-      out.textContent = f; inp.setAttribute('aria-valuetext', f);
-      let n = 0;
-      cards.forEach(c => { const inr = v >= +c.dataset.lo * 1000 && v <= +c.dataset.hi * 1000; c.classList.toggle('is-out', !inr); if (inr) n++; });
-      say.innerHTML = n === 1 ? `<b>1</b> of ${cards.length} trades usually lands around this budget.` : `<b>${n}</b> of ${cards.length} trades usually land around this budget.`;
+    const tape = $('.tape', r), strip = $('.tape-strip', r), band = $('.tape-band', r), list = $('.tm-list', r), rows = $$('.tm-t', r);
+    const vOut = $('[data-tm-v]', r), nOut = $('[data-tm-n]', r);
+    const PX = () => strip.offsetWidth / 50;
+    const xOf = v => band.clientWidth / 2 - v / 1000 * PX();
+    const vOf = x => clamp((band.clientWidth / 2 - x) / PX() * 1000, 0, 50000);
+    let val = 15000;
+    const upd = v => {
+      val = Math.round(v / 500) * 500;
+      const f = usd.format(val); vOut.textContent = f;
+      tape.setAttribute('aria-valuenow', val); tape.setAttribute('aria-valuetext', f);
+      list.style.setProperty('--v', (val / 50000).toFixed(4));
+      let n = 0; rows.forEach(rw => { const on = val >= +rw.dataset.lo * 1000 && val <= +rw.dataset.hi * 1000; rw.classList.toggle('is-on', on); if (on) n++; });
+      nOut.textContent = n === 1 ? `1 of ${rows.length} trades usually lands here.` : `${n} of ${rows.length} trades usually land here.`;
     };
-    b.on(inp, 'input', upd); upd();
+    let drag = null;
+    if (window.Draggable) {
+      drag = window.Draggable.create(strip, {
+        type: 'x', edgeResistance: 0.85, inertia: !!window.InertiaPlugin && motionOK(), zIndexBoost: false,
+        bounds: { minX: xOf(50000), maxX: xOf(0) },
+        snap: x => xOf(Math.round(vOf(x) / 500) * 500),
+        onDrag() { upd(vOf(this.x)); }, onThrowUpdate() { upd(vOf(this.x)); }, onDragEnd() { upd(vOf(this.x)); }
+      })[0];
+      b.add(() => drag.kill());
+    }
+    const setV = (v, anim) => {
+      v = clamp(v, 0, 50000);
+      if (anim && motionOK()) G.to(strip, { x: xOf(v), duration: 0.35, ease: ease.out, overwrite: true, onUpdate: () => upd(vOf(G.getProperty(strip, 'x'))), onComplete: () => drag && drag.update() });
+      else { G.set(strip, { x: xOf(v) }); upd(v); if (drag) drag.update(); }
+    };
+    b.on(tape, 'keydown', e => {
+      const st = e.shiftKey ? 5000 : 500, m = { ArrowRight: st, ArrowUp: st, ArrowLeft: -st, ArrowDown: -st };
+      if (e.key in m) { e.preventDefault(); setV(val + m[e.key], true); }
+      else if (e.key === 'Home') { e.preventDefault(); setV(0, true); }
+      else if (e.key === 'End') { e.preventDefault(); setV(50000, true); }
+    });
+    b.ro(band, () => { if (drag) drag.applyBounds({ minX: xOf(50000), maxX: xOf(0) }); setV(val); });
+    setV(15000);
+    if (motionOK()) { const o = { v: 0 }; G.to(o, { v: 15000, duration: 1.6, ease: ease.x, scrollTrigger: once(tape, 'top 85%'), onStart: () => setV(0), onUpdate: () => setV(o.v) }); }
   };
-
-  /* WORK */
+  /* WORK 1: drag the divider; a flick past 300 px/s or a release 50 px from an edge commits to that side (S0197);
+     arrows step 5 % (Shift 10 %); pairs change through the logo window panes. */
   V.work1 = (r, b) => {
     const fig = $('.cmp', r), A = $('.cmp-a', fig), B = $('.cmp-b', fig), h = $('.cmp-handle', fig), info = $('.cmp-info', r);
     const P = JSON.parse($('.pairs-data', r).textContent);
@@ -451,9 +525,21 @@
     const st = { v: 50 };
     const set = v => { st.v = clamp(v, 0, 100); fig.style.setProperty('--split', st.v + '%'); h.setAttribute('aria-valuenow', Math.round(st.v)); h.setAttribute('aria-valuetext', `${Math.round(st.v)}% of the before photo showing`); };
     const toX = e => { const rc = fig.getBoundingClientRect(); return (e.clientX - rc.left) / rc.width * 100; };
-    hdrag(fig, b, { handle: '.cmp-handle', onStart: () => G && G.killTweensOf(st), onMove: e => set(toX(e)) });
+    let vx = 0, lx = 0, lt = 0;
+    hdrag(fig, b, {
+      handle: '.cmp-handle',
+      onStart: e => { G && G.killTweensOf(st); lx = e.clientX; lt = performance.now(); vx = 0; },
+      onMove: e => { const t = performance.now(), dt = Math.max(1, t - lt); vx = (e.clientX - lx) / dt * 1000; lx = e.clientX; lt = t; set(toX(e)); },
+      onEnd: () => {
+        const w = fig.getBoundingClientRect().width, edge = 50 / w * 100;
+        let to = null;
+        if (Math.abs(vx) > 300) to = vx > 0 ? 100 : 0;
+        else if (st.v < edge) to = 0; else if (st.v > 100 - edge) to = 100;
+        if (to !== null) { if (motionOK()) G.to(st, { v: to, duration: 0.55, ease: ease.x, onUpdate: () => set(st.v) }); else set(to); }
+      }
+    });
     sliderKeys(h, b, () => st.v, set);
-    if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, onUpdate: () => set(st.v), scrollTrigger: { trigger: fig, start: 'top 70%', once: true } }); }
+    if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); }
     let cur = 0, busy = false;
     const fill = p => {
       A.src = `assets/img/h/work-${p.id}-a-1000.webp`; A.alt = p.aa; B.src = `assets/img/h/work-${p.id}-b-1000.webp`; B.alt = p.ab;
@@ -474,29 +560,46 @@
     }));
   };
 
+  /* WORK 2: survey, draw, rebuild (S0468). For each job: the old house; a scan line turns it into the drawing
+     (edge lines from the firm's own photo); one dimension label draws; a second scan builds the finished wall.
+     Photos swap only under the drawing. Auto-advances while in view, stops for good once you pick a job. */
   V.work2 = (r, b) => {
-    const items = $$('.sc', r), count = $('.sc-count span', r);
-    const pin = motionOK() && mqDesk.matches && window.innerHeight >= 620 && !!ST;
-    const toggleOf = it => $('.sc-toggle', it);
-    const setAfter = (it, on) => { it.classList.toggle('is-after', on); const t = toggleOf(it); t.setAttribute('aria-pressed', on); t.textContent = on ? 'Show before' : 'Show after'; };
-    if (!pin) {
-      items.forEach(it => {
-        b.on(toggleOf(it), 'click', () => setAfter(it, !it.classList.contains('is-after')));
-        if (motionOK() && ST) ST.create({ trigger: it, start: 'top 55%', once: true, onEnter: () => setAfter(it, true) });
-      });
-      return;
-    }
-    r.classList.add('is-pin');
-    const wrap = $('.sc-wrap', r);
-    G.set(items.slice(1), { yPercent: 104 });
-    const tl = G.timeline({ scrollTrigger: { trigger: wrap, start: () => `top ${hdH()}`, end: () => '+=' + window.innerHeight * 2.6, pin: wrap, scrub: true, anticipatePin: 1, invalidateOnRefresh: true,
-      onUpdate: self => { count.textContent = Math.min(items.length, 1 + Math.floor(self.progress * items.length * 0.999)); } } });
-    items.forEach((it, k) => {
-      tl.fromTo($('.sc-b', it), { clipPath: 'inset(0% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 100%)', ease: 'none', duration: 1 });
-      if (k < items.length - 1) tl.to(items[k + 1], { yPercent: 0, ease: 'none', duration: 0.55 }, '+=0.15');
-    });
+    const P = JSON.parse($('.pairs-data', r).textContent), fig = $('.bp-fig', r);
+    const B = $('.bp-b', fig), Pl = $('.bp-p', fig), A = $('.bp-a', fig), dim = $('.bp-dim', fig), dimT = $('[data-bp-dim]', fig);
+    const kEl = $('[data-bp-k]', r), nmEl = $('[data-bp-name]', r), fxEl = $('[data-bp-fix]', r), tabs = $$('.bp-step', r);
+    let i = 0, tl = null, next = null, auto = true, seen = false;
+    const S = { a: 0, c: 0, s: 0 };
+    const paint = () => { fig.style.setProperty('--s1', S.a + '%'); fig.style.setProperty('--s2', S.c + '%'); fig.style.setProperty('--scan', S.s + '%'); };
+    const load = k => {
+      const p = P[k];
+      B.src = `assets/img/h/work-${p.id}-b-1000.webp`; B.alt = p.ab; Pl.src = `assets/img/h/bp-${p.id}-1000.webp`;
+      A.src = `assets/img/h/work-${p.id}-a-1000.webp`; A.alt = p.aa;
+      if (window.__apAsset) window.__apAsset(fig);
+      dimT.textContent = `${p.bl} · ${p.band}`.toUpperCase();
+      kEl.textContent = '0' + (k + 1); nmEl.textContent = p.place; fxEl.textContent = `${p.what}, ${p.when}. ${p.bl} ${p.band}.`;
+      tabs.forEach((t, n) => { t.setAttribute('aria-checked', n === k); t.tabIndex = n === k ? 0 : -1; });
+    };
+    const play = k => {
+      if (tl) tl.kill(); if (next) next.kill();
+      i = k;
+      if (!motionOK()) { load(k); S.a = 100; S.c = 100; S.s = 0; paint(); return; }
+      const K = 1.4;   // S0468: everything plays 1.4x slower than its authored seconds
+      tl = G.timeline({ onComplete: () => { if (auto && seen) next = G.delayedCall(2.2, () => play((i + 1) % P.length)); } })
+        .add(() => { S.a = 0; S.c = 0; S.s = 0; paint(); load(k); G.set(dim, { autoAlpha: 0 }); })
+        .to({}, { duration: 0.6 })
+        .to(S, { a: 100, s: 100, duration: 0.8 * K, ease: 'power1.inOut', onUpdate: paint })
+        .to(dim, { autoAlpha: 1, duration: 0.4 }, '+=0.1')
+        .add(() => { S.s = 0; paint(); }, '+=0.5')
+        .to(S, { c: 100, s: 100, duration: 0.8 * K, ease: 'power1.inOut', onUpdate: paint })
+        .to(dim, { autoAlpha: 0, duration: 0.35 }, '-=0.3')
+        .add(() => { S.s = 0; paint(); });
+    };
+    const takeOver = k => { auto = false; play(k); };
+    radios($('.bp-steps', r), b, it => takeOver(+it.dataset.k), '.bp-step');
+    b.io(fig, ([en]) => { seen = en.isIntersecting; if (seen && !tl) play(0); else if (!seen && next) { next.kill(); next = null; } else if (seen && tl && !tl.isActive() && auto && !next) next = G.delayedCall(1.2, () => play((i + 1) % P.length)); }, { threshold: 0.35 });
+    b.add(() => { if (tl) tl.kill(); if (next) next.kill(); });
+    load(0); S.a = motionOK() ? 0 : 100; S.c = motionOK() ? 0 : 100; paint();
   };
-
   V.work3 = (r, b) => {
     $$('.sp-fig', r).forEach(fig => {
       const btn = $('.sp-toggle', fig);
@@ -518,6 +621,152 @@
       b.add(() => cancelAnimationFrame(raf));
     });
     if (motionOK()) G.from($$('.sp', r), { y: 40, autoAlpha: 0, duration: 0.8, ease: ease.out, stagger: 0.08, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
+  };
+
+  /* BUILT 1: the wall, taken apart (S0526 exploded view): one spring per layer, stiffness 64, drag 14.2, 4 sub-steps,
+     35 ms stagger, outermost leaves first and closes last; the selected layer is the one lit part, the rest step
+     down; idle tour after 1.4 s in view, resumes 3.6 s after the last input; transforms removed at rest. */
+  V.built1 = (r, b) => {
+    const svg = $('svg.iso', r), asm = $$('.asm', svg), btns = $$('.lg-b', r), ex = $('[data-explode]', r), read = $('[data-readout]', r);
+    const R = JSON.parse($('.b1x-data', r).textContent), ORDER = ['trim', 'siding', 'wrap', 'sheath', 'studs'];
+    const sp = {};
+    asm.forEach(g => { sp[g.dataset.asm] = { x: 0, v: 0, t: 0, at: 0, el: g, mx: +g.dataset.mx, my: +g.dataset.my }; });
+    let apart = false, clock = 0, raf = 0, last = 0, sel = '', tour = null, idle = null;
+    const write = s => { if (Math.abs(s.x) < 1e-4) s.el.removeAttribute('transform'); else s.el.setAttribute('transform', `translate(${(s.mx * s.x).toFixed(2)} ${(s.my * s.x).toFixed(2)})`); };
+    const tick = now => {
+      const dt = last ? Math.min(1 / 30, (now - last) / 1000) : 1 / 60; last = now; clock += dt;
+      let moving = false;
+      Object.values(sp).forEach(s => {
+        const tgt = clock >= s.at ? s.t : s.x;
+        const h = dt / 4;
+        for (let k = 0; k < 4; k++) { const a = 64 * (tgt - s.x) - 14.2 * s.v; s.v += a * h; s.x += s.v * h; }
+        if (Math.abs(tgt - s.x) < 1e-4 && Math.abs(s.v) < 1e-4 && clock >= s.at) { s.x = tgt; s.v = 0; } else moving = true;
+        write(s);
+      });
+      raf = moving ? requestAnimationFrame(tick) : 0;
+      if (!moving) last = 0;
+    };
+    const kick = () => { if (!raf) { last = 0; raf = requestAnimationFrame(tick); } };
+    const say = () => { read.textContent = sel ? R[sel] : (apart ? 'Apart · 5 layers' : 'Assembled · 5 layers'); };
+    const go = on => {
+      apart = on;
+      ex.setAttribute('aria-pressed', on); ex.textContent = on ? 'Put it back together' : 'Take it apart';
+      (on ? ORDER : ORDER.slice().reverse()).forEach((k, n) => { sp[k].t = on ? 1 : 0; sp[k].at = clock + n * 0.035; });
+      if (!motionOK()) { Object.values(sp).forEach(s => { s.x = s.t; s.v = 0; write(s); }); } else kick();
+      say();
+    };
+    const select = k => {
+      sel = k;
+      svg.toggleAttribute('data-focus', !!k);
+      asm.forEach(g => g.toggleAttribute('data-on', g.dataset.asm === k));
+      btns.forEach(x => x.setAttribute('aria-pressed', x.dataset.asm === k));
+      say();
+    };
+    const stopTour = () => { if (tour) { tour.kill(); tour = null; } if (idle) { idle.kill(); idle = null; } if (motionOK()) idle = G.delayedCall(3.6, startTour); };
+    function startTour() {
+      if (!motionOK()) return;
+      tour = G.timeline({ repeat: -1, repeatDelay: 1.2 })
+        .add(() => go(true)).add(() => select('siding'), '+=1.2').add(() => select('wrap'), '+=1.6').add(() => select('sheath'), '+=1.6')
+        .add(() => select(''), '+=1.6').add(() => go(false), '+=0.3');
+    }
+    btns.forEach(x => b.on(x, 'click', () => { stopTour(); const k = x.dataset.asm; if (!apart) go(true); select(sel === k ? '' : k); }));
+    b.on(ex, 'click', () => { stopTour(); go(!apart); if (!apart) select(''); });
+    asm.forEach(g => {
+      b.on(g, 'pointerenter', e => { if (e.pointerType !== 'mouse' || !apart) return; stopTour(); select(g.dataset.asm); });
+      b.on(g, 'click', () => { stopTour(); if (!apart) go(true); select(g.dataset.asm); });
+    });
+    b.io(svg, ([en]) => { if (en.isIntersecting && !tour && !idle && motionOK()) idle = G.delayedCall(1.4, startTour); else if (!en.isIntersecting) { if (tour) { tour.kill(); tour = null; } if (idle) { idle.kill(); idle = null; } } }, { rootMargin: '120px 0px' });
+    b.add(() => { cancelAnimationFrame(raf); if (tour) tour.kill(); if (idle) idle.kill(); });
+    if (motionOK()) G.from(asm.slice().reverse(), { y: -30, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.09, scrollTrigger: once(svg, 'top 80%') });
+  };
+
+  /* BUILT 2: a window drawn in one line that answers the pointer (S0425 hairline): pointer x tilts the sash out,
+     pointer y draws the 3/4 in glass unit out of it; the read-out under it names what you see; no labels on lines.
+     Follow by exponential easing, tau 0.18 s (S0526); one range is the keyboard and touch path; tour of 3 stops. */
+  V.built2 = (r, b) => {
+    const svg = $('svg.hw', r), fig = $('.b2x-fig', r), rng = $('[data-hw-range]', r), playBtn = $('[data-hw-play]', r), read = $('[data-hw-read]', r);
+    const NS = 'http://www.w3.org/2000/svg';
+    const k = 7.2, ox = 214, oy = 438;
+    const P = (x, y, z) => [ox + k * (0.94 * x - 0.34 * y), oy + k * (0.17 * x + 0.47 * y - z)];
+    const path = cls => { const p = d.createElementNS(NS, 'path'); p.setAttribute('class', cls); svg.appendChild(p); return p; };
+    const ring = pts => 'M' + pts.map(p => p.map(v => v.toFixed(1)).join(' ')).join('L') + 'Z';
+    const W = 32, HH = 50, FD = 3.25, FW = 2.6;    // FD: the published 3-1/4 in frame depth; outer size is a schematic
+    const els = { back: path('hw-f'), side: path('hw-s'), front: path('hw-f hw-fr'), open: path('hw-l'), upper: path('hw-l'), sash: path('hw-f hw-sash'), sashIn: path('hw-l'), g1: path('hw-g'), g2: path('hw-g hw-g2') };
+    const st = { t: 0, g: 0 }, tg = { t: 0, g: 0 };
+    let last = 0, raf = 0, tour = null;
+    const draw = () => {
+      // frame: back ring, the visible depth side, front ring with its opening
+      els.back.setAttribute('d', ring([P(0, 0, 0), P(W, 0, 0), P(W, 0, HH), P(0, 0, HH)]));
+      els.side.setAttribute('d', ring([P(W, 0, 0), P(W, FD, 0), P(W, FD, HH), P(W, 0, HH)]) + ring([P(0, FD, HH), P(W, FD, HH), P(W, 0, HH), P(0, 0, HH)]));
+      els.front.setAttribute('d', ring([P(0, FD, 0), P(W, FD, 0), P(W, FD, HH), P(0, FD, HH)]) + ring([P(FW, FD, FW), P(W - FW, FD, FW), P(W - FW, FD, HH - FW), P(FW, FD, HH - FW)]));
+      els.upper.setAttribute('d', ring([P(FW + 1, FD - 1.2, HH / 2), P(W - FW - 1, FD - 1.2, HH / 2), P(W - FW - 1, FD - 1.2, HH - FW - 1), P(FW + 1, FD - 1.2, HH - FW - 1)]));
+      // lower sash: hinged at its bottom edge, tilting out toward you by angle th
+      const th = st.t * 42 * Math.PI / 180, ys = FD - 0.6, z0 = FW, h = HH / 2 - FW + 0.6;
+      const S = (x, zz, dy = 0) => P(x, ys + dy + zz * Math.sin(th), z0 + zz * Math.cos(th));
+      const sw = 2.2;
+      els.sash.setAttribute('d', ring([S(FW, 0), S(W - FW, 0), S(W - FW, h), S(FW, h)]));
+      els.sashIn.setAttribute('d', ring([S(FW + sw, sw), S(W - FW - sw, sw), S(W - FW - sw, h - sw), S(FW + sw, h - sw)]));
+      // the dual-pane unit, 3/4 in overall (published), drawn as two panes that slide out of the sash along its normal
+      const out = st.g * 9, nx = Math.sin(th), nz = Math.cos(th);
+      const G2 = (x, zz, off) => P(x, ys + zz * nx + off * nz * 1 + 0, z0 + zz * nz - off * nx);
+      const pane = off => ring([G2(FW + sw, sw, off), G2(W - FW - sw, sw, off), G2(W - FW - sw, h - sw, off), G2(FW + sw, h - sw, off)]);
+      els.g1.setAttribute('d', pane(out));
+      els.g2.setAttribute('d', pane(out + 0.75));
+    };
+    const words = () => {
+      const t = Math.round(st.t * 42);
+      return st.g > 0.5 ? `Glass unit out of the sash · 3/4 in dual-pane` : t > 3 ? `Sash tilted out ${t} degrees · 3-1/4 in multi-chambered vinyl frame` : `Closed · 3-1/4 in multi-chambered vinyl frame · 3/4 in dual-pane glass`;
+    };
+    let said = '';
+    const tick = now => {
+      const dt = last ? Math.min(1 / 30, (now - last) / 1000) : 1 / 60; last = now;
+      const a = motionOK() ? 1 - Math.exp(-dt / 0.18) : 1;
+      st.t += (tg.t - st.t) * a; st.g += (tg.g - st.g) * a;
+      draw();
+      const w = words(); if (w !== said) { said = w; read.textContent = w; }
+      const moving = Math.abs(tg.t - st.t) > 1e-3 || Math.abs(tg.g - st.g) > 1e-3;
+      raf = moving ? requestAnimationFrame(tick) : 0; if (!moving) last = 0;
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    const fromRange = v => { tg.t = clamp(v / 60, 0, 1); tg.g = clamp((v - 60) / 40, 0, 1); kick(); };
+    const toRange = () => Math.round(tg.g > 0 ? 60 + tg.g * 40 : tg.t * 60);
+    const stopTour = () => { if (tour) { tour.kill(); tour = null; } };
+    b.on(rng, 'input', () => { stopTour(); fromRange(+rng.value); rng.setAttribute('aria-valuetext', words()); });
+    if (mqFine.matches) {
+      b.on(fig, 'pointermove', e => { if (e.pointerType !== 'mouse') return; stopTour(); const rc = fig.getBoundingClientRect(); tg.t = clamp((e.clientX - rc.left) / rc.width * 1.3 - 0.15, 0, 1); tg.g = clamp(((e.clientY - rc.top) / rc.height - 0.35) / 0.5, 0, 1) * (tg.t > 0.55 ? 1 : 0); rng.value = toRange(); kick(); });
+      b.on(fig, 'pointerleave', () => { tg.t = 0; tg.g = 0; rng.value = 0; kick(); });
+    }
+    b.on(playBtn, 'click', () => {
+      stopTour();
+      const stops = [[0.55, 0], [1, 0], [1, 1], [0, 0]];
+      tour = G.timeline();
+      stops.forEach(([t, g], n) => tour.add(() => { tg.t = t; tg.g = g; rng.value = toRange(); kick(); }, n ? '+=1.6' : 0));
+    });
+    b.add(() => { cancelAnimationFrame(raf); stopTour(); });
+    draw(); read.textContent = said = words();
+    if (motionOK() && window.DrawSVGPlugin) G.from($$('path', svg), { drawSVG: '0%', duration: 1.1, ease: 'power2.inOut', stagger: 0.08, scrollTrigger: once(svg, 'top 82%') });
+  };
+
+  /* BUILT 3: the dimensioned sheet (S0361) with a split spec panel (S1361): lap or board and batten swap by a
+     MorphSVG of one outline (S0184, 0.8 s power2.inOut); a spec row in focus or under the pointer turns its
+     dimension red and draws it again (accent only on the active detail). */
+  V.built3 = (r, b) => {
+    const svg = $('svg.sheet', r), morph = $('.sh-morph', svg), lap = $('.sh-lap', svg), bb = $('.sh-bb', svg), rows = $$('.spec-r', r);
+    const setStyle = (style, anim) => {
+      lap.toggleAttribute('hidden', style !== 'lap'); bb.toggleAttribute('hidden', style !== 'bb');
+      rows.forEach(rw => { rw.hidden = rw.dataset.set !== style; });
+      const to = style === 'lap' ? morph.dataset.lap : morph.dataset.bb;
+      if (anim && motionOK() && window.MorphSVGPlugin) G.to(morph, { morphSVG: { shape: to, type: 'linear', map: 'position' }, duration: 0.8, ease: 'power2.inOut', overwrite: true });
+      else morph.setAttribute('d', to);
+      if (anim && motionOK()) G.from($$('.dim, .xl, .cl, .vt, .vs, .sh-face', style === 'lap' ? lap : bb), { autoAlpha: 0, duration: 0.4, stagger: 0.03, delay: 0.5 });
+    };
+    radios($('.b3x-seg', r), b, it => setStyle(it.dataset.style, true));
+    const hi = (code, on) => {
+      $$(`.dim[data-code="${code}"]`, svg).forEach(dm => { dm.classList.toggle('on', on); if (on && motionOK() && window.DrawSVGPlugin) G.fromTo($$('path', dm), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 0.45, ease: 'power2.out', overwrite: true }); });
+      rows.forEach(rw => rw.classList.toggle('on', on && rw.dataset.code === code));
+    };
+    rows.forEach(rw => { ['pointerenter', 'focus'].forEach(ev => b.on(rw, ev, () => hi(rw.dataset.code, true))); ['pointerleave', 'blur'].forEach(ev => b.on(rw, ev, () => hi(rw.dataset.code, false))); });
+    if (motionOK() && window.DrawSVGPlugin) G.from($$('.sh-lap path, .sh-morph', svg), { drawSVG: '0%', duration: 0.9, ease: 'power2.inOut', stagger: 0.02, scrollTrigger: once(svg, 'top 82%') });
   };
 
   /* COLOUR: one studio engine over the photo-traced masks (S0006: masks from the photo, never polygons) */
@@ -636,36 +885,37 @@
     b.on($('.c2-reset', r), 'click', () => { S.reset(); select(null); });
   };
 
+  /* COLOUR 3: turn a dial (Draggable rotation with Inertia, snapping to the 12 published Sherwin-Williams colours,
+     S0184); the house repaints, the cursor carries the colour; arrows turn it one stop. */
   V.colour3 = (r, b) => {
-    const frame = $('.st-frame', r), S = Studio(frame), h = $('.c3-handle', frame), out = $('.c3-now', r), ghost = $('.ghost', frame);
-    const st = { v: 50 };
-    const set = v => { st.v = clamp(v, 0, 100); frame.style.setProperty('--split', st.v + '%'); h.setAttribute('aria-valuenow', Math.round(st.v)); };
-    const toX = e => { const rc = frame.getBoundingClientRect(); return (e.clientX - rc.left) / rc.width * 100; };
-    let demo = null;
-    const stopDemo = () => { if (demo) { demo.kill(); demo = null; G.set(ghost, { autoAlpha: 0 }); } };
-    hdrag(frame, b, { handle: '.c3-handle', onStart: stopDemo, onMove: e => set(toX(e)) });
-    sliderKeys(h, b, () => st.v, v => { stopDemo(); set(v); });
-    const row = $('.c3-row', r);
-    const pick = radios(row, b, it => { S.paint('body', it.dataset.hex); S.paint('gable', it.dataset.hex); out.textContent = `Yours: ${it.dataset.name}, ${it.dataset.code}. Left of the line is the real job.`; });
-    const sws = $$('.sw', row);
-    pick(sws[11]);
-    ['pointerdown', 'keydown', 'wheel'].forEach(ev => b.on(r, ev, stopDemo, { passive: true }));
-    if (!motionOK()) return;
-    b.io(frame, ([en], o) => {
-      if (!en.isIntersecting || demo) return; o.disconnect();
-      const W = () => frame.clientWidth, H = () => frame.clientHeight;
-      demo = G.timeline({ delay: 0.4, onComplete: () => { demo = null; } })
-        .set(ghost, { x: () => W() * 0.5 + 40, y: () => H() * 0.5 + 60, autoAlpha: 0 })
-        .to(ghost, { autoAlpha: 1, duration: 0.25 })
-        .to(ghost, { x: () => W() * 0.5 + 6, y: () => H() * 0.5 + 6, duration: 0.6, ease: ease.out })
-        .to(st, { v: 26, duration: 0.9, ease: ease.io, onUpdate: () => set(st.v) })
-        .to(ghost, { x: () => W() * 0.26 + 6, duration: 0.9, ease: ease.io }, '<')
-        .add(() => pick(sws[10]))
-        .to(st, { v: 62, duration: 1, ease: ease.io, onUpdate: () => set(st.v) }, '+=0.5')
-        .to(ghost, { x: () => W() * 0.62 + 6, duration: 1, ease: ease.io }, '<')
-        .add(() => pick(sws[4]))
-        .to(ghost, { autoAlpha: 0, duration: 0.3 }, '+=0.5');
-    }, { threshold: 0.6 });
+    const frame = $('.st-frame', r), S = Studio(frame), dial = $('.dial', r), rot = $('.dial-rot', dial), segs = $$('.dial-seg', dial);
+    const C = JSON.parse($('.dial-data', r).textContent), nm = $('[data-dial-name]', r), cd = $('[data-dial-code]', r), n = C.length, step = 360 / n;
+    const arc = (a0, a1, r0, r1) => { const p = (a, rr) => [Math.sin(a * Math.PI / 180) * rr, -Math.cos(a * Math.PI / 180) * rr].map(v => v.toFixed(2)).join(' '); return `M${p(a0, r1)}A${r1} ${r1} 0 0 1 ${p(a1, r1)}L${p(a1, r0)}A${r0} ${r0} 0 0 0 ${p(a0, r0)}Z`; };
+    segs.forEach((p, k) => p.setAttribute('d', arc(k * step - step / 2 + 1.2, k * step + step / 2 - 1.2, 58, 102)));
+    let idx = -1;
+    const apply = (k, paint = true) => {
+      k = ((k % n) + n) % n; if (k === idx) return; idx = k;
+      const c = C[k];
+      if (paint) { S.paint('body', c.h); S.paint('gable', c.h); }
+      nm.textContent = c.n; cd.textContent = c.c;
+      dial.setAttribute('aria-valuenow', k + 1); dial.setAttribute('aria-valuetext', `${c.n}, ${c.c}`);
+      segs.forEach((s, j) => s.classList.toggle('on', j === k));
+      if (window.APFX) window.APFX.setPaint(c.h);
+    };
+    const angle = () => +G.getProperty(rot, 'rotation') || 0;
+    const kOf = a => Math.round(-a / step);
+    const turn = (k, anim) => { if (anim && motionOK()) G.to(rot, { rotation: -k * step, duration: 0.45, ease: ease.out, svgOrigin: '0 0', onUpdate: () => apply(kOf(angle())) }); else { G.set(rot, { rotation: -k * step, svgOrigin: '0 0' }); apply(k); } };
+    G.set(rot, { rotation: -10 * step, svgOrigin: '0 0' });
+    apply(10, false); nm.textContent = 'The real job'; cd.textContent = 'Turn the dial';
+    if (window.Draggable) {
+      const dr = window.Draggable.create(rot, { type: 'rotation', inertia: !!window.InertiaPlugin && motionOK(), snap: v => Math.round(v / step) * step,
+        onDrag() { apply(kOf(this.rotation)); }, onThrowUpdate() { apply(kOf(this.rotation)); } })[0];
+      b.add(() => dr.kill());
+    }
+    b.on(dial, 'keydown', e => {
+      const m = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 };
+      if (e.key in m) { e.preventDefault(); turn(kOf(angle()) + m[e.key], true); }
+    });
   };
 
   /* NEAR YOU: shared map + finder */
@@ -679,7 +929,7 @@
     };
   }
   const placeOf = i => DATA.map.names[PINS[i][4]];
-  function Finder(box, M, n, b) {
+  function Finder(box, M, n, b, onPick) {
     const inp = $('input', box), list = $('.fd-list', box), out = $('.fd-out', box), clr = $('.fd-clear', box);
     const places = DATA.map.places;
     let opts = [], act = -1;
@@ -701,6 +951,7 @@
       const ppm = DATA.map.ppm;
       out.innerHTML = `<p>Nearest documented jobs to ${esc(p[0])}</p><ol>${near.map(([dd, i]) => `<li><span><b>${esc(placeOf(i))}</b><br>${esc(tradesOf(PINS[i][3]))}, ${ym(PINS[i][2])}</span><span class="num">${(dd / ppm).toFixed(1)}&nbsp;mi</span></li>`).join('')}</ol>`;
       M.hot(new Set(near.map(a => a[1]))); M.ring(x, y, near[near.length - 1][0] + 6);
+      if (onPick) onPick(p);
     }
     b.on(inp, 'input', render);
     b.on(inp, 'keydown', e => {
@@ -729,10 +980,50 @@
     b.on(svg, 'pointerleave', () => { tip.hidden = true; });
   }
 
+  /* survey trail for the map (S1323): motes emitted by distance travelled (step about 1.4 % of the map height), at most
+     14 per frame, the ring slot taken before it advances, an idle mote every 0.42 s while the pointer rests; touch
+     only while dragging; one loop that stops when the last mote fades. Decorative: the map works without it. */
+  function surveyTrail(fig, cv, b) {
+    if (!motionOK()) return;
+    const cx = cv.getContext('2d'); if (!cx) return;
+    const N = 160, M = Array.from({ length: N }, () => ({ x: 0, y: 0, t: -9, s: 1 }));
+    let head = 0, acc = 0, lx = null, ly = null, ex = 0, ey = 0, raf = 0, last = 0, now = 0, idle = 0, inside = false, down = false, W = 0, H = 0, dpr = 1;
+    const size = () => { const rc = fig.getBoundingClientRect(); dpr = Math.min(1.5, devicePixelRatio || 1); W = rc.width; H = rc.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); };
+    const spawn = (x, y, s = 1) => { const i = head; head = (head + 1) % N; const m = M[i]; m.x = x; m.y = y; m.t = now; m.s = s; };
+    const frame = t => {
+      const dt = last ? Math.min(1 / 30, (t - last) / 1000) : 1 / 60; last = t; now += dt;
+      if (inside && lx !== null) {
+        ex += (lx - ex) * (1 - Math.exp(-16 * dt)); ey += (ly - ey) * (1 - Math.exp(-16 * dt));
+        idle += dt; if (idle > 0.42) { idle = 0; spawn(ex, ey, 0.6); }
+      }
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.clearRect(0, 0, W, H);
+      let alive = false;
+      M.forEach(m => { const age = now - m.t; if (age > 2.2) return; alive = true; const u = age / 2.2; const a = (u < 0.12 ? u / 0.12 : 1 - (u - 0.12) / 0.88) * 0.9; cx.globalAlpha = a; cx.fillStyle = '#EA3C39'; cx.beginPath(); cx.arc(m.x, m.y, 1.7 * m.s * (1 + u * 0.55), 0, 6.283); cx.fill(); });
+      cx.globalAlpha = 1;
+      raf = (alive || inside) ? requestAnimationFrame(frame) : 0; if (!raf) last = 0;
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+    const move = e => {
+      if (e.pointerType !== 'mouse' && !down) return;
+      const rc = fig.getBoundingClientRect(), x = e.clientX - rc.left, y = e.clientY - rc.top;
+      if (lx === null) { lx = ex = x; ly = ey = y; }
+      const step = Math.max(4, H * 0.014), dx = x - lx, dy = y - ly, moved = Math.hypot(dx, dy);
+      acc += moved; let guard = 0;
+      while (acc >= step && guard++ < 14) { acc -= step; const t = moved > 1e-6 ? Math.min(1, guard * step / moved) : 0; spawn(lx + dx * t, ly + dy * t); }
+      lx = x; ly = y; idle = 0; inside = true; kick();
+    };
+    size(); b.ro(fig, size);
+    b.on(fig, 'pointermove', move);
+    b.on(fig, 'pointerdown', e => { down = true; lx = null; move(e); });
+    ['pointerup', 'pointercancel'].forEach(ev => b.on(fig, ev, () => { down = false; }));
+    b.on(fig, 'pointerleave', () => { inside = false; lx = ly = null; acc = 0; });
+    b.add(() => cancelAnimationFrame(raf));
+  }
   V.near1 = (r, b) => {
     const svg = $('.map-svg', r), M = MapView(svg), cnt = $('[data-count]', r), when = $('[data-when]', r);
     Finder($('[data-finder]', r), M, 3, b);
     tips(svg, $('.m-tip', r), b);
+    if (mqFine.matches) surveyTrail($('.n1-map', r), $('.n1-trail', r), b);
     if (!motionOK() || !ST) return;
     const months = Array.from(new Set(PINS.map(p => p[2])));
     M.pins.forEach(c => c.classList.add('off'));
@@ -766,12 +1057,44 @@
     if (motionOK()) G.from($$('.tw i', r), { scaleX: 0, duration: 0.9, ease: ease.out, stagger: 0.06, scrollTrigger: { trigger: $('.towns', r), start: 'top 80%', once: true } });
   };
 
+  /* NEAR 3: type your area; the map frames it and a ring you drag (or arrow) sets the miles; the count of
+     photographed jobs inside updates. Same Finder and map engine as the other versions, a new entry point. */
   V.near3 = (r, b) => {
-    const svg = $('.map-svg', r), M = MapView(svg);
-    Finder($('[data-finder]', r), M, 5, b);
+    const svg = $('.map-svg', r), M = MapView(svg), fig = $('.n3-map', r), knob = $('.n3-knob', r), say = $('[data-n3-say]', r);
+    const ppm = DATA.map.ppm;
+    let at = null, miles = 5;
+    const ringR = () => miles * ppm;
+    const place = () => {
+      if (!at) return;
+      const rc = svg.getBoundingClientRect(), fr = fig.getBoundingClientRect(), s = rc.width / 566;
+      knob.style.left = (rc.left - fr.left + (at.x + ringR()) * s) + 'px';
+      knob.style.top = (rc.top - fr.top + at.y * s) + 'px';
+    };
+    const count = () => {
+      if (!at) return;
+      const inside = new Set(PINS.map((p, i) => Math.hypot(p[0] - at.x, p[1] - at.y) <= ringR() ? i : -1).filter(i => i >= 0));
+      M.hot(inside); M.ring(at.x, at.y, ringR());
+      knob.setAttribute('aria-valuenow', miles); knob.setAttribute('aria-valuetext', `${miles} miles`);
+      say.textContent = `${inside.size} photographed jobs within ${miles} miles of ${at.name}.`;
+      place();
+    };
+    Finder($('[data-finder]', r), M, 5, b, p => { at = { name: p[0], x: p[1], y: p[2] }; knob.hidden = false; count(); if (motionOK()) G.from(knob, { scale: 0, duration: 0.4, ease: ease.out }); });
+    let drag = false;
+    b.on(knob, 'pointerdown', e => { drag = true; knob.setPointerCapture(e.pointerId); });
+    b.on(knob, 'pointermove', e => {
+      if (!drag || !at) return;
+      const rc = svg.getBoundingClientRect(), s = rc.width / 566;
+      const x = (e.clientX - rc.left) / s, y = (e.clientY - rc.top) / s;
+      miles = clamp(Math.round(Math.hypot(x - at.x, y - at.y) / ppm), 1, 15); count();
+    });
+    ['pointerup', 'pointercancel'].forEach(ev => b.on(knob, ev, () => { drag = false; }));
+    b.on(knob, 'keydown', e => { const m = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }; if (e.key in m) { e.preventDefault(); miles = clamp(miles + m[e.key], 1, 15); count(); } });
+    b.ro(fig, place);
   };
 
   /* REVIEWS */
+  /* REVIEWS 1: two rows run as a marquee; their speed and lean answer how fast you scroll (scroll velocity), so
+     the wall feels pushed by the page; edges fade 15/85 (S1348); a pause button (WCAG 2.2.2). */
   V.reviews1 = (r, b) => {
     const tracks = $$('.mq-track', r), mqs = $('.mqs', r), btn = $('.mq-pause', r);
     if (!motionOK()) { btn.hidden = true; return; }
@@ -781,8 +1104,21 @@
     });
     b.on(btn, 'click', () => { const on = !mqs.classList.contains('is-paused'); mqs.classList.toggle('is-paused', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Play' : 'Pause'; });
     b.io(r, ([en]) => r.classList.toggle('is-offscreen', !en.isIntersecting), { threshold: 0.01 });
+    if (!ST) return;
+    const anims = () => tracks.map(t => t.getAnimations ? t.getAnimations()[0] : null).filter(Boolean);
+    const skew = tracks.map(t => G.quickTo(t.parentElement, 'skewX', { duration: 0.5, ease: 'power3' }));
+    const st = ST.create({ trigger: r, start: 'top bottom', end: 'bottom top', onUpdate: self => {
+      if (mqs.classList.contains('is-paused')) return;
+      const v = clamp(self.getVelocity() / 1200, -3, 3);
+      anims().forEach(a => { a.playbackRate = 1 + Math.abs(v) * 1.6; });
+      skew.forEach((q, k) => q((k ? -1 : 1) * v * 1.6));
+      clearTimeout(st._t); st._t = setTimeout(() => { anims().forEach(a => { a.playbackRate = 1; }); skew.forEach(q => q(0)); }, 180);
+    } });
+    b.add(() => { clearTimeout(st._t); st.kill(); });
   };
 
+  /* REVIEWS 2: one big quote; swipe it (Observer, type touch and pointer, tolerance 10, S0184) or use the arrows;
+     the new quote's words rise in; the plain text goes to a polite live region. */
   V.reviews2 = (r, b) => {
     const Q = JSON.parse($('.one-data', r).textContent), q = $('.one-q', r), name = $('.one-n', r), k = $('.one-k span', r), say = $('[data-one-say]', r);
     let i = 0;
@@ -795,14 +1131,15 @@
       if (motionOK()) {
         const p = $('p', q);
         p.setAttribute('aria-hidden', 'true');
-        G.from(splitWords(p), { yPercent: 110, duration: 0.6, ease: ease.out, stagger: 0.012 });
+        G.from(splitWords(p), { xPercent: dir * 40, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.012 });
         G.fromTo(name, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: ease.out, delay: 0.2, overwrite: true });
       }
     };
     $$('.rb', r).forEach(btn => b.on(btn, 'click', () => go(+btn.dataset.dir)));
-    let sx = null;
-    b.on(q, 'pointerdown', e => { sx = e.clientX; });
-    b.on(q, 'pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 50) go(e.clientX < sx ? 1 : -1); sx = null; });
+    if (window.Observer) {
+      const ob = window.Observer.create({ target: $('.one', r), type: 'touch,pointer', tolerance: 10, dragMinimum: 40, onLeft: () => go(1), onRight: () => go(-1) });
+      b.add(() => ob.kill());
+    }
   };
 
   /* REVIEWS 3: four cards at a time so the wall never turns into a document; "Show more" adds four */
@@ -847,14 +1184,19 @@
     b.on(inp, 'input', upd);
     upd();
   };
+  /* MONEY 2: tap a monthly budget; the three project sizes count up to their new values (S0197 crawl, 1.2 s) */
   V.money2 = (r, b) => {
-    const inp = $('#m2-mo', r), out = $('output', r), cols = $$('.m2-cols li', r);
-    const upd = () => {
-      const M = +inp.value; out.textContent = usd.format(M); inp.setAttribute('aria-valuetext', `${usd.format(M)} a month`);
-      cols.forEach(li => { $('.m2-amt', li).textContent = usd.format(Math.floor(pv(M, +li.dataset.apr, +li.dataset.n) / 100) * 100); });
-    };
-    b.on(inp, 'input', upd); upd();
-    if (motionOK()) G.from(cols, { y: 30, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.1, scrollTrigger: { trigger: $('.m2-cols', r), start: 'top 85%', once: true } });
+    const cols = $$('.m2-cols li', r);
+    let M = 250;
+    const upd = anim => cols.forEach(li => {
+      const v = Math.floor(pv(M, +li.dataset.apr, +li.dataset.n) / 100) * 100, el = $('.m2-amt', li);
+      if (anim && motionOK()) { const o = { v: +el.dataset.v || 0 }; G.to(o, { v, duration: 1.2, ease: 'power3.out', overwrite: true, onUpdate: () => { el.textContent = usd.format(Math.round(o.v / 100) * 100); } }); }
+      else el.textContent = usd.format(v);
+      el.dataset.v = v;
+    });
+    radios($('.mo-chips', r), b, it => { M = +it.dataset.mo; upd(true); });
+    upd(false);
+    if (motionOK()) G.from(cols, { y: 30, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.m2-cols', r), 'top 85%') });
   };
   V.money3 = (r, b) => {
     const amt = $('.rc-amt input', r), boxes = $$('input[type="checkbox"]', r), odo = Odo($('[data-odo]', r)), was = $('[data-was]', r), save = $('[data-save]', r);
@@ -913,7 +1255,39 @@
       if (box) box.checked = true;
     };
   }
+  /* light folds behind the call (S1364): tall bands drifting on slow sines, screen-blended so overlaps brighten,
+     brightest toward the lower right, leaning toward the pointer; DPR 1.5; stops off screen; still under reduced motion */
+  function folds(cv, host, b) {
+    const cx = cv.getContext('2d'); if (!cx) return;
+    let W = 0, H = 0, dpr = 1, raf = 0, t0 = 0, on = false, lean = 0, leanT = 0;
+    const size = () => { const rc = host.getBoundingClientRect(); dpr = Math.min(1.5, devicePixelRatio || 1); W = rc.width; H = rc.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); draw(t0); };
+    const BANDS = Array.from({ length: 18 }, (_, i) => ({ x: (i + 0.5) / 18, w: 0.05 + ((i * 37) % 7) / 70, ph: i * 1.7, sp: 0.06 + ((i * 13) % 5) / 90, a: 0.05 + ((i * 29) % 6) / 70 }));
+    function draw(t) {
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx.globalCompositeOperation = 'source-over'; cx.clearRect(0, 0, W, H);
+      cx.globalCompositeOperation = 'screen';
+      lean += (leanT - lean) * 0.04;
+      BANDS.forEach(bd => {
+        const x = (bd.x + Math.sin(t * bd.sp + bd.ph) * 0.03 + lean * 0.05 * bd.x) * W, w = bd.w * W;
+        const g = cx.createLinearGradient(0, 0, 0, H);
+        const near = 0.5 + 0.5 * bd.x;
+        g.addColorStop(0, 'rgba(255,120,110,0)'); g.addColorStop(0.55, `rgba(255,140,120,${(bd.a * near).toFixed(3)})`); g.addColorStop(1, `rgba(255,190,170,${(bd.a * 1.6 * near).toFixed(3)})`);
+        cx.fillStyle = g; cx.fillRect(x - w / 2, 0, w, H);
+      });
+      const rg = cx.createRadialGradient(W * 0.86, H * 0.95, 0, W * 0.86, H * 0.95, Math.max(W, H) * 0.6);
+      rg.addColorStop(0, 'rgba(255,170,150,0.22)'); rg.addColorStop(1, 'rgba(255,170,150,0)');
+      cx.fillStyle = rg; cx.fillRect(0, 0, W, H);
+    }
+    const loop = t => { t0 = t / 1000; draw(t0); raf = on ? requestAnimationFrame(loop) : 0; };
+    size(); b.ro(host, size);
+    if (!motionOK()) return;
+    b.io(host, ([en]) => { on = en.isIntersecting && !d.hidden; if (on && !raf) raf = requestAnimationFrame(loop); }, { threshold: 0 });
+    b.on(d, 'visibilitychange', () => { on = !d.hidden && on; if (on && !raf) raf = requestAnimationFrame(loop); });
+    if (mqFine.matches) b.on(host, 'pointermove', e => { const rc = host.getBoundingClientRect(); leanT = (e.clientX - rc.left) / rc.width * 2 - 1; });
+    b.add(() => { on = false; cancelAnimationFrame(raf); });
+  }
   V.book1 = (r, b, s) => {
+    const cv = $('.b1-folds', r); if (cv) folds(cv, r, b);
     const open = $('.b1-open', r), panel = $('#b1-panel', r), pre = Form($('form', r), b);
     const toggle = (on, focus) => {
       open.setAttribute('aria-expanded', on); panel.hidden = !on; open.textContent = on ? 'Hide the form' : 'Book free inspection online';
@@ -957,13 +1331,13 @@
     s.label.textContent = s.names[v - 1];
     const vr = s.stage.firstElementChild;
     s.b = bag();
-    const run = () => { heads(vr, s); const fn = V[s.key + v]; if (fn) fn(vr, s.b, s); };
+    const run = () => { heads(vr, s); const fn = V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); };
     try {
       if (G) { s.ctx = G.context(() => {}); s.ctx.add(run); } else run();
     } catch (err) { console.error(s.key + v, err); }
   }
   const code = () => SECS.map(s => s.v).join('');
-  const pretty = () => code().replace(/(\d{3})(?=\d)/g, '$1 ');
+  const pretty = () => { const c = code(); return `${c.slice(0, 3)} ${c.slice(3, 6)} ${c.slice(6)}`; };
   function save() {
     store.set('ap-picks', code());
     try { const u = new URL(location.href); u.searchParams.set('v', code()); history.replaceState(null, '', u); } catch (e) { /* file URL or sandbox: the panel still shows the picks */ }
@@ -1031,10 +1405,10 @@
   function remountAll() { SECS.forEach(s => { const v = s.v; s.switched = true; mount(s, v, false); }); if (ST) ST.refresh(); }
   motionBox.addEventListener('change', () => {
     userMotion = motionBox.checked ? 'on' : 'off'; store.set('ap-motion', userMotion);
-    setMotionClass(); lenisSync(); remountAll();
+    setMotionClass(); lenisSync(); syncFx(); remountAll();
     pkMsg.textContent = motionBox.checked ? 'Motion on.' : 'Motion off: every section shows its finished state.';
   });
-  mqReduce.addEventListener('change', () => { if (userMotion) return; motionBox.checked = motionOK(); setMotionClass(); lenisSync(); remountAll(); });
+  mqReduce.addEventListener('change', () => { if (userMotion) return; motionBox.checked = motionOK(); setMotionClass(); lenisSync(); syncFx(); remountAll(); });
 
   /* in-page links: smooth with Lenis, focus moves to the target (S0915); booking links can preselect a trade */
   d.addEventListener('click', e => {
@@ -1063,9 +1437,9 @@
   /* boot: picks from ?v=, then saved picks, else all version 1 */
   let picks = null;
   try { picks = new URL(location.href).searchParams.get('v'); } catch (e) { picks = null; }
-  if (!/^[123]{9}$/.test(picks || '')) picks = store.get('ap-picks');
-  if (!/^[123]{9}$/.test(picks || '')) picks = '111111111';
-  lenisSync();
+  if (!/^[123]{10}$/.test(picks || '')) picks = store.get('ap-picks');
+  if (!/^[123]{10}$/.test(picks || '')) picks = '1111111111';
+  lenisSync(); syncFx();
   SECS.forEach((s, k) => mount(s, +picks[k], +picks[k] === 1));
   syncPicks();
   if (ST) {

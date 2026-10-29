@@ -1,4 +1,4 @@
-"""index.html, homepage v2: nine sections, three switchable versions each (DIRECTION-HOME-V2.md, SKILL-PACK.md).
+"""index.html, homepage v3: ten sections, three switchable versions each (PLAN-HOME-V3.md, SKILL-PACK.md).
 
 Only one version per section is live in the DOM; the other two wait in <template>s, so ids stay unique, there is one
 h1, and nothing hidden is focusable. Facts come from FACTS.md via the harvested JSON; no figure here is invented.
@@ -11,6 +11,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from parts import NEAR, HOME_PAIRS, SVC_PAIRS, PHOTOS, REVIEWS, LIVE, PHONE, TEL, TRADES, e, SITE, clean
 from pages_inner import SW, COLORPLUS
+import elevation
+import iso
+import sheet
 
 H = 'assets/img/h/'
 EMAIL = 'info@austinprosiding.com'
@@ -35,8 +38,19 @@ def btn_book(cls='btn btn-red', label='Book free inspection', trade=''):
     return f'<a class="{cls}" href="#book" data-book{t}>{label}</a>'
 
 
+def mag(html):
+    """magnetic wrapper (S1321): the wrapper moves, the button keeps its own press scale"""
+    return f'<span class="mag" data-magnet>{html}</span>'
+
+
 def ctas(dark=False):
-    return f'<div class="ctas">{btn_book()}<a class="tlink{" on-dark" if dark else ""}" href="#work">See the work</a></div>'
+    hero = '<a class="btn btn-red" href="#book" data-book data-cur="hero">Book free inspection</a>'
+    return f'<div class="ctas">{mag(hero)}<a class="tlink{" on-dark" if dark else ""}" href="#work">See the work</a></div>'
+
+
+def alt_btn(href, label, extra=''):
+    """the second button language on the page (S0145 arcade shadow), with its own cursor state"""
+    return f'<a class="btn btn-alt" href="{href}" data-cur="alt"{extra}>{label}</a>'
 
 
 H1 = '<h1 class="display" data-split>Siding and windows, priced in public</h1>'
@@ -152,31 +166,31 @@ def map_svg(cls='map-svg', label='Map of 312 photographed, documented Austin Pro
 # ---------- HERO ----------
 def hero1():
     rb, ra = f'{H}../pairs/robroy-hb', f'{H}../pairs/robroy-ha'
+    strips = ''.join(f'<i class="crs" style="--k:{k}"><img src="{ra}-1440.webp" srcset="{ra}-760.webp 760w, {ra}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" decoding="async"></i>' for k in range(30))
     return f'''<div class="v hero-1" data-tone="photo">
-  <figure class="h1-frame" data-wipe style="--wipe:50%">
-    <img class="h1-a" src="{ra}-1440.webp" srcset="{ra}-760.webp 760w, {ra}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="{alt(ROB['after']['alt'])}" fetchpriority="high">
-    <img class="h1-b" src="{rb}-1440.webp" srcset="{rb}-760.webp 760w, {rb}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="{alt(ROB['before']['alt'])}">
-    <span class="h1-line" aria-hidden="true"></span>
-    <span class="ptag ptag-b" aria-hidden="true">Before</span><span class="ptag ptag-a" aria-hidden="true">After</span>
-    <input class="sr-only h1-range" type="range" min="0" max="100" value="50" aria-label="Compare the Rob Roy house before and after">
-    <button class="h1-pause" type="button" aria-pressed="false" aria-label="Pause the before and after animation"><svg aria-hidden="true" viewBox="0 0 20 20"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
-    <figcaption class="pchip h1-chip"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
+  <figure class="h1-frame" role="img" aria-label="Rob Roy, Austin: {alt(ROB['before']['alt'])}, then {alt(ROB['after']['alt'])}">
+    <div class="h1-photo" data-depth="-1">
+      <img class="h1-b" src="{rb}-1440.webp" srcset="{rb}-760.webp 760w, {rb}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" fetchpriority="high">
+      <div class="h1-courses" aria-hidden="true">{strips}</div>
+    </div>
+    <figcaption class="pchip h1-chip" data-depth="0.42"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
+    <button class="h1-replay btn btn-glass btn-sm" type="button" data-cur="link">Re-side it again</button>
   </figure>
-  <div class="h1-copy">{H1}{LEAD}{ctas(True)}</div>
+  <div class="h1-copy" data-depth="0.18">{H1}{LEAD}{ctas(True)}</div>
 </div>'''
 
 
 def hero2():
-    panes = ''.join(f'<i class="pane pane-{k}" aria-hidden="true"></i>' for k in ('tl', 'tr', 'bl', 'br'))
-    p = PHOTOS[0]
     return f'''<div class="v hero-2" data-tone="ground">
-  <div class="h2-scene">
-    <div class="h2-stage">
-      <div class="h2-layer">{img(H + 'hero-window-1400.webp', 1400, 1050, alt(p['trades'] + ' in ' + p['place'] + ', ' + p['when']), 'h2-img', eager=True)}</div>
-      <div class="h2-copy">{H1}{LEAD}{ctas()}</div>
-      <div class="h2-box" aria-hidden="true">{panes}<i class="mull mull-x"></i><i class="mull mull-y"></i></div>
-      <p class="h2-cap">{e(p['place'])}. {e(p['trades'])}, {e(p['when'])}</p>
-    </div>
+  <div class="h2-grid">
+    <div class="h2-copy">{H1}{LEAD}{ctas()}</div>
+    <figure class="h2-fig" data-draw>
+      <img class="h2-photo" src="assets/img/studio/base-1400.webp" width="1400" height="875" alt="{alt(ROB['after']['alt'])}" fetchpriority="high">
+      <div class="h2-lines">{elevation.svg('h2el', 'elev h2-el', 'Line drawing of the same Rob Roy house, traced from the job photo')}</div>
+      <i class="h2-scan" aria-hidden="true"></i>
+      <figcaption class="pchip h2-chip"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
+      <p class="h2-note" aria-hidden="true">Drawn from the job photo, line for line</p>
+    </figure>
   </div>
 </div>'''
 
@@ -186,12 +200,12 @@ def hero3():
     assert hp['p'].startswith('Circle C')
     return f'''<div class="v hero-3" data-tone="night">
   <div class="h3-copy">{H1}{LEAD}{ctas(True)}</div>
-  <figure class="h3-stage" data-paint>
+  <figure class="h3-stage" data-paint data-cur="paint">
     {img(H + 'hero-paint-b-1280.webp', 1280, 800, alt(hp['ba']), 'h3-b', eager=True)}
     {img(H + 'hero-paint-a-1280.webp', 1280, 800, alt(hp['aa']), 'h3-a', eager=True)}
     <canvas class="h3-gl" aria-hidden="true"></canvas>
     <figcaption class="h3-bar">
-      <span class="h3-hint" data-fine>Move across the house to paint the new siding</span>
+      <span class="h3-hint" data-fine-only>Move across the house to paint the new siding</span>
       <button class="btn btn-glass h3-toggle" type="button" aria-pressed="false">Show the new siding</button>
     </figcaption>
     <p class="pchip h3-chip"><span>{e(hp['p'])}, {e(hp['w'])}</span><b>{e(hp['bl'])} {band(hp['b'])}</b></p>
@@ -200,20 +214,35 @@ def hero3():
 
 
 # ---------- PROOF ----------
-def digits(value, cls=''):
-    """Rolling figure: real value as text for AT and no-JS; digit strips added by JS."""
-    return f'<span class="roll{(" " + cls) if cls else ""}" data-roll="{e(value)}">{e(value)}</span>'
+CREDS = [('gaf-master-elite', 'GAF Master Elite', 357, 112), ('hardie-elite-preferred', 'James Hardie Elite Preferred', 300, 98),
+         ('hardie-presidents-club-2025', "James Hardie President's Club Award 2025", 140, 176),
+         ('andersen-certified-premier', 'Andersen Certified Contractor, Premier', 176, 168),
+         ('guildmaster-service-excellence', 'GuildQuality Guildmaster', 205, 164), ('bbb-a-plus', 'BBB Accredited, A+', 185, 120)]
+
+
+def creds(cls='creds'):
+    return f'<ul class="{cls}" aria-label="Certified, accredited and awarded">' + ''.join(
+        f'<li><img src="assets/img/{f}.webp" width="{w}" height="{h}" alt="{e(n)}" loading="lazy" decoding="async"></li>' for f, n, w, h in CREDS) + '</ul>'
+
+
+def ring49():
+    r = 40
+    c = 2 * 3.14159265 * r
+    return (f'<svg class="r49" viewBox="0 0 100 100" aria-hidden="true"><circle class="r49-t" cx="50" cy="50" r="{r}"/>'
+            f'<circle class="r49-v" cx="50" cy="50" r="{r}" style="--c:{c:.2f}; --off:{c * (1 - 4.9 / 5):.2f}"/></svg>')
 
 
 def proof1():
-    return f'''<div class="v proof-1" data-tone="ground">
+    return f'''<div class="v proof-1 has-bgf" data-tone="ground">
+  <div class="bgf" aria-hidden="true"><div class="p1-gw" data-depth="-0.7"><span class="p1-ghost">886</span></div></div>
   <h2 class="h2x" data-split>On record since 2009</h2>
-  <div class="cidx">
-    <p class="ci ci-a"><b>{digits('886')}</b><span>jobs documented since 2018, 316 of them with photos</span></p>
-    <p class="ci ci-b"><b>{digits('4.9')}</b><span>stars across 474 Google reviews</span></p>
-    <p class="ci ci-c"><b>{digits('5,000+')}</b><span>Central Texas homeowners</span></p>
-    <p class="ci ci-d"><b>{digits('2009')}</b><span>the year Austin Pro Siding &amp; Windows opened</span></p>
+  <div class="rec">
+    <p class="rc rc-a"><b class="num" data-scr="886">886</b><span>documented projects, 2018-2026, each with its price</span></p>
+    <p class="rc rc-b"><b class="num" data-scr="177">177</b><span>before-and-after pairs published</span></p>
+    <p class="rc rc-c">{ring49()}<b class="num" data-scr="4.9">4.9</b><span>on 474 Google reviews</span></p>
+    <p class="rc rc-d"><b class="num" data-scr="5,000+">5,000+</b><span>Central Texas homeowners</span></p>
   </div>
+  <div class="p1-foot">{creds()}{alt_btn('#work', 'See the work')}</div>
 </div>'''
 
 
@@ -229,8 +258,10 @@ def proof2():
   <ul class="wall" aria-label="32 documented jobs, with neighbourhood, trades and month">{tiles}</ul>
   <div class="wall-plate">
     <h2 class="h2x" data-split>886 jobs, documented and dated</h2>
-    <p>Each with its photos, neighbourhood, products and price band. These are 32 of them.</p>
+    <p><b class="num">4.9</b> on 474 Google reviews. 177 before-and-after pairs published.</p>
+    {alt_btn('#reviews', 'Read what they wrote')}
   </div>
+  <div class="cred-iso" aria-label="Certified, accredited and awarded">{creds('creds creds-iso')}</div>
 </div>'''
 
 
@@ -241,65 +272,83 @@ def pill(i):
 def proof3():
     return f'''<div class="v proof-3" data-tone="ground2">
   <h2 class="h2s">The short version</h2>
-  <p class="statement" data-illuminate>Since 2009, Austin Pro has worked on <b>5,000+</b> Central Texas homes. <b>886</b> {pill(3)} of those jobs are documented, each with photos and a real price. Homeowners rate the work <b>4.9</b> {pill(22)} stars across <b>474</b> Google reviews.</p>
+  <p class="statement" data-illuminate>Since 2009, Austin Pro has worked on <b>5,000+</b> Central Texas homes. <b>886</b> {pill(3)} of those jobs are documented, each with photos and a real price, and <b>177</b> {pill(22)} have a before and after. Homeowners rate the work <b>4.9</b> on <b>474</b> Google reviews.</p>
+  <div class="stamps">{creds('creds creds-stamp')}{alt_btn('#book', 'Book free inspection')}</div>
 </div>'''
 
 
 # ---------- SERVICES ----------
+# the six parts of the Rob Roy house the instrument can light, mapped to the firm's trades (FACTS.md counts and bands)
+PARTS = [('siding', 'Siding', 'siding', 'Siding'), ('windows', 'Windows', 'windows', 'Windows'),
+         ('roof', 'Roof', 'shingle-roofing', 'Shingle roofing'), ('trim', 'Trim and paint', 'exterior-painting', 'Exterior painting'),
+         ('doors', 'Doors', 'doors', 'Exterior doors'), ('deck', 'Deck', 'decking', 'Decking')]
+
+
 def services1():
+    data = {}
+    for key, label, slug, trade in PARTS:
+        t = TBY[slug]
+        cnt = f"{t['doc']} documented jobs" if t['doc'] else f"{t['n']} priced jobs"
+        extra = ''
+        if key == 'roof':
+            m = TBY['metal-roofing']
+            extra = f"Metal roofing: {m['doc'] or m['n']} jobs, median {med(m)}"
+        data[key] = dict(label=label, trade=trade, cnt=cnt, med=med(t), mid=mid(t), img=tphoto(slug) if slug in TRADE_PHOTO else '', cap=tcap(slug) if slug in TRADE_PHOTO else '', extra=extra)
+    btns = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" data-part="{key}">{label}</button>' for k, (key, label, *_r) in enumerate(PARTS))
+    d0 = data['siding']
+    js = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
+    return f'''<div class="v services-1 has-bgf" data-tone="ground">
+  <div class="pt-head"><h2 class="h2x" data-split>What needs work?</h2><p class="pt-sub">Point at the part of the house. Every number is from the firm's own job files.</p></div>
+  <div class="pt-grid">
+    <figure class="pt-fig" data-cur="view">{elevation.svg('ptel', 'elev pt-el', 'The Rob Roy house as a line drawing; each part of it opens the matching trade', hits=True)}</figure>
+    <div class="pt-card" aria-live="polite">
+      <div class="pt-parts" role="radiogroup" aria-label="Part of the house">{btns}</div>
+      <p class="pt-trade" data-pt="trade">{d0['trade']}</p>
+      <p class="pt-med num"><span>Median job</span><b data-pt="med">{d0['med']}</b></p>
+      <p class="pt-cnt" data-pt="cnt">{d0['cnt']}</p>
+      <p class="pt-extra" data-pt="extra" hidden></p>
+      <figure class="pt-ph"><img data-pt="img" src="{d0['img']}" width="800" height="600" alt="{e(d0['cap'])}" loading="lazy" decoding="async"></figure>
+      {btn_book('btn btn-ink pt-book', 'Book a free inspection', d0['trade'])}
+    </div>
+  </div>
+  <script type="application/json" class="pt-data">{js}</script>
+</div>'''
+
+
+def services2():
     rows = ''
     for slug in TRADE_ORDER:
         t = TBY[slug]
         cnt = f"{t['doc']} jobs" if t['doc'] else f"{t['n']} priced"
         im = f' data-img="{tphoto(slug)}"' if slug in TRADE_PHOTO else ''
         th = f'<img class="ix-th" src="{tphoto(slug)}" width="800" height="600" alt="" loading="lazy" decoding="async">' if slug in TRADE_PHOTO else '<span class="ix-th ix-th-none" aria-hidden="true"></span>'
-        rows += f'''<li><a class="ix-row" href="#book" data-book data-trade="{e(t['name'])}"{im} aria-label="{e(t['name'])}: {cnt}, median job {med(t)}. Book an inspection">
-      <span class="ix-name">{e(t['name'])}</span><span class="ix-meta"><span>{cnt}</span><b>Median {med(t)}</b></span>{th}</a></li>'''
-    rows += '''<li><a class="ix-row" href="#book" data-book data-trade="Storm damage" aria-label="Storm damage: free inspection, documented for your insurer. Book an inspection">
-      <span class="ix-name">Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
-    return f'''<div class="v services-1" data-tone="ground">
-  <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices come from the firm's own documented jobs, 2018-2026.</p></div>
+        rows += f'''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="{e(t['name'])}"{im} aria-label="{e(t['name'])}: {cnt}, median job {med(t)}. Book an inspection">
+      <span class="ix-name" data-chars>{e(t['name'])}</span><span class="ix-meta"><span>{cnt}</span><b>Median {med(t)}</b></span>{th}</a></li>'''
+    rows += '''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="Storm damage" aria-label="Storm damage: free inspection, documented for your insurer. Book an inspection">
+      <span class="ix-name" data-chars>Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
+    return f'''<div class="v services-2" data-tone="ground">
+  <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices from the firm's own documented jobs, 2018-2026.</p></div>
   <ul class="ix">{rows}</ul>
   <div class="ix-peek" aria-hidden="true"><img alt="" width="800" height="600"></div>
 </div>'''
 
 
-def services2():
-    five = ['siding', 'windows', 'shingle-roofing', 'exterior-painting', 'patio-covers']
-    sl = ''
-    for k, slug in enumerate(five):
-        t = TBY[slug]
-        sl += f'''<li class="sl{' is-on' if k == 0 else ''}" data-k="{k}">
-      <button class="sl-btn" type="button" aria-expanded="{'true' if k == 0 else 'false'}" aria-controls="sl-{k}"><span>{e(t['name'])}</span></button>
-      <img class="sl-img" src="{tphoto(slug)}" width="800" height="600" alt="{e(tcap(slug))}" loading="lazy" decoding="async">
-      <div class="sl-body" id="sl-{k}"><p class="sl-n"><b>{t['doc']}</b> documented jobs</p><p class="sl-m">Median job {med(t)}</p>{btn_book('btn btn-white btn-sm', 'Book free inspection', t['name'])}</div>
-    </li>'''
-    return f'''<div class="v services-2" data-tone="night">
-  <h2 class="h2x" data-split>Five trades, up close</h2>
-  <ul class="slices">{sl}</ul>
-  <p class="sl-more">Also gutters, exterior doors, garage doors, metal roofing, decking and storm damage. One free inspection covers every trade on the house.</p>
-</div>'''
-
-
 def services3():
-    cards = ''
+    rows = ''
     for slug in TRADE_ORDER:
         t = TBY[slug]
-        ph = f'<img src="{tphoto(slug)}" width="800" height="600" alt="" loading="lazy" decoding="async">' if slug in TRADE_PHOTO else f'<span class="bc-none" aria-hidden="true"><b class="num">{t["n"]}</b>priced jobs</span>'
-        cards += f'''<li class="bc" data-lo="{t['lo']}" data-hi="{t['hi']}"><div class="bc-ph">{ph}</div>
-      <p class="bc-name">{e(t['name'])}</p><p class="bc-range">Most jobs {mid(t)}</p></li>'''
-    return f'''<div class="v services-3" data-tone="ground">
-  <div class="bud-head">
-    <h2 class="h2x" data-split>What does your budget cover?</h2>
-    <div class="bud-ctl">
-      <label for="bud-in" class="bud-label">Budget</label>
-      <output class="bud-out num" for="bud-in">$15,000</output>
-      <input class="range" id="bud-in" type="range" min="2000" max="50000" step="500" value="15000" aria-valuetext="$15,000">
-      <p class="bud-say" aria-live="polite"><b>7</b> of 10 trades usually land around this budget.</p>
-    </div>
+        lo, hi = t['lo'], t['hi']
+        rows += f'''<li class="tm-t" data-lo="{lo}" data-hi="{hi}"><span class="tm-n">{e(t['name'])}</span><span class="tm-bar" style="--a:{lo / 50:.3f};--b:{hi / 50:.3f}" aria-hidden="true"><i></i></span><span class="tm-r num">{mid(t)}</span></li>'''
+    ticks = ''.join(f'<i class="tk{" tk-m" if k % 5 == 0 else ""}" style="--k:{k}">{f"<b>${k}k</b>" if k % 5 == 0 else ""}</i>' for k in range(0, 51))
+    return f'''<div class="v services-3" data-tone="ground2">
+  <div class="tm-head"><h2 class="h2x" data-split>Pull the tape to your budget</h2>
+    <p class="tm-say" aria-live="polite"><b class="num" data-tm-v>$15,000</b> <span data-tm-n>6 of 10 trades usually land here.</span></p></div>
+  <div class="tape" role="slider" tabindex="0" data-cur="drag" aria-label="Budget, from $0 to $50,000" aria-valuemin="0" aria-valuemax="50000" aria-valuenow="15000" aria-valuetext="$15,000">
+    <div class="tape-band"><div class="tape-strip" aria-hidden="true">{ticks}</div></div>
+    <i class="tape-mark" aria-hidden="true"></i>
   </div>
-  <ul class="bud-grid">{cards}</ul>
-  <p class="fine">"Most jobs" is the middle half of each trade's individually priced jobs, materials and labour before discounts, excluding tax. Your price comes from the free inspection.</p>
+  <ul class="tm-list" aria-label="Middle half of each trade's priced jobs">{rows}</ul>
+  <p class="fine">The bar is the middle half of each trade's individually priced jobs, materials and labour before discounts, excluding tax. Your price comes from the free inspection.</p>
 </div>'''
 
 
@@ -309,8 +358,8 @@ def work1():
     strip = ''.join(f'''<li><button class="fs" type="button" data-i="{k}" aria-pressed="{'true' if k == 0 else 'false'}"><img src="{H}work-{q['id']}-a-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async"><span>{e(q['place'].split(',')[0])}</span><b>{q['band']}</b></button></li>''' for k, q in enumerate(PAIRS6))
     data = json.dumps([dict(id=q['id'], place=q['place'], when=q['when'], what=q['what'], band=q['band'], bl=q['bl'], href=q['href'], ab=q['ab'].replace('—', ','), aa=q['aa'].replace('—', ',')) for q in PAIRS6], ensure_ascii=False).replace('</', '<\\/')
     return f'''<div class="v work-1" data-tone="ground">
-  <h2 class="h2x" data-split>Before, after, and the price</h2>
-  <figure class="cmp" data-cmp style="--split:50%">
+  <div class="w1-head"><h2 class="h2x" data-split>Before, after, and the price</h2><p class="w1-sub">Six of the 177 before-and-after pairs the firm publishes, each with its own price.</p></div>
+  <figure class="cmp" data-cmp data-cur="drag" style="--split:50%">
     {pimg(p, 'a', 'cmp-a')}{pimg(p, 'b', 'cmp-b')}
     <span class="cmp-line" aria-hidden="true"></span>
     <button class="cmp-handle" type="button" role="slider" aria-label="Before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half before, half after"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></button>
@@ -324,23 +373,29 @@ def work1():
 
 
 def work2():
-    four = PAIRS6[:4]
-    frames = ''.join(f'''<li class="sc" data-k="{k}">
-      <figure class="sc-fig">{pimg(q, 'a', 'sc-a')}{pimg(q, 'b', 'sc-b')}<span class="ptag ptag-b" aria-hidden="true">Before</span><span class="ptag ptag-a" aria-hidden="true">After</span>
-        <button class="sc-toggle btn btn-glass btn-sm" type="button" aria-pressed="false">Show after</button></figure>
-      <div class="sc-txt"><p class="sc-price num">{q['band']}</p><p><b>{e(q['bl'])}, {e(q['place'])}</b><br>{e(q['what'])}, {e(q['when'])}</p></div>
-    </li>''' for k, q in enumerate(four))
-    return f'''<div class="v work-2" data-tone="night">
-  <div class="sc-wrap">
-    <div class="sc-head"><h2 class="h2x" data-split>Scroll to install</h2><p class="sc-count" aria-hidden="true"><span>1</span> of 4</p></div>
-    <ol class="sc-list">{frames}</ol>
-  </div>
+    steps = ''
+    for k, q in enumerate(PAIRS6):
+        steps += f'''<li><button class="bp-step" type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" data-k="{k}" tabindex="{0 if k == 0 else -1}"><span class="num">0{k + 1}</span>{e(q['place'].split(',')[0])}</button></li>'''
+    data = json.dumps([dict(id=q['id'], place=q['place'], when=q['when'], what=q['what'], band=q['band'], bl=q['bl'], ab=q['ab'].replace('—', ','), aa=q['aa'].replace('—', ',')) for q in PAIRS6], ensure_ascii=False).replace('</', '<\\/')
+    p = PAIRS6[0]
+    return f'''<div class="v work-2" data-tone="ground">
+  <div class="bp-head"><h2 class="h2x" data-split>Survey, draw, rebuild</h2><p class="bp-sub">Each job as the crew sees it: the old house, the drawing, the finished wall.</p></div>
+  <figure class="bp-fig" data-cur="view">
+    <img class="bp-b" src="{H}work-{p['id']}-b-1000.webp" width="1000" height="625" alt="{alt(p['ab'])}" loading="lazy" decoding="async">
+    <img class="bp-p" src="{H}bp-{p['id']}-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async">
+    <img class="bp-a" src="{H}work-{p['id']}-a-1000.webp" width="1000" height="625" alt="{alt(p['aa'])}" loading="lazy" decoding="async">
+    <i class="bp-scan" aria-hidden="true"></i>
+    <p class="bp-dim" aria-hidden="true"><span data-bp-dim>{e(p['bl']).upper()} · {p['band'].upper()}</span></p>
+  </figure>
+  <div class="bp-band" aria-live="polite"><p class="bp-k num" data-bp-k>01</p><p class="bp-name" data-bp-name>{e(p['place'])}</p><p class="bp-fix" data-bp-fix>{e(p['what'])}, {e(p['when'])}. {e(p['bl'])} {p['band']}.</p></div>
+  <ol class="bp-steps" role="radiogroup" aria-label="Choose a job">{steps}</ol>
+  <script type="application/json" class="pairs-data">{data}</script>
 </div>'''
 
 
 def work3():
     tiles = ''.join(f'''<li class="sp sp-{k}">
-      <figure class="sp-fig" data-spot>{pimg(q, 'a', 'sp-a')}{pimg(q, 'b', 'sp-b')}
+      <figure class="sp-fig" data-spot data-cur="view" data-cur-label="Before">{pimg(q, 'a', 'sp-a')}{pimg(q, 'b', 'sp-b')}
         <button class="sp-toggle btn btn-glass btn-sm" type="button" aria-pressed="false">Show before</button></figure>
       <p class="sp-cap"><b>{e(q['place'])}</b><span>{e(q['bl'])} {q['band']}, {e(q['when'])}</span></p>
     </li>''' for k, q in enumerate(PAIRS6))
@@ -349,6 +404,72 @@ def work3():
   <ul class="spots">{tiles}</ul>
 </div>'''
 
+
+
+# ---------- BUILT TO SPEC ----------
+LEGEND = [('trim', 'Corner trim'), ('siding', 'HardiePlank lap'), ('wrap', 'House wrap'), ('sheath', 'Sheathing'), ('studs', 'Framing')]
+READ = {'trim': 'Corner trim: where the courses stop',
+        'siding': 'HardiePlank lap: 8.25 in board, 7 in exposure, 1.25 in lap, 5/16 in thick',
+        'wrap': 'House wrap: the water line behind the boards',
+        'sheath': 'Sheathing: what rot reaches first under old siding',
+        'studs': 'Framing: what the whole wall hangs on'}
+
+
+def built1():
+    btns = ''.join(f'<li><button type="button" class="lg-b" data-asm="{k}" aria-pressed="false"><span class="num">0{i + 1}</span>{n}</button></li>' for i, (k, n) in enumerate(LEGEND))
+    data = json.dumps(READ).replace('</', '<\\/')
+    return f'''<div class="v built-1 has-bgf" data-tone="ground">
+  <div class="bgf" aria-hidden="true"><div class="grid3" data-depth="-0.5"></div></div>
+  <div class="b1-grid">
+    <div class="b1x-side">
+      <h2 class="h2x" data-split>The wall, taken apart</h2>
+      <p class="b1x-sub">James Hardie lap, installed by an Elite Preferred crew. 301 of 415 priced siding jobs used this 8.25 in board.</p>
+      <ol class="legend" aria-label="Layers of the wall">{btns}</ol>
+      <div class="b1x-act"><button class="btn btn-ink btn-sm" type="button" data-explode aria-pressed="false">Take it apart</button></div>
+    </div>
+    <figure class="b1x-fig card-fig" data-cur="view">
+      <p class="fig-n" aria-hidden="true">Fig 1</p><p class="fig-t" aria-hidden="true">Corner of wall</p>
+      {iso.wall_assembly('isowall')}
+      <p class="fig-r num" aria-live="polite" data-readout>Assembled · 5 layers</p>
+    </figure>
+  </div>
+  <script type="application/json" class="b1x-data">{data}</script>
+</div>'''
+
+
+def built2():
+    return f'''<div class="v built-2" data-tone="night">
+  <div class="b2x-grid">
+    <div class="b2x-side">
+      <h2 class="h2x" data-split>A window that answers</h2>
+      <p class="b2x-sub">NT Windows went into 238 of 376 priced window jobs. Move across the window: it tilts and lets go of its glass.</p>
+      <label class="b2x-ctl"><span>Tilt and open</span><input class="range" type="range" min="0" max="100" value="0" aria-valuetext="Closed" data-hw-range></label>
+      <button class="btn btn-line btn-sm" type="button" data-hw-play>Play the tour</button>
+    </div>
+    <figure class="b2x-fig" data-cur="drag" data-hairline>
+      <svg class="hw" viewBox="0 0 600 480" role="img" aria-label="A replacement window drawn in one line: frame, tilting sash and the dual-pane glass unit"></svg>
+      <p class="hw-read num" aria-live="polite" data-hw-read>3-1/4 in multi-chambered vinyl frame · 3/4 in dual-pane glass</p>
+    </figure>
+  </div>
+</div>'''
+
+
+SPEC = [('L1', 'Board', '8.25 in', 'lap'), ('X1', 'Exposure', '7 in', 'lap'), ('O1', 'Lap = L1 - X1', '1.25 in', 'lap'), ('T1', 'Thickness', '5/16 in', 'lap'),
+        ('N1', 'Board length', '12 ft', 'lap'), ('P1', 'Panel', '4 ft', 'bb'), ('B1', 'Batten', '2.5 in', 'bb'), ('C1', 'Batten spacing', '16 in o.c.', 'bb')]
+
+
+def built3():
+    rows = ''.join(f'<li class="spec-r" data-code="{c}" data-set="{st}" tabindex="0"{" hidden" if st == "bb" else ""}><span class="num">{c}</span><span>{n}</span><b class="num">{v}</b></li>' for c, n, v, st in SPEC)
+    return f'''<div class="v built-3 has-bgf" data-tone="ground">
+  <div class="bgf" aria-hidden="true"><div class="grid3 grid3-p" data-depth="-0.4"></div></div>
+  <div class="b3x-head"><h2 class="h2x" data-split>Lap or batten, to the inch</h2>
+    <div class="seg b3x-seg" role="radiogroup" aria-label="Siding style"><button type="button" role="radio" aria-checked="true" data-style="lap">Lap · 301 of 415 jobs</button><button type="button" role="radio" aria-checked="false" data-style="bb">Board and batten · 27</button></div></div>
+  <div class="b3x-grid">
+    <figure class="b3x-sheet"><p class="tb num" aria-hidden="true"><span>DWG APS-S1</span><span>REV 03</span><span>UNITS IN</span><span>SOURCE austinprosiding.com</span></p>{sheet.svg()}</figure>
+    <div class="b3x-spec"><p class="tb num" aria-hidden="true"><span>VARIABLES</span></p><ul class="spec" aria-label="Published dimensions">{rows}</ul>
+      <p class="fine">Every value is the one the firm publishes for James Hardie siding. Thicknesses it does not publish stay [TBD].</p></div>
+  </div>
+</div>'''
 
 # ---------- COLOUR ----------
 def zones():
@@ -424,11 +545,24 @@ def colour2():
 
 
 def colour3():
+    n = len(SW)
+    segs = ''
+    for k, (nm, c, h) in enumerate(SW):
+        segs += f'<path class="dial-seg" data-k="{k}" style="--c:{h}" d=""/>'
+    data = json.dumps([dict(n=nm, c=c, h=h) for nm, c, h in SW]).replace('</', '<\\/')
     return f'''<div class="v colour-3" data-tone="night">
-  <div class="c3-head"><h2 class="h2x" data-split>Your colour beside the real one</h2></div>
-  <div class="c3-stage">{studio_frame('<span class="c3-line" aria-hidden="true"></span><button class="c3-handle" type="button" role="slider" aria-label="Move the line between the real house and your colour" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></button><span class="ptag ptag-b" aria-hidden="true">Real</span><span class="ptag ptag-a" aria-hidden="true">Yours</span><span class="ghost" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.6L10 19z"/></svg></span>')}</div>
-  <div class="c3-row" role="radiogroup" aria-label="Siding colour">{swatches('sw sw-lg', True)}</div>
-  <p class="c3-now num" aria-live="polite"></p>
+  <div class="c3-grid">
+    <div class="c3-stage">{studio_frame()}</div>
+    <div class="c3-side">
+      <h2 class="h2x" data-split>Turn the house a new colour</h2>
+      <div class="dial" role="slider" tabindex="0" data-cur="drag" aria-label="Siding colour dial" aria-valuemin="1" aria-valuemax="{n}" aria-valuenow="11" aria-valuetext="In the Navy, SW 9178">
+        <svg class="dial-svg" viewBox="-110 -110 220 220" aria-hidden="true"><g class="dial-rot">{segs}<circle class="dial-hub" r="46"/></g><path class="dial-mark" d="M0 -108L-7 -96H7Z"/></svg>
+        <p class="dial-now"><b data-dial-name>In the Navy</b><span data-dial-code>SW 9178</span></p>
+      </div>
+      <p class="fine">The twelve Sherwin-Williams colours the firm publishes, on the job's own photo.</p>
+    </div>
+  </div>
+  <script type="application/json" class="dial-data">{data}</script>
 </div>'''
 
 
@@ -452,7 +586,7 @@ def near1():
       <p class="n1-note">Each dot is a photographed job, placed near the home, never on it. 574 more are documented outside this frame or without photos.</p>
       {finder('n1')}
     </div>
-    <figure class="n1-map">{map_svg()}<div class="m-tip" hidden></div></figure>
+    <figure class="n1-map" data-cur="map">{map_svg()}<canvas class="n1-trail" aria-hidden="true"></canvas><div class="m-tip" hidden></div></figure>
   </div>
 </div>'''
 
@@ -476,10 +610,11 @@ def near2():
 def near3():
     return f'''<div class="v near-3" data-tone="ground2">
   <div class="n3-top">
-    <h2 class="h2x" data-split>Where is your house?</h2>
+    <h2 class="h2x" data-split>How many jobs near you?</h2>
     {finder('n3', 'Type your neighbourhood or town', big=True)}
   </div>
-  <figure class="n3-map">{map_svg('map-svg map-light')}</figure>
+  <figure class="n3-map" data-cur="map">{map_svg('map-svg map-light')}<button class="n3-knob" type="button" role="slider" aria-label="Radius in miles" aria-valuemin="1" aria-valuemax="15" aria-valuenow="5" aria-valuetext="5 miles" data-cur="drag" hidden></button></figure>
+  <p class="n3-say" aria-live="polite" data-n3-say></p>
 </div>'''
 
 
@@ -590,11 +725,11 @@ def money1():
 
 def money2():
     cols = ''.join(f'<li data-apr="{apr}" data-n="{n}"><p class="m2-amt num">-</p><p class="m2-plan"><b>{a}</b> for {m}</p></li>' for apr, n, a, m in TERMS)
+    chips = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if v == 250 else "false"}" data-mo="{v}" class="mo-chip num">${v}</button>' for v in (150, 250, 350, 500, 750))
     return f'''<div class="v money-2" data-tone="night">
   <div class="m2-top">
     <h2 class="h2x" data-split>Start from a monthly budget</h2>
-    <div class="m2-ctl"><label class="lab" for="m2-mo">I can put aside <output class="num" for="m2-mo">$250</output> a month</label>
-      <input class="range" id="m2-mo" type="range" min="100" max="800" step="10" value="250" aria-valuetext="$250 a month"></div>
+    <div class="m2-ctl"><p class="lab" id="m2-l">I can put aside, a month</p><div class="mo-chips" role="radiogroup" aria-labelledby="m2-l">{chips}</div></div>
   </div>
   <ul class="m2-cols" aria-live="polite">{cols}</ul>
   <p class="m2-ref">For scale: most siding jobs land between $5k and $20k, most window jobs between $5k and $25k.</p>
@@ -651,10 +786,11 @@ def form(pref, theme=''):
 
 
 def book1():
-    return f'''<div class="v book-1" data-tone="red">
+    return f'''<div class="v book-1 has-bgf" data-tone="red">
+  <div class="bgf" aria-hidden="true"><canvas class="b1-folds"></canvas></div>
   <h2 class="h2x b1-h" data-split>See your price in writing</h2>
   <p class="b1-sub">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price.</p>
-  <a class="b1-tel" href="{TEL}">{PHONE}</a>
+  <span class="mag" data-magnet><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
   <p class="b1-hours">Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM</p>
   <div class="b1-act"><button class="btn btn-white b1-open" type="button" aria-expanded="false" aria-controls="b1-panel">Book free inspection online</button></div>
   <div class="b1-panel" id="b1-panel" hidden>{form('b1', 'bk-card')}</div>
@@ -680,12 +816,13 @@ def book3():
 
 # ---------- page ----------
 SECTIONS = [
-    ('hero', 'Hero', [hero1, hero2, hero3], ['Full-bleed', 'Window', 'Paint it']),
-    ('proof', 'Proof', [proof1, proof2, proof3], ['Counter index', 'Photo wall', 'Statement']),
-    ('services', 'Services', [services1, services2, services3], ['Index', 'Slices', 'Budget']),
-    ('work', 'Work', [work1, work2, work3], ['Slider', 'Scroll', 'Spotlight']),
-    ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Drag paint', 'Split']),
-    ('near', 'Near you', [near1, near2, near3], ['Map', 'Towns', 'Search']),
+    ('hero', 'Hero', [hero1, hero2, hero3], ['Courses', 'Drawn, then built', 'Paint it']),
+    ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'Wall', 'Statement']),
+    ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
+    ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
+    ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Window', 'To the inch']),
+    ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Drag paint', 'Dial']),
+    ('near', 'Near you', [near1, near2, near3], ['Survey', 'Towns', 'Radius']),
     ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'Names']),
     ('money', 'Money', [money1, money2, money3], ['Amount', 'Budget', 'Receipt']),
     ('book', 'Book', [book1, book2, book3], ['Call', 'Form', 'Chat']),
@@ -746,7 +883,7 @@ def header():
 def picks():
     rows = ''.join(f'''<li><span>{label}</span><div class="pk-seg" role="radiogroup" aria-label="{label} version" data-for="{key}">{''.join(f'<button type="button" role="radio" aria-checked="{"true" if n == 1 else "false"}" data-v="{n}" title="{e(nm)}">{n}</button>' for n, nm in enumerate(names, 1))}</div></li>''' for key, label, _f, names in SECTIONS)
     return f'''<div class="picks">
-  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Your picks</span><b class="num" data-pk-code>111 111 111</b></button>
+  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Your picks</span><b class="num" data-pk-code>111 111 1111</b></button>
   <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Your picks" hidden>
     <p class="pk-h">Your picks</p>
     <p class="pk-tip">Switch any section here or with its 1 2 3 buttons. Keys 1, 2 and 3 switch the section in view.</p>
@@ -776,7 +913,9 @@ def build():
     body = head() + header() + '<main id="main">\n' + ''.join(section(k, l, f, n) for k, l, f, n in SECTIONS) + '</main>\n' + footer() + picks()
     data = json.dumps(dict(map=MAPDATA, sw=SW, cp=COLORPLUS), ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     body += f'\n<script type="application/json" id="home-data">{data}</script>\n'
-    body += '<script src="assets/js/gsap.min.js" defer></script>\n<script src="assets/js/ScrollTrigger.min.js" defer></script>\n<script src="assets/js/Flip.min.js" defer></script>\n<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
+    js = ['gsap', 'ScrollTrigger', 'Flip', 'SplitText', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'Observer', 'ScrambleTextPlugin', 'CustomEase']
+    body += ''.join(f'<script src="assets/js/{n}.min.js" defer></script>\n' for n in js)
+    body += '<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/fx.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
     out = clean(body)
     with open(os.path.join(SITE, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(out)
