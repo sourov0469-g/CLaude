@@ -471,6 +471,73 @@
   }
   $$('[data-pairs]').forEach(pairsBlock);
 
+  // a single compare outside a pairs block (page heroes): drag, keys, tap
+  $$('[data-compare]').forEach(fig => {
+    const handle = $('.c-handle', fig);
+    let pos = 50;
+    const setPos = p => { pos = clamp(p, 0, 100); fig.style.setProperty('--pos', pos + '%'); handle.setAttribute('aria-valuenow', String(Math.round(pos))); handle.setAttribute('aria-valuetext', `${Math.round(pos)}% before, ${100 - Math.round(pos)}% after`); };
+    const fromX = x => { const r = fig.getBoundingClientRect(); return (x - r.left) / r.width * 100; };
+    handle.addEventListener('pointerdown', e => {
+      e.preventDefault(); handle.setPointerCapture(e.pointerId);
+      const move = ev => setPos(fromX(ev.clientX));
+      const up = () => { handle.removeEventListener('pointermove', move); handle.removeEventListener('pointerup', up); };
+      handle.addEventListener('pointermove', move); handle.addEventListener('pointerup', up);
+    });
+    handle.addEventListener('keydown', e => {
+      const m = { ArrowLeft: -5, ArrowDown: -5, ArrowRight: 5, ArrowUp: 5 };
+      if (e.key in m) { e.preventDefault(); setPos(pos + m[e.key]); }
+      else if (e.key === 'Home') { e.preventDefault(); setPos(0); } else if (e.key === 'End') { e.preventDefault(); setPos(100); }
+    });
+    fig.addEventListener('click', e => { if (!handle.contains(e.target)) setPos(fromX(e.clientX)); });
+    setPos(50);
+  });
+
+  // Scale container on scroll (#154): 0.86 -> 1, scrub 1, no pin
+  if (G && ST && !reduce()) {
+    $$('[data-scale]').forEach(el => {
+      G.fromTo(el, { scale: .86 }, { scale: 1, ease: 'none', force3D: true, scrollTrigger: { trigger: el, start: 'clamp(top 80%)', end: 'clamp(top 15%)', scrub: 1 } });
+    });
+  }
+
+  // The wall, layer by layer: assembled, then scrubbed apart along the depth axis (ease none). Desktop and tall screens only.
+  $$('[data-wall]').forEach(sec => {
+    const layers = $$('.w-layer', sec), labels = $$('.w-label', sec);
+    const set = t => {
+      layers.forEach(l => { const i = +l.dataset.i; l.setAttribute('transform', `translate(${(-46 * i * t).toFixed(2)} ${(30 * i * t).toFixed(2)})`); });
+      labels.forEach(l => {
+        const i = +l.dataset.i, ax = +l.dataset.x - 46 * i * t, y = +l.dataset.y;
+        l.setAttribute('transform', `translate(0 ${(30 * i * t).toFixed(2)})`);
+        $('path', l).setAttribute('d', `M${ax.toFixed(2)} ${y}H${+$('text', l).getAttribute('x') - 8}`);
+        $('circle', l).setAttribute('cx', ax.toFixed(2));
+      });
+    };
+    // phone: crop to the drawing (labels become the list under it) so the codes stay legible
+    const svg = $('.wall-svg', sec), full = svg.getAttribute('viewBox');
+    const frame = () => svg.setAttribute('viewBox', mqDesk.matches ? full : '20 60 530 500');
+    frame(); mqDesk.addEventListener('change', frame);
+    if (!G || !ST || reduce()) return;
+    const mm = G.matchMedia();
+    mm.add('(min-width: 900px) and (min-height: 760px)', () => {
+      sec.classList.add('is-pinned');
+      ST.refresh();
+      set(0);
+      const st = ST.create({
+        trigger: $('.wall-track', sec), start: 'top top', end: 'bottom bottom', scrub: true,
+        onUpdate: self => set(clamp((self.progress - .12) / .55, 0, 1))
+      });
+      return () => { st.kill(); sec.classList.remove('is-pinned'); set(1); };
+    });
+  });
+
+  // share bars grow (0.8s power2.out, stagger 0.04)
+  if (G && !reduce()) {
+    $$('.hbars').forEach(list => {
+      const bars = $$('.hb-track i', list);
+      G.set(bars, { scaleX: 0 });
+      onEnter(list, () => G.to(bars, { scaleX: 1, duration: .8, ease: 'power2.out', stagger: .04 }));
+    });
+  }
+
   /* ---------------- colour studio (Codrops customizer #140 + BLK live zones #531, 400ms repaint) ---------------- */
   function studio(box) {
     const zones = Object.fromEntries($$('.zone', box).map(z => [z.dataset.zone, z]));

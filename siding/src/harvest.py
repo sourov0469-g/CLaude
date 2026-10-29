@@ -84,3 +84,10 @@ for fig in re.findall(r'<figure[^>]*>(.*?)</figure>', rev, re.S):
     reviews.append(dict(text=strip(q.group(1)), name=who.strip(), source=src.strip()))
 assert len(reviews) == 30, len(reviews)
 save('reviews.json', reviews)
+
+# 6. The firm's own Q&As (FAQPage JSON-LD) on the siding and windows pages, verbatim.
+faq = {}
+for key, page in (('siding', 'services_siding.html'), ('windows', 'services_windows.html')):
+    m = re.search(r'"@type":"FAQPage".*?"mainEntity":(\[.*?\])\}</script>', raw(page), re.S)
+    faq[key] = [[q['name'], q['acceptedAnswer']['text']] for q in json.loads(m.group(1))]
+save('faq.json', faq)

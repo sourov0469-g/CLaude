@@ -403,7 +403,7 @@ def pairs(keys, first=0, title_id='pairs-h', head=''):
       <span class="pair-price"><small>{e(p0['bandl'])}</small><b>{e(p0['band'])}</b></span>
     </figure>
     <p class="compare-hint"><span class="touch-hint">Drag the handle or tap the photo to compare.</span><span class="lens-hint">Drag the handle to compare, or rest the pointer on the photo: the square shows the other half of the job through it.</span></p>
-    <div class="pair-picks" role="group" aria-label="Choose a job">{''.join(picks)}</div>
+    <div class="pair-picks" role="group" aria-label="Choose a job" style="--n:{len(plist)}">{''.join(picks)}</div>
   </div>
 </div>'''
 
@@ -417,7 +417,7 @@ def hist(key, label):
     for i, (b, c) in enumerate(H['bands']):
         cls = 'hbar' + (' is-median' if i == H['median'] else '') + (' is-mid' if H['mid'][0] <= i <= H['mid'][1] and i != H['median'] else '')
         bars.append(f'<button type="button" class="{cls}" style="--h:{c / top * 100:.1f}%" aria-label="{e(b)}: {c} of {H["n"]} jobs"><b>{c}</b><i></i></button>')
-        xs.append(f'<span>{e(b.replace("Under ", "<"))}</span>')
+        xs.append(f'<span>{e(b.replace("Under ", "<")).replace("–", "-<wbr>")}</span>')
     grid = ''.join(f'<span class="hist-gridline" style="bottom:{g / top * 100:.1f}%"><span>{g}</span></span>' for g in range(0, top + 1, 40 if top > 100 else 25) if g)
     rows = ''.join(f'<tr><td>{e(b)}</td><td>{c}</td></tr>' for b, c in H['bands'])
     return f'''<div class="hist" data-hist="{key}">
