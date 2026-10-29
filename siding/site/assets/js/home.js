@@ -1232,6 +1232,10 @@
     if (motionOK()) G.from($('.b1-tel', r), { yPercent: 40, autoAlpha: 0, duration: 0.9, ease: ease.x, scrollTrigger: { trigger: r, start: 'top 70%', once: true } });
   };
   V.book2 = (r, b, s) => {
+    // v4: the three steps are three window panes; done panes glaze, the current pane is outlined (watches the step counter)
+    { const k = $('.bk-k span', r), ps = $$('.bp-pane', r), done = $('.bk-done', r);
+      const paint = () => { const n = +k.textContent || 1, all = done && !done.hidden; ps.forEach((p0, q) => { p0.classList.toggle('is-done', all || q < n - 1); p0.classList.toggle('is-now', !all && q === n - 1); }); };
+      if (k && ps.length) { const mo = new MutationObserver(paint); mo.observe(k, { childList: true, characterData: true, subtree: true }); if (done) mo.observe(done, { attributes: true, attributeFilter: ['hidden'] }); b.add(() => mo.disconnect()); paint(); } }
     const pre = Form($('form', r), b);
     s.api.book = trade => { if (trade) pre(trade); const f = $('input', $('form', r)); if (f) setTimeout(() => f.focus({ preventScroll: true }), 600); };
     if (motionOK()) G.from($('.b2-ph img', r), { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.08, duration: 1.1, ease: ease.io, scrollTrigger: { trigger: r, start: 'top 75%', once: true } });
@@ -1239,6 +1243,18 @@
   /* BOOK 3: Q413 Tequila's conversational form: one sentence with inline fields. Validated on Send, then live while
      fixing (S0661); the errors are listed in plain words under the sentence and the first bad field takes focus. */
   V.book3 = (r, b, s) => {
+    // v4 (Q163 pluck): each blank hangs as a slack chalk line; filling it snaps the line taut with a short decaying pluck
+    $$('.snt-in', r).forEach(w => {
+      const inp = $('input', w), path = $('.snt-ch path', w);
+      let taut = false;
+      const set = sag => path.setAttribute('d', `M0 4Q50 ${(4 + sag).toFixed(2)} 100 4`);
+      const snap = () => {
+        const full = inp.value.trim().length > 0; if (full === taut) return; taut = full;
+        if (!motionOK()) { set(full ? 0 : 5); return; }
+        const o = { t: 0 }; G.to(o, { t: 1, duration: full ? 0.6 : 0.3, ease: 'none', onUpdate: () => set(full ? 6 * Math.exp(-o.t * 5) * Math.cos(o.t * 24) : 5 * o.t) });
+      };
+      set(5); b.on(inp, 'change', snap); b.on(inp, 'blur', snap); b.on(inp, 'input', () => { if (!inp.value.trim()) snap(); });
+    });
     const form = $('[data-snt]', r), errs = $('.snt-err', form), done = $('.snt-done', form);
     const F = n => form.elements[n];
     const rules = [['name', v => v.trim().length > 0, 'Add your first name.'], ['zip', v => /^\d{5}$/.test(v.trim()), 'ZIP codes have 5 digits, like 78752.'],

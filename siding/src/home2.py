@@ -1033,11 +1033,16 @@ BOOK_TRADES = ['Siding', 'Windows', 'Shingle roofing', 'Metal roofing', 'Exterio
 BANDS = ['Under $5k', '$5k-$10k', '$10k-$15k', '$15k-$20k', '$20k or more', 'Not sure yet']
 
 
-def form(pref, theme=''):
+PANES3 = ('<svg class="bk-panes" viewBox="0 0 66 30" aria-hidden="true" focusable="false"><rect class="bp-fr" x="1" y="1" width="64" height="28" rx="1.5"/>'
+          + ''.join(f'<rect class="bp-pane" data-pane="{k}" x="{4 + k * 20.67:.2f}" y="4" width="17.6" height="22"/>' for k in range(3))
+          + '<path class="bp-sill" d="M-2 31H68"/></svg>')
+
+
+def form(pref, theme='', panes=False):
     chips = ''.join(f'<label class="ck"><input type="checkbox" name="trade" value="{t}"><span>{t}</span></label>' for t in BOOK_TRADES)
     radios = ''.join(f'<label class="ck"><input type="radio" name="{pref}-band" value="{b}"><span>{b}</span></label>' for b in BANDS)
     return f'''<form class="bk {theme}" data-form novalidate aria-label="Request a free inspection">
-      <p class="bk-k num" aria-live="polite"><span>1</span> of 3</p>
+      <p class="bk-k num" aria-live="polite">{PANES3 if panes else ''}<span>1</span> of 3</p>
       <fieldset class="bk-step is-on" data-step="1"><legend>What should we look at?</legend>
         <div class="cks">{chips}</div><p class="bk-err" id="{pref}-e1" hidden>Pick at least one, so the right person comes out.</p></fieldset>
       <fieldset class="bk-step" data-step="2" hidden><legend>Roughly what budget?</legend>
@@ -1057,7 +1062,7 @@ def book1():
   <div class="bgf" aria-hidden="true"><canvas class="b1-folds"></canvas></div>
   <h2 class="h2x b1-h" data-split>See your price in writing</h2>
   <p class="b1-sub">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price.</p>
-  <span class="mag" data-magnet><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
+  <span class="mag" data-magnet><svg class="b1-door" aria-hidden="true" focusable="false"><rect class="bd-o" x="0" y="0" width="100%" height="100%" rx="4"/><rect class="bd-i" x="12" y="12" width="100%" height="100%" rx="2"/></svg><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
   <p class="b1-hours">Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM</p>
   <div class="b1-act"><button class="btn btn-white b1-open" type="button" aria-expanded="false" aria-controls="b1-panel">Book free inspection online</button></div>
   <div class="b1-panel" id="b1-panel" hidden>{form('b1', 'bk-card')}</div>
@@ -1068,7 +1073,7 @@ def book2():
     return f'''<div class="v book-2" data-tone="ground">
   <div class="b2-grid">
     <figure class="b2-ph">{img(H + 'book-1000.webp', 1000, 625, alt(HOME_PAIRS[0]['aa']))}<figcaption>{e(HOME_PAIRS[0]['p'])}, {e(HOME_PAIRS[0]['w'])}. {e(HOME_PAIRS[0]['bl'])} {band(HOME_PAIRS[0]['b'])}</figcaption></figure>
-    <div class="b2-form"><h2 class="h2x" data-split>See your price in writing</h2><p class="b2-sub">Free inspection, 30 to 60 minutes, no obligation. Or call <a class="tlink" href="{TEL}">{PHONE}</a>.</p>{form('b2', 'bk-card')}</div>
+    <div class="b2-form"><h2 class="h2x" data-split>See your price in writing</h2><p class="b2-sub">Free inspection, 30 to 60 minutes, no obligation. Or call <a class="tlink" href="{TEL}">{PHONE}</a>.</p>{form('b2', 'bk-card', panes=True)}</div>
   </div>
 </div>'''
 
@@ -1081,11 +1086,11 @@ def book3():
     return f'''<div class="v book-3" data-tone="night">
   <form class="snt-form" data-snt novalidate aria-labelledby="snt-h">
     <h2 class="snt-k" id="snt-h">Book a free inspection, in one sentence</h2>
-    <p class="snt">Hi Austin Pro, I'm <input name="name" autocomplete="given-name" aria-label="Your first name" placeholder="your name" size="9" required>.
+    <p class="snt">Hi Austin Pro, I'm <span class="snt-in"><input name="name" autocomplete="given-name" aria-label="Your first name" placeholder="your name" size="9" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.
       Could you look at my <span class="snt-sel"><select name="trade" aria-label="What to look at">{trades}</select></span>
-      in <input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-label="Your ZIP code" placeholder="ZIP" size="5" required>?
+      in <span class="snt-in"><input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-label="Your ZIP code" placeholder="ZIP" size="5" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>?
       My budget is roughly <span class="snt-sel"><select name="band" aria-label="Rough budget">{bands}</select></span>.
-      Call me on <input name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-label="Your phone number" placeholder="phone" size="12" required>.</p>
+      Call me on <span class="snt-in"><input name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-label="Your phone number" placeholder="phone" size="12" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.</p>
     <ul class="snt-err" aria-live="polite" hidden></ul>
     <div class="snt-go"><button class="btn btn-red snt-send" type="submit" data-cur="hero">Send my request</button>
       <p class="snt-promise">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price in writing. The office calls you back to pick a time: Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM.</p></div>
