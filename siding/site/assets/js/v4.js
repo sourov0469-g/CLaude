@@ -230,7 +230,7 @@
 
     const sel = {
       drag: '[role="slider"], .cmp-handle, [data-cur="drag"], .tape-strip',
-      card: '[role="radio"], [role="option"], [role="tab"], .h2c, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .nm, .dv-chip, .term, .dt, .lg-b, .bp-step, .fs, .sp-toggle, [data-card]',
+      card: '[role="radio"], [role="option"], [role="tab"], .h2p, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .nm, .dv-chip, .term, .dt, .lg-b, .bp-step, .fs, .sp-toggle, [data-card]',
       button: '.btn, button, [role="button"], input[type="submit"]',
       link: 'a[href]',
       image: 'img, figure, picture, canvas, .map-svg',
@@ -866,7 +866,7 @@
   function roleOf(el) {
     if (el.matches('[role="slider"], .cmp-handle, input[type="range"]')) return 'control';
     if (el.matches('a[href^="tel:"]')) return 'tel';
-    if (el.matches('[role="radio"], [role="option"], [role="tab"], .h2c, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .nm, .dv-chip, .term, .dt, .lg-b, .bp-step, .fs, .sp-toggle, .vsw-b')) return 'card';
+    if (el.matches('[role="radio"], [role="option"], [role="tab"], .h2p, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .nm, .dv-chip, .term, .dt, .lg-b, .bp-step, .fs, .sp-toggle, .vsw-b')) return 'card';
     if (el.matches('.btn, button, input[type="submit"]')) return 'button';
     if (el.matches('a[href]')) return 'link';
     if (el.matches('figure.rx-img, [data-rx-img]')) return 'image';

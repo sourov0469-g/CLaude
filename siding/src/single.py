@@ -105,11 +105,13 @@ def build():
     html = re.sub(r'\s(?:srcset|sizes)="[^"]*"', '', html)
     used = set()
 
-    def to_data_src(m):
-        p = norm(m.group(1))
+    def asrc(p):
+        p = norm(p)
         used.add(p)
         return f' data-asrc="{p}"'
-    html = re.sub(r'\ssrc="(assets/img/[^"]+)"', to_data_src, html)
+    html = re.sub(r'\ssrc="(assets/img/[^"]+)"', lambda m: asrc(m.group(1)), html)
+    # SVG <image href> (Hero 1's masked heading): the start-up script writes it back as href
+    html = re.sub(r'(<image\b[^>]*?)\shref="(assets/img/[^"]+)"', lambda m: m.group(1) + asrc(m.group(2)), html)
     # paths that appear in JSON or that scripts build at run time
     for p in re.findall(r'assets/img/[A-Za-z0-9_./-]+\.(?:webp|png|jpg)', html):
         used.add(norm(p))
@@ -128,7 +130,7 @@ function url(p){if(!p)return p;var k=p.replace(/^\\.\\//,'');if(U[k])return U[k]
 U[k]=URL.createObjectURL(new Blob([a],{type:M[k]||'image/webp'}));return U[k];}
 function fill(root){if(!root)return;var list=[];if(root.nodeType===1&&(root.hasAttribute('data-asrc')||(root.tagName==='IMG'&&/^assets\\//.test(root.getAttribute('src')||''))))list.push(root);
 if(root.querySelectorAll)list=list.concat([].slice.call(root.querySelectorAll('[data-asrc],img[src^="assets/"]')));
-list.forEach(function(el){var p=el.getAttribute('data-asrc')||el.getAttribute('src');el.removeAttribute('data-asrc');el.setAttribute('src',url(p));});}
+list.forEach(function(el){var p=el.getAttribute('data-asrc')||el.getAttribute('src');el.removeAttribute('data-asrc');el.setAttribute(el.tagName==='image'?'href':'src',url(p));});}
 window.__apUrl=url;window.__apAsset=fill;fill(document);})();</script>
 '''
     asset_tag = '<script type="application/json" id="ap-assets">' + json.dumps({'t': types, 'd': table}, separators=(',', ':')) + '</script>\n'

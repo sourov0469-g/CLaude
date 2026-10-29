@@ -249,73 +249,103 @@
      ======================================================================================== */
   const V = {};
 
-  /* HERO 1: Q38 SVG mask transitions / R6 blinds (30 slits, stagger 0.02): the after photo installs over the before
-     in lap courses, bottom-up. Played once on load, not scrubbed (F17: no scroll gate), 0.6 s per course so the whole
-     reveal lands in about 1.2 s; pointer depth from fx.js (S1330); scroll parallax 0.18 (S1321) */
+  /* HERO 1: [BANK] Q95 Masked Heading. The headline is a clipPath of text and the Rob Roy after photo shows through
+     it: every letter is a window onto the finished wall, with a grille and a sill drawn over the glass. Q95's rise
+     reveal (cut to 0.3 s, stagger 0.05, F17), its pointer parallax (26) and drift (18) move the photo inside the
+     glyphs; fine pointers only for the parallax, nothing moves under reduced motion. Words are split at run time
+     from the measured layout so the clip and the casing rise together. */
   V.hero1 = (r, b) => {
-    const fr = $('.h1-frame', r), crs = $$('.crs', fr), btn = $('.h1-replay', r);
-    const order = crs.slice().reverse();
-    const shut = 'inset(0% 100% 0% 0%)', open = 'inset(0% 0% 0% 0%)';
-    const laps = $$('.h1-c', fr).reverse();
-    // v4: each course lands with its own lap shadow line and two nail heads, then the lines fade back into the photo
-    const nails = delay => laps.forEach((g, i) => {
-      G.timeline({ delay: delay + i * 0.02 + 0.42 }).fromTo(g, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.12, ease: 'none' })
-        .fromTo($$('.h1-n', g), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'back.out(1.7)', stagger: 0.05 }, 0)
-        .to(g, { autoAlpha: 0, duration: 0.6, ease: 'power2.in' }, 1.1 + (29 - i) * 0.01);
+    riseIn($$('.pstrip, .h1m-foot > *', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
+    const sills = svg => $$('.h1m-case text', svg).forEach((t, i) => {     // each sill runs under its own line only
+      const p = $$('.h1m-sill path', svg)[i], x = +t.getAttribute('x'), y = p.getAttribute('d').split(' ')[1].split('H')[0];
+      p.setAttribute('d', `M${x} ${y}H${(x + t.getComputedTextLength()).toFixed(0)}`);
     });
-    const play = delay => { nails(delay); return G.fromTo(order, { clipPath: shut }, { clipPath: open, duration: 0.6, ease: 'power3.out', stagger: 0.02, delay, overwrite: true }); };
-    if (!motionOK()) { btn.hidden = true; return; }
-    G.set(order, { clipPath: shut });
-    play(0.35);
-    G.from($('.h1-b', fr), { scale: 1.04, duration: 1.2, ease: ease.x });
-    riseIn($$('.pstrip, .lead, .ctas', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
-    b.on(btn, 'click', () => { G.set(order, { clipPath: shut }); play(0.1); });
-    if (mqDesk.matches && ST) G.to($$('.h1-b, .h1-courses', fr), { yPercent: 9, ease: 'none', scrollTrigger: { trigger: r, start: 'top top', end: 'bottom top', scrub: 1.2 } });
+    const NS = 'http://www.w3.org/2000/svg';
+    const words = svg => {
+      const out = [], clips = $$('clipPath text', svg), solids = $$('.h1m-solid text', svg);
+      $$('.h1m-case text', svg).forEach((line, li) => {
+        const clip = clips[li], solid = solids[li];
+        let at = 0;
+        $$('tspan', line).forEach(ts => {
+          const x = line.getStartPositionOfChar(at).x, y = line.getAttribute('y');
+          at += ts.textContent.length + 1;
+          const trio = [line, clip, solid].map(src => {
+            const t = d.createElementNS(NS, 'text');
+            t.setAttribute('class', src.getAttribute('class')); t.setAttribute('x', x.toFixed(1)); t.setAttribute('y', y); t.textContent = ts.textContent;
+            src.parentNode.insertBefore(t, src); return t;
+          });
+          out.push(trio);
+        });
+        [line, clip, solid].forEach(n => n.remove());
+      });
+      return out;
+    };
+    const start = () => {
+      $$('.h1m-svg', r).forEach(svg => {
+        if (!svg.getBoundingClientRect().width) return;             // the other breakpoint's copy stays whole
+        sills(svg);
+        if (!motionOK()) return;
+        const fs = parseFloat(svg.style.getPropertyValue('--fs')) || 100;
+        words(svg).forEach((trio, k) => G.from(trio, { y: fs * 0.55, duration: 0.3, ease: 'power3.out', delay: 0.1 + k * 0.05 }));
+        G.from($$('.h1m-sill path', svg), { scaleX: 0, transformOrigin: '0 50%', duration: 0.3, ease: 'power2.out', stagger: 0.05, delay: 0.3 });
+        const par = $('.h1m-par', svg), img = $('.h1m-img', svg);
+        const drift = G.to(img, { x: 18, y: -9, duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true });
+        b.io(svg, ([en]) => { en.isIntersecting ? drift.play() : drift.pause(); });
+        if (mqFine.matches) {
+          const qx = G.quickTo(par, 'x', { duration: 0.6, ease: 'power3.out' }), qy = G.quickTo(par, 'y', { duration: 0.6, ease: 'power3.out' });
+          b.on(r, 'pointermove', e => { const rc = svg.getBoundingClientRect(); qx(((e.clientX - rc.left) / rc.width - 0.5) * -52); qy(((e.clientY - rc.top) / rc.height - 0.5) * -52); });
+          b.on(r, 'pointerleave', () => { qx(0); qy(0); });
+        }
+      });
+    };
+    (d.fonts && d.fonts.ready ? d.fonts.ready : Promise.resolve()).then(() => { if (r.isConnected) start(); });
   };
 
-  /* HERO 2: Stronghold crown 1. The proof strip sits above the headline and the hero is step one of the quote:
-     four real job photos as project cards; picking one opens step two in place with that trade's published median
-     band, middle half and monthly estimate, and a booking button already set to the trade (Neil Kelly picker).
-     CSS motion only at Stronghold's dose (0.15-0.28 s). Without JS the cards are links to the services section. */
+  /* HERO 2: Stronghold crown 1 + Neil Kelly's picker. The proof strip sits above the headline and the hero is step
+     one of the quote: four real job photos, each with a drawn house locating its trade. Picking one opens step two in
+     place: the trade's published median band, middle half and monthly estimate, and a booking button set to the
+     trade. Step change at Stronghold's dose (0.24 s CSS). Without JS the cards are links to the services index. */
   V.hero2 = (r, b) => {
-    const T = JSON.parse($('.h2-data', r).textContent), step1 = $('.h2-step1', r), res = $('.h2-res', r);
-    const f = k => $(`[data-f="${k}"]`, res);
+    const T = JSON.parse($('.h2-data', r).textContent), s1 = $('.h2-s1', r), s2 = $('.h2-s2', r);
+    const f = k => $(`[data-f="${k}"]`, s2);
     let from = null;
     const open = c => {
       const t = T[c.dataset.t]; from = c;
       const im = f('img'); im.src = AU(t.img); im.alt = t.alt;
       ['name', 'n', 'med', 'mid', 'mo', 'cap'].forEach(k => { f(k).textContent = t[k]; });
-      const band = f('band'), X = v => 10 + v / 50 * 480;   // the median band slides along the tape blade
-      band.setAttribute('x', X(t.lo).toFixed(1)); band.setAttribute('width', (X(t.hi) - X(t.lo)).toFixed(1));
+      $('.h2-loc-l', s2).dataset.zone = t.zone;
       const bk = f('book'); bk.dataset.trade = t.book; bk.textContent = `Book a free ${t.name.toLowerCase()} inspection`;
-      step1.hidden = true; res.hidden = false; r.dataset.step = '2';
+      s1.hidden = true; s2.hidden = false; r.dataset.step = '2';
       f('head').focus({ preventScroll: true });
-      if (res.getBoundingClientRect().top < hdH()) goTo(r);
+      if (s2.getBoundingClientRect().top < hdH()) goTo(r);
     };
-    $$('.h2c', r).forEach(c => b.on(c, 'click', e => { e.preventDefault(); open(c); }));
-    b.on(f('back'), 'click', () => { res.hidden = true; step1.hidden = false; r.dataset.step = '1'; if (from) from.focus({ preventScroll: true }); });
-    riseIn($$('.pstrip, .lead, .h2-step1 > .h2-k, .h2-cards > li, .h2-more', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
+    $$('.h2p', r).forEach(c => b.on(c, 'click', e => { e.preventDefault(); open(c); }));
+    b.on(f('back'), 'click', () => { s2.hidden = true; s1.hidden = false; r.dataset.step = '1'; if (from) from.focus({ preventScroll: true }); });
+    riseIn($$('.pstrip, .lead, .h2-s1 > .h2-k, .h2-grid > li, .h2-more', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
   };
 
-  /* HERO 3: Feldco crown 2, as R33 poster frames (the live site's film can't be verified as the firm's job, so
-     photographs carry it): five job photos cross-fade every 5 s with a slow settle; the chip names place, month and
-     trades. Runs only while in view and the tab is visible, with a pause button (WCAG 2.2.2); still under reduced
-     motion. The stat band counts up once in trade units (R20). */
+  /* HERO 3: [BANK] Feldco crown 2 as R33 poster frames, picked by the visitor: five job tabs set the photo (0.3 s
+     cross-fade, no autoplay, so nothing moves unless asked); the yard sign carries place, trades and month and sways
+     once on its stakes when the job changes. The stat row is static, in trade units. Tabs follow the APG pattern. */
   V.hero3 = (r, b) => {
-    const fr = $$('.h3f', r), C = JSON.parse($('.h3-data', r).textContent), cap = $('[data-h3-cap]', r), no = $('[data-h3-no]', r), pz = $('.h3-pause', r);
-    let k = 0, t = 0, vis = false, paused = !motionOK();
-    const glint = $('.h3-glint', r);
-    const sweep = () => { if (!motionOK() || !glint) return; const w = r.querySelector('.h3-panel').offsetWidth; G.fromTo(glint, { x: -w * 0.3, opacity: 1 }, { x: w * 1.1, duration: 0.65, ease: 'power2.inOut', onComplete: () => G.set(glint, { opacity: 0 }) }); };
-    const show = n => { fr[k].classList.remove('on'); k = (n + fr.length) % fr.length; fr[k].classList.add('on'); cap.textContent = C[k]; no.textContent = String(k + 1).padStart(2, '0'); sweep(); };
-    const run = () => { clearInterval(t); t = 0; if (vis && !paused && !d.hidden) t = setInterval(() => show(k + 1), 5000); };
-    const label = () => { pz.setAttribute('aria-pressed', paused); pz.textContent = paused ? 'Play' : 'Pause'; };
-    b.io(r, ([en]) => { vis = en.isIntersecting; run(); });
-    b.on(d, 'visibilitychange', run);
-    b.on(pz, 'click', () => { paused = !paused; label(); run(); });
-    label();
-    b.add(() => clearInterval(t));
-    countUp($$('.h3-stats b', r), { delay: 0.4 });
-    riseIn($$('.h3-copy > .pstrip, .h3-date, .h3-copy > .lead, .h3-copy > .ctas', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
+    const tabs = $$('.h3-tab', r), ph = $$('.h3-ph', r), C = JSON.parse($('.h3-data', r).textContent), sign = $('.h3-sign', r), pane = $('#h3p', r);
+    const put = k => $$('[data-s]', sign).forEach(el => { el.textContent = C[k][el.dataset.s]; });
+    let cur = 0;
+    const pick = (k, focus) => {
+      if (k === cur) return;
+      tabs.forEach((t, i) => { const on = i === k; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+      if (focus) tabs[k].focus();
+      pane.setAttribute('aria-labelledby', tabs[k].id);
+      ph[cur].classList.remove('on'); ph[k].classList.add('on'); cur = k; put(k);
+      if (motionOK()) G.fromTo(sign, { rotation: k % 2 ? -2.4 : 2.4 }, { rotation: 0, duration: 0.3, ease: 'back.out(3)', transformOrigin: '50% 100%', overwrite: true });
+    };
+    tabs.forEach((t, i) => b.on(t, 'click', () => pick(i)));
+    b.on($('.h3-tabs', r), 'keydown', e => {
+      const n = { ArrowRight: cur + 1, ArrowLeft: cur - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (n === undefined) return;
+      e.preventDefault(); pick((n + tabs.length) % tabs.length, true);
+    });
+    riseIn($$('.h3-txt > *:not(h1), .h3-sign, .h3-pick, .h3-stats li', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
   };
 
   /* PROOF 1: #317 Digital Butlers "Proof, not promises": the counts, with the map's own arithmetic printed under

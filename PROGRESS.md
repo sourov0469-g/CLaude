@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 0, setup (in progress)
+- **Phase:** 2, rebuilds (Hero done)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -84,8 +84,8 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 ## Open issues (carried from AUDIT-V3.md; each must close with a reason)
 
 - [ ] **F1 · 886 wording.** See K1.
-- [ ] **F2 · No Texas licence line in the first screen** (anatomy F11).
-- [ ] **F3 · Hero 1 blinds** (Q38/R6 Tier 3, a 1.2 s reveal on load).
+- [x] **F2 · No Texas licence line in the first screen** (anatomy F11). CLOSED, not added: Texas issues no state contractor licence for siding, window or roofing work and the firm publishes none, so any number would be invented (§3). The first screen carries rating, review count, installer tiers and since-year (the proof strip in all three heroes).
+- [x] **F3 · Hero 1 blinds** (Q38/R6 Tier 3, a 1.2 s reveal on load). CLOSED: Hero 1 rebuilt from Q95; nothing plays on load beyond the 0.3 s rise.
 - [ ] **F4 · Services 1 and Hero 2 both end in a median price band.**
 - [ ] **F5 · Upload-your-house-photo flagship** (portfolio plan Site 6) is unbuilt.
 - [ ] **F6 · Built 1 and Built 3 both technical drawings.** Carried from AUDIT-V3.
@@ -97,3 +97,5 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 
 ## Log
 - Phase 0 started. Brief saved; baseline recorded; conflicts K1–K9 logged.
+- Phase 0/1 committed (825507d): 20 KEPT, 10 REBUILT recorded in AUDIT-V3 before any rebuild.
+- Hero rebuilt (all three versions). The section test `scratchpad/v5/sect.js` checks switch isolation by node identity, the section's controls, console, overflow and reduced motion. Hero: 9/9 PASS. The packer now carries SVG `<image href>` through the asset table (Hero 1).

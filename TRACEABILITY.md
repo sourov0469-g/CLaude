@@ -91,7 +91,7 @@ Sections are recorded in SECTIONS.md order.
   - M fail: the v4 blinds autoplay a ~1.2 s before/after on load (gate-intro class; flag F3).
   - T fail: a second before/after device outside the signature.
   - T fail: the v4 nail pop duplicated.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `v5/shots/hero1-d/-m.png`, reduced motion `hero1rm-d/-m.png`. Q95 re-checked: clipPath text, photo inside the glyphs, rise 0.3 s / stagger 0.05, parallax ±26, drift 18 (paused off-screen). Fixed during build: a word-split bug left "and" hollow; sills trimmed to each line. `sect.js hero`: switcher swaps only Hero (other stages keep the same node) at 1440, 375 and 1440 reduced motion; console 0; no overflow. Facts grep: "474 Google reviews" is the only review count; `tel:` link present; prices are FACTS medians/middle halves.
 
 **H2 · Pick your project**
 - **Reference:** [BANK] Stronghold Roofing (report Crown 1: proof strip above the headline; the hero is step 1 of the funnel; Atlas A2 + `roofing/structure-uiux/roofing.md` DEEP 1) and [BANK] Neil Kelly (CROWN, interactive project picker; A2 + `remodeling/structure-uiux/general-contractors.md` DEEP 1).
@@ -104,7 +104,7 @@ Sections are recorded in SECTIONS.md order.
   - T fail: the v4 tape blade duplicates Services 3.
   - T fail: the card icon redraw duplicates Services 2.
   - F4: price overlap with Services 1.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `hero2-d/-m.png`, step 2 `hero2s2-d/-m.png`. Card click opens step 2 in place (zone "win", book button set to Windows, focus on the step heading), Back returns focus to the card. No tape, no icon redraw. `sect.js hero`: switcher swaps only Hero (other stages keep the same node) at 1440, 375 and 1440 reduced motion; console 0; no overflow. Facts grep: "474 Google reviews" is the only review count; `tel:` link present; prices are FACTS medians/middle halves.
 
 **H3 · Real work**
 - **Reference:** [BANK] Feldco (siding report Crown 2: real-work hero under a dated superlative; stat row in trade units; A2 + `siding-windows-doors/structure-uiux/siding-windows.md` DEEP 2) and builder brief R33 (poster frames, poster-first).
@@ -117,7 +117,7 @@ Sections are recorded in SECTIONS.md order.
   - T fail: count-up duplicates Proof 1.
   - T fail: casing glint duplicates the Proof field.
   - M fail: a 5 s autoplay crossfade is a second carousel (F17 allows one).
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `hero3-d/-m.png`. Tab click sets photo 3 and the sign (Nov 2024); ArrowRight moves to tab 4 with focus; no timer anywhere. Stats static. Fixed during build: on phones the sign sat over the CTA; it now sits between photo and copy. `sect.js hero`: switcher swaps only Hero (other stages keep the same node) at 1440, 375 and 1440 reduced motion; console 0; no overflow. Facts grep: "474 Google reviews" is the only review count; `tel:` link present; prices are FACTS medians/middle halves.
 
 ### Proof
 

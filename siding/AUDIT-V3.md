@@ -177,3 +177,11 @@ Page systems (entrance timing, reaction kit, companion, cursor effect, section f
 Every section still has three different references (listed at the foot of `TRACEABILITY.md`).
 
 Final verdicts and verification evidence are appended below as each section passes.
+
+### Section results (Phase 2)
+
+**Hero — all three REBUILT, verified 29 Oct 2026.**
+- **Hero 1 "Window letters"** ([BANK] Q95 Masked Heading): the headline is a clipPath of text over the Rob Roy finished wall (a true pair's after photo, shown alone), with a grille and a sill per line. Rise 0.3 s, stagger 0.05; parallax 26 and drift 18. Replaces the 1.2 s blinds (F3 closed).
+- **Hero 2 "Pick your project"** (Stronghold + Neil Kelly): each card locates its trade on a drawn house; step 2 shows the published median band, middle half and monthly estimate. Tape and icon redraw removed. It is now the page's only median-band-by-trade device (F4 closed with Services 1's rebuild).
+- **Hero 3 "Real work"** (Feldco + R33): the visitor picks the job; the caption sits on a drawn yard sign that sways once on change. Static trade-unit stats. No autoplay, no count-up, no glint.
+- **Evidence:** `sect.js` PASS for all three at 1440, 375 and reduced motion; console 0; no overflow; facts grep clean. Screenshots are in the scratchpad `v5/shots`.

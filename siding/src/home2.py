@@ -44,8 +44,9 @@ def mag(html):
 
 
 def ctas(dark=False):
+    """the hero contact paths: book online, or call (K7: the phone sits in every version's contact path)"""
     hero = '<a class="btn btn-red" href="#book" data-book data-cur="hero">Book free inspection</a>'
-    return f'<div class="ctas">{mag(hero)}<a class="tlink{" on-dark" if dark else ""}" href="#work">See the work</a></div>'
+    return f'<div class="ctas">{mag(hero)}<a class="tlink{" on-dark" if dark else ""}" href="{TEL}">Call {PHONE}</a></div>'
 
 
 def alt_btn(href, label, extra=''):
@@ -176,86 +177,89 @@ def pmt(P, apr=0.0799, n=120):
     return P * r / (1 - (1 + r) ** -n)
 
 
-def h1_lap():
-    """one lap shadow line + highlight + two nail heads per course (30 courses, viewBox 1000 x 900)"""
-    g = ''
-    for k in range(30):
-        y = (k + 1) * 30
-        n1, n2 = 70 + (k * 137) % 400, 520 + (k * 211) % 400
-        g += (f'<g class="h1-c"><rect class="h1-sh" x="0" y="{y - 2.6}" width="1000" height="2.6"/><rect class="h1-hi" x="0" y="{y - 4}" width="1000" height="1"/>'
-              f'<ellipse class="h1-n" cx="{n1}" cy="{y - 9}" rx="3.2" ry="3.2"/><ellipse class="h1-n" cx="{n2}" cy="{y - 9}" rx="3.2" ry="3.2"/></g>')
-    return f'<svg class="h1-lap" viewBox="0 0 1000 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">{g}</svg>'
+H1_TEXT = 'Siding and windows, priced in public'
+
+
+def h1_mask(sid, vw, vh, lines, fs, x0, img_box):
+    """Q95 Masked Heading: the headline is a clipPath of text and the after photo of a true pair shows through it, so
+    every letter is a window onto the finished wall. A grille (muntins) and a sill per line are drawn over the glass;
+    a solid copy underneath is the no-JS / pre-load face. lines = [(y, [words])]; img_box = x, y, w, h of the photo."""
+    def txt(cls):
+        return ''.join(f'<text class="{cls}" x="{x0}" y="{y}">' + ' '.join(f'<tspan>{e(w)}</tspan>' for w in ws) + '</text>' for y, ws in lines)
+    ix, iy, iw, ih = img_box
+    sills = ''.join(f'<path d="M{x0} {y + fs * .16:.0f}H{vw - x0}"/>' for y, _ in lines)   # trimmed to each line's measured length at run time
+    return (f'<svg class="h1m-svg h1m-{sid}" viewBox="0 0 {vw} {vh}" style="--fs:{fs}px" aria-hidden="true" focusable="false"><defs>'
+            f'<clipPath id="h1m-c-{sid}">{txt("h1m-t h1m-cl")}</clipPath>'
+            f'<pattern id="h1m-g-{sid}" width="{fs * .5:.0f}" height="{fs * .62:.0f}" patternUnits="userSpaceOnUse"><path d="M0 .5H{fs * .5:.0f}M.5 0V{fs * .62:.0f}"/></pattern></defs>'
+            f'<g class="h1m-solid">{txt("h1m-t")}</g>'
+            f'<g class="h1m-glass" clip-path="url(#h1m-c-{sid})"><g class="h1m-par"><image class="h1m-img" href="{H}../pairs/robroy-ha-1440.webp" x="{ix}" y="{iy}" width="{iw}" height="{ih}" preserveAspectRatio="xMidYMid slice"/></g>'
+            f'<rect class="h1m-grille" width="{vw}" height="{vh}" fill="url(#h1m-g-{sid})"/></g>'
+            f'<g class="h1m-case">{txt("h1m-t")}</g><g class="h1m-sill">{sills}</g></svg>')
 
 
 def hero1():
-    """Q38 SVG mask transitions / R6 blinds (30 slits, stagger 0.02) over a true before/after pair"""
-    rb, ra = f'{H}../pairs/robroy-hb', f'{H}../pairs/robroy-ha'
-    strips = ''.join(f'<i class="crs" style="--k:{k}"><img src="{ra}-1440.webp" srcset="{ra}-760.webp 760w, {ra}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" decoding="async"></i>' for k in range(30))
-    return f'''<div class="v hero-1" data-tone="photo">
-  <figure class="h1-frame" role="img" aria-label="Rob Roy, Austin: {alt(ROB['before']['alt'])}, then {alt(ROB['after']['alt'])}">
-    <div class="h1-photo" data-depth="-1">
-      <img class="h1-b" src="{rb}-1440.webp" srcset="{rb}-760.webp 760w, {rb}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" fetchpriority="high">
-      <div class="h1-courses" aria-hidden="true">{strips}</div>
-      {h1_lap()}
-    </div>
-    <figcaption class="pchip h1-chip" data-depth="0.42"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
-    <button class="h1-replay btn btn-glass btn-sm" type="button" data-cur="link">Re-side it again</button>
-  </figure>
-  <div class="h1-copy" data-depth="0.18">{pstrip()}{H1}{LEAD}{ctas(True)}</div>
+    """[BANK] Q95 Masked Heading: letters as windows onto the Rob Roy finished wall (rise 0.3 s, stagger 0.05,
+    pointer parallax 26, drift 18), proof strip above, lead + both contact paths below"""
+    d = h1_mask('d', 1440, 372, [(150, ['Siding', 'and', 'windows,']), (318, ['priced', 'in', 'public'])], 168, 24, (-989, -573, 2498, 1561))
+    m = h1_mask('m', 375, 330, [(70, ['Siding', 'and']), (146, ['windows,']), (222, ['priced', 'in']), (298, ['public'])], 84, 8, (-369, -181, 931, 582))
+    return f'''<div class="v hero-1" data-tone="ground">
+  <div class="h1m-top">{pstrip()}</div>
+  <h1 class="h1m"><span class="sr-only">{H1_TEXT}</span>{d}{m}</h1>
+  <div class="h1m-foot">
+    <div class="h1m-copy">{LEAD}{ctas()}</div>
+    <p class="h1m-chip"><span>The letters are glazed with one finished wall: Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['installed'])}</b><span>{e(ROB['bl'])} {band(ROB['band'])}</span></p>
+  </div>
 </div>'''
 
 
 H2_TRADES = ['siding', 'windows', 'shingle-roofing', 'exterior-painting']
-H2_ICO = {   # technical line drawings of each trade, 64 x 40 (PLAN H2): lap courses, a double-hung sash, three-tab rows, brush over boards
-    'siding': '<path d="M6 4V38M58 4V38" class="i-trim"/><path d="M6 10H58M6 18H58M6 26H58M6 34H58"/><path class="i-sh" d="M6 12H58M6 20H58M6 28H58M6 36H58"/>',
-    'windows': '<path d="M19 3H45V37H19Z"/><path d="M19 20H45M32 3V20M22 23H42V34H22Z"/><path class="i-trim" d="M14 38H50"/>',
-    'shingle-roofing': '<path d="M3 8H61M3 18H61M3 28H61M3 38H61"/><path d="M13 8V18M33 8V18M53 8V18M23 18V28M43 18V28M13 28V38M33 28V38M53 28V38"/>',
-    'exterior-painting': '<path d="M3 12H61M3 22H61M3 32H61"/><path class="i-paint" d="M6 27C16 24 24 30 34 26"/><path d="M40 3L55 18M37 15L46 24L41 31L30 24Z"/>'
-}
+H2_ZONE = {'siding': 'wall', 'windows': 'win', 'shingle-roofing': 'roof', 'exterior-painting': 'trim'}
 BOOK_AS = {'siding': 'Siding', 'windows': 'Windows', 'shingle-roofing': 'Shingle roofing', 'exterior-painting': 'Exterior painting'}
 
 
-def h2_tape(lo, hi):
-    """a tape blade from $0 to $50k (the firm's own chart axis); the median band is the red run on it"""
-    x = lambda v: 10 + v / 50 * 480
-    t = ''.join(f'<path d="M{x(v):.1f} 8V{18 if v % 5 else 24}"/>' for v in range(51))
-    lab = ''.join(f'<text x="{x(v):.1f}" y="36">{v}k</text>' if v else f'<text x="{x(v):.1f}" y="36">$0</text>' for v in range(0, 51, 10))
-    return (f'<svg class="h2r-tape" viewBox="0 0 500 44" aria-hidden="true" focusable="false"><rect class="tp-blade" x="4" y="4" width="492" height="36" rx="3"/>'
-            f'<rect class="tp-band" data-f="band" x="{x(lo):.1f}" y="6" width="{x(hi) - x(lo):.1f}" height="20"/><g class="tp-ticks">{t}</g><g class="tp-lab">{lab}</g>'
-            f'<path class="tp-hook" d="M4 4V40"/></svg>')
+def locator(zone, cls='h2-loc'):
+    """Neil Kelly picker, drawn: one house elevation, the trade's own part lit (wall courses, glass, shingle rows, trim)"""
+    laps = ''.join(f'<path d="M14 {y}H106"/>' for y in range(52, 92, 6))
+    rows = ''.join(f'<path d="M{18 + k * 4} {40 - k * 6}H{102 - k * 4}"/>' for k in range(4))
+    return (f'<svg class="{cls}" viewBox="0 0 120 100" data-zone="{zone}" aria-hidden="true" focusable="false">'
+            f'<g class="z z-wall"><rect x="14" y="46" width="92" height="46"/>{laps}</g>'
+            f'<g class="z z-roof"><path d="M6 47L60 10L114 47Z"/>{rows}</g>'
+            '<g class="z z-win"><rect x="24" y="56" width="18" height="22"/><path d="M33 56V78M24 67H42"/><rect x="78" y="56" width="18" height="22"/><path d="M87 56V78M78 67H96"/></g>'
+            '<g class="z z-trim"><path d="M6 47L60 10L114 47M14 46V92M106 46V92"/><path d="M22 54H44M76 54H98"/></g>'
+            '<rect class="z-door" x="52" y="62" width="16" height="30"/><path class="z-grade" d="M0 92H120"/></svg>')
 
 
 def hero2():
-    """Stronghold crown 1: proof strip above the headline, the hero is step one of the quote (photo cards); Neil Kelly
-    project picker. Step two shows the trade's published median band, middle half and monthly estimate."""
+    """Stronghold crown 1 (proof strip above the headline; the hero IS step one of the quote) + Neil Kelly's project
+    picker: each card locates its trade on a drawn house; step two opens in place with the trade's published median
+    band, middle half and monthly estimate, and a booking button already set to the trade"""
     data, cards = {}, ''
     for k, s in enumerate(H2_TRADES):
         t = TBY[s]
         lo, hi = t['med']
-        data[s] = dict(lo=lo, hi=hi, name=t['name'], n=f"{t['n']}", med=med(t), mid=f"${t['lo']}k and ${t['hi']}k", mo=f"${pmt(lo * 1000):.0f}-${pmt(hi * 1000):.0f}",
-                       img=tphoto(s), alt=alt(PHOTOS[TRADE_PHOTO[s]]['alt']), cap=tcap(s), book=BOOK_AS[s])
-        cards += (f'<li><a class="h2c" href="#services" data-t="{s}" data-cur="view" data-cur-label="See prices">'
-                  f'{img(tphoto(s), 800, 600, "", "h2c-img", eager=k < 2)}<svg class="h2c-ico" viewBox="0 0 64 40" aria-hidden="true" focusable="false"><rect class="i-bg" x="-6" y="-6" width="76" height="52" rx="10"/>{H2_ICO[s].replace("<path", "<path pathLength=\"1\"")}</svg><span class="h2c-n">{t["name"]}</span>'
-                  f'<span class="h2c-go">See the price range</span></a></li>')
+        data[s] = dict(name=t['name'], n=f"{t['n']}", med=med(t), mid=f"${t['lo']}k and ${t['hi']}k", mo=f"${pmt(lo * 1000):.0f}-${pmt(hi * 1000):.0f}",
+                       img=tphoto(s), alt=alt(PHOTOS[TRADE_PHOTO[s]]['alt']), cap=tcap(s), book=BOOK_AS[s], zone=H2_ZONE[s])
+        cards += (f'<li><a class="h2p" href="#services" data-t="{s}" data-cur="view" data-cur-label="See prices">'
+                  f'{img(tphoto(s), 800, 600, "", "h2p-img", eager=k < 2)}<span class="h2p-plate">{locator(H2_ZONE[s])}'
+                  f'<span class="h2p-n">{t["name"]}</span><span class="h2p-go">What it costs</span></span></a></li>')
     f = data['siding']
     js = json.dumps(data).replace('</', '<\\/')
     return f'''<div class="v hero-2" data-tone="ground" data-step="1">
   <div class="h2-top">{pstrip()}{H1}<p class="lead">886 documented jobs around Austin, each with its real price. Pick your project to see what it usually costs.</p></div>
-  <div class="h2-step1">
-    <p class="h2-k"><span class="h2-steps" aria-hidden="true"><i class="on"></i><i></i></span>Step 1 of 2: pick your project</p>
-    <ul class="h2-cards">{cards}</ul>
-    <p class="h2-more">Gutters, doors, patio covers, metal roofing, decking or storm damage? <a href="#services">See all eleven trades</a>. One free inspection covers every trade on the house, or call <a href="tel:{TEL}">{PHONE}</a>.</p>
+  <div class="h2-s1">
+    <p class="h2-k"><span class="h2-pips" aria-hidden="true"><i class="on"></i><i></i></span>Step 1 of 2: pick your project</p>
+    <ul class="h2-grid">{cards}</ul>
+    <p class="h2-more">Gutters, doors, patio covers, metal roofing, decking or storm damage? <a href="#services">See all eleven trades</a>. One free inspection covers every trade on the house, or call <a href="{TEL}">{PHONE}</a>.</p>
   </div>
-  <div class="h2-res" hidden>
-    <figure class="h2r-fig"><img data-f="img" src="{f['img']}" width="800" height="600" alt="{f['alt']}" loading="lazy" decoding="async"><figcaption class="h2r-cap" data-f="cap">{e(f['cap'])}</figcaption></figure>
-    <div class="h2r-copy">
-      <p class="h2-k"><span class="h2-steps" aria-hidden="true"><i class="on"></i><i class="on"></i></span>Step 2 of 2</p>
-      <h2 class="h2r-h" tabindex="-1" data-f="head"><span data-f="name">{f['name']}</span>: what Austin Pro jobs cost</h2>
-      <p class="h2r-med"><span>Median job, from <b data-f="n">{f['n']}</b> priced jobs</span><b class="num" data-f="med">{f['med']}</b></p>
-      {h2_tape(f['lo'], f['hi'])}
-      <p class="h2r-mid">Half of them landed between <span data-f="mid">{f['mid']}</span>. Materials and labour, before discounts and tax.</p>
-      <p class="h2r-mo">About <b data-f="mo">{f['mo']}</b> a month at 7.99% APR over 120 months, on approved credit.</p>
-      <div class="h2r-cta"><a class="btn btn-red" href="#book" data-book data-trade="{f['book']}" data-cur="hero" data-f="book">Book a free siding inspection</a><button class="tlink h2r-back" type="button" data-f="back">Pick another project</button></div>
+  <div class="h2-s2" hidden>
+    <figure class="h2-fig"><img data-f="img" src="{f['img']}" width="800" height="600" alt="{f['alt']}" loading="lazy" decoding="async"><figcaption class="h2-cap" data-f="cap">{e(f['cap'])}</figcaption></figure>
+    <div class="h2-ans">
+      <p class="h2-k"><span class="h2-pips" aria-hidden="true"><i class="on"></i><i class="on"></i></span>Step 2 of 2</p>
+      <h2 class="h2-ah" tabindex="-1" data-f="head"><span data-f="name">{f['name']}</span>: what Austin Pro jobs cost</h2>
+      <div class="h2-row">{locator(f['zone'], 'h2-loc h2-loc-l')}<p class="h2-med"><span>Median job, from <b data-f="n">{f['n']}</b> priced jobs</span><b class="num" data-f="med">{f['med']}</b></p></div>
+      <p class="h2-mid">Half of them landed between <span data-f="mid">{f['mid']}</span>. Materials and labour, before discounts and tax.</p>
+      <p class="h2-mo">About <b data-f="mo">{f['mo']}</b> a month at 7.99% APR over 120 months, on approved credit.</p>
+      <div class="h2-cta"><a class="btn btn-red" href="#book" data-book data-trade="{f['book']}" data-cur="hero" data-f="book">Book a free siding inspection</a><a class="tlink" href="{TEL}">Call {PHONE}</a><button class="tlink h2-back" type="button" data-f="back">Pick another project</button></div>
     </div>
   </div>
   <script type="application/json" class="h2-data">{js}</script>
@@ -265,31 +269,39 @@ def hero2():
 H3F = [3, 15, 41, 18, 37]
 
 
+def yard_sign():
+    """the job caption hangs on a drawn yard sign: board, wire frame, two stakes in the grass"""
+    return ('<svg class="h3-sign-svg" viewBox="0 0 300 170" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+            '<path class="ys-stake" d="M70 120V170M230 120V170"/><path class="ys-wire" d="M62 120V8H238V120"/>'
+            '<rect class="ys-board" x="4" y="4" width="292" height="120" rx="6"/><rect class="ys-band" x="4" y="4" width="292" height="22" rx="6"/>'
+            '<path class="ys-grass" d="M40 170C48 160 52 158 56 150M58 170C60 162 66 156 72 154M84 170C82 162 84 156 90 150M214 170C216 160 222 156 226 152M234 170C236 162 242 158 248 154M252 170C252 164 256 158 262 156"/></svg>')
+
+
 def hero3():
-    """Feldco crown 2: hero media of real work under a dated line + a stat row in trade units counting up (R33 poster
-    frames; R20). Photos, not the live site's film (FACTS: the film cannot be verified as an Austin Pro job)."""
-    frames = ''.join(f'<img class="h3f{" on" if k == 0 else ""}" src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{alt(PHOTOS[i]["alt"])}" '
-                     + ('fetchpriority="high"' if k == 0 else 'loading="lazy"') + ' decoding="async">' for k, i in enumerate(H3F))
-    caps = [f"{PHOTOS[i]['place']}, {PHOTOS[i]['when']}. {PHOTOS[i]['trades']}" for i in H3F]
-    stats = [('5,000+', 'Central Texas homeowners served'), ('431', 'siding jobs documented'), ('388', 'window jobs documented'),
-             ('210', 'shingle roofs documented'), ('4.9', 'on 474 Google reviews')]
-    board = ('<svg class="h3-board" viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
-             '<path class="bd-grain" d="M0 30C40 26 80 34 120 29S180 31 200 28M0 52C50 48 90 56 140 50S190 53 200 51M0 72C30 70 70 76 110 71S170 74 200 72"/>'
-             '<rect class="bd-sh" y="90" width="200" height="10"/><rect class="bd-hi" y="0" width="200" height="2"/><ellipse class="bd-n" cx="12" cy="12" rx="2.4" ry="4.8"/><ellipse class="bd-n" cx="188" cy="12" rx="2.4" ry="4.8"/></svg>')
-    li = ''.join(f'<li>{board}<b class="num">{n}</b><span>{e(t)}</span></li>' for n, t in stats)
+    """[BANK] Feldco crown 2 (real-work hero under a dated line, a stat row in trade units) as R33 poster frames that
+    the VISITOR picks: five job tabs set the photo (no autoplay); the caption is a yard sign; stats are static"""
+    tabs, panels = '', ''
+    for k, i in enumerate(H3F):
+        p = PHOTOS[i]
+        on = k == 0
+        tabs += (f'<button class="h3-tab" type="button" role="tab" id="h3t{k}" aria-controls="h3p" aria-selected="{"true" if on else "false"}" tabindex="{0 if on else -1}" '
+                 f'data-k="{k}" aria-label="{e(p["place"])}, {p["when"]}"><img src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="" loading="lazy" decoding="async"><span>{e(p["place"].split(",")[0])}</span></button>')
+        panels += (f'<img class="h3-ph{" on" if on else ""}" src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{alt(p["alt"]) or e(p["trades"] + " at a home in " + p["place"])}" '
+                   + ('fetchpriority="high"' if on else 'loading="lazy"') + ' decoding="async">')
+    caps = [dict(place=PHOTOS[i]['place'], when=PHOTOS[i]['when'], trades=PHOTOS[i]['trades']) for i in H3F]
+    c0 = caps[0]
+    stats = [('431', 'siding jobs documented'), ('388', 'window jobs documented'), ('210', 'shingle roofs documented'), ('5,000+', 'Central Texas homeowners served')]
+    li = ''.join(f'<li><b class="num">{n}</b><span>{e(t)}</span></li>' for n, t in stats)
     return f'''<div class="v hero-3" data-tone="ground">
-  <div class="h3-panel">
-    <div class="h3-frames" role="group" aria-label="Five recent Austin Pro jobs">{frames}</div>
-    <svg class="h3-case" aria-hidden="true" focusable="false"><defs><linearGradient id="h3gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
-      <rect class="h3-glint" x="0" y="-20%" width="22%" height="140%" fill="url(#h3gl)"/>
-      <rect class="h3-bead" width="100%" height="100%"/><rect class="h3-casing" width="100%" height="100%"/>
-      <g class="h3-ros"><rect width="30" height="30"/><circle cx="15" cy="15" r="7"/><circle cx="15" cy="15" r="2.5"/></g>
-      <g class="h3-ros" transform="translate(-30 0)"><svg x="100%" overflow="visible"><rect width="30" height="30"/><circle cx="15" cy="15" r="7"/><circle cx="15" cy="15" r="2.5"/></svg></g>
-    </svg>
-    <div class="h3-copy">{pstrip()}<p class="h3-date">Austin's siding, window and roofing crew since 2009</p>{H1}{LEAD}{ctas(True)}</div>
-    <div class="h3-cap"><p class="h3-chip"><span class="num"><b data-h3-no>01</b> of {len(H3F):02d}</span><span data-h3-cap>{e(caps[0])}</span></p><button class="h3-pause btn btn-glass btn-sm" type="button" aria-pressed="false">Pause</button></div>
+  <div class="h3-stage" role="tabpanel" id="h3p" aria-labelledby="h3t0">
+    <div class="h3-photos">{panels}</div>
+    <div class="h3-txt">{pstrip()}<p class="h3-dated">Austin's siding, window and roofing crew since 2009</p>{H1}{LEAD}{ctas(True)}</div>
+    <div class="h3-sign" aria-live="polite">{yard_sign()}<p><b data-s="place">{e(c0['place'])}</b><span data-s="trades">{e(c0['trades'])}</span><span data-s="when">{c0['when']}</span></p></div>
   </div>
-  <ul class="h3-stats" aria-label="Austin Pro in numbers">{li}</ul>
+  <div class="h3-under">
+    <div class="h3-pick"><p class="h3-pl" id="h3pl">Pick a job</p><div class="h3-tabs" role="tablist" aria-labelledby="h3pl">{tabs}</div></div>
+    <ul class="h3-stats" aria-label="Austin Pro work in trade units">{li}</ul>
+  </div>
   <script type="application/json" class="h3-data">{json.dumps(caps)}</script>
 </div>'''
 
@@ -1102,14 +1114,14 @@ def book3():
 
 # ---------- page ----------
 SECTIONS = [
-    ('hero', 'Hero', [hero1, hero2, hero3], ['Courses', 'Pick your project', 'Real work']),
+    ('hero', 'Hero', [hero1, hero2, hero3], ['Window letters', 'Pick your project', 'Real work']),
     ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'At a glance', 'Statement']),
     ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
     ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
     ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Built for Texas', 'To the inch']),
-    ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Paint or ColorPlus', 'Colour book']),
+    ('colour', 'Colour', [colour1, colour2, colour3], ['Try it on your house', 'Paint or ColorPlus', 'Colour book']),
     ('near', 'Near you', [near1, near2, near3], ['Survey', 'Town by town', 'Neighbourhood drive']),
-    ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'Names']),
+    ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'The crew']),
     ('money', 'Money', [money1, money2, money3], ['Amount', 'What people paid', 'Receipt']),
     ('book', 'Book', [book1, book2, book3], ['Call', 'Form', 'One sentence']),
 ]
