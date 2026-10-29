@@ -1278,8 +1278,8 @@ html.has-pal .cur { display: none; }
 .f-chip.is-face { stroke-opacity: .32; }
 .f-punch { fill: currentColor; fill-opacity: .14; }
 .f-chips { opacity: .9; }
-.f-lot { fill: none; stroke: currentColor; stroke-opacity: .06; stroke-dasharray: 6 5; }
-.f-roof { fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .16; }
+.f-lot { fill: none; stroke: currentColor; stroke-opacity: .04; stroke-dasharray: 6 5; }
+.f-roof { fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .08; }
 .f-ridge { stroke: var(--red); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
 .f-stile { fill: none; stroke: currentColor; stroke-opacity: .12; stroke-width: 1.5; }
 .f-slat { fill: currentColor; fill-opacity: .085; }
@@ -1508,3 +1508,15 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .cbl-hi { fill: #fff; opacity: .28; }
 .cbl-sh { fill: #000; opacity: .2; }
 .cbl-g { fill: none; stroke: var(--ink); stroke-opacity: .12; vector-effect: non-scaling-stroke; }
+
+/* ---------- v4 Near (PLAN §3 Near) ---------- */
+.mx-sky { display: grid; gap: 6px; margin-bottom: 12px; }
+.mx-sky svg { display: block; max-width: 100%; height: auto; overflow: visible; }
+.mx-sky path { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; }
+.mx-sky path:nth-child(5n+1) { fill: var(--red); stroke: var(--red-d); }
+.mx-sky span { color: var(--fg2); font-size: .8125rem; }
+.n1-xh { pointer-events: none; }
+.n1-xh line { stroke: #F3F2EE; stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.n1-xh .xh-c { fill: none; stroke: #F3F2EE; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.n1-xh .xh-r { stroke: var(--red-on-night); stroke-width: 1.6; stroke-dasharray: none; }
+.n1-xh text { font: 700 11px var(--f); fill: #F3F2EE; paint-order: stroke; stroke: #141414; stroke-width: 3px; }

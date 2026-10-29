@@ -635,7 +635,7 @@
           if (inside) { const dist = Math.hypot(F.lp.x - (L.x + pan), F.lp.y - (L.y + pan * 0.6)); t = dist < 120 ? 1 : dist < 200 ? 1 - (dist - 120) / 80 : 0; }
           if (Math.abs(t - L.k) > 0.003) {
             L.k += (t - L.k) * a; busy = true;
-            L.u.style.opacity = (0.16 + L.k * 0.5).toFixed(3);
+            L.u.style.opacity = (0.08 + L.k * 0.52).toFixed(3);
             L.ridge.style.strokeDashoffset = (1 - L.k).toFixed(3);
           }
         }

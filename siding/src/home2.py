@@ -785,11 +785,14 @@ def near2():
         ph = [i for i, p in enumerate(PHOTOS) if town_of(p['place']) == town][:3]
         pics = ''.join(f'<li><img src="{H}t/p{i}-320.webp" width="320" height="240" alt="{alt(PHOTOS[i]["alt"])}" loading="lazy" decoding="async"><span>{e(PHOTOS[i]["place"])}, {e(PHOTOS[i]["when"])}</span></li>' for i in ph)
         note = f'<p class="mx-note">{e(f["note"])}</p>' if f.get('note') else ''
+        nh = max(1, round(docs.get(town, 0) / 10)) if isinstance(docs.get(town), int) else 0
+        sky = ''.join(f'<path d="M{i * 12} 30V{18 - (i * 7) % 5}L{i * 12 + 5} {13 - (i * 7) % 5}L{i * 12 + 10} {18 - (i * 7) % 5}V30Z"/>' for i in range(nh))
+        sky_svg = f'<div class="mx-sky"><svg viewBox="0 0 {max(nh * 12, 12)} 30" width="{max(nh * 12, 12)}" height="30" aria-hidden="true" focusable="false">{sky}</svg><span>{nh} {"house" if nh == 1 else "houses"}, one per ten documented jobs</span></div>' if nh else ''
         rows += f'''<li class="mx-r">
       <button class="mx-row" type="button" aria-expanded="false" aria-controls="mx-{k}">
         <span class="mx-t">{e(town)}</span><span class="mx-c mx-d"><span class="sr-only">Documented jobs in the project finder: </span><b class="num">{docs.get(town, '-')}</b></span>
         {cell(f.get('sid'), 'Siding')}{cell(f.get('win'), 'Windows')}<i class="mx-x" aria-hidden="true"></i></button>
-      <div class="mx-more" id="mx-{k}" inert><div class="mx-in">{note}{f'<ul class="mx-pics">{pics}</ul>' if pics else '<p class="mx-note">No photographed jobs from here published yet.</p>'}
+      <div class="mx-more" id="mx-{k}" inert><div class="mx-in">{sky_svg}{note}{f'<ul class="mx-pics">{pics}</ul>' if pics else '<p class="mx-note">No photographed jobs from here published yet.</p>'}
         <a class="tlink" href="#book" data-book>Book a free inspection in {e(town)}</a></div></div>
     </li>'''
     return f'''<div class="v near-2" data-tone="ground">

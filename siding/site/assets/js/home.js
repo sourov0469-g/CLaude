@@ -930,6 +930,31 @@
     Finder($('[data-finder]', r), M, 3, b);
     tips(svg, $('.m-tip', r), b);
     if (mqFine.matches) surveyTrail($('.n1-map', r), $('.n1-trail', r), b);
+    /* v4 surveyor's crosshair: follows the pointer over the map and reads the straight-line distance to the office
+       on the firm's own map scale (8.3 px per mile); a tap places it on touch */
+    {
+      const NSV = 'http://www.w3.org/2000/svg', HQ = DATA.map.hq, PPM = DATA.map.ppm, g = d.createElementNS(NSV, 'g');
+      g.setAttribute('class', 'n1-xh'); g.style.display = 'none';
+      g.innerHTML = '<line class="xh-h" x1="0" x2="566"/><line class="xh-v" y1="0" y2="640"/><line class="xh-r"/><circle class="xh-c" r="9"/><text class="xh-t"></text>';
+      svg.appendChild(g);
+      const [h, v, ray, c, t] = Array.from(g.children);
+      const place = e => {
+        const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+        const m = svg.getScreenCTM(); if (!m) return;
+        const q = pt.matrixTransform(m.inverse());
+        if (q.x < 0 || q.y < 0 || q.x > 566 || q.y > 640) { g.style.display = 'none'; return; }
+        g.style.display = '';
+        h.setAttribute('y1', q.y); h.setAttribute('y2', q.y); v.setAttribute('x1', q.x); v.setAttribute('x2', q.x);
+        c.setAttribute('cx', q.x); c.setAttribute('cy', q.y);
+        ray.setAttribute('x1', HQ[0]); ray.setAttribute('y1', HQ[1]); ray.setAttribute('x2', q.x); ray.setAttribute('y2', q.y);
+        const mi = Math.hypot(q.x - HQ[0], q.y - HQ[1]) / PPM;
+        t.textContent = mi < 0.5 ? 'At the office' : `${mi.toFixed(1)} mi from the office`;
+        t.setAttribute('x', q.x + 14 > 470 ? q.x - 120 : q.x + 14); t.setAttribute('y', q.y - 12);
+      };
+      b.on(svg, 'pointermove', place); b.on(svg, 'pointerdown', place);
+      b.on(svg, 'pointerleave', e => { if (e.pointerType === 'mouse') g.style.display = 'none'; });
+      b.add(() => g.remove());
+    }
     if (!motionOK() || !ST) return;
     const months = Array.from(new Set(PINS.map(p => p[2])));
     M.pins.forEach(c => c.classList.add('off'));
@@ -953,7 +978,11 @@
     const rows = $$('.mx-r', r);
     rows.forEach(li => {
       const btn = $('.mx-row', li), more = $('.mx-more', li);
-      b.on(btn, 'click', () => { const on = btn.getAttribute('aria-expanded') !== 'true'; btn.setAttribute('aria-expanded', on); li.classList.toggle('is-open', on); more.inert = !on; });
+      b.on(btn, 'click', () => {
+        const on = btn.getAttribute('aria-expanded') !== 'true'; btn.setAttribute('aria-expanded', on); li.classList.toggle('is-open', on); more.inert = !on;
+        // v4: the town's skyline rises, one house per ten documented jobs
+        if (on && motionOK()) { const hs = $$('.mx-sky path', li); if (hs.length) G.fromTo(hs, { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.3, ease: 'back.out(1.5)', stagger: { amount: 0.5 } }); }
+      });
     });
     if (motionOK()) G.from(rows, { y: 14, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.mx-list', r), 'top 85%') });
   };
