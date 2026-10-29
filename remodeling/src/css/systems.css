@@ -28,7 +28,7 @@
 [data-motion="off"] .buddysw { display: none; }
 
 /* ---------- button reactions: the drawn tools sit round the button; the button never moves ---------- */
-.has-rx { position: relative; overflow: visible; isolation: isolate; }
+:where(.has-rx) { position: relative; overflow: visible; isolation: isolate; }   /* zero specificity: a component that positions itself (skip link, sticky bars) keeps its own position */
 .has-rx > .btn__label, .has-rx > .rx-l, .has-rx > .rx-c { position: relative; z-index: 1; }
 .rx {
   position: absolute; left: -36px; top: -36px; z-index: 0;

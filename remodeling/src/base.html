@@ -26,60 +26,60 @@
 </script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-rx="~ladder/drop/hop/r">Skip to content</a>
 
 <header class="nav" id="nav">
   <div class="nav__in">
-    <a class="nav__logo" href="#top" aria-label="Elbaz Construction, back to top" data-cursor="link">
+    <a class="nav__logo" href="#top" aria-label="Elbaz Construction, back to top" data-rx="~crane/hoist/wobble/r">
       <img src="{{LOGO_SRC}}" alt="Elbaz Construction" width="720" height="181">
     </a>
     <ul class="nav__links">
-      <li><a href="#services" data-cursor="link">Services</a></li>
-      <li><a href="#work" data-cursor="link">Work</a></li>
-      <li><a href="#process" data-cursor="link">Process</a></li>
-      <li><a href="#financing" data-cursor="link">Financing</a></li>
-      <li><a href="#reviews" data-cursor="link">Reviews</a></li>
+      <li><a href="#services" data-rx="~wrench/swing/wobble/b">Services</a></li>
+      <li><a href="#work" data-rx="~camera/drop/flash/b">Work</a></li>
+      <li><a href="#process" data-rx="~gear/spin/spinout/b">Process</a></li>
+      <li><a href="#financing" data-rx="~coin/jack/hop/b">Financing</a></li>
+      <li><a href="#reviews" data-rx="~star/pop/sparkle/b">Reviews</a></li>
     </ul>
-    <a class="nav__tel nums" href="tel:+17542360675" data-cursor="link">(754)&nbsp;236&#8209;0675</a>
-    <a class="btn btn--call" href="tel:+17542360675" data-rx="handset">Call</a>
+    <a class="nav__tel nums" href="tel:+17542360675" data-rx="~cord/rail/sweep/b">(754)&nbsp;236&#8209;0675</a>
+    <a class="btn btn--call" href="tel:+17542360675" data-rx="~plug/zip/burst/r">Call</a>
     <a class="btn nav__book" href="#consult" data-rx="blueprint">Book a consultation</a>
-    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="sheet">Menu</button>
+    <button class="nav__menu" type="button" data-rx="~toolbox/lid/hop/l" aria-expanded="false" aria-controls="sheet">Menu</button>
   </div>
 </header>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu" hidden>
   <div class="sheet__top">
     <img src="{{LOGO_SRC}}" alt="Elbaz Construction" width="132" height="33">
-    <button class="sheet__close" type="button">Close</button>
+    <button class="sheet__close" type="button" data-rx="~xbrace/spin/ring/l">Close</button>
   </div>
   <ul>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#ba">Before and after</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#financing">Financing</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#towns">Service area</a></li>
+    <li><a href="#services" data-rx="~wrench/tilt/wobble/r">Services</a></li>
+    <li><a href="#ba" data-rx="~swap/hinge/spinout/r">Before and after</a></li>
+    <li><a href="#process" data-rx="~gear/roll/spinout/r">Process</a></li>
+    <li><a href="#financing" data-rx="~coin/bounce/hop/r">Financing</a></li>
+    <li><a href="#work" data-rx="~camera/slide/flash/r">Work</a></li>
+    <li><a href="#reviews" data-rx="~star/neon/sparkle/r">Reviews</a></li>
+    <li><a href="#towns" data-rx="~compass/orbit/spinout/r">Service area</a></li>
   </ul>
   <div class="sheet__settings">
     <fieldset>
       <legend>Theme</legend>
       <div class="seg" data-setting="theme">
-        <button type="button" data-value="evening" aria-pressed="true">Evening</button>
-        <button type="button" data-value="daylight" aria-pressed="false">Daylight</button>
+        <button type="button" data-rx="~moon/peek/wobble/r" data-value="evening" aria-pressed="true">Evening</button>
+        <button type="button" data-rx="~sun/peek/spinout/r" data-value="daylight" aria-pressed="false">Daylight</button>
       </div>
     </fieldset>
     <fieldset>
       <legend>Motion</legend>
       <div class="seg" data-setting="motion">
-        <button type="button" data-value="on" aria-pressed="true">On</button>
-        <button type="button" data-value="off" aria-pressed="false">Off</button>
+        <button type="button" data-rx="~play/unfold/ring/r" data-value="on" aria-pressed="true">On</button>
+        <button type="button" data-rx="~pause/unfold/shake/r" data-value="off" aria-pressed="false">Off</button>
       </div>
     </fieldset>
   </div>
   <div class="sheet__foot">
-    <a class="btn" href="#consult">Book a consultation</a>
-    <a class="btn btn--ghost nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
+    <a class="btn" href="#consult" data-rx="~calendar/drop/tick/r">Book a consultation</a>
+    <a class="btn btn--ghost nums" href="tel:+17542360675" data-rx="~handset/hoist/ring/r">(754)&nbsp;236&#8209;0675</a>
   </div>
 </div>
 
@@ -95,8 +95,8 @@
   <div class="wrap foot__cta">
     <p class="foot__line">Built properly. Permitted correctly.</p>
     <div class="foot__acts">
-      <a class="btn foot__book" href="#consult" data-rx="hardhat"><span class="btn__label">Book a consultation</span></a>
-      <a class="link nums foot__tel" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
+      <a class="btn foot__book" href="#consult" data-rx="~flag/hoist/wobble/tr"><span class="btn__label">Book a consultation</span></a>
+      <a class="link nums foot__tel" href="tel:+17542360675" data-rx="~cord/jack/ring/r">(754)&nbsp;236&#8209;0675</a>
     </div>
   </div>
   <div class="wrap grid12">
@@ -113,16 +113,16 @@
     </div>
     <div class="foot__col">
       <h3>Talk</h3>
-      <a class="nums" href="tel:+17542360675" data-cursor="link">(754)&nbsp;236&#8209;0675</a>
-      <a href="mailto:Sales@elbazconstruction.com" data-cursor="link">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es" data-cursor="link">Español</a>
+      <a class="nums" href="tel:+17542360675" data-rx="~handset/slide/shake/r">(754)&nbsp;236&#8209;0675</a>
+      <a href="mailto:Sales@elbazconstruction.com" data-rx="~envelope/slide/hop/r">Sales@elbazconstruction.com</a>
+      <a href="https://elbazconstructioncorp.com/es/" lang="es" data-rx="~globe/slide/spinout/r">Español</a>
     </div>
     <div class="foot__col">
       <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/" data-cursor="link">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/" data-cursor="link">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/" data-cursor="link">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A" data-cursor="link">YouTube</a>
+      <a href="https://www.instagram.com/elbazconstruction/" data-rx="~camera/peek/flash/r">Instagram</a>
+      <a href="https://www.facebook.com/elbazconstruction/" data-rx="~speech/peek/hop/r">Facebook</a>
+      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/" data-rx="~briefcase/peek/squash/r">LinkedIn</a>
+      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A" data-rx="~play/peek/ring/r">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Counties</h3>
@@ -133,15 +133,15 @@
     <div class="foot__legal">
       <span>Elbaz Construction and Remodeling</span>
       <span>Florida Certified Building Contractor CBC1265280</span>
-      <a class="link" href="https://www.myfloridalicense.com/" data-cursor="link">Verify a Florida licence</a>
+      <a class="link" href="https://www.myfloridalicense.com/" data-rx="~shield/rail/tick/r">Verify a Florida licence</a>
     </div>
   </div>
 </footer>
 
 <nav class="mbar" aria-label="Contact">
-  <a href="tel:+17542360675">Call</a>
-  <a href="sms:+17542360675">Text</a>
-  <a href="#consult" class="mbar__book">Book</a>
+  <a href="tel:+17542360675" data-rx="~handset/tilt/ring/t">Call</a>
+  <a href="sms:+17542360675" data-rx="~speech/tilt/hop/t">Text</a>
+  <a href="#consult" class="mbar__book" data-rx="~calendar/tilt/tick/t">Book</a>
 </nav>
 
 <div class="settings" id="settings">
@@ -149,23 +149,23 @@
     <fieldset>
       <legend>Theme</legend>
       <div class="seg" data-setting="theme">
-        <button type="button" data-value="evening" aria-pressed="true">Evening</button>
-        <button type="button" data-value="daylight" aria-pressed="false">Daylight</button>
+        <button type="button" data-rx="~moon/roll/wobble/l" data-value="evening" aria-pressed="true">Evening</button>
+        <button type="button" data-rx="~sun/roll/spinout/l" data-value="daylight" aria-pressed="false">Daylight</button>
       </div>
     </fieldset>
     <fieldset>
       <legend>Motion</legend>
       <div class="seg" data-setting="motion">
-        <button type="button" data-value="on" aria-pressed="true">On</button>
-        <button type="button" data-value="off" aria-pressed="false">Off</button>
+        <button type="button" data-rx="~play/roll/ring/l" data-value="on" aria-pressed="true">On</button>
+        <button type="button" data-rx="~pause/roll/shake/l" data-value="off" aria-pressed="false">Off</button>
       </div>
     </fieldset>
   </div>
-  <button class="settings__btn" type="button" aria-expanded="false" aria-controls="settings-panel">Settings</button>
+  <button class="settings__btn" type="button" data-rx="~gear/orbit/spinout/l" aria-expanded="false" aria-controls="settings-panel">Settings</button>
 </div>
 
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Project photo" hidden>
-  <button class="viewer__close" type="button">Close</button>
+  <button class="viewer__close" type="button" data-rx="~xbrace/tilt/shake/l">Close</button>
   <img class="viewer__img" alt="">
   <div class="viewer__bar"><p class="viewer__title t-small"></p><p class="viewer__count t-small muted nums"></p></div>
 </div>

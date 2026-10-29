@@ -1,6 +1,6 @@
 /* Elbaz homepage core runtime.
    Image store, section/version manager (the 1·2·3 control), cursor engine with per-element states,
-   magnets, weight lens, Lenis, nav, settings (theme + motion), viewer, lazy Three.js.
+   reactions, weight lens, Lenis, nav, settings (theme + motion), viewer, lazy Three.js.
    Motion values from PLAN §4.4 [S0063 STANDARDS, S0095 §5, S1321, S0652, S1303 §7]. */
 (function () {
   'use strict';
@@ -235,6 +235,9 @@
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
     financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation' };
 
+  // each section's switcher digits arrive by their own carrier, so no two switch buttons react alike [FULL Phase 3]
+  var SW_RX = { hero: 'drop', proof: 'swing', services: 'spin', ba: 'jack', process: 'hinge', financing: 'roll',
+    work: 'lid', reviews: 'zip', towns: 'unfold', consult: 'hoist' };
   function buildSwitch(s) {
     var wrap = doc.createElement('div');
     wrap.className = 'vswitch';
@@ -254,6 +257,7 @@
       b.setAttribute('aria-label', 'Version ' + i);
       b.dataset.v = i;
       b.dataset.cursor = 'link';
+      b.dataset.rx = '~t:' + i + '/' + (SW_RX[s.id] || 'pop') + '/hop/t';
       b.textContent = i;
       inner.appendChild(b);
     }
@@ -357,41 +361,9 @@
   EZ.cursorState = function () { if (EZ.buddy) EZ.buddy.retarget(); };
   EZ.cursorPin = function () {};
 
-  /* ---------- magnets [S0634 magnetic-button, S1321 magnetic .3/.15, S1375 #12 strong] ---------- */
-  var MAG = {
-    wide: { radius: 80, f: .3, fl: .15 },
-    'in': { radius: 0, f: .4, fl: .2 },
-    strong: { radius: 120, f: .35, fl: .18 }
-  };
+  /* ---------- per-element reactions (buttons never move; the old magnets are gone) ---------- */
   function bindMagnets(scope, kit) {
     if (EZ.bindReactions) EZ.bindReactions(scope, kit);
-  }
-  function magnet(el, kit) {
-    var cfg = MAG[el.dataset.magnet] || MAG.wide;
-    var inner = el.querySelector('.btn__label') || null;
-    var qx = gsap.quickTo(el, 'x', { duration: .45, ease: 'power3.out' });
-    var qy = gsap.quickTo(el, 'y', { duration: .45, ease: 'power3.out' });
-    var lx = inner && gsap.quickTo(inner, 'x', { duration: .45, ease: 'power3.out' });
-    var ly = inner && gsap.quickTo(inner, 'y', { duration: .45, ease: 'power3.out' });
-    var active = false;
-    kit.on(window, 'pointermove', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      var r = el.getBoundingClientRect();
-      var cx = r.left + r.width / 2 - (gsap.getProperty(el, 'x') || 0), cy = r.top + r.height / 2 - (gsap.getProperty(el, 'y') || 0);
-      var dx = e.clientX - cx, dy = e.clientY - cy;
-      var inside = Math.abs(dx) < r.width / 2 + cfg.radius && Math.abs(dy) < r.height / 2 + cfg.radius;
-      if (inside) {
-        active = true;
-        qx(dx * cfg.f); qy(dy * cfg.f);
-        if (lx) { lx(dx * cfg.fl); ly(dy * cfg.fl); }
-        if (el.dataset.magnet !== 'in') EZ.cursorPin(cx + dx * cfg.f, cy + dy * cfg.f);
-      } else if (active) {
-        active = false;
-        qx(0); qy(0); if (lx) { lx(0); ly(0); }
-        EZ.cursorPin(null);
-      }
-    }, { passive: true });
-    kit.add(function () { gsap.set([el, inner].filter(Boolean), { x: 0, y: 0 }); if (active) EZ.cursorPin(null); });
   }
 
   /* ---------- weight lens: text responds as the pointer passes [S0652 §8 falloff, S0634 hover-magnetic-text] ---------- */
@@ -483,7 +455,7 @@
     menuBtn.setAttribute('aria-expanded', 'true');
     doc.body.style.overflow = 'hidden';
     if (lenis) lenis.stop();
-    if (EZ.motionOn()) gsap.from(sheet.querySelectorAll('li'), { y: 24, opacity: 0, duration: .5, stagger: .05, ease: 'expo.out' });
+    if (EZ.motionOn()) gsap.from(sheet.querySelectorAll('li'), { y: 16, opacity: 0, duration: .25, stagger: .03, ease: 'power2.out' });
     sheet.querySelector('a, button').focus();
   }
   function closeSheet() {
@@ -585,9 +557,9 @@
         if (fi) {
           var a = fi.getBoundingClientRect(), b = img.getBoundingClientRect();
           gsap.fromTo(img, { x: a.left + a.width / 2 - (b.left + b.width / 2), y: a.top + a.height / 2 - (b.top + b.height / 2), scale: Math.max(a.width / b.width, .2) },
-            { x: 0, y: 0, scale: 1, duration: .6, ease: 'power2.inOut', clearProps: 'transform' });
+            { x: 0, y: 0, scale: 1, duration: .3, ease: 'power2.inOut', clearProps: 'transform' });
         }
-        gsap.fromTo(box, { backgroundColor: 'rgba(8,14,17,0)' }, { backgroundColor: 'rgba(8,14,17,.94)', duration: .4, clearProps: 'backgroundColor' });
+        gsap.fromTo(box, { backgroundColor: 'rgba(8,14,17,0)' }, { backgroundColor: 'rgba(8,14,17,.94)', duration: .25, clearProps: 'backgroundColor' });
       }
       closeBtn.focus();
     }
@@ -694,13 +666,13 @@
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
-    var d = kit.mobile ? 50 : 100;
+    var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)
     gsap.utils.toArray(targets, kit.root).forEach(function (el) {
       function from(dir) {
         var x = 0, y = dir * d, side = el.dataset.reveal;
         if (side === 'left') { x = -d; y = 0; } else if (side === 'right') { x = d; y = 0; }
         kit.ctx.add(function () {
-          gsap.fromTo(el, { x: x, y: y, autoAlpha: 0 }, { duration: 1.25, x: 0, y: 0, autoAlpha: 1, ease: 'expo', overwrite: 'auto' });
+          gsap.fromTo(el, { x: x, y: y, autoAlpha: 0 }, { duration: .3, x: 0, y: 0, autoAlpha: 1, ease: 'power2.out', overwrite: 'auto' });
         });
       }
       gsap.set(el, { autoAlpha: 0 });
@@ -718,8 +690,8 @@
     opts = opts || {};
     var split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'ln' });
     var tw = gsap.from(split.lines, {
-      yPercent: 105, duration: opts.duration || .8, ease: opts.ease || 'expo.out',
-      stagger: opts.stagger || .09, delay: opts.delay || 0,
+      yPercent: 105, duration: opts.duration || .3, ease: opts.ease || 'power2.out',
+      stagger: opts.stagger || .05, delay: opts.delay || 0,
       scrollTrigger: opts.trigger ? { trigger: opts.trigger, start: 'top 82%', once: true } : undefined,
       onComplete: function () { if (opts.revert !== false) split.revert(); }
     });
@@ -753,7 +725,7 @@
     EZ.booted = true;
     buildImages();
     gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip, MotionPathPlugin);
-    gsap.defaults({ ease: 'power3.out', duration: .85 });
+    gsap.defaults({ ease: 'power3.out', duration: .3 });   // §4 dosing default
     ScrollTrigger.config({ ignoreMobileResize: true });
 
     doc.querySelectorAll('[data-section]').forEach(function (el) {

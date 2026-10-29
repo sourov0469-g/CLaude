@@ -19,7 +19,7 @@ IMG = os.path.join(ROOT, "assets", "img")
 OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
 SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
-SYSTEMS = ["buddy", "react", "fields"]   # PLAN-V3 §2: companion, button reactions, section fields + dividers
+SYSTEMS = ["buddy", "rig", "react", "fields"]   # companion, reaction rig + reactions, section fields + dividers
 VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "Flip", "MotionPathPlugin"]   # only the plugins the sections call (F18)
 
 

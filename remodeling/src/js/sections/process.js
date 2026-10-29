@@ -135,6 +135,7 @@
     /* v3 · Measured in weeks */
     3: { init: function (root, k) {
       var S = (window.__DATA || {}).stages || [];
+      var P3RX = ['speech', 'magnifier', 'sketch', 'ledger', 'badge', 'sawhorse', 'check', 'flag'];
       var nav = root.querySelector('.process3__nav'), tape = root.querySelector('.process3__tape'), svg = root.querySelector('.process3__svg');
       var panel = root.querySelector('.process3__panel');
       var no = root.querySelector('.process3__no'), t = root.querySelector('.process3__t'), w = root.querySelector('.process3__w'), d = root.querySelector('.process3__d');
@@ -142,7 +143,7 @@
       function wk(n) { return n / 12 * .62; }
       var R = [[0, wk(1)], [0, wk(2)], [wk(1), wk(5)], [wk(4), wk(6)], [wk(5), wk(12)], [.62, .8], [.8, .9], [.9, 1]];
       nav.innerHTML = S.map(function (s, i) {
-        return '<button type="button" role="tab" class="process3__ic" id="p3t' + i + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '"><svg viewBox="0 0 40 40" aria-hidden="true">' + ICONS[i] + '</svg><span class="process3__ic-t">' + s.t + '</span></button>';
+        return '<button type="button" role="tab" class="process3__ic" id="p3t' + i + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" data-rx="~' + P3RX[i] + '/peek/hop/t"><svg viewBox="0 0 40 40" aria-hidden="true">' + ICONS[i] + '</svg><span class="process3__ic-t">' + s.t + '</span></button>';
       }).join('');
       var tabs = Array.prototype.slice.call(nav.querySelectorAll('.process3__ic'));
       k.add(function () { nav.innerHTML = ''; svg.innerHTML = ''; });

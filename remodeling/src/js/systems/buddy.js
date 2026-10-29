@@ -405,14 +405,14 @@
   };
 
   /* ---------- the Buddy switcher (fine pointers only; touch has no companion) ---------- */
-  var sw;
+  var sw, SW_RX = { hat: '~goggles/bounce/hop/t', level: '~ruler/bounce/squash/t', cone: '~vest/bounce/wobble/t', tape: '~vest/bounce/wobble/t', off: '~xbrace/bounce/shake/t' };
   function buildSwitch() {
     // lives in the Settings panel beside Theme and Motion (fine pointers only)
     sw = doc.createElement('fieldset');
     sw.className = 'buddysw';
     sw.innerHTML = '<legend id="buddysw-t">Cursor buddy</legend><div class="buddysw__in" role="radiogroup" aria-labelledby="buddysw-t">' +
       VARIANTS.map(function (v) {
-        return '<button type="button" role="radio" data-bv="' + v + '" aria-checked="false" aria-label="' + NAMES[v] + '" title="' + NAMES[v] + '"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">' + ICONS[v] + '</svg></button>';
+        return '<button type="button" role="radio" data-bv="' + v + '" data-rx="' + SW_RX[v] + '" aria-checked="false" aria-label="' + NAMES[v] + '" title="' + NAMES[v] + '"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">' + ICONS[v] + '</svg></button>';
       }).join('') + '</div>';
     var panel = doc.getElementById('settings-panel');
     (panel || doc.body).appendChild(sw);
