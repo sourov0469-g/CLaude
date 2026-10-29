@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 2, rebuilds (Hero, Proof, Services, Work done)
+- **Phase:** 2, rebuilds (Hero, Proof, Services, Work, Built done)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -97,7 +97,7 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - [x] **F3 · Hero 1 blinds** (Q38/R6 Tier 3, a 1.2 s reveal on load). CLOSED: Hero 1 rebuilt from Q95; nothing plays on load beyond the 0.3 s rise.
 - [x] **F4 · Services 1 and Hero 2 both end in a median price band.** CLOSED: Services 1 rebuilt with product facts and no price; Hero 2 is the only median-band-by-trade device.
 - [ ] **F5 · Upload-your-house-photo flagship** (portfolio plan Site 6) is unbuilt.
-- [ ] **F6 · Built 1 and Built 3 both technical drawings.** Carried from AUDIT-V3.
+- [x] **F6 · Built 1 and Built 3 both technical drawings.** CLOSED: different references and mechanisms (S0526 exploded iso on springs vs S0361 dimensioned section with a lap↔batten morph), different layouts, and Built 2 between them is photographic.
 - [ ] **F7 · Near 1 month-by-month build** (2.3 s data animation on scroll).
 - [ ] **F8 · Lenis kept** (≈18 KB).
 
@@ -115,3 +115,4 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - Phase 3 note: the kit's "tape" reaction (ruler ticks under hovered rows) duplicates Services 3's tape; redesign it in Phase 3.
 - Process note: a CSS slice anchored on the wrong header once replaced half the stylesheet. Caught by the diff stat before any commit, restored from git and redone with an exact anchor plus an assertion.
 - Defect fixed in kept Work 1: arrow keys during the 1.3 s opening sweep were overwritten; a key press now ends the sweep (drag already did).
+- Built verified (KEPT ×3). Phase 3 note: on phones the Built field X-ray band sits behind the section heading; keep it clear of text.

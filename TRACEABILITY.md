@@ -223,21 +223,21 @@ Sections are recorded in SECTIONS.md order.
 - **Mechanism:** an iso wall assembly explodes on demand; the selected layer is the lit part.
 - **Adaptations:** layers trim / lap / wrap / sheathing / studs; readout "301 of 415 priced siding jobs used the 8.25 in board".
 - **Verdict:** KEPT. R ✓ (springs 64/14.2), S ✓, T ✓, F ✓, 3D ✓ (earned: shows the trade object), D ✓, P ✓. Flag F6 closes with a reason.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `built1-d/-m.png`. 'Take it apart' moves the layers (transforms set); layer 3 → readout names the wrap. Springs 64 / 14.2 re-checked in code. F6 closed: different mechanism from Built 3 (exploded iso vs dimensioned section), and Built 2 is photographic. `sect.js built` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **B2 · Built for Texas**
 - **Reference:** ⟦S1322⟧ sticky stack cards (A1: covered card → 0.92, fade 0.72) = builder brief R45 (CSS sticky, never a GSAP pin).
 - **Mechanism:** cards stack under a sticky top; the covered card recedes as the next travels.
 - **Adaptations:** the five published Built-for-Texas properties, each with a real job photo and a drawn test diagram; warranty pair closes the stack.
 - **Verdict:** KEPT. R ✓, S ✓ (five test diagrams), T ✓, F ✓ (FACTS five + warranties), M ✓ (CSS sticky, not a pinned scene), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `built2-d/-m.png`. Five cards; CSS sticky, no pin. `sect.js built` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **B3 · To the inch**
 - **Reference:** ⟦S0361⟧ dimensional drawing (A1: every dimension a code; [TBD] where unknown) + ⟦S1361⟧ split technical layout.
 - **Mechanism:** a dimensioned technical sheet with spec rows.
 - **Adaptations:** the 8.25 in lap board section; MorphSVG lap ↔ board and batten.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓ (owns the morph), F ✓ (FACTS dimensions; [TBD] where unpublished), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `built3-d/-m.png`. Board and batten picked → the lap sheet hides (morph). `sect.js built` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 ### Colour
 

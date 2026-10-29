@@ -202,3 +202,5 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Evidence:** `sect.js services` PASS ×9; console 0; screenshots `services1–3`.
 
 **Work — all three KEPT, re-verified 29 Oct 2026.** `sect.js work` PASS ×9; screenshots `work1–3`. One defect fixed in Work 1, the signature interactive: arrow keys pressed during the 1.3 s opening sweep were overwritten by it. A key press now ends the sweep, as a drag already did. The mechanism and design are unchanged.
+
+**Built — all three KEPT, re-verified 29 Oct 2026.** `sect.js built` PASS ×9; screenshots `built1–3`. F6 closed with its reason: different mechanisms (exploded iso vs dimensioned section), and the middle version is photographic.
