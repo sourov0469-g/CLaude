@@ -574,32 +574,74 @@ html.motion .h3f.on { animation: h3kb 6.5s linear both; }
 .fd-big .fd-label { font-size: var(--t-lead); }
 .fd-big .fd-box input { min-height: 72px; font-size: clamp(1.25rem, 1rem + 1.4vw, 2rem); padding-left: 26px; font-weight: 600; }
 
-/* NEAR 2: towns */
-.n2-list { display: grid; gap: 16px; align-content: start; }
-.n2-sub { color: var(--fg2); max-width: 40ch; }
-.towns { display: grid; margin-top: 8px; }
-.tw { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 4px 16px; width: 100%; padding: 10px 0 14px; border: 0; background: none; text-align: left; transition: opacity var(--t-ui) ease; }
-.tw-n { font-size: clamp(1.5rem, 1rem + 2.4vw, 3rem); font-weight: 760; font-stretch: 84%; letter-spacing: -.02em; line-height: 1; }
-.tw-c { font-size: clamp(1.25rem, 1rem + 1.4vw, 2.25rem); font-weight: 760; font-stretch: 78%; }
-.tw i { grid-column: 1 / -1; height: 6px; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--w)); transition: background-color var(--t-ui) ease; }
-.tw[aria-pressed="true"] i { background: var(--red); }
-.towns:has(.tw[aria-pressed="true"]) .tw[aria-pressed="false"] { opacity: .45; }
-.n2-map { position: relative; max-width: 560px; width: 100%; justify-self: center; }
-.n2-cap { margin-top: 8px; font-size: var(--t-sm); color: var(--fg2); text-align: center; }
+/* NEAR 2: West Shore location x service matrix (rows are disclosures; grid-rows accordion .24 s) */
+.mx-head { display: grid; gap: 16px; margin-bottom: clamp(24px, 4vw, 48px); }
+.mx-head p { max-width: 56ch; color: var(--fg2); }
+.mx-h { display: none; }
+.mx-list { border-top: 1px solid var(--stone); }
+.mx-r { border-bottom: 1px solid var(--stone); }
+.mx-row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "t x" "d d" "s w"; gap: 6px 16px; width: 100%; padding: 16px 0; border: 0; background: none; text-align: left; }
+.mx-t { grid-area: t; font-size: clamp(1.5rem, 1rem + 2vw, 2.75rem); font-weight: 770; font-stretch: 84%; letter-spacing: -.02em; line-height: 1; }
+.mx-d { grid-area: d; }
+.mx-row > .mx-c:nth-of-type(3) { grid-area: s; }
+.mx-row > .mx-c:nth-of-type(4) { grid-area: w; }
+.mx-c { display: grid; gap: 2px; align-content: start; color: var(--fg2); font-size: var(--t-sm); }
+.mx-c b { color: var(--fg); font-size: var(--t-lead); font-weight: 760; }
+.mx-m { color: var(--fg); font-weight: 650; }
+.mx-none { color: var(--line); }
+.mx-x { grid-area: x; position: relative; width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.mx-x::before, .mx-x::after { content: ""; position: absolute; left: 8px; right: 8px; top: 13px; height: 1.5px; background: var(--ink); transition: transform .24s cubic-bezier(0, 0, .2, 1); }
+.mx-x::after { transform: rotate(90deg); }
+.is-open .mx-x::after { transform: rotate(0deg); }
+.mx-d::before { content: "Documented jobs"; font-size: .75rem; }
+.mx-row > .mx-c:nth-of-type(3)::before { content: "Siding"; font-size: .75rem; }
+.mx-row > .mx-c:nth-of-type(4)::before { content: "Windows"; font-size: .75rem; }
+.mx-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .24s cubic-bezier(0, 0, .2, 1); }
+.is-open .mx-more { grid-template-rows: 1fr; }
+.mx-in { display: grid; gap: 14px; justify-items: start; min-height: 0; overflow: hidden; }
+.is-open .mx-in { padding-bottom: 20px; }
+.mx-note { max-width: 70ch; color: var(--fg2); font-size: var(--t-sm); }
+.mx-pics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; }
+.mx-pics img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
+.mx-pics span { display: block; margin-top: 4px; color: var(--fg2); font-size: .75rem; }
+@media (hover: hover) and (pointer: fine) { .mx-row:hover .mx-t { color: var(--red); } }
 @media (min-width: 900px) {
-  .n2-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: start; }
-  .n2-list { grid-column: 1 / 7; }
-  .n2-map { grid-column: 7 / 13; position: sticky; top: calc(var(--hd) + 24px); }
+  .mx-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; } .mx-head .h2x { grid-column: 1 / 7; } .mx-head p { grid-column: 8 / 13; }
+  .mx-h { display: grid; grid-template-columns: 4fr 2fr 3fr 3fr 40px; gap: 16px; padding: 0 0 10px; color: var(--fg2); font-size: .8125rem; font-weight: 650; }
+  .mx-row { grid-template-columns: 4fr 2fr 3fr 3fr 40px; grid-template-areas: "t d s w x"; align-items: center; padding: 18px 0; }
+  .mx-c b { font-size: clamp(1.5rem, 1rem + 1vw, 2rem); }
+  .mx-d::before, .mx-row > .mx-c:nth-of-type(3)::before, .mx-row > .mx-c:nth-of-type(4)::before { content: none; }
+  .mx-pics { max-width: 760px; }
 }
-@media (hover: hover) and (pointer: fine) { .tw:hover { opacity: 1 !important; } .tw:hover .tw-n { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; } }
 
-/* NEAR 3: search */
-.n3-top { display: grid; gap: 24px; justify-items: start; }
-.n3-map { max-width: 560px; margin: 40px auto 0; }
+/* NEAR 3: KBF Neighborhood Drive (place chips, a map window that flies in, a chapter rail of that place's jobs) */
+.dv-head { display: grid; gap: 16px; margin-bottom: 24px; }
+.dv-head p { max-width: 44ch; color: var(--fg2); }
+.dv-chips { display: flex; gap: 8px; margin: 0 calc(var(--m) * -1) 24px; padding: 0 var(--m) 4px; overflow-x: auto; scrollbar-width: none; }
+.dv-chip { flex: none; display: grid; gap: 2px; padding: 10px 16px; border: 0; border-radius: 14px; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--stone); text-align: left; transition: background-color .18s cubic-bezier(0, 0, .2, 1), color .18s cubic-bezier(0, 0, .2, 1); }
+.dv-chip b { font-size: var(--t-body); font-weight: 720; }
+.dv-chip span { color: var(--fg2); font-size: .75rem; }
+.dv-chip[aria-checked="true"] { background: var(--ink); color: var(--ground); box-shadow: none; }
+.dv-chip[aria-checked="true"] span { color: #C9C6BE; }
+.dv-stage { display: grid; gap: 20px; }
+.dv-map { position: relative; justify-self: start; width: min(100%, 300px); aspect-ratio: 566 / 640; overflow: hidden; border-radius: 18px; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--stone); }
+.dv-map .map-svg { width: 100%; height: 100%; }
+.dv-svg .m-pins circle { r: 1.5; }   /* the view is zoomed about 3.3x: smaller pins and labels keep the map a map */
+.dv-svg .m-town { font-size: 5.5px; }
+.dv-svg .m-scale { display: none; }
+.dv-cap { position: absolute; left: 10px; bottom: 10px; padding: 5px 10px; border-radius: 999px; background: var(--ink); color: var(--ground); font-size: .75rem; font-weight: 650; }
+.dv-k { margin-bottom: 12px; color: var(--fg2); font-size: var(--t-sm); font-weight: 650; }
+.dv-rail { display: grid; grid-auto-flow: column; grid-auto-columns: min(74%, 300px); gap: 12px; margin: 0 calc(var(--m) * -1); padding: 0 var(--m) 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.dv-card { scroll-snap-align: start; display: grid; gap: 8px; }
+.dv-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
+.dv-card p { display: grid; gap: 2px; font-size: var(--t-sm); }
+.dv-card span { color: var(--fg2); }
 @media (min-width: 900px) {
-  .near-3 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: start; }
-  .n3-top { grid-column: 1 / 7; }
-  .n3-map { grid-column: 8 / 13; margin: 0; width: 100%; }
+  .dv-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; } .dv-head .h2x { grid-column: 1 / 7; } .dv-head p { grid-column: 8 / 13; }
+  .dv-chips { margin: 0 0 28px; padding: 0; overflow: visible; }
+  .dv-stage { grid-template-columns: 340px minmax(0, 1fr); gap: 28px; align-items: start; }
+  .dv-map { width: 100%; position: sticky; top: calc(var(--hd) + 72px); }
+  .dv-rail { grid-auto-columns: minmax(260px, 30%); margin: 0; padding: 0 0 8px; }
 }
 
 /* ---------- REVIEWS ---------- */
@@ -1098,12 +1140,9 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 .spec-r.on { background: #FBE9E8; } .spec-r.on span:first-child, .spec-r.on b { color: var(--red-d); }
 @media (min-width: 900px) { .b3x-grid { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
 
-/* NEAR 1: survey trail; NEAR 3: radius knob */
+/* NEAR 1: survey trail */
 .n1-map { position: relative; }
 .n1-trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.n3-map { position: relative; }
-.n3-knob { position: absolute; z-index: 3; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 3px solid #fff; border-radius: 50%; background: var(--red); box-shadow: 0 2px 10px rgba(0, 0, 0, .3); touch-action: none; }
-.n3-say { margin-top: 12px; font-size: var(--t-lead); font-weight: 650; min-height: 1.4em; }
 
 /* MONEY 2: budget chips */
 .mo-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }

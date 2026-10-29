@@ -853,7 +853,7 @@
     let shown = 0;
     const tl = G.timeline({ paused: true });
     tl.to($('.m-hq', svg), { scale: 1, duration: 0.5, ease: 'back.out(1.6)' })
-      .to(st, { k: months.length - 1, duration: 2.8, ease: 'power1.inOut', onUpdate: () => {
+      .to(st, { k: months.length - 1, duration: 1.8, ease: 'power1.inOut', onUpdate: () => {
         const lim = months[Math.round(st.k)];
         while (shown < PINS.length && PINS[shown][2] <= lim) { M.pins[shown].classList.remove('off'); shown++; }
         while (shown > 0 && PINS[shown - 1][2] > lim) { shown--; M.pins[shown].classList.add('off'); }
@@ -862,55 +862,38 @@
     ST.create({ trigger: svg, start: 'top 72%', once: true, onEnter: () => tl.play() });
   };
 
+  /* NEAR 2: West Shore Home's location x service matrix. Each town row is a disclosure; its panel opens on grid rows
+     (0fr to 1fr) in 0.24 s, Stronghold's accordion dose, and is inert while closed. Rows enter as a staggered group. */
   V.near2 = (r, b) => {
-    const svg = $('.map-svg', r), M = MapView(svg), cap = $('.n2-cap', r), cities = DATA.map.cities;
-    const btns = $$('.tw', r);
-    const show = btn => {
-      btns.forEach(x => x.setAttribute('aria-pressed', x === btn && btn.getAttribute('aria-pressed') !== 'true'));
-      if (btn.getAttribute('aria-pressed') !== 'true') { M.clear(); cap.textContent = '312 photographed jobs shown'; return; }
-      const ci = cities.indexOf(btn.dataset.town);
-      const set = new Set(PINS.map((p, i) => p[5] === ci ? i : -1).filter(i => i >= 0));
-      M.hot(set); M.ring(+btn.dataset.x, +btn.dataset.y, 26);
-      const n = +$('.tw-c', btn).textContent;
-      cap.textContent = `${btn.dataset.town}: ${n} documented jobs, ${set.size} of them photographed on this map`;
-    };
-    btns.forEach(btn => b.on(btn, 'click', () => show(btn)));
-    if (motionOK()) G.from($$('.tw i', r), { scaleX: 0, duration: 0.9, ease: ease.out, stagger: 0.06, scrollTrigger: { trigger: $('.towns', r), start: 'top 80%', once: true } });
+    const rows = $$('.mx-r', r);
+    rows.forEach(li => {
+      const btn = $('.mx-row', li), more = $('.mx-more', li);
+      b.on(btn, 'click', () => { const on = btn.getAttribute('aria-expanded') !== 'true'; btn.setAttribute('aria-expanded', on); li.classList.toggle('is-open', on); more.inert = !on; });
+    });
+    if (motionOK()) G.from(rows, { y: 14, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.mx-list', r), 'top 85%') });
   };
 
-  /* NEAR 3: type your area; the map frames it and a ring you drag (or arrow) sets the miles; the count of
-     photographed jobs inside updates. Same Finder and map engine as the other versions, a new entry point. */
+  /* NEAR 3: KBF's Neighborhood Drive. Pick a place (radio chips): the job map flies in to it (viewBox tween, 0.8 s
+     power3.inOut), its photographed pins light, and the chapter rail shows only the jobs photographed there. */
   V.near3 = (r, b) => {
-    const svg = $('.map-svg', r), M = MapView(svg), fig = $('.n3-map', r), knob = $('.n3-knob', r), say = $('[data-n3-say]', r);
-    const ppm = DATA.map.ppm;
-    let at = null, miles = 5;
-    const ringR = () => miles * ppm;
-    const place = () => {
-      if (!at) return;
-      const rc = svg.getBoundingClientRect(), fr = fig.getBoundingClientRect(), s = rc.width / 566;
-      knob.style.left = (rc.left - fr.left + (at.x + ringR()) * s) + 'px';
-      knob.style.top = (rc.top - fr.top + at.y * s) + 'px';
+    const D = JSON.parse($('.dv-data', r).textContent), svg = $('.dv-svg', r), M = MapView(svg), rail = $('[data-dv-rail]', r), kEl = $('[data-dv-k]', r), cap = $('[data-dv-cap]', r);
+    const view = t => { const w = 170, h = 192; const x = clamp(t.x - w / 2, 0, 566 - w), y = clamp(t.y - h / 2, 0, 640 - h); return `${x.toFixed(1)} ${y.toFixed(1)} ${w} ${h}`; };
+    let tw = null;
+    const go = (name, anim) => {
+      const t = D[name];
+      M.hot(new Set(PINS.map((p, i) => p[5] === t.ci ? i : -1).filter(i => i >= 0)));
+      if (tw) tw.kill();
+      if (anim && motionOK()) tw = G.timeline().to(svg, { attr: { viewBox: '0 0 566 640' }, duration: 0.35, ease: 'power2.in' }).to(svg, { attr: { viewBox: view(t) }, duration: 0.8, ease: 'power3.inOut' });
+      else svg.setAttribute('viewBox', view(t));
+      cap.textContent = `${name}: ${t.doc} documented jobs`;
+      kEl.textContent = `${t.n} photographed jobs in ${name}` + (t.n > t.p.length ? `, the latest ${t.p.length}` : '');
+      rail.innerHTML = t.p.map(q => `<li class="dv-card"><img src="${esc(AU(q.src))}" width="320" height="240" alt="${esc(q.alt)}" loading="lazy" decoding="async"><p><b>${esc(q.place)}</b><span>${esc(q.when)}. ${esc(q.trades)}</span></p></li>`).join('');
+      rail.scrollLeft = 0;
+      if (anim && motionOK()) G.from($$('.dv-card', rail), { x: 30, autoAlpha: 0, duration: 0.45, ease: ease.out, stagger: 0.05, delay: 0.25 });
     };
-    const count = () => {
-      if (!at) return;
-      const inside = new Set(PINS.map((p, i) => Math.hypot(p[0] - at.x, p[1] - at.y) <= ringR() ? i : -1).filter(i => i >= 0));
-      M.hot(inside); M.ring(at.x, at.y, ringR());
-      knob.setAttribute('aria-valuenow', miles); knob.setAttribute('aria-valuetext', `${miles} miles`);
-      say.textContent = `${inside.size} photographed jobs within ${miles} miles of ${at.name}.`;
-      place();
-    };
-    Finder($('[data-finder]', r), M, 5, b, p => { at = { name: p[0], x: p[1], y: p[2] }; knob.hidden = false; count(); if (motionOK()) G.from(knob, { scale: 0, duration: 0.4, ease: ease.out }); });
-    let drag = false;
-    b.on(knob, 'pointerdown', e => { drag = true; knob.setPointerCapture(e.pointerId); });
-    b.on(knob, 'pointermove', e => {
-      if (!drag || !at) return;
-      const rc = svg.getBoundingClientRect(), s = rc.width / 566;
-      const x = (e.clientX - rc.left) / s, y = (e.clientY - rc.top) / s;
-      miles = clamp(Math.round(Math.hypot(x - at.x, y - at.y) / ppm), 1, 15); count();
-    });
-    ['pointerup', 'pointercancel'].forEach(ev => b.on(knob, ev, () => { drag = false; }));
-    b.on(knob, 'keydown', e => { const m = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }; if (e.key in m) { e.preventDefault(); miles = clamp(miles + m[e.key], 1, 15); count(); } });
-    b.ro(fig, place);
+    radios($('.dv-chips', r), b, it => go(it.dataset.town, true), '.dv-chip');
+    go('Austin', false);
+    b.add(() => { if (tw) tw.kill(); });
   };
 
   /* REVIEWS */
