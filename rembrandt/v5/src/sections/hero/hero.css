@@ -144,6 +144,7 @@
 .hx3-sun circle{fill:var(--sun)}
 .hx3-sun path{stroke:var(--sun);stroke-width:4;stroke-linecap:round}
 .hx3-cloud path{fill:#fff;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:.9}
+@media (max-width:640px){.hx3-cloud--a{display:none}.hx3-cloud path{opacity:.5}} /* phones: the first cloud lands on the headline */
 .hx3-copy{position:relative;display:grid;gap:20px;max-width:620px}
 .hx3-kick{font-weight:700;font-size:.9375rem;color:var(--blue)}
 .hx3-h{font-size:clamp(2.6rem,5.2vw,5.25rem);font-weight:850;line-height:1;letter-spacing:-.045em;text-wrap:balance}

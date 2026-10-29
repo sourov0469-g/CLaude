@@ -78,8 +78,9 @@ html[data-motion="reduced"] .pv3-ctl{display:none}
 .pv2-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .pv2-bg .crs{stroke:var(--ink);stroke-width:1;opacity:.07;fill:none;transition:transform .25s var(--ease-x),opacity .25s var(--ease-x)}
 .pv2-bg .crs.is-up{transform:translateY(-2px);opacity:.16}
-.pv2-head,.pv2-right{position:relative;z-index:1}
-.pv2-right{position:relative}
+.pv2-head{z-index:1}
+.pv2-right{position:relative;z-index:1}
+@media (max-width:899px){.pv2-head{position:relative;top:auto}}
 .pv2-reel{position:absolute;left:-58px;top:-22px;width:56px;height:42px;overflow:visible}
 .pv2-reel-case{fill:var(--chalk);stroke:var(--ink);stroke-width:2.2}
 .pv2-reel-hub{fill:#fff;stroke:var(--ink);stroke-width:2}

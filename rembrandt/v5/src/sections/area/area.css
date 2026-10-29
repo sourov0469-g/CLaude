@@ -37,7 +37,10 @@
 .tw1-list button.is-press{animation:tw-pop .3s var(--ease-spring)}
 @keyframes tw-pop{0%{scale:.92}100%{scale:1}}
 @media (max-width:900px){.tw1-grid{grid-template-columns:1fr}.tw1-mapwrap{max-height:none}}
-@media (max-width:640px){.tw1-list button{min-height:44px}}
+@media (max-width:640px){.tw1-list button{min-height:44px}
+  /* phones: the map is ~0.38x, so town names would print near 7px; the pills below carry every name, the map keeps
+     the houses, the ring miles (enlarged) and the chosen town's name only */
+  .mk text{display:none}.mk.is-on text{display:inline;font-size:38px;stroke-width:8px}.tw1-rings text{font-size:28px}}
 
 /* ---------- v2: metric-led cards; each carries its own decades chart, bars laid like shingle courses */
 .tw2{--vbg:#fff;background:#fff;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
