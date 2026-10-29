@@ -1,108 +1,176 @@
-/* financing [PLAN-V2 2.5] — every figure is the firm's /financing/ page wording, attributed to the lender */
+/* financing, PLAN-V3 §3. Figures exactly as each partner publishes them (FACTS.md /financing/). */
 (function () {
-  var R = {
-    syn: { f: '6–132', n: 'Synchrony Project Card', d: 'months of special financing, as Synchrony publishes it' },
-    sfc: { f: '30', n: 'Service Finance', d: 'days after completion until the first payment' },
-    ygr: { f: '20', n: 'Ygrene, Florida PACE', d: 'year maximum published residential term' },
-    rnw: { f: '$250K', n: 'Renew Financial, RenewPACE', d: 'published maximum, up to 20% of property value' }
-  };
-  var PICK = {
-    kitchen: { for: 'For a kitchen', r: ['syn'],
-      why: 'A card rather than a one-off loan, so it stays open: useful if a kitchen now is likely to be followed by a bathroom or a flooring run later. A kitchen remodel is generally not a PACE improvement.' },
-    bath: { for: 'For a bathroom', r: ['syn', 'sfc'],
-      why: 'Service Finance is built around a defined, single-trade scope where the number does not move once it is set, such as plumbing or flooring.' },
-    shell: { for: 'For a roof, windows or doors', r: ['sfc', 'ygr', 'rnw'],
-      why: 'PACE is an assessment repaid through your property tax bill, not a loan, and it changes what happens when you sell or refinance.' },
-    whole: { for: 'For a whole home', r: ['syn'],
-      why: 'Two partners are consumer credit and two are property-assessed, so more than one kind of answer is possible. Explore it before the scope is locked.' }
-  };
+  function f(n) { return Math.round(n * 10) / 10; }
+  var ROUTES = [[0, 1], [0, 1], [0, 1, 2, 3], [0, 2, 3]];
+  var WHY = [
+    'Kitchens are interior finish work, so the usual routes are consumer credit: Synchrony’s revolving Project Card or a Service Finance installment loan. PACE is generally not available for a kitchen.',
+    'Bathrooms are interior finish work too: Synchrony’s Project Card or a Service Finance installment loan. PACE is generally not available for a bathroom remodel.',
+    'Storm-hardening work can fit all four. Service Finance lists roofs and impact windows and doors among typical projects, and both PACE programmes cover roofing, windows and doors.',
+    'A whole home crosses many trades. Synchrony’s card is reusable across projects, and qualifying parts such as roofing or impact windows can go through PACE.'
+  ];
 
   EZ.section('financing', {
-    /* v1 · the sheets */
+    /* v1 · Four tickets [S0882 + BANK 372] */
     1: { init: function (root, k) {
       EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
-      EZ.reveal(k, root.querySelectorAll('.financing1__item'));
-    } },
-
-    /* v2 · the picker */
-    2: { init: function (root, k) {
-      var chips = Array.prototype.slice.call(root.querySelectorAll('.financing2__chip'));
-      var forEl = root.querySelector('.financing2__for'), routes = root.querySelector('.financing2__routes'), why = root.querySelector('.financing2__why');
-      function render(key, animate) {
-        var p = PICK[key];
-        chips.forEach(function (c) { var on = c.dataset.k === key; c.setAttribute('aria-checked', on ? 'true' : 'false'); c.tabIndex = on ? 0 : -1; });
-        forEl.textContent = p.for;
-        routes.innerHTML = p.r.map(function (id) {
-          var r = R[id];
-          return '<div class="financing2__route"><span class="financing2__rf nums">' + r.f + '</span><span class="financing2__rn">' + r.n + '</span><span class="financing2__rd">' + r.d + '</span></div>';
-        }).join('');
-        why.textContent = p.why;
-        if (animate && k.motion) {
-          k.ctx.add(function () {
-            gsap.from(routes.children, { y: 18, autoAlpha: 0, duration: .45, stagger: .07, ease: 'power3.out' });
-            gsap.from(why, { autoAlpha: 0, duration: .45, delay: .1, ease: 'power2.out' });
+      var tks = root.querySelectorAll('.financing1__tk');
+      tks.forEach(function (tk) {
+        var main = tk.querySelector('.financing1__main'), stub = tk.querySelector('.financing1__stub'), more = tk.querySelector('.financing1__more');
+        var btn = tk.querySelector('.financing1__tear'), label = btn.querySelector('.btn__label');
+        k.ro(main, function () { tk.style.setProperty('--py', main.offsetHeight + 'px'); });
+        k.add(function () { tk.classList.remove('is-torn', 'is-glare'); tk.style.removeProperty('--py'); btn.setAttribute('aria-expanded', 'false'); label.textContent = 'Tear for details'; gsap.set([stub, more], { clearProps: 'all' }); });
+        if (k.fine && k.motion) {
+          k.on(tk, 'pointerenter', function () { tk.classList.add('is-glare'); });
+          k.on(tk, 'pointerleave', function () { tk.classList.remove('is-glare'); });
+          k.on(tk, 'pointermove', function (e) {            // glare tracks the pointer across the paper [BANK 372]
+            var r = tk.getBoundingClientRect();
+            tk.style.setProperty('--gx', (120 - (e.clientX - r.left) / r.width * 140).toFixed(1) + '%');
           });
         }
-      }
-      chips.forEach(function (c, i) {
-        k.on(c, 'click', function () { render(c.dataset.k, true); });
-        k.on(c, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (!d) return;
-          e.preventDefault(); e.stopPropagation();
-          var n = chips[(i + d + chips.length) % chips.length];
-          render(n.dataset.k, true); n.focus();
+        k.on(btn, 'click', function () {
+          var torn = !tk.classList.contains('is-torn');
+          btn.setAttribute('aria-expanded', torn ? 'true' : 'false');
+          label.textContent = torn ? 'Back to the stub' : 'Tear for details';
+          if (!k.motion) { tk.classList.toggle('is-torn', torn); stub.style.visibility = torn ? 'hidden' : ''; return; }
+          k.ctx.add(function () {
+            if (torn) {
+              gsap.timeline().to(stub, { y: 46, x: 6, autoAlpha: 0, duration: .32, ease: 'power3.in' })
+                .add(function () { tk.classList.add('is-torn'); })
+                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .4, ease: 'power3.out' });
+            } else {
+              gsap.timeline().to(more, { autoAlpha: 0, duration: .15 })
+                .add(function () { tk.classList.remove('is-torn'); })
+                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45, ease: 'back.out(2)' });
+            }
+          });
         });
       });
-      render('kitchen', false);
-      EZ.reveal(k, root.querySelectorAll('.financing2__ask > .t-label, .financing2__ask > .t-head'));
+      if (k.motion) gsap.from(tks, { y: 50, autoAlpha: 0, duration: .8, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: root.querySelector('.financing1__row'), start: 'top 85%', once: true } });
     } },
 
-    /* v3 · the read (S1327) */
-    3: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing3__in > .t-label, .financing3__h'));
-      if (!k.motion) return;
-      var passage = root.querySelector('.financing3__passage'), original = passage.innerHTML;
-      // walk text nodes (never flatten): wrap each non-whitespace token, keep whitespace and inline emphasis as they are
-      var walker = document.createTreeWalker(passage, NodeFilter.SHOW_TEXT), nodes = [], n;
-      while ((n = walker.nextNode())) nodes.push(n);
-      nodes.forEach(function (t) {
-        var frag = document.createDocumentFragment();
-        t.nodeValue.split(/(\s+)/).forEach(function (tok) {
-          if (!tok) return;
-          if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
-          var s = document.createElement('span'); s.className = 'w'; s.textContent = tok; frag.appendChild(s);
-        });
-        t.parentNode.replaceChild(frag, t);
-      });
-      // punctuation that follows an emphasised word stays glued to it (no line break between them)
-      passage.querySelectorAll('.w').forEach(function (w) {
-        var prev = w.previousSibling;
-        if (/^[,.;:!?]+$/.test(w.textContent) && prev && prev.nodeType === 1 && prev.tagName !== 'SPAN') {
-          var glue = document.createElement('span'); glue.style.whiteSpace = 'nowrap';
-          prev.parentNode.insertBefore(glue, prev); glue.appendChild(prev); glue.appendChild(w);
-        }
-      });
-      k.add(function () { passage.innerHTML = original; });
-      var words = Array.prototype.slice.call(passage.querySelectorAll('.w')), N = words.length;
-      var HIDE = .18, BLUR = 6, DROP = .14, OVER = .25;      // opacity .12-.3, blur 4-10px, .08-.22em, 10-30% overlap
-      function paint(reveal) {
-        var t = reveal * (N - 1 + 1 + OVER);
-        for (var i = 0; i < N; i++) {
-          var l = Math.min(1, Math.max(0, (t - i) / (1 + OVER)));
-          var s = words[i].style;
-          s.opacity = (HIDE + (1 - HIDE) * l).toFixed(3);
-          s.filter = l >= 1 ? '' : 'blur(' + (BLUR * (1 - l)).toFixed(2) + 'px)';
-          s.transform = l >= 1 ? '' : 'translateY(' + (DROP * (1 - l)).toFixed(3) + 'em)';
-        }
+    /* v2 · Pipe the money */
+    2: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
+      var rig = root.querySelector('.financing2__rig'), svg = root.querySelector('.financing2__pipes');
+      var vs = Array.prototype.slice.call(root.querySelectorAll('.financing2__v'));
+      var ls = Array.prototype.slice.call(root.querySelectorAll('.financing2__l'));
+      var why = root.querySelector('.financing2__why');
+      var G = null, cur = -1, flow = null;
+      function geo() {
+        var rr = rig.getBoundingClientRect();
+        if (!rr.width) return;
+        svg.setAttribute('viewBox', '0 0 ' + rr.width + ' ' + rr.height);
+        var S = vs.map(function (v) { var r = v.getBoundingClientRect(); return [r.right - rr.left, r.top - rr.top + r.height / 2]; });
+        var L = ls.map(function (l) { var r = l.getBoundingClientRect(); return [r.left - rr.left, r.top - rr.top + r.height / 2]; });
+        var mx = (S[0][0] + L[0][0]) / 2, top = Math.min(S[0][1], L[0][1]) - 8, bot = Math.max(S[3][1], L[3][1]) + 8;
+        var base = '', joints = '';
+        S.forEach(function (p) { base += 'M' + f(p[0]) + ' ' + f(p[1]) + 'H' + f(mx); joints += '<circle class="j" cx="' + f(p[0] + 4) + '" cy="' + f(p[1]) + '" r="6"/>'; });
+        L.forEach(function (p) { base += 'M' + f(mx) + ' ' + f(p[1]) + 'H' + f(p[0]); joints += '<circle class="j" cx="' + f(p[0] - 4) + '" cy="' + f(p[1]) + '" r="6"/>'; });
+        svg.innerHTML = '<path class="p" d="' + base + '"/><rect class="man" x="' + f(mx - 9) + '" y="' + f(top) + '" width="18" height="' + f(bot - top) + '" rx="4"/><path class="p-in" d="' + base + '"/><g class="ws"></g>' + joints;
+        G = { S: S, L: L, mx: mx, ws: svg.querySelector('.ws') };
+        if (cur > -1) water(cur, true);
       }
-      paint(0);
-      ScrollTrigger.create({
-        trigger: passage, start: 'top 85%',
-        end: function () { return '+=' + Math.round(innerHeight * 1.6); },   // span 160% of the viewport; no easing in the mapping
-        invalidateOnRefresh: true,
-        onUpdate: function (self) { paint(self.progress); }
+      function water(i, now) {
+        if (!G) return;
+        if (flow) { flow.kill(); flow = null; }
+        var s = G.S[i];
+        G.ws.innerHTML = ROUTES[i].map(function (j) { var l = G.L[j]; return '<path class="w" d="M' + f(s[0]) + ' ' + f(s[1]) + 'H' + f(G.mx) + 'V' + f(l[1]) + 'H' + f(l[0]) + '"/>'; }).join('');
+        var ws = G.ws.querySelectorAll('.w');
+        if (!k.motion || now) { gsap.set(ws, { opacity: 1 }); return; }
+        k.ctx.add(function () {
+          gsap.fromTo(ws, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .75, ease: 'power2.inOut', stagger: .08, onComplete: function () {
+            ws.forEach(function (w) { w.style.strokeDasharray = '10px 8px'; w.style.strokeDashoffset = '0px'; });
+            flow = gsap.fromTo(ws, { strokeDashoffset: 0 }, { strokeDashoffset: -36, duration: .7, ease: 'none', repeat: -1 });
+          } });
+        });
+      }
+      function pick(i, focus) {
+        if (i === cur) return;
+        cur = i;
+        vs.forEach(function (v, j) { v.setAttribute('aria-checked', j === i ? 'true' : 'false'); v.tabIndex = j === i ? 0 : -1; });
+        if (focus) vs[i].focus();
+        why.textContent = WHY[i];
+        ls.forEach(function (l, j) {
+          var on = ROUTES[i].indexOf(j) > -1;
+          l.classList.toggle('is-on', on); l.classList.toggle('is-off', !on);
+          if (k.motion) k.ctx.add(function () { gsap.to(l, { '--lvl': on ? 1 : 0, duration: on ? .9 : .3, delay: on ? .5 : 0, ease: 'power2.out' }); });
+          else l.style.setProperty('--lvl', on ? 1 : 0);
+        });
+        if (k.motion) k.ctx.add(function () { gsap.fromTo(vs[i].querySelector('.wheel'), { rotation: 0 }, { rotation: 270, svgOrigin: '20 20', duration: .6, ease: 'power2.inOut' }); });
+        water(i);
+      }
+      vs.forEach(function (v, i) {
+        v.tabIndex = i === 0 ? 0 : -1;
+        k.on(v, 'click', function () { pick(i); });
+        k.on(v, 'keydown', function (e) {
+          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+          if (d) { e.preventDefault(); pick((Math.max(cur, 0) + d + 4) % 4, true); }
+        });
       });
+      k.ro(rig, geo);
+      geo();
+      k.io(rig, function (en) { if (flow) en.isIntersecting ? flow.play() : flow.pause(); });
+      k.add(function () { if (flow) flow.kill(); svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); l.style.removeProperty('--lvl'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); why.textContent = 'Pick a project to see the usual routes.'; });
+      if (k.motion) gsap.from(vs.concat(ls), { x: function (i) { return i < 4 ? -30 : 30; }, autoAlpha: 0, duration: .6, ease: 'power3.out', stagger: .05, scrollTrigger: { trigger: rig, start: 'top 80%', once: true } });
+    } },
+
+    /* v3 · The morph sheet [BANK 255 Shazam] */
+    3: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.financing3__intro > *'));
+      var stage = root.querySelector('.financing3__stage'), orb = root.querySelector('.financing3__orb'), sheet = root.querySelector('.financing3__sheet');
+      var close = root.querySelector('.financing3__close'), busy = false;
+      var OPEN = EZ.bezier(.8, -.6, .2, 1), CONTENT = EZ.bezier(.7, 0, .3, 1), SHUT = EZ.bezier(.4, 1, .3, 1);
+      function rel(el) { var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect(); return { left: r.left - s.left, top: r.top - s.top, width: r.width, height: r.height }; }
+      function shape(from) {
+        var d = document.createElement('div');
+        d.setAttribute('aria-hidden', 'true');
+        d.style.cssText = 'position:absolute;z-index:3;pointer-events:none;left:' + from.left + 'px;top:' + from.top + 'px;width:' + from.width + 'px;height:' + from.height + 'px';
+        stage.appendChild(d);
+        return d;
+      }
+      function open() {
+        if (busy) return;
+        orb.setAttribute('aria-expanded', 'true');
+        if (!k.motion) { orb.hidden = true; sheet.hidden = false; close.focus(); return; }
+        busy = true;
+        var a = rel(orb);
+        sheet.hidden = false; sheet.style.visibility = 'hidden';
+        var b = rel(sheet);
+        var sh = shape(a);
+        orb.style.visibility = 'hidden';
+        k.ctx.add(function () {
+          gsap.timeline({ onComplete: function () { sh.remove(); busy = false; close.focus(); } })
+            .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418' },
+              { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#f3eee2', duration: .4, ease: OPEN })
+            .add(function () { orb.hidden = true; orb.style.visibility = ''; sheet.style.visibility = ''; })
+            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .45, ease: CONTENT, stagger: .03 });
+        });
+      }
+      function shut() {
+        if (busy || sheet.hidden) return;
+        orb.setAttribute('aria-expanded', 'false');
+        if (!k.motion) { sheet.hidden = true; orb.hidden = false; orb.focus(); return; }
+        busy = true;
+        var b = rel(sheet);
+        k.ctx.add(function () {
+          gsap.to(sheet.children, { autoAlpha: 0, duration: .15, onComplete: function () {
+            var sh = shape(b);
+            sheet.hidden = true; gsap.set(sheet.children, { clearProps: 'opacity,visibility' });
+            orb.hidden = false; orb.style.visibility = 'hidden';
+            var a = rel(orb);
+            gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#f3eee2' },
+              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418', duration: .5, ease: SHUT,
+                onComplete: function () { sh.remove(); orb.style.visibility = ''; busy = false; orb.focus(); } });
+          } });
+        });
+      }
+      k.on(orb, 'click', open);
+      k.on(close, 'click', shut);
+      k.on(sheet, 'keydown', function (e) { if (e.key === 'Escape') shut(); });
+      k.add(function () { sheet.hidden = true; orb.hidden = false; orb.style.visibility = ''; sheet.style.visibility = ''; orb.setAttribute('aria-expanded', 'false'); busy = false; stage.querySelectorAll(':scope > div[aria-hidden]').forEach(function (d) { d.remove(); }); });
+      if (k.motion) {
+        gsap.from(orb, { scale: .6, autoAlpha: 0, duration: .8, ease: 'back.out(1.8)', scrollTrigger: { trigger: stage, start: 'top 80%', once: true } });
+      }
     } }
   });
 })();
