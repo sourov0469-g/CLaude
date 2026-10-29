@@ -532,6 +532,12 @@ html.js .rv.is-in{opacity:1;transform:none}
   .nav > a.nav-hide-md{display:none}
   .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 }
+/* 901 to 1180: four footer columns are too narrow for the wordmark and the email address, so the brand gets its own row */
+@media (min-width:901px) and (max-width:1180px){
+  .foot-grid{grid-template-columns:minmax(0,1fr) minmax(0,.8fr) minmax(0,1.4fr);row-gap:var(--s-7)}
+  .foot-grid > :first-child{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:var(--s-7)}
+  .foot-grid > :first-child .foot-tel{grid-column:2;grid-row:1 / span 2;margin-top:0}
+}
 /* 901 to 1100: the half-width copy column is a few px short of "From a single", so set the headline a touch smaller to keep 3 lines */
 @media (min-width:901px) and (max-width:1100px){.hero h1{font-size:clamp(2.6rem, 5.5vw, 4.85rem)}}
 @media (max-width:900px){
@@ -560,7 +566,7 @@ html.js .rv.is-in{opacity:1;transform:none}
   /* stacked: a heading sits close to its own lead (proximity), far from the next block */
   .values-grid,.svc-head{row-gap:20px}
   .work-head{gap:20px}
-  .values-list{flex-wrap:wrap;justify-content:flex-start;gap:var(--s-2) var(--s-6)}
+  .values-list{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:var(--s-2) var(--s-6)}
   .values-list button{white-space:normal}
   .board{display:none}
   .level{margin-top:var(--s-8)}
@@ -808,15 +814,15 @@ html.rm .build-fig svg{transition:none!important}
       <svg viewBox="0 0 1200 80">
         <g id="level-g">
           <rect class="level-body" x="1" y="16" width="1198" height="48" rx="5"/>
+          <path d="M20 16v4M30 16v4M40 16v4M50 16v7M60 16v4M70 16v4M80 16v4M90 16v4M100 16v10M110 16v4M120 16v4M130 16v4M140 16v4M150 16v7M160 16v4M170 16v4M180 16v4M190 16v4M200 16v10M210 16v4M220 16v4M230 16v4M240 16v4M250 16v7M260 16v4M270 16v4M280 16v4M290 16v4M300 16v10M310 16v4M320 16v4M330 16v4M340 16v4M350 16v7M360 16v4M370 16v4M380 16v4M390 16v4M400 16v10M410 16v4M420 16v4M430 16v4M440 16v4M450 16v7M460 16v4M470 16v4M480 16v4M490 16v4M500 16v10M510 16v4M520 16v4M530 16v4M540 16v4M550 16v7M560 16v4M570 16v4M580 16v4M590 16v4M600 16v10M610 16v4M620 16v4M630 16v4M640 16v4M650 16v7M660 16v4M670 16v4M680 16v4M690 16v4M700 16v10M710 16v4M720 16v4M730 16v4M740 16v4M750 16v7M760 16v4M770 16v4M780 16v4M790 16v4M800 16v10M810 16v4M820 16v4M830 16v4M840 16v4M850 16v7M860 16v4M870 16v4M880 16v4M890 16v4M900 16v10M910 16v4M920 16v4M930 16v4M940 16v4M950 16v7M960 16v4M970 16v4M980 16v4M990 16v4M1000 16v10M1010 16v4M1020 16v4M1030 16v4M1040 16v4M1050 16v7M1060 16v4M1070 16v4M1080 16v4M1090 16v4M1100 16v10M1110 16v4M1120 16v4M1130 16v4M1140 16v4M1150 16v7M1160 16v4M1170 16v4M1180 16v4" stroke="#3D4235" stroke-width="1" opacity=".55"/>
           <rect class="level-edge" x="1" y="16" width="12" height="48" rx="3"/>
           <rect class="level-edge" x="1187" y="16" width="12" height="48" rx="3"/>
-          <path d="M20 16v4M30 16v4M40 16v4M50 16v7M60 16v4M70 16v4M80 16v4M90 16v4M100 16v10M110 16v4M120 16v4M130 16v4M140 16v4M150 16v7M160 16v4M170 16v4M180 16v4M190 16v4M200 16v10M210 16v4M220 16v4M230 16v4M240 16v4M250 16v7M260 16v4M270 16v4M280 16v4M290 16v4M300 16v10M310 16v4M320 16v4M330 16v4M340 16v4M350 16v7M360 16v4M370 16v4M380 16v4M390 16v4M400 16v10M410 16v4M420 16v4M430 16v4M440 16v4M450 16v7M460 16v4M470 16v4M480 16v4M490 16v4M500 16v10M510 16v4M520 16v4M530 16v4M540 16v4M550 16v7M560 16v4M570 16v4M580 16v4M590 16v4M600 16v10M610 16v4M620 16v4M630 16v4M640 16v4M650 16v7M660 16v4M670 16v4M680 16v4M690 16v4M700 16v10M710 16v4M720 16v4M730 16v4M740 16v4M750 16v7M760 16v4M770 16v4M780 16v4M790 16v4M800 16v10M810 16v4M820 16v4M830 16v4M840 16v4M850 16v7M860 16v4M870 16v4M880 16v4M890 16v4M900 16v10M910 16v4M920 16v4M930 16v4M940 16v4M950 16v7M960 16v4M970 16v4M980 16v4M990 16v4M1000 16v10M1010 16v4M1020 16v4M1030 16v4M1040 16v4M1050 16v7M1060 16v4M1070 16v4M1080 16v4M1090 16v4M1100 16v10M1110 16v4M1120 16v4M1130 16v4M1140 16v4M1150 16v7M1160 16v4M1170 16v4M1180 16v4" stroke="#3D4235" stroke-width="1" opacity=".55"/>
           <rect class="vial-glass" x="548" y="28" width="104" height="26" rx="13"/>
           <line class="vial-mark" x1="584" y1="25" x2="584" y2="57"/>
           <line class="vial-mark" x1="616" y1="25" x2="616" y2="57"/>
           <ellipse class="bubble" id="bubble" cx="600" cy="41" rx="14" ry="8.5"/>
-          <circle class="vial-glass" cx="150" cy="41" r="14"/><line class="vial-mark" x1="150" y1="29" x2="150" y2="53"/><circle class="bubble" cx="150" cy="41" r="5"/>
-          <circle class="vial-glass" cx="1050" cy="41" r="14"/><line class="vial-mark" x1="1038" y1="41" x2="1062" y2="41"/><circle class="bubble" cx="1050" cy="41" r="5"/>
+          <g id="vial-l"><circle class="vial-glass" cx="150" cy="41" r="14"/><line class="vial-mark" x1="150" y1="29" x2="150" y2="53"/><circle class="bubble" cx="150" cy="41" r="5"/></g>
+          <g id="vial-r"><circle class="vial-glass" cx="1050" cy="41" r="14"/><line class="vial-mark" x1="1038" y1="41" x2="1062" y2="41"/><circle class="bubble" cx="1050" cy="41" r="5"/></g>
         </g>
       </svg>
     </div>
@@ -1235,7 +1241,7 @@ html.rm .build-fig svg{transition:none!important}
         <h2>Get in touch</h2>
         <ul>
           <li><a href="tel:+447854823288">07854 823 288</a></li>
-          <li><a href="mailto:carpentryuk.phone@googlemail.com" style="overflow-wrap:anywhere">carpentryuk.phone@googlemail.com</a></li>
+          <li><a href="mailto:carpentryuk.phone@googlemail.com" style="overflow-wrap:break-word">carpentryuk.phone<wbr>@googlemail.com</a></li>
           <li><span style="display:inline-flex;min-height:36px;align-items:center">28 Kingston Cl, Tamworth B79 8TT</span></li>
         </ul>
       </div>
@@ -1682,8 +1688,17 @@ html.rm .build-fig svg{transition:none!important}
   valuesSec.addEventListener('pointerleave', () => { G.inside = false; wakeGrain(); });
 
   // spirit level
-  const levelSvg = $('#level svg');
-  const fitLevel = () => levelSvg.setAttribute('viewBox', valuesSec.clientWidth < 700 ? '330 0 540 80' : '0 0 1200 80');
+  const levelSvg = $('#level svg'), levelBody = $('.level-body', levelSvg), levelEnds = $$('.level-edge', levelSvg);
+  // phones: a shorter level drawn inside the crop, so the whole tool (both red ends, three vials) sits within the margins
+  const fitLevel = () => {
+    const narrow = valuesSec.clientWidth < 700;
+    levelSvg.setAttribute('viewBox', narrow ? '331 0 538 80' : '0 0 1200 80');
+    levelSvg.style.overflow = narrow ? 'hidden' : '';
+    levelBody.setAttribute('x', narrow ? 332 : 1); levelBody.setAttribute('width', narrow ? 536 : 1198);
+    levelEnds[0].setAttribute('x', narrow ? 332 : 1); levelEnds[1].setAttribute('x', narrow ? 856 : 1187);
+    $('#vial-l').setAttribute('transform', narrow ? 'translate(255 0)' : '');
+    $('#vial-r').setAttribute('transform', narrow ? 'translate(-255 0)' : '');
+  };
   fitLevel();
   const levelG = $('#level-g'), bubble = $('#bubble'), levelBox = $('#level'), levelDeg = $('#level-deg');
   const LV = { a: 1.6, t: 1.6, v: 0, raf: 0, lock: 0 };
