@@ -80,13 +80,18 @@
 @media (max-width: 767px) { .settings { display: none; } }
 
 /* ---------- version switch: a real radiogroup [S1303 §9, S0006 §12, S1441] ---------- */
+/* one floating pill at bottom left: only the switch of the section under the viewport's middle is shown,
+   so it never sits over a heading (FULL: the sticky top switch covered leads and headings at rest) */
 .vswitch {
-  position: sticky; top: calc(var(--nav-h) + 12px);
-  z-index: 30; height: 0;
-  display: flex; justify-content: flex-end; align-items: flex-start;
-  padding-inline: var(--margin);
+  position: fixed; left: var(--margin); bottom: 16px;
+  z-index: 55;
+  display: flex; align-items: center;
+  visibility: hidden; opacity: 0; transform: translateY(8px);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s linear 200ms;
   pointer-events: none;
 }
+.vswitch.is-current { visibility: visible; opacity: 1; transform: none; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s; }
+.vswitch__name { font: 600 .6875rem/1 var(--f-text); letter-spacing: .12em; text-transform: uppercase; padding: 0 8px 0 10px; opacity: .8; white-space: nowrap; }
 .vswitch__in {
   pointer-events: auto;
   display: inline-flex; align-items: center; gap: 2px;
@@ -114,7 +119,7 @@
   .vswitch button:hover { opacity: 1; }
 }
 @media (max-width: 767px) {
-  .vswitch { top: calc(var(--nav-h) + 6px); }
+  .vswitch { left: 10px; bottom: calc(76px + env(safe-area-inset-bottom)); }
   .vswitch button { width: 32px; height: 32px; }
 }
 

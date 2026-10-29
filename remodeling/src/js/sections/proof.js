@@ -1,5 +1,5 @@
-/* proof, PLAN-V3 §3: v1 inspection record (P14 stamp), v2 tape-measured odometers (Count Up 279 + Stroke Text 167),
-   v3 survey station (True Focus 300 + Heron grid). */
+/* proof: v1 inspection record (P14 stamp), v2 meter plate (Count Up 279 roll mode), v3 survey station (True Focus 300 + Heron grid).
+   Entrances dosed at .3s (FULL §4); the stamp thud and the focus jump keep their reference tempo as the centrepiece actions. */
 (function () {
   var NS = 'http://www.w3.org/2000/svg';
   var STAMP = EZ.bezier(.2, 1.6, .4, 1);          // [BANK P14] overshoot keyframe
@@ -12,82 +12,56 @@
       var rows = root.querySelectorAll('.proof1__table tbody tr');
       if (!k.motion) return;
       EZ.reveal(k, root.querySelectorAll('.proof1__intro > *'));
-      gsap.from(root.querySelector('.proof1__card'), { y: 48, autoAlpha: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: root.querySelector('.proof1__card'), start: 'top 85%', once: true } });
-      gsap.fromTo(root.querySelectorAll('.proof1__string'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .8, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
+      gsap.from(root.querySelector('.proof1__card'), { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.proof1__card'), start: 'top 85%', once: true } });
+      gsap.fromTo(root.querySelectorAll('.proof1__string'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
       gsap.set(stamps, { autoAlpha: 0, scale: 1.9 });
       var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 62%', once: true } });
       stamps.forEach(function (st, i) {
         var at = i * .16;
-        tl.to(st, { autoAlpha: .92, scale: 1, duration: .6, ease: STAMP }, at)
-          .fromTo(rows[i], { backgroundColor: 'rgba(200,64,46,.10)' }, { backgroundColor: 'rgba(200,64,46,0)', duration: .7, ease: 'power2.out' }, at + .18)
-          .fromTo(card, { y: 0 }, { y: 2, duration: .05, yoyo: true, repeat: 1, ease: 'power1.inOut' }, at + .16);
+        tl.to(st, { autoAlpha: .92, scale: 1, duration: .3, ease: STAMP }, at)
+          .fromTo(rows[i], { backgroundColor: 'rgba(200,64,46,.10)' }, { backgroundColor: 'rgba(200,64,46,0)', duration: .3, ease: 'power2.out' }, at + .12)
+          .fromTo(card, { y: 0 }, { y: 2, duration: .05, yoyo: true, repeat: 1, ease: 'power1.inOut' }, at + .1);
       });
     } },
 
-    /* v2 · Measured */
+    /* v2 · The meter plate: odometer reels [BANK 279 roll mode] set in steel; hover / focus / tap runs a meter again */
     2: { init: function (root, k) {
-      var rows = Array.prototype.slice.call(root.querySelectorAll('.proof2__row'));
-      EZ.reveal(k, root.querySelectorAll('.proof2__head > *'));
-
-      // tape blades, drawn to each row's width
-      rows.forEach(function (row, ri) {
-        var svg = row.querySelector('.proof2__svg'), tape = row.querySelector('.proof2__tape');
-        var p = { v: k.motion ? 0 : 1 }, parts = null;
-        function draw() {
-          var W = tape.clientWidth, H = tape.clientHeight;
-          if (!W) return;
-          svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-          var by = Math.round(H * .26), bh = Math.round(H * .44), x0 = 50, ticks = '', nums = '';
-          for (var x = x0 + 8, n = 0; x < W - 4; x += 8, n++) {
-            var big = (n + 1) % 10 === 0, mid = (n + 1) % 5 === 0;
-            ticks += 'M' + x + ' ' + by + 'v' + (big ? bh * .55 : mid ? bh * .38 : bh * .22);
-            if (big) nums += '<text class="tn" x="' + (x - 3) + '" y="' + (by + bh - 3) + '" text-anchor="end">' + ((n + 1) / 10) + '</text>';
-          }
-          svg.innerHTML = '<defs><clipPath id="p2c' + ri + '"><rect class="clip" x="' + x0 + '" y="0" width="' + (W - x0) + '" height="' + H + '"/></clipPath></defs>' +
-            '<g clip-path="url(#p2c' + ri + ')"><rect class="blade" x="' + x0 + '" y="' + by + '" width="' + (W - x0) + '" height="' + bh + '"/><path class="tick" d="' + ticks + '"/>' + nums + '</g>' +
-            '<path class="hook" d="M0 ' + (by - 5) + 'h5v' + (bh + 10) + 'h-5z"/>' +
-            '<rect class="case" x="1" y="1" width="54" height="' + (H - 2) + '" rx="10"/><rect class="grip" x="10" y="' + (H / 2 - 7) + '" width="30" height="14" rx="3"/>';
-          parts = { clip: svg.querySelector('.clip'), hook: svg.querySelector('.hook'), x0: x0, W: W };
-          set();
-        }
-        function set() {
-          if (!parts) return;
-          var w = (parts.W - parts.x0) * p.v;
-          parts.clip.setAttribute('width', Math.max(0, w));
-          parts.hook.setAttribute('transform', 'translate(' + (parts.x0 + w - 1) + ' 0)');
-        }
-        k.ro(tape, draw);
-        draw();
-        if (!k.motion) return;
-        gsap.to(p, { v: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: row, start: 'top 92%', end: 'top 48%', scrub: .6 } });
-        gsap.from(row.querySelector('.proof2__cap'), { y: 18, autoAlpha: 0, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: row, start: 'top 78%', once: true } });
-      });
-
+      var meters = Array.prototype.slice.call(root.querySelectorAll('.proof2__m'));
+      var EASE = EZ.bezier(.33, 1, .68, 1);
+      EZ.reveal(k, root.querySelectorAll('.proof2__head > *, .proof2__foot'));
       if (!k.motion) return;
-      // odometer roll [BANK 279]: cells 1em, stagger .07, turns <= 3 - rank, velocity blur while fast; outline fills on landing
-      rows.forEach(function (row) {
-        var num = row.querySelector('.proof2__num');
-        var val = num.dataset.n, orig = num.innerHTML;
+      gsap.from(root.querySelector('.proof2__plate'), { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.proof2__plate'), start: 'top 85%', once: true } });
+      meters.forEach(function (m) {
+        var num = m.querySelector('.proof2__num'), val = num.dataset.n, orig = num.innerHTML;
+        // final value stays in the HTML (no-JS / screen readers); the reels are drawn over it
         num.innerHTML = '<span class="sr-only">' + val + '</span>' + val.split('').map(function (ch) {
-          if (!/\d/.test(ch)) return '<span class="proof2__cell" aria-hidden="true"><span class="proof2__strip"><span>' + ch + '</span></span></span>';
+          if (!/\d/.test(ch)) return '<span class="proof2__cell proof2__cell--dot" aria-hidden="true"><span class="proof2__strip"><span>' + ch + '</span></span></span>';
           return '<span class="proof2__cell" aria-hidden="true" data-d="' + ch + '"><span class="proof2__strip"></span></span>';
         }).join('');
-        k.add(function () { num.innerHTML = orig; num.classList.remove('is-outline'); });
-        var cells = num.querySelectorAll('.proof2__cell[data-d]'), strips = [];
-        cells.forEach(function (c, i) {
-          var d = +c.dataset.d, turns = Math.max(1, 3 - i), s = '';
-          // the strip starts and ends on the real digit, so the figure never reads 0 before or after the roll
-          for (var t = 0; t <= turns * 10; t++) s += '<span>' + ((d + t) % 10) + '</span>';
-          var strip = c.querySelector('.proof2__strip');
-          strip.innerHTML = s;
-          strips.push({ el: strip, to: turns * 10 });
+        k.add(function () { num.innerHTML = orig; });
+        var reels = Array.prototype.slice.call(num.querySelectorAll('.proof2__cell[data-d]')).map(function (c, i, all) {
+          return { el: c.querySelector('.proof2__strip'), d: +c.dataset.d, turns: Math.max(1, all.length - i) };
         });
-        num.classList.add('is-outline');
-        var tl = gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 80%', once: true }, onComplete: function () { num.classList.remove('is-outline'); } });
-        strips.forEach(function (s, i) {
-          tl.to(s.el, { yPercent: 0, y: function () { return -s.to * s.el.firstChild.offsetHeight; }, duration: 1.5, ease: 'expo.out' }, i * .07)
-            .fromTo(s.el, { filter: 'blur(2.5px)' }, { filter: 'blur(0px)', duration: 1.1, ease: 'power2.in' }, i * .07);
-        });
+        // a run: each reel spins forward through whole turns and lands on its digit; first run sweeps up from 0
+        function run(fromZero, dur) {
+          var tl = gsap.timeline();
+          reels.forEach(function (r, i) {
+            var s = '', start = fromZero ? 0 : r.d, n = r.turns * 10 + (fromZero ? r.d : 0);
+            for (var t = 0; t <= n; t++) s += '<span>' + ((start + t) % 10) + '</span>';
+            r.el.innerHTML = s;
+            var h = r.el.firstChild.offsetHeight;
+            tl.fromTo(r.el, { y: 0 }, { y: -n * h, duration: dur, ease: EASE }, Math.min(i * .07, dur * .4))
+              .fromTo(r.el, { filter: 'blur(2px)' }, { filter: 'blur(0px)', duration: dur * .7, ease: 'power2.in' }, Math.min(i * .07, dur * .4));
+          });
+          return tl;
+        }
+        var cur = null;
+        reels.forEach(function (r) { r.el.innerHTML = '<span>0</span>'; });
+        ScrollTrigger.create({ trigger: m, start: 'top 85%', once: true, onEnter: function () { cur = run(true, 2); } });
+        function again() { if (cur && cur.isActive()) return; cur = run(false, .9); }
+        k.on(m, 'pointerenter', function (e) { if (e.pointerType === 'mouse') again(); });
+        k.on(m, 'focus', again);
+        k.on(m, 'click', again);
       });
     } },
 
@@ -167,8 +141,8 @@
       k.io(plan, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: .3 });
       if (k.motion) {
         EZ.reveal(k, root.querySelectorAll('.proof3__head > *'));
-        gsap.from(targets, { scale: .6, autoAlpha: 0, duration: .5, ease: 'back.out(2)', stagger: .08, scrollTrigger: { trigger: plan, start: 'top 75%', once: true } });
-        gsap.from(station, { y: 40, autoAlpha: 0, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: plan, start: 'top 75%', once: true } });
+        gsap.from(targets, { scale: .8, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: plan, start: 'top 75%', once: true } });
+        gsap.from(station, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: plan, start: 'top 75%', once: true } });
       }
     } }
   });

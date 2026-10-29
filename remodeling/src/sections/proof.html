@@ -38,43 +38,26 @@
     </div>
   </div>
 
-  <!-- v2 · Measured [BANK 279 Count Up odometer + BANK 167 Stroke Text + BANK Feldco trade-unit counts] -->
+  <!-- v2 · The meter plate [BANK 279 Count Up, roll mode: cells 1.2em, stagger .07, ease (0.33,1,0.68,1), IO once, final value in HTML] -->
   <div class="ver proof2" data-v="2" hidden>
     <div class="wrap">
       <div class="proof2__head">
-        <h2 class="t-head" id="proof-h2">The numbers, measured.</h2>
-        <p class="t-lead proof2__lead">Every figure here is one Elbaz publishes, and every one can be checked.</p>
+        <h2 class="t-head" id="proof-h2">The numbers, metered.</h2>
+        <p class="t-lead proof2__lead">Four figures Elbaz publishes, each one checkable. Hover or tap a meter and it runs its count again.</p>
       </div>
-      <ol class="proof2__rows">
-        <li class="proof2__row" data-card>
-          <p class="proof2__num nums" data-n="4.8">4.8</p>
-          <div class="proof2__tape" aria-hidden="true"><svg class="proof2__svg" preserveAspectRatio="none"></svg></div>
-          <p class="proof2__cap"><strong>Google rating</strong> based on <span class="nums">343</span> reviews</p>
-        </li>
-        <li class="proof2__row" data-card>
-          <p class="proof2__num nums" data-n="343">343</p>
-          <div class="proof2__tape" aria-hidden="true"><svg class="proof2__svg" preserveAspectRatio="none"></svg></div>
-          <p class="proof2__cap"><strong>Google reviews</strong> from homeowners</p>
-        </li>
-        <li class="proof2__row" data-card>
-          <p class="proof2__num nums" data-n="104">104</p>
-          <div class="proof2__tape" aria-hidden="true"><svg class="proof2__svg" preserveAspectRatio="none"></svg></div>
-          <p class="proof2__cap"><strong>Municipalities</strong> in Miami&#8209;Dade, Broward and Palm Beach</p>
-        </li>
-        <li class="proof2__row" data-card>
-          <p class="proof2__num nums" data-n="52">52</p>
-          <div class="proof2__tape" aria-hidden="true"><svg class="proof2__svg" preserveAspectRatio="none"></svg></div>
-          <p class="proof2__cap"><strong>Photographed projects</strong> every one our own work</p>
-        </li>
-        <li class="proof2__row" data-card>
-          <p class="proof2__num nums" data-n="30+">30+</p>
-          <div class="proof2__tape" aria-hidden="true"><svg class="proof2__svg" preserveAspectRatio="none"></svg></div>
-          <p class="proof2__cap"><strong>Years combined</strong> experience in the business</p>
-        </li>
-      </ol>
+      <div class="proof2__plate">
+        <i class="proof2__screw" aria-hidden="true"></i><i class="proof2__screw" aria-hidden="true"></i><i class="proof2__screw" aria-hidden="true"></i><i class="proof2__screw" aria-hidden="true"></i>
+        <ul class="proof2__meters">
+          <li><button type="button" class="proof2__m" data-rx="~star/roll/spinout/tr" aria-label="Google rating 4.8, run the count again"><span class="proof2__win"><span class="proof2__num nums" data-n="4.8">4.8</span></span><span class="proof2__lab"><b>Google rating</b> out of <span class="nums">5</span></span></button></li>
+          <li><button type="button" class="proof2__m" data-rx="~speech/roll/spinout/tr" aria-label="343 Google reviews, run the count again"><span class="proof2__win"><span class="proof2__num nums" data-n="343">343</span></span><span class="proof2__lab"><b>Google reviews</b> from homeowners</span></button></li>
+          <li><button type="button" class="proof2__m" data-rx="~compass/roll/spinout/tr" aria-label="104 municipalities, run the count again"><span class="proof2__win"><span class="proof2__num nums" data-n="104">104</span></span><span class="proof2__lab"><b>Municipalities</b> in three counties</span></button></li>
+          <li><button type="button" class="proof2__m" data-rx="~camera/roll/spinout/tr" aria-label="52 photographed projects, run the count again"><span class="proof2__win"><span class="proof2__num nums" data-n="52">52</span></span><span class="proof2__lab"><b>Photographed projects</b> all our own</span></button></li>
+        </ul>
+        <p class="proof2__serial">Florida Certified Building Contractor &middot; licence <span class="nums">CBC1265280</span></p>
+      </div>
       <div class="proof2__foot">
-        <a class="btn proof2__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="tape"><span class="btn__label">Read the 343 reviews</span></a>
-        <p class="proof2__lic">Florida Certified Building Contractor <span class="nums">CBC1265280</span></p>
+        <a class="btn proof2__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/bounce/sparkle/r"><span class="btn__label">Read the 343 reviews</span></a>
+        <a class="link proof2__chk" href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~magnifier/tilt/flash/r">Check the licence</a>
       </div>
     </div>
   </div>

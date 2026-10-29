@@ -46,7 +46,9 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
         const el = document.querySelector(sel);
         const ver = el.closest('.ver');
         const where = ver ? ver.closest('section').id + ver.dataset.v : (el.closest('.vswitch') ? el.closest('section').id + ':switch' : 'chrome');
-        const r = el.getBoundingClientRect(); const top = r.top + scrollY;
+        const r = el.getBoundingClientRect(); const sw = el.closest('.vswitch');
+        // a section's switch floats while that section holds the viewport's middle
+        const top = sw ? sw.closest('section').getBoundingClientRect().top + scrollY + 500 : r.top + scrollY;
         const fixed = !!el.closest('.nav, .mbar, .settings, .sheet');
         return { where, name: (el.getAttribute('aria-label') || el.textContent || el.querySelector('input')?.name || '').trim().replace(/\s+/g, ' ').slice(0, 28), rx: el.dataset.rx, top, fixed, href: el.getAttribute('href') };
       }, sel);

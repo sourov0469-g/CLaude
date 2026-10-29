@@ -245,6 +245,9 @@
     inner.className = 'vswitch__in';
     inner.setAttribute('role', 'radiogroup');
     inner.setAttribute('aria-label', (NAMES[s.id] || s.id) + ': design version');
+    var nm = doc.createElement('span');
+    nm.className = 'vswitch__name'; nm.setAttribute('aria-hidden', 'true'); nm.textContent = NAMES[s.id] || s.id;
+    inner.appendChild(nm);
     for (var i = 1; i <= 3; i++) {
       if (i > 1) {
         var sep = doc.createElement('span');
@@ -741,6 +744,11 @@
       activate(id, stored[id] || 1, { initial: true });
     });
     EZ.applyImages(doc.querySelector('.foot'));
+    // the floating switch shows the section that holds the viewport's middle line
+    var swIO = new IntersectionObserver(function (ens) {
+      ens.forEach(function (en) { var s = EZ.sections[en.target.dataset.section]; if (s && s.switchEl) s.switchEl.parentNode.classList.toggle('is-current', en.isIntersecting); });
+    }, { rootMargin: '-49% 0px -50% 0px' });
+    EZ.order.forEach(function (id) { swIO.observe(EZ.sections[id].el); });
 
     startLenis();
     setupCursor();

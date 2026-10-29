@@ -29,7 +29,7 @@
 
 /* ---------- button reactions: the drawn tools sit round the button; the button never moves ---------- */
 :where(.has-rx) { position: relative; overflow: visible; isolation: isolate; }   /* zero specificity: a component that positions itself (skip link, sticky bars) keeps its own position */
-.has-rx > .btn__label, .has-rx > .rx-l, .has-rx > .rx-c { position: relative; z-index: 1; }
+:where(.has-rx > .btn__label, .has-rx > .rx-l, .has-rx > .rx-c) { position: relative; z-index: 1; }   /* zero specificity: absolutely placed children (floating labels, hidden radio inputs) keep their position */
 .rx {
   position: absolute; left: -36px; top: -36px; z-index: 0;
   pointer-events: none; overflow: visible;
