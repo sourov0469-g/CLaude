@@ -1,0 +1,64 @@
+SOURCE PASS: https://dyo.blksport.com/ -> blk-design-your-own (2026-10-26T10:32:22Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 84K | assets: 4 files, 792K total | combined JS 580K, CSS 204K
+--- library/plugin counts (JS) ---
+gsap: 2
+ScrollTrigger: 0
+SplitText: 0
+SplitType: 0
+Lenis: 0
+lenis: 0
+three: 0
+WebGLRenderer: 0
+ShaderMaterial: 0
+Draggable: 0
+Observer: 4
+Flip: 0
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 0
+onnxruntime: 0
+requestAnimationFrame: 4
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+--- durations ---
+--- stagger ---
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 0 | fragmentShader: 0 | uniforms decls: 0
+--- CSS features ---
+@keyframes: 6
+cubic-bezier: 377
+prefers-reduced-motion: 0
+clip-path: 0
+backdrop-filter: 0
+mix-blend-mode: 0
+will-change: 0
+animation-timeline: 0
+    251 cubic-bezier(0.645, 0.045, 0.355, 1)
+     60 cubic-bezier(0.215, 0.61, 0.355, 1)
+     42 cubic-bezier(0.39, 0.575, 0.565, 1)
+     12 cubic-bezier(0.55, 0.055, 0.675, 0.19)
+      6 cubic-bezier(0.95, 0.05, 0.795, 0.035)
+      6 cubic-bezier(0.175, 0.885, 0.32, 1.375)
+@keyframes cart-pop
+@keyframes cart-shift
+@keyframes spinner
+--- fonts ---
+font-family:"Montserrat",sans-serif
+font-family:"Montserrat-Bold",sans-serif
+font-family:'Avenir-Book'
+font-family:'Montserrat'
+font-family:'Montserrat-Bold'
+font-family:inherit
+font-family:monospace, monospace
+font-family:sans-serif
+cross-host assets skipped (card discipline): 0
