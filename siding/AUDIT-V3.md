@@ -212,3 +212,5 @@ Final verdicts and verification evidence are appended below as each section pass
   - Beside it: the published siding band (415 jobs, median $10k-$15k, middle half $5k-$20k), the firm's six price levers, and a booking button with the phone.
   - **F5 closed.** The band also appears in Hero 2 (the only other band-by-trade device); the flagship reference requires it in the same flow, and the two only meet if both are picked.
 - **Evidence:** `sect.js colour` PASS ×9 with a real file upload; screenshots `colour1job`, `colour1mine`, `colour2`, `colour3`.
+
+**Near you — all three KEPT, re-verified 29 Oct 2026.** `sect.js near` PASS ×9: finder search with keyboard, row expand, map fly-in. Screenshots `near1–3`. Near 1's 1.8 s month build is a data animation (K10, flag F7).

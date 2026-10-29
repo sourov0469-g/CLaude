@@ -274,21 +274,21 @@ Sections are recorded in SECTIONS.md order.
 - **Mechanism:** real jobs plotted; the map is the coverage claim.
 - **Adaptations:** month-by-month build once; survey trail; crosshair reading miles to the office on the firm's 8.3 px/mile scale.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓, F ✓ (312 in frame, 574 more noted), M: the 1.8 s data build is logged as K10 (flag F7), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `near1-d/-m.png`. Finder: typing 'Round' lists options; ArrowDown + Enter → the readout names Round Rock. Month build 1.8 s is K10. `sect.js near` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **N2 · Town by town**
 - **Reference:** [BANK] West Shore Home location × service matrix (report DEEP 5: one page per town with local facts, never city-swap).
 - **Mechanism:** towns as rows carrying their own local figures.
 - **Adaptations:** per-town documented / priced counts and median bands; Round Rock's local notes; a skyline of one house per ten documented jobs on open.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓, F ✓, D ✓, P ✓ (genuinely local figures).
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `near2-d/-m.png`; a row opens (aria-expanded true). `sect.js near` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **N3 · Neighbourhood drive**
 - **Reference:** [BANK] KBF Design Gallery (remodeling report DEEP 3, originality CROWN: pick a neighbourhood → fly in → browse only jobs built there).
 - **Mechanism:** pick a place; the map flies in; a rail of local jobs.
 - **Adaptations:** viewBox tween over the firm's map; five towns with photographed jobs.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓, F ✓, D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `near3-d/-m.png`; a town chip flies the map (viewBox changes). `sect.js near` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 ### Reviews
 

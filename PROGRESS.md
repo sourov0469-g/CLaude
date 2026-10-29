@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 2, rebuilds (Hero, Proof, Services, Work, Built, Colour done)
+- **Phase:** 2, rebuilds (Hero → Near you done; Reviews, Money, Book left)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -98,7 +98,7 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - [x] **F4 · Services 1 and Hero 2 both end in a median price band.** CLOSED: Services 1 rebuilt with product facts and no price; Hero 2 is the only median-band-by-trade device.
 - [x] **F5 · Upload-your-house-photo flagship** (portfolio plan Site 6) is unbuilt. CLOSED: Colour 1 rebuilt as the flagship (local photo, brushed colour, published band and levers in one flow), tested with a real file.
 - [x] **F6 · Built 1 and Built 3 both technical drawings.** CLOSED: different references and mechanisms (S0526 exploded iso on springs vs S0361 dimensioned section with a lap↔batten morph), different layouts, and Built 2 between them is photographic.
-- [ ] **F7 · Near 1 month-by-month build** (2.3 s data animation on scroll).
+- [x] **F7 · Near 1 month-by-month build** (2.3 s data animation on scroll). CLOSED under K10: the firm's own map drawn month by month (now 1.8 s) is the data being read, played once, never gating, and complete at once under reduced motion.
 - [ ] **F8 · Lenis kept** (≈18 KB).
 
 ## Failed checks (kept visible until they pass)
@@ -120,3 +120,4 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - Phase 3 notes from the screenshots:
   - the Colour field's floating chips land on headings and intro text;
   - kit markers (small red notches) rest visibly on controls even when idle.
+- Near verified (KEPT ×3). Phase 3 note: the Near field roof plans sit behind data rows and maps; thin them out and keep text and maps clear.
