@@ -87,6 +87,12 @@ def main():
             if name.endswith(".json"):
                 lines[name[:-5]] = json.load(open(os.path.join(ldir, name)))
 
+    extra = {}
+    ddir = os.path.join(HERE, "data")
+    for name in sorted(os.listdir(ddir)):
+        if name.endswith(".json"):
+            extra[name[:-5]] = json.load(open(os.path.join(ddir, name)))
+
     vendor = "\n".join(read("vendor", v + ".min.js") for v in VENDOR) + "\n" + read("vendor", "lenis.min.js")
     hero_src = "data:image/webp;base64," + store.get("k-navy-shaker", "")
     logo_src = "data:image/png;base64," + b64(os.path.join(IMG, "logo.png"))
@@ -98,7 +104,7 @@ def main():
             .replace("{{HERO_SRC}}", hero_src)
             .replace("{{LOGO_SRC}}", logo_src)
             .replace("/*{{VENDOR}}*/", script_safe(vendor))
-            .replace("/*{{DATA}}*/", "window.__LINES=" + json.dumps(lines, separators=(",", ":")) + ";")
+            .replace("/*{{DATA}}*/", "window.__LINES=" + json.dumps(lines, separators=(",", ":")) + ";window.__DATA=" + json.dumps(extra, separators=(",", ":")) + ";")
             .replace("/*{{CORE}}*/", script_safe(read("js", "core.js")))
             .replace("/*{{SECTIONS_JS}}*/", script_safe("\n".join(js)))
             .replace("/*{{IMGSTORE}}*/", json.dumps(store, separators=(",", ":"))))
