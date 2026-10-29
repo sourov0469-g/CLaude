@@ -132,7 +132,7 @@ Sections are recorded in SECTIONS.md order.
   - F ✓: 886 / 177 / 4.9 / 474 / 5,000+ all FACTS.
   - M: count-up 1.4 s logged as K10.
   - D ✓, P ✓, 3D ✓ (earned: the checkable numbers are the proof).
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `v5/shots/proof1-d/-m.png`. Re-checked: Q165 12 layers + lerp 0.14 in code; count-up 1.4 s (K10). `sect.js proof` PASS at 1440, 375 and 1440 reduced motion (switch isolation by node identity, console 0, no overflow); facts grep: 474 only review count, 886 with 312 + 574, address verbatim (§3).
 
 **P2 · At a glance**
 - **Reference:** [BANK] Georgia Contractor Group (GC report CROWN local model: the "GCG at a glance" credential table as the hero proof; A2 + `remodeling/structure-uiux/general-contractors.md` DEEP 2).
@@ -142,7 +142,7 @@ Sections are recorded in SECTIONS.md order.
   - R ✓, S ✓ (leaders), T ✓ (leaders owned).
   - F ✓: six credentials as §3; the address string is fixed by the page-wide facts pass (K2).
   - D ✓ (a table vs counts vs a sentence), P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `proof2-d/-m.png`. Office row now the §3 address verbatim. `sect.js proof` PASS at 1440, 375 and 1440 reduced motion (switch isolation by node identity, console 0, no overflow); facts grep: 474 only review count, 886 with 312 + 574, address verbatim (§3).
 
 **P3 · Statement**
 - **Reference:** ⟦S1327⟧ scroll-scrubbed word reveal (A1: TreeWalker split, words 0.12–0.3 → 1 opacity) + [BANK] 292 Scroll Reveal (baseOpacity 0.1, stagger 0.05, scrub; A2 + deep-reads-slice-5).
@@ -153,7 +153,7 @@ Sections are recorded in SECTIONS.md order.
   - S ✓ (casement pills).
   - T ✓ (owns scrub words and stamp press-in).
   - F ✓, D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `proof3-d/-m.png`. S1327 TreeWalker split + scrub re-checked in code. `sect.js proof` PASS at 1440, 375 and 1440 reduced motion (switch isolation by node identity, console 0, no overflow); facts grep: 474 only review count, 886 with 312 + 574, address verbatim (§3).
 
 ### Services
 

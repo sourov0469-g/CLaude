@@ -185,3 +185,11 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Hero 2 "Pick your project"** (Stronghold + Neil Kelly): each card locates its trade on a drawn house; step 2 shows the published median band, middle half and monthly estimate. Tape and icon redraw removed. It is now the page's only median-band-by-trade device (F4 closed with Services 1's rebuild).
 - **Hero 3 "Real work"** (Feldco + R33): the visitor picks the job; the caption sits on a drawn yard sign that sways once on change. Static trade-unit stats. No autoplay, no count-up, no glint.
 - **Evidence:** `sect.js` PASS for all three at 1440, 375 and reduced motion; console 0; no overflow; facts grep clean. Screenshots are in the scratchpad `v5/shots`.
+
+**Proof — all three KEPT, re-verified 29 Oct 2026.** `sect.js` PASS (1440, 375, reduced motion); screenshots `proof1–3`. The Office row of Proof 2 now prints the §3 address verbatim.
+
+**Page-wide facts and chrome pass (K2, K7, K8), 29 Oct 2026.**
+- Hours and address are one constant each in `home2.py`, printed verbatim (§3) in Book 1, Book 3, the footer, the phone card and the JSON-LD.
+- Every hero CTA group carries `Call (512) 550-0000` as a `tel:` link.
+- The header and footer use the served logo files, byte for byte.
+- Each section's switcher now sticks inside a rail the height of its section. Before, its -56 px margin let it overhang the next section and stack on that section's switcher at the boundary (defect found in the Proof screenshots, fixed).

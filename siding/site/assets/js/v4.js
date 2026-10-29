@@ -962,7 +962,7 @@
     const r = el.getBoundingClientRect();
     const c = d.createElement('div');
     c.className = 'rx-call'; c.setAttribute('aria-hidden', 'true');
-    c.innerHTML = '<b>(512) 550-0000</b><span>Mon to Fri 8 AM to 8 PM · Sat 8 AM to 6 PM · Sun noon to 5 PM</span>';
+    c.innerHTML = '<b>(512) 550-0000</b><span>Monday–Friday 8–8, Saturday 8–6, Sunday 12–5</span>';
     d.body.appendChild(c);
     const w = Math.min(340, innerWidth - 32);
     G.set(c, { left: clamp(r.left + r.width / 2 - w / 2, 16, innerWidth - w - 16), top: clamp(r.top - 110, 12, innerHeight - 120), width: w });

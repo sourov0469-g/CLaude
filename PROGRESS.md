@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 2, rebuilds (Hero done)
+- **Phase:** 2, rebuilds (Hero, Proof done)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -99,3 +99,6 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - Phase 0 started. Brief saved; baseline recorded; conflicts K1–K9 logged.
 - Phase 0/1 committed (825507d): 20 KEPT, 10 REBUILT recorded in AUDIT-V3 before any rebuild.
 - Hero rebuilt (all three versions). The section test `scratchpad/v5/sect.js` checks switch isolation by node identity, the section's controls, console, overflow and reduced motion. Hero: 9/9 PASS. The packer now carries SVG `<image href>` through the asset table (Hero 1).
+- Proof verified (KEPT ×3).
+- Page-wide: §3 hours/address constants; served logos in header and footer; switcher rail fix (defect: the sticky switcher overhung the next section).
+- Reviews captions "Google review, 2026" are queued for the Reviews rebuild.

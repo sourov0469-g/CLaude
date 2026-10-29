@@ -21,7 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(os.path.dirname(HERE), 'site')
 OUT = os.path.join(os.path.dirname(HERE), 'homepage-standalone.html')
 JS = ['gsap', 'ScrollTrigger', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'CustomEase']
-MIME = {'.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2'}
+MIME = {'.webp': 'image/webp', '.avif': 'image/avif', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2'}
 # F18 weight pass, applied only to the packed copy (the site's own files stay as they are): (path pattern, max width,
 # format, quality), first match wins. Job photos go to AVIF at 50 (about 40 % under WebP at the same look) and at most
 # 1120 px wide (the widest place one shows is the Hero 3 panel); the traced blueprint plates are two-tone line art,

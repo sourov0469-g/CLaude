@@ -17,6 +17,8 @@ import sheet
 
 H = 'assets/img/h/'
 EMAIL = 'info@austinprosiding.com'
+ADDRESS = '7801 N Lamar Blvd Suite C70, Austin, TX 78752'   # BRIEF-V5 §3, verbatim
+HOURS = 'Monday–Friday 8–8, Saturday 8–6, Sunday 12–5'       # BRIEF-V5 §3, verbatim
 
 
 def band(s):
@@ -370,7 +372,7 @@ def proof2():
     rows = ''.join(f'''<tr><td class="gl-b"><img src="assets/img/{f}.webp" width="{dims[f][0]}" height="{dims[f][1]}" alt="" loading="lazy" decoding="async"><svg class="gl-ld" viewBox="0 0 40 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ld-l" pathLength="1" d="M2 6H36"/><path class="ld-t" d="M2 1V11M38 6L32 2.5V9.5Z"/></svg></td>
       <th scope="row">{e(n)}<span class="gl-t">{t}</span></th><td class="gl-m">{e(m)}</td></tr>''' for f, n, t, m in CRED_ROWS)
     base = [('In business', 'Since 2009. Austin Pro Siding &amp; Windows (2009) and Sanders Roofing &amp; Exteriors (2010) merged in 2018.'),
-            ('Office', '7801 N Lamar Blvd, Suite C70, Austin, TX 78752'),
+            ('Office', ADDRESS),
             ('Reviews', '<b class="num">4.9</b> on 474 Google reviews'),
             ('Record', '886 documented projects, 177 before-and-after pairs, 5,000+ Central Texas homeowners')]
     base_rows = ''.join(f'<div class="gl-r"><dt>{k}</dt><dd>{v}</dd></div>' for k, v in base)
@@ -1064,7 +1066,7 @@ def form(pref, theme='', panes=False):
         <div class="fld"><label for="{pref}-tel">Phone</label><input id="{pref}-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="{pref}-tel-e"><p class="bk-err" id="{pref}-tel-e" hidden>Phone numbers have 10 digits, like (512) 550-0000.</p></div>
         <div class="fld"><label for="{pref}-zip">ZIP code</label><input id="{pref}-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" required aria-describedby="{pref}-zip-e"><p class="bk-err" id="{pref}-zip-e" hidden>ZIP codes have 5 digits, like 78752.</p></div>
       </fieldset>
-      <div class="bk-done" tabindex="-1" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25l7 7 15-16"/></svg><p class="bk-done-h">Request saved, <span data-done-name>thanks</span></p><p>The office calls you back to pick a time: Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
+      <div class="bk-done" tabindex="-1" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25l7 7 15-16"/></svg><p class="bk-done-h">Request saved, <span data-done-name>thanks</span></p><p>The office calls you back to pick a time: {HOURS}.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
       <div class="bk-nav"><button class="bk-back tlink" type="button" hidden>Back</button><button class="btn btn-ink bk-next" type="button">Continue</button><button class="btn btn-red bk-send" type="submit" hidden>Request my inspection</button></div>
     </form>'''
 
@@ -1075,7 +1077,7 @@ def book1():
   <h2 class="h2x b1-h" data-split>See your price in writing</h2>
   <p class="b1-sub">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price.</p>
   <span class="mag" data-magnet><svg class="b1-door" aria-hidden="true" focusable="false"><rect class="bd-o" x="0" y="0" width="100%" height="100%" rx="4"/><rect class="bd-i" x="12" y="12" width="100%" height="100%" rx="2"/></svg><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
-  <p class="b1-hours">Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM</p>
+  <p class="b1-hours">Office hours: {HOURS}</p>
   <div class="b1-act"><button class="btn btn-white b1-open" type="button" aria-expanded="false" aria-controls="b1-panel">Book free inspection online</button></div>
   <div class="b1-panel" id="b1-panel" hidden>{form('b1', 'bk-card')}</div>
 </div>'''
@@ -1105,7 +1107,7 @@ def book3():
       Call me on <span class="snt-in"><input name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-label="Your phone number" placeholder="phone" size="12" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.</p>
     <ul class="snt-err" aria-live="polite" hidden></ul>
     <div class="snt-go"><button class="btn btn-red snt-send" type="submit" data-cur="hero">Send my request</button>
-      <p class="snt-promise">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price in writing. The office calls you back to pick a time: Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM.</p></div>
+      <p class="snt-promise">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price in writing. The office calls you back to pick a time: {HOURS}.</p></div>
     <div class="snt-done" tabindex="-1" hidden><p class="bk-done-h">Request saved, <span data-snt-name>thanks</span></p><p>The office calls you back to pick a time.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
   </form>
   <p class="b3-call">Rather talk? <a class="tlink on-dark" href="{TEL}">{PHONE}</a></p>
@@ -1133,7 +1135,7 @@ def section(key, label, fns, names):
                    for n, nm in enumerate(names, 1))
     tpl = ''.join(f'<template data-v="{n}">{v}</template>' for n, v in enumerate(vs, 1))
     return f'''<section class="sec sec-{key}" id="{key}" data-sec="{key}" data-names="{e('|'.join(names))}" aria-label="{label}">
-  <div class="vsw" role="tablist" aria-label="{label} versions"><span class="vsw-l" aria-hidden="true"><b>{label}</b> <span>{e(names[0])}</span></span>{tabs}</div>
+  <div class="vsw-rail"><div class="vsw" role="tablist" aria-label="{label} versions"><span class="vsw-l" aria-hidden="true"><b>{label}</b> <span>{e(names[0])}</span></span>{tabs}</div></div>
   <div class="stage" id="{key}-stage" role="tabpanel" aria-labelledby="{key}-tab1">{vs[0]}</div>
   {tpl}
 </section>'''
@@ -1142,7 +1144,7 @@ def section(key, label, fns, names):
 def head():
     ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Austin Pro Siding, Windows & Roofing",
           "telephone": "+1-512-550-0000", "email": EMAIL, "url": LIVE,
-          "address": {"@type": "PostalAddress", "streetAddress": "7801 N Lamar Blvd, Suite C70", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78752", "addressCountry": "US"},
+          "address": {"@type": "PostalAddress", "streetAddress": "7801 N Lamar Blvd Suite C70", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78752", "addressCountry": "US"},
           "openingHours": ["Mo-Fr 08:00-20:00", "Sa 08:00-18:00", "Su 12:00-17:00"], "foundingDate": "2009",
           "aggregateRating": {"@type": "AggregateRating", "ratingValue": 4.9, "reviewCount": 474, "bestRating": 5}}
     return f'''<!doctype html>
@@ -1169,7 +1171,7 @@ def header():
     links = [('#work', 'Work'), ('#colour', 'Colour'), ('#near', 'Near you'), ('#money', 'Financing')]
     nav = ''.join(f'<a href="{h}">{t}</a>' for h, t in links)
     return f'''<header class="hd">
-  <a class="hd-logo" href="#main" aria-label="Austin Pro Siding, Windows and Roofing, top of page"><img src="assets/img/logo-color.webp" width="1080" height="200" alt=""></a>
+  <a class="hd-logo" href="#main" aria-label="Austin Pro Siding, Windows and Roofing, top of page"><img src="assets/img/served/65246f239b165c29151e6f9f_AP_HORIZONTAL-LOGO_COLOR-V2-p-1080.png" width="1080" height="262" alt=""></a>
   <nav class="hd-nav" aria-label="Sections">{nav}</nav>
   <button class="hd-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button>
   <a class="hd-tel" href="{TEL}">{PHONE}</a>
@@ -1198,11 +1200,11 @@ def picks():
 
 def footer():
     return f'''<footer class="ft" data-tone="night">
-  <div class="ft-top"><img class="ft-logo" src="assets/img/logo-white.webp" width="500" height="93" alt="Austin Pro Siding, Windows and Roofing" loading="lazy">
+  <div class="ft-top"><img class="ft-logo" src="assets/img/served/AP_HORIZONTAL-LOGO_WHT-p-500.avif" width="500" height="122" alt="Austin Pro Siding, Windows and Roofing" loading="lazy">
     <p class="ft-big"><a href="{TEL}">{PHONE}</a></p></div>
   <div class="ft-grid">
-    <p><b>Office</b>7801 N Lamar Blvd, Suite C70<br>Austin, TX 78752</p>
-    <p><b>Hours</b>Monday to Friday 8 AM to 8 PM<br>Saturday 8 AM to 6 PM<br>Sunday noon to 5 PM</p>
+    <p><b>Office</b>{ADDRESS}</p>
+    <p><b>Hours</b>{HOURS}</p>
     <p><b>Write</b><a href="mailto:{EMAIL}">{EMAIL}</a></p>
     <nav aria-label="Footer"><b>On this page</b><a href="#work">Work</a><a href="#colour">Colour</a><a href="#near">Near you</a><a href="#money">Financing</a><a href="#book">Book</a><button class="ft-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button></nav>
   </div>
@@ -1217,7 +1219,8 @@ def build():
     js = ['gsap', 'ScrollTrigger', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'CustomEase']
     body += ''.join(f'<script src="assets/js/{n}.min.js" defer></script>\n' for n in js)
     body += '<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/fx.js" defer></script>\n<script src="assets/js/v4.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
-    out = clean(body)
+    # house style turns en dashes into hyphens; the §3 hours string is restored verbatim afterwards (K2)
+    out = clean(body).replace(clean(HOURS), HOURS)
     with open(os.path.join(SITE, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(out)
     words = len(re.sub(r'<[^>]+>', ' ', re.sub(r'<template.*?</template>|<script.*?</script>|<style.*?</style>', ' ', out, flags=re.S)).split())

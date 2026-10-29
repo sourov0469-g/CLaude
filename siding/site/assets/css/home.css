@@ -99,7 +99,8 @@ html.js.motion [data-split]:not(.is-split) { visibility: hidden; }
 .v[data-tone="red"] { --bg: var(--red); --fg: #fff; --fg2: #fff; }
 .v[data-tone="night"] :focus-visible, .v[data-tone="photo"] :focus-visible, .v[data-tone="red"] :focus-visible, .ft :focus-visible { outline-color: #fff; box-shadow: 0 0 0 3px var(--ink); }
 
-.vsw { position: sticky; z-index: 30; top: calc(var(--hd) + 10px); width: max-content; margin: 12px max(var(--m), env(safe-area-inset-right)) -56px auto; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(20, 20, 20, .9); color: #F3F2EE; font-size: .8125rem; line-height: 1; }
+.vsw-rail { position: absolute; z-index: 30; inset: 0; pointer-events: none; }   /* the switcher sticks inside its own section and never overhangs the next */
+.vsw { position: sticky; z-index: 30; top: calc(var(--hd) + 10px); width: max-content; margin: 12px max(var(--m), env(safe-area-inset-right)) 0 auto; pointer-events: auto; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(20, 20, 20, .9); color: #F3F2EE; font-size: .8125rem; line-height: 1; }
 .vsw-l { padding: 0 8px 0 10px; white-space: nowrap; }
 .vsw-l b { font-weight: 650; }
 .vsw-l span { display: none; color: #C9C6BE; }
