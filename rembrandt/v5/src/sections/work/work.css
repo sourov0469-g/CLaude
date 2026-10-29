@@ -26,7 +26,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 
 /* v2 Q157: a 5 x 5 collage (the demo runs 7 x 7 with many more photos; six real jobs need fewer cells) where the layout is the animation data. Opening one photo moves its image into the inner
    area (2 / 2 / -2 / -2); every other item changes only its row or column to an edge; Flip plays the difference. */
-.wv2{--cols:5;--rows:5}
+.wv2{--cols:4;--rows:4}
 .wv2-head{min-height:calc(var(--t-h2) + 72px);align-content:start}
 .wv2-closed{display:grid;gap:12px}
 .wv2-open{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
@@ -37,7 +37,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 @media (hover:hover){.wv2-close:hover{background:var(--mist)}}
 .wv2-grid{position:relative;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));grid-template-rows:repeat(var(--rows),minmax(0,1fr));gap:12px;
-  height:min(72svh,720px);min-height:460px;padding:0 var(--gutter)}
+  height:min(86svh,880px);min-height:520px;padding:0 var(--gutter)}
 .wv2-item{grid-column:var(--c);grid-row:var(--r);position:relative;padding:0;border:0;background:none;overflow:hidden;cursor:pointer}
 .wv2-item img,.wv2-full img{width:100%;height:100%;object-fit:cover;display:block}
 .wv2-item:focus-visible{outline-offset:2px}
@@ -69,3 +69,67 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv3-pair figcaption{font-size:.9375rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .wv3.is-still .wv3-frame,.wv3.is-still .wv3-labels{display:none}
 @media (max-width:640px){.wv3-pair{grid-template-columns:1fr}}
+
+/* ---------- V7 upgrades (PLAN-V7 §6 Work) */
+.wv{--vbg:var(--sky)}
+.wv-head,.wv1-strip,.wv1-foot,.wv1-tape,.wv2-grid,.wv3-stage{position:relative;z-index:1}
+/* v1: a roofer's tape runs under the loop, its ticks travelling with the track; the caption rides the hook; a faint
+   speed square behind turns with the job on show */
+.wv1-square{position:absolute;right:-60px;top:40px;width:min(42vw,520px);height:auto;z-index:0;pointer-events:none}
+.wv1-sq{transform-origin:40px 360px;transform-box:view-box;transition:transform .6s var(--ease-x)}
+.wv1-sq path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;opacity:.09;vector-effect:non-scaling-stroke}
+.wv1-sq .wv1-sq-lip{opacity:.07}
+.wv1-tape{height:28px;margin-top:18px;padding:0}
+.wv1-blade{display:block;width:100%;height:28px}
+.wv1-blade-bg{fill:var(--sun)}
+.wv1-blade-tk{stroke:var(--ink);stroke-width:1.4}
+#wv1-ticks path{stroke:var(--ink);stroke-width:1.4}
+.wv1-cap{display:flex;align-items:center;gap:12px}
+.wv1-hook{width:22px;height:28px;flex:none;overflow:visible}
+.wv1-hook path{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.wv1-hook rect{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.wv1.is-step .wv1-hook{animation:wv-hook .3s var(--ease-x)}
+@keyframes wv-hook{0%{transform:translateX(0)}40%{transform:translateX(10px)}100%{transform:translateX(0)}}
+.wv1-tile{position:relative}
+.wv1-nails{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wv1-nails circle{fill:#d8dde8;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
+@media (hover:hover){.wv1-tile:hover .wv1-nails circle{opacity:1;transform:scale(1)}.wv1-tile:hover .wv1-nails circle:nth-child(2){transition-delay:.03s}.wv1-tile:hover .wv1-nails circle:nth-child(3){transition-delay:.06s}.wv1-tile:hover .wv1-nails circle:nth-child(4){transition-delay:.09s}}
+.wv-btn{position:relative}
+.wv-btn .i-sq{opacity:0;fill:none;stroke-width:2.2}
+.wv-btn .i-arw,.wv-btn .i-sq{transition:opacity .18s var(--ease-x)}
+@media (hover:hover){.wv-btn[data-dir]:hover .i-arw{opacity:0}.wv-btn[data-dir]:hover .i-sq{opacity:1}}
+.wv-btn[data-dir]:focus-visible .i-arw{opacity:0}.wv-btn[data-dir]:focus-visible .i-sq{opacity:1}
+.wv-btn.is-press{animation:wv-tick .3s var(--ease-spring)}
+@keyframes wv-tick{0%{scale:.9}100%{scale:1}}
+.wv1-pause .i-pause{stroke-dasharray:12}
+@media (hover:hover){.wv1-pause:hover .i-pause{animation:wv-draw .25s var(--ease-x)}}
+@keyframes wv-draw{from{stroke-dashoffset:12}}
+/* v2: a gable cap lowers over a photo on hover (Q147 chevron, inverted into a roof line); opening lifts the roof off */
+.wv2-hip{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#wv2-hp path{fill:none;stroke:var(--ink);stroke-width:1;opacity:.07}
+.wv2-gc{position:absolute;left:0;top:0;width:100%;height:46%;pointer-events:none;overflow:visible}
+.wv2-gc-f{fill:var(--sky)}
+.wv2-gc-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.wv2-tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:700;line-height:1.2;opacity:0;transform:translateY(16px);transition:opacity .2s var(--ease-x),transform .3s var(--ease-x);pointer-events:none;text-align:left;max-width:calc(100% - 24px)}
+@media (hover:hover){.wv2-item:hover .wv2-tag{opacity:1;transform:none}}
+.wv2-item:focus-visible .wv2-tag{opacity:1;transform:none}
+.wv2.is-open .wv2-gc,.wv2.is-open .wv2-tag{opacity:0}
+.wv2-close{position:relative}
+.wv2-close .i-raf{opacity:0}
+.wv2-close .i-raf path{fill:var(--wood);stroke:currentColor;stroke-width:1.2}
+.wv2-close .i-x,.wv2-close .i-raf{transition:opacity .18s var(--ease-x)}
+@media (hover:hover){.wv2-close:hover .i-x{opacity:0}.wv2-close:hover .i-raf{opacity:1}}
+.wv2-close:focus-visible .i-x{opacity:0}.wv2-close:focus-visible .i-raf{opacity:1}
+.wv2-close.is-press .i-raf{animation:wv-fold .3s var(--ease-x)}
+@keyframes wv-fold{0%{transform:scaleY(1)}50%{transform:scaleY(.2)}100%{transform:scaleY(1)}}
+.wv2-close .i-raf{transform-origin:12px 11px;transform-box:view-box}
+/* v3: the after photo laid over the before, course by course, bottom to top; a small hammer rides the course going
+   on; the frame sits on a drawn drip edge and starter strip */
+.wv3-ham{pointer-events:none}
+.wv3-ham-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2}
+.wv3-ham-c{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.wv3-ham-s{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.wv3-drip{display:block;width:100%;height:18px;margin-top:-2px;overflow:visible}
+.wv3-drip-e,.wv3-drip-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.wv3-starter{fill:none;stroke:var(--chalk);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.wv3.is-still .wv3-drip{display:none}
