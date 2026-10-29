@@ -136,3 +136,8 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - `qa/scripts/famint.mjs`, log `qa/famint.log`: every reaction and background response confirmed. Errors 0.
   - Facts in the whole file: 353-9711 ×0, 24/7 ×0, licence ×0, emergency ×0.
 - **Divider:** family → chevrons, unchanged and unique on the page.
+- **Fixed after the first Family commit (kept visible):**
+  - A rerun of `famint.mjs` after the V2 wording change read R23 as "none". The Call link was not broken; it was still hidden.
+  - Cause: V2 started its entrance at `top 75%`, so with the longer statement the link sat in the lowest quarter of a 900 px screen and stayed invisible.
+  - Fix: V2 now uses the house start (`top 94%`). No other section overrides it.
+  - Rerun: R23 fm-wob / fm-ring, errors 0; `secqa.mjs family` 9/9 clean.

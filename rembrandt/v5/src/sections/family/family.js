@@ -83,7 +83,7 @@ function statement(root, c) {
   };
   render(0);
   ScrollTrigger.create({ trigger: p, start: 'top 88%', end: 'bottom 38%', scrub: true, onUpdate: s => render(s.progress), onRefresh: s => render(s.progress) });
-  beats(root, [root.querySelector('.fm2-photo'), root.querySelector('.fm2-call')], { start: 'top 75%' });
+  beats(root, [root.querySelector('.fm2-photo'), root.querySelector('.fm2-call')]); // the house start (top 94%): a later start left the call link invisible in the lowest quarter of the screen
   return cleanup;
 }
 
