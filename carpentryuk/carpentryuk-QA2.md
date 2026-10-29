@@ -204,3 +204,20 @@ Skills re-read for this round:
 - **Result.** Measured in our page: logo 42×42, wordmark 157×27, same font, size, weight, tracking and colour. The logo-to-wordmark offset is 50 px, the same as live. The live-vs-page shots look identical at 1440 and 375. Under 360 px the lockup steps down slightly (38 px logo, 18 px wordmark), so both 44 px header buttons still fit at 320.
 - **Palette.** Their theme colours: background `#F3EFEC`, foreground `#171511`, primary `#7A2812`, secondary `#3D4235`, tertiary `#E2E1DD`. The page already used the first four exactly. The alternate sheets (values, design and build, coverage) used an invented warm `#EBE6E0`; they now use their tertiary, `#E2E1DD`. The image-well shade is one step deeper in the same grey. Body copy on `#E2E1DD` measures above 4.5:1.
 - **Shots:** `round2/logo-live-vs-page-1440`, `round2/logo-live-vs-page-375` (live on top, page below), `round2/after-logo-header-320-360-375`, `round2/after-logo-footer-1440`, `round2/after-palette-values-1440`.
+
+### 2b. A calm hero: one signature move
+
+- **Finding.** Around the plumb bob, the hero carried several static line layers:
+  - a full roof-truss drawing behind the copy, crossing the headline and the lead;
+  - a ruler along the top of the photo and another down its left side;
+  - a dimension line and a bottom chord under the whole hero;
+  - paper "halo" text-shadows on the lead and caption, there only to lift text off those lines.
+
+  That is several decorative layers doing the same job (S1314 "decorative stacking"), and they compete with the one move that works, the pendulum (S1501: one primary emphasis per view).
+- **Change.** Removed the truss, both rulers, the photo crosshair lines, the dimension lines, the halos and the caption's blurred backing. Also removed the JS that drew and rebuilt all of these.
+  - **Plumb bob.** It now hangs from a small nail in the middle of the gap between the copy column and the photo, level with the photo's top edge. The line runs down beside the picture, like a carpenter checking the frame is true. Its drop-in, swing, cursor brush and reduced-motion state are unchanged.
+  - **Loupe.** It stays on the photo. It appears only while you're over the photo, so nothing is drawn there at rest.
+  - **Photo.** It gains the 34 px the rulers took.
+  - **Bottom padding.** Back to a normal step, since there is no truss chord to clear.
+- **Result.** The hero is now headline, lead, call, quote, a note, the photo and its caption, plus the pendulum, with nothing else drawn. Checked at 1440, 1280 (with the loupe), 1024 and 375. The bob clears both columns at every desktop width. On phones the pendulum stays off, as before: the columns stack and there is no gap for it to swing in. The phone hero is just copy, buttons and the full-width photo.
+- **Shots:** `round2/hero-before-vs-after-1440` (before on top), `round2/hero-before-vs-after-375` (before, after, before, after), `round2/after-hero-1024`, `round2/after-hero-1280-loupe`.
