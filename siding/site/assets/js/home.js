@@ -396,53 +396,35 @@
     $$('.ip-sash', p).forEach(sa => G.fromTo(sa, { scaleX: 1 }, { scaleX: 0.12, ease: 'none', scrollTrigger: { trigger: sa.closest('.ipill'), start: 'top 78%', end: 'top 58%', scrub: 0.4 } }));
     G.from($$('.creds-stamp li', r), { scale: 1.3, autoAlpha: 0, duration: 0.3, ease: 'power4.out', stagger: 0.12, scrollTrigger: once($('.stamps', r), 'top 88%') });   // pressed in, never rotated (builder brief 6)
   };
-  /* SERVICES 1: point at the house. Each part of the traced Rob Roy elevation opens its trade; the part becomes the
-     one lit red part and the rest steps down (S0526 selection). Hover previews, press commits; the radio buttons are
-     the DOM mirror of every hit area (S1334, 44 px). */
+  /* SERVICES 1: [BANK] Neil Kelly (configure the project before reading) + [BANK] 531 BLK Design Your Own (ONE inline
+     SVG; the picked zone re-fills in the same frame, ease (0.645, 0.045, 0.355, 1)). The traced Rob Roy elevation:
+     pointing at a part previews it, clicking or the chips commit it. The part takes its own material hatch (lap,
+     glazing, shingle tabs, trim cross-hatch, door stiles, deck boards), wiped in over 0.3 s, and the card lists what
+     the firm installs there. Hover previews on mouse only; chips are a radio group (arrows move and select). */
   V.services1 = (r, b) => {
-    const svg = $('.pt-el', r), card = $('.pt-card', r), D = JSON.parse($('.pt-data', r).textContent), seg = $('.pt-parts', r);
-    const out = k => $(`[data-pt="${k}"]`, card), book = $('.pt-book', card);
+    const svg = $('.sv1-el', r), card = $('.sv1-card', r), D = JSON.parse($('.sv1-data', r).textContent), seg = $('.sv1-parts', r);
+    const o = k => $(`[data-s1="${k}"]`, card), book = $('.sv1-book', card), NS = 'http://www.w3.org/2000/svg';
+    const layer = d.createElementNS(NS, 'g'); layer.setAttribute('class', 'sv1-hatch');
+    $('.hits', svg).before(layer);
+    const hatch = {};
+    $$('[data-hit]', svg).forEach(h => {
+      const p = d.createElementNS(NS, 'path'), k = h.dataset.hit;
+      p.setAttribute('d', h.getAttribute('d')); p.setAttribute('fill', `url(#sv1-h-${k})`); p.setAttribute('class', 'sv1-h');
+      layer.appendChild(p); hatch[k] = p;
+    });
+    b.add(() => layer.remove());
     let committed = 'siding', shown = '';
-    /* v4: the chosen part answers in its own trade's way: window glass glints (372 Glare), the lap courses get a
-       spirit level whose bubble settles (S0340 detent); one overlay group, rebuilt per pick */
-    const NSV = 'http://www.w3.org/2000/svg', fx = d.createElementNS(NSV, 'g');
-    fx.setAttribute('class', 'pt-fx'); svg.appendChild(fx); b.add(() => fx.remove());
-    const partFx = part => {
-      fx.textContent = '';
-      const g = $(`g[data-part="${part}"]`, svg); if (!g) return;
-      if (part === 'windows') {
-        $$('rect, path', g).slice(0, 12).forEach((el, i) => {
-          const bb = el.getBBox(); if (bb.width < 12 || bb.height < 12) return;
-          const ln = d.createElementNS(NSV, 'line'); ln.setAttribute('class', 'pt-glint');
-          ln.setAttribute('x1', bb.x + bb.width * 0.2); ln.setAttribute('y1', bb.y + bb.height * 0.8); ln.setAttribute('x2', bb.x + bb.width * 0.55); ln.setAttribute('y2', bb.y + bb.height * 0.2);
-          fx.appendChild(ln);
-          G.fromTo(ln, { opacity: 0, x: -bb.width * 0.25 }, { opacity: 0.9, x: bb.width * 0.35, duration: 0.65, ease: 'power2.inOut', delay: i * 0.04, yoyo: true, repeat: 1 });
-        });
-      } else if (part === 'siding') {
-        const bb = g.getBBox(), lv = d.createElementNS(NSV, 'g'); lv.setAttribute('class', 'pt-level');
-        const x = bb.x + bb.width * 0.55, y = bb.y + bb.height * 0.45;
-        lv.innerHTML = `<rect x="${x - 60}" y="${y - 9}" width="120" height="18" rx="4"/><rect x="${x - 16}" y="${y - 6}" width="32" height="12" rx="6"/><circle class="pt-bub" cx="${x - 9}" cy="${y}" r="4.5"/>`;
-        fx.appendChild(lv);
-        G.fromTo(lv, { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: 'back.out(1.6)' });
-        G.fromTo($('.pt-bub', lv), { x: -10 }, { x: 9, duration: 0.8, ease: 'back.out(1.4)', delay: 0.15 });
-        G.to(lv, { autoAlpha: 0, duration: 0.4, delay: 2.2 });
-      }
-    };
     const show = (part, anim) => {
-      const d0 = D[part]; if (!d0 || part === shown) return;
-      shown = part;
-      svg.dataset.on = part;
-      $$('[data-part]', svg).forEach(g => g.classList.toggle('is-on', g.dataset.part === part));
-      out('trade').textContent = d0.trade; out('med').textContent = d0.med; out('cnt').textContent = d0.cnt;
-      const ex = out('extra'); ex.hidden = !d0.extra; ex.textContent = d0.extra;
-      const im = out('img'), ph = im.parentElement;
-      if (d0.img) { im.src = AU(d0.img); im.alt = d0.cap; ph.hidden = false; } else ph.hidden = true;
-      book.dataset.trade = d0.trade; book.textContent = `Book a ${d0.trade.toLowerCase()} inspection`;
-      if (anim && motionOK()) {
-        partFx(part);
-        G.fromTo([out('trade'), out('med')], { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.35, ease: ease.out, stagger: 0.05, overwrite: true });
-        if (window.DrawSVGPlugin) G.fromTo($$(`g[data-part="${part}"] path`, svg), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.6, ease: 'power2.inOut', stagger: 0.01, overwrite: true });
-      }
+      const t = D[part]; if (!t || part === shown) return;
+      shown = part; svg.dataset.on = part;
+      $$('g[data-part]', svg).forEach(g => g.classList.toggle('is-on', g.dataset.part === part));
+      Object.entries(hatch).forEach(([k, p]) => p.classList.toggle('on', k === part));
+      o('label').textContent = t.label;
+      o('facts').innerHTML = t.facts.map(x => `<li>${esc(x)}</li>`).join('');
+      const im = o('img'), ph = im.parentElement;
+      if (t.img) { im.src = AU(t.img); im.alt = t.cap; o('cap').textContent = t.cap; ph.hidden = false; } else ph.hidden = true;
+      book.dataset.trade = t.trade; book.textContent = `Book a ${t.trade.toLowerCase()} inspection`;
+      if (anim && motionOK()) G.fromTo($$('li', o('facts')), { x: 10, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.24, ease: 'power2.out', stagger: 0.04, overwrite: true });
     };
     const pick = radios(seg, b, it => { committed = it.dataset.part; show(committed, true); });
     $$('[data-hit]', svg).forEach(h => {
@@ -451,7 +433,6 @@
     });
     b.on(svg, 'pointerleave', e => { if (e.pointerType === 'mouse') show(committed, true); });
     show('siding', false);
-    if (motionOK() && window.DrawSVGPlugin) G.from($$('[data-g] path', svg), { drawSVG: '0%', duration: 0.9, ease: 'power2.inOut', stagger: 0.004, scrollTrigger: once(svg, 'top 80%') });
   };
 
   /* SERVICES 2: Q571 AHA's numbered services index: an ordered list numbered by CSS counters, with the current /
@@ -491,54 +472,55 @@
     b.on(list, 'pointerleave', () => G.to(peek, { autoAlpha: 0, scale: 0.96, duration: 0.2 }));
   };
 
-  /* SERVICES 3: a tape measure from $0 to $50k. Pull it (Draggable x with Inertia, snapping to $500, S0184; edge
-     resistance 0.85), keys step $500 (Shift $5,000); trades whose middle half covers the mark light up. */
+  /* SERVICES 3: [BANK] Scrollable and Draggable Timeline (Codrops), Mode B: Draggable on the strip with
+     edgeResistance 0.85 and no inertia, a linear map from strip x to the value (ease none), + builder brief R38.
+     The tape reads $0 to $50,000; the red mark is your budget and every trade whose published middle half covers it
+     lights up. Nothing plays on arrival: the tape rests at $15,000 until the visitor pulls it. Keys: arrows $500
+     (Shift $5,000), Page Up/Down $5,000, Home/End; a key move travels in 0.24 s. The end hook catches at either end. */
   V.services3 = (r, b) => {
-    const tape = $('.tape', r), strip = $('.tape-strip', r), band = $('.tape-band', r), list = $('.tm-list', r), rows = $$('.tm-t', r);
+    const tape = $('.tape', r), strip = $('.tape-strip', r), band = $('.tape-band', r), list = $('.tm-list', r), rows = $$('.tm-t', r), hook = $('.tape-hook', r);
     const vOut = $('[data-tm-v]', r), nOut = $('[data-tm-n]', r);
-    const PX = () => strip.offsetWidth / 50;
-    const xOf = v => band.clientWidth / 2 - v / 1000 * PX();
-    const vOf = x => clamp((band.clientWidth / 2 - x) / PX() * 1000, 0, 50000);
-    let val = 15000;
-    const hook = $('.tape-hook', r);
-    let atEnd = false;
-    const upd = v => {
-      val = Math.round(v / 500) * 500;
-      const end = val === 0 || val === 50000;   // v4: the hook catches at either end of the travel
+    const MAX = 50000, STEP = 500;
+    const px = () => strip.offsetWidth / 50;                     // one $1k tick = 2 % of the strip
+    const xOf = v => band.clientWidth / 2 - v / 1000 * px();
+    const vOf = x => clamp((band.clientWidth / 2 - x) / px() * 1000, 0, MAX);
+    let val = 15000, atEnd = false, drag = null;
+    const read = v => {
+      val = Math.round(clamp(v, 0, MAX) / STEP) * STEP;
+      const f = usd.format(val);
+      vOut.textContent = f; tape.setAttribute('aria-valuenow', val); tape.setAttribute('aria-valuetext', f);
+      list.style.setProperty('--v', (val / MAX).toFixed(4));
+      let n = 0;
+      rows.forEach(rw => { const on = val >= +rw.dataset.lo * 1000 && val <= +rw.dataset.hi * 1000; rw.classList.toggle('is-on', on); n += on; });
+      nOut.textContent = `${n} of ${rows.length} trades usually ${n === 1 ? 'lands' : 'land'} here.`;
+      const end = val === 0 || val === MAX;
       if (end && !atEnd && motionOK() && hook) G.fromTo(hook, { rotation: 0 }, { rotation: val ? 14 : -14, duration: 0.14, ease: 'power2.out', yoyo: true, repeat: 1 });
       atEnd = end;
-      const f = usd.format(val); vOut.textContent = f;
-      tape.setAttribute('aria-valuenow', val); tape.setAttribute('aria-valuetext', f);
-      list.style.setProperty('--v', (val / 50000).toFixed(4));
-      let n = 0; rows.forEach(rw => { const on = val >= +rw.dataset.lo * 1000 && val <= +rw.dataset.hi * 1000; rw.classList.toggle('is-on', on); if (on) n++; });
-      nOut.textContent = n === 1 ? `1 of ${rows.length} trades usually lands here.` : `${n} of ${rows.length} trades usually land here.`;
     };
-    let drag = null;
+    const place = (v, travel) => {
+      read(v);
+      const x = xOf(val);
+      if (travel && motionOK()) G.to(strip, { x, duration: 0.24, ease: 'power2.out', overwrite: true, onComplete: () => drag && drag.update() });
+      else { G.set(strip, { x }); if (drag) drag.update(); }
+    };
     if (window.Draggable) {
       drag = window.Draggable.create(strip, {
-        type: 'x', edgeResistance: 0.85, inertia: !!window.InertiaPlugin && motionOK(), zIndexBoost: false,
-        bounds: { minX: xOf(50000), maxX: xOf(0) },
-        snap: x => xOf(Math.round(vOf(x) / 500) * 500),
-        onDrag() { upd(vOf(this.x)); }, onThrowUpdate() { upd(vOf(this.x)); }, onDragEnd() { upd(vOf(this.x)); }
+        type: 'x', edgeResistance: 0.85, inertia: false, zIndexBoost: false, bounds: { minX: xOf(MAX), maxX: xOf(0) },
+        onDrag() { read(vOf(this.x)); }, onDragEnd() { place(vOf(this.x), true); }
       })[0];
       b.add(() => drag.kill());
     }
-    const setV = (v, anim) => {
-      v = clamp(v, 0, 50000);
-      upd(v);                               // the value commits at once; only the tape travels (keys can stack)
-      if (anim && motionOK()) G.to(strip, { x: xOf(v), duration: 0.35, ease: ease.out, overwrite: true, onComplete: () => drag && drag.update() });
-      else { G.set(strip, { x: xOf(v) }); if (drag) drag.update(); }
-    };
     b.on(tape, 'keydown', e => {
-      const st = e.shiftKey ? 5000 : 500, m = { ArrowRight: st, ArrowUp: st, ArrowLeft: -st, ArrowDown: -st };
-      if (e.key in m) { e.preventDefault(); setV(val + m[e.key], true); }
-      else if (e.key === 'Home') { e.preventDefault(); setV(0, true); }
-      else if (e.key === 'End') { e.preventDefault(); setV(50000, true); }
+      const big = 5000, st = e.shiftKey ? big : STEP;
+      const m = { ArrowRight: st, ArrowUp: st, ArrowLeft: -st, ArrowDown: -st, PageUp: big, PageDown: -big };
+      if (e.key in m) { e.preventDefault(); place(val + m[e.key], true); }
+      else if (e.key === 'Home') { e.preventDefault(); place(0, true); }
+      else if (e.key === 'End') { e.preventDefault(); place(MAX, true); }
     });
-    b.ro(band, () => { if (drag) drag.applyBounds({ minX: xOf(50000), maxX: xOf(0) }); setV(val); });
-    setV(15000);
-    if (motionOK()) { const o = { v: 0 }; G.to(o, { v: 15000, duration: 1.6, ease: ease.x, scrollTrigger: once(tape, 'top 85%'), onStart: () => setV(0), onUpdate: () => { G.set(strip, { x: xOf(o.v) }); upd(o.v); }, onComplete: () => drag && drag.update() }); }
+    b.ro(band, () => { if (drag) drag.applyBounds({ minX: xOf(MAX), maxX: xOf(0) }); place(val); });
+    place(val);
   };
+
   /* WORK 1: drag the divider; a flick past 300 px/s or a release 50 px from an edge commits to that side (S0197);
      arrows step 5 % (Shift 10 %); pairs change through the logo window panes. */
   V.work1 = (r, b) => {

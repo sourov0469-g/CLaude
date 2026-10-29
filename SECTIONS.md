@@ -11,7 +11,7 @@ Flip a line to `passes: YES` only when that version has:
 |---|---|---|---|---|
 | 1 | Hero | Window letters — passes: YES | Pick your project — passes: YES | Real work — passes: YES |
 | 2 | Proof | Record — passes: YES | At a glance — passes: YES | Statement — passes: YES |
-| 3 | Services | Point at it — passes: NO | Index — passes: NO | Tape measure — passes: NO |
+| 3 | Services | Point at it — passes: YES | Index — passes: YES | Tape measure — passes: YES |
 | 4 | Work | Drag — passes: NO | Blueprint — passes: NO | Lens — passes: NO |
 | 5 | Built | Taken apart — passes: NO | Built for Texas — passes: NO | To the inch — passes: NO |
 | 6 | Colour | Dock — passes: NO | Paint or ColorPlus — passes: NO | Colour book — passes: NO |

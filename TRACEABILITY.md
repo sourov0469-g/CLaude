@@ -45,7 +45,7 @@ Page systems are judged once in Phase 3, not per version (conflict K9):
 | Stamp press-in | Proof 3 | v4 Money 3 "paid" stamp → rebuilt |
 | Picking a part on a house drawing | Services 1 | — |
 | Edge-aware row band + glyph redraw | Services 2 | v4 Hero 2 icon redraw → rebuilt |
-| Draggable tape | Services 3 | v4 Hero 2 tape blade → rebuilt |
+| Draggable tape | Services 3 | v4 Hero 2 tape blade → rebuilt; kit "tape" reaction → Phase 3 |
 | Exploded view on springs | Built 1 | — |
 | Sticky stacking cards | Built 2 | — |
 | Lap ↔ batten path morph | Built 3 | — |
@@ -166,7 +166,7 @@ Sections are recorded in SECTIONS.md order.
 - **Verdict:** REBUILT.
   - F4: price overlap.
   - T fail: the v4 window glints and spirit level duplicate the glint and level owners.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `services1-d/-m.png`, `services1w-d/-m.png` (Windows picked), reduced motion `services1rm`. Chip Windows: facts list 'NT Windows 238 …', one hatch on, booking set to Windows, no $ figure anywhere in the card (F4); ArrowRight → Roof. `tel:` link present. `sect.js services` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **S2 · Index**
 - **Reference:** [BANK] Q571 AHA (services index as a semantic numbered list, CSS counters; A2 + deep-reads-slice-9) + [BANK] Q162 K72 (edge-aware band, closestEdge; A2 + deep-reads-slice-3).
@@ -177,18 +177,17 @@ Sections are recorded in SECTIONS.md order.
   - S ✓ (11 glyph symbols).
   - T ✓ (owns band + glyph redraw).
   - F ✓ (FACTS counts and bands), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `services2-d/-m.png`. 11 rows; closestEdge band + glyph redraw re-checked in code. `sect.js services` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **S3 · Tape measure**
 - **Reference:** [BANK] Scrollable and Draggable Timeline (Codrops; master tween ease none, Draggable edgeResistance, Mode B without Club inertia; A2 + deep-reads-slice-4) + builder brief R38.
-- **Mechanism:** a draggable track mapped to a value.
-- **Adaptations:** a $0–$50k tape against each trade's published middle half; tape case and end hook; slider role + keys.
-- **Verdict:** KEPT.
-  - R ✓ (Draggable on the strip, linear mapping).
-  - S ✓ (tape case, hook, ticks).
-  - T ✓ (owns the tape).
-  - F ✓ (middle halves from FACTS), D ✓, P ✓.
-- **Verification:** —
+- **Mechanism:** a draggable track mapped linearly to a value.
+- **Adaptations:** a $0–$50k tape against each trade's published middle half; tape case and end hook; slider role + keys (arrows, Shift, Page Up/Down, Home/End); key moves travel 0.24 s; nothing plays on arrival.
+- **Verdict:** KEPT in Phase 1 → **REBUILT** on re-verification (29 Oct).
+  - M fail: a 1.6 s roll-out from $0 played on scroll (beyond F17's 0.3 s), and while it ran it overwrote keyboard input. Found by the section test (ArrowRight left the value at $15,000).
+  - R: the v4 code used Inertia; the reference's Mode B has none.
+  - Rewritten from the reference: no intro, no inertia, value committed on every key and drag.
+- **Verification:** PASS (29 Oct). Screenshot `services3-d/-m.png`. Focus the tape + ArrowRight → aria-valuenow changes at once (failed before the rewrite). `sect.js services` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 ### Work
 
@@ -367,9 +366,9 @@ Sections are recorded in SECTIONS.md order.
 
 ## Phase 1 totals
 
-**20 KEPT · 10 REBUILT.**
+**20 KEPT · 10 REBUILT** at Phase 1; **19 KEPT · 11 REBUILT** after Services 3 failed re-verification in Phase 2.
 
-The rebuilds: Hero 1, Hero 2, Hero 3, Services 1, Colour 1, Reviews 1, Reviews 2, Reviews 3, Money 1, Money 3.
+The rebuilds: Hero 1, Hero 2, Hero 3, Services 1, Services 3, Colour 1, Reviews 1, Reviews 2, Reviews 3, Money 1, Money 3.
 
 Each section's three references differ:
 - **Hero:** Q95 / Stronghold + Neil Kelly / Feldco + R33.

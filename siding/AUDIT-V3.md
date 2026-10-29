@@ -193,3 +193,10 @@ Final verdicts and verification evidence are appended below as each section pass
 - Every hero CTA group carries `Call (512) 550-0000` as a `tel:` link.
 - The header and footer use the served logo files, byte for byte.
 - Each section's switcher now sticks inside a rail the height of its section. Before, its -56 px margin let it overhang the next section and stack on that section's switcher at the boundary (defect found in the Proof screenshots, fixed).
+
+**Services — S1 REBUILT, S2 KEPT, S3 REBUILT (verdict changed), 29 Oct 2026.**
+- **Services 1 "Point at it"** (Neil Kelly + BLK 531): the traced Rob Roy elevation. Each part answers with what the firm installs there, from the FACTS product sections: Hardie 301 of 415 on the 8.25″ board, textures, window brands 238 / 54 / 38 / 31, GAF Master Elite with roof counts, Sherwin-Williams 320 and ColorPlus, doors 109, decking 5. The picked part wipes in its own material hatch in 0.3 s. No price, so F4 closes. The v4 glints and spirit level are gone.
+- **Services 2:** KEPT, re-verified.
+- **Services 3:** KEPT in Phase 1, REBUILT after the section test caught a 1.6 s roll-out on scroll that overwrote keyboard input (an F17 fail and a broken control). Rewritten from the Codrops reference, Mode B without inertia.
+- **Totals now 19 KEPT, 11 REBUILT.**
+- **Evidence:** `sect.js services` PASS ×9; console 0; screenshots `services1–3`.

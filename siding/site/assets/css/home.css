@@ -997,29 +997,34 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 .creds-stamp li { filter: grayscale(1); transition: filter var(--t-ui) ease; }
 .creds-stamp li:hover { filter: none; }
 
-/* SERVICES 1: point at the house */
-.pt-head { display: grid; gap: 12px; margin-bottom: clamp(20px, 3vw, 36px); }
-.pt-sub { color: var(--fg2); max-width: 46ch; }
-.pt-grid { display: grid; gap: 20px; }
-.pt-fig { position: relative; aspect-ratio: 1400 / 875; background: var(--sheet); outline: 1px solid var(--stone); outline-offset: -1px; overflow: hidden; touch-action: pan-y; }
-.pt-fig svg { width: 100%; height: 100%; }
-.pt-el g[data-part] path { transition: stroke var(--t-ui) ease, opacity var(--t-ui) ease, stroke-width var(--t-ui) ease; }
-.pt-el[data-on] g[data-part]:not(.is-on) path { opacity: .35; }
-.pt-el g.is-on path { stroke: var(--red); stroke-width: 1.8; opacity: 1; }
-.pt-el g.is-on .glass { stroke: var(--red); }
-.pt-card { display: grid; gap: 12px; align-content: start; }
-.pt-parts { display: flex; flex-wrap: wrap; gap: 6px; }
-.pt-parts button { min-height: 44px; padding: 0 16px; border: 2px solid var(--line); border-radius: 999px; background: transparent; font-weight: 650; }
-.pt-parts button[aria-checked="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
-.pt-trade { font-size: clamp(1.75rem, 1rem + 2.4vw, 3rem); font-weight: 780; font-stretch: 84%; letter-spacing: -.02em; line-height: 1; margin-top: 8px; }
-.pt-med { display: grid; }
-.pt-med span { color: var(--fg2); font-size: var(--t-sm); }
-.pt-med b { font-size: clamp(2.5rem, 1rem + 4vw, 4.5rem); font-weight: 790; font-stretch: 75%; line-height: .9; color: var(--red-d); }
-.pt-cnt, .pt-extra { color: var(--fg2); }
-.pt-ph { aspect-ratio: 4 / 3; overflow: hidden; background: var(--ground2); max-width: 360px; }
-.pt-ph img { width: 100%; height: 100%; object-fit: cover; }
-.pt-book { justify-self: start; }
-@media (min-width: 900px) { .pt-grid { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; align-items: start; } }
+/* SERVICES 1: point at a part of the traced house (Neil Kelly + BLK); each part takes its own material hatch */
+.sv1-head { display: grid; gap: 12px; margin-bottom: clamp(20px, 3vw, 36px); }
+.sv1-sub { color: var(--fg2); max-width: 46ch; }
+.sv1-grid { display: grid; gap: 20px; }
+.sv1-fig { position: relative; margin: 0; aspect-ratio: 1400 / 875; background: var(--sheet); outline: 1px solid var(--stone); outline-offset: -1px; overflow: hidden; touch-action: pan-y; }
+.sv1-fig svg { width: 100%; height: 100%; }
+.sv1-fc { position: absolute; left: 8px; bottom: 8px; padding: 2px 6px; background: var(--sheet); color: var(--line); font-size: .75rem; font-weight: 600; letter-spacing: .02em; }
+.sv1-el g[data-part] path { transition: stroke var(--t-ui) ease, opacity var(--t-ui) ease, stroke-width var(--t-ui) ease; }
+.sv1-el[data-on] g[data-part]:not(.is-on) path { opacity: .35; }
+.sv1-el g.is-on path { stroke: var(--red); stroke-width: 1.8; opacity: 1; }
+.sv1-el g.is-on .glass { stroke: var(--red); }
+.sv1-el pattern path { fill: none; stroke: var(--red); stroke-width: 1.4; opacity: .55; }
+.sv1-h { stroke: none; pointer-events: none; clip-path: inset(0 100% 0 0); transition: clip-path .3s cubic-bezier(.645, .045, .355, 1); }
+.sv1-h.on { clip-path: inset(0 0 0 0); }
+html:not(.motion) .sv1-h { transition: none; }
+.sv1-card { display: grid; gap: 14px; align-content: start; }
+.sv1-parts { display: flex; flex-wrap: wrap; gap: 6px; }
+.sv1-parts button { min-height: 44px; padding: 0 16px; border: 2px solid var(--line); border-radius: 999px; background: transparent; font-weight: 650; }
+.sv1-parts button[aria-checked="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.sv1-t { margin: 8px 0 0; font-size: clamp(1.75rem, 1rem + 2.4vw, 3rem); font-weight: 780; font-stretch: 84%; letter-spacing: -.02em; line-height: 1; }
+.sv1-facts { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.sv1-facts li { position: relative; padding-left: 22px; color: var(--ink2); line-height: 1.4; }
+.sv1-facts li::before { content: ""; position: absolute; left: 0; top: .55em; width: 12px; height: 2px; background: var(--red); box-shadow: 0 4px 0 var(--red); }
+.sv1-ph { display: grid; gap: 6px; margin: 0; max-width: 360px; }
+.sv1-ph img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--ground2); }
+.sv1-ph figcaption { color: var(--fg2); font-size: .8125rem; }
+.sv1-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+@media (min-width: 900px) { .sv1-grid { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; align-items: start; } }
 
 /* SERVICES 2: index letters answer the cursor (weight and width axes) */
 .ix-name .ch { display: inline-block; font-variation-settings: "wght" calc(770 + var(--k, 0) * 130), "wdth" calc(84 + var(--k, 0) * 22); transition: font-variation-settings .2s var(--ease); }
@@ -1421,11 +1426,6 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .th-tab { fill: #B9B6AE; stroke: #47443F; stroke-width: 1.5; }
 .th-lip { stroke: #47443F; stroke-width: 4; stroke-linecap: round; }
 .th-rv { fill: #47443F; }
-.pt-glint { stroke: #fff; stroke-width: 3; stroke-linecap: round; opacity: 0; pointer-events: none; }
-.pt-level rect:first-child { fill: #F2C230; stroke: #161616; stroke-width: 1; }
-.pt-level rect + rect { fill: #CFE8B5; stroke: #161616; stroke-width: .8; }
-.pt-level circle { fill: #fff; stroke: #161616; stroke-width: .6; }
-.pt-level { pointer-events: none; }
 
 /* ---------- v4 Work (PLAN §3 Work) ---------- */
 .cmp-line { width: 16px; margin-left: -8px; background: none; filter: drop-shadow(2px 0 3px rgba(0, 0, 0, .35)); }

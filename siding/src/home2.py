@@ -408,39 +408,61 @@ def proof3():
 
 # ---------- SERVICES ----------
 # the six parts of the Rob Roy house the instrument can light, mapped to the firm's trades (FACTS.md counts and bands)
-PARTS = [('siding', 'Siding', 'siding', 'Siding'), ('windows', 'Windows', 'windows', 'Windows'),
-         ('roof', 'Roof', 'shingle-roofing', 'Shingle roofing'), ('trim', 'Trim and paint', 'exterior-painting', 'Exterior painting'),
-         ('doors', 'Doors', 'doors', 'Exterior doors'), ('deck', 'Deck', 'decking', 'Decking')]
+SV1 = [   # (part, label, trade for booking, photo slug, facts as the firm publishes them: FACTS.md product sections)
+    ('siding', 'Siding', 'Siding', 'siding', ['James Hardie fiber cement on every priced siding job',
+                                             '301 of 415 used the HardiePlank lap 8.25″ board; 27 went board and batten',
+                                             'Select Cedarmill texture on 286 of 415, Smooth on 36',
+                                             '30-year non-prorated Hardie warranty, plus lifetime workmanship on labour']),
+    ('windows', 'Windows', 'Windows', 'windows', ['Four brands cover 361 of 376 priced window jobs',
+                                                  'NT Windows 238 · Simonton 54 · Andersen 38 · Pella 31',
+                                                  'Frames: 214 vinyl, 64 aluminum, 33 Fibrex composite',
+                                                  'Most window-only jobs take two days on site']),
+    ('roof', 'Roof', 'Shingle roofing', 'shingle-roofing', ['GAF Master Elite; GAF on 200 documented projects',
+                                                             '210 shingle roofs and 31 metal roofs documented',
+                                                             '5-year labour warranty on laminate and designer shingles; GAF Golden Pledge available',
+                                                             'Metal: lifetime workmanship, manufacturer 30 to 50 years']),
+    ('trim', 'Trim and paint', 'Exterior painting', 'exterior-painting', ['Sherwin-Williams on 320 documented projects',
+                                                                         'Any of 1,700+ colours with free colour matching, or ColorPlus baked on in 17 Austin colours',
+                                                                         'Painted in the same job on 297 of 415 priced siding jobs']),
+    ('doors', 'Doors', 'Exterior doors', 'doors', ['109 exterior door jobs documented',
+                                                   '18% of priced window jobs replaced doors too']),
+    ('deck', 'Deck', 'Decking', '', ['Decking is one of the firm\'s eleven trades',
+                                     '5 priced decking jobs in the firm\'s cost data, 2018–2026']),
+]
+SV1_HATCH = (   # material hatches, as a section drawing marks them: lap courses, glazing, shingle tabs, trim cross-hatch, door stiles, deck boards
+    '<pattern id="sv1-h-siding" width="28" height="18" patternUnits="userSpaceOnUse"><path d="M0 17H28M0 14.5H28"/></pattern>'
+    '<pattern id="sv1-h-windows" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)"><path d="M0 4H22M0 9H10"/></pattern>'
+    '<pattern id="sv1-h-roof" width="36" height="20" patternUnits="userSpaceOnUse"><path d="M0 19H36M0 9H36M12 0V9M30 10V19"/></pattern>'
+    '<pattern id="sv1-h-trim" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 12L12 0M0 0L12 12"/></pattern>'
+    '<pattern id="sv1-h-doors" width="14" height="40" patternUnits="userSpaceOnUse"><path d="M3 0V40M7 0V40"/></pattern>'
+    '<pattern id="sv1-h-deck" width="40" height="16" patternUnits="userSpaceOnUse"><path d="M0 15H40M0 13H40M20 0V13"/></pattern>')
 
 
 def services1():
+    """[BANK] Neil Kelly (configure the project before reading) + [BANK] 531 BLK (one inline SVG, the picked zone
+    re-fills in the same frame, ease (0.645, 0.045, 0.355, 1)). The traced Rob Roy elevation; each part answers with
+    what Austin Pro installs there, in the firm's own counts. No prices here: the trade bands live in Hero 2."""
     data = {}
-    for key, label, slug, trade in PARTS:
-        t = TBY[slug]
-        cnt = f"{t['doc']} documented jobs" if t['doc'] else f"{t['n']} priced jobs"
-        extra = ''
-        if key == 'roof':
-            m = TBY['metal-roofing']
-            extra = f"Metal roofing: {m['doc'] or m['n']} jobs, median {med(m)}"
-        data[key] = dict(label=label, trade=trade, cnt=cnt, med=med(t), mid=mid(t), img=tphoto(slug) if slug in TRADE_PHOTO else '', cap=tcap(slug) if slug in TRADE_PHOTO else '', extra=extra)
-    btns = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" data-part="{key}">{label}</button>' for k, (key, label, *_r) in enumerate(PARTS))
+    for part, label, trade, slug, facts in SV1:
+        data[part] = dict(label=label, trade=trade, facts=facts, img=tphoto(slug) if slug else '', cap=tcap(slug) if slug else '')
+    chips = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" data-part="{p}">{lab}</button>' for k, (p, lab, *_r) in enumerate(SV1))
     d0 = data['siding']
+    li = ''.join(f'<li>{e(x)}</li>' for x in d0['facts'])
+    draw = elevation.svg('sv1el', 'elev sv1-el', 'The Rob Roy house as a line drawing; each part of it opens the matching trade', hits=True).replace('<defs>', '<defs>' + SV1_HATCH, 1)
     js = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
-    return f'''<div class="v services-1 has-bgf" data-tone="ground">
-  <div class="pt-head"><h2 class="h2x" data-split>What needs work?</h2><p class="pt-sub">Point at the part of the house. Every number is from the firm's own job files.</p></div>
-  <div class="pt-grid">
-    <figure class="pt-fig" data-cur="view">{elevation.svg('ptel', 'elev pt-el', 'The Rob Roy house as a line drawing; each part of it opens the matching trade', hits=True)}</figure>
-    <div class="pt-card" aria-live="polite">
-      <div class="pt-parts" role="radiogroup" aria-label="Part of the house">{btns}</div>
-      <p class="pt-trade" data-pt="trade">{d0['trade']}</p>
-      <p class="pt-med num"><span>Median job</span><b data-pt="med">{d0['med']}</b></p>
-      <p class="pt-cnt" data-pt="cnt">{d0['cnt']}</p>
-      <p class="pt-extra" data-pt="extra" hidden></p>
-      <figure class="pt-ph"><img data-pt="img" src="{d0['img']}" width="800" height="600" alt="{e(d0['cap'])}" loading="lazy" decoding="async"></figure>
-      {btn_book('btn btn-ink pt-book', 'Book a free inspection', d0['trade'])}
+    return f'''<div class="v services-1" data-tone="ground">
+  <div class="sv1-head"><h2 class="h2x" data-split>What needs work?</h2><p class="sv1-sub">Point at a part of the house to see what Austin Pro puts there, counted from the firm's own job files.</p></div>
+  <div class="sv1-grid">
+    <figure class="sv1-fig" data-cur="view">{draw}<figcaption class="sv1-fc">Rob Roy, Austin, traced from the job photo</figcaption></figure>
+    <div class="sv1-card" aria-live="polite">
+      <div class="sv1-parts" role="radiogroup" aria-label="Part of the house">{chips}</div>
+      <h3 class="sv1-t" data-s1="label">{d0['label']}</h3>
+      <ul class="sv1-facts" data-s1="facts">{li}</ul>
+      <figure class="sv1-ph"><img data-s1="img" src="{d0['img']}" width="800" height="600" alt="{e(d0['cap'])}" loading="lazy" decoding="async"><figcaption data-s1="cap">{e(d0['cap'])}</figcaption></figure>
+      <div class="sv1-cta">{btn_book('btn btn-ink sv1-book', 'Book a siding inspection', d0['trade'])}<a class="tlink" href="{TEL}">Call {PHONE}</a></div>
     </div>
   </div>
-  <script type="application/json" class="pt-data">{js}</script>
+  <script type="application/json" class="sv1-data">{js}</script>
 </div>'''
 
 

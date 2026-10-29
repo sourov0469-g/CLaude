@@ -7487,3 +7487,4 @@ Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> —
 - **Firm financing example + anatomy F10** — PICKED-FOR: Money V1 — RESULT: **REBUILT (Phase 2)** — month-pane term grid replaces the spirit level.
 - **R24 + FACTS Offers** — PICKED-FOR: Money V3 — RESULT: **REBUILT (Phase 2)** — strike-and-rewrite total; no odometer, no stamp.
 - All other 20 versions: reference re-verified in the Atlas, **KEPT** (rows in TRACEABILITY.md).
+- **[BANK] Scrollable and Draggable Timeline (Codrops), Mode B** — PICKED-FOR: Services V3 — RESULT: **REBUILT (Phase 2)** — re-verification found a 1.6 s intro that overwrote keys; rewritten without intro or inertia.
