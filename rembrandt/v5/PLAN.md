@@ -31,6 +31,14 @@ Binding sources: the owner's DIRECTION CHANGE and decisions in RUN-PLAN.md, and 
 
 No two sections share an archetype.
 
+## 2a. Amendments from G5 (direction notes, read after the first draft)
+- No en dashes either, and no middle-dot strings in visible text. Hours read "Monday to Friday, 9 to 5".
+- Hero: headline ≤7 words, at most 2 lines on desktop (display clamp lowered to 7vw); one sentence ≤12 words: "Bunk started it, Wade runs it, and Rachel answers the phone."
+- No labels laid over photos (S0650 9.F): Before and After are control labels or captions outside the photo.
+- No hand-drawn houses or scenery (S0650, S1320, S1314). SVG is used for masks, line work traced from the real photos, and data graphics. How v2 becomes a roofline traced from the real charcoal ranch that draws itself; the real roof is then revealed course by course. Call v1 drops the drawn sun. Area v1 uses a plain dot, not a drawn truck.
+- Two CTA intents with identical labels everywhere: "Call (937) 746-7377" (tel:) and "Get a written estimate" (anchor to the call section, where the number and the estimate line live). No SMS: texting that line is not a known fact.
+- Word budget: at most 450 visible words for the default set, about 80 per screen.
+
 ## 2. Content: visitor first, no filler (owner; S0006 distill; S0095 words budget)
 
 About 300 words across the default page. No eyebrows or kickers (S0006 ban). No 01/02/03 section numbers. No em dashes anywhere, alt text included (S1303 #10). One primary action, the call; one secondary, a text to Rachel (sms:) or an anchor to the call section. Facts are only the owner's list. Town names come from the firm's own service list (rembrandt-pack.md), and distances from the US Census gazetteer (v4 towns.json). No licence number, no 24/7, no testimonials, no invented counts (S1303 gate 47).

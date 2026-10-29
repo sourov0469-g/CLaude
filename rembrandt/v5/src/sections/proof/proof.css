@@ -1,0 +1,42 @@
+/* PROOF: v1 Constellation (295 stars form 4.9), v2 Odometer (P4 strip over reactive course lines), v3 Zoom-through (pinned) */
+.pv{position:relative;overflow:clip}
+.pv-cred{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-weight:600;font-size:var(--t-lead);line-height:1.35}
+.pv-cred li::before{content:"";display:inline-block;width:.42em;height:.42em;margin-right:.6em;border-radius:2px;background:var(--sun);vertical-align:.12em}
+
+/* v1: blue field, the canvas spans the section; copy bottom-left */
+.pv1{min-height:max(720px,108svh);background:var(--blue);color:#fff;display:flex;align-items:flex-end}
+.pv1-cv,.pv1-field{position:absolute;inset:0;width:100%;height:100%}
+.pv1-copy{position:relative;display:grid;gap:28px;padding:clamp(4rem,2.5rem + 7.5vw,8rem) var(--gutter) calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar));max-width:960px;pointer-events:none}
+.pv1-copy h2{pointer-events:auto}
+
+/* v2: ink field, five real figures in one row; their digits roll (odometer) */
+.pv2{background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 8vw,10rem) var(--gutter);display:grid;gap:clamp(48px,8vh,96px);min-height:min(100svh,920px);align-content:center}
+.pv2-cv{position:absolute;inset:0;width:100%;height:100%}
+.pv2-h,.pv2-row{position:relative}
+.pv2-h{max-width:none}
+.pv2-row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;perspective:900px}
+.pv2-fig{display:grid;gap:10px;align-content:start;padding-top:20px;border-top:2px solid rgb(255 255 255/.22);transform-style:preserve-3d}
+.pv2-n{font-size:clamp(2.75rem,5.4vw,5.5rem);font-weight:800;line-height:1;letter-spacing:-.03em;display:flex;white-space:nowrap}
+.pv2-l{font-size:1rem;line-height:1.35;color:var(--on-blue-muted);max-width:16ch}
+.odo{display:inline-block;height:1em;overflow:clip;line-height:1}
+.odo>span{display:block}
+.odo>span>span{display:block;height:1em}
+@media (max-width:899px){.pv2-row{grid-template-columns:repeat(2,minmax(0,1fr))}.pv2-fig:last-child{grid-column:1/-1}}
+
+/* v3: pinned dive through each figure's full stop; tones alternate as the stop floods the screen */
+.pv3-pin{position:relative;height:max(640px,100svh);background:var(--blue);overflow:clip}
+.pv3-list{list-style:none;margin:0;padding:0;position:absolute;inset:0}
+.pv3-step{position:absolute;inset:0;display:grid;place-items:center;padding:0 var(--gutter)}
+.pv3-step[data-tone=blue]{color:#fff;background:var(--blue)}
+.pv3-step[data-tone=white]{color:var(--blue);background:#fff}
+.pv3-fig{display:grid;justify-items:center;gap:8px;text-align:center}
+.pv3-n{font-size:clamp(6rem,22vw,22rem);font-weight:800;line-height:1;letter-spacing:-.05em;display:flex;align-items:baseline}
+.pv3-dot{display:inline-block;width:.16em;height:.16em;margin-left:.04em;background:currentColor;border-radius:.02em}
+.pv3-c{font-size:var(--t-lead);font-weight:600;max-width:28ch}
+.pv3-flood{position:absolute;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;opacity:0;pointer-events:none}
+@media (max-width:899px),(prefers-reduced-motion:reduce){
+  .pv3-pin{height:auto;background:none}
+  .pv3-list{position:static}
+  .pv3-step{position:relative;inset:auto;min-height:60svh}
+  .pv3-n{font-size:clamp(5rem,26vw,12rem)}
+}

@@ -1,0 +1,69 @@
+/* HERO: three versions. v1 Daylight (WebGL relight), v2 Aperture (pinned frame that grows), v3 Blueprint (S1324 spotlight). */
+.hv{position:relative}
+.hv .t-lead{max-width:30ch}
+
+/* v1 Daylight: Z composition, headline over the canopy top-left, actions bottom-right; the yard sign stays clear */
+.hv1{min-height:max(640px,100svh);display:grid;grid-template-rows:auto 1fr auto;color:#fff;background:var(--ink);overflow:clip}
+.hv1-media{position:absolute;inset:-7% 0}
+.hv1-pd{position:absolute;inset:-2%}
+.hv1-img,.hv1-gl{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:8% 50%}
+.hv1-gl{opacity:0;transition:opacity .6s var(--ease-out)}
+.hv1-gl.on{opacity:1}
+.hv1-scrim{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(180deg,rgb(6 16 42/.82) 0%,rgb(6 16 42/.66) 24%,rgb(6 16 42/.34) 38%,rgb(6 16 42/0) 54%),
+  linear-gradient(0deg,rgb(6 16 42/.84) 0%,rgb(6 16 42/.6) 20%,rgb(6 16 42/0) 44%)}
+.hv1-h{position:relative;z-index:2;text-shadow:0 2px 28px rgb(6 16 42/.55);padding:calc(var(--nav-h) + clamp(24px,5vh,56px)) var(--gutter) 0;max-width:16ch;box-sizing:content-box}
+.hv1-act{position:relative;z-index:2;grid-row:3;justify-self:end;display:grid;gap:20px;padding:0 var(--gutter) clamp(36px,7vh,72px);width:min(100%,560px);box-sizing:border-box}
+.hv1-act .tlink{color:#fff}
+@media (max-width:640px){ /* phones: the photo is a band with the sign in view; the actions sit on solid ink below it */
+  .hv1{background:var(--ink)}
+  .hv1-media{inset:0 0 34% 0}
+  .hv1-img,.hv1-gl{object-position:30% 50%}
+  .hv1-scrim{background:linear-gradient(180deg,rgb(6 16 42/.86) 0%,rgb(6 16 42/.72) 30%,rgb(6 16 42/.4) 42%,rgb(6 16 42/0) 54%),linear-gradient(0deg,var(--ink) 0%,var(--ink) 34%,rgb(11 31 77/0) 46%)}
+  .hv1-act{justify-self:stretch;padding-bottom:calc(36px + var(--mbar))}
+}
+
+/* v2 Aperture: giant type on sky with the Tudor in a frame between the lines; scrolling opens the frame to full bleed */
+.hv2{background:var(--sky);color:var(--ink)}
+.hv2-pin{position:relative;height:max(640px,100svh);overflow:clip}
+.hv2-frame{position:absolute;inset:0;margin:0;clip-path:inset(29% 34% 35% 34%)}
+.hv2-pd{position:absolute;inset:-3%}
+.hv2-pd img{width:100%;height:100%;object-fit:cover;object-position:40% 45%}
+.hv2-shade{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;background:linear-gradient(0deg,rgb(6 16 42/.82) 0%,rgb(6 16 42/.45) 26%,rgb(6 16 42/0) 52%)}
+.hv2-h{position:absolute;left:var(--gutter);right:var(--gutter);top:calc(var(--nav-h) + 3vh);bottom:max(19%,152px);width:auto;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
+.hv2-h .ln{pointer-events:auto}
+.hv2-a{align-self:flex-start}
+.hv2-b{align-self:flex-end;text-align:right}
+.hv2-act{position:absolute;left:var(--gutter);bottom:clamp(28px,5vh,56px);display:grid;gap:16px;max-width:520px;transition:color var(--dur-quick) var(--ease-out)}
+.hv2.is-open .hv2-act{color:#fff}
+@media (max-width:899px){
+  .hv2-pin{height:auto;min-height:0;padding:calc(var(--nav-h) + 28px) var(--gutter) 40px;display:grid;gap:24px}
+  .hv2-frame{position:relative;inset:auto;clip-path:none;aspect-ratio:4/3;order:2}
+  .hv2-h{position:static;display:block}
+  .hv2-b{text-align:left}
+  .hv2-act{position:static;order:3}
+  .hv2-shade{display:none}
+}
+
+/* v3 Blueprint: the real job drawn in white lines; the cursor is a spotlight that shows the photo (S1324 exactly) */
+.hv3{min-height:max(640px,100svh);display:flex;align-items:flex-end;background:var(--blue);color:#fff;overflow:clip}
+.hv3-art{--reveal-x:50%;--reveal-y:50%;--reveal-radius:0px;position:absolute;inset:0;overflow:clip;isolation:isolate;contain:paint}
+.hv3-base,.hv3-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 50%}
+.hv3-photo{z-index:1;pointer-events:none;
+  -webkit-mask-image:radial-gradient(circle var(--reveal-radius) at var(--reveal-x) var(--reveal-y),rgb(0 0 0/1) 0%,rgb(0 0 0/1) 40%,rgb(0 0 0/.75) 60%,rgb(0 0 0/.4) 75%,rgb(0 0 0/.12) 88%,transparent 100%);
+  mask-image:radial-gradient(circle var(--reveal-radius) at var(--reveal-x) var(--reveal-y),rgb(0 0 0/1) 0%,rgb(0 0 0/1) 40%,rgb(0 0 0/.75) 60%,rgb(0 0 0/.4) 75%,rgb(0 0 0/.12) 88%,transparent 100%);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;will-change:-webkit-mask-image,mask-image}
+@media (hover:none),(pointer:coarse){.hv3-photo{display:none}}
+.hv3.show-photo .hv3-photo{display:block;-webkit-mask-image:none;mask-image:none}
+.hv3-grid{position:absolute;inset:-32px;z-index:2;pointer-events:none;background-image:linear-gradient(rgb(255 255 255/.1) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255/.1) 1px,transparent 1px);background-size:48px 48px}
+.hv3-scrim{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgb(16 44 110/.96) 0%,rgb(16 44 110/.92) 38%,rgb(16 44 110/.55) 52%,rgb(16 44 110/0) 66%)}
+.hv3-copy{position:relative;z-index:4;display:grid;gap:22px;padding:calc(var(--nav-h) + 40px) var(--gutter) calc(clamp(40px,8vh,88px) + var(--mbar));max-width:min(100%,920px)}
+.hv3-h{font-size:clamp(2.75rem,5.6vw,5.75rem)}
+.hv3-copy .tlink{color:#fff}
+.hv3-show{position:absolute;z-index:4;right:var(--gutter);bottom:clamp(40px,8vh,88px);min-height:44px;padding:0 18px;border:1px solid rgb(255 255 255/.7);border-radius:999px;background:rgb(16 44 110/.6);color:#fff;font-weight:700;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out)}
+.hv3-show[aria-pressed=true]{background:#fff;color:var(--ink)}
+.hv3-show:not(:disabled):active{scale:.96}
+@media (max-width:899px){
+  .hv3-scrim{background:linear-gradient(0deg,rgb(16 44 110/.97) 0%,rgb(16 44 110/.92) 50%,rgb(16 44 110/.4) 70%,rgb(16 44 110/0) 82%)}
+  .hv3-show{top:calc(var(--nav-h) + 16px);bottom:auto;right:auto;left:var(--gutter);background:var(--blue)}
+}
