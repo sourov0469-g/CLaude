@@ -547,7 +547,7 @@
         if (to !== null) { if (motionOK()) G.to(st, { v: to, duration: 0.55, ease: ease.x, onUpdate: () => set(st.v) }); else set(to); }
       }
     });
-    sliderKeys(h, b, () => st.v, set);
+    sliderKeys(h, b, () => st.v, v => { G && G.killTweensOf(st); set(v); });   // a key press ends the opening sweep, never fights it
     if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); }
     let cur = 0, busy = false;
     const fill = p => {

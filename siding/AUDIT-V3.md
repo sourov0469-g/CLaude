@@ -200,3 +200,5 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Services 3:** KEPT in Phase 1, REBUILT after the section test caught a 1.6 s roll-out on scroll that overwrote keyboard input (an F17 fail and a broken control). Rewritten from the Codrops reference, Mode B without inertia.
 - **Totals now 19 KEPT, 11 REBUILT.**
 - **Evidence:** `sect.js services` PASS ×9; console 0; screenshots `services1–3`.
+
+**Work — all three KEPT, re-verified 29 Oct 2026.** `sect.js work` PASS ×9; screenshots `work1–3`. One defect fixed in Work 1, the signature interactive: arrow keys pressed during the 1.3 s opening sweep were overwritten by it. A key press now ends the sweep, as a drag already did. The mechanism and design are unchanged.

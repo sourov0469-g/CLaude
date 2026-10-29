@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 2, rebuilds (Hero, Proof, Services done)
+- **Phase:** 2, rebuilds (Hero, Proof, Services, Work done)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -81,6 +81,15 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - F17 caps *reveal-level* animations at 0.15–0.3 s. Proof 1's count-up (1.4 s) and Near 1's month-by-month map build (1.8 s) are data animations: the number or the map IS the content being read, played once, never gating anything, with the final state shown immediately under reduced motion.
 - They keep their reference tempo; every section entrance (the reveal) is 0.3 s.
 
+**K11. "Everything else reveal level" across kept versions.**
+- A scan of every version's JS (Phase 2) found scroll entrances at 0.4–0.6 s and click transitions at 0.45–0.9 s in kept versions (Built 3 morph, Colour 2 tools, Colour 3 sheet, Near 3 fly-in, Book 1/2 entrances, Services 2 peek zoom, Money 2 bars).
+- Resolution: motion timing is a page system (K9), so one token pass in Phase 3 brings all of it to ≤0.3 s: entrance reveals through the shared entrance system, click transitions through a `T.ui` token. Each version's mechanism and design are untouched.
+- Exempt, with reasons:
+  - Work 1, the signature interactive: the opening sweep and flick-commit.
+  - K10 data/content animations the visitor reads or runs: count-up, the 4.9 ring, Near 1's month build, Work 2's visitor-run survey.
+  - Ambient pointer smoothing: quickTo followers.
+- Evidence: a re-scan in the §12 gate.
+
 ## Open issues (carried from AUDIT-V3.md; each must close with a reason)
 
 - [ ] **F1 · 886 wording.** See K1.
@@ -105,3 +114,4 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - Services: S1 rebuilt, S2 kept, S3 re-judged REBUILT (the 1.6 s intro swallowed keys; F17 fail). Totals 19 KEPT / 11 REBUILT.
 - Phase 3 note: the kit's "tape" reaction (ruler ticks under hovered rows) duplicates Services 3's tape; redesign it in Phase 3.
 - Process note: a CSS slice anchored on the wrong header once replaced half the stylesheet. Caught by the diff stat before any commit, restored from git and redone with an exact anchor plus an assertion.
+- Defect fixed in kept Work 1: arrow keys during the 1.3 s opening sweep were overwritten; a key press now ends the sweep (drag already did).

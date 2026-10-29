@@ -200,21 +200,21 @@ Sections are recorded in SECTIONS.md order.
   - T ✓ (owns the drag slider and the level).
   - F ✓ (true pairs, published bands).
   - M ✓ (it IS the signature interactive), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `work1-d/-m.png`. Two ArrowLeft presses during the opening sweep now hold (value < 50); before the one-line fix they were overwritten (defect found and fixed). Pair 2 picked → aria-pressed moves. `sect.js work` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); only true pairs shown as before/after.
 
 **W2 · Blueprint**
 - **Reference:** ⟦S0468⟧ blueprint-animation (A1: five phases per step, scan line top → bottom, swap only under the blueprint).
 - **Mechanism:** the scan line turns the photo into a drawing, then into the finished wall.
 - **Adaptations:** the visitor runs it per job (no auto-advance); plates traced from the firm's photos.
 - **Verdict:** KEPT. R ✓ (scan, swap under blueprint), S ✓ (the traced plates), T ✓, F ✓ (true pairs), M ✓ (visitor-run), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `work2-d/-m.png`. Job 3 picked → radio checked; the survey runs only on request. `sect.js work` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); only true pairs shown as before/after.
 
 **W3 · Lens**
 - **Reference:** ⟦S1324⟧ reveal-hover-effect (A1: radius 260 / 140–220 compact, position ease 0.1, radius ease 0.14) + [BANK] Q125 square lens.
 - **Mechanism:** the before shows through the after inside a lens under the pointer.
 - **Adaptations:** a square window-pane lens with muntins; coarse pointers get "Show before".
 - **Verdict:** KEPT. R ✓ (ease 0.1 / 0.14 in code), S ✓, T ✓, F ✓ (true pairs), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `work3-d/-m.png`. `sect.js work` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); only true pairs shown as before/after.
 
 ### Built
 
