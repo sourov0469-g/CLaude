@@ -1,0 +1,7 @@
+RESTART-CONTINUATION FOR RUN D (relaunch 2026-10-29 11:50 Dhaka, retry 2):
+
+You are resuming Run D of the Rembrandt Roofing & Restoration portfolio build in this same session. Your previous run froze mid-work at about 11:21 Dhaka (transcript and site files stopped growing; you were mid verification Bash checks on the homepage). That freeze is a runtime interruption, not a completed step.
+
+Continue Run D exactly where you left off. Do NOT restart Run D, do NOT redo completed work, do NOT rebuild the homepage from scratch, and do NOT re-read the whole research bank. Pick up from your in-session context and the files on disk in ~/workspace/previews/rembrandt-v4/ (site/, PLAN-FINAL.md, and your earlier notes).
+
+Finish Run D, then write ~/workspace/previews/rembrandt-v4/CHECKPOINT-D.md, then stop. Do not upload anything anywhere. No subagents.

@@ -1,0 +1,21 @@
+You are the second, independent QA and improvement pass on a finished client homepage preview for Carpentryuk, a Tamworth carpentry/joinery firm whose owner Stephen Nicholls asked to see it. The built page is ~/workspace/previews/carpentryuk.html (single self-contained file, 2.1 MB); its build note is at ~/workspace/previews/carpentryuk-BUILD-NOTE.md. A separate screenshot QA already passed it; your job is different: judge it with fresh eyes and MAKE IT BETTER.
+
+METHOD — CODE AND VISUAL TOGETHER:
+- Load the HTML file itself in a real browser (Playwright/Chromium on this machine) AND work with its source. Both, at the same time.
+- From the loaded page, screenshot FRAME BY FRAME: desktop 1440 full page, section by section, at multiple scroll positions; mobile 375px the same way, every section; plus interaction states (hover states, mega menu open, a service row open, lightbox open, form part-filled, mobile menu open, sticky call bar visible).
+- Audit the screenshots visually, frame by frame, mobile and desktop with equal weight: what looks cramped, weak, misaligned, unbalanced, cheap, janky or merely average becomes a finding. Use the source alongside to understand why it renders that way and to fix it precisely.
+- Improve, upgrade, fix: apply changes in the source, reload the page, re-screenshot the affected sections, and audit again. A change is not done until it looks right in a fresh screenshot AND the full final pass is clean.
+
+FIRST, safety: copy the file to ~/workspace/previews/carpentryuk-v1-backup.html (cp). All improvements go into carpentryuk.html itself. If your final verification fails and you cannot fix it, restore the backup and say so in your note.
+
+JUDGE THROUGH THE SKILLS BOOK: ~/workspace/previews/WEB-SKILLS.md. It is 22 MB; follow its own protocol: read the index, pick the skills relevant to judging and improving THIS page (visual hierarchy, spacing, typography, motion quality, interaction design, anti-slop rules, QA standards), and read those entries in full before judging. State in your note exactly which skills you read.
+
+HUNT two classes of findings: (a) defects — anything broken, misaligned, cramped, janky, slow, or reading badly; (b) improvements — concrete upgrades that lift it from good to top-tier: spacing rhythm, type hierarchy, motion timing and easing, interaction feedback, hero strength, section transitions. The bar is "not average": if a section is merely fine, improve it.
+
+KEEP: the concept ("Measured twice", drawing-board); the EXACT logo bytes (never touch the logo image data); the client's own photos; every verified fact (no invented reviews, ratings, years, prices, guarantees, or timber species); no em dashes in copy; phone 07854 823 288 prominent; noindex and the tracker beacon present; form posting to formsubmit.co/carpentryuk.phone@googlemail.com.
+
+FINAL VERIFICATION (in the browser): no horizontal overflow at 375/1024/1280/1440, no console errors, all interactions working (mega menu, loupe, accordion, lightbox, form validation, animation switch, mobile menu, sticky call bar), reduced-motion intact.
+
+WRITE ~/workspace/previews/carpentryuk-QA2.md: skills read; findings (defects and improvements) with what you changed for each; what you deliberately left alone and why; final verification results; and save your audit screenshots in ~/workspace/previews/carpentryuk-qa2-shots/ (before/after for changed sections).
+
+No subagents. Do not upload anything anywhere. Stop when a full re-audit, desktop and mobile, visual and code together, finds nothing left worth changing.

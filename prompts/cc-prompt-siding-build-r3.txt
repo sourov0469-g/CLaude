@@ -1,0 +1,28 @@
+Build a complete portfolio website: a full redesign of Austin Pro Siding, Windows & Roofing (Austin, Texas) — https://www.austinprosiding.com/ — the bank-crowned model for the Siding & Windows trade. This is a portfolio piece for a web designer: it must be award-tier, the top of the top, never safe or template-looking. Average is failure.
+
+READ FIRST (your full information pack — everything is here):
+1. The curated industry pack: ~/workspace/previews/bank-selection/siding-windows-doors/ — start with MANIFEST.md, then read in full: structure-uiux/siding-windows.md (the industry report: funnel, crowns, the Austin Pro and Feldco entries, synthesis), structure-uiux/00-conversion-anatomy.md, structure-uiux/ui-ux-patterns.md, structure-uiux/portfolio-site-plan.md (the Siding & Windows section), structure-uiux/builder-brief.md, animation/animation-parameter-library.md (exact GSAP numbers, use them, do not approximate), and the reverse-engineering deep-read slices named in the MANIFEST.
+2. The skills book: ~/workspace/previews/bank-selection/siding-windows-doors/WEB-SKILLS.md (same book as ~/workspace/previews/WEB-SKILLS.md). It is 22 MB; follow its own protocol: read the index, choose a 50+ skill pack for this build, read those entries in full. Judge everything through those skills, never from generic instinct. In your plan, state exactly which skills you read in full.
+3. The live site https://www.austinprosiding.com/ plus its key pages: harvest the REAL business facts and write them into a FACTS file before designing: exact business name, phone, address, service areas, services, brands carried, warranties, financing terms, review counts/ratings as published, project prices/bands as published. Use ONLY verified facts from the site itself; anything you cannot verify, leave out. Never invent reviews, ratings, years, or prices.
+
+THEN PLAN (before any HTML): write ~/workspace/previews/portfolio-siding/PLAN.md — concept, page list, and for every section: the animation/design/UI pattern it uses, naming the exact source (pack file + entry, or WEB-SKILLS skill ID) and the parameters, and how you adapted it. Include a from-scratch attestation: you reuse NO earlier site's HTML, template, or section stack. BANNED skeleton (do not produce it under any name): proof-strip hero + service picker + bento services grid + pinned leak/story section + estimate paper + before/after + FAQ + gable close.
+
+THE SIGNATURES OF THIS TRADE (from the crowns — make them genuinely excellent):
+- Austin Pro's documented-project transparency: price-banded draggable before/after pairs (the price band printed on the pair), a project map, real price distributions with a median band, worked financing examples.
+- Feldco's tooling: a colour/material visualiser (rebuild the Codrops customizer mechanic light — DOM/SVG live-preview repaints on every choice, per the BLK pattern in the pack — not a heavy WebGL scene unless it is flawless), count-up stats in trade units.
+- Motion from the parameter library with its exact values; section reveals in the bank's top patterns; sticky-stage chapters where they earn it.
+- 3D only where it is excellent and never cartoonish. Mobile is the utmost priority: every pattern must work beautifully at 375px, no scroll traps, no pin that can trap a phone.
+
+BUILD ORDER AND CHECKPOINTS (write each file the moment its step is done):
+1. FACTS.md, then PLAN.md (above).
+2. HOMEPAGE FIRST: build it completely, then screenshot it yourself (Playwright/Chromium) desktop 1440 + mobile 375, section by section, and audit the screenshots visually frame by frame; fix and re-shoot in rounds until the homepage is genuinely right — no round cap on quality, but write CHECKPOINT-HOME.md when it passes.
+3. Then the remaining pages (4–5 total, from the plan: typically Siding, Windows, Projects, Financing/Visualiser, About/Contact — final list from the firm's real services), each following the homepage's proven design system, each screenshot-audited.
+4. Full-site QA: links, anchors, forms (stub submit client-side), budgets (keep it fast), no console errors, no horizontal overflow at 375/1024/1280/1440.
+5. Deliverables in ~/workspace/previews/portfolio-siding/: the site/ folder, BUILD-NOTE.md (what was built, sources used per section, audit rounds and defects fixed, honest list of anything not verified), and a merged single-file standalone homepage HTML (homepage-standalone.html).
+
+No subagents. Work directly. Do not stop at the first working version; stop when the audit loops are clean.
+
+RELAUNCH OVERRIDE (2026-10-29 11:50 Dhaka, retry 2 — this overrides steps 1 and 2's start-from-scratch reading):
+- This is a RELAUNCH after the previous build session froze mid-work at about 11:21 Dhaka. Do NOT start from scratch.
+- FACTS.md and PLAN.md are ALREADY COMPLETE on disk in ~/workspace/previews/portfolio-siding/ — never redo them. You may re-read them, but do not rewrite them from scratch.
+- Continue from the current ~/workspace/previews/portfolio-siding/site/index.html and the work/ state on disk: finish the homepage audit loops, write CHECKPOINT-HOME.md when the homepage passes, then the remaining pages, full-site QA, BUILD-NOTE.md and homepage-standalone.html.
