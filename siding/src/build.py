@@ -6,46 +6,49 @@ import pages_inner
 
 
 def hero():
-    rob = SVC_PAIRS['siding'][1]  # Rob Roy, Jul 2026, $15k–$20k
+    rob = SVC_PAIRS['siding'][1]  # Rob Roy, Jul 2026, $15k-$20k
+    assert rob['place'].startswith('Rob Roy')
     href = LIVE + rob['href']
-    job = rob['href'].rsplit('-', 1)[-1].upper()
+    job = rob['href'].rsplit('-', 1)[-1]
+    src = lambda side: (f'assets/img/pairs/robroy-h{side}-1440.webp',
+                        f'assets/img/pairs/robroy-h{side}-760.webp 760w, assets/img/pairs/robroy-h{side}-1440.webp 1440w')
+    bs, bset = src('b')
+    as_, aset = src('a')
     return f'''<main id="main">
 <section class="hero" aria-labelledby="hero-h">
-  <div class="hero-grid">
-    <div class="hero-copy" data-roles>
-      <h1 class="display" id="hero-h" data-role="title">Siding and windows, priced in public.</h1>
-      <p class="lead" data-role="body">Real prices from 886 documented Austin jobs. Yours comes free at the inspection.</p>
-      <div class="hero-ctas" data-role="body">
-        <a class="btn btn-primary" href="#book" data-book>Book a free inspection</a>
-        <a class="tlink" href="{TEL}">Call {PHONE}</a>
-        <span class="hint">Pick a time online in about a minute. Free, no obligation.</span>
-      </div>
-      <div class="proofline" data-role="media">
-        <span>{stars()}<span>4.9 on 474 Google reviews</span></span>
-        <span>James Hardie Elite Preferred</span>
-        <span>GAF Master Elite</span>
-        <span>Austin, since 2009</span>
-      </div>
+  <div class="wrap hero-grid" data-roles>
+    <h1 class="display hero-h" id="hero-h" data-role="title"><span class="ln">Siding and windows,</span> <span class="ln">priced in public.</span></h1>
+    <p class="lead hero-lead" data-role="body">Real prices from 886 documented Austin jobs. Yours comes free at the inspection.</p>
+    <div class="hero-ctas" data-role="body">
+      <a class="btn btn-primary" href="#book" data-book>Book a free inspection</a>
+      <a class="tlink" href="{TEL}">Call {PHONE}</a>
     </div>
     <div class="hero-media">
-      <div class="course-frame" data-course data-start="42">
-        <img class="course-before" src="assets/img/pairs/robroy-b-1600.webp" srcset="assets/img/pairs/robroy-b-800.webp 800w, assets/img/pairs/robroy-b-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 60vw" width="1600" height="1000" alt="{e(rob['before']['alt'])}, before the job: khaki siding" fetchpriority="high">
-        <img class="course-after" src="assets/img/pairs/robroy-a-1600.webp" srcset="assets/img/pairs/robroy-a-800.webp 800w, assets/img/pairs/robroy-a-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 60vw" width="1600" height="1000" alt="{e(rob['after']['alt'])}, after: navy James Hardie lap siding" fetchpriority="high">
+      <div class="course-frame" data-course data-start="58">
+        <img class="course-before" src="{bs}" srcset="{bset}" sizes="(max-width: 900px) 100vw, 64vw" width="1440" height="900" alt="The Rob Roy house before the job: khaki lap siding, white trim" fetchpriority="high">
+        <img class="course-after" src="{as_}" srcset="{aset}" sizes="(max-width: 900px) 100vw, 64vw" width="1440" height="900" alt="The same wall after: navy James Hardie lap siding, white trim">
         <div class="course-strips" aria-hidden="true"></div>
-        <div class="course-line" aria-hidden="true"></div>
-        <span class="frame-tag tag-before">Before</span>
-        <span class="frame-tag tag-after">After</span>
-        <button class="course-handle" type="button" role="slider" aria-label="Siding courses installed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="58"><svg aria-hidden="true"><use href="#i-v"/></svg><span>Finish the wall</span></button>
-      </div>
-      <div class="jobtag">
-        <dl>
-          <div><dt>On this wall</dt><dd>Rob Roy, Austin<span class="jt-when">, July 2026</span></dd></div>
-          <div><dt>Installed</dt><dd>{e(rob['installed'])}</dd></div>
-        </dl>
-        <div class="band-row"><span class="cap">{e(rob['bl'])}</span><span class="band">{e(rob['band'])}</span></div>
-        {ext_link(href, 'Open job file ' + job)}
+        <div class="course-line" aria-hidden="true"><span class="course-count"><b>30</b> of 30 courses</span></div>
+        <span class="frame-tag tag-before" aria-hidden="true">Before</span>
+        <span class="frame-tag tag-after" aria-hidden="true">After</span>
+        <button class="course-handle" type="button" role="slider" aria-label="Courses of new siding installed" aria-valuemin="0" aria-valuemax="30" aria-valuenow="30" aria-valuetext="30 of 30 courses"><svg aria-hidden="true"><use href="#i-v"/></svg><span class="sr-only">Use the up and down arrow keys</span></button>
       </div>
     </div>
+    <div class="jobtag" data-role="media">
+      <p class="jobtag-h">On this wall</p>
+      <dl>
+        <div><dt>Where</dt><dd>Rob Roy, Austin, July 2026</dd></div>
+        <div><dt>Installed</dt><dd>{e(rob['installed'])}</dd></div>
+        <div class="jt-band"><dt>{e(rob['bl'])}</dt><dd class="num">{e(rob['band'])}</dd></div>
+      </dl>
+      {ext_link(href, 'Open job file APS-' + job)}
+    </div>
+    <ul class="proofline" data-role="body" aria-label="Proof">
+      <li>{stars()}<span>4.9 on 474 Google reviews</span></li>
+      <li>James Hardie Elite Preferred</li>
+      <li>GAF Master Elite</li>
+      <li>In Austin since 2009</li>
+    </ul>
   </div>
 </section>'''
 
@@ -67,7 +70,7 @@ def record():
         <li><span class="op" aria-hidden="true">+</span><b data-odo="574">574</b><span>counted, not on the map</span></li>
         <li class="is-sum"><span class="op" aria-hidden="true">=</span><b data-odo="886">886</b><span>documented projects</span></li>
       </ol>
-      <p class="eq-note">The firm's own figures reconcile to the job. The 312 are drawn on the map further down; every one is a photographed project.</p>
+      <p class="eq-note">The firm's own figures add up to the job. The 312 are drawn on the map further down, each one a photographed project.</p>
     </div>
   </div>
 </section>'''
@@ -97,7 +100,7 @@ def pairs_sec():
 def studio_compact():
     sw = [('Pure White', 'SW 7005', '#EDECE6'), ('Repose Gray', 'SW 7015', '#CCC9C0'), ('Accessible Beige', 'SW 7036', '#D1C7B8'), ('Dovetail', 'SW 7018', '#908A83'), ('Gauntlet Gray', 'SW 7019', '#78736E'), ('Urbane Bronze', 'SW 7048', '#54504A'),
           ('Iron Ore', 'SW 7069', '#434341'), ('Tricorn Black', 'SW 6258', '#2F2F30'), ('In the Navy', 'SW 9178', '#283849'), ('Hunt Club', 'SW 6468', '#2A4F43'), ('Agreeable Gray', 'SW 7029', '#D1CBC1'), ('Alabaster', 'SW 7008', '#EDEAE0')]
-    sws = ''.join(f'<button class="swatch paint-chip" type="button" role="radio" aria-checked="false" data-hex="{h}" style="--sw:{h}" aria-label="{n} {c}"><i aria-hidden="true"></i><span aria-hidden="true">{n}<small>{c}</small></span></button>' for n, c, h in sw)
+    sws = ''.join(f'<button class="swatch" type="button" role="radio" aria-checked="false" data-hex="{h}" style="--sw:{h}" aria-label="{n} {c}" title="{n} {c}"><i aria-hidden="true"></i></button>' for n, c, h in sw)
     return f'''<section class="section" id="studio" aria-labelledby="studio-h" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="sec-head"><h2 class="h2" id="studio-h" data-split>Repaint a real house before you pick a colour.</h2>
@@ -105,9 +108,7 @@ def studio_compact():
     <div class="studio" data-studio data-body="#2A4F43" data-trim="#EDECE6">
       <div class="studio-frame">
         <img src="assets/img/studio/base-1400.webp" srcset="assets/img/studio/base-760.webp 760w, assets/img/studio/base-1400.webp 1400w" sizes="(max-width: 960px) 100vw, 58vw" width="1400" height="875" alt="The Rob Roy house after its James Hardie siding job, shown repainted in the colours you choose" loading="lazy">
-        <div class="zone" data-zone="body" style="-webkit-mask-image:url(assets/img/studio/mask-body.png);mask-image:url(assets/img/studio/mask-body.png)"><span class="paint"></span><img class="shade" src="assets/img/studio/shade-body.webp" alt="" loading="lazy"></div>
-        <div class="zone" data-zone="gable" style="-webkit-mask-image:url(assets/img/studio/mask-gable.png);mask-image:url(assets/img/studio/mask-gable.png)"><span class="paint"></span><img class="shade" src="assets/img/studio/shade-body.webp" alt="" loading="lazy"></div>
-        <div class="zone" data-zone="trim" style="-webkit-mask-image:url(assets/img/studio/mask-trim.png);mask-image:url(assets/img/studio/mask-trim.png)"><span class="paint"></span><img class="shade" src="assets/img/studio/shade-trim.webp" alt="" loading="lazy"></div>
+        {zones()}
         <span class="frame-tag">Colour preview on a real job</span>
       </div>
       <div class="studio-panel">
@@ -118,7 +119,7 @@ def studio_compact():
           <div><dt>Trim</dt><dd data-read="trim"><i></i><span>Pure White SW 7005</span></dd></div>
           <div><dt>This job</dt><dd>Siding portion $15k–$20k</dd></div>
         </dl>
-        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <div class="studio-actions">
           <button class="btn btn-line btn-sm" type="button" data-original aria-pressed="false">Show the real navy</button>
           <a class="btn btn-dark btn-sm" href="plan.html#studio">Open the full studio</a>
         </div>
@@ -191,11 +192,11 @@ def build_index():
     html += header('home')
     html += hero() + record() + ledger_sec() + pairs_sec() + studio_compact() + timeline() + map_section() + people_sec() + money_sec()
     html += booking_section() + '</main>\n' + footer()
-    open(os.path.join(SITE, 'index.html'), 'w').write(html)
-    return len(html)
+    return write('index.html', html)
 
 
 if __name__ == '__main__':
+    minify()
     print('index', build_index())
     if len(sys.argv) > 1 and sys.argv[1] == 'all':
         pages_inner.build_all()

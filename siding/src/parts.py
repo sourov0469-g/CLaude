@@ -90,7 +90,8 @@ def head(title, desc, extra_ld=''):
 <meta name="theme-color" content="#EDECE6">
 <link rel="icon" href="assets/img/favicon.png">
 <link rel="preload" href="assets/fonts/MonaSans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.min.css">
+<script>document.documentElement.classList.add('js');setTimeout(function(){{document.documentElement.classList.add('hero-go')}},2500)</script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>{extra_ld}
 </head>
 '''
@@ -101,7 +102,7 @@ def mega():
     for t in TRADES:
         href = t.get('href') or f'plan.html#trade-{t["slug"]}'
         count = f'{t["doc"]} documented projects' if t['doc'] else f'{t["n"]} priced projects'
-        note = f'<span>{e(t["note"])}</span>' if t['note'] else ''
+        note = f'<span class="mega-note">{e(t["note"])}</span>' if t['note'] else ''
         rows.append(f'<a href="{href}"><span class="mega-name">{t["name"]}</span><span class="mega-med">${t["med"][0]}k–${t["med"][1]}k</span><span class="mega-meta"><span>{count}</span>{note}</span></a>')
     rows.append('<a href="about.html#storm"><span class="mega-name">Storm damage</span><span class="mega-med">Free</span><span class="mega-meta">Hail and wind damage, inspected and documented</span></a>')
     return f'''<div class="mega" id="mega-services">
@@ -162,7 +163,7 @@ def booking_section(title='Book your free inspection', sub=None):
     chips = ''.join(f'<label class="opt"><input type="checkbox" name="trade" value="{t}"><span>{t}</span></label>' for t in trades)
     bands = ['Under $5k', '$5k–$10k', '$10k–$15k', '$15k–$20k', '$20k or more', 'Not sure yet']
     radios = ''.join(f'<label class="opt"><input type="radio" name="budget" value="{b}"><span>{b}</span></label>' for b in bands)
-    sub = sub or 'Pick a time online in about a minute, or call the office. Either way it is free, and there is no obligation.'
+    sub = sub or 'Tell us what you have in mind and the office calls you back to pick a time. Or call now. Either way it is free, with no obligation.'
     return f'''<section class="section" id="book" aria-labelledby="book-h">
   <div class="wrap book">
     <div class="book-aside">
@@ -207,7 +208,7 @@ def booking_section(title='Book your free inspection', sub=None):
           <div class="form-nav">
             <button class="back" type="button" hidden>Back</button>
             <button class="btn btn-dark btn-next" type="button">Continue</button>
-            <button class="btn btn-primary prog-btn" type="submit" hidden><span class="lbl">Request my inspection</span><svg viewBox="0 0 70 70" aria-hidden="true"><path class="ring" d="M35,2.5A32.5,32.5 0 1,1 34.99,2.5"/><path class="tick" d="M23,36l8,8 16-17"/></svg></button>
+            <button class="btn btn-primary prog-btn" type="submit" hidden><span class="lbl">Request my inspection</span><svg viewBox="0 0 70 70" aria-hidden="true"><path class="ring" d="M35,13A22,22 0 1,1 34.99,13"/><path class="tick" d="M26,35.5l6.5,6.5 12-13"/></svg></button>
           </div>
         </div>
         <div class="form-done" tabindex="-1" role="status">
@@ -223,11 +224,11 @@ def booking_section(title='Book your free inspection', sub=None):
 
 def dialog():
     return '''<dialog class="book-dialog" id="book-dialog" aria-label="Book a free inspection">
-  <div class="dialog-inner"><button class="dialog-close" type="button" aria-label="Close"><svg aria-hidden="true"><use href="#i-x"/></svg></button><div class="form-card"></div></div>
+  <div class="dialog-inner"><p class="dialog-title">Book a free inspection</p><button class="dialog-close" type="button" aria-label="Close"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
 </dialog>'''
 
 
-def footer(scripts=('data.js',)):
+def footer(scripts=()):
     svc = ''.join(f'<li><a href="{t.get("href") or "plan.html#trade-" + t["slug"]}">{t["name"]}</a></li>' for t in TRADES) + '<li><a href="about.html#storm">Storm damage</a></li>'
     brands = [('James Hardie', 431), ('Sherwin-Williams', 320), ('NT Windows', 251), ('GAF', 200), ('Pella', 72), ('Simonton', 55), ('Andersen', 42), ('Provia', 39), ('Renaissance Patio', 34), ('McElroy Metal', 31), ('Owens Corning', 10), ('DoorLink', 9)]
     br = ''.join(f'<li><a href="about.html#brands">{b}<small>{n}</small></a></li>' for b, n in brands)
@@ -258,9 +259,44 @@ def footer(scripts=('data.js',)):
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 {js.replace('<script ', '<script defer ')}
-<script src="assets/js/site.js" defer></script>
+<script src="assets/js/site.min.js" defer></script>
 </body>
 </html>'''
+
+
+def zones(parts=('body', 'gable', 'trim')):
+    shade = {'body': 'body', 'gable': 'body', 'trim': 'trim'}
+    out = ''
+    for z in parts:
+        sh = f'assets/img/studio/shade-{shade[z]}'
+        out += (f'<div class="zone zone-{z}" data-zone="{z}"><span class="paint"></span>'
+                f'<img class="shade" src="{sh}-1400.webp" srcset="{sh}-760.webp 760w, {sh}-1400.webp 1400w" sizes="(max-width: 900px) 100vw, 60vw" width="1400" height="875" alt="" loading="lazy"></div>')
+    return out
+
+
+def clean(page):
+    """House style: no em dashes, no en dashes (ranges take a hyphen)."""
+    page = page.replace(' — ', ', ').replace('—', ', ')
+    return page.replace('–', '-')
+
+
+def minify():
+    """Ship minified copies of the hand-written CSS/JS (esbuild if present, else a plain copy)."""
+    import shutil, subprocess
+    tool = os.environ.get('ESBUILD') or shutil.which('esbuild')
+    for src, dst in (('css/site.css', 'css/site.min.css'), ('js/site.js', 'js/site.min.js')):
+        a, b = os.path.join(SITE, 'assets', src), os.path.join(SITE, 'assets', dst)
+        if tool:
+            subprocess.run([tool, a, '--minify', '--log-level=warning', f'--outfile={b}'], check=True)
+        else:
+            shutil.copyfile(a, b)
+
+
+def write(name, page):
+    page = clean(page)
+    with open(os.path.join(SITE, name), 'w', encoding='utf-8') as f:
+        f.write(page)
+    return len(page)
 
 
 # ---------------- components ----------------
@@ -276,21 +312,29 @@ def ledger(intro=True):
         l, w = lo / 50 * 100, (hi - lo) / 50 * 100
         ml, mw = t['med'][0] / 50 * 100, (t['med'][1] - t['med'][0]) / 50 * 100
         mid = t.get('lolabel') or f'${lo}k–${hi}k'
+        small = e(t['note']) if t['note'] else 'Middle half ' + mid[0].lower() + mid[1:]
         href = t.get('href') or f'plan.html#trade-{t["slug"]}'
         label = f'{t["name"]}: middle half of {t["n"]} priced jobs {mid}, median band ${t["med"][0]}k–${t["med"][1]}k'
         grid = ''.join(f'<i style="left:{g}%"></i>' for g in (0, 20, 40, 60, 80, 100))
-        rows.append(f'''<a class="ledger-row" href="{href}" id="trade-{t['slug']}" aria-label="{e(label)}">
-  <span class="ledger-name">{t['name']}<small>{e(t['note']) if t['note'] else 'Middle half ' + mid}</small></span>
+        rows.append(f'''<li><a class="ledger-row" href="{href}" id="trade-{t['slug']}" aria-label="{e(label)}">
+  <span class="ledger-name"><span>{t['name']}</span><small>{small}</small></span>
   <span class="ledger-n">{t['n']} priced</span>
   <span class="track" aria-hidden="true"><span class="track-grid">{grid}</span><span class="track-mid" style="left:{l:.1f}%;width:{w:.1f}%"></span><span class="track-med" style="left:{ml:.1f}%;width:{mw:.1f}%"></span></span>
   <span class="ledger-med">${t['med'][0]}k–${t['med'][1]}k</span>
   <span class="ledger-mo">≈ {mo_range(t['med'])}/mo*</span>
-</a>''')
+</a></li>''')
+    rows.append('''<li><a class="ledger-row is-storm" href="about.html#storm" id="trade-storm" aria-label="Storm damage: starts with a free inspection, documented for your insurer">
+  <span class="ledger-name"><span>Storm damage</span><small>Hail and wind, inspected and documented</small></span>
+  <span class="ledger-n">Not priced</span>
+  <span class="track track-note" aria-hidden="true">Photos and measurements for your adjuster</span>
+  <span class="ledger-med">Free</span>
+  <span class="ledger-mo">inspection</span>
+</a></li>''')
     return f'''<p class="ledger-scale-m">Bars run from $0 to $50k, gridlines every $10k. The dark block is the band holding the median job.</p>
-<div class="ledger" role="list">
+<div class="ledger">
   <div class="ledger-head" aria-hidden="true"><span>Trade</span><span>Jobs</span><span>Where the middle half landed, $0–$50k</span><span>Median job</span><span>Per month*</span></div>
   <div class="ledger-axis" aria-hidden="true"><span></span><span></span>{axis()}<span></span><span></span></div>
-  {''.join(rows)}
+  <ul class="ledger-rows">{''.join(rows)}</ul>
 </div>
 <div class="ledger-key"><span><i></i>Middle half of priced jobs</span><span><i class="k-med"></i>Band holding the median job</span></div>'''
 
@@ -303,7 +347,7 @@ def pair_list(keys):
     for key in keys:
         if key == 'home':
             for i, p in enumerate(HOME_PAIRS):
-                out.append(dict(id=f'home{i}', place=p['p'], when=p['w'], product=p['i'], band=p['b'], bandl=p['bl'], trade=p['t'], href=LIVE + '/recent-projects/' + p['s'], balt=p['ba'], aalt=p['aa']))
+                out.append(dict(id=f'home{i}', place=p['p'].replace(' At ', ' at '), when=p['w'], product=p['i'], band=p['b'], bandl=p['bl'], trade=p['t'], href=LIVE + '/recent-projects/' + p['s'], balt=p['ba'], aalt=p['aa']))
         else:
             for i, p in enumerate(SVC_PAIRS[key]):
                 out.append(dict(id=f'{key}{i}', place=p['place'], when=p['when'], product=p['installed'], band=p['band'], bandl=p['bl'], trade='Siding' if key == 'siding' else 'Windows', href=LIVE + p['href'], balt=p['before']['alt'], aalt=p['after']['alt']))
@@ -335,6 +379,17 @@ def pairs(keys, first=0, title_id='pairs-h', head=''):
  data-place="{e(p['place'])}" data-when="{e(p['when'])}" data-product="{e(p['product'])}" data-band="{e(p['band'])}" data-bandl="{e(p['bandl'])}" data-href="{e(p['href'])}">
   <img src="{thumb}" alt="" width="720" height="450" loading="lazy"><span>{e(p['place'].split(',')[0])}<small>{e(p['trade'])}, {e(p['when'])}</small><b>{e(p['band'])}</b></span></button>''')
     return f'''<div class="pairs{' has-head' if head else ''}" data-pairs>
+  <div class="pairs-side">
+    {head}
+    <dl class="pair-facts">
+      <div><dt>Where</dt><dd data-k="place">{e(p0['place'])}</dd></div>
+      <div><dt>Finished</dt><dd data-k="when">{e(p0['when'])}</dd></div>
+      <div><dt>Installed</dt><dd data-k="product">{e(p0['product'])}</dd></div>
+      <div><dt data-k="bandl">{e(p0['bandl'])}</dt><dd data-k="band" class="num">{e(p0['band'])}</dd></div>
+    </dl>
+    <p class="cap">Bands are the job's own worksheet amount for that trade, before discounts. Photos come from the job file, cropped to the same frame.</p>
+    <p class="cap" style="margin:0"><a class="tlink ext pair-link" href="{e(p0['href'])}" target="_blank" rel="noopener">Open this job file<svg aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only"> (opens austinprosiding.com in a new tab)</span></a></p>
+  </div>
   <div class="pairs-stage">
     {('<div class="filters" role="group" aria-label="Filter by trade">' + chips + '</div>') if chips else ''}
     <figure class="compare" style="margin:0">
@@ -348,17 +403,7 @@ def pairs(keys, first=0, title_id='pairs-h', head=''):
       <span class="pair-price"><small>{e(p0['bandl'])}</small><b>{e(p0['band'])}</b></span>
     </figure>
     <p class="compare-hint"><span class="touch-hint">Drag the handle or tap the photo to compare.</span><span class="lens-hint">Drag the handle to compare, or rest the pointer on the photo: the square shows the other half of the job through it.</span></p>
-  </div>
-  <div class="pairs-side">
-    {head}
-    <dl class="pair-facts">
-      <div><dt>Where</dt><dd data-k="place">{e(p0['place'])}</dd></div>
-      <div><dt>Finished</dt><dd data-k="when">{e(p0['when'])}</dd></div>
-      <div><dt>Installed</dt><dd data-k="product">{e(p0['product'])}</dd></div>
-      <div><dt data-k="bandl">{e(p0['bandl'])}</dt><dd data-k="band" class="num">{e(p0['band'])}</dd></div>
-    </dl>
-    <p class="cap">Bands are the job's own worksheet amount for that trade, before discounts. Photos come from the job file, cropped to the same frame.</p>
-    <div class="pair-picks">{''.join(picks)}</div>
+    <div class="pair-picks" role="group" aria-label="Choose a job">{''.join(picks)}</div>
   </div>
 </div>'''
 
@@ -387,15 +432,15 @@ def hist(key, label):
 def map_section(full=False, heading='312 dots. Each one is a documented job.'):
     pts = []
     city = {}
+    names = NEAR['pl'] + NEAR['ct']  # a pin's place is its neighbourhood, else its city
     for p in NEAR['p']:
         x, y, ym, bits, ci, pi, ph, pidx = p
         if ph == 1 and 0 <= x <= 566 and 0 <= y <= 640:
-            place = NEAR['pl'][pi] if pi >= 0 else NEAR['ct'][ci]
-            pts.append((x, y, ym, bits, place))
+            pts.append((x, y, ym, bits, pi if pi >= 0 else len(NEAR['pl']) + ci))
             c = NEAR['ct'][ci].strip().title()
             city[c] = city.get(c, 0) + 1
     assert len(pts) == 312
-    pins = ''.join(f'<circle class="map-pin" cx="{x}" cy="{y}" r="3.4" data-m="{ym}" data-t="{b}" data-place="{e(pl)}"/>' for x, y, ym, b, pl in sorted(pts, key=lambda q: q[2]))
+    pins = ''.join(f'<circle cx="{x}" cy="{y}" r="3.4" data-m="{ym}" data-t="{b}" data-p="{n}"/>' for x, y, ym, b, n in sorted(pts, key=lambda q: q[2]))
     grat = '<path class="map-grat" d="M0 603.2H566M0 488.6H566M0 374.0H566M0 259.4H566M0 144.7H566M0 30.1H566M49.4 0V640M148.3 0V640M247.3 0V640M346.2 0V640M445.1 0V640M544.1 0V640"/>'
     lat = ''.join(f'<text class="map-label" x="8" y="{y - 6}">{t}</text>' for y, t in [(488.6, '30.0°N'), (374.0, '30.2°N'), (259.4, '30.4°N'), (144.7, '30.6°N')])
     lon = ''.join(f'<text class="map-label" x="{x + 6}" y="630">{t}</text>' for x, t in [(148.3, '98.2°W'), (247.3, '98.0°W'), (346.2, '97.8°W'), (445.1, '97.6°W')])
@@ -411,6 +456,11 @@ def map_section(full=False, heading='312 dots. Each one is a documented job.'):
             anchor = 'end' if c == 'Austin' else 'start'
             dx = -12 if c == 'Austin' else 12
             plates += f'<text class="map-label map-label-strong" x="{X + dx:.0f}" y="{Y + 4:.0f}" text-anchor="{anchor}">{c} {n}</text>'
+    def clear(g):  # label only where its text box covers no dot, so no data hides under a name
+        x0, x1, y0, y1 = g[2] + 4, g[2] + 8 + 5.6 * len(g[0]), g[3] - 7, g[3] + 7
+        return not any(x0 - 3 <= x <= x1 + 3 and y0 - 3 <= y <= y1 + 3 for x, y, *_ in pts)
+    towns = ''.join(f'<text class="map-label map-town" x="{g[2] + 6}" y="{g[3] + 4}">{e(g[0])}</text>'
+                    for g in NEAR['g'] if g[1] == 'c' and g[6] >= 3 and g[0] not in plate_pos and 20 <= g[2] <= 520 and 40 <= g[3] <= 600 and clear(g))
     scale = f'<g transform="translate(456 600)"><path d="M0 0h{NEAR["ppm"] * 10:.0f}" stroke="#EDECE6" stroke-width="2"/><path d="M0 -5v10M{NEAR["ppm"] * 10:.0f} -5v10" stroke="#EDECE6" stroke-width="1.5"/><text class="map-label" x="0" y="-10">10 mi</text></g>'
     office = f'<rect class="map-hq" x="{hx - 5.5}" y="{hy - 5.5}" width="11" height="11"/><text class="map-label" x="{hx + 12}" y="{hy + 18}">Office, N Lamar</text>'
     chips_def = [('All', -1), ('Siding', 1), ('Windows', 2), ('Roofing', 12), ('Painting', 16), ('Doors', 192), ('Gutters', 32), ('Patio covers', 256)]
@@ -419,41 +469,50 @@ def map_section(full=False, heading='312 dots. Each one is a documented job.'):
         n = len(pts) if mask < 0 else sum(1 for p in pts if p[3] & mask)
         chips += f'<button class="chip" type="button" data-trade="{mask}" aria-pressed="{"true" if mask < 0 else "false"}">{name}<span>{n}</span></button>'
     first_m, last_m = min(p[2] for p in pts), max(p[2] for p in pts)
-    finder = '''<div class="finder">
-        <label for="near-in">Your neighbourhood or town</label>
-        <input id="near-in" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="near-list" placeholder="Try Milwood, Circle C Ranch, Round Rock">
-        <ul class="finder-list" id="near-list" role="listbox" hidden></ul>
+    places, seen = [], set()
+    for g in NEAR['g']:
+        name = g[0] if g[1] == 'c' or ',' in g[0] else f"{g[0]}, {NEAR['ct'][g[4]]}"
+        if name not in seen:
+            seen.add(name)
+            places.append([name, g[2], g[3]])
+    os.makedirs(os.path.join(SITE, 'assets', 'data'), exist_ok=True)
+    with open(os.path.join(SITE, 'assets', 'data', 'near.json'), 'w', encoding='utf-8') as f:  # loaded when the map is used
+        json.dump({'ppm': NEAR['ppm'], 'names': names, 'pl': places, 'pt': [[p[0], p[1], p[6]] for p in NEAR['p']]}, f, ensure_ascii=False, separators=(',', ':'))
+    finder = f'''<div class="finder">
+        <label for="near-in">Find documented jobs near you</label>
+        <input id="near-in" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="near-list" placeholder="Neighbourhood or town">
+        <ul class="finder-list" id="near-list" role="listbox" aria-label="Places in the firm's project file" hidden></ul>
       </div>
-      <div class="cap" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">Try <button class="chip" type="button" data-try="Round Rock">Round Rock</button><button class="chip" type="button" data-try="Cedar Park">Cedar Park</button><button class="chip" type="button" data-try="Milwood">Milwood</button></div>
+      <div class="finder-try">Try <button class="chip chip-sm" type="button" data-try="Round Rock">Round Rock</button><button class="chip chip-sm" type="button" data-try="Cedar Park">Cedar Park</button><button class="chip chip-sm" type="button" data-try="Milwood, Austin">Milwood</button></div>
       <div class="near-out" aria-live="polite"></div>'''
     return f'''<section class="map-sec dark" id="map" data-map aria-labelledby="map-h">
   <div class="wrap mapgrid">
     <div class="map-controls">
       <h2 class="h2" id="map-h" data-split>{heading}</h2>
-      <p class="body-m">Each dot is a documented project with photos, placed near the home, never on it. Scrub the dates to watch the file fill up.</p>
-      <div><span class="map-count num" data-map-count>312</span> <span class="label">projects shown, <span class="map-when" data-map-when>all dates</span></span></div>
+      <p class="body-m">Placed near each home, never on it, exactly as the firm publishes them. Scrub the dates to watch the file fill up.</p>
+      <div class="map-total"><span class="map-count num" data-map-count>312</span> <span class="label">projects shown, <span class="map-when" data-map-when>all dates</span></span></div>
       <div class="filters" role="group" aria-label="Filter the map by trade">{chips}</div>
       <div class="scrub">
         <label class="label" for="map-range">Documented through</label>
         <div class="scrub-row"><button class="btn btn-line btn-sm" type="button" data-map-play aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span>Play 2022 to now</span></button>
         <input class="range" id="map-range" type="range" min="0" max="1" step="1" value="1"></div>
       </div>
-      {finder if full else ''}
+      {finder}
     </div>
     <figure class="map-figure" style="margin:0">
       <svg class="map-svg" viewBox="0 0 566 640" role="img" aria-labelledby="map-t" aria-describedby="map-cap">
         <title id="map-t">Map of the 312 photographed, documented Austin Pro projects in this frame of Central Texas. Most are in Austin ({city.get('Austin', 0)}), Round Rock ({city.get('Round Rock', 0)}) and Pflugerville ({city.get('Pflugerville', 0)}).</title>
-        {grat}{lat}{lon}<g>{pins}</g>{office}{plates}{scale}<circle class="map-ring" cx="0" cy="0" r="0" style="display:none"/>
+        {grat}{lat}{lon}{towns}<g class="map-pins">{pins}</g>{office}{plates}{scale}<circle class="map-ring" cx="0" cy="0" r="0" style="display:none"/>
       </svg>
       <div class="map-tip" hidden></div>
     </figure>
-    <p class="map-caption" id="map-cap">312 photographed projects are drawn here. 574 more documented projects are counted but sit outside this frame, have no recorded location or have no photos published yet. 312 + 574 = 886. Data: the project finder file published on austinprosiding.com.</p>
+    <p class="map-caption" id="map-cap"><span class="map-crop-note" hidden></span>312 photographed projects are drawn here. 574 more documented projects are counted but sit outside this frame, have no recorded location or have no photos published yet. 312 + 574 = 886. Data: the project finder file published on austinprosiding.com.</p>
   </div>
 </section>'''
 
 
 CREW = [
-    ('Kevin', 9, 'Kevin was wonderful in helping me make some decisions about the project.', 'Lala Matthews'),
+    ('Kevin', 9, 'Kevin was wonderful in helping me make some decisions about the project…', 'Lala Matthews'),
     ('Garrett', 8, 'Also special shout out to Garrett who finished up and also swept the pollen off my deck! I did not expect that extra touch.', 'Katie Littleton'),
     ('Tracy', 4, 'Tracy provided us with a great, no pressure estimate along with a comprehensive package of info that detailed the entire process.', 'David McPherson'),
     ('Paul Hale', 3, 'Paul Hale came out and explained the process, the windows and the costs.', 'LOIS RICHWINE'),
@@ -471,7 +530,7 @@ BADGES = [
 
 
 def people(limit_badges=7):
-    crew = ''.join(f'''<li data-dir><div class="crew-name">{n}<small>named in {c} of the 30 reviews on the firm's reviews page</small></div>
+    crew = ''.join(f'''<li data-dir><div class="crew-name">{n}<small>Named in {c} of 30 reviews</small></div>
   <blockquote><p>“{e(q)}”</p><cite>{e(who)}, Google review, 2026</cite></blockquote></li>''' for n, c, q, who in CREW)
     badges = ''.join(f'<li><img src="assets/img/{f}" alt="" width="72" height="48" loading="lazy"><div><b>{e(t)}</b><span>{e(d)}</span></div></li>' for f, t, d in BADGES[:limit_badges])
     return f'''<div class="people">

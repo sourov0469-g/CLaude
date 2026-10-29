@@ -67,7 +67,11 @@ def main(debug=None):
         dt.rectangle(box, fill=255)
     trim = white & near & ~navy & house_outline & ~(np.asarray(not_trim) > 127)
     trim_img = Image.fromarray((trim * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.MaxFilter(3))
-    trim = np.asarray(trim_img) > 127
+    trim_img = trim_img.filter(ImageFilter.MaxFilter(7)).filter(ImageFilter.MinFilter(7))  # close gaps along fascia
+    trim = (np.asarray(trim_img) > 127) & house_outline & ~(np.asarray(not_trim) > 127)
+    # body and gable reach 2px past the colour key so no navy fringe shows under light colours (trim paints on top)
+    grow = lambda m: np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))) > 127
+    body, gable = grow(body) & ~tri | body, grow(gable) & tri | gable
 
     lum = .2126 * r + .7152 * g + .0722 * b
 
