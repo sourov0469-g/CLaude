@@ -367,11 +367,13 @@
     if (motionOK() && window.DrawSVGPlugin) G.from($$('[data-g] path', svg), { drawSVG: '0%', duration: 0.9, ease: 'power2.inOut', stagger: 0.004, scrollTrigger: once(svg, 'top 80%') });
   };
 
-  /* SERVICES 2: the index. Trade names answer the cursor on Mona Sans's weight and width axes, letter by letter
-     (S0184 split + variable axes); a photo follows the pointer (S1321 hover: zoom 1 to 1.06 in 0.7 s). */
+  /* SERVICES 2: Q571 AHA's numbered services index: an ordered list numbered by CSS counters, with the current /
+     total counter (01 of 11) in the intro column following the row you point at or tab to. Trade names answer the
+     cursor on Mona Sans's weight and width axes (variable axes); a photo follows the pointer (S1321 hover zoom). */
   V.services2 = (r, b) => {
-    const list = $('.ix', r), rows = $$('.ix-row', r);
-    if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
+    const list = $('.ix', r), rows = $$('.ix-row', r), now = $('[data-ix-now]', r);
+    rows.forEach((row, k) => { const set = () => { now.textContent = String(k + 1).padStart(2, '0'); }; b.on(row, 'pointerenter', set); b.on(row, 'focus', set); });
+    if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
     if (!(mqFine.matches && mqDesk.matches) || !G || !motionOK()) return;
     const names = $$('[data-chars]', r);
     names.forEach(n => {

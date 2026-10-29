@@ -379,6 +379,7 @@ def services1():
 
 
 def services2():
+    """Q571 AHA: the numbered services index (11 rows, 01 OF 11 counter by CSS counters, intro column left)"""
     rows = ''
     for slug in TRADE_ORDER:
         t = TBY[slug]
@@ -390,8 +391,9 @@ def services2():
     rows += '''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="Storm damage" aria-label="Storm damage: free inspection, documented for your insurer. Book an inspection">
       <span class="ix-name" data-chars>Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
     return f'''<div class="v services-2" data-tone="ground">
-  <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices from the firm's own documented jobs, 2018-2026.</p></div>
-  <ul class="ix">{rows}</ul>
+  <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices from the firm's own documented jobs, 2018-2026.</p>
+    <p class="ix-count num" aria-hidden="true"><b data-ix-now>01</b><span>of 11</span></p></div>
+  <ol class="ix">{rows}</ol>
   <div class="ix-peek" aria-hidden="true"><img alt="" width="800" height="600"></div>
 </div>'''
 

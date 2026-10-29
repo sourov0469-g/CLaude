@@ -277,59 +277,39 @@ html.motion .h3f.on { animation: h3kb 6.5s linear both; }
 .ipill { display: inline-block; width: 2.3em; height: .95em; border-radius: 999px; overflow: hidden; vertical-align: -.08em; background: var(--stone); }
 .ipill img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ---------- SERVICES 1: index ---------- */
-.ix-head { display: grid; gap: 16px; margin-bottom: clamp(24px, 4vw, 48px); }
+/* ---------- SERVICES 2: Q571 AHA numbered services index (ordered list, CSS-counter numbers, intro column left) ---------- */
+.ix-head { display: grid; gap: 16px; align-content: start; margin-bottom: clamp(24px, 4vw, 48px); }
 .ix-head p { color: var(--fg2); max-width: 46ch; }
-.ix li + li { margin-top: 2px; }
-.ix-row { display: grid; grid-template-columns: minmax(0, 1fr) 76px; grid-template-areas: "n t" "m t"; align-items: center; gap: 4px 16px; padding: 12px 0; text-decoration: none; }
-.ix-name { grid-area: n; font-size: clamp(1.75rem, 1rem + 3.8vw, 4.5rem); font-weight: 770; font-stretch: 84%; letter-spacing: -.03em; line-height: 1; transition: transform var(--t-ui) var(--ease), opacity var(--t-ui) ease; }
+.ix-count { display: none; }
+.ix { counter-reset: ix; border-top: 1px solid var(--stone); }
+.ix > li { counter-increment: ix; border-bottom: 1px solid var(--stone); }
+.ix-row { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr) 76px; grid-template-areas: "c n t" "c m t"; align-items: center; gap: 4px 12px; padding: 12px 0; text-decoration: none; }
+.ix-row::before { content: counter(ix, decimal-leading-zero); grid-area: c; align-self: start; padding-top: .35em; color: var(--fg2); font-size: var(--t-sm); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ix-name { grid-area: n; font-size: clamp(1.625rem, 1rem + 2.6vw, 3.5rem); font-weight: 770; font-stretch: 84%; letter-spacing: -.03em; line-height: 1; transition: transform var(--t-ui) var(--ease), opacity var(--t-ui) ease; }
 .ix-meta { grid-area: m; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: var(--t-sm); color: var(--fg2); }
 .ix-meta b { color: var(--fg); font-weight: 650; }
 .ix-th { grid-area: t; width: 76px; height: 57px; object-fit: cover; background: var(--ground2); }
 .ix-th-none { background: none; }
 .ix-peek { display: none; }
 @media (min-width: 900px) {
-  .ix-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; }
-  .ix-head .h2x { grid-column: 1 / 8; }
-  .ix-head p { grid-column: 9 / 13; }
-  .ix-row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "n m"; padding: 8px 0; }
+  .services-2 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 24px; }
+  .ix-head { grid-column: 1 / 5; position: sticky; top: calc(var(--hd) + 72px); align-self: start; margin: 0; }
+  .ix-count { display: flex; align-items: baseline; gap: 8px; margin-top: clamp(16px, 3vw, 40px); color: var(--fg2); }
+  .ix-count b { color: var(--red); font-size: clamp(4rem, 2rem + 4vw, 7rem); font-weight: 790; font-stretch: 75%; letter-spacing: -.04em; line-height: .85; }
+  .ix-count span { font-size: var(--t-lead); font-weight: 650; }
+  .ix { grid-column: 5 / 13; }
+  .ix-row { grid-template-columns: 3rem minmax(0, 1fr) auto; grid-template-areas: "c n m"; padding: 14px 0; }
+  .ix-row::before { align-self: center; padding: 0; }
   .ix-meta { display: grid; justify-items: end; text-align: right; font-size: var(--t-sm); }
   .ix-meta b { font-size: var(--t-body); }
   .ix-th { display: none; }
-  .ix-peek { display: block; position: absolute; z-index: 5; top: 0; left: 0; width: clamp(260px, 24vw, 400px); aspect-ratio: 4 / 3; overflow: hidden; pointer-events: none; opacity: 0; background: var(--ground2); }
+  .ix-peek { display: block; position: absolute; z-index: 5; top: 0; left: 0; width: clamp(240px, 22vw, 360px); aspect-ratio: 4 / 3; overflow: hidden; pointer-events: none; opacity: 0; background: var(--ground2); }
   .ix-peek img { width: 100%; height: 100%; object-fit: cover; }
 }
 @media (hover: hover) and (pointer: fine) {
-  .ix-row:hover .ix-name, .ix-row:focus-visible .ix-name { transform: translateX(20px); }
+  .ix-row:hover .ix-name, .ix-row:focus-visible .ix-name { transform: translateX(16px); }
   .ix:hover .ix-row:not(:hover) > * { opacity: .45; }
   .ix-meta { transition: opacity var(--t-ui) ease; }
-}
-
-/* ---------- SERVICES 2: slices ---------- */
-.services-2 .h2x { margin-bottom: clamp(24px, 4vw, 48px); }
-.slices { display: grid; gap: 4px; }
-.sl { position: relative; overflow: hidden; background: var(--night2); }
-.sl-btn { position: relative; z-index: 2; display: flex; align-items: center; width: 100%; min-height: 64px; padding: 0 16px; border: 0; background: transparent; color: #fff; font-size: 1.375rem; font-weight: 740; font-stretch: 86%; letter-spacing: -.01em; text-align: left; }
-.sl-img { display: none; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
-.sl-body { display: none; gap: 8px; padding: 16px; }
-.sl.is-on .sl-img { display: block; }
-.sl.is-on .sl-body { display: grid; justify-items: start; }
-.sl-n b { font-size: 2.5rem; font-weight: 780; font-stretch: 78%; line-height: .9; font-variant-numeric: tabular-nums; margin-right: 6px; }
-.sl-m { color: var(--fg2); }
-.sl-more { margin-top: 24px; color: var(--fg2); max-width: 60ch; }
-@media (min-width: 900px) {
-  .slices { position: relative; display: flex; gap: 4px; height: min(76svh, 760px); }
-  .sl { position: relative; flex: 1 1 0; min-width: 0; background: none; }
-  .sl.is-on { flex-grow: 4; }
-  .slices.is-clip { display: block; }
-  .slices.is-clip .sl { position: absolute; inset: 0; }
-  .sl-img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
-  .sl-btn { position: absolute; left: 0; bottom: 0; width: auto; min-height: 56px; padding: 0 20px 20px; align-items: flex-end; font-size: 1.125rem; text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
-  .sl::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(10, 10, 10, .7), rgba(10, 10, 10, 0) 45%); pointer-events: none; }
-  .sl-body { display: grid; position: absolute; z-index: 2; left: 0; bottom: 0; padding: 24px; opacity: 0; justify-items: start; }
-  .sl.is-on .sl-body { opacity: 1; }
-  .sl.is-on .sl-btn { opacity: 0; }
-  .sl-n b { font-size: clamp(3rem, 1rem + 4vw, 5.5rem); }
 }
 
 /* ---------- SERVICES 3: budget ---------- */
