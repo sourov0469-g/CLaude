@@ -161,3 +161,46 @@ All results come from `verify.mjs` (Chromium, all non-`file:` requests blocked).
 **Not covered:**
 - Firefox is not installed in this environment, so there is no Firefox pass this time. The v1 build note records one.
 - Not tested in Safari or on a real phone. Touch was emulated in Chromium.
+
+---
+
+## Round 2: client feedback (logo, hero, services board, mobile)
+
+**The feedback:**
+1. Use the exact logo from their current site, with the exact colours.
+2. The hero has too much going on. Keep the pendulum, and lose the extra static lines.
+3. In Services, hovering should show the drawing and then the real photo automatically, with no button to press.
+4. Make it feel great on phones.
+
+Skills re-read for this round:
+- `visual-hierarchy`
+- `responsive-design`
+- `gesture-patterns`
+- `fitts-law`
+- `emil-design-eng`
+- the judging notes' motion, hierarchy and slop rules.
+
+### 2a. Exact logo and palette, taken from carpentryuk.com
+
+**Source:** https://carpentryuk.com/ (fetched 2026-10-29). The header logo is `wp-content/uploads/2026/05/ext-custom-logo-1777959072130.webp`.
+
+- **Logo file.** Downloaded from the live site, it is byte-identical to the file already in the page: 91,248 bytes, sha256 `67786195…b35ca24`. The file itself was always right.
+- **What the page got wrong: how their site draws it.**
+  - **Colour.** Their header passes the logo through WordPress's duotone filter (`wp-duotone-primary-foreground`), which turns the black saw into their rust `#7A2812`. The page showed it black.
+  - **Wordmark.** "Carpentryuk.com" is set in **IBM Plex Sans Bold**, not a serif. Their heading-font variable is undefined, so the site title falls back to the body font. The page used Besley.
+  - **Size.** Measured in a browser on the live site at 1920, 1440 and 375:
+    - logo image 42×42;
+    - an 8 px gap;
+    - wordmark at 20 px, weight 700, letter-spacing -0.4 px, colour `#171511`;
+    - wordmark box 157×27.
+    The page showed the saw at about twice that size.
+- **Change.**
+  - The page now carries their exact duotone `<filter>`, copied from their HTML, and applies it to the logo image. The logo bytes are untouched.
+  - The image sits at 42×42, with an 8 px gap.
+  - IBM Plex Sans Bold is embedded. It is their own theme file from carpentryuk.com (60,192 bytes), unmodified, under the SIL OFL.
+  - The wordmark is set at their 20 px, 700, -0.4 px, `#171511`.
+  - The phone sheet uses the same lockup.
+  - The footer uses it too, in the paper colour on its paper tile. A rust saw straight on the dark footer would fail contrast.
+- **Result.** Measured in our page: logo 42×42, wordmark 157×27, same font, size, weight, tracking and colour. The logo-to-wordmark offset is 50 px, the same as live. The live-vs-page shots look identical at 1440 and 375. Under 360 px the lockup steps down slightly (38 px logo, 18 px wordmark), so both 44 px header buttons still fit at 320.
+- **Palette.** Their theme colours: background `#F3EFEC`, foreground `#171511`, primary `#7A2812`, secondary `#3D4235`, tertiary `#E2E1DD`. The page already used the first four exactly. The alternate sheets (values, design and build, coverage) used an invented warm `#EBE6E0`; they now use their tertiary, `#E2E1DD`. The image-well shade is one step deeper in the same grey. Body copy on `#E2E1DD` measures above 4.5:1.
+- **Shots:** `round2/logo-live-vs-page-1440`, `round2/logo-live-vs-page-375` (live on top, page below), `round2/after-logo-header-320-360-375`, `round2/after-logo-footer-1440`, `round2/after-palette-values-1440`.
