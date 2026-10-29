@@ -260,8 +260,9 @@ function reroof(root, c) {
   const [outline, gable] = svg.querySelectorAll('.hw2-line'), courses = [...svg.querySelectorAll('.hw2-c')];
   const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: pin, start: 'top top', end: '+=200%', scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
   tl.set({}, {}, 1) // the timeline is exactly 1 long, so every position below is a progress value
-    .fromTo(outline, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.3 }, 0.04)
-    .fromTo(gable, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.11 }, 0.27);
+    // attributes, not CSS: CSSPlugin rounds px values, which would snap a pathLength-1 dash from 1 to 0
+    .fromTo(outline, { attr: { 'stroke-dasharray': 1, 'stroke-dashoffset': 1 } }, { attr: { 'stroke-dashoffset': 0 }, duration: 0.3 }, 0.04)
+    .fromTo(gable, { attr: { 'stroke-dasharray': 1, 'stroke-dashoffset': 1 } }, { attr: { 'stroke-dashoffset': 0 }, duration: 0.11 }, 0.27);
   const D = 0.11, S = (0.52 - D) / (courses.length - 1);
   courses.forEach((r, i) => tl.fromTo(r, { scaleX: 1, transformOrigin: '100% 50%' }, { scaleX: 0, duration: D }, 0.4 + i * S));
   [0.2, 0.55, 0.9].forEach((at, i) => tl.fromTo(steps[i], { autoAlpha: 0, clipPath: SHUT }, { autoAlpha: 1, clipPath: OPEN, duration: 0.07 }, at - 0.04));

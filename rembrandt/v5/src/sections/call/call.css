@@ -6,9 +6,11 @@
 .cv-hours,.cv-now{font-size:var(--t-lead);font-weight:600;line-height:1.35;text-wrap:balance}
 .cv-now{display:inline-flex;align-items:center;gap:10px}
 .cv-now[hidden]{display:none}
-/* the one real-time state on the page (G5 #22): open shows a filled sun dot, closed a ring, so shape carries it too (1.4.1) */
-.cv-dot{width:.62em;height:.62em;flex:none;border-radius:50%;border:2px solid currentColor;opacity:.8}
-.cv-now.is-open .cv-dot{background:var(--sun);border-color:var(--sun);opacity:1}
+/* the one real-time state on the page (G5 #22, the one permitted availability dot): sun when open, a dim dot when closed;
+ * the words carry the state, so colour is never the only signal (1.4.1) */
+.cv-dot{width:.5em;height:.5em;flex:none;border-radius:50%;background:currentColor;opacity:.4}
+.cv-now.is-open .cv-dot{background:var(--sun);opacity:1}
+.nw{white-space:nowrap}
 
 /* footer: a hard colour cut (PLAN one separation mechanism); the mobile action bar is fixed over the last 84px */
 .cv-foot{position:relative;background:var(--ink);color:#fff;padding:28px var(--gutter) calc(36px + var(--mbar))}
@@ -18,7 +20,7 @@
 @media (max-width:640px){.cv-foot{flex-direction:column;align-items:flex-start;gap:12px}}
 
 /* ---------- v1 Number: a blue field, the number set as one huge tel link that fits the measure, rings radiating from it */
-.cv1{min-height:max(760px,100svh);display:grid;grid-template-rows:1fr auto;background:var(--blue);color:#fff}
+.cv1{min-height:max(760px,100svh);display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:1fr auto;background:var(--blue);color:#fff}
 .cv1-rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .cv1-body{position:relative;display:grid;align-content:center;gap:clamp(28px,5vh,56px);padding:clamp(7.5rem,5rem + 6vw,10rem) var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
 .cv1-h{font-size:clamp(1.75rem,1.1rem + 2.2vw,3.25rem);font-weight:800;line-height:1.04;letter-spacing:-.025em}
@@ -44,11 +46,11 @@
 }
 
 /* ---------- v2 Before you call: four big choices write the line to say; the field answers the chosen state */
-.cv2{display:grid;grid-template-rows:1fr auto;min-height:max(760px,100svh);background:var(--ink-2);color:#fff;transition:background-color .3s var(--ease-out)}
+.cv2{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:1fr auto;min-height:max(760px,100svh);background:var(--ink-2);color:#fff;transition:background-color .3s var(--ease-out)}
 .cv2.is-set{background:var(--blue)}
-.cv2-word{position:absolute;right:calc(var(--gutter) * -0.5);bottom:clamp(64px,12vh,140px);margin:0;font-size:clamp(9rem,30vw,30rem);font-weight:800;line-height:.8;letter-spacing:-.06em;white-space:nowrap;color:rgb(255 255 255 / .07);pointer-events:none;user-select:none}
+.cv2-word{position:absolute;left:calc(var(--gutter) - .02em);bottom:clamp(8px,2vh,32px);margin:0;font-size:clamp(8rem,22vw,22rem);font-weight:800;line-height:.8;letter-spacing:-.06em;white-space:nowrap;color:rgb(255 255 255 / .07);pointer-events:none;user-select:none}
 .cv2-w{display:inline-block}
-.cv2-body{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,96px);align-items:end;padding:clamp(7.5rem,5rem + 6vw,10rem) var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
+.cv2-body{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,96px);align-content:center;align-items:end;padding:clamp(7.5rem,5rem + 6vw,10rem) var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
 .cv2-ask{display:grid;gap:clamp(28px,4vh,44px)}
 .cv2-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.025em}
 .cv2-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -64,7 +66,7 @@
 .cv2-opt[aria-pressed=true] .cv2-tick{opacity:1;background:var(--ink);border-color:var(--ink);color:#fff}
 .cv2-opt[aria-pressed=true] .cv2-tick svg{opacity:1;scale:1;filter:blur(0)}
 .cv2-act{display:grid;gap:24px;justify-items:start;max-width:520px}
-.cv2-say{font-size:clamp(1.375rem,1rem + 1.2vw,2rem);font-weight:600;line-height:1.25;letter-spacing:-.015em;text-wrap:pretty;min-height:3.75em}
+.cv2-say{display:flex;flex-direction:column;justify-content:flex-end;min-height:5em;font-size:clamp(1.375rem,1rem + 1.2vw,2rem);font-weight:600;line-height:1.25;letter-spacing:-.015em;text-wrap:pretty} /* four lines reserved and bottom-anchored: the Call button never moves when the line changes (Fitts, CLS) */
 .cv2-say-a,.cv2-say-b{display:block}
 .cv2-say b{font-weight:800;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:.1em;text-underline-offset:.16em}
 .cv2 .cv-meta{gap:6px 24px}
@@ -72,21 +74,22 @@
 @media (max-width:899px){
   .cv2-body{grid-template-columns:minmax(0,1fr);align-items:start;gap:36px;padding-top:clamp(7rem,24vw,8.5rem)}
   .cv2-act{max-width:none}
-  .cv2-say{min-height:0}
 }
 @media (max-width:640px){
-  .cv2-opts{gap:10px}
-  .cv2-opt{min-height:60px;padding:0 10px 0 18px;font-size:1.0625rem}
-  .cv2-tick{width:32px;height:32px}
-  .cv2-tick svg{width:18px;height:18px}
-  .cv2-word{bottom:auto;top:clamp(96px,26vw,140px);right:-4vw;font-size:46vw}
+  .cv2-opts{grid-template-columns:minmax(0,1fr);gap:8px}
+  .cv2-opt{min-height:56px;padding:0 8px 0 22px;font-size:1.125rem}
+  .cv2-tick{width:36px;height:36px}
+  .cv2-tick svg{width:20px;height:20px}
+  .cv2-word{bottom:auto;top:clamp(150px,44vw,200px);font-size:34vw}
 }
 
 /* ---------- v3 Sign-off: two giant counter-running lines (S1303 Ft6), thrown by hand or by the scroll; one real link in flow */
-.cv3{display:grid;grid-template-rows:auto auto auto 1fr auto;min-height:max(760px,100svh);background:var(--ink);color:#fff}
-.cv3-top{padding:clamp(7.5rem,5rem + 6vw,9.5rem) var(--gutter) 0}
+/* the lines lead (visual order only: they are aria-hidden), then the statement and the call side by side, then the footer */
+.cv3{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 1fr auto;grid-template-areas:"rows rows" "head act" "foot foot";align-items:end;column-gap:48px;min-height:max(760px,100svh);background:var(--ink);color:#fff}
+.cv3-top{grid-area:head;padding:0 0 clamp(3rem,2rem + 3vw,5rem) var(--gutter)}
+.cv3 .cv-foot{grid-area:foot;background:var(--blue)}
 .cv3-h{font-size:clamp(1.75rem,1.1rem + 2.2vw,3.25rem);font-weight:800;line-height:1.04;letter-spacing:-.025em}
-.cv3-rows{display:grid;gap:clamp(4px,1.2vh,16px);padding:clamp(24px,5vh,56px) 0 clamp(28px,5vh,56px);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.cv3-rows{grid-area:rows;align-self:start;overflow:hidden;display:grid;gap:clamp(4px,1.2vh,16px);padding:calc(var(--nav-h) + clamp(28px,7vh,72px)) 0 clamp(28px,6vh,64px);touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .cv3-row{white-space:nowrap}
 .cv3-track{display:flex;width:max-content;will-change:transform}
 .cv3-u{display:flex;align-items:center;flex:none}
@@ -95,11 +98,11 @@
 .cv3-ra{font-size:clamp(5.5rem,16.5vw,17rem);font-weight:800;line-height:1;letter-spacing:-.045em}
 .cv3-rb{font-size:clamp(3rem,8.2vw,8.5rem);font-weight:300;line-height:1.08;letter-spacing:-.03em;color:var(--on-blue-muted)}
 .cv3-rb .cv3-dot{width:.24em;height:.24em}
-.cv3-dock{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding:0 var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
+.cv3-dock{grid-area:act;display:grid;justify-items:start;gap:14px;padding:0 var(--gutter) clamp(3rem,2rem + 3vw,5rem) 0}
 .cv3-dock .cv-meta{gap:6px 28px}
 .cv3-dock .cv-hours,.cv3-dock .cv-now{font-size:var(--t-body)}
-/* WCAG 2.2.2 pause control, visible whenever the lines move (G4 #16) */
-.cv3-pause{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-left:auto;padding:0 18px 0 14px;border:2px solid rgb(255 255 255 / .55);border-radius:999px;background:transparent;color:#fff;font-weight:700;cursor:pointer;touch-action:manipulation;transition:background-color var(--dur-quick) var(--ease-out),border-color var(--dur-quick) var(--ease-out),scale var(--dur-press) var(--ease-out)}
+/* WCAG 2.2.2 pause control, visible whenever the lines move, sitting on the lines it stops (G4 #16) */
+.cv3-pause{grid-area:rows;align-self:end;justify-self:end;position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;min-height:44px;margin:0 var(--gutter) 8px 0;padding:0 18px 0 14px;border:2px solid rgb(255 255 255 / .55);border-radius:999px;background:var(--ink);color:#fff;font-weight:700;cursor:pointer;touch-action:manipulation;transition:background-color var(--dur-quick) var(--ease-out),border-color var(--dur-quick) var(--ease-out),scale var(--dur-press) var(--ease-out)}
 .cv3-pause[hidden]{display:none}
 .cv3-pause:active{scale:.96}
 @media (hover:hover){.cv3-pause:hover{background:rgb(255 255 255 / .1);border-color:#fff}}
@@ -107,9 +110,13 @@
 .cv3-ico svg{grid-area:1/1;width:20px;height:20px;transition:opacity .3s var(--ease-icon),scale .3s var(--ease-icon),filter .3s var(--ease-icon)}
 .cv3-i-play,.cv3.is-paused .cv3-i-pause{opacity:0;scale:.25;filter:blur(4px)}
 .cv3.is-paused .cv3-i-play{opacity:1;scale:1;filter:blur(0)}
+@media (max-width:899px){
+  .cv3{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 1fr auto;grid-template-areas:"rows" "head" "act" "foot"}
+  .cv3-top{padding:0 var(--gutter) 28px}
+  .cv3-dock{align-self:start;padding:0 var(--gutter) clamp(3rem,2rem + 6vw,4.5rem)}
+}
 @media (max-width:640px){
   .cv3-ra{font-size:27vw}
   .cv3-rb{font-size:13vw}
-  .cv3-dock{flex-direction:column;align-items:flex-start}
-  .cv3-pause{margin-left:0}
+  .cv3-rows{padding-bottom:64px}
 }

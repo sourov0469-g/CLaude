@@ -5,13 +5,19 @@
 // cleanup stops loops, observers, timers and listeners.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { lines, rise, onEnter, EASE } from '../../js/fx.js';
+import { onEnter, EASE } from '../../js/fx.js';
 import { parallax } from '../../js/depth.js';
 import { loop } from '../../js/gl.js';
 import { spring, step } from '../../js/spring.js';
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const bell = p => Math.sin(Math.PI * clamp(p, 0, 1)); // S0489 bell(p): fades in and out over one beat
+// group rise with the fx.rise values (16px, 0.6s, ease-out, 0.1 stagger), but opacity only, never visibility: controls and
+// lines waiting for their entrance stay in the tab order and the accessibility tree (a keyboard user tabbing in from the
+// section above must land on them, not skip to the footer)
+// heading lines: the fx.lines values (S1321 masked line rise: yPercent 100 to 0, blur 8px to 0, 1s, stagger 0.11), opacity only
+const rows = (h, o = {}) => gsap.fromTo(h.querySelectorAll('.ln > span'), { yPercent: 100, opacity: 0, filter: 'blur(8px)' }, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 1, ease: EASE, stagger: 0.11, ...o });
+const show = (els, o = {}, from = {}) => gsap.fromTo(els, { y: 16, opacity: 0, ...from }, { y: 0, opacity: 1, duration: 0.6, ease: EASE, stagger: 0.1, clearProps: 'transform', ...o });
 
 // ---------- the one real-time state on the page (G5 #22, S0650 9.F). The office is open Monday to Friday, 9 to 5,
 // Eastern time; Intl reads the time in America/New_York, so the line is right wherever the visitor is. Nothing else is
@@ -130,11 +136,11 @@ function number(root, c) {
   offs.push(() => { clearTimeout(timer); io.disconnect(); document.removeEventListener('visibilitychange', vis); });
 
   const fall = gsap.timeline({ scrollTrigger: onEnter(num, { start: 'top 88%' }) });
-  fall.fromTo(chars.map(ch => ch.f), { y: -60, rotation: -20, autoAlpha: 0 }, { y: 0, rotation: 0, autoAlpha: 1, duration: 1.2, ease: EASE, stagger: 0.1 })
+  fall.fromTo(chars.map(ch => ch.f), { y: -60, rotation: -20, opacity: 0 }, { y: 0, rotation: 0, opacity: 1, duration: 1.2, ease: EASE, stagger: 0.1 })
     .fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: EASE }, '-=0.55')
     .add(() => { entered = true; ring(); schedule(); }, '-=0.3');
-  lines(root.querySelector('.cv1-h'), { scrollTrigger: onEnter(root, { start: 'top 72%' }) });
-  rise(root.querySelectorAll('.cv1 .cv-meta > *'), { scrollTrigger: onEnter(num, { start: 'top 88%' }), delay: 1.1 });
+  rows(root.querySelector('.cv1-h'), { scrollTrigger: onEnter(root, { start: 'top 72%' }) });
+  show(root.querySelectorAll('.cv1 .cv-meta > *'), { scrollTrigger: onEnter(num, { start: 'top 88%' }), delay: 1.1 });
 
   if (c.fine) {
     const move = e => { if (e.pointerType !== 'mouse') return; if (stale) measure(); ptr.on = true; ptr.x = e.clientX; ptr.y = e.clientY; lp.wake(); };
@@ -164,7 +170,7 @@ function number(root, c) {
 function converter(root, c) {
   const offs = [liveHours(root)];
   const opts = [...root.querySelectorAll('.cv2-opt')], a = root.querySelector('.cv2-say-a'), w = root.querySelector('.cv2-w');
-  const PROMPT = 'Call and tell Rachel what your roof is doing.', ASK = '?';
+  const PROMPT = 'Call and tell Rachel what it’s doing.', ASK = '?';
   let cur = opts.find(o => o.getAttribute('aria-pressed') === 'true') || null, tl = null;
   const write = () => {
     a.textContent = '';
@@ -190,9 +196,9 @@ function converter(root, c) {
   root.addEventListener('click', click);
   offs.push(() => root.removeEventListener('click', click));
   if (c.motion) {
-    lines(root.querySelector('.cv2-h'), { scrollTrigger: onEnter(root, { start: 'top 72%' }) });
-    gsap.fromTo(opts, { autoAlpha: 0, y: 12, scale: 0.95 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: EASE, stagger: 0.04, clearProps: 'transform', scrollTrigger: onEnter(root.querySelector('.cv2-opts'), { start: 'top 90%' }) });
-    rise(root.querySelectorAll('.cv2-act > *'), { scrollTrigger: onEnter(root.querySelector('.cv2-act'), { start: 'top 90%' }), delay: 0.2 });
+    rows(root.querySelector('.cv2-h'), { scrollTrigger: onEnter(root, { start: 'top 72%' }) });
+    show(opts, { stagger: 0.04, scrollTrigger: onEnter(root.querySelector('.cv2-opts'), { start: 'top 90%' }) }, { y: 12, scale: 0.95 });
+    show(root.querySelectorAll('.cv2-act > *'), { scrollTrigger: onEnter(root.querySelector('.cv2-act'), { start: 'top 90%' }), delay: 0.2 });
     gsap.fromTo(w, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE, scrollTrigger: onEnter(root, { start: 'top 60%' }) });
     parallax(root);
   }
@@ -232,6 +238,9 @@ function signoff(root, c) {
     }
     paint();
   };
+  // first frame (and the reduced-motion still): each line starts on the gutter, so the "(" sits under the heading's edge
+  const gut = parseFloat(getComputedStyle(root.querySelector('.cv3-top')).paddingLeft) || 0;
+  rows.forEach(r => { r.x.p = gut; });
   const ro = new ResizeObserver(layout); ro.observe(root);
   if (document.fonts) document.fonts.ready.then(layout);
   offs.push(() => { ro.disconnect(); rows.forEach(r => { r.track.style.transform = ''; }); });
@@ -279,8 +288,8 @@ function signoff(root, c) {
 
   // entrance: the throw-in, then the in-flow block
   ScrollTrigger.create({ ...onEnter(root, { start: 'top 75%' }), onEnter: () => { if (!paused) rows.forEach(r => { r.x.v += r.dir * sgn * 2400; }); lp.wake(); } });
-  lines(root.querySelector('.cv3-h'), { scrollTrigger: onEnter(root, { start: 'top 72%' }) });
-  rise(root.querySelectorAll('.cv3-dock > *:not([hidden])'), { scrollTrigger: onEnter(root.querySelector('.cv3-dock'), { start: 'top 92%' }), stagger: 0.08 });
+  rows(root.querySelector('.cv3-h'), { scrollTrigger: onEnter(root, { start: 'top 72%' }) });
+  show([...root.querySelectorAll('.cv3-dock > *'), btn], { scrollTrigger: onEnter(root.querySelector('.cv3-dock'), { start: 'top 95%' }), stagger: 0.08 });
   parallax(root);
   return () => offs.forEach(f => f());
 }

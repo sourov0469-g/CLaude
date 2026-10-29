@@ -4,7 +4,7 @@
 // returned cleanup undoes what GSAP does not own (DOM splits, classes, loops, listeners).
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { lines, rise, clipIn, onEnter, EASE, MOVE } from '../../js/fx.js';
+import { lines, clipIn, onEnter, EASE, MOVE } from '../../js/fx.js';
 import { parallax } from '../../js/depth.js';
 import { loop } from '../../js/gl.js';
 
@@ -24,6 +24,16 @@ function splitWords(el) {
     n.replaceWith(frag);
   }
   return () => el.replaceChildren(...saved);
+}
+
+// Group rise (S0075: 16px, 0.6s, ease-out, 0.1s between chunks) with opacity only, never visibility, so links stay in the
+// tab order and the accessibility tree before their reveal; focusing one finishes its reveal at once (G9 keyboard walk).
+function show(els, trigger, start) {
+  els = [...els].filter(Boolean);
+  const t = gsap.fromTo(els, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: EASE, stagger: 0.1, scrollTrigger: onEnter(trigger, { start }) });
+  const done = () => t.progress(1);
+  els.forEach(el => el.addEventListener('focusin', done));
+  return () => els.forEach(el => el.removeEventListener('focusin', done));
 }
 
 // v1 Sentence. Pinned scene (end +=150%, scrub; S1321 pinned story, S0019 row 6) in which the family sentence lights word by
@@ -61,9 +71,9 @@ function sentence(root, c) {
     parallax(root);
   }
   clipIn(fig, { scrollTrigger: onEnter(fig, { start: 'top 85%' }) });
-  rise(root.querySelector('.fv1-copy .tlink'), { scrollTrigger: onEnter(root, { start: 'top 45%' }) });
+  const unshow = show([root.querySelector('.fv1-copy .tlink')], root, 'top 45%');
   return () => {
-    root.classList.remove('is-live'); names.forEach(m => m.n.classList.remove('is-lit'));
+    unshow(); root.classList.remove('is-live'); names.forEach(m => m.n.classList.remove('is-lit'));
     if (restore) restore(); else words.forEach(w => w.style.removeProperty('--wp'));
   };
 }
@@ -128,10 +138,10 @@ function years(root, c) {
     steps.forEach((el, i) => (i === cur ? el.setAttribute('aria-current', 'step') : el.removeAttribute('aria-current')));
   };
   gsap.fromTo(fill, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: rail, start: 'top 62%', end: 'bottom 62%', scrub: true, invalidateOnRefresh: true, onUpdate: paint, onRefresh: paint } });
-  rise(root.querySelector('.fv2-cta'), { scrollTrigger: onEnter(root.querySelector('.fv2-cta'), { start: 'top 92%' }) });
+  const unshow = show([root.querySelector('.fv2-cta')], root.querySelector('.fv2-cta'), 'top 92%');
   steps.forEach(s => parallax(s, s)); // numerals and the photo, each over its own step's pass
   return () => {
-    off(); made.forEach(fn => fn());
+    off(); unshow(); made.forEach(fn => fn());
     root.classList.remove('is-live'); steps.forEach(el => { el.classList.remove('is-on'); el.removeAttribute('aria-current'); });
   };
 }
@@ -143,9 +153,13 @@ function years(root, c) {
 // centred picture is always exact. Calm by default (S0489): small amplitudes, no idle loop.
 function strata(root, c) {
   if (!c.motion) return; // reduced motion: the exact picture, still
-  const fig = root.querySelector('.fv3-ph'), bands = [...root.querySelectorAll('.fv3-b')];
-  lines(root.querySelector('.fv3-h'), { scrollTrigger: onEnter(root) });
-  rise(root.querySelectorAll('.fv3-side > *'), { scrollTrigger: onEnter(root.querySelector('.fv3-side'), { start: 'top 90%' }) });
+  const fig = root.querySelector('.fv3-ph'), bands = [...root.querySelectorAll('.fv3-b')], h = root.querySelector('.fv3-h');
+  const named = !h.hasAttribute('aria-label'); // keep a name while the masked lines are hidden (prepText names it on desktop)
+  if (named) h.setAttribute('aria-label', [...h.querySelectorAll('.ln')].map(l => l.textContent.trim()).join(' '));
+  lines(h, { scrollTrigger: onEnter(root) });
+  const unshow = show(root.querySelectorAll('.fv3-side > *'), root.querySelector('.fv3-side'), 'top 90%');
+  const offs = [unshow, () => { if (named) h.removeAttribute('aria-label'); }];
+  const end = () => offs.forEach(f => f());
   const k = c.wide ? 1 : 0.5; // S0204: halve the distances on small screens
   let p = 0, lp = null;
   // one pass of the whole section; progress .5 is the section centred in the viewport
@@ -155,7 +169,7 @@ function strata(root, c) {
     tl.fromTo(b, { yPercent: a }, { yPercent: 0, duration: 0.28 }, 0.12).to(b, { yPercent: -a, duration: 0.28 }, 0.6);
   });
   tl.set({}, {}, 1);
-  if (!c.fine) return;
+  if (!c.fine) return end;
   const AMP = [0.012, -0.022, 0.034]; // fractions of half the viewport width: sign far, people opposite, ground near
   const set = bands.map(b => gsap.quickSetter(b, 'x', 'px')), was = bands.map(() => 0);
   const s = { x: 0, tx: 0 };
@@ -171,10 +185,8 @@ function strata(root, c) {
   const leave = () => { s.tx = 0; lp.wake(); };
   const resize = () => { hw = innerWidth / 2; };
   root.addEventListener('pointermove', move); root.addEventListener('pointerleave', leave); addEventListener('resize', resize);
-  return () => {
-    lp.stop(); root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('resize', resize);
-    gsap.set(bands, { x: 0 });
-  };
+  offs.push(() => { lp.stop(); root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('resize', resize); gsap.set(bands, { x: 0 }); });
+  return end;
 }
 
 export default { 1: sentence, 2: years, 3: strata };

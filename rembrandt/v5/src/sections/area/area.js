@@ -71,7 +71,7 @@ function routeV(root, c) {
   const layer = root.querySelector('.av1-mapl'), map = root.querySelector('.av1-map'), svg = root.querySelector('.av1-svg');
   const ol = root.querySelector('.av1-towns'), now = root.querySelector('.av1-now'), nn = now.querySelector('.av1-nn'), nd = now.querySelector('.av1-nd');
   const bg = root.querySelector('.av1-bg');
-  if (!ol.children.length) NEAR.forEach(t => { const li = document.createElement('li'); li.innerHTML = `<span class="av-nm">${t.name}</span><span class="vh">, ${away(t).replace(/^O/, 'o')}</span>`; ol.append(li); });
+  if (!ol.children.length) NEAR.forEach(t => { const li = document.createElement('li'); li.innerHTML = `<span class="av-nm">${t.name}</span><span class="vh">, ${t.i ? t.n + ' miles' : 'our office'}</span>`; ol.append(li); });
   const lis = [...ol.children];
   const S = { total: 1, cum: [], pts: [], reach: [], dots: [], road: null, casing: null, marker: null, p: c.motion ? 0 : 1, idx: -2 };
 
@@ -120,7 +120,7 @@ function routeV(root, c) {
 
     if (wide) { // labels on the map, placed around their dots
       const extra = [{ ...nowBox }, { x: sx - 4, y: sy - 22, w: sb + 80, h: 30 }];
-      for (let k = 0; k < pts.length; k += 5) extra.push({ x: pts[k][0] - 3, y: pts[k][1] - 3, w: 6, h: 6, k: 0.25 });
+      for (let k = 0; k < pts.length; k += 4) extra.push({ x: pts[k][0] - 4, y: pts[k][1] - 4, w: 8, h: 8, k: 0.7 }); // keep labels off the road
       const spots = placeLabels(P.map((p, i) => ({ x: p.X, y: p.Y, r: i ? 5 : 8, ...sizes[i] })), W, H, cx, cy, extra);
       lis.forEach((li, i) => { li.style.left = f1(spots[i].x) + 'px'; li.style.top = f1(spots[i].y) + 'px'; li.dataset.side = spots[i].side; });
     } else lis.forEach(li => { li.style.left = li.style.top = ''; });
@@ -181,7 +181,7 @@ function routeV(root, c) {
 // verdict while the visitor is still typing, the "not on our list" answer only after Enter or leaving the field, re-checked
 // on input once shown, results in a polite live region). S0089: typing is high-frequency, so nothing moves per keystroke;
 // names and dots change colour in 150ms. The one sanctioned motion is the matched town's dot growing on the map.
-const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z]+/g, ' ').trim().replace(/\s+(oh|ohio)$/, '').replace(/^(city of|village of)\s+/, '');
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]+/g, ' ').trim().replace(/\s+(oh|ohio)$/, '').replace(/^(city of|village of)\s+/, '');
 const KEYS = T.map(t => { const n = norm(t.name); return { n, flat: n.replace(/ /g, ''), words: n.split(' ') }; });
 const list = names => (names.length < 2 ? names.join('') : names.slice(0, -1).join(', ') + ' or ' + names[names.length - 1]);
 function lookupV(root, c) {
@@ -194,7 +194,7 @@ function lookupV(root, c) {
   let sig = '';
   const layout = () => {
     const W = wrap.clientWidth, H = wrap.clientHeight; if (!W || !H || W + 'x' + H === sig) return; sig = W + 'x' + H;
-    const F = S.F = fit(W, H, c.wide ? [110, 40, 40, Math.max(40, W * 0.48)] : [Math.max(60, H - W * 1.25 - 40), 18, 40, 18]);
+    const F = S.F = fit(W, H, c.wide ? [H * 0.037 + 150, 56, H * 0.037 + 70, 96] : [24, 12, 24, 12]); // wide: the right half, clear of the nav
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.replaceChildren();
     const sp = el('g', {}, svg, 'av2-spokes');
     S.spokes = T.map((t, i) => (i ? el('line', { x1: f1(F.cx), y1: f1(F.cy), x2: f1(F.X(t)), y2: f1(F.Y(t)) }, sp) : null));

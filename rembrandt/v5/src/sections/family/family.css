@@ -3,10 +3,11 @@
  * Field: mist. A tonal cut from the sky of work above, a hard cut into the ink of how below. Ink text 12.7:1. */
 .fv{position:relative;isolation:isolate;overflow:clip;background:var(--mist);color:var(--ink)}
 .fv .tlink{color:var(--ink)}
+.fv :focus-visible{outline-color:var(--ink)} /* the global sun ring is 1.36:1 on mist; ink is 12.5:1 (WCAG 1.4.11) */
 
 /* v1 Sentence: the photo bleeds off the left edge; the sentence lights word by word beside it */
 .fv1{--dim:.18;--rise:.14em} /* S1327: hidden opacity .12 to .3, offset .08 to .22em */
-.fv1-pin{position:relative;height:max(640px,100svh);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);align-items:center;column-gap:clamp(40px,5.5vw,96px);padding:calc(var(--nav-h) + 20px) var(--gutter) 44px 0}
+.fv1-pin{position:relative;height:max(640px,100svh);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;column-gap:clamp(40px,5vw,88px);padding:calc(var(--nav-h) + 20px) var(--gutter) 44px 0}
 .fv1-ph{grid-column:1;grid-row:1;width:100%;aspect-ratio:3/2;margin:0}
 .fv1-sy{position:absolute;inset:-4% 0 -8%}         /* overscan for the bg drift, top-anchored so the sign stays whole */
 .fv1-pd{position:absolute;inset:0 -1.6%}           /* and for pointer depth */
@@ -50,10 +51,10 @@
 .fv2.is-live .fv2-step:not(.is-on) .fv2-dot{transform:scale(.5);background:var(--steel)}
 .fv2.is-live .fv2-step:not(.is-on) .fv2-t{color:var(--muted)}
 @media (max-width:899px){
-  .fv2-step{min-height:0;padding-bottom:clamp(64px,16vw,112px)}
-  .fv2-now{grid-template-columns:var(--dot) minmax(0,1fr);padding-bottom:0}
+  .fv2-step{min-height:min(48svh,440px);padding-bottom:clamp(48px,12vw,96px)} /* each year still gets its own beat on a phone */
+  .fv2-now{grid-template-columns:var(--dot) minmax(0,1fr);padding-bottom:0;min-height:0}
   .fv2-ph{grid-column:2;grid-row:4;margin-top:clamp(24px,6vw,40px)}
-  .fv2-gh{font-size:46vw;margin-top:-.7em}
+  .fv2-gh{font-size:46vw;margin-top:-.7em;color:rgb(255 255 255/.45)}
 }
 
 /* v3 Strata: three bands of one photo (cut on the soffit shadow at 297/801 and below the hands at 692/801);
