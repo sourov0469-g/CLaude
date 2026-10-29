@@ -1,0 +1,112 @@
+<!doctype html>
+<!--[if lte IE 9]>
+<html lang="en" class="oldie">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+  
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="N5Hi8g084BaaM9Pl3R6Yj3FAaN6fIl7Eb0vuhU8Y0vvmaSD9XLWptDvpQ2A8rDiibIKKlmmuQKsMvXguHeMkiA" />
+
+  
+
+    <!--
+Copyright (c) 2026 by GSAP (https://codepen.io/GreenSock/pen/XWoBypQ)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+-->
+
+
+  <title>MotionPath Demo</title>
+
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-defe0b00ddddc98ad4bc2c428e9d6182cd7742e2624f558656dbfb986d4ba13c.css" />
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/global/global-ad41277a46a88d9d3b7701645e96769f2bae2443772561a37ee06c42cc78c135.css" media="all" />
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/packs/css/everypage-4dd335a7.css" />
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/page/page-6d7ec71a37b87f5f80695384afc7b2b48ebfbe6ce33285d99441bfeb72357d7b.css" media="all" />
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/editor/editor-28e58047cdd10ddb866ce3eec8396fbb6003052a056114ce089680172508765f.css" media="all" />
+
+  
+
+<style type="text/css">@font-face {font-family:'Lato';font-style:normal;font-weight:400;src:url(/cf-fonts/s/lato/5.2.7/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Lato';font-style:normal;font-weight:400;src:url(/cf-fonts/s/lato/5.2.7/latin-ext/400/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Lato';font-style:normal;font-weight:700;src:url(/cf-fonts/s/lato/5.2.7/latin-ext/700/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Lato';font-style:normal;font-weight:700;src:url(/cf-fonts/s/lato/5.2.7/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Lato';font-style:normal;font-weight:900;src:url(/cf-fonts/s/lato/5.2.7/latin/900/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Lato';font-style:normal;font-weight:900;src:url(/cf-fonts/s/lato/5.2.7/latin-ext/900/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Lato';font-style:italic;font-weight:400;src:url(/cf-fonts/s/lato/5.2.7/latin/400/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Lato';font-style:italic;font-weight:400;src:url(/cf-fonts/s/lato/5.2.7/latin-ext/400/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Lato';font-style:italic;font-weight:700;src:url(/cf-fonts/s/lato/5.2.7/latin/700/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Lato';font-style:italic;font-weight:700;src:url(/cf-fonts/s/lato/5.2.7/latin-ext/700/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Lato';font-style:italic;font-weight:900;src:url(/cf-fonts/s/lato/5.2.7/latin-ext/900/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Lato';font-style:italic;font-weight:900;src:url(/cf-fonts/s/lato/5.2.7/latin/900/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}</style>
+  <meta name="google-adsense-account" content="ca-pub-5381196231596750">
+
+      <meta name="twitter:title" content="MotionPath Demo">
+    <meta name="twitter:description" content="...">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://shots.codepen.io/username/pen/XWoBypQ-800.jpg?version=1725036718">
+
+      <meta name="twitter:creator" content="@GreenSock">
+
+    <meta property="og:image" content="https://shots.codepen.io/username/pen/XWoBypQ-800.jpg?version=1725036718" itemprop="thumbnailUrl">
+    <meta property="og:title" content="MotionPath Demo">
+    <meta property="og:url" content="https://codepen.io/GreenSock/details/XWoBypQ">
+    <meta property="og:description" content="...">
+
+
+  <link rel="alternate" type="application/json+oembed"
+  href="https://codepen.io/api/oembed?url=https%3A%2F%2Fcodepen.io%2FGreenSock%2Fpen%2FXWoBypQ&format=json"
+  title="MotionPath Demo" />
+
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+</head>
+
+<body class="fullpage logged-out">
+
+  <header id="main-header" class="main-header"></header>
+
+  <div class="oldie-header">
+    <a href="https://codepen.io/GreenSock/pen/XWoBypQ?anon=true&amp;view=pen">Edit Pen</a>
+  </div>
+
+  <div id="result-iframe-wrap" role="main">
+
+    <iframe
+      id="result"
+      src="https://codepen.io/GreenSock/fullpage/XWoBypQ?anon=true&amp;view=fullpage"
+      sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="accelerometer *; bluetooth *; camera *; clipboard-read *; clipboard-write *; display-capture *; encrypted-media *; geolocation *; gyroscope *; language-detector *; language-model *; local-network-access *; microphone *; midi *; rewriter *; serial *; summarizer *; translator *; web-share *; writer *; xr-spatial-tracking *" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe" loading="lazy"></iframe>
+
+  </div>
+
+  <div id="pen-ad"></div>
+
+   <textarea id="init-data" style="display:none">{&quot;__browser&quot;:{&quot;country&quot;:&quot;US&quot;,&quot;device&quot;:&quot;unknown_device&quot;,&quot;mobile&quot;:false,&quot;name&quot;:&quot;chrome&quot;,&quot;platform&quot;:&quot;linux&quot;,&quot;version&quot;:&quot;126&quot;},&quot;__constants&quot;:{},&quot;__CPDATA&quot;:{&quot;api_url&quot;:&quot;https://api.codepen.io&quot;,&quot;domain_iframe&quot;:&quot;https://cdpn.io&quot;,&quot;environment&quot;:&quot;production&quot;,&quot;host&quot;:&quot;codepen.io&quot;,&quot;iframe_allow&quot;:&quot;accelerometer *; bluetooth *; camera *; clipboard-read *; clipboard-write *; display-capture *; encrypted-media *; geolocation *; gyroscope *; language-detector *; language-model *; local-network-access *; microphone *; midi *; rewriter *; serial *; summarizer *; translator *; web-share *; writer *; xr-spatial-tracking *&quot;,&quot;iframe_sandbox&quot;:&quot;allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation&quot;},&quot;__graphql&quot;:{&quot;data&quot;:{&quot;data&quot;:{&quot;sessionUser&quot;:{&quot;id&quot;:&quot;VoDkNZ&quot;,&quot;name&quot;:&quot;Captain Anonymous&quot;,&quot;title&quot;:&quot;Captain Anonymous&quot;,&quot;avatar&quot;:&quot;https://assets.codepen.io/t-1/user-default-avatar.jpg?format=auto&amp;version=0&quot;,&quot;currentContext&quot;:{&quot;id&quot;:&quot;VoDkNZ&quot;,&quot;title&quot;:&quot;Captain Anonymous&quot;,&quot;name&quot;:&quot;Captain Anonymous&quot;,&quot;avatar&quot;:&quot;https://assets.codepen.io/t-1/user-default-avatar.jpg?format=auto&amp;version=0&quot;,&quot;username&quot;:&quot;anon&quot;,&quot;__typename&quot;:&quot;User&quot;},&quot;currentTeamId&quot;:null,&quot;username&quot;:&quot;anon&quot;,&quot;admin&quot;:false,&quot;anon&quot;:true,&quot;pro&quot;:false,&quot;verified&quot;:false,&quot;editorSettings&quot;:{&quot;disableAI&quot;:false},&quot;featureFlags&quot;:[],&quot;teams&quot;:[],&quot;__typename&quot;:&quot;User&quot;}}},&quot;url&quot;:&quot;https://codepen.io/graphql&quot;,&quot;api&quot;:&quot;cprails&quot;,&quot;cpeUrl&quot;:&quot;https://codepen.io/cpe/graphql&quot;},&quot;__turnstile&quot;:{&quot;siteKey&quot;:&quot;0x4AAAAAAEipBMCzQz_qLax-&quot;},&quot;__user&quot;:{&quot;anon&quot;:true,&quot;base_url&quot;:&quot;/anon/&quot;,&quot;cohorts&quot;:[],&quot;current_team_hashid&quot;:null,&quot;current_team_id&quot;:0,&quot;hashid&quot;:&quot;VoDkNZ&quot;,&quot;id&quot;:1,&quot;itemType&quot;:&quot;user&quot;,&quot;name&quot;:&quot;Captain Anonymous&quot;,&quot;paid&quot;:false,&quot;tier&quot;:0,&quot;username&quot;:&quot;anon&quot;,&quot;created_at&quot;:null,&quot;email_verified&quot;:null,&quot;collections_count&quot;:0,&quot;collections_private_count&quot;:0,&quot;followers_count&quot;:0,&quot;followings_count&quot;:0,&quot;pens_count&quot;:0,&quot;pens_private_count&quot;:0},&quot;__firebase&quot;:{&quot;config&quot;:{&quot;apiKey&quot;:&quot;AIzaSyBgLAe7N_MdFpuVofMkcQLGwwhUu5tuxls&quot;,&quot;authDomain&quot;:&quot;codepen-store-production.firebaseapp.com&quot;,&quot;databaseURL&quot;:&quot;https://codepen-store-production.firebaseio.com&quot;,&quot;disabled&quot;:false,&quot;projectId&quot;:&quot;codepen-store-production&quot;},&quot;token&quot;:&quot;eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImNsYWltcyI6eyJvd25lcklkIjoiVm9Ea05aIiwiYWRtaW4iOmZhbHNlfSwiZXhwIjoxNzkzMDEzOTg2LCJpYXQiOjE3OTMwMTAzODYsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLThva3lsQGNvZGVwZW4tc3RvcmUtcHJvZHVjdGlvbi5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsInN1YiI6ImZpcmViYXNlLWFkbWluc2RrLThva3lsQGNvZGVwZW4tc3RvcmUtcHJvZHVjdGlvbi5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsInVpZCI6IlZvRGtOWiJ9.futOp8y63kZv3y2YMJs_U_w23Lg3LnpadCz5iHRwy-GM9wgxkjm3mM3IsTWgqHrH3BOybe9khsoi_Bpul6KcgVuyAMi4pravcmome2BteQAWLJfdWYcA6C5NoNG56llwNRbb97tsoZ4EBkj1obKHwMNzd40VSynp8zK-R7dT62o9L8a1rk4AZKwrYXM_IVEtTe5u-vD8AST6TSzQpmF23Pv57VnQIbPsg_DgkDeUKfkiPXU3l7mJVqEMNVPSZ2_gb0Rt-haHzlQ6qogfiTyvQUsI3MscADQkycDNT35RF5t6OVVgVBJaH5RKHyMAv-PVVkEuLBaC8bKEVGhsbHEvCg&quot;},&quot;__pay_stripe_public_key&quot;:&quot;pk_live_2GndomDfiklqpSNQn8FrGuwZSMIMzha7DkLJqlYe7IR0ihKAlKdiHg68JJc5eVPt68rzAjzAAVXcUwjySHRCsgjQQ00gtRBUFNH&quot;,&quot;__pay_braintree_env&quot;:&quot;production&quot;,&quot;__item&quot;:&quot;{\&quot;id\&quot;:70787537,\&quot;hashid\&quot;:\&quot;XWoBypQ\&quot;,\&quot;itemType\&quot;:\&quot;pen\&quot;,\&quot;user_id\&quot;:16327,\&quot;slug_hash\&quot;:\&quot;XWoBypQ\&quot;,\&quot;private\&quot;:false,\&quot;slug_hash_private\&quot;:\&quot;6e2b1f4aa6f8d3eaf58b5dee14dcc047\&quot;}&quot;,&quot;__profiled&quot;:{&quot;base_url&quot;:&quot;/GreenSock&quot;,&quot;hashid&quot;:&quot;MWEVYD&quot;,&quot;id&quot;:16327,&quot;name&quot;:&quot;GSAP&quot;,&quot;type&quot;:&quot;user&quot;,&quot;username&quot;:&quot;GreenSock&quot;},&quot;__pageType&quot;:&quot;full&quot;}</textarea>
+
+  <div id="popup-overlay" class="overlay popup-overlay"></div>
+  <div id="modal-overlay" class="overlay modal-overlay"></div>
+
+  <script src="https://cpwebassets.codepen.io/assets/common/everypage-b3f204f33fba8ab9477bcbded3c5df4f1d633ddaeb1c4f9618d01eea25c1f0c1.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/packs/js/referrer-tracking-4012a257594d6f011918.js"></script>
+
+
+
+  <script src="https://cpwebassets.codepen.io/assets/packs/js/vendor-20556d057d346513ac14.js"></script>
+<script src="https://cpwebassets.codepen.io/assets/packs/js/everypage-3fa2f88141283c48d447.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/editor/full/full_page_renderer-8dedae5180f894ae60aa701393611a4a85590d3b665df9720aefcfb2b61e62fe.js"></script>
+</body>
+
+</html>

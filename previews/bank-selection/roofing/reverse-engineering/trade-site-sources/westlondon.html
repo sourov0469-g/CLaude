@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>/* Cookie consent and Google Consent Mode v2 (Max, 30 Sept; advertising choice added 4 Oct for Wayne's Google Ads).
+   Inlined into every page head by tools/build.sh, before anything else runs.
+   Basic mode: every consent signal starts denied and gtag.js is not even requested until the visitor says yes to analytics,
+   so nothing is stored on or read from their device before they say yes (PECR regulation 6).
+   Two choices: analytics (analytics_storage) and advertising (ad_storage, ad_user_data, ad_personalization). Advertising works
+   through Google Analytics (GA4 key events imported into Google Ads), so with analytics off nothing loads whatever the
+   advertising answer is; the card's advertising switch says so and stays off until analytics is on.
+   GA4_ID is the one place the measurement ID goes. Empty means no tag, no banner, no cookies. */
+(function () {
+  var GA4_ID = "G-8K803PRWY7";
+  var KEY = "wlr-consent", VERSION = 2, DAYS = 365;
+  /* only the real site counts: previews (wlrtest1.netlify.app, deploy previews, localhost) show the banner and store the answer
+     but never load Google Analytics, so testing never shows up in the client's monthly numbers */
+  var LIVE = /(^|\.)westlondonroofingltd\.co\.uk$/.test(location.hostname);
+  /* staff phones: open the site once with ?internal=1 (?internal=0 undoes it) and GA tags those visits as internal traffic,
+     which the Internal traffic data filter in GA4 then keeps out of the client's numbers */
+  try {
+    var im = /[?&]internal=([01])(&|$)/.exec(location.search);
+    if (im) { if (im[1] === "1") localStorage.setItem("wlr-internal", "1"); else localStorage.removeItem("wlr-internal"); }
+  } catch (e) { /* storage blocked */ }
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied", wait_for_update: 500 });
+  /* while ad_storage is denied, Google Ads and Floodlight tags strip ad click IDs from their requests. The site has neither
+     (GA4 only, key events imported into Ads), so today this does nothing; it is here so any Ads tag added later is covered.
+     It does not stop GA4 seeing a gclid in the page address. */
+  gtag("set", "ads_data_redaction", true);
+  function signals(analytics, ads) {
+    var a = analytics ? "granted" : "denied", d = ads ? "granted" : "denied";
+    return { analytics_storage: a, ad_storage: d, ad_user_data: d, ad_personalization: d };
+  }
+  var loaded = false;
+  function load() {
+    if (!GA4_ID || !LIVE) return;
+    window["ga-disable-" + GA4_ID] = false;   /* before the guard, so Accept after a Reject on the same page measures again */
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA4_ID);
+    document.head.appendChild(s);
+    gtag("js", new Date());
+    /* no Google signals. Ad personalisation follows the ad_personalization consent signal alone (Google's advice: the old
+       allow_ad_personalization_signals setting would override a yes) */
+    var cfg = { allow_google_signals: false };
+    try { if (localStorage.getItem("wlr-internal") === "1") cfg.traffic_type = "internal"; } catch (e) { /* storage blocked */ }
+    gtag("config", GA4_ID, cfg);
+  }
+  /* { a: analytics yes, ad: advertising yes, or null when the advertising question has not been answered yet } */
+  function read() {
+    try {
+      var c = JSON.parse(localStorage.getItem(KEY));
+      if (c && typeof c.t === "number" && Date.now() - c.t < DAYS * 864e5) {
+        if (c.v === VERSION) return { a: !!c.a, ad: !!c.a && !!c.ad };
+        /* answered before 4 Oct, when the card only asked about analytics: that answer still stands. A yes is asked again about
+           advertising; a no is left alone, since advertising needs analytics on */
+        if (c.v === 1) return { a: !!c.a, ad: c.a ? null : false };
+      }
+    } catch (e) { /* storage blocked or bad value: ask again */ }
+    return null;
+  }
+  function clearCookies(prefixes) {
+    var host = location.hostname, parts = host.split("."), domains = [""];
+    for (var i = 0; i < parts.length - 1; i++) domains.push("; domain=." + parts.slice(i).join("."), "; domain=" + parts.slice(i).join("."));
+    document.cookie.split(";").forEach(function (c) {
+      var name = c.split("=")[0].trim();
+      if (!prefixes.some(function (p) { return name.indexOf(p) === 0; })) return;
+      domains.forEach(function (d) { document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + d; });
+    });
+  }
+  var saved = GA4_ID ? read() : null;
+  var api = {
+    id: GA4_ID,
+    live: LIVE,
+    /* analytics: "granted", "denied" or null. D.track in data.js sends events only when this is "granted" */
+    state: saved ? (saved.a ? "granted" : "denied") : null,
+    /* advertising: "granted", "denied" or null (not asked yet) */
+    ads: saved && saved.ad !== null ? (saved.ad ? "granted" : "denied") : null,
+    set: function (analytics, ads) {
+      ads = !!analytics && !!ads;
+      api.state = analytics ? "granted" : "denied";
+      api.ads = ads ? "granted" : "denied";
+      try { localStorage.setItem(KEY, JSON.stringify({ v: VERSION, a: !!analytics, ad: ads, t: Date.now() })); } catch (e) { /* choice holds for this page only */ }
+      gtag("consent", "update", signals(analytics, ads));
+      if (analytics) load();
+      else {
+        if (GA4_ID) window["ga-disable-" + GA4_ID] = true;
+        clearCookies(["_ga", "_gid"]);
+      }
+      if (!ads) clearCookies(["_gcl"]);
+      try { document.dispatchEvent(new CustomEvent("wlr:consent", { detail: { analytics: api.state, ads: api.ads } })); } catch (e) { /* old browser */ }
+    }
+  };
+  window.WLRConsent = api;
+  if (saved && saved.a) { gtag("consent", "update", signals(true, saved.ad === true)); load(); }
+})();
+</script>
+<title>Roofers in West London | West London Roofing Maintenance Ltd</title>
+<meta name="description" content="Roof repairs, new roofs and flat roofs across west London. 365 Checkatrade reviews, 9.55/10, 24 hour call-out. Free estimates. Call 07799 701056.">
+<link rel="canonical" href="https://westlondonroofingltd.co.uk/">
+<meta name="theme-color" content="#1C2A5E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="West London Roofing Maintenance Ltd">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Roofers in West London | West London Roofing Maintenance Ltd">
+<meta property="og:description" content="Roof repairs, new roofs and flat roofs across west London. 365 Checkatrade reviews, 9.55/10, 24 hour call-out. Free estimates. Call 07799 701056.">
+<meta property="og:url" content="https://westlondonroofingltd.co.uk/">
+<meta property="og:image" content="https://westlondonroofingltd.co.uk/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="West London Roofing Maintenance Ltd logo. Roofers in West London, 24 hour call-out. 07799 701056">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Roofers in West London | West London Roofing Maintenance Ltd">
+<meta name="twitter:description" content="Roof repairs, new roofs and flat roofs across west London. 365 Checkatrade reviews, 9.55/10, 24 hour call-out. Free estimates. Call 07799 701056.">
+<meta name="twitter:image" content="https://westlondonroofingltd.co.uk/og-image.jpg">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/avif" imagesrcset="/assets/img/hero/h-hw1-wide-480.avif 480w, /assets/img/hero/h-hw1-wide-690.avif 690w" imagesizes="54vw" media="(min-width: 1024px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" imagesrcset="/assets/img/hero/h-hw1-tall-480.avif 480w, /assets/img/hero/h-hw1-tall-562.avif 562w" imagesizes="100vw" media="(max-width: 1023px)" fetchpriority="high">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261007171357">
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js");try{if(document.referrer&&new URL(document.referrer).origin===location.origin)document.documentElement.classList.add("no-loader")}catch(e){}setTimeout(function(){if(!window.__wlrBoot){document.documentElement.classList.remove("js");var l=document.getElementById("loader");if(l)l.remove()}},8000);</script>
+<noscript><style>.faq__a,.step__more{grid-template-rows:1fr}.faq__glyph,.step__cue{display:none}</style></noscript>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"RoofingContractor","@id":"https://westlondonroofingltd.co.uk/#business","name":"West London Roofing Maintenance Ltd","alternateName":"West London Roofing","url":"https://westlondonroofingltd.co.uk/","telephone":"+447799701056","email":"info@westlondonroofingltd.co.uk","address":{"@type":"PostalAddress","addressLocality":"Cranford","addressRegion":"London","addressCountry":"GB"},"logo":"https://westlondonroofingltd.co.uk/assets/img/logo.png","image":"https://westlondonroofingltd.co.uk/og-image.jpg","foundingDate":"2016","identifier":"10442440","vatID":"GB435363008","paymentAccepted":"Credit Card, Debit Card","areaServed":[{"@type":"Place","name":"Heston"},{"@type":"Place","name":"Cranford"},{"@type":"Place","name":"Osterley"},{"@type":"Place","name":"Hayes"},{"@type":"Place","name":"West Drayton"},{"@type":"Place","name":"Uxbridge"},{"@type":"Place","name":"Southall"},{"@type":"Place","name":"Northolt"},{"@type":"Place","name":"Greenford"},{"@type":"Place","name":"Hanwell"},{"@type":"Place","name":"Ealing"},{"@type":"Place","name":"Acton"},{"@type":"Place","name":"Chiswick"},{"@type":"Place","name":"Hammersmith"},{"@type":"Place","name":"Fulham"},{"@type":"Place","name":"Kensington"},{"@type":"Place","name":"Brentford"},{"@type":"Place","name":"Isleworth"},{"@type":"Place","name":"Kew"},{"@type":"Place","name":"Richmond"},{"@type":"Place","name":"Twickenham"},{"@type":"Place","name":"Whitton"},{"@type":"Place","name":"Teddington"},{"@type":"Place","name":"Hanworth"},{"@type":"Place","name":"Feltham"},{"@type":"Place","name":"Ashford"},{"@type":"Place","name":"Staines"}],"sameAs":["https://www.checkatrade.com/trades/WestLondonRoofingMaintenanceLtd","https://www.instagram.com/westlondonroofing","https://www.facebook.com/profile.php?id=61581764278921"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}},{"@type":"WebSite","@id":"https://westlondonroofingltd.co.uk/#website","name":"West London Roofing Maintenance Ltd","alternateName":"West London Roofing","url":"https://westlondonroofingltd.co.uk/","publisher":{"@id":"https://westlondonroofingltd.co.uk/#business"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you do emergency call-outs?","acceptedAnswer":{"@type":"Answer","text":"Yes, 24 hours. If water's coming in, ring 07799 701056 and we'll get to you as fast as we can, then sort a proper fix once it's dry."}},{"@type":"Question","name":"Is the estimate free?","acceptedAnswer":{"@type":"Answer","text":"Yes. We come out, have a look, and give you a price in writing. No charge, no obligation."}},{"@type":"Question","name":"Is the work guaranteed?","acceptedAnswer":{"@type":"Answer","text":"All our work is guaranteed."}},{"@type":"Question","name":"Which areas do you cover?","acceptedAnswer":{"@type":"Answer","text":"Most of our work is across west London and Middlesex. We cover the rest of London, Surrey, Berkshire and Buckinghamshire too. Type your postcode into the checker above or just ring."}},{"@type":"Question","name":"Do you do commercial work?","acceptedAnswer":{"@type":"Answer","text":"Yes. Houses, flats, shops, offices and blocks. We can provide inspection reports for landlords and agents."}}]}]}</script>
+</head>
+<body data-page="home">
+<a class="skip" href="#main">Skip to content</a>
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="rl" viewBox="0 0 96 24"><path d="M0 20H40L52 10H96" pathLength="1" stroke="currentColor" stroke-width="3" fill="none"/></symbol></svg>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__box">
+    <img class="loader__logo" src="/assets/img/logo.webp" width="660" height="300" alt="" decoding="sync">
+    <svg class="loader__rule" viewBox="0 0 96 24" width="120" height="30" aria-hidden="true" focusable="false"><use href="#rl"></use></svg>
+    <span class="loader__bar"><span></span></span>
+  </div>
+</div>
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="/" aria-label="West London Roofing Maintenance Ltd, home">
+      <picture class="logo__pic">
+        <source type="image/webp" srcset="/assets/img/logo.webp" width="660" height="300">
+        <img src="/assets/img/logo.png" width="660" height="300" alt="West London Roofing Maintenance Ltd" decoding="async">
+      </picture>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav__link" href="/">Home<svg class="rule rule--nav" viewBox="0 0 24 8" aria-hidden="true" focusable="false"><path d="M0 6H10L13 3.5H24" pathLength="1" stroke="currentColor" stroke-width="2" fill="none"/></svg></a>
+      <a class="nav__link" href="/about-us/">About Us<svg class="rule rule--nav" viewBox="0 0 24 8" aria-hidden="true" focusable="false"><path d="M0 6H10L13 3.5H24" pathLength="1" stroke="currentColor" stroke-width="2" fill="none"/></svg></a>
+      <div class="nav__item nav__item--menu">
+        <a class="nav__link nav__link--menu" href="/services/" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu"><span class="chev-wrap">Services<svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><svg class="rule rule--nav" viewBox="0 0 24 8" aria-hidden="true" focusable="false"><path d="M0 6H10L13 3.5H24" pathLength="1" stroke="currentColor" stroke-width="2" fill="none"/></svg></a>
+        <ul class="menu" id="services-menu" aria-label="Services">
+          <li><a href="/services/roof-repairs/">Roof repairs and leaks</a></li>
+          <li><a href="/services/new-roofs/">New roofs and re-roofs</a></li>
+          <li><a href="/services/flat-roofs/">Flat roofs</a></li>
+          <li><a href="/services/chimneys-and-leadwork/">Chimneys and leadwork</a></li>
+          <li><a href="/services/fascias-soffits-and-guttering/">Fascias, soffits and guttering</a></li>
+          <li><a href="/services/roof-cleaning-and-moss-removal/">Roof cleaning and maintenance</a></li>
+        </ul>
+      </div>
+      <a class="nav__link" href="/gallery/">Gallery<svg class="rule rule--nav" viewBox="0 0 24 8" aria-hidden="true" focusable="false"><path d="M0 6H10L13 3.5H24" pathLength="1" stroke="currentColor" stroke-width="2" fill="none"/></svg></a>
+      <a class="nav__link" href="/contact-us/">Contact Us<svg class="rule rule--nav" viewBox="0 0 24 8" aria-hidden="true" focusable="false"><path d="M0 6H10L13 3.5H24" pathLength="1" stroke="currentColor" stroke-width="2" fill="none"/></svg></a>
+    </nav>
+    <div class="header__actions" data-block="header">
+      <a class="header__phone" href="tel:+447799701056" data-tel aria-label="Call 07799 701056, 24 hour call-out">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+        <span class="header__num" data-phone>07799 701056</span><span class="tag tag--sm" aria-hidden="true">24hr</span>
+      </a>
+      <a class="btn btn--secondary header__quote" href="#quote">Get a free quote</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu" data-block="menu" role="dialog" aria-label="Menu">
+  <ul class="mobile-menu__list">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about-us/">About Us</a></li>
+    <li><a href="/services/">Services</a>
+      <ul class="mobile-menu__sub">
+        <li><a href="/services/roof-repairs/">Roof repairs and leaks</a></li>
+        <li><a href="/services/new-roofs/">New roofs and re-roofs</a></li>
+        <li><a href="/services/flat-roofs/">Flat roofs</a></li>
+        <li><a href="/services/chimneys-and-leadwork/">Chimneys and leadwork</a></li>
+        <li><a href="/services/fascias-soffits-and-guttering/">Fascias, soffits and guttering</a></li>
+        <li><a href="/services/roof-cleaning-and-moss-removal/">Roof cleaning and maintenance</a></li>
+      </ul>
+    </li>
+    <li><a href="/gallery/">Gallery</a></li>
+    <li><a href="/contact-us/">Contact Us</a></li>
+  </ul>
+  <div class="mobile-menu__ctas">
+    <a class="btn btn--primary" href="tel:+447799701056" data-tel><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>Call <span data-phone>07799 701056</span></span></a>
+    <a class="btn btn--secondary" href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." data-wa="default" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3s1 2.7 1.1 2.9c.2.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5h-.4z"/></svg><span>WhatsApp us</span></a>
+  </div>
+</div>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero__media hero__media--cycle" data-hero="photo" data-cycle>
+    <picture class="hero__slide is-on" data-slide style="--pos: 50% 50%">
+      <source media="(min-width: 1024px)" type="image/avif" srcset="/assets/img/hero/h-hw1-wide-480.avif 480w, /assets/img/hero/h-hw1-wide-690.avif 690w" sizes="54vw">
+      <source media="(min-width: 1024px)" type="image/webp" srcset="/assets/img/hero/h-hw1-wide-480.webp 480w, /assets/img/hero/h-hw1-wide-690.webp 690w" sizes="54vw">
+      <source media="(min-width: 1024px)" srcset="/assets/img/hero/h-hw1-wide-480.jpg 480w, /assets/img/hero/h-hw1-wide-690.jpg 690w" sizes="54vw">
+      <source type="image/avif" srcset="/assets/img/hero/h-hw1-tall-480.avif 480w, /assets/img/hero/h-hw1-tall-562.avif 562w" sizes="100vw">
+      <source type="image/webp" srcset="/assets/img/hero/h-hw1-tall-480.webp 480w, /assets/img/hero/h-hw1-tall-562.webp 562w" sizes="100vw">
+      <img src="/assets/img/hero/h-hw1-tall-562.jpg" srcset="/assets/img/hero/h-hw1-tall-480.jpg 480w, /assets/img/hero/h-hw1-tall-562.jpg 562w" sizes="100vw" width="562" height="720" alt="Drone view of a finished roof in new red clay plain tiles with a front gable and two brick chimneys, Hanwell W7" fetchpriority="high" decoding="async">
+    </picture>
+    <picture class="hero__slide" data-slide style="--pos: 50% 50%">
+      <source media="(min-width: 1024px)" type="image/avif" data-srcset="/assets/img/hero/h-valley-wide-480.avif 480w, /assets/img/hero/h-valley-wide-960.avif 960w, /assets/img/hero/h-valley-wide-1440.avif 1440w" sizes="54vw">
+      <source media="(min-width: 1024px)" type="image/webp" data-srcset="/assets/img/hero/h-valley-wide-480.webp 480w, /assets/img/hero/h-valley-wide-960.webp 960w, /assets/img/hero/h-valley-wide-1440.webp 1440w" sizes="54vw">
+      <source media="(min-width: 1024px)" data-srcset="/assets/img/hero/h-valley-wide-480.jpg 480w, /assets/img/hero/h-valley-wide-960.jpg 960w, /assets/img/hero/h-valley-wide-1440.jpg 1440w" sizes="54vw">
+      <source type="image/avif" data-srcset="/assets/img/hero/h-valley-tall-480.avif 480w, /assets/img/hero/h-valley-tall-960.avif 960w, /assets/img/hero/h-valley-tall-1170.avif 1170w" sizes="100vw">
+      <source type="image/webp" data-srcset="/assets/img/hero/h-valley-tall-480.webp 480w, /assets/img/hero/h-valley-tall-960.webp 960w, /assets/img/hero/h-valley-tall-1170.webp 1170w" sizes="100vw">
+      <img data-src="/assets/img/hero/h-valley-tall-1170.jpg" data-srcset="/assets/img/hero/h-valley-tall-480.jpg 480w, /assets/img/hero/h-valley-tall-960.jpg 960w, /assets/img/hero/h-valley-tall-1170.jpg 1170w" sizes="100vw" width="1170" height="1500" alt="Grey tiled roof with a central valley, a Velux window and dry fixed ridge tiles, beside a brick parapet with a row of chimney pots and London rooftops beyond" decoding="async">
+    </picture>
+    <picture class="hero__slide" data-slide style="--pos: 50% 50%">
+      <source media="(min-width: 1024px)" type="image/avif" data-srcset="/assets/img/hero/h-05-wide-480.avif 480w, /assets/img/hero/h-05-wide-960.avif 960w, /assets/img/hero/h-05-wide-1152.avif 1152w" sizes="54vw">
+      <source media="(min-width: 1024px)" type="image/webp" data-srcset="/assets/img/hero/h-05-wide-480.webp 480w, /assets/img/hero/h-05-wide-960.webp 960w, /assets/img/hero/h-05-wide-1152.webp 1152w" sizes="54vw">
+      <source media="(min-width: 1024px)" data-srcset="/assets/img/hero/h-05-wide-480.jpg 480w, /assets/img/hero/h-05-wide-960.jpg 960w, /assets/img/hero/h-05-wide-1152.jpg 1152w" sizes="54vw">
+      <source type="image/avif" data-srcset="/assets/img/hero/h-05-tall-480.avif 480w, /assets/img/hero/h-05-tall-936.avif 936w" sizes="100vw">
+      <source type="image/webp" data-srcset="/assets/img/hero/h-05-tall-480.webp 480w, /assets/img/hero/h-05-tall-936.webp 936w" sizes="100vw">
+      <img data-src="/assets/img/hero/h-05-tall-936.jpg" data-srcset="/assets/img/hero/h-05-tall-480.jpg 480w, /assets/img/hero/h-05-tall-936.jpg 936w" sizes="100vw" width="936" height="1200" alt="Natural slate roof finished between rendered parapet walls, with a row of cream painted houses behind" decoding="async">
+    </picture>
+    <picture class="hero__slide" data-slide style="--pos: 50% 50%">
+      <source media="(min-width: 1024px)" type="image/avif" data-srcset="/assets/img/hero/h-hip-wide-480.avif 480w, /assets/img/hero/h-hip-wide-960.avif 960w, /assets/img/hero/h-hip-wide-1298.avif 1298w" sizes="54vw">
+      <source media="(min-width: 1024px)" type="image/webp" data-srcset="/assets/img/hero/h-hip-wide-480.webp 480w, /assets/img/hero/h-hip-wide-960.webp 960w, /assets/img/hero/h-hip-wide-1298.webp 1298w" sizes="54vw">
+      <source media="(min-width: 1024px)" data-srcset="/assets/img/hero/h-hip-wide-480.jpg 480w, /assets/img/hero/h-hip-wide-960.jpg 960w, /assets/img/hero/h-hip-wide-1298.jpg 1298w" sizes="54vw">
+      <source type="image/avif" data-srcset="/assets/img/hero/h-hip-tall-480.avif 480w, /assets/img/hero/h-hip-tall-960.avif 960w, /assets/img/hero/h-hip-tall-1298.avif 1298w" sizes="100vw">
+      <source type="image/webp" data-srcset="/assets/img/hero/h-hip-tall-480.webp 480w, /assets/img/hero/h-hip-tall-960.webp 960w, /assets/img/hero/h-hip-tall-1298.webp 1298w" sizes="100vw">
+      <img data-src="/assets/img/hero/h-hip-tall-1298.jpg" data-srcset="/assets/img/hero/h-hip-tall-480.jpg 480w, /assets/img/hero/h-hip-tall-960.jpg 960w, /assets/img/hero/h-hip-tall-1298.jpg 1298w" sizes="100vw" width="1298" height="1664" alt="Grey interlocking tiled hip roof with dry fixed hip tiles under a clear blue sky" decoding="async">
+    </picture>
+    <div class="hero__dots" aria-hidden="true"><span class="is-on"></span><span></span><span></span><span></span></div>
+    <button class="hero__pause" type="button" aria-label="Pause the photo slideshow" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5v14M15.5 5v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></button>
+  </div>
+  <div class="hero__panel">
+    <div class="hero__inner" data-hero="panel" data-block="hero">
+      <svg class="rule" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-hero="rule"><use href="#rl"></use></svg>
+      <p class="kicker" data-hero="kicker" data-slot="kicker">24 hour call-out across west London</p>
+      <h1 id="hero-h1" data-hero="h1" data-slot="headline">West London roofing done properly. Honest quotes, tidy work, photos of every job.</h1>
+      <p class="hero__sub" data-hero="sub">Free estimates. Cards accepted. Call or WhatsApp <a href="tel:+447799701056" data-tel data-phone>07799 701056</a>.</p>
+      <div class="btn-row hero__ctas">
+        <a class="btn btn--primary" data-hero="btn" href="tel:+447799701056" data-tel><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>Call <span data-phone>07799 701056</span></span></a>
+        <a class="btn btn--secondary" data-hero="btn" href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." data-wa="default" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3s1 2.7 1.1 2.9c.2.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5h-.4z"/></svg><span>WhatsApp us</span></a>
+      </div>
+      <a class="trust-line" data-hero="trust" data-block="trust-line" href="https://www.checkatrade.com/trades/WestLondonRoofingMaintenanceLtd" data-link="checkatrade" target="_blank" rel="noopener" aria-label="9.55 out of 10, 365 reviews, since 2014, £1,000 guarantee, free estimates, cards accepted. View our Checkatrade profile">
+        <img class="trust-line__seal" src="/assets/img/seal-checkatrade-156.png" width="156" height="154" alt="" decoding="async">
+        <span><span data-ck="score">9.55</span>&nbsp;/ 10</span><span><span data-ck="count">365</span>&nbsp;reviews</span><span>Since&nbsp;<span data-ck="since">2014</span></span><span>£1,000 guarantee</span><span>Free estimates</span><span>Cards accepted</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="proof grain" id="proof" aria-label="Checkatrade figures">
+  <div class="container proof__grid">
+    <p class="proof__item"><span class="proof__num" data-ck="years">12</span><span class="proof__lab">years on Checkatrade</span></p>
+    <p class="proof__item"><span class="proof__num" data-ck="count">365</span><span class="proof__lab">reviews</span></p>
+    <p class="proof__item"><span class="proof__num" data-ck="score">9.55</span><span class="proof__lab">out of 10</span></p>
+    <a class="proof__seal" href="https://www.checkatrade.com/trades/WestLondonRoofingMaintenanceLtd" data-link="checkatrade" target="_blank" rel="noopener" aria-label="Checkatrade Approved and Guaranteed. View our profile">
+      <img src="/assets/img/seal-checkatrade-156.png" width="156" height="154" alt="Checkatrade Approved and Guaranteed" loading="lazy" decoding="async">
+    </a>
+  </div>
+</section>
+
+<section class="section section--white" id="services" aria-labelledby="h-services" data-block="services">
+  <div class="container">
+    <div class="section__head">
+      <svg class="rule" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <h2 id="h-services">From a slipped tile to a whole new roof</h2>
+      <p class="lede">Six things we do. Tap one to see the work.</p>
+    </div>
+    <div class="cards" id="service-cards"><a class="card" href="/services/roof-repairs/" data-block="cards"><div class="card__media"><picture><source type="image/avif" srcset="/assets/img/services/roof-repairs-main-480.avif 480w, /assets/img/services/roof-repairs-main-960.avif 960w, /assets/img/services/roof-repairs-main-1200.avif 1200w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/services/roof-repairs-main-480.webp 480w, /assets/img/services/roof-repairs-main-960.webp 960w, /assets/img/services/roof-repairs-main-1200.webp 1200w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><img src="/assets/img/services/roof-repairs-main-1200.jpg" srcset="/assets/img/services/roof-repairs-main-480.jpg 480w, /assets/img/services/roof-repairs-main-960.jpg 960w, /assets/img/services/roof-repairs-main-1200.jpg 1200w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" width="1200" height="800" alt="Section of slate roof replaced around a roof window beside a dormer" loading="lazy" decoding="async"></picture><span class="tag card__tag">24hr call-out</span></div><div class="card__body"><h3>Roof repairs and leaks in West London</h3><p>Leaks traced and fixed, storm damage, slipped tiles. 24 hour call-out.</p></div></a><a class="card" href="/services/new-roofs/" data-block="cards"><div class="card__media"><picture><source type="image/avif" srcset="/assets/img/services/new-roofs-main-480.avif 480w, /assets/img/services/new-roofs-main-960.avif 960w, /assets/img/services/new-roofs-main-1600.avif 1600w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/services/new-roofs-main-480.webp 480w, /assets/img/services/new-roofs-main-960.webp 960w, /assets/img/services/new-roofs-main-1600.webp 1600w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><img src="/assets/img/services/new-roofs-main-1600.jpg" srcset="/assets/img/services/new-roofs-main-480.jpg 480w, /assets/img/services/new-roofs-main-960.jpg 960w, /assets/img/services/new-roofs-main-1600.jpg 1600w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" width="1600" height="1066" alt="New grey interlocking tile roof with two Velux windows, new lead flashing and a white gutter" loading="lazy" decoding="async"></picture></div><div class="card__body"><h3>New roofs and re-roofs in West London</h3><p>Slate, tile and concrete. Stripped, re-felted, re-battened and re-laid.</p></div></a><a class="card" href="/services/flat-roofs/" data-block="cards"><div class="card__media"><picture><source type="image/avif" srcset="/assets/img/services/flat-roofs-main-480.avif 480w, /assets/img/services/flat-roofs-main-930.avif 930w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/services/flat-roofs-main-480.webp 480w, /assets/img/services/flat-roofs-main-930.webp 930w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><img src="/assets/img/services/flat-roofs-main-930.jpg" srcset="/assets/img/services/flat-roofs-main-480.jpg 480w, /assets/img/services/flat-roofs-main-930.jpg 930w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" width="930" height="620" alt="Finished grey mineral felt flat roof on a rear extension, flashed in at the brick wall, gardens beyond" loading="lazy" decoding="async"></picture></div><div class="card__body"><h3>Flat roofs in West London</h3><p>Felt, fibreglass and rubber. Garages, extensions, balconies.</p></div></a><a class="card" href="/services/chimneys-and-leadwork/" data-block="cards"><div class="card__media"><picture><source type="image/avif" srcset="/assets/img/services/chimneys-leadwork-main-480.avif 480w, /assets/img/services/chimneys-leadwork-main-960.avif 960w, /assets/img/services/chimneys-leadwork-main-1500.avif 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/services/chimneys-leadwork-main-480.webp 480w, /assets/img/services/chimneys-leadwork-main-960.webp 960w, /assets/img/services/chimneys-leadwork-main-1500.webp 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><img src="/assets/img/services/chimneys-leadwork-main-1500.jpg" srcset="/assets/img/services/chimneys-leadwork-main-480.jpg 480w, /assets/img/services/chimneys-leadwork-main-960.jpg 960w, /assets/img/services/chimneys-leadwork-main-1500.jpg 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" width="1500" height="1000" alt="Rebuilt brick chimney stack with fresh pointing, four clay pots and new stepped lead flashing down the roof" loading="lazy" decoding="async"></picture></div><div class="card__body"><h3>Chimney repairs and leadwork in West London</h3><p>Repointing, rebuilds, cowls, flashing and valleys.</p></div></a><a class="card" href="/services/fascias-soffits-and-guttering/" data-block="cards"><div class="card__media"><picture><source type="image/avif" srcset="/assets/img/services/roofline-main-480.avif 480w, /assets/img/services/roofline-main-960.avif 960w, /assets/img/services/roofline-main-1500.avif 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/services/roofline-main-480.webp 480w, /assets/img/services/roofline-main-960.webp 960w, /assets/img/services/roofline-main-1500.webp 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><img src="/assets/img/services/roofline-main-1500.jpg" srcset="/assets/img/services/roofline-main-480.jpg 480w, /assets/img/services/roofline-main-960.jpg 960w, /assets/img/services/roofline-main-1500.jpg 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" width="1500" height="1000" alt="Brick gable with new fascia, soffit, bargeboards, box ends and dry verge" loading="lazy" decoding="async"></picture></div><div class="card__body"><h3>Fascias, soffits and guttering in West London</h3><p>UPVC roofline fitted properly so the water goes where it should.</p></div></a><a class="card" href="/services/roof-cleaning-and-moss-removal/" data-block="cards"><div class="card__media"><picture><source type="image/avif" srcset="/assets/img/services/maintenance-main-480.avif 480w, /assets/img/services/maintenance-main-960.avif 960w, /assets/img/services/maintenance-main-1500.avif 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/services/maintenance-main-480.webp 480w, /assets/img/services/maintenance-main-960.webp 960w, /assets/img/services/maintenance-main-1500.webp 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"><img src="/assets/img/services/maintenance-main-1500.jpg" srcset="/assets/img/services/maintenance-main-480.jpg 480w, /assets/img/services/maintenance-main-960.jpg 960w, /assets/img/services/maintenance-main-1500.jpg 1500w" sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" width="1500" height="1000" alt="Cleared white gutter along the eaves of a tiled roof above a paved garden" loading="lazy" decoding="async"></picture></div><div class="card__body"><h3>Roof cleaning and moss removal in West London</h3><p>Moss off, gutters cleared, roof checked while we're up there.</p></div></a></div>
+  </div>
+</section>
+
+<section class="section process process--photo" id="process" aria-labelledby="h-process" data-block="process">
+  <div class="process__bg" aria-hidden="true">
+    <picture>
+      <source type="image/avif" srcset="/assets/img/hero/bg-hat-480.avif 480w, /assets/img/hero/bg-hat-812.avif 812w" sizes="100vw">
+      <source type="image/webp" srcset="/assets/img/hero/bg-hat-480.webp 480w, /assets/img/hero/bg-hat-812.webp 812w" sizes="100vw">
+      <img src="/assets/img/hero/bg-hat-812.jpg" srcset="/assets/img/hero/bg-hat-480.jpg 480w, /assets/img/hero/bg-hat-812.jpg 812w" sizes="100vw" width="812" height="406" alt="" loading="lazy" decoding="async">
+    </picture>
+    <span class="process__veil"></span>
+  </div>
+  <div class="container">
+    <div class="section__head">
+      <svg class="rule rule--white" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <h2 id="h-process">What happens when you call</h2>
+      <p class="lede">Tap a step for the detail.</p>
+    </div>
+    <ol class="steps steps--live" id="process-list"><li class="step"><span class="step__num" aria-hidden="true">01</span><h3><button class="step__toggle" type="button" aria-expanded="false" aria-controls="step-more-1">You call or WhatsApp.</button></h3><p>Send a photo if you've got one. If it's pouring in, ring.</p><div class="step__more" id="step-more-1"><div><p>Ring <a href="tel:+447799701056" data-tel>07799 701056</a> or send a photo on WhatsApp and we'll give you a free estimate.</p></div></div><span class="step__cue" aria-hidden="true"></span></li><li class="step"><span class="step__num" aria-hidden="true">02</span><h3><button class="step__toggle" type="button" aria-expanded="false" aria-controls="step-more-2">We come and look.</button></h3><p>Free estimate, in writing, no pressure. If it doesn't need doing we'll say so.</p><div class="step__more" id="step-more-2"><div><p>We come out, have a look, and give you a price in writing. No charge, no obligation.</p></div></div><span class="step__cue" aria-hidden="true"></span></li><li class="step"><span class="step__num" aria-hidden="true">03</span><h3><button class="step__toggle" type="button" aria-expanded="false" aria-controls="step-more-3">We do the job.</button></h3><p>You get photos as we go so you can see the work without going up.</p><div class="step__more" id="step-more-3"><div><p>Most people never see their own roof. So we send you photos while we work: what we found, what we did, what it looks like finished.</p></div></div><span class="step__cue" aria-hidden="true"></span></li><li class="step step--last"><span class="step__num" aria-hidden="true">04</span><h3><button class="step__toggle" type="button" aria-expanded="false" aria-controls="step-more-4">We tidy up.</button></h3><p>Site cleared, old materials taken away, guarantee explained.</p><div class="step__more" id="step-more-4"><div><p>All our work is guaranteed.</p></div></div><span class="step__cue" aria-hidden="true"></span></li></ol>
+    <ul class="promises" aria-label="What you get">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M9 12h6M9 16h4"/></svg><span>Free estimates, in writing</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>24 hour call-out, 7 days</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg><span>All work guaranteed</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Photos of every job</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section band" id="shown" aria-labelledby="h-shown" data-block="shown">
+  <div class="container band__text">
+    <div>
+      <svg class="rule" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <h2 id="h-shown">You'll see every job as it happens</h2>
+    </div>
+    <p>Most people never see their own roof. So we send you photos while we work: what we found, what we did, what it looks like finished. Nothing gets hidden up a ladder.</p>
+  </div>
+  <div class="band__figures band__figures--two" id="shown-figures"><figure class="band__figure" data-parallax><div class="pair"><div class="pair__side pair__side--before"><picture><source type="image/avif" srcset="/assets/img/gallery/ealing-w5-4-480.avif 480w, /assets/img/gallery/ealing-w5-4-960.avif 960w" sizes="(min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/gallery/ealing-w5-4-480.webp 480w, /assets/img/gallery/ealing-w5-4-960.webp 960w" sizes="(min-width: 768px) 50vw, 100vw"><img src="/assets/img/gallery/ealing-w5-4-960.jpg" srcset="/assets/img/gallery/ealing-w5-4-480.jpg 480w, /assets/img/gallery/ealing-w5-4-960.jpg 960w" sizes="(min-width: 768px) 50vw, 100vw" width="960" height="640" alt="Old grey concrete tile roof with moss and lichen, a cracked white painted parapet and a brick chimney against a bright sky." loading="lazy" decoding="async"></picture><span class="pair__lab">Before</span></div><div class="pair__rule"><svg viewBox="0 0 24 96" preserveAspectRatio="none" aria-hidden="true"><path d="M4 0V40L14 52V96" stroke="currentColor" stroke-width="3" fill="none" vector-effect="non-scaling-stroke"/></svg></div><div class="pair__side pair__side--after"><picture><source type="image/avif" srcset="/assets/img/gallery/ealing-w5-1-480.avif 480w, /assets/img/gallery/ealing-w5-1-960.avif 960w" sizes="(min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/gallery/ealing-w5-1-480.webp 480w, /assets/img/gallery/ealing-w5-1-960.webp 960w" sizes="(min-width: 768px) 50vw, 100vw"><img src="/assets/img/gallery/ealing-w5-1-960.jpg" srcset="/assets/img/gallery/ealing-w5-1-480.jpg 480w, /assets/img/gallery/ealing-w5-1-960.jpg 960w" sizes="(min-width: 768px) 50vw, 100vw" width="960" height="640" alt="Drone view of a pitched roof newly covered in brown concrete interlocking tiles, with rendered parapet walls and lead flashing either side and the neighbours' older mossy tiled roofs beyond." loading="lazy" decoding="async"></picture><span class="pair__lab">After</span></div></div><figcaption>New roof, Ealing W5. Moss and worn tiles before. New tiles on, old ones either side, after.</figcaption></figure><figure class="band__figure" data-parallax><div class="pair"><div class="pair__side pair__side--before"><picture><source type="image/avif" srcset="/assets/img/gallery/hanwell-w7-3-480.avif 480w, /assets/img/gallery/hanwell-w7-3-960.avif 960w" sizes="(min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/gallery/hanwell-w7-3-480.webp 480w, /assets/img/gallery/hanwell-w7-3-960.webp 960w" sizes="(min-width: 768px) 50vw, 100vw"><img src="/assets/img/gallery/hanwell-w7-3-960.jpg" srcset="/assets/img/gallery/hanwell-w7-3-480.jpg 480w, /assets/img/gallery/hanwell-w7-3-960.jpg 960w" sizes="(min-width: 768px) 50vw, 100vw" width="960" height="640" alt="Drone view of an old brown tiled roof with moss, patched tiles and a small front gable, with the neighbour's roof and back gardens visible." loading="lazy" decoding="async"></picture><span class="pair__lab">Before</span></div><div class="pair__rule"><svg viewBox="0 0 24 96" preserveAspectRatio="none" aria-hidden="true"><path d="M4 0V40L14 52V96" stroke="currentColor" stroke-width="3" fill="none" vector-effect="non-scaling-stroke"/></svg></div><div class="pair__side pair__side--after"><picture><source type="image/avif" srcset="/assets/img/gallery/hanwell-w7-1-480.avif 480w, /assets/img/gallery/hanwell-w7-1-960.avif 960w" sizes="(min-width: 768px) 50vw, 100vw"><source type="image/webp" srcset="/assets/img/gallery/hanwell-w7-1-480.webp 480w, /assets/img/gallery/hanwell-w7-1-960.webp 960w" sizes="(min-width: 768px) 50vw, 100vw"><img src="/assets/img/gallery/hanwell-w7-1-960.jpg" srcset="/assets/img/gallery/hanwell-w7-1-480.jpg 480w, /assets/img/gallery/hanwell-w7-1-960.jpg 960w" sizes="(min-width: 768px) 50vw, 100vw" width="960" height="640" alt="Drone view of a finished pitched roof in new red clay plain tiles with a front gable, two brick chimneys and scaffolding still up, next to the neighbour's older brown tiled roof." loading="lazy" decoding="async"></picture><span class="pair__lab">After</span></div></div><figcaption>New roof, Hanwell W7. Old tiles full of moss and patches. Then all the new tiles on and the chimneys done.</figcaption></figure></div>
+</section>
+
+<section class="section reviews" id="reviews" aria-labelledby="h-reviews" data-block="reviews">
+  <div class="container">
+    <div class="section__head">
+      <svg class="rule" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <span class="kicker">Reviews from Checkatrade</span>
+      <h2 id="h-reviews">Don't take our word for it</h2>
+    </div>
+    <div data-reviews="marquee"><noscript><p class="svc-reviews__link"><a href="https://www.checkatrade.com/trades/WestLondonRoofingMaintenanceLtd" target="_blank" rel="noopener">Read our reviews on Checkatrade</a></p></noscript></div>
+    <div class="socials">
+      <span class="socials__lab">Follow us</span>
+      <ul class="socials__list">
+        <li><a class="socials__btn socials__btn--ig" href="https://www.instagram.com/westlondonroofing" data-link="instagram" target="_blank" rel="noopener" aria-label="West London Roofing on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+        <li><a class="socials__btn socials__btn--fb" href="https://www.facebook.com/profile.php?id=61581764278921" data-link="facebook" target="_blank" rel="noopener" aria-label="West London Roofing on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section cov" id="where-we-work" data-postcode data-block="postcode" aria-label="Where we work"><div class="cov__bg" aria-hidden="true"><div class="cov__van"><picture><source type="image/avif" srcset="/assets/img/about/fleet-wide-480.avif 480w, /assets/img/about/fleet-wide-960.avif 960w, /assets/img/about/fleet-wide-1500.avif 1500w" sizes="100vw"><source type="image/webp" srcset="/assets/img/about/fleet-wide-480.webp 480w, /assets/img/about/fleet-wide-960.webp 960w, /assets/img/about/fleet-wide-1500.webp 1500w" sizes="100vw"><img src="/assets/img/about/fleet-wide-1500.jpg" srcset="/assets/img/about/fleet-wide-480.jpg 480w, /assets/img/about/fleet-wide-960.jpg 960w, /assets/img/about/fleet-wide-1500.jpg 1500w" sizes="100vw" width="1500" height="640" alt="" loading="lazy" decoding="async"></picture></div><div class="cov__veil"></div><div class="cov__grain"></div></div><div class="container"><div class="cov__grid"><div class="cov__lead"><svg class="rule rule--white" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg><span class="kicker">Where we work</span><h2>West London first. Further for the right job.</h2><p>Most of our work is across west London and Middlesex, and we cover the rest of London, Surrey, Berkshire and Buckinghamshire. Type your postcode and see.</p></div><div class="cov__panel"><h3>Do we cover your area?</h3><form class="cov__form" novalidate data-cov-form><label class="vh" for="where-we-work-input">Your postcode</label><input class="cov__input" id="where-we-work-input" type="text" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" autocomplete="postal-code" placeholder="YOUR POSTCODE" maxlength="8"><button class="btn btn--primary" type="submit">Check</button></form><div class="cov__result" data-cov-result><p class="cov__head" data-cov-head></p><p data-cov-sub></p><div class="btn-row" data-cov-actions></div></div><p class="vh" role="status" aria-live="polite" data-cov-live></p><ul class="cov__chips" aria-label="Areas we cover"><li>Heston</li><li>Fulham</li><li>Kensington</li><li>Ealing</li><li>Richmond</li><li>Twickenham</li><li>Chiswick</li><li>Hayes</li><li>Uxbridge</li><li>Surrey</li><li>Berkshire</li><li>Buckinghamshire</li></ul></div></div></div></section>
+
+<section class="section about-short cv" id="about" aria-labelledby="h-about" data-block="about">
+  <div class="container about-short__grid">
+    <figure class="about-short__media" data-settle><picture><source type="image/avif" srcset="/assets/img/about/team-32-480.avif 480w, /assets/img/about/team-32-960.avif 960w, /assets/img/about/team-32-1500.avif 1500w" sizes="(min-width: 1024px) 720px, 100vw"><source type="image/webp" srcset="/assets/img/about/team-32-480.webp 480w, /assets/img/about/team-32-960.webp 960w, /assets/img/about/team-32-1500.webp 1500w" sizes="(min-width: 1024px) 720px, 100vw"><img src="/assets/img/about/team-32-1500.jpg" srcset="/assets/img/about/team-32-480.jpg 480w, /assets/img/about/team-32-960.jpg 960w, /assets/img/about/team-32-1500.jpg 1500w" sizes="(min-width: 1024px) 720px, 100vw" width="1500" height="1000" alt="Wayne and his team in company t-shirts outside a job in West London, lined up in front of the sign-written van" loading="lazy" decoding="async"></picture></figure>
+    <div class="about-short__text">
+      <svg class="rule" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <h2 id="h-about">Twelve years, mostly on recommendation</h2>
+      <p>West London Roofing Maintenance is run by Wayne Smith, working across West London and the surrounding areas, and further afield for the right job. Most of our work comes through recommendations from people we've already done a roof for. Honest and reliable, competitive on price, quality materials, and all of our work guaranteed. Wayne and his team run every job themselves and send you photos as they go.</p>
+      <a class="btn btn--secondary" href="/about-us/">More about us</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight brands brands--light" id="brands" aria-labelledby="h-brands" data-brands data-block="brands"><div class="container"><div class="brands__head"><h2 id="h-brands">Materials and manufacturers we work with</h2></div><ul class="brands__row"><li class="brand" tabindex="0" aria-label="Permavent: Breathable roof membranes"><svg viewBox="0 0 156 44" role="img" aria-label="Permavent"><path d="M8 30 20 14l12 16" fill="none" stroke="#1B3E6F" stroke-width="3.4"/><text x="40" y="29" font-family="Archivo, sans-serif" font-weight="800" font-size="17" letter-spacing="1.4" fill="#1B3E6F">PERMAVENT</text></svg><span class="brand__use" aria-hidden="true">Breathable roof membranes</span></li><li class="brand" tabindex="0" aria-label="Klöber: Dry ridge, dry verge and roof vents"><svg viewBox="0 0 150 44" role="img" aria-label="Klober professional roofing accessories"><text x="4" y="28" font-family="Archivo, sans-serif" font-weight="900" font-size="26" letter-spacing="-1" fill="#E2001A">KL</text><g><circle cx="55" cy="19" r="12.5" fill="none" stroke="#E2001A" stroke-width="6"/><rect x="50" y="3" width="6" height="17" rx="1" fill="#101820" transform="rotate(32 53 11)"/></g><text x="70" y="28" font-family="Archivo, sans-serif" font-weight="900" font-size="26" letter-spacing="-1" fill="#E2001A">BER</text><text x="5" y="40" font-family="Inter, sans-serif" font-size="7" letter-spacing=".5" fill="#63666A">PROFESSIONAL ROOFING ACCESSORIES</text></svg><span class="brand__use" aria-hidden="true">Dry ridge, dry verge and roof vents</span></li><li class="brand" tabindex="0" aria-label="Velux: Roof windows"><svg viewBox="0 0 112 44" role="img" aria-label="Velux"><rect x="2" y="6" width="108" height="32" fill="#E30613"/><text x="56" y="29" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="17" letter-spacing="2.4" fill="#FFFFFF">VELUX</text></svg><span class="brand__use" aria-hidden="true">Roof windows</span></li><li class="brand" tabindex="0" aria-label="Marley: Roof tiles"><svg viewBox="0 0 122 44" role="img" aria-label="Marley"><path d="M8 18 15 8l7 10Z" fill="#E4002B"/><path d="M20 18 27 8l7 10Z" fill="#E4002B" opacity=".55"/><text x="8" y="35" font-family="Archivo, sans-serif" font-weight="800" font-size="19" fill="#101820">marley</text></svg><span class="brand__use" aria-hidden="true">Roof tiles</span></li><li class="brand" tabindex="0" aria-label="Firestone RubberCover: EPDM rubber flat roofs"><svg viewBox="0 0 150 44" role="img" aria-label="Firestone RubberCover"><ellipse cx="75" cy="22" rx="72" ry="20" fill="none" stroke="#D50032" stroke-width="2.5"/><text x="75" y="19" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="13" fill="#D50032">Firestone</text><text x="75" y="33" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="11" fill="#101820">RubberCover</text></svg><span class="brand__use" aria-hidden="true">EPDM rubber flat roofs</span></li><li class="brand" tabindex="0" aria-label="Cure It GRP Roofing: GRP fibreglass flat roofs"><svg viewBox="0 0 140 44" role="img" aria-label="Cure It GRP roofing system"><text x="4" y="26" font-family="Archivo, sans-serif" font-weight="900" font-style="italic" font-size="20" fill="#101820">CURE IT</text><rect x="98" y="10" width="5" height="18" fill="#D50032" transform="skewX(-18)"/><text x="4" y="38" font-family="Inter, sans-serif" font-size="8" letter-spacing="1.6" fill="#63666A">GRP ROOFING SYSTEM</text></svg><span class="brand__use" aria-hidden="true">GRP fibreglass flat roofs</span></li></ul></div></section>
+
+<section class="section faq cv" id="faq" aria-labelledby="h-faq" data-block="faq">
+  <div class="container faq__grid">
+    <div class="section__head">
+      <svg class="rule" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <h2 id="h-faq">Questions people ask</h2>
+    </div>
+    <div id="faq-home"><div class="faq__list"><div class="faq__item"><h3 class="h4"><button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-0"><span>Do you do emergency call-outs?</span><span class="faq__glyph" aria-hidden="true"></span></button></h3><div class="faq__a" id="faq-0"><div><p>Yes, 24 hours. If water's coming in, ring <a href="tel:+447799701056" data-tel>07799 701056</a> and we'll get to you as fast as we can, then sort a proper fix once it's dry.</p></div></div></div><div class="faq__item"><h3 class="h4"><button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-1"><span>Is the estimate free?</span><span class="faq__glyph" aria-hidden="true"></span></button></h3><div class="faq__a" id="faq-1"><div><p>Yes. We come out, have a look, and give you a price in writing. No charge, no obligation.</p></div></div></div><div class="faq__item"><h3 class="h4"><button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-2"><span>Is the work guaranteed?</span><span class="faq__glyph" aria-hidden="true"></span></button></h3><div class="faq__a" id="faq-2"><div><p>All our work is guaranteed.</p></div></div></div><div class="faq__item"><h3 class="h4"><button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-3"><span>Which areas do you cover?</span><span class="faq__glyph" aria-hidden="true"></span></button></h3><div class="faq__a" id="faq-3"><div><p>Most of our work is across west London and Middlesex. We cover the rest of London, Surrey, Berkshire and Buckinghamshire too. Type your postcode into the checker above or just ring.</p></div></div></div><div class="faq__item"><h3 class="h4"><button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-4"><span>Do you do commercial work?</span><span class="faq__glyph" aria-hidden="true"></span></button></h3><div class="faq__a" id="faq-4"><div><p>Yes. Houses, flats, shops, offices and blocks. We can provide inspection reports for landlords and agents.</p></div></div></div></div></div>
+  </div>
+</section>
+
+<section class="section cta grain cta--photo" id="quote" aria-labelledby="h-cta" data-block="cta">
+  <div class="cta__bg" aria-hidden="true">
+    <picture>
+      <source type="image/avif" srcset="/assets/img/hero/bg-roofer-480.avif 480w, /assets/img/hero/bg-roofer-960.avif 960w, /assets/img/hero/bg-roofer-1600.avif 1600w" sizes="100vw">
+      <source type="image/webp" srcset="/assets/img/hero/bg-roofer-480.webp 480w, /assets/img/hero/bg-roofer-960.webp 960w, /assets/img/hero/bg-roofer-1600.webp 1600w" sizes="100vw">
+      <img src="/assets/img/hero/bg-roofer-1600.jpg" srcset="/assets/img/hero/bg-roofer-480.jpg 480w, /assets/img/hero/bg-roofer-960.jpg 960w, /assets/img/hero/bg-roofer-1600.jpg 1600w" sizes="100vw" width="1600" height="516" alt="" loading="lazy" decoding="async">
+    </picture>
+    <span class="cta__veil"></span>
+  </div>
+  <div class="container cta__grid">
+    <div class="cta__text">
+      <svg class="rule rule--white" viewBox="0 0 96 24" width="96" height="24" aria-hidden="true" focusable="false" data-draw><use href="#rl"></use></svg>
+      <h2 id="h-cta">Need a roofer? Ring&nbsp;us.</h2>
+      <p>Free estimates. 24 hour call-out. West London and surrounding areas.</p>
+      <a class="cta__num" href="tel:+447799701056" data-tel data-phone>07799 701056</a>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="tel:+447799701056" data-tel><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>Call <span data-phone>07799 701056</span></span></a>
+        <a class="btn btn--dark" href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." data-wa="default" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3s1 2.7 1.1 2.9c.2.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5h-.4z"/></svg><span>WhatsApp us</span></a>
+      </div>
+    </div>
+    <div class="cta__form"><h3>Or send us the details</h3><form class="form" id="q-home" data-quote-form action="https://formsubmit.co/info@westlondonroofingltd.co.uk" method="POST" enctype="multipart/form-data">
+        <div class="form__fields">
+          <div class="field"><label for="q-home-name">Your name</label><input id="q-home-name" name="name" type="text" autocomplete="name" required><span class="field__error"></span></div>
+          <div class="field"><label for="q-home-phone">Phone number</label><input id="q-home-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required><span class="field__error"></span></div>
+          <div class="field"><label for="q-home-postcode">Postcode</label><input id="q-home-postcode" name="postcode" type="text" autocomplete="postal-code" autocapitalize="characters" required><span class="field__error"></span></div>
+          <div class="field"><label for="q-home-message">What's the problem?</label><textarea id="q-home-message" name="message" rows="4" placeholder="e.g. leak above the back bedroom, started after the storm" required></textarea><span class="field__error"></span></div>
+          <fieldset class="field field--file" data-photos>
+            <legend class="vh">Photos</legend>
+            <div class="field__file-slot" data-photo-slot>
+              <input id="q-home-photo-1" name="photo_1" type="file" accept="image/*" aria-describedby="q-home-photo-1-name q-home-photo-help">
+              <div class="field__file-row"><label class="btn btn--secondary field__file-pick" for="q-home-photo-1"><span class="field__file-add">Add a photo</span><span class="field__file-change">Change photo</span></label><span class="field__file-name" id="q-home-photo-1-name"></span><button class="field__file-clear" type="button" aria-describedby="q-home-photo-1-name" hidden>Remove<span class="vh"> photo</span></button></div>
+            </div>
+            <div class="field__file-slot" data-photo-slot hidden>
+              <input id="q-home-photo-2" name="photo_2" type="file" accept="image/*" aria-describedby="q-home-photo-2-name q-home-photo-help">
+              <div class="field__file-row"><label class="btn btn--secondary field__file-pick" for="q-home-photo-2"><span class="field__file-add">Add another photo</span><span class="field__file-change">Change photo</span></label><span class="field__file-name" id="q-home-photo-2-name"></span><button class="field__file-clear" type="button" aria-describedby="q-home-photo-2-name" hidden>Remove<span class="vh"> photo</span></button></div>
+            </div>
+            <div class="field__file-slot" data-photo-slot hidden>
+              <input id="q-home-photo-3" name="photo_3" type="file" accept="image/*" aria-describedby="q-home-photo-3-name q-home-photo-help">
+              <div class="field__file-row"><label class="btn btn--secondary field__file-pick" for="q-home-photo-3"><span class="field__file-add">Add another photo</span><span class="field__file-change">Change photo</span></label><span class="field__file-name" id="q-home-photo-3-name"></span><button class="field__file-clear" type="button" aria-describedby="q-home-photo-3-name" hidden>Remove<span class="vh"> photo</span></button></div>
+            </div>
+            <span class="field__help" id="q-home-photo-help"><span data-photo-help="one">A photo helps us quote faster</span><span data-photo-help="many" hidden>Photos help us quote faster. You can add up to three.</span></span>
+            <p class="field__file-full" hidden>That's the most the form takes. Got more? <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp them to us</a>.</p>
+            <span class="vh" data-photo-status aria-live="polite"></span>
+          </fieldset>
+          <input type="hidden" name="_subject" value="Website enquiry">
+          <input type="hidden" name="source_page" value="">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_cc" value="max.patterson105@gmail.com">
+          <input type="hidden" name="_next" value="https://westlondonroofingltd.co.uk/enquiry-sent/">
+          <div class="field--honey" aria-hidden="true"><label for="q-home-honey">Leave this empty</label><input id="q-home-honey" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+        </div>
+        <button class="btn btn--primary form__submit" type="submit">Send it over</button>
+        <p class="form__note">We use these details to get back to you about your roof. See our <a href="/privacy/">privacy notice</a>.</p>
+        <p class="form__msg form__msg--ok" role="status" tabindex="-1" data-block="form-ok">Got it. We'll ring you back. If it's urgent, call <a href="tel:+447799701056" data-tel>07799 701056</a> now.</p>
+        <p class="form__msg form__msg--note" id="q-home-note-photoTooBig" data-note="photoTooBig" hidden>Your photo was too big to send, so the details went without it. <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp the photo to us</a>.</p>
+        <p class="form__msg form__msg--note" id="q-home-note-photosTooBig" data-note="photosTooBig" hidden>Your photos were too big to send, so your details went without them. <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp the photos to us</a>.</p>
+        <p class="form__msg form__msg--note" id="q-home-note-photosLeft" data-note="photosLeft" hidden>Your details arrived with as many photos as would fit. <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp the rest to us</a>.</p>
+        <p class="form__msg form__msg--note" id="q-home-note-photoFailed" data-note="photoFailed" hidden>Your details arrived, but the photo didn't. <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp the photo to us</a>.</p>
+        <p class="form__msg form__msg--note" id="q-home-note-photosFailed" data-note="photosFailed" hidden>Your details arrived, but the photos didn't. <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp them to us</a>.</p>
+        <p class="form__msg form__msg--fail" role="alert" tabindex="-1" data-block="form-fail">That didn't send. Ring <a href="tel:+447799701056" data-tel>07799 701056</a> or <a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." target="_blank" rel="noopener">WhatsApp us</a> instead.</p>
+      </form>
+</div>
+  </div>
+</section>
+
+
+</main>
+<footer class="footer grain" id="footer" data-block="footer">
+  <div class="container footer__grid">
+    <div>
+      <a class="footer__logo" href="/" aria-label="West London Roofing Maintenance Ltd, home">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/logo.webp">
+          <img src="/assets/img/logo.png" width="660" height="300" alt="West London Roofing Maintenance Ltd" loading="lazy" decoding="async">
+        </picture>
+      </a>
+      <p>Roofers in west London since 2014.</p>
+      <a class="footer__seal" href="https://www.checkatrade.com/trades/WestLondonRoofingMaintenanceLtd" data-link="checkatrade" target="_blank" rel="noopener" aria-label="View our Checkatrade profile">
+        <img src="/assets/img/seal-checkatrade-156.png" width="156" height="154" alt="Checkatrade Approved and Guaranteed" loading="lazy" decoding="async">
+      </a>
+      <div class="footer__accreditations" data-accreditations hidden></div>
+    </div>
+    <div>
+      <h2>What we do</h2>
+      <ul id="footer-services">
+        <li><a href="/services/roof-repairs/">Roof repairs and leaks</a></li><li><a href="/services/new-roofs/">New roofs and re-roofs</a></li><li><a href="/services/flat-roofs/">Flat roofs</a></li><li><a href="/services/chimneys-and-leadwork/">Chimneys and leadwork</a></li><li><a href="/services/fascias-soffits-and-guttering/">Fascias, soffits and guttering</a></li><li><a href="/services/roof-cleaning-and-moss-removal/">Roof cleaning and maintenance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Where we work</h2>
+      <ul class="footer__areas" id="footer-areas">
+        <li>Heston</li><li>Cranford</li><li>Osterley</li><li>Hayes</li><li>West Drayton</li><li>Uxbridge</li><li>Southall</li><li>Northolt</li><li>Greenford</li><li>Hanwell</li><li>Ealing</li><li>Acton</li><li>Chiswick</li><li>Hammersmith</li><li>Fulham</li><li>Kensington</li><li>Brentford</li><li>Isleworth</li><li>Kew</li><li>Richmond</li><li>Twickenham</li><li>Whitton</li><li>Teddington</li><li>Hanworth</li><li>Feltham</li><li>Ashford</li><li>Staines</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Get in touch</h2>
+      <ul class="footer__contact">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><a href="tel:+447799701056" data-tel data-phone>07799 701056</a></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3s1 2.7 1.1 2.9c.2.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5h-.4z"/></svg><a href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." data-wa="default" target="_blank" rel="noopener">WhatsApp us</a></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:info@westlondonroofingltd.co.uk" data-email>info@westlondonroofingltd.co.uk</a></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>24 hour call-out</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><a href="https://www.instagram.com/westlondonroofing" data-link="instagram" target="_blank" rel="noopener">Instagram</a></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg><a href="https://www.facebook.com/profile.php?id=61581764278921" data-link="facebook" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <span>West London Roofing Maintenance Ltd. Registered in England and Wales no. 10442440. VAT no. 435363008.</span>
+      <span class="footer__legal"><a href="/privacy/">Privacy</a><button class="footer__cookies" type="button" data-cookie-settings>Cookie settings</button><a class="credit" href="https://mavexdigital.com/?utm_source=westlondonroofingltd.co.uk&amp;utm_medium=referral&amp;utm_campaign=client_credit" target="_blank" rel="noopener"><span class="credit__by">Site by</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="172 -4 737 104" class="credit__mark" aria-hidden="true" focusable="false"><path d="M92 0L92 687L361 687L502 356Q510 339 520.5 310.5Q531 282 542.5 251.5Q554 221 563 196L570 196Q578 219 589 248Q600 277 611.5 306Q623 335 631 355L772 687L1034 687L1034 0L862 0L862 393Q862 412 862 435.5Q862 459 863.5 481Q865 503 865 520L857 520Q852 503 844 480Q836 457 827.5 434Q819 411 811 394L642 0L478 0L308 394Q298 417 289 440.5Q280 464 273.5 485Q267 506 262 520L254 520Q255 507 255.5 486Q256 465 256.5 441Q257 417 257 393L257 0Z" transform="translate(160 100) scale(0.15 -0.15)" fill="currentColor"/><path d="M20 0L363 687L556 687L897 0L709 0L650 124L257 124L198 0ZM321 257L586 257L513 414Q509 425 500.5 444Q492 463 483 485Q474 507 467 523Q460 539 458 543L450 543Q442 524 431.5 499Q421 474 411 450.5Q401 427 394 413Z" transform="translate(341.68 100) scale(0.15 -0.15)" fill="currentColor"/><path d="M345 0L16 687L208 687L376 321Q386 298 398.5 269.5Q411 241 422 214Q433 187 440 167L448 167Q456 185 466.5 211.5Q477 238 489 266.5Q501 295 512 320L681 687L865 687L535 0Z" transform="translate(483.93 100) scale(0.15 -0.15)" fill="currentColor"/><path d="M92 0L92 687L795 687L795 551L265 551L265 416L734 416L734 282L265 282L265 137L803 137L803 0Z" transform="translate(629.72 100) scale(0.15 -0.15)" fill="currentColor"/><path d="M31 0L355 356L61 687L284 687L463 474L475 474L659 687L867 687L573 363L896 0L673 0L464 246L453 246L240 0Z" transform="translate(773.26 100) scale(0.15 -0.15)" fill="#7A93FF" class="credit__accent"/></svg><span class="vh">MAVEX</span></a></span>
+    </div>
+  </div>
+</footer>
+<div class="sticky-bar" data-block="sticky">
+  <a class="btn btn--primary" href="tel:+447799701056" data-tel><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>Call</span></a>
+  <a class="btn btn--wa" href="https://wa.me/447799701056?text=Hi%2C%20I%20found%20you%20on%20your%20website.%20I%20need%20help%20with%20my%20roof." data-wa="default" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3s1 2.7 1.1 2.9c.2.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.4-.5-.6-.5h-.4z"/></svg><span>WhatsApp</span></a>
+</div>
+<script src="/assets/js/vendor.js?v=20261007171357" defer></script>
+<script src="/assets/js/data.js?v=20261007171357" defer></script>
+<script src="/assets/js/site.js?v=20261007171357" defer></script>
+</body>
+</html>
+

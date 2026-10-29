@@ -1,0 +1,17 @@
+GSAP Marquee Text (CodePen, GreenSock official pen wvZMwez)
+Source: codepen.io/GreenSock/pen/wvZMwez — full JS recovered via the embed-preview route (codepen.io/GreenSock/embed/preview/wvZMwez). Direct .js/.css asset URLs are Cloudflare-blocked; the pen page text extraction returns CSS + HTML only.
+
+STACK (Measured)
+- GSAP core only; the horizontalLoop() helper is fully self-contained in the pen (no plugins). Page furniture is Tailwind CDN classes; the marquee mechanism is plain GSAP + one CSS rule.
+
+PARAMETERS (Measured)
+- Init deferred to document.fonts.ready (so item widths are final before measuring).
+- Invocation: horizontalLoop(".marquee__item", { repeat: -1, paused: false, speed: 5, paddingRight: 100 }).
+- Markup: <footer> > div > .marquee-container (display flex, flex-nowrap, white-space nowrap, gap: 100px — the gap mirrors paddingRight 100) holding 6 x <p class="marquee__item">, font-size 186px, uppercase, line-height 1 (leading-none); item text "Komt goed bro." (first item is prefixed "1" in the source, last carries a stray "L" — as authored).
+- Helper internals: pixelsPerSecond = (config.speed || 1) * 100 -> 500 px/s at speed 5. Timeline defaults ease "none". Items' x transforms are converted to xPercent with snap = gsap.utils.snap(config.snap === false ? NaN : config.snap || 1) (integer snapping by default; snap: false disables).
+- totalWidth = last.offsetLeft + (xPercent/100)*lastWidth - startX + last.offsetWidth*lastScaleX + paddingRight.
+- Per item two tweens: tl.to(item, { xPercent: snap((curX - distanceToLoop)/width*100), duration: distanceToLoop/pixelsPerSecond }, 0), then .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth)/width*100) }, { xPercent: xPercents[i], duration: (totalWidth - distanceToLoop)/pixelsPerSecond, immediateRender: false }, distanceToLoop/pixelsPerSecond). Labels "label0..N" added at times[i] = distanceToStart/pixelsPerSecond.
+- Public API added to the timeline: next(), previous(), toIndex(index), current() — all wrap-aware (shortest direction via gsap.utils.wrap), with a modifiers plugin time-wrap so the playhead wraps seamlessly; playhead pre-rendered with tl.progress(1, true).progress(0, true); if config.reversed, onReverseComplete (totalTime += duration*100) fires and the timeline plays in reverse.
+
+READING (Inferred)
+- This is the canonical GSAP seamless-loop pattern: every item travels exactly one loop distance, then teleports a full totalWidth ahead inside a fromTo whose immediateRender is false, so the jump happens off-screen. Speed is in hundreds of px/s (speed 5 = 500 px/s), distance-based durations keep all items at identical velocity regardless of width.
