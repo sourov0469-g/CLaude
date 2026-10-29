@@ -1,400 +1,185 @@
-// AREA: where we work. The firm's own 24 towns (TOWNS, US Census 2023 centroids). Facts only: names, and straight-line
-// miles from the Springboro office (haversine from the coordinates, rounded to whole miles). Nothing about drive times,
-// response times or coverage beyond the list. Every version draws the same real geography three ways:
-//   v1 Route   a road line visits the towns nearest first, drawn by scroll (S0407 draw-on and motion along a path)
-//   v2 Your town   a live lookup: a sentence with an inline field (S1442, S0661); the town dots answer (S0089)
-//   v3 Radar   distance rings and true bearings; a slow sweep pings each town (S0489 water ripple, endless loop)
+// TOWNS (PLAN-V7 §6). Every number comes from data/towns.js (US Census 2023 Gazetteer positions; ACS median year built
+// and decades of construction); miles and bearings are from the centre of Springboro. The source is printed on the page.
+// Genuinely local (Hippo doctrine): each town carries facts of its own; nothing is city-swapped, nothing invented.
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
+import { EASE, beats } from '../../js/fx.js';
 import { TOWNS } from '../../data/towns.js';
-import { lines, rise, onEnter, EASE } from '../../js/fx.js';
-import { parallax } from '../../js/depth.js';
-import { loop } from '../../js/gl.js';
 
-const RAD = Math.PI / 180, MPD = 69.05, R_EARTH = 3958.8; // statute miles per degree of latitude; Earth radius in miles
-const O = TOWNS[0], KX = Math.cos(O.lat * RAD);
-const hav = t => { const a = Math.sin((t.lat - O.lat) * RAD / 2) ** 2 + Math.cos(O.lat * RAD) * Math.cos(t.lat * RAD) * Math.sin((t.lon - O.lon) * RAD / 2) ** 2; return 2 * R_EARTH * Math.asin(Math.sqrt(a)); };
-// equirectangular projection around Springboro with x scaled by cos(lat): miles east (x) and south (y) of the office
-const T = TOWNS.map((t, i) => { const d = hav(t); return { name: t.name, i, d, n: Math.round(d), brg: t.brg, x: (t.lon - O.lon) * KX * MPD, y: (O.lat - t.lat) * MPD }; });
-const NEAR = [...T].sort((a, b) => a.d - b.d); // nearest first, by the precise distance (the route never crosses itself)
-const AZ = [...T].sort((a, b) => a.name.localeCompare(b.name));
-const BX = { x0: Math.min(...T.map(t => t.x)), x1: Math.max(...T.map(t => t.x)), y0: Math.min(...T.map(t => t.y)), y1: Math.max(...T.map(t => t.y)) };
-const away = t => (t.i ? `${t.n} miles from our Springboro office` : 'Our office');
+gsap.registerPlugin(Flip);
 const NS = 'http://www.w3.org/2000/svg';
-const el = (tag, attrs, parent, cls) => { const e = document.createElementNS(NS, tag); for (const k in attrs || {}) e.setAttribute(k, attrs[k]); if (cls) e.setAttribute('class', cls); if (parent) parent.append(e); return e; };
-const f1 = v => Math.round(v * 10) / 10;
+const DIR = ['north', 'northeast', 'east', 'southeast', 'south', 'southwest', 'west', 'northwest'];
+const dir = b => DIR[Math.round(b / 45) % 8];
+const HOME = TOWNS[0]; // Springboro
+const fact = t => t === HOME ? 'Home. The office is at 38 N Pioneer Blvd.' : `${t.mi} miles ${dir(t.brg)} of the centre of Springboro, in ${t.county} County. The median home there was built in ${t.built}.`;
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; };
 
-// fit the projected box into W x H with padding [top, right, bottom, left]
-function fit(W, H, [pt, pr, pb, pl]) {
-  const w = Math.max(10, W - pl - pr), h = Math.max(10, H - pt - pb);
-  const s = Math.min(w / (BX.x1 - BX.x0), h / (BX.y1 - BX.y0));
-  const ox = pl + (w - s * (BX.x1 - BX.x0)) / 2 - s * BX.x0, oy = pt + (h - s * (BX.y1 - BX.y0)) / 2 - s * BX.y0;
-  return { s, X: t => ox + t.x * s, Y: t => oy + t.y * s, cx: ox, cy: oy };
-}
-
-// Greedy label placement: each label tries 8 spots around its dot, nearest towns first, and takes the spot with the least
-// overlap (other labels, dots, obstacles, the frame), preferring the side that points away from Springboro.
-function placeLabels(items, W, H, cx, cy, extra = []) {
-  const boxes = extra.map(b => ({ k: 1, ...b }));
-  items.forEach(d => boxes.push({ x: d.x - d.r - 2, y: d.y - d.r - 2, w: d.r * 2 + 4, h: d.r * 2 + 4, k: 2 }));
-  const ov = (x, y, w, h, b) => Math.max(0, Math.min(x + w, b.x + b.w) - Math.max(x, b.x)) * Math.max(0, Math.min(y + h, b.y + b.h) - Math.max(y, b.y));
-  const order = items.map((d, i) => i).sort((a, b) => Math.hypot(items[a].x - cx, items[a].y - cy) - Math.hypot(items[b].x - cx, items[b].y - cy));
-  const out = [];
-  for (const i of order) {
-    const d = items[i], g = d.r + 6, { w, h } = d;
-    const C = [[g, -h / 2, 'r'], [-g - w, -h / 2, 'l'], [g * 0.55, -h - g * 0.25, 'r'], [g * 0.55, g * 0.25, 'r'], [-w - g * 0.55, -h - g * 0.25, 'l'], [-w - g * 0.55, g * 0.25, 'l'], [-w / 2, -h - g * 0.8, 'c'], [-w / 2, g * 0.8, 'c']];
-    const ox = d.x - cx, oy = d.y - cy, ol = Math.hypot(ox, oy) || 1;
-    let best = null, bs = Infinity;
-    C.forEach(([dx, dy, side], k) => {
-      const x = d.x + dx, y = d.y + dy;
-      let s = 0;
-      for (const b of boxes) s += ov(x, y, w, h, b) * b.k;
-      s += (Math.max(0, -x) + Math.max(0, x + w - W) + Math.max(0, -y) + Math.max(0, y + h - H)) * 400;
-      const lx = x + w / 2 - d.x, ly = y + h / 2 - d.y;
-      s += (1 - (lx * ox + ly * oy) / ((Math.hypot(lx, ly) || 1) * ol)) * 10 + k * 0.5;
-      if (s < bs) { bs = s; best = { x, y, side }; }
-    });
-    boxes.push({ x: best.x, y: best.y, w, h, k: 3 }); out[i] = best;
-  }
-  return out;
-}
-const measure = els => els.map(e => ({ w: e.offsetWidth, h: e.offsetHeight })); // one batched read, before any write
-const fontsReady = () => (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve());
-
-// ---------------------------------------------------------------------------------------------------------------------
-// v1 Route. Narrative: the road leaves the office and visits every town, nearest first. Between two towns it turns
-// around Springboro (radius and bearing both interpolate), so distance only ever grows and the road never crosses itself.
-// S0407: stroke draw-on with pathLength="1" (dashoffset 1 -> 0), scrubbed, ease none; a plain dot rides the same path,
-// placed by arc length on the polyline the path is made of (motion along a path). Each town lights when the road arrives.
-// Depth (S0204 speeds, S1321 parallax): on wide screens the photo travels at 0.08x and the map at 0.15x of the scroll,
-// the words at 1x, so the map stays in view while the copy passes it. Not pinned.
-function routeV(root, c) {
-  const layer = root.querySelector('.av1-mapl'), map = root.querySelector('.av1-map'), svg = root.querySelector('.av1-svg');
-  const ol = root.querySelector('.av1-towns'), now = root.querySelector('.av1-now'), nn = now.querySelector('.av1-nn'), nd = now.querySelector('.av1-nd');
-  const bg = root.querySelector('.av1-bg');
-  if (!ol.children.length) NEAR.forEach(t => { const li = document.createElement('li'); li.innerHTML = `<span class="av-nm">${t.name}</span><span class="vh">, ${t.i ? t.n + ' miles' : 'our office'}</span>`; ol.append(li); });
-  const lis = [...ol.children];
-  const S = { total: 1, cum: [], pts: [], reach: [], dots: [], road: null, casing: null, marker: null, p: c.motion ? 0 : 1, idx: -2 };
-
-  let sig = '';
-  const layout = force => {
-    const W = map.clientWidth; if (!W) return;
-    const wide = c.wide, key = W + 'x' + map.clientHeight;
-    if (key === sig && !force) return; sig = key;
-    // narrow screens: the map is as tall as its geography; labels move into a list under it (the map simplifies)
-    const H = wide ? map.clientHeight : Math.round(W * (BX.y1 - BX.y0) / (BX.x1 - BX.x0)) + 40;
-    if (!wide) svg.style.height = H + 'px'; else svg.style.height = '';
-    const sizes = wide ? measure(lis) : [];
-    const nowBox = wide ? { x: 0, y: 0, w: now.offsetWidth + 12, h: now.offsetHeight + 12 } : null;
-    const F = fit(W, H, wide ? [16, 96, 16, 96] : [20, 18, 20, 18]);
-    const P = NEAR.map(t => ({ t, X: F.X(t), Y: F.Y(t) }));
-    // the road: polar interpolation around the office between consecutive towns, every 2 degrees
-    const cx = F.cx, cy = F.cy, pts = [[cx, cy]], at = [0];
-    for (let i = 1; i < P.length; i++) {
-      const A = P[i - 1], B = P[i];
-      const ra = Math.hypot(A.X - cx, A.Y - cy), rb = Math.hypot(B.X - cx, B.Y - cy);
-      const ab = Math.atan2(B.X - cx, -(B.Y - cy)), aa = i === 1 ? ab : Math.atan2(A.X - cx, -(A.Y - cy));
-      let d = ab - aa; d = ((d + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
-      const n = Math.max(2, Math.ceil(Math.abs(d) / (2 * RAD)), Math.ceil(Math.abs(rb - ra) / 6));
-      for (let k = 1; k <= n; k++) { const u = k / n, r = ra + (rb - ra) * u, a = aa + d * u; pts.push([cx + Math.sin(a) * r, cy - Math.cos(a) * r]); }
-      pts[pts.length - 1] = [B.X, B.Y]; at.push(pts.length - 1);
+// v1 [BANK] Austin Pro project map (CROWN: "the map is the coverage claim"; plot only what is real, label it honestly,
+// reconcile its arithmetic). Adapted: no job pins exist, so the 24 towns are placed by their Census bearing and distance
+// from the Springboro centroid (square-root radial scale, rings labelled in real miles), with a north arrow; the list is the
+// accessible control. Choosing a town draws a line from home and prints its facts. Rings ripple from the pointer.
+function map(root, c) {
+  const svg = root.querySelector('.tw1-map'), rings = svg.querySelector('.tw1-rings'), marks = svg.querySelector('.tw1-marks'), ripples = svg.querySelector('.tw1-ripples');
+  const line = svg.querySelector('.tw1-line'), card = root.querySelector('.tw1-card'), list = root.querySelector('.tw1-list');
+  // true bearings; distance on a square-root radial scale so the close-in towns do not pile up (the rings carry the
+  // real miles, so the scale stays honest): r = 460 * sqrt(mi / 25)
+  const R = mi => 460 * Math.sqrt(mi / 25), S = R(5) / 5;
+  const pos = t => { const a = t.brg * Math.PI / 180, r = R(t.mi); return [500 + Math.sin(a) * r, 500 - Math.cos(a) * r]; };
+  rings.replaceChildren(); marks.replaceChildren(); list.replaceChildren();
+  for (const r of [5, 10, 15, 20, 25]) { el('circle', { cx: 500, cy: 500, r: R(r) }, rings); const tx = el('text', { x: 506, y: 500 - R(r) - 6 }, rings); tx.textContent = `${r} mi`; }
+  const mks = [], btns = [];
+  TOWNS.forEach((t, i) => {
+    if (i) {
+      const [x, y] = pos(t), g = el('g', { class: 'mk', 'data-i': i }, marks);
+      el('path', { class: 'mk-h', d: `M${(x - 9).toFixed(1)} ${(y + 8).toFixed(1)} V${(y - 2).toFixed(1)} L${x.toFixed(1)} ${(y - 11).toFixed(1)} L${(x + 9).toFixed(1)} ${(y - 2).toFixed(1)} V${(y + 8).toFixed(1)} Z` }, g);
+      const right = x >= 500 || (t.brg > 300 && t.brg < 360), tx = el('text', { x: (right ? x + 14 : x - 14).toFixed(1), y: (y + 5).toFixed(1), 'text-anchor': right ? 'start' : 'end' }, g); tx.textContent = t.name;
+      mks[i] = g;
     }
-    const cum = [0]; for (let k = 1; k < pts.length; k++) cum.push(cum[k - 1] + Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]));
-    S.pts = pts; S.cum = cum; S.total = cum[cum.length - 1]; S.reach = at.map(k => cum[k]);
-    const dPath = 'M' + pts.map(p => f1(p[0]) + ' ' + f1(p[1])).join('L');
-
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.replaceChildren();
-    el('path', { d: dPath }, svg, 'av1-ghost');
-    S.casing = el('path', { d: dPath, pathLength: 1 }, svg, 'av1-casing');
-    S.road = el('path', { d: dPath, pathLength: 1 }, svg, 'av1-road');
-    // a 5-mile scale bar, bottom left (an honest map key)
-    const sb = 5 * F.s, sx = 12, sy = H - 18;
-    const keyG = el('g', { transform: `translate(${sx} ${sy})` }, svg, 'av1-key');
-    el('path', { d: `M0 -6V0H${f1(sb)}V-6` }, keyG);
-    el('text', { x: f1(sb + 8), y: 0 }, keyG).textContent = '5 miles';
-    const dg = el('g', {}, svg, 'av1-dots');
-    S.dots = P.map((p, i) => el('circle', { cx: f1(p.X), cy: f1(p.Y), r: i ? 4.5 : 7 }, dg, i ? 'av1-dot' : 'av1-dot av1-home'));
-    S.marker = el('g', {}, svg, 'av1-mk');
-    el('circle', { r: 15 }, S.marker, 'av1-mk-h'); el('circle', { r: 7 }, S.marker, 'av1-mk-d');
-    S.marker.style.display = c.motion ? '' : 'none';
-    if (!wide) el('text', { x: f1(cx + 12), y: f1(cy - 10) }, svg, 'av1-home-l').textContent = 'Springboro';
-
-    if (wide) { // labels on the map, placed around their dots
-      const extra = [{ ...nowBox }, { x: sx - 4, y: sy - 22, w: sb + 80, h: 30 }];
-      for (let k = 0; k < pts.length; k += 4) extra.push({ x: pts[k][0] - 4, y: pts[k][1] - 4, w: 8, h: 8, k: 0.7 }); // keep labels off the road
-      const spots = placeLabels(P.map((p, i) => ({ x: p.X, y: p.Y, r: i ? 5 : 8, ...sizes[i] })), W, H, cx, cy, extra);
-      lis.forEach((li, i) => { li.style.left = f1(spots[i].x) + 'px'; li.style.top = f1(spots[i].y) + 'px'; li.dataset.side = spots[i].side; });
-    } else lis.forEach(li => { li.style.left = li.style.top = ''; });
-    S.idx = -2; render(S.p);
-  };
-
-  const pointAt = L => { // arc-length lookup on the road's own polyline (binary search)
-    const { cum, pts } = S; let lo = 0, hi = cum.length - 1;
-    if (L <= 0) return pts[0]; if (L >= cum[hi]) return pts[hi];
-    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (cum[m] <= L) lo = m; else hi = m; }
-    const u = (L - cum[lo]) / (cum[hi] - cum[lo] || 1);
-    return [pts[lo][0] + (pts[hi][0] - pts[lo][0]) * u, pts[lo][1] + (pts[hi][1] - pts[lo][1]) * u];
-  };
-  const setIdx = k => {
-    if (k === S.idx) return;
-    const first = S.idx === -2; S.idx = k;
-    lis.forEach((li, i) => { li.classList.toggle('is-lit', i <= k); li.classList.toggle('is-now', i === k && c.motion); });
-    S.dots.forEach((d, i) => { d.classList.toggle('is-lit', i <= k); d.classList.toggle('is-now', i === k && c.motion); });
-    const t = NEAR[k]; nn.textContent = t.name; nd.textContent = away(t);
-    if (c.motion && !first) gsap.fromTo(now.children, { y: 4, autoAlpha: 0.2 }, { y: 0, autoAlpha: 1, duration: 0.15, ease: EASE, overwrite: true }); // S0410 text swap
-  };
-  function render(p) {
-    S.p = p; if (!S.road) return;
-    const off = (1 - p).toFixed(5);
-    S.road.style.strokeDashoffset = off; S.casing.style.strokeDashoffset = off;
-    const L = p * S.total, [mx, my] = pointAt(L);
-    S.marker.setAttribute('transform', `translate(${f1(mx)} ${f1(my)})`);
-    let k = 0; while (k + 1 < S.reach.length && S.reach[k + 1] <= L + 0.5) k++;
-    setIdx(k);
-  }
-
-  const ro = new ResizeObserver(() => layout()); ro.observe(map);
-  fontsReady().then(() => { if (S.alive) layout(true); });
-  S.alive = true;
-  layout();
-
-  if (c.motion) {
-    lines(root.querySelector('h2'), { scrollTrigger: onEnter(root.querySelector('h2'), { start: 'top 88%' }) });
-    rise(root.querySelectorAll('.av1-end > *'), { scrollTrigger: onEnter(root.querySelector('.av1-end'), { start: 'top 90%' }) });
-    const prog = { p: 0 };
-    const st = c.wide ? { trigger: root, start: 'top 38%', end: 'bottom bottom+=80' } : { trigger: svg, start: 'top 78%', end: 'bottom 42%' };
-    gsap.to(prog, { p: 1, ease: 'none', scrollTrigger: { ...st, scrub: 0.6, invalidateOnRefresh: true }, onUpdate: () => render(Math.min(1, prog.p / 0.96)) });
-    if (c.wide) { // the slow layers: screen speed k, positioned so the whole map is in view while the road draws
-      const slow = (target, k, endTop) => {
-        const u0 = () => root.offsetHeight - innerHeight - 80; // scroll offset (from "top top") where the draw ends
-        const s0 = () => endTop + k * u0();
-        gsap.fromTo(target, { y: () => s0() - (1 - k) * innerHeight }, { y: () => s0() + (1 - k) * root.offsetHeight, ease: 'none', scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
-      };
-      slow(layer, 0.15, -16);
-      slow(bg, 0.08, -70);
-    }
-  }
-  return () => { S.alive = false; ro.disconnect(); lis.forEach(li => li.classList.remove('is-lit', 'is-now')); };
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// v2 Your town. A live lookup (S1442: one field, a persistent visible label, autocomplete="address-level2"; S0661: no
-// verdict while the visitor is still typing, the "not on our list" answer only after Enter or leaving the field, re-checked
-// on input once shown, results in a polite live region). S0089: typing is high-frequency, so nothing moves per keystroke;
-// names and dots change colour in 150ms. The one sanctioned motion is the matched town's dot growing on the map.
-const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]+/g, ' ').trim().replace(/\s+(oh|ohio)$/, '').replace(/^(city of|village of)\s+/, '');
-const KEYS = T.map(t => { const n = norm(t.name); return { n, flat: n.replace(/ /g, ''), words: n.split(' ') }; });
-const list = names => (names.length < 2 ? names.join('') : names.slice(0, -1).join(', ') + ' or ' + names[names.length - 1]);
-function lookupV(root, c) {
-  const svg = root.querySelector('.av2-svg'), wrap = root.querySelector('.av2-mapl'), form = root.querySelector('.av2-ask');
-  const input = root.querySelector('.av2-input'), ans = root.querySelector('.av2-ans'), ul = root.querySelector('.av2-names');
-  if (!ul.children.length) AZ.forEach(t => { const li = document.createElement('li'); li.textContent = t.name; li.dataset.i = t.i; ul.append(li); });
-  const lis = [], byI = {}; [...ul.children].forEach(li => { byI[li.dataset.i] = li; }); T.forEach(t => lis.push(byI[t.i]));
-  const S = { dots: [], link: null, tag: null, committed: false, timer: 0, hits: new Set(), exact: -1, hov: -1, F: null };
-
-  let sig = '';
-  const layout = () => {
-    const W = wrap.clientWidth, H = wrap.clientHeight; if (!W || !H || W + 'x' + H === sig) return; sig = W + 'x' + H;
-    const F = S.F = fit(W, H, c.wide ? [H * 0.037 + 150, 56, H * 0.037 + 70, 96] : [24, 12, 24, 12]); // wide: the right half, clear of the nav
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.replaceChildren();
-    const sp = el('g', {}, svg, 'av2-spokes');
-    S.spokes = T.map((t, i) => (i ? el('line', { x1: f1(F.cx), y1: f1(F.cy), x2: f1(F.X(t)), y2: f1(F.Y(t)) }, sp) : null));
-    S.link = el('line', { x1: f1(F.cx), y1: f1(F.cy), x2: f1(F.cx), y2: f1(F.cy) }, svg, 'av2-link');
-    const g = el('g', {}, svg, 'av2-dots');
-    S.dots = T.map((t, i) => el('circle', { cx: f1(F.X(t)), cy: f1(F.Y(t)), r: i ? 5 : 7 }, g, i ? 'av2-dot' : 'av2-dot av2-home'));
-    el('text', { x: f1(F.cx + 14), y: f1(F.cy + 5) }, svg, 'av2-home-l').textContent = 'Springboro';
-    S.tag = el('text', { x: 0, y: 0 }, svg, 'av2-tag');
-    paint(true);
-  };
-  const paint = () => { // classes only; CSS changes colour in 150ms and grows the matched dot
-    const q = !!norm(input.value);
-    ul.classList.toggle('is-q', q); svg.classList.toggle('is-q', q);
-    T.forEach((t, i) => {
-      const hit = S.hits.has(i), ex = S.exact === i;
-      lis[i].classList.toggle('is-hit', hit); lis[i].classList.toggle('is-on', ex);
-      const d = S.dots[i]; if (!d) return;
-      d.classList.toggle('is-hit', hit); d.classList.toggle('is-on', ex); d.classList.toggle('is-hov', S.hov === i);
-      const s = S.spokes && S.spokes[i]; if (s) { s.classList.toggle('is-hit', hit); s.classList.toggle('is-hov', S.hov === i); }
-    });
-    if (S.F && S.link) {
-      const t = T[S.exact];
-      svg.classList.toggle('has-on', !!(t && t.i));
-      if (t && t.i) {
-        const x = S.F.X(t), y = S.F.Y(t), right = x < S.F.cx + 40;
-        S.link.setAttribute('x2', f1(x)); S.link.setAttribute('y2', f1(y));
-        S.tag.textContent = `${t.n} miles`; S.tag.setAttribute('x', f1(x + (right ? 16 : -16))); S.tag.setAttribute('y', f1(y + 5)); S.tag.setAttribute('text-anchor', right ? 'start' : 'end');
-      }
-    }
-  };
-  const match = raw => {
-    const q = norm(raw), flat = q.replace(/ /g, '');
-    if (!q) return { q, hits: [], exact: -1 };
-    const hits = []; let exact = -1;
-    KEYS.forEach((k, i) => {
-      if (k.n === q || k.flat === flat) exact = i;
-      if (k.n.startsWith(q) || k.flat.startsWith(flat) || k.words.some(w => w.startsWith(q))) hits.push(i);
-    });
-    return { q, hits, exact };
-  };
-  const say = html => { if (ans.innerHTML !== html) ans.innerHTML = html; };
-  const yes = i => (i ? `<strong>Yes.</strong> ${T[i].name} is ${T[i].n} miles from our Springboro office.` : '<strong>Yes.</strong> Our office is in Springboro.');
-  const update = (commit, enter) => {
-    clearTimeout(S.timer);
-    let m = match(input.value);
-    if (enter && m.exact < 0 && m.hits.length === 1) { input.value = T[m.hits[0]].name; m = match(input.value); } // Enter accepts the one candidate
-    S.hits = new Set(m.hits); S.exact = m.exact; paint();
-    if (!m.q) { S.committed = false; ans.dataset.state = ''; say(''); return; }
-    if (m.exact >= 0) { if (commit) S.committed = true; ans.dataset.state = 'yes'; say(yes(m.exact)); return; }
-    if (commit || S.committed) S.committed = true;
-    const names = m.hits.map(i => T[i].name).sort();
-    let state = '', html = '';
-    if (!names.length) { if (S.committed) { state = 'no'; html = '<strong>Not on our list of 24.</strong> Call and ask.'; } }
-    else if (names.length <= 4) { state = 'maybe'; html = `Do you mean ${list(names)}?`; }
-    else { state = 'maybe'; html = `${names.length} of our towns match so far.`; }
-    const apply = () => { ans.dataset.state = state; say(html); };
-    if (commit || state === 'no' || !html) apply(); else S.timer = setTimeout(apply, 300); // S0661: debounce the live text
-  };
-  const onInput = () => update(false, false);
-  const onSubmit = e => { e.preventDefault(); update(true, true); };
-  const onBlur = () => { if (norm(input.value)) update(true, false); };
-  const onKey = e => { if (e.key === 'Escape' && input.value) { input.value = ''; update(false, false); } };
-  input.addEventListener('input', onInput); form.addEventListener('submit', onSubmit); input.addEventListener('blur', onBlur); input.addEventListener('keydown', onKey);
-  // pointer: a name under the pointer finds its dot on the map (fine pointers; colour, plus growth when motion is allowed)
-  const over = e => { const li = e.target.closest('li'); const i = li ? +li.dataset.i : -1; if (i !== S.hov) { S.hov = i; paint(); } };
-  const out = () => { if (S.hov !== -1) { S.hov = -1; paint(); } };
-  if (c.fine) { ul.addEventListener('pointerover', over); ul.addEventListener('pointerleave', out); }
-
-  const ro = new ResizeObserver(() => layout()); ro.observe(wrap);
-  layout(); if (input.value) update(false, false);
-
-  if (c.motion) {
-    lines(root.querySelector('h2'), { scrollTrigger: onEnter(root) });
-    rise([root.querySelector('.av2-q'), root.querySelector('.av2-act')], { scrollTrigger: onEnter(root, { start: 'top 70%' }), delay: 0.2 });
-    gsap.fromTo(ul.children, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: EASE, stagger: { amount: 0.4 }, scrollTrigger: onEnter(ul, { start: 'top 92%' }) }); // the 24 as one group, 400ms in total
-    gsap.fromTo(svg, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: EASE, scrollTrigger: onEnter(root, { start: 'top 70%' }) });
-    parallax(root);
-  }
-  return () => {
-    clearTimeout(S.timer); ro.disconnect();
-    input.removeEventListener('input', onInput); form.removeEventListener('submit', onSubmit); input.removeEventListener('blur', onBlur); input.removeEventListener('keydown', onKey);
-    ul.removeEventListener('pointerover', over); ul.removeEventListener('pointerleave', out);
-  };
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// v3 Radar. A data graphic: rings every 5 miles, each town at its true bearing and straight-line distance. S0489: one main
-// action (the sweep, one turn per 8s, linear, as endless loops are) plus the pings it causes: a ring grows 0 to 1 with a
-// bell fade as the sweep passes a town. On entry the rings ripple out from the office (ease-out, "things that arrive").
-// Nothing runs unseen (gl.js loop: off-screen and hidden tab pause). Reduced motion: one still frame, sweep at 40 degrees.
-// Hovering grows the label nearest the pointer; the labels are the full list in text for keyboard and touch.
-const BANDS = [[-1, 5, 'Within 5 miles'], [5, 10, '5 to 10 miles'], [10, 15, '10 to 15 miles'], [15, 20, '15 to 20 miles'], [20, 25, '20 to 25 miles']];
-const PERIOD = 8, PING = 1.3, WEDGE = 30;
-const bell = p => Math.sin(Math.PI * Math.min(1, Math.max(0, p))); // S0489 bell: fades in and out over its run
-function radarV(root, c) {
-  const box = root.querySelector('.av3-radar'), svg = root.querySelector('.av3-svg'), dl = root.querySelector('.av3-bands');
-  if (!dl.children.length) BANDS.forEach(([lo, hi, label]) => {
-    const dt = document.createElement('dt'); dt.textContent = label;
-    const dd = document.createElement('dd'), ul = document.createElement('ul');
-    T.filter(t => t.d > lo && t.d <= hi).sort((a, b) => a.d - b.d).forEach(t => {
-      const li = document.createElement('li'); li.dataset.i = t.i;
-      li.innerHTML = `<span class="av-nm">${t.name}</span><span class="vh">, ${t.i ? t.n + ' miles' : 'our office'}</span>`; ul.append(li);
-    });
-    dd.append(ul); dl.append(dt, dd);
+    const li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button'; b.className = 'rx'; b.dataset.i = i; b.setAttribute('aria-pressed', String(!i));
+    b.innerHTML = `${t.name}<span class="mi">${i ? t.mi + ' mi' : 'home'}</span>`; li.append(b); list.append(li); btns[i] = b;
   });
-  const lis = []; dl.querySelectorAll('li').forEach(li => { lis[+li.dataset.i] = li; });
-  const S = { size: 0, c: 0, R: 0, pos: [], dots: [], pings: [], sweep: null, rings: [], ang: c.motion ? 0 : 40, near: -1, last: 0, t: 0, start: [] };
-
-  const layout = labelsOnly => {
-    const W = box.clientWidth; if (!W) return;
-    if (W === S.size) { if (labelsOnly === true) placeR(); return; }
-    const size = S.size = W, ctr = S.c = size / 2, R = S.R = size / 2 * (c.wide ? 0.8 : 0.92);
-    const pos = S.pos = T.map(t => { const r = t.d / 25 * R, a = t.brg * RAD; return [ctr + Math.sin(a) * r, ctr - Math.cos(a) * r]; });
-    svg.setAttribute('viewBox', `0 0 ${size} ${size}`); svg.replaceChildren();
-    el('circle', { cx: ctr, cy: ctr, r: f1(R) }, svg, 'av3-disc');
-    const ticks = el('g', {}, svg, 'av3-ticks');
-    for (let b = 0; b < 360; b += 5) { const a = b * RAD, l = b % 30 ? 5 : 10; ticks.append(el('line', { x1: f1(ctr + Math.sin(a) * R), y1: f1(ctr - Math.cos(a) * R), x2: f1(ctr + Math.sin(a) * (R + l)), y2: f1(ctr - Math.cos(a) * (R + l)) })); }
-    el('text', { x: ctr, y: f1(ctr - R - 18) }, svg, 'av3-n').textContent = 'N';
-    const rg = el('g', {}, svg, 'av3-rings');
-    S.rings = [1, 2, 3, 4, 5].map(k => el('circle', { cx: ctr, cy: ctr, r: f1(R * k / 5) }, rg));
-    const rl = el('g', {}, svg, 'av3-rl'), la = 160 * RAD; const rlBoxes = [];
-    [1, 2, 3, 4, 5].forEach(k => {
-      const r = R * k / 5, x = ctr + Math.sin(la) * r + 4, y = ctr - Math.cos(la) * r + 4;
-      el('text', { x: f1(x), y: f1(y) }, rl).textContent = k === 5 ? '25 miles' : String(k * 5);
-      rlBoxes.push({ x: x - 2, y: y - 12, w: k === 5 ? 62 : 22, h: 16 });
-    });
-    S.sweep = el('g', {}, svg, 'av3-sweep');
-    // the trail: three flat slices that fade behind the beam (no gradients, PLAN 3)
-    [[0, 8, 0.16], [8, 18, 0.085], [18, WEDGE, 0.04]].forEach(([a0, a1, o]) => {
-      const p0 = -a0 * RAD, p1 = -a1 * RAD;
-      el('path', { d: `M${ctr} ${ctr}L${f1(ctr + Math.sin(p1) * R)} ${f1(ctr - Math.cos(p1) * R)}A${f1(R)} ${f1(R)} 0 0 1 ${f1(ctr + Math.sin(p0) * R)} ${f1(ctr - Math.cos(p0) * R)}Z`, 'fill-opacity': o }, S.sweep, 'av3-wedge');
-    });
-    el('line', { x1: ctr, y1: ctr, x2: ctr, y2: f1(ctr - R) }, S.sweep, 'av3-beam');
-    const pg = el('g', {}, svg, 'av3-pings');
-    S.pings = pos.map(p => el('circle', { cx: f1(p[0]), cy: f1(p[1]), r: 0 }, pg));
-    const dg = el('g', {}, svg, 'av3-dots');
-    S.dots = pos.map((p, i) => el('circle', { cx: f1(p[0]), cy: f1(p[1]), r: i ? 4.5 : 7 }, dg, i ? 'av3-dot' : 'av3-dot av3-home'));
-    S.rlBoxes = rlBoxes; placeR();
-    S.start = T.map(() => -1e9); draw();
+  let cur = 0;
+  const choose = i => {
+    cur = i; btns.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    mks.forEach((m, j) => m && m.classList.toggle('is-on', j === i));
+    const t = TOWNS[i];
+    card.innerHTML = `<p class="tw1-card-t"></p><p class="tw1-card-d"></p>`; card.firstChild.textContent = t.name; card.lastChild.textContent = fact(t);
+    if (!i) { gsap.set(line, { opacity: 0 }); return; }
+    const [x, y] = pos(t); line.setAttribute('d', `M500 500 L${x.toFixed(1)} ${y.toFixed(1)}`);
+    gsap.set(line, { opacity: 1 }); gsap.fromTo(line, { drawSVG: '0%' }, { drawSVG: '100%', duration: c.motion ? 0.3 : 0, ease: EASE });
   };
-  const placeR = () => {
-    if (!c.wide) { lis.forEach(li => { li.style.left = li.style.top = ''; }); return; }
-    const sizes = measure(lis);
-    const spots = placeLabels(S.pos.map((p, i) => ({ x: p[0], y: p[1], r: i ? 5 : 8, ...sizes[i] })), S.size, S.size, S.c, S.c, S.rlBoxes);
-    lis.forEach((li, i) => { li.style.left = f1(spots[i].x) + 'px'; li.style.top = f1(spots[i].y) + 'px'; li.dataset.side = spots[i].side; });
+  const hover = (i, on) => { if (mks[i]) mks[i].classList.toggle('is-hover', on); };
+  const onClick = e => { const b = e.target.closest('[data-i]'); if (b && root.contains(b)) choose(+b.dataset.i); };
+  const onOver = e => { const b = e.target.closest('[data-i]'); if (b) hover(+b.dataset.i, true); };
+  const onOut = e => { const b = e.target.closest('[data-i]'); if (b) hover(+b.dataset.i, false); };
+  root.addEventListener('click', onClick); root.addEventListener('pointerover', onOver); root.addEventListener('pointerout', onOut); root.addEventListener('focusin', onOver); root.addEventListener('focusout', onOut);
+  gsap.set(line, { opacity: 0 });
+  const done = [() => { root.removeEventListener('click', onClick); root.removeEventListener('pointerover', onOver); root.removeEventListener('pointerout', onOut); root.removeEventListener('focusin', onOver); root.removeEventListener('focusout', onOut); }];
+  const cleanup = () => done.forEach(f => f());
+  if (!c.motion) return cleanup;
+  // the background answers the pointer: a distance ring ripples out from it (at most one every 0.9s, three alive)
+  const pt = svg.createSVGPoint(); let lastR = 0;
+  const onMove = e => {
+    if (e.pointerType !== 'mouse') return; const now = performance.now(); if (now - lastR < 900 || ripples.childElementCount >= 3) return; lastR = now;
+    const m = svg.getScreenCTM(); if (!m) return; pt.x = e.clientX; pt.y = e.clientY; const p = pt.matrixTransform(m.inverse());
+    const ci = el('circle', { cx: p.x.toFixed(0), cy: p.y.toFixed(0), r: 4 }, ripples);
+    gsap.fromTo(ci, { attr: { r: 4 }, opacity: 0.7 }, { attr: { r: 120 }, opacity: 0, duration: 1.4, ease: 'power2.out', onComplete: () => ci.remove() });
   };
-  const draw = () => {
-    if (!S.sweep) return;
-    S.sweep.setAttribute('transform', `rotate(${f1(S.ang)} ${S.c} ${S.c})`);
-    S.pings.forEach((p, i) => {
-      const k = (S.t - S.start[i]) / PING;
-      if (k < 0 || k > 1) { if (p.dataset.on) { p.setAttribute('r', 0); p.style.opacity = 0; delete p.dataset.on; } return; }
-      p.dataset.on = 1; p.setAttribute('r', f1(4 + 18 * k)); p.style.opacity = (bell(k) * 0.9).toFixed(3);
-    });
-  };
-  const ro = new ResizeObserver(() => layout()); ro.observe(box);
-  layout(); fontsReady().then(() => { if (S.alive) layout(true); }); S.alive = true;
-
-  let lp = null;
-  if (c.motion) {
-    const ent = gsap.timeline({ scrollTrigger: onEnter(box, { start: 'top 75%' }) });
-    ent.add(lines(root.querySelector('h2')), 0).add(rise(root.querySelectorAll('.av3-copy > :not(h2)')), 0.35);
-    ent.fromTo(S.rings, { scale: 0.04, autoAlpha: 0, transformOrigin: '50% 50%' }, { scale: 1, autoAlpha: 1, duration: 1.2, ease: EASE, stagger: 0.09 }, 0.1); // S0489 ripple
-    ent.fromTo(svg.querySelectorAll('.av3-ticks, .av3-rl, .av3-n, .av3-disc'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, ease: EASE }, 0.1);
-    // each town appears as the ripple reaches its distance (one group, 500ms spread)
-    const appear = T.map(t => 0.2 + (t.d / 25) * 0.5);
-    T.forEach((t, i) => { ent.fromTo([S.dots[i], lis[i]], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: EASE }, appear[i]); });
-    ent.fromTo(S.sweep, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, ease: EASE }, 0.6);
-    lp = loop(svg, dt => {
-      if (!ent.progress()) return false; // the sweep starts with the entrance
-      const prev = S.ang; S.t += dt; S.ang = (S.ang + dt / PERIOD * 360) % 360;
-      T.forEach((t, i) => { if (!i) return; const b = t.brg, crossed = prev <= S.ang ? b > prev && b <= S.ang : b > prev || b <= S.ang; if (crossed) S.start[i] = S.t; });
-      draw();
-    });
-    ent.eventCallback('onStart', () => lp && lp.wake());
-  } else draw();
-
-  // hover: the label nearest the pointer grows (rects read on enter and on scroll, not per move)
-  let rect = null;
-  const near = i => {
-    if (i === S.near) return;
-    if (S.near >= 0) { lis[S.near].classList.remove('is-near'); S.dots[S.near] && S.dots[S.near].classList.remove('is-near'); }
-    S.near = i;
-    if (i >= 0) { lis[i].classList.add('is-near'); S.dots[i] && S.dots[i].classList.add('is-near'); }
-  };
-  const move = e => {
-    if (e.pointerType !== 'mouse' || !S.pos.length) return;
-    rect = rect || svg.getBoundingClientRect();
-    const k = S.size / rect.width, x = (e.clientX - rect.left) * k, y = (e.clientY - rect.top) * k;
-    let best = -1, bd = 70 * k;
-    S.pos.forEach((p, i) => { const d = Math.hypot(p[0] - x, p[1] - y); if (d < bd) { bd = d; best = i; } });
-    near(best);
-  };
-  const leave = () => { rect = null; near(-1); };
-  const scrolled = () => { rect = null; };
-  if (c.fine) { box.addEventListener('pointermove', move); box.addEventListener('pointerleave', leave); addEventListener('scroll', scrolled, { passive: true }); }
-  return () => {
-    S.alive = false; ro.disconnect(); if (lp) lp.stop(); near(-1);
-    box.removeEventListener('pointermove', move); box.removeEventListener('pointerleave', leave); removeEventListener('scroll', scrolled);
-  };
+  if (c.fine) { svg.addEventListener('pointermove', onMove, { passive: true }); done.push(() => svg.removeEventListener('pointermove', onMove)); }
+  beats(root, [root.querySelector('.tw-h'), root.querySelector('.tw-note'), card, list.children]);
+  gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 80%', once: true } })
+    .fromTo(rings.querySelectorAll('circle'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05 }, 0)
+    .fromTo(marks.querySelectorAll('.mk-h'), { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2)', stagger: 0.015, clearProps: 'transform,opacity' }, 0.15);
+  return cleanup;
 }
 
-export default { 1: routeV, 2: lookupV, 3: radarV };
+// v2 [BANK] Q4 Ragged Edge metric-led cards (STRONG: the card's headline is its metric; power2.out 0.4-0.6s, stagger
+// 0.08-0.1, compressed to F17), with the Hippo doctrine (each town's own facts). Each card leads with the median year its
+// homes were built and carries the real share of homes by decade (⟦S1420⟧: bars from zero, one scale for all cards,
+// direct labels), drawn as stacked shingle courses; decades before 1980 in blue. Sorting re-lays the cards (Flip).
+function cards(root, c) {
+  const ol = root.querySelector('.tw2-cards'), plan = root.querySelector('.tw2-plan'), sorts = [...root.querySelectorAll('.tw2-sb')];
+  const MAX = Math.max(...TOWNS.flatMap(t => t.decades.map(d => d[1])));
+  ol.replaceChildren();
+  const items = TOWNS.map(t => {
+    const li = document.createElement('li'); li.className = 'tw2-card'; li.dataset.c = 'card'; li.dataset.built = t.built; li.dataset.mi = t.mi;
+    li.innerHTML = `<p class="tw2-y num"></p><p class="tw2-yl">median year built</p><p class="tw2-n"></p><p class="tw2-m"></p>`;
+    li.children[0].textContent = t.built; li.children[2].textContent = t.name;
+    li.children[3].textContent = `${t.county} County, ${t.mi ? `${t.mi} mi ${dir(t.brg)}` : 'home'}. ${t.pre1980}% built before 1980.`;
+    const dec = t.decades.slice().reverse(), W = 220, H = 64, bw = W / dec.length, top = dec.reduce((a, d, i) => (d[1] > dec[a][1] ? i : a), 0);
+    const s = el('svg', { class: 'tw2-bars', viewBox: `0 -14 ${W} ${H + 28}`, 'aria-hidden': 'true', focusable: 'false' });
+    dec.forEach(([lab, v], i) => {
+      const h = (v / MAX) * H, g = el('g', { class: 'bar' + (i < 5 ? ' is-old' : '') }, s), x = i * bw + 2;
+      el('rect', { x: x.toFixed(1), y: (H - h).toFixed(1), width: (bw - 4).toFixed(1), height: Math.max(0.5, h).toFixed(1), rx: 1.5 }, g);
+      for (let yy = H - 6; yy > H - h; yy -= 6) el('line', { x1: x, x2: x + bw - 4, y1: yy, y2: yy }, g);
+      if (i === top) { const tx = el('text', { x: (x + (bw - 4) / 2).toFixed(1), y: (H - h - 4).toFixed(1), 'text-anchor': 'middle', class: 'top' }, s); tx.textContent = `${Math.round(v)}%`; }
+    });
+    const l0 = el('text', { x: 2, y: H + 12 }, s); l0.textContent = 'before 1940'; const l1 = el('text', { x: W - 2, y: H + 12, 'text-anchor': 'end' }, s); l1.textContent = '2020+';
+    li.append(s);
+    const sr = document.createElement('p'); sr.className = 'vh'; sr.textContent = 'Share of homes by decade built: ' + t.decades.slice().reverse().map(d => `${d[0]} ${d[1]}%`).join(', ') + '.'; li.append(sr);
+    ol.append(li); return li;
+  });
+  const order = key => items.slice().sort((a, b) => (+a.dataset[key]) - (+b.dataset[key]));
+  const apply = (key, animate) => {
+    const state = animate ? Flip.getState(items) : null;
+    order(key).forEach(li => ol.append(li));
+    sorts.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === key)));
+    if (state) Flip.from(state, { duration: 0.3, ease: EASE, stagger: 0.01 });
+  };
+  apply('built', false);
+  const onSort = e => { const b = e.target.closest('.tw2-sb'); if (b) apply(b.dataset.sort, c.motion); };
+  root.addEventListener('click', onSort);
+  // background: neighbourhood roofs seen from above (hips and gables in plan), faint, drifting with scroll
+  const paint = () => {
+    const W = root.clientWidth, H = root.clientHeight; plan.setAttribute('viewBox', `0 0 ${W} ${H}`); plan.replaceChildren();
+    let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    for (let y = 40; y < H; y += 150) for (let x = (y / 150) % 2 ? 20 : 110; x < W; x += 190) {
+      const w = 90 + rnd() * 50, h = 60 + rnd() * 30, hip = rnd() > 0.5;
+      const d = hip ? `M${x} ${y}h${w}v${h}h${-w}Z M${x} ${y}L${x + h / 2} ${y + h / 2}L${x + w - h / 2} ${y + h / 2}L${x + w} ${y} M${x} ${y + h}L${x + h / 2} ${y + h / 2} M${x + w} ${y + h}L${x + w - h / 2} ${y + h / 2}`
+        : `M${x} ${y}h${w}v${h}h${-w}Z M${x} ${y + h / 2}H${x + w}`;
+      el('path', { class: 'rf', d }, plan);
+    }
+  };
+  paint(); const ro = new ResizeObserver(paint); ro.observe(root);
+  if (c.motion) {
+    beats(root, [root.querySelector('.tw-h'), root.querySelector('.tw-note'), root.querySelector('.tw2-sort')]);
+    ScrollTrigger.batch(items, { start: 'top 88%', once: true, onEnter: b => gsap.fromTo(b, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.04, clearProps: 'transform,opacity,visibility' }) });
+  }
+  return () => { root.removeEventListener('click', onSort); ro.disconnect(); };
+}
+
+// v3 [BANK] ROTTLER town finder (a finder, "135+ locations" counted in the heading, offered twice) with [BANK] West London
+// Roofing's coverage checker (CROWN: instant answer), and ⟦S1453⟧'s zero-results state (confirm the query, offer the next
+// step). Adapted: type or pick a town; the answer gives its real distance, direction, county and median year built; a
+// compass needle swings to the town's bearing, a roofer's tape pulls out to the miles (one inch per mile on its scale), and
+// the weathervane on the ridge behind turns with it. Not on the list: say so and offer the phone.
+const norm = s => s.toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim();
+function finder(root, c) {
+  const input = root.querySelector('#tw3-q'), ans = root.querySelector('.tw3-ans'), chips = root.querySelector('.tw3-chips');
+  const needle = root.querySelector('.tw3-needle'), tape = root.querySelector('.tw3-tape-b'), tk = root.querySelector('.tw3-tape-tk'), lab = root.querySelector('.tw3-tape-l'), arrow = root.querySelector('.tw3-arrow');
+  const ticks = root.querySelector('.tw3-ticks');
+  ticks.replaceChildren(); for (let a = 0; a < 360; a += 15) { const r1 = a % 45 ? 160 : 150, rad = a * Math.PI / 180; el('path', { d: `M${200 + Math.sin(rad) * r1} ${200 - Math.cos(rad) * r1} L${200 + Math.sin(rad) * 170} ${200 - Math.cos(rad) * 170}` }, ticks); }
+  tk.replaceChildren(); for (let m = 0; m <= 25; m++) { const x = 40 + m * 15; el('path', { d: `M${x} 24 V${m % 5 ? 30 : 36}` }, tk); }
+  chips.replaceChildren();
+  TOWNS.forEach((t, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'rx'; b.dataset.i = i; b.setAttribute('aria-pressed', 'false'); b.textContent = t.name; chips.append(b); });
+  const dur = c.motion ? 0.6 : 0;
+  let rot = 0;
+  const point = (t, preview) => {
+    const target = t ? t.brg : 0, delta = ((target - rot) % 360 + 540) % 360 - 180; rot += delta; // shortest way round
+    gsap.to(needle, { rotation: rot, svgOrigin: '200 200', duration: preview ? dur * 0.5 : dur, ease: 'back.out(1.6)', overwrite: 'auto' });
+    const len = t ? t.mi * 15 : 0; gsap.to(tape, { attr: { width: Math.max(0, len) + 30 }, duration: preview ? dur * 0.5 : dur, ease: EASE, overwrite: 'auto' });
+    lab.textContent = t ? (t.mi ? `${t.mi} miles` : 'home') : '';
+    arrow.style.transform = `scaleX(${t && t.mi ? (Math.sin(target * Math.PI / 180) * 0.85 + Math.sign(Math.sin(target * Math.PI / 180) || 1) * 0.15).toFixed(2) : 1})`;
+  };
+  const say = (t, q) => {
+    const T = ans.querySelector('.tw3-ans-t'), D = ans.querySelector('.tw3-ans-d');
+    if (t) { T.textContent = t === HOME ? 'Yes. Springboro is home.' : `Yes. ${t.name} is on our list.`; D.textContent = fact(t); }
+    else { T.textContent = `${q} isn't on our list of 24.`; D.textContent = 'Call Rachel and ask: (937) 746-7377, Monday to Friday, 9 to 5.'; }
+    ans.classList.remove('is-new'); void ans.offsetWidth; ans.classList.add('is-new');
+  };
+  const pick = (i, fromChip) => {
+    const t = TOWNS[i]; [...chips.children].forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    if (fromChip) input.value = t.name;
+    say(t); point(t);
+  };
+  let wait = null;
+  const onInput = () => {
+    clearTimeout(wait); wait = setTimeout(() => {
+      const q = norm(input.value); if (!q) return;
+      const i = TOWNS.findIndex(t => norm(t.name) === q), j = i >= 0 ? i : q.length >= 3 ? TOWNS.findIndex(t => norm(t.name).startsWith(q)) : -1;
+      if (j >= 0) pick(j, false); else if (q.length >= 3) { [...chips.children].forEach(b => b.setAttribute('aria-pressed', 'false')); say(null, input.value.trim()); point(null); }
+    }, 300);
+  };
+  const onSubmit = e => { e.preventDefault(); clearTimeout(wait); onInput(); };
+  const onChip = e => { const b = e.target.closest('.tw3-chips button'); if (b) pick(+b.dataset.i, true); };
+  const onPrev = e => { const b = e.target.closest('.tw3-chips button'); if (b && e.pointerType === 'mouse') point(TOWNS[+b.dataset.i], true); };
+  const onPrevOut = e => { const b = e.target.closest('.tw3-chips button'); if (b && e.pointerType === 'mouse') { const on = chips.querySelector('[aria-pressed="true"]'); point(on ? TOWNS[+on.dataset.i] : null, true); } };
+  input.addEventListener('input', onInput); root.querySelector('.tw3-form').addEventListener('submit', onSubmit);
+  chips.addEventListener('click', onChip); chips.addEventListener('pointerover', onPrev); chips.addEventListener('pointerout', onPrevOut);
+  if (c.motion) beats(root, [root.querySelector('.tw-h'), root.querySelector('.tw3-form'), [ans, chips], root.querySelector('.tw3-dial')]);
+  return () => { clearTimeout(wait); input.removeEventListener('input', onInput); root.querySelector('.tw3-form').removeEventListener('submit', onSubmit); chips.removeEventListener('click', onChip); chips.removeEventListener('pointerover', onPrev); chips.removeEventListener('pointerout', onPrevOut); };
+}
+
+export default { 1: map, 2: cards, 3: finder };

@@ -1,29 +1,31 @@
-// The 24 service towns (the firm's own list, rembrandt-pack.md). Position and distance are computed from the
-// US Census 2023 Gazetteer, measured from the Springboro city centroid (v4 towns.json); nothing here is estimated.
-// mi = straight-line miles from Springboro; brg = compass bearing in degrees. Sorted by distance.
+// The 24 service towns (the firm's own list). Every value is from public data, nothing is estimated:
+// lat/lon: US Census 2023 Gazetteer; mi / brg: straight-line miles and compass bearing from the Springboro city centroid;
+// county: county FIPS; built: median year structure built, ACS 2024 5-year (B25035) via Census Reporter; homes: housing
+// units; pre1980: % built before 1980; decades: % of housing units by decade built, ACS 2020-2024 5-year (B25034).
+export const SOURCE = "US Census 2023 Gazetteer (places, ZCTAs); median year built: ACS 2024 5-year B25035 via Census Reporter; distances computed from the Springboro city centroid; decades of construction: ACS 2020-2024 5-year B25034 via Census Reporter; NWS county zones from county FIPS";
 export const TOWNS = [
-  {"name":"Springboro","lat":39.56223,"lon":-84.2336,"mi":0.0,"brg":0},
-  {"name":"Franklin","lat":39.55495,"lon":-84.29573,"mi":3.3,"brg":261},
-  {"name":"Carlisle","lat":39.57899,"lon":-84.32096,"mi":4.8,"brg":284},
-  {"name":"Miamisburg","lat":39.63094,"lon":-84.27074,"mi":5.1,"brg":337},
-  {"name":"Centerville","lat":39.63433,"lon":-84.14572,"mi":6.8,"brg":43},
-  {"name":"West Carrollton","lat":39.66974,"lon":-84.25549,"mi":7.5,"brg":351},
-  {"name":"Waynesville","lat":39.53195,"lon":-84.09094,"mi":7.9,"brg":105},
-  {"name":"Middletown","lat":39.50295,"lon":-84.36489,"mi":8.1,"brg":240},
-  {"name":"Germantown","lat":39.63246,"lon":-84.36451,"mi":8.5,"brg":305},
-  {"name":"Moraine","lat":39.69752,"lon":-84.24272,"mi":9.4,"brg":357},
-  {"name":"Lebanon","lat":39.42555,"lon":-84.21319,"mi":9.5,"brg":173},
-  {"name":"Bellbrook","lat":39.6384,"lon":-84.08541,"mi":9.5,"brg":56},
-  {"name":"Kettering","lat":39.69599,"lon":-84.15044,"mi":10.2,"brg":26},
-  {"name":"Monroe","lat":39.44599,"lon":-84.36577,"mi":10.7,"brg":221},
-  {"name":"Harveysburg","lat":39.50288,"lon":-83.99056,"mi":13.6,"brg":107},
-  {"name":"Trenton","lat":39.47881,"lon":-84.46637,"mi":13.7,"brg":245},
-  {"name":"Beavercreek","lat":39.73315,"lon":-84.05961,"mi":15.0,"brg":38},
-  {"name":"Mason","lat":39.35171,"lon":-84.30204,"mi":15.0,"brg":194},
-  {"name":"Dayton","lat":39.78474,"lon":-84.19963,"mi":15.5,"brg":7},
-  {"name":"Clarksville","lat":39.40178,"lon":-83.9889,"mi":17.1,"brg":130},
-  {"name":"Xenia","lat":39.68313,"lon":-83.94081,"mi":17.7,"brg":62},
-  {"name":"Fairborn","lat":39.79958,"lon":-84.00848,"mi":20.3,"brg":36},
-  {"name":"Huber Heights","lat":39.85888,"lon":-84.11289,"mi":21.5,"brg":17},
-  {"name":"Yellow Springs","lat":39.79838,"lon":-83.89198,"mi":24.4,"brg":48}
+  {"name":"Springboro","lat":39.56223,"lon":-84.2336,"mi":0.0,"brg":0,"county":"Warren","built":1996,"homes":7185,"pre1980":25,"decades":[["2020+",1.9],["2010s",10.2],["2000s",26.9],["1990s",29.1],["1980s",7.2],["1970s",15.2],["1960s",5.6],["1950s",1.4],["1940s",0.0],["before 1940",2.5]]},
+  {"name":"Franklin","lat":39.55495,"lon":-84.29573,"mi":3.3,"brg":261,"county":"Warren","built":1967,"homes":5032,"pre1980":69,"decades":[["2020+",0.4],["2010s",3.9],["2000s",10.5],["1990s",11.5],["1980s",5.0],["1970s",14.0],["1960s",18.6],["1950s",13.3],["1940s",3.7],["before 1940",19.2]]},
+  {"name":"Carlisle","lat":39.57899,"lon":-84.32096,"mi":4.8,"brg":284,"county":"Warren","built":1978,"homes":2397,"pre1980":55,"decades":[["2020+",3.4],["2010s",14.1],["2000s",10.9],["1990s",6.5],["1980s",10.5],["1970s",22.5],["1960s",20.9],["1950s",8.0],["1940s",1.1],["before 1940",2.0]]},
+  {"name":"Miamisburg","lat":39.63094,"lon":-84.27074,"mi":5.1,"brg":337,"county":"Montgomery","built":1976,"homes":7937,"pre1980":55,"decades":[["2020+",0.8],["2010s",2.0],["2000s",16.8],["1990s",9.6],["1980s",15.3],["1970s",14.6],["1960s",9.9],["1950s",13.4],["1940s",2.3],["before 1940",15.3]]},
+  {"name":"Centerville","lat":39.63433,"lon":-84.14572,"mi":6.8,"brg":43,"county":"Montgomery","built":1977,"homes":12143,"pre1980":57,"decades":[["2020+",1.9],["2010s",4.6],["2000s",8.6],["1990s",14.1],["1980s",13.3],["1970s",29.4],["1960s",18.8],["1950s",6.4],["1940s",1.6],["before 1940",1.2]]},
+  {"name":"West Carrollton","lat":39.66974,"lon":-84.25549,"mi":7.5,"brg":351,"county":"Montgomery","built":1973,"homes":6162,"pre1980":76,"decades":[["2020+",0.0],["2010s",1.4],["2000s",0.5],["1990s",5.0],["1980s",16.8],["1970s",36.1],["1960s",20.8],["1950s",9.6],["1940s",0.7],["before 1940",9.1]]},
+  {"name":"Waynesville","lat":39.53195,"lon":-84.09094,"mi":7.9,"brg":105,"county":"Warren","built":1979,"homes":1113,"pre1980":51,"decades":[["2020+",2.0],["2010s",0.9],["2000s",5.1],["1990s",28.2],["1980s",13.2],["1970s",6.7],["1960s",19.9],["1950s",7.9],["1940s",3.6],["before 1940",12.4]]},
+  {"name":"Middletown","lat":39.50295,"lon":-84.36489,"mi":8.1,"brg":240,"county":"Butler","built":1965,"homes":23046,"pre1980":73,"decades":[["2020+",1.6],["2010s",3.7],["2000s",6.0],["1990s",7.7],["1980s",7.6],["1970s",17.4],["1960s",11.9],["1950s",17.6],["1940s",6.4],["before 1940",20.3]]},
+  {"name":"Germantown","lat":39.63246,"lon":-84.36451,"mi":8.5,"brg":305,"county":"Montgomery","built":1972,"homes":2300,"pre1980":67,"decades":[["2020+",3.0],["2010s",6.4],["2000s",15.1],["1990s",7.3],["1980s",1.6],["1970s",21.3],["1960s",14.1],["1950s",14.3],["1940s",2.3],["before 1940",14.6]]},
+  {"name":"Moraine","lat":39.69752,"lon":-84.24272,"mi":9.4,"brg":357,"county":"Montgomery","built":1979,"homes":3132,"pre1980":52,"decades":[["2020+",2.3],["2010s",7.1],["2000s",3.8],["1990s",15.6],["1980s",19.6],["1970s",12.3],["1960s",3.8],["1950s",17.4],["1940s",12.2],["before 1940",6.0]]},
+  {"name":"Lebanon","lat":39.42555,"lon":-84.21319,"mi":9.5,"brg":173,"county":"Warren","built":1986,"homes":8647,"pre1980":46,"decades":[["2020+",4.1],["2010s",5.0],["2000s",20.3],["1990s",18.3],["1980s",6.7],["1970s",14.5],["1960s",10.0],["1950s",9.9],["1940s",3.0],["before 1940",8.3]]},
+  {"name":"Bellbrook","lat":39.6384,"lon":-84.08541,"mi":9.5,"brg":56,"county":"Greene","built":1971,"homes":3084,"pre1980":59,"decades":[["2020+",0.5],["2010s",6.0],["2000s",8.4],["1990s",9.2],["1980s",17.3],["1970s",9.5],["1960s",26.8],["1950s",18.9],["1940s",0.7],["before 1940",2.5]]},
+  {"name":"Kettering","lat":39.69599,"lon":-84.15044,"mi":10.2,"brg":26,"county":"Montgomery","built":1961,"homes":27191,"pre1980":85,"decades":[["2020+",0.2],["2010s",0.9],["2000s",3.2],["1990s",4.1],["1980s",6.2],["1970s",12.6],["1960s",24.5],["1950s",31.5],["1940s",11.3],["before 1940",5.6]]},
+  {"name":"Monroe","lat":39.44599,"lon":-84.36577,"mi":10.7,"brg":221,"county":"Butler","built":2001,"homes":5391,"pre1980":27,"decades":[["2020+",0.5],["2010s",12.6],["2000s",40.3],["1990s",13.0],["1980s",6.2],["1970s",9.2],["1960s",9.2],["1950s",6.8],["1940s",0.7],["before 1940",1.6]]},
+  {"name":"Harveysburg","lat":39.50288,"lon":-83.99056,"mi":13.6,"brg":107,"county":"Warren","built":1962,"homes":337,"pre1980":55,"decades":[["2020+",1.8],["2010s",5.3],["2000s",13.4],["1990s",14.8],["1980s",10.1],["1970s",2.7],["1960s",2.4],["1950s",18.1],["1940s",0.9],["before 1940",30.6]]},
+  {"name":"Trenton","lat":39.47881,"lon":-84.46637,"mi":13.7,"brg":245,"county":"Butler","built":1992,"homes":4930,"pre1980":40,"decades":[["2020+",3.6],["2010s",2.6],["2000s",22.7],["1990s",25.4],["1980s",5.2],["1970s",11.8],["1960s",14.1],["1950s",7.2],["1940s",2.1],["before 1940",5.3]]},
+  {"name":"Beavercreek","lat":39.73315,"lon":-84.05961,"mi":15.0,"brg":38,"county":"Greene","built":1979,"homes":20352,"pre1980":51,"decades":[["2020+",1.3],["2010s",6.0],["2000s",17.4],["1990s",14.7],["1980s",9.6],["1970s",18.8],["1960s",12.5],["1950s",15.3],["1940s",2.3],["before 1940",2.1]]},
+  {"name":"Mason","lat":39.35171,"lon":-84.30204,"mi":15.0,"brg":194,"county":"Warren","built":1996,"homes":13866,"pre1980":22,"decades":[["2020+",1.1],["2010s",15.5],["2000s",23.1],["1990s",28.8],["1980s",9.8],["1970s",10.5],["1960s",4.6],["1950s",4.2],["1940s",0.8],["before 1940",1.7]]},
+  {"name":"Dayton","lat":39.78474,"lon":-84.19963,"mi":15.5,"brg":7,"county":"Montgomery","built":1951,"homes":70335,"pre1980":85,"decades":[["2020+",0.4],["2010s",3.0],["2000s",3.9],["1990s",3.5],["1980s",3.8],["1970s",9.6],["1960s",11.1],["1950s",16.3],["1940s",11.7],["before 1940",36.7]]},
+  {"name":"Clarksville","lat":39.40178,"lon":-83.9889,"mi":17.1,"brg":130,"county":"Clinton","built":1960,"homes":344,"pre1980":72,"decades":[["2020+",1.2],["2010s",1.7],["2000s",12.2],["1990s",11.0],["1980s",2.3],["1970s",17.4],["1960s",4.1],["1950s",14.8],["1940s",3.5],["before 1940",31.7]]},
+  {"name":"Xenia","lat":39.68313,"lon":-83.94081,"mi":17.7,"brg":62,"county":"Greene","built":1971,"homes":11820,"pre1980":71,"decades":[["2020+",0.6],["2010s",2.0],["2000s",13.2],["1990s",8.2],["1980s",4.6],["1970s",23.0],["1960s",11.5],["1950s",16.5],["1940s",4.1],["before 1940",16.2]]},
+  {"name":"Fairborn","lat":39.79958,"lon":-84.00848,"mi":20.3,"brg":36,"county":"Greene","built":1970,"homes":17063,"pre1980":61,"decades":[["2020+",1.6],["2010s",5.1],["2000s",10.3],["1990s",11.0],["1980s",10.6],["1970s",11.9],["1960s",18.2],["1950s",18.7],["1940s",6.4],["before 1940",6.1]]},
+  {"name":"Huber Heights","lat":39.85888,"lon":-84.11289,"mi":21.5,"brg":17,"county":"Montgomery","built":1976,"homes":18487,"pre1980":62,"decades":[["2020+",2.8],["2010s",10.9],["2000s",6.4],["1990s",5.1],["1980s",12.8],["1970s",27.9],["1960s",22.1],["1950s",10.0],["1940s",1.1],["before 1940",0.9]]},
+  {"name":"Yellow Springs","lat":39.79838,"lon":-83.89198,"mi":24.4,"brg":48,"county":"Greene","built":1961,"homes":2043,"pre1980":74,"decades":[["2020+",0.4],["2010s",3.7],["2000s",8.7],["1990s",3.0],["1980s",9.8],["1970s",8.4],["1960s",17.3],["1950s",24.4],["1940s",4.8],["before 1940",19.5]]},
 ];

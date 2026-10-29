@@ -1,151 +1,112 @@
-/* AREA: v1 Route (a road drawn by scroll over the job-truck photo), v2 Your town (a live lookup), v3 Radar (rings and
- * true bearings). Light fields between the ink how chapter and the blue call chapter: sky, white and mist. */
-.av{position:relative;overflow:clip;color:var(--ink)}
-.av .tlink{color:var(--ink)}
-.av :focus-visible{outline-color:var(--ink)} /* the sun ring is under 3:1 on light fields (WCAG 1.4.11) */
-.av-towns,.av3-bands ul{list-style:none;margin:0;padding:0}
-.av svg text{font-family:"Epilogue",ui-sans-serif,system-ui,sans-serif}
+/* TOWNS (PLAN-V7 §6). Real Census data only (data/towns.js), with the source printed. v1 [BANK] Austin Pro project map
+   (the map is the claim; plot only what is real); v2 [BANK] Q4 Ragged Edge metric-led cards + the Hippo genuinely-local
+   doctrine; v3 [BANK] ROTTLER town finder + West London coverage checker, with a compass and a tape. */
+.tw{position:relative;overflow:clip}
+.tw-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.tw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
+.tw-src{position:relative;max-width:1280px;margin:40px auto 0;padding:0 var(--gutter);font-size:.8125rem;line-height:1.5;color:var(--muted)}
 
-/* ---------- v1 Route: sky field; the photo is a pale duotone under the map (S0650: no labels on the photo) */
-.av1{background:var(--sky)}
-.av1-bg{position:absolute;left:0;right:0;top:0;height:calc(100svh + 180px);background:#b9c8e6;pointer-events:none}
-.av1-bgpd{position:absolute;inset:-3%}
-.av1-bg img{width:100%;height:100%;object-fit:cover;object-position:74% 64%;filter:grayscale(1) contrast(.92) brightness(1.12);mix-blend-mode:multiply}
-.av1-bg::after{content:"";position:absolute;inset:0;background:var(--sky);opacity:.84}
-.av1-svg{display:block;width:100%;overflow:visible}
-.av1-ghost{fill:none;stroke:#93a3c6;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0 7}
-.av1-casing,.av1-road{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 2}
-.av1-casing{stroke:#fff;stroke-width:11}
-.av1-road{stroke:var(--blue);stroke-width:4.5}
-.av1-dot{fill:#fff;stroke:#7d8cae;stroke-width:1.6;transform-box:fill-box;transform-origin:center;transition:fill var(--dur-quick) var(--ease-out),stroke var(--dur-quick) var(--ease-out),transform var(--dur-fast) var(--ease-out)}
-.av1-dot.is-lit{fill:var(--blue);stroke:#fff;stroke-width:2}
-.av1-dot.is-now{transform:scale(1.45)}
-.av1-dot.av1-home{fill:var(--ink);stroke:#fff;stroke-width:3}
-.av1-mk-h{fill:rgb(26 65 153/.18);stroke:rgb(26 65 153/.35);stroke-width:1.5}
-.av1-mk-d{fill:var(--ink);stroke:#fff;stroke-width:3.5}
-.av1-key path{fill:none;stroke:var(--ink);stroke-width:1.5}
-.av1-key text{font-size:13px;font-weight:600;fill:var(--muted);dominant-baseline:middle;transform:translateY(-3px)}
-.av1-home-l{font-size:15px;font-weight:800;fill:var(--ink);paint-order:stroke;stroke:var(--sky);stroke-width:4px;stroke-linejoin:round}
-.av1-now{display:grid;gap:4px;margin:0;pointer-events:none}
-.av1-nn{font-size:clamp(1.5rem,1rem + 1.4vw,2.25rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--blue)}
-.av1-nd{font-size:var(--t-small);font-weight:600;color:var(--muted)}
-.av1-towns li{font-size:var(--t-small);font-weight:600;line-height:1.25;color:var(--muted);transition:color var(--dur-quick) var(--ease-out)}
-.av1-towns li.is-lit{color:var(--ink)}
-.av1-towns li.is-now{color:var(--blue)}
-.av1-towns li:first-child{font-weight:800;color:var(--ink)}
-.av1-end{display:grid;gap:12px;justify-items:start}
-.av1-end .t-lead{max-width:24ch}
+/* ---------- v1: the map is the claim */
+.tw1{--vbg:#f5f7fb;background:#f5f7fb;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:start;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
+.tw1-mapwrap{position:relative;aspect-ratio:1;max-height:82svh;margin-inline:auto;width:100%}
+.tw1-map{width:100%;height:100%;overflow:visible}
+.tw1-rings circle{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:3 6;opacity:.35;vector-effect:non-scaling-stroke}
+.tw1-rings text{font:600 16px/1 "Epilogue",sans-serif;fill:var(--muted)}
+.tw1-ripples circle{fill:none;stroke:var(--chalk);stroke-width:2;vector-effect:non-scaling-stroke}
+.tw1-north path{fill:var(--ink)}
+.tw1-north text{font:800 18px/1 "Epilogue",sans-serif;fill:var(--ink)}
+.tw1-line{fill:none;stroke:var(--sun);stroke-width:4;stroke-linecap:round}
+.tw1-office path{fill:var(--sun);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.tw1-office rect{fill:var(--ink)}
+.mk{cursor:pointer}
+.mk .mk-h{fill:#fff;stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;transition:transform .22s var(--ease-spring),fill .18s var(--ease-x)}
 
-@media (min-width:900px){
-  .av1-mapl{position:absolute;top:0;right:0;z-index:1;width:min(66%,1120px);height:100svh;padding:calc(var(--nav-h) + 64px) var(--gutter) 24px 0}
-  .av1-map{position:relative;width:100%;height:100%}
-  .av1-svg{position:absolute;inset:0;height:100%}
-  .av1-now{position:absolute;left:0;top:0}
-  .av1-towns li{position:absolute;left:0;top:0;white-space:nowrap;padding:1px 5px;border-radius:4px;background:rgb(242 245 251/.9)} /* a cartographic halo: labels always sit on light ground */
-  .av1-towns li:first-child{font-size:1rem}
-  .av1-col{position:relative;z-index:2;width:34%;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
-}
-@media (min-width:900px) and (prefers-reduced-motion:no-preference){
-  .av1{min-height:max(185svh,1320px)}
-  .av1-col{min-height:max(185svh,1320px);padding:46svh 0 20svh var(--gutter)}
-}
-@media (min-width:900px) and (prefers-reduced-motion:reduce){
-  .av1{min-height:max(100svh,760px)}
-  .av1-col{min-height:max(100svh,760px);padding:calc(var(--nav-h) + 72px) 0 72px var(--gutter)}
-  .av1-bg{height:100%}
-}
-@media (prefers-reduced-motion:reduce){.av1-now{display:none}}
+.mk text{font:700 19px/1 "Epilogue",sans-serif;fill:var(--ink);paint-order:stroke;stroke:#f5f7fb;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.mk.is-hover .mk-h{transform:translateY(-6px) scale(1.25)}
+.mk.is-on .mk-h{fill:var(--sun);transform:translateY(-4px) scale(1.4)}
+.tw1-side{display:grid;gap:20px;align-content:start}
+.tw1-card{padding:20px 22px;border-radius:18px;background:var(--ink);color:#fff;min-height:118px}
+.tw1-card-t{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+.tw1-card-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-blue-muted)}
+.tw1-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tw1-list button{position:relative;min-height:40px;padding:0 12px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;font-weight:700;font-size:.875rem;cursor:pointer;transition:background-color .18s var(--ease-x)}
+.tw1-list button .mi{font-weight:600;color:var(--muted);margin-left:6px}
+@media (hover:hover){.tw1-list button:hover{background:var(--sky)}}
+.tw1-list button[aria-pressed="true"]{background:var(--sun)}
+.tw1-list button.is-press{animation:tw-pop .3s var(--ease-spring)}
+@keyframes tw-pop{0%{scale:.92}100%{scale:1}}
+@media (max-width:900px){.tw1-grid{grid-template-columns:1fr}.tw1-mapwrap{max-height:none}}
+@media (max-width:640px){.tw1-list button{min-height:44px}}
 
-@media (max-width:899px){
-  .av1{display:flex;flex-direction:column;padding:calc(var(--nav-h) + 48px) var(--gutter) calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar))}
-  .av1-col{display:contents}
-  .av1 h2{order:1}
-  .av1-mapl{order:2;position:relative;margin-top:28px}
-  .av1-end{order:3;margin-top:36px}
-  .av1-bg{top:auto;bottom:0;height:min(64svh,560px)}
-  .av1-bg::after{opacity:1;background:linear-gradient(var(--sky) 0%,rgb(242 245 251/.86) 38%,rgb(242 245 251/.74) 100%)}
-  .av1-now{margin-bottom:6px;min-height:3.6em}
-  .av1-nn{font-size:1.5rem}
-  .av1-towns{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:18px}
-  .av1-towns li{display:inline-flex;align-items:center;gap:6px;font-size:.9375rem}
-  .av1-towns li::before{content:"";width:8px;height:8px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #7d8cae;background:#fff;transition:background-color var(--dur-quick) var(--ease-out),box-shadow var(--dur-quick) var(--ease-out)}
-  .av1-towns li.is-lit::before{background:var(--blue);box-shadow:none}
-  .av1-towns li:first-child::before{background:var(--ink);box-shadow:none}
-}
+/* ---------- v2: metric-led cards; each carries its own decades chart, bars laid like shingle courses */
+.tw2{--vbg:#fff;background:#fff;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw2-plan{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tw2-plan .rf{fill:none;stroke:var(--ink);stroke-width:1.2;opacity:.07;vector-effect:non-scaling-stroke}
+.tw2-head{position:relative;display:grid;gap:14px;max-width:1280px;margin:0 auto clamp(32px,5vh,56px);padding:0 var(--gutter)}
+.tw2-sort{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tw2-sb{min-height:44px;padding:0 18px;border:2px solid var(--ink);border-radius:999px;background:#fff;font-weight:700;cursor:pointer;transition:background-color .18s var(--ease-x)}
+.tw2-sb[aria-pressed="true"]{background:var(--ink);color:#fff}
+@media (hover:hover){.tw2-sb[aria-pressed="false"]:hover{background:var(--sky)}}
+.tw2-sb.is-press{animation:tw-pop .3s var(--ease-spring)}
+.tw2-cards{position:relative;list-style:none;margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px;max-width:1280px}
+.tw2-card{display:grid;gap:6px;padding:18px 18px 14px;border-radius:16px;background:var(--sky);box-shadow:inset 0 0 0 1px oklch(0.25 0.06 262 / .08)}
+.tw2-y{font-size:clamp(2.2rem,1.8rem + 1.4vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.tw2-yl{font-size:.8125rem;font-weight:600;color:var(--muted)}
+.tw2-n{margin-top:6px;font-size:1.125rem;font-weight:800}
+.tw2-m{font-size:.875rem;color:var(--muted)}
+.tw2-bars{width:100%;height:auto;margin-top:8px;overflow:visible}
+.tw2-bars .bar rect{fill:var(--shingle)}
+.tw2-bars .bar line{stroke:var(--sky);stroke-width:1.2}
+.tw2-bars .bar.is-old rect{fill:var(--blue)}
+.tw2-bars .bar{transform-box:fill-box;transform-origin:50% 100%;transition:transform .25s var(--ease-x)}
+.tw2-bars text{font:600 9px/1 "Epilogue",sans-serif;fill:var(--muted)}
+.tw2-bars .top{font-weight:800;fill:var(--ink)}
+@media (hover:hover){.tw2-card:hover .bar{transform:scaleY(1.12)}}
 
-/* ---------- v2 Your town: white field; the 24 town dots sit behind the sentence as a faint map that answers */
-.av2{background:#fff;min-height:max(100svh,760px);padding:calc(var(--nav-h) + 72px) var(--gutter) calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar))}
-.av2-mapl{position:absolute;top:-4%;bottom:-4%;right:0;width:54%;pointer-events:none}
-.av2-svg{display:block;width:100%;height:100%;overflow:visible}
-.av2-in{position:relative;z-index:1;display:grid;gap:clamp(28px,5vh,56px);max-width:min(100%,60rem)}
-.av2-ask{display:grid;gap:clamp(16px,2.6vh,28px)}
-.av2-q{display:block;font-size:clamp(1.875rem,1rem + 3.2vw,3.75rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;text-wrap:balance}
-.av2-input{font:inherit;font-weight:800;letter-spacing:-.02em;color:var(--blue);caret-color:var(--blue);width:8.6em;max-width:100%;margin:0 .06em;padding:0 .08em .02em;border:0;border-bottom:3px solid var(--ink);border-radius:0;background:transparent;line-height:1.15;vertical-align:baseline;transition:border-color var(--dur-quick) var(--ease-out),box-shadow var(--dur-quick) var(--ease-out)}
-.av2-input::placeholder{color:var(--muted);font-weight:400;opacity:1}
-.av2-input:focus,.av2-input:focus-visible{outline:none;border-bottom-color:var(--blue);box-shadow:0 3px 0 var(--blue)}
-.av2-act{display:grid;justify-items:start;gap:clamp(14px,2.2vh,22px)}
-.av2-ans{max-width:52ch;min-height:1.4em;margin:0;font-size:var(--t-lead);line-height:1.4;text-wrap:pretty}
-.av2-ans strong{font-weight:800}
-.av2-ans[data-state=yes] strong{color:var(--blue)}
-.av2-names{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.3em 1.05em;max-width:44rem;font-size:var(--t-lead);font-weight:600;line-height:1.35}
-.av2-names li{color:var(--ink);padding:0 .14em;margin:0 -.14em;border-radius:4px;text-decoration:underline 2px transparent;text-underline-offset:.2em;transition:color var(--dur-quick) var(--ease-out),background-color var(--dur-quick) var(--ease-out),text-decoration-color var(--dur-quick) var(--ease-out)}
-.av2-names.is-q li{color:#68738f}
-.av2-names.is-q li.is-hit{color:var(--blue);text-decoration-color:currentColor}
-.av2-names li.is-on,.av2-names.is-q li.is-on{background:var(--blue);color:#fff;text-decoration-color:transparent}
-.av2-dot{fill:#c9d6f2;transform-box:fill-box;transform-origin:center;transition:fill var(--dur-quick) var(--ease-out),transform var(--dur-quick) var(--ease-out)}
-.av2-svg.is-q .av2-dot{fill:#e4eaf6}
-.av2-svg.is-q .av2-dot.is-hit,.av2-dot.is-hov{fill:var(--blue)}
-.av2-dot.is-hov{transform:scale(1.6)}
-.av2-dot.is-on,.av2-svg.is-q .av2-dot.is-on{fill:var(--blue);transform:scale(2.2)}
-.av2-dot.av2-home,.av2-svg.is-q .av2-dot.av2-home{fill:var(--ink)}
-.av2-home-l{font-size:14px;font-weight:800;fill:var(--ink)}
-.av2-spokes line{stroke:#e6ebf6;stroke-width:1.2;transition:stroke var(--dur-quick) var(--ease-out)}
-.av2-svg.is-q .av2-spokes line{stroke:#eff2f9}
-.av2-svg.is-q .av2-spokes line.is-hit{stroke:#b4c4e6}
-.av2-spokes line.is-hov,.av2-svg.is-q .av2-spokes line.is-hov{stroke:var(--blue)}
-.av2-link{stroke:var(--blue);stroke-width:2;stroke-linecap:round;stroke-dasharray:1 6;opacity:0;transition:opacity var(--dur-quick) var(--ease-out)}
-.av2-tag{font-size:15px;font-weight:800;fill:var(--blue);opacity:0;transition:opacity var(--dur-quick) var(--ease-out)}
-.av2-svg.has-on .av2-link,.av2-svg.has-on .av2-tag{opacity:1}
-@media (prefers-reduced-motion:reduce){.av2-dot.is-on,.av2-dot.is-hov,.av2-svg.is-q .av2-dot.is-on{transform:none}}
-@media (max-width:899px){
-  .av2{display:flex;flex-direction:column}
-  .av2-mapl{order:2;position:relative;top:auto;bottom:auto;width:100%;aspect-ratio:1/1.05;margin-top:24px}
-}
-@media (max-width:640px){.av2-ans{min-height:2.8em}}
-
-/* ---------- v3 Radar: mist field; rings every 5 miles, towns at true bearings, a sweep that pings them */
-.av3{background:var(--mist);min-height:max(100svh,760px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:40px clamp(24px,4vw,72px);padding:calc(var(--nav-h) + 48px) var(--gutter) clamp(3rem,2rem + 4vw,5rem)}
-.av3-copy{display:grid;gap:24px;justify-items:start;align-self:center}
-.av3-copy .t-lead{max-width:22ch}
-.av3-radar{position:relative;width:100%;max-width:min(80svh,760px);justify-self:center}
-.av3-svg{display:block;width:100%;aspect-ratio:1;height:auto;overflow:visible}
-.av3-bands{margin:0}
-.av3-bands dd{margin:0}
-.av3-disc{fill:#fff}
-.av3-rings circle{fill:none;stroke:rgb(26 65 153/.24);stroke-width:1.2}
-.av3-ticks line{stroke:rgb(26 65 153/.38);stroke-width:1.2}
-.av3-n{font-size:14px;font-weight:800;fill:var(--ink);text-anchor:middle}
-.av3-rl text{font-size:13px;font-weight:600;fill:var(--muted)}
-.av3-wedge{fill:var(--blue)}
-.av3-beam{stroke:var(--blue);stroke-width:1.6;opacity:.6}
-.av3-pings circle{fill:none;stroke:var(--blue);stroke-width:1.6;opacity:0}
-.av3-dot{fill:var(--blue);stroke:var(--sky);stroke-width:2;transform-box:fill-box;transform-origin:center;transition:transform var(--dur-quick) var(--ease-out)}
-.av3-dot.is-near{transform:scale(1.5);transition-duration:var(--dur-fast)}
-.av3-dot.av3-home{fill:var(--ink);stroke:#fff;stroke-width:3}
-.av3-bands li{font-weight:600;color:var(--ink)}
-@media (min-width:900px){
-  .av3-bands dt{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .av3-bands li{position:absolute;left:0;top:0;white-space:nowrap;font-size:var(--t-small);line-height:1.25;padding:1px 3px;transform-origin:0 50%;text-shadow:0 0 2px var(--sky),0 0 5px var(--sky);transition:transform var(--dur-quick) var(--ease-out),color var(--dur-quick) var(--ease-out)}
-  .av3-bands li[data-side=l]{transform-origin:100% 50%}
-  .av3-bands li[data-side=c]{transform-origin:50% 50%}
-  .av3-bands li.is-near{transform:scale(1.32);color:var(--blue);transition-duration:var(--dur-fast)}
-  .av3-bands li[data-i="0"]{font-weight:800;font-size:1rem}
-}
-@media (prefers-reduced-motion:reduce){.av3-bands li.is-near,.av3-dot.is-near{transform:none}}
-@media (max-width:899px){
-  .av3{grid-template-columns:minmax(0,1fr);align-items:start;padding-bottom:calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar))}
-  .av3-radar{max-width:none}
-  .av3-bands{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 16px;margin-top:28px}
-  .av3-bands dt{font-size:var(--t-small);font-weight:700;color:var(--muted);white-space:nowrap;padding-top:.15em}
-  .av3-bands ul{display:flex;flex-wrap:wrap;gap:2px 14px}
-}
+/* ---------- v3: the town finder with a compass that turns to the town, a tape scaled to the miles, and a weathervane */
+.tw3{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw3-vane{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none;opacity:.5}
+.tw3-roof,.tw3-cupola path,.tw3-arrow path{fill:none;stroke:oklch(1 0 0 / .35);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.tw3-arrow{transition:transform .6s var(--ease-x)}
+.tw3-nsew text{font:800 18px/1 "Epilogue",sans-serif;fill:oklch(1 0 0 / .4)}
+.tw3-grid{position:relative;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);align-items:center;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
+.tw3-copy{display:grid;gap:22px}
+.tw3-form{display:grid;gap:8px;max-width:460px}
+.tw3-form label{font-weight:700;color:var(--on-blue-muted)}
+.tw3-field{position:relative}
+.tw3-field input{width:100%;min-height:56px;padding:0 4px;border:0;border-bottom:2px solid oklch(1 0 0 / .5);background:none;color:#fff;font-size:1.5rem;font-weight:700;outline:none}
+.tw3-field input::placeholder{color:oklch(1 0 0 / .45)}
+.tw3-chalk{position:absolute;left:0;bottom:-3px;width:100%;height:8px;pointer-events:none}
+.tw3-chalk path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;clip-path:inset(0 100% 0 0);transition:clip-path .25s var(--ease-x)}
+.tw3-field:focus-within .tw3-chalk path{clip-path:inset(0)}
+.tw3-field input:focus-visible{outline:none}
+.tw3-ans{min-height:96px}
+.tw3-ans-t{font-size:clamp(1.4rem,1rem + 1.4vw,2rem);font-weight:800;line-height:1.15;letter-spacing:-.02em}
+.tw3-ans-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-blue-muted)}
+.tw3-ans.is-new{animation:tw-in .3s var(--ease-x)}
+@keyframes tw-in{from{opacity:0;translate:0 8px}}
+.tw3-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tw3-chips button{min-height:40px;padding:0 12px;border:1.5px solid oklch(1 0 0 / .5);border-radius:999px;background:none;color:#fff;font-weight:700;font-size:.875rem;cursor:pointer;transition:background-color .18s var(--ease-x),border-color .18s var(--ease-x)}
+@media (hover:hover){.tw3-chips button:hover{border-color:var(--sun)}}
+.tw3-chips button[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+.tw3-chips button.is-press{animation:tw-pop .3s var(--ease-spring)}
+@media (max-width:640px){.tw3-chips button{min-height:44px}}
+.tw3-dial{display:grid;gap:16px;justify-items:center}
+.tw3-rose{width:min(100%,420px);height:auto;overflow:visible}
+.tw3-ring{fill:none;stroke:oklch(1 0 0 / .4);stroke-width:2}
+.tw3-ring--in{stroke-dasharray:2 6}
+.tw3-ticks path{stroke:oklch(1 0 0 / .45);stroke-width:2;stroke-linecap:round}
+.tw3-pts path{fill:oklch(1 0 0 / .12);stroke:oklch(1 0 0 / .45);stroke-width:1.5;stroke-linejoin:round}
+.tw3-lt text{font:800 20px/1 "Epilogue",sans-serif;fill:#fff;text-anchor:middle}
+.tw3-needle{transform-origin:200px 200px;transform-box:view-box}
+.tw3-n1{fill:var(--sun);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.tw3-n2{fill:#fff;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.tw3-needle circle{fill:var(--ink);stroke:#fff;stroke-width:3}
+.tw3-tape{width:min(100%,420px);height:auto;overflow:visible}
+.tw3-tape-b{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.tw3-tape-tk path{stroke:var(--ink);stroke-width:1.5}
+.tw3-case{fill:var(--blue);stroke:#fff;stroke-width:2}
+.tw3-tape-l{font:700 14px/1 "Epilogue",sans-serif;fill:var(--on-blue-muted)}
+@media (max-width:900px){.tw3-grid{grid-template-columns:1fr}.tw3-dial{grid-row:1}}
+.tw3 .tw-src{color:var(--on-blue-muted)}
