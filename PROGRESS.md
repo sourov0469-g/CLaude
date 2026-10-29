@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 2 (Reviews) complete → Phase 3 (Work) next.
+- **Phase:** 3 (Work) complete → Phase 4 (Family, How, Towns, Call) next.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -99,3 +99,21 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - V1 reads "$2M liability cover" and "BBB A+ since 2001". §3's verbatim wording is "liability insurance" / "accredited since 2001". Same facts, different words.
   - Rule 4 forbids editing V1, and the owner kept it as-is, so it is left exactly as kept and listed in the final report for the owner's decision.
 - The QA scripts now live in `rembrandt/v5/qa/scripts/` (README there).
+
+### Phase 3: Work ×3 (upgraded)
+- **Before/after audit:** the only photos labelled before or after are the ba2 pair (V1 tiles 1–2, V2 two items, V3 the blinds and its reduced-motion pair). The V7 asset `ba1-after` was a single after-only photo whose name suggested a pair; it is renamed `blue-house` in `build/images.py` and every `data-img` (the stale `assets/img/ba1-after.webp` removed). The build has 0 `ba1-after` and 0 `ba1-before`.
+- **V1 Tape loop:**
+  - R18 rebuilt: the pause bars turn through 90° into the walls of a level vial; the bubble drifts while the strip runs; once pressed (held) it centres and stays. Replaces the V7 "bars draw", which repeated other pause buttons.
+  - R16 press now applies to tiles too: clicking a tile snaps the tape hook, as the arrows do.
+  - bg: a lit band follows the pointer along the tape (fine pointers, motion allowed), and the ticks under it turn blue and thicken. Its strength falls off with distance from the tape.
+- **V2 Gable push grid:** verified only. R19, R20 and the hip-pattern pointer depth were already in place.
+- **V3 Course blinds:** bg: nail heads along the starter strip (22 wide, 12 on phones). Within 150 px of the pointer they lift up to 9 px, grow and tip toward it.
+- **Evidence:**
+  - `qa/scripts/secqa.mjs work` at 1440, 375 and 1440 reduced: 9/9 "switcher swaps only work; overflow 0; errors 0".
+  - Screenshots: `qa/work{1,2,3}-{1440,375,1440-rm}.jpg`, reviewed.
+  - `qa/scripts/workint.mjs`: R16–R21 hover and press, the tape glow and the nail lift all respond (numbers in TRACEABILITY.md). Errors 0.
+  - Facts in the whole file: 353-9711 ×0, 24/7 ×0.
+- **Fixed during Phase 3 (kept visible):**
+  - The nail lift first read NaN: SVG elements have no `offsetLeft`. The nails' centres are now measured with getBoundingClientRect when the pointer enters the section.
+  - The first `workint` run hovered controls that were off screen (negative top). The script now scrolls each target into view before it hovers it.
+- **Note (owner tooling):** at 1440 the fixed Helper picker can sit over V1's arrow buttons when the foot of the section is at the very bottom of the viewport. One more scroll clears it. The picker is owner tooling, outside the registry; Phase 5 re-checks the companion's chrome.

@@ -44,11 +44,23 @@ function tiles(root, c) {
     if (b === pause) { held = !held; apply(); return; }
     if (!b && !t) return;
     held = true; apply();
-    if (b) { root.classList.remove('is-step'); void root.offsetWidth; root.classList.add('is-step'); loop.closestIndex(true); Number(b.dataset.dir) > 0 ? loop.next(step) : loop.previous(step); }
+    root.classList.remove('is-step'); void root.offsetWidth; root.classList.add('is-step'); // R16/R17 press: the tape hook snaps
+    if (b) { loop.closestIndex(true); Number(b.dataset.dir) > 0 ? loop.next(step) : loop.previous(step); }
     else loop.toIndex(items.indexOf(t), { duration: c.motion ? 0.8 : 0, ease: 'power1.inOut' });
   };
   root.addEventListener('click', onClick);
-  return () => { dead = true; if (loop) loop.destroy(); root.removeEventListener('click', onClick); };
+  // bg: a lit band follows the pointer along the tape, strongest when the pointer is close to it
+  const tape = root.querySelector('.wv1-tape'), glow = root.querySelector('.wv1-glow-m');
+  let onMove = null, onLeave = null;
+  if (c.fine && c.motion) {
+    const gx = gsap.quickTo(glow, 'x', { duration: 0.3, ease: 'power3.out' });
+    const go = gsap.quickTo(glow, 'opacity', { duration: 0.25, ease: 'power2.out' });
+    onMove = e => { if (e.pointerType !== 'mouse') return; const r = tape.getBoundingClientRect(), d = Math.abs(e.clientY - (r.top + r.height / 2)); gx(e.clientX - r.left - 120); go(Math.max(0, 1 - d / 260)); };
+    onLeave = () => go(0);
+    gsap.set(glow, { opacity: 0 });
+    root.addEventListener('pointermove', onMove); root.addEventListener('pointerleave', onLeave);
+  }
+  return () => { dead = true; if (loop) loop.destroy(); root.removeEventListener('click', onClick); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } };
 }
 
 // v2 [BANK] Q157 Push Animation on Grid Items (Codrops, demo 1; all three demo scripts read in the deep read): the
@@ -165,7 +177,24 @@ function blinds(root, c) {
   };
   const box = root.querySelector('.wv3-labels');
   box.addEventListener('pointerover', onOver); box.addEventListener('pointerout', onOut); box.addEventListener('focusin', onOver); box.addEventListener('focusout', onOut); box.addEventListener('click', onClick);
-  return () => { off(); box.removeEventListener('pointerover', onOver); box.removeEventListener('pointerout', onOut); box.removeEventListener('focusin', onOver); box.removeEventListener('focusout', onOut); box.removeEventListener('click', onClick); };
+  // bg: nail heads along the starter strip; within 150px of the pointer they lift off the strip and tip toward it
+  const row = root.querySelector('.wv3-nailrow'), N = c.wide ? 22 : 12;
+  row.replaceChildren(...Array.from({ length: N }, () => { const n = document.createElementNS(NS, 'svg'); n.setAttribute('class', 'wv3-nail'); n.setAttribute('viewBox', '-6 -6 12 12'); n.innerHTML = '<circle class="wv3-nail-h" r="4.6"/><path class="wv3-nail-g" d="M-2.6 -1.2 A2.8 2.8 0 0 1 -.6 -2.8"/>'; return n; }));
+  let onMove = null, onLeave = null;
+  if (c.fine) {
+    const nails = [...row.children].map(n => ({ n, y: gsap.quickTo(n, 'y', { duration: 0.3, ease: 'power3.out' }), r: gsap.quickTo(n, 'rotation', { duration: 0.3, ease: 'power3.out' }), s: gsap.quickTo(n, 'scale', { duration: 0.3, ease: 'power3.out' }) }));
+    let at = null; // each nail's centre x from the row's left edge (lifting and tipping about its centre never moves it)
+    const measure = () => { const l = row.getBoundingClientRect().left; at = nails.map(o => { const r = o.n.getBoundingClientRect(); return r.left + r.width / 2 - l; }); };
+    onMove = e => {
+      if (e.pointerType !== 'mouse') return;
+      if (!at) measure();
+      const rr = row.getBoundingClientRect(), cy = rr.top + rr.height / 2;
+      nails.forEach((o, i) => { const dx = e.clientX - rr.left - at[i], k = Math.max(0, 1 - Math.hypot(dx, e.clientY - cy) / 150) ** 2; o.y(-9 * k); o.s(1 + 0.35 * k); o.r(Math.max(-1, Math.min(1, dx / 60)) * 24 * k); });
+    };
+    onLeave = () => { at = null; nails.forEach(o => { o.y(0); o.s(1); o.r(0); }); };
+    root.addEventListener('pointermove', onMove); root.addEventListener('pointerleave', onLeave);
+  }
+  return () => { off(); row.replaceChildren(); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } box.removeEventListener('pointerover', onOver); box.removeEventListener('pointerout', onOut); box.removeEventListener('focusin', onOver); box.removeEventListener('focusout', onOut); box.removeEventListener('click', onClick); };
 }
 
 export default { 1: tiles, 2: push, 3: blinds };

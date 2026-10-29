@@ -14,9 +14,9 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 | 4 | Reviews (`proof`) | V1 Constellation | kept, pixel-untouched | YES (source hashes + pixel diff vs e685bee) |
 | 5 | Reviews (`proof`) | V2 | upgraded | YES (Phase 2 evidence) |
 | 6 | Reviews (`proof`) | V3 | rebuilt | YES (Phase 2 evidence) |
-| 7 | Work (`work`) | V1 | upgraded | NO |
-| 8 | Work (`work`) | V2 | upgraded | NO |
-| 9 | Work (`work`) | V3 | upgraded | NO |
+| 7 | Work (`work`) | V1 | upgraded | YES (Phase 3 evidence in PROGRESS.md) |
+| 8 | Work (`work`) | V2 | upgraded | YES (Phase 3 evidence in PROGRESS.md) |
+| 9 | Work (`work`) | V3 | upgraded | YES (Phase 3 evidence in PROGRESS.md) |
 | 10 | Family (`family`) | V1 | upgraded | NO |
 | 11 | Family (`family`) | V2 | upgraded | NO |
 | 12 | Family (`family`) | V3 | upgraded | NO |

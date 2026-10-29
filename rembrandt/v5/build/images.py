@@ -9,7 +9,7 @@ out.mkdir(exist_ok=True)
 JOBS = {  # name: (source, max width, quality). F18 / S1166 (page max 1500 KB): V7 caps the long edge at 1600 (hero photos);
 # gate trim: qualities lowered 4-8 points (PSNR -0.5 to -0.9 dB, checked at 1:1 on the roofs) to bring the page under 1500 KB
     # and 1100 (the rest), q62-66; every photo still reads sharp at its largest rendered size (checked at 1440 and 2x 390)
-    'ba1-after': ('ba1-after.png', 1280, 50),
+    'blue-house': ('ba1-after.png', 1280, 50),
     'tudor': ('tudor.jpg', 1600, 52),
     'job-charcoal': ('job-charcoal.png', 1100, 56),
     'job-truck': ('job-truck.png', 1100, 56),
