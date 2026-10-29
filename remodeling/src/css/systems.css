@@ -10,10 +10,27 @@
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .28));
 }
 .buddy.is-on { opacity: 1; }
+/* the pointer tip: replaces the system arrow while the companion is on (fine pointers, motion on, a buddy chosen) */
+.ptip { position: fixed; left: 0; top: 0; z-index: 95; width: 40px; height: 40px; margin: -20px 0 0 -20px; pointer-events: none; opacity: 0; color: #77b3b8; will-change: transform; }
+.ptip.is-on { opacity: 1; }
+.ptip svg { display: block; overflow: visible; max-width: none; transition: transform 120ms var(--ease-out); }
+.ptip.is-down svg { transform: scale(.78); }
+.ptip .pt-g > * { opacity: 0; transform: scale(.5); transform-box: fill-box; transform-origin: center; transition: opacity 140ms var(--ease-out), transform 160ms var(--ease-out); }
+.ptip .pt-g > .pt-nib { transform-origin: 0 0; transform-box: view-box; }
+.ptip:not([data-state]) .pt-nib, .ptip[data-state="none"] .pt-nib,
+.ptip[data-state="link"] .pt-nib, .ptip[data-state="link"] .pt-ul,
+.ptip[data-state="button"] .pt-ring, .ptip[data-state="image"] .pt-cross, .ptip[data-state="heading"] .pt-rule,
+.ptip[data-state="card"] .pt-frame, .ptip[data-state="drag"] .pt-drag { opacity: 1; transform: none; }
+.ptip[data-state="button"] .pt-ring { animation: pt-pulse 1.2s ease-in-out infinite; }
+@keyframes pt-pulse { 50% { transform: scale(1.18); } }
+html.has-buddy, html.has-buddy * { cursor: none !important; }
+html.has-buddy :is(input:not([type="range"]):not([type="radio"]):not([type="checkbox"]), textarea, [contenteditable="true"]) { cursor: text !important; }
+html.has-buddy select { cursor: default !important; }
+@media (prefers-reduced-motion: reduce) { .ptip { display: none; } }
 .buddy svg { display: block; overflow: visible; max-width: none; }
-.buddysw { display: none; }
+.settings .buddysw { display: none; }
 @media (hover: hover) and (pointer: fine) {
-  .buddysw { display: block; }
+  .settings .buddysw { display: grid; }
   .buddysw__in { display: flex; gap: 4px; }
   .buddysw button {
     width: 44px; height: 40px; padding: 0; display: grid; place-items: center;
@@ -24,8 +41,8 @@
   .buddysw button:hover { opacity: 1; }
   .buddysw button[aria-checked="true"] { background: #77b3b8; color: #0B1418; opacity: 1; box-shadow: none; }
 }
-@media (prefers-reduced-motion: reduce) { .buddysw { display: none; } }
-[data-motion="off"] .buddysw { display: none; }
+@media (prefers-reduced-motion: reduce) { .settings .buddysw { display: none; } }
+[data-motion="off"] .settings .buddysw { display: none; }
 
 /* ---------- button reactions: the drawn tools sit round the button; the button never moves ---------- */
 :where(.has-rx) { position: relative; overflow: visible; isolation: isolate; }   /* zero specificity: a component that positions itself (skip link, sticky bars) keeps its own position */
