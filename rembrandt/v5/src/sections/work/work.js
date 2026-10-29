@@ -63,12 +63,13 @@ function tiles(root, c) {
   return () => { dead = true; if (loop) loop.destroy(); root.removeEventListener('click', onClick); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } };
 }
 
-// v2 [BANK] Q157 Push Animation on Grid Items (Codrops, demo 1; all three demo scripts read in the deep read): the
-// clicked photo's image moves into the inner area; each other item is classified against the clicked rect (bottom
-// above its top: north; top below its bottom: south; else right of it: east, left: west) and only that row or column
-// class toggles to the edge; Flip.from replays everything (duration 0.9, ease expo, scale true, prune true). Click
-// again, the close button or Esc returns the collage. Adapted: a caption and a close button replace the heading while
-// open; focus moves to Close and back to the photo; reduced motion jumps without the flight.
+// v2 [BANK] Q157 Push Animation on Grid Items (Codrops, demo 1; all three demo scripts read in the deep read; P80
+// exact parameters): the layout is the animation data. The clicked photo's image moves into the inner area; the other
+// items are pushed to the edges; Flip.from replays everything (duration 0.9, ease expo, scale true, prune true).
+// v2 audit adaptation: six real jobs frame the title as a dense gallery wall (no empty cell), so the push is expressed
+// on the grid tracks: opening switches the tracks (CSS .is-open) so the frame squeezes to thin edges around the opened
+// photo. Caption and Close sit on the photo; focus moves to Close and back; Esc, Close or a click on the photo closes;
+// reduced motion jumps without the flight.
 function push(root, c) {
   const grid = root.querySelector('.wv2-grid'), full = root.querySelector('.wv2-full'), items = [...grid.querySelectorAll('.wv2-item')];
   const closed = root.querySelector('.wv2-closed'), open = root.querySelector('.wv2-open'), cap = root.querySelector('.wv2-cap'), closeBtn = root.querySelector('.wv2-close');
@@ -82,21 +83,15 @@ function push(root, c) {
   const onOut = e => { const it = e.target.closest('.wv2-item'); if (it && (!e.relatedTarget || !it.contains(e.relatedTarget))) roofCap(it, false); };
   grid.addEventListener('pointerover', onOver); grid.addEventListener('pointerout', onOut); grid.addEventListener('focusin', onOver); grid.addEventListener('focusout', onOut);
   let current = null, busy = null;
-  const DIRS = ['pos-north', 'pos-south', 'pos-west', 'pos-east'];
   const flip = state => {
     if (busy) busy.progress(1);
     busy = Flip.from(state, { duration: c.motion ? 0.9 : 0, ease: 'expo', scale: true, prune: true, onComplete: () => { busy = null; } });
   };
   function show(item) {
     gsap.to(item.querySelectorAll('.wv2-gc'), { yPercent: -60, opacity: 0, duration: c.motion ? 0.25 : 0, ease: 'power2.out', onComplete: () => { gsap.set(item.querySelectorAll('.wv2-gc'), { clearProps: 'all' }); roofCap(item, false); } }); // the roof lifts off
-    const pic = item.querySelector('img'), r = item.getBoundingClientRect();
+    const pic = item.querySelector('img');
     const state = Flip.getState([...items, pic]);
     full.append(pic); item.style.zIndex = 99; current = item;
-    for (const other of items) {
-      if (other === item) continue;
-      const o = other.getBoundingClientRect();
-      other.classList.add(o.bottom < r.top ? 'pos-north' : o.top > r.bottom ? 'pos-south' : o.left > r.right ? 'pos-east' : 'pos-west');
-    }
     root.classList.add('is-open'); full.setAttribute('aria-hidden', 'false');
     cap.textContent = item.dataset.cap; closed.hidden = true; open.hidden = false;
     flip(state);
@@ -106,7 +101,7 @@ function push(root, c) {
     if (!current) return;
     const item = current, pic = full.querySelector('img');
     const state = Flip.getState([...items, pic]);
-    item.append(pic); items.forEach(o => o.classList.remove(...DIRS));
+    item.append(pic);
     root.classList.remove('is-open'); full.setAttribute('aria-hidden', 'true');
     closed.hidden = false; open.hidden = true; current = null;
     flip(state);

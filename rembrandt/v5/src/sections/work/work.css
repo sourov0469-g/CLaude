@@ -24,33 +24,38 @@
 html[data-motion="reduced"] .wv1-pause{display:none}
 @keyframes wv-in{from{opacity:0;translate:0 6px}}
 
-/* v2 Q157: a 5 x 5 collage (the demo runs 7 x 7 with many more photos; six real jobs need fewer cells) where the layout is the animation data. Opening one photo moves its image into the inner
-   area (2 / 2 / -2 / -2); every other item changes only its row or column to an edge; Flip plays the difference. */
-.wv2{--cols:4;--rows:4}
-.wv2-head{min-height:calc(var(--t-h2) + 72px);align-content:start}
-.wv2-closed{display:grid;gap:12px}
-.wv2-open{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+/* v2 Q157 (v2 audit): the layout is the animation data. The six jobs frame the title as a dense gallery wall (no empty cell);
+   opening one moves its image into the centre and changes the grid tracks so the frame is pushed to thin edges; Flip plays
+   the difference. Desktop 4 x 3 (wide tiles top and bottom, tall tiles at the sides), phone 2 x 5. */
+.wv2-grid{position:relative;display:grid;gap:12px;padding:0 var(--gutter);height:min(86svh,860px);min-height:560px;
+  grid-template-columns:1fr 1.15fr 1.15fr 1fr;grid-template-rows:1fr 1.5fr 1fr}
+.wv2.is-open .wv2-grid{grid-template-columns:.42fr 1.6fr 1.6fr .42fr;grid-template-rows:.36fr 2.4fr .36fr}
+.wv2-item{position:relative;padding:0;border:0;background:none;overflow:hidden;cursor:pointer;min-height:0}
+.wv2-item.wa{grid-area:1 / 1 / 2 / 3}.wv2-item.wb{grid-area:1 / 3 / 2 / 5}.wv2-item.we{grid-area:2 / 1 / 3 / 2}
+.wv2-item.wf{grid-area:2 / 4 / 3 / 5}.wv2-item.wc{grid-area:3 / 1 / 4 / 3}.wv2-item.wd{grid-area:3 / 3 / 4 / 5}
+.wv2-item img,.wv2-full img{width:100%;height:100%;object-fit:cover;display:block}
+.wv2-item:focus-visible{outline-offset:2px}
+.wv2-closed{grid-area:2 / 2 / 3 / 4;display:grid;align-content:center;justify-items:center;gap:14px;padding:clamp(16px,3vw,40px);text-align:center;z-index:1}
+.wv2-closed .wv-note{max-width:30ch}
+.wv2-full{grid-area:2 / 2 / 3 / 4;position:relative;z-index:5;pointer-events:none;overflow:hidden}
+.wv2.is-open .wv2-full{pointer-events:auto;cursor:pointer}
+.wv2-full img{position:absolute;inset:0}
+.wv2-open{grid-area:2 / 2 / 3 / 4;align-self:end;z-index:6;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+  margin:0;padding:16px;background:linear-gradient(transparent,rgba(17,24,48,.72));pointer-events:none}
+.wv2-open>*{pointer-events:auto}
 .wv2-open[hidden],.wv2-closed[hidden]{display:none}
-.wv2-cap{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.wv2-cap{color:#fff;font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.02em}
 .wv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;
   transition:background-color var(--dur-quick) var(--ease-std)}
 .wv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 @media (hover:hover){.wv2-close:hover{background:var(--mist)}}
-.wv2-grid{position:relative;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));grid-template-rows:repeat(var(--rows),minmax(0,1fr));gap:12px;
-  height:min(86svh,880px);min-height:520px;padding:0 var(--gutter)}
-.wv2-item{grid-column:var(--c);grid-row:var(--r);position:relative;padding:0;border:0;background:none;overflow:hidden;cursor:pointer}
-.wv2-item img,.wv2-full img{width:100%;height:100%;object-fit:cover;display:block}
-.wv2-item:focus-visible{outline-offset:2px}
-.wv2-item.pos-north{grid-row:1}.wv2-item.pos-south{grid-row:var(--rows)}
-.wv2-item.pos-west{grid-column:1}.wv2-item.pos-east{grid-column:var(--cols)}
-.wv2-full{grid-area:2 / 2 / -2 / -2;position:relative;z-index:5;pointer-events:none}
-.wv2.is-open .wv2-full{pointer-events:auto;cursor:pointer}
-.wv2-full img{position:absolute;inset:0}
 @media (max-width:640px){
-  .wv2{--cols:3;--rows:4}
-  .wv2-item{grid-column:var(--mc);grid-row:var(--mr)}
-  .wv2-full{grid-area:2 / 1 / -2 / -1}
-  .wv2-grid{gap:8px;height:auto;min-height:0;aspect-ratio:3/4}
+  .wv2-grid{gap:8px;height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:40vw 46vw 38vw 46vw 40vw}
+  .wv2.is-open .wv2-grid{grid-template-columns:1fr 1fr;grid-template-rows:14vw 14vw 154vw 14vw 14vw}
+  .wv2-item.wa{grid-area:1 / 1 / 2 / 3}.wv2-item.we{grid-area:2 / 1 / 3 / 2}.wv2-item.wf{grid-area:2 / 2 / 3 / 3}
+  .wv2-item.wc{grid-area:4 / 1 / 5 / 2}.wv2-item.wd{grid-area:4 / 2 / 5 / 3}.wv2-item.wb{grid-area:5 / 1 / 6 / 3}
+  .wv2-closed,.wv2-full,.wv2-open{grid-area:3 / 1 / 4 / 3}
+  .wv2-closed{padding:24px 8px}
 }
 
 /* v3 Q38: thirty horizontal slits open in a scrubbed stagger, crisp edges; the labels sit outside the frame and switch at
