@@ -601,45 +601,63 @@ def colour1():
 </div>'''
 
 
+def ink_on(h):
+    """text colour that reads on a swatch (relative luminance)"""
+    r, g, b_ = (int(h[i:i + 2], 16) / 255 for i in (1, 3, 5))
+    return '#161616' if 0.2126 * r + 0.7152 * g + 0.0722 * b_ > 0.5 else '#FFFFFF'
+
+
 def colour2():
-    chips = ''
-    for n, c, h in SW[:9] + [COLORPLUS[i] for i in (0, 2, 4, 10, 12, 16)]:
-        code = c if c != 'ColorPlus' else 'James Hardie ColorPlus'
-        chips += f'<li><button class="chip-paint" type="button" aria-pressed="false" data-hex="{h}" data-name="{e(n)}" data-code="{e(code)}" style="--c:{h}"><i aria-hidden="true"></i><span>{e(n)}</span></button></li>'
+    """builder-brief R30 comparison table (Other vs Us, JS 0; Stronghold's live comparison block) adapted to the firm's
+    two published finish systems; each column carries its own published swatches"""
+    sw = ''.join(f'<button class="cmp-sw" type="button" aria-pressed="false" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="{e(c)}" style="--c:{h}" aria-label="{e(n)}, {e(c)}"></button>' for n, c, h in SW)
+    cp = ''.join(f'<button class="cmp-sw" type="button" aria-pressed="false" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="ColorPlus" style="--c:{h}" aria-label="{e(n)}, James Hardie ColorPlus"></button>' for n, c, h in COLORPLUS)
+    rows = [('How it is finished', 'Painted on site, after the boards go up', 'Baked on at the factory'),
+            ('Colours', '1,700+ Sherwin-Williams colours', '17 colours for Austin'),
+            ('Matching', 'Free colour matching', '-'),
+            ('Trim', '-', 'Arctic White trim'),
+            ('Finish life', '-', '15+ years, as the firm publishes it'),
+            ('On Austin Pro jobs', 'The usual finish. Painting was part of 297 of 415 priced siding jobs', '-')]
+    body = ''.join(f'<tr><th scope="row">{k}</th><td>{x}</td><td>{y}</td></tr>' for k, x, y in rows)
+    n0, c0, h0 = SW[10]
+    n1, c1, h1 = COLORPLUS[11]
     return f'''<div class="v colour-2" data-tone="ground2">
-  <div class="c2-grid">
-    <div class="c2-house">{studio_frame('<span class="c2-drop" aria-hidden="true"></span>')}
-      <div class="c2-zbtns" role="group" aria-label="Paint the selected colour on"><button type="button" data-zone-btn="body">Siding</button><button type="button" data-zone-btn="gable">Gable</button><button type="button" data-zone-btn="trim">Trim</button></div>
-    </div>
-    <div class="c2-side">
-      <h2 class="h2x" data-split>Drag a colour onto the house</h2>
-      <p class="c2-how" aria-live="polite">Drag a chip onto the siding, gable or trim. Or tap a chip, then tap the house.</p>
-      <ul class="chips-paint" aria-label="Paint colours">{chips}</ul>
-      <button class="tlink c2-reset" type="button">Back to the real colours</button>
-    </div>
-  </div>
+  <div class="cmp-head"><h2 class="h2x" data-split>Paint on site, or ColorPlus</h2>
+    <p>Every Hardie board gets one of two finishes. Here they are side by side, from what the firm publishes. Paint or ColorPlus is one of the six things that move the price.</p></div>
+  <table class="cmp">
+    <caption class="sr-only">Painted on site compared with James Hardie ColorPlus</caption>
+    <thead><tr><td></td>
+      <th scope="col" class="cmp-col" style="--c:{h0};--ink:{ink_on(h0)}"><span class="cmp-sys">Painted on site</span><span class="cmp-now"><b data-now>{e(n0)}</b><span data-code>{e(c0)}</span></span></th>
+      <th scope="col" class="cmp-col" style="--c:{h1};--ink:{ink_on(h1)}"><span class="cmp-sys">James Hardie ColorPlus</span><span class="cmp-now"><b data-now>{e(n1)}</b><span data-code>ColorPlus</span></span></th></tr>
+      <tr class="cmp-sws"><td></td><td><div class="cmp-set" role="group" aria-label="Twelve published Sherwin-Williams colours">{sw}</div></td><td><div class="cmp-set" role="group" aria-label="Seventeen ColorPlus colours for Austin">{cp}</div></td></tr></thead>
+    <tbody>{body}</tbody>
+  </table>
+  <p class="fine">Swatches use the colour values the firm publishes. A dash means the firm publishes nothing on that point.</p>
 </div>'''
 
 
 def colour3():
-    n = len(SW)
-    segs = ''
-    for k, (nm, c, h) in enumerate(SW):
-        segs += f'<path class="dial-seg" data-k="{k}" style="--c:{h}" d=""/>'
-    data = json.dumps([dict(n=nm, c=c, h=h) for nm, c, h in SW]).replace('</', '<\\/')
+    """[BANK] Grid-to-Fullscreen (Codrops) = builder-brief R10 DOM port: bounds measured at click, the tile grows to
+    fill the stage, close reverses; phones get fade and scale"""
+    tiles = ''
+    for n, c, h in SW + COLORPLUS:
+        sysn = 'Sherwin-Williams' if c != 'ColorPlus' else 'James Hardie ColorPlus'
+        code = c if c != 'ColorPlus' else 'ColorPlus'
+        tiles += (f'<li><button class="cb-t" type="button" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="{e(code)}" data-sys="{e(sysn)}" '
+                  f'style="--c:{h};--ink:{ink_on(h)}" aria-label="{e(n)}, {e(code)}. Open"><span class="cb-n">{e(n)}</span><span class="cb-c">{e(code)}</span></button></li>')
     return f'''<div class="v colour-3" data-tone="night">
-  <div class="c3-grid">
-    <div class="c3-stage">{studio_frame()}</div>
-    <div class="c3-side">
-      <h2 class="h2x" data-split>Turn the house a new colour</h2>
-      <div class="dial" role="slider" tabindex="0" data-cur="drag" aria-label="Siding colour dial" aria-valuemin="1" aria-valuemax="{n}" aria-valuenow="11" aria-valuetext="In the Navy, SW 9178">
-        <svg class="dial-svg" viewBox="-110 -110 220 220" aria-hidden="true"><g class="dial-rot">{segs}<circle class="dial-hub" r="46"/></g><path class="dial-mark" d="M0 -108L-7 -96H7Z"/></svg>
-        <p class="dial-now"><b data-dial-name>In the Navy</b><span data-dial-code>SW 9178</span></p>
-      </div>
-      <p class="fine">The twelve Sherwin-Williams colours the firm publishes, on the job's own photo.</p>
+  <div class="cb-head"><h2 class="h2x" data-split>The colour book</h2>
+    <p>All 29 colours the firm publishes for Hardie siding: twelve Sherwin-Williams paints and the seventeen ColorPlus colours for Austin. Open one to see it big.</p></div>
+  <div class="cb-stage">
+    <ul class="cb-grid">{tiles}</ul>
+    <div class="cb-sheet" role="dialog" aria-modal="false" aria-labelledby="cb-name" tabindex="-1" hidden>
+      <p class="cb-sys" data-cb-sys></p>
+      <h3 class="cb-big" id="cb-name" data-cb-name></h3>
+      <p class="cb-meta num"><span data-cb-code></span><span data-cb-hex></span></p>
+      <p class="cb-note" data-cb-note></p>
+      <button class="btn btn-glass cb-close" type="button">Back to all 29</button>
     </div>
   </div>
-  <script type="application/json" class="dial-data">{data}</script>
 </div>'''
 
 
@@ -898,7 +916,7 @@ SECTIONS = [
     ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
     ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
     ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Built for Texas', 'To the inch']),
-    ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Drag paint', 'Dial']),
+    ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Paint or ColorPlus', 'Colour book']),
     ('near', 'Near you', [near1, near2, near3], ['Survey', 'Towns', 'Radius']),
     ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'Names']),
     ('money', 'Money', [money1, money2, money3], ['Amount', 'Budget', 'Receipt']),

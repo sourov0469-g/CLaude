@@ -669,30 +669,6 @@
     function reset() { Object.values(zones).forEach(z => { z.classList.remove('is-painted'); if (G) G.set(z, { clearProps: 'clipPath' }); }); Object.keys(state).forEach(k => delete state[k]); }
     return { paint, reset, state, zones };
   }
-  /* which painted zone lies under a point: alpha of the traced masks, trim over gable over siding */
-  function zoneSampler(frame) {
-    const masks = {};
-    $$('.zone', frame).forEach(z => {
-      const url = getComputedStyle(z).maskImage || getComputedStyle(z).webkitMaskImage || '';
-      const m = url.match(/url\(["']?(.*?)["']?\)/); if (!m) return;
-      const im = new Image(); im.src = m[1];
-      masks[z.dataset.zone] = { im, cx: null };
-    });
-    return (x, y) => {
-      const rc = frame.getBoundingClientRect();
-      const u = (x - rc.left) / rc.width, v = (y - rc.top) / rc.height;
-      if (u < 0 || v < 0 || u > 1 || v > 1) return null;
-      for (const z of ['trim', 'gable', 'body']) {
-        const M = masks[z]; if (!M || !M.im.complete || !M.im.naturalWidth) continue;
-        if (!M.cx) { const c = d.createElement('canvas'); c.width = M.im.naturalWidth; c.height = M.im.naturalHeight; const cx = c.getContext('2d', { willReadFrequently: true }); cx.drawImage(M.im, 0, 0); M.cx = cx; }
-        const px = M.cx.getImageData(Math.floor(u * (M.im.naturalWidth - 1)), Math.floor(v * (M.im.naturalHeight - 1)), 1, 1).data;
-        if (px[3] > 110) return z;
-      }
-      return null;
-    };
-  }
-  const ZNAME = { body: 'siding', gable: 'gable', trim: 'trim' };
-
   V.colour1 = (r, b) => {
     const frame = $('.st-frame', r), S = Studio(frame), now = $('.c1-now', r);
     let part = 'body';
@@ -710,88 +686,57 @@
     if (motionOK()) G.from(frame, { clipPath: 'inset(8% 6% 8% 6%)', duration: 1.1, ease: ease.io, scrollTrigger: { trigger: frame, start: 'top 80%', once: true } });
   };
 
+  /* COLOUR 2: R30 comparison table (Other vs Us) adapted to the firm's two finish systems. Each column's swatches
+     recolour its own header band; text colour is chosen per swatch for contrast. Static and complete without JS. */
   V.colour2 = (r, b) => {
-    const frame = $('.st-frame', r), S = Studio(frame), house = $('.c2-house', r), how = $('.c2-how', r), zb = $$('[data-zone-btn]', r);
-    const at = zoneSampler(frame);
-    let sel = null;
-    const select = chip => {
-      $$('.chip-paint', r).forEach(c => c.setAttribute('aria-pressed', c === chip));
-      sel = chip; zb.forEach(x => { x.disabled = !chip; });
-      how.textContent = chip ? `${chip.dataset.name} picked. Tap the siding, gable or trim, or use the buttons under the photo.` : 'Drag a chip onto the siding, gable or trim. Or tap a chip, then tap the house.';
-    };
-    zb.forEach(x => { x.disabled = true; b.on(x, 'click', () => { if (sel) { S.paint(x.dataset.zoneBtn, sel.dataset.hex); how.textContent = `${sel.dataset.name} on the ${ZNAME[x.dataset.zoneBtn]}.`; } }); });
-    const drop = (chip, x, y) => {
-      const z = at(x, y);
-      if (!z) { how.textContent = 'That spot is not siding, gable or trim. Try the wall.'; return false; }
-      const rc = frame.getBoundingClientRect();
-      S.paint(z, chip.dataset.hex, { x: x - rc.left, y: y - rc.top });
-      how.textContent = `${chip.dataset.name} on the ${ZNAME[z]}.`;
-      return true;
-    };
-    b.on(frame, 'click', e => { if (sel) drop(sel, e.clientX, e.clientY); });
-    $$('.chip-paint', r).forEach(chip => {
-      let ghost = null, sx = 0, sy = 0, dragging = false, pid = null;
-      b.on(chip, 'pointerdown', e => { if (e.button > 0) return; sx = e.clientX; sy = e.clientY; pid = e.pointerId; dragging = false; chip.setPointerCapture(pid); });
-      b.on(chip, 'pointermove', e => {
-        if (e.pointerId !== pid) return;
-        if (!dragging && Math.hypot(e.clientX - sx, e.clientY - sy) > 6) {
-          dragging = true; ghost = d.createElement('span'); ghost.className = 'c2-ghost'; ghost.style.background = chip.dataset.hex; d.body.appendChild(ghost);
-          if (motionOK()) G.from(ghost, { scale: 0.6, duration: 0.2, ease: ease.out });
-        }
-        if (dragging) {
-          ghost.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-          house.classList.toggle('is-over', !!at(e.clientX, e.clientY));
-        }
-      });
-      const end = e => {
-        if (e.pointerId !== pid) return;
-        pid = null; house.classList.remove('is-over');
-        if (dragging) {
-          const ok = e.type === 'pointerup' && drop(chip, e.clientX, e.clientY);
-          const g = ghost; ghost = null;
-          if (motionOK() && g) G.to(g, { scale: ok ? 1.6 : 0.4, autoAlpha: 0, duration: 0.3, ease: ease.out, onComplete: () => g.remove() }); else if (g) g.remove();
-          chip.dataset.dragged = '1'; setTimeout(() => { delete chip.dataset.dragged; }, 50);
-        }
-        dragging = false;
-      };
-      b.on(chip, 'pointerup', end); b.on(chip, 'pointercancel', end);
-      b.on(chip, 'click', () => { if (chip.dataset.dragged) return; select(sel === chip ? null : chip); });
-      b.add(() => { if (ghost) ghost.remove(); });
+    $$('.cmp-set', r).forEach((set, k) => {
+      const col = $$('.cmp-col', r)[k], now = $('[data-now]', col), code = $('[data-code]', col), sws = $$('.cmp-sw', set);
+      sws.forEach(sw => b.on(sw, 'click', () => {
+        sws.forEach(x => x.setAttribute('aria-pressed', x === sw));
+        col.style.setProperty('--c', sw.dataset.hex); col.style.setProperty('--ink', sw.dataset.ink);
+        now.textContent = sw.dataset.name; code.textContent = sw.dataset.code;
+      }));
     });
-    b.on($('.c2-reset', r), 'click', () => { S.reset(); select(null); });
+    if (motionOK()) G.from($$('.cmp tbody tr', r), { y: 14, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.cmp', r), 'top 82%') });
   };
 
-  /* COLOUR 3: turn a dial (Draggable rotation with Inertia, snapping to the 12 published Sherwin-Williams colours,
-     S0184); the house repaints, the cursor carries the colour; arrows turn it one stop. */
+  /* COLOUR 3: Grid-to-Fullscreen (Codrops) as builder-brief R10's DOM port: the tile's bounds are measured at click
+     and the sheet grows out of them to fill the stage (clip-path inset, 0.5 s power3.inOut), its words arriving
+     once it lands; Back or Esc reverses into the same tile. Phones get the recipe's fade and scale. */
   V.colour3 = (r, b) => {
-    const frame = $('.st-frame', r), S = Studio(frame), dial = $('.dial', r), rot = $('.dial-rot', dial), segs = $$('.dial-seg', dial);
-    const C = JSON.parse($('.dial-data', r).textContent), nm = $('[data-dial-name]', r), cd = $('[data-dial-code]', r), n = C.length, step = 360 / n;
-    const arc = (a0, a1, r0, r1) => { const p = (a, rr) => [Math.sin(a * Math.PI / 180) * rr, -Math.cos(a * Math.PI / 180) * rr].map(v => v.toFixed(2)).join(' '); return `M${p(a0, r1)}A${r1} ${r1} 0 0 1 ${p(a1, r1)}L${p(a1, r0)}A${r0} ${r0} 0 0 0 ${p(a0, r0)}Z`; };
-    segs.forEach((p, k) => p.setAttribute('d', arc(k * step - step / 2 + 1.2, k * step + step / 2 - 1.2, 58, 102)));
-    let idx = -1;
-    const apply = (k, paint = true) => {
-      k = ((k % n) + n) % n; if (k === idx) return; idx = k;
-      const c = C[k];
-      if (paint) { S.paint('body', c.h); S.paint('gable', c.h); }
-      nm.textContent = c.n; cd.textContent = c.c;
-      dial.setAttribute('aria-valuenow', k + 1); dial.setAttribute('aria-valuetext', `${c.n}, ${c.c}`);
-      segs.forEach((s, j) => s.classList.toggle('on', j === k));
-      if (window.APFX) window.APFX.setPaint(c.h);
+    const stage = $('.cb-stage', r), sheet = $('.cb-sheet', r), tiles = $$('.cb-t', r), close = $('.cb-close', sheet);
+    const f = k => $(`[data-cb-${k}]`, sheet), words = $$('.cb-sys, .cb-big, .cb-meta, .cb-note, .cb-close', sheet);
+    let from = null, tw = null;
+    const box = t => { const g = stage.getBoundingClientRect(), q = t.getBoundingClientRect(); return `inset(${q.top - g.top}px ${g.right - q.right}px ${g.bottom - q.bottom}px ${q.left - g.left}px round 10px)`; };
+    const open = t => {
+      from = t;
+      sheet.style.setProperty('--c', t.dataset.hex); sheet.style.setProperty('--ink', t.dataset.ink);
+      f('sys').textContent = t.dataset.sys; f('name').textContent = t.dataset.name; f('code').textContent = t.dataset.code; f('hex').textContent = t.dataset.hex;
+      f('note').textContent = t.dataset.sys === 'Sherwin-Williams' ? 'Painted on site, with free colour matching.' : 'Baked on at the factory, with Arctic White trim.';
+      sheet.hidden = false;
+      sheet.focus({ preventScroll: true });   // the sheet itself, before any tween hides it or its words
+      if (tw) tw.kill();
+      if (motionOK()) {
+        tw = mqDesk.matches
+          ? G.timeline().fromTo(sheet, { clipPath: box(t) }, { clipPath: 'inset(0px 0px 0px 0px round 20px)', duration: 0.5, ease: 'power3.inOut' })
+              .fromTo(words, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: ease.out, stagger: 0.05 }, '-=0.12')
+          : G.fromTo(sheet, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: ease.out });
+      }
     };
-    const angle = () => +G.getProperty(rot, 'rotation') || 0;
-    const kOf = a => Math.round(-a / step);
-    const turn = (k, anim) => { if (anim && motionOK()) G.to(rot, { rotation: -k * step, duration: 0.45, ease: ease.out, svgOrigin: '0 0', onUpdate: () => apply(kOf(angle())) }); else { G.set(rot, { rotation: -k * step, svgOrigin: '0 0' }); apply(k); } };
-    G.set(rot, { rotation: -10 * step, svgOrigin: '0 0' });
-    apply(10, false); nm.textContent = 'The real job'; cd.textContent = 'Turn the dial';
-    if (window.Draggable) {
-      const dr = window.Draggable.create(rot, { type: 'rotation', inertia: !!window.InertiaPlugin && motionOK(), snap: v => Math.round(v / step) * step,
-        onDrag() { apply(kOf(this.rotation)); }, onThrowUpdate() { apply(kOf(this.rotation)); } })[0];
-      b.add(() => dr.kill());
-    }
-    b.on(dial, 'keydown', e => {
-      const m = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 };
-      if (e.key in m) { e.preventDefault(); turn(kOf(angle()) + m[e.key], true); }
-    });
+    const shut = () => {
+      if (sheet.hidden) return;
+      const done = () => { sheet.hidden = true; G.set(sheet, { clearProps: 'clipPath,opacity,visibility,transform' }); if (from) from.focus({ preventScroll: true }); };
+      if (tw) tw.kill();
+      if (!motionOK()) { done(); return; }
+      tw = mqDesk.matches && from
+        ? G.timeline({ onComplete: done }).to(words, { autoAlpha: 0, duration: 0.15 }).to(sheet, { clipPath: box(from), duration: 0.45, ease: 'power3.inOut' })
+        : G.to(sheet, { autoAlpha: 0, scale: 0.96, duration: 0.2, onComplete: done });
+    };
+    tiles.forEach(t => b.on(t, 'click', () => open(t)));
+    b.on(close, 'click', shut);
+    b.on(sheet, 'keydown', e => { if (e.key === 'Escape') shut(); });
+    b.add(() => { if (tw) tw.kill(); });
+    if (motionOK()) G.from(tiles, { y: 16, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: { each: 0.015, grid: 'auto', from: 'start' }, scrollTrigger: once(stage, 'top 85%') });
   };
 
   /* NEAR YOU: shared map + finder */
