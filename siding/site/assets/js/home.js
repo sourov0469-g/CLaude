@@ -741,37 +741,85 @@
       const shape1 = how.x != null ? `circle(150% at ${how.x}px ${how.y}px)` : 'inset(0% 0% 0% 0%)';
       if (!z.classList.contains('is-painted')) {
         p0.style.setProperty('--c', hex); z.classList.add('is-painted');
-        if (anim) { G.killTweensOf(z); G.fromTo(z, { clipPath: shape0 }, { clipPath: shape1, duration: 0.7, ease: ease.io, onComplete: () => G.set(z, { clearProps: 'clipPath' }) }); }
+        if (anim) { G.killTweensOf(z); G.fromTo(z, { clipPath: shape0 }, { clipPath: shape1, duration: 0.3, ease: ease.io, onComplete: () => G.set(z, { clearProps: 'clipPath' }) }); }
         return;
       }
       if (!anim) { p0.style.setProperty('--c', hex); return; }
       G.killTweensOf(p1);
       p1.style.setProperty('--c', hex);
-      G.fromTo(p1, { clipPath: shape0 }, { clipPath: shape1, duration: 0.6, ease: ease.io, onComplete: () => { p0.style.setProperty('--c', hex); G.set(p1, { clipPath: 'inset(0% 100% 0% 0%)' }); } });
+      G.fromTo(p1, { clipPath: shape0 }, { clipPath: shape1, duration: 0.3, ease: ease.io, onComplete: () => { p0.style.setProperty('--c', hex); G.set(p1, { clipPath: 'inset(0% 100% 0% 0%)' }); } });
     }
     function reset() { Object.values(zones).forEach(z => { z.classList.remove('is-painted'); if (G) G.set(z, { clearProps: 'clipPath' }); }); Object.keys(state).forEach(k => delete state[k]); }
     return { paint, reset, state, zones };
   }
   const ZNAME = { body: 'siding', gable: 'gable', trim: 'trim' };
+  /* COLOUR 1: the portfolio plan's flagship (Site 6): see your house in a published colour, then the published band,
+     before any contact capture (R36 + R24 in one flow) + [BANK] 531 BLK (zones re-fill in the same frame). Default
+     is the firm's own job photo with its traced zones (Studio). "My house" loads a local photo into a canvas; the
+     visitor brushes where the walls are and the picked colour lands as a colour blend with a light multiply, so the
+     photo keeps its own light. The file is read with an object URL and never leaves the device. */
   V.colour1 = (r, b) => {
-    // v4 fan deck: the picked colour on the front chip with its two neighbours each side in the same range (PLAN C1)
-    const fanFill = sw => { const list = sw ? $$('.sw', sw.parentElement) : $$('.dock:not([hidden]) .sw', r); const k = sw ? list.indexOf(sw) : 2; $$('.fc-c', r).forEach(c => { const o = list[(k + +c.dataset.fc - 2 + list.length * 2) % list.length]; if (o) c.style.setProperty('--fc', o.dataset.hex); }); };
-    fanFill(null);
-    b.on(r, 'click', e => { const sw = e.target.closest && e.target.closest('.dock .sw'); if (sw) fanFill(sw); });
-    const frame = $('.st-frame', r), S = Studio(frame), now = $('.c1-now', r);
-    let part = 'body';
-    radios($('.seg:not(.seg-set)', r), b, it => { part = it.dataset.part; });
-    const docks = $$('.dock', r);
-    radios($('.seg-set', r), b, it => { docks.forEach(dk => { dk.hidden = dk.dataset.setList !== it.dataset.set; }); });
-    docks.forEach(dk => {
-      radios(dk, b, it => { S.paint(part, it.dataset.hex); now.innerHTML = `<b>${esc(it.dataset.name)}</b> <span>${esc(it.dataset.code)} on the ${ZNAME[part]}</span>`; });
-      if (mqFine.matches && motionOK()) {
-        const sws = $$('.sw', dk);
-        b.on(dk, 'pointermove', e => sws.forEach(s => { const rc = s.getBoundingClientRect(); const dist = Math.abs(e.clientX - (rc.left + rc.width / 2)); G.to(s, { scale: 1 + 0.28 * Math.max(0, 1 - dist / 110), duration: 0.18, ease: ease.out, overwrite: 'auto' }); }));
-        b.on(dk, 'pointerleave', () => G.to(sws, { scale: 1, duration: 0.24, ease: ease.out }));
-      }
+    const frame = $('.st-frame', r), S = Studio(frame), o = k => $(`[data-c1="${k}"]`, r);
+    const mine = $('.c1t-mine', r), cv = $('.c1t-cv', r), file = $('.c1t-file', r), empty = $('.c1t-empty', r), brushBar = $('.c1t-brush', r), parts = $('.c1t-parts', r);
+    const chips = $('.c1t-chips', r);
+    let part = 'body', pick = null, src = 'job';
+    const say = () => {
+      if (!pick) return;
+      o('name').textContent = pick.dataset.name;
+      o('code').textContent = `${pick.dataset.code}${src === 'job' ? ` on the ${ZNAME[part]}` : ' on your walls'}`;
+    };
+    /* my photo: one photo canvas, one mask the brush writes, one tint layer rebuilt per frame */
+    let img = null, W = 0, H = 0, raf = 0, last = null;
+    const ctx = cv.getContext('2d'), mask = d.createElement('canvas'), mctx = mask.getContext('2d'), tint = d.createElement('canvas'), tctx = tint.getContext('2d');
+    const render = () => {
+      raf = 0; if (!img) return;
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1; ctx.drawImage(img, 0, 0, W, H);
+      if (!pick) return;
+      tctx.globalCompositeOperation = 'source-over'; tctx.clearRect(0, 0, W, H); tctx.fillStyle = pick.dataset.hex; tctx.fillRect(0, 0, W, H);
+      tctx.globalCompositeOperation = 'destination-in'; tctx.drawImage(mask, 0, 0);
+      ctx.globalCompositeOperation = 'color'; ctx.drawImage(tint, 0, 0);
+      ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.35; ctx.drawImage(tint, 0, 0);
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    };
+    const queue = () => { if (!raf) raf = requestAnimationFrame(render); };
+    b.add(() => cancelAnimationFrame(raf));
+    const load = f => {
+      if (!f || !/^image\//.test(f.type)) return;
+      const url = URL.createObjectURL(f), im = new Image();
+      im.onload = () => {
+        URL.revokeObjectURL(url);
+        W = Math.min(1400, im.naturalWidth); H = Math.round(W * im.naturalHeight / im.naturalWidth);
+        [cv, mask, tint].forEach(c => { c.width = W; c.height = H; });
+        img = im; mctx.clearRect(0, 0, W, H);
+        empty.hidden = true; cv.hidden = false; brushBar.hidden = false;
+        if (!pick) { const first = $('.sw', chips); first.click(); }
+        queue(); say();
+      };
+      im.onerror = () => { URL.revokeObjectURL(url); o('code').textContent = 'That file could not be read as a photo.'; };
+      im.src = url;
+    };
+    b.on(file, 'change', () => load(file.files[0]));
+    const at = e => { const rc = cv.getBoundingClientRect(); return [(e.clientX - rc.left) / rc.width * W, (e.clientY - rc.top) / rc.height * H]; };
+    const dab = (p, q) => {
+      mctx.strokeStyle = mctx.fillStyle = '#fff'; mctx.lineCap = 'round'; mctx.lineWidth = W * 0.06;
+      mctx.beginPath(); if (q) { mctx.moveTo(q[0], q[1]); mctx.lineTo(p[0], p[1]); mctx.stroke(); } else { mctx.arc(p[0], p[1], W * 0.03, 0, Math.PI * 2); mctx.fill(); }
+      queue();
+    };
+    b.on(cv, 'pointerdown', e => { if (!img) return; cv.setPointerCapture(e.pointerId); last = at(e); dab(last); });
+    b.on(cv, 'pointermove', e => { if (!last) return; const p = at(e); dab(p, last); last = p; });
+    const up = () => { last = null; };
+    b.on(cv, 'pointerup', up); b.on(cv, 'pointercancel', up);
+    b.on(o('all'), 'click', () => { mctx.fillStyle = '#fff'; mctx.fillRect(0, 0, W, H); queue(); });
+    b.on(o('clear'), 'click', () => { mctx.clearRect(0, 0, W, H); queue(); });
+    b.on(o('other'), 'click', () => file.click());
+    radios($('.c1t-src', r), b, it => {
+      src = it.dataset.src;
+      frame.hidden = src !== 'job'; mine.hidden = src === 'job'; parts.hidden = src !== 'job';
+      if (src === 'mine') { brushBar.hidden = !img; cv.hidden = !img; empty.hidden = !!img; } else brushBar.hidden = true;
+      say();
     });
-    if (motionOK()) G.from(frame, { clipPath: 'inset(8% 6% 8% 6%)', duration: 1.1, ease: ease.io, scrollTrigger: { trigger: frame, start: 'top 80%', once: true } });
+    radios(parts, b, it => { part = it.dataset.part; say(); });
+    radios(chips, b, it => { pick = it; if (src === 'job') S.paint(part, it.dataset.hex); else queue(); say(); }, '.sw');
   };
 
   /* COLOUR 2: R30 comparison table (Other vs Us) adapted to the firm's two finish systems. Each column's swatches

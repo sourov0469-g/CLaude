@@ -667,41 +667,59 @@ def studio_frame(extra=''):
     </div>'''
 
 
-def swatches(cls='sw', with_names=False):
-    out = ''
-    for n, c, h in SW:
-        nm = f'<span>{e(n)}</span>' if with_names else ''
-        out += f'<button class="{cls}" type="button" role="radio" aria-checked="false" data-hex="{h}" data-name="{e(n)}" data-code="{e(c)}" style="--c:{h}" aria-label="{e(n)}, {e(c)}"><i aria-hidden="true"></i>{nm}</button>'
-    return out
+LEVERS = ['Wall area and how many stories', "What's under the old siding (rot, sheathing)", 'The whole house or a few walls',
+          'Trim, soffit and fascia', 'Paint or ColorPlus', 'Profile and details']   # the six levers the firm's cost guide names
 
 
-def cplus(cls='sw', with_names=False):
-    out = ''
-    for n, c, h in COLORPLUS:
-        nm = f'<span>{e(n)}</span>' if with_names else ''
-        out += f'<button class="{cls}" type="button" role="radio" aria-checked="false" data-hex="{h}" data-name="{e(n)}" data-code="James Hardie ColorPlus" style="--c:{h}" aria-label="{e(n)}, James Hardie ColorPlus"><i aria-hidden="true"></i>{nm}</button>'
-    return out
-
-
-def parts_seg(pref):
-    return f'''<div class="seg" role="radiogroup" aria-label="Part of the house">
-      <button type="button" role="radio" aria-checked="true" data-part="body">Siding</button><button type="button" role="radio" aria-checked="false" data-part="gable">Gable</button><button type="button" role="radio" aria-checked="false" data-part="trim">Trim</button></div>'''
+def c1_chips():
+    """all 29 published colours in one radio group, Sherwin-Williams then ColorPlus"""
+    def chip(n, c, h):
+        return (f'<button class="sw" type="button" role="radio" aria-checked="false" data-hex="{h}" data-name="{e(n)}" data-code="{e(c)}" '
+                f'style="--c:{h}" aria-label="{e(n)}, {e(c)}"><i aria-hidden="true"></i></button>')
+    sw = ''.join(chip(n, c, h) for n, c, h in SW)
+    cp = ''.join(chip(n, 'James Hardie ColorPlus', h) for n, _c, h in COLORPLUS)
+    return (f'<div class="c1t-chips" role="radiogroup" aria-label="Published colours">'
+            f'<div class="c1t-set" role="group" aria-label="Sherwin-Williams, painted on site"><p class="c1t-sl" aria-hidden="true">Sherwin-Williams, painted on site</p><div class="c1t-row">{sw}</div></div>'
+            f'<div class="c1t-set" role="group" aria-label="ColorPlus, baked on"><p class="c1t-sl" aria-hidden="true">James Hardie ColorPlus, baked on</p><div class="c1t-row">{cp}</div></div></div>')
 
 
 def colour1():
+    """portfolio-site-plan Site 6 FLAGSHIP (instant pricing + visualisation in ONE flow, R36 + R24 fused) + [BANK] 531
+    BLK (zones re-fill in the same frame) + builder brief R36 colour customiser. See your house in a published colour,
+    then the published band, before any contact capture. Default: the firm's own job photo with its traced zones.
+    "Use my photo": a local file that never leaves the device, brushed where the wall is."""
+    t = TBY['siding']
+    lev = ''.join(f'<li>{e(x)}</li>' for x in LEVERS)
     return f'''<div class="v colour-1" data-tone="ground">
-  <div class="c1-head"><h2 class="h2x" data-split>Repaint a real Austin house</h2>
-    <p class="c1-now" aria-live="polite"><b data-now-name>The real job.</b> <span data-now-code>Pick a part, then a colour.</span></p></div>
-  <div class="c1-wrap">{studio_frame()}
-    <div class="dock-wrap">
-      <svg class="c1-fan" viewBox="0 0 120 74" aria-hidden="true" focusable="false"><g class="fc" style="--k:-2"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="0"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:2"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="4"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:-1"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="1"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:1"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="3"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:0"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="2"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><circle class="fc-rv" cx="60" cy="56" r="3"/></svg>
-      {parts_seg('c1')}
-      <div class="seg seg-set" role="radiogroup" aria-label="Paint range"><button type="button" role="radio" aria-checked="true" data-set="sw">Sherwin-Williams</button><button type="button" role="radio" aria-checked="false" data-set="cp">ColorPlus</button></div>
-      <div class="dock" role="radiogroup" aria-label="Sherwin-Williams colours" data-set-list="sw">{swatches('sw')}</div>
-      <div class="dock" role="radiogroup" aria-label="James Hardie ColorPlus colours" data-set-list="cp" hidden>{cplus('sw')}</div>
+  <div class="c1t-head"><h2 class="h2x" data-split>Try it on your house</h2>
+    <p class="c1t-now" aria-live="polite"><b data-c1="name">The finished Rob Roy job.</b> <span data-c1="code">Pick a part, then a colour.</span></p></div>
+  <div class="c1t-grid">
+    <div class="c1t-stage">
+      <div class="c1t-src seg" role="radiogroup" aria-label="Photo"><button type="button" role="radio" aria-checked="true" data-src="job">Our job photo</button><button type="button" role="radio" aria-checked="false" data-src="mine">My house</button></div>
+      <div class="c1t-view" data-view="job">{studio_frame()}
+        <div class="c1t-mine" hidden>
+          <canvas class="c1t-cv" hidden aria-label="Your photo with the colour brushed on" role="img"></canvas>
+          <div class="c1t-empty"><svg class="c1t-house" viewBox="0 0 120 80" aria-hidden="true" focusable="false"><path d="M8 40L60 8L112 40M18 34V74H102V34"/><path class="c1t-lap" d="M18 44H102M18 52H102M18 60H102M18 68H102"/><path d="M30 46H46V64H30ZM74 46H90V64H74ZM54 52H66V74H54Z"/></svg>
+            <label class="btn btn-ink c1t-pick">Choose a photo of your house<input class="c1t-file sr-only" type="file" accept="image/*"></label>
+            <p>Front-on and in daylight works best. Your photo stays on this device; nothing is uploaded.</p></div>
+        </div>
+      </div>
+      <div class="c1t-tools">
+        <div class="seg c1t-parts" role="radiogroup" aria-label="Part of the house"><button type="button" role="radio" aria-checked="true" data-part="body">Siding</button><button type="button" role="radio" aria-checked="false" data-part="gable">Gable</button><button type="button" role="radio" aria-checked="false" data-part="trim">Trim</button></div>
+        <div class="c1t-brush" hidden><p class="c1t-tip">Brush over the walls with a finger or the mouse.</p><button class="tlink" type="button" data-c1="all">Tint the whole photo</button><button class="tlink" type="button" data-c1="clear">Clear the brush</button><button class="tlink" type="button" data-c1="other">Another photo</button></div>
+        {c1_chips()}
+      </div>
     </div>
+    <aside class="c1t-ans" aria-label="What siding costs">
+      <p class="c1t-k">Then, what it costs</p>
+      <p class="c1t-med"><span>Median Austin Pro siding job, from {t['n']} priced jobs</span><b class="num">{med(t)}</b></p>
+      <p class="c1t-mid">Half of them landed between ${t['lo']}k and ${t['hi']}k, materials and labour, before discounts and tax.</p>
+      <p class="c1t-lk">Six things move the price</p>
+      <ol class="c1t-lev">{lev}</ol>
+      <div class="c1t-cta">{btn_book('btn btn-red c1t-book', 'Book a free siding inspection', 'Siding')}<a class="tlink" href="{TEL}">Call {PHONE}</a></div>
+    </aside>
   </div>
-  <p class="fine">A colour preview on the job's own photo, using colours the firm publishes. Real paint reads differently in Texas sun.</p>
+  <p class="fine">A colour preview using colours the firm publishes. Real paint reads differently in Texas sun; the inspection brings physical samples.</p>
 </div>'''
 
 

@@ -204,3 +204,11 @@ Final verdicts and verification evidence are appended below as each section pass
 **Work — all three KEPT, re-verified 29 Oct 2026.** `sect.js work` PASS ×9; screenshots `work1–3`. One defect fixed in Work 1, the signature interactive: arrow keys pressed during the 1.3 s opening sweep were overwritten by it. A key press now ends the sweep, as a drag already did. The mechanism and design are unchanged.
 
 **Built — all three KEPT, re-verified 29 Oct 2026.** `sect.js built` PASS ×9; screenshots `built1–3`. F6 closed with its reason: different mechanisms (exploded iso vs dimensioned section), and the middle version is photographic.
+
+**Colour — C1 REBUILT, C2 and C3 KEPT, 29 Oct 2026.**
+- **Colour 1 "Try it on your house"** (portfolio plan Site 6 flagship + BLK 531 + R36): one flow from the house in a published colour to the published band, before any contact capture.
+  - Default: the firm's job photo with its traced zones (siding, gable, trim), 29 published colours in one radio group.
+  - "My house": a local photo (object URL, never uploaded) brushed or tinted whole, with a colour blend plus a light multiply so it keeps its own light.
+  - Beside it: the published siding band (415 jobs, median $10k-$15k, middle half $5k-$20k), the firm's six price levers, and a booking button with the phone.
+  - **F5 closed.** The band also appears in Hero 2 (the only other band-by-trade device); the flagship reference requires it in the same flow, and the two only meet if both are picked.
+- **Evidence:** `sect.js colour` PASS ×9 with a real file upload; screenshots `colour1job`, `colour1mine`, `colour2`, `colour3`.

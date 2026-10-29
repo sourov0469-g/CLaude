@@ -462,24 +462,49 @@ html.motion .h2-s2 { animation: h2s2 .24s cubic-bezier(0, 0, .2, 1) both; }
 .sw[aria-checked="true"]::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--sel, var(--ground)); }
 .sw:active { transform: scale(.92); }
 
-/* COLOUR 1: dock */
-.c1-head { display: grid; gap: 12px; margin-bottom: clamp(20px, 3vw, 32px); }
-.c1-now { font-size: var(--t-lead); color: var(--fg2); min-height: 1.4em; }
-.c1-now b { color: var(--fg); font-weight: 720; }
-.c1-wrap { margin: 0 calc(var(--m) * -1); }
-.dock-wrap { display: grid; gap: 12px; justify-items: center; padding: 16px var(--m) 0; }
-.dock { display: flex; gap: 2px; padding: 6px; border-radius: 999px; background: var(--ink); max-width: 100%; overflow-x: auto; scrollbar-width: none; --sel: #fff; }
-.dock::-webkit-scrollbar { display: none; }
-.dock .sw { transform-origin: 50% 100%; }
+/* COLOUR 1: try it on your house (portfolio plan Site 6 flagship): photo + published colours, then the band */
+.c1t-head { display: grid; gap: 12px; margin-bottom: clamp(20px, 3vw, 32px); }
+.c1t-now { margin: 0; font-size: var(--t-lead); color: var(--fg2); min-height: 1.4em; }
+.c1t-now b { color: var(--fg); font-weight: 720; }
+.c1t-grid { display: grid; gap: 24px; }
+.c1t-stage { display: grid; gap: 12px; }
+.c1t-src { justify-self: start; }
+.c1t-view { position: relative; }
+.c1t-mine { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--sheet); outline: 1px solid var(--stone); outline-offset: -1px; }
+.c1t-cv { display: block; width: 100%; height: 100%; object-fit: contain; touch-action: none; cursor: crosshair; }
+.c1t-empty { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 20px; text-align: center; }
+.c1t-empty p { max-width: 30rem; margin: 0; color: var(--fg2); font-size: var(--t-sm); }
+.c1t-house { width: 120px; height: 80px; overflow: visible; }
+.c1t-house path { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+.c1t-house .c1t-lap { stroke: var(--line); stroke-width: 1; }
+.c1t-pick { position: relative; cursor: pointer; }
+.c1t-pick:focus-within { outline: 2px solid var(--ink); outline-offset: 3px; }
+.c1t-tools { display: grid; gap: 12px; }
+.c1t-parts { justify-self: start; }
+.c1t-brush { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.c1t-tip { margin: 0; color: var(--fg2); font-size: var(--t-sm); }
+.c1t-chips { display: grid; gap: 10px; }
+.c1t-sl { margin: 0 0 4px; color: var(--fg2); font-size: .75rem; font-weight: 650; letter-spacing: .02em; }
+.c1t-row { display: flex; flex-wrap: wrap; gap: 2px; --sel: var(--ink); }
+.c1t-row .sw { width: 38px; height: 38px; }
+.c1t-ans { display: grid; gap: 10px; align-content: start; padding: clamp(18px, 2.4vw, 28px); border-radius: 18px; background: var(--sheet); box-shadow: 0 0 0 1px var(--stone); }
+.c1t-k, .c1t-lk { margin: 0; color: var(--fg2); font-size: var(--t-sm); font-weight: 650; }
+.c1t-lk { margin-top: 8px; }
+.c1t-med { display: grid; gap: 2px; margin: 0; }
+.c1t-med span { color: var(--fg2); font-size: var(--t-sm); }
+.c1t-med b { color: var(--red); font-size: clamp(2.5rem, 1.6rem + 2.6vw, 4rem); font-weight: 780; font-stretch: 78%; letter-spacing: -.02em; line-height: .95; }
+.c1t-mid { margin: 0; color: var(--ink2); }
+.c1t-lev { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; counter-reset: lv; }
+.c1t-lev li { counter-increment: lv; display: grid; grid-template-columns: 1.6rem 1fr; color: var(--ink2); font-size: var(--t-sm); line-height: 1.35; }
+.c1t-lev li::before { content: counter(lv, decimal-leading-zero); color: var(--red); font-weight: 700; font-variant-numeric: tabular-nums; }
+.c1t-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 8px; }
 .colour-1 .fine { margin-top: 20px; }
 @media (min-width: 900px) {
-  .c1-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; }
-  .c1-head .h2x { grid-column: 1 / 8; }
-  .c1-now { grid-column: 8 / 13; text-align: right; }
-  .c1-wrap { margin: 0; }
-  .colour-1 .st-frame { aspect-ratio: 16 / 8.4; }
-  .dock-wrap { position: relative; z-index: 3; margin-top: -32px; grid-auto-flow: row; padding-top: 0; }
-  .dock .sw { width: 48px; height: 48px; }
+  .c1t-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; }
+  .c1t-head .h2x { grid-column: 1 / 8; }
+  .c1t-now { grid-column: 8 / 13; text-align: right; }
+  .c1t-grid { grid-template-columns: minmax(0, 2.1fr) minmax(280px, 1fr); gap: 32px; align-items: start; }
+  .c1t-ans { position: sticky; top: calc(var(--hd) + 72px); }
 }
 
 /* COLOUR 2: R30 comparison table, two finish systems; the column header is a band in the picked colour */
@@ -1214,7 +1239,6 @@ html:not(.motion) .sv1-h { transition: none; }
 /* BOOK 1: light folds */
 .b1-folds { inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; }
 .b1-tel { display: inline-block; }
-.dock .sw { transition: none; }   /* GSAP drives the dock scale; no CSS transition on the same property */
 
 /* phones: the iso figures scale to 116 % inside their card so parts stay legible (S0526 / S0504 phone rule) */
 @media (max-width: 899px) {
@@ -1467,14 +1491,6 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .tx-lab { font: 700 9px var(--f); fill: var(--fg); text-anchor: middle; }
 
 /* ---------- v4 Colour (PLAN §3 Colour) ---------- */
-.c1-fan { display: block; width: 120px; height: 74px; overflow: visible; --sp: 5deg; }
-.fc { transform-box: view-box; transform-origin: 60px 56px; transform: rotate(calc(var(--k) * var(--sp))); transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
-.fc-c { fill: var(--fc, #CFCBC2); stroke: #161616; stroke-width: 1.2; transition: fill .24s ease; }
-.fc-l { fill: #fff; opacity: .9; stroke: #161616; stroke-width: 1.2; }
-.fc-rv { fill: #8F8A80; stroke: #161616; }
-@media (hover: hover) and (pointer: fine) { .dock-wrap:hover .c1-fan, .dock-wrap:focus-within .c1-fan { --sp: 15deg; } }
-@media (min-width: 900px) { .c1-fan { position: absolute; left: max(0px, calc(50% - 480px)); bottom: 0; width: 140px; height: 86px; } }
-@media (max-width: 899px) { .c1-fan { width: 96px; height: 60px; } }
 .cmp-col { position: relative; }
 .c2-d { display: block; width: min(100%, 220px); height: auto; margin-bottom: 10px; overflow: visible; }
 .c2-b { fill: var(--c); stroke: #161616; stroke-width: 1.2; }

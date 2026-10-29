@@ -251,21 +251,21 @@ Sections are recorded in SECTIONS.md order.
   - "Use my photo": a local file never leaves the device; the visitor brushes the wall area and it takes the colour as a multiply tint over its own light.
   - The answer card shows the published siding median band $10k–$15k from 415 priced jobs, and the six price levers.
 - **Verdict:** REBUILT. Flag F5 (unbuilt flagship); this is the bank's "ownable gap". The v4 Dock was a variant of the same repaint without the flagship flow.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshots `colour1job-d/-m.png` (job photo, a colour on the siding), `colour1mine-d/-m.png` (a local photo, brushed or tinted whole). Test: trim + chip → trim zone painted and named; My house → empty state; a real file set on the input → canvas sized and shown; 'Tint the whole photo' changes the centre pixel; 'Clear' restores it. `tel:` present; the band is FACTS (415 jobs, $10k-$15k, $5k-$20k); the six levers are verbatim in meaning. `sect.js colour` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **C2 · Paint or ColorPlus**
 - **Reference:** builder brief R30 comparison table (JS 0, early) + Stronghold's live comparison block.
 - **Mechanism:** a two-column comparison.
 - **Adaptations:** the firm's two finish systems; each column carries its own published swatches and takes the picked colour; roller vs bake-oven diagrams.
 - **Verdict:** KEPT. R ✓, S ✓ (column diagrams), T ✓, F ✓ (FACTS finishes), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `colour2-d/-m.png`; swatch press toggles aria-pressed. `sect.js colour` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **C3 · Colour book**
 - **Reference:** [BANK] Grid-to-Fullscreen (Codrops, Q48; bounds measured at click; phones fade/scale) = builder brief R10 DOM port.
 - **Mechanism:** a tile grows from its own bounds to a full sheet; close reverses.
 - **Adaptations:** all 29 published colours as punched chips; the sheet shows three lap courses in the colour.
 - **Verdict:** KEPT. R ✓ (measure at click, DOM port), S ✓, T ✓, F ✓, D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `colour3-d/-m.png`; tile opens the sheet, Esc closes it. `sect.js colour` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 ### Near you
 

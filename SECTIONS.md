@@ -14,7 +14,7 @@ Flip a line to `passes: YES` only when that version has:
 | 3 | Services | Point at it — passes: YES | Index — passes: YES | Tape measure — passes: YES |
 | 4 | Work | Drag — passes: YES | Blueprint — passes: YES | Lens — passes: YES |
 | 5 | Built | Taken apart — passes: YES | Built for Texas — passes: YES | To the inch — passes: YES |
-| 6 | Colour | Dock — passes: NO | Paint or ColorPlus — passes: NO | Colour book — passes: NO |
+| 6 | Colour | Dock — passes: YES | Paint or ColorPlus — passes: YES | Colour book — passes: YES |
 | 7 | Near you | Survey — passes: NO | Town by town — passes: NO | Neighbourhood drive — passes: NO |
 | 8 | Reviews | Stream — passes: NO | One — passes: NO | Names — passes: NO |
 | 9 | Money | Amount — passes: NO | What people paid — passes: NO | Receipt — passes: NO |
