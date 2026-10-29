@@ -71,3 +71,10 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
 ## Phase log
 
 (appended below as phases complete)
+
+### Phase 2 — heroes (Hero V2 restore)
+
+- Hero V2 markup, CSS and JS restored to the 68f8ff5 code path (the owner-reviewed one). Removed: crop marks, outline-to-fill headline, star-fill tween, the rewritten lead, the 46svh phone band. Deleted (never rendered): the `fontWeight/fontStretch` scrub and the dead `font-weight:200; font-stretch` CSS.
+- Added, exactly one thing: the proof line `★ 4.8 · 343 Google reviews` (link to the Google listing) in V2's own type: Bebas numeral, Geist muted words, safety-yellow star. At ≥768px it shares the headline's grid cell, right-aligned on the second line's baseline, so no other element moves (measured no overlap at 768/1024/1280/1440/1920: headline right edge 396/510/601/658/763px vs proof left 532/764/1020/1180/1570px). Under 768px it sits under the headline.
+- Before/after proof: `remodeling/qa/hero2-before-after.jpg` (rows: 1440 at intro, 1440 at pin end, 375 at intro; columns: before / after / changed pixels in red). Pixel diff (threshold 24): 1440 intro 1,339 px changed, all inside the proof line's box (1100–1400, 700–750) except 65 px at (0–100, 0–50) = the retired plain cursor ring of the old page chrome (not Hero V2). 1440 pin-mid 1,329 px and pin-end 1,328 px: same two places only. 375: the proof line, plus the lead moved down by the line's height (49px). Nothing else differs.
+- Reactions on V2's three controls (proof link, CTA, phone) are added in Phase 3 (C3); at rest they draw nothing.

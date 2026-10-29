@@ -127,7 +127,8 @@
       });
     } },
 
-    /* v2 · From the brass to the room (owner keeper): composition unchanged */
+    /* v2 · From the brass to the room. OWNER KEEPER: the 68f8ff5 code path; the dead weight scrub is deleted
+       (Bebas has one weight and font-synthesis is off, so it never drew a pixel); the proof line rides in with the row */
     2: { init: function (root, k) {
       navOn(k, 'ground');
       var stage = root.querySelector('.hero2__stage');
@@ -135,16 +136,10 @@
       var win = root.querySelector('.hero2__window');
       var plate = root.querySelector('.hero2__plate');
       var h1 = root.querySelector('.hero2__h');
-      var AR = 2400 / 1601, HX = .645, HY = .34;
-      var Z = 2.4;
+      var AR = 2400 / 1601, HX = .645, HY = .34;      // the brass-banded hood, measured on the photograph
+      var Z = 2.4;   // start zoom: 2.4 keeps the 2400px source at <=1.4x
       var start = [22, 18, 22, 47];
 
-      function marks(r) {
-        band.style.setProperty('--ct', (start[0] * (1 - r)).toFixed(2) + '%');
-        band.style.setProperty('--cr', (start[1] * (1 - r)).toFixed(2) + '%');
-        band.style.setProperty('--cb', (start[2] * (1 - r)).toFixed(2) + '%');
-        band.style.setProperty('--cl', (start[3] * (1 - r)).toFixed(2) + '%');
-      }
       function fit() {
         var bw = band.clientWidth, bh = band.clientHeight;
         if (!bw || !bh) return;
@@ -152,6 +147,7 @@
         var left = (bw - w) / 2;
         var top = EZ.clamp(bh / 2 - h * HY, bh - h, 0);
         plate.style.cssText = 'width:' + w + 'px;height:' + h + 'px;left:' + left + 'px;top:' + top + 'px;right:auto;bottom:auto';
+        // window centred on the hood
         var hx = (left + w * HX) / bw * 100, hy = (top + h * HY) / bh * 100;
         var ww = EZ.mobile() ? 62 : 58, wh = EZ.mobile() ? 50 : 78;
         var l = EZ.clamp(hx - ww / 2, 0, 100 - ww), t = EZ.clamp(hy - wh / 2, 0, 100 - wh);
@@ -160,34 +156,33 @@
       }
       k.ro(band, fit);
       fit();
-      marks(0);
-      k.add(function () { plate.style.cssText = ''; ['--ct', '--cr', '--cb', '--cl'].forEach(function (v) { band.style.removeProperty(v); }); });
+      k.add(function () { plate.style.cssText = ''; });
 
-      if (!k.motion) { root.classList.add('is-static'); marks(1); k.add(function () { root.classList.remove('is-static'); }); return; }
+      if (!k.motion) { root.classList.add('is-static'); k.add(function () { root.classList.remove('is-static'); }); return; }
 
       var lines = wrapRise(h1.querySelectorAll('.ln'));
       h1.querySelectorAll('.ln').forEach(function (l) { l.style.overflow = 'clip'; l.style.paddingBottom = '.12em'; l.style.marginBottom = '-.12em'; });
-      var row = root.querySelector('.hero2__row');
+      var row = [root.querySelector('.hero2__proof'), root.querySelector('.hero2__row')];
 
       if (k.mobile) {
+        // phones: no pin; the zoom plays once
         gsap.timeline({ delay: .05 })
           .fromTo(plate, { scale: 1.8 }, { scale: 1, duration: 1.2, ease: 'expo.out' }, 0)
-          .add(EZ.clip(k, win, start, [0, 0, 0, 0], { duration: 1.2, ease: 'expo.out', onUpdate: function () { marks(this.ratio); } }), 0)
-          .fromTo(stage, { '--p': 0 }, { '--p': 1, duration: 1.2, ease: 'expo.out' }, .1)
+          .add(EZ.clip(k, win, start, [0, 0, 0, 0], { duration: 1.2, ease: 'expo.out' }), 0)
           .from(lines, { yPercent: 105, duration: .8, ease: 'expo.out', stagger: .09 }, .05)
           .from(row, { autoAlpha: 0, y: 14, duration: .7, ease: 'expo.out' }, .35);
         return;
       }
 
+      // intro: band opens, lines rise, row arrives
       gsap.timeline({ delay: .05 })
         .add(EZ.clip(k, band, [0, 0, 100, 0], [0, 0, 0, 0], { duration: 1, ease: 'power4.inOut', onComplete: function () { band.style.clipPath = ''; } }), 0)
         .from(lines, { yPercent: 105, duration: .8, ease: 'expo.out', stagger: .09 }, .1)
         .from(row, { autoAlpha: 0, y: 14, duration: .7, ease: 'expo.out' }, .35);
 
-      // pinned zoom-out, 140vh, scrub 1.1, linear [BANK S54 / Q154]; the outline headline fills on the same progress
+      // pinned zoom-out, 140vh, scrub 1.1, linear [BANK Q154 / S54]
       gsap.timeline({
-        scrollTrigger: { trigger: stage, start: 'top top', end: '+=140%', pin: true, scrub: 1.1, invalidateOnRefresh: true },
-        onUpdate: function () { marks(this.progress()); }
+        scrollTrigger: { trigger: stage, start: 'top top', end: '+=140%', pin: true, scrub: 1.1, invalidateOnRefresh: true }
       })
         .fromTo(plate, { scale: Z }, { scale: 1, ease: 'none' }, 0)
         .add(EZ.clip(k, win, function () { return start; }, [0, 0, 0, 0], { ease: 'none' }), 0)
