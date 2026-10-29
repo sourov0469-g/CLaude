@@ -2,8 +2,8 @@
 
 **Page:** `carpentryuk/carpentryuk.html`, improved in place.
 **Pristine pre-QA2 copy:** `carpentryuk/carpentryuk-v1-backup.html`. It has not been touched (2,186,784 bytes, sha256 `9e8e32e8…7bd9d`).
-**Screenshots:** `carpentryuk/carpentryuk-qa2-shots/`. `audit/` holds the first-pass frames and states. `before-after/` holds each changed section.
-**Status:** in progress. This file is updated after each committed chunk.
+**Screenshots:** `carpentryuk/carpentryuk-qa2-shots/`. `audit/` holds the first-pass frames and states. `before-after/` holds each changed section. `final-pass/` holds the closing re-audit.
+**Status:** done. A full re-audit at desktop and mobile, visual and code together, found nothing left worth changing. Final verification passed (see the end of this file).
 
 ## Where this run happened, and what that changed
 
@@ -78,3 +78,86 @@
 | 3.1 | Defect, P2 (S1314 §4 "buttons re-flow", S0049 toggle naming) | **Build toggle.** Pressing "Pull it apart" renamed it "Put it back together". At 375 the longer label pushed "Name the parts" onto a second line, so the controls jumped under the thumb. A toggle with `aria-pressed` should also keep its name, so screen readers announce "Pull it apart, pressed". Shot: `before-build-chips-375`. | The chip keeps its name. The dark pressed fill, the same one "Name the parts" uses, and `aria-pressed` carry the state. | The chips stay on one row at 375 in both states. Shot: `after-build-chips-375`. |
 | 3.2 | Defect, P3 (S0063 staging, modal dims background) | **Lightbox backdrop.** At 97% opacity, the tiles, their white captions and the header showed through around the photo on phones. The surface was busy behind a viewer whose only job is one photo. Shot: `before-lightbox-375`. | Backdrop is now solid `--ink`. The open and close fades are unchanged. | Shot: `after-lightbox-375`. |
 | 3.3 | Polish, P3 (S0063 / S0089 sub-300 ms UI) | **Two UI transitions ran at 420 ms.** These were the service accordion opening (a click), and the values underline (a hover, which happens tens of times a visit) on a strong expo curve. | Accordion 300 ms ease-out. Values underline 260 ms (`--d-fast`) ease-out. | Both feel immediate. The scroll reveals, line drawing, sawdust and other story motion are unchanged. They are explanatory, not UI feedback. |
+
+### Chunk 4: found in the full re-audit
+
+| # | Class | Finding (evidence) | Change | Result |
+|---|---|---|---|---|
+| 4.1 | Polish, P3 (S1314 §4 widows) | **Compass hint widow.** On phones the compass hint wrapped with "circle." alone on its second line. It's a `figcaption`, so it missed the `text-wrap: pretty` that every `p` on the page gets. Shot: `before-cover-hint-375`. | `text-wrap: pretty` added to the hint. | It now breaks as "…Tap to scribe / a circle." Shot: `after-cover-hint-375`. |
+
+The re-audit frames and states are in `final-pass/`. That covers desktop and mobile frames for every section, plus mega menu, service open, lightbox, build labels and pull-apart, mobile menu, mobile form errors and mobile lightbox. After 4.1, nothing left was worth changing.
+
+## Deliberately left alone, and why
+
+- **Section dividers.** The pack asks for "quiet unique shape dividers per section". The page already marks each sheet by alternating paper and deep-paper, and it already carries the header tape measure, the stage rulers, the wood grain, the graph paper and the footer tape. Ornamental dividers on top would stack decoration doing the same job (S1314 "decorative stacking"). By the Removal Test they'd add nothing the colour change doesn't already say.
+- **Identical section padding.** Every sheet uses the same `--section-y`. Here that steady beat reads as one drawing set, and no section is sparse or crowded next to its neighbour. Changing it for variety's sake would be spacing as spectacle.
+- **Values list offset.** "Precision" sits a little left of the centre vial. Centring it made the gaps uneven, which looked worse (1.3).
+- **Testimonials link goes nowhere (`#`).** The pack says the menu mirrors his live site (Services, Portfolio, Testimonials, About, Contact). He has no published reviews, so there is nothing to link to, and the page invents none.
+- **Mega menu opens in 260 ms.** That is just over S0063's 150-250 ms band for a small dropdown. This is a full-width panel with a photo, and 260 ms keeps it from popping. Closing stays at 180 ms.
+- **Story motion over 300 ms.** The word reveals, the truss drawing, the saw-cut photo change, the plumb bob, the grain, the compass and the tape measure are explanation and craft, not UI feedback. They all have a reduced-motion path, the footer switch turns them off, and every loop sleeps when idle.
+- **Skip link slides in on keyboard focus (180 ms).** It's a one-time, short movement. Removing it would make the link appear from nowhere at the top-left.
+- **Low-resolution photos.** A few are his own small files (the Shaker kitchen is 640×360). They are shown no larger than the grid needs, and each is his real work.
+- **Unused `--ease-in` token.** It's declared but never used, so it has no effect.
+
+## Final verification (in the browser)
+
+All results come from `verify.mjs` (Chromium, all non-`file:` requests blocked). Every check passed.
+
+**Overflow and console:**
+- No horizontal overflow at 375, 1024, 1280 and 1440, and also at 360, 768 and 901. In every case `scrollWidth` equals `clientWidth`.
+- No console errors at any of those widths, during desktop interactions, during mobile interactions, or under reduced motion.
+
+**Mega menu:**
+- Opens on hover and closes on Esc.
+- ArrowDown opens it and focuses the first link, and the arrow keys move between links.
+- A link opens its service row and scrolls to it.
+
+**Loupe and hero photo:** the loupe shows over the photo, and a click saw-cuts to job 2 of 4.
+
+**Accordion:** opens with `aria-expanded="true"`, reaches full panel height, and closes again. On mobile the drawing board moves inside the open panel.
+
+**Lightbox:**
+- Opens with focus on Close.
+- ArrowRight goes to the next photo (3 of 10, then 4 of 10).
+- Tab stays inside it.
+- Esc closes it and returns focus to the tile.
+
+**Build:**
+- "Pull it apart" sets `aria-pressed="true"`, keeps its name and lifts the layers.
+- "Name the parts" shows the labels.
+
+**Form validation:**
+- An empty submit is blocked, all three required fields are flagged, the status line explains, and focus goes to the first field.
+- Valid input clears the errors and closes the joint: "3 of 3. Joint closed. Ready to send."
+- A bad optional email is flagged on blur.
+- The form posts to `https://formsubmit.co/carpentryuk.phone@googlemail.com`. I did not submit it.
+
+**Animation switch:** sets `html.rm`, stores "off", reads `aria-checked="false"`, and survives a reload.
+
+**Mobile:**
+- The menu opens with focus on Close, and a link closes it and lands on the section.
+- The sticky call bar is hidden over the hero, shows after it (`tel:+447854823288`), steps aside at the footer, and steps aside while a field has focus.
+
+**Reduced motion (`prefers-reduced-motion: reduce`):**
+- 0 hidden headings or blocks.
+- The truss is fully drawn, and the build drawing is complete.
+- No physics, and no errors.
+
+**Keyboard:** a visible focus ring on each of the first 40 tab stops.
+
+**Guardrails (checked against the backup):**
+- **Logo:** byte-identical. All 22 embedded images and both fonts are byte-identical too.
+- **Phone:** "07854 823 288" appears 11 times, with 15 `tel:+447854823288` links. The header, hero and call bar are unchanged.
+- **Head and tracker:**
+  - `noindex` is present.
+  - The tracker beacon script is identical, and it is the last thing before `</body>`.
+  - The beacon never fired during QA (blocked).
+- **Copy:**
+  - No em dashes and no en dashes.
+  - The visible text diff against the backup shows only the lines changed in 2.1 and 2.2, the earlier run's caption reorder and values trim, and the joint and touch wording.
+  - No new claims, reviews, ratings, years, prices, guarantees or timber species.
+- **Backup:** `carpentryuk-v1-backup.html` is still 2,186,784 bytes, with sha256 `9e8e32e88aeaff5744f79777bab73d6a70e1ca156f90822d83146b8ef5c7bd9d`. It was never written to.
+
+**Not covered:**
+- Firefox is not installed in this environment, so there is no Firefox pass this time. The v1 build note records one.
+- Not tested in Safari or on a real phone. Touch was emulated in Chromium.
