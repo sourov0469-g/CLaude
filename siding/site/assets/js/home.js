@@ -1031,7 +1031,10 @@
   V.reviews2 = (r, b) => {
     const Q = JSON.parse($('.one-data', r).textContent), q = $('.one-q', r), name = $('.one-n', r), k = $('.one-k span', r), say = $('[data-one-say]', r);
     let i = 0;
+    const sash = $('.os-sash', r);
     const go = dir => {
+      // v4: the lower sash rises over the old quote and drops away from the new one (0.4 s up, 0.4 s down)
+      if (motionOK() && sash) G.timeline({ overwrite: true }).fromTo(sash, { yPercent: 100 }, { yPercent: 0, duration: 0.2, ease: 'power2.in' }).to(sash, { yPercent: 100, duration: 0.4, ease: 'power3.out' }, '+=0.05');
       i = (i + dir + Q.length) % Q.length;
       q.innerHTML = `<p>“${markNames(Q[i].q)}”</p>`;
       name.innerHTML = `${esc(Q[i].n)}<span>Google review, 2026</span>`;
@@ -1062,7 +1065,11 @@
       more.hidden = left <= 0;
       more.textContent = `Show ${Math.min(STEP, left)} more`;
       say.textContent = `${shown} of ${pool.length} reviews${who ? ' naming ' + who : ''}`;
-      if (fresh && motionOK()) G.fromTo(fresh, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: ease.out, stagger: 0.05, overwrite: true });
+      if (fresh && motionOK()) {
+        G.fromTo(fresh, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: ease.out, stagger: 0.05, overwrite: true });
+        // v4: each card that lands is nailed at its corners
+        fresh.forEach((c, n) => G.fromTo($$('.nw-nails circle', c), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.25, ease: 'back.out(1.7)', stagger: 0.04, delay: 0.25 + n * 0.05 }));
+      }
     };
     radios($('.names', r), b, it => {
       who = it.dataset.name;

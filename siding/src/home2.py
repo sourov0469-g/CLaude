@@ -847,9 +847,16 @@ def at_name(text, n):
     return ('…' if a else '') + cut(text[a:], n)
 
 
-def review_card(r, n=170, from_name=False):
+SHAKE = ('<svg class="rv-shake" viewBox="0 0 340 200" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+         '<path class="sk-f" d="M0 0H340V188L318 193L296 187L270 196L244 189L214 195L190 188L160 197L132 189L104 194L80 187L52 196L26 189L0 194Z"/>'
+         '<path class="sk-g" d="M30 0C34 60 26 120 32 188M96 0C92 70 100 130 94 192M168 0C172 50 164 140 170 196M236 0C232 80 240 140 234 190M300 0C304 70 296 120 302 192"/>'
+         '<ellipse class="sk-n" cx="40" cy="22" rx="4" ry="5"/><ellipse class="sk-n" cx="300" cy="22" rx="4" ry="5"/></svg>')
+NAILS4 = '<svg class="nw-nails" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2"/><svg x="100%" overflow="visible"><circle cx="-12" cy="12" r="3.2"/></svg><svg y="100%" overflow="visible"><circle cx="12" cy="-12" r="3.2"/></svg><svg x="100%" y="100%" overflow="visible"><circle cx="-12" cy="-12" r="3.2"/></svg></svg>'
+
+
+def review_card(r, n=170, from_name=False, shake=False):
     t = at_name(r['text'], n) if from_name else cut(r['text'], n)
-    return f'<figure class="rv"><blockquote><p>“{mark(t)}”</p></blockquote><figcaption>{e(r["name"])}<span>Google review, 2026</span></figcaption></figure>'
+    return f'<figure class="rv{" rv-sk" if shake else ""}">{SHAKE if shake else ""}<blockquote><p>“{mark(t)}”</p></blockquote><figcaption>{e(r["name"])}<span>Google review, 2026</span></figcaption></figure>'
 
 
 def stars():
@@ -860,7 +867,7 @@ def stars():
 def reviews1():
     pick = [REVIEWS[i] for i in (17, 26, 10, 0, 15, 28, 14, 3, 29, 9, 21, 25)]
     a, b = pick[:6], pick[6:]
-    row = lambda rs, cls: f'<div class="mq {cls}"><div class="mq-track">' + ''.join(review_card(r, 96) for r in rs) + '</div></div>'
+    row = lambda rs, cls: f'<div class="mq {cls}"><div class="mq-track">' + ''.join(review_card(r, 96, shake=True) for r in rs) + '</div></div>'
     return f'''<div class="v reviews-1" data-tone="ground">
   <div class="r1-head"><h2 class="h2x" data-split>What homeowners write</h2><p class="rating"><b class="num">4.9</b>{stars()}<span>474 Google reviews</span></p>
     <button class="btn btn-line btn-sm mq-pause" type="button" aria-pressed="false">Pause</button></div>
@@ -886,6 +893,7 @@ def reviews2():
     return f'''<div class="v reviews-2" data-tone="ground2">
   <h2 class="h2s">From 474 Google reviews, rated 4.9</h2>
   <figure class="one">
+    <svg class="one-sash" aria-hidden="true" focusable="false"><g class="os-sash"><rect class="os-glass" width="100%" height="100%"/><rect class="os-rail" width="100%" height="10"/><rect class="os-lift" x="48%" y="14" width="4%" height="5" rx="2"/></g><rect class="os-cas" width="100%" height="100%"/><svg y="100%" overflow="visible"><rect class="os-sill" x="-14" y="-2" width="100%" height="9"/></svg></svg>
     <blockquote class="one-q"><p>“{mark(q0)}”</p></blockquote>
     <figcaption class="one-n">{e(REVIEWS[i0]['name'])}<span>Google review, 2026</span></figcaption>
   </figure>
@@ -896,8 +904,9 @@ def reviews2():
 
 
 def reviews3():
-    names = ''.join(f'<button class="nm" type="button" role="radio" aria-checked="false" data-name="{e(n)}">{e(n)}<span class="num">{CREW_COUNT[n]}</span></button>' for n, _ in CREW)
-    cards = ''.join(f'<li class="nw" data-names="{e("|".join(crew_of(r["text"])))}">{review_card(r, 230, from_name=True)}</li>' for r in REVIEWS)
+    chip = lambda h: f'<svg class="nm-chip" viewBox="0 0 14 22" aria-hidden="true" focusable="false"><rect x="1" y="1" width="12" height="20" rx="2" style="fill:{h}"/><rect x="1" y="15" width="12" height="6" rx="2" class="nm-chl"/><circle cx="7" cy="18" r="1.2" class="nm-chr"/></svg>'
+    names = ''.join(f'<button class="nm" type="button" role="radio" aria-checked="false" data-name="{e(n)}">{chip(SW[(k * 5 + 3) % len(SW)][2])}{e(n)}<span class="num">{CREW_COUNT[n]}</span></button>' for k, (n, _) in enumerate(CREW))
+    cards = ''.join(f'<li class="nw" data-names="{e("|".join(crew_of(r["text"])))}">{NAILS4}{review_card(r, 230, from_name=True)}</li>' for r in REVIEWS)
     return f'''<div class="v reviews-3" data-tone="ground">
   <div class="r3-grid">
     <div class="r3-side">
