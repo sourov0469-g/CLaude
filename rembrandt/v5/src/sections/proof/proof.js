@@ -100,11 +100,48 @@ function constellation(root, c) {
 
 // v2 the ledger: [BANK] Cenco Roofing DEEP 5 (every credential carries a link to its issuer; live: "Every figure is
 // read from the platform named beside it"), anatomy F12 checkable proof (KBF "The Ledger": print the caveat), [BANK] #317
-// Digital Butlers "Proof, not promises". Static content; the rows arrive once at the F17 dose (CSS, proof.css).
+// Digital Butlers "Proof, not promises". Rows arrive once at the F17 dose (CSS, proof.css). V7: each rule is a roofer's
+// chalk line, drawn taut (DrawSVG 0.3s) then snapped (a 90ms, 2px vibration of the line's sag) as its row arrives; the
+// reel's crank turns while it feeds. Behind, faint shingle courses recede in perspective and lift 2px near the pointer.
+const NS = 'http://www.w3.org/2000/svg';
 function ledger(root, c) {
-  if (!c.motion) return;
+  const done = [];
+  // background courses: rows closer together far up the roof, wider near the eave; keyway ticks staggered per course
+  const bg = root.querySelector('.pv2-bg');
+  const paint = () => {
+    const W = root.clientWidth, H = root.clientHeight; bg.setAttribute('viewBox', `0 0 ${W} ${H}`); bg.innerHTML = '';
+    const rows = []; for (let y = 24, g = 14, i = 0; y < H; y += g, g *= 1.12, i++) rows.push([y, g, i]);
+    for (const [y, g, i] of rows) {
+      const tab = g * 2.6, off = i % 2 ? tab / 2 : 0;
+      let d = `M0 ${y.toFixed(1)}H${W}`; for (let x = off; x < W; x += tab) d += `M${x.toFixed(1)} ${y.toFixed(1)}v${(-g * 0.85).toFixed(1)}`;
+      const p = document.createElementNS(NS, 'path'); p.setAttribute('class', 'crs'); p.setAttribute('d', d); p.dataset.y = y; bg.append(p);
+    }
+  };
+  paint(); const ro = new ResizeObserver(paint); ro.observe(root); done.push(() => ro.disconnect());
+  if (c.fine && c.motion) {
+    let last = null;
+    const move = e => { const r = root.getBoundingClientRect(), y = e.clientY - r.top; bg.querySelectorAll('.crs').forEach(p => p.classList.toggle('is-up', Math.abs(+p.dataset.y - y) < 46)); };
+    const leave = () => bg.querySelectorAll('.crs.is-up').forEach(p => p.classList.remove('is-up'));
+    root.addEventListener('pointermove', move, { passive: true }); root.addEventListener('pointerleave', leave);
+    done.push(() => { root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); });
+  }
+  const cleanup = () => done.forEach(f => f());
+  if (!c.motion) return cleanup;
   root.classList.add('is-armed');
-  ScrollTrigger.create({ trigger: root.querySelector('.pv2-ledger'), start: 'top 80%', once: true, onEnter: () => root.classList.add('is-in') });
+  const lines = [...root.querySelectorAll('.pv2-cl')], dust = [...root.querySelectorAll('.pv2-dust')], crank = root.querySelector('.pv2-crank');
+  gsap.set(lines, { drawSVG: '0%' }); gsap.set(dust, { opacity: 0 });
+  ScrollTrigger.create({ trigger: root.querySelector('.pv2-ledger'), start: 'top 80%', once: true, onEnter: () => {
+    root.classList.add('is-in');
+    const tl = gsap.timeline();
+    tl.to(crank, { rotation: 360 * lines.length, duration: 0.3 + 0.04 * lines.length + 0.2, ease: 'power2.out', svgOrigin: '24 24' }, 0);
+    lines.forEach((l, i) => {
+      const at = i * 0.04;
+      tl.to(l, { drawSVG: '100%', duration: 0.3, ease: 'power3.out' }, at)
+        .to(l, { keyframes: [{ attr: { d: 'M0 6 Q500 8.5 1000 6' }, duration: 0.03 }, { attr: { d: 'M0 6 Q500 4 1000 6' }, duration: 0.03 }, { attr: { d: 'M0 6 Q500 6.8 1000 6' }, duration: 0.03 }, { attr: { d: 'M0 6 Q500 6 1000 6' }, duration: 0.03 }] }, at + 0.3)
+        .to(dust[i], { opacity: 0.28, duration: 0.2 }, at + 0.32);
+    });
+  } });
+  return cleanup;
 }
 
 // v3 the trains: [BANK] Q161 GreenSock horizontalLoop, lifted whole (js/hloop.js), measured after document.fonts.ready.
@@ -112,18 +149,41 @@ function ledger(root, c) {
 // lap takes 60s (F17 marquee token, Stronghold); the second train runs reversed. next()/previous() glide both trains
 // one item (0.8s power3.inOut) and leave them paused; the pause button (WCAG 2.2.2) holds or resumes; trains rest
 // while off screen. Reduced motion: no loops, the trains stand still and the controls hide.
+// V7 with [BANK] Q149 (scroll velocity [0,1000] -> [0,5] boosts the speed, then springs back): each fact rides under a
+// row of ridge-cap shingles that ripple with that boost (CSS sin() per cap, amplitude from the boost); roofing nails
+// separate the facts; a giant 6/12 roofline behind leans up to 1.5 degrees with speed.
 function trains(root, c) {
+  const items = [...root.querySelectorAll('.pv3-it')];
+  // ridge caps: one small overlapping cap per ~0.42em of each item's width, built before the loop measures
+  for (const it of items) {
+    if (it.querySelector('.pv3-cap')) continue;
+    const w = it.offsetWidth, em = parseFloat(getComputedStyle(it).fontSize), cw = em * 0.42, n = Math.max(3, Math.floor((w - em * 0.5) / cw));
+    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'pv3-cap'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
+    svg.setAttribute('viewBox', `0 0 ${n * 10} 6`); svg.setAttribute('preserveAspectRatio', 'none');
+    svg.innerHTML = Array.from({ length: n }, (_, i) => `<path style="--i:${i}" d="M${i * 10} 6 V2.4 Q${i * 10 + 5} -0.6 ${i * 10 + 11} 2.4 V6 Z"/>`).join('');
+    it.prepend(svg);
+  }
   if (!c.motion) return;
-  const rows = [...root.querySelectorAll('.pv3-row')], pause = root.querySelector('.pv3-pause');
+  const rows = [...root.querySelectorAll('.pv3-row')], pause = root.querySelector('.pv3-pause'), gable = root.querySelector('.pv3-gable');
   let loops = [], held = false, seen = true, dead = false;
   const apply = () => { loops.forEach(l => l.paused(held || !seen)); pause.setAttribute('aria-pressed', String(held)); };
+  const st = { boost: 0, ph: 0 }; let raf = 0, last = 0;
+  const frame = t => {
+    raf = 0; const dt = Math.min(1 / 30, (t - last) / 1000 || 1 / 60); last = t;
+    st.ph += dt * (3 + st.boost * 4);
+    root.style.setProperty('--amp', (st.boost * 2.2).toFixed(2)); root.style.setProperty('--ph', st.ph.toFixed(2));
+    gsap.set(gable, { rotation: -Math.min(1.5, st.boost * 0.3) });
+    loops.forEach(l => l.timeScale(1 + st.boost));
+    if (st.boost > 0.01 && seen) raf = requestAnimationFrame(frame); else { root.style.setProperty('--amp', 0); loops.forEach(l => l.timeScale(1)); }
+  };
   const build = () => c.ctx.add(() => {
     if (dead || !root.isConnected) return;
     loops = rows.map((row, i) => {
-      const lap = row.scrollWidth; // items carry their own trailing gap
+      const lap = row.scrollWidth;
       return horizontalLoop(row.children, { repeat: -1, paddingRight: 0, speed: lap / 60 / 100, reversed: i === 1 });
     });
-    ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); } });
+    ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); },
+      onUpdate: s => { if (held) return; const b = gsap.utils.clamp(0, 5, Math.abs(s.getVelocity()) / 1000 * 5); if (b > st.boost) { gsap.to(st, { boost: b, duration: 0.15, overwrite: 'auto', onComplete: () => gsap.to(st, { boost: 0, duration: 0.9, ease: 'power2.out' }) }); if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } } } });
     apply();
   });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
@@ -135,7 +195,7 @@ function trains(root, c) {
     loops.forEach((l, i) => { l.closestIndex(true); (d * (i ? -1 : 1) > 0 ? l.next(v) : l.previous(v)); });
   };
   root.addEventListener('click', onClick);
-  return () => { dead = true; loops.forEach(l => l.destroy()); root.removeEventListener('click', onClick); };
+  return () => { dead = true; cancelAnimationFrame(raf); gsap.killTweensOf(st); loops.forEach(l => l.destroy()); root.removeEventListener('click', onClick); };
 }
 
 export default { 1: constellation, 2: ledger, 3: trains };

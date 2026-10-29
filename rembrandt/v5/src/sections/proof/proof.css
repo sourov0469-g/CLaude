@@ -55,7 +55,7 @@
 .pv3{background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,5vh,56px);padding:clamp(4.5rem,3rem + 6vw,8rem) 0 calc(clamp(3rem,2rem + 4vw,5rem) + var(--mbar))}
 .pv3-top{padding:0 var(--gutter)}
 .pv3-h{font-size:.9375rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-blue-muted)}
-.pv3-trains{display:grid;gap:clamp(8px,2vh,20px);overflow:hidden}
+.pv3-trains{display:grid;gap:clamp(28px,5vh,56px);overflow:hidden;padding-top:.3em}
 .pv3-row{display:flex;flex-wrap:nowrap;white-space:nowrap;gap:0;font-size:clamp(3.5rem,9vw,9.5rem);font-weight:800;line-height:1.08;letter-spacing:-.04em}
 .pv3-it{display:inline-flex;align-items:center;flex:none;padding-right:.5em}
 .pv3-row--b{color:var(--on-blue-muted)}
@@ -70,3 +70,64 @@
 @media (hover:hover){.pv3-btn:hover{background:rgb(255 255 255/.12);border-color:#fff}}
 .pv3-btn:active{scale:.96}
 html[data-motion="reduced"] .pv3-ctl{display:none}
+
+/* ---------- V7 upgrades (PLAN-V7 §6 Reviews). v1 above is untouched. */
+/* v2: the rules are roofer's chalk lines, snapped taut as each row arrives; a chalk-line reel feeds them; faint shingle
+   courses recede behind the ledger and lift near the pointer. */
+.pv2{--vbg:#fff}
+.pv2-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.pv2-bg .crs{stroke:var(--ink);stroke-width:1;opacity:.07;fill:none;transition:transform .25s var(--ease-x),opacity .25s var(--ease-x)}
+.pv2-bg .crs.is-up{transform:translateY(-2px);opacity:.16}
+.pv2-head,.pv2-right{position:relative;z-index:1}
+.pv2-right{position:relative}
+.pv2-reel{position:absolute;left:-58px;top:-22px;width:56px;height:42px;overflow:visible}
+.pv2-reel-case{fill:var(--chalk);stroke:var(--ink);stroke-width:2.2}
+.pv2-reel-hub{fill:#fff;stroke:var(--ink);stroke-width:2}
+.pv2-crank path{stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.pv2-crank circle{fill:var(--sun);stroke:var(--ink);stroke-width:1.8}
+.pv2-crank{transform-origin:24px 24px;transform-box:view-box}
+.pv2-reel-hook{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pv2-row::before{display:none}
+.pv2-chalk{position:absolute;left:0;top:-5px;width:100%;height:12px;overflow:visible}
+.pv2-cl{fill:none;stroke:var(--chalk);stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.pv2-dust{fill:none;stroke:var(--chalk);stroke-width:7;stroke-linecap:round;stroke-dasharray:.5 5;opacity:.28;vector-effect:non-scaling-stroke}
+.pv2-check{position:relative;text-decoration:none}
+.pv2-ul{left:0;bottom:8px;width:calc(100% - 26px);height:10px}
+.pv2-ul .rx-h{fill:none;stroke:var(--chalk);stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke;clip-path:inset(0 100% 0 0);transition:clip-path .18s var(--ease-x)}
+.pv2-check .rx-h{clip-path:inset(0 0 0 0)}
+.pv2-check:not(:hover):not(:focus-visible) .rx-h{clip-path:inset(0 100% 0 0)}
+@media (hover:hover){.pv2-check:hover .pv2-ul .rx-h{animation:hx-snap .26s .14s ease-out}}
+.pv2-tick{right:-24px;top:50%;width:20px;height:20px;translate:0 -50%}
+.pv2-tick .rx-p{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;opacity:0}
+.pv2-check.is-press .pv2-tick .rx-p{animation:pv-tick .45s var(--ease-x) forwards}
+@keyframes pv-tick{0%{opacity:1;stroke-dashoffset:24;transform:scale(.85)}60%{opacity:1;stroke-dashoffset:0;transform:scale(1.15)}100%{opacity:1;stroke-dashoffset:0;transform:scale(1)}}
+.pv2-tick .rx-p{transform-origin:center;transform-box:fill-box}
+@keyframes hx-snap{0%{transform:translateY(0)}25%{transform:translateY(2px)}50%{transform:translateY(-1.5px)}75%{transform:translateY(.8px)}100%{transform:translateY(0)}}
+@media (max-width:899px){.pv2-reel{left:auto;right:0;top:-46px}}
+
+/* v3: the trains run under rows of ridge-cap shingles that ripple with scroll speed; roofing nails separate the facts;
+   a giant 6/12 roofline behind leans a degree with speed. */
+.pv3{--vbg:var(--ink)}
+.pv3-gable{position:absolute;left:0;right:0;bottom:0;width:100%;height:78%;pointer-events:none;transform-origin:50% 100%}
+.pv3-gable path{fill:none;stroke:oklch(1 0 0 / .1);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.pv3-gable .pv3-gable-in{stroke:oklch(1 0 0 / .05)}
+.pv3-top,.pv3-trains,.pv3-ctl{position:relative}
+.pv3-it{position:relative}
+.pv3-cap{position:absolute;left:0;top:-.2em;width:calc(100% - .5em);height:.2em;overflow:visible}
+.pv3-cap path{fill:var(--sun);stroke:var(--ink);stroke-width:1.5;transform:translateY(calc(sin(var(--ph,0) * 1rad + var(--i) * .7rad) * var(--amp,0) * 1px))}
+.pv3-row--b .pv3-cap path{fill:var(--on-blue-muted)}
+.pv3-mark{width:.24em;height:.4em;margin-left:.5em;fill:none;stroke:none}
+.pv3-mark .pv3-nh{fill:var(--on-blue-muted)}
+.pv3-mark .pv3-ns{fill:var(--on-blue-muted);opacity:.8}
+.pv3-btn{position:relative}
+.pv3-nail{left:50%;top:-14px;width:12px;height:18px;translate:-50% 0;opacity:0;transition:opacity .18s var(--ease-x),transform .2s var(--ease-x)}
+.pv3-nail path{fill:var(--on-blue-muted)}
+@media (hover:hover){.pv3-btn[data-dir]:hover .pv3-nail{opacity:1;transform:translateY(-4px)}}
+.pv3-btn[data-dir]:focus-visible .pv3-nail{opacity:1;transform:translateY(-4px)}
+.pv3-btn.is-press .pv3-nail{animation:pv-drive .3s var(--ease-x)}
+@keyframes pv-drive{0%{opacity:1;transform:translateY(-4px)}45%{opacity:1;transform:translateY(5px) scaleY(.7)}100%{opacity:0;transform:translateY(5px)}}
+.pv3-pause .i-pause{stroke-dasharray:12}
+@media (hover:hover){.pv3-pause:hover .i-pause{animation:hx-draw .25s var(--ease-x)}}
+@keyframes hx-draw{from{stroke-dashoffset:12}}
+.pv3-pause.is-press svg{animation:pv-bounce .3s var(--ease-spring)}
+@keyframes pv-bounce{0%{scale:.92}100%{scale:1}}
