@@ -148,3 +148,12 @@ Not fixed here: it is V1 code, and Run F owns the link and anchor audit.
 Also `site/src/index.html` (one copy line), and the rebuilt outputs `site/index.html`, `site/versions.html`, `site/css/versions.css` and `site/js/versions.js`.
 
 New in `v4/build/`: `build.mjs`, `recover-generated.mjs`, `serve.mjs`, `dgate.mjs`, `generated/`, `reports/dgate.json`.
+
+## After Run D: the one-file preview (A1)
+
+- `rembrandt/homepage-standalone.html` (about 606 KB) is the whole homepage in one file that opens from disk with no server: CSS, GSAP, the app, the WebGL lamp, the switcher with all 32 templates, the town data, fonts, the ply drawings and the favicon.
+  - Photos are labelled placeholders at their real proportions, because the graded photographs are not in this repository.
+  - Rebuild it with `node build.mjs && node standalone.mjs`. The script patches six known points in a temporary copy of the sources (the module imports, the JSON loads, the versions CSS and template loading, and the two image paths built at run time), and stops if any patch no longer matches exactly once.
+  - Tested from `file://` in Chromium at 1440 and 375: default, all-2, all-3 and `?storm=1`, plus a pill switch, all with no errors, no failed requests and no broken images. The only network call is the live NWS alert check, which fails silently offline.
+- The fonts were also missing from the repo and are rebuilt into `site/assets/fonts/` by `build/fonts.py`, following the BUILD-NOTE recipe: 80 KB in total, OFL licences alongside, sources from github.com/google/fonts.
+- `build/standins.mjs` now holds the placeholder generator shared by `serve.mjs` and `standalone.mjs`.
