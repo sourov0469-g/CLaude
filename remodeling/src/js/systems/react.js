@@ -518,11 +518,32 @@
     }
   };
 
+  /* before/after v3: a roll-down storm shutter closes behind the label; click rolls it up and down again */
+  R.shutter = {
+    art: function (w, h) {
+      var n = Math.max(4, Math.round(h / 7)), sl = '', sh = h / n;
+      for (var i = 0; i < n; i++) sl += '<rect class="sl" x="' + P + '" y="' + f(P + i * sh) + '" width="' + w + '" height="' + f(sh - 1.2) + '" fill="#9fb0b5" opacity=".38"/>';
+      return '<clipPath id="rxs-' + w + '-' + h + '"><rect x="' + P + '" y="' + P + '" width="' + w + '" height="' + h + '"/></clipPath>' +
+        '<g clip-path="url(#rxs-' + w + '-' + h + ')"><g class="sls">' + sl + '</g></g>' +
+        '<rect class="bx" x="' + (P - 3) + '" y="' + (P - 9) + '" width="' + (w + 6) + '" height="8" rx="2" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.1"/>';
+    },
+    hover: function (svg, w, h) {
+      return gsap.timeline({ paused: true })
+        .fromTo(one(svg, '.bx'), { opacity: 0, y: -4 }, { opacity: 1, y: 0, duration: .15, ease: 'power2.out' }, 0)
+        .fromTo(one(svg, '.sls'), { y: -h }, { y: 0, duration: .45, ease: EZ.bezier(.625, .05, 0, 1) }, .05);
+    },
+    click: function (svg, w, h) {
+      return gsap.timeline().to(one(svg, '.sls'), { y: -h, duration: .2, ease: 'power3.in' }).to(one(svg, '.sls'), { y: 0, duration: .4, ease: 'bounce.out' });
+    }
+  };
+
   EZ.REACTIONS = R;
 
   /* ---------- binding ---------- */
   function wrapLabel(el) {
     if (el.querySelector(':scope > .btn__label, :scope > .rx-l')) return null;
+    // structured buttons (grid rows, tabs) keep their children: each child is lifted above the drawing instead
+    if (el.children.length > 1) { Array.prototype.forEach.call(el.children, function (c) { c.classList.add('rx-c'); }); return null; }
     var span = document.createElement('span');
     span.className = 'rx-l';
     while (el.firstChild) span.appendChild(el.firstChild);

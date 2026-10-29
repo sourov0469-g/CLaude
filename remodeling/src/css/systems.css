@@ -29,7 +29,7 @@
 
 /* ---------- button reactions: the drawn tools sit round the button; the button never moves ---------- */
 .has-rx { position: relative; overflow: visible; isolation: isolate; }
-.has-rx > .btn__label, .has-rx > .rx-l { position: relative; z-index: 1; }
+.has-rx > .btn__label, .has-rx > .rx-l, .has-rx > .rx-c { position: relative; z-index: 1; }
 .rx {
   position: absolute; left: -36px; top: -36px; z-index: 0;
   pointer-events: none; overflow: visible;

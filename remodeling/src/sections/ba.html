@@ -1,92 +1,67 @@
 <section id="ba" class="sec ba g-base" data-section="ba" aria-labelledby="ba-h1">
 
-  <!-- v1 · The handle [Elbaz draggable before/afters (native range over the pair, --pos clip) + CMK slider + Austin Pro band on every pair] -->
+  <!-- v1 · The stud wall [BANK CMK hand-built CSS slider + BANK Elbaz draggable pairs + BANK R28 touch-first keyboard]: the page's one signature interactive -->
   <div class="ver ba1" data-v="1">
     <div class="wrap ba1__grid">
       <div class="ba1__side">
-        <p class="t-label ba__label-t">Before and after</p>
         <h2 class="t-head" id="ba-h1">Same room. Different house.</h2>
-        <p class="ba__intro muted">Four real Elbaz projects. Drag the handle, or use the arrow keys, to move between before and after.</p>
+        <p class="t-lead ba1__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
         <div class="ba1__tabs" role="tablist" aria-label="Before and after projects">
-          <button type="button" role="tab" class="ba1__tab" data-pair="0" aria-selected="true" data-cursor="link"><span class="ba1__tn nums">01</span><span class="ba1__tt">Kitchen</span><span class="ba1__tb">6&ndash;12 weeks of construction</span></button>
-          <button type="button" role="tab" class="ba1__tab" data-pair="1" aria-selected="false" data-cursor="link"><span class="ba1__tn nums">02</span><span class="ba1__tt">Bathroom</span><span class="ba1__tb">4&ndash;8 weeks of construction</span></button>
-          <button type="button" role="tab" class="ba1__tab" data-pair="2" aria-selected="false" data-cursor="link"><span class="ba1__tn nums">03</span><span class="ba1__tt">Kitchen</span><span class="ba1__tb">6&ndash;12 weeks of construction</span></button>
-          <button type="button" role="tab" class="ba1__tab" data-pair="3" aria-selected="false" data-cursor="link"><span class="ba1__tn nums">04</span><span class="ba1__tt">Outdoor living</span><span class="ba1__tb">Backyard and pergola</span></button>
+          <button type="button" role="tab" class="ba1__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="ba1__tn nums">01</span><span class="ba1__tl">Kitchen</span><span class="ba1__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="ba1__tab" aria-selected="false" data-pair="1" data-rx="swatch"><span class="ba1__tn nums">02</span><span class="ba1__tl">Bathroom</span><span class="ba1__tt"><span class="nums">4&ndash;8</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="ba1__tab" aria-selected="false" data-pair="2" data-rx="swatch"><span class="ba1__tn nums">03</span><span class="ba1__tl">Kitchen</span><span class="ba1__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="ba1__tab" aria-selected="false" data-pair="3" data-rx="swatch"><span class="ba1__tn nums">04</span><span class="ba1__tl">Outdoor living</span><span class="ba1__tt">Backyard and pergola</span></button>
         </div>
       </div>
-      <div class="ba1__stagewrap" role="tabpanel">
-        <div class="ba1__stage" style="--pos:50%;--w:834px">
-          <img class="ba1__before" data-img="ba-kitchen4-before" width="596" height="444" alt="Kitchen with dated oak cabinetry and tiled counters, before renovation">
-          <img class="ba1__after" data-img="ba-kitchen4-after" width="584" height="398" alt="Renovated kitchen with light cabinetry, range hood and island seating">
-          <span class="ba1__lab ba1__lab--b">Before</span>
-          <span class="ba1__lab ba1__lab--a">After</span>
-          <p class="ba1__band"><span class="ba1__bandt">Kitchen</span> <span class="ba1__bandd">6&ndash;12 weeks of construction</span></p>
-          <input class="ba1__range" type="range" min="0" max="100" value="50" step="1" aria-label="Kitchen before and after comparison" data-cursor="drag-x" data-cursor-label="Drag" data-cursor-lock="y">
-          <span class="ba1__handle" aria-hidden="true"><span class="ba1__grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg></span></span>
+      <div class="ba1__stage" role="tabpanel" aria-label="Before and after">
+        <figure class="ba1__img ba1__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
+        <figure class="ba1__img ba1__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
+        <span class="ba1__tag ba1__tag--b">Before</span><span class="ba1__tag ba1__tag--a">After</span>
+        <div class="ba1__stud" aria-hidden="true">
+          <svg class="ba1__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" fill="#d8b47a" stroke="#0B1418" stroke-width="2"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke="#a8814a" stroke-width="1"/></svg>
+          <span class="ba1__nail" style="top:12%"></span><span class="ba1__nail" style="top:46%"></span><span class="ba1__nail" style="top:82%"></span>
+          <svg class="ba1__grip" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="29" fill="#f2c230" stroke="#0B1418" stroke-width="3"/><path d="M14 32h36M14 32l7-7M14 32l7 7M50 32l-7-7M50 32l-7 7" fill="none" stroke="#0B1418" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <p class="ba__note t-small muted">Paired photographs as Elbaz publishes them. Every image on this page is the firm's own work.</p>
+        <input class="ba1__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="50% after">
       </div>
     </div>
   </div>
 
-  <!-- v2 · The loop [GreenSock horizontalLoop pen xxQaRoX: 200px/s, centre tile active, others brightness(.7)] -->
+  <!-- v2 · Rolled on [BANK 148 Superhero wavy reveal: feTurbulence displacement on the reveal edge] -->
   <div class="ver ba2" data-v="2" hidden>
-    <div class="wrap ba2__head">
-      <div>
-        <p class="t-label ba__label-t">Before and after</p>
-        <h2 class="t-head" id="ba-h2">Same room. Different house.</h2>
+    <div class="wrap">
+      <div class="ba__head">
+        <h2 class="t-head" id="ba-h2">Rolled on, room by room.</h2>
+        <p class="t-lead ba__lead">Scroll, and the after goes on over the before like a fresh coat. Four real pairs, nothing staged.</p>
       </div>
-      <div class="ba2__ctl">
-        <p class="ba2__cap" aria-live="polite"><span class="ba2__capt">Kitchen</span> <span class="ba2__capd muted">6&ndash;12 weeks of construction</span></p>
-        <div class="ba2__btns">
-          <button type="button" class="ba2__btn" data-dir="-1" aria-label="Previous project" data-cursor="link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
-          <button type="button" class="ba2__btn ba2__pause" aria-pressed="false" data-cursor="link">Pause</button>
-          <button type="button" class="ba2__btn" data-dir="1" aria-label="Next project" data-cursor="link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
-        </div>
+      <div class="ba2__grid">
+        <figure class="ba2__panel" data-pair="0"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><span class="sr-only">Dated kitchen with cream cabinets and tiled counters, renovated with grey shaker cabinetry and quartz counters.</span></figure>
+        <figure class="ba2__panel" data-pair="1"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Bathroom</strong> <span class="nums">4&ndash;8</span> weeks of construction</figcaption><span class="sr-only">Dated bathroom with an alcove tub and shower curtain, renovated with a frameless glass shower and round backlit mirror.</span></figure>
+        <figure class="ba2__panel" data-pair="2"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><span class="sr-only">Kitchen with dated oak cabinetry and tiled counters, renovated with light cabinetry, a range hood and island seating.</span></figure>
+        <figure class="ba2__panel" data-pair="3"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Outdoor living</strong> backyard and pergola</figcaption><span class="sr-only">Backyard with worn lawn and open patio, transformed into a covered pergola with dining and bar seating and a turfed backyard.</span></figure>
       </div>
+      <a class="btn ba2__btn" href="#consult" data-rx="roller"><span class="btn__label">Plan your own after</span></a>
     </div>
-    <div class="ba2__strip">
-      <div class="ba2__track">
-        <figure class="ba2__tile" data-t="Kitchen" data-d="6&ndash;12 weeks of construction"><img class="ba2__b" data-img="ba-kitchen4-before" width="596" height="444" alt="Kitchen with dated oak cabinetry and tiled counters, before renovation"><img class="ba2__a" data-img="ba-kitchen4-after" width="584" height="398" alt="Renovated kitchen with light cabinetry, range hood and island seating"><figcaption><span class="ba2__state">Before</span></figcaption></figure>
-        <figure class="ba2__tile" data-t="Bathroom" data-d="4&ndash;8 weeks of construction"><img class="ba2__b" data-img="ba-bath2-before" width="428" height="404" alt="Dated bathroom with alcove tub and shower curtain, before renovation"><img class="ba2__a" data-img="ba-bath2-after" width="430" height="490" alt="Renovated bathroom with frameless glass shower and round backlit mirror"><figcaption><span class="ba2__state">Before</span></figcaption></figure>
-        <figure class="ba2__tile" data-t="Kitchen" data-d="6&ndash;12 weeks of construction"><img class="ba2__b" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"><img class="ba2__a" data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"><figcaption><span class="ba2__state">Before</span></figcaption></figure>
-        <figure class="ba2__tile" data-t="Outdoor living" data-d="Backyard and pergola"><img class="ba2__b" data-img="ba-outdoor-before" width="558" height="466" alt="Backyard with worn lawn and open patio, before renovation"><img class="ba2__a" data-img="ba-outdoor-after" width="562" height="468" alt="Covered outdoor pergola with dining and bar seating, and a turfed backyard"><figcaption><span class="ba2__state">Before</span></figcaption></figure>
-      </div>
-    </div>
-    <div class="wrap"><p class="ba__note t-small muted">The project in the centre shows its after. Every image on this page is the firm's own work.</p></div>
   </div>
 
-  <!-- v3 · The blinds [Codrops SVG Mask Transitions on Scroll: horizontal blinds, 30 slits, stagger .02, scrub 2-2.5, crispEdges] -->
+  <!-- v3 · Storm shutters [BANK 178 Eleos column shutters: yPercent -100, .8s, stagger .06, ease (.625,.05,0,1)] -->
   <div class="ver ba3" data-v="3" hidden>
-    <div class="wrap">
-      <header class="ba3__head">
-        <p class="t-label ba__label-t">Before and after</p>
-        <h2 class="t-head" id="ba-h3">Same room. Different house.</h2>
-        <p class="ba__intro muted">Four real Elbaz projects. Keep scrolling and each room changes.</p>
-      </header>
-      <div class="ba3__list">
-        <figure class="ba3__item" data-w="596" data-h="444">
-          <div class="ba3__frame"><img class="ba3__b" data-img="ba-kitchen4-before" width="596" height="444" alt="Kitchen with dated oak cabinetry and tiled counters, before renovation"><svg class="ba3__svg" aria-hidden="true"></svg><span class="ba3__state" data-after="After">Before</span></div>
-          <figcaption><span class="ba3__n nums">01</span><span class="ba3__t">Kitchen</span><span class="ba3__d muted">6&ndash;12 weeks of construction</span><span class="sr-only">After: Renovated kitchen with light cabinetry, range hood and island seating</span></figcaption>
-          <template><img data-after="ba-kitchen4-after"></template>
-        </figure>
-        <figure class="ba3__item" data-w="430" data-h="470">
-          <div class="ba3__frame"><img class="ba3__b" data-img="ba-bath2-before" width="428" height="404" alt="Dated bathroom with alcove tub and shower curtain, before renovation"><svg class="ba3__svg" aria-hidden="true"></svg><span class="ba3__state" data-after="After">Before</span></div>
-          <figcaption><span class="ba3__n nums">02</span><span class="ba3__t">Bathroom</span><span class="ba3__d muted">4&ndash;8 weeks of construction</span><span class="sr-only">After: Renovated bathroom with frameless glass shower and round backlit mirror</span></figcaption>
-          <template><img data-after="ba-bath2-after"></template>
-        </figure>
-        <figure class="ba3__item" data-w="388" data-h="292">
-          <div class="ba3__frame"><img class="ba3__b" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"><svg class="ba3__svg" aria-hidden="true"></svg><span class="ba3__state" data-after="After">Before</span></div>
-          <figcaption><span class="ba3__n nums">03</span><span class="ba3__t">Kitchen</span><span class="ba3__d muted">6&ndash;12 weeks of construction</span><span class="sr-only">After: Renovated kitchen with grey shaker cabinetry and quartz counters</span></figcaption>
-          <template><img data-after="ba-kitchen1-after"></template>
-        </figure>
-        <figure class="ba3__item" data-w="558" data-h="466">
-          <div class="ba3__frame"><img class="ba3__b" data-img="ba-outdoor-before" width="558" height="466" alt="Backyard with worn lawn and open patio, before renovation"><svg class="ba3__svg" aria-hidden="true"></svg><span class="ba3__state" data-after="After">Before</span></div>
-          <figcaption><span class="ba3__n nums">04</span><span class="ba3__t">Outdoor living</span><span class="ba3__d muted">Backyard and pergola</span><span class="sr-only">After: Covered outdoor pergola with dining and bar seating, and a turfed backyard</span></figcaption>
-          <template><img data-after="ba-outdoor-after"></template>
-        </figure>
+    <div class="wrap ba3__grid">
+      <div class="ba3__stage">
+        <figure class="ba3__img"><img class="ba3__photo" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
+        <div class="ba3__shutters" aria-hidden="true"></div>
+        <span class="ba3__state" aria-live="polite">Before</span>
       </div>
-      <p class="ba__note t-small muted">Every image on this page is the firm's own work.</p>
+      <div class="ba3__side">
+        <h2 class="t-head" id="ba-h3">Shutters down. Shutters up.</h2>
+        <p class="t-lead ba__lead">In South Florida the shutters come down before a storm. Here they come down on the old room and go up on the new one.</p>
+        <p class="ba3__cap"><span class="ba3__no nums">01 / 04</span> <strong class="ba3__name">Kitchen</strong> <span class="ba3__time"><span class="nums">6&ndash;12</span> weeks of construction</span></p>
+        <div class="ba3__ctrl">
+          <button type="button" class="btn btn--ghost ba3__prev" data-rx="shutter"><span class="btn__label">Previous</span></button>
+          <button type="button" class="btn btn--ghost ba3__play" aria-pressed="false" data-rx="shutter"><span class="btn__label">Pause</span></button>
+          <button type="button" class="btn ba3__next" data-rx="shutter"><span class="btn__label">Next room</span></button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
