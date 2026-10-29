@@ -298,27 +298,30 @@
     const countEl = $('.course-count', frame);
     const tagB = $('.tag-before', frame), tagA = $('.tag-after', frame);
     const startPct = +(frame.dataset.start || 58) / 100;
+    const X = frame.dataset.axis === 'x';  // x: sash columns installing from the right, each dropping top to bottom
+    const [nDesk, nPhone] = (frame.dataset.n || '30,18').split(',').map(Number);
+    const unit = frame.dataset.unit || 'courses of new siding';
     let N = 0, k = 0, strips = [], url = '';
 
     const clipFor = (i, on) => {
-      const top = (i / N * 100).toFixed(3), bot = (100 - (i + 1) / N * 100 - .04).toFixed(3);
-      return `inset(${top}% ${on ? 0 : 100}% ${Math.max(0, bot)}% 0%)`;
+      const a = (i / N * 100).toFixed(3), b = Math.max(0, 100 - (i + 1) / N * 100 - .04).toFixed(3);
+      return X ? `inset(0% ${b}% ${on ? 0 : 100}% ${a}%)` : `inset(${a}% ${on ? 0 : 100}% ${b}% 0%)`;
     };
     const place = () => {
-      const h = frame.clientHeight;
-      const y = (N - k) / N * h;
-      line.style.transform = `translateY(${y.toFixed(1)}px)`;
-      handle.style.transform = `translateY(${clamp(y, 30, h - 30).toFixed(1)}px)`;
-      countB.textContent = k;
-      countEl.style.opacity = k === 0 ? 0 : 1;
+      const size = X ? frame.clientWidth : frame.clientHeight;
+      const p = (N - k) / N * size;
+      line.style.transform = X ? `translateX(${p.toFixed(1)}px)` : `translateY(${p.toFixed(1)}px)`;
+      const hp = clamp(p, 30, size - 30).toFixed(1);
+      handle.style.transform = X ? `translateX(${hp}px)` : `translateY(${hp}px)`;
+      if (countB) { countB.textContent = k; countEl.style.opacity = k === 0 ? 0 : 1; }
       handle.setAttribute('aria-valuenow', String(k));
       handle.setAttribute('aria-valuemax', String(N));
-      handle.setAttribute('aria-valuetext', `${k} of ${N} courses of new siding`);
+      handle.setAttribute('aria-valuetext', `${k} of ${N} ${unit}`);
       tagB.classList.toggle('is-hidden', (N - k) / N < .14);
       tagA.classList.toggle('is-hidden', k / N < .14);
     };
     const build = () => {
-      N = mqDesk.matches ? 30 : 18;
+      N = mqDesk.matches ? nDesk : nPhone;
       wrap.innerHTML = '';
       strips = Array.from({ length: N }, (_, i) => {
         const s = d.createElement('i');
@@ -327,8 +330,7 @@
         wrap.appendChild(s);
         return s;
       });
-      const count = $('.course-count', frame);
-      count.lastChild.textContent = ` of ${N} courses`;
+      if (countEl) countEl.lastChild.textContent = ` of ${N} courses`;
     };
     const setK = (nk, animate = true) => {
       nk = clamp(Math.round(nk), 0, N);
@@ -348,7 +350,7 @@
       frame.classList.add('is-live');
       if (!G || reduce()) { setK(k0, false); return; }
       k = 0; place();
-      const order = strips.slice(N - k0).reverse(); // bottom course first
+      const order = strips.slice(N - k0).reverse(); // bottom course (or right-hand sash) first
       const proxy = { k: 0 };
       // 30 strips (18 phone), stagger 0.02, 0.9s power3.out each, sequence ~1.5s
       G.to(order, {
@@ -358,19 +360,19 @@
       });
       G.to(proxy, { k: k0, duration: .9 + (k0 - 1) * .02, ease: 'power2.out', onUpdate: () => { k = Math.round(proxy.k); place(); } });
     };
-    const fromY = clientY => {
+    const fromY = (clientX, clientY) => {
       const r = frame.getBoundingClientRect();
-      return (1 - (clientY - r.top) / r.height) * N;
+      return X ? (1 - (clientX - r.left) / r.width) * N : (1 - (clientY - r.top) / r.height) * N;
     };
     handle.addEventListener('pointerdown', e => {
       e.preventDefault(); handle.setPointerCapture(e.pointerId);
-      const move = ev => setK(fromY(ev.clientY));
+      const move = ev => setK(fromY(ev.clientX, ev.clientY));
       const up = () => { handle.removeEventListener('pointermove', move); handle.removeEventListener('pointerup', up); handle.removeEventListener('pointercancel', up); };
       handle.addEventListener('pointermove', move); handle.addEventListener('pointerup', up); handle.addEventListener('pointercancel', up);
     });
-    frame.addEventListener('click', e => { if (!handle.contains(e.target) && frame.classList.contains('is-live')) setK(fromY(e.clientY)); });
+    frame.addEventListener('click', e => { if (!handle.contains(e.target) && frame.classList.contains('is-live')) setK(fromY(e.clientX, e.clientY)); });
     handle.addEventListener('keydown', e => {
-      const map = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1, PageUp: 5, PageDown: -5 };
+      const map = X ? { ArrowLeft: 1, ArrowUp: 1, ArrowRight: -1, ArrowDown: -1, PageUp: 5, PageDown: -5 } : { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1, PageUp: 5, PageDown: -5 };
       if (e.key in map) { e.preventDefault(); setK(k + map[e.key]); }
       else if (e.key === 'Home') { e.preventDefault(); setK(0); }
       else if (e.key === 'End') { e.preventDefault(); setK(N); }
@@ -526,6 +528,23 @@
         onUpdate: self => set(clamp((self.progress - .12) / .55, 0, 1))
       });
       return () => { st.kill(); sec.classList.remove('is-pinned'); set(1); };
+    });
+  });
+
+  // Horizontal pin + pagination (#270), desktop only: x = -(scrollWidth - viewport), ease none, scrub, end matched to travel 1:1
+  $$('[data-hscroll]').forEach(sec => {
+    const track = $('.brands-track', sec), pin = $('.brands-pin', sec), dots = $$('.hdot', sec);
+    if (!G || !ST || reduce()) return;
+    G.matchMedia().add('(min-width: 900px) and (min-height: 700px)', () => {
+      sec.classList.add('is-h');
+      const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+      const mark = p => { const i = Math.round(p * (dots.length - 1)); dots.forEach((d, k) => d.classList.toggle('is-on', k === i)); };
+      mark(0);
+      G.to(track, {
+        x: () => -dist(), ease: 'none',
+        scrollTrigger: { trigger: pin, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: true, invalidateOnRefresh: true, onUpdate: self => mark(self.progress) }
+      });
+      return () => { sec.classList.remove('is-h'); G.set(track, { clearProps: 'transform' }); };
     });
   });
 

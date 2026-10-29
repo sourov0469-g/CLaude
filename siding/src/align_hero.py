@@ -7,9 +7,9 @@ import numpy as np
 PAIRS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'site', 'assets', 'img', 'pairs')
 
 
-def main():
-    a = cv2.imread(os.path.join(PAIRS, 'robroy-a-1600.webp'))
-    b = cv2.imread(os.path.join(PAIRS, 'robroy-b-1600.webp'))
+def main(before='robroy-b-1600.webp', after='robroy-a-1600.webp', out=('robroy-hb', 'robroy-ha'), box=(.30, .22, .97, .92)):
+    a = cv2.imread(os.path.join(PAIRS, after))
+    b = cv2.imread(os.path.join(PAIRS, before))
     ga = cv2.cvtColor(a, cv2.COLOR_BGR2GRAY)
     gb = cv2.cvtColor(b, cv2.COLOR_BGR2GRAY)
     # The siding colour changed, so match structure, not colour: blurred gradient magnitude, then ECC
@@ -23,7 +23,8 @@ def main():
     eb = grad(cv2.resize(gb, None, fx=s, fy=s))
     # the main gable wall and its openings (right two thirds, below the eave), not sky, trees or deck
     mask = np.zeros(ea.shape, np.uint8)
-    mask[int(ea.shape[0] * .22):int(ea.shape[0] * .92), int(ea.shape[1] * .30):int(ea.shape[1] * .97)] = 255
+    x0, y0, x1, y1 = box
+    mask[int(ea.shape[0] * y0):int(ea.shape[0] * y1), int(ea.shape[1] * x0):int(ea.shape[1] * x1)] = 255
     warp = np.eye(3, dtype=np.float32)
     crit = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 400, 1e-6)
     for mode in (cv2.MOTION_AFFINE, cv2.MOTION_HOMOGRAPHY):
@@ -37,27 +38,29 @@ def main():
     h, w = a.shape[:2]
     warped = cv2.warpPerspective(b, H, (w, h), flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE)
     cover = cv2.warpPerspective(np.full(b.shape[:2], 255, np.uint8), H, (w, h), flags=cv2.INTER_NEAREST)
-    # largest 16:10 crop (left edge at 0, any height offset) that the warped before covers completely
-    rows_ok = lambda y0, ch, cw: cover[y0:y0 + ch, :cw].min() == 255
+    # largest 16:10 crop that the warped before covers completely
     found = None
-    for cw in range(w, int(w * .8), -4):
+    for cw in range(w, int(w * .6), -4):
         ch = int(round(cw * 10 / 16))
         for y0 in range(0, h - ch + 1, 2):
-            if rows_ok(y0, ch, cw):
-                found = (cw, ch, y0)
+            for x0 in range(0, w - cw + 1, 2):
+                if cover[y0:y0 + ch, x0:x0 + cw].min() == 255:
+                    found = (cw, ch, x0, y0)
+                    break
+            if found:
                 break
         if found:
             break
     if not found:
         raise SystemExit('no full-coverage crop')
-    cw, ch, y0 = found
-    print('crop', cw, ch, 'y0', y0)
-    for name, img in (('robroy-hb', warped), ('robroy-ha', a)):
-        crop = img[y0:y0 + ch, :cw]
+    cw, ch, x0, y0 = found
+    print('crop', cw, ch, 'at', x0, y0)
+    for name, img in ((out[0], warped), (out[1], a)):
+        crop = img[y0:y0 + ch, x0:x0 + cw]
         for W in (760, 1440):
             out = cv2.resize(crop, (W, W * 10 // 16), interpolation=cv2.INTER_AREA)
             cv2.imwrite(os.path.join(PAIRS, f'{name}-{W}.webp'), out, [cv2.IMWRITE_WEBP_QUALITY, 80])
 
 
 if __name__ == '__main__':
-    main()
+    main()  # Rob Roy, homepage hero. (The window pairs were tried too; none registers well enough, ECC < .6.)

@@ -17,3 +17,18 @@ Facts re-read from `/services/siding` and `/services/siding/cost` before buildin
 | S8 Reviews + book | Four excerpts, ellipsis at every cut | |
 
 Audit: 1440 + 375 section shots, wall scrub at 0 / 0.3 / 0.55 / 0.95, interactions (hero compare keys, histogram readouts, accordion, pair picks). Defects found and fixed: homepage hero placement rules leaking into the inner hero grid (implicit columns; scoped to `.hero-grid >`); H1 in 6 lines (now 2); wall after-content inside the pinned track (would have scrolled over the sticky drawing; moved out); wall labels sliding over back layers (now a fixed label column with leaders redrawn to each layer); phone wall labels at about 5px (list + cropped viewBox); histogram x-labels colliding on phone (`<wbr>` after the hyphen); chip book two-up on phone (now four-up, rows aligned); excerpts missing ellipses. Overflow 0px at 375 and 1440, no console errors.
+
+## windows.html (PLAN §6), passed 29 Oct 2026
+Facts re-read from `/services/windows` and `/services/windows/cost`; frame-colour hex values harvested from the page markup (`work/data/window_colours.json`: NT 19, Simonton 10, Andersen 5, Pella 5).
+
+| Section | Built | Source / parameters |
+|---|---|---|
+| W1 Hero | "Four window brands, measured to every opening."; Anderson Mill pair (NT Windows Executive, windows portion $15k-$20k, APS-4909) in the course frame on its x axis: 12 sash strips (8 phone) drop in from the right, then it is a before/after slider (keys, drag, tap). Stats: 388 documented / 238 of 376 NT / 2 days on site / lifetime labour | course mask values as the homepage (0.9s `power3.out`, stagger 0.02) |
+| W2 Four brands | Brand cards: share of 376, lines with job counts, published specs, frame-colour swatches, median band. Desktop ≥900×700: GSAP horizontal pin, `x = -(scrollWidth - viewport)`, ease none, scrub, `invalidateOnRefresh`, end = travel (1:1), dots circle → square. Phone and reduced motion: native scroll-snap strip, no pin | #270 |
+| W3 Frames, then the glass | Stacked bar 214 / 64 / 33 / 4 / 61 (sums to 376) with key; 3/4″ dual-pane section (overall depth to scale, stated); Low-E line per brand | |
+| W4 What 376 jobs cost | 12-band histogram (sums to 376) with the firm's example job per band; brand and city median tables; levers; done-in-the-same-job bars (36 / 22 / 18 / 10%); caveat | as siding |
+| W5 Four pairs | Balcones Village, Ridgewood, North Austin, Maple Run | shared pairs component |
+| W6 Built to order, then two days | Four steps; Sara Helms's "about 6 weeks" as the honest counterweight | |
+| W7 Q&As, reviews, book | Q&As verbatim from the page's FAQPage data; four excerpts, names as printed | |
+
+Audit: 1440 + 375 section shots, pinned track at 0 / 0.5 / 1, sash slider keys, histogram readouts. Defects fixed: alignment tried on all five window pairs (best ECC 0.57, too low to fake a same-wall install, so the sash strips are an entrance, not a re-glazing); `.brand` card class colliding with the header logo link (renamed `.brand-card`); pinned area taller than the viewport cut the H2 (heading moved out of the pin); glass section too small to read (redrawn at 72 px/in); an editorial line not in the firm's files replaced with its own wording. Overflow 0px, no console errors.

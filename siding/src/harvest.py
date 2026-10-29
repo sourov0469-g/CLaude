@@ -91,3 +91,10 @@ for key, page in (('siding', 'services_siding.html'), ('windows', 'services_wind
     m = re.search(r'"@type":"FAQPage".*?"mainEntity":(\[.*?\])\}</script>', raw(page), re.S)
     faq[key] = [[q['name'], q['acceptedAnswer']['text']] for q in json.loads(m.group(1))]
 save('faq.json', faq)
+
+# 7. Window frame colours per brand, with the hex values the windows page publishes.
+wsw = {}
+for brand, ul in re.findall(r'<ul class="apsv-pw-sw" aria-label="([^"]+?) exterior colors">(.*?)</ul>', raw('services_windows.html'), re.S):
+    wsw[html.unescape(brand)] = [[html.unescape(t), c] for c, t in re.findall(r'style="--c:(#[0-9A-Fa-f]{6})" title="([^"]+)"', ul)]
+assert sorted(len(v) for v in wsw.values()) == [5, 5, 10, 19], {k: len(v) for k, v in wsw.items()}
+save('window_colours.json', wsw)

@@ -1,0 +1,166 @@
+{
+ "NT Windows": [
+  [
+   "Creme White",
+   "#FAF8F6"
+  ],
+  [
+   "Almond",
+   "#D4C899"
+  ],
+  [
+   "Sandstone",
+   "#B9AD97"
+  ],
+  [
+   "Bronze",
+   "#16140C"
+  ],
+  [
+   "Tan",
+   "#CFC9B5"
+  ],
+  [
+   "Desert Sand",
+   "#B9AEA1"
+  ],
+  [
+   "Cameo",
+   "#E4DFD3"
+  ],
+  [
+   "Earthtone",
+   "#837263"
+  ],
+  [
+   "English Saddle",
+   "#4B3D25"
+  ],
+  [
+   "Bordeaux",
+   "#511B09"
+  ],
+  [
+   "Brick Red",
+   "#914020"
+  ],
+  [
+   "Midnight",
+   "#231F20"
+  ],
+  [
+   "Hartford",
+   "#082318"
+  ],
+  [
+   "Sage Green",
+   "#8AAEA1"
+  ],
+  [
+   "Obsidian",
+   "#425A69"
+  ],
+  [
+   "Aegean",
+   "#80A0B5"
+  ],
+  [
+   "Chateau Stone",
+   "#A0A7AC"
+  ],
+  [
+   "Spanish Moss",
+   "#A7A69D"
+  ],
+  [
+   "Black",
+   "#0C0B0B"
+  ]
+ ],
+ "Pella": [
+  [
+   "White",
+   "#F2F2F0"
+  ],
+  [
+   "Tan",
+   "#BDAA8C"
+  ],
+  [
+   "Morning Sky Gray",
+   "#C0BDB8"
+  ],
+  [
+   "Brown",
+   "#423D35"
+  ],
+  [
+   "Black",
+   "#1F2021"
+  ]
+ ],
+ "Simonton": [
+  [
+   "White",
+   "#F1F1F1"
+  ],
+  [
+   "Tan",
+   "#D2C6AC"
+  ],
+  [
+   "Black",
+   "#120F10"
+  ],
+  [
+   "Bronze",
+   "#44413B"
+  ],
+  [
+   "Cream",
+   "#E8E1CE"
+  ],
+  [
+   "Silver",
+   "#BDBCBA"
+  ],
+  [
+   "Driftwood",
+   "#B09D7F"
+  ],
+  [
+   "Brick",
+   "#7F361F"
+  ],
+  [
+   "Pine",
+   "#1B4538"
+  ],
+  [
+   "Chocolate",
+   "#301F16"
+  ]
+ ],
+ "Andersen": [
+  [
+   "White",
+   "#F3F0E9"
+  ],
+  [
+   "Sandtone",
+   "#B0A299"
+  ],
+  [
+   "Terratone",
+   "#786A61"
+  ],
+  [
+   "Dark Bronze",
+   "#493F3D"
+  ],
+  [
+   "Black",
+   "#323433"
+  ]
+ ]
+}
