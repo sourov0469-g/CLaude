@@ -791,18 +791,26 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 @media (min-width: 900px) { .b2-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: start; } .b2-ph { grid-column: 1 / 7; position: sticky; top: calc(var(--hd) + 24px); } .b2-ph img { aspect-ratio: 4 / 5; } .b2-form { grid-column: 8 / 13; } }
 
 .book-3 { display: grid; justify-items: center; text-align: left; }
-.bk-chat { width: 100%; max-width: 860px; gap: 28px; --fg: var(--on-night); --fg2: var(--on-night2); }
-.bk-chat .bk-step legend { font-size: clamp(2.25rem, 1rem + 5vw, 5rem); font-weight: 790; font-stretch: 84%; letter-spacing: -.03em; line-height: .98; margin-bottom: 24px; }
-.bk-chat .ck span { min-height: 56px; padding: 0 22px; font-size: 1.0625rem; border-color: #6F6B63; color: var(--on-night); }
-.bk-chat .ck input:checked + span { background: var(--on-night); border-color: var(--on-night); color: var(--night); }
-.bk-chat .ck input:focus-visible + span { outline-color: #fff; }
-.bk-chat .fld label { color: var(--on-night); font-size: var(--t-lead); }
-.bk-chat .fld input { min-height: 60px; font-size: 1.25rem; background: var(--night2); color: var(--on-night); border-color: #6F6B63; }
-.bk-chat .bk-err { color: #FF9B98; }
-.bk-chat .bk-err::before { background: #FF9B98; color: var(--night); }
-.bk-chat .btn-ink { background: var(--on-night); color: var(--night); }
-.bk-chat .bk-done svg { stroke: var(--on-night); }
-.b3-call { width: 100%; max-width: 860px; margin-top: 28px; color: var(--on-night2); }
+.b3-call { width: 100%; max-width: 980px; margin-top: 28px; color: var(--on-night2); }
+/* BOOK 3: Q413 Tequila conversational form, one sentence with inline fields */
+.snt-form { width: 100%; max-width: 980px; display: grid; gap: 28px; }
+.snt-k { margin: 0; color: var(--on-night2); font-size: var(--t-sm); font-weight: 650; }
+.snt { font-size: clamp(1.625rem, 1rem + 2.8vw, 3.5rem); font-weight: 720; font-stretch: 90%; letter-spacing: -.015em; line-height: 1.55; }
+.snt input, .snt select { min-width: 0; max-width: 100%; padding: 0 .12em; border: 0; border-bottom: 3px solid rgba(241, 239, 234, .45); border-radius: 0; background: transparent; color: var(--red-on-night); font: inherit; letter-spacing: inherit; transition: border-color .18s cubic-bezier(0, 0, .2, 1); }
+.snt input::placeholder { color: rgba(241, 239, 234, .4); }
+.snt input:focus, .snt select:focus { outline: none; border-bottom-color: #fff; }
+.snt input:focus-visible, .snt select:focus-visible { box-shadow: 0 3px 0 0 #fff; }
+.snt [aria-invalid="true"] { border-bottom-color: #FF9B98; }
+.snt-sel { display: inline-block; position: relative; }
+.snt select { appearance: none; -webkit-appearance: none; field-sizing: content; padding-right: 1em; cursor: pointer; }
+.snt select option { color: var(--ink); background: #fff; font-size: 1rem; }
+.snt-sel::after { content: ""; position: absolute; right: .15em; top: 50%; width: .32em; height: .32em; margin-top: -.25em; border-right: 3px solid var(--red-on-night); border-bottom: 3px solid var(--red-on-night); transform: rotate(45deg); pointer-events: none; }
+.snt-err { display: grid; gap: 4px; color: #FF9B98; font-weight: 650; }
+.snt-go { display: grid; gap: 16px; justify-items: start; }
+.snt-promise { max-width: 62ch; color: var(--on-night2); font-size: var(--t-sm); }
+.snt-done { display: grid; gap: 10px; }
+.snt-done:focus { outline: none; }
+@media (min-width: 900px) { .snt-go { grid-template-columns: auto 1fr; align-items: center; gap: 28px; } }
 .tlink.on-dark { color: #fff; }
 
 /* ---------- footer ---------- */

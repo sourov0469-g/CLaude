@@ -986,9 +986,23 @@ def book2():
 
 
 def book3():
+    """Q413 Tequila conversational form: the request written as one sentence with inline fields, plus the reply promise
+    in the firm's own words (30 to 60 minute inspection; scope, materials and price; office hours)"""
+    trades = ''.join(f'<option{" selected" if t == "Siding" else ""}>{e(t)}</option>' for t in BOOK_TRADES)
+    bands = ''.join(f'<option{" selected" if b_ == "Not sure yet" else ""}>{e(b_)}</option>' for b_ in BANDS)
     return f'''<div class="v book-3" data-tone="night">
-  <h2 class="sr-only">Book a free inspection</h2>
-  {form('b3', 'bk-chat')}
+  <form class="snt-form" data-snt novalidate aria-labelledby="snt-h">
+    <h2 class="snt-k" id="snt-h">Book a free inspection, in one sentence</h2>
+    <p class="snt">Hi Austin Pro, I'm <input name="name" autocomplete="given-name" aria-label="Your first name" placeholder="your name" size="9" required>.
+      Could you look at my <span class="snt-sel"><select name="trade" aria-label="What to look at">{trades}</select></span>
+      in <input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-label="Your ZIP code" placeholder="ZIP" size="5" required>?
+      My budget is roughly <span class="snt-sel"><select name="band" aria-label="Rough budget">{bands}</select></span>.
+      Call me on <input name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-label="Your phone number" placeholder="phone" size="12" required>.</p>
+    <ul class="snt-err" aria-live="polite" hidden></ul>
+    <div class="snt-go"><button class="btn btn-red snt-send" type="submit" data-cur="hero">Send my request</button>
+      <p class="snt-promise">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price in writing. The office calls you back to pick a time: Monday to Friday 8 AM to 8 PM, Saturday 8 AM to 6 PM, Sunday noon to 5 PM.</p></div>
+    <div class="snt-done" tabindex="-1" hidden><p class="bk-done-h">Request saved, <span data-snt-name>thanks</span></p><p>The office calls you back to pick a time.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
+  </form>
   <p class="b3-call">Rather talk? <a class="tlink on-dark" href="{TEL}">{PHONE}</a></p>
 </div>'''
 
@@ -1004,7 +1018,7 @@ SECTIONS = [
     ('near', 'Near you', [near1, near2, near3], ['Survey', 'Town by town', 'Neighbourhood drive']),
     ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'Names']),
     ('money', 'Money', [money1, money2, money3], ['Amount', 'What people paid', 'Receipt']),
-    ('book', 'Book', [book1, book2, book3], ['Call', 'Form', 'Chat']),
+    ('book', 'Book', [book1, book2, book3], ['Call', 'Form', 'One sentence']),
 ]
 
 

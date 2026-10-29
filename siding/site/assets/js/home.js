@@ -1109,9 +1109,34 @@
     s.api.book = trade => { if (trade) pre(trade); const f = $('input', $('form', r)); if (f) setTimeout(() => f.focus({ preventScroll: true }), 600); };
     if (motionOK()) G.from($('.b2-ph img', r), { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.08, duration: 1.1, ease: ease.io, scrollTrigger: { trigger: r, start: 'top 75%', once: true } });
   };
+  /* BOOK 3: Q413 Tequila's conversational form: one sentence with inline fields. Validated on Send, then live while
+     fixing (S0661); the errors are listed in plain words under the sentence and the first bad field takes focus. */
   V.book3 = (r, b, s) => {
-    const pre = Form($('form', r), b);
-    s.api.book = trade => { if (trade) pre(trade); const f = $('input', $('form', r)); if (f) setTimeout(() => f.focus({ preventScroll: true }), 600); };
+    const form = $('[data-snt]', r), errs = $('.snt-err', form), done = $('.snt-done', form);
+    const F = n => form.elements[n];
+    const rules = [['name', v => v.trim().length > 0, 'Add your first name.'], ['zip', v => /^\d{5}$/.test(v.trim()), 'ZIP codes have 5 digits, like 78752.'],
+      ['tel', v => v.replace(/\D/g, '').length === 10, 'Phone numbers have 10 digits, like (512) 550-0000.']];
+    let tried = false;
+    const check = focus => {
+      const bad = rules.filter(([n, ok]) => !ok(F(n).value));
+      rules.forEach(([n, ok]) => F(n).setAttribute('aria-invalid', !ok(F(n).value)));
+      errs.hidden = !bad.length; errs.innerHTML = bad.map(x => `<li>${x[2]}</li>`).join('');
+      if (bad.length && focus) F(bad[0][0]).focus();
+      return !bad.length;
+    };
+    rules.forEach(([n]) => b.on(F(n), 'input', () => { if (tried) check(false); }));
+    b.on(form, 'submit', e => {
+      e.preventDefault(); tried = true;
+      if (!check(true)) return;
+      $('[data-snt-name]', done).textContent = F('name').value.trim();
+      $$('.snt, .snt-go', form).forEach(el => { el.hidden = true; });
+      done.hidden = false; done.focus();
+    });
+    s.api.book = trade => {
+      if (trade) { const o = [...F('trade').options].find(x => x.text.toLowerCase() === trade.toLowerCase()); if (o) F('trade').value = o.value; }
+      setTimeout(() => F('name').focus({ preventScroll: true }), 600);
+    };
+    if (motionOK()) G.from($$('.snt-k, .snt, .snt-go', form), { y: 18, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once(form, 'top 80%') });
   };
 
   /* ========================================================================================
