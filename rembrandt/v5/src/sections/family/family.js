@@ -1,192 +1,134 @@
-// FAMILY. Facts only (owner): Bunk Walker started Rembrandt in 1995; his son Wade has run it since 2015; Rachel answers
-// the phone. The team photo shows nine staff; nobody in it is named, labelled or pointed at (we do not know who is who).
-// Each init runs inside the section's gsap.matchMedia() (main.js); tweens and triggers made here revert on swap, and the
-// returned cleanup undoes what GSAP does not own (DOM splits, classes, loops, listeners).
+// FAMILY (PLAN-V7 §6). Facts only: founded 1995 by Franklin "Bunk" Walker; his son Wade, president since 2015; Rachel
+// answers the phone, Monday to Friday, 9 to 5; BBB A+ since 2001; Owens Corning Platinum Preferred; 38 N Pioneer Blvd.
+// No quotes (none exist) and no portraits (nobody in the crew photo is identified).
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { lines, clipIn, onEnter, EASE, MOVE } from '../../js/fx.js';
-import { parallax } from '../../js/depth.js';
-import { loop } from '../../js/gl.js';
+import { img } from '../../js/main.js';
+import { EASE, beats } from '../../js/fx.js';
 
-// S1327 split: walk text nodes with a TreeWalker (never flatten), wrap each non-whitespace token in span.wd, keep whitespace
-// and inline elements (the name spans, any link) exactly as they are. Returns a restore for the original subtree.
-function splitWords(el) {
-  const saved = [...el.childNodes].map(n => n.cloneNode(true));
-  const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: n => (n.parentElement.closest('[data-no-split],script,style') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) });
-  const nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
+const visible = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.isIntersecting), { rootMargin: '100px' }); io.observe(el); return () => io.disconnect(); };
+
+// v1 [BANK] Q95 Masked Heading (React Bits; reduced motion verified in source): heading letters are windows onto a photo
+// (an SVG clipPath of the glyphs); the photo drifts idly (dx = sin(t*0.21)*18, dy = cos(t*0.17)*18*0.6) and answers the
+// pointer (parallax 26), smoothed 1 - exp(-dt/0.18); a spotlight (radius 160, smootherstep) follows the pointer with
+// tau 0.12 on hover and 0.6 when idle. F17 caps the rise at 0.3s. Adapted: WALKER, filled with the crew, standing under
+// drawn roof framing (rafters, collar tie, king post, ridge board, a sun-coloured top plate): the name under the roof.
+function masked(root, c) {
+  const svg = root.querySelector('.fm1-name'), im = root.querySelector('.fm1-img'), spot = root.querySelector('.fm1-spot');
+  im.setAttribute('href', img(im.dataset.fill));
+  const done = [];
+  const cleanup = () => done.forEach(f => f());
+  if (!c.motion) return cleanup;
+  beats(root, [root.querySelector('.fm1-frame'), root.querySelector('.fm1-h'), root.querySelectorAll('.fm1-facts li'), [root.querySelector('.fm1-call'), root.querySelector('.fm1-photo')]]);
+  gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 82%', once: true } })
+    .fromTo(root.querySelectorAll('.fm1-frame path, .fm1-frame rect'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05 }, 0)
+    .fromTo([im, root.querySelector('.fm1-under')], { y: 60 }, { y: 0, duration: 0.3, ease: EASE }, 0.1);
+  const st = { x: 0, y: 0, tx: 0, ty: 0, sx: 600, sy: 300, stx: 600, sty: 300, hover: false };
+  const pt = svg.createSVGPoint();
+  const onMove = e => {
+    if (e.pointerType !== 'mouse') return;
+    const r = svg.getBoundingClientRect(); st.tx = -((e.clientX - r.left) / r.width - 0.5) * 2 * 26; st.ty = -((e.clientY - r.top) / r.height - 0.5) * 2 * 26;
+    const m = svg.getScreenCTM(); if (!m) return; pt.x = e.clientX; pt.y = e.clientY; const p = pt.matrixTransform(m.inverse()); st.stx = p.x; st.sty = p.y; st.hover = true;
+  };
+  const onLeave = () => { st.tx = st.ty = 0; st.hover = false; };
+  root.addEventListener('pointermove', onMove, { passive: true }); root.addEventListener('pointerleave', onLeave);
+  let raf = 0, last = 0, inView = false, t0 = performance.now();
+  const frame = t => {
+    raf = 0; if (!inView || document.hidden) return;
+    const dt = Math.min(1 / 30, (t - last) / 1000 || 1 / 60); last = t; const s = (t - t0) / 1000;
+    const k = 1 - Math.exp(-dt / 0.18);
+    st.x += (st.tx + Math.sin(s * 0.21) * 18 - st.x) * k; st.y += (st.ty + Math.cos(s * 0.17) * 10.8 - st.y) * k;
+    if (!st.hover) { st.stx = 600 + Math.sin(s * 0.3) * 380; st.sty = 300 + Math.cos(s * 0.23) * 60; }
+    const ks = 1 - Math.exp(-dt / (st.hover ? 0.12 : 0.6));
+    st.sx += (st.stx - st.sx) * ks; st.sy += (st.sty - st.sy) * ks;
+    im.setAttribute('x', (-60 + st.x).toFixed(1)); im.setAttribute('y', (-330 + st.y).toFixed(1));
+    spot.setAttribute('cx', st.sx.toFixed(1)); spot.setAttribute('cy', st.sy.toFixed(1));
+    raf = requestAnimationFrame(frame);
+  };
+  const wake = () => { if (!raf && inView && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  done.push(visible(svg, v => { inView = v; if (v) wake(); }));
+  const onVis = () => wake(); document.addEventListener('visibilitychange', onVis);
+  done.push(() => { cancelAnimationFrame(raf); document.removeEventListener('visibilitychange', onVis); root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); });
+  return cleanup;
+}
+
+// v2 ⟦S1327⟧ scroll-scrubbed word reveal (STRONG): a marked-up passage becomes readable word by word as scroll advances:
+// word progress = clamp(reveal * N - i) with ~20% overlap; opacity 0.12 -> 1, blur 6px -> 0, y 0.12em -> 0; text nodes
+// split with a TreeWalker (never innerHTML); one untouched accessible copy kept; no easing in the scroll mapping.
+// Adapted: a short statement in the firm's voice (not a quote; attributed to no one). In step with it, a roof draws over
+// the passage: ridge first, then shingle courses from the eave up, the order they go on. Reduced motion: all shown.
+function statement(root, c) {
+  const p = root.querySelector('.fm2-say'), ridge = root.querySelector('.fm2-ridge'), eave = root.querySelector('.fm2-eave'), courses = [...root.querySelectorAll('.fm2-courses path')];
+  const done = [];
+  const cleanup = () => done.forEach(f => f());
+  if (!c.motion) return cleanup;
+  const copy = document.createElement('p'); copy.className = 'vh'; copy.textContent = p.textContent; p.after(copy); p.setAttribute('aria-hidden', 'true');
+  const walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT), nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
+  const words = [];
   for (const n of nodes) {
     const frag = document.createDocumentFragment();
-    for (const part of n.textContent.split(/(\s+)/)) {
-      if (!part) continue;
-      if (/^\s+$/.test(part)) { frag.append(part); continue; }
-      const w = document.createElement('span'); w.className = 'wd'; w.textContent = part; frag.append(w);
-    }
+    for (const part of n.textContent.split(/(\s+)/)) { if (!part) continue; if (/^\s+$/.test(part)) { frag.append(part); continue; } const w = document.createElement('span'); w.className = 'w'; w.textContent = part; words.push(w); frag.append(w); }
     n.replaceWith(frag);
   }
-  return () => el.replaceChildren(...saved);
+  done.push(() => { copy.remove(); p.removeAttribute('aria-hidden'); p.textContent = copy.textContent; });
+  const N = words.length, ord = courses.slice().reverse(); // bottom course first
+  gsap.set(ridge, { drawSVG: '0%' }); gsap.set(eave, { drawSVG: '50% 50%' }); gsap.set(ord, { drawSVG: '0%' });
+  const render = r => {
+    words.forEach((w, i) => { const k = gsap.utils.clamp(0, 1, (r * (N + 1.2) - i) / 1.2); w.style.opacity = (0.12 + 0.88 * k).toFixed(3); w.style.filter = k > 0.98 ? '' : `blur(${(6 * (1 - k)).toFixed(2)}px)`; w.style.transform = k > 0.98 ? '' : `translateY(${(0.12 * (1 - k)).toFixed(3)}em)`; });
+    gsap.set(eave, { drawSVG: `${50 - 50 * Math.min(1, r * 3)}% ${50 + 50 * Math.min(1, r * 3)}%` });
+    gsap.set(ridge, { drawSVG: `${100 * gsap.utils.clamp(0, 1, (r - 0.1) * 3)}%` });
+    ord.forEach((cp, i) => gsap.set(cp, { drawSVG: `${100 * gsap.utils.clamp(0, 1, (r - 0.35) * ord.length * 1.6 - i)}%` }));
+  };
+  render(0);
+  ScrollTrigger.create({ trigger: p, start: 'top 88%', end: 'bottom 38%', scrub: true, onUpdate: s => render(s.progress), onRefresh: s => render(s.progress) });
+  beats(root, [root.querySelector('.fm2-photo'), root.querySelector('.fm2-call')], { start: 'top 75%' });
+  return cleanup;
 }
 
-// Group rise (S0075: 16px, 0.6s, ease-out, 0.1s between chunks) with opacity only, never visibility, so links stay in the
-// tab order and the accessibility tree before their reveal; focusing one finishes its reveal at once (G9 keyboard walk).
-function show(els, trigger, start) {
-  els = [...els].filter(Boolean);
-  const t = gsap.fromTo(els, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: EASE, stagger: 0.1, scrollTrigger: onEnter(trigger, { start }) });
-  const done = () => t.progress(1);
-  els.forEach(el => el.addEventListener('focusin', done));
-  return () => els.forEach(el => el.removeEventListener('focusin', done));
-}
-
-// v1 Sentence. Pinned scene (end +=150%, scrub; S1321 pinned story, S0019 row 6) in which the family sentence lights word by
-// word (S1327): one normalized progress, local = clamp((p - i * step) / d) with a 25% word overlap, opacity .18 -> 1 and a
-// .14em rise, no blur (G9: blur is one-shot only). A sun bar sweeps under each name as it lights (S0410 emphasis, 500ms;
-// it retracts in 150ms if the visitor scrolls back). The photo opens with the S1321 clip reveal and drifts at background
-// depth; pointer depth moves the photo and the sentence in opposite, unequal amounts (S1330).
-function sentence(root, c) {
-  if (!c.motion) return; // reduced motion: the whole sentence, names underlined, no pin (S1327)
-  const pin = root.querySelector('.fv1-pin'), say = root.querySelector('.fv1-say'), fig = root.querySelector('.fv1-ph'), sy = root.querySelector('.fv1-sy');
-  const restore = say.querySelector('.wd') ? null : splitWords(say); // prepText (cursor) may have split it already
-  const words = [...say.querySelectorAll('.wd')], N = words.length;
-  const OV = 0.25, D = 1 / ((1 - OV) * (N - 1) + 1), STEP = (1 - OV) * D;
-  const last = words.map(() => -1);
-  const names = [...say.querySelectorAll('.fv1-nm')].map(n => ({ n, i: words.indexOf(n.querySelector('.wd')), on: false }));
-  const st = { p: 0 };
-  const draw = () => {
-    for (let i = 0; i < N; i++) {
-      const v = Math.round(Math.min(1, Math.max(0, (st.p - i * STEP) / D)) * 1000) / 1000;
-      if (v !== last[i]) { last[i] = v; words[i].style.setProperty('--wp', v); }
-    }
-    for (const m of names) { // hysteresis so a name does not flicker at the threshold
-      const v = last[m.i], on = m.on ? v > 0.45 : v >= 0.7;
-      if (on !== m.on) { m.on = on; m.n.classList.toggle('is-lit', on); }
+// v3 ⟦S1362⟧ technical-wireframe-info-layout: an outlined object with annotation pills joined by connector lines,
+// labels appearing in stages, connectors drawing; emphasis by brightness and line weight. Adapted: a king-post roof
+// truss on blueprint blue; each member carries one true fact (pills are the accessible control; the members mirror them
+// for the pointer). Plywood roof-deck sheets behind light up under the pointer.
+const ANCHOR = { bunk: [500, 62], wade: [500, 220], rachel: [300, 360], bbb: [395, 288], oc: [605, 288], addr: [937, 357] };
+const SAY = { bunk: 'Founded in 1995 by Franklin "Bunk" Walker.', wade: 'His son, Wade Walker, has been president since 2015.', rachel: 'Rachel answers the phone, Monday to Friday, 9 to 5.', bbb: 'Rated A+ by the Better Business Bureau since 2001.', oc: 'An Owens Corning Platinum Preferred contractor.', addr: 'The office: 38 N Pioneer Blvd, Springboro, OH 45066.' };
+function truss(root, c) {
+  const svg = root.querySelector('.fm3-truss'), leads = root.querySelector('.fm3-leads'), say = root.querySelector('.fm3-say');
+  const pills = [...root.querySelectorAll('.fm3-pill')], members = [...svg.querySelectorAll('.m')];
+  const NS = 'http://www.w3.org/2000/svg', paths = {}, pt = svg.createSVGPoint(), done = [];
+  for (const b of pills) { const p = document.createElementNS(NS, 'path'); p.dataset.m = b.dataset.m; leads.append(p); paths[b.dataset.m] = p; }
+  const layout = () => {
+    const m = svg.getScreenCTM(); if (!m || getComputedStyle(leads).display === 'none') return; const inv = m.inverse();
+    for (const b of pills) {
+      const r = b.getBoundingClientRect(); pt.x = r.left + r.width / 2; pt.y = r.top + r.height / 2; const q = pt.matrixTransform(inv);
+      const [ax, ay] = ANCHOR[b.dataset.m]; paths[b.dataset.m].setAttribute('d', `M${q.x.toFixed(1)} ${q.y.toFixed(1)} L${ax} ${q.y.toFixed(1) * 0.5 + ay * 0.5} L${ax} ${ay}`);
     }
   };
-  root.classList.add('is-live'); draw();
-  if (c.wide) {
-    const v = Number(sy.dataset.sy) || 10;
-    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: pin, start: 'top top', end: '+=150%', scrub: 0.8, pin: true, anticipatePin: 1, invalidateOnRefresh: true } })
-      .fromTo(sy, { yPercent: -v / 2 }, { yPercent: v / 2, duration: 1 }, 0) // the bg layer inside the pinned scene (S0019 row 6)
-      .fromTo(st, { p: 0 }, { p: 1, duration: 0.86, onUpdate: draw }, 0.04);
-  } else { // no pin below 900px: the words light as the sentence passes through the viewport
-    gsap.fromTo(st, { p: 0 }, { p: 1, ease: 'none', onUpdate: draw, scrollTrigger: { trigger: say, start: 'top 85%', end: 'bottom 40%', scrub: 0.6 } });
-    parallax(root);
-  }
-  clipIn(fig, { scrollTrigger: onEnter(fig, { start: 'top 85%' }) });
-  const unshow = show([root.querySelector('.fv1-copy .tlink')], root, 'top 45%');
-  return () => {
-    unshow(); root.classList.remove('is-live'); names.forEach(m => m.n.classList.remove('is-lit'));
-    if (restore) restore(); else words.forEach(w => w.style.removeProperty('--wp'));
+  const ro = new ResizeObserver(layout); ro.observe(root); layout(); done.push(() => ro.disconnect());
+  let pinned = null, shown = null;
+  const show = k => {
+    if (k === shown) return; shown = k;
+    svg.classList.toggle('has-m', !!k);
+    members.forEach(m => m.classList.toggle('is-on', m.dataset.m === k));
+    Object.entries(paths).forEach(([id, p]) => p.classList.toggle('is-on', id === k));
   };
+  const pin = k => { pinned = pinned === k ? null : k; pills.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === pinned))); show(pinned); say.textContent = pinned ? SAY[pinned] : ''; };
+  const over = e => { const t = e.target.closest('[data-m]'); if (t && (e.pointerType === 'mouse' || e.type === 'focusin')) show(t.dataset.m); };
+  const out = e => { const t = e.target.closest('[data-m]'); if (t && (!e.relatedTarget || !e.relatedTarget.closest || e.relatedTarget.closest('[data-m]') !== t)) show(pinned); };
+  const click = e => { const t = e.target.closest('[data-m]'); if (t) pin(t.dataset.m); };
+  root.addEventListener('pointerover', over); root.addEventListener('pointerout', out); root.addEventListener('focusin', over); root.addEventListener('focusout', out); root.addEventListener('click', click);
+  const ptr = e => { if (e.pointerType !== 'mouse') return; const r = root.getBoundingClientRect(); root.style.setProperty('--cx', (e.clientX - r.left).toFixed(0) + 'px'); root.style.setProperty('--cy', (e.clientY - r.top).toFixed(0) + 'px'); root.classList.add('is-ptr'); };
+  const ptrOut = () => root.classList.remove('is-ptr');
+  if (c.fine && c.motion) { root.addEventListener('pointermove', ptr, { passive: true }); root.addEventListener('pointerleave', ptrOut); }
+  done.push(() => { ['pointerover', 'pointerout', 'focusin', 'focusout', 'click'].forEach((ev, i) => root.removeEventListener(ev, [over, out, over, out, click][i])); root.removeEventListener('pointermove', ptr); root.removeEventListener('pointerleave', ptrOut); });
+  const cleanup = () => done.forEach(f => f());
+  if (!c.motion) return cleanup;
+  beats(root, [root.querySelector('.fm3-h'), root.querySelector('.fm3-note')]);
+  // staged: the members draw, then the pills arrive by role (people, credentials, office) and their connectors draw
+  gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 80%', once: true }, onComplete: layout })
+    .fromTo(members, { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05 }, 0)
+    .fromTo(pills, { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform,opacity,visibility' }, 0.25)
+    .fromTo(Object.values(paths), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.06 }, 0.3);
+  return cleanup;
 }
 
-// v2 Years. S1325 scroll-progress timeline: a semantic <ol>, a quiet base rail from the first dot's centre to the last's,
-// a fill at scaleY(progress) (one normalized value, scrub: true, so line head and active step always agree), reached steps
-// marked with aria-current="step". Each year rises into its mask when the head reaches it; 2015 counts up from 1995 once
-// (G4 #11: easeOutCubic over 1.5s, tabular figures, the real value stays in the HTML). The photo arrives at Today with a
-// wipe from the rail's side (S0060 clip reveal, ease-in-out). Huge faint numerals drift at background speed (S0019 rows
-// 13 and 14), and the photo and the numerals answer the pointer in opposite, unequal amounts (S1330).
-function years(root, c) {
-  const tl = root.querySelector('.fv2-tl'), rail = root.querySelector('.fv2-rail'), fill = root.querySelector('.fv2-fill');
-  const steps = [...root.querySelectorAll('.fv2-step')], dots = steps.map(s => s.querySelector('.fv2-dot'));
-  let f = steps.map(() => 0);
-  const measure = () => { // S1325: measure the point centres, not the section edges
-    const r = tl.getBoundingClientRect(), ys = dots.map(d => { const b = d.getBoundingClientRect(); return b.top + b.height / 2 - r.top; });
-    const a = ys[0], b = ys[ys.length - 1], h = Math.max(0, b - a);
-    rail.style.top = a.toFixed(1) + 'px'; rail.style.height = h.toFixed(1) + 'px';
-    f = ys.map(y => (h ? (y - a) / h : 0));
-  };
-  measure();
-  const ro = new ResizeObserver(measure); ro.observe(tl);
-  ScrollTrigger.addEventListener('refreshInit', measure);
-  const off = () => { ro.disconnect(); ScrollTrigger.removeEventListener('refreshInit', measure); rail.style.top = rail.style.height = ''; };
-  if (!c.motion) return off; // reduced motion: the complete line, every step reached (S1325)
-
-  root.classList.add('is-live');
-  const made = [];
-  const plays = steps.map(s => {
-    const y = s.querySelector('.fv2-y'), inner = y.querySelector('.ln > span');
-    const t = gsap.timeline({ paused: true }).fromTo(inner, { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: EASE }); // S0451 masked rise
-    if (y.dataset.from) {
-      let digits = [...inner.querySelectorAll('.ch')];
-      if (!digits.length) { // the cursor's prepText did not run (touch): make the digit spans and keep one accessible name
-        const text = inner.textContent.trim(), w = document.createElement('span');
-        w.className = 'wd'; w.setAttribute('aria-hidden', 'true');
-        for (const d of text) { const ch = document.createElement('span'); ch.className = 'ch'; ch.textContent = d; w.append(ch); }
-        y.setAttribute('aria-label', text); inner.replaceChildren(w); digits = [...w.children];
-        made.push(() => { inner.textContent = text; y.removeAttribute('aria-label'); });
-      }
-      const to = Number(digits.map(d => d.textContent).join('')), n = { v: Number(y.dataset.from) };
-      const write = () => { const s = String(Math.round(n.v)); digits.forEach((d, k) => { if (d.textContent !== s[k]) d.textContent = s[k]; }); };
-      write();
-      t.fromTo(n, { v: Number(y.dataset.from) }, { v: to, duration: 1.5, ease: 'power2.out', onUpdate: write }, 0);
-      made.push(() => { n.v = to; write(); });
-    }
-    const fig = s.querySelector('.fv2-ph');
-    if (fig) t.fromTo(fig, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: MOVE }, 0.1)
-      .fromTo(fig.querySelector('img'), { scale: 1.08 }, { scale: 1, duration: 1.3, ease: EASE }, 0.1);
-    return t;
-  });
-  const shown = steps.map(() => false), on = steps.map(() => false);
-  const paint = s => {
-    const head = s.isActive || s.progress === 1 ? s.progress : -1;
-    let cur = -1;
-    steps.forEach((el, i) => {
-      const reached = head >= f[i] - 0.002;
-      if (reached) cur = i;
-      if (reached !== on[i]) { on[i] = reached; el.classList.toggle('is-on', reached); }
-      if (reached && !shown[i]) { shown[i] = true; plays[i].play(); } // once (G7 #5)
-    });
-    steps.forEach((el, i) => (i === cur ? el.setAttribute('aria-current', 'step') : el.removeAttribute('aria-current')));
-  };
-  gsap.fromTo(fill, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: rail, start: 'top 62%', end: 'bottom 62%', scrub: true, invalidateOnRefresh: true, onUpdate: paint, onRefresh: paint } });
-  const unshow = show([root.querySelector('.fv2-cta')], root.querySelector('.fv2-cta'), 'top 92%');
-  steps.forEach(s => parallax(s, s)); // numerals and the photo, each over its own step's pass
-  return () => {
-    off(); unshow(); made.forEach(fn => fn());
-    root.classList.remove('is-live'); steps.forEach(el => { el.classList.remove('is-on'); el.removeAttribute('aria-current'); });
-  };
-}
-
-// v3 Strata. The photo is three bands (sign, people, ground) of one image. On scroll they slide at different rates
-// (S0019 row 14: yPercent (i+1)*8, scrub 0.5, three layers) and lock into the one exact picture while it is centred
-// (progress .4 to .6 of the section's pass), then part the other way. Under the pointer they shift in opposite, unequal directions (S1330:
-// one damped normalized target, alpha = 1 - (1 - 0.055)^(dt*60), dt <= 1/30), loosening only away from the lock, so the
-// centred picture is always exact. Calm by default (S0489): small amplitudes, no idle loop.
-function strata(root, c) {
-  if (!c.motion) return; // reduced motion: the exact picture, still
-  const fig = root.querySelector('.fv3-ph'), bands = [...root.querySelectorAll('.fv3-b')], h = root.querySelector('.fv3-h');
-  const named = !h.hasAttribute('aria-label'); // keep a name while the masked lines are hidden (prepText names it on desktop)
-  if (named) h.setAttribute('aria-label', [...h.querySelectorAll('.ln')].map(l => l.textContent.trim()).join(' '));
-  lines(h, { scrollTrigger: onEnter(root) });
-  const unshow = show(root.querySelectorAll('.fv3-side > *'), root.querySelector('.fv3-side'), 'top 90%');
-  const offs = [unshow, () => { if (named) h.removeAttribute('aria-label'); }];
-  const end = () => offs.forEach(f => f());
-  const k = c.wide ? 1 : 0.5; // S0204: halve the distances on small screens
-  let p = 0, lp = null;
-  // one pass of the whole section; progress .5 is the section centred in the viewport
-  const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: 0.5, invalidateOnRefresh: true, onUpdate: s => { p = s.progress; if (lp) lp.wake(); } } });
-  bands.forEach((b, i) => {
-    const a = (i + 1) * 8 * k;
-    tl.fromTo(b, { yPercent: a }, { yPercent: 0, duration: 0.28 }, 0.12).to(b, { yPercent: -a, duration: 0.28 }, 0.6);
-  });
-  tl.set({}, {}, 1);
-  if (!c.fine) return end;
-  const AMP = [0.012, -0.022, 0.034]; // fractions of half the viewport width: sign far, people opposite, ground near
-  const set = bands.map(b => gsap.quickSetter(b, 'x', 'px')), was = bands.map(() => 0);
-  const s = { x: 0, tx: 0 };
-  let hw = innerWidth / 2;
-  lp = loop(fig, dt => {
-    const a = 1 - Math.pow(1 - 0.055, dt * 60);
-    s.x += (s.tx - s.x) * a; s.x = Math.round(s.x * 1000) / 1000;
-    const t = Math.min(1, Math.max(0, (Math.abs(p - 0.5) - 0.1) / 0.14)), L = t * t * (3 - 2 * t); // 0 inside the lock
-    bands.forEach((b, i) => { const x = Math.round(AMP[i] * hw * s.x * L * 10) / 10; if (x !== was[i]) { was[i] = x; set[i](x); } });
-    return Math.abs(s.tx - s.x) > 0.001;
-  });
-  const move = e => { if (e.pointerType !== 'mouse') return; s.tx = e.clientX / innerWidth * 2 - 1; lp.wake(); };
-  const leave = () => { s.tx = 0; lp.wake(); };
-  const resize = () => { hw = innerWidth / 2; };
-  root.addEventListener('pointermove', move); root.addEventListener('pointerleave', leave); addEventListener('resize', resize);
-  offs.push(() => { lp.stop(); root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('resize', resize); gsap.set(bands, { x: 0 }); });
-  return end;
-}
-
-export default { 1: sentence, 2: years, 3: strata };
+export default { 1: masked, 2: statement, 3: truss };

@@ -1,77 +1,99 @@
-/* FAMILY: v1 Sentence (pinned scrubbed word reveal, S1327), v2 Years (scroll-progress timeline, S1325),
- * v3 Strata (the team photo cut in three bands that slide apart and lock, S0019 row 14 + S1330).
- * Field: mist. A tonal cut from the sky of work above, a hard cut into the ink of how below. Ink text 12.7:1. */
-.fv{position:relative;isolation:isolate;overflow:clip;background:var(--mist);color:var(--ink)}
-.fv .tlink{color:var(--ink)}
-.fv :focus-visible{outline-color:var(--ink)} /* the global sun ring is 1.36:1 on mist; ink is 12.5:1 (WCAG 1.4.11) */
+/* FAMILY (PLAN-V7 §6). v1 [BANK] Q95 Masked Heading: WALKER filled with the crew photo, under drawn roof framing;
+   v2 ⟦S1327⟧ scroll-scrubbed word reveal under a roof that draws with it; v3 ⟦S1362⟧ technical wireframe with
+   annotation pills: a king-post truss whose members carry the family's facts. No portraits (nobody is identified). */
+.fm{position:relative;overflow:clip}
 
-/* v1 Sentence: the photo bleeds off the left edge; the sentence lights word by word beside it */
-.fv1{--dim:.18;--rise:.14em} /* S1327: hidden opacity .12 to .3, offset .08 to .22em */
-.fv1-pin{position:relative;height:max(640px,100svh);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;column-gap:clamp(40px,5vw,88px);padding:calc(var(--nav-h) + 20px) var(--gutter) 44px 0}
-.fv1-ph{grid-column:1;grid-row:1;width:100%;aspect-ratio:3/2;margin:0}
-.fv1-sy{position:absolute;inset:-4% 0 -8%}         /* overscan for the bg drift, top-anchored so the sign stays whole */
-.fv1-pd{position:absolute;inset:0 -1.6%}           /* and for pointer depth */
-.fv1-pd img{width:100%;height:100%;object-fit:cover;object-position:50% 0%}
-.fv1-copy{grid-column:2;grid-row:1;display:grid;gap:clamp(20px,3.4vh,36px);justify-items:start}
-.fv1-say{font-size:clamp(1.75rem,.9rem + 2.3vw,3rem);font-weight:700;line-height:1.14;letter-spacing:-.022em;text-wrap:balance;isolation:isolate}
-.fv1-nm{position:relative;white-space:nowrap}
-.fv1-bar{position:absolute;left:-.05em;right:-.05em;bottom:.02em;height:.2em;background:var(--sun);z-index:-1;transform-origin:0 50%}
-/* the scrubbed state exists only once JS adds .is-live (content is complete without it) */
-.fv1.is-live .fv1-say .wd{opacity:calc(var(--dim) + (1 - var(--dim)) * var(--wp,1));transform:translate3d(0,calc((1 - var(--wp,1)) * var(--rise)),0)}
-.fv1.is-live .fv1-bar{transform:scaleX(0);transition:transform var(--dur-quick) var(--ease-out)}
-.fv1.is-live .is-lit .fv1-bar{transform:scaleX(1);transition:transform .5s var(--ease-in-out)} /* S0410 emphasis 500ms */
-@media (max-width:899px){
-  .fv1-pin{height:auto;grid-template-columns:minmax(0,1fr);row-gap:clamp(28px,7vw,48px);padding:clamp(4rem,2.5rem + 7.5vw,8rem) var(--gutter)}
-  .fv1-ph{grid-row:1;margin:0 calc(var(--gutter) * -1);width:auto}
-  .fv1-copy{grid-column:1;grid-row:2}
-}
+/* ---------- v1: ink field, the name as a window onto the crew */
+.fm1{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,56px);padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.fm1-stage{max-width:1240px;width:100%;margin:0 auto}
+.fm1-name{width:100%;height:auto;overflow:visible}
+.fm1-tx,.fm1-rim{font:900 300px/1 "Epilogue",sans-serif;letter-spacing:-.02em}
+.fm1-under{fill:var(--blue)}
+.fm1-rim{fill:none;stroke:oklch(1 0 0 / .55);stroke-width:2;vector-effect:non-scaling-stroke}
+.fm1-frame path,.fm1-frame rect{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fm1-frame .fm1-plate{stroke:var(--sun);stroke-width:5}
+.fm1-frame .fm1-raf{stroke-width:5}
+.fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-web{stroke:oklch(1 0 0 / .55)}
+.fm1-frame .fm1-ridge{fill:var(--ink)}
+.fm1-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px 48px;max-width:1240px;width:100%;margin:0 auto}
+.fm1-h{grid-column:1/-1;font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.fm1-facts{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:var(--t-lead);line-height:1.4}
+.fm1-facts li{display:grid;grid-template-columns:5.2ch minmax(0,1fr);gap:16px;align-items:baseline}
+.fm1-facts b{color:var(--sun);font-weight:800}
+.fm1-call{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 22px 0 14px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
+.fm1-ico{width:32px;height:32px;flex:none;overflow:visible}
+.fm1-ico-r{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.fm1-ico-w{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.fm1-ico-win{fill:var(--sky);stroke:var(--ink);stroke-width:1.5;transition:fill .18s var(--ease-x)}
+.fm1-ico-door{fill:var(--ink);transform-origin:0 50%;transform-box:fill-box}
+@media (hover:hover){.fm1-call:hover .fm1-ico-win{fill:var(--sun)}}
+.fm1-call:focus-visible .fm1-ico-win{fill:var(--sun)}
+.fm1-call.is-press .fm1-ico-door{animation:fm-door .35s var(--ease-x)}
+@keyframes fm-door{0%{transform:scaleX(1)}40%{transform:scaleX(.15)}100%{transform:scaleX(1)}}
+.fm1-photo{max-width:1240px;width:100%;margin:0 auto;aspect-ratio:1088/801;max-height:70svh}
+.fm1-photo img{object-position:50% 70%}
+@media (max-width:760px){.fm1-copy{grid-template-columns:1fr}.fm1-call{justify-self:start}}
 
-/* v2 Years: a left rail from the first dot to the last; each year owns a screen; the photo arrives at Today */
-.fv2{--dot:clamp(16px,1.5vw,22px);padding:clamp(5rem,3rem + 8vw,10rem) var(--gutter) clamp(4rem,2.5rem + 7.5vw,8rem)}
-.fv2-tl{position:relative}
-.fv2-rail{position:absolute;left:calc(var(--dot) / 2 - 1px);top:0;width:2px;height:100%;background:rgb(11 31 77/.14)}
-.fv2-fill{position:absolute;inset:0;background:var(--blue);transform-origin:50% 0}
-.fv2-list{position:relative;list-style:none;margin:0;padding:0}
-.fv2-step{position:relative;display:grid;grid-template-columns:var(--dot) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:clamp(20px,3vw,48px);align-content:start;min-height:min(56svh,560px)}
-.fv2-dot{grid-column:1;grid-row:1;align-self:center;width:var(--dot);height:var(--dot);border-radius:50%;background:var(--blue);box-shadow:0 0 0 6px var(--mist);position:relative;z-index:1;
-  transition:transform var(--dur-fast) var(--ease-out),background-color var(--dur-fast) var(--ease-out)}
-.fv2-y .ln{padding-bottom:.2em;margin-bottom:-.2em;overflow-clip-margin:0px} /* a clean mask: nothing peeks while hidden */
-.fv2-y{grid-column:2;grid-row:1;font-size:clamp(3.5rem,1.4rem + 7vw,8.5rem);font-weight:800;line-height:1;letter-spacing:-.045em;color:var(--blue)}
-.fv2-t{grid-column:2;grid-row:2;margin-top:clamp(8px,1.4vh,16px);font-size:clamp(1.375rem,1rem + 1.4vw,2.25rem);font-weight:600;line-height:1.2;letter-spacing:-.015em;max-width:20ch;text-wrap:balance;transition:color var(--dur-fast) var(--ease-out)}
-/* huge faint numerals at background depth (S0019 multi-layer parallax); decoration only */
-.fv2-gh{position:absolute;z-index:-1;right:-.03em;top:50%;margin-top:-.62em;font-size:clamp(9rem,27vw,28rem);font-weight:800;line-height:1;letter-spacing:-.06em;color:rgb(255 255 255/.55);pointer-events:none;user-select:none}
-.fv2-gh>span{display:block}
-.fv2-now{grid-template-columns:var(--dot) minmax(0,4fr) minmax(0,7fr);grid-template-rows:auto auto auto 1fr;min-height:0}
-.fv2-cta{grid-column:2;grid-row:3;justify-self:start;margin-top:clamp(12px,2vh,24px)}
-.fv2-ph{grid-column:3;grid-row:1/-1;align-self:start;margin:0;aspect-ratio:3/2}
-.fv2-sy{position:absolute;inset:-9% 0}
-.fv2-pd{position:absolute;inset:0 -2.5%}
-.fv2-pd img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
-/* states exist only once JS adds .is-live; reached steps (.is-on) look like the complete default */
-.fv2.is-live .fv2-step:not(.is-on) .fv2-dot{transform:scale(.5);background:var(--steel)}
-.fv2.is-live .fv2-step:not(.is-on) .fv2-t{color:var(--muted)}
-@media (max-width:899px){
-  .fv2-step{min-height:min(48svh,440px);padding-bottom:clamp(48px,12vw,96px)} /* each year still gets its own beat on a phone */
-  .fv2-now{grid-template-columns:var(--dot) minmax(0,1fr);padding-bottom:0;min-height:0}
-  .fv2-ph{grid-column:2;grid-row:4;margin-top:clamp(24px,6vw,40px)}
-  .fv2-gh{font-size:46vw;margin-top:-.7em;color:rgb(255 255 255/.45)}
-}
+/* ---------- v2: warm white, the statement sharpens word by word while a roof draws over it */
+.fm2{--vbg:#fffaf0;background:#fffaf0;color:var(--ink);padding:clamp(5rem,3rem + 6vw,9rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,9rem) + var(--mbar))}
+.fm2-bg{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
+.fm2-bg path{fill:oklch(0.9 0.03 80 / .55)}
+.fm2-grid{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:center;max-width:1280px;margin:0 auto}
+.fm2-photo{position:relative;margin:0}
+.fm2-gable{aspect-ratio:4/5;clip-path:polygon(0 30%,50% 2%,100% 30%,100% 100%,0 100%);overflow:hidden;background:var(--mist)}
+.fm2-gable img{width:100%;height:100%;object-fit:cover;object-position:46% 60%}
+.fm2-gable-line{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.fm2-gable-line path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fm2-text{display:grid;gap:28px}
+.fm2-house{width:min(100%,560px);height:auto;overflow:visible}
+.fm2-ridge,.fm2-eave{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fm2-eave{stroke:var(--blue);stroke-width:5}
+.fm2-courses path{stroke:var(--shingle);stroke-width:7;opacity:.85}
+.fm2-say{font-size:clamp(1.9rem,1.2rem + 2.4vw,3.6rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:22ch;text-wrap:pretty}
+.fm2-say .w{display:inline-block}
+.fm2-call{display:inline-flex;align-items:center;gap:12px;justify-self:start;min-height:52px;padding:0 20px 0 24px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none}
+.fm2-hs{width:28px;height:28px;overflow:visible}
+.fm2-hs-b{fill:var(--sun);stroke:var(--sun);stroke-width:1.5;stroke-linejoin:round;transform-origin:50% 50%;transform-box:fill-box}
+.fm2-ring{fill:none;stroke:var(--sun);stroke-width:2.2;stroke-linecap:round;opacity:0}
+@media (hover:hover){.fm2-call:hover .fm2-hs-b{animation:fm-wob .4s ease-in-out}}
+.fm2-call:focus-visible .fm2-hs-b{animation:fm-wob .4s ease-in-out}
+@keyframes fm-wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}50%{transform:rotate(9deg)}75%{transform:rotate(-5deg)}}
+.fm2-call.is-press .fm2-ring{animation:fm-ring .45s ease-out}
+@keyframes fm-ring{0%{opacity:1;transform:scale(.8)}100%{opacity:0;transform:scale(1.3)}}
+.fm2-ring{transform-origin:20px 12px;transform-box:view-box}
+@media (max-width:860px){.fm2-grid{grid-template-columns:1fr}.fm2-photo{max-width:420px}}
 
-/* v3 Strata: three bands of one photo (cut on the soffit shadow at 297/801 and below the hands at 692/801);
- * each lower band overlaps the one above by 1px so the resting picture has no seam */
-.fv3{padding:clamp(5rem,3rem + 8vw,10rem) var(--gutter);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,24px);row-gap:clamp(24px,4.5vh,48px)}
-.fv3-h{grid-column:1/-1;grid-row:1}
-.fv3-ph{grid-column:6/-1;grid-row:2;position:relative;margin:0;aspect-ratio:1088/801;justify-self:end;width:min(100%,calc((100svh - var(--nav-h) - 13rem) * 1.3583))} /* heading and picture share one screen at the lock */
-.fv3-pd,.fv3-b{position:absolute;inset:0}
-.fv3-b img{width:100%;height:100%;object-fit:cover}
-.fv3-b0{clip-path:inset(0 0 62.92% 0)}
-.fv3-b1{clip-path:inset(calc(37.08% - 1px) 0 13.61% 0)}
-.fv3-b2{clip-path:inset(calc(86.39% - 1px) 0 0 0)}
-.fv3-side{grid-column:1/span 5;grid-row:2;align-self:end;display:grid;gap:clamp(14px,2vh,22px);justify-items:start;padding-right:clamp(0px,2vw,32px)}
-.fv3-l{font-size:clamp(1.25rem,.95rem + 1vw,1.75rem);font-weight:600;line-height:1.3;letter-spacing:-.01em;max-width:20ch;text-wrap:balance}
-@media (max-width:899px){
-  .fv3{grid-template-columns:minmax(0,1fr)}
-  .fv3-h,.fv3-ph,.fv3-side{grid-column:1}
-  .fv3-ph{margin:0 calc(var(--gutter) * -1);width:auto;justify-self:stretch}
-  .fv3-side{grid-row:3}
+/* ---------- v3: blueprint blue, a king-post truss whose members carry the facts; plywood deck behind */
+.fm3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,8rem) + var(--mbar))}
+.fm3-deck{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#fm3-ply path{fill:none;stroke:oklch(1 0 0 / .08);stroke-width:1.5}
+.fm3-deck--hi{opacity:0;-webkit-mask-image:radial-gradient(circle 220px at var(--cx,-999px) var(--cy,-999px),#000,transparent);mask-image:radial-gradient(circle 220px at var(--cx,-999px) var(--cy,-999px),#000,transparent);filter:brightness(3);transition:opacity .3s var(--ease-x)}
+.fm3.is-ptr .fm3-deck--hi{opacity:1}
+.fm3-head{position:relative;display:grid;gap:12px;max-width:1240px;margin:0 auto clamp(28px,4vh,48px)}
+.fm3-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.fm3-note{font-size:var(--t-lead);line-height:1.4;color:var(--on-blue-muted);max-width:46ch}
+.fm3-stage{position:relative;max-width:1100px;margin:0 auto;padding:56px 0}
+.fm3-truss{width:100%;height:auto;overflow:visible}
+.m{fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;cursor:pointer;transition:stroke .22s var(--ease-x),opacity .22s var(--ease-x)}
+.m--plate{fill:var(--sun);stroke:var(--ink);stroke-width:2.5}
+.fm3-truss.has-m .m{opacity:.35}
+.fm3-truss.has-m .m.is-on{opacity:1;stroke:var(--sun)}
+.fm3-truss.has-m .m--plate.is-on{stroke:var(--ink);fill:#fff}
+.fm3-leads path{fill:none;stroke:oklch(1 0 0 / .7);stroke-width:1.6;stroke-dasharray:5 6;vector-effect:non-scaling-stroke}
+.fm3-leads path.is-on{stroke:var(--sun);stroke-dasharray:none;stroke-width:2.4}
+.fm3-pills{position:absolute;inset:0;pointer-events:none}
+.fm3-pill{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:2px solid #fff;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:.9375rem;white-space:nowrap;cursor:pointer;transition:background-color .18s var(--ease-x),color .18s var(--ease-x),border-color .18s var(--ease-x)}
+.fm3-pill b{color:var(--sun)}
+.fm3-pill:nth-child(3){translate:0 -50%}.fm3-pill:nth-child(4){translate:-100% -50%}
+@media (hover:hover){.fm3-pill:hover{border-color:var(--sun)}}
+.fm3-pill[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+.fm3-pill[aria-pressed="true"] b{color:var(--ink)}
+.fm3-pill.is-press{animation:fm-pop .3s var(--ease-spring)}
+@keyframes fm-pop{0%{scale:.92}100%{scale:1}}
+.fm3-say{position:relative;max-width:1100px;margin:16px auto 0;min-height:1.5em;font-size:var(--t-lead);font-weight:600;text-align:center}
+@media (max-width:900px){
+  .fm3-stage{padding:0}
+  .fm3-pills{position:static;display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;pointer-events:auto}
+  .fm3-pill,.fm3-pill:nth-child(3),.fm3-pill:nth-child(4){position:static;translate:none;white-space:normal;text-align:left}
+  .fm3-leads{display:none}
 }

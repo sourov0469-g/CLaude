@@ -127,7 +127,7 @@ html.cmp-on .cmp{display:block}
 .cmp-fx{position:fixed;left:0;top:0;overflow:visible;pointer-events:none}
 .cmp-pick{display:none}
 @media (hover:hover) and (pointer:fine){
-  .cmp-pick{position:fixed;left:var(--gutter);bottom:16px;z-index:95;display:flex;align-items:center;gap:2px;margin:0;padding:4px;border:0;border-radius:999px;background:#0b1328;color:#fff;font:600 13px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 0 0 1px oklch(1 0 0 / .14),0 6px 18px -8px oklch(0 0 0 / .5)}
+  .cmp-pick{position:fixed;right:var(--gutter);bottom:16px;z-index:95;display:flex;align-items:center;gap:2px;margin:0;padding:4px;border:0;border-radius:999px;background:#0b1328;color:#fff;font:600 13px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 0 0 1px oklch(1 0 0 / .14),0 6px 18px -8px oklch(0 0 0 / .5)}
   .cmp-pick legend{padding:0}
   .cmp-pick-l{padding:0 8px 0 10px;color:oklch(1 0 0 / .62)}
   .cmp-pick label{position:relative;display:grid;place-items:center;min-width:36px;height:36px;padding:0 6px;border-radius:999px;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out)}
