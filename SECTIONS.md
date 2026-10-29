@@ -23,9 +23,9 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 | 13 | How it works (`how`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 14 | How it works (`how`) | V2 | rebuilt | YES (Phase 4 evidence in PROGRESS.md) |
 | 15 | How it works (`how`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
-| 16 | Towns (`area`) | V1 | upgraded | NO |
-| 17 | Towns (`area`) | V2 | upgraded | NO |
-| 18 | Towns (`area`) | V3 | upgraded | NO |
+| 16 | Towns (`area`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 17 | Towns (`area`) | V2 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 18 | Towns (`area`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 19 | Call / closing (`call`) | V1 | upgraded | NO |
 | 20 | Call / closing (`call`) | V2 | upgraded | NO |
 | 21 | Call / closing (`call`) | V3 | upgraded | NO |

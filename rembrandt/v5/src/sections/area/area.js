@@ -41,6 +41,12 @@ function map(root, c) {
     b.type = 'button'; b.className = 'rx'; b.dataset.i = i; b.setAttribute('aria-pressed', String(!i));
     b.innerHTML = `${t.name}<span class="mi">${i ? t.mi + ' mi' : 'home'}</span>`; li.append(b); list.append(li); btns[i] = b;
   });
+  // labels that collide with an earlier label or a house step down (then up) a line until clear; phones hide the labels
+  const placed = mks.filter(Boolean).map(g => g.querySelector('.mk-h').getBBox()); // labels keep clear of every house too
+  mks.forEach(g => { if (!g) return; const tx = g.querySelector('text'), y0 = +tx.getAttribute('y'); let b = tx.getBBox(); if (!b.width) return;
+    const hit = r => placed.some(q => r.x < q.x + q.width && q.x < r.x + r.width && r.y < q.y + q.height && q.y < r.y + r.height);
+    for (const dy of [0, 16, -16, 32, -32]) { tx.setAttribute('y', y0 + dy); b = tx.getBBox(); if (!hit(b)) break; }
+    placed.push(b); });
   let cur = 0;
   const choose = i => {
     cur = i; btns.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
@@ -158,7 +164,12 @@ function finder(root, c) {
   const say = (t, q) => {
     const T = ans.querySelector('.tw3-ans-t'), D = ans.querySelector('.tw3-ans-d');
     if (t) { T.textContent = t === HOME ? 'Yes. Springboro is home.' : `Yes. ${t.name} is on our list.`; D.textContent = fact(t); }
-    else { T.textContent = `${q} isn't on our list of 24.`; D.textContent = 'Call Rachel and ask: (937) 746-7377, Monday to Friday, 9 to 5.'; }
+    else {
+      T.textContent = `${q} isn't on our list of 24.`;
+      const a = document.createElement('a'); a.className = 'tw3-tel rx'; a.href = 'tel:+19377467377'; a.textContent = '(937) 746-7377';
+      a.insertAdjacentHTML('beforeend', '<svg class="rx-s tw3-wv" viewBox="0 0 26 20" aria-hidden="true" focusable="false"><g class="tw3-wv-a"><path d="M3 10 H23 M23 10 l-5 -4 M23 10 l-5 4 M3 10 l-2 -3 h4 l2 3 l-2 3 h-4 z"/></g></svg>');
+      D.replaceChildren('Call Rachel and ask: ', a, ', Monday to Friday, 9 to 5.');
+    }
     ans.classList.remove('is-new'); void ans.offsetWidth; ans.classList.add('is-new');
   };
   const pick = (i, fromChip) => {
@@ -167,14 +178,14 @@ function finder(root, c) {
     say(t); point(t);
   };
   let wait = null;
-  const onInput = () => {
-    clearTimeout(wait); wait = setTimeout(() => {
-      const q = norm(input.value); if (!q) return;
-      const i = TOWNS.findIndex(t => norm(t.name) === q), j = i >= 0 ? i : q.length >= 3 ? TOWNS.findIndex(t => norm(t.name).startsWith(q)) : -1;
-      if (j >= 0) pick(j, false); else if (q.length >= 3) { [...chips.children].forEach(b => b.setAttribute('aria-pressed', 'false')); say(null, input.value.trim()); point(null); }
-    }, 300);
+  const answer = () => {
+    const q = norm(input.value); if (!q) return;
+    const i = TOWNS.findIndex(t => norm(t.name) === q), j = i >= 0 ? i : q.length >= 3 ? TOWNS.findIndex(t => norm(t.name).startsWith(q)) : -1;
+    if (j >= 0) pick(j, false); else if (q.length >= 3) { [...chips.children].forEach(b => b.setAttribute('aria-pressed', 'false')); say(null, input.value.trim()); point(null); }
   };
-  const onSubmit = e => { e.preventDefault(); clearTimeout(wait); onInput(); };
+  const onInput = () => { clearTimeout(wait); wait = setTimeout(answer, 300); };
+  const field = root.querySelector('.tw3-field');
+  const onSubmit = e => { e.preventDefault(); clearTimeout(wait); answer(); field.classList.remove('is-hook'); void field.offsetWidth; field.classList.add('is-hook'); }; // R33 press: the hook clicks
   const onChip = e => { const b = e.target.closest('.tw3-chips button'); if (b) pick(+b.dataset.i, true); };
   const onPrev = e => { const b = e.target.closest('.tw3-chips button'); if (b && e.pointerType === 'mouse') point(TOWNS[+b.dataset.i], true); };
   const onPrevOut = e => { const b = e.target.closest('.tw3-chips button'); if (b && e.pointerType === 'mouse') { const on = chips.querySelector('[aria-pressed="true"]'); point(on ? TOWNS[+on.dataset.i] : null, true); } };

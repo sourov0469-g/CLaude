@@ -1,0 +1,18 @@
+bg V1: ripples alive under the pointer 1
+R29 hover (Germantown): marker gable true, transform matrix(1.25, 0, 0, 1.25, 0, -6)
+R29 press: line M500 500 L280.3 346.2 opacity 1; card "Germantown8.5 miles northwest of the centre of Springboro, in Montgomery County. The median home there was built in 1972."; press pop none
+R30 card hover: bar matrix(1, 0, 0, 1.12, 0, 0)
+bg V2: plan transform matrix(1, 0, 0, 1, 0, -2.55001) -> matrix(1, 0, 0, 1, 6.6488, 22.5981)
+R31 sort hover: course translate 2px
+R31 sort press: tw-relay
+  sorted nearest first: first card Dayton -> Springboro, pressed true
+R33 focus: tape blade none
+R33 Enter: hook tw-hook; answer immediately "Yes. Bellbrook is on our list.9.5 miles northeast of the centre of Springboro, in Greene County. The median home there was built in 1971."
+  needle 56 deg; tape 172.5; label "9.5 miles"
+  not on the list: "Cincinnati isn't on our list of 24.Call Rachel and ask: (937) 746-7377, Monday to Friday, 9 to 5."; tel tel:+19377467377
+R42 hover: vane opacity 1, transform matrix(-1, 0, 0, -1, 0, 0)
+R42 press: tw-spin
+R32 chip hover (Yellow Springs): needle previews 49 deg
+R32 chip press: pressed true; tape 396; chip pop none
+bg V3: weathervane scaleX(0.78), ridge depth matrix(1, 0, 0, 1, 7.7214, -0.4078)
+errors: 0

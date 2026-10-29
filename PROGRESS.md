@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 4 in progress: Family, How done → Towns next (then Call).
+- **Phase:** 4 in progress: Family, How, Towns done → Call next.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -167,3 +167,21 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - Scene 2's tape ticks were missing: the generated path string was malformed (`M236342v8`). Regenerated, and the reshoot shows them.
   - The ladder-lean check first read 0°: the R28 press clicked the Estimate link, and Lenis animated the jump to #call. The test now releases off the link. The lean itself measured 0.91°.
 - **Divider:** how → rafters, unchanged and unique on the page.
+
+### Phase 4: Towns ×3 (upgraded)
+- **V1:**
+  - R29 kept (marker gable pops; press draws the distance line and prints the Census facts), and the ripple background kept.
+  - Defect fixed: town labels collided (Middletown over Trenton). Labels now step down or up a line until they clear every earlier label and every house. `mapcheck.mjs` measures 0 overlaps.
+- **V2:** bg: the street plan takes pointer depth on top of its scroll drift (depth moves x/y, parallax moves yPercent, so GSAP composes them in one transform).
+- **V3:**
+  - R33 rebuilt: focus runs a tape-measure blade out along the field (it was a chalk line), and Enter clicks the tape's hook.
+  - Form handler verified, and fixed: Enter used to wait for the 300 ms input debounce. It now answers at once. The inline `onsubmit="return false"` was removed; the JS handler calls preventDefault.
+  - The "not on our list" answer names the number; it is now a tel link with its own reaction (R42, added to the registry).
+  - Phones: the question and field come before the compass (they started almost a screen down). The tape shows a stub of blade before a town is picked.
+- **Reactions made unique:** V1 list pills, V2 sort buttons and V3 chips all ran the same scale pop on press (`tw-pop`), which repeated Work's arrow tick. Removed: each control's registered press reaction (line draws, courses re-lay, needle commits) is its press.
+- **Evidence:**
+  - `secqa.mjs area` at 1440, 375 and 1440 reduced: 9/9 "switcher swaps only area; overflow 0; errors 0".
+  - Screenshots: `qa/area{1,2,3}-*.jpg`, `qa/area1-map-1440.jpg`, reviewed.
+  - `qa/scripts/areaint.mjs` (log `qa/areaint.log`): every reaction, the form handler and the background responses confirmed. Errors 0.
+  - Facts: towns only from `data/towns.js` (24). Whole file: 353-9711 ×0.
+- **Divider:** area → steps, unchanged and unique.
