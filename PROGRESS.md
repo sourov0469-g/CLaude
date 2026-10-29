@@ -1,10 +1,10 @@
-# PROGRESS: Rembrandt homepage build under BRIEF-FULL.md
+# PROGRESS: Rembrandt homepage build (BRIEF-FULL.md, then BRIEF-FULL-v2.md from 2026-10-30)
 
 Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, SECTIONS.md, this file, TRACEABILITY.md, the usage log at the end of `bank-index/BANK-MAP.md`. Re-read them and continue; never restart a finished section. Failed checks stay listed here until they pass.
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 6 complete. §12 gate passed with evidence below. Delivery report: REPORT-FULL.md.
+- **Phase:** v2 brief (BRIEF-FULL-v2.md) in force. Phase 0 reconciled; full library read next, then the per-version verdict audit (§14), fixes, §12 gate rerun.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -281,3 +281,22 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
      - One scroll engine (Lenis). No GSAP pins. Sticky is used only by two column headings and the owner's picker rail.
      - MorphSVG, three.js and jQuery are absent.
      - Code is over F18's ~330 KB band; flagged in the report with its cause, which is three versions of every section in one file.
+
+---
+## Under BRIEF-FULL-v2.md (2026-10-30)
+
+### v2 Phase 0: bearings and setup
+- **Brief:** saved verbatim as BRIEF-FULL-v2.md. It supersedes BRIEF-FULL.md.
+- **Bearings, step 0 (the file wins):**
+  - The last 15 commits run from the V7 delivery through Phase 0–6 commits to 2f8b957 ("Phase 6 and the §12 gate …").
+  - The committed `rembrandt/v5/rembrandt-homepage.html` is byte-identical to a fresh build from source (SHA-256 4c149d14… both).
+  - Spot greps: 7 `data-section` hosts; versions 2 and 3 as templates for every section; `constellation()` e7d174cd (unchanged); facts gate 0 fails.
+  - The screenshot pass is the existing 42-shot set and contact sheets `qa/gate/sheet-{1440,375}.jpg`, made from this same file (hash unchanged since).
+  - **Correction to the operator state:** §0 says Phases 1–3 were done and Call was in progress. The file and the commits show all of Phases 1–6 committed and the v1 §12 gate passed. Call was finished in 1dea70b. SECTIONS.md (21 YES, S1–S7 YES) matches the file, so the state files needed no correction.
+- **Merge:** `origin/claude/hrm-presentation-slides-xag1ax`, re-upload head 4bf6bee, merged. Its content is identical to the copy merged before (empty diff from the merge base), so no file changed.
+- **Raw skills:** reassembled `cat part-00 … part-06`: 22,368,518 bytes, SHA-256 fe81307bc11935af8dc54870325aaccf917a0284d9ffeab6b7d833dec36d22b6. PASS.
+- **New in v2, to be done:**
+  - (a) The binding full read of BANK-MAP.md, then atlas part 1, then atlas part 2, A to Z.
+  - (b) §14's three binary verdicts per version: facts grounded, reference-intent match, generic feel. A version with a wrong verdict is not done, so the v1 "complete" status is held open until every version is graded.
+  - (c) The §12 gate rerun on the final file.
+- **Phases 1–6 skip rule (§10):** each phase's v1 done-criteria evidence stands (logs in `rembrandt/v5/qa/`). The phases are not rebuilt, but every version is re-graded after the full read, and any version that fails a verdict is reopened.
