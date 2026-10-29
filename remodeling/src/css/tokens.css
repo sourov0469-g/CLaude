@@ -1,0 +1,244 @@
+/* Elbaz homepage: tokens and base.
+   Identity lock [S0006 §12]: ink #0B1418 ground with deep-teal fields, logo teal #77B3B8 as the only accent,
+   Archivo display + Geist text [S0650 §4.1, S1303 §3], sharp 2px radius [S0650 §4.4], Elbaz's own photographs.
+   Colours are the brand's own CSS tokens (elbazconstructioncorp.com) [S0650 §11.C, S1304 §3]. */
+
+:root,
+[data-theme="evening"] {
+  --bg: #0B1418;            /* brand --ink */
+  --surface: #12212a;       /* brand --ink-2, 2-6 L points off ground [S0095 §4] */
+  --surface-2: #1c313b;     /* brand --ink-3 */
+  --ink: #e8e4dc;           /* brand --text-on-dark, 14.69:1 on bg */
+  --muted: #a9b6b9;         /* brand --text-on-dark-muted, 8.94:1 */
+  --accent: #77b3b8;        /* logo mark teal, 7.92:1 */
+  --accent-ink: #0B1418;
+  --line: #77b3b8;
+  --line-soft: rgba(119, 179, 184, .5);
+  --old: #3a2f20;           /* the warm light of an old kitchen, B/A section only */
+  --scrim: rgba(11, 20, 24, .5);
+  --shadow: 0 18px 40px -12px rgba(0, 0, 0, .55);
+  color-scheme: dark;
+}
+
+[data-theme="daylight"] {
+  --bg: #EEF2F1;
+  --surface: #E3E9E8;
+  --surface-2: #D6DFDE;
+  --ink: #0B1418;           /* 16.5:1 */
+  --muted: #4a5d62;         /* 6.13:1 */
+  --accent: #1d4a4e;        /* brand --teal-deep, 8.69:1 */
+  --accent-ink: #F2F5F4;
+  --line: #2e6b70;
+  --line-soft: rgba(46, 107, 112, .5);
+  --old: #c9b48f;
+  --scrim: rgba(11, 20, 24, .42);
+  --shadow: 0 18px 40px -14px rgba(11, 20, 24, .28);
+  color-scheme: light;
+}
+
+:root {
+  /* the committed teal field keeps its own ink in both themes */
+  --field: #1d4a4e;
+  --field-ink: #e8e4dc;     /* 7.73:1 */
+  --field-muted: #a9b6b9;   /* 4.71:1 */
+  --field-accent: #77b3b8;  /* 4.17:1, large text and UI only */
+
+  /* type [S0074, S1433, S0095 §4, S0006 §1: display max 6rem] */
+  --f-display: "Archivo", "Arial Narrow", sans-serif;
+  --f-text: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --t-display: clamp(2.75rem, 1rem + 5.4vw, 6rem);
+  --t-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --t-lead: clamp(1.25rem, 1.1rem + .7vw, 1.625rem);
+  --t-body: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
+  --t-small: clamp(.8125rem, .79rem + .1vw, .875rem);
+  --t-figure: clamp(3.5rem, 2rem + 6vw, 8rem);
+
+  /* space: base-4 scale [S1432, S1303 §5] */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+  --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px; --s11: 160px; --s12: 192px;
+  --margin: max(clamp(1rem, 2.2vw, 2rem), env(safe-area-inset-left));
+  --gutter: clamp(.75rem, 1.4vw, 1.5rem);
+  --section-y: clamp(88px, 6vw + 60px, 208px);   /* 88-112 phone, 160-208 desktop [S0095 §3] */
+  --radius: 2px;                                   /* shape lock: all-sharp [S0650 §4.4] */
+  --nav-h: 68px;
+
+  /* motion [S0063 STANDARDS, S0095 §5, S1303 §7] */
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-io: cubic-bezier(.77, 0, .175, 1);
+  --ease-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);
+  --ease-move: cubic-bezier(.25, 1, .5, 1);
+  --t-press: 160ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+}
+
+@media (min-width: 1024px) {
+  :root { --margin: max(2.5rem, clamp(1rem, 2.6vw, 4rem)); }  /* 40-64px desktop edges [S1375] */
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  background: var(--bg);
+}
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-text);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas, video { display: block; max-width: 100%; }
+img { height: auto; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+p { margin: 0; text-wrap: pretty; }
+h1, h2, h3, h4 { margin: 0; font-weight: inherit; text-wrap: balance; }
+ul, ol { margin: 0; padding: 0; }
+figure { margin: 0; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+html { scrollbar-color: var(--surface-2) var(--bg); }
+input, textarea { caret-color: var(--accent); }
+[hidden] { display: none !important; }
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+.g-field :focus-visible { outline-color: var(--field-accent); }
+
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- type roles ---------- */
+.t-display {
+  font-family: var(--f-display);
+  font-size: var(--t-display);
+  line-height: .98;
+  letter-spacing: -.035em;
+  font-weight: 640;
+  font-stretch: 78%;
+  max-width: 14ch;
+}
+.t-head {
+  font-family: var(--f-display);
+  font-size: var(--t-head);
+  line-height: 1.04;
+  letter-spacing: -.025em;
+  font-weight: 620;
+  font-stretch: 82%;
+  max-width: 18ch;
+}
+.t-lead { font-size: var(--t-lead); line-height: 1.35; max-width: 40ch; font-weight: 400; }
+.t-body { font-size: var(--t-body); line-height: 1.55; max-width: 62ch; }
+.t-small { font-size: var(--t-small); line-height: 1.45; font-weight: 500; }
+.t-figure {
+  font-family: var(--f-display);
+  font-size: var(--t-figure);
+  line-height: .9;
+  letter-spacing: -.04em;
+  font-weight: 560;
+  font-stretch: 72%;
+  font-variant-numeric: tabular-nums;
+}
+.muted { color: var(--muted); }
+.g-field .muted { color: var(--field-muted); }
+.nums { font-variant-numeric: tabular-nums; }
+.nowrap { white-space: nowrap; }
+
+/* ---------- grounds: one separation mechanism, lightness steps [S0095 §4] ---------- */
+.g-base { background: var(--bg); color: var(--ink); }
+.g-surface { background: var(--surface); color: var(--ink); }
+.g-field { background: var(--field); color: var(--field-ink); --accent: var(--field-accent); --accent-ink: #0B1418; --muted: var(--field-muted); --line: var(--field-accent); }
+
+/* ---------- layout ---------- */
+.wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--margin); }
+.grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+.sec {
+  position: relative;
+  padding-block: var(--section-y);
+  isolation: isolate;
+}
+
+/* ---------- actions [S0650 §4.5, S0652 §1, S0214] ---------- */
+.btn {
+  --h: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: var(--h);
+  padding: 0 24px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--f-text);
+  font-weight: 560;
+  font-size: 1rem;
+  letter-spacing: -.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--t-press) cubic-bezier(.22, 1, .36, 1), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.btn:active { transform: scale(.97); transition-duration: 0ms; }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: color-mix(in oklab, var(--accent) 86%, var(--ink)); }
+  .btn--ghost:hover { background: color-mix(in oklab, var(--ink) 10%, transparent); }
+}
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: .07em;
+  text-underline-offset: .18em;
+  text-decoration-color: color-mix(in oklab, currentColor 45%, transparent);
+  transition: text-decoration-color var(--t-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .link:hover { text-decoration-color: var(--accent); }
+}
+
+/* ---------- media ---------- */
+.ph { position: relative; overflow: clip; background: var(--surface); }
+.ph > img { width: 100%; height: 100%; object-fit: cover; }
+.cap { font-size: var(--t-small); color: var(--muted); margin-top: var(--s3); }
+
+/* drawings: line art traced from a real photo, registered to it */
+.draw line, .draw path, .draw polyline, .draw rect, .draw circle {
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- reduced motion: gentler, not zero [S0063, S0652 §10, S1190] ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

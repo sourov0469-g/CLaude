@@ -1,0 +1,145 @@
+/* hero: "Built properly. Permitted correctly." [PLAN 6.1]
+   Fold at 1280x800 shows h1 + lead + CTA [S1303 §2]; h1 two lines [S0095 §2]; <=4 text elements [S0650 §4.7]. */
+
+#hero { padding: 0; }
+.plate { position: absolute; inset: 0; }
+.plate > img, .plate > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.plate > img { object-fit: cover; }
+.hero__acts { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s4) var(--s6); }
+.hero__tel { font-weight: 560; font-size: 1.0625rem; min-height: 44px; display: inline-flex; align-items: center; }
+.hero__cta { position: relative; }
+.hero__cta .btn__label { display: inline-block; }
+.wd { display: inline-block; white-space: nowrap; }
+
+/* ---------- v1 · Drawn, then delivered [S1303 H3 photographic fold] ---------- */
+.hero1 {
+  position: relative;
+  height: 100svh; min-height: 620px; max-height: 1180px;
+  color: #e8e4dc;
+  overflow: clip;
+}
+.hero1__frame { position: absolute; inset: 0; overflow: hidden; background: #0B1418; }   /* darkroom ground in both themes */
+.hero1__plate { transform-origin: 50% 50%; }
+.hero1__lines svg { overflow: visible; }
+.hero1__lines line { stroke: #77b3b8; stroke-width: 1.5; fill: none; }
+.hero1__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  /* neutral scrims only: one for the nav, one fade over the lower part for the copy [S0095 §6] */
+  background:
+    linear-gradient(180deg, rgba(11, 20, 24, .58) 0, rgba(11, 20, 24, 0) 190px),
+    linear-gradient(0deg, rgba(11, 20, 24, .9) 0, rgba(11, 20, 24, .72) 26%, rgba(11, 20, 24, 0) 60%);
+}
+.hero1__copy {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  margin-inline: auto;
+  padding-bottom: clamp(28px, 6.5vh, 72px);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: var(--s5);
+  align-items: end;
+}
+.hero1__h { grid-column: 1 / span 8; max-width: none; }
+.hero1__h > span { display: block; white-space: nowrap; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
+.hero1__h .rise { display: block; }
+.hero1__side { grid-column: 9 / span 4; display: grid; gap: var(--s5); padding-bottom: .35em; }
+.hero1__lead { color: #d6d9d6; max-width: 34ch; font-size: clamp(1.0625rem, .95rem + .45vw, 1.375rem); }
+.hero1 .link { color: #e8e4dc; }
+.hero1 .btn { background: #77b3b8; color: #0B1418; }
+
+@media (max-width: 1199px) {
+  .hero1__h { grid-column: 1 / -1; }
+  .hero1__side { grid-column: 1 / span 8; padding-bottom: 0; }
+}
+@media (max-width: 767px) {
+  .hero1 { height: auto; min-height: 0; max-height: none; color: var(--ink); background: var(--bg); }
+  .hero1__frame { position: relative; height: 64svh; min-height: 420px; }
+  .hero1__scrim { background: linear-gradient(180deg, rgba(11, 20, 24, .6) 0, rgba(11, 20, 24, 0) 150px); }
+  .hero1__copy { position: relative; padding-top: var(--s6); padding-bottom: var(--s9); }
+  .hero1__side { grid-column: 1 / -1; }
+  .hero1__h > span { white-space: normal; }
+  .hero1__lead { color: var(--muted); }
+  .hero1 .link { color: var(--ink); }
+  .hero1 .btn { background: var(--accent); color: var(--accent-ink); }
+}
+
+/* ---------- v2 · From the brass to the room [pack #11 scale container on scroll, S1322] ---------- */
+.hero2__stage {
+  --p: 0;
+  height: 100svh; min-height: 640px; max-height: 1180px;
+  display: grid; grid-template-rows: minmax(0, 1fr) auto;
+  padding-top: calc(var(--nav-h) + 4px);
+  /* the ground lightens as the room opens (daylight entering) */
+  background: color-mix(in oklab, var(--bg), #ffffff calc(var(--p) * 4%));
+}
+.hero2__band { position: relative; margin-inline: var(--margin); overflow: hidden; }
+.hero2__window {
+  position: absolute; inset: 0; overflow: hidden;
+  clip-path: inset(22% 18% 22% 47%);
+  background: #0B1418;
+}
+.hero2__plate { position: absolute; inset: 0; transform-origin: 64.5% 34%; will-change: transform; }
+.hero2__plate > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero2__copy { padding-top: clamp(20px, 3.4vh, 40px); padding-bottom: clamp(24px, 4.5vh, 52px); display: grid; gap: var(--s5); }
+.hero2__h {
+  max-width: none;
+  font-weight: 200; font-stretch: 62%;
+  letter-spacing: -.02em;
+  line-height: .96;
+}
+.hero2__h .ln { display: block; white-space: nowrap; }
+.hero2__row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.hero2__lead { grid-column: 1 / span 6; max-width: 40ch; color: var(--muted); font-size: clamp(1.0625rem, .95rem + .45vw, 1.375rem); }
+.hero2__row .hero__acts { grid-column: 8 / span 5; justify-content: flex-end; }
+.hero2.is-static .hero2__h { font-weight: 700; font-stretch: 88%; }
+.hero2.is-static .hero2__window { clip-path: inset(0); }
+
+@media (max-width: 767px) {
+  .hero2__stage { height: auto; min-height: 0; max-height: none; grid-template-rows: auto auto; }
+  .hero2__band { height: 56svh; min-height: 360px; margin-inline: 0; }
+  .hero2__h .ln { white-space: normal; }
+  .hero2.is-static .hero2__h { font-stretch: 74%; }
+  .hero2__row { row-gap: var(--s5); }
+  .hero2__lead, .hero2__row .hero__acts { grid-column: 1 / -1; justify-content: flex-start; }
+  .hero2__copy { padding-bottom: var(--s9); }
+}
+
+/* ---------- v3 · The window [S1303 Poster Fold + H1 statement fold, S0650 Text Mask Reveal] ----------
+   Display stays at the 6rem ceiling [S0006, S1303 hero gate 8]: punch from width/weight and whitespace,
+   composed on a diagonal (line 1 left, line 2 right) [S1303 alignment knob: left-bias + right-bias]. */
+.hero3__in {
+  min-height: 100svh; max-height: 1180px;
+  display: grid; align-content: center; gap: clamp(40px, 7vh, 88px);
+  padding-top: calc(var(--nav-h) + var(--s6)); padding-bottom: var(--s8);
+}
+.hero3__type { position: relative; }
+.hero3__h { font-family: var(--f-display); font-size: var(--t-display); line-height: .92; letter-spacing: -.03em; display: grid; gap: .02em; }
+.hero3__win {
+  display: block; position: relative; white-space: nowrap; justify-self: start;
+  font-weight: 900; font-stretch: 125%;
+  letter-spacing: -.02em;
+  color: transparent;
+  padding-bottom: .06em;
+  background-size: cover; background-position: 50% 45%;
+  -webkit-background-clip: text; background-clip: text;
+}
+.hero3__win[data-ready] { background: none !important; }   /* letters carry their own slices once split */
+.hero3__win .ch { display: inline-block; color: transparent; -webkit-background-clip: text; background-clip: text; background-repeat: no-repeat; }
+.hero3__solid { display: block; justify-self: end; white-space: nowrap; font-weight: 300; font-stretch: 100%; color: var(--ink); }
+.hero3__credit { position: absolute; left: 0; top: calc(var(--t-display) * .98 + 18px); max-width: 26ch; }
+.hero3__row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.hero3__lead { grid-column: 1 / span 6; color: var(--muted); max-width: 40ch; }
+.hero3__row .hero__acts { grid-column: 8 / span 5; justify-content: flex-end; }
+
+@media (max-width: 1023px) {
+  .hero3__credit { position: static; margin-top: var(--s4); }
+}
+@media (max-width: 767px) {
+  .hero3__in { min-height: 0; padding-top: calc(var(--nav-h) + var(--s7)); padding-bottom: var(--s9); gap: var(--s7); }
+  .hero3__h { font-size: clamp(2.75rem, 1rem + 9vw, 4rem); }
+  .hero3__win { white-space: normal; font-stretch: 100%; font-size: clamp(3.25rem, 1rem + 12vw, 4.5rem); line-height: .9; }
+  .hero3__solid { justify-self: start; white-space: normal; font-weight: 420; }
+  .hero3__lead, .hero3__row .hero__acts { grid-column: 1 / -1; justify-content: flex-start; }
+  .hero3__row { row-gap: var(--s5); }
+}
+
+/* nav sits on the photograph only in v1; elsewhere it rests on the ground */
+html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
+[data-theme="daylight"]:not([data-nav-on="photo"]) .nav .nav__logo { background: #0B1418; padding: 6px 10px; margin-left: -10px; }
