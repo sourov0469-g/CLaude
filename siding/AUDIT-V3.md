@@ -227,3 +227,7 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Money 3 "Receipt"** (R24 + FACTS Offers): the three published offers on a torn receipt; the total is struck through and rewritten (0.3 s). The odometer and stamp are gone. The firm's $30,000 → $22,500 is reproduced; a booking button and the phone sit beside it.
 - **Money 2:** KEPT, re-verified.
 - **Evidence:** `sect.js money` PASS ×9; screenshots `money1–3`.
+
+**Book — all three KEPT, re-verified 29 Oct 2026.** `sect.js book` PASS ×9: every form is submitted twice, once empty (it must refuse) and once valid (it must reach its done state). Screenshots `book1–3`. One defect fixed in Book 1: the global `svg { max-width: 100% }` capped the door panel, so the phone number overhung it. The same cap was clipping Money 3's strike line; both are fixed.
+
+**Phase 2 complete: all ten sections pass (SECTIONS.md 30/30 YES). Final count: 19 KEPT, 11 REBUILT.**

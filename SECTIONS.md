@@ -18,4 +18,4 @@ Flip a line to `passes: YES` only when that version has:
 | 7 | Near you | Survey — passes: YES | Town by town — passes: YES | Neighbourhood drive — passes: YES |
 | 8 | Reviews | Stream — passes: YES | One — passes: YES | Names — passes: YES |
 | 9 | Money | Amount — passes: YES | What people paid — passes: YES | Receipt — passes: YES |
-| 10 | Book | Call — passes: NO | Form — passes: NO | One sentence — passes: NO |
+| 10 | Book | Call — passes: YES | Form — passes: YES | One sentence — passes: YES |

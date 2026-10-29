@@ -348,21 +348,21 @@ Sections are recorded in SECTIONS.md order.
 - **Mechanism:** the phone and online booking side by side.
 - **Adaptations:** giant phone on a raised door panel; the booking panel opens in place; folds canvas.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓ (owns the folds), F ✓ (phone; hours via K2), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `book1-d/-m.png`. The panel opens (aria-expanded), its form refuses an empty Continue and reaches 'Request saved' with valid data. Defect fixed: the door panel behind the phone was capped by the global svg max-width and the number overhung it; now it fits at 1440, 375 and 320. `sect.js book` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); hours print the §3 string verbatim.
 
 **K2 · Form**
 - **Reference:** [BANK] Mad City Windows (siding scan: ZIP-first, 3-question funnel; A2) + ⟦S1442⟧ / ⟦S0661⟧ (validate on blur/continue; step indicator).
 - **Mechanism:** a short multi-step form with a step indicator.
 - **Adaptations:** trade, budget band, contact; steps as three glazing panes; ring feedback on submit.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓, F ✓, D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `book2-d/-m.png`. Empty Continue shows the step error; a full valid run reaches done. `sect.js book` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); hours print the §3 string verbatim.
 
 **K3 · One sentence**
 - **Reference:** [BANK] 413 Tequila (form as a sentence with a reply promise; A2 + `hvac/reverse-engineering/deep-reads-slice-6.md`).
 - **Mechanism:** the request written as one sentence with inline fields.
 - **Adaptations:** the reply promise in the firm's words; the blanks are chalk lines that snap taut.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓ (owns the chalk pluck), F ✓, D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `book3-d/-m.png`. Empty Send lists errors; a filled sentence reaches done. `sect.js book` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); hours print the §3 string verbatim.
 
 ## Phase 1 totals
 

@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 2, rebuilds (Hero → Money done; Book left)
+- **Phase:** 3, page systems (Phase 2 complete: 30/30 versions pass; 19 KEPT, 11 REBUILT)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -123,3 +123,5 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - Near verified (KEPT ×3). Phase 3 note: the Near field roof plans sit behind data rows and maps; thin them out and keep text and maps clear.
 - Reviews rebuilt ×3. Phase 3 note: the Reviews field shutter shows a small dark tab beside the sticky switcher.
 - Money: M1 and M3 rebuilt, M2 kept.
+- Book verified (KEPT ×3). Defect fixed: the global svg max-width capped the Book 1 door panel and the Money 3 strike line.
+- Phase 2 complete.
