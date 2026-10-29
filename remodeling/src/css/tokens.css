@@ -1,6 +1,7 @@
 /* Elbaz homepage: tokens and base.
    Identity lock [S0006 §12]: ink #0B1418 ground with deep-teal fields, logo teal #77B3B8 as the only accent,
-   Archivo display + Geist text [S0650 §4.1, S1303 §3], sharp 2px radius [S0650 §4.4], Elbaz's own photographs.
+   Bebas Neue display (the firm's own type spec: "Display typography is Bebas Neue only", one weight, separated by
+   size and tracking) + Geist text, sharp 2px radius [S0650 §4.4], Elbaz's own photographs.
    Colours are the brand's own CSS tokens (elbazconstructioncorp.com) [S0650 §11.C, S1304 §3]. */
 
 :root,
@@ -44,7 +45,7 @@
   --field-accent: #77b3b8;  /* 4.17:1, large text and UI only */
 
   /* type [S0074, S1433, S0095 §4, S0006 §1: display max 6rem] */
-  --f-display: "Archivo", "Arial Narrow", sans-serif;
+  --f-display: "Bebas Neue", "Arial Narrow", sans-serif;
   --f-text: "Geist", ui-sans-serif, system-ui, sans-serif;
   --t-display: clamp(2.75rem, 1rem + 5.4vw, 6rem);
   --t-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
@@ -130,20 +131,20 @@ input, textarea { caret-color: var(--accent); }
 .t-display {
   font-family: var(--f-display);
   font-size: var(--t-display);
-  line-height: .98;
-  letter-spacing: -.035em;
-  font-weight: 640;
-  font-stretch: 78%;
-  max-width: 14ch;
+  line-height: .9;
+  letter-spacing: .005em;
+  font-weight: 400;
+  font-synthesis: none;
+  max-width: 16ch;
 }
 .t-head {
   font-family: var(--f-display);
   font-size: var(--t-head);
-  line-height: 1.04;
-  letter-spacing: -.025em;
-  font-weight: 620;
-  font-stretch: 82%;
-  max-width: 18ch;
+  line-height: .95;
+  letter-spacing: .01em;
+  font-weight: 400;
+  font-synthesis: none;
+  max-width: 20ch;
 }
 .t-lead { font-size: var(--t-lead); line-height: 1.35; max-width: 40ch; font-weight: 400; }
 .t-body { font-size: var(--t-body); line-height: 1.55; max-width: 62ch; }
@@ -151,12 +152,13 @@ input, textarea { caret-color: var(--accent); }
 .t-figure {
   font-family: var(--f-display);
   font-size: var(--t-figure);
-  line-height: .9;
-  letter-spacing: -.04em;
-  font-weight: 560;
-  font-stretch: 72%;
+  line-height: .85;
+  letter-spacing: .005em;
+  font-weight: 400;
+  font-synthesis: none;
   font-variant-numeric: tabular-nums;
 }
+.t-label { font-family: var(--f-display); font-size: 1.125rem; letter-spacing: .12em; line-height: 1; font-weight: 400; }  /* firm spec: .12em tracking at small sizes */
 .muted { color: var(--muted); }
 .g-field .muted { color: var(--field-muted); }
 .nums { font-variant-numeric: tabular-nums; }

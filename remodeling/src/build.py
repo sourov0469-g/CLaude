@@ -2,8 +2,7 @@
 
 Everything is inlined: fonts (base64 WOFF2), vendor JS, section CSS/JS,
 the photo store (base64 WebP, turned into object URLs at boot), traced line
-drawings. Three.js is inlined as inert text and only evaluated when the 3D
-section comes near the viewport.
+drawings and map geometry. No three.js (PLAN-V2 §0: F17/F18).
 
 usage: python3 build.py                 -> ../site/elbaz-homepage.html
        python3 build.py --only ba       -> ../site/dev/ba.html (chrome + that one section, for isolated work)
@@ -19,7 +18,7 @@ ROOT = os.path.dirname(HERE)
 IMG = os.path.join(ROOT, "assets", "img")
 OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
-SECTIONS = ["hero", "proof", "ba", "kitchens", "room", "baths", "work", "reviews", "towns", "consult"]
+SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
 VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "MorphSVGPlugin", "Draggable",
           "InertiaPlugin", "Flip", "MotionPathPlugin"]
 
@@ -53,11 +52,11 @@ def main():
         out = os.path.join(ROOT, "site", "dev", only + ".html")
 
     fonts = (
-        "@font-face{font-family:'Archivo';src:url(data:font/woff2;base64,%s) format('woff2');"
-        "font-weight:100 900;font-stretch:62%% 125%%;font-display:swap}"
+        "@font-face{font-family:'Bebas Neue';src:url(data:font/woff2;base64,%s) format('woff2');"
+        "font-weight:400;font-style:normal;font-display:swap}"
         "@font-face{font-family:'Geist';src:url(data:font/woff2;base64,%s) format('woff2');"
         "font-weight:100 900;font-display:swap}"
-        % (b64(os.path.join(HERE, "fonts", "archivo-wdth-wght.woff2")),
+        % (b64(os.path.join(HERE, "fonts", "bebas-neue-latin.woff2")),
            b64(os.path.join(HERE, "fonts", "geist-wght.woff2")))
     )
 
@@ -102,7 +101,6 @@ def main():
             .replace("/*{{DATA}}*/", "window.__LINES=" + json.dumps(lines, separators=(",", ":")) + ";")
             .replace("/*{{CORE}}*/", script_safe(read("js", "core.js")))
             .replace("/*{{SECTIONS_JS}}*/", script_safe("\n".join(js)))
-            .replace("/*{{THREE}}*/", script_safe(read("vendor", "three-r159.min.js")))
             .replace("/*{{IMGSTORE}}*/", json.dumps(store, separators=(",", ":"))))
 
     os.makedirs(os.path.dirname(out), exist_ok=True)

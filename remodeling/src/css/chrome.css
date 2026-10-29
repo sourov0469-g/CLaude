@@ -179,6 +179,24 @@
 .cursor[data-state="pin"] .cursor__dot,
 .cursor[data-state="orbit"] .cursor__dot { opacity: 0; }
 
+/* ---------- phone sticky contact bar [anatomy §6: A.B. May Text / Call / Book] ---------- */
+.mbar { display: none; }
+@media (max-width: 767px) {
+  .mbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 54;
+    display: grid; grid-template-columns: 1fr 1fr 1.4fr;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); gap: 8px;
+    background: rgba(11, 20, 24, .94); box-shadow: 0 -1px 0 rgba(232, 228, 220, .12);
+  }
+  .mbar a {
+    min-height: 48px; display: grid; place-items: center; border-radius: var(--radius);
+    font-weight: 560; font-size: 1rem; text-decoration: none; color: #e8e4dc;
+    box-shadow: inset 0 0 0 1.5px rgba(232, 228, 220, .4);
+  }
+  .mbar .mbar__book { background: #77b3b8; color: #0B1418; box-shadow: none; }
+  body { padding-bottom: 72px; }
+}
+
 /* ---------- settings (theme + motion) [S1304 §6 hidden at rest, S1169/S1209 toggle] ---------- */
 .settings { position: fixed; right: var(--margin); bottom: 16px; z-index: 55; }
 .settings__btn {
@@ -215,7 +233,18 @@
 }
 
 /* ---------- footer (chrome; Ft4 statement close) ---------- */
-.foot { background: #0B1418; color: #e8e4dc; padding-block: var(--s9) var(--s8); }
+.foot { background: #0B1418; color: #e8e4dc; padding-block: 0 var(--s8); overflow: clip; }
+/* giant two-tone wordmark: the brand stamp under the close [BANK pattern: OFFF Forum footer wordmark] */
+.foot__mark {
+  margin: 0 0 var(--s9); padding-top: var(--s7);
+  display: flex; justify-content: space-between; gap: .12em;
+  font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: .01em;
+  font-size: clamp(3.5rem, 15.6vw, 17.5rem);
+  padding-inline: var(--margin); white-space: nowrap;
+}
+.foot__mark span:first-child { color: #77b3b8; }
+.foot__mark span:last-child { color: #1d4a4e; }
+@media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; } }
 [data-theme="daylight"] .foot { background: #0B1418; color: #e8e4dc; }
 .foot .grid12 { row-gap: var(--s7); }
 .foot__brand { grid-column: 1 / span 5; display: grid; gap: var(--s5); align-content: start; }

@@ -213,8 +213,8 @@
   }
   EZ.activate = activate;
 
-  var NAMES = { hero: 'Opening', proof: 'Proof', ba: 'Before and after', kitchens: 'Kitchens', room: '3D room',
-    baths: 'Bathrooms', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation' };
+  var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation' };
 
   function buildSwitch(s) {
     var wrap = doc.createElement('div');
@@ -652,25 +652,31 @@
     return { init: init, open: open, close: close };
   })();
 
-  /* ---------- Three.js, evaluated only when the 3D section asks [threejs-pack §0] ---------- */
-  var threeP = null;
-  EZ.loadThree = function () {
-    if (window.THREE) return Promise.resolve(window.THREE);
-    if (threeP) return threeP;
-    threeP = new Promise(function (res, rej) {
-      var src = doc.getElementById('three-src');
-      if (!src) return rej(new Error('three source missing'));
-      var s = doc.createElement('script');
-      s.textContent = src.textContent;
-      doc.head.appendChild(s);
-      src.textContent = '';
-      if (window.THREE && window.THREE.REVISION === '159') res(window.THREE);
-      else rej(new Error('three failed'));
+  /* ---------- shared motion helpers ---------- */
+  // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
+  // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
+  // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  EZ.reveal = function (kit, targets) {
+    if (!kit.motion) return;
+    var d = kit.mobile ? 50 : 100;
+    gsap.utils.toArray(targets, kit.root).forEach(function (el) {
+      function from(dir) {
+        var x = 0, y = dir * d, side = el.dataset.reveal;
+        if (side === 'left') { x = -d; y = 0; } else if (side === 'right') { x = d; y = 0; }
+        kit.ctx.add(function () {
+          gsap.fromTo(el, { x: x, y: y, autoAlpha: 0 }, { duration: 1.25, x: 0, y: 0, autoAlpha: 1, ease: 'expo', overwrite: 'auto' });
+        });
+      }
+      gsap.set(el, { autoAlpha: 0 });
+      ScrollTrigger.create({
+        trigger: el,
+        onEnter: function () { from(1); },
+        onEnterBack: function () { from(-1); },
+        onLeave: function () { gsap.set(el, { autoAlpha: 0 }); }
+      });
     });
-    return threeP;
   };
 
-  /* ---------- shared motion helpers ---------- */
   // mask-rise lines: wraps each line of a SplitText in an overflow mask [S1321 line reveal]
   EZ.riseLines = function (el, opts) {
     opts = opts || {};
