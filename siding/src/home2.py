@@ -1066,23 +1066,25 @@ def header():
     return f'''<header class="hd">
   <a class="hd-logo" href="#main" aria-label="Austin Pro Siding, Windows and Roofing, top of page"><img src="assets/img/logo-color.webp" width="1080" height="200" alt=""></a>
   <nav class="hd-nav" aria-label="Sections">{nav}</nav>
+  <button class="hd-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button>
   <a class="hd-tel" href="{TEL}">{PHONE}</a>
   <a class="btn btn-red btn-sm hd-book" href="#book" data-book aria-label="Book free inspection"><span class="long">Book free inspection</span><span class="short" aria-hidden="true">Book</span></a>
   <button class="hd-menu" type="button" aria-expanded="false" aria-controls="sheet">Menu</button>
 </header>
-<div class="sheet" id="sheet" hidden><nav aria-label="Sections, mobile">{nav}<a href="#book">Book free inspection</a><a href="{TEL}">Call {PHONE}</a></nav></div>
+<div class="sheet" id="sheet" hidden><nav aria-label="Sections, mobile">{nav}<a href="#book">Book free inspection</a><a href="{TEL}">Call {PHONE}</a><button class="sh-motion" type="button" data-motion-btn aria-pressed="true"><span data-motion-t>Motion on</span></button></nav></div>
 '''
 
 
 def picks():
     rows = ''.join(f'''<li><span>{label}</span><div class="pk-seg" role="radiogroup" aria-label="{label} version" data-for="{key}">{''.join(f'<button type="button" role="radio" aria-checked="{"true" if n == 1 else "false"}" data-v="{n}" title="{e(nm)}">{n}</button>' for n, nm in enumerate(names, 1))}</div></li>''' for key, label, _f, names in SECTIONS)
     return f'''<div class="picks">
-  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Your picks</span><b class="num" data-pk-code>111 111 1111</b></button>
+  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Your picks</span><b class="num" data-pk-code>111 111 1111</b></button><div class="pal-mini"><span aria-hidden="true">Companion</span><div class="pal-sw" role="radiogroup" aria-label="Cursor companion, quick switch"><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="sash">Sash</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="gable">Gable</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="chip">Chip</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="off">Off</button></div></div>
   <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Your picks" hidden>
     <p class="pk-h">Your picks</p>
     <p class="pk-tip">Switch any section here or with its 1 2 3 buttons. Keys 1, 2 and 3 switch the section in view.</p>
     <ul class="pk-list">{rows}</ul>
     <label class="pk-motion"><input type="checkbox" data-motion checked><span>Motion</span></label>
+    <div class="pk-pal"><span id="pk-pal-l">Cursor companion</span><div class="pal-sw" role="radiogroup" aria-labelledby="pk-pal-l"><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="sash">Sash</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="gable">Gable</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="chip">Chip</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="off">Off</button></div><p class="pk-pal-note">The companion follows a mouse pointer. It stays off on touch screens and with motion off.</p></div>
     <div class="pk-act"><button class="btn btn-ink btn-sm" type="button" data-copy>Copy my picks</button><button class="tlink" type="button" data-reset>Reset</button></div>
     <p class="pk-msg" aria-live="polite"></p>
   </div>
@@ -1097,7 +1099,7 @@ def footer():
     <p><b>Office</b>7801 N Lamar Blvd, Suite C70<br>Austin, TX 78752</p>
     <p><b>Hours</b>Monday to Friday 8 AM to 8 PM<br>Saturday 8 AM to 6 PM<br>Sunday noon to 5 PM</p>
     <p><b>Write</b><a href="mailto:{EMAIL}">{EMAIL}</a></p>
-    <nav aria-label="Footer"><b>On this page</b><a href="#work">Work</a><a href="#colour">Colour</a><a href="#near">Near you</a><a href="#money">Financing</a><a href="#book">Book</a></nav>
+    <nav aria-label="Footer"><b>On this page</b><a href="#work">Work</a><a href="#colour">Colour</a><a href="#near">Near you</a><a href="#money">Financing</a><a href="#book">Book</a><button class="ft-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button></nav>
   </div>
   <p class="ft-note">Concept redesign for a design portfolio, not affiliated with or endorsed by Austin Pro Siding, Windows &amp; Roofing. Every figure, photo and colour comes from austinprosiding.com, read 29 Oct 2026. Financing on approved credit through GreenSky. Prices are materials and labour before discounts, excluding tax.</p>
 </footer>'''
@@ -1109,7 +1111,7 @@ def build():
     body += f'\n<script type="application/json" id="home-data">{data}</script>\n'
     js = ['gsap', 'ScrollTrigger', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'CustomEase']
     body += ''.join(f'<script src="assets/js/{n}.min.js" defer></script>\n' for n in js)
-    body += '<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/fx.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
+    body += '<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/fx.js" defer></script>\n<script src="assets/js/v4.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
     out = clean(body)
     with open(os.path.join(SITE, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(out)

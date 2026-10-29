@@ -899,7 +899,7 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 /* depth layers: a positioned field behind each version's content (S1330, S1425: ground stays quieter than figure) */
 .bgf { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .bgf > * { position: absolute; will-change: transform; }
-.v.has-bgf > :not(.bgf):not([class*="peek"]) { position: relative; z-index: 1; }
+.v.has-bgf > :not(.bgf):not([class*="peek"]):not(.sdv):not(.sfx) { position: relative; z-index: 1; }
 
 /* =====================================================================================
    v3 SECTIONS
@@ -1194,3 +1194,153 @@ html:not(.motion) .rv { scroll-snap-align: start; }
   .card-fig { overflow: hidden; padding: 40px 0 48px; }
   .card-fig .iso { width: 116%; max-width: none; margin-left: -8%; }
 }
+
+/* =====================================================================================
+   v4 (PLAN-HOME-V4.md §2): companion variants, section fields, dividers, reaction kit, motion toggle.
+   Everything below is decorative and aria-hidden; with motion off none of it is mounted except the dividers' still shapes.
+   ===================================================================================== */
+.v { isolation: isolate; }
+
+/* ---------- companion (§2.1): system cursor stays; the old follower steps aside while a companion is on ---------- */
+html.has-pal .cur { display: none; }
+.pal { position: fixed; top: 0; left: 0; z-index: 199; width: 48px; height: 48px; pointer-events: none; opacity: 0; transition: opacity .2s ease; will-change: transform;
+  --pal-ink: #161616; --pal-paper: #FBFAF7; --pal-glass: #CFDCE0; --pal-lid: #E9E1CF; filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .22)); }
+.pal.is-on { opacity: 1; }
+.pal.pal--dark { --pal-ink: #F1EFEA; --pal-paper: #2A2A28; --pal-glass: #56666B; --pal-lid: #4A463F; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .5)); }
+.pal svg { overflow: visible; width: 48px; height: 48px; }
+.pal .pk { stroke: var(--pal-ink); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.pal .pp { fill: var(--pal-paper); }
+.pal .pn { fill: none; }
+.pal .pglass { fill: var(--pal-glass); }
+.pal .pinkf { fill: var(--pal-ink); }
+.pal .pglint { fill: #fff; }
+.pal .plid { fill: var(--pal-lid); }
+.pal .pdark { fill: #1E1D1B; }
+.pal .prail { fill: var(--pal-ink); }
+.pal .psheen { fill: #fff; opacity: 0; }
+.pal .pbr path { fill: none; stroke: var(--red); stroke-width: 2.2; stroke-linecap: round; }
+.pal .pbr { opacity: 0; }
+.pal .pred { fill: var(--red); }
+.pal--red .pred { fill: #fff; }
+.pal .plap line { stroke: #8F8A80; stroke-width: .8; }
+.pal .psill { stroke-width: 2.2; }
+
+/* switcher: "Companion" radiogroup in the picks panel and a mini pill beside the picks button */
+.pal-sw { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, .08); }
+.pal-sw button { min-height: 36px; min-width: 44px; padding: 0 10px; border: 0; border-radius: 999px; background: transparent; color: #C9C6BE; font-size: .8125rem; font-weight: 650; transition: background-color var(--t-hover) var(--ease), color var(--t-hover) var(--ease); }
+.pal-sw button[aria-checked="true"] { background: #F3F2EE; color: #161616; }
+.pk-pal { display: grid; gap: 8px; margin-top: 12px; }
+.pk-pal > span { font-weight: 600; }
+.pk-pal-note { color: #B9B6AE; font-size: .8125rem; }
+.pal-mini { display: none; align-items: center; gap: 8px; margin-left: 8px; padding: 0 6px 0 14px; min-height: 48px; border-radius: 999px; background: rgba(20, 20, 20, .94); color: #F3F2EE; box-shadow: 0 8px 30px rgba(0, 0, 0, .28); vertical-align: top; }
+.pal-mini > span { font-weight: 650; }
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  html.motion .pal-mini { display: inline-flex; }
+  html.motion .pk-pal-note { display: none; }
+  .pal-sw button:hover { color: #fff; background: rgba(255, 255, 255, .12); }
+  .pal-sw button[aria-checked="true"]:hover { background: #F3F2EE; color: #161616; }
+}
+.pal-sw :focus-visible { outline: 2px solid #fff; outline-offset: 2px; box-shadow: none; }
+
+/* motion toggle (§2.5): nav + footer, one flag */
+.hd-motion { display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 999px; background: none; font-weight: 600; font-size: .9375rem; }
+.hd-motion svg, .ft-motion svg { width: 22px; height: 14px; flex: none; }
+.hd-motion .mt-k, .ft-motion .mt-k { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.hd-motion .mt-d, .ft-motion .mt-d { fill: currentColor; transition: transform var(--t-ui) var(--ease); }
+[aria-pressed="false"] .mt-d { transform: translateX(-8px); }
+@media (min-width: 1240px) { .hd-motion { display: inline-flex; } }
+@media (hover: hover) and (pointer: fine) { .hd-motion:hover { background: var(--ground2); } }
+.ft-motion { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
+.sheet .sh-motion { display: flex; align-items: center; min-height: 56px; border: 0; background: none; padding: 0; font-size: 1.25rem; font-weight: 700; text-align: left; }
+
+/* ---------- section fields (§2.2) ---------- */
+.sfx { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: var(--fg); }
+.v.has-bgf > .sfx { z-index: 0; }
+.sfx svg { display: block; width: 100%; height: 100%; overflow: hidden; }
+.f-line { fill: none; stroke: currentColor; stroke-opacity: .11; stroke-width: 1; }
+.f-shadow { fill: none; stroke: currentColor; stroke-opacity: .045; stroke-width: 3; }
+.f-mun line { stroke: currentColor; stroke-opacity: .06; stroke-width: 10; }
+.f-mun line.rail { stroke-width: 16; stroke-opacity: .075; }
+.f-sheen { opacity: .55; }
+.v[data-tone="night"] .f-sheen, .v[data-tone="photo"] .f-sheen { opacity: .12; }
+.f-dash { fill: none; stroke: currentColor; stroke-opacity: .22; stroke-width: 1.2; stroke-dasharray: 4 7; }
+.f-solid { fill: none; stroke: var(--red); stroke-opacity: .55; stroke-width: 1.5; }
+.f-studs line { stroke: currentColor; stroke-opacity: .07; stroke-dasharray: 1 1; }
+.f-nails circle { fill: currentColor; fill-opacity: .17; transition: fill-opacity .2s ease; }
+.f-nails circle.is-near { fill: var(--red); fill-opacity: .6; }
+.f-xbg { fill: #CDB892; }
+.f-wrap { fill: none; stroke: #F4F4F0; stroke-opacity: .55; stroke-width: 22; }
+.f-studx { fill: none; stroke: #8A6A3E; stroke-width: 2.2; }
+.f-seam { fill: none; stroke: #5A4630; stroke-width: 1.2; stroke-dasharray: 3 5; }
+.f-plate { fill: none; stroke: #8A6A3E; stroke-width: 12; }
+.f-bandline { fill: none; stroke: var(--red); stroke-width: 1; stroke-opacity: .6; }
+.f-chip { fill: var(--sheet); stroke: currentColor; stroke-opacity: .16; }
+.f-chip.is-face { stroke-opacity: .32; }
+.f-punch { fill: currentColor; fill-opacity: .14; }
+.f-chips { opacity: .9; }
+.f-lot { fill: none; stroke: currentColor; stroke-opacity: .06; stroke-dasharray: 6 5; }
+.f-roof { fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .16; }
+.f-ridge { stroke: var(--red); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.f-stile { fill: none; stroke: currentColor; stroke-opacity: .12; stroke-width: 1.5; }
+.f-slat { fill: currentColor; fill-opacity: .085; }
+.sfx-money pattern path { fill: none; stroke: currentColor; stroke-opacity: .28; }
+.f-chalk { fill: none; stroke: #3B6FB6; stroke-opacity: .6; stroke-width: 1.5; }
+.f-chalkdust { fill: none; stroke: #3B6FB6; stroke-opacity: 0; stroke-width: 7; transition: stroke-opacity .6s ease; }
+.f-chalkdust.is-on { stroke-opacity: .1; }
+.f-peg { fill: currentColor; fill-opacity: .3; }
+.f-jamb, .f-leaf, .f-door rect { fill: none; stroke: currentColor; stroke-opacity: .12; stroke-width: 2; }
+.f-knob { fill: currentColor; fill-opacity: .22; }
+.f-pool { mix-blend-mode: screen; }
+.v[data-tone="ground"] .f-pool, .v[data-tone="ground2"] .f-pool { mix-blend-mode: multiply; opacity: .5; }
+
+/* ---------- dividers (§2.3) ---------- */
+.sdv { position: absolute; top: 0; left: 0; z-index: 1; display: block; width: 100%; height: clamp(26px, 3.9vw, 56px); pointer-events: none; overflow: visible; }
+.sdv-p { fill: var(--sdv, var(--ground)); }
+.sdv { color: var(--sdv-line); }
+.sdv-l { fill: none; stroke: var(--sdv-line, currentColor); stroke-opacity: .3; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.sdv-bead { fill: #6FA8DC; }
+.sdv-house { fill: var(--night); }
+.sdv-win { fill: #FFD27A; }
+.ft { position: relative; }
+
+/* ---------- reaction kit (§2.4) ---------- */
+.rx-host { position: relative; }
+.rx { position: absolute; left: 0; top: 0; z-index: 2; overflow: visible; pointer-events: none; }
+.rx-l { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.rx-shade { stroke-opacity: .4; }
+.rx-glint { fill: #fff; opacity: .3; }
+.rx-nail { fill: currentColor; }
+.rx-nh circle { fill: var(--fg, #161616); }
+.rx-nh path { stroke: var(--bg, #fff); stroke-width: 1; }
+.rx-chip { fill: #B8925E; }
+.rx-paint { fill: var(--rx-paint, var(--red)); }
+.rx-drop, .rx-splash { opacity: 0; }
+.rx-splash { stroke: var(--rx-paint, var(--red)); }
+.rx-tab { opacity: 0; }
+.rx-tabf { fill: #4A4744; }
+.rx-tab .rx-l { stroke: #1E1D1B; stroke-width: 1; }
+.rx-tick { stroke: currentColor; stroke-width: 1; }
+.rx-lev { opacity: 0; }
+.rx-levb { fill: #F2C230; stroke: #161616; stroke-width: .8; }
+.rx-levv { fill: #CFE8B5; stroke: #161616; stroke-width: .6; }
+.rx-bub { fill: #fff; stroke: #161616; stroke-width: .4; }
+.rx-chalk { fill: none; stroke: #3B6FB6; stroke-width: 1.6; }
+.rx-dust circle { fill: #3B6FB6; opacity: 0; }
+.rx-fr, .rx-mun { fill: none; stroke: #fff; stroke-width: 3; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45)); }
+.rx-mun { stroke-width: 2; }
+.rx-pane { fill: #fff; opacity: 0; }
+.rx-seal { fill: none; stroke: var(--red); stroke-width: 1.5; }
+.rx-seal2 { fill: none; stroke: var(--red); stroke-width: 3; opacity: 0; }
+.rx-gab { opacity: 0; stroke-width: 2; }
+.rx-cap { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.rx-mor { opacity: 0; stroke-width: 2; }
+.rx-ring, .rx-ok, .rx-no { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+.rx-pill { opacity: 0; stroke-opacity: .5; }
+.rx-call { position: fixed; z-index: 300; display: grid; gap: 4px; padding: 16px 20px; border-radius: 20px; background: var(--ink); color: #F3F2EE; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); pointer-events: none; }
+.rx-call b { font-size: 1.6rem; font-weight: 780; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.rx-call span { font-size: .8125rem; color: #C9C6BE; }
+.rx-lap { position: absolute; left: 0; bottom: -12px; display: block; width: min(100%, 360px); height: 7px; overflow: visible; pointer-events: none; color: inherit; }
+.rx-lap path { fill: none; stroke: currentColor; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.rx-lap1 { opacity: calc(.12 + var(--k, 0) * .6); transform: translateY(calc(var(--k, 0) * -3px)); }
+.rx-lap2 { opacity: calc(.06 + var(--k, 0) * .3); transform: translateY(calc(var(--k, 0) * 1.5px)); }
+html:not(.motion) .rx, html:not(.motion) .pal { display: none; }

@@ -66,7 +66,7 @@
       lenis = null;
     }
   }
-  function syncFx() { if (window.APFX) { window.APFX.motion = motionOK(); window.APFX.sync(); } }
+  function syncFx() { if (window.APFX) { window.APFX.motion = motionOK(); window.APFX.sync(); } if (window.APV4) window.APV4.sync(motionOK()); }
   function jumpBy(dy) { if (!dy) return; if (lenis) lenis.scrollTo(window.scrollY + dy, { immediate: true, force: true }); else window.scrollBy(0, dy); }
   function goTo(el) {
     const y = el.getBoundingClientRect().top + window.scrollY - hdH();
@@ -1164,7 +1164,7 @@
     s.label.textContent = s.names[v - 1];
     const vr = s.stage.firstElementChild;
     s.b = bag();
-    const run = () => { heads(vr, s); const fn = V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); };
+    const run = () => { heads(vr, s); const fn = V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
     try {
       if (G) { s.ctx = G.context(() => {}); s.ctx.add(run); } else run();
     } catch (err) { console.error(s.key + v, err); }
@@ -1241,6 +1241,11 @@
     setMotionClass(); lenisSync(); syncFx(); remountAll();
     pkMsg.textContent = motionBox.checked ? 'Motion on.' : 'Motion off: every section shows its finished state.';
   });
+  const motionBtns = $$('[data-motion-btn]');
+  const paintMotionBtns = () => motionBtns.forEach(b => { const on = motionOK(); b.setAttribute('aria-pressed', on); const t = $('[data-motion-t]', b); if (t) t.textContent = on ? 'Motion on' : 'Motion off'; });
+  motionBtns.forEach(b => b.addEventListener('click', () => { motionBox.checked = !motionOK(); motionBox.dispatchEvent(new Event('change')); paintMotionBtns(); }));
+  motionBox.addEventListener('change', paintMotionBtns);
+  paintMotionBtns();
   mqReduce.addEventListener('change', () => { if (userMotion) return; motionBox.checked = motionOK(); setMotionClass(); lenisSync(); syncFx(); remountAll(); });
 
   /* in-page links: smooth with Lenis, focus moves to the target (S0915); booking links can preselect a trade */

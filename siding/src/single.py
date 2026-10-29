@@ -78,7 +78,7 @@ def squeeze(p):
 
 def script(n):
     src = rd(f'assets/js/{n}')
-    if TERSER and n in ('fx.js', 'home.js'):
+    if TERSER and n in ('fx.js', 'v4.js', 'home.js'):
         src = subprocess.run([TERSER, '--compress', '--mangle'], input=src, capture_output=True, text=True, check=True).stdout
     return src.replace('</script', '<\\/script')
 
@@ -134,7 +134,7 @@ window.__apUrl=url;window.__apAsset=fill;fill(document);})();</script>
     asset_tag = '<script type="application/json" id="ap-assets">' + json.dumps({'t': types, 'd': table}, separators=(',', ':')) + '</script>\n'
     # 4. scripts inline in load order, after the asset start-up
     scripts = ''
-    for n in [f'{j}.min.js' for j in JS] + ['lenis.min.js', 'fx.js', 'home.js']:
+    for n in [f'{j}.min.js' for j in JS] + ['lenis.min.js', 'fx.js', 'v4.js', 'home.js']:
         scripts += f'<script>\n{script(n)}\n</script>\n'
     html = re.sub(r'(<script src="assets/js/[^"]+" defer></script>\n)+', '', html)
     html = html.replace('</body>', asset_tag + boot + scripts + '</body>')
