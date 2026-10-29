@@ -221,3 +221,9 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Reviews 3 "The crew"** ([BANK] 300 True Focus + F13): red focus brackets travel 0.3 s to the pointed or chosen name and the other names soften. One verbatim card per person per review, opening at that person's sentence. No counts, no auto-cycle.
 - **Page-wide:** every caption now reads "Google, 2026", so no number sits beside the word "review".
 - **Evidence:** `sect.js reviews` PASS ×9; console 0; facts grep on the section clean.
+
+**Money — M1 and M3 REBUILT, M2 KEPT, verified 29 Oct 2026.**
+- **Money 1 "Amount"** (the firm's worked example + F10): the payment for any amount on the three published plans, on the odometer. The term is drawn as one glazed pane per monthly payment, twelve to a row, with each year's first pane red. The spirit level is gone (Work 1 owns it). The test reproduces the firm's $181.91.
+- **Money 3 "Receipt"** (R24 + FACTS Offers): the three published offers on a torn receipt; the total is struck through and rewritten (0.3 s). The odometer and stamp are gone. The firm's $30,000 → $22,500 is reproduced; a booking button and the phone sit beside it.
+- **Money 2:** KEPT, re-verified.
+- **Evidence:** `sect.js money` PASS ×9; screenshots `money1–3`.

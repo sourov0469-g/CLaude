@@ -998,23 +998,29 @@ def reviews3():
 TERMS = [(0, 24, '0% APR', '24 months'), (.0499, 60, '4.99% APR', '60 months'), (.0799, 120, '7.99% APR', '120 months')]
 
 
-def terms(name):
-    return ''.join(f'''<button class="term" type="button" role="radio" aria-checked="{'true' if n == 120 else 'false'}" data-apr="{apr}" data-n="{n}"><b>{a}</b><span>{m}</span>{'<i>Lowest monthly</i>' if n == 120 else ''}</button>''' for apr, n, a, m in TERMS)
-
-
 FINE = 'On approved credit through GreenSky; not everyone qualifies. The firm\'s own example: $15,000 at 7.99% APR for 120 months is 120 payments of $181.91.'
 
 
 def money1():
+    """Austin Pro's worked financing example (portfolio plan Site 6; FACTS: $15,000 at 7.99% APR for 120 months =
+    $181.91) + anatomy F10 (financing as its own section): the payment for any amount on the three published plans,
+    the figure on the odometer, and the term drawn as one window pane per monthly payment, a row of twelve per year"""
+    panes = ''.join(f'<rect x="{(k % 12) * 14}" y="{(k // 12) * 12}" width="12" height="10" rx="1"/>' for k in range(120))
+    plans = ''.join(f'''<button class="pay-t" type="button" role="radio" aria-checked="{'true' if n == 120 else 'false'}" tabindex="{0 if n == 120 else -1}" data-apr="{apr}" data-n="{n}"><b>{a}</b><span>{m}</span>{'<i>Lowest monthly</i>' if n == 120 else ''}</button>''' for apr, n, a, m in TERMS)
     return f'''<div class="v money-1" data-tone="ground">
   <h2 class="h2x" data-split>The monthly maths, done</h2>
-  <div class="m1-grid">
-    <div class="m1-fig"><p class="m1-big num" aria-hidden="true"><span class="odo" data-odo>$181.91</span><small>/mo</small></p><p class="m1-sub" data-m1-sub>$15,000 over 120 months at 7.99% APR</p><p class="sr-only" aria-live="polite" data-sr>$181.91 a month</p></div>
-    <div class="m1-ctl">
-      <label class="lab" for="m1-amt">Project amount <output class="num" for="m1-amt">$15,000</output></label>
-      <input class="range" id="m1-amt" type="range" min="2000" max="50000" step="500" value="15000" aria-valuetext="$15,000">
-      <svg class="m1-lev" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="ml-b" x="1" y="3" width="398" height="24" rx="5"/><rect class="ml-v" x="14" y="9" width="372" height="12" rx="6"/><path class="ml-m" d="M200 9V21"/><circle class="ml-bub" cx="0" cy="15" r="4.6" data-bub/></svg>
-      <div class="terms" role="radiogroup" aria-label="Payment plan">{terms('m1')}</div>
+  <div class="pay-grid">
+    <div class="pay-fig">
+      <p class="pay-big num" aria-hidden="true"><span class="odo" data-odo>$181.91</span><small>/mo</small></p>
+      <p class="pay-sub" data-pay="sub">$15,000 over 120 months at 7.99% APR</p>
+      <p class="sr-only" aria-live="polite" data-pay="sr"></p>
+      <figure class="pay-term"><svg class="pay-panes" viewBox="0 0 166 118" data-pay="panes" aria-hidden="true" focusable="false">{panes}</svg>
+        <figcaption data-pay="cap">120 monthly payments, one pane each; a row is a year</figcaption></figure>
+    </div>
+    <div class="pay-ctl">
+      <label class="lab" for="pay-amt">Project amount <output class="num" for="pay-amt" data-pay="amt">$15,000</output></label>
+      <input class="range" id="pay-amt" type="range" min="2000" max="50000" step="500" value="15000" aria-valuetext="$15,000">
+      <div class="pay-plans" role="radiogroup" aria-label="Payment plan">{plans}</div>
       <p class="fine">{FINE}</p>
     </div>
   </div>
@@ -1074,26 +1080,31 @@ def money2():
 
 
 def money3():
+    """builder brief R24 (options update a summary live; complete without JS) + FACTS Offers: the three published
+    offers on a receipt, from the firm's own example ($30,000 with all three = $22,500). When a box changes, the total
+    is struck through and written again; no odometer, no stamp (those belong to Money 1 and Proof 3)."""
+    torn = 'M0 0H400V8' + ''.join(f'L{x + 10} 16L{x + 20} 8' for x in range(0, 400, 20)) + 'V0Z'
     return f'''<div class="v money-3" data-tone="ground2">
-  <div class="m3-grid">
-    <div class="m3-side">
+  <div class="rcp-grid">
+    <div class="rcp-side">
       <h2 class="h2x" data-split>Three discounts, stacked</h2>
       <p>The firm's own example: a $30,000 project with all three comes to $22,500.</p>
-      <div class="m3-opts">
+      <div class="rcp-opts">
         <label class="tick"><input type="checkbox" data-pct="5" checked><span>Hometown Heroes: veterans and military, teachers, seniors, first responders</span></label>
         <label class="tick"><input type="checkbox" data-pct="10" checked><span>Pay in full by cash, check or ACH (not with financing)</span></label>
       </div>
+      <div class="rcp-cta">{btn_book('btn btn-ink', 'Book a free inspection')}<a class="tlink" href="{TEL}">Call {PHONE}</a></div>
     </div>
-    <div class="receipt" aria-live="polite">
-      <svg class="rc-perf" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 5H400"/></svg>
-      <svg class="rc-stamp" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><defs><path id="rcs-p" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1 -88 0"/></defs><circle class="st-o" cx="60" cy="60" r="56"/><circle class="st-i" cx="60" cy="60" r="34"/><text class="st-t"><textPath href="#rcs-p" startOffset="0">PAID IN FULL · CASH · CHECK · ACH ·</textPath></text><text class="st-n" x="60" y="68">-10%</text></svg>
-      <p class="rc-h">Your estimate</p>
-      <div class="rc-line rc-amt"><span>Project</span><label class="rc-in"><span class="sr-only">Project amount in dollars</span>$<input type="text" inputmode="numeric" value="30,000" autocomplete="off"></label></div>
-      <div class="rc-line" data-line="10"><span>Holiday Savings, through November 30</span><b>-10%</b></div>
-      <div class="rc-line" data-line="5"><span>Hometown Heroes</span><b>-5%</b></div>
-      <div class="rc-line" data-line="p"><span>Pay in full</span><b>-10%</b></div>
-      <div class="rc-tot"><span>You pay</span><b class="num"><s data-was>$30,000</s> <span class="odo" data-odo>$22,500</span></b></div>
-      <p class="rc-save num">You save <b data-save>$7,500</b></p>
+    <div class="rcp">
+      <svg class="rcp-perf" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 5H400"/></svg>
+      <p class="rcp-h">Your estimate</p>
+      <div class="rcp-l rcp-amt"><span>Project</span><label class="rcp-in"><span class="sr-only">Project amount in dollars</span>$<input type="text" inputmode="numeric" value="30,000" autocomplete="off"></label></div>
+      <div class="rcp-l"><span>Holiday Savings, through November 30</span><b>-10%</b></div>
+      <div class="rcp-l" data-line="5"><span>Hometown Heroes</span><b>-5%</b></div>
+      <div class="rcp-l" data-line="p"><span>Pay in full</span><b>-10%</b></div>
+      <div class="rcp-tot" aria-live="polite"><span>You pay</span><b class="num"><span class="rcp-now" data-now>$22,500</span><svg class="rcp-strike" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 13C30 9 64 12 98 6"/></svg></b></div>
+      <p class="rcp-save num">You save <b data-save>$7,500</b> on <span data-list>$30,000</span></p>
+      <svg class="rcp-torn" viewBox="0 0 400 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="{torn}"/></svg>
     </div>
   </div>
 </div>'''

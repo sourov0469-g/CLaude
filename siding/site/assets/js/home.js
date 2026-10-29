@@ -1151,21 +1151,29 @@
 
   /* MONEY */
   function srSay(el, text) { clearTimeout(el._t); el._t = setTimeout(() => { el.textContent = text; }, 450); }
+  /* MONEY 1: the firm's worked example ($15,000 at 7.99% APR over 120 months = $181.91) for any amount on the three
+     published plans. The figure runs on the odometer (only changed digits roll, 260 ms); the term is drawn as one
+     pane per monthly payment, twelve to a row, and a plan change lights its panes in under 0.3 s. */
   V.money1 = (r, b) => {
-    const inp = $('#m1-amt', r), out = $('output', r), sub = $('[data-m1-sub]', r), sr = $('[data-sr]', r);
-    const odo = Odo($('[data-odo]', r));
-    let apr = 0.0799, n = 120;
+    const inp = $('#pay-amt', r), o = k => $(`[data-pay="${k}"]`, r), odo = Odo($('[data-odo]', r));
+    const panes = $$('rect', o('panes'));
+    let apr = 0.0799, n = 120, lit = 120;
+    const term = () => {
+      const was = lit; lit = n;
+      o('panes').setAttribute('viewBox', `0 0 166 ${Math.ceil(n / 12) * 12 - 2}`);
+      panes.forEach((p, k) => p.classList.toggle('off', k >= n));
+      o('cap').textContent = `${n} monthly payments, one pane each; a row is a year`;
+      const fresh = panes.slice(Math.min(was, n), n);
+      if (fresh.length && motionOK()) G.fromTo(fresh, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none', stagger: Math.min(0.004, 0.18 / fresh.length), overwrite: true });
+    };
     const upd = () => {
       const A = +inp.value, m = pmt(A, apr, n), f = usd.format(A);
-      out.textContent = f; inp.setAttribute('aria-valuetext', f);
+      o('amt').textContent = f; inp.setAttribute('aria-valuetext', f);
       odo(usd2.format(m));
-      // v4: the level's bubble rides the amount along the vial (2,000 to 50,000), springing a little when moved
-      const bub = $('[data-bub]', r), x = 20 + (A - 2000) / 48000 * 360;
-      if (bub) { if (motionOK()) G.to(bub, { attr: { cx: x }, duration: 0.45, ease: 'back.out(1.4)', overwrite: true }); else bub.setAttribute('cx', x); }
-      sub.textContent = `${f} over ${n} months at ${apr ? (apr * 100).toFixed(2) + '%' : '0%'} APR`;
-      srSay(sr, `${usd2.format(m)} a month`);
+      o('sub').textContent = `${f} over ${n} months at ${apr ? (apr * 100).toFixed(2) + '%' : '0%'} APR`;
+      srSay(o('sr'), `${usd2.format(m)} a month for ${n} months`);
     };
-    radios($('.terms', r), b, it => { apr = +it.dataset.apr; n = +it.dataset.n; upd(); });
+    radios($('.pay-plans', r), b, it => { apr = +it.dataset.apr; n = +it.dataset.n; term(); upd(); });
     b.on(inp, 'input', upd);
     upd();
   };
@@ -1193,23 +1201,31 @@
     const flat = matchMedia('(max-width: 639px)').matches;   // phones draw the bars horizontally
     if (motionOK()) G.from($$('.db i', r), Object.assign(flat ? { scaleX: 0, transformOrigin: '0% 50%' } : { scaleY: 0, transformOrigin: '50% 100%' }, { duration: 0.6, ease: ease.out, stagger: 0.03, scrollTrigger: once(list, 'top 85%') }));
   };
+  /* MONEY 3: R24 configurator on a receipt. The Holiday Savings line always applies (through November 30); the other
+     two are boxes. Offers add, as the firm's example does (10 + 5 + 10 = 25 %). When the total changes, a pen line
+     strikes the old figure (0.15 s) and the new one is written in from the left (0.15 s). */
   V.money3 = (r, b) => {
-    const amt = $('.rc-amt input', r), boxes = $$('input[type="checkbox"]', r), odo = Odo($('[data-odo]', r)), was = $('[data-was]', r), save = $('[data-save]', r);
-    const lines = { 5: $('[data-line="5"]', r), p: $('[data-line="p"]', r) };
-    const upd = () => {
-      const A = Math.min(500000, +amt.value.replace(/[^\d]/g, '') || 0);
-      const heroes = boxes[0].checked, full = boxes[1].checked;
+    const amt = $('.rcp-amt input', r), boxes = $$('.rcp-opts input', r), now = $('[data-now]', r), pen = $('.rcp-strike path', r);
+    const save = $('[data-save]', r), list = $('[data-list]', r), lines = { 5: $('[data-line="5"]', r), p: $('[data-line="p"]', r) };
+    let shown = now.textContent;
+    const upd = anim => {
+      const A = Math.min(500000, +amt.value.replace(/[^\d]/g, '') || 0), heroes = boxes[0].checked, full = boxes[1].checked;
       lines[5].classList.toggle('is-off', !heroes); lines.p.classList.toggle('is-off', !full);
-      const pct = 10 + (heroes ? 5 : 0) + (full ? 10 : 0), price = Math.round(A * (100 - pct) / 100);
-      was.textContent = usd.format(A); odo(usd.format(price)); save.textContent = usd.format(A - price);
-      // v4: the pay-in-full stamp lands when that box is ticked (scale 1.3 to 1, never rotated: builder brief 6)
-      const rc = $('.receipt', r), was0 = rc.classList.contains('is-paid'); rc.classList.toggle('is-paid', full);
-      if (full && !was0 && motionOK()) G.fromTo($('.rc-stamp', r), { scale: 1.35, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'power4.out' });
+      const pct = 10 + (heroes ? 5 : 0) + (full ? 10 : 0), price = Math.round(A * (100 - pct) / 100), txt = usd.format(price);
+      save.textContent = usd.format(A - price); list.textContent = usd.format(A);
+      if (txt === shown) return;
+      shown = txt;
+      if (!anim || !motionOK() || !window.DrawSVGPlugin) { now.textContent = txt; return; }
+      G.timeline()
+        .fromTo(pen, { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.15, ease: 'power2.in' })
+        .add(() => { now.textContent = txt; G.set(pen, { drawSVG: '0%' }); })
+        .fromTo(now, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.15, ease: 'power2.out', clearProps: 'clipPath' });
     };
-    b.on(amt, 'input', upd); b.on(amt, 'blur', () => { const v = +amt.value.replace(/[^\d]/g, '') || 0; amt.value = v.toLocaleString('en-US'); upd(); });
-    boxes.forEach(x => b.on(x, 'change', upd));
-    upd();
-    if (motionOK()) G.from($$('.rc-h, .rc-line, .rc-tot, .rc-save', r), { clipPath: 'inset(0% 0% 100% 0%)', y: -6, duration: 0.45, ease: ease.out, stagger: 0.12, scrollTrigger: { trigger: $('.receipt', r), start: 'top 75%', once: true }, clearProps: 'clipPath' });
+    b.on(amt, 'input', () => upd(false));
+    b.on(amt, 'blur', () => { const v = +amt.value.replace(/[^\d]/g, '') || 0; amt.value = v.toLocaleString('en-US'); upd(true); });
+    boxes.forEach(x => b.on(x, 'change', () => upd(true)));
+    if (window.DrawSVGPlugin) G.set(pen, { drawSVG: '0%' });
+    upd(false);
   };
 
   /* BOOK: one form engine for all three versions (S1442, S0661: validate on Continue, then live; focus first invalid) */

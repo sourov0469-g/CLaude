@@ -17,5 +17,5 @@ Flip a line to `passes: YES` only when that version has:
 | 6 | Colour | Dock — passes: YES | Paint or ColorPlus — passes: YES | Colour book — passes: YES |
 | 7 | Near you | Survey — passes: YES | Town by town — passes: YES | Neighbourhood drive — passes: YES |
 | 8 | Reviews | Stream — passes: YES | One — passes: YES | Names — passes: YES |
-| 9 | Money | Amount — passes: NO | What people paid — passes: NO | Receipt — passes: NO |
+| 9 | Money | Amount — passes: YES | What people paid — passes: YES | Receipt — passes: YES |
 | 10 | Book | Call — passes: NO | Form — passes: NO | One sentence — passes: NO |

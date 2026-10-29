@@ -323,14 +323,14 @@ Sections are recorded in SECTIONS.md order.
 - **Mechanism:** a worked payment from the published plans.
 - **Adaptations:** amount + plan; the odometer readout; the term drawn as a grid of monthly panes (24 / 60 / 120, a row per year); disclosure printed.
 - **Verdict:** REBUILT. T fail: the v4 spirit level duplicates the level owner (Work 1).
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `money1-d/-m.png`. 0% / 24 months → 24 panes lit, '$15,000 over 24 months at 0% APR', $625.00; back to 7.99% / 120 → $181.91 (the firm's printed example). No spirit level. `sect.js money` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **M2 · What people paid**
 - **Reference:** [BANK] Austin Pro crown 1 invoiced distribution (anatomy F7e, "ranges are estimates; distributions are evidence").
 - **Mechanism:** every priced job by band; the median marked; the caveat printed.
 - **Adaptations:** 415 siding / 376 window priced jobs; bars as boards; a chalk tick on the median.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓ (owns bars grow), F ✓ (counts sum to 415 / 376), D ✓, P ✓.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `money2-d/-m.png`; the windows tab takes. `sect.js money` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 **M3 · Receipt**
 - **Reference:** builder brief R24 tier-pricing configurator (options update a summary live; static without JS) + FACTS Offers.
@@ -339,7 +339,7 @@ Sections are recorded in SECTIONS.md order.
 - **Verdict:** REBUILT.
   - T fail: odometer duplicates Money 1.
   - T fail: "paid" stamp duplicates Proof 3.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `money3-d/-m.png`. Start $22,500 (the firm's example); untick Pay in full → $25,500; amount 10,000 → $8,500. Strike 0.15 s + rewrite 0.15 s; no odometer, no stamp. `tel:` present. `sect.js money` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow).
 
 ### Book
 
