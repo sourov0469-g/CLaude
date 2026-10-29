@@ -282,7 +282,7 @@ html.js .stage-media.is-hidden img.is-active{clip-path:inset(0 100% 0 0)}
 .values-list{list-style:none;margin:0;padding:0;display:flex;justify-content:space-between;gap:var(--s-3) var(--s-6)}
 .values-list button{white-space:nowrap}
 .values-list button{position:relative;border:0;background:none;padding:6px 0;cursor:pointer;font-family:var(--font-display);font-weight:650;font-size:clamp(1.45rem, 1.1rem + 1.4vw, 2.35rem);line-height:1.15;color:var(--ink);letter-spacing:-.012em;text-align:left}
-.values-list button::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--rust);transform:scaleX(0);transform-origin:left;transition:transform var(--d-slow) var(--ease-expo)}
+.values-list button::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--rust);transform:scaleX(0);transform-origin:left;transition:transform var(--d-fast) var(--ease-out)}
 .values-list button.is-on::after,.values-list button:focus-visible::after{transform:scaleX(1)}
 @media (hover:hover) and (pointer:fine){.values-list button:hover::after{transform:scaleX(1)}}
 
@@ -302,7 +302,7 @@ html.js .stage-media.is-hidden img.is-active{clip-path:inset(0 100% 0 0)}
 .svc-item.is-open .svc-plus svg{transform:rotate(45deg)}
 @media (hover:hover) and (pointer:fine){.svc-btn:hover .svc-name{transform:translateX(10px);color:var(--rust)}}
 .svc-item.is-current .svc-name{color:var(--rust)}
-.svc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-slow) var(--ease-out)}
+.svc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows 300ms var(--ease-out)}
 .svc-item.is-open .svc-panel{grid-template-rows:1fr}
 .svc-panel > div{overflow:hidden}
 .svc-panel-in{padding-bottom:28px;display:grid;gap:var(--s-4)}
@@ -391,7 +391,7 @@ html.js .stage-media.is-hidden img.is-active{clip-path:inset(0 100% 0 0)}
 .dust{position:absolute;inset:0;z-index:3;pointer-events:none;width:100%;height:100%}
 
 /* lightbox */
-.lb{position:fixed;inset:0;z-index:80;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:rgba(23,21,17,.97);color:var(--paper);visibility:hidden;opacity:0;transition:opacity var(--d-quick) var(--ease-out),visibility 0s linear var(--d-quick)}
+.lb{position:fixed;inset:0;z-index:80;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:var(--ink);color:var(--paper);visibility:hidden;opacity:0;transition:opacity var(--d-quick) var(--ease-out),visibility 0s linear var(--d-quick)}
 .lb.is-open{visibility:visible;opacity:1;transition:opacity var(--d-fast) var(--ease-out),visibility 0s}
 .lb-top{display:flex;justify-content:space-between;align-items:center;padding:14px var(--gutter);gap:var(--s-4)}
 .lb-count{font-variant-numeric:tabular-nums;color:rgba(243,239,236,.7);font-size:var(--t-small)}
@@ -1862,7 +1862,8 @@ html.rm .build-fig svg{transition:none!important}
   const fitBuild = () => buildSvg.setAttribute('viewBox', W.innerWidth <= 560 ? '0 0 960 540' : '0 0 850 540');
   fitBuild();
   const explodeBtn = $('#build-explode'), labelBtn = $('#build-labels');
-  explodeBtn.addEventListener('click', () => { B.pinned = !B.pinned; explodeBtn.setAttribute('aria-pressed', String(B.pinned)); explodeBtn.textContent = B.pinned ? 'Put it back together' : 'Pull it apart'; wakeBuild(); });
+  // a toggle keeps its name; the pressed fill (and aria-pressed) says it is on, so the chips never re-flow
+  explodeBtn.addEventListener('click', () => { B.pinned = !B.pinned; explodeBtn.setAttribute('aria-pressed', String(B.pinned)); wakeBuild(); });
   const toggleLabels = () => { B.labelled = !B.labelled; labelBtn.setAttribute('aria-pressed', String(B.labelled)); wakeBuild(); };
   labelBtn.addEventListener('click', toggleLabels);
   fig.addEventListener('click', toggleLabels);

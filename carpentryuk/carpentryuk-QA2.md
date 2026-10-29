@@ -71,9 +71,10 @@
 | 2.3 | Defect, P3 (spacing system) | **Quote lead spacing.** The quote lead sat 16 px under its heading. Every other lead on the page sits 24 px under. The descenders of "your job." nearly touched it. Shot: `before-quote-1440`. | Changed to the shared 24 px step (`--s-5`). | Same rhythm as the hero, build and coverage leads. Shot: `after-quote-1440`. |
 | 2.4 | Improvement, P3 (S1473 #1, system status) | **Joint caption.** When the three required fields were valid, the dovetail closed and the count read "3 of 3", but the caption still said "Fill in the form to close the joint." Shot: `before-quote-filled-1440`. | At 3 of 3 the caption reads "Joint closed. Ready to send." It goes back if a field is cleared. | Shot: `after-quote-filled-1440`. |
 
-### Next chunk (planned)
+### Chunk 3: interaction and motion
 
-- **Interaction and motion:**
-  - The build toggle renames itself. It wraps the chips on phones, and a pressed toggle should keep its name.
-  - The lightbox backdrop lets the page show through.
-  - A few UI transitions run over 300 ms.
+| # | Class | Finding (evidence) | Change | Result |
+|---|---|---|---|---|
+| 3.1 | Defect, P2 (S1314 §4 "buttons re-flow", S0049 toggle naming) | **Build toggle.** Pressing "Pull it apart" renamed it "Put it back together". At 375 the longer label pushed "Name the parts" onto a second line, so the controls jumped under the thumb. A toggle with `aria-pressed` should also keep its name, so screen readers announce "Pull it apart, pressed". Shot: `before-build-chips-375`. | The chip keeps its name. The dark pressed fill, the same one "Name the parts" uses, and `aria-pressed` carry the state. | The chips stay on one row at 375 in both states. Shot: `after-build-chips-375`. |
+| 3.2 | Defect, P3 (S0063 staging, modal dims background) | **Lightbox backdrop.** At 97% opacity, the tiles, their white captions and the header showed through around the photo on phones. The surface was busy behind a viewer whose only job is one photo. Shot: `before-lightbox-375`. | Backdrop is now solid `--ink`. The open and close fades are unchanged. | Shot: `after-lightbox-375`. |
+| 3.3 | Polish, P3 (S0063 / S0089 sub-300 ms UI) | **Two UI transitions ran at 420 ms.** These were the service accordion opening (a click), and the values underline (a hover, which happens tens of times a visit) on a strong expo curve. | Accordion 300 ms ease-out. Values underline 260 ms (`--d-fast`) ease-out. | Both feel immediate. The scroll reveals, line drawing, sawdust and other story motion are unchanged. They are explanatory, not UI feedback. |
