@@ -1477,3 +1477,34 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .tx-d .tx-rule { fill: #F2C230; }
 .tx-d .tx-tick { stroke-width: 1; }
 .tx-lab { font: 700 9px var(--f); fill: var(--fg); text-anchor: middle; }
+
+/* ---------- v4 Colour (PLAN §3 Colour) ---------- */
+.c1-fan { display: block; width: 120px; height: 74px; overflow: visible; --sp: 5deg; }
+.fc { transform-box: view-box; transform-origin: 60px 56px; transform: rotate(calc(var(--k) * var(--sp))); transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
+.fc-c { fill: var(--fc, #CFCBC2); stroke: #161616; stroke-width: 1.2; transition: fill .24s ease; }
+.fc-l { fill: #fff; opacity: .9; stroke: #161616; stroke-width: 1.2; }
+.fc-rv { fill: #8F8A80; stroke: #161616; }
+@media (hover: hover) and (pointer: fine) { .dock-wrap:hover .c1-fan, .dock-wrap:focus-within .c1-fan { --sp: 15deg; } }
+@media (min-width: 900px) { .c1-fan { position: absolute; left: max(0px, calc(50% - 480px)); bottom: 0; width: 140px; height: 86px; } }
+@media (max-width: 899px) { .c1-fan { width: 96px; height: 60px; } }
+.cmp-col { position: relative; }
+.c2-d { display: block; width: min(100%, 220px); height: auto; margin-bottom: 10px; overflow: visible; }
+.c2-b { fill: var(--c); stroke: #161616; stroke-width: 1.2; }
+.c2-raw { fill: #DCD7CC; stroke: #161616; stroke-width: 1.2; }
+.c2-sh { stroke: #000; stroke-opacity: .25; stroke-width: 2; }
+.c2-h { fill: none; stroke: #161616; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.c2-roll { fill: var(--c); stroke: #161616; stroke-width: 1.4; }
+.c2-belt { stroke: #161616; stroke-width: 2.4; }
+.c2-wh { fill: #CFCBC2; stroke: #161616; stroke-width: 1.2; }
+.c2-oven { fill: #2A2A28; stroke: #161616; stroke-width: 1.4; }
+.c2-coil { fill: none; stroke: #F28B30; stroke-width: 2; stroke-linejoin: round; }
+.c2-door { stroke: #F3F2EE; stroke-width: 2; }
+.cb-t { position: relative; }
+.cb-ph { position: absolute; top: 6px; left: 50%; width: 24px; height: 12px; margin-left: -12px; overflow: visible; }
+.cb-ph circle { fill: var(--night); stroke: var(--ink); stroke-opacity: .3; }
+.cb-ph path { stroke: var(--ink); stroke-opacity: .25; stroke-dasharray: 2 2; }
+.cb-lap { display: block; width: 100%; height: clamp(90px, 16vh, 156px); margin: 8px 0 4px; border-radius: 10px; overflow: hidden; }
+.cbl-f { fill: var(--c); }
+.cbl-hi { fill: #fff; opacity: .28; }
+.cbl-sh { fill: #000; opacity: .2; }
+.cbl-g { fill: none; stroke: var(--ink); stroke-opacity: .12; vector-effect: non-scaling-stroke; }

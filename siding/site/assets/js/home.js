@@ -742,6 +742,10 @@
   }
   const ZNAME = { body: 'siding', gable: 'gable', trim: 'trim' };
   V.colour1 = (r, b) => {
+    // v4 fan deck: the picked colour on the front chip with its two neighbours each side in the same range (PLAN C1)
+    const fanFill = sw => { const list = sw ? $$('.sw', sw.parentElement) : $$('.dock:not([hidden]) .sw', r); const k = sw ? list.indexOf(sw) : 2; $$('.fc-c', r).forEach(c => { const o = list[(k + +c.dataset.fc - 2 + list.length * 2) % list.length]; if (o) c.style.setProperty('--fc', o.dataset.hex); }); };
+    fanFill(null);
+    b.on(r, 'click', e => { const sw = e.target.closest && e.target.closest('.dock .sw'); if (sw) fanFill(sw); });
     const frame = $('.st-frame', r), S = Studio(frame), now = $('.c1-now', r);
     let part = 'body';
     radios($('.seg:not(.seg-set)', r), b, it => { part = it.dataset.part; });
@@ -761,6 +765,14 @@
   /* COLOUR 2: R30 comparison table (Other vs Us) adapted to the firm's two finish systems. Each column's swatches
      recolour its own header band; text colour is chosen per swatch for contrast. Static and complete without JS. */
   V.colour2 = (r, b) => {
+    // v4: picking a swatch replays its column's diagram: the roller runs the wet course / the board rides through the bake oven
+    b.on(r, 'click', e => {
+      const sw = e.target.closest && e.target.closest('.cmp-sw'); if (!sw || !motionOK()) return;
+      const col = sw.closest('td').cellIndex, d0 = $$('thead .cmp-col .c2-d', r)[col - 1]; if (!d0) return;
+      const tool = $('.c2-tool', d0), wet = $('.c2-wet', d0), brd = $('.c2-board', d0);
+      if (tool) { G.fromTo(tool, { x: -90 }, { x: 0, duration: 0.6, ease: 'power2.inOut' }); G.fromTo(wet, { attr: { width: 6 } }, { attr: { width: 96 }, duration: 0.6, ease: 'power2.inOut' }); }
+      if (brd) G.fromTo(brd, { x: -10 }, { x: 116, duration: 0.9, ease: 'power1.inOut' });
+    });
     $$('.cmp-set', r).forEach((set, k) => {
       const col = $$('.cmp-col', r)[k], now = $('[data-now]', col), code = $('[data-code]', col), sws = $$('.cmp-sw', set);
       sws.forEach(sw => b.on(sw, 'click', () => {
@@ -792,6 +804,7 @@
         tw = mqDesk.matches
           ? G.timeline().fromTo(sheet, { clipPath: box(t) }, { clipPath: 'inset(0px 0px 0px 0px round 20px)', duration: 0.5, ease: 'power3.inOut' })
               .fromTo(words, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: ease.out, stagger: 0.05 }, '-=0.12')
+              .fromTo($$('.cbl', sheet), { xPercent: -6, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.3, ease: ease.out, stagger: 0.07 }, '<')
           : G.fromTo(sheet, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: ease.out });
       }
     };

@@ -658,6 +658,7 @@ def colour1():
     <p class="c1-now" aria-live="polite"><b data-now-name>The real job.</b> <span data-now-code>Pick a part, then a colour.</span></p></div>
   <div class="c1-wrap">{studio_frame()}
     <div class="dock-wrap">
+      <svg class="c1-fan" viewBox="0 0 120 74" aria-hidden="true" focusable="false"><g class="fc" style="--k:-2"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="0"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:2"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="4"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:-1"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="1"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:1"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="3"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><g class="fc" style="--k:0"><rect class="fc-c" x="49" y="4" width="22" height="58" rx="2.5" data-fc="2"/><rect class="fc-l" x="49" y="48" width="22" height="14" rx="2.5"/></g><circle class="fc-rv" cx="60" cy="56" r="3"/></svg>
       {parts_seg('c1')}
       <div class="seg seg-set" role="radiogroup" aria-label="Paint range"><button type="button" role="radio" aria-checked="true" data-set="sw">Sherwin-Williams</button><button type="button" role="radio" aria-checked="false" data-set="cp">ColorPlus</button></div>
       <div class="dock" role="radiogroup" aria-label="Sherwin-Williams colours" data-set-list="sw">{swatches('sw')}</div>
@@ -694,8 +695,8 @@ def colour2():
   <table class="cmp">
     <caption class="sr-only">Painted on site compared with James Hardie ColorPlus</caption>
     <thead><tr><td></td>
-      <th scope="col" class="cmp-col" style="--c:{h0};--ink:{ink_on(h0)}"><span class="cmp-sys">Painted on site</span><span class="cmp-now"><b data-now>{e(n0)}</b><span data-code>{e(c0)}</span></span></th>
-      <th scope="col" class="cmp-col" style="--c:{h1};--ink:{ink_on(h1)}"><span class="cmp-sys">James Hardie ColorPlus</span><span class="cmp-now"><b data-now>{e(n1)}</b><span data-code>ColorPlus</span></span></th></tr>
+      <th scope="col" class="cmp-col" style="--c:{h0};--ink:{ink_on(h0)}"><svg class="c2-d" viewBox="0 0 200 64" aria-hidden="true" focusable="false"><g class="c2-boards"><rect class="c2-b" x="4" y="6" width="150" height="16"/><rect class="c2-b" x="4" y="24" width="150" height="16"/><rect class="c2-b c2-wet" x="4" y="42" width="96" height="16"/><rect class="c2-raw" x="100" y="42" width="54" height="16"/><path class="c2-sh" d="M4 21H154M4 39H154M4 57H154"/></g><g class="c2-tool"><path class="c2-h" d="M100 40V62H128"/><rect class="c2-roll" x="94" y="32" width="12" height="28" rx="5"/></g></svg><span class="cmp-sys">Painted on site</span><span class="cmp-now"><b data-now>{e(n0)}</b><span data-code>{e(c0)}</span></span></th>
+      <th scope="col" class="cmp-col" style="--c:{h1};--ink:{ink_on(h1)}"><svg class="c2-d" viewBox="0 0 200 64" aria-hidden="true" focusable="false"><path class="c2-belt" d="M4 52H196"/><circle class="c2-wh" cx="20" cy="56" r="4"/><circle class="c2-wh" cx="100" cy="56" r="4"/><circle class="c2-wh" cx="180" cy="56" r="4"/><g class="c2-board"><rect class="c2-b" x="10" y="38" width="64" height="12"/><path class="c2-sh" d="M10 49H74"/></g><path class="c2-oven" d="M86 52V12H156V52"/><path class="c2-coil" d="M94 20L102 26L110 20L118 26L126 20L134 26L142 20L150 26"/><path class="c2-door" d="M86 30H90M152 30H156"/></svg><span class="cmp-sys">James Hardie ColorPlus</span><span class="cmp-now"><b data-now>{e(n1)}</b><span data-code>ColorPlus</span></span></th></tr>
       <tr class="cmp-sws"><td></td><td><div class="cmp-set" role="group" aria-label="Twelve published Sherwin-Williams colours">{sw}</div></td><td><div class="cmp-set" role="group" aria-label="Seventeen ColorPlus colours for Austin">{cp}</div></td></tr></thead>
     <tbody>{body}</tbody>
   </table>
@@ -711,7 +712,7 @@ def colour3():
         sysn = 'Sherwin-Williams' if c != 'ColorPlus' else 'James Hardie ColorPlus'
         code = c if c != 'ColorPlus' else 'ColorPlus'
         tiles += (f'<li><button class="cb-t" type="button" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="{e(code)}" data-sys="{e(sysn)}" '
-                  f'style="--c:{h};--ink:{ink_on(h)}" aria-label="{e(n)}, {e(code)}. Open"><span class="cb-n">{e(n)}</span><span class="cb-c">{e(code)}</span></button></li>')
+                  f'style="--c:{h};--ink:{ink_on(h)}" aria-label="{e(n)}, {e(code)}. Open"><svg class="cb-ph" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><circle cx="12" cy="6" r="3.6"/><path d="M0 11.5H24"/></svg><span class="cb-n">{e(n)}</span><span class="cb-c">{e(code)}</span></button></li>')
     return f'''<div class="v colour-3" data-tone="night">
   <div class="cb-head"><h2 class="h2x" data-split>The colour book</h2>
     <p>All 29 colours the firm publishes for Hardie siding: twelve Sherwin-Williams paints and the seventeen ColorPlus colours for Austin. Open one to see it big.</p></div>
@@ -722,6 +723,7 @@ def colour3():
       <h3 class="cb-big" id="cb-name" data-cb-name></h3>
       <p class="cb-meta num"><span data-cb-code></span><span data-cb-hex></span></p>
       <p class="cb-note" data-cb-note></p>
+      <svg class="cb-lap" viewBox="0 0 400 156" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g class="cbl" transform="translate(0 0)"><rect class="cbl-f" width="400" height="52"/><rect class="cbl-hi" width="400" height="2"/><rect class="cbl-sh" y="44" width="400" height="8"/><path class="cbl-g" d="M0 18C90 14 180 22 270 17S370 20 400 18M0 32C120 28 220 36 320 30S390 33 400 31"/></g><g class="cbl" transform="translate(0 52)"><rect class="cbl-f" width="400" height="52"/><rect class="cbl-hi" width="400" height="2"/><rect class="cbl-sh" y="44" width="400" height="8"/><path class="cbl-g" d="M0 18C90 14 180 22 270 17S370 20 400 18M0 32C120 28 220 36 320 30S390 33 400 31"/></g><g class="cbl" transform="translate(0 104)"><rect class="cbl-f" width="400" height="52"/><rect class="cbl-hi" width="400" height="2"/><rect class="cbl-sh" y="44" width="400" height="8"/><path class="cbl-g" d="M0 18C90 14 180 22 270 17S370 20 400 18M0 32C120 28 220 36 320 30S390 33 400 31"/></g></svg>
       <button class="btn btn-glass cb-close" type="button">Back to all 29</button>
     </div>
   </div>
