@@ -563,7 +563,7 @@
     const segs = $$('[data-zone-btn]', box);
     const sw = $$('.swatch', box);
     const original = $('[data-original]', box);
-    const state = { body: box.dataset.body || null, gable: box.dataset.gable || null, trim: box.dataset.trim || null, active: 'body', original: false };
+    const state = { body: box.dataset.body || null, gable: box.dataset.gable || null, trim: box.dataset.trim || null, active: 'body', original: false, finish: 'sw' };
     const names = Object.fromEntries(sw.map(s => [s.dataset.hex.toUpperCase(), s.getAttribute('aria-label')]));
     const paint = () => {
       const fill = { body: state.body, gable: state.gable || state.body, trim: state.trim };
@@ -617,6 +617,65 @@
         paint();
       });
     }
+    // full studio: finish trays, split compare, state in the URL, copy link, book with this plan
+    const finishBtns = $$('[data-finish-btn]', box), trays = $$('[data-tray]', box);
+    const nameOf = h => h ? (names[h.toUpperCase()] || h) : 'Original';
+    const setFinish = f => {
+      state.finish = f;
+      finishBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.finishBtn === f)));
+      trays.forEach(t => { t.hidden = t.dataset.tray !== f; });
+      const sumF = $('[data-sum=finish]', box);
+      if (sumF) sumF.textContent = f === 'cp' ? 'James Hardie ColorPlus, baked on at the plant' : 'Painted on site in Sherwin-Williams';
+    };
+    finishBtns.forEach(b => b.addEventListener('click', () => {
+      setFinish(b.dataset.finishBtn);
+      if (b.dataset.finishBtn === 'cp' && b.dataset.trim) state.trim = b.dataset.trim;  // the firm pairs ColorPlus with Arctic White trim
+      paint();
+    }));
+    if (box.dataset.permalink !== undefined) {
+      const q = new URLSearchParams(location.search);
+      ['body', 'gable', 'trim'].forEach(z => { const v = q.get(z); if (v && /^[0-9A-Fa-f]{6}$/.test(v)) state[z] = '#' + v.toUpperCase(); });
+      if (finishBtns.length) setFinish(q.get('finish') === 'cp' ? 'cp' : 'sw');
+      box.addEventListener('studio:change', () => {
+        if (!box.dataset.touched) return;  // the URL only changes once the visitor changes something
+        const p = new URLSearchParams();
+        ['body', 'gable', 'trim'].forEach(z => { if (state[z]) p.set(z, state[z].slice(1)); });
+        if (state.finish === 'cp') p.set('finish', 'cp');
+        history.replaceState(null, '', `${location.pathname}?${p}#studio`);
+      });
+      const copy = $('[data-copy]', box), msg = $('[data-copy-msg]', box);
+      if (copy) copy.addEventListener('click', () => {
+        const done = ok => { msg.textContent = ok ? 'Link copied. It opens this exact plan.' : 'Copy the address bar: it holds this plan.'; };
+        if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(() => done(true), () => done(false)); else done(false);
+      });
+    }
+    const frameEl = $('.studio-frame', box), splitBtn = $('[data-split-btn]', box), sh = $('.s-handle', box);
+    if (splitBtn && sh) {
+      let pos = 50;
+      const setS = v => { pos = clamp(v, 0, 100); frameEl.style.setProperty('--split', pos + '%'); sh.setAttribute('aria-valuenow', String(Math.round(pos))); };
+      splitBtn.addEventListener('click', () => {
+        const on = !frameEl.classList.contains('is-split');
+        frameEl.classList.toggle('is-split', on); splitBtn.setAttribute('aria-pressed', String(on)); sh.hidden = !on; setS(50);
+      });
+      sh.addEventListener('pointerdown', e => {
+        e.preventDefault(); sh.setPointerCapture(e.pointerId);
+        const r = () => frameEl.getBoundingClientRect();
+        const move = ev => setS((ev.clientX - r().left) / r().width * 100);
+        const up = () => { sh.removeEventListener('pointermove', move); sh.removeEventListener('pointerup', up); };
+        sh.addEventListener('pointermove', move); sh.addEventListener('pointerup', up);
+      });
+      sh.addEventListener('keydown', e => { const m = { ArrowLeft: -5, ArrowRight: 5 }; if (e.key in m) { e.preventDefault(); setS(pos + m[e.key]); } });
+    }
+    const plan = $('[data-book-plan]', box);
+    if (plan) plan.addEventListener('click', () => {
+      const note = d.getElementById('f-note'), sid = $('form.booking input[name=trade][value="Siding"]');
+      if (sid) sid.checked = true;
+      if (note) {
+        note.value = `My Colour Studio plan: siding ${nameOf(state.body)}, gable ${nameOf(state.gable || state.body)}, trim ${nameOf(state.trim)}; ` +
+          (state.finish === 'cp' ? 'James Hardie ColorPlus.' : 'painted on site in Sherwin-Williams.') + ` Link: ${location.href}`;
+      }
+    });
+    box.addEventListener('click', e => { if (e.target.closest('button')) box.dataset.touched = '1'; }, true);
     box.apStudio = { state, paint };
     paint();
   }
@@ -800,6 +859,24 @@
       G.set(fills, { scaleY: 0 });
       onEnter(h, () => G.to(fills, { scaleY: 1, duration: .8, ease: 'power2.out', stagger: i => Math.min(i, 7) * .04 }));
     }
+  });
+
+  /* ---------------- tabs (plan page distributions) ---------------- */
+  $$('[data-tabs]').forEach(box => {
+    const tabs = $$('[role=tab]', box), panels = $$('[role=tabpanel]', box);
+    const show = t => {
+      tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+      panels.forEach(p => { p.hidden = p.dataset.panel !== t.dataset.tab; });
+      const p = panels.find(x => !x.hidden);
+      if (G && p) G.to($$('.hbar i', p), { scaleY: 1, duration: reduce() ? 0 : .8, ease: 'power2.out', stagger: i => Math.min(i, 7) * .04 });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t));
+      t.addEventListener('keydown', e => {
+        const m = { ArrowRight: 1, ArrowLeft: -1 };
+        if (e.key in m) { e.preventDefault(); const n = tabs[(i + m[e.key] + tabs.length) % tabs.length]; n.focus(); show(n); }
+      });
+    });
   });
 
   /* ---------------- mobile action bar ---------------- */

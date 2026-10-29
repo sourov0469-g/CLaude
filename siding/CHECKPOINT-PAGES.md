@@ -32,3 +32,15 @@ Facts re-read from `/services/windows` and `/services/windows/cost`; frame-colou
 | W7 Q&As, reviews, book | Q&As verbatim from the page's FAQPage data; four excerpts, names as printed | |
 
 Audit: 1440 + 375 section shots, pinned track at 0 / 0.5 / 1, sash slider keys, histogram readouts. Defects fixed: alignment tried on all five window pairs (best ECC 0.57, too low to fake a same-wall install, so the sash strips are an entrance, not a re-glazing); `.brand` card class colliding with the header logo link (renamed `.brand-card`); pinned area taller than the viewport cut the H2 (heading moved out of the pin); glass section too small to read (redrawn at 72 px/in); an editorial line not in the firm's files replaced with its own wording. Overflow 0px, no console errors.
+
+## plan.html (PLAN §8), passed 29 Oct 2026
+| Section | Built | Source / parameters |
+|---|---|---|
+| Hero | "Pick the colour. Then see the price." (one line at 1440), lead, CTAs | |
+| L1 Colour Studio (full) | Rob Roy photo with body, gable and trim zones; finish switch swaps the tray (12 SW sample colours / 17 ColorPlus Austin colours, the firm's hex values; ColorPlus sets Arctic White trim, as the firm pairs it); "Show the real navy"; "Compare side by side" split with a draggable handle; summary from one state object (names and codes, finish, the job's $15k-$20k band on a mini histogram of all 415 siding jobs, ≈$182-$243/mo at 7.99%/120); state carried in the URL (`?body=…&gable=…&trim=…&finish=cp#studio`) once the visitor changes something; "Copy a link to this plan"; "Book with this plan" opens the booking dialog with Siding ticked and the plan in the note | Codrops customizer #140, BLK zones #531 (400ms `cubic-bezier(.645,.045,.355,1)`), Silo #98 single state + permalink |
+| L2 Every trade priced | The ledger with ids `trade-*` (the mega-menu links land here) | as H3 |
+| L3 Distributions | Tabs (arrow keys, `aria-selected`): siding 415 / windows 376 histograms | |
+| L4 Financing, worked | Live amortisation + the discount stack; $30,000 with all three gives 25%, $7,500 off, $22,500 (the firm's own example) | |
+| L5 Referral | $200 per referral, no limit, name mentioned before the first appointment; ticket stub | ui-ux-patterns "Referral ticket" |
+
+Audit: 1440 + 375 shots; interactions (finish switch, gable colour, split, permalink round trip on reload, book-with-plan prefill, tabs, stack). Defects fixed: the permalink rewrote the URL to `#studio` on load and the page opened scrolled past its H1 (now written only after the visitor changes something); discount figures overflowing on phone; "$200" repeated in heading and stub. Overflow 0px (375 strip items are the swatch tray), no console errors.

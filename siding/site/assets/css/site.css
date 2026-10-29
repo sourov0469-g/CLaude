@@ -582,7 +582,8 @@ body.is-locked { overflow: hidden; }
 .offers .cap { margin: 12px 0 0; }
 .stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .stack > div { padding: 14px 16px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line-2); display: grid; gap: 2px; }
-.stack b { font-stretch: 78%; font-size: var(--t3); font-weight: 640; line-height: 1; }
+.stack b { font-stretch: 78%; font-size: clamp(1.4rem, 1rem + 2vw, var(--t3)); font-weight: 640; line-height: 1; }
+@media (max-width: 599px) { .stack { gap: 8px; } .stack > div { padding: 12px; } }
 .stack span { font-size: var(--t-2); color: var(--muted); }
 @media (min-width: 640px) { .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); } .plan { grid-template-columns: minmax(0, 1fr); align-items: start; } .plan .pay { grid-column: 1; grid-row: auto; margin-top: 18px; } }
 @media (min-width: 900px) {
@@ -974,6 +975,48 @@ body.is-locked { overflow: hidden; }
 .honest blockquote { margin: 0; }
 .honest p { margin: 0; }
 .honest blockquote p { font-size: var(--t2); line-height: 1.3; letter-spacing: -.012em; font-stretch: 104%; text-wrap: pretty; }
+
+/* plan: full studio */
+.studio-full .ctl { display: grid; gap: 8px; }
+.studio-full .seg { flex-wrap: wrap; }
+.studio-frame.is-split .zone { clip-path: inset(0 0 0 var(--split, 50%)); }
+.studio-frame.is-split::after { content: ''; position: absolute; top: 0; bottom: 0; left: var(--split, 50%); width: 2px; margin-left: -1px; background: var(--paper); z-index: 2; pointer-events: none; }
+.s-handle { position: absolute; top: 50%; left: var(--split, 50%); z-index: 3; width: 48px; height: 48px; margin: -24px 0 0 -24px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--paper); color: var(--ink); box-shadow: 0 8px 24px -8px rgba(47, 47, 48, .6); cursor: ew-resize; touch-action: none; }
+.s-handle svg { width: 22px; height: 22px; }
+.plan-sum { display: grid; gap: 24px; padding: 24px; border-radius: 16px; background: var(--sheet); border: 1px solid var(--line); }
+.plan-sum .h4 { margin-bottom: -8px; }
+.sum-price p { margin: 0; }
+.sum-price > p:first-child { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.sum-price > p:first-child span { font-size: var(--t-1); color: var(--muted); }
+.sum-price > p:first-child b { font-stretch: 78%; font-weight: 640; font-size: var(--t2); }
+.minihist { display: flex; align-items: flex-end; gap: 3px; height: 64px; margin: 12px 0 10px; border-bottom: 1.5px solid var(--ink); }
+.minihist i { flex: 1; height: var(--h); min-height: 2px; background: var(--stone); border-radius: 2px 2px 0 0; }
+.minihist i.is-med { background: var(--ink); }
+.minihist i.is-job { background: var(--signal); }
+.sum-actions { display: grid; gap: 10px; justify-items: start; align-content: start; }
+.link-btn { border: 0; background: none; padding: 0; min-height: 44px; cursor: pointer; font-size: .9375rem; }
+@media (min-width: 900px) {
+  .studio-full .plan-sum { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, .8fr); column-gap: 40px; }
+  .studio-full .plan-sum .h4 { grid-column: 1 / -1; }
+}
+@media (max-width: 899px) {
+  .tray { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 52px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 4px 10px; }
+  .tray .swatch { scroll-snap-align: start; }
+}
+
+/* tabs */
+[data-tabs] .seg { margin-bottom: 28px; }
+[data-tabs] .seg button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+.dist-panels .cap { margin-top: 12px; }
+
+/* referral ticket */
+.ticket { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); border-radius: 16px; background: var(--ink); color: var(--paper); overflow: hidden; }
+.ticket-main { padding: clamp(28px, 4vw, 48px); display: grid; gap: 14px; }
+.ticket-main p { margin: 0; color: var(--on-dark); max-width: 52ch; }
+.ticket-stub { display: grid; align-content: center; justify-items: start; gap: 4px; padding: 24px clamp(28px, 4vw, 48px); border-top: 2px dashed rgba(237, 236, 230, .3); }
+.ticket-stub b { font-stretch: 78%; font-weight: 640; font-size: clamp(3.5rem, 2.5rem + 3vw, 5rem); line-height: .9; color: var(--paper); }
+.ticket-stub span { color: var(--on-dark); font-size: var(--t-1); }
+@media (min-width: 760px) { .ticket { grid-template-columns: minmax(0, 1fr) 240px; } .ticket-stub { border-top: 0; border-left: 2px dashed rgba(237, 236, 230, .3); justify-items: center; } }
 
 /* ---------- reduced motion: keep state, drop travel ---------- */
 @media (prefers-reduced-motion: reduce) {
