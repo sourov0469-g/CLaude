@@ -1,19 +1,21 @@
 <div class="wv wv2">
-  <div class="wv2-pin">
-    <div class="wv2-head">
-      <h2 class="t-h2" data-cursor="text"><span class="ln"><span>House by house.</span></span></h2>
-      <a class="tlink" href="#call" data-cursor="link">Get an estimate</a>
+  <div class="wv-head wv2-head">
+    <div class="wv2-closed">
+      <h2 class="wv-h">Our work, up close.</h2>
+      <p class="wv-note">Choose a photo to open it. Every one is a Rembrandt job.</p>
     </div>
-    <div class="wv2-view" tabindex="0" role="region" aria-label="Photos of Rembrandt jobs, scroll sideways">
-      <ul class="wv2-track" role="list">
-        <li class="wv2-f" data-cursor="view"><figure class="ph"><img data-img="ba2-before" alt="Before: a brick home with its old, dark roof" decoding="async"></figure><p class="wv2-c">Before</p></li>
-        <li class="wv2-f" data-cursor="view"><figure class="ph"><img data-img="ba2-after" alt="After: the same brick home with its new roof" decoding="async"></figure><p class="wv2-c">After</p></li>
-        <li class="wv2-f" data-cursor="view"><figure class="ph"><img data-img="tudor" alt="A Tudor-style home under old shade trees" decoding="async"></figure></li>
-        <li class="wv2-f" data-cursor="view"><figure class="ph"><img data-img="job-charcoal" alt="A brick ranch with a new charcoal roof and a blue gable" decoding="async"></figure></li>
-        <li class="wv2-f" data-cursor="view"><figure class="ph"><img data-img="ba1-after" alt="A blue-sided home with a Rembrandt yard sign by the walk" decoding="async"></figure></li>
-        <li class="wv2-f" data-cursor="view"><figure class="ph"><img data-img="job-truck" alt="The Rembrandt truck parked at a brick ranch" decoding="async"></figure></li>
-      </ul>
+    <div class="wv2-open" hidden>
+      <p class="wv2-cap" aria-live="polite"></p>
+      <button class="wv2-close" type="button" data-cursor="link">Close<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
-    <div class="wv2-prog" aria-hidden="true"><span></span></div>
+  </div>
+  <div class="wv2-grid">
+    <button class="wv2-item" type="button" style="--c:2;--r:1;--mc:1;--mr:1" data-cursor="open" data-cap="This house, before its new roof"><img data-img="ba2-before" alt="A brick home before its new roof, the old roof dark and worn" decoding="async"></button>
+    <button class="wv2-item" type="button" style="--c:4;--r:1;--mc:3;--mr:1" data-cursor="open" data-cap="The same house, after"><img data-img="ba2-after" alt="The same brick home after, with its new roof" decoding="async"></button>
+    <button class="wv2-item" type="button" style="--c:1;--r:2;--mc:2;--mr:2" data-cursor="open" data-cap="A Tudor-style home"><img data-img="tudor" alt="A Tudor-style home under old shade trees" decoding="async"></button>
+    <button class="wv2-item" type="button" style="--c:5;--r:4;--mc:1;--mr:3" data-cursor="open" data-cap="A brick ranch, charcoal shingles"><img data-img="job-charcoal" alt="A brick ranch with a new charcoal roof and a blue gable" decoding="async"></button>
+    <button class="wv2-item" type="button" style="--c:3;--r:3;--mc:3;--mr:3" data-cursor="open" data-cap="The blue house, our sign by the walk"><img data-img="ba1-after" alt="A blue-sided home with a Rembrandt yard sign by the walk" decoding="async"></button>
+    <button class="wv2-item" type="button" style="--c:2;--r:5;--mc:2;--mr:4" data-cursor="open" data-cap="Our truck at a ranch job"><img data-img="job-truck" alt="The Rembrandt truck parked at a brick ranch" decoding="async"></button>
+    <div class="wv2-full" aria-hidden="true" data-cursor="open" data-cursor-label="Close"></div>
   </div>
 </div>

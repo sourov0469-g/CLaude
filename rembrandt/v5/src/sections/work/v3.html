@@ -1,15 +1,18 @@
 <div class="wv wv3">
-  <div class="wv3-pin">
-    <div class="wv3-head">
-      <h2 class="t-h2" data-cursor="text"><span class="ln"><span>Same house.</span></span></h2>
-      <p class="wv3-state" aria-hidden="true"><span class="wv3-sb is-on">Before</span><span class="wv3-sa">After</span></p>
-    </div>
-    <div class="wv3-tilt">
-      <div class="wv3-stage" data-cursor="view">
-        <figure class="wv3-fb ph"><img data-img="ba2-before" alt="Before: the house with its old, dark roof" decoding="async"><figcaption class="wv3-cap">Before</figcaption></figure>
-        <figure class="wv3-fa ph"><img data-img="ba2-after" alt="After: the same house with its new roof" decoding="async"><figcaption class="wv3-cap">After</figcaption></figure>
-        <canvas class="wv3-gl" aria-hidden="true"></canvas>
-      </div>
+  <div class="wv-head">
+    <h2 class="wv-h">Same house. New roof.</h2>
+    <p class="wv-note">Our one before-and-after pair: the same house, photographed before and after.</p>
+  </div>
+  <div class="wv3-stage">
+    <div class="wv3-labels" aria-hidden="true"><span class="wv3-l is-on" data-l="before">Before</span><span class="wv3-l" data-l="after">After</span></div>
+    <svg class="wv3-frame" viewBox="0 0 1024 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A brick home before and after its new roof. The after photo opens over the before in horizontal blinds as you scroll.">
+      <defs><mask id="wv3-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="600"><g class="wv3-slits" fill="#fff" shape-rendering="crispEdges"></g></mask></defs>
+      <image class="wv3-before" data-fill="ba2-before" x="0" y="0" width="1024" height="600" preserveAspectRatio="xMidYMid slice"/>
+      <image class="wv3-after" data-fill="ba2-after" x="0" y="0" width="1024" height="600" preserveAspectRatio="xMidYMid slice" mask="url(#wv3-m)"/>
+    </svg>
+    <div class="wv3-pair" hidden>
+      <figure><img data-img="ba2-before" alt="Before: the brick home with its old, dark roof" decoding="async"><figcaption>Before</figcaption></figure>
+      <figure><img data-img="ba2-after" alt="After: the same brick home with its new roof" decoding="async"><figcaption>After</figcaption></figure>
     </div>
   </div>
 </div>

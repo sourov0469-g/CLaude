@@ -52,7 +52,7 @@ export function initCursor() {
     update(e.target);
   }
   let pending = false;
-  function onScroll() { // content moves under a still pointer: re-read what is under it once per frame
+  function recheck() { // content moved or changed under a still pointer (scroll, a click that opens something): re-read it once per frame
     if (!on || pending || px < 0) return; pending = true;
     requestAnimationFrame(() => { pending = false; if (kind === 'text') textScroll(); update(document.elementFromPoint(px, py)); });
   }
@@ -64,7 +64,8 @@ export function initCursor() {
   }
   gsap.set(root, { autoAlpha: 0 });
   addEventListener('pointermove', onMove, { passive: true });
-  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('scroll', recheck, { passive: true });
+  addEventListener('click', recheck, true);
   document.addEventListener('versionswap', () => { if (on) setKind('default', null); });
   document.addEventListener('pointerleave', () => gsap.to(root, { autoAlpha: 0, duration: 0.15 }));
   addEventListener('blur', () => gsap.to(root, { autoAlpha: 0, duration: 0.15 }));
