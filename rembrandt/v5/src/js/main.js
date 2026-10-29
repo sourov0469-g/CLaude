@@ -5,7 +5,6 @@
 // context. An init may return a cleanup for rAF loops, observers and GL.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
 import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 import Lenis from 'lenis';
@@ -14,7 +13,7 @@ import { initMagnet } from './magnet.js';
 import { initCompanion } from './companion.js';
 import { initDividers } from './dividers.js';
 
-gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, MorphSVGPlugin);
+gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin);
 gsap.defaults({ ease: 'power3.out', duration: 0.8 });
 
 const IMG = window.__IMG || {};
@@ -157,4 +156,4 @@ export function boot(mods) {
   addEventListener('load', () => sortRefresh());
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
 }
-export { gsap, ScrollTrigger, SplitText, DrawSVGPlugin, MorphSVGPlugin };
+export { gsap, ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin };
