@@ -1,0 +1,426 @@
+{
+ "when": "2026-10-29T08:16:16.135Z",
+ "fails": 0,
+ "results": [
+  {
+   "group": "render 1440",
+   "name": "header:2",
+   "ok": true,
+   "info": "h 900"
+  },
+  {
+   "group": "render 1440",
+   "name": "header:3",
+   "ok": true,
+   "info": "h 64"
+  },
+  {
+   "group": "render 1440",
+   "name": "hero:2",
+   "ok": true,
+   "info": "h 824"
+  },
+  {
+   "group": "render 1440",
+   "name": "hero:3",
+   "ok": true,
+   "info": "h 900"
+  },
+  {
+   "group": "render 1440",
+   "name": "storm:2",
+   "ok": true,
+   "info": "h 3420"
+  },
+  {
+   "group": "render 1440",
+   "name": "storm:3",
+   "ok": true,
+   "info": "h 2160"
+  },
+  {
+   "group": "render 1440",
+   "name": "inspect:2",
+   "ok": true,
+   "info": "h 2219"
+  },
+  {
+   "group": "render 1440",
+   "name": "inspect:3",
+   "ok": true,
+   "info": "h 1548"
+  },
+  {
+   "group": "render 1440",
+   "name": "layers:2",
+   "ok": true,
+   "info": "h 1800"
+  },
+  {
+   "group": "render 1440",
+   "name": "layers:3",
+   "ok": true,
+   "info": "h 1189"
+  },
+  {
+   "group": "render 1440",
+   "name": "estimate:2",
+   "ok": true,
+   "info": "h 1981"
+  },
+  {
+   "group": "render 1440",
+   "name": "estimate:3",
+   "ok": true,
+   "info": "h 1027"
+  },
+  {
+   "group": "render 1440",
+   "name": "install:2",
+   "ok": true,
+   "info": "h 2160"
+  },
+  {
+   "group": "render 1440",
+   "name": "install:3",
+   "ok": true,
+   "info": "h 2160"
+  },
+  {
+   "group": "render 1440",
+   "name": "signature:2",
+   "ok": true,
+   "info": "h 850"
+  },
+  {
+   "group": "render 1440",
+   "name": "signature:3",
+   "ok": true,
+   "info": "h 913"
+  },
+  {
+   "group": "render 1440",
+   "name": "work:2",
+   "ok": true,
+   "info": "h 2237"
+  },
+  {
+   "group": "render 1440",
+   "name": "work:3",
+   "ok": true,
+   "info": "h 2770"
+  },
+  {
+   "group": "render 1440",
+   "name": "reviews:2",
+   "ok": true,
+   "info": "h 1070"
+  },
+  {
+   "group": "render 1440",
+   "name": "reviews:3",
+   "ok": true,
+   "info": "h 837"
+  },
+  {
+   "group": "render 1440",
+   "name": "people:2",
+   "ok": true,
+   "info": "h 2429"
+  },
+  {
+   "group": "render 1440",
+   "name": "people:3",
+   "ok": true,
+   "info": "h 871"
+  },
+  {
+   "group": "render 1440",
+   "name": "towns:2",
+   "ok": true,
+   "info": "h 747"
+  },
+  {
+   "group": "render 1440",
+   "name": "towns:3",
+   "ok": true,
+   "info": "h 824"
+  },
+  {
+   "group": "render 1440",
+   "name": "insurance:2",
+   "ok": true,
+   "info": "h 943"
+  },
+  {
+   "group": "render 1440",
+   "name": "insurance:3",
+   "ok": true,
+   "info": "h 659"
+  },
+  {
+   "group": "render 1440",
+   "name": "faq:2",
+   "ok": true,
+   "info": "h 817"
+  },
+  {
+   "group": "render 1440",
+   "name": "faq:3",
+   "ok": true,
+   "info": "h 574"
+  },
+  {
+   "group": "render 1440",
+   "name": "close:2",
+   "ok": true,
+   "info": "h 900"
+  },
+  {
+   "group": "render 1440",
+   "name": "close:3",
+   "ok": true,
+   "info": "h 807"
+  },
+  {
+   "group": "render 1440",
+   "name": "footer:2",
+   "ok": true,
+   "info": "h 1506"
+  },
+  {
+   "group": "render 1440",
+   "name": "footer:3",
+   "ok": true,
+   "info": "h 1164"
+  },
+  {
+   "group": "render 375",
+   "name": "header:2",
+   "ok": true,
+   "info": "h 64"
+  },
+  {
+   "group": "render 375",
+   "name": "header:3",
+   "ok": true,
+   "info": "h 64"
+  },
+  {
+   "group": "render 375",
+   "name": "hero:2",
+   "ok": true,
+   "info": "h 1072"
+  },
+  {
+   "group": "render 375",
+   "name": "hero:3",
+   "ok": true,
+   "info": "h 750"
+  },
+  {
+   "group": "render 375",
+   "name": "storm:2",
+   "ok": true,
+   "info": "h 1166"
+  },
+  {
+   "group": "render 375",
+   "name": "storm:3",
+   "ok": true,
+   "info": "h 1334"
+  },
+  {
+   "group": "render 375",
+   "name": "inspect:2",
+   "ok": true,
+   "info": "h 1649"
+  },
+  {
+   "group": "render 375",
+   "name": "inspect:3",
+   "ok": true,
+   "info": "h 2014"
+  },
+  {
+   "group": "render 375",
+   "name": "layers:2",
+   "ok": true,
+   "info": "h 1201"
+  },
+  {
+   "group": "render 375",
+   "name": "layers:3",
+   "ok": true,
+   "info": "h 1513"
+  },
+  {
+   "group": "render 375",
+   "name": "estimate:2",
+   "ok": true,
+   "info": "h 2862"
+  },
+  {
+   "group": "render 375",
+   "name": "estimate:3",
+   "ok": true,
+   "info": "h 1006"
+  },
+  {
+   "group": "render 375",
+   "name": "install:2",
+   "ok": true,
+   "info": "h 1334"
+  },
+  {
+   "group": "render 375",
+   "name": "install:3",
+   "ok": true,
+   "info": "h 1334"
+  },
+  {
+   "group": "render 375",
+   "name": "signature:2",
+   "ok": true,
+   "info": "h 1408"
+  },
+  {
+   "group": "render 375",
+   "name": "signature:3",
+   "ok": true,
+   "info": "h 973"
+  },
+  {
+   "group": "render 375",
+   "name": "work:2",
+   "ok": true,
+   "info": "h 1537"
+  },
+  {
+   "group": "render 375",
+   "name": "work:3",
+   "ok": true,
+   "info": "h 1228"
+  },
+  {
+   "group": "render 375",
+   "name": "reviews:2",
+   "ok": true,
+   "info": "h 1709"
+  },
+  {
+   "group": "render 375",
+   "name": "reviews:3",
+   "ok": true,
+   "info": "h 763"
+  },
+  {
+   "group": "render 375",
+   "name": "people:2",
+   "ok": true,
+   "info": "h 1064"
+  },
+  {
+   "group": "render 375",
+   "name": "people:3",
+   "ok": true,
+   "info": "h 917"
+  },
+  {
+   "group": "render 375",
+   "name": "towns:2",
+   "ok": true,
+   "info": "h 937"
+  },
+  {
+   "group": "render 375",
+   "name": "towns:3",
+   "ok": true,
+   "info": "h 996"
+  },
+  {
+   "group": "render 375",
+   "name": "insurance:2",
+   "ok": true,
+   "info": "h 995"
+  },
+  {
+   "group": "render 375",
+   "name": "insurance:3",
+   "ok": true,
+   "info": "h 907"
+  },
+  {
+   "group": "render 375",
+   "name": "faq:2",
+   "ok": true,
+   "info": "h 1059"
+  },
+  {
+   "group": "render 375",
+   "name": "faq:3",
+   "ok": true,
+   "info": "h 975"
+  },
+  {
+   "group": "render 375",
+   "name": "close:2",
+   "ok": true,
+   "info": "h 667"
+  },
+  {
+   "group": "render 375",
+   "name": "close:3",
+   "ok": true,
+   "info": "h 791"
+  },
+  {
+   "group": "render 375",
+   "name": "footer:2",
+   "ok": true,
+   "info": "h 2054"
+  },
+  {
+   "group": "render 375",
+   "name": "footer:3",
+   "ok": true,
+   "info": "h 1828"
+  },
+  {
+   "group": "regress",
+   "name": "S0 V2 rail: one numeral after a full scroll, the hero is 01 of 15",
+   "ok": true,
+   "info": "{\"n\":1,\"at\":\"01\",\"of\":\"of 15\"}"
+  },
+  {
+   "group": "regress",
+   "name": "S6 V3 clock: never \":60\", 5:00 pm lights the walkthrough",
+   "ok": true,
+   "info": "{\"bad\":[],\"end\":\"5:00 pm\",\"on\":\"5:00 Walkthrough with you\"}"
+  },
+  {
+   "group": "regress",
+   "name": "S7 V3 ruler fits a desktop screen, end marker visible, no stray tab stop",
+   "ok": true,
+   "info": "{\"right\":1300,\"vw\":1440,\"tab\":false}"
+  },
+  {
+   "group": "regress",
+   "name": "storm mode: the compact S2 label sits above its heading",
+   "ok": true,
+   "info": "{\"labelBottom\":1779,\"h2Top\":1795}"
+  },
+  {
+   "group": "regress",
+   "name": "S4 V3 on a phone: swatch groups fit the screen and the long ones scroll",
+   "ok": true,
+   "info": "[{\"fs\":335,\"scrolls\":true},{\"fs\":335,\"scrolls\":true},{\"fs\":335,\"scrolls\":false},{\"fs\":335,\"scrolls\":true},{\"fs\":335,\"scrolls\":true}]"
+  },
+  {
+   "group": "regress",
+   "name": "S4 V2 on a phone: the lens never covers the heading",
+   "ok": true,
+   "info": "{\"lensTop\":265,\"h2Bottom\":237}"
+  }
+ ]
+}

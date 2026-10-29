@@ -157,3 +157,4 @@ New in `v4/build/`: `build.mjs`, `recover-generated.mjs`, `serve.mjs`, `dgate.mj
   - Tested from `file://` in Chromium at 1440 and 375: default, all-2, all-3 and `?storm=1`, plus a pill switch, all with no errors, no failed requests and no broken images. The only network call is the live NWS alert check, which fails silently offline.
 - The fonts were also missing from the repo and are rebuilt into `site/assets/fonts/` by `build/fonts.py`, following the BUILD-NOTE recipe: 80 KB in total, OFL licences alongside, sources from github.com/google/fonts.
 - `build/standins.mjs` now holds the placeholder generator shared by `serve.mjs` and `standalone.mjs`.
+- With the real fonts in place, the gate's render and regression groups pass 70/70 (`reports/dgate-render-regress.json`).
