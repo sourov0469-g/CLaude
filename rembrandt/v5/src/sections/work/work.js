@@ -30,6 +30,7 @@ function tiles(root, c) {
     if (dead || !root.isConnected) return;
     loop = horizontalLoop(items, { paused: true, speed: 2, center: true, repeat: -1, paddingRight: 24, onChange: setCap });
     ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); } });
+    { const r = root.getBoundingClientRect(); seen = r.bottom > 0 && r.top < innerHeight; } // start state: onToggle only reports changes
     apply();
     // the tape's ticks travel with the track: offset the tick pattern by the first tile's x, modulo one inch (96px)
     const tick = () => { if (seen) pat.setAttribute('x', (gsap.getProperty(items[0], 'x') % 96).toFixed(1)); };

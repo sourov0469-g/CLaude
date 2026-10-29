@@ -103,12 +103,13 @@ function marquee(root, c) {
   if (!c.motion) return;
   beats(root, [root.querySelector('.cl3-h'), root.querySelector('.cl3-p'), root.querySelector('.cl3-top .cta-row')]);
   let loop = null, held = false, seen = true, dead = false;
-  const smokeTl = gsap.timeline({ repeat: -1 }).fromTo(smoke, { y: 20, scale: 0.6, opacity: 0 }, { y: -20, scale: 1.2, opacity: 0.8, duration: 3, ease: 'sine.out', stagger: 1 }).to(smoke, { opacity: 0, duration: 1, stagger: 1 }, 2);
+  const smokeTl = gsap.timeline({ repeat: -1, paused: true }).fromTo(smoke, { y: 20, scale: 0.6, opacity: 0 }, { y: -20, scale: 1.2, opacity: 0.8, duration: 3, ease: 'sine.out', stagger: 1 }).to(smoke, { opacity: 0, duration: 1, stagger: 1 }, 2);
   const apply = () => { if (loop) loop.paused(held || !seen); held || !seen ? smokeTl.pause() : smokeTl.play(); pause.setAttribute('aria-pressed', String(held)); };
   const build = () => c.ctx.add(() => {
     if (dead || !root.isConnected) return;
     loop = horizontalLoop([...track.children], { repeat: -1, paddingRight: 0, speed: track.scrollWidth / 60 / 100 });
     ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); } });
+    { const r = root.getBoundingClientRect(); seen = r.bottom > 0 && r.top < innerHeight; } // start state: onToggle only reports changes
     apply();
   });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);

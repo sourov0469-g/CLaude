@@ -152,7 +152,7 @@ export function boot(mods) {
   addEventListener('pointerdown', press, { passive: true }); addEventListener('keydown', press);
   RM.addEventListener('change', () => (RM.matches ? stopLenis() : startLenis()));
   FINE.addEventListener('change', () => (FINE.matches ? startLenis() : stopLenis()));
-  window.ScrollTrigger = ScrollTrigger; // inspection hook for the QA scripts
+  window.ScrollTrigger = ScrollTrigger; window.gsap = gsap; // inspection hooks for the QA scripts
   sortRefresh();
   addEventListener('load', () => sortRefresh());
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());

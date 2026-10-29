@@ -184,6 +184,7 @@ function trains(root, c) {
     });
     ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); },
       onUpdate: s => { if (held) return; const b = gsap.utils.clamp(0, 5, Math.abs(s.getVelocity()) / 1000 * 5); if (b > st.boost) { gsap.to(st, { boost: b, duration: 0.15, overwrite: 'auto', onComplete: () => gsap.to(st, { boost: 0, duration: 0.9, ease: 'power2.out' }) }); if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } } } });
+    { const r = root.getBoundingClientRect(); seen = r.bottom > 0 && r.top < innerHeight; } // start state: onToggle only reports changes
     apply();
   });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
