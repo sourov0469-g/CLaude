@@ -1459,3 +1459,21 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .sw-m { stroke: #FBFAF7; stroke-width: 2.5; }
 .sw-gl { stroke: #fff; stroke-opacity: .55; stroke-width: 1.4; stroke-linecap: round; }
 .sp-fig.is-before .sp-win { display: none; }
+
+/* ---------- v4 Built (PLAN §3 Built) ---------- */
+.tx-d { display: block; width: min(100%, 260px); height: auto; margin-top: 14px; overflow: visible; }
+.tx-d path { fill: none; stroke: var(--fg); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; }
+.tx-board { fill: var(--sheet); stroke: var(--fg); stroke-width: 1.6; }
+.tx-sun { fill: #F2C230; stroke: var(--fg); stroke-width: 1.2; }
+.tx-d .tx-ray, .tx-d .tx-flame { stroke: var(--red); }
+.tx-d .tx-flame { fill: rgba(212, 33, 37, .12); }
+.tx-d .tx-ghost { stroke: var(--line); stroke-dasharray: .025 .03; }
+.tx-d .tx-lvl { stroke: #3B6FB6; stroke-width: 1; }
+.tx-d .tx-drop, .tx-d .tx-run { stroke: #3B6FB6; }
+.tx-d .tx-drop { fill: rgba(59, 111, 182, .14); }
+.tx-d .tx-stop { stroke: var(--red); stroke-width: 2.6; }
+.tx-d .tx-trail { stroke: #8A6A3E; stroke-dasharray: .02 .035; }
+.tx-bug { fill: #8A6A3E; }
+.tx-d .tx-rule { fill: #F2C230; }
+.tx-d .tx-tick { stroke-width: 1; }
+.tx-lab { font: 700 9px var(--f); fill: var(--fg); text-anchor: middle; }

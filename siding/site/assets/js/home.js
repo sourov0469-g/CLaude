@@ -679,6 +679,8 @@
      trapped). On desktop, as the next card travels from 78 % to 24 % of the viewport, the covered card settles back:
      scale toward 0.92 (+0.015 per index), opacity 0.72, 24 px up, scrubbed linearly (parameter library). */
   V.built2 = (r, b) => {
+    // v4: each card's test diagram draws as the card arrives (stroke draw 0.6 s, stagger 0.08; final drawing without motion)
+    if (motionOK()) $$('.tx-d', r).forEach(dg => { const ps = $$('path', dg); if (!ps.length) return; G.fromTo(ps, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.inOut', stagger: 0.08, scrollTrigger: once(dg, 'top 85%') }); });
     const cards = $$('.ts-card', r);
     if (!motionOK()) return;
     G.from($$('.ts-head > *', r), { y: 16, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.08, scrollTrigger: once(r, 'top 80%') });

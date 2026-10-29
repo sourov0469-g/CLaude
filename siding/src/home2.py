@@ -565,6 +565,15 @@ TEXAS = [('Doesn\'t warp', 'Sun and heat', 3), ('Doesn\'t rot', 'Moisture', 28),
          ('Doesn\'t feed termites', 'Termites', 0), ('Lasts decades', '30-year warranty', 33)]
 
 
+TX_DIAG = [   # one test diagram per published property (PLAN B2), 160 x 90; the board is the lap board in section
+    '<circle class="tx-sun" cx="30" cy="22" r="10"/><path class="tx-ray" d="M30 4V8M30 36V40M12 22H16M44 22H48M17 9L20 12M40 32L43 35M17 35L20 32M40 12L43 9"/><path class="tx-ghost" d="M60 64C90 54 120 74 152 62"/><rect class="tx-board" x="60" y="58" width="92" height="12"/><path class="tx-lvl" d="M60 52H152"/>',
+    '<rect class="tx-board" x="14" y="40" width="132" height="12"/><path class="tx-drop" d="M40 18C40 18 34 26 34 30A6 6 0 0 0 46 30C46 26 40 18 40 18ZM80 10C80 10 74 18 74 22A6 6 0 0 0 86 22C86 18 80 10 80 10ZM118 20C118 20 112 28 112 32A6 6 0 0 0 124 32C124 28 118 20 118 20Z"/><path class="tx-run" d="M146 52V70M150 58V78"/>',
+    '<rect class="tx-board" x="70" y="30" width="16" height="52"/><path class="tx-flame" d="M40 82C24 82 18 68 26 56C28 64 32 64 32 64C30 50 40 40 44 30C46 42 56 46 56 60C58 56 60 54 60 54C66 66 60 82 40 82Z"/><path class="tx-stop" d="M64 28V84"/>',
+    '<rect class="tx-board" x="110" y="20" width="14" height="62"/><path class="tx-trail" d="M8 70C20 60 30 76 42 64S62 52 74 62S92 70 102 56"/><path class="tx-stop" d="M104 46L104 66M98 50L110 62M110 50L98 62"/><circle class="tx-bug" cx="102" cy="56" r="3.2"/>',
+    '<path class="tx-rule" d="M10 40H150V60H10Z"/><path class="tx-tick" d="' + ''.join(f'M{10 + i * 140 / 30:.1f} 40V{48 if i % 5 else 54}' for i in range(31)) + '"/><text class="tx-lab" x="10" y="76">0</text><text class="tx-lab" x="80" y="76">15</text><text class="tx-lab" x="150" y="76">30 yr</text>'
+]
+
+
 def built2():
     """S1322 sticky stack cards (CROWN) = builder-brief R45 (CSS sticky core, never a GSAP pin): the published
     Built-for-Texas five, one card each with a real job photo, closed by the warranty pair"""
@@ -573,7 +582,8 @@ def built2():
         ph = PHOTOS[i]
         cards += f'''<li class="ts-card">
       <figure class="ts-fig"><img src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{alt(ph['alt'])}" loading="lazy" decoding="async"><figcaption>{e(ph['place'])}, {e(ph['when'])}</figcaption></figure>
-      <div class="ts-txt"><p class="ts-n num">0{k + 1}<span> of 05</span></p><h3 class="ts-h">{e(t)}</h3><p class="ts-tag">{e(tag)}</p></div>
+      <div class="ts-txt"><p class="ts-n num">0{k + 1}<span> of 05</span></p><h3 class="ts-h">{e(t)}</h3><p class="ts-tag">{e(tag)}</p>
+        <svg class="tx-d" viewBox="0 0 160 90" aria-hidden="true" focusable="false">{TX_DIAG[k].replace('<path ', '<path pathLength="1" ')}</svg></div>
     </li>'''
     cards += '''<li class="ts-card ts-end">
       <div class="ts-txt"><p class="ts-n">The warranty pair</p>
