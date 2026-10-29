@@ -47,8 +47,8 @@
         }).join('');
         if (k.motion) {
           k.ctx.add(function () {
-            gsap.to(svg, { attr: { viewBox: vb(c) }, duration: 1.1, ease: 'power3.inOut', overwrite: 'auto' });
-            gsap.fromTo(pinsG.querySelectorAll('.pi'), { y: -30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .5, ease: 'bounce.out', stagger: { each: .02, from: 'random' }, delay: .5 });
+            gsap.to(svg, { attr: { viewBox: vb(c) }, duration: .6, ease: 'power3.inOut', overwrite: 'auto' });
+            gsap.fromTo(pinsG.querySelectorAll('.pi'), { y: -30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'back.out(2)', stagger: { each: .012, from: 'random' }, delay: .35 });
           });
         } else svg.setAttribute('viewBox', vb(c));
       }
@@ -69,7 +69,7 @@
         if (!sp) return;
         sp.classList.add('is-hl');
         var pi = pinsG.querySelectorAll('.pi')[+sp.dataset.i];
-        if (pi && k.motion) gsap.fromTo(pi, { scale: 1.8, transformOrigin: '50% 100%' }, { scale: 1, duration: .5, ease: 'elastic.out(1,.4)' });
+        if (pi && k.motion) gsap.fromTo(pi, { scale: 1.8, transformOrigin: '50% 100%' }, { scale: 1, duration: .4, ease: 'elastic.out(1,.4)' });
       });
       svg.setAttribute('viewBox', '0 0 ' + D.w + ' ' + D.h);
       select('Miami-Dade');
@@ -119,7 +119,7 @@
       k.on(pause, 'click', function () { paused = !paused; pause.setAttribute('aria-pressed', paused ? 'true' : 'false'); pl.textContent = paused ? 'Run the rings' : 'Pause the rings'; });
       k.add(function () { pause.setAttribute('aria-pressed', 'false'); pl.textContent = 'Pause the rings'; });
       EZ.reveal(k, root.querySelectorAll('.towns__head > *'));
-      gsap.from(svg.querySelectorAll('.ring'), { scale: .4, autoAlpha: 0, transformOrigin: '50% 50%', duration: 1, ease: 'expo.out', stagger: .12, scrollTrigger: { trigger: stage, start: 'top 75%', once: true } });
+      gsap.from(svg.querySelectorAll('.ring'), { scale: .4, autoAlpha: 0, transformOrigin: '50% 50%', duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: stage, start: 'top 75%', once: true } });
     } },
 
     /* v3 · The road sign [F3 + BANK 310 Madoka] */
@@ -184,7 +184,7 @@
       function show(t, raw) {
         if (t) { draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
         else { draw('NOT ON OUR LIST', raw ? '“' + raw + '”' : '', 'Call (754) 236-0675 to ask', false); ans.textContent = (raw || 'That town') + ' is not one of the 104 municipalities on our list. Call (754) 236-0675 to ask.'; }
-        if (k.motion) k.ctx.add(function () { gsap.fromTo(sign.querySelector('.panel'), { y: -80, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, ease: 'bounce.out' }); });
+        if (k.motion) k.ctx.add(function () { gsap.fromTo(sign.querySelector('.panel'), { y: -80, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .4, ease: 'back.out(2)' }); });
       }
       draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true);
       k.add(function () { sign.innerHTML = ''; root.querySelector('.towns3__all').innerHTML = ''; inp.value = ''; close(); gsap.set(opath, { clearProps: 'all' }); });

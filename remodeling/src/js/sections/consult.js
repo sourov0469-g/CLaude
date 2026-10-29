@@ -55,8 +55,8 @@
       liveClear(form, k);
       EZ.reveal(k, root.querySelectorAll('.consult1__side > *'));
       if (k.motion) {
-        gsap.from(root.querySelector('.consult1__board'), { y: 60, autoAlpha: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: root.querySelector('.consult1__board'), start: 'top 85%', once: true } });
-        gsap.from(root.querySelector('.consult1__lever'), { rotation: -20, svgOrigin: '170 34', duration: .6, ease: 'back.out(3)', delay: .3, scrollTrigger: { trigger: root.querySelector('.consult1__board'), start: 'top 85%', once: true } });
+        gsap.from(root.querySelector('.consult1__board'), { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.consult1__board'), start: 'top 85%', once: true } });
+        gsap.from(root.querySelector('.consult1__lever'), { rotation: -20, svgOrigin: '170 34', duration: .3, ease: 'back.out(3)', delay: .2, scrollTrigger: { trigger: root.querySelector('.consult1__board'), start: 'top 85%', once: true } });
       }
       k.add(function () { gsap.set([btn, label, ring], { clearProps: 'all' }); });
       k.on(form, 'submit', function (e) {
@@ -78,7 +78,7 @@
       });
     } },
 
-    /* v2 · Pick the rooms [BANK Neil Kelly picker + BANK 255 morph] */
+    /* v2 · Pick the rooms [BANK Neil Kelly picker]; the plan folds into the contact step (the morph belongs to Financing V3) */
     2: { init: function (root, k) {
       var form = root.querySelector('.consult2__form'), svg = root.querySelector('.consult2__svg');
       var p1 = root.querySelector('.consult2__p1'), p2 = root.querySelector('.consult2__p2'), step = root.querySelector('.consult2__step');
@@ -97,7 +97,7 @@
           var on = r.getAttribute('aria-pressed') !== 'true';
           r.setAttribute('aria-pressed', on ? 'true' : 'false');
           err.hidden = true;
-          if (k.motion && on) gsap.fromTo(r.querySelector('span'), { scale: 1.25 }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+          if (k.motion && on) gsap.fromTo(r.querySelector('span'), { scale: 1.2 }, { scale: 1, duration: .25, ease: 'back.out(3)' });
         });
       });
       k.on(whole, 'change', function () { rooms.forEach(function (r) { r.setAttribute('aria-pressed', whole.checked ? 'true' : 'false'); }); err.hidden = true; });
@@ -107,8 +107,9 @@
         if (to2) picked.textContent = sel().join(' · ');
         if (!k.motion) { from.hidden = true; to.hidden = false; (to.querySelector('input, button') || to).focus(); return; }
         k.ctx.add(function () {
-          gsap.timeline().to(from, { autoAlpha: 0, y: -16, duration: .25, ease: 'power2.in', onComplete: function () { from.hidden = true; gsap.set(from, { clearProps: 'all' }); to.hidden = false; } })
-            .fromTo(to, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .45, ease: EZ.bezier(.7, 0, .3, 1), onComplete: function () { (to.querySelector('input, button') || to).focus(); } });
+          // the plan sheet folds up to its top edge and the next sheet unfolds from it (a paper fold, no rotation of text)
+          gsap.timeline().to(from, { scaleY: 0, transformOrigin: '50% 0%', filter: 'brightness(.55)', duration: .26, ease: 'power2.in', onComplete: function () { from.hidden = true; gsap.set(from, { clearProps: 'all' }); to.hidden = false; } })
+            .fromTo(to, { scaleY: 0, transformOrigin: '50% 0%', filter: 'brightness(.55)' }, { scaleY: 1, filter: 'brightness(1)', duration: .3, ease: 'power2.out', clearProps: 'transform,filter', onComplete: function () { (to.querySelector('input, button') || to).focus(); } });
         });
       }
       k.on(root.querySelector('.consult2__next'), 'click', function () {
@@ -123,7 +124,7 @@
         done(form);
       });
       EZ.reveal(k, root.querySelectorAll('.consult2__side > *'));
-      if (k.motion) gsap.fromTo(svg.querySelectorAll('.wall, .door, .fix'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.2, ease: 'power2.inOut', stagger: .15, scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+      if (k.motion) gsap.fromTo(svg.querySelectorAll('.wall, .door, .fix'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
     } },
 
     /* v3 · Phone first [BANK JC Suzanne giant CTA] */
