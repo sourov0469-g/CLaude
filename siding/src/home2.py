@@ -276,37 +276,54 @@ def ring49():
 
 
 def proof1():
+    """#317 Digital Butlers "Proof, not promises" band (counts stated beside the offer) + anatomy F12 checkable arithmetic"""
     return f'''<div class="v proof-1 has-bgf" data-tone="ground">
   <div class="bgf" aria-hidden="true"><div class="p1-gw" data-depth="-0.7"><span class="p1-ghost">886</span></div></div>
   <h2 class="h2x" data-split>On record since 2009</h2>
   <div class="rec">
-    <p class="rc rc-a"><b class="num" data-scr="886">886</b><span>documented projects, 2018-2026, each with its price</span></p>
-    <p class="rc rc-b"><b class="num" data-scr="177">177</b><span>before-and-after pairs published</span></p>
-    <p class="rc rc-c">{ring49()}<b class="num" data-scr="4.9">4.9</b><span>on 474 Google reviews</span></p>
-    <p class="rc rc-d"><b class="num" data-scr="5,000+">5,000+</b><span>Central Texas homeowners</span></p>
+    <p class="rc rc-a"><b class="num" data-count>886</b><span>documented projects, 2018-2026, each with its price</span><span class="rc-sum num">312 on the map with photos + 574 more counted = 886</span></p>
+    <p class="rc rc-b"><b class="num" data-count>177</b><span>before-and-after pairs published</span></p>
+    <p class="rc rc-c">{ring49()}<b class="num" data-count>4.9</b><span>on 474 Google reviews</span></p>
+    <p class="rc rc-d"><b class="num" data-count>5,000+</b><span>Central Texas homeowners</span></p>
   </div>
   <div class="p1-foot">{creds()}{alt_btn('#work', 'See the work')}</div>
 </div>'''
 
 
-WALL = [0, 3, 42, 18, 11, 22, 26, 12, 33, 5, 38, 16, 41, 7, 29, 36, 2, 13, 19, 24, 31, 40, 6, 28, 10, 21, 35, 15, 30, 9, 27, 37]
+# what each credential means, in the firm's own words where it published them (FACTS: Proof as published)
+CRED_ROWS = [
+    ('gaf-master-elite', 'GAF Master Elite', 'Roofing', 'GAF says fewer than 2% of contractors nationwide hold it.'),
+    ('hardie-elite-preferred', 'James Hardie Elite Preferred', 'Siding', "The top tier of the James Hardie contractor alliance. It can't be bought: James Hardie audits it, and it has to be re-earned."),
+    ('hardie-presidents-club-2025', "James Hardie President's Club Award 2025", 'Siding', 'Awarded by James Hardie for 2025.'),
+    ('andersen-certified-premier', 'Andersen Certified Contractor, Premier', 'Windows', 'Certified by Andersen at the Premier level.'),
+    ('guildmaster-service-excellence', 'GuildQuality Guildmaster', 'Service', 'Award for Service Excellence, four years in a row, 2015 through 2018.'),
+    ('bbb-a-plus', 'BBB Accredited, A+', 'Business', 'Accredited Business, rated A+.'),
+]
 
 
 def proof2():
-    tiles = ''
-    for k, i in enumerate(WALL):
-        p = PHOTOS[i]
-        tiles += f'<li class="wt" data-k="{k}"><img src="{H}t/p{i}-320.webp" width="320" height="240" alt="{e(p["trades"])} in {e(p["place"])}, {e(p["when"])}" loading="lazy" decoding="async"></li>'
+    """Georgia Contractor Group (CROWN, GC report): the "at a glance" credential table as the proof unit, installer
+    tier above review volume (builder brief 2.3)"""
+    dims = {f: (w, h) for f, n, w, h in CREDS}
+    rows = ''.join(f'''<tr><td class="gl-b"><img src="assets/img/{f}.webp" width="{dims[f][0]}" height="{dims[f][1]}" alt="" loading="lazy" decoding="async"></td>
+      <th scope="row">{e(n)}<span class="gl-t">{t}</span></th><td class="gl-m">{e(m)}</td></tr>''' for f, n, t, m in CRED_ROWS)
+    base = [('In business', 'Since 2009. Austin Pro Siding &amp; Windows (2009) and Sanders Roofing &amp; Exteriors (2010) merged in 2018.'),
+            ('Office', '7801 N Lamar Blvd, Suite C70, Austin, TX 78752'),
+            ('Reviews', '<b class="num">4.9</b> on 474 Google reviews'),
+            ('Record', '886 documented projects, 177 before-and-after pairs, 5,000+ Central Texas homeowners')]
+    base_rows = ''.join(f'<div class="gl-r"><dt>{k}</dt><dd>{v}</dd></div>' for k, v in base)
     return f'''<div class="v proof-2" data-tone="night">
-  <ul class="wall" aria-label="32 documented jobs, with neighbourhood, trades and month">{tiles}</ul>
-  <div class="wall-plate">
-    <h2 class="h2x" data-split>886 jobs, documented and dated</h2>
-    <p><b class="num">4.9</b> on 474 Google reviews. 177 before-and-after pairs published.</p>
-    {alt_btn('#reviews', 'Read what they wrote')}
-  </div>
-  <div class="cred-iso">
-    <div class="ci-say" aria-hidden="true"><p class="ci-h">Certified, accredited and awarded</p><ol class="ci-names">{''.join(f'<li data-k="{k}">{e(n)}</li>' for k, (f, n, w, h) in enumerate(CREDS))}</ol></div>
-    {creds('creds creds-iso')}
+  <div class="gl">
+    <div class="gl-head">
+      <h2 class="h2x" data-split>Austin Pro at a glance</h2>
+      <p class="gl-lead">The credentials first, then the record. Badges as the firm publishes them.</p>
+      <dl class="gl-base">{base_rows}</dl>
+      {alt_btn('#reviews', 'Read what they wrote')}
+    </div>
+    <table class="gl-table"><caption class="sr-only">Certified, accredited and awarded</caption>
+      <thead><tr><th scope="col"><span class="sr-only">Badge</span></th><th scope="col">Credential</th><th scope="col">What it means</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
   </div>
 </div>'''
 
@@ -863,7 +880,7 @@ def book3():
 # ---------- page ----------
 SECTIONS = [
     ('hero', 'Hero', [hero1, hero2, hero3], ['Courses', 'Pick your project', 'Real work']),
-    ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'Wall', 'Statement']),
+    ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'At a glance', 'Statement']),
     ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
     ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
     ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Window', 'To the inch']),

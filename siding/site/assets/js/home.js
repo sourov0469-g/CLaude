@@ -307,46 +307,25 @@
     riseIn($$('.h3-copy > .pstrip, .h3-date, .h3-copy > .lead, .h3-copy > .ctas', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
   };
 
-  /* PROOF 1: the record resolves (S0184 ScrambleText digits, revealDelay 0.3); 4.9 as a ring drawn to 98 % (S0197:
-     r 40, stroke 8, round cap, -90 deg); credentials rise like dominoes 0.1 s apart (S0222) */
+  /* PROOF 1: #317 Digital Butlers "Proof, not promises": the counts, with the map's own arithmetic printed under
+     886 (anatomy F12). Count-ups at the page's one tempo (R20); 4.9 as a ring drawn to 98 % (S0197: r 40, stroke 8,
+     round cap, -90 deg); credentials rise 0.1 s apart */
   V.proof1 = (r, b) => {
-    const nums = $$('[data-scr]', r), ring = $('.r49-v', r), ghost = $('.p1-ghost', r);
-    nums.forEach(el => { const sr = d.createElement('span'); sr.className = 'sr-only'; sr.textContent = el.dataset.scr + ' '; el.before(sr); el.setAttribute('aria-hidden', 'true'); });
+    const ring = $('.r49-v', r), ghost = $('.p1-ghost', r);
+    countUp($$('[data-count]', r), { st: el => once(el, 'top 92%') });
     if (!motionOK()) return;
-    nums.forEach((el, k) => {
-      const final = el.dataset.scr;
-      el.textContent = final.replace(/\d/g, '0');
-      G.to(el, { scrambleText: { text: final, chars: '0123456789', revealDelay: 0.3, speed: 0.5 }, duration: 1.3, delay: k * 0.12, scrollTrigger: once(el, 'top 92%') });
-    });
-    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: ease.x, scrollTrigger: once(ring, 'top 92%') });
-    G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
+    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: 'power2.out', scrollTrigger: once(ring, 'top 92%') });
+    G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
     if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   };
-  /* PROOF 2: the wall of jobs is a field: tiles near the pointer lift and turn toward it, under 4 deg (S1321
-     magnetic cards); credentials on an isometric plane rotateX(60) rotateZ(-45) that lift on hover (S0222) */
+  /* PROOF 2: Georgia Contractor Group's "at a glance" table: the credentials as one scannable unit, the record beside
+     it. Rows enter as a staggered group (R5, never static); pointing at a row lifts its badge (CSS scale-in .18 s) */
   V.proof2 = (r, b) => {
-    const tiles = $$('.wt', r).filter(t => t.offsetParent !== null), wall = $('.wall', r);
-    if (motionOK()) {
-      G.from(tiles, { autoAlpha: 0, scale: 0.9, duration: 0.7, ease: ease.out, stagger: { each: 0.014, from: 'center', grid: 'auto' }, scrollTrigger: once(r, 'top 75%') });
-      G.from($$('.creds-iso img', r), { autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.cred-iso', r), 'top 90%') });
-    }
-    // the plane and the names answer each other: point at a badge and its name lights; point at a name and its badge lifts
-    const badges = $$('.creds-iso li', r), names = $$('.ci-names li', r);
-    const lit = k => { badges.forEach((x, i) => x.classList.toggle('is-up', i === k)); names.forEach((x, i) => x.classList.toggle('on', i === k)); };
-    badges.forEach((x, k) => { b.on(x, 'pointerenter', () => lit(k)); b.on(x, 'pointerleave', () => lit(-1)); });
-    names.forEach((x, k) => { b.on(x, 'pointerenter', () => lit(k)); b.on(x, 'pointerleave', () => lit(-1)); });
-    if (!mqFine.matches || !motionOK()) return;
-    const Q = tiles.map(t => ({ t, rx: G.quickTo(t, 'rotationX', { duration: 0.5, ease: 'power3' }), ry: G.quickTo(t, 'rotationY', { duration: 0.5, ease: 'power3' }), z: G.quickTo(t, 'z', { duration: 0.5, ease: 'power3' }) }));
-    let rects = [];
-    const measure = () => { rects = Q.map(q => { const rc = q.t.getBoundingClientRect(); return [rc.left + rc.width / 2, rc.top + rc.height / 2]; }); };
-    let raf = 0, px = 0, py = 0;
-    b.on(wall, 'pointerenter', measure);
-    b.on(wall, 'pointermove', e => { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(() => { raf = 0; Q.forEach((q, i) => { const [cx, cy] = rects[i] || [0, 0]; const dx = px - cx, dy = py - cy, k = Math.max(0, 1 - Math.hypot(dx, dy) / 280); q.ry(clamp(dx / 280, -1, 1) * 4 * k); q.rx(clamp(-dy / 280, -1, 1) * 4 * k); q.z(36 * k); }); }); });
-    b.on(wall, 'pointerleave', () => Q.forEach(q => { q.rx(0); q.ry(0); q.z(0); }));
-    b.on(window, 'scroll', () => { rects = []; }, { passive: true });
-    b.add(() => cancelAnimationFrame(raf));
+    if (!motionOK()) return;
+    G.from($$('.gl-table tbody tr', r), { y: 18, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.08, scrollTrigger: once($('.gl-table', r), 'top 85%') });
+    G.from($$('.gl-lead, .gl-base .gl-r, .gl-head .btn-alt', r), { y: 14, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.gl-head', r), 'top 80%') });
   };
-  /* PROOF 3: one sentence lit word by word on scroll (S1327), then the credentials press in like stamps */
+  /* PROOF 3: one sentence lit word by word on scroll (S1327, #292 Scroll Reveal), then the credentials press in like stamps */
   V.proof3 = (r, b) => {
     const p = $('.statement', r);
     if (!motionOK()) return;
@@ -354,7 +333,7 @@
     const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => { const f = d.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.appendChild(d.createTextNode(t)); else { const s = d.createElement('span'); s.className = 't'; s.textContent = t; f.appendChild(s); } }); n.replaceWith(f); });
     G.fromTo($$('.t, .ipill', p), { opacity: 0.18 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: p, start: 'top 82%', end: 'bottom 50%', scrub: 0.4 } });
-    G.from($$('.creds-stamp li', r), { scale: 1.5, rotation: -6, autoAlpha: 0, duration: 0.32, ease: 'power4.out', stagger: 0.12, scrollTrigger: once($('.stamps', r), 'top 88%') });
+    G.from($$('.creds-stamp li', r), { scale: 1.3, autoAlpha: 0, duration: 0.3, ease: 'power4.out', stagger: 0.12, scrollTrigger: once($('.stamps', r), 'top 88%') });   // pressed in, never rotated (builder brief 6)
   };
   /* SERVICES 1: point at the house. Each part of the traced Rob Roy elevation opens its trade; the part becomes the
      one lit red part and the rest steps down (S0526 selection). Hover previews, press commits; the radio buttons are
