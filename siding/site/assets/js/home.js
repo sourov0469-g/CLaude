@@ -373,6 +373,31 @@
     const svg = $('.pt-el', r), card = $('.pt-card', r), D = JSON.parse($('.pt-data', r).textContent), seg = $('.pt-parts', r);
     const out = k => $(`[data-pt="${k}"]`, card), book = $('.pt-book', card);
     let committed = 'siding', shown = '';
+    /* v4: the chosen part answers in its own trade's way: window glass glints (372 Glare), the lap courses get a
+       spirit level whose bubble settles (S0340 detent); one overlay group, rebuilt per pick */
+    const NSV = 'http://www.w3.org/2000/svg', fx = d.createElementNS(NSV, 'g');
+    fx.setAttribute('class', 'pt-fx'); svg.appendChild(fx); b.add(() => fx.remove());
+    const partFx = part => {
+      fx.textContent = '';
+      const g = $(`g[data-part="${part}"]`, svg); if (!g) return;
+      if (part === 'windows') {
+        $$('rect, path', g).slice(0, 12).forEach((el, i) => {
+          const bb = el.getBBox(); if (bb.width < 12 || bb.height < 12) return;
+          const ln = d.createElementNS(NSV, 'line'); ln.setAttribute('class', 'pt-glint');
+          ln.setAttribute('x1', bb.x + bb.width * 0.2); ln.setAttribute('y1', bb.y + bb.height * 0.8); ln.setAttribute('x2', bb.x + bb.width * 0.55); ln.setAttribute('y2', bb.y + bb.height * 0.2);
+          fx.appendChild(ln);
+          G.fromTo(ln, { opacity: 0, x: -bb.width * 0.25 }, { opacity: 0.9, x: bb.width * 0.35, duration: 0.65, ease: 'power2.inOut', delay: i * 0.04, yoyo: true, repeat: 1 });
+        });
+      } else if (part === 'siding') {
+        const bb = g.getBBox(), lv = d.createElementNS(NSV, 'g'); lv.setAttribute('class', 'pt-level');
+        const x = bb.x + bb.width * 0.55, y = bb.y + bb.height * 0.45;
+        lv.innerHTML = `<rect x="${x - 60}" y="${y - 9}" width="120" height="18" rx="4"/><rect x="${x - 16}" y="${y - 6}" width="32" height="12" rx="6"/><circle class="pt-bub" cx="${x - 9}" cy="${y}" r="4.5"/>`;
+        fx.appendChild(lv);
+        G.fromTo(lv, { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: 'back.out(1.6)' });
+        G.fromTo($('.pt-bub', lv), { x: -10 }, { x: 9, duration: 0.8, ease: 'back.out(1.4)', delay: 0.15 });
+        G.to(lv, { autoAlpha: 0, duration: 0.4, delay: 2.2 });
+      }
+    };
     const show = (part, anim) => {
       const d0 = D[part]; if (!d0 || part === shown) return;
       shown = part;
@@ -384,6 +409,7 @@
       if (d0.img) { im.src = AU(d0.img); im.alt = d0.cap; ph.hidden = false; } else ph.hidden = true;
       book.dataset.trade = d0.trade; book.textContent = `Book a ${d0.trade.toLowerCase()} inspection`;
       if (anim && motionOK()) {
+        partFx(part);
         G.fromTo([out('trade'), out('med')], { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.35, ease: ease.out, stagger: 0.05, overwrite: true });
         if (window.DrawSVGPlugin) G.fromTo($$(`g[data-part="${part}"] path`, svg), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.6, ease: 'power2.inOut', stagger: 0.01, overwrite: true });
       }
@@ -404,6 +430,8 @@
   V.services2 = (r, b) => {
     const list = $('.ix', r), rows = $$('.ix-row', r), now = $('[data-ix-now]', r);
     rows.forEach((row, k) => { const set = () => { now.textContent = String(k + 1).padStart(2, '0'); }; b.on(row, 'pointerenter', set); b.on(row, 'focus', set); });
+    // v4 K72 edge-aware band: the hover band grows from the edge the pointer came in through
+    rows.forEach(row => b.on(row, 'pointerenter', e => { const rc = row.getBoundingClientRect(); row.style.setProperty('--edge', e.clientY - rc.top < rc.height / 2 ? '0%' : '100%'); }));
     if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
     if (!(mqFine.matches && mqDesk.matches) || !G || !motionOK()) return;
     const names = $$('[data-chars]', r);
@@ -442,8 +470,13 @@
     const xOf = v => band.clientWidth / 2 - v / 1000 * PX();
     const vOf = x => clamp((band.clientWidth / 2 - x) / PX() * 1000, 0, 50000);
     let val = 15000;
+    const hook = $('.tape-hook', r);
+    let atEnd = false;
     const upd = v => {
       val = Math.round(v / 500) * 500;
+      const end = val === 0 || val === 50000;   // v4: the hook catches at either end of the travel
+      if (end && !atEnd && motionOK() && hook) G.fromTo(hook, { rotation: 0 }, { rotation: val ? 14 : -14, duration: 0.14, ease: 'power2.out', yoyo: true, repeat: 1 });
+      atEnd = end;
       const f = usd.format(val); vOut.textContent = f;
       tape.setAttribute('aria-valuenow', val); tape.setAttribute('aria-valuetext', f);
       list.style.setProperty('--v', (val / 50000).toFixed(4));

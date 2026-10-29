@@ -1406,3 +1406,35 @@ html:not(.motion) .h1-lap { display: none; }
 .ip-fr { fill: none; stroke: var(--sheet); stroke-width: 2.2; vector-effect: non-scaling-stroke; }
 .ip-sash { fill: #CFDCE0; opacity: .78; transform-box: fill-box; transform-origin: 0% 50%; }
 html:not(.motion) .ip-sash { transform: scaleX(.12); }
+
+/* ---------- v4 Services (PLAN §3 Services) ---------- */
+@property --d { syntax: '<number>'; inherits: true; initial-value: 0; }
+.ix-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ix-row { position: relative; isolation: isolate; }
+.ix-gl { grid-area: t; justify-self: end; width: 48px; height: 32px; overflow: visible; --d: 0; transition: --d .45s cubic-bezier(.4, 0, .2, 1); }
+.ix-gl use, .ix-gl { fill: none; stroke: var(--fg); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ix-defs path, .ix-defs circle { stroke-dasharray: 1 1; stroke-dashoffset: var(--d, 0); }
+@media (min-width: 900px) { .ix-row { grid-template-columns: 3rem 56px minmax(0, 1fr) auto; grid-template-areas: "c t n m"; } .ix-gl { justify-self: start; } }
+@media (max-width: 899px) { .ix-gl { display: none; } }
+@media (hover: hover) and (pointer: fine) {
+  html.motion .ix-row:hover .ix-gl { animation: ixDraw .5s cubic-bezier(.4, 0, .2, 1); }
+  .ix-row::after { content: ""; position: absolute; z-index: -1; inset: 0 -14px; border-radius: 12px; background: var(--ground2); transform: scaleY(0); transform-origin: 50% var(--edge, 0%); transition: transform .32s cubic-bezier(.16, 1, .3, 1); }
+  .ix-row:hover::after { transform: scaleY(1); }
+}
+@keyframes ixDraw { from { --d: 1; } to { --d: 0; } }
+.tape-case { position: absolute; z-index: 2; left: 50%; top: -34px; width: 120px; height: 52px; margin-left: -60px; pointer-events: none; overflow: visible; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .25)); }
+.tc-body { fill: #2A2A28; stroke: #161616; stroke-width: 1.5; }
+.tc-win { fill: #F3F2EE; }
+.tc-lock { stroke: var(--red); stroke-width: 5; stroke-linecap: round; }
+.tc-rv { fill: #8F8A80; }
+.tc-mark { stroke: var(--red); stroke-width: 3; }
+.tape-mark { top: 18px; }
+.tape-hook { position: absolute; left: -30px; top: 0; width: 30px; height: 96px; overflow: visible; transform-origin: 100% 50%; }
+.th-tab { fill: #B9B6AE; stroke: #47443F; stroke-width: 1.5; }
+.th-lip { stroke: #47443F; stroke-width: 4; stroke-linecap: round; }
+.th-rv { fill: #47443F; }
+.pt-glint { stroke: #fff; stroke-width: 3; stroke-linecap: round; opacity: 0; pointer-events: none; }
+.pt-level rect:first-child { fill: #F2C230; stroke: #161616; stroke-width: 1; }
+.pt-level rect + rect { fill: #CFE8B5; stroke: #161616; stroke-width: .8; }
+.pt-level circle { fill: #fff; stroke: #161616; stroke-width: .6; }
+.pt-level { pointer-events: none; }

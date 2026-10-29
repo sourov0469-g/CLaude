@@ -430,6 +430,9 @@ def services1():
 </div>'''
 
 
+IX_SYMS = '<symbol id="ixg-siding" viewBox="0 0 48 32"><path pathLength="1" d="M5 3V29M43 3V29"/><path pathLength="1" d="M5 8H43M5 14H43M5 20H43M5 26H43"/></symbol><symbol id="ixg-windows" viewBox="0 0 48 32"><path pathLength="1" d="M14 2H34V29H14ZM14 15.5H34M24 2V15.5M17 18H31V27H17Z"/><path pathLength="1" d="M10 30H38"/></symbol><symbol id="ixg-exterior-painting" viewBox="0 0 48 32"><path pathLength="1" d="M3 9H45M3 17H45M3 25H45"/><path pathLength="1" d="M28 3H44V9H28ZM36 9V14H26V26"/></symbol><symbol id="ixg-shingle-roofing" viewBox="0 0 48 32"><path pathLength="1" d="M2 6H46M2 14H46M2 22H46M2 30H46M10 6V14M26 6V14M42 6V14M18 14V22M34 14V22M10 22V30M26 22V30M42 22V30"/></symbol><symbol id="ixg-gutters" viewBox="0 0 48 32"><path pathLength="1" d="M3 8H38V15C38 18 36 19 33 19H3"/><path pathLength="1" d="M3 12H36M30 19V30H37V19"/></symbol><symbol id="ixg-doors" viewBox="0 0 48 32"><path pathLength="1" d="M14 2H34V30H14Z"/><path pathLength="1" d="M17 5H23V13H17ZM25 5H31V13H25ZM17 16H23V27H17ZM25 16H31V27H25Z"/></symbol><symbol id="ixg-patio-covers" viewBox="0 0 48 32"><path pathLength="1" d="M2 7L46 3M2 11L46 7M8 10V30M40 6V30M4 30H44"/><path pathLength="1" d="M14 9V12M20 8.5V11.5M26 8V11M32 7.5V10.5"/></symbol><symbol id="ixg-metal-roofing" viewBox="0 0 48 32"><path pathLength="1" d="M4 28L24 4L44 28Z"/><path pathLength="1" d="M12 28L28 9M18 28L31 12.5M24 28L34 16M30 28L37 19.5M36 28L40.5 23"/></symbol><symbol id="ixg-garage-doors" viewBox="0 0 48 32"><path pathLength="1" d="M6 30V6H42V30"/><path pathLength="1" d="M9 9H39V30M9 15H39M9 21H39M9 27H39"/></symbol><symbol id="ixg-decking" viewBox="0 0 48 32"><path pathLength="1" d="M2 26L14 14H46L34 26Z"/><path pathLength="1" d="M5 23H37M8 20H40M11 17H43M8 26V30M34 26V30"/></symbol><symbol id="ixg-storm" viewBox="0 0 48 32"><path pathLength="1" d="M3 30L24 14L45 30"/><circle pathLength="1" cx="12" cy="6" r="2"/><circle pathLength="1" cx="23" cy="4" r="2.4"/><circle pathLength="1" cx="35" cy="7" r="2"/><path pathLength="1" d="M14 11L12 14M26 10L24 13M37 12L35 15"/></symbol>'
+
+
 def services2():
     """Q571 AHA: the numbered services index (11 rows, 01 OF 11 counter by CSS counters, intro column left)"""
     rows = ''
@@ -439,12 +442,13 @@ def services2():
         im = f' data-img="{tphoto(slug)}"' if slug in TRADE_PHOTO else ''
         th = f'<img class="ix-th" src="{tphoto(slug)}" width="800" height="600" alt="" loading="lazy" decoding="async">' if slug in TRADE_PHOTO else '<span class="ix-th ix-th-none" aria-hidden="true"></span>'
         rows += f'''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="{e(t['name'])}"{im} aria-label="{e(t['name'])}: {cnt}, median job {med(t)}. Book an inspection">
-      <span class="ix-name" data-chars>{e(t['name'])}</span><span class="ix-meta"><span>{cnt}</span><b>Median {med(t)}</b></span>{th}</a></li>'''
+      <svg class="ix-gl" aria-hidden="true" focusable="false"><use href="#ixg-{slug}"/></svg><span class="ix-name" data-chars>{e(t['name'])}</span><span class="ix-meta"><span>{cnt}</span><b>Median {med(t)}</b></span>{th}</a></li>'''
     rows += '''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="Storm damage" aria-label="Storm damage: free inspection, documented for your insurer. Book an inspection">
-      <span class="ix-name" data-chars>Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
+      <svg class="ix-gl" aria-hidden="true" focusable="false"><use href="#ixg-storm"/></svg><span class="ix-name" data-chars>Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
     return f'''<div class="v services-2" data-tone="ground">
   <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices from the firm's own documented jobs, 2018-2026.</p>
     <p class="ix-count num" aria-hidden="true"><b data-ix-now>01</b><span>of 11</span></p></div>
+  <svg class="ix-defs" aria-hidden="true" focusable="false">{IX_SYMS}</svg>
   <ol class="ix">{rows}</ol>
   <div class="ix-peek" aria-hidden="true"><img alt="" width="800" height="600"></div>
 </div>'''
@@ -461,8 +465,9 @@ def services3():
   <div class="tm-head"><h2 class="h2x" data-split>Pull the tape to your budget</h2>
     <p class="tm-say" aria-live="polite"><b class="num" data-tm-v>$15,000</b> <span data-tm-n>6 of 10 trades usually land here.</span></p></div>
   <div class="tape" role="slider" tabindex="0" data-cur="drag" aria-label="Budget, from $0 to $50,000" aria-valuemin="0" aria-valuemax="50000" aria-valuenow="15000" aria-valuetext="$15,000">
-    <div class="tape-band"><div class="tape-strip" aria-hidden="true">{ticks}</div></div>
+    <div class="tape-band"><div class="tape-strip" aria-hidden="true"><svg class="tape-hook" viewBox="0 0 30 96" focusable="false"><path class="th-tab" d="M30 4H8C5 4 4 5 4 8V88C4 91 5 92 8 92H30"/><path class="th-lip" d="M4 10V86"/><circle class="th-rv" cx="20" cy="30" r="2.6"/><circle class="th-rv" cx="20" cy="66" r="2.6"/></svg>{ticks}</div></div>
     <i class="tape-mark" aria-hidden="true"></i>
+    <svg class="tape-case" viewBox="0 0 120 52" aria-hidden="true" focusable="false"><path class="tc-body" d="M10 4H104C111 4 116 9 116 16V40C116 45 112 48 107 48H14C8 48 4 44 4 38V10C4 7 7 4 10 4Z"/><rect class="tc-win" x="52" y="30" width="16" height="16" rx="2"/><path class="tc-lock" d="M20 14H44"/><circle class="tc-rv" cx="104" cy="16" r="3"/><circle class="tc-rv" cx="104" cy="36" r="3"/><path class="tc-mark" d="M60 30V48"/></svg>
   </div>
   <ul class="tm-list" aria-label="Middle half of each trade's priced jobs">{rows}</ul>
   <p class="fine">The bar is the middle half of each trade's individually priced jobs, materials and labour before discounts, excluding tax. Your price comes from the free inspection.</p>
