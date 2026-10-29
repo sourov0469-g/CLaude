@@ -1,0 +1,25 @@
+R25 hover: bracket opacity 1, transform none
+R25 press: screw animation hw-screw
+V2 start: tab 1 selected; panels Va -i -i; bar hw2-story running
+  after 5.3s: tab 2; panels -i Va -i; bar 1 done true
+  scene 2 plays: tape hw2-pull, dims hw2-draw
+R27 hover: shingle tabs opacity 1, bars opacity 0
+R27 press: flip hw2-flip
+  paused: aria-pressed true, bar paused
+  held 5.6s: tab 2 -> 2
+R26 hover: flashing opacity 1, bent leg none
+R26 press: snap hw2-snap
+  click tab 3: tab 3; panels -i -i Va; scene 3 roof hw2-set, puffs hw2-puff
+  ArrowRight from tab 3: tab 1 (wraps), focus on hw2-t1; scene 1 handset hw2-lift
+  End: tab 3
+  keyboard focus on a tab holds: bar paused
+  focus gone: bar running
+R41 hover: cord opacity 1, transform none
+R41 press: recoil hw2-coil; tel tel:+19377467377
+bg V2: scene layers on pointer depth: near matrix(1, 0, 0, 1, 5.59, 2.8242) -> matrix(1, 0, 0, 1, -4.4255, -3.1306)
+  off screen: bar paused
+R28 hover (rule): segment matrix(1, 0, 0, 1, 0, 0)
+R28 press (rule): hw-meas
+bg V3: ladder lean toward the pointer 0.91 deg
+  chips: A real person | Mon to Fri, 9 to 5 | In writing | Line by line | Owens Corning Platinum Preferred | $2M liability insurance
+errors: 0

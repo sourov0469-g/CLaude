@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 4 in progress: Family done → How next (then Towns, Call).
+- **Phase:** 4 in progress: Family, How done → Towns next (then Call).
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -141,3 +141,29 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - Cause: V2 started its entrance at `top 75%`, so with the longer statement the link sat in the lowest quarter of a 900 px screen and stayed invisible.
   - Fix: V2 now uses the house start (`top 94%`). No other section overrides it.
   - Rerun: R23 fm-wob / fm-ring, errors 0; `secqa.mjs family` 9/9 clean.
+
+### Phase 4: How it works ×3 (V1, V3 upgraded; V2 rebuilt)
+- **V2 rebuilt on [BANK] UZIK / P74:**
+  - Protocol: Atlas entries P74 / UZIK and deep read 221 re-read. Live site visited with plain curl, read only (scratchpad `ref/uzik/`).
+  - Its CSS confirms the deep read, ported as is: `.diapo__item{opacity:0;transition:opacity .4s var(--transition-diapo)}`, `.is-visible{opacity:1}`, `--transition-diapo: cubic-bezier(0.25,0.1,0.25,1)`; pager `.story__pager-progress.is-animating{animation:storyPagerProgress 5s linear infinite}`, `.is-done` full, `translate3d(calc(-100% - 1px),0,0) → 0`; chrome 300 ms cubic-bezier(0.86,0.1,0.14,0.9).
+  - The step advances on `animationiteration`, so the 5 s fill is the dwell.
+  - The old V2 (a CSS-sticky scroll stage that named roof layers) is gone, so the page no longer has a sticky stage.
+- **Adaptations and deviations from the plan (logged, §2):**
+  - Desktop: the pager is the top row of the story card, and the scene sits beside the caption. With UZIK's overlay, the scene ran 560 px tall and pushed the caption below the fold.
+  - Scene 1 is answered, not rung: the office lights come on and the handset lifts off its base. Family V2 (R23) and Call V2 (R36) already ring a handset.
+  - Scene 3: the finished roof comes down onto the walls with dust puffs at the eaves. Courses laid eave to ridge would repeat Work V3 and Family V2 (§4, no trick twice).
+  - Scene 2 shows a tape run along the eave and dimension lines on a roof plane, with no paper (§5).
+  - R41 added to the registry for V2's Call link (coiled cord stretches; recoils on press).
+- **V1:** R25 replaces the drop/splash: a gutter-hanger bracket swings down over the link's corner, and press turns its screw.
+- **V3:**
+  - bg: the ladder leans up to 1° toward the pointer.
+  - Chip "$2M insured" is now "$2M liability insurance" (§3 wording).
+- **Evidence:**
+  - `secqa.mjs how` at 1440, 375 and 1440 reduced: 9/9 "switcher swaps only how; overflow 0; errors 0".
+  - Screenshots: `qa/how{1,2,3}-*.jpg`, plus `qa/how2-step{2,3}-{1440,375}.jpg`, reviewed.
+  - `qa/scripts/howint.mjs` (log `qa/howint.log`): pager timing, pause, tabs, keys, offscreen rest and every reaction pass. Errors 0.
+  - Each version has tel:+19377467377 ×1. Whole file: 353-9711 ×0, 24/7 ×0.
+- **Fixed during How (kept visible):**
+  - Scene 2's tape ticks were missing: the generated path string was malformed (`M236342v8`). Regenerated, and the reshoot shows them.
+  - The ladder-lean check first read 0°: the R28 press clicked the Estimate link, and Lenis animated the jump to #call. The test now releases off the link. The lean itself measured 0.91°.
+- **Divider:** how → rafters, unchanged and unique on the page.

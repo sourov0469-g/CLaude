@@ -1,40 +1,60 @@
 <div class="hw hw2">
-  <div class="hw2-track">
-    <div class="hw2-stage">
-      <div class="hw2-copy">
-        <h2 class="hw-h">How it works.</h2>
-        <ol class="hw2-steps" role="list">
-          <li class="hw2-step is-on"><span class="num">01</span><b>Call Rachel.</b><span class="hw2-d">Monday to Friday, 9 to 5.</span></li>
-          <li class="hw2-step"><span class="num">02</span><b>Get a written estimate.</b><span class="hw2-d">Line by line, in writing.</span></li>
-          <li class="hw2-step"><span class="num">03</span><b>We do the roof.</b><span class="hw2-d">Owens Corning Platinum Preferred. $2M liability insurance.</span></li>
-        </ol>
-        <a class="btn btn--sun rx hw2-call" href="tel:+19377467377">ICON_PHONE<span>Call (937) 746-7377</span><svg class="rx-s hw2-cs" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="rx-h" d="M170 58 V-14 M188 58 V-14 M170 46 H188 M170 30 H188 M170 14 H188 M170 -2 H188"/></svg></a>
-      </div>
-      <div class="hw2-scene">
-        <svg class="hw2-sky" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path class="hw2-arc" d="M60 520 A420 420 0 0 1 760 300"/><circle class="hw2-sun" r="26" cx="60" cy="520"/></svg>
-        <div class="hw2-3d">
-          <svg class="hw2-svg" viewBox="0 0 940 560" aria-hidden="true" focusable="false">
-            <defs><clipPath id="hw2-build"><rect class="hw2-clip" x="0" y="560" width="940" height="560"/></clipPath></defs>
-            <path class="hw2-ground" d="M0 520 H800"/>
-            <g class="hw2-house"><rect x="170" y="330" width="460" height="190"/><rect class="hw2-win" x="220" y="380" width="80" height="70" rx="3"/><rect class="hw2-win" x="500" y="380" width="80" height="70" rx="3"/><rect class="hw2-door" x="370" y="410" width="60" height="110" rx="3"/></g>
-            <g class="hw2-frame"><path d="M120 336 L400 130 L680 336"/><path class="hw2-raf" d="M190 336 L400 182 M610 336 L400 182 M260 336 L400 233 M540 336 L400 233"/><path d="M150 336 H650"/></g>
-            <g class="hw2-layers" clip-path="url(#hw2-build)">
-              <g class="ly" data-ly="0"><path class="ly-deck" d="M108 330 L400 116 L692 330 L676 342 L400 140 L124 342 Z"/></g>
-              <g class="ly" data-ly="1"><path class="ly-under" d="M104 322 L400 105 L696 322 L692 330 L400 116 L108 330 Z"/></g>
-              <g class="ly" data-ly="2"><path class="ly-sh" d="M96 316 L400 92 L704 316 L696 322 L400 105 L104 322 Z"/><path class="ly-crs" d="M136 287 L166 265 M176 258 L206 236 M216 228 L246 206 M256 199 L286 177 M296 170 L326 148 M336 140 L366 118 M664 287 L634 265 M624 258 L594 236 M584 228 L554 206 M544 199 L514 177 M504 170 L474 148 M464 140 L434 118"/></g>
-              <g class="ly" data-ly="3"><path class="ly-ridge" d="M372 100 L400 80 L428 100 L428 110 L400 92 L372 110 Z"/></g>
-            </g>
-            <path class="hw2-line" d="M40 560 H760"/>
-            <g class="hw2-tags">
-              <g class="tag" data-ly="0"><path d="M640 300 L720 300"/><text x="726" y="305">01 Deck</text></g>
-              <g class="tag" data-ly="1"><path d="M590 250 L720 250"/><text x="726" y="255">02 Underlayment</text></g>
-              <g class="tag" data-ly="2"><path d="M530 200 L720 200"/><text x="726" y="205">03 Shingles</text></g>
-              <g class="tag" data-ly="3"><path d="M428 100 L720 100"/><text x="726" y="105">04 Ridge vent</text></g>
-            </g>
-            <g class="hw2-phone"><circle cx="400" cy="250" r="34"/><path d="M386 236h7l3.4 9-4.4 2.8a24 24 0 0 0 15.5 15.5l2.8-4.4 9 3.4V269a3.4 3.4 0 0 1-3.7 3.4A35.5 35.5 0 0 1 382.7 240a3.4 3.4 0 0 1 3.3-4z"/><path class="hw2-ring" d="M420 222 a20 20 0 0 1 18 18 M418 232 a10 10 0 0 1 9 9"/></g>
-          </svg>
+  <div class="hw2-in">
+    <div class="hw2-head">
+      <h2 class="hw-h">How it works.</h2>
+      <p class="hw-note">Three steps, from the first call to the finished roof.</p>
+    </div>
+    <div class="hw2-story">
+      <div class="hw2-pager">
+        <div class="hw2-tabs" role="tablist" aria-label="The three steps">
+          <button class="hw2-tab rx" type="button" role="tab" id="hw2-t1" aria-controls="hw2-p1" aria-selected="true"><span class="hw2-bar"><span class="hw2-prog"></span></span><span class="hw2-tl"><span class="num">01</span> Call Rachel</span><svg class="rx-s hw2-fl" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path class="hw2-fl-h" d="M2 3 H19"/><path class="hw2-fl-v" d="M19 3 V19"/></svg></button>
+          <button class="hw2-tab rx" type="button" role="tab" id="hw2-t2" aria-controls="hw2-p2" aria-selected="false" tabindex="-1"><span class="hw2-bar"><span class="hw2-prog"></span></span><span class="hw2-tl"><span class="num">02</span> Written estimate</span><svg class="rx-s hw2-fl" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path class="hw2-fl-h" d="M2 3 H19"/><path class="hw2-fl-v" d="M19 3 V19"/></svg></button>
+          <button class="hw2-tab rx" type="button" role="tab" id="hw2-t3" aria-controls="hw2-p3" aria-selected="false" tabindex="-1"><span class="hw2-bar"><span class="hw2-prog"></span></span><span class="hw2-tl"><span class="num">03</span> Your roof</span><svg class="rx-s hw2-fl" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path class="hw2-fl-h" d="M2 3 H19"/><path class="hw2-fl-v" d="M19 3 V19"/></svg></button>
         </div>
-        <p class="hw2-pct num" aria-hidden="true">0%</p>
+        <button class="hw2-pause rx" type="button" aria-pressed="false" aria-label="Pause the steps"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="hw2-pz" d="M9 6v12M15 6v12"/><path class="hw2-py" d="M8 5l11 7-11 7z"/><g class="hw2-tb"><path class="hw2-tb1" d="M3 6h8v11.5a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 3 17.5z"/><path class="hw2-tb2" d="M13 6h8v11.5a1.5 1.5 0 0 1-1.5 1.5h-5a1.5 1.5 0 0 1-1.5-1.5z"/></g></svg></button>
+      </div>
+      <div class="hw2-diapo">
+        <div class="hw2-item is-visible" role="tabpanel" id="hw2-p1" aria-labelledby="hw2-t1">
+          <svg class="hw2-scene hw2-s1" viewBox="0 0 960 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+            <g class="hw2-far" data-pd="-0.015"><path d="M0 360 V320 L70 288 L140 320 V300 L220 262 L300 300 V360 Z M660 360 V306 L740 268 L820 306 V292 L890 260 L960 292 V360 Z"/></g>
+            <path class="hw2-gr" d="M0 384 H960"/>
+            <g class="s1-office"><rect class="s1-wall" x="300" y="246" width="360" height="138"/><path class="s1-roof" d="M276 252 L480 160 L684 252 Z"/><path class="s1-fas" d="M268 254 H692"/><rect class="s1-win" x="330" y="282" width="70" height="56" rx="3"/><rect class="s1-win" x="560" y="282" width="70" height="56" rx="3"/><rect class="s1-door" x="450" y="300" width="60" height="84" rx="3"/><rect class="s1-sign" x="392" y="258" width="176" height="28" rx="4"/><text class="s1-hrs" x="480" y="277" text-anchor="middle">MON TO FRI, 9 TO 5</text></g>
+            <g class="hw2-near" data-pd="0.02"><circle class="s1-disc" cx="480" cy="92" r="58"/><path class="s1-base" d="M446 124 h68 a6 6 0 0 0 6 -6 v-8 a12 12 0 0 0 -12 -12 h-12 l-4 -6 h-24 l-4 6 h-12 a12 12 0 0 0 -12 12 v8 a6 6 0 0 0 6 6z"/><path class="s1-keys" d="M466 108 h6 M477 108 h6 M488 108 h6 M466 116 h6 M477 116 h6 M488 116 h6"/><path class="s1-hset" d="M440 86 q40 -26 80 0 l-4 12 a6 6 0 0 1 -7 3 l-10 -4 a4 4 0 0 1 -2 -5 l2 -6 q-18 -6 -38 0 l2 6 a4 4 0 0 1 -2 5 l-10 4 a6 6 0 0 1 -7 -3z"/></g>
+          </svg>
+          <div class="hw2-cap">
+            <h3 class="hw2-t">Call Rachel.</h3>
+            <div class="hw2-cd"><p>Monday to Friday, 9 to 5. A real person answers.</p><a class="hw2-call rx" href="tel:+19377467377">Call (937) 746-7377<svg class="rx-s hw2-cord" viewBox="0 0 64 20" aria-hidden="true" focusable="false"><path d="M2 10 c3 -9 7 -9 7 0 s4 9 7 0 s4 -9 7 0 s4 9 7 0 s4 -9 7 0 s4 9 7 0 s4 -9 7 0 s4 9 7 0"/></svg></a></div>
+          </div>
+        </div>
+        <div class="hw2-item" role="tabpanel" id="hw2-p2" aria-labelledby="hw2-t2" inert>
+          <svg class="hw2-scene hw2-s2" viewBox="0 0 960 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+            <defs><clipPath id="hw2-s2c"><rect x="212" y="330" width="600" height="44"/></clipPath></defs>
+            <g class="hw2-far" data-pd="-0.015"><path d="M80 60 H880 M80 120 H880 M80 180 H880 M80 240 H880 M80 300 H880 M160 30 V340 M320 30 V340 M480 30 V340 M640 30 V340 M800 30 V340"/></g>
+            <path class="hw2-gr" d="M0 384 H960"/>
+            <path class="s2-plane" d="M176 330 L302 132 L658 132 L784 330 Z"/>
+            <path class="s2-seam" d="M239 231 H721 M270 182 H690"/>
+            <g class="s2-dims"><path class="s2-dim s2-dim1" d="M302 100 H658 M302 90 V110 M658 90 V110"/><path class="s2-dim s2-dim2" d="M812 330 L686 132 M804 336 L820 324 M678 138 L694 126"/></g>
+            <g class="hw2-near" data-pd="0.02"><g clip-path="url(#hw2-s2c)"><g class="s2-tape"><rect class="s2-blade" x="212" y="342" width="572" height="18"/><path class="s2-tk" d="M236 342v8M260 342v12M284 342v8M308 342v12M332 342v8M356 342v12M380 342v8M404 342v12M428 342v8M452 342v12M476 342v8M500 342v12M524 342v8M548 342v12M572 342v8M596 342v12M620 342v8M644 342v12M668 342v8M692 342v12M716 342v8M740 342v12M764 342v8"/><path class="s2-hook" d="M784 338 V364 H792"/></g></g><rect class="s2-case" x="146" y="322" width="76" height="62" rx="14"/><circle class="s2-hub" cx="184" cy="353" r="15"/></g>
+          </svg>
+          <div class="hw2-cap">
+            <h3 class="hw2-t">Get a written estimate.</h3>
+            <div class="hw2-cd"><p>Line by line, in writing, before any work starts. Nothing starts without your written approval.</p></div>
+          </div>
+        </div>
+        <div class="hw2-item" role="tabpanel" id="hw2-p3" aria-labelledby="hw2-t3" inert>
+          <svg class="hw2-scene hw2-s3" viewBox="0 0 960 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+            <defs><pattern id="hw2-sh" width="56" height="22" patternUnits="userSpaceOnUse"><path class="s3-crs" d="M0 21.5 H56 M14 11 V22 M42 11 V22 M0 10.5 H56 M28 0 V11"/></pattern></defs>
+            <g class="hw2-far" data-pd="-0.015"><circle class="s3-sun" cx="790" cy="84" r="32"/></g>
+            <path class="hw2-gr" d="M0 384 H960"/>
+            <rect class="s3-wall" x="252" y="252" width="456" height="132"/><rect class="s3-win" x="292" y="288" width="72" height="56" rx="3"/><rect class="s3-win" x="596" y="288" width="72" height="56" rx="3"/><rect class="s3-door" x="450" y="300" width="60" height="84" rx="3"/>
+            <g class="s3-puffs"><path class="s3-puff s3-puffl" d="M196 262 a12 12 0 0 1 20 -8 a14 14 0 0 1 24 4 a10 10 0 0 1 2 18 h-40 a8 8 0 0 1 -6 -14z"/><path class="s3-puff s3-puffr" d="M720 262 a12 12 0 0 1 20 -8 a14 14 0 0 1 24 4 a10 10 0 0 1 2 18 h-40 a8 8 0 0 1 -6 -14z"/></g>
+            <g class="hw2-near" data-pd="0.02"><g class="s3-roof"><path class="s3-sh" d="M210 258 L480 90 L750 258 Z"/><path class="s3-tex" d="M210 258 L480 90 L750 258 Z" fill="url(#hw2-sh)"/><path class="s3-edge" d="M200 262 L480 86 L760 262"/><path class="s3-ridge" d="M448 104 L480 82 L512 104"/></g></g>
+          </svg>
+          <div class="hw2-cap">
+            <h3 class="hw2-t">We do the roof.</h3>
+            <div class="hw2-cd"><p>Owens Corning Platinum Preferred, with $2M liability insurance.</p></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

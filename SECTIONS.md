@@ -20,9 +20,9 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 | 10 | Family (`family`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 11 | Family (`family`) | V2 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 12 | Family (`family`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
-| 13 | How it works (`how`) | V1 | upgraded | NO |
-| 14 | How it works (`how`) | V2 | rebuilt | NO |
-| 15 | How it works (`how`) | V3 | upgraded | NO |
+| 13 | How it works (`how`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 14 | How it works (`how`) | V2 | rebuilt | YES (Phase 4 evidence in PROGRESS.md) |
+| 15 | How it works (`how`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 16 | Towns (`area`) | V1 | upgraded | NO |
 | 17 | Towns (`area`) | V2 | upgraded | NO |
 | 18 | Towns (`area`) | V3 | upgraded | NO |

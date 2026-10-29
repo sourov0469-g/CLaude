@@ -1,7 +1,7 @@
-/* HOW (PLAN-V7 §6). Facts: 1 call Rachel, Monday to Friday 9 to 5; 2 a written, line-by-line estimate; 3 the roof,
-   Owens Corning Platinum Preferred, $2M liability insurance. v1 ⟦S1325⟧ progress spine as a downspout; v2 ⟦S1340⟧ the
-   roof builds under a rising line (⟦S1326⟧ progress math, CSS sticky), its layers exploding in CSS 3D; v3 [BANK] Q409
-   deliverable chips + Q411 three verbs + Q91 animated icons, joined by a roofer's ladder. */
+/* HOW. Facts: 1 call Rachel, Monday to Friday 9 to 5; 2 a written, line-by-line estimate, nothing starts without written
+   approval; 3 the roof, Owens Corning Platinum Preferred, $2M liability insurance. v1 ⟦S1325⟧ progress spine as a
+   downspout; v2 [BANK] UZIK story pager (P74) over three drawn scenes; v3 [BANK] Q409 deliverable chips + Q411 three
+   verbs + Q91 animated icons, joined by a roofer's ladder. */
 .hw{position:relative;overflow:clip}
 .hw-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
 .hw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
@@ -24,73 +24,133 @@
 .hw1-step[aria-current="step"] .hw1-t,.hw1-step.is-past .hw1-t{color:var(--ink)}
 .hw1-p{margin-top:10px;font-size:var(--t-lead);line-height:1.45;max-width:40ch}
 .hw1-link{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:10px;font-weight:800;font-size:1.25rem;color:var(--blue)}
-.hw1-ls{position:relative;width:22px;height:22px;overflow:visible}
-.hw1-ls .rx-h{fill:var(--chalk);stroke:var(--ink);stroke-width:1.5;opacity:0;transform:translateY(-10px);transition:opacity .2s var(--ease-x),transform .25s var(--ease-x)}
-.hw1-ls .rx-p{fill:none;stroke:var(--chalk);stroke-width:2;opacity:0;transform-origin:12px 20px;transform-box:view-box}
-@media (hover:hover){.hw1-link:hover .rx-h{opacity:1;transform:none}}
-.hw1-link:focus-visible .rx-h{opacity:1;transform:none}
-.hw1-link.is-press .rx-p{animation:hw-splash .4s ease-out}
-@keyframes hw-splash{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(2.4)}}
+/* R25: a gutter-hanger bracket swings down and clamps over the link's corner; press turns its screw */
+.hw1-hg{right:-30px;top:-10px;width:32px;height:24px;opacity:0;transform:translate(8px,-12px) rotate(28deg);transform-origin:90% 70%;transition:opacity .15s var(--ease-x),transform .28s var(--ease-spring)}
+.hw1-hg-s,.hw1-hg-l{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.hw1-hg-k circle{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.6}
+.hw1-hg-k path{stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+.hw1-hg-k{transform-box:fill-box;transform-origin:center}
+@media (hover:hover){.hw1-link:hover .hw1-hg{opacity:1;transform:none}}
+.hw1-link:focus-visible .hw1-hg{opacity:1;transform:none}
+.hw1-link.is-press .hw1-hg{opacity:1;transform:none}
+.hw1-link.is-press .hw1-hg-k{animation:hw-screw .4s var(--ease-x)}
+@keyframes hw-screw{to{transform:rotate(180deg)}}
 @media (max-width:860px){.hw1{grid-template-columns:1fr}.hw1-head{position:static}.hw1-body{padding-left:64px}.hw1-pipe{width:64px}}
 
-/* ---------- v2: a sticky stage; the roof goes on under a rising line; at the estimate its layers come apart */
-.hw2{--vbg:#eef3fb;background:#eef3fb;color:var(--ink)}
-.hw2-track{height:300vh;padding:0 var(--gutter)}
-.hw2-stage{position:sticky;top:var(--nav-h);height:calc(100svh - var(--nav-h));display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center;max-width:1360px;margin:0 auto}
-.hw2-copy{display:grid;gap:28px}
-.hw2-steps{list-style:none;margin:0;padding:0;display:grid;gap:18px}
-.hw2-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;opacity:.38;transition:opacity .25s var(--ease-x)}
-.hw2-step.is-on{opacity:1}
-.hw2-step .num{grid-row:span 2;font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted);padding-top:.35em}
-.hw2-step b{font-size:clamp(1.4rem,1rem + 1.4vw,2.2rem);font-weight:800;line-height:1.1;letter-spacing:-.025em}
-.hw2-d{font-size:1rem;line-height:1.45;color:var(--muted)}
-.hw2-call{justify-self:start}
-.hw2-cs{left:0;top:0;width:100%;height:100%}
-.hw2-cs .rx-h{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .2s var(--ease-x)}
-@media (hover:hover){.hw2-call:hover .hw2-cs .rx-h{opacity:.5}}
-.hw2-call:focus-visible .hw2-cs .rx-h{opacity:.5}
-.hw2-call.is-press{animation:hw-bounce .3s var(--ease-spring)}
-@keyframes hw-bounce{0%{scale:.95}100%{scale:1}}
-.hw2-scene{position:relative;height:100%;max-height:640px;display:grid;place-items:center}
-.hw2-sky{position:absolute;inset:0;width:100%;height:100%}
-.hw2-arc{fill:none;stroke:var(--sun);stroke-width:2;stroke-dasharray:2 8;stroke-linecap:round;opacity:.7}
-.hw2-sun{fill:var(--sun)}
-.hw2-3d{position:relative;width:100%;perspective:900px}
-.hw2-svg{width:100%;height:auto;overflow:visible;transform-style:preserve-3d}
-.hw2-ground{stroke:var(--ink);stroke-width:3}
-.hw2-house rect:first-child{fill:#fff;stroke:var(--ink);stroke-width:3}
-.hw2-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
-.hw2-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
-.hw2-frame path{fill:none;stroke:var(--wood);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
-.hw2-frame .hw2-raf{stroke-width:5;opacity:.75}
-.ly-deck{fill:#d9b98a;stroke:var(--ink);stroke-width:2}
-.ly-under{fill:#5d6b86;stroke:var(--ink);stroke-width:1.5}
-.ly-sh{fill:var(--shingle);stroke:var(--ink);stroke-width:2}
-.ly-crs{fill:none;stroke:oklch(1 0 0 / .3);stroke-width:2}
-.ly-ridge{fill:#2b3142;stroke:var(--ink);stroke-width:2}
-.hw2-line{stroke:var(--sun);stroke-width:3;stroke-dasharray:10 8}
-.hw2-ghost path{fill:oklch(1 0 0 / .55);stroke:var(--blue);stroke-width:2;stroke-dasharray:6 5}
-.hw2-ghost .ly-crs{display:none}
-.hw2-ghost{opacity:0}
-.tag path{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 4}
-.tag text{font:700 17px/1 "Epilogue",sans-serif;fill:var(--ink)}
-.tag{opacity:.25;transition:opacity .25s var(--ease-x)}
-.tag.is-on{opacity:1}
-.hw2-phone circle{fill:var(--sun);stroke:var(--ink);stroke-width:3}
-.hw2-phone path{fill:var(--ink)}
-.hw2-phone .hw2-ring{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-.hw2-pct{position:absolute;right:0;bottom:12px;font-size:clamp(2.5rem,2rem + 2vw,4rem);font-weight:800;letter-spacing:-.04em;color:oklch(0.25 0.06 262 / .18)}
-@media (max-width:860px){
-  .hw2-stage{grid-template-columns:1fr;align-content:center;gap:12px}
-  .hw2-copy{gap:14px}
-  .hw2-steps{gap:8px}
-  .hw2-step:not(.is-on) .hw2-d{display:none}
-  .hw2-scene{height:auto}
-  .tag text{font-size:26px}
+/* ---------- v2 [BANK] UZIK story pager (P74 Harvest [221]): stacked scenes crossfade 0.4s on the content curve; each
+   step's bar fills 5s linear and that fill IS the dwell; chrome on the house curve at 300ms. Not pinned, nothing sticky. */
+.hw2{--vbg:#eef3fb;--t-dur:300ms;--t-chrome:cubic-bezier(0.86,0.1,0.14,0.9);--t-diapo:cubic-bezier(0.25,0.1,0.25,1);background:#eef3fb;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.hw2-in{max-width:1280px;margin:0 auto;display:grid;gap:clamp(28px,4vh,48px)}
+.hw2-head{display:grid;gap:12px}
+.hw2-story{position:relative;border-radius:24px;background:#fff;box-shadow:0 0 0 2px var(--ink);overflow:hidden}
+.hw2-pager{position:relative;z-index:3;display:flex;align-items:flex-start;gap:14px;padding:18px 18px 6px;border-bottom:2px solid var(--ink)}
+.hw2-tabs{flex:1;min-width:0;display:flex;gap:8px}
+.hw2-tab{flex:1 1 0;min-width:0;display:grid;gap:10px;min-height:44px;align-content:start;padding:0 0 8px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.hw2-bar{position:relative;display:block;height:3px;border-radius:2px;background:oklch(0.25 0.06 262 / .15);overflow:hidden}
+.hw2-prog{position:absolute;inset:0;background:var(--ink);transform:translate3d(calc(-100% - 1px),0,0)}
+.hw2-prog.is-animating{animation:hw2-story 5s linear infinite}
+.hw2-prog.is-done{animation:none;transform:translateZ(0)}
+@keyframes hw2-story{0%{transform:translate3d(calc(-100% - 1px),0,0)}to{transform:translateZ(0)}}
+.hw2-tl{font-size:.9375rem;font-weight:700;line-height:1.2;opacity:.5;transition:opacity var(--t-dur) var(--t-chrome)}
+.hw2-tl .num{color:var(--muted)}
+.hw2-tab[aria-selected="true"] .hw2-tl{opacity:1}
+/* R26: a length of step flashing bends around the tab's corner; press snaps it flat, then it re-bends */
+.hw2-fl{right:-7px;top:-6px;width:22px;height:22px;opacity:0;transition:opacity var(--t-dur) var(--t-chrome)}
+.hw2-fl path{fill:none;stroke:#8a93a8;stroke-width:3.4;stroke-linecap:square}
+.hw2-fl-v{transform-box:view-box;transform-origin:19px 3px;transform:rotate(-90deg);transition:transform var(--t-dur) var(--t-chrome)}
+@media (hover:hover){.hw2-tab:hover .hw2-fl{opacity:1}.hw2-tab:hover .hw2-fl-v{transform:none}}
+.hw2-tab:focus-visible .hw2-fl{opacity:1}.hw2-tab:focus-visible .hw2-fl-v{transform:none}
+.hw2-tab.is-press .hw2-fl{opacity:1}
+.hw2-tab.is-press .hw2-fl-v{animation:hw2-snap .36s var(--t-chrome)}
+@keyframes hw2-snap{0%{transform:none}35%,65%{transform:rotate(-90deg)}100%{transform:none}}
+/* R27: the pause bars become two shingle tabs; press flips them */
+.hw2-pause{position:relative;flex:none;display:grid;place-items:center;width:44px;height:44px;margin-top:-10px;padding:0;border:2px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer}
+.hw2-pause svg{width:18px;height:18px;overflow:visible}
+.hw2-pz{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.hw2-py{fill:currentColor}
+.hw2-pz,.hw2-py,.hw2-tb{transition:opacity .15s var(--t-chrome)}
+.hw2-pause[aria-pressed="false"] .hw2-py,.hw2-pause[aria-pressed="true"] .hw2-pz{display:none}
+.hw2-tb{opacity:0}
+.hw2-tb path{fill:var(--shingle);stroke:var(--ink);stroke-width:1.4}
+.hw2-tb1,.hw2-tb2{transform-box:fill-box;transform-origin:50% 0}
+@media (hover:hover){.hw2-pause:hover .hw2-tb{opacity:1}.hw2-pause:hover .hw2-pz,.hw2-pause:hover .hw2-py{opacity:0}}
+.hw2-pause:focus-visible .hw2-tb{opacity:1}.hw2-pause:focus-visible .hw2-pz,.hw2-pause:focus-visible .hw2-py{opacity:0}
+.hw2-pause.is-press .hw2-tb{opacity:1}
+.hw2-pause.is-press .hw2-tb1{animation:hw2-flip .36s var(--t-chrome)}
+.hw2-pause.is-press .hw2-tb2{animation:hw2-flip .36s var(--t-chrome) .06s}
+@keyframes hw2-flip{50%{transform:scaleY(-1)}}
+/* the diapo: every step in one grid cell, the visible one fades in over the others */
+.hw2-diapo{display:grid}
+.hw2-item{grid-area:1/1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);opacity:0;transition:opacity .4s var(--t-diapo)}
+.hw2-item.is-visible{opacity:1}
+.hw2-scene{display:block;width:100%;height:auto;aspect-ratio:960/420;align-self:stretch;background:linear-gradient(#f4f8ff,#fff)}
+.hw2-cap{display:grid;align-content:center;gap:18px;padding:32px clamp(24px,3vw,44px);border-left:2px solid var(--ink)}
+.hw2-t{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.6rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}
+.hw2-cd{display:grid;gap:16px;font-size:var(--t-lead);line-height:1.45;max-width:46ch}
+.hw2-call{justify-self:start;display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:800;text-decoration:none}
+/* R41: a coiled phone cord stretches out of the link; press lets it spring back */
+.hw2-cord{left:calc(100% - 4px);top:50%;width:60px;height:18px;margin-top:-9px;opacity:0;transform:scaleX(.18);transform-origin:0 50%;transition:opacity .15s var(--t-chrome),transform .4s var(--ease-spring)}
+.hw2-cord path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover){.hw2-call:hover .hw2-cord{opacity:1;transform:none}}
+.hw2-call:focus-visible .hw2-cord{opacity:1;transform:none}
+.hw2-call.is-press .hw2-cord{opacity:1;animation:hw2-coil .4s var(--ease-spring)}
+@keyframes hw2-coil{0%{transform:none}35%{transform:scaleX(.15)}100%{transform:none}}
+/* the three scenes */
+.hw2-far path{fill:oklch(0.25 0.06 262 / .06)}
+.hw2-s2 .hw2-far path{fill:none;stroke:oklch(0.25 0.06 262 / .08);stroke-width:1.5}
+.hw2-gr{stroke:var(--ink);stroke-width:3}
+.s1-wall,.s3-wall{fill:#fff;stroke:var(--ink);stroke-width:3}
+.s1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-fas{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
+.s1-win,.s3-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
+.s1-door,.s3-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
+.s1-sign{fill:var(--ink)}
+.s1-hrs{font:800 15px/1 "Epilogue",sans-serif;fill:#fff;letter-spacing:.06em}
+.s1-disc{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.s1-base,.s1-hset{fill:#fff;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-keys{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.s1-hset{transform-box:fill-box;transform-origin:15% 100%}
+/* step 1 plays: the office lights come on, then the handset lifts off its base (the call is answered) */
+.hw2-item.is-visible .s1-win{animation:hw2-lit .3s var(--t-chrome) .25s both}
+@keyframes hw2-lit{to{fill:#ffd36b}}
+.hw2-item.is-visible .s1-hset{animation:hw2-lift .5s cubic-bezier(.3,1.5,.5,1) .7s both}
+@keyframes hw2-lift{to{transform:translate(-6px,-26px) rotate(-14deg)}}
+.s2-plane{fill:#d9b98a;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s2-seam{stroke:oklch(0.25 0.06 262 / .25);stroke-width:2}
+.s2-dim{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
+.s2-blade{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.s2-tk{stroke:var(--ink);stroke-width:1.5}
+.s2-hook{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.s2-case{fill:var(--blue);stroke:var(--ink);stroke-width:3}
+.s2-hub{fill:#fff;stroke:var(--ink);stroke-width:3}
+/* step 2 plays: the tape runs out of its case across the eave, then the dimension lines draw along ridge and rake */
+.hw2-item.is-visible .s2-tape{animation:hw2-pull .9s cubic-bezier(.2,.8,.2,1) .2s both}
+@keyframes hw2-pull{from{transform:translateX(-572px)}}
+.hw2-item.is-visible .s2-dim{animation:hw2-draw .5s var(--t-chrome) both}
+.hw2-item.is-visible .s2-dim1{animation-delay:1s}.hw2-item.is-visible .s2-dim2{animation-delay:1.3s}
+@keyframes hw2-draw{from{stroke-dashoffset:900}}
+.s3-sun{fill:var(--sun)}
+.s3-sh{fill:var(--shingle)}
+.s3-crs{fill:none;stroke:oklch(1 0 0 / .22);stroke-width:1.5}
+.s3-edge{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.s3-ridge{fill:none;stroke:var(--ink);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.s3-puff{fill:#fff;stroke:var(--ink);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:50% 100%}
+/* step 3 plays: the finished roof comes down onto the walls, settles, and a puff of dust leaves each eave */
+.hw2-item.is-visible .s3-roof{animation:hw2-set .7s cubic-bezier(.3,1.5,.5,1) .2s both}
+@keyframes hw2-set{from{transform:translateY(-150px);opacity:0}40%{opacity:1}}
+.hw2-item.is-visible .s3-puff{animation:hw2-puff .7s ease-out .6s both}
+@keyframes hw2-puff{0%{opacity:0;transform:scale(.3)}30%{opacity:1}100%{opacity:0;transform:translateY(-8px) scale(1.2)}}
+@media (max-width:900px){
+  .hw2-item{grid-template-columns:1fr}
+  .hw2-cap{border-left:0;border-top:2px solid var(--ink);padding:22px 20px 26px}
 }
-html[data-motion="reduced"] .hw2-track{height:auto}
-html[data-motion="reduced"] .hw2-stage{position:static;height:auto;padding:clamp(4rem,3rem + 4vw,7rem) 0 calc(clamp(4rem,3rem + 4vw,7rem) + var(--mbar))}
-html[data-motion="reduced"] .hw2-step{opacity:1}
+@media (max-width:760px){
+  .hw2-pager{padding:14px 14px 4px;gap:10px}
+  .hw2-tl{font-size:.8125rem}
+  .hw2-scene{aspect-ratio:16/9}
+}
+html[data-motion="reduced"] .hw2-item{transition:none}
+html[data-motion="reduced"] .hw2-bar,html[data-motion="reduced"] .hw2-pause{visibility:hidden}
 
 /* ---------- v3: three verbs, each with its own drawn tool and its deliverables; a ladder joins them */
 .hw3{--vbg:#fff;background:#fff;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}

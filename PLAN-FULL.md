@@ -106,6 +106,7 @@ Owner tooling (the 1·2·3 version switchers, the helper picker) is excluded: it
 | R38 | Call V3 band | it slows to 0.3 and the seams catch a light sweep | (it is the tel link) | sweep |
 | R39 | Call V3 Call | a chimney rises on the pill | smoke puffs | fly / puff |
 | R40 | Call V3 pause | the bars draw themselves | the icon bounces | draw / bounce |
+| R41 | How V2 Call link (added in Phase 4: the rebuilt V2 needed one) | a coiled phone cord stretches out of the link | the cord springs back | stretch / recoil |
 
 ### G5 Motion and weight law
 - **F17:** reveal-level motion at 0.15–0.3 s. **One signature interactive: the hero headline system**, in each of the three hero versions.

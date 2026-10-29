@@ -4,8 +4,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EASE, beats } from '../../js/fx.js';
 
-const NS = 'http://www.w3.org/2000/svg';
-
 // v1 ⟦S1325⟧ scroll-progress-timeline: a real <ol>; one line runs from the first step's dot centre to the last; the
 // fill scales with normalized progress = (anchor - lineStart) / (lineEnd - lineStart), clamped, written in one rAF;
 // a step activates as the head crosses it (aria-current="step"); inactive steps stay readable; left rail on phones;
@@ -49,46 +47,36 @@ function spine(root, c) {
   return () => { ro.disconnect(); removeEventListener('scroll', onScroll); };
 }
 
-// v2 ⟦S1340⟧ threejs-towers (a building that builds itself: one rising plane, finished work below it, bare framing above,
-// stage captions naming the work as it passes, a quiet percentage in the corner), ported to SVG, with ⟦S1326⟧'s progress
-// math (a sticky stage; state is a pure function of normalized progress, no implicit easing; copy stops 0 / 0.42 / 0.78).
-// Adapted to the three real steps: 0 Rachel's phone rings over a bare frame; 0.42 the written estimate, where the roof's
-// layers are named and come apart in CSS 3D so each line is a visible layer (3D earns its place here); 0.78 the roof is
-// on. CSS sticky, not a GSAP pin (the only sticky stage on the page). Reduced motion: no sticky, the finished frame.
-function build(root, c) {
-  const track = root.querySelector('.hw2-track'), clip = root.querySelector('.hw2-clip'), line = root.querySelector('.hw2-line');
-  const layers = [...root.querySelectorAll('.ly')], tags = [...root.querySelectorAll('.tag')], steps = [...root.querySelectorAll('.hw2-step')];
-  const phone = root.querySelector('.hw2-phone'), pct = root.querySelector('.hw2-pct'), sun = root.querySelector('.hw2-sun'), arc = root.querySelector('.hw2-arc'), svg = root.querySelector('.hw2-svg');
-  const L = arc.getTotalLength();
-  const STOPS = [0, 0.42, 0.78];
-  // the estimate's ghost: an unclipped outline copy of every layer that comes apart and is named before the build
-  const solid = root.querySelector('.hw2-layers'), ghost = solid.cloneNode(true);
-  ghost.removeAttribute('clip-path'); ghost.setAttribute('class', 'hw2-ghost'); solid.before(ghost);
-  const ghosts = [...ghost.querySelectorAll('.ly')];
-  root.__hwClean = () => ghost.remove();
-  const render = p => {
-    // copy stops
-    const s = p >= STOPS[2] ? 2 : p >= STOPS[1] ? 1 : 0; steps.forEach((el, i) => el.classList.toggle('is-on', i === s));
-    // phone over the bare frame for the first stop
-    gsap.set(phone, { opacity: gsap.utils.clamp(0, 1, 1 - (p - 0.3) / 0.08), scale: 1 + 0.06 * Math.sin(p * 60) * (p < 0.3 ? 1 : 0), svgOrigin: '400 250' });
-    // tags (the estimate's lines) light up one by one between 0.3 and 0.42, and stay
-    tags.forEach((t, i) => t.classList.toggle('is-on', p >= 0.3 + i * 0.03));
-    // the explode: the ghost layers come apart (translateY in SVG units, depth by CSS 3D) around the estimate stop
-    const ex = gsap.utils.clamp(0, 1, Math.min((p - 0.28) / 0.12, (0.6 - p) / 0.08));
-    ghosts.forEach((ly, i) => gsap.set(ly, { y: -ex * (i + 1) * 28, z: ex * (i + 1) * 30 }));
-    gsap.set(ghost, { opacity: gsap.utils.clamp(0, 1, Math.min((p - 0.26) / 0.04, (0.86 - p) / 0.06)) });
-    gsap.set(svg, { rotationX: ex * 12 });
-    // build: the line rises from the ground to above the ridge between 0.55 and 0.85; finished work below it
-    const b = gsap.utils.clamp(0, 1, (p - 0.55) / 0.3), y = 560 - b * 500;
-    clip.setAttribute('y', y.toFixed(1)); line.setAttribute('transform', `translate(0 ${(y - 560).toFixed(1)})`); line.style.opacity = b > 0 && b < 1 ? 1 : 0;
-    // the sun walks its arc with the whole sequence; the corner percentage
-    const pt = arc.getPointAtLength(L * p); sun.setAttribute('cx', pt.x.toFixed(1)); sun.setAttribute('cy', pt.y.toFixed(1));
-    pct.textContent = Math.round(p * 100) + '%';
+// v2 [BANK] UZIK story pager (deep read 221; live CSS read: .diapo__item / .story__pager-progress) + [BANK] P74: the
+// steps are stacked; the visible one crossfades in (opacity 0.4s cubic-bezier(0.25,0.1,0.25,1)); in the pager, past bars
+// are full (.is-done) and the current one runs storyPagerProgress 5s linear infinite (.is-animating), and that run IS the
+// dwell: the step advances on animationiteration, so timing lives in one place; chrome on the house curve
+// (0.86,0.1,0.14,0.9) at 300ms. Adapted: three drawn roofing scenes for the three real steps, each playing as it shows;
+// tabs are real tabs (arrow keys, aria-selected, inactive panels inert); a pause button (WCAG 2.2.2); the dwell holds while
+// a tab has keyboard focus and while the story is off screen. Not pinned, nothing sticky. Reduced motion: no autoplay.
+function pager(root, c) {
+  const tabs = [...root.querySelectorAll('.hw2-tab')], items = [...root.querySelectorAll('.hw2-item')], bars = tabs.map(t => t.querySelector('.hw2-prog'));
+  const pause = root.querySelector('.hw2-pause'), list = root.querySelector('.hw2-tabs'), story = root.querySelector('.hw2-story');
+  let cur = 0, held = !c.motion, seen = false, keyed = false;
+  const run = () => { bars[cur].style.animationPlayState = c.motion && !held && seen && !keyed ? 'running' : 'paused'; pause.setAttribute('aria-pressed', String(held)); };
+  const go = i => {
+    cur = (i + items.length) % items.length;
+    items.forEach((it, k) => { const on = k === cur; it.classList.toggle('is-visible', on); it.inert = !on; });
+    tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === cur)); t.tabIndex = k === cur ? 0 : -1; bars[k].classList.remove('is-animating'); bars[k].classList.toggle('is-done', k < cur); bars[k].style.animationPlayState = ''; });
+    if (c.motion) { void bars[cur].offsetWidth; bars[cur].classList.add('is-animating'); }
+    run();
   };
-  if (!c.motion) { render(1); return () => root.__hwClean(); }
-  render(0);
-  ScrollTrigger.create({ trigger: track, start: 'top top', end: 'bottom bottom', scrub: true, onUpdate: s => render(s.progress), onRefresh: s => render(s.progress) });
-  return () => root.__hwClean();
+  const onIter = e => { if (e.target === bars[cur]) go(cur + 1); };
+  const onClick = e => { const t = e.target.closest('.hw2-tab'); if (t) { go(tabs.indexOf(t)); return; } if (e.target.closest('.hw2-pause')) { held = !held; run(); } };
+  const KEYS = { ArrowRight: 1, ArrowLeft: -1, Home: 'first', End: 'last' };
+  const onKey = e => { const k = KEYS[e.key]; if (k === undefined) return; e.preventDefault(); go(k === 'first' ? 0 : k === 'last' ? items.length - 1 : cur + k); tabs[cur].focus(); };
+  const onFocus = e => { keyed = !!(e.target.matches && e.target.matches(':focus-visible')); run(); };
+  const onBlur = e => { if (!list.contains(e.relatedTarget)) { keyed = false; run(); } };
+  list.addEventListener('animationiteration', onIter); root.addEventListener('click', onClick); list.addEventListener('keydown', onKey); list.addEventListener('focusin', onFocus); list.addEventListener('focusout', onBlur);
+  const io = new IntersectionObserver(([e]) => { seen = e.isIntersecting; run(); }, { threshold: 0.35 }); io.observe(story);
+  go(0);
+  if (c.motion) beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note'), story]);
+  return () => { io.disconnect(); list.removeEventListener('animationiteration', onIter); root.removeEventListener('click', onClick); list.removeEventListener('keydown', onKey); list.removeEventListener('focusin', onFocus); list.removeEventListener('focusout', onBlur); };
 }
 
 // v3 [BANK] Q409 Grow My Business process (CROWN: numbered steps, each naming what the customer gets as deliverable
@@ -109,11 +97,19 @@ function verbs(root, c) {
   const light = n => [...rungs.children].forEach((r, i) => r.classList.toggle('is-on', i < n * 5));
   if (!c.motion) { light(3); return () => ro.disconnect(); }
   beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]);
+  // bg: the ladder leans up to 1 degree toward the pointer, as if someone just set a hand on it
+  let onMove = null, onLeave = null;
+  if (c.fine) {
+    const lean = gsap.quickTo(lad, 'rotation', { duration: 0.6, ease: 'power3.out' });
+    onMove = e => { if (e.pointerType !== 'mouse') return; const r = lad.getBoundingClientRect(), narrow = r.height > r.width; const d = narrow ? (e.clientY - (r.top + r.height / 2)) / (r.height / 2) : (e.clientX - (r.left + r.width / 2)) / (r.width / 2); lean(gsap.utils.clamp(-1, 1, d) * (narrow ? -1 : 1)); };
+    onLeave = () => lean(0);
+    root.addEventListener('pointermove', onMove); root.addEventListener('pointerleave', onLeave);
+  }
   cols.forEach((col, i) => {
     gsap.fromTo(col.children, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform,opacity,visibility', scrollTrigger: { trigger: col, start: 'top bottom-=10%', once: true } });
     ScrollTrigger.create({ trigger: col, start: 'top 70%', onEnter: () => light(i + 1), onLeaveBack: () => light(i) });
   });
-  return () => ro.disconnect();
+  return () => { ro.disconnect(); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } };
 }
 
-export default { 1: spine, 2: build, 3: verbs };
+export default { 1: spine, 2: pager, 3: verbs };
