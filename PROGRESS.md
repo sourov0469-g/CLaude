@@ -53,6 +53,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 | C8 | #289 pause-on-hover only vs WCAG 2.2.2 | A visible pause button as well, plus offscreen rest. |
 | C9 | Rule 11 "no roof-anatomy lessons" vs V7 Hero V3 (named roof parts) and V7 How V2 (named layers) | Both removed (Hero V3 and How V2 rebuilt). |
 | C10 | §4 "every interactive element has its own reaction" vs groups of siblings (6 tiles, 24 chips) | One reaction per control group; groups never share a reaction with another group or element. |
+| C11 | v2 §3 is a closed list vs the written, line-by-line estimate (Hero V2 link label, How V1–V3 step 2, Call V1–V3) | The estimate line is the firm's own published claim, recorded in the repo pack `rembrandt/rembrandt-pack.md` ("Their published claims & systems (use only these)": "written line-item estimate BEFORE any work starts"). It is not general knowledge and not one of §1.3's banned inventions (reviews, quotes, stats, towns, prices, credentials). Kept, worded no stronger than the pack, and flagged in the report for the owner. The Towns versions' Census figures are public data with their source printed on the page; they are kept and flagged the same way. |
 
 ## Open issues
 (none yet)
@@ -340,3 +341,43 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
     - A1: S1474 parallel-concepts / S1502 fingerprint (13971–14247); S1320 one scroll engine (12328–12501).
     - A2: F17/F18 + checklist 19/20 (6085, 6269, 6278); builder brief cost lab and standing standards (6691); cross-site rules (4605); cursor rule with the system cursor kept usable (5533); anti-pattern of scene pages and loaders (5515).
 - **Next:** task #30, the verdict audit of 21 versions × 3 binary verdicts against this shortlist.
+
+### v2 verdict audit (task #30)
+- **Method:** each version graded against §14's three binary verdicts.
+  - **Facts grounded:** visible text extracted from every `v*.html` and read against §3; links checked (search URLs only, no fabricated profile URLs).
+  - **Reference-intent match:** TRACEABILITY.md row vs the build and the full-read shortlist.
+  - **Generic/default feel:** both contact sheets (`qa/gate/sheet-{1440,375}.jpg`) judged against the bank's anti-generic lenses (S0095, S1474, F17) and the §5 bans.
+- **Failures found (2):**
+  - **Work V2:** a sparse 4×4 lattice, ten empty cells, a checkerboard at 375. It read as unfinished. Upgraded: commit 34a6e0a.
+  - **How V3:** an icon-topped three-card row, the default "how it works" composition. Rebuilt: commit de5899f.
+  - Both now pass with evidence (TRACEABILITY.md).
+- **Verdict table (after fixes):**
+
+| Section | V | Kept / upgraded / rebuilt | Facts grounded | Reference-intent match | Generic feel |
+|---|---|---|---|---|---|
+| Hero | 1 | rebuilt (P1) | YES | YES (⟦S0534⟧ tile depth field + sweep, shingle cells) | NO |
+| Hero | 2 | rebuilt (P1) | YES (C11: "written estimate" link label) | YES (Variable Proximity gaussian + idle wave) | NO |
+| Hero | 3 | rebuilt (P1) | YES (24 pack towns) | YES (#289 + P73 timings) | NO |
+| Reviews | 1 | kept, untouched | YES (Constellation's own wording; see flags) | YES (owner-kept) | NO |
+| Reviews | 2 | upgraded (P2) | YES (search links only) | YES (Cenco Verify + KBF caveat) | NO |
+| Reviews | 3 | rebuilt (P2) | YES | YES (Count Up roll mode) | NO |
+| Work | 1 | upgraded (P3) | YES (ba2 only before/after) | YES (Q361 horizontalLoop) | NO |
+| Work | 2 | upgraded (P3, again in audit) | YES | YES (Q157 push via tracks, Q147 cap) | NO (was YES: fixed) |
+| Work | 3 | upgraded (P3) | YES (ba2 pair) | YES (Q38 blinds as courses) | NO |
+| Family | 1 | upgraded (P4) | YES | YES (Q95 Masked Heading) | NO |
+| Family | 2 | upgraded (P4) | YES | YES (⟦S1327⟧ word scrub) | NO |
+| Family | 3 | upgraded (P4) | YES (address, §3 facts) | YES (⟦S1362⟧ wireframe annotation) | NO |
+| How | 1 | upgraded (P4) | YES (C11) | YES (⟦S1325⟧ spine) | NO |
+| How | 2 | rebuilt (P4) | YES (C11) | YES (UZIK live CSS) | NO |
+| How | 3 | rebuilt in audit | YES (C11) | YES (Q409 trail, Q411 verbs, Signal-A rows, S18) | NO (was YES: fixed) |
+| Towns | 1 | upgraded (P4) | YES (Census, sourced on page) | YES (Austin Pro map) | NO |
+| Towns | 2 | upgraded (P4) | YES (ACS, sourced on page) | YES (Q4 metric-led cards) | NO |
+| Towns | 3 | upgraded (P4) | YES | YES (ROTTLER finder / West London checker) | NO |
+| Call | 1 | upgraded (P4) | YES (C11; hours computed, never "open now") | YES (F9/F14 + OFFF wordmark + gooey drops) | NO |
+| Call | 2 | upgraded (P4) | YES (C11) | YES (Shazam morph timings) | NO |
+| Call | 3 | upgraded (P4) | YES (C11) | YES (Q114 giant marquee, 60 s) | NO |
+
+- **Flags carried to the report:**
+  - The Constellation's caption says "BBB A+ since 2001" and "$2M liability cover". §3 wording is "accredited since 2001" and "liability insurance", but the Constellation is untouchable by rule 4.
+  - Code weight is over F18's band.
+  - C11: the estimate claim and the Census data.
