@@ -163,3 +163,43 @@ html.cmp-on .cmp{display:block}
 .rx{position:relative}
 .rx-s{position:absolute;pointer-events:none;overflow:visible}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}.rx *,.rx{transition-duration:.01ms!important}}
+
+/* Chrome reactions (Rule 3: every interactive element has its own SVG reaction; hover and press differ). Each is a
+   different roofing part: nav and bar call = a ridge vent (hover draws it on, press flaps the louvers); logo = a gable
+   roof rises behind the pill, so it reads as home (press pops it); footer logo = a ladder up (press lights the rungs in
+   turn); footer phone = nails (hover sets them, press drives them flush); bar estimate = a chalk line (press snaps it). */
+.btn .ch-vent{left:20px;right:20px;top:-9px;width:auto;height:11px;clip-path:inset(-4px 100% 0 0);transition:clip-path .2s var(--ease-x)}
+.ch-vent-cap{fill:var(--sun);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.ch-vent-sl{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:50% 100%}
+@media (hover:hover){.ch-call:hover .ch-vent{clip-path:inset(-4px 0 0 0)}}
+.ch-call:focus-visible .ch-vent,.ch-call.is-press .ch-vent{clip-path:inset(-4px 0 0 0)}
+.ch-call.is-press .ch-vent-sl{animation:ch-louver .4s var(--ease-x)}
+@keyframes ch-louver{0%{scale:1 1}35%{scale:1 .25}100%{scale:1 1}}
+.ch-gable{left:12%;width:76%;top:-15px;height:18px;z-index:-1;opacity:0;translate:0 12px;transition:opacity .2s var(--ease-x),translate .22s var(--ease-x)}
+.ch-gable path{fill:#fff;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+@media (hover:hover){.ch-home:hover .ch-gable{opacity:1;translate:0 0}}
+.ch-home:focus-visible .ch-gable{opacity:1;translate:0 0}
+.ch-home.is-press .ch-gable{opacity:1;animation:ch-pop .3s var(--ease-spring)}
+@keyframes ch-pop{0%{translate:0 0}40%{translate:0 -4px}100%{translate:0 0}}
+.ch-up{position:relative}
+.ch-ladder{right:14px;bottom:calc(100% - 2px);width:22px;height:36px;opacity:0;translate:0 14px;transition:opacity .2s var(--ease-x),translate .22s var(--ease-x)}
+.ch-l-rail,.ch-l-rung{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round}
+@media (hover:hover){.ch-up:hover .ch-ladder{opacity:1;translate:0 0}}
+.ch-up:focus-visible .ch-ladder{opacity:1;translate:0 0}
+.ch-up.is-press .ch-ladder{opacity:1;translate:0 0}
+.ch-up.is-press .ch-l-rung{animation:ch-rung .45s var(--ease-x) calc(var(--i) * 70ms) both}
+@keyframes ch-rung{0%,100%{stroke:#fff}40%{stroke:var(--sun)}}
+.ch-ftel{position:relative;display:inline-block}
+.ch-nails{left:0;top:100%;width:44px;height:8px;fill:var(--sun)}
+.ch-nails g{opacity:0;translate:0 -3px;transition:opacity .15s var(--ease-x) calc(var(--i) * 40ms),translate .2s var(--ease-x) calc(var(--i) * 40ms)}
+@media (hover:hover){.ch-ftel:hover .ch-nails g{opacity:1;translate:0 0}}
+.ch-ftel:focus-visible .ch-nails g{opacity:1;translate:0 0}
+.ch-ftel.is-press .ch-nails g{opacity:1;animation:ch-drive .3s var(--ease-x) calc(var(--i) * 60ms) both}
+@keyframes ch-drive{0%{translate:0 -3px}60%{translate:0 2px}100%{translate:0 2px}}
+.ch-est-t{position:relative}
+.btn .ch-chalk{left:0;bottom:-6px;width:100%;height:6px;overflow:visible}
+.ch-chalk path{fill:none;stroke:var(--chalk);stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke;clip-path:inset(0 100% 0 0);transition:clip-path .2s var(--ease-x)}
+@media (hover:hover){.ch-est:hover .ch-chalk path{clip-path:inset(0)}}
+.ch-est:focus-visible .ch-chalk path{clip-path:inset(0)}
+.ch-est.is-press .ch-chalk path{clip-path:inset(0);stroke:var(--blue);animation:hx-snap .26s ease-out}
+@keyframes hx-snap{0%{transform:translateY(0)}25%{transform:translateY(2px)}50%{transform:translateY(-1.5px)}75%{transform:translateY(.8px)}100%{transform:translateY(0)}}
