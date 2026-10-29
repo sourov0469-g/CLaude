@@ -537,6 +537,25 @@
     }
   };
 
+  /* work v3: two strips of masking tape stick the button to the board; click tears one off */
+  R.masking = {
+    art: function (w, h) {
+      function strip(cx, cy, a, cls) {
+        return '<g class="' + cls + '" transform="translate(' + cx + ' ' + cy + ') rotate(' + a + ')"><path d="M-20 -7 L20 -7 L22 -4 L19 -1 L22 2 L20 7 L-20 7 L-22 4 L-19 1 L-22 -2 Z" fill="#e9dfc2" fill-opacity=".9" stroke="#b9ad8c" stroke-width=".8"/></g>';
+      }
+      return strip(P + 6, P + 2, -32, 'ta') + strip(P + w - 6, P + h - 2, -32, 'tb');
+    },
+    hover: function (svg) {
+      return gsap.timeline({ paused: true })
+        .fromTo(one(svg, '.ta'), { opacity: 0, scale: 1.6, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: .28, ease: 'back.out(2.4)' }, 0)
+        .fromTo(one(svg, '.tb'), { opacity: 0, scale: 1.6, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: .28, ease: 'back.out(2.4)' }, .12);
+    },
+    click: function (svg) {
+      return gsap.timeline().to(one(svg, '.tb'), { x: 18, y: -20, opacity: 0, duration: .35, ease: 'power2.in' })
+        .set(one(svg, '.tb'), { x: 0, y: 0, opacity: 1 }, .9);
+    }
+  };
+
   EZ.REACTIONS = R;
 
   /* ---------- binding ---------- */

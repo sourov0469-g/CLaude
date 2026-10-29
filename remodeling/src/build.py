@@ -71,10 +71,11 @@ def main():
     page_text = "\n".join(sections_html) + "\n".join(js)
     for m in re.finditer(r"data-(?:bg-)?img=\"([a-z0-9-]+)\"|EZ\.img\('([a-z0-9-]+)'\)", page_text):
         used.add(m.group(1) or m.group(2))
+    data_text = "".join(open(os.path.join(HERE, "data", n)).read() for n in os.listdir(os.path.join(HERE, "data")) if n.endswith(".json"))
     # keys named in JS data (e.g. before/after pair tables) count as used too
     for name in os.listdir(IMG):
         key, ext = os.path.splitext(name)
-        if ext == ".webp" and ("'" + key + "'" in page_text or '"' + key + '"' in page_text):
+        if ext == ".webp" and ("'" + key + "'" in page_text or '"' + key + '"' in page_text or '"' + key + '"' in data_text):
             used.add(key)
     store = {}
     for name in sorted(os.listdir(IMG)):
