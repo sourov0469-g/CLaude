@@ -63,6 +63,11 @@ function setUrl() {
   if (v) u.searchParams.set('v', v); else u.searchParams.delete('v');
   try { history.replaceState(null, '', u); } catch (e) { /* file:// in some browsers */ }
 }
+// ⟦S0736⟧ tweaks pattern: choices persist client-side under a per-artifact key and are re-applied at first paint;
+// T hides or shows the controls, R resets to defaults. One knob per section (its version).
+const KEY = 'tweaks-rembrandt-home';
+const store = { get() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* private mode */ } } };
+function save() { const o = {}; for (const [id, s] of live) if (s.v !== 1) o[id] = s.v; store.set(o); }
 function readUrl() { // ?v=hero2,proof3 (strict: unknown ids or versions are ignored)
   const out = {}; let raw = '';
   try { raw = new URL(location.href).searchParams.get('v') || ''; } catch (e) { return out; }
@@ -82,7 +87,7 @@ export function switchTo(sec, v) {
   if (lenis) { lenis.scrollTo(y, { immediate: true, force: true }); lenis.start(); } else window.scrollTo(0, y);
   ScrollTrigger.update();
   const p = sec.querySelector(`input[value="${v}"]`); if (p && !p.checked) p.checked = true;
-  setUrl();
+  setUrl(); save();
   announce(`${sec.querySelector('legend').textContent.replace(': choose a version', '')}: version ${v} of 3`);
 }
 
@@ -95,19 +100,24 @@ export function boot(mods) {
     t.innerHTML = sec.querySelector('.stage').innerHTML; document.body.append(t);
   }
   startLenis();
-  const want = readUrl();
+  // [BANK] Q107 Anton & Irene: one reduced-motion flag on <html>, read by CSS and JS
+  const flag = () => { document.documentElement.dataset.motion = RM.matches ? 'reduced' : 'full'; };
+  flag(); RM.addEventListener('change', flag);
+  const saved = store.get(), url = readUrl();
+  const want = Object.keys(url).length ? url : Object.fromEntries(Object.entries(saved).filter(([id, v]) => MODS[id] && [1, 2, 3].includes(v)));
   for (const sec of ORDER) mount(sec, want[sec.dataset.section] || 1, !!want[sec.dataset.section] && want[sec.dataset.section] !== 1);
   for (const sec of ORDER) {
     const p = sec.querySelector(`input[value="${live.get(sec.dataset.section).v}"]`); if (p) p.checked = true;
     sec.querySelector('.pick').addEventListener('change', e => switchTo(sec, +e.target.value));
   }
-  // keys 1, 2, 3 switch the section in view; R replays it (S1303 picker spec)
+  // keys 1, 2, 3 switch the section in view (S1303 picker spec); T and R per S0736
   let inView = ORDER[0];
   for (const sec of ORDER) ScrollTrigger.create({ trigger: sec, start: 'top center', end: 'bottom center', onToggle: s => { if (s.isActive) inView = sec; } });
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable]')) return;
     if (/^[123]$/.test(e.key)) switchTo(inView, +e.key);
-    else if (e.key === 'r' || e.key === 'R') { const s = live.get(inView.dataset.section); mount(inView, s.v, true); sortRefresh(); }
+    else if (e.key === 't' || e.key === 'T') document.documentElement.classList.toggle('picks-off');
+    else if (e.key === 'r' || e.key === 'R') { for (const sec of ORDER) if (live.get(sec.dataset.section).v !== 1) switchTo(sec, 1); store.set({}); }
   });
   // one filled call per view (S1435, G6 #1): the nav's call button waits until the hero's own has scrolled away
   const nav = document.querySelector('.nav'), hero = document.getElementById('hero');

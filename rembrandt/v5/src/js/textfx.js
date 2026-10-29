@@ -1,4 +1,6 @@
 // Headings answer the cursor (owner: "headings and text shift/respond as it passes").
+// Reference: [BANK] Variable Proximity (React Bits): per-letter falloff inside a radius of about 1.0x the font size,
+// exponential falloff (1 - d/r)^2, damping 1 - exp(-dt / (0.2 x 400ms)). Adapted from weight swell to a transform lift.
 // Characters near the pointer lift and grow a little, by proximity; transform only (S0019 perf), rects read once on
 // enter and on scroll, never per pointer move (S1330). Movement stays under 16px (S1321 directional hover).
 
@@ -32,7 +34,7 @@ function measure(a) {
 function tick(t) {
   raf = 0;
   const dt = Math.min((t - (last || t)) / 1000, 1 / 30); last = t;
-  const a = 1 - Math.pow(1 - 0.16, dt * 60); // S1330 frame-rate independent damping
+  const a = 1 - Math.exp(-dt / 0.08); // Variable Proximity damping, smoothing 0.2
   let moving = false;
   for (const set of [active, leaving]) if (set) for (const c of set.chars) {
     c.cy += (c.ty - c.cy) * a; c.cs += (c.ts - c.cs) * a;
@@ -49,7 +51,7 @@ export function textEnter(h) {
   textLeave();
   const fs = parseFloat(getComputedStyle(h).fontSize) || 48;
   const chars = [...h.querySelectorAll('.ch')].map(el => { let c = state.get(el); if (!c) { c = { el, cy: 0, cs: 1, ty: 0, ts: 1 }; state.set(el, c); } return c; });
-  active = { h, chars, R: Math.max(110, fs * 1.5), lift: Math.min(14, fs * 0.11) };
+  active = { h, chars, R: Math.max(60, fs * 1.0), lift: Math.min(12, fs * 0.1) };
   measure(active);
 }
 export function textMove(x, y) {

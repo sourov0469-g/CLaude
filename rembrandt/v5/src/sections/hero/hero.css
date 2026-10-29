@@ -1,69 +1,119 @@
-/* HERO: three versions. v1 Daylight (WebGL relight), v2 Aperture (pinned frame that grows), v3 Blueprint (S1324 spotlight). */
-.hv{position:relative}
-.hv .t-lead{max-width:30ch}
+/* HERO. Three reference families (PLAN-V6): v1 ⟦S1321⟧ cinematic full-bleed, v2 [BANK] Smeulders project carousel with
+   image-filled display type, v3 [BANK] West London crowned trade split at the F17 dose. */
+.hx{position:relative;overflow:clip}
 
-/* v1 Daylight: Z composition, headline over the canopy top-left, actions bottom-right; the yard sign stays clear */
-.hv1{min-height:max(640px,100svh);display:grid;grid-template-rows:auto 1fr auto;color:#fff;background:var(--ink);overflow:clip}
-.hv1-media{position:absolute;inset:-7% 0}
-.hv1-pd{position:absolute;inset:-2%}
-.hv1-img,.hv1-gl{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:8% 50%}
-.hv1-gl{opacity:0;transition:opacity .6s var(--ease-out)}
-.hv1-gl.on{opacity:1}
-.hv1-scrim{position:absolute;inset:0;pointer-events:none;background:
-  linear-gradient(180deg,rgb(6 16 42/.82) 0%,rgb(6 16 42/.66) 24%,rgb(6 16 42/.34) 38%,rgb(6 16 42/0) 54%),
-  linear-gradient(0deg,rgb(6 16 42/.84) 0%,rgb(6 16 42/.6) 20%,rgb(6 16 42/0) 44%)}
-.hv1-h{position:relative;z-index:2;text-shadow:0 2px 28px rgb(6 16 42/.55);padding:calc(var(--nav-h) + clamp(24px,5vh,56px)) var(--gutter) 0;max-width:16ch;box-sizing:content-box}
-.hv1-act{position:relative;z-index:2;grid-row:3;justify-self:end;display:grid;gap:20px;padding:0 var(--gutter) clamp(36px,7vh,72px);width:min(100%,560px);box-sizing:border-box}
-.hv1-act .tlink{color:#fff}
-@media (max-width:640px){ /* phones: the photo is a band with the sign in view; the actions sit on solid ink below it */
-  .hv1{background:var(--ink)}
-  .hv1-media{inset:0 0 34% 0}
-  .hv1-img,.hv1-gl{object-position:30% 50%}
-  .hv1-scrim{background:linear-gradient(180deg,rgb(6 16 42/.86) 0%,rgb(6 16 42/.72) 30%,rgb(6 16 42/.4) 42%,rgb(6 16 42/0) 54%),linear-gradient(0deg,var(--ink) 0%,var(--ink) 34%,rgb(11 31 77/0) 46%)}
-  .hv1-act{justify-self:stretch;padding-bottom:calc(36px + var(--mbar))}
+/* ---------- v1 ⟦S1321⟧: full-bleed Tudor job, clip image reveal, masked lines, overscanned parallax, mouse layers */
+.hx1{min-height:max(640px,100svh);background:var(--ink);color:#fff;display:flex;align-items:flex-end}
+.hx1-media{position:absolute;inset:0;overflow:hidden}
+.hx1-depth{position:absolute;inset:-24px -40px}
+.hx1-img{position:absolute;left:0;top:0;width:100%;height:120%;object-fit:cover;object-position:50% 40%;transform-origin:50% 40%}
+.hx1-shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,oklch(0.16 0.07 262 / .92) 0%,oklch(0.16 0.07 262 / .72) 26%,oklch(0.16 0.07 262 / .2) 56%,oklch(0.16 0.07 262 / 0) 72%),
+             linear-gradient(to right,oklch(0.16 0.07 262 / .5) 0%,oklch(0.16 0.07 262 / 0) 60%)}
+.hx1-copy{position:relative;display:grid;gap:clamp(18px,2.4vh,28px);padding:0 var(--gutter) calc(clamp(40px,8vh,88px) + var(--mbar));max-width:1320px}
+.hx1-h{font-size:clamp(2.6rem,7.2vw,7.75rem);font-weight:800;line-height:.98;letter-spacing:-.04em}
+.hx1-p{font-size:var(--t-lead);line-height:1.4;max-width:34ch;color:rgb(255 255 255/.9)}
+.hx1-cta .tlink{color:#fff}
+/* first paint: hidden only when the scripted reveal will run; a failsafe shows it if the script never does */
+@media (prefers-reduced-motion:no-preference){
+  html.js .hx1:not(.is-run) .hx1-media{clip-path:inset(0 0 100% 0);animation:hx-fail 0s 2.5s forwards}
+  html.js .hx1:not(.is-run) .hx1-copy{opacity:0;animation:hx-fail 0s 2.5s forwards}
+}
+@keyframes hx-fail{to{opacity:1;clip-path:inset(0)}}
+
+/* ---------- v2 [BANK] Smeulders: fullscreen jobs under a slow drift, the headline filled with the job's own photo */
+.hx2{min-height:max(640px,100svh);background:var(--ink);color:#fff;display:grid;grid-template-rows:1fr auto;align-items:end}
+.hx2-slides{position:absolute;inset:0;z-index:0}
+.hx2-slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden}
+.hx2-slide.is-on{opacity:1;visibility:visible}
+.hx2-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%}
+.hx2-shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,oklch(0.16 0.07 262 / .86) 0%,oklch(0.16 0.07 262 / .64) 32%,oklch(0.16 0.07 262 / .22) 60%,oklch(0.16 0.07 262 / .06) 100%)}
+.hx2-rule{position:absolute;background:oklch(1 0 0 / .32);pointer-events:none}
+.hx2-rule--v{top:0;bottom:0;right:calc(var(--gutter) + 132px);width:1px;transform-origin:50% 0}
+.hx2-rule--h{left:0;right:0;bottom:calc(132px + var(--mbar));height:1px;transform-origin:0 50%}
+.hx2-copy{position:relative;grid-row:1;align-self:end;display:grid;gap:18px;padding:0 var(--gutter) 40px;max-width:1240px}
+/* the image-filled title (live site: background-clip:text, background 150% wide with an offset, a glass rim of
+   stacked drop-shadows). Each word carries its own clip so words can rise one by one; JS aligns every word's
+   background to one shared image box, and the two layers crossfade when the job changes. */
+.hx2-h{position:relative;display:grid;font-size:clamp(2.6rem,7.4vw,8rem);font-weight:900;line-height:.98;letter-spacing:-.035em;
+  filter:drop-shadow(0 1px 0 oklch(1 0 0 / .9)) drop-shadow(0 -1px 0 oklch(1 0 0 / .55)) drop-shadow(1px 0 0 oklch(1 0 0 / .45)) drop-shadow(-1px 0 0 oklch(1 0 0 / .45)) drop-shadow(0 2px 2px oklch(0 0 0 / .35)) drop-shadow(0 12px 28px oklch(0.12 0.06 262 / .45))}
+.hx2-fill{grid-area:1/1;color:#fff}
+.hx2-fill:not(.is-on){visibility:hidden}
+.hx2-h.is-filled .hx2-fill{visibility:visible}
+.hx2-h.is-filled .hx2-w{display:inline-block;color:transparent;-webkit-text-fill-color:transparent;
+  background-image:linear-gradient(oklch(1 0 0 / .42),oklch(1 0 0 / .42)),var(--fill);background-repeat:no-repeat;
+  -webkit-background-clip:text;background-clip:text;padding:0 .02em;margin:0 -.02em}
+.hx2-sub{font-size:var(--t-lead);line-height:1.4;max-width:34ch;color:rgb(255 255 255/.92)}
+.hx2-cap{min-height:1.4em;font-size:var(--t-small);font-weight:600;color:rgb(255 255 255/.92)}
+.hx2-cap:empty{visibility:hidden}
+.hx2-ctl{position:relative;grid-row:2;display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:132px;padding:0 var(--gutter) var(--mbar)}
+.hx2-call{display:inline-flex;align-items:center;gap:16px;min-height:52px;font-weight:700;font-size:1.0625rem;color:#fff;text-decoration:none}
+.hx2-ring{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:1.5px solid oklch(1 0 0 / .8);background:var(--sun);color:var(--ink);
+  transition:background-color var(--dur-quick) var(--ease-out),scale var(--dur-fast) var(--ease-out)}
+.hx2-ring svg{width:24px;height:24px}
+@media (hover:hover){.hx2-call:hover .hx2-ring{background:var(--sun-hi);scale:1.06}}
+.hx2-call:active .hx2-ring{scale:.96}
+.hx2-nav{display:flex;align-items:center;gap:6px}
+.hx2-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid oklch(1 0 0 / .5);border-radius:50%;background:oklch(0.16 0.07 262 / .35);color:#fff;cursor:pointer;
+  transition:background-color var(--dur-quick) var(--ease-out),border-color var(--dur-quick) var(--ease-out)}
+.hx2-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hx2-btn .i-play{fill:currentColor;stroke:none}
+.hx2-pause[aria-pressed="false"] .i-play,.hx2-pause[aria-pressed="true"] .i-pause{display:none}
+@media (hover:hover){.hx2-btn:hover{background:oklch(1 0 0 / .16);border-color:#fff}}
+.hx2-btn:active{scale:.96}
+.hx2-count{min-width:4.6ch;text-align:center;font-weight:600;font-size:.9375rem;color:rgb(255 255 255/.92)}
+.hx2-count b{color:#fff;font-weight:800}
+@media (max-width:640px){
+  .hx2-rule{display:none}
+  .hx2-ctl{min-height:96px;gap:12px}
+  .hx2-call span:last-child{display:none}
+  .hx2-ring{width:52px;height:52px}
+  .hx2-copy{padding-bottom:16px}
+  .hx2-h.is-filled .hx2-w{background-image:linear-gradient(oklch(1 0 0 / .6),oklch(1 0 0 / .6)),var(--fill)}
+}
+@media (prefers-reduced-motion:no-preference){
+  html.js .hx2:not(.is-run) .hx2-copy,html.js .hx2:not(.is-run) .hx2-ctl{opacity:0;animation:hx-fail 0s 2.5s forwards}
 }
 
-/* v2 Aperture: giant type on sky with the Tudor in a frame between the lines; scrolling opens the frame to full bleed */
-.hv2{background:var(--sky);color:var(--ink)}
-.hv2-pin{position:relative;height:max(640px,100svh);overflow:clip}
-.hv2-frame{position:absolute;inset:0;margin:0;clip-path:inset(29% 34% 35% 34%)}
-.hv2-pd{position:absolute;inset:-3%}
-.hv2-pd img{width:100%;height:100%;object-fit:cover;object-position:40% 45%}
-.hv2-shade{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;background:linear-gradient(0deg,rgb(6 16 42/.82) 0%,rgb(6 16 42/.45) 26%,rgb(6 16 42/0) 52%)}
-.hv2-h{position:absolute;left:var(--gutter);right:var(--gutter);top:calc(var(--nav-h) + 3vh);bottom:max(19%,152px);width:auto;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
-.hv2-h .ln{pointer-events:auto}
-.hv2-a{align-self:flex-start}
-.hv2-b{align-self:flex-end;text-align:right}
-.hv2-act{position:absolute;left:var(--gutter);bottom:clamp(28px,5vh,56px);display:grid;gap:16px;max-width:520px;transition:color var(--dur-quick) var(--ease-out)}
-.hv2.is-open .hv2-act{color:#fff}
+/* ---------- v3 [BANK] West London: plain trade split, copy left, a real job right, the town checker, a facts grid.
+   Motion at the F17 dose only: enter .15s ease, 40ms apart; the photo scales in over .18s ease-out. */
+.hx3{min-height:max(640px,100svh);background:#fff;color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr)}
+.hx3-copy{display:grid;align-content:center;gap:18px;padding:calc(var(--nav-h) + 28px) clamp(24px,4.5vw,72px) 40px var(--gutter);max-width:760px}
+.hx3-kick{display:grid;gap:14px;justify-items:start;font-weight:700;font-size:.9375rem;color:var(--blue)}
+.hx3-swoosh{display:block;width:96px;height:14px;background:no-repeat center/100% 100% url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'%3E%3Cpath d='M0 12h38l10-10h48' fill='none' stroke='%231a4199' stroke-width='3'/%3E%3C/svg%3E")}
+.hx3-h{font-size:clamp(2.5rem,4.2vw,4.25rem);font-weight:850;line-height:1.02;letter-spacing:-.045em;text-wrap:balance;max-width:15ch}
+.hx3-p{font-size:var(--t-lead);line-height:1.45;max-width:38ch;color:var(--ink)}
+.hx3-p a{font-weight:700;color:var(--blue)}
+.btn--line{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+@media (hover:hover){.btn--line:hover{background:var(--sky)}}
+.hx3-check{display:grid;gap:8px;max-width:440px;margin-top:6px}
+.hx3-check label{font-weight:700;font-size:1rem}
+.hx3-field{display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--ink);transition:border-color var(--dur-quick) var(--ease-std)}
+.hx3-field:focus-within{border-color:var(--blue)}
+.hx3-field input{flex:1;min-width:0;min-height:48px;padding:0;border:0;background:none;font-size:1.25rem;font-weight:600;outline:none}
+.hx3-field input::placeholder{color:var(--muted);opacity:1;font-weight:500}
+.hx3-check:focus-within{outline:none}
+.hx3-field:has(input:focus-visible){box-shadow:0 2px 0 0 var(--blue)}
+.hx3-of{font-size:var(--t-small);font-weight:600;color:var(--muted)}
+.hx3-ans{min-height:1.5em;font-size:1rem;font-weight:600;color:var(--ink)}
+.hx3-ans b{color:var(--blue)}
+.hx3-facts{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 28px;font-size:.8125rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.hx3-facts li{display:flex;align-items:baseline;gap:10px}
+.hx3-facts li::before{content:"";flex:none;width:7px;height:7px;background:var(--blue);translate:0 -1px}
+.hx3-photo{position:relative;overflow:hidden;background:var(--mist)}
+.hx3-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 50%}
+.hx3-copy>*{animation:hx3-in .15s ease both}
+.hx3-copy>:nth-child(2){animation-delay:.04s}.hx3-copy>:nth-child(3){animation-delay:.08s}.hx3-copy>:nth-child(4){animation-delay:.12s}
+.hx3-copy>:nth-child(5){animation-delay:.16s}.hx3-copy>:nth-child(6){animation-delay:.2s}
+.hx3-photo img{animation:hx3-scale .18s var(--ease-dec) both}
+@keyframes hx3-in{from{opacity:0;translate:0 8px}}
+@keyframes hx3-scale{from{opacity:0;scale:1.04}}
+.hx3-ans.is-new{animation:hx3-in .15s ease both}
+@media (max-width:1100px){.hx3-facts{grid-template-columns:repeat(2,auto)}}
 @media (max-width:899px){
-  .hv2-pin{height:auto;min-height:0;padding:calc(var(--nav-h) + 28px) var(--gutter) 40px;display:grid;gap:24px}
-  .hv2-frame{position:relative;inset:auto;clip-path:none;aspect-ratio:4/3;order:2}
-  .hv2-h{position:static;display:block}
-  .hv2-b{text-align:left}
-  .hv2-act{position:static;order:3}
-  .hv2-shade{display:none}
+  .hx3{grid-template-columns:1fr;min-height:0}
+  .hx3-copy{padding:calc(var(--nav-h) + 40px) var(--gutter) 40px;max-width:none}
+  .hx3-photo{grid-row:2;aspect-ratio:4/3}
 }
-
-/* v3 Blueprint: the real job drawn in white lines; the cursor is a spotlight that shows the photo (S1324 exactly) */
-.hv3{min-height:max(640px,100svh);display:flex;align-items:flex-end;background:var(--blue);color:#fff;overflow:clip}
-.hv3-art{--reveal-x:50%;--reveal-y:50%;--reveal-radius:0px;position:absolute;inset:0;overflow:clip;isolation:isolate;contain:paint}
-.hv3-base,.hv3-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 50%}
-.hv3-photo{z-index:1;pointer-events:none;
-  -webkit-mask-image:radial-gradient(circle var(--reveal-radius) at var(--reveal-x) var(--reveal-y),rgb(0 0 0/1) 0%,rgb(0 0 0/1) 40%,rgb(0 0 0/.75) 60%,rgb(0 0 0/.4) 75%,rgb(0 0 0/.12) 88%,transparent 100%);
-  mask-image:radial-gradient(circle var(--reveal-radius) at var(--reveal-x) var(--reveal-y),rgb(0 0 0/1) 0%,rgb(0 0 0/1) 40%,rgb(0 0 0/.75) 60%,rgb(0 0 0/.4) 75%,rgb(0 0 0/.12) 88%,transparent 100%);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;will-change:-webkit-mask-image,mask-image}
-@media (hover:none),(pointer:coarse){.hv3-photo{display:none}}
-.hv3.show-photo .hv3-photo{display:block;-webkit-mask-image:none;mask-image:none}
-.hv3-grid{position:absolute;inset:-32px;z-index:2;pointer-events:none;background-image:linear-gradient(rgb(255 255 255/.1) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255/.1) 1px,transparent 1px);background-size:48px 48px}
-.hv3-scrim{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgb(16 44 110/.96) 0%,rgb(16 44 110/.92) 38%,rgb(16 44 110/.55) 52%,rgb(16 44 110/0) 66%)}
-.hv3-copy{position:relative;z-index:4;display:grid;gap:22px;padding:calc(var(--nav-h) + 40px) var(--gutter) calc(clamp(40px,8vh,88px) + var(--mbar));max-width:min(100%,920px)}
-.hv3-h{font-size:clamp(2.75rem,5.6vw,5.75rem)}
-.hv3-copy .tlink{color:#fff}
-.hv3-show{position:absolute;z-index:4;right:var(--gutter);bottom:clamp(40px,8vh,88px);min-height:44px;padding:0 18px;border:1px solid rgb(255 255 255/.7);border-radius:999px;background:rgb(16 44 110/.6);color:#fff;font-weight:700;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out)}
-.hv3-show[aria-pressed=true]{background:#fff;color:var(--ink)}
-.hv3-show:not(:disabled):active{scale:.96}
-@media (max-width:899px){
-  .hv3-scrim{background:linear-gradient(0deg,rgb(16 44 110/.97) 0%,rgb(16 44 110/.92) 50%,rgb(16 44 110/.4) 70%,rgb(16 44 110/0) 82%)}
-  .hv3-show{top:calc(var(--nav-h) + 16px);bottom:auto;right:auto;left:var(--gutter);background:var(--blue)}
-}
+@media (max-width:640px){.hx3-h{font-size:clamp(2.25rem,10.4vw,3rem)}.hx3-facts{grid-template-columns:1fr 1fr;gap:10px 16px;font-size:.75rem}}

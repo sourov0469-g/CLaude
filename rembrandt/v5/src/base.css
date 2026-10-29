@@ -6,8 +6,10 @@
 :root{
   --blue:#1a4199; --blue-hi:#2453b8; --ink:#0b1f4d; --ink-2:#132a63; --sky:#f2f5fb; --mist:#dce4f3; --steel:#7a8090;
   --sun:#ffb81f; --sun-hi:#ffc84d; --white:#fff; --muted:#46557a; --on-blue-muted:#c9d6f2;
-  --ease-out:cubic-bezier(0.23,1,0.32,1); --ease-in-out:cubic-bezier(0.77,0,0.175,1); --ease-icon:cubic-bezier(0.2,0,0,1);
-  --dur-press:150ms; --dur-quick:150ms; --dur-fast:250ms;
+  /* F17 trade motion law (anatomy §7b, Stronghold's measured CSS): enter/exit .15s ease, accordion .2-.28s ease-out,
+     scale-in .18s ease-out, beziers (.4,0,.2,1) and (0,0,.2,1) */
+  --ease-std:cubic-bezier(.4,0,.2,1); --ease-dec:cubic-bezier(0,0,.2,1); --ease-out:cubic-bezier(0,0,.2,1); --ease-in-out:cubic-bezier(.4,0,.2,1);
+  --dur-press:150ms; --dur-quick:150ms; --dur-fast:180ms; --dur-acc:240ms;
   --t-display:clamp(2.75rem,7vw,7.25rem); --t-h2:clamp(2.125rem,4.4vw,4.5rem); --t-lead:clamp(1.125rem,1.5vw,1.375rem);
   --t-body:1.0625rem; --t-small:.875rem;
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s12:48px;--s16:64px;--s24:96px;--s32:128px;--s40:160px;--s48:192px;
@@ -92,23 +94,23 @@ button,input{font:inherit;color:inherit}
   .pick label{width:36px;height:36px}
 }
 
+/* S0736: T hides every version control; R resets to defaults */
+html.picks-off .pick-rail{display:none}
+
 /* photos: square corners, neutral image outline (S0412 #11) */
 .ph{position:relative;overflow:hidden;background:var(--mist)}
 .ph img{width:100%;height:100%;object-fit:cover}
 .ph::after{content:"";position:absolute;inset:0;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;pointer-events:none}
 
-/* custom cursor (S1321 + S1330); only when html.cur-on (fine pointer, motion allowed) */
+/* custom cursor (S1321): difference-blend ring + dot; only when html.cur-on (fine pointer, motion allowed) */
 .cur{position:fixed;left:0;top:0;z-index:300;pointer-events:none;display:none}
 html.cur-on .cur{display:block}
 html.cur-on,html.cur-on a,html.cur-on button,html.cur-on label,html.cur-on [data-cursor]{cursor:none}
 html.cur-on input[type=text],html.cur-on input[type=search],html.cur-on input[type=tel],html.cur-on textarea{cursor:text}
-.cur-f{position:fixed;left:0;top:0;mix-blend-mode:difference}
-.cur-dot{position:fixed;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:#fff;mix-blend-mode:difference}
-.cur-c{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border:0 solid #fff}
-.cur-c.tl{border-width:2px 0 0 2px}.cur-c.tr{border-width:2px 2px 0 0}.cur-c.bl{border-width:0 0 2px 2px}.cur-c.br{border-width:0 2px 2px 0}
-.cur-caret{position:absolute;left:-1px;top:-18px;width:2px;height:36px;background:#fff;opacity:0}
-.cur-disc{position:fixed;left:-46px;top:-46px;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:var(--sun);color:var(--ink);font:800 15px/1 "Epilogue",sans-serif;letter-spacing:-.01em;opacity:0;scale:.6}
-.cur-roof{position:fixed;left:-30px;top:-24px;width:60px;height:30px;opacity:0;overflow:visible}
+.cur-ring{position:fixed;left:-22px;top:-22px;width:44px;height:44px;border-radius:50%;border:1.5px solid #fff;mix-blend-mode:difference;display:grid;place-items:center}
+.cur-ring.is-label{mix-blend-mode:normal;background:var(--sun);border-color:var(--sun)}
+.cur-label{font:800 9px/1 "Epilogue",sans-serif;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+.cur-dot{position:fixed;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#fff;mix-blend-mode:difference}
 .ch{display:inline-block}
 [data-cursor="text"]{width:fit-content;max-width:100%}
 .wd{display:inline-block;white-space:nowrap}

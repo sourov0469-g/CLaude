@@ -1,6 +1,7 @@
 // Shared entrance vocabulary (S1321 text and image reveals; S0060 clip reveal; tokens from PLAN §3).
 // Hidden start states exist only inside these tweens, which only run with motion allowed (content visible by default).
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export const EASE = 'power4.out';      // ≈ cubic-bezier(0.23,1,0.32,1), --ease-out
 export const MOVE = 'power3.inOut';    // ≈ cubic-bezier(0.77,0,0.175,1), --ease-in-out
@@ -17,3 +18,30 @@ export function clipIn(fig, o = {}) {
 export const rise = (els, o = {}, from = {}) => gsap.fromTo(els, { y: 16, autoAlpha: 0, ...from }, { y: 0, x: 0, autoAlpha: 1, duration: 0.6, ease: EASE, stagger: 0.1, ...o });
 // once-on-entry trigger (S1321 start "top 82%", once)
 export const onEnter = (trigger, o = {}) => ({ trigger, start: 'top 82%', once: true, ...o });
+
+// [BANK] Q40 direction-aware reveals (GreenSock pen pojzxwZ, CROWN): content arrives from the direction of travel.
+// fromTo y +100px scrolling down / -100px scrolling up, autoAlpha 0 -> 1, 1.25s expo, overwrite "auto"; ~50px on phones.
+export function dirReveal(targets, trigger, o = {}) {
+  const els = gsap.utils.toArray(targets), d = innerWidth < 640 ? 50 : 100;
+  gsap.set(els, { autoAlpha: 0 });
+  const show = dir => gsap.fromTo(els, { y: dir * d, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.25, ease: 'expo.out', overwrite: 'auto', stagger: o.stagger || 0 });
+  return ScrollTrigger.create({ trigger, start: o.start || 'top 85%', end: o.end || 'bottom 15%',
+    onEnter: () => show(1), onEnterBack: () => show(-1),
+    onLeave: () => gsap.set(els, { autoAlpha: 0, overwrite: 'auto' }), onLeaveBack: () => gsap.set(els, { autoAlpha: 0, overwrite: 'auto' }) });
+}
+// word spans for a paragraph's entrance (no font dependency; text stays one readable run). Returns [words, revert].
+export function words(el) {
+  const html = el.innerHTML, out = [];
+  const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+  while (walk.nextNode()) nodes.push(walk.currentNode);
+  for (const n of nodes) {
+    const frag = document.createDocumentFragment();
+    for (const part of n.textContent.split(/(\s+)/)) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) { frag.append(part); continue; }
+      const w = document.createElement('span'); w.style.display = 'inline-block'; w.textContent = part; out.push(w); frag.append(w);
+    }
+    n.replaceWith(frag);
+  }
+  return [out, () => { el.innerHTML = html; }];
+}

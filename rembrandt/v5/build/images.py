@@ -6,14 +6,14 @@ from PIL import Image, ImageFilter, ImageOps, ImageChops
 root = pathlib.Path(__file__).resolve().parent.parent
 src, out = root / 'assets' / 'owner', root / 'assets' / 'img'
 out.mkdir(exist_ok=True)
-JOBS = {  # name: (source, max width, quality)
-    'ba1-after': ('ba1-after.png', 1480, 80),
-    'tudor': ('tudor.jpg', 2000, 78),
-    'job-charcoal': ('job-charcoal.png', 1156, 80),
-    'job-truck': ('job-truck.png', 1102, 80),
-    'ba2-before': ('ba2-before.png', 1024, 80),
-    'ba2-after': ('ba2-after.webp', 1024, 80),
-    'team': ('team.webp', 1088, 80),
+JOBS = {  # name: (source, max width, quality). F18 weight budget: capped widths, q70-74 (anatomy §7b)
+    'ba1-after': ('ba1-after.png', 1480, 70),
+    'tudor': ('tudor.jpg', 1800, 70),
+    'job-charcoal': ('job-charcoal.png', 1156, 72),
+    'job-truck': ('job-truck.png', 1102, 72),
+    'ba2-before': ('ba2-before.png', 1024, 72),
+    'ba2-after': ('ba2-after.webp', 1024, 72),
+    'team': ('team.webp', 1088, 74),
 }
 
 def save(im, name, q):
@@ -26,23 +26,6 @@ for name, (f, w, q) in JOBS.items():
     if name in CROP_TOP: im = im.crop((0, CROP_TOP[name], im.width, im.height))
     if im.width > w: im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
     save(im, name, q)
-
-# Linework twin: Sobel edges of the same pixels, drawn white on the brand blue, so the photo and the drawing align exactly.
-# Two passes: a median-filtered one for clean outlines, and a faint detailed one that keeps the shingle and brick texture.
-def edges(med, blur, th, gain):
-    im = Image.open(src / 'job-charcoal.png').convert('L')
-    if med: im = im.filter(ImageFilter.MedianFilter(med))
-    im = im.filter(ImageFilter.GaussianBlur(blur))
-    kx = ImageFilter.Kernel((3, 3), [-1, 0, 1, -2, 0, 2, -1, 0, 1], scale=1)
-    ky = ImageFilter.Kernel((3, 3), [-1, -2, -1, 0, 0, 0, 1, 2, 1], scale=1)
-    ex = ImageChops.add(im.filter(kx), ImageOps.invert(im).filter(kx))  # both edge polarities
-    ey = ImageChops.add(im.filter(ky), ImageOps.invert(im).filter(ky))
-    return ImageChops.lighter(ex, ey).point(lambda v: 0 if v < th else min(255, int((v - th) * gain)))
-clean, detail = edges(5, 0.7, 48, 3.0), edges(0, 1.1, 34, 2.4).point(lambda v: int(v * 0.32))
-edge = ImageChops.lighter(clean, detail)
-size = edge.size
-line = Image.composite(Image.new('RGB', size, (236, 242, 255)), Image.new('RGB', size, (26, 65, 153)), edge)
-save(line, 'job-charcoal-lines', 82)
 
 # Favicon: the house mark from the logo (left part of the exact logo file), 64 px.
 logo = Image.open(src / 'logo.png').convert('RGBA')

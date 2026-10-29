@@ -71,8 +71,7 @@ let page = icons(read('index.html'));
 page = page.replace(/<img\b[^>]*>/g, m => images(m, true));
 page = page.replace('<!--SECTIONS-->', () => sections).replace('<!--TEMPLATES-->', () => templates);
 // photos not embedded in the live page go into one registry the scripts read
-const keys = new Set([...page.matchAll(/data-img="([a-z0-9-]+)"/g)].map(m => m[1]));
-for (const k of ['job-charcoal-lines']) if (fs.existsSync(path.join(IMG_DIR, k + '.webp'))) keys.add(k); // textures only scripts use
+const keys = new Set([...page.matchAll(/data-(?:img|fill)="([a-z0-9-]+)"/g)].map(m => m[1]));
 const registry = Object.fromEntries([...keys].filter(k => !inlined.has(k)).map(k => [k, dataUri(k)]));
 
 // ---------- CSS
