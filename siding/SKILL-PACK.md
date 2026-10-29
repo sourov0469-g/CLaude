@@ -239,3 +239,35 @@ Total: 193 core skills + 42 Front-End Checklist rules for the final QA sweep = 2
 
 ## T. Front-End Checklist rules, final QA sweep (42)
 S0914 alt-text, S1011 dimensions, S1038 fetchpriority-attribute, S1114 lazy-above-fold, S1115 lazy-loading, S1082 image-file-size, S1166 page-weight, S1050 font-loading, S1000 cumulative-layout-shift, S1113 largest-contentful-paint, S1095 interaction-to-next-paint, S1087 import-on-visibility, S1132 memory-leaks, S0991 css-containment, S1190 reduced-motion, S1209 scrolljacking, S1169 parallax-effects, S0915 anchor-smooth-scroll, S0947 autoplay-media, S1276 view-transitions, S0971 color-contrast, S1049 focus-styles, S1046 focus-management, S1107 keyboard-navigation, S1246 tabs-accessibility, S1018 draggable-accessibility, S0964 carousel-accessibility, S1259 touch-targets, S1268 unique-id, S1020 duplicate-id-active, S0924 aria-hidden-focus, S0982 content-without-css, S1066 horizontal-scroll, S1062 h1, S1128 local-business, S1248 tel-mailto, S0927 aria-live-regions, S1213 sensory-instructions, S1055 form-labels, S1056 form-validation, S1093 input-types, S1001 currency-formatting
+
+## Supplement for the immersive brief (29 Oct, round 2: 31 skills, read in full, notes-13..17)
+The owner's new brief (custom cursor per element, layered depth, rich SVG renders, 3D where it earns it, text as motion) needed skills the first pack had left out. Total pack now 224 core + 42 checklist.
+
+Cursor, pointer and depth
+- S1323 pointer-trail-emitter: distance-emitted survey trail for the map cursor
+- S1333 build-interactive-particle-trail: stale-point reset rule for every follower; burst pattern
+- S0086 morphing-icons: the cursor's three-line glyph that morphs per element
+- S0222 antigravity-design-expert: isometric tilt plane for the credentials version
+- S1330 add-mouse-driven-orbit: one damped pointer target split across unequal opposing layers
+- S1425 law-of-figure-ground: parallax layers stay ground, instruments are figure; scrims on photos
+- S0159 perspective: vanishing-point construction; every hover effect lists its keyboard and touch path
+- S1332 background-grid-webgl: perspective blueprint grid behind the spec section
+- S1363 ambient-section-particles: considered for a storm atmosphere (density by area, settle mode)
+- S1364 atmosphere-background: light folds leaning to the pointer behind the call CTA
+- S0145 immersive: exhibit framing (proof you play) and the arcade hover for one button language
+- S1348 css-alpha-masking: 15/85 edge fades on marquees, course strips, grid far field
+- S0184 gsap-plugins (re-read): SplitText, DrawSVG, MorphSVG, Draggable, Inertia, Observer, ScrambleText exact options
+
+SVG renders and technical drawing
+- S0407 svg-animation: draw-on in construction order, morph, seek harness
+- S0361 dimensional-drawing: line weights, chain dims with closing formula, title block, never invent values
+- S1362 technical-wireframe-info-layout: exploded structure with sparse pills
+- S0468 blueprint-animation: scan-line wipe from photo to blueprint to photo, phase timings
+- S0424 hairline-adopt, S0425 hairline-create: one-stroke isometric window that answers the pointer
+- S1361 split-layout-technical: drawing panel + mono spec panel, accent only on the active detail
+- S0197 motion-advanced: drag thresholds, count-up crawl, progress ring, follower springs (ported to GSAP)
+- S0526 wheresryan22/anatomy: real objects as explanation, four-tone solids, exploded views 64/14.2, review checklist
+- S0504 Teddarific/anatomy-asset: iso camera 55-60°/30°, stroke weights, palette tokens, composition table, craft checks
+
+3D decision
+- S0205 3d-web-experience, S0206 premium-3d-website, S1344 webgl-3d-object, S1335 build-wireframe-scan-reveal, S1334 build-threejs-scroll-worlds, S0313 cloudai-x/threejs-fundamentals: when 3D earns its place, budgets, fallbacks; outcome: solids in SVG, WebGL only for light and paint, no Three.js in the single file.
