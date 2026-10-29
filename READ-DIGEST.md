@@ -6,7 +6,7 @@ Resume marker: the last line read in each file. If context resets, continue from
 ## Resume markers
 - BANK-MAP.md: 7475 / 7475 — COMPLETE (Part I skills map, Part II bank map, coverage ledger, usage log)
 - atlas-part-1-skills.md: 14247 / 14247 — COMPLETE
-- atlas-part-2-bank.md: 0 / 8829
+- atlas-part-2-bank.md: 8829 / 8829 — COMPLETE
 
 ## Governing laws and standards (from the front matter)
 - Flow: Map A-Z → shortlist 3 genuinely different mechanisms per section → Atlas exact params → deep-read source+code → live reference → plan before code → build solo → judge against the skills (a mechanism that only resembles its reference is a failure) → usage log.
@@ -312,3 +312,333 @@ Resume marker: the last line read in each file. If context resets, continue from
 - S1502 scroll-craft (description-only): 8 page grammars; fingerprint gate — new build differs on ≥4 of 6 dims (grammar, navigation, hero, act sequence, close, signature move); taste floor: 4px scale, ≤2 families, 6 colour roles + 1 accent, no identical cards → applies to versions too: each version differs on ≥4 dims.
 - S1488 case-study (outcome first), S1490 design-rationale (record rejected options) → REPORT-FULL format.
 - Rest: team/process — NOT-FOR-TRADES.
+
+### atlas-part-2 lines 1–441 (roofing + siding MANIFEST picks: Animation, Design, Reverse-eng start) — HIGHEST trade relevance
+- Animation parameter library (motion constitution): scrubbed = linear always; triggered = expo/power2/power3 out; reveals 0.4–0.8s; staggers 0.02–0.12; Lenis rAF → GSAP ticker (one clock); clearProps after reveals.
+- Count Up (entry 279, R20): 2s easeOut cubic-bezier(0.33,1,0.68,1), IO once, tabular-nums, FINAL VALUE IN HTML as no-JS fallback (counter rendering 0 without JS = defect) → Proof numbers (4.9 / 295 / 1995 / 2001).
+- Direction-aware reveals (R1, entry 40): ±100px, 1.25s expo, overwrite auto, halved on phones.
+- GSAP marquee (R16, entry 161): trade speed = Stronghold 60s linear; measure after fonts.ready; pause on hover/reduced → town strip.
+- GSAP pin sidebar (entry 153): pinned process steps desktop; phone stacked fallback (never trap phone scroll) → How.
+- SVG shapes on scroll (R8, entry 53): separator viewBox 0 0 100 10, 150px tall, d/data-path-to structures must match; last separator end inside reachable scroll.
+- MotionPath (R39 route divider, entry 72): one per page, hidden on touch, autoRotate, resize = save progress → rebuild → restore → Area route line between towns.
+- Curved path scroll (entry 54): add reduced-motion jump-to-final.
+- Square lens (125): take mask idea in DOM (before/after inspection).
+- Grid-to-fullscreen R10 DOM port; Sticky grid scroll (94): 425vh, reveal 0–45%, zoom 45–90% to 2.05.
+- Shopify Editions (58): motion-token system (scroll-state .6s cubic-bezier(.41,.19,.13,.95), fade .52, slide .6, spring cubic-bezier(.34,1.56,.64,1)).
+- Trionn (163): ONE ticker for everything.
+- Silo (98): derived totals, one state object.
+- DESIGN: Bakstad Construction (319, STRONG model GC homepage): fixed left rail, plain hero, project cards name+location+year, press band, footer with NAMED principal + street address + phone; restraint; reduced-motion present → Family/footer model (named principals Bunk/Wade/Rachel). Boardman Roofing (31/35 design pick): rotating-word hero, numbered 001–021 project index, Fraunces + Inter Tight — copy/claims NOT a model. Roofix (160): default trade skeleton nav→hero(rating proof+form)→about counters→services×4→process×4→projects→why→team→testimonials→articles→locations×12→CTA→footer; template residue warning (scrub other-trade words). Specia1ne (569): paper #F2F1EB + one blue #1D39F5, numbered sections, CSS-only motion house curve cubic-bezier(.16,1,.3,1), clip-path reveals, 20 reduced-motion blocks. Erdmann: place-first (suburb-indexed) before/after → Area/Work tie. Renewal by Andersen: award claim WITH printed sourcing footnote → Proof "4.9 · 295 Google reviews" with source line.
+- REVERSE-ENG: Bonner Built (27/35): review wall + JSON-LD AggregateRating that agrees with visible wall. Dr. Roof: AggregateRating schema. Erie: hero proof strip 4.8/40,000+ + BBB A+ (pattern = our 4.9/295 + BBB A+ strip). Greater Midwest: price ranges (no price facts in our brief → do not invent).
+
+### atlas-part-2 lines 442–878 (roofing/siding firms, crowns, structure) — HIGHEST relevance
+- CROWN 1 Stronghold (33/35): proof strip ABOVE headline (4.9★ · 500+ reviews · GAF Master Elite · licence · 4,386 roofs); hero = funnel step 1; CSS-only motion: enter/exit .15s ease, accordions .2–.28s ease-out, scale-ins .18s, ONE 60s linear project marquee; cubic-bezier(.4,0,.2,1)/(0,0,.2,1); Archivo; JSON-LD matches display. → Hero proof strip pattern: "4.9 · 295 Google reviews · BBB A+ since 2001 · Owens Corning Platinum Preferred" (no licence — none in repo; never invent).
+- CROWN 2 West London (31/35): "What happens when you call" section → Call version (Rachel answers; what happens next); before/afters captioned BY PLACE.
+- Austin Pro (siding crown): reconciled counts (312 + 574 = 886) — our numbers must reconcile; draggable before/after with per-project band (we have no price data → caption with town + job type only if in repo).
+- Feldco: count-ups in TRADE units (1.2–1.6s ease-out).
+- Cenco (29): Verify link on every credential (BBB profile link? only if URL in repo; else none) + honesty line "If your roof is fine, we tell you — in writing" (only if in repo copy).
+- Hippo: one-line proof strip; town pages with genuinely local content; Indy: review volume in hero, schema MATCHES displayed count; LOA cautionary (schema 734 vs copy 1,000+); Thompson Creek cautionary (71,000 vs 3,300) → ONE NUMBER RULE: 4.9 / 295 everywhere identical.
+- Rogers: "Call Now" and "Schedule Online" equal weight (we have phone only + hours; no online scheduler → phone + hours).
+- Stay Dry: sticky CALL/TEXT bar; response-time promise (none in repo → don't invent).
+- Lane 2 findings F17: trade top tier uses CSS 0.15–0.28s + one marquee + Swiper; NOBODY uses GSAP/WebGL scenes. F18: weight is the tax (winners 50–330KB HTML). → our 435KB code is over band (known flag).
+- Builder brief: Tier 1 lead-gen = CSS 0.15–0.3 + one carousel + ONE signature interactive; stacking cards = CSS sticky never GSAP pin; pinned horizontal desktop-only; every other pin needs written reason + 375px release test; GSAP 115.6KB/45.7KB gzip; hero rules F1 proof strip, F11 licence in first screen, F2 outcome headline, F3 one low-friction entry; QA = anatomy 24-item checklist.
+- Conversion anatomy F1–F18 + 24-item checklist = QA gate; anti-patterns: placeholder testimonials, counters rendering 0, blended review scales, stock photos in portfolios.
+- Monolith Studio (22): team-with-tags → 5-star strip → services → hub → booking → directory footer (Family before Proof ordering idea).
+- Circular progress button (348): honest submit state; Iper (561): sticky single CTA.
+- Accordion (306) → R23 details/summary + grid-rows FAQ.
+- Portfolio site plan: ONE signature interactive per page; no loaders/scene pages/scroll gates.
+
+### atlas-part-2 lines 879–1221 (siding tail, remodeling + HVAC manifest picks)
+- UI/UX pattern library: 8/24 award sites are scene pages and 5/24 open with a gate/loader → DO NOT USE where job is phone calls; reduced-motion found on only 2/15 → our builds ship it (quality edge). Section models: credential as giant type (ESR); persistent contact button after hero; case-study index rows with mono micro-labels; giant two-tone footer wordmark; chapter colour change; audience split.
+- West Shore location skeleton: per-town local data, never city-swap → Area: no invented local data; towns presented as coverage with honest framing.
+- Window World: weakest call path (tel ×1 at 47%) → our tel must appear early (header) and often.
+- FAMILY-relevant: Varian "meet Bill, not a salesperson" — named principal replaces sales process; one deep testimonial (we have none → aggregate only); Fred Beese founder biography as reason for the work; Strike Force crown 2: eyebrow line "Family-owned · Dallas, TX · Since 2011" → ours "Family-owned · Springboro, OH · Since 1995"; founder story makes promises biographical (Bunk founded 1995, Wade president since 2015); no-stock caption honesty ("Shot on our jobs" — only true if photos are theirs: ba2 pair is theirs per repo? check provenance); two numbers separated honestly (we have ONE number only — (937) 746-7377; never the 353 number).
+- Huffmans: named callback in form ("a person, not we'll be in touch") → "Rachel answers the phone" is exactly this device.
+- Harmony: promises repeated verbatim at every depth; Elbaz: licence strip + week-ranged process (we have no week data → no invented durations); CMK: proof BEFORE pitch first screen; project count by neighbourhood map (no counts in repo → don't invent); KBF: place-first map with real counts; Monolith/OakWood heritage line.
+- Shazam morphing button (255): "Call now" button morphs into contact card (overshoot cubic-bezier(0.8,−0.6,0.2,1) 400ms) → Call V candidate (GSAP attr d tween, same point count).
+- Evergreen HVAC 92KB clarity benchmark; Cooling Co: hero proof strip with BBB A+ and 0 complaints (we have BBB A+ since 2001 only).
+
+### atlas-part-2 lines 1222–1464 (HVAC picks tail; slice 9 Part A/B start)
+- Estes (26): FOUR-NUMBER hero stat strip rating / reviews / since-year / jobs → ours: 4.9 / 295 / since 1995 / (no job count in repo → 3 numbers + BBB 2001). Heritage + volume beats adjectives.
+- One Hour: big proof number in HERO not footer; A.B. May cautionary: proof buried in footer = wasted (placement > volume); sticky mobile Text/Call/Book bar.
+- A/C Authority: proof in title tag + JSON-LD consistent.
+- London AirCon / Stay Dry: response deadline with a unit (none in repo → no invented promise).
+- Q571 AHA: numbered services index as semantic <ol> with CSS counters (01OF11 current/total).
+- Q572 Amphora: CSS-keyframe whole-page motion; house curve cubic-bezier(.22,1,.36,1); REDUCED-MOTION MODEL: kill duplicate marquee track (display:none), snap word reveals to final state (opacity 1, filter none, transform none), also under forced-colors → copy wholesale.
+- Q574 CRISP: CTA repeated 5× (hero, mid, final, footer) — repeated call CTA pattern.
+- Q567 Save Design: category grid WITH item counts; Q568 Sirnik: numbered testimonials 001–007 + credential strip UNDER testimonials (one line micro-proof) → Proof V candidate (no quotes allowed → numbered credential dossier instead?); 2-step form with step counter.
+- Q569 Specia1ne repeat (CSS-only, clip-path, 20 RM blocks).
+- Q236/Q239/Q252/Q341/Q344/Q347/Q62: WebGL/WebGPU mechanism studies — not for trade page (Q239 OGL lerp 0.9 chain / spring .06/.85 transferable to companion trail).
+
+### atlas-part-2 lines 1465–1735 (slice 9 B/C tail, slice 1 start)
+- Q588 Yoga studio (STRONG, maps 1:1 to trades): proof cluster ABOVE fold — rating + reviews + years + volume as 4 stat chips beside headline; checklist tick rows; trial CTA primary / pricing secondary → Hero version: chips 4.9 · 295 Google reviews · since 1995 · BBB A+ 2001; tick rows: Owens Corning Platinum Preferred, $2M liability, family-owned (all verified).
+- Q593 Bin There (STRONG): headline formula negate pain + product + place + free benefit; 3 verb-first steps → How 3 steps (call → inspect → roof)? only with brief-true wording.
+- Q594 Dentalo: proof count IN hero; dual CTA (book primary + browse services secondary) → "Call (937) 746-7377" primary + "See the work" secondary.
+- Q587 agency: proof AFTER offer understood; FAQ in nav.
+- Q597 Skyro: FAQ before pricing; two conversion paths in hero.
+- Q598: hero → index directly (services index under hero).
+- Q585 SENVA: wordmark-as-hero ~18–22vw type with photo inset; listing rows image + name + location.
+- Q4 Ragged Edge: metric-led cards (number IS the headline), power2.out 0.4–0.6s stagger 0.08–0.1 → Proof version: metric headlines (only real metrics).
+- Q6/Q11 Flip list→detail; Q12 Eloy role-grouped 4-beat reveals (eyebrow→title→body→media, ~0.08–0.12s) → choreography rule; Q13 proof-in-intro copy; Q14 dirt: services + enquiry on ONE homepage, seamless duplicated-track loop (200%, −50%, linear 30–40s) → town strip CSS loop; Q15 budget-radio form.
+- WebGL studies Q224–Q235, Q3, Q8, Q16: not for trade page.
+
+### atlas-part-2 lines 1736–2056 (slice 1 tail, slice 2 start)
+- Q40 Direction-aware reveals = CROWN house reveal (±100px, 1.25s expo, overwrite auto, halve on phones).
+- Q30 Creative Ocean: DURATION DISCIPLINE histogram 0.3/0.4/0.5 core, ≤1.0 ceiling ("fast and confident") → audit our durations.
+- Q38 SVG mask blinds (30 slits, stagger 0.02, scrub 2–2.5 → ~1 mobile; grid 14→6 cols; crispEdges) → before/after reveal (Work V candidate).
+- Q48 Grid-to-fullscreen; Q49 asymmetric damp reveal 0.6 / dismiss 0.15; tap-vs-drag 5px / 15px touch → ba2 drag slider threshold.
+- Q41 renderer caps 40fps, DPR ≤1.25, hidden-tab skip (cursorfx cites this).
+- Q44 Studiogusto ease profile expo.out entrances / expo.inOut transitions.
+- Q22 Monolith blueprint; Q29 audience split; Q24 numbered case list.
+- Q36 MotionPath segment 0.25→0.80 + repeatDelay 5 (tasteful route loop) → Area route.
+- Q50 LottieScrollTrigger (scroll-scrubbed illustrated process "roof drawing that builds"); Q53 SVG separator recipe; Q54 curved traveller between measured anchors (reduced → jump to final anchor); Q55 3D text cylinder (cut on mobile).
+- Q57 OPX: restraint — scroll reveals OFF sitewide, 50s cover breathing zoom scale 1→1.24→1 linear (CSS, zero JS) → Hero calm life option.
+- Q58 Shopify Editions: timing tokens + 9 reduced-motion blocks; orbiting dots offset-path; Lenis duration 1 easeOutExpo.
+- Q72 MotionPath van along route; resize pattern progress→revert→rebuild→progress(saved) → Area route van/line.
+- Q75 stagger reveal swap (char 0.5s, stagger 0.014, power3) → version swap transition reference.
+
+### atlas-part-2 lines 2057–2264 (slice 2 tail, slice 3 start)
+- Q78 text hover curves (sweep cubic-bezier(0.7,0,0.3,1), spring (0.2,1,0.3,1), 0.5/0.4s, stage 0.3s) — hover-only enhancement for nav/footer links.
+- Q79 Atlason: one named in/out ease pair as site-wide token; lazy-load GSAP; gsap.matchMedia gating.
+- Q88 3D infinite carousel (cheap, 27KB): maxRot 28°, depth 140, minScale .92; bg tint from centre photo palette.
+- Q90 organic clipPath cards: three-layer duration ladder (path / image ≥1.1 counter-scale / deco lag), 75ms hover debounce.
+- Q93 elastic grid (ScrollSmoother is Club → free quickTo fallback); Q94 sticky grid (rem = 100vw/1440).
+- Q98 Silo: one state object, derived total.
+- Q101 nav overlay stagger {autoAlpha, y, .05, .6s, circ.out}.
+- Q107 Anton & Irene: REDUCED-MOTION ARCHITECTURE — one flag from one matchMedia, data-motion="reduced" on <html> read by CSS and JS; restrained .3s ease default / .4s large / easeOutCirc cubic-bezier(.075,.82,.165,1) emphasis; IA counters → numbered services → partnerships → awards → product.
+- Q108 Bureau Cool: dated features feed = freshness proof.
+- Q114 JC Suzanne: footer CTA = the contact itself as GIANT marquee (60→272px), hover colour swap 300ms → Call V candidate: "(937) 746-7377" as giant type/marquee (tel link, reduced → static).
+- Q120 Raffael: <2KB JS, flash-mask linear-gradient edge fades 4rem; reduced → scroll-behavior auto.
+- Q122 opening type peel (CSS 3D, ~1KB) — playful; Q123/Q125/Q126/Q127 WebGL — not.
+- Q128 WebGL image transitions: strips (7) and circle grow (3) for before/after — DOM/SVG mask equivalent for ba2.
+
+### atlas-part-2 lines 2265–2463 (slice 3: WebGL image effects, SVG shape work)
+- Q129 shader noise reveal (fallback plain <img>, never depend on canvas); Q131–Q138, Q141, Q144: WebGL — not adopted (weight; F17 trade ceiling).
+- Q143 liquid distortion TIMING SHAPE: ramp distortion 1s → crossfade 0.5+0.5s at peak → settle 1s (applies to any slideshow/swap, e.g. version swap or ba2 swap).
+- Q145 displacement hover (before/after swap) — DOM/SVG alternative preferred.
+- Q146 morphing background blob behind whole page, one brand fill, breathes between path/pathAlt 3.5s; identical command structure rule.
+- Q147 shape hover (SVG path card cover; backout 300ms playful / easeinout 250 sober) → Work/Family cards.
+- Q148 superhero SVG filter wipe: liquid wavy reveal edge (feTurbulence 0.08 / displacement 50 → 20–35 subtler), filter on small mask group only; interactive: cursor Y = progress → ba2 before/after "old roof → new roof" candidate (Chrome-best caveat).
+- Q149 marquee along SVG path (resample on resize); Q150 shape overlays (randomise per toggle); Q151 elastic SVG (elastic only on RETURN leg, short plain out-leg) → switcher/companion toggle micro.
+- Q152 getScrollLookup for nav into horizontal sections.
+- Q153 pin sidebar process with progress rail (STRONG trade process) — pin distance separate from content distance; desktop only.
+- Q156 image grid motion (bloom centre-out 2s expo, lerp .07, grid 110%) — needs many photos (we have only ba2) → not feasible.
+- Q157 push grid items (Flip).
+
+### atlas-part-2 lines 2464–2655 (slice 3 tail, slice 4 start)
+- Q161 GSAP horizontalLoop = CROWN canonical marquee (fonts.ready first; immediateRender:false; trade speed slow) → town strip.
+- Q162 K72 marquee hover (nested counter-translation) → services/town row hover.
+- Q163 Trionn: ONE ticker; shared progress ref; transitionReady gate; reduced = idle rotation REDUCED not removed (we remove under reduce: OK either).
+- Q164 Circular text ring (DOM spans, IO-gated, reduced → still) → badge "SINCE 1995 • SPRINGBORO, OHIO • FAMILY OWNED •" (no licence claim).
+- Q165 Depth text (CSS 3D, 34 layers) cheap 3D headline; Q166 particle text; Q167 stroke text draw (dash = fontSize×7, clip wipe fill) — one headline per page; Q169 text loop on path; Q170 text type with human mistakes — one per page.
+- Q158 infinite scroll — not for trade.
+- Slice 4: Variable proximity (Roboto Flex wght/opsz near cursor, radius ≈ 0.8–1.2× font size at headline) → Hero headline option; Eco-luxury lawn landing: trade skeleton hero → proof → services → process → pricing → reviews → CTA (fix numbering slips); Maison TALI rotating statements; Shotline: Other-vs-Me comparison table between work and testimonials.
+- Eleos (178): CMS shell + hand GSAP; DrawSVG loader 1.0s power2.out stagger .08 then wipe; COLUMN-SHUTTER image reveal (overlay columns yPercent 0→−100, 0.8s, stagger .06, once at top 85%) → ba2 photo reveal; house CustomEase cubic-bezier(0.625,0.05,0,1).
+- Collapsing logo (196): two-axis asymmetric collapse (scaleX 300ms easeOutQuad then scaleY 700ms easeOutExpo).
+- Decorative letter bursts (197); grid motion hover (198); on-scroll text motion Flip + scramble (200, Club plugins).
+- Product grid flip card (201): back face carries specs/guarantees — CSS 3D, ≤0.45s → Proof credential cards (front: BBB A+; back: "accredited since 2001").
+- Built Kindly: visible "Toggle motion effects" control remembered + reduced motion; time-of-day greeting ("Good Morning!") → Call: live office status from Mon–Fri 9–5 (Eastern) — "Rachel is answering now" vs "Office opens Monday 9" — factual, derived from brief hours.
+
+### atlas-part-2 lines 2656–2834 (slice 4 cont.)
+- Built Kindly motion toggle (~20 lines around data-motion + GSAP kill switch) = advertisable accessibility feature; our companion "Off" control is the analogue.
+- dhero rotating word: out 0.45s sine.in blur12 / in 0.8s sine.out blur20→0, every 3200ms (asymmetric: arrives through fog, leaves clean) → Hero rotating word option (e.g. "roofs / siding / gutters" only if services in repo).
+- Mara Züst B/W→colour hover; Thomas Duval staged lightbox ladder backdrop .50 / image .50 @+.04 from scale .985 / controls .28 @+.14, RM kills → ba2 lightbox.
+- UZIK: ZERO JS libs, tokens --transition-duration 300ms, hard UI bezier (0.86,0.1,0.14,0.9), gentle content curve (0.25,0.1,0.25,1); progress bar duration = dwell time.
+- VERDE: tag-labelled archive index; 3-frame filmstrip thumbs; CSS-transition cursor follower 0.2s (no JS lerp).
+- Horizontal parallax gallery DOM phase (125%, MAX_SHIFT 10, lerp .07) ~80 lines.
+- 3D circular CSS carousel (rotate then translateZ order; radius ≈1.95× card width).
+- Interlude page cover contract; Lens refraction contract: WebGL replaces media only while active; text transparent not hidden; scrollState formulas grayscale = 1−visibility³ (colour cubed-eases in), zoom 1+progress×.66 → ba2 "grey to colour as it enters" via CSS filter (no WebGL).
+- Segment menu icon (constant-length window; author 10× and scale down for getTotalLength consistency) → applies to our DrawSVG paths.
+- Page loading effects / preloader: shared easing (0.7,0,0.3,1) makes 5 elements one gesture; but NO loaders on trade (portfolio plan).
+- Pin 2 video scale-then-hold: scroll × (1 + holdRatio).
+- CSS scroll()/view() timelines gated by @supports + no-preference; @property hue.
+- Draggable timeline (Club inertia) — history timeline for established firm (Family 1995→2001→2015) but drag/scroll sync needs care.
+- Blur Text: filter/opacity linear 0.7s + spring y (back.out(1.4)), stagger 200ms, IO 0.1 once.
+- Count Up: easeOut cubic-bezier(0.33,1,0.68,1) 2s; final value as no-JS fallback; reduced = instant end.
+
+### atlas-part-2 2835–3113 (deep-read slice 5: React Bits text, Codrops, live sites 281–325)
+- 281 Curved Loop STRONG: towns marquee band, interactive off, gate RM. 285 Fold Text: one hero headline (92deg, .65s, .045 stagger). 288 Gradient Text: accent word only. 289 Rotating Text STRONG: services-list hero word slot, 2000ms. 291 Scroll Float: section headings, back.inOut(2).
+- 292 Scroll Reveal CROWN "THE standard reveal": word scrub opacity .1→1, blur 4px→0, rot 3→0, stagger .05, end 'bottom bottom'. Default for intro statements (family, how intro).
+- 294 Shiny Text: CTA/badge sweep 2s 120deg. 295 Shuffle: respectReducedMotion true (only RM default). 296 Split Flap SITUATIONAL: "Now booking" status accent only (call/area strip). 297 Split Text STRONG: entrance system (y40, 1.25s, 50ms). 300 True Focus: trust phrase cycling ("BBB A+ · OC Platinum · $2M") -> proof candidate.
+- 306 CSS accordion STRONG FAQ (open .5s / close .3s). 307 overlay opacity .5s + visibility 0s .5s pair. 308 grid → detail view SITUATIONAL (work). 310 floating labels (quote form). 313 modal max 630px. 314 Pricing CROWN (not used: no prices). 316 tooltips need tap fallback.
+- 348 Circular progress button CROWN form-feedback (r 32.5, stroke 5, #1ECD97). 349 feTurbulence rough paper (fractalNoise .04, 5 octaves, surfaceScale 2, az 45 el 60) -> texture option for family/craft. 351 posterize discrete ".25 .4 .5 .75 1".
+- 302 Nik R: stats band + counters + 33 review cards (Elementor GSAP pattern).
+- 317 Digital Butlers CROWN quote-form exemplar: "Proof, not promises" stats band → budget radios → 48h promise (call section structure; we have no form/prices so only the proof-band → promise sequence transfers).
+- 319 Bakstad CROWN trade exemplar: left rail, project cards name+location+year, press band, footer named principal + street address + phone; .3s fades, IO only, RM present. -> family + footer + work card captions.
+- 320 Afternow budget ladder. 321 AKLR filter pills WITH COUNTS -> work V2 harvest (filters with counts; only honest counts usable). 322 Domaine stats band + CSS-only motion + RM present. 323 Grain & Mortar duplicated track marquee 40/28/15s, .25s power2.out micro. 324 Haptic live clocks + word scrub intro (-> call live office status, Mon–Fri 9–5 clock). 325 Hyper Effekt numbered 01/02/03 blocks (-> how).
+
+### atlas-part-2 3114–3376 (slice 5 tail 325–329, L2 inspection log, slice 6 start 352–356)
+- 325 Hyper Effekt numbered 01 Design / 02 Build / 03 Grow -> how section numbered blocks. 326 ONOERA booking-card (name + who + duration). 329 reboot scroll-fill grey→black word by word without GSAP; "Projects start at 8 weeks" scope line device.
+- L2 log totals: 600 queue, KEEP 287, deep-read queue 300. Chunk 1: Monolith Studio blueprint (Google 5-star strip), metric-led cards (Ragged Edge). Chunk 2: 38 blinds 30 slits stagger .02; 40 direction-aware reveals; 54 curved path.
+- Chunk 3: 88 no-WebGL 3D carousel (MAX_ROTATION 28, MAX_DEPTH 140, MIN_SCALE .8, perspective 1800). Chunk 4: 95 Masked Heading RM VERIFIED; 98 Silo configurator ("quote-builder analogue"). Chunk 5: 147 shape hover, 149 SVG path marquee (offset-path, baseVelocity 20), 150 Dynamic Shape Overlays TOP.
+- Chunk 6 ROOFIX 160 KEEP TOP roofing skeleton: hero + quote form + 5.0/2K reviews → counters → services ×4 → process ×4 → projects ×5 → why us → team → testimonials → articles → locations ×12 → CTA. QA LESSON: template residue (fencing copy) -> scrub foreign trade terms (add a grep gate: fence/hvac/plumb/clean/lawn/siding words not in our copy).
+- 153 Pin Sidebar "cleanest process pattern" (desktop); 158 Never Ending Story (100svh iOS fix); 167 Stroke Text (draw 1.6s, fillDelay .2, stagger .05, power2.out) "most phone-legible showpiece"; 172 Elementor lawn care.
+- Chunk 7: 181 Frame&Co warm stone palette #EDECE7/#1C1A16/#867756; 187 Spurwing 4-point checklist; 203 Built Kindly "Toggle motion effects" button VERIFIED (we have the companion/motion toggle); 204 dhero "Three ways to start".
+- Chunk 8: 220 Thomas Duval TOP: full-bleed photo hero + 6 gallery cards + tap-to-call footer. 221 UZIK /6 counter. Codrops WebGPU belt all REJECT for phone-first.
+- Chunk 9: 245 pure-CSS 3D carousel; 253 Segment menu icon; 255 Shazam morph button; 268 pin word cycle; 267 Mixed Observer scrolljack REJECT warning.
+- Chunk 10: 271 CSS scroll()-driven with every animation in @media (prefers-reduced-motion: no-preference) — "the bank's model article"; 279 Count Up "trust-stats standard"; 275 draggable timeline (RM + keyboard) "process-strip candidate"; 278 Blur Text. REJECT 293 Scroll Velocity "distorts trust copy; use 281".
+- Chunk 11/12: 314, 319 TOP; 348 form-feedback; 353 cleaning blueprint (scarcity bar, rating badge hero 4.9); 356 CSS 3D timeline; 357 full-width tabs "services-tabs standard". Chunks 13–20 tally-only.
+- 352 SVG drop-shadow recipe (stdDeviation 10, feFuncA table "0 0.5"). 353 trade skeleton: scarcity bar → rating hero → service cards → toggle → testimonials. 354 App showcase recede + fan. 356 Responsive CSS Timeline 3D STRONG: radio :checked, rotateY 10→-5 on .8s cubic-bezier(.59,1.45,.69,.98) .2s; accent swap; ≤540px spine left 50px -> how/family timeline candidate (1995 → 2001 → 2015).
+
+### atlas-part-2 3377–3618 (slice 6: 357–413)
+- 357 cbpFWTabs services-tabs standard (4–5 tabs; ≤52.375em icon-only). 361 GSAP horizontalLoop CROWN seamless loop (speed 2 = 200px/s, center, onChange active tile; Draggable is Club — drop it) -> work/area strip option; gate autoplay on RM.
+- 362 mismatched-period loader trick. 363 border-draw 4×1.35s choreography. 364 CSS-only marquee STRONG: N copies, -1 copy → -2 copies, linear; logo strip 20–40s; always-on marquee must ship a pause -> area marquee rule.
+- 366 counter-sliding cover pair menu (1.6s power3.inOut). 369 scroll-behavior smooth + scroll-margin-top gated no-preference. 372 Glare Hover: 33-stop smootherstep gradient, -45deg, .65s, RM in source -> CTA/card sheen.
+- 374 Logo Loop: constant px/s, wrap modulo one copy, 12% edge fade, hover eases speed to 0 (SMOOTH_TAU .25, GLIDE_TAU .8) -> area V marquee upgrade.
+- 380 Alejandro HA restraint recipe (scrub none-ease structure; power4.out/expo.out entrances; one elastic accent). 381 Andrew Reff pause button on logo row + Reduce motion toggle; GRID/INDEX toggle for galleries. 382 Avec Anni one entrance recipe site-wide (spring bounce .2 .4s); two services, no filler.
+- 388 Gallery Play audience-card trio (homeowner/landlord/commercial); top 95% + slow.out. 389 GMX chapter-numbered page, pause/reduce controls visible, house bezier (.16,1,.3,1).
+- 393 loehx proof-per-row accordion ("14 yrs / 300+ roofs" count per row; our honest counts: since 1995 / 4.9 · 295 / since 2001) + NOW-stamped availability. 394 .9s power3.out .02 letter stagger. 395 float/floatAlt phase pair.
+- 401 WAM case-card formula: outcome headline + service tag + photo -> work card copy for ba2 ("The making of the … re-roof" — but we don't know the town for ba2; do not fabricate).
+- 403 named conversion section "Ready to fix your roof?" instead of "Contact us" -> call headline. 404 Lory pulsing availability badge pure CSS ("now booking") -> call/office-open badge (from Mon–Fri 9–5 clock, honest).
+- 405 PiecesSlider fragment before→after (heavy, one hero). 406 dot nav (scale tap ≥24px). 407 infinite tubes texture-offset travel.
+- 408 Pulsenova 3-step process with "One fixed investment per phase"; osmo ease. 409 Grow My Business CROWN trade structure: counters + review wall proof stack (5.0, 99 reviews), process 01–05 with deliverable chips, priced tiers w/ Best-for, address/hours footer; motion scrub .2, start "top bottom-=10%", .6s power3.out; "top+=5svh bottom". -> how (deliverable chips per step), proof (counter + review count), footer hours.
+- 411 NVRMND Map → Make → Move three-verb process with discipline tag per step; tiers stamped with timelines. 413 Tequila stat + one-line substantiation; conversational sentence form; "within 24 hours" promise; Swiper ticker speed 3000 delay 0.
+
+### atlas-part-2 3619–3866 (slice 6 tail 419–421; slice 8 489–552)
+- 419 FORN one small inline SVG motif repeated as brand texture; split-word display; "24 timer" response promise. 421 FH Potsdam portable cursor field (data-tx/ty per element, blur coupled to scale, variable-font wdth lerp .08; pointer:coarse gate) — hero option, gate RM.
+- 489 Ski school STRONG conversion IA: sticky reviews panel (4.9/5 · 12,347) site-wide; range chips on cards; destinations as COUNTS not lists (-> area: "24 towns" count); OFFICE HOURS BESIDE PHONE (weekday 9:00–17:00) -> call/footer: Mon–Fri 9–5 next to (937) 746-7377.
+- 492 Patio RM token layer (one set of tokens referenced everywhere). 495 double GSAP anti-pattern. 496 Primer authenticity line ("real roofs, no stock photos") -> only true if photos are real; ba2 is real repo asset. 498 Raw House one-file CSS motion system; neon flicker; dual-direction marquees.
+- 500 ROTTLER town/postcode finder repeated TWICE on page; "135+ locations" as heading; 12-item guarantee grid -> area finder idea (type your town → yes/no against 24 towns).
+- 504 Septiembre loader counter. 506 Smeulders small GSAP carousel (~17 tweens, out power2.in .7 / in power3.out 1.1, 1-of-6 counter) -> work carousel lean benchmark.
+- 507 Solterra best trade template: quote CTA ×3, numbered why-us 01–03, FAQ answers name a person with direct phone (-> "Rachel answers").
+- 509 Beatus one transition curve site-wide token; RM ×17. 511 Televic proof band directly above listings. 514 Record Institute sheen + reserved glow for top tier. 515 thrive proof-stack order quote → logos → stats → awards → segmented CTA. 516 Tillberg scrub ladder {true,1,.8,.75,.5}; two-stat close (62 years / 211 projects) -> "30 years" style close (1995 → now = 31 years; compute from the 2026 date? keep "since 1995" not a computed number).
+- 517 blob trio; header colour state. 523 3D nav + fallback menu. 528 AppSignal objection flip cards ("You'll hate us if…"); one token (.4,0,.2,1).
+- 531 BLK configurator CROWN: one inline SVG, id'd zones, swatch tray re-fills -> roof shingle colour picker (Owens Corning Platinum Preferred; but no product colour names in facts -> do not name OC colour lines).
+- 538 Codapress RM benchmark CSS ×11 / JS ×22 / HTML ×9. 539 calendar grid as section (Mon–Fri) -> call: week grid Mon–Fri 9–5 honest. 542 fraction counter 01/05; testimonial accordion (no quotes for us).
+- 547 Graffico house GSAP: power2.out / 1s / "top 85%", stagger .1, scrub ladder {2,1,.6}, count-ups 2.2–3.6s, back.out(1.7) accent, quickTo followers.
+- 549 Here Comes The Sun CROWN scroll-story formula: one pinned container, timeline per step, scrub linear, ~10 SVG layer tweens per step, progress nav of step icons, starts −100px early -> HOW section (SVG roof layers build step by step) — verify how V? uses it.
+- 552 Josh Goldsmith CSS-3D cuboid reel; pixel-cell transitions.
+
+### atlas-part-2 3867–4065 (slice 8 tail 552–565; bank-code-a demos 1–13)
+- 554 Ario numbered practice rows, centre-triggered start "50%", overlay pair .66/.68 power3.inOut. 555 Atomic Black 4-phase float family (no sync); twin-ring % preloader. 557 CryptOwl scrubbed replay in 32K JS ("a job's progress replayed by scroll — before/during/after") -> work/how option. 558 Digital Kitchen: one CTA repeated hero + footer.
+- 561 Iper sticky quote CTA → 6-step overlay (01/06, "60 seconds" promise); service + city naming. 562 Lagom cards with price-from/area/term/availability; clamp() ST start. 565 Redstone case-span grid morph; numbered services with sub-service lists; process timeline stated in FAQ.
+- Code-a 58 Shopify Editions: no GSAP, CSS-variable + IO reveal system, Lenis duration 1 expo; 9 RM blocks = RM blueprint; davinci lines stroke-dashoffset 3s; orbit offset-path dots.
+- iper code: quote form spec. septiembre: loader progress = images 60% / modules 40%; 10s timeout. monolith-studio: section order hero → team+tags → 5-star strip → services → knowledge hub → booking CTA → directory footer; LocalBusiness/review/FAQ schema files (SEO layer) -> our JSON-LD.
+- blk configurator (STRONG here; CROWN in slice-8 entry). tillberg scrub ladder. fancy-svg-letter-animation: 3 stacked stroke layers (9/9.5/10px), draw 800ms easeOutQuint, delay pathIndex×200 + letterIndex×40, elastic rise 900ms -> hero wordmark option ("Rembrandt" drawn).
+- scrolltrigger-horizontal-pagination: column-wrap strip trick; circle→square dot pagination; DEFECT: end must be scrollWidth − clientWidth.
+- count-up-reactbits STRONG: easeOut cubicBezier(.33,1,.68,1) 2s; roll mode CELL 1.2em, STAGGER .07 capped 40%; final value in SR-only span from start; tabular-nums; RM finishes instantly -> proof counters (4.9 / 295 / 1995 / 2001).
+- color-customizer-3d (fog-matched floor). pen-40 direction reveals STRONG "house reveal candidate": fromTo ±100px (halve to 50px on mobile), 1.25s expo, overwrite auto, onEnterBack mirrored. 125 square lens SITUATIONAL (no touch). shazam morph: 3 same-point-count paths in data attrs, 400/450/400ms beziers [.8,-.6,.2,1] -> call CTA morph (one per page).
+
+### atlas-part-2 4066–4254 (code-a tail; bank-code-b demos 16–32)
+- infinite-marquee-svg-path: one clock + CSS offset-path; offset-distance = wrap(clock + i×100/N); hover spring to .3×; scroll velocity adds speed; opacity (1−|2p−1|^10)² end fade -> area towns riding a curved route option (one per page).
+- 53 onscroll path wave separator STRONG "cheapest": viewBox 0 0 100 10 preserveAspectRatio none, 150px, d flat→sag scrub, same point structure; RM gate sets final path -> section dividers.
+- digital-butlers code: conversion structure only. haptic: word-highlight manifesto + live local clock.
+- 98 Silo explode-on-scroll stack (EXPAND_RUN 1, OPEN_HOLD 1.15, catch-up 0.35s, wheel cap 100, lead cap .3vh, bar-room reserved) -> HOW option: roof layers pull apart (deck, underlayment, ice&water, shingles) — layer names are generic roofing, not company facts; OK as illustration labels.
+- here-comes-the-sun code: pin 1200%, 12 equal steps 8.333%, dwell delays; sun bezier arc; TOUCH gets buttons, not a broken pin (honest fallback) -> how section mobile fallback rule.
+- lagom code: pinned project deck scale→.5 + rise + fade; 5.5s visible progress timer; clip-path slit inset(50% 0 50% 0) open; locations accordion 15s progress drives map.
+- 120 Raffael Stüken: progressive disclosure "Continue" paragraphs with focus moves; 1.8s cubic-bezier(0,.23,.07,1) calm premium token -> family story beats option.
+- smeulders code hero order: words y24 .85 power3.out stagger .06 delay .15 → subtitle .7 stagger .08 → visual y32 scale .96 delay .7 → play pop delay .85 → more btn delay 1.0; line ornaments scaleY/X 1.1s delay .3 -> hero entrance timing reference.
+- specia1ne cursor reveal slit: duplicated inverted layer clip-path inset band 7rem, lerp .12, inactive 680ms, desktop gate (hover+fine, min 64rem), RM off -> hero "second layer" option.
+- 95 masked heading code: glyph clipPaths, media fillScale 1.25, parallax 26, rise 1.1 / .09 power4.out; RM settles instantly.
+- 72 MotionPath: duration 5, yoyo, autoRotate, alignOrigin .5; rebuild on resize keeping progress -> area route marker.
+- dynamic shape overlays demo1 numPoints 18 / 600ms / delayPointsMax 300 / delayPerPath 100. trionn architecture: one master clock, transitionReady gating, idle preload chunks of 20. grid-to-fullscreen degraded capture. 94 sticky grid scroll zoom 2.05 ±40 splits.
+- gsap-pin-sidebar code: two timelines (pin +100%; content 100%×points), indicator rail 3px #adadad → active; absolute stacked points = zero layout shift -> how V (desktop) pattern. gsap-marquee-text: horizontalLoop speed 5 (500px/s), paddingRight = CSS gap, wait document.fonts.ready. scale-container: no scale step exists (honest gap).
+
+### atlas-part-2 4255–4544 (Animation Parameter Library P01–P32)
+- P01 masked word reveal .6s expo.out stagger .04–.06, y 64–70px -> headline default. P02 Heron slide-up .8s power2.out stagger .02 autoAlpha+yPercent + clearProps (40/41 triggers) -> "the default reveal for trade pages". P03 blur-in .4s power1.out blur 10 y15 (badges/nav). P04 parallax mixed scrub 1.9–4.3 (no lockstep). P05 hairlines -> use scaleY not height.
+- P06/P23 SVG blinds 30 slits scrub 2.5 "prime before/after candidate"; random grid 14 cols → 6 mobile; crispEdges; rebuild on resize -> work ba2 option. P07 Swiper slide scale 1.2→1 .9s. P08 logo loader: avoid long loaders on lead pages. P09 MorphSVG is Club (we have it? check: only DrawSVG/Flip/CustomEase listed — no MorphSVG). P10 attribute-state cursor follower via quickTo (we do per-section kinds). P11 case cascade (inferred).
+- P12 pinned story text out/in ~30px 1.2–1.5s + separate progress bar scrub .3 -> how. P13 1minus1 dosage: .3s dominant, "top bottom", rare scrub. P14 YOLO overshoot cubic-bezier(.2,1.6,.4,1) (retro — trades want restraint).
+- P15 mouse-angle motionpath. P16 DOM-synced WebGL dissolve. P17 accessible WebGL text. P18 Flip link→title; slider↔grid. P19 Draggable inertia rails. P20 custom scroller keeps mobile bars fixed. P21 portal mask.
+- P22 direction-aware reveal (pen 40). P24 Lottie pinned scrub (process only). P25 path-morph separator (Q53). P26 runtime Bézier through 3 measured anchors (multipliers .8/.3/.6/.2) responsive by construction -> area/how connector path. P27 CSS-3D text cylinder (shrink pin on phones). P28 GSAP→uniform. P29 MotionPath segment loop .25→.80 repeatDelay 5 (route line ambient). P30 vanilla 3D carousel. P31 letter stagger .014. P32 MotionPath resize-resilient.
+
+### atlas-part-2 4545–4833 (P33–P66)
+- P33 textPath startOffset scroll (Firefox: animated SVG filters dreadful). P34 organic clipPath morph (tap on phones). P35 staged SVG hero scene, sun transformOrigin "50% bottom" SlowMo 5s.
+- P36 Masked Heading component values. P37 elastic lag grid (ScrollSmoother = Club). P38 infinite parallax grid.
+- CROSS-SITE RULES (verified laws): scrubbed = linear ease; triggered = expo/power2/power3 out; reveals .4–.8s; staggers .02–.12; Lenis rAF in GSAP ticker (one clock); clearProps after reveals; touch/coarse gets a separate simpler path; data-* attribute-driven animation keeps pages maintainable. -> QA check list for all 21 versions.
+- P40 [4] case cards .4–.6 power2.out. P45 [14] duplicated-track loop. P47 [19] transparent-not-removed DOM. P51 [29] audience fork. P52 [30] HOUSE DURATION SCALE .3/.4/.5 core, ≤1.0 ceiling. P56 [38] blinds. P58 [40]. P59 [41] renderer caps 40fps, DPR ≤1.25, document.hidden skip (cursorfx follows). P60 [43] grid/full toggle. P61 [44] expo.out ×10 ease profile. P63 [48] single reusable WebGL plane. P64 [49] damp reveal .6 / dismiss .15; tap <5px / drag 15px. P65 [50] Lottie speed map {2000,1000,500}. P66 [53] separator.
+
+### atlas-part-2 4834–5063 (P67–P85; 3D/SVG library S01–S07)
+- P67 CSS cylinder/orbit/tube (backface-visibility hidden mandatory). P68 circular WebGL gallery. P70 [171] proximity variable font (falloff trio, damping 1−exp(−Δt/(.2×400)), idle wave 3.2s after 500ms idle) -> hero proximity option (our dhero note). P71 logo-collapse intro (keep short). P72 layered pointer tilt ranges per layer.
+- P73 [204] word rotator: every 3200ms, out .45 sine.in yPercent −100 blur 12 stagger .04; in .8 sine.out yPercent 100→0 blur 20→0 stagger .05 -> hero rotating word ("Roofing / Repairs / Restoration") — check current hero V uses these values.
+- P74 [221] CSS-only token house: 300ms, chrome (.86,.1,.14,.9), content (.25,.1,.25,1); crossfade slideshow with 5s linear progress bar = dwell -> work slideshow option. P75 Shazam. P76 [271] CSS scroll-driven recipe under @supports + RM guard; view() cover/contain; @property --hue.
+- P77 [58] Shopify vocab; IO thresholds 0/.1/.5. P78 [153] pin sidebar exact. P79 [156] mouse grid field. P80 [157] Flip grid 7×7 push classes. P81 [161] marquee 500px/s. P82 layered 3D text (34 layers, heavy). P83 particle text (sr-only span). P84 text ribbon path. P85 typewriter (sr-only span holds all sentences).
+- 3D/SVG library stack-fit: Preview → STRONG, Full build → SITUATIONAL, No → NOT-FOR-TRADES (lead pages). S01 splat (poster fallback). S02 fluid NOT-FOR-TRADES. S03 smoke (gate pattern DO NOT USE). S04 cursor image shader (small scale). S05 lidar. S06 video lens planes. S07 bookshelf (reference only).
+
+### atlas-part-2 5064–5288 (S08–S33)
+- S08 one 3D object in a marketing page = Preview/STRONG (single-object hero). S09 canvas count ≠ WebGL. S10 shape-overlay menu. S11 data-path-hover card (hover→tap). S12 scroll-morph bg shapes STRONG (few, large; Safari lag). S13 offset-path marquee. S14 warped-SDF organic reveal STRONG.
+- S15 blinds = Preview + "prime before/after candidate" (30 strips viewBox 100 wide, stagger .02, scrub 2.5) -> work ba2. S16 MorphSVG Club licence. S17 logo loader short. S18 SVG scroll hairlines (data-svg-scroll, linear scrub, matchMedia) STRONG -> dividers/route lines. S19 clip-path menu reversing ease. S20 scroll-driven SVG map: NOT YET READ (no values) -> cannot claim as area reference.
+- FILE RULES: strips/masks in SVG not canvas; touch gets a simpler path; ring/circular text must never crowd the centre (standing rule) -> check area compass/ring text.
+- S21 MotionPath letter assembly. S22 pixel dissolve. S23 Lottie v2 + stroke recolour. S24 [54] "S-curve between three measured anchors" + RM jump-to-final via gsap.matchMedia -> area/how route. S25 Raffael entrance .6s (.55,.08,.21,.92) + .2 delay. S26 refraction lens. S27 WebGL transitions.
+- S29 [178] Eleos one house ease CustomEase (0.625,0.05,0,1) site-wide; DrawSVG loader strokes 1.0 power2.out stagger .08; column shutters yPercent −100 .8s stagger .06 'top 85%' once -> we have CustomEase + DrawSVG: good references for work V (shutter) and house ease. S30 letter shape burst. S31 Flip loop + footer takeover. S32 B/W thumbs colourise on hover (zero animation — restraint).
+
+### atlas-part-2 5289–5508 (S33–S55; UI/UX pattern library start)
+- S33 [220] lightbox ladder: fade .5 ease-out → zoom from .985 .5s (.2,.75,.25,1) delay .04 → controls from .94 .28s delay .14; RM animation none -> work lightbox (Duval staged lightbox note).
+- S34 [243] DOM→WebGL sync; parallax buffer img 125% at −12.5%, MAX_SHIFT 10% -> any image parallax rule (oversize so edge never shows). S35 CSS 3D ring 12×30deg (towns ring? watch "never crowd the centre").
+- S36 page-cover engine. S37 scroll-rig: WebGL only when smooth active; touch = no WebGL meshes. S38 Segment icon. S39 pageload covers. S40 feMorphology outline filters. S41 layered stroke letters.
+- S42 [259] SVG ring progress (ring 60px stroke 6 viewBox 80; offset = L×(1−val)); unified easing (.7,0,.3,1). S43 horizontal pagination. S44 [278] blur-reveal 2 steps (midpoint blur/2, opacity .5, +10% overshoot) .35s/step; UI ease (.22,1,.36,1). S45 count-up spring makeSpring(.06).
+- S46 drop shadow chain. S48 motionpath exact. S49 WebGL distortion hover. S50 morph bg shapes exact. S51 shape hover paths. S52 superhero filter. S53 morphing sidebar paths. S54 scale container. S55 [167] stroke text draw 1.6 / fillDelay .2 / stagger .05 power2.out, wipe fill from left -> hero/call headline draw option.
+- UI/UX patterns: Lenis 14/24 award sites BUT anatomy F17: Lenis only 2/20 GC trade homepages (award default ≠ trade default) — our Lenis use must stay light/optional. Stacks census. Page length: service sites 8–12 screens (our page 7 sections — check total length ≈ within band).
+
+### atlas-part-2 5509–5727 (UI/UX patterns)
+- NOT-FOR-TRADES: scene pages that don't scroll normally (8/24) and gate/long loaders (5/24) — DO NOT USE where the job is phone calls -> veto check for every version (no pin that traps, no loader).
+- RM support = quality edge (only 2/15 sites ship it) — standing rule. Cursor: small follower reacting per background, SYSTEM CURSOR KEPT USABLE (standing rule) -> verify companion never hides the system cursor.
+- Credential as giant type on white, hero-adjacent (ESR; trade version CANDIDATE) -> proof V option ("BBB A+ accredited since 2001" set giant) — but Constellation V1 must stay; V2/V3 can. Persistent Contact button after the hero (sticky CTA rule). Horizontal sector panels (candidate). Case-study index rows (mono labels + mixed-weight giant type) -> work/area index option. Blueprint grid + crosshair corners -> how V (blueprint). Giant two-tone footer wordmark STRONG -> call/footer. Chapter colour change + pill nav (sparingly).
+- Budget-radio form CROWN (no form for us). Audience split "For homeowners / For landlords" (we have no facts about landlord service -> don't). Availability date "Now booking: <month>" STRONG — only if true; we don't know booking state -> use office hours instead (honest). Metric-led case cards: review count, jobs done, years, response time (only true numbers: 4.9/295, since 1995).
+- Monolith blueprint CROWN. Services + enquiry on homepage. Turnaround promise inside copy (only if honourable -> we have none). FEATURED/FULL switch + counted trust intro. Motion-clip gallery (cap count).
+- ROOFIX skeleton CROWN default trade skeleton; cautions: 6-field hero form too long; scrub other trades' copy.
+- Other-vs-Me comparison table STRONG (response time, guarantee, pricing transparency, cleanup) — needs facts we lack except... none -> skip. Elementor split hero.
+
+### atlas-part-2 5728–6077 (UI/UX harvest blocks; conversion anatomy §1–§6)
+- Pinned process step-through STRONG with explicit mobile condition: stacked fallback, never the only way to read the steps -> how version with pin must stack on phones.
+- [22] 30 FPS hero cap (performance). [42] reduced-motion-as-section rule. [114] JC Suzanne: reveal quint.out 1–1.5s stagger .1/.03; GIANT-TYPE CTA 60px mobile → 272px desktop, hover colour swap 300ms ease-out-cubic -> call V (giant phone). [201] CSS flip card .4s, perspective 1000. [203] motion-effects toggle persisted + RM check; time-of-day greeting; "Anatomy of…" named method section. [222] CSS-transition cursor follower .2s; RM kill-switch animation:none !important. [268] pin word rotator. [571] CSS-counter services index current/total. [574] 5× booking CTA. [576] category-panel hero. [57] OPX coverZoom 1→1.24→1 50s linear (hero breathing). [164] circular text spinner role=img aria-label; spin 20s -> "Since 1995" badge ring (keep centre clear).
+- ANATOMY §1 CROWN hero build sheet: F1 one-line proof strip in/under hero (stars + count + licence/years/warranty) "single most consistent top-site device"; F2 headline sells outcome/fear relief not history; F3 interactive low-friction entry beats a lone button; F11 licence in first screen (WE HAVE NO LICENCE NUMBER -> skip, never invent). -> hero versions: check each has a proof strip (4.9 · 295 Google reviews · BBB A+ since 2001 · Since 1995) and an outcome headline.
+- §2 CROWN proof: F4 named systems (OC Platinum Preferred is a named credential); F5 review VOLUME beside stars + platform name ("4.9 on Google · 295 reviews"); F6 tagged reviews (no quotes allowed -> n/a); F12 checkable proof w/ honest caveat (BBB accreditation is checkable; link to BBB? no URL in facts -> state "check us on BBB" without URL? avoid fabricating URL); F13 reviews name operative (n/a, no quotes).
+- §3 CROWN offer: F7 price transparency (no prices in facts -> none); F8 comparison table; F9 free named next step ("Free roof inspection"? NOT in facts -> only "Call Rachel" / "Call (937) 746-7377"); F10 financing (no facts); F14 consultation produces a number; F15 money mechanics; F16 productised offers. -> All require facts we lack; record as not-applicable in verdicts.
+- §4 forms: lowest-friction first field; CallRail. §5 review schema: JSON-LD AggregateRating with REAL numbers (Stronghold 4.9/500) -> ours 4.9/295 in JSON-LD; stale wall reads older than no wall. §6 sticky call: mobile sticky bar Text/Call/Book; phone in nav; nationals without phone underperform.
+
+### atlas-part-2 6078–6465 (anatomy §7–§9 checklist 1–24; roofing.md + hvac.md DEEPs)
+- §7 CROWN: before/after drag slider ROOFING present (Green Conception custom); keyboard-accessible sliders (Elbaz); timed process (week stamps) — untimed processes scored lower everywhere (we have no timings -> no fabricated weeks); never city-swap town pages.
+- §7b CROWN F17 TRADE MOTION CEILING: nobody at the trade top runs GSAP/WebGL scene animation; Stronghold CSS: enter/exit .15s, accordion .2–.28 ease-out, scale-in .18, marquee 60s linear, beziers (.4,0,.2,1)/(0,0,.2,1). Refined rule: dose GSAP at reveal level (.15–.3s ease-out family, carousels, ONE signature interactive per page) — never scene pages or loaders. "Template opportunity: be the first with GSAP-grade craft AND top conversion." F18 weight is the tax: winners ~50–330KB HTML; >1MB needs justification. -> our 435KB is over band: flagged (known).
+- §8 Roofing doctrine: offer + proof IN the hero (instant estimate, licence, review count); fear-killer content converts. Plumbing converts on the phone (Zoom Drain 14 tel: links, first at 10.2% of HTML).
+- Checklist: 1 proof strip (CROWN); 2 outcome headline; 3 low-friction hero entry; 4 numbered process 3–5 steps each de-risking one fear; 5 named guarantee (n/a); 6 price device CROWN (n/a — no prices; never "call for all pricing" is the prohibition: we must not write "call for pricing"); 7 comparison (n/a); 8 platform + real count; 9 financing (n/a); 10 sticky call mobile + phone in nav desktop; 11 real work caption (ba2 real); 12 local content (no city-swap); 13 licence (n/a, none); 14 ≥1 checkable claim + caveat CROWN (BBB A+ accredited since 2001 is publicly checkable on BBB; say "listed with the BBB since 2001"); 18 AggregateRating JSON-LD real numbers; 19 motion budget CROWN; 20 weight budget; 21 distributions (n/a); 22–24 n/a.
+- ROOFING REPORT CROWN: #1 Stronghold 33/35; #2 West London 31/35. Steal-stack: (1) proof strip ABOVE headline → claim/honesty headline → step 1 or Call at equal weight; (3) review count in page TITLE + JSON-LD; (4) honesty block; (5) job photos captioned by town + process story; (6) fear-killer (longevity stat: "since 1995" = local longevity, honest); (7) Stronghold motion budget.
+- Stronghold DEEP CROWN: claim banner → proof strip above headline → "A Better Roof. A Lower Quote." → funnel step 1 + phone fallback; CSS-only motion; JSON-LD 4.9/500.
+- Hippo STRONG: review count in <title> ("4.8 Stars, 722 Reviews"); licence linked to state record; fear-killer "41 Brevard firms gone since 2016".
+- Green Conception: before/after drag slider + numbered process-story photos (inspection → tear-off → deck → underlayment → shingles) -> how section stages are generic roofing stages (OK as process, not a claim about Rembrandt's specific steps? they are standard; keep phrasing generic).
+- West London CROWN small-firm: "What happens when you call" 4-step section; postcode coverage checker (-> area town checker against 24 towns); before/afters captioned by postcode; trust strip with platform score + count + since-year; functional motion only, "nothing decorative blocking the phone path".
+- Cenco: review strip 4.9/5 · 843 · OWENS CORNING PLATINUM · since 2013 (same credential class as ours) + Verify links per credential (no URLs for us -> no links); ZIP checker; numbered inspection.
+- HVAC DEEPs (cross-trade): Cooling Co 0 complaints; One Hour review COUNT in hero (placement is the steal); Strike Force eyebrow "Family-owned · Dallas, TX · Since 2011" + numbered services 01–12 + two phones day/after-hours (we: one phone only, office hours) + no-stock caption; JSON-LD matches display; CONSISTENT counts everywhere (Fuse lesson).
+
+### atlas-part-2 6466–6646 (siding-windows DEEPs + report; GC/remodeling DEEPs)
+- Renewal by Andersen: named 4-step process as homepage spine; one featured project story above any review grid; borrow process confidence, not price silence. Feldco CROWN 2: stat row in trade-specific units; counters 1.2–1.6s ease-out on enter (design-bank standard); reveals .4–.8 power2.out stagger .02–.06; footer 7-day hours + HQ; unsourced "#1" claim = do not copy. Pacific Exteriors problem trio (fears) opening; quote validity period. Allied anti-pressure local; disqualifier section "Are we the right fit?"; projects named Product + Town; restraint only works because everything else is specific. West Shore: location page needs 3 genuinely local facts (we have none per town -> area = honest coverage list, no fake local facts).
+- Siding report proof hierarchy: installer-tier manufacturer status (= OC Platinum Preferred for us!) > review count w/ rating + source > geotagged projects > volume counters > awards; headline review claims must match footer/schema (Thompson Creek cautionary).
+- GC: Neil Kelly CROWN stat bar repeated verbatim as rhythm device (80 Years / 30,000+ / 5yr / 4.6 from 2,200+). Georgia Contractor Group CROWN local model: "GCG at a glance" credential TABLE as hero proof (founder name + role, building since 1998, licences, credentials, base + area) -> proof/family V option: "Rembrandt at a glance" table (Founded 1995 by Franklin "Bunk" Walker · President Wade Walker since 2015 · BBB A+ accredited since 2001 · OC Platinum Preferred · $2M liability · 38 N Pioneer Blvd Springboro · Mon–Fri 9–5 · 24 towns) — all true facts.
+- Murray Lampert: lean 122KB; BBB A+ 50 yrs accredited; "family-owned since 1975, four generations" block; licence linked; zero testimonials (awards do the work). Jackson: three-format proof; named communication cadence. Sebby: only GSAP build; editorial numbered sections + founder voice; 4 drag sliders; weak conversion.
+- Elbaz CROWN remodel: licence + municipalities count in hero strip ("104 municipalities" -> "24 towns" count); keyboard draggable B/A; process with week ranges. CMK: PROOF BEFORE SERVICES hero order; badge-wall density caution (2 awards show 2, large). KBF CROWN originality: place-first neighbourhood index with counts (lightweight) + checkable Ledger with caveat. Phoenix price-after-design. Harmony repeat hard promises verbatim at every scroll depth (repetition of promises not adjectives) -> our 4 facts repeated consistently.
+- GC report: GSAP at exactly one of 20 shortlist firms; motion ceiling holds.
+
+### atlas-part-2 6647–6851 (GC/remodel report files; Lane 5 top-8; BUILDER BRIEF; portfolio plan; lane2 source findings; lane4 source pass; CSV rows 1–10)
+- GC verdict: every 29–30 pairs a named staged process with checkable proof. Remodel steal-stack: proof bar (years/projects/rating/warranty) BEFORE services (CMK order); anti-patterns QA list: stock-photo portfolios, counters rendering 0, partner-only testimonials, INCONSISTENT NUMBERS, franchise sameness with no local layer.
+- Lane 5 top 8: Lars reviews broken out by platform with counts; CQC licence in header/footer chrome; "Book a 15-minute call" low-friction first step; Harth FAQ plain credentials (registered, fully insured) + honest cost guidance.
+- BUILDER BRIEF (governing manual) — key rules for audit:
+  - default homepage order: nav with phone + CTA → hero (outcome headline, one-line proof strip, ONE low-friction entry) → named pillar → services → price device → comparison → proof → numbered timed process → financing → FAQ → closing CTA → directory footer (ours: 7 sections; brief-locked order differs — our brief governs).
+  - recipes: R2 masked word reveal (hand-rolled splitter, no SplitText licence) · R18 rotating word (one word only) · R20 count-up (FINAL NUMBERS IN HTML as no-JS fallback) · R5 role-grouped 4-step entrance (eyebrow → title → body → media, beats .08–.12s) = house section entrance · R1 direction-aware (travel halved on mobile) · R45 stacking service cards CSS sticky · R8 morphing separator (last separator morph completes only ~47% — give taller following section or end "bottom bottom") · R39 MotionPath route divider (hidden on touch, one per page) · R28 B/A slider (touch-first, drag handle, labels, KEYBOARD ARROWS) · R29 testimonial carousel · R30 comparison · R13 horizontal gallery (phone = native scroll-snap, no pin ≤768) · R16 marquee 60s linear · R42 status bar (honest availability only, never fake scarcity) · R23 CSS FAQ · R25 modal (focus trap + Esc) · R26 menu (scroll-lock must release) · R27 filter pills with counts · R43 directory footer · R37 CSS 3D ring desktop only · R38 inertia row keyboard path required.
+  - motion ceiling tiers: Tier 1 emergency/lead-gen default (CSS-family, no loaders/scenes/WebGL, no pins except signature story); Tier 2 planned purchase (GSAP reveal-level once conversion systems complete). Roofing replacement = planned purchase → Tier 2 allowed IF conversion systems complete.
+  - GSAP params (don't invent): reveals .4–.8s; triggered expo/power2/power3 out; scrubbed linear; staggers .02–.12 never larger; masked word .6 expo.out stagger .04–.06 64–70px; slide-up .8 power2.out .02; blur-in .4 power1.out (headlines only).
+  - PIN RULES: the signature story MUST release; any other pin needs a written reason + recorded 375px release test; horizontal galleries never pinned on phone.
+  - Cost lab: ≤330KB HTML target (aim 50–150KB); GSAP 45.7KB gzip once; NEVER HIDE CONTENT IN CSS — hidden start-states set by JS only inside a prefers-reduced-motion: no-preference branch; if JS fails page reads complete; no-JS fallback structural (counters show final values).
+  - Standing standards: exact client logo never redrawn; NEVER ROTATE A TEXT-BEARING ELEMENT (rotating badge bug — verify numeric angle after scroll round-trips) -> check any rotating ring text / compass with text!; personalisation scrub (other trades' terms, towns, licence numbers, prices, company names); ONE CONSISTENT NUMBER everywhere (hero, proof, schema, footer).
+  - Anti-patterns = QA fails: no phone CTA; inflated claims; stock imagery in process/portfolio; placeholder testimonials/licence placeholders live; counters 0 without JS; inconsistent numbers; gate loaders/scene pages; other trade copy; hidden content w/o no-JS path; pin that doesn't release; menu scroll-lock not released.
+  - QA triple-check; 375px mobile pass; RM pass; badge/rotation numeric check; numbers pass; screenshot each section desktop + 375.
+- Portfolio plan roofing site: Stronghold skeleton + West London; recipes R33, R20, R16, R21, R28, R45, R1, R5, R23, R26, R44. HVAC: ONE review number identical in hero/JSON-LD/footer, rounded down.
+- Lane 2 source findings: Stronghold CSS-only; West London hand-built static, self-hosted Archivo; schema-vs-marketing mismatches (Estes 4.77/3 vs hero 4.9/6000+, LOA) are a hygiene failure — our JSON-LD must say 4.9/295 exactly as displayed.
+- Lane 4 source pass: siding quote-form-first; plumbing phone-first. CSV rows 1–10: DaBella, Pella, RbA, Andersen, Marvin, Milgard, Window World, Power, West Shore, Thompson Creek (reference rows only).
+
+### atlas-part-2 6852–7155 (lane4 CSV rows 11–48)
+- Reference rows only (siding/windows firms, manufacturers, off-trade controls 24–27). No homepage-section shortlist value for a roofer beyond: Irish Roofing & Restoration (row 31, 15/35, rebrand) — same "Roofing and Restoration" naming class as Rembrandt; low score, not a model. Manufacturer visualizers (Hardie Dream Color, Crane DreamDesigner) = configurator class (n/a: no OC colour facts).
+
+### atlas-part-2 7156–7459 (lane4 CSV rows 49–87)
+- Reference rows (manufacturers 49–75; locals 76–87). Notables: row 79 Austin Pro 29 top (named-owner transparency); row 80 Allied 27; row 81 Statewide "40yr family story"; row 83 NewSouth "up-to pricing anchor NOT-copy"; row 75 Wallside "since 1944" dated trust. No new homepage-section shortlist items.
+
+### atlas-part-2 7460–7768 (lane4 CSV rows 87–125)
+- Reference rows only. Dated-trust devices recurring at mid-pack: "since 1946" (Alure), "since 1955" + median project value proof stat (Joyce, 27), "75+ yr family brand" (Long), "family since 1995" (Morgan Exteriors FL, 19/35) — "since 1995" alone does not lift a site; it must sit with count + rating. Many not-opened 0 rows (parked/blank) kept thin.
+
+### atlas-part-2 7769–8076 (lane4 CSV rows 126–164)
+- Reference rows; mostly not-opened 0 rows (parked/no site, high-end WA batch) and manufacturers. Notables: row 136 Pacific Exteriors 25 (problem-trio, penny-exact quotes); row 137 KV Construction "how-it-works clarity"; row 155 Cornerstone Renovations 24 "visualizer + estimator + ranges trio". No new shortlist items.
+
+### atlas-part-2 8077–8385 (lane4 CSV rows 164–202)
+- Reference rows: manufacturers/distributors (ABC Supply, Beacon, SRS = roofing distributors, corporate) and not-opened sideA rows. Row 190 Hatch Homes "visualizer pricing updates live". No new shortlist items.
+
+### atlas-part-2 8386–8829 (lane4 CSV rows 203–248; Lane 3 bench log; high-end chunk) — END OF FILE
+- CSV 203–248: reference rows (CA/US locals, many not-opened; UK nationals CR Smith, Anglian "since 1966", Stormclad showroom + trust marks). No new shortlist items.
+- Bench log: weight contrast 50KB bespoke (Lusk) vs 1.14MB WP (Elbaz) = evidence for weight budget; CMK B/A = one hand-rolled CSS component (.before-after__slider, 350px desktop) not a plugin -> work ba2 lightweight slider reference; West Shore review-aggregate discrepancy (65k/88k vs 32k) = read numbers off the exact surface; KBF crown kept.
+- High-end chunk five patterns: publish real numbers or don't talk price; name the process + price mechanism inside it; portfolio = named project + neighbourhood + story + specs (we have ba2 with no named neighbourhood -> don't invent); WARRANTY AS HEADLINE (no warranty facts -> n/a); CTA = consultation or cost guide, never a generic contact form (ours: call Rachel, office hours).

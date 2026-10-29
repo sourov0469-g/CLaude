@@ -300,3 +300,43 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - (b) §14's three binary verdicts per version: facts grounded, reference-intent match, generic feel. A version with a wrong verdict is not done, so the v1 "complete" status is held open until every version is graded.
   - (c) The §12 gate rerun on the final file.
 - **Phases 1–6 skip rule (§10):** each phase's v1 done-criteria evidence stands (logs in `rembrandt/v5/qa/`). The phases are not rebuilt, but every version is re-graded after the full read, and any version that fails a verdict is reopened.
+
+### v2 full read: complete (ADDENDUM record)
+- **Files read completely, A to Z, in this order:**
+  1. `bank-index/BANK-MAP.md` (7,475 lines)
+  2. `bank-index/atlas-part-1-skills.md` (14,247 lines)
+  3. `bank-index/atlas-part-2-bank.md` (8,829 lines)
+- **Notes and resume markers:** `READ-DIGEST.md`. All three markers read COMPLETE.
+- **Where each section's shortlist now comes from.** Map = BANK-MAP.md line ranges; A1 = atlas part 1 line ranges; A2 = atlas part 2 line numbers.
+  - **Hero:**
+    - Map Part II and 1200–4888 hero rows.
+    - A1: S0095 page system (451–1839); S1303 tastemaker (12266–12327); S1321 halo / S1323 trail (12328–12501).
+    - A2: anatomy §1 F1/F2/F3 + checklist 1–3 (6022, 6107–6131); Stronghold DEEP (6346); Strike Force eyebrow (6450); P73 word rotator (4887); smeulders hero order (4139); P01/P02 reveals (4253–4269).
+  - **Reviews/proof:**
+    - Map Part II proof rows.
+    - A1: S1200 AggregateRating, S1262 trust signals (10730–11682).
+    - A2: anatomy §2 + §5 + checklist 8/14/18 (6031, 6058, 6170, 6224, 6260); Georgia CG glance table (6553); count-up code (4018); True Focus #300 (2930); siding proof hierarchy (6509); credential as giant type (5542). The Constellation stays.
+  - **Work:**
+    - Map Part II work rows.
+    - A1: S1324 reveal-hover, S1330 slider aria (12502–12692).
+    - A2: anatomy §7 before/after (6077); CMK hand-rolled slider (8791); blinds S15/P06/P23 (5133, 4298, 4457); Eleos column shutter S29 (5255); lightbox ladder S33 (5287); AKLR filter counts #321 (3074); checklist 11 (6197).
+  - **Family:**
+    - Map Part II and 2800–4888 family rows.
+    - A1: S0944 author-expertise (8610–9015 run).
+    - A2: Bakstad #319 (3056); Murray Lampert (6562); Georgia CG (6553); CSS 3D timeline #356 (3367); Raffael Stüken disclosure (4130); Scroll Reveal #292 (2885).
+  - **How it works:**
+    - Map Part II process rows.
+    - A1: S1325 timeline, S1340 towers (12502–12692); S1352 / S1357 (12693–12965).
+    - A2: Here Comes The Sun #549 + code (3855, 4112); gsap-pin-sidebar code + P78 (4211, 4929); checklist 4 (6134); NVRMND / Hyper Effekt numbered verbs (3601, 3110); builder brief pin rules (6691); 98-silo explode (4103).
+  - **Towns/area:**
+    - Map Part II towns rows.
+    - A1: S1128 LocalBusiness, S1146 NAP, S1214 service-area (10367–11682).
+    - A2: checklist 12 no city-swap (6206); West London postcode checker (6376); KBF place-first index (6616); ROTTLER finder (3693); Curved Loop #281 (2840); CSS / GSAP marquee (3412, 4220); MotionPath P32/S48 (4540, 5409); S24 S-curve (5215).
+  - **Call/close:**
+    - Map Part II call rows.
+    - A1: S1441 Fitts, S1452 peak-end (13245–13622).
+    - A2: anatomy §6 + checklist 10 (6067, 6188); West London "what happens when you call" (6376); [114] giant-type CTA (5818); Shazam morph (4054); availability block, true only (5641); Ski School hours beside phone #489 (3639); Lory pulsing badge #404 (3547).
+  - **Page systems:**
+    - A1: S1474 parallel-concepts / S1502 fingerprint (13971–14247); S1320 one scroll engine (12328–12501).
+    - A2: F17/F18 + checklist 19/20 (6085, 6269, 6278); builder brief cost lab and standing standards (6691); cross-site rules (4605); cursor rule with the system cursor kept usable (5533); anti-pattern of scene pages and loaders (5515).
+- **Next:** task #30, the verdict audit of 21 versions × 3 binary verdicts against this shortlist.
