@@ -69,7 +69,7 @@ def main():
 
     used = set()
     page_text = "\n".join(sections_html) + "\n".join(js)
-    for m in re.finditer(r"data-img=\"([a-z0-9-]+)\"|EZ\.img\('([a-z0-9-]+)'\)", page_text):
+    for m in re.finditer(r"data-(?:bg-)?img=\"([a-z0-9-]+)\"|EZ\.img\('([a-z0-9-]+)'\)", page_text):
         used.add(m.group(1) or m.group(2))
     store = {}
     for name in sorted(os.listdir(IMG)):
