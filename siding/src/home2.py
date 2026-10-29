@@ -54,7 +54,7 @@ def alt_btn(href, label, extra=''):
 
 
 H1 = '<h1 class="display" data-split>Siding and windows, priced in public</h1>'
-LEAD = '<p class="lead">886 documented Austin jobs, each with its real price. Inspections are free.</p>'
+LEAD = '<p class="lead">886 documented jobs around Austin, each with its real price. Inspections are free.</p>'
 
 # ---------- data ----------
 ROB = SVC_PAIRS['siding'][1]
@@ -164,7 +164,20 @@ def map_svg(cls='map-svg', label='Map of 312 photographed, documented Austin Pro
 
 
 # ---------- HERO ----------
+def pstrip(cls=''):
+    """anatomy F1 proof strip: rating + review count + installer tier + since-year, in or above every hero"""
+    c = f' {cls}' if cls else ''
+    return (f'<p class="pstrip{c}"><span><span class="ps-st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><b>4.9</b> on 474 Google reviews</span>'
+            '<span>GAF Master Elite</span><span>James Hardie Elite Preferred</span><span>Since 2009</span></p>')
+
+
+def pmt(P, apr=0.0799, n=120):
+    r = apr / 12
+    return P * r / (1 - (1 + r) ** -n)
+
+
 def hero1():
+    """Q38 SVG mask transitions / R6 blinds (30 slits, stagger 0.02) over a true before/after pair"""
     rb, ra = f'{H}../pairs/robroy-hb', f'{H}../pairs/robroy-ha'
     strips = ''.join(f'<i class="crs" style="--k:{k}"><img src="{ra}-1440.webp" srcset="{ra}-760.webp 760w, {ra}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" decoding="async"></i>' for k in range(30))
     return f'''<div class="v hero-1" data-tone="photo">
@@ -176,40 +189,70 @@ def hero1():
     <figcaption class="pchip h1-chip" data-depth="0.42"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
     <button class="h1-replay btn btn-glass btn-sm" type="button" data-cur="link">Re-side it again</button>
   </figure>
-  <div class="h1-copy" data-depth="0.18">{H1}{LEAD}{ctas(True)}</div>
+  <div class="h1-copy" data-depth="0.18">{pstrip()}{H1}{LEAD}{ctas(True)}</div>
 </div>'''
+
+
+H2_TRADES = ['siding', 'windows', 'shingle-roofing', 'exterior-painting']
+BOOK_AS = {'siding': 'Siding', 'windows': 'Windows', 'shingle-roofing': 'Shingle roofing', 'exterior-painting': 'Exterior painting'}
 
 
 def hero2():
-    return f'''<div class="v hero-2" data-tone="ground">
-  <div class="h2-grid">
-    <div class="h2-copy">{H1}{LEAD}{ctas()}</div>
-    <figure class="h2-fig" data-draw>
-      <img class="h2-photo" src="assets/img/studio/base-1400.webp" width="1400" height="875" alt="{alt(ROB['after']['alt'])}" fetchpriority="high">
-      <div class="h2-lines">{elevation.svg('h2el', 'elev h2-el', 'Line drawing of the same Rob Roy house, traced from the job photo')}</div>
-      <i class="h2-scan" aria-hidden="true"></i>
-      <figcaption class="pchip h2-chip"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
-      <p class="h2-note" aria-hidden="true">Drawn from the job photo, line for line</p>
-    </figure>
+    """Stronghold crown 1: proof strip above the headline, the hero is step one of the quote (photo cards); Neil Kelly
+    project picker. Step two shows the trade's published median band, middle half and monthly estimate."""
+    data, cards = {}, ''
+    for k, s in enumerate(H2_TRADES):
+        t = TBY[s]
+        lo, hi = t['med']
+        data[s] = dict(name=t['name'], n=f"{t['n']}", med=med(t), mid=f"${t['lo']}k and ${t['hi']}k", mo=f"${pmt(lo * 1000):.0f}-${pmt(hi * 1000):.0f}",
+                       img=tphoto(s), alt=alt(PHOTOS[TRADE_PHOTO[s]]['alt']), cap=tcap(s), book=BOOK_AS[s])
+        cards += (f'<li><a class="h2c" href="#services" data-t="{s}" data-cur="view" data-cur-label="See prices">'
+                  f'{img(tphoto(s), 800, 600, "", "h2c-img", eager=k < 2)}<span class="h2c-n">{t["name"]}</span>'
+                  f'<span class="h2c-go">See the price range</span></a></li>')
+    f = data['siding']
+    js = json.dumps(data).replace('</', '<\\/')
+    return f'''<div class="v hero-2" data-tone="ground" data-step="1">
+  <div class="h2-top">{pstrip()}{H1}<p class="lead">886 documented jobs around Austin, each with its real price. Pick your project to see what it usually costs.</p></div>
+  <div class="h2-step1">
+    <p class="h2-k"><span class="h2-steps" aria-hidden="true"><i class="on"></i><i></i></span>Step 1 of 2: pick your project</p>
+    <ul class="h2-cards">{cards}</ul>
+    <p class="h2-more">Gutters, doors, patio covers, metal roofing, decking or storm damage? <a href="#services">See all eleven trades</a>. One free inspection covers every trade on the house, or call <a href="tel:{TEL}">{PHONE}</a>.</p>
   </div>
+  <div class="h2-res" hidden>
+    <figure class="h2r-fig"><img data-f="img" src="{f['img']}" width="800" height="600" alt="{f['alt']}" loading="lazy" decoding="async"><figcaption class="h2r-cap" data-f="cap">{e(f['cap'])}</figcaption></figure>
+    <div class="h2r-copy">
+      <p class="h2-k"><span class="h2-steps" aria-hidden="true"><i class="on"></i><i class="on"></i></span>Step 2 of 2</p>
+      <h2 class="h2r-h" tabindex="-1" data-f="head"><span data-f="name">{f['name']}</span>: what Austin Pro jobs cost</h2>
+      <p class="h2r-med"><span>Median job, from <b data-f="n">{f['n']}</b> priced jobs</span><b class="num" data-f="med">{f['med']}</b></p>
+      <p class="h2r-mid">Half of them landed between <span data-f="mid">{f['mid']}</span>. Materials and labour, before discounts and tax.</p>
+      <p class="h2r-mo">About <b data-f="mo">{f['mo']}</b> a month at 7.99% APR over 120 months, on approved credit.</p>
+      <div class="h2r-cta"><a class="btn btn-red" href="#book" data-book data-trade="{f['book']}" data-cur="hero" data-f="book">Book a free siding inspection</a><button class="tlink h2r-back" type="button" data-f="back">Pick another project</button></div>
+    </div>
+  </div>
+  <script type="application/json" class="h2-data">{js}</script>
 </div>'''
 
 
+H3F = [3, 15, 41, 18, 37]
+
+
 def hero3():
-    hp = HOME_PAIRS[5]
-    assert hp['p'].startswith('Circle C')
-    return f'''<div class="v hero-3" data-tone="night">
-  <div class="h3-copy">{H1}{LEAD}{ctas(True)}</div>
-  <figure class="h3-stage" data-paint data-cur="paint">
-    {img(H + 'hero-paint-b-1280.webp', 1280, 800, alt(hp['ba']), 'h3-b', eager=True)}
-    {img(H + 'hero-paint-a-1280.webp', 1280, 800, alt(hp['aa']), 'h3-a', eager=True)}
-    <canvas class="h3-gl" aria-hidden="true"></canvas>
-    <figcaption class="h3-bar">
-      <span class="h3-hint" data-fine-only>Move across the house to paint the new siding</span>
-      <button class="btn btn-glass h3-toggle" type="button" aria-pressed="false">Show the new siding</button>
-    </figcaption>
-    <p class="pchip h3-chip"><span>{e(hp['p'])}, {e(hp['w'])}</span><b>{e(hp['bl'])} {band(hp['b'])}</b></p>
-  </figure>
+    """Feldco crown 2: hero media of real work under a dated line + a stat row in trade units counting up (R33 poster
+    frames; R20). Photos, not the live site's film (FACTS: the film cannot be verified as an Austin Pro job)."""
+    frames = ''.join(f'<img class="h3f{" on" if k == 0 else ""}" src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{alt(PHOTOS[i]["alt"])}" '
+                     + ('fetchpriority="high"' if k == 0 else 'loading="lazy"') + ' decoding="async">' for k, i in enumerate(H3F))
+    caps = [f"{PHOTOS[i]['place']}, {PHOTOS[i]['when']}. {PHOTOS[i]['trades']}" for i in H3F]
+    stats = [('5,000+', 'Central Texas homeowners served'), ('431', 'siding jobs documented'), ('388', 'window jobs documented'),
+             ('210', 'shingle roofs documented'), ('4.9', 'on 474 Google reviews')]
+    li = ''.join(f'<li><b class="num">{n}</b><span>{e(t)}</span></li>' for n, t in stats)
+    return f'''<div class="v hero-3" data-tone="ground">
+  <div class="h3-panel">
+    <div class="h3-frames" role="group" aria-label="Five recent Austin Pro jobs">{frames}</div>
+    <div class="h3-copy">{pstrip()}<p class="h3-date">Austin's siding, window and roofing crew since 2009</p>{H1}{LEAD}{ctas(True)}</div>
+    <div class="h3-cap"><p class="h3-chip"><span class="num"><b data-h3-no>01</b> of {len(H3F):02d}</span><span data-h3-cap>{e(caps[0])}</span></p><button class="h3-pause btn btn-glass btn-sm" type="button" aria-pressed="false">Pause</button></div>
+  </div>
+  <ul class="h3-stats" aria-label="Austin Pro in numbers">{li}</ul>
+  <script type="application/json" class="h3-data">{json.dumps(caps)}</script>
 </div>'''
 
 
@@ -819,7 +862,7 @@ def book3():
 
 # ---------- page ----------
 SECTIONS = [
-    ('hero', 'Hero', [hero1, hero2, hero3], ['Courses', 'Drawn, then built', 'Paint it']),
+    ('hero', 'Hero', [hero1, hero2, hero3], ['Courses', 'Pick your project', 'Real work']),
     ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'Wall', 'Statement']),
     ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
     ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
@@ -848,7 +891,8 @@ def head():
     ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Austin Pro Siding, Windows & Roofing",
           "telephone": "+1-512-550-0000", "email": EMAIL, "url": LIVE,
           "address": {"@type": "PostalAddress", "streetAddress": "7801 N Lamar Blvd, Suite C70", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78752", "addressCountry": "US"},
-          "openingHours": ["Mo-Fr 08:00-20:00", "Sa 08:00-18:00", "Su 12:00-17:00"], "foundingDate": "2009"}
+          "openingHours": ["Mo-Fr 08:00-20:00", "Sa 08:00-18:00", "Su 12:00-17:00"], "foundingDate": "2009",
+          "aggregateRating": {"@type": "AggregateRating", "ratingValue": 4.9, "reviewCount": 474, "bestRating": 5}}
     return f'''<!doctype html>
 <html lang="en">
 <head>

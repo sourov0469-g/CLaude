@@ -95,7 +95,9 @@
     el.dataset.splitDone = '1';
     return $$('.w', el);
   }
-  /* ---------- headings: each section enters its own way (PLAN-HOME-V3 G3); the phrase stays in aria-label ---------- */
+  /* ---------- headings: each section enters its own way, all inside the parameter library's reveal band (builder
+     brief 3: reveals 0.4-0.8 s, staggers 0.02-0.12, no rotation of text, G5 in AUDIT-V3); the phrase stays in
+     aria-label ---------- */
   const once = (el, start = 'top 86%') => ({ trigger: el, start, once: true });
   function heads(rootEl, s) {
     $$('[data-split]', rootEl).forEach(el => {
@@ -105,36 +107,49 @@
       const first = s.key === 'hero' && !s.switched;
       const st = first ? undefined : once(el);
       switch (s.key) {
-        case 'hero':      // S1321 line reveal: rise with blur
-          G.from(words, { yPercent: 100, filter: 'blur(8px)', duration: 1, ease: 'power4.out', stagger: 0.06, delay: first ? 0.12 : 0, scrollTrigger: st, clearProps: 'filter' }); break;
-        case 'services':  // boards hinging up into place
-          G.from(words, { rotationX: -95, yPercent: 30, transformOrigin: '50% 100%', duration: 0.75, ease: 'power3.out', stagger: 0.05, scrollTrigger: st }); break;
-        case 'work':      // words slide in under their mask
-          G.from(words, { xPercent: -110, duration: 0.8, ease: 'expo.out', stagger: 0.045, scrollTrigger: st }); break;
-        case 'built': {   // S0411 drafted: outline first, then the ink fills left to right
-          el.classList.add('is-draft');
-          G.fromTo(el, { '--fill': '0%' }, { '--fill': '100%', duration: 1.3, ease: 'power2.inOut', scrollTrigger: st, onComplete: () => el.classList.remove('is-draft') });
-          break;
-        }
+        case 'hero':      // R3 blur-in, headlines only: 0.4 s power1.out, blur 10 px and 15 px to rest
+          G.from(words, { y: 15, filter: 'blur(10px)', autoAlpha: 0, duration: 0.4, ease: 'power1.out', stagger: 0.05, delay: first ? 0.1 : 0, scrollTrigger: st, clearProps: 'filter' }); break;
+        case 'services':  // R2 masked word reveal: 0.6 s expo.out, stagger 0.05, words rise from under the mask
+          G.from(words, { yPercent: 110, duration: 0.6, ease: 'expo.out', stagger: 0.05, scrollTrigger: st }); break;
+        case 'work':      // Q40 direction-aware variant: words slide in from the left under their mask
+          G.from(words, { xPercent: -110, duration: 0.6, ease: 'expo.out', stagger: 0.045, scrollTrigger: st }); break;
+        case 'built':     // slide-up reveal: 0.8 s power2.out, stagger 0.02, autoAlpha + yPercent
+          G.from(words, { yPercent: 60, autoAlpha: 0, duration: 0.8, ease: 'power2.out', stagger: 0.02, scrollTrigger: st }); break;
         case 'colour':    // words arrive in paint and dry to ink
-          G.from(words, { color: '#D42125', yPercent: 40, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.06, scrollTrigger: st }); break;
-        case 'near':      // letters resolve like place names on a survey
-          words.forEach((w, k) => { const t = w.textContent; G.to(w, { scrambleText: { text: t, chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', speed: 0.6, revealDelay: 0.2 }, duration: 0.9, delay: k * 0.08, scrollTrigger: st }); });
-          break;
+          G.from(words, { color: '#D42125', yPercent: 40, autoAlpha: 0, duration: 0.6, ease: 'power3.out', stagger: 0.05, scrollTrigger: st }); break;
+        case 'near':      // masked drop from above
+          G.from(words, { yPercent: -110, duration: 0.6, ease: 'expo.out', stagger: 0.05, scrollTrigger: st }); break;
         case 'reviews':   // S1329 staggered words: opacity and 12 px, 0.05 s apart
           G.from(words, { autoAlpha: 0, y: 12, duration: 0.6, ease: 'power2.out', stagger: 0.05, scrollTrigger: st }); break;
-        case 'money':     // figures drop in from above
-          G.from(words, { yPercent: -110, duration: 0.8, ease: 'power3.out', stagger: 0.035, scrollTrigger: st }); break;
+        case 'money':     // quiet fade, the figures below do the talking
+          G.from(words, { autoAlpha: 0, duration: 0.4, ease: 'power1.out', stagger: 0.08, scrollTrigger: st }); break;
         case 'book':      // S1334: words about 72 ms apart, settling from a little large
-          G.from(words, { scale: 1.18, autoAlpha: 0, duration: 0.7, ease: 'power3.out', stagger: 0.072, transformOrigin: '0% 100%', scrollTrigger: st }); break;
-        default:          // S0451 masked rise
-          G.from(words, { yPercent: 110, duration: 0.8, ease: ease.out, stagger: 0.035, scrollTrigger: st });
+          G.from(words, { scale: 1.12, autoAlpha: 0, duration: 0.6, ease: 'power3.out', stagger: 0.072, transformOrigin: '0% 100%', scrollTrigger: st }); break;
+        default:          // R2 masked word reveal
+          G.from(words, { yPercent: 110, duration: 0.6, ease: 'expo.out', stagger: 0.05, scrollTrigger: st });
       }
     });
   }
   function riseIn(els, opts = {}) {
     if (!motionOK() || !els.length) return;
     G.from(els, Object.assign({ y: 16, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.08 }, opts));
+  }
+
+  /* ---------- count-up trust stats (R20). One tempo for the page (Playbook 2): 1.4 s power2.out, inside Feldco's
+     1.2-1.6 s band. The final figure is written in the HTML; the counting copy is aria-hidden and an sr-only twin
+     keeps the real number. opts.st(el) returns a ScrollTrigger config when the count waits for the scroll. ---------- */
+  function countUp(els, opts = {}) {
+    els.forEach((el, k) => {
+      const final = el.textContent.trim(), m = final.match(/^([^\d]*)([\d,]*\.?\d+)(.*)$/);
+      if (!m) return;
+      const sr = d.createElement('span'); sr.className = 'sr-only'; sr.textContent = final; el.before(sr); el.setAttribute('aria-hidden', 'true');
+      if (!motionOK()) return;
+      const dec = (m[2].split('.')[1] || '').length, to = parseFloat(m[2].replace(/,/g, '')), o = { v: 0 };
+      const fmt = v => m[1] + v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[3];
+      el.textContent = fmt(0);
+      G.to(o, { v: to, duration: 1.4, ease: 'power2.out', delay: (opts.delay || 0) + k * 0.08, scrollTrigger: opts.st ? opts.st(el) : undefined,
+        onUpdate: () => { el.textContent = fmt(o.v); }, onComplete: () => { el.textContent = final; } });
+    });
   }
 
   /* ---------- odometer: only changed digits roll, 260 ms (S0652) ---------- */
@@ -234,141 +249,63 @@
      ======================================================================================== */
   const V = {};
 
-  /* HERO 1: the after photo installs over the before in lap courses, bottom-up (PLAN.md blind mask: 30 strips,
-     stagger 0.02, 0.9 s power3.out, about 1.5 s); pointer depth from fx.js (S1330); scroll parallax 0.18 (S1321) */
+  /* HERO 1: Q38 SVG mask transitions / R6 blinds (30 slits, stagger 0.02): the after photo installs over the before
+     in lap courses, bottom-up. Played once on load, not scrubbed (F17: no scroll gate), 0.6 s per course so the whole
+     reveal lands in about 1.2 s; pointer depth from fx.js (S1330); scroll parallax 0.18 (S1321) */
   V.hero1 = (r, b) => {
     const fr = $('.h1-frame', r), crs = $$('.crs', fr), btn = $('.h1-replay', r);
     const order = crs.slice().reverse();
     const shut = 'inset(0% 100% 0% 0%)', open = 'inset(0% 0% 0% 0%)';
-    const play = delay => G.fromTo(order, { clipPath: shut }, { clipPath: open, duration: 0.9, ease: 'power3.out', stagger: 0.02, delay, overwrite: true });
+    const play = delay => G.fromTo(order, { clipPath: shut }, { clipPath: open, duration: 0.6, ease: 'power3.out', stagger: 0.02, delay, overwrite: true });
     if (!motionOK()) { btn.hidden = true; return; }
     G.set(order, { clipPath: shut });
-    play(0.55);
-    G.from($('.h1-b', fr), { scale: 1.06, duration: 1.8, ease: ease.x });
-    riseIn($$('.lead, .ctas', r), { delay: 0.5 });
+    play(0.35);
+    G.from($('.h1-b', fr), { scale: 1.04, duration: 1.2, ease: ease.x });
+    riseIn($$('.pstrip, .lead, .ctas', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
     b.on(btn, 'click', () => { G.set(order, { clipPath: shut }); play(0.1); });
     if (mqDesk.matches && ST) G.to($$('.h1-b, .h1-courses', fr), { yPercent: 9, ease: 'none', scrollTrigger: { trigger: r, start: 'top top', end: 'bottom top', scrub: 1.2 } });
   };
 
-  /* HERO 2: drawn, then built. The traced elevation draws in construction order (S0407: grade, wall, courses
-     bottom-up, trim, windows, roof), a scan line wipes the drawing into the job photo (S0468), and scrolling on
-     desktop runs the scan back up toward the drawing. Line layers float at different depths (S1330). */
+  /* HERO 2: Stronghold crown 1. The proof strip sits above the headline and the hero is step one of the quote:
+     four real job photos as project cards; picking one opens step two in place with that trade's published median
+     band, middle half and monthly estimate, and a booking button already set to the trade (Neil Kelly picker).
+     CSS motion only at Stronghold's dose (0.15-0.28 s). Without JS the cards are links to the services section. */
   V.hero2 = (r, b) => {
-    const fig = $('.h2-fig', r), svg = $('svg', fig);
-    const set = p => { fig.style.setProperty('--scan', (p * 100).toFixed(2) + '%'); fig.classList.toggle('is-scan', p > 0.002 && p < 0.998); };
-    riseIn($$('.lead, .ctas', r), { delay: 0.5 });
-    if (!motionOK() || !window.DrawSVGPlugin) { set(1); return; }
-    set(0);
-    // the drawing is written at a readable pace, then played at 1.9x so the whole intro lands in about 3.3 s
-    const draw = G.timeline();
-    ['grade', 'wall', 'siding', 'wingc', 'trim', 'windows', 'gable', 'roof', 'wing', 'doors', 'deck'].forEach((n, i) => {
-      const g = $(`[data-g="${n}"]`, svg); if (!g) return;
-      const paths = $$('path', g);                                      // courses are generated bottom-up already
-      draw.from(paths, { drawSVG: '0%', duration: n === 'siding' ? 0.35 : 0.55, ease: 'power2.inOut', stagger: n === 'siding' || n === 'wingc' ? 0.03 : 0.04 }, i === 0 ? 0 : '-=0.42');
-    });
-    draw.timeScale(1.9);
-    const tl = G.timeline({ delay: 0.25 }).add(draw);
-    const st = { p: 0 };
-    tl.to(st, { p: 1, duration: 1.1, ease: 'power2.inOut', onUpdate: () => set(st.p) }, '+=0.15');
-    ['roof', 'gable', 'windows', 'trim'].forEach((n, k) => { const g = $(`[data-g="${n}"]`, svg); if (g) g.dataset.depth = [0.6, 0.45, 0.3, 0.2][k]; });
-    if (mqDesk.matches && ST) ST.create({ trigger: r, start: 'top top', end: 'bottom top', onUpdate: self => { if (tl.progress() === 1) set(1 - self.progress * 0.9); } });
-  };
-  /* HERO 3: WebGL brush paints the after photo over the before; tap button for touch, keyboard and fallback */
-  V.hero3 = (r, b) => {
-    const fig = $('.h3-stage', r), cv = $('.h3-gl', fig), imgB = $('.h3-b', fig), imgA = $('.h3-a', fig), btn = $('.h3-toggle', fig);
-    if (motionOK()) riseIn($$('.lead, .ctas', r), { delay: 0.5 });
-    let gl = null, after = false;
-    const label = () => { btn.textContent = after ? 'Show the old siding' : 'Show the new siding'; btn.setAttribute('aria-pressed', after); };
-    b.on(btn, 'click', () => {
-      after = !after; label();
-      if (gl) gl.show(after);
-      else fig.classList.toggle('is-after', after);
-    });
-    if (!motionOK()) return;
-    const start = () => { if (gl || !imgA.complete || !imgB.complete) return; gl = paintGL(fig, cv, imgB, imgA, b); if (gl) { fig.classList.add('gl-on'); gl.demo(); } };
-    b.io(fig, ([en]) => { if (en.isIntersecting) { if (imgA.complete && imgB.complete) start(); else { imgA.decode().then(start, () => {}); imgB.decode().then(start, () => {}); } } }, { rootMargin: '200px' });
+    const T = JSON.parse($('.h2-data', r).textContent), step1 = $('.h2-step1', r), res = $('.h2-res', r);
+    const f = k => $(`[data-f="${k}"]`, res);
+    let from = null;
+    const open = c => {
+      const t = T[c.dataset.t]; from = c;
+      const im = f('img'); im.src = AU(t.img); im.alt = t.alt;
+      ['name', 'n', 'med', 'mid', 'mo', 'cap'].forEach(k => { f(k).textContent = t[k]; });
+      const bk = f('book'); bk.dataset.trade = t.book; bk.textContent = `Book a free ${t.name.toLowerCase()} inspection`;
+      step1.hidden = true; res.hidden = false; r.dataset.step = '2';
+      f('head').focus({ preventScroll: true });
+      if (res.getBoundingClientRect().top < hdH()) goTo(r);
+    };
+    $$('.h2c', r).forEach(c => b.on(c, 'click', e => { e.preventDefault(); open(c); }));
+    b.on(f('back'), 'click', () => { res.hidden = true; step1.hidden = false; r.dataset.step = '1'; if (from) from.focus({ preventScroll: true }); });
+    riseIn($$('.pstrip, .lead, .h2-step1 > .h2-k, .h2-cards > li, .h2-more', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
   };
 
-  function paintGL(fig, cv, imgB, imgA, b) {
-    let g;
-    try { g = cv.getContext('webgl', { premultipliedAlpha: false, antialias: false, failIfMajorPerformanceCaveat: true }); } catch (e) { g = null; }
-    if (!g) return null;
-    const VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
-    const FS_BRUSH = 'precision mediump float;varying vec2 v;uniform vec2 uPos;uniform float uR,uAsp,uK;void main(){vec2 q=v-uPos;q.x*=uAsp;float a=smoothstep(uR,uR*.3,length(q))*uK;gl_FragColor=vec4(a);}';
-    const FS = `precision mediump float;varying vec2 v;uniform sampler2D uB,uA,uP;uniform vec4 uC;uniform float uProg;
-      float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-      float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),u.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),u.x),u.y);}
-      void main(){vec2 uv=vec2(v.x,1.-v.y);vec2 t=uv*uC.xy+uC.zw;
-        float nn=n(uv*vec2(9.,6.))*.6+n(uv*vec2(24.,16.))*.4;
-        float m=texture2D(uP,v).r+uProg*1.5;
-        float k=smoothstep(.42,.62,m+(nn-.5)*.4);float e=k*(1.-k)*4.;vec2 o=vec2(nn-.5)*.014*e;
-        vec3 cb=texture2D(uB,t+o).rgb,ca=texture2D(uA,t-o).rgb;
-        gl_FragColor=vec4(clamp(mix(cb,ca,k)+e*.05,0.,1.),1.);}`;
-    const sh = (type, src) => { const s = g.createShader(type); g.shaderSource(s, src); g.compileShader(s); if (!g.getShaderParameter(s, g.COMPILE_STATUS)) { console.warn(g.getShaderInfoLog(s)); return null; } return s; };
-    const prog = (fs) => { const p = g.createProgram(); const a = sh(g.VERTEX_SHADER, VS), c = sh(g.FRAGMENT_SHADER, fs); if (!a || !c) return null; g.attachShader(p, a); g.attachShader(p, c); g.bindAttribLocation(p, 0, 'p'); g.linkProgram(p); return g.getProgramParameter(p, g.LINK_STATUS) ? p : null; };
-    const P1 = prog(FS_BRUSH), P2 = prog(FS);
-    if (!P1 || !P2) return null;
-    const buf = g.createBuffer(); g.bindBuffer(g.ARRAY_BUFFER, buf); g.bufferData(g.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), g.STATIC_DRAW);
-    g.enableVertexAttribArray(0); g.vertexAttribPointer(0, 2, g.FLOAT, false, 0, 0);
-    const tex = (src) => { const t = g.createTexture(); g.bindTexture(g.TEXTURE_2D, t); [g.TEXTURE_WRAP_S, g.TEXTURE_WRAP_T].forEach(k => g.texParameteri(g.TEXTURE_2D, k, g.CLAMP_TO_EDGE)); g.texParameteri(g.TEXTURE_2D, g.TEXTURE_MIN_FILTER, g.LINEAR); g.texParameteri(g.TEXTURE_2D, g.TEXTURE_MAG_FILTER, g.LINEAR); if (src) g.texImage2D(g.TEXTURE_2D, 0, g.RGBA, g.RGBA, g.UNSIGNED_BYTE, src); return t; };
-    let tB, tA;
-    try { tB = tex(imgB); tA = tex(imgA); } catch (e) { return null; }
-    const PW = 512, PH = 320;
-    const tP = tex(null); g.texImage2D(g.TEXTURE_2D, 0, g.RGBA, PW, PH, 0, g.RGBA, g.UNSIGNED_BYTE, null);
-    const fb = g.createFramebuffer(); g.bindFramebuffer(g.FRAMEBUFFER, fb); g.framebufferTexture2D(g.FRAMEBUFFER, g.COLOR_ATTACHMENT0, g.TEXTURE_2D, tP, 0);
-    const clearPaint = () => { g.bindFramebuffer(g.FRAMEBUFFER, fb); g.viewport(0, 0, PW, PH); g.clearColor(0, 0, 0, 0); g.clear(g.COLOR_BUFFER_BIT); };
-    clearPaint();
-    const U = (p, n) => g.getUniformLocation(p, n);
-    const st = { prog: 0 };
-    let W = 1, H = 1, frame = 0, lost = false;
-    const size = () => { const rc = fig.getBoundingClientRect(); const dpr = Math.min(window.devicePixelRatio || 1, 1.5); W = Math.max(1, Math.round(rc.width * dpr)); H = Math.max(1, Math.round(rc.height * dpr)); cv.width = W; cv.height = H; draw(); };
-    function draw() {
-      frame = 0; if (lost) return;
-      g.bindFramebuffer(g.FRAMEBUFFER, null); g.viewport(0, 0, W, H); g.disable(g.BLEND); g.useProgram(P2);
-      const ca = W / H, ia = 1280 / 800;
-      const c = ca > ia ? [1, ia / ca, 0, (1 - ia / ca) / 2] : [ca / ia, 1, (1 - ca / ia) / 2, 0];
-      g.uniform4f(U(P2, 'uC'), c[0], c[1], c[2], c[3]); g.uniform1f(U(P2, 'uProg'), st.prog);
-      [[tB, 'uB'], [tA, 'uA'], [tP, 'uP']].forEach(([t, n], i) => { g.activeTexture(g.TEXTURE0 + i); g.bindTexture(g.TEXTURE_2D, t); g.uniform1i(U(P2, n), i); });
-      g.drawArrays(g.TRIANGLE_STRIP, 0, 4);
-    }
-    const ask = () => { if (!frame) frame = requestAnimationFrame(draw); };
-    function stamp(x, y, k = 1) {
-      g.bindFramebuffer(g.FRAMEBUFFER, fb); g.viewport(0, 0, PW, PH); g.useProgram(P1);
-      g.enable(g.BLEND); g.blendFunc(g.ONE, g.ONE);
-      g.uniform2f(U(P1, 'uPos'), x, 1 - y); g.uniform1f(U(P1, 'uR'), 0.11); g.uniform1f(U(P1, 'uAsp'), W / H); g.uniform1f(U(P1, 'uK'), 0.45 * k);
-      g.drawArrays(g.TRIANGLE_STRIP, 0, 4); g.disable(g.BLEND);
-    }
-    let last = null;
-    function strokeTo(x, y) {
-      if (!last) { stamp(x, y); last = [x, y]; ask(); return; }
-      const dx = x - last[0], dy = y - last[1], dist = Math.hypot(dx * W / H, dy), steps = Math.min(24, Math.ceil(dist / 0.025));
-      for (let i = 1; i <= steps; i++) stamp(last[0] + dx * i / steps, last[1] + dy * i / steps);
-      last = [x, y]; ask();
-    }
-    const pos = e => { const rc = fig.getBoundingClientRect(); return [(e.clientX - rc.left) / rc.width, (e.clientY - rc.top) / rc.height]; };
-    let demoTl = null;
-    const stopDemo = () => { if (demoTl) { demoTl.kill(); demoTl = null; } };
-    if (mqFine.matches) {
-      b.on(fig, 'pointermove', e => { if (e.pointerType !== 'mouse') return; stopDemo(); const [x, y] = pos(e); strokeTo(x, y); });
-      b.on(fig, 'pointerleave', () => { last = null; });
-    }
-    hdrag(fig, b, { onMove: e => { if (e.pointerType === 'mouse') return; stopDemo(); const [x, y] = pos(e); strokeTo(x, y); }, onEnd: () => { last = null; } });
-    b.on(cv, 'webglcontextlost', e => { e.preventDefault(); lost = true; fig.classList.remove('gl-on'); });
-    b.ro(fig, size);
-    size();
-    b.add(() => { if (frame) cancelAnimationFrame(frame); stopDemo(); G.killTweensOf(st); [tB, tA, tP].forEach(t => g.deleteTexture(t)); g.deleteFramebuffer(fb); g.deleteBuffer(buf); g.deleteProgram(P1); g.deleteProgram(P2); const ext = g.getExtension('WEBGL_lose_context'); if (ext) ext.loseContext(); });
-    return {
-      show(on) {
-        stopDemo(); G.killTweensOf(st);
-        G.to(st, { prog: on ? 1 : 0, duration: 1.2, ease: 'power2.inOut', onUpdate: ask, onComplete: () => { if (!on) { clearPaint(); ask(); } } });
-      },
-      demo() {
-        const p = { t: 0 };
-        last = null;
-        demoTl = G.to(p, { t: 1, duration: 1.6, delay: 0.6, ease: 'power2.inOut', onUpdate: () => { const x = 0.18 + p.t * 0.55, y = 0.55 + Math.sin(p.t * Math.PI * 2) * 0.12; strokeTo(x, y); }, onComplete: () => { last = null; demoTl = null; } });
-      }
-    };
-  }
+  /* HERO 3: Feldco crown 2, as R33 poster frames (the live site's film can't be verified as the firm's job, so
+     photographs carry it): five job photos cross-fade every 5 s with a slow settle; the chip names place, month and
+     trades. Runs only while in view and the tab is visible, with a pause button (WCAG 2.2.2); still under reduced
+     motion. The stat band counts up once in trade units (R20). */
+  V.hero3 = (r, b) => {
+    const fr = $$('.h3f', r), C = JSON.parse($('.h3-data', r).textContent), cap = $('[data-h3-cap]', r), no = $('[data-h3-no]', r), pz = $('.h3-pause', r);
+    let k = 0, t = 0, vis = false, paused = !motionOK();
+    const show = n => { fr[k].classList.remove('on'); k = (n + fr.length) % fr.length; fr[k].classList.add('on'); cap.textContent = C[k]; no.textContent = String(k + 1).padStart(2, '0'); };
+    const run = () => { clearInterval(t); t = 0; if (vis && !paused && !d.hidden) t = setInterval(() => show(k + 1), 5000); };
+    const label = () => { pz.setAttribute('aria-pressed', paused); pz.textContent = paused ? 'Play' : 'Pause'; };
+    b.io(r, ([en]) => { vis = en.isIntersecting; run(); });
+    b.on(d, 'visibilitychange', run);
+    b.on(pz, 'click', () => { paused = !paused; label(); run(); });
+    label();
+    b.add(() => clearInterval(t));
+    countUp($$('.h3-stats b', r), { delay: 0.4 });
+    riseIn($$('.h3-copy > .pstrip, .h3-date, .h3-copy > .lead, .h3-copy > .ctas', r), { delay: 0.3, duration: 0.5, stagger: 0.06 });
+  };
 
   /* PROOF 1: the record resolves (S0184 ScrambleText digits, revealDelay 0.3); 4.9 as a ring drawn to 98 % (S0197:
      r 40, stroke 8, round cap, -90 deg); credentials rise like dominoes 0.1 s apart (S0222) */
@@ -1429,6 +1366,7 @@
 
   /* in-page links: smooth with Lenis, focus moves to the target (S0915); booking links can preselect a trade */
   d.addEventListener('click', e => {
+    if (e.defaultPrevented) return;                                      // a version handled its own link (Hero 2 cards)
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
     const id = a.getAttribute('href').slice(1);
