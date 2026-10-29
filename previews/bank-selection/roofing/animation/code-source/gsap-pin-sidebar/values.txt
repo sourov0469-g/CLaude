@@ -1,0 +1,30 @@
+SLUG: gsap-pin-sidebar
+ENTRY: 153 GSAP Pin Sidebar (CodePen, akapowl)
+PEN: https://codepen.io/akapowl/pen/poRdoLV/9b99361db3839f1169cdc0f278746ee5 (hash-suffixed URL required — the bare /pen/poRdoLV 404s; full HTML/CSS/JS captured from the hash URL)
+VARIANTS: a "- 2" fork (pen JjEOwoP) and a GreenSock variant (pen NWprdPM) exist — not this entry.
+
+STACK (Measured)
+- GSAP + ScrollTrigger; vanilla CSS layout; two scrubbed timelines on one section
+
+PARAMETERS (Measured from pen source)
+POINTS TIMELINE:
+- duration = points.length (1 unit per point)
+- ScrollTrigger: trigger ".philosophie", start "top bottom", end "+=" + height + "%" where height = 100 * points.length (so 100% of viewport per point), scrub: true, id "points"
+PINNER TIMELINE:
+- ScrollTrigger: trigger ".philosophie.wrapper", start "top top", end "+=100%", scrub: true, pin ".philosophie.wrapper", pinSpacing: true, id "pinning", markers: true (left on in the pen; ScrollTrigger.defaults markers: false elsewhere)
+PER-POINT SEQUENCE (point i, 0-based, at timeline position i):
+- .point elements are position absolute, top 0 (stacked)
+- indicator i: backgroundColor -> "orange", duration 0.25, at position i (indicators default #adadad)
+- img: from autoAlpha 0 at i
+- article: from autoAlpha 0 + y (translateY) 100 at i
+- For every point except the last, at position i + 0.75: indicator -> "#adadad" (0.25), article -> autoAlpha 0 + y -100, img -> autoAlpha 0
+CSS (Measured):
+- .indicators: position absolute, left 2rem, margin 10vh 0, height 80vh, width 3px, flex column, justify-content space-between; display none until JS switches it to flex
+- .point: height 100vh, padding 4rem, display flex; article flex-basis 60%; img flex-basis 25%, max-width 25vw
+
+READING / MECHANISM
+1. A full-height section contains N stacked "points" (image + article pairs), all absolutely positioned on top of each other, plus a slim vertical indicator rail (one dot/segment per point).
+2. Timeline A (the pinner) pins the section wrapper for exactly +100% scroll so the stack stays in view while Timeline B plays.
+3. Timeline B is scrubbed over 100%-per-point of scroll: at each unit position it fades/slides the current point in (image fade, article rises 100 px), lights its indicator orange for 0.25, then at +0.75 exits it upward (-100 px) and dims the indicator — a scroll-driven carousel with a progress rail.
+4. Because points are stacked absolute, entering/exiting is pure autoAlpha/transform — no layout shift.
+REBUILD NOTE: separate the pin timeline from the content timeline (as here) — it keeps end calculations clean: pin distance = one viewport, content distance = 100% x number of points. Remove markers:true for production.
