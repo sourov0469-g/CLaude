@@ -7418,3 +7418,68 @@ STRONG · cheap · Remodeling shortlisting, pricing-transparency patterns · →
 Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> — RESULT: <kept / scrapped / adapted verdict + one line why>`
 
 - **Reviews "Constellation" (star-assembly into the rating figure)** — PICKED-FOR: Rembrandt Roofing homepage v5, Reviews V1 — RESULT: **KEPT** — the only version of the first-three-sections build the owner rated worth keeping (build scored 5/10 overall; all hero versions scrapped, most V2/V3 scrapped as filler). The mechanism works; the lesson logged with it: versions built "just to say they're there" fail — every version needs a named reference and full craft.
+
+### Elbaz Construction homepage (remodeling, Miami) — PLAN-V2 build, 10 sections × 3 versions, one self-contained file
+
+Page system:
+- **[BANK] Elbaz co-skeleton + Roofix order (anatomy §8 remodeling doctrine)** — PICKED-FOR: Elbaz homepage, page order, all versions — RESULT: **KEPT** — hero → proof → services → before/after → process → financing → work → reviews → towns → consult reads as the doctrine says: proof before services, financing before the gallery.
+- **[BANK] Q40 direction-aware reveals (pen-40)** — PICKED-FOR: Elbaz homepage, default entrance, every version without its own — RESULT: **KEPT** — copied as `EZ.reveal` (±100px, 50 on phones, 1.25s expo, overwrite auto, hide on leave); one helper, so all 30 versions enter the same way.
+- **[BANK] Anatomy §7b F17 motion ceiling** — PICKED-FOR: Elbaz homepage, motion law — RESULT: **KEPT** — the default config (all v1) has zero pins and one signature interactive (the before/after handle); pins only in hero v2 and process v3, plus work v2's CSS sticky stage.
+- **[BANK] Anatomy §7b F18 weight budget** — PICKED-FOR: Elbaz homepage, weight law — RESULT: **ADAPTED** — three.js, the Archivo font and four unused GSAP plugins (MorphSVG, Draggable, Inertia, MotionPath, ~86KB) were cut, but the brief's "every image embedded, one file" puts the photos inside the HTML: 3.97MB total, of which 3.26MB is the 38 WebP photographs. Code, fonts and data come to about 0.7MB.
+- **⟦S1320⟧ one smooth-scroll engine** — PICKED-FOR: Elbaz homepage, scrolling — RESULT: **KEPT** — Lenis only, driving ScrollTrigger; off on touch, reduced motion and motion-off.
+- **⟦S0736⟧ tweaks engine** — PICKED-FOR: Elbaz homepage, the 1 · 2 · 3 switch per section — RESULT: **KEPT** — per-section radiogroup, state in `ez-versions` + URL (`?proof=2`); a full 1→2→3→1 cycle of all ten sections leaves no pin-spacers, no new triggers and no console errors at 1440 and 375.
+- **⟦S1321⟧ difference-blend cursor + [BANK] tillberg `data-cursor`/`data-cursor-label` + P10 attribute-state follower** — PICKED-FOR: Elbaz homepage, cursor per element — RESULT: **KEPT** — one follower, states set by attribute; off on coarse pointers and reduced motion.
+- **[BANK] Anatomy §6 sticky mobile contact bar (A.B. May) + checklist 10** — PICKED-FOR: Elbaz homepage, phones — RESULT: **KEPT** — Call · Text · Book bar under 768px.
+- **[BANK] Giant two-tone footer wordmark (OFFF Forum) + [BANK] 319 Bakstad footer record** — PICKED-FOR: Elbaz homepage, footer — RESULT: **KEPT** — "ELBAZ CONSTRUCTION" full width in two tones over NAP, licence, hours, counties.
+- **[BANK] Anatomy §5 + ⟦S1128⟧ schema** — PICKED-FOR: Elbaz homepage, head — RESULT: **KEPT** — LocalBusiness + AggregateRating 4.8 / 343 with the real numbers.
+
+Hero (built before the reference method; flagged in PLAN-V2 §1, not rebuilt):
+- **⟦S1303⟧ H3 photographic fold + ⟦S1321⟧ motion values** — PICKED-FOR: Elbaz homepage, hero, v1 — RESULT: **KEPT, FLAGGED** — the fold works, but its signature move (the photo's traced lines draw, then the photograph develops under them) traces to no bank entry.
+- **[BANK] S54 / Q154 scale-container-scrolltrigger** — PICKED-FOR: Elbaz homepage, hero, v2 — RESULT: **ADAPTED, FLAGGED (partial)** — the pinned window-into-image scrub works; its headline weight/width scrub went inert when the brand's one-weight Bebas Neue replaced Archivo.
+- **[BANK] 95-masked-heading + [BANK] 506 Smeulders image-filled names** — PICKED-FOR: Elbaz homepage, hero, v3 — RESULT: **KEPT, FLAGGED (partial)** — imagery inside the glyphs holds; the weight lens on line 2 is inert under Bebas. All three hero versions also miss F1: the ★4.8 · 343 proof strip is not in the first screen (the licence is).
+
+Proof:
+- **[BANK] Georgia Contractor Group "at a glance" + [BANK] P05 growing hairlines** — PICKED-FOR: Elbaz homepage, proof, v1 — RESULT: **KEPT** — a checkable credential table (licence, permits in our name, 4.8, 104, 52, 30+) with "State register" / "Read them" links; rules draw scaleX 1.1s power3.out.
+- **[BANK] KBF "The Ledger" + [BANK] Austin Pro self-reconciling arithmetic + [BANK] S45 count-up / odometer (Q279)** — PICKED-FOR: Elbaz homepage, proof, v2 — RESULT: **KEPT** — 34 + 31 + 39 = 104, then 4.8 · 343; odometer cells 1.2em, stagger .07, cubic-bezier(.33,1,.68,1), velocity blur; final numbers stay in the HTML.
+- **[BANK] 300 True Focus** — PICKED-FOR: Elbaz homepage, proof, v3 — RESULT: **KEPT** — brackets hop between the four credentials (hold 1s, move .5s, blur 5px), each showing its evidence line; manual on hover and focus.
+
+Services:
+- **[BANK] PHS Renovations figure-on-card + [BANK] Neil Kelly service grid** — PICKED-FOR: Elbaz homepage, services, v1 — RESULT: **ADAPTED** — Elbaz publishes no prices, so the card's headline figure is construction time (6–12 / 4–8 weeks / several months).
+- **[BANK] Q162 K72 Marquee Hover** — PICKED-FOR: Elbaz homepage, services, v2 — RESULT: **KEPT** — closestEdge entry, ±101 counter-translate .6s expo, CSS marquee 15s; the band is parked with GSAP yPercent (stacking CSS transforms with GSAP hid it, fixed).
+- **[BANK] 516 Tillberg + tillberg-design code demo** — PICKED-FOR: Elbaz homepage, services, v3 — RESULT: **ADAPTED** — three image chapters; took the demo's own image travel (y 0 → box − image, scrub true) over the plan's yPercent ±8, title words .1 stagger, line words from opacity .4 scrub 1.
+
+Before / after:
+- **[BANK] Elbaz draggable before/afters + [BANK] CMK CSS slider + [BANK] Austin Pro banding** — PICKED-FOR: Elbaz homepage, before/after, v1 — RESULT: **KEPT** — native range over the pair (keyboard for free), tabs for the four genuine pairs, band = published construction time; the page's one signature interactive.
+- **[BANK] 361 horizontalLoop (GreenSock xxQaRoX)** — PICKED-FOR: Elbaz homepage, before/after, v2 — RESULT: **KEPT** — speed 2, center, the active tile shows its after; pause / prev / next added, drag dropped.
+- **[BANK] Q38 SVG Mask Transitions (blinds)** — PICKED-FOR: Elbaz homepage, before/after, v3 — RESULT: **KEPT** — 30 slits, stagger .02, scrub 2 (1 on phones), crispEdges. ⟦S1324⟧ was ruled out because the pairs are not pixel-aligned.
+
+Process:
+- **[BANK] Anatomy §7 timed process (Elbaz) + [BANK] Neil Kelly phase timelines** — PICKED-FOR: Elbaz homepage, process, v1 — RESULT: **KEPT** — a week-axis chart of the eight published ranges; bars grow scaleX .8s, .07 stagger; the detail line is aria-live.
+- **⟦S1325⟧ scroll-progress-timeline** — PICKED-FOR: Elbaz homepage, process, v2 — RESULT: **ADAPTED** — the rail is measured between dot centres as specified; added a sticky "NN of 08" stage panel after the Elbaz process track.
+- **[BANK] scrolltrigger-horizontal-pagination code demo** — PICKED-FOR: Elbaz homepage, process, v3 — RESULT: **KEPT** — pinned sideways run, travel = scrollWidth − clientWidth, numbered dots toggled via containerAnimation; native snap row on phones.
+
+Financing:
+- **[BANK] 314 Pricing Tables + [BANK] Anatomy F10** — PICKED-FOR: Elbaz homepage, financing, v1 — RESULT: **ADAPTED** — four partner columns, not three: /financing/ publishes distinct figures for Ygrene (20-year term) and Renew Financial ($250K / 20%), so PACE splits in two.
+- **[BANK] Anatomy §4 TruGreen problem-picker** — PICKED-FOR: Elbaz homepage, financing, v2 — RESULT: **KEPT** — Kitchen / Bathroom / Roof, windows or doors / Whole home → the routes that apply and why; aria-live.
+- **⟦S1327⟧ scroll-scrubbed-word-reveal** — PICKED-FOR: Elbaz homepage, financing, v3 — RESULT: **KEPT** — opacity .18, blur 6px, .14em, span 160vh; punctuation after `<strong>` glued so a comma never wraps alone.
+
+Work:
+- **[BANK] 321 AKLR counted filters + [BANK] Featured / Full (Jesper Landberg) + [BANK] P80 Flip grid** — PICKED-FOR: Elbaz homepage, work, v1 — RESULT: **ADAPTED** — 26 titled projects held in the file, Featured 12 / Full 26, counts on every filter; Flip runs .45s power2.inOut, not the plan's .3s Material curve.
+- **[BANK] 94-sticky-grid-scroll code demo** — PICKED-FOR: Elbaz homepage, work, v2 — RESULT: **KEPT** — 425vh sticky stage, ±r reveal stagger .06, zoom 2.05, columns ±40, content at −=0.32; static grid on phones and reduced motion; the title's halo follows the theme background.
+- **[BANK] 506 Smeulders + smeulders code demo** — PICKED-FOR: Elbaz homepage, work, v3 — RESULT: **ADAPTED** — six fullscreen slides with a 1s power2.inOut crossfade and a slow drift on two-image slides, ring timer, caption words y24 .85s stagger .06; the title is not image-filled, so the hero v3 trick stays unique.
+
+Reviews:
+- **Reviews "Constellation" via ⟦S0687⟧ canvas FX + ⟦S1323⟧ pointer emission** — PICKED-FOR: Elbaz homepage, reviews, v1 — RESULT: **KEPT** — 343 points (one per review) assemble into "4.8" sampled from Bebas, jittered ±0.4 step so the glyph does not read as a grid; pointer scatter radius 90; assembled still under reduced motion.
+- **[BANK] Georgia Contractor Group dated, named testimonials + [BANK] Anatomy §5 / F6 / F13** — PICKED-FOR: Elbaz homepage, reviews, v2 — RESULT: **ADAPTED** — a feed of 11 verbatim kitchen and bathroom reviews, the operative's name marked, dated as published; filters cut to All / Kitchens / Bathrooms to match the homepage's scope.
+- **[BANK] Q161 GSAP seamless marquee + [BANK] Stronghold marquee token** — PICKED-FOR: Elbaz homepage, reviews, v3 — RESULT: **KEPT** — two opposite trains at about 45px/s, paused on hover, focus, button and offscreen.
+
+Towns:
+- **[BANK] 562 Lagom locations accordion + [BANK] KBF place index with counts** — PICKED-FOR: Elbaz homepage, towns, v1 — RESULT: **KEPT** — 15s linear progress fill, auto-advance, hover reverses .5s; the map's viewBox flies 1.2s to the open county. Geometry is Census record (county outlines + 2023 Gazetteer places), all 104 matched.
+- **[BANK] Anatomy §1 F3 / §4 lowest-friction first field + ⟦S1128⟧ areaServed** — PICKED-FOR: Elbaz homepage, towns, v2 — RESULT: **KEPT** — one giant town field, ≤4 suggestions, a yes/no answer with the county, or the call line.
+- **[BANK] P70 proximity variable font (Q171)** — PICKED-FOR: Elbaz homepage, towns, v3 — RESULT: **ADAPTED** — moved to Geist's weight axis (300→800) because Bebas has none; gaussian R 120, smoothing exp(−ms/80), 64ms clamp, idle wave 3.2s; a hidden 800-weight copy reserves width so names never reflow.
+
+Consult:
+- **[BANK] 317 Digital Butlers form blueprint + [BANK] 348 Circular Progress Button + [BANK] 310 Text Input Effects** — PICKED-FOR: Elbaz homepage, consult, v1 — RESULT: **KEPT** — proof band, floating labels after the input, one-tap contact radios, pill → 70px ring → tick; the ring draws while the email is composed.
+- **[BANK] iper code demo (multi-step overlay, 01/06 counter)** — PICKED-FOR: Elbaz homepage, consult, v2 — RESULT: **ADAPTED** — four steps (01/04) in a dialog with focus trap and Escape; per-step validation, and a bad field on submit jumps back to its step.
+- **[BANK] Q413 Tequila conversational form** — PICKED-FOR: Elbaz homepage, consult, v3 — RESULT: **KEPT** — the request as a sentence with inline fields sized to their content, consent below, the response promise beside the button.
+  All three consult versions have no server: they validate inline, then compose an email to Sales@elbazconstruction.com, and the page says so before sending.

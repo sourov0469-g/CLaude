@@ -803,7 +803,7 @@
     if (EZ.booted) return;
     EZ.booted = true;
     buildImages();
-    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, MorphSVGPlugin, Draggable, InertiaPlugin, Flip, MotionPathPlugin);
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip);
     gsap.defaults({ ease: 'power3.out', duration: .85 });
     ScrollTrigger.config({ ignoreMobileResize: true });
 

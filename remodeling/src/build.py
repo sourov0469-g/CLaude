@@ -19,8 +19,7 @@ IMG = os.path.join(ROOT, "assets", "img")
 OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
 SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
-VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "MorphSVGPlugin", "Draggable",
-          "InertiaPlugin", "Flip", "MotionPathPlugin"]
+VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "Flip"]   # only the plugins the sections call (F18)
 
 
 def read(*p):
@@ -94,8 +93,8 @@ def main():
             extra[name[:-5]] = json.load(open(os.path.join(ddir, name)))
 
     vendor = "\n".join(read("vendor", v + ".min.js") for v in VENDOR) + "\n" + read("vendor", "lenis.min.js")
-    hero_src = "data:image/webp;base64," + store.get("k-navy-shaker", "")
-    logo_src = "data:image/png;base64," + b64(os.path.join(IMG, "logo.png"))
+    hero_src = "data:image/webp;base64," + store.get("k-navy-shaker", "")   # hero first frame paints before the store boots
+    logo_src = "data:image/webp;base64," + b64(os.path.join(IMG, "logo-lossless.webp"))   # lossless WebP of logo.png, 7KB vs 25KB
 
     html = (html
             .replace("/*{{FONTS}}*/", fonts)

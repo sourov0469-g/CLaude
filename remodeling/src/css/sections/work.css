@@ -38,7 +38,7 @@
 .work2__block { height: 425vh; }
 .work2__wrapper { position: sticky; top: 0; height: 100vh; overflow: hidden; padding-inline: var(--margin); will-change: transform; }
 .work2__content { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100vh; text-align: center; }
-.work2__title { text-shadow: 0 1px 2px rgba(11, 20, 24, .5), 0 8px 28px rgba(11, 20, 24, .55); font-family: var(--f-display); font-weight: 400; font-size: clamp(3rem, 1.2rem + 5.4vw, 6.5rem); line-height: .95; letter-spacing: .005em; max-width: 13ch; }
+.work2__title { text-shadow: 0 1px 2px color-mix(in oklab, var(--bg) 50%, transparent), 0 8px 28px color-mix(in oklab, var(--bg) 55%, transparent); font-family: var(--f-display); font-weight: 400; font-size: clamp(3rem, 1.2rem + 5.4vw, 6.5rem); line-height: .95; letter-spacing: .005em; max-width: 13ch; }
 .work2__desc { margin-top: var(--s5); max-width: 32ch; font-size: var(--t-small); font-weight: 560; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .work2__btn { margin-top: var(--s6); }
 .work2__gallery { position: absolute; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); width: min(736px, 86vw); }
