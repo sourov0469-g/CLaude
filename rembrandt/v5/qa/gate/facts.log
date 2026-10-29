@@ -1,0 +1,26 @@
+PASS  353-9711 appears 0 times (any spacing/format)                                                                  0 / 0
+PASS  only one phone number: every tel: link is +19377467377                                                         ['+19377467377']
+PASS  no other phone-shaped number in visible text                                                                   []
+PASS  24/7 appears 0 times                                                                                           0
+PASS  no emergency-hours claim                                                                                       0
+PASS  no licence number / "licensed" claim                                                                           0
+PASS  "295" present                                                                                                  4
+PASS  "4.9" present                                                                                                  5
+PASS  no other review count (280 homeowners)                                                                         0
+PASS  invented review quotes: 0 quote-like sentences in visible text                                                 []
+PASS  no reviewer-attribution pattern (— Name / Jane D.)                                                             0
+PASS  no stray rating other than 4.9                                                                                 ['4.9', '4.9', '4.9']
+PASS  address verbatim present                                                                                       
+PASS  BBB wording: every visible BBB mention says "accredited" (Reviews V1 Constellation exempt by Rule 4, flagged)  non-accredited mentions 1, all in the Constellation: True
+PASS  Founded 1995 / Bunk / Wade 2015 / Rachel present                                                               
+PASS  Owens Corning Platinum Preferred present                                                                       
+PASS  $2M liability present                                                                                          4
+PASS  no prices / % discounts / financing terms invented                                                             []
+PASS  every version contact path is 746-7377 (no other tel)                                                          versions with their own tel link: 12/21 (call1, call2, call3, family1, family2, hero1, hero2, hero3, how1, how2, how3, proof2); nav, phone bar and footer carry it on every page state
+PASS  no "Job Ticket" string                                                                                         0
+PASS  no FAQ section                                                                                                 0
+PASS  no service picker / bento services                                                                             0
+PASS  no estimate-paper / leak-story / proof-strip                                                                   0
+PASS  section sequence is not the v1-v4 skeleton                                                                     hero > proof > work > family > how > area > call
+PASS  no roof-anatomy lesson (Rule 11): no named layer lists                                                         []
+FAILS: 0

@@ -1,0 +1,126 @@
+PASS hero1: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "Call (937) 746-7377"
+PASS hero2: ids referenced 63, missing 0, duplicates 0; controls 2 working 2
+   ok  tel "Call (937) 746-7377"
+   ok  anchor #call "Get a written estimate" (target top 5)
+PASS hero3: ids referenced 63, missing 0, duplicates 0; controls 3 working 3
+   ok  button "Pause the town names" (3 mutations)
+   ok  tel "Call (937) 746-7377"
+   ok  anchor #area "All 24 towns" (target top 4)
+PASS proof1: ids referenced 63, missing 0, duplicates 0; controls 0 working 0
+PASS proof2: ids referenced 64, missing 0, duplicates 0; controls 4 working 4
+   ok  external "Check it on Google (opens in a new"
+   ok  external "Check it on bbb.org (opens in a ne"
+   ok  external "Check it in their contractor finde"
+   ok  tel "Ask Rachel for the certificate"
+PASS proof3: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+   ok  external "Read the reviews on Google (opens "
+PASS work1: ids referenced 63, missing 0, duplicates 0; controls 3 working 3
+   ok  button "Previous job" (625 mutations)
+   ok  button "Pause the moving photos" (296 mutations)
+   ok  button "Next job" (167 mutations)
+PASS work2: ids referenced 61, missing 0, duplicates 0; controls 7 working 7
+   ok  button "Close" (660 mutations)
+   ok  button "This house, before its new roof" (463 mutations)
+   ok  button "The same house, after" (438 mutations)
+   ok  button "A Tudor-style home" (494 mutations)
+   ok  button "A brick ranch, charcoal shingles" (441 mutations)
+   ok  button "The blue house, our sign by the wa" (502 mutations)
+   ok  button "Our truck at a ranch job" (429 mutations)
+PASS work3: ids referenced 61, missing 0, duplicates 0; controls 2 working 2
+   ok  button "Before: show the old roof" (442 mutations)
+   ok  button "After: show the new roof" (177 mutations)
+PASS family1: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "Call Rachel at (937) 746-7377"
+PASS family2: ids referenced 62, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "Call Rachel at (937) 746-7377"
+PASS family3: ids referenced 62, missing 0, duplicates 0; controls 6 working 6
+   ok  button "1995 Bunk Walker founded it" (1430 mutations)
+   ok  button "2015 Wade Walker, president" (318 mutations)
+   ok  button "A+ BBB accredited since 2001" (313 mutations)
+   ok  button "OC Platinum Preferred" (305 mutations)
+   ok  button "Phone Rachel, Mon to Fri, 9 to 5" (312 mutations)
+   ok  button "Office 38 N Pioneer Blvd" (312 mutations)
+PASS how1: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "(937) 746-7377"
+PASS how2: ids referenced 70, missing 0, duplicates 0; controls 5 working 5
+   ok  button "01 Call Rachel" (874 mutations)
+   ok  button "02 Written estimate" (18 mutations)
+   ok  button "03 Your roof" (18 mutations)
+   ok  button "Pause the steps" (2 mutations)
+   ok  tel "Call (937) 746-7377"
+PASS how3: ids referenced 62, missing 0, duplicates 0; controls 3 working 3
+   ok  tel "Call (937) 746-7377"
+   ok  anchor #call "Estimate." (target top 5)
+   ok  anchor #work "Roof." (target top -3)
+PASS area1: ids referenced 63, missing 0, duplicates 0; controls 24 working 24
+   ok  button "Springborohome" (2123 mutations)
+   ok  button "Franklin3.3 mi" (251 mutations)
+   ok  button "Carlisle4.8 mi" (75 mutations)
+   ok  button "Miamisburg5.1 mi" (75 mutations)
+   ok  button "Centerville6.8 mi" (75 mutations)
+   ok  button "West Carrollton7.5 mi" (78 mutations)
+   ok  button "Waynesville7.9 mi" (75 mutations)
+   ok  button "Middletown8.1 mi" (75 mutations)
+   ok  button "Germantown8.5 mi" (75 mutations)
+   ok  button "Moraine9.4 mi" (75 mutations)
+   ok  button "Lebanon9.5 mi" (75 mutations)
+   ok  button "Bellbrook9.5 mi" (75 mutations)
+   ok  button "Kettering10.2 mi" (75 mutations)
+   ok  button "Monroe10.7 mi" (75 mutations)
+   ok  button "Harveysburg13.6 mi" (75 mutations)
+   ok  button "Trenton13.7 mi" (75 mutations)
+   ok  button "Beavercreek15 mi" (75 mutations)
+   ok  button "Mason15 mi" (72 mutations)
+   ok  button "Dayton15.5 mi" (75 mutations)
+   ok  button "Clarksville17.1 mi" (75 mutations)
+   ok  button "Xenia17.7 mi" (75 mutations)
+   ok  button "Fairborn20.3 mi" (75 mutations)
+   ok  button "Huber Heights21.5 mi" (75 mutations)
+   ok  button "Yellow Springs24.4 mi" (75 mutations)
+PASS area2: ids referenced 63, missing 0, duplicates 0; controls 2 working 2
+   ok  button "Oldest homes first" (1802 mutations)
+   ok  button "Nearest first" (1421 mutations)
+PASS area3: ids referenced 64, missing 0, duplicates 0; controls 25 working 25; forms 1 (tw3-form)
+   ok  input[text] "" (979 mutations)
+   ok  button "Springboro" (102 mutations)
+   ok  button "Franklin" (102 mutations)
+   ok  button "Carlisle" (102 mutations)
+   ok  button "Miamisburg" (102 mutations)
+   ok  button "Centerville" (102 mutations)
+   ok  button "West Carrollton" (102 mutations)
+   ok  button "Waynesville" (102 mutations)
+   ok  button "Middletown" (102 mutations)
+   ok  button "Germantown" (102 mutations)
+   ok  button "Moraine" (102 mutations)
+   ok  button "Lebanon" (100 mutations)
+   ok  button "Bellbrook" (102 mutations)
+   ok  button "Kettering" (104 mutations)
+   ok  button "Monroe" (102 mutations)
+   ok  button "Harveysburg" (102 mutations)
+   ok  button "Trenton" (102 mutations)
+   ok  button "Beavercreek" (102 mutations)
+   ok  button "Mason" (102 mutations)
+   ok  button "Dayton" (104 mutations)
+   ok  button "Clarksville" (102 mutations)
+   ok  button "Xenia" (102 mutations)
+   ok  button "Fairborn" (104 mutations)
+   ok  button "Huber Heights" (102 mutations)
+   ok  button "Yellow Springs" (102 mutations)
+PASS call1: ids referenced 63, missing 0, duplicates 0; controls 2 working 2
+   ok  tel "Call (937) 746-7377"
+   ok  external "38 N Pioneer Blvd, Springboro (ope"
+PASS call2: ids referenced 62, missing 0, duplicates 0; controls 3 working 3
+   ok  tel "Call (937) 746-7377"
+   ok  tel "(937) 746-7377"
+   ok  button "See the details" (2672 mutations)
+PASS call3: ids referenced 63, missing 0, duplicates 0; controls 3 working 3
+   ok  tel "Call (937) 746-7377"
+   ok  button "Pause the moving number" (2309 mutations)
+   ok  tel "Call (937) 746-7377"
+switchers (21 labels): 21/21 change their own section 
+helper picker (4 options): 4/4 set the companion
+nav / phone bar / footer links: 6/6 valid (#hero tel:+19377467377 tel:+19377467377 #call #hero tel:+19377467377)
+forms on the page across versions: tw3-form (Towns V3) only; handler tested in areaint.log and above
+console errors: 0
+FAILS: 0

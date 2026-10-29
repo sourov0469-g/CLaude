@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 5 (companion and page systems) complete → Phase 6 (assembly, reduced-motion pass, weight, §12 gate, report) next.
+- **Phase:** 6 complete. §12 gate passed with evidence below. Delivery report: REPORT-FULL.md.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -248,3 +248,36 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - Errors 0 in every run.
   - `sweep.mjs` after Phase 5, at 1440, 375 and 1440 reduced, all three version sets: overflow 0, errors none.
   - Constellation still pixel-identical to e685bee at both widths.
+
+### Phase 6: assembly and the §12 final gate
+- **Fix made during the gate (kept visible):** the contact sheets showed that Hero V1 and V2 still said "Bunk Walker started it… His son Wade runs it". They now say "founded it in 1995 … has been president since 2015" (§3), the same correction made in Family. `secqa.mjs hero` reran 9/9 clean, and the facts gate reran with 0 fails.
+- **§12 record:**
+  1. **Facts grep:** `qa/scripts/factsgate.py`, log `qa/gate/facts.log`, 25 checks, FAILS 0.
+     - 353-9711 ×0 in any format; the only tel is +19377467377; no other phone-shaped number.
+     - 24/7 ×0; emergency ×0; licence ×0; prices, discounts and APR ×0.
+     - 295 ×4 and 4.9 ×5. No quote-like sentence and no reviewer-attribution pattern.
+     - Every BBB mention says "accredited", except the Constellation (Rule 4, flagged).
+     - 12 versions carry their own tel link; the nav, phone bar and footer carry it on every page state.
+  2. **Banned patterns:** same log. "Job Ticket" ×0. No FAQ, service picker, bento, estimate paper, leak story or proof strip. Sections run hero > reviews > work > family > how > towns > call, not the v1–v4 skeleton. No named roof-layer lists (Rule 11). No GSAP pin, and the old CSS-sticky How stage is gone.
+  3. **Traceability audit:** three rows drawn with `random.Random(20261029)`: Call V1, Towns V1, Work V3. Each Atlas entry was re-opened.
+     - Call V1 matches: F14 offer that produces a number, F9 named next step, OFFF two-tone full-width wordmark, S1350 blur plus alpha-threshold drops with a static reduced-motion fallback.
+     - Towns V1 matches: plots only what is real, at true positions; source printed; 24 = 24.
+     - Work V3 matches on the slit mask, crispEdges, scrub 2.2 / 1 and no pinning. It differs in 16 courses instead of 30 slits, laid in sequence rather than 0.02 apart. Both deviations are now written into the row's Adaptations.
+  4. **Switchers:** `secqa.mjs` for all 7 sections at 1440, 375 and 1440 reduced, log `qa/gate/switchers.log`: 63/63 "switcher swaps only <section>; overflow 0; errors 0". `domgate.mjs`: all 21 labels change only their own section.
+  5. **Screenshots:** all 21 versions at 1440 and 375 in `qa/<section><v>-{1440,375,1440-rm}.jpg`, with contact sheets `qa/gate/sheet-1440.jpg` and `qa/gate/sheet-375.jpg`, compared with §4. Defects found and fixed across phases are listed in each phase note. This pass found the hero wording, which is fixed.
+  6. **Console and DOM:** `qa/scripts/domgate.mjs`, log `qa/gate/dom.log`, FAILS 0.
+     - In each of the 21 live versions: 61–70 referenced ids, all resolve; 0 duplicates.
+     - 100 controls each changed the DOM when used, or are valid tel, external or anchor links (anchors land within 140 px).
+     - Helper picker 4/4; chrome links 6/6. The one form (Towns V3) has a working submit handler. Console errors 0.
+     - Overflow at 375: 0, per `sweep.mjs` and `secqa`.
+  7. **Companion:** `qa/compint.log` 42/42 plus variants, Off, H key, text field, press, page-leave, first paint, touch and reduced motion (Phase 5). Reduced-motion pass `qa/scripts/rmgate.mjs`, log `qa/gate/reduced.log`: 42/42, meaning no infinite CSS or GSAP animation running, no Lenis, no companion, overflow 0 and errors 0, in every version at both widths.
+  8. **Constellation untouched:**
+     - Method (a): source. `constellation()` SHA-256 e7d174cd… is identical to e685bee. The `.pv1` rules match e685bee line for line, and no proof file has changed since the Phase 2 commit.
+     - Method (b): pixels. `constel.mjs` renders the V1 stage in the e685bee build and in the current build with Math.random ≡ 0.5, reduced motion and overlays hidden. Diff bbox None, max 0, at 1440 and 375, after the Phase 5 changes.
+  9. **Weight:** `qa/scripts/weightgate.py`, log `qa/gate/weight.log`.
+     - Total 1506 KB (951 KB gzip).
+     - Code 435 KB: markup 72 + CSS 91 + JS 271, of which the libraries (GSAP core, ScrollTrigger, DrawSVG, Flip, CustomEase, Lenis) are 160 KB. Gzipped: 134 KB.
+     - Media 1072 KB: 10 data URIs, each stored once. The six job photos sit in Work's live V1 (920 KB, under the 1 MB per-group threshold) and are reused by the hero and family templates; the team photo is 67 KB, the font 27 KB, plus the logo and favicon.
+     - One scroll engine (Lenis). No GSAP pins. Sticky is used only by two column headings and the owner's picker rail.
+     - MorphSVG, three.js and jQuery are absent.
+     - Code is over F18's ~330 KB band; flagged in the report with its cause, which is three versions of every section in one file.

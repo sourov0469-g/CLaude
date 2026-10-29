@@ -1,0 +1,45 @@
+PASS hero1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS hero2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS hero3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS proof1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS proof2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS proof3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS work1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS work2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS work3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS family1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS family2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS family3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS how1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS how2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS how3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS area1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS area2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS area3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS call1@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS call2@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS call3@1440: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+errors @1440: 0
+PASS hero1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS hero2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS hero3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS proof1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS proof2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS proof3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS work1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS work2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS work3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS family1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS family2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS family3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS how1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS how2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS how3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS area1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS area2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS area3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS call1@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS call2@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+PASS call3@375: infinite CSS 0, infinite GSAP 0, lenis false, companion false, overflow 0
+errors @375: 0
+FAILS: 0

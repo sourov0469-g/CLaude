@@ -34,10 +34,10 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 
 | # | System | passes |
 |---|---|---|
-| S1 | Direction-aware entrance (Q40 at the F17 dose) on every section | IN PLACE (beats() rewritten, Phase 1); verified page-wide in Phase 6 |
+| S1 | Direction-aware entrance (Q40 at the F17 dose) on every section | YES (beats() on every version; reduced-motion pass shows content static and present, `qa/gate/reduced.log`) |
 | S2 | Cursor companion: House / Hammer / Drop + Off; replaces the system cursor on fine pointers | YES (Phase 5: `qa/compint.log`, 42/42 version × width runs + variants, Off, H key, text field, press, page-leave, first paint, touch, reduced motion) |
 | S3 | Per-section cursor effect (halo / trail / field) + background reacts back, every version | YES (Phase 5: effect kind checked in all 42 runs; background audit in PROGRESS.md, every version reacts) |
-| S4 | A different shape divider at every section boundary | IN PLACE (one per boundary, all different: roofline, shingles, chevrons, rafters, steps, scales, gutter); verified page-wide in Phase 6 |
-| S5 | Every interactive element has its own SVG reaction (registry in PLAN-FULL.md §G4), hover ≠ press | IN PLACE (R01–R42 each tested hover and press in the section logs and `qa/chromeint.log`); final uniqueness audit in Phase 6 |
-| S6 | One self-contained HTML; switchers swap only their section at 1440 and 375 | NO |
-| S7 | §12 final gate (all nine items with evidence) | NO |
+| S4 | A different shape divider at every section boundary | YES (roofline, shingles, chevrons, rafters, steps, scales, gutter: seven boundaries, seven profiles, seen in `qa/gate/sheet-1440.jpg`) |
+| S5 | Every interactive element has its own SVG reaction (registry in PLAN-FULL.md §G4), hover ≠ press | YES (R01–R42 tested hover and press in the section logs and `qa/chromeint.log`; press-keyframe audit: no keyframe shared by two controls) |
+| S6 | One self-contained HTML; switchers swap only their section at 1440 and 375 | YES (`qa/gate/switchers.log` 63/63; `qa/gate/dom.log` 21/21 labels) |
+| S7 | §12 final gate (all nine items with evidence) | YES (PROGRESS.md §12 record; REPORT-FULL.md) |

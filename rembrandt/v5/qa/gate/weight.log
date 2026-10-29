@@ -1,0 +1,17 @@
+total file          1506 KB  (gzip 951 KB)
+code (no data URIs) 435 KB = markup 72 KB + css 91 KB + js 271 KB  (gzip 134 KB)
+media (data URIs)   1072 KB in 10 URIs; types: font/woff2, image/png, image/webp
+section hero    media    0 KB  images []
+section proof   media    0 KB  images []
+section work    media    0 KB  images []
+section family  media    0 KB  images []
+section how     media    0 KB  images []
+section area    media    0 KB  images []
+section call    media    0 KB  images []
+images used outside the sections (chrome): [] 0 KB
+fonts embedded: 1 (27 KB)
+images shared by several sections (stored once): []
+section groups over 1 MB of media: none
+scroll engines: lenis True | locomotive False | smooth-scrollbar False
+pinned systems: ScrollTrigger pin: 0 | CSS sticky selectors: ['.pick-rail', '.pv2-head', '.hw1-head']
+MorphSVG in bundle: False | three.js: False | jQuery: False
