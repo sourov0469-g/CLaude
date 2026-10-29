@@ -868,17 +868,51 @@ def money1():
 </div>'''
 
 
+BANDS13 = ['Under $2k', '$2k-$5k', '$5k-$10k', '$10k-$15k', '$15k-$20k', '$20k-$25k', '$25k-$30k', '$30k-$40k', '$40k-$50k', '$50k-$60k', '$60k-$75k', '$75k-$100k', '$100k+']
+SHORT13 = ['<2k', '2-5k', '5-10k', '10-15k', '15-20k', '20-25k', '25-30k', '30-40k', '40-50k', '50-60k', '60-75k', '75-100k', '100k+']
+DIST = {
+    'siding': dict(name='Siding', n=415, c=[12, 33, 70, 107, 92, 53, 22, 19, 4, 1, 2, 0, 0], med=3, mid='$5k and $20k', cities=31,
+                   moves=['Wall area and stories', "What's under the old siding (rot, sheathing)", 'Whole house or a few walls', 'Trim, soffit and fascia', 'Paint or ColorPlus', 'Profile and details'],
+                   moves_h='What moves a siding price, as the firm lists it'),
+    'windows': dict(name='Windows', n=376, c=[12, 40, 96, 79, 50, 30, 19, 30, 13, 4, 0, 2, 1], med=3, mid='$5k and $25k', cities=40,
+                    moves=['NT Windows: 238 jobs, median $10k-$15k', 'Simonton: 54 jobs, median $10k-$15k', 'Andersen: 38 jobs, median $20k-$25k', 'Pella: 31 jobs, median $5k-$10k'],
+                    moves_h='Median by brand, from the same job files'),
+}
+assert sum(DIST['siding']['c']) == 415 and sum(DIST['windows']['c']) == 376
+
+
+def dist_bars(d):
+    mx = max(d['c'])
+    return ''.join(f'<li class="db{" is-med" if k == d["med"] else ""}" style="--h:{c / mx:.4f}"><span class="db-n num">{c}</span><i aria-hidden="true"></i><span class="db-l">{SHORT13[k]}</span>'
+                   f'<span class="sr-only">{BANDS13[k]}: {c} jobs</span></li>' for k, c in enumerate(d['c']))
+
+
 def money2():
-    cols = ''.join(f'<li data-apr="{apr}" data-n="{n}"><p class="m2-amt num">-</p><p class="m2-plan"><b>{a}</b> for {m}</p></li>' for apr, n, a, m in TERMS)
-    chips = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if v == 250 else "false"}" data-mo="{v}" class="mo-chip num">${v}</button>' for v in (150, 250, 350, 500, 750))
+    """Austin Pro crown 1, invoiced distribution (anatomy F7e, the bank's strongest price form: "ranges are estimates;
+    distributions are evidence"): every priced job by band, median band marked, the sample caveat printed"""
+    d = DIST['siding']
+    js = json.dumps(DIST).replace('</', '<\\/')
+    tabs = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == "siding" else "false"}" tabindex="{0 if k == "siding" else -1}" class="dt" data-k="{k}">{v["name"]}<span class="num">{v["n"]} jobs</span></button>' for k, v in DIST.items())
+    moves = ''.join(f'<li>{e(m)}</li>' for m in d['moves'])
     return f'''<div class="v money-2" data-tone="night">
-  <div class="m2-top">
-    <h2 class="h2x" data-split>Start from a monthly budget</h2>
-    <div class="m2-ctl"><p class="lab" id="m2-l">I can put aside, a month</p><div class="mo-chips" role="radiogroup" aria-labelledby="m2-l">{chips}</div></div>
+  <div class="dd-top">
+    <h2 class="h2x" data-split>What people actually paid</h2>
+    <div class="dd-tabs" role="radiogroup" aria-label="Trade">{tabs}</div>
   </div>
-  <ul class="m2-cols" aria-live="polite">{cols}</ul>
-  <p class="m2-ref">For scale: most siding jobs land between $5k and $20k, most window jobs between $5k and $25k.</p>
-  <p class="fine">{FINE}</p>
+  <div class="dd-grid">
+    <figure class="dd-fig">
+      <ol class="dd-bars" data-dd-bars aria-label="Priced siding jobs by price band, 2022-2026">{dist_bars(d)}</ol>
+      <figcaption class="dd-cap" aria-live="polite" data-dd-cap><b class="num">{d['n']}</b> priced {d['name'].lower()} jobs, 2022-2026, in {d['cities']} Central Texas cities</figcaption>
+    </figure>
+    <div class="dd-side">
+      <p class="dd-med"><span>Median band</span><b class="num" data-dd-med>{BANDS13[d['med']]}</b></p>
+      <p class="dd-mid">Half of them landed between <b data-dd-mid>{d['mid']}</b>.</p>
+      <p class="dd-mh" data-dd-mh>{e(d['moves_h'])}</p>
+      <ol class="dd-moves" data-dd-moves>{moves}</ol>
+    </div>
+  </div>
+  <p class="fine">A documented sample, not every job since 2009: 1,590 individually priced trades on 886 documented projects, 2018-2026. Bands are materials and labour, before discounts, excluding tax.</p>
+  <script type="application/json" class="dd-data">{js}</script>
 </div>'''
 
 
@@ -969,7 +1003,7 @@ SECTIONS = [
     ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Paint or ColorPlus', 'Colour book']),
     ('near', 'Near you', [near1, near2, near3], ['Survey', 'Town by town', 'Neighbourhood drive']),
     ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'Names']),
-    ('money', 'Money', [money1, money2, money3], ['Amount', 'Budget', 'Receipt']),
+    ('money', 'Money', [money1, money2, money3], ['Amount', 'What people paid', 'Receipt']),
     ('book', 'Book', [book1, book2, book3], ['Call', 'Form', 'Chat']),
 ]
 

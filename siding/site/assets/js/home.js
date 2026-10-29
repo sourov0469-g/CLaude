@@ -897,8 +897,9 @@
   };
 
   /* REVIEWS */
-  /* REVIEWS 1: two rows run as a marquee; their speed and lean answer how fast you scroll (scroll velocity), so
-     the wall feels pushed by the page; edges fade 15/85 (S1348); a pause button (WCAG 2.2.2). */
+  /* REVIEWS 1: Q161 seamless marquee as R16 (duplicated track, -50 % loop, CSS only), slow and constant like
+     Stronghold's 60 s linear band; edges fade 15/85 (S1348); paused on hover, focus, off-screen and by the button
+     (WCAG 2.2.2); still under reduced motion. */
   V.reviews1 = (r, b) => {
     const tracks = $$('.mq-track', r), mqs = $('.mqs', r), btn = $('.mq-pause', r);
     if (!motionOK()) { btn.hidden = true; return; }
@@ -908,21 +909,11 @@
     });
     b.on(btn, 'click', () => { const on = !mqs.classList.contains('is-paused'); mqs.classList.toggle('is-paused', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Play' : 'Pause'; });
     b.io(r, ([en]) => r.classList.toggle('is-offscreen', !en.isIntersecting), { threshold: 0.01 });
-    if (!ST) return;
-    const anims = () => tracks.map(t => t.getAnimations ? t.getAnimations()[0] : null).filter(Boolean);
-    const skew = tracks.map(t => G.quickTo(t.parentElement, 'skewX', { duration: 0.5, ease: 'power3' }));
-    const st = ST.create({ trigger: r, start: 'top bottom', end: 'bottom top', onUpdate: self => {
-      if (mqs.classList.contains('is-paused')) return;
-      const v = clamp(self.getVelocity() / 1200, -3, 3);
-      anims().forEach(a => { a.playbackRate = 1 + Math.abs(v) * 1.6; });
-      skew.forEach((q, k) => q((k ? -1 : 1) * v * 1.6));
-      clearTimeout(st._t); st._t = setTimeout(() => { anims().forEach(a => { a.playbackRate = 1; }); skew.forEach(q => q(0)); }, 180);
-    } });
-    b.add(() => { clearTimeout(st._t); st.kill(); });
   };
 
-  /* REVIEWS 2: one big quote; swipe it (Observer, type touch and pointer, tolerance 10, S0184) or use the arrows;
-     the new quote's words rise in; the plain text goes to a polite live region. */
+  /* REVIEWS 2: R29 testimonial carousel, manual: one big quote, arrows or a horizontal swipe (pointer events, 40 px,
+     vertical scroll left alone); the new quote's words arrive 0.012 s apart (S1329); the plain text goes to a polite
+     live region. */
   V.reviews2 = (r, b) => {
     const Q = JSON.parse($('.one-data', r).textContent), q = $('.one-q', r), name = $('.one-n', r), k = $('.one-k span', r), say = $('[data-one-say]', r);
     let i = 0;
@@ -940,10 +931,11 @@
       }
     };
     $$('.rb', r).forEach(btn => b.on(btn, 'click', () => go(+btn.dataset.dir)));
-    if (window.Observer) {
-      const ob = window.Observer.create({ target: $('.one', r), type: 'touch,pointer', tolerance: 10, dragMinimum: 40, onLeft: () => go(1), onRight: () => go(-1) });
-      b.add(() => ob.kill());
-    }
+    const one = $('.one', r);
+    let sx = 0, sy = 0, on = false;
+    b.on(one, 'pointerdown', e => { if (e.target.closest('button, a')) return; on = true; sx = e.clientX; sy = e.clientY; });
+    b.on(one, 'pointerup', e => { if (!on) return; on = false; const dx = e.clientX - sx, dy = e.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(dx < 0 ? 1 : -1); });
+    b.on(one, 'pointercancel', () => { on = false; });
   };
 
   /* REVIEWS 3: four cards at a time so the wall never turns into a document; "Show more" adds four */
@@ -988,19 +980,29 @@
     b.on(inp, 'input', upd);
     upd();
   };
-  /* MONEY 2: tap a monthly budget; the three project sizes count up to their new values (S0197 crawl, 1.2 s) */
+  /* MONEY 2: Austin Pro's invoiced distribution (F7e): every priced job by band, median band in red. Bars grow once on
+     entry (0.6 s, 0.03 s apart); switching trade re-scales them in 0.4 s (reveal band); the caption, median, middle
+     half and the "what moves it" list follow; the caveat is printed under it. */
   V.money2 = (r, b) => {
-    const cols = $$('.m2-cols li', r);
-    let M = 250;
-    const upd = anim => cols.forEach(li => {
-      const v = Math.floor(pv(M, +li.dataset.apr, +li.dataset.n) / 100) * 100, el = $('.m2-amt', li);
-      if (anim && motionOK()) { const o = { v: +el.dataset.v || 0 }; G.to(o, { v, duration: 1.2, ease: 'power3.out', overwrite: true, onUpdate: () => { el.textContent = usd.format(Math.round(o.v / 100) * 100); } }); }
-      else el.textContent = usd.format(v);
-      el.dataset.v = v;
-    });
-    radios($('.mo-chips', r), b, it => { M = +it.dataset.mo; upd(true); });
-    upd(false);
-    if (motionOK()) G.from(cols, { y: 30, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.m2-cols', r), 'top 85%') });
+    const D = JSON.parse($('.dd-data', r).textContent), bars = $$('.db', r), list = $('[data-dd-bars]', r);
+    const f = k => $(`[data-dd-${k}]`, r);
+    const B = ['Under $2k', '$2k-$5k', '$5k-$10k', '$10k-$15k', '$15k-$20k', '$20k-$25k', '$25k-$30k', '$30k-$40k', '$40k-$50k', '$50k-$60k', '$60k-$75k', '$75k-$100k', '$100k+'];
+    const show = k => {
+      const d = D[k], mx = Math.max(...d.c);
+      bars.forEach((li, i) => {
+        const h = d.c[i] / mx;
+        if (motionOK()) G.to(li, { '--h': h, duration: 0.4, ease: 'power2.out', overwrite: true }); else li.style.setProperty('--h', h);
+        $('.db-n', li).textContent = d.c[i]; $('.sr-only', li).textContent = `${B[i]}: ${d.c[i]} jobs`;
+        li.classList.toggle('is-med', i === d.med);
+      });
+      list.setAttribute('aria-label', `Priced ${d.name.toLowerCase()} jobs by price band, 2022-2026`);
+      f('cap').innerHTML = `<b class="num">${d.n}</b> priced ${d.name.toLowerCase()} jobs, 2022-2026, in ${d.cities} Central Texas cities`;
+      f('med').textContent = B[d.med]; f('mid').textContent = d.mid; f('mh').textContent = d.moves_h;
+      f('moves').innerHTML = d.moves.map(m => `<li>${esc(m)}</li>`).join('');
+    };
+    radios($('.dd-tabs', r), b, it => show(it.dataset.k), '.dt');
+    const flat = matchMedia('(max-width: 639px)').matches;   // phones draw the bars horizontally
+    if (motionOK()) G.from($$('.db i', r), Object.assign(flat ? { scaleX: 0, transformOrigin: '0% 50%' } : { scaleY: 0, transformOrigin: '50% 100%' }, { duration: 0.6, ease: ease.out, stagger: 0.03, scrollTrigger: once(list, 'top 85%') }));
   };
   V.money3 = (r, b) => {
     const amt = $('.rc-amt input', r), boxes = $$('input[type="checkbox"]', r), odo = Odo($('[data-odo]', r)), was = $('[data-was]', r), save = $('[data-save]', r);

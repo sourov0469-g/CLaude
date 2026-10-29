@@ -670,7 +670,7 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 @media (min-width: 900px) { .r1-head { grid-template-columns: 1fr auto auto; align-items: end; gap: 32px; } .r1-head .h2x { max-width: 12ch; } }
 
 .reviews-2 { display: grid; gap: clamp(24px, 4vw, 48px); justify-items: start; }
-.one { display: grid; gap: 24px; }
+.one { display: grid; gap: 24px; touch-action: pan-y; }
 .one-q { margin: 0; max-width: 24ch; font-size: clamp(1.75rem, 1rem + 2.9vw, 3.5rem); font-weight: 620; line-height: 1.12; letter-spacing: -.02em; min-height: 6.8em; text-wrap: pretty; }
 .one-n { display: grid; font-weight: 700; font-size: var(--t-lead); }
 .one-n span { font-weight: 450; font-size: var(--t-sm); color: var(--fg2); }
@@ -722,18 +722,7 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 .odo .os > span, .odo .ox { display: block; height: .82em; line-height: .82; }
 
 .money-2 .range::-webkit-slider-thumb { background: var(--night); }
-.m2-top { display: grid; gap: 28px; margin-bottom: clamp(32px, 5vw, 56px); }
-.m2-ctl { display: grid; gap: 12px; max-width: 520px; }
-.m2-ctl .lab { justify-content: flex-start; flex-wrap: wrap; font-size: var(--t-lead); }
-.m2-ctl .lab output { font-size: clamp(2rem, 1rem + 3vw, 3.5rem); font-weight: 790; font-stretch: 78%; }
-.m2-cols { display: grid; gap: 24px; }
-.m2-cols li { display: grid; gap: 6px; }
-.m2-amt { font-size: clamp(2.75rem, 1rem + 6vw, 6.5rem); font-weight: 790; font-stretch: 76%; line-height: .86; letter-spacing: -.03em; }
-.m2-plan { color: var(--fg2); }
-.m2-plan b { color: var(--fg); }
-.m2-ref { margin-top: 32px; color: var(--fg2); max-width: 56ch; }
 .money-2 .fine { margin-top: 12px; }
-@media (min-width: 900px) { .m2-top { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; } .m2-top .h2x { grid-column: 1 / 7; } .m2-ctl { grid-column: 8 / 13; } .m2-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 .m3-grid { display: grid; gap: 32px; }
 .m3-side { display: grid; gap: 16px; align-content: start; }
@@ -1144,10 +1133,47 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 .n1-map { position: relative; }
 .n1-trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
-/* MONEY 2: budget chips */
-.mo-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.mo-chip { min-height: 52px; padding: 0 20px; border: 2px solid rgba(255, 255, 255, .35); border-radius: 999px; background: transparent; font-size: 1.125rem; font-weight: 750; }
-.mo-chip[aria-checked="true"] { background: var(--on-night); color: var(--night); border-color: var(--on-night); }
+/* MONEY 2: Austin Pro's invoiced distribution, bars by price band, median band red */
+.dd-top { display: grid; gap: 20px; margin-bottom: clamp(28px, 4vw, 48px); }
+.dd-tabs { display: flex; gap: 8px; }
+.dt { display: grid; gap: 2px; min-height: 52px; padding: 8px 18px; border: 2px solid rgba(255, 255, 255, .3); border-radius: 14px; background: transparent; font-size: 1.0625rem; font-weight: 740; text-align: left; transition: background-color .18s cubic-bezier(0, 0, .2, 1), color .18s cubic-bezier(0, 0, .2, 1); }
+.dt span { font-size: .75rem; font-weight: 600; opacity: .75; }
+.dt[aria-checked="true"] { background: var(--on-night); color: var(--night); border-color: var(--on-night); }
+.dd-grid { display: grid; gap: 32px; }
+.dd-bars { display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); align-items: end; gap: 3px; height: clamp(220px, 34vw, 380px); }
+.db { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.db i { height: calc(var(--h) * 82% + 2px); border-radius: 4px 4px 0 0; background: rgba(241, 239, 234, .3); }
+.db.is-med i { background: var(--red-on-night); }
+.db-n { padding-bottom: 4px; color: var(--on-night2); font-size: .6875rem; font-weight: 650; text-align: center; }
+.db.is-med .db-n { color: #fff; font-weight: 760; }
+.db-l { padding-top: 6px; border-top: 1px solid rgba(255, 255, 255, .25); color: var(--on-night2); font-size: .625rem; text-align: center; white-space: nowrap; overflow: hidden; }
+.db.is-med .db-l { color: #fff; }
+.dd-cap { margin-top: 14px; color: var(--on-night2); font-size: var(--t-sm); }
+.dd-cap b { color: var(--on-night); }
+.dd-side { display: grid; gap: 14px; align-content: start; }
+.dd-med { display: grid; gap: 2px; }
+.dd-med span { color: var(--on-night2); font-size: var(--t-sm); }
+.dd-med b { color: var(--red-on-night); font-size: clamp(3rem, 1.6rem + 4vw, 5.5rem); font-weight: 790; font-stretch: 76%; letter-spacing: -.02em; line-height: .9; }
+.dd-mid { color: var(--on-night2); }
+.dd-mid b { color: var(--on-night); }
+.dd-mh { margin-top: 10px; font-weight: 700; }
+.dd-moves { display: grid; gap: 0; border-top: 1px solid rgba(255, 255, 255, .16); counter-reset: mv; }
+.dd-moves li { counter-increment: mv; display: grid; grid-template-columns: 2rem 1fr; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, .16); color: var(--on-night2); font-size: var(--t-sm); }
+.dd-moves li::before { content: counter(mv, decimal-leading-zero); color: var(--on-night); font-weight: 650; }
+.money-2 .fine { margin-top: 28px; max-width: 70ch; }
+/* phones: the same bars turn horizontal, label left, count right, so every label stays upright and readable */
+@media (max-width: 639px) {
+  .dd-bars { grid-template-columns: 1fr; height: auto; gap: 4px; }
+  .db { display: grid; grid-template-columns: 4rem 1fr 2.25rem; grid-template-rows: 18px; align-items: center; height: auto; }
+  .db-l { order: -1; padding: 0; border: 0; font-size: .75rem; text-align: left; }
+  .db i { height: 14px; width: calc(var(--h) * 100% + 2px); border-radius: 0 4px 4px 0; align-self: center; }
+  .db-n { order: 2; padding: 0 0 0 6px; font-size: .75rem; text-align: left; }
+}
+@media (min-width: 900px) {
+  .dd-top { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; } .dd-top .h2x { grid-column: 1 / 8; } .dd-tabs { grid-column: 9 / 13; justify-content: flex-end; }
+  .dd-grid { grid-template-columns: 8fr 4fr; gap: clamp(32px, 4vw, 64px); align-items: start; }
+  .db-l { font-size: .75rem; } .db-n { font-size: .8125rem; }
+}
 
 /* BOOK 1: light folds */
 .b1-folds { inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; }
