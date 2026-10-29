@@ -290,7 +290,8 @@ def build_siding():
 
 
 def build_all():
-    import pages_windows, pages_plan
+    import pages_windows, pages_plan, pages_projects
     print('siding', build_siding())
     print('windows', pages_windows.build_windows())
     print('plan', pages_plan.build_plan())
+    print('projects', pages_projects.build_projects())

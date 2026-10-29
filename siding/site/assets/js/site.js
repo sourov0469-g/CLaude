@@ -548,6 +548,123 @@
     });
   });
 
+  // Sticky Grid Scroll (#94): columns arrive from alternate ends, then the grid zooms on the centre tile and the copy settles.
+  // Native scroll with a sticky stage (no GSAP pin); desktop only; reduced motion keeps the static grid.
+  $$('[data-sticky-grid]').forEach(sec => {
+    if (!G || !ST || reduce()) return;
+    G.matchMedia().add('(min-width: 900px)', () => {
+      sec.classList.add('is-on');
+      const grid = $('.sg-grid', sec), cols = $$('.sg-col', sec), target = $('.sg-target', sec), copy = $('.sg-overlay', sec);
+      const mid = $$('.sg-col[data-col="1"] .sg-item:not(.sg-target)', sec);
+      let reveal, zoom;
+      const make = () => {
+        [reveal, zoom].forEach(t => { if (t) { t.scrollTrigger && t.scrollTrigger.kill(); t.progress(1).kill(); } });
+        G.set([grid, ...cols, ...mid, copy, ...$$('.sg-item', sec)], { clearProps: 'transform,opacity,visibility' });
+        const tr = target.getBoundingClientRect();
+        const s = Math.min(innerWidth * .94 / tr.width, (innerHeight - 40) * .94 / tr.height);
+        // reveal: columns alternate top/bottom, stagger 0.06, power1.inOut; played once as the block arrives (it is often in view at load)
+        reveal = G.timeline({ paused: true });
+        cols.forEach((c, i) => reveal.from($$('.sg-item', c), { yPercent: i % 2 ? 60 : -60, autoAlpha: 0, ease: 'power1.inOut', stagger: .06, duration: .9 }, 0));
+        if (!sec.dataset.revealed) onEnter(sec, () => { sec.dataset.revealed = '1'; reveal.play(); }, '0px 0px -15% 0px'); else reveal.progress(1);
+        // zoom 45-90% of the pinned travel: grid scales on the centre tile, side columns xPercent +/-40, centre items yPercent +/-40
+        zoom = G.timeline({ scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: true } });
+        zoom.to({}, { duration: .1 })
+          .to(grid, { scale: s, ease: 'power1.inOut', duration: .8 }, .1)
+          .to(cols[0], { xPercent: -40, ease: 'power1.inOut', duration: .8 }, .1)
+          .to(cols[2], { xPercent: 40, ease: 'power1.inOut', duration: .8 }, .1)
+          .to(mid[0], { yPercent: -40, ease: 'power1.inOut', duration: .5 }, .1)
+          .to(mid[1], { yPercent: 40, ease: 'power1.inOut', duration: .5 }, .1)
+          .fromTo(copy, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, ease: 'power2.inOut', duration: .1 }, .9)
+          .to({}, { duration: .1 });
+      };
+      make();
+      const onR = () => make();
+      ST.addEventListener('refreshInit', () => G.set(grid, { clearProps: 'transform' }));
+      window.addEventListener('resize', onR);
+      return () => { window.removeEventListener('resize', onR); [reveal, zoom].forEach(t => t && t.kill()); sec.classList.remove('is-on'); G.set([grid, ...cols, ...mid, copy, ...$$('.sg-item', sec)], { clearProps: 'all' }); };
+    });
+  });
+
+  // Gallery: trade filters and a lightbox; on desktop the photo grows out of its tile (grid-to-fullscreen #48, Flip 0.9s expo)
+  $$('[data-gallery]').forEach(sec => {
+    const tiles = $$('.gal-tile', sec), items = $$('.gal-grid > li', sec), chips = $$('.chip[data-g]', sec);
+    const data = JSON.parse($('#gal-data', sec).textContent);
+    const lb = $('.lightbox', sec), img = $('.lb-img', lb), cap = $('.lb-cap', lb), job = $('.lb-job', lb), bar = $('.lb-bar', lb);
+    const F = window.Flip;
+    let cur = -1, busy = false, all = false;
+    // the first twelve matches show; "Show all" opens the rest (keeps the phone page from running 43 tiles long)
+    const LIM = 12, more = $('.gal-more', sec);
+    const layout = () => {
+      const m = items.filter(li => !li.hidden);
+      m.forEach((li, k) => li.classList.toggle('is-more', !all && k >= LIM));
+      items.filter(li => li.hidden).forEach(li => li.classList.remove('is-more'));
+      more.hidden = all || m.length <= LIM;
+      $('span', more).textContent = `Show all ${m.length} photos`;
+    };
+    const expand = () => { all = true; layout(); ST && ST.refresh(); };
+    more.addEventListener('click', () => {
+      const first = items.filter(li => !li.hidden)[LIM];
+      expand();
+      first && $('.gal-tile', first).focus();
+    });
+    layout();
+    chips.forEach(c => c.addEventListener('click', () => {
+      chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+      const g = c.dataset.g, grid = $('.gal-grid', sec);
+      const apply = () => { items.forEach(li => { li.hidden = !(g === 'all' || li.dataset.tags.split(' ').includes(g)); }); layout(); ST && ST.refresh(); };
+      if (G && !reduce()) G.to(grid, { opacity: 0, duration: .15, onComplete: () => { apply(); G.to(grid, { opacity: 1, duration: .25 }); } }); else apply();
+    }));
+    const visible = () => tiles.filter(t => !t.closest('li').hidden);
+    const show = i => {
+      cur = i;
+      const D = data[i], t = tiles[i];
+      cap.innerHTML = `<b>${D.p}</b><span>${D.t}, ${D.w}</span>`;
+      job.href = D.h;
+      img.alt = `${D.t} in ${D.p}, ${D.w}`;
+      img.src = $('img', t).currentSrc || $('img', t).src;
+      const big = new Image(); big.src = t.dataset.full;
+      (big.decode ? big.decode() : Promise.resolve()).then(() => { if (cur === i) img.src = t.dataset.full; }).catch(() => {});
+    };
+    const fancy = () => G && F && !reduce() && mqDesk.matches;
+    const open = i => {
+      lb.hidden = false; d.body.classList.add('is-locked');
+      show(i);
+      if (fancy()) {
+        const tImg = $('img', tiles[i]);
+        img.setAttribute('data-flip-id', tImg.dataset.flipId);
+        F.from(F.getState(tImg), { targets: img, duration: .9, ease: 'expo.inOut', scale: true });
+        G.fromTo(lb, { backgroundColor: 'rgba(47,47,48,0)' }, { backgroundColor: 'rgba(47,47,48,1)', duration: .6 });
+        G.fromTo(bar, { autoAlpha: 0 }, { autoAlpha: 1, duration: .3, delay: .5 });
+      } else if (G && !reduce()) G.fromTo(lb, { opacity: 0, scale: .98 }, { opacity: 1, scale: 1, duration: .3, ease: 'power2.out' });
+      lb.focus();  // the button bar fades in, so focus the dialog itself; Tab then moves through its buttons
+    };
+    const close = () => {
+      if (busy) return;
+      const t = tiles[cur];
+      if (t.closest('li').classList.contains('is-more')) expand();  // stepped past the first twelve: open the grid so focus can return
+      const done = () => { lb.hidden = true; busy = false; d.body.classList.remove('is-locked'); G && G.set([img, lb, bar], { clearProps: 'all' }); t.focus(); };
+      if (fancy() && !t.closest('li').hidden) {
+        busy = true;
+        G.to(bar, { autoAlpha: 0, duration: .15 });
+        F.fit(img, $('img', t), { duration: .6, ease: 'expo.inOut', scale: true, onComplete: done });
+      } else done();
+    };
+    const step = dir => { const v = visible(); const k = v.indexOf(tiles[cur]); const n = v[(k + dir + v.length) % v.length]; show(tiles.indexOf(n)); };
+    tiles.forEach((t, i) => t.addEventListener('click', () => open(i)));
+    $('.lb-close', lb).addEventListener('click', close);
+    $('.lb-prev', lb).addEventListener('click', () => step(-1));
+    $('.lb-next', lb).addEventListener('click', () => step(1));
+    lb.addEventListener('keydown', e => {
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') step(1);
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'Tab') trapFocus(lb, e);
+    });
+    let sx = null;
+    lb.addEventListener('pointerdown', e => { sx = e.clientX; });
+    lb.addEventListener('pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 50 && e.target.closest('.lb-stage')) step(e.clientX < sx ? 1 : -1); sx = null; });
+  });
+
   // share bars grow (0.8s power2.out, stagger 0.04)
   if (G && !reduce()) {
     $$('.hbars').forEach(list => {
@@ -782,7 +899,7 @@
         pins.forEach(p => p.classList.remove('is-hit'));
         inR.forEach(o => o.p.classList.add('is-hit'));
         ring.setAttribute('cx', x); ring.setAttribute('cy', y); ring.setAttribute('r', R); ring.style.display = '';
-        const top = near.slice(0, 3).map(o => `<li>${placeOf(D, o.p)}, ${label(+o.p.dataset.m)} <span>(${(o.d / D.ppm).toFixed(1)} mi)</span></li>`).join('');
+        const top = near.slice(0, +sec.dataset.nearN || 3).map(o => `<li>${placeOf(D, o.p)}, ${label(+o.p.dataset.m)} <span>(${(o.d / D.ppm).toFixed(1)} mi)</span></li>`).join('');
         outN.innerHTML = `<p style="margin:0">Within 1.5 miles of ${pl[0]}: <b>${docs} documented ${docs === 1 ? 'project' : 'projects'}</b>, ${inR.length} of them photographed and lit on the map.</p><p style="margin:8px 0 0">Nearest photographed jobs:</p><ol>${top}</ol>`;
       };
       const render = (D, q) => {

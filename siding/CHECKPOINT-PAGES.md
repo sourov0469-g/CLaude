@@ -44,3 +44,17 @@ Audit: 1440 + 375 section shots, pinned track at 0 / 0.5 / 1, sash slider keys, 
 | L5 Referral | $200 per referral, no limit, name mentioned before the first appointment; ticket stub | ui-ux-patterns "Referral ticket" |
 
 Audit: 1440 + 375 shots; interactions (finish switch, gable colour, split, permalink round trip on reload, book-with-plan prefill, tabs, stack). Defects fixed: the permalink rewrote the URL to `#studio` on load and the page opened scrolled past its H1 (now written only after the visitor changes something); discount figures overflowing on phone; "$200" repeated in heading and stub. Overflow 0px (375 strip items are the swatch tray), no console errors.
+
+## projects.html (PLAN §7), passed 29 Oct 2026
+Job APS-4867 re-read from its job page (`work/raw`), nine site photos harvested to `work/data/job4867.json` and fetched square as the job page shows them.
+
+| Section | Built | Source / parameters |
+|---|---|---|
+| Hero | "886 jobs, documented and dated." in two lines; lead: 316 have photos | |
+| P1 Sticky grid opener | Ten captioned photos round the APS-4867 after-photo (centre column, two rows). Columns reveal top/bottom once on arrival (0.9s `power1.inOut`, stagger 0.06), then a scrubbed zoom over a 360vh track: outer columns part ±40%, the centre tile scales to fill and the job card fades in (link to the job below). Phone and reduced motion: static grid with the card under it | Codrops Sticky Grid Scroll #94 |
+| P2 Map, full | All 312 in-frame pins with trade filters (counts per trade), date scrub and "Play 2022 to now", tooltips, finder showing the 8 nearest documented jobs; 312 + 574 = 886 reconciliation under the map | the firm's project finder file, as published |
+| P3 Gallery | 43 captioned photos, trade filters with counts, first 12 then "Show all"; lightbox (dialog, opaque, arrows / Esc / swipe, focus returns to the tile); on desktop the photo grows out of its tile | grid-to-fullscreen #48: Flip 0.9s `expo.inOut`, close 0.6s |
+| P4 Fourteen pairs | Every pair from home, siding and windows pages, filterable by trade, band on each | shared pairs component |
+| P5 APS-4867 in full | The homepage timeline (178 days: 101 to approval, 74 to the crew, 4 on site) plus scope by trade with bands (siding $25k-$30k, painting $5k-$10k, drip edge at two 2-by-2 locations) and the nine job photos | |
+
+Audit: 1440 + 375 section shots; sticky grid at enter / mid / end; lightbox keyboard round trip (ArrowRight, Tab to Previous, Esc, focus back on the tile); filters (Windows 15, Patio covers 5); show-all, and stepping past photo 12 in the lightbox opens the grid so focus can return. Defects fixed: the scrubbed reveal sat half-done on first view (now plays once on enter); the zoomed tile went soft (`sizes` 90vw, no `will-change`); lightbox arrows dead because focus sat on a hidden button (dialog focuses itself, `tabindex=-1`); see-through lightbox backdrop (opaque ink); phone gallery 5,200px long (first 12 + "Show all"); the job section lead repeated "Job APS-4867" under a heading that already names it. Overflow 0px (375 wide items are clipped map SVG children and the pair strip), no console errors.

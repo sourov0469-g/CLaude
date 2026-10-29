@@ -98,3 +98,14 @@ for brand, ul in re.findall(r'<ul class="apsv-pw-sw" aria-label="([^"]+?) exteri
     wsw[html.unescape(brand)] = [[html.unescape(t), c] for c, t in re.findall(r'style="--c:(#[0-9A-Fa-f]{6})" title="([^"]+)"', ul)]
 assert sorted(len(v) for v in wsw.values()) == [5, 5, 10, 19], {k: len(v) for k, v in wsw.items()}
 save('window_colours.json', wsw)
+
+# 8. The nine site photos on the APS-4867 job page (the homepage's dated job), in page order.
+jp = raw('recent-projects_austin-village-at-western-oaks-siding-exterior-painting-09-03-26-aps-4867.html')
+seg = jp[jp.find('9 Photos'):]
+job = []
+for tag in re.findall(r'<img[^>]+>', seg[:20000]):
+    src = re.search(r'production/([0-9a-f]{40}-\d+x\d+\.jpg)', tag)
+    if src and src.group(1) not in [j['img'] for j in job]:
+        job.append(dict(img=src.group(1), alt=html.unescape(re.search(r'alt="([^"]*)"', tag).group(1))))
+assert len(job) == 9, len(job)
+save('job4867.json', job)

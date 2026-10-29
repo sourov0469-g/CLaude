@@ -81,6 +81,14 @@ def main():
                 im = im.resize((w, h), Image.LANCZOS)
             save_webp(im, os.path.join(IMG, 'photos', f'p{i}-{w}.webp'), q=72)
 
+    # APS-4867 site photos (square, as the job page shows them)
+    for i, p in enumerate(json.load(open(os.path.join(DATA, 'job4867.json')))):
+        for w in (480, 960):
+            im = load(get(sanity(p['img'], w, w), f'job4867-{i}-{w}.webp'))
+            if im.size != (w, w):
+                im = im.resize((w, w), Image.LANCZOS)
+            save_webp(im, os.path.join(IMG, 'job', f'4867-{i}-{w}.webp'), q=72)
+
     # Logos and badges, as served.
     logo = load(get(LIVE + '/images/65246f239b165c29151e6f9f_AP_HORIZONTAL-LOGO_COLOR-V2-p-1080.png', 'logo-color.png'))
     logo.save(os.path.join(IMG, 'logo-color.png'), optimize=True)

@@ -130,7 +130,7 @@ def studio_compact():
 </section>'''
 
 
-def timeline():
+def timeline(sec_id='one-job', heading='One job, start to finish.', extra=''):
     from datetime import date
     D = [date(2026, 3, 9), date(2026, 6, 18), date(2026, 8, 31), date(2026, 9, 3)]
     gaps = [(D[1] - D[0]).days, (D[2] - D[1]).days, (D[3] - D[2]).days]  # 101, 74, 3 (four on-site days)
@@ -148,12 +148,12 @@ def timeline():
           <div class="tl-span-key" aria-hidden="true"><span><b>{gaps[0]}</b> days to approval</span><span><b>{gaps[1]}</b> days to the crew</span><span class="is-site"><b>4</b> days on site</span></div>
         </div>'''
     p = HOME_PAIRS[0]
-    return f'''<section class="section" id="one-job" aria-labelledby="job-h">
+    return f'''<section class="section" id="{sec_id}" aria-labelledby="job-h">
   <div class="wrap">
     <div class="tl" data-timeline>
       <div class="tl-aside">
-        <div class="side-head"><h2 class="h2" id="job-h" data-split>One job, start to finish.</h2>
-          <p>Job APS-4867, Village at Western Oaks, Austin, as the firm's own file records it. Every job runs the same four steps: free inspection, written proposal, install, final check.</p></div>
+        <div class="side-head"><h2 class="h2" id="job-h" data-split>{heading}</h2>
+          <p>{'' if 'APS-4867' in heading else 'Job APS-4867, '}Village at Western Oaks, Austin, as the firm's own file records it. Every job runs the same four steps: free inspection, written proposal, install, final check.</p></div>
         <figure class="compare" style="margin:0;aspect-ratio:16/10">
           <img class="c-after" style="clip-path:none" src="assets/img/pairs/home0a-1280.webp" srcset="assets/img/pairs/home0a-720.webp 720w, assets/img/pairs/home0a-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 40vw" width="1280" height="800" alt="{e(p['aa'])}" loading="lazy">
           <span class="pair-price"><small>Siding portion</small><b>$25k–$30k</b></span>
@@ -163,6 +163,7 @@ def timeline():
       </div>
       <div class="tl-track"><span class="tl-rail" aria-hidden="true"></span><span class="tl-fill" aria-hidden="true"></span><ol class="tl-list">{lis}</ol></div>
     </div>
+    {extra}
   </div>
 </section>'''
 
