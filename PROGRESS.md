@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 0 (setup) complete → Phase 1 (Hero ×3) next.
+- **Phase:** 1 (Hero ×3) complete → Phase 2 (Reviews) next.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -58,4 +58,21 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 (none yet)
 
 ## Phase notes
-(appended per section below)
+
+### Phase 1: Hero ×3 (rebuilt fresh; no V7 hero code reused: v1/v2/v3.html, hero.css and hero.js rewritten)
+- **Versions:**
+  - **V1 Shingle wall:** ⟦S0534⟧, Canvas 2D, FAMILY ROOFERS → SINCE 1995.
+  - **V2 Weighted headline:** Variable Proximity, Epilogue wght 300 → 900.
+  - **V3 Town rotator:** #289 + P73 over the 24 towns.
+- **Page system G1:** `beats()` in `src/js/fx.js` rewritten as the Q40 direction-aware entrance (±40 / ±20 px, 0.3 s expo.out, reset on leave). `lines` / `rise` / `onEnter` / `EASE` are byte-identical, so the Constellation is unaffected. Unused helpers removed: dirReveal, clipIn, drawIn, words, MOVE.
+- **Evidence:**
+  - `scratchpad v7/secqa.mjs hero`, switching 2→3→1 at 1440, 375 and 1440 reduced motion: 9/9 lines "switcher swaps only hero; overflow 0; errors 0". Method: every section's live version node is marked before the click; after it, only the hero's mark is gone.
+  - Screenshots: `rembrandt/v5/qa/hero{1,2,3}-{1440,375,1440-rm}.jpg`, each showing the Call (937) 746-7377 button.
+  - `heroint.mjs`: wall flip verified by canvas pixels (blue 53 → 204); proximity weights 898 vs 323; rotator rotate / pause-hold / resume; R07, R09–R13 hover and press: all respond. Errors 0.
+  - Facts: each hero version has tel:+19377467377 ×1; 353-9711 ×0 and 24/7 ×0 in the whole file.
+  - Whole-page sweep after the entrance change: overflow 0 and errors none for all three sets at 1440 and 375; every section's content shows (sweep sheet reviewed).
+- **Fixed during Phase 1 (kept visible):**
+  - The H1 sweep was lost when the ResizeObserver's first call rebuilt the tiles. Rebuilds now happen only on real size changes and keep the wave's target.
+  - At 375 the sweep was dropped by a font reflow. A load sweep still under way is now re-laid onto the new tiles.
+  - H3's reduced-motion pause button showed despite `hidden` (CSS display won). Added `.hx3-pause[hidden]{display:none}`.
+  - H3 photo: the tree canopy hid the roof and the yard sign sat behind the CTA, so it was swapped to job-truck.

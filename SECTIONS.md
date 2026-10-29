@@ -8,9 +8,9 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 
 | # | Section (`data-section`) | Version | Status target | passes |
 |---|---|---|---|---|
-| 1 | Hero (`hero`) | V1 | rebuilt fresh | NO |
-| 2 | Hero (`hero`) | V2 | rebuilt fresh | NO |
-| 3 | Hero (`hero`) | V3 | rebuilt fresh | NO |
+| 1 | Hero (`hero`) | V1 | rebuilt fresh | YES (Phase 1 evidence in PROGRESS.md) |
+| 2 | Hero (`hero`) | V2 | rebuilt fresh | YES (Phase 1 evidence in PROGRESS.md) |
+| 3 | Hero (`hero`) | V3 | rebuilt fresh | YES (Phase 1 evidence in PROGRESS.md) |
 | 4 | Reviews (`proof`) | V1 Constellation | kept, pixel-untouched | NO |
 | 5 | Reviews (`proof`) | V2 | upgraded | NO |
 | 6 | Reviews (`proof`) | V3 | rebuilt | NO |
@@ -34,7 +34,7 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 
 | # | System | passes |
 |---|---|---|
-| S1 | Direction-aware entrance (Q40 at the F17 dose) on every section | NO |
+| S1 | Direction-aware entrance (Q40 at the F17 dose) on every section | IN PLACE (beats() rewritten, Phase 1); verified page-wide in Phase 6 |
 | S2 | Cursor companion: House / Hammer / Drop + Off; replaces the system cursor on fine pointers | NO |
 | S3 | Per-section cursor effect (halo / trail / field) + background reacts back, every version | NO |
 | S4 | A different shape divider at every section boundary | NO |

@@ -1,285 +1,404 @@
-// HERO (PLAN-V7 §6). Each version is the page's one signature interactive (F17). Reveals are compressed to the F17
-// level (0.3s moves). Facts only: since 1995; Bunk founded it, Wade runs it, Rachel answers; (937) 746-7377; written,
-// line-item estimates; Mon to Fri 9 to 5; the photos are real jobs.
+// HERO (PLAN-FULL.md §1): three fresh builds from three reference families; each version's headline system is the
+// page's one signature interactive (F17). Facts only (BRIEF-FULL.md §3): founded 1995 by Bunk Walker, son Wade
+// president since 2015, Rachel answers the phone, Monday to Friday 9 to 5, (937) 746-7377, the 24 service towns.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { img } from '../../js/main.js';
-import { EASE, words, beats } from '../../js/fx.js';
+import { EASE, beats } from '../../js/fx.js';
+import { TOWNS } from '../../data/towns.js';
 
-const NS = 'http://www.w3.org/2000/svg';
-const visible = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.isIntersecting), { rootMargin: '120px' }); io.observe(el); return () => io.disconnect(); };
+const clamp01 = u => (u < 0 ? 0 : u > 1 ? 1 : u);
+const smooth = u => { u = clamp01(u); return u * u * (3 - 2 * u); };
+const mulberry = seed => () => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+const inView = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.isIntersecting), { rootMargin: '60px' }); io.observe(el); return () => io.disconnect(); };
 
-// ---------------------------------------------------------------------------------------------------------------
-// v1 ⟦S1321⟧ cinematic (clip image reveal; masked lines; overscanned parallax 0.18, scrub 1.2; mouse layers 0.04) with
-// the weather over the roofline, after ⟦S1341⟧ threejs-weather ported to SVG: one pre-allocated pool of drops, storm =
-// rain intensified (fall speed x1 -> x1.42, slant grows with speed squared), and ⟦S1339⟧'s rule that a light state is
-// cross-faded from wherever it is (scroll drives it, so it never jumps). The cursor leans the rain and parts it; the
-// Tudor's real ridge and gable lines (traced from the photo) draw themselves and catch the light near the pointer.
-// Scrolling the first 40% of the hero clears the storm: rain thins out, the clouds part, the sun warms the scrim.
-function cinematic(root, c) {
-  root.classList.add('is-run');
-  const sec = c.sec, done = [], q = s => root.querySelector(s), qa = s => root.querySelectorAll(s);
-  const ridge = q('.hx1-ridge'), glow = q('.hx1-glow-c'), rl = qa('.hx1-rl path'), base = qa('.hx1-rl:not(.hx1-rl--glow) path');
-  const clouds = [...qa('.hx1-cloud .cl')], sun = q('.hx1-sun'), shade = q('.hx1-shade');
-  done.push(() => { delete sec.dataset.mood; });
-  // the ridge glow follows the pointer (fine pointers): client -> SVG user space through the inverse screen matrix
-  const pt = ridge.createSVGPoint();
-  const onGlow = e => { if (e.pointerType !== 'mouse') return; const m = ridge.getScreenCTM(); if (!m) return; pt.x = e.clientX; pt.y = e.clientY; const p = pt.matrixTransform(m.inverse()); glow.setAttribute('cx', p.x.toFixed(0)); glow.setAttribute('cy', p.y.toFixed(0)); };
-  const offGlow = () => { glow.setAttribute('cx', -500); glow.setAttribute('cy', -500); };
-  root.addEventListener('pointermove', onGlow, { passive: true }); root.addEventListener('pointerleave', offGlow);
-  done.push(() => { root.removeEventListener('pointermove', onGlow); root.removeEventListener('pointerleave', offGlow); });
+// v1 ⟦S0534⟧ heygen-com/code-slice-hero (HyperFrames block; live source read: code-slice-hero.html). One surface of cells
+// carries a headline and a second headline sits behind it. A cursor's Gaussian depth field, exp(-falloff·d²/r²) cut off
+// smoothly at 0.06, lifts and tilts the cells near it (tilt ∝ offset/r × strength × pull × depth/160; z = strength/30 ×
+// depth × 0.45 × pull). Only cells over either headline's ink flip: a half-turn smooth(p/0.64) with a damped ring
+// bounce flipBounce·36·sin(3.3π·t), a flight lift 17·sin(πp)^0.7·peak and shading 1 − 0.12|sin|; flip time ×(1 + 0.18
+// (1 − peak)); ink-free cells lift at 0.55 and never flip. A 2.6s sweep (ease strength 3) turns front into rear.
+// Adapted: the cells are 3-tab shingle tabs in staggered courses with keyways and granules; the letters are spelled in
+// a second shingle colour, FAMILY ROOFERS then SINCE 1995; the visitor's pointer is the cursor (it lifts tabs like
+// wind); the reference's sweep runs once on load, and a press anywhere on the wall sends a flip wave out from that
+// point. Canvas 2D, drawn only while something moves; it sleeps at rest and off screen.
+const WALL = { falloff: 1.4, depth: 80, tilt: 28, flip: 0.75, bounce: 0.15, sweep: 2.6, sweepPow: 4, noise: 2 };
+const SHADES = { under: '#070d1c', dark: ['#202a40', '#2b3650', '#323e5a'], front: ['#cfc6b1', '#ece5d3', '#f6f1e4'], rear: ['#e09a00', '#ffb81f', '#ffc94f'] };
+function wall(root, c) {
+  const host = root.querySelector('.hx1-wall'), plate = root.querySelector('.hx1-plate'), cv = root.querySelector('.hx1-cv');
+  const ctx = cv.getContext && cv.getContext('2d');
+  const done = [];
   const cleanup = () => done.forEach(f => f());
-  // reduced motion: the designed still is the cleared state (sun out, clouds parted, the roofline drawn), no rain
-  if (!c.motion) {
-    sec.dataset.mood = 'visor';
-    gsap.set(sun, { opacity: 1 }); gsap.set(shade, { '--warm': 1 });
-    gsap.set(clouds[0], { x: -160 }); gsap.set(clouds[1], { y: -40, opacity: 0.6 }); gsap.set(clouds[2], { x: 200 });
+  if (!ctx) { root.classList.add('no-cv'); return cleanup; }
+  const size = { w: 0, h: 0 };
+  let W = 0, H = 0, dpr = 1, T = 72, TH = 45, R = 160, tiles = [], base = null, faces = [], shadow = null, raf = 0, last = 0, seen = true, built = false;
+  const field = { x: -1e4, y: -1e4, on: 0, target: 0, moved: 0 };
+  let sweep = null, target = 0; const queue = [];
+  const now = () => performance.now() / 1000;
+
+  // ---------- textures: a field of tabs in one shingle colour, the same tabs in a letter colour masked by the type
+  function noise(n = 96) {
+    const cn = document.createElement('canvas'); cn.width = cn.height = n; const x = cn.getContext('2d'), rnd = mulberry(7);
+    for (let i = 0; i < n * n * 0.16; i++) { x.fillStyle = rnd() < 0.5 ? `rgba(255,255,255,${0.04 + rnd() * 0.1})` : `rgba(0,0,0,${0.06 + rnd() * 0.14})`; x.fillRect(Math.floor(rnd() * n), Math.floor(rnd() * n), 1, 1); }
+    return cn;
+  }
+  const NOISE = noise();
+  function tabs(colors) {
+    const cn = document.createElement('canvas'); cn.width = W; cn.height = H; const x = cn.getContext('2d');
+    const g = Math.max(2, Math.round(T * 0.035));
+    for (const t of tiles) {
+      const gr = x.createLinearGradient(0, t.y, 0, t.y + t.h);
+      gr.addColorStop(0, colors[0]); gr.addColorStop(0.24, colors[0]); gr.addColorStop(0.3, colors[1]); gr.addColorStop(1, colors[2]);
+      x.fillStyle = gr; x.fillRect(t.x + g / 2, t.y, t.w - g, t.h - Math.max(1, dpr));
+    }
+    x.globalCompositeOperation = 'source-atop'; x.fillStyle = x.createPattern(NOISE, 'repeat'); x.fillRect(0, 0, W, H);
+    return cn;
+  }
+  function mask(lines, fs) {
+    const cn = document.createElement('canvas'); cn.width = W; cn.height = H; const x = cn.getContext('2d');
+    x.font = `900 ${fs}px Epilogue, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+    if ('letterSpacing' in x) x.letterSpacing = `${-0.02 * fs}px`;
+    const lh = fs * 0.86, top = (H - lh * lines.length) / 2;
+    lines.forEach((l, i) => { const m = x.measureText(l); const asc = m.actualBoundingBoxAscent || fs * 0.72; x.fillText(l, W / 2, top + i * lh + (lh + asc) / 2 - fs * 0.04); });
+    return cn;
+  }
+  function face(colors, m) { // dark tabs, then the letter-coloured tabs cut to the type
+    const out = tabs(SHADES.dark), lt = tabs(colors), x = lt.getContext('2d');
+    x.globalCompositeOperation = 'destination-in'; x.drawImage(m, 0, 0);
+    out.getContext('2d').drawImage(lt, 0, 0); return out;
+  }
+  function build() {
+    const r = host.getBoundingClientRect(); if (r.width < 10 || r.height < 10) return;
+    if (built && Math.abs(r.width - size.w) < 2 && Math.abs(r.height - size.h) < 2) return; // ResizeObserver's first call
+    size.w = r.width; size.h = r.height;
+    // a real resize (fonts reflowing the band, a rotated phone): the wall restarts in the state its latest wave was
+    // heading to; a load sweep still under way is re-laid onto the new tiles with its original start time
+    const state = built ? (queue.length ? target : (tiles.filter(t => t.active && t.want === 1).length > tiles.filter(t => t.active).length / 2 ? 1 : 0)) : 0;
+    const resweep = built && sweep && now() < sweep.t0 + WALL.sweep;
+    queue.length = 0; if (built && !resweep) sweep = null;
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    const cw = r.width, ch = r.height;
+    W = Math.round(cw * dpr); H = Math.round(ch * dpr); cv.width = W; cv.height = H; cv.style.width = cw + 'px'; cv.style.height = ch + 'px';
+    const tw = Math.max(30, Math.min(84, cw / 20)); T = tw * dpr; TH = tw * 0.62 * dpr; R = Math.max(90, cw * 0.11);
+    // tiles in staggered courses (odd courses shift half a tab), covering the canvas
+    tiles = []; const rnd = mulberry(1995);
+    const rows = Math.ceil(H / TH) + 1, cols = Math.ceil(W / T) + 2;
+    for (let row = 0; row < rows; row++) for (let col = -1; col < cols; col++) {
+      const x = col * T - (row % 2 ? T / 2 : 0), y = row * TH;
+      if (x + T < 0 || x > W || y > H) continue;
+      tiles.push({ x, y, w: T, h: TH, cx: (x + T / 2) / dpr, cy: (y + TH / 2) / dpr, face: 0, want: 0, flip: null, st: state, pull: 0, ink: 0, active: false,
+        seedX: rnd() * 2 - 1, seedY: rnd() * 2 - 1, seedZ: rnd() * 2 - 1, phase: rnd() * 6.283 });
+    }
+    // one type size for both headlines, fitted to the wall (S0534: copy, type size and cell size are independent)
+    const probe = document.createElement('canvas').getContext('2d'); probe.font = `900 100px Epilogue, sans-serif`;
+    const widest = Math.max(...[...FRONT, ...REAR].map(l => probe.measureText(l).width)) / 100;
+    const fs = Math.min((W * 0.86) / widest, (H * 0.82) / (2 * 0.86));
+    const mf = mask(FRONT, fs), mr = mask(REAR, fs);
+    faces = [face(SHADES.front, mf), face(SHADES.rear, mr)];
+    // which tiles carry ink (either headline): eligibility and peak, from the masks' alpha (downsampled)
+    const k = 4, sw = Math.ceil(W / k), sh = Math.ceil(H / k), sc = document.createElement('canvas'); sc.width = sw; sc.height = sh;
+    const sx = sc.getContext('2d', { willReadFrequently: true });
+    sx.drawImage(mf, 0, 0, sw, sh); sx.globalCompositeOperation = 'lighter'; sx.drawImage(mr, 0, 0, sw, sh);
+    const a = sx.getImageData(0, 0, sw, sh).data;
+    for (const t of tiles) {
+      let n = 0, tot = 0;
+      for (let y = Math.max(0, Math.floor(t.y / k)); y < Math.min(sh, Math.ceil((t.y + t.h) / k)); y++)
+        for (let x = Math.max(0, Math.floor(t.x / k)); x < Math.min(sw, Math.ceil((t.x + t.w) / k)); x++) { tot++; if (a[(y * sw + x) * 4 + 3] > 40) n++; }
+      t.ink = tot ? n / tot : 0; t.active = t.ink > 0.04; t.peak = Math.min(1, t.ink * 2);
+      if (t.active) t.face = t.want = t.st;
+    }
+    // a soft shadow sprite for lifted tabs
+    shadow = document.createElement('canvas'); const pad = Math.ceil(T * 0.35); shadow.width = Math.ceil(T + pad * 2); shadow.height = Math.ceil(TH + pad * 2);
+    const shx = shadow.getContext('2d'); shx.filter = `blur(${Math.max(2, T * 0.08)}px)`; shx.fillStyle = 'rgba(0,0,0,1)'; shx.fillRect(pad, pad, T, TH);
+    shadow.pad = pad;
+    // the rest image: every tile in its current face
+    base = document.createElement('canvas'); base.width = W; base.height = H; paintBase();
+    if (resweep) { tiles.forEach(t => { if (t.active) t.face = t.want = 0; }); paintBase(); schedule(null, 1, sweep.t0); }
+    built = true; draw(now());
+  }
+  function paintBase() {
+    const b = base.getContext('2d'); b.fillStyle = SHADES.under; b.fillRect(0, 0, W, H);
+    for (const t of tiles) b.drawImage(faces[t.face], t.x, t.y, t.w, t.h, t.x, t.y, t.w, t.h);
+  }
+  function settle(t) { const b = base.getContext('2d'); b.fillStyle = SHADES.under; b.fillRect(t.x, t.y, t.w, t.h); b.drawImage(faces[t.face], t.x, t.y, t.w, t.h, t.x, t.y, t.w, t.h); }
+
+  // ---------- the reference's field, sweep easing and pose
+  const fieldAt = (x, y, fx, fy) => { const d2 = (x - fx) ** 2 + (y - fy) ** 2, raw = Math.exp((-WALL.falloff * d2) / (R * R)); return smooth((raw - 0.06) / 0.94); };
+  const easeSweep = u => 1 - Math.pow(1 - clamp01(u), WALL.sweepPow), invSweep = u => 1 - Math.pow(1 - clamp01(u), 1 / WALL.sweepPow);
+  function startFlip(t, at) { t.flip = { t0: at, dur: WALL.flip * (1 + 0.18 * (1 - t.peak)), from: t.face, to: 1 - t.face }; }
+  function schedule(origin, toFace, at) { // a flip wave: every ink tile flips when the wave front reaches it
+    queue.length = 0; target = toFace; const cw = W / dpr, ch = H / dpr;
+    const maxD = origin ? Math.max(...[[0, 0], [cw, 0], [0, ch], [cw, ch]].map(([x, y]) => Math.hypot(x - origin.x, y - origin.y))) : cw;
+    for (const t of tiles) if (t.active) {
+      const rank = origin ? Math.hypot(t.cx - origin.x, t.cy - origin.y) / maxD : t.cx / cw;
+      queue.push({ t, at: at + (origin ? 0.85 : 1) * WALL.sweep * invSweep(rank), to: toFace });
+    }
+    queue.sort((a, b) => a.at - b.at);
+  }
+  function pose(t, time, fx, fy, on, sweepOn) {
+    let p = 0, theta = 0, flight = 0;
+    if (t.flip) {
+      p = clamp01((time - t.flip.t0) / t.flip.dur);
+      const turn = smooth(p / 0.64), ringT = clamp01((p - 0.64) / 0.36);
+      const env = smooth(ringT / 0.12) * Math.exp(-3.3 * ringT) * (1 - smooth((ringT - 0.72) / 0.28));
+      theta = 180 * turn + WALL.bounce * 36 * Math.sin(ringT * Math.PI * 3.3) * env;
+      flight = Math.pow(Math.sin(Math.PI * p), 0.7);
+    }
+    const pull = t.pull, dx = fx - t.cx, dy = fy - t.cy, gain = WALL.depth / 160;
+    const variation = WALL.noise * Math.max(pull, flight * t.peak) * (sweepOn ? 1 : field.jit);
+    const jitter = variation * (Math.sin(time * 5.7 + t.phase) * 0.7 + Math.sin(time * 10.3 + t.phase * 1.71) * 0.3);
+    const rx = gain * ((dy / R) * WALL.tilt * 1.6 * pull + t.seedX * WALL.tilt * 0.16 * pull) + jitter;
+    const ry = gain * ((dx / R) * WALL.tilt * 1.8 * pull + t.seedY * WALL.tilt * 0.12 * pull) + jitter * 0.7;
+    const z = (WALL.tilt / 30) * WALL.depth * 0.45 * pull + 17 * flight * t.peak;
+    return {
+      p, theta, z, rx, ry, rz: t.seedZ * variation * (2.3 * flight + 1.2 * pull) + jitter * 0.35,
+      x: Math.max(-t.w * 0.18, Math.min(t.w * 0.18, dx * dpr * 0.08 * pull)) + jitter * 0.2 * dpr,
+      y: Math.max(-t.h * 0.11, Math.min(t.h * 0.11, dy * dpr * 0.07 * pull)) + jitter * 0.16 * dpr,
+    };
+  }
+
+  // ---------- one frame
+  function draw(time) {
+    if (!built) return false;
+    const dt = Math.min(1 / 30, last ? time - last : 1 / 60); last = time;
+    // sweep cursor (the reference's imaginary cursor) and the visitor's pointer field
+    let fx = field.x, fy = field.y, on = field.on, sweepOn = false;
+    if (sweep) {
+      const u = (time - sweep.t0) / WALL.sweep;
+      if (u > 1.15) sweep = null;
+      else if (u > -0.1) { sweepOn = true; const cw = W / dpr; fx = -R + (cw + 2 * R) * easeSweep(u); fy = H / dpr / 2; on = Math.max(on, smooth((u + 0.1) / 0.2) * (1 - smooth((u - 0.95) / 0.2))); }
+    }
+    field.on += (field.target - field.on) * (1 - Math.exp(-dt / 0.18));
+    field.jit = smooth(1 - (time - field.moved - 0.6) / 0.9);
+    while (queue.length && queue[0].at <= time) { const q = queue.shift(); q.t.want = q.to; if (!q.t.flip && q.t.face !== q.t.want) startFlip(q.t, q.at); }
+    const k = 1 - Math.exp(-dt / 0.09);
+    ctx.drawImage(base, 0, 0);
+    const act = []; let moving = false;
+    for (const t of tiles) {
+      const target = on > 0.002 ? fieldAt(t.cx, t.cy, fx, fy) * on * (t.active ? 1 : 0.55) : 0;
+      if (Math.abs(target - t.pull) > 0.0015) { t.pull += (target - t.pull) * k; moving = true; } else t.pull = target;
+      if (t.flip && time - t.flip.t0 >= t.flip.dur) { t.face = t.flip.to; t.flip = null; settle(t); if (t.want !== t.face) startFlip(t, time); }
+      if (t.pull > 0.002 || t.flip) act.push(t);
+    }
+    if (act.length) {
+      const poses = act.map(t => [t, pose(t, time, fx, fy, on, sweepOn)]);
+      ctx.fillStyle = SHADES.under; for (const [t] of poses) ctx.fillRect(t.x, t.y, t.w, t.h);
+      poses.sort((a, b) => a[1].z - b[1].z);
+      const pad = shadow.pad;
+      for (const [t, q] of poses) if (q.z > 0.5) { ctx.globalAlpha = Math.min(0.55, 0.19 * q.z / 9); ctx.drawImage(shadow, t.x + q.x + q.z * 0.25 * dpr - pad, t.y + q.y + q.z * 0.45 * dpr - pad); }
+      ctx.globalAlpha = 1;
+      for (const [t, q] of poses) {
+        const th = (q.theta * Math.PI) / 180, cos = Math.cos(th), f = cos >= 0 || !t.flip ? (t.flip ? t.flip.from : t.face) : t.flip.to;
+        const lift = 1 + q.z * 0.004, sy = Math.max(0.02, Math.abs(cos)) * Math.cos((q.rx * Math.PI) / 180) * lift, sxs = Math.cos((q.ry * Math.PI) / 180) * lift;
+        ctx.save(); ctx.translate(t.x + t.w / 2 + q.x, t.y + t.h / 2 + q.y); ctx.rotate((q.rz * Math.PI) / 180); ctx.scale(sxs, sy);
+        ctx.drawImage(faces[f], t.x, t.y, t.w, t.h, -t.w / 2, -t.h / 2, t.w, t.h);
+        const shade = 0.12 * Math.abs(Math.sin(th)) + Math.max(0, -q.rx / WALL.tilt) * 0.16;
+        if (shade > 0.01) { ctx.fillStyle = `rgba(0,0,0,${shade})`; ctx.fillRect(-t.w / 2, -t.h / 2, t.w, t.h); }
+        const glint = Math.max(0, q.rx / WALL.tilt) * 0.14; if (glint > 0.01) { ctx.fillStyle = `rgba(255,255,255,${glint})`; ctx.fillRect(-t.w / 2, -t.h / 2, t.w, t.h * 0.3); }
+        ctx.restore();
+      }
+    }
+    return moving || act.length > 0 || queue.length > 0 || !!sweep || Math.abs(field.target - field.on) > 0.002 || field.jit > 0;
+  }
+  const tick = () => { raf = 0; if (!seen || document.hidden) return; if (draw(now())) raf = requestAnimationFrame(tick); };
+  const wake = () => { if (!raf && seen && c.motion) { last = 0; raf = requestAnimationFrame(tick); } };
+
+  // ---------- input: the pointer is the cursor; a press sends a flip wave from the press point
+  const local = e => { const r = host.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  const onMove = e => { if (e.pointerType === 'touch') return; const p = local(e); field.x = p.x; field.y = p.y; field.target = 1; field.moved = now(); wake(); };
+  const onLeave = () => { field.target = 0; wake(); };
+  const onDown = e => {
+    if (e.button > 0 || (e.target.closest && e.target.closest('a,button,input,label'))) return;
+    const p = local(e), majority = tiles.filter(t => t.active && t.want === 1).length > tiles.filter(t => t.active).length / 2;
+    schedule(p, majority ? 0 : 1, now()); if (e.pointerType === 'touch') { field.x = p.x; field.y = p.y; field.target = 1; field.moved = now(); setTimeout(() => { field.target = 0; wake(); }, 450); }
+    wake();
+  };
+
+  const start = () => {
+    if (!root.isConnected) return;
+    build();
+    const ro = new ResizeObserver(() => { clearTimeout(ro.t); ro.t = setTimeout(() => { if (root.isConnected) { build(); wake(); } }, 140); }); ro.observe(host); done.push(() => { ro.disconnect(); clearTimeout(ro.t); });
+    if (!c.motion) return;
+    sweep = { t0: now() + (c.swap ? 0.25 : 0.9) }; schedule(null, 1, sweep.t0); wake();
+  };
+  (document.fonts ? document.fonts.load('900 100px Epilogue').then(() => document.fonts.ready) : Promise.resolve()).then(start, start);
+  if (c.motion) {
+    root.addEventListener('pointermove', onMove, { passive: true }); root.addEventListener('pointerleave', onLeave); host.addEventListener('pointerdown', onDown);
+    done.push(() => { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); host.removeEventListener('pointerdown', onDown); });
+    done.push(inView(root, v => { seen = v; if (v) wake(); }));
+    const onVis = () => wake(); document.addEventListener('visibilitychange', onVis); done.push(() => document.removeEventListener('visibilitychange', onVis));
+    // the wall leaves at its own rate (S1321 parallax 0.18 of the viewport)
+    gsap.fromTo(plate, { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+    beats(root, [root.querySelector('.hx1-sub'), root.querySelector('.hx1-call')], { now: true, delay: c.swap ? 0 : 0.15 });
+  }
+  done.push(() => cancelAnimationFrame(raf));
+  return cleanup;
+}
+const FRONT = ['FAMILY', 'ROOFERS'], REAR = ['SINCE', '1995'];
+
+// v2 [BANK] Variable Proximity (React Bits; deep read slice 4 #171, full source mined). Each letter's
+// font-variation-settings eases toward a target set by its distance to the pointer: gaussian falloff
+// (e^(-2(d/r)²) − e⁻²)/(1 − e⁻²), cut at d ≥ r; damping level += (target − level)(1 − exp(−Δt/(0.2·400))), Δt ≤ 64ms,
+// snap within 0.002; letters reset to the rest weight before measuring. After 500ms with nothing near, an idle wave
+// mixes in (τ 600ms): phase ((x + 0.6y)/span − t/3.2)·2π, amplitude 0.7·((1 + cos)/2)^2.2, span max(220, 0.85 × width);
+// the loop stops when everything settles. Adapted: Epilogue's own wght axis 300 → 900, radius = 1.0 × font-size; the
+// headline stands on drawn shingle courses whose keyways lift under heavy letters; the wave (a gust over the roof)
+// runs two passes then rests until the pointer moves again (WCAG 2.2.2); the Call label thickens as the pointer
+// approaches; a rafter drawing behind turns toward the pointer; the Tudor job photo is cut along a 6/12 roof pitch.
+const VP = { from: 300, to: 900, smoothing: 0.2, period: 3.2, peak: 0.7, edge: Math.exp(-2) };
+function weighted(root, c) {
+  const h = root.querySelector('.hx2-vis'), lines = [...root.querySelectorAll('.hx2-l')], photo = root.querySelector('.hx2-photo');
+  const cut = root.querySelector('.hx2-cut'), cutL = cut.querySelector('.hx2-cut-l'), cutC = cut.querySelector('.hx2-cut-c');
+  const NS = 'http://www.w3.org/2000/svg', done = [];
+  const cleanup = () => done.forEach(f => f());
+  // split into letters (an sr-only copy already carries the sentence) and give each line its course drawing
+  const L = [];
+  lines.forEach((ln, li) => {
+    const text = ln.textContent; ln.textContent = '';
+    for (const ch of text) { const s = document.createElement('span'); s.className = ch === ' ' ? 'hx2-sp' : 'hx2-ch'; s.textContent = ch; ln.append(s); if (ch !== ' ') L.push({ el: s, line: li, x: 0, y: 0, level: 0, target: 0, w: '' }); }
+    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'hx2-course'); svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = '<path class="hx2-course-l"/>'; ln.append(svg);
+  });
+  const courses = lines.map(ln => ln.querySelector('.hx2-course-l'));
+  const write = (o, v) => { const w = Math.round(VP.from + (VP.to - VP.from) * v); if (w !== o.w) { o.w = w; o.el.style.fontVariationSettings = `'wght' ${w}`; } };
+  let fs = 80, span = 220, geom = [];
+  function measure() {
+    L.forEach(o => { o.el.style.fontVariationSettings = `'wght' ${VP.from}`; o.w = VP.from; });
+    const hr = h.getBoundingClientRect(); fs = parseFloat(getComputedStyle(h).fontSize);
+    L.forEach(o => { const r = o.el.getBoundingClientRect(); o.x = r.left - hr.left + r.width / 2; o.y = r.top - hr.top + r.height / 2; o.w0 = r.width; });
+    span = Math.max(220, hr.width * 0.85);
+    geom = lines.map((ln, li) => { const r = ln.getBoundingClientRect(); return { x0: r.left - hr.left, w: r.width, letters: L.filter(o => o.line === li) }; });
+    L.forEach(o => write(o, o.level));
+    courses.forEach((p, i) => p.closest('svg').setAttribute('viewBox', `0 0 ${Math.max(1, geom[i].w).toFixed(0)} 14`));
+    drawCourses(true);
+    // the photo's top edge follows a 6/12 roof pitch: it rises half the panel's width across the panel
+    const pr = photo.getBoundingClientRect(), rise = Math.min(pr.height * 0.42, pr.width * 0.5);
+    photo.style.setProperty('--rise', rise.toFixed(1) + 'px');
+    cut.setAttribute('viewBox', `0 0 ${pr.width.toFixed(0)} ${pr.height.toFixed(0)}`);
+    const d = `M0 ${rise.toFixed(1)} L${pr.width.toFixed(1)} 0`;
+    cutL.setAttribute('d', d); cutC.setAttribute('d', d);
+  }
+  let lastCourse = '';
+  function drawCourses(force) { // keyway notches every ~0.42em, each lifted 4px × the level of the letter above it
+    const key = L.map(o => o.level.toFixed(2)).join(''); if (!force && key === lastCourse) return; lastCourse = key;
+    courses.forEach((p, i) => {
+      const g = geom[i]; if (!g) return; const step = fs * 0.42, n = Math.max(2, Math.floor(g.w / step));
+      let d = 'M0 9'; for (let k = 1; k < n; k++) {
+        const x = (k * g.w) / n, gx = g.x0 + x; let lv = 0, best = 1e9;
+        for (const o of g.letters) { const dd = Math.abs(o.x - gx); if (dd < best) { best = dd; lv = o.level; } }
+        const lift = 4 * lv; d += `H${(x - 2).toFixed(1)}V${(9 - 6 - lift).toFixed(1)}H${(x + 2).toFixed(1)}V9`;
+      }
+      p.setAttribute('d', d + `H${g.w.toFixed(1)}`);
+    });
+  }
+  const strength = (d, r) => (d >= r ? 0 : (Math.exp(-2 * (d / r) ** 2) - VP.edge) / (1 - VP.edge));
+  if (!c.motion) { // a designed still: "since 1995." set heavy
+    measure(); L.forEach(o => { o.level = o.line === 2 ? 1 : 0; write(o, o.level); }); drawCourses(true);
+    const ro0 = new ResizeObserver(() => { measure(); L.forEach(o => { o.level = o.line === 2 ? 1 : 0; write(o, o.level); }); drawCourses(true); }); ro0.observe(root); done.push(() => ro0.disconnect());
     return cleanup;
   }
-  // parallax: the plate (photo + traced lines together) travels 0.18 of the viewport as the hero leaves (S1321)
-  gsap.to(q('.hx1-plate'), { y: () => -innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 1.2, invalidateOnRefresh: true } });
-  // entrance at the F17 level: media, then the headline lines, then copy and actions, then the roofline draws
-  gsap.timeline({ delay: c.swap ? 0 : 0.05 })
-    .fromTo(q('.hx1-media'), { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.3, ease: EASE }, 0)
-    .fromTo(q('.hx1-img'), { scale: 1.04 }, { scale: 1, duration: 0.3, ease: EASE }, 0)
-    .fromTo(qa('.hx1-h .ln > span'), { yPercent: 100 }, { yPercent: 0, duration: 0.3, ease: EASE, stagger: 0.08 }, 0.12)
-    .fromTo([q('.hx1-p'), q('.hx1-cta')], { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.08 }, 0.28)
-    .fromTo(rl, { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.06 }, 0.36);
-
-  // rain: one pre-allocated pool (S1341), sized to the hero's pixel box; density scales with area
-  const svg = q('.hx1-rain'); let W = 1, H = 1;
-  const N = Math.round(gsap.utils.clamp(18, 48, (innerWidth * innerHeight) / 27000));
-  const drops = Array.from({ length: N }, (_, i) => { const l = document.createElementNS(NS, 'line'); svg.append(l); return { l, x: 0, y: 0, len: 14 + Math.random() * 14, sp: 820 + Math.random() * 520, i }; });
-  const seed = d => { d.x = Math.random() * (W + 200) - 100; d.y = Math.random() * H; };
-  const size = () => { const r = root.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height); svg.setAttribute('viewBox', `0 0 ${W.toFixed(0)} ${H.toFixed(0)}`); };
-  const ro = new ResizeObserver(size); ro.observe(root); size(); drops.forEach(seed); done.push(() => ro.disconnect());
-  const st = { w: 1, lean: 0, leanT: 0, px: -1e4, py: -1e4 };
-  let raf = 0, last = 0, inView = true;
-  // weather state from scroll (0 -> 40% of the hero); everything reads st.w so the cross-fade never jumps
-  const parts = [{ el: clouds[0], to: { x: -160 } }, { el: clouds[1], to: { y: -40, opacity: 0.6 } }, { el: clouds[2], to: { x: 200 } }];
-  const clr = gsap.timeline({ paused: true })
-    .to(parts[0].el, { ...parts[0].to, ease: 'none', duration: 1 }, 0).to(parts[1].el, { ...parts[1].to, ease: 'none', duration: 1 }, 0).to(parts[2].el, { ...parts[2].to, ease: 'none', duration: 1 }, 0)
-    .fromTo(sun, { opacity: 0, y: 60 }, { opacity: 1, y: 0, ease: 'none', duration: 1 }, 0)
-    .fromTo(shade, { '--warm': 0 }, { '--warm': 1, ease: 'none', duration: 1 }, 0)
-    .fromTo(base, { stroke: '#ffffff' }, { stroke: '#ffe2a0', ease: 'none', duration: 1 }, 0);
-  const setW = w => { st.w = w; clr.progress(1 - w); sec.dataset.mood = w > 0.5 ? 'umbrella' : 'visor'; if (w > 0.01) wake(); };
-  ScrollTrigger.create({ trigger: root, start: 'top top', end: '40% top', scrub: true, onUpdate: s => setW(1 - s.progress), onRefresh: s => setW(1 - s.progress) });
-  // ambient cloud drift on coprime periods (7.1 / 11.3 / 13.7 s), paused offscreen
-  const drift = clouds.map((cl, i) => gsap.fromTo(cl.querySelector('path'), { x: -14 }, { x: 14, duration: [7.1, 11.3, 13.7][i], ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-  // the pointer leans the rain (target -0.35..0.35) and parts it locally
-  const onMove = e => { if (e.pointerType !== 'mouse') return; const r = root.getBoundingClientRect(); st.leanT = ((e.clientX - r.left) / r.width - 0.5) * 0.7; st.px = e.clientX - r.left; st.py = e.clientY - r.top; };
-  const onLeave = () => { st.leanT = 0; st.px = st.py = -1e4; };
-  root.addEventListener('pointermove', onMove, { passive: true }); root.addEventListener('pointerleave', onLeave);
-  done.push(() => { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); });
-  function frame(t) {
-    raf = 0; if (!inView || document.hidden) return;
-    const dt = Math.min(1 / 30, (t - last) / 1000 || 1 / 60); last = t;
-    st.lean += (st.leanT - st.lean) * (1 - Math.pow(0.9, dt * 60));
-    const v = 1 + 0.42 * st.w, slant = (0.12 + st.lean) * v * v, live = Math.ceil(N * st.w);
-    for (const d of drops) {
-      if (d.i >= live) { if (d.on !== false) { d.l.setAttribute('opacity', 0); d.on = false; } continue; }
-      if (d.on === false) { d.on = true; d.l.setAttribute('opacity', 1); seed(d); d.y = -d.len; }
-      d.y += d.sp * v * dt; d.x += d.sp * v * dt * slant;
-      if (d.y > H + d.len) { d.y = -d.len - Math.random() * 40; d.x = Math.random() * (W + 300) - 150 - slant * H * 0.5; }
-      // part around the pointer: a visual offset, strongest within 110px
-      let off = 0; const dx = d.x - st.px, dy = d.y - st.py, dist = Math.hypot(dx, dy);
-      if (dist < 110) off = Math.sign(dx || 1) * 22 * (1 - dist / 110) ** 2;
-      const x = d.x + off;
-      d.l.setAttribute('x1', x.toFixed(1)); d.l.setAttribute('y1', d.y.toFixed(1)); d.l.setAttribute('x2', (x - d.len * slant).toFixed(1)); d.l.setAttribute('y2', (d.y - d.len).toFixed(1));
+  let px = -1e4, py = -1e4, raf = 0, last = 0, idleSince = performance.now(), waveMix = 0, waveStart = 0, waveDone = false, seen = true;
+  const call = root.querySelector('.hx2-call'), callT = root.querySelector('.hx2-call-t'); let callW = 600;
+  function tick(t) {
+    raf = 0; if (!seen || document.hidden) return;
+    const dt = Math.min(64, last ? t - last : 16); last = t;
+    const hr = h.getBoundingClientRect(), r = fs * 1.0;
+    let near = false, busy = false;
+    for (const o of L) { const d = Math.hypot(px - (hr.left + o.x), py - (hr.top + o.y)); o.target = strength(d, r); if (o.target > 0) near = true; }
+    if (near) { idleSince = t; waveStart = 0; waveDone = false; }
+    const idle = t - idleSince > 500 && !waveDone;
+    if (idle && !waveStart) waveStart = t;
+    if (waveStart && t - waveStart > VP.period * 2000) { waveDone = true; waveStart = 0; }
+    const wTarget = idle ? 1 : 0; waveMix += (wTarget - waveMix) * (1 - Math.exp(-dt / 600)); if (Math.abs(wTarget - waveMix) < 0.002) waveMix = wTarget;
+    const k = 1 - Math.exp(-dt / (VP.smoothing * 400)), ts = t / 1000;
+    for (const o of L) {
+      let tg = o.target;
+      if (waveMix > 0.001) { const ph = ((o.x + o.y * 0.6) / span - ts / VP.period) * Math.PI * 2; tg = Math.max(tg, VP.peak * Math.pow((1 + Math.cos(ph)) / 2, 2.2) * waveMix); }
+      const dl = tg - o.level; if (Math.abs(dl) < 0.002) o.level = tg; else { o.level += dl * k; busy = true; }
+      write(o, o.level);
     }
-    if (st.w > 0.01 || drops.some(d => d.on)) raf = requestAnimationFrame(frame);
-    else svg.style.visibility = 'hidden'; // a cleared sky costs nothing to composite
+    drawCourses(false);
+    // R09: the Call label thickens as the pointer approaches the button
+    const cr = call.getBoundingClientRect(), cd = Math.hypot(px - (cr.left + cr.width / 2), py - (cr.top + cr.height / 2));
+    const cw = Math.round(600 + 300 * strength(Math.max(0, cd - cr.width * 0.35), 170)); if (cw !== callW) { callW = cw; callT.style.fontVariationSettings = `'wght' ${cw}`; busy = true; }
+    if (busy || waveMix > 0.001 || (idle && !waveDone)) raf = requestAnimationFrame(tick);
   }
-  function wake() { if (!raf && inView && !document.hidden) { svg.style.visibility = ''; last = performance.now(); raf = requestAnimationFrame(frame); } }
-  done.push(visible(root, v => { inView = v; drift.forEach(d => (v ? d.resume() : d.pause())); if (v) wake(); }));
-  const onVis = () => { if (!document.hidden) wake(); }; document.addEventListener('visibilitychange', onVis);
-  done.push(() => { document.removeEventListener('visibilitychange', onVis); cancelAnimationFrame(raf); drift.forEach(d => d.kill()); });
-  setW(1);
+  const wake = () => { if (!raf && seen) { last = 0; raf = requestAnimationFrame(tick); } };
+  const onMove = e => { px = e.clientX; py = e.clientY; if (e.pointerType === 'mouse' || e.pointerType === 'pen') waveDone = false; wake(); };
+  const onTouch = e => { const t = e.touches && e.touches[0]; if (t) { px = t.clientX; py = t.clientY; wake(); } };
+  const onEnd = () => { px = py = -1e4; wake(); };
+  addEventListener('pointermove', onMove, { passive: true }); addEventListener('touchmove', onTouch, { passive: true }); addEventListener('touchend', onEnd, { passive: true });
+  document.documentElement.addEventListener('mouseleave', onEnd);
+  done.push(() => { removeEventListener('pointermove', onMove); removeEventListener('touchmove', onTouch); removeEventListener('touchend', onEnd); document.documentElement.removeEventListener('mouseleave', onEnd); cancelAnimationFrame(raf); });
+  done.push(inView(root, v => { seen = v; if (v) wake(); }));
+  const go = () => { if (!root.isConnected) return; measure(); idleSince = performance.now() - 520; wake(); };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
+  const ro = new ResizeObserver(() => { if (root.isConnected) { measure(); wake(); } }); ro.observe(root); done.push(() => ro.disconnect());
+  // the rafter drawing turns toward the pointer (±1.5°); the photo plate leaves at 0.18 of the viewport
+  const raft = root.querySelector('.hx2-raft'), qr = gsap.quickTo(raft, 'rotation', { duration: 0.8, ease: 'power3.out' });
+  const onRaft = e => { if (e.pointerType === 'mouse') qr((e.clientX / innerWidth - 0.5) * 3); };
+  root.addEventListener('pointermove', onRaft, { passive: true }); done.push(() => root.removeEventListener('pointermove', onRaft));
+  gsap.fromTo(root.querySelector('.hx2-plate'), { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+  beats(root, [root.querySelector('.hx2-kick'), lines, root.querySelector('.hx2-sub'), root.querySelector('.hx2-cta'), photo], { now: true, delay: c.swap ? 0 : 0.1 });
   return cleanup;
 }
 
-// ---------------------------------------------------------------------------------------------------------------
-// v2 [BANK] Smeulders Interieurgroep carousel (deep read 506; live site): fullscreen jobs under a slow drift, the title
-// in image-filled type, a counter, prev/next. Values: outgoing power2.in 0.7s; incoming power3.out 1.1s; crossfades
-// power1.inOut. With [BANK] Q146 morphing background shape: one large outline changes posture per slide, then breathes
-// between its path and pathAlt (3500ms linear, alternate). Adapted: the outline is each job's roof line, traced from that
-// photo, drawn as a blueprint on a 16px drafting grid; the morph runs with the slide (1.1s power3.out; no elastic, S1314).
-// The counter is four shingle tabs. Autoplay every 6s with a visible pause (WCAG 2.2.2); off under reduced motion.
-const ROOFS = [ // [outline, breathing alt, detail lines] in the blueprint's 400 x 200 box, ground at y 180
-  ['M20 180V95L70 45L120 95V112L150 98L240 98L262 112L320 72L380 112V180Z', 'M20 180V93L70 41L120 93V110L150 95L240 95L262 110L320 68L380 110V180Z', 'M120 112V180M262 112V180M44 120h50v28h-50zM292 128h58v52'],
-  ['M10 180V110L120 28L170 64L160 78L208 52L262 114L330 116L352 100L385 122V180Z', 'M10 180V108L120 24L170 61L160 75L208 48L262 112L330 114L352 97L385 120V180Z', 'M160 78L160 180M262 114V180M120 28V60M40 120h60M196 96h28'],
-  ['M20 180V118L70 84L330 84L380 118V180Z', 'M20 180V116L70 81L330 81L380 116V180Z', 'M120 118L165 98L210 118M262 84V66H274V84M20 118H380'],
-  ['M15 180V120L70 70L330 70L385 120V180Z', 'M15 180V118L70 66L330 66L385 118V180Z', 'M95 120L150 82L205 120M200 110L245 62L290 110M300 120L335 96L370 120M15 120H385'],
-];
-const HOLD = 6, DRIFT = { scale: 1.06, xPercent: -2.4 };
-function carousel(root, c) {
-  root.classList.add('is-run');
-  const slides = [...root.querySelectorAll('.hx2-slide')], N = slides.length;
-  const h = root.querySelector('.hx2-h'), layers = [...h.querySelectorAll('.hx2-fill')];
-  const cap = root.querySelector('.hx2-cap'), count = root.querySelector('.hx2-count b'), pause = root.querySelector('.hx2-pause');
-  const tabs = [...root.querySelectorAll('.hx2-tabs i')], tabRow = root.querySelector('.hx2-tabs');
-  const roof = root.querySelector('.hx2-bp-roof'), det = root.querySelector('.hx2-bp-det');
-  const t = c.motion ? 1 : 0;
-
-  for (const l of layers) {
-    const text = l.textContent.replace(/\s+/g, ' ').trim(); l.textContent = '';
-    text.split(' ').forEach((w, i) => { if (i) l.append(' '); const s = document.createElement('span'); s.className = 'hx2-w'; s.textContent = w; l.append(s); });
-  }
-  const fills = slides.map(s => ({ uri: img(s.dataset.fill), a: 1.5 }));
-  fills.forEach(f => { if (!f.uri) return; const i = new Image(); i.onload = () => { f.a = i.naturalWidth / i.naturalHeight; layout(); }; i.src = f.uri; });
-  const shown = [0, 0];
-  function paint(l, k) {
-    const f = fills[k], W = h.clientWidth, H = h.clientHeight;
-    const S = Math.max(W * 1.5, H * f.a * 1.4), SH = S / f.a, bx = (W - S) / 2, by = (H - SH) / 2;
-    l.style.setProperty('--fill', `url("${f.uri}")`);
-    for (const w of l.children) {
-      w.style.backgroundSize = `100% 100%, ${S.toFixed(0)}px ${SH.toFixed(0)}px`;
-      w.style.backgroundPosition = `0 0, ${(bx - w.offsetLeft).toFixed(1)}px ${(by - w.offsetTop).toFixed(1)}px`;
-    }
-  }
-  function layout() { layers.forEach((l, i) => paint(l, shown[i])); }
-  if (fills.every(f => f.uri)) { h.classList.add('is-filled'); layout(); }
-  const ro = new ResizeObserver(() => layout()); ro.observe(h);
-
-  // the blueprint roof line (Q146 posture per slide, then breathing)
-  let breathe = null;
-  function setRoof(k, dur) {
-    const [d, alt, lines] = ROOFS[k];
-    if (breathe) { breathe.kill(); breathe = null; }
-    det.innerHTML = lines.split('M').filter(Boolean).map(p => `<path d="M${p}"/>`).join('');
-    if (!dur) { roof.setAttribute('d', d); }
-    else {
-      gsap.to(roof, { morphSVG: d, duration: dur, ease: 'power3.out', overwrite: 'auto' });
-      gsap.fromTo(det.children, { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05, delay: dur * 0.5 });
-    }
-    if (t && inView) breathe = gsap.to(roof, { morphSVG: alt, duration: 3.5, ease: 'none', yoyo: true, repeat: -1, delay: dur || 0 });
-  }
-
-  let cur = 0, front = 0, playing = c.motion, timer = null, inView = true;
-  const drift = s => gsap.fromTo(s.querySelector('.hx2-img'), { scale: 1, xPercent: 0 }, { ...DRIFT, duration: HOLD + 1.1, ease: 'none', overwrite: 'auto' });
-  function setCap(k) {
-    const txt = slides[k].dataset.caption || '';
-    if (cap.textContent === txt) return;
-    cap.textContent = txt;
-    if (txt && t) gsap.fromTo(cap, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE });
-  }
-  function go(n) {
-    n = (n + N) % N; if (n === cur) return;
-    const out = slides[cur], inn = slides[n];
-    slides.forEach((s, i) => { s.style.zIndex = i === n ? 2 : i === cur ? 1 : 0; s.setAttribute('aria-hidden', i === n ? 'false' : 'true'); s.classList.toggle('is-on', i === n || i === cur); });
-    gsap.to(out, { autoAlpha: 0, duration: 0.7 * t, ease: 'power2.in', overwrite: 'auto', onComplete: () => out.classList.remove('is-on') });
-    gsap.fromTo(inn, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.1 * t, ease: 'power3.out', overwrite: 'auto' });
-    count.textContent = n + 1; tabs.forEach((x, i) => x.classList.toggle('is-on', i === n));
-    if (t) drift(inn);
-    const back = 1 - front; shown[back] = n; paint(layers[back], n);
-    // the filled words swap in 0.3s at the middle of the photo fade (F17): a background-clip:text fade repaints every word
-    // each frame, so it is kept short rather than run for the photo's full 1.1s
-    gsap.to(layers[back], { autoAlpha: 1, duration: 0.3 * t, delay: 0.35 * t, ease: 'power1.inOut', overwrite: 'auto' });
-    gsap.to(layers[front], { autoAlpha: 0, duration: 0.3 * t, delay: 0.35 * t, ease: 'power1.inOut', overwrite: 'auto' });
-    layers[back].classList.add('is-on'); layers[front].classList.remove('is-on'); front = back;
-    setRoof(+inn.dataset.roof, 1.1 * t);
-    setCap(n); cur = n; arm();
-  }
-  function arm() { if (timer) timer.kill(); timer = playing && inView ? gsap.delayedCall(HOLD, () => go(cur + 1)) : null; }
-  function setPlaying(p) { playing = p; pause.setAttribute('aria-pressed', String(!p)); arm(); }
-  slides.forEach((s, i) => s.setAttribute('aria-hidden', i ? 'true' : 'false'));
-  gsap.set(layers[1], { autoAlpha: 0 });
-  tabs[0].classList.add('is-on');
-  const onClick = e => {
-    const b = e.target.closest('.hx2-btn'); if (!b) return;
-    if (b === pause) { setPlaying(!playing); return; }
-    const dir = Number(b.dataset.dir);
-    tabRow.style.setProperty('--sh', dir * 6 + 'px'); tabRow.classList.remove('is-shift'); void tabRow.offsetWidth; tabRow.classList.add('is-shift');
-    go(cur + dir);
-  };
-  root.addEventListener('click', onClick);
-  ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { inView = s.isActive; arm(); if (breathe) (inView ? breathe.resume() : breathe.pause()); } });
-  setRoof(0, 0);
-  setPlaying(playing);
-  const done = [() => ro.disconnect(), () => timer && timer.kill(), () => root.removeEventListener('click', onClick), () => breathe && breathe.kill()];
+// v3 [BANK] 289 Rotating Text (React Bits, STRONG: "services-list hero pattern"; deep read slice 5 #289) with the
+// [BANK] P73 Harvest [204] word-rotator values. A fixed sentence with one word slot; the slot's characters split; in
+// 'wait' mode the old word leaves completely before the new one enters; a highlight block behind the active word
+// resizes to fit each new word; pause on hover. P73: out 0.45s sine.in, yPercent −100, blur 12px, stagger 0.04; in
+// 0.8s sine.out, yPercent 100 → 0, blur 20 → 0, stagger 0.05; interval 3.2s. Adapted: the slot cycles the 24 real
+// service towns (towns.js order, Springboro first); the highlight is a sun-yellow 3-tab shingle tab (keyway slots on its
+// bottom edge) whose two nails pop at each change; a counter ticks; each town rests readable for 2s after it lands
+// (the interval runs from the end of the entry, so long names like West Carrollton read as long as short ones); a
+// visible pause button (WCAG 2.2.2), hover/focus pause and off-screen rest. Reduced motion: a static line.
+function rotator(root, c) {
+  const word = root.querySelector('.hx3-word'), slot = root.querySelector('.hx3-slot'), tab = root.querySelector('.hx3-tab');
+  const tabS = tab.querySelector('.hx3-tab-s'), nails = [...tab.querySelectorAll('.hx3-nail')], count = root.querySelector('.hx3-count b');
+  const pause = root.querySelector('.hx3-pause'), h1 = root.querySelector('.hx3-h');
+  const names = TOWNS.map(t => t.name), done = [];
   const cleanup = () => done.forEach(f => f());
-  if (!t) return cleanup;
-  // (no pointer parallax on the photo fill: moving a background-clip:text fill re-rasterizes every word each frame, measured at 5fps)
-
-  // entrance at the F17 level, in the measured order (visual, rules, title words, subtitle, controls, blueprint)
-  drift(slides[0]);
-  gsap.timeline({ delay: c.swap ? 0 : 0.05 })
-    .fromTo(slides[0], { scale: 1.04, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.3, ease: EASE }, 0)
-    .fromTo(root.querySelectorAll('.hx2-rule--v'), { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: EASE }, 0.08)
-    .fromTo(root.querySelectorAll('.hx2-rule--h'), { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: EASE }, 0.08)
-    .fromTo(layers[0].children, { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.04 }, 0.12)
-    .fromTo(root.querySelector('.hx2-sub'), { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE }, 0.3)
-    .fromTo(root.querySelector('.hx2-ctl'), { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE }, 0.38)
-    .fromTo([roof, ...root.querySelectorAll('.hx2-bp-ground,.hx2-bp-tick path')], { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05 }, 0.3);
+  const box = { w: 0, h: 0 };
+  function shape(w, hgt) { // a 3-tab shingle tab: flat top, two keyway slots in the bottom edge
+    box.w = w; box.h = hgt; tab.setAttribute('viewBox', `0 0 ${w.toFixed(1)} ${hgt.toFixed(1)}`); tab.style.width = w + 'px'; tab.style.height = hgt + 'px';
+    const s = Math.max(5, hgt * 0.13), k = 3.2, a = w / 3, b = (2 * w) / 3, y = hgt;
+    tabS.setAttribute('d', `M0 0H${w}V${y}H${b + k}V${y - s}H${b - k}V${y}H${a + k}V${y - s}H${a - k}V${y}H0Z`);
+    nails[0].setAttribute('cx', Math.min(14, w * 0.12)); nails[1].setAttribute('cx', w - Math.min(14, w * 0.12));
+    nails.forEach(n => n.setAttribute('cy', Math.max(7, hgt * 0.16)));
+  }
+  const fit = () => { const r = slot.getBoundingClientRect(); return [r.width, r.height]; }; // the padded slot is the tab
+  const split = text => { word.textContent = ''; return [...text].map(ch => { const s = document.createElement('span'); s.className = 'hx3-c'; s.textContent = ch === ' ' ? ' ' : ch; word.append(s); return s; }); };
+  if (!c.motion) { word.textContent = '24 towns'; root.querySelector('.hx3-dot').textContent = ' around Springboro.'; count.parentElement.hidden = true; pause.hidden = true; requestAnimationFrame(() => shape(...fit())); return cleanup; }
+  let i = 0, held = false, hover = false, seen = true, timer = null, busy = false, dead = false;
+  let chars = split(names[0]);
+  const fonts = (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { if (!dead) shape(...fit()); });
+  const tw = { w: 0 };
+  function next() {
+    timer = null; if (held || hover || !seen || dead) return;
+    busy = true; i = (i + 1) % names.length;
+    const tl = gsap.timeline({ onComplete: () => { busy = false; arm(); } });
+    tl.to(chars, { yPercent: -100, filter: 'blur(12px)', opacity: 0, duration: 0.45, ease: 'sine.in', stagger: { each: 0.04, from: 'end' } });
+    tl.add(() => {
+      const prev = box.w; chars = split(names[i]); const [w, hgt] = fit(); gsap.set(chars, { yPercent: 100, filter: 'blur(20px)', opacity: 0 });
+      tw.w = prev; gsap.to(tw, { w, duration: 0.3, ease: EASE, onUpdate: () => shape(tw.w, hgt) });
+      gsap.fromTo(nails, { scale: 0.4, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.06, delay: 0.18 });
+      count.textContent = i + 1;
+    });
+    tl.to({}, { duration: 0.12 });
+    tl.add(() => gsap.to(chars, { yPercent: 0, filter: 'blur(0px)', opacity: 1, duration: 0.8, ease: 'sine.out', stagger: 0.05 }));
+    tl.to({}, { duration: 0.8 + chars.length * 0.05 });
+  }
+  function arm() { clearTimeout(timer); timer = null; if (!held && !hover && seen && !busy && !dead) timer = setTimeout(next, 2000); }
+  const setHeld = v => { held = v; pause.setAttribute('aria-pressed', String(v)); pause.setAttribute('aria-label', v ? 'Play the town names' : 'Pause the town names'); root.classList.toggle('is-held', v); if (!v) arm(); else { clearTimeout(timer); timer = null; } };
+  const onPause = () => setHeld(!held);
+  const onIn = () => { hover = true; clearTimeout(timer); timer = null; }, onOut = () => { hover = false; arm(); };
+  pause.addEventListener('click', onPause); h1.addEventListener('pointerenter', onIn); h1.addEventListener('pointerleave', onOut);
+  done.push(() => { dead = true; clearTimeout(timer); pause.removeEventListener('click', onPause); h1.removeEventListener('pointerenter', onIn); h1.removeEventListener('pointerleave', onOut); });
+  done.push(inView(root, v => { seen = v; if (v) arm(); else { clearTimeout(timer); timer = null; } }));
+  const ro = new ResizeObserver(() => { if (!busy && root.isConnected) shape(...fit()); }); ro.observe(slot); done.push(() => ro.disconnect());
+  fonts.then(() => { if (!dead) { arm(); } });
+  gsap.fromTo(root.querySelector('.hx3-plate'), { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+  beats(root, [root.querySelector('.hx3-kick'), root.querySelector('.hx3-h'), root.querySelector('.hx3-row'), root.querySelector('.hx3-sub'), root.querySelector('.hx3-cta')], { now: true, delay: c.swap ? 0 : 0.1 });
   return cleanup;
 }
 
-// ---------------------------------------------------------------------------------------------------------------
-// v3 [BANK] AirWorks hover-the-house diagnostic (HVAC triple crown: the illustration answers per spot; GSAP with a CSS
-// backstop) with [BANK] BLK 531 (one inline SVG whose id'd zones are re-filled; easing cubic-bezier(.645,.045,.355,1)).
-// Adapted: a drawn house; point at or tab to a part of the roof and it lights, a leader draws to its name and a plain
-// line about what it does. The chips are the accessible control (aria-pressed), mirrored by the zones for the pointer.
-// Copy ties it to a real fact: written, line-item estimates. Definitions are general roofing knowledge, not claims.
-const ZONES = {
-  ridge: { n: 'Ridge', d: 'The peak, where two slopes meet. Capped so water sheds both ways.', a: [320, 106], l: [250, 34] },
-  shingles: { n: 'Shingles', d: 'The field. Courses go on from the bottom up, each lapping the one below.', a: [470, 200], l: [610, 70] },
-  flashing: { n: 'Flashing', d: 'Metal folded around the chimney so water runs past the joint.', a: [232, 143], l: [36, 46] },
-  vents: { n: 'Vents', d: 'Let the attic breathe, which keeps heat and damp off the deck.', a: [392, 151], l: [610, 30] },
-  drip: { n: 'Drip edge', d: 'Metal at the roof edge that turns water into the gutter.', a: [110, 244], l: [20, 168] },
-  fascia: { n: 'Fascia', d: 'The board behind the gutter that holds it up.', a: [520, 254], l: [620, 312] },
-  gutters: { n: 'Gutters', d: 'Catch the water at the eave.', a: [300, 264], l: [20, 310] },
-  downspouts: { n: 'Downspouts', d: 'Carry it down and away from the house.', a: [563, 360], l: [620, 410] },
-};
-function diagnostic(root, c) {
-  root.classList.add('is-run');
-  const svg = root.querySelector('.hx3-svg'), house = root.querySelector('.hx3-house'), out = root.querySelector('.hx3-call-out');
-  const lead = root.querySelector('.hx3-lead'), dot = root.querySelector('.hx3-dot'), say = root.querySelector('.hx3-say');
-  const chips = [...root.querySelectorAll('.hx3-chip')], zones = [...svg.querySelectorAll('.z')];
-  const dur = c.motion ? 0.3 : 0;
-  let pinned = null, shown = null;
-  function show(z) {
-    if (z === shown) return; shown = z;
-    zones.forEach(p => p.classList.toggle('is-on', p.dataset.z === z));
-    svg.classList.toggle('has-z', !!z);
-    if (!z) { out.classList.remove('is-on'); gsap.to([lead, dot], { autoAlpha: 0, duration: dur * 0.8 }); return; }
-    const Z = ZONES[z], [ax, ay] = Z.a, [lx, ly] = Z.l, mx = lx < 320 ? Math.max(lx + 20, ax - 40) : Math.min(lx - 20, ax + 40);
-    lead.setAttribute('d', `M${ax} ${ay} L${mx} ${ly} L${lx} ${ly}`); dot.setAttribute('cx', ax); dot.setAttribute('cy', ay);
-    gsap.set([lead, dot], { autoAlpha: 1 });
-    gsap.fromTo(lead, { drawSVG: '0%' }, { drawSVG: '100%', duration: dur, ease: EASE });
-    gsap.fromTo(dot, { scale: 0.85 }, { scale: 1, duration: dur, ease: 'back.out(2)', transformOrigin: 'center' });
-    out.querySelector('b').textContent = Z.n; out.querySelector('span').textContent = Z.d;
-    out.style.left = (lx / 640 * 100) + '%'; out.style.top = (ly / 480 * 100) + '%';
-    out.style.translate = `${lx < 320 ? '0' : '-100%'} -50%`;
-    out.classList.remove('is-on'); void out.offsetWidth; out.classList.add('is-on');
-  }
-  function pin(z) {
-    pinned = pinned === z ? null : z;
-    chips.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.z === pinned)));
-    show(pinned);
-    say.textContent = pinned ? `${ZONES[pinned].n}: ${ZONES[pinned].d}` : '';
-  }
-  const preview = z => show(z || pinned);
-  const zEnter = e => { if (e.pointerType === 'mouse') preview(e.target.dataset.z); };
-  const zLeave = e => { if (e.pointerType === 'mouse') preview(null); };
-  const zClick = e => { const p = e.target.closest('.z'); if (p) pin(p.dataset.z); };
-  zones.forEach(p => { p.addEventListener('pointerenter', zEnter); p.addEventListener('pointerleave', zLeave); });
-  svg.addEventListener('click', zClick);
-  const cEnter = e => preview(e.currentTarget.dataset.z), cLeave = () => preview(null), cClick = e => pin(e.currentTarget.dataset.z);
-  chips.forEach(b => { b.addEventListener('pointerenter', cEnter); b.addEventListener('focus', cEnter); b.addEventListener('pointerleave', cLeave); b.addEventListener('blur', cLeave); b.addEventListener('click', cClick); });
-  const done = [() => { zones.forEach(p => { p.removeEventListener('pointerenter', zEnter); p.removeEventListener('pointerleave', zLeave); }); svg.removeEventListener('click', zClick); chips.forEach(b => { b.removeEventListener('pointerenter', cEnter); b.removeEventListener('focus', cEnter); b.removeEventListener('pointerleave', cLeave); b.removeEventListener('blur', cLeave); b.removeEventListener('click', cClick); }); }];
-  gsap.set([lead, dot], { autoAlpha: 0 });
-  const cleanup = () => done.forEach(f => f());
-  if (!c.motion) return cleanup;
-  // entrance at the F17 level: copy beats, then the house draws (walls, zones), then the chips
-  beats(root, [root.querySelector('.hx3-kick'), root.querySelector('.hx3-h'), [root.querySelector('.hx3-p'), root.querySelector('.hx3-copy .cta-row')]], { now: true, delay: c.swap ? 0 : 0.05 });
-  gsap.timeline({ delay: c.swap ? 0.1 : 0.15 })
-    .fromTo(root.querySelector('.hx3-stage'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15 }, 0)
-    .fromTo(svg.querySelectorAll('.hx3-walls rect, .z, .hx3-chim rect'), { drawSVG: '0%', fillOpacity: 0 }, { drawSVG: '100%', fillOpacity: 1, duration: 0.3, ease: EASE, stagger: 0.025, clearProps: 'fillOpacity' }, 0)
-    .fromTo(chips, { y: 8, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.03, clearProps: 'transform,opacity,visibility' }, 0.3);
-  // quiet weather: clouds drift on coprime periods, paused offscreen
-  const drift = [...root.querySelectorAll('.hx3-cloud .cl')].map((cl, i) => gsap.fromTo(cl, { x: -18 }, { x: 18, duration: [9.7, 12.1, 14.3][i], ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-  done.push(visible(root, v => drift.forEach(d => (v ? d.resume() : d.pause()))), () => drift.forEach(d => d.kill()));
-  return cleanup;
-}
-
-export default { 1: cinematic, 2: carousel, 3: diagnostic };
+export default { 1: wall, 2: weighted, 3: rotator };
