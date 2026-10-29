@@ -105,16 +105,16 @@
         k.ctx.add(function () {
           var tl = gsap.timeline({ delay: .15 });
           // Smeulders ladder: visual, words, subtitle, CTA [BANK Smeulders]
-          tl.fromTo(plate, { scale: 1.06 }, { scale: 1, duration: 1.4, ease: 'expo.out' }, 0)
-            .fromTo(root, { '--bwk': 0 }, { '--bwk': 1, duration: .35, ease: EZ.bezier(.2, .7, .2, 1) }, .5)
-            .fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .9, ease: 'power2.out', stagger: { each: .008, from: 'random' } }, .55)
-            .fromTo(st.outlines, { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.out', stagger: .02 }, 0)
-            .fromTo(st.wipes, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .7, ease: 'power2.inOut', stagger: .12 }, 1.0)
-            .to(st.outlines, { opacity: 0, duration: .3 }, 1.7)
-            .from(lead, { y: 24, autoAlpha: 0, duration: .7, ease: 'power3.out' }, .55)
-            .from(block, { y: 32, scale: .96, autoAlpha: 0, duration: .85, ease: 'power3.out', transformOrigin: '50% 100%' }, .7)
-            .from(acts[0], { y: 64, autoAlpha: 0, duration: .85, ease: 'power3.out' }, .85)
-            .from(acts[1], { y: 64, autoAlpha: 0, duration: .85, ease: 'power3.out' }, 1.0);
+          tl.fromTo(plate, { scale: 1.04 }, { scale: 1, duration: .3, ease: 'power2.out' }, 0)
+            .fromTo(root, { '--bwk': 0 }, { '--bwk': 1, duration: .3, ease: EZ.bezier(.2, .7, .2, 1) }, .3)
+            .fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: { each: .004, from: 'random' } }, .3)
+            .fromTo(st.outlines, { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, duration: .3, ease: 'power2.out', stagger: .015 }, 0)
+            .fromTo(st.wipes, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .3, ease: 'power2.inOut', stagger: .06 }, .55)
+            .to(st.outlines, { opacity: 0, duration: .25 }, .95)
+            .from(lead, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .3)
+            .from(block, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .4)
+            .from(acts[0], { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .5)
+            .from(acts[1], { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .55);
           if (k.mobile) {
             // phones: the slit sweeps across once so the drawing is discovered, then rests; drag moves it
             var o = { v: frame.clientWidth * .08 };
@@ -244,17 +244,17 @@
       var o = { n: 0 };
       layers = 0; paint();
       var tl = gsap.timeline({ delay: .1 });
-      tl.from(faces, { yPercent: 40, autoAlpha: 0, duration: .8, ease: 'power3.out', stagger: .1 }, 0)
-        .to(o, { n: N, duration: .9, ease: 'power2.out', onUpdate: function () { layers = o.n; paint(); } }, .35)
-        .from(root.querySelector('.hero3__lead'), { y: 24, autoAlpha: 0, duration: .7, ease: 'power3.out' }, .5)
-        .from(root.querySelector('.hero__acts').children, { y: 24, autoAlpha: 0, duration: .7, ease: 'power3.out', stagger: .12 }, .65)
-        .fromTo(svg.querySelectorAll('.std'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .6, ease: 'power2.out', stagger: .08 }, .2)
-        .fromTo(svg.querySelectorAll('.led'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .5, ease: 'power2.out', stagger: .06 }, .5)
-        .fromTo(svg.querySelectorAll('.brace'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .4, ease: 'power2.out' }, .8)
-        .from(svg.querySelectorAll('.cpl'), { scale: .3, autoAlpha: 0, transformOrigin: '50% 50%', duration: .3, ease: 'back.out(3)', stagger: .015 }, .85)
-        .from(svg.querySelectorAll('.board, .toe'), { scaleX: 0, transformOrigin: '0% 50%', duration: .5, ease: 'power3.out', stagger: .06 }, .95)
-        .add(EZ.clip(k, bay, [100, 0, 0, 0], [0, 0, 0, 0], { duration: .8, ease: 'expo.out', onComplete: function () { bay.style.clipPath = ''; } }), 1.05)
-        .from(board, { y: -60, autoAlpha: 0, duration: .8, ease: 'bounce.out' }, 1.2);
+      tl.from(faces, { yPercent: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05 }, 0)
+        .to(o, { n: N, duration: .3, ease: 'power2.out', onUpdate: function () { layers = o.n; paint(); } }, .2)
+        .from(root.querySelector('.hero3__lead'), { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .3)
+        .from(root.querySelector('.hero__acts').children, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05 }, .35)
+        .fromTo(svg.querySelectorAll('.std'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .04 }, .1)
+        .fromTo(svg.querySelectorAll('.led'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, .2)
+        .fromTo(svg.querySelectorAll('.brace'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' }, .3)
+        .from(svg.querySelectorAll('.cpl'), { scale: .3, autoAlpha: 0, transformOrigin: '50% 50%', duration: .2, ease: 'back.out(3)', stagger: .008 }, .35)
+        .from(svg.querySelectorAll('.board, .toe'), { scaleX: 0, transformOrigin: '0% 50%', duration: .3, ease: 'power2.out', stagger: .04 }, .4)
+        .add(EZ.clip(k, bay, [100, 0, 0, 0], [0, 0, 0, 0], { duration: .3, ease: 'power2.out', onComplete: function () { bay.style.clipPath = ''; } }), .45)
+        .from(board, { y: -24, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, .55);
 
       if (k.fine) {
         var raf = k.raf(function () {

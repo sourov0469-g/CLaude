@@ -36,16 +36,16 @@
             if (torn) {
               gsap.timeline().to(stub, { y: 46, x: 6, autoAlpha: 0, duration: .32, ease: 'power3.in' })
                 .add(function () { tk.classList.add('is-torn'); })
-                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .4, ease: 'power3.out' });
+                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'power3.out' });
             } else {
               gsap.timeline().to(more, { autoAlpha: 0, duration: .15 })
                 .add(function () { tk.classList.remove('is-torn'); })
-                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45, ease: 'back.out(2)' });
+                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'back.out(2)' });
             }
           });
         });
       });
-      if (k.motion) gsap.from(tks, { y: 50, autoAlpha: 0, duration: .8, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: root.querySelector('.financing1__row'), start: 'top 85%', once: true } });
+      if (k.motion) gsap.from(tks, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.financing1__row'), start: 'top 85%', once: true } });
     } },
 
     /* v2 · Pipe the money */
@@ -111,7 +111,7 @@
       geo();
       k.io(rig, function (en) { if (flow) en.isIntersecting ? flow.play() : flow.pause(); });
       k.add(function () { if (flow) flow.kill(); svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); l.style.removeProperty('--lvl'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); why.textContent = 'Pick a project to see the usual routes.'; });
-      if (k.motion) gsap.from(vs.concat(ls), { x: function (i) { return i < 4 ? -30 : 30; }, autoAlpha: 0, duration: .6, ease: 'power3.out', stagger: .05, scrollTrigger: { trigger: rig, start: 'top 80%', once: true } });
+      if (k.motion) gsap.from(vs.concat(ls), { x: function (i) { return i < 4 ? -30 : 30; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .04, scrollTrigger: { trigger: rig, start: 'top 80%', once: true } });
     } },
 
     /* v3 · The morph sheet [BANK 255 Shazam] */
@@ -143,7 +143,7 @@
             .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418' },
               { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#f3eee2', duration: .4, ease: OPEN })
             .add(function () { orb.hidden = true; orb.style.visibility = ''; sheet.style.visibility = ''; })
-            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .45, ease: CONTENT, stagger: .03 });
+            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .4, ease: CONTENT, stagger: .03 });
         });
       }
       function shut() {
@@ -159,7 +159,7 @@
             orb.hidden = false; orb.style.visibility = 'hidden';
             var a = rel(orb);
             gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#f3eee2' },
-              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418', duration: .5, ease: SHUT,
+              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418', duration: .4, ease: SHUT,
                 onComplete: function () { sh.remove(); orb.style.visibility = ''; busy = false; orb.focus(); } });
           } });
         });
@@ -169,7 +169,7 @@
       k.on(sheet, 'keydown', function (e) { if (e.key === 'Escape') shut(); });
       k.add(function () { sheet.hidden = true; orb.hidden = false; orb.style.visibility = ''; sheet.style.visibility = ''; orb.setAttribute('aria-expanded', 'false'); busy = false; stage.querySelectorAll(':scope > div[aria-hidden]').forEach(function (d) { d.remove(); }); });
       if (k.motion) {
-        gsap.from(orb, { scale: .6, autoAlpha: 0, duration: .8, ease: 'back.out(1.8)', scrollTrigger: { trigger: stage, start: 'top 80%', once: true } });
+        gsap.from(orb, { scale: .8, autoAlpha: 0, duration: .3, ease: 'back.out(1.8)', scrollTrigger: { trigger: stage, start: 'top 80%', once: true } });
       }
     } }
   });

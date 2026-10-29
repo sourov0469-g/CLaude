@@ -1544,7 +1544,25 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .financing3__intro .t-head { grid-column: 1 / span 6; }
 .financing3__intro .financing__lead { grid-column: 8 / span 5; }
 .financing3__stage { position: relative; display: grid; place-items: center; min-height: 420px; }
+/* the closed state: the two kinds already laid out on light technical paper, the orb sitting on the seam [S1383] */
+.financing3__ground {
+  position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr;
+  background: #f3eee2; color: #1b2629;
+  background-image: linear-gradient(rgba(27, 38, 41, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(27, 38, 41, .06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  box-shadow: 0 30px 60px -34px rgba(0, 0, 0, .7);
+}
+.financing3__ground::after { content: ""; position: absolute; left: 50%; top: 22px; bottom: 22px; border-left: 1.5px dashed rgba(27, 38, 41, .45); }
+.financing3__half { padding: clamp(28px, 4vw, 56px); display: grid; align-content: space-between; }
+.financing3__half:last-child { text-align: right; }
+.financing3__gk { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: .01em; }
+.financing3__half:first-child .financing3__gk { border-top: 3px solid #1b2629; padding-top: 12px; }
+.financing3__half:last-child .financing3__gk { border-top: 3px solid #c8402e; padding-top: 12px; }
+.financing3__gn { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: #3a4a4e; }
+.financing3__stage:has(.financing3__orb[aria-expanded="true"]) .financing3__ground { visibility: hidden; }
+.financing3__gl { margin: 0; font: 500 .8125rem/1.3 var(--f-text); color: #1d4a4e; letter-spacing: .02em; }
 .financing3__orb {
+  position: relative; z-index: 1;
   width: 240px; height: 240px; border-radius: 50%; border: 0; padding: 30px;
   background: #0B1418; color: #e8e4dc; cursor: pointer;
   box-shadow: 0 0 0 2px #f2c230, 0 0 0 12px rgba(242, 194, 48, .14), 0 30px 60px -20px rgba(0, 0, 0, .6);
@@ -1575,7 +1593,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .financing3__btn { background: #1b2629; color: #f3eee2; }
 .financing3__btn .rx { color: #1d4a4e; }
 @media (max-width: 1023px) { .financing3__intro .t-head, .financing3__intro .financing__lead { grid-column: 1 / -1; } .financing3__intro .financing__lead { margin-top: var(--s4); } }
-@media (max-width: 767px) { .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 200px; height: 200px; font-size: 1.5rem; } }
+@media (max-width: 767px) { .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(27, 38, 41, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
 
 /* work, PLAN-V3 §3: the firm's own photographs only. plan room / turntable / taped deck */
 .work__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
@@ -2552,6 +2570,11 @@ blockquote { margin: 0; }
         <p class="t-lead financing__lead">Revolving credit, fixed installments, or repayment through your property tax bill. They are genuinely different products.</p>
       </div>
       <div class="financing3__stage">
+        <div class="financing3__ground" aria-hidden="true">
+          <i class="financing3__br financing3__br--tl"></i><i class="financing3__br financing3__br--tr"></i><i class="financing3__br financing3__br--bl"></i><i class="financing3__br financing3__br--br"></i>
+          <div class="financing3__half"><p class="financing3__gk">Consumer credit</p><p class="financing3__gn">Synchrony &middot; Service Finance</p><p class="financing3__gl">Paid monthly to the lender</p></div>
+          <div class="financing3__half"><p class="financing3__gk">Property&#8209;assessed</p><p class="financing3__gn">Ygrene &middot; Renew Financial</p><p class="financing3__gl">Repaid with property taxes</p></div>
+        </div>
         <button type="button" class="financing3__orb" aria-expanded="false" aria-controls="fin3-sheet" data-rx="native:morph"><span class="financing3__orb-t">See the two kinds of money</span></button>
         <div class="financing3__sheet" id="fin3-sheet" role="region" aria-label="Financing partners by kind" hidden>
           <i class="financing3__br financing3__br--tl"></i><i class="financing3__br financing3__br--tr"></i><i class="financing3__br financing3__br--bl"></i><i class="financing3__br financing3__br--br"></i>
@@ -5536,16 +5559,16 @@ blockquote { margin: 0; }
         k.ctx.add(function () {
           var tl = gsap.timeline({ delay: .15 });
           // Smeulders ladder: visual, words, subtitle, CTA [BANK Smeulders]
-          tl.fromTo(plate, { scale: 1.06 }, { scale: 1, duration: 1.4, ease: 'expo.out' }, 0)
-            .fromTo(root, { '--bwk': 0 }, { '--bwk': 1, duration: .35, ease: EZ.bezier(.2, .7, .2, 1) }, .5)
-            .fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .9, ease: 'power2.out', stagger: { each: .008, from: 'random' } }, .55)
-            .fromTo(st.outlines, { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.out', stagger: .02 }, 0)
-            .fromTo(st.wipes, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .7, ease: 'power2.inOut', stagger: .12 }, 1.0)
-            .to(st.outlines, { opacity: 0, duration: .3 }, 1.7)
-            .from(lead, { y: 24, autoAlpha: 0, duration: .7, ease: 'power3.out' }, .55)
-            .from(block, { y: 32, scale: .96, autoAlpha: 0, duration: .85, ease: 'power3.out', transformOrigin: '50% 100%' }, .7)
-            .from(acts[0], { y: 64, autoAlpha: 0, duration: .85, ease: 'power3.out' }, .85)
-            .from(acts[1], { y: 64, autoAlpha: 0, duration: .85, ease: 'power3.out' }, 1.0);
+          tl.fromTo(plate, { scale: 1.04 }, { scale: 1, duration: .3, ease: 'power2.out' }, 0)
+            .fromTo(root, { '--bwk': 0 }, { '--bwk': 1, duration: .3, ease: EZ.bezier(.2, .7, .2, 1) }, .3)
+            .fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: { each: .004, from: 'random' } }, .3)
+            .fromTo(st.outlines, { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, duration: .3, ease: 'power2.out', stagger: .015 }, 0)
+            .fromTo(st.wipes, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .3, ease: 'power2.inOut', stagger: .06 }, .55)
+            .to(st.outlines, { opacity: 0, duration: .25 }, .95)
+            .from(lead, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .3)
+            .from(block, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .4)
+            .from(acts[0], { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .5)
+            .from(acts[1], { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .55);
           if (k.mobile) {
             // phones: the slit sweeps across once so the drawing is discovered, then rests; drag moves it
             var o = { v: frame.clientWidth * .08 };
@@ -5675,17 +5698,17 @@ blockquote { margin: 0; }
       var o = { n: 0 };
       layers = 0; paint();
       var tl = gsap.timeline({ delay: .1 });
-      tl.from(faces, { yPercent: 40, autoAlpha: 0, duration: .8, ease: 'power3.out', stagger: .1 }, 0)
-        .to(o, { n: N, duration: .9, ease: 'power2.out', onUpdate: function () { layers = o.n; paint(); } }, .35)
-        .from(root.querySelector('.hero3__lead'), { y: 24, autoAlpha: 0, duration: .7, ease: 'power3.out' }, .5)
-        .from(root.querySelector('.hero__acts').children, { y: 24, autoAlpha: 0, duration: .7, ease: 'power3.out', stagger: .12 }, .65)
-        .fromTo(svg.querySelectorAll('.std'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .6, ease: 'power2.out', stagger: .08 }, .2)
-        .fromTo(svg.querySelectorAll('.led'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .5, ease: 'power2.out', stagger: .06 }, .5)
-        .fromTo(svg.querySelectorAll('.brace'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .4, ease: 'power2.out' }, .8)
-        .from(svg.querySelectorAll('.cpl'), { scale: .3, autoAlpha: 0, transformOrigin: '50% 50%', duration: .3, ease: 'back.out(3)', stagger: .015 }, .85)
-        .from(svg.querySelectorAll('.board, .toe'), { scaleX: 0, transformOrigin: '0% 50%', duration: .5, ease: 'power3.out', stagger: .06 }, .95)
-        .add(EZ.clip(k, bay, [100, 0, 0, 0], [0, 0, 0, 0], { duration: .8, ease: 'expo.out', onComplete: function () { bay.style.clipPath = ''; } }), 1.05)
-        .from(board, { y: -60, autoAlpha: 0, duration: .8, ease: 'bounce.out' }, 1.2);
+      tl.from(faces, { yPercent: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05 }, 0)
+        .to(o, { n: N, duration: .3, ease: 'power2.out', onUpdate: function () { layers = o.n; paint(); } }, .2)
+        .from(root.querySelector('.hero3__lead'), { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .3)
+        .from(root.querySelector('.hero__acts').children, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05 }, .35)
+        .fromTo(svg.querySelectorAll('.std'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .04 }, .1)
+        .fromTo(svg.querySelectorAll('.led'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, .2)
+        .fromTo(svg.querySelectorAll('.brace'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' }, .3)
+        .from(svg.querySelectorAll('.cpl'), { scale: .3, autoAlpha: 0, transformOrigin: '50% 50%', duration: .2, ease: 'back.out(3)', stagger: .008 }, .35)
+        .from(svg.querySelectorAll('.board, .toe'), { scaleX: 0, transformOrigin: '0% 50%', duration: .3, ease: 'power2.out', stagger: .04 }, .4)
+        .add(EZ.clip(k, bay, [100, 0, 0, 0], [0, 0, 0, 0], { duration: .3, ease: 'power2.out', onComplete: function () { bay.style.clipPath = ''; } }), .45)
+        .from(board, { y: -24, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, .55);
 
       if (k.fine) {
         var raf = k.raf(function () {
@@ -5960,7 +5983,7 @@ blockquote { margin: 0; }
         } else {
           ScrollTrigger.create({ trigger: stage, start: 'top 60%', end: 'bottom 30%', onToggle: function (s) { to(s.isActive ? 1 : 0); } });
         }
-        gsap.from(card, { y: 40, autoAlpha: 0, duration: .8, ease: 'power3.out', delay: ci * .08, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
+        gsap.from(card, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', delay: ci * .05, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
       });
     } },
 
@@ -5984,7 +6007,7 @@ blockquote { margin: 0; }
               k.ctx.add(function () {
                 gsap.fromTo(sc.querySelectorAll('li'), { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: .3, stagger: .025, ease: 'power2.out' });
               });
-              EZ.clip(k, sc, [0, 0, 100, 0], [0, 0, 0, 0], { duration: .45, ease: 'power3.out', onComplete: function () { sc.style.clipPath = ''; } });
+              EZ.clip(k, sc, [0, 0, 100, 0], [0, 0, 0, 0], { duration: .3, ease: 'power3.out', onComplete: function () { sc.style.clipPath = ''; } });
             }
           } else sc.classList.add('is-shut');
         });
@@ -5994,7 +6017,7 @@ blockquote { margin: 0; }
       sheets.forEach(function (sh, i) {
         var next = sheets[i + 1];
         if (!next) return;
-        gsap.to(sh.querySelector('.services2__frame'), { scale: .94, filter: 'brightness(.62)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (90 + i * 18) + 'px', scrub: true } });
+        gsap.fromTo(sh.querySelector('.services2__frame'), { scale: 1, filter: 'brightness(1)' }, { scale: .95, filter: 'brightness(.82)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (90 + i * 18) + 'px', scrub: true } });
       });
       sheets.forEach(function (sh) {
         gsap.from(sh.querySelector('.services2__photo img'), { scale: 1.12, ease: 'none', scrollTrigger: { trigger: sh, start: 'top bottom', end: 'top 30%', scrub: true } });
@@ -6043,8 +6066,8 @@ blockquote { margin: 0; }
       k.add(function () { rows.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); });
       if (!k.motion) return;
       EZ.reveal(k, root.querySelectorAll('.services3__side > *'));
-      gsap.from(tools, { y: -30, autoAlpha: 0, duration: .6, ease: 'bounce.out', stagger: .12, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
-      gsap.from(root.querySelectorAll('.services3__tags span'), { y: -14, autoAlpha: 0, duration: .5, ease: 'back.out(2)', stagger: .04, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
+      gsap.from(tools, { y: -20, autoAlpha: 0, duration: .3, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
+      gsap.from(root.querySelectorAll('.services3__tags span'), { y: -10, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .03, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
       // phones: the tools take turns as the wall comes into view
       if (!k.fine) {
         var n = 0, t = null;
@@ -6109,8 +6132,8 @@ blockquote { margin: 0; }
         if (!k.motion) { swap(); return; }
         k.ctx.add(function () {
           gsap.timeline().to([imgB, imgA], { autoAlpha: 0, duration: .18, ease: 'power2.in', onComplete: swap })
-            .to([imgB, imgA], { autoAlpha: 1, duration: .35, ease: 'power2.out' })
-            .fromTo(range, { value: +range.value }, { value: 50, duration: .6, ease: 'power3.inOut', onUpdate: function () { setPos(+range.value); } }, .1);
+            .to([imgB, imgA], { autoAlpha: 1, duration: .25, ease: 'power2.out' })
+            .fromTo(range, { value: +range.value }, { value: 50, duration: .4, ease: 'power3.inOut', onUpdate: function () { setPos(+range.value); } }, .1);
         });
       }
       tabs.forEach(function (t, i) {
@@ -6126,10 +6149,10 @@ blockquote { margin: 0; }
       // first sight: the stud swings to show both sides, then rests [hint]
       var o = { v: 50 };
       gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top 70%', once: true } })
-        .from(stage, { clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'power3.out' })
-        .to(o, { v: 22, duration: .6, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } }, .5)
-        .to(o, { v: 70, duration: .8, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
-        .to(o, { v: 50, duration: .5, ease: 'power2.out', onUpdate: function () { range.value = o.v; setPos(o.v); } });
+        .from(stage, { clipPath: 'inset(0 0 100% 0)', duration: .3, ease: 'power2.out' })
+        .to(o, { v: 22, duration: .4, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } }, .3)
+        .to(o, { v: 70, duration: .5, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
+        .to(o, { v: 50, duration: .3, ease: 'power2.out', onUpdate: function () { range.value = o.v; setPos(o.v); } });
     } },
 
     /* v2 · Rolled on [BANK 148 wavy reveal] */
@@ -6278,7 +6301,7 @@ blockquote { margin: 0; }
       gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: route, start: 'top 62%', end: 'bottom 62%', scrub: .6 } });
       cards.forEach(function (c) {
         ScrollTrigger.create({ trigger: c, start: 'center 62%', onEnter: function () { c.classList.add('is-on'); }, onLeaveBack: function () { c.classList.remove('is-on'); } });
-        gsap.from(c, { y: 30, autoAlpha: 0, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 88%', once: true } });
+        gsap.from(c, { y: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: c, start: 'top 88%', once: true } });
       });
     } },
 
@@ -6315,7 +6338,17 @@ blockquote { margin: 0; }
         '<path d="M276 300H324V398H276Z" fill="#fff1b8"/><path d="M276 300L300 306V404L276 398Z" fill="#1d4a4e" stroke="#0B1418" stroke-width="2"/><rect x="182" y="270" width="56" height="50" fill="#ffe08a" opacity=".85"/><rect x="362" y="270" width="56" height="50" fill="#ffe08a" opacity=".85"/>' +
           '<g transform="translate(340 352)"><circle r="8" fill="#f2c230" stroke="#0B1418" stroke-width="2"/><path d="M8 0h18M20 0v6M24 0v5" stroke="#f2c230" stroke-width="3" stroke-linecap="round"/></g>'
       ];
-      svg.innerHTML = '<path class="ln" d="M0 404H600" opacity=".35"/>' + L.map(function (s, i) { return '<g class="L" data-i="' + i + '">' + s + '</g>'; }).join('');
+      // the sheet itself: border, title block, scale bar, north point, the lot and its neighbours, a site palm.
+      // It is there from stage 1, so the drawing never reads as an empty page while the house is still to come.
+      var palm = '<g transform="translate(560 404)"><path d="M0 0q3-40-2-78" fill="none" stroke="rgba(238,244,249,.55)" stroke-width="2.4"/>' +
+        '<path class="thin" d="M-2-78q-20-12-38 2M-2-78q18-14 36 0M-2-78q-14-20-30-18M-2-78q12-20 28-16M-2-78q-2-22 6-30"/></g>';
+      var base = '<rect class="thin" x="6" y="6" width="588" height="448" opacity=".5"/>' +
+        '<path class="thin" d="M0 404H600" opacity=".7"/><path class="thin" d="M30 404V392M570 404V392M30 398H570" stroke-dasharray="2 4"/>' +
+        '<text class="lbl" x="34" y="390">LOT LINE</text><text class="lbl" x="566" y="390" text-anchor="end">LOT LINE</text>' +
+        '<g transform="translate(290 40)"><circle class="thin" r="16"/><path d="M0-14L5 6H-5Z" fill="#eef4f9"/><text class="lbl" y="-20" text-anchor="middle">N</text></g>' +
+        '<g transform="translate(24 428)"><path class="thin" d="M0 0h100M0-4v8M25-3v6M50-4v8M75-3v6M100-4v8"/><text class="lbl" x="0" y="18">0</text><text class="lbl" x="100" y="18" text-anchor="middle">10 FT</text></g>' +
+        '<g transform="translate(24 22)"><rect class="thin" width="232" height="30"/><path class="thin" d="M172 0v30"/><text class="lbl" x="8" y="19">SECTION A-A · ELBAZ</text><text class="lbl" x="182" y="19">A-201</text></g>' + palm;
+      svg.innerHTML = '<g class="process2__base" opacity=".75">' + base + '</g>' + L.map(function (s, i) { return '<g class="L" data-i="' + i + '">' + s + '</g>'; }).join('');
       var groups = svg.querySelectorAll('.L');
       k.add(function () { svg.innerHTML = ''; root.classList.remove('is-live'); items.forEach(function (it) { it.classList.remove('is-on'); }); });
       var cur = -1;
@@ -6331,9 +6364,9 @@ blockquote { margin: 0; }
           if (!k.motion) { g.style.opacity = on ? 1 : 0; return; }
           if (on && j > prev) {
             k.ctx.add(function () {
-              gsap.fromTo(g, { autoAlpha: 0, y: j === 7 ? 0 : -14 }, { autoAlpha: 1, y: 0, duration: .55, ease: 'back.out(1.6)', overwrite: 'auto' });
+              gsap.fromTo(g, { autoAlpha: 0, y: j === 7 ? 0 : -14 }, { autoAlpha: 1, y: 0, duration: .3, ease: 'back.out(1.6)', overwrite: 'auto' });
               var lines = g.querySelectorAll('.ln, .dash, .thin');
-              if (lines.length) gsap.fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .8, ease: 'power2.out', stagger: .05 });
+              if (lines.length) gsap.fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 });
             });
           } else if (!on) {
             k.ctx.add(function () { gsap.to(g, { autoAlpha: 0, duration: .25, overwrite: 'auto' }); });
@@ -6406,10 +6439,10 @@ blockquote { margin: 0; }
           // zoom-through swap [S0536]: out 1 -> 1.2 + blur .2s power3.in, hard swap at peak, in .75 -> 1 .5s expo.out
           var parts = [no, t, w, d];
           gsap.timeline()
-            .to(parts, { scale: 1.2, filter: 'blur(10px)', opacity: .15, duration: .2, ease: 'power3.in', transformOrigin: '0% 50%' })
+            .fromTo(parts, { scale: 1, filter: 'blur(0px)', opacity: 1 }, { scale: 1.2, filter: 'blur(10px)', opacity: .15, duration: .2, ease: 'power3.in', transformOrigin: '0% 50%' })
             .add(function () { text(i); })
-            .fromTo(parts, { scale: .75, filter: 'blur(10px)', opacity: .15 }, { scale: 1, filter: 'blur(0px)', opacity: 1, duration: .5, ease: 'expo.out', stagger: .03 });
-          gsap.to(rs, { a: R[i][0], b: R[i][1], duration: .7, ease: 'back.out(1.2)', onUpdate: paint });
+            .fromTo(parts, { scale: .75, filter: 'blur(10px)', opacity: .15 }, { scale: 1, filter: 'blur(0px)', opacity: 1, duration: .3, ease: 'expo.out', stagger: .03 });
+          gsap.to(rs, { a: R[i][0], b: R[i][1], duration: .4, ease: 'back.out(1.2)', onUpdate: paint });
         });
       }
       tabs.forEach(function (b, i) {
@@ -6423,9 +6456,9 @@ blockquote { margin: 0; }
       k.on(root.querySelector('.process3__prev'), 'click', function () { select(cur - 1); });
       k.on(root.querySelector('.process3__next'), 'click', function () { select(cur + 1); });
       if (!k.motion) return;
-      gsap.from(tabs, { y: 20, autoAlpha: 0, duration: .5, ease: 'power3.out', stagger: .05, scrollTrigger: { trigger: nav, start: 'top 85%', once: true } });
+      gsap.from(tabs, { y: 12, autoAlpha: 0, duration: .25, ease: 'power2.out', stagger: .03, scrollTrigger: { trigger: nav, start: 'top 85%', once: true } });
       var o = { b: 0 };
-      gsap.fromTo(rs, { b: 0 }, { b: R[0][1], duration: .9, ease: 'expo.out', onUpdate: paint, scrollTrigger: { trigger: tape, start: 'top 80%', once: true } });
+      gsap.fromTo(rs, { b: 0 }, { b: R[0][1], duration: .4, ease: 'expo.out', onUpdate: paint, scrollTrigger: { trigger: tape, start: 'top 80%', once: true } });
     } }
   });
 })();
@@ -6468,16 +6501,16 @@ blockquote { margin: 0; }
             if (torn) {
               gsap.timeline().to(stub, { y: 46, x: 6, autoAlpha: 0, duration: .32, ease: 'power3.in' })
                 .add(function () { tk.classList.add('is-torn'); })
-                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .4, ease: 'power3.out' });
+                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'power3.out' });
             } else {
               gsap.timeline().to(more, { autoAlpha: 0, duration: .15 })
                 .add(function () { tk.classList.remove('is-torn'); })
-                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45, ease: 'back.out(2)' });
+                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'back.out(2)' });
             }
           });
         });
       });
-      if (k.motion) gsap.from(tks, { y: 50, autoAlpha: 0, duration: .8, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: root.querySelector('.financing1__row'), start: 'top 85%', once: true } });
+      if (k.motion) gsap.from(tks, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.financing1__row'), start: 'top 85%', once: true } });
     } },
 
     /* v2 · Pipe the money */
@@ -6543,7 +6576,7 @@ blockquote { margin: 0; }
       geo();
       k.io(rig, function (en) { if (flow) en.isIntersecting ? flow.play() : flow.pause(); });
       k.add(function () { if (flow) flow.kill(); svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); l.style.removeProperty('--lvl'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); why.textContent = 'Pick a project to see the usual routes.'; });
-      if (k.motion) gsap.from(vs.concat(ls), { x: function (i) { return i < 4 ? -30 : 30; }, autoAlpha: 0, duration: .6, ease: 'power3.out', stagger: .05, scrollTrigger: { trigger: rig, start: 'top 80%', once: true } });
+      if (k.motion) gsap.from(vs.concat(ls), { x: function (i) { return i < 4 ? -30 : 30; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .04, scrollTrigger: { trigger: rig, start: 'top 80%', once: true } });
     } },
 
     /* v3 · The morph sheet [BANK 255 Shazam] */
@@ -6575,7 +6608,7 @@ blockquote { margin: 0; }
             .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418' },
               { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#f3eee2', duration: .4, ease: OPEN })
             .add(function () { orb.hidden = true; orb.style.visibility = ''; sheet.style.visibility = ''; })
-            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .45, ease: CONTENT, stagger: .03 });
+            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .4, ease: CONTENT, stagger: .03 });
         });
       }
       function shut() {
@@ -6591,7 +6624,7 @@ blockquote { margin: 0; }
             orb.hidden = false; orb.style.visibility = 'hidden';
             var a = rel(orb);
             gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#f3eee2' },
-              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418', duration: .5, ease: SHUT,
+              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#0B1418', duration: .4, ease: SHUT,
                 onComplete: function () { sh.remove(); orb.style.visibility = ''; busy = false; orb.focus(); } });
           } });
         });
@@ -6601,7 +6634,7 @@ blockquote { margin: 0; }
       k.on(sheet, 'keydown', function (e) { if (e.key === 'Escape') shut(); });
       k.add(function () { sheet.hidden = true; orb.hidden = false; orb.style.visibility = ''; sheet.style.visibility = ''; orb.setAttribute('aria-expanded', 'false'); busy = false; stage.querySelectorAll(':scope > div[aria-hidden]').forEach(function (d) { d.remove(); }); });
       if (k.motion) {
-        gsap.from(orb, { scale: .6, autoAlpha: 0, duration: .8, ease: 'back.out(1.8)', scrollTrigger: { trigger: stage, start: 'top 80%', once: true } });
+        gsap.from(orb, { scale: .8, autoAlpha: 0, duration: .3, ease: 'back.out(1.8)', scrollTrigger: { trigger: stage, start: 'top 80%', once: true } });
       }
     } }
   });

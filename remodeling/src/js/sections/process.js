@@ -60,7 +60,7 @@
       gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: route, start: 'top 62%', end: 'bottom 62%', scrub: .6 } });
       cards.forEach(function (c) {
         ScrollTrigger.create({ trigger: c, start: 'center 62%', onEnter: function () { c.classList.add('is-on'); }, onLeaveBack: function () { c.classList.remove('is-on'); } });
-        gsap.from(c, { y: 30, autoAlpha: 0, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 88%', once: true } });
+        gsap.from(c, { y: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: c, start: 'top 88%', once: true } });
       });
     } },
 
@@ -97,7 +97,17 @@
         '<path d="M276 300H324V398H276Z" fill="#fff1b8"/><path d="M276 300L300 306V404L276 398Z" fill="#1d4a4e" stroke="#0B1418" stroke-width="2"/><rect x="182" y="270" width="56" height="50" fill="#ffe08a" opacity=".85"/><rect x="362" y="270" width="56" height="50" fill="#ffe08a" opacity=".85"/>' +
           '<g transform="translate(340 352)"><circle r="8" fill="#f2c230" stroke="#0B1418" stroke-width="2"/><path d="M8 0h18M20 0v6M24 0v5" stroke="#f2c230" stroke-width="3" stroke-linecap="round"/></g>'
       ];
-      svg.innerHTML = '<path class="ln" d="M0 404H600" opacity=".35"/>' + L.map(function (s, i) { return '<g class="L" data-i="' + i + '">' + s + '</g>'; }).join('');
+      // the sheet itself: border, title block, scale bar, north point, the lot and its neighbours, a site palm.
+      // It is there from stage 1, so the drawing never reads as an empty page while the house is still to come.
+      var palm = '<g transform="translate(560 404)"><path d="M0 0q3-40-2-78" fill="none" stroke="rgba(238,244,249,.55)" stroke-width="2.4"/>' +
+        '<path class="thin" d="M-2-78q-20-12-38 2M-2-78q18-14 36 0M-2-78q-14-20-30-18M-2-78q12-20 28-16M-2-78q-2-22 6-30"/></g>';
+      var base = '<rect class="thin" x="6" y="6" width="588" height="448" opacity=".5"/>' +
+        '<path class="thin" d="M0 404H600" opacity=".7"/><path class="thin" d="M30 404V392M570 404V392M30 398H570" stroke-dasharray="2 4"/>' +
+        '<text class="lbl" x="34" y="390">LOT LINE</text><text class="lbl" x="566" y="390" text-anchor="end">LOT LINE</text>' +
+        '<g transform="translate(290 40)"><circle class="thin" r="16"/><path d="M0-14L5 6H-5Z" fill="#eef4f9"/><text class="lbl" y="-20" text-anchor="middle">N</text></g>' +
+        '<g transform="translate(24 428)"><path class="thin" d="M0 0h100M0-4v8M25-3v6M50-4v8M75-3v6M100-4v8"/><text class="lbl" x="0" y="18">0</text><text class="lbl" x="100" y="18" text-anchor="middle">10 FT</text></g>' +
+        '<g transform="translate(24 22)"><rect class="thin" width="232" height="30"/><path class="thin" d="M172 0v30"/><text class="lbl" x="8" y="19">SECTION A-A · ELBAZ</text><text class="lbl" x="182" y="19">A-201</text></g>' + palm;
+      svg.innerHTML = '<g class="process2__base" opacity=".75">' + base + '</g>' + L.map(function (s, i) { return '<g class="L" data-i="' + i + '">' + s + '</g>'; }).join('');
       var groups = svg.querySelectorAll('.L');
       k.add(function () { svg.innerHTML = ''; root.classList.remove('is-live'); items.forEach(function (it) { it.classList.remove('is-on'); }); });
       var cur = -1;
@@ -113,9 +123,9 @@
           if (!k.motion) { g.style.opacity = on ? 1 : 0; return; }
           if (on && j > prev) {
             k.ctx.add(function () {
-              gsap.fromTo(g, { autoAlpha: 0, y: j === 7 ? 0 : -14 }, { autoAlpha: 1, y: 0, duration: .55, ease: 'back.out(1.6)', overwrite: 'auto' });
+              gsap.fromTo(g, { autoAlpha: 0, y: j === 7 ? 0 : -14 }, { autoAlpha: 1, y: 0, duration: .3, ease: 'back.out(1.6)', overwrite: 'auto' });
               var lines = g.querySelectorAll('.ln, .dash, .thin');
-              if (lines.length) gsap.fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .8, ease: 'power2.out', stagger: .05 });
+              if (lines.length) gsap.fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 });
             });
           } else if (!on) {
             k.ctx.add(function () { gsap.to(g, { autoAlpha: 0, duration: .25, overwrite: 'auto' }); });
@@ -188,10 +198,10 @@
           // zoom-through swap [S0536]: out 1 -> 1.2 + blur .2s power3.in, hard swap at peak, in .75 -> 1 .5s expo.out
           var parts = [no, t, w, d];
           gsap.timeline()
-            .to(parts, { scale: 1.2, filter: 'blur(10px)', opacity: .15, duration: .2, ease: 'power3.in', transformOrigin: '0% 50%' })
+            .fromTo(parts, { scale: 1, filter: 'blur(0px)', opacity: 1 }, { scale: 1.2, filter: 'blur(10px)', opacity: .15, duration: .2, ease: 'power3.in', transformOrigin: '0% 50%' })
             .add(function () { text(i); })
-            .fromTo(parts, { scale: .75, filter: 'blur(10px)', opacity: .15 }, { scale: 1, filter: 'blur(0px)', opacity: 1, duration: .5, ease: 'expo.out', stagger: .03 });
-          gsap.to(rs, { a: R[i][0], b: R[i][1], duration: .7, ease: 'back.out(1.2)', onUpdate: paint });
+            .fromTo(parts, { scale: .75, filter: 'blur(10px)', opacity: .15 }, { scale: 1, filter: 'blur(0px)', opacity: 1, duration: .3, ease: 'expo.out', stagger: .03 });
+          gsap.to(rs, { a: R[i][0], b: R[i][1], duration: .4, ease: 'back.out(1.2)', onUpdate: paint });
         });
       }
       tabs.forEach(function (b, i) {
@@ -205,9 +215,9 @@
       k.on(root.querySelector('.process3__prev'), 'click', function () { select(cur - 1); });
       k.on(root.querySelector('.process3__next'), 'click', function () { select(cur + 1); });
       if (!k.motion) return;
-      gsap.from(tabs, { y: 20, autoAlpha: 0, duration: .5, ease: 'power3.out', stagger: .05, scrollTrigger: { trigger: nav, start: 'top 85%', once: true } });
+      gsap.from(tabs, { y: 12, autoAlpha: 0, duration: .25, ease: 'power2.out', stagger: .03, scrollTrigger: { trigger: nav, start: 'top 85%', once: true } });
       var o = { b: 0 };
-      gsap.fromTo(rs, { b: 0 }, { b: R[0][1], duration: .9, ease: 'expo.out', onUpdate: paint, scrollTrigger: { trigger: tape, start: 'top 80%', once: true } });
+      gsap.fromTo(rs, { b: 0 }, { b: R[0][1], duration: .4, ease: 'expo.out', onUpdate: paint, scrollTrigger: { trigger: tape, start: 'top 80%', once: true } });
     } }
   });
 })();

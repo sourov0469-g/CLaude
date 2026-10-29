@@ -103,7 +103,7 @@
         } else {
           ScrollTrigger.create({ trigger: stage, start: 'top 60%', end: 'bottom 30%', onToggle: function (s) { to(s.isActive ? 1 : 0); } });
         }
-        gsap.from(card, { y: 40, autoAlpha: 0, duration: .8, ease: 'power3.out', delay: ci * .08, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
+        gsap.from(card, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', delay: ci * .05, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
       });
     } },
 
@@ -127,7 +127,7 @@
               k.ctx.add(function () {
                 gsap.fromTo(sc.querySelectorAll('li'), { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: .3, stagger: .025, ease: 'power2.out' });
               });
-              EZ.clip(k, sc, [0, 0, 100, 0], [0, 0, 0, 0], { duration: .45, ease: 'power3.out', onComplete: function () { sc.style.clipPath = ''; } });
+              EZ.clip(k, sc, [0, 0, 100, 0], [0, 0, 0, 0], { duration: .3, ease: 'power3.out', onComplete: function () { sc.style.clipPath = ''; } });
             }
           } else sc.classList.add('is-shut');
         });
@@ -137,7 +137,7 @@
       sheets.forEach(function (sh, i) {
         var next = sheets[i + 1];
         if (!next) return;
-        gsap.to(sh.querySelector('.services2__frame'), { scale: .94, filter: 'brightness(.62)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (90 + i * 18) + 'px', scrub: true } });
+        gsap.fromTo(sh.querySelector('.services2__frame'), { scale: 1, filter: 'brightness(1)' }, { scale: .95, filter: 'brightness(.82)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (90 + i * 18) + 'px', scrub: true } });
       });
       sheets.forEach(function (sh) {
         gsap.from(sh.querySelector('.services2__photo img'), { scale: 1.12, ease: 'none', scrollTrigger: { trigger: sh, start: 'top bottom', end: 'top 30%', scrub: true } });
@@ -186,8 +186,8 @@
       k.add(function () { rows.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); });
       if (!k.motion) return;
       EZ.reveal(k, root.querySelectorAll('.services3__side > *'));
-      gsap.from(tools, { y: -30, autoAlpha: 0, duration: .6, ease: 'bounce.out', stagger: .12, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
-      gsap.from(root.querySelectorAll('.services3__tags span'), { y: -14, autoAlpha: 0, duration: .5, ease: 'back.out(2)', stagger: .04, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
+      gsap.from(tools, { y: -20, autoAlpha: 0, duration: .3, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
+      gsap.from(root.querySelectorAll('.services3__tags span'), { y: -10, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .03, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
       // phones: the tools take turns as the wall comes into view
       if (!k.fine) {
         var n = 0, t = null;

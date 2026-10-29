@@ -36,8 +36,8 @@
         if (!k.motion) { swap(); return; }
         k.ctx.add(function () {
           gsap.timeline().to([imgB, imgA], { autoAlpha: 0, duration: .18, ease: 'power2.in', onComplete: swap })
-            .to([imgB, imgA], { autoAlpha: 1, duration: .35, ease: 'power2.out' })
-            .fromTo(range, { value: +range.value }, { value: 50, duration: .6, ease: 'power3.inOut', onUpdate: function () { setPos(+range.value); } }, .1);
+            .to([imgB, imgA], { autoAlpha: 1, duration: .25, ease: 'power2.out' })
+            .fromTo(range, { value: +range.value }, { value: 50, duration: .4, ease: 'power3.inOut', onUpdate: function () { setPos(+range.value); } }, .1);
         });
       }
       tabs.forEach(function (t, i) {
@@ -53,10 +53,10 @@
       // first sight: the stud swings to show both sides, then rests [hint]
       var o = { v: 50 };
       gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top 70%', once: true } })
-        .from(stage, { clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'power3.out' })
-        .to(o, { v: 22, duration: .6, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } }, .5)
-        .to(o, { v: 70, duration: .8, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
-        .to(o, { v: 50, duration: .5, ease: 'power2.out', onUpdate: function () { range.value = o.v; setPos(o.v); } });
+        .from(stage, { clipPath: 'inset(0 0 100% 0)', duration: .3, ease: 'power2.out' })
+        .to(o, { v: 22, duration: .4, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } }, .3)
+        .to(o, { v: 70, duration: .5, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
+        .to(o, { v: 50, duration: .3, ease: 'power2.out', onUpdate: function () { range.value = o.v; setPos(o.v); } });
     } },
 
     /* v2 · Rolled on [BANK 148 wavy reveal] */
