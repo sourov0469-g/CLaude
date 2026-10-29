@@ -1,68 +1,147 @@
-/* HOW: the ink chapter (PLAN tokens: --ink is the how-section field); its background reacts as weather.
- * v1 Shelter (rain in three depth layers on one canvas; the cursor is a roof that sheds it), v2 Re-roof (pinned: a roofline
- * traced from the real ranch draws itself, then the real roof is laid course by course), v3 Stack (sticky cards) */
-.hw{position:relative;background:var(--ink);color:#fff}
+/* HOW (PLAN-V7 §6). Facts: 1 call Rachel, Monday to Friday 9 to 5; 2 a written, line-by-line estimate; 3 the roof,
+   Owens Corning Platinum Preferred, $2M liability insurance. v1 ⟦S1325⟧ progress spine as a downspout; v2 ⟦S1340⟧ the
+   roof builds under a rising line (⟦S1326⟧ progress math, CSS sticky), its layers exploding in CSS 3D; v3 [BANK] Q409
+   deliverable chips + Q411 three verbs + Q91 animated icons, joined by a roofer's ladder. */
+.hw{position:relative;overflow:clip}
+.hw-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.hw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
 
-/* v1 Shelter: the type is the midground; far and mid rain pass behind the letters, 2 or 3 near drops cross in front */
-.hw1{min-height:max(720px,100svh);display:flex;align-items:flex-end;overflow:clip}
-.hw1-field{position:absolute;inset:0;z-index:1}
-.hw1-cv{position:absolute;inset:0;z-index:3;width:100%;height:100%;pointer-events:none}
-.hw1-copy{display:grid;justify-items:start;gap:clamp(28px,5vh,52px);width:100%;padding:calc(var(--nav-h) + 72px) var(--gutter) calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar));pointer-events:none}
-.hw1-stack{position:relative;z-index:2;font-size:clamp(2.25rem,5vw,5.5rem);font-weight:800;line-height:1.04;letter-spacing:-.035em}
-.hw1-h{font:inherit;letter-spacing:inherit;color:color-mix(in oklab,var(--on-blue-muted) 66%,var(--ink));pointer-events:auto}
-.hw1-steps{list-style:none;margin:0;padding:0}
-.hw1-steps .ln>span,.hw1-h .ln>span{text-wrap:balance}
-.hw1-s1{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.42em}
-.hw1-hours{font-size:var(--t-lead);font-weight:600;line-height:1.35;letter-spacing:0;color:var(--on-blue-muted);padding-bottom:.1em}
-.hw1-cta{position:relative;z-index:4;pointer-events:auto}
-@media (max-width:640px){.hw1-copy{padding-top:calc(var(--nav-h) + 96px)}.hw1-s1{display:block}.hw1-hours{display:block;margin-top:.3em}}
+/* ---------- v1: the spine is a downspout that fills with water as you read; hangers are the step markers */
+.hw1{--vbg:var(--sky);background:var(--sky);color:var(--ink);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.hw1-head{position:sticky;top:calc(var(--nav-h) + 48px);align-self:start;display:grid;gap:14px}
+.hw1-body{position:relative;padding-left:92px}
+.hw1-pipe{position:absolute;left:0;top:0;width:92px;height:100%;overflow:visible;pointer-events:none}
+.hw1-gut{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hw1-tube{fill:#fff;stroke:var(--ink);stroke-width:3}
+.hw1-water{fill:var(--chalk)}
+.hw1-hangers path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transition:transform .2s var(--ease-x)}
+.hw1-hangers path.is-on{stroke:var(--blue)}
+.hw1-drop{fill:var(--chalk);stroke:var(--ink);stroke-width:1.5}
+.hw1-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(72px,14vh,160px)}
+.hw1-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:baseline;scroll-margin-top:calc(var(--nav-h) + 24px)}
+.hw1-n{font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.hw1-t{font-size:clamp(1.75rem,1.2rem + 2vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:oklch(0.25 0.06 262 / .55);transition:color .2s var(--ease-x)}
+.hw1-step[aria-current="step"] .hw1-t,.hw1-step.is-past .hw1-t{color:var(--ink)}
+.hw1-p{margin-top:10px;font-size:var(--t-lead);line-height:1.45;max-width:40ch}
+.hw1-link{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:10px;font-weight:800;font-size:1.25rem;color:var(--blue)}
+.hw1-ls{position:relative;width:22px;height:22px;overflow:visible}
+.hw1-ls .rx-h{fill:var(--chalk);stroke:var(--ink);stroke-width:1.5;opacity:0;transform:translateY(-10px);transition:opacity .2s var(--ease-x),transform .25s var(--ease-x)}
+.hw1-ls .rx-p{fill:none;stroke:var(--chalk);stroke-width:2;opacity:0;transform-origin:12px 20px;transform-box:view-box}
+@media (hover:hover){.hw1-link:hover .rx-h{opacity:1;transform:none}}
+.hw1-link:focus-visible .rx-h{opacity:1;transform:none}
+.hw1-link.is-press .rx-p{animation:hw-splash .4s ease-out}
+@keyframes hw-splash{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(2.4)}}
+@media (max-width:860px){.hw1{grid-template-columns:1fr}.hw1-head{position:static}.hw1-body{padding-left:64px}.hw1-pipe{width:64px}}
 
-/* v2 Re-roof: pinned on wide screens; a letterbox of the real ranch, the steps beneath it */
-.hw2-pin{position:relative;height:max(640px,100svh);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(18px,3vh,32px);padding:calc(var(--nav-h) + 20px) 0 clamp(24px,4.5vh,44px);overflow:clip}
-.hw2-head{padding:0 var(--gutter)}
-.hw2-frame{position:relative;margin:0;min-height:0;overflow:hidden;background:var(--ink-2)}
-.hw2-frame::after{content:"";position:absolute;inset:0;outline:1px solid rgb(255 255 255/.1);outline-offset:-1px;pointer-events:none}
-.hw2-pd{position:absolute;inset:-2%}
-.hw2-img,.hw2-svg{position:absolute;inset:0;width:100%;height:100%}
-.hw2-img{object-fit:cover;object-position:50% 50%}
-.hw2-svg,.hw2-wx{display:none}
-.hw2.is-live .hw2-svg,.hw2.is-live .hw2-wx{display:block}
-.hw2-wx{position:absolute;inset:0;background:rgb(6 16 42/.3);pointer-events:none}
-.hw2-c{fill:var(--mist)}
-.hw2-line{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round} /* clipped to the roof: half shows, always on the mist */
-.hw2-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px clamp(24px,4vw,64px);padding:0 var(--gutter)}
-.hw2-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px clamp(24px,3.4vw,56px);align-items:start}
-.hw2-t{font-size:clamp(1.5rem,2.5vw,2.625rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
-.hw2-s{margin-top:8px;font-size:1rem;line-height:1.4;color:var(--on-blue-muted)}
-@media (max-width:899px),(prefers-reduced-motion:reduce){
-  .hw2-pin{height:auto;grid-template-rows:auto;padding:clamp(4.5rem,3rem + 6vw,8rem) 0 calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar))}
-  .hw2-frame{aspect-ratio:1156/682}
-  .hw2-pd{inset:0}
+/* ---------- v2: a sticky stage; the roof goes on under a rising line; at the estimate its layers come apart */
+.hw2{--vbg:#eef3fb;background:#eef3fb;color:var(--ink)}
+.hw2-track{height:300vh;padding:0 var(--gutter)}
+.hw2-stage{position:sticky;top:var(--nav-h);height:calc(100svh - var(--nav-h));display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center;max-width:1360px;margin:0 auto}
+.hw2-copy{display:grid;gap:28px}
+.hw2-steps{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.hw2-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;opacity:.38;transition:opacity .25s var(--ease-x)}
+.hw2-step.is-on{opacity:1}
+.hw2-step .num{grid-row:span 2;font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted);padding-top:.35em}
+.hw2-step b{font-size:clamp(1.4rem,1rem + 1.4vw,2.2rem);font-weight:800;line-height:1.1;letter-spacing:-.025em}
+.hw2-d{font-size:1rem;line-height:1.45;color:var(--muted)}
+.hw2-call{justify-self:start}
+.hw2-cs{left:0;top:0;width:100%;height:100%}
+.hw2-cs .rx-h{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .2s var(--ease-x)}
+@media (hover:hover){.hw2-call:hover .hw2-cs .rx-h{opacity:.5}}
+.hw2-call:focus-visible .hw2-cs .rx-h{opacity:.5}
+.hw2-call.is-press{animation:hw-bounce .3s var(--ease-spring)}
+@keyframes hw-bounce{0%{scale:.95}100%{scale:1}}
+.hw2-scene{position:relative;height:100%;max-height:640px;display:grid;place-items:center}
+.hw2-sky{position:absolute;inset:0;width:100%;height:100%}
+.hw2-arc{fill:none;stroke:var(--sun);stroke-width:2;stroke-dasharray:2 8;stroke-linecap:round;opacity:.7}
+.hw2-sun{fill:var(--sun)}
+.hw2-3d{position:relative;width:100%;perspective:900px}
+.hw2-svg{width:100%;height:auto;overflow:visible;transform-style:preserve-3d}
+.hw2-ground{stroke:var(--ink);stroke-width:3}
+.hw2-house rect:first-child{fill:#fff;stroke:var(--ink);stroke-width:3}
+.hw2-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
+.hw2-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
+.hw2-frame path{fill:none;stroke:var(--wood);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.hw2-frame .hw2-raf{stroke-width:5;opacity:.75}
+.ly-deck{fill:#d9b98a;stroke:var(--ink);stroke-width:2}
+.ly-under{fill:#5d6b86;stroke:var(--ink);stroke-width:1.5}
+.ly-sh{fill:var(--shingle);stroke:var(--ink);stroke-width:2}
+.ly-crs{fill:none;stroke:oklch(1 0 0 / .3);stroke-width:2}
+.ly-ridge{fill:#2b3142;stroke:var(--ink);stroke-width:2}
+.hw2-line{stroke:var(--sun);stroke-width:3;stroke-dasharray:10 8}
+.hw2-ghost path{fill:oklch(1 0 0 / .55);stroke:var(--blue);stroke-width:2;stroke-dasharray:6 5}
+.hw2-ghost .ly-crs{display:none}
+.hw2-ghost{opacity:0}
+.tag path{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 4}
+.tag text{font:700 17px/1 "Epilogue",sans-serif;fill:var(--ink)}
+.tag{opacity:.25;transition:opacity .25s var(--ease-x)}
+.tag.is-on{opacity:1}
+.hw2-phone circle{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.hw2-phone path{fill:var(--ink)}
+.hw2-phone .hw2-ring{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.hw2-pct{position:absolute;right:0;bottom:12px;font-size:clamp(2.5rem,2rem + 2vw,4rem);font-weight:800;letter-spacing:-.04em;color:oklch(0.25 0.06 262 / .18)}
+@media (max-width:860px){
+  .hw2-stage{grid-template-columns:1fr;align-content:center;gap:12px}
+  .hw2-copy{gap:14px}
+  .hw2-steps{gap:8px}
+  .hw2-step:not(.is-on) .hw2-d{display:none}
+  .hw2-scene{height:auto}
+  .tag text{font-size:26px}
 }
-@media (max-width:899px){
-  .hw2-foot{grid-template-columns:minmax(0,1fr);justify-items:start}
-  .hw2-steps{grid-template-columns:minmax(0,1fr);gap:18px}
-  .hw2-t{font-size:clamp(1.5rem,6.4vw,2rem)}
-}
+html[data-motion="reduced"] .hw2-track{height:auto}
+html[data-motion="reduced"] .hw2-stage{position:static;height:auto;padding:clamp(4rem,3rem + 4vw,7rem) 0 calc(clamp(4rem,3rem + 4vw,7rem) + var(--mbar))}
+html[data-motion="reduced"] .hw2-step{opacity:1}
 
-/* v3 Stack: three full-width cards stick and stack; the one underneath recedes (S1322) */
-.hw3{--hw3-top:max(12vh,calc(var(--nav-h) + 24px));padding:clamp(5rem,3rem + 8vw,10rem) 0 clamp(4rem,2.5rem + 7.5vw,8rem)}
-.hw3-head{padding:0 var(--gutter) clamp(32px,6vh,64px)}
-.hw3-stack{list-style:none;margin:0;padding:0;position:relative}
-.hw3-card{position:sticky;top:var(--hw3-top);height:calc(100svh - var(--hw3-top) - 32px);min-height:460px;display:flex;flex-direction:column;justify-content:flex-end;overflow:clip;transform-origin:50% 0}
-.hw3-card[data-tone=blue]{background:var(--blue);color:#fff}
-.hw3-card[data-tone=sun]{background:var(--sun);color:var(--ink)}
-.hw3-card[data-tone=sky]{background:var(--sky);color:var(--ink)}
-.hw3-in{display:grid;gap:clamp(20px,3.5vh,36px);padding:clamp(28px,4.5vw,72px) var(--gutter)}
-.hw3-t{font-size:clamp(2.75rem,7.2vw,7.75rem);font-weight:800;line-height:1;letter-spacing:-.04em;text-wrap:balance;max-width:15ch}
-.hw3-act{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px}
-.hw3-s{font-size:var(--t-lead);font-weight:600;color:var(--on-blue-muted)}
-@media (max-width:640px){
-  .hw3{--hw3-top:calc(var(--nav-h) + 40px)}
-  .hw3-card{height:calc(100svh - var(--hw3-top) - var(--mbar) - 20px);min-height:380px}
+/* ---------- v3: three verbs, each with its own drawn tool and its deliverables; a ladder joins them */
+.hw3{--vbg:#fff;background:#fff;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.hw3-head{display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(40px,6vh,72px)}
+.hw3-cols{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);max-width:1280px;margin:0 auto}
+.hw3-ladder{position:absolute;left:0;right:0;top:112px;width:100%;height:56px;pointer-events:none;z-index:0}
+.hw3-rail{fill:none;stroke:var(--wood);stroke-width:6;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.hw3-rungs path{stroke:var(--wood);stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.3;transition:opacity .2s var(--ease-x),stroke .2s var(--ease-x)}
+.hw3-rungs path.is-on{opacity:1;stroke:var(--sun)}
+.hw3-col{position:relative;z-index:1;display:grid;align-content:start;gap:16px;padding:28px;border-radius:20px;background:#fff;box-shadow:0 0 0 2px var(--ink)}
+.hw3-n{font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.hw3-act{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:16px;color:var(--ink);text-decoration:none;min-height:96px}
+.hw3-ico{width:96px;height:96px;overflow:visible;border-radius:16px;background:var(--sky)}
+.hw3-v{font-size:clamp(2rem,1.4rem + 2vw,3.25rem);font-weight:800;letter-spacing:-.035em;line-height:1;text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.12em;text-decoration-color:transparent;transition:text-decoration-color .18s var(--ease-x)}
+@media (hover:hover){.hw3-act:hover .hw3-v{text-decoration-color:var(--sun)}}
+.hw3-act:focus-visible .hw3-v{text-decoration-color:var(--sun)}
+.hw3-ico *{transform-box:fill-box}
+.i-base{fill:var(--shingle)}
+.i-hand path{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.i-hand{transform-origin:50% 100%;transition:transform .2s var(--ease-x)}
+.i-ring{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0}
+.i-seg rect{fill:var(--sun);stroke:var(--ink);stroke-width:2.5}
+.i-seg path{stroke:var(--ink);stroke-width:2}
+.i-pin{fill:var(--ink)}
+.i-seg2{transform-origin:0% 50%;transition:transform .25s var(--ease-x)}
+.hw3-ico--rule .i-seg2{transform:rotate(-150deg)}
+.hw3-ico--rule .i-seg2{transform-origin:0 50%}
+.i-board{stroke:var(--wood);stroke-width:8;stroke-linecap:round}
+.i-nail path{fill:#8a93a8}
+.i-hammer rect{stroke:var(--ink);stroke-width:2.5}
+.i-hd{fill:var(--shingle)}.i-hl{fill:var(--sun)}
+.i-hammer{transform-origin:100% 100%;transition:transform .2s var(--ease-x)}
+@media (hover:hover){
+  .hw3-act:hover .i-hand{transform:translateY(-8px) rotate(-6deg)}
+  .hw3-act:hover .hw3-ico--rule .i-seg2{transform:rotate(0)}
+  .hw3-act:hover .i-hammer{transform:rotate(-18deg)}
 }
-@media (prefers-reduced-motion:reduce){
-  .hw3-card{position:relative;top:auto;height:auto;min-height:56svh}
-}
-/* the roof cursor (cursor.js kind "roof") exists only over the v1 field: an ink halo keeps it visible over the white type */
-.cur-roof{filter:drop-shadow(0 0 1.5px rgb(6 16 42/.9)) drop-shadow(0 1px 3px rgb(6 16 42/.6))}
+.hw3-act:focus-visible .i-hand{transform:translateY(-8px) rotate(-6deg)}
+.hw3-act:focus-visible .hw3-ico--rule .i-seg2{transform:rotate(0)}
+.hw3-act:focus-visible .i-hammer{transform:rotate(-18deg)}
+.hw3-act.is-press .i-ring{animation:hw-ring .2s steps(1) 3}
+@keyframes hw-ring{0%{opacity:1}50%{opacity:0}}
+.hw3-act.is-press .i-hand{animation:hw-shake .3s linear}
+@keyframes hw-shake{0%,100%{translate:0 0}25%{translate:-2px 0}75%{translate:2px 0}}
+.hw3-act.is-press .hw3-ico--rule .i-seg1{animation:hw-meas .3s var(--ease-x)}
+@keyframes hw-meas{50%{translate:-6px 0}}
+.hw3-act.is-press .i-hammer{animation:hw-strike .3s var(--ease-x)}
+.hw3-act.is-press .i-nail{animation:hw-drive .3s var(--ease-x) forwards}
+@keyframes hw-strike{0%{transform:rotate(-18deg)}40%{transform:rotate(14deg)}100%{transform:rotate(0)}}
+@keyframes hw-drive{0%,35%{translate:0 0}60%,100%{translate:0 8px}}
+.hw3-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.hw3-chips li{padding:8px 12px;border-radius:999px;background:var(--sky);font-weight:700;font-size:.9375rem;line-height:1.2}
+.hw3-p{font-size:1rem;line-height:1.45;color:var(--muted)}
+@media (max-width:900px){.hw3-cols{grid-template-columns:1fr}.hw3-ladder{left:-24px;right:auto;top:0;width:56px;height:100%;transform:none}}
