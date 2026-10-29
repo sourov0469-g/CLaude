@@ -3,6 +3,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EASE, beats } from '../../js/fx.js';
+import { parallax } from '../../js/depth.js';
 
 // v1 ⟦S1325⟧ scroll-progress-timeline: a real <ol>; one line runs from the first step's dot centre to the last; the
 // fill scales with normalized progress = (anchor - lineStart) / (lineEnd - lineStart), clamped, written in one rAF;
@@ -43,7 +44,7 @@ function spine(root, c) {
   const ro = new ResizeObserver(measure); ro.observe(body); measure();
   if (document.fonts) document.fonts.ready.then(() => root.isConnected && measure());
   addEventListener('scroll', onScroll, { passive: true });
-  if (c.motion) beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]);
+  if (c.motion) { beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]); parallax(root); } // the rain layer drifts with scroll
   return () => { ro.disconnect(); removeEventListener('scroll', onScroll); };
 }
 

@@ -115,9 +115,36 @@ html.picks-off .pick-rail{display:none}
 .ph img{width:100%;height:100%;object-fit:cover}
 .ph::after{content:"";position:absolute;inset:0;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;pointer-events:none}
 
-/* V7 cursor companion (PLAN-V7 §5): additive, pointer-events none, the system cursor always stays.
-   Mounted only for (hover:hover) and (pointer:fine); its switcher is a radio group, desktop only. */
+/* Cursor companion (PLAN-FULL G2): on a fine pointer with a variant chosen it is the cursor. The system cursor is hidden
+   only while html.cmp-live (mounted AND the pointer position known); text fields keep the I-beam and the nail hides. */
 .cmp{position:fixed;left:0;top:0;z-index:300;pointer-events:none;display:none}
+html.cmp-on.cmp-live,html.cmp-on.cmp-live *{cursor:none!important}
+html.cmp-on.cmp-live :is(input:not([type=radio]):not([type=checkbox]):not([type=range]):not([type=button]):not([type=submit]),textarea,[contenteditable]){cursor:text!important}
+.cmp-nail{position:fixed;left:0;top:0;width:12px;height:12px;overflow:visible;will-change:transform;transition:scale .08s ease-out}
+.cmp-nail circle{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.8}
+.cmp-nail path{fill:none;stroke:#fff;stroke-width:1.2;stroke-linecap:round}
+.cmp-nail.is-down{scale:.72}
+html.cmp-text .cmp-nail{opacity:0}
+/* per-section cursor effects (PLAN-FULL G3): pools moved by transform; marks in ink and blue, light marks on dark versions */
+.cfx{position:fixed;inset:0;z-index:280;pointer-events:none;overflow:hidden;--fa:var(--ink);--fb:var(--blue);--fw:#b77a3c}
+.cfx.is-dark{--fa:#fff;--fb:var(--chalk);--fw:#e2b07a}
+.cfx-one,.cfx-p{position:absolute;left:0;top:0;will-change:transform}
+.cfx-one>*,.cfx-p>svg{display:block;translate:-50% -50%;overflow:visible}
+.cfx-halo{width:300px;height:300px;border-radius:50%;background:radial-gradient(closest-side,oklch(0.86 0.15 80 / .5),oklch(0.86 0.15 80 / 0));mix-blend-mode:soft-light}
+.cfx.is-dark .cfx-halo{mix-blend-mode:screen;opacity:.45}
+.cfx-finder{width:60px;height:60px}
+.cfx-finder path{fill:none;stroke:var(--fa);stroke-width:2.2;stroke-linecap:round}
+.cfx-finder circle{fill:var(--sun)}
+.cfx-compass{width:60px;height:60px}
+.cfx-compass circle{fill:none;stroke:var(--fa);stroke-width:1.5;stroke-dasharray:2 4;opacity:.7}
+.cfx-compass .cfx-ticks{stroke:var(--fa);stroke-width:1.8;stroke-linecap:round}
+.cfx-compass .n{fill:var(--sun);stroke:var(--ink);stroke-width:1}.cfx-compass .s{fill:var(--fa);opacity:.5}
+.cfx-stars svg{width:12px;height:12px}.cfx-stars path{fill:var(--sun);stroke:var(--ink);stroke-width:.6}
+.cfx.is-dark .cfx-stars path{stroke:none}
+.cfx-shavings svg{width:16px;height:16px}.cfx-shavings path{fill:none;stroke:var(--fw);stroke-width:2.2;stroke-linecap:round}
+.cfx-ripple svg{width:40px;height:40px}.cfx-ripple circle{fill:none;stroke:var(--fb);stroke-width:2}
+.cfx-signal svg{width:32px;height:32px}.cfx-signal path{fill:none;stroke:var(--fb);stroke-width:2.4;stroke-linecap:round}
+.cfx.is-dark .cfx-signal path{stroke:var(--sun)}
 html.cmp-on .cmp{display:block}
 .cmp-pos{position:fixed;left:0;top:0;width:46px;height:46px;will-change:transform}
 .cmp-tilt{width:100%;height:100%;transform-origin:50% 90%}
@@ -140,6 +167,7 @@ html.cmp-on .cmp{display:block}
   .cmp-pick input:focus-visible+label{outline:2px solid #fff;outline-offset:2px}
   .cmp-pick input:not(:checked)+label:hover{background:oklch(1 0 0 / .14)}
   html.picks-off .cmp-pick{display:none}
+  @media (max-width:640px){.cmp-pick{bottom:calc(84px + env(safe-area-inset-bottom))}} /* narrow windows with a mouse: sit above the phone bar, never over its buttons */
 }
 .ch{display:inline-block}
 [data-cursor="text"]{width:fit-content;max-width:100%}
@@ -175,12 +203,34 @@ html.cmp-on .cmp{display:block}
 .ch-call:focus-visible .ch-vent,.ch-call.is-press .ch-vent{clip-path:inset(-4px 0 0 0)}
 .ch-call.is-press .ch-vent-sl{animation:ch-louver .4s var(--ease-x)}
 @keyframes ch-louver{0%{scale:1 1}35%{scale:1 .25}100%{scale:1 1}}
-.ch-gable{left:12%;width:76%;top:-15px;height:18px;z-index:-1;opacity:0;translate:0 12px;transition:opacity .2s var(--ease-x),translate .22s var(--ease-x)}
-.ch-gable path{fill:#fff;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-@media (hover:hover){.ch-home:hover .ch-gable{opacity:1;translate:0 0}}
-.ch-home:focus-visible .ch-gable{opacity:1;translate:0 0}
-.ch-home.is-press .ch-gable{opacity:1;animation:ch-pop .3s var(--ease-spring)}
-@keyframes ch-pop{0%{translate:0 0}40%{translate:0 -4px}100%{translate:0 0}}
+/* R02 nav logo: a dormer pops up on the pill's right shoulder (12px of room above the pill, the logo fills its middle);
+   press flashes its pane with sun */
+.ch-dormer{right:-16px;top:-9px;width:32px;height:23px;opacity:0;translate:0 14px;transition:opacity .15s var(--ease-x),translate .3s var(--ease-spring)}
+.ch-d-wall{fill:#fff;stroke:var(--ink);stroke-width:1.6}
+.ch-d-pane{fill:var(--sky);stroke:var(--ink);stroke-width:1.4;transition:fill .2s var(--ease-x)}
+.ch-d-bar{stroke:var(--ink);stroke-width:1}
+.ch-d-roof{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover){.ch-home:hover .ch-dormer{opacity:1;translate:0 0}}
+.ch-home:focus-visible .ch-dormer{opacity:1;translate:0 0}
+.ch-home.is-press .ch-dormer{opacity:1;translate:0 0}
+.ch-home.is-press .ch-d-pane{animation:ch-flash .4s var(--ease-x)}
+@keyframes ch-flash{30%{fill:var(--sun)}}
+/* R03 bar Call (phones): a roofing nail hovers at the pill's left edge; press drives it in with a spark */
+.btn .ch-nail{left:14px;top:-26px;width:22px;height:34px;opacity:0;transition:opacity .15s var(--ease-x)}
+.ch-n-h{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.6}
+.ch-n-s{fill:none;stroke:#c9cfdb;stroke-width:3;stroke-linecap:round}
+.ch-spk path{stroke:var(--sun);stroke-width:2.4;stroke-linecap:round}
+.ch-spk{opacity:0}
+.ch-n{animation:ch-hover 1.2s ease-in-out infinite paused}
+@keyframes ch-hover{50%{translate:0 -3px}}
+@media (hover:hover){.ch-bcall:hover .ch-nail{opacity:1}.ch-bcall:hover .ch-n{animation-play-state:running}}
+.ch-bcall:focus-visible .ch-nail{opacity:1}
+.ch-bcall.is-press .ch-nail{opacity:1}
+.ch-bcall.is-press .ch-n{animation:ch-driven .3s cubic-bezier(.5,0,.75,0) both}
+.ch-bcall.is-press .ch-spk{animation:ch-spark .35s ease-out .22s both}
+@keyframes ch-driven{to{translate:0 10px}}
+@keyframes ch-spark{0%{opacity:1;scale:.6}100%{opacity:0;scale:1.3}}
+.ch-spk{transform-box:fill-box;transform-origin:50% 50%}
 .ch-up{position:relative}
 .ch-ladder{right:14px;bottom:calc(100% - 2px);width:22px;height:36px;opacity:0;translate:0 14px;transition:opacity .2s var(--ease-x),translate .22s var(--ease-x)}
 .ch-l-rail,.ch-l-rung{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round}
@@ -190,16 +240,26 @@ html.cmp-on .cmp{display:block}
 .ch-up.is-press .ch-l-rung{animation:ch-rung .45s var(--ease-x) calc(var(--i) * 70ms) both}
 @keyframes ch-rung{0%,100%{stroke:#fff}40%{stroke:var(--sun)}}
 .ch-ftel{position:relative;display:inline-block}
-.ch-nails{left:0;top:100%;width:44px;height:8px;fill:var(--sun)}
-.ch-nails g{opacity:0;translate:0 -3px;transition:opacity .15s var(--ease-x) calc(var(--i) * 40ms),translate .2s var(--ease-x) calc(var(--i) * 40ms)}
-@media (hover:hover){.ch-ftel:hover .ch-nails g{opacity:1;translate:0 0}}
-.ch-ftel:focus-visible .ch-nails g{opacity:1;translate:0 0}
-.ch-ftel.is-press .ch-nails g{opacity:1;animation:ch-drive .3s var(--ease-x) calc(var(--i) * 60ms) both}
-@keyframes ch-drive{0%{translate:0 -3px}60%{translate:0 2px}100%{translate:0 2px}}
+/* R06 footer phone: a bead of sealant draws under the number; press tools it flat */
+.ch-bead{left:0;top:100%;width:100%;height:8px}
+.ch-bead path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .3s var(--ease-x)}
+@media (hover:hover){.ch-ftel:hover .ch-bead path{stroke-dashoffset:0}}
+.ch-ftel:focus-visible .ch-bead path{stroke-dashoffset:0}
+.ch-ftel.is-press .ch-bead path{stroke-dashoffset:0}
+.ch-ftel.is-press .ch-bead{animation:ch-tool .35s var(--ease-x)}
+@keyframes ch-tool{40%{scale:1 .25}100%{scale:1 1}}
+.ch-bead{transform-origin:50% 50%}
 .ch-est-t{position:relative}
-.btn .ch-chalk{left:0;bottom:-6px;width:100%;height:6px;overflow:visible}
-.ch-chalk path{fill:none;stroke:var(--chalk);stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke;clip-path:inset(0 100% 0 0);transition:clip-path .2s var(--ease-x)}
-@media (hover:hover){.ch-est:hover .ch-chalk path{clip-path:inset(0)}}
-.ch-est:focus-visible .ch-chalk path{clip-path:inset(0)}
-.ch-est.is-press .ch-chalk path{clip-path:inset(0);stroke:var(--blue);animation:hx-snap .26s ease-out}
+/* R04 bar "Get an estimate": an underlayment roll peeks at the label's end; press rolls it back across, laying the felt */
+.ch-roll{left:0;right:0;bottom:-9px;height:10px}
+.btn .ch-ul{position:absolute;left:0;top:2px;width:100%;height:6px;transform:scaleX(0);transform-origin:100% 50%}
+.ch-ul rect{fill:#4f5b73}.ch-ul path{stroke:oklch(1 0 0 / .35);stroke-width:.6;vector-effect:non-scaling-stroke}
+.btn .ch-rl{position:absolute;right:-12px;top:-2px;width:14px;height:14px;opacity:0;translate:6px 0;transition:opacity .15s var(--ease-x),translate .25s var(--ease-x)}
+.ch-rl circle{fill:#4f5b73;stroke:var(--ink);stroke-width:1.2}.ch-rl path{fill:none;stroke:oklch(1 0 0 / .6);stroke-width:1}
+@media (hover:hover){.ch-est:hover .ch-rl{opacity:1;translate:0 0}}
+.ch-est:focus-visible .ch-rl{opacity:1;translate:0 0}
+.ch-est.is-press .ch-rl{opacity:1;animation:ch-unroll .45s var(--ease-x) both}
+.ch-est.is-press .ch-ul{animation:ch-lay .45s var(--ease-x) both}
+@keyframes ch-unroll{from{right:-12px;rotate:0deg}to{right:calc(100% - 4px);rotate:-540deg}}
+@keyframes ch-lay{to{transform:scaleX(1)}}
 @keyframes hx-snap{0%{transform:translateY(0)}25%{transform:translateY(2px)}50%{transform:translateY(-1.5px)}75%{transform:translateY(.8px)}100%{transform:translateY(0)}}

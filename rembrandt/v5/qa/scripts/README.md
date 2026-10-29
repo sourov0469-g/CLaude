@@ -9,3 +9,5 @@ Run from a folder whose `node_modules` holds `playwright` (Chromium preinstalled
 | `constel3.mjs` | Logs the Constellation's `fillText('4.9')` calls (font, canvas size, font-ready) in both builds. |
 | `heroint.mjs`, `proofint.mjs`, `workint.mjs`, `famint.mjs`, `howint.mjs`, `areaint.mjs`, `callint.mjs`, `mapcheck.mjs` (Towns V1 label overlaps) | Signature interactions and every control's hover/press reaction for the hero and reviews versions. |
 | `sweep.mjs <w> <h> [reduce] [shots]` | Whole page, all three version sets: horizontal overflow and console errors, optional per-section screenshots. |
+| `compint.mjs` | Phase 5: the companion in every version at 1440 and 375 (cursor hidden only while live, nail on the pointer, hover reaction, section effect), variants, Off, H key, text field, press, page-leave, first paint, touch, reduced motion. |
+| `chromeint.mjs` | R01 to R06 (nav, phone bar, footer) hover and press; fixed chrome tested mid-page because the nav is quiet over the hero. |

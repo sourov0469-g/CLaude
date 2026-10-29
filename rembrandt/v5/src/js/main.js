@@ -10,6 +10,7 @@ import Lenis from 'lenis';
 import { initDepth } from './depth.js';
 import { initMagnet } from './magnet.js';
 import { initCompanion } from './companion.js';
+import { initCursorFx } from './cursorfx.js';
 import { initDividers } from './dividers.js';
 
 gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
@@ -144,7 +145,7 @@ function start(mods) {
   // one filled call per view (S1435, G6 #1): the nav's call button waits until the hero's own has scrolled away
   const nav = document.querySelector('.nav'), hero = document.getElementById('hero');
   if (nav && hero) ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom 35%', onToggle: s => nav.classList.toggle('nav--quiet', s.isActive) });
-  initDepth(); initMagnet(); initCompanion(store);
+  initDepth(); initMagnet(); initCompanion(store); initCursorFx();
   // PLAN-V7 §4d: every reaction element (.rx) gets a press state on pointer-down and on Enter/Space, separate from
   // its hover state; the section's CSS draws the press. One delegated listener for the page.
   const press = e => {

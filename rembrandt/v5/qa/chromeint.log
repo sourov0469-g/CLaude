@@ -1,0 +1,7 @@
+R01 nav Call @1440: hover clipPath=inset(-4px 0px 0px); press ch-louver
+R02 nav logo @1440: hover opacity=1; press ch-flash
+R05 footer logo @1440: hover opacity=1; press ch-rung
+R06 footer phone @1440: hover strokeDashoffset=0px; press ch-tool
+R03 bar Call @375: hover opacity=1; press ch-driven
+R04 bar estimate @375: hover opacity=1; press ch-lay
+errors: 0

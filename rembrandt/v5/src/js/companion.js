@@ -1,13 +1,15 @@
-// V7 cursor companion (PLAN-V7 §5). A small roofing character follows the pointer, idles, blinks, glances, rolls its
-// eyes, now and then acts on its own, and reacts differently to buttons, links, images, headings and cards (hover and
-// press differ). Three variants (House, Hammer, Drop) and Off, picked in a small radio group; the choice persists.
-// References: S0489 living illustration (pupils glance, lids blink, body breathes), S0635 gaze-follow characters,
-// S1303 pointer lerp (eyes 0.06-0.12 per frame, max travel 10-25px scaled to a 46px character), S1321 follower lag
-// (quickTo 0.35 power3.out), S1309 tilt only from horizontal velocity, capped at 8 degrees, #362 mismatched periods
-// (idle 2.6 / 4.3 / 7.1 s, coprime, never visibly repeating), Q381 named state presets, S1455 explicit states, P10
-// attribute-state follower, S1323 re-entry reset. The system cursor always stays; the companion is aria-hidden and
-// pointer-events none; it is never mounted on touch or coarse pointers; under reduced motion it defaults to Off and,
-// if chosen, follows without idle loops. One rAF loop, stopped when the tab is hidden or the pointer leaves.
+// Cursor companion (PLAN-FULL G2; BRIEF-FULL §4: no plain or fixed cursor). On a fine pointer, with a variant chosen, the
+// companion IS the cursor: the system cursor is hidden (text fields keep the I-beam) and a nail head sits exactly on the
+// pointer with zero lag (S1321 cursor dot), so pointing stays precise; the character follows at +22/+22. It idles,
+// blinks, glances, rolls its eyes, now and then acts on its own, and reacts differently to buttons, links, images,
+// headings and cards (hover and press differ). Variants House, Hammer, Drop and Off (Off gives the system cursor back).
+// References: S0489 living illustration, S0635 gaze-follow, S1303 pointer lerp (eyes 0.06-0.12 per frame), S1321
+// follower (quickTo 0.35 power3.out) and cursor dot, S1309 tilt from horizontal velocity (<= 8 degrees), #362 mismatched
+// idle periods, Q381 state presets, S1455 explicit states, P10 attribute state (data-hover on .cmp), S1323 re-entry
+// reset. Safety: the cursor is hidden only after the companion has mounted AND the pointer position is known
+// (html.cmp-live), and that is dropped when the pointer leaves the page, so a failure can never strand the page without a
+// cursor; aria-hidden, pointer-events none; never mounted on touch or coarse pointers; Off by default under reduced
+// motion. One rAF loop, stopped when the tab is hidden or the pointer is still.
 import { gsap } from 'gsap';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -149,7 +151,8 @@ export function initCompanion(store) {
   const html = document.documentElement, root = document.querySelector('.cmp'), pick = document.querySelector('.cmp-pick');
   const fineQ = matchMedia('(hover: hover) and (pointer: fine)'), rmQ = matchMedia('(prefers-reduced-motion: reduce)');
   const pos = root.querySelector('.cmp-pos'), tilt = root.querySelector('.cmp-tilt'), ch = root.querySelector('.cmp-ch'), acc = root.querySelector('.cmp-acc'), lab = root.querySelector('.cmp-label');
-  const fxl = root.querySelector('.cmp-fx');
+  const fxl = root.querySelector('.cmp-fx'), nail = root.querySelector('.cmp-nail');
+  const TEXT = 'input:not([type=radio]):not([type=checkbox]):not([type=range]):not([type=button]):not([type=submit]),textarea,[contenteditable]';
   let mode = null, on = false, mounted = false;
   let px = -200, py = -200, cx = -200, cy = -200, vx = 0, rot = 0, lastMove = 0, raf = 0, last = 0;
   let hoverKind = null, hoverEl = null, hoverTw = null, idleTw = null, soloAt = 0, soloTw = null, blinkAt = 0, glanceAt = 0, glance = [0, 0], mood = '';
@@ -182,7 +185,7 @@ export function initCompanion(store) {
     if (k === hoverKind && el === hoverEl) return;
     if (hoverTw) { hoverTw.kill(); hoverTw = null; }
     if (hoverKind) { resetParts(); if (idleTw) { idleTw.kill(); idleTw = R[mode].idle(ch); } }
-    hoverKind = k; hoverEl = el;
+    hoverKind = k; hoverEl = el; root.dataset.hover = k || '';
     const label = el && el.dataset.cursorLabel; lab.textContent = label || ''; lab.classList.toggle('is-on', !!label);
     if (!k || rmQ.matches) return;
     if (idleTw) idleTw.pause();
@@ -190,7 +193,9 @@ export function initCompanion(store) {
     hoverTw = R[mode].hover[k](ch, dir);
   }
   function onDown(e) {
-    if (!on || rmQ.matches || e.pointerType !== 'mouse') return;
+    if (!on || e.pointerType !== 'mouse') return;
+    nail.classList.add('is-down'); // the nail head sets on press (precise, no lag)
+    if (rmQ.matches) return;
     const k = kindOf(e.target); if (!k) return;
     const r = k[1].getBoundingClientRect(), dir = r.left + r.width / 2 < cx ? -1 : 1;
     R[mode].press[k[0]](ch, dir, fx);
@@ -227,6 +232,9 @@ export function initCompanion(store) {
     if (e.pointerType && e.pointerType !== 'mouse') return;
     vx += (e.clientX - px) * 0.5 * (px < -100 ? 0 : 1); px = e.clientX; py = e.clientY; lastMove = performance.now();
     if (!on) return;
+    nail.style.transform = `translate3d(${px - 6}px,${py - 6}px,0)`; // the hotspot: exactly on the pointer, no lag
+    if (!html.classList.contains('cmp-live')) html.classList.add('cmp-live');
+    html.classList.toggle('cmp-text', !!(e.target.closest && e.target.closest(TEXT)));
     // keep it on screen: flip to the other side of the pointer near the right / bottom edges
     const ox = px > innerWidth - 80 ? -68 : 22, oy = py > innerHeight - 80 ? -68 : 22;
     cx = px + ox; cy = py + oy;
@@ -240,7 +248,7 @@ export function initCompanion(store) {
     mode = v; html.dataset.companion = v;
     const can = fineQ.matches && v !== 'off';
     if (pick) { const i = pick.querySelector(`input[value="${v}"]`); if (i) i.checked = true; }
-    if (!can) { if (on) { on = false; html.classList.remove('cmp-on'); setHover(null, null); if (idleTw) idleTw.kill(); idleTw = null; gsap.set(root, { autoAlpha: 0 }); } return; }
+    if (!can) { if (on) { on = false; html.classList.remove('cmp-on', 'cmp-live', 'cmp-text'); setHover(null, null); if (idleTw) idleTw.kill(); idleTw = null; gsap.set(root, { autoAlpha: 0 }); } return; }
     if (!mounted) { mounted = true; qx = gsap.quickTo(pos, 'x', { duration: 0.35, ease: 'power3.out' }); qy = gsap.quickTo(pos, 'y', { duration: 0.35, ease: 'power3.out' }); }
     build(v); on = true; html.classList.add('cmp-on'); hoverKind = null; hoverEl = null;
     gsap.set(root, { autoAlpha: px < -100 ? 0 : 1 }); if (px > -100) { gsap.set(pos, { x: cx, y: cy }); }
@@ -257,8 +265,9 @@ export function initCompanion(store) {
   });
   addEventListener('pointermove', onMove, { passive: true });
   addEventListener('pointerdown', onDown, { passive: true });
+  addEventListener('pointerup', () => nail.classList.remove('is-down'), { passive: true });
   addEventListener('scroll', () => { if (!on || px < -100) return; const el = document.elementFromPoint(px, py); const k = kindOf(el); setHover(k ? k[0] : null, k ? k[1] : null); }, { passive: true });
-  document.addEventListener('pointerleave', () => { gsap.to(root, { autoAlpha: 0, duration: 0.15 }); setHover(null, null); });
+  document.addEventListener('pointerleave', () => { html.classList.remove('cmp-live'); gsap.to(root, { autoAlpha: 0, duration: 0.15 }); setHover(null, null); });
   addEventListener('blur', () => gsap.to(root, { autoAlpha: 0, duration: 0.15 }));
   document.addEventListener('visibilitychange', () => { if (document.hidden) { if (idleTw) idleTw.pause(); } else wake(); });
   document.addEventListener('versionswap', () => setHover(null, null));

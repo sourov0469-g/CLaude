@@ -126,7 +126,12 @@ function marquee(root, c) {
   const slow = v => () => { if (loop) gsap.to(loop, { timeScale: v, duration: 0.3, overwrite: 'auto' }); };
   const enter = slow(0.3), leave = slow(1);
   pause.addEventListener('click', onPause); band.addEventListener('pointerenter', enter); band.addEventListener('pointerleave', leave);
-  return () => { dead = true; smokeTl.kill(); if (loop) loop.destroy(); pause.removeEventListener('click', onPause); band.removeEventListener('pointerenter', enter); band.removeEventListener('pointerleave', leave); };
+  // bg: the chimney smoke bends away from the pointer, as smoke does in a breeze
+  const plume = root.querySelector('.cl3-smoke'), chim = root.querySelector('.cl3-chim'), bend = gsap.quickTo(plume, 'x', { duration: 1.2, ease: 'power2.out' });
+  const onDrift = e => { if (e.pointerType !== 'mouse' || !c.fine) return; const r = chim.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2); bend(-gsap.utils.clamp(-1, 1, dx / 500) * 22); };
+  const onCalm = () => bend(0);
+  root.addEventListener('pointermove', onDrift, { passive: true }); root.addEventListener('pointerleave', onCalm);
+  return () => { root.removeEventListener('pointermove', onDrift); root.removeEventListener('pointerleave', onCalm); dead = true; smokeTl.kill(); if (loop) loop.destroy(); pause.removeEventListener('click', onPause); band.removeEventListener('pointerenter', enter); band.removeEventListener('pointerleave', leave); };
 }
 
 export default { 1: close, 2: morph, 3: marquee };

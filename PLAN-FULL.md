@@ -67,7 +67,7 @@ Owner tooling (the 1·2·3 version switchers, the helper picker) is excluded: it
 | # | Element | Hover | Press | Verb mix |
 |---|---|---|---|---|
 | R01 | Nav Call (desktop) | ridge-vent strip draws along the pill top | the vent's louvers flap | draw / pop |
-| R02 | Nav logo (back to top) | a dormer pops up from the pill's top edge | the dormer's pane flashes sun | pop / flash |
+| R02 | Nav logo (back to top) | a dormer pops up on the pill's right shoulder (moved in Phase 5: only 12 px above the pill and the logo fills its middle) | the dormer's pane flashes sun | pop / flash |
 | R03 | Bar Call (phones) | a roofing nail hovers at the pill's left edge | the nail drives in with a spark | approach / fly-pop |
 | R04 | Bar "Get an estimate" | an underlayment roll peeks at the label end | the roll unrolls under the label | approach / fly |
 | R05 | Footer logo | a ladder rises behind the pill | its rungs light in sequence | fly / pop |

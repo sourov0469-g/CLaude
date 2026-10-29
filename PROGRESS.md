@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 4 (remaining sections) complete → Phase 5 (companion as cursor, per-section cursor effects, chrome reactions, background audit) next.
+- **Phase:** 5 (companion and page systems) complete → Phase 6 (assembly, reduced-motion pass, weight, §12 gate, report) next.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -207,3 +207,44 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 - Family, How, Towns and Call all have SECTIONS lines at YES, TRACEABILITY Verification filled, and a commit each.
 - Dividers: one per boundary, all different. S4 is marked IN PLACE; the page-wide check is Phase 6.
 - Shared scale-pop presses were removed wherever a control already had its registered press, which leaves Work's arrow tick (R17) as the only scale press. The full registry audit is Phase 5.
+
+### Phase 5: Cursor companion and page systems
+- **Companion as the cursor (§4 "no plain or fixed cursor"):**
+  - On a fine pointer with House, Hammer or Drop chosen, the system cursor is hidden and a nail head sits exactly on the pointer with zero lag. Measured offset in all 42 runs: 0,0 px.
+  - The character follows at +22/+22 and keeps its idle, blink, glance, eye-roll and solo acts, plus five hover reactions and five different press reactions per variant (button, link, image, heading, card).
+  - Text fields keep the I-beam, and the nail hides over them. Press sets the nail.
+  - Off, touch and reduced motion (Off by default there) keep the system cursor.
+  - Safety: the cursor is hidden only under `html.cmp-live`, i.e. mounted AND pointer position known. It is dropped when the pointer leaves the page. Before the first move the cursor is `auto` (tested). A script failure therefore cannot leave the page without a cursor.
+  - Defect avoided: the V7 code added `cmp-on` at mount, so hiding the cursor on that class alone would have blanked it until the first move.
+- **Per-section cursor effects (G3), new `src/js/cursorfx.js`:**
+  - Effects: hero sun halo, reviews star dust, work viewfinder, family wood shavings, how ripples, towns compass along the direction of travel, call signal arcs.
+  - Colours come from the live version's painted background (`--sec-bg`): light marks on dark versions, ink and blue on light ones.
+  - Emission is by distance travelled. Pools hold at most 12 nodes, moved by transform. The effects run only while the companion is live, so none with Off, on touch or under reduced motion.
+  - Contact sheet: `qa/cfx-sheet.jpg`.
+- **Chrome reactions (registry R02, R03, R04, R06):**
+  - R02 nav logo: a dormer pops up on the pill's right shoulder, and press flashes its pane. Moved from the pill's top edge: there are only 12 px above the pill, and the logo fills its middle. Registry wording updated.
+  - R03 phone-bar Call: a roofing nail hovers at the pill's left edge, and press drives it in with a spark. The bar Call used to share R01's ridge vent.
+  - R04 phone-bar estimate: an underlayment roll peeks at the label end, and press rolls it across, laying the felt. Replaces the chalk line.
+  - R06 footer phone: a sealant bead draws under the number, and press tools it flat. Replaces the nails.
+  - Evidence: `qa/scripts/chromeint.mjs`, log `qa/chromeint.log`: R01 to R06 all respond to hover and press. Contact sheet `qa/chrome-sheet.jpg`. Errors 0.
+- **Defects found and fixed (kept visible):**
+  - On narrow windows with a mouse, the owner's Helper picker sat on top of the phone bar's "Get an estimate" button (elementFromPoint hit the picker). At ≤ 640 px it now sits above the bar.
+  - The generic `.btn svg{width:1.15em}` outranked the new chrome graphics inside buttons (roll, felt strip, nail). Their selectors are now scoped under `.btn`.
+  - The first chrome run read R01, R03 and R04 as dead. The nav is quiet over the hero (its Call is hidden there, because the hero carries its own) and the bar hides with it; the test now checks them mid-page.
+- **Background audit (§4: the background reacts to cursor and/or scroll), all 21 versions:**
+  - Hero: V1 the shingle wall itself plus 0.18 parallax; V2 rafters turn ±1.5°; V3 photo plate on pointer depth.
+  - Reviews: V1 the stars spring away from the pointer (kept as is); V2 shingle courses lift near the pointer; V3 sheen follows the pointer.
+  - Work: V1 tape glow and turning square; V2 hip pattern on pointer depth; V3 starter nails lift.
+  - Family: V1 spotlight and photo drift; V2 roofline depth plus scroll; V3 plywood deck window.
+  - How: V1 **added** a faint rain layer, drifting with scroll (data-sy) and leaning with pointer depth (data-pd); V2 scene layers on pointer depth; V3 the ladder leans.
+  - Towns: V1 ripples; V2 street plan, depth plus scroll; V3 weathervane and ridge depth.
+  - Call: V1 the drop leans; V2 dusk skyline on pointer depth; V3 **added**: the chimney smoke bends away from the pointer.
+- **Evidence (Phase 5 done-criteria):**
+  - `qa/scripts/compint.mjs` (log `qa/compint.log`) ran in every version of every section at 1440 and 375: 42/42 PASS, each recording cursor `none`, nail offset 0,0, companion visible, the right effect kind with 1–16 nodes, and a hover reaction where a control was in view (39 of 42; 3 had none in view).
+  - Variants: Hammer, Drop and House each mount their body. Off removes `cmp-on`, the cursor is `auto`, and there are no effect nodes. The H key cycles Off to House.
+  - Text field: cursor `text` and the nail hidden. Press sets the nail and release lifts it. Leaving the page drops `cmp-live`. Before the first move the cursor is `auto`.
+  - Touch device (375, hasTouch, isMobile): not mounted, cursor `auto`, 0 effect nodes, tel link present.
+  - Reduced motion: Off, cursor `auto`, 0 effect nodes.
+  - Errors 0 in every run.
+  - `sweep.mjs` after Phase 5, at 1440, 375 and 1440 reduced, all three version sets: overflow 0, errors none.
+  - Constellation still pixel-identical to e685bee at both widths.
