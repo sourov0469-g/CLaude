@@ -1,0 +1,99 @@
+# PROGRESS — Austin Pro homepage, BRIEF-V5 build
+
+Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
+
+## State
+- **Phase:** 0, setup (in progress)
+- **Branch:** `claude/intelligent-keller-0n8afi`
+- **Baseline commit:** e20237b (v4 delivery)
+
+## Phase 0 record
+
+1. **Base branch merge.** `git merge origin/claude/hrm-presentation-slides-xag1ax` returned "Already up to date"; it was merged earlier at 1f29406.
+2. **Raw skills.** Reassembled with `cat part-00 … part-06 > WEB-SKILLS.md` in the scratchpad.
+   - Size: 22,368,518 bytes ✓
+   - SHA-256: fe81307bc11935af8dc54870325aaccf917a0284d9ffeab6b7d833dec36d22b6 ✓
+3. **BANK-MAP.** Front matter, rules and Section Playbooks 1–10 read (lines 1–300). Shortlists per section are in `TRACEABILITY.md`.
+4. **Memory files.** `PROGRESS.md`, `SECTIONS.md` and `TRACEABILITY.md` created; the brief is saved as `BRIEF-V5.md`.
+5. **Baseline, on `siding/homepage-standalone.html` at e20237b.**
+
+   File size:
+
+   | Part | Bytes |
+   |---|---|
+   | Total | 4,339,867 |
+   | Media (base64 images in the asset table + data-URI font and masks) | 3,456,985 |
+   | of which the font | 130,832 |
+   | Code and markup (scripts, CSS, markup of all 30 versions, inline SVG, JSON data) | 882,882 |
+
+   The weights come from `scratchpad/v5/weigh.py`.
+
+   Tests:
+
+   | Suite | Run | Result |
+   |---|---|---|
+   | Interaction suite `ix4.js` | 1440×900, file:// | all PASS, console "ERRS: none" |
+   | Interaction suite `ix4.js` | 375×812, file:// | all PASS, console "ERRS: none" |
+   | v4 suite `qa4.js` (companion in all 30 versions at 1440, switchers, Motion toggle, touch at 375/320, reduced motion), file:// | — | 155/155 PASS |
+
+   Both suites ran on e20237b in this session, immediately before this brief.
+
+## Conflicts resolved under §2 (logged, then continued)
+
+**K1. 886 split.**
+- §3 writes "886 documented projects (312 siding + 574 roofing)", but in the same line requires the wording's meaning to stay identical to AUDIT-V3.md's record.
+- AUDIT-V3.md records the firm's own meaning: 312 documented projects with photos on the map + 574 more counted outside the frame or without photos = 886 (FACTS.md: siding documented 431; shingle 210; metal 31).
+- Resolution: the page keeps the AUDIT-V3 wording, so the arithmetic 312 + 574 = 886 is unchanged. Printing "312 siding + 574 roofing" would contradict FACTS.md's own counts and the AUDIT-V3 record that §3 points to.
+
+**K2. Hours and address strings.**
+- §3 gives "Monday–Friday 8–8, Saturday 8–6, Sunday 12–5" and "7801 N Lamar Blvd Suite C70, Austin, TX 78752" verbatim; earlier briefs banned en dashes in copy.
+- §3 and this prompt supersede them. All hours and address strings become the §3 text exactly.
+
+**K3. Weight baseline.**
+- §4 says the current file is "~3.98 MB"; that was the v3 size. The file actually delivered at Phase 0 is 4,339,867 B (v4).
+- The rule "must not exceed the current file's size" is applied to the measured Phase-0 file. I also aim to finish below it.
+
+**K4. Direction-aware reveals.**
+- Q40's mechanism uses ±100 px and 1.25 s expo; §4 F17 caps reveals at 0.15–0.3 s.
+- Under §2, the standard beats the reference's parameters: Q40's direction logic is kept and the duration is set to 0.3 s.
+
+**K5. "NO plain or fixed cursor" vs keeping the system cursor usable.**
+- The bank's standing rule (keep the system cursor usable) and pointer accessibility both apply.
+- Reading: the page never runs on a bare default cursor. A companion is always on for fine pointers, and the switcher offers 3 variants plus "Off" (which falls back to the v3 follower ring, still not a plain cursor). The OS arrow stays visible so pointing precision is never lost.
+
+**K6. "No trick repeated twice on the page".**
+- Applied to signature mechanisms (count-up, odometer, glint sweep, level bubble, chalk pluck, nail pop, stamp, marquee, crossfade, scan, morph, etc.). Each gets exactly ONE owner across all 30 versions and the page systems.
+- §4 itself asks for SVGs that draw themselves, so self-drawing strokes and fades are base techniques, not tricks. The owner table is in `TRACEABILITY.md`.
+
+**K7. "(512) 550-0000 in every version's contact paths".**
+- Reading: every version that offers a contact path (a book/call CTA) carries the number as a `tel:` link next to it.
+- The header and footer carry it on every page view, and the sticky header phone shows from 1100 px.
+
+**K8. Logo.**
+- The repo's `logo-color.webp` / `logo-white.webp` (and `logo-color.png`, 54,701 B) are conversions; their hashes differ from the live site's served files.
+- I downloaded the served files: `AP_HORIZONTAL-LOGO_COLOR-V2-p-1080.png` (24,829 B, sha256 64ab1b1b…eb54) and `AP_HORIZONTAL-LOGO_WHT-p-500.avif` (9,570 B, sha256 cb9c7306…dbdb). They are added to the repo untouched and embedded byte for byte.
+
+**K9. Page systems vs keeping versions.**
+- Changes that apply uniformly to every version are page systems, not patches of a kept version: the §3 fact strings, the direction-aware entrance system, the reaction kit, the companion, the fields and the dividers. They live in shared code.
+- A version is judged on its own mechanism, SVG, tricks, facts and design. A kept version's own design code is not edited; only shared helpers change.
+
+**K10. Data animations vs F17 reveal timing.**
+- F17 caps *reveal-level* animations at 0.15–0.3 s. Proof 1's count-up (1.4 s) and Near 1's month-by-month map build (1.8 s) are data animations: the number or the map IS the content being read, played once, never gating anything, with the final state shown immediately under reduced motion.
+- They keep their reference tempo; every section entrance (the reveal) is 0.3 s.
+
+## Open issues (carried from AUDIT-V3.md; each must close with a reason)
+
+- [ ] **F1 · 886 wording.** See K1.
+- [ ] **F2 · No Texas licence line in the first screen** (anatomy F11).
+- [ ] **F3 · Hero 1 blinds** (Q38/R6 Tier 3, a 1.2 s reveal on load).
+- [ ] **F4 · Services 1 and Hero 2 both end in a median price band.**
+- [ ] **F5 · Upload-your-house-photo flagship** (portfolio plan Site 6) is unbuilt.
+- [ ] **F6 · Built 1 and Built 3 both technical drawings.** Carried from AUDIT-V3.
+- [ ] **F7 · Near 1 month-by-month build** (2.3 s data animation on scroll).
+- [ ] **F8 · Lenis kept** (≈18 KB).
+
+## Failed checks (kept visible until they pass)
+(none yet)
+
+## Log
+- Phase 0 started. Brief saved; baseline recorded; conflicts K1–K9 logged.

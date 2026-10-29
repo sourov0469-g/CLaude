@@ -136,3 +136,44 @@ packer only (`src/single.py`); the site's own image files are unchanged.
    is the firm's own map being drawn; kept at reveal level.
 8. **Lenis** could be dropped for about 18 KB (the builder brief notes this); kept because S1320 asks for exactly one engine and
    the desktop scroll feel is part of the brief.
+
+---
+
+## V5 re-audit (BRIEF-V5), 29 Oct 2026
+
+Governing prompt: `BRIEF-V5.md`. The full per-version rows (reference + repo path, mechanism, adaptations, criteria, verification) are in `TRACEABILITY.md`; this section is the plan and the Phase 1 verdict record. Conflicts K1–K10 are in `PROGRESS.md`.
+
+### Plan
+
+Every version is judged on the §4 criteria, cited by code:
+- **R** reference traceability;
+- **S** SVG richness;
+- **T** trick unique on the page (one owner per signature mechanism);
+- **F** facts exact (§3, no review count other than 474);
+- **M** F17 motion;
+- **D** a different design from its siblings;
+- **P** template feel;
+- **3D** where earned.
+
+Page systems (entrance timing, reaction kit, companion, cursor effect, section field, divider) are judged once in Phase 3 (K9).
+
+### Phase 1 verdicts (recorded before any rebuild)
+
+| Section | v1 | v2 | v3 |
+|---|---|---|---|
+| Hero | **REBUILT** · Q95 Masked Heading · M (1.2 s blinds on load), T (2nd before/after device, nail pop) | **REBUILT** · Stronghold + Neil Kelly · T (tape blade = Services 3, icon redraw = Services 2), F4 price overlap | **REBUILT** · Feldco + R33 · T (count-up = Proof 1, glint = Proof field), M (5 s autoplay crossfade, a 2nd carousel) |
+| Proof | KEPT · #317 + F12 + Q165 · R S T F D P 3D | KEPT · Georgia CG table · R S T F D P | KEPT · S1327 + #292 · R S T F D P |
+| Services | **REBUILT** · Neil Kelly + BLK 531 · F4 price overlap, T (glints, level) | KEPT · Q571 + Q162 · R S T F D P | KEPT · Codrops timeline + R38 · R S T F D P |
+| Work | KEPT · R28 draggable pairs (the signature interactive) · R S T F M D P | KEPT · S0468 blueprint · R S T F M D P | KEPT · S1324 + Q125 lens · R S T F D P |
+| Built | KEPT · S0526 + S0504 · R S T F D P 3D (F6 closes) | KEPT · S1322 / R45 sticky stack · R S T F M D P | KEPT · S0361 + S1361 · R S T F D P |
+| Colour | **REBUILT** · portfolio plan Site 6 flagship + BLK 531 + R36 · F5 (flagship unbuilt; v4 Dock a variant of the same repaint) | KEPT · R30 + Stronghold comparison · R S T F D P | KEPT · Q48 grid-to-fullscreen · R S T F D P |
+| Near you | KEPT · firm 312-point map + S1323 · R S T F D P (K10 / F7) | KEPT · West Shore matrix · R S T F D P | KEPT · KBF fly-in · R S T F D P |
+| Reviews | **REBUILT** · Q161 marquee · F ("30 review excerpts") | **REBUILT** · R29 + S1329 · F ("1 of 8") | **REBUILT** · #300 True Focus + F13 · F (per-name counts, "All 30", "4 of 9 reviews") |
+| Money | **REBUILT** · firm financing example + F10 · T (spirit level = Work 1) | KEPT · F7e distribution · R S T F D P | **REBUILT** · R24 + FACTS Offers · T (odometer = Money 1, stamp = Proof 3) |
+| Book | KEPT · Rogers + S1364 · R S T F D P | KEPT · Mad City + S1442 / S0661 · R S T F D P | KEPT · #413 Tequila · R S T F D P |
+
+**Totals: 20 KEPT, 10 REBUILT.** The rebuilds are Hero 1, 2, 3; Services 1; Colour 1; Reviews 1, 2, 3; Money 1, 3.
+
+Every section still has three different references (listed at the foot of `TRACEABILITY.md`).
+
+Final verdicts and verification evidence are appended below as each section passes.

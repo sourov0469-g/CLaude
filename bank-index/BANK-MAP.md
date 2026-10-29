@@ -7474,3 +7474,16 @@ Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> —
 - **Q165 Depth Text** — PICKED-FOR: Proof 1 count signs — RESULT: **ADAPTED** — 12 text-shadow layers turning from the pointer (synced with the count-up), still pose otherwise.
 - **125 square lens** — PICKED-FOR: Work 3 lens — RESULT: **ADAPTED** — square window pane with muntins replaces the round lens.
 - Version-specific trade SVGs added on 25 of 30 versions (list in AUDIT-V4); Work 2, Built 1, Built 3 and Near 3 kept their own drawings; Services 1 gained part reactions.
+
+## v5 pass (29 Oct 2026): BRIEF-V5 re-audit (see TRACEABILITY.md, siding/AUDIT-V3.md "V5 re-audit")
+- **[BANK] Q95 Masked Heading** — PICKED-FOR: Hero V1 "Window letters" — RESULT: **NEW BUILD (Phase 2)** — replaces the Q38/R6 blinds (F17: autoplay reveal on load).
+- **[BANK] Stronghold Roofing + [BANK] Neil Kelly** — PICKED-FOR: Hero V2 — RESULT: **REBUILT (Phase 2)** — funnel step kept; tape blade and icon redraw removed (owned by Services 3 / Services 2).
+- **[BANK] Feldco + builder brief R33** — PICKED-FOR: Hero V3 — RESULT: **REBUILT (Phase 2)** — visitor-picked poster frames, no autoplay, static trade-unit stats.
+- **[BANK] Neil Kelly + [BANK] 531 BLK** — PICKED-FOR: Services V1 — RESULT: **REBUILT (Phase 2)** — product facts per part, no price (closes F4).
+- **portfolio-site-plan Site 6 FLAGSHIP + [BANK] 531 BLK + R36** — PICKED-FOR: Colour V1 "Try it on your house" — RESULT: **NEW BUILD (Phase 2)** — closes F5.
+- **[BANK] Q161 seamless marquee** — PICKED-FOR: Reviews V1 — RESULT: **REBUILT (Phase 2)** — no counts.
+- **R29 + ⟦S1329⟧** — PICKED-FOR: Reviews V2 — RESULT: **REBUILT (Phase 2)** — pane pips replace "1 of 8".
+- **[BANK] 300 True Focus + anatomy F13** — PICKED-FOR: Reviews V3 "The crew" — RESULT: **NEW BUILD (Phase 2)** — replaces #321 filter pills with counts.
+- **Firm financing example + anatomy F10** — PICKED-FOR: Money V1 — RESULT: **REBUILT (Phase 2)** — month-pane term grid replaces the spirit level.
+- **R24 + FACTS Offers** — PICKED-FOR: Money V3 — RESULT: **REBUILT (Phase 2)** — strike-and-rewrite total; no odometer, no stamp.
+- All other 20 versions: reference re-verified in the Atlas, **KEPT** (rows in TRACEABILITY.md).
