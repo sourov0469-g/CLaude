@@ -210,7 +210,7 @@ def wall_assembly(id_='wall', az=58, el=30, W=760, H=560, pad=28):
         off = 0.06 * (c + 1)                       # each course rides out by the board below
         y1 = wy + 0.12 + off + THICK
         butt = seg(cam, (x0, y1 + 0.02, z0), (WALL_W + 0.2, y1 + 0.02, z0), 'bt')
-        sid.append(f'<g class="crs" data-c="{c}">' + box(cam, x0, wy + 0.12 + off, z0, WALL_W + 0.2 - x0, THICK, BOARD, cls='hi', bevel=0.15) + butt + '</g>')
+        sid.append(f'<g class="course" data-c="{c}">' + box(cam, x0, wy + 0.12 + off, z0, WALL_W + 0.2 - x0, THICK, BOARD, cls='hi', bevel=0.15) + butt + '</g>')
     g['siding'] = ''.join(sid)
 
     # corner trim board (1x4) wrapping the right end

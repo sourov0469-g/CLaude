@@ -31,6 +31,7 @@
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const ym = m => `${MONTHS[m % 100 - 1]} 20${String(Math.floor(m / 100)).padStart(2, '0')}`;
   const hdH = () => ($('.hd') || { offsetHeight: 0 }).offsetHeight;
+  const AU = p => (window.__apUrl ? window.__apUrl(p) : p);   // single-file build: asset table blob URLs
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const CREW_RX = /\b(Kevin(?: Harris)?|Garret{1,2}|Tracy|Paul Hale|Paul Schantz(?:'s)?|Taylor(?: Anderson)?|Jake|Jerry|Maria|Shorty)\b/g;
   const markNames = s => esc(s).replace(CREW_RX, '<mark>$1</mark>');
@@ -139,18 +140,19 @@
   /* ---------- odometer: only changed digits roll, 260 ms (S0652) ---------- */
   function Odo(el) {
     let cur = '';
-    const strip = c => `<span class="oc"><span class="os" style="transform:translateY(-${c * 10}%)">${'0123456789'.split('').map(n => `<span>${n}</span>`).join('')}</span></span>`;
+    const strip = c => `<span class="oc" aria-hidden="true"><span class="os" style="transform:translateY(-${c * 10}%)">${'0123456789'.split('').map(n => `<span>${n}</span>`).join('')}</span></span>`;
     return text => {
       if (text === cur) return;
       if (text.length !== cur.length || !motionOK()) {
-        el.innerHTML = [...text].map(c => /\d/.test(c) ? strip(c) : `<span class="ox">${esc(c)}</span>`).join('');
+        el.innerHTML = [...text].map(c => /\d/.test(c) ? strip(c) : `<span class="ox" aria-hidden="true">${esc(c)}</span>`).join('') + `<span class="sr-only">${esc(text)}</span>`;
       } else {
+        el.lastElementChild.textContent = text;
         const slots = el.children;
         [...text].forEach((c, i) => {
           if (c === cur[i]) return;
           const slot = slots[i];
           if (/\d/.test(c) && slot && slot.classList.contains('oc')) slot.firstChild.style.transform = `translateY(-${c * 10}%)`;
-          else if (slot) slot.outerHTML = /\d/.test(c) ? strip(c) : `<span class="ox">${esc(c)}</span>`;
+          else if (slot) slot.outerHTML = /\d/.test(c) ? strip(c) : `<span class="ox" aria-hidden="true">${esc(c)}</span>`;
         });
       }
       cur = text;
@@ -257,15 +259,17 @@
     riseIn($$('.lead, .ctas', r), { delay: 0.5 });
     if (!motionOK() || !window.DrawSVGPlugin) { set(1); return; }
     set(0);
-    const tl = G.timeline({ delay: 0.25 });
+    // the drawing is written at a readable pace, then played at 1.9x so the whole intro lands in about 3.3 s
+    const draw = G.timeline();
     ['grade', 'wall', 'siding', 'wingc', 'trim', 'windows', 'gable', 'roof', 'wing', 'doors', 'deck'].forEach((n, i) => {
       const g = $(`[data-g="${n}"]`, svg); if (!g) return;
-      let paths = $$('path', g);
-      if (n === 'siding' || n === 'wingc') paths = paths.slice();        // generated bottom-up already
-      tl.from(paths, { drawSVG: '0%', duration: n === 'siding' ? 0.35 : 0.55, ease: 'power2.inOut', stagger: n === 'siding' || n === 'wingc' ? 0.03 : 0.04 }, i === 0 ? 0 : '-=0.42');
+      const paths = $$('path', g);                                      // courses are generated bottom-up already
+      draw.from(paths, { drawSVG: '0%', duration: n === 'siding' ? 0.35 : 0.55, ease: 'power2.inOut', stagger: n === 'siding' || n === 'wingc' ? 0.03 : 0.04 }, i === 0 ? 0 : '-=0.42');
     });
+    draw.timeScale(1.9);
+    const tl = G.timeline({ delay: 0.25 }).add(draw);
     const st = { p: 0 };
-    tl.to(st, { p: 1, duration: 1.4, ease: 'power2.inOut', onUpdate: () => set(st.p) }, '+=0.25');
+    tl.to(st, { p: 1, duration: 1.1, ease: 'power2.inOut', onUpdate: () => set(st.p) }, '+=0.15');
     ['roof', 'gable', 'windows', 'trim'].forEach((n, k) => { const g = $(`[data-g="${n}"]`, svg); if (g) g.dataset.depth = [0.6, 0.45, 0.3, 0.2][k]; });
     if (mqDesk.matches && ST) ST.create({ trigger: r, start: 'top top', end: 'bottom top', onUpdate: self => { if (tl.progress() === 1) set(1 - self.progress * 0.9); } });
   };
@@ -378,7 +382,7 @@
       G.to(el, { scrambleText: { text: final, chars: '0123456789', revealDelay: 0.3, speed: 0.5 }, duration: 1.3, delay: k * 0.12, scrollTrigger: once(el, 'top 92%') });
     });
     if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: ease.x, scrollTrigger: once(ring, 'top 92%') });
-    G.from($$('.creds li, .p1-foot .btn-alt', r), { y: 24, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
+    G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
     if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   };
   /* PROOF 2: the wall of jobs is a field: tiles near the pointer lift and turn toward it, under 4 deg (S1321
@@ -387,8 +391,13 @@
     const tiles = $$('.wt', r).filter(t => t.offsetParent !== null), wall = $('.wall', r);
     if (motionOK()) {
       G.from(tiles, { autoAlpha: 0, scale: 0.9, duration: 0.7, ease: ease.out, stagger: { each: 0.014, from: 'center', grid: 'auto' }, scrollTrigger: once(r, 'top 75%') });
-      G.from($$('.creds-iso li', r), { y: -40, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.cred-iso', r), 'top 90%') });
+      G.from($$('.creds-iso img', r), { autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.cred-iso', r), 'top 90%') });
     }
+    // the plane and the names answer each other: point at a badge and its name lights; point at a name and its badge lifts
+    const badges = $$('.creds-iso li', r), names = $$('.ci-names li', r);
+    const lit = k => { badges.forEach((x, i) => x.classList.toggle('is-up', i === k)); names.forEach((x, i) => x.classList.toggle('on', i === k)); };
+    badges.forEach((x, k) => { b.on(x, 'pointerenter', () => lit(k)); b.on(x, 'pointerleave', () => lit(-1)); });
+    names.forEach((x, k) => { b.on(x, 'pointerenter', () => lit(k)); b.on(x, 'pointerleave', () => lit(-1)); });
     if (!mqFine.matches || !motionOK()) return;
     const Q = tiles.map(t => ({ t, rx: G.quickTo(t, 'rotationX', { duration: 0.5, ease: 'power3' }), ry: G.quickTo(t, 'rotationY', { duration: 0.5, ease: 'power3' }), z: G.quickTo(t, 'z', { duration: 0.5, ease: 'power3' }) }));
     let rects = [];
@@ -425,7 +434,7 @@
       out('trade').textContent = d0.trade; out('med').textContent = d0.med; out('cnt').textContent = d0.cnt;
       const ex = out('extra'); ex.hidden = !d0.extra; ex.textContent = d0.extra;
       const im = out('img'), ph = im.parentElement;
-      if (d0.img) { im.src = d0.img; im.alt = d0.cap; ph.hidden = false; if (window.__apAsset) window.__apAsset(ph); } else ph.hidden = true;
+      if (d0.img) { im.src = AU(d0.img); im.alt = d0.cap; ph.hidden = false; } else ph.hidden = true;
       book.dataset.trade = d0.trade; book.textContent = `Book a ${d0.trade.toLowerCase()} inspection`;
       if (anim && motionOK()) {
         G.fromTo([out('trade'), out('med')], { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.35, ease: ease.out, stagger: 0.05, overwrite: true });
@@ -467,7 +476,7 @@
     rows.forEach(row => b.on(row, 'pointerenter', () => {
       const s = row.dataset.img;
       if (!s) { G.to(peek, { autoAlpha: 0, duration: 0.2 }); return; }
-      if (s !== src) { pim.src = window.__apUrl ? window.__apUrl(s) : s; src = s; }
+      if (s !== src) { pim.src = AU(s); src = s; }
       G.fromTo(pim, { scale: 1 }, { scale: 1.06, duration: 0.7, ease: ease.out });
       G.to(peek, { autoAlpha: 1, scale: 1, duration: 0.3, ease: ease.out });
     }));
@@ -503,8 +512,9 @@
     }
     const setV = (v, anim) => {
       v = clamp(v, 0, 50000);
-      if (anim && motionOK()) G.to(strip, { x: xOf(v), duration: 0.35, ease: ease.out, overwrite: true, onUpdate: () => upd(vOf(G.getProperty(strip, 'x'))), onComplete: () => drag && drag.update() });
-      else { G.set(strip, { x: xOf(v) }); upd(v); if (drag) drag.update(); }
+      upd(v);                               // the value commits at once; only the tape travels (keys can stack)
+      if (anim && motionOK()) G.to(strip, { x: xOf(v), duration: 0.35, ease: ease.out, overwrite: true, onComplete: () => drag && drag.update() });
+      else { G.set(strip, { x: xOf(v) }); if (drag) drag.update(); }
     };
     b.on(tape, 'keydown', e => {
       const st = e.shiftKey ? 5000 : 500, m = { ArrowRight: st, ArrowUp: st, ArrowLeft: -st, ArrowDown: -st };
@@ -514,7 +524,7 @@
     });
     b.ro(band, () => { if (drag) drag.applyBounds({ minX: xOf(50000), maxX: xOf(0) }); setV(val); });
     setV(15000);
-    if (motionOK()) { const o = { v: 0 }; G.to(o, { v: 15000, duration: 1.6, ease: ease.x, scrollTrigger: once(tape, 'top 85%'), onStart: () => setV(0), onUpdate: () => setV(o.v) }); }
+    if (motionOK()) { const o = { v: 0 }; G.to(o, { v: 15000, duration: 1.6, ease: ease.x, scrollTrigger: once(tape, 'top 85%'), onStart: () => setV(0), onUpdate: () => { G.set(strip, { x: xOf(o.v) }); upd(o.v); }, onComplete: () => drag && drag.update() }); }
   };
   /* WORK 1: drag the divider; a flick past 300 px/s or a release 50 px from an edge commits to that side (S0197);
      arrows step 5 % (Shift 10 %); pairs change through the logo window panes. */
@@ -542,7 +552,7 @@
     if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); }
     let cur = 0, busy = false;
     const fill = p => {
-      A.src = `assets/img/h/work-${p.id}-a-1000.webp`; A.alt = p.aa; B.src = `assets/img/h/work-${p.id}-b-1000.webp`; B.alt = p.ab;
+      A.src = AU(`assets/img/h/work-${p.id}-a-1000.webp`); A.alt = p.aa; B.src = AU(`assets/img/h/work-${p.id}-b-1000.webp`); B.alt = p.ab;
       $('.cmp-price', info).textContent = p.band;
       $('.cmp-what', info).innerHTML = `<b>${esc(p.bl)}, ${esc(p.place)}</b><span>${esc(p.what)}, ${esc(p.when)}. <a class="tlink" href="${esc(p.href)}" target="_blank" rel="noopener">Job file</a></span>`;
       if (window.__apAsset) window.__apAsset(fig);
@@ -572,8 +582,8 @@
     const paint = () => { fig.style.setProperty('--s1', S.a + '%'); fig.style.setProperty('--s2', S.c + '%'); fig.style.setProperty('--scan', S.s + '%'); };
     const load = k => {
       const p = P[k];
-      B.src = `assets/img/h/work-${p.id}-b-1000.webp`; B.alt = p.ab; Pl.src = `assets/img/h/bp-${p.id}-1000.webp`;
-      A.src = `assets/img/h/work-${p.id}-a-1000.webp`; A.alt = p.aa;
+      B.src = AU(`assets/img/h/work-${p.id}-b-1000.webp`); B.alt = p.ab; Pl.src = AU(`assets/img/h/bp-${p.id}-1000.webp`);
+      A.src = AU(`assets/img/h/work-${p.id}-a-1000.webp`); A.alt = p.aa;
       if (window.__apAsset) window.__apAsset(fig);
       dimT.textContent = `${p.bl} · ${p.band}`.toUpperCase();
       kEl.textContent = '0' + (k + 1); nmEl.textContent = p.place; fxEl.textContent = `${p.what}, ${p.when}. ${p.bl} ${p.band}.`;
@@ -620,7 +630,10 @@
       b.on(window, 'blur', () => { tr = 0; kick(); });
       b.add(() => cancelAnimationFrame(raf));
     });
-    if (motionOK()) G.from($$('.sp', r), { y: 40, autoAlpha: 0, duration: 0.8, ease: ease.out, stagger: 0.08, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
+    if (!motionOK()) return;
+    G.from($$('.sp-fig, .sp-cap', r), { y: 40, autoAlpha: 0, duration: 0.8, ease: ease.out, stagger: 0.06, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
+    // S1321 layered scroll: the three columns travel at different speeds, so the pairs sit at different depths
+    if (mqDesk.matches && ST) $$('.sp', r).forEach((li, k) => { const s = [0.5, 1.2, 0.8][k % 3] * 36; G.fromTo(li, { y: s }, { y: -s, ease: 'none', scrollTrigger: { trigger: $('.spots', r), start: 'top bottom', end: 'bottom top', scrub: 1.2 } }); });
   };
 
   /* BUILT 1: the wall, taken apart (S0526 exploded view): one spring per layer, stiffness 64, drag 14.2, 4 sub-steps,
@@ -715,7 +728,7 @@
     };
     const words = () => {
       const t = Math.round(st.t * 42);
-      return st.g > 0.5 ? `Glass unit out of the sash · 3/4 in dual-pane` : t > 3 ? `Sash tilted out ${t} degrees · 3-1/4 in multi-chambered vinyl frame` : `Closed · 3-1/4 in multi-chambered vinyl frame · 3/4 in dual-pane glass`;
+      return st.g > 0.5 ? `Glass unit out of the sash: 3/4 in dual-pane` : t > 3 ? `Sash tilted out ${t} degrees, in a 3-1/4 in multi-chambered vinyl frame` : `Closed: 3-1/4 in multi-chambered vinyl frame, 3/4 in dual-pane glass`;
     };
     let said = '';
     const tick = now => {
@@ -751,8 +764,11 @@
      MorphSVG of one outline (S0184, 0.8 s power2.inOut); a spec row in focus or under the pointer turns its
      dimension red and draws it again (accent only on the active detail). */
   V.built3 = (r, b) => {
-    const svg = $('svg.sheet', r), morph = $('.sh-morph', svg), lap = $('.sh-lap', svg), bb = $('.sh-bb', svg), rows = $$('.spec-r', r);
+    const svg = $('svg.dwg', r), morph = $('.sh-morph', svg), lap = $('.sh-lap', svg), bb = $('.sh-bb', svg), rows = $$('.spec-r', r);
+    // S0361 conflict resolved: phones get their own composition (a tighter viewBox), never a sideways scroll
+    const frameFor = style => (mqDesk.matches ? '0 0 620 540' : style === 'lap' ? '196 30 330 500' : '30 150 580 250');
     const setStyle = (style, anim) => {
+      svg.setAttribute('viewBox', frameFor(style));
       lap.toggleAttribute('hidden', style !== 'lap'); bb.toggleAttribute('hidden', style !== 'bb');
       rows.forEach(rw => { rw.hidden = rw.dataset.set !== style; });
       const to = style === 'lap' ? morph.dataset.lap : morph.dataset.bb;
@@ -761,6 +777,7 @@
       if (anim && motionOK()) G.from($$('.dim, .xl, .cl, .vt, .vs, .sh-face', style === 'lap' ? lap : bb), { autoAlpha: 0, duration: 0.4, stagger: 0.03, delay: 0.5 });
     };
     radios($('.b3x-seg', r), b, it => setStyle(it.dataset.style, true));
+    svg.setAttribute('viewBox', frameFor('lap'));
     const hi = (code, on) => {
       $$(`.dim[data-code="${code}"]`, svg).forEach(dm => { dm.classList.toggle('on', on); if (on && motionOK() && window.DrawSVGPlugin) G.fromTo($$('path', dm), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 0.45, ease: 'power2.out', overwrite: true }); });
       rows.forEach(rw => rw.classList.toggle('on', on && rw.dataset.code === code));

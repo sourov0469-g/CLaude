@@ -114,7 +114,7 @@ def svg():
             '<path d="M0 0L10 5L0 10Z" class="ah"/></marker>'
             '<pattern id="sh-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V6" class="ht"/></pattern></defs>')
     morph = f'<path class="sh-morph" d="{"".join(lap_shape)}" data-lap="{"".join(lap_shape)}" data-bb="{"".join(bb_shape)}"/>'
-    return (f'<svg class="sheet" viewBox="0 0 {VW} {VH}" role="img" aria-label="Dimensioned section of James Hardie lap siding and of board and batten">'
+    return (f'<svg class="dwg" viewBox="0 0 {VW} {VH}" role="img" aria-label="Dimensioned section of James Hardie lap siding and of board and batten">'
             f'{defs}<g class="sh-lap">{lap}</g><g class="sh-bb" hidden>{bb}</g>{morph}</svg>')
 
 

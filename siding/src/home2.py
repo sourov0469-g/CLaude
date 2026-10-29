@@ -261,7 +261,10 @@ def proof2():
     <p><b class="num">4.9</b> on 474 Google reviews. 177 before-and-after pairs published.</p>
     {alt_btn('#reviews', 'Read what they wrote')}
   </div>
-  <div class="cred-iso" aria-label="Certified, accredited and awarded">{creds('creds creds-iso')}</div>
+  <div class="cred-iso">
+    <div class="ci-say" aria-hidden="true"><p class="ci-h">Certified, accredited and awarded</p><ol class="ci-names">{''.join(f'<li data-k="{k}">{e(n)}</li>' for k, (f, n, w, h) in enumerate(CREDS))}</ol></div>
+    {creds('creds creds-iso')}
+  </div>
 </div>'''
 
 
@@ -379,7 +382,7 @@ def work2():
     data = json.dumps([dict(id=q['id'], place=q['place'], when=q['when'], what=q['what'], band=q['band'], bl=q['bl'], ab=q['ab'].replace('—', ','), aa=q['aa'].replace('—', ',')) for q in PAIRS6], ensure_ascii=False).replace('</', '<\\/')
     p = PAIRS6[0]
     return f'''<div class="v work-2" data-tone="ground">
-  <div class="bp-head"><h2 class="h2x" data-split>Survey, draw, rebuild</h2><p class="bp-sub">Each job as the crew sees it: the old house, the drawing, the finished wall.</p></div>
+  <div class="bp-head"><h2 class="h2x" data-split>Survey, draw, rebuild</h2><p class="bp-sub">The old house, a drawing traced from the finished photo, then the finished wall.</p></div>
   <figure class="bp-fig" data-cur="view">
     <img class="bp-b" src="{H}work-{p['id']}-b-1000.webp" width="1000" height="625" alt="{alt(p['ab'])}" loading="lazy" decoding="async">
     <img class="bp-p" src="{H}bp-{p['id']}-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async">
@@ -448,7 +451,7 @@ def built2():
     </div>
     <figure class="b2x-fig" data-cur="drag" data-hairline>
       <svg class="hw" viewBox="0 0 600 480" role="img" aria-label="A replacement window drawn in one line: frame, tilting sash and the dual-pane glass unit"></svg>
-      <p class="hw-read num" aria-live="polite" data-hw-read>3-1/4 in multi-chambered vinyl frame · 3/4 in dual-pane glass</p>
+      <p class="hw-read num" aria-live="polite" data-hw-read>Closed: 3-1/4 in multi-chambered vinyl frame, 3/4 in dual-pane glass</p>
     </figure>
   </div>
 </div>'''
