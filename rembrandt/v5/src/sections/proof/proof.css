@@ -70,6 +70,10 @@
 @media (hover:hover){.pv3-btn:hover{background:rgb(255 255 255/.12);border-color:#fff}}
 .pv3-btn:active{scale:.96}
 html[data-motion="reduced"] .pv3-ctl{display:none}
+/* reduced motion: the designed still sets every credential whole, wrapped like courses, instead of a cut-off train */
+html[data-motion="reduced"] .pv3-row{flex-wrap:wrap;white-space:normal;row-gap:.35em;font-size:clamp(2rem,4.6vw,5rem);padding:0 var(--gutter)}
+html[data-motion="reduced"] .pv3-it{display:inline-block;flex:0 1 auto;max-width:100%;text-wrap:balance}
+html[data-motion="reduced"] .pv3-it>svg:not(.pv3-cap){display:inline-block;vertical-align:baseline}
 
 /* ---------- V7 upgrades (PLAN-V7 §6 Reviews). v1 above is untouched. */
 /* v2: the rules are roofer's chalk lines, snapped taut as each row arrives; a chalk-line reel feeds them; faint shingle

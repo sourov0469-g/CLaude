@@ -34,6 +34,7 @@
 .tw1-list button .mi{font-weight:600;color:var(--muted);margin-left:6px}
 @media (hover:hover){.tw1-list button:hover{background:var(--sky)}}
 .tw1-list button[aria-pressed="true"]{background:var(--sun)}
+.tw1-list button[aria-pressed="true"] .mi{color:var(--ink)}
 .tw1-list button.is-press{animation:tw-pop .3s var(--ease-spring)}
 @keyframes tw-pop{0%{scale:.92}100%{scale:1}}
 @media (max-width:900px){.tw1-grid{grid-template-columns:1fr}.tw1-mapwrap{max-height:none}}
