@@ -1344,3 +1344,38 @@ html.has-pal .cur { display: none; }
 .rx-lap1 { opacity: calc(.12 + var(--k, 0) * .6); transform: translateY(calc(var(--k, 0) * -3px)); }
 .rx-lap2 { opacity: calc(.06 + var(--k, 0) * .3); transform: translateY(calc(var(--k, 0) * 1.5px)); }
 html:not(.motion) .rx, html:not(.motion) .pal { display: none; }
+
+/* ---------- v4 Hero (PLAN §3 Hero) ---------- */
+.h1-lap { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.h1-c { opacity: 0; }
+.h1-sh { fill: #000; opacity: .32; }
+.h1-hi { fill: #fff; opacity: .28; }
+.h1-n { fill: #D9D6CF; stroke: #2a2a28; stroke-width: 1; }
+html:not(.motion) .h1-lap { display: none; }
+.h2c { position: relative; }
+.h2c-ico { position: absolute; top: 10px; right: 10px; width: 76px; height: 50px; padding: 0; overflow: visible; }
+.h2c-ico .i-bg { fill: var(--sheet); stroke: var(--stone); }
+.h2c-ico path { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+.h2c-ico .i-sh { stroke-width: .8; stroke: var(--line); }
+.h2c-ico .i-trim { stroke-width: 3; }
+.h2c-ico .i-paint { stroke: var(--red); stroke-width: 4; }
+@keyframes icoDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (hover: hover) and (pointer: fine) { html.motion .h2c:hover .h2c-ico path { animation: icoDraw .5s cubic-bezier(.4, 0, .2, 1) both; } html.motion .h2c:hover .h2c-ico path:nth-of-type(2) { animation-delay: .06s; } html.motion .h2c:hover .h2c-ico path:nth-of-type(3) { animation-delay: .12s; } }
+.h2r-tape { display: block; width: min(100%, 460px); height: auto; overflow: visible; }
+.tp-blade { fill: #F2C230; stroke: #161616; stroke-width: 1.2; }
+.tp-band { fill: var(--red); opacity: .85; transition: x .28s cubic-bezier(.4, 0, .2, 1), width .28s cubic-bezier(.4, 0, .2, 1); }
+.tp-ticks path { stroke: #161616; stroke-width: 1; }
+.tp-lab text { font: 700 9px var(--f); fill: #161616; text-anchor: middle; }
+.tp-hook { stroke: #161616; stroke-width: 4; }
+.h3-case { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.h3-casing { fill: none; stroke: var(--sheet); stroke-width: 26; }
+.h3-bead { fill: none; stroke: rgba(0, 0, 0, .35); stroke-width: 32; }
+.h3-ros rect { fill: var(--sheet); stroke: rgba(0, 0, 0, .25); }
+.h3-ros circle { fill: none; stroke: var(--stone); stroke-width: 1.5; }
+.h3-glint { opacity: 0; mix-blend-mode: screen; }
+.h3-stats li { position: relative; isolation: isolate; overflow: hidden; }
+.h3-board { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.bd-grain { fill: none; stroke: #fff; stroke-opacity: .12; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.bd-sh { fill: #000; opacity: .18; }
+.bd-hi { fill: #fff; opacity: .22; }
+.bd-n { fill: #F6C9C9; opacity: .9; }

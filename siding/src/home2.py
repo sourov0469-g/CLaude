@@ -176,6 +176,17 @@ def pmt(P, apr=0.0799, n=120):
     return P * r / (1 - (1 + r) ** -n)
 
 
+def h1_lap():
+    """one lap shadow line + highlight + two nail heads per course (30 courses, viewBox 1000 x 900)"""
+    g = ''
+    for k in range(30):
+        y = (k + 1) * 30
+        n1, n2 = 70 + (k * 137) % 400, 520 + (k * 211) % 400
+        g += (f'<g class="h1-c"><rect class="h1-sh" x="0" y="{y - 2.6}" width="1000" height="2.6"/><rect class="h1-hi" x="0" y="{y - 4}" width="1000" height="1"/>'
+              f'<ellipse class="h1-n" cx="{n1}" cy="{y - 9}" rx="3.2" ry="3.2"/><ellipse class="h1-n" cx="{n2}" cy="{y - 9}" rx="3.2" ry="3.2"/></g>')
+    return f'<svg class="h1-lap" viewBox="0 0 1000 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">{g}</svg>'
+
+
 def hero1():
     """Q38 SVG mask transitions / R6 blinds (30 slits, stagger 0.02) over a true before/after pair"""
     rb, ra = f'{H}../pairs/robroy-hb', f'{H}../pairs/robroy-ha'
@@ -185,6 +196,7 @@ def hero1():
     <div class="h1-photo" data-depth="-1">
       <img class="h1-b" src="{rb}-1440.webp" srcset="{rb}-760.webp 760w, {rb}-1440.webp 1440w" sizes="100vw" width="1440" height="900" alt="" fetchpriority="high">
       <div class="h1-courses" aria-hidden="true">{strips}</div>
+      {h1_lap()}
     </div>
     <figcaption class="pchip h1-chip" data-depth="0.42"><span>Rob Roy, Austin, {ROB['when']}</span><b>{e(ROB['bl'])} {band(ROB['band'])}</b></figcaption>
     <button class="h1-replay btn btn-glass btn-sm" type="button" data-cur="link">Re-side it again</button>
@@ -194,7 +206,23 @@ def hero1():
 
 
 H2_TRADES = ['siding', 'windows', 'shingle-roofing', 'exterior-painting']
+H2_ICO = {   # technical line drawings of each trade, 64 x 40 (PLAN H2): lap courses, a double-hung sash, three-tab rows, brush over boards
+    'siding': '<path d="M6 4V38M58 4V38" class="i-trim"/><path d="M6 10H58M6 18H58M6 26H58M6 34H58"/><path class="i-sh" d="M6 12H58M6 20H58M6 28H58M6 36H58"/>',
+    'windows': '<path d="M19 3H45V37H19Z"/><path d="M19 20H45M32 3V20M22 23H42V34H22Z"/><path class="i-trim" d="M14 38H50"/>',
+    'shingle-roofing': '<path d="M3 8H61M3 18H61M3 28H61M3 38H61"/><path d="M13 8V18M33 8V18M53 8V18M23 18V28M43 18V28M13 28V38M33 28V38M53 28V38"/>',
+    'exterior-painting': '<path d="M3 12H61M3 22H61M3 32H61"/><path class="i-paint" d="M6 27C16 24 24 30 34 26"/><path d="M40 3L55 18M37 15L46 24L41 31L30 24Z"/>'
+}
 BOOK_AS = {'siding': 'Siding', 'windows': 'Windows', 'shingle-roofing': 'Shingle roofing', 'exterior-painting': 'Exterior painting'}
+
+
+def h2_tape(lo, hi):
+    """a tape blade from $0 to $50k (the firm's own chart axis); the median band is the red run on it"""
+    x = lambda v: 10 + v / 50 * 480
+    t = ''.join(f'<path d="M{x(v):.1f} 8V{18 if v % 5 else 24}"/>' for v in range(51))
+    lab = ''.join(f'<text x="{x(v):.1f}" y="36">{v}k</text>' if v else f'<text x="{x(v):.1f}" y="36">$0</text>' for v in range(0, 51, 10))
+    return (f'<svg class="h2r-tape" viewBox="0 0 500 44" aria-hidden="true" focusable="false"><rect class="tp-blade" x="4" y="4" width="492" height="36" rx="3"/>'
+            f'<rect class="tp-band" data-f="band" x="{x(lo):.1f}" y="6" width="{x(hi) - x(lo):.1f}" height="20"/><g class="tp-ticks">{t}</g><g class="tp-lab">{lab}</g>'
+            f'<path class="tp-hook" d="M4 4V40"/></svg>')
 
 
 def hero2():
@@ -204,10 +232,10 @@ def hero2():
     for k, s in enumerate(H2_TRADES):
         t = TBY[s]
         lo, hi = t['med']
-        data[s] = dict(name=t['name'], n=f"{t['n']}", med=med(t), mid=f"${t['lo']}k and ${t['hi']}k", mo=f"${pmt(lo * 1000):.0f}-${pmt(hi * 1000):.0f}",
+        data[s] = dict(lo=lo, hi=hi, name=t['name'], n=f"{t['n']}", med=med(t), mid=f"${t['lo']}k and ${t['hi']}k", mo=f"${pmt(lo * 1000):.0f}-${pmt(hi * 1000):.0f}",
                        img=tphoto(s), alt=alt(PHOTOS[TRADE_PHOTO[s]]['alt']), cap=tcap(s), book=BOOK_AS[s])
         cards += (f'<li><a class="h2c" href="#services" data-t="{s}" data-cur="view" data-cur-label="See prices">'
-                  f'{img(tphoto(s), 800, 600, "", "h2c-img", eager=k < 2)}<span class="h2c-n">{t["name"]}</span>'
+                  f'{img(tphoto(s), 800, 600, "", "h2c-img", eager=k < 2)}<svg class="h2c-ico" viewBox="0 0 64 40" aria-hidden="true" focusable="false"><rect class="i-bg" x="-6" y="-6" width="76" height="52" rx="10"/>{H2_ICO[s].replace("<path", "<path pathLength=\"1\"")}</svg><span class="h2c-n">{t["name"]}</span>'
                   f'<span class="h2c-go">See the price range</span></a></li>')
     f = data['siding']
     js = json.dumps(data).replace('</', '<\\/')
@@ -224,6 +252,7 @@ def hero2():
       <p class="h2-k"><span class="h2-steps" aria-hidden="true"><i class="on"></i><i class="on"></i></span>Step 2 of 2</p>
       <h2 class="h2r-h" tabindex="-1" data-f="head"><span data-f="name">{f['name']}</span>: what Austin Pro jobs cost</h2>
       <p class="h2r-med"><span>Median job, from <b data-f="n">{f['n']}</b> priced jobs</span><b class="num" data-f="med">{f['med']}</b></p>
+      {h2_tape(f['lo'], f['hi'])}
       <p class="h2r-mid">Half of them landed between <span data-f="mid">{f['mid']}</span>. Materials and labour, before discounts and tax.</p>
       <p class="h2r-mo">About <b data-f="mo">{f['mo']}</b> a month at 7.99% APR over 120 months, on approved credit.</p>
       <div class="h2r-cta"><a class="btn btn-red" href="#book" data-book data-trade="{f['book']}" data-cur="hero" data-f="book">Book a free siding inspection</a><button class="tlink h2r-back" type="button" data-f="back">Pick another project</button></div>
@@ -244,10 +273,19 @@ def hero3():
     caps = [f"{PHOTOS[i]['place']}, {PHOTOS[i]['when']}. {PHOTOS[i]['trades']}" for i in H3F]
     stats = [('5,000+', 'Central Texas homeowners served'), ('431', 'siding jobs documented'), ('388', 'window jobs documented'),
              ('210', 'shingle roofs documented'), ('4.9', 'on 474 Google reviews')]
-    li = ''.join(f'<li><b class="num">{n}</b><span>{e(t)}</span></li>' for n, t in stats)
+    board = ('<svg class="h3-board" viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+             '<path class="bd-grain" d="M0 30C40 26 80 34 120 29S180 31 200 28M0 52C50 48 90 56 140 50S190 53 200 51M0 72C30 70 70 76 110 71S170 74 200 72"/>'
+             '<rect class="bd-sh" y="90" width="200" height="10"/><rect class="bd-hi" y="0" width="200" height="2"/><ellipse class="bd-n" cx="12" cy="12" rx="2.4" ry="4.8"/><ellipse class="bd-n" cx="188" cy="12" rx="2.4" ry="4.8"/></svg>')
+    li = ''.join(f'<li>{board}<b class="num">{n}</b><span>{e(t)}</span></li>' for n, t in stats)
     return f'''<div class="v hero-3" data-tone="ground">
   <div class="h3-panel">
     <div class="h3-frames" role="group" aria-label="Five recent Austin Pro jobs">{frames}</div>
+    <svg class="h3-case" aria-hidden="true" focusable="false"><defs><linearGradient id="h3gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+      <rect class="h3-glint" x="0" y="-20%" width="22%" height="140%" fill="url(#h3gl)"/>
+      <rect class="h3-bead" width="100%" height="100%"/><rect class="h3-casing" width="100%" height="100%"/>
+      <g class="h3-ros"><rect width="30" height="30"/><circle cx="15" cy="15" r="7"/><circle cx="15" cy="15" r="2.5"/></g>
+      <g class="h3-ros" transform="translate(-30 0)"><svg x="100%" overflow="visible"><rect width="30" height="30"/><circle cx="15" cy="15" r="7"/><circle cx="15" cy="15" r="2.5"/></svg></g>
+    </svg>
     <div class="h3-copy">{pstrip()}<p class="h3-date">Austin's siding, window and roofing crew since 2009</p>{H1}{LEAD}{ctas(True)}</div>
     <div class="h3-cap"><p class="h3-chip"><span class="num"><b data-h3-no>01</b> of {len(H3F):02d}</span><span data-h3-cap>{e(caps[0])}</span></p><button class="h3-pause btn btn-glass btn-sm" type="button" aria-pressed="false">Pause</button></div>
   </div>

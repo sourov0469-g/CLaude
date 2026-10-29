@@ -256,7 +256,14 @@
     const fr = $('.h1-frame', r), crs = $$('.crs', fr), btn = $('.h1-replay', r);
     const order = crs.slice().reverse();
     const shut = 'inset(0% 100% 0% 0%)', open = 'inset(0% 0% 0% 0%)';
-    const play = delay => G.fromTo(order, { clipPath: shut }, { clipPath: open, duration: 0.6, ease: 'power3.out', stagger: 0.02, delay, overwrite: true });
+    const laps = $$('.h1-c', fr).reverse();
+    // v4: each course lands with its own lap shadow line and two nail heads, then the lines fade back into the photo
+    const nails = delay => laps.forEach((g, i) => {
+      G.timeline({ delay: delay + i * 0.02 + 0.42 }).fromTo(g, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.12, ease: 'none' })
+        .fromTo($$('.h1-n', g), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'back.out(1.7)', stagger: 0.05 }, 0)
+        .to(g, { autoAlpha: 0, duration: 0.6, ease: 'power2.in' }, 1.1 + (29 - i) * 0.01);
+    });
+    const play = delay => { nails(delay); return G.fromTo(order, { clipPath: shut }, { clipPath: open, duration: 0.6, ease: 'power3.out', stagger: 0.02, delay, overwrite: true }); };
     if (!motionOK()) { btn.hidden = true; return; }
     G.set(order, { clipPath: shut });
     play(0.35);
@@ -278,6 +285,8 @@
       const t = T[c.dataset.t]; from = c;
       const im = f('img'); im.src = AU(t.img); im.alt = t.alt;
       ['name', 'n', 'med', 'mid', 'mo', 'cap'].forEach(k => { f(k).textContent = t[k]; });
+      const band = f('band'), X = v => 10 + v / 50 * 480;   // the median band slides along the tape blade
+      band.setAttribute('x', X(t.lo).toFixed(1)); band.setAttribute('width', (X(t.hi) - X(t.lo)).toFixed(1));
       const bk = f('book'); bk.dataset.trade = t.book; bk.textContent = `Book a free ${t.name.toLowerCase()} inspection`;
       step1.hidden = true; res.hidden = false; r.dataset.step = '2';
       f('head').focus({ preventScroll: true });
@@ -295,7 +304,9 @@
   V.hero3 = (r, b) => {
     const fr = $$('.h3f', r), C = JSON.parse($('.h3-data', r).textContent), cap = $('[data-h3-cap]', r), no = $('[data-h3-no]', r), pz = $('.h3-pause', r);
     let k = 0, t = 0, vis = false, paused = !motionOK();
-    const show = n => { fr[k].classList.remove('on'); k = (n + fr.length) % fr.length; fr[k].classList.add('on'); cap.textContent = C[k]; no.textContent = String(k + 1).padStart(2, '0'); };
+    const glint = $('.h3-glint', r);
+    const sweep = () => { if (!motionOK() || !glint) return; const w = r.querySelector('.h3-panel').offsetWidth; G.fromTo(glint, { x: -w * 0.3, opacity: 1 }, { x: w * 1.1, duration: 0.65, ease: 'power2.inOut', onComplete: () => G.set(glint, { opacity: 0 }) }); };
+    const show = n => { fr[k].classList.remove('on'); k = (n + fr.length) % fr.length; fr[k].classList.add('on'); cap.textContent = C[k]; no.textContent = String(k + 1).padStart(2, '0'); sweep(); };
     const run = () => { clearInterval(t); t = 0; if (vis && !paused && !d.hidden) t = setInterval(() => show(k + 1), 5000); };
     const label = () => { pz.setAttribute('aria-pressed', paused); pz.textContent = paused ? 'Play' : 'Pause'; };
     b.io(r, ([en]) => { vis = en.isIntersecting; run(); });
