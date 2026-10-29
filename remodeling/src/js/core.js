@@ -196,10 +196,12 @@
     EZ.applyImages(verEl);
     var def = s.defs && s.defs[v];
     var kit = s.kit = makeKit(s, verEl);
+    // every GSAP tween/ScrollTrigger made in init (or later via kit.ctx.add) is reverted on swap
+    s.ctx = kit.ctx = gsap.context(function () {}, verEl);
     if (def && def.init) {
-      s.ctx = gsap.context(function () {
+      s.ctx.add(function () {
         try { s.cleanup = def.init(verEl, kit) || null; } catch (e) { console.error('[' + id + ' v' + v + ']', e); }
-      }, verEl);
+      });
     }
     bindMagnets(verEl, kit);
     bindLens(verEl, kit);
