@@ -1,7 +1,8 @@
 // Boot: smooth scroll, the version registry behind every section's 1 · 2 · 3 picker, and the global cursor and depth.
 // Each section module exports { 1: init, 2: init, 3: init }. An init gets (root, c) and runs inside a gsap.matchMedia()
 // scoped to its version root, so switching versions reverts every tween, ScrollTrigger, pin and split it made (G8 #4).
-// c = { motion, reduce, fine, wide, swap, sec, id }. An init may return a cleanup for rAF loops, observers and GL.
+// c = { motion, reduce, fine, wide, swap, sec, id, ctx }. ctx.add(fn) records late work (after fonts load) in the same
+// context. An init may return a cleanup for rAF loops, observers and GL.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -52,7 +53,7 @@ function mount(sec, v, swap) {
   mm.add(Q, ctx => {
     if (ctx.conditions.motion && ctx.conditions.fine) prepText(root);
     const init = MODS[id] && MODS[id][v];
-    return init ? init(root, { ...ctx.conditions, swap, sec, id }) : undefined;
+    return init ? init(root, { ...ctx.conditions, swap, sec, id, ctx }) : undefined;
   }, root);
   live.set(id, { mm, v });
 }

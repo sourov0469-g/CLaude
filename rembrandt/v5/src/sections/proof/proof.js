@@ -1,9 +1,11 @@
 // PROOF. Only the owner's figures: 4.9 stars, 295 Google reviews, BBB A+ since 2001, Owens Corning Platinum Preferred,
 // $2M liability cover, family-run since 1995 (S1303 gate 47: nothing invented).
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { lines, rise, onEnter } from '../../js/fx.js';
 import { loop } from '../../js/gl.js';
 import { spring, step } from '../../js/spring.js';
+import { horizontalLoop } from '../../js/hloop.js';
 
 const seeded = s => () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
 
@@ -96,98 +98,44 @@ function constellation(root, c) {
   return () => { ro.disconnect(); if (lp) lp.stop(); root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('scroll', scrolled); };
 }
 
-// v2 Odometer: P4 stat strip (S1303), digits roll once on entry (G4 #11: 260ms per changed digit, ease-out) and again on
-// hover with a tilt under 4 degrees (S1321 magnetic cards). Background: course lines that bend away from the pointer.
-function odometer(root, c) {
-  const figs = [...root.querySelectorAll('.pv2-fig')], cv = root.querySelector('.pv2-cv'), g = cv.getContext('2d');
-  const strips = [];
-  figs.forEach(f => { // build the digit strips (the real value stays in the HTML for no-JS and screen readers)
-    const n = f.querySelector('.pv2-n'), val = f.dataset.odo; n.textContent = '';
-    for (const ch of val) {
-      if (!/\d/.test(ch)) { const s = document.createElement('span'); s.textContent = ch; n.append(s); continue; }
-      const o = document.createElement('span'); o.className = 'odo'; const col = document.createElement('span');
-      for (let k = 0; k < 20; k++) { const d = document.createElement('span'); d.textContent = k % 10; col.append(d); }
-      o.append(col); n.append(o); strips.push({ f, col, d: +ch });
-    }
-  });
-  const at = (s, cycle) => -(cycle * 10 + s.d) * 5; // yPercent of a 20-digit strip
-  strips.forEach(s => gsap.set(s.col, { yPercent: at(s, 1) }));
-  if (c.motion) {
-    rise(root.querySelectorAll('.pv2-h .ln > span'), { scrollTrigger: onEnter(root), stagger: 0.11, duration: 0.9 }, { y: 24 });
-    const tl = gsap.timeline({ scrollTrigger: onEnter(root.querySelector('.pv2-row'), { start: 'top 88%' }) });
-    strips.forEach((s, i) => tl.fromTo(s.col, { yPercent: 0 }, { yPercent: at(s, 1), duration: 0.55 + 0.11 * s.d, ease: 'power3.out' }, i * 0.05));
-    tl.fromTo(figs, { borderTopColor: 'rgba(255,255,255,0)' }, { borderTopColor: 'rgba(255,255,255,0.22)', duration: 0.6, stagger: 0.08 }, 0);
-  }
-  const offs = [];
-  if (c.fine && c.motion) figs.forEach(f => {
-    const rx = gsap.quickTo(f, 'rotationX', { duration: 0.45, ease: 'power3.out' }), ry = gsap.quickTo(f, 'rotationY', { duration: 0.45, ease: 'power3.out' });
-    let r = null;
-    const enter = () => { r = f.getBoundingClientRect(); strips.filter(s => s.f === f).forEach((s, i) => gsap.fromTo(s.col, { yPercent: at(s, 0) }, { yPercent: at(s, 1), duration: 0.9, ease: 'power3.out', delay: i * 0.05, overwrite: true })); };
-    const move = e => { if (!r) r = f.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * 8); rx(-((e.clientY - r.top) / r.height - 0.5) * 8); };
-    const leave = () => { r = null; rx(0); ry(0); };
-    f.addEventListener('pointerenter', enter); f.addEventListener('pointermove', move); f.addEventListener('pointerleave', leave);
-    offs.push(() => { f.removeEventListener('pointerenter', enter); f.removeEventListener('pointermove', move); f.removeEventListener('pointerleave', leave); });
-  });
-  // course lines: horizontal hairlines every 22px; near the damped pointer they bend away like a lens (S1330 damping)
-  let W = 0, H = 0, dpr = 1, rect = null, lp = null;
-  const p = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4, k: 0, tk: 0 };
-  const draw = () => {
-    g.clearRect(0, 0, W, H); g.strokeStyle = 'rgba(203,218,246,0.09)'; g.lineWidth = 1;
-    const sig = 150, Rv = 170;
-    for (let y0 = 11; y0 < H; y0 += 22) {
-      g.beginPath();
-      const dv = y0 - p.y, near = Math.abs(dv) < Rv ? (1 - Math.abs(dv) / Rv) : 0;
-      for (let x = 0; x <= W; x += 16) {
-        const push = near ? Math.sign(dv || 1) * near * 26 * p.k * Math.exp(-((x - p.x) ** 2) / (2 * sig * sig)) : 0;
-        x ? g.lineTo(x, y0 + push) : g.moveTo(x, y0 + push);
-      }
-      g.stroke();
-    }
-  };
-  const layout = () => { const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0); rect = null; draw(); };
-  const ro = new ResizeObserver(layout); ro.observe(cv);
-  if (c.fine && c.motion) {
-    lp = loop(cv, dt => {
-      const a = 1 - Math.pow(1 - 0.09, dt * 60);
-      p.x += (p.tx - p.x) * a; p.y += (p.ty - p.y) * a; p.k += (p.tk - p.k) * a; draw();
-      return Math.abs(p.tx - p.x) > 0.3 || Math.abs(p.ty - p.y) > 0.3 || Math.abs(p.tk - p.k) > 0.005;
+// v2 the ledger: [BANK] Cenco Roofing DEEP 5 (every credential carries a link to its issuer; live: "Every figure is
+// read from the platform named beside it"), anatomy F12 checkable proof (KBF "The Ledger": print the caveat), [BANK] #317
+// Digital Butlers "Proof, not promises". Static content; the rows arrive once at the F17 dose (CSS, proof.css).
+function ledger(root, c) {
+  if (!c.motion) return;
+  root.classList.add('is-armed');
+  ScrollTrigger.create({ trigger: root.querySelector('.pv2-ledger'), start: 'top 80%', once: true, onEnter: () => root.classList.add('is-in') });
+}
+
+// v3 the trains: [BANK] Q161 GreenSock horizontalLoop, lifted whole (js/hloop.js), measured after document.fonts.ready.
+// Config per the entry: { repeat: -1, paddingRight } with the gap carried by each item's own padding; speed set so one
+// lap takes 60s (F17 marquee token, Stronghold); the second train runs reversed. next()/previous() glide both trains
+// one item (0.8s power3.inOut) and leave them paused; the pause button (WCAG 2.2.2) holds or resumes; trains rest
+// while off screen. Reduced motion: no loops, the trains stand still and the controls hide.
+function trains(root, c) {
+  if (!c.motion) return;
+  const rows = [...root.querySelectorAll('.pv3-row')], pause = root.querySelector('.pv3-pause');
+  let loops = [], held = false, seen = true, dead = false;
+  const apply = () => { loops.forEach(l => l.paused(held || !seen)); pause.setAttribute('aria-pressed', String(held)); };
+  const build = () => c.ctx.add(() => {
+    if (dead || !root.isConnected) return;
+    loops = rows.map((row, i) => {
+      const lap = row.scrollWidth; // items carry their own trailing gap
+      return horizontalLoop(row.children, { repeat: -1, paddingRight: 0, speed: lap / 60 / 100, reversed: i === 1 });
     });
-    const move = e => { if (e.pointerType !== 'mouse') return; rect = rect || cv.getBoundingClientRect(); p.tx = e.clientX - rect.left; p.ty = e.clientY - rect.top; if (p.k < 0.01) { p.x = p.tx; p.y = p.ty; } p.tk = 1; lp.wake(); };
-    const leave = () => { p.tk = 0; lp.wake(); };
-    const scrolled = () => { rect = null; };
-    root.addEventListener('pointermove', move); root.addEventListener('pointerleave', leave); addEventListener('scroll', scrolled, { passive: true });
-    offs.push(() => { root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('scroll', scrolled); });
-  }
-  return () => { offs.forEach(f => f()); ro.disconnect(); if (lp) lp.stop(); };
-}
-
-// v3 Zoom-through: pinned (S0019 row 6, end +=300%, scrub 1). Each figure ends in a full stop; scrolling dives into it and
-// the stop floods the screen in the next chapter's colour. Scrubbed motion is linear (S0652); the zoom runs on a log scale.
-function zoom(root, c) {
-  if (!(c.motion && c.wide)) return; // narrow screens and reduced motion get the stacked figures (CSS)
-  const pin = root.querySelector('.pv3-pin'), steps = [...root.querySelectorAll('.pv3-step')], flood = root.querySelector('.pv3-flood');
-  gsap.set(steps.slice(1), { autoAlpha: 0 }); gsap.set(flood, { autoAlpha: 0 });
-  const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: pin, start: 'top top', end: '+=300%', scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
-  const bg = el => (el.dataset.tone === 'blue' ? '#1a4199' : '#ffffff');
-  steps.forEach((st, i) => {
-    const fig = st.querySelector('.pv3-fig'), num = st.querySelector('.pv3-n'), dot = st.querySelector('.pv3-dot'), cap = st.querySelector('.pv3-c');
-    if (i) tl.fromTo(fig, { scale: 0.92, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.3, immediateRender: false });
-    tl.to({}, { duration: 0.3 });
-    if (i === steps.length - 1) return;
-    const next = steps[i + 1];
-
-    // the stop's centre as a fraction of the figure: a percentage origin does not move while the figure scales
-    let org = null;
-    const origin = () => { if (!org) { const n = num.getBoundingClientRect(), d = dot.getBoundingClientRect(); org = `${((d.left + d.width / 2 - n.left) / n.width) * 100}% ${((d.top + d.height / 2 - n.top) / n.height) * 100}%`; } return org; };
-    const dotXY = () => { const d = dot.getBoundingClientRect(), r = pin.getBoundingClientRect(); return [d.left + d.width / 2 - r.left, d.top + d.height / 2 - r.top, d.width]; };
-    const z = { v: 0 };
-    tl.to(cap, { autoAlpha: 0, duration: 0.12 })
-      .fromTo(z, { v: 0 }, { v: 1, duration: 0.55, immediateRender: false, onUpdate: () => gsap.set(num, { scale: Math.exp(z.v * Math.log(9)), transformOrigin: origin() }) }, '<')
-      .fromTo(flood, { x: () => dotXY()[0], y: () => dotXY()[1], scale: () => dotXY()[2] * 9 / 20 * 0.55, autoAlpha: 1, backgroundColor: () => bg(next), borderRadius: '12%' },
-        { scale: () => Math.hypot(pin.clientWidth, pin.clientHeight) / 10 * 1.15, duration: 0.3, immediateRender: false }, '<0.25')
-      .set(st, { autoAlpha: 0 }).set(next, { autoAlpha: 1 }).set(flood, { autoAlpha: 0 });
+    ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); } });
+    apply();
   });
-  tl.to({}, { duration: 0.25 });
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
+  const onClick = e => {
+    const b = e.target.closest('.pv3-btn'); if (!b || !loops.length) return;
+    if (b === pause) { held = !held; apply(); return; }
+    held = true; pause.setAttribute('aria-pressed', 'true');
+    const d = Number(b.dataset.dir), v = { duration: 0.8, ease: 'power3.inOut' };
+    loops.forEach((l, i) => { l.closestIndex(true); (d * (i ? -1 : 1) > 0 ? l.next(v) : l.previous(v)); });
+  };
+  root.addEventListener('click', onClick);
+  return () => { dead = true; loops.forEach(l => l.destroy()); root.removeEventListener('click', onClick); };
 }
 
-export default { 1: constellation, 2: odometer, 3: zoom };
+export default { 1: constellation, 2: ledger, 3: trains };

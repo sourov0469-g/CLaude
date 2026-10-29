@@ -1,4 +1,5 @@
-/* PROOF: v1 Constellation (295 stars form 4.9), v2 Odometer (P4 strip over reactive course lines), v3 Zoom-through (pinned) */
+/* PROOF: v1 Constellation (KEPT: 295 stars form 4.9), v2 the checkable ledger (Cenco Verify links + KBF Ledger F12 +
+   #317 "Proof, not promises"), v3 two proof trains ([BANK] Q161 horizontalLoop, F17 60s marquee) */
 .pv{position:relative;overflow:clip}
 .pv-cred{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-weight:600;font-size:var(--t-lead);line-height:1.35}
 .pv-cred li::before{content:"";display:inline-block;width:.42em;height:.42em;margin-right:.6em;border-radius:2px;background:var(--sun);vertical-align:.12em}
@@ -9,34 +10,63 @@
 .pv1-copy{position:relative;display:grid;gap:28px;padding:clamp(4rem,2.5rem + 7.5vw,8rem) var(--gutter) calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar));max-width:960px;pointer-events:none}
 .pv1-copy h2{pointer-events:auto}
 
-/* v2: ink field, five real figures in one row; their digits roll (odometer) */
-.pv2{background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 8vw,10rem) var(--gutter);display:grid;gap:clamp(48px,8vh,96px);min-height:min(100svh,920px);align-content:center}
-.pv2-cv{position:absolute;inset:0;width:100%;height:100%}
-.pv2-h,.pv2-row{position:relative}
-.pv2-h{max-width:none}
-.pv2-row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;perspective:900px}
-.pv2-fig{display:grid;gap:10px;align-content:start;padding-top:20px;border-top:2px solid rgb(255 255 255/.22);transform-style:preserve-3d}
-.pv2-n{font-size:clamp(2.75rem,5.4vw,5.5rem);font-weight:800;line-height:1;letter-spacing:-.03em;display:flex;white-space:nowrap}
-.pv2-l{font-size:1rem;line-height:1.35;color:var(--on-blue-muted);max-width:16ch}
-.odo{display:inline-block;height:1em;overflow:clip;line-height:1}
-.odo>span{display:block}
-.odo>span>span{display:block;height:1em}
-@media (max-width:899px){.pv2-row{grid-template-columns:repeat(2,minmax(0,1fr))}.pv2-fig:last-child{grid-column:1/-1}}
-
-/* v3: pinned dive through each figure's full stop; tones alternate as the stop floods the screen */
-.pv3-pin{position:relative;height:max(640px,100svh);background:var(--blue);overflow:clip}
-.pv3-list{list-style:none;margin:0;padding:0;position:absolute;inset:0}
-.pv3-step{position:absolute;inset:0;display:grid;place-items:center;padding:0 var(--gutter)}
-.pv3-step[data-tone=blue]{color:#fff;background:var(--blue)}
-.pv3-step[data-tone=white]{color:var(--blue);background:#fff}
-.pv3-fig{display:grid;justify-items:center;gap:8px;text-align:center}
-.pv3-n{font-size:clamp(6rem,22vw,22rem);font-weight:800;line-height:1;letter-spacing:-.05em;display:flex;align-items:baseline}
-.pv3-dot{display:inline-block;width:.16em;height:.16em;margin-left:.04em;background:currentColor;border-radius:.02em}
-.pv3-c{font-size:var(--t-lead);font-weight:600;max-width:28ch}
-.pv3-flood{position:absolute;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;opacity:0;pointer-events:none}
-@media (max-width:899px),(prefers-reduced-motion:reduce){
-  .pv3-pin{height:auto;background:none}
-  .pv3-list{position:static}
-  .pv3-step{position:relative;inset:auto;min-height:60svh}
-  .pv3-n{font-size:clamp(5rem,26vw,12rem)}
+/* v2: the ledger. Left, the headline figure and where every figure comes from (Cenco: "Every figure is read from the
+   platform named beside it"); right, one ruled row per credential with its own check link. F17 dose: rows enter
+   .15s ease 40ms apart, rules draw over .3s ease-out. */
+.pv2{background:#fff;color:var(--ink);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,112px);
+  padding:clamp(5rem,3rem + 7vw,9rem) var(--gutter);align-items:start}
+.pv2-head{position:sticky;top:calc(var(--nav-h) + 40px);display:grid;gap:14px;justify-items:start}
+.pv2-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;max-width:9ch;margin-bottom:18px}
+.pv2-big{display:flex;align-items:baseline;font-weight:800;line-height:.9;letter-spacing:-.05em;color:var(--blue)}
+.pv2-big .num{font-size:clamp(5.5rem,11vw,10rem)}
+.pv2-of{font-size:clamp(1.5rem,2.4vw,2.25rem);letter-spacing:-.02em;color:var(--ink);margin-left:.2em}
+.pv2-count{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.0625rem}
+.pv2-stars{width:120px;height:22px;flex:none}
+.pv2-st-off polygon{fill:var(--mist)}
+.pv2-st-on polygon{fill:var(--ink)}
+.pv2-note{max-width:38ch;font-size:var(--t-small);line-height:1.5;color:var(--muted);margin-top:6px}
+.pv2-ledger{list-style:none;margin:0;padding:0;counter-reset:row}
+.pv2-row{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"src src" "fig check" "what check";
+  column-gap:24px;row-gap:4px;padding:28px 0 30px;align-items:end}
+.pv2-row::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--ink);transform-origin:0 50%}
+.pv2-row:last-child::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--mist)}
+.pv2-src{grid-area:src;font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.pv2-fig{grid-area:fig;font-size:clamp(2.25rem,4vw,3.75rem);font-weight:800;line-height:1;letter-spacing:-.035em}
+.pv2-what{grid-area:what;font-size:1.0625rem;color:var(--ink)}
+.pv2-check{grid-area:check;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;color:var(--blue);text-decoration:underline;
+  text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);transition:text-decoration-color var(--dur-quick) var(--ease-std)}
+.pv2-check svg{width:18px;height:18px;flex:none;transition:translate var(--dur-quick) var(--ease-std)}
+@media (hover:hover){.pv2-check:hover{text-decoration-color:currentColor}.pv2-check:hover svg{translate:3px 0}}
+@media (prefers-reduced-motion:no-preference){
+  .pv2.is-armed .pv2-row{opacity:0;translate:0 6px}
+  .pv2.is-armed .pv2-row::before{transform:scaleX(0)}
+  .pv2.is-in .pv2-row{opacity:1;translate:0 0;transition:opacity .15s ease calc(var(--i) * 40ms),translate .15s ease calc(var(--i) * 40ms)}
+  .pv2.is-in .pv2-row::before{transform:none;transition:transform .3s var(--ease-dec) calc(var(--i) * 40ms)}
 }
+@media (max-width:899px){
+  .pv2{grid-template-columns:1fr;padding-bottom:calc(clamp(4rem,3rem + 7vw,9rem) + var(--mbar))}
+  .pv2-head{position:static}
+  .pv2-row{grid-template-areas:"src" "fig" "what" "check";grid-template-columns:1fr;align-items:start}
+  .pv2-check{margin-top:8px}
+}
+
+/* v3: two proof trains (Q161 horizontalLoop), white on ink; the second runs the other way in the muted tint. A pause and two
+   step buttons drive the loops (Q161 next()/previous()); reduced motion shows the trains still. */
+.pv3{background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,5vh,56px);padding:clamp(4.5rem,3rem + 6vw,8rem) 0 calc(clamp(3rem,2rem + 4vw,5rem) + var(--mbar))}
+.pv3-top{padding:0 var(--gutter)}
+.pv3-h{font-size:.9375rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-blue-muted)}
+.pv3-trains{display:grid;gap:clamp(8px,2vh,20px);overflow:hidden}
+.pv3-row{display:flex;flex-wrap:nowrap;white-space:nowrap;gap:0;font-size:clamp(3.5rem,9vw,9.5rem);font-weight:800;line-height:1.08;letter-spacing:-.04em}
+.pv3-it{display:inline-flex;align-items:center;flex:none;padding-right:.5em}
+.pv3-row--b{color:var(--on-blue-muted)}
+.pv3-star{width:.62em;height:.62em;margin:0 .06em 0 .04em;fill:currentColor;align-self:center}
+.pv3-mark{width:.6em;height:.36em;margin-left:.5em;fill:none;stroke:var(--on-blue-muted);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.pv3-ctl{display:flex;justify-content:flex-end;gap:8px;padding:0 var(--gutter)}
+.pv3-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid rgb(255 255 255/.5);border-radius:50%;background:none;color:#fff;cursor:pointer;
+  transition:background-color var(--dur-quick) var(--ease-std),border-color var(--dur-quick) var(--ease-std)}
+.pv3-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pv3-btn .i-play{fill:currentColor;stroke:none}
+.pv3-pause[aria-pressed="false"] .i-play,.pv3-pause[aria-pressed="true"] .i-pause{display:none}
+@media (hover:hover){.pv3-btn:hover{background:rgb(255 255 255/.12);border-color:#fff}}
+.pv3-btn:active{scale:.96}
+html[data-motion="reduced"] .pv3-ctl{display:none}
