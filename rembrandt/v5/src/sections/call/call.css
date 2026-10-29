@@ -14,6 +14,7 @@
 .cl1-inner{display:grid;gap:22px;justify-items:start;max-width:1280px;margin:0 auto;padding:clamp(2.5rem,1.5rem + 4vw,5rem) var(--gutter) 0}
 .cl1-kick{font-weight:700;font-size:.9375rem;color:var(--on-blue-muted)}
 .cl1-h{font-size:clamp(2.6rem,1.6rem + 4.4vw,6rem);font-weight:850;line-height:.98;letter-spacing:-.045em;max-width:14ch;text-wrap:balance}
+.cl1-nw{white-space:nowrap}
 .cl1-p{font-size:var(--t-lead);line-height:1.45;max-width:46ch}
 .cl1-live{display:block;color:var(--on-blue-muted)}
 .cl1-act{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:8px}
@@ -43,7 +44,7 @@
 .cl1-word span:first-child{color:transparent;-webkit-text-stroke:2px oklch(1 0 0 / .35)}
 .cl1-word span:last-child{color:#fff;clip-path:inset(0 0 52% 0)}
 
-/* ---------- v2 */
+/* ---------- v2 (the morph is GSAP string interpolation between two 48-point paths of equal structure) */
 .cl2{--vbg:#141c3d;background:linear-gradient(to bottom,#0b1f4d,#25346e 70%,#3b3f78);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
 .cl2-dusk{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
 .cl2-dusk path{fill:#0b1328}
@@ -75,10 +76,9 @@
 @keyframes cl-redraw{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}
 .cl2.is-open .cl2-tog .i-x{display:block}.cl2.is-open .cl2-tog .i-open{display:none}
 @media (hover:hover){.cl2-tog:hover{background:oklch(1 0 0 / .12)}}
-.cl2-tog.is-press{animation:cl-pop .3s var(--ease-spring)}
-@keyframes cl-pop{0%{scale:.94}100%{scale:1}}
-.cl2-call.is-press .cl2-hs{animation:cl-ring .3s linear}
-@keyframes cl-ring{0%,100%{rotate:0deg}25%{rotate:-12deg}75%{rotate:12deg}}
+/* R36 press: the handset buzzes sideways like a phone on vibrate (Family V2 already wobbles a handset by rotation) */
+.cl2-call.is-press .cl2-hs{animation:cl-buzz .32s steps(8)}
+@keyframes cl-buzz{0%,100%{translate:0 0}12%,62%{translate:-3px 0}37%,87%{translate:3px 0}}
 @media (max-width:640px){.cl2-card{inset:24% 6% 5%}.cl2-list li{grid-template-columns:1fr;gap:2px}.cl2-list{gap:6px}.cl2-list li{font-size:.875rem}}
 
 /* ---------- v3 */
@@ -100,7 +100,9 @@
 .cl3-pause .i-pause{stroke-dasharray:12}
 @media (hover:hover){.cl3-pause:hover .i-pause{animation:cl-draw .25s var(--ease-x)}}
 @keyframes cl-draw{from{stroke-dashoffset:12}}
-.cl3-pause.is-press{animation:cl-pop .3s var(--ease-spring)}
+/* R40 press: the icon bounces inside the ring */
+.cl3-pause.is-press svg{animation:cl-bounce .35s var(--ease-spring)}
+@keyframes cl-bounce{0%{translate:0 0}35%{translate:0 -6px}100%{translate:0 0}}
 html[data-motion="reduced"] .cl3-pause{display:none}
 .cl3-band{position:relative;display:block;height:clamp(140px,19vw,300px);background:var(--ink);color:#fff;text-decoration:none;overflow:hidden}
 .cl3-roof{position:absolute;inset:0;width:100%;height:100%}

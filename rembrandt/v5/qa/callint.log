@@ -1,0 +1,19 @@
+V1 hours line: "It's 5:37 pm on Thursday in Springboro, outside office hours. Rachel is back tomorrow at 9."
+bg V1: drop leans -10.0 deg (pointer right), 7.2 deg (pointer left)
+R34 hover: drop gathers opacity 1
+R34 press: splash cl-splash
+R35 hover: pin matrix(1, 0, 0, 1, 0, -6)
+R35 press: cl-pin
+R36 hover: rings ring (ring opacity 0.4199)
+R36 press: handset cl-buzz; tel tel:+19377467377
+R37 hover: icon redraw cl-redraw
+R37 press: open true, expanded true; card visible 1
+  morph by string interpolation: numbers 96 -> 96; mid-tween differs from both ends true; ends at the house (apex 300,24: true)
+  closed: back to the circle true
+R38 band hover: seam light sweep matrix(1, 0, 0, 1, 1440, 0)
+R39 hover: chimney opacity 1
+R39 press: smoke cl-puff
+R40 hover: bars draw cl-draw
+R40 press: icon bounce cl-bounce
+  paused true
+errors: 0

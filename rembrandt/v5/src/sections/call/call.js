@@ -48,6 +48,15 @@ function close(root, c) {
     .fromTo(fall, { attr: { cy: 30 }, opacity: 1 }, { attr: { cy: () => root.__fall || 150 }, opacity: 0.6, duration: 0.6, ease: 'power2.in', immediateRender: false }, '<')
     .set(fall, { opacity: 0 });
   done.push(visible(root.querySelector('.cl1-act'), v => (v ? tl.play() : tl.pause())), () => tl.kill());
+  // bg: the gathering drop leans toward the pointer (up to 10 degrees, hinged at the gutter lip), as water does in a draught
+  if (c.fine) {
+    const lean = gsap.quickTo(drops, 'rotation', { duration: 0.8, ease: 'power3.out' });
+    gsap.set(drops, { transformOrigin: '50% 0%' });
+    const onMove = e => { if (e.pointerType !== 'mouse') return; const r = drops.getBoundingClientRect(); lean(-gsap.utils.clamp(-1, 1, (e.clientX - (r.left + r.width / 2)) / 400) * 10); };
+    const onLeave = () => lean(0);
+    root.addEventListener('pointermove', onMove); root.addEventListener('pointerleave', onLeave);
+    done.push(() => { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); });
+  }
   return cleanup;
 }
 
@@ -56,7 +65,7 @@ function close(root, c) {
 // the next enters from +25px; ripple ring 1.2s ease-out, a second ring 0.6s later; close 400ms cubic-bezier(.4,1,.3,1);
 // paths share one point structure. Adapted: the round call morphs into a house-shaped card (gable top) with Rachel's
 // details; the tel link stays the primary action; rings ring three times on arrival and while hovered, never endlessly.
-const pts = (shape, n) => { // n points round a circle, or round a house outline, in the same order (MorphSVG still matches)
+const pts = (shape, n) => { // n points round a circle, or round a house outline, in the same order: equal structure, so GSAP tweens the d string number by number (no MorphSVG)
   const out = [];
   for (let i = 0; i < n; i++) {
     const t = i / n;
@@ -79,7 +88,7 @@ function morph(root, c) {
   const ring = (n) => rings.forEach((r, i) => gsap.fromTo(r, { scale: 1, opacity: 0.8, svgOrigin: '300 210' }, { scale: 1.35, opacity: 0, duration: 1.2, ease: 'power2.out', delay: i * 0.6, repeat: n - 1 }));
   const set = o => {
     open = o; root.classList.toggle('is-open', o); tog.setAttribute('aria-expanded', String(o)); tog.querySelector('.cl2-tog-t').textContent = o ? 'Hide the details' : 'See the details';
-    gsap.to(body, { morphSVG: o ? HOUSE : CIRCLE, duration: dur, ease: o ? IN : OUT, overwrite: 'auto' });
+    gsap.to(body, { attr: { d: o ? HOUSE : CIRCLE }, duration: dur, ease: o ? IN : OUT, overwrite: 'auto' });
     if (o) { card.hidden = false; gsap.fromTo(card, { y: 25, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: dur, delay: dur * 0.5, ease: EASE }); }
     else gsap.to(card, { y: -25, autoAlpha: 0, duration: dur * 0.8, ease: EASE, onComplete: () => { card.hidden = true; } });
   };

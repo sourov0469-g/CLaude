@@ -6,14 +6,13 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
-import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 import Lenis from 'lenis';
 import { initDepth } from './depth.js';
 import { initMagnet } from './magnet.js';
 import { initCompanion } from './companion.js';
 import { initDividers } from './dividers.js';
 
-gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin);
+gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
 gsap.defaults({ ease: 'power3.out', duration: 0.8 });
 
 const IMG = window.__IMG || {};
@@ -162,4 +161,4 @@ function start(mods) {
   addEventListener('load', () => sortRefresh());
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
 }
-export { gsap, ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin };
+export { gsap, ScrollTrigger, DrawSVGPlugin };

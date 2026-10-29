@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 4 in progress: Family, How, Towns done → Call next.
+- **Phase:** 4 (remaining sections) complete → Phase 5 (companion as cursor, per-section cursor effects, chrome reactions, background audit) next.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -185,3 +185,25 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - `qa/scripts/areaint.mjs` (log `qa/areaint.log`): every reaction, the form handler and the background responses confirmed. Errors 0.
   - Facts: towns only from `data/towns.js` (24). Whole file: 353-9711 ×0.
 - **Divider:** area → steps, unchanged and unique.
+
+### Phase 4: Call ×3 (upgraded)
+- **V1:**
+  - bg: the drop gathering at the gutter lip leans toward the pointer, up to 10°, hinged at the lip.
+  - R34 and R35 kept. The drop/splash is now unique to this button: How V1's copy became the hanger bracket.
+  - At 375 the heading broke as "line-by- / line"; the compound now stays on one line.
+- **V2:**
+  - MorphSVG removed from the bundle (main.js import, register and export). The circle ↔ house morph is GSAP string interpolation of two equal-structure 48-point paths; same easing (shazamIn / shazamOut) and duration.
+  - R36 press now buzzes the handset sideways. Before, it was a rotation shake like Family V2's handset wobble.
+  - The toggle's extra scale pop is removed; its press reaction is the morph (R37).
+- **V3:** R40 press bounces the icon inside the ring. Before, it was the shared scale pop.
+- **Evidence:**
+  - `secqa.mjs call` at 1440, 375 and 1440 reduced: 9/9 "switcher swaps only call; overflow 0; errors 0".
+  - Screenshots: `qa/call{1,2,3}-*.jpg`, reviewed.
+  - `qa/scripts/callint.mjs` (log `qa/callint.log`): every reaction, the morph (mid-tween sampled) and the drop lean confirmed. Errors 0.
+  - Constellation re-checked after the main.js change: `constel.mjs` diff bbox None, max 0 at 1440 and 375. `constellation()` still e7d174cd. The `.pv1` rules match e685bee line for line, and no proof file has changed since the Phase 2 commit.
+- **Weight:** build 1496 KB (css 114, js 266).
+
+### Phase 4 summary
+- Family, How, Towns and Call all have SECTIONS lines at YES, TRACEABILITY Verification filled, and a commit each.
+- Dividers: one per boundary, all different. S4 is marked IN PLACE; the page-wide check is Phase 6.
+- Shared scale-pop presses were removed wherever a control already had its registered press, which leaves Work's arrow tick (R17) as the only scale press. The full registry audit is Phase 5.

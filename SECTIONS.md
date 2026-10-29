@@ -26,9 +26,9 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 | 16 | Towns (`area`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 17 | Towns (`area`) | V2 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 18 | Towns (`area`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
-| 19 | Call / closing (`call`) | V1 | upgraded | NO |
-| 20 | Call / closing (`call`) | V2 | upgraded | NO |
-| 21 | Call / closing (`call`) | V3 | upgraded | NO |
+| 19 | Call / closing (`call`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 20 | Call / closing (`call`) | V2 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 21 | Call / closing (`call`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 
 ## Page systems (tracked here too, so nothing is assumed)
 
@@ -37,7 +37,7 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 | S1 | Direction-aware entrance (Q40 at the F17 dose) on every section | IN PLACE (beats() rewritten, Phase 1); verified page-wide in Phase 6 |
 | S2 | Cursor companion: House / Hammer / Drop + Off; replaces the system cursor on fine pointers | NO |
 | S3 | Per-section cursor effect (halo / trail / field) + background reacts back, every version | NO |
-| S4 | A different shape divider at every section boundary | NO |
+| S4 | A different shape divider at every section boundary | IN PLACE (one per boundary, all different: roofline, shingles, chevrons, rafters, steps, scales, gutter); verified page-wide in Phase 6 |
 | S5 | Every interactive element has its own SVG reaction (registry in PLAN-FULL.md §G4), hover ≠ press | NO |
 | S6 | One self-contained HTML; switchers swap only their section at 1440 and 375 | NO |
 | S7 | §12 final gate (all nine items with evidence) | NO |
