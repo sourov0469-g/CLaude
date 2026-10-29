@@ -1,0 +1,57 @@
+#140 Color Customizer App for a 3D Model with Three.js — code-source/color-customizer-3d/values.txt
+Article: https://tympanus.net/codrops/2019/09/17/how-to-build-a-color-customizer-app-for-a-3d-model-with-three-js/
+(Codrops, by Kyle Wetton; built as a 4-part CodePen series). Demo: https://tympanus.net/Tutorials/3DModelCustomizer/
+("Grab to rotate chair. Scroll to zoom. Drag swatches to view more.") + full-source ZIP linked from the article.
+No shader code in this entry: the mechanism is scene-graph/material management, so parameters are scene values.
+
+STACK (Measured — article)
+- three.js r108 global build (unpkg three@0.108.0) + GLTFLoader from the r92 examples/js build + OrbitControls
+  (threejs.org examples/js). No bundler: plain script tags over a <canvas id="c">. Model: chair.glb (~1MB, hosted on
+  CodePen's S3), authored in Blender with Smart UV unwrap; every customisable part is a separate named object:
+  back, base, cushions, legs, supports (duplicates get .001/.002 suffixes — matched by substring, see below).
+
+SCENE (Measured — article code blocks)
+- BACKGROUND_COLOR 0xf1f1f1; scene.background = that colour; scene.fog = Fog(0xf1f1f1, 20, 100).
+- Renderer: WebGLRenderer({canvas, antialias:true}); DPR handled via renderer.setPixelRatio(devicePixelRatio) +
+  setSize on resize (article Part 3 fix for pixelation).
+- Camera: PerspectiveCamera(50, aspect, 0.1, 1000), position.z = cameraFar = 5.
+- Model on load: scale.set(2,2,2), position.y = -1, scene.add(theModel) — and only THEN the CSS loader is removed
+  (LOADER.remove() right after scene.add).
+- Lights: HemisphereLight(0xffffff, 0xffffff, 0.61) at (0, 50, 0); DirectionalLight(0xffffff, 0.54) at (-8, 12, 8),
+  castShadow, shadow.mapSize 1024x1024.
+- Floor: PlaneGeometry(5000, 5000, 1, 1), MeshPhongMaterial({color: 0xeeeeee (hand-matched to the lit background),
+  shininess: 0}), rotation.x = -PI/2, position.y = -1, receiveShadow = true.
+
+CUSTOMISER MECHANISM (Measured — article code blocks)
+1. Part tagging at load: initColor(parent, type, mtl) traverses the model; for every mesh whose name INCLUDES the
+   type string (o.name.includes(type)) it sets o.material = mtl and stamps o.nameID = type. Run once per part with
+   that part's default material before scene.add.
+2. Swatch data: const colors = [ {texture: wood.jpg, size: [2,2,2], shininess: 60},
+   {texture: denim.jpg, size: [3,3,3], shininess: 0}, {color: '66533C'}, {color: '173A2F'}, {color: '153944'},
+   {color: '27548D'}, {color: '438AAC'} ] — hex stored WITHOUT #/0x prefixes.
+3. selectSwatch(e): color = colors[parseInt(e.target.dataset.key)]; build a NEW MeshPhongMaterial:
+   - texture entry: TextureLoader().load(url); txt.repeat.set(size[0], size[1], size[2]); wrapS/wrapT = RepeatWrapping;
+     material = MeshPhongMaterial({map: txt, shininess: color.shininess ?? 10}).
+   - colour entry: MeshPhongMaterial({color: parseInt('0x' + color.color), shininess: color.shininess ?? 10}).
+   Then setMaterial(theModel, activeOption, new_mtl): traverse and swap material on every mesh whose nameID matches
+   the currently selected part (the options row above the tray sets activeOption; walkthrough starts with 'legs').
+4. UI: .controls fixed to the bottom; .tray 100% wide with a .tray__slide strip of swatches wider than the screen,
+   dragged horizontally with a small dependency-free slider script; an options row selects which part is active.
+
+CONTROLS + INTRO (Measured — article)
+- OrbitControls: enableDamping = true, dampingFactor = 0.1, enablePan = false, minPolarAngle = PI/3,
+  maxPolarAngle = PI/2, autoRotate = false (toggle), autoRotateSpeed = 0.2; controls.update() each frame.
+  Touch rotate/zoom works out of the box (the demo instructions say grab/scroll).
+- Intro spin (NOT OrbitControls autoRotate): initialRotation() runs inside animate() while theModel != null &&
+  loaded == false: initRotate++; if (initRotate <= 120) theModel.rotation.y += PI/60 (a full 360 degrees over
+  120 frames ~= 2s at 60fps); then loaded = true and the "drag" notice element gets its shown class.
+- Loader overlay (pure CSS): wrapper with perspective: 120px; a 100px box containing a 50x50px red square running
+  @keyframes flip 1s infinite: 0% rotate(0); 50% rotateY(180deg); 100% rotateY(180deg) rotateX(180deg).
+
+READING (Inferred)
+- The transferable pattern for client product demos: name your Blender objects by part, match by substring,
+  tag with nameID once, then a swatch click is just "new Phong material -> traverse -> swap where nameID matches".
+  Materials are rebuilt per click (cheap at this scale) instead of mutated, which keeps texture/colour entries uniform.
+- Phong + shininess is the 2019-budget choice; swapping in MeshStandardMaterial/MeshPhysicalMaterial keeps the
+  same architecture while upgrading realism. The fog-matched floor colour trick (0xeeeeee vs bg 0xf1f1f1) is what
+  makes the ground plane disappear into the background.

@@ -1,0 +1,3486 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Tue Nov 25 2025 01:58:01 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.silosilosilo.com" data-wf-page="67b34e4928a0b575614410f6" data-wf-site="67b34e4928a0b575614410f4" lang="en"><head><meta charset="utf-8"/><title>Silo</title><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/css/siloweb.webflow.shared.309fd5a5e.css" rel="stylesheet" type="text/css"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/67ddd9b85635171fb75a7fea_silo-logo-favicon.png" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/67ddd9bc26ed107dabf671ce_silo-logo-apple-icon.png" rel="apple-touch-icon"/><!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
+<style>
+  .cart_box-checkout {
+    background-color: #616161 !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .cart_box-checkout:hover {
+    background-color: #616161 !important;
+  }
+
+  .cart_wrap-checkout.has-inline-total {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart_wrap-checkout.has-inline-total > #cart {
+    border-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex: 1;
+  }
+
+  .cart_wrap-checkout.has-inline-total > #cart .padding-global {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .cart_wrap-checkout.has-inline-total > #cart .cart_wrap-bottom {
+    grid-column-gap: 1.6rem;
+    grid-row-gap: 1.6rem;
+    color: #fff;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .cart_wrap-checkout.has-inline-total > #cart .text-style-allcaps {
+    display: none;
+  }
+
+  .cart_wrap-checkout.has-inline-total > #cart .heading-style-h0 {
+    font-size: 5.6rem;
+    line-height: 1;
+  }
+
+  .cart_wrap-checkout.has-inline-total > .text-style-allcaps {
+    margin-left: auto;
+  }
+
+  .shopify-buy__product {
+    flex-flow: row !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .shopify-buy__btn-wrapper {
+    display: none !important;
+  }
+
+  .cart-top-price {
+    color: var(--gray_200);
+    text-align: left;
+    white-space: nowrap;
+    margin-right: auto;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .shopify-buy__quantity-container {
+    margin-left: auto;
+  }
+
+  .section_cart .cart_visual,
+  .section_cart .cart_visual-2 {
+    max-width: 120px !important;
+    width: 100%;
+  }
+
+  .section_cart .cart_box-middle.cc-last {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--gray_400);
+  }
+
+  .section_cart .cart_box-middle.is-empty {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 767px) {
+    .cart_wrap-checkout.has-inline-total > #cart .heading-style-h0 {
+      font-size: 4rem;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .cart_wrap-checkout.has-inline-total > #cart .heading-style-h0 {
+      font-size: 3.2rem;
+    }
+  }
+
+  .section_hp-storage-extra.sku-addon {
+    border-bottom-width: 1px;
+    padding-top: 5.6rem;
+    padding-bottom: 5.6rem;
+  }
+
+  .section_hp-storage-extra.sku-addon .hp_storage-extra_wrap {
+    grid-column-gap: 4rem;
+    grid-row-gap: 4rem;
+  }
+
+  .section_hp-storage-extra.sku-addon .hp_storage-extra_visual {
+    width: min(340px, 100%);
+    max-width: 340px;
+  }
+
+  .section_hp-storage-extra.sku-addon .heading-style-h1 {
+    font-size: 4.8rem;
+  }
+
+  .section_cart.sku-addon .cart-middle {
+    padding-top: 4.8rem;
+    padding-bottom: 4.8rem;
+  }
+
+  .section_cart.sku-addon .cart-top {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+  }
+
+  .section_cart.sku-addon .cart_visual-2 {
+    max-width: 120px;
+  }
+
+  .section_cart.sku-addon .cart_visual-2 .cover-img {
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 767px) {
+    .section_hp-storage-extra.sku-addon {
+      padding-top: 3.2rem;
+      padding-bottom: 3.2rem;
+    }
+
+    .section_hp-storage-extra.sku-addon .hp_storage-extra_visual {
+      max-width: 26rem;
+    }
+
+    .section_hp-storage-extra.sku-addon .heading-style-h1 {
+      font-size: 3.2rem;
+    }
+
+    .section_cart.sku-addon .cart_visual-2 {
+      max-width: 120px;
+    }
+
+    .section_cart.sku-addon .cart-middle {
+      padding-top: 2.4rem;
+      padding-bottom: 2.4rem;
+    }
+
+    .section_cart.sku-addon .cart-top {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  /* ==================================================================
+     MATERIAL COLUMNS
+     One column per material — Aluminum | Brass | Titanium — over a
+     single persistent cart bar you can fill across all three.
+     The column header carries the material, which is exactly why the
+     piece rows below it read as bare sizes (Cap / 15 / 30 / 60 / 90).
+     ================================================================== */
+
+  .mat-col_head-inner {
+    text-align: center;
+    padding: 2.4rem 1.6rem;
+  }
+
+  .mat-col_billet {
+    display: block;
+    width: 100%;
+    max-width: 14rem;
+    height: auto;
+    margin: 0 auto 1.2rem;
+  }
+
+  /* The raw-material billet that tops each column — "an image of an aluminum
+     billet, an image of a brass, an image of a titanium, with the word".
+     No billet renders exist yet, so the slot hides itself until one is given
+     a src; adding the image is then a one-attribute change. */
+  .mat-col_billet:not([src]) { display: none; }
+
+  .mat-col_name {
+    font-size: 2.4rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--gray_200);
+  }
+
+  .mat-col_note {
+    margin-top: .6rem;
+    font-size: 1.1rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gray_100);
+  }
+
+  /* ---- the inserts row: everything under the titanium stack ---------------
+     One section, three cells across — 15mm titanium, 30mm aluminum, 60mm
+     aluminum. The inserts are the one product family that crosses materials,
+     so they live together. Each cell's stepper writes straight into its
+     hidden .section_cart row (see .is-in-inserts), which is what CartManager
+     totals — same one-model rule as the explode. */
+  /* The home markers placeAccessories() leaves behind. They hold a slot in
+     the column so a moved row can find its way back; they are never seen. */
+  .acc-home { display: none; }
+  /* The row whose cells were folded into the other one on a phone. */
+  .inserts-row.is-emptied { display: none; }
+
+  /* Outranks the column's blanket .mat-cols .section_hp-storage-extra
+     padding, which lives later in the sheet inside the desktop block. */
+  .mat-cols .section_hp-storage-extra.inserts-row {
+    /* No lead-in: the open stack ends on the frame's bottom edge and the
+       accessories begin on the next pixel, so the column reads as one column
+       of objects rather than a stack and then, after a gap, some more things. */
+    padding-top: 0;
+    /* A run-out, not a clearance. The tail used to be a bar's height plus
+       12rem, on the theory that the bar rides over the grid's bottom band —
+       it does not: the grid is sized 100vh minus the live bar height and the
+       bar never grows into it. What that bought was 312px of empty white
+       under the last insert, which is what the end of the run landed on.
+       The accessories park in the middle of the frame now (below), so the
+       tail is only the room the row runs out into. */
+    padding-bottom: 6.4rem;
+  }
+
+  /* ---- the accessories get the beat the open stack gets -------------------
+     "It should stop at the inserts section as well." Same mechanism the
+     explode uses, one level down: the row is the wall and its inner is the
+     frame, exactly as .hp_storage-wrap_wall parks .hp-storage_wrap-box. The
+     inner sticks, so the accessories hold in the middle of the screen while
+     the wheel runs the wall out — and because the park is a centring rather
+     than an offset, the two desktop rows (two inserts in aluminum, one in
+     titanium) sit level with each other instead of ending ragged.
+
+     Both numbers are written by parkAccessories(): where it parks depends on
+     whether there is a material title above it to hang from, and the wall's
+     length is the open stack's own dwell, read off --acc-screens so there is
+     one number for the beat and not two. The row's padding cannot be the
+     wall — padding is outside the content box, which is what bounds a sticky
+     child — so the wall is an element (below). */
+  .mat-cols .inserts-row > .padding-global {
+    position: sticky;
+    top: var(--acc-park, 0px);
+  }
+
+  /* The wall itself. It has to be a sibling of what parks against it: a
+     sticky box is confined to its containing block INSET BY ITS OWN MARGINS,
+     so a margin under the inner extends the box and reserves the same
+     distance again — the travel comes out at exactly zero, which is what a
+     first pass did. Room after it is the only room that counts. */
+  .acc-wall { flex: none; }
+
+  /* The explode section's own tail, which sat between the last piece and the
+     accessories for the same reason. */
+  .mat-cols .section_hp-storage { padding-bottom: 0; }
+
+  .inserts-row_head {
+    margin-bottom: 3.2rem;
+    font-size: 1.1rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gray_100);
+  }
+
+  /* One above the other, at the scale of the pieces above them.
+     They used to sit side by side as small thumbnails, which read as a
+     different kind of thing from the stack they belong in — two 130px chips
+     next to a 300px piece. Stacked and drawn at the piece scale, the column
+     reads as one continuous listing: the stack comes apart, and the
+     accessories carry on below it. */
+  /* The renders narrow as the pieces get taller — a perspective artifact of
+     shooting every piece to the same frame height, and consistent across
+     aluminum and brass: 97.3 / 97.0 / 96.5 / 95.3 / 93.3 percent of the frame
+     for aluminum, 97.3 / 97.3 / 96.8 / 95.8 / 93.3 for brass.
+
+     Titanium runs 97.5 / 97.3 / 97.0 / 97.3 / 93.8 — the 60 breaks the taper
+     and comes out as wide as the 15, which is the bulge you can see on the
+     closed stack where its edges stand proud of the pieces above and below.
+     Every piece is the same diameter in life, so this is the export, not the
+     object. Trimmed to the taper the other two materials follow, the same way
+     .hp_storage_visual.is-5 already carries its own width. Replace this rule,
+     don't extend it, if the render is ever re-exported. */
+  [data-explode="titanium"] .hp_storage_visual.is-4 { width: 42.4em; }
+
+  .inserts-row_grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+  }
+
+  /* The same three-track row the explode pieces use — piece centred, type in
+     the right slot, the left one empty and holding the centre — so an
+     accessory lines up on the axis the stack hangs from. */
+  .inserts-row_cell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    width: 100%;
+    line-height: 1;
+    color: var(--gray_200);
+    /* The same em base .hp_storage-box carries. .hp_storage-heading is sized in
+       em at the narrower breakpoints, so an accessory's label only matches the
+       piece labels above it if it inherits the same base. */
+    font-size: var(--piece-em);
+  }
+
+  /* 43.2em is the width of .hp_storage_visual — the piece RENDER, not the row
+     it sits in, which is 80em and includes the type tracks either side. Off
+     the same em base, so a 60mm divider is drawn exactly as wide as the 60mm
+     can it goes inside. Height is left to the render: the three have three
+     different aspects, and so do the pieces above them. */
+  .inserts-row_img {
+    grid-column: 2;
+    /* 43.2em is .hp_storage_visual, the piece render, at 90% — an accessory
+       reads as belonging to the piece above it without matching it exactly. */
+    width: calc(38.88 * var(--piece-em));
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  /* All three on row 1, said outright: the label is appended AFTER the
+     image in the DOM, and auto-placement will not put a later item in an
+     earlier column of the same row — it opened a second row for the label,
+     which is why the type sat below the accessory instead of beside it. */
+  .inserts-row_cell > .inserts-row_img { grid-row: 1; }
+  .inserts-row_cell > .piece-label { grid-column: 1; grid-row: 1; }
+  .inserts-row_cell > .piece-side { grid-column: 3; grid-row: 1; }
+
+  /* Represented in the inserts row: off the page, still the cart's model. */
+  .is-in-inserts { display: none; }
+
+  /* ---------- the explode, at every width ---------------------------------
+     Desktop lays the three materials out side by side; mobile stacks them, one
+     material per screen. Either way a column is the same thing — a sticky
+     material title, a stack that hangs from it, and a wall of scroll to open
+     the stack through — so the parts that make that work are shared, and only
+     the three-across grid below is desktop's.
+     ------------------------------------------------------------------ */
+
+  /* The jump nav belonged to the collapsed-accordion mobile layout, which is
+     gone: the columns are full sections now and you reach a material by
+     scrolling to it. */
+  .mat-nav { display: none; }
+
+  .mat-col_head {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    background-color: var(--white);
+  }
+
+  /* Above the material headers. The bar is sticky with no z-index of its
+     own, so a header (z-index 6) scrolling up from below rode over it. */
+  .sticky-ui { z-index: 20; }
+
+  /* The stack hangs from the title and the pieces fall away beneath it, so the
+     frame is one screen minus the two fixed bars, and the wall is the scroll
+     budget: three frames buys the whole arc — open, a beat long enough to read
+     five prices and press one, and the reassembly at the end.
+
+     .hp-storage_wrap-box is already `position: sticky`; that is the design's
+     own mechanism for parking the stack while the wall scrolls past it. It
+     could not stick at its stock min-height of 100vh, because a sticky box
+     taller than its scrollport never parks. Sized to the frame it works as
+     drawn, which is why none of this needs a GSAP pin. */
+  .mat-cols .hp-storage_wrap-box {
+    height: calc(100vh - var(--bar-room, 20rem) - var(--head-h, 9.5rem));
+    min-height: 0;
+    top: var(--head-h, 9.5rem);
+    /* The frame centred its content, which is where the ~320px of air between
+       the material title and the closed stack came from. Top-aligned, the cap
+       sits directly under the title — and because the cap is the one piece
+       that never moves, everything below it now falls into the room the
+       centring used to waste. */
+    justify-content: flex-start;
+    padding-top: 1.2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* The wall is the explode's scroll budget. What the scroll actually spends
+     is the wall LESS one height of the scroller it sits in — that difference
+     is the run — so the wall has to be expressed in the scroller's own units
+     or the run does not survive a resize. It used to be a multiple of the
+     FRAME, which is 100vh less the bar and the header: two fixed costs, so on
+     a short window the frame collapsed faster than the scroller and the
+     subtraction ate what was left. Measured at 1200 × 560 the whole explode
+     had 114px of wheel — one nudge and the stack went from shut to open —
+     against 570px at 1440 × 900. That is the weird scrolling on a laptop.
+
+     In the scroller's units it holds: the opening is OPEN_SCREENS ≈ 0.71 of a
+     screen of wheel (it does not come apart in a flick) and the rest is the
+     held beat at the cap — the stack fully open, the wheel running against a
+     parked frame, before the accessories come up. Same on the way back.
+
+     --wall-screens is written by the script, off the same OPEN_HOLD that
+     sizes the beat: one screen for the parked frame plus the run itself,
+     1 + OPEN_SCREENS · T. The fallback here is the value for the shipped
+     hold, for the paint before the script runs — it is not a second place to
+     change the number. */
+  .mat-cols .hp_storage-wrap_wall {
+    height: calc(var(--wall-screens, 2.54) * (100vh - var(--bar-h, 13rem)));
+  }
+
+  /* .hp_storage-box sizes itself in em off this font-size, and the box is
+     ~100em tall. A purely width-derived size overflows a short window: the
+     closed stack alone came out taller than the frame, taking the offer panel
+     off the bottom of the screen. Capped against the frame's own height as
+     well, with room left for the panel beneath it. */
+  /* The em base every render in the shop is drawn from — .hp_storage-box is
+     80em wide and .hp_storage_visual 43.2em, so this one number sets both the
+     stack and the accessories below it, at every width.
+
+     The vw figures mirror what the stylesheet already used per breakpoint
+     (.6 / .92 / 1), because the stack is sized off the width it is given and a
+     narrow screen needs a bigger share of it. A single flat value made the
+     stack shrink to a third of a phone screen. The second term is a height cap:
+     the box is ~100em tall, so a purely width-derived size overflows a short
+     window and takes the offer panel off the bottom of it. */
+  .mat-cols {
+    --piece-em: min(.78vw, calc((100vh - var(--bar-room, 20rem) - var(--head-h, 9.5rem) - 17rem) / 118));
+  }
+
+  @media screen and (max-width: 767px) {
+    /* .85 → .70 on AZ's call (8/19): "shrink the silo a bit — so when fully
+       expanded it fits." The smaller stack is what buys the open spread its
+       room — the offsets are measured into the frame now (see
+       createScrollTrigger), and a .85vw stack left them only ~20px apart. */
+    .mat-cols { --piece-em: min(.7vw, calc((100vh - var(--bar-room, 20rem) - var(--head-h, 9.5rem) - 17rem) / 118)); }
+  }
+
+  .mat-cols .hp_storage-box {
+    position: relative;
+    overflow: visible;
+    font-size: var(--piece-em);
+  }
+
+  /* The explode IS the piece listing now — "we don't need to repeat all the
+     stuff in the back". The rows stay in the DOM because CartManager iterates
+     section.section_cart and they are still the model the controls read and
+     write; only their own UI is hidden. */
+  .mat-cols .is-in-explode { display: none; }
+
+  /* ---------- desktop: three lanes on one scroll surface ------------ */
+  @media screen and (min-width: 992px) {
+    /* One scroll surface, three lanes.
+       The columns used to be three independent scrollers, and making them move
+       together meant mirroring scrollTop between them — which then needed the
+       three lanes padded to equal height, or the shortest one clamped and
+       dragged the others to a stop before they reached their own ends. Scrolling
+       the grid instead is the same behaviour with none of that: one scrollport,
+       one scrollbar to hide, and stretched grid items give equal heights for
+       free. The sticky headers and the sticky explode frames now park against
+       this box. */
+    .mat-cols {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 2px solid var(--gray_400);
+      height: calc(100vh - var(--bar-h, 13rem));
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      /* The material headers are sticky against THIS box, not the window, so
+         anything that scrolls the box itself takes the titles with it. Any
+         page scroll under the shop would otherwise slide the whole grid up —
+         headers off the top of the screen, and the cap left sitting at y=0
+         with no title above it. Stuck to the viewport, a title is above its
+         stack the whole time. */
+      position: sticky;
+      top: 0;
+    }
+
+    .mat-cols::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+    .mat-col {
+      min-width: 0;
+      border-left: 2px solid var(--gray_400);
+    }
+
+    .mat-col:first-child { border-left: 0; }
+
+    /* These sections were drawn full-bleed; at a third of the width every
+       measure has to come down a step. */
+    .mat-cols .padding-global {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    /* Applied to every section in a column, not only .sku-addon ones. The
+       stack rows and the inserts row are not addons, and kept the full-bleed
+       64px heading while the piece rows sat at 24px. */
+    .mat-cols .section_hp-storage-extra {
+      padding-top: 3.2rem;
+      padding-bottom: 3.2rem;
+    }
+
+    .mat-cols .section_hp-storage-extra .heading-style-h1 {
+      font-size: 2.4rem;
+    }
+
+    /* The price and quantity are drawn at 96px for a full-bleed row; at a
+       third of the width "$299 − 0 +" runs off the end. The price tracks
+       this automatically — applyTopPrices() copies the computed size off
+       the quantity element. */
+    .mat-cols .shopify-buy__quantity {
+      font-size: 3.6rem;
+      line-height: 1.1;
+    }
+
+    /* Every product visual in a column, not just the .sku-addon ones — the
+       stack rows and the inserts are not addons and would otherwise render
+       at double the size of the pieces beside them. Both properties are set,
+       and the selector carries three classes, because the .sku-addon rule
+       above pins width as well as max-width at the same specificity. */
+    .mat-cols .section_hp-storage-extra .hp_storage-extra_visual {
+      width: min(17rem, 100%);
+      max-width: 17rem;
+    }
+
+    /* The collapse control is a mobile affordance; all three columns are
+       visible at once here. */
+    .mat-col_toggle { display: none; }
+
+    .mat-cols .section_cart.sku-addon .cart-middle {
+      padding-top: 2.4rem;
+      padding-bottom: 2.4rem;
+    }
+
+    .mat-cols .section_cart.sku-addon .cart-top {
+      padding-top: 1.6rem;
+      padding-bottom: 1.6rem;
+    }
+
+    /* A column is a third of the window here, so a third of the stock .6vw —
+       then 15% off that, with the type beside it: the render and its control
+       were jammed against the column edge. */
+    .mat-cols {
+      --piece-em: min(.27vw, calc((100vh - var(--bar-room, 20rem) - var(--head-h, 9.5rem) - 17rem) / 118));
+    }
+
+  }
+
+  /* ---------- mobile: one material per screen ----------------------------
+     Three columns side by side do not survive a phone, and the peek-and-expand
+     accordion that used to stand in for them showed a slice of a stack with no
+     room to open it. Stacked instead: each material is a full section, and
+     scrolling through it runs the same arc desktop runs — title, closed stack,
+     the pieces falling away beneath a cap that stays put, then the next
+     material's title. Same mechanism three times rather than a different
+     mechanism once.
+     ------------------------------------------------------------------ */
+  @media screen and (max-width: 991px) {
+    /* No own scroller here: the window is what scrolls, so the columns are a
+       plain flow of full-width sections and each explode's sticky frame parks
+       against the viewport. */
+    .mat-cols { display: block; }
+
+    .mat-col_toggle { display: none; }
+
+    /* At full width the em base is the stock one, which the shared height cap
+       above still trims on a short screen. */
+    /* Symmetric, or the piece is not centred on the screen: the grid is
+       1fr / auto / 1fr, so the piece sits dead centre of the padded box and
+       any extra on one side shifts it. Room for the price and stepper to
+       clear the right edge comes from tightening the gaps, not the padding:
+       on a 390px phone the side column has to hold ~97px of type. */
+    .mat-cols .padding-global {
+      padding-left: 1.6rem;
+      padding-right: 1.6rem;
+    }
+    .mat-cols { --side-gap: 1.6rem; }
+    .piece-side { flex-wrap: nowrap; gap: 1rem; }
+
+    /* Keep the explode's negative bottom margin inside the column instead of
+       letting it collapse out through it. Contained, it shortens the column
+       to the height of what the column actually draws — which is what the
+       sticky title measures its stay against, so TITANIUM now lets go of the
+       top of the screen before the accessories arrive under it rather than
+       hovering over them to the end of the page. */
+    .mat-cols .mat-col_body { display: flow-root; }
+
+    /* One material to the next. The gap used to be whatever the explode's
+       release happened to leave behind — 0 after a column with no inserts,
+       a screen after one with them. It is a set distance now, the same
+       before every title, and the same one the accessories get below. */
+    .mat-cols .mat-col + .mat-col { margin-top: 6.4rem; }
+
+    /* Moved out of its column by placeAccessories(), the row is no longer the
+       bottom of a stack — it is the last beat of the page, after all three.
+       So it takes the lead-in the column version deliberately refuses, and
+       the same measure under it: the row's own box is the wall the parked
+       inner runs against, and where the wall ends is where the page does. */
+    .mat-cols > .section_hp-storage-extra.inserts-row {
+      padding-top: 6.4rem;
+      padding-bottom: 6.4rem;
+    }
+  }
+
+  /* ==================================================================
+     Buy from the explode.
+     Each piece sits in a three-column grid — the piece in the middle,
+     a slot either side. Both the size and the price live in the right
+     slot: "one side of type". The left slot is left empty rather than
+     removed, because it is what keeps the piece itself centred.
+     ================================================================== */
+  /* Webflow drew the row as three fixed columns because both outer slots held
+     type. With the left one empty it collapsed and took the stack off-centre
+     with it, so the sides are now equal fractions and the piece is what sizes
+     the middle — the stack stays centred whatever the type beside it says. */
+  /* Every piece has to hang off the same vertical axis, or the cap does not sit
+     on the body it is closing.
+
+     Webflow sets `grid-template-columns: 1fr auto 1fr` on each .is-N, and `1fr`
+     is `minmax(auto, 1fr)` — its floor is min-content. So the type column grew
+     to fit whatever was in it and pushed the piece across by the difference.
+     "LID  Included" is narrower than "90 MM  Included", which is why the cap
+     alone sat ~25px right of the stack below it, and why titanium (no steppers,
+     so every block the same width) looked fine.
+
+     minmax(0, ...) drops that floor so the two side tracks are always equal.
+     Three classes because the .is-N rules carry two. */
+  .mat-cols .hp_storage-box .hp_storage-box_inner {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  /* Placed explicitly, because the row now has two children where it had two
+     others: auto-placement would put the piece in the left slot and slide the
+     whole stack across. */
+  .hp_storage-box_inner > .hp_storage_visual { grid-column: 2; }
+  .hp_storage-box_inner > .piece-side { grid-column: 3; }
+
+  /* The size, in the left slot, set against the piece: LID on the left,
+     price and stepper on the right, the render between them. Its stock rules
+     make it a full-width flex row; here it hugs the piece. */
+  .hp_storage-box_inner > .piece-label,
+  .inserts-row_cell > .piece-label {
+    grid-column: 1;
+    justify-self: end;
+    width: auto;
+    max-width: none;
+    justify-content: flex-end;
+    text-align: right;
+    line-height: 1;
+  }
+
+  /* The same size as the price across from it. Stock, the heading is sized
+     in em off the piece and comes out a step larger than the type it now
+     shares a line with. */
+  .piece-label .hp_storage-heading {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  /* Air between the type and the render, both sides. One value, so the
+     closed stack's panel, the piece rows and the accessories all line up. */
+  .mat-cols { --side-gap: 2.8rem; }
+  .mat-cols .hp_storage-box .hp_storage-box_inner,
+  .inserts-row_cell { column-gap: var(--side-gap); }
+
+  /* Price and stepper on one line, centred on each other. */
+  .piece-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.2rem;
+    justify-self: start;
+    text-align: left;
+    line-height: 1;
+    color: var(--gray_200);
+  }
+
+  .piece-side_head {
+    display: flex;
+    align-items: baseline;
+    gap: .8rem;
+    white-space: nowrap;
+  }
+
+  .piece-buy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .4rem;
+    line-height: 1;
+  }
+
+  .piece-buy_price {
+    font-size: 1.1rem;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .piece-buy_qty {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  /* Bare glyphs. They had circles round them, which read as buttons in a
+     column where nothing else is a button. */
+  .piece-buy_step {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--gray_100);
+    cursor: pointer;
+    user-select: none;
+    transition: color .15s;
+  }
+
+  .piece-buy_step:hover { color: var(--gray_200); }
+
+  .piece-buy_n {
+    min-width: 1.4rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Nothing in the cart, nothing to count. The row is the size, the render
+     and the price until you own one — a column of grey zeros beside every
+     piece was chrome standing in for information it did not have. The count
+     appears with the first one, where it earns its place: it is also the only
+     way back out, since clicking the render only ever adds.
+     (The phone had this already; it is every width now.) */
+  /* Hidden, not removed: the stepper keeps its footprint at zero. With
+     display: none the − vanished from under the pointer on the press that
+     emptied the line, so the next press of a quick run landed on the render
+     or the stack behind it, which only ever add. On a phone that ran
+     1, 0, 1, 0: the − seemed to fight back, and it drew rage clicks. Now a
+     press on the empty slot lands inside .piece-side or .stack-offer, which
+     the add handlers already ignore, so 0 is the floor and it stays there. */
+  .piece-buy.is-empty .piece-buy_qty { visibility: hidden; }
+
+  .piece-buy_price.is-included {
+    color: var(--gray_100);
+    font-size: 1.1rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Phone: tap the item, not a stepper --------------------------------
+     "If somebody just taps on the item it adds to cart." Below the desktop
+     cutoff the render itself is the add control (wired in
+     buildPieceControls / buildInsertsRow), so the piece rows lose the +:
+     three glyphs of chrome beside every piece was the ugliest thing in the
+     row. At zero the row is just the price; once something is in the cart
+     the count appears with the − beside it — the way back out — both drawn
+     bigger, since they are now the row's only control and a thumb has to
+     hit the −. The offer panel's stepper keeps its + : the closed stack
+     cannot be tapped (five pieces overlap there), so the panel is still
+     its own control. */
+  @media screen and (max-width: 991px) {
+    .piece-side .piece-buy_inc { display: none; }
+    .piece-side .piece-buy_step {
+      width: 3.2rem;
+      height: 3.2rem;
+      font-size: 1.7rem;
+    }
+    .piece-side .piece-buy_n {
+      font-size: 1.7rem;
+      min-width: 1.7rem;
+    }
+    [data-explode] .hp_storage-box_inner,
+    .inserts-row_cell {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+  @keyframes piece-tap {
+    50% { transform: scale(.96); }
+  }
+  .is-tapped { animation: piece-tap .22s ease; }
+
+  /* A render is a control now, not a picture to drag off the page. Press and
+     move a pixel — which is what half of all clicks are — and Chrome started
+     an image drag instead: the little globe that came up under the cursor
+     mid-click. Nothing here is draggable, and nothing here is selectable, so
+     a double-click does not leave a size label highlighted either. */
+  .hp_storage-box_inner,
+  .inserts-row_cell { user-select: none; -webkit-user-select: none; }
+  .hp_storage_visual img,
+  .inserts-row_img img,
+  .cart-strip_item img { -webkit-user-drag: none; }
+
+  /* Click-to-add works at every width now, not only under a thumb. Desktop
+     is told by the hand: a sellable piece under an open stack shows a
+     pointer and firms up a step on hover; the click dips it, the same
+     acknowledgement as the tap. Titanium's pieces have no .piece-buy, so
+     they never invite a click they cannot honour. */
+  @media screen and (min-width: 992px) {
+    .hp_storage_visual,
+    .inserts-row_img { transition: transform .18s ease; }
+    [data-explode]:not(.is-panel-live) .hp_storage-box_inner:has(.piece-buy),
+    [data-explode].is-panel-live .hp_storage-box,
+    .inserts-row_cell:has(.piece-buy) { cursor: pointer; }
+    [data-explode]:not(.is-panel-live) .hp_storage-box_inner:has(.piece-buy):hover .hp_storage_visual,
+    .inserts-row_cell:has(.piece-buy):hover .inserts-row_img { transform: scale(1.02); }
+  }
+
+  /* How you buy is invisible until you know it, so the bar says it once:
+     a quiet line in the empty middle of the checkout bar, white on the
+     bar's grey, gone the moment the first item lands (the strip filling is
+     the signal — and the proof the lesson took). Absolutely centred so the
+     bar never changes height over it. */
+  .cart_box-checkout { position: relative; }
+  .bar-hint {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.1rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--white);
+    opacity: .55;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .sticky-ui:has(.cart-strip.is-filled) .bar-hint { opacity: 0; }
+  /* On a phone the bar's centre is not the middle of the room: the subtotal
+     takes the left, CHECKOUT takes the right, and at 390px "Click the stack
+     to add it" — the longer of the two lines — ran under the button. Held to
+     the width that clears both and allowed to take a second line, which costs
+     nothing: the line is absolutely positioned, so the bar's height is the
+     bar's height whatever it says. */
+  @media screen and (max-width: 479px) {
+    .bar-hint {
+      font-size: 1rem;
+      letter-spacing: .06em;
+      white-space: normal;
+      max-width: 12rem;
+      line-height: 1.35;
+      text-align: center;
+    }
+  }
+
+  /* ---- the closed stack sells itself ------------------------------------
+     The three per-column receipts are gone; the grey bar at the bottom of the
+     window is the only subtotal on the page. What is left in the frame is the
+     offer, and it carries the one control the receipt used to: the same
+     stepper the pieces have. (There was a "Add full stack" callout beside
+     it; the plus and minus are enough.)
+
+     It sits to the right of the closed stack, on the axis the piece steppers
+     take when the stack opens. The pieces move by transform and never reflow,
+     so the panel holds this position the whole way through the explode —
+     where it is faded out and untouchable.
+     ------------------------------------------------------------------ */
+  .stack-offer {
+    /* Hung off the bottom of the closed stack rather than laid out under it.
+       In flow it would take its height out of the frame, and the frame's
+       leftover height IS the distance the pieces travel — the panel would be
+       buying its own space out of the explode. Absolute, it costs nothing:
+       while the stack is open the pieces move through this spot and the panel
+       is faded out anyway. The stack box no longer moves, so "below the stack"
+       is a fixed place. */
+    position: absolute;
+    /* The same three tracks as a piece row — a 43.2em render in the middle,
+       the type either side of it, --side-gap off — laid over the closed stack at
+       its centre line. STACK sits in the left slot like a size label; the
+       price and stepper take the right, exactly where the pieces' steppers
+       come up when it opens — one control slot, occupied by whichever state
+       is showing. */
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 43.2em minmax(0, 1fr);
+    column-gap: var(--side-gap, 2.8rem);
+    align-items: center;
+    line-height: 1;
+    color: var(--gray_200);
+    text-decoration: none;
+    /* The timeline owns this opacity. Faded out it still occupies its slot, so
+       clicks are gated by the section class below rather than by visibility —
+       an invisible control is still a hit target. */
+    pointer-events: none;
+    /* Above the piece rows, which stack themselves z-index 1 to 5 (lid on
+       top). Below them, the 60's row lay over the panel's − on a phone
+       whenever a piece row held a count, so pressing − on the stack added
+       a stack. */
+    z-index: 6;
+  }
+
+  /* Live only when the stack is actually closed and the panel actually shown:
+     at the very start, and again once the pieces have reassembled. Set by
+     applyPart, which is the one place that knows where the
+     timeline is. Only the stepper takes the press: the panel spans the
+     stack's full width, and the rest of it lets clicks through to the stack
+     underneath, which adds one. */
+  [data-explode].is-panel-live .stack-offer_buy { pointer-events: auto; }
+
+
+
+  .stack-offer_side {
+    grid-column: 3;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    white-space: nowrap;
+  }
+
+  .stack-offer_head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .stack-offer_name {
+    grid-column: 1;
+    justify-self: end;
+    text-align: right;
+    font-size: 1.1rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .stack-offer_price { font-size: 1.4rem; }
+
+  .stack-offer_tag {
+    color: var(--gray_100);
+    font-size: 1.1rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  /* ---- the visual cart -------------------------------------------------
+     A row of thumbnails above the grey bar: what is in the cart, as the
+     objects themselves. It is drawn from the same collapsed line items that
+     price the bar and build the checkout permalink, so a complete set shows
+     as one stack thumbnail rather than five pieces — the picture agrees with
+     the number by construction.
+     ------------------------------------------------------------------ */
+  /* Hairline, not the stock 2px rule: one device pixel on a retina screen. */
+  .sticky-ui { border-top: .5px solid var(--gray_400); }
+
+  .cart-strip {
+    background-color: var(--white);
+    border-top: .5px solid var(--gray_400);
+    height: 0;
+    overflow: hidden;
+    transition: height .28s ease;
+  }
+
+  /* Two heights, not many: the bar's height feeds --bar-h, which sizes every
+     explode frame on the page. A strip that grew with its contents would
+     resize the shop on every click. */
+  .cart-strip.is-filled { height: 7.2rem; }
+
+  .cart-strip_items {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.6rem;
+    height: 7.2rem;
+    padding: .8rem 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  .cart-strip_items::-webkit-scrollbar { height: 0; display: none; }
+
+  .cart-strip_item {
+    position: relative;
+    flex: 0 0 auto;
+    width: 5rem;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .cart-strip_item img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    transition: opacity .18s ease;
+  }
+
+  /* The thumbnail is the control for the thing it pictures: press it and one
+     comes back out of the cart. The hover says so in the object's own terms —
+     the render steps back and the stepper's minus takes its place — rather
+     than hanging a delete button off every picture in the row. A minus, not
+     a cross: a press takes one off, so a ×3 goes to ×2. */
+  .cart-strip_item { cursor: pointer; }
+
+  .cart-strip_item:hover img,
+  .cart-strip_item:focus-visible img { opacity: .2; }
+
+  .cart-strip_item::after {
+    content: '\2212';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--gray_200);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+  }
+
+  .cart-strip_item:hover::after,
+  .cart-strip_item:focus-visible::after { opacity: 1; }
+
+  /* Only when there is more than one, so a cart of singles stays a row of
+     objects rather than a row of badges. Top right, clear of the base the
+     renders all stand on. */
+  .cart-strip_n {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 1.7rem;
+    padding: 0 .4rem;
+    border-radius: 1rem;
+    background-color: var(--gray_200);
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.7rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The stepper used to be desktop-only, because the two things it depends on
+     were missing below 992px: a sticky frame for the pieces to hold still in,
+     and room in the piece grid's third column. Mobile has the frame now — it
+     runs the same explode — and the grid's side tracks are equal fractions of
+     a full-width column rather than a third of one, so the control fits. The
+     piece rows it replaced stay hidden at every width. */
+
+  /* A stacked stack is five pieces sitting on top of each other, so its five
+     controls are five overlapping hit targets. They fade in with the expand
+     (the timeline drives opacity) and only take clicks once it has opened. */
+  .hp_storage-box.is-stacked .piece-side { pointer-events: none; }
+
+  /* The explode IS the piece listing now — "we don't need to repeat all the
+     stuff in the back". The rows stay in the DOM because CartManager iterates
+     section.section_cart and they are still the model the controls read and
+     write; only their own UI is hidden. Desktop only: the mobile explode has
+     no stepper, so the rows are the only way to buy there. */
+  @media screen and (min-width: 992px) {
+    .mat-cols .is-in-explode { display: none; }
+    /* Room to breathe: air above the material name, and between the name
+       and the lid. Both are measured (--head-h) so the frame simply gets
+       shorter by the same amount. */
+    .mat-col_head-inner { padding-top: 5.6rem; padding-bottom: 3.2rem; }
+    .mat-cols .hp-storage_wrap-box { padding-top: 4rem; }
+    /* The checkout bar sits at the bottom of the page here, in flow under
+       the shop's scroller — not stuck to the window. The scroller is one
+       viewport less the bar, so with the shop in view the bar is at the foot
+       of the window anyway; past the shop it scrolls on with the page.
+       Relative, not static, so its z-index holds and nothing from the
+       columns paints over it. */
+    .sticky-ui { position: relative; z-index: 20; }
+  }
+
+  /* Taken off the page, not out of the store. The 30mm and 60mm inserts are
+     still live Shopify products; they simply do not have a row here any more.
+     Marked in the markup rather than deleted so putting them back is one class,
+     and so they keep reconciling against the storefront. */
+  .is-shelved { display: none; }
+
+  /* ------------------------------------------------------------------
+     No rules inside the shop.
+     Webflow draws a 2px line under every .cart_box-top and
+     .cart_box-middle, and the column shell added dividers and a header
+     rule on top of that, which chopped the page into a grid of boxes.
+     Spacing separates the rows instead. Last block in the sheet so it
+     wins on order; the cart bar keeps its own top border, since that
+     one divides fixed UI from content.
+     ------------------------------------------------------------------ */
+  .mat-cols,
+  .mat-col,
+  .mat-col_head,
+  .mat-cols .cart_box-top,
+  .mat-cols .cart_box-middle,
+  .mat-cols .section_cart .cart_box-middle.cc-last,
+  /* The explode's own bottom border. It was invisible while the three columns
+     scrolled separately, because they never lined up; on one scroll surface all
+     three land at the same y and read as one rule across the shop. */
+  .mat-cols .section_hp-storage,
+  .mat-cols .section_hp-storage-extra,
+  .mat-cols .section_hp-storage-extra.sku-addon {
+    border: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .mat-nav,
+    .mat-nav_link {
+      border: 0;
+    }
+    /* No panning on a phone: the page only moves up and down. Anything that
+       overhangs the viewport sideways is clipped rather than draggable, and
+       touch is told so, so a diagonal thumb never skids the page sideways.
+       `clip`, not `hidden`: overflow-x hidden on the body makes the body a
+       scroll container of its own, and every sticky frame then parks against
+       the body's box instead of the viewport — the whole shop drifts. `clip`
+       only clips. */
+    html, body {
+      overflow-x: clip;
+      touch-action: pan-y;
+      overscroll-behavior-x: none;
+    }
+    /* On a phone the checkout bar is fixed to the foot of the window the
+       whole way down, and the page ends with the bar's height of padding so
+       the last of it can scroll clear of the bar. */
+    .sticky-ui {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .page-wrapper { padding-bottom: var(--bar-h, 13rem); }
+  }
+
+  /* ---- Titanium waitlist ------------------------------------------------
+     Set in the Silo design system, not the page's Webflow idiom. It was a
+     full-bleed band, the system's own answer to a dialog — and at full width
+     the type had to be display-sized to hold the room, which made asking for
+     an email look like a product launch. So: a small panel, centred, sized to
+     the sentence it is asking. The parts are unchanged — a row, a hairline,
+     an action strip — just at dialog scale. Kantumruy Pro throughout; every
+     label Dark Grey #616161, never black; the hairline #DDE1E0 runs the full
+     width of the panel; negative tracking; nothing rounded, nothing shadowed.
+     The email input follows the stepper's rule — no box, no border, no
+     background — it is type sitting on the panel, closed by the hairline.
+     Inactive/placeholder = the same Dark Grey at 20% opacity, per the
+     variant-list rule. */
+  .wl-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 40; /* over the bar (20) */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2.4rem;
+    background: rgba(97, 97, 97, .55); /* Dark Grey over the page */
+  }
+  .wl-veil.is-open { display: flex; }
+
+  .wl-band {
+    position: relative;
+    width: 100%;
+    max-width: 42rem;
+    background: #ffffff;
+    font-family: 'Kantumruy Pro', system-ui, sans-serif;
+    color: #616161;
+  }
+
+  .wl-band_head {
+    padding: 2.8rem 5.6rem 2.4rem 2.8rem; /* room for the close */
+  }
+
+  .wl-title {
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .wl-copy {
+    margin-top: .6rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+  }
+
+  .wl-close {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+    padding: .8rem;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #616161;
+    cursor: pointer;
+  }
+
+  .wl-form { margin: 0; }
+
+  .wl-input {
+    display: block;
+    width: 100%;
+    padding: 0 2.8rem 1.6rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    font-family: inherit;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #616161;
+    caret-color: #616161;
+  }
+  .wl-input:focus { outline: none; }
+  .wl-input::placeholder { color: #616161; opacity: .2; }
+
+  .wl-hairline {
+    width: 100%;
+    height: 1px;
+    background: #DDE1E0;
+  }
+
+  /* The action strip — the action bar's grammar at panel scale: Dark Grey,
+     edge to edge of the panel, state on the left in white, the one action
+     on the right. */
+  .wl-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    min-height: 4.8rem;
+    padding: .8rem 2.8rem;
+    background: #616161;
+    color: #ffffff;
+  }
+
+  .wl-msg {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: #ffffff;
+  }
+  .wl-msg a { color: #ffffff; text-decoration: underline; }
+
+  .wl-submit {
+    padding: .8rem 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .wl-submit:disabled { opacity: .2; cursor: default; }
+</style><script defer src="/public/tracking.js"></script></head><body><div class="page-wrapper"><header class="nav_wrapper hide"><div data-w-id="bab75165-42d9-528d-0a10-03f54767e2a7" data-animation="default" data-collapse="none" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav"><div class="nav_wrap"><a href="#" class="nav_brand w-nav-brand"><div class="img-brand w-embed"><svg width="100%" height="100%" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_11607_51168)">
+<path d="M15.0643 36.0031H10.043V57.9411H15.0643V36.0031Z" fill="currentColor"></path>
+<path d="M10.043 26.8795L77.2344 26.8627C78.1746 26.8627 78.9361 26.1006 78.9361 25.1597C78.9361 24.2189 78.1746 23.4567 77.2344 23.4567L10.043 23.4679V10.0086H83.9631V15.0339H16.766C15.8259 15.0339 15.0643 15.796 15.0643 16.7369C15.0643 17.6777 15.8259 18.4399 16.766 18.4399L83.9659 18.4454V31.8936L10.0458 31.9019V26.8767L10.043 26.8795Z" fill="currentColor"></path>
+<path d="M16.766 78.9633C15.8259 78.9633 15.0643 78.2012 15.0643 77.2603V68.8319C15.0643 67.8911 15.8259 67.1289 16.766 67.1289H77.2428C78.1829 67.1289 78.9445 67.8911 78.9445 68.8319V77.2603C78.9445 78.2012 78.1829 78.9633 77.2428 78.9633H16.766ZM83.9631 62.1064H10.043V83.9886H83.9631V62.1064Z" fill="currentColor"></path>
+<path d="M18.7158 36.0031H23.7372L23.7483 51.2156C23.7483 52.1565 24.5099 52.9186 25.45 52.9186H83.9629V57.9439H18.7158V36.0059V36.0031Z" fill="currentColor"></path>
+<path d="M5.02137 7.46528C5.02137 6.09171 6.13444 4.97778 7.50694 4.97778H86.4903C87.8628 4.97778 88.9759 6.09171 88.9759 7.46528V86.5375C88.9759 87.9111 87.8628 89.025 86.4903 89.025H7.50694C6.13444 89.025 5.02137 87.9111 5.02137 86.5375V7.46528ZM94 0H0V94H94V0Z" fill="currentColor"></path>
+</g>
+<defs>
+<clipPath id="clip0_11607_51168">
+<rect width="94" height="94" fill="currentColor"></rect>
+</clipPath>
+</defs>
+</svg></div></a><nav role="navigation" class="nav_menu-items w-nav-menu"><div class="nav_menu-items-inner"><a href="#" class="nav_link w-nav-link">Login</a><a href="#" class="button w-inline-block"><div>Button</div></a></div></nav><div class="nav_button w-nav-button"><div class="nav_button-inner"><div class="menu_top-line"></div><div class="menu_middle-line"></div><div class="menu_bottom-line"></div></div></div></div></div></header><div class="global-wrap"><div class="global-styles w-embed"><style>
+  /* ///////////////////// START OF GLOBAL EDITS ///////////////////// */
+  main:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+ 
+  html{
+    font-size: 62.5%;
+  }
+  
+  /* --- Font Smoothing --- */
+  body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Make sure containers never lose their center alignment*/
+  .container-medium, .container-small, .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* --- Links --- */
+   .link-arrow{
+    transition: 350ms;
+  }
+  
+  a:hover .link-arrow{
+    transform: translateX(0.25rem);
+  }
+
+  /* --- Rich Text --- */
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+  .text-rich-text li::marker{
+    color: black;
+  }
+
+  /* --- Inherit links styling --- */
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    font-size: inherit;
+  }
+
+  /* --- Prevent --- */
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+  
+  /* Prevent highlight on element */
+  .user-select-off {
+    user-select: none;
+  }
+
+  /*Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  /* Apply "..." at 100% width */
+  .truncate-width { 
+    width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+
+  /* Removes native scrollbar */
+  .no-scrollbar {
+    -ms-overflow-style: none;  
+    overflow: -moz-scrollbars-none;  
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* --- These classes are never overwritten --- */
+  .hide {
+    display: none !important;
+  }
+  
+  /* --- section --- */
+  .section {
+  position: relative;
+  }
+
+  @media screen and (max-width: 991px), 
+  @media screen and (max-width: 767px), 
+  @media screen and (max-width: 479px){
+    .hide, .hide-tablet{
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 767px){
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 479px){
+    .hide-mobile{
+      display: none !important;
+    }
+  }
+  /* ///////////////////// END OF GLOBAL EDITS ///////////////////// */
+
+  /* ///////////////////// START OF SPACINGS ///////////////////// */
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  /* ///////////////////// END OF SPACINGS ///////////////////// */
+
+  /* ///////////////////// ELEMENTS ///////////////////// */
+
+  /* Swiper */
+  .swiper-button-disabled {
+    opacity: 0.5;
+    pointer-events:none;
+  }
+  
+   /* Tabs */
+  .w-tabs:before, .w-tabs:after{
+	display: none;
+}
+
+ /* Visuals */
+  [class$="_visual"],
+  [class*="_visual "]{
+    position: relative;
+    overflow: hidden;
+  }
+
+  [class$="_visual"] > :is(div,p,a,ul),
+  [class*="_visual "] > :is(div,p,a,ul){
+    z-index: 2;
+  }
+</style></div></div><div class="css-page-specific w-embed"><style>
+@media only screen and (min-width: 1440px) {
+  .hp_storage-box{
+      font-size: 9px;
+  }
+}
+</style></div><main class="main-wrapper"><section class="section_hp-hero"><div data-poster-url="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4%2F682687d296903b2dc4a960fc_SILO_20SEC_R4_1A-poster-00001.jpg" data-video-urls="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4%2F682687d296903b2dc4a960fc_SILO_20SEC_R4_1A-transcode.mp4,https://cdn.prod.website-files.com/67b34e4928a0b575614410f4%2F682687d296903b2dc4a960fc_SILO_20SEC_R4_1A-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="hp_hero-bg w-background-video w-background-video-atom"><video id="ec07f89e-94f9-2de7-2956-0d43b13fe7d4-video" autoplay="" loop="" style="background-image:url(&quot;https://cdn.prod.website-files.com/67b34e4928a0b575614410f4%2F682687d296903b2dc4a960fc_SILO_20SEC_R4_1A-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover"><source src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4%2F682687d296903b2dc4a960fc_SILO_20SEC_R4_1A-transcode.mp4" data-wf-ignore="true"/><source src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4%2F682687d296903b2dc4a960fc_SILO_20SEC_R4_1A-transcode.webm" data-wf-ignore="true"/></video></div><div class="hp_hero-logo w-embed"><svg width="100%" height="100%" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_6360_230243)">
+    <mask id="mask0_6360_230243" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="97" height="97">
+      <path d="M97 0H0V97H97V0Z" fill="white"/>
+    </mask>
+    <g mask="url(#mask0_6360_230243)">
+      <path d="M15.5449 37.1523H10.3633V59.7904H15.5449V37.1523Z" fill="white"/>
+      <path d="M10.3633 27.7374L79.6992 27.7201C80.6693 27.7201 81.4552 26.9336 81.4552 25.9627C81.4552 24.9919 80.6693 24.2054 79.6992 24.2054L10.3633 24.2169V10.3281H86.6425V15.5137H17.3009C16.3308 15.5137 15.5449 16.3002 15.5449 17.271C15.5449 18.2419 16.3308 19.0284 17.3009 19.0284L86.6454 19.0342V32.9115L10.3662 32.9201V27.7345L10.3633 27.7374Z" fill="white"/>
+      <path d="M17.3009 81.4833C16.3308 81.4833 15.5449 80.6968 15.5449 79.7259V71.0285C15.5449 70.0576 16.3308 69.2711 17.3009 69.2711H79.7078C80.6779 69.2711 81.4638 70.0576 81.4638 71.0285V79.7259C81.4638 80.6968 80.6779 81.4833 79.7078 81.4833H17.3009ZM86.6425 64.0884H10.3633V86.6689H86.6425V64.0884Z" fill="white"/>
+      <path d="M19.3135 37.1523H24.4951L24.5066 52.8503C24.5066 53.8212 25.2925 54.6077 26.2626 54.6077H86.6429V59.7933H19.3135V37.1552V37.1523Z" fill="white"/>
+      <path d="M5.18162 7.70353C5.18162 6.28613 6.33022 5.13665 7.74653 5.13665H89.2506C90.6669 5.13665 91.8155 6.28613 91.8155 7.70353V89.2993C91.8155 90.7168 90.6669 91.8662 89.2506 91.8662H7.74653C6.33022 91.8662 5.18162 90.7168 5.18162 89.2993V7.70353ZM97 0H0V97H97V0Z" fill="white"/>
+    </g>
+  </g>
+  <defs>
+    <clipPath id="clip0_6360_230243">
+      <rect width="97" height="97" fill="white"/>
+    </clipPath>
+  </defs>
+</svg></div></section><div class="shop-block"><nav class="mat-nav" aria-label="Materials"><a class="mat-nav_link is-active" href="#col-aluminum" data-jump="aluminum">Aluminum</a><a class="mat-nav_link" href="#col-brass" data-jump="brass">Brass</a><a class="mat-nav_link" href="#col-titanium" data-jump="titanium">Titanium</a></nav><div class="mat-cols"><div class="mat-col" data-material="aluminum" id="col-aluminum"><div class="mat-col_head"><div class="mat-col_head-inner"><img class="mat-col_billet" data-billet="aluminum" alt=""/><div class="mat-col_name">Aluminum</div><div class="mat-col_note">6061-T6</div></div></div><div class="mat-col_body"><section class="section_hp-storage" data-explode="aluminum" data-stack-thumb="./public/silo-full.avif"><div class="padding-global"><div class="container-medium"><div class="hp_storage-wrap"><div class="hp_storage-wrap_wall"><div class="hp-storage_wrap-box"><div class="hp_storage-box"><div data-piece="8974057079036" class="hp_storage-box_inner is-1"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">LID</div></div></div><div class="hp_storage_visual is-1"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7f12d2ec8e9404b8f93_product_1.avif" loading="eager" sizes="(max-width: 1880px) 100vw, 1880px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7f12d2ec8e9404b8f93_product_1-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7f12d2ec8e9404b8f93_product_1-p-800.avif 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7f12d2ec8e9404b8f93_product_1.avif 1880w" alt="" class="cover-img"/></div></div><div data-piece="8974057832700" class="hp_storage-box_inner is-2"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">15 MM</div></div></div><div class="hp_storage_visual is-2"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6f075be9bcd2cadfa_product_2.avif" loading="eager" sizes="(max-width: 1880px) 100vw, 1880px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6f075be9bcd2cadfa_product_2-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6f075be9bcd2cadfa_product_2.avif 1880w" alt="" class="cover-img"/></div></div><div data-piece="8974058717436" class="hp_storage-box_inner is-3"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">30 MM</div></div></div><div class="hp_storage_visual is-3"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e696864d75fa4f300e_product_3.avif" loading="eager" sizes="(max-width: 1880px) 100vw, 1880px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e696864d75fa4f300e_product_3-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e696864d75fa4f300e_product_3-p-800.avif 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e696864d75fa4f300e_product_3.avif 1880w" alt="" class="cover-img"/></div></div><div data-piece="8974059077884" class="hp_storage-box_inner is-4"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">60 MM</div></div></div><div class="hp_storage_visual is-4"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6c7ff3d077102603e_product_4.avif" loading="eager" sizes="(max-width: 1880px) 100vw, 1880px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6c7ff3d077102603e_product_4-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6c7ff3d077102603e_product_4-p-800.avif 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6c7ff3d077102603e_product_4.avif 1880w" alt="" class="cover-img"/></div></div><div data-piece="8974059602172" class="hp_storage-box_inner is-5"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">90 MM</div></div></div><div class="hp_storage_visual is-5"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6e1b80b2bc2434cde_product_5.avif" loading="eager" width="Auto" sizes="(max-width: 1880px) 100vw, 1880px" alt="" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6e1b80b2bc2434cde_product_5-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6859c7e6e1b80b2bc2434cde_product_5.avif 1880w" class="cover-img"/></div></div></div></div></div></div></div></div></section><section sf-product="8973822722300" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual user-select-off"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/687b976cb6d083cca7a85028_silo-full.avif" loading="lazy" alt="" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra inserts-row"><div class="padding-global"><div class="container-medium"><div class="inserts-row_head">Inserts</div><div class="inserts-row_grid"><div class="inserts-row_cell" data-insert="8973828849916"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small.png" loading="lazy" alt="30mm Aluminum Insert" class="inserts-row_img"/><div class="inserts-row_name">30 MM</div></div><div class="inserts-row_cell" data-insert="8973831667964"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small.png" loading="lazy" alt="60mm Aluminum Insert" class="inserts-row_img"/><div class="inserts-row_name">60 MM</div></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/product_1.avif" loading="lazy" alt="Cap" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">CAP</div></div></div></div></div></div></section><section sf-product="8974057079036" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/trimmed/cap.png" loading="lazy" alt="Cap" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/product_2.avif" loading="lazy" alt="15" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">15</div></div></div></div></div></div></section><section sf-product="8974057832700" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/trimmed/15.png" loading="lazy" alt="15" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/product_3.avif" loading="lazy" alt="30" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">30</div></div></div></div></div></div></section><section sf-product="8974058717436" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/trimmed/30.png" loading="lazy" alt="30" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/product_4.avif" loading="lazy" alt="60" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">60</div></div></div></div></div></div></section><section sf-product="8974059077884" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/trimmed/60.png" loading="lazy" alt="60" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/product_5.avif" loading="lazy" alt="90" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">90</div></div></div></div></div></div></section><section sf-product="8974059602172" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/trimmed/90.png" loading="lazy" alt="90" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra is-shelved"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small.png" loading="lazy" sizes="(max-width: 1280px) 100vw, 1280px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small-p-500.png 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small-p-800.png 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small-p-1080.png 1080w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small.png 1280w" alt="" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">30MM INSERT</div></div></div></div></div></div></section><section sf-product="8973828849916" class="section_cart is-shelved"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small.png" loading="lazy" sizes="(max-width: 1280px) 100vw, 1280px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small-p-500.png 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small-p-800.png 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small-p-1080.png 1080w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252b423f5e113b657da4_insert-30mm-small.png 1280w" alt="" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra is-shelved"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small.png" loading="lazy" sizes="(max-width: 1280px) 100vw, 1280px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small-p-500.png 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small-p-800.png 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small-p-1080.png 1080w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small.png 1280w" alt="" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">60MM INSERT</div></div></div></div></div></div></section><section sf-product="8973831667964" class="section_cart is-shelved"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small.png" loading="lazy" sizes="(max-width: 1280px) 100vw, 1280px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small-p-500.png 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small-p-800.png 800w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small-p-1080.png 1080w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/6913252fd6715eb0f73c2c8c_inset-60mm-small.png 1280w" alt="" class="cover-img"/></div></div></div></div></section></div></div><div class="mat-col" data-material="brass" id="col-brass"><div class="mat-col_head"><div class="mat-col_head-inner"><img class="mat-col_billet" data-billet="brass" alt=""/><div class="mat-col_name">Brass</div><div class="mat-col_note">C360</div></div></div><div class="mat-col_body"><section class="section_hp-storage" data-explode="brass" data-stack-thumb="./public/brass_full.avif"><div class="padding-global"><div class="container-medium"><div class="hp_storage-wrap"><div class="hp_storage-wrap_wall"><div class="hp-storage_wrap-box"><div class="hp_storage-box"><div data-piece="brass-cap" class="hp_storage-box_inner is-1"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">LID</div></div></div><div class="hp_storage_visual is-1"><img src="./public/brass_cap.avif" loading="eager" alt="" class="cover-img"/></div></div><div data-piece="brass-15" class="hp_storage-box_inner is-2"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">15 MM</div></div></div><div class="hp_storage_visual is-2"><img src="./public/brass_15.avif" loading="eager" alt="" class="cover-img"/></div></div><div data-piece="brass-30" class="hp_storage-box_inner is-3"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">30 MM</div></div></div><div class="hp_storage_visual is-3"><img src="./public/brass_30.avif" loading="eager" alt="" class="cover-img"/></div></div><div data-piece="brass-60" class="hp_storage-box_inner is-4"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">60 MM</div></div></div><div class="hp_storage_visual is-4"><img src="./public/brass_60.avif" loading="eager" alt="" class="cover-img"/></div></div><div data-piece="brass-90" class="hp_storage-box_inner is-5"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">90 MM</div></div></div><div class="hp_storage_visual is-5"><img src="./public/brass_90.avif" loading="eager" width="Auto" alt="" class="cover-img"/></div></div></div></div></div></div></div></div></section><section sf-product="brass-stack" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual user-select-off"><img src="./public/brass_full.avif" loading="lazy" alt="Brass Stack" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/brass_cap.avif" loading="lazy" alt="Brass Cap" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">BRASS CAP</div></div></div></div></div></div></section><section sf-product="brass-cap" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/brass/cap.png" loading="lazy" alt="Brass Cap" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/brass_15.avif" loading="lazy" alt="Brass 15" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">BRASS 15</div></div></div></div></div></div></section><section sf-product="brass-15" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/brass/15.png" loading="lazy" alt="Brass 15" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/brass_30.avif" loading="lazy" alt="Brass 30" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">BRASS 30</div></div></div></div></div></div></section><section sf-product="brass-30" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/brass/30.png" loading="lazy" alt="Brass 30" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/brass_60.avif" loading="lazy" alt="Brass 60" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">BRASS 60</div></div></div></div></div></div></section><section sf-product="brass-60" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/brass/60.png" loading="lazy" alt="Brass 60" class="cover-img"/></div></div></div></div></section><section class="section_hp-storage-extra"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="./public/brass_90.avif" loading="lazy" alt="Brass 90" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">BRASS 90</div></div></div></div></div></div></section><section sf-product="brass-90" class="section_cart"><div class="cart_box-top"><div class="padding-global"><div class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="./public/stacking-trays/brass/90.png" loading="lazy" alt="Brass 90" class="cover-img"/></div></div></div></div></section></div></div><div class="mat-col" data-material="titanium" id="col-titanium"><div class="mat-col_head"><div class="mat-col_head-inner"><img class="mat-col_billet" data-billet="titanium" alt=""/><div class="mat-col_name">Titanium</div><div class="mat-col_note">Waitlist</div></div></div><div class="mat-col_body"><section class="section_hp-storage" data-explode="titanium" data-stack-thumb="./public/titanium_full.avif" data-offer-price="$1,000" data-offer-tag="Waitlist" data-offer-href="mailto:silo@silosilosilo.com?subject=Titanium%20waitlist%20%E2%80%94%20Stack"><div class="padding-global"><div class="container-medium"><div class="hp_storage-wrap"><div class="hp_storage-wrap_wall"><div class="hp-storage_wrap-box"><div class="hp_storage-box"><div class="hp_storage-box_inner is-1"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">LID</div></div></div><div class="hp_storage_visual is-1"><img src="./public/titanium_cap.avif" loading="eager" alt="" class="cover-img"/></div></div><div class="hp_storage-box_inner is-2"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">15 MM</div></div></div><div class="hp_storage_visual is-2"><img src="./public/titanium_15.avif" loading="eager" alt="" class="cover-img"/></div></div><div class="hp_storage-box_inner is-3"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">30 MM</div></div></div><div class="hp_storage_visual is-3"><img src="./public/titanium_30.avif" loading="eager" alt="" class="cover-img"/></div></div><div class="hp_storage-box_inner is-4"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">60 MM</div></div></div><div class="hp_storage_visual is-4"><img src="./public/titanium_60.avif" loading="eager" alt="" class="cover-img"/></div></div><div class="hp_storage-box_inner is-5"><div class="hp_storage-visual_text"><div class="text-color-gray-200"><div class="hp_storage-heading">90 MM</div></div></div><div class="hp_storage_visual is-5"><img src="./public/titanium_90.avif" loading="eager" width="Auto" alt="" class="cover-img"/></div></div></div></div></div></div></div></div></section><section class="section_hp-storage-extra inserts-row"><div class="padding-global"><div class="container-medium"><div class="inserts-row_head">Inserts</div><div class="inserts-row_grid"><div class="inserts-row_cell" data-insert="8973825540348"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small.avif" loading="lazy" alt="15mm Titanium Insert" class="inserts-row_img"/><div class="inserts-row_name">15 MM</div></div></div></div></div></section><section class="section_hp-storage-extra is-in-inserts"><div class="padding-global"><div class="container-medium"><div class="hp_storage-extra_wrap"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small.avif" loading="lazy" sizes="(max-width: 2500px) 100vw, 2500px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small.avif 2500w" alt="" class="hp_storage-extra_visual"/><div class="text-color-gray-200"><div class="text-align-center"><div class="heading-style-h1 text-weight-light">15MM INSERT</div></div></div></div></div></div></section><section sf-product="8973825540348" class="section_cart is-in-inserts"><div class="cart_box-top"><div class="padding-global"><div id="product-component-1" class="cart-top"><div class="shopify-buy__product"><div class="shopify-buy__quantity-container"><div data-change-quantity-dec="1" class="shopify-buy__quantity-decrement"></div><div data-show-quantity="1" data-cart-amount="" data-amount="0" class="shopify-buy__quantity">0</div><div sf-add-to-cart="1" data-change-quantity-inc="1" class="shopify-buy__quantity-increment"></div></div><div class="shopify-buy__btn-wrapper"></div></div></div></div></div><div class="cart_box-middle cc-last"><div class="padding-global"><div data-cart-items-container="" class="cart-middle"><div data-cart-item="" class="cart_visual-2 user-select-off"><img src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small.avif" loading="lazy" sizes="(max-width: 2500px) 100vw, 2500px" srcset="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small-p-500.avif 500w, https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/686fb1abfad3ae244a718470_insert-small.avif 2500w" alt="" class="cover-img"/></div></div></div></div></section></div></div></div><div id="cart" class="cart_box-bottom"><div class="padding-global"><div class="cart_wrap-bottom"><div class="text-style-allcaps"><div class="heading-style-h2 user-select-off">total</div></div><div sf-cart-subtotal="1" data-cart-total="" class="heading-style-h0 user-select-off">$0</div></div></div></div><div sf-cart="1" class="sticky-ui"><a sf-checkout="1" href="#" class="cart_box-checkout w-inline-block"><div class="padding-global"><div class="cart_wrap-checkout"><div class="text-style-allcaps"><div class="heading-style-h2">Checkout</div></div></div><div class="container-large"></div></div></a></div></div></main></div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67b34e4928a0b575614410f4" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/js/webflow.schunk.1f9357751f782e68.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/67b34e4928a0b575614410f4/js/webflow.d453270f.050679f86acd3251.js" type="text/javascript"></script><!-- swiper 8 JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+
+<!-- Swiper Logic -->
+<script>
+  let swipers = {};
+  let windowWidth = window.innerWidth;
+  let uniqueIdCounter = 0;
+
+  const createResponsiveSwiper = (
+    componentSelector,
+    swiperSelector,
+    classSelector,
+    options,
+    mode
+  ) => {
+    const mobile = window.matchMedia('(min-width: 0px) and (max-width: 991px)');
+    const desktop = window.matchMedia('(min-width: 992px)');
+
+    let elements = $(componentSelector);
+
+    if (elements.length === 0) {
+      console.log('No elements found for selector', componentSelector); // Step 2
+      return;
+    }
+
+    elements.each(function () {
+      // Generate a unique key for this instance
+      let uniqueKey = classSelector + '_' + uniqueIdCounter;
+
+      const arrows = '.swiper-arrow';
+      const pagination = '.swiper-navigation';
+
+      $(this).find(swiperSelector).addClass(uniqueKey);
+      $(this).find(arrows).addClass(uniqueKey);
+      $(this).find(pagination).addClass(uniqueKey);
+
+      let swiperOptions = Object.assign({}, options, {
+        navigation: {
+          prevEl: `${arrows}.prev.${uniqueKey}`,
+          nextEl: `${arrows}.next.${uniqueKey}`,
+        },
+        pagination: {
+          el: `${pagination}.${uniqueKey}`,
+          type: 'bullets',
+          bulletActiveClass: 'swiper-bullet-active',
+          bulletClass: 'swiper-bullet',
+          clickable: true,
+        },
+      });
+
+      swipers[classSelector] = swipers[classSelector] || {};
+      swipers[classSelector][uniqueKey] = swipers[classSelector][uniqueKey] || {};
+
+      let existingInstance = swipers[classSelector] ? swipers[classSelector][uniqueKey] : null;
+
+      let shouldInitDesktop = mode === 'desktop' && desktop.matches;
+      let shouldInitMobile = mode === 'mobile' && mobile.matches;
+      let shouldInitAll = mode === 'all';
+
+      let existingSwiper =
+          swipers[classSelector] && swipers[classSelector][uniqueKey]
+      ? swipers[classSelector][uniqueKey].swiperInstance
+      : null;
+      let existingMode =
+          swipers[classSelector] && swipers[classSelector][uniqueKey]
+      ? swipers[classSelector][uniqueKey].mode
+      : null;
+
+      if (shouldInitDesktop || shouldInitMobile || shouldInitAll) {
+        if (!existingSwiper) {
+          // Initialize new instance
+          let swiper = new Swiper(`${swiperSelector}.${uniqueKey}`, swiperOptions);
+
+          swipers[classSelector][uniqueKey] = {
+            swiperInstance: swiper,
+            mode: shouldInitDesktop ? 'desktop' : shouldInitMobile ? 'mobile' : 'all',
+            initialized: true, // set the initialized flag to true
+          };
+
+          console.log('Swiper initialized for', componentSelector, 'with uniqueKey', uniqueKey);
+        }
+      } else if (existingSwiper) {
+        // If none of the init conditions are true and an existing swiper instance is found, destroy it
+        existingSwiper.destroy(true, true);
+        delete swipers[classSelector][uniqueKey];
+        console.log('Swiper destroyed for', componentSelector, 'with uniqueKey', uniqueKey);
+      }
+
+      // Increment the uniqueIdCounter after processing each element
+      uniqueIdCounter++;
+    });
+  };
+
+  // Function to initialize swipers from an array of instances
+  const runSwipers = (swiperInstances) => {
+    swiperInstances.forEach((instance) => {
+      console.log(...instance);
+      createResponsiveSwiper(...instance);
+    });
+  };
+
+  const initSwipers = (swiperInstances) => {
+    // Load
+    window.addEventListener('load', function () {
+      runSwipers(swiperInstances);
+    });
+
+    // Resize
+    window.addEventListener('resize', function () {
+      if (window.innerWidth !== windowWidth) {
+        windowWidth = window.innerWidth;
+        uniqueIdCounter = 0; // Reset the uniqueIdCounter
+        runSwipers(swiperInstances);
+      }
+    });
+  };
+
+</script>
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.css">
+<!-- Kantumruy Pro — the brand's structural face; the waitlist band is set in it -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script> 
+<!-- Add to Project Settings > Custom Code > Head Code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  // Lenis smooth-scrolls the page. On desktop the material columns are their
+  // own native scroll container, and the handoff between the two scrollers is
+  // positional, not just spatial: a wheel over the columns belongs to the PAGE
+  // until the shop actually fills the screen — otherwise the columns start
+  // consuming scroll while the shop is still half-entered, headers cut off,
+  // which reads as the page jamming. Only once the grid's top edge has parked
+  // at the viewport top do the columns take over.
+  let gridLenis = null;
+  const gridAligned = () => {
+    const grid = document.querySelector('.mat-cols');
+    return !grid || grid.getBoundingClientRect().top <= 4;
+  };
+  // gridLenis is the columns' own instance, declared below. Lenis calls
+  // preventDefault on every wheel it sees, so native scroll chaining is gone:
+  // when the grid is at either end and the wheel keeps going, the grid's
+  // instance lets the event through and THIS one has to take it, or the page
+  // is stuck under a parked grid.
+  const gridAtEdge = () => !gridLenis
+    || gridLenis.animatedScroll <= 0 || gridLenis.animatedScroll >= gridLenis.limit;
+  // Speed limit. Two caps on wheel input, applied before Lenis reads it
+  // (its `virtualScroll` option sees the delta object before the values are
+  // read off it, so clamping there sticks): each event's delta is capped, and
+  // the target may only run so far ahead of the smoothed position — that
+  // second one is the real ceiling, since with a lerp the speed is
+  // proportional to that lead. Roughly a third of a screen of lead is about
+  // two screens a second flat out, and the explode cannot be flicked open.
+  // 40px per event clamped normal scrolling, not just flicks: one notch of a
+  // mouse wheel is ~100px and a trackpad's momentum events run past 150, so
+  // every ordinary gesture arrived flattened to a constant rate — the wheel
+  // stopped feeling connected to the page. 100 leaves normal input alone and
+  // trims only the violent end. The lead cap is the real ceiling anyway (with
+  // a lerp, speed is proportional to lead): a third of a screen is about two
+  // screens a second flat out, which is the number the note above describes.
+  const MAX_WHEEL_DELTA = 100;
+  const maxLead = () => 0.3 * window.innerHeight;
+  const speedLimit = (getLenis) => (d) => {
+    const l = getLenis();
+    if (!l) return;
+    if (Math.abs(d.deltaY) > MAX_WHEEL_DELTA) d.deltaY = Math.sign(d.deltaY) * MAX_WHEEL_DELTA;
+    const cap = maxLead();
+    const lead = l.targetScroll - l.animatedScroll + d.deltaY;
+    if (lead > cap) d.deltaY -= lead - cap;
+    else if (lead < -cap) d.deltaY -= lead + cap;
+  };
+
+  const lenis = new Lenis({
+    virtualScroll: speedLimit(() => lenis),
+    prevent: (node) => !!(node && node.closest && node.closest('.mat-cols'))
+      && isMatDesktop() && gridAligned() && !gridAtEdge()
+  });
+  // The page ends at the shop. There was a footer under it — a mark, an
+  // Instagram link and INFO — which had a whole reveal cycle of its own so it
+  // stayed blank until the scroll ran out at the bottom of BOTH scrollers.
+  // It is gone (EC, 8/23), and so is that machinery: the last thing on the
+  // page is the thing the page is for.
+  lenis.on('scroll', () => {
+    ScrollTrigger.update();
+    // Momentum clamp: approaching from above, the page PARKS at the shop —
+    // Lenis's leftover velocity must not coast past it, or the grid starts
+    // its explode with its own headers scrolled out of view. Only clamped on
+    // the approach; once past (deep-linked, or returning up from the footer),
+    // the page moves freely.
+    const grid = document.querySelector('.mat-cols');
+    if (grid && isMatDesktop()) {
+      const gridDocY = grid.getBoundingClientRect().top + window.scrollY;
+      if (lenis.animatedScroll < gridDocY - 1 && lenis.targetScroll > gridDocY) {
+        lenis.scrollTo(gridDocY);
+      }
+    }
+  });
+  gsap.ticker.add((time) => {lenis.raf(time * 1000);});
+  gsap.ticker.lagSmoothing(0);
+
+  const MAT_DESKTOP = '(min-width: 992px)';
+  const isMatDesktop = () => window.matchMedia(MAT_DESKTOP).matches;
+
+  // The columns get the same smoothing the page has. On silosilosilo.com the
+  // explode is driven off the window, which Lenis smooths, and that lerp is
+  // half of the feel — the pieces are read off a scroll position that eases,
+  // not off raw wheel ticks. Here the grid is its own scroller, so it needs
+  // its own instance. It only takes the wheel while the grid is the active
+  // surface (desktop, and parked at the top of the window), and at either
+  // end it lets the event through so the page picks it up as before.
+  const matGrid = document.querySelector('.mat-cols');
+  gridLenis = matGrid ? new Lenis({
+    wrapper: matGrid,
+    content: matGrid,
+    overscroll: true,
+    virtualScroll: speedLimit(() => gridLenis),
+    prevent: () => !(isMatDesktop() && gridAligned())
+  }) : null;
+  if (gridLenis) {
+    gridLenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {gridLenis.raf(time * 1000);});
+  }
+
+  let explodeTriggers = [];
+  let explodeParts = [];
+  let sharedProgress = true;
+
+  // Desktop puts the three materials side by side on one scroll surface, so
+  // they open and close together, off the MAX progress across the columns —
+  // scrolling aluminum must not leave brass and titanium sitting closed beside
+  // it, which is the whole point of three exploded materials in a row. The max,
+  // not the last one touched: scrolling a second column after the first is open
+  // must not drag the first shut, and scrolling back to the top closes all three.
+  //
+  // Mobile stacks them instead, one material per screen, so each column is
+  // driven by its own trigger. A shared progress there would open all three at
+  // once — you would arrive at brass to find it already apart, with nothing
+  // left to scroll it through.
+  // Share of the opening run within which a closing stack snaps shut.
+  const CLOSE_MAGNET = 0.3;
+  // Share of the opening run by which the closed stack's offer has faded out
+  // — the point past which there is nothing left to stop on. Kept in step
+  // with the offer's own tween below.
+  const OFFER_GONE = 0.35;
+  // How long the pieces take to catch up to where the scroll says they are —
+  // scrub, in other words, and short enough that they move WITH the wheel.
+  // This was a rate cap with a 1.4s floor: every wheel event scheduled a
+  // tween of at least 1.4 seconds, so the pieces were still travelling more
+  // than a second after the wheel stopped, and a full open took four seconds
+  // of animation no matter how you scrolled. That decoupling is what read as
+  // jank — the surface never tracked the hand.
+  const OPEN_LAG = 0.35;
+  // A ceiling still applies, but as a ceiling rather than a speed: a jump of
+  // half the run takes half a second, a nudge takes OPEN_LAG. The explode
+  // cannot be thrown open in one flick, and it is never slower than the hand.
+  // This is the limit that holds on a phone, where touch scroll is native and
+  // cannot be capped at the input.
+  const OPEN_RATE = 1;
+  function driveExplodes() {
+    if (!explodeParts.length) return;
+    const shared = sharedProgress
+      ? explodeParts.reduce((m, x) => Math.max(m, x.st.progress), 0)
+      : null;
+    explodeParts.forEach((x) => {
+      const p = shared === null ? x.st.progress : shared;
+      // What `scrub` used to do, applied per column: the timeline is paused,
+      // and this tween is what carries it to where the scroll says it should be.
+      // The two directions feel different on purpose. Opening (scrolling
+      // down) tracks the scroll gently — a long, soft catch-up, no snap, so
+      // the pieces part smoothly under the finger. Closing (scrolling up) is
+      // magnetic: a quick expo catch-up, and once the stack is within the
+      // magnet zone of closed it is pulled the rest of the way shut on its
+      // own, like the pieces seating on a magnet.
+      const last = x.target === undefined ? x.proxy.p : x.target;
+      const closing = p < last || (p === last && x.st.direction < 0);
+      let target = p;
+      if (closing && p < CLOSE_MAGNET * EXPAND_END) target = 0;
+      x.target = p;
+      const openDur = Math.max(OPEN_LAG, Math.abs(target - x.proxy.p) / OPEN_RATE);
+      gsap.to(x.proxy, {
+        p: target,
+        duration: closing ? 0.6 : openDur,
+        ease: closing ? 'expo.out' : 'power2.out',
+        overwrite: true,
+        onUpdate: () => applyPart(x),
+        onComplete: () => applyPart(x)
+      });
+    });
+  }
+
+  function applyPart(x) {
+    const p = x.proxy.p;
+    x.tl.progress(p);
+    // Closed only at the start. Five pieces sitting on top of each other are
+    // five overlapping hit targets, so the piece controls stay dead until they
+    // part — and the offer panel, which keeps its slot in the frame while
+    // faded, takes clicks over exactly the same stretch. Closed, the whole
+    // stack is one target and one price, which is what the panel is showing.
+    //
+    // Only on the change. This ran two classList writes per section per frame
+    // of every scroll, and one of the classes is read by :has() rules — the
+    // kind of per-frame style work that has no business in the scroll path.
+    const closed = p < stackedBelow;
+    if (closed !== x.wasClosed) {
+      x.wasClosed = closed;
+      x.stack.classList.toggle('is-stacked', closed);
+      x.section.classList.toggle('is-panel-live', closed);
+      if (window.syncBarHint) window.syncBarHint();
+    }
+  }
+
+  // There is one explode per material now, each inside its own column. Every
+  // query below is scoped to its section — the selectors used to be global,
+  // which would drive both stacks off whichever timeline ran last.
+  //
+  // "Started on a stack. Then as you scroll down, it expands. Then the stepper
+  // comes up for quantities." And it does not end there: "there's a step after
+  // 90 that brings it back together… it reassembles the full stack. You get an
+  // offer for a full stack at the beginning and the end. In between, you can
+  // buy individual." Closed offer, open configurator, closed receipt.
+  //
+  const EXPAND_RUN = 1;   // share of the scroll range spent opening
+  // The held stretch at the cap. The stack opens, and then the scroll is
+  // STUCK there for a bit — fully open, frame parked, steppers still — before
+  // the wall runs out and the column moves on; coming back up, the same
+  // stretch keeps it open before the close begins. This dwell was cut once
+  // (it read as the page stopping dead) and is back by request at 08-19: the
+  // open state is the configurator, and arriving at it should feel like
+  // arriving, not like driving past. The scroll distance the dwell occupies
+  // follows this number on its own — the desktop wall is written from it
+  // (--wall-screens, below) and the mobile travel is a multiple of T — so the
+  // opening's px-per-progress does not move when this does. One number.
+  //
+  // 0.75 was cut to 0.4 (~210px of wheel) on the theory that a long dead stop
+  // reads as the scroll jamming. That theory is retired. 0.8 on EC's call
+  // 8/21 — "it needs to stop at this screen more" — and 1.15 on 8/23, "a bit
+  // longer" again: ~560px, about two thirds of a screen standing on the open
+  // configurator. It is the thing the page is for, and it should be hard to
+  // scroll past by accident.
+  const OPEN_HOLD = 1.15;
+  const EXPAND_END = EXPAND_RUN / (EXPAND_RUN + OPEN_HOLD);
+
+  // How much wheel the OPENING takes, in scroller screens. Holding this fixed
+  // is what lets the dwell above move on its own: the pieces part at the same
+  // rate per pixel whatever OPEN_HOLD is set to, and only the beat at the cap
+  // gets longer. The wall the run is measured against follows from the two —
+  // one screen for the parked frame, plus the run itself — and is written
+  // into the stylesheet from here rather than typed there a second time. It
+  // was typed there a second time, and the two had already drifted: the CSS
+  // said 2 screens while the comment beside it said 2.34.
+  const OPEN_SCREENS = 0.714;
+  document.documentElement.style.setProperty(
+    '--wall-screens', String(1 + OPEN_SCREENS * (EXPAND_RUN + OPEN_HOLD)));
+
+  // The dwell on its own, in screens — what the two constants above are worth
+  // once the opening is paid for. The accessories hold for the same beat (see
+  // parkAccessories), and this is how they get it: the beat is one number,
+  // written once, rather than a second one typed somewhere else that starts
+  // out equal and drifts the first time this one moves.
+  document.documentElement.style.setProperty(
+    '--acc-screens', String(OPEN_SCREENS * OPEN_HOLD));
+
+  // Where "stacked" ends, as a fraction of the whole timeline. One cut, not
+  // two: the stack no longer comes back together at the far end, so there is
+  // no second closed stretch to gate.
+  let stackedBelow = 0.35;
+
+  function createScrollTrigger() {
+    // Where each stack was before the rebuild, by section. The rebuild fires
+    // when the cart strip first opens, and resetting every proxy to closed
+    // and tweening back out replayed the whole explode across the page —
+    // three stacks snapping shut and reopening because a thumbnail appeared.
+    // Rebuilt in place, a stack picks up exactly where it stood.
+    const wasAt = new Map(explodeParts.map((x) => [x.section, x.proxy.p]));
+    explodeTriggers.forEach((t) => t.kill());
+    explodeParts.forEach((x) => {
+      gsap.killTweensOf(x.proxy);
+      // Rewound, THEN discarded. A timeline is only killed here — it is never
+      // rendered again — so whatever it last wrote stays on the element, and
+      // the replacement does not necessarily overwrite it: the frame's
+      // release tween starts late in the run, so at the top of the new
+      // timeline it writes nothing at all. Three rebuilds later the frame was
+      // still wearing the first timeline's end state, parked a release's
+      // worth above where it belonged for the whole run. Rewinding puts every
+      // target back the way it was found.
+      x.tl.progress(0).kill();
+    });
+    explodeTriggers = [];
+    explodeParts = [];
+
+    const isDesktop = window.innerWidth >= 992;
+    const stagger = EXPAND_RUN * 0.06;
+    sharedProgress = isDesktop;
+
+    // The stack opens and stays open: reaching the bottom of a column leaves
+    // it apart, with the accessories below it, and closing it is what scrolling
+    // back UP does. The timeline is scrubbed off scroll position, so the close
+    // is the expand run backwards — it needs no segment of its own, and taking
+    // one out is what stops the column from spending its last screen putting
+    // away the thing you came to buy from.
+    const T = EXPAND_RUN + OPEN_HOLD;
+    stackedBelow = (0.77 * EXPAND_RUN) / T;
+
+    document.querySelectorAll('[data-explode]').forEach((section) => {
+      const stack = section.querySelector('.hp_storage-box');
+      const boxes = Array.from(section.querySelectorAll('.hp_storage-box_inner:not(.is-1)'));
+      const endTrigger = section.querySelector('.hp_storage-wrap_wall');
+      if (!stack || !boxes.length || !endTrigger) return;
+
+      // The grid scrolls itself on desktop, so ScrollTrigger has to watch that
+      // element rather than the window. All three explodes share it, which is
+      // what makes them open and close as one.
+      const grid = section.closest('.mat-cols');
+      const scroller = (isDesktop && grid) ? grid : undefined;
+
+      // How far the pieces travel. Measured, not guessed: the open stack has to
+      // fit the sticky frame it parks in, or the 90 — the piece with the most
+      // to sell — hangs off the bottom where nobody can reach its control.
+      //
+      // The cap is the fixed point. It is already excluded from `boxes`
+      // (:not(.is-1)), so it holds its place under the material title while the
+      // four pieces below it fall away — which means the travel budget is the
+      // room LEFT UNDER the closed stack, not the frame's full height.
+      // Open, the stack fills the frame: the cap stays under the title and
+      // the last piece lands a short margin above the frame's bottom edge,
+      // which is where the accessories start. Measured off the frame's CONTENT box — its own
+      // padding is not room the pieces may travel into, and guessing at it with
+      // a flat 24px left the 90 hanging over the edge on some window sizes.
+      const frame = section.querySelector('.hp-storage_wrap-box');
+      // Measured clean: a previous pass may have grown the frame and the wall
+      // to hold a phone's open stack (below), and that must not compound.
+      if (frame) frame.style.height = '';
+      endTrigger.style.height = '';
+      section.style.marginBottom = '';
+      const fcs = frame ? getComputedStyle(frame) : null;
+      const inner = frame
+        ? frame.clientHeight - parseFloat(fcs.paddingTop) - parseFloat(fcs.paddingBottom)
+        : 0;
+      // Less a margin: landing flush on the frame's edge put the 90 hard
+      // against the checkout bar, which read as the bar cutting it off.
+      const clearance = 4 * parseFloat(getComputedStyle(document.documentElement).fontSize || '10');
+      const gap = Math.max(16, (inner - clearance - stack.offsetHeight) / boxes.length);
+      // The phone used to override this measured spread with fixed vh
+      // offsets (k·(i+2)^1.5, k = 4) that overshot any screen shorter than
+      // ~950px — the open 90 sat under the checkout bar, off the frame.
+      // AZ's call (8/19): "shrink the silo a bit — so when fully expanded it
+      // fits — the pieces could also be a little closer together." So every
+      // width now does what desktop always did: the open stack is fitted
+      // into the frame it actually has. The smaller phone stack (--piece-em
+      // .7vw, was .85) is what gives the measured gaps their air.
+      const offsets = boxes.map((box, i) => (i + 1) * gap);
+
+      // The 16px gap floor can still outgrow a very short frame, and the
+      // pieces move by transform, so nothing below would make room for
+      // them: the open 90 would sit on the accessories, or on the next
+      // material. So the frame and the wall grow to hold the open stack.
+      // Taller than the viewport the frame no longer parks, which is fine —
+      // the timeline reads scroll position, not stickiness.
+      // The travel is also longer here than the CSS wall gives, so a
+      // thumb-flick moves the pieces less: the explode reads slower under
+      // the finger.
+      let travel = 0;
+      // Declared out here because the release ramp below needs it too, and a
+      // `screen` scoped to this block resolves to window.screen out there —
+      // silently NaN, which takes the whole ramp with it.
+      let screenH = 0;
+      if (frame && !isDesktop) {
+        const screen = screenH = frame.clientHeight;
+        const need = stack.offsetHeight + offsets[offsets.length - 1] + clearance
+          + parseFloat(fcs.paddingTop) + parseFloat(fcs.paddingBottom);
+        const frameH = Math.max(need, screen);
+        // Two screens carried the old 1.3-unit run (2/1.3 ≈ 1.54 screens per
+        // timeline unit). The run grew with OPEN_HOLD, and the travel grows
+        // with it: the pieces part at the same rate under the thumb, and the
+        // extra distance is all the held stretch at the cap.
+        travel = 1.54 * screen * T;
+        frame.style.height = frameH + 'px';
+        endTrigger.style.height = (frameH + travel) + 'px';
+      }
+
+      // The timeline is paused and driven by driveExplodes(), not scrubbed by
+      // this trigger — the trigger is only here to report how far this column
+      // has been scrolled. The 0.35s tween in driveExplodes() is what `scrub`
+      // used to do, applied to all three at once.
+      // Never park half-open. Wheel input can stop anywhere, so once it does,
+      // the surface settles to whichever state is nearest: closed offer, open
+      // configurator (any point in the hold is open, so the hold is left
+      // alone), or reassembled receipt. One trigger owns the snap; all three
+      // share the scroller, so snapping one snaps the surface.
+      const expandEnd = EXPAND_RUN / T;
+
+      const headPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--head-h')) || 95;
+      const tl = gsap.timeline({ paused: true });
+      const st = ScrollTrigger.create({
+        trigger: endTrigger,
+        scroller: scroller,
+        // The frame sticks at --head-h, not at the top of the screen, so on
+        // mobile the run starts where the frame stops moving, or the pieces
+        // would sit still for the first head's-height of it and the frame
+        // would drift for the last.
+        start: isDesktop ? 'top top' : 'top ' + headPx,
+        endTrigger: endTrigger,
+        // Desktop: the wall's bottom meets the frame's — the frame IS a
+        // screen. Mobile: the frame may stand taller than the screen (grown
+        // above to hold the open stack), and then "bottom bottom" runs on
+        // past the point where the sticky frame lets go — the stack would
+        // still be opening while it scrolls away. So the run ends exactly
+        // when the frame unsticks: the wall's height less the frame's, which
+        // is the travel. Nothing scrolls past until the stack is fully open.
+        end: (isDesktop || !frame)
+          ? 'bottom bottom'
+          : '+=' + Math.max(1, endTrigger.offsetHeight - frame.offsetHeight),
+        snap: (isDesktop && !explodeTriggers.length) ? {
+          // Directional: finish whatever movement the scroll started, never
+          // pull against it — snapping backward reads as the page fighting
+          // the wheel. The hold is left alone; any point in it is open.
+          snapTo: (p, self) => {
+            // Coming back up: nearly closed goes closed, like a magnet.
+            if (self.direction < 0 && p < expandEnd * CLOSE_MAGNET) return 0;
+            // Going down: the stretch between the two states is a dead zone —
+            // the pieces are apart but the labels have not arrived and every
+            // click is still swallowed, so stopping there leaves a stack that
+            // has come apart into nothing you can buy from. The offer fading
+            // out is the line: once the closed stack's price is gone the
+            // surface owes you the open configurator, so finish the open.
+            // Forward only, so it never pulls against the wheel.
+            if (self.direction > 0 && p > expandEnd * OFFER_GONE && p < expandEnd) return expandEnd;
+            return p;
+          },
+          duration: { min: 0.2, max: 0.45 },
+          delay: 0.2,
+          ease: 'power1.inOut'
+        } : undefined,
+        onUpdate: driveExplodes,
+        onRefresh: driveExplodes
+      });
+
+      explodeTriggers.push(st);
+      explodeParts.push({ st: st, tl: tl, stack: stack, section: section, proxy: { p: 0 } });
+
+      // Empty on the first pass — the controls are built once CartManager has
+      // loaded, and this runs again after. GSAP warns on an empty NodeList, so
+      // the fade is only scheduled when there is something to fade.
+      const sides = Array.from(section.querySelectorAll('.piece-side, .piece-label'));
+
+      // Closed: every piece sits where it was drawn, nested into a stack.
+      boxes.forEach((box) => gsap.set(box, { y: 0 }));
+      gsap.set(stack, { y: 0 });
+      if (sides.length) gsap.set(sides, { opacity: 0 });
+
+      // From the bottom up, and that is not decoration. Each piece travels
+      // further than the one above it, so if the upper piece starts FIRST it
+      // closes on a lower piece that has not set off yet — the two overlap more
+      // than they did closed, then separate. Starting at the end inverts it:
+      // the piece below always leads the piece above, so every joint opens
+      // monotonically and no two units ever pass through each other. The same
+      // holds in reverse, which is the close.
+      //
+      // The ease was power3.in — written for the close, which reversed is a
+      // power3.out seat. But an ease-in open hits its top speed at the very
+      // end, and that is where the frame lets go and the page starts to
+      // scroll: the pieces went from full tilt to a dead stop as the scroll
+      // took over. power3.inOut instead: the pieces slow to rest at the end
+      // of the run and the scroll picks up from stillness. The close's
+      // precision now comes from the magnet in driveExplodes(), not the ease.
+      // In order but overlapping: the 90 sets off first, the 60 while it is
+      // still going, then the 30, then the 15 — starts .06 apart, each run
+      // .82 long, so the last one ends the opening. Reversed that is the
+      // close, 15 seating first. Mobile runs the same sequence; each column
+      // there has its own trigger, so the stacks open one at a time as they
+      // come up the page.
+      tl.to(boxes, {
+        y: (i) => offsets[i],
+        stagger: { each: stagger, from: 'end' },
+        ease: 'power3.inOut',
+        duration: EXPAND_RUN * 0.82
+      }, 0);
+
+      // "The person closed: a hundred dollars. You scroll and it opens up,
+      // the hundred dollars goes away."
+      const offer = section.querySelector('.stack-offer');
+      if (offer) {
+        gsap.set(offer, { opacity: 1 });
+        tl.to(offer, {
+          opacity: 0,
+          ease: 'power1.out',
+          duration: EXPAND_RUN * 0.3
+        }, EXPAND_RUN * 0.05);
+      }
+
+      // "Then the stepper comes up for quantities" — after the pieces have
+      // parted, not during, so the type does not ride down through the stack.
+      if (sides.length) {
+        tl.to(sides, {
+          opacity: 1,
+          ease: 'power2.out',
+          duration: EXPAND_RUN * 0.4
+        }, EXPAND_RUN * 0.6);
+      }
+
+      // Middle silence: the stack is open and still while you buy from it.
+      // A timeline sizes itself to its content, so on mobile — where nothing
+      // follows — the hold has to be an explicit segment or there is nothing
+      // to scroll through.
+      tl.to({}, { duration: OPEN_HOLD }, EXPAND_RUN);
+
+      // Easing into the scroll. A sticky frame lets go all at once — parked
+      // one moment, moving at full scroll speed the next — and no amount of
+      // settling the pieces softens that step. So through the tail the frame
+      // itself starts to drift up, ease-in, and the drift is sized so that at
+      // the moment the frame unsticks it is already travelling at exactly the
+      // page's speed: over the tail's S px of scroll it moves S/2 (a power2.in
+      // ramp ends with slope 2·D/S = 1). Position and velocity are both
+      // continuous through the release; scrolling back up it re-parks the
+      // same way in reverse.
+      if (frame && !isDesktop && travel > 0) {
+        const tailPx = travel * OPEN_HOLD / T;
+        // ...over the LAST stretch of the hold, not all of it. The ramp costs
+        // half its own length in blank wall — the frame ends up that much
+        // higher than the slot it was laid out in — and the hold has grown a
+        // lot (0.4 -> 1.15), which turned that cost into a screen of nothing
+        // between one material and the next on a phone. Capped at ~0.6 of a
+        // screen, the void is ~0.3 and the release is identical: the ramp's
+        // end slope is 2·(D/2)/D = 1 whatever D is.
+        //
+        // It is better for the dwell as well. Easing across the whole hold
+        // meant the frame never actually stood still — the beat the hold is
+        // there to buy was a slow drift. Now it stops, then leaves.
+        const releasePx = Math.min(tailPx, 0.6 * screenH);
+        const releaseRun = OPEN_HOLD * (releasePx / tailPx);
+        gsap.set(frame, { y: 0 });
+        tl.to(frame, { y: -releasePx / 2, ease: 'power2.in', duration: releaseRun },
+              EXPAND_RUN + OPEN_HOLD - releaseRun);
+
+        // The ramp ends with the frame drawn releasePx/2 above the slot it was
+        // laid out in, so the wall's last releasePx/2 are blank — and the
+        // section keeps that height whatever the frame is doing, which left a
+        // band of nothing at the foot of every material and kept the sticky
+        // title pinned over it. Pulling the next section up by exactly that
+        // much closes it: at the moment the frame lets go, its visual bottom
+        // and the next section's top are the same pixel, and the column now
+        // ends where its content ends. The wall itself is untouched, so the
+        // run and the trigger are unchanged.
+        section.style.marginBottom = (-releasePx / 2) + 'px';
+      }
+
+    });
+
+    // First build: nothing has scrolled yet, so every stack starts closed.
+    // Rebuild: each stack keeps its place; the refresh below then tweens it
+    // to wherever the re-measured scroll says, which is a small move or none.
+    explodeParts.forEach((x) => {
+      x.proxy.p = wasAt.has(x.section) ? wasAt.get(x.section) : 0;
+      x.target = x.proxy.p;
+      applyPart(x);
+    });
+    // A grown wall moves everything under it, so every trigger re-measures.
+    ScrollTrigger.refresh();
+  }
+
+  createScrollTrigger();
+
+  // The per-piece buy controls are built later — they need CartManager's price
+  // map, which loads after this block. Building them changes both the targets
+  // of the fade tween and the height of the closed stack the gap is measured
+  // against, so the timelines are rebuilt once the controls are in.
+  window.rebuildExplodes = function() {
+    createScrollTrigger();
+  };
+
+  // The scroller has to refresh ScrollTrigger as it moves, or the explodes
+  // never advance — the window is not what is scrolling any more.
+  document.querySelectorAll('.mat-cols').forEach((grid) => {
+    grid.addEventListener('scroll', () => ScrollTrigger.update(), { passive: true });
+  });
+
+  // Rebuild on any real width change. The previous version compared against a
+  // `windowWidth` owned by an earlier resize handler that had already updated it,
+  // so the condition was always false and the timeline never rebuilt — which now
+  // matters, because the correct scroller differs on either side of 992px.
+  let lastWidthTl = window.innerWidth;
+
+  $(window).on('resize', function() {
+    if (window.innerWidth !== lastWidthTl) {
+      lastWidthTl = window.innerWidth;
+      // Before the rebuild: the accessories move between the columns and the
+      // end of the run across 992px, which changes what every trigger below
+      // them is measured against.
+      if (window.placeAccessories) window.placeAccessories();
+      if (window.parkAccessories) window.parkAccessories();
+      createScrollTrigger();
+      ScrollTrigger.refresh();
+    }
+  });
+</script>
+
+<!-- Material columns: bar clearance, mobile collapse, material nav -->
+<script>
+  (function() {
+    const cols = Array.from(document.querySelectorAll('.mat-col'));
+    if (!cols.length) return;
+
+    // Publish the cart bar's real height so the columns can size to
+    // calc(100vh - var(--bar-h)) instead of guessing at it. The sticky
+    // material header is measured the same way: the explode frame parks
+    // directly beneath it, so a guessed height shows as a clipped stack.
+    //
+    // Two numbers. --bar-h is the bar as it stands right now, and only the
+    // desktop scroller's height reads it. --bar-room is the bar with the
+    // thumbnail strip counted as OPEN whether or not it is: every explode
+    // frame, wall and piece size reads that one. Sizing them off the live
+    // height meant the first item added to the cart opened the strip,
+    // changed the height, and re-sized the whole shop under the pointer —
+    // pieces shrinking a step on the phone, the page shifting on desktop.
+    // Reserving the strip's height from the start costs 7.2rem of frame
+    // and nothing ever moves.
+    function measureBar() {
+      const bar = document.querySelector('.sticky-ui');
+      if (bar && bar.offsetHeight > 0) {
+        const strip = bar.querySelector('.cart-strip');
+        const stripH = strip ? strip.offsetHeight : 0;
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+        const room = bar.offsetHeight - stripH + 7.2 * rem;
+        document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+        document.documentElement.style.setProperty('--bar-room', room + 'px');
+      }
+      const head = document.querySelector('.mat-col_head');
+      if (head && head.offsetHeight > 0) {
+        document.documentElement.style.setProperty('--head-h', head.offsetHeight + 'px');
+      }
+    }
+
+    // The cart strip changes the bar's height when it opens, and every explode
+    // frame is sized against that height.
+    window.remeasureBar = measureBar;
+
+    // The collapse toggles, the peek, and the jump nav all belonged to the
+    // accordion layout, where three materials had to share one phone screen.
+    // Mobile gives each material a screen of its own now, so there is nothing
+    // to collapse and nowhere to jump to that scrolling does not already reach.
+    measureBar();
+    window.addEventListener('resize', measureBar);
+    // The bar's height changes once #cart is folded into it.
+    window.setTimeout(measureBar, 1300);
+  })();
+</script>
+
+<!-- Cart -->
+<script>
+  // Where this visit came from, carried to checkout. The checkout is a
+  // different host, so without this every UTM and the Meta click id stopped
+  // at the cart permalink, and Shopify recorded each order as arriving from
+  // silosilosilo.com with no campaign. Captured from the landing URL and
+  // kept for the tab's session, so a visitor who lands from an ad and
+  // browses before checking out still carries it. First touch wins: once a
+  // session has a source, a later tagged URL in the same tab does not
+  // replace it.
+  const ATTRIBUTION = (function() {
+    const KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
+                  'fbclid', 'gclid', 'ttclid'];
+    const STORE = 'silo:attribution';
+    const fromUrl = {};
+    const query = new URLSearchParams(window.location.search);
+    KEYS.forEach((k) => { const v = query.get(k); if (v) fromUrl[k] = v; });
+    try {
+      const saved = JSON.parse(window.sessionStorage.getItem(STORE) || 'null');
+      if (saved && Object.keys(saved).length) return saved;
+      if (Object.keys(fromUrl).length) window.sessionStorage.setItem(STORE, JSON.stringify(fromUrl));
+    } catch (e) {
+      // Storage blocked: this page's own URL is still worth carrying.
+    }
+    return fromUrl;
+  })();
+
+  const CartManager = {
+    config: {
+      selectors: {
+        quantityDisplay: '[data-show-quantity]',
+        quantityInc: '[data-change-quantity-inc]',
+        quantityDec: '[data-change-quantity-dec]',
+        cartContainer: '[data-cart-items-container]',
+        cartItem: '[data-cart-item]'
+      },
+      attributes: {
+        dynamicProductId: 'data-dynamic-product-id',
+        cartTemplate: 'cart-template'
+      },
+      values: {
+        dynamicItem: 'dynamic-item'
+      },
+      // Brass go-live switch. Kept as a switch because brass depends on Shopify state
+      // this file cannot see; flip it off if that state regresses.
+      gates: {
+        brass: true
+      },
+      prices: {
+        '8973822722300': 100,
+        '8973825540348': 19,
+        '8973828849916': 19,
+        '8973831667964': 19,
+        '8974057079036': 9,
+        '8974057832700': 19,
+        '8974058717436': 29,
+        '8974059077884': 39,
+        '8974059602172': 49,
+        // Brass, on Eddie's curve. Shopify was moved to these values first (2026-08-16,
+        // 39/39/59/69/99 -> 29/59/89/119/149) and these mirror it — checkout here is a cart
+        // permalink, so Shopify's price wins no matter what this file says. Page and charge
+        // must agree by construction; that is the lesson of the Tower overcharge, where the
+        // page said $99 and Shopify charged $145.
+        // If these ever need to change: change Shopify first, then match here. Never the
+        // other way round.
+        'brass-cap': 29,
+        'brass-15': 59,
+        'brass-30': 89,
+        'brass-60': 119,
+        'brass-90': 149,
+        // The brass counterpart to the $100 Silo Stack. Created in Shopify
+        // 2026-08-16 as SILO-SS-BR: a 33% bundle discount off the $445 parts
+        // sum, mirroring aluminum's 31% ($100 against $145).
+        'brass-stack': 299
+      },
+      variants: {
+        '8973822722300': '47171959030012',
+        '8973825540348': '47171380838652',
+        '8973828849916': '47171412427004',
+        '8973831667964': '47171488350460',
+        '8974057079036': '47173359206652',
+        '8974057832700': '47173364678908',
+        '8974058717436': '47173369135356',
+        '8974059077884': '47173369659644',
+        '8974059602172': '47173371298044',
+        // VERIFIED 2026-08-16 against the live storefront (products.json): every ID below
+        // resolves to the expected SILO-SS-BR-* SKU at the price above.
+        'brass-cap': '50988602261756',
+        'brass-15': '50988602917116',
+        'brass-30': '50988602982652',
+        'brass-60': '50988603048188',
+        'brass-90': '50988603080956',
+        'brass-stack': '50988897992956'
+      },
+
+      // Which five pieces make a stack, per material. This is the only place
+      // the bundle rule is written down; collapseCart() below is the only
+      // place it is applied, and the bar, the thumbnails and the checkout
+      // permalink all read that one result.
+      sets: [
+        {
+          stack: '8973822722300',
+          pieces: ['8974057079036', '8974057832700', '8974058717436', '8974059077884', '8974059602172']
+        },
+        {
+          stack: 'brass-stack',
+          pieces: ['brass-cap', 'brass-15', 'brass-30', 'brass-60', 'brass-90']
+        }
+      ]
+    },
+
+    rowQty(productId) {
+      const row = document.querySelector('section.section_cart[sf-product="' + productId + '"]');
+      if (!row) return 0;
+      const display = row.querySelector('[data-show-quantity]');
+      return display ? (parseInt(display.textContent, 10) || 0) : 0;
+    },
+
+    // The cart as it will actually be charged.
+    //
+    // The rows hold what was clicked, piece by piece. But a complete set of
+    // five IS a stack, and Shopify sells that as one cheaper SKU — $100 where
+    // the same five à la carte are $145. So the cart is collapsed once, here,
+    // before anything reads it: whole sets become stacks, the remainder stays
+    // à la carte, and inserts pass straight through.
+    //
+    // Doing it in one place is the point. The subtotal in the bar, the
+    // thumbnails above it and the variants in the permalink are three views of
+    // this one list, so they cannot drift apart — and the buyer gets the
+    // cheaper number without having to know the rule exists.
+    collapseCart() {
+      const lines = [];
+      const claimed = {};
+
+      this.config.sets.forEach((set) => {
+        set.pieces.concat([set.stack]).forEach((id) => { claimed[id] = true; });
+        if (!this.isPurchasable(set.stack)) return;
+        const qtys = set.pieces.map((id) => this.rowQty(id));
+        const folded = Math.min.apply(null, qtys);
+        // The stack row's own quantity is already a stack; the folded sets are
+        // added to it rather than counted twice.
+        const stacks = this.rowQty(set.stack) + folded;
+        if (stacks > 0) lines.push({ id: set.stack, n: stacks });
+        set.pieces.forEach((id, i) => {
+          const over = qtys[i] - folded;
+          if (over > 0) lines.push({ id: id, n: over });
+        });
+      });
+
+      $('section.section_cart').each((index, element) => {
+        const id = $(element).attr('sf-product');
+        if (claimed[id]) return;
+        const n = this.rowQty(id);
+        if (n > 0) lines.push({ id: id, n: n });
+      });
+
+      return lines.filter((l) => this.isPurchasable(l.id));
+    },
+
+    // A key is purchasable unless a gate covers it. There is deliberately no brass Tower:
+    // SILO-SS-BR does not exist, so a brass stack stays unsellable rather than mispriced.
+    isPurchasable(productId) {
+      if (!productId) return false;
+      if (String(productId).indexOf('brass-') === 0) return this.config.gates.brass;
+      return true;
+    },
+
+    initializeCart() {
+      $('section.section_cart').each((index, element) => {
+        const section = $(element);
+        const cartContainer = section.find(this.config.selectors.cartContainer);
+        const quantityDisplay = section.find(this.config.selectors.quantityDisplay).first();
+
+        if (quantityDisplay.length > 0) {
+          quantityDisplay.text('0');
+        }
+
+        if (cartContainer.find(this.config.selectors.cartItem).length > 0) {
+          const template = cartContainer.find(this.config.selectors.cartItem).first().clone();
+          section.data(this.config.attributes.cartTemplate, template);
+          cartContainer.empty();
+          this.setCartMiddleVisibility(section, 0);
+        }
+      });
+    },
+
+    setSectionQuantity(section, quantity) {
+      const safeQuantity = Math.max(0, Number(quantity) || 0);
+      const quantityDisplay = section.find(this.config.selectors.quantityDisplay).first();
+      if (quantityDisplay.length > 0) {
+        quantityDisplay.text(safeQuantity);
+      }
+      this.updateCartItemsDisplay(section, safeQuantity);
+      this.updateCartTotal();
+    },
+
+    updateCartTotal() {
+      const lines = this.collapseCart();
+      const total = lines.reduce((sum, l) => sum + (this.config.prices[l.id] || 0) * l.n, 0);
+      $('[sf-cart-subtotal]').text('$' + total);
+      // Everything downstream of a quantity change happens here, so there is
+      // one path from the model to the page however the change was made — a
+      // piece stepper, the stack callout, or an insert.
+      if (window.renderCartStrip) window.renderCartStrip(lines);
+      if (window.syncShopControls) window.syncShopControls();
+    },
+
+    updateCartItemsDisplay(section, quantity) {
+      const cartContainer = section.find(this.config.selectors.cartContainer);
+      let template = section.data(this.config.attributes.cartTemplate);
+      const safeQuantity = Math.max(0, Number(quantity) || 0);
+
+      if (!template) {
+        template = section.find(this.config.selectors.cartItem).first().clone();
+        section.data(this.config.attributes.cartTemplate, template);
+      }
+
+      cartContainer.find(`[${this.config.attributes.dynamicProductId}]`).remove();
+      for (let i = 0; i < safeQuantity; i++) {
+        cartContainer.append(template.clone().attr(this.config.attributes.dynamicProductId, this.config.values.dynamicItem));
+      }
+      this.setCartMiddleVisibility(section, safeQuantity);
+    },
+
+    setCartMiddleVisibility(section, quantity) {
+      const cartMiddleBox = section.find('.cart_box-middle');
+      if (cartMiddleBox.length === 0) {
+        return;
+      }
+      const isEmpty = quantity <= 0;
+      cartMiddleBox.toggleClass('is-empty', isEmpty);
+      cartMiddleBox.css('display', isEmpty ? 'none' : '');
+    },
+
+    updateQuantityAndCart(section, change) {
+      // A gated item cannot be added. Refusing the increment here is what keeps the
+      // subtotal honest — the row can never hold a quantity the checkout would drop.
+      if (change > 0 && !this.isPurchasable(section.attr('sf-product'))) return;
+      const quantityDisplay = section.find(this.config.selectors.quantityDisplay);
+      if (quantityDisplay.length > 0) {
+        const currentQuantity = parseInt(quantityDisplay.text()) || 0;
+        const newQuantity = Math.max(0, currentQuantity + change);
+        this.setSectionQuantity(section, newQuantity);
+      }
+    },
+
+    bindQuantityButtons() {
+      $(document).on('click', this.config.selectors.quantityDec, (e) => {
+        this.updateQuantityAndCart($(e.currentTarget).closest('section'), -1);
+      });
+
+      $(document).on('click', this.config.selectors.quantityInc, (e) => {
+        this.updateQuantityAndCart($(e.currentTarget).closest('section'), 1);
+      });
+    },
+
+    buildCheckoutUrl() {
+      // Same collapsed list the bar was priced from, so Shopify is asked for
+      // exactly the lines the buyer was shown — a folded set goes over as one
+      // stack variant, never as five pieces at the higher price.
+      const items = this.collapseCart()
+        .filter((l) => this.config.variants[l.id])
+        .map((l) => this.config.variants[l.id] + ':' + l.n);
+      if (items.length === 0) return null;
+      // Shopify's permalink takes a query string after the line items
+      // (/cart/<variant>:<qty>,...?key=value). Set through URL so anything
+      // already on the query is merged with, never doubled.
+      const url = new URL('https://checkout.silosilosilo.com/cart/' + items.join(','));
+      Object.keys(ATTRIBUTION).forEach((k) => {
+        if (!url.searchParams.has(k)) url.searchParams.set(k, ATTRIBUTION[k]);
+      });
+      return url.toString();
+    },
+
+    bindCheckout() {
+      $(document).on('click', '[sf-checkout]', (e) => {
+        e.preventDefault();
+        const url = this.buildCheckoutUrl();
+        if (url) {
+          window.location.href = url;
+        }
+      });
+    },
+
+    initialize() {
+      this.initializeCart();
+      this.bindQuantityButtons();
+      this.bindCheckout();
+    }
+  };
+
+  // Exposed so the price actually shown on a row can be derived from the same map used to
+  // total the cart and build the checkout URL, instead of a second hand-maintained copy.
+  window.CartManager = CartManager;
+
+  $(document).ready(function() { CartManager.initialize(); });
+</script><script>
+  (function() {
+    // Fallback only. This used to be the sole source of the displayed price, maintained by
+    // hand alongside CartManager's map — two copies of the same number, free to drift, which
+    // is exactly how a row can advertise one price while checkout charges another.
+    const FALLBACK_PRICES = {
+      '8973822722300': '$100',
+      '8973825540348': '$19',
+      '8973828849916': '$19',
+      '8973831667964': '$19',
+      '8974057079036': '$9',
+      '8974057832700': '$19',
+      '8974058717436': '$29',
+      '8974059077884': '$39',
+      '8974059602172': '$49'
+    };
+
+    function applyTopPrices() {
+      // Derive from the map that actually drives the subtotal and the checkout permalink, so
+      // the number a buyer reads is the number they are charged. Adding a product is then a
+      // one-place change.
+      const cm = window.CartManager;
+      let productPrices = FALLBACK_PRICES;
+      if (cm && cm.config && cm.config.prices) {
+        productPrices = {};
+        Object.keys(cm.config.prices).forEach(function(id) {
+          productPrices[id] = '$' + cm.config.prices[id];
+        });
+      }
+
+      Object.entries(productPrices).forEach(([productId, price]) => {
+        const section = document.querySelector(`section.section_cart[sf-product="${productId}"]`);
+        if (!section) {
+          return;
+        }
+
+        const productRow = section.querySelector('.shopify-buy__product');
+        const quantityContainer = section.querySelector('.shopify-buy__quantity-container');
+        const quantity = section.querySelector('.shopify-buy__quantity');
+        if (!productRow || !quantityContainer || !quantity) {
+          return;
+        }
+
+        let priceEl = productRow.querySelector('.cart-top-price');
+        if (!priceEl) {
+          priceEl = document.createElement('div');
+          priceEl.className = 'cart-top-price user-select-off';
+          productRow.insertBefore(priceEl, quantityContainer);
+        }
+
+        priceEl.textContent = price;
+
+        const quantityStyles = window.getComputedStyle(quantity);
+        priceEl.style.fontSize = quantityStyles.fontSize;
+        priceEl.style.lineHeight = quantityStyles.lineHeight;
+        priceEl.style.fontWeight = quantityStyles.fontWeight;
+      });
+    }
+
+    function markSkuAddons() {
+      const addonLabels = {
+        '8974057079036': 'Cap',
+        '8974057832700': '15',
+        '8974058717436': '30',
+        '8974059077884': '60',
+        '8974059602172': '90',
+        // Bare sizes in both columns. This was the other way round while the
+        // page was a single strip, where a brass row under a bare "60" was
+        // indistinguishable from the aluminum "60" above it. The material
+        // column header now carries that, so the prefix is redundant.
+        'brass-cap': 'Cap',
+        'brass-15': '15',
+        'brass-30': '30',
+        'brass-60': '60',
+        'brass-90': '90'
+      };
+
+      Object.entries(addonLabels).forEach(([productId, label]) => {
+        const cartSection = document.querySelector(`section.section_cart[sf-product="${productId}"]`);
+        if (!cartSection) {
+          return;
+        }
+
+        cartSection.classList.add('sku-addon');
+
+        const visualSection = cartSection.previousElementSibling;
+        if (visualSection && visualSection.classList.contains('section_hp-storage-extra')) {
+          visualSection.classList.add('sku-addon');
+          const heading = visualSection.querySelector('.heading-style-h1');
+          if (heading) {
+            heading.textContent = label;
+          }
+        }
+      });
+    }
+
+    // ----------------------------------------------------------------------
+    // Buy from the explode.
+    //
+    // The control does not hold a quantity of its own. It reads and drives the
+    // product's existing .section_cart row, so the piece, the row below it, the
+    // subtotal and the checkout permalink are all one number. A second counter
+    // here would be a second thing to keep in step — and the one that ends up
+    // disagreeing with what Shopify charges.
+    // ----------------------------------------------------------------------
+    function rowFor(productId) {
+      return document.querySelector(`section.section_cart[sf-product="${productId}"]`);
+    }
+
+    // Which stack product a column sells.
+    const STACK_OF = { aluminum: '8973822722300', brass: 'brass-stack' };
+
+    // Every stepper on the page — piece, stack, insert — reads and writes one
+    // thing: the product's .section_cart row. That row is what CartManager
+    // totals and what the checkout permalink is built from, so there is a
+    // single number per product and nothing to keep in step. A control holding
+    // a count of its own would be a second copy, and the one that ends up
+    // disagreeing with what Shopify charges.
+    function qtyOf(productId) {
+      return window.CartManager.rowQty(productId);
+    }
+
+    function setQty(productId, n) {
+      const row = rowFor(productId);
+      if (!row) return;
+      window.CartManager.setSectionQuantity($(row), Math.max(0, n));
+    }
+
+    // The tap's acknowledgement: a quick dip of the render. The class is
+    // pulled and re-added around a reflow so a second tap replays it.
+    function pulseTap(el) {
+      if (!el) return;
+      el.classList.remove('is-tapped');
+      void el.offsetWidth;
+      el.classList.add('is-tapped');
+    }
+
+    function buildPieceControls() {
+      const cm = window.CartManager;
+      if (!cm || !cm.config) return false;
+
+      let built = 0;
+      document.querySelectorAll('[data-explode] .hp_storage-box_inner').forEach((box) => {
+        if (box.querySelector('.piece-side')) return;
+
+        // Two sides of type: the size stays in the left slot, where the
+        // markup put it, and the price and stepper take the right. Every
+        // piece gets the label, sellable or not — a titanium piece still has
+        // to say 30 MM — and it fades in with the sides, so it is marked.
+        const side = document.createElement('div');
+        side.className = 'piece-side';
+        const head = document.createElement('div');
+        head.className = 'piece-side_head';
+        const label = box.querySelector('.hp_storage-visual_text');
+        if (label) label.classList.add('piece-label');
+        side.appendChild(head);
+        box.appendChild(side);
+        built++;
+
+        const productId = box.getAttribute('data-piece');
+        const row = productId ? rowFor(productId) : null;
+        const price = productId ? cm.config.prices[productId] : null;
+        // No row, no price, or gated off: the piece simply does not sell. It
+        // gets no stepper rather than a dead one — the same reason the titanium
+        // waitlist rows are not .section_cart sections.
+        if (!row || price == null || !cm.isPurchasable(productId)) return;
+
+        // The unit price, and it stays the unit price. What a complete set is
+        // worth is settled in collapseCart(), which is what the bar shows —
+        // the row here answers "what does one more cost", nothing else.
+        const priceEl = document.createElement('div');
+        priceEl.className = 'piece-buy_price';
+        priceEl.textContent = '$' + price;
+        head.appendChild(priceEl);
+
+        // Straight into the cart, starting at nothing. These used to hold a
+        // scratch configuration that a per-column receipt committed later;
+        // with the receipts gone the bar at the bottom is the only subtotal,
+        // so a press has to move it immediately or it moves nothing at all.
+        const ctrl = document.createElement('div');
+        ctrl.className = 'piece-buy';
+        ctrl.setAttribute('data-piece-for', productId);
+        ctrl.innerHTML =
+          '<div class="piece-buy_qty">' +
+            '<div class="piece-buy_step piece-buy_dec" role="button" tabindex="0" aria-label="One fewer">&minus;</div>' +
+            '<div class="piece-buy_n">0</div>' +
+            '<div class="piece-buy_step piece-buy_inc" role="button" tabindex="0" aria-label="One more">+</div>' +
+          '</div>';
+
+        ctrl.querySelector('.piece-buy_inc').addEventListener('click', () => setQty(productId, qtyOf(productId) + 1));
+        ctrl.querySelector('.piece-buy_dec').addEventListener('click', () => setQty(productId, qtyOf(productId) - 1));
+
+        side.appendChild(ctrl);
+
+        // The piece itself adds to the cart — every width; the bar-hint is
+        // what says so. Not while the offer panel is live (closed, the
+        // five pieces are five overlapping hit targets and the panel owns
+        // the click), and not for clicks that came off the row's own
+        // controls, which bubble up through the box.
+        box.addEventListener('click', (e) => {
+          if (e.target.closest('.piece-side')) return;
+          const sec = box.closest('[data-explode]');
+          if (sec && sec.classList.contains('is-panel-live')) return;
+          setQty(productId, qtyOf(productId) + 1);
+          pulseTap(box.querySelector('.hp_storage_visual'));
+        });
+
+        // "We don't need to repeat all the stuff in the back." The explode is
+        // the piece listing now, so the product's own row and visual come off
+        // the page. They stay in the DOM because they are still what the cart
+        // is written to and what the checkout permalink is built from.
+        row.classList.add('is-in-explode');
+        const visual = row.previousElementSibling;
+        if (visual && visual.classList.contains('section_hp-storage-extra')) {
+          visual.classList.add('is-in-explode');
+        }
+      });
+
+      if (built) {
+        document.querySelectorAll('[data-explode]').forEach(buildStackPanel);
+        syncShopControls();
+      }
+      return built > 0;
+    }
+
+    // The closed stack's own storefront: what it costs, the same stepper the
+    // pieces carry, and one press that puts a whole stack in the cart.
+    //
+    // It shows at both ends of the explode, because both ends are the same
+    // closed stack — the offer you arrive at and the offer you land back on
+    // once the pieces have reassembled. There is no third thing to build; the
+    // receipt that used to occupy the far end was the third subtotal on a page
+    // that now has exactly one, in the bar.
+    //
+    // Titanium has no stack SKU, so its panel is the price and a waitlist
+    // link: same slot, same shape, and no stepper for something that cannot be
+    // bought.
+    function buildStackPanel(section) {
+      // Anchored to the stack box, which is what the panel is the price of —
+      // and which, now that nothing lifts it, holds one place all the way
+      // through the explode.
+      const anchor = section.querySelector('.hp_storage-box');
+      if (!anchor || section.querySelector('.stack-offer')) return;
+
+      const cm = window.CartManager;
+      const stackId = STACK_OF[section.getAttribute('data-explode')];
+      const stackRow = stackId ? rowFor(stackId) : null;
+      const sellable = !!(stackRow && cm.isPurchasable(stackId) && cm.config.prices[stackId] != null);
+      const price = sellable ? '$' + cm.config.prices[stackId] : section.getAttribute('data-offer-price');
+      if (!price) return;
+
+      const tag = section.getAttribute('data-offer-tag');
+      const href = section.getAttribute('data-offer-href');
+
+      const panel = document.createElement('div');
+      panel.className = 'stack-offer';
+      panel.innerHTML =
+        '<span class="stack-offer_name">Stack</span>' +
+        '<div class="stack-offer_side">' +
+          '<div class="stack-offer_head">' +
+            '<span class="stack-offer_price">' + price + '</span>' +
+            (tag && !sellable ? '<span class="stack-offer_tag">' + tag + '</span>' : '') +
+          '</div>' +
+        '</div>';
+      const sideSlot = panel.querySelector('.stack-offer_side');
+
+      if (sellable) {
+        const ctrl = document.createElement('div');
+        ctrl.className = 'piece-buy stack-offer_buy';
+        ctrl.setAttribute('data-piece-for', stackId);
+        ctrl.innerHTML =
+          '<div class="piece-buy_qty">' +
+            '<div class="piece-buy_step piece-buy_dec" role="button" tabindex="0" aria-label="One fewer stack">&minus;</div>' +
+            '<div class="piece-buy_n">0</div>' +
+            '<div class="piece-buy_step piece-buy_inc" role="button" tabindex="0" aria-label="One more stack">+</div>' +
+          '</div>';
+        ctrl.querySelector('.piece-buy_inc').addEventListener('click', () => setQty(stackId, qtyOf(stackId) + 1));
+        ctrl.querySelector('.piece-buy_dec').addEventListener('click', () => setQty(stackId, qtyOf(stackId) - 1));
+        sideSlot.appendChild(ctrl);
+
+        // The panel is the stack's listing now, so the plain row and its
+        // visual come off the page like the piece rows did. The row stays in
+        // the DOM as the cart's model.
+        stackRow.classList.add('is-in-explode');
+        const stackVisual = stackRow.previousElementSibling;
+        if (stackVisual && stackVisual.classList.contains('section_hp-storage-extra')) {
+          stackVisual.classList.add('is-in-explode');
+        }
+      }
+      // Titanium has no button of its own. It had one — JOIN WAITLIST, in a
+      // box, in the narrowest side track on the page, where it was clipped at
+      // some widths and wrapped to two lines at others. The stack is the
+      // control now, the same as every other column: the row states the price
+      // and the word WAITLIST, and clicking the render opens the panel.
+
+      // The closed stack is a target too, and it has to be: the bar says to
+      // click, and until the pieces part the stack is the only thing there.
+      // Clicking it does exactly what the panel's + does — one stack, at the
+      // stack price — or opens the waitlist where there is no stack to sell.
+      //
+      // The two states never overlap. Closed, the section is .is-panel-live
+      // and the piece handlers bail out; open, this one does. Clicks off the
+      // panel's own controls bubble up through here and are let alone.
+      anchor.addEventListener('click', (e) => {
+        if (!section.classList.contains('is-panel-live')) return;
+        if (e.target.closest('.stack-offer')) return;
+        if (sellable) {
+          setQty(stackId, qtyOf(stackId) + 1);
+          pulseTap(anchor);
+        } else if (href) {
+          openWaitlist('Titanium Stack', href);
+        }
+      });
+
+      anchor.appendChild(panel);
+    }
+
+    // The waitlist modal. One panel for the page, built on first use;
+    // openWaitlist() resets it, so a second visit starts clean. Submits to
+    // /api/waitlist, which writes the email into the site's Vercel Blob store —
+    // if that fails for any reason, the old mailto link is the way out.
+    let wlVeil = null;
+    function ensureWaitlistModal() {
+      if (wlVeil) return wlVeil;
+      wlVeil = document.createElement('div');
+      wlVeil.className = 'wl-veil';
+      wlVeil.innerHTML =
+        '<div class="wl-band" role="dialog" aria-modal="true" aria-labelledby="wl-title">' +
+          '<button type="button" class="wl-close" aria-label="Close">&times;</button>' +
+          '<div class="wl-band_head">' +
+            '<div class="wl-title" id="wl-title">Titanium waitlist</div>' +
+            '<div class="wl-copy">Leave your email and we’ll write when titanium is ready.</div>' +
+          '</div>' +
+          '<form class="wl-form" novalidate>' +
+            '<input class="wl-input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>' +
+            '<div class="wl-hairline"></div>' +
+            '<div class="wl-strip">' +
+              '<div class="wl-msg" aria-live="polite"></div>' +
+              '<button type="submit" class="wl-submit">Join waitlist</button>' +
+            '</div>' +
+          '</form>' +
+        '</div>';
+      document.body.appendChild(wlVeil);
+
+      const close = () => {
+        wlVeil.classList.remove('is-open');
+        document.documentElement.style.overflow = '';
+        if (typeof lenis !== 'undefined' && lenis) lenis.start();
+      };
+      wlVeil.addEventListener('click', (e) => { if (e.target === wlVeil) close(); });
+      wlVeil.querySelector('.wl-close').addEventListener('click', close);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && wlVeil.classList.contains('is-open')) close();
+      });
+
+      const form = wlVeil.querySelector('.wl-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = form.querySelector('.wl-input');
+        const submit = form.querySelector('[type="submit"]');
+        const msg = wlVeil.querySelector('.wl-msg');
+        const email = input.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          msg.textContent = 'Enter a valid email.';
+          input.focus();
+          return;
+        }
+        submit.disabled = true;
+        msg.textContent = 'One moment…';
+        try {
+          const r = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, product: wlVeil.dataset.product })
+          });
+          if (!r.ok) {
+            const j = await r.json().catch(() => ({}));
+            throw new Error(j.error || 'Could not save your email.');
+          }
+          wlVeil.querySelector('.wl-title').textContent = 'You’re on the list';
+          wlVeil.querySelector('.wl-copy').textContent =
+            'We’ll write to ' + email + ' when titanium is ready.';
+          form.style.display = 'none';
+          msg.textContent = '';
+          document.dispatchEvent(new CustomEvent('silo:waitlist', { detail: { product: wlVeil.dataset.product } }));
+        } catch (err) {
+          msg.innerHTML = '';
+          msg.appendChild(document.createTextNode(err.message + ' Or '));
+          const a = document.createElement('a');
+          a.href = wlVeil.dataset.mailto || 'mailto:silo@silosilosilo.com';
+          a.textContent = 'email us';
+          msg.appendChild(a);
+          msg.appendChild(document.createTextNode('.'));
+        } finally {
+          submit.disabled = false;
+        }
+      });
+      return wlVeil;
+    }
+
+    // One quiet line in the bar teaches the gesture; the strip filling is
+    // both what retires it and the proof the lesson took. Wording follows the
+    // input that will actually be used — and the thing under it. Closed, the
+    // only target is the stack; open, it is the piece you want. The line said
+    // "a piece" from the first paint, over a closed stack whose clicks are
+    // deliberately swallowed, so the first thing anyone tried did nothing.
+    // The CSS above stops the drag in WebKit and Blink; this is the backstop
+    // everywhere else, and it covers renders built after this line — one
+    // listener rather than an attribute to remember on every new image.
+    document.addEventListener('dragstart', (e) => {
+      if (e.target.closest && e.target.closest('.hp_storage_visual, .inserts-row_img, .cart-strip_item')) {
+        e.preventDefault();
+      }
+    });
+
+    (function barHint() {
+      const bar = document.querySelector('.sticky-ui .cart_box-checkout');
+      if (!bar || bar.querySelector('.bar-hint')) return;
+      const hint = document.createElement('div');
+      hint.className = 'bar-hint';
+      const verb = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        ? 'Click' : 'Tap';
+      window.syncBarHint = () => {
+        const open = !!document.querySelector('[data-explode]:not(.is-panel-live)');
+        const text = open ? verb + ' a piece to add it' : verb + ' the stack to add it';
+        if (hint.textContent !== text) hint.textContent = text;
+      };
+      window.syncBarHint();
+      bar.appendChild(hint);
+    })();
+
+    function openWaitlist(product, mailto) {
+      const veil = ensureWaitlistModal();
+      veil.dataset.product = product;
+      veil.dataset.mailto = mailto || '';
+      veil.querySelector('.wl-title').textContent = 'Titanium waitlist';
+      veil.querySelector('.wl-copy').textContent =
+        'Leave your email and we’ll write when titanium is ready.';
+      veil.querySelector('.wl-msg').textContent = '';
+      const form = veil.querySelector('.wl-form');
+      form.style.display = '';
+      form.querySelector('.wl-input').value = '';
+      veil.classList.add('is-open');
+      // The page must not move behind the veil: Lenis is told to stand
+      // still, and the html overflow lock catches native touch scrolling.
+      document.documentElement.style.overflow = 'hidden';
+      if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+      form.querySelector('.wl-input').focus();
+    }
+
+    // One pass that makes every control agree with the cart rows. Nothing here
+    // decides anything — the rows are the model, so this only redraws.
+    function syncShopControls() {
+      document.querySelectorAll('[data-piece-for]').forEach((ctrl) => {
+        const n = qtyOf(ctrl.getAttribute('data-piece-for'));
+        const nEl = ctrl.querySelector('.piece-buy_n, .ins-buy_n');
+        if (nEl) nEl.textContent = n;
+        ctrl.classList.toggle('is-empty', n === 0);
+      });
+    }
+    window.syncShopControls = syncShopControls;
+
+    // The inserts row under the titanium stack. Unlike the explode's steppers
+    // these buy immediately — an insert is à la carte, there is no stack to
+    // configure it into — so each click writes straight into the hidden cart
+    // row and the bar moves at once.
+    // The accessories, built as piece rows. They are the same kind of thing —
+    // a render, a size, a price, a stepper — so they are made of the same parts
+    // rather than a second, smaller design. What differs is only that these
+    // never belonged to a stack: an insert is à la carte, so there is no bundle
+    // for collapseCart() to fold it into.
+    function buildInsertsRow() {
+      const cm = window.CartManager;
+      if (!cm || !cm.config) return;
+      document.querySelectorAll('.inserts-row_cell[data-insert]').forEach((cell) => {
+        if (cell.querySelector('.piece-side')) return;
+        const id = cell.getAttribute('data-insert');
+        const row = rowFor(id);
+        const price = cm.config.prices[id];
+        if (!row || price == null || !cm.isPurchasable(id)) return;
+
+        const nameEl = cell.querySelector('.inserts-row_name');
+        const name = nameEl ? nameEl.textContent.trim() : '';
+        if (nameEl) nameEl.remove();
+
+        const label = document.createElement('div');
+        label.className = 'hp_storage-visual_text piece-label';
+        label.innerHTML = '<div class="text-color-gray-200"><div class="hp_storage-heading">' + esc(name) + '</div></div>';
+        cell.appendChild(label);
+
+        const side = document.createElement('div');
+        side.className = 'piece-side';
+        side.innerHTML =
+          '<div class="piece-side_head">' +
+            '<div class="piece-buy_price">$' + price + '</div>' +
+          '</div>' +
+          '<div class="piece-buy" data-piece-for="' + esc(id) + '">' +
+            '<div class="piece-buy_qty">' +
+              '<div class="piece-buy_step piece-buy_dec" role="button" tabindex="0" aria-label="One fewer">&minus;</div>' +
+              '<div class="piece-buy_n">0</div>' +
+              '<div class="piece-buy_step piece-buy_inc" role="button" tabindex="0" aria-label="One more">+</div>' +
+            '</div>' +
+          '</div>';
+
+        side.querySelector('.piece-buy_inc').addEventListener('click', () => setQty(id, qtyOf(id) + 1));
+        side.querySelector('.piece-buy_dec').addEventListener('click', () => setQty(id, qtyOf(id) - 1));
+
+        cell.appendChild(side);
+
+        // Same as the pieces — the insert's render is the add control at
+        // every width; the stepper's clicks bubble through and are let alone.
+        cell.addEventListener('click', (e) => {
+          if (e.target.closest('.piece-side')) return;
+          setQty(id, qtyOf(id) + 1);
+          pulseTap(cell.querySelector('.inserts-row_img') || cell);
+        });
+      });
+      syncShopControls();
+    }
+
+    // ----------------------------------------------------------------------
+    // The visual cart — a row of thumbnails above the grey bar.
+    //
+    // It is drawn from the same collapsed line items the subtotal is priced
+    // from, so a complete set of five shows as one stack thumbnail rather than
+    // five pieces. The picture and the number are two views of one list, which
+    // is what makes the bundle rule legible: press five pieces and you watch
+    // them become a stack.
+    // ----------------------------------------------------------------------
+    const PRODUCT_MEDIA = {};
+
+    function noteMedia(id, img, label) {
+      if (!id || PRODUCT_MEDIA[id] || !img) return;
+      const src = img.currentSrc || img.getAttribute('src') || '';
+      if (!src) return;
+      PRODUCT_MEDIA[id] = { src: src, label: label || '' };
+    }
+
+    // Order matters: each product is claimed by the most specific source that
+    // has a picture of it, and noteMedia never overwrites.
+    function buildProductMedia() {
+      document.querySelectorAll('[data-explode]').forEach((section) => {
+        const col = section.closest('.mat-col');
+        const nameEl = col && col.querySelector('.mat-col_name');
+        const material = nameEl ? nameEl.textContent.trim() : '';
+
+        section.querySelectorAll('.hp_storage-box_inner[data-piece]').forEach((box) => {
+          const heading = box.querySelector('.hp_storage-heading');
+          noteMedia(box.getAttribute('data-piece'), box.querySelector('img.cover-img'),
+            (material + ' ' + (heading ? heading.textContent.trim() : '')).trim());
+        });
+
+        // The stack is one SKU and gets one thumbnail: the closed-stack
+        // render named on the section. Unlike every other product it has no
+        // listing row to borrow a picture from — the explode is its listing —
+        // so the image is declared in the markup beside the piece renders it
+        // has to sit next to.
+        const stackId = STACK_OF[section.getAttribute('data-explode')];
+        const thumb = section.getAttribute('data-stack-thumb');
+        if (stackId && thumb) {
+          const img = new Image();
+          img.src = thumb;
+          noteMedia(stackId, img, (material + ' stack').trim());
+        }
+      });
+
+      document.querySelectorAll('.inserts-row_cell[data-insert]').forEach((cell) => {
+        const nameEl = cell.querySelector('.inserts-row_name');
+        noteMedia(cell.getAttribute('data-insert'),
+          cell.querySelector('img'),
+          ('Insert ' + (nameEl ? nameEl.textContent.trim() : '')).trim());
+      });
+    }
+
+    function esc(text) {
+      return String(text).replace(/[&<>"]/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    }
+
+    // Press a thumbnail and one of that thing comes back out of the cart. It
+    // writes to the same .section_cart row every stepper writes to, so the
+    // strip, the subtotal and the checkout permalink all move together —
+    // there is still exactly one number per product.
+    //
+    // A stack thumbnail is the one line that may not have a row behind it:
+    // collapseCart() also shows five folded piece rows as a stack. So the
+    // stack row is taken from first — that is the one somebody added AS a
+    // stack — and a set is only unfolded when there is no stack row left to
+    // take from. Unfolding takes one off each of the five, which is precisely
+    // the set that was folded, so the pieces the buyer had over and above it
+    // stay in the cart.
+    function removeLine(id) {
+      const cm = window.CartManager;
+      if (!id || !cm) return;
+      const set = (cm.config.sets || []).find((s) => s.stack === id);
+      if (set && qtyOf(id) === 0) {
+        set.pieces.forEach((pieceId) => setQty(pieceId, qtyOf(pieceId) - 1));
+        return;
+      }
+      setQty(id, qtyOf(id) - 1);
+    }
+
+    // Prepended into .sticky-ui but OUTSIDE the checkout anchor — a thumbnail
+    // is not a checkout button, and inside the <a> every one of them would be.
+    function ensureCartStrip() {
+      const bar = document.querySelector('.sticky-ui');
+      if (!bar) return null;
+      let strip = bar.querySelector('.cart-strip');
+      if (strip) return strip;
+      strip = document.createElement('div');
+      strip.className = 'cart-strip';
+      strip.innerHTML = '<div class="cart-strip_items"></div>';
+      // On the strip, not on each item: the items are rewritten from the
+      // model on every change, and a listener per thumbnail would be rebound
+      // on every click.
+      strip.addEventListener('click', (e) => {
+        const item = e.target.closest('.cart-strip_item');
+        if (item) removeLine(item.getAttribute('data-line'));
+      });
+      strip.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const item = e.target.closest('.cart-strip_item');
+        if (!item) return;
+        e.preventDefault();
+        removeLine(item.getAttribute('data-line'));
+      });
+      bar.prepend(strip);
+      return strip;
+    }
+
+    function renderCartStrip(lines) {
+      const strip = ensureCartStrip();
+      if (!strip) return;
+      const items = strip.querySelector('.cart-strip_items');
+
+      items.innerHTML = (lines || []).map((line) => {
+        const media = PRODUCT_MEDIA[line.id];
+        if (!media) return '';
+        const name = esc(media.label);
+        const label = name + (line.n > 1 ? ' × ' + line.n : '');
+        // Named as what pressing it does, because pressing it is all it does.
+        const act = 'Remove ' + (name || 'item');
+        return '<div class="cart-strip_item" data-line="' + esc(line.id) + '"' +
+                 ' role="button" tabindex="0" title="' + act + '" aria-label="' + act + '">' +
+                 '<img src="' + esc(media.src) + '" alt="' + label + '"/>' +
+                 (line.n > 1 ? '<span class="cart-strip_n">' + line.n + '</span>' : '') +
+               '</div>';
+      }).join('');
+
+      const filled = items.children.length > 0;
+      if (filled === strip.classList.contains('is-filled')) return;
+      strip.classList.toggle('is-filled', filled);
+
+      // The frames are sized off --bar-room, which already counts the strip
+      // as open, so nothing inside the shop changes size here. Only the
+      // desktop scroller's own height moves (it reads the live --bar-h), so
+      // the triggers re-measure once the transition has run — no rebuild.
+      window.setTimeout(() => {
+        if (window.remeasureBar) window.remeasureBar();
+        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      }, 320);
+    }
+    window.renderCartStrip = renderCartStrip;
+
+    function placeTotalInStickyBar() {
+      const checkoutWrap = document.querySelector('.cart_wrap-checkout');
+      const cartBoxBottom = document.getElementById('cart');
+
+      if (!checkoutWrap || !cartBoxBottom || checkoutWrap.contains(cartBoxBottom)) {
+        return;
+      }
+
+      checkoutWrap.prepend(cartBoxBottom);
+      checkoutWrap.classList.add('has-inline-total');
+    }
+
+    // Where a moved node lived. A marker left permanently in its old slot,
+    // rather than a remembered (parent, nextSibling) pair: siblings that move
+    // together invalidate each other's references, and a marker that never
+    // moves cannot go stale.
+    function homeMarker(el) {
+      let m = el.previousElementSibling;
+      if (!m || !m.classList.contains('acc-home')) {
+        m = document.createElement('div');
+        m.className = 'acc-home';
+        el.parentNode.insertBefore(m, el);
+      }
+      return m;
+    }
+
+    // Desktop reads down three columns at once, so each material's inserts
+    // belong under its own stack. The phone reads down ONE column, and there
+    // the same arrangement buries the accessories between the materials: you
+    // meet aluminum's inserts before you have seen brass at all.
+    //
+    // "Stacks in order then the accessories." So on a phone the three stacks
+    // run back to back and every insert lands after them, in one row, in size
+    // order — which is what they always were: one product family that crosses
+    // the materials, three cells across. The row keeps its own head, the
+    // emptied one is hidden, and the whole thing goes back into the columns
+    // the moment the layout does.
+    function placeAccessories() {
+      const cols = document.querySelector('.mat-cols');
+      const rows = Array.from(document.querySelectorAll('.inserts-row'));
+      if (!cols || !rows.length) return;
+
+      // Desktop: every marker takes its own node back. Order survives because
+      // the markers never left.
+      if (window.innerWidth >= 992) {
+        document.querySelectorAll('[data-acc-home]').forEach((el) => {
+          const m = document.getElementById(el.getAttribute('data-acc-home'));
+          if (m) m.after(el);
+        });
+        rows.forEach((r) => r.classList.remove('is-emptied'));
+        return;
+      }
+
+      // Re-entrant: applyLayoutTweaks() runs again once the prices have
+      // loaded, and by then the host has already moved to the end of the page
+      // — so document order no longer names it. It carries its own tag, and
+      // the emptied flags are cleared before they are re-applied, or the row
+      // that hosted the first pass gets hidden by the second.
+      rows.forEach((r) => r.classList.remove('is-emptied'));
+      const host = rows.find((r) => r.classList.contains('is-acc-host')) || rows[0];
+      host.classList.add('is-acc-host');
+      const grid = host.querySelector('.inserts-row_grid');
+      if (!grid) return;
+
+      // The cells first, so the host row is carrying all of them when it moves.
+      const cells = rows.flatMap((r) => Array.from(r.querySelectorAll('.inserts-row_cell')));
+      cells.forEach(markHome);
+      // 15, 30, 60 — the sizes read as a series, which is the only order they
+      // have. Split across two columns they were 30, 60, then 15.
+      cells.sort((a, b) => sizeOf(a) - sizeOf(b)).forEach((c) => grid.appendChild(c));
+
+      markHome(host);
+      cols.appendChild(host);
+      rows.filter((r) => r !== host).forEach((r) => r.classList.add('is-emptied'));
+    }
+
+    let accIds = 0;
+    function markHome(el) {
+      if (el.hasAttribute('data-acc-home')) return;
+      const m = homeMarker(el);
+      m.id = 'acc-home-' + (++accIds);
+      el.setAttribute('data-acc-home', m.id);
+    }
+
+    function sizeOf(cell) {
+      const name = cell.querySelector('.inserts-row_name, .piece-label');
+      return parseInt((name ? name.textContent : '').replace(/\D/g, ''), 10) || 0;
+    }
+
+    window.placeAccessories = placeAccessories;
+
+    // Park the accessories the way the explode parks a stack: the inner is
+    // sticky (see the CSS), this decides where it stops and how long it stays
+    // there. Both are measurements, because both depend on how tall the row's
+    // own content turns out to be — and on desktop the two rows are not the
+    // same height, so the numbers are per row.
+    function parkAccessories() {
+      const cols = document.querySelector('.mat-cols');
+      if (!cols) return;
+      const rows = Array.from(document.querySelectorAll('.inserts-row'))
+        .filter((r) => !r.classList.contains('is-emptied'));
+      const inners = rows.map((r) => r.querySelector('.padding-global'))
+        .filter(Boolean);
+      if (!inners.length) return;
+
+      const root = getComputedStyle(document.documentElement);
+      const px = (name) => parseFloat(root.getPropertyValue(name)) || 0;
+      const desktop = window.innerWidth >= 992;
+      // Desktop parks against the grid's own scrollport, under the material
+      // title that is stuck to the top of it; a phone parks against the
+      // window, with the fixed bar taking the bottom and nothing above.
+      const head = desktop
+        ? ((document.querySelector('.mat-col_head') || {}).offsetHeight || 0)
+        : 0;
+      const frame = (desktop ? cols.clientHeight
+                             : window.innerHeight - px('--bar-h')) - head;
+      // The open stack's dwell, in screens. One source (see --acc-screens).
+      const hold = frame * (parseFloat(root.getPropertyValue('--acc-screens')) || 0.82);
+      // Fractional, not offsetHeight — these are 318.4 and 116.6, and every
+      // number below is a difference of them.
+      const heights = inners.map((i) => i.getBoundingClientRect().height);
+      const tallest = Math.max.apply(null, heights);
+
+      // Desktop hangs the accessories off the material title, the way the
+      // stack hangs off it — the same 1.2rem breath .hp-storage_wrap-box
+      // takes, and for the reason written beside it there: centring a short
+      // row in a tall frame is where a screenful of air between ALUMINUM and
+      // INSERTS comes from. It was, again. The slack belongs under the last
+      // insert, where the bar closes it, not over the first one. One park for
+      // every row, so the heads make a band across the shop rather than
+      // appearing twice at two different heights.
+      //
+      // A phone has no title above the accessories — the last material's
+      // header has let go by then — so there is nothing to hang from and the
+      // row is a screen of its own. Centred there.
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+      const park = desktop ? Math.round(head + 1.2 * rem)
+                           : Math.max(0, Math.round((frame - tallest) / 2));
+
+      inners.forEach((inner, i) => {
+        const h = heights[i];
+        rows[i].style.setProperty('--acc-park', park + 'px');
+        // The wall, derived rather than guessed. At the end of the run the
+        // row's bottom sits on the bottom of the frame, so how long the inner
+        // stays parked is how far the row's own top has travelled past the
+        // park by then — which makes the wall the beat plus everything
+        // between the park and the frame's bottom edge. Guessing it cost the
+        // dwell half its length the first time the park moved.
+        //
+        // It also equalises for free: the row's total height comes out at
+        // hold + frame + head − park whatever is in it, so aluminum's two
+        // inserts and titanium's one run out on the same line instead of the
+        // short one riding up while the tall one is still parked.
+        wallOf(rows[i]).style.height =
+          Math.round(hold + frame + head - park - h - padBottom(rows[i])) + 'px';
+      });
+    }
+
+    function padBottom(el) {
+      return parseFloat(getComputedStyle(el).paddingBottom) || 0;
+    }
+
+    function wallOf(row) {
+      let wall = row.querySelector(':scope > .acc-wall');
+      if (!wall) {
+        wall = document.createElement('div');
+        wall.className = 'acc-wall';
+        row.appendChild(wall);
+      }
+      return wall;
+    }
+
+    window.parkAccessories = parkAccessories;
+
+    function applyLayoutTweaks() {
+      placeTotalInStickyBar();
+      markSkuAddons();
+      applyTopPrices();
+      buildPieceControls();
+      buildInsertsRow();
+      placeAccessories();
+      parkAccessories();
+      buildProductMedia();
+      // Draws the strip for whatever is already in the cart and puts every
+      // stepper in step with it — one call, because updateCartTotal is the
+      // single path from the rows to the page.
+      if (window.CartManager) window.CartManager.updateCartTotal();
+      // Always, not only when controls were built. The travel is derived from
+      // the measured height of the closed stack, and adding the controls
+      // changes that height — a rebuild fired in the same tick as the insert
+      // measures the old layout and opens the stack too far.
+      if (window.rebuildExplodes) window.rebuildExplodes();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyLayoutTweaks, { once: true });
+    } else {
+      applyLayoutTweaks();
+    }
+
+    window.addEventListener('resize', applyTopPrices);
+    // The park is half of what the row does not fill, so it moves with the
+    // window at every size, not only across the column breakpoint.
+    window.addEventListener('resize', parkAccessories);
+    // The row's height is its images' height, and on a cold load they are not
+    // measured yet — a park read off the unloaded row is a park off by the
+    // difference.
+    window.addEventListener('load', parkAccessories);
+    window.setTimeout(applyLayoutTweaks, 1200);
+  })();
+</script></body></html>

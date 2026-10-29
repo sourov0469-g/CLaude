@@ -1,0 +1,21 @@
+SLUG: scale-container-scrolltrigger
+ENTRY: 154 How to scale smoothly the container on scroll using ScrollTrigger (CodePen, popjrluq-the-selector)
+PEN: https://codepen.io/popjrluq-the-selector/pen/VwNvVWP
+EVIDENCE NOTE: the pen page itself rendered only its settings panel; the full CSS+JS below were recovered from the CodePen embed crawl in search results — labelled as embed-excerpt evidence, not a direct pen-page read.
+
+STACK (Measured from embed excerpt)
+- GSAP + ScrollTrigger; CSS background-attachment: fixed parallax layers inside a pinned container
+
+PARAMETERS (Measured)
+- Timeline ScrollTrigger: trigger ".imgOwl", toggleActions "restart pause reverse pause", pin '.container', force3D: true (on the tween), scrub: 1, markers: true, start "clamp(top 12%)", end "bottom top"
+- Tweens:
+    ".imgOwl.inner" backgroundPosition -> "0px -550px", ease power1.out
+    ".imgOwl.extra" backgroundPosition -> "0px 5px", ease power1.out, position "<" (parallel)
+    .from(".container", {}) at "<" — EMPTY vars object: the "scale the container" step in the title is an unfilled placeholder in the pen as published
+- CSS: .imgOwl width 1320px, height 540px, background-attachment fixed, clip-path inset(0); header block 1320 x 80 px blue with border-radius 24px on the top corners; an SVG wave divider sits at top 460 px with transform scale(0.6) (Level 2 measured the wave at 480 x 40)
+
+READING / MECHANISM
+1. A fixed-width "browser window" container (1320 px, rounded top bar) is pinned while the user scrolls (start when its top hits 12% of the viewport, clamped).
+2. Inside it, two stacked background layers (.inner/.extra) with background-attachment: fixed are counter-shifted via backgroundPosition tweens (-550 px vs +5 px) scrubbed 1:1 with scroll — a depth/parallax reveal inside the frame.
+3. toggleActions "restart pause reverse pause" makes the (non-scrubbed parts of the) timeline replay on re-entry.
+HONEST GAP: despite the title, the shipped pen animates background parallax inside a pinned container; the container-scale tween is an empty .from(".container", {}) placeholder. Rebuilds should add the real scale step (e.g. .from(".container", {scale: 0.85}) with transformOrigin center) — that addition is our inference, not the pen's code.

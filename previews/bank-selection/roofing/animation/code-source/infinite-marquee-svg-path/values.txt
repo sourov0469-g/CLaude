@@ -1,0 +1,30 @@
+SLUG: infinite-marquee-svg-path
+ENTRY: 149 Building an Infinite Marquee Along an SVG Path with React & Motion (Codrops, Daniel Petho, 17 Jun 2025)
+ARTICLE: https://tympanus.net/codrops/2025/06/17/building-an-infinite-marquee-along-an-svg-path-with-react-motion/
+SOURCE NOTE: no public repo and no separate hosted demo found (author's GitHub repo list checked) — the article's code blocks are the measured source (all 26 pre blocks extracted).
+
+STACK (Measured from article code)
+- React + Motion ("motion/react": useMotionValue, useTransform, useAnimationFrame, useScroll, useVelocity, useSpring)
+- CSS Motion Path: offset-path / offset-distance / offset-rotate do the actual placement — no SVG <animateMotion>
+- D3 (d3.create, scaleLinear, line + curveBasis, getTotalLength/getPointAtLength) for the responsive path-rescaling step
+
+PARAMETERS (Measured from article code blocks)
+- Path (demo): "M0 186.219C138.5 186.219 305.5 194.719 305.5 49.7188C305.5 -113.652 -75 186.219 484.5 186.219H587.5"; SVG viewBox "0 0 588 187"
+- Core loop: useAnimationFrame((_, delta) => moveBy = baseVelocity * delta / 1000; baseOffset.set(baseOffset.get() + moveBy)) — baseVelocity is in %-of-path per second
+- baseVelocity values: 20 (single-item demo), 5 (final card marquee with repeat=4)
+- Item distribution: position = (itemIndex * 100) / totalItems; wrappedValue = wrap(0, 100, v + position); style offsetPath: path('...'), offsetDistance: itemOffset (%), offsetRotate: "auto"; aria-hidden={repeatIndex > 0}
+- Repeat: children flattened via useMemo flatMap — itemIndex = repeatIndex * childrenArray.length + childIndex; final app: 5 cards x repeat 4 = 20 items
+- zIndex from progress: zIndex = floor(zIndexBase + progress%) so items stack correctly where the path self-overlaps (zIndexBase passed as prop; numeric value not printed in the article)
+- Hover slowdown: hoverFactor target 0.3 (hovered) vs 1; smoothed by useSpring(hoverFactorValue, { stiffness: 100, damping: 20 }); moveBy multiplied by smoothHoverFactor.get()
+- Scroll coupling: scrollY -> useVelocity -> useSpring(scrollVelocity, springConfig) (springConfig values not printed in article excerpts) -> useTransform [0, 1000] -> [0, 5] clamp:false = scrollVelocityFactor; sign of the factor sets directionFactor (+1/-1); moveBy += directionFactor * moveBy * scrollVelocityFactor
+- Edge fade: opacity = (1 - |2*progress - 1|^10)^2 — items fade in/out at path ends
+- Responsive fix: parsePathToPoints(path, maxSamples = 100) — temp SVG via d3.create, getTotalLength, numSamples = min(100, totalLength), sample getPointAtLength; createScaledPath: d3.scaleLinear domain [0,588]/[0,187] -> container px, d3.line().curve(d3.curveBasis) regenerates a smooth path; recomputed on resize with viewBox set to container size
+
+READING / MECHANISM
+1. One MotionValue (baseOffset) is the single clock: every frame it advances by baseVelocity * delta/1000 (percent of path length per second).
+2. Each item derives its own offsetDistance from the shared clock via useTransform: wrap(0,100, clock + itemIndex*100/totalItems) — even spacing, seamless wrap at 100%.
+3. The browser's CSS motion-path engine places/rotates each absolutely-positioned item along the SVG path string passed to offset-path; the SVG itself is only drawn as a visible guide.
+4. Hover: a ref flag flips the hover factor target to 0.3; a spring (100/20) eases the factor so the marquee glides slower instead of jerking.
+5. Scroll: page scroll velocity (sprung, mapped 0-1000 px/s -> 0-5x) boosts speed and its SIGN flips travel direction.
+6. Because offset-path percentages refer to the path's own coordinate space, on resize the article re-derives the path at container pixel size with D3 sampling (max 100 points, curveBasis smoothing) so items stay on the drawn curve.
+REBUILD NOTE: the wrap() helper is plain modulo arithmetic ((((v-min)%range)+range)%range)+min. Keep totalItems high enough (children x repeat) that spacing < item width, or gaps appear at the wrap point.

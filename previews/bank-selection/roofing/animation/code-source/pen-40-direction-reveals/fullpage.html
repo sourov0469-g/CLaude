@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Reveal animations based on scroll direction - ScrollTrigger</title>
+
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-defe0b00ddddc98ad4bc2c428e9d6182cd7742e2624f558656dbfb986d4ba13c.css" />
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+
+
+  <title>Reveal animations based on scroll direction - ScrollTrigger</title>
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning span { font-family: initial; }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; }
+  </style>
+</head>
+
+<body class="">
+  <div class="referer-warning">
+    <h1><span>⚠️</span> Do not enter passwords or personal information on this page. <span>⚠️</span></h1>
+      This is a code demo posted by a web developer on <a href="https://codepen.io">CodePen</a>.
+    <br />
+    A referer from CodePen is required to render this page view, and your browser is not sending one (<a href="https://blog.codepen.io/2017/10/05/regarding-referer-headers/" target="_blank" rel="noreferrer noopener">more details</a>).</h1>
+  </div>
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe
+      id="result"
+      srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+  
+  <meta charset=&quot;UTF-8&quot;>
+  
+
+    <link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+
+    <meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+    <link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+    <link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg&quot; color=&quot;#111&quot; />
+
+
+
+  
+    <script src=&quot;https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js&quot;></script>
+
+
+  <title>Reveal animations based on scroll direction - ScrollTrigger</title>
+
+    <link rel=&quot;canonical&quot; href=&quot;https://codepen.io/GreenSock/pen/pojzxwZ&quot;>
+  <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;>
+  
+  <link rel='stylesheet' href='https://codepen.io/GreenSock/pen/xxmzBrw.css'>
+  
+<style>
+body {
+  font-weight: 300;
+}
+
+.content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.content__hero {
+  height: 40vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.content__heading {
+  text-align: center;
+  hi
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.features__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  height: 100vh;
+  border-top: dashed 2px grey;
+}
+
+.features__item--left {
+  flex-direction: row;
+  text-align: right;
+}
+
+.features__item--right {
+  flex-direction: row-reverse;
+}
+
+.features__image {
+  flex: 1 1 40%;
+  position: relative;
+}
+
+.features__card {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.features__img {
+  max-width: 100%;
+  position: absolute;
+  object-fit: cover;
+  display: block;
+}
+
+.features__content {
+  flex: 1 1 55%;
+}
+
+.features__title {
+  font-size: 1.8em;
+  margin-block-end: 1rem;
+}
+
+.features__description {
+  line-height: 1.6;
+}
+
+/* GSAP animation reveal styles */
+.gs_reveal {
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.spacer {
+  height: 100vh;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate=&quot;no&quot;>
+  <div class=&quot;content&quot;>
+  <div class=&quot;content__hero&quot;>
+    <h1 class=&quot;content__heading gs_reveal&quot;>Reveal animations based on scroll direction</h1>
+  </div>
+  
+
+  <div class=&quot;features&quot;>
+
+    <div class=&quot;features__item features__item--left gs_reveal gs_reveal_fromLeft&quot;>
+      <div class=&quot;features__image&quot;>
+        <div class=&quot;features__card&quot;>
+          <img class=&quot;features__img&quot; src=&quot;https://assets.codepen.io/16327/portrait-image-14.jpg&quot; alt=&quot;&quot;>
+        </div>
+      </div>
+      <div class=&quot;features__content&quot;>
+        <h2 class=&quot;features__title gs_reveal&quot;>Highway Vinyl Nights</h2>
+        <p class=&quot;features__description gs_reveal&quot;>
+          The headlights hum along the painted lines<br>
+          We twist the dial till static turns to choir<br>
+          Your hand keeps time on the wheel and the night leans in<br>
+          Every mile is a chorus we have not written yet
+        </p>
+      </div>
+    </div>
+
+    <div class=&quot;features__item features__item--right gs_reveal gs_reveal_fromRight&quot;>
+      <div class=&quot;features__image&quot;>
+        <div class=&quot;features__card&quot;>
+          <img class=&quot;features__img&quot; src=&quot;https://assets.codepen.io/16327/portrait-image-4.jpg&quot; alt=&quot;&quot;>
+        </div>
+      </div>
+      <div class=&quot;features__content&quot;>
+        <h2 class=&quot;features__title gs_reveal&quot;>Last Diner on Route 9</h2>
+        <p class=&quot;features__description gs_reveal&quot;>
+          The coffee tastes like rainwater and luck<br>
+          Neon flickers slow while the jukebox spins a waltz<br>
+          We carve our names in steam on the window glass<br>
+          Stay till sunrise and the road will wait its turn
+        </p>
+      </div>
+    </div>
+
+    <div class=&quot;features__item features__item--left gs_reveal gs_reveal_fromLeft&quot;>
+      <div class=&quot;features__image&quot;>
+        <div class=&quot;features__card&quot;>
+          <img class=&quot;features__img&quot; src=&quot;https://assets.codepen.io/16327/portrait-image-3.jpg&quot; alt=&quot;&quot;>
+        </div>
+      </div>
+      <div class=&quot;features__content&quot;>
+        <h2 class=&quot;features__title gs_reveal&quot;>Stardust Ballroom</h2>
+        <p class=&quot;features__description gs_reveal&quot;>
+          Mirror tiles catch every hopeful face<br>
+          Records spin thin silver threads through the dark<br>
+          We move like planets pulled by quiet drums<br>
+          Hold the beat and the night will never close
+        </p>
+      </div>
+    </div>
+
+    <div class=&quot;features__item features__item--right gs_reveal gs_reveal_fromRight&quot;>
+      <div class=&quot;features__image&quot;>
+        <div class=&quot;features__card&quot;>
+          <img class=&quot;features__img&quot; src=&quot;https://assets.codepen.io/16327/portrait-image-1.jpg&quot; alt=&quot;&quot;>
+        </div>
+      </div>
+      <div class=&quot;features__content&quot;>
+        <h2 class=&quot;features__title gs_reveal&quot;>Sky Without Borders</h2>
+        <p class=&quot;features__description gs_reveal&quot;>
+          Lay your worries down beneath the porchlight glow<br>
+          The crickets stitch soft rhythm in the grass<br>
+          We trade small dreams and make them loud together<br>
+          A sky without borders is waiting past the trees
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class=&quot;spacer&quot;></div>
+  <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js?r=5426'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js'></script>
+    <script id=&quot;rendered-js&quot; >
+function animateFrom(elem, direction) {
+  direction = direction || 1;
+  var x = 0,
+  y = direction * 100;
+  if (elem.classList.contains(&quot;gs_reveal_fromLeft&quot;)) {
+    x = -100;
+    y = 0;
+  } else if (elem.classList.contains(&quot;gs_reveal_fromRight&quot;)) {
+    x = 100;
+    y = 0;
+  }
+  elem.style.transform = &quot;translate(&quot; + x + &quot;px, &quot; + y + &quot;px)&quot;;
+  elem.style.opacity = &quot;0&quot;;
+  gsap.fromTo(elem, { x: x, y: y, autoAlpha: 0 }, {
+    duration: 1.25,
+    x: 0,
+    y: 0,
+    autoAlpha: 1,
+    ease: &quot;expo&quot;,
+    overwrite: &quot;auto&quot; });
+
+}
+
+function hide(elem) {
+  gsap.set(elem, { autoAlpha: 0 });
+}
+
+document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray(&quot;.gs_reveal&quot;).forEach(function (elem) {
+    hide(elem); // assure that the element is hidden when scrolled into view
+
+    ScrollTrigger.create({
+      trigger: elem,
+      // markers: true,
+      onEnter: function () {animateFrom(elem);},
+      onEnterBack: function () {animateFrom(elem, -1);},
+      onLeave: function () {hide(elem);} // assure that the element is hidden when scrolled into view
+    });
+  });
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
+"
+      sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="accelerometer *; ambient-light-sensor *; camera *; display-capture *; encrypted-media *; geolocation *; gyroscope *; microphone *; midi *; payment *; serial *; vr *; web-share *; xr-spatial-tracking *" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+</html>
