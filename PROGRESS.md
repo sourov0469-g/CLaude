@@ -219,3 +219,41 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 10. **Final verdicts and flags — PASS.** `siding/AUDIT-V3.md` "Final verdicts": 19 KEPT, 11 REBUILT. F1–F8 are all closed with reasons (above).
 
 **Motion ceilings (K11), measured live:** no scroll entrance in any of the 30 versions plays longer than 0.3 s per element ("OVER 0.3: none"). The K10 data animations are exempt and marked.
+
+
+---
+
+# V6: BRIEF-V6 (FULL BUILD PROMPT v2, 30 Oct 2026)
+
+Governing prompt: `BRIEF-V6.md`. Everything above this line is the V5 record. Its gate is a CLAIM to re-verify, not evidence.
+
+## V6 state
+- **Phase:** 0 → 1
+- **Baseline:** `siding/homepage-standalone.html` at df98d54, 4,221,484 B, sha256 d2c28a321f88491be50f1e7b5689972265abdce612f80dbe78dfe1e1ed687b12
+
+## V6 Phase 0 record (30 Oct)
+1. **Bearings and reconciliation.**
+   - Read PROGRESS, SECTIONS, TRACEABILITY, AUDIT-V3, AUDIT-V4 and the last 15 commits.
+   - Repacking from the current sources (`home2.py` → `single.py` with terser) gives the same sha d2c28a…; the state files and the file agree, so nothing needed correcting.
+   - Section inventory: 10 sections × 3 versions in `<template>`s. The default mix is 1111111111.
+   - Earlier gate claims and their evidence:
+     - **In the repo:** `siding/qa/v5/` holds 10 contact sheets, `final-static.json`, `final-weight.json` and the scripts.
+     - **Scratchpad only:** `final-sect.out`, `final-qa4.out`, `final-k11.out`, `final-shots.out`.
+     - **Not evidenced anywhere:** "every control click-tested to change the DOM". V5 click-tested chosen controls per version, not every control. Visible text after the entrances was never checked.
+2. **Base-branch merge** (re-upload of 30 Oct): merged, with no content change against df98d54 (the re-upload is identical to the copy already held).
+3. **Raw skills** reassembled: 22,368,518 B, SHA-256 fe81307bc11935af8dc54870325aaccf917a0284d9ffeab6b7d833dec36d22b6 ✓.
+4. **Map:** front matter and playbooks as recorded in V5; shortlists stand in TRACEABILITY. Re-opened only if a version fails.
+5. **SECTIONS.md** reset: 30 lines at passes: NO.
+
+## V6 open issues (each must be resolved or closed with a reason; V5 closures are re-checked, not assumed)
+- [ ] **G1 · 886 wording.** V5 prints "312 on the map with photos + 574 more counted = 886" (K1). Re-check against §3 + AUDIT-V3's record.
+- [ ] **G2 · Texas licence line in the first screen.** V5 closed it: none exists to print. Re-check.
+- [ ] **G3 · Hero 1 blinds.** V5 replaced them with Q95. Re-check that no blinds remain.
+- [ ] **G4 · Services 1 / Hero 2 price overlap.** V5 removed the price from Services 1. Re-check, including Colour 1, which also shows the siding band.
+- [ ] **G5 · Upload-your-house-photo flagship.** V5 built Colour 1. Re-check with a real file.
+- [ ] **G6 (AUDIT-V4 #3) · Motion beyond top trade sites.** Re-check against F17 with fresh timing evidence.
+- [ ] **G7 (AUDIT-V4 #5) · System cursor kept visible.** BRIEF says "NO plain or fixed cursor". Re-check the reading (K5).
+- [ ] **G8 (AUDIT-V4 #6) · Reaction per element vs per role.** Re-check the uniqueness evidence.
+- [ ] **G9 (AUDIT-V4 #7) · No elastic or bounce (S0544).** The V5 kit uses `elastic.out` (sway) and `bounce.out` (drop). Re-check.
+- [ ] **G10 (AUDIT-V4 #8) · The hero's ghost waves as a perpetual loop.** Re-check against F17.
+- [ ] **G11 (AUDIT-V4 #4) · Custom SVG vs "no model-drawn illustration".** Owner rule wins; re-check that it is a trade diagram, not clip-art.
