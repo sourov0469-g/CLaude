@@ -51,6 +51,13 @@ WORKING RULES
   (Note: 9 skill-reading agents were already in flight when this arrived. They are left to finish, and no more will be launched.)
 - Homepage first. Audit EVERY section against the skills used (their checklists and do/don't lists), fix what fails, and only then present the file. Inner pages wait until the homepage is finalized with the owner.
 
+ATTACHED PHOTOS, second batch (owner, 2026-10-29): ba1-after.png (1480x675, blue board-and-batten house under a maple, Rembrandt yard sign), job-charcoal.png (1156x682, ranch with a new charcoal roof, blue gable, silver pickup), job-truck.png (1102x563, the same 7105 ranch with its old brown roof and the Rembrandt truck). The chat attachments were not saved to disk; these are byte copies of the identical photos from the firm's site (Layer-1.png, Layer-2-1.png, Layer-3-1-e1722613724429.png). job-charcoal and job-truck show the same house, but the owner names ba2 as the only genuine before/after pair, so they are not presented as one.
+
+OWNER DECISIONS (via representative, 2026-10-29, binding):
+1. The six remaining reading agents are stopped. Core notes: tastemaker, impeccable, polish-motion and my own cursor/depth/SVG notes (G10); G3, G4 and G9 are partial. No new sub-agents beyond a couple, only where they clearly speed things up. Each specific skill is re-opened by its tag while building the section that uses it.
+2. The ba2 alignment / OpenCV step is dropped. No installs. Before/after is side-by-side or a crossfade, with no pixel alignment.
+3. Next: write the plan (per section: three version concepts, its own interaction language, exact skills by tag with parameters), then build. First three sections at full quality, checkpoint and commit, then section by section, self-auditing each against its skills. No stopping for micro-decisions.
+
 ATTACHED PHOTOS (owner, 2026-10-29): images/1.png logo (396x120, embed exact bytes, at most 200 px wide); 2.webp team at the office (1088x801); 3.png ba2 BEFORE (1024x768, "Before" label baked in); 4.webp ba2 AFTER (1024x768, "After" label); 5.jpg Tudor house job photo (2000x1013). The firm's site has the same ba2 pair at 1440x1080.
 
 ## Real photos: the firm's own site
