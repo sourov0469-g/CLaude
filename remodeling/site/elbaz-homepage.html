@@ -734,14 +734,16 @@ input, textarea { caret-color: var(--accent); }
 .dv-bolt { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
 .dv-tapeband { fill: none; stroke: #f2c230; stroke-width: 22; }
 .dv-tapestripe { fill: none; stroke: #0B1418; stroke-width: 22; stroke-dasharray: 16 16; }
-.dv-tube { fill: none; stroke: var(--muted); stroke-width: 3; stroke-linecap: round; }
-.dv-cpl { fill: var(--accent); stroke: var(--bg); stroke-width: 1.5; }
+.dv-pipe { fill: none; stroke: #9aa6a9; stroke-width: 8; stroke-linecap: round; }
+.dv-jb rect { fill: #c9d1d3; stroke: var(--bg); stroke-width: 2; }
+.dv-jb circle { fill: var(--bg); }
+.dv-strap { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; }
 .dv-blade { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.2; stroke-linejoin: round; }
 .dv-kerf { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 6 5; }
 .dv-roof { fill: var(--surface); stroke: var(--line); stroke-width: 2; stroke-linejoin: round; }
 .dv-webs { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: .7; }
 .dv-tile { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
-.dv-adh { fill: none; stroke: var(--muted); stroke-width: 2; stroke-dasharray: 3 4; }
+.dv-grout { fill: none; stroke: var(--muted); stroke-width: 2; }
 .dv-pivot { fill: var(--line); }
 .dv-brick { fill: #8b4a36; stroke: var(--bg); stroke-width: 3; }
 [data-theme="daylight"] .dv-brick { fill: #b8644a; }
@@ -749,6 +751,7 @@ input, textarea { caret-color: var(--accent); }
 .dv-hatch { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .7; }
 .dv-bar { fill: none; stroke: #c9a46a; stroke-width: 2; }
 .dv-rebar { fill: #c9a46a; }
+.dv-sh { fill: #6b4a33; stroke: var(--bg); stroke-width: 1.5; }
 
 /* hero: "Built properly. Permitted correctly." PLAN-V3 §3 hero. Every version carries the F1 proof line. */
 
@@ -2262,7 +2265,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
                 <ul><li>Full kitchen remodel</li><li>Custom cabinetry</li><li>Cabinet refacing and replacement</li><li>Countertop installation</li><li>Kitchen islands</li><li>Layout and design</li><li>Luxury kitchens</li><li>Open-concept kitchens</li><li>Outdoor kitchens</li><li>Small and galley kitchens</li></ul>
               </div>
               <div class="services2__acts">
-                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-1" data-rx="saw"><span class="btn__label">Open the scope</span></button>
+                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-1" data-rx="~sander/rail/chips/r"><span class="btn__label">Open the scope</span></button>
                 <p class="services2__time"><span class="nums">6&ndash;12</span> weeks of construction</p>
               </div>
             </div>
@@ -2469,7 +2472,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       </div>
       <div class="process3__ctrl">
         <button type="button" class="btn btn--ghost process3__prev" data-rx="~arrowL/rail/shake/l"><span class="btn__label">Previous stage</span></button>
-        <button type="button" class="btn process3__next" data-rx="chalk"><span class="btn__label">Next stage</span></button>
+        <button type="button" class="btn process3__next" data-rx="~arrowR/rail/hop/r"><span class="btn__label">Next stage</span></button>
       </div>
       <p class="process__note">Timelines vary by scope and jurisdiction.</p>
     </div>
@@ -2804,7 +2807,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
             <svg class="towns3__outline" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path/></svg>
             <ul class="towns3__list" id="towns3-list" role="listbox" hidden></ul>
           </div>
-          <button type="submit" class="btn towns3__go" data-rx="stake"><span class="btn__label">Check it</span></button>
+          <button type="submit" class="btn towns3__go" data-rx="~compass/jack/ring/r"><span class="btn__label">Check it</span></button>
         </form>
         <p class="towns3__call">Not sure? Call <a class="link nums" href="tel:+17542360675" data-rx="~cord/peek/ring/r">(754)&nbsp;236&#8209;0675</a>.</p>
       </div>
@@ -4661,34 +4664,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     }
   };
 
-  /* services v2: a handsaw cuts along the bottom edge; click drops sawdust */
-  R.saw = {
-    art: function (w, h) {
-      var y = P + h, teeth = 'M0 0';
-      for (var i = 0; i < 9; i++) teeth += 'l2.5 4l2.5 -4';
-      var dust = '';
-      for (var j = 0; j < 9; j++) dust += '<circle cx="' + f(P + w * (.15 + j * .09)) + '" cy="' + (y + 4) + '" r="' + (1 + (j % 3) * .5) + '" fill="#d9b98a"/>';
-      return '<path class="ct" d="M' + P + ' ' + (y + 3) + 'H' + (P + w) + '" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>' +
-        '<g class="sa" opacity="0"><path d="M0 -12 H40 L46 -2 V0 H0 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.1"/><path d="' + teeth + '" fill="' + STEEL + '" stroke="' + INK + '" stroke-width=".8"/>' +
-        '<path d="M46 -12 h10 a5 5 0 0 1 5 5 v4 a5 5 0 0 1 -5 5 h-10 Z" fill="#8a5a33" stroke="' + INK + '" stroke-width="1.1"/></g>' +
-        '<g class="du" opacity="0">' + dust + '</g>';
-    },
-    hover: function (svg, w, h) {
-      var sa = one(svg, '.sa');
-      gsap.set(sa, { y: P + h + 2 });
-      return gsap.timeline({ paused: true })
-        .set(sa, { opacity: 1 }, 0)
-        .fromTo(sa, { x: P - 40 }, { x: P + w - 40, duration: .6, ease: 'power1.inOut' }, 0)
-        .fromTo(one(svg, '.ct'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .6, ease: 'power1.inOut' }, 0)
-        .to(sa, { opacity: 0, duration: .15 }, .55);
-    },
-    click: function (svg) {
-      var du = one(svg, '.du');
-      return gsap.timeline().set(du, { opacity: 1 })
-        .fromTo(du.children, { y: 0, opacity: 1 }, { y: function () { return 16 + Math.random() * 18; }, x: function () { return (Math.random() - .5) * 12; }, opacity: 0, duration: .7, ease: 'power2.in', stagger: .02 });
-    }
-  };
-
   /* services v3: a pegboard hook drops onto the top edge and sways */
   R.hook = {
     art: function (w) {
@@ -4723,29 +4698,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     }
   };
 
-  /* process: a chalk line snaps under the label and leaves a puff of blue dust */
-  R.chalk = {
-    art: function (w, h) {
-      var y = P + h + 6, dust = '';
-      for (var i = 0; i < 7; i++) dust += '<circle cx="' + f(P + w / 2 + (i - 3) * 5) + '" cy="' + y + '" r="2" fill="#5aa8d6"/>';
-      return '<path class="cl" d="M' + P + ' ' + y + 'Q' + (P + w / 2) + ' ' + y + ' ' + (P + w) + ' ' + y + '" fill="none" stroke="#5aa8d6" stroke-width="1.8" stroke-linecap="round"/><g class="pf" opacity="0">' + dust + '</g>';
-    },
-    hover: function (svg, w, h) {
-      var cl = one(svg, '.cl'), y = P + h + 6, o = { d: 0 };
-      function set() { cl.setAttribute('d', 'M' + P + ' ' + y + 'Q' + (P + w / 2) + ' ' + f(y + o.d) + ' ' + (P + w) + ' ' + y); }
-      return gsap.timeline({ paused: true })
-        .fromTo(cl, { drawSVG: '0%' }, { drawSVG: '100%', duration: .25, ease: 'power2.out' }, 0)
-        .fromTo(o, { d: 0 }, { d: 14, duration: .15, ease: 'power2.out', onUpdate: set }, .2)
-        .to(o, { d: 0, duration: .6, ease: 'elastic.out(1.2,.25)', onUpdate: set }, .35)
-        .fromTo(one(svg, '.pf').children, { opacity: .9, y: 0, scale: 1, transformOrigin: '50% 50%' }, { opacity: 0, y: function (i) { return -6 - (i % 3) * 4; }, scale: 2.2, duration: .5, stagger: .02, ease: 'power2.out' }, .36)
-        .set(one(svg, '.pf'), { opacity: 1 }, .36);
-    },
-    click: function (svg, w, h) {
-      var cl = one(svg, '.cl'), y = P + h + 6, o = { d: -10 };
-      return gsap.timeline().to(o, { d: 0, duration: .55, ease: 'elastic.out(1.2,.25)', onUpdate: function () { cl.setAttribute('d', 'M' + P + ' ' + y + 'Q' + (P + w / 2) + ' ' + f(y + o.d) + ' ' + (P + w) + ' ' + y); } });
-    }
-  };
-
   /* work: viewfinder corners snap onto the button; click fires the shutter */
   R.viewfinder = {
     art: function (w, h) {
@@ -4768,24 +4720,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     }
   };
 
-  /* reviews: a clamp work-lamp swings in and lights the button; click flickers it */
-  R.lamp = {
-    art: function (w, h) {
-      var x = P - 4, y = P - 22;
-      return '<path class="cn" d="M' + (x + 6) + ' ' + (y + 6) + 'L' + (P + w * .9) + ' ' + (P + h + 4) + 'L' + (P - 2) + ' ' + (P + h + 4) + 'Z" fill="#fff1b8" opacity="0"/>' +
-        '<g class="lp" opacity="0"><path d="M' + (x - 16) + ' ' + (y - 14) + 'L' + x + ' ' + y + '" stroke="' + STEEL + '" stroke-width="2.2"/><path d="M' + (x - 4) + ' ' + (y - 6) + 'l13 -3l3 13l-13 3z" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/></g>';
-    },
-    hover: function (svg) {
-      var o = (P - 20) + ' ' + (P - 36);
-      return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.lp'), { opacity: 0, rotation: -40 }, { opacity: 1, rotation: 0, svgOrigin: o, duration: .45, ease: 'back.out(1.6)' }, 0)
-        .fromTo(one(svg, '.cn'), { opacity: 0 }, { opacity: .32, duration: .3, ease: 'power2.out' }, .25);
-    },
-    click: function (svg) {
-      return gsap.timeline().to(one(svg, '.cn'), { keyframes: [{ opacity: .05, duration: .05 }, { opacity: .32, duration: .05 }, { opacity: .1, duration: .06 }, { opacity: .4, duration: .1 }, { opacity: .32, duration: .2 }] });
-    }
-  };
-
   /* work v3: two strips of masking tape stick the button to the board; click tears one off */
   R.masking = {
     art: function (w, h) {
@@ -4802,25 +4736,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     click: function (svg) {
       return gsap.timeline().to(one(svg, '.tb'), { x: 18, y: -20, opacity: 0, duration: .35, ease: 'power2.in' })
         .set(one(svg, '.tb'), { x: 0, y: 0, opacity: 1 }, .9);
-    }
-  };
-
-  /* towns: a survey stake with flagging tape is driven in beside the button */
-  R.stake = {
-    art: function (w, h) {
-      var x = P - 12, y = P + h;
-      return '<g class="sk2" opacity="0"><path d="M' + x + ' ' + (y - 34) + 'v30l3 7l3 -7v-30z" fill="#c9a46a" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/>' +
-        '<path class="fl" d="M' + (x + 6) + ' ' + (y - 32) + 'q12 2 16 9q-9 -3 -16 2z" fill="#ff7a3c" stroke="' + INK + '" stroke-width=".8"/></g>' +
-        '<path class="gd" d="M' + (x - 10) + ' ' + (y + 4) + 'h26" stroke="currentColor" stroke-width="1.4" opacity="0"/>';
-    },
-    hover: function (svg, w, h) {
-      return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.sk2'), { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .25, ease: 'power4.in' }, 0)
-        .fromTo(one(svg, '.gd'), { opacity: 0, scaleX: .3, transformOrigin: '50% 50%' }, { opacity: 1, scaleX: 1, duration: .25, ease: 'expo.out' }, .24)
-        .fromTo(one(svg, '.fl'), { scaleX: .6, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .5, ease: 'elastic.out(1,.4)' }, .25);
-    },
-    click: function (svg) {
-      return gsap.timeline().to(one(svg, '.sk2'), { y: 4, duration: .08, ease: 'power4.in' }).to(one(svg, '.sk2'), { y: 2, duration: .2 });
     }
   };
 
@@ -5298,15 +5213,17 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         return gsap.to(o, { s: 6, ease: 'none', scrollTrigger: st, onUpdate: function () { var v = d(o.s); ps[0].setAttribute('d', v); ps[1].setAttribute('d', v); } });
       } };
   };
-  // 4 before/after -> process: scaffold frame draws itself, couplers pop
-  DIV.scaffold = function (w) {
-    var d = '', c = '', bay = 150;
-    for (var x = 20; x <= w; x += bay) { d += 'M' + x + ' 8V92'; c += '<circle class="dv-cpl" cx="' + x + '" cy="20" r="4"/><circle class="dv-cpl" cx="' + x + '" cy="80" r="4"/>'; if (x + bay <= w + bay) d += 'M' + x + ' 80L' + (x + bay) + ' 20'; }
-    d += 'M0 20H' + w + 'M0 80H' + w;
-    return { h: 100, svg: '<path class="dv-tube" d="' + d + '"/>' + c,
+  // 4 before/after -> process: an electrical conduit run; junction boxes set, the pipe runs between them, straps snap on
+  DIV.conduit = function (w) {
+    var boxes = '', straps = '', y = 46, step = Math.max(220, w / 5);
+    for (var x = 40; x < w - 20; x += step) boxes += '<g class="dv-jb"><rect x="' + f(x - 15) + '" y="' + (y - 15) + '" width="30" height="30" rx="3"/><circle cx="' + f(x) + '" cy="' + y + '" r="5"/></g>';
+    for (var x2 = 40 + step / 2; x2 < w; x2 += step / 2) if (Math.abs(((x2 - 40) % step)) > 1) straps += '<path class="dv-strap" d="M' + f(x2 - 9) + ' ' + (y + 9) + 'V' + (y - 9) + 'H' + f(x2 + 9) + 'V' + (y + 9) + '"/>';
+    return { h: 92, svg: '<path class="dv-pipe" d="M0 ' + y + 'H' + w + '"/>' + boxes + straps,
       anim: function (svg, st) {
-        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-tube'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.2, ease: 'power2.inOut' })
-          .from(svg.querySelectorAll('.dv-cpl'), { scale: .3, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .02, ease: 'back.out(3)' }, .5);
+        return gsap.timeline({ scrollTrigger: st })
+          .from(svg.querySelectorAll('.dv-jb'), { scale: .4, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .05, ease: 'back.out(2.4)' })
+          .fromTo(svg.querySelector('.dv-pipe'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .5, ease: 'power2.inOut' }, .15)
+          .from(svg.querySelectorAll('.dv-strap'), { y: -12, opacity: 0, duration: .2, stagger: .03, ease: 'back.out(3)' }, .45);
       } };
   };
   // 5 process -> financing: a handsaw blade grows its teeth and cuts across
@@ -5340,31 +5257,26 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         return gsap.to(o, { a: 70, ease: 'none', scrollTrigger: st, onUpdate: set });
       } };
   };
-  // 7 work -> reviews: tile and grout, a notched trowel rides the adhesive path
+  // 7 work -> reviews: a tile course is set, each tile tipping down onto the bed in turn, then the grout lines are struck
   DIV.tile = function (w) {
-    var t = '';
-    for (var x = 0; x < w; x += 52) t += '<rect class="dv-tile" x="' + (x + 2) + '" y="50" width="48" height="30"/>';
-    var path = 'M0 36';
-    for (var x2 = 0; x2 < w; x2 += 80) path += 'Q' + (x2 + 40) + ' 22 ' + (x2 + 80) + ' 36';
-    return { h: 92, svg: t + '<path class="dv-adh" d="' + path + '"/><g class="dv-trowel"><path d="M-22 0 H22 L18 -6 H-18 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.2"/><path d="M0 -6 V-16" stroke="' + INK + '" stroke-width="2"/><rect x="-12" y="-23" width="24" height="7" rx="3.5" fill="#8a5a33" stroke="' + INK + '" stroke-width="1.2"/></g>',
+    var t = '', g = '';
+    for (var x = 0; x < w; x += 52) { t += '<rect class="dv-tile" x="' + (x + 2) + '" y="30" width="48" height="36"/>'; g += 'M' + (x + 1) + ' 30V66'; }
+    return { h: 92, svg: '<path class="dv-l" d="M0 70H' + w + '"/>' + t + '<path class="dv-grout" d="' + g + 'M0 30H' + w + 'M0 66H' + w + '"/>',
       anim: function (svg, st) {
-        var adh = svg.querySelector('.dv-adh');
-        st.scrub = 1; st.start = 'top 95%'; st.end = 'bottom 40%';
         return gsap.timeline({ scrollTrigger: st })
-          .fromTo(adh, { drawSVG: '0%' }, { drawSVG: '100%', ease: 'none' }, 0)
-          .to(svg.querySelector('.dv-trowel'), { motionPath: { path: adh, align: adh, alignOrigin: [.5, 1], autoRotate: true }, ease: 'none' }, 0);
+          .from(svg.querySelectorAll('.dv-tile'), { scaleY: 0, opacity: 0, transformOrigin: '50% 100%', duration: .2, stagger: { each: .02, from: 'start' }, ease: 'back.out(2)' })
+          .fromTo(svg.querySelector('.dv-grout'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .4, ease: 'power2.out' }, '-=.1');
       } };
   };
-  // 8 reviews -> towns: a plumb bob swings on its line (pendulum; stops offscreen)
-  DIV.bob = function (w) {
-    var x = w / 2;
-    return { h: 120, svg: '<path class="dv-l" d="M0 8H' + w + '"/><g class="dv-pend"><path d="M' + x + ' 8V86" stroke="#d64b37" stroke-width="1.4"/><path d="M' + x + ' 84l-9 8l9 24l9 -24z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.4"/></g><circle cx="' + x + '" cy="8" r="4" class="dv-pivot"/>',
+  // 8 reviews -> towns: a course of roof shingles slides in from the eave, each tab lapping the one before (scrubbed)
+  DIV.shingle = function (w) {
+    var t = '', n = Math.ceil(w / 46) + 1;
+    for (var i = 0; i < n; i++) t += '<path class="dv-sh" d="M' + (i * 46) + ' 26h44v34l-22 8l-22 -8z"/>';
+    return { h: 84, svg: '<path class="dv-l" d="M0 26H' + w + '"/><g class="dv-shs">' + t + '</g>',
       anim: function (svg, st) {
-        var tw = gsap.fromTo(svg.querySelector('.dv-pend'), { rotation: -9 }, { rotation: 9, svgOrigin: x + ' 8', duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true });
-        st.onToggle = function (s) { s.isActive ? tw.play() : tw.pause(); };
-        st.start = 'top bottom'; st.end = 'bottom top';
-        tw._st = ScrollTrigger.create(st);
-        return tw;
+        var sh = svg.querySelectorAll('.dv-sh');
+        st.scrub = .8; st.start = 'top 95%'; st.end = 'bottom 45%';
+        return gsap.timeline({ scrollTrigger: st }).fromTo(sh, { x: function (i) { return 60 + i * 6; }, opacity: 0 }, { x: 0, opacity: 1, ease: 'none', stagger: .02 });
       } };
   };
   // 9 towns -> consult: a brick course laid brick by brick
@@ -5389,7 +5301,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       } };
   };
 
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'tape'], ['ba', 'scaffold'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'bob'], ['towns', 'brick'], ['consult', 'footing']];
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'tape'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'brick'], ['consult', 'footing']];
   var dividers = [];
 
   function drawDivider(d) {

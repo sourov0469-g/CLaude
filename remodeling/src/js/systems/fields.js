@@ -351,15 +351,17 @@
         return gsap.to(o, { s: 6, ease: 'none', scrollTrigger: st, onUpdate: function () { var v = d(o.s); ps[0].setAttribute('d', v); ps[1].setAttribute('d', v); } });
       } };
   };
-  // 4 before/after -> process: scaffold frame draws itself, couplers pop
-  DIV.scaffold = function (w) {
-    var d = '', c = '', bay = 150;
-    for (var x = 20; x <= w; x += bay) { d += 'M' + x + ' 8V92'; c += '<circle class="dv-cpl" cx="' + x + '" cy="20" r="4"/><circle class="dv-cpl" cx="' + x + '" cy="80" r="4"/>'; if (x + bay <= w + bay) d += 'M' + x + ' 80L' + (x + bay) + ' 20'; }
-    d += 'M0 20H' + w + 'M0 80H' + w;
-    return { h: 100, svg: '<path class="dv-tube" d="' + d + '"/>' + c,
+  // 4 before/after -> process: an electrical conduit run; junction boxes set, the pipe runs between them, straps snap on
+  DIV.conduit = function (w) {
+    var boxes = '', straps = '', y = 46, step = Math.max(220, w / 5);
+    for (var x = 40; x < w - 20; x += step) boxes += '<g class="dv-jb"><rect x="' + f(x - 15) + '" y="' + (y - 15) + '" width="30" height="30" rx="3"/><circle cx="' + f(x) + '" cy="' + y + '" r="5"/></g>';
+    for (var x2 = 40 + step / 2; x2 < w; x2 += step / 2) if (Math.abs(((x2 - 40) % step)) > 1) straps += '<path class="dv-strap" d="M' + f(x2 - 9) + ' ' + (y + 9) + 'V' + (y - 9) + 'H' + f(x2 + 9) + 'V' + (y + 9) + '"/>';
+    return { h: 92, svg: '<path class="dv-pipe" d="M0 ' + y + 'H' + w + '"/>' + boxes + straps,
       anim: function (svg, st) {
-        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-tube'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.2, ease: 'power2.inOut' })
-          .from(svg.querySelectorAll('.dv-cpl'), { scale: .3, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .02, ease: 'back.out(3)' }, .5);
+        return gsap.timeline({ scrollTrigger: st })
+          .from(svg.querySelectorAll('.dv-jb'), { scale: .4, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .05, ease: 'back.out(2.4)' })
+          .fromTo(svg.querySelector('.dv-pipe'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .5, ease: 'power2.inOut' }, .15)
+          .from(svg.querySelectorAll('.dv-strap'), { y: -12, opacity: 0, duration: .2, stagger: .03, ease: 'back.out(3)' }, .45);
       } };
   };
   // 5 process -> financing: a handsaw blade grows its teeth and cuts across
@@ -393,31 +395,26 @@
         return gsap.to(o, { a: 70, ease: 'none', scrollTrigger: st, onUpdate: set });
       } };
   };
-  // 7 work -> reviews: tile and grout, a notched trowel rides the adhesive path
+  // 7 work -> reviews: a tile course is set, each tile tipping down onto the bed in turn, then the grout lines are struck
   DIV.tile = function (w) {
-    var t = '';
-    for (var x = 0; x < w; x += 52) t += '<rect class="dv-tile" x="' + (x + 2) + '" y="50" width="48" height="30"/>';
-    var path = 'M0 36';
-    for (var x2 = 0; x2 < w; x2 += 80) path += 'Q' + (x2 + 40) + ' 22 ' + (x2 + 80) + ' 36';
-    return { h: 92, svg: t + '<path class="dv-adh" d="' + path + '"/><g class="dv-trowel"><path d="M-22 0 H22 L18 -6 H-18 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.2"/><path d="M0 -6 V-16" stroke="' + INK + '" stroke-width="2"/><rect x="-12" y="-23" width="24" height="7" rx="3.5" fill="#8a5a33" stroke="' + INK + '" stroke-width="1.2"/></g>',
+    var t = '', g = '';
+    for (var x = 0; x < w; x += 52) { t += '<rect class="dv-tile" x="' + (x + 2) + '" y="30" width="48" height="36"/>'; g += 'M' + (x + 1) + ' 30V66'; }
+    return { h: 92, svg: '<path class="dv-l" d="M0 70H' + w + '"/>' + t + '<path class="dv-grout" d="' + g + 'M0 30H' + w + 'M0 66H' + w + '"/>',
       anim: function (svg, st) {
-        var adh = svg.querySelector('.dv-adh');
-        st.scrub = 1; st.start = 'top 95%'; st.end = 'bottom 40%';
         return gsap.timeline({ scrollTrigger: st })
-          .fromTo(adh, { drawSVG: '0%' }, { drawSVG: '100%', ease: 'none' }, 0)
-          .to(svg.querySelector('.dv-trowel'), { motionPath: { path: adh, align: adh, alignOrigin: [.5, 1], autoRotate: true }, ease: 'none' }, 0);
+          .from(svg.querySelectorAll('.dv-tile'), { scaleY: 0, opacity: 0, transformOrigin: '50% 100%', duration: .2, stagger: { each: .02, from: 'start' }, ease: 'back.out(2)' })
+          .fromTo(svg.querySelector('.dv-grout'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .4, ease: 'power2.out' }, '-=.1');
       } };
   };
-  // 8 reviews -> towns: a plumb bob swings on its line (pendulum; stops offscreen)
-  DIV.bob = function (w) {
-    var x = w / 2;
-    return { h: 120, svg: '<path class="dv-l" d="M0 8H' + w + '"/><g class="dv-pend"><path d="M' + x + ' 8V86" stroke="#d64b37" stroke-width="1.4"/><path d="M' + x + ' 84l-9 8l9 24l9 -24z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.4"/></g><circle cx="' + x + '" cy="8" r="4" class="dv-pivot"/>',
+  // 8 reviews -> towns: a course of roof shingles slides in from the eave, each tab lapping the one before (scrubbed)
+  DIV.shingle = function (w) {
+    var t = '', n = Math.ceil(w / 46) + 1;
+    for (var i = 0; i < n; i++) t += '<path class="dv-sh" d="M' + (i * 46) + ' 26h44v34l-22 8l-22 -8z"/>';
+    return { h: 84, svg: '<path class="dv-l" d="M0 26H' + w + '"/><g class="dv-shs">' + t + '</g>',
       anim: function (svg, st) {
-        var tw = gsap.fromTo(svg.querySelector('.dv-pend'), { rotation: -9 }, { rotation: 9, svgOrigin: x + ' 8', duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true });
-        st.onToggle = function (s) { s.isActive ? tw.play() : tw.pause(); };
-        st.start = 'top bottom'; st.end = 'bottom top';
-        tw._st = ScrollTrigger.create(st);
-        return tw;
+        var sh = svg.querySelectorAll('.dv-sh');
+        st.scrub = .8; st.start = 'top 95%'; st.end = 'bottom 45%';
+        return gsap.timeline({ scrollTrigger: st }).fromTo(sh, { x: function (i) { return 60 + i * 6; }, opacity: 0 }, { x: 0, opacity: 1, ease: 'none', stagger: .02 });
       } };
   };
   // 9 towns -> consult: a brick course laid brick by brick
@@ -442,7 +439,7 @@
       } };
   };
 
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'tape'], ['ba', 'scaffold'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'bob'], ['towns', 'brick'], ['consult', 'footing']];
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'tape'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'brick'], ['consult', 'footing']];
   var dividers = [];
 
   function drawDivider(d) {

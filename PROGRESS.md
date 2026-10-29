@@ -96,3 +96,8 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
   - V2 constellation: exactly 343 canvas stars sampled into the figure "4.8" in Bebas; nearest-neighbour constellation lines; pointer repulsion (r 90) with spring return; 40fps cap, DPR ≤ 1.25, hidden-tab skip, paused off-screen; tap or "Scatter the stars" scatters; reduced motion draws the assembled figure once.
   - V3 calibration dial: 0–5 dial, ticks every .1, a calibration mark at 4.8; needle sweeps to 4.8 (elastic 1.6s); drag anywhere and it springs back; "Flick the needle" for keyboard; `role="meter"` named "Google rating, 4.8 out of 5, from 343 reviews"; the digital readout only ever shows 4.8.
 - Built-file scan: "Ashley", "Asher", "Damian", "Nunez", "Rio Norman", "blockquote", "a year ago", "months ago", "word for word" → 0 occurrences each.
+
+### Phase 4 — trick register clean-up
+- Dividers: BA → Process scaffold (repeated Hero V3's scaffold) → electrical conduit run; Work → Reviews trowel MotionPath follower (repeated Process V1's path follower) → tile course tipping onto its bed + grout struck; Reviews → Towns plumb bob (repeated the Financing field's plumb bob) → shingle course lapping in.
+- Reactions retired for repeating a field or divider in the same page: saw (saw divider), chalk (Process chalk-line field), stake (Towns survey-stake field), lamp (unused after the Reviews rebuild). Hand-built reactions left: blueprint, pencil, bolt, screw, hook, swatch, viewfinder, masking, keys (one element each).
+- `rxcheck.js` after all rebuilds: 259 interactive elements across 30 versions + chrome; 259 covered, 0 missing, 0 duplicate specs, 0 invalid.

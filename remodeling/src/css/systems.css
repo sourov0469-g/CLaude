@@ -181,14 +181,16 @@
 .dv-bolt { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
 .dv-tapeband { fill: none; stroke: #f2c230; stroke-width: 22; }
 .dv-tapestripe { fill: none; stroke: #0B1418; stroke-width: 22; stroke-dasharray: 16 16; }
-.dv-tube { fill: none; stroke: var(--muted); stroke-width: 3; stroke-linecap: round; }
-.dv-cpl { fill: var(--accent); stroke: var(--bg); stroke-width: 1.5; }
+.dv-pipe { fill: none; stroke: #9aa6a9; stroke-width: 8; stroke-linecap: round; }
+.dv-jb rect { fill: #c9d1d3; stroke: var(--bg); stroke-width: 2; }
+.dv-jb circle { fill: var(--bg); }
+.dv-strap { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; }
 .dv-blade { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.2; stroke-linejoin: round; }
 .dv-kerf { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 6 5; }
 .dv-roof { fill: var(--surface); stroke: var(--line); stroke-width: 2; stroke-linejoin: round; }
 .dv-webs { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: .7; }
 .dv-tile { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
-.dv-adh { fill: none; stroke: var(--muted); stroke-width: 2; stroke-dasharray: 3 4; }
+.dv-grout { fill: none; stroke: var(--muted); stroke-width: 2; }
 .dv-pivot { fill: var(--line); }
 .dv-brick { fill: #8b4a36; stroke: var(--bg); stroke-width: 3; }
 [data-theme="daylight"] .dv-brick { fill: #b8644a; }
@@ -196,3 +198,4 @@
 .dv-hatch { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .7; }
 .dv-bar { fill: none; stroke: #c9a46a; stroke-width: 2; }
 .dv-rebar { fill: #c9a46a; }
+.dv-sh { fill: #6b4a33; stroke: var(--bg); stroke-width: 1.5; }

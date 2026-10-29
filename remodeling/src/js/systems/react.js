@@ -105,34 +105,6 @@
     }
   };
 
-  /* services v2: a handsaw cuts along the bottom edge; click drops sawdust */
-  R.saw = {
-    art: function (w, h) {
-      var y = P + h, teeth = 'M0 0';
-      for (var i = 0; i < 9; i++) teeth += 'l2.5 4l2.5 -4';
-      var dust = '';
-      for (var j = 0; j < 9; j++) dust += '<circle cx="' + f(P + w * (.15 + j * .09)) + '" cy="' + (y + 4) + '" r="' + (1 + (j % 3) * .5) + '" fill="#d9b98a"/>';
-      return '<path class="ct" d="M' + P + ' ' + (y + 3) + 'H' + (P + w) + '" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>' +
-        '<g class="sa" opacity="0"><path d="M0 -12 H40 L46 -2 V0 H0 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.1"/><path d="' + teeth + '" fill="' + STEEL + '" stroke="' + INK + '" stroke-width=".8"/>' +
-        '<path d="M46 -12 h10 a5 5 0 0 1 5 5 v4 a5 5 0 0 1 -5 5 h-10 Z" fill="#8a5a33" stroke="' + INK + '" stroke-width="1.1"/></g>' +
-        '<g class="du" opacity="0">' + dust + '</g>';
-    },
-    hover: function (svg, w, h) {
-      var sa = one(svg, '.sa');
-      gsap.set(sa, { y: P + h + 2 });
-      return gsap.timeline({ paused: true })
-        .set(sa, { opacity: 1 }, 0)
-        .fromTo(sa, { x: P - 40 }, { x: P + w - 40, duration: .6, ease: 'power1.inOut' }, 0)
-        .fromTo(one(svg, '.ct'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .6, ease: 'power1.inOut' }, 0)
-        .to(sa, { opacity: 0, duration: .15 }, .55);
-    },
-    click: function (svg) {
-      var du = one(svg, '.du');
-      return gsap.timeline().set(du, { opacity: 1 })
-        .fromTo(du.children, { y: 0, opacity: 1 }, { y: function () { return 16 + Math.random() * 18; }, x: function () { return (Math.random() - .5) * 12; }, opacity: 0, duration: .7, ease: 'power2.in', stagger: .02 });
-    }
-  };
-
   /* services v3: a pegboard hook drops onto the top edge and sways */
   R.hook = {
     art: function (w) {
@@ -167,29 +139,6 @@
     }
   };
 
-  /* process: a chalk line snaps under the label and leaves a puff of blue dust */
-  R.chalk = {
-    art: function (w, h) {
-      var y = P + h + 6, dust = '';
-      for (var i = 0; i < 7; i++) dust += '<circle cx="' + f(P + w / 2 + (i - 3) * 5) + '" cy="' + y + '" r="2" fill="#5aa8d6"/>';
-      return '<path class="cl" d="M' + P + ' ' + y + 'Q' + (P + w / 2) + ' ' + y + ' ' + (P + w) + ' ' + y + '" fill="none" stroke="#5aa8d6" stroke-width="1.8" stroke-linecap="round"/><g class="pf" opacity="0">' + dust + '</g>';
-    },
-    hover: function (svg, w, h) {
-      var cl = one(svg, '.cl'), y = P + h + 6, o = { d: 0 };
-      function set() { cl.setAttribute('d', 'M' + P + ' ' + y + 'Q' + (P + w / 2) + ' ' + f(y + o.d) + ' ' + (P + w) + ' ' + y); }
-      return gsap.timeline({ paused: true })
-        .fromTo(cl, { drawSVG: '0%' }, { drawSVG: '100%', duration: .25, ease: 'power2.out' }, 0)
-        .fromTo(o, { d: 0 }, { d: 14, duration: .15, ease: 'power2.out', onUpdate: set }, .2)
-        .to(o, { d: 0, duration: .6, ease: 'elastic.out(1.2,.25)', onUpdate: set }, .35)
-        .fromTo(one(svg, '.pf').children, { opacity: .9, y: 0, scale: 1, transformOrigin: '50% 50%' }, { opacity: 0, y: function (i) { return -6 - (i % 3) * 4; }, scale: 2.2, duration: .5, stagger: .02, ease: 'power2.out' }, .36)
-        .set(one(svg, '.pf'), { opacity: 1 }, .36);
-    },
-    click: function (svg, w, h) {
-      var cl = one(svg, '.cl'), y = P + h + 6, o = { d: -10 };
-      return gsap.timeline().to(o, { d: 0, duration: .55, ease: 'elastic.out(1.2,.25)', onUpdate: function () { cl.setAttribute('d', 'M' + P + ' ' + y + 'Q' + (P + w / 2) + ' ' + f(y + o.d) + ' ' + (P + w) + ' ' + y); } });
-    }
-  };
-
   /* work: viewfinder corners snap onto the button; click fires the shutter */
   R.viewfinder = {
     art: function (w, h) {
@@ -212,24 +161,6 @@
     }
   };
 
-  /* reviews: a clamp work-lamp swings in and lights the button; click flickers it */
-  R.lamp = {
-    art: function (w, h) {
-      var x = P - 4, y = P - 22;
-      return '<path class="cn" d="M' + (x + 6) + ' ' + (y + 6) + 'L' + (P + w * .9) + ' ' + (P + h + 4) + 'L' + (P - 2) + ' ' + (P + h + 4) + 'Z" fill="#fff1b8" opacity="0"/>' +
-        '<g class="lp" opacity="0"><path d="M' + (x - 16) + ' ' + (y - 14) + 'L' + x + ' ' + y + '" stroke="' + STEEL + '" stroke-width="2.2"/><path d="M' + (x - 4) + ' ' + (y - 6) + 'l13 -3l3 13l-13 3z" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/></g>';
-    },
-    hover: function (svg) {
-      var o = (P - 20) + ' ' + (P - 36);
-      return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.lp'), { opacity: 0, rotation: -40 }, { opacity: 1, rotation: 0, svgOrigin: o, duration: .45, ease: 'back.out(1.6)' }, 0)
-        .fromTo(one(svg, '.cn'), { opacity: 0 }, { opacity: .32, duration: .3, ease: 'power2.out' }, .25);
-    },
-    click: function (svg) {
-      return gsap.timeline().to(one(svg, '.cn'), { keyframes: [{ opacity: .05, duration: .05 }, { opacity: .32, duration: .05 }, { opacity: .1, duration: .06 }, { opacity: .4, duration: .1 }, { opacity: .32, duration: .2 }] });
-    }
-  };
-
   /* work v3: two strips of masking tape stick the button to the board; click tears one off */
   R.masking = {
     art: function (w, h) {
@@ -246,25 +177,6 @@
     click: function (svg) {
       return gsap.timeline().to(one(svg, '.tb'), { x: 18, y: -20, opacity: 0, duration: .35, ease: 'power2.in' })
         .set(one(svg, '.tb'), { x: 0, y: 0, opacity: 1 }, .9);
-    }
-  };
-
-  /* towns: a survey stake with flagging tape is driven in beside the button */
-  R.stake = {
-    art: function (w, h) {
-      var x = P - 12, y = P + h;
-      return '<g class="sk2" opacity="0"><path d="M' + x + ' ' + (y - 34) + 'v30l3 7l3 -7v-30z" fill="#c9a46a" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/>' +
-        '<path class="fl" d="M' + (x + 6) + ' ' + (y - 32) + 'q12 2 16 9q-9 -3 -16 2z" fill="#ff7a3c" stroke="' + INK + '" stroke-width=".8"/></g>' +
-        '<path class="gd" d="M' + (x - 10) + ' ' + (y + 4) + 'h26" stroke="currentColor" stroke-width="1.4" opacity="0"/>';
-    },
-    hover: function (svg, w, h) {
-      return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.sk2'), { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .25, ease: 'power4.in' }, 0)
-        .fromTo(one(svg, '.gd'), { opacity: 0, scaleX: .3, transformOrigin: '50% 50%' }, { opacity: 1, scaleX: 1, duration: .25, ease: 'expo.out' }, .24)
-        .fromTo(one(svg, '.fl'), { scaleX: .6, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .5, ease: 'elastic.out(1,.4)' }, .25);
-    },
-    click: function (svg) {
-      return gsap.timeline().to(one(svg, '.sk2'), { y: 4, duration: .08, ease: 'power4.in' }).to(one(svg, '.sk2'), { y: 2, duration: .2 });
     }
   };
 
