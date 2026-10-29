@@ -1,149 +1,218 @@
-/* reviews, PLAN-V3 §3. Aggregate first (4.8 / 343); quotes verbatim, never edited. */
+/* reviews: aggregate-led ONLY (FULL §3). The page uses two published figures, 4.8 and 343, and links to the firm's
+   own Google listing. No quotes, no names.
+   v1 tally ledger [KBF Ledger / F12], v2 star constellation [S0687 + Q41 caps], v3 calibration dial [S1380 + S0928]. */
 (function () {
   var NS = 'http://www.w3.org/2000/svg';
-  function f(n) { return Math.round(n * 10) / 10; }
+  var COUNT = 343, AVG = 4.8;
 
   EZ.section('reviews', {
-    /* v1 · On the tape [Codrops marquee along a path + BANK 169] */
+    /* v1 · The tally ledger: 343 strokes in gates of five, scratched in with the scroll; hover a gate for its range */
     1: { init: function (root, k) {
-      var run = root.querySelector('.reviews1__run'), svg = root.querySelector('.reviews1__svg');
-      var lis = Array.prototype.slice.call(root.querySelectorAll('.reviews1__list li'));
-      var pause = root.querySelector('.reviews1__pause'), pl = pause.querySelector('.btn__label');
-      EZ.reveal(k, root.querySelectorAll('.reviews__agg > *'));
-      if (!k.motion) { root.classList.add('is-static'); k.add(function () { root.classList.remove('is-static'); }); return; }
-      var L = 0, off = 0, speed = 1, target = 1, BASE = k.mobile ? 34 : 46, paused = false, inView = false, path;
+      var svg = root.querySelector('.reviews1__svg'), book = root.querySelector('.reviews1__book');
+      var countEl = root.querySelector('.reviews1__count'), tip = root.querySelector('.reviews1__tip');
+      var strokes = [], gates = [], shown = COUNT;
       function build() {
-        var W = run.clientWidth, H = run.clientHeight;
-        if (!W) return;
+        var per = EZ.mobile() ? 7 : 10, W = 600, gw = W / per, rows = Math.ceil(COUNT / 5 / per), rh = 64, H = rows * rh;
         svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-        // the loop is exactly as long as the cards need: spacing = card width x 1.12, so no card sits on another
-        var cw = lis[0].firstElementChild.offsetWidth || 300, need = lis.length * cw * 1.12, ext = Math.max(200, (need - W) / 2), d = '';
-        function trace() {
-          d = '';
-          for (var i = 0; i <= 120; i++) {
-            var x = -ext + (W + ext * 2) * i / 120, y = H * .5 + Math.sin(x / Math.max(W, 900) * Math.PI * 1.15 + .6) * H * .14;
-            d += (i ? 'L' : 'M') + f(x) + ' ' + f(y);
+        var s = '', n = 0;
+        for (var g = 0; n < COUNT; g++) {
+          var col = g % per, row = Math.floor(g / per), x = col * gw + gw * .2, y = row * rh + 12, from = n + 1;
+          var body = '';
+          for (var j = 0; j < 4 && n < COUNT; j++, n++) {
+            // a hand-made tally: each stroke leans a little and differs a little in length
+            var lean = ((g * 7 + j * 3) % 5 - 2) * .9, top = y + ((g + j) % 3), bot = y + 40 - ((g * 3 + j) % 4);
+            body += '<path class="st" d="M' + (x + j * 9) + ' ' + top + 'L' + (x + j * 9 + lean) + ' ' + bot + '"/>';
           }
-          svg.innerHTML = '<path class="band" d="' + d + '"/><path class="stripe" d="' + d + '"/>';
-          path = svg.querySelector('.band');
-          L = path.getTotalLength();
+          if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 33) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
+          s += '<g class="gate" data-a="' + from + '" data-b="' + n + '"><rect x="' + (x - 8) + '" y="' + (y - 4) + '" width="' + (gw * .82) + '" height="50"/>' + body + '</g>';
         }
-        for (var it = 0; it < 3; it++) { trace(); ext += (need - L) / 2; ext = Math.max(100, ext); }
-        trace();
-        lis.forEach(function (li) { li.style.offsetPath = 'path("' + d + '")'; });
-        place();
+        svg.innerHTML = s;
+        strokes = Array.prototype.slice.call(svg.querySelectorAll('.st'));
+        gates = Array.prototype.slice.call(svg.querySelectorAll('.gate'));
+        gsap.set(strokes, { transformOrigin: '50% 100%' });
+        gsap.set(svg.querySelectorAll('.st--d'), { transformOrigin: '0% 100%' });
+        if (k.motion) { strokes.forEach(function (st, i) { st.style.opacity = i < shown ? 1 : 0; }); }
       }
-      function place() {
-        var gap = L / lis.length;
-        lis.forEach(function (li, i) { li.style.offsetDistance = (((off + i * gap) % L) + L) % L + 'px'; });
+      function show(n) {
+        n = Math.max(0, Math.min(COUNT, n));
+        if (n === shown) return;
+        if (n > shown) {
+          var fresh = strokes.slice(shown, n);
+          fresh.forEach(function (st) { st.style.opacity = 1; });
+          if (fresh.length < 40) gsap.fromTo(fresh, { scale: .1 }, { scale: 1, duration: .15, ease: 'power2.out', stagger: .01, overwrite: true });
+        } else strokes.slice(n, shown).forEach(function (st) { st.style.opacity = 0; });
+        shown = n;
+        countEl.textContent = n;
       }
-      k.ro(run, build);
+      if (k.motion) shown = 0;
       build();
-      k.add(function () { svg.innerHTML = ''; lis.forEach(function (li) { li.style.offsetPath = li.style.offsetDistance = ''; }); });
-      var loop = k.raf(function (dt) {
-        speed = EZ.damp(speed, paused ? 0 : target, 5, dt);       // hover slows to .3 on a spring-like damp
-        off += BASE * speed * dt;
-        place();
+      if (k.motion) countEl.textContent = 0;
+      var lastPer = EZ.mobile();
+      k.ro(book, function () { if (EZ.mobile() !== lastPer) { lastPer = EZ.mobile(); var n = shown; shown = k.motion ? 0 : COUNT; build(); if (k.motion) show(n); } });
+      k.add(function () { svg.innerHTML = ''; countEl.textContent = COUNT; tip.textContent = ''; });
+      // hover a gate: which reviews it holds
+      k.on(svg, 'pointerover', function (e) {
+        var g = e.target.closest('.gate'); if (!g) return;
+        gates.forEach(function (x) { x.classList.toggle('is-hot', x === g); });
+        tip.textContent = g.dataset.a === g.dataset.b ? 'Review ' + g.dataset.a : 'Reviews ' + g.dataset.a + '–' + g.dataset.b;
       });
-      k.io(run, function (en) { inView = en.isIntersecting; inView ? loop.start() : loop.stop(); });
-      k.on(run, 'pointerenter', function (e) { if (e.pointerType === 'mouse') target = .3; });
-      k.on(run, 'pointerleave', function () { target = 1; });
-      k.on(run, 'focusin', function () { target = .3; });
-      k.on(run, 'focusout', function () { target = 1; });
-      k.on(pause, 'click', function () {
-        paused = !paused;
-        pause.setAttribute('aria-pressed', paused ? 'true' : 'false');
-        pl.textContent = paused ? 'Run the tape' : 'Pause the tape';
-      });
-      k.add(function () { pause.setAttribute('aria-pressed', 'false'); pl.textContent = 'Pause the tape'; });
-      gsap.fromTo(svg.querySelectorAll('path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.2, ease: 'power2.inOut', scrollTrigger: { trigger: run, start: 'top 80%', once: true } });
-    } },
-
-    /* v2 · The site board [comb lift S0409] */
-    2: { init: function (root, k) {
-      var notes = Array.prototype.slice.call(root.querySelectorAll('.reviews2__note'));
+      k.on(svg, 'pointerleave', function () { gates.forEach(function (x) { x.classList.remove('is-hot'); }); tip.textContent = ''; });
       if (!k.motion) return;
-      gsap.from(root.querySelector('.reviews2__sign'), { y: -30, autoAlpha: 0, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: root.querySelector('.reviews2__board'), start: 'top 80%', once: true } });
-      gsap.from(notes, { y: -40, autoAlpha: 0, duration: .6, ease: 'bounce.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.reviews2__grid'), start: 'top 80%', once: true } });
-      notes.forEach(function (n, i) {
-        k.on(n, 'pointerenter', function (e) {
-          if (e.pointerType !== 'mouse') return;
-          n.classList.add('is-up');
-          notes.forEach(function (m, j) {
-            var dist = Math.abs(i - j);
-            gsap.to(m, { y: -4 * Math.pow(.45, dist) * (j === i ? 2 : 1), scale: j === i ? 1.03 : 1, boxShadow: j === i ? '0 26px 30px -14px rgba(0,0,0,.6)' : '0 10px 18px -10px rgba(0,0,0,.55)', duration: .32, ease: 'power3.out', overwrite: 'auto' });
-          });
-        });
-        k.on(n, 'pointerleave', function () {
-          n.classList.remove('is-up');
-          gsap.to(notes, { y: 0, scale: 1, boxShadow: '0 10px 18px -10px rgba(0,0,0,.55)', duration: .5, ease: 'back.out(3)', overwrite: 'auto' });
-        });
-      });
-      k.add(function () { notes.forEach(function (n) { n.classList.remove('is-up'); }); });
+      EZ.reveal(k, root.querySelectorAll('.reviews1__side > *'));
+      ScrollTrigger.create({ trigger: book, start: 'top 78%', end: 'bottom 70%', scrub: .3,
+        onUpdate: function (self) { show(Math.round(self.progress * COUNT)); },
+        onLeave: function () { show(COUNT); } });
     } },
 
-    /* v3 · Under the work lamp [S0634 spotlight-follow + BANK 292] */
-    3: { init: function (root, k) {
-      var bench = root.querySelector('.reviews3__bench'), svg = root.querySelector('.reviews3__lamp');
-      var qs = Array.prototype.slice.call(root.querySelectorAll('.reviews3__q'));
-      EZ.reveal(k, root.querySelectorAll('.reviews3__head > *'));
-      if (!k.motion) { svg.style.display = 'none'; k.add(function () { svg.style.display = ''; }); return; }
-      var reveal = qs.map(function () { return { r: 0 }; }), C = [], W = 0, H = 0;
-      var lamp = { x: 0, tx: 0, ty: 0, px: 0, py: 0 }, head, beam, hasPtr = false;
-      function build() {
-        W = bench.clientWidth; H = bench.clientHeight;
-        if (!W) return;
-        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-        svg.innerHTML = '<defs><radialGradient id="rv3-beam" gradientUnits="userSpaceOnUse" r="1"><stop offset="0" stop-color="#fff1b8" stop-opacity=".2"/><stop offset="1" stop-color="#fff1b8" stop-opacity="0"/></radialGradient></defs>' +
-          '<path class="rail" d="M0 26H' + W + '"/><path class="beam" d=""/>' +
-          '<g class="lh"><rect x="-10" y="18" width="20" height="16" rx="3" fill="#c9d1d3" stroke="#0B1418" stroke-width="2"/><path d="M0 34V52" stroke="#5f7176" stroke-width="4"/>' +
-          '<g class="hd"><path d="M-16 52 L16 52 L24 84 L-24 84 Z" fill="#1d4a4e" stroke="#0B1418" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="0" cy="84" rx="24" ry="5" fill="#fff1b8" stroke="#0B1418" stroke-width="2"/></g></g>';
-        head = svg.querySelector('.lh'); beam = svg.querySelector('.beam');
-        var br = bench.getBoundingClientRect();
-        C = qs.map(function (q) { var r = q.getBoundingClientRect(); return [r.left - br.left + r.width / 2, r.top - br.top + r.height / 2]; });
-        if (!lamp.x) { lamp.x = W * .3; lamp.px = W * .3; lamp.py = H * .4; }
-      }
-      function render() {
-        var R = 230;
-        qs.forEach(function (q, i) {
-          var c = C[i] || [0, 0], dd = Math.hypot(c[0] - lamp.px, (c[1] - lamp.py) * 1.3), lit = Math.max(0, 1 - dd / R);
-          var o = (.55 + .45 * lit) * (.1 + .9 * reveal[i].r);
-          q.style.opacity = o.toFixed(3);
-          q.style.filter = reveal[i].r < .99 ? 'blur(' + ((1 - reveal[i].r) * 4).toFixed(2) + 'px)' : '';
-        });
-        if (!head || !head.isConnected) return;
-        head.setAttribute('transform', 'translate(' + f(lamp.x) + ' 0)');
-        var ang = Math.atan2(lamp.px - lamp.x, Math.max(40, lamp.py - 52)) * 180 / Math.PI;
-        head.querySelector('.hd').setAttribute('transform', 'rotate(' + f(-EZ.clamp(ang, -55, 55)) + ' 0 52)');
-        var a = (-EZ.clamp(ang, -55, 55)) * Math.PI / 180, hx = lamp.x - Math.sin(a) * 84, hy = 52 + Math.cos(a) * 32 + 32;
-        var nx = Math.cos(a) * 24, ny = Math.sin(a) * 24;
-        beam.setAttribute('d', 'M' + f(hx - nx) + ' ' + f(hy - ny) + 'L' + f(lamp.px - 150) + ' ' + f(lamp.py + 60) + 'A150 90 0 0 0 ' + f(lamp.px + 150) + ' ' + f(lamp.py + 60) + 'L' + f(hx + nx) + ' ' + f(hy + ny) + 'Z');
-        var g = svg.querySelector('#rv3-beam');
-        if (!g) return;
-        g.setAttribute('cx', f(lamp.px)); g.setAttribute('cy', f(lamp.py)); g.setAttribute('r', '320');
-      }
-      k.ro(bench, function () { build(); render(); });
-      build();
-      qs.forEach(function (q, i) {
-        gsap.to(reveal[i], { r: 1, ease: 'none', onUpdate: render, scrollTrigger: { trigger: q, start: 'top 92%', end: 'top 62%', scrub: true } });
-      });
-      var loop = k.raf(function () {
-        if (!hasPtr) {
-          // no pointer: the lamp lights the review nearest the middle of the screen
-          var br = bench.getBoundingClientRect(), mid = innerHeight / 2 - br.top, best = 0, bd = 1e9;
-          C.forEach(function (c, i) { var d = Math.abs(c[1] - mid); if (d < bd) { bd = d; best = i; } });
-          if (C[best]) { lamp.tx = C[best][0]; lamp.ty = C[best][1]; }
+    /* v2 · The constellation: 343 stars assemble into the average; the pointer pushes them, they spring home */
+    2: { init: function (root, k) {
+      var sky = root.querySelector('.reviews2__sky'), cv = root.querySelector('.reviews2__cv');
+      var ctx = cv.getContext('2d'), stars = [], links = [], W = 0, H = 0, dpr = 1;
+      var ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0;
+      function sample() {
+        // the average, set in the display face, sampled for 343 evenly spaced points [S0687 counter/constellation FX]
+        var o = document.createElement('canvas'); o.width = W; o.height = H;
+        var c = o.getContext('2d');
+        c.fillStyle = '#000'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Bebas Neue", sans-serif';
+        c.fillText('4.8', W / 2, H * .53);
+        var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 160));
+        for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) if (d[(y * W + x) * 4 + 3] > 128) cand.push([x, y]);
+        // shuffle, then keep points no closer than gap; shrink gap until 343 fit
+        for (var i = cand.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = cand[i]; cand[i] = cand[j]; cand[j] = t; }
+        var gap = Math.sqrt(cand.length * step * step / COUNT) * .95, pts = [];
+        for (var tries = 0; tries < 8; tries++) {
+          pts = [];
+          for (var m = 0; m < cand.length && pts.length < COUNT; m++) {
+            var p = cand[m], ok = true;
+            for (var q = 0; q < pts.length; q++) { var dx = pts[q][0] - p[0], dy = pts[q][1] - p[1]; if (dx * dx + dy * dy < gap * gap) { ok = false; break; } }
+            if (ok) pts.push(p);
+          }
+          if (pts.length >= COUNT) break;
+          gap *= .85;
         }
-        lamp.px += (lamp.tx - lamp.px) * .12; lamp.py += (lamp.ty - lamp.py) * .12;
-        lamp.x += (EZ.clamp(lamp.px, 30, W - 30) - lamp.x) * .08;
-        render();
-      });
-      k.io(bench, function (en) { en.isIntersecting ? loop.start() : loop.stop(); });
-      if (k.fine) {
-        k.on(bench, 'pointermove', function (e) { var r = bench.getBoundingClientRect(); hasPtr = true; lamp.tx = e.clientX - r.left; lamp.ty = e.clientY - r.top; });
-        k.on(bench, 'pointerleave', function () { hasPtr = false; });
+        while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
+        return pts.slice(0, COUNT);
       }
-      k.add(function () { svg.innerHTML = ''; qs.forEach(function (q) { q.style.opacity = ''; q.style.filter = ''; }); });
+      function layout(fresh) {
+        var r = sky.getBoundingClientRect();
+        W = Math.round(r.width); H = Math.round(r.height);
+        if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.25);                 // [Q41] DPR cap
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        var pts = sample();
+        pts.forEach(function (p, i) {
+          var s = stars[i];
+          if (!s || fresh) s = stars[i] = { x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, r: 1.2 + Math.random() * 1.6, ph: Math.random() * 6.28 };
+          s.tx = p[0]; s.ty = p[1];
+        });
+        // each star drawn to its nearest neighbour: the faint lines of a constellation
+        links = stars.map(function (s, i) {
+          var best = -1, bd = 1e9;
+          for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
+          return best;
+        });
+        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
+      }
+      function draw(t) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.strokeStyle = 'rgba(242,194,48,.14)'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (var i = 0; i < stars.length; i++) { var a = stars[i], b = stars[links[i]]; if (!b) continue; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
+        ctx.stroke();
+        for (var n = 0; n < stars.length; n++) {
+          var s = stars[n], tw = .65 + .35 * Math.sin(t * .003 + s.ph), r = s.r;
+          ctx.fillStyle = 'rgba(242,194,48,' + tw.toFixed(2) + ')';
+          // a four-point star
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y - r * 2.2); ctx.lineTo(s.x + r * .55, s.y - r * .55); ctx.lineTo(s.x + r * 2.2, s.y); ctx.lineTo(s.x + r * .55, s.y + r * .55);
+          ctx.lineTo(s.x, s.y + r * 2.2); ctx.lineTo(s.x - r * .55, s.y + r * .55); ctx.lineTo(s.x - r * 2.2, s.y); ctx.lineTo(s.x - r * .55, s.y - r * .55);
+          ctx.closePath(); ctx.fill();
+        }
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 25) return;                       // [Q41] 40fps ceiling, hidden-tab skip
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        var R = 90, R2 = R * R;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var ax = (s.tx - s.x) * .045, ay = (s.ty - s.y) * .045;
+          var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 3.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
+          s.x += s.vx * dt; s.y += s.vy * dt;
+        }
+        draw(t);
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(cx, cy) {
+        stars.forEach(function (s) {
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 14 + Math.random() * 18;
+          s.vx += dx / d * f; s.vy += dy / d * f;
+        });
+        run();
+      }
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(sky, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; links = []; ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.on(sky, 'pointermove', function (e) { var r = sky.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; });
+      k.on(sky, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(sky, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = sky.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
+      k.on(root.querySelector('.reviews2__scatter'), 'click', function () { if (k.motion) scatter(); });
+      k.io(sky, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
+      if (!k.motion) { root.querySelector('.reviews2__scatter').hidden = true; k.add(function () { root.querySelector('.reviews2__scatter').hidden = false; }); return; }
+      EZ.reveal(k, root.querySelectorAll('.reviews2__head > *, .reviews2__acts'));
+    } },
+
+    /* v3 · The calibration dial: the needle sweeps to 4.8; drag it and it springs back */
+    3: { init: function (root, k) {
+      var svg = root.querySelector('.reviews3__svg'), dial = root.querySelector('.reviews3__dial');
+      var C = 200, A0 = -120, SPAN = 240;                                  // 0 at -120deg, 5 at +120deg
+      function ang(v) { return A0 + v / 5 * SPAN; }
+      function pol(a, r) { var t = (a - 90) * Math.PI / 180; return [C + Math.cos(t) * r, C + Math.sin(t) * r]; }
+      var s = '<circle class="bezel" cx="200" cy="200" r="192"/><circle class="face" cx="200" cy="200" r="174"/>';
+      for (var i = 0; i <= 50; i++) {
+        var a = ang(i / 10), big = i % 10 === 0, mid = i % 5 === 0, p1 = pol(a, 164), p2 = pol(a, big ? 140 : mid ? 148 : 154);
+        s += '<path class="' + (big ? 'tk-m' : 'tk') + '" d="M' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + 'L' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1) + '"/>';
+        if (big) { var pl = pol(a, 122); s += '<text class="tl" x="' + pl[0].toFixed(1) + '" y="' + (pl[1] + 8).toFixed(1) + '" text-anchor="middle">' + (i / 10) + '</text>'; }
+      }
+      var pm = pol(ang(AVG), 178);
+      s += '<path class="mark" transform="translate(' + pm[0].toFixed(1) + ' ' + pm[1].toFixed(1) + ') rotate(' + ang(AVG) + ')" d="M0 -2L-7 -14H7Z"/>';
+      s += '<text class="cap-t" x="200" y="158" text-anchor="middle">GOOGLE RATING</text>';
+      s += '<g class="needle-g"><path class="needle" d="M196 236L200 52L204 236Z"/><circle class="hub" cx="200" cy="200" r="16"/><circle class="hub2" cx="200" cy="200" r="6"/></g>';
+      s += '<circle class="grab" cx="200" cy="200" r="190"/>';
+      svg.innerHTML = s;
+      var needle = svg.querySelector('.needle-g');
+      k.add(function () { svg.innerHTML = ''; });
+      gsap.set(needle, { rotation: ang(AVG), svgOrigin: '200 200' });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.reviews3__side > *'));
+      function settle(from, dur) {
+        gsap.fromTo(needle, { rotation: from }, { rotation: ang(AVG), svgOrigin: '200 200', duration: dur || 1.2, ease: 'elastic.out(1, .4)', overwrite: true });
+      }
+      gsap.set(needle, { rotation: A0, svgOrigin: '200 200' });
+      ScrollTrigger.create({ trigger: dial, start: 'top 75%', once: true, onEnter: function () { settle(A0, 1.6); } });
+      // drag the needle anywhere on the dial; let go and it comes back to the average
+      var dragging = false;
+      function at(e) {
+        var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 400 - C, y = (e.clientY - r.top) / r.height * 400 - C;
+        var deg = Math.atan2(y, x) * 180 / Math.PI + 90;          // 0 = straight up, clockwise positive
+        if (deg > 180) deg -= 360;
+        return EZ.clamp(deg, A0 - 10, A0 + SPAN + 10);
+      }
+      k.on(svg, 'pointerdown', function (e) { dragging = true; svg.setPointerCapture(e.pointerId); gsap.killTweensOf(needle); gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .12, overwrite: true }); });
+      k.on(svg, 'pointermove', function (e) { if (dragging) gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .08, overwrite: true }); });
+      function release() { if (!dragging) return; dragging = false; settle(gsap.getProperty(needle, 'rotation')); }
+      k.on(svg, 'pointerup', release);
+      k.on(svg, 'pointercancel', release);
+      k.on(root.querySelector('.reviews3__flick'), 'click', function () {
+        var to = ang(.6 + Math.random() * 2.4);
+        gsap.timeline().to(needle, { rotation: to, svgOrigin: '200 200', duration: .18, ease: 'power3.out' }).add(function () { settle(to, 1.3); });
+      });
     } }
   });
 })();

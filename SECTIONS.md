@@ -23,9 +23,9 @@ financing 3 — FIX — passes: NO
 work 1 — FIX — passes: NO
 work 2 — FIX — passes: NO
 work 3 — REBUILD (built: seamless belts, Q161 + 364) — passes: NO
-reviews 1 — REBUILD — passes: NO
-reviews 2 — REBUILD — passes: NO
-reviews 3 — REBUILD — passes: NO
+reviews 1 — REBUILD (built: tally ledger) — passes: NO
+reviews 2 — REBUILD (built: 343-star constellation) — passes: NO
+reviews 3 — REBUILD (built: calibration dial) — passes: NO
 towns 1 — FIX — passes: NO
 towns 2 — FIX — passes: NO
 towns 3 — FIX — passes: NO

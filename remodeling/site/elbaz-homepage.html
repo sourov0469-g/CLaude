@@ -1685,78 +1685,74 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 @media (max-width: 767px) { .work3__cap { opacity: 1; transform: none; padding: 16px 8px 6px; } .work3__ct { display: none; } .work3__cap b { margin: 0; } }
 
 
-/* reviews, PLAN-V3 §3: the 4.8 / 343 aggregate leads; quotes are verbatim from FACTS.md. tape / board / lamp */
-.reviews__h { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-weight: 400; }
-.reviews__big { font: 400 clamp(5rem, 3rem + 7vw, 10rem)/.8 var(--f-display); letter-spacing: -.01em; color: var(--ink); }
-.rv__star { width: clamp(44px, 5vw, 72px); height: auto; fill: #f2c230; stroke: #0B1418; stroke-width: 1; stroke-linejoin: round; }
-.reviews__sub { flex-basis: 100%; font: 400 clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem)/1 var(--f-display); letter-spacing: .02em; color: var(--muted); }
-.reviews__intro { margin: var(--s4) 0 0; color: var(--muted); max-width: 46ch; }
-.reviews__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5) var(--s7); margin-top: var(--s6); }
-.reviews__all { font-weight: 600; display: inline-block; padding-block: 11px; }
-blockquote { margin: 0; }
-.rv__meta { color: inherit; opacity: .7; font-size: .8125rem; }
+/* reviews: aggregate-led only (FULL §3). v1 tally ledger / v2 star constellation / v3 calibration dial */
+.reviews__lead { color: var(--muted); max-width: 40ch; }
+.reviews__lead strong { color: var(--ink); font-weight: 600; }
 
-/* ---------- v1 · On the tape ---------- */
-.reviews1__run { position: relative; height: clamp(420px, 44vw, 560px); margin-top: var(--s6); overflow: hidden; }
-.reviews1__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.reviews1__svg .band { fill: none; stroke: #f2c230; stroke-width: 34; stroke-linecap: butt; }
-.reviews1__svg .stripe { fill: none; stroke: #0B1418; stroke-width: 34; stroke-dasharray: 18 18; }
-.reviews1__list { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
-.reviews1__list li { position: absolute; left: 0; top: 0; offset-rotate: 0deg; offset-anchor: 50% 30%; will-change: offset-distance; }
-.reviews1__card {
-  width: clamp(250px, 24vw, 320px); padding: 18px 20px 16px; background: #f3eee2; color: #1b2629;
-  box-shadow: 0 18px 30px -16px rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 0, 0, .08);
-  font-size: .9375rem; line-height: 1.45;
+/* ---------- v1 · The tally ledger [KBF Ledger, F12 checkable proof] ---------- */
+.reviews1__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.reviews1__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
+.reviews1__avg { margin: 0; display: flex; align-items: flex-end; gap: 14px; }
+.reviews1__n { font: 400 clamp(5rem, 3rem + 6vw, 9rem)/.8 var(--f-display); color: var(--ink); }
+.reviews1__of { font: 500 .9375rem/1.35 var(--f-text); color: var(--muted); padding-bottom: .4em; }
+.reviews1__btn { justify-self: start; }
+.reviews1__book {
+  grid-column: 6 / -1; margin: 0; position: relative;
+  background: #f4efe2; color: #1b2629; padding: clamp(18px, 2.6vw, 34px) clamp(14px, 2.6vw, 34px) 18px clamp(44px, 5vw, 70px);
+  background-image: linear-gradient(90deg, transparent calc(clamp(44px, 5vw, 70px) - 14px), rgba(200, 64, 46, .55) calc(clamp(44px, 5vw, 70px) - 14px), rgba(200, 64, 46, .55) calc(clamp(44px, 5vw, 70px) - 12px), transparent calc(clamp(44px, 5vw, 70px) - 12px)),
+    repeating-linear-gradient(180deg, transparent 0 31px, rgba(43, 106, 150, .22) 31px 32px);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7);
 }
-.reviews1__card p { margin: 0 0 10px; }
-.reviews1__card cite { font-style: normal; font-weight: 700; }
-.reviews1__card .rv__meta { color: #4a5a5e; opacity: 1; }
-.reviews1__pause .rx { color: #f2c230; }
-/* reduced motion / motion off: the tape becomes a plain scroller */
-.reviews1.is-static .reviews1__run { height: auto; overflow-x: auto; padding-bottom: 12px; }
-.reviews1.is-static .reviews1__list { position: static; display: flex; gap: 16px; padding: 0 var(--margin); }
-.reviews1.is-static .reviews1__list li { position: static; flex: none; }
-.reviews1.is-static .reviews1__svg, .reviews1.is-static .reviews1__pause { display: none; }
+.reviews1__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.reviews1__svg .st { stroke: #1b2629; stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.reviews1__svg .gate { cursor: crosshair; }
+.reviews1__svg .gate rect { fill: transparent; }
+.reviews1__svg .gate.is-hot .st { stroke: #c8402e; }
+.reviews1__svg .gate.is-hot rect { fill: rgba(242, 194, 48, .28); }
+.reviews1__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); color: #4a5a5e; }
+.reviews1__count { font: 400 1.75rem/1 var(--f-display); color: #1b2629; }
+.reviews1__tip { margin-left: auto; font-weight: 600; color: #c8402e; min-height: 1.3em; }
+@media (max-width: 1023px) { .reviews1__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); } .reviews1__book { grid-column: 1 / -1; } }
 
-/* ---------- v2 · The site board ---------- */
-.reviews2__board {
-  position: relative; padding: clamp(20px, 3vw, 44px);
-  background-color: #b98a52;
-  background-image: repeating-linear-gradient(92deg, rgba(110, 76, 38, .18) 0 2px, transparent 2px 9px), repeating-linear-gradient(88deg, rgba(255, 230, 190, .08) 0 1px, transparent 1px 23px);
-  box-shadow: inset 0 0 0 10px #6e4c26, 0 30px 60px -30px rgba(0, 0, 0, .7);
+/* ---------- v2 · The constellation [S0687 starfield / particle assembly, Q41 caps] ---------- */
+.reviews2__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.reviews2__head .t-head { grid-column: 1 / span 6; }
+.reviews2__head .reviews__lead { grid-column: 8 / span 5; }
+.reviews2__sky {
+  position: relative; height: clamp(360px, 48vw, 600px); overflow: hidden; border-radius: 4px;
+  background: radial-gradient(120% 90% at 50% 100%, #12324f 0%, #0B1418 70%);
+  box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .12);
 }
-.reviews2__sign { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s5); padding: 20px 24px; margin-bottom: clamp(20px, 3vw, 36px); background: #0B1418; color: #e8e4dc; box-shadow: 0 6px 0 rgba(0, 0, 0, .3); }
-.reviews2__sign .reviews__big { color: #e8e4dc; }
-.reviews2__sign .reviews__sub { color: #a9b6b9; }
-.reviews2__grid { list-style: none; margin: 0; padding: 0; columns: 3 260px; column-gap: clamp(14px, 2vw, 24px); }
-.reviews2__slot { break-inside: avoid; padding-top: 14px; margin-bottom: clamp(14px, 2vw, 22px); }
-.reviews2__note {
-  position: relative; padding: 22px 18px 16px; background: #f6f1e4; color: #1b2629; font-size: .9375rem; line-height: 1.45;
-  box-shadow: 0 10px 18px -10px rgba(0, 0, 0, .55);
-}
-.reviews2__slot:nth-child(3n+2) .reviews2__note { background: #f2e6b8; }
-.reviews2__slot:nth-child(3n) .reviews2__note { background: #e4eef0; }
-.reviews2__note::before { /* the pushpin */
-  content: ""; position: absolute; left: 50%; top: -9px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ff8d7a 0 20%, #e2412b 22% 100%); box-shadow: 0 3px 3px rgba(0, 0, 0, .35), inset 0 0 0 1.5px #0B1418;
-}
-.reviews2__note p { margin: 0 0 10px; }
-.reviews2__note cite { font-style: normal; font-weight: 700; }
-.reviews2__note .rv__meta { color: #4a5a5e; opacity: 1; }
+.reviews2__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.reviews2__fallback { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font: 400 clamp(10rem, 30vw, 26rem)/1 var(--f-display); color: #f2c230; opacity: 0; pointer-events: none; }
+.reviews2.is-static .reviews2__fallback { opacity: 1; }
+.reviews2__legend { position: absolute; left: 18px; bottom: 14px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: rgba(232, 228, 220, .75); }
+.reviews2__acts { margin-top: var(--s6); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
+@media (max-width: 1023px) { .reviews2__head .t-head, .reviews2__head .reviews__lead { grid-column: 1 / -1; } .reviews2__head .reviews__lead { margin-top: var(--s4); } }
 
-/* ---------- v3 · Under the work lamp ---------- */
-.reviews3__head { margin-bottom: var(--s6); }
-.reviews3__bench { position: relative; padding: 90px clamp(18px, 3vw, 40px) 40px; background: #081013; box-shadow: inset 0 0 0 1px var(--line-soft); overflow: hidden; }
-[data-theme="daylight"] .reviews3__bench { background: #1b2629; }
-.reviews3__lamp { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
-.reviews3__lamp .rail { stroke: #5f7176; stroke-width: 6; }
-.reviews3__lamp .beam { fill: url(#rv3-beam); }
-.reviews3__cols { position: relative; z-index: 1; columns: 2 320px; column-gap: clamp(24px, 4vw, 64px); }
-.reviews3__q { break-inside: avoid; margin-bottom: clamp(22px, 3vw, 36px); color: #e8e4dc; }
-.reviews3__q p { margin: 0 0 8px; font: 400 clamp(1.25rem, 1rem + .7vw, 1.625rem)/1.32 var(--f-text); letter-spacing: -.005em; }
-.reviews3__q cite { font-style: normal; font-weight: 700; font-size: .9375rem; }
-.reviews3__q .rv__meta { color: #a9b6b9; opacity: 1; }
-.reviews3__btn { margin-top: var(--s7); }
+/* ---------- v3 · The calibration dial [S1380 dial, S0928 meter] ---------- */
+.reviews3__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.reviews3__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
+.reviews3__acts { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
+.reviews3__dial { grid-column: 7 / -1; position: relative; max-width: 560px; width: 100%; justify-self: center; touch-action: none; }
+.reviews3__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.reviews3__svg .bezel { fill: #c9d1d3; stroke: #0B1418; stroke-width: 3; }
+.reviews3__svg .face { fill: #f4efe2; stroke: #7f8b8e; stroke-width: 2; }
+.reviews3__svg .tk { stroke: #1b2629; stroke-width: 1.4; }
+.reviews3__svg .tk-m { stroke: #1b2629; stroke-width: 3; }
+.reviews3__svg .tl { font: 400 22px/1 var(--f-display); fill: #1b2629; }
+.reviews3__svg .band { fill: none; stroke-width: 12; }
+.reviews3__svg .cap-t { font: 600 9.5px/1 var(--f-text); letter-spacing: .18em; fill: #4a5a5e; }
+.reviews3__svg .needle { fill: #c8402e; stroke: #0B1418; stroke-width: 1.5; }
+.reviews3__svg .hub { fill: #0B1418; }
+.reviews3__svg .hub2 { fill: #f2c230; }
+.reviews3__svg .grab { fill: transparent; cursor: grab; }
+.reviews3__svg .grab:active { cursor: grabbing; }
+.reviews3__svg .mark { fill: #f2c230; stroke: #0B1418; stroke-width: 1.2; }
+.reviews3__read { position: absolute; left: 0; right: 0; top: 66%; margin: 0; display: grid; justify-items: center; gap: 2px; pointer-events: none; color: #1b2629; }
+.reviews3__val { font: 400 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/1 var(--f-display); padding: 2px 12px; background: #0B1418; color: #f2c230; border-radius: 3px; min-width: 2.6ch; text-align: center; }
+.reviews3__unit { font: 600 .6875rem/1.2 var(--f-text); letter-spacing: .14em; text-transform: uppercase; color: #4a5a5e; }
+@media (max-width: 1023px) { .reviews3__side, .reviews3__dial { grid-column: 1 / -1; } .reviews3__dial { margin-top: var(--s7); } }
 
 /* towns, PLAN-V3 §3: 104 municipalities (Census geometry, FACTS lists). survey map / orbit rings / road sign */
 .towns__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
@@ -2699,81 +2695,62 @@ blockquote { margin: 0; }
 </section>
 
 <section id="reviews" class="sec reviews g-surface" data-section="reviews" aria-labelledby="reviews-h1">
+  <!-- Reviews are aggregate-led ONLY (FULL §3): the two published figures, 4.8 and 343, and a link to the firm's own Google listing.
+       No quote, no reviewer name, nothing invented. -->
 
-  <!-- v1 · On the tape [Codrops Infinite Marquee Along an SVG Path (baseVelocity 20, hover slows to .3) + BANK 169 Text Loop] -->
+  <!-- v1 · The tally ledger [BANK KBF "The Ledger" checkable proof (F12) + Anatomy §2 F5 review volume beside the stars]:
+       343 strokes in gates of five, scratched in as the section scrolls; hover a gate for its range -->
   <div class="ver reviews1" data-v="1">
-    <div class="wrap reviews__agg">
-      <h2 class="reviews__h" id="reviews-h1"><span class="reviews__big nums">4.8</span><svg class="rv__star" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8l-5.8 3.3 1.4-6.4-4.9-4.4 6.5-.7z"/></svg><span class="reviews__sub">from <span class="nums">343</span> Google reviews</span></h2>
-      <p class="reviews__intro">Ten of them, word for word, about kitchens and bathrooms. Hover or focus to slow the tape down.</p>
-    </div>
-    <div class="reviews1__run">
-      <svg class="reviews1__svg" aria-hidden="true" focusable="false"></svg>
-      <ul class="reviews1__list" role="list">
-          <li><blockquote class="reviews1__card" data-i="0"><p>&ldquo;I am very grateful that Ashley took on my project . Now every morning I run to my beautiful kitchen because it is more than I expected. Thank you Ashley for your efforts, understanding and patience&rdquo;</p><footer><cite>RIo Norman</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="1"><p>&ldquo;Highly recommended for any bathroom or kitchen projects! Raz is very knowledgeable at this field and gave us wonderful ideas for the design. It was done in a timely manner. Thank you !!&rdquo;</p><footer><cite>Valerie Cisneros</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="2"><p>&ldquo;Excellent beautiful work on our kitchen project. Asher passion and professionalism were outstanding! Very happy with the outcome&rdquo;</p><footer><cite>Alan Schroeder</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="3"><p>&ldquo;Thank you Ashley ! We love the new bathrooms. Good with communication and very clear with explanations . I will definitely use them again in the future&rdquo;</p><footer><cite>Andrew Tyupa</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="4"><p>&ldquo;Sean has experience and he gave me the best ideas for my kitchen and bathroom project. He did high quality Job . We are very satisfied&rdquo;</p><footer><cite>J C</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="5"><p>&ldquo;If I could refer anybody to getting their bathroom redone it's through this company very reliable honest and clean work&rdquo;</p><footer><cite>Jonathan Vargas</cite> <span class="rv__meta">on Google, 11 months ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="6"><p>&ldquo;Asher was knowledgeable and gave us cool ideas that we didn't even know before. Nice beautiful color and design. We appreciate the price !&rdquo;</p><footer><cite>Sierra Bernabeo</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="7"><p>&ldquo;Outstanding service by Elbaz Construction. The team finished our bathroom in a timely fashion. Highly recommended for anyone who is looking for à reliable construction work&rdquo;</p><footer><cite>Paco Jazz</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="8"><p>&ldquo;If you are planning to remodel your kitchen or bathroom or do any other construction project, call Sean from Elbaz Construction . He has a lot of experience and will recommend the best options/ suggestions to your project. He did high quality job !&rdquo;</p><footer><cite>Kameron Allison</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li><blockquote class="reviews1__card" data-i="9"><p>&ldquo;Dealing with Asher was a truly enjoyable experience. His team is experienced and swift. They did a splendid job!&rdquo;</p><footer><cite>Sandy Zurita</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-      </ul>
-    </div>
-    <div class="wrap reviews__acts">
-      <button type="button" class="btn btn--ghost reviews1__pause" aria-pressed="false" data-rx="caution"><span class="btn__label">Pause the tape</span></button>
-      <a class="link reviews__all" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener">Read all <span class="nums">343</span> on Google</a>
+    <div class="wrap reviews1__grid">
+      <div class="reviews1__side">
+        <h2 class="t-head" id="reviews-h1">343 Google reviews. Count them.</h2>
+        <p class="t-lead reviews__lead">Every stroke on this ledger is one review on our Google listing, tallied in gates of five. Hover a gate to see which reviews it holds.</p>
+        <p class="reviews1__avg"><span class="reviews1__n nums">4.8</span><span class="reviews1__of">out of <span class="nums">5</span><br>average of all <span class="nums">343</span></span></p>
+        <a class="btn reviews1__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~ledger/swing/tick/r"><span class="btn__label">Read all 343 on Google</span></a>
+      </div>
+      <figure class="reviews1__book">
+        <svg class="reviews1__svg" role="img" aria-label="A tally of 343 strokes: 68 full gates of five and three more strokes"></svg>
+        <figcaption class="reviews1__cap"><span class="reviews1__count nums" aria-hidden="true">343</span> <span class="reviews1__cap-t">strokes tallied</span> <span class="reviews1__tip" aria-hidden="true"></span></figcaption>
+      </figure>
     </div>
   </div>
 
-  <!-- v2 · The site board [BANK Georgia CG dated, named testimonials + S0409 comb lift (-4px x 0.45^distance)] -->
+  <!-- v2 · The constellation [skill S0687 html-ppt constellation / starfield canvas FX + Mechanism family "Star / particle assembly";
+       BANK Q41 renderer caps: 40fps ceiling, DPR <= 1.25, hidden-tab skip]: 343 stars, one per review, assemble into the average -->
   <div class="ver reviews2" data-v="2" hidden>
     <div class="wrap">
-      <div class="reviews2__board">
-        <div class="reviews2__sign">
-          <h2 class="reviews__h" id="reviews-h2"><span class="reviews__big nums">4.8</span><svg class="rv__star" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8l-5.8 3.3 1.4-6.4-4.9-4.4 6.5-.7z"/></svg><span class="reviews__sub">from <span class="nums">343</span> Google reviews</span></h2>
-          <a class="btn reviews2__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="pushpin"><span class="btn__label">Read them all on Google</span></a>
-        </div>
-        <ol class="reviews2__grid">
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="0"><p>&ldquo;I am very grateful that Ashley took on my project . Now every morning I run to my beautiful kitchen because it is more than I expected. Thank you Ashley for your efforts, understanding and patience&rdquo;</p><footer><cite>RIo Norman</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="1"><p>&ldquo;Highly recommended for any bathroom or kitchen projects! Raz is very knowledgeable at this field and gave us wonderful ideas for the design. It was done in a timely manner. Thank you !!&rdquo;</p><footer><cite>Valerie Cisneros</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="2"><p>&ldquo;Excellent beautiful work on our kitchen project. Asher passion and professionalism were outstanding! Very happy with the outcome&rdquo;</p><footer><cite>Alan Schroeder</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="3"><p>&ldquo;Thank you Ashley ! We love the new bathrooms. Good with communication and very clear with explanations . I will definitely use them again in the future&rdquo;</p><footer><cite>Andrew Tyupa</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="4"><p>&ldquo;Sean has experience and he gave me the best ideas for my kitchen and bathroom project. He did high quality Job . We are very satisfied&rdquo;</p><footer><cite>J C</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="5"><p>&ldquo;If I could refer anybody to getting their bathroom redone it's through this company very reliable honest and clean work&rdquo;</p><footer><cite>Jonathan Vargas</cite> <span class="rv__meta">on Google, 11 months ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="6"><p>&ldquo;Asher was knowledgeable and gave us cool ideas that we didn't even know before. Nice beautiful color and design. We appreciate the price !&rdquo;</p><footer><cite>Sierra Bernabeo</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="7"><p>&ldquo;Outstanding service by Elbaz Construction. The team finished our bathroom in a timely fashion. Highly recommended for anyone who is looking for à reliable construction work&rdquo;</p><footer><cite>Paco Jazz</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="8"><p>&ldquo;If you are planning to remodel your kitchen or bathroom or do any other construction project, call Sean from Elbaz Construction . He has a lot of experience and will recommend the best options/ suggestions to your project. He did high quality job !&rdquo;</p><footer><cite>Kameron Allison</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-          <li class="reviews2__slot"><blockquote class="reviews2__note" data-i="9"><p>&ldquo;Dealing with Asher was a truly enjoyable experience. His team is experienced and swift. They did a splendid job!&rdquo;</p><footer><cite>Sandy Zurita</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote></li>
-        </ol>
+      <div class="reviews2__head">
+        <h2 class="t-head" id="reviews-h2">Three hundred and forty-three stars.</h2>
+        <p class="t-lead reviews__lead">One for every review on our Google listing. Together they make the average: <strong><span class="nums">4.8</span> out of <span class="nums">5</span></strong>. Run your cursor through them; they always come back.</p>
+      </div>
+      <div class="reviews2__sky">
+        <canvas class="reviews2__cv" aria-hidden="true"></canvas>
+        <p class="reviews2__fallback nums" aria-hidden="true">4.8</p>
+        <p class="reviews2__legend"><span class="nums">343</span> Google reviews &middot; average <span class="nums">4.8</span> out of <span class="nums">5</span></p>
+      </div>
+      <div class="reviews2__acts">
+        <a class="btn reviews2__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/orbit/sparkle/r"><span class="btn__label">Read them on Google</span></a>
+        <button type="button" class="btn btn--ghost reviews2__scatter" data-rx="~sun/spin/burst/l"><span class="btn__label">Scatter the stars</span></button>
       </div>
     </div>
   </div>
 
-  <!-- v3 · Under the work lamp [S0634 spotlight-follow + BANK 292 Scroll Reveal (opacity .1 -> 1, blur 4; rotate dropped)] -->
+  <!-- v3 · The calibration dial [skill S1380 layered calibration dial (ring, ticks, labels, core) + S0928 meter naming]:
+       the needle sweeps to 4.8; drag it anywhere and it springs back to 4.8 -->
   <div class="ver reviews3" data-v="3" hidden>
-    <div class="wrap">
-      <div class="reviews3__head">
-        <h2 class="reviews__h" id="reviews-h3"><span class="reviews__big nums">4.8</span><svg class="rv__star" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8l-5.8 3.3 1.4-6.4-4.9-4.4 6.5-.7z"/></svg><span class="reviews__sub">from <span class="nums">343</span> Google reviews</span></h2>
-        <p class="reviews__intro">Bring the lamp over a review to read it closely. Every word is the homeowner&rsquo;s own.</p>
-      </div>
-      <div class="reviews3__bench">
-        <svg class="reviews3__lamp" aria-hidden="true" focusable="false"></svg>
-        <div class="reviews3__cols">
-          <blockquote class="reviews3__q" data-i="0"><p>&ldquo;I am very grateful that Ashley took on my project . Now every morning I run to my beautiful kitchen because it is more than I expected. Thank you Ashley for your efforts, understanding and patience&rdquo;</p><footer><cite>RIo Norman</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="1"><p>&ldquo;Highly recommended for any bathroom or kitchen projects! Raz is very knowledgeable at this field and gave us wonderful ideas for the design. It was done in a timely manner. Thank you !!&rdquo;</p><footer><cite>Valerie Cisneros</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="2"><p>&ldquo;Excellent beautiful work on our kitchen project. Asher passion and professionalism were outstanding! Very happy with the outcome&rdquo;</p><footer><cite>Alan Schroeder</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="3"><p>&ldquo;Thank you Ashley ! We love the new bathrooms. Good with communication and very clear with explanations . I will definitely use them again in the future&rdquo;</p><footer><cite>Andrew Tyupa</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="4"><p>&ldquo;Sean has experience and he gave me the best ideas for my kitchen and bathroom project. He did high quality Job . We are very satisfied&rdquo;</p><footer><cite>J C</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="5"><p>&ldquo;If I could refer anybody to getting their bathroom redone it's through this company very reliable honest and clean work&rdquo;</p><footer><cite>Jonathan Vargas</cite> <span class="rv__meta">on Google, 11 months ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="6"><p>&ldquo;Asher was knowledgeable and gave us cool ideas that we didn't even know before. Nice beautiful color and design. We appreciate the price !&rdquo;</p><footer><cite>Sierra Bernabeo</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="7"><p>&ldquo;Outstanding service by Elbaz Construction. The team finished our bathroom in a timely fashion. Highly recommended for anyone who is looking for à reliable construction work&rdquo;</p><footer><cite>Paco Jazz</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="8"><p>&ldquo;If you are planning to remodel your kitchen or bathroom or do any other construction project, call Sean from Elbaz Construction . He has a lot of experience and will recommend the best options/ suggestions to your project. He did high quality job !&rdquo;</p><footer><cite>Kameron Allison</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
-          <blockquote class="reviews3__q" data-i="9"><p>&ldquo;Dealing with Asher was a truly enjoyable experience. His team is experienced and swift. They did a splendid job!&rdquo;</p><footer><cite>Sandy Zurita</cite> <span class="rv__meta">on Google, a year ago</span></footer></blockquote>
+    <div class="wrap reviews3__grid">
+      <div class="reviews3__side">
+        <h2 class="t-head" id="reviews-h3">The needle settles on 4.8.</h2>
+        <p class="t-lead reviews__lead">That is the average of <span class="nums">343</span> Google reviews. Push the needle anywhere you like; it comes back.</p>
+        <div class="reviews3__acts">
+          <a class="btn reviews3__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~magnifier/hoist/flash/r"><span class="btn__label">Read the 343 on Google</span></a>
+          <button type="button" class="btn btn--ghost reviews3__flick" data-rx="~bulb/pop/flash/l"><span class="btn__label">Flick the needle</span></button>
         </div>
       </div>
-      <a class="btn reviews3__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="lamp"><span class="btn__label">Read all 343 on Google</span></a>
+      <div class="reviews3__dial" role="meter" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.8" aria-valuetext="4.8 out of 5" aria-label="Google rating, 4.8 out of 5, from 343 reviews">
+        <svg class="reviews3__svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+        <p class="reviews3__read" aria-hidden="true"><span class="reviews3__val nums">4.8</span><span class="reviews3__unit">of <span class="nums">5</span> &middot; <span class="nums">343</span> readings</span></p>
+      </div>
     </div>
   </div>
 </section>
@@ -6846,152 +6823,221 @@ blockquote { margin: 0; }
   });
 })();
 
-/* reviews, PLAN-V3 §3. Aggregate first (4.8 / 343); quotes verbatim, never edited. */
+/* reviews: aggregate-led ONLY (FULL §3). The page uses two published figures, 4.8 and 343, and links to the firm's
+   own Google listing. No quotes, no names.
+   v1 tally ledger [KBF Ledger / F12], v2 star constellation [S0687 + Q41 caps], v3 calibration dial [S1380 + S0928]. */
 (function () {
   var NS = 'http://www.w3.org/2000/svg';
-  function f(n) { return Math.round(n * 10) / 10; }
+  var COUNT = 343, AVG = 4.8;
 
   EZ.section('reviews', {
-    /* v1 · On the tape [Codrops marquee along a path + BANK 169] */
+    /* v1 · The tally ledger: 343 strokes in gates of five, scratched in with the scroll; hover a gate for its range */
     1: { init: function (root, k) {
-      var run = root.querySelector('.reviews1__run'), svg = root.querySelector('.reviews1__svg');
-      var lis = Array.prototype.slice.call(root.querySelectorAll('.reviews1__list li'));
-      var pause = root.querySelector('.reviews1__pause'), pl = pause.querySelector('.btn__label');
-      EZ.reveal(k, root.querySelectorAll('.reviews__agg > *'));
-      if (!k.motion) { root.classList.add('is-static'); k.add(function () { root.classList.remove('is-static'); }); return; }
-      var L = 0, off = 0, speed = 1, target = 1, BASE = k.mobile ? 34 : 46, paused = false, inView = false, path;
+      var svg = root.querySelector('.reviews1__svg'), book = root.querySelector('.reviews1__book');
+      var countEl = root.querySelector('.reviews1__count'), tip = root.querySelector('.reviews1__tip');
+      var strokes = [], gates = [], shown = COUNT;
       function build() {
-        var W = run.clientWidth, H = run.clientHeight;
-        if (!W) return;
+        var per = EZ.mobile() ? 7 : 10, W = 600, gw = W / per, rows = Math.ceil(COUNT / 5 / per), rh = 64, H = rows * rh;
         svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-        // the loop is exactly as long as the cards need: spacing = card width x 1.12, so no card sits on another
-        var cw = lis[0].firstElementChild.offsetWidth || 300, need = lis.length * cw * 1.12, ext = Math.max(200, (need - W) / 2), d = '';
-        function trace() {
-          d = '';
-          for (var i = 0; i <= 120; i++) {
-            var x = -ext + (W + ext * 2) * i / 120, y = H * .5 + Math.sin(x / Math.max(W, 900) * Math.PI * 1.15 + .6) * H * .14;
-            d += (i ? 'L' : 'M') + f(x) + ' ' + f(y);
+        var s = '', n = 0;
+        for (var g = 0; n < COUNT; g++) {
+          var col = g % per, row = Math.floor(g / per), x = col * gw + gw * .2, y = row * rh + 12, from = n + 1;
+          var body = '';
+          for (var j = 0; j < 4 && n < COUNT; j++, n++) {
+            // a hand-made tally: each stroke leans a little and differs a little in length
+            var lean = ((g * 7 + j * 3) % 5 - 2) * .9, top = y + ((g + j) % 3), bot = y + 40 - ((g * 3 + j) % 4);
+            body += '<path class="st" d="M' + (x + j * 9) + ' ' + top + 'L' + (x + j * 9 + lean) + ' ' + bot + '"/>';
           }
-          svg.innerHTML = '<path class="band" d="' + d + '"/><path class="stripe" d="' + d + '"/>';
-          path = svg.querySelector('.band');
-          L = path.getTotalLength();
+          if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 33) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
+          s += '<g class="gate" data-a="' + from + '" data-b="' + n + '"><rect x="' + (x - 8) + '" y="' + (y - 4) + '" width="' + (gw * .82) + '" height="50"/>' + body + '</g>';
         }
-        for (var it = 0; it < 3; it++) { trace(); ext += (need - L) / 2; ext = Math.max(100, ext); }
-        trace();
-        lis.forEach(function (li) { li.style.offsetPath = 'path("' + d + '")'; });
-        place();
+        svg.innerHTML = s;
+        strokes = Array.prototype.slice.call(svg.querySelectorAll('.st'));
+        gates = Array.prototype.slice.call(svg.querySelectorAll('.gate'));
+        gsap.set(strokes, { transformOrigin: '50% 100%' });
+        gsap.set(svg.querySelectorAll('.st--d'), { transformOrigin: '0% 100%' });
+        if (k.motion) { strokes.forEach(function (st, i) { st.style.opacity = i < shown ? 1 : 0; }); }
       }
-      function place() {
-        var gap = L / lis.length;
-        lis.forEach(function (li, i) { li.style.offsetDistance = (((off + i * gap) % L) + L) % L + 'px'; });
+      function show(n) {
+        n = Math.max(0, Math.min(COUNT, n));
+        if (n === shown) return;
+        if (n > shown) {
+          var fresh = strokes.slice(shown, n);
+          fresh.forEach(function (st) { st.style.opacity = 1; });
+          if (fresh.length < 40) gsap.fromTo(fresh, { scale: .1 }, { scale: 1, duration: .15, ease: 'power2.out', stagger: .01, overwrite: true });
+        } else strokes.slice(n, shown).forEach(function (st) { st.style.opacity = 0; });
+        shown = n;
+        countEl.textContent = n;
       }
-      k.ro(run, build);
+      if (k.motion) shown = 0;
       build();
-      k.add(function () { svg.innerHTML = ''; lis.forEach(function (li) { li.style.offsetPath = li.style.offsetDistance = ''; }); });
-      var loop = k.raf(function (dt) {
-        speed = EZ.damp(speed, paused ? 0 : target, 5, dt);       // hover slows to .3 on a spring-like damp
-        off += BASE * speed * dt;
-        place();
+      if (k.motion) countEl.textContent = 0;
+      var lastPer = EZ.mobile();
+      k.ro(book, function () { if (EZ.mobile() !== lastPer) { lastPer = EZ.mobile(); var n = shown; shown = k.motion ? 0 : COUNT; build(); if (k.motion) show(n); } });
+      k.add(function () { svg.innerHTML = ''; countEl.textContent = COUNT; tip.textContent = ''; });
+      // hover a gate: which reviews it holds
+      k.on(svg, 'pointerover', function (e) {
+        var g = e.target.closest('.gate'); if (!g) return;
+        gates.forEach(function (x) { x.classList.toggle('is-hot', x === g); });
+        tip.textContent = g.dataset.a === g.dataset.b ? 'Review ' + g.dataset.a : 'Reviews ' + g.dataset.a + '–' + g.dataset.b;
       });
-      k.io(run, function (en) { inView = en.isIntersecting; inView ? loop.start() : loop.stop(); });
-      k.on(run, 'pointerenter', function (e) { if (e.pointerType === 'mouse') target = .3; });
-      k.on(run, 'pointerleave', function () { target = 1; });
-      k.on(run, 'focusin', function () { target = .3; });
-      k.on(run, 'focusout', function () { target = 1; });
-      k.on(pause, 'click', function () {
-        paused = !paused;
-        pause.setAttribute('aria-pressed', paused ? 'true' : 'false');
-        pl.textContent = paused ? 'Run the tape' : 'Pause the tape';
-      });
-      k.add(function () { pause.setAttribute('aria-pressed', 'false'); pl.textContent = 'Pause the tape'; });
-      gsap.fromTo(svg.querySelectorAll('path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.2, ease: 'power2.inOut', scrollTrigger: { trigger: run, start: 'top 80%', once: true } });
-    } },
-
-    /* v2 · The site board [comb lift S0409] */
-    2: { init: function (root, k) {
-      var notes = Array.prototype.slice.call(root.querySelectorAll('.reviews2__note'));
+      k.on(svg, 'pointerleave', function () { gates.forEach(function (x) { x.classList.remove('is-hot'); }); tip.textContent = ''; });
       if (!k.motion) return;
-      gsap.from(root.querySelector('.reviews2__sign'), { y: -30, autoAlpha: 0, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: root.querySelector('.reviews2__board'), start: 'top 80%', once: true } });
-      gsap.from(notes, { y: -40, autoAlpha: 0, duration: .6, ease: 'bounce.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.reviews2__grid'), start: 'top 80%', once: true } });
-      notes.forEach(function (n, i) {
-        k.on(n, 'pointerenter', function (e) {
-          if (e.pointerType !== 'mouse') return;
-          n.classList.add('is-up');
-          notes.forEach(function (m, j) {
-            var dist = Math.abs(i - j);
-            gsap.to(m, { y: -4 * Math.pow(.45, dist) * (j === i ? 2 : 1), scale: j === i ? 1.03 : 1, boxShadow: j === i ? '0 26px 30px -14px rgba(0,0,0,.6)' : '0 10px 18px -10px rgba(0,0,0,.55)', duration: .32, ease: 'power3.out', overwrite: 'auto' });
-          });
-        });
-        k.on(n, 'pointerleave', function () {
-          n.classList.remove('is-up');
-          gsap.to(notes, { y: 0, scale: 1, boxShadow: '0 10px 18px -10px rgba(0,0,0,.55)', duration: .5, ease: 'back.out(3)', overwrite: 'auto' });
-        });
-      });
-      k.add(function () { notes.forEach(function (n) { n.classList.remove('is-up'); }); });
+      EZ.reveal(k, root.querySelectorAll('.reviews1__side > *'));
+      ScrollTrigger.create({ trigger: book, start: 'top 78%', end: 'bottom 70%', scrub: .3,
+        onUpdate: function (self) { show(Math.round(self.progress * COUNT)); },
+        onLeave: function () { show(COUNT); } });
     } },
 
-    /* v3 · Under the work lamp [S0634 spotlight-follow + BANK 292] */
-    3: { init: function (root, k) {
-      var bench = root.querySelector('.reviews3__bench'), svg = root.querySelector('.reviews3__lamp');
-      var qs = Array.prototype.slice.call(root.querySelectorAll('.reviews3__q'));
-      EZ.reveal(k, root.querySelectorAll('.reviews3__head > *'));
-      if (!k.motion) { svg.style.display = 'none'; k.add(function () { svg.style.display = ''; }); return; }
-      var reveal = qs.map(function () { return { r: 0 }; }), C = [], W = 0, H = 0;
-      var lamp = { x: 0, tx: 0, ty: 0, px: 0, py: 0 }, head, beam, hasPtr = false;
-      function build() {
-        W = bench.clientWidth; H = bench.clientHeight;
-        if (!W) return;
-        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-        svg.innerHTML = '<defs><radialGradient id="rv3-beam" gradientUnits="userSpaceOnUse" r="1"><stop offset="0" stop-color="#fff1b8" stop-opacity=".2"/><stop offset="1" stop-color="#fff1b8" stop-opacity="0"/></radialGradient></defs>' +
-          '<path class="rail" d="M0 26H' + W + '"/><path class="beam" d=""/>' +
-          '<g class="lh"><rect x="-10" y="18" width="20" height="16" rx="3" fill="#c9d1d3" stroke="#0B1418" stroke-width="2"/><path d="M0 34V52" stroke="#5f7176" stroke-width="4"/>' +
-          '<g class="hd"><path d="M-16 52 L16 52 L24 84 L-24 84 Z" fill="#1d4a4e" stroke="#0B1418" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="0" cy="84" rx="24" ry="5" fill="#fff1b8" stroke="#0B1418" stroke-width="2"/></g></g>';
-        head = svg.querySelector('.lh'); beam = svg.querySelector('.beam');
-        var br = bench.getBoundingClientRect();
-        C = qs.map(function (q) { var r = q.getBoundingClientRect(); return [r.left - br.left + r.width / 2, r.top - br.top + r.height / 2]; });
-        if (!lamp.x) { lamp.x = W * .3; lamp.px = W * .3; lamp.py = H * .4; }
-      }
-      function render() {
-        var R = 230;
-        qs.forEach(function (q, i) {
-          var c = C[i] || [0, 0], dd = Math.hypot(c[0] - lamp.px, (c[1] - lamp.py) * 1.3), lit = Math.max(0, 1 - dd / R);
-          var o = (.55 + .45 * lit) * (.1 + .9 * reveal[i].r);
-          q.style.opacity = o.toFixed(3);
-          q.style.filter = reveal[i].r < .99 ? 'blur(' + ((1 - reveal[i].r) * 4).toFixed(2) + 'px)' : '';
-        });
-        if (!head || !head.isConnected) return;
-        head.setAttribute('transform', 'translate(' + f(lamp.x) + ' 0)');
-        var ang = Math.atan2(lamp.px - lamp.x, Math.max(40, lamp.py - 52)) * 180 / Math.PI;
-        head.querySelector('.hd').setAttribute('transform', 'rotate(' + f(-EZ.clamp(ang, -55, 55)) + ' 0 52)');
-        var a = (-EZ.clamp(ang, -55, 55)) * Math.PI / 180, hx = lamp.x - Math.sin(a) * 84, hy = 52 + Math.cos(a) * 32 + 32;
-        var nx = Math.cos(a) * 24, ny = Math.sin(a) * 24;
-        beam.setAttribute('d', 'M' + f(hx - nx) + ' ' + f(hy - ny) + 'L' + f(lamp.px - 150) + ' ' + f(lamp.py + 60) + 'A150 90 0 0 0 ' + f(lamp.px + 150) + ' ' + f(lamp.py + 60) + 'L' + f(hx + nx) + ' ' + f(hy + ny) + 'Z');
-        var g = svg.querySelector('#rv3-beam');
-        if (!g) return;
-        g.setAttribute('cx', f(lamp.px)); g.setAttribute('cy', f(lamp.py)); g.setAttribute('r', '320');
-      }
-      k.ro(bench, function () { build(); render(); });
-      build();
-      qs.forEach(function (q, i) {
-        gsap.to(reveal[i], { r: 1, ease: 'none', onUpdate: render, scrollTrigger: { trigger: q, start: 'top 92%', end: 'top 62%', scrub: true } });
-      });
-      var loop = k.raf(function () {
-        if (!hasPtr) {
-          // no pointer: the lamp lights the review nearest the middle of the screen
-          var br = bench.getBoundingClientRect(), mid = innerHeight / 2 - br.top, best = 0, bd = 1e9;
-          C.forEach(function (c, i) { var d = Math.abs(c[1] - mid); if (d < bd) { bd = d; best = i; } });
-          if (C[best]) { lamp.tx = C[best][0]; lamp.ty = C[best][1]; }
+    /* v2 · The constellation: 343 stars assemble into the average; the pointer pushes them, they spring home */
+    2: { init: function (root, k) {
+      var sky = root.querySelector('.reviews2__sky'), cv = root.querySelector('.reviews2__cv');
+      var ctx = cv.getContext('2d'), stars = [], links = [], W = 0, H = 0, dpr = 1;
+      var ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0;
+      function sample() {
+        // the average, set in the display face, sampled for 343 evenly spaced points [S0687 counter/constellation FX]
+        var o = document.createElement('canvas'); o.width = W; o.height = H;
+        var c = o.getContext('2d');
+        c.fillStyle = '#000'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Bebas Neue", sans-serif';
+        c.fillText('4.8', W / 2, H * .53);
+        var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 160));
+        for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) if (d[(y * W + x) * 4 + 3] > 128) cand.push([x, y]);
+        // shuffle, then keep points no closer than gap; shrink gap until 343 fit
+        for (var i = cand.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = cand[i]; cand[i] = cand[j]; cand[j] = t; }
+        var gap = Math.sqrt(cand.length * step * step / COUNT) * .95, pts = [];
+        for (var tries = 0; tries < 8; tries++) {
+          pts = [];
+          for (var m = 0; m < cand.length && pts.length < COUNT; m++) {
+            var p = cand[m], ok = true;
+            for (var q = 0; q < pts.length; q++) { var dx = pts[q][0] - p[0], dy = pts[q][1] - p[1]; if (dx * dx + dy * dy < gap * gap) { ok = false; break; } }
+            if (ok) pts.push(p);
+          }
+          if (pts.length >= COUNT) break;
+          gap *= .85;
         }
-        lamp.px += (lamp.tx - lamp.px) * .12; lamp.py += (lamp.ty - lamp.py) * .12;
-        lamp.x += (EZ.clamp(lamp.px, 30, W - 30) - lamp.x) * .08;
-        render();
-      });
-      k.io(bench, function (en) { en.isIntersecting ? loop.start() : loop.stop(); });
-      if (k.fine) {
-        k.on(bench, 'pointermove', function (e) { var r = bench.getBoundingClientRect(); hasPtr = true; lamp.tx = e.clientX - r.left; lamp.ty = e.clientY - r.top; });
-        k.on(bench, 'pointerleave', function () { hasPtr = false; });
+        while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
+        return pts.slice(0, COUNT);
       }
-      k.add(function () { svg.innerHTML = ''; qs.forEach(function (q) { q.style.opacity = ''; q.style.filter = ''; }); });
+      function layout(fresh) {
+        var r = sky.getBoundingClientRect();
+        W = Math.round(r.width); H = Math.round(r.height);
+        if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.25);                 // [Q41] DPR cap
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        var pts = sample();
+        pts.forEach(function (p, i) {
+          var s = stars[i];
+          if (!s || fresh) s = stars[i] = { x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, r: 1.2 + Math.random() * 1.6, ph: Math.random() * 6.28 };
+          s.tx = p[0]; s.ty = p[1];
+        });
+        // each star drawn to its nearest neighbour: the faint lines of a constellation
+        links = stars.map(function (s, i) {
+          var best = -1, bd = 1e9;
+          for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
+          return best;
+        });
+        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
+      }
+      function draw(t) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.strokeStyle = 'rgba(242,194,48,.14)'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (var i = 0; i < stars.length; i++) { var a = stars[i], b = stars[links[i]]; if (!b) continue; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
+        ctx.stroke();
+        for (var n = 0; n < stars.length; n++) {
+          var s = stars[n], tw = .65 + .35 * Math.sin(t * .003 + s.ph), r = s.r;
+          ctx.fillStyle = 'rgba(242,194,48,' + tw.toFixed(2) + ')';
+          // a four-point star
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y - r * 2.2); ctx.lineTo(s.x + r * .55, s.y - r * .55); ctx.lineTo(s.x + r * 2.2, s.y); ctx.lineTo(s.x + r * .55, s.y + r * .55);
+          ctx.lineTo(s.x, s.y + r * 2.2); ctx.lineTo(s.x - r * .55, s.y + r * .55); ctx.lineTo(s.x - r * 2.2, s.y); ctx.lineTo(s.x - r * .55, s.y - r * .55);
+          ctx.closePath(); ctx.fill();
+        }
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 25) return;                       // [Q41] 40fps ceiling, hidden-tab skip
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        var R = 90, R2 = R * R;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var ax = (s.tx - s.x) * .045, ay = (s.ty - s.y) * .045;
+          var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 3.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
+          s.x += s.vx * dt; s.y += s.vy * dt;
+        }
+        draw(t);
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(cx, cy) {
+        stars.forEach(function (s) {
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 14 + Math.random() * 18;
+          s.vx += dx / d * f; s.vy += dy / d * f;
+        });
+        run();
+      }
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(sky, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; links = []; ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.on(sky, 'pointermove', function (e) { var r = sky.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; });
+      k.on(sky, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(sky, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = sky.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
+      k.on(root.querySelector('.reviews2__scatter'), 'click', function () { if (k.motion) scatter(); });
+      k.io(sky, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
+      if (!k.motion) { root.querySelector('.reviews2__scatter').hidden = true; k.add(function () { root.querySelector('.reviews2__scatter').hidden = false; }); return; }
+      EZ.reveal(k, root.querySelectorAll('.reviews2__head > *, .reviews2__acts'));
+    } },
+
+    /* v3 · The calibration dial: the needle sweeps to 4.8; drag it and it springs back */
+    3: { init: function (root, k) {
+      var svg = root.querySelector('.reviews3__svg'), dial = root.querySelector('.reviews3__dial');
+      var C = 200, A0 = -120, SPAN = 240;                                  // 0 at -120deg, 5 at +120deg
+      function ang(v) { return A0 + v / 5 * SPAN; }
+      function pol(a, r) { var t = (a - 90) * Math.PI / 180; return [C + Math.cos(t) * r, C + Math.sin(t) * r]; }
+      var s = '<circle class="bezel" cx="200" cy="200" r="192"/><circle class="face" cx="200" cy="200" r="174"/>';
+      for (var i = 0; i <= 50; i++) {
+        var a = ang(i / 10), big = i % 10 === 0, mid = i % 5 === 0, p1 = pol(a, 164), p2 = pol(a, big ? 140 : mid ? 148 : 154);
+        s += '<path class="' + (big ? 'tk-m' : 'tk') + '" d="M' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + 'L' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1) + '"/>';
+        if (big) { var pl = pol(a, 122); s += '<text class="tl" x="' + pl[0].toFixed(1) + '" y="' + (pl[1] + 8).toFixed(1) + '" text-anchor="middle">' + (i / 10) + '</text>'; }
+      }
+      var pm = pol(ang(AVG), 178);
+      s += '<path class="mark" transform="translate(' + pm[0].toFixed(1) + ' ' + pm[1].toFixed(1) + ') rotate(' + ang(AVG) + ')" d="M0 -2L-7 -14H7Z"/>';
+      s += '<text class="cap-t" x="200" y="158" text-anchor="middle">GOOGLE RATING</text>';
+      s += '<g class="needle-g"><path class="needle" d="M196 236L200 52L204 236Z"/><circle class="hub" cx="200" cy="200" r="16"/><circle class="hub2" cx="200" cy="200" r="6"/></g>';
+      s += '<circle class="grab" cx="200" cy="200" r="190"/>';
+      svg.innerHTML = s;
+      var needle = svg.querySelector('.needle-g');
+      k.add(function () { svg.innerHTML = ''; });
+      gsap.set(needle, { rotation: ang(AVG), svgOrigin: '200 200' });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.reviews3__side > *'));
+      function settle(from, dur) {
+        gsap.fromTo(needle, { rotation: from }, { rotation: ang(AVG), svgOrigin: '200 200', duration: dur || 1.2, ease: 'elastic.out(1, .4)', overwrite: true });
+      }
+      gsap.set(needle, { rotation: A0, svgOrigin: '200 200' });
+      ScrollTrigger.create({ trigger: dial, start: 'top 75%', once: true, onEnter: function () { settle(A0, 1.6); } });
+      // drag the needle anywhere on the dial; let go and it comes back to the average
+      var dragging = false;
+      function at(e) {
+        var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 400 - C, y = (e.clientY - r.top) / r.height * 400 - C;
+        var deg = Math.atan2(y, x) * 180 / Math.PI + 90;          // 0 = straight up, clockwise positive
+        if (deg > 180) deg -= 360;
+        return EZ.clamp(deg, A0 - 10, A0 + SPAN + 10);
+      }
+      k.on(svg, 'pointerdown', function (e) { dragging = true; svg.setPointerCapture(e.pointerId); gsap.killTweensOf(needle); gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .12, overwrite: true }); });
+      k.on(svg, 'pointermove', function (e) { if (dragging) gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .08, overwrite: true }); });
+      function release() { if (!dragging) return; dragging = false; settle(gsap.getProperty(needle, 'rotation')); }
+      k.on(svg, 'pointerup', release);
+      k.on(svg, 'pointercancel', release);
+      k.on(root.querySelector('.reviews3__flick'), 'click', function () {
+        var to = ang(.6 + Math.random() * 2.4);
+        gsap.timeline().to(needle, { rotation: to, svgOrigin: '200 200', duration: .18, ease: 'power3.out' }).add(function () { settle(to, 1.3); });
+      });
     } }
   });
 })();
