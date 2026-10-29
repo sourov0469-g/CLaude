@@ -490,12 +490,13 @@
 
   /* WORK 2: survey, draw, rebuild (S0468). For each job: the old house; a scan line turns it into the drawing
      (edge lines from the firm's own photo); one dimension label draws; a second scan builds the finished wall.
-     Photos swap only under the drawing. Auto-advances while in view, stops for good once you pick a job. */
+     Photos swap only under the drawing. The visitor runs it: "Run the survey" or a job number plays that job once
+     (no auto-advance, F17 / AUDIT-V3 G6). */
   V.work2 = (r, b) => {
-    const P = JSON.parse($('.pairs-data', r).textContent), fig = $('.bp-fig', r);
+    const P = JSON.parse($('.pairs-data', r).textContent), fig = $('.bp-fig', r), run = $('.bp-run', fig);
     const B = $('.bp-b', fig), Pl = $('.bp-p', fig), A = $('.bp-a', fig), dim = $('.bp-dim', fig), dimT = $('[data-bp-dim]', fig);
     const kEl = $('[data-bp-k]', r), nmEl = $('[data-bp-name]', r), fxEl = $('[data-bp-fix]', r), tabs = $$('.bp-step', r);
-    let i = 0, tl = null, next = null, auto = true, seen = false;
+    let i = 0, tl = null;
     const S = { a: 0, c: 0, s: 0 };
     const paint = () => { fig.style.setProperty('--s1', S.a + '%'); fig.style.setProperty('--s2', S.c + '%'); fig.style.setProperty('--scan', S.s + '%'); };
     const load = k => {
@@ -508,13 +509,14 @@
       tabs.forEach((t, n) => { t.setAttribute('aria-checked', n === k); t.tabIndex = n === k ? 0 : -1; });
     };
     const play = k => {
-      if (tl) tl.kill(); if (next) next.kill();
+      if (tl) tl.kill();
       i = k;
       if (!motionOK()) { load(k); S.a = 100; S.c = 100; S.s = 0; paint(); return; }
       const K = 1.4;   // S0468: everything plays 1.4x slower than its authored seconds
-      tl = G.timeline({ onComplete: () => { if (auto && seen) next = G.delayedCall(2.2, () => play((i + 1) % P.length)); } })
+      run.disabled = true;
+      tl = G.timeline({ onComplete: () => { run.disabled = false; run.textContent = 'Run it again'; } })
         .add(() => { S.a = 0; S.c = 0; S.s = 0; paint(); load(k); G.set(dim, { autoAlpha: 0 }); })
-        .to({}, { duration: 0.6 })
+        .to({}, { duration: 0.4 })
         .to(S, { a: 100, s: 100, duration: 0.8 * K, ease: 'power1.inOut', onUpdate: paint })
         .to(dim, { autoAlpha: 1, duration: 0.4 }, '+=0.1')
         .add(() => { S.s = 0; paint(); }, '+=0.5')
@@ -522,10 +524,10 @@
         .to(dim, { autoAlpha: 0, duration: 0.35 }, '-=0.3')
         .add(() => { S.s = 0; paint(); });
     };
-    const takeOver = k => { auto = false; play(k); };
-    radios($('.bp-steps', r), b, it => takeOver(+it.dataset.k), '.bp-step');
-    b.io(fig, ([en]) => { seen = en.isIntersecting; if (seen && !tl) play(0); else if (!seen && next) { next.kill(); next = null; } else if (seen && tl && !tl.isActive() && auto && !next) next = G.delayedCall(1.2, () => play((i + 1) % P.length)); }, { threshold: 0.35 });
-    b.add(() => { if (tl) tl.kill(); if (next) next.kill(); });
+    radios($('.bp-steps', r), b, it => play(+it.dataset.k), '.bp-step');
+    b.on(run, 'click', () => play(i));
+    b.add(() => { if (tl) tl.kill(); });
+    if (!motionOK()) run.hidden = true;
     load(0); S.a = motionOK() ? 0 : 100; S.c = motionOK() ? 0 : 100; paint();
   };
   V.work3 = (r, b) => {
@@ -549,20 +551,20 @@
       b.add(() => cancelAnimationFrame(raf));
     });
     if (!motionOK()) return;
-    G.from($$('.sp-fig, .sp-cap', r), { y: 40, autoAlpha: 0, duration: 0.8, ease: ease.out, stagger: 0.06, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
+    G.from($$('.sp-fig, .sp-cap', r), { y: 40, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.06, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
     // S1321 layered scroll: the three columns travel at different speeds, so the pairs sit at different depths
     if (mqDesk.matches && ST) $$('.sp', r).forEach((li, k) => { const s = [0.5, 1.2, 0.8][k % 3] * 36; G.fromTo(li, { y: s }, { y: -s, ease: 'none', scrollTrigger: { trigger: $('.spots', r), start: 'top bottom', end: 'bottom top', scrub: 1.2 } }); });
   };
 
   /* BUILT 1: the wall, taken apart (S0526 exploded view): one spring per layer, stiffness 64, drag 14.2, 4 sub-steps,
      35 ms stagger, outermost leaves first and closes last; the selected layer is the one lit part, the rest step
-     down; idle tour after 1.4 s in view, resumes 3.6 s after the last input; transforms removed at rest. */
+     down; it moves only when asked (no idle tour, F17); transforms removed at rest. */
   V.built1 = (r, b) => {
     const svg = $('svg.iso', r), asm = $$('.asm', svg), btns = $$('.lg-b', r), ex = $('[data-explode]', r), read = $('[data-readout]', r);
     const R = JSON.parse($('.b1x-data', r).textContent), ORDER = ['trim', 'siding', 'wrap', 'sheath', 'studs'];
     const sp = {};
     asm.forEach(g => { sp[g.dataset.asm] = { x: 0, v: 0, t: 0, at: 0, el: g, mx: +g.dataset.mx, my: +g.dataset.my }; });
-    let apart = false, clock = 0, raf = 0, last = 0, sel = '', tour = null, idle = null;
+    let apart = false, clock = 0, raf = 0, last = 0, sel = '';
     const write = s => { if (Math.abs(s.x) < 1e-4) s.el.removeAttribute('transform'); else s.el.setAttribute('transform', `translate(${(s.mx * s.x).toFixed(2)} ${(s.my * s.x).toFixed(2)})`); };
     const tick = now => {
       const dt = last ? Math.min(1 / 30, (now - last) / 1000) : 1 / 60; last = now; clock += dt;
@@ -593,91 +595,30 @@
       btns.forEach(x => x.setAttribute('aria-pressed', x.dataset.asm === k));
       say();
     };
-    const stopTour = () => { if (tour) { tour.kill(); tour = null; } if (idle) { idle.kill(); idle = null; } if (motionOK()) idle = G.delayedCall(3.6, startTour); };
-    function startTour() {
-      if (!motionOK()) return;
-      tour = G.timeline({ repeat: -1, repeatDelay: 1.2 })
-        .add(() => go(true)).add(() => select('siding'), '+=1.2').add(() => select('wrap'), '+=1.6').add(() => select('sheath'), '+=1.6')
-        .add(() => select(''), '+=1.6').add(() => go(false), '+=0.3');
-    }
+    const stopTour = () => {};   // no idle tour (F17, AUDIT-V3 G6): the wall moves only when asked
     btns.forEach(x => b.on(x, 'click', () => { stopTour(); const k = x.dataset.asm; if (!apart) go(true); select(sel === k ? '' : k); }));
     b.on(ex, 'click', () => { stopTour(); go(!apart); if (!apart) select(''); });
     asm.forEach(g => {
       b.on(g, 'pointerenter', e => { if (e.pointerType !== 'mouse' || !apart) return; stopTour(); select(g.dataset.asm); });
       b.on(g, 'click', () => { stopTour(); if (!apart) go(true); select(g.dataset.asm); });
     });
-    b.io(svg, ([en]) => { if (en.isIntersecting && !tour && !idle && motionOK()) idle = G.delayedCall(1.4, startTour); else if (!en.isIntersecting) { if (tour) { tour.kill(); tour = null; } if (idle) { idle.kill(); idle = null; } } }, { rootMargin: '120px 0px' });
-    b.add(() => { cancelAnimationFrame(raf); if (tour) tour.kill(); if (idle) idle.kill(); });
-    if (motionOK()) G.from(asm.slice().reverse(), { y: -30, autoAlpha: 0, duration: 0.7, ease: ease.out, stagger: 0.09, scrollTrigger: once(svg, 'top 80%') });
+    b.add(() => cancelAnimationFrame(raf));
+    if (motionOK()) G.from(asm.slice().reverse(), { y: -30, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.09, scrollTrigger: once(svg, 'top 80%') });
   };
 
-  /* BUILT 2: a window drawn in one line that answers the pointer (S0425 hairline): pointer x tilts the sash out,
-     pointer y draws the 3/4 in glass unit out of it; the read-out under it names what you see; no labels on lines.
-     Follow by exponential easing, tau 0.18 s (S0526); one range is the keyboard and touch path; tour of 3 stops. */
+  /* BUILT 2: S1322 sticky stack cards (R45: CSS sticky does the stacking, never a GSAP pin, so phones can't be
+     trapped). On desktop, as the next card travels from 78 % to 24 % of the viewport, the covered card settles back:
+     scale toward 0.92 (+0.015 per index), opacity 0.72, 24 px up, scrubbed linearly (parameter library). */
   V.built2 = (r, b) => {
-    const svg = $('svg.hw', r), fig = $('.b2x-fig', r), rng = $('[data-hw-range]', r), playBtn = $('[data-hw-play]', r), read = $('[data-hw-read]', r);
-    const NS = 'http://www.w3.org/2000/svg';
-    const k = 7.2, ox = 214, oy = 438;
-    const P = (x, y, z) => [ox + k * (0.94 * x - 0.34 * y), oy + k * (0.17 * x + 0.47 * y - z)];
-    const path = cls => { const p = d.createElementNS(NS, 'path'); p.setAttribute('class', cls); svg.appendChild(p); return p; };
-    const ring = pts => 'M' + pts.map(p => p.map(v => v.toFixed(1)).join(' ')).join('L') + 'Z';
-    const W = 32, HH = 50, FD = 3.25, FW = 2.6;    // FD: the published 3-1/4 in frame depth; outer size is a schematic
-    const els = { back: path('hw-f'), side: path('hw-s'), front: path('hw-f hw-fr'), open: path('hw-l'), upper: path('hw-l'), sash: path('hw-f hw-sash'), sashIn: path('hw-l'), g1: path('hw-g'), g2: path('hw-g hw-g2') };
-    const st = { t: 0, g: 0 }, tg = { t: 0, g: 0 };
-    let last = 0, raf = 0, tour = null;
-    const draw = () => {
-      // frame: back ring, the visible depth side, front ring with its opening
-      els.back.setAttribute('d', ring([P(0, 0, 0), P(W, 0, 0), P(W, 0, HH), P(0, 0, HH)]));
-      els.side.setAttribute('d', ring([P(W, 0, 0), P(W, FD, 0), P(W, FD, HH), P(W, 0, HH)]) + ring([P(0, FD, HH), P(W, FD, HH), P(W, 0, HH), P(0, 0, HH)]));
-      els.front.setAttribute('d', ring([P(0, FD, 0), P(W, FD, 0), P(W, FD, HH), P(0, FD, HH)]) + ring([P(FW, FD, FW), P(W - FW, FD, FW), P(W - FW, FD, HH - FW), P(FW, FD, HH - FW)]));
-      els.upper.setAttribute('d', ring([P(FW + 1, FD - 1.2, HH / 2), P(W - FW - 1, FD - 1.2, HH / 2), P(W - FW - 1, FD - 1.2, HH - FW - 1), P(FW + 1, FD - 1.2, HH - FW - 1)]));
-      // lower sash: hinged at its bottom edge, tilting out toward you by angle th
-      const th = st.t * 42 * Math.PI / 180, ys = FD - 0.6, z0 = FW, h = HH / 2 - FW + 0.6;
-      const S = (x, zz, dy = 0) => P(x, ys + dy + zz * Math.sin(th), z0 + zz * Math.cos(th));
-      const sw = 2.2;
-      els.sash.setAttribute('d', ring([S(FW, 0), S(W - FW, 0), S(W - FW, h), S(FW, h)]));
-      els.sashIn.setAttribute('d', ring([S(FW + sw, sw), S(W - FW - sw, sw), S(W - FW - sw, h - sw), S(FW + sw, h - sw)]));
-      // the dual-pane unit, 3/4 in overall (published), drawn as two panes that slide out of the sash along its normal
-      const out = st.g * 9, nx = Math.sin(th), nz = Math.cos(th);
-      const G2 = (x, zz, off) => P(x, ys + zz * nx + off * nz * 1 + 0, z0 + zz * nz - off * nx);
-      const pane = off => ring([G2(FW + sw, sw, off), G2(W - FW - sw, sw, off), G2(W - FW - sw, h - sw, off), G2(FW + sw, h - sw, off)]);
-      els.g1.setAttribute('d', pane(out));
-      els.g2.setAttribute('d', pane(out + 0.75));
-    };
-    const words = () => {
-      const t = Math.round(st.t * 42);
-      return st.g > 0.5 ? `Glass unit out of the sash: 3/4 in dual-pane` : t > 3 ? `Sash tilted out ${t} degrees, in a 3-1/4 in multi-chambered vinyl frame` : `Closed: 3-1/4 in multi-chambered vinyl frame, 3/4 in dual-pane glass`;
-    };
-    let said = '';
-    const tick = now => {
-      const dt = last ? Math.min(1 / 30, (now - last) / 1000) : 1 / 60; last = now;
-      const a = motionOK() ? 1 - Math.exp(-dt / 0.18) : 1;
-      st.t += (tg.t - st.t) * a; st.g += (tg.g - st.g) * a;
-      draw();
-      const w = words(); if (w !== said) { said = w; read.textContent = w; }
-      const moving = Math.abs(tg.t - st.t) > 1e-3 || Math.abs(tg.g - st.g) > 1e-3;
-      raf = moving ? requestAnimationFrame(tick) : 0; if (!moving) last = 0;
-    };
-    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
-    const fromRange = v => { tg.t = clamp(v / 60, 0, 1); tg.g = clamp((v - 60) / 40, 0, 1); kick(); };
-    const toRange = () => Math.round(tg.g > 0 ? 60 + tg.g * 40 : tg.t * 60);
-    const stopTour = () => { if (tour) { tour.kill(); tour = null; } };
-    b.on(rng, 'input', () => { stopTour(); fromRange(+rng.value); rng.setAttribute('aria-valuetext', words()); });
-    if (mqFine.matches) {
-      b.on(fig, 'pointermove', e => { if (e.pointerType !== 'mouse') return; stopTour(); const rc = fig.getBoundingClientRect(); tg.t = clamp((e.clientX - rc.left) / rc.width * 1.3 - 0.15, 0, 1); tg.g = clamp(((e.clientY - rc.top) / rc.height - 0.35) / 0.5, 0, 1) * (tg.t > 0.55 ? 1 : 0); rng.value = toRange(); kick(); });
-      b.on(fig, 'pointerleave', () => { tg.t = 0; tg.g = 0; rng.value = 0; kick(); });
-    }
-    b.on(playBtn, 'click', () => {
-      stopTour();
-      const stops = [[0.55, 0], [1, 0], [1, 1], [0, 0]];
-      tour = G.timeline();
-      stops.forEach(([t, g], n) => tour.add(() => { tg.t = t; tg.g = g; rng.value = toRange(); kick(); }, n ? '+=1.6' : 0));
+    const cards = $$('.ts-card', r);
+    if (!motionOK()) return;
+    G.from($$('.ts-head > *', r), { y: 16, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.08, scrollTrigger: once(r, 'top 80%') });
+    if (!mqDesk.matches || !ST) return;
+    cards.slice(0, -1).forEach((c, k) => {
+      G.to(c, { scale: 0.92 + 0.015 * k, autoAlpha: 0.72, y: -24, ease: 'none', transformOrigin: '50% 0%',
+        scrollTrigger: { trigger: cards[k + 1], start: 'top 78%', end: 'top 24%', scrub: true } });
     });
-    b.add(() => { cancelAnimationFrame(raf); stopTour(); });
-    draw(); read.textContent = said = words();
-    if (motionOK() && window.DrawSVGPlugin) G.from($$('path', svg), { drawSVG: '0%', duration: 1.1, ease: 'power2.inOut', stagger: 0.08, scrollTrigger: once(svg, 'top 82%') });
   };
-
   /* BUILT 3: the dimensioned sheet (S0361) with a split spec panel (S1361): lap or board and batten swap by a
      MorphSVG of one outline (S0184, 0.8 s power2.inOut); a spec row in focus or under the pointer turns its
      dimension red and draws it again (accent only on the active detail). */

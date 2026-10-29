@@ -438,6 +438,7 @@ def work1():
 
 
 def work2():
+    """S0468 blueprint animation: scan line, swap only under the blueprint, fades of 0.3 s or more; visitor-run (F17)"""
     steps = ''
     for k, q in enumerate(PAIRS6):
         steps += f'''<li><button class="bp-step" type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" data-k="{k}" tabindex="{0 if k == 0 else -1}"><span class="num">0{k + 1}</span>{e(q['place'].split(',')[0])}</button></li>'''
@@ -451,6 +452,7 @@ def work2():
     <img class="bp-a" src="{H}work-{p['id']}-a-1000.webp" width="1000" height="625" alt="{alt(p['aa'])}" loading="lazy" decoding="async">
     <i class="bp-scan" aria-hidden="true"></i>
     <p class="bp-dim" aria-hidden="true"><span data-bp-dim>{e(p['bl']).upper()} · {p['band'].upper()}</span></p>
+    <button class="bp-run btn btn-glass btn-sm" type="button">Run the survey</button>
   </figure>
   <div class="bp-band" aria-live="polite"><p class="bp-k num" data-bp-k>01</p><p class="bp-name" data-bp-name>{e(p['place'])}</p><p class="bp-fix" data-bp-fix>{e(p['what'])}, {e(p['when'])}. {e(p['bl'])} {p['band']}.</p></div>
   <ol class="bp-steps" role="radiogroup" aria-label="Choose a job">{steps}</ol>
@@ -502,20 +504,30 @@ def built1():
 </div>'''
 
 
+TEXAS = [('Doesn\'t warp', 'Sun and heat', 3), ('Doesn\'t rot', 'Moisture', 28), ('Doesn\'t burn', 'Noncombustible', 5),
+         ('Doesn\'t feed termites', 'Termites', 0), ('Lasts decades', '30-year warranty', 33)]
+
+
 def built2():
-    return f'''<div class="v built-2" data-tone="night">
-  <div class="b2x-grid">
-    <div class="b2x-side">
-      <h2 class="h2x" data-split>A window that answers</h2>
-      <p class="b2x-sub">NT Windows went into 238 of 376 priced window jobs. Move across the window: it tilts and lets go of its glass.</p>
-      <label class="b2x-ctl"><span>Tilt and open</span><input class="range" type="range" min="0" max="100" value="0" aria-valuetext="Closed" data-hw-range></label>
-      <button class="btn btn-line btn-sm" type="button" data-hw-play>Play the tour</button>
-    </div>
-    <figure class="b2x-fig" data-cur="drag" data-hairline>
-      <svg class="hw" viewBox="0 0 600 480" role="img" aria-label="A replacement window drawn in one line: frame, tilting sash and the dual-pane glass unit"></svg>
-      <p class="hw-read num" aria-live="polite" data-hw-read>Closed: 3-1/4 in multi-chambered vinyl frame, 3/4 in dual-pane glass</p>
-    </figure>
-  </div>
+    """S1322 sticky stack cards (CROWN) = builder-brief R45 (CSS sticky core, never a GSAP pin): the published
+    Built-for-Texas five, one card each with a real job photo, closed by the warranty pair"""
+    cards = ''
+    for k, (t, tag, i) in enumerate(TEXAS):
+        ph = PHOTOS[i]
+        cards += f'''<li class="ts-card">
+      <figure class="ts-fig"><img src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{alt(ph['alt'])}" loading="lazy" decoding="async"><figcaption>{e(ph['place'])}, {e(ph['when'])}</figcaption></figure>
+      <div class="ts-txt"><p class="ts-n num">0{k + 1}<span> of 05</span></p><h3 class="ts-h">{e(t)}</h3><p class="ts-tag">{e(tag)}</p></div>
+    </li>'''
+    cards += '''<li class="ts-card ts-end">
+      <div class="ts-txt"><p class="ts-n">The warranty pair</p>
+        <p class="ts-w"><b class="num">30</b><span>year non-prorated James Hardie siding warranty, when an Elite Preferred contractor installs</span></p>
+        <p class="ts-w"><b>Lifetime</b><span>Austin Pro workmanship warranty on the labour</span></p>
+        <p class="ts-fine">Whole walls or the whole house, never patches. 1 to 2 weeks on site, paint included.</p></div>
+    </li>'''
+    return f'''<div class="v built-2" data-tone="ground2">
+  <div class="ts-head"><h2 class="h2x" data-split>Built for Texas</h2>
+    <p>Every priced siding job is James Hardie fiber cement. What the board stands up to here, as the firm publishes it, on its own jobs.</p></div>
+  <ol class="ts">{cards}</ol>
 </div>'''
 
 
@@ -885,7 +897,7 @@ SECTIONS = [
     ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'At a glance', 'Statement']),
     ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
     ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
-    ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Window', 'To the inch']),
+    ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Built for Texas', 'To the inch']),
     ('colour', 'Colour', [colour1, colour2, colour3], ['Dock', 'Drag paint', 'Dial']),
     ('near', 'Near you', [near1, near2, near3], ['Survey', 'Towns', 'Radius']),
     ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'Names']),

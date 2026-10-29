@@ -982,6 +982,7 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 .w1-sub { color: var(--fg2); max-width: 46ch; }
 
 /* WORK 2: blueprint (S0468) */
+.bp-run { position: absolute; z-index: 4; right: 12px; bottom: 12px; }
 .bp-head { display: grid; gap: 10px; margin-bottom: clamp(20px, 3vw, 36px); }
 .bp-sub { color: var(--fg2); max-width: 46ch; }
 .bp-fig { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--sheet); }
@@ -1038,22 +1039,36 @@ html:not(.motion) .rv { scroll-snap-align: start; }
 @media (hover: hover) and (pointer: fine) { .lg-b:hover { background: var(--ground2); } .lg-b[aria-pressed="true"]:hover { background: var(--ink); } }
 @media (min-width: 900px) { .b1-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: 40px; align-items: center; } }
 
-/* BUILT 2: hairline window */
-.b2x-grid { display: grid; gap: 24px; }
-.b2x-side { display: grid; gap: 16px; align-content: start; }
-.b2x-sub { color: var(--fg2); max-width: 40ch; }
-.b2x-ctl { display: grid; gap: 8px; max-width: 320px; font-weight: 650; }
-.b2x-side .btn-line { justify-self: start; color: var(--on-night); }
-.b2x-fig { position: relative; display: grid; gap: 12px; touch-action: pan-y; }
-.hw { width: 100%; height: auto; overflow: visible; }
-.hw path { fill: var(--night); stroke: var(--on-night); stroke-width: 1.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.hw .hw-s { fill: #1d1d1c; }
-.hw .hw-l { fill: none; stroke: var(--on-night2); stroke-width: .9; }
-.hw .hw-sash { stroke-width: 1.6; }
-.hw .hw-g { fill: rgba(170, 196, 214, .14); stroke: #9fb6c8; stroke-width: .9; }
-.hw .hw-g2 { stroke: var(--red-on-night); }
-.hw-read { color: var(--on-night2); font-size: var(--t-sm); min-height: 2.6em; }
-@media (min-width: 900px) { .b2x-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 40px; align-items: center; } }
+/* BUILT 2: S1322 sticky stack cards (R45: CSS sticky, sticky top 12vh on desktop) */
+.ts-head { display: grid; gap: 16px; margin-bottom: clamp(28px, 4vw, 56px); }
+.ts-head p { max-width: 46ch; color: var(--fg2); }
+.ts { display: grid; gap: 16px; }
+.ts-card { position: sticky; top: calc(var(--hd) + 12px); display: grid; border-radius: 22px; overflow: hidden; background: var(--sheet); box-shadow: 0 0 0 1px var(--stone), 0 -10px 30px rgba(22, 22, 22, .06); will-change: transform; }
+.ts-fig { position: relative; }
+.ts-fig img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.ts-fig figcaption { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(16, 16, 16, .78); color: #fff; font-size: .8125rem; font-weight: 600; }
+.ts-txt { display: grid; gap: 10px; align-content: center; padding: 20px 20px 24px; }
+.ts-n { color: var(--red); font-size: var(--t-sm); font-weight: 700; }
+.ts-n span { color: var(--ink2); font-weight: 600; }
+.ts-h { margin: 0; font-size: clamp(2.25rem, 1.2rem + 4.4vw, 5.5rem); font-weight: 790; font-stretch: 76%; letter-spacing: -.03em; line-height: .92; }
+.ts-tag { justify-self: start; padding: 6px 12px; border-radius: 999px; background: var(--ground2); color: var(--ink); font-size: var(--t-sm); font-weight: 650; }
+.ts-end { position: relative; top: auto; background: var(--night); color: var(--on-night); box-shadow: none; }
+.ts-end .ts-txt { gap: 18px; padding: clamp(24px, 4vw, 56px); }
+.ts-end .ts-n { color: var(--red-on-night); }
+.ts-w { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 4px 16px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .16); }
+.ts-w b { color: var(--red-on-night); font-size: clamp(3rem, 1.6rem + 4.5vw, 6rem); font-weight: 790; font-stretch: 76%; letter-spacing: -.03em; line-height: .9; }
+.ts-w span { max-width: 30ch; color: var(--on-night2); }
+.ts-fine { color: var(--on-night2); font-size: var(--t-sm); }
+@media (min-width: 900px) {
+  .ts-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; }
+  .ts-head .h2x { grid-column: 1 / 8; }
+  .ts-head p { grid-column: 9 / 13; }
+  .ts { gap: 5vh; }
+  .ts-card { top: calc(var(--hd) + 12vh - 40px); grid-template-columns: 7fr 5fr; height: min(62vh, 560px); }
+  .ts-fig img { height: 100%; aspect-ratio: auto; }
+  .ts-txt { padding: clamp(28px, 3vw, 48px); }
+  .ts-end { height: auto; grid-template-columns: 1fr; }
+}
 
 /* BUILT 3: dimensioned sheet (S0361) + spec panel (S1361) */
 .b3x-head { display: grid; gap: 16px; margin-bottom: 24px; }
