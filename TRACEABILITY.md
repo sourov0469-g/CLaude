@@ -297,14 +297,14 @@ Sections are recorded in SECTIONS.md order.
 - **Mechanism:** a seamless loop of items at constant speed.
 - **Adaptations:** two rows of verbatim published excerpts hung as cedar shakes; pause button; no review counts anywhere.
 - **Verdict:** REBUILT. F fail: "30 review excerpts" aria-label = a review count other than 474 (§3).
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `reviews1-d/-m.png`. Both rows loop with aria-hidden clones; Pause holds them (also on hover, focus, off-screen); still and scrollable under reduced motion. `sect.js reviews` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow). Facts grep on the section: "474 Google reviews" is the only count; no "N of M"; captions read "Google, 2026".
 
 **R2 · One**
 - **Reference:** builder brief R29 testimonial carousel (cards in HTML, manual, pause) + ⟦S1329⟧ staggered word reveal.
 - **Mechanism:** one large quote at a time, manual.
 - **Adaptations:** a glass lower sash lifts over the old quote and drops from the new one; pane pips instead of a numeric counter.
 - **Verdict:** REBUILT. F fail: "1 of 8" / "Review 1 of 8" is a numeric count next to "review" (§3 / §12-1).
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `reviews2-d/-m.png`. Next → new author, pane 2 lit; ArrowLeft on the window → pane 1. Sash rise 0.14 s + drop 0.16 s. `sect.js reviews` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow). Facts grep on the section: "474 Google reviews" is the only count; no "N of M"; captions read "Google, 2026".
 
 **R3 · Names (rebuilt as "The crew")**
 - **Reference:** [BANK] 300 True Focus (React Bits: focus brackets move to the next word over 0.5 s; unfocused words 5 px blur; A2 + deep-reads-slice-5) + anatomy F13 (reviews that name the operative).
@@ -314,7 +314,7 @@ Sections are recorded in SECTIONS.md order.
   - Pointing or tabbing to a name moves the brackets (0.3 s) and shows the verbatim excerpts that name them.
   - No counts; no auto-cycle.
 - **Verdict:** REBUILT. F fail: per-name review counts, "All 30" and "4 of 9 reviews" are review counts; its reference (#321, filter pills WITH COUNTS) cannot stay without the counts, so a new reference is needed.
-- **Verification:** —
+- **Verification:** PASS (29 Oct). Screenshot `reviews3-d/-m.png`. Garrett → every visible excerpt names Garrett (fixed during build: each card now opens at its own person's sentence); 'Show the rest' reveals more and moves focus to the first new card; ArrowRight → Tracy. `sect.js reviews` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow). Facts grep on the section: "474 Google reviews" is the only count; no "N of M"; captions read "Google, 2026".
 
 ### Money
 

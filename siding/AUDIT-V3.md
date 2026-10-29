@@ -214,3 +214,10 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Evidence:** `sect.js colour` PASS ×9 with a real file upload; screenshots `colour1job`, `colour1mine`, `colour2`, `colour3`.
 
 **Near you — all three KEPT, re-verified 29 Oct 2026.** `sect.js near` PASS ×9: finder search with keyboard, row expand, map fly-in. Screenshots `near1–3`. Near 1's 1.8 s month build is a data animation (K10, flag F7).
+
+**Reviews — all three REBUILT, verified 29 Oct 2026.**
+- **Reviews 1 "Stream"** (Q161 marquee): two courses of drawn cedar shakes, each with its own ragged butt edge and grain, running opposite ways at about 40 px/s. Pauses on hover, focus, the button, off-screen and in a hidden tab. The region label no longer counts the excerpts.
+- **Reviews 2 "One"** (R29 + S1329): one quote inside a double-hung window. The lower sash rises over the old quote and drops away from the new one in 0.3 s total. Position is shown as lit panes, never "1 of 8".
+- **Reviews 3 "The crew"** ([BANK] 300 True Focus + F13): red focus brackets travel 0.3 s to the pointed or chosen name and the other names soften. One verbatim card per person per review, opening at that person's sentence. No counts, no auto-cycle.
+- **Page-wide:** every caption now reads "Google, 2026", so no number sits beside the word "review".
+- **Evidence:** `sect.js reviews` PASS ×9; console 0; facts grep on the section clean.

@@ -693,60 +693,82 @@ html.motion .h2-s2 { animation: h2s2 .24s cubic-bezier(0, 0, .2, 1) both; }
 }
 
 /* ---------- REVIEWS ---------- */
-.rating { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+.rating { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin: 0; }
 .rating > b { font-size: clamp(3rem, 1.5rem + 4vw, 5rem); font-weight: 790; font-stretch: 76%; line-height: .85; }
 .rating span:last-child { font-weight: 620; color: var(--fg2); }
 .stars { display: inline-flex; gap: 2px; color: var(--fg); }
 .stars svg { width: 20px; height: 20px; fill: currentColor; }
-.r1-head { display: grid; gap: 16px; justify-items: start; margin-bottom: clamp(28px, 4vw, 48px); }
-.mqs { display: grid; gap: 16px; margin: 0 calc(var(--m) * -1); overflow: hidden; }
-.mq { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
-.mq-track { display: flex; gap: 16px; width: max-content; padding: 0 var(--m); }
-.motion .mq-track.is-loop { animation: mq var(--dur, 90s) linear infinite; }
-.motion .mq-b .mq-track.is-loop { animation-direction: reverse; }
-.mqs.is-paused .mq-track, .mqs:hover .mq-track, .mqs:focus-within .mq-track, .is-offscreen .mq-track { animation-play-state: paused; }
-@keyframes mq { to { transform: translateX(-50%); } }
-.rv { flex: none; width: min(340px, 78vw); display: grid; gap: 14px; align-content: space-between; padding: 22px 22px 20px; border-radius: 20px; background: var(--sheet); }
-.rv blockquote { margin: 0; }
-.rv p { font-size: 1.0625rem; line-height: 1.42; }
-.rv figcaption { display: grid; font-weight: 650; font-size: .9375rem; }
-.rv figcaption span { font-weight: 450; color: var(--fg2); font-size: var(--t-sm); }
-.rv mark, .one mark { background: none; color: inherit; font-weight: 750; box-shadow: inset 0 -.32em 0 var(--hl, #E8D9C9); }
-html:not(.motion) .mqs { overflow: visible; }
-html:not(.motion) .mq { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x mandatory; }
-html:not(.motion) .rv { scroll-snap-align: start; }
-@media (min-width: 900px) { .r1-head { grid-template-columns: 1fr auto auto; align-items: end; gap: 32px; } .r1-head .h2x { max-width: 12ch; } }
+.reviews-1 mark, .reviews-2 mark, .reviews-3 mark { background: none; color: inherit; font-weight: 750; box-shadow: inset 0 -.32em 0 var(--hl, #E8D9A8); }
 
+/* REVIEWS 1: Q161 marquee of cedar shakes (two rows, opposite ways, one slow speed) */
+.sk-head { display: grid; gap: 16px; justify-items: start; margin-bottom: clamp(28px, 4vw, 48px); }
+.sk-rows { display: grid; gap: 18px; margin: 0 calc(var(--m) * -1); overflow: hidden; }
+.sk-row { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.sk-track { display: flex; align-items: flex-start; gap: 14px; width: max-content; padding: 0 var(--m); }
+.sk-b .sk-track { padding-left: calc(var(--m) + 150px); }   /* the second course breaks joints with the first, as shakes are laid */
+.motion .sk-track.is-loop { animation: skRun var(--dur, 90s) linear infinite; }
+.motion .sk-b .sk-track.is-loop { animation-direction: reverse; }
+.sk-rows.is-held .sk-track, .sk-rows:hover .sk-track, .sk-rows:focus-within .sk-track, .sk-rows.is-off .sk-track { animation-play-state: paused; }
+@keyframes skRun { to { transform: translateX(-50%); } }
+.sk { position: relative; isolation: isolate; flex: none; display: grid; gap: 14px; align-content: space-between; width: min(var(--w, 310px), 78vw); min-height: 210px; margin: 0; padding: 40px 24px 34px; }
+.sk-bg { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 10px rgba(60, 40, 20, .14)); }
+.sk-body { fill: #E8D7BC; stroke: #8A6A3E; stroke-opacity: .35; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sk:nth-child(3n+2) .sk-body { fill: #E2CDAD; }
+.sk:nth-child(3n) .sk-body { fill: #EDDFC8; }
+.sk-grain path { fill: none; stroke: #8A6A3E; stroke-opacity: .2; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sk-nail { fill: #8F8A80; stroke: #47443F; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sk blockquote { margin: 0; }
+.sk p { margin: 0; font-size: 1.0625rem; line-height: 1.42; color: #2a2116; }
+.sk figcaption { display: grid; font-weight: 650; font-size: .9375rem; color: #2a2116; }
+.sk figcaption span { font-weight: 450; color: #6b5a44; font-size: var(--t-sm); }
+html:not(.motion) .sk-rows { overflow: visible; }
+html:not(.motion) .sk-row { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+html:not(.motion) .sk { scroll-snap-align: start; }
+@media (min-width: 900px) { .sk-head { grid-template-columns: 1fr auto auto; align-items: end; gap: 32px; } }
+
+/* REVIEWS 2: one quote in a double-hung window; the lower sash rises over it on change */
 .reviews-2 { display: grid; gap: clamp(24px, 4vw, 48px); justify-items: start; }
-.one { display: grid; gap: 24px; touch-action: pan-y; }
-.one-q { margin: 0; max-width: 24ch; font-size: clamp(1.75rem, 1rem + 2.9vw, 3.5rem); font-weight: 620; line-height: 1.12; letter-spacing: -.02em; min-height: 6.8em; text-wrap: pretty; }
-.one-n { display: grid; font-weight: 700; font-size: var(--t-lead); }
-.one-n span { font-weight: 450; font-size: var(--t-sm); color: var(--fg2); }
-.one-ctl { display: flex; align-items: center; gap: 16px; }
-.rb { width: 52px; height: 52px; border: 2px solid var(--ink); border-radius: 50%; background: none; display: grid; place-items: center; transition: transform var(--t-press) var(--ease), background-color var(--t-hover) ease; }
+.dh { position: relative; isolation: isolate; display: grid; margin: 0; padding: clamp(26px, 4vw, 52px); padding-bottom: clamp(34px, 5vw, 64px); overflow: hidden; touch-action: pan-y; outline-offset: 6px; }
+.dh-frame { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.dh-case { fill: none; stroke: var(--ink); stroke-width: 12; }
+.dh-meet { stroke: var(--ink); stroke-opacity: .07; stroke-width: 2; }
+.dh-sill { fill: var(--ink); }
+.dh-sash { position: absolute; z-index: 2; left: 6px; right: 6px; bottom: 6px; width: calc(100% - 12px); height: 50%; transform: translateY(100%); pointer-events: none; overflow: visible; }
+.dh-glass { fill: #CFDCE0; opacity: .96; }
+.dh-rail { fill: var(--ink); }
+.dh-lift { fill: #B9B6AE; }
+.dh-q { position: relative; z-index: 1; margin: 0; }
+.dh-q p { margin: 0; max-width: 24ch; font-size: clamp(1.625rem, 1rem + 2.6vw, 3.25rem); font-weight: 620; line-height: 1.14; letter-spacing: -.012em; }
+.dh-n { display: grid; margin-top: 22px; font-weight: 700; font-size: var(--t-lead); }
+.dh-n span { font-weight: 450; font-size: var(--t-sm); color: var(--fg2); }
+.dh-ctl { display: flex; align-items: center; gap: 16px; }
+.dh-pips { width: 76px; height: 40px; }
+.pp { fill: none; stroke: var(--ink); stroke-width: 1; }
+.pp.on { fill: var(--ink); }
+.rb { width: 52px; height: 52px; border: 2px solid var(--ink); border-radius: 50%; background: none; display: grid; place-items: center; transition: background-color var(--t-ui) var(--ease), color var(--t-ui) var(--ease), transform var(--t-press) var(--ease); }
 .rb svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .rb:active { transform: scale(.94); }
 @media (hover: hover) and (pointer: fine) { .rb:hover { background: var(--ink); color: var(--ground); } }
-.one-k { font-weight: 600; color: var(--fg2); }
-.one-k span { color: var(--fg); }
-@media (min-width: 900px) { .reviews-2 { grid-template-columns: repeat(12, minmax(0, 1fr)); } .reviews-2 .h2s { grid-column: 1 / 4; } .one { grid-column: 4 / 13; } .one-ctl { grid-column: 4 / 12; } }
+@media (min-width: 900px) { .reviews-2 { grid-template-columns: repeat(12, minmax(0, 1fr)); } .reviews-2 .h2s { grid-column: 1 / 4; } .dh { grid-column: 4 / 13; } .dh-ctl { grid-column: 4 / 12; } }
 
-.r3-grid { display: grid; gap: 32px; }
-.r3-side { display: grid; gap: 16px; align-content: start; }
-.r3-sub { color: var(--fg2); max-width: 40ch; }
-.names { display: flex; flex-wrap: wrap; gap: 8px; }
-.nm { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 2px solid var(--ink); border-radius: 999px; background: none; font-weight: 650; transition: background-color var(--t-ui) var(--ease), color var(--t-ui) var(--ease), transform var(--t-press) var(--ease); }
-.nm span { font-weight: 560; color: var(--fg2); }
-.nm[aria-checked="true"] { background: var(--ink); color: var(--ground); }
-.nm[aria-checked="true"] span { color: var(--stone); }
-.nm:active { transform: scale(.96); }
-.nwall { display: grid; gap: 16px; align-items: start; }
-.nw-col { display: grid; gap: 16px; justify-items: start; }
-.nw-say { color: var(--fg2); font-size: var(--t-sm); }
-.nw .rv { width: auto; }
-.nw.is-out { display: none; }
-@media (min-width: 700px) { .nwall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .r3-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; } .r3-side { grid-column: 1 / 5; position: sticky; top: calc(var(--hd) + 32px); } .nw-col { grid-column: 5 / 13; } }
+/* REVIEWS 3: True Focus over the crew's names; the excerpts that name them below */
+.cr-head { display: grid; gap: 12px; margin-bottom: clamp(24px, 3vw, 40px); }
+.cr-sub { margin: 0; color: var(--fg2); max-width: 44ch; }
+.cr-line { position: relative; display: flex; flex-wrap: wrap; gap: 4px 22px; margin-bottom: clamp(28px, 4vw, 48px); }
+.cr-n { padding: 6px 2px; border: 0; background: none; color: var(--ink); font: inherit; font-size: clamp(1.75rem, 1rem + 3.2vw, 4rem); font-weight: 780; font-stretch: 80%; letter-spacing: -.02em; line-height: 1; transition: filter .3s ease, opacity .3s ease; }
+.cr-n.is-soft { filter: blur(3px); opacity: .45; }
+.cr-n:focus-visible { outline: none; filter: none; opacity: 1; }
+html:not(.motion) .cr-n.is-soft { filter: none; }
+.cr-br { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: visible; pointer-events: none; }
+.cr-br path { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: square; }
+.cr-cards { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.cr-c { display: grid; gap: 12px; align-content: space-between; padding: 22px 22px 18px; border-left: 3px solid var(--red); background: var(--sheet); }
+.cr-c blockquote { margin: 0; }
+.cr-c blockquote p { margin: 0; line-height: 1.45; }
+.cr-by { display: grid; margin: 0; font-weight: 650; font-size: .9375rem; }
+.cr-by span { font-weight: 450; color: var(--fg2); font-size: var(--t-sm); }
+.cr-more { margin-top: 16px; }
+@media (min-width: 700px) { .cr-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---------- MONEY ---------- */
 .lab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 650; }
@@ -1524,30 +1546,6 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .n1-xh .xh-c { fill: none; stroke: #F3F2EE; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
 .n1-xh .xh-r { stroke: var(--red-on-night); stroke-width: 1.6; stroke-dasharray: none; }
 .n1-xh text { font: 700 11px var(--f); fill: #F3F2EE; paint-order: stroke; stroke: #141414; stroke-width: 3px; }
-
-/* ---------- v4 Reviews (PLAN §3 Reviews) ---------- */
-.rv-sk { position: relative; isolation: isolate; background: none; border-radius: 4px; padding-bottom: 28px; }
-.rv-shake { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 10px rgba(22, 22, 22, .1)); }
-.sk-f { fill: #EADBC3; }
-.sk-g { fill: none; stroke: #8A6A3E; stroke-opacity: .2; stroke-width: 1; vector-effect: non-scaling-stroke; }
-.sk-n { fill: #8F8A80; stroke: #47443F; stroke-width: 1; vector-effect: non-scaling-stroke; }
-.one { position: relative; padding: clamp(22px, 3vw, 40px); }
-.one-sash { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.os-cas { fill: none; stroke: var(--ink); stroke-width: 10; stroke-opacity: .9; }
-.one-sash { overflow: hidden; }
-.os-sash { transform: translateY(100%); }
-.os-glass { fill: #CFDCE0; opacity: .94; }
-.os-rail { fill: var(--ink); }
-.os-lift { fill: #B9B6AE; }
-.os-sill { fill: var(--ink); width: calc(100% + 28px); }
-.one { isolation: isolate; }
-.nm-chip { width: 14px; height: 22px; flex: none; overflow: visible; }
-.nm-chip rect:first-child { stroke: rgba(0, 0, 0, .35); stroke-width: 1; }
-.nm-chl { fill: #fff; opacity: .9; }
-.nm-chr { fill: #8F8A80; }
-.nw { position: relative; }
-.nw-nails { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.nw-nails circle { fill: #B9B6AE; stroke: #47443F; stroke-width: 1; }
 
 /* ---------- v4 Money (PLAN §3 Money) ---------- */
 .m1-lev { display: block; width: 100%; height: 26px; margin-top: 2px; overflow: visible; }

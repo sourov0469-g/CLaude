@@ -1071,77 +1071,82 @@
   };
 
   /* REVIEWS */
-  /* REVIEWS 1: Q161 seamless marquee as R16 (duplicated track, -50 % loop, CSS only), slow and constant like
-     Stronghold's 60 s linear band; edges fade 15/85 (S1348); paused on hover, focus, off-screen and by the button
-     (WCAG 2.2.2); still under reduced motion. */
+  /* REVIEWS 1: [BANK] Q161 seamless marquee: each row's shakes are cloned once (aria-hidden, unfocusable) and the
+     track slides -50 % at one constant speed (ease none, about 40 px/s) so the seam never shows; the second row runs
+     the other way. Pauses on hover, on focus inside, with the Pause button, off screen and in a hidden tab. Under
+     reduced motion nothing moves: each row scrolls sideways inside itself instead. */
   V.reviews1 = (r, b) => {
-    const tracks = $$('.mq-track', r), mqs = $('.mqs', r), btn = $('.mq-pause', r);
+    const rows = $('.sk-rows', r), btn = $('.sk-pause', r), tracks = $$('.sk-track', r);
     if (!motionOK()) { btn.hidden = true; return; }
-    tracks.forEach((t, k) => {
-      [...t.children].forEach(c => { const cl = c.cloneNode(true); cl.setAttribute('aria-hidden', 'true'); cl.setAttribute('inert', ''); t.appendChild(cl); });
-      t.style.setProperty('--dur', (k ? 95 : 80) + 's'); t.classList.add('is-loop');
+    tracks.forEach(t => {
+      const copy = t.cloneNode(true);
+      $$('*', copy).forEach(n => n.removeAttribute('id'));
+      [...copy.children].forEach(c => { c.setAttribute('aria-hidden', 'true'); t.appendChild(c); });
+      t.style.setProperty('--dur', `${Math.round(t.scrollWidth / 2 / 40)}s`);
+      t.classList.add('is-loop');
     });
-    b.on(btn, 'click', () => { const on = !mqs.classList.contains('is-paused'); mqs.classList.toggle('is-paused', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Play' : 'Pause'; });
-    b.io(r, ([en]) => r.classList.toggle('is-offscreen', !en.isIntersecting), { threshold: 0.01 });
+    let held = false;
+    const sync = () => rows.classList.toggle('is-held', held);
+    b.on(btn, 'click', () => { held = !held; btn.setAttribute('aria-pressed', held); btn.textContent = held ? 'Play' : 'Pause'; sync(); });
+    b.io(rows, ([en]) => rows.classList.toggle('is-off', !en.isIntersecting));
   };
 
-  /* REVIEWS 2: R29 testimonial carousel, manual: one big quote, arrows or a horizontal swipe (pointer events, 40 px,
-     vertical scroll left alone); the new quote's words arrive 0.012 s apart (S1329); the plain text goes to a polite
-     live region. */
+  /* REVIEWS 2: builder brief R29 (one quote at a time, manual, cards in HTML) + ⟦S1329⟧ staggered words. The quote
+     sits in a double-hung window: on change the lower sash rises over the old quote (0.14 s), the text swaps, and it
+     drops away from the new one (0.16 s) while the words step in 0.03 s apart. Arrows, the buttons or a sideways
+     swipe; position is the lit pane, never a number. */
   V.reviews2 = (r, b) => {
-    const Q = JSON.parse($('.one-data', r).textContent), q = $('.one-q', r), name = $('.one-n', r), k = $('.one-k span', r), say = $('[data-one-say]', r);
-    let i = 0;
-    const sash = $('.os-sash', r);
+    const Q = JSON.parse($('.dh-data', r).textContent), fig = $('.dh', r), q = $('.dh-q', r), sash = $('.dh-sash', r), pips = $$('.pp', r);
+    let i = 0, busy = false;
+    const write = () => { q.innerHTML = `<p>“${Q[i].q}”</p><footer class="dh-n">${esc(Q[i].n)}<span>Google, 2026</span></footer>`; pips.forEach((p, k) => p.classList.toggle('on', k === i)); };
     const go = dir => {
-      // v4: the lower sash rises over the old quote and drops away from the new one (0.4 s up, 0.4 s down)
-      if (motionOK() && sash) G.timeline({ overwrite: true }).fromTo(sash, { yPercent: 100 }, { yPercent: 0, duration: 0.2, ease: 'power2.in' }).to(sash, { yPercent: 100, duration: 0.4, ease: 'power3.out' }, '+=0.05');
+      if (busy) return;
       i = (i + dir + Q.length) % Q.length;
-      q.innerHTML = `<p>“${markNames(Q[i].q)}”</p>`;
-      name.innerHTML = `${esc(Q[i].n)}<span>Google review, 2026</span>`;
-      k.textContent = i + 1;
-      say.textContent = `Review ${i + 1} of ${Q.length}, ${Q[i].n}: ${Q[i].q}`;
-      if (motionOK()) {
-        const p = $('p', q);
-        p.setAttribute('aria-hidden', 'true');
-        G.from(splitWords(p), { xPercent: dir * 40, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.012 });
-        G.fromTo(name, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: ease.out, delay: 0.2, overwrite: true });
-      }
+      if (!motionOK()) { write(); return; }
+      busy = true;
+      G.timeline({ onComplete: () => { busy = false; } })
+        .fromTo(sash, { yPercent: 100 }, { yPercent: 0, duration: 0.14, ease: 'power2.in' })
+        .add(() => { write(); G.from(splitWords($('p', q)), { y: 8, autoAlpha: 0, duration: 0.2, ease: 'power2.out', stagger: 0.03 }); })
+        .to(sash, { yPercent: 100, duration: 0.16, ease: 'power2.out' });
     };
-    $$('.rb', r).forEach(btn => b.on(btn, 'click', () => go(+btn.dataset.dir)));
-    const one = $('.one', r);
-    let sx = 0, sy = 0, on = false;
-    b.on(one, 'pointerdown', e => { if (e.target.closest('button, a')) return; on = true; sx = e.clientX; sy = e.clientY; });
-    b.on(one, 'pointerup', e => { if (!on) return; on = false; const dx = e.clientX - sx, dy = e.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(dx < 0 ? 1 : -1); });
-    b.on(one, 'pointercancel', () => { on = false; });
+    $$('.rb', r).forEach(x => b.on(x, 'click', () => go(+x.dataset.dir)));
+    b.on(fig, 'keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
+    let sx = null;
+    b.on(fig, 'pointerdown', e => { sx = e.clientX; });
+    b.on(fig, 'pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 50) go(e.clientX < sx ? 1 : -1); sx = null; });
   };
 
-  /* REVIEWS 3: four cards at a time so the wall never turns into a document; "Show more" adds four */
+  /* REVIEWS 3: [BANK] 300 True Focus: four corner brackets travel to the focused word (0.3 s here, F17) and the other
+     words soften; + anatomy F13. The words are the crew as homeowners name them. Pointing previews a name, a click or
+     the arrow keys commit it, and the excerpts that name that person come up word for word, the name marked. No
+     counts and no auto-cycle. */
   V.reviews3 = (r, b) => {
-    const cards = $$('.nw', r), more = $('.nw-more', r), say = $('.nw-say', r), STEP = 4;
-    let pool = cards, lim = STEP, who = '';
-    const lay = fresh => {
-      cards.forEach(c => c.classList.toggle('is-out', pool.indexOf(c) < 0 || pool.indexOf(c) >= lim));
-      const shown = Math.min(lim, pool.length), left = pool.length - shown;
-      more.hidden = left <= 0;
-      more.textContent = `Show ${Math.min(STEP, left)} more`;
-      say.textContent = `${shown} of ${pool.length} reviews${who ? ' naming ' + who : ''}`;
-      if (fresh && motionOK()) {
-        G.fromTo(fresh, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: ease.out, stagger: 0.05, overwrite: true });
-        // v4: each card that lands is nailed at its corners
-        fresh.forEach((c, n) => G.fromTo($$('.nw-nails circle', c), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.25, ease: 'back.out(1.7)', stagger: 0.04, delay: 0.25 + n * 0.05 }));
-      }
+    const line = $('.cr-line', r), names = $$('.cr-n', r), br = $('.cr-br', r), cards = $$('.cr-c', r), more = $('.cr-more', r);
+    const FIRST = 4;
+    let committed = names[0], open = false;
+    const frame = (n, anim) => {
+      const L = line.getBoundingClientRect(), R = n.getBoundingClientRect(), pad = 8;
+      const box = { x: R.left - L.left - pad, y: R.top - L.top - pad, width: R.width + pad * 2, height: R.height + pad * 2 };
+      if (anim && motionOK()) G.to(br, Object.assign({ duration: 0.3, ease: 'power3.out', overwrite: true }, box)); else G.set(br, box);
+      names.forEach(x => x.classList.toggle('is-soft', x !== n));
     };
-    radios($('.names', r), b, it => {
-      who = it.dataset.name;
-      pool = cards.filter(c => !who || c.dataset.names.split('|').includes(who));
-      lim = STEP; lay(pool.slice(0, lim));
+    const list = () => {
+      const who = committed.dataset.name, hit = cards.filter(c => c.dataset.name === who);
+      cards.forEach(c => { c.hidden = !hit.includes(c) || (!open && hit.indexOf(c) >= FIRST); });
+      more.hidden = open || hit.length <= FIRST;
+      if (motionOK()) G.fromTo(hit.filter(c => !c.hidden), { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: 'power2.out', stagger: 0.04, overwrite: true });   // opacity, not visibility: a card can take focus mid-fade
+    };
+    radios(line, b, it => { committed = it; open = false; frame(it, true); list(); }, '.cr-n');
+    if (mqFine.matches) {
+      names.forEach(n => b.on(n, 'pointerenter', () => frame(n, true)));
+      b.on(line, 'pointerleave', () => frame(committed, true));
+    }
+    b.on(more, 'click', () => {   // the button leaves with its job done, so focus moves to the first card it revealed
+      const was = cards.filter(c => !c.hidden).length; open = true; list();
+      const next = cards.filter(c => !c.hidden)[was]; if (next) next.focus({ preventScroll: false });
     });
-    b.on(more, 'click', () => {
-      const from = lim; lim += STEP; lay(pool.slice(from, lim));
-      const f = pool[from] && $('blockquote', pool[from]);
-      if (f) { f.tabIndex = -1; f.focus({ preventScroll: true }); }
-    });
-    lay(null);
+    b.ro(line, () => frame(committed, false));
+    frame(committed, false); list();
   };
 
   /* MONEY */

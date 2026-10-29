@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 2, rebuilds (Hero → Near you done; Reviews, Money, Book left)
+- **Phase:** 2, rebuilds (Hero → Reviews done; Money, Book left)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -121,3 +121,4 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
   - the Colour field's floating chips land on headings and intro text;
   - kit markers (small red notches) rest visibly on controls even when idle.
 - Near verified (KEPT ×3). Phase 3 note: the Near field roof plans sit behind data rows and maps; thin them out and keep text and maps clear.
+- Reviews rebuilt ×3. Phase 3 note: the Reviews field shutter shows a small dark tab beside the sticky switcher.
