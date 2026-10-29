@@ -1,0 +1,114 @@
+<section id="consult" class="sec consult g-field" data-section="consult" aria-labelledby="consult-h1">
+
+  <!-- v1 · The form [Digital Butlers quote-form blueprint (proof band, one-tap radios, time promise) + Codrops circular progress button (348) + text input effects (310)] -->
+  <div class="ver consult1" data-v="1">
+    <div class="wrap consult1__grid">
+      <div class="consult1__side">
+        <p class="t-label consult__label">Book a consultation</p>
+        <h2 class="t-head" id="consult-h1">Let&rsquo;s talk about what you want to change.</h2>
+        <p class="consult__lead">Book a consultation and we will walk the property, talk through scope honestly, and tell you what it really takes. A real consultation, not a sales visit.</p>
+        <a class="consult1__tel nums" href="tel:+17542360675" data-cursor="link">(754)&nbsp;236&#8209;0675</a>
+        <dl class="consult__facts">
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm<br>Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310<br>Miami, FL 33130</dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-cursor="link">Sales@elbazconstruction.com</a></dd></div>
+        </dl>
+      </div>
+      <form class="consult1__form c-form" novalidate data-keys>
+        <p class="consult1__proof"><span><b class="nums">4.8</b> from 343 Google reviews</span><span>Licence <b class="nums">CBC1265280</b></span></p>
+        <div class="c1__f"><input id="c1-name" name="name" class="c1__in" type="text" autocomplete="name" required><label for="c1-name" class="c1__lab"><span>Full name</span></label><p class="c__err" id="c1-name-err" hidden></p></div>
+        <div class="consult1__pair"><div class="c1__f"><input id="c1-phone" name="phone" class="c1__in" type="tel" autocomplete="tel" required><label for="c1-phone" class="c1__lab"><span>Phone</span></label><p class="c__err" id="c1-phone-err" hidden></p></div><div class="c1__f"><input id="c1-email" name="email" class="c1__in" type="email" autocomplete="email" required><label for="c1-email" class="c1__lab"><span>Email</span></label><p class="c__err" id="c1-email-err" hidden></p></div></div>
+        <div class="c1__f"><input id="c1-address" name="address" class="c1__in" type="text" autocomplete="street-address" required><label for="c1-address" class="c1__lab"><span>Address of the property</span></label><p class="c__err" id="c1-address-err" hidden></p></div>
+        <div class="c1__f"><textarea id="c1-project" name="project" class="c1__in" rows="3" required></textarea><label for="c1-project" class="c1__lab"><span>What do you want to change?</span></label><p class="c__err" id="c1-project-err" hidden></p></div>
+        <fieldset class="c__radios"><legend>Preferred contact</legend>
+          <label><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+          <label><input type="radio" name="contact" value="Email"><span>Email</span></label>
+          <label><input type="radio" name="contact" value="Text"><span>Text</span></label>
+        </fieldset>
+        <label class="c__consent"><input type="checkbox" name="consent" required aria-describedby="c1-consent-err"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <p class="c__err" id="c1-consent-err" hidden></p>
+        <p class="c__note t-small">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <div class="consult1__send">
+          <button type="submit" class="pbtn" data-magnet="strong" data-cursor="magnet-strong"><span class="pbtn__label btn__label">Send my request</span>
+            <svg class="pbtn__ring" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="32.5"/></svg>
+            <svg class="pbtn__tick" viewBox="0 0 70 70" aria-hidden="true"><path d="M23 36l8 8 16-17"/></svg>
+          </button>
+          <p class="c__promise t-small">We usually come back the same or next working day.</p>
+        </div>
+        <p class="c__done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- v2 · Four short steps [iper: sticky quote button opening a stepped overlay, 01/06 counter, contact-only step 1, the time promise on the form] -->
+  <div class="ver consult2" data-v="2" hidden>
+    <div class="wrap consult2__in">
+      <p class="t-label consult__label">Book a consultation</p>
+      <h2 class="consult2__h" id="consult-h2">Let&rsquo;s talk about what you want to change.</h2>
+      <p class="consult__lead">A real consultation, not a sales visit. We walk the property, talk through scope honestly, and tell you what it really takes.</p>
+      <div class="consult2__acts">
+        <button type="button" class="btn consult2__open" aria-haspopup="dialog" data-magnet="strong" data-cursor="magnet-strong"><span class="btn__label">Book a consultation</span></button>
+        <a class="consult2__tel nums" href="tel:+17542360675" data-cursor="link">or call (754)&nbsp;236&#8209;0675</a>
+      </div>
+      <p class="consult2__meta t-small">Sun&ndash;Fri 7am&ndash;7pm, Saturday closed &middot; 19 W Flagler St #310, Miami &middot; Sales@elbazconstruction.com</p>
+    </div>
+    <div class="consult2__overlay" role="dialog" aria-modal="true" aria-labelledby="c2-title" hidden>
+      <form class="consult2__form c-form" novalidate data-keys>
+        <div class="consult2__top"><p class="consult2__count nums"><span class="consult2__cur">01</span>/04</p><p id="c2-title" class="consult2__title">Book a consultation</p><button type="button" class="consult2__close" data-cursor="link">Close</button></div>
+        <div class="consult2__steps">
+          <fieldset class="consult2__step" data-step="1"><legend>Who should we call?</legend>
+            <p class="c__promise">Four short steps. We usually come back the same or next working day.</p>
+            <div class="c2__f"><label for="c2-name">Full name</label><input id="c2-name" name="name" autocomplete="name" required><p class="c__err" id="c2-name-err" hidden></p></div>
+            <div class="c2__f"><label for="c2-phone">Phone</label><input id="c2-phone" name="phone" type="tel" autocomplete="tel" required><p class="c__err" id="c2-phone-err" hidden></p></div>
+            <div class="c2__f"><label for="c2-email">Email</label><input id="c2-email" name="email" type="email" autocomplete="email" required><p class="c__err" id="c2-email-err" hidden></p></div>
+          </fieldset>
+          <fieldset class="consult2__step" data-step="2" hidden><legend>Where is the property?</legend>
+            <div class="c2__f"><label for="c2-address">Address</label><input id="c2-address" name="address" autocomplete="street-address" required><p class="c__err" id="c2-address-err" hidden></p></div>
+          </fieldset>
+          <fieldset class="consult2__step" data-step="3" hidden><legend>What do you want to change?</legend>
+            <div class="c2__f"><label for="c2-project">Project description</label><textarea id="c2-project" name="project" rows="5" required></textarea><p class="c__err" id="c2-project-err" hidden></p></div>
+          </fieldset>
+          <fieldset class="consult2__step" data-step="4" hidden><legend>How should we reach you?</legend>
+            <div class="c__radios c__radios--big" role="radiogroup" aria-label="Preferred contact">
+              <label><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+              <label><input type="radio" name="contact" value="Email"><span>Email</span></label>
+              <label><input type="radio" name="contact" value="Text"><span>Text</span></label>
+            </div>
+            <label class="c__consent"><input type="checkbox" name="consent" required aria-describedby="c2-consent-err"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+            <p class="c__err" id="c2-consent-err" hidden></p>
+            <p class="c__note t-small">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          </fieldset>
+          <p class="c__done" role="status" hidden></p>
+        </div>
+        <div class="consult2__nav"><button type="button" class="consult2__back" data-cursor="link">Back</button><button type="button" class="btn consult2__next">Next</button><button type="submit" class="btn consult2__send" hidden>Send my request</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- v3 · A sentence [Tequila conversational form: the form reads as a sentence, with the response promise] -->
+  <div class="ver consult3" data-v="3" hidden>
+    <div class="wrap">
+      <p class="t-label consult__label">Book a consultation</p>
+      <h2 class="t-head" id="consult-h3">Let&rsquo;s talk about what you want to change.</h2>
+      <form class="consult3__form c-form" novalidate data-keys>
+        <p class="consult3__sentence">
+          Hi Elbaz, I&rsquo;m <span class="c3__w"><label class="sr-only" for="c3-name">Full name</label><input id="c3-name" name="name" autocomplete="name" placeholder="your full name" required></span>.
+          I&rsquo;d like to talk about <span class="c3__w"><label class="sr-only" for="c3-project">Project description</label><input id="c3-project" name="project" placeholder="what you want to change" required></span>
+          at <span class="c3__w"><label class="sr-only" for="c3-address">Address</label><input id="c3-address" name="address" autocomplete="street-address" placeholder="the property address" required></span>.
+          You can reach me on <span class="c3__w"><label class="sr-only" for="c3-phone">Phone</label><input id="c3-phone" name="phone" type="tel" autocomplete="tel" placeholder="phone" required></span>
+          or <span class="c3__w"><label class="sr-only" for="c3-email">Email</label><input id="c3-email" name="email" type="email" autocomplete="email" placeholder="email" required></span>,
+          and I prefer a <span class="c3__w c3__w--sel"><label class="sr-only" for="c3-contact">Preferred contact</label><select id="c3-contact" name="contact"><option>call</option><option>email</option><option>text</option></select></span>.
+        </p>
+        <ul class="consult3__errs" aria-live="polite"></ul>
+        <label class="c__consent"><input type="checkbox" name="consent" required aria-describedby="c3-consent-err"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <p class="c__err" id="c3-consent-err" hidden></p>
+        <div class="consult3__send">
+          <button type="submit" class="btn consult3__btn" data-magnet="strong" data-cursor="magnet-strong"><span class="btn__label">Send it</span></button>
+          <p class="c__promise">We usually come back the same or next working day. If it is urgent, call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
+        </div>
+        <p class="c__note t-small">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <p class="c__done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
