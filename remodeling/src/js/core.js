@@ -23,6 +23,25 @@
   EZ.lerp = function (a, b, t) { return a + (b - a) * t; };
   // frame-rate independent smoothing [threejs-pack §9]
   EZ.damp = function (a, b, lambda, dt) { return EZ.lerp(a, b, 1 - Math.exp(-lambda * dt)); };
+  // cubic-bezier(x1,y1,x2,y2) as a GSAP ease (no CustomEase in the bundle): Newton + bisection on x(t)
+  EZ.bezier = function (x1, y1, x2, y2) {
+    function a(p1, p2) { return 1 - 3 * p2 + 3 * p1; }
+    function b(p1, p2) { return 3 * p2 - 6 * p1; }
+    function c(p1) { return 3 * p1; }
+    function at(t, p1, p2) { return ((a(p1, p2) * t + b(p1, p2)) * t + c(p1)) * t; }
+    function slope(t, p1, p2) { return 3 * a(p1, p2) * t * t + 2 * b(p1, p2) * t + c(p1); }
+    return function (x) {
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      var t = x;
+      for (var i = 0; i < 6; i++) { var sl = slope(t, x1, x2); if (Math.abs(sl) < 1e-6) break; t -= (at(t, x1, x2) - x) / sl; }
+      if (t < 0 || t > 1 || Math.abs(at(t, x1, x2) - x) > 1e-4) {
+        var lo = 0, hi = 1; t = x;
+        for (var j = 0; j < 30; j++) { var v = at(t, x1, x2); if (Math.abs(v - x) < 1e-5) break; if (v < x) lo = t; else hi = t; t = (lo + hi) / 2; }
+      }
+      return at(t, y1, y2);
+    };
+  };
   EZ.map = function (v, a, b, c, d) { return c + (d - c) * EZ.clamp((v - a) / (b - a), 0, 1); };
 
   /* ---------- image store: one Blob URL per photo, reused by every version [PLAN §4.7] ---------- */

@@ -554,14 +554,21 @@
       svg.setAttribute('viewBox', '0 0 ' + (w + P * 2) + ' ' + (h + P * 2));
       svg.innerHTML = def.art(w, h);
       hoverTl = def.build ? def.build(svg, w, h) : def.hover(svg, w, h);
+      hoverTl.eventCallback('onReverseComplete', rest);
       if (inside) hoverTl.progress(1);
     }
-    function enter() { inside = true; draw(); if (hoverTl) hoverTl.timeScale(1).play(); }
+    // the drawing is only on stage while it acts: nothing sits beside a resting button
+    var clicking = false;
+    function rest() { if (!inside && !clicking) el.classList.remove('rx-on'); }
+    function enter() { inside = true; draw(); el.classList.add('rx-on'); if (hoverTl) hoverTl.timeScale(1).play(); }
     function leave() { inside = false; if (hoverTl) hoverTl.timeScale(2.5).reverse(); }   // in .5 / out .2 [BANK 229]
     function press(e) {
       if (!w) draw();
       if (clickTl) clickTl.progress(1).kill();
+      el.classList.add('rx-on');
+      clicking = true;
       clickTl = def.click(svg, w, h, el);
+      clickTl.eventCallback('onComplete', function () { clicking = false; if (!inside && (!hoverTl || hoverTl.progress() === 0)) rest(); });
       if (e && e.pointerType === 'touch') {
         // phones: the tap is the hover, then it settles back
         if (hoverTl) { hoverTl.timeScale(1.4).play(0); }

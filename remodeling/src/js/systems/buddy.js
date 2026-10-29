@@ -8,7 +8,13 @@
   var doc = document, root = doc.documentElement;
   var LS = 'ez-buddy';
   var VARIANTS = ['hat', 'level', 'tape', 'off'];
-  var NAMES = { hat: 'Hard hat', level: 'Level', tape: 'Tape', off: 'Off' };
+  var NAMES = { hat: 'Hard hat', level: 'Level', tape: 'Tape measure', off: 'No buddy' };
+  var ICONS = {
+    hat: '<path d="M4 15a8 8 0 0 1 16 0z" fill="#f2c230" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="15" width="20" height="3" rx="1.5" fill="#f2c230" stroke="currentColor" stroke-width="1.5"/>',
+    level: '<rect x="2" y="9" width="20" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="10.6" width="8" height="3.8" rx="1.9" fill="#d6ec8a"/><circle cx="12" cy="12.5" r="1.3" fill="currentColor"/>',
+    tape: '<rect x="3" y="5" width="13" height="13" rx="3.5" fill="#f2c230" stroke="currentColor" stroke-width="1.5"/><path d="M16 15h6v3h-6" fill="#f2c230" stroke="currentColor" stroke-width="1.3"/><circle cx="9.5" cy="11.5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/>',
+    off: '<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 17.5l11-11" stroke="currentColor" stroke-width="1.6"/>'
+  };
 
   /* ---------- pointer service: one source of truth for the buddy and the section fields ---------- */
   var P = EZ.ptr = { x: -1, y: -1, vx: 0, vy: 0, has: false, target: null, zone: null, t: 0, subs: [] };
@@ -401,13 +407,15 @@
   /* ---------- the Buddy switcher (fine pointers only; touch has no companion) ---------- */
   var sw;
   function buildSwitch() {
-    sw = doc.createElement('div');
+    // lives in the Settings panel beside Theme and Motion (fine pointers only)
+    sw = doc.createElement('fieldset');
     sw.className = 'buddysw';
-    sw.innerHTML = '<span class="buddysw__t" id="buddysw-t">Cursor buddy</span><div class="buddysw__in" role="radiogroup" aria-labelledby="buddysw-t">' +
+    sw.innerHTML = '<legend id="buddysw-t">Cursor buddy</legend><div class="buddysw__in" role="radiogroup" aria-labelledby="buddysw-t">' +
       VARIANTS.map(function (v) {
-        return '<button type="button" role="radio" data-bv="' + v + '" aria-checked="false">' + NAMES[v] + '</button>';
+        return '<button type="button" role="radio" data-bv="' + v + '" aria-checked="false" aria-label="' + NAMES[v] + '" title="' + NAMES[v] + '"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">' + ICONS[v] + '</svg></button>';
       }).join('') + '</div>';
-    doc.body.appendChild(sw);
+    var panel = doc.getElementById('settings-panel');
+    (panel || doc.body).appendChild(sw);
     sw.addEventListener('click', function (e) { var b = e.target.closest('[data-bv]'); if (b) B.set(b.dataset.bv); });
     sw.addEventListener('keydown', function (e) {
       var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
