@@ -7418,3 +7418,40 @@ STRONG · cheap · Remodeling shortlisting, pricing-transparency patterns · →
 Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> — RESULT: <kept / scrapped / adapted verdict + one line why>`
 
 - **Reviews "Constellation" (star-assembly into the rating figure)** — PICKED-FOR: Rembrandt Roofing homepage v5, Reviews V1 — RESULT: **KEPT** — the only version of the first-three-sections build the owner rated worth keeping (build scored 5/10 overall; all hero versions scrapped, most V2/V3 scrapped as filler). The mechanism works; the lesson logged with it: versions built "just to say they're there" fail — every version needs a named reference and full craft.
+
+**Austin Pro Siding, Windows & Roofing homepage v3, 30 versions (29 Oct 2026; full table in `siding/AUDIT-V3.md`).** Audit under the reference method: 10 versions failed (no named reference, or a re-skin of a sibling) and were rebuilt; 10 were adapted to F17/F18 and builder-brief §6; 10 kept as built. Final single file 3.98 MB (was 5.4 MB), 58 AVIF + 17 WebP; interaction suite all pass at 1440 and 375, served and from disk.
+
+- **[BANK] Stronghold Roofing crown 1** + **[BANK] Neil Kelly** — PICKED-FOR: Austin Pro homepage v3, Hero V2 "Pick your project" — RESULT: **ADAPTED, new build** — proof strip above the headline, four real job-photo cards as step one, step two shows the trade's published median band, middle half and monthly estimate in place; CSS motion at Stronghold's dose.
+- **[BANK] Feldco crown 2** (= builder-brief R33 + R20) — PICKED-FOR: Hero V3 "Real work" — RESULT: **ADAPTED, new build** — real job photos as poster frames (the firm's own film is unverifiable, so not used), pause control, count-up stat band in trade units at 1.4 s.
+- **[BANK] Q38 SVG Mask Transitions / R6 blinds** — PICKED-FOR: Hero V1 "Courses" — RESULT: **KEPT, re-dosed** — 30 slits at stagger 0.02 install the after photo of a true pair; played once (~1.2 s), not scrubbed; flagged as Tier-3 craft used on a portfolio piece.
+- **[BANK] #317 Digital Butlers** + anatomy F12 — PICKED-FOR: Proof V1 "Record" — RESULT: **ADAPTED** — counts band now prints the map's own arithmetic (312 + 574 = 886); ScrambleText replaced by the page's single count-up tempo.
+- **[BANK] Georgia Contractor Group (GC report CROWN)** — PICKED-FOR: Proof V2 "At a glance" — RESULT: **ADAPTED, new build** — credential glance-table (badge as served, what it means in the firm's words) beside the record; replaced an instinct-built photo wall whose badges sat on a rotated plane (builder brief §6).
+- **⟦S1327⟧** + **[BANK] #292 Scroll Reveal** — PICKED-FOR: Proof V3 "Statement" — RESULT: **KEPT** — stamps now scale in without rotation.
+- **[BANK] Neil Kelly** + **[BANK] BLK Design Your Own** — PICKED-FOR: Services V1 "Point at it" — RESULT: **KEPT** — traced elevation as a part picker leading to published bands.
+- **[BANK] Q571 AHA** — PICKED-FOR: Services V2 "Index" — RESULT: **ADAPTED** — numbered 11-row ordered list by CSS counters with the live "01 of 11" counter in the intro column; works well for an 11-trade firm.
+- **[BANK] Scrollable and Draggable Timeline (Codrops)** + R38 — PICKED-FOR: Services V3 "Tape measure" — RESULT: **KEPT** — draggable $0–$50k tape against the published middle halves.
+- **[BANK] Austin Pro price-banded draggable pairs (anatomy §7)** = R28 — PICKED-FOR: Work V1 "Drag" — RESULT: **KEPT** — the page's one signature interactive.
+- **⟦S0468⟧ blueprint-animation** — PICKED-FOR: Work V2 "Blueprint" — RESULT: **ADAPTED** — auto-advance removed; the visitor runs each job; now the only scan line on the page (Hero V2's copy of the trick was scrapped).
+- **⟦S1324⟧ reveal-hover-effect** — PICKED-FOR: Work V3 "Lens" — RESULT: **KEPT** — exact mask stops; layout tightened 3,064 → 1,723 px with per-column scroll drift.
+- **⟦S0526⟧ anatomy** + **⟦S0504⟧** — PICKED-FOR: Built V1 "Taken apart" — RESULT: **ADAPTED** — springs 64/14.2 kept, idle tour removed (F17).
+- **⟦S1322⟧ sticky stack cards** = R45 — PICKED-FOR: Built V2 "Built for Texas" — RESULT: **ADAPTED, new build** — CSS sticky stack (no pin), covered card to 0.92 / 0.72 / −24 px as the next travels 78→24 %; replaced ⟦S0425⟧ hairline window (third line drawing in one section, low visitor value: SCRAPPED).
+- **⟦S0361⟧** + **⟦S1361⟧** — PICKED-FOR: Built V3 "To the inch" — RESULT: **KEPT** — the ⟦S0411⟧ heading entrance used on it was removed (Map: NOT-FOR-TRADES).
+- **R36 colour customiser** / **[BANK] BLK Design Your Own** — PICKED-FOR: Colour V1 "Dock" — RESULT: **KEPT**.
+- **R30 comparison table** (Stronghold's live block seen) — PICKED-FOR: Colour V2 "Paint or ColorPlus" — RESULT: **ADAPTED, new build** — option-vs-option rather than us-vs-them; replaced the drag-paint re-skin of V1 (SCRAPPED).
+- **[BANK] Grid-to-Fullscreen (Codrops)** = R10 DOM port — PICKED-FOR: Colour V3 "Colour book" — RESULT: **ADAPTED, new build** — 29 published colours, tile grows from its own bounds by clip-path; phones fade/scale; replaced the rotating dial re-skin (SCRAPPED).
+- **[BANK] Austin Pro 312-point project map** + **⟦S1323⟧** — PICKED-FOR: Near V1 "Survey" — RESULT: **KEPT** — month build shortened to 1.8 s.
+- **[BANK] West Shore Home location × service matrix** — PICKED-FOR: Near V2 "Town by town" — RESULT: **ADAPTED, new build** — per-town published figures, disclosure rows with photographed jobs and local notes; replaced a map variation (SCRAPPED).
+- **[BANK] KBF Design Gallery, The Neighborhood Drive (CROWN)** — PICKED-FOR: Near V3 "Neighbourhood drive" — RESULT: **ADAPTED, new build** — pick a place, the job map flies in by viewBox tween, rail of jobs photographed there; replaced the radius-ring map variation (SCRAPPED).
+- **[BANK] Q161 seamless marquee** = R16 — PICKED-FOR: Reviews V1 "Stream" — RESULT: **ADAPTED** — scroll-velocity speed and skew removed; slow constant band with pause.
+- **R29 testimonial carousel** + **⟦S1329⟧** — PICKED-FOR: Reviews V2 "One" — RESULT: **ADAPTED** — Observer replaced by pointer events.
+- **[BANK] #321 AKLR / R27** + anatomy F6/F13 — PICKED-FOR: Reviews V3 "Names" — RESULT: **KEPT**.
+- **Austin Pro worked financing example** (portfolio plan Site 6 steal 6) — PICKED-FOR: Money V1 "Amount" — RESULT: **KEPT**.
+- **[BANK] Austin Pro crown 1, invoiced distribution (anatomy F7e)** — PICKED-FOR: Money V2 "What people paid" — RESULT: **ADAPTED, new build** — 415 / 376 priced jobs by band, median red, caveat printed, horizontal bars on phones; replaced budget chips (V1's maths backwards: SCRAPPED).
+- **R24 tier-pricing configurator** — PICKED-FOR: Money V3 "Receipt" — RESULT: **KEPT**.
+- **[BANK] Rogers Roofing** + **⟦S1364⟧** — PICKED-FOR: Book V1 "Call" — RESULT: **KEPT**.
+- **[BANK] Mad City Windows** + **⟦S1442⟧ / ⟦S0661⟧** (+ R21 budget radios as step 2) — PICKED-FOR: Book V2 "Form" — RESULT: **KEPT**.
+- **[BANK] Q413 Tequila conversational form** — PICKED-FOR: Book V3 "One sentence" — RESULT: **ADAPTED, new build** — the request as one sentence with inline fields, validated on Send; replaced the chat re-skin of V2 (SCRAPPED).
+- **⟦S0646⟧ / ⟦S0322⟧ WebGL paint brush** — PICKED-FOR: Hero V3 (earlier build) — RESULT: **SCRAPPED** — builder brief §3: no WebGL hero on Tier-2 siding pages.
+- **⟦S0407⟧ + ⟦S0468⟧ drawing-to-photo intro** — PICKED-FOR: Hero V2 (earlier build) — RESULT: **SCRAPPED** — a 3.3 s scene animation in the hero (F17) and the same scan trick as Work V2.
+- **⟦S0222⟧ isometric badge plane** — PICKED-FOR: Proof V2 (earlier build) — RESULT: **SCRAPPED** — rotated text-bearing badges (builder brief §6).
+- **Builder brief §2–6 (F17 motion ceiling, F18 cost lab, §6 standards)** — PICKED-FOR: the whole page — RESULT: **APPLIED** — heading entrances re-cut to the parameter library, tours and auto-advance removed, system cursor kept visible, AggregateRating JSON-LD added, four libraries dropped, packed imagery to AVIF.

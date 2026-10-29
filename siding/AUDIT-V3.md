@@ -80,4 +80,59 @@ No scale or density knobs. Re-verified after every rebuild (results below).
 
 ## Results
 
-(Filled in after the rebuilds: weight, test runs, flagged-not-changed.)
+### Weight (F18)
+
+| | Before (29 Oct, start of this audit) | After |
+|---|---|---|
+| Single file | 5.4 MB | **3.98 MB** (4,170,193 bytes) |
+| Images | 75, 3.1 MB raw, all WebP | 75, 2.36 MB raw: 58 AVIF (job photos, quality 50, at most 1120 px wide) + 17 WebP (blueprint plates as two-tone lossless, badges, logos) |
+| Libraries | GSAP core, ScrollTrigger, Flip, SplitText, DrawSVG, MorphSVG, Draggable, Inertia, Observer, ScrambleText, CustomEase, Lenis | Flip, SplitText, Observer and ScrambleText dropped (nothing needed them after the rebuilds); the rest is one shared GSAP load; Lenis stays as the single smooth-scroll engine (S1320), desktop pointer only |
+| Site scripts | home.js 100 KB + fx.js 11 KB as written | minified with terser when packed |
+| Studio masks | each PNG embedded twice (mask-image and -webkit-mask-image) | each stored once as a CSS custom property, as lossless WebP |
+
+What the 3.98 MB is: 3.08 MB of base64 imagery (75 images, 2.36 MB raw: real job photos, the six true before/after pairs used by Work, the
+traced plates, the studio photo and masks for Colour 1, badges and logos), 0.32 MB of CSS (the Mona Sans font is 0.12 MB of it),
+0.25 MB of scripts and 0.34 MB of markup for all 30 versions (the elevation, wall-assembly, sheet and map drawings are inline SVG).
+Only the photographs and drawings are above the bank's 330 KB HTML class, and they are the content. The re-encoding happens in the
+packer only (`src/single.py`); the site's own image files are unchanged.
+
+### Tests run on the final build
+
+- Interaction suite (`ix4.js`, 25 steps covering every version: pickers, sliders, drags, keyboard paths, tab switching, the 1·2·3
+  keys, the picks code and its persistence): **48/48 pass at 1440 px and 46/46 at 375 px** over http; **47/47 and 45/45 from the
+  single file opened from disk** (persistence is only tested over http). No console errors in any run.
+- Viewport sweeps of all 30 versions at 1440 × 900 and 375 × 812, normal motion and `prefers-reduced-motion: reduce`: no horizontal
+  scroll, unique ids, one h1, no content left hidden (the one flagged element is Services 2's pointer-follow photo, hidden by design
+  until a row is hovered).
+- From disk (`file://`): page loads in about 0.5 s, every image decodes (AVIF included), 0 broken images, every version switches.
+- Switcher (S0736): one knob per section, re-verified after every rebuild; keys 1/2/3 act on the section in view; the 10-digit picks
+  code persists in localStorage and `?v=`.
+
+### Bugs found and fixed during the audit
+
+- Colour 1 lost its zone-name table when the drag-paint helper was removed (a page error on every colour pick); restored and now
+  covered by a test.
+- Hero 2's project cards also triggered the page's own anchor scrolling; the global handler now respects a handled click.
+- Colour 3's sheet could not take focus while invisible, so Esc did not close it; focus now moves to the sheet before it animates.
+- Colour 2's table broke when forced into block layout on phones; it stays a native table with narrower columns.
+
+### Flagged, not changed
+
+1. **886 is not "312 siding + 574 roofing".** The restart brief describes it that way; the firm's own page says 312 documented
+   projects with photos sit on the map and 574 more are counted outside the frame or without photos (FACTS, project map). The
+   build prints the firm's wording: "312 on the map with photos + 574 more counted = 886".
+2. **No licence number in the first screen** (anatomy F11). Texas has no state contractor licence for this work and the site
+   publishes none, so the proof strip carries rating, review count, installer tier and since-year only.
+3. **Hero 1's blinds (Q38 / R6)** are listed in the builder brief under Tier 3 (portfolio craft). Kept: this is a portfolio
+   redesign, the reveal is played once in about 1.2 s and never gates the page.
+4. **Services 1 and Hero 2 both end in a trade's median band.** Different input and composition (pointing at the traced house vs
+   photo cards); they only meet if both are picked at once.
+5. **Built 1 and Built 3 are both technical drawings** (S0526 exploded iso vs S0361 dimensioned section). Different mechanisms and
+   layouts; Built 2 is now photographic, so the section no longer reads as three drawings.
+6. **The portfolio plan's flagship flow** (upload a photo of your own house, see it re-sided, get the published band in one flow)
+   is not built: it needs image upload and segmentation. Colour 1 (the real job photo, recoloured) and Hero 2 / Money 2 (published
+   bands and distributions) are its two halves.
+7. **Near 1's month-by-month build** (about 2.3 s, once, on scroll) is the one data animation left that runs without a click. It
+   is the firm's own map being drawn; kept at reveal level.
+8. **Lenis** could be dropped for about 18 KB (the builder brief notes this); kept because S1320 asks for exactly one engine and
+   the desktop scroll feel is part of the brief.

@@ -626,7 +626,8 @@ html.motion .h3f.on { animation: h3kb 6.5s linear both; }
 .dv-stage { display: grid; gap: 20px; }
 .dv-map { position: relative; justify-self: start; width: min(100%, 300px); aspect-ratio: 566 / 640; overflow: hidden; border-radius: 18px; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--stone); }
 .dv-map .map-svg { width: 100%; height: 100%; }
-.dv-svg .m-pins circle { r: 1.5; }   /* the view is zoomed about 3.3x: smaller pins and labels keep the map a map */
+.dv-svg .m-pins circle { r: 1.5; }
+.dv-svg .m-pins circle.hot { transform: none; }   /* the view is zoomed about 3.3x: smaller pins and labels keep the map a map */
 .dv-svg .m-town { font-size: 5.5px; }
 .dv-svg .m-scale { display: none; }
 .dv-cap { position: absolute; left: 10px; bottom: 10px; padding: 5px 10px; border-radius: 999px; background: var(--ink); color: var(--ground); font-size: .75rem; font-weight: 650; }

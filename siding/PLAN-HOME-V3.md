@@ -1,5 +1,7 @@
 # Homepage v3: the immersive build (plan before code)
 
+> **Superseded per version by `AUDIT-V3.md` (29 Oct 2026).** Under the bank reference method, 10 of the 30 versions below were rebuilt from named references (Hero 2, Hero 3, Proof 2, Built 2, Colour 2, Colour 3, Near 2, Near 3, Money 2, Book 3) and 10 were adapted; the audit table names every version's reference. The global systems below still hold, re-dosed per AUDIT-V3 G1-G9.
+
 Brief: `cc-prompt-siding-immersive.txt` (29 Oct 2026). Judgment: WEB-SKILLS.md only. Facts: FACTS.md only. Raw material: PLAN.md (crown assets kept: 886 documented projects, 177 published pairs, price bands, the 312-dot map). Every line below names the skill (tag) that decides it; numbers are the skills' own values from the Skill Pack Notes (notes-01..17).
 
 ## 0. What changes from v2 (and why)

@@ -6,8 +6,8 @@
   const d = document, root = d.documentElement;
   const $ = (s, el = d) => el.querySelector(s);
   const $$ = (s, el = d) => Array.from(el.querySelectorAll(s));
-  const G = window.gsap, ST = window.ScrollTrigger, FL = window.Flip;
-  if (G) G.registerPlugin(...[ST, FL].filter(Boolean));
+  const G = window.gsap, ST = window.ScrollTrigger;
+  if (G && ST) G.registerPlugin(ST);
   const DATA = JSON.parse($('#home-data').textContent);
   const PINS = DATA.map.pins;
 
@@ -391,7 +391,8 @@
     const qx = G.quickTo(peek, 'x', { duration: 0.45, ease: 'power3' }), qy = G.quickTo(peek, 'y', { duration: 0.45, ease: 'power3' });
     let src = '';
     b.on(list, 'pointermove', e => { const rc = r.getBoundingClientRect(); qx(e.clientX - rc.left + 28); qy(e.clientY - rc.top - peek.offsetHeight * 0.5); });
-    rows.forEach(row => b.on(row, 'pointerenter', () => {
+    rows.forEach(row => b.on(row, 'pointerenter', e => {
+      if (+G.getProperty(peek, 'opacity') < 0.05) { const rc = r.getBoundingClientRect(); G.set(peek, { x: e.clientX - rc.left + 28, y: e.clientY - rc.top - peek.offsetHeight * 0.5 }); }   // first show starts at the pointer
       const s = row.dataset.img;
       if (!s) { G.to(peek, { autoAlpha: 0, duration: 0.2 }); return; }
       if (s !== src) { pim.src = AU(s); src = s; }
@@ -669,6 +670,7 @@
     function reset() { Object.values(zones).forEach(z => { z.classList.remove('is-painted'); if (G) G.set(z, { clearProps: 'clipPath' }); }); Object.keys(state).forEach(k => delete state[k]); }
     return { paint, reset, state, zones };
   }
+  const ZNAME = { body: 'siding', gable: 'gable', trim: 'trim' };
   V.colour1 = (r, b) => {
     const frame = $('.st-frame', r), S = Studio(frame), now = $('.c1-now', r);
     let part = 'body';

@@ -1107,7 +1107,7 @@ def build():
     body = head() + header() + '<main id="main">\n' + ''.join(section(k, l, f, n) for k, l, f, n in SECTIONS) + '</main>\n' + footer() + picks()
     data = json.dumps(dict(map=MAPDATA, sw=SW, cp=COLORPLUS), ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     body += f'\n<script type="application/json" id="home-data">{data}</script>\n'
-    js = ['gsap', 'ScrollTrigger', 'Flip', 'SplitText', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'Observer', 'ScrambleTextPlugin', 'CustomEase']
+    js = ['gsap', 'ScrollTrigger', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'CustomEase']
     body += ''.join(f'<script src="assets/js/{n}.min.js" defer></script>\n' for n in js)
     body += '<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/fx.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
     out = clean(body)
