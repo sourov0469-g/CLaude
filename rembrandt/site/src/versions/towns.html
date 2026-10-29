@@ -1,0 +1,42 @@
+<template id="tpl-towns-2" data-class="towns towns--roofs on-dark seam" data-label="troofs-title">
+ <div class="wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 4:45 pm <span class="br">〕</span></span>
+  <h2 id="troofs-title" class="t-h2" style="margin-bottom:24px">Your town's roofs</h2>
+  <div class="troofs">
+   <div class="troofs-pick">
+    <label for="tr-town">Pick your town</label>
+    <select id="tr-town" data-tr-town></select>
+    <p class="troofs-fact" aria-live="polite" data-tr-fact></p>
+    <div class="decades" data-decades aria-hidden="true"></div>
+    <ul class="decade-key" data-decade-key></ul>
+    <p class="troofs-mean" data-tr-mean></p>
+   </div>
+   <form class="zipform" data-tr-zip novalidate>
+    <label for="tr-zip">Or check your ZIP<input id="tr-zip" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" autocomplete="postal-code" placeholder="45066"></label>
+    <button class="btn btn-blue" type="submit">Check</button>
+    <p class="zip-out" aria-live="polite" data-tr-out></p>
+   </form>
+  </div>
+  <p class="t-caption tr-src">Homes by decade built: US Census Bureau, American Community Survey 2020 to 2024 (table B25034).</p>
+ </div>
+</template>
+
+<template id="tpl-towns-3" data-class="towns towns--roofline on-dark seam" data-label="tline-title">
+ <div class="wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 4:45 pm <span class="br">〕</span></span>
+  <h2 id="tline-title" class="t-h2" style="margin-bottom:24px">Springboro and 23 towns around Dayton</h2>
+ </div>
+ <div class="tline" data-tline>
+  <svg class="tline-svg" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true" data-tline-svg>
+   <defs><path id="rl-wide" d="M0 268 L170 268 L330 150 L470 150 L560 86 L650 150 L700 150 L800 52 L900 150 L960 150 L1060 108 L1160 150 L1270 150 L1430 268 L1600 268"/><path id="rl-narrow" d="M0 250 L200 70 L400 250 L560 140 L720 250 L800 250"/></defs>
+   <use href="#rl-wide" class="rl-line" data-rl-line/>
+   <text class="rl-text" data-rl-a><textPath href="#rl-wide" data-rl-pa></textPath></text>
+   <text class="rl-text" data-rl-b><textPath href="#rl-wide" data-rl-pb></textPath></text>
+  </svg>
+  <button class="tl-pause" type="button" aria-pressed="false" data-tline-pause>Pause the names</button>
+ </div>
+ <div class="wrap">
+  <p class="zip-out" aria-live="polite" data-tline-out></p>
+  <ul class="tline-list" data-tline-list></ul>
+ </div>
+</template>

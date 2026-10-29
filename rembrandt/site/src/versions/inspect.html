@@ -1,0 +1,56 @@
+<template id="tpl-inspect-2" data-class="inspect inspect--blinds seam" data-label="blinds-title">
+ <div class="blind-stage" data-blind-stage>
+  <div class="blind-sticky">
+   <div class="blind-view" data-blind-view>
+    <img class="street" src="assets/img/hero-1600.webp" alt="A house seen from the street after rain; the roof looks fine" width="1600" height="1091" decoding="async">
+    <div class="slits" data-slits aria-hidden="true"></div>
+    <p class="blind-label" aria-live="polite"><span data-blind-label>From the street</span></p>
+   </div>
+   <div class="blind-copy wrap">
+    <span class="label chapter-label"><span class="br">〔</span> 6:12 am <span class="br">〕</span></span>
+    <h2 id="blinds-title" class="t-display cast-host" data-split>From the street, it looks fine.</h2>
+    <p>Up on the roof at 7 in the morning, with the sun low, the same kind of roof shows its bruises. That's why we inspect at an angle, photograph everything, and show you the photos.</p>
+    <a class="btn btn-blue" href="#estimate" data-cta="inspect2-book" data-adds="roof">Book a free inspection</a>
+    <p class="t-caption blind-cap">Illustrative stock: a street view and a close-up in low light. Two different roofs.</p>
+   </div>
+  </div>
+ </div>
+ <div class="wrap honest">
+  <p class="t-display cast-host" data-split>If your roof is fine, we'll tell you. <u>In writing.</u></p>
+ </div>
+</template>
+
+<template id="tpl-inspect-3" data-class="inspect inspect--ask seam" data-label="ask-title">
+ <div class="wrap ask">
+  <div class="ask-head">
+   <span class="label chapter-label"><span class="br">〔</span> 6:12 am <span class="br">〕</span></span>
+   <h2 id="ask-title" class="t-display cast-host" data-split>Ask the roof.</h2>
+   <p>Five things you can check from the ground or the attic. Tap the photo if you see it.</p>
+  </div>
+  <div class="ask-grid">
+   <ol class="ask-qs" data-ask>
+    <li data-zone="gutter"><button type="button" class="ask-photo" aria-pressed="false" data-yes><img src="assets/img/sym-gutter-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><span>Do you see granules or grit in your gutters?</span></button><button type="button" class="ask-no" aria-pressed="false" data-no>Not that I can see</button></li>
+    <li data-zone="tabs"><button type="button" class="ask-photo" aria-pressed="false" data-yes><img src="assets/img/sym-tab-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><span>Any shingle edges lifted or curling?</span></button><button type="button" class="ask-no" aria-pressed="false" data-no>Not that I can see</button></li>
+    <li data-zone="ceiling"><button type="button" class="ask-photo" aria-pressed="false" data-yes><img src="assets/img/sym-stain-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><span>A brown stain on a ceiling or upstairs wall?</span></button><button type="button" class="ask-no" aria-pressed="false" data-no>Not that I can see</button></li>
+    <li data-zone="attic"><button type="button" class="ask-photo" aria-pressed="false" data-yes><img src="assets/img/sym-attic-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><span>Daylight through the boards in the attic?</span></button><button type="button" class="ask-no" aria-pressed="false" data-no>Not that I can see</button></li>
+    <li data-zone="field"><button type="button" class="ask-photo" aria-pressed="false" data-yes><img src="assets/img/sym-curl-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><span>Shingles cracked, buckled or missing?</span></button><button type="button" class="ask-no" aria-pressed="false" data-no>Not that I can see</button></li>
+   </ol>
+   <div class="ask-side">
+    <svg class="ask-house" viewBox="0 0 320 220" role="img" aria-label="A roof diagram that lights the parts you answer yes to">
+     <path class="z" data-z="field" d="M40 112 L160 30 L280 112 L254 112 L160 48 L66 112 Z"/>
+     <path class="z" data-z="tabs" d="M40 112 L66 112 L84 100 L58 100 Z M280 112 L254 112 L236 100 L262 100 Z"/>
+     <path class="z" data-z="attic" d="M74 112 L160 52 L246 112 Z"/>
+     <rect class="z" data-z="ceiling" x="74" y="112" width="172" height="10"/>
+     <path class="z" data-z="gutter" d="M28 112 h18 v10 h-18 Z M274 112 h18 v10 h-18 Z"/>
+     <path class="ln" d="M28 112 L160 22 L292 112 M74 112 V200 H246 V112 M74 122 H246 M120 200 V160 H150 V200"/>
+    </svg>
+    <div class="ask-result" role="status" aria-live="polite" data-ask-result><p>Answer the five questions and the roof will tell you where to look.</p></div>
+   </div>
+  </div>
+  <div class="ask-end">
+   <p class="t-display cast-host" data-split>If your roof is fine, we'll tell you. <u>In writing.</u></p>
+   <a class="btn btn-blue" href="#estimate" data-cta="inspect3-book" data-adds="roof">Book a free inspection</a>
+  </div>
+  <p class="t-caption ask-cap">Photos are stock examples of each sign, not Rembrandt jobs.</p>
+ </div>
+</template>

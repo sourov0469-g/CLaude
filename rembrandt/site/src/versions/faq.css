@@ -1,0 +1,22 @@
+/* S13 V2 Ask by situation */
+.sitq{display:grid;gap:var(--s-6);margin-top:var(--s-6)}
+.sitg h3{font-family:var(--mona);font-weight:600;font-size:1.125rem;margin:0 0 var(--s-2);padding-bottom:var(--s-2);border-bottom:2px solid var(--ink-900)}
+.sitg details{border-bottom:1px solid var(--plaster-200)}
+.sitg summary{cursor:pointer;padding:var(--s-3) 0;font-family:var(--mona);font-weight:560;font-size:1rem;list-style-position:inside}
+.sitg .ans{padding:0 0 var(--s-4)}
+.sitg .signed{font-family:var(--mona);font-size:.8125rem;color:var(--slate-600)}
+@media (min-width:1024px){.sitq{grid-template-columns:1fr 1fr;gap:var(--s-7) var(--s-8)}}
+/* S13 V3 Find it by the picture */
+.pic-intro{margin:var(--s-3) 0 var(--s-5)}
+.pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--s-3)}
+.pics button{display:grid;gap:var(--s-2);padding:0;border:0;background:none;text-align:left;cursor:pointer;font-family:var(--mona);font-weight:560;font-size:.9375rem;color:var(--ink-900)}
+.pics img{width:100%;aspect-ratio:1;object-fit:cover;outline:1px solid var(--plaster-200);outline-offset:-1px}
+.pics button[aria-expanded=true] img{outline:3px solid var(--blue-700);outline-offset:-3px}
+.pics button:focus-visible{outline:2px solid var(--blue-700);outline-offset:3px}
+.pic-ans{margin-top:var(--s-5);max-width:64ch}
+.pic-ans > div{overflow:hidden}
+.pic-ans h3{font-family:var(--mona);font-weight:600;font-size:1.375rem;margin:0 0 var(--s-2)}
+.pic-ans .next{margin-top:var(--s-3)}
+.pic-ans .phone{color:var(--blue-700)}
+.pic-cap{margin-top:var(--s-5);color:var(--slate-600)}
+@media (max-width:640px){.pics{grid-template-columns:repeat(2,1fr)}}

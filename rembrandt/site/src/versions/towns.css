@@ -1,0 +1,24 @@
+/* S11 V2 Your town's roofs */
+.troofs{display:grid;gap:var(--s-7)}
+.troofs-pick label{display:block;font-family:var(--mona);font-weight:600;margin-bottom:var(--s-2)}
+.troofs-pick select{min-height:48px;min-width:16rem;padding:0 12px;border:1px solid rgb(236 233 228 / .45);border-radius:2px;background:#2b221b;color:var(--plaster-100);font-family:var(--mona);font-size:1rem}
+.troofs-fact{margin:var(--s-4) 0;max-width:60ch;color:#e3ddd5}
+.decades{display:flex;height:28px;max-width:720px;background:rgb(236 233 228 / .08)}
+.decades i{display:block;height:100%;transform-origin:0 50%;border-right:1px solid var(--umber-900)}
+.decades .d0{background:#6b5a48}.decades .d1{background:#7d6a55}.decades .d2{background:#907b62}.decades .d3{background:#a38c70}.decades .d4{background:#b59d7d}.decades .d5{background:#c7af8c}.decades .d6{background:#d6c19f}.decades .d7{background:#e2cfae}.decades .d8{background:#e9b364}.decades .d9{background:#f2c886}
+.decade-key{list-style:none;padding:0;margin:var(--s-3) 0 0;display:flex;flex-wrap:wrap;gap:var(--s-1) var(--s-4);font-family:var(--mona);font-size:.8125rem;color:var(--mist-300);max-width:720px}
+.decade-key b{color:var(--plaster-100);font-variant-numeric:tabular-nums}
+.troofs-mean{margin-top:var(--s-5);max-width:60ch;font-family:var(--news);font-style:italic;color:var(--plaster-100)}
+.tr-src{color:var(--mist-300);margin-top:var(--s-6)}
+@media (min-width:1024px){.troofs{grid-template-columns:2fr 1fr;align-items:start}}
+/* S11 V3 Roofline of towns */
+.tline{position:relative;margin:var(--s-5) 0}
+.tline-svg{display:block;width:100%;height:auto;max-height:46vh}
+.rl-line{fill:none;stroke:rgb(236 233 228 / .35);stroke-width:2;stroke-dasharray:2 7}
+.rl-text{font-family:var(--mona);font-weight:600;font-stretch:112%;font-size:26px;fill:var(--plaster-100);letter-spacing:.02em}
+.tline{display:flex;flex-direction:column}
+.tl-pause{align-self:flex-end;margin:var(--s-2) var(--margin) 0 0;min-height:36px;padding:0 var(--s-3);border:1px solid rgb(236 233 228 / .45);background:rgb(24 17 13 / .5);color:var(--plaster-100);border-radius:2px;font-family:var(--mona);font-size:.8125rem;cursor:pointer}
+.tline-list{list-style:none;padding:0;margin:var(--s-5) 0 0;display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.tline-list button{min-height:40px;padding:0 var(--s-3);border:1px solid rgb(236 233 228 / .3);border-radius:2px;background:none;color:var(--plaster-100);font-family:var(--mona);font-size:.9375rem;cursor:pointer}
+.tline-list button:hover,.tline-list button:focus-visible{background:rgb(236 233 228 / .12)}
+@media (max-width:640px){.rl-text{font-size:40px}.tline-svg{max-height:none}}

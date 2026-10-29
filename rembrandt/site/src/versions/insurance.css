@@ -1,0 +1,27 @@
+/* S12 V2 The adjuster's checklist */
+.adj-intro{max-width:56ch;margin:var(--s-3) 0 var(--s-5)}
+.adj{list-style:none;margin:0;padding:0;display:grid;gap:0;max-width:760px}
+.adj li{border-top:1px solid var(--plaster-200)}
+.adj label{position:relative;display:flex;gap:var(--s-3);align-items:flex-start;padding:var(--s-3) 0;cursor:pointer;font-family:var(--news);font-size:1.125rem}
+.adj input{position:absolute;opacity:0;width:24px;height:24px;margin:2px 0 0;cursor:pointer}
+.adj svg{flex:none;width:22px;height:22px;margin-top:3px}
+.adj svg rect{fill:none;stroke:var(--ink-900);stroke-width:1.5}
+.adj svg path{fill:none;stroke:var(--blue-700);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:16;stroke-dashoffset:16;transition:stroke-dashoffset 200ms var(--ease-out)}
+.adj input:checked + svg path{stroke-dashoffset:0}
+.adj input:focus-visible + svg rect{stroke:var(--blue-700);stroke-width:2.5}
+.adj span{background:linear-gradient(var(--mist-300),var(--mist-300)) 0 55%/0 1.5px no-repeat;transition:background-size 160ms var(--ease-out),color 160ms}
+.adj li.done span{background-size:100% 1.5px;color:var(--slate-600)}
+.adj small{display:block;font-size:.875rem;color:var(--slate-600)}
+.adj-actions{display:flex;gap:var(--s-3);margin:var(--s-5) 0}
+.adj-note{max-width:60ch}
+@media print{.print-checklist body *{visibility:hidden}.print-checklist .claim--list,.print-checklist .claim--list *{visibility:visible}.print-checklist .claim--list{position:absolute;inset:0 auto auto 0}.print-checklist .adj-actions,.print-checklist .vpill{display:none}}
+/* S12 V3 Your questions, answered by the office */
+.oq{display:grid;gap:var(--s-5);margin-top:var(--s-6)}
+.oq-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-2);align-content:start}
+.oq-list button{width:100%}
+.oq-list button{text-align:left;min-height:52px;padding:var(--s-3) var(--s-4);border:1px solid var(--plaster-200);border-radius:2px;background:#f4f2ee;color:var(--ink-900);font-family:var(--mona);font-weight:560;font-size:1rem;cursor:pointer}
+.oq-list button[aria-expanded=true]{border-color:var(--blue-700);box-shadow:inset 3px 0 0 var(--blue-700)}
+.oq-ans{font-family:var(--news);font-size:1.25rem;line-height:1.55;min-height:8em}
+.oq-ans .signed{font-family:var(--mona);font-size:.8125rem;color:var(--slate-600);margin-top:var(--s-3)}
+.oq-hint{color:var(--slate-600);font-style:italic}
+@media (min-width:1024px){.oq{grid-template-columns:1fr 1.2fr;gap:var(--s-8)}}

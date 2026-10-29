@@ -1,0 +1,106 @@
+<template id="tpl-storm-2" data-class="storm storm--year seam" data-label="year-title">
+ <a class="stage-skip" href="#inspect">Skip the year</a>
+ <div class="year-head wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 9:41 pm <span class="br">〕</span></span>
+  <h2 id="year-title" class="t-display cast-host" data-split>The year in one roof.</h2>
+  <p class="year-deck">Ohio weather works on a roof all year. Here is what each month does to it, and what to check.</p>
+  <div class="threats" role="tablist" aria-label="Ohio's four threats to a roof" data-threats>
+   <button type="button" role="tab" id="th-hail" aria-controls="tp-hail" aria-selected="false" tabindex="-1" data-threat="hail">Hail</button>
+   <button type="button" role="tab" id="th-wind" aria-controls="tp-wind" aria-selected="false" tabindex="-1" data-threat="wind">Wind</button>
+   <button type="button" role="tab" id="th-freeze" aria-controls="tp-freeze" aria-selected="false" tabindex="-1" data-threat="freeze">Freeze-thaw</button>
+   <button type="button" role="tab" id="th-ice" aria-controls="tp-ice" aria-selected="false" tabindex="-1" data-threat="ice">Ice dams</button>
+  </div>
+  <div class="threat-panels">
+   <div role="tabpanel" id="tp-hail" aria-labelledby="th-hail" tabindex="0" hidden><p><b>What it does.</b> Hail bruises shingles and knocks the granules loose. From the street the roof looks fine; the bare spots age fast in the sun.</p><p><b>What to check.</b> Granules in the gutters, dents on gutters and downspouts, dings on a car or grill from the same storm.</p></div>
+   <div role="tabpanel" id="tp-wind" aria-labelledby="th-wind" tabindex="0" hidden><p><b>What it does.</b> Wind gets under the bottom edge of a shingle, breaks the seal strip and creases the tab. The next rain finds the gap.</p><p><b>What to check.</b> Shingles in the yard, tabs that look creased or raised, bare strips along the ridge.</p></div>
+   <div role="tabpanel" id="tp-freeze" aria-labelledby="th-freeze" tabindex="0" hidden><p><b>What it does.</b> Ohio can swing 50 degrees in a week from November to March. Water in a small crack freezes, expands and opens it wider.</p><p><b>What to check.</b> Cracked or lifted shingles after a thaw, loose flashing at the chimney and pipes.</p></div>
+   <div role="tabpanel" id="tp-ice" aria-labelledby="th-ice" tabindex="0" hidden><p><b>What it does.</b> In January and February, attic heat melts snow that refreezes at the cold eave. The ice holds back meltwater, and it backs up under the shingles.</p><p><b>What to check.</b> Thick icicles at the gutters, stains on ceilings near outside walls, damp insulation at the eaves.</p></div>
+  </div>
+ </div>
+ <div class="year-stage" data-year-stage>
+  <div class="year-sticky">
+   <svg class="sunarc" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path data-sunpath d="M0 110 C 260 110, 330 14, 600 14 C 870 14, 940 110, 1200 110"/><circle data-sun r="9" cx="0" cy="110"/></svg>
+   <ol class="months" data-months>
+    <li data-m="0"><b>January</b><span class="what">Ice dams form at the eaves when attic heat melts snow that refreezes at the cold edge.</span><span class="chk">Check: thick icicles, stains near outside walls.</span></li>
+    <li data-m="1"><b>February</b><span class="what">Meltwater backs up behind the ice and under the shingles.</span><span class="chk">Check: damp attic insulation at the eaves.</span></li>
+    <li data-m="2"><b>March</b><span class="what">Freeze-thaw: 50-degree swings in a week open small cracks wider.</span><span class="chk">Check: cracked or lifted shingles after a thaw.</span></li>
+    <li data-m="3"><b>April</b><span class="what">Hail season starts. It runs here from April to July.</span><span class="chk">Check: granules in the gutters after each storm.</span></li>
+    <li data-m="4"><b>May</b><span class="what">Storm lines bring hail and gusts that lift and crease tabs.</span><span class="chk">Check: shingles in the yard, creased tabs.</span></li>
+    <li data-m="5"><b>June</b><span class="what">Ohio averages about 19 hail days a year, most of them in these months.</span><span class="chk">Check: dents on gutters, dings on cars or grills.</span></li>
+    <li data-m="6"><b>July</b><span class="what">The end of hail season, and the hottest attics of the year.</span><span class="chk">Check: curling on the sunny side.</span></li>
+    <li data-m="7"><b>August</b><span class="what">Heat dries shingles out, and a hot attic ages them from below.</span><span class="chk">Check: attic vents clear, shingles lying flat.</span></li>
+    <li data-m="8"><b>September</b><span class="what">The first leaves start filling the gutters.</span><span class="chk">Check: gutters and valleys clear.</span></li>
+    <li data-m="9"><b>October</b><span class="what">Full gutters overflow behind the fascia and into the walls.</span><span class="chk">Check: downspouts running, valleys clear.</span></li>
+    <li data-m="10"><b>November</b><span class="what">Freeze-thaw returns, and the first hard freezes find loose flashing.</span><span class="chk">Check: flashing at the chimney and pipes.</span></li>
+    <li data-m="11"><b>December</b><span class="what">Snow load and freeze-thaw on an older roof.</span><span class="chk">Check: attic ventilation before the snow settles.</span></li>
+   </ol>
+  </div>
+ </div>
+ <p class="storm-line storm-line--static"><span>Storm damage right now?</span> <a class="phone" href="tel:+19377467377" data-cta="storm2-call">Call (937) 746-7377</a> <span class="live">or <a href="sms:+19377467377" data-sms data-cta="storm2-text">text us photos</a>.</span></p>
+</template>
+
+<template id="tpl-storm-3" data-class="storm storm--age seam" data-label="age-title">
+ <a class="stage-skip" href="#inspect">Skip the years</a>
+ <div class="age-stage" data-age-stage>
+  <div class="age-sticky">
+   <div class="age-plates" aria-hidden="true">
+    <img data-age-plate src="assets/img/age-0-1024.webp" alt="" width="1024" height="614" decoding="async">
+    <img data-age-plate src="assets/img/age-1-1024.webp" alt="" width="1024" height="358" decoding="async" loading="lazy">
+    <img data-age-plate src="assets/img/age-2-1024.webp" alt="" width="1024" height="576" decoding="async" loading="lazy">
+    <img data-age-plate src="assets/img/age-3-1024.webp" alt="" width="1024" height="495" decoding="async" loading="lazy">
+    <img data-age-plate src="assets/img/age-4-1024.webp" alt="" width="1024" height="572" decoding="async" loading="lazy">
+    <div class="age-shade"></div>
+   </div>
+   <div class="age-copy wrap">
+    <span class="label chapter-label"><span class="br">〔</span> 9:41 pm <span class="br">〕</span></span>
+    <h2 id="age-title" class="t-display cast-host" data-split>Twenty years in twenty seconds.</h2>
+    <p class="age-now" aria-live="polite"><b data-age-yr>New</b><span data-age-note>Granules intact, every tab sealed flat.</span></p>
+    <div class="age-ticks" aria-hidden="true"><i data-tick="0">0</i><i data-tick="1">5</i><i data-tick="2">10</i><i data-tick="3">15</i><i data-tick="4">20 years</i></div>
+    <form class="age-form" data-age-form novalidate>
+     <label for="age-in">When was your roof put on?</label>
+     <div class="age-row"><input id="age-in" class="blank" inputmode="numeric" maxlength="4" placeholder="2008" autocomplete="off"><button class="btn btn-line" type="submit">Show me</button></div>
+    </form>
+    <p class="age-honest">A roof's age alone doesn't mean it needs replacing. We'll tell you if it doesn't.</p>
+    <p class="t-caption age-cap">Illustrative: five different roofs, not one roof photographed over time. Stock photos, credited in the footer.</p>
+   </div>
+  </div>
+ </div>
+ <p class="storm-line storm-line--static"><span>Storm damage right now?</span> <a class="phone" href="tel:+19377467377" data-cta="storm3-call">Call (937) 746-7377</a> <span class="live">or <a href="sms:+19377467377" data-sms data-cta="storm3-text">text us photos</a>.</span></p>
+</template>
+
+<template id="tpl-storm-s" data-class="storm storm--compact seam" data-label="stormc-title">
+ <div class="wrap stormc">
+  <span class="label chapter-label"><span class="br">〔</span> 9:41 pm <span class="br">〕</span></span>
+  <h2 id="stormc-title" class="t-h2">One night in May</h2>
+  <ul class="stormc-facts">
+   <li>Hail season here runs April to July, and Ohio sees about 19 hail days a year.</li>
+   <li>Wind gets under the tabs: it lifts shingles from the bottom and breaks the seal.</li>
+   <li>Most roof damage doesn't show from the street.</li>
+   <li>By the time water shows on a ceiling, it has usually been getting in for a while.</li>
+  </ul>
+ </div>
+ <p class="storm-line storm-line--static"><span data-storm-live>Storm damage right now?</span> <a class="phone" href="tel:+19377467377" data-cta="stormc-call">Call (937) 746-7377</a> <span class="live">or <a href="sms:+19377467377" data-sms data-cta="stormc-text">text us photos</a>.</span></p>
+</template>
+
+<template id="tpl-nexthour">
+ <section class="nexthour on-dark" id="next-hour" data-chapter="nexthour" aria-labelledby="nh-title">
+  <div class="wrap">
+   <span class="label chapter-label">Storm mode</span>
+   <h2 id="nh-title" class="t-h2">The next hour</h2>
+   <p class="nh-sub">If a storm just came through, or water is coming in, start here. Tick them off as you go.</p>
+   <ol class="nh-list" data-nh>
+    <li><label><input type="checkbox" value="off"><span><b>Stay off the roof.</b> Wet shingles and storm debris are how people get hurt.</span></label></li>
+    <li><label><input type="checkbox" value="drip"><span><b>Move things away from any drip</b> and put a bucket under it.</span></label></li>
+    <li><label><input type="checkbox" value="photo"><span><b>Photograph the ceiling inside,</b> and the roof and yard from the ground.</span></label></li>
+    <li><label><input type="checkbox" value="insurer"><span><b>Call your insurer's claim line</b> and write down the claim number.</span></label></li>
+    <li><label><input type="checkbox" value="text"><span><b>Text us the photos.</b> We'll call you back.</span></label></li>
+   </ol>
+   <div class="nh-cta">
+    <a class="btn btn-blue" href="sms:+19377467377" data-sms data-cta="nexthour-text"><svg aria-hidden="true"><use href="#i-text"/></svg>Text us the photos</a>
+    <a class="btn btn-line" href="tel:+19377467377" data-cta="nexthour-call"><svg aria-hidden="true"><use href="#i-phone"/></svg><span class="phone">Call (937) 746-7377</span></a>
+   </div>
+   <p class="nh-office" data-nh-office></p>
+   <button type="button" class="nh-exit" data-storm-exit>Show the whole story</button>
+  </div>
+ </section>
+</template>

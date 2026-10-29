@@ -1,0 +1,44 @@
+<template id="tpl-insurance-2" data-class="claim claim--list seam on-plaster" data-label="adj-title">
+ <div class="wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 5:20 pm <span class="br">〕</span></span>
+  <h2 id="adj-title" class="t-h2">The adjuster's checklist</h2>
+  <p class="adj-intro">What an insurance adjuster usually asks for. Tick what you have; this device remembers.</p>
+  <ul class="adj" data-adj>
+   <li><label><input type="checkbox" value="policy"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>Your policy number</span></label></li>
+   <li><label><input type="checkbox" value="date"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>The date of the storm</span></label></li>
+   <li><label><input type="checkbox" value="claim"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>A claim number from your insurer</span></label></li>
+   <li><label><input type="checkbox" value="slopes"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>Photos of every roof slope <small>(we take these at the free inspection)</small></span></label></li>
+   <li><label><input type="checkbox" value="inside"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>Photos of any inside damage: ceilings, walls, the attic</span></label></li>
+   <li><label><input type="checkbox" value="receipts"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>Receipts for tarps or emergency repairs</span></label></li>
+   <li><label><input type="checkbox" value="estimate"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="2"/><path d="M5 10.5 l3.2 3.2 L15 6.5"/></svg><span>A written estimate you can match to the insurer's scope, line by line</span></label></li>
+  </ul>
+  <div class="adj-actions"><button class="btn btn-line" type="button" data-adj-print>Print it</button><a class="btn btn-line" href="sms:" data-adj-sms>Text it to me</a></div>
+  <p class="adj-note">Paying yourself instead? Ask us about payment options, including monthly payments and our military, veteran and first responder discount.</p>
+ </div>
+</template>
+
+<template id="tpl-insurance-3" data-class="claim claim--office seam on-plaster" data-label="office-title">
+ <div class="wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 5:20 pm <span class="br">〕</span></span>
+  <h2 id="office-title" class="t-h2">Your questions, answered by the office</h2>
+  <div class="oq" data-oq>
+   <ul class="oq-list">
+    <li><button type="button" aria-expanded="false" aria-controls="oa1">Can you talk to my insurance company for me?</button></li>
+    <li><button type="button" aria-expanded="false" aria-controls="oa2">What if the adjuster says no?</button></li>
+    <li><button type="button" aria-expanded="false" aria-controls="oa3">Will you start before my insurer approves?</button></li>
+    <li><button type="button" aria-expanded="false" aria-controls="oa4">Do I pay anything for the inspection?</button></li>
+    <li><button type="button" aria-expanded="false" aria-controls="oa5">Can I pay monthly?</button></li>
+    <li><button type="button" aria-expanded="false" aria-controls="oa6">Is there a discount for veterans?</button></li>
+   </ul>
+   <div class="oq-ans" aria-live="polite">
+    <div id="oa1" hidden><p>The claim is between you and your insurer. If you want us there, we meet the adjuster on your roof with our photos, and you get a copy of everything we document.</p><p class="signed">Answered by the Rembrandt office</p></div>
+    <div id="oa2" hidden><p>Ask for the reasons in writing. You can share our photos and our written estimate with your insurer. We can't promise a result, and we won't.</p><p class="signed">Answered by the Rembrandt office</p></div>
+    <div id="oa3" hidden><p>Nothing starts without your written approval of our written estimate. When you sign is your call.</p><p class="signed">Answered by the Rembrandt office</p></div>
+    <div id="oa4" hidden><p>No. The inspection and the written estimate are free.</p><p class="signed">Answered by the Rembrandt office</p></div>
+    <div id="oa5" hidden><p>Yes. We offer in-house financing with flexible monthly payments. Ask us for the terms; we don't print rates on the site.</p><p class="signed">Answered by the Rembrandt office</p></div>
+    <div id="oa6" hidden><p>Yes. Military members, veterans and first responders get a discount on every project. Ask us how much it is for your job.</p><p class="signed">Answered by the Rembrandt office</p></div>
+    <p class="oq-hint" data-oq-hint>Tap a question.</p>
+   </div>
+  </div>
+ </div>
+</template>

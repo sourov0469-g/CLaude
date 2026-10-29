@@ -1,0 +1,37 @@
+/* S0 V2 Chapter rail (≥1024: a 72px left rail; phones keep the V1 bar) */
+.hrail{display:none}
+@media (min-width:1024px){
+ .rail-on body{padding-left:72px}
+ .rail-on .storm-banner{left:72px}
+ .hdr--rail{inset:0 auto 0 0;width:72px;height:100vh;height:100dvh;background:var(--umber-900);border-right:1px solid rgb(236 233 228 / .1);align-items:stretch}
+ .hdr--rail.is-hidden{transform:none}
+ .hdr--rail > .wrap{display:none}
+ .hdr--rail .hrail{display:flex;flex-direction:column;align-items:center;width:72px;height:100%;padding:20px 0 16px;gap:18px}
+ .hrail-mark{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mona);font-weight:640;font-stretch:112%;font-size:1.25rem;letter-spacing:-.01em;text-decoration:none;color:var(--plaster-100)}
+ .hrail-num{position:relative;height:1.1em;overflow:hidden;font-family:var(--mona);font-weight:600;font-variant-numeric:tabular-nums;font-size:1.375rem;line-height:1.1;color:var(--plaster-100);width:2.2ch;text-align:center;margin-top:auto}
+ .hrail-num span{position:absolute;inset:0}
+ .hrail-of{font-family:var(--mona);font-size:.6875rem;color:var(--mist-300);margin-top:-12px}
+ .hrail-menu{width:52px;height:40px;background:none;border:1px solid rgb(236 233 228 / .5);border-radius:2px;color:var(--plaster-100);font-family:var(--mona);font-weight:600;font-size:.75rem;cursor:pointer}
+ .hrail-phone{writing-mode:vertical-rl;transform:rotate(180deg);background:var(--blue-700);color:#fff;border-radius:999px;padding:14px 10px;text-decoration:none;font-family:var(--mona);font-weight:650;font-stretch:110%;font-size:.9375rem;box-shadow:inset 0 0 0 1px rgb(233 179 100 / .4);white-space:nowrap}
+ .hrail-prog{position:absolute;right:-1px;top:0;bottom:0;width:2px;background:rgb(236 233 228 / .08)}
+ .hrail-prog i{position:absolute;inset:0;background:var(--lamp-400);transform-origin:50% 0;transform:scaleY(0)}
+ .hdr--rail > .vpill{top:12px;left:84px;right:auto}
+}
+/* S0 V3 Sign-painter overlay */
+.hdr--sign .wrap{gap:var(--s-4)}
+.signsheet{position:fixed;inset:0;z-index:70;background:var(--plaster-100);color:var(--ink-900);overflow:auto;-webkit-overflow-scrolling:touch}
+.signsheet[hidden]{display:none}
+.signsheet-in{width:min(100% - 2*var(--margin),var(--max));margin:0 auto;padding:calc(var(--header-h) + var(--s-5)) 0 var(--s-8);position:relative}
+.signsheet .close{position:absolute;right:0;top:var(--s-4);min-height:44px;padding:0 var(--s-4);border:1px solid var(--ink-900);background:none;border-radius:2px;font-family:var(--mona);font-weight:600;cursor:pointer;color:inherit}
+.signsheet ul{list-style:none;margin:0;padding:0}
+.signsheet li{border-bottom:1px solid var(--plaster-200);overflow:hidden}
+.signsheet li a{position:relative;display:block;padding:var(--s-3) 0 var(--s-4);text-decoration:none;color:inherit}
+.signsheet li b{display:block;font-family:var(--mona);font-weight:600;font-stretch:118%;font-size:clamp(2rem,1rem + 4.4vw,4.75rem);line-height:1;letter-spacing:-.03em}
+.signsheet li i{display:block;margin-top:6px;font-family:var(--news);font-style:italic;font-size:clamp(1rem,.9rem + .5vw,1.375rem);color:var(--slate-600)}
+.signsheet li a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--blue-700);transform:translateX(-101%);transition:transform 400ms cubic-bezier(.7,0,.3,1)}
+@media (hover:hover){.signsheet li a:hover::after{transform:translateX(0)}}
+.signsheet li a:focus-visible::after{transform:translateX(0)}
+.signsheet-foot{display:flex;flex-direction:column;gap:4px;margin-top:var(--s-6);font-family:var(--mona);font-weight:600}
+.signsheet-foot .phone{font-size:1.5rem;color:var(--blue-700);text-decoration:none}
+
+.hdr--sign .menu-btn{display:inline-flex}

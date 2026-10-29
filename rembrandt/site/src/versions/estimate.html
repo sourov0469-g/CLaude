@@ -1,0 +1,98 @@
+<template id="tpl-estimate-2" data-class="estimate estimate--read on-plaster seam" data-label="read-title">
+ <div class="wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 8:30 am <span class="br">〕</span></span>
+  <h2 id="read-title" class="t-display cast-host" data-split style="max-width:14ch;margin-bottom:var(--s-4)">Read the estimate.</h2>
+  <p class="read-intro">This is what a written estimate from us looks like. It's a sample, so it has no prices; yours lists your roof, measured on site.</p>
+  <article class="paper sample" data-sample>
+   <header class="paper-head">
+    <h3 class="t-h2">Estimate. Rembrandt Roofing &amp; Restoration</h3>
+    <div class="doc-meta"><span>38 N Pioneer Blvd, Springboro, Ohio 45066</span><span class="phone">(937) 746-7377</span><span>Sample, for illustration</span></div>
+   </header>
+   <div class="sample-body" data-reveal>
+    <p><b>Prepared for:</b> a homeowner in Centerville, Ohio. <b>Roof:</b> main roof, 6/12 pitch, about 26 squares; detached garage, 4/12 pitch, about 5 squares.</p>
+    <ol class="sample-lines">
+     <li>Tear off the existing roof down to the deck, one layer of shingles. Haul away and dispose of everything.</li>
+     <li>Inspect every deck board. Replace soft decking, priced per sheet, photographed and shown to you before any board is replaced. <button type="button" class="note-btn" aria-expanded="false" data-note="n-deck">Why we list the deck separately</button><span class="note" id="n-deck" hidden>The deck is the one thing nobody can see until the old roof is off. Listing it per sheet means you know the price of a soft board before we find one.</span></li>
+     <li>Drip edge at every eave and rake.</li>
+     <li>Ice and water barrier: two rows at the eaves and in every valley.</li>
+     <li>Synthetic underlayment over the rest of the deck.</li>
+     <li>Starter strip along the eaves and rakes.</li>
+     <li>Shingles: Owens Corning TruDefinition Duration, in the color you choose. <button type="button" class="note-btn" aria-expanded="false" data-note="n-prod">Why we name the product</button><span class="note" id="n-prod" hidden>An estimate that only says "architectural shingles" could mean anything. Ours names the maker and the product line, so you can look them up.</span></li>
+     <li>Flashing: new step flashing where the roof meets the walls, chimney counter-flashing re-cut, new pipe boots. <button type="button" class="note-btn" aria-expanded="false" data-note="n-flash">What flashing means here</button><span class="note" id="n-flash" hidden>Leaks start at the edges more often than in the middle. Flashing is the metal where walls, chimneys and pipes meet the roof.</span></li>
+     <li>Ridge vent, with hip and ridge caps.</li>
+     <li>Clean-up: a magnet sweep of the lawn, beds and driveway for nails.</li>
+     <li>Final walkthrough with the progress photos, and warranty registration.</li>
+    </ol>
+    <p class="sample-terms">Nothing starts without your written approval of this estimate. <button type="button" class="note-btn" aria-expanded="false" data-note="n-appr">Why that matters</button><span class="note" id="n-appr" hidden>If it isn't written here, it isn't in the job. And nothing starts until you sign.</span></p>
+   </div>
+  </article>
+  <form class="short-form" data-short novalidate>
+   <h3 class="t-h3">Ask for yours</h3>
+   <div class="sf-grid">
+    <label>Name<input name="name" autocomplete="name" required data-f="name"></label>
+    <label>ZIP<input name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" required data-f="zip"></label>
+    <label>Phone<input name="phone" type="tel" autocomplete="tel" required data-f="phone"></label>
+    <label>What's going on<select name="situation" data-f="situation"><option value="storm">A storm came through</option><option value="leak">It's leaking</option><option value="old">It's getting old</option><option value="claim">Insurance claim</option><option value="check" selected>Just check it</option></select></label>
+    <label>Best time<select name="bestTime" data-f="bestTime"><option>morning</option><option>around midday</option><option>afternoon</option></select></label>
+   </div>
+   <p class="zip-answer" aria-live="polite" data-sf-zip></p>
+   <p class="err" role="alert" data-sf-err></p>
+   <button class="btn btn-blue" type="submit" data-sf-send>Send my request</button>
+   <div class="result" role="status" aria-live="polite" hidden data-sf-result></div>
+  </form>
+ </div>
+</template>
+
+<template id="tpl-estimate-3" data-class="estimate estimate--build on-plaster seam" data-label="build-title">
+ <div class="wrap">
+  <span class="label chapter-label"><span class="br">〔</span> 8:30 am <span class="br">〕</span></span>
+  <h2 id="build-title" class="t-display cast-host" data-split style="max-width:14ch;margin-bottom:var(--s-6)">Build your request.</h2>
+  <form class="builder" data-builder novalidate>
+   <div class="b-count" aria-hidden="true"><span class="roll" data-roll><span data-roll-col>01</span></span><span class="of">/ 04</span></div>
+   <p class="sr-only" aria-live="polite" data-b-live>Step 1 of 4</p>
+   <div class="b-steps">
+    <fieldset class="b-step" data-step="1"><legend>What's going on?</legend>
+     <div class="b-opts">
+      <label class="b-opt"><input type="radio" name="b-sit" value="storm"><span>A storm came through</span></label>
+      <label class="b-opt"><input type="radio" name="b-sit" value="leak"><span>It's leaking</span></label>
+      <label class="b-opt"><input type="radio" name="b-sit" value="old"><span>It's getting old</span></label>
+      <label class="b-opt"><input type="radio" name="b-sit" value="claim"><span>I'm filing an insurance claim</span></label>
+      <label class="b-opt"><input type="radio" name="b-sit" value="check"><span>I just want it checked</span></label>
+     </div>
+    </fieldset>
+    <fieldset class="b-step" data-step="2" hidden><legend>What should we look at?</legend>
+     <div class="b-opts">
+      <label class="b-opt"><input type="checkbox" name="b-svc" value="roof"><span>Roof</span></label>
+      <label class="b-opt"><input type="checkbox" name="b-svc" value="gutters"><span>Gutters</span></label>
+      <label class="b-opt"><input type="checkbox" name="b-svc" value="siding"><span>Siding</span></label>
+      <label class="b-opt"><input type="checkbox" name="b-svc" value="skylights"><span>Skylights</span></label>
+      <label class="b-opt"><input type="checkbox" name="b-svc" value="attic"><span>Attic ventilation or insulation</span></label>
+      <label class="b-opt"><input type="checkbox" name="b-svc" value="other"><span>Something else</span></label>
+     </div>
+    </fieldset>
+    <fieldset class="b-step" data-step="3" hidden><legend>Where is the house?</legend>
+     <label class="b-field">ZIP code<input name="b-zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" data-b-zip></label>
+     <p class="b-ans" aria-live="polite" data-b-ans></p>
+    </fieldset>
+    <fieldset class="b-step" data-step="4" hidden><legend>Who should Rachel ask for?</legend>
+     <label class="b-field">Your name<input name="b-name" autocomplete="name" data-b-name></label>
+     <label class="b-field">Phone<input name="b-phone" type="tel" autocomplete="tel" data-b-phone></label>
+     <label class="b-field">Best time to call<select name="b-time" data-b-time><option>morning</option><option>around midday</option><option>afternoon</option></select></label>
+     <label class="b-field">Email <small>(optional)</small><input name="b-email" type="email" autocomplete="email" data-b-email></label>
+    </fieldset>
+    <div class="b-step b-sum" data-step="5" hidden>
+     <h3>Estimate request</h3>
+     <dl data-b-sum></dl>
+     <p class="b-next">What happens next: Rachel calls you within one business day (Mon to Fri, 9 to 5). We book a free inspection, photograph what we find, and give you a written, line-item estimate before any work. Storm damage right now? Call <a class="phone" href="tel:+19377467377">(937) 746-7377</a>.</p>
+    </div>
+   </div>
+   <p class="err b-err" role="alert" data-b-err></p>
+   <div class="b-nav">
+    <button class="btn b-back" type="button" data-b-back hidden>Back</button>
+    <button class="btn btn-blue" type="button" data-b-next>Next</button>
+    <button class="btn btn-blue" type="submit" data-b-send hidden>Sign and send</button>
+   </div>
+   <div class="result" role="status" aria-live="polite" hidden data-b-result></div>
+  </form>
+ </div>
+</template>
