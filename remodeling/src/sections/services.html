@@ -1,120 +1,130 @@
 <section id="services" class="sec services g-surface" data-section="services" aria-labelledby="services-h1">
 
-  <!-- v1 · Cards that carry the figure [PHS Renovations: investment + timeline on every service card; Neil Kelly service grid] -->
+  <!-- v1 · Exploded assemblies [BANK 98 Silo explode: open max(.35,|dp|) power2.out, close .6 expo.out, magnet .3] -->
   <div class="ver services1" data-v="1">
     <div class="wrap">
-      <header class="services__head">
-        <p class="t-label services__label">What we design and build</p>
-        <h2 class="t-head" id="services-h1">Kitchens. Bathrooms. Whole homes.</h2>
-        <p class="t-lead muted services__lead">Priced against the drawings, not a guess. The figure on each card is construction time once permits are in.</p>
-      </header>
+      <div class="services__head">
+        <h2 class="t-head" id="services-h1">Whatever the scope, one team accountable for all of it.</h2>
+        <p class="t-lead services__lead">Every job is a stack of trades. Hover a drawing, or tap it, to take the room apart the way we build it.</p>
+      </div>
       <div class="services1__grid">
-        <article class="services1__card services1__card--main">
-          <div class="services1__ph ph"><img data-img="k-white-shaker" width="1600" height="1067" loading="lazy" alt="White Shaker kitchen with a waterfall quartz island, an Elbaz kitchen remodel"></div>
-          <div class="services1__body">
-            <h3 class="services1__t">Kitchen remodeling</h3>
-            <p class="services1__fig"><span class="services1__n nums">6&ndash;12</span><span class="services1__u">weeks of construction</span></p>
-            <p class="services1__line">Layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope.</p>
-            <ul class="services1__subs"><li>Full kitchen remodel</li><li>Layout and design</li><li>Custom cabinetry</li><li>Open-concept remodel</li><li>Islands and countertops</li><li>Small and galley kitchens</li></ul>
-            <a class="link services1__go" href="#consult" data-cursor="link">Talk about your kitchen</a>
-          </div>
+        <article class="services1__card" data-asm="kitchen" data-card>
+          <button type="button" class="services1__stage" aria-expanded="false" aria-label="Kitchen: show the layers">
+            <svg class="services1__svg" aria-hidden="true" focusable="false"></svg>
+          </button>
+          <h3 class="services1__h">Kitchens</h3>
+          <p class="services1__p">Layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope.</p>
+          <ol class="services1__layers" aria-label="Kitchen layers, from the floor up"><li>Layout</li><li>Plumbing and electrical</li><li>Cabinetry</li><li>Counters</li></ol>
+          <p class="services1__time"><span class="nums">6&ndash;12</span> weeks of construction, typically</p>
+          <a class="btn btn--ghost services1__btn" href="#consult" data-rx="screw"><span class="btn__label">Plan a kitchen</span></a>
         </article>
-        <article class="services1__card">
-          <div class="services1__ph ph"><img data-img="b-spa-guest" width="1600" height="1067" loading="lazy" alt="Spa-style guest bathroom with a curbless shower and backlit mirrors, an Elbaz bathroom remodel"></div>
-          <div class="services1__body">
-            <h3 class="services1__t">Bathroom remodeling</h3>
-            <p class="services1__fig"><span class="services1__n nums">4&ndash;8</span><span class="services1__u">weeks of construction</span></p>
-            <p class="services1__line">Waterproofing done properly, tile set square, glass and fixtures that still look right in year five.</p>
-            <ul class="services1__subs"><li>Full bathroom remodel</li><li>Walk-in shower conversion</li><li>Primary bath suite</li><li>ADA and accessible</li></ul>
-            <a class="link services1__go" href="#consult" data-cursor="link">Talk about your bathroom</a>
-          </div>
+        <article class="services1__card" data-asm="bath" data-card>
+          <button type="button" class="services1__stage" aria-expanded="false" aria-label="Bathroom: show the layers">
+            <svg class="services1__svg" aria-hidden="true" focusable="false"></svg>
+          </button>
+          <h3 class="services1__h">Bathrooms</h3>
+          <p class="services1__p">Down to the studs. Waterproofed properly. Closed up once.</p>
+          <ol class="services1__layers" aria-label="Bathroom wall layers, from the studs out"><li>Studs</li><li>Backer board</li><li>Waterproofing</li><li>Tile, set square</li><li>Glass, templated after tiling</li></ol>
+          <p class="services1__time"><span class="nums">4&ndash;8</span> weeks of construction, typically</p>
+          <a class="btn btn--ghost services1__btn" href="#consult" data-rx="screw"><span class="btn__label">Plan a bathroom</span></a>
         </article>
-        <article class="services1__card">
-          <div class="services1__ph ph"><img data-img="m-open-plan" width="1600" height="1067" loading="lazy" alt="Open-plan kitchen, dining and living area, an Elbaz project"></div>
-          <div class="services1__body">
-            <h3 class="services1__t">Whole-home renovation</h3>
-            <p class="services1__fig"><span class="services1__n">Months</span><span class="services1__u">several, by scope</span></p>
-            <p class="services1__line">Opening up plans, moving structure, and re-sequencing a house so it works the way you live now.</p>
-            <ul class="services1__subs"><li>One contractor</li><li>One disruption, not five</li></ul>
-            <a class="link services1__go" href="#consult" data-cursor="link">Talk about your house</a>
-          </div>
+        <article class="services1__card" data-asm="home" data-card>
+          <button type="button" class="services1__stage" aria-expanded="false" aria-label="Whole home: show the layers">
+            <svg class="services1__svg" aria-hidden="true" focusable="false"></svg>
+          </button>
+          <h3 class="services1__h">Whole homes</h3>
+          <p class="services1__p">Opening up plans, moving structure, and re&#8209;sequencing a house so it works the way you live now.</p>
+          <ol class="services1__layers" aria-label="Whole-home layers, from the ground up"><li>Slab</li><li>Structure</li><li>Open plan</li><li>Roof</li></ol>
+          <p class="services1__time">Several months of construction, typically</p>
+          <a class="btn btn--ghost services1__btn" href="#consult" data-rx="screw"><span class="btn__label">Plan a whole home</span></a>
         </article>
       </div>
-      <p class="services__note t-small muted">Timelines vary by scope and jurisdiction. Permit review can add weeks.</p>
+      <p class="services__also">Also: ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction, commercial remodeling, planning and permitting.</p>
     </div>
   </div>
 
-  <!-- v2 · The rows [Codrops K72 Marquee Hover: edge-aware band wipe revealing a running marquee] -->
+  <!-- v2 · The drawing set [BANK R45 stacking cards (CSS sticky) + BANK 571 counter "01 of 03" + S0211 curtain] -->
   <div class="ver services2" data-v="2" hidden>
     <div class="wrap">
-      <header class="services__head services2__head">
-        <p class="t-label services__label">What we design and build</p>
-        <h2 class="t-head" id="services-h2">Kitchens. Bathrooms. Whole homes.</h2>
-        <p class="t-lead muted services__lead">Priced against the drawings, not a guess.</p>
-      </header>
+      <div class="services__head">
+        <h2 class="t-head" id="services-h2">Three drawing sets. One contractor.</h2>
+        <p class="t-lead services__lead">Each scope is drawn before it is priced. Open a sheet to see everything it covers.</p>
+      </div>
+      <div class="services2__stack">
+        <article class="services2__sheet" data-card>
+          <div class="services2__frame">
+            <figure class="services2__photo"><img data-img="k-walnut-marble" width="1600" height="1067" loading="lazy" alt="Open-concept kitchen with fluted walnut cabinetry and bookmatched marble, an Elbaz project"></figure>
+            <div class="services2__body">
+              <p class="services2__no nums">Sheet 01 of 03</p>
+              <h3 class="services2__h">Kitchens</h3>
+              <p class="services2__p">The room you actually live in. In a kitchen, the sequence is the job.</p>
+              <div class="services2__scope" id="sv2-scope-1">
+                <ul><li>Full kitchen remodel</li><li>Custom cabinetry</li><li>Cabinet refacing and replacement</li><li>Countertop installation</li><li>Kitchen islands</li><li>Layout and design</li><li>Luxury kitchens</li><li>Open-concept kitchens</li><li>Outdoor kitchens</li><li>Small and galley kitchens</li></ul>
+              </div>
+              <div class="services2__acts">
+                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-1" data-rx="saw"><span class="btn__label">Open the scope</span></button>
+                <p class="services2__time"><span class="nums">6&ndash;12</span> weeks of construction</p>
+              </div>
+            </div>
+            <dl class="services2__tb"><div><dt>Project</dt><dd>Kitchen remodeling</dd></div><div><dt>Contractor</dt><dd>Elbaz, <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;01</dd></div></dl>
+          </div>
+        </article>
+        <article class="services2__sheet" data-card>
+          <div class="services2__frame">
+            <figure class="services2__photo"><img data-img="b-black-marble" width="1200" height="1600" loading="lazy" alt="Black marble primary bathroom with a freestanding tub and glass wet room, an Elbaz project"></figure>
+            <div class="services2__body">
+              <p class="services2__no nums">Sheet 02 of 03</p>
+              <h3 class="services2__h">Bathrooms</h3>
+              <p class="services2__p">Waterproofing done properly, tile set square, glass and fixtures that still look right in year five.</p>
+              <div class="services2__scope" id="sv2-scope-2">
+                <ul><li>Full bathroom remodel</li><li>Primary bath suites</li><li>Walk-in shower conversions</li><li>Bathtub-to-shower conversions</li><li>Spa bathrooms</li><li>Luxury bathrooms</li><li>Small bathrooms</li><li>Powder rooms</li><li>Vanity and storage</li><li>ADA and accessible bathrooms</li></ul>
+              </div>
+              <div class="services2__acts">
+                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-2" data-rx="saw"><span class="btn__label">Open the scope</span></button>
+                <p class="services2__time"><span class="nums">4&ndash;8</span> weeks of construction</p>
+              </div>
+            </div>
+            <dl class="services2__tb"><div><dt>Project</dt><dd>Bathroom remodeling</dd></div><div><dt>Contractor</dt><dd>Elbaz, <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;02</dd></div></dl>
+          </div>
+        </article>
+        <article class="services2__sheet" data-card>
+          <div class="services2__frame">
+            <figure class="services2__photo"><img data-img="r-openplan" width="1600" height="1600" loading="lazy" alt="Modern open-concept kitchen and living area renovation by Elbaz"></figure>
+            <div class="services2__body">
+              <p class="services2__no nums">Sheet 03 of 03</p>
+              <h3 class="services2__h">Whole homes</h3>
+              <p class="services2__p">One contractor. The whole house. One disruption, not five.</p>
+              <div class="services2__scope" id="sv2-scope-3">
+                <ul><li>Opening up floor plans</li><li>Moving structure</li><li>Re-sequencing the house</li><li>ADUs and additions</li><li>Roofing</li><li>Flooring</li><li>Windows and doors</li><li>Outdoor living</li><li>Planning and permitting</li></ul>
+              </div>
+              <div class="services2__acts">
+                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-3" data-rx="saw"><span class="btn__label">Open the scope</span></button>
+                <p class="services2__time">Several months of construction</p>
+              </div>
+            </div>
+            <dl class="services2__tb"><div><dt>Project</dt><dd>Whole-home renovation</dd></div><div><dt>Contractor</dt><dd>Elbaz, <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;03</dd></div></dl>
+          </div>
+        </article>
+      </div>
     </div>
-    <nav class="services2__menu" aria-label="Services">
-      <div class="services2__item">
-        <a class="services2__link" href="#consult" data-cursor="none"><span class="services2__name">Kitchens</span><span class="services2__fig">6&ndash;12 weeks</span></a>
-        <div class="services2__marquee" aria-hidden="true"><div class="services2__wrap"><div class="services2__inner">
-          <span>Layout and design</span><i data-bg-img="k-navy-white"></i><span>Custom cabinetry</span><i data-bg-img="k-turquoise"></i><span>Open-concept</span><i data-bg-img="k-chef"></i><span>Islands</span><i data-bg-img="k-stone-island"></i>
-          <span>Layout and design</span><i data-bg-img="k-navy-white"></i><span>Custom cabinetry</span><i data-bg-img="k-turquoise"></i><span>Open-concept</span><i data-bg-img="k-chef"></i><span>Islands</span><i data-bg-img="k-stone-island"></i>
-        </div></div></div>
-      </div>
-      <div class="services2__item">
-        <a class="services2__link" href="#consult" data-cursor="none"><span class="services2__name">Bathrooms</span><span class="services2__fig">4&ndash;8 weeks</span></a>
-        <div class="services2__marquee" aria-hidden="true"><div class="services2__wrap"><div class="services2__inner">
-          <span>Walk-in showers</span><i data-bg-img="b-emerald"></i><span>Primary suites</span><i data-bg-img="b-champagne"></i><span>Waterproofed properly</span><i data-bg-img="b-copper"></i><span>Accessible baths</span><i data-bg-img="b-sea-glass"></i>
-          <span>Walk-in showers</span><i data-bg-img="b-emerald"></i><span>Primary suites</span><i data-bg-img="b-champagne"></i><span>Waterproofed properly</span><i data-bg-img="b-copper"></i><span>Accessible baths</span><i data-bg-img="b-sea-glass"></i>
-        </div></div></div>
-      </div>
-      <div class="services2__item">
-        <a class="services2__link" href="#consult" data-cursor="none"><span class="services2__name">Whole homes</span><span class="services2__fig">Several months</span></a>
-        <div class="services2__marquee" aria-hidden="true"><div class="services2__wrap"><div class="services2__inner">
-          <span>One contractor</span><i data-bg-img="w-bath-whole"></i><span>The whole house</span><i data-bg-img="w-farmhouse"></i><span>One disruption</span><i data-bg-img="m-open-plan"></i><span>Not five</span><i data-bg-img="r-openplan"></i>
-          <span>One contractor</span><i data-bg-img="w-bath-whole"></i><span>The whole house</span><i data-bg-img="w-farmhouse"></i><span>One disruption</span><i data-bg-img="m-open-plan"></i><span>Not five</span><i data-bg-img="r-openplan"></i>
-        </div></div></div>
-      </div>
-    </nav>
-    <div class="wrap"><p class="services__note t-small muted">Weeks are construction time once permits are in. Timelines vary by scope and jurisdiction.</p></div>
   </div>
 
-  <!-- v3 · Chapters [Tillberg Design of Sweden: one service per full-bleed image chapter, scrub-ladder parallax] -->
+  <!-- v3 · The tool wall [BANK 91 animated SVG trade icons + S0634 grid-magnetic dot grid (radius 100, pull .3)] -->
   <div class="ver services3" data-v="3" hidden>
-    <div class="wrap services3__intro">
-      <p class="t-label services__label">What we design and build</p>
-      <h2 class="t-head" id="services-h3">Kitchens. Bathrooms. Whole homes.</h2>
+    <div class="wrap services3__grid">
+      <div class="services3__side">
+        <h2 class="t-head" id="services-h3">Pick the job. We bring every tool.</h2>
+        <ul class="services3__list" role="list">
+          <li><button type="button" class="services3__row" data-tool="0" aria-pressed="false"><span class="services3__n nums">01</span><span class="services3__name">Kitchens</span><span class="services3__line">Layout, cabinetry, counters and the services behind them. <span class="nums">6&ndash;12</span> weeks.</span></button></li>
+          <li><button type="button" class="services3__row" data-tool="1" aria-pressed="false"><span class="services3__n nums">02</span><span class="services3__name">Bathrooms</span><span class="services3__line">Down to the studs, waterproofed, closed up once. <span class="nums">4&ndash;8</span> weeks.</span></button></li>
+          <li><button type="button" class="services3__row" data-tool="2" aria-pressed="false"><span class="services3__n nums">03</span><span class="services3__name">Whole homes</span><span class="services3__line">Plans opened, structure moved, one disruption. Several months.</span></button></li>
+        </ul>
+        <a class="btn services3__btn" href="#consult" data-rx="hook"><span class="btn__label">Book a consultation</span></a>
+      </div>
+      <div class="services3__wall" aria-hidden="true">
+        <svg class="services3__board"></svg>
+        <div class="services3__tags"><span>ADUs and additions</span><span>Roofing</span><span>Outdoor living</span><span>Flooring</span><span>Windows and doors</span><span>New construction</span><span>Commercial</span><span>Permitting</span></div>
+      </div>
     </div>
-    <article class="services3__ch">
-      <div class="services3__img"><img data-img="k-walnut-marble" width="1600" height="1067" loading="lazy" alt="Open-concept kitchen with fluted walnut cabinetry and bookmatched marble, an Elbaz kitchen remodel"></div>
-      <div class="wrap services3__text">
-        <p class="services3__n nums">01</p>
-        <h3 class="services3__t">Kitchens</h3>
-        <p class="services3__line">Layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope.</p>
-        <p class="services3__fig"><span class="nums">6&ndash;12</span> weeks of construction</p>
-        <a class="services3__go" href="#consult" data-cursor="view" data-cursor-label="Book">Talk about your kitchen</a>
-      </div>
-    </article>
-    <article class="services3__ch">
-      <div class="services3__img"><img data-img="b-black-marble" width="1600" height="1067" loading="lazy" alt="Black marble primary bathroom with a freestanding tub and glass wet room, an Elbaz bathroom remodel"></div>
-      <div class="wrap services3__text">
-        <p class="services3__n nums">02</p>
-        <h3 class="services3__t">Bathrooms</h3>
-        <p class="services3__line">Waterproofing done properly, tile set square, glass and fixtures that still look right in year five.</p>
-        <p class="services3__fig"><span class="nums">4&ndash;8</span> weeks of construction</p>
-        <a class="services3__go" href="#consult" data-cursor="view" data-cursor-label="Book">Talk about your bathroom</a>
-      </div>
-    </article>
-    <article class="services3__ch">
-      <div class="services3__img"><img data-img="w-farmhouse" width="1600" height="1067" loading="lazy" alt="Modern farmhouse whole-home renovation by Elbaz"></div>
-      <div class="wrap services3__text">
-        <p class="services3__n nums">03</p>
-        <h3 class="services3__t">Whole homes</h3>
-        <p class="services3__line">Opening up plans, moving structure, and re-sequencing a house so it works the way you live now.</p>
-        <p class="services3__fig">Several months, one contractor</p>
-        <a class="services3__go" href="#consult" data-cursor="view" data-cursor-label="Book">Talk about your house</a>
-      </div>
-    </article>
-    <div class="wrap"><p class="services__note t-small muted">Weeks are construction time once permits are in. Timelines vary by scope and jurisdiction.</p></div>
   </div>
 </section>
