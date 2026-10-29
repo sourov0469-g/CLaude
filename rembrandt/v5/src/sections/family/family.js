@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { img } from '../../js/main.js';
 import { EASE, beats } from '../../js/fx.js';
+import { parallax } from '../../js/depth.js';
 
 const visible = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.isIntersecting), { rootMargin: '100px' }); io.observe(el); return () => io.disconnect(); };
 
@@ -62,6 +63,7 @@ function statement(root, c) {
   const done = [];
   const cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
+  parallax(root); // the background courses travel at their own scroll rate (data-sy)
   const copy = document.createElement('p'); copy.className = 'vh'; copy.textContent = p.textContent; p.after(copy); p.setAttribute('aria-hidden', 'true');
   const walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT), nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
   const words = [];
@@ -116,10 +118,14 @@ function truss(root, c) {
   const out = e => { const t = e.target.closest('[data-m]'); if (t && (!e.relatedTarget || !e.relatedTarget.closest || e.relatedTarget.closest('[data-m]') !== t)) show(pinned); };
   const click = e => { const t = e.target.closest('[data-m]'); if (t) pin(t.dataset.m); };
   root.addEventListener('pointerover', over); root.addEventListener('pointerout', out); root.addEventListener('focusin', over); root.addEventListener('focusout', out); root.addEventListener('click', click);
-  const ptr = e => { if (e.pointerType !== 'mouse') return; const r = root.getBoundingClientRect(); root.style.setProperty('--cx', (e.clientX - r.left).toFixed(0) + 'px'); root.style.setProperty('--cy', (e.clientY - r.top).toFixed(0) + 'px'); root.classList.add('is-ptr'); };
+  // the deck highlight follows the pointer as a small window moved by transform (a section-sized masked layer composited
+  // at half the frame rate), written once per frame
+  const hi = root.querySelector('.fm3-deck--hi'), hiG = hi.querySelector('.fm3-hi-g'); let pq = 0, px = 0, py = 0;
+  const ptrW = () => { pq = 0; hi.style.transform = `translate3d(${px - 220}px,${py - 220}px,0)`; hiG.setAttribute('transform', `translate(${220 - px} ${220 - py})`); };
+  const ptr = e => { if (e.pointerType !== 'mouse') return; const r = root.getBoundingClientRect(); px = Math.round(e.clientX - r.left); py = Math.round(e.clientY - r.top); if (!pq) pq = requestAnimationFrame(ptrW); root.classList.add('is-ptr'); };
   const ptrOut = () => root.classList.remove('is-ptr');
   if (c.fine && c.motion) { root.addEventListener('pointermove', ptr, { passive: true }); root.addEventListener('pointerleave', ptrOut); }
-  done.push(() => { ['pointerover', 'pointerout', 'focusin', 'focusout', 'click'].forEach((ev, i) => root.removeEventListener(ev, [over, out, over, out, click][i])); root.removeEventListener('pointermove', ptr); root.removeEventListener('pointerleave', ptrOut); });
+  done.push(() => { ['pointerover', 'pointerout', 'focusin', 'focusout', 'click'].forEach((ev, i) => root.removeEventListener(ev, [over, out, over, out, click][i])); root.removeEventListener('pointermove', ptr); root.removeEventListener('pointerleave', ptrOut); cancelAnimationFrame(pq); });
   const cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
   beats(root, [root.querySelector('.fm3-h'), root.querySelector('.fm3-note')]);

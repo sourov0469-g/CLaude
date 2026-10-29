@@ -13,13 +13,13 @@
 .hx1-rl{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:.82;vector-effect:non-scaling-stroke}
 .hx1-rl path{vector-effect:non-scaling-stroke}
 .hx1-rl--glow{stroke:url(#hx1-glow-g);stroke-width:5;opacity:1}
-.hx1-sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hx1-sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;will-change:transform}
 .hx1-cloud path{fill:oklch(0.86 0.02 262 / .2);filter:blur(1.5px)}
 .hx1-cloud .cl path:first-child{stroke:oklch(1 0 0 / .45);stroke-width:1.5;stroke-dasharray:3 7;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .hx1-sun circle{fill:var(--sun)}
 .hx1-sun path{stroke:var(--sun);stroke-width:4;stroke-linecap:round}
 .hx1-sun{opacity:0}
-.hx1-rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hx1-rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;will-change:transform} /* own layers: the weather repaints every frame and must not re-raster the photo and type under it (28 -> 58fps) */
 .hx1-rain line{stroke:oklch(0.94 0.03 250 / .72);stroke-width:1.6;stroke-linecap:round}
 .hx1-shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to top,oklch(0.16 0.07 262 / .92) 0%,oklch(0.16 0.07 262 / .72) 26%,oklch(0.16 0.07 262 / .2) 56%,oklch(0.16 0.07 262 / 0) 72%),
@@ -58,12 +58,12 @@
 .hx2{--vbg:var(--ink);min-height:max(640px,100svh);background:var(--ink);color:#fff;display:grid;grid-template-rows:1fr auto;align-items:end}
 .hx2-slides{position:absolute;inset:0;z-index:0}
 .hx2-slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden}
-.hx2-slide.is-on{opacity:1;visibility:visible}
+.hx2-slide.is-on{opacity:1;visibility:visible;will-change:opacity}
 .hx2-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%}
 .hx2-shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to top,oklch(0.16 0.07 262 / .86) 0%,oklch(0.16 0.07 262 / .64) 32%,oklch(0.16 0.07 262 / .22) 60%,oklch(0.16 0.07 262 / .06) 100%),
              linear-gradient(to left,oklch(0.16 0.07 262 / .55) 0%,oklch(0.16 0.07 262 / 0) 46%)}
-.hx2-bp{position:absolute;right:calc(var(--gutter) + 132px + 24px);top:calc(var(--nav-h) + 28px);width:min(32vw,440px);height:auto;overflow:visible;pointer-events:none}
+.hx2-bp{will-change:transform;position:absolute;right:calc(var(--gutter) + 132px + 24px);top:calc(var(--nav-h) + 28px);width:min(32vw,440px);height:auto;overflow:visible;pointer-events:none}
 @media (max-height:820px){.hx2-bp{width:min(26vw,360px)}}
 .hx2-bp-grid{opacity:.35}
 .hx2-bp-ground,.hx2-bp-tick path{fill:none;stroke:#fff;stroke-width:1.2;opacity:.55;vector-effect:non-scaling-stroke}
@@ -139,7 +139,7 @@
 
 /* ---------- v3: the hover-the-house diagnostic (AirWorks) with BLK zone fills; quiet weather behind */
 .hx3{--vbg:#fbfcfe;min-height:max(680px,100svh);background:linear-gradient(to bottom,#e6eefb,#fbfcfe 70%);color:var(--ink);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:0 clamp(16px,3vw,48px);padding:calc(var(--nav-h) + 40px) var(--gutter) calc(var(--div-h) + 32px)}
-.hx3-sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hx3-sky{will-change:transform;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hx3-arc{fill:none;stroke:var(--sun);stroke-width:1.5;stroke-dasharray:2 8;stroke-linecap:round;opacity:.6;vector-effect:non-scaling-stroke}
 .hx3-sun circle{fill:var(--sun)}
 .hx3-sun path{stroke:var(--sun);stroke-width:4;stroke-linecap:round}

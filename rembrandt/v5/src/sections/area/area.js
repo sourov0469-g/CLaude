@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Flip } from 'gsap/Flip';
 import { EASE, beats } from '../../js/fx.js';
+import { parallax } from '../../js/depth.js';
 import { TOWNS } from '../../data/towns.js';
 
 gsap.registerPlugin(Flip);
@@ -124,6 +125,7 @@ function cards(root, c) {
   };
   paint(); const ro = new ResizeObserver(paint); ro.observe(root);
   if (c.motion) {
+    parallax(root); // the street plan behind the cards travels at its own scroll rate (data-sy)
     beats(root, [root.querySelector('.tw-h'), root.querySelector('.tw-note'), root.querySelector('.tw2-sort')]);
     ScrollTrigger.batch(items, { start: 'top 88%', once: true, onEnter: b => gsap.fromTo(b, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.04, clearProps: 'transform,opacity,visibility' }) });
   }

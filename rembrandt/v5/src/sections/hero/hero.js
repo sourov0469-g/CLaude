@@ -134,7 +134,7 @@ function carousel(root, c) {
     l.style.setProperty('--fill', `url("${f.uri}")`);
     for (const w of l.children) {
       w.style.backgroundSize = `100% 100%, ${S.toFixed(0)}px ${SH.toFixed(0)}px`;
-      w.style.backgroundPosition = `0 0, calc(${(bx - w.offsetLeft).toFixed(1)}px + var(--mx, 0px)) calc(${(by - w.offsetTop).toFixed(1)}px + var(--my, 0px))`;
+      w.style.backgroundPosition = `0 0, ${(bx - w.offsetLeft).toFixed(1)}px ${(by - w.offsetTop).toFixed(1)}px`;
     }
   }
   function layout() { layers.forEach((l, i) => paint(l, shown[i])); }
@@ -172,8 +172,10 @@ function carousel(root, c) {
     count.textContent = n + 1; tabs.forEach((x, i) => x.classList.toggle('is-on', i === n));
     if (t) drift(inn);
     const back = 1 - front; shown[back] = n; paint(layers[back], n);
-    gsap.to(layers[back], { autoAlpha: 1, duration: 1.1 * t, ease: 'power1.inOut', overwrite: 'auto' });
-    gsap.to(layers[front], { autoAlpha: 0, duration: 1.1 * t, ease: 'power1.inOut', overwrite: 'auto' });
+    // the filled words swap in 0.3s at the middle of the photo fade (F17): a background-clip:text fade repaints every word
+    // each frame, so it is kept short rather than run for the photo's full 1.1s
+    gsap.to(layers[back], { autoAlpha: 1, duration: 0.3 * t, delay: 0.35 * t, ease: 'power1.inOut', overwrite: 'auto' });
+    gsap.to(layers[front], { autoAlpha: 0, duration: 0.3 * t, delay: 0.35 * t, ease: 'power1.inOut', overwrite: 'auto' });
     layers[back].classList.add('is-on'); layers[front].classList.remove('is-on'); front = back;
     setRoof(+inn.dataset.roof, 1.1 * t);
     setCap(n); cur = n; arm();
@@ -197,10 +199,7 @@ function carousel(root, c) {
   const done = [() => ro.disconnect(), () => timer && timer.kill(), () => root.removeEventListener('click', onClick), () => breathe && breathe.kill()];
   const cleanup = () => done.forEach(f => f());
   if (!t) return cleanup;
-  const off = { x: 0, y: 0 }, setOff = () => { h.style.setProperty('--mx', off.x.toFixed(1) + 'px'); h.style.setProperty('--my', off.y.toFixed(1) + 'px'); };
-  const qx = gsap.quickTo(off, 'x', { duration: 0.8, ease: 'power3.out', onUpdate: setOff }), qy = gsap.quickTo(off, 'y', { duration: 0.8, ease: 'power3.out', onUpdate: setOff });
-  const onMove = e => { if (!c.fine || e.pointerType !== 'mouse') return; qx(-(e.clientX / innerWidth - 0.5) * 80); qy(-(e.clientY / innerHeight - 0.5) * 40); };
-  root.addEventListener('pointermove', onMove, { passive: true }); done.push(() => root.removeEventListener('pointermove', onMove));
+  // (no pointer parallax on the photo fill: moving a background-clip:text fill re-rasterizes every word each frame, measured at 5fps)
 
   // entrance at the F17 level, in the measured order (visual, rules, title words, subtitle, controls, blueprint)
   drift(slides[0]);

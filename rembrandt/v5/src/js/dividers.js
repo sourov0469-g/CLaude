@@ -129,9 +129,13 @@ export function initDividers() {
     const tw = gsap.to(p, { t: 1, ease: 'none', paused: rm.matches, scrollTrigger: rm.matches ? undefined : { ...trig, scrub: true }, onUpdate: () => { st.t = p.t; render(); } });
     rm.addEventListener('change', () => { if (rm.matches) { tw.scrollTrigger && tw.scrollTrigger.disable(); st.t = 1; render(); } else { tw.scrollTrigger && tw.scrollTrigger.enable(); } });
     // cursor lift: loop only while the pointer is within 160px of the divider
+    let drawnPx = NaN, drawnAmp = NaN;
     const tick = () => {
-      st.amp += (st.ampT - st.amp) * 0.12; render();
-      if (st.ampT === 0 && st.amp < 0.01) { st.amp = 0; render(); st.raf = 0; return; }
+      st.amp += (st.ampT - st.amp) * 0.12;
+      if (st.ampT === 0 && st.amp < 0.01) { st.amp = 0; render(); drawnAmp = 0; st.raf = 0; return; }
+      // settled under a still pointer: stop until the pointer moves again (no per-frame redraw of an unchanged path)
+      if (Math.abs(st.ampT - st.amp) < 0.004 && st.px === drawnPx && Math.abs(st.amp - drawnAmp) < 0.004) { st.raf = 0; return; }
+      render(); drawnPx = st.px; drawnAmp = st.amp;
       st.raf = requestAnimationFrame(tick);
     };
     addEventListener('pointermove', e => {

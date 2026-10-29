@@ -79,7 +79,10 @@ button,input{font:inherit;color:inherit}
 /* sections and the 1 · 2 · 3 picker */
 .sec{position:relative;isolation:isolate;background:var(--sec-bg,var(--sky))}
 .sec[data-div]{padding-top:var(--div-h)}
-.div{position:absolute;left:0;width:100%;height:var(--div-h);pointer-events:none;z-index:4;overflow:visible}
+/* anything redrawn every frame (dividers, weather, drifting fills, vanes, smoke) gets its own layer, so its repaint never
+   re-rasters the photos and type beneath it (measured: up to 4.5 s of raster per 2 s down to a fraction) */
+[data-pd],[data-sy]{will-change:transform}
+.div{will-change:transform;position:absolute;left:0;width:100%;height:var(--div-h);pointer-events:none;z-index:4;overflow:visible}
 .div--hang{top:0;fill:var(--prev-bg,var(--sky))}
 .div--rise{bottom:-1px;fill:var(--next-bg,var(--sky))}
 .div path{transition:fill var(--dur-fast) var(--ease-out)}

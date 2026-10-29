@@ -70,7 +70,7 @@
 
 /* ---------- v3: the town finder with a compass that turns to the town, a tape scaled to the miles, and a weathervane */
 .tw3{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
-.tw3-vane{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none;opacity:.5}
+.tw3-vane{will-change:transform;position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none;opacity:.5}
 .tw3-roof,.tw3-cupola path,.tw3-arrow path{fill:none;stroke:oklch(1 0 0 / .35);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .tw3-arrow{transition:transform .6s var(--ease-x)}
 .tw3-nsew text{font:800 18px/1 "Epilogue",sans-serif;fill:oklch(1 0 0 / .4)}

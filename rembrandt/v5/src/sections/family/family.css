@@ -6,7 +6,7 @@
 /* ---------- v1: ink field, the name as a window onto the crew */
 .fm1{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,56px);padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .fm1-stage{max-width:1240px;width:100%;margin:0 auto}
-.fm1-name{width:100%;height:auto;overflow:visible}
+.fm1-name{will-change:transform;width:100%;height:auto;overflow:visible}
 .fm1-tx,.fm1-rim{font:900 300px/1 "Epilogue",sans-serif;letter-spacing:-.02em}
 .fm1-under{fill:var(--blue)}
 .fm1-rim{fill:none;stroke:oklch(1 0 0 / .55);stroke-width:2;vector-effect:non-scaling-stroke}
@@ -67,7 +67,8 @@
 .fm3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,8rem) + var(--mbar))}
 .fm3-deck{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 #fm3-ply path{fill:none;stroke:oklch(1 0 0 / .08);stroke-width:1.5}
-.fm3-deck--hi{opacity:0;-webkit-mask-image:radial-gradient(circle 220px at var(--cx,-999px) var(--cy,-999px),#000,transparent);mask-image:radial-gradient(circle 220px at var(--cx,-999px) var(--cy,-999px),#000,transparent);filter:brightness(3);transition:opacity .3s var(--ease-x)}
+.fm3-deck--hi{inset:auto;left:0;top:0;width:440px;height:440px;will-change:transform;opacity:0;-webkit-mask-image:radial-gradient(circle 220px at 50% 50%,#000,transparent);mask-image:radial-gradient(circle 220px at 50% 50%,#000,transparent);filter:brightness(3);transition:opacity .3s var(--ease-x)}
+/* a 440px window that moves on the compositor; the pattern inside is counter-shifted so it stays registered to the deck */
 .fm3.is-ptr .fm3-deck--hi{opacity:1}
 .fm3-head{position:relative;display:grid;gap:12px;max-width:1240px;margin:0 auto clamp(28px,4vh,48px)}
 .fm3-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}

@@ -79,7 +79,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv1-sq{transform-origin:40px 360px;transform-box:view-box;transition:transform .6s var(--ease-x)}
 .wv1-sq path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;opacity:.09;vector-effect:non-scaling-stroke}
 .wv1-sq .wv1-sq-lip{opacity:.07}
-.wv1-tape{height:28px;margin-top:18px;padding:0}
+.wv1-tape{will-change:transform;height:28px;margin-top:18px;padding:0}
 .wv1-blade{display:block;width:100%;height:28px}
 .wv1-blade-bg{fill:var(--sun)}
 .wv1-blade-tk{stroke:var(--ink);stroke-width:1.4}
@@ -91,7 +91,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv1.is-step .wv1-hook{animation:wv-hook .3s var(--ease-x)}
 @keyframes wv-hook{0%{transform:translateX(0)}40%{transform:translateX(10px)}100%{transform:translateX(0)}}
 .wv1-tile{position:relative}
-.wv1-nails{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wv1-nails{will-change:transform;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .wv1-nails circle{fill:#d8dde8;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
 @media (hover:hover){.wv1-tile:hover .wv1-nails circle{opacity:1;transform:scale(1)}.wv1-tile:hover .wv1-nails circle:nth-child(2){transition-delay:.03s}.wv1-tile:hover .wv1-nails circle:nth-child(3){transition-delay:.06s}.wv1-tile:hover .wv1-nails circle:nth-child(4){transition-delay:.09s}}
 .wv-btn{position:relative}
@@ -107,7 +107,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 /* v2: a gable cap lowers over a photo on hover (Q147 chevron, inverted into a roof line); opening lifts the roof off */
 .wv2-hip{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 #wv2-hp path{fill:none;stroke:var(--ink);stroke-width:1;opacity:.07}
-.wv2-gc{position:absolute;left:0;top:0;width:100%;height:46%;pointer-events:none;overflow:visible}
+.wv2-gc{will-change:transform;position:absolute;left:0;top:0;width:100%;height:46%;pointer-events:none;overflow:visible}
 .wv2-gc-f{fill:var(--sky)}
 .wv2-gc-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .wv2-tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:700;line-height:1.2;opacity:0;transform:translateY(16px);transition:opacity .2s var(--ease-x),transform .3s var(--ease-x);pointer-events:none;text-align:left;max-width:calc(100% - 24px)}

@@ -103,7 +103,7 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 #cl3-seam path{stroke:oklch(1 0 0 / .14);stroke-width:3}
 .cl3-band::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,oklch(1 0 0 / .14) 45%,transparent 60%);transform:translateX(-100%);transition:transform .8s var(--ease-x)}
 @media (hover:hover){.cl3-band:hover::before{transform:translateX(100%)}}
-.cl3-chim{position:absolute;right:clamp(24px,8vw,140px);bottom:100%;width:clamp(48px,6vw,84px);height:auto;margin-bottom:-2px;overflow:visible}
+.cl3-chim{will-change:transform;position:absolute;right:clamp(24px,8vw,140px);bottom:100%;width:clamp(48px,6vw,84px);height:auto;margin-bottom:-2px;overflow:visible}
 .cl3-band{overflow:visible}
 .cl3-stack{fill:#b85a38;stroke:var(--ink);stroke-width:3}
 .cl3-cap{fill:var(--shingle);stroke:var(--ink);stroke-width:3}
