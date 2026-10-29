@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 3, page systems (Phase 2 complete: 30/30 versions pass; 19 KEPT, 11 REBUILT)
+- **Phase:** 4, assembly + §12 gate (Phase 3 complete)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -125,3 +125,38 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 - Money: M1 and M3 rebuilt, M2 kept.
 - Book verified (KEPT ×3). Defect fixed: the global svg max-width capped the Book 1 door panel and the Money 3 strike line.
 - Phase 2 complete.
+
+### Phase 3 (page systems), 29 Oct
+- **Reaction kit rebuilt (v4.js).**
+  - Every section has its own trade glyph:
+    - hero: a lap course with its nail;
+    - proof: a seal star;
+    - services: a hatched square;
+    - work: a split pane;
+    - built: studs;
+    - colour: a published-colour chip;
+    - near: a house plan;
+    - reviews: a shake;
+    - money: a coin;
+    - book: a door;
+    - chrome: a 2×2 pane.
+  - Each role (button, link, card, image, control, tel) lays its glyphs out its own way.
+  - A hover verb and a different click verb come from an 11 × 6 table (`APV4.table()`).
+  - Checked: no verb repeats within any role across sections, or within any section across roles. Click verbs never reuse hover verbs. Glyphs are invisible at rest (this fixes the resting red notches seen in Phase 2).
+  - Gone from the kit: glint, spirit level, tape ticks, chalk pluck and path morph (all version-owned tricks).
+- **Cursor effect:** a per-section halo under the companion, styled per section and shown only with it. Tested in all ten sections: correct key, dark grounds flagged, console 0.
+- **Section entrance:** Q40 direction-aware heading reveal at 0.3 s for every section (from below scrolling down, from above scrolling up), replacing ten per-section heading styles. `riseIn` defaults to 0.3 s.
+- **K11 ceilings:**
+  - `REVEAL = 0.3`: every scroll entrance a version sets up is time-scaled to ≤0.3 s per element at mount. K10 tweens are marked `data: 'k10'` and exempt.
+  - `UI = 0.3`: click transitions in Services 2, Work 1, Built 3, Colour 2, Colour 3, Near 3, Money 2, Book 1 and the form engine.
+- **Fields:**
+  - Colour chips now sit only in the side margins.
+  - Near roof plans are fainter, with the content band masked to 30 %.
+  - The Built X-ray band is at 35 % on phones.
+  - The Money field is replaced by ledger paper (ruled rows ink in near the cursor), because the v4 chalk line and tape ticks were Book 3's and Services 3's tricks.
+- **Dead code removed:** `rollIn`, `panesOpen` and the `.roll` CSS (no callers).
+- **Regression:** `sect.js` for all ten sections × 3 widths/modes, 90/90 PASS, console 0.
+- **Phase 3 regression:**
+  - `qa4`: 159/159 PASS (companion on in all 30 versions with its variant, field + divider present, system cursor kept, reaction on hover, switchers, touch at 375/320, reduced motion).
+  - Legacy `ix4` at 1440: every check on the 19 kept versions PASS (30), page errors none. Its failures are only on the 11 rebuilt versions, whose removed markup it still looks for; `sect.js` covers those.
+  - Kit contact sheet `v5/shots/kit-sheet.png`; halo crops `v5/shots/halo-*.png`.

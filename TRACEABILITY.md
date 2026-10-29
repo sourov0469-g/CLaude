@@ -45,7 +45,7 @@ Page systems are judged once in Phase 3, not per version (conflict K9):
 | Stamp press-in | Proof 3 | v4 Money 3 "paid" stamp → rebuilt |
 | Picking a part on a house drawing | Services 1 | — |
 | Edge-aware row band + glyph redraw | Services 2 | v4 Hero 2 icon redraw → rebuilt |
-| Draggable tape | Services 3 | v4 Hero 2 tape blade → rebuilt; kit "tape" reaction → Phase 3 |
+| Draggable tape | Services 3 | v4 Hero 2 tape blade → rebuilt; kit "tape" reaction → removed in Phase 3 |
 | Exploded view on springs | Built 1 | — |
 | Sticky stacking cards | Built 2 | — |
 | Lap ↔ batten path morph | Built 3 | — |
@@ -61,13 +61,17 @@ Page systems are judged once in Phase 3, not per version (conflict K9):
 | Odometer digits | Money 1 | v4 Money 3 → rebuilt |
 | Distribution bars grow | Money 2 | — |
 | Strike-and-rewrite total | Money 3 (new) | — |
-| Glint / sheen sweep | Proof field only (page system) | v4 Hero 3 casing glint, Services 1 window glints, kit "sash" click → rebuilt / Phase 3 |
-| Spirit-level bubble | Work 1 (handle reads the drag) | v4 Services 1, Money 1, kit "level" → rebuilt / Phase 3 |
-| Chalk-line pluck | Book 3 | v4 Money field, kit "chalk" → Phase 3 |
-| Nail pop | — (page kit owner decided in Phase 3) | v4 Hero 1, Reviews 3 → rebuilt |
+| Glint / sheen sweep | Proof field only (page system) | v4 Hero 3 casing glint and Services 1 window glints → rebuilt; kit "sash" click → kit rebuilt in Phase 3 (no glint) |
+| Spirit-level bubble | Work 1 (handle reads the drag) | v4 Services 1, Money 1 → rebuilt; kit "level" → removed in Phase 3 |
+| Chalk-line pluck | Book 3 | kit "chalk" → removed in Phase 3; Money field snap line → see the Phase 3 note |
+| Nail pop | — (retired) | v4 Hero 1, Reviews 3 → rebuilt; the Phase 3 kit has no nail pop |
 | Atmosphere folds canvas | Book 1 | — |
 | Multi-step form with step panes | Book 2 | — |
 | Sentence form | Book 3 | — |
+| Strike-and-rewrite | Money 3 | — |
+| Section trade glyphs on hover/click verbs (11 × 6 table, all distinct) | Reaction kit (page system, Phase 3) | replaces the v4 13-kind kit |
+| Per-section cursor halo | Cursor effect (page system, Phase 3) | — |
+| Direction-aware heading entrance (Q40, 0.3 s) | Section entrance (page system, Phase 3) | replaces ten per-section heading styles |
 
 ## Rows
 

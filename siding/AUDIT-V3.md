@@ -231,3 +231,10 @@ Final verdicts and verification evidence are appended below as each section pass
 **Book — all three KEPT, re-verified 29 Oct 2026.** `sect.js book` PASS ×9: every form is submitted twice, once empty (it must refuse) and once valid (it must reach its done state). Screenshots `book1–3`. One defect fixed in Book 1: the global `svg { max-width: 100% }` capped the door panel, so the phone number overhung it. The same cap was clipping Money 3's strike line; both are fixed.
 
 **Phase 2 complete: all ten sections pass (SECTIONS.md 30/30 YES). Final count: 19 KEPT, 11 REBUILT.**
+
+### Phase 3: page systems (29 Oct 2026)
+- **Reaction kit:** section glyphs × role layouts × an 11 × 6 table of hover and click verbs, with no repeats within a role or a section, and clicks never equal to hovers. Invisible at rest. No version-owned trick is reused.
+- **Cursor effect:** a per-section halo under the companion (lap lines, seal ring, dimension cross, split disc, stud X-ray, colour bloom, survey reticle, warm read, coin rim, porch light). The fields keep answering the pointer.
+- **Section entrance:** direction-aware heading reveal (Q40), 0.3 s. A K11 ceiling of 0.3 s applies to every scroll entrance and click transition; the K10 data animations are exempt.
+- **Fields:** the Colour chips moved to the margins; the Near plans are quieter; the Built band is softer on phones; the Money field is now ledger paper (the v4 chalk line and tape ticks duplicated Book 3 and Services 3).
+- **Evidence:** `sect.js` 90/90, `qa4` 159/159, `ix4` kept-version checks 30/30, console 0.

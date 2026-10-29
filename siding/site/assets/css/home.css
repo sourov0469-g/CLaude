@@ -287,10 +287,6 @@ html.motion .h2-s2 { animation: h2s2 .24s cubic-bezier(0, 0, .2, 1) both; }
   .ci-c { grid-column: 8 / 11; grid-row: 2; }
   .ci-d { grid-column: 11 / 13; grid-row: 2; }
 }
-.roll { display: inline-flex; height: .8em; }
-.roll .rc { display: inline-block; height: .8em; overflow: hidden; }
-.roll .rs { display: flex; flex-direction: column; }
-.roll .rs > span, .roll .rx { display: block; height: .8em; line-height: .8; }
 
 /* ---------- PROOF 3: statement ---------- */
 .proof-3 { display: grid; gap: 32px; }
@@ -1360,20 +1356,19 @@ html.has-pal .cur { display: none; }
 .f-seam { fill: none; stroke: #5A4630; stroke-width: 1.2; stroke-dasharray: 3 5; }
 .f-plate { fill: none; stroke: #8A6A3E; stroke-width: 12; }
 .f-bandline { fill: none; stroke: var(--red); stroke-width: 1; stroke-opacity: .6; }
+.f-rule { stroke: #3B6FB6; stroke-opacity: .07; }
+.f-margin { fill: none; stroke: var(--red); stroke-opacity: .28; stroke-width: 1; }
 .f-chip { fill: var(--sheet); stroke: currentColor; stroke-opacity: .16; }
 .f-chip.is-face { stroke-opacity: .32; }
 .f-punch { fill: currentColor; fill-opacity: .14; }
 .f-chips { opacity: .9; }
 .f-lot { fill: none; stroke: currentColor; stroke-opacity: .04; stroke-dasharray: 6 5; }
-.f-roof { fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .08; }
+.sfx-near { -webkit-mask: linear-gradient(90deg, #000, rgba(0, 0, 0, .3) 16%, rgba(0, 0, 0, .3) 84%, #000); mask: linear-gradient(90deg, #000, rgba(0, 0, 0, .3) 16%, rgba(0, 0, 0, .3) 84%, #000); }   /* V5: the roof plans stay quiet behind the rows and the maps */
+@media (max-width: 899px) { .sfx-built { opacity: .35; } }   /* V5: on phones the X-ray band passes behind the heading */
+.f-roof { fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .05; }
 .f-ridge { stroke: var(--red); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
 .f-stile { fill: none; stroke: currentColor; stroke-opacity: .12; stroke-width: 1.5; }
 .f-slat { fill: currentColor; fill-opacity: .085; }
-.sfx-money pattern path { fill: none; stroke: currentColor; stroke-opacity: .28; }
-.f-chalk { fill: none; stroke: #3B6FB6; stroke-opacity: .6; stroke-width: 1.5; }
-.f-chalkdust { fill: none; stroke: #3B6FB6; stroke-opacity: 0; stroke-width: 7; transition: stroke-opacity .6s ease; }
-.f-chalkdust.is-on { stroke-opacity: .1; }
-.f-peg { fill: currentColor; fill-opacity: .3; }
 .f-jamb, .f-leaf, .f-door rect { fill: none; stroke: currentColor; stroke-opacity: .12; stroke-width: 2; }
 .f-knob { fill: currentColor; fill-opacity: .22; }
 .f-pool { mix-blend-mode: screen; }
@@ -1392,36 +1387,16 @@ html.has-pal .cur { display: none; }
 /* ---------- reaction kit (§2.4) ---------- */
 .rx-host { position: relative; }
 .rx { position: absolute; left: 0; top: 0; z-index: 2; overflow: visible; pointer-events: none; }
-.rx-l { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
-.rx-shade { stroke-opacity: .4; }
-.rx-glint { fill: #fff; opacity: .3; }
-.rx-nail { fill: currentColor; }
-.rx-nh circle { fill: var(--fg, #161616); }
-.rx-nh path { stroke: var(--bg, #fff); stroke-width: 1; }
-.rx-chip { fill: #B8925E; }
-.rx-paint { fill: var(--rx-paint, var(--red)); }
-.rx-drop, .rx-splash { opacity: 0; }
-.rx-splash { stroke: var(--rx-paint, var(--red)); }
-.rx-tab { opacity: 0; }
-.rx-tabf { fill: #4A4744; }
-.rx-tab .rx-l { stroke: #1E1D1B; stroke-width: 1; }
-.rx-tick { stroke: currentColor; stroke-width: 1; }
-.rx-lev { opacity: 0; }
-.rx-levb { fill: #F2C230; stroke: #161616; stroke-width: .8; }
-.rx-levv { fill: #CFE8B5; stroke: #161616; stroke-width: .6; }
-.rx-bub { fill: #fff; stroke: #161616; stroke-width: .4; }
-.rx-chalk { fill: none; stroke: #3B6FB6; stroke-width: 1.6; }
-.rx-dust circle { fill: #3B6FB6; opacity: 0; }
-.rx-fr, .rx-mun { fill: none; stroke: #fff; stroke-width: 3; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .45)); }
-.rx-mun { stroke-width: 2; }
-.rx-pane { fill: #fff; opacity: 0; }
-.rx-seal { fill: none; stroke: var(--red); stroke-width: 1.5; }
-.rx-seal2 { fill: none; stroke: var(--red); stroke-width: 3; opacity: 0; }
-.rx-gab { opacity: 0; stroke-width: 2; }
-.rx-cap { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
-.rx-mor { opacity: 0; stroke-width: 2; }
-.rx-ring, .rx-ok, .rx-no { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
-.rx-pill { opacity: 0; stroke-opacity: .5; }
+.rx { color: var(--rx-ink, var(--red)); }
+.rx .rg { opacity: 0; }   /* nothing of the kit shows at rest */
+.rx .g-l { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.rx .g-f { fill: currentColor; }
+.rx .g-c { stroke: rgba(0, 0, 0, .35); stroke-width: .6; }
+.rx .g-w { fill: #fff; opacity: .85; }
+.rx .g-s { fill: #D9BE92; stroke: #8A6A3E; stroke-width: .6; }
+.rx-image { color: #fff; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)); }
+.v[data-tone="night"], .ft, .hero-3 .h3-stage { --rx-ink: var(--red-on-night); }
+.v[data-tone="red"] { --rx-ink: #fff; }
 .rx-call { position: fixed; z-index: 300; display: grid; gap: 4px; padding: 16px 20px; border-radius: 20px; background: var(--ink); color: #F3F2EE; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); pointer-events: none; }
 .rx-call b { font-size: 1.6rem; font-weight: 780; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
 .rx-call span { font-size: .8125rem; color: #C9C6BE; }
@@ -1587,3 +1562,20 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .snt-in { position: relative; display: inline-block; }
 .snt-ch { position: absolute; left: 0; bottom: -7px; width: 100%; height: 10px; overflow: visible; pointer-events: none; }
 .snt-ch path { fill: none; stroke: #6FA8DC; stroke-width: 2; vector-effect: non-scaling-stroke; }
+
+/* ---------- V5 cursor effect: one halo under the companion, a different ground per section ---------- */
+.cfx { --ci: 22, 22, 22; position: fixed; left: 0; top: 0; z-index: 190; width: 128px; height: 128px; margin: -64px 0 0 -64px; border-radius: 50%; pointer-events: none; opacity: 0; transition: opacity .2s ease, width .3s ease, height .3s ease, margin .3s ease; -webkit-mask: radial-gradient(closest-side, #000 55%, transparent); mask: radial-gradient(closest-side, #000 55%, transparent); }
+.cfx.is-dark { --ci: 241, 239, 234; }
+.cfx.is-on { opacity: 1; }
+.cfx[data-sec="hero"] { background: repeating-linear-gradient(0deg, rgba(var(--ci), .16) 0 1.5px, transparent 1.5px 10px); }
+.cfx[data-sec="proof"] { width: 72px; height: 72px; margin: -36px 0 0 -36px; border: 1.5px dotted rgba(var(--ci), .45); -webkit-mask: none; mask: none; }
+.cfx[data-sec="services"] { width: 96px; height: 96px; margin: -48px 0 0 -48px; background: linear-gradient(rgba(212, 33, 37, .5), rgba(212, 33, 37, .5)) center / 1px 100% no-repeat, linear-gradient(90deg, rgba(212, 33, 37, .5), rgba(212, 33, 37, .5)) center / 100% 1px no-repeat; }
+.cfx[data-sec="work"] { width: 96px; height: 96px; margin: -48px 0 0 -48px; background: linear-gradient(90deg, rgba(var(--ci), .12) 50%, rgba(255, 255, 255, .22) 50%); }
+.cfx[data-sec="built"] { background: repeating-linear-gradient(90deg, rgba(var(--ci), .16) 0 2px, transparent 2px 18px), radial-gradient(rgba(var(--ci), .08), transparent 70%); }
+.cfx[data-sec="colour"] { background: conic-gradient(#283849, #2A4F43, #A28F7D, #714D47, #5F696D, #283849); opacity: 0; filter: blur(16px); }
+.cfx[data-sec="colour"].is-on { opacity: .3; }
+.cfx[data-sec="near"] { width: 104px; height: 104px; margin: -52px 0 0 -52px; background: repeating-conic-gradient(rgba(var(--ci), .5) 0 1.5deg, transparent 1.5deg 30deg); -webkit-mask: radial-gradient(closest-side, transparent 78%, #000 80%, #000 98%, transparent); mask: radial-gradient(closest-side, transparent 78%, #000 80%, #000 98%, transparent); }
+.cfx[data-sec="reviews"] { background: radial-gradient(rgba(232, 217, 168, .6), transparent 70%); }
+.cfx[data-sec="money"] { width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 2px dashed rgba(var(--ci), .3); -webkit-mask: none; mask: none; }
+.cfx[data-sec="book"] { width: 180px; height: 180px; margin: -90px 0 0 -90px; background: radial-gradient(rgba(255, 214, 150, .32), transparent 70%); }
+html:not(.motion) .cfx { display: none; }

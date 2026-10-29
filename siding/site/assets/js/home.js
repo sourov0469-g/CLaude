@@ -37,6 +37,7 @@
   const markNames = s => esc(s).replace(CREW_RX, '<mark>$1</mark>');
   const tradesOf = bits => DATA.map.sv.filter((_, i) => bits & (1 << i)).join(', ');
   const ease = { out: 'power3.out', x: 'expo.out', io: 'power4.inOut' };
+  const REVEAL = 0.3, UI = 0.3;   // F17 / K11 ceilings: an entrance element, and a state change answering a click
 
   /* a bag of listeners, observers and timers, cleared when a version is switched out (S1315 leak rules) */
   function bag() {
@@ -95,44 +96,24 @@
     el.dataset.splitDone = '1';
     return $$('.w', el);
   }
-  /* ---------- headings: each section enters its own way, all inside the parameter library's reveal band (builder
-     brief 3: reveals 0.4-0.8 s, staggers 0.02-0.12, no rotation of text, G5 in AUDIT-V3); the phrase stays in
-     aria-label ---------- */
+  /* ---------- section entrance (BRIEF-V5 §4, K4): Q40 direction-aware reveal at reveal level. Heading words rise out
+     of their masks from below when the section is reached scrolling down and drop in from above when it is reached
+     scrolling up; 0.3 s, power3.out, 0.04 s apart. The phrase stays in aria-label. ---------- */
   const once = (el, start = 'top 86%') => ({ trigger: el, start, once: true });
   function heads(rootEl, s) {
     $$('[data-split]', rootEl).forEach(el => {
       if (!motionOK()) { el.classList.add('is-split'); return; }
       const words = splitWords(el);
       el.classList.add('is-split');
-      const first = s.key === 'hero' && !s.switched;
-      const st = first ? undefined : once(el);
-      switch (s.key) {
-        case 'hero':      // R3 blur-in, headlines only: 0.4 s power1.out, blur 10 px and 15 px to rest
-          G.from(words, { y: 15, filter: 'blur(10px)', autoAlpha: 0, duration: 0.4, ease: 'power1.out', stagger: 0.05, delay: first ? 0.1 : 0, scrollTrigger: st, clearProps: 'filter' }); break;
-        case 'services':  // R2 masked word reveal: 0.6 s expo.out, stagger 0.05, words rise from under the mask
-          G.from(words, { yPercent: 110, duration: 0.6, ease: 'expo.out', stagger: 0.05, scrollTrigger: st }); break;
-        case 'work':      // Q40 direction-aware variant: words slide in from the left under their mask
-          G.from(words, { xPercent: -110, duration: 0.6, ease: 'expo.out', stagger: 0.045, scrollTrigger: st }); break;
-        case 'built':     // slide-up reveal: 0.8 s power2.out, stagger 0.02, autoAlpha + yPercent
-          G.from(words, { yPercent: 60, autoAlpha: 0, duration: 0.8, ease: 'power2.out', stagger: 0.02, scrollTrigger: st }); break;
-        case 'colour':    // words arrive in paint and dry to ink
-          G.from(words, { color: '#D42125', yPercent: 40, autoAlpha: 0, duration: 0.6, ease: 'power3.out', stagger: 0.05, scrollTrigger: st }); break;
-        case 'near':      // masked drop from above
-          G.from(words, { yPercent: -110, duration: 0.6, ease: 'expo.out', stagger: 0.05, scrollTrigger: st }); break;
-        case 'reviews':   // S1329 staggered words: opacity and 12 px, 0.05 s apart
-          G.from(words, { autoAlpha: 0, y: 12, duration: 0.6, ease: 'power2.out', stagger: 0.05, scrollTrigger: st }); break;
-        case 'money':     // quiet fade, the figures below do the talking
-          G.from(words, { autoAlpha: 0, duration: 0.4, ease: 'power1.out', stagger: 0.08, scrollTrigger: st }); break;
-        case 'book':      // S1334: words about 72 ms apart, settling from a little large
-          G.from(words, { scale: 1.12, autoAlpha: 0, duration: 0.6, ease: 'power3.out', stagger: 0.072, transformOrigin: '0% 100%', scrollTrigger: st }); break;
-        default:          // R2 masked word reveal
-          G.from(words, { yPercent: 110, duration: 0.6, ease: 'expo.out', stagger: 0.05, scrollTrigger: st });
-      }
+      const go = dir => G.fromTo(words, { yPercent: 110 * dir }, { yPercent: 0, duration: 0.3, ease: 'power3.out', stagger: 0.04, overwrite: true });
+      if (s.key === 'hero' && !s.switched) { go(1); return; }
+      G.set(words, { yPercent: 110 });
+      ST.create({ trigger: el, start: 'top 90%', end: 'bottom 10%', once: true, onEnter: () => go(1), onEnterBack: () => go(-1) });
     });
   }
   function riseIn(els, opts = {}) {
     if (!motionOK() || !els.length) return;
-    G.from(els, Object.assign({ y: 16, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.08 }, opts));
+    G.from(els, Object.assign({ y: 16, autoAlpha: 0, duration: 0.3, ease: ease.out, stagger: 0.05 }, opts));
   }
 
   /* ---------- count-up trust stats (R20). One tempo for the page (Playbook 2): 1.4 s power2.out, inside Feldco's
@@ -147,7 +128,7 @@
       const dec = (m[2].split('.')[1] || '').length, to = parseFloat(m[2].replace(/,/g, '')), o = { v: 0 };
       const fmt = v => m[1] + v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[3];
       el.textContent = fmt(0);
-      G.to(o, { v: to, duration: 1.4, ease: 'power2.out', delay: (opts.delay || 0) + k * 0.08, scrollTrigger: opts.st ? opts.st(el) : undefined,
+      G.to(o, { v: to, duration: 1.4, ease: 'power2.out', data: 'k10', delay: (opts.delay || 0) + k * 0.08, scrollTrigger: opts.st ? opts.st(el) : undefined,
         onUpdate: () => { el.textContent = fmt(o.v); }, onComplete: () => { el.textContent = final; } });
     });
   }
@@ -172,23 +153,6 @@
       }
       cur = text;
     };
-  }
-
-  /* ---------- rolling figures for the proof index: two turns of the drum, 1.1 s expo, columns 70 ms apart ---------- */
-  function rollIn(el, delay) {
-    const val = el.dataset.roll;
-    if (!motionOK()) return;
-    const drum = '01234567890123456789'.split('').map(n => `<span>${n}</span>`).join('');
-    el.innerHTML = `<span aria-hidden="true" style="display:inline-flex">${[...val].map(c => /\d/.test(c) ? `<span class="rc"><span class="rs" data-to="${c}">${drum}</span></span>` : `<span class="rx">${esc(c)}</span>`).join('')}</span><span class="sr-only">${esc(val)}</span>`;
-    const strips = $$('.rs', el);
-    G.fromTo(strips, { yPercent: 0 }, { yPercent: i => -(10 + +strips[i].dataset.to) * 5, duration: 1.1, ease: ease.x, stagger: 0.07, delay, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
-  }
-
-  /* ---------- the logo's 2x2 window: four panes open from the centre cross (house motif) ---------- */
-  function panesOpen(panes, delay = 0) {
-    if (!motionOK()) { panes.forEach(p => G && G.set(p, { scale: 0 })); return null; }
-    G.set(panes, { scale: 1 });
-    return G.to(panes, { scale: 0, duration: 1, ease: ease.io, stagger: { each: 0.06, from: 'center' }, delay });
   }
 
   /* ---------- drag helper: pointer capture, 10 px direction lock so vertical page scroll is never trapped (S1443) ---------- */
@@ -373,7 +337,7 @@
       b.add(() => { cancelAnimationFrame(raf2); nums.forEach(n => { n.style.textShadow = ''; }); });
     }
     G.from($$('.bq', r), { y: -14, autoAlpha: 0, duration: 0.45, ease: 'back.out(1.5)', stagger: 0.12, scrollTrigger: once($('.b886', r), 'top 92%') });
-    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: 'power2.out', scrollTrigger: once(ring, 'top 92%') });
+    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: 'power2.out', data: 'k10', scrollTrigger: once(ring, 'top 92%') });
     G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
     if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   };
@@ -443,7 +407,7 @@
     rows.forEach((row, k) => { const set = () => { now.textContent = String(k + 1).padStart(2, '0'); }; b.on(row, 'pointerenter', set); b.on(row, 'focus', set); });
     // v4 K72 edge-aware band: the hover band grows from the edge the pointer came in through
     rows.forEach(row => b.on(row, 'pointerenter', e => { const rc = row.getBoundingClientRect(); row.style.setProperty('--edge', e.clientY - rc.top < rc.height / 2 ? '0%' : '100%'); }));
-    if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
+    if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
     if (!(mqFine.matches && mqDesk.matches) || !G || !motionOK()) return;
     const names = $$('[data-chars]', r);
     names.forEach(n => {
@@ -466,7 +430,7 @@
       const s = row.dataset.img;
       if (!s) { G.to(peek, { autoAlpha: 0, duration: 0.2 }); return; }
       if (s !== src) { pim.src = AU(s); src = s; }
-      G.fromTo(pim, { scale: 1 }, { scale: 1.06, duration: 0.7, ease: ease.out });
+      G.fromTo(pim, { scale: 1 }, { scale: 1.06, duration: UI, ease: ease.out });
       G.to(peek, { autoAlpha: 1, scale: 1, duration: 0.3, ease: ease.out });
     }));
     b.on(list, 'pointerleave', () => G.to(peek, { autoAlpha: 0, scale: 0.96, duration: 0.2 }));
@@ -544,11 +508,11 @@
         let to = null;
         if (Math.abs(vx) > 300) to = vx > 0 ? 100 : 0;
         else if (st.v < edge) to = 0; else if (st.v > 100 - edge) to = 100;
-        if (to !== null) { if (motionOK()) G.to(st, { v: to, duration: 0.55, ease: ease.x, onUpdate: () => set(st.v) }); else set(to); }
+        if (to !== null) { if (motionOK()) G.to(st, { v: to, duration: UI, ease: ease.x, onUpdate: () => set(st.v) }); else set(to); }
       }
     });
     sliderKeys(h, b, () => st.v, v => { G && G.killTweensOf(st); set(v); });   // a key press ends the opening sweep, never fights it
-    if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); }
+    if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, data: 'k10', onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); }
     let cur = 0, busy = false;
     const fill = p => {
       A.src = AU(`assets/img/h/work-${p.id}-a-1000.webp`); A.alt = p.aa; B.src = AU(`assets/img/h/work-${p.id}-b-1000.webp`); B.alt = p.ab;
@@ -562,10 +526,10 @@
       if (!motionOK()) { fill(P[k]); set(50); return; }
       busy = true;
       G.timeline({ onComplete: () => { busy = false; } })
-        .to(panes, { scale: 1, duration: 0.42, ease: 'power4.in', stagger: 0.04 })
+        .to(panes, { scale: 1, duration: UI, ease: 'power4.in', stagger: 0.04 })
         .add(() => { fill(P[k]); set(50); return null; })
         .add(() => Promise.all([A, B].map(i => i.decode ? i.decode().catch(() => {}) : 0)))
-        .to(panes, { scale: 0, duration: 0.6, ease: 'power4.out', stagger: 0.04 }, '+=0.12');
+        .to(panes, { scale: 0, duration: UI, ease: 'power4.out', stagger: 0.04 }, '+=0.12');
     }));
   };
 
@@ -714,18 +678,18 @@
       lap.toggleAttribute('hidden', style !== 'lap'); bb.toggleAttribute('hidden', style !== 'bb');
       rows.forEach(rw => { rw.hidden = rw.dataset.set !== style; });
       const to = style === 'lap' ? morph.dataset.lap : morph.dataset.bb;
-      if (anim && motionOK() && window.MorphSVGPlugin) G.to(morph, { morphSVG: { shape: to, type: 'linear', map: 'position' }, duration: 0.8, ease: 'power2.inOut', overwrite: true });
+      if (anim && motionOK() && window.MorphSVGPlugin) G.to(morph, { morphSVG: { shape: to, type: 'linear', map: 'position' }, duration: UI, ease: 'power2.inOut', overwrite: true });
       else morph.setAttribute('d', to);
-      if (anim && motionOK()) G.from($$('.dim, .xl, .cl, .vt, .vs, .sh-face', style === 'lap' ? lap : bb), { autoAlpha: 0, duration: 0.4, stagger: 0.03, delay: 0.5 });
+      if (anim && motionOK()) G.from($$('.dim, .xl, .cl, .vt, .vs, .sh-face', style === 'lap' ? lap : bb), { autoAlpha: 0, duration: UI, stagger: 0.03, delay: 0.15 });
     };
     radios($('.b3x-seg', r), b, it => setStyle(it.dataset.style, true));
     svg.setAttribute('viewBox', frameFor('lap'));
     const hi = (code, on) => {
-      $$(`.dim[data-code="${code}"]`, svg).forEach(dm => { dm.classList.toggle('on', on); if (on && motionOK() && window.DrawSVGPlugin) G.fromTo($$('path', dm), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 0.45, ease: 'power2.out', overwrite: true }); });
+      $$(`.dim[data-code="${code}"]`, svg).forEach(dm => { dm.classList.toggle('on', on); if (on && motionOK() && window.DrawSVGPlugin) G.fromTo($$('path', dm), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: UI, ease: 'power2.out', overwrite: true }); });
       rows.forEach(rw => rw.classList.toggle('on', on && rw.dataset.code === code));
     };
     rows.forEach(rw => { ['pointerenter', 'focus'].forEach(ev => b.on(rw, ev, () => hi(rw.dataset.code, true))); ['pointerleave', 'blur'].forEach(ev => b.on(rw, ev, () => hi(rw.dataset.code, false))); });
-    if (motionOK() && window.DrawSVGPlugin) G.from($$('.sh-lap path, .sh-morph', svg), { drawSVG: '0%', duration: 0.9, ease: 'power2.inOut', stagger: 0.02, scrollTrigger: once(svg, 'top 82%') });
+    if (motionOK() && window.DrawSVGPlugin) G.from($$('.sh-lap path, .sh-morph', svg), { drawSVG: '0%', duration: UI, ease: 'power2.inOut', stagger: 0.02, scrollTrigger: once(svg, 'top 82%') });
   };
 
   /* COLOUR: one studio engine over the photo-traced masks (S0006: masks from the photo, never polygons) */
@@ -830,8 +794,8 @@
       const sw = e.target.closest && e.target.closest('.cmp-sw'); if (!sw || !motionOK()) return;
       const col = sw.closest('td').cellIndex, d0 = $$('thead .cmp-col .c2-d', r)[col - 1]; if (!d0) return;
       const tool = $('.c2-tool', d0), wet = $('.c2-wet', d0), brd = $('.c2-board', d0);
-      if (tool) { G.fromTo(tool, { x: -90 }, { x: 0, duration: 0.6, ease: 'power2.inOut' }); G.fromTo(wet, { attr: { width: 6 } }, { attr: { width: 96 }, duration: 0.6, ease: 'power2.inOut' }); }
-      if (brd) G.fromTo(brd, { x: -10 }, { x: 116, duration: 0.9, ease: 'power1.inOut' });
+      if (tool) { G.fromTo(tool, { x: -90 }, { x: 0, duration: UI, ease: 'power2.inOut' }); G.fromTo(wet, { attr: { width: 6 } }, { attr: { width: 96 }, duration: UI, ease: 'power2.inOut' }); }
+      if (brd) G.fromTo(brd, { x: -10 }, { x: 116, duration: UI, ease: 'power1.inOut' });
     });
     $$('.cmp-set', r).forEach((set, k) => {
       const col = $$('.cmp-col', r)[k], now = $('[data-now]', col), code = $('[data-code]', col), sws = $$('.cmp-sw', set);
@@ -841,7 +805,7 @@
         now.textContent = sw.dataset.name; code.textContent = sw.dataset.code;
       }));
     });
-    if (motionOK()) G.from($$('.cmp tbody tr', r), { y: 14, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.cmp', r), 'top 82%') });
+    if (motionOK()) G.from($$('.cmp tbody tr', r), { y: 14, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.cmp', r), 'top 82%') });
   };
 
   /* COLOUR 3: Grid-to-Fullscreen (Codrops) as builder-brief R10's DOM port: the tile's bounds are measured at click
@@ -862,7 +826,7 @@
       if (tw) tw.kill();
       if (motionOK()) {
         tw = mqDesk.matches
-          ? G.timeline().fromTo(sheet, { clipPath: box(t) }, { clipPath: 'inset(0px 0px 0px 0px round 20px)', duration: 0.5, ease: 'power3.inOut' })
+          ? G.timeline().fromTo(sheet, { clipPath: box(t) }, { clipPath: 'inset(0px 0px 0px 0px round 20px)', duration: UI, ease: 'power3.inOut' })
               .fromTo(words, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: ease.out, stagger: 0.05 }, '-=0.12')
               .fromTo($$('.cbl', sheet), { xPercent: -6, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.3, ease: ease.out, stagger: 0.07 }, '<')
           : G.fromTo(sheet, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: ease.out });
@@ -874,14 +838,14 @@
       if (tw) tw.kill();
       if (!motionOK()) { done(); return; }
       tw = mqDesk.matches && from
-        ? G.timeline({ onComplete: done }).to(words, { autoAlpha: 0, duration: 0.15 }).to(sheet, { clipPath: box(from), duration: 0.45, ease: 'power3.inOut' })
+        ? G.timeline({ onComplete: done }).to(words, { autoAlpha: 0, duration: 0.15 }).to(sheet, { clipPath: box(from), duration: UI, ease: 'power3.inOut' })
         : G.to(sheet, { autoAlpha: 0, scale: 0.96, duration: 0.2, onComplete: done });
     };
     tiles.forEach(t => b.on(t, 'click', () => open(t)));
     b.on(close, 'click', shut);
     b.on(sheet, 'keydown', e => { if (e.key === 'Escape') shut(); });
     b.add(() => { if (tw) tw.kill(); });
-    if (motionOK()) G.from(tiles, { y: 16, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: { each: 0.015, grid: 'auto', from: 'start' }, scrollTrigger: once(stage, 'top 85%') });
+    if (motionOK()) G.from(tiles, { y: 16, autoAlpha: 0, duration: UI, ease: ease.out, stagger: { each: 0.015, grid: 'auto', from: 'start' }, scrollTrigger: once(stage, 'top 85%') });
   };
 
   /* NEAR YOU: shared map + finder */
@@ -1057,13 +1021,13 @@
       const t = D[name];
       M.hot(new Set(PINS.map((p, i) => p[5] === t.ci ? i : -1).filter(i => i >= 0)));
       if (tw) tw.kill();
-      if (anim && motionOK()) tw = G.timeline().to(svg, { attr: { viewBox: '0 0 566 640' }, duration: 0.35, ease: 'power2.in' }).to(svg, { attr: { viewBox: view(t) }, duration: 0.8, ease: 'power3.inOut' });
+      if (anim && motionOK()) tw = G.timeline().to(svg, { attr: { viewBox: '0 0 566 640' }, duration: UI, ease: 'power2.in' }).to(svg, { attr: { viewBox: view(t) }, duration: UI, ease: 'power3.inOut' });
       else svg.setAttribute('viewBox', view(t));
       cap.textContent = `${name}: ${t.doc} documented jobs`;
       kEl.textContent = `${t.n} photographed jobs in ${name}` + (t.n > t.p.length ? `, the latest ${t.p.length}` : '');
       rail.innerHTML = t.p.map(q => `<li class="dv-card"><img src="${esc(AU(q.src))}" width="320" height="240" alt="${esc(q.alt)}" loading="lazy" decoding="async"><p><b>${esc(q.place)}</b><span>${esc(q.when)}. ${esc(q.trades)}</span></p></li>`).join('');
       rail.scrollLeft = 0;
-      if (anim && motionOK()) G.from($$('.dv-card', rail), { x: 30, autoAlpha: 0, duration: 0.45, ease: ease.out, stagger: 0.05, delay: 0.25 });
+      if (anim && motionOK()) G.from($$('.dv-card', rail), { x: 30, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.05, delay: 0.25 });
     };
     radios($('.dv-chips', r), b, it => go(it.dataset.town, true), '.dv-chip');
     go('Austin', false);
@@ -1188,7 +1152,7 @@
       const d = D[k], mx = Math.max(...d.c);
       bars.forEach((li, i) => {
         const h = d.c[i] / mx;
-        if (motionOK()) G.to(li, { '--h': h, duration: 0.4, ease: 'power2.out', overwrite: true }); else li.style.setProperty('--h', h);
+        if (motionOK()) G.to(li, { '--h': h, duration: UI, ease: 'power2.out', overwrite: true }); else li.style.setProperty('--h', h);
         $('.db-n', li).textContent = d.c[i]; $('.sr-only', li).textContent = `${B[i]}: ${d.c[i]} jobs`;
         li.classList.toggle('is-med', i === d.med);
       });
@@ -1199,7 +1163,7 @@
     };
     radios($('.dd-tabs', r), b, it => show(it.dataset.k), '.dt');
     const flat = matchMedia('(max-width: 639px)').matches;   // phones draw the bars horizontally
-    if (motionOK()) G.from($$('.db i', r), Object.assign(flat ? { scaleX: 0, transformOrigin: '0% 50%' } : { scaleY: 0, transformOrigin: '50% 100%' }, { duration: 0.6, ease: ease.out, stagger: 0.03, scrollTrigger: once(list, 'top 85%') }));
+    if (motionOK()) G.from($$('.db i', r), Object.assign(flat ? { scaleX: 0, transformOrigin: '0% 50%' } : { scaleY: 0, transformOrigin: '50% 100%' }, { duration: UI, ease: ease.out, stagger: 0.03, scrollTrigger: once(list, 'top 85%') }));
   };
   /* MONEY 3: R24 configurator on a receipt. The Holiday Savings line always applies (through November 30); the other
      two are boxes. Offers add, as the firm's example does (10 + 5 + 10 = 25 %). When the total changes, a pen line
@@ -1243,7 +1207,7 @@
       if (first && focus) first.focus();
       return !first;
     }
-    function shake() { if (motionOK()) G.fromTo(steps[i], { x: 0 }, { keyframes: { x: [0, -6, 6, -4, 4, 0] }, duration: 0.32, ease: 'none' }); }
+    function shake() { if (motionOK()) G.fromTo(steps[i], { x: 0 }, { keyframes: { x: [0, -6, 6, -4, 4, 0] }, duration: UI, ease: 'none' }); }
     function show(n, dir) {
       steps[i].hidden = true; steps[n].hidden = false; i = n; k.textContent = n + 1;
       back.hidden = n === 0; next.hidden = n === 2; send.hidden = n !== 2;
@@ -1262,7 +1226,7 @@
       $('[data-done-name]', form).textContent = $('input[name="name"]', form).value.trim() || 'thanks';
       steps.forEach(s => { s.hidden = true; }); [kEl, $('.bk-nav', form)].forEach(x => { x.hidden = true; });
       done.hidden = false; done.focus();
-      if (motionOK()) { const p = $('path', done), L = p.getTotalLength(); G.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.55, ease: ease.out, delay: 0.1 }); G.from($$('p', done), { y: 10, autoAlpha: 0, duration: 0.4, ease: ease.out, stagger: 0.06 }); }
+      if (motionOK()) { const p = $('path', done), L = p.getTotalLength(); G.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: UI, ease: ease.out, delay: 0.1 }); G.from($$('p', done), { y: 10, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.06 }); }
     });
     return trade => {
       const box = $$('input[name="trade"]', form).find(x => x.value.toLowerCase() === String(trade).toLowerCase());
@@ -1305,12 +1269,12 @@
     const open = $('.b1-open', r), panel = $('#b1-panel', r), pre = Form($('form', r), b);
     const toggle = (on, focus) => {
       open.setAttribute('aria-expanded', on); panel.hidden = !on; open.textContent = on ? 'Hide the form' : 'Book free inspection online';
-      if (on && motionOK()) G.fromTo(panel, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, ease: ease.out, overwrite: true });
+      if (on && motionOK()) G.fromTo(panel, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: UI, ease: ease.out, overwrite: true });
       if (on && focus) { const f = $('input', panel); if (f) f.focus({ preventScroll: true }); }
     };
     b.on(open, 'click', () => toggle(open.getAttribute('aria-expanded') !== 'true', true));
     s.api.book = trade => { if (trade) pre(trade); toggle(true, true); };
-    if (motionOK()) G.from($('.b1-tel', r), { yPercent: 40, autoAlpha: 0, duration: 0.9, ease: ease.x, scrollTrigger: { trigger: r, start: 'top 70%', once: true } });
+    if (motionOK()) G.from($('.b1-tel', r), { yPercent: 40, autoAlpha: 0, duration: UI, ease: ease.x, scrollTrigger: { trigger: r, start: 'top 70%', once: true } });
   };
   V.book2 = (r, b, s) => {
     // v4: the three steps are three window panes; done panes glaze, the current pane is outlined (watches the step counter)
@@ -1387,8 +1351,11 @@
     const vr = s.stage.firstElementChild;
     s.b = bag();
     const run = () => { heads(vr, s); const fn = V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
+    /* K11: every scroll entrance a version sets up plays at reveal level (each element 0.3 s at most, staggers scaled
+       with it); tweens marked data: 'k10' (data the visitor reads, and Work 1's sweep) keep their tempo */
+    const cap = () => { if (!s.ctx || !s.ctx.getTweens) return; s.ctx.getTweens().forEach(t => { if (t.scrollTrigger && t.vars.data !== 'k10' && (t.vars.duration || 0) > REVEAL) t.timeScale(t.vars.duration / REVEAL); }); };
     try {
-      if (G) { s.ctx = G.context(() => {}); s.ctx.add(run); } else run();
+      if (G) { s.ctx = G.context(() => {}); s.ctx.add(run); cap(); } else run();
     } catch (err) { console.error(s.key + v, err); }
   }
   const code = () => SECS.map(s => s.v).join('');

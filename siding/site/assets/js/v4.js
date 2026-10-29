@@ -52,6 +52,7 @@
     P.x = e.clientX; P.y = e.clientY; P.t = now; P.in = true; P.moved = now;
     FIELDS.forEach(f => f.onPointer && f.onPointer());
     Pal.move(e);
+    Halo.move(e);
     wake();
   }
 
@@ -320,11 +321,48 @@
     }
     function sync() {
       const want = API.motion && mqFine.matches && kind !== 'off';
+      Halo.sync(want);
       if (want && !on) { on = true; draw(); subs.add(tick); schedule(); root.classList.add('has-pal'); }
       else if (want && on && el.dataset.kind !== kind) { draw(); }
       else if (!want && on) { on = false; clear(); subs.delete(tick); hide(); root.classList.remove('has-pal'); }
     }
     return { move, press, hide, set, sync, get kind() { return kind; }, pose: n => { S.state = n; pose(n); }, blink };
+  })();
+
+  /* ======================================================================================
+     CURSOR EFFECT (BRIEF-V5 §4): a halo under the companion that changes with each section's ground: lap lines in
+     the hero, a seal ring in proof, a dimension cross in services, a split disc in work, an X-ray of studs in built,
+     a bloom of the published colours in colour, a survey reticle near you, a warm read in reviews, a coin rim in
+     money, a porch light in book. The fields answer the same pointer, so the ground reacts back. Shown only with
+     the companion (fine pointer, motion on, a variant picked); never takes pointer events.
+     ====================================================================================== */
+  const Halo = (() => {
+    let el = null, on = false, key = '', x = -999, y = -999;
+    const make = () => { el = d.createElement('div'); el.className = 'cfx'; el.setAttribute('aria-hidden', 'true'); d.body.appendChild(el); };
+    const tick = dt => {
+      if (!on || !el) return false;
+      const a = 1 - Math.pow(1 - 0.24, dt * 60);
+      x += (P.x - x) * a; y += (P.y - y) * a;
+      el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+      return Math.abs(P.x - x) + Math.abs(P.y - y) > 0.4;
+    };
+    function move(e) {
+      if (!on) return;
+      const sec = e.target.closest && e.target.closest('.sec'), k = sec ? sec.dataset.sec : '';
+      if (k !== key) {
+        key = k; el.dataset.sec = k;
+        const v = sec && sec.querySelector('.v');
+        el.classList.toggle('is-dark', !!v && /night|photo|red/.test(v.dataset.tone || ''));
+      }
+      if (!el.classList.contains('is-on') && k) { x = P.x; y = P.y; }
+      el.classList.toggle('is-on', !!k && P.in);
+    }
+    function sync(want) {
+      if (want && !on) { if (!el) make(); on = true; subs.add(tick); }
+      else if (!want && on) { on = false; subs.delete(tick); if (el) el.classList.remove('is-on'); }
+    }
+    const hide = () => { if (el) el.classList.remove('is-on'); };
+    return { move, sync, hide };
   })();
 
   /* switcher: "Companion: Sash · Gable · Chip · Off" (radiogroup, persisted, ?pal=) */
@@ -572,19 +610,22 @@
     colour: {
       build(F) {
         const pal = HEX();
-        const n = clamp(Math.round(F.w * F.h / 22000), 24, 64);
+        // V5: chips live in the side margins only, so they never sit under a heading or a line of copy
+        const mg = clamp(F.w * 0.1, 14, 150), sc = mg < 60 ? 0.5 : 1;
+        const n = clamp(Math.round(F.h / (mg < 60 ? 70 : 46)), 10, 48);
         F.chips = [];
         const g = svgEl('g', { class: 'f-chips' }, F.svg);
         for (let i = 0; i < n; i++) {
-          const x = hash(i * 3.1) * (F.w - 30) + 15, y = hash(i * 7.7 + 1) * (F.h - 40) + 20, rot = (hash(i * 5.3) - 0.5) * 24;
-          const c = svgEl('g', { transform: `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})` }, g);
+          const side = i % 2, u = 6 + hash(i * 3.1) * (mg - 12);
+          const x = side ? F.w - u : u, y = hash(i * 7.7 + 1) * (F.h - 40) + 20, rot = (hash(i * 5.3) - 0.5) * 24;
+          const c = svgEl('g', { transform: `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)}) scale(${sc})` }, g);
           const inner = svgEl('g', {}, c);
           const face = svgEl('rect', { x: -9, y: -13, width: 18, height: 26, rx: 1.5, class: 'f-chip' }, inner);
           svgEl('circle', { cx: 0, cy: -9, r: 1.6, class: 'f-punch' }, inner);
           F.chips.push({ x, y, inner, face, hex: pal.length ? pal[i % pal.length] : '#CFCBC2', k: 0, row: i });
         }
       },
-      still(F) { F.chips.forEach((C, i) => { if (i % 5 === 0) this.set(C, 1); }); },
+      still(F) { F.chips.forEach((C, i) => { if (i % 7 === 0) this.set(C, 1); }); },
       set(C, k) {
         const s = Math.abs(Math.cos(Math.PI * k));
         C.inner.setAttribute('transform', `scale(1 ${Math.max(0.04, s).toFixed(3)})`);
@@ -670,47 +711,32 @@
         return busy;
       }
     },
-    /* Money: a chalk snap line that plucks when the cursor crosses it (Q163 spring chain) + tape ticks pulled by the scroll */
+    /* Money (V5): ledger paper. Ruled rows and a red double margin; rows near the cursor ink in as if a figure were
+       being entered, and the ruling drifts a little with the scroll. Replaces the v4 chalk line and tape ticks, which
+       were Book 3's and Services 3's tricks. */
     money: {
       build(F) {
-        const id = uid('tp');
-        F.svg.innerHTML = `<defs><pattern id="${id}" width="20" height="96" patternUnits="userSpaceOnUse"><path d="M0 0H20M0 12H8M0 24H12M0 36H8M0 48H16M0 60H8M0 72H12M0 84H8"/></pattern></defs>
-<rect class="f-tape" x="0" y="0" width="22" height="${F.h}" fill="url(#${id})"/><rect class="f-tape" x="${F.w - 22}" y="0" width="22" height="${F.h}" fill="url(#${id})" transform="scale(-1 1) translate(${-F.w * 2 + 22} 0)"/>
-<polyline class="f-chalkdust"/><polyline class="f-chalk"/><circle class="f-peg" r="3.5"/><circle class="f-peg" r="3.5"/>`;
-        F.pat = F.svg.querySelector('pattern');
-        F.line = F.svg.querySelector('.f-chalk'); F.dust = F.svg.querySelector('.f-chalkdust');
-        const pegs = F.svg.querySelectorAll('.f-peg');
-        F.ly = Math.round(F.h - clamp(F.h * 0.06, 36, 64)); F.n = 48;
-        F.x0 = 30; F.x1 = F.w - 30;
-        pegs[0].setAttribute('cx', F.x0); pegs[0].setAttribute('cy', F.ly); pegs[1].setAttribute('cx', F.x1); pegs[1].setAttribute('cy', F.ly);
-        F.off = new Float32Array(F.n); F.vel = new Float32Array(F.n); F.side = 0;
-        this.write(F);
-      },
-      still(F) { this.write(F); },
-      write(F) {
-        let s = '';
-        for (let i = 0; i < F.n; i++) s += `${(F.x0 + (F.x1 - F.x0) * i / (F.n - 1)).toFixed(1)},${(F.ly + F.off[i]).toFixed(1)} `;
-        F.line.setAttribute('points', s); F.dust.setAttribute('points', s);
-      },
-      tick(F, dt, now, inside) {
-        F.pat.setAttribute('patternTransform', `translate(0 ${(F.p * 480).toFixed(1)})`);
-        if (inside && F.lp.x > F.x0 && F.lp.x < F.x1) {
-          const side = Math.sign(F.lp.y - F.ly), i = Math.round((F.lp.x - F.x0) / (F.x1 - F.x0) * (F.n - 1));
-          if (Math.abs(F.lp.y - F.ly) < 34) { F.off[i] = clamp(F.lp.y - F.ly, -26, 26); F.held = i; }
-          else if (F.held != null) F.held = null;
-          if (F.side && side !== F.side && F.held == null) F.dust.classList.add('is-on');
-          F.side = side || F.side;
-        } else F.held = null;
-        let e = 0;
-        for (let i = 1; i < F.n - 1; i++) {
-          if (i === F.held) continue;
-          const sp = -F.off[i] * 0.12 + ((F.off[i - 1] + F.off[i + 1]) / 2 - F.off[i]) * 0.22;
-          F.vel[i] = (F.vel[i] + sp) * 0.86;
-          e += Math.abs(F.vel[i]) + Math.abs(F.off[i]);
+        const gap = 30, mx = clamp(F.w * 0.07, 22, 96);
+        F.rows = [];
+        const g = svgEl('g', { class: 'f-ledger' }, F.svg);
+        for (let y = 40, i = 0; y < F.h - 10; y += gap, i++) {
+          const ln = svgEl('line', { x1: 0, x2: F.w, y1: y, y2: y, class: 'f-rule' }, g);
+          F.rows.push({ ln, y, k: 0 });
         }
-        for (let i = 1; i < F.n - 1; i++) if (i !== F.held) F.off[i] += F.vel[i];
-        this.write(F);
-        return e > 0.05 || F.held != null;
+        svgEl('path', { d: `M${mx} 0V${F.h}M${mx + 4} 0V${F.h}`, class: 'f-margin' }, F.svg);
+        F.g = g;
+      },
+      still(F) { F.g.setAttribute('transform', 'translate(0 0)'); },
+      tick(F, dt, now, inside) {
+        F.g.setAttribute('transform', `translate(0 ${((F.p - 0.5) * 12).toFixed(1)})`);
+        const a = 1 - Math.pow(1 - 0.16, dt * 60), band = F.p * F.h;
+        let busy = false;
+        for (const R of F.rows) {
+          const yy = inside ? F.lp.y : (mqFine.matches ? -999 : band);
+          const t = Math.abs(yy - R.y) < 70 ? smooth(1 - Math.abs(yy - R.y) / 70) : 0;
+          if (Math.abs(t - R.k) > 0.003) { R.k += (t - R.k) * a; busy = true; R.ln.style.strokeOpacity = (0.07 + R.k * 0.35).toFixed(3); R.ln.style.strokeWidth = (1 + R.k * 0.8).toFixed(2); }
+        }
+        return busy;
       }
     },
     /* Book: a six-panel door, large and faint, with a porch-light pool that trails the cursor (S0267, lag 0.3-0.5 s) */
@@ -848,115 +874,119 @@
   }
 
   /* ======================================================================================
-     REACTION KIT (§2.4): an own SVG hover and a different click per element; kinds vary by section and role
+     REACTION KIT (BRIEF-V5 §4): every interactive element answers with its section's own trade glyph, laid out by
+     its role, on a hover verb and a DIFFERENT click verb. Hover verbs and click verbs are assigned so that no two
+     sections share one for the same role and no two roles in a section share one (11 x 6 table, below). The kit
+     never reuses a version-owned trick: no glint, level, tape, chalk pluck, stamp or path morph. At rest every
+     glyph is invisible; the kit only runs with motion on and a fine pointer or keyboard focus.
      ====================================================================================== */
-  const RX_MAP = {
-    hero: { button: 'sash', link: 'course', card: 'gable', image: 'frame' },
-    proof: { button: 'nail', link: 'chalk', card: 'seal', image: 'frame' },
-    services: { button: 'shingle', link: 'course', card: 'tape', image: 'frame', control: 'level' },
-    work: { button: 'sash', link: 'chalk', card: 'gable', image: 'frame', control: 'level' },
-    built: { button: 'nail', link: 'course', card: 'shingle', control: 'tape' },
-    colour: { button: 'drip', link: 'course', card: 'drip', image: 'frame', control: 'level' },
-    near: { button: 'shingle', link: 'chalk', card: 'gable', image: 'frame', control: 'tape' },
-    reviews: { button: 'nail', link: 'course', card: 'shingle', control: 'level' },
-    money: { button: 'sash', link: 'chalk', card: 'tape', control: 'level' },
-    book: { button: 'ring', link: 'course', card: 'gable', image: 'frame', tel: 'morph' },
-    chrome: { button: 'sash', link: 'course', card: 'frame' }
+  const KEYS = ['hero', 'proof', 'services', 'work', 'built', 'colour', 'near', 'reviews', 'money', 'book', 'chrome'];
+  const ROLES = ['button', 'link', 'card', 'image', 'control', 'tel'];
+  const MOTIF = {   // one glyph per section, about 12 px, centred on 0 0
+    hero: '<path class="g-l" pathLength="1" d="M-7 -2.5H7M-7 2.5H7"/><circle class="g-f" cx="4.5" cy="0" r="1.2"/>',
+    proof: '<path class="g-f" d="M0 -6.5L1.9 -1.9 6.5 0 1.9 1.9 0 6.5 -1.9 1.9 -6.5 0 -1.9 -1.9Z"/>',
+    services: '<rect class="g-l" pathLength="1" x="-5" y="-5" width="10" height="10"/><path class="g-l" pathLength="1" d="M-5 2L2 -5M-2 5L5 -2"/>',
+    work: '<rect class="g-l" pathLength="1" x="-6" y="-4.5" width="12" height="9"/><rect class="g-f" x="-6" y="-4.5" width="6" height="9"/>',
+    built: '<path class="g-l" pathLength="1" d="M-6 -6H6M-6 6H6M-4 -6V6M0 -6V6M4 -6V6"/>',
+    colour: '<rect class="g-c" x="-4" y="-6" width="8" height="12" rx="1.6"/><rect class="g-w" x="-4" y="2.5" width="8" height="3.5" rx="1"/>',
+    near: '<path class="g-l" pathLength="1" d="M-6 6V-1L0 -6L6 -1V6Z"/><path class="g-l" pathLength="1" d="M-1.6 6V2H1.6V6"/>',
+    reviews: '<path class="g-s" d="M-4.5 -6.5H4.5L3.4 6.5H-3.4Z"/><path class="g-l" pathLength="1" d="M-0.8 -5.5C-0.4 -1 -1.2 2 -0.6 5.5"/>',
+    money: '<circle class="g-l" pathLength="1" r="5.6"/><path class="g-l" pathLength="1" d="M0 -3.4V3.4M-2 -1.8C-2 -3 2 -3 2 -1.2S-2 0.8 -2 1.6 2 3 2 1.8"/>',
+    book: '<rect class="g-l" pathLength="1" x="-4.2" y="-6.5" width="8.4" height="13"/><path class="g-l" pathLength="1" d="M-2.4 -4.4H2.4V-0.8H-2.4Z"/><circle class="g-f" cx="2.3" cy="1.8" r="0.9"/>',
+    chrome: '<rect class="g-l" pathLength="1" x="-5" y="-5" width="10" height="10"/><path class="g-l" pathLength="1" d="M0 -5V5M-5 0H5"/>'
   };
+  const LAYOUT = {   // where a role's glyphs sit around the element (w x h)
+    button: (w, h) => { const n = clamp(Math.floor((w - 12) / 18), 2, 8), s = (w - 20) / Math.max(1, n - 1); return Array.from({ length: n }, (_, i) => [10 + i * s, h + 10, 1]); },
+    link: (w, h) => { const n = clamp(Math.floor(w / 13), 2, 12), s = (w - 8) / Math.max(1, n - 1); return Array.from({ length: n }, (_, i) => [4 + i * s, h + 7, 0.62]); },
+    card: (w) => [[w - 6, -9, 1], [w - 21, -9, 0.82], [w + 6, 7, 0.82]],
+    image: (w, h) => [[14, 14, 1.2], [w - 14, 14, 1.2], [14, h - 14, 1.2], [w - 14, h - 14, 1.2]],
+    control: (w, h) => [[-12, h / 2, 1], [w + 12, h / 2, 1]],
+    tel: (w, h) => { const n = clamp(Math.floor(w / 15), 2, 10), s = (w - 8) / Math.max(1, n - 1); return Array.from({ length: n }, (_, i) => [4 + i * s, h + 7, 0.7]); }
+  };
+  const ST = (g, k) => ({ each: k, from: 'start' });
+  const HOVER = {   // 11 ways in
+    pop: g => G.fromTo(g, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: 'back.out(2.2)', stagger: ST(g, 0.025) }),
+    fly: g => G.fromTo(g, { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.02) }),
+    drop: g => G.fromTo(g, { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: 'bounce.out', stagger: ST(g, 0.02) }),
+    rise: g => G.fromTo(g, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: 'power2.out', stagger: ST(g, 0.03) }),
+    stretch: g => G.fromTo(g, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.22, ease: 'power3.out', stagger: ST(g, 0.02) }),
+    spin: g => G.fromTo(g, { rotation: -160, scale: 0.3, opacity: 0 }, { rotation: 0, scale: 1, opacity: 1, duration: 0.3, ease: 'power3.out', stagger: ST(g, 0.03) }),
+    sway: g => G.fromTo(g, { rotation: 28, opacity: 0, transformOrigin: '50% 0%' }, { rotation: 0, opacity: 1, duration: 0.3, ease: 'elastic.out(1, 0.45)', stagger: ST(g, 0.03) }),
+    draw: g => { G.set(g, { opacity: 1 }); return G.fromTo(g.map(x => Array.from(x.querySelectorAll('.g-l'))).flat(), { strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.28, ease: 'power2.out', stagger: 0.015 }); },
+    grow: g => G.fromTo(g, { scale: 0.2, opacity: 0, transformOrigin: '50% 100%' }, { scale: 1, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.025) }),
+    slip: g => G.fromTo(g, { x: 14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: { each: 0.02, from: 'end' } }),
+    unfold: g => G.fromTo(g, { scaleY: 0, opacity: 0, transformOrigin: '50% 0%' }, { scaleY: 1, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.025) })
+  };
+  const CLICK = {   // 11 different answers to a press
+    hammer: g => G.fromTo(g, { scaleY: 1 }, { scaleY: 0.4, duration: 0.07, ease: 'power2.in', yoyo: true, repeat: 1, transformOrigin: '50% 100%' }),
+    scatter: g => g.forEach((x, i) => { const a = hash(i + 3) * Math.PI * 2; G.fromTo(x, { x: 0, y: 0 }, { x: Math.cos(a) * 10, y: Math.sin(a) * 10, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1 }); }),
+    hop: g => G.fromTo(g, { y: 0 }, { y: -7, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, stagger: 0.03 }),
+    twirl: g => G.fromTo(g, { rotation: 0 }, { rotation: 360, duration: 0.3, ease: 'power2.inOut', stagger: 0.02 }),
+    swell: g => G.fromTo(g, { scale: 1 }, { scale: 1.6, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, stagger: { each: 0.03, from: 'center' } }),
+    slide: g => G.fromTo(g, { x: 0 }, { x: 12, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, stagger: 0.02 }),
+    shrink: g => G.fromTo(g, { scale: 1 }, { scale: 0.3, duration: 0.12, ease: 'power2.in', yoyo: true, repeat: 1 }),
+    tilt: g => G.fromTo(g, { rotation: 0 }, { rotation: -25, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, transformOrigin: '0% 100%' }),
+    blink: g => G.fromTo(g, { opacity: 1 }, { opacity: 0.15, duration: 0.07, ease: 'none', yoyo: true, repeat: 3 }),
+    burst: g => G.fromTo(g, { scale: 1, opacity: 1 }, { scale: 2, opacity: 0, duration: 0.24, ease: 'power2.out', onComplete: () => G.set(g, { scale: 1, opacity: 1 }) }),
+    nod: g => G.fromTo(g, { rotation: 0 }, { rotation: 18, duration: 0.09, ease: 'power1.inOut', yoyo: true, repeat: 3 })
+  };
+  const HV = Object.keys(HOVER), CK = Object.keys(CLICK);
+  /* the table: section i, role r -> hover HV[(i + 3r) % 11], click CK[(i + 5r + 1) % 11]; both are distinct across
+     the 11 keys for a role and across the 6 roles within a key, and a click never reuses a hover verb */
+  const verbOf = (key, role) => { const i = Math.max(0, KEYS.indexOf(key)), r = ROLES.indexOf(role); return { hover: HV[(i + 3 * r) % 11], click: CK[(i + 5 * r + 1) % 11] }; };
+  API.table = () => KEYS.map(k => ROLES.map(r => { const v = verbOf(k, r); return `${k}.${r}: ${v.hover}/${v.click}`; }));
   function roleOf(el) {
     if (el.matches('[role="slider"], .cmp-handle, input[type="range"]')) return 'control';
     if (el.matches('a[href^="tel:"]')) return 'tel';
-    if (el.matches('[role="radio"], [role="option"], [role="tab"], .h2p, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .cr-n, .dv-chip, .pay-t, .dt, .lg-b, .bp-step, .fs, .sp-toggle, .vsw-b')) return 'card';
+    if (el.matches('[role="radio"], [role="option"], [role="tab"], .h2p, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .cr-n, .dv-chip, .pay-t, .dt, .lg-b, .bp-step, .fs, .sp-toggle, .vsw-b, .h3-tab')) return 'card';
     if (el.matches('.btn, button, input[type="submit"]')) return 'button';
     if (el.matches('a[href]')) return 'link';
     if (el.matches('figure.rx-img, [data-rx-img]')) return 'image';
     return '';
   }
-  const KIT = {
-    sash: {
-      make: (w, h) => { const r = Math.min(h / 2, 26); return `<clipPath id="§c"><rect width="${w}" height="${h}" rx="${r}"/></clipPath><g clip-path="url(#§c)"><path class="rx-l rx-draw" pathLength="1" d="M${r} ${h - 5}H${w - r}"/><path class="rx-l rx-draw" pathLength="1" d="M${r * 0.6} ${h - 9}V9M${w - r * 0.6} ${h - 9}V9"/><rect class="rx-glint" x="${-w * 0.5}" y="${-h}" width="${h * 0.7}" height="${h * 3}" transform="rotate(25 0 0)"/></g>` },
-      over: (s) => G.to(s.querySelectorAll('.rx-draw'), { strokeDashoffset: 0, duration: 0.24, ease: 'power3.out', stagger: 0.04, overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelectorAll('.rx-draw'), { strokeDashoffset: 1, duration: 0.3, ease: 'power2.inOut', overwrite: 'auto' }),
-      click: (s, w) => G.fromTo(s.querySelector('.rx-glint'), { x: 0 }, { x: w * 1.8, duration: 0.65, ease: 'power2.inOut' })
-    },
-    course: {
-      make: (w, h) => `<g class="rx-board"><path class="rx-l rx-draw" pathLength="1" d="M0 ${h + 3}H${w}"/><path class="rx-l rx-shade rx-draw" pathLength="1" d="M0 ${h + 6}H${w}"/></g><circle class="rx-nail" cx="${w - 5}" cy="${h + 4.5}" r="2"/>`,
-      over: (s) => G.to(s.querySelectorAll('.rx-draw'), { strokeDashoffset: 0, duration: 0.4, ease: 'kukuri', stagger: 0.08, overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelectorAll('.rx-draw'), { strokeDashoffset: -1, duration: 0.35, ease: 'power2.in', overwrite: 'auto', onComplete() { G.set(s.querySelectorAll('.rx-draw'), { strokeDashoffset: 1 }); } }),
-      click: (s) => G.timeline().fromTo(s.querySelector('.rx-board'), { y: 0 }, { y: 7, duration: 0.18, ease: 'power2.in' }).fromTo(s.querySelector('.rx-nail'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'back.out(1.7)' }).to(s.querySelector('.rx-board'), { y: 0, duration: 0.3, ease: 'power2.out' }).to(s.querySelector('.rx-nail'), { scale: 0, duration: 0.2, delay: 0.5 })
-    },
-    nail: {
-      make: (w, h) => { let c = ''; const r = Math.min(h / 2, 22); [[r, -4], [w - r, -4], [r, h + 4], [w - r, h + 4]].forEach(([x, y]) => { c += `<g class="rx-nh" transform="translate(${x} ${y})"><circle r="2.6"/><path d="M-1.5 0H1.5"/></g>`; }); let ch = ''; for (let i = 0; i < 6; i++) ch += `<path class="rx-chip" d="M0 0l3 1-2 2z" transform="translate(${(w * (0.2 + i * 0.12)).toFixed(1)} ${h})"/>`; return c + ch; },
-      over: (s) => G.fromTo(s.querySelectorAll('.rx-nh'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.24, ease: 'back.out(1.5)', stagger: 0.03, overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelectorAll('.rx-nh'), { scale: 0, duration: 0.2, ease: 'power2.in', overwrite: 'auto' }),
-      click: (s) => { G.fromTo(s.querySelectorAll('.rx-nh'), { scaleY: 1 }, { scaleY: 0.35, duration: 0.08, yoyo: true, repeat: 1, ease: 'power2.in' }); s.querySelectorAll('.rx-chip').forEach((c, i) => { const a = -Math.PI * (0.15 + hash(i + 1) * 0.7); G.fromTo(c, { x: 0, y: 0, opacity: 1, rotation: 0 }, { x: Math.cos(a) * (30 + i * 4), y: Math.sin(a) * (24 + i * 3), rotation: 180 * (i % 2 ? 1 : -1), opacity: 0, duration: 0.5, ease: 'power2.out' }); }); }
-    },
-    drip: {
-      make: (w) => { const x = Math.round(w * 0.72); return `<path class="rx-paint rx-drip" d="M${x - 4} 0 V1 a4 4 0 0 0 8 0 V0Z" data-to="M${x - 4} 0 V12 a4 4 0 0 0 8 0 V0Z"/><circle class="rx-paint rx-drop" cx="${x}" cy="13" r="3.2"/><ellipse class="rx-l rx-splash" cx="${x}" cy="48" rx="0" ry="0"/>`; },
-      over: (s) => { const p = s.querySelector('.rx-drip'); p._from = p._from || p.getAttribute('d'); G.to(p, { attr: { d: p.dataset.to }, duration: 0.25, ease: 'power3.out', overwrite: 'auto' }); },
-      out: (s) => { const p = s.querySelector('.rx-drip'); if (p._from) G.to(p, { attr: { d: p._from }, duration: 0.35, ease: 'power2.inOut', overwrite: 'auto' }); },
-      click: (s, w, h) => { const dr = s.querySelector('.rx-drop'), sp = s.querySelector('.rx-splash'); G.set(sp, { attr: { cy: h + 8 } }); G.timeline().fromTo(dr, { opacity: 1, y: 0 }, { y: h - 8, duration: 0.32, ease: 'power2.in' }).set(dr, { opacity: 0 }).fromTo(sp, { attr: { rx: 0, ry: 0 }, opacity: 1 }, { attr: { rx: 14, ry: 3 }, opacity: 0, duration: 0.45, ease: 'power2.out' }); }
-    },
-    shingle: {
-      make: (w) => `<g class="rx-tab" transform="translate(${w - 22} -8)"><path class="rx-tabf" d="M0 0H22V16H0Z"/><path class="rx-l" d="M7.3 0V16M14.6 0V16"/></g>`,
-      over: (s) => G.fromTo(s.querySelector('.rx-tab'), { rotationX: 15, transformPerspective: 550, transformOrigin: '50% 100%', opacity: 0 }, { rotationX: 40, opacity: 1, duration: 0.3, ease: 'power3.out', overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelector('.rx-tab'), { rotationX: 15, opacity: 0, duration: 0.25, ease: 'power2.in', overwrite: 'auto' }),
-      click: (s) => G.fromTo(s.querySelector('.rx-tab'), { rotationX: 40 }, { rotationX: 220, duration: 0.4, ease: 'power2.inOut', yoyo: true, repeat: 1 })
-    },
-    gable: {
-      make: (w) => `<path class="rx-l rx-gab" d="M0 8 L${w / 2} 8 L${w} 8" data-to="M0 14 L${w / 2} 2 L${w} 14"/><path class="rx-cap" d="M${w / 2 - 9} 2H${w / 2 + 9}" pathLength="1"/>`,
-      over: (s) => { const p = s.querySelector('.rx-gab'); p._from = p._from || p.getAttribute('d'); G.to(p, { attr: { d: p.dataset.to }, opacity: 1, duration: 0.3, ease: 'back.out(1.4)', overwrite: 'auto' }); },
-      out: (s) => { const p = s.querySelector('.rx-gab'); if (!p._from) return; G.to(p, { attr: { d: p._from }, opacity: 0, duration: 0.25, ease: 'power2.in', overwrite: 'auto' }); },
-      click: (s) => G.timeline().fromTo(s.querySelector('.rx-cap'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.2, ease: 'power2.out' }).fromTo(s.querySelector('.rx-gab'), { y: 0 }, { y: -5, duration: 0.14, ease: 'power2.out', yoyo: true, repeat: 1 }, 0).to(s.querySelector('.rx-cap'), { strokeDashoffset: 1, duration: 0.3, delay: 0.3 })
-    },
-    tape: {
-      make: (w, h) => { let t = ''; const n = Math.min(40, Math.floor(w / 8)); for (let i = 0; i <= n; i++) t += `<path class="rx-tick" d="M${i * 8 + 1} ${h + 1}V${h + (i % 4 ? 5 : 9)}"/>`; return `<g class="rx-ticks">${t}</g>`; },
-      over: (s) => G.fromTo(s.querySelectorAll('.rx-tick'), { scaleY: 0, transformOrigin: '50% 0%' }, { scaleY: 1, duration: 0.18, ease: 'power3.out', stagger: { amount: 0.24 }, overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelectorAll('.rx-tick'), { scaleY: 0, duration: 0.15, ease: 'power2.in', stagger: { amount: 0.12, from: 'end' }, overwrite: 'auto' }),
-      click: (s, w) => G.timeline().to(s.querySelector('.rx-ticks'), { x: w * 0.3, scaleX: 0.2, transformOrigin: '100% 0%', duration: 0.18, ease: 'power3.in' }).to(s.querySelector('.rx-ticks'), { x: 0, scaleX: 1, duration: 0.32, ease: 'power3.out' })
-    },
-    level: {
-      make: (w) => `<g class="rx-lev" transform="translate(${w / 2 - 17} -14)"><rect class="rx-levb" width="34" height="8" rx="2"/><rect class="rx-levv" x="11" y="1.5" width="12" height="5" rx="2.5"/><circle class="rx-bub" cx="13" cy="4" r="1.8"/></g>`,
-      over: (s) => { G.fromTo(s.querySelector('.rx-lev'), { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: 0.2, ease: 'power3.out', overwrite: 'auto' }); G.fromTo(s.querySelector('.rx-bub'), { x: -1 }, { x: 4, duration: 0.5, ease: 'power3.out', overwrite: 'auto' }); },
-      out: (s) => G.to(s.querySelector('.rx-lev'), { opacity: 0, duration: 0.25, overwrite: 'auto' }),
-      click: (s) => G.fromTo(s.querySelector('.rx-bub'), { y: 0 }, { y: -3, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1 })
-    },
-    chalk: {
-      make: (w, h) => `<path class="rx-chalk" d="M0 ${h + 4} Q${w / 2} ${h + 4} ${w} ${h + 4}"/><g class="rx-dust">${[0.2, 0.4, 0.55, 0.7, 0.85].map(k => `<circle cx="${(w * k).toFixed(1)}" cy="${h + 4}" r="1"/>`).join('')}</g>`,
-      over: (s) => G.fromTo(s.querySelector('.rx-chalk'), { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.22, ease: 'power3.out', overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelector('.rx-chalk'), { scaleX: 0, transformOrigin: '100% 50%', duration: 0.25, ease: 'power2.in', overwrite: 'auto' }),
-      click: (s, w, h) => { const c = s.querySelector('.rx-chalk'), o = { t: 0 }; G.to(o, { t: 1, duration: 0.6, ease: 'none', onUpdate() { const k = 9 * Math.exp(-o.t * 5) * Math.cos(o.t * 22); c.setAttribute('d', `M0 ${h + 4} Q${w / 2} ${(h + 4 + k).toFixed(2)} ${w} ${h + 4}`); } }); G.fromTo(s.querySelectorAll('.rx-dust circle'), { opacity: 1, y: 0 }, { opacity: 0, y: 6, duration: 0.6, stagger: 0.03, ease: 'power2.out' }); }
-    },
-    frame: {
-      make: (w, h) => { const m = 7; return `<rect class="rx-fr rx-draw" pathLength="1" x="${m}" y="${m}" width="${w - m * 2}" height="${h - m * 2}"/><path class="rx-mun rx-draw" pathLength="1" d="M${w / 2} ${m}V${h - m}M${m} ${h / 2}H${w - m}"/>${[[m, m], [w / 2, m], [m, h / 2], [w / 2, h / 2]].map(([x, y]) => `<rect class="rx-pane" x="${x}" y="${y}" width="${w / 2 - m}" height="${h / 2 - m}"/>`).join('')}`; },
-      over: (s) => G.to(s.querySelectorAll('.rx-draw'), { strokeDashoffset: 0, duration: 0.35, ease: 'power3.out', stagger: 0.08, overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelectorAll('.rx-draw'), { strokeDashoffset: 1, duration: 0.3, ease: 'power2.in', overwrite: 'auto' }),
-      click: (s) => G.fromTo(s.querySelectorAll('.rx-pane'), { opacity: 0.32 }, { opacity: 0, duration: 0.3, stagger: 0.06, ease: 'power2.out' })
-    },
-    seal: {
-      make: (w, h) => { const r = Math.min(w, h) / 2 + 4; return `<circle class="rx-seal rx-draw" pathLength="1" cx="${w / 2}" cy="${h / 2}" r="${r}"/><circle class="rx-seal2" cx="${w / 2}" cy="${h / 2}" r="${r + 4}"/>`; },
-      over: (s) => G.to(s.querySelector('.rx-draw'), { strokeDashoffset: 0, duration: 0.3, ease: 'power3.out', overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelector('.rx-draw'), { strokeDashoffset: 1, duration: 0.25, ease: 'power2.in', overwrite: 'auto' }),
-      click: (s) => G.fromTo(s.querySelector('.rx-seal2'), { scale: 1.25, opacity: 1, transformOrigin: '50% 50%' }, { scale: 1, opacity: 0, duration: 0.45, ease: 'power3.out' })
-    },
-    morph: {
-      make: (w, h) => `<path class="rx-l rx-mor" d="M${h / 2} 0H${w - h / 2}A${h / 2} ${h / 2} 0 0 1 ${w - h / 2} ${h}H${h / 2}A${h / 2} ${h / 2} 0 0 1 ${h / 2} 0Z"/>`,
-      over: (s) => G.fromTo(s.querySelector('.rx-mor'), { scale: 1, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1.04, opacity: 1, duration: 0.25, ease: 'power3.out', overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelector('.rx-mor'), { scale: 1, opacity: 0, duration: 0.25, overwrite: 'auto' }),
-      click: (s, w, h, el) => phoneCard(el)
-    },
-    ring: {
-      make: (w, h) => { const cx = w - h / 2, r = Math.max(8, h / 2 - 7), k = r * 0.5; return `<circle class="rx-ring" pathLength="1" cx="${cx}" cy="${h / 2}" r="${r}" transform="rotate(-90 ${cx} ${h / 2})"/><path class="rx-ok" pathLength="1" d="M${cx - k} ${h / 2} l${k * 0.7} ${k * 0.7} l${k * 1.3} ${-k * 1.4}"/><path class="rx-no" pathLength="1" d="M${cx - k} ${h / 2 - k} l${k * 2} ${k * 2} M${cx + k} ${h / 2 - k} l${-k * 2} ${k * 2}"/><rect class="rx-l rx-pill" x="1" y="1" width="${w - 2}" height="${h - 2}" rx="${h / 2 - 1}"/>`; },
-      over: (s) => G.to(s.querySelector('.rx-pill'), { opacity: 1, duration: 0.2, overwrite: 'auto' }),
-      out: (s) => G.to(s.querySelector('.rx-pill'), { opacity: 0, duration: 0.25, overwrite: 'auto' }),
-      click: (s, w, h, el) => setTimeout(() => {   // #348: the ring draws, then the check or the cross from the form's real state
-        const f = el.closest('form'), bad = f && f.querySelector('[aria-invalid="true"]');
-        G.timeline().fromTo(s.querySelector('.rx-ring'), { strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.inOut' })
-          .fromTo(s.querySelector(bad ? '.rx-no' : '.rx-ok'), { strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, duration: 0.3, ease: 'power3.out' })
-          .to(s.querySelectorAll('.rx-ring, .rx-ok, .rx-no'), { opacity: 0, duration: 0.3, delay: 0.6 });
-      }, 30)
-    }
-  };
+  function glyphs(key, role, w, h) {
+    const hex = HEX(), m = MOTIF[key] || MOTIF.chrome;
+    return LAYOUT[role](w, h).map(([x, y, s], i) => {
+      const body = key === 'colour' && hex.length ? m.replace('class="g-c"', `class="g-c" style="fill:${hex[(i * 7 + 3) % hex.length]}"`) : m;
+      return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${s})"><g class="rg">${body}</g></g>`;
+    }).join('');
+  }
+  function rxize(scope, key, b) {
+    const els = Array.from(scope.querySelectorAll('a[href], button, [role="slider"], [role="radio"], [role="tab"], input[type="submit"], input[type="range"], figure[data-rx-img], [data-rx]'));
+    els.forEach(el => {
+      if (el.closest('.pal-sw, .picks, .rx') || el.dataset.rx === 'none' || el._rx) return;
+      const role = roleOf(el); if (!role) return;
+      const v = verbOf(key, role);
+      el._rx = { svg: null, w: 0, h: 0, on: false };
+      const ensure = () => {
+        const r = el.getBoundingClientRect(), w = Math.round(r.width), h = Math.round(r.height);
+        if (!w || !h) return null;
+        if (el._rx.svg && el._rx.w === w && el._rx.h === h) return el._rx.svg;
+        if (el._rx.svg) el._rx.svg.remove();
+        if (getComputedStyle(el).position === 'static') el.classList.add('rx-host');
+        const s = svgEl('svg', { class: `rx rx-${role} rx-k-${key}`, width: w, height: h, viewBox: `0 0 ${w} ${h}`, 'aria-hidden': 'true', focusable: 'false' });
+        s.innerHTML = glyphs(key, role, w, h);
+        (el.matches('input') ? el.parentElement : el).appendChild(s);
+        if (el.matches('input')) { el.parentElement.classList.add('rx-host'); G.set(s, { left: el.offsetLeft, top: el.offsetTop }); }
+        el._rx.svg = s; el._rx.w = w; el._rx.h = h;
+        return s;
+      };
+      const g = () => Array.from(el._rx.svg.querySelectorAll('.rg'));
+      const over = () => { if (el._rx.on) return; const s = ensure(); if (!s) return; el._rx.on = true; G.killTweensOf(g()); HOVER[v.hover](g()); };
+      const out = () => { if (!el._rx.on || !el._rx.svg) return; el._rx.on = false; G.killTweensOf(g()); G.to(g(), { opacity: 0, duration: 0.18, ease: 'power2.in', stagger: { each: 0.015, from: 'end' } }); };
+      b.on(el, 'pointerenter', e => { if (e.pointerType !== 'touch') over(); });
+      b.on(el, 'pointerleave', e => { if (e.pointerType !== 'touch') out(); });
+      b.on(el, 'focus', () => { if (el.matches(':focus-visible')) over(); });
+      b.on(el, 'blur', out);
+      b.on(el, 'click', () => {
+        if (role === 'tel') phoneCard(el);
+        const s = ensure(); if (!s) return;
+        if (!el._rx.on) { G.set(g(), { opacity: 1 }); el._rx.on = true; setTimeout(out, 700); }
+        CLICK[v.click](g());
+      });
+      b.add(() => { if (el._rx && el._rx.svg) el._rx.svg.remove(); el.classList.remove('rx-host'); delete el._rx; });
+    });
+  }
   /* Shazam-style call card (overshoot (.8,-.6,.2,1) 400 ms, close (.4,1,.3,1)); the tel: link still dials */
   function phoneCard(el) {
     const r = el.getBoundingClientRect();
@@ -969,42 +999,6 @@
     G.timeline({ onComplete: () => c.remove() }).fromTo(c, { scale: 0.6, opacity: 0, transformOrigin: '50% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'shazamIn' })
       .to(c, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'shazamOut', delay: 2.4 });
   }
-  function rxize(scope, key, b) {
-    const els = Array.from(scope.querySelectorAll('a[href], button, [role="slider"], [role="radio"], [role="tab"], input[type="submit"], figure[data-rx-img], [data-rx]'));
-    els.forEach(el => {
-      if (el.closest('.pal-sw, .picks, .rx') || el.dataset.rx === 'none' || el._rx) return;
-      const role = roleOf(el); if (!role) return;
-      const map = RX_MAP[key] || RX_MAP.chrome;
-      const kind = el.dataset.rx || map[role] || (role === 'tel' ? 'morph' : map.button);
-      const K = KIT[kind]; if (!K) return;
-      el._rx = { kind, svg: null, w: 0, h: 0 };
-      const ensure = () => {
-        const r = el.getBoundingClientRect(), w = Math.round(r.width), h = Math.round(r.height);
-        if (!w || !h) return null;
-        if (el._rx.svg && el._rx.w === w && el._rx.h === h) return el._rx.svg;
-        if (el._rx.svg) el._rx.svg.remove();
-        if (getComputedStyle(el).position === 'static') el.classList.add('rx-host');
-        const s = svgEl('svg', { class: `rx rx-${kind}`, width: w, height: h, viewBox: `0 0 ${w} ${h}`, 'aria-hidden': 'true', focusable: 'false' });
-        const id = uid('rx');
-        s.innerHTML = K.make(w, h).replace(/§c/g, id);
-        s.querySelectorAll('.rx-draw, .rx-cap, .rx-ring, .rx-ok, .rx-no').forEach(p => { p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = 1; });
-        el.appendChild(s);
-        const pre = (q, v) => { const l = s.querySelectorAll(q); if (l.length) G.set(l, v); };
-        pre('.rx-nh, .rx-nail', { scale: 0, transformOrigin: '50% 50%' });
-        pre('.rx-tick', { scaleY: 0, transformOrigin: '50% 0%' });
-        pre('.rx-chalk', { scaleX: 0, transformOrigin: '0% 50%' });
-        el._rx.svg = s; el._rx.w = w; el._rx.h = h;
-        return s;
-      };
-      b.on(el, 'pointerenter', e => { if (e.pointerType === 'touch') return; const s = ensure(); if (s) K.over(s, el._rx.w, el._rx.h, el); });
-      b.on(el, 'pointerleave', e => { if (e.pointerType === 'touch' || !el._rx.svg) return; K.out(el._rx.svg, el._rx.w, el._rx.h, el); });
-      b.on(el, 'focus', () => { if (!el.matches(':focus-visible')) return; const s = ensure(); if (s) K.over(s, el._rx.w, el._rx.h, el); });
-      b.on(el, 'blur', () => { if (el._rx.svg) K.out(el._rx.svg, el._rx.w, el._rx.h, el); });
-      b.on(el, 'click', () => { const s = ensure(); if (s) K.click(s, el._rx.w, el._rx.h, el); });
-      b.add(() => { if (el._rx && el._rx.svg) el._rx.svg.remove(); el.classList.remove('rx-host'); delete el._rx; });
-    });
-  }
-
   /* headings react on approach: a lap underline lifts within 140 px (P70 falloff) */
   function lapHeads(scope, b) {
     const hs = Array.from(scope.querySelectorAll('.h2x, .display'));
@@ -1078,8 +1072,8 @@
     Pal.set(PAL_ORDER.includes(saved) ? saved : 'sash');
     d.addEventListener('pointermove', onMove, { passive: true });
     d.addEventListener('pointerdown', e => Pal.press(e), { passive: true });
-    root.addEventListener('pointerleave', () => { P.in = false; Pal.hide(); });
-    addEventListener('blur', () => { P.in = false; Pal.hide(); });
+    root.addEventListener('pointerleave', () => { P.in = false; Pal.hide(); Halo.hide(); });
+    addEventListener('blur', () => { P.in = false; Pal.hide(); Halo.hide(); });
     mqFine.addEventListener('change', () => Pal.sync());
     addEventListener('resize', () => recolor(), { passive: true });
   }

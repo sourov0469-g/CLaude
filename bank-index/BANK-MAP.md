@@ -7488,3 +7488,6 @@ Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> —
 - **R24 + FACTS Offers** — PICKED-FOR: Money V3 — RESULT: **REBUILT (Phase 2)** — strike-and-rewrite total; no odometer, no stamp.
 - All other 20 versions: reference re-verified in the Atlas, **KEPT** (rows in TRACEABILITY.md).
 - **[BANK] Scrollable and Draggable Timeline (Codrops), Mode B** — PICKED-FOR: Services V3 — RESULT: **REBUILT (Phase 2)** — re-verification found a 1.6 s intro that overwrote keys; rewritten without intro or inertia.
+- **[BANK] Q40 direction-aware reveal** — PICKED-FOR: the section entrance on every section (page system) — RESULT: **APPLIED (Phase 3)** — 0.3 s (F17, K4); from below scrolling down, from above scrolling up.
+- **Reaction kit v5** (section glyphs, 11 hover verbs × 11 click verbs over 6 roles) — PICKED-FOR: every interactive element (page system) — RESULT: **NEW BUILD (Phase 3)** — replaces the v4 13-kind kit, which reused glint, level, tape, chalk and morph.
+- **Per-section halo** (cursor effect) — PICKED-FOR: under the companion, in all ten sections — RESULT: **NEW BUILD (Phase 3)**.
