@@ -1,0 +1,58 @@
+SOURCE PASS: https://smeulders-ig.nl/ -> smeulders-interieurgroep (2026-10-26T10:28:48Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 56K | assets: 3 files, 36K total | combined JS 28K, CSS 0
+--- library/plugin counts (JS) ---
+gsap: 20
+ScrollTrigger: 0
+SplitText: 0
+SplitType: 0
+Lenis: 0
+lenis: 0
+three: 0
+WebGLRenderer: 0
+ShaderMaterial: 0
+Draggable: 0
+Observer: 2
+Flip: 0
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 0
+onnxruntime: 0
+requestAnimationFrame: 9
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+      7 ease:"power3.out"
+      4 ease:"power1.inOut"
+      3 ease:"linear"
+      2 ease:"power2.inOut"
+      1 ease:"power2.in"
+--- durations ---
+      2 duration:1.1
+      2 duration:.85
+      2 duration:.7
+      1 duration:.8
+--- stagger ---
+      1 stagger:.08
+      1 stagger:.06
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 0 | fragmentShader: 0 | uniforms decls: 0
+--- CSS features ---
+@keyframes: 0
+cubic-bezier: 0
+prefers-reduced-motion: 0
+clip-path: 0
+backdrop-filter: 0
+mix-blend-mode: 0
+will-change: 0
+animation-timeline: 0
+--- fonts ---
+cross-host assets skipped (card discipline): 0
