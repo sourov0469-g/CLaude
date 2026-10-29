@@ -146,6 +146,26 @@ function blinds(root, c) {
     scrollTrigger: { trigger: root.querySelector('.wv3-frame'), start: 'top 70%', end: 'bottom 35%', scrub: c.wide ? 2.2 : 1, invalidateOnRefresh: true } });
   order.forEach((p, i) => tl.to(p, { scaleY: 1, duration: 0.4, ease: 'none' }, i * 0.4));
   gsap.set(ham, { opacity: 0 });
+  // Before / After buttons (PLAN-V7 Work V3): hover outlines the course that goes on first (bottom, for Before) or last
+  // (top, for After); press lays or lifts every course in 0.3s and holds there until the reader scrolls again
+  const hl = root.querySelector('.wv3-hl'), st = tl.scrollTrigger;
+  let held = false;
+  const SCROLL_KEYS = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+  const resume = () => { if (!held) return; held = false; off(); st.enable(false); };
+  const onKey = e => { if (SCROLL_KEYS.includes(e.key) && !(e.target.closest && e.target.closest('button,a,input'))) resume(); };
+  const off = () => { removeEventListener('wheel', resume); removeEventListener('touchstart', resume); removeEventListener('keydown', onKey); };
+  const outline = b => { hl.setAttribute('d', course(b.dataset.l === 'after' ? 0 : COURSES - 1)); };
+  const onOver = e => { const b = e.target.closest('.wv3-l'); if (b && (e.type === 'focusin' || e.pointerType === 'mouse')) { outline(b); hl.classList.add('is-on'); } };
+  const onOut = e => { if (e.target.closest('.wv3-l')) hl.classList.remove('is-on'); };
+  const onClick = e => {
+    const b = e.target.closest('.wv3-l'); if (!b) return;
+    outline(b); hl.classList.remove('is-flash'); void hl.getBBox(); hl.classList.add('is-flash');
+    if (!held) { held = true; st.disable(false); addEventListener('wheel', resume, { passive: true }); addEventListener('touchstart', resume, { passive: true }); addEventListener('keydown', onKey); }
+    gsap.to(tl, { progress: b.dataset.l === 'after' ? 1 : 0, duration: 0.3, ease: EASE, overwrite: true });
+  };
+  const box = root.querySelector('.wv3-labels');
+  box.addEventListener('pointerover', onOver); box.addEventListener('pointerout', onOut); box.addEventListener('focusin', onOver); box.addEventListener('focusout', onOut); box.addEventListener('click', onClick);
+  return () => { off(); box.removeEventListener('pointerover', onOver); box.removeEventListener('pointerout', onOut); box.removeEventListener('focusin', onOver); box.removeEventListener('focusout', onOut); box.removeEventListener('click', onClick); };
 }
 
 export default { 1: tiles, 2: push, 3: blinds };

@@ -15,7 +15,7 @@ JOBS = {  # name: (source, max width, quality). F18 / S1166 (page max 1500 KB): 
     'job-truck': ('job-truck.png', 1100, 56),
     'ba2-before': ('ba2-before.png', 1024, 64),
     'ba2-after': ('ba2-after.webp', 1024, 54),
-    'team': ('team.webp', 1088, 66),
+    'team': ('team.webp', 1088, 62),
 }
 
 def save(im, name, q):
