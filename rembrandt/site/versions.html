@@ -14,7 +14,7 @@
 <div class="hrail">
 <a class="hrail-mark" href="#main" aria-label="Rembrandt Roofing &amp; Restoration, top of page"><span>Rembrandt</span></a>
 <div class="hrail-num" aria-hidden="true"><span data-rail-num>01</span></div>
-<span class="hrail-of" aria-hidden="true">of 16</span>
+<span class="hrail-of" aria-hidden="true">of 15</span>
 <button class="hrail-menu" type="button" aria-expanded="false" aria-controls="drawer" data-menu>Menu</button>
 <a class="hrail-phone" href="tel:+19377467377" data-cta="rail-call"><span class="phone">(937) 746-7377</span></a>
 <span class="hrail-prog" aria-hidden="true"><i data-rail-prog></i></span>
@@ -130,7 +130,7 @@
 </div>
 <div class="year-stage" data-year-stage>
 <div class="year-sticky">
-<svg class="sunarc" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path data-sunpath d="M0 110 C 260 110, 330 14, 600 14 C 870 14, 940 110, 1200 110"/><circle data-sun r="9" cx="0" cy="110"/></svg>
+<div class="sunarc" aria-hidden="true"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path data-sunpath d="M0 110 C 260 110, 330 14, 600 14 C 870 14, 940 110, 1200 110"/></svg><i data-sun></i></div>
 <ol class="months" data-months>
 <li data-m="0"><b>January</b><span class="what">Ice dams form at the eaves when attic heat melts snow that refreezes at the cold edge.</span><span class="chk">Check: thick icicles, stains near outside walls.</span></li>
 <li data-m="1"><b>February</b><span class="what">Meltwater backs up behind the ice and under the shingles.</span><span class="chk">Check: damp attic insulation at the eaves.</span></li>
@@ -249,13 +249,15 @@
 <li data-zone="field"><button type="button" class="ask-photo" aria-pressed="false" data-yes><img src="assets/img/sym-curl-480.webp" alt="" width="480" height="480" loading="lazy" decoding="async"><span>Shingles cracked, buckled or missing?</span></button><button type="button" class="ask-no" aria-pressed="false" data-no>Not that I can see</button></li>
 </ol>
 <div class="ask-side">
-<svg class="ask-house" viewBox="0 0 320 220" role="img" aria-label="A roof diagram that lights the parts you answer yes to">
-<path class="z" data-z="field" d="M40 112 L160 30 L280 112 L254 112 L160 48 L66 112 Z"/>
-<path class="z" data-z="tabs" d="M40 112 L66 112 L84 100 L58 100 Z M280 112 L254 112 L236 100 L262 100 Z"/>
-<path class="z" data-z="attic" d="M74 112 L160 52 L246 112 Z"/>
-<rect class="z" data-z="ceiling" x="74" y="112" width="172" height="10"/>
-<path class="z" data-z="gutter" d="M28 112 h18 v10 h-18 Z M274 112 h18 v10 h-18 Z"/>
-<path class="ln" d="M28 112 L160 22 L292 112 M74 112 V200 H246 V112 M74 122 H246 M120 200 V160 H150 V200"/>
+<svg class="ask-house" viewBox="0 0 320 220" role="img" aria-label="A cross-section of a roof that lights the parts you answer yes to: shingles, tab edges, gutters, attic and ceiling">
+<path class="z" data-z="field" d="M20 116 L160 18 L300 116 L293.1 125.8 L160 32.6 L26.9 125.8 Z"/>
+<path class="z" data-z="tabs" d="M20 116 L44.6 98.8 L51.5 108.6 L26.9 125.8 Z M300 116 L275.4 98.8 L268.5 108.6 L293.1 125.8 Z"/>
+<path class="z" data-z="attic" d="M48 140 V111 L160 32.6 L272 111 V140 Z"/>
+<rect class="z" data-z="ceiling" x="48" y="140" width="224" height="10"/>
+<path class="z" data-z="gutter" d="M8 120 h14 v12 h-14 Z M298 120 h14 v12 h-14 Z"/>
+<path class="ln2" d="M35.6 105.1 L42.4 114.9 M284.4 105.1 L277.6 114.9 M51.1 94.2 L58 104 M268.9 94.2 L262 104 M66.7 83.3 L73.6 93.1 M253.3 83.3 L246.4 93.1 M82.3 72.4 L89.1 82.2 M237.7 72.4 L230.9 82.2 M97.8 61.5 L104.7 71.3 M222.2 61.5 L215.3 71.3 M113.4 50.6 L120.3 60.5 M206.6 50.6 L199.7 60.5 M129 39.7 L135.8 49.6 M191 39.7 L184.2 49.6 M144.5 28.8 L151.4 38.7 M175.5 28.8 L168.6 38.7 M160 32.6 V140"/>
+<path class="ln" d="M20 116 L160 18 L300 116 M26.9 125.8 L160 32.6 L293.1 125.8 M20 116 L26.9 125.8 M300 116 L293.1 125.8 M8 120 V132 H22 V120 M298 120 V132 H312 V120 M48 111 V208 M272 111 V208 M48 140 H272 M48 150 H272 M24 208 H296"/>
+<g class="lb" aria-hidden="true"><text x="230" y="50">Shingles</text><text x="2" y="84">Tab edges</text><text x="15" y="146" text-anchor="middle">Gutter</text><text x="206" y="124" text-anchor="middle">Attic</text><text x="160" y="166" text-anchor="middle">Ceiling</text></g>
 </svg>
 <div class="ask-result" role="status" aria-live="polite" data-ask-result><p>Answer the five questions and the roof will tell you where to look.</p></div>
 </div>
@@ -457,7 +459,7 @@
 <circle r="5" class="hub"/>
 </svg>
 <div class="clock-steps">
-<p class="clock-now" aria-live="polite"><b data-clock-time>7:30 am</b><span data-clock-step>The crew arrives, covers the beds and lays plywood where trucks meet the driveway.</span></p>
+<p class="clock-now"><b data-clock-time>7:30 am</b><span aria-live="polite" data-clock-step>The crew arrives, covers the beds and lays plywood where trucks meet the driveway.</span></p>
 <ol class="clock-list" data-clock-list>
 <li data-t="450"><b>7:30</b> Crew arrives, beds covered</li>
 <li data-t="480"><b>8:00</b> Tear-off begins</li>
@@ -465,6 +467,7 @@
 <li data-t="990"><b>4:30</b> Magnet sweep for nails</li>
 <li data-t="1020"><b>5:00</b> Walkthrough with you</li>
 </ol>
+<p class="t-caption clock-cap">A typical day, set out for illustration. When your job is booked, the office gives you your own crew's times.</p>
 </div>
 </div>
 </div>
@@ -494,7 +497,7 @@
 <h2 id="ruler-title" class="t-display cast-host" data-split>Fifty years.</h2>
 <p class="ruler-intro">If you sign off on a new roof this year, here is how far the Owens Corning material coverage reaches. Our workmanship warranty has no end date while you own the home.</p>
 </div>
-<div class="ruler-scroll" data-ruler-scroll tabindex="0" aria-label="A 50-year ruler, scroll sideways">
+<div class="ruler-scroll" data-ruler-scroll tabindex="0" role="region" aria-label="A 50-year ruler">
 <svg class="ruler" data-ruler role="img" aria-label="A ruler from this year to 50 years from now, marking today, the 20-year mark and where the material coverage ends"></svg>
 </div>
 <div class="wrap"><ul class="ruler-key">
@@ -608,13 +611,13 @@
 <div class="wrap rachel">
 <span class="label chapter-label"><span class="br">〔</span> 4:10 pm <span class="br">〕</span></span>
 <h2 id="rachel-title" class="t-display cast-host" data-split>When you call, Rachel answers.</h2>
-<p class="rachel-who">Born and raised in Springboro, she coordinates your job from the first call to the final walkthrough.</p>
+<p class="rachel-who">Born and raised in Springboro, Rachel coordinates your job from the first call to the final walkthrough.</p>
 <p class="rachel-state" data-office><span class="dot" aria-hidden="true"></span><span data-office-long>Office hours: Monday to Friday, 9 am to 5 pm.</span></p>
 <div class="rachel-cta">
 <a class="bignum-s phone" href="tel:+19377467377" data-cta="people3-call">(937) 746-7377</a>
 <a class="btn btn-line" href="sms:+19377467377" data-sms data-cta="people3-text"><svg aria-hidden="true"><use href="#i-text"/></svg>Text us</a>
 </div>
-<p class="rachel-more">Behind her: Wade Walker, who has run the company since 2015, project managers with 20 to 25 years on roofs each, a dedicated repair crew, and two U.S. Army veterans. Se habla español.</p>
+<p class="rachel-more">Behind Rachel: Wade Walker, who has run the company since 2015, project managers with 20 to 25 years on roofs each, a dedicated repair crew, and two U.S. Army veterans. Se habla español.</p>
 </div>
 </template>
 <template id="tpl-towns-2" data-class="towns towns--roofs on-dark seam" data-label="troofs-title">
@@ -646,7 +649,7 @@
 </div>
 <div class="tline" data-tline>
 <svg class="tline-svg" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true" data-tline-svg>
-<defs><path id="rl-wide" d="M0 268 L170 268 L330 150 L470 150 L560 86 L650 150 L700 150 L800 52 L900 150 L960 150 L1060 108 L1160 150 L1270 150 L1430 268 L1600 268"/><path id="rl-narrow" d="M0 250 L200 70 L400 250 L560 140 L720 250 L800 250"/></defs>
+<defs><path id="rl-wide" d="M0 268 L170 268 L330 150 L470 150 L560 86 L650 150 L700 150 L800 52 L900 150 L960 150 L1060 108 L1160 150 L1270 150 L1430 268 L1600 268"/><path id="rl-narrow" d="M0 262 L70 262 L400 64 L730 262 L800 262"/><path id="rl-wide-t" d="M0 268 L136.0 268.0 Q170 268 197.4 247.8 L302.6 170.2 Q330 150 364.0 150.0 L436.0 150.0 Q470 150 497.7 130.3 L532.3 105.7 Q560 86 587.7 105.7 L631.5 136.8 Q650 150 672.7 150.0 L677.3 150.0 Q700 150 716.2 134.1 L775.7 75.8 Q800 52 824.3 75.8 L880.5 130.9 Q900 150 927.3 150.0 L932.7 150.0 Q960 150 985.1 139.4 L1028.7 121.2 Q1060 108 1091.3 121.2 L1128.7 136.8 Q1160 150 1194.0 150.0 L1236.0 150.0 Q1270 150 1297.4 170.2 L1402.6 247.8 Q1430 268 1464.0 268.0 L1600 268"/><path id="rl-narrow-t" d="M0 262 L38.2 262.0 Q70 262 97.3 245.6 L348.6 94.9 Q400 64 451.4 94.9 L702.7 245.6 Q730 262 761.8 262.0 L800 262"/></defs>
 <use href="#rl-wide" class="rl-line" data-rl-line/>
 <text class="rl-text" data-rl-a><textPath href="#rl-wide" data-rl-pa></textPath></text>
 <text class="rl-text" data-rl-b><textPath href="#rl-wide" data-rl-pb></textPath></text>

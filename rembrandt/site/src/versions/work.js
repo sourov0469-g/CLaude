@@ -27,7 +27,7 @@ def('work', 2, {
     };
     const total = 1.2 + (prints.length - 1) * 0.34;
     if (calm()) { sec.classList.add('table-calm'); requestAnimationFrame(place); }
-    else sub(stage, () => { const t = clamp(stageP(stage) / 0.7, 0, 1) * total; P.forEach((p, i) => { const k = clamp((t - i * 0.34) / 1.2, 0, 1); p.k = 1 - Math.pow(1 - k, 3); }); if (focus < 0) place(); return false; });
+    else sub(stage, () => { const t = 1.2 + clamp(stageP(stage) / 0.7, 0, 1) * (total - 1.2); /* the first print is already down when the table arrives: never an empty table */ P.forEach((p, i) => { const k = clamp((t - i * 0.34) / 1.2, 0, 1); p.k = 1 - Math.pow(1 - k, 3); }); if (focus < 0) place(); return false; });
     addEventListener('resize', () => sec.isConnected && place());
     const animate = () => { table.classList.add('moving'); place(); clearTimeout(animate.t); animate.t = setTimeout(() => table.classList.remove('moving'), 950); };
     prints.forEach((el, i) => el.addEventListener('click', () => {

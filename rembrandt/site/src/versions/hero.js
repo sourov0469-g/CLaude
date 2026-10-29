@@ -38,7 +38,10 @@ def('hero', 3, {
     text.split(' ').forEach((w, wi) => { const ws = d.createElement('span'); ws.className = 'rk-w'; [...w].forEach(ch => { const s = d.createElement('span'); s.className = 'rk-l'; s.textContent = ch; ws.append(s); letters.push({ el: s, v: 0, x: 0, y: 0, w: -1 }); }); vis.append(ws); if (wi < text.split(' ').length - 1) vis.append(' '); });
     const sr = d.createElement('span'); sr.className = 'sr-only'; sr.textContent = text; h1.append(sr, vis);
     const lamp = { x: 0.62, y: 0.4, tx: 0.62, ty: 0.4 };
-    const measure = () => { const hb = box.getBoundingClientRect(); letters.forEach(L => { const r = L.el.getBoundingClientRect(); L.x = r.left + r.width / 2 - hb.left; L.y = r.top + r.height / 2 - hb.top; }); this.fs = parseFloat(getComputedStyle(h1).fontSize); };
+    // until someone moves it, the lamp rests on the headline's second word, so the page opens with the type half lit
+    let moved = false, placed = false;
+    const rest = () => { const w = $$('.rk-w', vis)[1]; if (!w) return; const hb = box.getBoundingClientRect(), r = w.getBoundingClientRect(); lamp.tx = (r.left + r.width / 2 - hb.left) / hb.width; lamp.ty = (r.top + r.height / 2 - hb.top) / hb.height; if (!placed) { placed = true; lamp.x = lamp.tx; lamp.y = lamp.ty; } };
+    const measure = () => { const hb = box.getBoundingClientRect(); letters.forEach(L => { const r = L.el.getBoundingClientRect(); L.x = r.left + r.width / 2 - hb.left; L.y = r.top + r.height / 2 - hb.top; }); this.fs = parseFloat(getComputedStyle(h1).fontSize); if (!moved) { rest(); kick(); } };
     requestAnimationFrame(measure); addEventListener('resize', () => sec.isConnected && measure());
     const apply = () => {
       const hb = box.getBoundingClientRect(), lx = lamp.x * hb.width, ly = lamp.y * hb.height;
@@ -48,13 +51,13 @@ def('hero', 3, {
     if (calm()) { apply(); letters.forEach(L => { L.el.style.color = 'rgb(236 233 228)'; }); hint.textContent = 'The light rests on the damage.'; return; }
     let auto = !fine, autoT = 0, lastDt = 16, settled = 0;
     const r = () => this.fs || 100;
-    if (fine) box.parentElement.addEventListener('pointermove', e => { const hb = box.getBoundingClientRect(); lamp.tx = (e.clientX - hb.left) / hb.width; lamp.ty = (e.clientY - hb.top) / hb.height; hint.style.opacity = 0; kick(); });
-    sec.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') { auto = false; const hb = box.getBoundingClientRect(); lamp.tx = (e.clientX - hb.left) / hb.width; lamp.ty = (e.clientY - hb.top) / hb.height; kick(); } });
-    sec.addEventListener('pointermove', e => { if (e.pointerType === 'touch') { auto = false; const hb = box.getBoundingClientRect(); lamp.tx = (e.clientX - hb.left) / hb.width; lamp.ty = (e.clientY - hb.top) / hb.height; kick(); } }, { passive: true });
+    if (fine) box.parentElement.addEventListener('pointermove', e => { moved = true; const hb = box.getBoundingClientRect(); lamp.tx = (e.clientX - hb.left) / hb.width; lamp.ty = (e.clientY - hb.top) / hb.height; hint.style.opacity = 0; kick(); });
+    sec.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') { auto = false; moved = true; const hb = box.getBoundingClientRect(); lamp.tx = (e.clientX - hb.left) / hb.width; lamp.ty = (e.clientY - hb.top) / hb.height; kick(); } });
+    sec.addEventListener('pointermove', e => { if (e.pointerType === 'touch') { auto = false; moved = true; const hb = box.getBoundingClientRect(); lamp.tx = (e.clientX - hb.left) / hb.width; lamp.ty = (e.clientY - hb.top) / hb.height; kick(); } }, { passive: true });
     const E2 = Math.exp(-2);
     sub(sec, (dt) => {
       lastDt = dt;
-      if (auto) { autoT += dt / 1000; lamp.tx = 0.5 + 0.36 * Math.sin(autoT * 0.37 * 2.2); lamp.ty = 0.5 + 0.22 * Math.sin(autoT * 0.61 * 2.2 + 0.9); if (autoT > 6) { auto = false; hint.textContent = 'Move the light across the roof.'; } }
+      if (auto) { autoT += dt / 1000; lamp.tx = 0.5 + 0.36 * Math.sin(autoT * 0.37 * 2.2); lamp.ty = 0.5 + 0.22 * Math.sin(autoT * 0.61 * 2.2 + 0.9); if (autoT > 6) { auto = false; hint.textContent = 'Move the light across the roof.'; if (!moved) rest(); } }
       const k = 1 - Math.pow(1 - 0.08, dt / 16.7);
       lamp.x += (lamp.tx - lamp.x) * k; lamp.y += (lamp.ty - lamp.y) * k;
       const { lx, ly } = apply(); const R0 = r(); const sm = 1 - Math.exp(-dt / 80);

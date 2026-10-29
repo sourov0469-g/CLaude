@@ -30,8 +30,9 @@ def('towns', 3, {
   async init(sec) {
     const towns = await townsP(), svg = $('[data-tline-svg]', sec), pa = $('[data-rl-pa]', sec), pb = $('[data-rl-pb]', sec), line = $('[data-rl-line]', sec), out = $('[data-tline-out]', sec), list = $('[data-tline-list]', sec), btn = $('[data-tline-pause]', sec);
     const narrow = small(); const id = narrow ? 'rl-narrow' : 'rl-wide';
-    [pa, pb].forEach(p => p.setAttribute('href', '#' + id)); line.setAttribute('href', '#' + id);
-    const path = svg.querySelector('#' + id), L = path.getTotalLength();
+    // the drawn roofline keeps its sharp ridges; the names ride a copy with rounded corners so letters never pile up at a peak
+    [pa, pb].forEach(p => p.setAttribute('href', '#' + id + '-t')); line.setAttribute('href', '#' + id);
+    const path = svg.querySelector('#' + id + '-t'), L = path.getTotalLength();
     const txt = towns.map(t => t.name).join('\u2003\u2003') + '\u2003\u2003';
     // names at reading size; one lap of the list (T) is longer than the path, so two copies T apart always cover it
     if (narrow) svg.setAttribute('viewBox', '0 0 800 300');

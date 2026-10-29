@@ -1,5 +1,6 @@
 /* Storm mode (§3.12) */
 .storm--compact{padding:var(--s-8) 0 0}
+.storm--compact .chapter-label{position:static} /* V1 pins its label inside the stage; the compact storm has no stage */
 .stormc h2{margin-bottom:var(--s-4)}
 .stormc-facts{margin:0 0 var(--s-6);padding-left:1.1em;display:grid;gap:var(--s-2);max-width:60ch;color:#e3ddd5;font-size:1.125rem}
 .nexthour{background:var(--umber-800);color:var(--plaster-100);padding:var(--s-8) 0 var(--s-8);border-top:3px solid var(--brick-600)}

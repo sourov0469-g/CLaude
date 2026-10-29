@@ -226,7 +226,36 @@ try {
     await ctx.close();
   }
 
-  // ---------------- 8. no-JS: defaults complete, no switcher
+  // ---------------- 8. regressions found in the Run D visual review
+  if (want('regress')) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    let { p, errs } = await open(ctx, 'nws=off&v=header:2'); await sweep(p); await p.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' })); await settle(p, 500);
+    const rail = await p.evaluate(() => ({ n: document.querySelectorAll('[data-rail-num]').length, at: document.querySelector('[data-rail-num]').textContent, of: document.querySelector('.hrail-of').textContent }));
+    check('regress', 'S0 V2 rail: one numeral after a full scroll, the hero is 01 of 15', rail.n === 1 && rail.at === '01' && rail.of === 'of 15', JSON.stringify(rail)); await p.close();
+    ({ p, errs } = await open(ctx, 'nws=off&v=install:3'));
+    const clock = await p.evaluate(async () => { const s = document.querySelector('[data-clock-stage]'), seen = new Set(); const top = scrollY + s.getBoundingClientRect().top;
+      for (let y = top; y <= top + s.offsetHeight; y += 23) { window.scrollTo({ top: y, behavior: 'instant' }); await new Promise(r => requestAnimationFrame(() => setTimeout(r, 16))); seen.add(document.querySelector('[data-clock-time]').textContent); }
+      await new Promise(r => setTimeout(r, 1200)); return { bad: [...seen].filter(t => /:6\d/.test(t)), end: document.querySelector('[data-clock-time]').textContent, on: document.querySelector('[data-clock-list] li.on').textContent }; });
+    check('regress', 'S6 V3 clock: never ":60", 5:00 pm lights the walkthrough', !clock.bad.length && clock.end === '5:00 pm' && /Walkthrough/.test(clock.on), JSON.stringify(clock)); await p.close();
+    ({ p, errs } = await open(ctx, 'nws=off&v=signature:3')); await sweep(p, 'section[data-chapter="signature"]');
+    const ruler = await p.evaluate(() => { const end = document.querySelector('[data-ruler] .end text').getBoundingClientRect(); return { right: Math.round(end.right), vw: innerWidth, tab: document.querySelector('[data-ruler-scroll]').hasAttribute('tabindex') }; });
+    check('regress', 'S7 V3 ruler fits a desktop screen, end marker visible, no stray tab stop', ruler.right <= ruler.vw && !ruler.tab, JSON.stringify(ruler)); await p.close();
+    ({ p, errs } = await open(ctx, 'nws=off&storm=1')); await settle(p, 1200);
+    const sc = await p.evaluate(() => { const s = document.querySelector('.storm--compact'); const l = s.querySelector('.chapter-label').getBoundingClientRect(), h = s.querySelector('h2').getBoundingClientRect(); return { labelBottom: Math.round(l.bottom), h2Top: Math.round(h.top) }; });
+    check('regress', 'storm mode: the compact S2 label sits above its heading', sc.labelBottom <= sc.h2Top, JSON.stringify(sc)); await p.close();
+    await ctx.close();
+    const mctx = await browser.newContext({ viewport: { width: 375, height: 667 } });
+    ({ p, errs } = await open(mctx, 'nws=off&v=layers:3')); await sweep(p, 'section[data-chapter="layers"]');
+    const sw = await p.evaluate(() => [...document.querySelectorAll('[data-zonepick]')].map(f => { const r = f.querySelector('.sw-row'); return { fs: Math.round(f.getBoundingClientRect().width), scrolls: r.scrollWidth > r.clientWidth + 1 }; }));
+    check('regress', 'S4 V3 on a phone: swatch groups fit the screen and the long ones scroll', sw.every(x => x.fs <= 375) && sw[0].scrolls, JSON.stringify(sw)); await p.close();
+    ({ p, errs } = await open(mctx, 'nws=off&v=layers:2')); await sweep(p, 'section[data-chapter="layers"]');
+    const lens = await p.evaluate(async () => { const s = document.querySelector('[data-core-stage]'); for (let i = 0, still = 0; i < 14 && still < 2; i++) { const dy = s.getBoundingClientRect().top; if (Math.abs(dy) < 1) still++; else { still = 0; scrollBy({ top: dy, behavior: 'instant' }); } await new Promise(r => requestAnimationFrame(() => setTimeout(r, 60))); } await new Promise(r => setTimeout(r, 600));
+      const l = document.querySelector('[data-lens]').getBoundingClientRect(), h = document.querySelector('.layers--core h2').getBoundingClientRect(); return { lensTop: Math.round(l.top), h2Bottom: Math.round(h.bottom) }; });
+    check('regress', 'S4 V2 on a phone: the lens never covers the heading', lens.lensTop >= lens.h2Bottom, JSON.stringify(lens)); await p.close();
+    await mctx.close();
+  }
+
+  // ---------------- 9. no-JS: defaults complete, no switcher
   if (want('nojs')) {
     const ctx = await browser.newContext({ viewport: { width: 375, height: 667 }, javaScriptEnabled: false });
     const p = await ctx.newPage(); await p.goto(BASE, { waitUntil: 'load' });

@@ -19,7 +19,9 @@ def('storm', 2, {
     // the current month's lamp underline draws on entry (ink grammar)
     once(here, () => here.classList.add('drawn'), { threshold: 0.6 });
     const path = $('[data-sunpath]', sec), sun = $('[data-sun]', sec), L = path.getTotalLength();
-    const place = p => { const pt = path.getPointAtLength(p * L); sun.setAttribute('cx', pt.x.toFixed(1)); sun.setAttribute('cy', pt.y.toFixed(1)); };
+    const arc = sun.parentElement; let aw = 0, ah = 0, lastP = 0;
+    const place = p => { lastP = p; if (!aw) { aw = arc.clientWidth; ah = arc.clientHeight; } const pt = path.getPointAtLength(p * L); sun.style.transform = `translate3d(${(pt.x / 1200 * aw).toFixed(1)}px,${(pt.y / 120 * ah).toFixed(1)}px,0)`; };
+    addEventListener('resize', () => { if (!sec.isConnected) return; aw = 0; place(lastP); });
     const scrubbed = () => !calm() && innerWidth >= 768;
     if (!scrubbed()) { place(m / 11); sec.classList.add('year-native'); list.tabIndex = 0; list.setAttribute('aria-label', 'Twelve months, scroll sideways'); return; }
     let x = 0;

@@ -34,3 +34,4 @@
 @media (max-width:640px){.clock-stage{height:200vh}.clockface{width:min(34vh,260px)}.clock-wrap{gap:var(--s-4)}.clock-head p{display:none}}
 .clock-calm .clock-stage,.calm .install--clock .clock-stage{height:auto}
 .clock-calm .clock-sticky,.calm .install--clock .clock-sticky{position:relative;height:auto;padding:var(--s-9) 0}
+.clock-cap{margin-top:var(--s-4);max-width:40ch;color:var(--slate-600)}

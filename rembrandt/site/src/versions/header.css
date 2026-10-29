@@ -3,6 +3,7 @@
 @media (min-width:1024px){
  .rail-on body{padding-left:72px}
  .rail-on .storm-banner{left:72px}
+.rail-on .fpill .phone{display:none} /* the rail carries the phone; the floating pill keeps only the estimate */
  .hdr--rail{inset:0 auto 0 0;width:72px;height:100vh;height:100dvh;background:var(--umber-900);border-right:1px solid rgb(236 233 228 / .1);align-items:stretch}
  .hdr--rail.is-hidden{transform:none}
  .hdr--rail > .wrap{display:none}

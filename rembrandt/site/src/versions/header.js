@@ -4,20 +4,20 @@ import { ORDER } from './order.js';
 // ---------- S0 V2 "Chapter rail": numeral swap (240ms, --ease-out) + page progress line (scaleY)
 def('header', 2, {
   init(sec) {
-    const num = $('[data-rail-num]', sec), prog = $('[data-rail-prog]', sec), box = num.parentElement; let curN = 1;
+    const num = $('[data-rail-num]', sec), prog = $('[data-rail-prog]', sec), box = num.parentElement; let curN = 1, shown = num;
     this.sub = () => {
       if (!sec.isConnected || !H.classList.contains('rail-on') || innerWidth < 1024) return false;
       const P = clamp(scrollY / Math.max(1, d.documentElement.scrollHeight - innerHeight), 0, 1);
       prog.style.transform = `scaleY(${P.toFixed(4)})`;
       const y = innerHeight * 0.4; let n = curN;
-      ORDER.forEach((k, i) => { if (k === 'header') return; const s = k === 'footer' ? $('.ftr') : $(`section[data-chapter="${k}"]`); if (!s) return; const r = R(s); if (r.top <= y && r.bottom > y) n = i + 1; });
+      ORDER.forEach((k, i) => { if (k === 'header') return; const s = k === 'footer' ? $('.ftr') : $(`section[data-chapter="${k}"]`); if (!s) return; const r = R(s); if (r.top <= y && r.bottom > y) n = i; }); // the hero is chapter 01: the header is not a chapter
       if (n !== curN) {
-        const old = num, nu = old.cloneNode(); nu.textContent = String(n).padStart(2, '0'); box.append(nu);
+        const old = shown, nu = old.cloneNode(); nu.textContent = String(n).padStart(2, '0'); box.append(nu);
         if (calm()) old.remove(); else {
           old.animate([{ transform: 'none' }, { transform: 'translateY(-100%)' }], { duration: 240, easing: E.out, fill: 'forwards' }).onfinish = () => old.remove();
           nu.animate([{ transform: 'translateY(100%)' }, { transform: 'none' }], { duration: 240, easing: E.out });
         }
-        curN = n; this.num = nu;
+        curN = n; shown = nu;
       }
       return false;
     };

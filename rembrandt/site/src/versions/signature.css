@@ -25,4 +25,5 @@
 .ruler .twenty line{stroke:var(--slate-600);stroke-dasharray:4 4}.ruler .twenty text{fill:var(--slate-600)}
 .ruler .end line{stroke:var(--ink-900)}.ruler .end text{fill:var(--ink-900)}
 .ruler-key{list-style:none;padding:0;margin:var(--s-5) 0 0;display:grid;gap:var(--s-3);max-width:64ch}
-.ruler-key b{display:inline-block;min-width:6.5em;font-family:var(--mona);font-weight:600;font-variant-numeric:tabular-nums}
+.ruler-key li{display:grid;grid-template-columns:5em 1fr;gap:var(--s-4)}
+.ruler-key b{font-family:var(--mona);font-weight:600;font-variant-numeric:tabular-nums}

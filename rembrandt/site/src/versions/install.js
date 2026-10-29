@@ -2,7 +2,7 @@ import { def, d, $, $$, E, calm, small, clamp, lerp, sub, stageP } from './regis
 
 // ---------- S6 V2 "One day, time-lapse": frames on ONE <img>, src swapped when the index changes, index eased .12/frame, frames decoded on idle
 const FRAMES = [['install-1', 520, 'Tarps down over the beds. The old roof starts coming off.'], ['install-2', 677, 'Old roof off. Underlayment going on.'], ['install-4', 770, 'The new roof is on and the lawn is cleared.']];
-const fmt = m => { const h = Math.floor(m / 60), mm = String(Math.round(m % 60)).padStart(2, '0'); return `${(h + 11) % 12 + 1}:${mm} ${h < 12 ? 'am' : 'pm'}`; };
+const fmt = m => { const t = Math.round(m), h = Math.floor(t / 60), mm = String(t % 60).padStart(2, '0'); return `${(h + 11) % 12 + 1}:${mm} ${h < 12 ? 'am' : 'pm'}`; }; // round whole minutes first: never 4:60
 def('install', 2, {
   init(sec) {
     const stage = $('[data-lapse-stage]', sec), img = $('[data-lapse-img]', sec), time = $('[data-lapse-time]', sec), cap = $('[data-lapse-cap]', sec), bar = $('[data-lapse-bar]', sec);
@@ -28,6 +28,7 @@ def('install', 3, {
     const STEPS = ['The crew arrives, covers the beds and lays plywood where trucks meet the driveway.', 'Tear-off begins. The old roof comes off down to the boards.', 'Every deck board checked; soft ones shown to you first. The roof is dried in.', 'The magnet sweep: lawn, beds and driveway, for nails.', 'The walkthrough, with the progress photos, before anyone asks you to sign.'];
     let cur = -1, v = 0;
     const set = m => {
+      m = Math.round(m); // one minute value for the hands, the label and the step, so 5:00 always lights the walkthrough
       const hr = (m / 60) % 12, mn = m % 60;
       hh.setAttribute('transform', `rotate(${(hr * 30).toFixed(2)})`); mh.setAttribute('transform', `rotate(${(mn * 6).toFixed(2)})`);
       tEl.textContent = fmt(m);
