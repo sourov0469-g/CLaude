@@ -6,12 +6,15 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 import Lenis from 'lenis';
-import { initCursor } from './cursor.js';
 import { initDepth } from './depth.js';
-import { prepText } from './textfx.js';
+import { initMagnet } from './magnet.js';
+import { initCompanion } from './companion.js';
+import { initDividers } from './dividers.js';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, MorphSVGPlugin);
 gsap.defaults({ ease: 'power3.out', duration: 0.8 });
 
 const IMG = window.__IMG || {};
@@ -51,11 +54,23 @@ function mount(sec, v, swap) {
   root.dataset.v = v; sec.dataset.v = v;
   const mm = gsap.matchMedia();
   mm.add(Q, ctx => {
-    if (ctx.conditions.motion && ctx.conditions.fine) prepText(root);
     const init = MODS[id] && MODS[id][v];
     return init ? init(root, { ...ctx.conditions, swap, sec, id, ctx }) : undefined;
   }, root);
   live.set(id, { mm, v });
+  paintBg(sec, root);
+}
+// PLAN-V7 §4b: each section paints its active version's background (--vbg on the version root, else its computed
+// background); the neighbours' dividers take that colour (--prev-bg on the next host, --next-bg on the one above).
+function paintBg(sec, root) {
+  const cs = getComputedStyle(root);
+  let bg = cs.getPropertyValue('--vbg').trim();
+  if (!bg) { const c = cs.backgroundColor; bg = c && c !== 'rgba(0, 0, 0, 0)' && c !== 'transparent' ? c : getComputedStyle(document.documentElement).getPropertyValue('--sky').trim(); }
+  sec.style.setProperty('--sec-bg', bg);
+  const next = sec.nextElementSibling || document.getElementById('foot');
+  if (next) next.style.setProperty('--prev-bg', bg);
+  const prev = sec.previousElementSibling; if (prev && prev.matches('[data-section]')) prev.style.setProperty('--next-bg', bg);
+  if (sec.id === 'call') { const f = document.getElementById('foot'); if (f) f.style.setProperty('--prev-bg', bg); }
 }
 const announce = t => { const a = document.getElementById('announce'); a.textContent = ''; requestAnimationFrame(() => { a.textContent = t; }); };
 function setUrl() {
@@ -68,7 +83,7 @@ function setUrl() {
 // T hides or shows the controls, R resets to defaults. One knob per section (its version).
 const KEY = 'tweaks-rembrandt-home';
 const store = { get() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* private mode */ } } };
-function save() { const o = {}; for (const [id, s] of live) if (s.v !== 1) o[id] = s.v; store.set(o); }
+function save() { const o = { companion: store.get().companion }; for (const [id, s] of live) if (s.v !== 1) o[id] = s.v; store.set(o); }
 function readUrl() { // ?v=hero2,proof3 (strict: unknown ids or versions are ignored)
   const out = {}; let raw = '';
   try { raw = new URL(location.href).searchParams.get('v') || ''; } catch (e) { return out; }
@@ -101,11 +116,13 @@ export function boot(mods) {
     t.innerHTML = sec.querySelector('.stage').innerHTML; document.body.append(t);
   }
   startLenis();
+  hydrate(document.getElementById('foot') || document.createElement('i'));
   // [BANK] Q107 Anton & Irene: one reduced-motion flag on <html>, read by CSS and JS
   const flag = () => { document.documentElement.dataset.motion = RM.matches ? 'reduced' : 'full'; };
   flag(); RM.addEventListener('change', flag);
   const saved = store.get(), url = readUrl();
   const want = Object.keys(url).length ? url : Object.fromEntries(Object.entries(saved).filter(([id, v]) => MODS[id] && [1, 2, 3].includes(v)));
+  initDividers();
   for (const sec of ORDER) mount(sec, want[sec.dataset.section] || 1, !!want[sec.dataset.section] && want[sec.dataset.section] !== 1);
   for (const sec of ORDER) {
     const p = sec.querySelector(`input[value="${live.get(sec.dataset.section).v}"]`); if (p) p.checked = true;
@@ -118,12 +135,21 @@ export function boot(mods) {
     if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable]')) return;
     if (/^[123]$/.test(e.key)) switchTo(inView, +e.key);
     else if (e.key === 't' || e.key === 'T') document.documentElement.classList.toggle('picks-off');
-    else if (e.key === 'r' || e.key === 'R') { for (const sec of ORDER) if (live.get(sec.dataset.section).v !== 1) switchTo(sec, 1); store.set({}); }
+    else if (e.key === 'r' || e.key === 'R') { for (const sec of ORDER) if (live.get(sec.dataset.section).v !== 1) switchTo(sec, 1); store.set({ companion: store.get().companion }); }
   });
   // one filled call per view (S1435, G6 #1): the nav's call button waits until the hero's own has scrolled away
   const nav = document.querySelector('.nav'), hero = document.getElementById('hero');
   if (nav && hero) ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom 35%', onToggle: s => nav.classList.toggle('nav--quiet', s.isActive) });
-  initCursor(); initDepth();
+  initDepth(); initMagnet(); initCompanion(store);
+  // PLAN-V7 §4d: every reaction element (.rx) gets a press state on pointer-down and on Enter/Space, separate from
+  // its hover state; the section's CSS draws the press. One delegated listener for the page.
+  const press = e => {
+    const t = e.target.closest && e.target.closest('.rx'); if (!t) return;
+    if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+    t.classList.remove('is-press'); void t.offsetWidth; t.classList.add('is-press');
+    clearTimeout(t._rx); t._rx = setTimeout(() => t.classList.remove('is-press'), 700);
+  };
+  addEventListener('pointerdown', press, { passive: true }); addEventListener('keydown', press);
   RM.addEventListener('change', () => (RM.matches ? stopLenis() : startLenis()));
   FINE.addEventListener('change', () => (FINE.matches ? startLenis() : stopLenis()));
   window.ScrollTrigger = ScrollTrigger; // inspection hook for the QA scripts
@@ -131,4 +157,4 @@ export function boot(mods) {
   addEventListener('load', () => sortRefresh());
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
 }
-export { gsap, ScrollTrigger, SplitText };
+export { gsap, ScrollTrigger, SplitText, DrawSVGPlugin, MorphSVGPlugin };

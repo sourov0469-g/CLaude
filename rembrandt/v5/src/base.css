@@ -15,6 +15,10 @@
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s12:48px;--s16:64px;--s24:96px;--s32:128px;--s40:160px;--s48:192px;
   --gutter:clamp(16px,4vw,56px); --nav-h:76px;
   --focus:0 0 0 3px var(--sky),0 0 0 6px var(--ink); --mbar:0px;
+  /* V7 drawing roles (PLAN-V7 §1, §4a): shingle charcoal, chalk blue; strokes round-capped */
+  --shingle:#3a4152; --chalk:#6f9be8; --wood:#c98b4a;
+  /* V7 house entrance (R5 beats, F17): 0.3s moves, 0.08s apart, S1303 decelerate */
+  --ease-x:cubic-bezier(.23,1,.32,1); --ease-spring:cubic-bezier(.34,1.56,.64,1); --div-h:clamp(52px,7.2vw,104px);
 }
 @media (max-width:640px){:root{--mbar:84px}}
 *,*::before,*::after{box-sizing:border-box}
@@ -73,7 +77,13 @@ button,input{font:inherit;color:inherit}
 }
 
 /* sections and the 1 · 2 · 3 picker */
-.sec{position:relative;isolation:isolate}
+.sec{position:relative;isolation:isolate;background:var(--sec-bg,var(--sky))}
+.sec[data-div]{padding-top:var(--div-h)}
+.div{position:absolute;left:0;width:100%;height:var(--div-h);pointer-events:none;z-index:4;overflow:visible}
+.div--hang{top:0;fill:var(--prev-bg,var(--sky))}
+.div--rise{bottom:-1px;fill:var(--next-bg,var(--sky))}
+.div path{transition:fill var(--dur-fast) var(--ease-out)}
+.div .div-shade{fill:oklch(0.2 0.05 262 / .14)}
 .stage{position:relative}
 .pick-rail{position:sticky;top:calc(var(--nav-h) + 4px);height:0;z-index:60;display:flex;justify-content:flex-end;align-items:flex-start;padding:0 var(--gutter);pointer-events:none}
 .pick{pointer-events:auto;display:flex;align-items:center;gap:2px;margin:0;padding:4px;border:0;border-radius:999px;background:#0b1328;color:#fff;font:600 13px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 0 0 1px oklch(1 0 0 / .14),0 6px 18px -8px oklch(0 0 0 / .5);transform:translateY(8px)}
@@ -102,22 +112,51 @@ html.picks-off .pick-rail{display:none}
 .ph img{width:100%;height:100%;object-fit:cover}
 .ph::after{content:"";position:absolute;inset:0;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;pointer-events:none}
 
-/* custom cursor (S1321): difference-blend ring + dot; only when html.cur-on (fine pointer, motion allowed) */
-.cur{position:fixed;left:0;top:0;z-index:300;pointer-events:none;display:none}
-html.cur-on .cur{display:block}
-html.cur-on,html.cur-on a,html.cur-on button,html.cur-on label,html.cur-on [data-cursor]{cursor:none}
-html.cur-on input[type=text],html.cur-on input[type=search],html.cur-on input[type=tel],html.cur-on textarea{cursor:text}
-.cur-ring{position:fixed;left:-22px;top:-22px;width:44px;height:44px;border-radius:50%;border:1.5px solid #fff;mix-blend-mode:difference;display:grid;place-items:center}
-.cur-ring.is-label{mix-blend-mode:normal;background:var(--sun);border-color:var(--sun)}
-.cur-label{font:800 9px/1 "Epilogue",sans-serif;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
-.cur-dot{position:fixed;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#fff;mix-blend-mode:difference}
+/* V7 cursor companion (PLAN-V7 §5): additive, pointer-events none, the system cursor always stays.
+   Mounted only for (hover:hover) and (pointer:fine); its switcher is a radio group, desktop only. */
+.cmp{position:fixed;left:0;top:0;z-index:300;pointer-events:none;display:none}
+html.cmp-on .cmp{display:block}
+.cmp-pos{position:fixed;left:0;top:0;width:46px;height:46px;will-change:transform}
+.cmp-tilt{width:100%;height:100%;transform-origin:50% 90%}
+.cmp-ch{width:46px;height:46px;overflow:visible}
+.cmp-ch *{transform-box:fill-box}
+.cmp-ch .lid{transform-origin:50% 0;transform:scaleY(0)}
+.cmp-acc{position:absolute;width:22px;height:22px;right:-12px;top:-8px;overflow:visible}
+.cmp-label{position:absolute;left:44px;top:36px;padding:5px 9px;border-radius:999px;background:var(--sun);color:var(--ink);font:800 11px/1 "Epilogue",sans-serif;letter-spacing:.01em;white-space:nowrap;opacity:0;transition:opacity var(--dur-quick) var(--ease-out)}
+.cmp-label.is-on{opacity:1}
+.cmp-fx{position:fixed;left:0;top:0;overflow:visible;pointer-events:none}
+.cmp-pick{display:none}
+@media (hover:hover) and (pointer:fine){
+  .cmp-pick{position:fixed;left:var(--gutter);bottom:16px;z-index:95;display:flex;align-items:center;gap:2px;margin:0;padding:4px;border:0;border-radius:999px;background:#0b1328;color:#fff;font:600 13px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 0 0 1px oklch(1 0 0 / .14),0 6px 18px -8px oklch(0 0 0 / .5)}
+  .cmp-pick legend{padding:0}
+  .cmp-pick-l{padding:0 8px 0 10px;color:oklch(1 0 0 / .62)}
+  .cmp-pick label{position:relative;display:grid;place-items:center;min-width:36px;height:36px;padding:0 6px;border-radius:999px;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out)}
+  .cmp-pick label svg{width:24px;height:24px;overflow:visible}
+  .cmp-pick input{position:absolute;opacity:0;pointer-events:none}
+  .cmp-pick input:checked+label{background:var(--sun);color:var(--ink)}
+  .cmp-pick input:focus-visible+label{outline:2px solid #fff;outline-offset:2px}
+  .cmp-pick input:not(:checked)+label:hover{background:oklch(1 0 0 / .14)}
+  html.picks-off .cmp-pick{display:none}
+}
 .ch{display:inline-block}
 [data-cursor="text"]{width:fit-content;max-width:100%}
 .wd{display:inline-block;white-space:nowrap}
 
+/* shared footer: [BANK] #319 Bakstad NAP record (named principal, street address, phone, hours); the gutter divider hangs over its top */
+.ftr{position:relative;background:var(--ink);color:#fff;padding:calc(var(--div-h) + 40px) var(--gutter) 48px}
+.ftr-in{display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between;max-width:1280px;margin:0 auto}
+.ftr-logo{display:inline-flex;padding:10px 16px;background:#fff;border-radius:999px}
+.ftr-logo img{width:150px;height:auto}
+.ftr-nap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 28px;font-style:normal;font-size:var(--t-small);line-height:1.5;max-width:52ch}
+.ftr-k{color:var(--on-blue-muted);font-weight:700}
+.ftr a{color:#fff;font-weight:700}
+@media (max-width:640px){.ftr{padding-bottom:calc(48px + var(--mbar))}}
 /* footer (rendered by the call section) */
 .foot{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;padding:28px var(--gutter) 40px;font-size:var(--t-small)}
 .foot img{width:132px;height:auto}
 .foot-logo{display:inline-flex;padding:10px 14px;background:#fff;border-radius:999px}
 
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+/* PLAN-V7 §4d reaction parts: drawn inside the element, aria-hidden; hover and press are separate states */
+.rx{position:relative}
+.rx-s{position:absolute;pointer-events:none;overflow:visible}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}.rx *,.rx{transition-duration:.01ms!important}}

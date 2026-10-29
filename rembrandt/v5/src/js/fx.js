@@ -45,3 +45,14 @@ export function words(el) {
   }
   return [out, () => { el.innerHTML = html; }];
 }
+
+// V7 house entrance (PLAN-V7 §4e): Builder Brief R5 / Q12 Eloy Benoffi role-grouped beats (eyebrow > title > body >
+// media) 0.08s apart, each move 0.3s (F17 reveal level), y 16 -> 0 with opacity, decelerating; "top 82%", once.
+// Hidden start states exist only inside this tween, which runs only with motion allowed.
+export function beats(trigger, groups, o = {}) {
+  const tl = gsap.timeline({ scrollTrigger: o.now ? undefined : { trigger, start: o.start || 'top 82%', once: true }, delay: o.delay || 0 });
+  groups.forEach((g, i) => { const els = gsap.utils.toArray(g); if (els.length) tl.fromTo(els, { y: o.y ?? 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: o.stagger ?? 0.05, clearProps: 'transform,opacity,visibility' }, i * 0.08); });
+  return tl;
+}
+// a stroke that draws itself (DrawSVG 0 -> 100%); duration defaults to the F17 ceiling
+export const drawIn = (els, o = {}) => gsap.fromTo(els, { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, ...o });

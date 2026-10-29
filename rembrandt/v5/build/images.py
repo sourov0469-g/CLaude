@@ -6,14 +6,15 @@ from PIL import Image, ImageFilter, ImageOps, ImageChops
 root = pathlib.Path(__file__).resolve().parent.parent
 src, out = root / 'assets' / 'owner', root / 'assets' / 'img'
 out.mkdir(exist_ok=True)
-JOBS = {  # name: (source, max width, quality). F18 weight budget: capped widths, q70-74 (anatomy §7b)
-    'ba1-after': ('ba1-after.png', 1480, 70),
-    'tudor': ('tudor.jpg', 1800, 70),
-    'job-charcoal': ('job-charcoal.png', 1156, 72),
-    'job-truck': ('job-truck.png', 1102, 72),
-    'ba2-before': ('ba2-before.png', 1024, 72),
-    'ba2-after': ('ba2-after.webp', 1024, 72),
-    'team': ('team.webp', 1088, 74),
+JOBS = {  # name: (source, max width, quality). F18 / S1166 (page max 1500 KB): V7 caps the long edge at 1600 (hero photos)
+    # and 1100 (the rest), q62-66; every photo still reads sharp at its largest rendered size (checked at 1440 and 2x 390)
+    'ba1-after': ('ba1-after.png', 1280, 56),
+    'tudor': ('tudor.jpg', 1600, 58),
+    'job-charcoal': ('job-charcoal.png', 1100, 64),
+    'job-truck': ('job-truck.png', 1100, 64),
+    'ba2-before': ('ba2-before.png', 1024, 64),
+    'ba2-after': ('ba2-after.webp', 1024, 58),
+    'team': ('team.webp', 1088, 66),
 }
 
 def save(im, name, q):
