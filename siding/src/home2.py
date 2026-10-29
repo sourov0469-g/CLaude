@@ -483,7 +483,7 @@ def services2():
       <svg class="ix-gl" aria-hidden="true" focusable="false"><use href="#ixg-storm"/></svg><span class="ix-name" data-chars>Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
     return f'''<div class="v services-2" data-tone="ground">
   <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices from the firm's own documented jobs, 2018-2026.</p>
-    <p class="ix-count num" aria-hidden="true"><b data-ix-now>01</b><span>of 11</span></p></div>
+    <p class="ix-count num" aria-hidden="true"><b data-ix-now>01</b><span>of 11</span></p><p class="ix-call">Pick a trade to book its free inspection, or call <a class="tlink" href="{TEL}">{PHONE}</a>.</p></div>
   <svg class="ix-defs" aria-hidden="true" focusable="false">{IX_SYMS}</svg>
   <ol class="ix">{rows}</ol>
   <div class="ix-peek" aria-hidden="true"><img alt="" width="800" height="600"></div>
@@ -847,7 +847,7 @@ def near2():
         <span class="mx-t">{e(town)}</span><span class="mx-c mx-d"><span class="sr-only">Documented jobs in the project finder: </span><b class="num">{docs.get(town, '-')}</b></span>
         {cell(f.get('sid'), 'Siding')}{cell(f.get('win'), 'Windows')}<i class="mx-x" aria-hidden="true"></i></button>
       <div class="mx-more" id="mx-{k}" inert><div class="mx-in">{sky_svg}{note}{f'<ul class="mx-pics">{pics}</ul>' if pics else '<p class="mx-note">No photographed jobs from here published yet.</p>'}
-        <a class="tlink" href="#book" data-book>Book a free inspection in {e(town)}</a></div></div>
+        <a class="tlink" href="#book" data-book>Book a free inspection in {e(town)}</a> <span class="mx-or">or call <a class="tlink" href="{TEL}">{PHONE}</a></span></div></div>
     </li>'''
     return f'''<div class="v near-2" data-tone="ground">
   <div class="mx-head"><h2 class="h2x" data-split>Town by town</h2>

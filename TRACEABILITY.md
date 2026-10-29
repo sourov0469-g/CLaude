@@ -318,7 +318,7 @@ Sections are recorded in SECTIONS.md order.
   - Pointing or tabbing to a name moves the brackets (0.3 s) and shows the verbatim excerpts that name them.
   - No counts; no auto-cycle.
 - **Verdict:** REBUILT. F fail: per-name review counts, "All 30" and "4 of 9 reviews" are review counts; its reference (#321, filter pills WITH COUNTS) cannot stay without the counts, so a new reference is needed.
-- **Verification:** PASS (29 Oct). Screenshot `reviews3-d/-m.png`. Garrett → every visible excerpt names Garrett (fixed during build: each card now opens at its own person's sentence); 'Show the rest' reveals more and moves focus to the first new card; ArrowRight → Tracy. `sect.js reviews` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow). Facts grep on the section: "474 Google reviews" is the only count; no "N of M"; captions read "Google, 2026".
+- **Verification:** PASS (29 Oct). Screenshot `reviews3-d/-m.png`. Garrett → every visible excerpt names Garrett (fixed during build: each card now opens at its own person's sentence); 'Show the rest' reveals more and moves focus to the first new card; ArrowRight → Tracy. `sect.js reviews` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow). Facts grep on the section: "474 Google reviews" is the only count; no "N of M"; captions read "Google, 2026". Gate fix: pointing now brings a name's excerpts up after a 160 ms dwell, as the version promises; a keyboard choice is never overridden by a parked pointer.
 
 ### Money
 

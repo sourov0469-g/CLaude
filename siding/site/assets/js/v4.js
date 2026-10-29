@@ -611,8 +611,8 @@
       build(F) {
         const pal = HEX();
         // V5: chips live in the side margins only, so they never sit under a heading or a line of copy
-        const mg = clamp(F.w * 0.1, 14, 150), sc = mg < 60 ? 0.5 : 1;
-        const n = clamp(Math.round(F.h / (mg < 60 ? 70 : 46)), 10, 48);
+        const mg = clamp(F.w * 0.03, 12, 44), sc = 0.55;   // the page margin (--m) and no further
+        const n = clamp(Math.round(F.h / 60), 10, 40);
         F.chips = [];
         const g = svgEl('g', { class: 'f-chips' }, F.svg);
         for (let i = 0; i < n; i++) {

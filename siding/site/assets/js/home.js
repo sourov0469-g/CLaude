@@ -1100,10 +1100,13 @@
       more.hidden = open || hit.length <= FIRST;
       if (motionOK()) G.fromTo(hit.filter(c => !c.hidden), { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: 'power2.out', stagger: 0.04, overwrite: true });   // opacity, not visibility: a card can take focus mid-fade
     };
-    radios(line, b, it => { committed = it; open = false; frame(it, true); list(); }, '.cr-n');
-    if (mqFine.matches) {
-      names.forEach(n => b.on(n, 'pointerenter', () => frame(n, true)));
-      b.on(line, 'pointerleave', () => frame(committed, true));
+    const pick = radios(line, b, it => { if (it === committed && cards.some(c => !c.hidden)) { frame(it, true); return; } committed = it; open = false; frame(it, true); list(); }, '.cr-n');
+    if (mqFine.matches) {   // pointing reads: the brackets move at once, a 160 ms dwell brings that person's excerpts up
+      let dwell = 0;
+      const keyed = () => { const a = d.activeElement; return !!a && line.contains(a) && a.matches(':focus-visible'); };   // a keyboard choice is never overridden by a parked pointer
+      names.forEach(n => b.on(n, 'pointerenter', () => { frame(n, true); clearTimeout(dwell); if (!keyed()) dwell = setTimeout(() => { if (!keyed()) pick(n, false); }, 160); }));
+      b.on(line, 'pointerleave', () => { clearTimeout(dwell); frame(committed, true); });
+      b.add(() => clearTimeout(dwell));
     }
     b.on(more, 'click', () => {   // the button leaves with its job done, so focus moves to the first card it revealed
       const was = cards.filter(c => !c.hidden).length; open = true; list();

@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** 4, assembly + §12 gate (Phase 3 complete)
+- **Phase:** DONE: §12 gate passed on the delivered file (evidence below)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -92,14 +92,14 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 
 ## Open issues (carried from AUDIT-V3.md; each must close with a reason)
 
-- [ ] **F1 · 886 wording.** See K1.
+- [x] **F1 · 886 wording.** CLOSED under K1: the page prints the AUDIT-V3 / FACTS meaning, "312 on the map with photos + 574 more counted = 886"; the arithmetic is unchanged.
 - [x] **F2 · No Texas licence line in the first screen** (anatomy F11). CLOSED, not added: Texas issues no state contractor licence for siding, window or roofing work and the firm publishes none, so any number would be invented (§3). The first screen carries rating, review count, installer tiers and since-year (the proof strip in all three heroes).
 - [x] **F3 · Hero 1 blinds** (Q38/R6 Tier 3, a 1.2 s reveal on load). CLOSED: Hero 1 rebuilt from Q95; nothing plays on load beyond the 0.3 s rise.
 - [x] **F4 · Services 1 and Hero 2 both end in a median price band.** CLOSED: Services 1 rebuilt with product facts and no price; Hero 2 is the only median-band-by-trade device.
 - [x] **F5 · Upload-your-house-photo flagship** (portfolio plan Site 6) is unbuilt. CLOSED: Colour 1 rebuilt as the flagship (local photo, brushed colour, published band and levers in one flow), tested with a real file.
 - [x] **F6 · Built 1 and Built 3 both technical drawings.** CLOSED: different references and mechanisms (S0526 exploded iso on springs vs S0361 dimensioned section with a lap↔batten morph), different layouts, and Built 2 between them is photographic.
 - [x] **F7 · Near 1 month-by-month build** (2.3 s data animation on scroll). CLOSED under K10: the firm's own map drawn month by month (now 1.8 s) is the data being read, played once, never gating, and complete at once under reduced motion.
-- [ ] **F8 · Lenis kept** (≈18 KB).
+- [x] **F8 · Lenis kept** (≈18 KB). CLOSED: F18 asks for ONE smooth-scroll engine, and Lenis is that one. It runs on desktop fine pointers only, is off under reduced motion, and has no rival engine. The file is still 118 KB under the baseline with it.
 
 ## Failed checks (kept visible until they pass)
 (none yet)
@@ -160,3 +160,62 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
   - `qa4`: 159/159 PASS (companion on in all 30 versions with its variant, field + divider present, system cursor kept, reaction on hover, switchers, touch at 375/320, reduced motion).
   - Legacy `ix4` at 1440: every check on the 19 kept versions PASS (30), page errors none. Its failures are only on the 11 rebuilt versions, whose removed markup it still looks for; `sect.js` covers those.
   - Kit contact sheet `v5/shots/kit-sheet.png`; halo crops `v5/shots/halo-*.png`.
+
+## §12 Gate: evidence (run on the delivered `siding/homepage-standalone.html`, file://, 29 Oct 2026)
+
+- **Deliverable:** 4,221,484 B, sha256 `d2c28a32…687b12`.
+- **Tools** (in `siding/qa/v5/`):
+  - `gate_static.py` → `final-static.json`
+  - `sect.js` (switch isolation, controls, console, overflow at 1440 / 375 / 1440 reduced motion)
+  - `qa4.js` (companion suite, scratchpad v4)
+  - `k11.js` (live entrance timing)
+  - `shots_all.js` (60 screenshots → the 10 contact sheets `siding/qa/v5/<section>.webp`)
+
+1. **Facts grep — PASS.**
+   - Review counts in the visible text: only "474 Google reviews". The JSON-LD reviewCount is 474. No "N of M" counts reviews (the only N-of-M strings are steps, trades and job shares such as "301 of 415").
+   - Phone: every version with a booking path carries `tel:+15125500000` (30/30 checked per template; Services 2 and Near 2 were found missing it and fixed).
+   - 886 with its split: "312 on the map with photos + 574 more counted = 886" (K1).
+   - Address "7801 N Lamar Blvd Suite C70, Austin, TX 78752" and hours "Monday–Friday 8–8, Saturday 8–6, Sunday 12–5" appear verbatim, with no other variants.
+2. **Logo — PASS.** The embedded bytes hash-match the served files:
+   - colour PNG `64ab1b1b…eb54` == disk;
+   - white AVIF `cb9c7306…dbdb` == disk;
+   - no converted logo files remain in the asset table.
+3. **Banned patterns — PASS.**
+   - Each section has three different references (`TRACEABILITY.md` foot).
+   - Before/after: the only "Before" images are the six `work-*-b` files of true pairs. Hero 1 shows the Rob Roy *after* photo alone, inside the letters.
+   - No invented counts or prices; no redrawn logo; no inner pages.
+4. **Traceability — PASS.**
+   - 30/30 rows have Verification filled (0 "—" left).
+   - Three references picked at random (seed 20261029) and re-opened in the Atlas:
+     - **Q48 Grid-to-Fullscreen:** "positions/scales from the thumbnail's DOM bounds — re-measured at click time … close reverses the same tween; phones: simple fade/scale". Matches Colour 3.
+     - **S0361 dimensional drawing:** "every dimension is a variable code … [TBD]". Matches Built 3's L1/X1/O1/T1 sheet.
+     - **Q571 AHA:** "services index as a semantic ordered list, counter generated by CSS counters (01 of 11)". **Q162 K72:** "closestEdge() compares … top-centre vs bottom-centre". Both match Services 2.
+5. **Switchers — PASS.** `sect.js` checks that the other nine stages keep the same DOM node after each switch, at 1440 and 375 (and 1440 reduced motion): 90/90.
+6. **Screenshots — PASS.** All 30 versions at 1440 and 375 (60 shots, console 0, no overflow), reviewed as contact sheets.
+   - Defects found and fixed during the gate:
+     - Colour field chips grazed wide text (moved to the page margin).
+     - Reviews 3 pointing did not bring excerpts up (160 ms dwell added); a parked pointer then overrode a keyboard choice (guarded by `:focus-visible`).
+     - Services 2 and Near 2 lacked the phone (K7).
+   - Earlier phases fixed the switcher overhang, the Book 1 door panel, the Money 3 strike line, the Hero 1 word split, the Hero 3 sign position and the Reviews 2 meeting rail.
+7. **Console, overflow, ids, controls, forms — PASS.**
+   - Console 0 on load, switching and pointer movement in every run.
+   - No overflow at 375.
+   - All 6 ids the scripts reference exist.
+   - Every version's controls are click- or key-tested by `sect.js`, including real form submissions: every booking form is refused when empty and reaches its done state when filled; Colour 1 takes a real file.
+8. **Companion — PASS.** `qa4` 159/159 on the delivered file:
+   - all three variants across the 30 versions;
+   - mini pill and picks switchers;
+   - off on touch at 375 and 320;
+   - off under reduced motion.
+   - The halo and the reaction kit were checked separately (correct section key, glyphs invisible at rest).
+9. **Weight — PASS.** 4,221,484 B, which is 118,383 B under the 4,339,867 B baseline:
+
+   | Part | Now (B) | Baseline (B) | Change (B) |
+   |---|---|---|---|
+   | Media (base64) | 3,349,758 (font 130,832) | 3,456,985 | −107,227 |
+   | Code and markup | 871,726 | 882,882 | −11,156 |
+
+   Images are 58 AVIF, 15 WebP (lossless plates and masks) and 1 PNG (the served logo, by rule).
+10. **Final verdicts and flags — PASS.** `siding/AUDIT-V3.md` "Final verdicts": 19 KEPT, 11 REBUILT. F1–F8 are all closed with reasons (above).
+
+**Motion ceilings (K11), measured live:** no scroll entrance in any of the 30 versions plays longer than 0.3 s per element ("OVER 0.3: none"). The K10 data animations are exempt and marked.

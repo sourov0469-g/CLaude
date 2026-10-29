@@ -238,3 +238,30 @@ Final verdicts and verification evidence are appended below as each section pass
 - **Section entrance:** direction-aware heading reveal (Q40), 0.3 s. A K11 ceiling of 0.3 s applies to every scroll entrance and click transition; the K10 data animations are exempt.
 - **Fields:** the Colour chips moved to the margins; the Near plans are quieter; the Built band is softer on phones; the Money field is now ledger paper (the v4 chalk line and tape ticks duplicated Book 3 and Services 3).
 - **Evidence:** `sect.js` 90/90, `qa4` 159/159, `ix4` kept-version checks 30/30, console 0.
+
+### Final verdicts (BRIEF-V5 §12 item 10), 29 Oct 2026
+
+| Section | v1 | v2 | v3 |
+|---|---|---|---|
+| Hero | REBUILT · Q95 Masked Heading · M, T | REBUILT · Stronghold + Neil Kelly · T, F4 | REBUILT · Feldco + R33 · T, M |
+| Proof | KEPT · #317 + Q165 | KEPT · Georgia CG | KEPT · S1327 + #292 |
+| Services | REBUILT · Neil Kelly + BLK 531 · F4, T | KEPT · Q571 + Q162 | REBUILT · Codrops timeline Mode B · M (1.6 s intro swallowed keys) |
+| Work | KEPT · R28 (signature; key-fight defect fixed) | KEPT · S0468 | KEPT · S1324 + Q125 |
+| Built | KEPT · S0526 + S0504 | KEPT · S1322 | KEPT · S0361 + S1361 |
+| Colour | REBUILT · Site 6 flagship + BLK 531 + R36 · F5 | KEPT · R30 | KEPT · Q48 |
+| Near you | KEPT · firm map + S1323 | KEPT · West Shore | KEPT · KBF |
+| Reviews | REBUILT · Q161 · F (count) | REBUILT · R29 + S1329 · F ("1 of 8") | REBUILT · #300 True Focus + F13 · F (counts) |
+| Money | REBUILT · firm example + F10 · T (level) | KEPT · F7e | REBUILT · R24 + Offers · T (odometer, stamp) |
+| Book | KEPT · Rogers + S1364 (panel defect fixed) | KEPT · Mad City + S1442 | KEPT · #413 Tequila |
+
+**19 KEPT · 11 REBUILT.** Every version's row in `TRACEABILITY.md` has its Verification filled.
+
+**Phase-0 flags, all closed** (reasons in `PROGRESS.md`):
+- F1: the 886 wording (K1);
+- F2: the licence line (none exists to print);
+- F3: the blinds (Hero 1 rebuilt);
+- F4: the price overlap (Services 1 has no price);
+- F5: the flagship (Colour 1);
+- F6: the two drawings (different mechanisms, photographic middle);
+- F7: the month build (K10);
+- F8: Lenis (kept as the one engine, desktop only).

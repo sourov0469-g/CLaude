@@ -1,0 +1,85 @@
+{
+ "review_counts": [
+  ", TX 78752 Reviews",
+  "1 2 3 Reviews",
+  "474 Google reviews",
+  "9 474 Google reviews"
+ ],
+ "n_of_m": [
+  "01  of 05",
+  "01  of 11",
+  "02  of 05",
+  "03  of 05",
+  "04  of 05",
+  "05  of 05",
+  "1  of 3",
+  "1 of 2",
+  "2 of 2",
+  "286 of 415",
+  "297 of 415",
+  "301 of 415",
+  "6 of 10"
+ ],
+ "jsonld_reviewCount": [
+  "474"
+ ],
+ "address_variants": [
+  "7801 N Lamar Blvd Suite C70",
+  "7801 N Lamar Blvd Suite C70, Austin, TX 78752"
+ ],
+ "hours_variants": [
+  "Monday–Friday 8–8, Saturday 8–6, Sunday 12–5",
+  "Monday–Friday 8–8, Saturday 8–6, Sunday 12–5."
+ ],
+ "886_split": [
+  "312  on the map, with photos   +        574  more counted   =        886",
+  "312 on the map with photos + 574 more counted = 886"
+ ],
+ "k7_contact_paths": [
+  "hero1:cta/tel",
+  "hero2:cta/tel",
+  "hero3:cta/tel",
+  "proof1:-/NO-TEL",
+  "proof2:-/NO-TEL",
+  "proof3:-/NO-TEL",
+  "services1:cta/tel",
+  "services2:cta/tel",
+  "services3:-/NO-TEL",
+  "work1:-/NO-TEL",
+  "work2:-/NO-TEL",
+  "work3:-/NO-TEL",
+  "built1:-/NO-TEL",
+  "built2:-/NO-TEL",
+  "built3:-/NO-TEL",
+  "colour1:cta/tel",
+  "colour2:-/NO-TEL",
+  "colour3:-/NO-TEL",
+  "near1:-/NO-TEL",
+  "near2:cta/tel",
+  "near3:-/NO-TEL",
+  "reviews1:-/NO-TEL",
+  "reviews2:-/NO-TEL",
+  "reviews3:-/NO-TEL",
+  "money1:-/NO-TEL",
+  "money2:-/NO-TEL",
+  "money3:cta/tel",
+  "book1:cta/tel",
+  "book2:cta/tel",
+  "book3:cta/tel"
+ ],
+ "k7_cta_without_tel": [],
+ "logo 65246f239b165c29151e6f9f_AP_HORIZONTAL-LOGO_COLOR-V2-p-1080.png": "64ab1b1b35e4b7f1… == 64ab1b1b35e4b7f1… : True",
+ "logo AP_HORIZONTAL-LOGO_WHT-p-500.avif": "cb9c7306074faf5f… == cb9c7306074faf5f… : True",
+ "old_logo_files_left": [],
+ "pair_images": 13,
+ "before_alts_from": [
+  "assets/img/h/work-home2-b-1000.webp",
+  "assets/img/h/work-robroy-b-1000.webp",
+  "assets/img/h/work-siding0-b-1000.webp",
+  "assets/img/h/work-siding2-b-1000.webp",
+  "assets/img/h/work-windows1-b-1000.webp",
+  "assets/img/h/work-windows3-b-1000.webp"
+ ],
+ "js_id_refs": [],
+ "js_id_refs_missing": []
+}
