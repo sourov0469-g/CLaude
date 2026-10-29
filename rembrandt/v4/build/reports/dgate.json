@@ -1,5 +1,5 @@
 {
- "when": "2026-10-29T07:35:48.207Z",
+ "when": "2026-10-29T07:56:04.538Z",
  "fails": 0,
  "results": [
   {
@@ -48,7 +48,7 @@
    "group": "render 1440",
    "name": "inspect:3",
    "ok": true,
-   "info": "h 1521"
+   "info": "h 1577"
   },
   {
    "group": "render 1440",
@@ -96,7 +96,7 @@
    "group": "render 1440",
    "name": "signature:3",
    "ok": true,
-   "info": "h 916"
+   "info": "h 913"
   },
   {
    "group": "render 1440",
@@ -240,7 +240,7 @@
    "group": "render 375",
    "name": "inspect:3",
    "ok": true,
-   "info": "h 1982"
+   "info": "h 2034"
   },
   {
    "group": "render 375",
@@ -288,7 +288,7 @@
    "group": "render 375",
    "name": "signature:3",
    "ok": true,
-   "info": "h 948"
+   "info": "h 973"
   },
   {
    "group": "render 375",
@@ -444,13 +444,13 @@
    "group": "combo 1440",
    "name": "all-3 (16 switched)",
    "ok": true,
-   "info": "page 18422px  "
+   "info": "page 18475px  "
   },
   {
    "group": "combo 1440",
    "name": "mix-1 (11 switched)",
    "ok": true,
-   "info": "page 21525px  "
+   "info": "page 21522px  "
   },
   {
    "group": "combo 1440",
@@ -474,13 +474,13 @@
    "group": "combo 1440",
    "name": "mix-5 (14 switched)",
    "ok": true,
-   "info": "page 22110px  "
+   "info": "page 22107px  "
   },
   {
    "group": "combo 1440",
    "name": "mix-6 (9 switched)",
    "ok": true,
-   "info": "page 25546px  "
+   "info": "page 25602px  "
   },
   {
    "group": "combo 375",
@@ -492,13 +492,13 @@
    "group": "combo 375",
    "name": "all-3 (16 switched)",
    "ok": true,
-   "info": "page 17348px  "
+   "info": "page 17426px  "
   },
   {
    "group": "combo 375",
    "name": "mix-1 (11 switched)",
    "ok": true,
-   "info": "page 20466px  "
+   "info": "page 20491px  "
   },
   {
    "group": "combo 375",
@@ -522,13 +522,13 @@
    "group": "combo 375",
    "name": "mix-5 (14 switched)",
    "ok": true,
-   "info": "page 19627px  "
+   "info": "page 19653px  "
   },
   {
    "group": "combo 375",
    "name": "mix-6 (9 switched)",
    "ok": true,
-   "info": "page 21215px  "
+   "info": "page 21267px  "
   },
   {
    "group": "storm 1440",
@@ -570,7 +570,7 @@
    "group": "storm 1440",
    "name": "?nws=test: the warning banner arms storm mode",
    "ok": true,
-   "info": "{\"banner\":\"TEST: Severe Thunderstorm Warning for Warren and Montgomery counties until 4:35 am (Nation\",\"on\":true}"
+   "info": "{\"banner\":\"TEST: Severe Thunderstorm Warning for Warren and Montgomery counties until 4:55 am (Nation\",\"on\":true}"
   },
   {
    "group": "storm 375",
@@ -606,13 +606,13 @@
    "group": "storm 375",
    "name": "entering storm mode deep in the page keeps the reader where they are",
    "ok": true,
-   "info": "{\"before\":200,\"after\":200,\"storm\":\"s\"}"
+   "info": "{\"before\":200,\"after\":201,\"storm\":\"s\"}"
   },
   {
    "group": "storm 375",
    "name": "?nws=test: the warning banner arms storm mode",
    "ok": true,
-   "info": "{\"banner\":\"TEST: Severe Thunderstorm Warning for Warren and Montgomery counties until 4:35 am (Nation\",\"on\":true}"
+   "info": "{\"banner\":\"TEST: Severe Thunderstorm Warning for Warren and Montgomery counties until 4:55 am (Nation\",\"on\":true}"
   },
   {
    "group": "ui",
@@ -679,6 +679,42 @@
    "name": "all-3 in calm",
    "ok": true,
    "info": "{\"calm\":true,\"hidden\":[],\"tall\":[]} "
+  },
+  {
+   "group": "regress",
+   "name": "S0 V2 rail: one numeral after a full scroll, the hero is 01 of 15",
+   "ok": true,
+   "info": "{\"n\":1,\"at\":\"01\",\"of\":\"of 15\"}"
+  },
+  {
+   "group": "regress",
+   "name": "S6 V3 clock: never \":60\", 5:00 pm lights the walkthrough",
+   "ok": true,
+   "info": "{\"bad\":[],\"end\":\"5:00 pm\",\"on\":\"5:00 Walkthrough with you\"}"
+  },
+  {
+   "group": "regress",
+   "name": "S7 V3 ruler fits a desktop screen, end marker visible, no stray tab stop",
+   "ok": true,
+   "info": "{\"right\":1300,\"vw\":1440,\"tab\":false}"
+  },
+  {
+   "group": "regress",
+   "name": "storm mode: the compact S2 label sits above its heading",
+   "ok": true,
+   "info": "{\"labelBottom\":1764,\"h2Top\":1780}"
+  },
+  {
+   "group": "regress",
+   "name": "S4 V3 on a phone: swatch groups fit the screen and the long ones scroll",
+   "ok": true,
+   "info": "[{\"fs\":335,\"scrolls\":true},{\"fs\":335,\"scrolls\":true},{\"fs\":335,\"scrolls\":false},{\"fs\":335,\"scrolls\":true},{\"fs\":335,\"scrolls\":true}]"
+  },
+  {
+   "group": "regress",
+   "name": "S4 V2 on a phone: the lens never covers the heading",
+   "ok": true,
+   "info": "{\"lensTop\":265,\"h2Bottom\":237}"
   },
   {
    "group": "nojs",

@@ -1,7 +1,7 @@
 # CHECKPOINT-D: Rembrandt Roofing "In Good Light", Run D
 
 2026-10-29. Run D per PLAN-FINAL §10: the section switcher, every V2/V3 version as a template, and storm mode (§3.12, carried over from Run C). Gate: every `?v=` combination renders, the page is refreshed after a switch, nothing jumps.
-**Status: done.** Gate: the full run on the build before the visual-review fixes passed 114/114; on the final build the 6 regression checks pass, axe and html-validate are clean, and the final full run is recorded below when it completes. Next chunk: Run E part 1 (e1).
+**Status: done. The Run D gate passes 120/120 on the final build** (`build/reports/dgate.json`). No-jump worst case is 0.0 px at 1440 and at 375. axe-core: 0 violations. html-validate: 0 errors. Next chunk: Run E part 1 (e1).
 
 ## Where Run D stood when this run began
 
