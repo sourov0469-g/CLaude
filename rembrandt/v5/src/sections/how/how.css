@@ -64,3 +64,5 @@
 @media (prefers-reduced-motion:reduce){
   .hw3-card{position:relative;top:auto;height:auto;min-height:56svh}
 }
+/* the roof cursor (cursor.js kind "roof") exists only over the v1 field: an ink halo keeps it visible over the white type */
+.cur-roof{filter:drop-shadow(0 0 1.5px rgb(6 16 42/.9)) drop-shadow(0 1px 3px rgb(6 16 42/.6))}

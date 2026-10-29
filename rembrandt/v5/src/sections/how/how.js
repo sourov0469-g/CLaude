@@ -40,8 +40,8 @@ function shelter(root, c) {
   const rnd = seeded(2015);
   const RAMP = ['255,255,255', '228,235,248', '201,214,242', '169,191,233'];
   const LAYERS = [ // authored at 1440x900; v in px/s; par = share of the scroll the layer lags by; pd = pointer depth
-    { n: 72, s: [0.3, 0.5], o: [0.22, 0.4], v: 620, par: 0.45, pd: -0.015 },
-    { n: 124, s: [0.5, 0.85], o: [0.46, 0.78], v: 1150, par: 0.2, pd: 0.012 },
+    { n: 96, s: [0.3, 0.5], o: [0.22, 0.4], v: 620, par: 0.45, pd: -0.015 },
+    { n: 132, s: [0.5, 0.85], o: [0.46, 0.78], v: 1150, par: 0.2, pd: 0.012 },
     { n: 3, s: [1.05, 1.9], o: [0.5, 0.82], v: 2150, par: -0.15, pd: 0.05 },
   ];
   // sprites, pre-rendered once (S1377 cost rule): a streak whose head is at the bottom, and a soft droplet
@@ -64,8 +64,8 @@ function shelter(root, c) {
     for (let i = 0; i < max; i++) {
       const sc = L.s[0] + rnd() * (L.s[1] - L.s[0]), v = L.v * (0.8 + 0.4 * rnd()), lean = 0.15 * (0.8 + 0.4 * rnd()), a = Math.atan(lean);
       drops.push({ L: li, i, v, vx: v * lean, lean, cos: Math.cos(a), sin: Math.sin(a), op: L.o[0] + rnd() * (L.o[1] - L.o[0]),
-        len: v * (0.016 + 0.01 * rnd()) * (li === 2 ? 1.3 : 1), w: (li === 2 ? 2.6 : 2.2) * sc, col: Math.floor(rnd() * RAMP.length),
-        r: rnd(), x: 0, y: 0, py: 0, live: false });
+        len: v * (0.026 + 0.018 * rnd()) * (li === 2 ? 0.9 : 1), w: (li === 2 ? 2.6 : 2.2) * sc, col: Math.floor(rnd() * RAMP.length),
+        r: rnd(), x: 0, y: 0, py: 0, live: false, f: 1 });
     }
   });
   const rain = { want: c.motion ? 0 : 1 };
@@ -74,14 +74,14 @@ function shelter(root, c) {
   const P = { x: 0, y: 0, tx: 0, ty: 0 }, offX = [0, 0, 0], offY = [0, 0, 0];
   const spray = [], runs = [], drips = [];
   const spawnX = d => -H * d.lean + rnd() * (W + H * d.lean);
-  const respawn = d => { d.x = spawnX(d); d.y = -rnd() * H * 0.25; d.py = d.y; d.live = d.r < rain.want; };
+  const respawn = d => { d.x = spawnX(d); d.y = -rnd() * H * 0.25; d.py = d.y; d.live = d.r < rain.want; d.f = 1; };
   const scatter = () => drops.forEach(d => { d.x = spawnX(d); d.y = rnd() * (H + d.len); d.py = d.y; d.live = d.r < rain.want; });
 
   // the glyph mask: the words drawn once, at their laid-out places, so far and mid rain can be cut out behind them
-  const mask = document.createElement('canvas');
+  const mask = document.createElement('canvas'); let box = [0, 0, 0, 0];
   function buildMask() {
     if (!W) return;
-    mask.width = cw; mask.height = ch; const m = mask.getContext('2d');
+    mask.width = cw; mask.height = ch; const m = mask.getContext('2d'); box = [cw, ch, 0, 0];
     m.setTransform(dpr, 0, 0, dpr, 0, 0); m.fillStyle = m.strokeStyle = '#000'; m.lineWidth = 3; m.lineJoin = 'round';
     const cr = cv.getBoundingClientRect(), range = document.createRange(), walk = document.createTreeWalker(stack, NodeFilter.SHOW_TEXT);
     while (walk.nextNode()) {
@@ -95,6 +95,7 @@ function shelter(root, c) {
         const asc = m.measureText(w[0]).fontBoundingBoxAscent || parseFloat(cs.fontSize) * 0.8;
         const x = r.left - cr.left, y = r.top - cr.top + asc;
         m.fillText(w[0], x, y); m.strokeText(w[0], x, y);
+        box = [Math.min(box[0], x * dpr - 4), Math.min(box[1], (r.top - cr.top) * dpr - 4), Math.max(box[2], (x + r.width) * dpr + 4), Math.max(box[3], (r.bottom - cr.top) * dpr + 4)];
       }
     }
   }
@@ -127,6 +128,8 @@ function shelter(root, c) {
       if (d.i >= cnt[d.L]) continue;
       d.py = d.y; d.y += d.v * dt + ds * LAYERS[d.L].par; d.x += d.vx * dt;
       if (d.y - d.len > H + 8) { respawn(d); continue; }
+      if (!d.live && d.r < rain.want) { d.live = true; d.f = 0; } // the rain thickens where it is: each new drop fades in
+      if (d.f < 1) d.f = Math.min(1, d.f + dt / 0.35);
       if (R && d.live && d.L > 0) {
         const hx = d.x + offX[d.L], dx = hx - R.ax;
         if (Math.abs(dx) <= 27) {
@@ -158,7 +161,7 @@ function shelter(root, c) {
     const x = d.x + offX[d.L], y = d.y + offY[d.L];
     if (y < -2 || y - d.len > H) return;
     const Wd = d.w * 4, Hd = d.len * 136 / 120;
-    g.globalAlpha = d.op;
+    g.globalAlpha = d.op * d.f;
     g.setTransform(dpr * d.cos, -dpr * d.sin, dpr * d.sin, dpr * d.cos, x * dpr, y * dpr);
     g.drawImage(SPR[d.L === 2 ? 1 : 0][d.col], -Wd / 2, -Hd * 128 / 136, Wd, Hd);
   }
@@ -173,7 +176,9 @@ function shelter(root, c) {
     for (const d of drops) if (d.L < 2) put(d);
     if (masked && mask.width === cw) { // behind the words
       g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'destination-out';
-      g.drawImage(mask, 0, 0); g.globalCompositeOperation = 'source-over';
+      const bx = Math.max(0, Math.floor(box[0])), by = Math.max(0, Math.floor(box[1])), bw = Math.min(cw, Math.ceil(box[2])) - bx, bh = Math.min(ch, Math.ceil(box[3])) - by;
+      if (bw > 0 && bh > 0) g.drawImage(mask, bx, by, bw, bh, bx, by, bw, bh); // only the words' box is composited
+      g.globalCompositeOperation = 'source-over';
     }
     for (const q of runs) { line(q.x, q.y, q.side * UX, UY, 5, q.r * 0.9, q.op); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.drawImage(DOT, q.x - q.r * 1.6, q.y - q.r * 1.6, q.r * 3.2, q.r * 3.2); }
     for (const q of drips) line(q.x, q.y, q.vx, q.vy, clamp(q.vy * 0.02, 3, 26), 1.6, q.op);
