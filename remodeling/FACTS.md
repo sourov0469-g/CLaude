@@ -47,6 +47,7 @@ Home Gyms Design and LYKORA are niche (gym fit-outs; Moroccan interiors) and are
 
 ## Proof as published
 - **Google: 4.8 stars, "Based on 343 Google reviews"** (homepage reviews block; also "4.8 Google rating across 343 reviews" on the kitchen, bathroom-adjacent and whole-home pages). Consistent everywhere. **USED: "4.8 · 343 Google reviews".**
+- Google reviews link as published on the homepage (reviews panel of the Maps listing "Elbaz Construction & Bathroom Remodeling"): `https://www.google.com/maps/place/Elbaz+Construction+%26+Bathroom+Remodeling/@25.7744577,-80.1939141,17z/data=!4m8!3m7!1s0x88d9ad9ece57c53f:0xf8a590d174b44dc6!8m2!3d25.7744577!4d-80.1939141!9m1!1b1!16s%2Fg%2F11tc2l_6dz` (also `https://www.google.com/maps?cid=17916885921843924422`).
 - The homepage also shows badge images for Google, Facebook, Yelp and Thumbtack reviews with no rating figures attached. Build: Google only (the only one with a published number).
 - Projects: see contradiction table. **USED: "52 photographed projects"** (the countable portfolio) as the gallery figure; the higher project totals are not used.
 - Service area: **104 municipalities across 3 counties** (Miami-Dade 34, Broward 31, Palm Beach 39 = 104, verified by count of the published lists). "104 municipalities across three counties — and we hold the licence to build in all of them."

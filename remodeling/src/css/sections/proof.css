@@ -1,0 +1,110 @@
+/* proof [PLAN-V2 2.1] — deep-teal field; three references: GCG glance table / KBF+Austin Pro arithmetic / True Focus */
+#proof .proof__label { color: var(--field-accent); margin-bottom: var(--s5); }
+#proof .t-head { color: var(--field-ink); }
+
+/* ---------- v1 · At a glance [Georgia Contractor Group glance table; P05 hairlines as scaleX] ---------- */
+.proof1__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.proof1__intro { grid-column: 1 / span 4; position: sticky; top: calc(var(--nav-h) + var(--s8)); }
+.proof1__lead { margin-top: var(--s5); max-width: 30ch; }
+.proof1__table { grid-column: 6 / -1; }
+.proof1__row {
+  position: relative;
+  display: grid; grid-template-columns: 7rem minmax(10rem, 15.5rem) 1fr 7.5rem; column-gap: var(--s5);
+  align-items: baseline;
+  padding: var(--s6) 0 var(--s5);
+  transition: background-color 240ms var(--ease-out);
+}
+.proof1__row::before {                       /* the rule belongs to the table: it draws as the row arrives */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: rgba(232, 228, 220, .32);
+  transform-origin: left; transform: scaleX(var(--rule, 1));
+}
+.proof1__row:last-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(232, 228, 220, .32); }
+.proof1__k { font-family: var(--f-display); font-size: 1.0625rem; letter-spacing: .12em; color: var(--field-accent); }
+.proof1__v { font-family: var(--f-display); font-size: clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); white-space: nowrap; line-height: .9; letter-spacing: .01em; color: var(--field-ink); }
+.proof1__d { color: var(--field-muted); font-size: var(--t-small); line-height: 1.45; max-width: 34ch; }
+.proof1__c { justify-self: end; font-size: var(--t-small); font-weight: 560; }
+.proof1__c .link { color: var(--field-ink); display: inline-flex; min-height: 44px; align-items: center; }
+@media (hover: hover) and (pointer: fine) {
+  .proof1__row:hover { background: rgba(232, 228, 220, .045); }
+}
+@media (max-width: 1023px) {
+  .proof1__intro { grid-column: 1 / -1; position: static; margin-bottom: var(--s8); }
+  .proof1__table { grid-column: 1 / -1; }
+}
+@media (max-width: 767px) {
+  .proof1__row { grid-template-columns: 1fr auto; row-gap: var(--s2); padding: var(--s5) 0; }
+  .proof1__k { grid-column: 1 / -1; }
+  .proof1__v { grid-column: 1; }
+  .proof1__c { grid-column: 2; grid-row: 2; align-self: center; }
+  .proof1__d { grid-column: 1 / -1; }
+}
+
+/* ---------- v2 · The record adds up [KBF Ledger + Austin Pro arithmetic; S45 odometer cells 1.2em] ---------- */
+.proof2__head { max-width: 46rem; }
+.proof2__head .t-lead { margin-top: var(--s4); }
+.proof2__sum {
+  margin-top: clamp(48px, 7vw, 112px);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: clamp(8px, 1.6vw, 28px);
+}
+.proof2__term { display: grid; justify-items: start; gap: var(--s3); }
+.proof2__term--total .proof2__n { color: var(--field-accent); }
+.proof2__eq { display: flex; align-items: flex-start; gap: clamp(8px, 1.6vw, 28px); }
+.proof2__n {
+  font-family: var(--f-display); font-weight: 400; letter-spacing: .005em;
+  font-size: clamp(4rem, 1rem + 9.6vw, 9.5rem); line-height: 1; height: 1em;
+  color: var(--field-ink); font-variant-numeric: tabular-nums;
+  display: inline-flex; overflow: hidden;
+}
+.proof2__op { font-family: var(--f-display); font-size: clamp(2.5rem, .8rem + 5vw, 5.5rem); line-height: 1.6; color: rgba(232, 228, 220, .45); }
+.proof2__cap { font-size: var(--t-small); font-weight: 560; color: var(--field-muted); max-width: 16ch; }
+.proof2__rate { margin-top: clamp(40px, 5vw, 80px); display: flex; align-items: baseline; flex-wrap: wrap; gap: var(--s4) var(--s7); padding-top: var(--s6); border-top: 1px solid rgba(232, 228, 220, .32); }
+.proof2__n--rate { font-size: clamp(3.5rem, 1rem + 6vw, 6.5rem); color: var(--field-ink); }
+.proof2__ratecap { font-size: var(--t-lead); color: var(--field-ink); }
+.proof2__ratecap .nums { display: inline-flex; overflow: hidden; height: 1em; line-height: 1; vertical-align: -.12em; }
+.proof2__lic { margin-left: auto; font-family: var(--f-display); font-size: 1.5rem; letter-spacing: .1em; color: var(--field-accent); }
+.proof2__caveat { margin-top: var(--s6); color: var(--field-muted); max-width: 62ch; }
+.proof2__caveat .link { color: var(--field-ink); }
+/* odometer: one strip of digits per column, rolled with translateY in em [CountUp.jsx roll mode] */
+.odo-col { display: inline-block; position: relative; height: 1em; overflow: hidden; }
+.odo-strip { display: block; will-change: transform; }
+.odo-strip > span { display: block; height: 1em; line-height: 1em; }
+@media (max-width: 767px) {
+  .proof2__sum { flex-wrap: wrap; justify-content: flex-start; row-gap: var(--s5); }
+  .proof2__eq { width: 100%; }
+  .proof2__op { line-height: 1.2; }
+  .proof2__lic { margin-left: 0; }
+}
+
+/* ---------- v3 · One sentence, in focus [React Bits True Focus: corners 16px / 3px, blur 5px, hold 1s, move .5s] ---------- */
+.proof3 { position: relative; min-height: min(100svh, 980px); display: grid; align-items: center; color: #e8e4dc; margin-block: calc(-1 * var(--section-y)); }
+.proof3__bg { position: absolute; inset: 0; overflow: hidden; }
+.proof3__bg img { width: 100%; height: 100%; object-fit: cover; }
+.proof3__bg::after { content: ""; position: absolute; inset: 0; background: rgba(11, 20, 24, .74); }      /* solid ink scrim [S0095 §6] */
+.proof3__in { position: relative; padding-block: var(--section-y); }
+.proof3__head .t-head { color: #e8e4dc; font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); }
+.proof3__line {
+  position: relative; margin-top: clamp(40px, 6vw, 96px);
+  display: flex; flex-wrap: wrap; gap: .1em .42em; align-items: baseline;
+  font-family: var(--f-display); font-size: clamp(3rem, 1rem + 6.2vw, 7.5rem); line-height: 1; letter-spacing: .005em;
+}
+.proof3__w {
+  position: relative; background: none; border: 0; padding: .06em .12em; margin: 0;
+  font: inherit; color: #e8e4dc; line-height: inherit; letter-spacing: inherit;
+  transition: filter .5s var(--ease-out), opacity .5s var(--ease-out);
+}
+.proof3__w:not(:last-of-type)::after { content: "\00b7"; position: absolute; right: -.31em; color: rgba(232, 228, 220, .4); filter: none; }
+.proof3.is-cycling .proof3__w:not(.is-on) { filter: blur(5px); opacity: .7; }
+.proof3__w.is-on { color: #fff; }
+.proof3__frame { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.proof3__frame i { position: absolute; width: 16px; height: 16px; border: 3px solid #77b3b8; }
+.proof3__frame i:nth-child(1) { left: -6px; top: -6px; border-right: 0; border-bottom: 0; }
+.proof3__frame i:nth-child(2) { right: -6px; top: -6px; border-left: 0; border-bottom: 0; }
+.proof3__frame i:nth-child(3) { left: -6px; bottom: -6px; border-right: 0; border-top: 0; }
+.proof3__frame i:nth-child(4) { right: -6px; bottom: -6px; border-left: 0; border-top: 0; }
+.proof3__ev { margin-top: var(--s7); min-height: 3.2em; font-size: var(--t-lead); max-width: 44ch; color: #e8e4dc; }
+.proof3__ev .link { color: #77b3b8; }
+.proof3__sub { margin-top: var(--s7); color: #a9b6b9; }
+@media (max-width: 767px) {
+  .proof3__line { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+}
