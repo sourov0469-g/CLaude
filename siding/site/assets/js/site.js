@@ -758,7 +758,7 @@
         const p = new URLSearchParams();
         ['body', 'gable', 'trim'].forEach(z => { if (state[z]) p.set(z, state[z].slice(1)); });
         if (state.finish === 'cp') p.set('finish', 'cp');
-        history.replaceState(null, '', `${location.pathname}?${p}#studio`);
+        try { history.replaceState(null, '', `${location.pathname}?${p}#studio`); } catch (err) { /* framed copies (about:srcdoc) cannot rewrite their URL */ }
       });
       const copy = $('[data-copy]', box), msg = $('[data-copy-msg]', box);
       if (copy) copy.addEventListener('click', () => {
