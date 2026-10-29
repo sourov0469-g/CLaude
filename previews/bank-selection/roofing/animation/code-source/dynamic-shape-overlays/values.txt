@@ -1,0 +1,30 @@
+SLUG: dynamic-shape-overlays
+ENTRY: 150 Dynamic Shape Overlays with SVG (Codrops, 2017; original technique by Yoichi Kobayashi "ykob")
+ARTICLE: https://tympanus.net/codrops/2017/10/17/dynamic-shape-overlays-with-svg/
+DEMO: https://tympanus.net/Development/ShapeOverlays/ (3 demos, same class, different configs)
+ORIGINAL REPO: github.com/ykob/shape-overlays
+
+STACK (Measured, from demo assets on disk)
+- Vanilla JS class ShapeOverlays + requestAnimationFrame render loop (no animation library)
+- Inline SVG overlay: <svg class="shape-overlays" viewBox="0 0 100 100" preserveAspectRatio="none"> with stacked <path> layers (demo1: 3 paths)
+- Hand-ported glsl-easings functions (easings.js): exponentialIn/Out/InOut, sineOut, circularInOut, cubicIn/Out/InOut, quadraticOut, quarticOut — cubicInOut(t) = t<0.5 ? 4t^3 : 0.5*(2t-2)^3+1
+
+PARAMETERS (Measured from js/demo1.js, demo2.js, demo3.js)
+CORE CLASS (demo1 config):
+- numPoints 18; duration 600 ms; delayPointsMax 300 ms; delayPerPath 100 ms
+- Per-toggle delay field: range = 4 * Math.random() + 6 (so 6..10); for point i: radian = i/(numPoints-1) * PI; delay[i] = (sin(-radian) + sin(-radian*range) + 2) / 4 * delayPointsMax — a sine-composite wave so the edge ripples irregularly, re-randomised every toggle
+- Point progress: p_i = cubicInOut(clamp((time - delay[i]) / duration, 0, 1)) * 100 (y position in viewBox units)
+- Path construction per frame: 19 points (numPoints+1); str = isOpened ? "M 0 0 V {p0} " : "M 0 {p0} "; then for i in 0..numPoints-2: p = (i+1)/(numPoints-1)*100, cp = p - (100/(numPoints-1))/2, append "C {cp} {points[i]} {cp} {points[i+1]} {p} {points[i+1]} "; close isOpened ? "V 0 H 0" : "V 100 H 0" — a wavy horizontal edge swept across a full-bleed rect
+- Multi-path stagger: opening renders path i with time offset +delayPerPath*i; closing reverses the order (delayPerPath*(len-1-i)) — layers peel in sequence
+- Loop ends when elapsed > duration + delayPerPath*(paths-1) + delayPointsMax
+- Demo1 path fills (CSS vars): --path-fill-1 #413f46, --path-fill-2 #e6e5ea, --path-fill-3 #cccccc
+DEMO 2 config: numPoints 4; duration 800; delayPointsMax 180; delayPerPath 70; delay formula differs: radian = i/(numPoints-1) * 2PI, range = Math.random() * 2PI, delay = (sin(radian + range) + 1) / 2 * delayPointsMax
+DEMO 3 config: numPoints 2; duration 600; delayPointsMax 0 (no ripple); delayPerPath 200; easing swaps per path index: opening uses (i==1 ? cubicOut : cubicInOut), closing uses (i==1 ? cubicInOut : cubicOut)
+
+READING / MECHANISM
+1. A fixed full-screen SVG (stretched, preserveAspectRatio none) holds 2-4 identical-geometry paths in different colours, stacked.
+2. On toggle, the class precomputes a per-point delay wave (sine composite + random range), then RAF-loops: each point's Y = eased progress * 100, delayed by its wave value, so the top edge of the rect is a living curve rather than a straight line.
+3. The path string is rebuilt every frame from the 19 point Y values with midpoint control points (cp halfway between point X positions), giving a smooth wavy curtain edge.
+4. Layers follow each other 70-200 ms apart (delayPerPath), so colours cascade; closing runs the layer order in reverse.
+5. Hamburger/global-nav items just toggle CSS classes in sync; isAnimating guards re-entry.
+REBUILD NOTE: this is the classic full-screen menu/page-transition curtain. 18 points + 600 ms + 300 ms wave (demo1) = liquid; 2 points + 200 ms path stagger (demo3) = snappy wipe. Randomising `range` per toggle stops the motion feeling canned.
