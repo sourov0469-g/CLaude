@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 3 (Work) complete → Phase 4 (Family, How, Towns, Call) next.
+- **Phase:** 4 in progress: Family done → How next (then Towns, Call).
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -117,3 +117,22 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - The nail lift first read NaN: SVG elements have no `offsetLeft`. The nails' centres are now measured with getBoundingClientRect when the pointer enters the section.
   - The first `workint` run hovered controls that were off screen (negative top). The script now scrolls each target into view before it hovers it.
 - **Note (owner tooling):** at 1440 the fixed Helper picker can sit over V1's arrow buttons when the foot of the section is at the very bottom of the viewport. One more scroll clears it. The picker is owner tooling, outside the registry; Phase 5 re-checks the companion's chrome.
+
+### Phase 4: Family ×3 (upgraded)
+- **Facts corrected (§3, invent nothing):**
+  - V1 and V2 said Bunk "started Rembrandt in Springboro". The pack says only that he founded it in 1995. Now "Franklin “Bunk” Walker founded Rembrandt" (V1) and "Bunk Walker founded Rembrandt in 1995" (V2).
+  - V2 "Wade has run it since 2015" is now "has been president since 2015".
+  - V3 "Rated A+ by the Better Business Bureau since 2001" claimed the rating dates from 2001. Now "BBB A+, accredited since 2001"; the pill reads "BBB accredited since 2001".
+- **§4 no trick twice:** V2's gable-cropped photo repeated Hero V2's roof-pitch crop. V2's photo is now a plain frame; its roof motif is the roof that draws with the statement.
+- **V1:** kept (G1, R22, spotlight and photo drift as the background reaction); facts line corrected.
+- **V2:** bg: the skyline of roofs now takes pointer depth (−0.025) on top of its scroll parallax (the depth sits on the path, the parallax on the svg, so they never fight over one transform).
+- **V3:**
+  - R24 press rebuilt. Pinning drives a roofing tack through the pill's top edge, and it stays while pinned. This replaces a scale pop that repeated Work's arrow tick.
+  - Hover adds a glow to the member's leader.
+  - Side pills raised to 41% so the longer BBB pill clears the rafter.
+- **Evidence:**
+  - `secqa.mjs family` at 1440, 375 and 1440 reduced: 9/9 "switcher swaps only family; overflow 0; errors 0".
+  - Screenshots: `qa/family{1,2,3}-{1440,375,1440-rm}.jpg`, reviewed.
+  - `qa/scripts/famint.mjs`, log `qa/famint.log`: every reaction and background response confirmed. Errors 0.
+  - Facts in the whole file: 353-9711 ×0, 24/7 ×0, licence ×0, emergency ×0.
+- **Divider:** family → chevrons, unchanged and unique on the page.

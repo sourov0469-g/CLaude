@@ -1,0 +1,13 @@
+bg V1: spotlight follows the pointer (cx 743.1 -> 793.5), photo x -58.1
+R22 hover: attic window fill rgb(255, 184, 32)
+R22 press: door animation fm-door
+  tel tel:+19377467377
+bg V2: roofline pointer depth none -> matrix(1, 0, 0, 1, 2.7037, -5.9414)
+  words revealed at centre: 12/19
+R23 hover: handset animation none
+R23 press: ring animation none
+R24 hover: member stroke rgb(255, 184, 31), leader filter drop-shadow(rgb(255, 184, 31) 0px 0px 5px)
+R24 press: aria-pressed true, tack animation fm-tack
+  tack opacity 1; caption "His son, Wade Walker, has been president since 2015."
+bg V3: deck window on (true), at translate3d(742px, 95px, 0px)
+errors: 0

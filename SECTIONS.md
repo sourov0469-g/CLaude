@@ -17,9 +17,9 @@ A line flips to `passes: YES` only with the evidence its phase's done-criteria n
 | 7 | Work (`work`) | V1 | upgraded | YES (Phase 3 evidence in PROGRESS.md) |
 | 8 | Work (`work`) | V2 | upgraded | YES (Phase 3 evidence in PROGRESS.md) |
 | 9 | Work (`work`) | V3 | upgraded | YES (Phase 3 evidence in PROGRESS.md) |
-| 10 | Family (`family`) | V1 | upgraded | NO |
-| 11 | Family (`family`) | V2 | upgraded | NO |
-| 12 | Family (`family`) | V3 | upgraded | NO |
+| 10 | Family (`family`) | V1 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 11 | Family (`family`) | V2 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
+| 12 | Family (`family`) | V3 | upgraded | YES (Phase 4 evidence in PROGRESS.md) |
 | 13 | How it works (`how`) | V1 | upgraded | NO |
 | 14 | How it works (`how`) | V2 | rebuilt | NO |
 | 15 | How it works (`how`) | V3 | upgraded | NO |

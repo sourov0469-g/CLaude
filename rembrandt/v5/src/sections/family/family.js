@@ -92,7 +92,7 @@ function statement(root, c) {
 // truss on blueprint blue; each member carries one true fact (pills are the accessible control; the members mirror them
 // for the pointer). Plywood roof-deck sheets behind light up under the pointer.
 const ANCHOR = { bunk: [500, 62], wade: [500, 220], rachel: [300, 360], bbb: [395, 288], oc: [605, 288], addr: [937, 357] };
-const SAY = { bunk: 'Founded in 1995 by Franklin "Bunk" Walker.', wade: 'His son, Wade Walker, has been president since 2015.', rachel: 'Rachel answers the phone, Monday to Friday, 9 to 5.', bbb: 'Rated A+ by the Better Business Bureau since 2001.', oc: 'An Owens Corning Platinum Preferred contractor.', addr: 'The office: 38 N Pioneer Blvd, Springboro, OH 45066.' };
+const SAY = { bunk: 'Founded in 1995 by Franklin "Bunk" Walker.', wade: 'His son, Wade Walker, has been president since 2015.', rachel: 'Rachel answers the phone, Monday to Friday, 9 to 5.', bbb: 'BBB A+, accredited since 2001.', oc: 'An Owens Corning Platinum Preferred contractor.', addr: 'The office: 38 N Pioneer Blvd, Springboro, OH 45066.' };
 function truss(root, c) {
   const svg = root.querySelector('.fm3-truss'), leads = root.querySelector('.fm3-leads'), say = root.querySelector('.fm3-say');
   const pills = [...root.querySelectorAll('.fm3-pill')], members = [...svg.querySelectorAll('.m')];
