@@ -309,17 +309,18 @@ html.js .stage-media.is-hidden img.is-active{clip-path:inset(0 100% 0 0)}
 .board-sheet{position:relative;aspect-ratio:4/3;background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-media);overflow:hidden}
 .board-sheet::before{content:"";position:absolute;inset:14px;border:1px solid var(--pencil-2);pointer-events:none;z-index:3;transition:opacity var(--d-slow) var(--ease-out)}
 .board.is-built .board-sheet::before{opacity:0}
-.board-draw{position:absolute;inset:0;padding:28px;z-index:2;transition:opacity var(--d-slow) var(--ease-out)}
+.board-draw{position:absolute;inset:0;padding:28px;z-index:2}
 .board-draw svg{width:100%;height:100%}
 .board-draw > svg{position:absolute;inset:28px;width:calc(100% - 56px);height:calc(100% - 56px);opacity:0;transition:opacity var(--d-fast) var(--ease-out)}
 .board-draw > svg.is-on{opacity:1}
 .board-draw > svg{overflow:visible}
 .board-photo{position:absolute;inset:0;z-index:1}
-.board-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease-out)}
-.board.is-built .board-photo img.is-on{opacity:1}
-.board.is-built .board-draw{opacity:0}
+/* drawn first, then built: the drawing appears at once and draws itself; as soon as it is done the photo sweeps
+   in over it from left to right (no button), while the pencil lines fade a beat later */
+.board-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;clip-path:inset(0 100% 0 0)}
+.board.is-built .board-photo img.is-on{opacity:1;clip-path:inset(0 0 0 0);transition:clip-path .85s cubic-bezier(.65,0,.35,1)}
+.board.is-built .board-draw{opacity:0;transition:opacity .45s var(--ease-out) .3s}
 .board-cap{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);margin-top:var(--s-2);font-size:var(--t-cap);color:var(--ink-3)}
-.board-toggle{white-space:nowrap;flex:none;border:0;background:none;padding:0 2px;min-height:40px;font:inherit;color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .tsq{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .tsq i{position:absolute;display:block;background:var(--rust);opacity:0;transition:opacity var(--d-fast) var(--ease-out)}
 .tsq .tsq-h{left:0;right:0;top:0;height:1px}
@@ -599,6 +600,15 @@ html.js .rv.is-in{opacity:1;transform:none}
   .foot-grid{grid-template-columns:max-content minmax(0,1fr);column-gap:var(--s-5)}
 }
 
+/* touch: every link and control at least 44px tall (Fitts, WCAG 2.5.8) */
+@media (pointer:coarse){
+  .brand,.foot-brand{min-height:44px}
+  .values-list button{padding-block:10px}
+  .addr a,.call-meta a{display:inline-flex;align-items:center;min-height:44px;justify-self:start}
+  .call-big{min-height:48px}
+  .foot li a{min-height:44px}
+}
+
 /* reduced motion: final states, no travel (S1190, S0400) */
 html.rm *, html.rm *::before, html.rm *::after{animation-duration:1ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
 html.rm .rv, html.rm [data-words] .w{opacity:1!important;transform:none!important;transition:none!important}
@@ -606,6 +616,8 @@ html.rm .draw [pathLength]{stroke-dashoffset:0!important;transition:none!importa
 html.rm .draw .dw-txt, html.rm .draw .dw-arrow, html.rm .draw .fade-in{opacity:1!important;transition:none!important}
 html.rm .stage-media.is-hidden img.is-active{clip-path:none!important}
 html.rm .build-fig svg{transition:none!important}
+html.rm .board-photo img{clip-path:none!important}
+html.rm .board.is-built .board-photo img.is-on{transition:opacity .3s ease-out!important}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 </style>
@@ -954,7 +966,7 @@ html.rm .build-fig svg{transition:none!important}
             </svg>
           </div>
         </div>
-        <div class="board-cap"><span id="board-cap">Drawn first. Hover a service to see it built.</span><button type="button" class="board-toggle" id="board-toggle" tabindex="-1">Show the photo</button></div>
+        <div class="board-cap"><span id="board-cap">Drawn first. Hover a service to see it built.</span></div>
       </div>
     </div>
   </div>
@@ -1690,19 +1702,20 @@ html.rm .build-fig svg{transition:none!important}
      SERVICES: accordion, drawing board (draw, then built), T-square
      ===================================================================== */
   const items = $$('.svc-item'), board = $('#board'), boardDraws = $$('.board-draw > svg'), boardPhotos = $$('.board-photo img');
-  const boardCap = $('#board-cap'), boardToggle = $('#board-toggle'), svcGrid = $('.svc-grid');
+  const boardCap = $('#board-cap'), svcGrid = $('.svc-grid');
   const svcNames = ['Bespoke kitchens', 'Home extensions', 'Home renovations', 'Outdoor structures', 'Carpentry services'];
   let boardI = -1, builtTimer = 0;
-  const setBuilt = (on) => { board.classList.toggle('is-built', on); boardToggle.textContent = on ? 'Show the drawing' : 'Show the photo'; };
+  const setBuilt = (on) => board.classList.toggle('is-built', on);
   const setBoard = (i, force) => {
     if (i === boardI && !force) return;
     boardI = i; clearTimeout(builtTimer); setBuilt(false);
     boardDraws.forEach((s, j) => { s.classList.toggle('is-on', j === i); resetDraw(s); });
     boardPhotos.forEach((p, j) => p.classList.toggle('is-on', j === i));
     items.forEach((it, j) => it.classList.toggle('is-current', j === i));
-    drawIn(boardDraws[i], 80, 1000, 60);
+    drawIn(boardDraws[i], 40, 650, 45);
     boardCap.textContent = wide.matches ? svcNames[i] + ': drawn first, then built.' : 'Drawn first, then built.';
-    builtTimer = setTimeout(() => setBuilt(true), RM ? 1400 : 2600);
+    // the photo follows as soon as the drawing has finished (last stroke ends at about 1.1 s)
+    builtTimer = setTimeout(() => setBuilt(true), RM ? 900 : 1150);
   };
   const svc = {
     open(i, only) {
@@ -1713,6 +1726,12 @@ html.rm .build-fig svg{transition:none!important}
       });
       placeBoard(i);
       setBoard(i, true);
+      // phones: a row closing above can slide the tapped row up out of view, and a row near the bottom of the
+      // screen opens its drawing below the fold. Once the panel has opened, bring the row's header to the top.
+      if (!only && !wide.matches && items[i].classList.contains('is-open')) setTimeout(() => {
+        const t = items[i].getBoundingClientRect().top;
+        if (t < header.offsetHeight || t > W.innerHeight * 0.45) items[i].scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' });
+      }, 320);
     }
   };
   const placeBoard = (i) => {
@@ -1722,14 +1741,17 @@ html.rm .build-fig svg{transition:none!important}
     if (board.parentElement !== inner) inner.prepend(board);
     board.style.display = 'block';
   };
+  let hoverTimer = 0;
   items.forEach((it, i) => {
     const btn = $('.svc-btn', it);
     btn.addEventListener('click', () => svc.open(i));
-    btn.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && wide.matches) setBoard(i); });
+    // hover intent: skimming down the list doesn't restart the board on every row it crosses
+    btn.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && wide.matches) { clearTimeout(hoverTimer); hoverTimer = setTimeout(() => setBoard(i), 100); } });
+    btn.addEventListener('pointerleave', () => clearTimeout(hoverTimer));
     btn.addEventListener('focus', () => { if (wide.matches) setBoard(i); });
   });
-  boardToggle.addEventListener('click', () => { clearTimeout(builtTimer); setBuilt(!board.classList.contains('is-built')); });
-  $('.board-sheet').addEventListener('click', () => { clearTimeout(builtTimer); setBuilt(!board.classList.contains('is-built')); });
+  // click or tap the board to watch it drawn and built again
+  $('.board-sheet').addEventListener('click', () => { if (boardI >= 0) setBoard(boardI, true); });
   watch($('#services'), v => { if (v && boardI < 0 && wide.matches) setBoard(0); }, { threshold: 0.25 });
   wide.addEventListener('change', () => {
     placeBoard(items.findIndex(it => it.classList.contains('is-open')));

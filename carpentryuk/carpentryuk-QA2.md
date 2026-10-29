@@ -221,3 +221,64 @@ Skills re-read for this round:
   - **Bottom padding.** Back to a normal step, since there is no truss chord to clear.
 - **Result.** The hero is now headline, lead, call, quote, a note, the photo and its caption, plus the pendulum, with nothing else drawn. Checked at 1440, 1280 (with the loupe), 1024 and 375. The bob clears both columns at every desktop width. On phones the pendulum stays off, as before: the columns stack and there is no gap for it to swing in. The phone hero is just copy, buttons and the full-width photo.
 - **Shots:** `round2/hero-before-vs-after-1440` (before on top), `round2/hero-before-vs-after-375` (before, after, before, after), `round2/after-hero-1024`, `round2/after-hero-1280-loupe`.
+
+### 2c. Services board: drawing, then the photo by itself, plus a phone pass
+
+- **Finding (UX).** Hovering a service drew its elevation, then waited 2.6 s before swapping to the real photo. On phones there was a "Show the photo" text button under the board. The photo felt hidden behind a control: one more step, and a toggle that changed its name. Moving down the list also restarted the board on every row the pointer crossed.
+- **Change.**
+  - **Drawing.** It now draws faster: 0.65 s per stroke with a 45 ms stagger, so the last line lands at about 1.1 s.
+  - **Photo.** At 1.15 s the real photo sweeps in over the drawing from left to right: a `clip-path` reveal, 0.85 s on a strong ease-in-out curve. The pencil lines fade out a beat after the sweep starts, so you see it drawn first, then built.
+  - **No button.** The "Show the photo" button is gone, and so is its JS. The caption just names the service.
+  - **Replay.** Click or tap the board to watch it drawn and built again.
+  - **Hover intent.** A 100 ms delay, so only the row you stop on changes the board.
+  - **Reduced motion.** No drawing animation and no wipe. The photo fades in after 0.9 s.
+- **Phone pass (`responsive-design`, `fitts-law`, `gesture-patterns`).**
+  - **Accordion jump.** Opening a lower service while an upper one was open closed the upper panel. The tapped row slid up off-screen, and a row near the bottom of the screen opened its drawing below the fold. Once the panel opens (320 ms), the row's header is now brought to the top if it ended up off-screen or low. Tested: the tapped "Carpentry services" row went from 321 px to 80 px, just under the header. The drawing then completes and the photo sweeps in, all in view.
+  - **Touch targets at 375.** These were measured under 44 px:
+    - the big quote-section phone number (34 px);
+    - the coverage phone and email links (27 px);
+    - the quote-side email (27 px);
+    - the three value words (39 px);
+    - every footer link (36 px).
+
+    On touch screens they are now at least 44 px tall (the phone number 48 px). On a mouse nothing changes. The header brand and footer brand links are 44 px tall too.
+  - **Gesture alternatives.** Every gesture has a tap alternative:
+    - the hero photo: tap for the next job; dragging sideways only opens the loupe;
+    - the lightbox: swipe, or its 48 px arrows;
+    - the compass: drag, or tap.
+  - **Pendulum.** It stays desktop-only (see 2b).
+- **Result.** Shots: `round2/services-board-sequence-1440` (0.15, 0.6, 1.1, 1.45 and 2.3 s after hover: drawing, complete, photo sweeping, photo in) and `round2/services-board-sequence-375` (tap, scroll into place, drawing, then photo).
+
+### Round 2 verification (Chromium, all non-`file:` requests blocked)
+
+**Result:** 57 checks pass, 0 fail, and the Firefox check is skipped. 47 of the 48 round-1 checks are kept and still pass. The round-1 truss check is replaced, since the truss is gone. The other 10 are new.
+
+**New checks:**
+- **Board:**
+  - hover shows the drawing first;
+  - the photo follows by itself;
+  - no "Show the photo" button remains;
+  - hover intent ignores the rows crossed on the way.
+- **Logo:** the duotone filter is applied, the logo is 42 px, and the wordmark is IBM Plex Sans 700, 20 px, `#171511`, with the font loaded.
+- **Phones:**
+  - the tapped row stays in view when a row above closes;
+  - the board builds itself inside the panel;
+  - no tap target under 42-44 px, inline text links aside.
+- **Reduced motion:** no truss or rulers, the plumb bob at rest, and the board shows the photo with no wipe.
+
+**Overflow and console:** no horizontal overflow and no console errors at 360, 375, 768, 1024, 1280 and 1440.
+
+**Guardrails:**
+- **Logo:** the embedded logo is byte-identical to the live file.
+- **Font:** the embedded IBM Plex Sans Bold is byte-identical to their live font file.
+- **Images:** all 22 photos are unchanged from v1.
+- **Tracker:** identical, and still the last thing before `</body>`. It never fired during QA.
+- **Head and form:** `noindex` is present, and the FormSubmit action is unchanged.
+- **Copy:** no em or en dashes. The phone number appears 11 times. The only visible text change this round is the removed "Show the photo" button.
+- **Backup:** untouched, at 2,186,784 bytes.
+
+**Page size:** 2,271,111 bytes. The extra ~80 KB is the embedded wordmark font.
+
+**Full re-shoot after round 2:** `round2/final-d-0`, `final-d-1` (desktop) and `round2/final-m-0` to `final-m-2` (phone).
+
+**Not covered:** no Firefox (not installed here), no Safari, no real phone. Touch was emulated in Chromium.
