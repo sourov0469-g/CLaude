@@ -6,7 +6,7 @@ hero 1 — REBUILD (done in PLAN-V3; re-audit: FIX) — passes: NO
 hero 2 — KEEPER — preserve + proof line — passes: NO
 hero 3 — REBUILD (done in PLAN-V3; re-audit: FIX) — passes: NO
 proof 1 — FIX — passes: NO
-proof 2 — REBUILD — passes: NO
+proof 2 — REBUILD (built: meter plate, 279 roll mode) — passes: NO
 proof 3 — FIX — passes: NO
 services 1 — FIX — passes: NO
 services 2 — FIX — passes: NO
@@ -22,7 +22,7 @@ financing 2 — FIX — passes: NO
 financing 3 — FIX — passes: NO
 work 1 — FIX — passes: NO
 work 2 — FIX — passes: NO
-work 3 — REBUILD — passes: NO
+work 3 — REBUILD (built: seamless belts, Q161 + 364) — passes: NO
 reviews 1 — REBUILD — passes: NO
 reviews 2 — REBUILD — passes: NO
 reviews 3 — REBUILD — passes: NO
