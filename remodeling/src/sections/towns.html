@@ -1,78 +1,61 @@
 <section id="towns" class="sec towns g-base" data-section="towns" aria-labelledby="towns-h1">
 
-  <!-- v1 · The counties [Lagom locations accordion: 15s linear progress per row auto-advancing and driving the map camera; KBF place-first index with counts] -->
+  <!-- v1 · The survey [BANK For Living material-by-region map (hover -> tap) + BANK KBF Neighborhood Drive index] -->
   <div class="ver towns1" data-v="1">
     <div class="wrap towns1__grid">
       <div class="towns1__side">
-        <p class="t-label towns__label">Service area</p>
-        <h2 class="t-head" id="towns-h1">Do you build in my town?</h2>
-        <p class="towns__line muted">104 municipalities across three counties, and we hold the licence to build in all of them.</p>
-        <div class="towns1__acc">
-          <div class="towns1__row" data-county="Miami-Dade">
-            <button type="button" class="towns1__head" aria-expanded="true" aria-controls="towns1-l0" data-cursor="pin"><span class="towns1__name">Miami-Dade</span><span class="towns1__n nums">34</span><span class="towns1__bar" aria-hidden="true"></span></button>
-            <ul class="towns1__list" id="towns1-l0"><li>Aventura</li><li>Bal Harbour</li><li>Bay Harbor Islands</li><li>Biscayne Park</li><li>Coral Gables</li><li>Cutler Bay</li><li>Doral</li><li>El Portal</li><li>Florida City</li><li>Golden Beach</li><li>Hialeah</li><li>Hialeah Gardens</li><li>Homestead</li><li>Indian Creek</li><li>Key Biscayne</li><li>Medley</li><li>Miami</li><li>Miami Beach</li><li>Miami Gardens</li><li>Miami Lakes</li><li>Miami Shores</li><li>Miami Springs</li><li>North Bay Village</li><li>North Miami</li><li>North Miami Beach</li><li>Opa-locka</li><li>Palmetto Bay</li><li>Pinecrest</li><li>South Miami</li><li>Sunny Isles Beach</li><li>Surfside</li><li>Sweetwater</li><li>Virginia Gardens</li><li>West Miami</li></ul>
-          </div>
-          <div class="towns1__row" data-county="Broward">
-            <button type="button" class="towns1__head" aria-expanded="false" aria-controls="towns1-l1" data-cursor="pin"><span class="towns1__name">Broward</span><span class="towns1__n nums">31</span><span class="towns1__bar" aria-hidden="true"></span></button>
-            <ul class="towns1__list" id="towns1-l1" hidden><li>Coconut Creek</li><li>Cooper City</li><li>Coral Springs</li><li>Dania Beach</li><li>Davie</li><li>Deerfield Beach</li><li>Fort Lauderdale</li><li>Hallandale Beach</li><li>Hillsboro Beach</li><li>Hollywood</li><li>Lauderdale-by-the-Sea</li><li>Lauderdale Lakes</li><li>Lauderhill</li><li>Lazy Lake</li><li>Lighthouse Point</li><li>Margate</li><li>Miramar</li><li>North Lauderdale</li><li>Oakland Park</li><li>Parkland</li><li>Pembroke Park</li><li>Pembroke Pines</li><li>Plantation</li><li>Pompano Beach</li><li>Sea Ranch Lakes</li><li>Southwest Ranches</li><li>Sunrise</li><li>Tamarac</li><li>Weston</li><li>West Park</li><li>Wilton Manors</li></ul>
-          </div>
-          <div class="towns1__row" data-county="Palm Beach">
-            <button type="button" class="towns1__head" aria-expanded="false" aria-controls="towns1-l2" data-cursor="pin"><span class="towns1__name">Palm Beach</span><span class="towns1__n nums">39</span><span class="towns1__bar" aria-hidden="true"></span></button>
-            <ul class="towns1__list" id="towns1-l2" hidden><li>Atlantis</li><li>Belle Glade</li><li>Boca Raton</li><li>Boynton Beach</li><li>Briny Breezes</li><li>Cloud Lake</li><li>Delray Beach</li><li>Glen Ridge</li><li>Golf</li><li>Greenacres</li><li>Gulf Stream</li><li>Haverhill</li><li>Highland Beach</li><li>Hypoluxo</li><li>Juno Beach</li><li>Jupiter</li><li>Jupiter Inlet Colony</li><li>Lake Clarke Shores</li><li>Lake Park</li><li>Lake Worth Beach</li><li>Lantana</li><li>Loxahatchee Groves</li><li>Manalapan</li><li>Mangonia Park</li><li>North Palm Beach</li><li>Ocean Ridge</li><li>Pahokee</li><li>Palm Beach</li><li>Palm Beach Gardens</li><li>Palm Beach Shores</li><li>Palm Springs</li><li>Riviera Beach</li><li>Royal Palm Beach</li><li>South Bay</li><li>South Palm Beach</li><li>Tequesta</li><li>Wellington</li><li>Westlake</li><li>West Palm Beach</li></ul>
-          </div>
+        <h2 class="t-head" id="towns-h1">Do we build in your town?</h2>
+        <p class="t-lead towns__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+        <div class="towns1__tabs" role="tablist" aria-label="Counties">
+          <button type="button" role="tab" class="towns1__tab" data-c="Miami-Dade" aria-selected="true" data-rx="pin"><span class="btn__label">Miami&#8209;Dade <span class="nums">34</span></span></button>
+          <button type="button" role="tab" class="towns1__tab" data-c="Broward" aria-selected="false" data-rx="pin"><span class="btn__label">Broward <span class="nums">31</span></span></button>
+          <button type="button" role="tab" class="towns1__tab" data-c="Palm Beach" aria-selected="false" data-rx="pin"><span class="btn__label">Palm Beach <span class="nums">39</span></span></button>
         </div>
+        <div class="towns1__legend" role="tabpanel" aria-live="polite"></div>
       </div>
-      <figure class="towns1__map" aria-hidden="true">
-        <svg class="towns1__svg" preserveAspectRatio="xMidYMid meet"></svg>
-        <figcaption class="towns1__cap t-small muted">County outlines and municipality points from US Census records.</figcaption>
-      </figure>
+      <div class="towns1__map"><svg class="towns1__svg" aria-hidden="true" focusable="false"></svg></div>
     </div>
   </div>
 
-  <!-- v2 · Ask [anatomy §1 F3 / §4: the lowest-friction first field (System Pavers zip-first, Hippo local answer); S1128 areaServed] -->
+  <!-- v2 · Around the office [S0717 motion-frames: concentric rings at 60 / 90 / 180s, labels stay upright] -->
   <div class="ver towns2" data-v="2" hidden>
-    <div class="wrap towns2__in">
-      <p class="t-label towns__label">Service area</p>
-      <h2 class="t-head" id="towns-h2">Do you build in my town?</h2>
-      <div class="towns2__field">
-        <label class="sr-only" for="towns2-input">Your town or city</label>
-        <input id="towns2-input" class="towns2__input" type="text" autocomplete="address-level2" placeholder="Type your town" spellcheck="false" aria-describedby="towns2-answer" aria-autocomplete="list" aria-controls="towns2-sug">
-        <ul class="towns2__sug" id="towns2-sug" role="listbox" aria-label="Suggestions" hidden></ul>
+    <div class="wrap">
+      <div class="towns__head">
+        <h2 class="t-head" id="towns-h2">Three counties, circling one office.</h2>
+        <p class="t-lead towns__lead">Every dot is a municipality we build in. The names surface as they pass the survey mark.</p>
       </div>
-      <p class="towns2__answer" id="towns2-answer" aria-live="polite">104 municipalities across three counties, and we hold the licence to build in all of them.</p>
-      <p class="towns2__counties" aria-hidden="true"><span data-c="Miami-Dade">Miami&#8209;Dade <b class="nums">34</b></span><span data-c="Broward">Broward <b class="nums">31</b></span><span data-c="Palm Beach">Palm Beach <b class="nums">39</b></span></p>
+      <div class="towns2__stage">
+        <svg class="towns2__svg" aria-hidden="true" focusable="false"></svg>
+        <div class="towns2__hub"><p class="towns2__n nums">104</p><p class="towns2__nl">municipalities</p><p class="towns2__addr">From 19 W Flagler St, Miami</p></div>
+        <ul class="towns2__read" aria-hidden="true"><li data-r="2"></li><li data-r="1"></li><li data-r="0"></li></ul>
+      </div>
+      <button type="button" class="btn btn--ghost towns2__pause" aria-pressed="false" data-rx="stake"><span class="btn__label">Pause the rings</span></button>
+      <div class="towns2__lists"></div>
     </div>
   </div>
 
-  <!-- v3 · All 104 [P70 proximity variable font (Q171): letters swell with the pointer, gaussian falloff, idle wave] -->
+  <!-- v3 · The road sign [BANK Anatomy F3 lowest-friction first field + BANK 310 Madoka input outline] -->
   <div class="ver towns3" data-v="3" hidden>
-    <div class="wrap">
-      <header class="towns3__head">
-        <div>
-          <p class="t-label towns__label">Service area</p>
-          <h2 class="t-head" id="towns-h3">Do you build in my town?</h2>
-          <p class="towns__line muted">104 municipalities across three counties, and we hold the licence to build in all of them.</p>
-        </div>
-        <div class="towns3__find">
-          <label for="towns3-find" class="t-small">Find your town</label>
-          <input id="towns3-find" type="text" autocomplete="address-level2" spellcheck="false" aria-describedby="towns3-answer">
-          <p id="towns3-answer" class="towns3__answer t-small" aria-live="polite"></p>
-        </div>
-      </header>
-      <div class="towns3__index" data-cursor="lens">
-        <div class="towns3__col" data-county="Miami-Dade">
-          <button type="button" class="towns3__ch" aria-pressed="false" data-cursor="link"><span>Miami-Dade County</span><span class="nums">34</span></button>
-          <ul class="towns3__names"><li data-name="aventura">Aventura</li><li data-name="bal harbour">Bal Harbour</li><li data-name="bay harbor islands">Bay Harbor Islands</li><li data-name="biscayne park">Biscayne Park</li><li data-name="coral gables">Coral Gables</li><li data-name="cutler bay">Cutler Bay</li><li data-name="doral">Doral</li><li data-name="el portal">El Portal</li><li data-name="florida city">Florida City</li><li data-name="golden beach">Golden Beach</li><li data-name="hialeah">Hialeah</li><li data-name="hialeah gardens">Hialeah Gardens</li><li data-name="homestead">Homestead</li><li data-name="indian creek">Indian Creek</li><li data-name="key biscayne">Key Biscayne</li><li data-name="medley">Medley</li><li data-name="miami">Miami</li><li data-name="miami beach">Miami Beach</li><li data-name="miami gardens">Miami Gardens</li><li data-name="miami lakes">Miami Lakes</li><li data-name="miami shores">Miami Shores</li><li data-name="miami springs">Miami Springs</li><li data-name="north bay village">North Bay Village</li><li data-name="north miami">North Miami</li><li data-name="north miami beach">North Miami Beach</li><li data-name="opa-locka">Opa-locka</li><li data-name="palmetto bay">Palmetto Bay</li><li data-name="pinecrest">Pinecrest</li><li data-name="south miami">South Miami</li><li data-name="sunny isles beach">Sunny Isles Beach</li><li data-name="surfside">Surfside</li><li data-name="sweetwater">Sweetwater</li><li data-name="virginia gardens">Virginia Gardens</li><li data-name="west miami">West Miami</li></ul>
-        </div>
-        <div class="towns3__col" data-county="Broward">
-          <button type="button" class="towns3__ch" aria-pressed="false" data-cursor="link"><span>Broward County</span><span class="nums">31</span></button>
-          <ul class="towns3__names"><li data-name="coconut creek">Coconut Creek</li><li data-name="cooper city">Cooper City</li><li data-name="coral springs">Coral Springs</li><li data-name="dania beach">Dania Beach</li><li data-name="davie">Davie</li><li data-name="deerfield beach">Deerfield Beach</li><li data-name="fort lauderdale">Fort Lauderdale</li><li data-name="hallandale beach">Hallandale Beach</li><li data-name="hillsboro beach">Hillsboro Beach</li><li data-name="hollywood">Hollywood</li><li data-name="lauderdale lakes">Lauderdale Lakes</li><li data-name="lauderdale-by-the-sea">Lauderdale-by-the-Sea</li><li data-name="lauderhill">Lauderhill</li><li data-name="lazy lake">Lazy Lake</li><li data-name="lighthouse point">Lighthouse Point</li><li data-name="margate">Margate</li><li data-name="miramar">Miramar</li><li data-name="north lauderdale">North Lauderdale</li><li data-name="oakland park">Oakland Park</li><li data-name="parkland">Parkland</li><li data-name="pembroke park">Pembroke Park</li><li data-name="pembroke pines">Pembroke Pines</li><li data-name="plantation">Plantation</li><li data-name="pompano beach">Pompano Beach</li><li data-name="sea ranch lakes">Sea Ranch Lakes</li><li data-name="southwest ranches">Southwest Ranches</li><li data-name="sunrise">Sunrise</li><li data-name="tamarac">Tamarac</li><li data-name="west park">West Park</li><li data-name="weston">Weston</li><li data-name="wilton manors">Wilton Manors</li></ul>
-        </div>
-        <div class="towns3__col" data-county="Palm Beach">
-          <button type="button" class="towns3__ch" aria-pressed="false" data-cursor="link"><span>Palm Beach County</span><span class="nums">39</span></button>
-          <ul class="towns3__names"><li data-name="atlantis">Atlantis</li><li data-name="belle glade">Belle Glade</li><li data-name="boca raton">Boca Raton</li><li data-name="boynton beach">Boynton Beach</li><li data-name="briny breezes">Briny Breezes</li><li data-name="cloud lake">Cloud Lake</li><li data-name="delray beach">Delray Beach</li><li data-name="glen ridge">Glen Ridge</li><li data-name="golf">Golf</li><li data-name="greenacres">Greenacres</li><li data-name="gulf stream">Gulf Stream</li><li data-name="haverhill">Haverhill</li><li data-name="highland beach">Highland Beach</li><li data-name="hypoluxo">Hypoluxo</li><li data-name="juno beach">Juno Beach</li><li data-name="jupiter">Jupiter</li><li data-name="jupiter inlet colony">Jupiter Inlet Colony</li><li data-name="lake clarke shores">Lake Clarke Shores</li><li data-name="lake park">Lake Park</li><li data-name="lake worth beach">Lake Worth Beach</li><li data-name="lantana">Lantana</li><li data-name="loxahatchee groves">Loxahatchee Groves</li><li data-name="manalapan">Manalapan</li><li data-name="mangonia park">Mangonia Park</li><li data-name="north palm beach">North Palm Beach</li><li data-name="ocean ridge">Ocean Ridge</li><li data-name="pahokee">Pahokee</li><li data-name="palm beach">Palm Beach</li><li data-name="palm beach gardens">Palm Beach Gardens</li><li data-name="palm beach shores">Palm Beach Shores</li><li data-name="palm springs">Palm Springs</li><li data-name="riviera beach">Riviera Beach</li><li data-name="royal palm beach">Royal Palm Beach</li><li data-name="south bay">South Bay</li><li data-name="south palm beach">South Palm Beach</li><li data-name="tequesta">Tequesta</li><li data-name="wellington">Wellington</li><li data-name="west palm beach">West Palm Beach</li><li data-name="westlake">Westlake</li></ul>
-        </div>
+    <div class="wrap towns3__grid">
+      <div class="towns3__side">
+        <h2 class="t-head" id="towns-h3">Type your town.</h2>
+        <p class="t-lead towns__lead">One field. The sign tells you straight away whether we build there.</p>
+        <form class="towns3__form" novalidate>
+          <div class="towns3__field">
+            <label class="towns3__lbl" for="towns3-q">Your town or city</label>
+            <input class="towns3__in" id="towns3-q" type="text" autocomplete="address-level2" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="towns3-list" spellcheck="false">
+            <svg class="towns3__outline" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path/></svg>
+            <ul class="towns3__list" id="towns3-list" role="listbox" hidden></ul>
+          </div>
+          <button type="submit" class="btn towns3__go" data-rx="stake"><span class="btn__label">Check it</span></button>
+        </form>
+        <p class="towns3__call">Not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
+      </div>
+      <div class="towns3__road">
+        <svg class="towns3__sign" viewBox="0 0 520 420" aria-hidden="true" focusable="false"></svg>
+        <p class="towns3__ans" aria-live="polite"></p>
       </div>
     </div>
+    <div class="wrap"><div class="towns3__all"></div></div>
   </div>
 </section>

@@ -589,6 +589,25 @@
     }
   };
 
+  /* towns: a survey stake with flagging tape is driven in beside the button */
+  R.stake = {
+    art: function (w, h) {
+      var x = P - 12, y = P + h;
+      return '<g class="sk2" opacity="0"><path d="M' + x + ' ' + (y - 34) + 'v30l3 7l3 -7v-30z" fill="#c9a46a" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+        '<path class="fl" d="M' + (x + 6) + ' ' + (y - 32) + 'q12 2 16 9q-9 -3 -16 2z" fill="#ff7a3c" stroke="' + INK + '" stroke-width=".8"/></g>' +
+        '<path class="gd" d="M' + (x - 10) + ' ' + (y + 4) + 'h26" stroke="currentColor" stroke-width="1.4" opacity="0"/>';
+    },
+    hover: function (svg, w, h) {
+      return gsap.timeline({ paused: true })
+        .fromTo(one(svg, '.sk2'), { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .25, ease: 'power4.in' }, 0)
+        .fromTo(one(svg, '.gd'), { opacity: 0, scaleX: .3, transformOrigin: '50% 50%' }, { opacity: 1, scaleX: 1, duration: .25, ease: 'expo.out' }, .24)
+        .fromTo(one(svg, '.fl'), { scaleX: .6, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .5, ease: 'elastic.out(1,.4)' }, .25);
+    },
+    click: function (svg) {
+      return gsap.timeline().to(one(svg, '.sk2'), { y: 4, duration: .08, ease: 'power4.in' }).to(one(svg, '.sk2'), { y: 2, duration: .2 });
+    }
+  };
+
   EZ.REACTIONS = R;
 
   /* ---------- binding ---------- */
