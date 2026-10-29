@@ -1,0 +1,76 @@
+/* financing [PLAN-V2 2.5] — the firm's four partners, their published figures, "not a lender" */
+#financing .financing__label { color: var(--accent); margin-bottom: var(--s5); }
+#financing .financing__head { max-width: 50rem; margin-bottom: clamp(40px, 5vw, 72px); }
+#financing .financing__lead { margin-top: var(--s4); }
+#financing .financing__foot { margin-top: var(--s6); max-width: 76ch; }
+
+/* ---------- v1 · the sheets [Codrops pricing tables: flex, wrap, centred; item margin 1.5em, padding 2em] ---------- */
+.financing1__pricing { display: flex; flex-wrap: wrap; justify-content: center; width: 100%; margin: 0 auto; gap: var(--gutter); }
+.financing1__item {
+  flex: 1 1 15rem; display: flex; flex-direction: column; gap: var(--s4);
+  padding: 2em; background: var(--bg); position: relative;
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+.financing1__item::before { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 400ms var(--ease-out); }
+.financing1__title { font-family: var(--f-display); font-size: clamp(1.75rem, 1.3rem + 1vw, 2.25rem); letter-spacing: .04em; line-height: 1; }
+.financing1__kind { font-size: var(--t-small); font-weight: 560; color: var(--accent); }
+.financing1__price { display: grid; gap: var(--s2); padding: var(--s5) 0; border-top: 1px solid color-mix(in oklab, var(--ink) 14%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--ink) 14%, transparent); }
+.financing1__fig { font-family: var(--f-display); font-size: clamp(3.5rem, 2rem + 3.2vw, 5.5rem); line-height: .85; letter-spacing: .005em; color: var(--ink); }
+.financing1__per { font-size: var(--t-small); color: var(--muted); max-width: 26ch; }
+.financing1__features { list-style: none; display: grid; gap: var(--s2); flex: 1; }
+.financing1__features li { font-size: .9375rem; color: var(--ink); padding-left: 1.1em; position: relative; }
+.financing1__features li::before { content: ""; position: absolute; left: 0; top: .62em; width: .45em; height: 1.5px; background: var(--accent); }
+.financing1__action {
+  margin-top: var(--s3); min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius); box-shadow: inset 0 0 0 1.5px var(--ink); color: var(--ink); font-weight: 560; text-decoration: none;
+  transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .financing1__item:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .financing1__item:hover::before { transform: scaleX(1); }
+  .financing1__action:hover { background: var(--ink); color: var(--bg); }
+}
+@media (max-width: 1023px) { .financing1__item { flex-basis: calc(50% - var(--gutter)); } }
+@media (max-width: 600px) { .financing1__item { flex-basis: 100%; } }
+
+/* ---------- v2 · the picker [TruGreen: one-tap choices -> a recommendation] ---------- */
+.financing2__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.financing2__ask { grid-column: 1 / span 5; }
+.financing2__q { margin-top: var(--s7); font-size: var(--t-lead); color: var(--muted); }
+.financing2__chips { margin-top: var(--s4); display: grid; gap: var(--s2); }
+.financing2__chip {
+  position: relative; text-align: left; min-height: 64px; padding: 0 var(--s5);
+  background: transparent; border: 0; border-radius: var(--radius); box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--ink) 26%, transparent);
+  font-family: var(--f-display); font-size: clamp(1.5rem, 1.1rem + 1vw, 2.125rem); letter-spacing: .03em; color: var(--muted);
+  transition: background-color 240ms var(--ease-out), color 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+}
+.financing2__chip[aria-checked="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+@media (hover: hover) and (pointer: fine) { .financing2__chip:not([aria-checked="true"]):hover { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); } }
+.financing2__answer { grid-column: 7 / -1; background: var(--bg); padding: clamp(24px, 3vw, 48px); display: grid; gap: var(--s5); min-height: 100%; }
+.financing2__for { font-family: var(--f-display); font-size: 1.125rem; letter-spacing: .12em; color: var(--accent); }
+.financing2__routes { display: grid; gap: var(--s5); }
+.financing2__route { display: grid; grid-template-columns: auto 1fr; column-gap: var(--s5); align-items: baseline; padding-bottom: var(--s4); border-bottom: 1px solid color-mix(in oklab, var(--ink) 14%, transparent); }
+.financing2__rf { grid-row: 1 / span 2; font-family: var(--f-display); font-size: clamp(2.75rem, 1.8rem + 2.4vw, 4.5rem); line-height: .85; color: var(--ink); }
+.financing2__rn { font-family: var(--f-display); font-size: 1.5rem; letter-spacing: .03em; }
+.financing2__rd { font-size: var(--t-small); color: var(--muted); }
+.financing2__why { color: var(--ink); max-width: 52ch; }
+.financing2__go { justify-self: start; }
+@media (max-width: 1023px) {
+  .financing2__ask, .financing2__answer { grid-column: 1 / -1; }
+  .financing2__answer { margin-top: var(--s7); }
+}
+
+/* ---------- v3 · the read [S1327: words from opacity .18 / blur 6px / .14em drop to full over 160% of the viewport] ---------- */
+.financing3__in { max-width: 1180px; }
+.financing3__h { margin-bottom: clamp(32px, 4vw, 64px); }
+.financing3__passage {
+  font-size: clamp(1.75rem, 1.1rem + 2vw, 3.25rem); line-height: 1.22; font-weight: 500; letter-spacing: -.012em; max-width: 30ch; color: var(--ink);
+}
+.financing3__passage strong { font-weight: 600; color: var(--accent); }
+.financing3__passage .w { display: inline-block; will-change: opacity, filter, transform; }
+.financing3__line { list-style: none; margin-top: clamp(40px, 5vw, 80px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+.financing3__line li { display: grid; gap: var(--s2); padding-top: var(--s4); border-top: 1px solid color-mix(in oklab, var(--ink) 20%, transparent); }
+.financing3__line b { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; letter-spacing: .03em; }
+.financing3__line span { font-size: var(--t-small); color: var(--muted); }
+.financing3__go { margin-top: var(--s8); }
+@media (max-width: 767px) { .financing3__line { grid-template-columns: 1fr 1fr; } }
