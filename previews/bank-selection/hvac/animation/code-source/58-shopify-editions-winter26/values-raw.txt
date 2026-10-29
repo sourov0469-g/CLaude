@@ -1,0 +1,82 @@
+SOURCE PASS: https://www.shopify.com/editions/winter2026 -> 58-shopify-editions-winter26 (2026-10-26T10:29:47Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 1.4M | assets: 14 files, 984K total | combined JS 824K, CSS 128K
+--- library/plugin counts (JS) ---
+gsap: 0
+ScrollTrigger: 0
+SplitText: 0
+SplitType: 0
+Lenis: 4
+lenis: 26
+three: 0
+WebGLRenderer: 0
+ShaderMaterial: 0
+Draggable: 0
+Observer: 49
+Flip: 0
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 18
+onnxruntime: 0
+requestAnimationFrame: 42
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+      1 ease:"ease"
+--- durations ---
+      2 duration:1
+      1 duration:0
+--- stagger ---
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 0 | fragmentShader: 0 | uniforms decls: 0
+uTier:
+uType:
+--- CSS features ---
+@keyframes: 14
+cubic-bezier: 19
+prefers-reduced-motion: 9
+clip-path: 10
+backdrop-filter: 13
+mix-blend-mode: 2
+will-change: 1
+animation-timeline: 0
+      3 cubic-bezier(.34,1.56,.64,1)
+      2 cubic-bezier(.72, .16, .19, .96)
+      2 cubic-bezier(.4, 0, .2, 1)
+      2 cubic-bezier(.34, 1.56, .64, 1)
+      1 cubic-bezier(0, 0, .2, 1)
+      1 cubic-bezier(.6,-.28,.74,.05)
+@keyframes emoji-rise
+@keyframes fade-in
+@keyframes line-fade
+@keyframes load-lines
+@keyframes media-entrance
+@keyframes nav-item-in
+@keyframes opacityPulse
+@keyframes orbit-path
+@keyframes search-loading-rotate
+@keyframes search-loading-stroke
+@keyframes show-close-button
+@keyframes slide
+@keyframes stagger-fade-in
+@keyframes timeline-start
+--- fonts ---
+font-family:HWCigars
+font-family:HWCigars,Georgia,Times New Roman,serif
+font-family:ImperialScript
+font-family:ImperialScript,Georgia,serif
+font-family:Inter-Variable
+font-family:Inter-Variable,Helvetica,sans-serif
+font-family:NeueMontreal
+font-family:NeueMontreal,Helvetica,Arial,sans-serif
+cross-host assets skipped (card discipline): 0
+
+INTEGRITY NOTE (recovery pass, 26 Oct): this file is the ALLOW_CDN=1 re-mine (10:29) and is CONSISTENT with the downloaded cdn.shopify.com first-party bundles (gsap 0, lenis 26, IntersectionObserver 18, 14 @keyframes). Hand-verified for deep-reads-slice-2-part1b.md (Q58): Lenis config and all CSS variable values confirmed verbatim in source.

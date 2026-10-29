@@ -1,0 +1,63 @@
+SOURCE PASS: https://specia1ne.com/ -> specia1ne (2026-10-26T10:29:50Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 40K | assets: 7 files, 228K total | combined JS 80K, CSS 136K
+--- library/plugin counts (JS) ---
+gsap: 0
+ScrollTrigger: 1
+SplitText: 0
+SplitType: 0
+Lenis: 0
+lenis: 0
+three: 0
+WebGLRenderer: 0
+ShaderMaterial: 0
+Draggable: 0
+Observer: 10
+Flip: 0
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 0
+onnxruntime: 0
+requestAnimationFrame: 16
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+--- durations ---
+--- stagger ---
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 0 | fragmentShader: 0 | uniforms decls: 0
+--- CSS features ---
+@keyframes: 5
+cubic-bezier: 34
+prefers-reduced-motion: 20
+clip-path: 63
+backdrop-filter: 0
+mix-blend-mode: 0
+will-change: 42
+animation-timeline: 0
+     13 cubic-bezier(.16,1,.3,1)
+     11 cubic-bezier(.2,.75,.2,1)
+      5 cubic-bezier(.22,.61,.36,1)
+      2 cubic-bezier(.4,0,.2,1)
+      1 cubic-bezier(.35,0,.2,1)
+      1 cubic-bezier(.2, .7, .2, 1)
+@keyframes site-button-loader-pulse
+@keyframes site-field-autofill
+@keyframes site-menu-marker-close-to-grid
+@keyframes site-menu-marker-open-from-dot
+@keyframes site-menu-marker-open-from-grid
+--- fonts ---
+font-family:Geist
+font-family:Geist Mono
+font-family:inherit
+font-family:var(--font-mono)
+font-family:var(--font-sans)
+cross-host assets skipped (card discipline): 0

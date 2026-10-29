@@ -1,0 +1,48 @@
+SOURCE PASS: https://tympanus.net/Development/OnScrollPathAnimations/ -> 53-onscroll-path-animations (2026-10-26T10:26:28Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 4.0K | assets: 0 files, 0 total | combined JS 0, CSS 0
+--- library/plugin counts (JS) ---
+gsap: 0
+ScrollTrigger: 0
+SplitText: 0
+SplitType: 0
+Lenis: 0
+lenis: 0
+three: 0
+WebGLRenderer: 0
+ShaderMaterial: 0
+Draggable: 0
+Observer: 1
+Flip: 0
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 0
+onnxruntime: 0
+requestAnimationFrame: 0
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+--- durations ---
+--- stagger ---
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 0 | fragmentShader: 0 | uniforms decls: 0
+--- CSS features ---
+@keyframes: 0
+cubic-bezier: 0
+prefers-reduced-motion: 0
+clip-path: 0
+backdrop-filter: 0
+mix-blend-mode: 0
+will-change: 0
+animation-timeline: 0
+--- fonts ---
+font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif
+cross-host assets skipped (card discipline): 0

@@ -1,0 +1,86 @@
+SOURCE PASS: https://reactbits.dev/text-animations/count-up -> count-up-reactbits (2026-10-26T10:32:06Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 16K | assets: 4 files, 668K total | combined JS 424K, CSS 244K
+--- library/plugin counts (JS) ---
+gsap: 1
+ScrollTrigger: 0
+SplitText: 3
+SplitType: 0
+Lenis: 0
+lenis: 0
+three: 2
+WebGLRenderer: 0
+ShaderMaterial: 0
+Draggable: 0
+Observer: 20
+Flip: 1
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 16
+onnxruntime: 0
+requestAnimationFrame: 17
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+      1 ease:"elastic.out(2, 1)"
+      1 ease:"elastic.out(1, 0.3)"
+      1 ease:"easeOut"
+--- durations ---
+      6 duration:.5
+      3 duration:.2
+      2 duration:1
+      1 duration:2
+      1 duration:.4
+      1 duration:.3
+--- stagger ---
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 0 | fragmentShader: 0 | uniforms decls: 0
+--- CSS features ---
+@keyframes: 41
+cubic-bezier: 17
+prefers-reduced-motion: 34
+clip-path: 2
+backdrop-filter: 77
+mix-blend-mode: 15
+will-change: 9
+animation-timeline: 0
+      6 cubic-bezier(.22,1,.36,1)
+      4 cubic-bezier(.23,1,.32,1)
+      2 cubic-bezier(.4,0,.2,1)
+      1 cubic-bezier(0,0,.2,1)
+      1 cubic-bezier(.77,0,.175,1)
+      1 cubic-bezier(.4,0,1,1)
+@keyframes border-dance
+@keyframes cursorBlink
+@keyframes demo-scroll-hint-bob
+@keyframes docs-qs-blink
+@keyframes docs-section-enter
+@keyframes fadeInUp
+@keyframes fadeInUpMobile
+@keyframes fadeInUpMobileRotate1
+@keyframes fadeInUpMobileRotate2
+@keyframes fadeInUpMobileRotate3
+@keyframes fadeInUpRotate1
+@keyframes fadeInUpRotate2
+@keyframes fadeInUpRotate3
+@keyframes glow-pulse
+@keyframes gradientShift
+@keyframes heroTextFadeIn
+--- fonts ---
+font-family:Geist
+font-family:Geist Mono
+font-family:Geist Mono,monospace
+font-family:Geist Mono,ui-monospace,monospace
+font-family:Geist,sans-serif
+font-family:Google Sans Code,monospace
+font-family:inherit
+font-family:var(--default-font-family,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji")
+cross-host assets skipped (card discipline): 0

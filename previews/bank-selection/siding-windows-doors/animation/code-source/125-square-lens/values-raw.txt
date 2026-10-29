@@ -1,0 +1,50 @@
+SOURCE PASS: https://tympanus.net/Tutorials/PointerSquareLensDistortion -> 125-square-lens (2026-10-26T10:41:51Z)
+ROUTE: terminal curl (HTML + linked bundles)
+index.html: 8.0K | assets: 3 files, 536K total | combined JS 532K, CSS 0
+--- library/plugin counts (JS) ---
+gsap: 0
+ScrollTrigger: 0
+SplitText: 0
+SplitType: 0
+Lenis: 0
+lenis: 0
+three: 1
+WebGLRenderer: 35
+ShaderMaterial: 16
+Draggable: 0
+Observer: 1
+Flip: 4
+MorphSVG: 0
+DrawSVG: 0
+quickTo: 0
+ScrollSmoother: 0
+MotionPath: 0
+CustomEase: 0
+IntersectionObserver: 0
+onnxruntime: 0
+requestAnimationFrame: 8
+--- scrollTrigger configs ---
+0
+--- version strings ---
+--- eases ---
+--- durations ---
+--- stagger ---
+--- scrub ---
+--- starts ---
+--- ends ---
+--- shaders ---
+vertexShader: 46 | fragmentShader: 46 | uniforms decls: 123
+--- CSS features ---
+@keyframes: 0
+cubic-bezier: 0
+prefers-reduced-motion: 0
+clip-path: 0
+backdrop-filter: 0
+mix-blend-mode: 0
+will-change: 0
+animation-timeline: 0
+--- fonts ---
+cross-host assets skipped (card discipline): 0
+
+--- INTEGRITY NOTE (Batch 4, 26 Oct) ---
+Assets are REAL (Astro bundle 538,912 B). Combined CSS = 0 because the demo's styles ship inside the JS/HTML (Astro), not as .css files — not a stub artifact. Deployed defaults verified in bundle: squareSize .4 (article tutorial default is 0.3), lensDistortion 1.5, rgbShift .01/0/-.01, pointerEase .1.

@@ -1,0 +1,4 @@
+HAPTIC (haptic.studio) — SOURCE PASS, 26 Oct 2026 (curl from VM, after Land-book first contact)
+Files: index.html 500K · 0 same-host JS/CSS assets — Framer site (Land-book platform tag, Seen): all runtime JS/CSS is cross-host Framer CDN, skipped per card discipline, so no bundle parameters are claimed.
+MEASURED FROM PAGE (browser deep read): live London/New York clocks ticking per second; word-by-word scroll-highlight intro statement (each word a separate node); pricing tiers $15,000/mo and $30,000/mo + bespoke (full tier detail in deep-reads-slice-5.md).
+READING (Inferred): Framer's native scroll transforms drive the word highlight; a rebuild in GSAP = entry 292 Scroll Reveal scrub pattern (word split, opacity from ~0.1, end "bottom bottom").
