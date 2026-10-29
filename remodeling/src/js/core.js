@@ -1,6 +1,6 @@
 /* Elbaz homepage core runtime.
    Image store, section/version manager (the 1·2·3 control), cursor engine with per-element states,
-   reactions, weight lens, Lenis, nav, settings (theme + motion), viewer, lazy Three.js.
+   reactions, Lenis, nav, settings (theme + motion), viewer, lazy Three.js.
    Motion values from PLAN §4.4 [S0063 STANDARDS, S0095 §5, S1321, S0652, S1303 §7]. */
 (function () {
   'use strict';
@@ -223,7 +223,6 @@
       });
     }
     bindMagnets(verEl, kit);
-    bindLens(verEl, kit);
     if (!opts.initial) {
       persist();
       ScrollTrigger.sort();
@@ -369,7 +368,7 @@
     if (EZ.bindReactions) EZ.bindReactions(scope, kit);
   }
 
-  /* ---------- weight lens: text responds as the pointer passes [S0652 §8 falloff, S0634 hover-magnetic-text] ---------- */
+  /* ---------- character split (used by heroes) ---------- */
   EZ.splitChars = function (el) {
     if (el.dataset.split === '1') return el.querySelectorAll('.ch');
     var text = el.textContent.replace(/\s+/g, ' ').trim();
@@ -382,47 +381,6 @@
     el.dataset.split = '1';
     return el.querySelectorAll('.ch');
   };
-  function bindLens(scope, kit) {
-    if (!kit.fine || !kit.motion) return;
-    scope.querySelectorAll('[data-lens]').forEach(function (el) { lens(el, kit); });
-  }
-  function lens(el, kit) {
-    var cs = getComputedStyle(el);
-    var baseW = parseFloat(el.dataset.lensW || cs.fontWeight) || 600;
-    var baseS = parseFloat(el.dataset.lensS || cs.fontStretch) || 80;
-    var addW = +(el.dataset.lensAddW || 260), addS = +(el.dataset.lensAddS || 14), reach = +(el.dataset.lensReach || 120);
-    var orig = el.innerHTML, wasSplit = el.dataset.split === '1';
-    var chars = Array.prototype.slice.call(EZ.splitChars(el));
-    var cache = [], px = -1e4, py = -1e4, dirty = true, idle = 0;
-    chars.forEach(function (c) { c.style.transition = 'font-weight 320ms var(--ease-out), font-stretch 320ms var(--ease-out)'; c.style.display = 'inline-block'; });
-    function measure() { cache = chars.map(function (c) { var r = c.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }); }
-    var near = false;
-    kit.on(window, 'pointermove', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      px = e.clientX; py = e.clientY;
-      var r = el.getBoundingClientRect();
-      var n = px > r.left - reach && px < r.right + reach && py > r.top - reach && py < r.bottom + reach;
-      if (n || near) { dirty = true; if (!loop) start(); }
-      near = n;
-    }, { passive: true });
-    kit.on(window, 'scroll', function () { cache = []; }, { passive: true });
-    kit.on(window, 'resize', function () { cache = []; });
-    var loop = null;
-    function start() {
-      loop = kit.raf(function () {
-        if (!dirty) { if (++idle > 30) { loop = null; return false; } return; }
-        idle = 0; dirty = false;
-        if (!cache.length) measure();
-        for (var i = 0; i < chars.length; i++) {
-          var dx = cache[i][0] - px, dy = cache[i][1] - py, d = Math.sqrt(dx * dx + dy * dy);
-          var k = d > reach ? 0 : Math.pow(.45, d / 60);
-          chars[i].style.fontWeight = Math.round(baseW + addW * k);
-          chars[i].style.fontStretch = (baseS + addS * k).toFixed(1) + '%';
-        }
-      });
-    }
-    kit.add(function () { if (!wasSplit) { el.innerHTML = orig; delete el.dataset.split; } });
-  }
 
   /* ---------- nav [S0095 §3, S1303 N2] + progress tape ---------- */
   var sheet, menuBtn, lastFocus;
@@ -683,7 +641,8 @@
         trigger: el,
         onEnter: function () { from(1); },
         onEnterBack: function () { from(-1); },
-        onLeave: function () { gsap.set(el, { autoAlpha: 0 }); }
+        // sticky columns stay on screen after their trigger "leaves": only hide what has really gone
+        onLeave: function () { if (el.getBoundingClientRect().bottom < 0) gsap.set(el, { autoAlpha: 0 }); }
       });
     });
   };

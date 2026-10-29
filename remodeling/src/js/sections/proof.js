@@ -15,7 +15,7 @@
       gsap.from(root.querySelector('.proof1__card'), { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.proof1__card'), start: 'top 85%', once: true } });
       gsap.fromTo(root.querySelectorAll('.proof1__string'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
       gsap.set(stamps, { autoAlpha: 0, scale: 1.9 });
-      var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 62%', once: true } });
+      var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 80%', once: true } });
       stamps.forEach(function (st, i) {
         var at = i * .16;
         tl.to(st, { autoAlpha: .92, scale: 1, duration: .3, ease: STAMP }, at)

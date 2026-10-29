@@ -1,0 +1,24 @@
+licence tokens found: 17 (all "CBC1265280": true)
+full credential statements: 7, verbatim "Florida Certified Building Contractor, licence CBC1265280": all
+printed line "Licensed, bonded & insured · CBC1265280": true
+"4.8" occurrences: 12
+"343" occurrences: 15
+other ratings stated: 0
+reviewer names present: 0
+curly quotation marks in visible text: 0
+em dashes in visible text: 0
+hero 1 @1440 proof line: "★4.8 · 343 Google reviews" at 822-843 (screen 900) IN FIRST SCREEN
+hero 2 @1440 proof line: "★ 4.8 · 343 Google reviews" at 704-748 (screen 900) IN FIRST SCREEN
+hero 3 @1440 proof line: "★ 4.8 · 343 Google reviews" at 251-312 (screen 900) IN FIRST SCREEN
+hero 1 @375 proof line: "★4.8 · 343 Google reviews" at 611-653 (screen 748) IN FIRST SCREEN
+hero 2 @375 proof line: "★ 4.8 · 343 Google reviews" at 663-707 (screen 748) IN FIRST SCREEN
+hero 3 @375 proof line: "★ 4.8 · 343 Google reviews" at 543-591 (screen 748) IN FIRST SCREEN
+script ids checked: 8; missing after build: 0
+consult 1 form: empty submit -> 6 errors, 0 mails; valid -> 1 mail mailto:Sales@elbazconstruction.com?subject=Consultation%20re… OK
+consult 2 form: empty submit -> 5 errors, 0 mails; valid -> 1 mail mailto:Sales@elbazconstruction.com?subject=Consultation%20re… OK
+consult 3 form: empty submit -> 4 errors, 0 mails; valid -> 1 mail mailto:Sales@elbazconstruction.com?subject=Consultation%20re… OK
+towns 3 form: ["AVENTURAMiami-Dade CountyWe build here","NOT ON OUR LIST“Orlando”Call (754) 236-0675 to ask"]
+switch cycle: 30 switches, wrong version shown 0, triggers 74 -> 74, pin spacers 0, errors 0
+weight-trick tweens in own code (fontWeight / fontStretch / variation): 0
+before/after pair tabs: 4 distinct (max 4)
+GATE FAILS: 0

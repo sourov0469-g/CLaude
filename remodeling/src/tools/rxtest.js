@@ -48,12 +48,15 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
         const where = ver ? ver.closest('section').id + ver.dataset.v : (el.closest('.vswitch') ? el.closest('section').id + ':switch' : 'chrome');
         const r = el.getBoundingClientRect(); const sw = el.closest('.vswitch');
         // a section's switch floats while that section holds the viewport's middle
-        const top = sw ? sw.closest('section').getBoundingClientRect().top + scrollY + 500 : r.top + scrollY;
+        const sr = sw && sw.closest('section').getBoundingClientRect();
+        const top = sw ? sr.top + scrollY + Math.min(sr.height / 2, 600) : r.top + scrollY;
         const fixed = !!el.closest('.nav, .mbar, .settings, .sheet');
         return { where, name: (el.getAttribute('aria-label') || el.textContent || el.querySelector('input')?.name || '').trim().replace(/\s+/g, ' ').slice(0, 28), rx: el.dataset.rx, top, fixed, href: el.getAttribute('href') };
       }, sel);
       const row = { ...info, w, hover: null, clear: null, click: null, job: null, note: '' };
       try {
+        // park the pointer in the margin first: a scroll can carry an element under a resting pointer and legitimately switch it on
+        if (!mob) await p.mouse.move(2, 450);
         await p.waitForTimeout(300);
         await jump(info.fixed ? 0 : info.top - (mob ? 406 : 450));
         await p.waitForTimeout(650);
@@ -87,28 +90,54 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
           window.__mo = new MutationObserver(l => { l.forEach(m => { if (!(m.target.closest && m.target.closest('.rx')) && !(m.target.parentElement && m.target.parentElement.closest('.rx')) && !(m.target.classList && m.target.classList.contains('bdy'))) window.__mut++; }); });
           window.__mo.observe(document.body, { subtree: true, attributes: true, childList: true, characterData: true });
         }, sel);
+        // in-page recorder: did this element's reaction switch on during the phase, and was a drawing visible 250ms in?
+        // (reading the class at one instant misses beats on links that scroll the page, and on moving targets)
+        await p.evaluate(sel => {
+          const e = document.querySelector(sel);
+          window.__rx = { phase: 'hover', hover: false, drawn: false, click: false };
+          window.__rxo && window.__rxo.disconnect();
+          window.__rxo = new MutationObserver(() => {
+            if (!e.classList.contains('rx-on')) return;
+            const ph = window.__rx.phase;
+            if (window.__rx[ph]) return;
+            window.__rx[ph] = true;
+            if (ph === 'hover') setTimeout(() => { window.__rx.drawn = !!e.querySelector(':scope > .rx') && [...e.querySelectorAll(':scope > .rx *')].some(n => +getComputedStyle(n).opacity > .5 && n.getBBox && n.getBBox().width > 0); }, 250);
+          });
+          window.__rxo.observe(e, { attributes: true, attributeFilter: ['class'] });
+        }, sel);
         if (!mob) {
-          await p.mouse.move(cx, cy, { steps: 3 });
-          await p.waitForTimeout(380);
-          row.hover = native ? await p.evaluate(() => window.__mut > 0)
-            : await p.$eval(sel, e => e.classList.contains('rx-on') && !!e.querySelector(':scope > .rx') && [...e.querySelectorAll(':scope > .rx *')].some(n => +getComputedStyle(n).opacity > .5 && n.getBBox && n.getBBox().width > 0));
+          // moving belts: hold them first (the visitor's own control), then measure the target where it is now
+          await p.evaluate(sel => { const e = document.querySelector(sel), h = e.closest('.work3') && document.querySelector('.work3__hold'); if (h && h.getAttribute('aria-pressed') !== 'true' && !e.matches('.work3__hold')) h.click(); }, sel);
+          if (await p.$eval(sel, e => e.matches('.work3__tile'))) { await p.mouse.move(2, 450); await p.$eval(sel, e => { e.focus(); }); await p.waitForTimeout(600); await p.$eval(sel, e => { e.blur(); }); await p.waitForTimeout(700); await p.evaluate(() => { window.__rx.hover = false; window.__rx.drawn = false; }); }
+          await p.waitForTimeout(120);
+          const nb = await p.$eval(sel, e => { const r = e.getBoundingClientRect(); return [r.left + Math.min(r.width / 2, 40), r.top + r.height / 2]; });
+          const pre = await p.$eval(sel, e => e.className);
+          await p.mouse.move(nb[0], nb[1], { steps: 2 });
+          await p.waitForTimeout(400);
+          row.hover = native ? await p.evaluate(() => window.__mut > 0) : await p.evaluate(() => window.__rx.hover && window.__rx.drawn);
+          if (!row.hover) row.dbg = await p.evaluate(([sel, x, y]) => { const u = document.elementFromPoint(x, y), e = document.querySelector(sel), r = e.getBoundingClientRect(); return 'at ' + Math.round(x) + ',' + Math.round(y) + ' under=' + (u && (u.tagName + '.' + (u.className.baseVal === undefined ? u.className : 'svg')).slice(0, 50)) + ' own=' + (u && e.contains(u)) + ' rect=' + [r.left, r.top, r.width, r.height].map(Math.round) + ' rx=' + JSON.stringify(window.__rx) + ' viewer=' + !document.getElementById('viewer').hidden; }, [sel, nb[0], nb[1]]) + ' pre=' + pre;
           await p.mouse.move(2, mob ? 400 : 450, { steps: 2 });
           await p.waitForTimeout(700);
           row.clear = native ? true : await p.$eval(sel, e => !e.classList.contains('rx-on'));
+          await p.mouse.move(2, 450);
           await jump(info.fixed ? 0 : info.top - 450);
           await p.waitForTimeout(450);
           bx = await p.$eval(sel, e => { const r = e.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
           await p.mouse.move(bx.x + Math.min(bx.w / 2, 40), bx.y + bx.h / 2, { steps: 2 });
           await p.waitForTimeout(200);
-          await p.evaluate(() => { window.__mut = 0; window.__followed = null; });
+          await p.evaluate(sel => { window.__mut = 0; window.__followed = null; window.__rx.phase = 'click'; document.querySelector(sel).classList.remove('rx-on'); }, sel);
           await p.mouse.down(); await p.mouse.up();
-          await p.waitForTimeout(25);
-          row.click = native ? true : await p.$eval(sel, e => e.classList.contains('rx-on'));
+          await p.waitForTimeout(150);
+          row.click = native ? true : await p.evaluate(() => window.__rx.click);
         } else {
-          await p.evaluate(() => { window.__mut = 0; window.__followed = null; });
-          await p.touchscreen.tap(cx, cy);
+          await p.evaluate(sel => { const e = document.querySelector(sel), h = e.closest('.work3') && document.querySelector('.work3__hold'); if (h && h.getAttribute('aria-pressed') !== 'true' && !e.matches('.work3__hold')) h.click(); }, sel);
+          if (await p.$eval(sel, e => e.matches('.work3__tile'))) { await p.mouse.move(2, 450); await p.$eval(sel, e => { e.focus(); }); await p.waitForTimeout(600); await p.$eval(sel, e => { e.blur(); }); await p.waitForTimeout(700); await p.evaluate(() => { window.__rx.hover = false; window.__rx.drawn = false; }); }
           await p.waitForTimeout(120);
-          row.hover = native ? await p.evaluate(() => window.__mut > 0) : await p.$eval(sel, e => e.classList.contains('rx-on'));
+          const tb = await p.$eval(sel, e => { const r = e.getBoundingClientRect(); return [r.left + Math.min(r.width / 2, 40), r.top + r.height / 2]; });
+          await p.evaluate(() => { window.__mut = 0; window.__followed = null; });
+          await p.touchscreen.tap(tb[0], tb[1]);
+          await p.waitForTimeout(400);
+          row.hover = native ? await p.evaluate(() => window.__mut > 0) : await p.evaluate(() => window.__rx.hover && window.__rx.drawn);
           row.click = row.hover;
           await p.waitForTimeout(1900);
           row.clear = native ? true : await p.$eval(sel, e => !e.classList.contains('rx-on') || e.matches(':focus-within'));
@@ -136,7 +165,7 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
   const na = rows.filter(r => r.note.startsWith('n/a'));
   console.log(`width ${w}: tested ${rows.length - skipped.length - na.length}, failed ${fail.length}, n/a at this width ${na.length}, not on screen/err ${skipped.length}, page errors ${errs.length}`);
   na.forEach(r => console.log('NA', r.where, r.name, r.note));
-  fail.forEach(r => console.log('FAIL', r.where, r.name, r.rx, 'hover', r.hover, 'clear', r.clear, 'click', r.click, 'job', r.job));
+  fail.forEach(r => console.log('FAIL', r.where, r.name, r.rx, 'hover', r.hover, 'clear', r.clear, 'click', r.click, 'job', r.job, r.dbg || ''));
   skipped.forEach(r => console.log('SKIP', r.where, r.name, r.rx, r.note));
   errs.slice(0, 10).forEach(e => console.log('ERR', e));
   if (process.env.OUT) fs.writeFileSync(process.env.OUT, JSON.stringify({ rows, errs }, null, 1));

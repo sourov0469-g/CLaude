@@ -230,7 +230,8 @@
       if (!nw || !nh || (nw === w && nh === h)) return;
       w = nw; h = nh;
       if (hoverTl) hoverTl.kill();
-      if (clickTl) clickTl.kill();
+      // a redraw during a click beat (a toggle whose label changes) releases the beat, or the drawing would stay on
+      if (clickTl) { clickTl.kill(); clickTl = null; clicking = false; }
       svg.setAttribute('width', w + P * 2); svg.setAttribute('height', h + P * 2);
       svg.setAttribute('viewBox', '0 0 ' + (w + P * 2) + ' ' + (h + P * 2));
       svg.innerHTML = def.art(w, h);
@@ -263,7 +264,7 @@
     on(el, 'pointerleave', function (e) { if (e.pointerType === 'mouse' || e.pointerType === 'pen') leave(); });
     // focusin/out so a wrapper (label, field box) reacts when the control inside it takes keyboard focus
     on(el, 'focusin', function (e) { if (e.target.matches(':focus-visible')) enter(); });
-    on(el, 'focusout', function () { if (inside) leave(); });
+    on(el, 'focusout', function () { if (inside && !el.matches(':hover')) leave(); });   // still under the pointer: keep it
     on(el, 'pointerdown', function (e) { if (e.pointerType === 'touch') press(e); });
     on(el, 'click', function (e) { if (!el._rxTouch) press(e); });   // mouse, pen and keyboard; touch already reacted on press
     on(el, 'touchstart', function () { el._rxTouch = 1; clearTimeout(el._rxTT); el._rxTT = setTimeout(function () { el._rxTouch = 0; }, 600); }, { passive: true });

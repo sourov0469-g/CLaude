@@ -150,16 +150,21 @@
       if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; k.add(function () { hold.hidden = false; }); return; }
 
       var held = false, inView = false, boost = { v: 1 };
+      var builtW = 0;
       function build() {
+        // a rebuild keeps where each belt was, and starts from clean transforms (stale xPercent overlaps the tiles)
+        var prev = loops.map(function (l) { return { p: l.tl.progress(), slow: l.slow }; });
         loops.forEach(function (l) { l.tl.kill(); });
+        builtW = root.querySelector('.work3__belts').clientWidth;
         loops = belts.map(function (belt, bi) {
           var items = belt.querySelectorAll('.work3__tile');
+          gsap.set(items, { clearProps: 'transform' });
           var gap = parseFloat(getComputedStyle(belt.querySelector('.work3__track')).columnGap) || 16;
           var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .55, paddingRight: gap });
           // a photo is already cut by the left edge at rest [BANK 364 peek offset]
-          tl.time(tl.duration() * (bi ? .37 : .13));
+          if (prev[bi]) tl.progress(prev[bi].p); else tl.time(tl.duration() * (bi ? .37 : .13));
           if (bi) tl.reversed(true);
-          return { tl: tl, belt: belt, slow: { v: 1 } };
+          return { tl: tl, belt: belt, slow: prev[bi] ? prev[bi].slow : { v: 1 } };
         });
         sync();
       }
@@ -174,12 +179,21 @@
       var imgs = root.querySelectorAll('.work3__tile img'), left = imgs.length;
       imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
       build();
-      k.ro(root.querySelector('.work3__belts'), function () { build(); });
+      k.ro(root.querySelector('.work3__belts'), function () { if (root.querySelector('.work3__belts').clientWidth !== builtW) build(); });
       k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
       loops.forEach(function (l, i) {
         k.on(l.belt, 'pointerenter', function (e) { if (e.pointerType === 'mouse') gsap.to(loops[i].slow, { v: .25, duration: .3, onUpdate: sync }); });
         k.on(l.belt, 'pointerleave', function () { gsap.to(loops[i].slow, { v: 1, duration: .3, onUpdate: sync }); });
-        k.on(l.belt, 'focusin', function () { loops[i].slow.v = 0; sync(); });
+        // a focused photo must be in view (WCAG focus not obscured): the belt stops and glides that photo to its centre
+        k.on(l.belt, 'focusin', function (e) {
+          loops[i].slow.v = 0; sync();
+          var t = e.target.closest('.work3__tile'); if (!t) return;
+          var br = l.belt.getBoundingClientRect(), tr = t.getBoundingClientRect();
+          var dx = (tr.left + tr.width / 2) - (br.left + br.width / 2), tl = loops[i].tl;
+          if (Math.abs(dx) < 8) return;
+          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
+          gsap.to(tl, { totalTime: tl.totalTime() + dx / 55, duration: k.motion ? .4 : 0, ease: 'power3.inOut', overwrite: true });
+        });
         k.on(l.belt, 'focusout', function (e) { if (!l.belt.contains(e.relatedTarget)) { loops[i].slow.v = 1; sync(); } });
       });
       k.on(hold, 'click', function () {

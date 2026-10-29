@@ -14,11 +14,24 @@
     1: { init: function (root, k) {
       EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
       var tks = root.querySelectorAll('.financing1__tk');
+      // [BANK 372] Glare Hover, streak profile: 33 stops from bump(t,.5,.06+.16*softness) + .32*bump(t,.5,.5),
+      // smootherstep kernel t^3(t(6t-15)+10), softness .6, opacity .5, angle -45deg, screen blend, follow mode
+      var GLARE = (function () {
+        function ss(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+        function bump(t, c, h) { var x = 1 - Math.abs(t - c) / h; return x <= 0 ? 0 : ss(Math.min(1, x)); }
+        var soft = .6, stops = [];
+        for (var i = 0; i <= 32; i++) {
+          var t = i / 32, a = Math.min(1, bump(t, .5, .06 + .16 * soft) + .32 * bump(t, .5, .5)) * .5;
+          stops.push('rgba(255,255,255,' + a.toFixed(3) + ') ' + (t * 100).toFixed(1) + '%');
+        }
+        return 'linear-gradient(-45deg, ' + stops.join(', ') + ')';
+      })();
       tks.forEach(function (tk) {
         var main = tk.querySelector('.financing1__main'), stub = tk.querySelector('.financing1__stub'), more = tk.querySelector('.financing1__more');
         var btn = tk.querySelector('.financing1__tear'), label = btn.querySelector('.btn__label');
         k.ro(main, function () { tk.style.setProperty('--py', main.offsetHeight + 'px'); });
-        k.add(function () { tk.classList.remove('is-torn', 'is-glare'); tk.style.removeProperty('--py'); btn.setAttribute('aria-expanded', 'false'); label.textContent = 'Tear for details'; gsap.set([stub, more], { clearProps: 'all' }); });
+        tk.style.setProperty('--glare', GLARE);
+        k.add(function () { tk.classList.remove('is-torn', 'is-glare'); tk.style.removeProperty('--py'); tk.style.removeProperty('--glare'); btn.setAttribute('aria-expanded', 'false'); label.textContent = 'Tear for details'; gsap.set([stub, more], { clearProps: 'all' }); });
         if (k.fine && k.motion) {
           k.on(tk, 'pointerenter', function () { tk.classList.add('is-glare'); });
           k.on(tk, 'pointerleave', function () { tk.classList.remove('is-glare'); });

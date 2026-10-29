@@ -1,0 +1,92 @@
+width 375: tested 240, failed 72, n/a at this width 17, not on screen/err 2, page errors 0
+NA chrome Services n/a: not shown at this width
+NA chrome Work n/a: not shown at this width
+NA chrome Process n/a: not shown at this width
+NA chrome Financing n/a: not shown at this width
+NA chrome Reviews n/a: not shown at this width
+NA chrome (754) 236‑0675 n/a: not shown at this width
+NA chrome Book a consultation n/a: not shown at this width
+NA chrome Evening n/a: not shown at this width
+NA chrome Daylight n/a: not shown at this width
+NA chrome On n/a: not shown at this width
+NA chrome Off n/a: not shown at this width
+NA chrome Hard hat n/a: not shown at this width
+NA chrome Level n/a: not shown at this width
+NA chrome Traffic cone n/a: not shown at this width
+NA chrome No buddy n/a: not shown at this width
+NA chrome Settings n/a: not shown at this width
+NA chrome Close n/a: not shown at this width
+FAIL financing3 Close the sheet ~xbrace/pop/spinout/l hover false clear true click false job true
+FAIL work3 Navy Blue Shaker Kitchen wit ~t:P-01/drop/flash/tl hover false clear true click false job true
+FAIL work3 Open-Concept Kitchen Remodel ~t:P-04/drop/flash/tl hover false clear true click false job true
+FAIL work3 Emerald Shaker Kitchen Remod ~t:P-07/drop/flash/tl hover false clear true click false job true
+FAIL work3 White Shaker Kitchen Remodel ~t:P-12/drop/flash/tl hover false clear true click false job true
+FAIL work3 Two-Tone Kitchen Remodel wit ~t:P-13/drop/flash/tl hover false clear true click false job true
+FAIL work3 Gray Shaker Kitchen Remodel  ~t:P-14/drop/flash/tl hover false clear true click false job true
+FAIL work3 Two-Tone Navy & White Kitche ~t:P-15/drop/flash/tl hover false clear true click false job true
+FAIL work3 Chef-Grade Kitchen Remodel w ~t:P-09/drop/flash/tl hover false clear true click false job true
+FAIL work3 Two-Tone Kitchen Remodel wit ~t:P-16/drop/flash/tl hover false clear true click false job true
+FAIL work3 Two-Tone Kitchen Remodel wit ~t:P-17/drop/flash/tl hover false clear true click false job true
+FAIL work3 Black Marble Primary Bathroo ~t:P-02/drop/flash/tl hover false clear true click false job true
+FAIL work3 Polished-Concrete Primary Ba ~t:P-05/drop/flash/tl hover false clear true click false job true
+FAIL work3 Spa-Style Guest Bathroom Rem ~t:P-08/drop/flash/tl hover false clear true click false job true
+FAIL work3 Emerald Tile Walk-In Shower  ~t:P-18/drop/flash/tl hover false clear true click false job true
+FAIL work3 Contemporary Primary Bath Re ~t:P-10/drop/flash/tl hover false clear true click false job true
+FAIL work3 Champagne Bronze & Marble-Lo ~t:P-19/drop/flash/tl hover false clear true click false job true
+FAIL work3 Walk-In Shower Bathroom Remo ~t:P-20/drop/flash/tl hover false clear true click false job true
+FAIL work3 Floating Vanity Primary Bath ~t:P-21/drop/flash/tl hover false clear true click false job true
+FAIL work3 Sea-Glass Glazed Tile Bathro ~t:P-22/drop/flash/tl hover false clear true click false job true
+FAIL work3 Navy Vanity Bathroom Remodel ~t:P-23/drop/flash/tl hover false clear true click false job true
+FAIL work3 White Marble Guest Bath & Gr ~t:P-24/drop/flash/tl hover false clear true click false job true
+FAIL work3 Multi-Bathroom Renovation wi ~t:P-25/drop/flash/tl hover false clear true click false job true
+FAIL work3 Modern Farmhouse Whole-Home  ~t:P-03/drop/flash/tl hover false clear true click false job true
+FAIL work3 Whole-Home Bathroom Renovati ~t:P-26/drop/flash/tl hover false clear true click false job true
+FAIL work3 Modern Open-Concept Kitchen  ~t:P-11/drop/flash/tl hover false clear true click false job true
+FAIL chrome On ~play/unfold/ring/r hover false clear true click false job true
+FAIL chrome Book a consultation ~calendar/drop/tick/r hover false clear true click false job true
+FAIL chrome (754) 236‑0675 ~handset/hoist/ring/r hover false clear true click false job true
+FAIL hero:switch Version 1 ~t:1/drop/hop/t hover false clear true click false job true
+FAIL hero:switch Version 2 ~t:2/drop/hop/t hover false clear true click false job true
+FAIL hero:switch Version 3 ~t:3/drop/hop/t hover false clear true click false job true
+FAIL proof:switch Version 1 ~t:1/swing/hop/t hover false clear true click false job true
+FAIL proof:switch Version 2 ~t:2/swing/hop/t hover false clear true click false job true
+FAIL proof:switch Version 3 ~t:3/swing/hop/t hover false clear true click false job true
+FAIL services:switch Version 1 ~t:1/spin/hop/t hover false clear true click false job true
+FAIL services:switch Version 2 ~t:2/spin/hop/t hover false clear true click false job true
+FAIL services:switch Version 3 ~t:3/spin/hop/t hover false clear true click false job true
+FAIL ba:switch Version 1 ~t:1/jack/hop/t hover false clear true click false job true
+FAIL ba:switch Version 2 ~t:2/jack/hop/t hover false clear true click false job true
+FAIL ba:switch Version 3 ~t:3/jack/hop/t hover false clear true click false job true
+FAIL process:switch Version 1 ~t:1/hinge/hop/t hover false clear true click false job false
+FAIL process:switch Version 2 ~t:2/hinge/hop/t hover false clear true click false job true
+FAIL process:switch Version 3 ~t:3/hinge/hop/t hover false clear true click false job true
+FAIL financing:switch Version 1 ~t:1/roll/hop/t hover false clear true click false job false
+FAIL financing:switch Version 2 ~t:2/roll/hop/t hover false clear true click false job true
+FAIL financing:switch Version 3 ~t:3/roll/hop/t hover false clear true click false job true
+FAIL work:switch Version 1 ~t:1/lid/hop/t hover false clear true click false job false
+FAIL work:switch Version 2 ~t:2/lid/hop/t hover false clear true click false job true
+FAIL work:switch Version 3 ~t:3/lid/hop/t hover false clear true click false job true
+FAIL reviews:switch Version 1 ~t:1/zip/hop/t hover false clear true click false job false
+FAIL reviews:switch Version 2 ~t:2/zip/hop/t hover false clear true click false job true
+FAIL reviews:switch Version 3 ~t:3/zip/hop/t hover false clear true click false job true
+FAIL towns:switch Version 1 ~t:1/unfold/hop/t hover false clear true click false job false
+FAIL towns:switch Version 2 ~t:2/unfold/hop/t hover false clear true click false job true
+FAIL towns:switch Version 3 ~t:3/unfold/hop/t hover false clear true click false job true
+FAIL consult:switch Version 1 ~t:1/hoist/hop/t hover false clear true click false job false
+FAIL consult:switch Version 2 ~t:2/hoist/hop/t hover false clear true click false job true
+FAIL consult:switch Version 3 ~t:3/hoist/hop/t hover false clear true click false job false
+FAIL chrome Book a consultation ~flag/hoist/wobble/tr hover false clear true click false job true
+FAIL chrome (754) 236‑0675 ~cord/jack/ring/r hover false clear true click false job true
+FAIL chrome (754) 236‑0675 ~handset/slide/shake/r hover false clear true click false job true
+FAIL chrome Sales@elbazconstruction.com ~envelope/slide/hop/r hover false clear true click false job true
+FAIL chrome Español ~globe/slide/spinout/r hover false clear true click false job true
+FAIL chrome Instagram ~camera/peek/flash/r hover false clear true click false job true
+FAIL chrome Facebook ~speech/peek/hop/r hover false clear true click false job true
+FAIL chrome LinkedIn ~briefcase/peek/squash/r hover false clear true click false job true
+FAIL chrome YouTube ~play/peek/ring/r hover false clear true click false job true
+FAIL chrome Verify a Florida licence ~shield/rail/tick/r hover false clear true click false job true
+FAIL chrome Call ~handset/tilt/ring/t hover false clear true click false job true
+FAIL chrome Text ~speech/tilt/hop/t hover false clear true click false job true
+FAIL chrome Book ~calendar/tilt/tick/t hover false clear true click false job true
+SKIP work1 Show the featured twelve ~grid/pop/burst/r not on screen {"x":16,"y":-62.546875,"w":241.25,"h":52,"vis":true}
+SKIP chrome Skip to content ~ladder/drop/hop/r not on screen {"x":12,"y":-62.150001525878906,"w":151.703125,"h":46.34375,"vis":true}

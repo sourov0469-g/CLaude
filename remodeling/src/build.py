@@ -67,6 +67,10 @@ def main():
         css.append(maybe("css", "sections", sid + ".css"))
         js.append(maybe("js", "sections", sid + ".js"))
 
+    # weight (FULL §4): the delivered file drops CSS and HTML comments; the sources keep them, references live in TRACEABILITY.md
+    css = [re.sub(r"/\*.*?\*/", "", c, flags=re.S) for c in css]
+    sections_html = [re.sub(r"<!--(?!\{\{).*?-->", "", h, flags=re.S) for h in sections_html]
+    html = re.sub(r"<!--(?!\{\{).*?-->", "", html, flags=re.S)
     used = set()
     page_text = "\n".join(sections_html) + "\n".join(js)
     for m in re.finditer(r"data-(?:bg-)?img=\"([a-z0-9-]+)\"|EZ\.img\('([a-z0-9-]+)'\)", page_text):

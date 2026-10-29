@@ -7507,3 +7507,23 @@ Sections:
 - Reviews v1 **Codrops marquee along a path + [BANK] 169** — RESULT: **ADAPTED** — loop length solved to card spacing, cards upright (offset-rotate 0) · v2 **[BANK] Georgia CG + ⟦S0409⟧ comb lift** — RESULT: **KEPT** · v3 **⟦S0634⟧ spotlight + [BANK] 292** — RESULT: **ADAPTED** — the rotate was dropped and the base opacity is .55. All ten quotes are verbatim from FACTS.md (script-checked).
 - Towns v1 **[BANK] For Living + [BANK] KBF index** — RESULT: **KEPT** · v2 **⟦S0717⟧ rings 60/90/180s** — RESULT: **ADAPTED** — the names surface at a survey mark instead of riding the ring · v3 **[BANK] F3 + [BANK] 310 Madoka** — RESULT: **KEPT** — a road-sign answer.
 - Consult v1 **[BANK] R21 (no prices) + [BANK] 310 + [BANK] 348** — RESULT: **KEPT** · v2 **[BANK] Neil Kelly picker + [BANK] 255** — RESULT: **KEPT** · v3 **[BANK] JC Suzanne giant CTA** — RESULT: **KEPT**.
+
+### Elbaz Construction homepage — FULL BUILD (owner verdict applied, 29 Oct 2026)
+
+**Governing brief:** FULL BUILD PROMPT §1–§14. Facts locked: reviews aggregate-led only (4.8, 343, no quotes); licence verbatim from FACTS.md. Owner verdict: Hero V2 kept exactly + proof line; button hovers rebuilt per element. Traceability for every version: `TRACEABILITY.md` (repo root).
+
+Page systems:
+- **[BANK] 147 Shape Hover + [BANK] 151 elastic press + ⟦S0634⟧ click-burst / ripple + ⟦S0409⟧ success check + [BANK] 229 asymmetric in/out** — PICKED-FOR: Elbaz homepage, a reaction for every one of 259 controls — RESULT: **ADAPTED** — built as a rig (subject sprite × carrier × beat × anchor) so each control gets its own combination; 18 earlier reactions retired because they replayed a centrepiece, a divider or the cursor (a reaction must never repeat a trick the page already owns). Lesson for the next build: plan the trick register before the reactions, not after.
+- **⟦S1321⟧ cursor (hidden on coarse pointers) + [BANK] P10 + ⟦S1303⟧ + [BANK] 344** — PICKED-FOR: Elbaz homepage, "no plain or fixed cursor" — RESULT: **ADAPTED** — an exact animated pointer tip replaces the arrow on fine pointers (caret kept in text fields); companion variants hard hat / level / traffic cone; tape variant dropped (the tape measure belongs to Process V3).
+- **[BANK] Q40 direction-aware reveals** — RESULT: **ADAPTED** — kept the direction, dropped its 1.25s / 100px for the anatomy's F17 dosing (.3s, 24px). Lesson: Q40's onLeave hide must check the real rect, or CSS-sticky columns vanish while on screen.
+
+Rebuilt versions:
+- Proof v2 **[BANK] 279 Count Up, roll mode** — RESULT: **KEPT** — four odometer windows set in a steel plate; hover/focus/tap re-runs a meter. (Tape blades and stroke numerals removed: tricks owned elsewhere.)
+- Work v3 **[BANK] Q161 GSAP seamless marquee (horizontalLoop) + [BANK] 364 CSS-only marquee peek** — RESULT: **ADAPTED** — two photo belts at one velocity, opposite directions; scroll velocity boosts, hover slows to a quarter, a photo opens in the viewer, Hold button, off-screen pause; replaces a sticky deck that repeated Services v2.
+- Reviews v1 **[BANK] KBF "The Ledger" (F12 checkable proof) + Anatomy §2 F5** — RESULT: **ADAPTED** — a 343-stroke tally ledger that can literally be counted; gate hover names the range.
+- Reviews v2 **⟦S0687⟧ constellation / starfield FX + [BANK] Q41 renderer caps** — RESULT: **ADAPTED** — exactly 343 stars sampled into "4.8"; pointer repulsion with spring return; 40fps / DPR 1.25 / hidden-tab caps honoured.
+- Reviews v3 **⟦S1380⟧ calibration dial + ⟦S0928⟧ meter naming** — RESULT: **ADAPTED** — site-instrument register instead of the sci-fi glass; needle sweeps to 4.8 and springs back from any drag; the readout never shows another number.
+- Financing v1 **[BANK] 372 Glare Hover** — RESULT: **CORRECTED** — the spot check found a 4-stop soft-light sheen; replaced with the entry's 33-stop smootherstep streak profile (softness .6, opacity .5, −45°, screen) plus the rim glint.
+- Financing v3 closed state + **⟦S1383⟧ light paper technical** — RESULT: **ADAPTED** — the two kinds of money laid out on technical paper behind the orb, so the morph opens from a page that already reads.
+- Consult v2 — RESULT: **CHANGED** — the 255 morph between steps was a second morph on the page; replaced with a paper fold.
+- Dividers: scaffold → electrical conduit; trowel MotionPath follower → tile course; plumb bob → shingle course (each repeated a trick owned by a section or a field).
