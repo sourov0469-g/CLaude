@@ -1438,3 +1438,24 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .pt-level rect + rect { fill: #CFE8B5; stroke: #161616; stroke-width: .8; }
 .pt-level circle { fill: #fff; stroke: #161616; stroke-width: .6; }
 .pt-level { pointer-events: none; }
+
+/* ---------- v4 Work (PLAN §3 Work) ---------- */
+.cmp-line { width: 16px; margin-left: -8px; background: none; filter: drop-shadow(2px 0 3px rgba(0, 0, 0, .35)); }
+.cmp-trim, .cmp-nails { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ct-b { fill: #F3F2EE; }
+.ct-s { fill: #000; opacity: .12; }
+.ct-g { fill: none; stroke: #8F8A80; stroke-opacity: .35; stroke-width: .6; vector-effect: non-scaling-stroke; }
+.cmp-nails circle { fill: #B9B6AE; stroke: #47443F; stroke-width: .8; }
+.cmp-handle { overflow: visible; }
+.cmp-lev { position: absolute; left: 50%; top: 100%; width: 54px; height: 15px; margin: 8px 0 0 -27px; overflow: visible; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .3)); }
+.cl-b { fill: #F2C230; stroke: #161616; stroke-width: 1; }
+.cl-v { fill: #CFE8B5; stroke: #161616; stroke-width: .7; }
+.cl-m { stroke: #161616; stroke-width: .6; }
+.cl-bub { fill: #fff; stroke: #161616; stroke-width: .5; }
+.sp-b { -webkit-mask-image: linear-gradient(#000, #000); mask-image: linear-gradient(#000, #000); -webkit-mask-size: calc(var(--r) * 1.5) calc(var(--r) * 1.5); mask-size: calc(var(--r) * 1.5) calc(var(--r) * 1.5); -webkit-mask-position: calc(var(--x) - var(--r) * .75) calc(var(--y) - var(--r) * .75); mask-position: calc(var(--x) - var(--r) * .75) calc(var(--y) - var(--r) * .75); }
+.sp-fig.is-before .sp-b { -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-position: 0 0; mask-position: 0 0; }
+.sp-win { position: absolute; z-index: 2; left: var(--x); top: var(--y); width: calc(var(--r) * 1.5); height: calc(var(--r) * 1.5); transform: translate(-50%, -50%); opacity: var(--o, 0); pointer-events: none; overflow: visible; }
+.sw-f { fill: none; stroke: #FBFAF7; stroke-width: 4; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)); }
+.sw-m { stroke: #FBFAF7; stroke-width: 2.5; }
+.sw-gl { stroke: #fff; stroke-opacity: .55; stroke-width: 1.4; stroke-linecap: round; }
+.sp-fig.is-before .sp-win { display: none; }

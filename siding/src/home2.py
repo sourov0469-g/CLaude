@@ -483,8 +483,8 @@ def work1():
   <div class="w1-head"><h2 class="h2x" data-split>Before, after, and the price</h2><p class="w1-sub">Six of the 177 before-and-after pairs the firm publishes, each with its own price.</p></div>
   <figure class="cmp" data-cmp data-cur="drag" style="--split:50%">
     {pimg(p, 'a', 'cmp-a')}{pimg(p, 'b', 'cmp-b')}
-    <span class="cmp-line" aria-hidden="true"></span>
-    <button class="cmp-handle" type="button" role="slider" aria-label="Before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half before, half after"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></button>
+    <span class="cmp-line" aria-hidden="true"><svg class="cmp-trim" viewBox="0 0 16 100" preserveAspectRatio="none" focusable="false"><rect class="ct-b" x="1" y="0" width="14" height="100"/><rect class="ct-s" x="11.5" y="0" width="3.5" height="100"/><path class="ct-g" d="M5 0C4 30 7 60 5 100M9 0C10 40 8 70 9.5 100"/></svg><svg class="cmp-nails" focusable="false">{''.join(f'<circle cx="8" cy="{y}%" r="2.2"/>' for y in (8, 24, 40, 60, 76, 92))}</svg></span>
+    <button class="cmp-handle" type="button" role="slider" aria-label="Before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half before, half after"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg><svg class="cmp-lev" viewBox="0 0 44 12" aria-hidden="true" focusable="false"><rect class="cl-b" x="1" y="1" width="42" height="10" rx="3"/><rect class="cl-v" x="14" y="2.5" width="16" height="7" rx="3.5"/><path class="cl-m" d="M19 2.5V9.5M25 2.5V9.5"/><circle class="cl-bub" cx="22" cy="6" r="2.4"/></svg></button>
     <span class="ptag ptag-b" aria-hidden="true">Before</span><span class="ptag ptag-a" aria-hidden="true">After</span>
     <i class="pane pane-tl"></i><i class="pane pane-tr"></i><i class="pane pane-bl"></i><i class="pane pane-br"></i>
   </figure>
@@ -519,7 +519,7 @@ def work2():
 
 def work3():
     tiles = ''.join(f'''<li class="sp sp-{k}">
-      <figure class="sp-fig" data-spot data-cur="view" data-cur-label="Before">{pimg(q, 'a', 'sp-a')}{pimg(q, 'b', 'sp-b')}
+      <figure class="sp-fig" data-spot data-cur="view" data-cur-label="Before">{pimg(q, 'a', 'sp-a')}{pimg(q, 'b', 'sp-b')}<svg class="sp-win" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><rect class="sw-f" x="2" y="2" width="96" height="96"/><path class="sw-m" d="M50 2V98M2 50H98"/><path class="sw-gl" d="M12 40L40 12M18 46L46 18"/></svg>
         <button class="sp-toggle btn btn-glass btn-sm" type="button" aria-pressed="false">Show before</button></figure>
       <p class="sp-cap"><b>{e(q['place'])}</b><span>{e(q['bl'])} {q['band']}, {e(q['when'])}</span></p>
     </li>''' for k, q in enumerate(PAIRS6))

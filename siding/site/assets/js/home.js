@@ -515,6 +515,9 @@
     const fig = $('.cmp', r), A = $('.cmp-a', fig), B = $('.cmp-b', fig), h = $('.cmp-handle', fig), info = $('.cmp-info', r);
     const P = JSON.parse($('.pairs-data', r).textContent);
     const panes = $$('.pane', fig);
+    // v4: the level on the handle reads the drag; its bubble runs against the motion and settles back (back.out, S0544)
+    const bub = $('.cl-bub', fig), lev = $('.cmp-lev', fig);
+    const tilt = v => { if (!motionOK() || !bub) return; const k = clamp(v / 1600, -1, 1); G.to(bub, { x: -k * 7, duration: v ? 0.18 : 0.6, ease: v ? 'power2.out' : 'back.out(1.6)', overwrite: true }); G.to(lev, { rotation: k * 6, duration: v ? 0.18 : 0.6, ease: v ? 'power2.out' : 'back.out(1.6)', overwrite: true }); };
     const st = { v: 50 };
     const set = v => { st.v = clamp(v, 0, 100); fig.style.setProperty('--split', st.v + '%'); h.setAttribute('aria-valuenow', Math.round(st.v)); h.setAttribute('aria-valuetext', `${Math.round(st.v)}% of the before photo showing`); };
     const toX = e => { const rc = fig.getBoundingClientRect(); return (e.clientX - rc.left) / rc.width * 100; };
@@ -522,8 +525,9 @@
     hdrag(fig, b, {
       handle: '.cmp-handle',
       onStart: e => { G && G.killTweensOf(st); lx = e.clientX; lt = performance.now(); vx = 0; },
-      onMove: e => { const t = performance.now(), dt = Math.max(1, t - lt); vx = (e.clientX - lx) / dt * 1000; lx = e.clientX; lt = t; set(toX(e)); },
+      onMove: e => { const t = performance.now(), dt = Math.max(1, t - lt); vx = (e.clientX - lx) / dt * 1000; lx = e.clientX; lt = t; set(toX(e)); tilt(vx); },
       onEnd: () => {
+        tilt(0);
         const w = fig.getBoundingClientRect().width, edge = 50 / w * 100;
         let to = null;
         if (Math.abs(vx) > 300) to = vx > 0 ? 100 : 0;
@@ -605,7 +609,7 @@
       const loop = () => {
         const k1 = motionOK() ? 0.1 : 1, k2 = motionOK() ? 0.14 : 1;
         x += (tx - x) * k1; y += (ty - y) * k1; rr += (tr - rr) * k2;
-        fig.style.setProperty('--x', x.toFixed(1) + 'px'); fig.style.setProperty('--y', y.toFixed(1) + 'px'); fig.style.setProperty('--r', rr.toFixed(1) + 'px');
+        fig.style.setProperty('--x', x.toFixed(1) + 'px'); fig.style.setProperty('--y', y.toFixed(1) + 'px'); fig.style.setProperty('--r', rr.toFixed(1) + 'px'); fig.style.setProperty('--o', Math.min(1, rr / R()).toFixed(3));
         raf = (Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1 || Math.abs(tr - rr) > 0.1) ? requestAnimationFrame(loop) : 0;
       };
       const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
