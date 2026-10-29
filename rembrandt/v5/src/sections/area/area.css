@@ -49,7 +49,7 @@
 .tw2-plan .rf{fill:none;stroke:var(--ink);stroke-width:1.2;opacity:.07;vector-effect:non-scaling-stroke}
 .tw2-head{position:relative;display:grid;gap:14px;max-width:1280px;margin:0 auto clamp(32px,5vh,56px);padding:0 var(--gutter)}
 .tw2-sort{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.tw2-sb{min-height:44px;padding:0 18px;border:2px solid var(--ink);border-radius:999px;background:#fff;font-weight:700;cursor:pointer;transition:background-color .18s var(--ease-x)}
+.tw2-sb{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:2px solid var(--ink);border-radius:999px;background:#fff;font-weight:700;cursor:pointer;transition:background-color .18s var(--ease-x)}
 .tw2-sb[aria-pressed="true"]{background:var(--ink);color:#fff}
 @media (hover:hover){.tw2-sb[aria-pressed="false"]:hover{background:var(--sky)}}
 .tw2-sb.is-press{animation:tw-pop .3s var(--ease-spring)}
@@ -114,3 +114,10 @@
 .tw3-tape-l{font:700 14px/1 "Epilogue",sans-serif;fill:var(--on-blue-muted)}
 @media (max-width:900px){.tw3-grid{grid-template-columns:1fr}.tw3-dial{grid-row:1}}
 .tw3 .tw-src{color:var(--on-blue-muted)}
+/* sort buttons: a shingle-course icon each (oldest: equal courses with keyways; nearest: courses growing in length);
+   hover staggers the courses like laid shingles, press re-lays them top to bottom */
+.tw2-sb-i{width:20px;height:16px;flex:none;overflow:visible}
+.tw2-sb-i path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;transition:translate .2s var(--ease-x) calc(var(--i) * 30ms)}
+@media (hover:hover){.tw2-sb:hover .tw2-sb-i path:nth-child(odd){translate:2px 0}.tw2-sb:hover .tw2-sb-i path:nth-child(2){translate:-2px 0}}
+.tw2-sb.is-press .tw2-sb-i path{animation:tw-relay .35s var(--ease-x) calc(var(--i) * 50ms) both}
+@keyframes tw-relay{0%{translate:0 -5px;opacity:0}100%{translate:0 0;opacity:1}}

@@ -69,6 +69,10 @@
 .cl2-tog{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid #fff;border-radius:999px;background:none;color:#fff;font-weight:700;cursor:pointer}
 .cl2-tog-i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .cl2-tog .i-x{display:none}
+/* hover redraws the toggle's icon stroke by stroke (house outline, or the crossed rafters when open); press morphs the card */
+.cl2-tog-i path{stroke-dasharray:100;stroke-dashoffset:0}
+@media (hover:hover){.cl2-tog:hover .cl2-tog-i path{animation:cl-redraw .4s var(--ease-x)}}
+@keyframes cl-redraw{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}
 .cl2.is-open .cl2-tog .i-x{display:block}.cl2.is-open .cl2-tog .i-open{display:none}
 @media (hover:hover){.cl2-tog:hover{background:oklch(1 0 0 / .12)}}
 .cl2-tog.is-press{animation:cl-pop .3s var(--ease-spring)}
