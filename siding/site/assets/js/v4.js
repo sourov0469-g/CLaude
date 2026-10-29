@@ -32,7 +32,7 @@
   const subs = new Set();
   let raf = 0, last = 0, hiddenNow = d.hidden;
   function frame(t) {
-    raf = 0;
+    raf = 0; API.frames = (API.frames || 0) + 1;
     const dt = Math.min(1 / 30, last ? (t - last) / 1000 : 1 / 60);
     last = t;
     let more = false;
@@ -226,7 +226,7 @@
       every(tic, 11900, 1300);
       every(roll, 17100, 1500);
     }
-    function clear() { timers.forEach(clearTimeout); timers = []; }
+    function clear() { timers.forEach(clearTimeout); timers = []; clearTimeout(napT); }
 
     const sel = {
       drag: '[role="slider"], .cmp-handle, [data-cur="drag"], .tape-strip',
@@ -241,10 +241,12 @@
       for (const k of ['drag', 'card', 'button', 'link', 'image', 'heading']) { const x = t.closest(sel[k]); if (x && !x.closest('.pal-sw, .picks')) return [x, k]; }
       return [null, 'idle'];
     }
-    let lastSec = null;
+    let lastSec = null, napT = 0;
+    const nap = () => { if (on && S.shown && S.state !== 'drag' && !S.sleep) { S.sleep = true; pose('sleep'); } else if (on) napT = setTimeout(nap, 3000); };
     function move(e) {
       if (!on) return;
-      if (S.sleep) { S.sleep = false; pose('idle'); blink(); }
+      clearTimeout(napT); napT = setTimeout(nap, 9000);   // asleep after 9 s without a move: shades down
+      if (S.sleep) { S.sleep = false; pose(S.state, S.tr); blink(); }
       const [tg, st] = classify(e.target);
       if (tg !== S.target || st !== S.state) {
         S.target = tg; S.state = st;
@@ -306,8 +308,6 @@
         g._x += (ex * r - g._x) * a * 1.4; g._y += (ey * r * 0.8 - g._y) * a * 1.4;
         g.setAttribute('transform', `translate(${g._x.toFixed(2)} ${g._y.toFixed(2)})`);
       });
-      // sleep after 9 s without a move: shades down, the loop stops
-      if (now - P.moved > 9000 && !S.sleep && S.state === 'idle') { S.sleep = true; pose('sleep'); }
       const busy = Math.abs(tx - S.x) > 0.05 || Math.abs(ty - S.y) > 0.05 || Math.abs(S.lean) > 0.02 || S.state === 'heading' || S.look || S.rollA != null;
       return busy || (now - P.moved < 400);
     }
@@ -375,14 +375,15 @@
     F.onPointer = () => { F.want = true; };
     F.tick = (dt, now) => {
       if (!F.vis || !F.built) return false;
-      if (now - F.last < 33) return true;          // ambient work capped at 30 fps
+      if (now - F.last < 33) return F.busy;        // ambient work capped at 30 fps; a skipped frame keeps the last verdict
       const fdt = Math.min(1 / 30, (now - (F.last || now - 33)) / 1000);
       F.last = now;
       F.scroll();
       const r = F.rect;
       const inside = mqFine.matches && P.in && P.x >= r.left && P.x <= r.right && P.y >= r.top && P.y <= r.bottom;
       F.lp.x = inside ? P.x - r.left : -999; F.lp.y = inside ? P.y - r.top : -999;
-      return impl.tick(F, fdt, now, inside) !== false;
+      F.busy = impl.tick(F, fdt, now, inside) !== false;
+      return F.busy;
     };
     const ro = window.ResizeObserver ? new ResizeObserver(() => { size(); wake(); }) : null;
     if (ro) ro.observe(vr);
@@ -501,7 +502,7 @@
         F.lens.setAttribute('cx', F.lx.toFixed(1)); F.lens.setAttribute('cy', (F.ly - ty).toFixed(1)); F.lens.setAttribute('r', F.lr.toFixed(1));
         F.bp.setAttribute('transform', `translate(0 ${ty.toFixed(1)})`);
         if (!inside && F.lr < 0.5) { F.lx = -999; }
-        return inside || F.lr > 0.5;
+        return (inside && (Math.abs(F.lp.x - F.lx) > 0.3 || Math.abs(F.lp.y - F.ly) > 0.3)) || Math.abs(tr - F.lr) > 0.5;
       }
     },
     /* Work: the nail schedule on 16 in stud lines; heads lean toward the cursor (P79 field, Q156 roam, lerp 0.07) */
@@ -536,7 +537,7 @@
             N.n.classList.toggle('is-near', Math.hypot(N.ox, N.oy) > 4);
           }
         }
-        return busy || inside || (F.p > 0 && F.p < 1);
+        return busy;
       }
     },
     /* Built: an X-ray band (7 rem) shows the framing behind the cream (specia1ne reveal slit, lerp 0.12, settles at 680 ms) */
@@ -563,7 +564,7 @@
         const tw = inside ? 112 : (mqFine.matches ? 56 : 112);
         F.bw += (tw - F.bw) * a;
         this.place(F, F.bx, F.bw);
-        if (inside) F.idle = now;
+        if (inside && (F.lp.x !== F.lastX || F.lp.y !== F.lastY)) { F.idle = now; F.lastX = F.lp.x; F.lastY = F.lp.y; }   // settles 680 ms after the pointer stops
         return now - (F.idle || 0) < 680 || Math.abs(target - F.bx) > 0.3 || Math.abs(tw - F.bw) > 0.3;
       }
     },
@@ -600,7 +601,7 @@
           if (!mqFine.matches) t = Math.abs(C.y / F.h - band) < 0.06 ? 1 : 0;   // touch: a scroll band flips one row
           if (Math.abs(t - C.k) > 0.002) { C.k += (t - C.k) * a; this.set(C, C.k); busy = true; }
         }
-        return busy || inside;
+        return busy;
       }
     },
     /* Near: roof plans on lot lines; lots near the cursor light and draw their ridge (S0425 emblem answers the pointer) */
@@ -639,7 +640,7 @@
             L.ridge.style.strokeDashoffset = (1 - L.k).toFixed(3);
           }
         }
-        return busy || inside || (F.p > 0 && F.p < 1);
+        return busy;
       }
     },
     /* Reviews: louvred shutters at both edges; slats open near the cursor and progressively with scroll (Q122 hinge) */
@@ -666,7 +667,7 @@
           if (inside) { const dy = Math.abs(F.lp.y - S.y), near = S.side ? F.w - F.lp.x : F.lp.x; t = Math.max(t, dy < 120 ? smooth(1 - dy / 120) * clamp(1 - near / (F.w * 0.5), 0.25, 1) : 0); }
           if (Math.abs(t - S.k) > 0.003) { S.k += (t - S.k) * a; this.set(S, S.k); busy = true; }
         }
-        return busy || inside;
+        return busy;
       }
     },
     /* Money: a chalk snap line that plucks when the cursor crosses it (Q163 spring chain) + tape ticks pulled by the scroll */
@@ -709,7 +710,7 @@
         }
         for (let i = 1; i < F.n - 1; i++) if (i !== F.held) F.off[i] += F.vel[i];
         this.write(F);
-        return e > 0.05 || inside || (F.p > 0 && F.p < 1);
+        return e > 0.05 || F.held != null;
       }
     },
     /* Book: a six-panel door, large and faint, with a porch-light pool that trails the cursor (S0267, lag 0.3-0.5 s) */
@@ -733,7 +734,7 @@
         F.px += (tx - F.px) * a; F.py += (ty - F.py) * a;
         F.pool.setAttribute('cx', F.px.toFixed(1)); F.pool.setAttribute('cy', F.py.toFixed(1));
         F.door.style.transform = `perspective(900px) rotateY(${(clamp(F.p * 1.4 - 0.2, 0, 1) * 8).toFixed(2)}deg)`;
-        return Math.abs(tx - F.px) > 0.3 || Math.abs(ty - F.py) > 0.3 || inside || (F.p > 0 && F.p < 1);
+        return Math.abs(tx - F.px) > 0.3 || Math.abs(ty - F.py) > 0.3;
       }
     }
   };
@@ -905,7 +906,7 @@
     gable: {
       make: (w) => `<path class="rx-l rx-gab" d="M0 8 L${w / 2} 8 L${w} 8" data-to="M0 14 L${w / 2} 2 L${w} 14"/><path class="rx-cap" d="M${w / 2 - 9} 2H${w / 2 + 9}" pathLength="1"/>`,
       over: (s) => { const p = s.querySelector('.rx-gab'); p._from = p._from || p.getAttribute('d'); G.to(p, { attr: { d: p.dataset.to }, opacity: 1, duration: 0.3, ease: 'back.out(1.4)', overwrite: 'auto' }); },
-      out: (s) => { const p = s.querySelector('.rx-gab'); G.to(p, { attr: { d: p._from }, opacity: 0, duration: 0.25, ease: 'power2.in', overwrite: 'auto' }); },
+      out: (s) => { const p = s.querySelector('.rx-gab'); if (!p._from) return; G.to(p, { attr: { d: p._from }, opacity: 0, duration: 0.25, ease: 'power2.in', overwrite: 'auto' }); },
       click: (s) => G.timeline().fromTo(s.querySelector('.rx-cap'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.2, ease: 'power2.out' }).fromTo(s.querySelector('.rx-gab'), { y: 0 }, { y: -5, duration: 0.14, ease: 'power2.out', yoyo: true, repeat: 1 }, 0).to(s.querySelector('.rx-cap'), { strokeDashoffset: 1, duration: 0.3, delay: 0.3 })
     },
     tape: {

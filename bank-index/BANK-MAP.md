@@ -7455,3 +7455,22 @@ Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> —
 - **⟦S0407⟧ + ⟦S0468⟧ drawing-to-photo intro** — PICKED-FOR: Hero V2 (earlier build) — RESULT: **SCRAPPED** — a 3.3 s scene animation in the hero (F17) and the same scan trick as Work V2.
 - **⟦S0222⟧ isometric badge plane** — PICKED-FOR: Proof V2 (earlier build) — RESULT: **SCRAPPED** — rotated text-bearing badges (builder brief §6).
 - **Builder brief §2–6 (F17 motion ceiling, F18 cost lab, §6 standards)** — PICKED-FOR: the whole page — RESULT: **APPLIED** — heading entrances re-cut to the parameter library, tours and auto-advance removed, system cursor kept visible, AggregateRating JSON-LD added, four libraries dropped, packed imagery to AVIF.
+
+## v4 pass (29 Oct 2026): strict standard + SVG identity addendum + companion variants (see siding/AUDIT-V4.md)
+- **[BANK] Cursor: small follower, system cursor kept usable** + **P10 attribute-state follower** + **⟦S0489⟧ / ⟦S0546⟧ / ⟦S0340⟧ / ⟦S0385⟧** — PICKED-FOR: page-wide cursor companion, three variants (Sash, Gable, Chip) behind a switcher — RESULT: **NEW BUILD** — idle blink/glance/tic/eye-roll on coprime periods, per-target reactions, sleep after 9 s, steps aside from small targets; off on touch, reduced motion and Motion off; loop sleeps when settled.
+- **Q138 wave cube grid** (as SVG lap lines) — PICKED-FOR: Hero field — RESULT: **ADAPTED** — wavefronts from the cursor path, ghost waves after 3 s idle, 30 fps cap.
+- **372 Glare Hover** — PICKED-FOR: Proof field (window grid sheen), Hero 3 glint, Services 1 window glints, reaction kind "sash" click — RESULT: **ADAPTED**.
+- **⟦S1335⟧ wireframe scan reveal** — PICKED-FOR: Services field — RESULT: **ADAPTED** — dashed elevations turn solid in a radial lens around the cursor.
+- **P79 grid field** + **Q156 roam** + **S18 hairlines** — PICKED-FOR: Work field (nail schedule on 16 in studs) — RESULT: **ADAPTED**.
+- **specia1ne reveal slit** — PICKED-FOR: Built field (X-ray band showing the framing) — RESULT: **ADAPTED** — lerp 0.12, settles 680 ms after the pointer stops; scroll-driven on touch.
+- **P70 variable proximity** — PICKED-FOR: Colour field (29 published colours as chips that flip) and heading lap underlines — RESULT: **ADAPTED**.
+- **⟦S0425⟧ hairline emblem** — PICKED-FOR: Near field (roof plans on lots, ridges draw near the cursor) — RESULT: **ADAPTED** — resting opacity halved after a clutter check.
+- **Q122 peel hinge** — PICKED-FOR: Reviews field (louvred shutters) and reaction kind "shingle" — RESULT: **ADAPTED**.
+- **Q163 Trionn pluck** — PICKED-FOR: Money field (chalk snap line), reaction kind "chalk", Book 3 chalk blanks — RESULT: **ADAPTED**.
+- **⟦S0267⟧ light pool** — PICKED-FOR: Book field (porch light over a six-panel door) — RESULT: **ADAPTED**.
+- **R8 / S15 / S18 / R39 / Q146 analogue (roof geometry)** — PICKED-FOR: ten trade dividers (lap edge, gable, three-tab, board and batten, drips, transom, gutter with bead, fish-scale, dentils, skyline) — RESULT: **NEW BUILD**.
+- **Q78 Kukuri, Q147 gable paths, P14 stamp, #348 circular progress, Shazam morph** — PICKED-FOR: reaction kit (13 kinds, own hover + different click per element) — RESULT: **NEW BUILD**.
+- **[203] motion toggle** + **⟦S0658⟧** — PICKED-FOR: Motion toggle in header, phone menu and footer, one `data-motion` flag — RESULT: **NEW BUILD**.
+- **Q165 Depth Text** — PICKED-FOR: Proof 1 count signs — RESULT: **ADAPTED** — 12 text-shadow layers turning from the pointer (synced with the count-up), still pose otherwise.
+- **125 square lens** — PICKED-FOR: Work 3 lens — RESULT: **ADAPTED** — square window pane with muntins replaces the round lens.
+- Version-specific trade SVGs added on 25 of 30 versions (list in AUDIT-V4); Work 2, Built 1, Built 3 and Near 3 kept their own drawings; Services 1 gained part reactions.
