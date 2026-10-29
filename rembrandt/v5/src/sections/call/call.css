@@ -1,0 +1,115 @@
+/* CALL: the closing chapter ends on the number (S0006 #17, S1303 C2 + Ft6). v1 Number (type as the call, it rings),
+ * v2 Before you call (a converter that writes what to tell Rachel), v3 Sign-off (counter-running marquees you can throw).
+ * Footer inside every version: logo on a white pill, one copyright line, the phone link (no sitemap columns, S1303 Ft3 ban). */
+.cv{position:relative;overflow:clip;isolation:isolate}
+.cv-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px}
+.cv-hours,.cv-now{font-size:var(--t-lead);font-weight:600;line-height:1.35;text-wrap:balance}
+.cv-now{display:inline-flex;align-items:center;gap:10px}
+.cv-now[hidden]{display:none}
+/* the one real-time state on the page (G5 #22): open shows a filled sun dot, closed a ring, so shape carries it too (1.4.1) */
+.cv-dot{width:.62em;height:.62em;flex:none;border-radius:50%;border:2px solid currentColor;opacity:.8}
+.cv-now.is-open .cv-dot{background:var(--sun);border-color:var(--sun);opacity:1}
+
+/* footer: a hard colour cut (PLAN one separation mechanism); the mobile action bar is fixed over the last 84px */
+.cv-foot{position:relative;background:var(--ink);color:#fff;padding:28px var(--gutter) calc(36px + var(--mbar))}
+.cv-foot p{color:var(--on-blue-muted)}
+.cv-ftel{display:inline-flex;align-items:center;min-height:44px;font-weight:700;font-size:var(--t-body);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);transition:text-decoration-color var(--dur-quick) var(--ease-out)}
+@media (hover:hover){.cv-ftel:hover{text-decoration-color:currentColor}}
+@media (max-width:640px){.cv-foot{flex-direction:column;align-items:flex-start;gap:12px}}
+
+/* ---------- v1 Number: a blue field, the number set as one huge tel link that fits the measure, rings radiating from it */
+.cv1{min-height:max(760px,100svh);display:grid;grid-template-rows:1fr auto;background:var(--blue);color:#fff}
+.cv1-rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cv1-body{position:relative;display:grid;align-content:center;gap:clamp(28px,5vh,56px);padding:clamp(7.5rem,5rem + 6vw,10rem) var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
+.cv1-h{font-size:clamp(1.75rem,1.1rem + 2.2vw,3.25rem);font-weight:800;line-height:1.04;letter-spacing:-.025em}
+.cv1-fit{container-type:inline-size;min-width:0}
+/* the measure is filled exactly, by the ink: the split line is 6.933em wide at this tracking (measured in Chromium); the
+ * "(" carries 0.078em of side bearing (pulled back so its ink aligns with the heading, S0075 optical alignment) and the last
+ * "7" overhangs its box by 0.036em, so the ink is 6.891em and 100cqi / 6.891 fills the measure. Phones: "746-7377" sets it,
+ * 4.228em with a 0.031em lead bearing, ink 4.233em. */
+.cv1-num{display:inline-block;position:relative;font-size:13vw;font-size:calc(100cqi / 6.891);font-weight:800;line-height:1;letter-spacing:-.045em;white-space:nowrap;color:#fff;text-decoration:none;border-radius:.06em;-webkit-tap-highlight-color:transparent}
+.cv1-num:focus-visible{outline-offset:.08em}
+.cv1-g{display:inline-block;white-space:nowrap}
+.cv1-c,.cv1-f{display:inline-block}
+.cv1-c{transform-origin:50% 60%}
+.cv1-f{transform-origin:50% 100%}
+.cv1-lead{margin-left:-.078em}
+.cv1-g+.cv1-g .cv1-lead{margin-left:0}
+.cv1-bar{display:block;height:.055em;margin:.06em -.036em 0 0;background:var(--sun);border-radius:99px;transform-origin:0 50%}
+@media (max-width:639px){ /* phones: break after the area code, never inside a group; "746-7377" sets the size */
+  .cv1-num{white-space:normal;font-size:calc(100cqi / 4.233)}
+  .cv1-g{display:block}
+  .cv1-g+.cv1-g .cv1-lead{margin-left:-.031em}
+  .cv1-body{align-content:end;padding-top:clamp(7rem,30vw,9rem)}
+}
+
+/* ---------- v2 Before you call: four big choices write the line to say; the field answers the chosen state */
+.cv2{display:grid;grid-template-rows:1fr auto;min-height:max(760px,100svh);background:var(--ink-2);color:#fff;transition:background-color .3s var(--ease-out)}
+.cv2.is-set{background:var(--blue)}
+.cv2-word{position:absolute;right:calc(var(--gutter) * -0.5);bottom:clamp(64px,12vh,140px);margin:0;font-size:clamp(9rem,30vw,30rem);font-weight:800;line-height:.8;letter-spacing:-.06em;white-space:nowrap;color:rgb(255 255 255 / .07);pointer-events:none;user-select:none}
+.cv2-w{display:inline-block}
+.cv2-body{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,96px);align-items:end;padding:clamp(7.5rem,5rem + 6vw,10rem) var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
+.cv2-ask{display:grid;gap:clamp(28px,4vh,44px)}
+.cv2-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.025em}
+.cv2-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cv2-opt{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:clamp(64px,8.5vh,84px);padding:0 14px 0 28px;border:2px solid rgb(255 255 255 / .55);border-radius:999px;background:transparent;color:#fff;font-size:clamp(1.125rem,.9rem + .8vw,1.5rem);font-weight:700;letter-spacing:-.01em;text-align:left;cursor:pointer;touch-action:manipulation;
+  transition:background-color .2s var(--ease-out),color .2s var(--ease-out),border-color .2s var(--ease-out),scale var(--dur-press) var(--ease-out)}
+.cv2-opt:active{scale:.96}
+@media (hover:hover){.cv2-opt:hover{background:rgb(255 255 255 / .1);border-color:#fff}}
+.cv2-opt[aria-pressed=true]{background:#fff;border-color:#fff;color:var(--ink)}
+.cv2-opt:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:999px}
+/* the state indicator: an empty ring that fills with a tick (S0075 icon swap: scale .25 to 1, opacity, blur 4px to 0) */
+.cv2-tick{position:relative;display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:50%;border:2px solid currentColor;opacity:.7;transition:background-color .2s var(--ease-out),opacity .2s var(--ease-out),border-color .2s var(--ease-out)}
+.cv2-tick svg{width:22px;height:22px;opacity:0;scale:.25;filter:blur(4px);transition:opacity .2s var(--ease-icon),scale .2s var(--ease-icon),filter .2s var(--ease-icon)}
+.cv2-opt[aria-pressed=true] .cv2-tick{opacity:1;background:var(--ink);border-color:var(--ink);color:#fff}
+.cv2-opt[aria-pressed=true] .cv2-tick svg{opacity:1;scale:1;filter:blur(0)}
+.cv2-act{display:grid;gap:24px;justify-items:start;max-width:520px}
+.cv2-say{font-size:clamp(1.375rem,1rem + 1.2vw,2rem);font-weight:600;line-height:1.25;letter-spacing:-.015em;text-wrap:pretty;min-height:3.75em}
+.cv2-say-a,.cv2-say-b{display:block}
+.cv2-say b{font-weight:800;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:.1em;text-underline-offset:.16em}
+.cv2 .cv-meta{gap:6px 24px}
+.cv2 .cv-hours,.cv2 .cv-now{font-size:var(--t-body)}
+@media (max-width:899px){
+  .cv2-body{grid-template-columns:minmax(0,1fr);align-items:start;gap:36px;padding-top:clamp(7rem,24vw,8.5rem)}
+  .cv2-act{max-width:none}
+  .cv2-say{min-height:0}
+}
+@media (max-width:640px){
+  .cv2-opts{gap:10px}
+  .cv2-opt{min-height:60px;padding:0 10px 0 18px;font-size:1.0625rem}
+  .cv2-tick{width:32px;height:32px}
+  .cv2-tick svg{width:18px;height:18px}
+  .cv2-word{bottom:auto;top:clamp(96px,26vw,140px);right:-4vw;font-size:46vw}
+}
+
+/* ---------- v3 Sign-off: two giant counter-running lines (S1303 Ft6), thrown by hand or by the scroll; one real link in flow */
+.cv3{display:grid;grid-template-rows:auto auto auto 1fr auto;min-height:max(760px,100svh);background:var(--ink);color:#fff}
+.cv3-top{padding:clamp(7.5rem,5rem + 6vw,9.5rem) var(--gutter) 0}
+.cv3-h{font-size:clamp(1.75rem,1.1rem + 2.2vw,3.25rem);font-weight:800;line-height:1.04;letter-spacing:-.025em}
+.cv3-rows{display:grid;gap:clamp(4px,1.2vh,16px);padding:clamp(24px,5vh,56px) 0 clamp(28px,5vh,56px);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.cv3-row{white-space:nowrap}
+.cv3-track{display:flex;width:max-content;will-change:transform}
+.cv3-u{display:flex;align-items:center;flex:none}
+.cv3-t{display:block}
+.cv3-dot{display:block;width:.2em;height:.2em;margin:0 .42em;flex:none;border-radius:50%;background:var(--sun)}
+.cv3-ra{font-size:clamp(5.5rem,16.5vw,17rem);font-weight:800;line-height:1;letter-spacing:-.045em}
+.cv3-rb{font-size:clamp(3rem,8.2vw,8.5rem);font-weight:300;line-height:1.08;letter-spacing:-.03em;color:var(--on-blue-muted)}
+.cv3-rb .cv3-dot{width:.24em;height:.24em}
+.cv3-dock{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding:0 var(--gutter) clamp(4rem,2.5rem + 5vw,7rem)}
+.cv3-dock .cv-meta{gap:6px 28px}
+.cv3-dock .cv-hours,.cv3-dock .cv-now{font-size:var(--t-body)}
+/* WCAG 2.2.2 pause control, visible whenever the lines move (G4 #16) */
+.cv3-pause{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-left:auto;padding:0 18px 0 14px;border:2px solid rgb(255 255 255 / .55);border-radius:999px;background:transparent;color:#fff;font-weight:700;cursor:pointer;touch-action:manipulation;transition:background-color var(--dur-quick) var(--ease-out),border-color var(--dur-quick) var(--ease-out),scale var(--dur-press) var(--ease-out)}
+.cv3-pause[hidden]{display:none}
+.cv3-pause:active{scale:.96}
+@media (hover:hover){.cv3-pause:hover{background:rgb(255 255 255 / .1);border-color:#fff}}
+.cv3-ico{display:grid;width:20px;height:20px}
+.cv3-ico svg{grid-area:1/1;width:20px;height:20px;transition:opacity .3s var(--ease-icon),scale .3s var(--ease-icon),filter .3s var(--ease-icon)}
+.cv3-i-play,.cv3.is-paused .cv3-i-pause{opacity:0;scale:.25;filter:blur(4px)}
+.cv3.is-paused .cv3-i-play{opacity:1;scale:1;filter:blur(0)}
+@media (max-width:640px){
+  .cv3-ra{font-size:27vw}
+  .cv3-rb{font-size:13vw}
+  .cv3-dock{flex-direction:column;align-items:flex-start}
+  .cv3-pause{margin-left:0}
+}

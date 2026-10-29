@@ -1,0 +1,66 @@
+/* HOW: the ink chapter (PLAN tokens: --ink is the how-section field); its background reacts as weather.
+ * v1 Shelter (rain in three depth layers on one canvas; the cursor is a roof that sheds it), v2 Re-roof (pinned: a roofline
+ * traced from the real ranch draws itself, then the real roof is laid course by course), v3 Stack (sticky cards) */
+.hw{position:relative;background:var(--ink);color:#fff}
+
+/* v1 Shelter: the type is the midground; far and mid rain pass behind the letters, 2 or 3 near drops cross in front */
+.hw1{min-height:max(720px,100svh);display:flex;align-items:flex-end;overflow:clip}
+.hw1-field{position:absolute;inset:0;z-index:1}
+.hw1-cv{position:absolute;inset:0;z-index:3;width:100%;height:100%;pointer-events:none}
+.hw1-copy{display:grid;justify-items:start;gap:clamp(28px,5vh,52px);width:100%;padding:calc(var(--nav-h) + 72px) var(--gutter) calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar));pointer-events:none}
+.hw1-stack{position:relative;z-index:2;font-size:clamp(2.25rem,5vw,5.5rem);font-weight:800;line-height:1.04;letter-spacing:-.035em}
+.hw1-h{font:inherit;letter-spacing:inherit;color:color-mix(in oklab,var(--on-blue-muted) 66%,var(--ink));pointer-events:auto}
+.hw1-steps{list-style:none;margin:0;padding:0}
+.hw1-steps .ln>span,.hw1-h .ln>span{text-wrap:balance}
+.hw1-s1{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.42em}
+.hw1-hours{font-size:var(--t-lead);font-weight:600;line-height:1.35;letter-spacing:0;color:var(--on-blue-muted);padding-bottom:.1em}
+.hw1-cta{position:relative;z-index:4;pointer-events:auto}
+@media (max-width:640px){.hw1-copy{padding-top:calc(var(--nav-h) + 96px)}.hw1-s1{display:block}.hw1-hours{display:block;margin-top:.3em}}
+
+/* v2 Re-roof: pinned on wide screens; a letterbox of the real ranch, the steps beneath it */
+.hw2-pin{position:relative;height:max(640px,100svh);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(18px,3vh,32px);padding:calc(var(--nav-h) + 20px) 0 clamp(24px,4.5vh,44px);overflow:clip}
+.hw2-head{padding:0 var(--gutter)}
+.hw2-frame{position:relative;margin:0;min-height:0;overflow:hidden;background:var(--ink-2)}
+.hw2-frame::after{content:"";position:absolute;inset:0;outline:1px solid rgb(255 255 255/.1);outline-offset:-1px;pointer-events:none}
+.hw2-pd{position:absolute;inset:-2%}
+.hw2-img,.hw2-svg{position:absolute;inset:0;width:100%;height:100%}
+.hw2-img{object-fit:cover;object-position:50% 50%}
+.hw2-svg,.hw2-wx{display:none}
+.hw2.is-live .hw2-svg,.hw2.is-live .hw2-wx{display:block}
+.hw2-wx{position:absolute;inset:0;background:rgb(6 16 42/.38);pointer-events:none}
+.hw2-c{fill:var(--mist)}
+.hw2-line{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.hw2-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px clamp(24px,4vw,64px);padding:0 var(--gutter)}
+.hw2-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px clamp(24px,3.4vw,56px);align-items:start}
+.hw2-t{font-size:clamp(1.375rem,2.05vw,2.125rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.hw2-s{margin-top:8px;font-size:1rem;line-height:1.4;color:var(--on-blue-muted)}
+@media (max-width:899px),(prefers-reduced-motion:reduce){
+  .hw2-pin{height:auto;grid-template-rows:auto;padding:clamp(4.5rem,3rem + 6vw,8rem) 0 calc(clamp(4rem,2.5rem + 7.5vw,8rem) + var(--mbar))}
+  .hw2-frame{aspect-ratio:1156/682}
+  .hw2-pd{inset:0}
+}
+@media (max-width:899px){
+  .hw2-foot{grid-template-columns:minmax(0,1fr);justify-items:start}
+  .hw2-steps{grid-template-columns:minmax(0,1fr);gap:18px}
+  .hw2-t{font-size:clamp(1.5rem,6.4vw,2rem)}
+}
+
+/* v3 Stack: three full-width cards stick and stack; the one underneath recedes (S1322) */
+.hw3{--hw3-top:max(12vh,calc(var(--nav-h) + 24px));padding:clamp(5rem,3rem + 8vw,10rem) 0 clamp(4rem,2.5rem + 7.5vw,8rem)}
+.hw3-head{padding:0 var(--gutter) clamp(32px,6vh,64px)}
+.hw3-stack{list-style:none;margin:0;padding:0;position:relative}
+.hw3-card{position:sticky;top:var(--hw3-top);height:calc(100svh - var(--hw3-top) - 32px);min-height:460px;display:flex;flex-direction:column;justify-content:flex-end;overflow:clip;transform-origin:50% 0}
+.hw3-card[data-tone=blue]{background:var(--blue);color:#fff}
+.hw3-card[data-tone=sun]{background:var(--sun);color:var(--ink)}
+.hw3-card[data-tone=sky]{background:var(--sky);color:var(--ink)}
+.hw3-in{display:grid;gap:clamp(20px,3.5vh,36px);padding:clamp(28px,4.5vw,72px) var(--gutter)}
+.hw3-t{font-size:clamp(2.75rem,7.2vw,7.75rem);font-weight:800;line-height:1;letter-spacing:-.04em;text-wrap:balance;max-width:15ch}
+.hw3-act{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px}
+.hw3-s{font-size:var(--t-lead);font-weight:600;color:var(--on-blue-muted)}
+@media (max-width:640px){
+  .hw3{--hw3-top:calc(var(--nav-h) + 40px)}
+  .hw3-card{height:calc(100svh - var(--hw3-top) - var(--mbar) - 20px);min-height:380px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hw3-card{position:relative;top:auto;height:auto;min-height:56svh}
+}

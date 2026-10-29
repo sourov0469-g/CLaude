@@ -32,20 +32,31 @@ function constellation(root, c) {
     const oc = document.createElement('canvas'); oc.width = ow; oc.height = oh; const x = oc.getContext('2d');
     let fs = oh * 1.25; x.font = `800 ${fs}px Epilogue, sans-serif`; const w = x.measureText('4.9').width; if (w > ow * 0.98) fs *= ow * 0.98 / w;
     x.font = `800 ${fs}px Epilogue, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = '#000'; x.fillText('4.9', ow / 2, oh / 2 + fs * 0.04);
-    const data = x.getImageData(0, 0, ow, oh).data; let pts = [];
-    for (let sp = 9; sp >= 1.5; sp -= 0.25) {
-      pts = [];
-      for (let yy = sp / 2, row = 0; yy < oh; yy += sp * 0.866, row++) for (let xx = (row % 2 ? sp : sp / 2); xx < ow; xx += sp) if (data[(Math.round(yy) * ow + Math.round(xx)) * 4 + 3] > 140) pts.push([xx, yy]);
-      if (pts.length >= N) break;
-    }
-    const out = []; for (let i = 0; i < N; i++) { const p = pts[Math.floor(i * pts.length / N)] || [ow / 2, oh / 2]; out.push([box.x + p[0] * 2, box.y + p[1] * 2]); }
+    const data = x.getImageData(0, 0, ow, oh).data, A = (i, j) => (i < 0 || j < 0 || i >= ow || j >= oh ? 0 : data[(j * ow + i) * 4 + 3]);
+    // stars trace the glyph's outline (295 marks read far better as a contour than as a sparse fill)
+    const edge = [];
+    for (let j = 0; j < oh; j++) for (let i = 0; i < ow; i++) if (A(i, j) > 140 && (A(i - 1, j) <= 140 || A(i + 1, j) <= 140 || A(i, j - 1) <= 140 || A(i, j + 1) <= 140)) edge.push([i, j]);
+    for (let i = edge.length - 1; i > 0; i--) { const k = Math.floor(rnd() * (i + 1)); [edge[i], edge[k]] = [edge[k], edge[i]]; }
+    const thin = d => { // Poisson-style thinning on a hash grid: keep points at least d apart
+      const cell = d, grid = new Map(), keep = [];
+      for (const q of edge) {
+        const gx = Math.floor(q[0] / cell), gy = Math.floor(q[1] / cell); let ok = true;
+        for (let a = -1; a <= 1 && ok; a++) for (let b = -1; b <= 1 && ok; b++) for (const o of grid.get((gx + a) + ',' + (gy + b)) || []) if ((o[0] - q[0]) ** 2 + (o[1] - q[1]) ** 2 < d * d) { ok = false; break; }
+        if (ok) { keep.push(q); const key = gx + ',' + gy; (grid.get(key) || grid.set(key, []).get(key)).push(q); }
+      }
+      return keep;
+    };
+    let lo = 1, hi = 40, pts = thin(lo);
+    for (let it = 0; it < 18; it++) { const mid = (lo + hi) / 2, k = thin(mid); if (k.length >= N) { lo = mid; pts = k; } else hi = mid; }
+    const out = pts.slice(0, N).map(p => [box.x + p[0] * 2, box.y + p[1] * 2]);
+    while (out.length < N) out.push(out[out.length % Math.max(1, pts.length)] || [box.x + ow, box.y + oh]);
     for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; } // mixed tiers across the glyph
     return out;
   };
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; if (!W || !H) return;
     dpr = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const box = W >= 900 ? { x: W * 0.42, y: H * 0.08, w: W * 0.54, h: H * 0.6 } : { x: W * 0.05, y: H * 0.06, w: W * 0.9, h: H * 0.4 };
+    const box = W >= 900 ? { x: W * 0.42, y: H * 0.15, w: W * 0.52, h: H * 0.54 } : { x: W * 0.05, y: H * 0.1, w: W * 0.9, h: H * 0.36 };
     glyph(box).forEach((p, i) => { stars[i].tx = p[0]; stars[i].ty = p[1]; });
     rect = null; ready = true; draw();
   };

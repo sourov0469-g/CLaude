@@ -6,7 +6,8 @@
 import fs from 'node:fs'; import path from 'node:path'; import { createRequire } from 'node:module'; import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const V5 = path.resolve(here, '..'), SRC = path.join(V5, 'src'), OUT = path.join(V5, 'rembrandt-homepage.html');
+const V5 = path.resolve(here, '..'), SRC = path.join(V5, 'src'), OUT = process.env.OUT || path.join(V5, 'rembrandt-homepage.html');
+const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null; // build a subset of sections (parallel work)
 const TOOLS = process.env.TOOLS || path.join(V5, 'build');
 const require = createRequire(path.join(TOOLS, 'node_modules', 'x.js'));
 const esbuild = require('esbuild');
@@ -20,7 +21,7 @@ export const SECTIONS = [
   { id: 'how', name: 'Steps', label: 'How it works' },
   { id: 'area', name: 'Towns', label: 'Where we work' },
   { id: 'call', name: 'Call', label: 'Call Rembrandt' },
-].filter(s => fs.existsSync(path.join(SRC, 'sections', s.id)));
+].filter(s => fs.existsSync(path.join(SRC, 'sections', s.id)) && (!ONLY || ONLY.includes(s.id)));
 
 const ICONS = {
   ICON_PHONE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 3.4 5.2 1.6 1.6 0 0 1 5 3.5z"/></svg>',
@@ -98,4 +99,4 @@ if (/scale\(0\)/.test(css + js)) fails.push('scale(0)');
 if (fails.length) { console.error('GATE FAIL:\n- ' + fails.join('\n- ')); process.exit(1); }
 fs.writeFileSync(OUT, page);
 const kb = n => (n / 1024).toFixed(0) + ' KB';
-console.log(`${path.relative(process.cwd(), OUT)}  ${kb(Buffer.byteLength(page))}  (css ${kb(css.length)}, js ${kb(js.length)}, ${inlined.size} live images, ${Object.keys(registry).length} in registry, ${SECTIONS.length} sections)`);
+console.log(`${OUT}  ${kb(Buffer.byteLength(page))}  (css ${kb(css.length)}, js ${kb(js.length)}, ${inlined.size} live images, ${Object.keys(registry).length} in registry, ${SECTIONS.length} sections)`);

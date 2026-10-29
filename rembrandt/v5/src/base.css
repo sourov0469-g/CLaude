@@ -108,7 +108,7 @@ html.cur-on input[type=text],html.cur-on input[type=search],html.cur-on input[ty
 .cur-c.tl{border-width:2px 0 0 2px}.cur-c.tr{border-width:2px 2px 0 0}.cur-c.bl{border-width:0 0 2px 2px}.cur-c.br{border-width:0 2px 2px 0}
 .cur-caret{position:absolute;left:-1px;top:-18px;width:2px;height:36px;background:#fff;opacity:0}
 .cur-disc{position:fixed;left:-46px;top:-46px;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:var(--sun);color:var(--ink);font:800 15px/1 "Epilogue",sans-serif;letter-spacing:-.01em;opacity:0;scale:.6}
-.cur-roof{position:absolute;left:-30px;top:-22px;width:60px;height:30px;opacity:0}
+.cur-roof{position:fixed;left:-30px;top:-24px;width:60px;height:30px;opacity:0;overflow:visible}
 .ch{display:inline-block}
 [data-cursor="text"]{width:fit-content;max-width:100%}
 .wd{display:inline-block;white-space:nowrap}
