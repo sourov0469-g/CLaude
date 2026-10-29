@@ -329,85 +329,14 @@
     });
   }
 
-  /* ---------- cursor engine [S1321 cursor lag .35, S0634 §A, S0652 §3, PLAN §4.6] ---------- */
-  var cur = { el: null, ring: null, dot: null, label: null, glyph: null, x: -100, y: -100, on: false,
-    rx: null, ry: null, dx: null, dy: null, lockY: null, target: null };
-  var GLYPHS = {
-    'drag-x': '<svg viewBox="-18 -18 36 36"><path d="M-9 0h18M-9 0l4-4M-9 0l4 4M9 0l-4-4M9 0l-4 4" fill="none" stroke="#0B1418" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    'orbit': '<svg viewBox="-18 -18 36 36"><path d="M-11 4a12 7 0 0 0 22 0M-11 4l1-4M-11 4l4 1M11 -4a12 7 0 0 0-22 0M11 -4l-1 4M11 -4l-4 -1" fill="none" stroke="#e8e4dc" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" transform="scale(.82)"/></svg>',
-    'quote': '<svg viewBox="-18 -18 36 36"><text x="0" y="9" text-anchor="middle" font-family="Archivo, sans-serif" font-size="26" font-weight="800" fill="#0B1418">“</text></svg>'
-  };
-  function cursorEnabled() { return EZ.fine() && EZ.motionOn(); }
-  function setupCursor() {
-    cur.el = doc.getElementById('cursor');
-    if (!cur.el) return;
-    cur.ring = cur.el.querySelector('.cursor__ring');
-    cur.dot = cur.el.querySelector('.cursor__dot');
-    cur.label = cur.el.querySelector('.cursor__label');
-    cur.glyph = cur.el.querySelector('.cursor__glyph');
-    cur.rx = gsap.quickTo(cur.ring, 'x', { duration: .35, ease: 'power3.out' });
-    cur.ry = gsap.quickTo(cur.ring, 'y', { duration: .35, ease: 'power3.out' });
-    cur.dx = gsap.quickTo(cur.dot, 'x', { duration: .12, ease: 'power3.out' });
-    cur.dy = gsap.quickTo(cur.dot, 'y', { duration: .12, ease: 'power3.out' });
-
-    doc.addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      cur.x = e.clientX; cur.y = e.clientY;
-      if (!cur.on) return;
-      cur.el.classList.remove('is-hidden');
-      var ry = cur.lockY != null ? cur.lockY : cur.y;
-      if (!cur.pinned) { cur.rx(cur.x); cur.ry(ry); }
-      cur.dx(cur.x); cur.dy(cur.y);
-    }, { passive: true });
-    doc.addEventListener('pointerover', function (e) {
-      if (!cur.on) return;
-      var t = e.target.closest ? e.target.closest('[data-cursor]') : null;
-      setState(t);
-    });
-    doc.addEventListener('pointerleave', function () { cur.el.classList.add('is-hidden'); });
-    window.addEventListener('blur', function () { cur.el.classList.add('is-hidden'); });
-    doc.addEventListener('pointerdown', function () { if (cur.on) gsap.to(cur.ring, { scale: .86, duration: .12, overwrite: 'auto' }); });
-    doc.addEventListener('pointerup', function () { if (cur.on) gsap.to(cur.ring, { scale: 1, duration: .3, ease: 'power3.out', overwrite: 'auto' }); });
-    refreshCursor();
-  }
-  function setState(t) {
-    if (t === cur.target) return;
-    cur.target = t;
-    var st = t ? t.dataset.cursor : '';
-    if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) st = 'none';
-    cur.el.dataset.state = st || '';
-    var label = t ? (t.dataset.cursorLabel || '') : '';
-    cur.label.textContent = label;
-    cur.el.dataset.label = label ? '1' : '';
-    var g = GLYPHS[st] && !label ? GLYPHS[st] : (st === 'orbit' ? '' : '');
-    cur.glyph.innerHTML = g || '';
-    cur.el.dataset.glyph = g ? '1' : '';
-    cur.el.style.setProperty('--sw', t && t.dataset.sw ? t.dataset.sw : '');
-    var cw = '';
-    if (st === 'magnet-wide' && t) {
-      // ring grows to wrap the button [PLAN §4.6]
-      var r = t.getBoundingClientRect();
-      cw = (Math.max(r.width, r.height) / 36 * 1.08).toFixed(2);
-    }
-    cur.el.style.setProperty('--cw', cw);
-    cur.lockY = null;
-    if (st === 'drag-x' && t && t.dataset.cursorLock === 'y') {
-      var rr = t.getBoundingClientRect();
-      cur.lockY = rr.top + rr.height / 2;
-    }
-  }
-  EZ.cursorState = function (el) { if (cur.on) { cur.target = undefined; setState(el); } };
-  EZ.cursorPin = function (x, y) {
-    // magnets pull the ring onto the button centre
-    if (!cur.on) return;
-    if (x == null) { cur.pinned = false; cur.rx(cur.x); cur.ry(cur.y); return; }
-    cur.pinned = true; cur.rx(x); cur.ry(y);
-  };
+  /* ---------- cursor: the plain ring is retired; the companion lives in buddy.js (PLAN-V3 §2.1) ---------- */
+  function setupCursor() {}
   function refreshCursor() {
-    cur.on = cursorEnabled();
-    root.classList.toggle('has-cursor', cur.on);
-    if (!cur.on && cur.el) { cur.el.dataset.state = ''; cur.target = null; cur.pinned = false; }
+    if (EZ.buddy) EZ.buddy.refresh();
+    if (EZ.fields) EZ.fields.refresh();
   }
+  EZ.cursorState = function () { if (EZ.buddy) EZ.buddy.retarget(); };
+  EZ.cursorPin = function () {};
 
   /* ---------- magnets [S0634 magnetic-button, S1321 magnetic .3/.15, S1375 #12 strong] ---------- */
   var MAG = {
@@ -416,8 +345,7 @@
     strong: { radius: 120, f: .35, fl: .18 }
   };
   function bindMagnets(scope, kit) {
-    if (!kit.fine || !kit.motion) return;
-    scope.querySelectorAll('[data-magnet]').forEach(function (el) { magnet(el, kit); });
+    if (EZ.bindReactions) EZ.bindReactions(scope, kit);
   }
   function magnet(el, kit) {
     var cfg = MAG[el.dataset.magnet] || MAG.wide;
@@ -596,6 +524,8 @@
   }
   function motionChanged() {
     refreshCursor();
+    if (EZ.dividers) EZ.dividers.refresh();
+    if (EZ.bindChromeReactions) EZ.bindChromeReactions();
     startLenis();
     EZ.order.forEach(function (id) { activate(id, EZ.sections[id].current, { initial: true }); });
     ScrollTrigger.sort();
@@ -803,7 +733,7 @@
     if (EZ.booted) return;
     EZ.booted = true;
     buildImages();
-    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip);
+    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip, MotionPathPlugin, MorphSVGPlugin);
     gsap.defaults({ ease: 'power3.out', duration: .85 });
     ScrollTrigger.config({ ignoreMobileResize: true });
 
@@ -823,6 +753,7 @@
 
     startLenis();
     setupCursor();
+    if (EZ.systemsBoot) EZ.systemsBoot();
     setupNav();
     setupSettings();
     EZ.viewer.init();

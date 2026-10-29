@@ -19,7 +19,8 @@ IMG = os.path.join(ROOT, "assets", "img")
 OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
 SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
-VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "Flip"]   # only the plugins the sections call (F18)
+SYSTEMS = ["buddy", "react", "fields"]   # PLAN-V3 §2: companion, button reactions, section fields + dividers
+VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "Flip", "MotionPathPlugin", "MorphSVGPlugin"]   # only the plugins the sections call (F18)
 
 
 def read(*p):
@@ -59,7 +60,7 @@ def main():
            b64(os.path.join(HERE, "fonts", "geist-wght.woff2")))
     )
 
-    css = [read("css", "tokens.css"), read("css", "chrome.css")]
+    css = [read("css", "tokens.css"), read("css", "chrome.css"), read("css", "systems.css")]
     sections_html, js = [], []
     for sid in sections:
         sections_html.append(maybe("sections", sid + ".html"))
@@ -104,7 +105,7 @@ def main():
             .replace("{{LOGO_SRC}}", logo_src)
             .replace("/*{{VENDOR}}*/", script_safe(vendor))
             .replace("/*{{DATA}}*/", "window.__LINES=" + json.dumps(lines, separators=(",", ":")) + ";window.__DATA=" + json.dumps(extra, separators=(",", ":")) + ";")
-            .replace("/*{{CORE}}*/", script_safe(read("js", "core.js")))
+            .replace("/*{{CORE}}*/", script_safe(read("js", "core.js") + "\n" + "\n".join(read("js", "systems", n + ".js") for n in SYSTEMS)))
             .replace("/*{{SECTIONS_JS}}*/", script_safe("\n".join(js)))
             .replace("/*{{IMGSTORE}}*/", json.dumps(store, separators=(",", ":"))))
 

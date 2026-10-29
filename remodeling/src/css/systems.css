@@ -1,0 +1,201 @@
+/* PLAN-V3 §2 systems: cursor buddy, button reactions, section fields, dividers. */
+
+/* ---------- buddy (the system cursor stays visible; this trails it) ---------- */
+.buddy {
+  position: fixed; left: 0; top: 0; z-index: 90;
+  width: 64px; height: 64px;
+  pointer-events: none; opacity: 0;
+  transition: opacity 200ms var(--ease-out);
+  will-change: transform;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .28));
+}
+.buddy.is-on { opacity: 1; }
+.buddy svg { display: block; overflow: visible; max-width: none; }
+.buddysw { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .buddysw {
+    position: fixed; left: var(--margin); bottom: 16px; z-index: 55;
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 6px 5px 12px;
+    background: rgba(11, 20, 24, .86); color: #e8e4dc;
+    box-shadow: 0 0 0 1px rgba(232, 228, 220, .14);
+    border-radius: var(--radius);
+    font: 500 .8125rem/1 var(--f-text);
+    backdrop-filter: blur(8px);
+  }
+  .buddysw__in { display: flex; gap: 2px; }
+  .buddysw button {
+    min-height: 34px; padding: 0 10px;
+    background: none; border: 0; border-radius: var(--radius);
+    color: inherit; font: inherit; opacity: .7; cursor: pointer;
+  }
+  .buddysw button:hover { opacity: 1; }
+  .buddysw button[aria-checked="true"] { background: #77b3b8; color: #0B1418; opacity: 1; }
+  .buddysw__t { opacity: .7; }
+}
+@media (prefers-reduced-motion: reduce) { .buddysw { display: none; } }
+[data-motion="off"] .buddysw { display: none; }
+
+/* ---------- button reactions: the drawn tools sit round the button; the button never moves ---------- */
+.has-rx { position: relative; overflow: visible; isolation: isolate; }
+.has-rx > .btn__label, .has-rx > .rx-l { position: relative; z-index: 1; }
+.rx {
+  position: absolute; left: -36px; top: -36px; z-index: 0;
+  pointer-events: none; overflow: visible;
+  max-width: none; max-height: none;
+  color: var(--accent);
+}
+.g-field .rx { color: var(--field-accent); }
+
+/* ---------- section fields ---------- */
+.has-fld { position: relative; isolation: isolate; }
+.has-fld > .ver, .has-fld > .sec__body { position: relative; z-index: 1; }
+.foot.has-fld > :not(.fld) { position: relative; z-index: 1; }
+.fld {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+  --fg: var(--line);
+  color: var(--fg);
+}
+.g-field .fld { --fg: var(--field-ink); }
+.fld-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.fld-hot-only { display: none; }
+
+/* hero: blueprint grid + crosshair */
+.fld-grid {
+  position: absolute; inset: -12% 0;
+  background-image:
+    linear-gradient(var(--fg) 1px, transparent 1px), linear-gradient(90deg, var(--fg) 1px, transparent 1px),
+    linear-gradient(var(--fg) 1px, transparent 1px), linear-gradient(90deg, var(--fg) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+  opacity: .06;
+  transform: translate3d(0, calc(var(--sp, 0) * -8%), 0);
+}
+.fld-grid--hot { opacity: 0; transition: opacity 300ms var(--ease-out); -webkit-mask: radial-gradient(200px circle at var(--mx) var(--my), #000 0, transparent 100%); mask: radial-gradient(200px circle at var(--mx) var(--my), #000 0, transparent 100%); transform: none; inset: 0; }
+.fld-ch, .fld-read { position: absolute; opacity: 0; transition: opacity 250ms var(--ease-out); }
+.fld-ch--x { left: 0; right: 0; top: var(--my); height: 1px; background: var(--fg); }
+.fld-ch--y { top: 0; bottom: 0; left: var(--mx); width: 1px; background: var(--fg); }
+.fld-read { left: calc(var(--mx) + 14px); top: calc(var(--my) + 12px); font: 500 11px/1 var(--f-text); letter-spacing: .06em; color: var(--fg); }
+.fld-live .is-hot .fld-grid--hot { opacity: .32; }
+.fld-live .is-hot .fld-ch { opacity: .22; }
+.fld-live .is-hot .fld-read { opacity: .6; }
+
+/* proof: survey contours */
+.fld-c { fill: none; stroke: var(--fg); stroke-width: 1; opacity: .16; }
+.fld-c--major { stroke-width: 1.5; opacity: .3; }
+.fld--contours .fld-svg { transform: translate3d(0, calc(var(--sp, 0) * -40px), 0); }
+
+/* services: axonometric grid */
+.fld-axo {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(30deg, var(--fg) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(150deg, var(--fg) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(90deg, var(--fg) 0 1px, transparent 1px 76px);
+  opacity: .055;
+  background-position: 0 calc(var(--sp, 0) * -60px);
+}
+.fld-axo--hot { opacity: 0; transition: opacity 300ms var(--ease-out); -webkit-mask: radial-gradient(220px circle at var(--mx) var(--my), #000, transparent); mask: radial-gradient(220px circle at var(--mx) var(--my), #000, transparent); }
+.fld-live .is-hot .fld-axo--hot { opacity: .3; }
+
+/* before/after: drywall + hidden studs (16in centres -> 96px) */
+.fld-wall {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 383px, var(--fg) 383px 384px);
+  opacity: .08;
+}
+.fld-studs {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 40px, rgba(201, 164, 106, .55) 40px 54px, transparent 54px 96px),
+    repeating-linear-gradient(180deg, transparent 0 46px, rgba(201, 164, 106, .4) 46px 49px, transparent 49px 192px);
+  opacity: .12;
+}
+.fld-live .fld-studs { opacity: 0; transition: opacity 300ms var(--ease-out); -webkit-mask: radial-gradient(170px circle at var(--mx) var(--my), #000 30%, transparent); mask: radial-gradient(170px circle at var(--mx) var(--my), #000 30%, transparent); }
+.fld-live .is-hot .fld-studs { opacity: 1; }
+
+/* process: chalk lines */
+.fld-chalk { fill: none; stroke: #5aa8d6; stroke-width: 1.3; opacity: .34; }
+
+/* financing: ledger + plumb bob */
+.fld-ledger {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--fg) 1px, transparent 1px), linear-gradient(90deg, var(--fg) 1px, transparent 1px),
+    linear-gradient(var(--fg) 1px, transparent 1px), linear-gradient(90deg, var(--fg) 1px, transparent 1px);
+  background-size: 16px 16px, 16px 16px, 80px 80px, 80px 80px;
+  opacity: .05;
+}
+.fld-plumb { position: absolute; top: 0; left: 86%; overflow: visible; opacity: .75; }
+
+/* work: registration marks */
+.fld-mark circle, .fld-mark path { fill: none; stroke: var(--fg); stroke-width: 1.2; opacity: .3; }
+.fld-mark .fld-mark-tip { fill: var(--fg); stroke: none; opacity: .45; }
+
+/* reviews: plywood + work-lamp halo */
+.fld-wood { opacity: .55; mix-blend-mode: soft-light; }
+[data-theme="daylight"] .fld-wood { opacity: .45; mix-blend-mode: multiply; }
+.fld-halo { position: absolute; inset: 0; opacity: 0; transition: opacity 300ms var(--ease-out); background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 30%), rgba(255, 236, 170, .16), transparent 70%); }
+.fld-live .is-hot .fld-halo { opacity: 1; }
+
+/* towns: compass + stakes */
+.fld-compass { position: absolute; right: -40px; top: 8%; width: 260px; height: 260px; overflow: visible; opacity: .5; }
+.fld-cr { fill: none; stroke: var(--fg); stroke-width: 1; opacity: .35; }
+.fld-ticks path { stroke: var(--fg); stroke-width: 1; opacity: .4; }
+.fld-rose { fill: none; stroke: var(--fg); stroke-width: 1; opacity: .35; }
+.fld-n { font: 400 18px/1 var(--f-display); fill: var(--fg); opacity: .6; }
+.fld-stakes { opacity: .45; }
+@media (max-width: 767px) { .fld-compass { width: 180px; height: 180px; right: -60px; top: 2%; } }
+
+/* consult: bricks + laser */
+.fld-brick {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--fg) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fg) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fg) 1px, transparent 1px);
+  background-size: 100% 28px, 64px 56px, 64px 56px;
+  background-position: 0 0, 0 0, 32px 28px;
+  -webkit-mask: linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0);
+  opacity: .05;
+}
+.fld-laser, .fld-dot, .fld-emitter { position: absolute; opacity: 0; transition: opacity 250ms var(--ease-out); }
+.fld-laser { left: 0; right: 0; top: var(--my); height: 1px; background: #e2412b; box-shadow: 0 0 6px 1px rgba(226, 65, 43, .6); }
+.fld-dot { left: calc(var(--mx) - 4px); top: calc(var(--my) - 4px); width: 9px; height: 9px; border-radius: 50%; background: #ff5a3c; box-shadow: 0 0 12px 3px rgba(255, 90, 60, .55); }
+.fld-emitter { left: 6px; top: calc(var(--my) - 13px); }
+.fld-live .is-hot .fld-laser { opacity: .5; }
+.fld-live .is-hot .fld-dot, .fld-live .is-hot .fld-emitter { opacity: .9; }
+
+/* footer: rebar mat */
+.fld-rebar {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(0deg, transparent 0 46px, rgba(201, 164, 106, .5) 46px 49px), repeating-linear-gradient(90deg, transparent 0 46px, rgba(201, 164, 106, .5) 46px 49px);
+  opacity: .07;
+}
+
+/* ---------- dividers ---------- */
+.dv { position: relative; width: 100%; overflow: hidden; color: var(--line); background: var(--bg); }
+.dv svg { display: block; overflow: visible; max-width: none; }
+.dv-l, .dv-a { fill: none; stroke: var(--line); stroke-width: 1.4; }
+.dv-t { font: 500 12px/1 var(--f-text); letter-spacing: .08em; fill: var(--muted); }
+.dv-bg { fill: var(--bg); }
+.dv-steel { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+.dv-web { fill: var(--surface); }
+.dv-bolt { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+.dv-tapeband { fill: none; stroke: #f2c230; stroke-width: 22; }
+.dv-tapestripe { fill: none; stroke: #0B1418; stroke-width: 22; stroke-dasharray: 16 16; }
+.dv-tube { fill: none; stroke: var(--muted); stroke-width: 3; stroke-linecap: round; }
+.dv-cpl { fill: var(--accent); stroke: var(--bg); stroke-width: 1.5; }
+.dv-blade { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.2; stroke-linejoin: round; }
+.dv-kerf { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 6 5; }
+.dv-roof { fill: var(--surface); stroke: var(--line); stroke-width: 2; stroke-linejoin: round; }
+.dv-webs { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: .7; }
+.dv-tile { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
+.dv-adh { fill: none; stroke: var(--muted); stroke-width: 2; stroke-dasharray: 3 4; }
+.dv-pivot { fill: var(--line); }
+.dv-brick { fill: #8b4a36; stroke: var(--bg); stroke-width: 3; }
+[data-theme="daylight"] .dv-brick { fill: #b8644a; }
+.dv-footing { fill: var(--surface-2); }
+.dv-hatch { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .7; }
+.dv-bar { fill: none; stroke: #c9a46a; stroke-width: 2; }
+.dv-rebar { fill: #c9a46a; }
