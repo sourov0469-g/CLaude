@@ -209,8 +209,7 @@
   // reviews: plywood grain under a work-lamp halo
   FIELD.plywood = function () {
     var el = doc.createElement('div');
-    el.innerHTML = '<svg class="fld-svg fld-wood" preserveAspectRatio="none" viewBox="0 0 800 600"><filter id="fld-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".004 .09" numOctaves="3" seed="7"/>' +
-      '<feColorMatrix values="0 0 0 0 .78  0 0 0 0 .6  0 0 0 0 .38  0 0 0 1.4 -.55"/></filter><rect width="800" height="600" filter="url(#fld-grain)"/></svg><div class="fld-halo"></div>';
+    el.innerHTML = '<div class="fld-wood"></div><div class="fld-halo"></div>';
     return { el: el };
   };
 

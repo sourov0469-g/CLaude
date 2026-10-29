@@ -126,8 +126,12 @@
 .fld-mark .fld-mark-tip { fill: var(--fg); stroke: none; opacity: .45; }
 
 /* reviews: plywood + work-lamp halo */
-.fld-wood { opacity: .55; mix-blend-mode: soft-light; }
-[data-theme="daylight"] .fld-wood { opacity: .45; mix-blend-mode: multiply; }
+.fld-wood {
+  position: absolute; inset: 0; opacity: .07;
+  background-image:
+    repeating-linear-gradient(90deg, #c79a61 0 1px, transparent 1px 7px, #c79a61 7px 8px, transparent 8px 19px),
+    repeating-linear-gradient(90deg, transparent 0 240px, rgba(199, 154, 97, .9) 240px 242px);
+}
 .fld-halo { position: absolute; inset: 0; opacity: 0; transition: opacity 300ms var(--ease-out); background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 30%), rgba(255, 236, 170, .16), transparent 70%); }
 .fld-live .is-hot .fld-halo { opacity: 1; }
 

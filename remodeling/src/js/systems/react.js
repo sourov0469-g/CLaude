@@ -556,6 +556,39 @@
     }
   };
 
+  /* reviews v1: barrier tape runs along the top edge */
+  R.caution = {
+    art: function (w) {
+      var st = '';
+      for (var x = -12; x < w + 12; x += 12) st += 'M' + (P + x) + ' ' + (P - 4) + 'l6 -8h6l-6 8z';
+      return '<clipPath id="rxc2-' + w + '"><rect x="' + (P - 6) + '" y="' + (P - 14) + '" width="' + (w + 12) + '" height="12"/></clipPath>' +
+        '<g class="cb" clip-path="url(#rxc2-' + w + ')"><rect x="' + (P - 6) + '" y="' + (P - 13) + '" width="' + (w + 12) + '" height="10" fill="' + YEL + '"/><path class="st" d="' + st + '" fill="' + INK + '"/></g>';
+    },
+    hover: function (svg) {
+      return gsap.timeline({ paused: true })
+        .fromTo(one(svg, '.cb'), { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .35, ease: 'power3.out' }, 0)
+        .fromTo(one(svg, '.st'), { x: 0 }, { x: 12, duration: .5, ease: 'none', repeat: 1 }, 0);
+    },
+    click: function (svg) {
+      return gsap.timeline().to(one(svg, '.cb'), { y: -6, duration: .1, yoyo: true, repeat: 1, ease: 'power2.out' });
+    }
+  };
+
+  /* reviews v2: a pushpin presses into the corner */
+  R.pushpin = {
+    art: function (w) {
+      var x = P + w - 10, y = P + 2;
+      return '<g class="pp" opacity="0"><ellipse cx="' + (x + 3) + '" cy="' + (y + 3) + '" rx="7" ry="3" fill="rgba(0,0,0,.3)"/><path d="M' + x + ' ' + y + 'l-6 -14" stroke="' + STEEL + '" stroke-width="2"/>' +
+        '<circle class="hd" cx="' + (x - 7) + '" cy="' + (y - 16) + '" r="7" fill="' + RED + '" stroke="' + INK + '" stroke-width="1.3"/><circle cx="' + (x - 9) + '" cy="' + (y - 18) + '" r="2" fill="#fff" opacity=".6"/></g>';
+    },
+    hover: function (svg, w) {
+      return gsap.timeline({ paused: true }).fromTo(one(svg, '.pp'), { opacity: 0, y: -14, x: -6 }, { opacity: 1, y: 0, x: 0, duration: .3, ease: 'back.out(3)' });
+    },
+    click: function (svg) {
+      return gsap.timeline().to(one(svg, '.pp'), { y: 3, duration: .08, yoyo: true, repeat: 1 });
+    }
+  };
+
   EZ.REACTIONS = R;
 
   /* ---------- binding ---------- */
