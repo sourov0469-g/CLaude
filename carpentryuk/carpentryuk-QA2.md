@@ -62,13 +62,17 @@
 | 1.2 | Defect, P2 | **Spirit level on phones.** The SVG was cropped to the vial by its viewBox, but `overflow:visible` still painted the rest of the level past the gutters to both screen edges. It read as a band across the page, and its red ends were lost. Shot: `before-values-375`. | Under 700 px the level is drawn short, inside the crop: the body ends at 332 and 868, the red ends move in, and the two end vials slide in to sit either side of the centre vial. The SVG clips at its own box, and the tick path now sits under the red ends. | A whole level, red ends and three vials, inside the margins at 360 and 699. The full level is unchanged from 701 up. Shots: `after-values-375`, `after-level-360-699-701-820`. |
 | 1.3 | Tried, reverted | Values list on desktop: "Precision" sits left of the centre vial. I tried a 1fr / auto / 1fr grid so it sat right under the vial. | It made the gaps uneven: 345 px on one side, 98 px on the other. That imbalance looked worse than the small offset, so I put back the equal gaps. | Unchanged from the start state. |
 
-### Next chunks (planned)
+### Chunk 2: copy and hierarchy
 
-- **Copy and hierarchy:**
-  - The coverage heading runs to 5 lines on desktop and mobile.
-  - The "Home extensions" summary repeats the build section's lead word for word.
-  - The quote lead sits tighter under its heading than the other leads do.
-  - The joint caption doesn't change when the form is complete.
+| # | Class | Finding (evidence) | Change | Result |
+|---|---|---|---|---|
+| 2.1 | Improvement, P2 (S0650 headline length, S1501 weight) | **Coverage heading.** "Based in Tamworth. Working across the Midlands, and nationwide." is 9 words and set in 5 display lines at both 1440 and 375. That is the heaviest block on the page. It also repeats the hero lead and the footer line almost word for word. Shots: `before-cover-1440`, `before-cover-375`. | The heading is now "Tamworth, the Midlands, and nationwide." It reads like the compass beside it, from the pin outward: Tamworth, the Midlands ring, then the nationwide ring. "Based in Tamworth, Staffordshire." moves to the start of the lead. Every fact is unchanged and in his words. | 3 lines at both widths. On phones the compass now comes into view on the section's first screen. Shots: `after-cover-1440`, `after-cover-375`. |
+| 2.2 | Slop pattern, P2 (S1314 §9, repeated copy) | **Repeated sentence.** The Home extensions row in Services said "Working with local architects and trades, we can offer a complete design and build package to suit you." The Design and build section's lead, two screens later, says exactly the same. | The services row now says "Complete design and build, with local architects and trades." That matches the mega menu. The full sentence stays where it belongs, in the extensions section. | The row is one line at 1440, like its neighbours. Shot: `after-services-1440`. |
+| 2.3 | Defect, P3 (spacing system) | **Quote lead spacing.** The quote lead sat 16 px under its heading. Every other lead on the page sits 24 px under. The descenders of "your job." nearly touched it. Shot: `before-quote-1440`. | Changed to the shared 24 px step (`--s-5`). | Same rhythm as the hero, build and coverage leads. Shot: `after-quote-1440`. |
+| 2.4 | Improvement, P3 (S1473 #1, system status) | **Joint caption.** When the three required fields were valid, the dovetail closed and the count read "3 of 3", but the caption still said "Fill in the form to close the joint." Shot: `before-quote-filled-1440`. | At 3 of 3 the caption reads "Joint closed. Ready to send." It goes back if a field is cleared. | Shot: `after-quote-filled-1440`. |
+
+### Next chunk (planned)
+
 - **Interaction and motion:**
   - The build toggle renames itself. It wraps the chips on phones, and a pressed toggle should keep its name.
   - The lightbox backdrop lets the page show through.
