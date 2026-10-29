@@ -42,11 +42,11 @@ out.push(`bg V2: scene layers on pointer depth: near ${n0} -> ${await p.evaluate
 await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(600);
 out.push(`  off screen: bar ${await p.evaluate(() => getComputedStyle(document.querySelector('.hw2-tab[aria-selected="true"] .hw2-prog')).animationPlayState)}`);
 
-await go('how3', '.hw3-cols'); await p.waitForTimeout(400);
-const [ax, ay] = await centre('.hw3-col:nth-of-type(2) .hw3-act'); await p.mouse.move(ax, ay, { steps: 5 }); await p.waitForTimeout(400);
+await go('how3', '.hw3-rows'); await p.waitForTimeout(400);
+const [ax, ay] = await centre('.hw3-row:nth-of-type(2) .hw3-line'); await p.mouse.move(ax, ay, { steps: 5 }); await p.waitForTimeout(400);
 out.push(`R28 hover (rule): segment ${await cs('.hw3-ico--rule .i-seg2', 'transform')}`);
 await p.mouse.down(); await p.waitForTimeout(60); out.push(`R28 press (rule): ${await cs('.hw3-ico--rule .i-seg1', 'animationName')}`); await p.mouse.move(ax, ay - 200); await p.mouse.up(); // release off the link: no jump to #call
 await p.mouse.move(300, 450, { steps: 4 }); await p.mouse.move(1300, 450, { steps: 8 }); await p.waitForTimeout(800);
-out.push(`bg V3: ladder lean toward the pointer ${await p.evaluate(() => gsap.getProperty(document.querySelector('.hw3-ladder'), 'rotation').toFixed(2))} deg`);
+out.push(`bg V3: rafter layer on pointer depth ${await p.evaluate(() => getComputedStyle(document.querySelector('.hw3-raft')).transform)}; overstroke on the hovered row ${await p.evaluate(() => getComputedStyle(document.querySelectorAll('.hw3-ro')[1]).strokeDasharray)}`);
 out.push(`  chips: ${await p.evaluate(() => [...document.querySelectorAll('.hw3-chips li')].map(l => l.textContent).join(' | '))}`);
 out.push('errors: ' + (errs.length ? errs.join(' | ') : 0)); console.log(out.join('\n')); await b.close();

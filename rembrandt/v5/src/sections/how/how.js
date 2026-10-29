@@ -80,37 +80,32 @@ function pager(root, c) {
   return () => { io.disconnect(); list.removeEventListener('animationiteration', onIter); root.removeEventListener('click', onClick); list.removeEventListener('keydown', onKey); list.removeEventListener('focusin', onFocus); list.removeEventListener('focusout', onBlur); };
 }
 
-// v3 [BANK] Q409 Grow My Business process (CROWN: numbered steps, each naming what the customer gets as deliverable
-// chips; reveals trail the scroll, scrub 0.2, start "top bottom-=10%", 0.6s power3.out, compressed to 0.3s by F17), with
-// [BANK] Q411 NVRMND three verbs (Map/Make/Move with a hand-drawn SVG icon set) and [BANK] Q91 animated SVG icons
-// (from -> to steps at 200ms, bound to click/tap, never hover-only). Adapted: Call. Estimate. Roof. Each verb is a real
-// link with its own drawn tool (handset, folding rule, hammer and nail); hover readies it, press uses it. A roofer's
-// ladder joins the columns; its rungs light as each column scrolls in.
+// v3 (v2 audit, rebuilt layout) [BANK] Q409 Grow My Business process (CROWN): numbered steps, each naming what the
+// customer gets as deliverable chips; reveals trail the scroll by a hair (scrub 0.2, start "top bottom-=10%"). With
+// [BANK] Q411 NVRMND (three verbs are the whole process) and [BANK] Signal-A case-study index rows (the list is the
+// design: a small label beside a giant line whose weight changes inside the line). [BANK] S18 SVG scroll hairlines:
+// each row's ridge-cap rule draws itself scrubbed, linear (scrubbed motion is always linear). Each verb is a real link
+// with its own drawn tool (R28: hover readies it, press uses it); hover also runs a sun overstroke along the row's ridge.
 function verbs(root, c) {
-  const lad = root.querySelector('.hw3-ladder'), rungs = lad.querySelector('.hw3-rungs'), cols = [...root.querySelectorAll('.hw3-col')], rail = lad.querySelector('.hw3-rail');
-  const draw = () => {
-    const narrow = innerWidth <= 900;
-    if (narrow) { lad.setAttribute('viewBox', '0 0 80 1000'); rail.setAttribute('d', 'M18 0 V1000 M62 0 V1000'); }
-    else { lad.setAttribute('viewBox', '0 0 1000 80'); rail.setAttribute('d', 'M0 18 H1000 M0 62 H1000'); }
-    rungs.innerHTML = Array.from({ length: 15 }, (_, i) => { const t = 20 + i * 68; return narrow ? `<path d="M18 ${t} H62"/>` : `<path d="M${t} 18 V62"/>`; }).join('');
-  };
-  draw(); const ro = new ResizeObserver(draw); ro.observe(root);
-  const light = n => [...rungs.children].forEach((r, i) => r.classList.toggle('is-on', i < n * 5));
-  if (!c.motion) { light(3); return () => ro.disconnect(); }
-  beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]);
-  // bg: the ladder leans up to 1 degree toward the pointer, as if someone just set a hand on it
-  let onMove = null, onLeave = null;
-  if (c.fine) {
-    const lean = gsap.quickTo(lad, 'rotation', { duration: 0.6, ease: 'power3.out' });
-    onMove = e => { if (e.pointerType !== 'mouse') return; const r = lad.getBoundingClientRect(), narrow = r.height > r.width; const d = narrow ? (e.clientY - (r.top + r.height / 2)) / (r.height / 2) : (e.clientX - (r.left + r.width / 2)) / (r.width / 2); lean(gsap.utils.clamp(-1, 1, d) * (narrow ? -1 : 1)); };
-    onLeave = () => lean(0);
-    root.addEventListener('pointermove', onMove); root.addEventListener('pointerleave', onLeave);
-  }
-  cols.forEach((col, i) => {
-    gsap.fromTo(col.children, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform,opacity,visibility', scrollTrigger: { trigger: col, start: 'top bottom-=10%', once: true } });
-    ScrollTrigger.create({ trigger: col, start: 'top 70%', onEnter: () => light(i + 1), onLeaveBack: () => light(i) });
+  const rows = [...root.querySelectorAll('.hw3-row')];
+  const over = rows.map(r => r.querySelector('.hw3-ro'));
+  gsap.set(over, { drawSVG: '0%' });
+  rows.forEach((row, i) => {
+    const a = row.querySelector('.hw3-act');
+    const on = () => gsap.to(over[i], { drawSVG: '0% 100%', duration: c.motion ? 0.3 : 0, ease: EASE, overwrite: 'auto' });
+    const off = () => gsap.to(over[i], { drawSVG: '0%', duration: c.motion ? 0.22 : 0, ease: 'power2.out', overwrite: 'auto' });
+    a.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') on(); }); a.addEventListener('pointerleave', off);
+    a.addEventListener('focus', on); a.addEventListener('blur', off);
   });
-  return () => { ro.disconnect(); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } };
+  if (!c.motion) return () => {};
+  beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]);
+  const tweens = [];
+  rows.forEach(row => {
+    const rule = row.querySelectorAll('.hw3-rl, .hw3-rt'), body = [row.querySelector('.hw3-n'), row.querySelector('.hw3-line'), row.querySelector('.hw3-chips')];
+    tweens.push(gsap.fromTo(rule, { drawSVG: '0%' }, { drawSVG: '0% 100%', ease: 'none', scrollTrigger: { trigger: row, start: 'top bottom-=10%', end: 'top 55%', scrub: 0.2 } }));
+    tweens.push(gsap.fromTo(body, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, ease: 'none', stagger: 0.08, scrollTrigger: { trigger: row, start: 'top bottom-=10%', end: 'top 60%', scrub: 0.2 } }));
+  });
+  return () => tweens.forEach(t => { if (t.scrollTrigger) t.scrollTrigger.kill(); t.kill(); });
 }
 
 export default { 1: spine, 2: pager, 3: verbs };
