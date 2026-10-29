@@ -325,6 +325,24 @@
     const ring = $('.r49-v', r), ghost = $('.p1-ghost', r);
     countUp($$('[data-count]', r), { st: el => once(el, 'top 92%') });
     if (!motionOK()) return;
+    /* v4 3D where earned (Q165 Depth Text, CSS only): the counts are extruded signs whose depth turns away from the
+       pointer, lerp 0.14, 12 layers; loop sleeps when settled; a still pose without motion or on touch */
+    if (mqFine.matches) {
+      const nums = $$('.rc b', r), D = { x: 1, y: 1, tx: 1, ty: 1 }, shade = i => { const p = i / 11; return `rgb(${Math.round(207 - p * p * 80)},${Math.round(203 - p * p * 82)},${Math.round(194 - p * p * 82)})`; };
+      let raf2 = 0;
+      const paint = () => {
+        raf2 = 0;
+        D.x += (D.tx - D.x) * 0.14; D.y += (D.ty - D.y) * 0.14;
+        const st = []; for (let i = 1; i <= 12; i++) st.push(`${(D.x * i * 0.75).toFixed(2)}px ${(D.y * i * 0.75).toFixed(2)}px 0 ${shade(i - 1)}`);
+        st.push(`${(D.x * 10).toFixed(1)}px ${(D.y * 10).toFixed(1)}px 14px rgba(0,0,0,.12)`);
+        nums.forEach(n => { n.style.textShadow = st.join(','); });
+        if (Math.abs(D.tx - D.x) + Math.abs(D.ty - D.y) > 0.004) raf2 = requestAnimationFrame(paint);
+      };
+      b.on(r, 'pointermove', e => { const rc = r.getBoundingClientRect(); D.tx = clamp(-(e.clientX - rc.left - rc.width / 2) / (rc.width / 2) * 1.4, -1.4, 1.4); D.ty = clamp(-(e.clientY - rc.top - rc.height / 2) / (rc.height / 2) * 1.4, -1.4, 1.4); if (!raf2) raf2 = requestAnimationFrame(paint); });
+      b.on(r, 'pointerleave', () => { D.tx = 1; D.ty = 1; if (!raf2) raf2 = requestAnimationFrame(paint); });
+      b.add(() => { cancelAnimationFrame(raf2); nums.forEach(n => { n.style.textShadow = ''; }); });
+    }
+    G.from($$('.bq', r), { y: -14, autoAlpha: 0, duration: 0.45, ease: 'back.out(1.5)', stagger: 0.12, scrollTrigger: once($('.b886', r), 'top 92%') });
     if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: 'power2.out', scrollTrigger: once(ring, 'top 92%') });
     G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
     if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
@@ -344,6 +362,8 @@
     const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => { const f = d.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.appendChild(d.createTextNode(t)); else { const s = d.createElement('span'); s.className = 't'; s.textContent = t; f.appendChild(s); } }); n.replaceWith(f); });
     G.fromTo($$('.t, .ipill', p), { opacity: 0.18 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: p, start: 'top 82%', end: 'bottom 50%', scrub: 0.4 } });
+    // v4: each photo pill is a casement window; its sash swings open as its word lights (scrub, linear)
+    $$('.ip-sash', p).forEach(sa => G.fromTo(sa, { scaleX: 1 }, { scaleX: 0.12, ease: 'none', scrollTrigger: { trigger: sa.closest('.ipill'), start: 'top 78%', end: 'top 58%', scrub: 0.4 } }));
     G.from($$('.creds-stamp li', r), { scale: 1.3, autoAlpha: 0, duration: 0.3, ease: 'power4.out', stagger: 0.12, scrollTrigger: once($('.stamps', r), 'top 88%') });   // pressed in, never rotated (builder brief 6)
   };
   /* SERVICES 1: point at the house. Each part of the traced Rob Roy elevation opens its trade; the part becomes the

@@ -313,13 +313,25 @@ def ring49():
             f'<circle class="r49-v" cx="50" cy="50" r="{r}" style="--c:{c:.2f}; --off:{c * (1 - 4.9 / 5):.2f}"/></svg>')
 
 
+def boards886():
+    """F12 arithmetic as three lap boards hung on nails: 312 + 574 = 886 (PLAN P1)"""
+    def board(x, w, n, cap, cls=''):
+        return (f'<g class="bq {cls}" transform="translate({x} 6)"><rect class="bq-f" width="{w}" height="40" rx="2"/><path class="bq-g" d="M6 13C{w * .3:.0f} 10 {w * .6:.0f} 16 {w - 6} 12M6 27C{w * .4:.0f} 24 {w * .7:.0f} 30 {w - 6} 26"/>'
+                f'<rect class="bq-sh" y="36" width="{w}" height="4"/><circle class="bq-n" cx="9" cy="9" r="2.6"/><circle class="bq-n" cx="{w - 9}" cy="9" r="2.6"/>'
+                f'<text class="bq-t" x="{w / 2}" y="30">{n}</text><text class="bq-c" x="{w / 2}" y="62">{cap}</text></g>')
+    return ('<svg class="b886" viewBox="0 0 470 70" aria-hidden="true" focusable="false">'
+            + board(0, 120, '312', 'on the map, with photos') + '<text class="bq-op" x="146" y="36">+</text>'
+            + board(172, 120, '574', 'more counted') + '<text class="bq-op" x="318" y="36">=</text>'
+            + board(344, 120, '886', 'documented', 'bq-r') + '</svg>')
+
+
 def proof1():
     """#317 Digital Butlers "Proof, not promises" band (counts stated beside the offer) + anatomy F12 checkable arithmetic"""
     return f'''<div class="v proof-1 has-bgf" data-tone="ground">
   <div class="bgf" aria-hidden="true"><div class="p1-gw" data-depth="-0.7"><span class="p1-ghost">886</span></div></div>
   <h2 class="h2x" data-split>On record since 2009</h2>
   <div class="rec">
-    <p class="rc rc-a"><b class="num" data-count>886</b><span>documented projects, 2018-2026, each with its price</span><span class="rc-sum num">312 on the map with photos + 574 more counted = 886</span></p>
+    <p class="rc rc-a"><b class="num" data-count>886</b><span>documented projects, 2018-2026, each with its price</span><span class="rc-sum num"><span class="sr-only">312 on the map with photos + 574 more counted = 886</span>{boards886()}</span></p>
     <p class="rc rc-b"><b class="num" data-count>177</b><span>before-and-after pairs published</span></p>
     <p class="rc rc-c">{ring49()}<b class="num" data-count>4.9</b><span>on 474 Google reviews</span></p>
     <p class="rc rc-d"><b class="num" data-count>5,000+</b><span>Central Texas homeowners</span></p>
@@ -343,7 +355,7 @@ def proof2():
     """Georgia Contractor Group (CROWN, GC report): the "at a glance" credential table as the proof unit, installer
     tier above review volume (builder brief 2.3)"""
     dims = {f: (w, h) for f, n, w, h in CREDS}
-    rows = ''.join(f'''<tr><td class="gl-b"><img src="assets/img/{f}.webp" width="{dims[f][0]}" height="{dims[f][1]}" alt="" loading="lazy" decoding="async"></td>
+    rows = ''.join(f'''<tr><td class="gl-b"><img src="assets/img/{f}.webp" width="{dims[f][0]}" height="{dims[f][1]}" alt="" loading="lazy" decoding="async"><svg class="gl-ld" viewBox="0 0 40 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ld-l" pathLength="1" d="M2 6H36"/><path class="ld-t" d="M2 1V11M38 6L32 2.5V9.5Z"/></svg></td>
       <th scope="row">{e(n)}<span class="gl-t">{t}</span></th><td class="gl-m">{e(m)}</td></tr>''' for f, n, t, m in CRED_ROWS)
     base = [('In business', 'Since 2009. Austin Pro Siding &amp; Windows (2009) and Sanders Roofing &amp; Exteriors (2010) merged in 2018.'),
             ('Office', '7801 N Lamar Blvd, Suite C70, Austin, TX 78752'),
@@ -367,7 +379,9 @@ def proof2():
 
 
 def pill(i):
-    return f'<span class="ipill" aria-hidden="true"><img src="{H}t/p{i}-320.webp" width="320" height="240" alt="" loading="lazy" decoding="async"></span>'
+    case = ('<svg class="ip-case" viewBox="0 0 46 19" preserveAspectRatio="none" focusable="false"><rect class="ip-sash" x="2" y="2" width="42" height="15"/>'
+            '<path class="ip-fr" d="M1 1H45V18H1ZM23 1V18"/></svg>')
+    return f'<span class="ipill" aria-hidden="true"><img src="{H}t/p{i}-320.webp" width="320" height="240" alt="" loading="lazy" decoding="async">{case}</span>'
 
 
 def proof3():

@@ -1379,3 +1379,30 @@ html:not(.motion) .h1-lap { display: none; }
 .bd-sh { fill: #000; opacity: .18; }
 .bd-hi { fill: #fff; opacity: .22; }
 .bd-n { fill: #F6C9C9; opacity: .9; }
+
+/* ---------- v4 Proof (PLAN §3 Proof) ---------- */
+.proof-1 .rc b { text-shadow: 1px 1px 0 #CFCBC2, 2px 2px 0 #C6C1B7, 3px 3px 0 #BCB7AC, 4px 4px 0 #B1ABA0, 5px 5px 0 #A59F93, 6px 6px 0 #999286, 7px 7px 0 #8C8579, 8px 8px 12px rgba(0, 0, 0, .12); }
+.rc .rc-sum { border-top: 0; padding-top: 4px; width: min(100%, 470px); max-width: none; }
+.b886 { display: block; width: min(100%, 470px); height: auto; overflow: visible; }
+.bq-f { fill: #E7D9BE; stroke: #8A6A3E; stroke-width: 1.2; }
+.bq-r .bq-f { fill: var(--red); stroke: var(--red-d); }
+.bq-g { fill: none; stroke: #8A6A3E; stroke-opacity: .35; }
+.bq-r .bq-g { stroke: #fff; stroke-opacity: .25; }
+.bq-sh { fill: #000; opacity: .16; }
+.bq-n { fill: #8F8A80; stroke: #47443F; stroke-width: .8; }
+.bq-t { font: 800 22px var(--f); fill: #161616; text-anchor: middle; font-variant-numeric: tabular-nums; }
+.bq-r .bq-t { fill: #fff; }
+.bq-c { font: 600 10.5px var(--f); fill: var(--ink2); text-anchor: middle; }
+.bq-op { font: 800 26px var(--f); fill: var(--red); text-anchor: middle; }
+.gl-b { position: relative; }
+.gl-ld { position: absolute; right: -14px; top: 50%; width: 30px; height: 12px; margin-top: -6px; overflow: visible; pointer-events: none; }
+.ld-l { fill: none; stroke: var(--red-on-night); stroke-width: 1.4; stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset .25s cubic-bezier(.4, 0, .2, 1); vector-effect: non-scaling-stroke; }
+.ld-t { fill: var(--red-on-night); stroke: var(--red-on-night); stroke-width: 1; opacity: 0; transition: opacity .2s ease .1s; vector-effect: non-scaling-stroke; }
+.gl-table tbody tr:hover .ld-l, .gl-table tbody tr:focus-within .ld-l { stroke-dashoffset: 0; }
+.gl-table tbody tr:hover .ld-t, .gl-table tbody tr:focus-within .ld-t { opacity: 1; }
+@media (max-width: 760px) { .gl-ld { display: none; } }
+.ipill { position: relative; }
+.ip-case { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ip-fr { fill: none; stroke: var(--sheet); stroke-width: 2.2; vector-effect: non-scaling-stroke; }
+.ip-sash { fill: #CFDCE0; opacity: .78; transform-box: fill-box; transform-origin: 0% 50%; }
+html:not(.motion) .ip-sash { transform: scaleX(.12); }
