@@ -29,7 +29,7 @@
 .studio-house svg{width:100%;height:auto;display:block;background:linear-gradient(#e9e4dc,#f1ede7 70%)}
 .studio-house figcaption{margin-top:var(--s-2);color:var(--slate-600)}
 .studio-picks{display:grid;gap:var(--s-4)}
-.studio-picks fieldset{border:0;padding:0;margin:0}
+.studio-picks fieldset{border:0;padding:0;margin:0;min-width:0}
 .studio-picks legend{font-family:var(--mona);font-weight:600;font-size:1rem;margin-bottom:var(--s-2)}
 .studio-picks legend small{display:block;font-weight:520;font-size:.8125rem;color:var(--slate-600)}
 .sw-row{display:flex;flex-wrap:wrap;gap:6px}

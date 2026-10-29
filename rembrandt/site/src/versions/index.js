@@ -1,7 +1,7 @@
 /* The 1|2|3 section switcher (PLAN §3.6) and the alternate versions (Run D).
    Defaults are server-rendered; versions 2 and 3 live as <template>s in versions.html, fetched on first use (inert until then).
    Switched-out versions are parked in a fragment, not destroyed: switching back is instant and keeps their state. */
-import { V } from './registry.js';
+import { V, settleTo } from './registry.js';
 import './header.js'; import './hero.js'; import './storm.js'; import './inspect.js'; import './layers.js'; import './estimate.js';
 import './install.js'; import './signature.js'; import './work.js'; import './reviews.js'; import './people.js'; import './towns.js';
 import './insurance.js'; import './faq.js'; import './close.js'; import './footer.js';
@@ -105,7 +105,7 @@ function writeUrl() {
   if (v) u.searchParams.set('v', v); else u.searchParams.delete('v');
   history.replaceState(history.state, '', u.pathname + (u.search ? u.search.replace(/%3A/gi, ':').replace(/%2C/gi, ',') : '') + u.hash);
 }
-function readUrl() { return (P.get('v') || '').split(',').map(s => s.split(':')).filter(([k, n]) => NAMES[k] && /^[123]$/.test(n)); }
+function readUrl() { return (P.get('v') || '').split(',').map(s => s.split(':')).filter(e => e.length === 2 && NAMES[e[0]] && /^[123]$/.test(e[1])); }
 
 // ---------- keyboard: 1 2 3 switch the section nearest the 40% line, H hides the pills
 function nearest() {
@@ -127,7 +127,7 @@ function showcase() {
   const btn = $('.vindex-btn', b), panel = $('.vindex-panel', b);
   btn.onclick = () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); };
   panel.addEventListener('click', e => {
-    const s = e.target.closest('[data-k]'); if (s) { const sec = sectionOf(s.dataset.k); swap(s.dataset.k, s.dataset.n, { keep: false }).then(() => sec && s.dataset.k !== 'header' && sec.scrollIntoView({ block: 'start' })); }
+    const s = e.target.closest('[data-k]'); if (s) { const sec = sectionOf(s.dataset.k); swap(s.dataset.k, s.dataset.n, { keep: false }).then(() => sec && s.dataset.k !== 'header' && settleTo(sec)); }
     if (e.target.closest('[data-copy]')) { navigator.clipboard && navigator.clipboard.writeText(location.href); e.target.textContent = 'Copied'; setTimeout(() => e.target.textContent = 'Copy link to this mix', 1200); }
   });
   d.body.append(b);

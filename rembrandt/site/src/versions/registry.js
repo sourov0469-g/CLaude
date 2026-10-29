@@ -13,6 +13,15 @@ export function sub(el, fn, margin = '10% 0px') {
 }
 // progress through a sticky stage: 0 at its top, 1 when its bottom meets the viewport bottom
 export const stageP = el => { const r = R(el); return clamp(-r.top / Math.max(1, r.height - innerHeight), 0, 1); };
+// put el's top at `at` px and keep correcting while content-visibility sections on the way render at their real height
+// (they settle a few frames after the jump, without scroll anchoring); done once it holds for two checks in a row
+export async function settleTo(el, at = 0) {
+  for (let i = 0, still = 0; i < 12 && still < 2; i++) {
+    const dy = el.getBoundingClientRect().top - at;
+    if (Math.abs(dy) < 2) still++; else { still = 0; scrollBy({ top: dy, behavior: 'instant' }); }
+    await new Promise(r => requestAnimationFrame(() => setTimeout(r, 60)));
+  }
+}
 export const once = (el, cb, opts = {}) => { const io = new IntersectionObserver(e => { if (e[e.length - 1].isIntersecting) { io.disconnect(); cb(); } }, opts); io.observe(el); };
 export const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // client-side stub of the estimate endpoint (A5), shared by the S5 alternates: ?submit=error | fail-once ; offline -> error
