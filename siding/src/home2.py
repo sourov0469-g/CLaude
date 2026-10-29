@@ -942,6 +942,7 @@ def money1():
     <div class="m1-ctl">
       <label class="lab" for="m1-amt">Project amount <output class="num" for="m1-amt">$15,000</output></label>
       <input class="range" id="m1-amt" type="range" min="2000" max="50000" step="500" value="15000" aria-valuetext="$15,000">
+      <svg class="m1-lev" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="ml-b" x="1" y="3" width="398" height="24" rx="5"/><rect class="ml-v" x="14" y="9" width="372" height="12" rx="6"/><path class="ml-m" d="M200 9V21"/><circle class="ml-bub" cx="0" cy="15" r="4.6" data-bub/></svg>
       <div class="terms" role="radiogroup" aria-label="Payment plan">{terms('m1')}</div>
       <p class="fine">{FINE}</p>
     </div>
@@ -962,9 +963,13 @@ DIST = {
 assert sum(DIST['siding']['c']) == 415 and sum(DIST['windows']['c']) == 376
 
 
+BOARD_I = ('<svg class="db-bd" viewBox="0 0 10 100" preserveAspectRatio="none" focusable="false"><rect class="db-sh" x="7.6" width="2.4" height="100"/><path class="db-g" d="M3 0C2 30 4 60 3 100M6 0C7 40 5 70 6.4 100"/></svg>'
+           '<svg class="db-nl" focusable="false"><circle cx="50%" cy="7" r="2.2"/></svg><svg class="db-chalk" viewBox="0 0 24 16" focusable="false"><path d="M2 8L9 14L22 2"/></svg>')
+
+
 def dist_bars(d):
     mx = max(d['c'])
-    return ''.join(f'<li class="db{" is-med" if k == d["med"] else ""}" style="--h:{c / mx:.4f}"><span class="db-n num">{c}</span><i aria-hidden="true"></i><span class="db-l">{SHORT13[k]}</span>'
+    return ''.join(f'<li class="db{" is-med" if k == d["med"] else ""}" style="--h:{c / mx:.4f}"><span class="db-n num">{c}</span><i aria-hidden="true">{BOARD_I}</i><span class="db-l">{SHORT13[k]}</span>'
                    f'<span class="sr-only">{BANDS13[k]}: {c} jobs</span></li>' for k, c in enumerate(d['c']))
 
 
@@ -1009,6 +1014,8 @@ def money3():
       </div>
     </div>
     <div class="receipt" aria-live="polite">
+      <svg class="rc-perf" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 5H400"/></svg>
+      <svg class="rc-stamp" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><defs><path id="rcs-p" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1 -88 0"/></defs><circle class="st-o" cx="60" cy="60" r="56"/><circle class="st-i" cx="60" cy="60" r="34"/><text class="st-t"><textPath href="#rcs-p" startOffset="0">PAID IN FULL · CASH · CHECK · ACH ·</textPath></text><text class="st-n" x="60" y="68">-10%</text></svg>
       <p class="rc-h">Your estimate</p>
       <div class="rc-line rc-amt"><span>Project</span><label class="rc-in"><span class="sr-only">Project amount in dollars</span>$<input type="text" inputmode="numeric" value="30,000" autocomplete="off"></label></div>
       <div class="rc-line" data-line="10"><span>Holiday Savings, through November 30</span><b>-10%</b></div>

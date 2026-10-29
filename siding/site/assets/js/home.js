@@ -1094,6 +1094,9 @@
       const A = +inp.value, m = pmt(A, apr, n), f = usd.format(A);
       out.textContent = f; inp.setAttribute('aria-valuetext', f);
       odo(usd2.format(m));
+      // v4: the level's bubble rides the amount along the vial (2,000 to 50,000), springing a little when moved
+      const bub = $('[data-bub]', r), x = 20 + (A - 2000) / 48000 * 360;
+      if (bub) { if (motionOK()) G.to(bub, { attr: { cx: x }, duration: 0.45, ease: 'back.out(1.4)', overwrite: true }); else bub.setAttribute('cx', x); }
       sub.textContent = `${f} over ${n} months at ${apr ? (apr * 100).toFixed(2) + '%' : '0%'} APR`;
       srSay(sr, `${usd2.format(m)} a month`);
     };
@@ -1134,6 +1137,9 @@
       lines[5].classList.toggle('is-off', !heroes); lines.p.classList.toggle('is-off', !full);
       const pct = 10 + (heroes ? 5 : 0) + (full ? 10 : 0), price = Math.round(A * (100 - pct) / 100);
       was.textContent = usd.format(A); odo(usd.format(price)); save.textContent = usd.format(A - price);
+      // v4: the pay-in-full stamp lands when that box is ticked (scale 1.3 to 1, never rotated: builder brief 6)
+      const rc = $('.receipt', r), was0 = rc.classList.contains('is-paid'); rc.classList.toggle('is-paid', full);
+      if (full && !was0 && motionOK()) G.fromTo($('.rc-stamp', r), { scale: 1.35, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'power4.out' });
     };
     b.on(amt, 'input', upd); b.on(amt, 'blur', () => { const v = +amt.value.replace(/[^\d]/g, '') || 0; amt.value = v.toLocaleString('en-US'); upd(); });
     boxes.forEach(x => b.on(x, 'change', upd));

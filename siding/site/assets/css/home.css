@@ -1544,3 +1544,29 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .nw { position: relative; }
 .nw-nails { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .nw-nails circle { fill: #B9B6AE; stroke: #47443F; stroke-width: 1; }
+
+/* ---------- v4 Money (PLAN §3 Money) ---------- */
+.m1-lev { display: block; width: 100%; height: 26px; margin-top: 2px; overflow: visible; }
+.ml-b { fill: #F2C230; stroke: #161616; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.ml-v { fill: #CFE8B5; stroke: #161616; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ml-m { stroke: #161616; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ml-bub { fill: #fff; stroke: #161616; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.db i { position: relative; overflow: visible; }
+.db-bd { position: absolute; inset: 0; width: 100%; height: 100%; }
+.db-sh { fill: #000; opacity: .22; }
+.db-g { fill: none; stroke: #F1EFEA; stroke-opacity: .2; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.db-nl { position: absolute; left: 0; top: 0; width: 100%; height: 14px; overflow: visible; }
+.db-nl circle { fill: #8F8A80; stroke: #141414; stroke-width: .8; }
+.db-chalk { display: none; position: absolute; left: 50%; bottom: calc(100% + 26px); width: 26px; height: 18px; margin-left: -13px; overflow: visible; }
+.db-chalk path { fill: none; stroke: #6FA8DC; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.db.is-med .db-chalk { display: block; }
+@media (max-width: 899px) { .db-nl, .db-chalk { display: none !important; } }
+.rc-perf { position: absolute; left: 14px; right: 14px; top: 14px; width: calc(100% - 28px); height: 10px; }
+.rc-perf path { stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.receipt { padding-bottom: 128px; }
+.rc-stamp { position: absolute; left: 50%; bottom: 22px; width: 92px; height: 92px; margin-left: -46px; opacity: 0; pointer-events: none; mix-blend-mode: multiply; }
+.receipt.is-paid .rc-stamp { opacity: .9; }
+.st-o, .st-i { fill: none; stroke: var(--red); stroke-width: 3; }
+.st-i { stroke-width: 1.6; }
+.st-t { font: 800 10.4px var(--f); fill: var(--red); letter-spacing: .06em; }
+.st-n { font: 800 22px var(--f); fill: var(--red); text-anchor: middle; }
