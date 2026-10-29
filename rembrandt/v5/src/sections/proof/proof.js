@@ -2,10 +2,9 @@
 // $2M liability cover, family-run since 1995 (S1303 gate 47: nothing invented).
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { lines, rise, onEnter } from '../../js/fx.js';
+import { lines, rise, onEnter, beats, EASE } from '../../js/fx.js';
 import { loop } from '../../js/gl.js';
 import { spring, step } from '../../js/spring.js';
-import { horizontalLoop } from '../../js/hloop.js';
 
 const seeded = s => () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
 
@@ -127,6 +126,7 @@ function ledger(root, c) {
   }
   const cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
+  beats(root, [root.querySelector('.pv2-h'), [root.querySelector('.pv2-big'), root.querySelector('.pv2-count')], root.querySelector('.pv2-note')]); // G1
   root.classList.add('is-armed');
   const lines = [...root.querySelectorAll('.pv2-cl')], dust = [...root.querySelectorAll('.pv2-dust')], crank = root.querySelector('.pv2-crank');
   gsap.set(lines, { drawSVG: '0%' }); gsap.set(dust, { opacity: 0 });
@@ -144,59 +144,94 @@ function ledger(root, c) {
   return cleanup;
 }
 
-// v3 the trains: [BANK] Q161 GreenSock horizontalLoop, lifted whole (js/hloop.js), measured after document.fonts.ready.
-// Config per the entry: { repeat: -1, paddingRight } with the gap carried by each item's own padding; speed set so one
-// lap takes 60s (F17 marquee token, Stronghold); the second train runs reversed. next()/previous() glide both trains
-// one item (0.8s power3.inOut) and leave them paused; the pause button (WCAG 2.2.2) holds or resumes; trains rest
-// while off screen. Reduced motion: no loops, the trains stand still and the controls hide.
-// V7 with [BANK] Q149 (scroll velocity [0,1000] -> [0,5] boosts the speed, then springs back): each fact rides under a
-// row of ridge-cap shingles that ripple with that boost (CSS sin() per cap, amplitude from the boost); roofing nails
-// separate the facts; a giant 6/12 roofline behind leans up to 1.5 degrees with speed.
-function trains(root, c) {
-  const items = [...root.querySelectorAll('.pv3-it')];
-  // ridge caps: one small overlapping cap per ~0.42em of each item's width, built before the loop measures
-  for (const it of items) {
-    if (it.querySelector('.pv3-cap')) continue;
-    const w = it.offsetWidth, em = parseFloat(getComputedStyle(it).fontSize), cw = em * 0.42, n = Math.max(3, Math.floor((w - em * 0.5) / cw));
-    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'pv3-cap'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
-    svg.setAttribute('viewBox', `0 0 ${n * 10} 6`); svg.setAttribute('preserveAspectRatio', 'none');
-    svg.innerHTML = Array.from({ length: n }, (_, i) => `<path style="--i:${i}" d="M${i * 10} 6 V2.4 Q${i * 10 + 5} -0.6 ${i * 10 + 11} 2.4 V6 Z"/>`).join('');
-    it.prepend(svg);
+// v3 [BANK] Count Up (React Bits; deep read slice 4 #279, code read: animation/code-source/count-up-reactbits/CountUp.jsx)
+// in roll mode, inside [BANK] Q409 Grow My Business's proof stack (CROWN: counters as the proof stack). Roll mode, as
+// in the source: every place is a column; its travel is the mod-10 shortest distance plus whole extra turns, capped at
+// 3 − rank (rank 0 = the rightmost column); a 4-cell strip (offsets −1..+2, cells 1.2em) shows mod10(base + offset − 1)
+// and is translated by −(1 + pos − base)·1.2em; columns stagger min(0.07, total·0.4/(n − 1)); a vertical motion blur
+// σ = min(0.05·cell, speed·cell/600) only while σ > 0.2; ease cubic-bezier(0.33, 1, 0.68, 1); fires once when the
+// number enters the view; an sr-only copy carries the final value; reduced motion lands at once. Adapted: each digit
+// rolls on a strip of shingle tabs (courses moving up a roof) under a ridge-cap rail; duration 2s → 1.4s (the bank's
+// recorded 1.2–1.6s trade counters, toward F17); aggregate-led: 4.9 and 295 lead, 2001 / 1995 / $2M follow; a sun
+// sheen on the slate follows the pointer (the background answers back).
+const bezier = (x1, y1, x2, y2) => { // cubic-bezier easing (Newton–Raphson on x, then y)
+  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx, cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+  const sx = t => ((ax * t + bx) * t + cx) * t, sy = t => ((ay * t + by) * t + cy) * t, dx = t => (3 * ax * t + 2 * bx) * t + cx;
+  return u => { if (u <= 0) return 0; if (u >= 1) return 1; let t = u; for (let k = 0; k < 6; k++) { const e = sx(t) - u, d = dx(t); if (Math.abs(e) < 1e-5 || !d) break; t -= e / d; } return sy(t); };
+};
+const ROLL = { cell: 1.2, stagger: 0.07, total: 1.4, ease: bezier(0.33, 1, 0.68, 1) };
+const mod10 = n => ((n % 10) + 10) % 10;
+function rollModel(el) { // digits become columns; anything else ($, ., M) is a fixed mark
+  const text = el.dataset.to, digits = [...text].filter(ch => /\d/.test(ch)), to = +digits.join(''), cols = [];
+  el.querySelectorAll('.pv3-col,.pv3-mark,.pv3-defs').forEach(n => n.remove());
+  const frag = document.createDocumentFragment(); let di = 0;
+  for (const ch of text) {
+    if (/\d/.test(ch)) {
+      const place = digits.length - 1 - di, d = +ch; di++;
+      const box = document.createElement('span'); box.className = 'pv3-col'; box.setAttribute('aria-hidden', 'true');
+      const strip = document.createElement('span'); strip.className = 'pv3-strip';
+      for (let o = 0; o < 4; o++) { const c = document.createElement('span'); c.className = 'pv3-cell'; c.textContent = mod10(o - 1); strip.append(c); }
+      box.append(strip); frag.append(box); cols.push({ place, to: d, box, strip, cells: [...strip.children], base: 0, sigma: 0 });
+    } else { const m = document.createElement('span'); m.className = 'pv3-mark'; m.setAttribute('aria-hidden', 'true'); m.textContent = ch; frag.append(m); }
   }
-  if (!c.motion) return;
-  const rows = [...root.querySelectorAll('.pv3-row')], pause = root.querySelector('.pv3-pause'), gable = root.querySelector('.pv3-gable');
-  let loops = [], held = false, seen = true, dead = false;
-  const apply = () => { loops.forEach(l => l.paused(held || !seen)); pause.setAttribute('aria-pressed', String(held)); };
-  const st = { boost: 0, ph: 0 }; let raf = 0, last = 0;
-  const frame = t => {
-    raf = 0; const dt = Math.min(1 / 30, (t - last) / 1000 || 1 / 60); last = t;
-    st.ph += dt * (3 + st.boost * 4);
-    root.style.setProperty('--amp', (st.boost * 2.2).toFixed(2)); root.style.setProperty('--ph', st.ph.toFixed(2));
-    gsap.set(gable, { rotation: -Math.min(1.5, st.boost * 0.3) });
-    loops.forEach(l => l.timeScale(1 + st.boost));
-    if (st.boost > 0.01 && seen) raf = requestAnimationFrame(frame); else { root.style.setProperty('--amp', 0); loops.forEach(l => l.timeScale(1)); }
-  };
-  const build = () => c.ctx.add(() => {
-    if (dead || !root.isConnected) return;
-    loops = rows.map((row, i) => {
-      const lap = row.scrollWidth;
-      return horizontalLoop(row.children, { repeat: -1, paddingRight: 0, speed: lap / 60 / 100, reversed: i === 1 });
-    });
-    ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: s => { seen = s.isActive; apply(); },
-      onUpdate: s => { if (held) return; const b = gsap.utils.clamp(0, 5, Math.abs(s.getVelocity()) / 1000 * 5); if (b > st.boost) { gsap.to(st, { boost: b, duration: 0.15, overwrite: 'auto', onComplete: () => gsap.to(st, { boost: 0, duration: 0.9, ease: 'power2.out' }) }); if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } } } });
-    { const r = root.getBoundingClientRect(); seen = r.bottom > 0 && r.top < innerHeight; } // start state: onToggle only reports changes
-    apply();
+  el.prepend(frag);
+  // vertical-only motion blur, as in the source: one SVG feGaussianBlur per column, stdDeviation "0 σ"
+  const uid = 'pv3f' + Math.random().toString(36).slice(2, 7), defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  defs.setAttribute('class', 'pv3-defs'); defs.setAttribute('aria-hidden', 'true'); defs.setAttribute('width', '0'); defs.setAttribute('height', '0');
+  defs.innerHTML = '<defs>' + cols.map((_, i) => `<filter id="${uid}-${i}" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="0 0"/></filter>`).join('') + '</defs>';
+  el.append(defs); cols.forEach((col, i) => { col.blur = defs.querySelector(`#${uid}-${i} feGaussianBlur`); col.fid = `${uid}-${i}`; });
+  cols.forEach((c, index) => { // rank 0 is the rightmost column (CountUp: rank = columns.length − 1 − index)
+    const rank = cols.length - 1 - index, base = mod10(c.to - 0);
+    const turns = Math.min(Math.floor(to / 10 ** (c.place + 1)), Math.max(0, 3 - rank));
+    c.delta = base + 10 * turns; c.index = index;
   });
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
-  const onClick = e => {
-    const b = e.target.closest('.pv3-btn'); if (!b || !loops.length) return;
-    if (b === pause) { held = !held; apply(); return; }
-    held = true; pause.setAttribute('aria-pressed', 'true');
-    const d = Number(b.dataset.dir), v = { duration: 0.8, ease: 'power3.inOut' };
-    loops.forEach((l, i) => { l.closestIndex(true); (d * (i ? -1 : 1) > 0 ? l.next(v) : l.previous(v)); });
+  return { cols, to };
+}
+function rollers(root, c) {
+  const done = [], cleanup = () => done.forEach(f => f());
+  const els = [...root.querySelectorAll('.pv3-roll')], models = els.map(rollModel);
+  const set = (col, pos) => {
+    const base = Math.floor(pos);
+    if (base !== col.base) { col.base = base; col.cells.forEach((n, o) => { n.textContent = mod10(base + o - 1); }); }
+    col.strip.style.transform = `translateY(${(-(1 + pos - base) * ROLL.cell).toFixed(4)}em)`;
   };
-  root.addEventListener('click', onClick);
-  return () => { dead = true; cancelAnimationFrame(raf); gsap.killTweensOf(st); loops.forEach(l => l.destroy()); root.removeEventListener('click', onClick); };
+  const land = m => m.cols.forEach(col => { set(col, col.delta); col.strip.style.filter = ''; });
+  // courses behind the board, and the sheen that follows the pointer
+  const courses = root.querySelector('.pv3-courses'), NS = 'http://www.w3.org/2000/svg';
+  const paint = () => {
+    const W = root.clientWidth, H = root.clientHeight; courses.setAttribute('viewBox', `0 0 ${W} ${H}`); courses.innerHTML = '';
+    for (let y = 30, i = 0; y < H; y += 46, i++) { const p = document.createElementNS(NS, 'path'); let d = `M0 ${y}H${W}`; for (let x = (i % 2) * 46; x < W; x += 92) d += `M${x} ${y}v-14`; p.setAttribute('d', d); courses.append(p); }
+  };
+  paint(); const ro = new ResizeObserver(paint); ro.observe(root); done.push(() => ro.disconnect());
+  if (!c.motion) { models.forEach(land); return cleanup; }
+  const sheen = root.querySelector('.pv3-sheen'), qx = gsap.quickTo(sheen, 'x', { duration: 0.9, ease: 'power3.out' });
+  const onMove = e => { if (e.pointerType !== 'mouse') return; const r = root.getBoundingClientRect(); qx(e.clientX - r.left - r.width / 2); };
+  root.addEventListener('pointermove', onMove, { passive: true }); done.push(() => root.removeEventListener('pointermove', onMove));
+  beats(root, [root.querySelector('.pv3-head'), root.querySelectorAll('.pv3-lab'), root.querySelector('.pv3-foot')]);
+  // each number rolls once, when it enters the view
+  models.forEach((m, k) => {
+    m.cols.forEach(col => set(col, 0));
+    const n = m.cols.length, stagger = n > 1 ? Math.min(ROLL.stagger, (ROLL.total * 0.4) / (n - 1)) : 0, span = ROLL.total - stagger * (n - 1);
+    const fontPx = () => parseFloat(getComputedStyle(els[k]).fontSize);
+    const run = () => {
+      const cell = ROLL.cell * fontPx(), t0 = performance.now();
+      const tick = now => {
+        const t = (now - t0) / 1000; let live = false;
+        m.cols.forEach(col => {
+          const u = Math.min(1, Math.max(0, (t - col.index * stagger) / span)), pos = col.delta * ROLL.ease(u);
+          set(col, pos); if (u < 1) live = true;
+          const u0 = Math.max(0, u - 0.004), u1 = Math.min(1, u + 0.004);
+          const speed = u1 > u0 ? (col.delta * Math.abs(ROLL.ease(u1) - ROLL.ease(u0))) / (u1 - u0) / span : 0;
+          const sigma = u > 0 && u < 1 ? Math.min(cell * 0.05, (speed * cell) / 600) : 0;
+          if (Math.abs(sigma - col.sigma) > 0.05 || (sigma === 0 && col.sigma !== 0)) { col.sigma = sigma; if (sigma > 0.2) { col.blur.setAttribute('stdDeviation', `0 ${sigma.toFixed(2)}`); col.strip.style.filter = `url(#${col.fid})`; } else col.strip.style.filter = ''; }
+        });
+        if (live) raf = requestAnimationFrame(tick); else land(m);
+      };
+      let raf = requestAnimationFrame(tick); done.push(() => cancelAnimationFrame(raf));
+    };
+    ScrollTrigger.create({ trigger: els[k], start: 'top 92%', once: true, onEnter: run });
+  });
+  return cleanup;
 }
 
-export default { 1: constellation, 2: ledger, 3: trains };
+export default { 1: constellation, 2: ledger, 3: rollers };

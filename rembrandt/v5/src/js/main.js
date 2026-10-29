@@ -107,6 +107,12 @@ export function switchTo(sec, v) {
 }
 
 export function boot(mods) {
+  // sections mount once the embedded Epilogue is ready (capped at 1.2s), so every init that measures or draws type
+  // (the Constellation's "4.9" outline, the hero canvases) runs on the real font, as it did in the owner-kept build
+  const fontReady = document.fonts ? Promise.race([Promise.all(['300', '800', '900'].map(w => document.fonts.load(`${w} 100px Epilogue`))), new Promise(r => setTimeout(r, 1200))]) : Promise.resolve();
+  fontReady.then(() => start(mods), () => start(mods));
+}
+function start(mods) {
   MODS = mods;
   document.querySelectorAll('img[data-img][src]').forEach(i => { IMG[i.dataset.img] = IMG[i.dataset.img] || i.getAttribute('src'); });
   ORDER = [...document.querySelectorAll('[data-section]')];

@@ -50,30 +50,6 @@
   .pv2-check{margin-top:8px}
 }
 
-/* v3: two proof trains (Q161 horizontalLoop), white on ink; the second runs the other way in the muted tint. A pause and two
-   step buttons drive the loops (Q161 next()/previous()); reduced motion shows the trains still. */
-.pv3{background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,5vh,56px);padding:clamp(4.5rem,3rem + 6vw,8rem) 0 calc(clamp(3rem,2rem + 4vw,5rem) + var(--mbar))}
-.pv3-top{padding:0 var(--gutter)}
-.pv3-h{font-size:.9375rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-blue-muted)}
-.pv3-trains{display:grid;gap:clamp(28px,5vh,56px);overflow:hidden;padding-top:.3em}
-.pv3-row{display:flex;flex-wrap:nowrap;white-space:nowrap;gap:0;font-size:clamp(3.5rem,9vw,9.5rem);font-weight:800;line-height:1.08;letter-spacing:-.04em}
-.pv3-it{display:inline-flex;align-items:center;flex:none;padding-right:.5em}
-.pv3-row--b{color:var(--on-blue-muted)}
-.pv3-star{width:.62em;height:.62em;margin:0 .06em 0 .04em;fill:currentColor;align-self:center}
-.pv3-mark{width:.6em;height:.36em;margin-left:.5em;fill:none;stroke:var(--on-blue-muted);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
-.pv3-ctl{display:flex;justify-content:flex-end;gap:8px;padding:0 var(--gutter)}
-.pv3-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid rgb(255 255 255/.5);border-radius:50%;background:none;color:#fff;cursor:pointer;
-  transition:background-color var(--dur-quick) var(--ease-std),border-color var(--dur-quick) var(--ease-std)}
-.pv3-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.pv3-btn .i-play{fill:currentColor;stroke:none}
-.pv3-pause[aria-pressed="false"] .i-play,.pv3-pause[aria-pressed="true"] .i-pause{display:none}
-@media (hover:hover){.pv3-btn:hover{background:rgb(255 255 255/.12);border-color:#fff}}
-.pv3-btn:active{scale:.96}
-html[data-motion="reduced"] .pv3-ctl{display:none}
-/* reduced motion: the designed still sets every credential whole, wrapped like courses, instead of a cut-off train */
-html[data-motion="reduced"] .pv3-row{flex-wrap:wrap;white-space:normal;row-gap:.35em;font-size:clamp(2rem,4.6vw,5rem);padding:0 var(--gutter)}
-html[data-motion="reduced"] .pv3-it{display:inline-block;flex:0 1 auto;max-width:100%;text-wrap:balance}
-html[data-motion="reduced"] .pv3-it>svg:not(.pv3-cap){display:inline-block;vertical-align:baseline}
 
 /* ---------- V7 upgrades (PLAN-V7 §6 Reviews). v1 above is untouched. */
 /* v2: the rules are roofer's chalk lines, snapped taut as each row arrives; a chalk-line reel feeds them; faint shingle
@@ -110,29 +86,47 @@ html[data-motion="reduced"] .pv3-it>svg:not(.pv3-cap){display:inline-block;verti
 @keyframes hx-snap{0%{transform:translateY(0)}25%{transform:translateY(2px)}50%{transform:translateY(-1.5px)}75%{transform:translateY(.8px)}100%{transform:translateY(0)}}
 @media (max-width:899px){.pv2-reel{left:auto;right:0;top:-46px}}
 
-/* v3: the trains run under rows of ridge-cap shingles that ripple with scroll speed; roofing nails separate the facts;
-   a giant 6/12 roofline behind leans a degree with speed. */
-.pv3{--vbg:var(--ink)}
-.pv3-gable{position:absolute;left:0;right:0;bottom:0;width:100%;height:78%;pointer-events:none;transform-origin:50% 100%}
-.pv3-gable path{fill:none;stroke:oklch(1 0 0 / .1);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.pv3-gable .pv3-gable-in{stroke:oklch(1 0 0 / .05)}
-.pv3-top,.pv3-trains,.pv3-ctl{position:relative}
-.pv3-it{position:relative}
-.pv3-cap{position:absolute;left:0;top:-.2em;width:calc(100% - .5em);height:.2em;overflow:visible}
-.pv3-cap path{fill:var(--sun);stroke:var(--ink);stroke-width:1.5;transform:translateY(calc(sin(var(--ph,0) * 1rad + var(--i) * .7rad) * var(--amp,0) * 1px))}
-.pv3-row--b .pv3-cap path{fill:var(--on-blue-muted)}
-.pv3-mark{width:.24em;height:.4em;margin-left:.5em;fill:none;stroke:none}
-.pv3-mark .pv3-nh{fill:var(--on-blue-muted)}
-.pv3-mark .pv3-ns{fill:var(--on-blue-muted);opacity:.8}
-.pv3-btn{position:relative}
-.pv3-nail{left:50%;top:-14px;width:12px;height:18px;translate:-50% 0;opacity:0;transition:opacity .18s var(--ease-x),transform .2s var(--ease-x)}
-.pv3-nail path{fill:var(--on-blue-muted)}
-@media (hover:hover){.pv3-btn[data-dir]:hover .pv3-nail{opacity:1;transform:translateY(-4px)}}
-.pv3-btn[data-dir]:focus-visible .pv3-nail{opacity:1;transform:translateY(-4px)}
-.pv3-btn.is-press .pv3-nail{animation:pv-drive .3s var(--ease-x)}
-@keyframes pv-drive{0%{opacity:1;transform:translateY(-4px)}45%{opacity:1;transform:translateY(5px) scaleY(.7)}100%{opacity:0;transform:translateY(5px)}}
-.pv3-pause .i-pause{stroke-dasharray:12}
-@media (hover:hover){.pv3-pause:hover .i-pause{animation:hx-draw .25s var(--ease-x)}}
-@keyframes hx-draw{from{stroke-dashoffset:12}}
-.pv3-pause.is-press svg{animation:pv-bounce .3s var(--ease-spring)}
-@keyframes pv-bounce{0%{scale:.92}100%{scale:1}}
+
+/* v3 (PLAN-FULL.md §2): the roller board. [BANK] Count Up roll mode inside Q409's proof stack: each digit rolls on a strip of
+   shingle tabs under a ridge-cap rail; a slate roof panel with a sun sheen that follows the pointer. */
+.pv3{--vbg:#1d2536;position:relative;background:#1d2536;color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(4rem,3rem + 5vw,7rem) + var(--mbar))}
+.pv3-sheen{position:absolute;left:50%;top:-10%;width:46vw;height:120%;margin-left:-23vw;pointer-events:none;background:linear-gradient(100deg,transparent 30%,oklch(0.9 0.12 85 / .09) 50%,transparent 70%);will-change:transform}
+.pv3-courses{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pv3-courses path{fill:none;stroke:oklch(1 0 0 / .05);stroke-width:1.5}
+.pv3-in{position:relative;max-width:1240px;margin:0 auto;display:grid;gap:clamp(36px,5vw,64px)}
+.pv3-kick{font-size:.875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sun)}
+.pv3-h{margin-top:10px;font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.025em;max-width:16ch}
+.pv3-board{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(28px,4vw,56px) clamp(20px,3vw,40px);align-items:end}
+.pv3-stat{grid-column:span 2;display:grid;gap:12px;justify-items:start}
+.pv3-stat--xl{grid-column:span 3}
+.pv3-roll{position:relative;display:inline-flex;align-items:flex-end;margin:0;padding-top:.22em;font-weight:900;font-size:clamp(2.8rem,6vw,5.5rem);line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums}
+.pv3-stat--xl .pv3-roll{font-size:clamp(4.6rem,13vw,11.5rem)}
+/* ridge-cap rail over the row of tabs */
+.pv3-roll::before{content:"";position:absolute;left:-.06em;right:-.06em;top:0;height:.2em;border-radius:.1em .1em .04em .04em;background:repeating-linear-gradient(90deg,#d99a06 0 .46em,#b47e04 .46em .5em);box-shadow:0 .04em 0 oklch(0 0 0 / .35)}
+.pv3-col{position:relative;display:inline-block;height:1.2em;overflow:hidden;margin-right:.04em;border-radius:.03em}
+.pv3-strip{display:flex;flex-direction:column;transform:translateY(-1.2em);will-change:transform}
+.pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:#f6f1e4;background:linear-gradient(#2b3650 0 22%,#36425f 26%,#323e5a 100%);box-shadow:inset 0 -.04em 0 oklch(0 0 0 / .45),inset .04em 0 0 oklch(0 0 0 / .25)}
+.pv3-mark{display:inline-grid;place-items:center;height:1.2em;padding:0 .04em;color:var(--sun)}
+.pv3-lab{display:flex;align-items:center;gap:8px;margin:0;font-size:1.0625rem;font-weight:600;color:oklch(1 0 0 / .78)}
+.pv3-stat--xl .pv3-lab{font-size:1.25rem;color:#fff}
+.pv3-star{width:1em;height:1em;fill:var(--sun)}
+.pv3-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding-top:24px;border-top:1px solid oklch(1 0 0 / .14)}
+.pv3-also{margin:0;font-size:1.0625rem;font-weight:600}
+/* R15: five stars fly in along the link (hover); they settle with a pop (press) */
+.pv3-google{position:relative;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:#fff;text-decoration:underline;text-decoration-color:oklch(1 0 0 / .35);text-underline-offset:6px}
+.pv3-stars{left:0;bottom:calc(100% - 4px);width:110px;height:16px}
+.pv3-st{fill:var(--sun);opacity:0;transform:translateX(-28px);transition:opacity .15s var(--ease-x) calc(var(--i) * 30ms),transform .25s var(--ease-x) calc(var(--i) * 30ms)}
+@media (hover:hover){.pv3-google:hover .pv3-st{opacity:1;transform:none}}
+.pv3-google:focus-visible .pv3-st{opacity:1;transform:none}
+.pv3-google.is-press .pv3-st{opacity:1;transform:none;animation:pv3-pop .3s var(--ease-spring) calc(var(--i) * 40ms)}
+.pv3-st path{transform-box:fill-box;transform-origin:50% 50%}
+@keyframes pv3-pop{0%{scale:1}45%{scale:1.45}100%{scale:1}}
+@media (max-width:760px){
+  .pv3-board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pv3-stat,.pv3-stat--xl{grid-column:span 1}
+  .pv3-stat--xl .pv3-roll{font-size:clamp(3.6rem,17vw,6rem)}
+  .pv3-stat:last-child{grid-column:span 2}
+  .pv3-stat--xl .pv3-lab{font-size:1rem}
+  .pv3-lab{gap:6px}
+}
+.pv3-defs{position:absolute;width:0;height:0;overflow:hidden}

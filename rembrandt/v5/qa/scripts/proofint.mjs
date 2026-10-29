@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const FILE = 'file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html';
+const b = await chromium.launch(); const out = []; const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+const centre = sel => p.evaluate(sel => { const r = document.querySelector(sel).getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, sel);
+const hov = async (sel, el, prop = 'opacity') => { const [x, y] = await centre(sel); await p.mouse.move(x, y, { steps: 6 }); await p.waitForTimeout(400); return p.evaluate(([el, prop]) => getComputedStyle(document.querySelector(el))[prop], [el, prop]); };
+const press = async sel => { await p.evaluate(sel => document.querySelector(sel).dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerType: 'mouse' })), sel); await p.waitForTimeout(80); return p.evaluate(sel => document.querySelector(sel).classList.contains('is-press'), sel); };
+await p.goto(FILE + '?v=proof2'); await p.waitForTimeout(700);
+await p.evaluate(() => document.querySelector('.pv2-check').scrollIntoView({ block: 'center' })); await p.waitForTimeout(1500);
+out.push(`R14 V2 check link: hover chalk clip ${await hov('.pv2-check', '.pv2-check .rx-h', 'clipPath')}; press is-press ${await press('.pv2-check')}`);
+await p.goto(FILE + '?v=proof3'); await p.waitForTimeout(700);
+await p.evaluate(() => document.getElementById('proof').scrollIntoView()); await p.waitForTimeout(500);
+await p.evaluate(() => document.querySelector('.pv3-foot').scrollIntoView({ block: 'center' })); await p.waitForTimeout(2600);
+const shown = await p.evaluate(() => [...document.querySelectorAll('.pv3-roll')].map(r => { const cols = [...r.querySelectorAll('.pv3-col')]; return r.dataset.to + '=' + [...r.childNodes].filter(n => n.classList && (n.classList.contains('pv3-col') || n.classList.contains('pv3-mark'))).map(n => n.classList.contains('pv3-mark') ? n.textContent : n.querySelectorAll('.pv3-cell')[1].textContent).join(''); }));
+out.push('V3 rollers landed: ' + shown.join(' | '));
+out.push(`R15 V3 Google link: hover star opacity ${await hov('.pv3-google', '.pv3-st')}; press is-press ${await press('.pv3-google')}`);
+out.push('errors: ' + (errs.length ? errs.join(' | ') : 0)); console.log(out.join('\n')); await b.close();

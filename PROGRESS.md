@@ -4,7 +4,7 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 
 ## State
 - **Branch:** `claude/sweet-hypatia-it8evf`.
-- **Phase:** 1 (Hero ×3) complete → Phase 2 (Reviews) next.
+- **Phase:** 2 (Reviews) complete → Phase 3 (Work) next.
 - **Build:** `cd rembrandt/v5 && TOOLS=<scratchpad>/tools node build/build.mjs` → `rembrandt/v5/rembrandt-homepage.html`. TOOLS holds esbuild, gsap, lenis and playwright in `node_modules`; if the scratchpad is lost, reinstall them there.
 - **Sources:** `rembrandt/v5/src/` holds `index.html`, `base.css`, `js/*`, `sections/<id>/{v1,v2,v3}.html, <id>.css, <id>.js` and `data/towns.js`.
 
@@ -76,3 +76,26 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - At 375 the sweep was dropped by a font reflow. A load sweep still under way is now re-laid onto the new tiles.
   - H3's reduced-motion pause button showed despite `hidden` (CSS display won). Added `.hx3-pause[hidden]{display:none}`.
   - H3 photo: the tree canopy hid the roof and the yard sign sat behind the CTA, so it was swapped to job-truck.
+
+### Phase 2: Reviews ×3
+- **V1 Constellation, untouched. Verification method:**
+  - (a) Source hashes against e685bee, the owner-kept build: `constellation()` (e7d174cd…), v1.html, gl.js, spring.js, the fx helpers it imports (`lines`, `rise`, `onEnter`, `EASE`) and the `.pv1` CSS block are all identical.
+  - (b) Rendered pixels. `qa/scripts/constel.mjs` renders the V1 stage in the e685bee build and in the current build, with Math.random ≡ 0.5, reduced motion and overlays hidden. Diff bbox **None, max 0** at 1440 and at 375.
+- **Failure found and fixed (kept visible):**
+  - At 375 the first pixel diff showed a different star sampling.
+  - `constel3.mjs` showed why: in the current build the Constellation's first layout ran before Epilogue loaded (fallback 119.1 px vs 106.8 px), consuming its seeded PRNG differently. The faster new heroes changed the boot timing.
+  - Fix outside the Constellation: `boot()` now waits for the embedded Epilogue (300/800/900, capped at 1.2 s) before mounting sections. Re-run: identical at both widths.
+- **V2 Ledger (upgraded):**
+  - Wording corrected to §3 verbatim: BBB "accredited since 2001", Owens Corning "Platinum Preferred", "$2M liability insurance".
+  - G1 entrance added on the head; R14 kept.
+  - Evidence: `secqa.mjs proof` clean, `proofint.mjs` R14 OK.
+- **V3 Roller board (rebuilt):** Count Up roll mode inside Q409's proof stack, a vanilla port of CountUp.jsx's column model (turns ≤ 3 − rank, stagger min(0.07, 0.4·T/(n−1)), SVG vertical blur σ, ease (.33,1,.68,1)), duration 1.4 s. The marquee trains are removed.
+- **Evidence:**
+  - `secqa.mjs proof`, switching 2→3→1 at 1440, 375 and reduced motion: 9/9 "swaps only proof; overflow 0; errors 0".
+  - Rollers land on 4.9, 295, 2001, 1995, $2M. R15 OK.
+  - Quote/name scan of all three versions' visible text: 0 quote-like strings, 0 reviewer-name patterns.
+  - "295" and "4.9" present in all three versions.
+- **Flag (not changed; Rule 4 vs §3 wording):**
+  - V1 reads "$2M liability cover" and "BBB A+ since 2001". §3's verbatim wording is "liability insurance" / "accredited since 2001". Same facts, different words.
+  - Rule 4 forbids editing V1, and the owner kept it as-is, so it is left exactly as kept and listed in the final report for the owner's decision.
+- The QA scripts now live in `rembrandt/v5/qa/scripts/` (README there).
