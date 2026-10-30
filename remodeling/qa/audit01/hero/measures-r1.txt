@@ -1,0 +1,10 @@
+hero1 1440: height 900, visible elements 22, overflow 0, console 0
+hero2 1440: height 900, visible elements 30, overflow 0, console 0
+hero3 1440: height 900, visible elements 22, overflow 0, console 0
+hero4 1440: height 900, visible elements 26, overflow 0, console 0
+hero5 1440: height 900, visible elements 28, overflow 0, console 0
+hero1 375: height 748, visible elements 22, overflow 0, bar overlap 0px² (content bottom 668, bar top 748), console 0
+hero2 375: height 826, visible elements 30, overflow 0, bar overlap 0px² (content bottom 508, bar top 748), console 0
+hero3 375: height 779, visible elements 22, overflow 0, bar overlap 0px² (content bottom 428, bar top 748), console 0
+hero4 375: height 804, visible elements 26, overflow 0, bar overlap 0px² (content bottom 724, bar top 748), console 0
+hero5 375: height 679, visible elements 28, overflow 0, bar overlap 0px² (content bottom 428, bar top 748), console 0

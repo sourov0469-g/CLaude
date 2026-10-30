@@ -256,7 +256,7 @@
     return { el: el };
   };
 
-  var MAP = { hero: 'blueprint', proof: 'contours', services: 'axo', ba: 'studs', process: 'chalk', financing: 'plumb', work: 'marks', reviews: 'plywood', towns: 'compass', consult: 'laser', footer: 'rebar' };
+  var MAP = { proof: 'contours', services: 'axo', ba: 'studs', process: 'chalk', financing: 'plumb', work: 'marks', reviews: 'plywood', towns: 'compass', consult: 'laser', footer: 'rebar' };
   var fields = {};
 
   function mount(id, host) {

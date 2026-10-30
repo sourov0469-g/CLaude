@@ -216,6 +216,9 @@
     s.el.dataset.active = v;
     radios(s, v);
     if (!verEl) return;
+    // the section is named by the heading of the version on show (backups keep their own ids) [AUDIT-01 A.2]
+    var hd = verEl.querySelector('h1[id], h2[id]');
+    if (hd) s.el.setAttribute('aria-labelledby', hd.id);
     EZ.applyImages(verEl);
     var def = s.defs && s.defs[v];
     var kit = s.kit = makeKit(s, verEl);

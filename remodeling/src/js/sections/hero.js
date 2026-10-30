@@ -48,9 +48,142 @@
     return { outlines: svg.querySelectorAll('.o'), wipes: svg.querySelectorAll('.wipe'), fills: svg.querySelectorAll('.f'), W: W };
   }
 
+  var HOUSE = EZ.bezier(.23, 1, .32, 1);
+  // one entrance per page view, on whichever version shows first; a switcher re-entry never replays it [AUDIT-01 F1.8; S0063 Std 4]
+  function entrance(k, root, extra) {
+    if (!k.motion || EZ._heroIn) return null;
+    EZ._heroIn = true;
+    var lines = root.querySelectorAll('.hh .ln');
+    var rest = root.querySelectorAll('.hlead, .hero__acts, .hproof, .hlic' + (extra ? ', ' + extra : ''));
+    return gsap.timeline({ delay: .05 })
+      .from(lines, { y: 12, autoAlpha: 0, duration: .28, ease: HOUSE, stagger: .08 }, 0)
+      .from(rest, { y: 12, autoAlpha: 0, duration: .28, ease: HOUSE, stagger: .09 }, .16);
+  }
+  // a spring that keeps its velocity when the target moves [S0089 spring-for-interruptible]
+  function spring(o, target, k_, c_, dt) {
+    for (var t = dt; t > 0; t -= 1 / 240) { var h = Math.min(t, 1 / 240); o.v += (k_ * (target - o.x) - c_ * o.v) * h; o.x += o.v * h; }
+    return Math.abs(target - o.x) > .02 || Math.abs(o.v) > .02;
+  }
+
   EZ.section('hero', {
-    /* v1 · As built, as drawn */
+    /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
     1: { init: function (root, k) {
+      navOn(k, 'ground');
+      var win = root.querySelector('.hp__win'), img = win.querySelector('img');
+      var tl = entrance(k, root);
+      if (tl) tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
+        .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0);
+    } },
+
+    /* 2 · Pick your room [Anatomy §1 F1 + F3]: the entry is a choice; the photo and the CTA answer it */
+    2: { init: function (root, k) {
+      navOn(k, 'ground');
+      var opts = Array.prototype.slice.call(root.querySelectorAll('.hk__opt'));
+      var imgs = Array.prototype.slice.call(root.querySelectorAll('.hk__img'));
+      var cap = root.querySelector('.hk__cap'), lbl = root.querySelector('.hero__cta .btn__label');
+      var CAP = { 'k-walnut-marble': 'Walnut and marble kitchen', 'b-white-marble': 'White marble bathroom', 'w-farmhouse': 'Modern farmhouse, whole home' };
+      var CTA = { Kitchen: 'Book a kitchen consultation', Bathroom: 'Book a bathroom consultation', 'Whole home': 'Book a whole-home consultation' };
+      function pick(i, focus) {
+        opts.forEach(function (o, j) { o.setAttribute('aria-checked', j === i ? 'true' : 'false'); o.tabIndex = j === i ? 0 : -1; });
+        var key = opts[i].dataset.k;
+        imgs.forEach(function (im) { var on = im.dataset.img === key; im.classList.toggle('is-on', on); gsap.to(im, { autoAlpha: on ? 1 : 0, duration: k.motion ? .2 : 0, ease: 'power2.out', overwrite: true }); });
+        cap.textContent = CAP[key];
+        lbl.textContent = CTA[opts[i].dataset.room];
+        EZ.pickedRoom = opts[i].dataset.room;   // carried into Consult, which preselects it
+        if (focus) opts[i].focus();
+      }
+      opts.forEach(function (o, i) {
+        k.on(o, 'click', function () { pick(i); });
+        k.on(o, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault(); e.stopPropagation();
+          pick((i + d + opts.length) % opts.length, true);
+        });
+      });
+      gsap.set(imgs, { autoAlpha: 0 });
+      pick(0);
+      k.add(function () { gsap.set(imgs, { clearProps: 'opacity,visibility' }); delete EZ.pickedRoom; });
+      entrance(k, root, '.hk__pick, .hk__photo');
+    } },
+
+    /* 3 · Scaffold, cleaned: the tubes draw round a large real photograph, which rises into the bay (once) */
+    3: { init: function (root, k) {
+      navOn(k, 'ground');
+      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hs__bay');
+      var s = '';
+      [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
+      [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
+      s += '<path class="t br" d="M22 506L118 410M618 14L522 110"/>';
+      [[22, 14], [618, 14], [22, 506], [618, 506]].forEach(function (q) { s += '<rect class="cp" x="' + (q[0] - 7) + '" y="' + (q[1] - 7) + '" width="14" height="14" rx="2"/>'; });
+      svg.innerHTML = s;
+      k.add(function () { svg.innerHTML = ''; });
+      var tl = entrance(k, root);
+      if (tl) tl.fromTo(svg.querySelectorAll('.t'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, 0)
+        .from(svg.querySelectorAll('.cp'), { scale: 0, transformOrigin: '50% 50%', duration: .18, ease: 'power2.out', stagger: .03 }, .2)
+        .fromTo(bay, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .4, ease: HOUSE, clearProps: 'clipPath' }, .18);
+    } },
+
+    /* 4 · As built (Direction A): a real range input drives the line between the traced drawing and the photograph */
+    4: { init: function (root, k) {
+      navOn(k, 'ground');
+      var plate = root.querySelector('.ha__plate'), draw = root.querySelector('.ha__draw');
+      var rule = root.querySelector('.ha__rule'), range = root.querySelector('.ha__range');
+      draw.innerHTML = EZ.drawing('k-fluted-hero', { par: 'xMidYMid slice' });   // same crop as the photo: object-fit cover, centred [S1324 aligned pair]
+      var o = { x: +range.value, v: 0 }, target = o.x, loop = null;
+      function apply(v) { draw.style.clipPath = 'inset(0% ' + (100 - v).toFixed(2) + '% 0% 0%)'; rule.style.left = v.toFixed(2) + '%'; }
+      apply(o.x);
+      function go() {
+        if (!k.motion) { o.x = target; apply(o.x); return; }
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) { var moving = spring(o, target, 500, 30, dt); apply(o.x); if (!moving) { o.x = target; o.v = 0; apply(o.x); return false; } });
+      }
+      k.on(range, 'input', function () { target = +range.value; go(); });
+      // the grip answers the pointer and the keyboard (an input cannot carry a drawn reaction): it swells 8% in 150ms
+      var grip = root.querySelector('.ha__grip');
+      function lift(on) { if (k.motion) gsap.to(grip, { scale: on ? 1.08 : 1, duration: .15, ease: 'power2.out', overwrite: true }); }
+      k.on(range, 'pointerenter', function (e) { if (e.pointerType === 'mouse') lift(true); });
+      k.on(range, 'pointerleave', function () { lift(false); });
+      k.on(range, 'pointerdown', function () { lift(true); });
+      k.on(range, 'focus', function () { lift(true); });
+      k.on(range, 'blur', function () { lift(false); });
+      k.add(function () { draw.innerHTML = ''; draw.style.clipPath = ''; rule.style.left = ''; range.value = 38; });
+      entrance(k, root, '.ha__key');
+    } },
+
+    /* 5 · Open house (Direction B): three real rooms on three depth planes; the pointer opens the house a few pixels */
+    5: { init: function (root, k) {
+      navOn(k, 'ground');
+      var house = root.querySelector('.ho__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.ho__p'));
+      entrance(k, root, '.ho__p');
+      if (!k.motion || !k.fine) return;   // coarse pointers and reduced motion: the static triptych (CSS)
+      var tx = 0, ty = 0, st = ps.map(function () { return { x: { x: 0, v: 0 }, y: { x: 0, v: 0 } }; }), loop = null;
+      function go() {
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) {
+          var moving = false;
+          ps.forEach(function (p, i) {
+            var d = +p.dataset.depth, s2 = st[i];
+            if (spring(s2.x, tx * d, 170, 26, dt)) moving = true;
+            if (spring(s2.y, ty * d, 170, 26, dt)) moving = true;
+            p.style.transform = 'translate3d(' + s2.x.x.toFixed(2) + 'px,' + s2.y.x.toFixed(2) + 'px,0)';
+          });
+          if (!moving) return false;
+        });
+      }
+      k.on(root, 'pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = house.getBoundingClientRect();
+        tx = EZ.clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+        ty = EZ.clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+        go();
+      });
+      k.on(root, 'pointerleave', function () { tx = ty = 0; go(); });
+      k.add(function () { ps.forEach(function (p) { p.style.transform = ''; }); });
+    } },
+
+    /* v1 · As built, as drawn */
+    b1: { init: function (root, k) {
       navOn(k, 'photo');
       var alive = true;
       k.add(function () { alive = false; });
@@ -154,7 +287,7 @@
 
     /* v2 · From the brass to the room. OWNER KEEPER: the 68f8ff5 code path; the dead weight scrub is deleted
        (Bebas has one weight and font-synthesis is off, so it never drew a pixel); the proof line rides in with the row */
-    2: { init: function (root, k) {
+    b2: { init: function (root, k) {
       navOn(k, 'ground');
       var stage = root.querySelector('.hero2__stage');
       var band = root.querySelector('.hero2__band');
@@ -215,7 +348,7 @@
     } },
 
     /* v3 · Steel letters on the scaffold */
-    3: { init: function (root, k) {
+    b3: { init: function (root, k) {
       navOn(k, 'ground');
       var svg = root.querySelector('.hero3__scaffold');
       var bay = root.querySelector('.hero3__bay');
