@@ -60,7 +60,7 @@
    "where": "proof1",
    "name": "Florida Certified Building C",
    "rx": "~shield/orbit/hop/tr",
-   "top": 1495.378173828125,
+   "top": 1495.4781494140625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -116,7 +116,7 @@
    "where": "proof1",
    "name": "30+ years combined",
    "rx": "~nut/orbit/wobble/tr",
-   "top": 1632.578125,
+   "top": 1632.6781005859375,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -246,12 +246,11 @@
    "fixed": false,
    "href": "#consult",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
    "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1000,476 under=SPAN.btn__label own=true rect=960,450,189,52 rx={\"phase\":\"hover\",\"hover\":true,\"drawn\":true,\"click\":false} viewer=false pre=btn btn--ghost services1__btn has-rx"
+   "note": ""
   },
   {
    "where": "ba1",
@@ -579,7 +578,7 @@
    "where": "work1",
    "name": "P‑03Modern Farmhouse Whole-H",
    "rx": "~t:P-03/frame/flash/tr",
-   "top": 8649.690185546875,
+   "top": 8618.64892578125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -587,7 +586,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-759.640625,\"w\":439.90625,\"h\":391.5625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-728.640625,\"w\":439.90625,\"h\":391.5625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -607,7 +606,7 @@
    "where": "work1",
    "name": "P‑05Polished-Concrete Primar",
    "rx": "~t:P-05/frame/flash/tr",
-   "top": 8659.854736328125,
+   "top": 8657.4609375,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -615,7 +614,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-338.4375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-335.4375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -635,7 +634,7 @@
    "where": "work1",
    "name": "P‑07Emerald Shaker Kitchen R",
    "rx": "~t:P-07/frame/flash/tr",
-   "top": 9092.314086914062,
+   "top": 9083.007446289062,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -643,7 +642,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-339.21875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-330.21875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -663,7 +662,7 @@
    "where": "work1",
    "name": "P‑09Chef-Grade Kitchen Remod",
    "rx": "~t:P-09/frame/flash/tr",
-   "top": 9520.3359375,
+   "top": 9493.609619140625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -671,7 +670,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-767.21875,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-741.21875,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -691,7 +690,7 @@
    "where": "work1",
    "name": "P‑11Modern Open-Concept Kitc",
    "rx": "~t:P-11/frame/flash/tr",
-   "top": 9522.97265625,
+   "top": 9513.06103515625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -699,7 +698,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-339,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-329,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -719,7 +718,7 @@
    "where": "work1",
    "name": "P‑13Two-Tone Kitchen Remodel",
    "rx": "~t:P-13/frame/flash/tr",
-   "top": 9954.12841796875,
+   "top": 9954.413818359375,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -747,7 +746,7 @@
    "where": "work1",
    "name": "P‑15Two-Tone Navy & White Ki",
    "rx": "~t:P-15/frame/flash/tr",
-   "top": 10362.53271484375,
+   "top": 10379.971923828125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -755,7 +754,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-747.78125,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-764.78125,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -775,7 +774,7 @@
    "where": "work1",
    "name": "P‑17Two-Tone Kitchen Remodel",
    "rx": "~t:P-17/frame/flash/tr",
-   "top": 10385.609375,
+   "top": 10370.24072265625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -783,7 +782,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-339.5625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-323.5625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -803,7 +802,7 @@
    "where": "work1",
    "name": "P‑19Champagne Bronze & Marbl",
    "rx": "~t:P-19/frame/flash/tr",
-   "top": 10816.913818359375,
+   "top": 10816.123291015625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -811,7 +810,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-339.359375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-338.359375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -831,7 +830,7 @@
    "where": "work1",
    "name": "P‑21Floating Vanity Primary ",
    "rx": "~t:P-21/frame/flash/tr",
-   "top": 11246.10400390625,
+   "top": 11245.859619140625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -859,7 +858,7 @@
    "where": "work1",
    "name": "P‑23Navy Vanity Bathroom Rem",
    "rx": "~t:P-23/frame/flash/tr",
-   "top": 11247.8291015625,
+   "top": 11228.326171875,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -867,7 +866,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-339.140625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-319.140625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -887,7 +886,7 @@
    "where": "work1",
    "name": "P‑25Multi-Bathroom Renovatio",
    "rx": "~t:P-25/frame/flash/tr",
-   "top": 11677.0673828125,
+   "top": 11677.79931640625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -895,7 +894,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-336.921875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-337.921875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -915,7 +914,7 @@
    "where": "work1",
    "name": "Show the featured twelve",
    "rx": "~grid/pop/burst/r",
-   "top": 12495.61328125,
+   "top": 12497.87646484375,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -923,7 +922,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-695.875,\"w\":241.25,\"h\":52,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-697.875,\"w\":241.25,\"h\":52,\"vis\":true}"
   },
   {
    "where": "reviews1",
@@ -1339,12 +1338,11 @@
    "fixed": false,
    "href": null,
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
    "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 789,476 under=SPAN.btn__label own=true rect=749,450,166,52 rx={\"phase\":\"hover\",\"hover\":true,\"drawn\":true,\"click\":false} viewer=false pre=btn btn--ghost services2__toggle has-rx"
+   "note": ""
   },
   {
    "where": "services2",
@@ -1354,12 +1352,11 @@
    "fixed": false,
    "href": null,
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
    "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 788,475 under=SPAN.btn__label own=true rect=748,450,166,52 rx={\"phase\":\"hover\",\"hover\":true,\"drawn\":true,\"click\":false} viewer=false pre=btn btn--ghost services2__toggle has-rx"
+   "note": ""
   },
   {
    "where": "services2",
@@ -1369,12 +1366,11 @@
    "fixed": false,
    "href": null,
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
    "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 789,476 under=SPAN.btn__label own=true rect=749,450,166,52 rx={\"phase\":\"hover\",\"hover\":true,\"drawn\":true,\"click\":false} viewer=false pre=btn btn--ghost services2__toggle has-rx"
+   "note": ""
   },
   {
    "where": "ba2",
@@ -2042,12 +2038,11 @@
    "fixed": false,
    "href": "#consult",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
    "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 80,476 under=SPAN.btn__label own=true rect=40,450,197,52 rx={\"phase\":\"hover\",\"hover\":true,\"drawn\":true,\"click\":false} viewer=false pre=btn services3__btn has-rx"
+   "note": ""
   },
   {
    "where": "ba3",
@@ -2151,7 +2146,7 @@
    "where": "financing3",
    "name": "Close the sheet",
    "rx": "~xbrace/pop/spinout/l",
-   "top": 5547.645751953125,
+   "top": 5547.65625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -2883,12 +2878,11 @@
    "fixed": false,
    "href": null,
    "w": 1440,
-   "hover": false,
-   "clear": false,
+   "hover": true,
+   "clear": true,
    "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 491,34 under=SPAN.rx-l own=true rect=474,17,34,34 rx={\"phase\":\"hover\",\"hover\":true,\"drawn\":true,\"click\":false} viewer=false pre=has-rx"
+   "note": ""
   },
   {
    "where": "ba:switch",
@@ -3216,7 +3210,7 @@
    "where": "chrome",
    "name": "Process",
    "rx": "~gear/spin/spinout/b",
-   "top": 5827,
+   "top": 6000,
    "fixed": true,
    "href": "#process",
    "w": 1440,
@@ -3230,7 +3224,7 @@
    "where": "chrome",
    "name": "Financing",
    "rx": "~coin/jack/hop/b",
-   "top": 4052,
+   "top": 4103,
    "fixed": true,
    "href": "#financing",
    "w": 1440,
@@ -3244,7 +3238,7 @@
    "where": "chrome",
    "name": "Reviews",
    "rx": "~star/pop/sparkle/b",
-   "top": 4803,
+   "top": 4950,
    "fixed": true,
    "href": "#reviews",
    "w": 1440,
@@ -3258,7 +3252,7 @@
    "where": "chrome",
    "name": "(754) 236‑0675",
    "rx": "~cord/rail/sweep/b",
-   "top": 6876.375,
+   "top": 7155.375,
    "fixed": true,
    "href": "tel:+17542360675",
    "w": 1440,
@@ -3300,7 +3294,7 @@
    "where": "chrome",
    "name": "Evening",
    "rx": "~moon/roll/wobble/l",
-   "top": 8597,
+   "top": 8873,
    "fixed": true,
    "href": null,
    "w": 1440,
@@ -3360,11 +3354,11 @@
    "fixed": true,
    "href": null,
    "w": 1440,
-   "hover": null,
-   "clear": null,
-   "click": null,
-   "job": null,
-   "note": "n/a: not shown at this width"
+   "hover": true,
+   "clear": true,
+   "click": true,
+   "job": true,
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3374,11 +3368,11 @@
    "fixed": true,
    "href": null,
    "w": 1440,
-   "hover": null,
-   "clear": null,
-   "click": null,
-   "job": null,
-   "note": "n/a: not shown at this width"
+   "hover": true,
+   "clear": true,
+   "click": true,
+   "job": true,
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3388,11 +3382,11 @@
    "fixed": true,
    "href": null,
    "w": 1440,
-   "hover": null,
-   "clear": null,
-   "click": null,
-   "job": null,
-   "note": "n/a: not shown at this width"
+   "hover": true,
+   "clear": true,
+   "click": true,
+   "job": true,
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3402,11 +3396,11 @@
    "fixed": true,
    "href": null,
    "w": 1440,
-   "hover": null,
-   "clear": null,
-   "click": null,
-   "job": null,
-   "note": "n/a: not shown at this width"
+   "hover": true,
+   "clear": true,
+   "click": true,
+   "job": true,
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3416,12 +3410,11 @@
    "fixed": true,
    "href": null,
    "w": 1440,
-   "hover": false,
-   "clear": false,
-   "click": false,
+   "hover": true,
+   "clear": true,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1378,34 under=svg.svg own=true rect=1356,12,44,44 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre=settings__btn rx-on"
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3641,12 +3634,11 @@
    "fixed": false,
    "href": "#consult",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1083,476 under=SPAN.btn__label own=true rect=1043,450,197,52 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre=btn foot__book"
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3656,12 +3648,11 @@
    "fixed": false,
    "href": "tel:+17542360675",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1312,474 under=A.link nums foot__tel own=true rect=1272,450,128,48 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre=link nums foot__tel"
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3671,12 +3662,11 @@
    "fixed": false,
    "href": "tel:+17542360675",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 885,466 under=A.nums own=true rect=845,450,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre=nums"
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3686,12 +3676,11 @@
    "fixed": false,
    "href": "mailto:Sales@elbazconstruction.com",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 885,482 under=A. own=true rect=845,466,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre="
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3701,12 +3690,11 @@
    "fixed": false,
    "href": "https://elbazconstructioncorp.com/es/",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 885,522 under=A. own=true rect=845,506,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre="
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3716,12 +3704,11 @@
    "fixed": false,
    "href": "https://www.instagram.com/elbazconstruction/",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1115,466 under=A. own=true rect=1075,450,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre="
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3731,12 +3718,11 @@
    "fixed": false,
    "href": "https://www.facebook.com/elbazconstruction/",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1115,482 under=A. own=true rect=1075,466,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre="
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3746,12 +3732,11 @@
    "fixed": false,
    "href": "https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1115,522 under=A. own=true rect=1075,506,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre="
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3761,12 +3746,11 @@
    "fixed": false,
    "href": "https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 1115,562 under=A. own=true rect=1075,546,210,32 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre="
+   "note": ""
   },
   {
    "where": "chrome",
@@ -3776,12 +3760,11 @@
    "fixed": false,
    "href": "https://www.myfloridalicense.com/",
    "w": 1440,
-   "hover": false,
+   "hover": true,
    "clear": true,
-   "click": false,
+   "click": true,
    "job": true,
-   "note": "",
-   "dbg": "at 984,826 under=A.link own=true rect=944,816,134,20 rx={\"phase\":\"hover\",\"hover\":false,\"drawn\":false,\"click\":false} viewer=false pre=link"
+   "note": ""
   },
   {
    "where": "chrome",

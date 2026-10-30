@@ -1,4 +1,4 @@
-width 375: tested 254, failed 25, n/a at this width 17, not on screen/err 2, page errors 0
+width 375: tested 254, failed 13, n/a at this width 17, not on screen/err 2, page errors 0
 NA chrome Services n/a: not shown at this width
 NA chrome Work n/a: not shown at this width
 NA chrome Process n/a: not shown at this width
@@ -29,17 +29,5 @@ FAIL chrome Off ~pause/unfold/shake/r hover false clear true click false job tru
 FAIL chrome Book a consultation ~calendar/drop/tick/r hover false clear true click false job true 
 FAIL chrome (754) 236‑0675 ~handset/hoist/ring/r hover false clear true click false job true 
 FAIL chrome Book a consultation ~flag/hoist/wobble/tr hover false clear true click false job true 
-FAIL chrome (754) 236‑0675 ~cord/jack/ring/r hover false clear true click false job true 
-FAIL chrome (754) 236‑0675 ~handset/slide/shake/r hover false clear true click false job true 
-FAIL chrome Sales@elbazconstruction.com ~envelope/slide/hop/r hover false clear true click false job true 
-FAIL chrome Español ~globe/slide/spinout/r hover false clear true click false job true 
-FAIL chrome Instagram ~camera/peek/flash/r hover false clear true click false job true 
-FAIL chrome Facebook ~speech/peek/hop/r hover false clear true click false job true 
-FAIL chrome LinkedIn ~briefcase/peek/squash/r hover false clear true click false job true 
-FAIL chrome YouTube ~play/peek/ring/r hover false clear true click false job true 
-FAIL chrome Verify a Florida licence ~shield/rail/tick/r hover false clear true click false job true 
-FAIL chrome Call ~handset/tilt/ring/t hover false clear true click false job true 
-FAIL chrome Text ~speech/tilt/hop/t hover false clear true click false job true 
-FAIL chrome Book ~calendar/tilt/tick/t hover false clear true click false job true 
 SKIP work1 Show the featured twelve ~grid/pop/burst/r not on screen {"x":16,"y":-64.40625,"w":241.25,"h":52,"vis":true}
 SKIP chrome Skip to content ~ladder/drop/hop/r not on screen {"x":12,"y":-62.150001525878906,"w":151.703125,"h":46.34375,"vis":true}
