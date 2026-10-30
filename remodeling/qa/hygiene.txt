@@ -1,0 +1,52 @@
+overflow 320 v1: scrollWidth 320 / 320, escaping elements 0
+overflow 320 v2: scrollWidth 320 / 320, escaping elements 0
+overflow 320 v3: scrollWidth 320 / 320, escaping elements 0
+overflow 375 v1: scrollWidth 375 / 375, escaping elements 0
+overflow 375 v2: scrollWidth 375 / 375, escaping elements 0
+overflow 375 v3: scrollWidth 375 / 375, escaping elements 0
+overflow 768 v1: scrollWidth 768 / 768, escaping elements 0
+overflow 768 v2: scrollWidth 768 / 768, escaping elements 0
+overflow 768 v3: scrollWidth 768 / 768, escaping elements 0
+overflow 1024 v1: scrollWidth 1024 / 1024, escaping elements 0
+overflow 1024 v2: scrollWidth 1024 / 1024, escaping elements 0
+overflow 1024 v3: scrollWidth 1024 / 1024, escaping elements 0
+overflow 1440 v1: scrollWidth 1440 / 1440, escaping elements 0
+overflow 1440 v2: scrollWidth 1440 / 1440, escaping elements 0
+overflow 1440 v3: scrollWidth 1440 / 1440, escaping elements 0
+v1 duplicate ids: 0
+v1 DOM elements: 4409
+v1 exposed h1: 1
+v1 elements transitioning "all": 0
+skip link resolves: true
+favicon: true
+og tags: 5
+footer <address>: true
+links to myfloridalicense.com: 5
+phone in header: true
+controls whose focus ring (outline) is transitioned: 0
+v2 duplicate ids: 0
+v2 DOM elements: 3390
+v2 exposed h1: 1
+v2 elements transitioning "all": 0
+v3 duplicate ids: 0
+v3 DOM elements: 3801
+v3 exposed h1: 1
+v3 elements transitioning "all": 0
+375 v1 inputs under 16px: 0
+375 v1 targets under 24px: 0
+375 v2 inputs under 16px: 0
+375 v2 targets under 24px: 0
+375 v3 inputs under 16px: 0
+375 v3 targets under 24px: 0
+no-JS: hidden text elements: 0
+forced-colors page errors: 0
+daylight theme applied: daylight
+first tel: link at: 5.15% of the HTML (198777 B in)
+AI-pattern words in visible copy: 0
+trade words in visible copy: roof, hvac, solar, lawn (all in FACTS.md: true)
+other firms named in visible copy: 0
+em dashes in visible copy: 0
+page length (v3 page, 1440x900): 13.0 screens
+console errors/warnings across overflow runs: 0
+
+FAILS: 0
