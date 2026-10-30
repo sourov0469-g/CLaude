@@ -333,9 +333,12 @@ input, textarea { caret-color: var(--accent); }
   position: fixed; inset: 0; z-index: 60;
   background: var(--bg); color: var(--ink);
   display: flex; flex-direction: column; padding: var(--s5) var(--margin);
-  overscroll-behavior: contain;
+  overscroll-behavior: contain; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--s5) + env(safe-area-inset-bottom, 0px));
 }
 .sheet[hidden] { display: none; }
+
+@media (max-height: 900px) { .sheet ul { margin-top: var(--s5); gap: 2px; } .sheet ul a { font-size: 2.125rem; } .sheet__settings { margin-top: var(--s4); } .sheet__foot { margin-top: var(--s5); } }
 .sheet__top { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
 .sheet__close { background: none; border: 0; min-height: 44px; font-weight: 560; }
 .sheet ul { list-style: none; margin-top: var(--s8); display: grid; gap: var(--s3); }
@@ -5900,9 +5903,10 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       k.add(function () { gsap.set(focus, { clearProps: 'all' }); targets.forEach(function (el) { el.classList.remove('is-on'); }); root.classList.remove('is-cycling'); });
 
       // True Focus [BANK 300]: hold 1s, move .5s; manual on hover / focus; paused offscreen
-      var timer = null, manual = false, inView = false;
-      function next() { aim((cur + 1) % targets.length); }
-      function run() { stop(); if (k.motion && inView && !manual) { root.classList.add('is-cycling'); timer = setInterval(next, 1500); } }
+      var timer = null, manual = false, inView = false, steps = 0;
+      // self-running for three moves (4.5s) per visit, then it holds: nothing moves past 5s unasked
+      function next() { aim((cur + 1) % targets.length); if (++steps >= 3) stop(); }
+      function run() { stop(); steps = 0; if (k.motion && inView && !manual) { root.classList.add('is-cycling'); timer = setInterval(next, 1500); } }
       function stop() { clearInterval(timer); timer = null; }
       k.add(stop);
       targets.forEach(function (t, i) {
@@ -6112,10 +6116,10 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       EZ.reveal(k, root.querySelectorAll('.services3__side > *'));
       gsap.from(tools, { y: -20, autoAlpha: 0, duration: .3, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
       gsap.from(root.querySelectorAll('.services3__tags span'), { y: -10, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .03, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
-      // phones: the tools take turns as the wall comes into view
+      // phones: the tools take one turn each as the wall comes into view, then stop (no motion runs past 5s unasked)
       if (!k.fine) {
         var n = 0, t = null;
-        k.io(wall, function (en) { clearInterval(t); if (en.isIntersecting) t = setInterval(function () { pick(n++ % 3, true); }, 2200); }, { threshold: .5 });
+        k.io(wall, function (en) { clearInterval(t); if (en.isIntersecting && n < 3) { pick(n++, true); t = setInterval(function () { if (n >= 3) { clearInterval(t); return; } pick(n++, true); }, 1600); } }, { threshold: .5 });
         k.add(function () { clearInterval(t); });
         return;
       }
@@ -6658,7 +6662,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         k.ctx.add(function () {
           gsap.fromTo(ws, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .75, ease: 'power2.inOut', stagger: .08, onComplete: function () {
             ws.forEach(function (w) { w.style.strokeDasharray = '10px 8px'; w.style.strokeDashoffset = '0px'; });
-            flow = gsap.fromTo(ws, { strokeDashoffset: 0 }, { strokeDashoffset: -36, duration: .7, ease: 'none', repeat: -1 });
+            flow = gsap.fromTo(ws, { strokeDashoffset: 0 }, { strokeDashoffset: -36, duration: .7, ease: 'none', repeat: 5 });   // flows ~4s, then rests (no motion past 5s unasked)
           } });
         });
       }
@@ -7584,12 +7588,12 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       if (!k.motion) return;
       // the number grows from a line of text to the size of the room as it comes up the screen
       gsap.fromTo(digits, { scale: .3 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: num, start: 'top bottom', end: 'top 40%', scrub: true } });
-      // the handset rings every few seconds while it is on screen
-      var ring = gsap.timeline({ repeat: -1, repeatDelay: 2.6, paused: true })
+      // the handset rings twice when it comes on screen (under 5s), and again whenever the pointer reaches the number
+      var ring = gsap.timeline({ repeat: 1, repeatDelay: 2.6, paused: true })
         .to(hs, { keyframes: [{ rotation: -14, duration: .06 }, { rotation: 12, duration: .06 }, { rotation: -10, duration: .06 }, { rotation: 8, duration: .06 }, { rotation: -6, duration: .06 }, { rotation: 0, duration: .08 }], svgOrigin: '28 40' }, 0)
         .fromTo(waves, { drawSVG: '50% 50%', opacity: 0 }, { drawSVG: '0% 100%', opacity: 1, duration: .3, stagger: .08 }, 0)
         .to(waves, { opacity: 0, duration: .4 }, .7);
-      k.io(num, function (en) { en.isIntersecting ? ring.play() : ring.pause(); });
+      k.io(num, function (en) { en.isIntersecting ? ring.restart() : ring.pause(); });
       k.on(num, 'pointerenter', function () { ring.restart(); });
     } }
   });

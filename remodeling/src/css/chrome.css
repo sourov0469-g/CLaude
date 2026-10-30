@@ -64,9 +64,12 @@
   position: fixed; inset: 0; z-index: 60;
   background: var(--bg); color: var(--ink);
   display: flex; flex-direction: column; padding: var(--s5) var(--margin);
-  overscroll-behavior: contain;
+  overscroll-behavior: contain; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--s5) + env(safe-area-inset-bottom, 0px));
 }
 .sheet[hidden] { display: none; }
+/* short phones: the whole sheet (links, settings, call) fits without scrolling down to 740px tall */
+@media (max-height: 900px) { .sheet ul { margin-top: var(--s5); gap: 2px; } .sheet ul a { font-size: 2.125rem; } .sheet__settings { margin-top: var(--s4); } .sheet__foot { margin-top: var(--s5); } }
 .sheet__top { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
 .sheet__close { background: none; border: 0; min-height: 44px; font-weight: 560; }
 .sheet ul { list-style: none; margin-top: var(--s8); display: grid; gap: var(--s3); }

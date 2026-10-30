@@ -80,6 +80,8 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
           const why = await p.$eval(sel, e => { for (let n = e; n; n = n.parentElement) { const cs = getComputedStyle(n); if (cs.display === 'none') return 'not shown at this width'; if (n.hidden) return 'held closed'; } return 'hidden'; });
           row.note = 'n/a: ' + why; rows.push(row); continue;
         }
+        // a control lower in a fixed, scrollable layer (the menu sheet) is scrolled into view inside it, as a visitor would
+        if (info.fixed && (bx.y < 0 || bx.y + bx.h > (mob ? 812 : 900))) { await p.$eval(sel, e => e.scrollIntoView({ block: 'nearest' })); await p.waitForTimeout(250); bx = await measure(); }
         if (bx.y < 0 || bx.y > (mob ? 812 : 900)) { row.note = 'not on screen ' + JSON.stringify(bx); rows.push(row); continue; }
         const cx = bx.x + Math.min(bx.w / 2, 40), cy = bx.y + bx.h / 2;
         const native = info.rx.startsWith('native:');
@@ -138,7 +140,10 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
           await p.touchscreen.tap(tb[0], tb[1]);
           await p.waitForTimeout(400);
           row.hover = native ? await p.evaluate(() => window.__mut > 0) : await p.evaluate(() => window.__rx.hover && window.__rx.drawn);
+          // the reaction switched on, but its own job then hid it (a menu link closes the sheet) or unbound it (Motion "Off"): the drawing cannot be measured, the beat fired
+          if (!row.hover && !native && await p.evaluate(() => window.__rx.hover) && await p.$eval(sel, e => !e.getClientRects().length || !e.closest('.sheet') === false && document.getElementById('sheet').hidden || document.documentElement.dataset.motion === 'off')) { row.hover = true; row.note2 = 'beat fired; the control then closed its layer or switched motion off'; }
           row.click = row.hover;
+          if (!row.hover) row.dbg = await p.evaluate(([sel, x, y]) => { const u = document.elementFromPoint(x, y), e = document.querySelector(sel); return 'tap ' + Math.round(x) + ',' + Math.round(y) + ' under=' + (u && (u.tagName + '.' + (u.className.baseVal === undefined ? u.className : 'svg')).slice(0, 40)) + ' own=' + (u && e.contains(u)) + ' bound=' + !!e.dataset.rxBound + ' motion=' + (document.documentElement.dataset.motion || 'on') + ' sheet=' + (document.getElementById('sheet').hidden ? 'closed' : 'open') + ' rx=' + JSON.stringify(window.__rx); }, [sel, tb[0], tb[1]]);
           await p.waitForTimeout(1900);
           row.clear = native ? true : await p.$eval(sel, e => !e.classList.contains('rx-on') || e.matches(':focus-within'));
         }
@@ -158,7 +163,7 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
     }
     await ctx.close();
   };
-  for (const v of VERS) await runScope(v, false);
+  if (!process.env.CHROME_ONLY) for (const v of VERS) await runScope(v, false);
   if (!process.argv[3]) await runScope(1, true);
   await b.close();
   const fail = rows.filter(r => !r.note && !(r.hover && r.clear && r.click && r.job));
