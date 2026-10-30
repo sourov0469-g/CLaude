@@ -467,3 +467,8 @@
 .fsl__side.is-far { opacity: .45; }
 @media (max-width: 767px) { .fsl__cards { grid-template-columns: 1fr; } }
 .frd__card[aria-hidden="true"] > * { visibility: hidden; }
+
+/* Phase 6 QA r1: a lender that does not match stays readable; "off" is shown by a dashed rule and a muted name, not by fading
+   the text (it fell to 2.8:1) */
+.frx__l.is-off { opacity: 1; box-shadow: inset 0 0 0 1.5px var(--grey); outline: 1.5px dashed var(--grey); outline-offset: -6px; }
+.frx__l.is-off strong { color: var(--muted); }

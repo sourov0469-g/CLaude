@@ -540,3 +540,6 @@
 .ppl__list li.is-on .ppl__s { opacity: 1; visibility: visible; }
 @media (max-width: 1023px) { .ppl__side, .ppl__list { grid-column: 1 / -1; } .ppl__list { margin-top: var(--s5); } .ppl__list li { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .ppl__ring .fg, .ppl__list label path, .ppl__s { transition: none; } }
+
+/* Phase 6 QA r1: punch-list numbers printed in the accent-text shade (were 3.6:1) */
+.ppl__list label b { color: var(--a-700); }

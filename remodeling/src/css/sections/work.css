@@ -399,3 +399,9 @@
 /* slot 4 fix: the thumb strip scrolls inside its column instead of widening the single mobile column */
 @media (max-width: 1023px) { .wfp__grid { grid-template-columns: minmax(0, 1fr); } }
 .wfp__view { min-width: 0; }
+
+/* Phase 6 QA r1: plan-room codes and chip counts to AA; the turntable stage tint lightened so its labels hold AA */
+.w1x__no { color: var(--a-700); }
+.w1x__f .nums { opacity: 1; }
+.w2x__stage { background: color-mix(in oklab, var(--tint) 8%, var(--paper)); }
+.w2x .acc { color: var(--a-700); }

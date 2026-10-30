@@ -406,3 +406,8 @@
 .pcl__after button { min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--a-50); box-shadow: inset 0 0 0 2px var(--ink); font: 600 .8125rem/1 var(--f-text); cursor: pointer; }
 .pcl__after button[aria-checked="true"] { background: var(--a-500); }
 @media (max-width: 1023px) { .pcl__cal { grid-column: 1 / -1; } .pcl__weeks, .pcl__row { grid-template-columns: 96px repeat(12, 1fr); } }
+
+/* Phase 6 QA r1: step numbers, elevator floor numbers and the week stamps to AA */
+.plx__ino { color: var(--a-700); }
+.pel__floors b { color: var(--a-700); }
+.p3x__stamp { background: var(--white); color: var(--err); }

@@ -215,7 +215,7 @@ input, textarea { caret-color: var(--accent); }
   -webkit-tap-highlight-color: transparent;
   transition: background-color var(--t-hover) ease, color var(--t-hover) ease, box-shadow var(--t-press) ease;   /* no transform transition: GSAP owns transforms */
 }
-.btn:active { box-shadow: inset 0 0 0 999px rgba(11, 20, 24, .12); transition-duration: 0ms; }
+.btn:active { box-shadow: inset 0 0 0 999px rgba(18, 18, 18, .12); transition-duration: 0ms; }   /* --ink at 12% */
 .btn--ghost {
   background: transparent;
   color: var(--ink);

@@ -1,0 +1,27 @@
+hero switcher: [1,2,3,4,5,6,7,8] ok
+hero slot 1: text measured 14, below AA 1, unmeasured 0
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero slot 2: text measured 16, below AA 1, unmeasured 3
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero slot 3: text measured 12, below AA 1, unmeasured 0
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero slot 4: text measured 1, below AA 0, unmeasured 13
+hero slot 5: text measured 12, below AA 1, unmeasured 3
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero slot 6: text measured 23, below AA 1, unmeasured 1
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero slot 7: text measured 13, below AA 1, unmeasured 3
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero slot 8: text measured 13, below AA 1, unmeasured 1
+   LOW span.hproof__star "★" 2.85 < 4.5
+hero backup b4: opens (900px)
+hero backup b5: opens (900px)
+hero backup b6: opens (900px)
+hero backup b7: opens (900px)
+hero backup b8: opens (900px)
+hero backup b1: opens (900px)
+hero backup b2: opens (900px)
+hero backup b3: opens (900px)
+
+page errors: 0
+FAILS: 7

@@ -1,0 +1,179 @@
+proof switcher: [1,2,3,4,5,6,7,8] ok
+proof slot 1: text measured 16, below AA 0, unmeasured 1
+proof slot 2: text measured 18, below AA 2, unmeasured 0
+   LOW span.pbx__v "104" 1.11 < 3
+   LOW span.pbx__k "municipalities" 1.11 < 4.5
+proof slot 3: text measured 5, below AA 0, unmeasured 10
+proof slot 4: text measured 21, below AA 0, unmeasured 0
+proof slot 5: text measured 11, below AA 0, unmeasured 4
+proof slot 6: text measured 15, below AA 0, unmeasured 0
+proof slot 7: text measured 14, below AA 0, unmeasured 0
+proof slot 8: text measured 14, below AA 4, unmeasured 1
+   LOW b.nums "4.8" 3.62 < 4.5
+   LOW b.nums "343" 3.62 < 4.5
+   LOW b.nums "104" 3.62 < 4.5
+   LOW b.nums "26" 3.62 < 4.5
+proof backup b2: opens (511px)
+proof backup b3: opens (746px)
+proof backup b1: opens (560px)
+proof backup b4: opens (915px)
+services switcher: [1,2,3,4,5,6,7,8] ok
+services slot 1: text measured 32, below AA 0, unmeasured 16
+services slot 2: text measured 25, below AA 9, unmeasured 17
+   LOW dt. "Project" 2.30 < 4.5
+   LOW dt. "Contractor" 2.30 < 4.5
+   LOW dt. "Sheet" 2.30 < 4.5
+   LOW dt. "Project" 2.30 < 4.5
+   LOW dt. "Contractor" 2.30 < 4.5
+   LOW dt. "Sheet" 2.30 < 4.5
+   LOW dt. "Project" 2.30 < 4.5
+   LOW dt. "Contractor" 2.30 < 4.5
+   LOW dt. "Sheet" 2.30 < 4.5
+services slot 3: text measured 23, below AA 3, unmeasured 0
+   LOW span.s3x__n "01" 3.05 < 4.5
+   LOW span.s3x__n "02" 3.05 < 4.5
+   LOW span.s3x__n "03" 3.05 < 4.5
+services slot 4: text measured 10, below AA 0, unmeasured 7
+services slot 5: text measured 15, below AA 0, unmeasured 0
+services slot 6: text measured 13, below AA 0, unmeasured 4
+services slot 7: text measured 14, below AA 0, unmeasured 0
+services slot 8: text measured 18, below AA 0, unmeasured 5
+services backup b2: opens (1911px)
+services backup b1: opens (1016px)
+services backup b3: opens (2356px)
+services backup b4: opens (666px)
+ba switcher: [1,2,3,4,5,6,7,8] ok
+ba slot 1: text measured 15, below AA 1, unmeasured 7
+   LOW span.bsx__tl "Kitchen, grey Shaker" 2.61 < 3
+ba slot 2: text measured 24, below AA 0, unmeasured 4
+ba slot 3: text measured 10, below AA 0, unmeasured 1
+ba slot 4: text measured 9, below AA 0, unmeasured 2
+ba slot 5: text measured 10, below AA 0, unmeasured 0
+ba slot 6: text measured 20, below AA 0, unmeasured 0
+ba slot 7: text measured 9, below AA 0, unmeasured 0
+ba slot 8: text measured 8, below AA 0, unmeasured 0
+ba backup b2: opens (737px)
+ba backup b1: opens (736px)
+ba backup b3: opens (1853px)
+ba backup b4: opens (589px)
+process switcher: [1,2,3,4,5,6,7,8] ok
+process slot 1: text measured 53, below AA 8, unmeasured 8
+   LOW span.plx__ino "01" 3.05 < 4.5
+   LOW span.plx__ino "02" 3.05 < 4.5
+   LOW span.plx__ino "03" 3.05 < 4.5
+   LOW span.plx__ino "04" 3.05 < 4.5
+   LOW span.plx__ino "05" 3.05 < 4.5
+   LOW span.plx__ino "06" 3.05 < 4.5
+   LOW span.plx__ino "07" 3.05 < 4.5
+   LOW span.plx__ino "08" 3.05 < 4.5
+process slot 2: text measured 24, below AA 0, unmeasured 0
+process slot 3: text measured 14, below AA 4, unmeasured 12
+   LOW span.p3x__stamp "Week 1" 1.30 < 4.5
+   LOW span.p3x__stamp "Weeks 1–2" 1.30 < 4.5
+   LOW span.p3x__stamp "Weeks 2–5" 1.30 < 4.5
+   LOW span.p3x__stamp "Weeks 5–6" 1.30 < 4.5
+process slot 4: text measured 17, below AA 0, unmeasured 8
+process slot 5: text measured 17, below AA 0, unmeasured 0
+process slot 6: text measured 34, below AA 8, unmeasured 0
+   LOW b.nums "8" 3.62 < 4.5
+   LOW b.nums "7" 3.62 < 4.5
+   LOW b.nums "6" 3.62 < 4.5
+   LOW b.nums "5" 3.62 < 4.5
+   LOW b.nums "4" 3.62 < 4.5
+   LOW b.nums "3" 3.62 < 4.5
+   LOW b.nums "2" 3.62 < 4.5
+   LOW b.nums "1" 3.62 < 4.5
+process slot 7: text measured 10, below AA 0, unmeasured 16
+process slot 8: text measured 29, below AA 0, unmeasured 0
+process backup b2: opens (1258px)
+process backup b1: opens (1009px)
+process backup b3: opens (984px)
+process backup b4: opens (560px)
+financing switcher: [1,2,3,4,5,6,7,8] ok
+financing slot 1: text measured 23, below AA 4, unmeasured 0
+   LOW span.frx__q "Florida PACE, repaid with pr" 2.76 < 4.5
+   LOW span.nums "20" 2.76 < 4.5
+   LOW span.frx__q "RenewPACE. Up to" 2.76 < 4.5
+   LOW span.nums "$250K" 2.76 < 4.5
+financing slot 2: text measured 27, below AA 0, unmeasured 8
+financing slot 3: text measured 5, below AA 0, unmeasured 17
+financing slot 4: text measured 14, below AA 0, unmeasured 0
+financing slot 5: text measured 22, below AA 0, unmeasured 0
+financing slot 6: text measured 10, below AA 0, unmeasured 0
+financing slot 7: text measured 7, below AA 0, unmeasured 0
+financing slot 8: text measured 21, below AA 0, unmeasured 0
+financing backup b2: opens (945px)
+financing backup b3: opens (665px)
+financing backup b1: opens (878px)
+financing backup b4: opens (632px)
+work switcher: [1,2,3,4,5,6,7,8] ok
+work slot 1: text measured 5, below AA 0, unmeasured 52
+work slot 2: text measured 49, below AA 13, unmeasured 8
+   LOW span.nums "12" 3.94 < 4.5
+   LOW span.w1x__no "P‑01" 3.05 < 4.5
+   LOW span.w1x__no "P‑02" 3.05 < 4.5
+   LOW span.w1x__no "P‑03" 3.05 < 4.5
+   LOW span.w1x__no "P‑04" 3.05 < 4.5
+   LOW span.w1x__no "P‑05" 3.05 < 4.5
+   LOW span.w1x__no "P‑06" 3.05 < 4.5
+   LOW span.w1x__no "P‑07" 3.05 < 4.5
+   LOW span.w1x__no "P‑08" 3.05 < 4.5
+   LOW span.w1x__no "P‑09" 3.05 < 4.5
+   LOW span.w1x__no "P‑10" 3.05 < 4.5
+   LOW span.w1x__no "P‑11" 3.05 < 4.5
+   LOW span.w1x__no "P‑12" 3.05 < 4.5
+work slot 3: text measured 8, below AA 3, unmeasured 0
+   LOW p.eyebrow "Our work" 4.42 < 4.5
+   LOW span.acc "Turn them over." 2.91 < 3
+   LOW span.w2x__n "01 / 26" 4.42 < 4.5
+work slot 4: text measured 14, below AA 0, unmeasured 0
+work slot 5: text measured 27, below AA 0, unmeasured 0
+work slot 6: text measured 9, below AA 0, unmeasured 0
+work slot 7: text measured 57, below AA 0, unmeasured 0
+work slot 8: text measured 13, below AA 0, unmeasured 0
+work backup b2: opens (939px)
+work backup b3: opens (2136px)
+work backup b4: opens (1275px)
+work backup b1: opens (920px)
+reviews switcher: [1,2,3,4,5,6,7,8] ok
+reviews slot 1: text measured 9, below AA 0, unmeasured 0
+reviews slot 2: text measured 8, below AA 0, unmeasured 4
+reviews slot 3: text measured 11, below AA 0, unmeasured 7
+reviews slot 4: text measured 11, below AA 0, unmeasured 0
+reviews slot 5: text measured 10, below AA 0, unmeasured 1
+reviews slot 6: text measured 15, below AA 0, unmeasured 0
+reviews slot 7: text measured 14, below AA 0, unmeasured 0
+reviews slot 8: text measured 13, below AA 0, unmeasured 5
+reviews backup b2: opens (653px)
+reviews backup b1: opens (600px)
+reviews backup b3: opens (872px)
+reviews backup b4: opens (560px)
+towns switcher: [1,2,3,4,5,6,7,8] ok
+towns slot 1: text measured 18, below AA 0, unmeasured 3
+towns slot 2: text measured 20, below AA 0, unmeasured 0
+towns slot 3: text measured 22, below AA 0, unmeasured 3
+towns slot 4: text measured 6, below AA 0, unmeasured 4
+towns slot 5: text measured 36, below AA 0, unmeasured 0
+towns slot 6: text measured 20, below AA 0, unmeasured 5
+towns slot 7: text measured 226, below AA 0, unmeasured 0
+towns slot 8: text measured 45, below AA 0, unmeasured 0
+towns backup b2: opens (632px)
+towns backup b3: opens (895px)
+towns backup b4: opens (1151px)
+towns backup b1: opens (662px)
+consult switcher: [1,2,3,4,5,6,7,8] ok
+consult slot 1: text measured 18, below AA 0, unmeasured 1
+consult slot 2: text measured 13, below AA 0, unmeasured 16
+consult slot 3: text measured 18, below AA 0, unmeasured 0
+consult slot 4: text measured 18, below AA 0, unmeasured 0
+consult slot 5: text measured 26, below AA 0, unmeasured 1
+consult slot 6: text measured 34, below AA 0, unmeasured 12
+consult slot 7: text measured 20, below AA 0, unmeasured 1
+consult slot 8: text measured 14, below AA 0, unmeasured 0
+consult backup b2: opens (719px)
+consult backup b3: opens (838px)
+consult backup b1: opens (667px)
+consult backup b4: opens (838px)
+
+page errors: 0
+FAILS: 59

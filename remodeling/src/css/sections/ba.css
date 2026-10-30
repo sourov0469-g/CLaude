@@ -292,3 +292,6 @@
 .bln__ring { position: absolute; left: var(--x); top: var(--y); width: calc(var(--r) * 2); height: calc(var(--r) * 2); translate: -50% -50%; border-radius: 50%; box-shadow: 0 0 0 5px var(--a-500), 0 0 0 8px var(--ink); pointer-events: none; }
 .bln__stage:focus-visible { outline: 3px solid var(--a-600); outline-offset: 4px; }
 @media (max-width: 1023px) { .bln__stage { grid-column: 1 / -1; --r: 80px; } }
+
+/* Phase 6 QA r1: the chosen tape label in the accent-text shade (the accent was 2.6:1 on its tab) */
+.bsx__tab[aria-selected="true"] .bsx__tl { color: var(--a-700); }

@@ -635,3 +635,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .hlt__row > div { display: grid; gap: 14px; justify-items: start; }
 .hlt__note { margin: 0; font: 500 .8125rem/1.35 var(--f-text); color: var(--muted); }
 @media (max-width: 767px) { .hlt__row { grid-template-columns: 1fr; } .hlt__stage { padding-bottom: 80px; } }
+
+/* Phase 6 QA r1: the rating star beside 4.8 measured 2.85:1 in the accent; the visible heroes print it in the accent-text
+   shade (5.5:1 on paper). Backups keep their recorded colour. */
+#hero .ver:not([data-v^="b"]) .hproof__star { color: var(--a-700); }

@@ -380,3 +380,7 @@
 .sdb__row--open .sdb__bar { left: 0; width: 100%; background: repeating-linear-gradient(90deg, var(--a-200) 0 18px, var(--a-100) 18px 26px); }
 .sdb__row--open .sdb__bar::after { content: ""; position: absolute; right: -14px; top: -6px; border: 17px solid transparent; border-left: 16px solid var(--ink); border-right: 0; }
 @media (max-width: 767px) { .sdb__scale { margin-left: 0; } .sdb__row { grid-template-columns: 64px 1fr; } .sdb__row img { width: 64px; } .sdb__track { grid-column: 1 / -1; } }
+
+/* Phase 6 QA r1: title-block keys and the sheet numbers to AA */
+.s2x__tb dt { color: var(--ink); font-size: .625rem; }   /* on the orange block only full ink holds AA (6.1:1) */
+.s3x__n { color: var(--a-700); }
