@@ -956,3 +956,48 @@ Tools: `scratchpad/ap/qa.js` (static sweep of every state) and the legacy `qa/v6
 - Document overflow: 0.
 - Every H1 is 71/780 (72 px step); every H2 is 64/780 desktop and 32/780 at 375.
 - C.6 visible-element budget (≤300): met in every version. The largest are Near 2 (216), Services 2 (213) and Reviews 1 (185, the marquee clones). The pack measured 599 / 513 / ~504 in Near / Reviews / Work; those are now 30–216 / 58–185 / 49–75.
+
+## QA round 2 (contrast, focus, ARIA, measure; plus the full re-check suite)
+Tools: `scratchpad/ap/qa2.js` (WCAG contrast of every visible text node against its effective background; focus ring on every focusable; dangling `aria-*` ids; duplicate ids; measure) and `qa/v7/recheck.js` (the V6 suite, with a wait for the section before scrolling).
+
+**Raised:**
+- (a) The "or" in every next-step line at 3.68–3.92:1.
+- (b) Services 3's unlit trade names at 3.25:1.
+- (c) Reviews 3's unpicked names at 2.38:1, which is the pack's own 0.38 opacity.
+- (d) Money 3's not-applied receipt lines at 2.93:1.
+- (e) Book 1's "Call the office" label at 3.92:1.
+- (f) Colour 2's swatch-name code at 4.29:1.
+- (g) Near 2's "-" at 1.9:1 after the night switch.
+- (h) Colour 1's money line at a 150ch measure.
+- (i) Possible false positives: text over photos and plates (Hero 3 sign, Built 2 bleed plate, Colour 3 Aged Pewter plate, Work 3 lens toggle), Services 3's transparent link overlay, and Near 2's row measure.
+
+**Killed:**
+- (i) Each one sits on a photo or a ≥0.78 dark plate that the script cannot composite. Checked by hand: the Aged Pewter plate composites to about #282828 under white, roughly 14:1. The tape overlay's text is intentionally transparent; its visible cue is the "Book →" in `--red-d`. The Near 2 row is a grid, not a paragraph. ⟦S1306⟧ (verify before fixing).
+- (c) The pack's literal 0.38: REJECTED in favour of 0.62. These names are live controls and need 4.5:1; the focus brackets and the weight drop still carry the selection. ⟦S0071⟧, ⟦S1473⟧ H6.
+
+**Landed:**
+- (a) `.ns-or` at full `--fg2`.
+- (b) Unlit tape names at 0.68.
+- (c) Unpicked names at 0.62.
+- (d) Not-applied receipt lines at 0.66.
+- (e) Opacity 1 on the label.
+- (f) Opacity 1 on the code.
+- (g) `--on-night2`.
+- (h) The line is capped at 62ch.
+- ⟦S0071⟧, ⟦S1500⟧.
+
+**Focus:** every focusable in all 30 live states shows a focus indicator (0 flagged).
+
+**ARIA:** 0 dangling ids and 0 duplicate ids. The sentence-form error ids exist only while an error shows, by design.
+
+**Re-check suite:** 225 pass, 0 fail. It covers:
+- one h1 and one main;
+- no duplicate ids;
+- no focusables inside `aria-hidden`;
+- slider ARIA, and tablist arrows wrapping over the visible tabs;
+- JSON-LD facts, and review counts consistent;
+- marquee pause and off-screen freeze;
+- reduced motion (no Lenis, no infinite loop, text visible);
+- no-JS content;
+- no overflow and no sub-24 px targets at 320 and 375;
+- every booking field labelled, with autocomplete and inputmode.
