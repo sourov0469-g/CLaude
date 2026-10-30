@@ -18,7 +18,7 @@ rows = []
 # R4 Phase 6: the inner pages run every ban; the homepage-only checks (its section order, the Storm section, the review
 # figures it must show) report n/a there
 HOME = 'homepage' in os.path.basename(sys.argv[1])
-HOME_ONLY = ('"295" present', '"4.9" present', 'section sequence', 'storm v')
+HOME_ONLY = ('"295" present', '"4.9" present', 'section sequence', 'storm v', 'Owens Corning Platinum Preferred present', '$2M liability present')
 def chk(name, ok, detail): rows.append((('n/a' if not HOME and name.startswith(HOME_ONLY) else 'PASS' if ok else 'FAIL'), name, detail))
 P353 = r'353[\s.)-]*9711'
 chk('353-9711 appears 0 times (any spacing/format)', n(P353) == 0 and n(r'9373539711') == 0, f"{n(P353)} / {n(r'9373539711')}")
