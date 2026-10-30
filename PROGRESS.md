@@ -140,3 +140,13 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
 - Found while testing: at 1024 the header row already overflowed by ~100px (Book button past the margin). 1024–1279 now hides the phone number (Book a consultation stays) and tightens gaps. Measured header overflow: 0 at 1024, 1280 and 1440; panel opens and switches theme at all three.
 - `rxcheck.js`: 273 interactive elements, 273 covered, 0 missing, 0 duplicate specs.
 - Weight after Towns: 3,866,542 B (1,017 over the cap) → two more photos re-encoded at q74 (k-turquoise, b-white-marble): **3,853,966 B** (cap 3,865,525).
+
+## v2 — audit measures after the rebuilds (`audit.js`, 1440; full table `remodeling/qa/v2-audit-after-rebuild.txt`)
+| Version | prose before → after | centre share before → after | controls in centre before → after |
+|---|---|---|---|
+| Proof V1 | 28 → 21 | .43 → .71 | 4 → 5 |
+| Process V1 | 25 → 20 | .73 → .68 | 0 → 8 |
+| Process V2 | 195 → 19 | .09 → .51 | 0 → 1 |
+| Process V3 | 50 → 24 | .12 → .47 | 0 → 1 |
+| Towns V1 | 82 → 26 | .37 → .71 | 0 → 1 |
+All five now meet the Phase 1 rule (prose ≤ 60 and centre share ≥ .35). The `ptr` column (DOM changes during a straight hover sweep) reads 0 for Proof V1, Process V2/V3 and Towns V1: these centrepieces answer to grab, drag, swipe or a pointer near a mark, not to a passing sweep. Their interactions are proven by the scripted grab/drag/swipe/hover tests above and in the interaction table, not by this column.
