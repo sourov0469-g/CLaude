@@ -6,7 +6,7 @@
    [BANK] Shopify hand-drawn lines 3s (.34,.22,.47,.84), [BANK] 349 feTurbulence grain. */
 (function () {
   var doc = document, NS = 'http://www.w3.org/2000/svg';
-  var INK = '#0B1418', YEL = '#f2c230', STEEL = '#c9d1d3';
+  var INK = '#121212', YEL = '#FF5F00', STEEL = '#C9C1B6';
   function f(n) { return Math.round(n * 10) / 10; }
   function live() { return EZ.fine() && EZ.motionOn(); }
 
@@ -150,7 +150,7 @@
   // financing: ledger graph paper; a plumb bob hangs from the top and swings to point at the pointer
   FIELD.plumb = function () {
     var el = doc.createElement('div');
-    el.innerHTML = '<div class="fld-ledger"></div><svg class="fld-plumb" viewBox="-60 -10 120 300" width="120" height="300"><g class="fld-bobg"><path d="M0 0 V236" stroke="#d64b37" stroke-width="1.2"/>' +
+    el.innerHTML = '<div class="fld-ledger"></div><svg class="fld-plumb" viewBox="-60 -10 120 300" width="120" height="300"><g class="fld-bobg"><path d="M0 0 V236" stroke="#C42B1C" stroke-width="1.2"/>' +
       '<path d="M0 232 l-9 8 l9 30 l9 -30 z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.4" stroke-linejoin="round"/><path d="M-9 240 H9" stroke="' + INK + '" stroke-width="1"/></g><circle r="4" fill="' + INK + '"/></svg>';
     var g = el.querySelector('.fld-bobg'), plumb = el.querySelector('.fld-plumb');
     var ang = 0, vel = 0, target = 0, raf = 0, ax = 0, ay = 0;
@@ -220,10 +220,10 @@
     for (var i = 0; i < 72; i++) ticks += '<path d="M0 -' + (i % 9 ? 116 : 108) + ' V-122" transform="rotate(' + i * 5 + ')"/>';
     el.innerHTML = '<svg class="fld-compass" viewBox="-130 -130 260 260" width="260" height="260"><circle r="122" class="fld-cr"/><circle r="96" class="fld-cr"/><g class="fld-ticks">' + ticks + '</g>' +
       '<path class="fld-rose" d="M0 -92 L10 -10 L92 0 L10 10 L0 92 L-10 10 L-92 0 L-10 -10 Z"/><text x="0" y="-100" text-anchor="middle" class="fld-n">N</text>' +
-      '<g class="fld-needle"><path d="M0 -80 L7 0 L-7 0 Z" fill="#d64b37"/><path d="M0 80 L7 0 L-7 0 Z" fill="' + STEEL + '"/><circle r="6" fill="' + INK + '" stroke="' + STEEL + '" stroke-width="2"/></g></svg>' +
+      '<g class="fld-needle"><path d="M0 -80 L7 0 L-7 0 Z" fill="#C42B1C"/><path d="M0 80 L7 0 L-7 0 Z" fill="' + STEEL + '"/><circle r="6" fill="' + INK + '" stroke="' + STEEL + '" stroke-width="2"/></g></svg>' +
       '<svg class="fld-svg fld-stakes" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">' +
       [[120, 460], [300, 120], [540, 520], [860, 380], [700, 90]].map(function (p) {
-        return '<g transform="translate(' + p[0] + ' ' + p[1] + ')"><path d="M0 0 V-40" stroke="#c9a46a" stroke-width="5"/><path d="M0 0 l-2.5 6 h5 z" fill="#c9a46a"/><path d="M2 -38 q14 2 18 10 q-10 -3 -18 2" fill="#ff7a3c"/></g>';
+        return '<g transform="translate(' + p[0] + ' ' + p[1] + ')"><path d="M0 0 V-40" stroke="#FFC29A" stroke-width="5"/><path d="M0 0 l-2.5 6 h5 z" fill="#FFC29A"/><path d="M2 -38 q14 2 18 10 q-10 -3 -18 2" fill="#ff7a3c"/></g>';
       }).join('') + '</svg>';
     var needle = el.querySelector('.fld-needle'), comp = el.querySelector('.fld-compass'), a = 0, t = 0, raf = 0;
     function step() { raf = 0; a += (t - a) * .12; needle.setAttribute('transform', 'rotate(' + f(a) + ')'); if (Math.abs(t - a) > .1) raf = requestAnimationFrame(step); }
@@ -245,7 +245,7 @@
   FIELD.laser = function () {
     var el = doc.createElement('div');
     el.innerHTML = '<div class="fld-brick"></div><span class="fld-laser"></span><span class="fld-dot"></span>' +
-      '<svg class="fld-emitter" viewBox="0 0 34 26" width="34" height="26"><rect x="1" y="3" width="26" height="20" rx="3" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.6"/><rect x="5" y="7" width="12" height="7" rx="1" fill="#41545a"/><circle cx="29" cy="13" r="3" fill="#e2412b"/></svg>';
+      '<svg class="fld-emitter" viewBox="0 0 34 26" width="34" height="26"><rect x="1" y="3" width="26" height="20" rx="3" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.6"/><rect x="5" y="7" width="12" height="7" rx="1" fill="#41545a"/><circle cx="29" cy="13" r="3" fill="#C42B1C"/></svg>';
     return { el: el };
   };
 

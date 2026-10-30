@@ -164,7 +164,7 @@
       function draw(t) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, W, H);
-        ctx.strokeStyle = 'rgba(242,194,48,.14)'; ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(255, 95, 0, .14)'; ctx.lineWidth = 1;
         ctx.beginPath();
         for (var i = 0; i < stars.length; i++) { var a = stars[i], b = stars[links[i]]; if (!b) continue; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
         ctx.stroke();

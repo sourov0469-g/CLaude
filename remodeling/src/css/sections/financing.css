@@ -11,7 +11,7 @@
 .financing1__tk {
   --py: 220px; --gx: -40%;
   position: relative; display: grid; grid-template-rows: auto 112px auto;
-  background: #f3eee2; color: #1b2629;
+  background: #FFFFFF; color: #121212;
   -webkit-mask: radial-gradient(circle 11px at 0 var(--py), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% var(--py), transparent 98%, #000) right / 51% 100% no-repeat;
   mask: radial-gradient(circle 11px at 0 var(--py), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% var(--py), transparent 98%, #000) right / 51% 100% no-repeat;
   box-shadow: inset 0 0 0 1px rgba(27, 38, 41, .12);
@@ -20,29 +20,29 @@
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: var(--glare, none); background-size: 260% 260%; background-position: var(--gx, 120%) var(--gx, 120%);
   mix-blend-mode: screen; opacity: 0; transition: opacity 650ms var(--ease-out);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0);
+  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, 0);
 }
 /* the sheen follows the pointer; the rim glints once as it arrives [BANK 372 rimGlint] */
 .financing1__tk.is-glare::after { opacity: 1; animation: fin1-rim 650ms var(--ease-out); }
 @keyframes fin1-rim { 30% { box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .75); } 100% { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0); } }
-.financing1__main { padding: 22px 20px 18px; border-bottom: 2px dashed rgba(27, 38, 41, .4); min-width: 0; }
+.financing1__main { padding: 22px 20px 18px; border-bottom: 2px dashed rgba(18, 18, 18, .4); min-width: 0; }
 .financing1__name { margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: -.005em; }
-.financing1__kind { margin: 6px 0 0; font: 600 .75rem/1.3 var(--f-text); color: #1d4a4e; }
+.financing1__kind { margin: 6px 0 0; font: 600 .75rem/1.3 var(--f-text); color: #121212; }
 .financing1__fig { margin: 18px 0 0; font: 400 clamp(3rem, 2rem + 2.6vw, 4.5rem)/.9 var(--f-display); letter-spacing: -.005em; white-space: nowrap; }
-.financing1__per { margin: 6px 0 0; font-size: .8125rem; line-height: 1.35; color: #4a5a5e; }
+.financing1__per { margin: 6px 0 0; font-size: .8125rem; line-height: 1.35; color: #5E5852; }
 .financing1__stub, .financing1__more { grid-row: 2; grid-column: 1; padding: 16px 20px; display: grid; align-content: center; }
-.financing1__stub { background: repeating-linear-gradient(135deg, rgba(27, 38, 41, .04) 0 6px, transparent 6px 12px); }
-.financing1__sfig { margin: 0; font: 400 2rem/1 var(--f-display); color: #c8402e; }
-.financing1__sper { margin: 4px 0 0; font-size: .8125rem; color: #4a5a5e; }
+.financing1__stub { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .04) 0 6px, transparent 6px 12px); }
+.financing1__sfig { margin: 0; font: 400 2rem/1 var(--f-display); color: #C42B1C; }
+.financing1__sper { margin: 4px 0 0; font-size: .8125rem; color: #5E5852; }
 .financing1__more { font-size: .875rem; line-height: 1.45; }
 .financing1__more p { margin: 0; }
 .js .financing1__more { visibility: hidden; }
 .financing1__tk.is-torn .financing1__more { visibility: visible; }
 .financing1__tear {
   grid-row: 3; margin: 0 20px 18px; min-height: 44px; padding: 0 14px;
-  background: #1b2629; color: #f3eee2; border: 0; font: 600 .875rem/1 var(--f-text); cursor: pointer;
+  background: #FFFFFF; color: #121212; border: 0; font: 600 .875rem/1 var(--f-text); cursor: pointer;
 }
-.financing1__tear .rx { color: #c8402e; }
+.financing1__tear .rx { color: #C42B1C; }
 @media (max-width: 1023px) { .financing1__row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .financing1__row { grid-template-columns: 1fr; } }
 
@@ -95,52 +95,52 @@
 /* the closed state: the two kinds already laid out on light technical paper, the orb sitting on the seam [S1383] */
 .financing3__ground {
   position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr;
-  background: #f3eee2; color: #1b2629;
-  background-image: linear-gradient(rgba(27, 38, 41, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(27, 38, 41, .06) 1px, transparent 1px);
+  background: #FFFFFF; color: #121212;
+  background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
   background-size: 24px 24px;
   box-shadow: none;
 }
-.financing3__ground::after { content: ""; position: absolute; left: 50%; top: 22px; bottom: 22px; border-left: 1.5px dashed rgba(27, 38, 41, .45); }
+.financing3__ground::after { content: ""; position: absolute; left: 50%; top: 22px; bottom: 22px; border-left: 1.5px dashed rgba(18, 18, 18, .45); }
 .financing3__half { padding: clamp(28px, 4vw, 56px); display: grid; align-content: space-between; }
 .financing3__half:last-child { text-align: right; }
 .financing3__gk { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; }
-.financing3__half:first-child .financing3__gk { border-top: 3px solid #1b2629; padding-top: 12px; }
-.financing3__half:last-child .financing3__gk { border-top: 3px solid #c8402e; padding-top: 12px; }
+.financing3__half:first-child .financing3__gk { border-top: 3px solid #121212; padding-top: 12px; }
+.financing3__half:last-child .financing3__gk { border-top: 3px solid #C42B1C; padding-top: 12px; }
 .financing3__gn { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: #3a4a4e; }
 .financing3__stage:has(.financing3__orb[aria-expanded="true"]) .financing3__ground { visibility: hidden; }
-.financing3__gl { margin: 0; font: 500 .8125rem/1.3 var(--f-text); color: #1d4a4e; letter-spacing: .02em; }
+.financing3__gl { margin: 0; font: 500 .8125rem/1.3 var(--f-text); color: #121212; letter-spacing: .02em; }
 .financing3__orb {
   position: relative; z-index: 1;
   width: 240px; height: 240px; border-radius: 50%; border: 0; padding: 30px;
-  background: #0B1418; color: #e8e4dc; cursor: pointer;
-  box-shadow: 0 0 0 2px #f2c230, 0 0 0 12px rgba(242, 194, 48, .14);
+  background: #FFFFFF; color: #121212; cursor: pointer;
+  box-shadow: 0 0 0 2px #FF5F00, 0 0 0 12px rgba(255, 95, 0, .14);
   font: 400 1.75rem/1.05 var(--f-display); letter-spacing: -.005em;
 }
-@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #f2c230, 0 0 0 18px rgba(242, 194, 48, .2); } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
+@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #FF5F00, 0 0 0 18px rgba(255, 95, 0, .2); } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .financing3__sheet {
   position: relative; width: 100%; padding: clamp(28px, 4vw, 52px);
-  background: #f3eee2; color: #1b2629;
-  background-image: repeating-linear-gradient(135deg, rgba(27, 38, 41, .025) 0 2px, transparent 2px 14px);
+  background: #FFFFFF; color: #121212;
+  background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 14px);
 }
-.financing3__br { position: absolute; width: 22px; height: 22px; border: 0 solid #1b2629; }
+.financing3__br { position: absolute; width: 22px; height: 22px; border: 0 solid #121212; }
 .financing3__br--tl { left: 12px; top: 12px; border-width: 2px 0 0 2px; }
 .financing3__br--tr { right: 12px; top: 12px; border-width: 2px 2px 0 0; }
 .financing3__br--bl { left: 12px; bottom: 12px; border-width: 0 0 2px 2px; }
 .financing3__br--br { right: 12px; bottom: 12px; border-width: 0 2px 2px 0; }
-.financing3__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #1b2629; cursor: pointer; }
+.financing3__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #121212; cursor: pointer; }
 .financing3__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
-.financing3__col { border-top: 3px solid #1b2629; padding-top: 16px; }
+.financing3__col { border-top: 3px solid #121212; padding-top: 16px; }
 .financing3__k { margin: 0 0 12px; font: 400 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; }
 .financing3__col dl { margin: 0; display: grid; gap: 14px; }
 .financing3__col dt { font: 700 .9375rem/1.2 var(--f-text); }
 .financing3__col dd { margin: 4px 0 0; font-size: .9375rem; line-height: 1.45; color: #3a4a4e; }
-.financing3__fit { margin: 16px 0 0; font: 600 .875rem/1.4 var(--f-text); color: #1d4a4e; }
-.financing3__foot { margin-top: clamp(24px, 3vw, 40px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); padding-top: 18px; border-top: 1px dashed rgba(27, 38, 41, .35); }
-.financing3__foot p { margin: 0; font-size: .875rem; color: #4a5a5e; max-width: 52ch; }
-.financing3__btn { background: #1b2629; color: #f3eee2; }
-.financing3__btn .rx { color: #1d4a4e; }
+.financing3__fit { margin: 16px 0 0; font: 600 .875rem/1.4 var(--f-text); color: #121212; }
+.financing3__foot { margin-top: clamp(24px, 3vw, 40px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); padding-top: 18px; border-top: 1px dashed rgba(18, 18, 18, .35); }
+.financing3__foot p { margin: 0; font-size: .875rem; color: #5E5852; max-width: 52ch; }
+.financing3__btn { background: #FFFFFF; color: #121212; }
+.financing3__btn .rx { color: #121212; }
 @media (max-width: 1023px) { .financing3__intro .t-head, .financing3__intro .financing__lead { grid-column: 1 / -1; } .financing3__intro .financing__lead { margin-top: var(--s4); } }
-@media (max-width: 767px) { .financing3__sheet { padding-top: 76px; } .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(27, 38, 41, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
+@media (max-width: 767px) { .financing3__sheet { padding-top: 76px; } .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(18, 18, 18, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
 
 
 /* ---------- slot 1 · AUDIT-01 winner, copied from v2 (.financing2 -> .fr); fixes follow ---------- */
@@ -148,29 +148,29 @@
 .fr__src { grid-column: 1; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
 .fr__v {
   display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 64px;
-  background: rgba(11, 20, 24, .35); color: var(--field-ink); border: 0; box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .3); cursor: pointer; text-align: left;
+  background: rgba(255, 255, 255, .35); color: var(--field-ink); border: 0; box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .3); cursor: pointer; text-align: left;
   font: 600 .9375rem/1.2 var(--f-text);
 }
 .fr__v svg { width: 40px; height: 40px; flex: none; overflow: visible; }
-.fr__v .wheel { fill: none; stroke: #e2412b; stroke-width: 3; }
-.fr__v .hub { fill: #0B1418; }
-.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #f2c230; background: rgba(11, 20, 24, .55); }
+.fr__v .wheel { fill: none; stroke: #C42B1C; stroke-width: 3; }
+.fr__v .hub { fill: #121212; }
+.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #FF5F00; background: rgba(255, 255, 255, .55); }
 .fr__pipes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.fr__pipes .p { fill: none; stroke: #5f7176; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
-.fr__pipes .p-in { fill: none; stroke: #0B1418; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
-.fr__pipes .w { fill: none; stroke: #5ab6e6; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 8; opacity: 0; }
-.fr__pipes .j { fill: #c9d1d3; stroke: #0B1418; stroke-width: 2; }
-.fr__pipes .man { fill: #5f7176; stroke: #0B1418; stroke-width: 2; }
+.fr__pipes .p { fill: none; stroke: #C9C1B6; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+.fr__pipes .p-in { fill: none; stroke: #121212; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+.fr__pipes .w { fill: none; stroke: #FF5F00; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 8; opacity: 0; }
+.fr__pipes .j { fill: #C9C1B6; stroke: #121212; stroke-width: 2; }
+.fr__pipes .man { fill: #C9C1B6; stroke: #121212; stroke-width: 2; }
 .fr__dst { grid-column: 3; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
 .fr__l {
   position: relative; overflow: hidden; display: grid; gap: 2px; padding: 12px 14px; min-height: 64px; align-content: center;
-  background: rgba(11, 20, 24, .45); box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .3); color: var(--field-ink);
+  background: rgba(255, 255, 255, .45); box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .3); color: var(--field-ink);
 }
-.fr__l::before { content: ""; position: absolute; inset: 0; background: rgba(90, 182, 230, .28); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
+.fr__l::before { content: ""; position: absolute; inset: 0; background: rgba(255, 95, 0, .28); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
 .fr__l strong, .fr__l span { position: relative; }
 .fr__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; }
 .fr__l span { font-size: .8125rem; color: var(--field-muted); }
-.fr__l.is-on { box-shadow: inset 0 0 0 2px #5ab6e6; }
+.fr__l.is-on { box-shadow: inset 0 0 0 2px #FF5F00; }
 .fr__l.is-off { opacity: .45; }
 .fr__why { margin: var(--s6) 0 0; min-height: 3em; max-width: 64ch; color: var(--field-ink); font-size: 1.0625rem; }
 .fr__btn { margin-top: var(--s5); }
@@ -185,15 +185,15 @@
 
 /* [AUDIT-01 F6] slot 1: ink wheels, teal 2px selection, no water; partners crossfade 200ms; qualifier lines at one size */
 .fr__v { transition: box-shadow 150ms ease, background-color 150ms ease; }
-.fr__v .wheel { stroke: #0B1418; }
-.fr__v .hub { fill: #e8e4dc; }
-.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #77b3b8; }
-.fr__pipes .p { stroke: rgba(232, 228, 220, .22); stroke-width: 3; }
-.fr__pipes .w { stroke: #77b3b8; stroke-width: 3; stroke-dasharray: none; opacity: 1; animation: fr-in 200ms ease-out both; }
+.fr__v .wheel { stroke: #121212; }
+.fr__v .hub { fill: #FFFFFF; }
+.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #FF5F00; }
+.fr__pipes .p { stroke: rgba(18, 18, 18, .22); stroke-width: 3; }
+.fr__pipes .w { stroke: #FF5F00; stroke-width: 3; stroke-dasharray: none; opacity: 1; animation: fr-in 200ms ease-out both; }
 @keyframes fr-in { from { opacity: 0; } }
 .fr__l { transition: opacity 200ms ease-out, box-shadow 200ms ease-out; }
 .fr__l::before { content: none; }
-.fr__l.is-on { box-shadow: inset 0 0 0 2px #77b3b8; }
+.fr__l.is-on { box-shadow: inset 0 0 0 2px #FF5F00; }
 .fr__l .fr__q { display: block; font-size: .875rem; line-height: 1.45; color: var(--field-muted); margin-top: 6px; }
 .fr__rig { grid-template-columns: minmax(180px, 1fr) 1fr minmax(280px, 1.4fr); }
 .fr__note { max-width: 72ch; }
@@ -210,10 +210,10 @@
 }
 
 /* [AUDIT-01 F6 loser V1, P1] a maximum is printed at the size of its qualifier, never as a hero figure; the stub figures lose the red */
-.financing1__fig { margin: 18px 0 0; font: 600 .9375rem/1.35 var(--f-text); color: #0B1418; white-space: normal; }
+.financing1__fig { margin: 18px 0 0; font: 600 .9375rem/1.35 var(--f-text); color: #121212; white-space: normal; }
 .financing1__per { margin-top: 0; font-size: .9375rem; }
-.financing1__sfig { font: 600 .9375rem/1.35 var(--f-text); color: #0B1418; }
+.financing1__sfig { font: 600 .9375rem/1.35 var(--f-text); color: #121212; }
 .financing1__kind { font-size: .8125rem; }
 /* [AUDIT-01 F6 loser V3, P1] the orb is a small plain control, no glow, no gold ring */
-.financing3__orb { width: 132px; height: 132px; padding: 16px; font-size: 1rem; box-shadow: 0 0 0 2px #0B1418; }
-@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #77b3b8; } }
+.financing3__orb { width: 132px; height: 132px; padding: 16px; font-size: 1rem; box-shadow: 0 0 0 2px #121212; }
+@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #FF5F00; } }

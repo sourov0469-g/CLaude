@@ -56,3 +56,13 @@ c2, cx2 = text_path('poppins-latin-500-normal.woff2', 'Construction', 25, 0, 196
 W2 = round(max(ex2, cx2) + 2)
 write('elbaz-logo-stacked.svg', W2, 206, mark((W2 - 100) / 2, 0) + '<path d="%s" fill="%s"/><path d="%s" fill="%s"/>' % (e2, BLACK, c2, BLACK), 'Elbaz Construction')
 print('lockup width', W, 'stacked width', W2)
+
+# mono versions (the mark must read in black, in white and in the accent): block in one colour, the roof-E knocked out
+def mono(block, stroke, name):
+    m = mark().replace('fill="%s"' % ORANGE, 'fill="%s"' % block).replace('stroke="%s"' % WHITE, 'stroke="%s"' % stroke)
+    write(name, 100, 100, m, 'Elbaz Construction')
+mono(BLACK, WHITE, 'elbaz-mark-black.svg')
+mono(WHITE, BLACK, 'elbaz-mark-white.svg')
+mono(ORANGE, WHITE, 'elbaz-mark-accent.svg')
+write('elbaz-logo-black.svg', W, 100, mark().replace('fill="%s"' % ORANGE, 'fill="%s"' % BLACK) + '<path d="%s" fill="%s"/><path d="%s" fill="%s"/>' % (e, BLACK, c, BLACK), 'Elbaz Construction')
+write('elbaz-logo-white.svg', W, 100, mark().replace('fill="%s"' % ORANGE, 'fill="%s"' % WHITE).replace('stroke="%s"' % WHITE, 'stroke="%s"' % ORANGE) + '<path d="%s" fill="%s"/><path d="%s" fill="%s"/>' % (e, WHITE, c, WHITE), 'Elbaz Construction')

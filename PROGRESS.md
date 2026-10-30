@@ -237,3 +237,29 @@ Interaction flags verified by hand (Playwright probe, `scratchpad dbg5.js`; log 
 - Financing V3 Close (375) after the fix: `pointerdown, ON@3937, click, off@4380`; the sheet closes.
 - Header Close / menu links (375): the beat fires, then the control closes the sheet (the test now records this as a pass with a note).
 The rxtest rows for the first four stay flagged because the control's own job (open, morph, submit, relabel) moves or re-renders it inside the test's 150 ms click window; the hand probes show the reactions work.
+
+---
+
+# CONSOLIDATED MASTER DIRECTIVE (2026-10-30) · Phase 0 note
+
+Supersedes the day's earlier notes (deadline scope, design note, redesign directive, clarification, addendum). Amendment applied: pure black and near-black backgrounds are banned everywhere; a deep green is allowed on at most two sections.
+
+- **Accent:** `--accent #FF5F00` (Elbaz orange), with tints and shades `--a-50 … --a-800`. Accent text uses `--a-700 #B84200` (5.5:1 on paper). Orange is the colour of the trade on a Miami street (safety orange, permit tags, terracotta and late sun), so it reads as a working builder, not a lifestyle brand. It is warm against the photographed interiors and lively on a light page.
+- **Accent 2:** none. One orange carries buttons, labels, rules and artwork.
+- **Deep green (amendment):** none used so far. Every use would be logged here.
+- **Grounds:** `--paper #FAF7F2` (warm off-white), `--white #FFFFFF`, `--a-100` orange-tint field. Text is `--ink #121212` and `--muted #5E5852`.
+- **Logo (one line):** the "roof-E". One white stroke climbs a roof gable and turns down into the spine of an E with two bars (the letter is the house), set in a rounded orange block. Wordmark: Poppins Bold "Elbaz" over Poppins Medium "Construction", outlined to paths. Black, white and accent mono versions are in `remodeling/brand/`.
+- **Fonts:** Poppins (display, SemiBold/Bold) + Roboto (text). Bebas Neue and Geist remain only inside hidden backups.
+- **Dark visible sections at the start of Phase 2:**
+  - Every section was dark: hero, proof (deep teal), services, before/after, process, financing (deep teal), work, reviews, towns, consult (deep teal).
+  - The header, the footer, the menu sheet and the photo viewer were dark too.
+  - All are being converted to paper, white or orange-tint grounds.
+- **Bespoke interactive (one line):** the **Finish picker**. Tap a cabinet finish and the hero swaps to the real Elbaz kitchen built in that finish, named with its project title. Each swatch is a crop of that project's own photograph, so only a firm with this project record could offer it. The Emerald project is left out while its photo/caption match is an open owner item.
+- **Phase order:** 0 note → 1 logo (done, plus mono variants) → 2 palette tokens + light conversion + hex normalisation → 3 section-by-section upgrade in page order (eyebrow labels, composition, one bespoke SVG artwork per section, a different divider per section) → 4 Finish picker → 5 version expansion per section → 6 three QA rounds per section under the new skin → final gate report.
+
+**Collisions logged (priority: facts > hard rules > standards > lessons > judgement):**
+1. Phase 5 assumes five visible versions per section. Only the hero has five; sections 2–10 have three, because slots 4–5 were deferred this morning under the deadline order. Plan for sections 2–10:
+   - Back up the three visible versions (byte-identical). Backups become b1–b6.
+   - Build three improved versions plus five new versions, so the switcher still runs 1–8.
+   - Each of those sections ends with 14 versions, not the gate's 16. The two missing backups would have to be versions that never existed; inventing them to fill the count would be false.
+2. "Hidden backups byte-identical": their own markup, rules and JS defs are untouched. Shared rules (section heads, `.btn`, tokens) are scoped back to the old values whenever a backup is showing (`.sec:has(> .ver[data-v^="b"]:not([hidden]))`), so a backup still renders as recorded.

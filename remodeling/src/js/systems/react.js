@@ -8,7 +8,7 @@
 (function () {
   var NS = 'http://www.w3.org/2000/svg';
   var P = 36;                                   // drawing margin around the button, px
-  var INK = '#0B1418', YEL = '#f2c230', STEEL = '#c9d1d3', BLUE = '#2b6a96', RED = '#e2412b', DEEP = '#1d4a4e';
+  var INK = '#121212', YEL = '#FF5F00', STEEL = '#C9C1B6', BLUE = '#FF5F00', RED = '#C42B1C', DEEP = '#FF5F00';
 
   function f(n) { return Math.round(n * 10) / 10; }
   function q(svg, s) { return svg.querySelectorAll(s); }
@@ -22,8 +22,8 @@
     art: function (w, h) {
       var y = P + h - 7;
       return '<g class="s" opacity="0"><rect x="' + P + '" y="' + y + '" width="' + w + '" height="7" fill="' + DEEP + '"/>' +
-        '<path d="M' + P + ' ' + (y + 3.5) + 'H' + (P + w) + '" stroke="#e8e4dc" stroke-width=".7" stroke-dasharray="3 3"/></g>' +
-        '<g class="r" opacity="0"><circle cx="0" cy="0" r="5" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/><circle r="2" fill="#e8e4dc"/></g>';
+        '<path d="M' + P + ' ' + (y + 3.5) + 'H' + (P + w) + '" stroke="#121212" stroke-width=".7" stroke-dasharray="3 3"/></g>' +
+        '<g class="r" opacity="0"><circle cx="0" cy="0" r="5" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/><circle r="2" fill="#FFFFFF"/></g>';
     },
     hover: function (svg, w, h) {
       var s = one(svg, '.s'), r = one(svg, '.r');
@@ -124,9 +124,9 @@
   /* before/after: a fan of paint swatches opens at the right edge; click lets a drip fall */
   R.swatch = {
     art: function (w, h) {
-      var x = P + w - 16, y = P + h - 4, cols = ['#ecdcc4', '#77b3b8', '#1d4a4e', '#c9a46a'], s = '';
+      var x = P + w - 16, y = P + h - 4, cols = ['#ecdcc4', '#FF5F00', '#FF5F00', '#FFC29A'], s = '';
       for (var i = 0; i < 4; i++) s += '<rect class="sw' + i + '" x="' + (x - 3) + '" y="' + (y - 30) + '" width="9" height="30" rx="1" fill="' + cols[i] + '" stroke="' + INK + '" stroke-width="1"/>';
-      return '<g class="fan" opacity="0">' + s + '<circle cx="' + (x + 1.5) + '" cy="' + (y - 4) + '" r="1.6" fill="' + INK + '"/></g><circle class="dp" cx="' + (x + 1.5) + '" cy="' + (y + 2) + '" r="2.6" fill="#77b3b8" opacity="0"/>';
+      return '<g class="fan" opacity="0">' + s + '<circle cx="' + (x + 1.5) + '" cy="' + (y - 4) + '" r="1.6" fill="' + INK + '"/></g><circle class="dp" cx="' + (x + 1.5) + '" cy="' + (y + 2) + '" r="2.6" fill="#FF5F00" opacity="0"/>';
     },
     hover: function (svg, w, h) {
       var o = (P + w - 14.5) + ' ' + (P + h - 8), tl = gsap.timeline({ paused: true }).set(one(svg, '.fan'), { opacity: 1 }, 0);
@@ -184,7 +184,7 @@
     art: function (w, h) {
       var cx = P + 12, cy = P + 6;
       function key(a, col) { return '<g class="ky" transform="rotate(' + a + ' ' + cx + ' ' + cy + ')"><circle cx="' + cx + '" cy="' + (cy + 12) + '" r="4.5" fill="' + col + '" stroke="' + INK + '" stroke-width="1.1"/><path d="M' + cx + ' ' + (cy + 16) + 'v14m0 -4h4m-4 4h3" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/></g>'; }
-      return '<g class="kr" opacity="0"><circle cx="' + cx + '" cy="' + cy + '" r="6" fill="none" stroke="' + STEEL + '" stroke-width="2"/>' + key(-20, YEL) + key(10, STEEL) + key(34, '#c9a46a') + '</g>';
+      return '<g class="kr" opacity="0"><circle cx="' + cx + '" cy="' + cy + '" r="6" fill="none" stroke="' + STEEL + '" stroke-width="2"/>' + key(-20, YEL) + key(10, STEEL) + key(34, '#FFC29A') + '</g>';
     },
     hover: function (svg) {
       var tl = gsap.timeline({ paused: true }).fromTo(one(svg, '.kr'), { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: .25, ease: 'power3.out' }, 0);

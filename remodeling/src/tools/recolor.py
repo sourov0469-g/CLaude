@@ -119,3 +119,25 @@ if __name__ == '__main__':
     for f in glob.glob(os.path.join(HERE, 'css', 'sections', '*.css')) + [os.path.join(HERE, 'css', n) for n in ('chrome.css', 'systems.css')]: css(f)
     for f in glob.glob(os.path.join(HERE, 'js', 'sections', '*.js')) + glob.glob(os.path.join(HERE, 'js', 'systems', '*.js')): js(f)
     print('recoloured')
+
+def html(f):
+    h = open(f).read()
+    out = []; i = 0
+    for m in re.finditer(r'<div class="ver [^"]*" data-v="(b?\d)"', h):
+        pass
+    # recolour attribute and inline-style colours everywhere except inside backup version blocks
+    blocks = [(m.start(), m.group(1)) for m in re.finditer(r'<div class="ver [^"]*" data-v="(b?\d)"', h)]
+    bounds = [b[0] for b in blocks] + [len(h)]
+    def in_backup(pos):
+        for k, (st, v) in enumerate(blocks):
+            if st <= pos < bounds[k + 1]: return v.startswith('b')
+        return False
+    def attr(m):
+        if in_backup(m.start()): return m.group(0)
+        return m.group(1) + m.group(2) + map_hex(m.group(3), m.group(1))
+    h = re.sub(r'(fill|stroke|stop-color|color|background)(=["\']|:\s*)(#[0-9a-fA-F]{3,6})\b', attr, h)
+    open(f, 'w').write(h)
+
+if __name__ == '__main__' and '--html' in sys.argv:
+    for f in glob.glob(os.path.join(HERE, 'sections', '*.html')) + [os.path.join(HERE, 'base.html')]: html(f)
+    print('html recoloured')

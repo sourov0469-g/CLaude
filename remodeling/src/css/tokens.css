@@ -4,47 +4,47 @@
    size and tracking) + Geist text, sharp 2px radius [S0650 §4.4], Elbaz's own photographs.
    Colours are the brand's own CSS tokens (elbazconstructioncorp.com) [S0650 §11.C, S1304 §3]. */
 
-:root,
-[data-theme="evening"] {
-  --err-field: #ff8a75;   /* error text on ink / deep-teal grounds */
-  --err-paper: #b5341f;   /* error text on paper and cream grounds */
-  --bg: #0B1418;            /* brand --ink */
-  --surface: #15272f;       /* [AUDIT-01 C.8] a visible step off the ground now that the grounds carry the rhythm alone */
-  --surface-2: #1c313b;     /* brand --ink-3 */
-  --ink: #e8e4dc;           /* brand --text-on-dark, 14.69:1 on bg */
-  --muted: #a9b6b9;         /* brand --text-on-dark-muted, 8.94:1 */
-  --accent: #77b3b8;        /* logo mark teal, 7.92:1 */
-  --accent-ink: #0B1418;
-  --line: #77b3b8;
-  --line-soft: rgba(119, 179, 184, .5);
-  --old: #3a2f20;           /* the warm light of an old kitchen, B/A section only */
-  --scrim: rgba(11, 20, 24, .5);
-  --shadow: 0 18px 40px -12px rgba(0, 0, 0, .55);
-  color-scheme: dark;
+:root {
+  /* OWNER REDESIGN: light only. Black + white + one orange accent with its tints; near-black text on a warm off-white page.
+     Accent #FF5F00 = 3.05:1 on white (large type, fills, rules); #B84200 (a-700) carries accent TEXT at 5.5:1. */
+  --a-50: #FFF5EE;  --a-100: #FFE7D6;  --a-200: #FFC9A3;  --a-300: #FF9C5E;
+  --a-500: #FF5F00; --a-600: #E95600;  --a-700: #B84200;  --a-800: #7A2C00;
+  --paper: #FAF7F2;          /* warm off-white page ground */
+  --err-field: #C42B1C;      /* one error red, 5.6:1 on paper */
+  --err-paper: #C42B1C;
+  --bg: var(--paper);
+  --surface: #FFFFFF;
+  --surface-2: #F1ECE4;
+  --ink: #121212;            /* 18.4:1 on paper */
+  --ink-2: #3A3633;
+  --muted: #5E5852;          /* 6.6:1 on paper */
+  --accent: var(--a-500);
+  --accent-text: var(--a-700);
+  --accent-ink: #121212;     /* text on an orange fill, 6.1:1 */
+  --line: var(--a-500);
+  --line-soft: #E3DBCF;
+  --old: #c9b48f;
+  --scrim: rgba(18, 18, 18, .4);
+  --shadow: 0 2px 0 rgba(18, 18, 18, .06), 0 10px 24px -14px rgba(18, 18, 18, .25);
+  color-scheme: light;
 }
 
-[data-theme="daylight"] {
-  --bg: #EEF2F1;
-  --surface: #E3E9E8;
-  --surface-2: #D6DFDE;
-  --ink: #0B1418;           /* 16.5:1 */
-  --muted: #4a5d62;         /* 6.13:1 */
-  --accent: #1d4a4e;        /* brand --teal-deep, 8.69:1 */
-  --accent-ink: #F2F5F4;
-  --line: #2e6b70;
-  --line-soft: rgba(46, 107, 112, .5);
-  --old: #c9b48f;
-  --scrim: rgba(11, 20, 24, .42);
-  --shadow: 0 18px 40px -14px rgba(11, 20, 24, .28);
-  color-scheme: light;
+/* the hidden backup slots are records: their section grounds and tokens stay as they were recorded */
+.sec:has(> .ver[data-v^="b"]:not([hidden])), .ver[data-v^="b"] {
+  --err-field: #ff8a75; --err-paper: #b5341f;
+  --bg: #0B1418; --surface: #15272f; --surface-2: #1c313b; --ink: #e8e4dc; --muted: #a9b6b9;
+  --accent: #77b3b8; --accent-ink: #0B1418; --line: #77b3b8; --line-soft: rgba(119, 179, 184, .5);
+  --old: #3a2f20; --scrim: rgba(11, 20, 24, .5); --shadow: 0 18px 40px -12px rgba(0, 0, 0, .55);
+  --field: #1d4a4e; --field-ink: #e8e4dc; --field-muted: #a9b6b9; --field-accent: #77b3b8;
+  color-scheme: dark;
 }
 
 :root {
   /* the committed teal field keeps its own ink in both themes */
-  --field: #1d4a4e;
-  --field-ink: #e8e4dc;     /* 7.73:1 */
-  --field-muted: #a9b6b9;   /* 4.71:1 */
-  --field-accent: #77b3b8;  /* 4.17:1, large text and UI only */
+  --field: var(--a-100);    /* the accent ground: lively, light */
+  --field-ink: #121212;
+  --field-muted: #5E5852;
+  --field-accent: var(--a-700);
 
   /* type [S0074, S1433, S0095 §4, S0006 §1: display max 6rem] */
   /* [OWNER DESIGN NOTE] Poppins (display, via the size-adjusted 'Elbaz Display' face) + Roboto (text); was Bebas Neue + Geist */
@@ -173,7 +173,10 @@ input, textarea { caret-color: var(--accent); }
 /* ---------- grounds: one separation mechanism, lightness steps [S0095 §4] ---------- */
 .g-base { background: var(--bg); color: var(--ink); }
 .g-surface { background: var(--surface); color: var(--ink); }
-.g-field { background: var(--field); color: var(--field-ink); --accent: var(--field-accent); --accent-ink: #0B1418; --muted: var(--field-muted); --line: var(--field-accent); }
+.g-field { background: var(--field); color: var(--field-ink); --muted: var(--field-muted); }
+.sec:has(> .ver[data-v^="b"]:not([hidden])).g-base { background: #0B1418; color: #e8e4dc; }
+.sec:has(> .ver[data-v^="b"]:not([hidden])).g-surface { background: #15272f; color: #e8e4dc; }
+.sec:has(> .ver[data-v^="b"]:not([hidden])).g-field { background: #1d4a4e; color: #e8e4dc; --accent: #77b3b8; --muted: #a9b6b9; }
 
 /* ---------- layout ---------- */
 .wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--margin); }

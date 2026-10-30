@@ -118,10 +118,10 @@
           '<clipPath id="ba2-c' + i + '"><rect width="400" height="300"/></clipPath></defs>' +
           '<g clip-path="url(#ba2-c' + i + ')"><image href="' + EZ.img(p.b) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice"/>' +
           '<image href="' + EZ.img(p.a) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice" mask="url(#ba2-m' + i + ')"/></g>' +
-          '<rect width="400" height="300" fill="none" stroke="rgba(232,228,220,.25)"/>' +
-          '<g class="rl"><path d="M386 -2 v-34 h-26 v-30" fill="none" stroke="#c9d1d3" stroke-width="5" stroke-linejoin="round"/><rect x="352" y="-104" width="16" height="40" rx="6" fill="#1d4a4e" stroke="#0B1418" stroke-width="2.5"/>' +
-          '<rect x="6" y="-14" width="388" height="22" rx="11" fill="#e8e4dc" stroke="#0B1418" stroke-width="2.5"/><rect x="6" y="-2" width="388" height="10" rx="5" fill="#77b3b8" opacity=".55"/></g>' +
-          '<text class="tg" x="12" y="22" font-family="Roboto, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#e8e4dc" stroke="#0B1418" stroke-width="3" paint-order="stroke">BEFORE</text>';
+          '<rect width="400" height="300" fill="none" stroke="rgba(18, 18, 18, .25)"/>' +
+          '<g class="rl"><path d="M386 -2 v-34 h-26 v-30" fill="none" stroke="#C9C1B6" stroke-width="5" stroke-linejoin="round"/><rect x="352" y="-104" width="16" height="40" rx="6" fill="#FF5F00" stroke="#121212" stroke-width="2.5"/>' +
+          '<rect x="6" y="-14" width="388" height="22" rx="11" fill="#FFFFFF" stroke="#121212" stroke-width="2.5"/><rect x="6" y="-2" width="388" height="10" rx="5" fill="#FF5F00" opacity=".55"/></g>' +
+          '<text class="tg" x="12" y="22" font-family="Roboto, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#FFFFFF" stroke="#121212" stroke-width="3" paint-order="stroke">BEFORE</text>';
         // [AUDIT-01 F4 loser P1] reduced motion rests on the complete after photograph, never a half wipe
         var mk = svg.querySelector('.mk'), rl = svg.querySelector('.rl'), tg = svg.querySelector('.tg'), st = { p: k.motion ? 0 : 1 };
         var btn = panel.querySelector('.ba2__tog'), scrub = null;

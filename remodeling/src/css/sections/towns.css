@@ -14,23 +14,23 @@
 .towns1__tab { min-height: 44px; padding: 0 16px; background: none; border: 0; box-shadow: inset 0 0 0 1px var(--line-soft); color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
 .towns1__tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
 .towns1__count { margin: 0; display: flex; align-items: baseline; gap: 10px; }
-.towns1__n { font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: #f2c230; }
+.towns1__n { font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: #B84200; }
 .towns1__of { font: 500 .9375rem/1.3 var(--f-text); color: var(--muted); }
 /* the map is the version */
-.towns1__map { position: relative; height: min(76vh, 760px); border-radius: 4px; overflow: hidden; outline: none; background: radial-gradient(90% 90% at 70% 40%, rgba(119, 179, 184, .07), transparent 70%); box-shadow: inset 0 0 0 1px var(--line-soft); cursor: crosshair; touch-action: pan-y; }
-.towns1__map:focus-visible { box-shadow: inset 0 0 0 3px #f2c230; }
+.towns1__map { position: relative; height: min(76vh, 760px); border-radius: 4px; overflow: hidden; outline: none; background: radial-gradient(90% 90% at 70% 40%, rgba(255, 95, 0, .07), transparent 70%); box-shadow: inset 0 0 0 1px var(--line-soft); cursor: crosshair; touch-action: pan-y; }
+.towns1__map:focus-visible { box-shadow: inset 0 0 0 3px #FF5F00; }
 .towns1__svg { width: 100%; height: 100%; overflow: hidden; display: block; }
-.towns1__svg .cty { fill: rgba(119, 179, 184, .05); stroke: var(--line-soft); stroke-width: 2; cursor: pointer; transition: fill 240ms var(--ease-out); vector-effect: non-scaling-stroke; }
-.towns1__svg .cty.is-on { fill: rgba(119, 179, 184, .15); stroke: var(--accent); }
+.towns1__svg .cty { fill: rgba(255, 95, 0, .05); stroke: var(--line-soft); stroke-width: 2; cursor: pointer; transition: fill 240ms var(--ease-out); vector-effect: non-scaling-stroke; }
+.towns1__svg .cty.is-on { fill: rgba(255, 95, 0, .15); stroke: var(--accent); }
 .towns1__svg .clbl { font: 400 54px/1 var(--f-display); fill: var(--ink); opacity: .35; letter-spacing: 2px; pointer-events: none; }
-.towns1__svg .mk { fill: #0B1418; stroke: var(--accent); stroke-width: 2.5; vector-effect: non-scaling-stroke; transition: opacity 240ms; }
+.towns1__svg .mk { fill: #121212; stroke: var(--accent); stroke-width: 2.5; vector-effect: non-scaling-stroke; transition: opacity 240ms; }
 .towns1__svg .mk.is-dim { opacity: .25; }
-.towns1__svg .mk.is-hot { fill: #f2c230; stroke: #0B1418; }
-.towns1__svg .office { fill: #f2c230; stroke: #0B1418; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.towns1__svg .mk.is-hot { fill: #FF5F00; stroke: #121212; }
+.towns1__svg .office { fill: #FF5F00; stroke: #121212; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .towns1__svg .olbl { font: 600 22px/1 var(--f-text); fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 6px; }
 .towns1__svg .flag { pointer-events: none; }
-.towns1__svg .flag .pole { stroke: #e8e4dc; stroke-width: 2; vector-effect: non-scaling-stroke; }
-.towns1__svg .flag .pen { fill: #e2412b; stroke: #0B1418; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.towns1__svg .flag .pole { stroke: #121212; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.towns1__svg .flag .pen { fill: #C42B1C; stroke: #121212; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .towns1__svg .flag text { font-family: var(--f-display); fill: #fff; letter-spacing: -.005em; }
 .towns1__read { position: absolute; left: 14px; bottom: 12px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); pointer-events: none; }
 @media (max-width: 1023px) { .towns1__head .t-head, .towns1__head .towns__lead { grid-column: 1 / -1; } .towns1__head .towns__lead { margin-top: var(--s4); } .towns1__map { height: 64vh; } }
@@ -40,17 +40,17 @@
 .towns2__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .towns2__svg .ring { fill: none; stroke: var(--line-soft); stroke-width: 1; }
 .towns2__svg .td { fill: var(--muted); }
-.towns2__svg .td.is-hl { fill: #f2c230; }
-.towns2__svg .mark { stroke: #e2412b; stroke-width: 2; }
+.towns2__svg .td.is-hl { fill: #FF5F00; }
+.towns2__svg .mark { stroke: #C42B1C; stroke-width: 2; }
 .towns2__svg .rlbl { font: 600 13px/1 var(--f-text); fill: var(--muted); letter-spacing: 1.5px; }
 .towns2__hub { position: absolute; left: 50%; top: 50%; translate: -50% -50%; text-align: center; display: grid; gap: 4px; }
 .towns2__n { margin: 0; font: 400 clamp(4rem, 2rem + 6vw, 7rem)/.85 var(--f-display); }
 .towns2__nl { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--muted); }
 .towns2__addr { margin: 6px 0 0; font-size: .8125rem; color: var(--muted); }
 .towns2__read { list-style: none; margin: 0; padding: 0; position: absolute; left: 50%; top: 0; translate: -50% 0; display: grid; gap: 6px; justify-items: center; pointer-events: none; }
-.towns2__read li { font: 600 .875rem/1.2 var(--f-text); padding: 4px 9px; background: rgba(11, 20, 24, .85); color: #e8e4dc; white-space: nowrap; }
-[data-theme="daylight"] .towns2__read li { background: #0B1418; }
-.towns2__read li b { color: #f2c230; font-weight: 600; margin-right: 6px; }
+.towns2__read li { font: 600 .875rem/1.2 var(--f-text); padding: 4px 9px; background: rgba(255, 255, 255, .85); color: #121212; white-space: nowrap; }
+[data-theme="daylight"] .towns2__read li { background: #FFFFFF; }
+.towns2__read li b { color: #B84200; font-weight: 600; margin-right: 6px; }
 .towns2__pause { display: flex; margin: var(--s5) auto 0; }
 .towns2__lists { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
 .towns2__lists details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
@@ -94,7 +94,7 @@
 .tc__list { position: absolute; left: 0; right: 0; top: 100%; z-index: 5; margin: 6px 0 0; padding: 4px; list-style: none; background: var(--surface); box-shadow: 0 0 0 1px var(--line-soft), var(--shadow); }
 .tc__list li { padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
 .tc__list li span { color: var(--muted); font-size: .8125rem; }
-.tc__list li[aria-selected="true"] { background: rgba(119, 179, 184, .16); }
+.tc__list li[aria-selected="true"] { background: rgba(255, 95, 0, .16); }
 .tc__call { margin: 0; color: var(--muted); }
 .tc__road { grid-column: 7 / -1; position: relative; }
 .tc__sign { width: 100%; height: auto; overflow: visible; display: block; }

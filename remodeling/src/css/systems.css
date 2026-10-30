@@ -11,7 +11,7 @@
 }
 .buddy.is-on { opacity: 1; }
 /* the pointer tip: replaces the system arrow while the companion is on (fine pointers, motion on, a buddy chosen) */
-.ptip { position: fixed; left: 0; top: 0; z-index: 95; width: 40px; height: 40px; margin: -20px 0 0 -20px; pointer-events: none; opacity: 0; color: #77b3b8; will-change: transform; }
+.ptip { position: fixed; left: 0; top: 0; z-index: 95; width: 40px; height: 40px; margin: -20px 0 0 -20px; pointer-events: none; opacity: 0; color: #B84200; will-change: transform; }
 .ptip.is-on { opacity: 1; }
 .ptip svg { display: block; overflow: visible; max-width: none; transition: transform 120ms var(--ease-out); }
 .ptip.is-down svg { transform: scale(.78); }
@@ -36,10 +36,10 @@ html.has-buddy select { cursor: default !important; }
     width: 44px; height: 40px; padding: 0; display: grid; place-items: center;
     background: none; border: 0; border-radius: var(--radius);
     color: inherit; opacity: .72; cursor: pointer;
-    box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .18);
+    box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .18);
   }
   .buddysw button:hover { opacity: 1; }
-  .buddysw button[aria-checked="true"] { background: #77b3b8; color: #0B1418; opacity: 1; box-shadow: none; }
+  .buddysw button[aria-checked="true"] { background: #FF5F00; color: #121212; opacity: 1; box-shadow: none; }
 }
 @media (prefers-reduced-motion: reduce) { .settings .buddysw { display: none; } }
 [data-motion="off"] .settings .buddysw { display: none; }
@@ -127,7 +127,7 @@ html.has-buddy select { cursor: default !important; }
 .fld-live .is-hot .fld-studs { opacity: 1; }
 
 /* process: chalk lines */
-.fld-chalk { fill: none; stroke: #5aa8d6; stroke-width: 1.3; opacity: .34; }
+.fld-chalk { fill: none; stroke: #FF5F00; stroke-width: 1.3; opacity: .34; }
 
 /* financing: ledger + plumb bob */
 .fld-ledger {
@@ -176,8 +176,8 @@ html.has-buddy select { cursor: default !important; }
   opacity: .05;
 }
 .fld-laser, .fld-dot, .fld-emitter { position: absolute; opacity: 0; transition: opacity 250ms var(--ease-out); }
-.fld-laser { left: 0; right: 0; top: var(--my); height: 1px; background: #e2412b; box-shadow: 0 0 6px 1px rgba(226, 65, 43, .6); }
-.fld-dot { left: calc(var(--mx) - 4px); top: calc(var(--my) - 4px); width: 9px; height: 9px; border-radius: 50%; background: #ff5a3c; box-shadow: 0 0 12px 3px rgba(255, 90, 60, .55); }
+.fld-laser { left: 0; right: 0; top: var(--my); height: 1px; background: #C42B1C; box-shadow: 0 0 6px 1px rgba(196, 43, 28, .6); }
+.fld-dot { left: calc(var(--mx) - 4px); top: calc(var(--my) - 4px); width: 9px; height: 9px; border-radius: 50%; background: #C42B1C; box-shadow: 0 0 12px 3px rgba(255, 90, 60, .55); }
 .fld-emitter { left: 6px; top: calc(var(--my) - 13px); }
 .fld-live .is-hot .fld-laser { opacity: .5; }
 .fld-live .is-hot .fld-dot, .fld-live .is-hot .fld-emitter { opacity: .9; }
@@ -198,10 +198,10 @@ html.has-buddy select { cursor: default !important; }
 .dv-steel { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
 .dv-web { fill: var(--surface); }
 .dv-bolt { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
-.dv-tapeband { fill: none; stroke: #f2c230; stroke-width: 22; }
-.dv-tapestripe { fill: none; stroke: #0B1418; stroke-width: 22; stroke-dasharray: 16 16; }
+.dv-tapeband { fill: none; stroke: #FF5F00; stroke-width: 22; }
+.dv-tapestripe { fill: none; stroke: #121212; stroke-width: 22; stroke-dasharray: 16 16; }
 .dv-pipe { fill: none; stroke: #9aa6a9; stroke-width: 8; stroke-linecap: round; }
-.dv-jb rect { fill: #c9d1d3; stroke: var(--bg); stroke-width: 2; }
+.dv-jb rect { fill: #C9C1B6; stroke: var(--bg); stroke-width: 2; }
 .dv-jb circle { fill: var(--bg); }
 .dv-strap { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; }
 .dv-blade { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.2; stroke-linejoin: round; }
@@ -215,6 +215,6 @@ html.has-buddy select { cursor: default !important; }
 [data-theme="daylight"] .dv-brick { fill: #b8644a; }
 .dv-footing { fill: var(--surface-2); }
 .dv-hatch { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .7; }
-.dv-bar { fill: none; stroke: #c9a46a; stroke-width: 2; }
-.dv-rebar { fill: #c9a46a; }
+.dv-bar { fill: none; stroke: #FFC29A; stroke-width: 2; }
+.dv-rebar { fill: #FFC29A; }
 .dv-sh { fill: #6b4a33; stroke: var(--bg); stroke-width: 1.5; }
