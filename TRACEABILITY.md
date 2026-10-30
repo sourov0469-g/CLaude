@@ -275,3 +275,7 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | NEW The big drawing | a multi-part SVG illustration as the centrepiece (house, courses laid one by one, the orange ridge drawn last, chimney, ladder, roofer, sun, tree); built once on load, no loop | directive design lesson (illustration centrepiece); ⟦S0139⟧ flat; ⟦S1448⟧ one sequence | errors 0 |
 | 7 | NEW Postcard from Springboro | two real job photos as tilted postcards with a brand stamp (the mark, 1995) and a postmark; hover straightens a card | ⟦S0095⟧ (the subject's own artefacts); real photography rule | errors 0 |
 | 8 | NEW The brushstroke | the logo's gable painted huge across the hero (DrawSVG 1s, once); a real photo in a house-shaped clip | brand presence (directive); ⟦S0218⟧-style type and image pairing | errors 0 |
+### All other sections, improved V1-V5 (shared layer)
+| Change | Reference | Verification |
+|---|---|---|
+| the orange brand label (the logo's gable glyph + a sentence-case section line in --a700) above every H2 in 40 versions; a faint roofline contour artwork (stacked gables in --a200) in each section's corner; on Call's orange band the label is black | brand presence (directive); C1 label role (sentence case, 14px, 0 tracking) | `qa/r4d-labels-1440.jpg`; build 0 errors |

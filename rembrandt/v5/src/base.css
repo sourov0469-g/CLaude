@@ -375,3 +375,11 @@ html.cmp-on .cmp{display:block}
 @media (max-width:700px){.sp-close{grid-template-columns:1fr}.sp-act{grid-column:1;grid-row:auto}}
 /* R4: the hidden backups keep the pre-R4 palette (records of the page as it was) */
 .sec.on-bk{--blue:#1a4199;--blue-hi:#2453b8;--ink:#0b1f4d;--ink-2:#132a63;--sky:#f2f5fb;--mist:#dce4f3;--steel:#7a8090;--sun:#ffb81f;--sun-hi:#ffc84d;--muted:#46557a;--on-blue-muted:#c9d6f2;--cream:#f6f1e4;--on-dark-2:#b9c6e6;--shingle:#3a4152;--chalk:#6f9be8;--wood:#c98b4a}
+
+/* R4 directive Phase 3 (all sections): the brand label (the logo's gable + a sentence-case line in the accent) and a
+   faint roofline contour artwork in the section's corner. The artwork's stroke is --a200 (#ffc9ae). */
+.r4-lab{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;margin:0 0 12px;font-family:var(--f-head);font-size:var(--t-label);font-weight:600;color:var(--a700)}
+.r4-lab svg{width:28px;height:auto;fill:var(--a500);flex:none}
+.r4-art{background-image:url("data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"%3E%3Cg fill="none" stroke="%23ffc9ae" stroke-width="2" stroke-linejoin="round"%3E%3Cpath d="M0 300 L150 190 L300 300"/%3E%3Cpath d="M0 260 L150 150 L300 260"/%3E%3Cpath d="M0 220 L150 110 L300 220"/%3E%3Cpath d="M220 300 L380 180 L540 300"/%3E%3Cpath d="M220 260 L380 140 L540 260"/%3E%3Cpath d="M220 220 L380 100 L540 220"/%3E%3Cpath d="M440 300 L560 210 L680 300"/%3E%3Cpath d="M440 260 L560 170 L680 260"/%3E%3C/g%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right -60px bottom -30px!important;background-size:min(820px,70%) auto!important}
+.cl.r4-art{background-image:none!important}
+.cl .r4-lab,.cl .r4-lab svg{color:var(--black);fill:var(--black)}
