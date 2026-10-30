@@ -155,4 +155,39 @@ function pano(root, c) {
   return () => { a.kill(); b.kill(); };
 }
 
-export default { 1: masked, 2: statement, 3: truss, 4: cards, 5: pano };
+
+// R4 v6 (new) Family tree: the trunk and branches draw once (DrawSVG, .6s), the three people rise along them, 120ms apart
+function tree(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.fm6-copy')]);
+  const ln = root.querySelectorAll('.fm6-trunk, .fm6-br'), lf = root.querySelectorAll('.fm6-leaf circle'), nd = root.querySelectorAll('.fm6-node');
+  gsap.set(ln, { drawSVG: '0%' }); gsap.set(lf, { scale: 0.4, autoAlpha: 0, transformOrigin: '50% 50%' }); gsap.set(nd, { autoAlpha: 0, y: 24 });
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.fm6-tree'), start: 'top 80%', once: true, onEnter: () => {
+    gsap.timeline().to(ln, { drawSVG: '100%', duration: 0.6, ease: EASE, stagger: 0.1 })
+      .to(lf, { scale: 1, autoAlpha: 1, duration: 0.3, ease: 'back.out(1.6)', stagger: 0.04 }, '-=0.3')
+      .to(nd, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'expo.out', stagger: 0.12 }, '-=0.2');
+  } });
+  return () => st.kill();
+}
+// R4 v7 (new) Name tags: each sticker slaps on once (from 1.08 and its tilt doubled to its resting tilt), 90ms apart
+function tags(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.fm7-head')]);
+  const t = root.querySelectorAll('.fm7-tag');
+  gsap.set(t, { autoAlpha: 0, scale: 1.08, y: -16 });
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.fm7-tags'), start: 'top 82%', once: true,
+    onEnter: () => gsap.to(t, { autoAlpha: 1, scale: 1, y: 0, duration: 0.28, ease: 'power3.out', stagger: 0.09 }) });
+  return () => st.kill();
+}
+// R4 v8 (new) The ladder: an accent line climbs the ladder with scroll (scrubbed DrawSVG from the bottom); each step
+// lights as the line passes its rung (1995 at a third, 2015 at two thirds, today at the top). Reduced motion: all lit.
+function ladder(root, c) {
+  const fill = root.querySelector('.fm8-fill'), s = [...root.querySelectorAll('.fm8-s')].reverse();
+  if (!c.motion) { s.forEach(el => el.classList.add('is-on')); return; }
+  beats(root, [root.querySelector('.fm8-copy')]);
+  gsap.set(fill, { drawSVG: '0%' });
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.fm8-ladder'), start: 'top 75%', end: 'bottom 45%', scrub: 0.4,
+    onUpdate: self => { const p = self.progress; gsap.set(fill, { drawSVG: `0% ${p * 100}%` }); s.forEach((el, i) => el.classList.toggle('is-on', p >= (i + 0.5) / 3.2)); } });
+  return () => st.kill();
+}
+export default { 1: masked, 2: statement, 3: truss, 4: cards, 5: pano, 6: tree, 7: tags, 8: ladder };

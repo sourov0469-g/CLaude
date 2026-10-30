@@ -66,5 +66,6 @@ for v in ['1','2','3','4','5']:
     blk = (live.get('storm','') if v == '1' else dict(((a+b), c) for a, b, c in tpl).get('storm'+v, ''))
     t = H.unescape(re.sub(r'<[^>]+>', ' ', blk))
     rows.append((('PASS' if re.search(r'insur\w* (company )?decides|decision is your insurer', t, re.I) else 'FAIL'), f'storm v{v}: says the insurer decides the claim', ''))
-chk('no promise of claim approval (outside the struck sentence in Storm V3)', n(r"(?<!<s>)we('ll| will) get your claim approved|guarantee[ds]? (your )?(claim|approval)") <= 1, str(n(r"get your claim approved")))
+# counted in the raw source: every occurrence must sit inside <s> (Storm V3, and its verbatim backup B6, strike it out)
+chk('no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)', n(r"(?<!<s>)we('ll| will) get your claim approved|guarantee[ds]? (your )?(claim|approval)", src) == 0, f'{n(r"get your claim approved", src)} struck')
 for r in rows[-6:]: print(f'{r[0]:5} {r[1]:<110} {r[2]}')

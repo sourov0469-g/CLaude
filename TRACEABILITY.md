@@ -297,3 +297,10 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | The pile: six prints scattered on the table; the top one straightens; clicking it, or Next, sends it under the pile; the count is announced | ⟦S0095⟧ artefact; Checklist 11 | `worktest`: 7 Next + 1 click cycle correctly; errors 0 |
 | 7 | The job clipboard: one job per page clipped to a board, with a job card (Job / In the photo / Photo); Previous / Next flip the page | ⟦S0095⟧ the jobsite clipboard; ⟦S1448⟧ | `worktest`: one page visible, forward and back; errors 0 |
 | 8 | Six roof shapes: each photo cut to a roof profile (gable, hip, shed, saltbox, flat) in an asymmetric 12-column wall | brand roof motif; ⟦S0995⟧ grid | `qa/r4d-work-new-1440.jpg`; errors 0 |
+
+### Family, new V6-V8 (facts only: Bunk founded 1995; Wade, his son, president since 2015; Rachel answers, Mon-Fri 9-5; no quotes, nobody in the crew photo named)
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | One family tree: a drawn trunk and branches (DrawSVG, once) carry three people in order, 1995 / 2015 / Today; on phones the trunk becomes a rail with the people along it | brand roof/brush line; ⟦S1325⟧ timeline | `qa/r4d-family-new6-1440.jpg`, `qa/r4d-family-new6-375.jpg` (first phone shot overlapped; fixed); errors 0 |
+| 7 | Three name tags ("Hello, my name is"): Bunk, Wade, Rachel, each with a one-line fact; the stickers slap on once, 90ms apart | ⟦S0095⟧ artefact | 1440 and 375 shots; errors 0 |
+| 8 | The ladder: an accent line climbs the ladder with scroll (scrubbed DrawSVG); 1995, 2015 and Today light as it passes; reduced motion shows all lit | ⟦S1325⟧ scroll progress | 1440 and 375 shots; errors 0 |
