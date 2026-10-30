@@ -258,8 +258,12 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
 - **Phase order:** 0 note → 1 logo (done, plus mono variants) → 2 palette tokens + light conversion + hex normalisation → 3 section-by-section upgrade in page order (eyebrow labels, composition, one bespoke SVG artwork per section, a different divider per section) → 4 Finish picker → 5 version expansion per section → 6 three QA rounds per section under the new skin → final gate report.
 
 **Collisions logged (priority: facts > hard rules > standards > lessons > judgement):**
-1. Phase 5 assumes five visible versions per section. Only the hero has five; sections 2–10 have three, because slots 4–5 were deferred this morning under the deadline order. Plan for sections 2–10:
-   - Back up the three visible versions (byte-identical). Backups become b1–b6.
+1. Phase 5 assumes five visible versions and three backups per section. Only the hero has that (5 visible, b1–b3). Sections 2–10 hold three visible versions and ONE backup (b1, the winner's untouched original): slots 4–5 were deferred under the deadline order, and AUDIT-01 only backed up each winner. Plan for sections 2–10:
+   - Back up the three visible versions. Backups become b1–b4.
    - Build three improved versions plus five new versions, so the switcher still runs 1–8.
-   - Each of those sections ends with 14 versions, not the gate's 16. The two missing backups would have to be versions that never existed; inventing them to fill the count would be false.
+   - Each of those sections ends with 12 versions, not the gate's 16. The four missing backups would have to be versions that never existed; inventing them to fill the count would be false. The hero reaches the full 16.
 2. "Hidden backups byte-identical": their own markup, rules and JS defs are untouched. Shared rules (section heads, `.btn`, tokens) are scoped back to the old values whenever a backup is showing (`.sec:has(> .ver[data-v^="b"]:not([hidden]))`), so a backup still renders as recorded.
+
+**Phase 4 evidence (Finish picker):** `remodeling/qa/pickertest.txt`, `remodeling/qa/picker-turquoise.jpg`, `remodeling/src/tools/pickertest.js`.
+- Six swatches, six distinct photos, each printing a real project title from `data/projects.json`.
+- Arrow keys wrap around the row; reduced motion swaps instantly; 0 page errors.

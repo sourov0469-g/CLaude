@@ -1,0 +1,17 @@
+swatch 1 Navy Shaker: checked=true name="Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood" isRealProjectTitle=true opacity=1
+swatch 2 White Shaker: checked=true name="White Shaker Kitchen Remodel with Waterfall Quartz Island" isRealProjectTitle=true opacity=0.999051
+swatch 3 Gray Shaker: checked=true name="Gray Shaker Kitchen Remodel with Wolf Range & Farmhouse Sink" isRealProjectTitle=true opacity=0.999054
+swatch 4 Turquoise backsplash: checked=true name="Two-Tone Kitchen Remodel with Turquoise Herringbone Backsplash" isRealProjectTitle=true opacity=0.998442
+swatch 5 Navy and white: checked=true name="Two-Tone Navy & White Kitchen Remodel with Waterfall Quartz Island" isRealProjectTitle=true opacity=0.999054
+swatch 6 Brass-banded hood: checked=true name="Two-Tone Kitchen Remodel with Custom Brass-Banded Range Hood" isRealProjectTitle=true opacity=0.998464
+ArrowRight from last -> Navy Shaker; focus on Navy Shaker
+page errors: 0
+RM swatch 1 Navy Shaker: checked=true name="Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood" isRealProjectTitle=true opacity=1
+RM swatch 2 White Shaker: checked=true name="White Shaker Kitchen Remodel with Waterfall Quartz Island" isRealProjectTitle=true opacity=1
+RM swatch 3 Gray Shaker: checked=true name="Gray Shaker Kitchen Remodel with Wolf Range & Farmhouse Sink" isRealProjectTitle=true opacity=1
+RM swatch 4 Turquoise backsplash: checked=true name="Two-Tone Kitchen Remodel with Turquoise Herringbone Backsplash" isRealProjectTitle=true opacity=1
+RM swatch 5 Navy and white: checked=true name="Two-Tone Navy & White Kitchen Remodel with Waterfall Quartz Island" isRealProjectTitle=true opacity=1
+RM swatch 6 Brass-banded hood: checked=true name="Two-Tone Kitchen Remodel with Custom Brass-Banded Range Hood" isRealProjectTitle=true opacity=1
+RM ArrowRight from last -> Navy Shaker; focus on Navy Shaker
+RM page errors: 0
+distinct photos: 6 1920x1281 1400x934 1400x934 1400x934 1400x788 1400x934
