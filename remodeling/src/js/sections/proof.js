@@ -248,7 +248,7 @@
 
     b3: { init: function (root, k) {
       var M = window.Matter, site = root.querySelector('.proof1__site');
-      var els = Array.prototype.slice.call(root.querySelectorAll('.proof1blk'));
+      var els = Array.prototype.slice.call(root.querySelectorAll('.proof1__blk'));
       EZ.reveal(k, root.querySelectorAll('.proof1__head > *, .proof1__foot'));
       if (!M) { root.classList.add('is-static'); return; }
       var engine, bodies = [], W = 0, H = 0, sc = 1, loop = null, drag = null, inView = false, dropped = false;

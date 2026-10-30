@@ -1,0 +1,16 @@
+services1 1440: height 2204, visible elements 26, overflow 0, console 0
+services2 1440: height 2667, visible elements 79, overflow 0, console 0
+services3 1440: height 1009, visible elements 37, overflow 0, console 1 ["[services v3] TypeError: Cannot read properties of null (reading 'setAttribute')\n    at Object.init (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:9466:11)\n    at Context.<anonymous> (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5889:31)\n    at Gw (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5604:45813)\n    at Context.add (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5604:45940)\n    at activate (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5888:13)\n    at file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:6449:7\n    at Array.forEach (<anonymous>)\n    at EZ.boot (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:6446:14)\n    at file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:11700:12"]
+services4 1440: height 913, visible elements 29, overflow 0, console 0
+services5 1440: height 869, visible elements 37, overflow 0, console 0
+services6 1440: height 808, visible elements 20, overflow 0, console 0
+services7 1440: height 1205, visible elements 20, overflow 0, console 0
+services8 1440: height 1028, visible elements 43, overflow 0, console 0
+services1 375: height 2608, visible elements 26, overflow 0, console 0
+services2 375: height 2576, visible elements 79, overflow 0, console 0
+services3 375: height 1154, visible elements 37, overflow 0, console 1 ["[services v3] TypeError: Cannot read properties of null (reading 'setAttribute')\n    at Object.init (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:9466:11)\n    at Context.<anonymous> (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5889:31)\n    at Gw (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5604:45813)\n    at Context.add (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5604:45940)\n    at activate (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:5888:13)\n    at file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:6449:7\n    at Array.forEach (<anonymous>)\n    at EZ.boot (file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:6446:14)\n    at file:///home/user/CLaude/remodeling/site/elbaz-homepage.html?services=3:11700:12"]
+services4 375: height 1045, visible elements 29, overflow 0, console 0
+services5 375: height 1141, visible elements 37, overflow 0, console 0
+services6 375: height 893, visible elements 20, overflow 0, console 0
+services7 375: height 665, visible elements 20, overflow 0, console 0
+services8 375: height 1030, visible elements 43, overflow 0, console 0

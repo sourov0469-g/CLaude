@@ -381,7 +381,7 @@
     /* 3 · Scaffold, cleaned: the tubes draw round a large real photograph, which rises into the bay (once) */
     b6: { init: function (root, k) {
       navOn(k, 'ground');
-      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hsbay');
+      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hs__bay');
       var s = '';
       [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
       [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
@@ -460,12 +460,12 @@
       k.add(function () { alive = false; });
       var frame = root.querySelector('.hero1__frame');
       var plate = root.querySelector('.hero1__plate');
-      var bp = root.querySelector('.hero1bp');
+      var bp = root.querySelector('.hero1__bp');
       var linesEl = root.querySelector('.hero1__lines');
       var strokeSvg = root.querySelector('.hero1__stroke');
       var lead = root.querySelector('.hero1__lead');
       var acts = root.querySelector('.hero__acts').children;
-      var block = root.querySelector('.hero1block');
+      var block = root.querySelector('.hero1__block');
       linesEl.innerHTML = EZ.drawing('k-fluted-hero', { par: 'none' });
       var notesEl = root.querySelector('.hero1__notes'), notes = Array.prototype.slice.call(notesEl.querySelectorAll('.hero1__note'));
       var lines = linesEl.querySelectorAll('line');
@@ -561,7 +561,7 @@
     b2: { init: function (root, k) {
       navOn(k, 'ground');
       var stage = root.querySelector('.hero2__stage');
-      var band = root.querySelector('.hero2band');
+      var band = root.querySelector('.hero2__band');
       var win = root.querySelector('.hero2__window');
       var plate = root.querySelector('.hero2__plate');
       var h1 = root.querySelector('.hero2__h');
@@ -622,8 +622,8 @@
     b3: { init: function (root, k) {
       navOn(k, 'ground');
       var svg = root.querySelector('.hero3__scaffold');
-      var bay = root.querySelector('.hero3bay');
-      var board = root.querySelector('.hero3board');
+      var bay = root.querySelector('.hero3__bay');
+      var board = root.querySelector('.hero3__board');
       var depths = root.querySelectorAll('.hero3__depth');
       var faces = root.querySelectorAll('.hero3__face');
       var h1 = root.querySelector('.hero3__h');

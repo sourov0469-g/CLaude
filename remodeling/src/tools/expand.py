@@ -35,9 +35,10 @@ if cmd == 'backup':
     vis = re.findall(r'<div class="ver [^"]*" data-v="(\d)"', H)
     for n, v in enumerate(vis):
         nb = 'b%d' % (k + n)
-        H = re.sub(r'(<div class="ver [^"]*" data-v=")' + v + r'"( hidden)?>', lambda m: m.group(1) + '__' + nb + '" hidden>', H, count=1)
-        J = re.sub(r'\n(\s*)' + v + r': \{ init: function', '\n\\g<1>__' + nb + ': { init: function', J, count=1)
-    H = H.replace('data-v="__b', 'data-v="b'); J = J.replace('__b', 'b')
+        H = re.sub(r'(<div class="ver [^"]*" data-v=")' + v + r'"( hidden)?>', lambda m: m.group(1) + '@@' + nb + '" hidden>', H, count=1)
+        J = re.sub(r'\n(\s*)' + v + r': \{ init: function', '\n\\g<1>@@' + nb + ': { init: function', J, count=1)
+    # placeholders are '@@', which never occurs in this code (the first version used '__' and stripped real BEM '__b' names)
+    H = H.replace('data-v="@@b', 'data-v="b'); J = J.replace('@@b', 'b')
     open(hp, 'w').write(H); open(jp, 'w').write(J)
     print('backed up', vis, '->', ['b%d' % (k + n) for n in range(len(vis))])
 
