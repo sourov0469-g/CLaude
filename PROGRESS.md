@@ -502,3 +502,63 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - Opening one shows the old whole page in the head slot (it carries its own H1). They are records, not states the page ships in.
   - The close sections are new and have no earlier generation, so they carry no backups; this is reported, not faked.
 - **Facts:** the same locked fact lists in `build/gen-pages.py` feed every version. Merging or mixing versions stays parked.
+
+### R5 final report: full-site QA, improve and finalize
+**Method.** First a mechanical sweep: `qa/scripts/fullqa.mjs`, run over every visible version of every page at 1440 and 375. It checks:
+- overflow and console errors;
+- WCAG contrast of every text node against its real ground;
+- the 12px type floor;
+- 44px touch targets;
+- clipped text, broken images and heading order.
+
+Then a design review of all 72 homepage versions and all 40 inner-page section versions (section sheets at 1440 and 375). Every finding was challenged against the WEB-SKILLS judging notes (`state/web-skills-judging-notes.md` §3) before acting.
+
+**Issues found and fixed** (commits 6ca94df, 1e1938a, 3dc1b52, 90a50a4, plus the gate commit):
+- **Invisible text left by the light flip** (1.08-1.20:1, P0):
+  - Reviews V3 "Platinum"; Work V2 photo tags; Work V4 Before/After pills; Storm V2 "Now"; Storm V4 captions.
+  - Fix: ink or accent-700 text.
+- **Orange as small text** (3.12:1 on white, 2.6-2.9:1 on tints; §3.4 AA 4.5:1). About a dozen places:
+  - check links, "Show all 24", Family figures and call links, Storm accents, Towns V6 counts, Services page ledes.
+  - Fix: `--a700` (4.9-5.9:1) or `--a800`.
+- **Below the 12px floor:** Call V4 keypad letters; Reviews V5 ring text on phones (now 12px minimum).
+- **Footer phone link:** a 21px-tall target on phones; it now has a 44px hit area, with no layout shift.
+- **Brand label stealing a grid cell** (S0650 layout), the same R4 bug in two places:
+  - Storm V2: the title had slid under the picker.
+  - Services V4 head: already fixed in R4; the scan (`labcell`) finds no others.
+- **Off-token colour the hex-only check missed:** 40 `oklch()` and 9 `rgb()` old-palette navy and gold literals in shadows, glows and underlines.
+  - Now `--black` alpha, neutral-token mixes or accent mixes.
+  - The new `qa/scripts/tokengate.py` scans hex, `rgb()`, `hsl()` and `oklch()`.
+- **Towns V1 map labels:** white text on an ink halo (dark-ground leftover), smudged on the light map. Now ink on a paper halo.
+- **Inner pages:** pickers sat over content (body and close sections now open at the 4.5rem phone minimum). The Contact card was too short on phones. The Contact week-scale labels collided.
+- **Regression of my own, caught in R5 and fixed:** a custom property named `--sun` (the accent token's name) blanked Storm V5's call button, in motion only. The final browser gate now runs with motion and checks that every visible button keeps its ground.
+
+**What each homepage section came out with (IMPROVED, not only fixed):**
+- **Hero:** headline phrases no longer carry a colour accent in V2/V6/V7/V8 (S0220 #7, an S0001 tell); the accent lives in each version's artwork and call. V3's orange slot stays: it is the rotating town mechanism, not decoration.
+- **Reviews:** V1's 4.9 now reads at a glance. A filled 4.9 in the lightest tint fades in under the 295 stars; before, the 9 read as an "e". V2/V5 check links and the V3 "Platinum" word are now legible.
+- **Services:** V8's third panel is a drawn wall (lap siding, trimmed window, fascia, gutter, downspout) instead of faint stripes, and it re-crops correctly when the panel opens. V5 copy is no longer a scroll cue (S0650). Old navy shadows are now token shades.
+- **Work:** V2/V4 photo tags and pills are readable. V5 gives touch screens large thumbnails at every width, and drops "point at a row" where there is no pointer.
+- **Family:** V4's three identical, empty cards (S0001 card-kit trait) each carry a drawn era glyph (hammer, house, handset) and a folded corner that says the card turns. V8 drops the "Scroll to climb" cue. Labels never wrap (V5 label). The V1/V3/V5 figures meet AA.
+- **How it works:** V1/V2 headings no longer echo their own label. V5's three equal cards (S0650 3-equal-cards ban, flat hierarchy) became 1:1:1.7, with the new roof leading.
+- **Storm & Insurance:**
+  - V2's title and 19 are back in their own cells, and the "Now" tag is visible.
+  - V4 captions are readable.
+  - V5's window was an empty pane at rest; it now looks onto rooftops, and the sun comes out as the rain clears.
+- **Towns:** V1 map labels are crisp ink on paper, and the chosen town turns accent. The town card and the V2/V5 cards moved from a grey ink tint to the accent tint (S0650 colour consistency). V6 counts meet AA.
+- **Call:** V8's phone is a drawn receiver lifted off a desk-phone base, with the cord running from handset to base (it was a blob). V4 keypad letters meet the type floor.
+- **Motion:** card flip 600ms became 400ms; Services V8 panel expand 450ms became 350ms (S0063 duration budgets). Everything else was checked and is within budget or deliberate (scroll reveals, spring arrivals).
+
+**Inner pages (owner clarification).** Each page is now a set of sections, each with five versions, its own 1-5 picker and backups. See the note above. The three page heads and two closes are new designs:
+- Services head: type and roofline; photo strip; promise checklist; photo with title card; six-icon contents strip.
+- About head: type; crew panorama; Bunk and Wade split; drawn 1995; three faces.
+- Contact head: giant number; turning card; week board; accent panel; three lines.
+- Closes: card; accent band with the number; Rachel; phone-message slip; photo with facts.
+- Contact's body gains a distance-band tablist (V3).
+
+**Deliberately left, and why:**
+- **Brand labels above section headings.** The owner's directive required the brand label in every section, which wins over S0650's eyebrow ration. They are sentence case, not tracked caps (S0220 #6 allows that).
+- **The Call V1 hollow REMBRANDT wordmark** (measures 1:1): a decorative `aria-hidden` duplicate.
+- **The Reviews V5 star glyph** (3.12:1): a graphic, which needs 3:1.
+- **Work V3 at rest:** it shows a small side-by-side pair under reduced motion, but with motion it is the full-width compare slider. Left as is.
+- **Towns V1 ring:** a few label pairs sit close at the 15-20 mile ring; their positions are the towns' true bearings, so moving them would misstate geography.
+- **Accent bands:** the orange band on most Call versions is the one committed accent ground, allowed by the directive.
+- **No backups for the close sections and Contact's area section:** they have no earlier generation, so nothing was faked.

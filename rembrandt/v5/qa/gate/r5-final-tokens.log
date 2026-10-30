@@ -1,0 +1,7 @@
+declared colour tokens in base.css :root: 20
+colour literals scanned outside :root: {'hex': 51, 'rgb': 125, 'hsl': 0, 'oklch': 0}
+exceptions (not a token value, not a black/paper alpha shade): 4
+   sections/family/family.css:79 hex #000
+   sections/family/family.css:79 hex #000
+   sections/proof/proof.css:2 hex #317
+   sections/proof/proof.js:37 hex #000

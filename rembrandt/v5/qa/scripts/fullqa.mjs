@@ -2,7 +2,7 @@
 // every visible version of every page at 1440 and 375, reduced motion (content at rest). Writes JSON per run.
 import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright'); import fs from 'node:fs';
 const HOME = ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'];
-const PAGES = [['rembrandt-homepage.html', HOME, 8], ['services.html', ['svcp'], 5], ['about.html', ['about'], 5], ['contact.html', ['contact'], 5]];
+const PAGES = [['rembrandt-homepage.html', HOME, 8], ['services.html', ['sphero', 'svcp', 'spclose'], 5], ['about.html', ['abhero', 'about', 'abclose'], 5], ['contact.html', ['cthero', 'contact'], 5]]; // R5: inner pages per section
 const only = process.env.ONLY; const widths = (process.env.W || '1440,375').split(',').map(Number);
 const b = await chromium.launch(); const out = [];
 for (const [file, ids, n] of PAGES) {

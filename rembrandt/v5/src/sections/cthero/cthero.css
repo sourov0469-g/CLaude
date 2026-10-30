@@ -19,7 +19,7 @@
 .kt3-now span{position:absolute;top:50%;left:6px;translate:0 -50%;padding:1px 6px;border-radius:999px;background:var(--black);color:var(--paper);font:600 .6875rem var(--f-head)}
 @media (max-width:640px){.kt3-board{--lab:5.6rem;--tail:3.6rem}.kt3-h{font-size:.8125rem}.kt3-day b{font-size:.9375rem}}
 .kt2-stage{display:grid;justify-items:center;gap:18px;margin-bottom:clamp(40px,5vw,72px);perspective:1400px}
-.kt2-card{position:relative;width:min(100%,560px);aspect-ratio:1.75;transform-style:preserve-3d;transition:transform .6s var(--ease-x)}
+.kt2-card{position:relative;width:min(100%,560px);aspect-ratio:1.75;transform-style:preserve-3d;transition:transform .4s var(--ease-x)}
 .kt2-card.is-back{transform:rotateY(180deg)}
 .kt2-face{position:absolute;inset:0;display:grid;align-content:center;gap:6px;padding:clamp(20px,4vw,40px);border-radius:14px;backface-visibility:hidden;box-shadow:0 0 0 1px var(--line),0 30px 50px -30px rgb(20 20 20 / .5)}
 .kt2-front{background:var(--paper)}

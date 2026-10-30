@@ -1,8 +1,10 @@
-// R4 master directive FINAL GATE (browser part): every visible version switches and mounts; light check (no black or
-// near-black ground, no large dark panel, deep-green uses listed); logo in header and footer; favicon; errors.
+// R4/R5 FINAL GATE (browser part): every visible version switches and mounts; light check (no black or near-black
+// ground, no large dark panel, deep-green uses listed); logo in header and footer; favicon; errors. Runs WITH motion
+// (the R5 lesson: a custom property named like a token blanked a button only when motion ran), and checks that every
+// visible .btn keeps a painted ground once the section has been scrolled through.
 import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
 const HOME = ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'];
-const PAGES = [['rembrandt-homepage.html', HOME, 8], ['services.html', ['svcp'], 5], ['about.html', ['about'], 5], ['contact.html', ['contact'], 5]];
+const PAGES = [['rembrandt-homepage.html', HOME, 8], ['services.html', ['sphero', 'svcp', 'spclose'], 5], ['about.html', ['abhero', 'about', 'abclose'], 5], ['contact.html', ['cthero', 'contact'], 5]]; // R5: inner pages per section
 const b = await chromium.launch(); let bad = 0; const dark = [], green = [], fail = [];
 for (const [file, ids, n] of PAGES) {
   for (let v = 1; v <= n; v++) {
@@ -17,6 +19,9 @@ for (const [file, ids, n] of PAGES) {
           .map(e => [e.className && e.className.baseVal === undefined ? e.className : '', rgb(getComputedStyle(e).backgroundColor)]).filter(([, a]) => (a.length === 3 || a[3] > 0.5) && lum(a.slice(0, 3)) < 0.05);
         return { id, v: s.dataset.v, kids: root.childElementCount, g, L: +lum(g).toFixed(3), hue: Math.round(hue(g)), big: big.map(x => x[0]).slice(0, 2) }; });
     }, ids);
+    const H = await p.evaluate(() => document.documentElement.scrollHeight); for (let y = 0; y < H; y += 600) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(120); } await p.waitForTimeout(600);
+    const nobg = await p.evaluate(() => [...document.querySelectorAll('section .btn')].filter(a => a.getBoundingClientRect().width && getComputedStyle(a).backgroundColor === 'rgba(0, 0, 0, 0)' && !a.closest('[aria-hidden="true"]')).map(a => a.closest('section').id + ':' + a.className));
+    if (nobg.length) { bad++; fail.push(`${file} v${v}: buttons without a ground: ${nobg.join(', ')}`); }
     const logo = await p.evaluate(() => [document.querySelectorAll('.nav svg.logo, header svg.logo').length, document.querySelectorAll('footer svg.logo, .ftr svg.logo').length, (document.querySelector('link[rel="icon"]')?.getAttribute('href') || '').slice(0, 15)]);
     for (const x of r) {
       if (x.v !== String(v) || !x.kids) { bad++; fail.push(`${file} ${x.id}${v}: v=${x.v} kids=${x.kids}`); }
