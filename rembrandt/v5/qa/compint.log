@@ -1,46 +1,74 @@
-PASS hero1@1440: live true, cursor none, nail offset 0,0, companion 1, effect halo (1 nodes), hover a→button
-PASS hero2@1440: live true, cursor none, nail offset 0,0, companion 1, effect halo (1 nodes), hover a→button
-PASS hero3@1440: live true, cursor none, nail offset 0,0, companion 1, effect halo (1 nodes), hover button→button
-PASS proof1@1440: live true, cursor none, nail offset 0,0, companion 1, effect stars (3 nodes), hover h2→heading
-PASS proof2@1440: live true, cursor none, nail offset 0,0, companion 1, effect stars (4 nodes), hover a→link
-PASS proof3@1440: live true, cursor none, nail offset 0,0, companion 1, effect stars (3 nodes), hover h2→heading
-PASS work1@1440: live true, cursor none, nail offset 0,0, companion 1, effect finder (1 nodes), hover h2→heading
-PASS work2@1440: live true, cursor none, nail offset 0,0, companion 1, effect finder (1 nodes), hover button→image
-PASS work3@1440: live true, cursor none, nail offset 0,0, companion 1, effect finder (1 nodes), hover button→button
-PASS family1@1440: live true, cursor none, nail offset 0,0, companion 1, effect shavings (4 nodes), hover none in view
-PASS family2@1440: live true, cursor none, nail offset 0,0, companion 1, effect shavings (4 nodes), hover none in view
-PASS family3@1440: live true, cursor none, nail offset 0,0, companion 1, effect shavings (4 nodes), hover button→button
-PASS how1@1440: live true, cursor none, nail offset 0,0, companion 1, effect ripple (2 nodes), hover a→link
-PASS how2@1440: live true, cursor none, nail offset 0,0, companion 1, effect ripple (2 nodes), hover button→button
-PASS how3@1440: live true, cursor none, nail offset 0,0, companion 1, effect ripple (2 nodes), hover a→link
-PASS area1@1440: live true, cursor none, nail offset 0,0, companion 1, effect compass (1 nodes), hover h2→heading
-PASS area2@1440: live true, cursor none, nail offset 0,0, companion 1, effect compass (1 nodes), hover button→button
-PASS area3@1440: live true, cursor none, nail offset 0,0, companion 1, effect compass (1 nodes), hover button→button
-PASS call1@1440: live true, cursor none, nail offset 0,0, companion 1, effect signal (3 nodes), hover h2→heading
-PASS call2@1440: live true, cursor none, nail offset 0,0, companion 1, effect signal (3 nodes), hover a→link
-PASS call3@1440: live true, cursor none, nail offset 0,0, companion 1, effect signal (3 nodes), hover a→button
+PASS hero1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS hero2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS hero3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS hero4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS hero5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call1@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call2@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call3@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call4@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call5@1440: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
 errors @1440: 0
-PASS hero1@375: live true, cursor none, nail offset 0,0, companion 1, effect halo (1 nodes), hover none in view
-PASS hero2@375: live true, cursor none, nail offset 0,0, companion 1, effect halo (1 nodes), hover a→button
-PASS hero3@375: live true, cursor none, nail offset 0,0, companion 1, effect halo (1 nodes), hover button→button
-PASS proof1@375: live true, cursor none, nail offset 0,0, companion 1, effect stars (4 nodes), hover h2→heading
-PASS proof2@375: live true, cursor none, nail offset 0,0, companion 1, effect stars (4 nodes), hover a→link
-PASS proof3@375: live true, cursor none, nail offset 0,0, companion 1, effect stars (4 nodes), hover h2→heading
-PASS work1@375: live true, cursor none, nail offset 0,0, companion 1, effect finder (1 nodes), hover button→button
-PASS work2@375: live true, cursor none, nail offset 0,0, companion 1, effect finder (1 nodes), hover button→image
-PASS work3@375: live true, cursor none, nail offset 0,0, companion 1, effect finder (1 nodes), hover button→button
-PASS family1@375: live true, cursor none, nail offset 0,0, companion 1, effect shavings (3 nodes), hover a→link
-PASS family2@375: live true, cursor none, nail offset 0,0, companion 1, effect shavings (3 nodes), hover figure→image
-PASS family3@375: live true, cursor none, nail offset 0,0, companion 1, effect shavings (3 nodes), hover button→button
-PASS how1@375: live true, cursor none, nail offset 0,0, companion 1, effect ripple (2 nodes), hover a→link
-PASS how2@375: live true, cursor none, nail offset 0,0, companion 1, effect ripple (2 nodes), hover button→button
-PASS how3@375: live true, cursor none, nail offset 0,0, companion 1, effect ripple (2 nodes), hover a→link
-PASS area1@375: live true, cursor none, nail offset 0,0, companion 1, effect compass (1 nodes), hover h2→heading
-PASS area2@375: live true, cursor none, nail offset 0,0, companion 1, effect compass (1 nodes), hover button→button
-PASS area3@375: live true, cursor none, nail offset 0,0, companion 1, effect compass (1 nodes), hover button→button
-PASS call1@375: live true, cursor none, nail offset 0,0, companion 1, effect signal (3 nodes), hover a→button
-PASS call2@375: live true, cursor none, nail offset 0,0, companion 1, effect signal (3 nodes), hover a→link
-PASS call3@375: live true, cursor none, nail offset 0,0, companion 1, effect signal (3 nodes), hover a→button
+PASS hero1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover none in view
+PASS hero2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover a→button
+PASS hero3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover a→button
+PASS hero4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover a→button
+PASS hero5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover a→link
+PASS proof1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS proof5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS work5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS family5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS how5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS area5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call1@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call2@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call3@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call4@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
+PASS call5@375: live true, cursor none, nail offset 0,0, companion 1, cursor-effect layers 0, hover label→pick
 errors @375: 0
 variant hammer: live true, body part .handle
 variant drop: live true, body part .drp
@@ -53,6 +81,6 @@ press: nail sets true
 pointer leaves the page: cmp-live false (system cursor back)
 errors: 0
 before the first move: cmp-on true, cmp-live false, cursor auto
-touch (375, hasTouch, isMobile): cmp-on false, companion display none, cursor auto, effect nodes 0, Call link works without it true, errors 0
+touch (375, hasTouch, isMobile): cmp-on false, companion display none, cursor pointer, effect nodes 0, Call link works without it true, errors 0
 reduced motion (1440): cmp-on false, companion display none, cursor auto, effect nodes 0, Call link works without it true, errors 0
 FAILS: 0

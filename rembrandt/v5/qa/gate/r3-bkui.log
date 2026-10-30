@@ -1,0 +1,9 @@
+hero: start v2 (def 2) bk none/false -> more: flex/true -> B2: vb2 "Hero section: backup 2" ind 341px -> back: v2 "Hero section: version 2 of 5"
+proof: start v2 (def 2) bk none/false -> more: flex/true -> B2: vb2 "Reviews section: backup 2" ind 364px -> back: v2 "Reviews section: version 2 of 5"
+work: start v1 (def 1) bk none/false -> more: flex/true -> B2: vb2 "Work section: backup 2" ind 344px -> back: v1 "Work section: version 1 of 5"
+family: start v1 (def 1) bk none/false -> more: flex/true -> B2: vb2 "Family section: backup 2" ind 353px -> back: v1 "Family section: version 1 of 5"
+how: start v3 (def 3) bk none/false -> more: flex/true -> B2: vb2 "Steps section: backup 2" ind 347px -> back: v3 "Steps section: version 3 of 5"
+area: start v3 (def 3) bk none/false -> more: flex/true -> B2: vb2 "Towns section: backup 2" ind 353px -> back: v3 "Towns section: version 3 of 5"
+call: start v1 (def 1) bk none/false -> more: flex/true -> B2: vb2 "Call section: backup 2" ind 335px -> back: v1 "Call section: version 1 of 5"
+B key: flex,flex,flex,flex,flex,flex,flex
+errors 0

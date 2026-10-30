@@ -1,124 +1,155 @@
-PASS hero1: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+PASS hero1: ids referenced 139, missing 0, duplicates 0; controls 1 working 1
    ok  tel "Call (937) 746-7377"
-PASS hero2: ids referenced 63, missing 0, duplicates 0; controls 2 working 2
+PASS hero2: ids referenced 139, missing 0, duplicates 0; controls 2 working 2
    ok  tel "Call (937) 746-7377"
-   ok  anchor #call "Get a written estimate" (target top 5)
-PASS hero3: ids referenced 63, missing 0, duplicates 0; controls 3 working 3
-   ok  button "Pause the town names" (3 mutations)
+   ok  anchor #proof "4.9 stars from 295 Google reviews" (target top 1)
+PASS hero3: ids referenced 139, missing 0, duplicates 0; controls 3 working 3
    ok  tel "Call (937) 746-7377"
    ok  anchor #area "All 24 towns" (target top 4)
-PASS proof1: ids referenced 63, missing 0, duplicates 0; controls 0 working 0
-PASS proof2: ids referenced 64, missing 0, duplicates 0; controls 4 working 4
+   ok  button "Pause the town names" (322 mutations)
+PASS hero4: ids referenced 139, missing 0, duplicates 0; controls 2 working 2
+   ok  tel "Call (937) 746-7377"
+   ok  anchor #proof "4.9 stars from 295 Google reviews" (target top 1)
+PASS hero5: ids referenced 139, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "Rachel answers (937) 746-7377."
+PASS proof1: ids referenced 138, missing 0, duplicates 0; controls 0 working 0
+PASS proof2: ids referenced 139, missing 0, duplicates 0; controls 4 working 4
    ok  external "Check it on Google (opens in a new"
    ok  external "Check it on bbb.org (opens in a ne"
    ok  external "Check it in their contractor finde"
    ok  tel "Ask Rachel for the certificate"
-PASS proof3: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+PASS proof3: ids referenced 138, missing 0, duplicates 0; controls 1 working 1
    ok  external "Read the reviews on Google (opens "
-PASS work1: ids referenced 63, missing 0, duplicates 0; controls 3 working 3
-   ok  button "Previous job" (538 mutations)
-   ok  button "Pause the moving photos" (281 mutations)
-   ok  button "Next job" (173 mutations)
-PASS work2: ids referenced 61, missing 0, duplicates 0; controls 7 working 7
-   ok  button "The same house, after" (1190 mutations)
-   ok  button "A brick ranch, charcoal shingles" (494 mutations)
-   ok  button "A Tudor-style home" (534 mutations)
-   ok  button "The blue house, our sign by the wa" (425 mutations)
-   ok  button "This house, before its new roof" (524 mutations)
-   ok  button "Our truck at a ranch job" (471 mutations)
-   ok  button "Close" (478 mutations)
-PASS work3: ids referenced 61, missing 0, duplicates 0; controls 2 working 2
-   ok  button "Before: show the old roof" (374 mutations)
-   ok  button "After: show the new roof" (168 mutations)
-PASS family1: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+PASS proof4: ids referenced 139, missing 0, duplicates 0; controls 4 working 4
+   ok  external "4.9stars from 295 Google reviewsCh"
+   ok  external "A+Better Business Bureau, accredit"
+   ok  external "PlatinumOwens Corning Preferred Co"
+   ok  tel "$2Mliability insuranceAsk Rachel f"
+PASS proof5: ids referenced 139, missing 0, duplicates 0; controls 4 working 4
+   ok  external "Check it on Google (opens in a new"
+   ok  external "Check it on bbb.org (opens in a ne"
+   ok  external "Check it in their contractor finde"
+   ok  tel "Ask Rachel for the certificate"
+PASS work1: ids referenced 139, missing 0, duplicates 0; controls 3 working 3
+   ok  button "Previous job" (504 mutations)
+   ok  button "Pause the moving photos" (300 mutations)
+   ok  button "Next job" (228 mutations)
+PASS work2: ids referenced 138, missing 0, duplicates 0; controls 7 working 7
+   ok  button "Same house, before" (799 mutations)
+   ok  button "Same house, after" (393 mutations)
+   ok  button "A Tudor-style home" (430 mutations)
+   ok  button "The blue house, our sign by the wa" (376 mutations)
+   ok  button "A brick ranch, charcoal shingles" (430 mutations)
+   ok  button "Our truck at a ranch job" (375 mutations)
+   ok  button "Close" (375 mutations)
+PASS work3: ids referenced 139, missing 0, duplicates 0; controls 2 working 2
+   ok  button "Before: show the old roof" (242 mutations)
+   ok  button "After: show the new roof" (173 mutations)
+PASS work4: ids referenced 138, missing 0, duplicates 0; controls 0 working 0
+PASS work5: ids referenced 138, missing 0, duplicates 0; controls 0 working 0
+PASS family1: ids referenced 139, missing 0, duplicates 0; controls 1 working 1
    ok  tel "Call Rachel at (937) 746-7377"
-PASS family2: ids referenced 62, missing 0, duplicates 0; controls 1 working 1
+PASS family2: ids referenced 138, missing 0, duplicates 0; controls 1 working 1
    ok  tel "Call Rachel at (937) 746-7377"
-PASS family3: ids referenced 62, missing 0, duplicates 0; controls 6 working 6
-   ok  button "1995 Bunk Walker founded it" (1399 mutations)
-   ok  button "2015 Wade Walker, president" (318 mutations)
-   ok  button "A+ BBB accredited since 2001" (306 mutations)
-   ok  button "OC Platinum Preferred" (305 mutations)
-   ok  button "Phone Rachel, Mon to Fri, 9 to 5" (305 mutations)
-   ok  button "Office 38 N Pioneer Blvd" (305 mutations)
-PASS how1: ids referenced 63, missing 0, duplicates 0; controls 1 working 1
+PASS family3: ids referenced 138, missing 0, duplicates 0; controls 4 working 4
+   ok  button "1995 Bunk Walker founded it" (714 mutations)
+   ok  button "2015 Wade Walker, president" (14 mutations)
+   ok  button "Phone Rachel, Mon to Fri, 9 to 5" (15 mutations)
+   ok  button "Today the crew" (15 mutations)
+PASS family4: ids referenced 137, missing 0, duplicates 0; controls 4 working 4
+   ok  button "1995Bunk WalkerFounderFranklin “Bu" (414 mutations)
+   ok  button "2015Wade WalkerPresidentHis son, W" (5 mutations)
+   ok  button "TodayRachelOn the phoneRachel answ" (5 mutations)
+   ok  tel "Call Rachel at (937) 746-7377"
+PASS family5: ids referenced 137, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "Call Rachel at (937) 746-7377"
+PASS how1: ids referenced 139, missing 0, duplicates 0; controls 1 working 1
    ok  tel "(937) 746-7377"
-PASS how2: ids referenced 70, missing 0, duplicates 0; controls 5 working 5
-   ok  button "01 Call Rachel" (771 mutations)
-   ok  button "02 Written estimate" (18 mutations)
-   ok  button "03 Your roof" (18 mutations)
-   ok  button "Pause the steps" (2 mutations)
+PASS how2: ids referenced 146, missing 0, duplicates 0; controls 5 working 5
+   ok  button "01 Call Rachel" (596 mutations)
+   ok  button "02 Written estimate" (23 mutations)
+   ok  button "03 Your roof" (23 mutations)
+   ok  button "Pause the steps" (9 mutations)
    ok  tel "Call (937) 746-7377"
-PASS how3: ids referenced 62, missing 0, duplicates 0; controls 3 working 3
+PASS how3: ids referenced 139, missing 0, duplicates 0; controls 1 working 1
    ok  tel "Call (937) 746-7377"
-   ok  anchor #call "Estimate. In writing." (target top 5)
-   ok  anchor #work "Roof. Platinum Preferred." (target top -4)
-PASS area1: ids referenced 63, missing 0, duplicates 0; controls 24 working 24
-   ok  button "Springborohome" (2063 mutations)
-   ok  button "Franklin3.3 mi" (218 mutations)
-   ok  button "Carlisle4.8 mi" (75 mutations)
-   ok  button "Miamisburg5.1 mi" (75 mutations)
-   ok  button "Centerville6.8 mi" (62 mutations)
-   ok  button "West Carrollton7.5 mi" (75 mutations)
-   ok  button "Waynesville7.9 mi" (75 mutations)
-   ok  button "Middletown8.1 mi" (75 mutations)
-   ok  button "Germantown8.5 mi" (75 mutations)
-   ok  button "Moraine9.4 mi" (75 mutations)
-   ok  button "Lebanon9.5 mi" (75 mutations)
-   ok  button "Bellbrook9.5 mi" (75 mutations)
-   ok  button "Kettering10.2 mi" (75 mutations)
-   ok  button "Monroe10.7 mi" (75 mutations)
-   ok  button "Harveysburg13.6 mi" (75 mutations)
-   ok  button "Trenton13.7 mi" (75 mutations)
-   ok  button "Beavercreek15 mi" (75 mutations)
-   ok  button "Mason15 mi" (75 mutations)
-   ok  button "Dayton15.5 mi" (75 mutations)
-   ok  button "Clarksville17.1 mi" (75 mutations)
-   ok  button "Xenia17.7 mi" (75 mutations)
-   ok  button "Fairborn20.3 mi" (75 mutations)
-   ok  button "Huber Heights21.5 mi" (75 mutations)
-   ok  button "Yellow Springs24.4 mi" (75 mutations)
-PASS area2: ids referenced 63, missing 0, duplicates 0; controls 2 working 2
-   ok  button "Oldest homes first" (1887 mutations)
-   ok  button "Nearest first" (1437 mutations)
-PASS area3: ids referenced 64, missing 0, duplicates 0; controls 25 working 25; forms 1 (tw3-form)
-   ok  input[text] "" (1105 mutations)
-   ok  button "Springboro" (102 mutations)
-   ok  button "Franklin" (102 mutations)
-   ok  button "Carlisle" (102 mutations)
-   ok  button "Miamisburg" (104 mutations)
-   ok  button "Centerville" (102 mutations)
-   ok  button "West Carrollton" (102 mutations)
-   ok  button "Waynesville" (104 mutations)
-   ok  button "Middletown" (102 mutations)
-   ok  button "Germantown" (102 mutations)
-   ok  button "Moraine" (102 mutations)
-   ok  button "Lebanon" (98 mutations)
-   ok  button "Bellbrook" (102 mutations)
-   ok  button "Kettering" (102 mutations)
-   ok  button "Monroe" (102 mutations)
-   ok  button "Harveysburg" (102 mutations)
-   ok  button "Trenton" (102 mutations)
-   ok  button "Beavercreek" (102 mutations)
-   ok  button "Mason" (102 mutations)
-   ok  button "Dayton" (102 mutations)
-   ok  button "Clarksville" (102 mutations)
-   ok  button "Xenia" (102 mutations)
-   ok  button "Fairborn" (102 mutations)
-   ok  button "Huber Heights" (102 mutations)
-   ok  button "Yellow Springs" (102 mutations)
-PASS call1: ids referenced 63, missing 0, duplicates 0; controls 2 working 2
+PASS how4: ids referenced 140, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "(937) 746-7377"
+PASS how5: ids referenced 139, missing 0, duplicates 0; controls 1 working 1
+   ok  tel "(937) 746-7377"
+PASS area1: ids referenced 138, missing 0, duplicates 0; controls 25 working 25
+   ok  button "Springborohome" (1867 mutations)
+   ok  button "Franklin3.3 mi" (141 mutations)
+   ok  button "Carlisle4.8 mi" (145 mutations)
+   ok  button "Miamisburg5.1 mi" (143 mutations)
+   ok  button "Centerville6.8 mi" (143 mutations)
+   ok  button "West Carrollton7.5 mi" (144 mutations)
+   ok  button "Waynesville7.9 mi" (141 mutations)
+   ok  button "Middletown8.1 mi" (143 mutations)
+   ok  button "Germantown8.5 mi" (145 mutations)
+   ok  button "Moraine9.4 mi" (146 mutations)
+   ok  button "Lebanon9.5 mi" (145 mutations)
+   ok  button "Bellbrook9.5 mi" (144 mutations)
+   ok  button "Kettering10.2 mi" (144 mutations)
+   ok  button "Monroe10.7 mi" (143 mutations)
+   ok  button "Harveysburg13.6 mi" (144 mutations)
+   ok  button "Trenton13.7 mi" (137 mutations)
+   ok  button "Beavercreek15 mi" (143 mutations)
+   ok  button "Mason15 mi" (141 mutations)
+   ok  button "Dayton15.5 mi" (140 mutations)
+   ok  button "Clarksville17.1 mi" (141 mutations)
+   ok  button "Xenia17.7 mi" (144 mutations)
+   ok  button "Fairborn20.3 mi" (143 mutations)
+   ok  button "Huber Heights21.5 mi" (143 mutations)
+   ok  button "Yellow Springs24.4 mi" (143 mutations)
+   ok  button "Show all 24" (24 mutations)
+PASS area2: ids referenced 138, missing 0, duplicates 0; controls 3 working 3
+   ok  button "Oldest homes first" (2377 mutations)
+   ok  button "Nearest first" (764 mutations)
+   ok  button "Show all 24" (662 mutations)
+PASS area3: ids referenced 139, missing 0, duplicates 0; controls 25 working 25; forms 1 (tw3-form)
+   ok  input[text] "" (904 mutations)
+   ok  button "Springboro" (122 mutations)
+   ok  button "Franklin" (126 mutations)
+   ok  button "Carlisle" (130 mutations)
+   ok  button "Miamisburg" (130 mutations)
+   ok  button "Centerville" (130 mutations)
+   ok  button "West Carrollton" (130 mutations)
+   ok  button "Waynesville" (130 mutations)
+   ok  button "Middletown" (130 mutations)
+   ok  button "Germantown" (130 mutations)
+   ok  button "Moraine" (130 mutations)
+   ok  button "Lebanon" (130 mutations)
+   ok  button "Bellbrook" (130 mutations)
+   ok  button "Kettering" (130 mutations)
+   ok  button "Monroe" (130 mutations)
+   ok  button "Harveysburg" (130 mutations)
+   ok  button "Trenton" (130 mutations)
+   ok  button "Beavercreek" (128 mutations)
+   ok  button "Mason" (128 mutations)
+   ok  button "Dayton" (130 mutations)
+   ok  button "Clarksville" (130 mutations)
+   ok  button "Xenia" (130 mutations)
+   ok  button "Fairborn" (132 mutations)
+   ok  button "Huber Heights" (130 mutations)
+   ok  button "Yellow Springs" (130 mutations)
+PASS area4: ids referenced 138, missing 0, duplicates 0; controls 0 working 0
+PASS area5: ids referenced 138, missing 0, duplicates 0; controls 0 working 0
+PASS call1: ids referenced 139, missing 0, duplicates 0; controls 2 working 2
    ok  tel "Call (937) 746-7377"
    ok  external "38 N Pioneer Blvd, Springboro (ope"
-PASS call2: ids referenced 62, missing 0, duplicates 0; controls 3 working 3
+PASS call2: ids referenced 138, missing 0, duplicates 0; controls 2 working 2
    ok  tel "Call (937) 746-7377"
-   ok  tel "(937) 746-7377"
-   ok  button "See the details" (2804 mutations)
-PASS call3: ids referenced 63, missing 0, duplicates 0; controls 3 working 3
+   ok  button "See the details" (901 mutations)
+PASS call3: ids referenced 139, missing 0, duplicates 0; controls 2 working 2
    ok  tel "Call (937) 746-7377"
-   ok  button "Pause the moving number" (2491 mutations)
+   ok  button "Pause the moving number" (965 mutations)
+PASS call4: ids referenced 138, missing 0, duplicates 0; controls 1 working 1
    ok  tel "Call (937) 746-7377"
-switchers (21 labels): 21/21 change their own section 
+PASS call5: ids referenced 138, missing 0, duplicates 0; controls 2 working 2
+   ok  tel "Call (937) 746-7377"
+   ok  external "38 N Pioneer Blvd, Springboro, OH "
+switchers (35 labels): 35/35 change their own section 
 helper picker (4 options): 4/4 set the companion
 nav / phone bar / footer links: 6/6 valid (#hero tel:+19377467377 tel:+19377467377 #call #hero tel:+19377467377)
 forms on the page across versions: tw3-form (Towns V3) only; handler tested in areaint.log and above

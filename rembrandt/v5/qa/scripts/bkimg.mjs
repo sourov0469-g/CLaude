@@ -1,0 +1,5 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright'); import crypto from 'node:crypto';
+const [OLD, NEW] = process.argv.slice(2); const b = await chromium.launch();
+const g = async (f, q, id) => { const p = await (await b.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' })).newPage(); await p.goto('file://' + f + '?v=' + q); await p.waitForTimeout(1500); await p.evaluate(id => document.getElementById(id).scrollIntoView(), id); await p.waitForTimeout(900); return p.evaluate(id => [...document.querySelectorAll(`#${id} .stage img`)].map(i => [i.currentSrc, i.alt, i.naturalWidth]), id); };
+for (const [id, n] of [['work', 1], ['family', 1]]) { const o = await g(OLD, id + n, id), x = await g(NEW, id + 'b' + n, id); const h = a => a.map(([s, alt, w]) => crypto.createHash('md5').update(s).digest('hex').slice(0, 8) + ':' + w + ':' + alt.slice(0, 20)).join(' '); console.log(id, n, h(o) === h(x) ? 'same images' : 'DIFF', '\n ', h(o), '\n ', h(x)); }
+await b.close();

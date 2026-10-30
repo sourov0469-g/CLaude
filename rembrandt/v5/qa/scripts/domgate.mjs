@@ -9,8 +9,8 @@ const b = await chromium.launch(); const out = []; let fails = 0; const errs = [
 const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage();
 p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
 await p.exposeFunction('noop', () => 0);
-const SCRIPT_IDS = ['announce', 'foot', 'hero', ...SECS, ...SECS.flatMap(s => [1, 2, 3].map(v => `tpl-${s}-${v}`))];
-for (const s of SECS) for (const v of [1, 2, 3]) {
+const SCRIPT_IDS = ['announce', 'foot', 'hero', ...SECS, ...SECS.flatMap(s => [1, 2, 3, 4, 5, 'b1', 'b2', 'b3'].map(v => `tpl-${s}-${v}`))];
+for (const s of SECS) for (const v of [1, 2, 3, 4, 5]) {
   await p.goto(FILE + '?v=' + s + v); await p.waitForTimeout(900);
   const refs = await p.evaluate(ids => {
     const all = [...document.querySelectorAll('[id]')].map(e => e.id), dup = all.filter((x, i) => all.indexOf(x) !== i);
@@ -59,9 +59,9 @@ for (const s of SECS) for (const v of [1, 2, 3]) {
 }
 // chrome: section switchers (every 1/2/3 label changes its section), nav, phone bar, footer, helper picker
 await p.goto(FILE); await p.waitForTimeout(900);
-const sw = await p.evaluate(async secs => { const r = []; for (const s of secs) for (const v of [2, 3, 1]) { const sec = document.getElementById(s), before = sec.querySelector('.stage').firstElementChild; const l = document.querySelector(`label[for="v-${s}-${v}"]`); l.click(); await new Promise(z => setTimeout(z, 250)); r.push(`${s}${v}:${sec.querySelector('.stage').firstElementChild !== before && sec.dataset.v === String(v) ? 'ok' : 'BAD'}`); } return r; }, SECS);
+const sw = await p.evaluate(async secs => { const r = []; for (const s of secs) { const d = +document.getElementById(s).dataset.v; for (const v of [1, 2, 3, 4, 5, d].filter((x, i) => i === 5 || x !== d)) { const sec = document.getElementById(s), before = sec.querySelector('.stage').firstElementChild; const l = document.querySelector(`label[for="v-${s}-${v}"]`); l.click(); await new Promise(z => setTimeout(z, 250)); r.push(`${s}${v}:${sec.querySelector('.stage').firstElementChild !== before && sec.dataset.v === String(v) ? 'ok' : 'BAD'}`); } } return r; }, SECS); // R3: each section starts from its default, so the default's label is clicked last
 if (sw.some(x => x.endsWith('BAD'))) fails++;
-out.push(`switchers (21 labels): ${sw.filter(x => x.endsWith('ok')).length}/21 change their own section ${sw.filter(x => x.endsWith('BAD')).join(' ')}`);
+out.push(`switchers (35 labels): ${sw.filter(x => x.endsWith("ok")).length}/35 change their own section ${sw.filter(x => x.endsWith('BAD')).join(' ')}`);
 const pk = await p.evaluate(async () => { const r = []; for (const v of ['hammer', 'drop', 'off', 'house']) { document.querySelector(`label[for="cmp-${v}"]`).click(); await new Promise(z => setTimeout(z, 120)); r.push(document.documentElement.dataset.companion === v); } return r; });
 if (pk.includes(false)) fails++;
 out.push(`helper picker (4 options): ${pk.filter(Boolean).length}/4 set the companion`);

@@ -8,7 +8,7 @@ const b = await chromium.launch(); const out = []; let fails = 0;
 for (const [w, h] of [[1440, 900], [375, 812]]) {
   const p = await (await b.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' })).newPage(); const errs = [];
   p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
-  for (const s of SECS) for (const v of [1, 2, 3]) {
+  for (const s of SECS) for (const v of [1, 2, 3, 4, 5]) {
     await p.goto(FILE + '?v=' + s + v); await p.waitForTimeout(700);
     await p.evaluate(s => document.getElementById(s).scrollIntoView({ block: 'start' }), s); await p.waitForTimeout(800);
     await p.mouse.move(w / 2, h / 2, { steps: 4 }); await p.waitForTimeout(1500);

@@ -6,7 +6,7 @@ const b = await chromium.launch();
 const ctx = await b.newContext({ viewport: { width: +W, height: +H }, reducedMotion: rm === 'reduce' ? 'reduce' : 'no-preference', hasTouch: +W < 500, isMobile: +W < 500 });
 const ids = ['hero', 'proof', 'work', 'family', 'how', 'area', 'call'], out = [], files = [];
 fs.mkdirSync('sw', { recursive: true });
-for (const v of [1, 2, 3]) {
+for (const v of [1, 2, 3, 4, 5]) {
   const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
   await p.goto('file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html?v=' + ids.map(i => i + v).join(','));
   await p.waitForTimeout(600);

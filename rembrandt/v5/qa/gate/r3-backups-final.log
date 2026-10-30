@@ -1,0 +1,179 @@
+# R3 final backup check vs pre-round file (6ade4e3), run after every section's R3 pass
+## 1. version roots, dividers hidden (bkcheck.mjs ... stage + pixdiff.py)
+area1-1440 SIZE (1440, 1262) (1440, 1261)
+area1-375        size (375, 1755) bbox (0, 0, 375, 1399) max 188 >8: 0.173%
+area2-1440 SIZE (1440, 2519) (1440, 2518)
+area2-375        size (375, 8800) bbox (0, 0, 375, 1) max 13 >8: 0.011%
+area3-1440 SIZE (1440, 909) (1440, 908)
+area3-375        size (375, 1517) bbox (0, 0, 375, 1238) max 231 >8: 0.071%
+call1-1440 SIZE (1440, 1043) (1440, 1042)
+call1-375        size (375, 758) bbox None max 0 >8: 0.000%
+call2-1440 SIZE (1440, 948) (1440, 947)
+call2-375        size (375, 693) bbox (0, 51, 375, 622) max 10 >8: 0.000%
+call3-1440       size (1440, 781) bbox (0, 242, 1440, 781) max 244 >8: 1.436%
+call3-375        size (375, 594) bbox None max 0 >8: 0.000%
+family1-1440 SIZE (1440, 1614) (1440, 1613)
+family1-375      size (375, 962) bbox (0, 0, 375, 508) max 231 >8: 0.107%
+family2-1440 SIZE (1440, 892) (1440, 891)
+family2-375      size (375, 1091) bbox (0, 0, 375, 906) max 33 >8: 0.004%
+family3-1440     size (1440, 1046) bbox (0, 0, 1440, 1046) max 244 >8: 5.036%
+family3-375      size (375, 905) bbox (0, 0, 375, 1) max 216 >8: 0.110%
+hero1-1440       size (1440, 900) bbox None max 0 >8: 0.000%
+hero1-375        size (375, 900) bbox None max 0 >8: 0.000%
+hero2-1440       size (1440, 900) bbox None max 0 >8: 0.000%
+hero2-375        size (375, 984) bbox None max 0 >8: 0.000%
+hero3-1440       size (1440, 900) bbox None max 0 >8: 0.000%
+hero3-375        size (375, 900) bbox None max 0 >8: 0.000%
+how1-1440        size (1440, 918) bbox (0, 917, 1440, 918) max 3 >8: 0.000%
+how1-375         size (375, 989) bbox None max 0 >8: 0.000%
+how2-1440 SIZE (1440, 839) (1440, 838)
+how2-375         size (375, 853) bbox (16, 286, 359, 477) max 1 >8: 0.000%
+how3-1440        size (1440, 1270) bbox (1246, 681, 1301, 724) max 244 >8: 0.037%
+how3-375         size (375, 1160) bbox (0, 1159, 375, 1160) max 10 >8: 0.000%
+proof1-1440      size (1440, 972) bbox None max 0 >8: 0.000%
+proof1-375       size (375, 972) bbox None max 0 >8: 0.000%
+proof2-1440      size (1440, 1009) bbox None max 0 >8: 0.000%
+proof2-375       size (375, 1439) bbox None max 0 >8: 0.000%
+proof3-1440      size (1440, 1124) bbox None max 0 >8: 0.000%
+proof3-375       size (375, 928) bbox None max 0 >8: 0.000%
+work1-1440 SIZE (1440, 895) (1440, 894)
+work1-375        size (375, 720) bbox None max 0 >8: 0.000%
+work2-1440 SIZE (1440, 1014) (1440, 1013)
+work2-375        size (375, 1048) bbox None max 0 >8: 0.000%
+work3-1440 SIZE (1440, 818) (1440, 817)
+work3-375        size (375, 970) bbox (0, 969, 375, 970) max 231 >8: 0.103%
+
+## 2. mounted DOM + computed style of every visible element (bkdom.mjs)
+same hero V1/B1 @1440: elements 23/23, style rows differing 0
+  <h1 c | <div class="bhx bhx1" data-mood="umbrella" data-v="b1">
+  <h]
+same hero V2/B2 @1440: elements 76/76, style rows differing 0
+  <div  | <div class="bhx bhx2" data-mood="umbrella" data-v="b2">
+  <d]
+same hero V3/B3 @1440: elements 32/32, style rows differing 0
+  <figu | <div class="bhx bhx3" data-mood="umbrella" data-v="b3">
+  <f]
+same proof V1/B1 @1440: elements 13/13, style rows differing 0
+  <canvas class="pv1-cv" ari | <div class="bpv bpv1" data-v="b1">
+  <canvas class="bpv1-cv"]
+same proof V2/B2 @1440: elements 107/107, style rows differing 0
+  <svg class="pv2-bg" aria-h | <div class="bpv bpv2" data-v="b2">
+  <svg class="bpv2-bg" ar]
+DIFF proof V3/B3 @1440: elements 151/151, style rows differing 0 html@6366: «ght="0"><defs><filter id="pv3fkcjv1-0" x="-10%" y="-40%" width="120%" » vs «ght="0"><defs><filter id="pv3frvyxf-0" x="-10%" y="-40%" width="120%" »
+DIFF work V1/B1 @1440: elements 73/73, style rows differing 0 html@781: «cap="This house, before"><img src="data:image/webp;base64,UklGRsAXAQBX» vs «cap="This house, before"><img width="1024" height="684" data-img="ba2-»
+same work V2/B2 @1440: elements 44/44, style rows differing 0
+  <svg class="wv2-hip" aria- | <div class="bwv bwv2" data-v="b2">
+  <svg class="bwv2-hip" a]
+same work V3/B3 @1440: elements 12/12, style rows differing 0
+  <div class="wv-he | <div class="bwv bwv3 is-still" data-v="b3">
+  <div class="bw]
+DIFF family V1/B1 @1440: elements 35/35, style rows differing 0 html@70879: «ure class="fm1-photo ph"><img src="data:image/webp;base64,UklGRnTIAABX» vs «ure class="fm1-photo ph"><img width="1088" height="801" data-img="team»
+same family V2/B2 @1440: elements 26/26, style rows differing 0
+  <svg class="fm2-bg" viewBo | <div class="bfm bfm2" data-v="b2">
+  <svg class="bfm2-bg" vi]
+same family V3/B3 @1440: elements 57/57, style rows differing 0
+  <svg class="fm3-deck" aria | <div class="bfm bfm3" data-v="b3">
+  <svg class="bfm3-deck" ]
+same how V1/B1 @1440: elements 40/40, style rows differing 0
+  <svg class="hw1-rain" aria | <div class="bhw bhw1" data-v="b1">
+  <svg class="bhw1-rain" ]
+same how V2/B2 @1440: elements 109/109, style rows differing 0
+  <div class="hw2-in">
+    < | <div class="bhw bhw2" data-v="b2">
+  <div class="bhw2-in">
+ ]
+same how V3/B3 @1440: elements 68/68, style rows differing 0
+  <svg class="hw3-raft" aria | <div class="bhw bhw3" data-v="b3">
+  <svg class="bhw3-raft" ]
+same area V1/B1 @1440: elements 171/171, style rows differing 0
+  <div class="tw1-grid">
+    | <div class="btw btw1" data-v="b1">
+  <div class="btw1-grid">]
+same area V2/B2 @1440: elements 1370/1370, style rows differing 0
+  <svg class="tw2-plan" aria | <div class="btw btw2" data-v="b2">
+  <svg class="btw2-plan" ]
+same area V3/B3 @1440: elements 92/92, style rows differing 0
+  <svg class="tw3-vane" view | <div class="btw btw3" data-v="b3">
+  <svg class="btw3-vane" ]
+same call V1/B1 @1440: elements 33/33, style rows differing 0
+  <svg class="cl1-gut" viewB | <div class="bcl bcl1" data-v="b1">
+  <svg class="bcl1-gut" v]
+same call V2/B2 @1440: elements 24/24, style rows differing 0
+  <svg class="cl2-dusk" view | <div class="bcl bcl2" data-v="b2">
+  <svg class="bcl2-dusk" ]
+same call V3/B3 @1440: elements 32/32, style rows differing 0
+  <div class="cl3-top">
+     | <div class="bcl bcl3" data-v="b3">
+  <div class="bcl3-top">
+]
+same hero V1/B1 @375: elements 23/23, style rows differing 0
+  <h1 c | <div class="bhx bhx1" data-mood="umbrella" data-v="b1">
+  <h]
+same hero V2/B2 @375: elements 76/76, style rows differing 0
+  <div  | <div class="bhx bhx2" data-mood="umbrella" data-v="b2">
+  <d]
+same hero V3/B3 @375: elements 32/32, style rows differing 0
+  <figu | <div class="bhx bhx3" data-mood="umbrella" data-v="b3">
+  <f]
+same proof V1/B1 @375: elements 13/13, style rows differing 0
+  <canvas class="pv1-cv" ari | <div class="bpv bpv1" data-v="b1">
+  <canvas class="bpv1-cv"]
+same proof V2/B2 @375: elements 110/110, style rows differing 0
+  <svg class="pv2-bg" aria-h | <div class="bpv bpv2" data-v="b2">
+  <svg class="bpv2-bg" ar]
+DIFF proof V3/B3 @375: elements 147/147, style rows differing 0 html@2577: «ght="0"><defs><filter id="pv3f4hntx-0" x="-10%" y="-40%" width="120%" » vs «ght="0"><defs><filter id="pv3fpxgnp-0" x="-10%" y="-40%" width="120%" »
+DIFF work V1/B1 @375: elements 73/73, style rows differing 0 html@787: «cap="This house, before"><img src="data:image/webp;base64,UklGRsAXAQBX» vs «cap="This house, before"><img width="1024" height="684" data-img="ba2-»
+same work V2/B2 @375: elements 44/44, style rows differing 0
+  <svg class="wv2-hip" aria- | <div class="bwv bwv2" data-v="b2">
+  <svg class="bwv2-hip" a]
+same work V3/B3 @375: elements 12/12, style rows differing 0
+  <div class="wv-he | <div class="bwv bwv3 is-still" data-v="b3">
+  <div class="bw]
+DIFF family V1/B1 @375: elements 35/35, style rows differing 0 html@70879: «ure class="fm1-photo ph"><img src="data:image/webp;base64,UklGRnTIAABX» vs «ure class="fm1-photo ph"><img width="1088" height="801" data-img="team»
+same family V2/B2 @375: elements 26/26, style rows differing 0
+  <svg class="fm2-bg" viewBo | <div class="bfm bfm2" data-v="b2">
+  <svg class="bfm2-bg" vi]
+same family V3/B3 @375: elements 50/50, style rows differing 0
+  <svg class="fm3-deck" aria | <div class="bfm bfm3" data-v="b3">
+  <svg class="bfm3-deck" ]
+same how V1/B1 @375: elements 40/40, style rows differing 0
+  <svg class="hw1-rain" aria | <div class="bhw bhw1" data-v="b1">
+  <svg class="bhw1-rain" ]
+same how V2/B2 @375: elements 109/109, style rows differing 0
+  <div class="hw2-in">
+    < | <div class="bhw bhw2" data-v="b2">
+  <div class="bhw2-in">
+ ]
+same how V3/B3 @375: elements 68/68, style rows differing 0
+  <svg class="hw3-raft" aria | <div class="bhw bhw3" data-v="b3">
+  <svg class="bhw3-raft" ]
+same area V1/B1 @375: elements 148/148, style rows differing 0
+  <div class="tw1-grid">
+    | <div class="btw btw1" data-v="b1">
+  <div class="btw1-grid">]
+same area V2/B2 @375: elements 1352/1352, style rows differing 0
+  <svg class="tw2-plan" aria | <div class="btw btw2" data-v="b2">
+  <svg class="btw2-plan" ]
+same area V3/B3 @375: elements 92/92, style rows differing 0
+  <svg class="tw3-vane" view | <div class="btw btw3" data-v="b3">
+  <svg class="btw3-vane" ]
+same call V1/B1 @375: elements 33/33, style rows differing 0
+  <svg class="cl1-gut" viewB | <div class="bcl bcl1" data-v="b1">
+  <svg class="bcl1-gut" v]
+same call V2/B2 @375: elements 24/24, style rows differing 0
+  <svg class="cl2-dusk" view | <div class="bcl bcl2" data-v="b2">
+  <svg class="bcl2-dusk" ]
+same call V3/B3 @375: elements 32/32, style rows differing 0
+  <div class="cl3-top">
+     | <div class="bcl bcl3" data-v="b3">
+  <div class="bcl3-top">
+]
+DIFFERING 6/42
+
+## 3. image bytes for the two DOM diffs with images (bkimg.mjs)
+work 1 same images 
+  5b8406b4:1024:A brick home before  3f22c6ba:1024:The same brick home  7fd80c78:1600:A Tudor-style home u a539ba0f:1100:A brick ranch with a e140c37f:1280:A blue-sided home wi 196a481e:1100:The Rembrandt truck  
+  5b8406b4:1024:A brick home before  3f22c6ba:1024:The same brick home  7fd80c78:1600:A Tudor-style home u a539ba0f:1100:A brick ranch with a e140c37f:1280:A blue-sided home wi 196a481e:1100:The Rembrandt truck 
+family 1 same images 
+  4b9ed8bf:1088:The Rembrandt crew,  
+  4b9ed8bf:1088:The Rembrandt crew, 

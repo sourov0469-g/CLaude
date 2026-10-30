@@ -422,10 +422,20 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
 - **Done:**
   - Hero 274e55c: V1 to V3 fixed, V4 Stitched, V5 Poster, 10 rounds.
   - Reviews 4678046: V1 to V3 fixed, V4 Office wall, V5 Seal, 10 rounds.
-- **Next:** Work, Family, How, Towns, Call, Footer. Then the Part H report, written as REPORT-R3.md. Nothing is marked shipped.
+  - Work 106f4fd: V1 to V3 fixed, V4 Two jobs, V5 Job index, 10 rounds.
+  - Family 932faa7: V1 to V3 fixed, V4 Three cards, V5 Editorial panorama, 10 rounds.
+  - How 99d0a50: V1 to V3 fixed, V4 One house three states, V5 Three artefacts, 10 rounds.
+  - Towns 95ba8a4: V1 to V3 fixed (V3 grafted ring map), V4 Distance ruler, V5 Eight directions, 10 rounds.
+  - Call and footer b5f7690: V1 to V3 fixed, V4 Keypad, V5 Office status, footer as one NAP row, 10 rounds.
+- **Final gates (logs in `qa/gate/`):**
+  - facts PASS; dom 35/35 and switchers 35/35; sweep 25/25 runs clean; reduced 70/70; companion 70/70 (`qa/compint.log`); bkui PASS; weight 1789 KB (code 718 KB, 171 KB gzip).
+  - Gate scripts now cover 5 versions. compint checks for "no effect layer", because the per-section cursor effects are retired. domgate clicks each section's default label last.
+- **Backups, final:** after every pass, 36/42 have an identical mounted DOM and computed style. The 6 others differ only in image attribute order (same bytes) or a random filter id. Pixel noise is sub-pixel edge AA from the new divider frame (`qa/gate/r3-backups-final.log`; `bkdom.mjs`, `bkimg.mjs`, `bkcheck.mjs ... stage`).
+- **Part H:** REPORT-R3.md. Nothing is marked shipped; the file goes back for the screenshot audit.
 - **QA tools** (copy them to the scratchpad v7 to run):
   - `qa/scripts/r3qa.mjs <sec> 1,2,3,4,5`
   - `occl.mjs <sec> <vs>`
   - `look.mjs <w> <query> <out> <sec[@off]>` (scratchpad only)
-  - `bkui.mjs`, `bkcheck.mjs`, `pixdiff.py`, `heroR.mjs`, `proofR.mjs`
+  - `bkui.mjs`, `bkcheck.mjs`, `bkdom.mjs`, `bkimg.mjs`, `pixdiff.py`, `heroR.mjs`, `proofR.mjs`, `workR.mjs`, `famR.mjs`, `howR3.mjs`, `areaR.mjs`, `rulerR.mjs`, `callR.mjs`
+  - page gates: `domgate.mjs`, `sweep.mjs`, `rmgate.mjs`, `compint.mjs`, `weightgate.py`
   - `factsgate.py`: only B1 is exempt from the BBB wording.
