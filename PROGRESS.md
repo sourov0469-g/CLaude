@@ -404,3 +404,28 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
    - Source: `constellation()` body brace-matched and SHA-256 hashed, identical at e685bee and HEAD (752e073b…). This hash method differs from the earlier e7d174cd one, which hashed a different slice; both show identity.
    - `proof/v1.html`, `gl.js` and `spring.js`: 0 diff lines.
 9. **Weight:** 1509 KB total (951 KB gzip). Code 437 KB (markup 75 + CSS 92 + JS 271; 134 KB gzip). Media 1072 KB in 10 URIs. One scroll engine (Lenis); 0 ScrollTrigger pins; no MorphSVG, three.js or jQuery (`qa/gate/weight.log`).
+
+## R3: audit feedback pack (2026-10-30), running status
+- **Challenge log:** AUDIT-R3.md. **Traceability:** TRACEABILITY.md "R3" (rows before code; QA rounds per section).
+- **Infrastructure (d68ffc0):**
+  - B1 to B3 backups sit in `src/sections/<id>/bk/`, with frozen helpers in `src/js/frozen/`.
+  - All 42 are pixel-identical to the pre-round file (`qa/gate/r3-backups.log`).
+  - Each picker shows 1 to 5, a "more" button for the backups, and the B key.
+  - Defaults are the winners: hero 2, proof 2, work 1, family 1, how 3, area 3, call 1.
+- **Page systems:**
+  - Tokens: --cream, --on-dark-2, --t-hero / --t-h1 / --t-h2 (48/700) / --t-mark / --t-label.
+  - Hover gated; phone arcs and .97 press; switcher motion.
+  - Companion: springs, blink, 8 data-c signatures, label removed.
+  - Helper yields (250ms re-check). Dividers per boundary. Cursor effects retired.
+  - Focus ring: ink on light grounds, sun on dark (`data-tone`).
+- **Cadence lock:** hero cream / proof ink / work sky / family ink / how sky / area ink / call blue / footer ink.
+- **Done:**
+  - Hero 274e55c: V1 to V3 fixed, V4 Stitched, V5 Poster, 10 rounds.
+  - Reviews 4678046: V1 to V3 fixed, V4 Office wall, V5 Seal, 10 rounds.
+- **Next:** Work, Family, How, Towns, Call, Footer. Then the Part H report, written as REPORT-R3.md. Nothing is marked shipped.
+- **QA tools** (copy them to the scratchpad v7 to run):
+  - `qa/scripts/r3qa.mjs <sec> 1,2,3,4,5`
+  - `occl.mjs <sec> <vs>`
+  - `look.mjs <w> <query> <out> <sec[@off]>` (scratchpad only)
+  - `bkui.mjs`, `bkcheck.mjs`, `pixdiff.py`, `heroR.mjs`, `proofR.mjs`
+  - `factsgate.py`: only B1 is exempt from the BBB wording.
