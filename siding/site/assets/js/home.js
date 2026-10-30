@@ -1148,10 +1148,16 @@
      sits in a double-hung window: on change the lower sash rises over the old quote (0.14 s), the text swaps, and it
      drops away from the new one (0.16 s) while the words step in 0.03 s apart. Arrows, the buttons or a sideways
      swipe; position is the lit pane, never a number. */
-  V.reviews2 = (r, b) => {
-    const Q = JSON.parse($('.dh-data', r).textContent), fig = $('.dh', r), q = $('.dh-q', r), sash = $('.dh-sash', r), pips = $$('.pp', r);
-    let i = 0, busy = false;
-    const write = () => { q.innerHTML = `<p>“${Q[i].q}”</p><footer class="dh-n">${esc(Q[i].n)}<span>Google, 2026</span></footer>`; pips.forEach((p, k) => p.classList.toggle('on', k === i)); };
+  V.reviews2 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 2 keeps the marked names and the plain carousel (A.2)
+    const ALL = JSON.parse($('.dh-data', r).textContent), fig = $('.dh', r), q = $('.dh-q', r), sash = $('.dh-sash', r), pips = $$('.pp', r), cap = $('[data-dh-cap]', r);
+    const COUNT = { Kevin: 9, Garrett: 8, Tracy: 4, 'Paul Hale': 3, 'Paul Schantz': 2, Taylor: 2, Jake: 1, Jerry: 1, Maria: 1, Shorty: 1 };   // CREW_COUNT, home2.py
+    let Q = ALL, i = 0, busy = false;
+    const write = () => {
+      q.innerHTML = `<p>“${Q[i].q}”</p><footer class="dh-n">${esc(Q[i].n)}<span>Google, 2026</span></footer>`;
+      pips.forEach((p, k) => { p.classList.toggle('on', k === ALL.indexOf(Q[i])); p.classList.toggle('out', !Q.includes(ALL[k])); });
+      if (cap) { const c = Q[i].c || []; cap.textContent = c.length ? `${c.join(' and ')}: named in ${COUNT[c[0]]} of the 30 excerpts the firm publishes` : ''; }   // F8 V2.4
+    };
     const go = dir => {
       if (busy) return;
       i = (i + dir + Q.length) % Q.length;
@@ -1165,8 +1171,14 @@
     $$('.rb', r).forEach(x => b.on(x, 'click', () => go(+x.dataset.dir)));
     b.on(fig, 'keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
     let sx = null;
-    b.on(fig, 'pointerdown', e => { sx = e.clientX; });
+    b.on(fig, 'pointerdown', e => { if (e.target.closest('.rb')) return; sx = e.clientX; });
     b.on(fig, 'pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 50) go(e.clientX < sx ? 1 : -1); sx = null; });
+    /* F8 graft 2 (from V3): the crew chips filter the eight quotes to the ones naming that person; "All" restores */
+    $$('.dh-f', r).forEach(f => b.on(f, 'click', () => {
+      $$('.dh-f', r).forEach(x => x.setAttribute('aria-pressed', x === f));
+      const n = f.dataset.crew; Q = n ? ALL.filter(x => (x.c || []).includes(n)) : ALL; i = 0; busy = false; write();
+    }));
+    if (!bk) write();
   };
 
   /* REVIEWS 3: [BANK] 300 True Focus: four corner brackets travel to the focused word (0.3 s here, F17) and the other

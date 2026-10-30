@@ -1845,3 +1845,35 @@ html.motion .sec:not([data-bk]) .fd-list:not([hidden]) { animation: fdOpen 160ms
 .near-3[data-tone="night"] .dv-chip[aria-checked="true"] { background: var(--sheet); color: var(--ink); box-shadow: none; }
 .near-3[data-tone="night"] .dv-chip[aria-checked="true"] span { color: var(--ink2); }
 .near-3[data-tone="night"] .dv-card p span { color: var(--on-night2); }
+
+/* ================= F8 REVIEWS (Audit pack). Scoped off the backups. ================= */
+.rating .chk { margin-left: 8px; }
+/* V2: the H2 at the H2 step with the aggregate and its check link beside it; crew chips above the frame; the
+   controls ride in the frame's bottom rail; one step smaller quote; no dead volume */
+.sec:not([data-bk]) .reviews-2 { padding-bottom: clamp(48px, 6vw, 88px); }
+.dh-head { display: grid; gap: 12px; }
+.dh-head .rating { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; color: var(--fg2); }
+.dh-head .rating b { color: var(--fg); font-size: 1.5rem; font-weight: 780; }
+.dh-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; color: var(--ink2); font-size: var(--t-sm); }
+.dh-f { min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: transparent; font-weight: 650; transition: background-color 160ms var(--ease), transform 160ms var(--ease); }
+.dh-f[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.dh-f:active { transform: scale(.97); }
+.sec:not([data-bk]) .dh-q p { font-size: clamp(1.5rem, 1rem + 1.8vw, 2.5rem); max-width: 30ch; }
+.sec:not([data-bk]) .dh .dh-ctl { position: relative; z-index: 2; grid-column: 1 / -1; margin-top: 24px; }
+.sec:not([data-bk]) .rb { transition: background-color 160ms var(--ease), color 160ms var(--ease), transform 160ms cubic-bezier(0, 0, .2, 1); }
+.sec:not([data-bk]) .rb:active { transform: scale(.97); }
+.sec:not([data-bk]) .dh-pips .pp { transition: fill 160ms var(--ease), opacity 160ms var(--ease); }
+.dh-pips .pp.out { opacity: .25; }
+.dh-cap { margin: 0; min-height: 1.5em; color: var(--ink2); font-size: var(--t-sm); }
+.sec:not([data-bk]) .reviews-2 mark { box-shadow: none; font-weight: inherit; }
+@media (min-width: 900px) { .sec:not([data-bk]) .reviews-2 .dh-head, .sec:not([data-bk]) .reviews-2 .dh-filter, .sec:not([data-bk]) .reviews-2 .dh-cap { grid-column: 1 / 13; } .sec:not([data-bk]) .reviews-2 .dh { grid-column: 1 / 11; } }
+/* V1: one course of shakes; quotes are whole sentences without site emphasis; phones end at the standard gutter */
+.sec:not([data-bk]) .reviews-1 mark { box-shadow: none; font-weight: inherit; }
+@media (max-width: 639px) { .sec:not([data-bk]) .reviews-1 { padding-bottom: var(--m); } }
+/* V3: the aggregate pinned; names soften by opacity and weight, never blur; 180 ms; counts in the names */
+.cr-head .rating { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; color: var(--fg2); }
+.cr-head .rating b { color: var(--fg); font-size: 1.5rem; font-weight: 780; }
+.sec:not([data-bk]) .cr-n { transition: opacity 180ms cubic-bezier(.23, 1, .32, 1); }
+.sec:not([data-bk]) .cr-n.is-soft { filter: none; opacity: .38; font-weight: 650; }
+.cr-k { color: var(--ink2); font-size: .45em; font-weight: 650; vertical-align: .6em; }
+.cr-also { display: block; color: var(--ink2); font-size: .8125rem; }

@@ -803,3 +803,35 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 - 5 · Edge mask: ACCEPTED. A 4 % fade on the chip rail below 900 px (E.5).
 
 **V2, Town by town (weak):** mined, as the pack directs. Its per-town documented counts now drive V1's selection readout. Its other defects are logged for the QA rounds.
+
+## F8 · Reviews
+The review texts stay exactly as the firm publishes them, typos included. No sentence was rewritten; only where an excerpt starts and stops changed.
+
+**V2, One (winner).**
+- 1 · Dead volume and rail: ACCEPTED. The arrows and pane pips now sit inside the frame on its bottom rail, and the section's bottom padding drops to the standard 48–88 px. ⟦S1498⟧, ⟦S1473⟧ H6.
+- 2 · `transition: all`: REJECTED as a finding. `grep "transition: all"` over home.css and every script returns 0, and the quote has no CSS transition at all (GSAP tweens opacity/y on its words). The named-transition rule is still honoured on what does transition: `.rb`, `.dh-f` and the pips use opacity/background/transform at 160 ms. ⟦S0063⟧.
+- 3 · Quote size: ACCEPTED. The max goes from 3.25 rem to 2.5 rem (40 px), with a 30ch measure. ⟦S0650⟧ §4.10.
+- 4 · No emphasis inside the quote: ACCEPTED, and the caption IMPROVED.
+  - The `<mark>` is gone from the quote. The crew link is a caption outside the frame.
+  - The pack's wording "Jake: named in 3 of the 474" is REJECTED as unverifiable. The page can only count the 30 excerpts the firm publishes, and Jake appears in 1 of them. The caption reads "Jake: named in 1 of the 30 excerpts the firm publishes", computed from `CREW_COUNT`.
+  - ⟦S1306⟧.
+- 5 · Press states: ACCEPTED. 0.97 at 160 ms on the arrows and chips; the pips change in 160 ms. ⟦S0063⟧.
+- C.5 · Heading: the 23.9 px label H2 becomes a 64/780 H2, "What homeowners say", with the 4.9, the 98 % stars and 474 beside it.
+- GRAFT 1: ACCEPTED. "Read all 474 on Google ↗" points to the firm's own Google listing link (place_id), here and in V1 and V3. ⟦S1306⟧.
+- GRAFT 2: ACCEPTED. Above the frame sits "Named in these reviews: All 8 · Garrett · Tracy · Jake", which filters the carousel to the quotes naming that person (the pips of the others dim). The aggregate never leaves the view.
+- No auto-advance, progress bar or count-up was added.
+
+**V1, Stream.**
+- 1 · Row B: ACCEPTED, deleted. All 12 excerpts run in one course at the same 40 px/s, with every pause path kept. ⟦S0650⟧.
+- 2 · Excerpts: ACCEPTED. `sentence_cut()` ends every excerpt at a sentence end, aiming at ~90 characters. When the opening sentence is long, it picks the first complete sentence of 30–120 characters, with a leading "…". The firm's own cut-off sentences (ending in "…") are never used. ⟦S0650⟧ §4.10.
+- 3 · Stars: ACCEPTED, through C.9.
+- 4 · No `<b>`/`<mark>` in quotes: ACCEPTED.
+- 5 · Phone bottom padding: ACCEPTED, set to the gutter. ⟦S1498⟧.
+
+**V3, The crew.**
+- 1 · Aggregate pinned: ACCEPTED. 4.9, the 98 % stars, 474 and the Google link sit under the head in every state. ⟦S1306⟧.
+- 2 · Promise: ACCEPTED, reworded without the em dash the pack's own wording carried: "in their own words, shortened where you see …". Cuts already happen at word boundaries (`cut()` splits on spaces). The one mid-word ending was the firm's own published cut-off, and it is now never chosen as an opening. ⟦S1314⟧ §9.
+- 3 · Blur: ACCEPTED, replaced by opacity 0.38 plus weight 650. The brackets carry the selection. ⟦S1473⟧ H6.
+- 4 · Duplicates: ACCEPTED. Each review is filed once, under the person it names first. Its card says "+ also names Garrett, Maria". The cards drop from 32 to the unique set. ⟦S0220⟧ Axiom 3.
+- 5 · Transition: ACCEPTED. Opacity at 180 ms on `cubic-bezier(.23,1,.32,1)`. ⟦S0089⟧.
+- 6 · Uneven sets: ACCEPTED. Every name prints its count ("Jake · 1"). People with no review filed under them drop out of the line.

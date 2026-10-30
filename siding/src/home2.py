@@ -1021,7 +1021,39 @@ def at_name(text, n):
     return ('…' if a else '') + cut(text[a:], n)
 
 
-SOURCE = 'Google, 2026'   # where and when each excerpt was posted, as the firm publishes it (no number beside "review")
+def sentence_cut(text, n=90):
+    """F8 V1.2: an excerpt is a whole sentence (or two), never a fragment. The first sentence when it is short enough;
+    otherwise the first complete sentence of 30 to 120 characters, marked with a leading … where it is not the
+    opening; a review with no such sentence keeps its opening sentence whole."""
+    sents = [x.strip() for x in re.split(r'(?<=[.!?])\s+', text.strip()) if x.strip() and not x.strip().endswith(('…', '...'))]   # the firm's own cut-offs are not sentences
+    out = ''
+    for x in sents:
+        if len(out) + len(x) + 1 > n and out:
+            break
+        out = (out + ' ' + x).strip()
+        if len(out) >= n * 0.6:
+            break
+    if len(out) <= 120:
+        return out
+    for k, x in enumerate(sents):
+        if 30 <= len(x) <= 120:
+            return ('…' if k else '') + x
+    return sents[0]
+
+
+def crew_name(text):
+    """the crew member a review names FIRST in its text (F8 V3.4 files each review under one person)"""
+    hits = sorted((m.start(), n) for n, rx in CREW for m in [re.search(rx, text)] if m)
+    return hits[0][1] if hits else None
+
+
+SOURCE = 'Google, 2026'
+G_REVIEWS_URL = 'https://www.google.com/maps/place/?q=place_id:ChIJg1S9mOQrW4YREI2DIL1kcy0'   # the firm's own link to its Google listing (work/raw)
+
+
+def read_all(cls='chk'):
+    return (f'<a class="{cls}" href="{G_REVIEWS_URL}" target="_blank" rel="noopener">Read all 474 on Google<span aria-hidden="true"> ↗</span>'
+            '<span class="sr-only"> (opens in a new tab)</span></a>')   # where and when each excerpt was posted, as the firm publishes it (no number beside "review")
 
 
 STAR = '<path d="M10 1.6l2.47 5.3 5.8.62-4.32 3.93 1.2 5.7L10 14.3l-5.15 2.85 1.2-5.7L1.73 7.52l5.8-.62z"/>'
@@ -1055,13 +1087,13 @@ def reviews1():
     W = (300, 330, 286, 344, 312, 296)
 
     def card(r, k):
-        return (f'<figure class="sk" style="--w:{W[k % len(W)]}px">{shake(k)}<blockquote><p>“{mark(cut(r["text"], 100))}”</p></blockquote>'
+        return (f'<figure class="sk" style="--w:{W[k % len(W)]}px">{shake(k)}<blockquote><p>“{e(sentence_cut(r["text"]))}”</p></blockquote>'
                 f'<figcaption>{e(r["name"])}<span>{SOURCE}</span></figcaption></figure>')
     row = lambda rs, cls, k0: f'<div class="sk-row {cls}"><div class="sk-track">' + ''.join(card(r, k0 + k) for k, r in enumerate(rs)) + '</div></div>'
     return f'''<div class="v reviews-1" data-tone="ground">
-  <div class="sk-head"><h2 class="h2x" data-split>What homeowners write</h2><p class="rating"><b class="num">4.9</b>{stars()}<span>474 Google reviews</span></p>
+  <div class="sk-head"><h2 class="h2x" data-split>What homeowners write</h2><p class="rating"><b class="num">4.9</b>{stars()}<span>474 Google reviews</span> {read_all()}</p>
     <button class="btn btn-line btn-sm sk-pause" type="button" aria-pressed="false">Pause</button></div>
-  <div class="sk-rows" role="region" aria-label="Excerpts from Google reviews, as published on austinprosiding.com">{row(pick[:6], 'sk-a', 0)}{row(pick[6:], 'sk-b', 6)}</div>
+  <div class="sk-rows" role="region" aria-label="Excerpts from Google reviews, as published on austinprosiding.com">{row(pick, 'sk-a', 0)}</div>
 </div>'''
 
 
@@ -1081,19 +1113,26 @@ def reviews2():
     Position is shown as panes of the window lit in turn (no numbers)."""
     for i, q in ONE:
         assert q.rstrip('.!') in REVIEWS[i]['text'], (i, q)
-    data = json.dumps([dict(q=mark(q), n=REVIEWS[i]['name']) for i, q in ONE], ensure_ascii=False).replace('</', '<\\/')
+    # F8 V2.4: the words are the reviewer's, so the site adds no emphasis inside the quote; who it names is a caption
+    data = json.dumps([dict(q=e(q), n=REVIEWS[i]['name'], c=crew_of(q)) for i, q in ONE], ensure_ascii=False).replace('</', '<\\/')
     i0, q0 = ONE[0]
+    named = [n for n, _ in CREW if any(n in crew_of(q) for _i, q in ONE)]
+    chips = ''.join(f'<button type="button" class="dh-f" aria-pressed="false" data-crew="{e(n)}">{e(n)}</button>' for n in named)
+    cap0 = ' and '.join(crew_of(q0))
     panes = ''.join(f'<rect class="pp{" on" if k == 0 else ""}" x="{2 + (k % 4) * 9}" y="{2 + (k // 4) * 9}" width="8" height="8" rx="1"/>' for k in range(len(ONE)))
     return f'''<div class="v reviews-2" data-tone="ground2">
-  <h2 class="h2s">From 474 Google reviews, rated 4.9</h2>
+  <div class="dh-head"><h2 class="h2x" data-split>What homeowners say</h2>
+    <p class="rating"><b class="num">4.9</b>{stars()}<span>474 Google reviews</span> {read_all()}</p></div>
+  <div class="dh-filter" role="group" aria-label="Named in these reviews"><span>Named in these reviews:</span><button type="button" class="dh-f" aria-pressed="true" data-crew="">All {len(ONE)}</button>{chips}</div>
   <figure class="dh" tabindex="0" aria-roledescription="quote viewer" aria-label="Homeowner quotes; use the arrow keys or the buttons">
     <svg class="dh-frame" aria-hidden="true" focusable="false"><rect class="dh-case" width="100%" height="100%"/><line class="dh-meet" x1="0" y1="50%" x2="100%" y2="50%"/><svg y="100%" overflow="visible"><rect class="dh-sill" x="-14" y="-4" width="calc(100% + 28px)" height="12"/></svg></svg>
     <svg class="dh-sash" aria-hidden="true" focusable="false"><rect class="dh-glass" width="100%" height="100%"/><rect class="dh-rail" width="100%" height="12"/><rect class="dh-lift" x="46%" y="16" width="8%" height="6" rx="3"/></svg>
-    <blockquote class="dh-q" aria-live="polite"><p>“{mark(q0)}”</p><footer class="dh-n">{e(REVIEWS[i0]['name'])}<span>{SOURCE}</span></footer></blockquote>
+    <blockquote class="dh-q" aria-live="polite"><p>“{e(q0)}”</p><footer class="dh-n">{e(REVIEWS[i0]['name'])}<span>{SOURCE}</span></footer></blockquote>
+    <div class="dh-ctl"><button class="rb" type="button" data-dir="-1" aria-label="Previous quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <svg class="dh-pips" viewBox="0 0 38 20" aria-hidden="true" focusable="false">{panes}</svg>
+      <button class="rb" type="button" data-dir="1" aria-label="Next quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </figure>
-  <div class="dh-ctl"><button class="rb" type="button" data-dir="-1" aria-label="Previous quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <svg class="dh-pips" viewBox="0 0 38 20" aria-hidden="true" focusable="false">{panes}</svg>
-    <button class="rb" type="button" data-dir="1" aria-label="Next quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
+  <p class="dh-cap" data-dh-cap>{f"{e(cap0)}: named in {CREW_COUNT[crew_of(q0)[0]]} of the 30 excerpts the firm publishes" if cap0 else ""}</p>
   <script type="application/json" class="dh-data">{data}</script>
 </div>'''
 
@@ -1102,18 +1141,25 @@ def reviews3():
     """[BANK] 300 True Focus (React Bits: focus brackets travel to the next word, unfocused words blur) + anatomy F13
     (reviews that name the operative): the crew as homeowners name them; pointing or tabbing to a name moves the
     brackets there in 0.3 s and the verbatim excerpts that name them come up. No counts, no auto-cycle."""
-    names = ''.join(f'<button class="cr-n" type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" tabindex="{0 if k == 0 else -1}" data-name="{e(n)}">{e(n)}</button>' for k, (n, _) in enumerate(CREW))
+    # F8 V3.4/6: each review is filed once, under the person it names first; the name carries its own count
+    own = {n: [r for r in REVIEWS if crew_name(r['text']) == n] for n, _ in CREW}
+    crew = [(n, rx) for n, rx in CREW if own[n]]
+    names = ''.join(f'<button class="cr-n" type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" tabindex="{0 if k == 0 else -1}" data-name="{e(n)}">{e(n)}<span class="cr-k num"> · {len(own[n])}</span></button>' for k, (n, _) in enumerate(crew))
     def about(text, rx, n=240):
         # the excerpt opens at the sentence that names THIS person, so their name is always in view
         m = re.search(rx, text)
         starts = [x.end() for x in re.finditer(r'[.!?]\s+', text[:m.start()])]
         a = starts[-1] if starts else 0
         return ('…' if a else '') + cut(text[a:], n)
-    cards = ''.join(f'<li class="cr-c" tabindex="-1" data-name="{e(n)}"><blockquote><p>“{mark(about(r["text"], rx))}”</p></blockquote><p class="cr-by">{e(r["name"])}<span>{SOURCE}</span></p></li>'
-                    for n, rx in CREW for r in REVIEWS if re.search(rx, r['text']))
+    def also(r, n):
+        o = [x for x in crew_of(r['text']) if x != n]
+        return f'<span class="cr-also">+ also names {e(", ".join(o))}</span>' if o else ''
+    cards = ''.join(f'<li class="cr-c" tabindex="-1" data-name="{e(n)}"><blockquote><p>“{mark(about(r["text"], rx))}”</p></blockquote><p class="cr-by">{e(r["name"])}<span>{SOURCE}</span>{also(r, n)}</p></li>'
+                    for n, rx in crew for r in own[n])
     br = '<svg class="cr-br" aria-hidden="true" focusable="false"><path d="M2 14V2H14"/><svg x="100%" overflow="visible"><path d="M-2 14V2H-14"/></svg><svg y="100%" overflow="visible"><path d="M2 -14V-2H14"/></svg><svg x="100%" y="100%" overflow="visible"><path d="M-2 -14V-2H-14"/></svg></svg>'
     return f'''<div class="v reviews-3" data-tone="ground">
-  <div class="cr-head"><h2 class="h2x" data-split>The crew, as homeowners name them</h2><p class="cr-sub">Point at a name to read what people wrote about them, word for word.</p></div>
+  <div class="cr-head"><h2 class="h2x" data-split>The crew, as homeowners name them</h2><p class="cr-sub">Point at a name to read what people wrote about them, in their own words, shortened where you see …</p>
+    <p class="rating"><b class="num">4.9</b>{stars()}<span>474 Google reviews</span> {read_all()}</p></div>
   <div class="cr-line" role="radiogroup" aria-label="Crew members named in reviews">{names}{br}</div>
   <ul class="cr-cards" aria-live="polite">{cards}</ul>
   <button class="btn btn-line cr-more" type="button" hidden>Show the rest</button>
