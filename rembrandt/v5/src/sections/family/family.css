@@ -162,7 +162,7 @@
 
 /* ---------- R4 new versions (master directive Phase 5): v6 family tree, v7 name tags, v8 the ladder */
 .fm-h2{font-size:var(--t-h2);font-weight:700;line-height:1.08;letter-spacing:-.01em;font-family:var(--f-head);max-width:18ch;text-wrap:pretty}
-.fm6,.fm7,.fm8{padding-inline:var(--gutter)}
+.fm6,.fm7,.fm8{padding-inline:var(--gutter);padding-block:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .fm6{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(24px,4vw,72px);align-items:center;max-width:1280px;margin-inline:auto;box-sizing:content-box}
 .fm6-copy{display:grid;gap:16px;justify-items:start}
 .fm6-sub,.fm8-sub{font-size:var(--t-lead);line-height:1.45;max-width:36ch}

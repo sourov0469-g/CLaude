@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); const errs = []; p.on('pageerror', e => errs.push(e.message));
+const F = 'file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html?v=';
+await p.goto(F + 'how6'); await p.waitForTimeout(1200);
+await p.evaluate(() => document.getElementById('how').scrollIntoView()); await p.waitForTimeout(800);
+const tr = () => p.evaluate(() => document.querySelector('.hw6-truck').getAttribute('transform'));
+const t0 = await tr(); await p.click('.hw6-stop[data-i="2"]'); await p.waitForTimeout(900); const t2 = await tr();
+const st = await p.evaluate(() => [[...document.querySelectorAll('.hw6-stop')].map(b => b.getAttribute('aria-pressed')).join(), [...document.querySelectorAll('.hw6-card')].map(c => c.hidden ? 0 : 1).join(), [...document.querySelectorAll('.hw6-pin.is-on')].length]);
+await p.click('.hw6-stop[data-i="1"]'); await p.waitForTimeout(900); const t1 = await tr();
+console.log('v6 truck', t0, '->', t2, '->', t1, 'state', st);
+await p.goto(F + 'how7'); await p.waitForTimeout(1200); await p.evaluate(() => document.getElementById('how').scrollIntoView()); await p.waitForTimeout(800);
+await p.click('#hw7-t2'); const a = await p.evaluate(() => [...document.querySelectorAll('.hw7-sheet')].map(s => s.hidden ? 0 : 1).join());
+await p.keyboard.press('ArrowRight'); const b2 = await p.evaluate(() => [document.activeElement.id, [...document.querySelectorAll('.hw7-sheet')].map(s => s.hidden ? 0 : 1).join()]);
+await p.keyboard.press('Home'); const c = await p.evaluate(() => [document.activeElement.id, document.querySelector('#hw7-t1').getAttribute('aria-selected')]);
+console.log('v7 click t2', a, 'ArrowRight', b2, 'Home', c);
+console.log('errors', errs.length ? errs : 0); await b.close();

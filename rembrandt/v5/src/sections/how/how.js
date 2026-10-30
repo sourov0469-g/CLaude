@@ -153,4 +153,50 @@ function artefacts(root, c) {
   return () => st.kill();
 }
 
-export default { 1: spine, 2: pager, 3: verbs, 4: house, 5: artefacts };
+// R4 v6 (new) The drive over: three stops along a drawn road; picking one drives the truck there (a .6s tween along the
+// path via getPointAtLength), the travelled road fills in accent and that step's card shows. Reduced motion: it jumps.
+function drive(root, c) {
+  const road = root.querySelector('.hw6-road'), done = root.querySelector('.hw6-done'), tk = root.querySelector('.hw6-truck');
+  const pins = [...root.querySelectorAll('.hw6-pin')], btn = [...root.querySelectorAll('.hw6-stop')], cards = [...root.querySelectorAll('.hw6-card')];
+  const L = road.getTotalLength(), at = [0.02, 0.5, 0.98].map(f => f * L), pos = { l: at[0] };
+  pins.forEach((p, i) => { const q = road.getPointAtLength(at[i]); p.setAttribute('transform', `translate(${q.x} ${q.y + 30})`); });
+  done.style.strokeDasharray = `${L} ${L}`;
+  const place = () => { const q = road.getPointAtLength(pos.l); tk.setAttribute('transform', `translate(${q.x} ${q.y})`); done.style.strokeDashoffset = String(L - pos.l); };
+  let tw; const go = i => {
+    btn.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i))); cards.forEach((k, j) => { k.hidden = j !== i; });
+    pins.forEach((p, j) => p.classList.toggle('is-on', j <= i));
+    tw?.kill(); if (c.motion) tw = gsap.to(pos, { l: at[i], duration: 0.6, ease: EASE, onUpdate: place }); else { pos.l = at[i]; place(); }
+  };
+  place(); pins[0].classList.add('is-on');
+  const on = e => { const b = e.target.closest('.hw6-stop'); if (b) go(+b.dataset.i); };
+  root.addEventListener('click', on);
+  if (c.motion) beats(root, [root.querySelector('.hw6-head')]);
+  return () => { root.removeEventListener('click', on); tw?.kill(); };
+}
+// R4 v7 (new) The work order: a tablist over three carbon copies; arrows, Home and End move between tabs; the new sheet
+// drops in from the top edge (.24s) like a page torn off the pad
+function order(root, c) {
+  const tabs = [...root.querySelectorAll('.hw7-tab')], sh = [...root.querySelectorAll('.hw7-sheet')];
+  const show = (i, focus) => {
+    tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; }); sh.forEach((s, j) => { s.hidden = j !== i; });
+    if (focus) tabs[i].focus();
+    if (c.motion) gsap.fromTo(sh[i], { y: -18, rotate: -1.2, autoAlpha: 0 }, { y: 0, rotate: 0, autoAlpha: 1, duration: 0.24, ease: 'power2.out', clearProps: 'transform' });
+  };
+  const on = e => { const t = e.target.closest('.hw7-tab'); if (t) show(tabs.indexOf(t)); };
+  const key = e => { const i = tabs.indexOf(e.target); if (i < 0) return; const n = tabs.length;
+    const j = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key]; if (j === undefined) return; e.preventDefault(); show(j, true); };
+  root.addEventListener('click', on); root.addEventListener('keydown', key);
+  if (c.motion) beats(root, [root.querySelector('.hw7-head'), root.querySelector('.hw7-pad')]);
+  return () => { root.removeEventListener('click', on); root.removeEventListener('keydown', key); };
+}
+// R4 v8 (new) Up the slope: the three steps rise in order, low to high, 120ms apart; the ridge cap draws last (DrawSVG)
+function slope(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.hw8-head')]);
+  const s = root.querySelectorAll('.hw8-s'), cap = root.querySelector('.hw8-cap');
+  gsap.set(s, { autoAlpha: 0, y: 40 }); gsap.set(cap, { drawSVG: '0%' });
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.hw8-climb'), start: 'top 78%', once: true, onEnter: () =>
+    gsap.timeline().to(s, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'expo.out', stagger: 0.12 }).to(cap, { drawSVG: '100%', duration: 0.4, ease: EASE }, '-=0.1') });
+  return () => st.kill();
+}
+export default { 1: spine, 2: pager, 3: verbs, 4: house, 5: artefacts, 6: drive, 7: order, 8: slope };

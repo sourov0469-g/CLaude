@@ -304,3 +304,10 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | One family tree: a drawn trunk and branches (DrawSVG, once) carry three people in order, 1995 / 2015 / Today; on phones the trunk becomes a rail with the people along it | brand roof/brush line; ⟦S1325⟧ timeline | `qa/r4d-family-new6-1440.jpg`, `qa/r4d-family-new6-375.jpg` (first phone shot overlapped; fixed); errors 0 |
 | 7 | Three name tags ("Hello, my name is"): Bunk, Wade, Rachel, each with a one-line fact; the stickers slap on once, 90ms apart | ⟦S0095⟧ artefact | 1440 and 375 shots; errors 0 |
 | 8 | The ladder: an accent line climbs the ladder with scroll (scrubbed DrawSVG); 1995, 2015 and Today light as it passes; reduced motion shows all lit | ⟦S1325⟧ scroll progress | 1440 and 375 shots; errors 0 |
+
+### How, new V6-V8 (facts only: call Rachel, Mon-Fri 9-5; a written, line-by-line estimate before any work starts; Owens Corning Platinum Preferred, $2M liability insurance; no durations or prices)
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | The drive over: a drawn street with house blocks; three stop buttons drive the company truck along the road (getPointAtLength tween, .6s), the travelled road fills in accent and that step's card shows | business-only interactive (the firm comes to you); ⟦S1325⟧ path progress | `qa/scripts/howtest.mjs`: truck moves to stop 3 then back to 2, aria-pressed and cards follow; errors 0 |
+| 7 | One work order, three copies: a carbon-copy pad (white, then two tinted copies behind) with tabs; each copy carries one step as form rows | ⟦S0095⟧ artefact; WAI-ARIA tabs | `howtest.mjs`: click, ArrowRight and Home move tab, focus and sheet; errors 0 |
+| 8 | Up in three steps: the step cards climb a dashed roof slope; the third is the accent card; a ridge cap draws last | brand roof motif | `qa/r4d-how-new6-1440.jpg` set; 1440 and 375 shots; errors 0 |
