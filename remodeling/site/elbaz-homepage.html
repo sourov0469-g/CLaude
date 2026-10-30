@@ -800,6 +800,11 @@ html.has-buddy select { cursor: default !important; }
   background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
 }
 .hero1__lines svg { overflow: visible; }
+.hero1__notes svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hero1__note .dot { fill: #f2c230; stroke: #0B1418; stroke-width: 2; }
+.hero1__note .con { fill: none; stroke: #f1f7fc; stroke-width: 1.6; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
+.hero1__note .pill rect { fill: #0B1418; stroke: #f2c230; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.hero1__note .pill text { font: 600 18px/1 var(--f-text); letter-spacing: .05em; fill: #f1f7fc; text-transform: uppercase; }
 .hero1__lines line { stroke: #f1f7fc; stroke-width: 1.7; fill: none; vector-effect: non-scaling-stroke; }
 .hero1__slit { position: absolute; top: 0; bottom: 0; left: calc(var(--bx) - var(--bw) / 2); width: var(--bw); pointer-events: none; color: #eaf4fc; }
 .hero1__edge { position: absolute; top: 0; bottom: 0; width: 2px; background: #eaf4fc; box-shadow: 0 0 0 1px rgba(11, 20, 24, .35); }
@@ -2038,6 +2043,12 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         <div class="hero1__bp plate"><img data-img="k-fluted-hero" width="1600" height="1000" alt=""></div>
         <div class="hero1__grid"></div>
         <div class="hero1__lines plate"></div>
+        
+        <div class="hero1__notes plate"><svg viewBox="0 0 1600 1000" preserveAspectRatio="none">
+          <g class="hero1__note" data-ax="232" data-ay="404"><circle class="dot" cx="232" cy="404" r="7"/><path class="con" d="M232 404V294"/><g class="pill"><rect x="120" y="254" width="223" height="40" rx="20"/><text x="232" y="281" text-anchor="middle">Fluted cabinetry</text></g></g>
+          <g class="hero1__note" data-ax="458" data-ay="470"><circle class="dot" cx="458" cy="470" r="7"/><path class="con" d="M458 470V320"/><g class="pill"><rect x="346" y="280" width="223" height="40" rx="20"/><text x="458" y="307" text-anchor="middle">Pendant lighting</text></g></g>
+          <g class="hero1__note" data-ax="560" data-ay="790"><circle class="dot" cx="560" cy="790" r="7"/><path class="con" d="M560 790V470"/><g class="pill"><rect x="465" y="430" width="190" height="40" rx="20"/><text x="560" y="457" text-anchor="middle">Marble island</text></g></g>
+        </svg></div>
       </div>
       <div class="hero1__slit" aria-hidden="true">
         <span class="hero1__edge hero1__edge--l"></span><span class="hero1__edge hero1__edge--r"></span>
@@ -5325,7 +5336,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   };
 })();
 </script>
-<script>/* hero, PLAN-V3 §3. v1 rebuilt (Specia1ne slit + Smeulders ladder + Stroke Text), v2 kept and augmented,
+<script>/* hero. v1 rebuilt (Specia1ne slit + Smeulders ladder + Stroke Text; line layer = S1362 annotated wireframe), v2 owner keeper + proof line,
    v3 rebuilt (SENVA wordmark-as-hero + Depth Text on a drawn scaffold). */
 (function () {
   var html = document.documentElement;
@@ -5390,9 +5401,32 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       var acts = root.querySelector('.hero__acts').children;
       var block = root.querySelector('.hero1__block');
       linesEl.innerHTML = EZ.drawing('k-fluted-hero', { par: 'none' });
+      var notesEl = root.querySelector('.hero1__notes'), notes = Array.prototype.slice.call(notesEl.querySelectorAll('.hero1__note'));
       var lines = linesEl.querySelectorAll('line');
       var opt = { ar: 1.6, x: function () { return EZ.mobile() ? .6 : .5; }, y: .5 };
-      EZ.cover(k, frame, plate, opt); EZ.cover(k, frame, bp, opt); EZ.cover(k, frame, linesEl, opt);
+      EZ.cover(k, frame, plate, opt); EZ.cover(k, frame, bp, opt); EZ.cover(k, frame, linesEl, opt); EZ.cover(k, frame, notesEl, opt);
+      // [S1362] each annotation appears in stages when the slit reaches its part: dot, then the connector draws, then the pill
+      var slitEl = root.querySelector('.hero1__slit');
+      function stageNotes() {
+        var pr = notesEl.getBoundingClientRect(), sr = slitEl.getBoundingClientRect(), fr = frame.getBoundingClientRect();
+        notes.forEach(function (n) {
+          var x = pr.left + (+n.dataset.ax) / 1600 * pr.width, pw = (+n.querySelector('.pill rect').getAttribute('width')) / 1600 * pr.width;
+          // a pill shows only while it fits inside the slit, so it is never cut by the band's edge
+          var inBand = Math.abs(x - (sr.left + sr.width / 2)) < Math.max(10, (sr.width - pw) / 2 - 4) && x > fr.left && x < fr.right;
+          if (inBand === !!n._on) return;
+          n._on = inBand;
+          if (!k.motion) { gsap.set(n, { autoAlpha: inBand ? 1 : 0 }); return; }
+          gsap.killTweensOf([n, n.querySelector('.con'), n.querySelector('.pill'), n.querySelector('.dot')]);
+          if (inBand) {
+            gsap.timeline().set(n, { autoAlpha: 1 })
+              .fromTo(n.querySelector('.dot'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .15, ease: 'back.out(3)' })
+              .fromTo(n.querySelector('.con'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .22, ease: 'power2.out' }, .08)
+              .fromTo(n.querySelector('.pill'), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, duration: .2, ease: 'power2.out' }, .24);
+          } else gsap.to(n, { autoAlpha: 0, duration: .15 });
+        });
+      }
+      gsap.set(notes, { autoAlpha: 0 });
+      k.add(function () { notes.forEach(function (n) { n._on = false; }); gsap.set(notes, { clearProps: 'all' }); });
 
       // the slit: follows the pointer (lerp .12), settles at rest after 680ms still [BANK Specia1ne]
       var bx = null, tx = null, last = -1e9, dragging = false, sweeping = false;
@@ -5400,7 +5434,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       function setBx(v) { root.style.setProperty('--bx', v.toFixed(1) + 'px'); }
       k.add(function () { root.style.removeProperty('--bx'); root.style.removeProperty('--bwk'); });
       bx = rest(); setBx(bx);
-      k.ro(frame, function () { if (!loop) { bx = rest(); setBx(bx); } });
+      k.ro(frame, function () { if (!loop) { bx = rest(); setBx(bx); } requestAnimationFrame(stageNotes); });
+      requestAnimationFrame(stageNotes);
       var loop = null;
       if (k.motion) {
         loop = k.raf(function (dt, now) {
@@ -5409,6 +5444,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
           var target = idle || tx == null ? rest() : tx;
           bx += (target - bx) * (1 - Math.pow(1 - .12, dt * 60));
           setBx(bx);
+          stageNotes();
           if (idle && Math.abs(target - bx) < .3) { bx = target; setBx(bx); return false; }
         });
         function aim(e) {
@@ -5447,7 +5483,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
             var o = { v: frame.clientWidth * .08 };
             sweeping = true; bx = o.v; setBx(bx);
             tl.to(o, { v: rest(), duration: 1.6, ease: 'power2.inOut',
-              onUpdate: function () { if (dragging) { sweeping = false; return; } if (sweeping) { bx = o.v; setBx(bx); } },
+              onUpdate: function () { if (dragging) { sweeping = false; return; } if (sweeping) { bx = o.v; setBx(bx); stageNotes(); } },
               onComplete: function () { sweeping = false; } }, .6);
           }
         });

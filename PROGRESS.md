@@ -107,3 +107,9 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
 - Variants: hard hat, spirit level, traffic cone (new; the tape-measure variant retired because the tape belongs to Process V3), or No buddy. A stored "tape" choice falls back to the hard hat.
 - Fixed while testing: a control that fades in under a resting pointer was not re-classified → the companion now re-hit-tests every 350ms while the pointer rests. The buddy switcher showed in Settings under reduced motion and on touch tablets → hidden there.
 - `remodeling/src/tools/buddyqa.js`: 162 checks (3 variants × 30 versions × button/heading/image targets + leave), **0 fails, 0 console errors**; tip lands on the pointer to ±1px; text field keeps `cursor: text`; Off restores the system cursor; touch (375) → buddy off, tip off, cursor auto; reduced motion → buddy off, tip off, cursor auto.
+
+## v2 Phase 2 — Hero V1 flag 2 (traced lines now governed by ⟦S1362⟧)
+- Inside the X-ray slit the room's traced linework is now the ⟦S1362⟧ object: three annotation pills on dashed connector lines, each drawn in stages (dot .15s → connector .22s → pill .2s) when the slit reaches its part, and withdrawn when it leaves. A pill only shows while it fits wholly inside the band.
+- Labels use only the words FACTS.md gives this photograph ("Open kitchen with black fluted cabinetry, marble island and pendant lighting"): Fluted cabinetry · Pendant lighting · Marble island.
+- Evidence: centring the slit on each anchor shows each note (`visible` ×3, 0 page errors); screenshots in the scratchpad h1n2 set; the full hero set is re-shot in the gate.
+- Hero V2 untouched. Hero V3 untouched (DONE on audit).

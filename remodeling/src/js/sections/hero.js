@@ -1,4 +1,4 @@
-/* hero, PLAN-V3 §3. v1 rebuilt (Specia1ne slit + Smeulders ladder + Stroke Text), v2 kept and augmented,
+/* hero. v1 rebuilt (Specia1ne slit + Smeulders ladder + Stroke Text; line layer = S1362 annotated wireframe), v2 owner keeper + proof line,
    v3 rebuilt (SENVA wordmark-as-hero + Depth Text on a drawn scaffold). */
 (function () {
   var html = document.documentElement;
@@ -63,9 +63,32 @@
       var acts = root.querySelector('.hero__acts').children;
       var block = root.querySelector('.hero1__block');
       linesEl.innerHTML = EZ.drawing('k-fluted-hero', { par: 'none' });
+      var notesEl = root.querySelector('.hero1__notes'), notes = Array.prototype.slice.call(notesEl.querySelectorAll('.hero1__note'));
       var lines = linesEl.querySelectorAll('line');
       var opt = { ar: 1.6, x: function () { return EZ.mobile() ? .6 : .5; }, y: .5 };
-      EZ.cover(k, frame, plate, opt); EZ.cover(k, frame, bp, opt); EZ.cover(k, frame, linesEl, opt);
+      EZ.cover(k, frame, plate, opt); EZ.cover(k, frame, bp, opt); EZ.cover(k, frame, linesEl, opt); EZ.cover(k, frame, notesEl, opt);
+      // [S1362] each annotation appears in stages when the slit reaches its part: dot, then the connector draws, then the pill
+      var slitEl = root.querySelector('.hero1__slit');
+      function stageNotes() {
+        var pr = notesEl.getBoundingClientRect(), sr = slitEl.getBoundingClientRect(), fr = frame.getBoundingClientRect();
+        notes.forEach(function (n) {
+          var x = pr.left + (+n.dataset.ax) / 1600 * pr.width, pw = (+n.querySelector('.pill rect').getAttribute('width')) / 1600 * pr.width;
+          // a pill shows only while it fits inside the slit, so it is never cut by the band's edge
+          var inBand = Math.abs(x - (sr.left + sr.width / 2)) < Math.max(10, (sr.width - pw) / 2 - 4) && x > fr.left && x < fr.right;
+          if (inBand === !!n._on) return;
+          n._on = inBand;
+          if (!k.motion) { gsap.set(n, { autoAlpha: inBand ? 1 : 0 }); return; }
+          gsap.killTweensOf([n, n.querySelector('.con'), n.querySelector('.pill'), n.querySelector('.dot')]);
+          if (inBand) {
+            gsap.timeline().set(n, { autoAlpha: 1 })
+              .fromTo(n.querySelector('.dot'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .15, ease: 'back.out(3)' })
+              .fromTo(n.querySelector('.con'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .22, ease: 'power2.out' }, .08)
+              .fromTo(n.querySelector('.pill'), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, duration: .2, ease: 'power2.out' }, .24);
+          } else gsap.to(n, { autoAlpha: 0, duration: .15 });
+        });
+      }
+      gsap.set(notes, { autoAlpha: 0 });
+      k.add(function () { notes.forEach(function (n) { n._on = false; }); gsap.set(notes, { clearProps: 'all' }); });
 
       // the slit: follows the pointer (lerp .12), settles at rest after 680ms still [BANK Specia1ne]
       var bx = null, tx = null, last = -1e9, dragging = false, sweeping = false;
@@ -73,7 +96,8 @@
       function setBx(v) { root.style.setProperty('--bx', v.toFixed(1) + 'px'); }
       k.add(function () { root.style.removeProperty('--bx'); root.style.removeProperty('--bwk'); });
       bx = rest(); setBx(bx);
-      k.ro(frame, function () { if (!loop) { bx = rest(); setBx(bx); } });
+      k.ro(frame, function () { if (!loop) { bx = rest(); setBx(bx); } requestAnimationFrame(stageNotes); });
+      requestAnimationFrame(stageNotes);
       var loop = null;
       if (k.motion) {
         loop = k.raf(function (dt, now) {
@@ -82,6 +106,7 @@
           var target = idle || tx == null ? rest() : tx;
           bx += (target - bx) * (1 - Math.pow(1 - .12, dt * 60));
           setBx(bx);
+          stageNotes();
           if (idle && Math.abs(target - bx) < .3) { bx = target; setBx(bx); return false; }
         });
         function aim(e) {
@@ -120,7 +145,7 @@
             var o = { v: frame.clientWidth * .08 };
             sweeping = true; bx = o.v; setBx(bx);
             tl.to(o, { v: rest(), duration: 1.6, ease: 'power2.inOut',
-              onUpdate: function () { if (dragging) { sweeping = false; return; } if (sweeping) { bx = o.v; setBx(bx); } },
+              onUpdate: function () { if (dragging) { sweeping = false; return; } if (sweeping) { bx = o.v; setBx(bx); stageNotes(); } },
               onComplete: function () { sweeping = false; } }, .6);
           }
         });

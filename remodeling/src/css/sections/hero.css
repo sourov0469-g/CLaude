@@ -32,6 +32,11 @@
   background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
 }
 .hero1__lines svg { overflow: visible; }
+.hero1__notes svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hero1__note .dot { fill: #f2c230; stroke: #0B1418; stroke-width: 2; }
+.hero1__note .con { fill: none; stroke: #f1f7fc; stroke-width: 1.6; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
+.hero1__note .pill rect { fill: #0B1418; stroke: #f2c230; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.hero1__note .pill text { font: 600 18px/1 var(--f-text); letter-spacing: .05em; fill: #f1f7fc; text-transform: uppercase; }
 .hero1__lines line { stroke: #f1f7fc; stroke-width: 1.7; fill: none; vector-effect: non-scaling-stroke; }
 .hero1__slit { position: absolute; top: 0; bottom: 0; left: calc(var(--bx) - var(--bw) / 2); width: var(--bw); pointer-events: none; color: #eaf4fc; }
 .hero1__edge { position: absolute; top: 0; bottom: 0; width: 2px; background: #eaf4fc; box-shadow: 0 0 0 1px rgba(11, 20, 24, .35); }
