@@ -250,4 +250,41 @@ function directions(root, c) {
   if (c.motion) beats(root, [root.querySelector('.tw-h'), root.querySelector('.tw-note'), grid.children], { stagger: 0.04 });
 }
 
-export default { 1: map, 2: cards, 3: finder, 4: ruler, 5: directions };
+// R4 v6 (new) The county quilt: one stitched patch per county (largest first), its towns nearest first with their
+// miles; patches rise once, 70ms apart
+function quilt(root, c) {
+  const box = root.querySelector('.tw6-quilt'), by = {};
+  TOWNS.forEach(t => (by[t.county] ||= []).push(t));
+  Object.entries(by).sort((a, b) => b[1].length - a[1].length).forEach(([k, ts], i) => {
+    const p = document.createElement('section'); p.className = 'tw6-patch'; p.style.setProperty('--i', String(i % 4));
+    p.innerHTML = `<svg class="tw6-x" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4 L20 20 M20 4 L4 20"/></svg><h3 class="tw6-k">${k} County <span class="num">${ts.length}</span></h3><ul class="tw6-t" role="list">${ts.sort((a, b) => a.mi - b.mi).map(t => `<li>${t.name}<span class="num">${t.mi ? t.mi + ' mi' : 'Home'}</span></li>`).join('')}</ul>`;
+    box.append(p);
+  });
+  if (c.motion) { beats(root, [root.querySelector('.tw6-head')]); beats(root, [box.children], { stagger: 0.07 }); }
+}
+// R4 v7 (new) How far do we come: a range input (0 to 25 miles) grows a circle around the office on a true-bearing
+// plot (5 units a mile); the towns inside it light up and list, nearest first; the count is announced
+function radius(root, c) {
+  const r = root.querySelector('.tw7-r'), mi = root.querySelector('.tw7-mi'), zone = root.querySelector('.tw7-zone'), g = root.querySelector('.tw7-dots');
+  const list = root.querySelector('.tw7-list'), out = root.querySelector('.tw7-count'), K = 5;
+  const ts = [...TOWNS].sort((a, b) => a.mi - b.mi);
+  const dots = ts.map(t => { const a = t.brg * Math.PI / 180; return t.mi ? el('circle', { r: 4.2, cx: (Math.sin(a) * t.mi * K).toFixed(1), cy: (-Math.cos(a) * t.mi * K).toFixed(1), class: 'tw7-dot' }, g) : null; });
+  let tw; const set = () => {
+    const v = +r.value, n = ts.filter(t => t.mi <= v);
+    mi.textContent = String(v); out.textContent = n.length === 1 ? 'Just Springboro, our home town.' : `${n.length} of 24 towns inside ${v} miles.`;
+    dots.forEach((d, i) => d && d.classList.toggle('is-in', ts[i].mi <= v));
+    list.innerHTML = n.map(t => `<li>${t.name}<span class="num">${t.mi ? t.mi + ' mi' : 'Home'}</span></li>`).join('');
+    tw?.kill(); if (c.motion) tw = gsap.to(zone, { attr: { r: Math.max(v * K, 2) }, duration: 0.25, ease: EASE }); else zone.setAttribute('r', String(Math.max(v * K, 2)));
+  };
+  r.addEventListener('input', set); set();
+  if (c.motion) beats(root, [root.querySelector('.tw7-copy'), root.querySelector('.tw7-map')]);
+  return () => { r.removeEventListener('input', set); tw?.kill(); };
+}
+// R4 v8 (new) Town line to town line: a roadside sign per town (name, miles and direction, county), nearest first; the
+// signs go up once, 40ms apart. Springboro's sign is the accent one: home, 38 N Pioneer Blvd.
+function signs(root, c) {
+  const ul = root.querySelector('.tw8-signs');
+  ul.innerHTML = [...TOWNS].sort((a, b) => a.mi - b.mi).map(t => `<li class="tw8-s${t.mi ? '' : ' tw8-s--home'}"><span class="tw8-plate"><b class="tw8-name">${t.name}</b><span class="tw8-meta">${t.mi ? `${t.mi} mi ${dir(t.brg)}, ${t.county} County` : 'Home: 38 N Pioneer Blvd'}</span></span></li>`).join('');
+  if (c.motion) { beats(root, [root.querySelector('.tw8-head')]); beats(root, [ul.children], { stagger: 0.04 }); }
+}
+export default { 1: map, 2: cards, 3: finder, 4: ruler, 5: directions, 6: quilt, 7: radius, 8: signs };

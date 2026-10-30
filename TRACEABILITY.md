@@ -318,3 +318,10 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | After a storm, a checklist: six real checkboxes from the call to the written approval; each tick lays one shingle course on a drawn roof and the count is announced; the insurer's step is tinted (the one the firm does not control) | business-only interactive; ⟦S1013⟧ visible disclaimer | `qa/scripts/stormtest.mjs`: 3 ticks (mouse and Space) give 3 of 6 and 3 courses; untick gives 2; errors 0 |
 | 7 | What to look for: four marks on a drawn house (torn tabs, a dented vent, grit at the downspout, a fallen limb); each mark shows its note; idle marks pulse (off under reduced motion) | ⟦S1362⟧ annotated drawing; storm photos in V4 show the same damage | `stormtest.mjs`: each mark selects its own note; targets 44x44; `qa/r4d-storm-new7-1440.jpg`; errors 0 |
 | 8 | What you get after we look: a storm inspection sheet (the firm's own storm photos, a line-item scope as blank lines, no figures) stamped "Your insurer decides the claim" | ⟦S0095⟧ artefact; ⟦S1013⟧ | 1440 and 375 shots; errors 0 |
+
+### Towns, new V6-V8 (every value from data/towns.js: the firm's 24 towns, Census positions, county FIPS; nothing typed by hand)
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | Five counties, one quilt: one stitched patch per county, largest first, towns nearest first with miles | Hippo doctrine (genuinely local); craft motif | `qa/scripts/areatest.mjs`: Montgomery 8, Warren 7, Greene 5, Butler 3, Clinton 1 = 24; errors 0 |
+| 7 | How far do we come: a range input (0-25 mi) grows a circle around the office on a true-bearing plot; the towns inside light up and list; the count is announced | business-only interactive; ⟦S1325⟧ | `areatest.mjs`: 0 mi = Springboro only, 5 = 3, 25 = 24, keys to 10 = 12; `qa/r4d-area-new7-1440.jpg`; errors 0 |
+| 8 | Town line to town line: a roadside sign per town (miles, direction, county), nearest first; Springboro's sign is the accent one with the office address | roadside sign artefact | `areatest.mjs`: 24 signs; 1440 and 375 shots; errors 0 |

@@ -186,3 +186,38 @@
 .tw5-home svg{width:40px;height:40px}
 .tw5-home b{font-size:1.25rem}
 @media (max-width:760px){.tw5-grid{grid-template-columns:1fr}.tw5-home{order:-1;min-height:0}}
+
+/* ---------- R4 new versions (master directive Phase 5): v6 county quilt, v7 how far do we come, v8 town signs */
+.tw6,.tw7,.tw8{max-width:1280px;margin-inline:auto;box-sizing:content-box;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar));display:grid;gap:clamp(24px,3.6vw,44px)}
+.tw6-head,.tw8-head{display:grid;gap:12px}
+.tw6-quilt{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 2px var(--black)}
+.tw6-patch{position:relative;display:grid;align-content:start;gap:12px;padding:22px 22px 26px;background:var(--paper);outline:2px dashed var(--a400);outline-offset:-10px}
+.tw6-patch:nth-child(4n+2){background:var(--a50)}.tw6-patch:nth-child(4n+3){background:var(--a100)}.tw6-patch:nth-child(4n){background:var(--a200)}
+.tw6-x{position:absolute;right:16px;top:16px;width:18px;height:18px}.tw6-x path{stroke:var(--a700);stroke-width:3;stroke-linecap:round}
+.tw6-k{font:700 1.25rem/1.2 var(--f-head);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding-right:26px}.tw6-k .num{font-size:.9375rem;color:var(--a700)}
+.tw6-t,.tw7-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tw6-t li,.tw7-list li{display:flex;justify-content:space-between;gap:12px;padding-bottom:6px;border-bottom:1px solid rgb(20 20 20 / .12);font-weight:600}
+.tw6-t .num,.tw7-list .num{font-weight:600;color:var(--n700)}
+
+.tw7-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,5fr);gap:clamp(24px,5vw,80px);align-items:start}
+.tw7-copy{display:grid;gap:14px}
+.tw7-lab{font:600 1.0625rem var(--f-head);margin-top:6px}.tw7-lab b{font-size:1.5rem;color:var(--a700)}
+.tw7-r{width:100%;height:44px;accent-color:var(--a500);cursor:pointer}
+.tw7-count{font:700 1.125rem var(--f-head)}
+.tw7-list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;max-height:340px;overflow:auto;padding-right:6px}
+.tw7-map{width:100%;max-width:560px;justify-self:center;height:auto;overflow:visible}
+.tw7-ring{fill:none;stroke:var(--a200);stroke-width:1;stroke-dasharray:3 4}
+.tw7-zone{fill:var(--a500);fill-opacity:.14;stroke:var(--a500);stroke-width:2}
+.tw7-dot{fill:var(--n300);transition:fill .15s var(--ease-x)}.tw7-dot.is-in{fill:var(--a700)}
+.tw7-home path{fill:var(--black)}
+@media (max-width:899px){.tw7-grid{grid-template-columns:1fr}.tw7-map{grid-row:2;max-width:360px}}
+
+.tw8-signs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:clamp(18px,2.4vw,30px) clamp(14px,2vw,24px)}
+.tw8-s{display:grid;justify-items:center}
+.tw8-s::after{content:"";width:8px;height:28px;background:var(--n500);border-radius:0 0 3px 3px}
+.tw8-plate{display:grid;gap:4px;width:100%;padding:12px 14px;text-align:center;background:var(--paper);border-radius:8px;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 5px var(--black),0 14px 24px -18px rgb(20 20 20 / .5)}
+.tw8-name{font:700 1.125rem/1.15 var(--f-head)}
+.tw8-meta{font-size:.875rem;color:var(--n700)}
+.tw8-s--home .tw8-plate{background:var(--a500);box-shadow:inset 0 0 0 3px var(--a500),inset 0 0 0 5px var(--black)}
+.tw8-s--home .tw8-meta{color:var(--black)}
+@media (max-width:520px){.tw7-list{grid-template-columns:1fr}.tw8-plate{padding:10px 8px}.tw8-name{font-size:1rem}.tw8-meta{font-size:.8125rem}}
