@@ -4,29 +4,29 @@
 .fm{position:relative;overflow:clip}
 
 /* ---------- v1: ink field, the name as a window onto the crew */
-.fm1{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"stage stage" "copy photo";column-gap:clamp(28px,4vw,56px);row-gap:clamp(28px,4vw,48px);max-width:1352px;margin-inline:auto;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.fm1{--vbg:var(--a50);background:var(--a50);color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"stage stage" "copy photo";column-gap:clamp(28px,4vw,56px);row-gap:clamp(28px,4vw,48px);max-width:1352px;margin-inline:auto;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .fm1-stage{grid-area:stage;max-width:1240px;width:100%;margin:0 auto}
 .fm1-name{width:100%;height:auto;overflow:visible} /* R3 P6: no static will-change */
 .fm1-tx,.fm1-rim{font:900 300px/1 var(--f-head);letter-spacing:-.01em;font-family:var(--f-head)}
 .fm1-under{fill:var(--blue)}
-.fm1-rim{fill:none;stroke:oklch(1 0 0 / .55);stroke-width:2;vector-effect:non-scaling-stroke}
-.fm1-frame path,.fm1-frame rect{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fm1-rim{fill:none;stroke:rgb(20 20 20 / .55);stroke-width:2;vector-effect:non-scaling-stroke}
+.fm1-frame path,.fm1-frame rect{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .fm1-frame .fm1-plate{stroke:var(--sun);stroke-width:5}
 .fm1-frame .fm1-raf{stroke-width:5}
-.fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-web{stroke:oklch(1 0 0 / .55)}
+.fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-web{stroke:rgb(20 20 20 / .55)}
 .fm1-frame .fm1-ridge{fill:var(--ink)}
 .fm1-copy{grid-area:copy;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:24px;width:100%}
 .fm1-h{grid-column:1/-1;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 /* R3 P7 (S1325): a 2px rail beside the facts fills sun as they pass */
 .fm1-facts{position:relative;list-style:none;margin:0;padding:0 0 0 22px;display:grid;gap:12px;font-size:var(--t-lead);line-height:1.4}
-.fm1-facts::before,.fm1-facts::after{content:"";position:absolute;left:0;top:.35em;bottom:.35em;width:2px;background:oklch(1 0 0 / .18)}
+.fm1-facts::before,.fm1-facts::after{content:"";position:absolute;left:0;top:.35em;bottom:.35em;width:2px;background:rgb(20 20 20 / .18)}
 .fm1-facts::after{background:var(--sun);transform-origin:50% 0;transform:scaleY(var(--rail,1))}
 .fm1-facts li{display:grid;grid-template-columns:5.2ch minmax(0,1fr);gap:16px;align-items:baseline}
 .fm1-facts b{color:var(--sun);font-weight:700}
 .fm1-call{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 22px 0 14px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
 .fm1-ico{width:32px;height:32px;flex:none;overflow:visible}
 .fm1-ico-r{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.fm1-ico-w{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.fm1-ico-w{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
 .fm1-ico-win{fill:var(--sky);stroke:var(--ink);stroke-width:1.5;transition:fill .18s var(--ease-x)}
 .fm1-ico-door{fill:var(--ink);transform-origin:0 50%;transform-box:fill-box}
 @media (hover:hover) and (pointer:fine){.fm1-call:hover .fm1-ico-win{fill:var(--sun)}}
@@ -44,9 +44,9 @@
 @media (max-width:767px){.fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-ridge{display:none}}
 
 /* ---------- v2: warm white, the statement sharpens word by word while a roof draws over it */
-.fm2{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,9rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,9rem) + var(--mbar))}
+.fm2{--vbg:var(--a50);background:var(--a50);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,9rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,9rem) + var(--mbar))}
 .fm2-bg{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
-.fm2-bg path{fill:oklch(1 0 0 / .05)}
+.fm2-bg path{fill:rgb(20 20 20 / .05)}
 .fm2-grid{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:center;max-width:1280px;margin:0 auto}
 .fm2-photo{position:relative;margin:0}
 /* a plain frame: Hero V2 already crops its photo to a roof pitch, so this one does not (§4, no trick twice) */
@@ -54,7 +54,7 @@
 .fm2-pic img{width:100%;height:100%;object-fit:cover;object-position:46% 52%}
 .fm2-text{display:grid;gap:28px}
 .fm2-house{width:min(100%,560px);height:auto;overflow:visible}
-.fm2-ridge,.fm2-eave{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fm2-ridge,.fm2-eave{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .fm2-eave{stroke:var(--sun);stroke-width:5}
 .fm2-courses path{stroke:var(--chalk);stroke-width:7;opacity:.55}
 .fm2-say{font-size:var(--t-h2);font-weight:700;line-height:1.08;letter-spacing:-.01em;max-width:20ch;text-wrap:pretty;font-family:var(--f-head)}
@@ -73,9 +73,9 @@
 @media (max-width:860px){.fm2-grid{grid-template-columns:1fr}.fm2-photo{max-width:420px}}
 
 /* ---------- v3: blueprint blue, a king-post truss whose members carry the facts; plywood deck behind */
-.fm3{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,8rem) + var(--mbar))}
+.fm3{--vbg:var(--a50);background:var(--a50);color:var(--ink);padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,8rem) + var(--mbar))}
 .fm3-deck{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-#fm3-ply path{fill:none;stroke:oklch(1 0 0 / .08);stroke-width:1.5}
+#fm3-ply path{fill:none;stroke:rgb(20 20 20 / .08);stroke-width:1.5}
 .fm3-deck--hi{inset:auto;left:0;top:0;width:440px;height:440px;will-change:transform;opacity:0;-webkit-mask-image:radial-gradient(circle 180px at 50% 50%,#000,transparent);mask-image:radial-gradient(circle 180px at 50% 50%,#000,transparent);filter:brightness(1.6);transition:opacity .3s var(--ease-x)}
 /* a 440px window that moves on the compositor; the pattern inside is counter-shifted so it stays registered to the deck */
 .fm3.is-ptr .fm3-deck--hi{opacity:1}
@@ -84,15 +84,15 @@
 .fm3-note{font-size:var(--t-lead);line-height:1.4;color:var(--on-dark-2);max-width:46ch}
 .fm3-stage{position:relative;max-width:1100px;margin:0 auto;padding:56px 0 76px}
 .fm3-truss{width:100%;height:auto;overflow:visible}
-.m{fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;cursor:pointer;transition:stroke .22s var(--ease-x),opacity .22s var(--ease-x)}
+.m{fill:none;stroke:var(--ink);stroke-width:9;stroke-linecap:round;stroke-linejoin:round;cursor:pointer;transition:stroke .22s var(--ease-x),opacity .22s var(--ease-x)}
 .m--plate{fill:var(--sun);stroke:var(--ink);stroke-width:2.5}
 .fm3-truss.has-m .m{opacity:.55}
 .fm3-truss.has-m .m.is-on{opacity:1;stroke:var(--sun)}
-.fm3-truss.has-m .m--plate.is-on{stroke:var(--ink);fill:#fff}
-.fm3-leads path{fill:none;stroke:oklch(1 0 0 / .7);stroke-width:1.6;stroke-dasharray:5 6;vector-effect:non-scaling-stroke}
+.fm3-truss.has-m .m--plate.is-on{stroke:var(--ink);fill:var(--paper)}
+.fm3-leads path{fill:none;stroke:rgb(20 20 20 / .7);stroke-width:1.6;stroke-dasharray:5 6;vector-effect:non-scaling-stroke}
 .fm3-leads path.is-on{stroke:var(--sun);stroke-dasharray:none;stroke-width:2.4}
 .fm3-pills{position:absolute;inset:0;pointer-events:none}
-.fm3-pill{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:2px solid #fff;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:.9375rem;white-space:nowrap;cursor:pointer;transition:background-color .18s var(--ease-x),color .18s var(--ease-x),border-color .18s var(--ease-x)}
+.fm3-pill{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:2px solid var(--paper);border-radius:999px;background:var(--a100);color:var(--ink);font-weight:700;font-size:.9375rem;white-space:nowrap;cursor:pointer;transition:background-color .18s var(--ease-x),color .18s var(--ease-x),border-color .18s var(--ease-x)}
 .fm3-pill b{color:var(--sun)}
 .fm3-pill:nth-child(3){translate:0 -50%}.fm3-pill:nth-child(4){translate:-100% -50%}
 @media (hover:hover) and (pointer:fine){.fm3-pill:hover{border-color:var(--sun)}}
@@ -102,9 +102,9 @@
    stays while the pill is pinned */
 .fm3-leads path.is-on{filter:drop-shadow(0 0 5px var(--sun))}
 .fm3-tack{position:absolute;left:14px;top:-15px;width:14px;height:22px;overflow:visible;opacity:0;translate:0 -10px;pointer-events:none;transition:opacity .15s var(--ease-x),translate .25s var(--ease-x)}
-.fm3-tack-s{fill:none;stroke:#c9cfdb;stroke-width:2.4;stroke-linecap:round}
-.fm3-tack-h{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.4}
-.fm3-tack-g{fill:none;stroke:#fff;stroke-width:1.2;stroke-linecap:round}
+.fm3-tack-s{fill:none;stroke:var(--n300);stroke-width:2.4;stroke-linecap:round}
+.fm3-tack-h{fill:var(--n300);stroke:var(--ink);stroke-width:1.4}
+.fm3-tack-g{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-linecap:round}
 .fm3-pill[aria-pressed="true"] .fm3-tack{opacity:1;translate:0 0}
 .fm3-pill[aria-pressed="true"].is-press .fm3-tack{animation:fm-tack .3s cubic-bezier(.3,1.6,.5,1)}
 @keyframes fm-tack{0%{translate:0 -16px;opacity:0}55%{translate:0 2px;opacity:1}100%{translate:0 0}}
@@ -124,7 +124,7 @@
 
 /* ---------- v4 (R3, new): three cards. [BANK] Harvest [201] CSS flip card: perspective 1000px, preserve-3d, backface
    hidden, the back at rotateY(180deg), a class toggle on click; .4s ease-out there, .36s --ease-x here. */
-.fm4{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.fm4{--vbg:var(--a50);background:var(--a50);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .fm4-in{max-width:1240px;margin:0 auto}
 .fm4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .fm4-note{margin-top:12px;font-size:var(--t-lead);color:var(--on-dark-2)}
@@ -133,7 +133,7 @@
 .fm4-card{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;transition:transform .36s var(--ease-x)}
 .fm4-card[aria-pressed="true"]{transform:rotateY(180deg)}
 .fm4-face{position:absolute;inset:0;display:grid;align-content:space-between;padding:clamp(18px,2.2vw,28px);background:var(--cream);border-radius:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 22px 40px -24px oklch(0 0 0 / .7)}
-.fm4-back{transform:rotateY(180deg);background:#fff;align-content:center}
+.fm4-back{transform:rotateY(180deg);background:var(--paper);align-content:center}
 .fm4-y{font-size:clamp(2.5rem,4.4vw,4rem);font-weight:700;line-height:1;letter-spacing:-.015em;color:var(--blue);font-family:var(--f-head)}
 .fm4-n{font-size:clamp(1.375rem,1rem + 1vw,1.75rem);font-weight:700;line-height:1.1;font-family:var(--f-head)}
 .fm4-r{font-size:var(--t-label);font-weight:600;color:var(--muted)}
@@ -148,11 +148,11 @@
 
 /* ---------- v5 (R3, new): editorial panorama. S1354 agency-grid-layout-minimal: a strict grid, the headline across most of
    it, a narrow metadata column (the page's label role, not caps), a panoramic image block that settles once. */
-.fm5{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.fm5{--vbg:var(--a50);background:var(--a50);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .fm5-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:24px;max-width:1440px;margin:0 auto;padding:0 var(--gutter);align-items:end}
 .fm5-h{grid-column:1 / span 7;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .fm5-meta{grid-column:9 / span 4;margin:0;display:grid;gap:0}
-.fm5-row{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid oklch(1 0 0 / .16)}
+.fm5-row{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid rgb(20 20 20 / .16)}
 .fm5-row dt{font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
 .fm5-row dd{margin:0;font-size:1.0625rem;line-height:1.4}
 .fm5-call{grid-column:9 / span 4;justify-self:start;display:inline-flex;align-items:center;min-height:48px;font-weight:700;color:var(--sun);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}

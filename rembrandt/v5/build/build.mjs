@@ -56,6 +56,9 @@ const ICONS = {
   ICON_SSIDING: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="ic-f" d="M8 10h32v28H8z"/><path d="M8 10h32v28H8zM8 17h32M8 24h32M8 31h32"/></svg>',
   ICON_SGUTTER: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M4 12 24 4l20 8"/><path class="ic-f" d="M6 14h36v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"/><path d="M6 14h36v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3zM36 22v16"/><path class="ic-f" d="M36 42c-2 0-3-1.4-3-3 0-2 3-5 3-5s3 3 3 5c0 1.6-1 3-3 3z"/></svg>',
 };
+// R4 brand (owner redesign directive, AUDIT-R4.md §4): the new logo, inline SVG from assets/brand/logo.svg. The name
+// stays "Rembrandt Roofing & Restoration"; the role/label sit on the link, so the drawing is aria-hidden here.
+ICONS.ICON_LOGO = fs.readFileSync(path.join(V5, 'assets', 'brand', 'logo.svg'), 'utf8').trim().replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg class="logo" aria-hidden="true" focusable="false"').replace(/ role="img" aria-label="[^"]*"/, '');
 const icons = s => s.replace(/ICON_[A-Z]+/g, k => { if (!ICONS[k]) throw new Error('unknown icon ' + k); return ICONS[k]; });
 
 // ---------- images: each photo is embedded once

@@ -15,10 +15,11 @@
 // (S0089); rest offset +34/+34 and 35% opacity while the pointer is down (S1314 §7, occlusion); no heading reactions and
 // no hover loops (S0063 frequency, S1314 §8); eight data-c hooks with their own signatures (S1448, S1314 §7), drawn in
 // the companion's own layers so they work for House, Hammer and Drop alike.
+// R4 brand: colour constants below mirror the CSS tokens (--black, --ink-2, --a700, --a500, --a300, --line), since SVG attributes set from JS cannot read custom properties.
 import { gsap } from 'gsap';
 
 const NS = 'http://www.w3.org/2000/svg';
-const INK = '#0b1f4d', BLUE = '#1a4199', SUN = '#ffb81f', SKY = '#dce4f3', CHALK = '#6f9be8', SH = '#3a4152';
+const INK = '#141414', BLUE = '#b53a0e', SUN = '#ff5a1f', SKY = '#ece3dc', CHALK = '#ffa27a', SH = '#2b2b2b';
 const eye = (x, y, r, lid) => `<g class="eye"><circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${INK}" stroke-width="2"/><circle class="p" cx="${x}" cy="${y}" r="${(r * 0.5).toFixed(1)}" fill="${INK}"/><circle class="lid" cx="${x}" cy="${y}" r="${r + 0.6}" fill="${lid}"/></g>`;
 export const VARIANTS = {
   house: { name: 'House', svg: `

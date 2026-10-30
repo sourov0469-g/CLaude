@@ -22,7 +22,7 @@ const inView = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.i
 // wind); the reference's sweep runs once on load, and a press anywhere on the wall sends a flip wave out from that
 // point. Canvas 2D, drawn only while something moves; it sleeps at rest and off screen.
 const WALL = { falloff: 1.4, depth: 80, tilt: 28, flip: 0.75, bounce: 0.15, sweep: 2.6, sweepPow: 4, noise: 2 };
-const SHADES = { under: '#0b1f4d', dark: ['#202a40', '#2b3650', '#323e5a'], front: ['#cfc6b1', '#ece5d3', '#f6f1e4'], rear: ['#e09a00', '#ffb81f', '#ffc94f'] };
+const SHADES = { under: '#ffe6d9', dark: ['#ffffff', '#fff4ee', '#ffe6d9'], front: ['#141414', '#2b2b2b', '#4a4542'], rear: ['#e8470f', '#ff5a1f', '#ff7c4a'] }; // R4 brand: a light tile field (white, --a50, --a100), letters in the accent, backs black
 function wall(root, c) {
   const host = root.querySelector('.hx1-wall'), plate = root.querySelector('.hx1-plate'), cv = root.querySelector('.hx1-cv');
   const ctx = cv.getContext && cv.getContext('2d');

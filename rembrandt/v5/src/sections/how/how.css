@@ -14,7 +14,7 @@
 .hw1-body{position:relative;padding-left:92px}
 .hw1-pipe{position:absolute;left:0;top:0;width:92px;height:100%;overflow:visible;pointer-events:none}
 .hw1-gut{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.hw1-tube{fill:#fff;stroke:var(--ink);stroke-width:3}
+.hw1-tube{fill:var(--paper);stroke:var(--ink);stroke-width:3}
 .hw1-water{fill:var(--chalk)}
 .hw1-hangers path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transition:transform .15s var(--ease-x),stroke .15s var(--ease-x)}
 .hw1-hangers path.is-on{stroke:var(--blue)}
@@ -30,7 +30,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 /* R25: a gutter-hanger bracket swings down and clamps over the link's corner; press turns its screw */
 .hw1-hg{right:-30px;top:-10px;width:32px;height:24px;opacity:0;transform:translate(8px,-12px) rotate(28deg);transform-origin:90% 70%;transition:opacity .15s var(--ease-x),transform .28s var(--ease-spring)}
 .hw1-hg-s,.hw1-hg-l{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.hw1-hg-k circle{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.6}
+.hw1-hg-k circle{fill:var(--n300);stroke:var(--ink);stroke-width:1.6}
 .hw1-hg-k path{stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
 .hw1-hg-k{transform-box:fill-box;transform-origin:center}
 @media (hover:hover) and (pointer:fine){.hw1-link:hover .hw1-hg{opacity:1;transform:none}}
@@ -50,7 +50,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-tabs{flex:1;min-width:0;display:flex;gap:8px}
 .hw2-tab{flex:1 1 0;min-width:0;display:grid;gap:10px;min-height:44px;align-content:start;padding:0 0 8px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
 .hw2-bar{position:relative;display:block;height:3px;border-radius:2px;background:oklch(0.25 0.06 262 / .15);overflow:hidden}
-.hw2-prog{position:absolute;inset:0;background:var(--ink);transform:translate3d(calc(-100% - 1px),0,0)}
+.hw2-prog{position:absolute;inset:0;background:var(--a100);transform:translate3d(calc(-100% - 1px),0,0)}
 .hw2-prog.is-animating{animation:hw2-story 5s linear infinite}
 .hw2-prog.is-done{animation:none;transform:translateZ(0)}
 @keyframes hw2-story{0%{transform:translate3d(calc(-100% - 1px),0,0)}to{transform:translateZ(0)}}
@@ -60,7 +60,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-tab[aria-selected="true"] .hw2-tl{color:var(--ink)}
 /* R26: a length of step flashing bends around the tab's corner; press snaps it flat, then it re-bends */
 .hw2-fl{right:-7px;top:-6px;width:22px;height:22px;opacity:0;transition:opacity var(--t-dur) var(--t-chrome)}
-.hw2-fl path{fill:none;stroke:#8a93a8;stroke-width:3.4;stroke-linecap:square}
+.hw2-fl path{fill:none;stroke:var(--n500);stroke-width:3.4;stroke-linecap:square}
 .hw2-fl-v{transform-box:view-box;transform-origin:19px 3px;transform:rotate(-90deg);transition:transform var(--t-dur) var(--t-chrome)}
 @media (hover:hover) and (pointer:fine){.hw2-tab:hover .hw2-fl{opacity:1}.hw2-tab:hover .hw2-fl-v{transform:none}}
 .hw2-tab:focus-visible .hw2-fl{opacity:1}.hw2-tab:focus-visible .hw2-fl-v{transform:none}
@@ -68,7 +68,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-tab.is-press .hw2-fl-v{animation:hw2-snap .36s var(--t-chrome)}
 @keyframes hw2-snap{0%{transform:none}35%,65%{transform:rotate(-90deg)}100%{transform:none}}
 /* R27: the pause bars become two shingle tabs; press flips them */
-.hw2-pause{position:relative;flex:none;display:grid;place-items:center;width:44px;height:44px;margin-top:-10px;padding:0;border:2px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer}
+.hw2-pause{position:relative;flex:none;display:grid;place-items:center;width:44px;height:44px;margin-top:-10px;padding:0;border:2px solid var(--ink);border-radius:50%;background:var(--paper);color:var(--ink);cursor:pointer}
 .hw2-pause svg{width:18px;height:18px;overflow:visible}
 .hw2-pz{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
 .hw2-py{fill:currentColor}
@@ -89,7 +89,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-item{grid-area:1/1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);visibility:hidden;clip-path:inset(0 0 0 100%);transition:clip-path .25s var(--ease-x),visibility 0s .25s}
 .hw2-item.is-visible{visibility:visible;clip-path:inset(0);transition:clip-path .25s var(--ease-x),visibility 0s}
 .hw2-photo{display:block;width:100%;height:100%;aspect-ratio:960/420;object-fit:cover}
-.hw2-scene{display:block;width:100%;height:auto;aspect-ratio:960/420;align-self:stretch;background:#fff}
+.hw2-scene{display:block;width:100%;height:auto;aspect-ratio:960/420;align-self:stretch;background:var(--paper)}
 .hw2-cap{display:grid;align-content:center;gap:18px;padding:32px clamp(24px,3vw,44px);border-left:2px solid var(--ink)}
 .hw2-t{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.6rem);font-weight:700;line-height:1.05;letter-spacing:-.015em;font-family:var(--f-head)}
 .hw2-cd{display:grid;gap:16px;font-size:var(--t-lead);line-height:1.45;max-width:46ch}
@@ -105,30 +105,30 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-far path{fill:oklch(0.25 0.06 262 / .06)}
 .hw2-s2 .hw2-far path{fill:none;stroke:oklch(0.25 0.06 262 / .08);stroke-width:1.5}
 .hw2-gr{stroke:var(--ink);stroke-width:3}
-.s1-wall,.s3-wall{fill:#fff;stroke:var(--ink);stroke-width:3}
+.s1-wall,.s3-wall{fill:var(--paper);stroke:var(--ink);stroke-width:3}
 .s1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .s1-fas{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
 .s1-win,.s3-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
 .s1-door,.s3-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
 .s1-sign{fill:var(--ink)}
-.s1-hrs{font:800 15px/1 var(--f-head);fill:#fff;letter-spacing:.06em;font-family:var(--f-head)}
+.s1-hrs{font:800 15px/1 var(--f-head);fill:var(--paper);letter-spacing:.06em;font-family:var(--f-head)}
 .s1-disc{fill:var(--sun);stroke:var(--ink);stroke-width:3}
-.s1-base,.s1-hset{fill:#fff;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-base,.s1-hset{fill:var(--paper);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .s1-keys{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
 .s1-hset{transform-box:fill-box;transform-origin:15% 100%}
 /* step 1 plays: the office lights come on, then the handset lifts off its base (the call is answered) */
 .hw2-item.is-visible .s1-win{animation:hw2-lit .3s var(--t-chrome) .25s both}
-@keyframes hw2-lit{to{fill:#ffd36b}}
+@keyframes hw2-lit{to{fill:var(--a300)}}
 .hw2-item.is-visible .s1-hset{animation:hw2-lift .5s cubic-bezier(.3,1.5,.5,1) .7s both}
 @keyframes hw2-lift{to{transform:translate(-6px,-26px) rotate(-14deg)}}
-.s2-plane{fill:#d9b98a;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s2-plane{fill:var(--wood);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .s2-seam{stroke:oklch(0.25 0.06 262 / .25);stroke-width:2}
 .s2-dim{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
 .s2-blade{fill:var(--sun);stroke:var(--ink);stroke-width:2}
 .s2-tk{stroke:var(--ink);stroke-width:1.5}
 .s2-hook{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
 .s2-case{fill:var(--blue);stroke:var(--ink);stroke-width:3}
-.s2-hub{fill:#fff;stroke:var(--ink);stroke-width:3}
+.s2-hub{fill:var(--paper);stroke:var(--ink);stroke-width:3}
 /* step 2 plays: the tape runs out of its case across the eave, then the dimension lines draw along ridge and rake */
 .hw2-item.is-visible .s2-tape{animation:hw2-pull .9s cubic-bezier(.2,.8,.2,1) .2s both}
 @keyframes hw2-pull{from{transform:translateX(-572px)}}
@@ -137,10 +137,10 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 @keyframes hw2-draw{from{stroke-dashoffset:900}}
 .s3-sun{fill:var(--sun)}
 .s3-sh{fill:var(--shingle)}
-.s3-crs{fill:none;stroke:oklch(1 0 0 / .22);stroke-width:1.5}
+.s3-crs{fill:none;stroke:rgb(20 20 20 / .22);stroke-width:1.5}
 .s3-edge{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .s3-ridge{fill:none;stroke:var(--ink);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
-.s3-puff{fill:#fff;stroke:var(--ink);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:50% 100%}
+.s3-puff{fill:var(--paper);stroke:var(--ink);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:50% 100%}
 /* step 3 plays: the finished roof comes down onto the walls, settles, and a puff of dust leaves each eave */
 .hw2-item.is-visible .s3-roof{animation:hw2-set .7s cubic-bezier(.3,1.5,.5,1) .2s both}
 @keyframes hw2-set{from{transform:translateY(-150px);opacity:0}40%{opacity:1}}
@@ -191,7 +191,7 @@ a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-de
 .hw3-ico--rule .i-seg2{transform:rotate(-150deg)}
 .hw3-ico--rule .i-seg2{transform-origin:0 50%}
 .i-board{stroke:var(--wood);stroke-width:8;stroke-linecap:round}
-.i-nail path{fill:#8a93a8}
+.i-nail path{fill:var(--n500)}
 .i-hammer rect{stroke:var(--ink);stroke-width:2.5}
 .i-hd{fill:var(--shingle)}.i-hl{fill:var(--sun)}
 .i-hammer{transform-origin:100% 100%;transition:transform .2s var(--ease-x)}
@@ -226,7 +226,7 @@ a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-de
 .hw4-stage{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start}
 .hw4-house{display:block;width:100%;height:auto;overflow:visible}
 .hw4-gr{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-.hw4-wall{fill:#fff;stroke:var(--ink);stroke-width:3}
+.hw4-wall{fill:var(--paper);stroke:var(--ink);stroke-width:3}
 .hw4-win{fill:var(--mist);stroke:var(--ink);stroke-width:2.5}
 .hw4-door{fill:var(--ink)}
 .hw4-roof-old{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
@@ -263,13 +263,13 @@ html[data-motion="reduced"] .hw4 .hw4-t{color:var(--ink)}
 .hw5-head{max-width:1240px;margin:0 auto clamp(28px,4vw,48px)}
 .hw5-row{list-style:none;margin:0 auto;padding:0;max-width:1240px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
 .hw5-a{display:grid;gap:16px;align-content:start}
-.hw5-art{position:relative;aspect-ratio:4/3;display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 1px oklch(0.2 0.05 262 / .14);overflow:hidden}
+.hw5-art{position:relative;aspect-ratio:4/3;display:grid;place-items:center;background:var(--paper);box-shadow:inset 0 0 0 1px oklch(0.2 0.05 262 / .14);overflow:hidden}
 .hw5-art svg{width:72%;height:auto;overflow:visible}
 .hw5-ph{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .hw5-arc{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round}
 .hw5-phone svg{width:52%;margin-top:-14%}
 .hw5-tel{position:absolute;left:0;right:0;bottom:12%;display:flex;align-items:center;justify-content:center;min-height:44px;text-align:center;font-size:clamp(1.25rem,.9rem + 1vw,1.75rem);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px;font-family:var(--f-head)}
-.hw5-pg{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.hw5-pg{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
 .hw5-hd{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
 .hw5-ln{stroke:var(--steel);stroke-width:2;stroke-linecap:round}
 .hw5-sg{stroke:var(--blue);stroke-width:2.5;stroke-linecap:round}

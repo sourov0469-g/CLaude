@@ -14,7 +14,7 @@ const seeded = s => () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
 function constellation(root, c) {
   const cv = root.querySelector('.pv1-cv'), g = cv.getContext('2d'), N = 295, R = 130;
   const SPR = spring(2.2, 0.7), rnd = seeded(1995);
-  const COLORS = ['#ffffff', '#ffffff', '#ffffff', '#cbdaf6', '#abc3f0', '#ffb81f'];
+  const COLORS = ['#ffffff', '#ffffff', '#ffffff', '#ffc9ae', '#ffa27a', '#ff5a1f'];
   const sprites = COLORS.map(col => { // pre-rendered once (S1377 cost rule): a soft five-point star
     const s = document.createElement('canvas'); s.width = s.height = 64; const x = s.getContext('2d');
     x.translate(32, 32); x.fillStyle = col; x.shadowColor = col; x.shadowBlur = 10; x.beginPath();

@@ -9,7 +9,7 @@
 .wv-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .wv-btn .i-play{fill:currentColor;stroke:none}
 .wv-btn[aria-pressed="false"] .i-play,.wv-btn[aria-pressed="true"] .i-pause{display:none}
-@media (hover:hover) and (pointer:fine){.wv-btn:hover{background:var(--ink);color:#fff}}
+@media (hover:hover) and (pointer:fine){.wv-btn:hover{background:var(--a100);color:var(--ink)}}
 .wv-btn:active{scale:.96}
 
 /* v1 Q361: an endless strip at 200 px/s, the centre tile lit, the rest at brightness(0.7); the caption follows */
@@ -44,8 +44,8 @@ html[data-motion="reduced"] .wv1-pause{display:none}
   margin:0;padding:16px;background:linear-gradient(transparent,rgba(17,24,48,.72));pointer-events:none}
 .wv2-open>*{pointer-events:auto}
 .wv2-open[hidden],.wv2-closed[hidden]{display:none}
-.wv2-cap{color:#fff;font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.01em}
-.wv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;
+.wv2-cap{color:var(--paper);font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.01em}
+.wv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);color:var(--ink);font-weight:700;cursor:pointer;
   transition:background-color var(--dur-quick) var(--ease-std)}
 .wv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 @media (hover:hover) and (pointer:fine){.wv2-close:hover{background:var(--mist)}}
@@ -70,7 +70,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv3-hl.is-flash{animation:wv3-flash .5s var(--ease-x)}
 @keyframes wv3-flash{0%{opacity:1;stroke-width:7}100%{opacity:0;stroke-width:4}}
 .wv3-l.is-on{color:var(--ink)}
-.wv3-l.is-on::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;background:var(--blue);vertical-align:.08em}
+.wv3-l.is-on::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;background:var(--a100);vertical-align:.08em}
 .wv3-frame{width:100%;height:auto;aspect-ratio:1024/600;background:var(--mist)}
 .wv3-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .wv3-pair[hidden]{display:none}
@@ -97,7 +97,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 @keyframes wv-hook{0%{transform:translateX(0)}40%{transform:translateX(10px)}100%{transform:translateX(0)}}
 .wv1-tile{position:relative}
 .wv1-nails{will-change:transform;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.wv1-nails circle{fill:#d8dde8;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
+.wv1-nails circle{fill:var(--line);stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
 @media (hover:hover) and (pointer:fine){.wv1-tile:hover .wv1-nails circle{opacity:1;transform:scale(1)}.wv1-tile:hover .wv1-nails circle:nth-child(2){transition-delay:.025s}.wv1-tile:hover .wv1-nails circle:nth-child(3){transition-delay:.05s}.wv1-tile:hover .wv1-nails circle:nth-child(4){transition-delay:.075s}}
 .wv-btn{position:relative}
 .wv-btn .i-sq{opacity:0;fill:none;stroke-width:2.2}
@@ -127,7 +127,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv1-pause[aria-pressed="false"]:focus-visible .i-bub{animation:wv-bub .6s var(--ease-x)}
 .wv1-pause.is-press .i-bub,.wv1-pause[aria-pressed="true"] .i-bub{animation:none;translate:0 0}
 /* R3 E3 (S1314 §7): a held strip shows on the control itself, a filled ink face */
-.wv1-pause[aria-pressed="true"]{background:var(--ink);color:#fff}
+.wv1-pause[aria-pressed="true"]{background:var(--a100);color:var(--ink)}
 /* R3 F3: phones keep three bottom layers (strip, caption, controls); the tape leaves */
 @media (max-width:640px){.wv1-tape{display:none}}
 .wv1-tape svg{overflow:hidden}
@@ -136,7 +136,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv2-gc-f{fill:var(--sky)}
 .wv2-gc-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 /* R3 F3-V2: captions always on, small (hover is never the only way to read them, S1314 §7) */
-.wv2-tag{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);padding:5px 9px;border-radius:12px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:600;line-height:1.2;pointer-events:none;text-align:left}
+.wv2-tag{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);padding:5px 9px;border-radius:12px;background:var(--a100);color:var(--paper);font-size:.8125rem;font-weight:600;line-height:1.2;pointer-events:none;text-align:left}
 .wv2.is-open .wv2-gc,.wv2.is-open .wv2-tag{opacity:0}
 .wv2-close{position:relative}
 .wv2-close .i-raf{opacity:0}
@@ -160,8 +160,8 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 /* bg: a row of nail heads along the starter strip; the ones near the pointer lift off the strip and turn their bright side up */
 .wv3-nailrow{display:flex;justify-content:space-between;height:12px;margin-top:-6px;padding:0 1.2%;pointer-events:none}
 .wv3-nail{width:10px;height:10px;overflow:visible;will-change:transform}
-.wv3-nail-h{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.2}
-.wv3-nail-g{fill:none;stroke:#fff;stroke-width:1.2;stroke-linecap:round;opacity:.9}
+.wv3-nail-h{fill:var(--n300);stroke:var(--ink);stroke-width:1.2}
+.wv3-nail-g{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-linecap:round;opacity:.9}
 
 /* ---------- v4 (R3, new): two jobs, told straight. [BANK] Checklist 11 (say every photo is real work) and S1314 product
    truth: one column holds the one genuine pair, the other a single finished photo that says it has no before. */
@@ -171,7 +171,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv4-ph{position:relative;margin:0;overflow:hidden;background:var(--mist)}
 .wv4-ph img{width:100%;aspect-ratio:3/2;object-fit:cover}
 .wv4-one img{aspect-ratio:4/3}
-.wv4-ph figcaption{position:absolute;left:10px;top:10px;padding:5px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:var(--t-label);font-weight:600;line-height:1.2}
+.wv4-ph figcaption{position:absolute;left:10px;top:10px;padding:5px 10px;border-radius:999px;background:var(--a100);color:var(--paper);font-size:var(--t-label);font-weight:600;line-height:1.2}
 .wv4-t{margin-top:6px;font-size:clamp(1.375rem,1rem + 1vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.007em;font-family:var(--f-head)}
 .wv4-d{max-width:46ch;font-size:var(--t-body);line-height:1.5;color:var(--muted)}
 @media (max-width:899px){.wv4-grid{grid-template-columns:1fr}}

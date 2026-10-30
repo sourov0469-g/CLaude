@@ -5,16 +5,16 @@
 .cl{position:relative;overflow:clip}
 
 /* ---------- v1 */
-.cl1{--vbg:var(--blue);background:var(--blue);color:#fff;padding:0 0 calc(clamp(2rem,1rem + 3vw,4rem) + var(--mbar))}
+.cl1{--vbg:var(--a500);background:var(--a500);color:var(--ink);padding:0 0 calc(clamp(2rem,1rem + 3vw,4rem) + var(--mbar))}
 .cl1-gut{display:block;width:clamp(280px,32vw,460px);height:clamp(60px,9vw,110px);margin-left:var(--gutter)} /* R3 F7.2: a short segment over the call, not the full width */
-.cl1-fascia{stroke:oklch(1 0 0 / .5);stroke-width:2}
-.cl1-trough{fill:#e8ecf4;stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
-.cl1-lip{fill:none;stroke:#fff;stroke-width:5;vector-effect:non-scaling-stroke}
+.cl1-fascia{stroke:rgb(20 20 20 / .5);stroke-width:2}
+.cl1-trough{fill:var(--a50);stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.cl1-lip{fill:none;stroke:var(--ink);stroke-width:5;vector-effect:non-scaling-stroke}
 .cl1-hangers path{stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
 .cl1-inner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px clamp(32px,5vw,80px);align-items:center;max-width:1280px;margin:0 auto;padding:clamp(2.5rem,1.5rem + 4vw,5rem) var(--gutter) 0}
 .cl1-main{display:grid;gap:22px;justify-items:start}
 /* R3 F7.1: the bordered office-status panel (the live line and the hours) */
-.cl1-status{display:grid;gap:14px;padding:clamp(20px,2.4vw,28px);border:1.5px solid oklch(1 0 0 / .45);border-radius:14px}
+.cl1-status{display:grid;gap:14px;padding:clamp(20px,2.4vw,28px);border:1.5px solid rgb(20 20 20 / .45);border-radius:14px}
 .cl1-hours{margin:0;display:grid;gap:8px}
 .cl1-hours div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:10px}
 .cl1-hours dt{font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted)}
@@ -26,19 +26,19 @@
 .cl1-live{margin:0;font-size:var(--t-lead);font-weight:600;line-height:1.4}
 .cl1-act{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:8px}
 .cl1-drops{position:absolute;left:0;top:calc(clamp(60px,9vw,110px) * .3 - 4px);width:120px;height:600px;pointer-events:none;display:none;overflow:visible}
-.cl1-lipg{fill:#e8ecf4}
+.cl1-lipg{fill:var(--a50)}
 .cl1-d{fill:var(--chalk)}
 .cl1-fall{fill:var(--chalk);stroke:var(--ink);stroke-width:1.2;opacity:0}
 .cl1-call{font-size:1.25rem;min-height:64px;padding:0 32px 0 26px;transition:scale 60ms var(--ease-out),background-color var(--dur-quick) var(--ease-out)}
 .cl1-call:active{scale:.97}
 .cl1-cs{left:0;top:0;width:100%;height:100%}
 .cl1-cs .rx-h{fill:var(--chalk);stroke:var(--ink);stroke-width:1.2;opacity:0;transform:translateY(-14px);transition:opacity .2s var(--ease-x),transform .25s var(--ease-x)}
-.cl1-cs .rx-p{fill:none;stroke:#fff;stroke-width:2;opacity:0;transform-origin:center;transform-box:fill-box}
+.cl1-cs .rx-p{fill:none;stroke:var(--ink);stroke-width:2;opacity:0;transform-origin:center;transform-box:fill-box}
 @media (hover:hover) and (pointer:fine){.cl1-call:hover .cl1-cs .rx-h{opacity:1;transform:translateY(-4px)}}
 .cl1-call:focus-visible .cl1-cs .rx-h{opacity:1;transform:translateY(-4px)}
 .cl1-call.is-press .cl1-cs .rx-p{animation:cl-splash .3s var(--ease-out)}
 @keyframes cl-splash{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
-.cl1-addr{display:inline-flex;align-items:center;gap:10px;min-height:48px;font-weight:700;color:#fff}
+.cl1-addr{display:inline-flex;align-items:center;gap:10px;min-height:48px;font-weight:700;color:var(--ink)}
 .cl1-pin{width:20px;height:25px;overflow:visible}
 .cl1-pin path{fill:var(--sun);stroke:var(--ink);stroke-width:1.6}
 .cl1-pin circle{fill:var(--ink)}
@@ -49,11 +49,11 @@
 @keyframes cl-pin{0%{transform:translateY(-6px)}50%{transform:translateY(2px) scaleY(.85)}100%{transform:none}}
 .cl1-word{position:relative;display:grid;margin:clamp(40px,7vw,96px) 0 0;font-size:var(--t-mark-call,clamp(3.2rem,15.6vw,15rem));font-weight:900;letter-spacing:-.025em;line-height:.8;white-space:nowrap;text-align:center;user-select:none}
 .cl1-word span{grid-area:1/1}
-.cl1-word span:first-child{color:transparent;-webkit-text-stroke:2px oklch(1 0 0 / .35)}
-.cl1-word span:last-child{color:#fff;clip-path:inset(0 0 52% 0)}
+.cl1-word span:first-child{color:transparent;-webkit-text-stroke:2px rgb(20 20 20 / .35)}
+.cl1-word span:last-child{color:var(--ink);clip-path:inset(0 0 52% 0)}
 
 /* ---------- v2 (the morph is GSAP string interpolation between two 48-point paths of equal structure) */
-.cl2{--vbg:var(--blue);background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
+.cl2{--vbg:var(--a500);background:var(--a500);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
 .cl2-dusk{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
 .cl2-dusk path{fill:var(--ink);opacity:.35}
 .cl2-win rect{fill:var(--sun);opacity:.8}
@@ -63,19 +63,19 @@
 /* R3 F7-V2: the number reads at most of the disc's width; the details are a solid card below the stage */
 .cl2-stage{position:relative;width:min(100%,600px);aspect-ratio:600/420;margin-top:12px}
 .cl2-shape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.cl2-body{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.cl2-body{fill:var(--paper);stroke:var(--ink);stroke-width:3}
 .cl2-ripple{fill:none;stroke:var(--sun);stroke-width:2;opacity:0}
 .cl2-call{position:absolute;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;gap:6px;width:46%;color:var(--ink);text-decoration:none;font-weight:700}
 .cl2-hs{width:clamp(36px,7vw,52px);height:auto}
 .cl2-hs path{fill:var(--ink)}
 .cl2-num{font-size:clamp(1rem,3.4vw,2rem);letter-spacing:-.01em;white-space:nowrap}
-.cl2-card{width:min(100%,600px);padding:20px 24px;border-radius:14px;background:#fff;color:var(--ink);text-align:left}
+.cl2-card{width:min(100%,600px);padding:20px 24px;border-radius:14px;background:var(--paper);color:var(--ink);text-align:left}
 .cl2-card[hidden]{display:none}
 .cl2-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .cl2-list li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:12px;align-items:baseline;font-size:1rem;line-height:1.35}
 .cl2-list b{font-size:var(--t-label);font-weight:600;color:var(--muted)}
 .cl2-list a{font-weight:800;color:var(--ink)}
-.cl2-tog{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid #fff;border-radius:999px;background:none;color:#fff;font-weight:700;cursor:pointer}
+.cl2-tog{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--paper);border-radius:999px;background:none;color:var(--ink);font-weight:700;cursor:pointer}
 .cl2-tog-i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .cl2-tog .i-x{display:none}
 /* hover redraws the toggle's icon stroke by stroke (house outline, or the crossed rafters when open); press morphs the card */
@@ -83,14 +83,14 @@
 @media (hover:hover) and (pointer:fine){.cl2-tog:hover .cl2-tog-i path{animation:cl-redraw .4s var(--ease-x)}}
 @keyframes cl-redraw{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}
 .cl2.is-open .cl2-tog .i-x{display:block}.cl2.is-open .cl2-tog .i-open{display:none}
-@media (hover:hover) and (pointer:fine){.cl2-tog:hover{background:oklch(1 0 0 / .12)}}
+@media (hover:hover) and (pointer:fine){.cl2-tog:hover{background:rgb(20 20 20 / .12)}}
 /* R36 press: the handset buzzes sideways like a phone on vibrate (Family V2 already wobbles a handset by rotation) */
 .cl2-call.is-press .cl2-hs{animation:cl-buzz .24s steps(8)}
 @keyframes cl-buzz{0%,100%{translate:0 0}12%,62%{translate:-3px 0}37%,87%{translate:3px 0}}
 @media (max-width:640px){.cl2-list li{grid-template-columns:1fr;gap:2px}.cl2-list{gap:6px}}
 
 /* ---------- v3 */
-.cl3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(3rem,2rem + 3vw,5rem) + var(--mbar))}
+.cl3{--vbg:var(--a500);background:var(--a500);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(3rem,2rem + 3vw,5rem) + var(--mbar))}
 .cl3-top{display:grid;gap:16px;max-width:1280px;margin:0 auto clamp(48px,7vh,88px);padding:0 var(--gutter)}
 .cl3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .cl3-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
@@ -101,7 +101,7 @@
 .cl3-call:focus-visible .cl3-cs .rx-h{opacity:1}
 .cl3-call.is-press .cl3-cs .rx-p{animation:cl-puff .3s var(--ease-out)}
 @keyframes cl-puff{0%{opacity:1;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-14px) scale(1.6)}}
-.cl3-pause{display:grid;place-items:center;width:48px;height:48px;padding:0;border:2px solid #fff;border-radius:50%;background:none;color:#fff;cursor:pointer}
+.cl3-pause{display:grid;place-items:center;width:48px;height:48px;padding:0;border:2px solid var(--paper);border-radius:50%;background:none;color:var(--ink);cursor:pointer}
 .cl3-pause svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 .cl3-pause .i-play{fill:currentColor;stroke:none}
 .cl3-pause[aria-pressed="false"] .i-play,.cl3-pause[aria-pressed="true"] .i-pause{display:none}
@@ -112,12 +112,12 @@
 .cl3-pause.is-press svg{animation:cl-bounce .24s var(--ease-x)}
 @keyframes cl-bounce{0%{translate:0 0}35%{translate:0 -6px}100%{translate:0 0}}
 html[data-motion="reduced"] .cl3-pause{display:none}
-.cl3-band{position:relative;display:block;height:clamp(110px,16vw,240px);background:var(--ink);color:#fff;text-decoration:none;overflow:hidden}
+.cl3-band{position:relative;display:block;height:clamp(110px,16vw,240px);background:var(--a100);color:var(--ink);text-decoration:none;overflow:hidden}
 .cl3-roof{position:absolute;inset:0;width:100%;height:100%}
-#cl3-seam path{stroke:oklch(1 0 0 / .14);stroke-width:3}
+#cl3-seam path{stroke:rgb(20 20 20 / .14);stroke-width:3}
 .cl3-chim{will-change:transform;position:absolute;right:clamp(24px,8vw,140px);bottom:100%;width:clamp(48px,6vw,84px);height:auto;margin-bottom:-2px;overflow:visible}
 .cl3-band{overflow:visible}
-.cl3-stack{fill:#b85a38;stroke:var(--ink);stroke-width:3}
+.cl3-stack{fill:var(--a600);stroke:var(--ink);stroke-width:3}
 .cl3-cap{fill:var(--shingle);stroke:var(--ink);stroke-width:3}
 .cl3-brick{stroke:var(--ink);stroke-width:1.5;opacity:.45}
 .cl3-smoke circle{fill:oklch(0.85 0.01 262 / .7)}
@@ -130,7 +130,7 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 @media (max-width:899px){.cl1-word{padding-bottom:calc(var(--mbar) + 12px)}}
 
 /* ---------- v4 The keypad (R3 new): ⟦S0095⟧ the action's own artefact; one dial on entry (⟦S1448⟧) */
-.cl4{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.cl4{--vbg:var(--a500);background:var(--a500);color:var(--ink);padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .cl4-inner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,6vw,104px);align-items:center;max-width:1180px;margin:0 auto}
 .cl4-copy{display:grid;gap:18px;justify-items:start}
 .cl4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
@@ -140,8 +140,8 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl4.is-dialing .cl4-caret{display:inline-block}
 .cl4-act{display:flex}
 .cl4-pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.4vw,16px);width:min(100%,340px);justify-self:center}
-.cl4-k{--lit:0;display:grid;place-items:center;align-content:center;aspect-ratio:1;border-radius:50%;border:1.5px solid oklch(1 0 0 / .35);
-  background:color-mix(in oklch,var(--sun) calc(var(--lit) * 100%),oklch(1 0 0 / .06));color:color-mix(in oklch,var(--ink) calc(var(--lit) * 100%),#fff);user-select:none}
+.cl4-k{--lit:0;display:grid;place-items:center;align-content:center;aspect-ratio:1;border-radius:50%;border:1.5px solid rgb(20 20 20 / .35);
+  background:color-mix(in oklch,var(--sun) calc(var(--lit) * 100%),rgb(20 20 20 / .06));color:color-mix(in oklch,var(--ink) calc(var(--lit) * 100%),var(--paper));user-select:none}
 .cl4-k b{font-size:clamp(1.25rem,.9rem + 1.2vw,1.75rem);font-weight:700;line-height:1;font-family:var(--f-head)}
 .cl4-k i{min-height:1em;font-style:normal;font-size:.6875rem;font-weight:600;letter-spacing:.08em;line-height:1.2;opacity:.75}
 .cl4-go{grid-column:2;background:var(--sun);border-color:var(--sun);color:var(--ink)}
@@ -149,12 +149,12 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 @media (max-width:899px){.cl4-inner{grid-template-columns:1fr}.cl4-pad{width:min(100%,280px)}}
 
 /* ---------- v5 Office status (R3 new): the week, the hours on it, and where Springboro's clock is now (⟦S1314⟧: no pulse) */
-.cl5{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.cl5{--vbg:var(--a500);background:var(--a500);color:var(--ink);padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .cl5-inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(40px,6vw,104px);align-items:start;max-width:1180px;margin:0 auto}
 .cl5-head{display:grid;gap:16px}
 .cl5-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:12ch;text-wrap:pretty;font-family:var(--f-head)}
 .cl5-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch;color:var(--on-blue-muted)}
-.cl5-board{grid-row:span 2;display:grid;gap:14px;padding:clamp(20px,2.6vw,32px);border-radius:16px;background:var(--ink)}
+.cl5-board{grid-row:span 2;display:grid;gap:14px;padding:clamp(20px,2.6vw,32px);border-radius:16px;background:var(--a100)}
 .cl5-clock{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0}
 .cl5-time{font-size:clamp(2rem,1.2rem + 3vw,3.25rem);font-weight:800;letter-spacing:-.01em;line-height:1;font-family:var(--f-head)}
 .cl5-day{font-size:var(--t-lead);font-weight:600;color:var(--on-dark-2)}
@@ -162,16 +162,20 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl5-week{display:grid;gap:6px}
 .cl5-row,.cl5-scale{display:grid;grid-template-columns:2.75rem minmax(0,1fr);gap:12px;align-items:center}
 .cl5-dn{font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
-.cl5-row.is-today .cl5-dn{color:#fff;font-weight:800}
-.cl5-tr{position:relative;height:18px;border-radius:4px;background:oklch(1 0 0 / .08)}
+.cl5-row.is-today .cl5-dn{color:var(--ink);font-weight:800}
+.cl5-tr{position:relative;height:18px;border-radius:4px;background:rgb(20 20 20 / .08)}
 .cl5-blk{position:absolute;left:37.5%;width:33.333%;top:0;bottom:0;border-radius:4px;background:var(--sun)}
-.cl5-now{position:absolute;top:-6px;bottom:-6px;width:3px;margin-left:-1.5px;background:#fff;border-radius:2px;box-shadow:0 0 0 2px var(--ink)}
-.cl5-now span{position:absolute;top:50%;left:calc(100% + 5px);translate:0 -50%;padding:2px 6px;border-radius:4px;background:#fff;color:var(--ink);font-size:.75rem;font-weight:700;line-height:1.2;white-space:nowrap}
+.cl5-now{position:absolute;top:-6px;bottom:-6px;width:3px;margin-left:-1.5px;background:var(--paper);border-radius:2px;box-shadow:0 0 0 2px var(--ink)}
+.cl5-now span{position:absolute;top:50%;left:calc(100% + 5px);translate:0 -50%;padding:2px 6px;border-radius:4px;background:var(--paper);color:var(--ink);font-size:.75rem;font-weight:700;line-height:1.2;white-space:nowrap}
 .cl5-now.is-end span{left:auto;right:calc(100% + 5px)} /* late evening: the tag sits left of the mark so it stays in the track */
 .cl5-sc{position:relative;height:1.2em;font-size:.75rem;color:var(--on-dark-2)}
 .cl5-sc i{position:absolute;top:0;font-style:normal;white-space:nowrap;translate:-50% 0}
 .cl5-sc i:first-child{translate:0 0}.cl5-sc i:last-child{translate:-100% 0}
 .cl5-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;align-self:end}
-.cl5-addr{display:inline-flex;align-items:center;min-height:48px;font-weight:700;color:#fff;text-underline-offset:4px}
+.cl5-addr{display:inline-flex;align-items:center;min-height:48px;font-weight:700;color:var(--ink);text-underline-offset:4px}
 @media (hover:hover) and (pointer:fine){.cl5-addr:hover{text-decoration-thickness:3px}}
 @media (max-width:899px){.cl5-inner{grid-template-columns:1fr}.cl5-board{grid-row:auto}.cl5-act{align-self:start}}
+/* R4 brand: Call sits on the vivid accent band, so its call buttons invert to a black pill (the accent cannot sit on
+   itself); hover lifts to --ink-2 */
+.cl .btn--sun{background:var(--black);color:var(--paper)}
+@media (hover:hover) and (pointer:fine){.cl .btn--sun:hover{background:var(--ink-2)}}

@@ -8,31 +8,31 @@
 
 /* ---------- v1 (R3 F6-V1): the map is the claim, on the ink ground; the 8 nearest towns' labels sit radially; the list
    shows the 8 nearest and opens to all 24; phones keep the list only */
-.tw1{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.tw1{--vbg:var(--paper);background:var(--paper);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .tw1 .tw-note,.tw1 .tw-src{color:var(--on-dark-2)}
 .tw1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:start;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
 .tw1-mapwrap{position:relative;aspect-ratio:1;max-height:78svh;margin-inline:auto;width:100%}
 .tw1-map{width:100%;height:100%;overflow:visible}
-.tw1-rings circle{fill:none;stroke:#fff;stroke-width:1.2;stroke-dasharray:3 6;opacity:.32;vector-effect:non-scaling-stroke}
+.tw1-rings circle{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:3 6;opacity:.32;vector-effect:non-scaling-stroke}
 .tw1-rings text{font:600 16px/1 var(--f-head);fill:var(--on-dark-2);font-family:var(--f-head)}
 .tw1-ripples circle{fill:none;stroke:var(--sun);stroke-width:2;vector-effect:non-scaling-stroke}
-.tw1-north path{fill:#fff}
-.tw1-north text{font:800 18px/1 var(--f-head);fill:#fff;font-family:var(--f-head)}
+.tw1-north path{fill:var(--paper)}
+.tw1-north text{font:800 18px/1 var(--f-head);fill:var(--paper);font-family:var(--f-head)}
 .tw1-line{fill:none;stroke:var(--sun);stroke-width:4;stroke-linecap:round}
-.tw1-office path{fill:var(--sun);stroke:#fff;stroke-width:2;stroke-linejoin:round}
+.tw1-office path{fill:var(--sun);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
 .tw1-office rect{fill:var(--ink)}
 .mk{cursor:pointer}
-.mk .mk-h{fill:var(--sky);stroke:#fff;stroke-width:1.5;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;transition:transform .15s var(--ease-x),fill .15s var(--ease-x)}
-.mk text{font:700 19px/1 var(--f-head);fill:#fff;paint-order:stroke;stroke:var(--ink);stroke-width:5px;stroke-linejoin:round;pointer-events:none;font-family:var(--f-head)}
+.mk .mk-h{fill:var(--sky);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;transition:transform .15s var(--ease-x),fill .15s var(--ease-x)}
+.mk text{font:700 19px/1 var(--f-head);fill:var(--paper);paint-order:stroke;stroke:var(--ink);stroke-width:5px;stroke-linejoin:round;pointer-events:none;font-family:var(--f-head)}
 .mk.is-hover .mk-h{transform:translateY(-6px) scale(1.25)}
 .mk.is-on .mk-h{fill:var(--sun);transform:translateY(-4px) scale(1.4)}
 .tw1-side{display:grid;gap:20px;align-content:start}
-.tw1-card{padding:20px 22px;border-radius:14px;background:oklch(1 0 0 / .06);box-shadow:inset 0 0 0 1px oklch(1 0 0 / .16);color:#fff;min-height:118px}
+.tw1-card{padding:20px 22px;border-radius:14px;background:rgb(20 20 20 / .06);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .16);color:var(--ink);min-height:118px}
 .tw1-card-t{font-size:1.5rem;font-weight:700;letter-spacing:-.01em}
 .tw1-card-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-dark-2)}
 .tw1-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .tw1-list li[hidden]{display:none}
-.tw1-list button{position:relative;min-height:44px;padding:0 14px;border:1.5px solid oklch(1 0 0 / .5);border-radius:999px;background:none;color:#fff;font-weight:700;font-size:.875rem;cursor:pointer;transition:background-color .15s var(--ease-x),border-color .15s var(--ease-x)}
+.tw1-list button{position:relative;min-height:44px;padding:0 14px;border:1.5px solid rgb(20 20 20 / .5);border-radius:999px;background:none;color:var(--ink);font-weight:700;font-size:.875rem;cursor:pointer;transition:background-color .15s var(--ease-x),border-color .15s var(--ease-x)}
 .tw1-list button .mi{font-weight:600;color:var(--on-dark-2);margin-left:6px}
 @media (hover:hover) and (pointer:fine){.tw1-list button:hover{border-color:var(--sun)}}
 .tw1-list button[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
@@ -42,14 +42,14 @@
 @media (max-width:640px){.tw1-mapwrap{display:none}}
 
 /* ---------- v2: metric-led cards; each carries its own decades chart, bars laid like shingle courses */
-.tw2{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw2{--vbg:var(--paper);background:var(--paper);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .tw2-head{position:relative;display:grid;gap:14px;max-width:1280px;margin:0 auto clamp(32px,5vh,56px);padding:0 var(--gutter)}
 .tw2-sort{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.tw2-sb{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:2px solid oklch(1 0 0 / .6);border-radius:999px;background:none;color:#fff;font-weight:700;cursor:pointer;transition:background-color .18s var(--ease-x)}
+.tw2-sb{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:2px solid rgb(20 20 20 / .6);border-radius:999px;background:none;color:var(--ink);font-weight:700;cursor:pointer;transition:background-color .18s var(--ease-x)}
 .tw2-sb[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
 @media (hover:hover) and (pointer:fine){.tw2-sb[aria-pressed="false"]:hover{border-color:var(--sun)}}
 .tw2-cards{position:relative;list-style:none;margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px;max-width:1280px}
-.tw2-card{display:grid;gap:6px;padding:18px 18px 14px;border-radius:14px;background:oklch(1 0 0 / .05);box-shadow:inset 0 0 0 1px oklch(1 0 0 / .14)}
+.tw2-card{display:grid;gap:6px;padding:18px 18px 14px;border-radius:14px;background:rgb(20 20 20 / .05);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .14)}
 .tw2-card[hidden]{display:none}
 .tw2-card.is-old .tw2-y{color:var(--sun)}
 .tw2 .tw-note,.tw2 .tw-src,.tw2-yl,.tw2-m{color:var(--on-dark-2)}
@@ -59,23 +59,23 @@
 .tw2-n{margin-top:6px;font-size:1.125rem;font-weight:700}
 .tw2-m{font-size:.875rem;color:var(--on-dark-2)}
 .tw2-bars{width:100%;height:auto;margin-top:8px;overflow:visible}
-.tw2-bars .bar rect{fill:oklch(1 0 0 / .3)}
+.tw2-bars .bar rect{fill:rgb(20 20 20 / .3)}
 .tw2-bars .bar line{stroke:var(--ink);stroke-width:1.2}
 .tw2-bars .bar.is-old rect{fill:var(--chalk)}
 .tw2-bars .bar{transform-box:fill-box;transform-origin:50% 100%;transition:transform .25s var(--ease-x)}
 .tw2-bars text{font:600 9px/1 var(--f-head);fill:var(--on-dark-2)}
-.tw2-bars .top{font-weight:700;fill:#fff}
+.tw2-bars .top{font-weight:700;fill:var(--paper)}
 @media (hover:hover) and (pointer:fine){.tw2-card:hover .bar{transform:scaleY(1.12)}}
 
 /* ---------- v3: the town finder with a compass that turns to the town, a tape scaled to the miles, and a weathervane */
-.tw3{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw3{--vbg:var(--paper);background:var(--paper);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .tw3-grid{position:relative;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);align-items:center;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
 .tw3-copy{display:grid;gap:22px}
 .tw3-form{display:grid;gap:8px;max-width:460px}
 .tw3-form label{font-weight:700;color:var(--on-dark-2)}
 .tw3-field{position:relative}
-.tw3-field input{width:100%;min-height:56px;padding:0 4px;border:0;border-bottom:2px solid oklch(1 0 0 / .5);background:none;color:#fff;font-size:1.5rem;font-weight:700;outline:none}
-.tw3-field input::placeholder{color:oklch(1 0 0 / .45)}
+.tw3-field input{width:100%;min-height:56px;padding:0 4px;border:0;border-bottom:2px solid rgb(20 20 20 / .5);background:none;color:var(--ink);font-size:1.5rem;font-weight:700;outline:none}
+.tw3-field input::placeholder{color:rgb(20 20 20 / .45)}
 /* R33: focus runs a tape-measure blade out along the field; Enter clicks its hook */
 .tw3-blade{position:absolute;left:0;bottom:-7px;width:100%;height:12px;pointer-events:none;overflow:visible}
 .tw3-run{transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease-x)}
@@ -90,7 +90,7 @@
 .tw3-ans-t{font-size:clamp(1.4rem,1rem + 1.4vw,2rem);font-weight:700;line-height:1.15;letter-spacing:-.01em;font-family:var(--f-head)}
 .tw3-ans-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-dark-2)}
 /* R42: the number in the "not on our list" answer; a weathervane arrow swings round to point at it, press spins it */
-.tw3-tel{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:var(--sun);text-underline-offset:.18em;white-space:nowrap}
+.tw3-tel{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--sun);text-underline-offset:.18em;white-space:nowrap}
 .tw3-wv{left:calc(100% + 4px);top:50%;width:26px;height:20px;margin-top:-10px}
 .tw3-wv path{fill:none;stroke:var(--sun);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tw3-wv-a{transform-box:view-box;transform-origin:13px 10px;transform:rotate(90deg);opacity:0;transition:transform .45s var(--ease-spring),opacity .15s var(--ease-x)}
@@ -101,37 +101,37 @@
 .tw3-ans.is-new{animation:tw-in .2s var(--ease-x)} /* R3: answer crossfade <= 200ms */
 @keyframes tw-in{from{opacity:0;translate:0 8px}}
 .tw3-chips{display:flex;flex-wrap:wrap;gap:6px}
-.tw3-chips button{min-height:44px;min-width:44px;padding:0 14px;border:1.5px solid oklch(1 0 0 / .5);border-radius:999px;background:none;color:#fff;font-weight:700;font-size:.875rem;cursor:pointer;transition:background-color .18s var(--ease-x),border-color .18s var(--ease-x)}
+.tw3-chips button{min-height:44px;min-width:44px;padding:0 14px;border:1.5px solid rgb(20 20 20 / .5);border-radius:999px;background:none;color:var(--ink);font-weight:700;font-size:.875rem;cursor:pointer;transition:background-color .18s var(--ease-x),border-color .18s var(--ease-x)}
 @media (hover:hover) and (pointer:fine){.tw3-chips button:hover{border-color:var(--sun)}}
 .tw3-chips button[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
 
 .tw3-dial{display:grid;gap:16px;justify-items:center}
 .tw3-rose{width:min(100%,315px);height:auto;overflow:visible} /* R3: ~25% smaller */
-.tw3-ring{fill:none;stroke:oklch(1 0 0 / .4);stroke-width:2}
+.tw3-ring{fill:none;stroke:rgb(20 20 20 / .4);stroke-width:2}
 .tw3-ring--in{stroke-dasharray:2 6}
-.tw3-ticks path{stroke:oklch(1 0 0 / .45);stroke-width:2;stroke-linecap:round}
-.tw3-pts path{fill:oklch(1 0 0 / .12);stroke:oklch(1 0 0 / .45);stroke-width:1.5;stroke-linejoin:round}
-.tw3-lt text{font:800 20px/1 var(--f-head);fill:#fff;text-anchor:middle;font-family:var(--f-head)}
+.tw3-ticks path{stroke:rgb(20 20 20 / .45);stroke-width:2;stroke-linecap:round}
+.tw3-pts path{fill:rgb(20 20 20 / .12);stroke:rgb(20 20 20 / .45);stroke-width:1.5;stroke-linejoin:round}
+.tw3-lt text{font:800 20px/1 var(--f-head);fill:var(--paper);text-anchor:middle;font-family:var(--f-head)}
 .tw3-needle{transform-origin:200px 200px;transform-box:view-box}
 .tw3-n1{fill:var(--sun);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
-.tw3-n2{fill:#fff;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
-.tw3-needle circle{fill:var(--ink);stroke:#fff;stroke-width:3}
+.tw3-n2{fill:var(--paper);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.tw3-needle circle{fill:var(--ink);stroke:var(--ink);stroke-width:3}
 .tw3-tape{width:min(100%,360px);height:auto;overflow:visible;opacity:0;transition:opacity .2s var(--ease-x)}
 .tw3.has-town .tw3-tape{opacity:1} /* R3: the tape shows only with a town */
 .tw3-needle{opacity:.4;transition:opacity .2s var(--ease-x)}
 .tw3.has-town .tw3-needle{opacity:1}
 .tw3-tape-b{fill:var(--sun);stroke:var(--ink);stroke-width:2}
 .tw3-tape-tk path{stroke:var(--ink);stroke-width:1.5}
-.tw3-case{fill:var(--blue);stroke:#fff;stroke-width:2}
+.tw3-case{fill:var(--blue);stroke:var(--ink);stroke-width:2}
 .tw3-tape-l{font:700 14px/1 var(--f-head);fill:var(--on-dark-2);font-family:var(--f-head)}
 @media (max-width:900px){.tw3-grid{grid-template-columns:1fr}.tw3-rose{width:min(100%,300px)}} /* phones: the question and the field first, the compass after */
 .tw3 .tw-src{color:var(--on-dark-2)}
 /* R3 graft: a slim ring map under a Yes (V1's square-root rings), the town lit, the connector drawn */
 .tw3-mini{display:block;width:0;height:0;overflow:visible;opacity:0;transition:opacity .2s var(--ease-x)}
 .tw3.has-yes .tw3-mini{width:200px;height:200px;opacity:1}
-.tw3-mr circle{fill:none;stroke:oklch(1 0 0 / .3);stroke-width:1;stroke-dasharray:2 4}
+.tw3-mr circle{fill:none;stroke:rgb(20 20 20 / .3);stroke-width:1;stroke-dasharray:2 4}
 .tw3-ml{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round}
-.tw3-mo{fill:#fff;stroke:var(--ink);stroke-width:1.5}
+.tw3-mo{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
 .tw3-mh{fill:var(--sun);stroke:var(--ink);stroke-width:1.5}
 .tw3-chips button:active{scale:.97;transition:scale 70ms var(--ease-out)}
 @media (max-width:900px){.tw3.has-yes .tw3-mini{width:160px;height:160px}}
@@ -145,20 +145,20 @@
 
 /* ---------- v4 (R3, new): the distance ruler. S0603 evidence doctrine: a zero baseline, direct labels, tabular figures.
    The list is the content; on wide screens each town is placed at its miles along one tape, labels in greedy lanes. */
-.tw4{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.tw4{--vbg:var(--paper);background:var(--paper);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .tw4 .tw-note,.tw4 .tw-src,.tw4-read{color:var(--on-dark-2)}
 .tw4-head{display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,4vw,48px);padding:0 var(--gutter)}
 .tw4-wrap{position:relative;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
 .tw4-list{list-style:none;margin:0;padding:0}
-.tw4-t{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid oklch(1 0 0 / .14);font-weight:700}
+.tw4-t{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid rgb(20 20 20 / .14);font-weight:700}
 .tw4-t .mi{font-weight:600;color:var(--on-dark-2);font-variant-numeric:tabular-nums}
 .tw4-tape{display:none}
 @media (min-width:900px){
   .tw4-wrap{height:var(--h,420px)}
   .tw4-list{position:absolute;inset:0 var(--gutter);isolation:isolate}
-  .tw4-t .nm,.tw4-t .mi{background:var(--ink);padding:0 4px} /* leaders run behind every label */
+  .tw4-t .nm,.tw4-t .mi{background:var(--a100);padding:0 4px} /* leaders run behind every label */
   .tw4-t{position:absolute;left:calc(var(--x) * 1%);top:var(--y);transform:translateX(-50%);display:grid;justify-items:center;gap:0;padding:0;border:0;font-size:.875rem;white-space:nowrap;cursor:default;outline-offset:4px}
-  .tw4-t::after{content:"";position:absolute;z-index:-1;left:50%;width:1px;background:oklch(1 0 0 / .35);height:var(--lead);top:var(--lt)}
+  .tw4-t::after{content:"";position:absolute;z-index:-1;left:50%;width:1px;background:rgb(20 20 20 / .35);height:var(--lead);top:var(--lt)}
   .tw4-t .mi{font-size:.75rem}
   .tw4-t:hover,.tw4-t:focus-visible{color:var(--sun)}
   .tw4-t:hover::after,.tw4-t:focus-visible::after{background:var(--sun)}
@@ -171,11 +171,11 @@
 
 /* ---------- v5 (R3, new): eight directions. S1499 chunking and scanning: the towns grouped by compass direction around
    the office, each list nearest first under an arrow turned to its bearing. */
-.tw5{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.tw5{--vbg:var(--paper);background:var(--paper);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .tw5 .tw-note,.tw5 .tw-src{color:var(--on-dark-2)}
 .tw5-head{display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,4vw,48px);padding:0 var(--gutter)}
 .tw5-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
-.tw5-cell{padding:18px 20px;border-radius:14px;background:oklch(1 0 0 / .05);box-shadow:inset 0 0 0 1px oklch(1 0 0 / .14);min-height:150px}
+.tw5-cell{padding:18px 20px;border-radius:14px;background:rgb(20 20 20 / .05);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .14);min-height:150px}
 .tw5-cell h3{display:flex;align-items:center;gap:10px;font-size:1.125rem;font-weight:700;text-transform:none}
 .tw5-arr{width:22px;height:22px;flex:none;fill:var(--sun)}
 .tw5-cell ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px}

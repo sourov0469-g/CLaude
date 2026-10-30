@@ -4,8 +4,8 @@
 .hx{position:relative;overflow:clip}
 
 /* ---------- v1: a wall of shingle tabs spelling the headline; an eave band below with the drip edge and gutter */
-.hx1{--vbg:var(--cream);min-height:max(640px,100svh);display:grid;grid-template-rows:minmax(0,1fr) auto;background:var(--ink);color:var(--ink)}
-.hx1-wall{position:relative;min-height:0;overflow:hidden;background:var(--ink);cursor:inherit;touch-action:pan-y}
+.hx1{--vbg:var(--cream);min-height:max(640px,100svh);display:grid;grid-template-rows:minmax(0,1fr) auto;background:var(--a100);color:var(--ink)}
+.hx1-wall{position:relative;min-height:0;overflow:hidden;background:var(--a100);cursor:inherit;touch-action:pan-y}
 .hx1-plate{position:absolute;inset:0;will-change:transform}
 .hx1-cv{display:block;width:100%;height:100%}
 .hx1-fallback{display:none}
@@ -14,7 +14,7 @@
 .hx1-drip{position:absolute;left:0;top:-3px;width:100%;height:40px;overflow:visible;pointer-events:none}
 .hx1-drip-edge{fill:none;stroke:var(--steel);stroke-width:3}
 .hx1-drip-lip{fill:none;stroke:var(--steel);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.hx1-gutter{fill:#fff;stroke:var(--mist);stroke-width:1.2;vector-effect:non-scaling-stroke;filter:drop-shadow(0 3px 2px oklch(0.2 0.05 262 / .12))}
+.hx1-gutter{fill:var(--paper);stroke:var(--mist);stroke-width:1.2;vector-effect:non-scaling-stroke;filter:drop-shadow(0 3px 2px oklch(0.2 0.05 262 / .12))}
 .hx1-gutter-bead{fill:none;stroke:var(--mist);stroke-width:1.2;vector-effect:non-scaling-stroke}
 .hx1-band{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:clamp(20px,4vw,64px);max-width:1440px;margin:0 auto;padding:58px var(--gutter) 0}
 .hx1-copy{display:grid;gap:12px}
@@ -115,7 +115,7 @@
 /* R11: a yard sign plants itself on the pill's corner (hover); it wobbles on its stake (press) */
 .hx3-sign{right:16px;bottom:calc(100% - 6px);width:28px;height:36px}
 .hx3-sign-g{transform-box:fill-box;transform-origin:50% 100%;opacity:0;transform:translateY(14px) scaleY(.4);transition:opacity .15s var(--ease-x),transform .22s var(--ease-x)}
-.hx3-sign-b{fill:#fff;stroke:var(--ink);stroke-width:1.5}
+.hx3-sign-b{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
 .hx3-sign-post{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
 .hx3-sign-r{fill:none;stroke:var(--blue);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
 @media (hover:hover) and (pointer:fine){.hx3-call:hover .hx3-sign-g{opacity:1;transform:none}}

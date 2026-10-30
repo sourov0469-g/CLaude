@@ -13,7 +13,7 @@
 
 /* shared credential list (four entries with their check links) */
 .ab1-creds,.ab2-creds,.ab4-creds,.ab5-creds{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
-.ab1-creds li,.ab2-creds li,.ab4-creds li,.ab5-creds li{display:grid;gap:2px;align-content:start;padding:18px 20px;border-radius:14px;background:#fff}
+.ab1-creds li,.ab2-creds li,.ab4-creds li,.ab5-creds li{display:grid;gap:2px;align-content:start;padding:18px 20px;border-radius:14px;background:var(--paper)}
 .ab1-creds b,.ab2-creds b,.ab4-creds b,.ab5-creds b{font-size:1.625rem;font-weight:700;line-height:1.1}
 
 /* ---------- v1 people first */
@@ -33,7 +33,7 @@
 .ab2-ridge-bg{stroke:var(--mist)}.ab2-ridge-fg{stroke:var(--sun)}
 .ab2-stops{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
 .ab2-stop{position:relative;display:grid;gap:6px;align-content:start}
-.ab2-dot{width:14px;height:14px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 4px var(--sky)}
+.ab2-dot{width:14px;height:14px;border-radius:50%;background:var(--a100);box-shadow:0 0 0 4px var(--sky)}
 .ab2-y{font-size:clamp(2rem,1.4rem + 2vw,3rem);font-weight:700;line-height:1;color:var(--blue)}
 .ab2-t{font-size:1.0625rem;line-height:1.5;max-width:28ch}
 .ab2-pair{max-width:1180px;margin:clamp(40px,5vw,72px) auto 0;display:grid;grid-template-columns:2fr 3fr;gap:16px}
@@ -54,7 +54,7 @@
 
 /* ---------- v4 sticky photo story (⟦S0441⟧: one sticky artefact; .3s crossfade per chapter) */
 .ab4-wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px)}
-.ab4-stage{position:sticky;top:calc(var(--nav-h) + 56px);align-self:start;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--ink)}
+.ab4-stage{position:sticky;top:calc(var(--nav-h) + 56px);align-self:start;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--a100)}
 .ab4-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s var(--ease-x)}
 .ab4-img.is-on{opacity:1}
 .ab4-chs{display:grid;gap:clamp(64px,22vh,200px);padding:clamp(24px,10vh,120px) 0}

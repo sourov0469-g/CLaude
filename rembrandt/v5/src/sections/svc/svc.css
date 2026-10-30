@@ -15,25 +15,25 @@
 .sv1-house{display:block;width:100%;height:auto;overflow:visible}
 .sv1-house *{vector-effect:non-scaling-stroke}
 .sv1-ground{stroke:var(--ink);stroke-width:2.5}
-.sv1-wall{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.sv1-wall{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
 .sv1-lap{stroke:var(--mist);stroke-width:2}
 .sv1-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
 .sv1-win rect{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}.sv1-win path{stroke:var(--ink);stroke-width:2}
 .sv1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
-.sv1-course{stroke:oklch(1 0 0 / .18);stroke-width:2}
-.sv1-patch{fill:#5b6478;stroke:var(--ink);stroke-width:2}
-.sv1-hail circle{fill:#fff;stroke:var(--ink);stroke-width:1.5}
-.sv1-gut{fill:#fff;stroke:var(--ink);stroke-width:2.5}.sv1-spout{stroke:var(--ink);stroke-width:8;stroke-linecap:round}
-.sv1-post{stroke:var(--ink);stroke-width:4}.sv1-box{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}.sv1-paper{fill:#fff;stroke:var(--ink);stroke-width:2}
+.sv1-course{stroke:rgb(20 20 20 / .18);stroke-width:2}
+.sv1-patch{fill:var(--n700);stroke:var(--ink);stroke-width:2}
+.sv1-hail circle{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
+.sv1-gut{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}.sv1-spout{stroke:var(--ink);stroke-width:8;stroke-linecap:round}
+.sv1-post{stroke:var(--ink);stroke-width:4}.sv1-box{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}.sv1-paper{fill:var(--paper);stroke:var(--ink);stroke-width:2}
 .sv1-p *{transition:fill .2s var(--ease-x),stroke .2s var(--ease-x)}
 .sv1-p.is-on .sv1-wall,.sv1-p.is-on .sv1-roof,.sv1-p.is-on .sv1-patch,.sv1-p.is-on .sv1-gut,.sv1-p.is-on .sv1-box,.sv1-p.is-on .sv1-paper,.sv1-p.is-on .sv1-hail circle{fill:var(--sun)}
 .sv1-p.is-on .sv1-spout{stroke:var(--sun)}
 .sv1-p.is-on .sv1-lap{stroke:oklch(0.62 0.13 75)}
-.sv1-hs{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;display:grid;place-items:center;width:44px;height:44px;padding:0;border:2.5px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);font:inherit;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 6px 16px -8px rgb(16 24 40 / 0.28);transition:background-color .15s var(--ease-x),scale .15s var(--ease-x)}
-.sv1-hs[aria-pressed="true"]{background:var(--ink);color:#fff}
+.sv1-hs{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;display:grid;place-items:center;width:44px;height:44px;padding:0;border:2.5px solid var(--ink);border-radius:50%;background:var(--paper);color:var(--ink);font:inherit;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 6px 16px -8px rgb(16 24 40 / 0.28);transition:background-color .15s var(--ease-x),scale .15s var(--ease-x)}
+.sv1-hs[aria-pressed="true"]{background:var(--a100);color:var(--ink)}
 @media (hover:hover) and (pointer:fine){.sv1-hs:hover{scale:1.08}}
 .sv1-hs:active{scale:.94}
-.sv1-panel{display:grid;gap:10px;padding:clamp(22px,2.6vw,32px);border-radius:16px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06)}
+.sv1-panel{display:grid;gap:10px;padding:clamp(22px,2.6vw,32px);border-radius:16px;background:var(--paper);box-shadow:0 0 0 1px oklch(0 0 0 / .06)}
 .sv1-n{margin:0;font-size:var(--t-label);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
 .sv1-t{font-size:clamp(1.5rem,1.1rem + 1.2vw,2.125rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;font-family:var(--f-head)}
 .sv1-d{font-size:var(--t-body);line-height:1.55}
@@ -46,8 +46,8 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv2-head{align-self:start;position:sticky;top:calc(var(--nav-h) + 40px)}
 .sv2-head .sv-also{margin:24px 0 0}
 .sv2-stack{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,6vh,64px)}
-.sv2-card{position:sticky;top:calc(var(--nav-h) + 40px + var(--i) * 18px);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"n i" "t t" "d d";gap:14px 16px;align-items:center;padding:clamp(24px,3vw,36px);border-radius:18px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 18px 40px -26px rgb(16 24 40 / 0.25);transform-origin:50% 0}
-.sv2-card:nth-child(even){background:var(--ink);color:#fff}
+.sv2-card{position:sticky;top:calc(var(--nav-h) + 40px + var(--i) * 18px);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"n i" "t t" "d d";gap:14px 16px;align-items:center;padding:clamp(24px,3vw,36px);border-radius:18px;background:var(--paper);box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 18px 40px -26px rgb(16 24 40 / 0.25);transform-origin:50% 0}
+.sv2-card:nth-child(even){background:var(--a100);color:var(--ink)}
 .sv2-card:nth-child(even) .sv2-n{color:var(--on-dark-2)}
 .sv2-n{grid-area:n;font-size:var(--t-label);font-weight:700;color:var(--muted)}
 .sv2-card .ic-s{grid-area:i;justify-self:end;width:56px;height:56px}
@@ -60,10 +60,10 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv3-t{width:100%;margin-top:clamp(28px,4vw,48px);border-collapse:collapse;font-size:var(--t-body);line-height:1.5}
 .sv3-t thead th{padding:0 0 12px;text-align:left;font-size:var(--t-label);font-weight:600;color:var(--muted);border-bottom:2px solid var(--ink)}
 .sv3-t tbody th{width:42%;padding:22px 32px 22px 0;text-align:left;vertical-align:top;font-size:clamp(1.25rem,1rem + .9vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.005em;font-family:var(--f-head)}
-.sv3-t tbody th::after{content:"";display:inline-block;width:.7em;height:.7em;margin-left:.35em;vertical-align:.02em;background:var(--blue);clip-path:polygon(0 35%,55% 35%,55% 0,100% 50%,55% 100%,55% 65%,0 65%)}
+.sv3-t tbody th::after{content:"";display:inline-block;width:.7em;height:.7em;margin-left:.35em;vertical-align:.02em;background:var(--a100);clip-path:polygon(0 35%,55% 35%,55% 0,100% 50%,55% 100%,55% 65%,0 65%)}
 .sv3-t td{padding:22px 0;vertical-align:top}
 .sv3-t tbody tr{border-bottom:1px solid oklch(0.3 0.05 262 / .18);transition:background-color .15s var(--ease-x)}
-@media (hover:hover) and (pointer:fine){.sv3-t tbody tr:hover{background:oklch(1 0 0 / .65)}}
+@media (hover:hover) and (pointer:fine){.sv3-t tbody tr:hover{background:rgb(20 20 20 / .65)}}
 @media (max-width:700px){.sv3-t thead{display:none}.sv3-t tbody tr{display:grid;gap:6px;padding:18px 0}.sv3-t tbody th,.sv3-t td{width:auto;padding:0}}
 
 /* ---------- v4 circles (⟦S0823⟧: 50% circles, white satellite buttons docked at the circle, arcs between) */
@@ -74,13 +74,13 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv4-o{position:relative;display:grid;justify-items:center;gap:12px;text-align:center}
 .sv4-o--a{grid-column:1/5}.sv4-o--b{grid-column:5/9;margin-top:clamp(40px,8vw,120px)}.sv4-o--c{grid-column:9/13;margin-top:clamp(10px,2vw,30px)}
 .sv4-o--d{grid-column:2/5}.sv4-o--e{grid-column:6/9;margin-top:clamp(20px,4vw,60px)}.sv4-o--f{grid-column:10/13}
-.sv4-c{position:relative;width:var(--d);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 24px 48px -28px rgb(16 24 40 / 0.28)}
+.sv4-c{position:relative;width:var(--d);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--a100);box-shadow:0 24px 48px -28px rgb(16 24 40 / 0.28)}
 .sv4-c img{width:100%;height:100%;object-fit:cover}
-.sv4-disc .sv4-c{display:grid;place-items:center;background:var(--blue);color:#fff}
-.sv4-o--e .sv4-c{background:var(--ink)}
+.sv4-disc .sv4-c{display:grid;place-items:center;background:var(--a100);color:var(--ink)}
+.sv4-o--e .sv4-c{background:var(--a100)}
 .sv4-disc .ic-s{width:38%;height:38%}
 .sv4-t{font-size:clamp(1.125rem,1rem + .4vw,1.375rem);font-weight:700;line-height:1.2}
-.sv4-sat{position:absolute;top:calc(var(--d) * .78);left:calc(50% + var(--d) * .32);display:grid;place-items:center;width:52px;height:52px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 24px oklch(0 0 0 / .12)}
+.sv4-sat{position:absolute;top:calc(var(--d) * .78);left:calc(50% + var(--d) * .32);display:grid;place-items:center;width:52px;height:52px;padding:0;border:0;border-radius:50%;background:var(--paper);color:var(--ink);cursor:pointer;box-shadow:0 4px 24px oklch(0 0 0 / .12)}
 .sv4-sat svg{width:22px;height:22px;transition:rotate .2s var(--ease-x)}
 .sv4-sat[aria-expanded="true"]{background:var(--sun)}
 .sv4-sat[aria-expanded="true"] svg{rotate:90deg}
