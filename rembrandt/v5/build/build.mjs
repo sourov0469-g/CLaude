@@ -25,21 +25,27 @@ export const REGISTRY = [
   { id: 'storm', name: 'Storm', label: 'Storm damage and insurance', def: 1 },
   { id: 'area', name: 'Towns', label: 'Where we work', def: 3 },
   { id: 'call', name: 'Call', label: 'Call Rembrandt', def: 1 },
-  // R4 inner pages: each page body is one section with five whole-page layouts behind the same 1-5 picker
-  { id: 'svcp', name: 'Page', label: 'Services', def: 1 },
-  { id: 'about', name: 'Page', label: 'About the family', def: 1 },
-  { id: 'contact', name: 'Page', label: 'Contact and service area', def: 1 },
+  // R5 inner pages (owner clarification): each page is a set of sections, each with five versions, its own picker and
+  // backups. rec: the section's backups are current-palette records (the R4 whole-page layouts), not old-palette ones.
+  { id: 'sphero', name: 'Intro', label: 'Services', def: 1, rec: true },
+  { id: 'svcp', name: 'Services', label: 'The six services', def: 1 },
+  { id: 'spclose', name: 'Call', label: 'Call about a service', def: 1 },
+  { id: 'abhero', name: 'Intro', label: 'About the family', def: 1, rec: true },
+  { id: 'about', name: 'Family', label: 'The family and the record', def: 1 },
+  { id: 'abclose', name: 'Call', label: 'Call the family firm', def: 1 },
+  { id: 'cthero', name: 'Phone', label: 'Contact', def: 1, rec: true },
+  { id: 'contact', name: 'Area', label: 'The office and the towns we serve', def: 1 },
 ];
 // R4 (AUDIT-R4.md §2): four pages. The homepage keeps its file name; the inner pages sit beside it.
 const HOME = 'rembrandt-homepage.html';
 export const PAGES = [
   { key: 'home', file: HOME, ids: ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'], home: '#hero', est: '#call',
     title: 'Rembrandt Roofing &amp; Restoration, Springboro, Ohio', desc: "Springboro's family roofers since 1995. 4.9 stars from 295 Google reviews, BBB A+ accredited since 2001. Call Rachel at (937) 746-7377, Monday to Friday, 9 to 5." },
-  { key: 'services', file: 'services.html', ids: ['svcp'], home: HOME, est: 'contact.html',
+  { key: 'services', file: 'services.html', ids: ['sphero', 'svcp', 'spclose'], home: HOME, est: 'contact.html',
     title: 'Roofing, storm damage, siding and gutters | Rembrandt Roofing &amp; Restoration', desc: 'Roof replacement, roof repair, storm and hail damage, insurance claims, siding and gutters in Springboro and Greater Dayton. Call Rachel at (937) 746-7377, Monday to Friday, 9 to 5.' },
-  { key: 'about', file: 'about.html', ids: ['about'], home: HOME, est: 'contact.html',
+  { key: 'about', file: 'about.html', ids: ['abhero', 'about', 'abclose'], home: HOME, est: 'contact.html',
     title: 'About the Walker family | Rembrandt Roofing &amp; Restoration', desc: 'Founded in 1995 by Franklin "Bunk" Walker; his son Wade has been president since 2015. BBB A+ accredited since 2001, Owens Corning Platinum Preferred, 4.9 stars from 295 Google reviews.' },
-  { key: 'contact', file: 'contact.html', ids: ['contact'], home: HOME, est: 'tel:+19377467377',
+  { key: 'contact', file: 'contact.html', ids: ['cthero', 'contact'], home: HOME, est: 'tel:+19377467377',
     title: 'Contact and service area | Rembrandt Roofing &amp; Restoration', desc: 'Call Rachel at (937) 746-7377, Monday to Friday, 9 to 5. Office at 38 N Pioneer Blvd, Springboro, OH 45066. We work in 24 towns around Springboro.' },
 ].filter(p => !process.env.PAGE || process.env.PAGE.split(',').includes(p.key));
 let SECTIONS = [];
@@ -103,6 +109,10 @@ const GLYPH = {
   svcp: '<path d="M2 8 8 3l6 5v6H2z"/><rect class="g-m" x="6" y="9" width="4" height="5"/>',
   about: '<circle cx="5" cy="5" r="2.4"/><circle cx="11" cy="5" r="2.4"/><path class="g-m" d="M1 14a4 4 0 0 1 8 0zM7 14a4 4 0 0 1 8 0z"/>',
   contact: '<path class="g-m" d="M8 15s-5-5.2-5-8.6a5 5 0 0 1 10 0C13 9.8 8 15 8 15zm0-6.6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill-rule="evenodd"/>',
+  sphero: '<path d="M1 10h14v4H1z"/><path class="g-m" d="M2 9 8 4l6 5"/>', abhero: '<path d="M1 10h14v4H1z"/><path class="g-m" d="M2 9 8 4l6 5"/>',
+  cthero: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
+  spclose: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
+  abclose: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
   call: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
 };
 const pick = s => `<div class="pick-rail"><fieldset class="pick"><legend class="vh">${s.name} section: choose a version</legend><span class="pick-l" aria-hidden="true"><svg class="pick-g pick-g--${s.id}" viewBox="0 0 16 16" focusable="false">${GLYPH[s.id] || ''}</svg>${s.name}</span>` +
@@ -116,7 +126,7 @@ for (const P of PAGES) {
   inlined = new Set();
   let sections = '', templates = '';
   for (const s of SECTIONS) {
-    sections += `<section id="${s.id}" class="sec sec--${s.id}" data-section="${s.id}" data-def="${s.def}" aria-label="${s.label.replace(/&/g, '&amp;')}">\n${pick(s)}\n<div class="stage">\n${images(ver(s, s.def), true)}\n</div>\n</section>\n`;
+    sections += `<section id="${s.id}" class="sec sec--${s.id}" data-section="${s.id}" data-def="${s.def}"${s.rec ? ' data-rec' : ''} aria-label="${s.label.replace(/&/g, '&amp;')}">\n${pick(s)}\n<div class="stage">\n${images(ver(s, s.def), true)}\n</div>\n</section>\n`;
   }
   for (const s of SECTIONS) for (const v of [...VERS(s), ...BKS(s)]) if (v !== String(s.def)) templates += `<template id="tpl-${s.id}-${v}">${images(ver(s, v), false)}</template>\n`;
   let page = icons(read('index.html'));

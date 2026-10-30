@@ -1,6 +1,6 @@
 /* SERVICES PAGE (R4, TRACEABILITY.md "R4 pages"): every service, five page layouts. Ground: --sky with the page's own
    bands (ink, blue) where a layout needs them. Type: Poppins headings, Open Sans text (owner design note). */
-.sp{--vbg:var(--sky);position:relative;background:var(--sky);color:var(--ink);padding:calc(var(--nav-h) + clamp(2.5rem,1.5rem + 4vw,5rem)) var(--gutter) calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.sp{--vbg:var(--sky);position:relative;background:var(--sky);color:var(--ink);padding:clamp(4.5rem,3.5rem + 2vw,6rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .sp-hero{max-width:1180px;margin:0 auto clamp(40px,5vw,72px)}
 .sp-h1{font-size:var(--t-h1);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:20ch}
 .sp-sub{margin-top:14px;font-size:var(--t-lead);line-height:1.5;color:var(--muted);max-width:52ch}
@@ -43,7 +43,7 @@
 .sp2-t3{margin-top:22px;font-size:1.25rem;font-weight:700}
 .sp2-band{margin:clamp(24px,3vw,40px) calc(var(--gutter) * -1);padding:clamp(40px,5vw,72px) var(--gutter);background:var(--a100);color:var(--ink)}
 .sp2-band-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center}
-.sp2-band .sp2-lede{color:var(--sun)}
+.sp2-band .sp2-lede{color:var(--a700)}
 .sp2-band p{color:var(--ink)}
 .sp2-foot{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:clamp(32px,4vw,56px);padding-top:28px;border-top:1px solid var(--mist)}
 @media (max-width:799px){.sp2-row,.sp2-band-in,.sp2-foot{grid-template-columns:1fr}.sp2-row--flip .sp2-art{order:0}}
@@ -74,20 +74,20 @@
 .sp4-g-in{max-width:1180px;margin:0 auto}
 .sp4-gh{display:flex;align-items:baseline;gap:14px;font-size:var(--t-h2);font-weight:700;line-height:1.1;margin-bottom:clamp(20px,3vw,36px)}
 .sp4-gh .num{font-size:.45em;color:var(--blue)}
-.sp4-g--storm .sp4-gh .num,.sp4-g--storm .ic-s{color:var(--sun)}
+.sp4-g--storm .sp4-gh .num,.sp4-g--storm .ic-s{color:var(--a700)}
 .sp4-g--storm .ic-f{fill:var(--paper)}
 .sp4-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(24px,3vw,48px)}
 .sp4-s{display:grid;gap:8px;align-content:start}
 .sp4-t{font-size:1.375rem;font-weight:700}
 .sp4-lede{font-family:var(--f-head);font-weight:500;color:var(--blue)}
-.sp4-g--storm .sp4-lede{color:var(--sun)}
+.sp4-g--storm .sp4-lede{color:var(--a700)}
 .sp4-s--more ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 @media (max-width:799px){.sp4 .sp-hero{grid-template-columns:1fr}.sp4 .sp-hero>.sp4-ev{grid-column:1;grid-row:auto}}
 
 /* ---------- v5 the menu board ([BANK] Q30/Q14: the list is the page) */
 .sp5-strip{display:grid;grid-template-columns:2fr 1.3fr 1fr;gap:10px;height:clamp(180px,24vw,320px);margin:0 calc(var(--gutter) * -1) clamp(32px,4vw,56px);padding:0 var(--gutter)}
 .sp5-strip img{width:100%;height:100%;object-fit:cover;border-radius:10px}
-.sp5{padding-top:calc(var(--nav-h) + 24px)}
+/* R5: .sp5 no longer opens the page (the head section does) */
 .sp5-board{max-width:900px;margin:0 auto;padding:clamp(24px,4vw,48px);border-radius:18px;background:var(--paper)}
 .sp5-board .sp-k:not(:first-child){margin-top:36px}
 .sp5-list{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:18px}
@@ -99,3 +99,6 @@
 .sp5-li--sm .sp5-n{font-size:1.0625rem;font-weight:600}.sp5-li--sm .sp5-d{color:var(--muted);font-weight:400}
 .sp5-ev{margin-top:32px;padding-top:24px;border-top:1px solid var(--mist)}
 @media (max-width:600px){.sp5-li{grid-template-columns:1fr}.sp5-dots{display:none}.sp5-d{text-align:left}.sp5-strip{grid-template-columns:1fr 1fr}.sp5-strip img:last-child{display:none}}
+
+/* R5: V4's "On every job" closes the body now that the page head is its own section */
+.sp4-ev--end{max-width:1180px;margin:clamp(32px,4vw,56px) auto 0}

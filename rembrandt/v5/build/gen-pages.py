@@ -1,5 +1,5 @@
 # R4 inner pages: writes src/sections/<page>/v1-v5.html from ONE fact list per page, so the five layouts of a page carry
-# the same, traceable copy (AUDIT-R4.md §1 facts; TRACEABILITY.md "R4 pages"). Run: python3 -I build/gen-pages.py [svcp about contact]
+# the same, traceable copy (AUDIT-R4.md §1 facts; TRACEABILITY.md "R4 pages"). Run: python3 -I build/gen-pages.py [services about contact]
 # Every sentence below comes from the facts lock or the firm's own published lines (rembrandt-pack.md §3/§5.6, flag C12).
 # No prices, no warranties, no guarantees, no promise about insurance claims.
 import os, re, html
@@ -278,8 +278,122 @@ def ct_v5():  # do we come to you?
   <aside class="ct5-panel" aria-labelledby="ct5-p"><h2 class="ct-h2" id="ct5-p">Call Rachel</h2><p class="ct5-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p>Monday to Friday, 9 to 5.</p><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address>{maplink()}</aside></div>
 </div>'''
 
+# ================================================================ R5: inner pages versioned per SECTION (owner clarification)
+# Each page is a set of sections, each with five versions. The bodies are the R4 whole-page layouts minus their header
+# and close (asserted, so no copy is lost or invented); the head and close sections get five versions each.
+def cut(h, pat, n=1):
+    h2, k = re.subn(pat, '', h, count=n, flags=re.S); assert k == n, pat; return h2
+CLOSE_RX = r'\s*<div class="sp-close">.*?<div class="sp-act">.*?</a></div></div>'
+def body(h, head_rx):
+    return cut(cut(h, head_rx), CLOSE_RX)
+
+# ---- Services: the six services (svcp), bodies of the R4 layouts
+def svb1(): return body(svc_v1(), r'\s*<header class="sp-hero">.*?</header>')
+def svb2(): return body(svc_v2(), r'\s*<header class="sp-hero sp2-hero">.*?</header>')
+def svb3(): return body(svc_v3(), r'\s*<header class="sp-hero">.*?</header>')
+def svb4():  # its "On every job" list lived in the R4 header: it now closes the body
+    h = body(svc_v4(), r'\s*<header class="sp-hero">.*?</header>')
+    i = h.rindex('</div>'); return h[:i] + '  ' + every('sp4-ev sp4-ev--end') + '\n' + h[i:]
+def svb5(): return cut(body(svc_v5(), r'\s*<header class="sp-hero sp5-hero">.*?</header>'), r'\s*<div class="sp5-strip".*?</div>')
+
+# ---- Services: the page head (sphero)
+def sh_v1():  # type and the drawn roofline
+    return f'<div class="sh sh1">\n  <header class="sh-head"><h1 class="sh-h1">{E(H1)}</h1><p class="sh-sub">{E(SUB)}</p></header>\n</div>\n'
+def sh_v2():  # a strip of three job photos over the title
+    return f'<div class="sh sh2">\n  <div class="sh2-strip"><img data-img="svc-aerial" alt="{E(SVC[0]["alt"])}" decoding="async"><img data-img="svc-repair" alt="{E(SVC[1]["alt"])}" decoding="async"><img data-img="storm-wind" alt="{E(SVC[2]["alt"])}" decoding="async"></div>\n  <header class="sh-head"><h1 class="sh-h1">{E(H1)}</h1><p class="sh-sub">{E(SUB)}</p></header>\n</div>\n'
+def sh_v3():  # title beside the promise on every job
+    return f'<div class="sh sh3">\n  <header class="sh-head"><h1 class="sh-h1">{E(H1)}</h1><p class="sh-sub">{E(SUB)}</p>{every("sh3-ev")}</header>\n</div>\n'
+def sh_v4():  # one big job photo with the title on a card
+    return f'<div class="sh sh4">\n  <figure class="sh4-ph"><img data-img="svc-aerial" alt="{E(SVC[0]["alt"])}" decoding="async"></figure>\n  <header class="sh-head sh4-card"><h1 class="sh-h1">{E(H1)}</h1><p class="sh-sub">{E(SUB)}</p>{CALL_BTN}</header>\n</div>\n'
+def sh_v5():  # the six, as an icon contents strip
+    ic = ''.join(f'<li><a class="sh5-i rx" href="#svcp">{s["icon"]}<span>{E(s["n"])}</span></a></li>' for s in SVC)
+    return f'<div class="sh sh5">\n  <header class="sh-head"><h1 class="sh-h1">{E(H1)}</h1><p class="sh-sub">{E(SUB)}</p></header>\n  <nav class="sh5-nav" aria-label="The six services"><ul class="sh5-list" role="list">{ic}</ul></nav>\n</div>\n'
+
+# ---- the close sections: five versions each (Services: spclose, prefix sc; About: abclose, prefix ac)
+def close_versions(pfx, h, line, extra_img, extra_alt):
+    T = E(h); L = E(line)
+    PH = '<a class="rx" href="' + TEL + '" data-c="call">(937) 746-7377</a>'
+    return [
+      lambda: f'<div class="{pfx} {pfx}1"><div class="{pfx}1-card"><h2 class="cs-h">{T}</h2><p>{L}</p>{CALL_BTN}</div></div>\n',
+      lambda: f'<div class="{pfx} {pfx}2"><div class="{pfx}2-band"><h2 class="cs-h">{T}</h2><p class="{pfx}2-num num">{PH}</p><p>{L}</p></div></div>\n',
+      lambda: f'<div class="{pfx} {pfx}3"><figure class="{pfx}3-ph"><img data-img="ab-rachel" alt="Rachel, who answers the phone at Rembrandt Roofing" decoding="async"></figure><div class="{pfx}3-tx"><h2 class="cs-h">{T}</h2><p>{L}</p>{CALL_BTN}</div></div>\n',
+      lambda: f'<div class="{pfx} {pfx}4"><div class="{pfx}4-slip"><p class="{pfx}4-k">While you were out</p><dl class="{pfx}4-rows"><div><dt>For</dt><dd>Rachel</dd></div><div><dt>About</dt><dd>{T}</dd></div><div><dt>Call</dt><dd>{PH}</dd></div><div><dt>When</dt><dd>Monday to Friday, 9 to 5</dd></div></dl></div><div class="{pfx}4-tx"><h2 class="cs-h">{T}</h2><p>{L}</p></div></div>\n',
+      lambda: f'<div class="{pfx} {pfx}5"><figure class="{pfx}5-ph"><img data-img="{extra_img}" alt="{E(extra_alt)}" decoding="async"></figure><div class="{pfx}5-tx"><h2 class="cs-h">{T}</h2><p>{L}</p><ul class="{pfx}5-facts" role="list"><li><b>Phone</b>{PH}</li><li><b>Hours</b><span>Monday to Friday, 9 to 5</span></li><li><b>Office</b><span>38 N Pioneer Blvd, Springboro</span></li></ul></div></div>\n',
+    ]
+
+# ---- About: the family and the record (about), bodies of the R4 layouts
+def abb1(): return body(ab_v1(), r'\s*<header class="ab-hero">.*?</header>')
+def abb2(): return body(ab_v2(), r'\s*<header class="ab-hero">.*?</header>').replace('<div class="ab ab2">', '<div class="ab ab2">\n  <h2 class="ab-h2">Since 1995, year by year.</h2>', 1)
+def abb3(): return body(ab_v3(), r'\s*<header class="ab-hero">.*?</header>').replace('<div class="ab ab3">', '<div class="ab ab3">\n  <h2 class="ab-h2">Rembrandt at a glance.</h2>', 1)
+def abb4(): return body(ab_v4(), r'\s*<header class="ab-hero">.*?</header>')
+def abb5(): return body(ab_v5(), r'\s*<header class="ab5-head">.*?</header>')
+
+# ---- About: the page head (abhero)
+def ah_v1(): return f'<div class="ah ah1">\n  <header class="ah-head"><h1 class="ah-h1">{E(AH1)}</h1><p class="ah-sub">{E(ASUB)}</p></header>\n</div>\n'
+def ah_v2():  # the crew panorama under the title
+    return f'<div class="ah ah2">\n  <header class="ah-head"><h1 class="ah-h1">{E(AH1)}</h1><p class="ah-sub">{E(ASUB)}</p></header>\n  {fig("ab-crew", PEOPLE[2][2], "ah2-pan")}\n</div>\n'
+def ah_v3():  # title beside Bunk and Wade
+    return f'<div class="ah ah3">\n  <header class="ah-head"><h1 class="ah-h1">{E(AH1)}</h1><p class="ah-sub">{E(ASUB)}</p></header>\n  {fig("ab-bunkwade", PEOPLE[0][2], "ah3-ph")}\n</div>\n'
+def ah_v4():  # the R4 magazine title, big, over a drawn 1995
+    return f'<div class="ah ah4">\n  <svg class="ah4-yr" viewBox="0 0 600 200" aria-hidden="true" focusable="false"><text x="0" y="170">1995</text></svg>\n  <header class="ah-head"><h1 class="ah-h1 ah4-h1">One family. Springboro. Since 1995.</h1><p class="ah-sub">{E(ASUB)}</p></header>\n</div>\n'
+def ah_v5():  # three people, three faces
+    ppl = [('ab-bunkwade', PEOPLE[0][2], 'Bunk and Wade.', 'Founder in 1995; president since 2015.'), ('ab-rachel', PEOPLE[1][2], 'Rachel.', 'She answers the phone.'), ('ab-crew', PEOPLE[2][2], 'The crew.', 'They do the work.')]
+    li = ''.join(f'<li>{fig(k, alt, "ah5-ph")}<p><b>{E(n)}</b> {E(t)}</p></li>' for k, alt, n, t in ppl)
+    return f'<div class="ah ah5">\n  <header class="ah-head"><h1 class="ah-h1">{E(AH1)}</h1><p class="ah-sub">{E(ASUB)}</p></header>\n  <ul class="ah5-row" role="list">{li}</ul>\n</div>\n'
+
+# ---- Contact: the page head (cthero, prefix kt): phone and hours, five ways
+KHRS = '<p class="kt-hours" data-hours>Office hours: Monday to Friday, 9 to 5.</p>'
+def kt_v1(): return f'<div class="kt kt1">\n  <header class="kt-head"><h1 class="kt-h1">Call Rachel.</h1><p class="kt1-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p>{KHRS}<p class="kt-sub">Ask for a written, line-by-line estimate. No form to fill in: a person answers.</p></header>\n</div>\n'
+def kt_v2():
+    front = f'<div class="kt2-face kt2-front"><svg class="kt2-mark" viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg><p class="kt2-name">Rembrandt Roofing &amp; Restoration</p><p class="kt2-who">Rachel answers</p><p class="kt2-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p class="kt2-hrs">Monday to Friday, 9 to 5</p></div>'
+    back = f'<div class="kt2-face kt2-back"><p class="kt2-name">The office</p><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address><p class="kt2-hrs">A family firm since 1995</p>{maplink("kt2-map")}</div>'
+    return f'<div class="kt kt2">\n  <header class="kt-head"><h1 class="kt-h1">Our card, both sides.</h1><p class="kt-sub">Everything you need to reach us fits on a business card.</p></header>\n  <div class="kt2-stage"><div class="kt2-card">{front}{back}</div><button class="kt2-turn rx" type="button" aria-pressed="false">Turn the card</button></div>\n</div>\n'
+def kt_v3():
+    days = ''.join(f'<li class="kt3-day{" kt3-day--off" if i > 4 else ""}" data-d="{i}"><b>{d}</b><span class="kt3-bar"><i class="kt3-on"></i></span><span class="kt3-h">{"9 to 5" if i < 5 else "Closed"}</span></li>' for i, d in enumerate(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']))
+    tel = f'<a class="rx" href="{TEL}" data-c="call">{NUM}</a>'
+    return f'<div class="kt kt3">\n  <header class="kt-head"><h1 class="kt-h1">Monday to Friday, 9 to 5.</h1>{KHRS}<p class="kt-sub">That is when Rachel answers {tel}.</p></header>\n  <div class="kt3-board"><div class="kt3-scale" aria-hidden="true"><span>Midnight</span><span>9 am</span><span>5 pm</span><span>Midnight</span></div><ol class="kt3-week" role="list">{days}</ol><span class="kt3-now" aria-hidden="true" hidden><span>Now</span></span></div>\n</div>\n'
+def kt_v4():
+    return f'<div class="kt kt4">\n  <header class="kt-head kt4-panel"><h1 class="kt-h1">Rachel answers the phone.</h1><p class="kt4-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p>{KHRS}<address>38 N Pioneer Blvd, Springboro, OH 45066</address></header>\n</div>\n'
+def kt_v5():
+    tel = f'<a class="rx" href="{TEL}" data-c="call">{NUM}</a>'
+    return f'<div class="kt kt5">\n  <header class="kt-head"><h1 class="kt-h1">Phone, hours, office.</h1><p class="kt-sub">Three lines are all you need.</p></header>\n  <dl class="kt5-rows"><div><dt>Phone</dt><dd>{tel}</dd></div><div><dt>Hours</dt><dd>Monday to Friday, 9 to 5</dd></div><div><dt>Office</dt><dd>38 N Pioneer Blvd, Springboro</dd></div></dl>\n</div>\n'
+
+# ---- Contact: the office and the 24 towns (contact), five ways
+def cb_v1(): return f'<div class="ct ct1">\n  <div class="ct1-row">{office("ct1-office", "ct1-o")}<section class="ct1-towns" aria-labelledby="ct1-t"><h2 class="ct-h2" id="ct1-t">The 24 towns we serve</h2><ul class="ct-towns ct-towns--az" data-towns="az" role="list"></ul></section></div>\n</div>\n'
+def cb_v2(): return cut(ct_v2(), r'\s*<header class="ct-hero">.*?</header>') + '\n'
+def cb_v3():  # towns by distance band, as tabs
+    bands = [('Within 5 miles', 0, 5), ('5 to 10 miles', 5, 10), ('10 to 15 miles', 10, 15), ('15 to 25 miles', 15, 25)]
+    tabs = ''.join(f'<button class="ct3-tab rx" type="button" role="tab" id="ct3-t{i}" aria-controls="ct3-p{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}">{E(n)}</button>' for i, (n, a, b) in enumerate(bands))
+    pans = ''.join(f'<div class="ct3-pan" role="tabpanel" id="ct3-p{i}" aria-labelledby="ct3-t{i}"{"" if i == 0 else " hidden"}><ul class="ct-chips" data-band="{a}-{b}" role="list"></ul></div>' for i, (n, a, b) in enumerate(bands))
+    return f'<div class="ct ct3">\n  <div class="ct3-row">{office("ct3-office", "ct3-o")}<section class="ct3-towns" aria-labelledby="ct3-h"><h2 class="ct-h2" id="ct3-h">How far is your town?</h2><div class="ct3-tabs" role="tablist" aria-label="Towns by distance from the office">{tabs}</div>{pans}{TSRC}</section></div>\n</div>\n'
+def cb_v4(): return f'<div class="ct ct4">\n  <div class="ct4-row">{office("ct4-office", "ct4-o")}<section class="ct4-towns" aria-labelledby="ct4-t"><h2 class="ct-h2" id="ct4-t">The 24 towns we serve</h2><ul class="ct-chips" data-towns="near" role="list"></ul>{TSRC}</section></div>\n</div>\n'
+def cb_v5():
+    find = '<div class="ct5-find"><h2 class="ct-h2">Do we come to you?</h2><label class="ct5-lab" for="ct5-in">Your town</label><input class="ct5-in" id="ct5-in" type="text" list="ct5-list" autocomplete="address-level2" spellcheck="false"><datalist id="ct5-list"></datalist><p class="ct5-out" aria-live="polite"></p></div>'
+    return f'<div class="ct ct5">\n  <div class="ct5-grid">{find}{office("ct5-office", "ct5-o")}</div>\n</div>\n'
+
+LABEL2 = {'sphero': 'What we do', 'abhero': 'The family firm', 'cthero': 'Call or come by'}
+def dress2(sid, h):
+    lab = f'<p class="r4-lab"><svg viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg>{LABEL2[sid]}</p>'
+    h = re.sub(r'^<div class="([^"]+)"', r'<div class="\1 r4-art"', h, count=1)
+    return h.replace('<h1', lab + '<h1', 1).replace('</header>', RIDGE + '</header>', 1)
+def art2(h): return re.sub(r'^<div class="([^"]+)"', r'<div class="\1 r4-art"', h, count=1)
+def write2(sid, gens, dressed=False):
+    d = os.path.join(SEC, sid); os.makedirs(d, exist_ok=True)
+    for i, g in enumerate(gens, 1):
+        h = g()
+        open(os.path.join(d, f'v{i}.html'), 'w').write(dress2(sid, h) if dressed else h)
+    print(sid, len(gens))
+
 import sys
-want = sys.argv[1:] or ['svcp', 'about', 'contact']
-if 'svcp' in want: write('svcp', [svc_v1, svc_v2, svc_v3, svc_v4, svc_v5])
-if 'about' in want: write('about', [ab_v1, ab_v2, ab_v3, ab_v4, ab_v5])
-if 'contact' in want: write('contact', [ct_v1, ct_v2, ct_v3, ct_v4, ct_v5])
+want = sys.argv[1:] or ['services', 'about', 'contact']
+if 'services' in want:
+    write2('sphero', [sh_v1, sh_v2, sh_v3, sh_v4, sh_v5], True)
+    write2('svcp', [lambda f=f: art2(f()) for f in (svb1, svb2, svb3, svb4, svb5)])
+    write2('spclose', close_versions('sc', 'Not sure which one you need?', 'Call Rachel and tell her what you are seeing. Monday to Friday, 9 to 5.', 'svc-repair', SVC[1]['alt']))
+if 'about' in want:
+    write2('abhero', [ah_v1, ah_v2, ah_v3, ah_v4, ah_v5], True)
+    write2('about', [lambda f=f: art2(f()) for f in (abb1, abb2, abb3, abb4, abb5)])
+    write2('abclose', close_versions('ac', 'Talk to the family firm.', 'Call Rachel at the office. Monday to Friday, 9 to 5.', 'ab-bunkwade', PEOPLE[0][2]))
+if 'contact' in want:
+    write2('cthero', [kt_v1, kt_v2, kt_v3, kt_v4, kt_v5], True)
+    write2('contact', [lambda f=f: art2(f()) for f in (cb_v1, cb_v2, cb_v3, cb_v4, cb_v5)])

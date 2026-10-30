@@ -56,7 +56,7 @@ function mount(sec, v, swap) {
     return init ? init(root, { ...ctx.conditions, swap, sec, id, ctx }) : undefined;
   }, root);
   live.set(id, { mm, v });
-  const bk = String(v)[0] === 'b'; sec.classList.toggle('on-bk', bk); sec.classList.toggle('on-bk-old', bk && +String(v).slice(1) <= 3); // R4: B1-B3 are the Epilogue-era records if (bk) showBk(sec, true);
+  const bk = String(v)[0] === 'b', rec = sec.hasAttribute('data-rec'); sec.classList.toggle('on-bk', bk && !rec); sec.classList.toggle('on-bk-old', bk && !rec && +String(v).slice(1) <= 3); /* R5: data-rec sections keep current-palette records (no old-palette restore) */ // R4: B1-B3 are the Epilogue-era records if (bk) showBk(sec, true);
   paintBg(sec, root);
 }
 // PLAN-V7 §4b: each section paints its active version's background (--vbg on the version root, else its computed

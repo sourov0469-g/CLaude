@@ -1,7 +1,7 @@
 /* ABOUT PAGE (R4, TRACEABILITY.md "R4 pages"): the family, the record and where to check it. Facts lock only.
    v1 [BANK] Q22 Monolith (team cards + star strip); v2 ⟦S1325⟧ timeline; v3 ⟦S0603⟧ fact sheet; v4 ⟦S0441⟧ sticky photo
    story; v5 ⟦S1354⟧ editorial grid. */
-.ab{--vbg:var(--sky);position:relative;background:var(--sky);color:var(--ink);padding:calc(var(--nav-h) + clamp(2.5rem,1.5rem + 4vw,5rem)) var(--gutter) calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.ab{--vbg:var(--sky);position:relative;background:var(--sky);color:var(--ink);padding:clamp(4.5rem,3.5rem + 2vw,6rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .ab-hero{max-width:1180px;margin:0 auto clamp(36px,5vw,64px)}
 .ab-h1{font-size:var(--t-h1);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:18ch}
 .ab-sub{margin-top:14px;font-size:var(--t-lead);line-height:1.5;color:var(--muted);max-width:54ch}
@@ -64,7 +64,7 @@
 @media (max-width:799px){.ab4-wrap{grid-template-columns:1fr}.ab4-stage{position:relative;top:auto;aspect-ratio:4/3}.ab4-chs{gap:48px;padding:16px 0 0}}
 
 /* ---------- v5 magazine (⟦S1354⟧: oversized headline, panoramic image, narrow metadata column) */
-.ab5{padding-top:calc(var(--nav-h) + clamp(2rem,1rem + 3vw,4rem))}
+/* R5: .ab5 no longer opens the page (the head section does) */
 .ab5-head{max-width:1180px;margin:0 auto 28px}
 .ab5-h1{font-size:clamp(2.5rem,1rem + 5vw,5rem);font-weight:700;line-height:1.02;letter-spacing:-.015em;max-width:14ch}
 .ab5-pan{margin:0 calc(var(--gutter) * -1);height:clamp(240px,38vw,520px)}

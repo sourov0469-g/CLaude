@@ -1,0 +1,23 @@
+/* SERVICES PAGE HEAD (R5, per-section versions): v1 type and the drawn roofline; v2 three job photos over the title;
+   v3 the title beside "On every job"; v4 one big job photo with the title on a card; v5 the six as an icon strip. */
+.sh2-strip{display:grid;grid-template-columns:2fr 1.3fr 1fr;gap:10px;height:clamp(160px,24vw,320px);margin-bottom:clamp(28px,4vw,48px)}
+.sh2-strip img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}
+.sh3 .sh-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:20px 56px;align-items:end}
+.sh3 .sh-head>*{grid-column:1}.sh3 .sh-head>.sh3-ev{grid-column:2;grid-row:1/span 3}.sh3 .sh-head>.pg-ridge{grid-column:1/-1}
+.sh3-ev{padding:clamp(20px,2.4vw,28px);border-radius:16px;background:var(--a50);box-shadow:inset 0 0 0 2px var(--a100)}
+.sh3-ev ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.sh3-ev li{position:relative;padding-left:28px;line-height:1.4;font-weight:600}
+.sh3-ev li::before{content:"";position:absolute;left:4px;top:.3em;width:12px;height:7px;border-left:3px solid var(--a700);border-bottom:3px solid var(--a700);rotate:-45deg}
+.sh4{display:grid}
+.sh4-ph{margin:0;height:clamp(260px,40vw,540px);border-radius:20px;overflow:hidden;background:var(--a100)}
+.sh4-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.sh4-card{position:relative;width:min(640px,100% - 32px);margin:calc(-1 * clamp(70px,9vw,140px)) 0 0 calc(max(0px,(100% - 1180px) / 2) + clamp(16px,3vw,40px));padding:clamp(22px,3vw,36px);border-radius:18px;background:var(--paper);box-shadow:0 30px 60px -36px rgb(20 20 20 / .55)}
+.sh4-card .btn{margin-top:18px}
+.sh5-nav{margin-top:clamp(20px,3vw,36px)}
+.sh5-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.sh5-i{display:grid;justify-items:center;align-content:start;gap:10px;min-height:44px;padding:18px 10px;border-radius:14px;background:var(--a50);box-shadow:inset 0 0 0 1px var(--a100);color:var(--ink);text-align:center;text-decoration:none;font:600 .9375rem/1.25 var(--f-head);transition:background-color .15s var(--ease-x),translate .15s var(--ease-x)}
+.sh5-i .ic-s{width:44px;height:44px}
+@media (hover:hover) and (pointer:fine){.sh5-i:hover{background:var(--a100);translate:0 -2px}}
+.sh5-i:active{scale:.97}
+@media (max-width:899px){.sh3 .sh-head{grid-template-columns:1fr}.sh3 .sh-head>.sh3-ev{grid-column:1;grid-row:auto}.sh5-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.sh2-strip{grid-template-columns:1.6fr 1fr;height:180px}.sh2-strip img:nth-child(3){display:none}.sh4-card{margin-left:12px;width:calc(100% - 24px)}}

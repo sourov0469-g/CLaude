@@ -314,6 +314,7 @@ html.cmp-on .cmp{display:block}
 .ch-up.is-press .ch-l-rung{animation:ch-rung .45s var(--ease-x) calc(var(--i) * 70ms) both}
 @keyframes ch-rung{0%,100%{stroke:var(--ink)}40%{stroke:var(--sun)}}
 .ch-ftel{position:relative;display:inline-block;justify-self:start;align-self:start} /* R3 footer: the bead spans the number, not the column */
+.ch-ftel::before{content:"";position:absolute;inset:-12px -6px} /* R5 QA: a 44px-tall hit area on phones without moving the number (WEB-SKILLS §3.8 touch 44x44) */
 /* R06 footer phone: a bead of sealant draws under the number; press tools it flat */
 .ch-bead{left:0;top:100%;width:100%;height:8px}
 .ch-bead path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:100;stroke-dashoffset:100;opacity:0;transition:stroke-dashoffset .3s var(--ease-x),opacity 0s .3s}
@@ -387,3 +388,42 @@ html.cmp-on .cmp{display:block}
 .pg-ridge{display:block;width:100%;height:clamp(26px,3.6vw,48px);margin-top:clamp(20px,2.6vw,32px);overflow:visible}
 .pg-ridge-e{fill:none;stroke:var(--a300);stroke-width:2;stroke-dasharray:8 8;vector-effect:non-scaling-stroke}
 .pg-ridge-a{fill:none;stroke:var(--a500);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+/* R5 inner pages, versioned per section (body and close sections open at 4.5rem minimum: the picker sits there): the page-head sections (sphero, abhero, cthero) and the close sections
+   (spclose, abclose) share their ground, measure and type; each version adds its own layout in its section file */
+.sh,.ah,.kt{--vbg:var(--paper);position:relative;background:var(--paper);color:var(--ink);padding:calc(var(--nav-h) + clamp(2.5rem,1.5rem + 4vw,5rem)) var(--gutter) clamp(1.5rem,1rem + 2vw,3rem)}
+.sh>*,.ah>*,.kt>*,.sc>*,.ac>*{max-width:1180px;margin-inline:auto}
+.sh-h1,.ah-h1,.kt-h1{font-size:var(--t-h1);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:20ch;font-family:var(--f-head);text-wrap:balance}
+.sh-sub,.ah-sub,.kt-sub,.kt-hours{margin-top:14px;font-size:var(--t-lead);line-height:1.5;color:var(--muted);max-width:52ch}
+.kt-hours{color:var(--ink);font-weight:600}.kt-sub a{color:var(--a700);font-weight:700}
+.sc,.ac{--vbg:var(--paper);position:relative;background:var(--paper);color:var(--ink);padding:clamp(4.5rem,3.5rem + 2vw,6rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.cs-h{font:700 clamp(1.5rem,1.1rem + 1.4vw,2.25rem)/1.15 var(--f-head);text-wrap:balance}
+.sc p,.ac p{line-height:1.5;max-width:52ch}
+/* v1 the card */
+.sc1-card,.ac1-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 32px;align-items:center;padding:clamp(28px,4vw,48px);border-radius:18px;background:var(--a100)}
+.sc1-card>.btn,.ac1-card>.btn{grid-column:2;grid-row:1/3}
+/* v2 the accent band with the number */
+.sc2-band,.ac2-band{display:grid;gap:10px;justify-items:start;padding:clamp(32px,5vw,64px);border-radius:22px;background:var(--a500);color:var(--black)}
+.sc2-num,.ac2-num{font:800 clamp(2.5rem,1.4rem + 4.6vw,5.5rem)/1 var(--f-head);letter-spacing:-.02em;white-space:nowrap}
+.sc2-num a,.ac2-num a{color:var(--black);text-decoration:none;background:linear-gradient(var(--black),var(--black)) 0 96%/100% .08em no-repeat}
+/* v3 Rachel beside the line */
+.sc3,.ac3{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
+.sc3-ph,.ac3-ph{margin:0;aspect-ratio:4/5;max-width:380px;border-radius:18px;overflow:hidden;background:var(--a100)}
+.sc3-ph img,.ac3-ph img,.sc5-ph img,.ac5-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.sc3-tx,.ac3-tx,.sc4-tx,.ac4-tx,.sc5-tx,.ac5-tx{display:grid;gap:14px;justify-items:start}
+/* v4 the phone message slip */
+.sc4,.ac4{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,80px);align-items:center}
+.sc4-slip,.ac4-slip{background:var(--paper);border-radius:6px;rotate:-1.5deg;box-shadow:0 0 0 1px var(--line),0 30px 50px -30px rgb(20 20 20 / .5);overflow:hidden;max-width:460px}
+.sc4-k,.ac4-k{margin:0;padding:12px 20px;background:var(--a500);color:var(--black);font:700 1.0625rem var(--f-head)}
+.sc4-rows,.ac4-rows{margin:0;padding:6px 20px 20px}
+.sc4-rows div,.ac4-rows div{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px dashed var(--n300)}
+.sc4-rows dt,.ac4-rows dt{font:600 var(--t-label) var(--f-head);color:var(--a700)}
+.sc4-rows dd,.ac4-rows dd{margin:0;font-weight:600}.sc4-rows a,.ac4-rows a{color:var(--black)}
+/* v5 a photo and the three facts */
+.sc5,.ac5{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:center}
+.sc5-ph,.ac5-ph{margin:0;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--a100)}
+.sc5-facts,.ac5-facts{list-style:none;margin:6px 0 0;padding:0;display:grid;width:100%}
+.sc5-facts li,.ac5-facts li{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:12px;padding:12px 0;border-top:2px solid var(--black)}
+.sc5-facts b,.ac5-facts b{font:600 var(--t-label) var(--f-head);color:var(--a700)}
+.sc5-facts a,.ac5-facts a{color:var(--black);font-weight:700}
+@media (max-width:760px){.sc1-card,.ac1-card{grid-template-columns:1fr}.sc1-card>.btn,.ac1-card>.btn{grid-column:1;grid-row:auto}.sc3,.ac3,.sc4,.ac4,.sc5,.ac5{grid-template-columns:1fr}.sc3-ph,.ac3-ph{max-width:260px}}
+@media (max-width:400px){.sc2-num,.ac2-num{font-size:2.125rem}}

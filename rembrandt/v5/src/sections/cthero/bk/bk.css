@@ -1,0 +1,88 @@
+/* Backups B1-B5 of the cthero section (R5): the whole-page contact layouts as they stood at cbe610a, before the page was split into sections; verbatim except the prefix ct -> ect. Never edit. */
+/* CONTACT PAGE (R4, TRACEABILITY.md "Contact page"): the phone, the office, the hours and the 24 towns (data/towns.js).
+   No form. v1 phone first; v2 office and towns by distance; v3 the week board; v4 the business card; v5 do we come to
+   you? (an accent panel: the amended Rule 1 bans dark panels). */
+.ect{--vbg:var(--paper);position:relative;background:var(--paper);color:var(--ink);padding:calc(var(--nav-h) + clamp(2.5rem,1.5rem + 4vw,5rem)) var(--gutter) calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.ect>*{max-width:1180px;margin-inline:auto}
+.ect-hero{margin-bottom:clamp(32px,4.4vw,56px)}
+.ect-h1{font-size:var(--t-h1);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:20ch;font-family:var(--f-head)}
+.ect-sub,.ect-hours{margin-top:12px;font-size:var(--t-lead);line-height:1.5;color:var(--muted);max-width:54ch}
+.ect-hours{color:var(--ink);font-weight:600}
+.ect-sub a{color:var(--a700);font-weight:700}
+.ect-h2{font:700 clamp(1.25rem,1rem + 1vw,1.75rem)/1.2 var(--f-head);margin-bottom:14px}
+.ect-office{display:grid;gap:10px;align-content:start;padding:clamp(22px,3vw,32px);border-radius:18px;background:var(--a50);box-shadow:inset 0 0 0 2px var(--a100)}
+.ect-office address{font-style:normal;font-size:1.125rem;font-weight:600;line-height:1.45}
+.ect-map,.ect4-map{display:inline-flex;align-items:center;min-height:44px;font:600 .9375rem var(--f-head);color:var(--a700);text-decoration:underline;text-underline-offset:4px}
+.ect-towns{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.ect-towns li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-weight:600}
+.ect-towns li .num{color:var(--n700);font-weight:600}
+.ect-towns--az{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.ect-src{margin-top:14px;font-size:.8125rem;color:var(--muted)}
+
+.ect1-num{margin-top:6px;font:800 clamp(2.75rem,1.4rem + 5.6vw,6.5rem)/1 var(--f-head);letter-spacing:-.02em;white-space:nowrap}
+.ect1-num a{color:var(--black);text-decoration:none;background:linear-gradient(var(--a500),var(--a500)) 0 94%/100% .14em no-repeat}
+.ect1-row,.ect3-row{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:start}
+
+.ect2-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,4fr);gap:clamp(20px,3vw,44px);align-items:start}
+.ect2-ring{margin:0;display:grid;gap:10px}.ect2-ring figcaption{font-size:.875rem;color:var(--muted);text-align:center}
+.ect-ring{width:100%;height:auto;overflow:visible}
+.ect-ring-c{fill:none;stroke:var(--a200);stroke-dasharray:3 4}
+.ect-ring-t{font:600 9px var(--f-head);fill:var(--a700)}
+.ect-ring-dot{fill:var(--a500)}.ect-ring-home{fill:var(--black)}
+.ect-towns--near li{padding:7px 0}
+
+.ect3-board{position:relative;margin-bottom:clamp(32px,4vw,56px);padding:clamp(18px,2.6vw,28px);border-radius:18px;background:var(--a50);box-shadow:inset 0 0 0 2px var(--a100)}
+.ect3-scale{display:grid;grid-template-columns:9fr 8fr 7fr 0;margin:0 calc(var(--tail) + 14px) 0 calc(var(--lab) + 14px);white-space:nowrap;font:600 .75rem var(--f-head);color:var(--n700);padding-bottom:6px}
+.ect3-board{--lab:7.5rem;--tail:5.5rem}
+.ect3-week{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ect3-day{display:grid;grid-template-columns:var(--lab) minmax(0,1fr) var(--tail);gap:14px;align-items:center}
+.ect3-day b{font-family:var(--f-head)}
+.ect3-bar{position:relative;height:22px;border-radius:6px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.ect3-on{position:absolute;left:37.5%;width:33.333%;top:0;bottom:0;border-radius:6px;background:var(--a500)}
+.ect3-day--off .ect3-on{display:none}
+.ect3-day--off b,.ect3-day--off .ect3-h{color:var(--n500)}
+.ect3-h{font-weight:600;font-size:.9375rem}
+.ect3-day.is-today b{color:var(--a700)}
+.ect3-now{position:absolute;width:2px;background:var(--black);pointer-events:none}
+.ect3-now span{position:absolute;top:50%;left:6px;translate:0 -50%;padding:1px 6px;border-radius:999px;background:var(--black);color:var(--paper);font:600 .6875rem var(--f-head)}
+.ect-towns--cols{display:block;columns:3 10rem;column-gap:28px}
+.ect-towns--cols li{break-inside:avoid}
+@media (max-width:640px){.ect3-board{--lab:5.6rem;--tail:3.6rem}.ect3-h{font-size:.8125rem}.ect3-day b{font-size:.9375rem}}
+
+.ect4-stage{display:grid;justify-items:center;gap:18px;margin-bottom:clamp(40px,5vw,72px);perspective:1400px}
+.ect4-card{position:relative;width:min(100%,560px);aspect-ratio:1.75;transform-style:preserve-3d;transition:transform .6s var(--ease-x)}
+.ect4-card.is-back{transform:rotateY(180deg)}
+.ect4-face{position:absolute;inset:0;display:grid;align-content:center;gap:6px;padding:clamp(20px,4vw,40px);border-radius:14px;backface-visibility:hidden;box-shadow:0 0 0 1px var(--line),0 30px 50px -30px rgb(20 20 20 / .5)}
+.ect4-front{background:var(--paper)}
+.ect4-back{background:var(--a500);transform:rotateY(180deg)}
+.ect4-mark{width:56px;fill:var(--a500);margin-bottom:6px}
+.ect4-name{font:700 clamp(1.125rem,.9rem + 1vw,1.5rem)/1.2 var(--f-head)}
+.ect4-who{color:var(--n700)}
+.ect4-num{font:800 clamp(1.75rem,1rem + 3vw,2.75rem)/1.1 var(--f-head)}.ect4-num a{color:var(--black);text-decoration:none}
+.ect4-hrs{font-weight:600}
+.ect4-back address{font-style:normal;font-size:1.25rem;font-weight:600;line-height:1.4}
+.ect4-back .ect4-map{color:var(--black)}
+.ect4-turn{min-height:48px;padding:0 24px;border:2px solid var(--black);border-radius:999px;background:var(--paper);font:600 1rem var(--f-head);cursor:pointer}
+.ect4-turn[aria-pressed="true"]{background:var(--a500);border-color:var(--a500)}
+.ect4-turn:active{scale:.97}
+.ect-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ect-chips li{padding:8px 14px;border-radius:999px;background:var(--a50);box-shadow:inset 0 0 0 1px var(--a200);font-weight:600;font-size:.9375rem}
+.ect-chips li .num{margin-left:6px;color:var(--a700)}
+@media (prefers-reduced-motion:reduce){.ect4-card{transition:none}}
+
+.ect5-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,4fr);gap:clamp(24px,4vw,64px);align-items:start}
+.ect5-find{display:grid;gap:10px}
+.ect5-lab{font:600 1.0625rem var(--f-head)}
+.ect5-in{width:100%;min-height:60px;padding:0 18px;border:2px solid var(--black);border-radius:14px;background:var(--paper);font:600 1.375rem var(--f-body);color:var(--ink)}
+.ect5-in:focus-visible{outline:none;box-shadow:var(--focus)}
+.ect5-out{min-height:3.2em;font-size:var(--t-lead);line-height:1.45;font-weight:600}
+.ect5-out.is-yes{color:var(--a700)}
+.ect5-out a{color:var(--a700)}
+.ect5-panel{display:grid;gap:8px;padding:clamp(22px,3vw,34px);border-radius:18px;background:var(--a500);color:var(--black)}
+.ect5-panel address{font-style:normal;font-weight:600}
+.ect5-num{font:800 clamp(1.75rem,1rem + 2.4vw,2.5rem)/1.1 var(--f-head)}.ect5-num a{color:var(--black);text-decoration:none}
+.ect5-panel .ect-map{color:var(--black)}
+
+@media (max-width:899px){.ect1-row,.ect3-row,.ect5-grid{grid-template-columns:1fr}.ect2-grid{grid-template-columns:1fr}.ect2-ring{max-width:360px;justify-self:center}}
+@media (max-width:520px){.ect-towns--az{grid-template-columns:1fr}.ect1-num{font-size:2.25rem}}
+.ect3-scale span:last-child{translate:-100% 0}
