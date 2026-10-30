@@ -114,7 +114,7 @@
         svg.setAttribute('viewBox', '0 0 400 300');
         svg.innerHTML =
           '<defs><filter id="ba2-w' + i + '" x="-10%" y="-20%" width="120%" height="140%"><feTurbulence type="turbulence" baseFrequency=".035 .08" numOctaves="2" seed="' + (i + 3) + '" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="26"/></filter>' +
-          '<mask id="ba2-m' + i + '"><rect class="mk" x="-20" y="-40" width="440" height="40" fill="#fff" filter="url(#ba2-w' + i + ')"/></mask>' +
+          '<mask id="ba2-m' + i + '"><rect class="mk" x="-20" y="-40" width="440" height="40" fill="#FFFFFF" filter="url(#ba2-w' + i + ')"/></mask>' +
           '<clipPath id="ba2-c' + i + '"><rect width="400" height="300"/></clipPath></defs>' +
           '<g clip-path="url(#ba2-c' + i + ')"><image href="' + EZ.img(p.b) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice"/>' +
           '<image href="' + EZ.img(p.a) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice" mask="url(#ba2-m' + i + ')"/></g>' +

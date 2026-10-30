@@ -7,7 +7,7 @@
   var TRUCK = '<g class="truck"><rect x="-26" y="-9" width="30" height="13" rx="2" fill="#FF5F00" stroke="#121212" stroke-width="2"/>' +
     '<path d="M4 4 V-9 h11 l8 8 V4 Z" fill="#FF5F00" stroke="#121212" stroke-width="2" stroke-linejoin="round"/><path d="M8 -6 h6 l5 5 h-11 Z" fill="#FFFFFF" stroke="#121212" stroke-width="1.2"/>' +
     '<circle cx="-16" cy="6" r="5" fill="#121212"/><circle cx="-16" cy="6" r="2" fill="#C9C1B6"/><circle cx="13" cy="6" r="5" fill="#121212"/><circle cx="13" cy="6" r="2" fill="#C9C1B6"/>' +
-    '<rect x="-24" y="-15" width="8" height="6" fill="#FFC29A" stroke="#121212" stroke-width="1.2"/><rect x="-14" y="-15" width="8" height="6" fill="#FFC29A" stroke="#121212" stroke-width="1.2"/></g>';
+    '<rect x="-24" y="-15" width="8" height="6" fill="#FFC9A3" stroke="#121212" stroke-width="1.2"/><rect x="-14" y="-15" width="8" height="6" fill="#FFC9A3" stroke="#121212" stroke-width="1.2"/></g>';
   // one drawn mark per stage (40x40): clipboard, flood gauge, set square, scope sheet, permit card, framing, level, keys
   var ICONS = [
     '<rect class="s" x="10" y="8" width="20" height="27" rx="2"/><rect class="f" x="15" y="5" width="10" height="6" rx="1.5"/><path class="s" d="M15 18h10M15 23h10M15 28h6"/>',

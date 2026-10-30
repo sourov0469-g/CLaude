@@ -44,8 +44,8 @@
     art: function (w, h) {
       var d = 'M' + (P + 3) + ' ' + (P + 3) + 'H' + (P + w - 3) + 'V' + (P + h - 3) + 'H' + (P + 3) + 'Z';
       return '<path class="box" d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>' +
-        '<g class="pc" opacity="0"><path d="M0 0 L-4 -9 L4 -9 Z" fill="#ecdcc4" stroke="' + INK + '" stroke-width="1"/><path d="M-1.3 -3 L0 0 L1.3 -3Z" fill="' + INK + '"/>' +
-        '<rect x="-4" y="-34" width="8" height="25" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.1"/><rect x="-4" y="-38" width="8" height="4" fill="#d06a5a" stroke="' + INK + '" stroke-width="1.1"/></g>' +
+        '<g class="pc" opacity="0"><path d="M0 0 L-4 -9 L4 -9 Z" fill="#E3DBCF" stroke="' + INK + '" stroke-width="1"/><path d="M-1.3 -3 L0 0 L1.3 -3Z" fill="' + INK + '"/>' +
+        '<rect x="-4" y="-34" width="8" height="25" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.1"/><rect x="-4" y="-38" width="8" height="4" fill="#FF9C5E" stroke="' + INK + '" stroke-width="1.1"/></g>' +
         '<path class="tk" d="M' + (P + w - 22) + ' ' + (P + h / 2) + 'l5 5l11 -12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>';
     },
     hover: function (svg) {
@@ -124,7 +124,7 @@
   /* before/after: a fan of paint swatches opens at the right edge; click lets a drip fall */
   R.swatch = {
     art: function (w, h) {
-      var x = P + w - 16, y = P + h - 4, cols = ['#ecdcc4', '#FF5F00', '#FF5F00', '#FFC29A'], s = '';
+      var x = P + w - 16, y = P + h - 4, cols = ['#E3DBCF', '#FF5F00', '#FF5F00', '#FFC9A3'], s = '';
       for (var i = 0; i < 4; i++) s += '<rect class="sw' + i + '" x="' + (x - 3) + '" y="' + (y - 30) + '" width="9" height="30" rx="1" fill="' + cols[i] + '" stroke="' + INK + '" stroke-width="1"/>';
       return '<g class="fan" opacity="0">' + s + '<circle cx="' + (x + 1.5) + '" cy="' + (y - 4) + '" r="1.6" fill="' + INK + '"/></g><circle class="dp" cx="' + (x + 1.5) + '" cy="' + (y + 2) + '" r="2.6" fill="#FF5F00" opacity="0"/>';
     },
@@ -145,7 +145,7 @@
       return '<g class="vf" fill="none" stroke="currentColor" stroke-width="2"><path class="c0" d="M' + a + ' ' + (c + L) + 'V' + c + 'H' + (a + L) + '"/><path class="c1" d="M' + (b - L) + ' ' + c + 'H' + b + 'V' + (c + L) + '"/>' +
         '<path class="c2" d="M' + b + ' ' + (d - L) + 'V' + d + 'H' + (b - L) + '"/><path class="c3" d="M' + (a + L) + ' ' + d + 'H' + a + 'V' + (d - L) + '"/></g>' +
         '<circle class="rec" cx="' + (P + w - 10) + '" cy="' + (P + 10) + '" r="2.5" fill="' + RED + '" opacity="0"/>' +
-        '<rect class="fl" x="' + P + '" y="' + P + '" width="' + w + '" height="' + h + '" fill="#fff" opacity="0"/>';
+        '<rect class="fl" x="' + P + '" y="' + P + '" width="' + w + '" height="' + h + '" fill="#FFFFFF" opacity="0"/>';
     },
     hover: function (svg) {
       return gsap.timeline({ paused: true })
@@ -164,7 +164,7 @@
   R.masking = {
     art: function (w, h) {
       function strip(cx, cy, a, cls) {
-        return '<g class="' + cls + '" transform="translate(' + cx + ' ' + cy + ') rotate(' + a + ')"><path d="M-20 -7 L20 -7 L22 -4 L19 -1 L22 2 L20 7 L-20 7 L-22 4 L-19 1 L-22 -2 Z" fill="#e9dfc2" fill-opacity=".9" stroke="#b9ad8c" stroke-width=".8"/></g>';
+        return '<g class="' + cls + '" transform="translate(' + cx + ' ' + cy + ') rotate(' + a + ')"><path d="M-20 -7 L20 -7 L22 -4 L19 -1 L22 2 L20 7 L-20 7 L-22 4 L-19 1 L-22 -2 Z" fill="#E3DBCF" fill-opacity=".9" stroke="#C9B48F" stroke-width=".8"/></g>';
       }
       return strip(P + 10, P + 4, -32, 'ta') + strip(P + w - 10, P + h - 4, -32, 'tb');
     },
@@ -184,7 +184,7 @@
     art: function (w, h) {
       var cx = P + 12, cy = P + 6;
       function key(a, col) { return '<g class="ky" transform="rotate(' + a + ' ' + cx + ' ' + cy + ')"><circle cx="' + cx + '" cy="' + (cy + 12) + '" r="4.5" fill="' + col + '" stroke="' + INK + '" stroke-width="1.1"/><path d="M' + cx + ' ' + (cy + 16) + 'v14m0 -4h4m-4 4h3" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/></g>'; }
-      return '<g class="kr" opacity="0"><circle cx="' + cx + '" cy="' + cy + '" r="6" fill="none" stroke="' + STEEL + '" stroke-width="2"/>' + key(-20, YEL) + key(10, STEEL) + key(34, '#FFC29A') + '</g>';
+      return '<g class="kr" opacity="0"><circle cx="' + cx + '" cy="' + cy + '" r="6" fill="none" stroke="' + STEEL + '" stroke-width="2"/>' + key(-20, YEL) + key(10, STEEL) + key(34, '#FFC9A3') + '</g>';
     },
     hover: function (svg) {
       var tl = gsap.timeline({ paused: true }).fromTo(one(svg, '.kr'), { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: .25, ease: 'power3.out' }, 0);

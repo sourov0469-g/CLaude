@@ -7,11 +7,11 @@
   pointer-events: none; opacity: 0;
   transition: opacity 200ms var(--ease-out);
   will-change: transform;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .28));
+  filter: drop-shadow(0 6px 10px rgba(18, 18, 18, .28));
 }
 .buddy.is-on { opacity: 1; }
 /* the pointer tip: replaces the system arrow while the companion is on (fine pointers, motion on, a buddy chosen) */
-.ptip { position: fixed; left: 0; top: 0; z-index: 95; width: 40px; height: 40px; margin: -20px 0 0 -20px; pointer-events: none; opacity: 0; color: #B84200; will-change: transform; }
+.ptip { position: fixed; left: 0; top: 0; z-index: 95; width: 40px; height: 40px; margin: -20px 0 0 -20px; pointer-events: none; opacity: 0; color: var(--a-700); will-change: transform; }
 .ptip.is-on { opacity: 1; }
 .ptip svg { display: block; overflow: visible; max-width: none; transition: transform 120ms var(--ease-out); }
 .ptip.is-down svg { transform: scale(.78); }
@@ -39,7 +39,7 @@ html.has-buddy select { cursor: default !important; }
     box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .18);
   }
   .buddysw button:hover { opacity: 1; }
-  .buddysw button[aria-checked="true"] { background: #FF5F00; color: #121212; opacity: 1; box-shadow: none; }
+  .buddysw button[aria-checked="true"] { background: var(--a-500); color: var(--ink); opacity: 1; box-shadow: none; }
 }
 @media (prefers-reduced-motion: reduce) { .settings .buddysw { display: none; } }
 [data-motion="off"] .settings .buddysw { display: none; }
@@ -119,15 +119,15 @@ html.has-buddy select { cursor: default !important; }
 .fld-studs {
   position: absolute; inset: 0;
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 40px, rgba(201, 164, 106, .55) 40px 54px, transparent 54px 96px),
-    repeating-linear-gradient(180deg, transparent 0 46px, rgba(201, 164, 106, .4) 46px 49px, transparent 49px 192px);
+    repeating-linear-gradient(90deg, transparent 0 40px, rgba(201, 180, 143, .55) 40px 54px, transparent 54px 96px),
+    repeating-linear-gradient(180deg, transparent 0 46px, rgba(201, 180, 143, .4) 46px 49px, transparent 49px 192px);
   opacity: .12;
 }
 .fld-live .fld-studs { opacity: 0; transition: opacity 300ms var(--ease-out); -webkit-mask: radial-gradient(170px circle at var(--mx) var(--my), #000 30%, transparent); mask: radial-gradient(170px circle at var(--mx) var(--my), #000 30%, transparent); }
 .fld-live .is-hot .fld-studs { opacity: 1; }
 
 /* process: chalk lines */
-.fld-chalk { fill: none; stroke: #FF5F00; stroke-width: 1.3; opacity: .34; }
+.fld-chalk { fill: none; stroke: var(--a-500); stroke-width: 1.3; opacity: .34; }
 
 /* financing: ledger + plumb bob */
 .fld-ledger {
@@ -148,10 +148,10 @@ html.has-buddy select { cursor: default !important; }
 .fld-wood {
   position: absolute; inset: 0; opacity: .07;
   background-image:
-    repeating-linear-gradient(90deg, #c79a61 0 1px, transparent 1px 7px, #c79a61 7px 8px, transparent 8px 19px),
-    repeating-linear-gradient(90deg, transparent 0 240px, rgba(199, 154, 97, .9) 240px 242px);
+    repeating-linear-gradient(90deg, var(--old) 0 1px, transparent 1px 7px, var(--old) 7px 8px, transparent 8px 19px),
+    repeating-linear-gradient(90deg, transparent 0 240px, rgba(201, 180, 143, .9) 240px 242px);
 }
-.fld-halo { position: absolute; inset: 0; opacity: 0; transition: opacity 300ms var(--ease-out); background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 30%), rgba(255, 236, 170, .16), transparent 70%); }
+.fld-halo { position: absolute; inset: 0; opacity: 0; transition: opacity 300ms var(--ease-out); background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 30%), rgba(255, 231, 214, .16), transparent 70%); }
 .fld-live .is-hot .fld-halo { opacity: 1; }
 
 /* towns: compass + stakes */
@@ -176,8 +176,8 @@ html.has-buddy select { cursor: default !important; }
   opacity: .05;
 }
 .fld-laser, .fld-dot, .fld-emitter { position: absolute; opacity: 0; transition: opacity 250ms var(--ease-out); }
-.fld-laser { left: 0; right: 0; top: var(--my); height: 1px; background: #C42B1C; box-shadow: 0 0 6px 1px rgba(196, 43, 28, .6); }
-.fld-dot { left: calc(var(--mx) - 4px); top: calc(var(--my) - 4px); width: 9px; height: 9px; border-radius: 50%; background: #C42B1C; box-shadow: 0 0 12px 3px rgba(255, 90, 60, .55); }
+.fld-laser { left: 0; right: 0; top: var(--my); height: 1px; background: var(--err); box-shadow: 0 0 6px 1px rgba(196, 43, 28, .6); }
+.fld-dot { left: calc(var(--mx) - 4px); top: calc(var(--my) - 4px); width: 9px; height: 9px; border-radius: 50%; background: var(--err); box-shadow: 0 0 12px 3px rgba(255, 95, 0, .55); }
 .fld-emitter { left: 6px; top: calc(var(--my) - 13px); }
 .fld-live .is-hot .fld-laser { opacity: .5; }
 .fld-live .is-hot .fld-dot, .fld-live .is-hot .fld-emitter { opacity: .9; }
@@ -185,7 +185,7 @@ html.has-buddy select { cursor: default !important; }
 /* footer: rebar mat */
 .fld-rebar {
   position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(0deg, transparent 0 46px, rgba(201, 164, 106, .5) 46px 49px), repeating-linear-gradient(90deg, transparent 0 46px, rgba(201, 164, 106, .5) 46px 49px);
+  background-image: repeating-linear-gradient(0deg, transparent 0 46px, rgba(201, 180, 143, .5) 46px 49px), repeating-linear-gradient(90deg, transparent 0 46px, rgba(201, 180, 143, .5) 46px 49px);
   opacity: .07;
 }
 
@@ -198,10 +198,10 @@ html.has-buddy select { cursor: default !important; }
 .dv-steel { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
 .dv-web { fill: var(--surface); }
 .dv-bolt { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
-.dv-tapeband { fill: none; stroke: #FF5F00; stroke-width: 22; }
-.dv-tapestripe { fill: none; stroke: #121212; stroke-width: 22; stroke-dasharray: 16 16; }
-.dv-pipe { fill: none; stroke: #9aa6a9; stroke-width: 8; stroke-linecap: round; }
-.dv-jb rect { fill: #C9C1B6; stroke: var(--bg); stroke-width: 2; }
+.dv-tapeband { fill: none; stroke: var(--a-500); stroke-width: 22; }
+.dv-tapestripe { fill: none; stroke: var(--ink); stroke-width: 22; stroke-dasharray: 16 16; }
+.dv-pipe { fill: none; stroke: var(--old); stroke-width: 8; stroke-linecap: round; }
+.dv-jb rect { fill: var(--grey); stroke: var(--bg); stroke-width: 2; }
 .dv-jb circle { fill: var(--bg); }
 .dv-strap { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; }
 .dv-blade { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.2; stroke-linejoin: round; }
@@ -211,10 +211,10 @@ html.has-buddy select { cursor: default !important; }
 .dv-tile { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
 .dv-grout { fill: none; stroke: var(--muted); stroke-width: 2; }
 .dv-pivot { fill: var(--line); }
-.dv-brick { fill: #8b4a36; stroke: var(--bg); stroke-width: 3; }
-[data-theme="daylight"] .dv-brick { fill: #b8644a; }
+.dv-brick { fill: var(--muted); stroke: var(--bg); stroke-width: 3; }
+[data-theme="daylight"] .dv-brick { fill: var(--a-700); }
 .dv-footing { fill: var(--surface-2); }
 .dv-hatch { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .7; }
-.dv-bar { fill: none; stroke: #FFC29A; stroke-width: 2; }
-.dv-rebar { fill: #FFC29A; }
-.dv-sh { fill: #6b4a33; stroke: var(--bg); stroke-width: 1.5; }
+.dv-bar { fill: none; stroke: var(--a-200); stroke-width: 2; }
+.dv-rebar { fill: var(--a-200); }
+.dv-sh { fill: var(--muted); stroke: var(--bg); stroke-width: 1.5; }

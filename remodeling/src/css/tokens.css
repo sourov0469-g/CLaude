@@ -7,6 +7,7 @@
 :root {
   /* OWNER REDESIGN: light only. Black + white + one orange accent with its tints; near-black text on a warm off-white page.
      Accent #FF5F00 = 3.05:1 on white (large type, fills, rules); #B84200 (a-700) carries accent TEXT at 5.5:1. */
+  --grey: #C9C1B6;  --white: #FFFFFF;  --err: #C42B1C;
   --a-50: #FFF5EE;  --a-100: #FFE7D6;  --a-200: #FFC9A3;  --a-300: #FF9C5E;
   --a-500: #FF5F00; --a-600: #E95600;  --a-700: #B84200;  --a-800: #7A2C00;
   --paper: #FAF7F2;          /* warm off-white page ground */

@@ -21,10 +21,10 @@
 .work1__sheet::before, .work1__sheet::after { content: ""; position: absolute; width: 14px; height: 14px; border: 0 solid var(--accent); pointer-events: none; }
 .work1__sheet::before { left: -5px; top: -5px; border-width: 1.5px 0 0 1.5px; }
 .work1__sheet::after { right: -5px; bottom: -5px; border-width: 0 1.5px 1.5px 0; }
-.work1__ph { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #FFFFFF; }
+.work1__ph { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--white); }
 .work1__ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .work1__it.is-open .work1__ph { aspect-ratio: 16 / 8; }
-.work1__it.is-open .work1__ph img { object-fit: contain; background: #FFFFFF; }
+.work1__it.is-open .work1__ph img { object-fit: contain; background: var(--white); }
 .work1__meta { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; padding-top: 12px; }
 .work1__no { grid-row: 1 / span 2; font: 400 1rem/1 var(--f-display); letter-spacing: -.005em; color: var(--accent); padding-top: 2px; }
 .work1__t { font: 500 .9375rem/1.3 var(--f-text); }
@@ -40,12 +40,12 @@
 
 /* ---------- v2 · On the turntable ---------- */
 .work2 { margin-block: calc(var(--section-y) * -1); }
-.work2__stage { --tint: #FF5F00; padding-block: var(--section-y); background: radial-gradient(120% 80% at 50% 62%, color-mix(in oklab, var(--tint) 55%, var(--bg)) 0%, var(--bg) 70%); }
+.work2__stage { --tint: var(--a-500); padding-block: var(--section-y); background: radial-gradient(120% 80% at 50% 62%, color-mix(in oklab, var(--tint) 55%, var(--bg)) 0%, var(--bg) 70%); }
 .work2__arc { display: block; width: min(800px, 92%); height: auto; margin: 0 auto -8px; overflow: visible; }
 .work2__arc .tk { stroke: var(--line-soft); stroke-width: 1.2; }
 .work2__arc .tkm { stroke: var(--ink); stroke-width: 1.6; }
 .work2__arc .arc { fill: none; stroke: var(--line-soft); stroke-width: 1.2; }
-.work2__arc .ndl { fill: #FF5F00; stroke: #121212; stroke-width: 1.5; }
+.work2__arc .ndl { fill: var(--a-500); stroke: var(--ink); stroke-width: 1.5; }
 .work2__track {
   display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
   padding: 40px calc(50% - min(26vw, 210px)); perspective: 1800px; perspective-origin: 50% 50%;
@@ -97,16 +97,16 @@
 .wb__belt::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
 .wb__belt::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
 .wb__track { display: flex; gap: clamp(12px, 1.6vw, 22px); width: max-content; }
-.wb__tile { --h: clamp(190px, 26vw, 340px); position: relative; flex: none; height: var(--h); padding: 0; border: 0; background: #FFFFFF; cursor: pointer; overflow: visible; }
+.wb__tile { --h: clamp(190px, 26vw, 340px); position: relative; flex: none; height: var(--h); padding: 0; border: 0; background: var(--white); cursor: pointer; overflow: visible; }
 .wb__belt--b .wb__tile { --h: clamp(160px, 20vw, 270px); }
 .wb__tile img { display: block; height: 100%; width: auto; object-fit: cover; }
-.wb__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 22px 12px 10px; background: linear-gradient(transparent, rgba(255, 255, 255, .88)); color: #121212; text-align: left; font: 500 .8125rem/1.3 var(--f-text); opacity: 0; transform: translateY(6px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
-.wb__cap b { display: block; font: 400 .875rem/1 var(--f-display); letter-spacing: -.005em; color: #B84200; margin-bottom: 3px; }
+.wb__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 22px 12px 10px; background: linear-gradient(transparent, rgba(255, 255, 255, .88)); color: var(--ink); text-align: left; font: 500 .8125rem/1.3 var(--f-text); opacity: 0; transform: translateY(6px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+.wb__cap b { display: block; font: 400 .875rem/1 var(--f-display); letter-spacing: -.005em; color: var(--a-700); margin-bottom: 3px; }
 .wb__tile:focus-visible .wb__cap { opacity: 1; transform: none; }
 @media (hover: hover) and (pointer: fine) {
   .wb__tile:hover .wb__cap { opacity: 1; transform: none; }
 }
-.wb__tile:focus-visible { outline: 3px solid #FF5F00; outline-offset: 3px; }
+.wb__tile:focus-visible { outline: 3px solid var(--a-500); outline-offset: 3px; }
 .wb__foot { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; margin-top: var(--s7); }
 .wb.is-static .wb__belt { overflow-x: auto; scrollbar-width: thin; }
 .wb.is-static .wb__track { padding-left: var(--margin); }
@@ -118,5 +118,5 @@
 
 /* [AUDIT-01 F7] slot 1: captions permanent at every width; teal label and focus ring (gold off controls) */
 .wb__cap { opacity: 1; transform: none; transition: none; }
-.wb__cap b { color: #B84200; letter-spacing: .08em; }
-.wb__tile:focus-visible { outline-color: #FF5F00; }
+.wb__cap b { color: var(--a-700); letter-spacing: .08em; }
+.wb__tile:focus-visible { outline-color: var(--a-500); }

@@ -120,7 +120,7 @@
         // the average, set in the display face, sampled for 343 evenly spaced points [S0687 counter/constellation FX]
         var o = document.createElement('canvas'); o.width = W; o.height = H;
         var c = o.getContext('2d');
-        c.fillStyle = '#000'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.fillStyle = '#121212'; c.textAlign = 'center'; c.textBaseline = 'middle';
         c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Poppins", Arial, sans-serif';
         c.fillText('4.8', W / 2, H * .53);
         var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 160));

@@ -498,7 +498,7 @@
       var m = root.dataset.motion === 'off' ? 'off' : 'on';
       doc.querySelectorAll('[data-setting="motion"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.value === m ? 'true' : 'false'); });
       var meta = doc.querySelector('meta[name="theme-color"]');
-      if (meta) meta.content = root.dataset.theme === 'daylight' ? '#EEF2F1' : '#0B1418';
+      if (meta) meta.content = root.dataset.theme === 'daylight' ? '#F1ECE4' : '#121212';
     }
     function toggle(open) {
       panel.hidden = !open;
@@ -601,7 +601,7 @@
           gsap.fromTo(img, { x: a.left + a.width / 2 - (b.left + b.width / 2), y: a.top + a.height / 2 - (b.top + b.height / 2), scale: Math.max(a.width / b.width, .2) },
             { x: 0, y: 0, scale: 1, duration: .3, ease: 'power2.inOut', clearProps: 'transform' });
         }
-        gsap.fromTo(box, { backgroundColor: 'rgba(8,14,17,0)' }, { backgroundColor: 'rgba(8,14,17,.94)', duration: .25, clearProps: 'backgroundColor' });
+        gsap.fromTo(box, { backgroundColor: 'rgba(18, 18, 18, 0)' }, { backgroundColor: 'rgba(18, 18, 18, .94)', duration: .25, clearProps: 'backgroundColor' });
       }
       closeBtn.focus();
     }

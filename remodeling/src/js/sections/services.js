@@ -41,7 +41,7 @@
         var e = -6, w = 212, ez = 80, rz = 128;
         return '<polygon class="m-roof-l" points="' + pts([[e, -8, ez], [w, -8, ez], [w, 80, rz], [e, 80, rz]]) + '" stroke="#121212" stroke-width="1.1"/>' +
           '<polygon class="m-roof" points="' + pts([[e, 80, rz], [w, 80, rz], [w, 168, ez], [e, 168, ez]]) + '" stroke="#121212" stroke-width="1.1"/>' +
-          '<polygon class="m-wall" points="' + pts([[w - 6, -8, ez], [w - 6, 80, rz], [w - 6, 168, ez]]) + '" fill="#d6d1c5" stroke="#121212" stroke-width="1.1"/>';
+          '<polygon class="m-wall" points="' + pts([[w - 6, -8, ez], [w - 6, 80, rz], [w - 6, 168, ez]]) + '" fill="#E3DBCF" stroke="#121212" stroke-width="1.1"/>';
       } }
     ] }
   };
@@ -187,11 +187,11 @@
       h += '<rect class="frm" x="5" y="5" width="' + (W - 10) + '" height="' + (H - 10) + '"/>';
       // tools hang from hooks [BANK 91: hammer strike, trowel sweep, cabinet door swing]
       h += '<g class="tool" data-t="0"><path class="hook" d="M100 75v14q0 8 8 8"/><path class="hook" d="M175 75v14q0 8 -8 8"/>' +
-        '<g class="door"><rect x="86" y="95" width="104" height="160" fill="#2a5d61" stroke="#121212" stroke-width="3"/><rect x="102" y="111" width="72" height="128" fill="#FF5F00" stroke="#121212" stroke-width="2.5"/><rect x="170" y="170" width="6" height="26" rx="3" fill="#FFC29A" stroke="#121212" stroke-width="1.5"/></g>' +
+        '<g class="door"><rect x="86" y="95" width="104" height="160" fill="#5E5852" stroke="#121212" stroke-width="3"/><rect x="102" y="111" width="72" height="128" fill="#FF5F00" stroke="#121212" stroke-width="2.5"/><rect x="170" y="170" width="6" height="26" rx="3" fill="#FFC9A3" stroke="#121212" stroke-width="1.5"/></g>' +
         '<rect x="80" y="118" width="8" height="18" fill="#C9C1B6" stroke="#121212" stroke-width="1.5"/><rect x="80" y="214" width="8" height="18" fill="#C9C1B6" stroke="#121212" stroke-width="1.5"/></g>';
-      h += '<g class="tool" data-t="1"><path class="hook" d="M300 75v22"/><g class="trowel"><rect x="291" y="96" width="18" height="46" rx="8" fill="#FF9A5C" stroke="#121212" stroke-width="2.5"/><path d="M300 142v22" stroke="#121212" stroke-width="4"/>' +
+      h += '<g class="tool" data-t="1"><path class="hook" d="M300 75v22"/><g class="trowel"><rect x="291" y="96" width="18" height="46" rx="8" fill="#FF9C5E" stroke="#121212" stroke-width="2.5"/><path d="M300 142v22" stroke="#121212" stroke-width="4"/>' +
         '<path d="M250 164h100v58l-6 0v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-6z" fill="#C9C1B6" stroke="#121212" stroke-width="2.5" stroke-linejoin="round"/></g></g>';
-      h += '<g class="tool" data-t="2"><path class="hook" d="M440 75v20"/><path class="hook" d="M520 75v20"/><g class="hammer"><rect x="472" y="88" width="16" height="170" rx="6" fill="#FF9A5C" stroke="#121212" stroke-width="2.5"/>' +
+      h += '<g class="tool" data-t="2"><path class="hook" d="M440 75v20"/><path class="hook" d="M520 75v20"/><g class="hammer"><rect x="472" y="88" width="16" height="170" rx="6" fill="#FF9C5E" stroke="#121212" stroke-width="2.5"/>' +
         '<path d="M430 92h88l10 8v22h-98q-12 -6 -14 -18q4 -10 14 -12z" fill="#C9C1B6" stroke="#121212" stroke-width="2.5" stroke-linejoin="round"/><path d="M528 100q22 -2 30 16q-16 -6 -30 -2z" fill="#C9C1B6" stroke="#121212" stroke-width="2.5"/></g>' +
         '<g class="nail"><path d="M560 330v-26" stroke="#C9C1B6" stroke-width="4"/><rect x="552" y="300" width="16" height="5" fill="#C9C1B6" stroke="#121212" stroke-width="1.5"/></g></g>';
       svg.innerHTML = h;

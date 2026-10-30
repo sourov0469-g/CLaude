@@ -223,7 +223,7 @@
       '<g class="fld-needle"><path d="M0 -80 L7 0 L-7 0 Z" fill="#C42B1C"/><path d="M0 80 L7 0 L-7 0 Z" fill="' + STEEL + '"/><circle r="6" fill="' + INK + '" stroke="' + STEEL + '" stroke-width="2"/></g></svg>' +
       '<svg class="fld-svg fld-stakes" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">' +
       [[120, 460], [300, 120], [540, 520], [860, 380], [700, 90]].map(function (p) {
-        return '<g transform="translate(' + p[0] + ' ' + p[1] + ')"><path d="M0 0 V-40" stroke="#FFC29A" stroke-width="5"/><path d="M0 0 l-2.5 6 h5 z" fill="#FFC29A"/><path d="M2 -38 q14 2 18 10 q-10 -3 -18 2" fill="#ff7a3c"/></g>';
+        return '<g transform="translate(' + p[0] + ' ' + p[1] + ')"><path d="M0 0 V-40" stroke="#FFC9A3" stroke-width="5"/><path d="M0 0 l-2.5 6 h5 z" fill="#FFC9A3"/><path d="M2 -38 q14 2 18 10 q-10 -3 -18 2" fill="#FF9C5E"/></g>';
       }).join('') + '</svg>';
     var needle = el.querySelector('.fld-needle'), comp = el.querySelector('.fld-compass'), a = 0, t = 0, raf = 0;
     function step() { raf = 0; a += (t - a) * .12; needle.setAttribute('transform', 'rotate(' + f(a) + ')'); if (Math.abs(t - a) > .1) raf = requestAnimationFrame(step); }
@@ -245,7 +245,7 @@
   FIELD.laser = function () {
     var el = doc.createElement('div');
     el.innerHTML = '<div class="fld-brick"></div><span class="fld-laser"></span><span class="fld-dot"></span>' +
-      '<svg class="fld-emitter" viewBox="0 0 34 26" width="34" height="26"><rect x="1" y="3" width="26" height="20" rx="3" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.6"/><rect x="5" y="7" width="12" height="7" rx="1" fill="#41545a"/><circle cx="29" cy="13" r="3" fill="#C42B1C"/></svg>';
+      '<svg class="fld-emitter" viewBox="0 0 34 26" width="34" height="26"><rect x="1" y="3" width="26" height="20" rx="3" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.6"/><rect x="5" y="7" width="12" height="7" rx="1" fill="#5E5852"/><circle cx="29" cy="13" r="3" fill="#C42B1C"/></svg>';
     return { el: el };
   };
 

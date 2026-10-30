@@ -7,7 +7,7 @@
    Mechanism refs: [BANK] 147 Shape Hover (backout), [BANK] 151 elastic two-stage press, S0634 click-burst/ripple,
    S0409 success check, [BANK] 229 asymmetric hover (in / out 2.5x). */
 (function () {
-  var INK = '#121212', YEL = '#FF5F00', STEEL = '#C9C1B6', BLUE = '#FF5F00', RED = '#C42B1C', WOOD = '#FF9A5C', TEAL = '#FF5F00', PAPER = '#121212', GRN = '#FF5F00';
+  var INK = '#121212', YEL = '#FF5F00', STEEL = '#C9C1B6', BLUE = '#FF5F00', RED = '#C42B1C', WOOD = '#FF9C5E', TEAL = '#FF5F00', PAPER = '#121212', GRN = '#FF5F00';
   var o = ' stroke="' + INK + '" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"';
   function c(fill) { return ' fill="' + fill + '"' + o; }
   var N = ' fill="none"' + o;
