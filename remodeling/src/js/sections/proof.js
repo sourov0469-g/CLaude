@@ -4,6 +4,88 @@
   var NS = 'http://www.w3.org/2000/svg';
 
   EZ.section('proof', {
+    /* slot 4 · NEW · The receipt: prints out of its slot line by line, once */
+    4: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.prc__side > *'));
+      if (!k.motion) return;
+      var paper = root.querySelector('.prc__paper'), lines = root.querySelectorAll('.prc__top, .prc__lines li, .prc__lic, .prc__ver');
+      gsap.set(paper, { clipPath: 'inset(0 0 100% 0)' });
+      ScrollTrigger.create({ trigger: paper, start: 'top 80%', once: true, onEnter: function () {
+        gsap.timeline().to(paper, { clipPath: 'inset(0 0 0% 0)', duration: .9, ease: 'steps(9)' })
+          .from(lines, { autoAlpha: 0, duration: .12, stagger: .1 }, 0);
+      } });
+      k.add(function () { gsap.set(paper, { clearProps: 'clipPath' }); });
+    } },
+
+    /* slot 5 · NEW · Proof is the work: the four genuine pairs (the shared pairs array), each a small keyboard wipe */
+    5: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ppw__head > *'));
+      var box = root.querySelector('.ppw__pairs'), P = EZ.PAIRS || [];
+      box.innerHTML = P.map(function (p, i) {
+        return '<div class="ppw__pair"><img class="b" src="' + EZ.img(p.b) + '" alt="' + p.ba + '"><img class="a" src="' + EZ.img(p.a) + '" alt="' + p.aa + '"><span class="ln"></span><span class="nm">' + p.name + '</span>' +
+          '<input type="range" min="0" max="100" value="50" aria-label="' + p.name + ' ' + (i + 1) + ', before and after: move the line" data-rx="native:pair-wipe"></div>';
+      }).join('');
+      box.querySelectorAll('.ppw__pair').forEach(function (pr) {
+        var r = pr.querySelector('input');
+        k.on(r, 'input', function () { pr.style.setProperty('--p', r.value + '%'); r.setAttribute('aria-valuetext', r.value + '% after'); });
+      });
+      if (EZ.bindReactions) EZ.bindReactions(root, k);
+      k.add(function () { box.innerHTML = ''; });
+    } },
+
+    /* slot 6 · NEW · The hard hat: peel a sticker and its source shows beside the hat */
+    6: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.phh__side > *'));
+      var st = Array.prototype.slice.call(root.querySelectorAll('.phh__st')), src = root.querySelector('.phh__src');
+      function show(b) {
+        st.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        var ext = b.dataset.href.charAt(0) !== '#';
+        src.innerHTML = '<p>' + b.dataset.src + '</p><a href="' + b.dataset.href + '"' + (ext ? ' rel="noopener"' : '') + ' data-rx="~tag/peek/hop/r">' + (ext ? 'Open it on Google' : 'Go there on this page') + '</a>';
+        if (EZ.bindOne) EZ.bindOne(src.querySelector('a'), k);
+      }
+      st.forEach(function (b) { k.on(b, 'click', function () { show(b); }); });
+      k.add(function () { st.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); src.innerHTML = '<p class="phh__src-t">Pick a sticker.</p>'; });
+      if (k.motion) gsap.from(st, { autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .07, scrollTrigger: { trigger: root.querySelector('.phh__hat'), start: 'top 75%', once: true } });
+    } },
+
+    /* slot 7 · NEW · The tape: the range pulls the blade out; each figure appears once the blade passes its mark */
+    7: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ptm__head > *'));
+      var rig = root.querySelector('.ptm__rig'), blade = root.querySelector('.ptm__blade'), pull = root.querySelector('.ptm__pull');
+      var fs = Array.prototype.slice.call(root.querySelectorAll('.ptm__f'));
+      fs.forEach(function (f) { rig.appendChild(f); });
+      function set() {
+        var v = +pull.value, cw = root.querySelector('.ptm__case').offsetWidth, tw = rig.clientWidth - cw - 10;
+        rig.style.setProperty('--ext', v + '%');
+        fs.forEach(function (f) {
+          var at = parseFloat(f.style.getPropertyValue('--at')) || 0;
+          f.style.left = (cw + tw * at / 100) + 'px';
+          var on = v >= at; f.classList.toggle('is-off', !on); f.tabIndex = on ? 0 : -1; f.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        pull.setAttribute('aria-valuetext', fs.filter(function (f) { return !f.classList.contains('is-off'); }).length + ' of 4 figures showing');
+      }
+      if (!k.motion) pull.value = 100;
+      k.on(pull, 'input', set);
+      k.ro(rig, set);
+      set();
+      k.add(function () { fs.forEach(function (f) { blade.appendChild(f); f.classList.remove('is-off'); f.style.left = ''; }); pull.value = 24; });
+    } },
+
+    /* slot 8 · NEW · The punch list: tick a line and its source opens beside it; the ring counts the ticks */
+    8: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ppl__side > *'));
+      var items = Array.prototype.slice.call(root.querySelectorAll('.ppl__list li')), fg = root.querySelector('.ppl__ring .fg'), n = root.querySelector('.ppl__ring .n');
+      function sync() {
+        var c = 0;
+        items.forEach(function (li) { var on = li.querySelector('input').checked; li.classList.toggle('is-on', on); li.querySelector('.ppl__s').tabIndex = on ? 0 : -1; if (on) c++; });
+        fg.style.strokeDashoffset = (314.16 * (1 - c / items.length)).toFixed(1);
+        n.textContent = c + '/' + items.length;
+      }
+      items.forEach(function (li) { k.on(li.querySelector('input'), 'change', sync); });
+      sync();
+      k.add(function () { items.forEach(function (li) { li.querySelector('input').checked = false; }); sync(); });
+    } },
+
     /* slot 3 · Phase 5 improved version of b4 */
     3: { init: function (root, k) {
       var plan = root.querySelector('.psx__plan');

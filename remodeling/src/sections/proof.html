@@ -105,6 +105,119 @@
     </div>
   </div>
 
+  <!-- slot 4 · NEW · The receipt: the four figures itemised on a contractor's receipt that prints out of its slot, each line
+       with its own check link (mechanism: clip reveal, line by line, once). -->
+  <div class="ver prc" data-v="4" hidden>
+    <div class="wrap prc__grid">
+      <div class="prc__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h4">Itemised, like <span class="acc">any honest job.</span></h2>
+        <p class="t-lead prc__lead">Four figures Elbaz publishes, on one receipt. Every line names where to check it.</p>
+      </div>
+      <div class="prc__machine">
+        <div class="prc__slot" aria-hidden="true"></div>
+        <div class="prc__paper">
+          <p class="prc__top"><b>Elbaz Construction</b><span>19 W Flagler St #310, Miami, FL 33130</span></p>
+          <ul class="prc__lines">
+            <li><span class="k">Google rating</span><span class="d"></span><span class="v nums">4.8 / 5</span><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/rail/sparkle/r">Check on Google</a></li>
+            <li><span class="k">Google reviews</span><span class="d"></span><span class="v nums">343</span><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/rail/hop/r">Read them</a></li>
+            <li><span class="k">Municipalities</span><span class="d"></span><span class="v nums">104</span><a href="#towns" data-rx="~compass/rail/spinout/r">34 / 31 / 39 by county</a></li>
+            <li><span class="k">Projects photographed on this page</span><span class="d"></span><span class="v nums">26</span><a href="#work" data-rx="~camera/rail/flash/r">See them</a></li>
+          </ul>
+          <p class="prc__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+          <a class="prc__ver" href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~badge/rail/tick/r">Verify the licence on the state register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 5 · NEW · Proof is the work: the four genuine before/after pairs as four small wipes (keyboard ranges), and the
+       two figures that the page itself can show (mechanism: four range-driven clip wipes). -->
+  <div class="ver ppw" data-v="5" hidden>
+    <div class="wrap">
+      <div class="ppw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h5">The proof is <span class="acc">the work.</span></h2>
+        <p class="t-lead ppw__lead">Four real before-and-after pairs. Slide any of them.</p>
+      </div>
+      <div class="ppw__grid">
+        <a class="ppw__fact" href="#work" data-rx="~grid/rail/flash/r"><b class="nums">26</b><span>projects photographed on this page</span></a>
+        <div class="ppw__pairs"></div>
+        <a class="ppw__fact" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/swing/sparkle/r"><b class="nums">&#9733; 4.8</b><span><span class="nums">343</span> Google reviews</span></a>
+      </div>
+      <p class="ppw__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+    </div>
+  </div>
+
+  <!-- slot 6 · NEW · The hard hat: the four figures as stickers on an illustrated hard hat; peel a sticker and its source
+       shows (mechanism: peel transform + a live source panel). -->
+  <div class="ver phh" data-v="6" hidden>
+    <div class="wrap phh__grid">
+      <div class="phh__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h6">Every sticker <span class="acc">is earned.</span></h2>
+        <p class="t-lead phh__lead">Hard hats collect stickers. These four come with their sources: peel one.</p>
+        <div class="phh__src" aria-live="polite"><p class="phh__src-t">Pick a sticker.</p></div>
+        <p class="phh__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+      <div class="phh__hat">
+        <svg class="phh__art" viewBox="0 0 600 420" aria-hidden="true" focusable="false">
+          <path class="brim" d="M40 330 C40 300 560 300 560 330 C560 352 40 352 40 330 Z"/>
+          <path class="shell" d="M80 318 C80 160 180 70 300 70 C420 70 520 160 520 318 Z"/>
+          <path class="ridge" d="M276 74 C268 150 266 240 268 318 M324 74 C332 150 334 240 332 318"/>
+          <path class="band" d="M84 300 C200 286 400 286 516 300"/>
+        </svg>
+        <button type="button" class="phh__st phh__st--a" aria-pressed="false" data-src="Google: the business listing's average rating." data-href="https://www.google.com/maps?cid=17916885921843924422" data-rx="native:hat-sticker"><b class="nums">4.8</b><span>Google rating</span></button>
+        <button type="button" class="phh__st phh__st--b" aria-pressed="false" data-src="Google: 343 reviews on the business listing." data-href="https://www.google.com/maps?cid=17916885921843924422" data-rx="native:hat-sticker"><b class="nums">343</b><span>reviews</span></button>
+        <button type="button" class="phh__st phh__st--c" aria-pressed="false" data-src="The service area: 34 in Miami-Dade, 31 in Broward, 39 in Palm Beach." data-href="#towns" data-rx="native:hat-sticker"><b class="nums">104</b><span>municipalities</span></button>
+        <button type="button" class="phh__st phh__st--d" aria-pressed="false" data-src="The Work section: 26 projects photographed on this page." data-href="#work" data-rx="native:hat-sticker"><b class="nums">26</b><span>projects</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 7 · NEW · The tape: pull a tape measure out of its case and the figures appear along the blade as it passes
+       their marks (mechanism: a range input extends the blade; marks reveal by position). -->
+  <div class="ver ptm" data-v="7" hidden>
+    <div class="wrap">
+      <div class="ptm__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h7">Measured, <span class="acc">not claimed.</span></h2>
+        <p class="t-lead ptm__lead">Pull the tape. Each figure sits on its mark, with where to check it.</p>
+      </div>
+      <div class="ptm__rig">
+        <div class="ptm__case" aria-hidden="true"><svg viewBox="0 0 160 160"><rect x="6" y="6" width="148" height="148" rx="30" class="c"/><circle cx="80" cy="80" r="40" class="r"/><path d="M58 80 L80 58 L102 80" class="e"/><path d="M66 74 V100 H96 M66 87 H90" class="e"/></svg></div>
+        <div class="ptm__blade"><div class="ptm__ticks"></div>
+          <a class="ptm__f" style="--at:16%" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/hoist/sparkle/t"><b class="nums">4.8</b><span>Google rating</span></a>
+          <a class="ptm__f" style="--at:40%" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/hoist/hop/t"><b class="nums">343</b><span>Google reviews</span></a>
+          <a class="ptm__f" style="--at:64%" href="#towns" data-rx="~compass/hoist/spinout/t"><b class="nums">104</b><span>municipalities</span></a>
+          <a class="ptm__f" style="--at:88%" href="#work" data-rx="~camera/hoist/flash/t"><b class="nums">26</b><span>projects photographed here</span></a>
+        </div>
+        <input class="ptm__pull" type="range" min="8" max="100" value="24" aria-label="Pull the tape out" data-rx="native:tape-pull">
+      </div>
+      <p class="ptm__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+    </div>
+  </div>
+
+  <!-- slot 8 · NEW · The punch list: tick each line off and its source appears beside it; a ring counts what has been
+       checked (mechanism: checkbox ticks drawing a stroke, a progress ring). -->
+  <div class="ver ppl" data-v="8" hidden>
+    <div class="wrap ppl__grid">
+      <div class="ppl__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h8">Tick it off <span class="acc">yourself.</span></h2>
+        <p class="t-lead ppl__lead">A punch list of what Elbaz publishes. Tick a line and its source opens beside it.</p>
+        <svg class="ppl__ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="50" class="bg"/><circle cx="60" cy="60" r="50" class="fg"/><text x="60" y="68" class="n">0/5</text></svg>
+      </div>
+      <ul class="ppl__list">
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">4.8</b> Google rating, out of 5</span></label><a class="ppl__s" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/peek/tick/r">Check on Google</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">343</b> Google reviews</span></label><a class="ppl__s" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/peek/tick/r">Read them</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">104</b> municipalities in three counties</span></label><a class="ppl__s" href="#towns" data-rx="~compass/peek/tick/r">See the list</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">26</b> projects photographed on this page</span></label><a class="ppl__s" href="#work" data-rx="~camera/peek/tick/r">See them</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span>Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></span></label><a class="ppl__s" href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~badge/peek/tick/r">Verify on the state register</a></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="ver pm" data-v="b2" hidden>
     <div class="wrap">
       <div class="pm__head">

@@ -1,6 +1,7 @@
 /* before/after, PLAN-V3 §3. Only the four genuine pairs (FACTS.md). */
 (function () {
-  var PAIRS = [
+  var PAIRS = EZ.PAIRS = [   // the one source of the four genuine pairs (Proof slot 5 reads it too)
+
     { b: 'ba-kitchen1-before', a: 'ba-kitchen1-after', name: 'Kitchen', time: '<span class="nums">6&ndash;12</span> weeks of construction',
       ba: 'Dated kitchen with cream cabinets and tiled counters, before renovation', aa: 'Renovated kitchen with grey shaker cabinetry and quartz counters' },
     { b: 'ba-bath2-before', a: 'ba-bath2-after', name: 'Bathroom', time: '<span class="nums">4&ndash;8</span> weeks of construction',

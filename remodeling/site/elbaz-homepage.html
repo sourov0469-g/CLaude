@@ -1911,6 +1911,108 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 }
 
 
+.prc__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.prc__side { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; position: sticky; top: calc(var(--nav-h) + 40px); }
+.prc__lead { color: var(--muted); max-width: 34ch; }
+.prc__machine { grid-column: 7 / -1; position: relative; padding-top: 18px; }
+.prc__slot { position: absolute; left: -18px; right: -18px; top: 0; height: 26px; border-radius: 13px; background: var(--ink); }
+.prc__paper { position: relative; margin: 10px 8px 0; padding: 34px 28px 30px; background: var(--white); box-shadow: 0 0 0 1px var(--line-soft);
+  -webkit-mask: linear-gradient(var(--ink) 0 0) top / 100% calc(100% - 12px) no-repeat, conic-gradient(from -45deg at bottom, transparent 90deg, var(--ink) 0) bottom / 18px 12px repeat-x;
+  mask: linear-gradient(var(--ink) 0 0) top / 100% calc(100% - 12px) no-repeat, conic-gradient(from -45deg at bottom, transparent 90deg, var(--ink) 0) bottom / 18px 12px repeat-x; }
+.prc__top { margin: 0 0 18px; display: grid; gap: 4px; text-align: center; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.prc__top b { font: 700 1.25rem/1 var(--f-display); color: var(--ink); }
+.prc__lines { list-style: none; margin: 0; padding: 14px 0; border-block: 2px dashed var(--grey); display: grid; gap: 14px; }
+.prc__lines li { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 8px; row-gap: 2px; }
+.prc__lines .k { font: 500 1rem/1.3 var(--f-text); }
+.prc__lines .d { border-bottom: 2px dotted var(--grey); translate: 0 -4px; }
+.prc__lines .v { font: 700 1.25rem/1 var(--f-display); color: var(--a-600); }
+.prc__lines a { grid-column: 1 / -1; justify-self: start; font: 500 .8125rem/1.3 var(--f-text); color: var(--accent-text); }
+.prc__lic { margin: 16px 0 6px; text-align: center; font: 600 .875rem/1.3 var(--f-text); }
+.prc__ver { display: block; text-align: center; font: 500 .8125rem/1.3 var(--f-text); color: var(--accent-text); }
+@media (max-width: 1023px) { .prc__side, .prc__machine { grid-column: 1 / -1; position: static; } .prc__machine { margin-top: var(--s6); } }
+
+
+.ppw__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s6); }
+.ppw__lead { color: var(--muted); }
+.ppw__grid { display: grid; grid-template-columns: 1fr 3fr 1fr; gap: var(--gutter); align-items: center; }
+.ppw__pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ppw__pair { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; box-shadow: 0 0 0 2px var(--ink); background: var(--white); --p: 50%; }
+.ppw__pair img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ppw__pair .a { clip-path: inset(0 0 0 var(--p)); }
+.ppw__pair .ln { position: absolute; top: 0; bottom: 0; left: var(--p); width: 4px; margin-left: -2px; background: var(--a-500); pointer-events: none; }
+.ppw__pair .nm { position: absolute; left: 8px; bottom: 8px; padding: 3px 8px; border-radius: 999px; background: var(--white); font: 600 .75rem/1.2 var(--f-text); pointer-events: none; }
+.ppw__pair input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.ppw__pair:has(input:focus-visible) { box-shadow: 0 0 0 4px var(--a-600); }
+.ppw__fact { display: grid; gap: 6px; justify-items: center; text-align: center; padding: 22px 14px; border-radius: 16px; background: var(--white); box-shadow: 0 0 0 2px var(--ink); text-decoration: none; color: var(--ink); }
+.ppw__fact b { font: 700 clamp(2.25rem, 1.5rem + 2vw, 3.5rem)/1 var(--f-display); color: var(--a-600); }
+.ppw__fact span { font: 500 .875rem/1.3 var(--f-text); }
+.ppw__lic { margin: var(--s5) 0 0; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) { .ppw__grid { grid-template-columns: 1fr 1fr; } .ppw__pairs { grid-column: 1 / -1; grid-row: 1; } }
+
+
+.phh__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.phh__side { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; }
+.phh__lead { color: var(--muted); max-width: 36ch; }
+.phh__src { min-height: 88px; width: 100%; padding: 14px 16px; border-radius: 14px; background: var(--white); box-shadow: 0 0 0 1px var(--line-soft); }
+.phh__src p { margin: 0 0 6px; font: 500 .9375rem/1.4 var(--f-text); }
+.phh__src a { font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
+.phh__lic { margin: 0; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.phh__hat { grid-column: 6 / -1; position: relative; aspect-ratio: 600 / 420; }
+.phh__art { width: 100%; height: 100%; overflow: visible; }
+.phh__art .shell { fill: var(--a-500); stroke: var(--ink); stroke-width: 5; }
+.phh__art .brim { fill: var(--a-600); stroke: var(--ink); stroke-width: 5; }
+.phh__art .ridge, .phh__art .band { fill: none; stroke: var(--ink); stroke-width: 4; }
+.phh__st { position: absolute; display: grid; place-items: center; align-content: center; gap: 2px; width: 19%; aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; background: var(--white); color: var(--ink); cursor: pointer;
+  box-shadow: 0 0 0 3px var(--ink); transform-origin: 20% 20%; transition: transform 260ms var(--ease-out), box-shadow 160ms ease-out; }
+.phh__st b { font: 700 clamp(1.25rem, .9rem + 1vw, 1.75rem)/1 var(--f-display); color: var(--a-600); }
+.phh__st span { font: 600 .6875rem/1.1 var(--f-text); }
+.phh__st--a { left: 22%; top: 34%; } .phh__st--b { left: 44%; top: 22%; border-radius: 18px; } .phh__st--c { left: 62%; top: 40%; } .phh__st--d { left: 35%; top: 52%; border-radius: 18px; }
+.phh__st[aria-pressed="true"] { transform: rotate(-14deg) translate(-6px, -10px); box-shadow: 0 0 0 3px var(--ink), 6px 8px 0 var(--a-200); }
+.phh__st:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ink), 0 0 0 7px var(--a-200); }
+@media (max-width: 1023px) { .phh__side, .phh__hat { grid-column: 1 / -1; } .phh__hat { margin-top: var(--s5); } }
+@media (prefers-reduced-motion: reduce) { .phh__st { transition: none; } }
+
+
+.ptm__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s7); }
+.ptm__lead { color: var(--muted); }
+.ptm__rig { position: relative; display: grid; grid-template-columns: 120px 1fr; align-items: end; padding-top: 120px; --ext: 24%; }
+.ptm__case svg { width: 120px; height: 120px; display: block; }
+.ptm__case .c { fill: var(--a-500); stroke: var(--ink); stroke-width: 5; } .ptm__case .r { fill: var(--white); stroke: var(--ink); stroke-width: 4; } .ptm__case .e { fill: none; stroke: var(--a-500); stroke-width: 7; }
+.ptm__blade { position: relative; height: 46px; margin-bottom: 30px; width: var(--ext); background: var(--a-200); border: 3px solid var(--ink); border-left: 0; border-radius: 0 6px 6px 0; }
+.ptm__blade::after { content: ""; position: absolute; right: -8px; top: -10px; width: 8px; height: 64px; background: var(--ink); border-radius: 2px; }
+.ptm__ticks { position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 24px), repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 6px); background-size: 100% 18px, 100% 9px; background-repeat: no-repeat; }
+.ptm__f { position: absolute; top: 16px; display: grid; gap: 2px; justify-items: center; translate: -50% 0; padding: 8px 12px; border-radius: 12px; background: var(--white); box-shadow: 0 0 0 2px var(--ink); color: var(--ink); text-decoration: none; white-space: nowrap; transition: opacity 180ms ease-out, translate 180ms ease-out; }
+.ptm__f b { font: 700 1.5rem/1 var(--f-display); color: var(--a-600); } .ptm__f span { font: 500 .75rem/1.2 var(--f-text); }
+.ptm__f.is-off { opacity: 0; translate: -50% 12px; pointer-events: none; }
+.ptm__pull { grid-column: 1 / -1; width: 100%; accent-color: var(--a-600); margin-top: 6px; min-height: 44px; }
+.ptm__lic { margin: var(--s4) 0 0; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+@media (max-width: 767px) { .ptm__rig { grid-template-columns: 70px 1fr; padding-top: 150px; } .ptm__case svg { width: 70px; height: 70px; } .ptm__f { padding: 6px 8px; } .ptm__f b { font-size: 1.125rem; } .ptm__f span { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ptm__f { transition: none; } }
+
+
+.ppl__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.ppl__side { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; }
+.ppl__lead { color: var(--muted); max-width: 34ch; }
+.ppl__ring { width: 140px; height: 140px; margin-top: 8px; }
+.ppl__ring .bg { fill: none; stroke: var(--white); stroke-width: 14; } .ppl__ring .fg { fill: none; stroke: var(--a-500); stroke-width: 14; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 60px 60px; stroke-dasharray: 314.16; stroke-dashoffset: 314.16; transition: stroke-dashoffset 300ms var(--ease-out); }
+.ppl__ring .n { font: 700 26px/1 var(--f-display); text-anchor: middle; fill: var(--ink); }
+.ppl__list { grid-column: 7 / -1; list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ppl__list li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--white); box-shadow: 0 0 0 1px var(--line-soft); }
+.ppl__list label { display: flex; align-items: center; gap: 14px; min-height: 44px; cursor: pointer; font: 500 1rem/1.35 var(--f-text); }
+.ppl__list label b { font: 700 1.125rem/1 var(--f-display); color: var(--a-600); }
+.ppl__list input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.ppl__list label svg { width: 28px; height: 28px; flex: none; }
+.ppl__list label rect { fill: var(--white); stroke: var(--ink); stroke-width: 2.5; transition: fill 150ms ease-out; }
+.ppl__list label path { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 200ms var(--ease-out); }
+.ppl__list input:checked + svg rect { fill: var(--a-500); }
+.ppl__list input:checked + svg path { stroke-dashoffset: 0; }
+.ppl__list input:focus-visible + svg rect { stroke: var(--a-600); stroke-width: 4; }
+.ppl__s { font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); opacity: 0; visibility: hidden; transition: opacity 180ms ease-out; }
+.ppl__list li.is-on .ppl__s { opacity: 1; visibility: visible; }
+@media (max-width: 1023px) { .ppl__side, .ppl__list { grid-column: 1 / -1; } .ppl__list { margin-top: var(--s5); } .ppl__list li { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .ppl__ring .fg, .ppl__list label path, .ppl__s { transition: none; } }
+
+
 .services__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
 .services__head .t-head { grid-column: 1 / span 7; }
 .services__lead { grid-column: 9 / span 4; color: var(--muted); max-width: 34ch; }
@@ -3762,6 +3864,114 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         <p class="psx__read" id="psx-read-i" aria-live="polite"><span class="psx__read-k">Target 01</span> <span class="psx__read-v">Florida Certified Building Contractor, licence CBC1265280, recognised by the Department of Business and Professional Regulation.</span></p>
       </div>
       <a class="btn psx__btn" href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~lock/zip/tick/r"><span class="btn__label">Verify on the state register</span></a>
+    </div>
+  </div>
+
+  
+  <div class="ver prc" data-v="4" hidden>
+    <div class="wrap prc__grid">
+      <div class="prc__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h4">Itemised, like <span class="acc">any honest job.</span></h2>
+        <p class="t-lead prc__lead">Four figures Elbaz publishes, on one receipt. Every line names where to check it.</p>
+      </div>
+      <div class="prc__machine">
+        <div class="prc__slot" aria-hidden="true"></div>
+        <div class="prc__paper">
+          <p class="prc__top"><b>Elbaz Construction</b><span>19 W Flagler St #310, Miami, FL 33130</span></p>
+          <ul class="prc__lines">
+            <li><span class="k">Google rating</span><span class="d"></span><span class="v nums">4.8 / 5</span><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/rail/sparkle/r">Check on Google</a></li>
+            <li><span class="k">Google reviews</span><span class="d"></span><span class="v nums">343</span><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/rail/hop/r">Read them</a></li>
+            <li><span class="k">Municipalities</span><span class="d"></span><span class="v nums">104</span><a href="#towns" data-rx="~compass/rail/spinout/r">34 / 31 / 39 by county</a></li>
+            <li><span class="k">Projects photographed on this page</span><span class="d"></span><span class="v nums">26</span><a href="#work" data-rx="~camera/rail/flash/r">See them</a></li>
+          </ul>
+          <p class="prc__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+          <a class="prc__ver" href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~badge/rail/tick/r">Verify the licence on the state register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver ppw" data-v="5" hidden>
+    <div class="wrap">
+      <div class="ppw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h5">The proof is <span class="acc">the work.</span></h2>
+        <p class="t-lead ppw__lead">Four real before-and-after pairs. Slide any of them.</p>
+      </div>
+      <div class="ppw__grid">
+        <a class="ppw__fact" href="#work" data-rx="~grid/rail/flash/r"><b class="nums">26</b><span>projects photographed on this page</span></a>
+        <div class="ppw__pairs"></div>
+        <a class="ppw__fact" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/swing/sparkle/r"><b class="nums">&#9733; 4.8</b><span><span class="nums">343</span> Google reviews</span></a>
+      </div>
+      <p class="ppw__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+    </div>
+  </div>
+
+  
+  <div class="ver phh" data-v="6" hidden>
+    <div class="wrap phh__grid">
+      <div class="phh__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h6">Every sticker <span class="acc">is earned.</span></h2>
+        <p class="t-lead phh__lead">Hard hats collect stickers. These four come with their sources: peel one.</p>
+        <div class="phh__src" aria-live="polite"><p class="phh__src-t">Pick a sticker.</p></div>
+        <p class="phh__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+      <div class="phh__hat">
+        <svg class="phh__art" viewBox="0 0 600 420" aria-hidden="true" focusable="false">
+          <path class="brim" d="M40 330 C40 300 560 300 560 330 C560 352 40 352 40 330 Z"/>
+          <path class="shell" d="M80 318 C80 160 180 70 300 70 C420 70 520 160 520 318 Z"/>
+          <path class="ridge" d="M276 74 C268 150 266 240 268 318 M324 74 C332 150 334 240 332 318"/>
+          <path class="band" d="M84 300 C200 286 400 286 516 300"/>
+        </svg>
+        <button type="button" class="phh__st phh__st--a" aria-pressed="false" data-src="Google: the business listing's average rating." data-href="https://www.google.com/maps?cid=17916885921843924422" data-rx="native:hat-sticker"><b class="nums">4.8</b><span>Google rating</span></button>
+        <button type="button" class="phh__st phh__st--b" aria-pressed="false" data-src="Google: 343 reviews on the business listing." data-href="https://www.google.com/maps?cid=17916885921843924422" data-rx="native:hat-sticker"><b class="nums">343</b><span>reviews</span></button>
+        <button type="button" class="phh__st phh__st--c" aria-pressed="false" data-src="The service area: 34 in Miami-Dade, 31 in Broward, 39 in Palm Beach." data-href="#towns" data-rx="native:hat-sticker"><b class="nums">104</b><span>municipalities</span></button>
+        <button type="button" class="phh__st phh__st--d" aria-pressed="false" data-src="The Work section: 26 projects photographed on this page." data-href="#work" data-rx="native:hat-sticker"><b class="nums">26</b><span>projects</span></button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver ptm" data-v="7" hidden>
+    <div class="wrap">
+      <div class="ptm__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h7">Measured, <span class="acc">not claimed.</span></h2>
+        <p class="t-lead ptm__lead">Pull the tape. Each figure sits on its mark, with where to check it.</p>
+      </div>
+      <div class="ptm__rig">
+        <div class="ptm__case" aria-hidden="true"><svg viewBox="0 0 160 160"><rect x="6" y="6" width="148" height="148" rx="30" class="c"/><circle cx="80" cy="80" r="40" class="r"/><path d="M58 80 L80 58 L102 80" class="e"/><path d="M66 74 V100 H96 M66 87 H90" class="e"/></svg></div>
+        <div class="ptm__blade"><div class="ptm__ticks"></div>
+          <a class="ptm__f" style="--at:16%" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/hoist/sparkle/t"><b class="nums">4.8</b><span>Google rating</span></a>
+          <a class="ptm__f" style="--at:40%" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/hoist/hop/t"><b class="nums">343</b><span>Google reviews</span></a>
+          <a class="ptm__f" style="--at:64%" href="#towns" data-rx="~compass/hoist/spinout/t"><b class="nums">104</b><span>municipalities</span></a>
+          <a class="ptm__f" style="--at:88%" href="#work" data-rx="~camera/hoist/flash/t"><b class="nums">26</b><span>projects photographed here</span></a>
+        </div>
+        <input class="ptm__pull" type="range" min="8" max="100" value="24" aria-label="Pull the tape out" data-rx="native:tape-pull">
+      </div>
+      <p class="ptm__lic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+    </div>
+  </div>
+
+  
+  <div class="ver ppl" data-v="8" hidden>
+    <div class="wrap ppl__grid">
+      <div class="ppl__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h8">Tick it off <span class="acc">yourself.</span></h2>
+        <p class="t-lead ppl__lead">A punch list of what Elbaz publishes. Tick a line and its source opens beside it.</p>
+        <svg class="ppl__ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="50" class="bg"/><circle cx="60" cy="60" r="50" class="fg"/><text x="60" y="68" class="n">0/5</text></svg>
+      </div>
+      <ul class="ppl__list">
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">4.8</b> Google rating, out of 5</span></label><a class="ppl__s" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/peek/tick/r">Check on Google</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">343</b> Google reviews</span></label><a class="ppl__s" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/peek/tick/r">Read them</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">104</b> municipalities in three counties</span></label><a class="ppl__s" href="#towns" data-rx="~compass/peek/tick/r">See the list</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span><b class="nums">26</b> projects photographed on this page</span></label><a class="ppl__s" href="#work" data-rx="~camera/peek/tick/r">See them</a></li>
+        <li><label data-rx="native:punch-tick"><input type="checkbox"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="6"/><path d="M7 15 L12 20 L21 9"/></svg><span>Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></span></label><a class="ppl__s" href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~badge/peek/tick/r">Verify on the state register</a></li>
+      </ul>
     </div>
   </div>
 
@@ -8165,6 +8375,88 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   var NS = 'http://www.w3.org/2000/svg';
 
   EZ.section('proof', {
+    /* slot 4 · NEW · The receipt: prints out of its slot line by line, once */
+    4: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.prc__side > *'));
+      if (!k.motion) return;
+      var paper = root.querySelector('.prc__paper'), lines = root.querySelectorAll('.prc__top, .prc__lines li, .prc__lic, .prc__ver');
+      gsap.set(paper, { clipPath: 'inset(0 0 100% 0)' });
+      ScrollTrigger.create({ trigger: paper, start: 'top 80%', once: true, onEnter: function () {
+        gsap.timeline().to(paper, { clipPath: 'inset(0 0 0% 0)', duration: .9, ease: 'steps(9)' })
+          .from(lines, { autoAlpha: 0, duration: .12, stagger: .1 }, 0);
+      } });
+      k.add(function () { gsap.set(paper, { clearProps: 'clipPath' }); });
+    } },
+
+    /* slot 5 · NEW · Proof is the work: the four genuine pairs (the shared pairs array), each a small keyboard wipe */
+    5: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ppw__head > *'));
+      var box = root.querySelector('.ppw__pairs'), P = EZ.PAIRS || [];
+      box.innerHTML = P.map(function (p, i) {
+        return '<div class="ppw__pair"><img class="b" src="' + EZ.img(p.b) + '" alt="' + p.ba + '"><img class="a" src="' + EZ.img(p.a) + '" alt="' + p.aa + '"><span class="ln"></span><span class="nm">' + p.name + '</span>' +
+          '<input type="range" min="0" max="100" value="50" aria-label="' + p.name + ' ' + (i + 1) + ', before and after: move the line" data-rx="native:pair-wipe"></div>';
+      }).join('');
+      box.querySelectorAll('.ppw__pair').forEach(function (pr) {
+        var r = pr.querySelector('input');
+        k.on(r, 'input', function () { pr.style.setProperty('--p', r.value + '%'); r.setAttribute('aria-valuetext', r.value + '% after'); });
+      });
+      if (EZ.bindReactions) EZ.bindReactions(root, k);
+      k.add(function () { box.innerHTML = ''; });
+    } },
+
+    /* slot 6 · NEW · The hard hat: peel a sticker and its source shows beside the hat */
+    6: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.phh__side > *'));
+      var st = Array.prototype.slice.call(root.querySelectorAll('.phh__st')), src = root.querySelector('.phh__src');
+      function show(b) {
+        st.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        var ext = b.dataset.href.charAt(0) !== '#';
+        src.innerHTML = '<p>' + b.dataset.src + '</p><a href="' + b.dataset.href + '"' + (ext ? ' rel="noopener"' : '') + ' data-rx="~tag/peek/hop/r">' + (ext ? 'Open it on Google' : 'Go there on this page') + '</a>';
+        if (EZ.bindOne) EZ.bindOne(src.querySelector('a'), k);
+      }
+      st.forEach(function (b) { k.on(b, 'click', function () { show(b); }); });
+      k.add(function () { st.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); src.innerHTML = '<p class="phh__src-t">Pick a sticker.</p>'; });
+      if (k.motion) gsap.from(st, { autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .07, scrollTrigger: { trigger: root.querySelector('.phh__hat'), start: 'top 75%', once: true } });
+    } },
+
+    /* slot 7 · NEW · The tape: the range pulls the blade out; each figure appears once the blade passes its mark */
+    7: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ptm__head > *'));
+      var rig = root.querySelector('.ptm__rig'), blade = root.querySelector('.ptm__blade'), pull = root.querySelector('.ptm__pull');
+      var fs = Array.prototype.slice.call(root.querySelectorAll('.ptm__f'));
+      fs.forEach(function (f) { rig.appendChild(f); });
+      function set() {
+        var v = +pull.value, cw = root.querySelector('.ptm__case').offsetWidth, tw = rig.clientWidth - cw - 10;
+        rig.style.setProperty('--ext', v + '%');
+        fs.forEach(function (f) {
+          var at = parseFloat(f.style.getPropertyValue('--at')) || 0;
+          f.style.left = (cw + tw * at / 100) + 'px';
+          var on = v >= at; f.classList.toggle('is-off', !on); f.tabIndex = on ? 0 : -1; f.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        pull.setAttribute('aria-valuetext', fs.filter(function (f) { return !f.classList.contains('is-off'); }).length + ' of 4 figures showing');
+      }
+      if (!k.motion) pull.value = 100;
+      k.on(pull, 'input', set);
+      k.ro(rig, set);
+      set();
+      k.add(function () { fs.forEach(function (f) { blade.appendChild(f); f.classList.remove('is-off'); f.style.left = ''; }); pull.value = 24; });
+    } },
+
+    /* slot 8 · NEW · The punch list: tick a line and its source opens beside it; the ring counts the ticks */
+    8: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ppl__side > *'));
+      var items = Array.prototype.slice.call(root.querySelectorAll('.ppl__list li')), fg = root.querySelector('.ppl__ring .fg'), n = root.querySelector('.ppl__ring .n');
+      function sync() {
+        var c = 0;
+        items.forEach(function (li) { var on = li.querySelector('input').checked; li.classList.toggle('is-on', on); li.querySelector('.ppl__s').tabIndex = on ? 0 : -1; if (on) c++; });
+        fg.style.strokeDashoffset = (314.16 * (1 - c / items.length)).toFixed(1);
+        n.textContent = c + '/' + items.length;
+      }
+      items.forEach(function (li) { k.on(li.querySelector('input'), 'change', sync); });
+      sync();
+      k.add(function () { items.forEach(function (li) { li.querySelector('input').checked = false; }); sync(); });
+    } },
+
     /* slot 3 · Phase 5 improved version of b4 */
     3: { init: function (root, k) {
       var plan = root.querySelector('.psx__plan');
@@ -8823,7 +9115,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 
 /* before/after, PLAN-V3 §3. Only the four genuine pairs (FACTS.md). */
 (function () {
-  var PAIRS = [
+  var PAIRS = EZ.PAIRS = [   // the one source of the four genuine pairs (Proof slot 5 reads it too)
+
     { b: 'ba-kitchen1-before', a: 'ba-kitchen1-after', name: 'Kitchen', time: '<span class="nums">6&ndash;12</span> weeks of construction',
       ba: 'Dated kitchen with cream cabinets and tiled counters, before renovation', aa: 'Renovated kitchen with grey shaker cabinetry and quartz counters' },
     { b: 'ba-bath2-before', a: 'ba-bath2-after', name: 'Bathroom', time: '<span class="nums">4&ndash;8</span> weeks of construction',
