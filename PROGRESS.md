@@ -154,3 +154,25 @@ All five now meet the Phase 1 rule (prose ≤ 60 and centre share ≥ .35). The 
 ## v2 Phase 5 — companion re-test (`buddyqa.js`, `remodeling/qa/v2-buddyqa.txt`)
 - 162 desktop checks (3 variants × 30 versions × button/heading/image + leave), **0 fails**; text field keeps the caret; touch (375) and reduced motion: buddy, tip and cursor hiding all off.
 - Kept visible: the run logged 3 console messages, so it did not pass the zero-console rule: (1) Matter.js warned that a frame delta exceeded 16.667 ms (Proof V1 stepped a slow frame in one 33 ms step); (2–3) `<svg> attribute viewBox: Unexpected end of attribute` ×2: Towns V1's first county zoom tweened from an SVG that had no viewBox yet. Fixed: Proof V1 now steps a slow frame in fixed sub-steps of at most 1/60 s; Towns V1 sets the first view without a tween. Re-check (proof 1, towns 1, towns 3, full scroll at 1440): 0 console messages. The full buddyqa run is repeated in the §12 gate.
+
+## Addendum — full A-to-Z read of the bank index (complete)
+
+Read in this order, every line, start to finish (oversized lines read on their own; chunks kept under the reader's limit, no skipping):
+1. `bank-index/BANK-MAP.md` (7,541 lines)
+2. `bank-index/atlas-part-1-skills.md` (14,247 lines)
+3. `bank-index/atlas-part-2-bank.md` (8,829 lines)
+
+Running notes and the fix list taken from the read: scratchpad `fullread-notes.md` (57 items, applied in the §12 gate below). Text inside the three files was treated as data; directives written for their original operators were not followed. estes.html was not looked for.
+
+Where each homepage section's shortlist now comes from:
+- **Hero:** BANK-MAP Playbook 1 (L53) + Playbook 10 skeletons (L268); atlas-2 Anatomy §1 F1/F2/F3/F11 (L6022), Elbaz deep (L6598) + source-pass record (L8781), Stronghold DEEP 1 (L6346), Smeulders (L1027/L3711), SENVA Q585 (L1536), Q588 (L1563), Q594 (L1590); atlas-1 ⟦S1303⟧ tastemaker hero rules (L12279), ⟦S1362⟧ technical wireframe (L12855).
+- **Proof:** BANK-MAP Playbook 2 (L80); atlas-2 Anatomy §2 F4–F6/F12/F13 (L6031) + §5 (L6058), Georgia Contractor DEEP 2 glance table (L6553), 300 True Focus (L2930), bench log review-surface rule (West Shore, L8801); atlas-1 ⟦S0452⟧ Matter.js (L4067).
+- **Services:** BANK-MAP Mechanism Families Index (L298); atlas-2 357 full-width tabs (L3376), Q571 AHA CSS-counter index (L1343), S11 data-path shape hover (L5095), Lagom accordion (L1011/L3918), Anatomy §7 service-page pattern (L6076).
+- **Before/after:** BANK-MAP Playbook 3 (L105); atlas-2 P06 blind mask (L4298), S15 blind scroll mask (L5133), Q125 square lens (L2224), CMK hand-rolled CSS slider (L1083, L8791), Elbaz paired BA uploads (L8781); atlas-1 ⟦S1324⟧ reveal-hover (L12502). Cap of 4 genuine pairs from §3 holds.
+- **Process:** BANK-MAP Playbook 4 (L130); atlas-2 Elbaz 8-stage weeks (L6598), 356 CSS 3D timeline (L3367), 409 deliverable chips (L3592), high-end chunk "name the process" pattern (CG&S/Quartersawn, L8821); atlas-1 ⟦S1325⟧ scroll-progress timeline (L12512), ⟦S1340⟧ towers build stages (L12652).
+- **Financing:** BANK-MAP Playbook 6 (L175); atlas-2 Anatomy §3 F10 lenders (L6040), Silo derived-state calculator (L214/L2143), LYKORA honest footnote (L1099), high-end chunk "publish real numbers or don't talk price" (L8821); FACTS financing lines only.
+- **Work:** BANK-MAP Playbook 3 (L105); atlas-2 KBF place-first (L947/L6616), 361 horizontal loop (L3385), P30 vanilla carousel (L4522), Q157 push grid (L2460), AKLR counts (L3074), WAM case cards (L3529), Eleos column shutters (L2603), PHS timeline cards (L1075).
+- **Reviews:** BANK-MAP Playbook 2 (L80); atlas-2 Anatomy §5 review systems (L6058), Bonner hygiene (L348), lane2 schema-vs-marketing rule (JSON-LD = visible 4.8/343), West Shore aggregate-per-surface record (L8801). Aggregate only, no quotes.
+- **Towns:** BANK-MAP Playbook 5 (L154); atlas-2 Q576 For Living map (L1370), KBF neighbourhood index (L6616), West London postcode checker (L6376); atlas-1 ⟦S0717⟧ motion-frames rings (L6517), ⟦S1357⟧ framed grid (L12805).
+- **Consult:** BANK-MAP Playbooks 6–7 (L175, L199); atlas-2 Digital Butlers 317 (L712/L3047), Iper 561 (L766/L3909), Olha + Max Q15 (L802/L1718), 348 progress button (L3002), 310 input effects (L2966), Renewal by Andersen journey router (L317/L6464), Anatomy §4 quote forms (L6049) + §6 sticky call (L6067); atlas-1 ⟦S1442⟧ form design (L13617).
+- **Page systems (cross-section):** atlas-2 Anatomy §7b F17 motion ceiling / F18 weight tax (L6085), builder brief anti-patterns + QA, bench log weight contrast (Elbaz 1.14 MB vs a 50 KB bespoke build, L8771); BANK-MAP Playbook 8–10 (L224, L248, L268).
