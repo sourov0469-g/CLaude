@@ -2,7 +2,25 @@
 
   <!-- v1 · On the road [BANK Q54 responsive scroll-triggered curved path: a traveller rides a path generated through measured
        anchors (control multipliers .8/.3/.6/.2), scrub, ease none]. The route is the section: a site plan with eight signposts. -->
-  <div class="ver process1" data-v="1">
+  <!-- slot 1 · AUDIT-01 winner (copied from v1, fixes applied here; the original is in a backup slot) -->
+  <div class="ver pl" data-v="1">
+    <div class="wrap">
+      <div class="process__head">
+        <h2 class="t-head" id="process-h1-w">Eight stops between your first call and your keys.</h2>
+        <div class="pl__headtxt">
+          <p class="t-lead process__lead">The route every Elbaz job drives, in order. Each stop says what happens there.</p>
+          <p class="pl__note">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        </div>
+      </div>
+      <div class="pl__plan" aria-hidden="true">
+        <svg class="pl__svg" focusable="false"></svg>
+        <ol class="pl__signs"></ol>
+      </div>
+      <ol class="pl__list" aria-label="The eight stages of a project"></ol>
+    </div>
+  </div>
+
+  <div class="ver process1" data-v="b1" hidden>
     <div class="wrap">
       <div class="process__head">
         <h2 class="t-head" id="process-h1">Eight stops between your first call and your keys.</h2>
@@ -27,7 +45,6 @@
       <div class="process2__stage">
         <svg class="process2__svg" viewBox="0 0 1000 620" aria-hidden="true" focusable="false"></svg>
         <div class="process2__cap" aria-live="polite"><span class="process2__no nums">01</span><span class="process2__t">Consultation</span><span class="process2__w nums">Week 1</span></div>
-        <p class="process2__pct nums" aria-hidden="true">0%</p>
         <button type="button" class="process2__grip" aria-label="Build line: drag up or down, or use the arrow keys" data-rx="native:build-line"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18"/><path d="M22 10v24M15 17l7-7 7 7M15 27l7 7 7-7"/></svg></button>
       </div>
       <div class="process2__pips" role="group" aria-label="Pick a stage"></div>

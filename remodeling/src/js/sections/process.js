@@ -4,7 +4,7 @@
   function f(n) { return Math.round(n * 10) / 10; }
   function S() { return (window.__DATA || {}).stages || []; }
   function plain(html) { var d = document.createElement('div'); d.innerHTML = html; return d.textContent; }
-  var TRUCK = '<g class="truck"><rect x="-26" y="-9" width="30" height="13" rx="2" fill="#f2c230" stroke="#0B1418" stroke-width="2"/>' +
+  var TRUCK = '<g class="truck"><rect x="-26" y="-9" width="30" height="13" rx="2" fill="#77b3b8" stroke="#0B1418" stroke-width="2"/>' +
     '<path d="M4 4 V-9 h11 l8 8 V4 Z" fill="#77b3b8" stroke="#0B1418" stroke-width="2" stroke-linejoin="round"/><path d="M8 -6 h6 l5 5 h-11 Z" fill="#dff1f3" stroke="#0B1418" stroke-width="1.2"/>' +
     '<circle cx="-16" cy="6" r="5" fill="#0B1418"/><circle cx="-16" cy="6" r="2" fill="#c9d1d3"/><circle cx="13" cy="6" r="5" fill="#0B1418"/><circle cx="13" cy="6" r="2" fill="#c9d1d3"/>' +
     '<rect x="-24" y="-15" width="8" height="6" fill="#c9a46a" stroke="#0B1418" stroke-width="1.2"/><rect x="-14" y="-15" width="8" height="6" fill="#c9a46a" stroke="#0B1418" stroke-width="1.2"/></g>';
@@ -22,8 +22,49 @@
   var RXS = ['speech', 'magnifier', 'sketch', 'ledger', 'badge', 'sawhorse', 'check', 'flag'];
 
   EZ.section('process', {
-    /* v1 · On the road [Q54]: a site plan; the truck rides a path generated through the eight signposts with scroll */
+    /* slot 1 · AUDIT-01 winner (copied from v1; F5 fixes): the plan is a graphic (teal road and truck, scroll-driven on desktop,
+       parked at stop 01 on phones and under reduced motion); every stop's description is always on the page in the numbered list */
     1: { init: function (root, k) {
+      var plan = root.querySelector('.pl__plan'), svg = root.querySelector('.pl__svg'), signs = root.querySelector('.pl__signs'), list = root.querySelector('.pl__list');
+      var st = S(), road, done, truck, P = { p: 0 }, VW = 1200, VH = 520, scrub = null;
+      var pts = [[90, 420], [250, 250], [430, 380], [575, 190], [735, 350], [880, 170], [1030, 320], [1125, 120]];
+      EZ.reveal(k, root.querySelectorAll('.process__head .t-head, .pl__headtxt > *'));
+      signs.innerHTML = st.map(function (s, i) {
+        return '<li class="pl__stop' + (i % 2 === 0 ? ' is-below' : '') + '" style="left:' + (pts[i][0] / VW * 100) + '%;top:' + (pts[i][1] / VH * 100) + '%"><span class="pl__sign"><span class="pl__no nums">0' + (i + 1) + '</span><span class="pl__t">' + s.t + '</span></span></li>';
+      }).join('');
+      list.innerHTML = st.map(function (s, i) {
+        return '<li class="pl__item"><span class="pl__ino nums" aria-hidden="true">0' + (i + 1) + '</span><h3 class="pl__ih">' + s.t + '</h3><p class="pl__iw nums">' + s.w + '</p><p class="pl__id">' + s.d + '</p></li>';
+      }).join('');
+      var d = 'M' + pts[0][0] + ' ' + pts[0][1];
+      for (var i = 1; i < pts.length; i++) {
+        var a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1];
+        d += 'C' + f(a[0] + dx * .2) + ' ' + f(a[1] + dy * .8) + ' ' + f(b[0] - dx * .6) + ' ' + f(b[1] - dy * .3) + ' ' + b[0] + ' ' + b[1];
+      }
+      var pads = pts.map(function (p, n) { return '<g class="pad" transform="translate(' + p[0] + ' ' + p[1] + ')"><circle r="15"/><text y="5" text-anchor="middle">' + (n + 1) + '</text></g>'; }).join('');
+      var home = '<g class="home" transform="translate(' + (pts[7][0] + 40) + ' ' + (pts[7][1] - 46) + ')"><path d="M-30 10l30-24 30 24v26h-60z"/><rect class="win" x="-20" y="16" width="12" height="10"/><rect class="win" x="8" y="16" width="12" height="10"/></g>';
+      svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+      svg.innerHTML = '<path class="road-case" d="' + d + '"/><path class="road" d="' + d + '"/><path class="road-line" d="' + d + '"/><path class="road-done" d="' + d + '"/>' + pads + home + TRUCK;
+      road = svg.querySelector('.road'); done = svg.querySelector('.road-done'); truck = svg.querySelector('.truck');
+      function set() {
+        gsap.set(done, { drawSVG: '0% ' + (P.p * 100) + '%' });
+        gsap.set(truck, { motionPath: { path: road, align: road, alignOrigin: [.5, .5], autoRotate: true, start: 0, end: Math.max(.0001, P.p) } });
+        svg.classList.toggle('is-home', P.p > .995);
+      }
+      set();
+      k.add(function () { svg.innerHTML = ''; signs.innerHTML = ''; list.innerHTML = ''; if (scrub) scrub.kill(); });
+      if (!k.motion) return;
+      // one focal motion: the truck. Desktop only; a phone shows the plan parked at stop 01 above the list.
+      var mq = matchMedia('(min-width: 768px)');
+      function arm() {
+        if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; P.p = 0; set(); }
+        if (mq.matches) scrub = gsap.to(P, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: plan, start: 'top 70%', end: 'bottom 40%', scrub: .6 } });
+      }
+      arm();
+      k.on(mq, 'change', arm);
+    } },
+
+    /* v1 · On the road [Q54]: a site plan; the truck rides a path generated through the eight signposts with scroll */
+    b1: { init: function (root, k) {
       var plan = root.querySelector('.process1__plan'), svg = root.querySelector('.process1__svg'), list = root.querySelector('.process1__signs');
       var st = S(), road, done, truck, P = { p: k.motion ? 0 : 1 }, VW, VH, pts;
       EZ.reveal(k, root.querySelectorAll('.process__head > *'));
@@ -122,7 +163,8 @@
     2: { init: function (root, k) {
       var svg = root.querySelector('.process2__svg'), stage = root.querySelector('.process2__stage');
       var capNo = root.querySelector('.process2__no'), capT = root.querySelector('.process2__t'), capW = root.querySelector('.process2__w');
-      var pctEl = root.querySelector('.process2__pct'), grip = root.querySelector('.process2__grip'), pipsEl = root.querySelector('.process2__pips');
+      // [AUDIT-01 F5 loser] the percentage readout is gone: equal bands under unequal durations made it a fabricated number
+      var grip = root.querySelector('.process2__grip'), pipsEl = root.querySelector('.process2__pips');
       var st = S(), TOP = 150, BOT = 600, ys = st.map(function (s, i) { return BOT - (i + 1) / st.length * (BOT - TOP); });
       EZ.reveal(k, root.querySelectorAll('.process__head > *'));
       // the house, in section: footings, slab, walls, partition, door, windows, ceiling, truss roof, covering; site props
@@ -171,7 +213,6 @@
           capNo.textContent = (idx < 9 ? '0' : '') + (idx + 1); capT.innerHTML = st[idx].t; capW.innerHTML = st[idx].w;
           pips.forEach(function (p, j) { p.setAttribute('aria-pressed', j === idx ? 'true' : 'false'); p.classList.toggle('is-done', j < n); });
         }
-        pctEl.textContent = Math.round((BOT - y) / (BOT - TOP) * 100) + '%';
         stage.classList.toggle('is-done', y <= TOP + .5);
       }
       var auto = null;
