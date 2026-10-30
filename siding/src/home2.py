@@ -1440,10 +1440,19 @@ def backups(key):
     return [(BK_SLOT + n, facts_pass(open(os.path.join(BK, f'{key}-b{n}.html'), encoding='utf-8').read()), names[n - 1]) for n in (1, 2, 3)]
 
 
+EYEBROW = {'proof': 'The record', 'services': 'What we install', 'work': 'Before, after, priced', 'built': 'How it is built',
+           'colour': 'Colour', 'near': 'Near you', 'reviews': 'Reviews', 'money': 'Financing', 'book': 'Free inspection'}
+
+
 def section(key, label, fns, names):
     vs = [with_phone(key, f()) for f in fns]
     if key == 'hero':   # Phase 3: the drawn street is the hero's centrepiece band in every visible version
         vs = [v[:v.rfind('</div>')] + f'<div class="art-band art-band--street">{art.street(f"st{n}")}</div></div>' for n, v in enumerate(vs, 1)]
+    else:               # Phase 3: an accent eyebrow over the first heading, and the section's trade-object drawing
+        num = [k for k, *_ in SECTIONS].index(key) + 1
+        eb = f'<p class="eyebrow" aria-hidden="true"><span>{num:02d}</span>{EYEBROW[key]}</p>'
+        vs = [re.sub(r'(<h2\b)', eb + r'\1', v, count=1) for v in vs]
+        vs = [v[:v.rfind('</div>')] + f'<div class="art-corner">{art.motif(key)}</div></div>' for v in vs]
     bks = backups(key)
     tabs = ''.join(f'<button class="vsw-b" type="button" role="tab" id="{key}-tab{n}" aria-selected="{"true" if n == 1 else "false"}" aria-controls="{key}-stage" tabindex="{0 if n == 1 else -1}" data-v="{n}" aria-label="{label} version {n}: {e(nm)}">{n}</button>'
                    for n, nm in enumerate(names, 1))

@@ -102,6 +102,50 @@ def street(uid='st'):
             f'{ground}{"".join(H)}</svg>')
 
 
+
+# ---------- section motifs: one trade object per section, drawn on a 320 grid, tints of the accent only ----------
+def _svg(key, body, label):
+    return (f'<svg class="art-motif am-{key}" viewBox="0 0 320 320" aria-hidden="true" focusable="false">{body}</svg>')
+
+
+def motif(key):
+    M = {
+        # a spirit level, bubble centred: the record, level and checkable
+        'proof': '<rect class="am-f" x="18" y="132" width="284" height="56" rx="10"/><rect class="am-l" x="18" y="132" width="284" height="56" rx="10"/>'
+                 '<rect class="am-g" x="120" y="144" width="80" height="32" rx="16"/><path class="am-l" d="M150 144v32M170 144v32"/>'
+                 '<circle class="am-b" cx="160" cy="160" r="9"/><circle class="am-l" cx="52" cy="160" r="12"/><circle class="am-l" cx="268" cy="160" r="12"/>'
+                 '<path class="am-t" d="' + ''.join(f'M{x} 132v{10 if x % 40 == 38 else 6}' for x in range(38, 300, 20)) + '"/>',
+        # a framing square over three lap boards in profile
+        'services': '<path class="am-f" d="M40 40h40v200h200v40H40z"/><path class="am-l" d="M40 40h40v200h200v40H40z"/>'
+                    '<path class="am-t" d="' + ''.join(f'M{x} 280v-{12 if (x - 80) % 40 == 0 else 7}' for x in range(90, 280, 10)) + ''.join(f'M40 {y}h{12 if y % 40 == 0 else 7}' for y in range(50, 240, 10)) + '"/>'
+                    + ''.join(f'<path class="am-g" d="M120 {y}l170 -6v28l-170 6z"/><path class="am-l" d="M120 {y}l170 -6v28l-170 6z"/>' for y in (98, 138, 178)),
+        # a chalk-line reel, the line snapped across the frame
+        'work': '<circle class="am-f" cx="70" cy="90" r="46"/><circle class="am-l" cx="70" cy="90" r="46"/><circle class="am-g" cx="70" cy="90" r="18"/><circle class="am-l" cx="70" cy="90" r="18"/>'
+                '<path class="am-l" d="M70 72v-30M88 90h28"/><path class="am-snap" pathLength="1" d="M112 112L300 270"/><path class="am-dust" d="M112 112L300 270"/><circle class="am-b" cx="300" cy="270" r="7"/>',
+        # a stack of fibre-cement lap boards, end grain showing the bevel
+        'built': ''.join(f'<path class="am-f" d="M30 {y}h230l30 -16H60z"/><path class="am-l" d="M30 {y}h230l30 -16H60z"/><path class="am-g" d="M30 {y}h230v14H30z"/><path class="am-l" d="M30 {y}h230v14H30zM260 {y + 14}l30 -16v-14"/>' for y in (250, 220, 190, 160, 130, 100)),
+        # a fan deck: the colour book, opened, in tints of the one accent
+        'colour': ''.join(f'<g transform="rotate({a} 160 280)"><rect class="am-fan am-fan{i}" x="140" y="40" width="40" height="230" rx="8"/><rect class="am-l" x="140" y="40" width="40" height="230" rx="8"/><path class="am-l" d="M140 220h40"/></g>' for i, a in enumerate((-48, -32, -16, 0, 16, 32, 48)))
+                  + '<circle class="am-b" cx="160" cy="262" r="8"/>',
+        # a compass rose over a street grid: the neighbourhoods
+        'near': '<path class="am-t" d="' + ''.join(f'M{x} 20V300' for x in range(40, 300, 44)) + ''.join(f'M20 {y}H300' for y in range(40, 300, 44)) + '"/>'
+                '<circle class="am-f" cx="160" cy="160" r="78"/><circle class="am-l" cx="160" cy="160" r="78"/><circle class="am-l" cx="160" cy="160" r="60"/>'
+                '<path class="am-g" d="M160 92l14 68-14 68-14-68z"/><path class="am-l" d="M160 92l14 68-14 68-14-68z"/><path class="am-b" d="M160 92l14 68h-28z"/>'
+                '<path class="am-l" d="M92 160h136"/><text class="am-tx" x="160" y="76" text-anchor="middle">N</text>',
+        # a yard sign on its stake: how a finished job is announced on an Austin street
+        'reviews': '<path class="am-l am-stake" d="M120 170v130M200 170v130"/><rect class="am-f" x="70" y="60" width="180" height="120" rx="10"/><rect class="am-l" x="70" y="60" width="180" height="120" rx="10"/>'
+                   + ''.join(f'<path class="am-b" d="M{x} 92l6 13 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2z"/>' for x in (110, 140, 170, 200))
+                   + '<path class="am-g" d="M96 140h128v14H96z"/>',
+        # a price tag cut as a house: published bands, not quotes in a drawer
+        'money': '<path class="am-f" d="M60 140l100-90 100 90v130H60z"/><path class="am-l" d="M60 140l100-90 100 90v130H60z"/><circle class="am-b" cx="160" cy="112" r="12"/>'
+                 '<path class="am-l am-string" d="M160 100C150 60 190 40 230 24"/><path class="am-g" d="M92 180h136v14H92zM92 210h96v14H92z"/>',
+        # an inspection clipboard, items ticking off
+        'book': '<rect class="am-f" x="70" y="40" width="180" height="250" rx="12"/><rect class="am-l" x="70" y="40" width="180" height="250" rx="12"/><rect class="am-g" x="120" y="28" width="80" height="28" rx="8"/><rect class="am-l" x="120" y="28" width="80" height="28" rx="8"/>'
+                + ''.join(f'<rect class="am-l" x="96" y="{y}" width="20" height="20" rx="4"/><path class="am-tick" style="--i:{i}" pathLength="1" d="M100 {y + 10}l5 6 9-12"/><path class="am-t" d="M128 {y + 10}h96"/>' for i, y in enumerate((86, 130, 174, 218))),
+    }
+    return _svg(key, M[key], key) if key in M else ''
+
+
 if __name__ == '__main__':
     s = street()
     print(len(s), 'B')

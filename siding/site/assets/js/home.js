@@ -4,6 +4,11 @@
 (() => {
   'use strict';
   const TRAIL = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || 'currentColor';   // Rule 3: from the token
+  // Phase 3 artwork: a section is marked once it scrolls into view, so its drawing can finish itself (CSS, motion only)
+  if ('IntersectionObserver' in window) {
+    const seen = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); seen.unobserve(en.target); } }), { rootMargin: '0px 0px -25% 0px' });
+    document.querySelectorAll('.sec').forEach(sec => seen.observe(sec));
+  }
   const d = document, root = d.documentElement;
   const $ = (s, el = d) => el.querySelector(s);
   const $$ = (s, el = d) => Array.from(el.querySelectorAll(s));

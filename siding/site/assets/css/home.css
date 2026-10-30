@@ -1011,7 +1011,7 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 /* depth layers: a positioned field behind each version's content (S1330, S1425: ground stays quieter than figure) */
 .bgf { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .bgf > * { position: absolute; will-change: transform; }
-.v.has-bgf > :not(.bgf):not([class*="peek"]):not(.sdv):not(.sfx) { position: relative; z-index: 1; }
+.v.has-bgf > :not(.bgf):not([class*="peek"]):not(.sdv):not(.sfx):not(.art-corner) { position: relative; z-index: 1; }
 
 /* =====================================================================================
    v3 SECTIONS
@@ -2137,3 +2137,36 @@ html.motion .sec:not([data-bk]) .fd-list:not([hidden]) { animation: fdOpen 160ms
   .sec:not([data-bk]) .hero-3 .h3-under { margin-top: 48px; }
 }
 .sec:not([data-bk]) .h3-stage { background: transparent; }
+/* eyebrow: the accent label over every section heading, numbered in page order (brand presence, UAV lesson) */
+.eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; color: var(--accent-d); font: 600 .8125rem/1 var(--f); letter-spacing: .14em; text-transform: uppercase; }
+.eyebrow span { display: inline-grid; place-items: center; min-width: 30px; height: 22px; padding: 0 6px; border-radius: 6px; background: var(--accent); color: var(--paper); letter-spacing: .02em; font-family: var(--fh); }
+.eyebrow::after { content: ""; width: 40px; height: 2px; background: var(--accent-300); }
+.v[data-tone="red"] .eyebrow { color: var(--ink); }
+.v[data-tone="red"] .eyebrow::after { background: var(--ink); }
+/* the section's trade object, drawn large in accent tints in the lower corner, behind the content */
+.v:not([data-bk] *) { isolation: isolate; }
+.art-corner { position: absolute; z-index: -1; right: clamp(-60px, -2vw, 0px); bottom: clamp(-40px, -2vw, 0px); width: clamp(180px, 22vw, 340px); pointer-events: none; }
+.art-corner svg { display: block; width: 100%; height: auto; overflow: visible; }
+.art-motif .am-f { fill: var(--accent-50); }
+.v[data-tone="ground2"] .art-motif .am-f, .v[data-tone="night"] .art-motif .am-f { fill: var(--paper); }
+.art-motif .am-g { fill: var(--accent-100); }
+.art-motif .am-l { fill: none; stroke: var(--accent-300); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.art-motif .am-t { fill: none; stroke: var(--accent-200); stroke-width: 2; }
+.art-motif .am-b { fill: var(--accent-300); }
+.art-motif .am-tx { fill: var(--accent-300); font: 700 22px var(--fh); }
+.art-motif .am-snap { fill: none; stroke: var(--accent-300); stroke-width: 3; }
+.art-motif .am-dust { fill: none; stroke: var(--accent-100); stroke-width: 12; stroke-linecap: round; }
+.art-motif .am-tick { fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.art-motif .am-fan0 { fill: var(--accent-50); } .art-motif .am-fan1 { fill: var(--accent-100); } .art-motif .am-fan2 { fill: var(--accent-200); }
+.art-motif .am-fan3 { fill: var(--accent-300); } .art-motif .am-fan4 { fill: var(--accent-200); } .art-motif .am-fan5 { fill: var(--accent-100); } .art-motif .am-fan6 { fill: var(--accent-50); }
+.v[data-tone="red"] .art-motif .am-l, .v[data-tone="red"] .art-motif .am-t { stroke: var(--accent); }
+.v[data-tone="red"] .art-motif .am-f, .v[data-tone="red"] .art-motif .am-g { fill: var(--accent-200); }
+@media (prefers-reduced-motion: no-preference) {
+  html.motion .art-motif .am-tick, html.motion .art-motif .am-snap { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .6s var(--ease); transition-delay: calc(var(--i, 0) * .25s); }
+  html.motion .sec.is-in .art-motif .am-tick, html.motion .sec.is-in .art-motif .am-snap { stroke-dashoffset: 0; }
+  html.motion .am-proof .am-b { transform: translateX(-60px); transition: transform 1.2s cubic-bezier(.3, 1.6, .5, 1) .3s; }
+  html.motion .sec.is-in .am-proof .am-b { transform: none; }
+}
+@media (max-width: 639px) { .art-corner { width: 150px; opacity: .8; } }
+.v > .art-corner.art-corner { position: absolute; z-index: -1; }
+#money .art-corner { width: clamp(150px, 15vw, 230px); bottom: auto; top: clamp(24px, 4vw, 64px); right: clamp(-40px, -1vw, 0px); }
