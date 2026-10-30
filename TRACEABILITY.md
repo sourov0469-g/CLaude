@@ -325,3 +325,10 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | Five counties, one quilt: one stitched patch per county, largest first, towns nearest first with miles | Hippo doctrine (genuinely local); craft motif | `qa/scripts/areatest.mjs`: Montgomery 8, Warren 7, Greene 5, Butler 3, Clinton 1 = 24; errors 0 |
 | 7 | How far do we come: a range input (0-25 mi) grows a circle around the office on a true-bearing plot; the towns inside light up and list; the count is announced | business-only interactive; ⟦S1325⟧ | `areatest.mjs`: 0 mi = Springboro only, 5 = 3, 25 = 24, keys to 10 = 12; `qa/r4d-area-new7-1440.jpg`; errors 0 |
 | 8 | Town line to town line: a roadside sign per town (miles, direction, county), nearest first; Springboro's sign is the accent one with the office address | roadside sign artefact | `areatest.mjs`: 24 signs; 1440 and 375 shots; errors 0 |
+
+### Call, new V6-V8 (facts only: (937) 746-7377; Rachel answers; Monday to Friday, 9 to 5; 38 N Pioneer Blvd, Springboro, OH 45066; written, line-by-line estimates; never "open now")
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | Come by, or call: the office door drawn with an hours sign on the glass; today's row is marked from Springboro's time zone (it names the day, never claims "open") | ⟦S1291⟧ NAP; storefront artefact | `qa/scripts/calltest.mjs`: one row marked, equal to the America/New_York weekday; errors 0 |
+| 7 | Need a roof? Take a number: a pinned flyer with eight tear-off tabs, each the phone link; a pressed tab tears away and grows back after 4s; only the first tab is in the tab order and the accessibility tree | business-only interactive; [BANK] Checklist 14 one primary action | `calltest.mjs`: tab torn, ghost removed, regrown at 4s, 1 focusable tab; `qa/r4d-call-new7-1440.jpg`; errors 0 |
+| 8 | The number: the phone number as the headline, a drawn handset whose cord draws to the base once | peak-end close (S1452) | 1440 and 375 shots; errors 0 |

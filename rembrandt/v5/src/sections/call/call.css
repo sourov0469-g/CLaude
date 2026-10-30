@@ -179,3 +179,47 @@ html[data-motion="reduced"] .cl3-pause{display:none}
    itself); hover lifts to --ink-2 */
 .cl .btn--sun{background:var(--black);color:var(--paper)}
 @media (hover:hover) and (pointer:fine){.cl .btn--sun:hover{background:var(--ink-2)}}
+
+/* ---------- R4 new versions (master directive Phase 5): v6 the office door, v7 the tear-off flyer, v8 the number */
+.cl-h2{font-size:var(--t-h2);font-weight:700;line-height:1.08;letter-spacing:-.01em;font-family:var(--f-head);max-width:16ch;text-wrap:pretty}
+.cl6,.cl7,.cl8{padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.cl6{--vbg:var(--a50);background:var(--a50)}
+.cl6-grid,.cl8-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,5fr);gap:clamp(24px,5vw,88px);align-items:center;max-width:1280px;margin-inline:auto}
+.cl6-copy,.cl8-copy{display:grid;gap:16px;justify-items:start}
+.cl6-sub,.cl7-sub,.cl8-sub{font-size:var(--t-lead);line-height:1.45;max-width:38ch}
+.cl6-map{color:var(--a700);font-weight:700;min-height:44px;display:inline-flex;align-items:center}
+.cl6-door{position:relative;width:100%;max-width:420px;justify-self:center}
+.cl6-svg{display:block;width:100%;height:auto}
+.cl6-frame{fill:var(--a700)}.cl6-glass{fill:var(--a100)}.cl6-shine{fill:var(--paper);opacity:.7}.cl6-panel{fill:var(--a600)}.cl6-bar{fill:var(--n300)}.cl6-logo{fill:var(--a500)}
+.cl6-sign{position:absolute;left:24%;right:24%;top:30%;padding:12px 14px;background:var(--paper);border-radius:6px;box-shadow:0 0 0 2px var(--black),0 12px 24px -16px rgb(20 20 20 / .5);rotate:-2deg}
+.cl6-k{font:700 1rem var(--f-head);text-align:center;padding-bottom:6px;border-bottom:2px solid var(--black)}
+.cl6-days{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:2px;font-size:.875rem}
+.cl6-days li{display:flex;justify-content:space-between;gap:8px;padding:2px 6px;border-radius:4px}
+.cl6-days li span{font-weight:600}
+.cl6-days li.is-today{background:var(--a500);font-weight:700}
+@media (max-width:899px){.cl6-grid,.cl8-grid{grid-template-columns:1fr}.cl6-door{max-width:340px}}
+
+.cl7{--vbg:var(--a500);background:var(--a500)}
+.cl7-board{max-width:880px;margin-inline:auto}
+.cl7-flyer{position:relative;background:var(--paper);rotate:-1deg;padding:clamp(28px,4vw,48px) clamp(20px,4vw,48px) 0;box-shadow:0 30px 60px -30px rgb(20 20 20 / .55)}
+.cl7-pin{position:absolute;left:50%;top:-14px;width:34px;translate:-50% 0}.cl7-pin circle{fill:var(--black)}.cl7-pin path{stroke:var(--n500);stroke-width:3}
+.cl7-top{display:grid;gap:14px;justify-items:center;text-align:center;padding-bottom:clamp(24px,3vw,36px)}
+.cl7-top .cl-h2{max-width:20ch}
+.cl7-tabs{list-style:none;margin:0 calc(-1 * clamp(20px,4vw,48px));padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-top:2px dashed var(--n300)}
+.cl7-tabs li{border-left:2px dashed var(--n300)}.cl7-tabs li:first-child{border-left:0}
+.cl7-tab{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;gap:6px;min-height:clamp(150px,18vw,200px);padding:12px 4px;writing-mode:vertical-rl;rotate:180deg;color:var(--black);text-decoration:none;font:600 .9375rem/1 var(--f-head);background:var(--paper)}
+.cl7-tab .num{font-weight:700;color:var(--a700)}
+.cl7-tn{font-weight:500;color:var(--n700)}
+@media (hover:hover) and (pointer:fine){.cl7-tab:hover{background:var(--a50)}}
+.cl7-tabs li.is-torn .cl7-tab{visibility:hidden}
+@media (max-width:640px){.cl7-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.cl7-tabs li:nth-child(n+5){display:none}.cl7-tab{min-height:170px}}
+
+.cl8{--vbg:var(--paper);background:var(--paper)}
+.cl8-phone{width:100%;max-width:400px;justify-self:center;height:auto;overflow:visible}
+.cl8-cord{fill:none;stroke:var(--a500);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.cl8-hand{fill:var(--black)}
+.cl8-base{fill:var(--a700)}.cl8-btn{fill:var(--a500)}
+.cl8-num{font:800 clamp(2.5rem,1.2rem + 5vw,5.5rem)/1 var(--f-head);letter-spacing:-.02em;white-space:nowrap}
+.cl8-num a{color:var(--black);text-decoration:none;background:linear-gradient(var(--a500),var(--a500)) 0 92%/100% .14em no-repeat}
+@media (max-width:899px){.cl8-phone{max-width:240px;grid-row:2}}
+@media (max-width:400px){.cl8-num{font-size:2.25rem}}

@@ -193,4 +193,33 @@ function status(root, c) {
   return () => clearInterval(clock);
 }
 
-export default { 1: close, 2: morph, 3: marquee, 4: keypad, 5: status };
+// R4 v6 (new) The office door: an hours sign on the glass; today's row (Springboro's time zone, from Intl) is marked.
+// It says only which day it is, never "open now" (a holiday could make that untrue).
+function door(root, c) {
+  const wd = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short' }).format(new Date());
+  const d = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(wd);
+  root.querySelectorAll('.cl6-days li').forEach(li => li.classList.toggle('is-today', +li.dataset.d === d));
+  if (c.motion) beats(root, [root.querySelector('.cl6-copy'), root.querySelector('.cl6-door')]);
+}
+// R4 v7 (new) The tear-off flyer: every tab is the phone link; pressing one tears it away (it drops and turns, .4s)
+// while the call goes through; the tab grows back after 4s so the flyer never runs out
+function flyer(root, c) {
+  const on = e => { const a = e.target.closest('.cl7-tab'); if (!a || !c.motion) return; const li = a.parentElement; if (li.classList.contains('is-torn')) return;
+    const ghost = a.cloneNode(true); ghost.removeAttribute('href'); ghost.setAttribute('aria-hidden', 'true'); ghost.style.position = 'absolute';
+    const r = a.getBoundingClientRect(), pr = li.offsetParent.getBoundingClientRect(); Object.assign(ghost.style, { left: `${r.left - pr.left}px`, top: `${r.top - pr.top}px`, width: `${r.width}px`, height: `${r.height}px`, pointerEvents: 'none', zIndex: 3 });
+    li.offsetParent.append(ghost); li.classList.add('is-torn');
+    gsap.to(ghost, { y: 160, rotate: 180 + (Math.random() * 30 - 15), autoAlpha: 0, duration: 0.4, ease: 'power2.in', onComplete: () => ghost.remove() });
+    setTimeout(() => li.classList.remove('is-torn'), 4000); };
+  root.addEventListener('click', on);
+  if (c.motion) beats(root, [root.querySelector('.cl7-flyer')]);
+  return () => root.removeEventListener('click', on);
+}
+// R4 v8 (new) The number: the handset cord draws (DrawSVG, .9s) from the handset to the base once, then the number rises
+function number(root, c) {
+  if (!c.motion) return;
+  const cord = root.querySelector('.cl8-cord'); gsap.set(cord, { drawSVG: '0%' });
+  beats(root, [root.querySelector('.cl8-copy')]);
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.cl8-phone'), start: 'top 80%', once: true, onEnter: () => gsap.to(cord, { drawSVG: '100%', duration: 0.9, ease: EASE }) });
+  return () => st.kill();
+}
+export default { 1: close, 2: morph, 3: marquee, 4: keypad, 5: status, 6: door, 7: flyer, 8: number };

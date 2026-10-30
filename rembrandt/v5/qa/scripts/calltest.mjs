@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); const errs = []; p.on('pageerror', e => errs.push(e.message));
+const F = 'file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html?v=';
+await p.goto(F + 'call6'); await p.waitForTimeout(1000);
+const today = await p.evaluate(() => [document.querySelector('.cl6-days li.is-today')?.firstChild.textContent, new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'long' }).format(new Date()), document.querySelectorAll('.cl6-days li.is-today').length]);
+console.log('v6 today marked', today);
+await p.goto(F + 'call7'); await p.waitForTimeout(1000); await p.evaluate(() => document.getElementById('call').scrollIntoView()); await p.waitForTimeout(800);
+await p.evaluate(() => document.addEventListener('click', e => { if (e.target.closest('a[href^="tel:"]')) e.preventDefault(); }, true));
+const href = await p.getAttribute('.cl7-tab >> nth=2', 'href');
+await p.click('.cl7-tab >> nth=2'); await p.waitForTimeout(150);
+const a = await p.evaluate(() => [document.querySelectorAll('.cl7-tabs li.is-torn').length, document.querySelectorAll('.cl7-flyer > .cl7-tab').length]);
+await p.waitForTimeout(600); const b2 = await p.evaluate(() => document.querySelectorAll('.cl7-flyer > .cl7-tab').length);
+await p.waitForTimeout(3600); const c = await p.evaluate(() => document.querySelectorAll('.cl7-tabs li.is-torn').length);
+const ax = await p.evaluate(() => [...document.querySelectorAll('.cl7-tab')].filter(t => t.tabIndex >= 0).length);
+console.log('v7 href', href, 'torn+ghost', a, 'ghost gone', b2 === 0, 'regrown after 4s', c === 0, 'focusable tabs', ax);
+console.log('errors', errs.length ? errs : 0); await b.close();
