@@ -9,6 +9,7 @@
   const G = window.gsap, ST = window.ScrollTrigger;
   if (G && ST) G.registerPlugin(ST);
   if (G && window.InertiaPlugin) G.registerPlugin(window.InertiaPlugin);
+  if (G && window.CustomEase) { G.registerPlugin(window.CustomEase); window.CustomEase.create('expoOut23', '0.23,1,0.32,1'); }   // Audit pack F7: cubic-bezier(0.23, 1, 0.32, 1)
   const DATA = JSON.parse($('#home-data').textContent);
   const PINS = DATA.map.pins;
 
@@ -1012,9 +1013,26 @@
     b.on(fig, 'pointerleave', () => { inside = false; lx = ly = null; acc = 0; });
     b.add(() => cancelAnimationFrame(raf));
   }
-  V.near1 = (r, b) => {
+  V.near1 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 1 keeps the count-up and the plain finder (A.2)
     const svg = $('.map-svg', r), M = MapView(svg), cnt = $('[data-count]', r), when = $('[data-when]', r);
-    Finder($('[data-finder]', r), M, 3, b);
+    const TD = bk ? null : JSON.parse($('.n1-data', r).textContent), pay = $('.n1-pay', r);
+    const when0 = when.textContent;
+    /* F7 V1.3: a pick lights its town: that town's dots red, the rest at 25 %, 180 ms; the counter swaps (static text,
+       crossfade) to the town's documented count; the town's photo stories land under the map (graft from Near 3) */
+    const townPick = p => {
+      const town = p[0].split(',').pop().trim(), t = TD && TD[town];
+      if (!t) return;
+      M.hot(new Set(PINS.map((q, i) => q[5] === t.ci ? i : -1).filter(i => i >= 0)));
+      const swap = () => { cnt.textContent = t.doc; when.textContent = `documented jobs in ${town}`; };
+      if (motionOK()) G.timeline().to([cnt, when], { autoAlpha: 0, duration: 0.08 }).add(swap).to([cnt, when], { autoAlpha: 1, duration: 0.08 }); else swap();
+      $('.n1-pk', pay).textContent = t.n ? `${t.n} of ${town}'s photographed jobs have a full photo story${t.n > t.p.length ? `; the latest ${t.p.length}` : ''}` : `No photo story from ${town} published yet.`;
+      $('.n1-rail', pay).innerHTML = t.p.map(q => `<li class="dv-card"><img src="${esc(AU(q.src))}" width="320" height="240" alt="${esc(q.alt)}" loading="lazy" decoding="async"><p><b>${esc(q.place)}</b><span>${esc(q.when)}. ${esc(q.trades)}</span></p></li>`).join('');
+      pay.hidden = false;
+      if (motionOK()) G.fromTo($$('.dv-card', pay), { y: 8, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.22, ease: ease.out, stagger: 0.04 });
+    };
+    Finder($('[data-finder]', r), M, 3, b, bk ? null : townPick);
+    if (!bk) b.on($('.fd-clear', r), 'click', () => { cnt.textContent = '312'; when.textContent = when0; pay.hidden = true; });
     tips(svg, $('.m-tip', r), b);
     if (mqFine.matches) surveyTrail($('.n1-map', r), $('.n1-trail', r), b);
     /* v4 surveyor's crosshair: follows the pointer over the map and reads the straight-line distance to the office
@@ -1048,13 +1066,16 @@
     G.set($('.m-hq', svg), { scale: 0, transformOrigin: '50% 50%' });
     const st = { k: 0 };
     let shown = 0;
-    const tl = G.timeline({ paused: true });
+    /* F7 V1.1: the dots still arrive in date order (every dot is a real job), but no number counts up: "312" is
+       printed from the first paint and the date line fades in once, in 0.2 s, when the last dot lands */
+    if (!bk) G.set(when, { autoAlpha: 0 });
+    const tl = G.timeline({ paused: true, onComplete: () => { if (!bk) G.to(when, { autoAlpha: 1, duration: 0.2, ease: 'power2.out' }); } });
     tl.to($('.m-hq', svg), { scale: 1, duration: 0.5, ease: 'back.out(1.6)' })
       .to(st, { k: months.length - 1, duration: 1.8, ease: 'power1.inOut', onUpdate: () => {
         const lim = months[Math.round(st.k)];
         while (shown < PINS.length && PINS[shown][2] <= lim) { M.pins[shown].classList.remove('off'); shown++; }
         while (shown > 0 && PINS[shown - 1][2] > lim) { shown--; M.pins[shown].classList.add('off'); }
-        cnt.textContent = shown; when.textContent = `jobs, Mar 2022 to ${ym(lim)}`;
+        if (bk) { cnt.textContent = shown; when.textContent = `jobs, Mar 2022 to ${ym(lim)}`; }
       } }, 0.2);
     ST.create({ trigger: svg, start: 'top 72%', once: true, onEnter: () => tl.play() });
   };
@@ -1076,7 +1097,8 @@
 
   /* NEAR 3: KBF's Neighborhood Drive. Pick a place (radio chips): the job map flies in to it (viewBox tween, 0.8 s
      power3.inOut), its photographed pins light, and the chapter rail shows only the jobs photographed there. */
-  V.near3 = (r, b) => {
+  V.near3 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 3 keeps its two-leg 0.6 s fly (A.2)
     const D = JSON.parse($('.dv-data', r).textContent), svg = $('.dv-svg', r), M = MapView(svg), rail = $('[data-dv-rail]', r), kEl = $('[data-dv-k]', r), cap = $('[data-dv-cap]', r);
     const view = t => { const w = 170, h = 192; const x = clamp(t.x - w / 2, 0, 566 - w), y = clamp(t.y - h / 2, 0, 640 - h); return `${x.toFixed(1)} ${y.toFixed(1)} ${w} ${h}`; };
     let tw = null;
@@ -1084,15 +1106,19 @@
       const t = D[name];
       M.hot(new Set(PINS.map((p, i) => p[5] === t.ci ? i : -1).filter(i => i >= 0)));
       if (tw) tw.kill();
-      if (anim && motionOK()) tw = G.timeline().to(svg, { attr: { viewBox: '0 0 566 640' }, duration: UI, ease: 'power2.in' }).to(svg, { attr: { viewBox: view(t) }, duration: UI, ease: 'power3.inOut' });
+      if (anim && motionOK()) tw = bk ? G.timeline().to(svg, { attr: { viewBox: '0 0 566 640' }, duration: UI, ease: 'power2.in' }).to(svg, { attr: { viewBox: view(t) }, duration: UI, ease: 'power3.inOut' })
+        : G.to(svg, { attr: { viewBox: view(t) }, duration: 0.38, ease: 'expoOut23' });   // F7 V3.4: one 380 ms flight
       else svg.setAttribute('viewBox', view(t));
+      if (!bk && anim) r.classList.add('is-picked');   // F7 V3.3: after a pick the map yields ~30 % to the photo rail
       cap.textContent = `${name}: ${t.doc} documented jobs`;
-      kEl.textContent = `${t.n} photographed jobs in ${name}` + (t.n > t.p.length ? `, the latest ${t.p.length}` : '');
+      kEl.textContent = bk ? `${t.n} photographed jobs in ${name}` + (t.n > t.p.length ? `, the latest ${t.p.length}` : '') : `${t.n} of ${name}'s photographed jobs have a full photo story here` + (t.n > t.p.length ? `; the latest ${t.p.length}` : '');   // F7 V3.2: one vocabulary
       rail.innerHTML = t.p.map(q => `<li class="dv-card"><img src="${esc(AU(q.src))}" width="320" height="240" alt="${esc(q.alt)}" loading="lazy" decoding="async"><p><b>${esc(q.place)}</b><span>${esc(q.when)}. ${esc(q.trades)}</span></p></li>`).join('');
       rail.scrollLeft = 0;
       if (anim && motionOK()) G.from($$('.dv-card', rail), { x: 30, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.05, delay: 0.25 });
     };
     radios($('.dv-chips', r), b, it => go(it.dataset.town, true), '.dv-chip');
+    const more = $('[data-near-survey]', r);
+    if (more) b.on(more, 'click', e => { e.preventDefault(); if (BY.near) switchTo(BY.near, 1, { focusTab: true }); });
     go('Austin', false);
     b.add(() => { if (tw) tw.kill(); });
   };

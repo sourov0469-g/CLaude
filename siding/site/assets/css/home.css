@@ -1817,3 +1817,31 @@ html.js:not(.motion) *, html.js:not(.motion) ::before, html.js:not(.motion) ::af
 .cb-t[data-plate] .cb-n, .cb-t[data-plate] .cb-c { justify-self: start; padding: 1px 6px; border-radius: 4px; background: rgba(16, 16, 16, .78); color: var(--sheet); }
 .sec:not([data-bk]) .cb-sheet:focus-visible { outline: 2px solid var(--ink); outline-offset: -6px; }
 .sec:not([data-bk]) .colour-3 .cb-sheet:focus-visible { outline-color: var(--ink); }
+
+/* ================= F7 NEAR (Audit pack). Scoped off the backups. ================= */
+.n1-k1 { margin: 0; padding-top: 10px; border-top: 1px solid var(--line); color: var(--fg); font-weight: 650; }
+.sec:not([data-bk]) .near-1 .m-pins circle, .sec:not([data-bk]) .near-3 .m-pins circle { transition: transform 180ms cubic-bezier(.23, 1, .32, 1), opacity 180ms cubic-bezier(.23, 1, .32, 1), fill 180ms cubic-bezier(.23, 1, .32, 1); }
+.sec:not([data-bk]) .near-1 .m-pins circle.dim { opacity: .25; }
+html.motion .sec:not([data-bk]) .fd-list:not([hidden]) { animation: fdOpen 160ms cubic-bezier(0, 0, .2, 1) both; }
+@keyframes fdOpen { from { opacity: 0; transform: translateY(4px); } }
+.n1-towns { display: none; }
+.n1-pay { margin-top: 28px; }
+.n1-pk { margin: 0 0 12px; color: var(--fg2); font-weight: 650; }
+.n1-rail { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; }
+@media (max-width: 639px) {   /* F7 V1.4: phones lead with the finder and a town list, never the 566-unit map shrunk */
+  .sec:not([data-bk]) .near-1 .n1-map { display: none; }
+  .n1-towns { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .n1-towns li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent); font-size: 1rem; }
+  .n1-towns span { color: var(--fg2); }
+  .n1-towns span::after { content: " documented"; }
+}
+/* V3 on night; six more towns named; the rail fades at its edges on phones; the map yields to the rail after a pick */
+.sec:not([data-bk]) .near-3 .dv-map { background: var(--night2); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14); }
+.dv-more { max-width: 60ch; margin: -12px 0 24px; color: var(--fg2); font-size: var(--t-sm); }
+@media (max-width: 899px) { .sec:not([data-bk]) .dv-chips { -webkit-mask-image: linear-gradient(90deg, transparent, var(--ink) 4%, var(--ink) 96%, transparent); mask-image: linear-gradient(90deg, transparent, var(--ink) 4%, var(--ink) 96%, transparent); } }
+@media (min-width: 900px) { .sec:not([data-bk]) .near-3.is-picked .dv-stage { grid-template-columns: 240px minmax(0, 1fr); } .sec:not([data-bk]) .near-3 .dv-stage { transition: grid-template-columns 0s; } }
+.near-3[data-tone="night"] .dv-chip { background: transparent; color: var(--on-night); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22); }
+.near-3[data-tone="night"] .dv-chip span { color: var(--on-night2); }
+.near-3[data-tone="night"] .dv-chip[aria-checked="true"] { background: var(--sheet); color: var(--ink); box-shadow: none; }
+.near-3[data-tone="night"] .dv-chip[aria-checked="true"] span { color: var(--ink2); }
+.near-3[data-tone="night"] .dv-card p span { color: var(--on-night2); }

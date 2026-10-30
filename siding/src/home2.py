@@ -156,13 +156,13 @@ MAPDATA = dict(ppm=NEAR['ppm'], hq=NEAR['hq'], names=NAMES, pins=PINS, places=PL
 def map_svg(cls='map-svg', label='Map of 312 photographed, documented Austin Pro jobs around Austin'):
     pins = ''.join(f'<circle cx="{x}" cy="{y}" r="3.6" data-i="{i}"/>' for i, (x, y, *_r) in enumerate(PINS))
     grat = '<path class="m-grat" d="M0 603.2H566M0 488.6H566M0 374.0H566M0 259.4H566M0 144.7H566M0 30.1H566M49.4 0V640M148.3 0V640M247.3 0V640M346.2 0V640M445.1 0V640M544.1 0V640"/>'
-    towns = ''.join(f'<text class="m-town" x="{x + 7}" y="{y + 4}">{e(n)}</text>' for n, x, y, c in TOWNS
+    towns = ''.join(f'<text class="m-town" x="{x + 7 - (10 if n == "Round Rock" else 0)}" y="{y + 4}">{e(n)}</text>' for n, x, y, c in TOWNS
                     if n in ('Round Rock', 'Cedar Park', 'Leander', 'Pflugerville', 'Georgetown', 'Buda', 'Lakeway', 'Hutto', 'Manor', 'San Marcos') and 10 <= x <= 520 and 20 <= y <= 620)
     hx, hy = NEAR['hq']
     office = f'<rect class="m-hq" x="{hx - 6}" y="{hy - 6}" width="12" height="12"/><text class="m-town m-hq-t" x="{hx + 13}" y="{hy + 19}">Office, N Lamar</text>'
     scale = f'<g class="m-scale" transform="translate(452 606)"><path d="M0 0h{NEAR["ppm"] * 10:.0f}M0 -5v10M{NEAR["ppm"] * 10:.0f} -5v10"/><text x="0" y="-10">10 mi</text></g>'
     return f'''<svg class="{cls}" viewBox="0 0 566 640" role="img" aria-label="{label}">
-      {grat}{towns}<g class="m-pins">{pins}</g>{office}{scale}<circle class="m-ring" r="0" cx="0" cy="0"/>
+      {grat}<g class="m-pins">{pins}</g><g class="m-towns">{towns}</g>{office}{scale}<circle class="m-ring" r="0" cx="0" cy="0"/>
     </svg>'''
 
 
@@ -883,27 +883,47 @@ def colour3():
 
 
 # ---------- NEAR YOU ----------
-def finder(pref, label='Your neighbourhood or town', big=False):
+def finder(pref, label='Your neighbourhood or town', big=False, tries=True):
     return f'''<div class="fd{' fd-big' if big else ''}" data-finder>
       <label class="fd-label" for="{pref}-in">{label}</label>
       <div class="fd-box"><input id="{pref}-in" type="text" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="{pref}-list" placeholder="Try Round Rock or Milwood…"><button class="fd-clear" type="button" aria-label="Clear" hidden>&times;</button></div>
       <ul class="fd-list" id="{pref}-list" role="listbox" aria-label="Places in the project file" hidden></ul>
-      <div class="fd-try"><span>Try</span><button type="button" data-try="Round Rock">Round Rock</button><button type="button" data-try="Cedar Park">Cedar Park</button><button type="button" data-try="Milwood, Austin">Milwood</button></div>
+      {'<div class="fd-try"><span>Try</span><button type="button" data-try="Round Rock">Round Rock</button><button type="button" data-try="Cedar Park">Cedar Park</button><button type="button" data-try="Milwood, Austin">Milwood</button></div>' if tries else ''}
       <div class="fd-out" aria-live="polite"></div>
     </div>'''
 
 
+def town_data():
+    """per town: documented jobs in the finder file, the map's city index, its photographed jobs (photo stories)"""
+    out = {}
+    for n, _x, _y, c in TOWNS:
+        if n not in CITIES:
+            continue
+        ph = [i for i, p in enumerate(PHOTOS) if town_of(p['place']) == n]
+        out[n] = dict(doc=c, ci=CITIES.index(n), p=[dict(src=f'{H}t/p{i}-320.webp', alt=alt(PHOTOS[i]['alt']) or e(f"{PHOTOS[i]['trades']} at a home in {PHOTOS[i]['place']}"), place=PHOTOS[i]['place'], when=PHOTOS[i]['when'], trades=PHOTOS[i]['trades']) for i in ph[:4]], n=len(ph))
+    return out
+
+
 def near1():
+    """Audit pack F7: the count is static (no count-up), K1 is printed, a finder pick lights its town and brings that
+    town's photo stories under the map (graft from Near 3); phones lead with the finder and a town list"""
+    td = town_data()
+    js = json.dumps(td).replace('</', '<\\/')
+    towns = ''.join(f'<li><b>{e(n)}</b><span class="num">{c}</span></li>' for n, _x, _y, c in sorted(TOWN_TOP, key=lambda t: -t[3]))
     return f'''<div class="v near-1" data-tone="night">
   <div class="n1-grid">
     <div class="n1-side">
       <h2 class="h2x" data-split>Austin, job by job</h2>
-      <p class="n1-count"><span class="num" data-count>312</span> <span data-when>jobs, Mar 2022 to Sep 2026</span></p>
-      <p class="n1-note">Each dot is a photographed job, placed near the home, never on it. 574 more are documented outside this frame or without photos.</p>
-      {finder('n1')}
+      <p class="n1-count" aria-live="polite"><span class="num" data-count>312</span> <span data-when>photographed jobs on the map, Mar 2022 to Sep 2026</span></p>
+      <p class="n1-k1">312 on the map with photos + 574 more counted = 886 documented projects.</p>
+      <p class="n1-note">Each dot is a photographed job, placed near the home, never on it. The 574 are documented outside this frame or without photos.</p>
+      {finder('n1', tries=False)}
+      <ul class="n1-towns" aria-label="Documented jobs by town">{towns}</ul>
     </div>
     <figure class="n1-map" data-cur="map">{map_svg()}<canvas class="n1-trail" aria-hidden="true"></canvas><div class="m-tip" hidden></div></figure>
   </div>
+  <div class="n1-pay" hidden><p class="n1-pk" aria-live="polite"></p><ol class="dv-rail n1-rail"></ol></div>
+  <script type="application/json" class="n1-data">{js}</script>
 </div>'''
 
 
@@ -947,7 +967,7 @@ def near2():
       <div class="mx-more" id="mx-{k}" inert><div class="mx-in">{sky_svg}{note}{f'<ul class="mx-pics">{pics}</ul>' if pics else '<p class="mx-note">No photographed jobs from here published yet.</p>'}
         <a class="tlink" href="#book" data-book>Book a free inspection in {e(town)}</a> <span class="mx-or">or call <a class="tlink" href="{TEL}">{PHONE}</a></span></div></div>
     </li>'''
-    return f'''<div class="v near-2" data-tone="ground">
+    return f'''<div class="v near-2" data-tone="night">
   <div class="mx-head"><h2 class="h2x" data-split>Town by town</h2>
     <p>Each town's own numbers: documented jobs in the firm's project finder, and the priced siding and window jobs from its cost guides, with the median band where it is published.</p></div>
   <div class="mx" role="presentation">
@@ -958,6 +978,7 @@ def near2():
 
 
 DRIVE = ['Austin', 'Cedar Park', 'Pflugerville', 'Round Rock', 'Georgetown']
+MORE_TOWNS = [n for n, *_r in sorted(TOWN_TOP + [t for t in TOWNS if t[0] in ('Lakeway', 'Manor', 'Hutto')], key=lambda t: -t[3]) if n not in DRIVE]   # F7 V3.1
 
 
 def near3():
@@ -970,17 +991,18 @@ def near3():
         x, y, c = docs[town] if town != 'Austin' else (NEAR['hq'][0], NEAR['hq'][1], docs['Austin'][2])
         ci = CITIES.index(town)
         data[town] = dict(x=x, y=y, doc=c, ci=ci, n=len(ph), p=[dict(src=f'{H}t/p{i}-320.webp', alt=alt(PHOTOS[i]['alt']), place=PHOTOS[i]['place'], when=PHOTOS[i]['when'], trades=PHOTOS[i]['trades']) for i in ph[:8]])
-        chips += f'<button type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" tabindex="{0 if k == 0 else -1}" class="dv-chip" data-town="{e(town)}"><b>{e(town)}</b><span class="num">{len(ph)} photographed</span></button>'
+        chips += f'<button type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" tabindex="{0 if k == 0 else -1}" class="dv-chip" data-town="{e(town)}"><b>{e(town)}</b><span class="num">{len(ph)} photo {"story" if len(ph) == 1 else "stories"}</span></button>'
     a0 = data['Austin']
     cards = ''.join(f'<li class="dv-card"><img src="{q["src"]}" width="320" height="240" alt="{q["alt"]}" loading="lazy" decoding="async"><p><b>{e(q["place"])}</b><span>{e(q["when"])}. {e(q["trades"])}</span></p></li>' for q in a0['p'])
     js = json.dumps(data).replace('</', '<\\/')
-    return f'''<div class="v near-3" data-tone="ground2">
+    return f'''<div class="v near-3" data-tone="night">
   <div class="dv-head"><h2 class="h2x" data-split>The neighbourhood drive</h2>
     <p>Pick a place. The map flies in, and you see only the jobs photographed there.</p></div>
   <div class="dv-chips" role="radiogroup" aria-label="Choose a place">{chips}</div>
+  <p class="dv-more">{len(MORE_TOWNS)} more towns in the project file have documented jobs but no photo story here yet: {e(', '.join(MORE_TOWNS))}. <a class="tlink" href="#near" data-near-survey>See them on the survey</a></p>
   <div class="dv-stage">
-    <figure class="dv-map" data-cur="map">{map_svg('map-svg map-light dv-svg')}<figcaption class="dv-cap num" aria-live="polite" data-dv-cap>Austin: {a0['doc']} documented jobs</figcaption></figure>
-    <div class="dv-chapter"><p class="dv-k" data-dv-k>{a0['n']} photographed jobs in Austin{f", the latest {len(a0['p'])}" if a0['n'] > len(a0['p']) else ""}</p>
+    <figure class="dv-map" data-cur="map">{map_svg('map-svg dv-svg')}<figcaption class="dv-cap num" aria-live="polite" data-dv-cap>Austin: {a0['doc']} documented jobs</figcaption></figure>
+    <div class="dv-chapter"><p class="dv-k" data-dv-k>{a0['n']} of Austin's photographed jobs have a full photo story here{f"; the latest {len(a0['p'])}" if a0['n'] > len(a0['p']) else ""}</p>
       <ol class="dv-rail" data-dv-rail>{cards}</ol></div>
   </div>
   <script type="application/json" class="dv-data">{js}</script>

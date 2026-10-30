@@ -1046,7 +1046,7 @@
     const offs = [];
     if (!vr) return;
     // Audit pack F3: the dashed house watermark behind Services fails the Removal Test; backups keep theirs
-    if (BUILDERS[key] && !(key === 'services' && !vr.closest('[data-bk]'))) offs.push(makeField(vr, key));
+    if (BUILDERS[key] && !(/^(services|near)$/.test(key) && !vr.closest('[data-bk]'))) offs.push(makeField(vr, key));   // F7.7: the lot-line motif behind Near goes too
     if (DIV[key] && key !== 'ft') offs.push(makeDivider(vr, key));
     if (API.motion && G) { rxize(vr, key, b); lapHeads(vr, b); }
     recolor();

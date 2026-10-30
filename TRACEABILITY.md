@@ -773,3 +773,33 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 - 3 · Sheet focus: ACCEPTED. A 2 px inset `:focus-visible` outline in ink. ⟦S0049⟧.
 
 **E.3, follow-up (found while checking Colour 1).** The desktop Versions bar still sat over Colour 1's part buttons. The bar is now a small "Versions" pill everywhere, and the version code prints inside the open panel. ⟦S1306⟧, ⟦S0049⟧.
+
+## F7 · Near you
+**V1, Survey (winner).**
+- 1 · Count-up: ACCEPTED.
+  - "312" prints from first paint and never counts.
+  - The date line ("photographed jobs on the map, Mar 2022 to Sep 2026") fades in once, in 0.2 s, when the last dot lands.
+  - The dots still arrive in date order. Every dot shown is a real job, so the accumulation is honest; only the asserting readout went.
+  - Backup 1 keeps its count-up.
+  - ⟦S1306⟧.
+- 2 · K1: ACCEPTED. Printed verbatim under the counter: "312 on the map with photos + 574 more counted = 886 documented projects." The 574 sentence stays as the explainer. ⟦S0220⟧ #8.
+- 3 · Finder reaction: ACCEPTED. The picked town's dots turn red; all others dim to 25 %, both in 180 ms `cubic-bezier(.23,1,.32,1)`. The counter crossfades to the town's documented count from the project file (Round Rock 110), and the input holds the name.
+  - Verified: "Round Rock" gives 37 red and 275 dimmed dots, the count reads 110, and three photo stories show.
+  - The clear button restores the survey.
+  - ⟦S0063⟧.
+- 4 · Phones: ACCEPTED, the pack's second option. Below 640 px the map is not drawn. The section leads with the K1 line, the finder and a list of the 8 main towns, each with its documented count at 16 px. No 566-unit map shrinks to 7 px labels. ⟦S1500⟧, ⟦S0220⟧ Banned #10.
+- 5 · Labels: ACCEPTED. Town labels are painted after the pins (`<g class="m-towns">` follows `<g class="m-pins">`), keeping the existing 3 px `paint-order: stroke` halo. Round Rock moves 10 units left. ⟦S1500⟧.
+- 6 · Pins 180 ms: ACCEPTED. The suggestion list opens with opacity and translateY(4 px) in 160 ms. ⟦S0050⟧.
+- 7 · Motif and Try chips: ACCEPTED, both deleted. Near's lot-line field no longer mounts on live versions; `finder(..., tries=False)` drops the chips. ⟦S1306⟧.
+- GRAFT: ACCEPTED. A pick brings that town's photo stories (V3's cards, up to 4) under the map, with "N of X's photographed jobs have a full photo story". ⟦S0083⟧ staging.
+
+**C.8:** Near 2 and Near 3 move to night (Near 1 already was). The V3 chips are re-derived for night.
+
+**V3, Neighbourhood drive.**
+- 1 · Coverage: ACCEPTED, the pack's second option. A line under the chips names the six towns with documented jobs but no photo story: Leander, San Marcos, Buda, Lakeway, Manor, Hutto. "See them on the survey" switches the section to version 1. ⟦S1499⟧, ⟦S1473⟧ H2.
+- 2 · Vocabulary: ACCEPTED. Chips read "N photo stories", the rail reads "24 of Austin's photographed jobs have a full photo story here", and V1 keeps "photographed jobs". ⟦S0220⟧ Axiom 3.
+- 3 · The map yields: ACCEPTED. After a pick the map column goes from 340 to 240 px (~30 %) and the rail takes the width. ⟦S1501⟧.
+- 4 · Fly: ACCEPTED. One 380 ms flight on `cubic-bezier(.23,1,.32,1)` (CustomEase `expoOut23`), replacing the two-leg ~0.5–0.6 s zoom-out/zoom-in. ⟦S0063⟧ Std 4, ⟦S0089⟧.
+- 5 · Edge mask: ACCEPTED. A 4 % fade on the chip rail below 900 px (E.5).
+
+**V2, Town by town (weak):** mined, as the pack directs. Its per-town documented counts now drive V1's selection readout. Its other defects are logged for the QA rounds.
