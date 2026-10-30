@@ -2086,3 +2086,54 @@ html.motion .sec:not([data-bk]) .fd-list:not([hidden]) { animation: fdOpen 160ms
 .h3-stage .tlink:not([data-bk] *) { color: var(--ink); }
 .ts-bleed .ts-tag:not([data-bk] *) { background: var(--accent-100); color: var(--ink); }
 .dt[aria-checked="true"] span:not([data-bk] *) { opacity: 1; }
+
+/* ===== MASTER DIRECTIVE Phase 3: brand artwork (src/art.py). Drawn in tokens; motion only with motion allowed. ===== */
+.art-band { position: relative; margin: clamp(32px, 5vw, 64px) calc(var(--m) * -1) 0; pointer-events: none; }
+.v:has(> .art-band--street):not([data-bk] *) { padding-bottom: 0; }
+.art-band svg { display: block; width: 100%; height: auto; overflow: visible; }
+.art-street { pointer-events: auto; }
+.art-street .ar-wall { fill: var(--accent-50); stroke: var(--accent-dd); stroke-width: 2; stroke-linejoin: round; }
+.art-street .ar-roof { fill: var(--accent); stroke: var(--accent-dd); stroke-width: 2; stroke-linejoin: round; }
+.art-street .ar-roof-sh, .art-street .ar-roof-m { fill: var(--accent-d); }
+.art-street .ar-c { fill: none; stroke: var(--accent-300); stroke-width: 1.4; }
+.art-street .ar-sh, .art-street .ar-seam { fill: none; stroke: var(--accent-200); stroke-width: 1.6; }
+.art-street .ar-w { fill: var(--accent-200); stroke: var(--accent-dd); stroke-width: 2; transition: fill .3s ease; }
+.art-street .ar-mu { stroke: var(--accent-dd); stroke-width: 1.4; }
+.art-street .ar-sill { stroke: var(--accent-dd); stroke-width: 3; stroke-linecap: round; }
+.art-street .ar-door { fill: var(--accent); stroke: var(--accent-dd); stroke-width: 2; }
+.art-street .ar-knob { fill: var(--paper); }
+.art-street .ar-pc { fill: var(--accent-300); stroke: var(--accent-dd); stroke-width: 2; stroke-linejoin: round; }
+.art-street .ar-post { stroke: var(--accent-dd); stroke-width: 5; }
+.art-street .ar-trunk { fill: none; stroke: var(--accent-dd); stroke-width: 6; stroke-linecap: round; }
+.art-street .ar-leaf { fill: var(--accent-200); stroke: var(--accent-dd); stroke-width: 2; }
+.art-street .ar-ground { stroke: var(--accent-dd); stroke-width: 3; }
+.art-street .ar-grass { fill: none; stroke: var(--accent-300); stroke-width: 1.5; }
+.art-street .ar-tag { opacity: 0; transform-box: fill-box; transition: opacity .2s ease; }
+.art-street .ar-tag rect { fill: var(--accent); }
+.art-street .ar-tag text { fill: var(--paper); font: 600 13px var(--fh); }
+.art-street .ar-h { cursor: default; transition: transform .3s var(--ease); transform-box: fill-box; transform-origin: 50% 100%; }
+.art-street .ar-h:hover { transform: translateY(-6px); }
+.art-street .ar-h:hover .ar-tag { opacity: 1; }
+.art-street .ar-h:hover .ar-w { fill: var(--paper); }
+@media (prefers-reduced-motion: no-preference) {
+  html.motion .art-street .ar-c, html.motion .art-street .ar-sh, html.motion .art-street .ar-seam { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ar-draw .5s var(--ease) forwards; animation-delay: calc(.35s + var(--n, 0) * .12s + var(--i) * .035s); }
+  html.motion .art-street .ar-w { animation: ar-lit 1.6s ease forwards; animation-delay: calc(1.2s + var(--i) * .09s); }
+  html.motion .art-street .ar-h { animation: ar-rise .7s var(--ease) both; animation-delay: calc(var(--n) * .1s); }
+}
+@keyframes ar-draw { to { stroke-dashoffset: 0; } }
+@keyframes ar-lit { 0%, 100% { fill: var(--accent-200); } 40% { fill: var(--paper); } }
+@keyframes ar-rise { from { transform: translateY(18px); opacity: 0; } }
+.ar-h .ar-c { --n: inherit; }
+
+/* Hero 3 on the light palette: no scrim over the photograph. The words sit on paper at the left, the photograph
+   stands at the right under a roof-pitch corner (the logo's gable, cut into the frame), the yard sign overlaps it. */
+@media (min-width: 900px) {
+  .sec:not([data-bk]) .h3-stage { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: clamp(24px, 3vw, 56px); height: auto; min-height: 0; border-radius: 0; overflow: visible; background: transparent; --fg: var(--ink); --fg2: var(--ink2); }
+  .sec:not([data-bk]) .h3-stage::after { display: none; }
+  .sec:not([data-bk]) .h3-photos { position: relative; inset: auto; grid-column: 2; grid-row: 1; aspect-ratio: 5 / 4; clip-path: polygon(0 22%, 34% 0, 100% 0, 100% 100%, 0 100%); border-radius: 0 0 24px 24px; }
+  .sec:not([data-bk]) .h3-txt { position: static; grid-column: 1; grid-row: 1; max-width: none; padding: 0; }
+  .sec:not([data-bk]) .h3-txt .pstrip, .sec:not([data-bk]) .h3-txt .lead { color: var(--ink2); }
+  .sec:not([data-bk]) .h3-sign { top: auto; bottom: -28px; right: auto; left: calc(41.67% + 40px); }
+  .sec:not([data-bk]) .hero-3 .h3-under { margin-top: 48px; }
+}
+.sec:not([data-bk]) .h3-stage { background: transparent; }

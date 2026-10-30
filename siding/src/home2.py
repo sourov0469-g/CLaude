@@ -13,6 +13,7 @@ from parts import NEAR, HOME_PAIRS, SVC_PAIRS, PHOTOS, REVIEWS, LIVE, PHONE, TEL
 from pages_inner import SW, COLORPLUS
 import elevation
 from logo import mark as logo_mark
+import art
 import iso
 import sheet
 
@@ -1441,6 +1442,8 @@ def backups(key):
 
 def section(key, label, fns, names):
     vs = [with_phone(key, f()) for f in fns]
+    if key == 'hero':   # Phase 3: the drawn street is the hero's centrepiece band in every visible version
+        vs = [v[:v.rfind('</div>')] + f'<div class="art-band art-band--street">{art.street(f"st{n}")}</div></div>' for n, v in enumerate(vs, 1)]
     bks = backups(key)
     tabs = ''.join(f'<button class="vsw-b" type="button" role="tab" id="{key}-tab{n}" aria-selected="{"true" if n == 1 else "false"}" aria-controls="{key}-stage" tabindex="{0 if n == 1 else -1}" data-v="{n}" aria-label="{label} version {n}: {e(nm)}">{n}</button>'
                    for n, nm in enumerate(names, 1))
