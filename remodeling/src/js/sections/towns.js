@@ -15,8 +15,82 @@
   }
 
   EZ.section('towns', {
-    /* v1 · The survey map [BANK Q576 For Living: the map answers on hover (desktop) and on tap (touch)] */
+    /* slot 1 · AUDIT-01 winner (copied from v3; F9): clearing the field resets the sign and the live region, the list never
+       covers Check it, the outline draws in 180ms, the sign swaps in 280ms and a miss shakes the posts once */
     1: { init: function (root, k) {
+      var D = geo(), form = root.querySelector('.tc__form'), inp = root.querySelector('.tc__in'), list = root.querySelector('.tc__list');
+      var outline = root.querySelector('.tc__outline'), opath = outline.querySelector('path'), sign = root.querySelector('.tc__sign'), ans = root.querySelector('.tc__ans');
+      lists(root.querySelector('.tc__all'));
+      var ALL = [];
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { ALL.push({ n: t[0], c: c, k: norm(t[0]) }); }); });
+      // Madoka outline: drawn round the field from the bottom-left on focus
+      function shapeOutline() { var w = outline.clientWidth, h = outline.clientHeight; outline.setAttribute('viewBox', '0 0 ' + w + ' ' + h); opath.setAttribute('d', 'M1 ' + (h - 1) + 'V1H' + (w - 1) + 'V' + (h - 1) + 'H1'); }
+      k.ro(outline, shapeOutline);
+      shapeOutline();
+      gsap.set(opath, { drawSVG: '0%' });
+      k.on(inp, 'focus', function () { if (k.motion) gsap.to(opath, { drawSVG: '100%', duration: .18, ease: EZ.bezier(.23, 1, .32, 1) }); else gsap.set(opath, { drawSVG: '100%' }); });
+      k.on(inp, 'blur', function () { if (!inp.value) gsap.to(opath, { drawSVG: '0%', duration: k.motion ? .3 : 0 }); k.timeout(close, 150); });
+
+      var opts = [], act = -1;
+      function close() { list.hidden = true; inp.setAttribute('aria-expanded', 'false'); act = -1; inp.removeAttribute('aria-activedescendant'); }
+      function suggest() {
+        var q = norm(inp.value);
+        if (!q) { close(); rest(); return; }
+        opts = ALL.filter(function (t) { return t.k.indexOf(q) === 0; }).concat(ALL.filter(function (t) { return t.k.indexOf(q) > 0; })).slice(0, 4);
+        if (!opts.length) { close(); return; }
+        list.innerHTML = opts.map(function (t, i) { return '<li role="option" id="tco' + i + '" aria-selected="false">' + esc(t.n) + '<span>' + t.c + '</span></li>'; }).join('');
+        list.hidden = false; inp.setAttribute('aria-expanded', 'true'); act = -1;
+      }
+      function mark(i) {
+        act = i;
+        list.querySelectorAll('li').forEach(function (li, j) { li.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+        if (i > -1) inp.setAttribute('aria-activedescendant', 'tco' + i);
+      }
+      k.on(inp, 'input', suggest);
+      k.on(inp, 'keydown', function (e) {
+        if (list.hidden) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); mark((act + 1) % opts.length); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); mark((act - 1 + opts.length) % opts.length); }
+        else if (e.key === 'Escape') { close(); }
+        else if (e.key === 'Enter' && act > -1) { e.preventDefault(); var t = opts[act]; inp.value = t.n; close(); show(t); }
+      });
+      k.on(list, 'pointerdown', function (e) { var li = e.target.closest('li'); if (!li) return; e.preventDefault(); var t = opts[+li.id.slice(3)]; inp.value = t.n; close(); show(t); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var q = norm(inp.value);
+        if (!q) { inp.focus(); return; }
+        var hit = ALL.filter(function (t) { return t.k === q; })[0] || (opts.length === 1 ? opts[0] : null);
+        close();
+        show(hit || null, inp.value.trim());
+      });
+
+      function fit(txt, max, w) { return Math.min(max, Math.floor(w / Math.max(1, txt.length * .68))); }
+      function draw(main, sub, verdict, yes) {
+        var fs = fit(main, 64, 440);
+        sign.innerHTML =
+          '<g class="posts"><path d="M150 236V300M370 236V300" stroke="#9fb0b5" stroke-width="12"/><path d="M150 236V300M370 236V300" stroke="#0B1418" stroke-width="2" opacity=".3"/>' +
+          '<g class="panel"><rect x="20" y="20" width="480" height="230" rx="18" fill="' + (yes === false ? '#f2c230' : '#1e6b3a') + '" stroke="#0B1418" stroke-width="3"/>' +
+          '<rect x="32" y="32" width="456" height="206" rx="12" fill="none" stroke="' + (yes === false ? '#0B1418' : '#fff') + '" stroke-width="4"/>' +
+          '<text x="260" y="' + (110 + fs * .1) + '" text-anchor="middle" font-family="Geist, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + (yes === false ? '#0B1418' : '#fff') + '">' + esc(main) + '</text>' +
+          '<text x="260" y="160" text-anchor="middle" font-family="Geist, sans-serif" font-weight="600" font-size="24" fill="' + (yes === false ? '#0B1418' : '#e4f1e7') + '">' + esc(sub) + '</text>' +
+          '<text x="260" y="208" text-anchor="middle" font-family="Geist, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? '#0B1418' : '#fff') + '">' + esc(verdict) + '</text></g></g>';
+      }
+      function show(t, raw) {
+        if (t) { draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
+        else { draw('NOT ON OUR LIST', raw ? '“' + raw + '”' : '', 'Call (754) 236-0675 to ask', false); ans.textContent = (raw || 'That town') + ' is not one of the 104 municipalities on our list. Call (754) 236-0675 to ask.'; }
+        if (k.motion) k.ctx.add(function () {
+          gsap.fromTo(sign.querySelector('.panel'), { y: -60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .28, ease: 'back.out(1.8)' });
+          if (!t) gsap.fromTo(sign.querySelector('.posts'), { rotation: 0 }, { keyframes: [{ rotation: -1.2, duration: .05 }, { rotation: 1.2, duration: .07 }, { rotation: -.6, duration: .04 }, { rotation: 0, duration: .04 }], svgOrigin: '260 300', delay: .28 });
+        });
+      }
+      function rest() { draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true); ans.textContent = ''; }
+      rest();
+      k.add(function () { sign.innerHTML = ''; root.querySelector('.tc__all').innerHTML = ''; inp.value = ''; close(); gsap.set(opath, { clearProps: 'all' }); });
+      EZ.reveal(k, root.querySelectorAll('.tc__side > h2, .tc__side > p'));
+    } },
+
+    /* v1 · The survey map [BANK Q576 For Living: the map answers on hover (desktop) and on tap (touch)] */
+    2: { init: function (root, k) {
       var D = geo(), map = root.querySelector('.towns1__map'), svg = root.querySelector('.towns1__svg'), read = root.querySelector('.towns1__read');
       var nEl = root.querySelector('.towns1__n'), cnEl = root.querySelector('.towns1__cn'), sr = root.querySelector('.towns1__sr');
       var tabs = Array.prototype.slice.call(root.querySelectorAll('.towns1__tab'));
@@ -125,7 +199,7 @@
     } },
 
     /* v2 · Around the office [S0717] */
-    2: { init: function (root, k) {
+    3: { init: function (root, k) {
       var D = geo(), svg = root.querySelector('.towns2__svg'), stage = root.querySelector('.towns2__stage');
       var reads = root.querySelectorAll('.towns2__read li'), pause = root.querySelector('.towns2__pause'), pl = pause.querySelector('.btn__label');
       lists(root.querySelector('.towns2__lists'));
@@ -171,7 +245,7 @@
     } },
 
     /* v3 · The road sign [F3 + BANK 310 Madoka] */
-    3: { init: function (root, k) {
+    b1: { init: function (root, k) {
       var D = geo(), form = root.querySelector('.towns3__form'), inp = root.querySelector('.towns3__in'), list = root.querySelector('.towns3__list');
       var outline = root.querySelector('.towns3__outline'), opath = outline.querySelector('path'), sign = root.querySelector('.towns3__sign'), ans = root.querySelector('.towns3__ans');
       lists(root.querySelector('.towns3__all'));

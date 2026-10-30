@@ -2,7 +2,33 @@
 
   <!-- v1 · The survey map [BANK Q576 For Living region map: areas answer on hover (desktop), degrade to tap (touch)].
        The map is the whole version: 104 survey marks; hover / tap / arrow keys raise a town's name on a survey flag. -->
-  <div class="ver towns1" data-v="1">
+  <!-- slot 1 · AUDIT-01 winner (copied from v3, fixes applied here; the original is in a backup slot) -->
+  <div class="ver tc" data-v="1">
+    <div class="wrap tc__grid">
+      <div class="tc__side">
+        <h2 class="t-head" id="towns-h3-w">Type your town.</h2>
+        <p class="t-lead towns__lead">Type yours, the sign answers.</p>
+        <p class="tc__hub">104 municipalities in Miami-Dade, Broward and Palm Beach, from our office at 19 W Flagler St, Miami.</p>
+        <form class="tc__form" novalidate>
+          <div class="tc__field">
+            <label class="tc__lbl" for="tc-q-w">Your town or city</label>
+            <input class="tc__in" id="tc-q-w" type="text" autocomplete="address-level2" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="tc-list-w" spellcheck="false" data-rx="native:madoka-outline">
+            <svg class="tc__outline" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path/></svg>
+            <ul class="tc__list" id="tc-list-w" role="listbox" hidden></ul>
+          </div>
+          <button type="submit" class="btn tc__go" data-rx="~compass/jack/ring/r"><span class="btn__label">Check it</span></button>
+        </form>
+        <p class="tc__call">Not sure? Call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>.</p>
+      </div>
+      <div class="tc__road">
+        <svg class="tc__sign" viewBox="0 0 520 300" aria-hidden="true" focusable="false"></svg>
+        <p class="tc__ans" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="wrap"><div class="tc__all"></div></div>
+  </div>
+
+  <div class="ver towns1" data-v="2" hidden>
     <div class="wrap">
       <div class="towns1__head">
         <h2 class="t-head" id="towns-h1">Do we build in your town?</h2>
@@ -25,7 +51,7 @@
   </div>
 
   <!-- v2 · Around the office [S0717 motion-frames: concentric rings at 60 / 90 / 180s, labels stay upright] -->
-  <div class="ver towns2" data-v="2" hidden>
+  <div class="ver towns2" data-v="3" hidden>
     <div class="wrap">
       <div class="towns__head">
         <h2 class="t-head" id="towns-h2">Three counties, circling one office.</h2>
@@ -42,7 +68,7 @@
   </div>
 
   <!-- v3 · The road sign [BANK Anatomy F3 lowest-friction first field + BANK 310 Madoka input outline] -->
-  <div class="ver towns3" data-v="3" hidden>
+  <div class="ver towns3" data-v="b1" hidden>
     <div class="wrap towns3__grid">
       <div class="towns3__side">
         <h2 class="t-head" id="towns-h3">Type your town.</h2>

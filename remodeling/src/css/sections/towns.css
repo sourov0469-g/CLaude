@@ -80,3 +80,37 @@
 .towns3__all summary { cursor: pointer; font: 400 1.375rem/1 var(--f-display); letter-spacing: .02em; min-height: 44px; }
 .towns3__all p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
 @media (max-width: 1023px) { .towns3__side, .towns3__road { grid-column: 1 / -1; } .towns3__road { margin-top: var(--s7); } .towns3__all { grid-template-columns: 1fr; } }
+
+
+/* ---------- slot 1 · AUDIT-01 winner, copied from v3 (.towns3 -> .tc); fixes follow ---------- */
+.tc__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.tc__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
+.tc__form { display: grid; gap: var(--s4); justify-items: start; }
+.tc__field { position: relative; width: 100%; }
+.tc__lbl { display: block; font: 600 .875rem/1 var(--f-text); color: var(--muted); margin-bottom: 10px; }
+.tc__in { width: 100%; min-height: 64px; padding: 0 18px; background: transparent; border: 0; color: var(--ink); font: 400 clamp(1.75rem, 1.3rem + 1.2vw, 2.5rem)/1 var(--f-display); letter-spacing: .02em; outline: none; box-shadow: inset 0 -2px 0 var(--line-soft); }
+.tc__outline { position: absolute; left: 0; bottom: 0; width: 100%; height: 64px; pointer-events: none; overflow: visible; }
+.tc__outline path { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.tc__list { position: absolute; left: 0; right: 0; top: 100%; z-index: 5; margin: 6px 0 0; padding: 4px; list-style: none; background: var(--surface); box-shadow: 0 0 0 1px var(--line-soft), var(--shadow); }
+.tc__list li { padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+.tc__list li span { color: var(--muted); font-size: .8125rem; }
+.tc__list li[aria-selected="true"] { background: rgba(119, 179, 184, .16); }
+.tc__call { margin: 0; color: var(--muted); }
+.tc__road { grid-column: 7 / -1; position: relative; }
+.tc__sign { width: 100%; height: auto; overflow: visible; display: block; }
+.tc__ans { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.tc__all { margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.tc__all details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.tc__all summary { cursor: pointer; font: 400 1.375rem/1 var(--f-display); letter-spacing: .02em; min-height: 44px; }
+.tc__all p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 1023px) {
+  .tc__side, .tc__road { grid-column: 1 / -1; }
+  .tc__road { margin-top: var(--s7); }
+  .tc__all { grid-template-columns: 1fr; }
+}
+
+/* [AUDIT-01 F9] slot 1: the typed town in Geist (Bebas stays on the sign); Check it always above its own list; 120ms highlight */
+.tc__in { font: 500 1.25rem/1.2 var(--f-text); letter-spacing: 0; }
+.tc__go { position: relative; z-index: 6; }
+.tc__list li { transition: background-color 120ms ease-out; }
+.tc__hub { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--muted); max-width: 44ch; }
