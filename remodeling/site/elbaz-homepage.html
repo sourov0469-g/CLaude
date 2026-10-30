@@ -4003,8 +4003,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .reviews2__head .reviews__lead { grid-column: 8 / span 5; }
 .reviews2__sky {
   position: relative; height: clamp(360px, 48vw, 600px); overflow: hidden; border-radius: 4px;
-  background: radial-gradient(120% 90% at 50% 100%, var(--a-500) 0%, var(--white) 70%);
-  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .12);
+  background: var(--a-50);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
 }
 .reviews2__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .reviews2__fallback { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font: 400 clamp(10rem, 30vw, 26rem)/1 var(--f-display); color: var(--a-700); opacity: 0; pointer-events: none; }
@@ -4056,6 +4056,190 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .rt__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); color: var(--muted); }
 .rt__tip { margin-left: auto; font-weight: 600; color: var(--a-700); min-height: 1.3em; }
 @media (max-width: 1023px) { .rt__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); } .rt__book { grid-column: 1 / -1; } }
+
+
+
+.rtx__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.rtx__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
+.rtx__avg { margin: 0; display: flex; align-items: flex-end; gap: 14px; }
+.rtx__n { font: 400 clamp(5rem, 3rem + 6vw, 9rem)/.8 var(--f-display); color: var(--ink); }
+.rtx__of { font: 500 .9375rem/1.35 var(--f-text); color: var(--muted); padding-bottom: .4em; }
+.rtx__btn { justify-self: start; }
+.rtx__book { grid-column: 6 / -1; margin: 0; }
+.rtx__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rtx__svg .st { stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.rtx__svg .gate { cursor: default; outline: none; }
+.rtx__svg .gate rect { fill: transparent; transition: fill 150ms ease-out; }
+.rtx__svg .gate.is-hot .st { stroke: var(--a-500); }
+.rtx__svg .gate.is-hot rect { fill: var(--a-100); }
+.rtx__svg .gate:focus-visible rect { stroke: var(--a-500); stroke-width: 2; }
+.rtx__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); color: var(--muted); }
+.rtx__tip { margin-left: auto; font-weight: 600; color: var(--a-700); min-height: 1.3em; }
+@media (max-width: 1023px) {
+  .rtx__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); }
+  .rtx__book { grid-column: 1 / -1; }
+}
+
+
+
+.r2x__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.r2x__head .t-head { grid-column: 1 / span 6; }
+.r2x__head .reviews__lead { grid-column: 8 / span 5; }
+.r2x__sky {
+  position: relative; height: clamp(360px, 48vw, 600px); overflow: hidden; border-radius: 4px;
+  background: var(--a-50);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+.r2x__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.r2x__fallback { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font: 400 clamp(10rem, 30vw, 26rem)/1 var(--f-display); color: var(--a-700); opacity: 0; pointer-events: none; }
+.r2x.is-static .r2x__fallback { opacity: 1; }
+.r2x__legend { position: absolute; left: 18px; bottom: 14px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--white); z-index: 1; }
+.r2x__acts { margin-top: var(--s6); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
+@media (max-width: 1023px) {
+  .r2x__head .t-head, .r2x__head .reviews__lead { grid-column: 1 / -1; }
+  .r2x__head .reviews__lead { margin-top: var(--s4); }
+}
+
+
+
+.r3x__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.r3x__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
+.r3x__acts { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
+.r3x__dial { grid-column: 7 / -1; position: relative; max-width: 560px; width: 100%; justify-self: center; touch-action: none; }
+.r3x__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.r3x__svg .bezel { fill: var(--grey); stroke: var(--ink); stroke-width: 3; }
+.r3x__svg .face { fill: var(--white); stroke: var(--grey); stroke-width: 2; }
+.r3x__svg .tk { stroke: var(--ink); stroke-width: 1.4; }
+.r3x__svg .tk-m { stroke: var(--ink); stroke-width: 3; }
+.r3x__svg .tl { font: 400 22px/1 var(--f-display); fill: var(--ink); }
+.r3x__svg .band { fill: none; stroke-width: 12; }
+.r3x__svg .cap-t { font: 600 9.5px/1 var(--f-text); letter-spacing: .18em; fill: var(--grey); }
+.r3x__svg .needle { fill: var(--err); stroke: var(--ink); stroke-width: 1.5; }
+.r3x__svg .hub { fill: var(--ink); }
+.r3x__svg .hub2 { fill: var(--a-500); }
+.r3x__svg .grab { fill: transparent; cursor: grab; }
+.r3x__svg .grab:active { cursor: grabbing; }
+.r3x__svg .mark { fill: var(--a-500); stroke: var(--ink); stroke-width: 1.2; }
+.r3x__read { position: absolute; left: 0; right: 0; top: 66%; margin: 0; display: grid; justify-items: center; gap: 2px; pointer-events: none; color: var(--ink); }
+.r3x__val { font: 400 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/1 var(--f-display); padding: 2px 12px; background: var(--white); color: var(--a-700); border-radius: 3px; min-width: 2.6ch; text-align: center; }
+.r3x__unit { font: 600 .6875rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); }
+@media (max-width: 1023px) {
+  .r3x__side, .r3x__dial { grid-column: 1 / -1; }
+  .r3x__dial { margin-top: var(--s7); }
+}
+
+
+
+.rtx__svg .st--d { stroke: var(--a-500); }
+.rtx__avg { box-shadow: inset 4px 0 0 var(--a-500); padding-left: 16px; }
+
+.r2x__roofs { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: clamp(60px, 9vw, 120px); pointer-events: none; }
+.r2x__roofs path { fill: var(--ink); }
+.r2x__head .eyebrow { grid-column: 1 / -1; }
+
+.r3x__svg .bezel { fill: var(--a-500); }
+.r3x__svg .cap-t { fill: var(--muted); }
+.r3x__side .eyebrow { margin-bottom: calc(var(--s6) * -.6); }
+
+
+.rpr__head, .rnl__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.rpr__head .t-head, .rnl__head .t-head { grid-column: 1 / span 6; }
+.rpr__head .reviews__lead, .rnl__head .reviews__lead { grid-column: 8 / span 5; }
+@media (max-width: 1023px) { .rpr__head .t-head, .rnl__head .t-head, .rpr__head .reviews__lead, .rnl__head .reviews__lead { grid-column: 1 / -1; } .rpr__head .reviews__lead, .rnl__head .reviews__lead { margin-top: var(--s4); } }
+
+
+.rsh__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.rsh__side { display: grid; gap: var(--s5); justify-items: start; }
+.rsh__count { margin: 0; display: flex; align-items: baseline; gap: 10px; font: 500 1rem/1.3 var(--f-text); color: var(--ink-2); }
+.rsh__n { font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/1 var(--f-display); color: var(--a-700); min-width: 3ch; }
+.rsh__svg { width: 100%; height: auto; overflow: visible; }
+.rsh__svg .sg { fill: var(--a-500); stroke: var(--paper); stroke-width: 1.5; }
+.rsh__svg .sg.t2 { fill: var(--a-600); }
+.rsh__svg .sg.t3 { fill: var(--a-300); }
+.rsh__svg .ridge { fill: var(--ink); }
+.rsh__svg .fascia { fill: var(--ink); }
+.rsh__svg .wall { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
+.rsh__svg .win { fill: var(--a-100); stroke: var(--ink); stroke-width: 2; }
+.rsh__svg .chim { fill: var(--ink-2); }
+@media (max-width: 1023px) { .rsh__grid { grid-template-columns: 1fr; } }
+
+
+.rpr__wall { position: relative; padding: 0 0 140px; touch-action: pan-y; }
+.rpr__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rpr__svg .stencil { fill: var(--white); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.rpr__svg .paint { fill: var(--a-500); }
+.rpr__svg .drip { fill: var(--a-500); }
+.rpr__svg .tape { fill: var(--a-100); }
+.rpr__svg .mark { stroke: var(--ink); stroke-width: 2; }
+.rpr__svg .ml { font: 600 15px/1 var(--f-display); fill: var(--ink-2); text-anchor: middle; }
+.rpr__svg .stop { stroke: var(--a-700); stroke-width: 2.5; stroke-dasharray: 6 5; }
+.rpr__svg .stop-t { font: 600 14px/1 var(--f-text); fill: var(--a-700); text-anchor: middle; }
+.rpr__roller { position: absolute; top: 0; left: 0; width: clamp(40px, 5vw, 60px); margin-left: calc(clamp(40px, 5vw, 60px) / -2); cursor: grab; outline-offset: 4px; touch-action: none; }
+.rpr__roller:active { cursor: grabbing; }
+.rpr__roller svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rpr__nap { fill: var(--a-500); stroke: var(--ink); stroke-width: 2.5; }
+.rpr__frame { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+.rpr__grip { fill: var(--ink); }
+.rpr__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); }
+.rpr__read { margin: 0; display: flex; align-items: baseline; gap: 10px; font: 500 1rem/1.3 var(--f-text); color: var(--ink-2); }
+.rpr__v { font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/1 var(--f-display); color: var(--a-700); }
+@media (max-width: 767px) { .rpr__wall { padding-bottom: 96px; } }
+
+
+.rsf__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.rsf__side { display: grid; gap: var(--s5); justify-items: start; }
+.rsf__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
+.rsf__sign { margin: 0; }
+.rsf__board { position: relative; z-index: 1; display: grid; gap: 18px; padding: clamp(18px, 3vw, 32px); background: var(--a-500); box-shadow: inset 0 0 0 6px var(--ink); }
+.rsf__row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "k k" "f u"; align-items: end; column-gap: 14px; row-gap: 8px; margin: 0; }
+.rsf__k { grid-area: k; font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
+.rsf__u { grid-area: u; font: 600 1rem/1.2 var(--f-text); color: var(--ink); padding-bottom: 6px; }
+.rsf__flaps { grid-area: f; display: flex; gap: 6px; }
+.rsf__f { position: relative; display: grid; place-items: center; width: clamp(48px, 7vw, 76px); height: clamp(64px, 9.5vw, 104px); background: var(--white); color: var(--ink); font: 600 clamp(2.5rem, 1.6rem + 3vw, 4.25rem)/1 var(--f-display); box-shadow: inset 0 0 0 2px var(--ink); perspective: 300px; }
+.rsf__f::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--ink); opacity: .55; }
+.rsf__f.is-dot { width: clamp(22px, 3vw, 32px); }
+.rsf__f.is-flip { animation: rsf-flip 70ms linear; }
+@keyframes rsf-flip { 50% { transform: rotateX(-70deg); } }
+.rsf__posts { display: block; width: 100%; height: clamp(70px, 9vw, 120px); margin-top: -2px; }
+.rsf__posts rect { fill: var(--ink); }
+.rsf__ground { stroke: var(--ink-2); stroke-width: 3; vector-effect: non-scaling-stroke; }
+@media (max-width: 1023px) { .rsf__grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .rsf__f.is-flip { animation: none; } }
+
+
+.rtg__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.rtg__side { display: grid; gap: var(--s5); justify-items: start; }
+.rtg__hang { position: relative; height: 470px; }
+.rtg__str { position: absolute; left: 50%; top: 0; width: 200px; height: 400px; margin-left: -100px; overflow: visible; pointer-events: none; }
+.rtg__hook { fill: none; stroke: var(--ink); stroke-width: 4; }
+.rtg__line { fill: none; stroke: var(--ink-2); stroke-width: 2; }
+.rtg__tag { position: absolute; left: 50%; top: 116px; width: 220px; height: 320px; margin-left: -110px; padding: 0; border: 0; background: none; cursor: grab; transform-style: preserve-3d; touch-action: none; transform-origin: 50% 0; }
+.rtg__tag:active { cursor: grabbing; }
+.rtg__face { position: absolute; inset: 0; display: grid; align-content: start; justify-items: center; gap: 6px; padding: 40px 18px 18px; background: var(--white); color: var(--ink); clip-path: polygon(22% 0, 78% 0, 100% 12%, 100% 100%, 0 100%, 0 12%); backface-visibility: hidden; box-shadow: inset 0 0 0 3px var(--ink); }
+.rtg__face--a { background: var(--a-500); }
+.rtg__face--b { transform: rotateY(180deg); background: var(--white); }
+.rtg__eye { width: 22px; height: 22px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 3px var(--ink); margin-bottom: 14px; }
+.rtg__k { font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; }
+.rtg__big { font: 600 5.5rem/1 var(--f-display); letter-spacing: -.02em; }
+.rtg__face--b .rtg__big { color: var(--a-700); }
+.rtg__s { font: 500 .9375rem/1.3 var(--f-text); text-align: center; }
+.rtg__line2 { margin-top: auto; padding-top: 10px; width: 100%; text-align: center; box-shadow: inset 0 2px 0 var(--ink); font: 600 .8125rem/1.2 var(--f-text); }
+@media (max-width: 1023px) { .rtg__grid { grid-template-columns: 1fr; } .rtg__hang { height: 450px; } }
+
+
+.rnl__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rnl__svg .plank { fill: var(--a-100); stroke: var(--ink); stroke-width: 3; }
+.rnl__svg .grain { fill: none; stroke: var(--a-300); stroke-width: 1.5; }
+.rnl__svg .nail-h { fill: var(--ink); }
+.rnl__svg .nail-s { fill: var(--ink-2); }
+.rnl__svg .nl { font: 600 16px/1 var(--f-display); fill: var(--muted); text-anchor: middle; }
+.rnl__svg .hm-h { fill: var(--ink); }
+.rnl__svg .hm-g { fill: var(--a-500); stroke: var(--ink); stroke-width: 2.5; }
+.rnl__svg .spark { fill: none; stroke: var(--a-500); stroke-width: 3; stroke-linecap: round; opacity: 0; }
+.rnl__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-top: var(--s6); }
+.rnl__read { margin: 0; display: flex; align-items: baseline; gap: 10px; font: 500 1rem/1.3 var(--f-text); color: var(--ink-2); }
+.rnl__v { font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/1 var(--f-display); color: var(--a-700); }
+.rnl__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
 
 
 .towns__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
@@ -6741,7 +6925,160 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 
   
   
-  <div class="ver rt" data-v="1">
+  
+  <div class="ver rtx" data-v="1">
+    <div class="wrap rtx__grid">
+      <div class="rtx__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h1-w-i"><span class="acc">343</span> Google reviews. Count them.</h2>
+        <p class="t-lead reviews__lead">One stroke for every review on our Google listing, tallied in gates of five. Point at or tab to a gate to see which reviews it holds.</p>
+        <p class="rtx__avg"><span class="rtx__n nums">4.8</span><span class="rtx__of">out of <span class="nums">5</span>,<br>the average across every review</span></p>
+        <a class="btn rtx__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~ledger/swing/tick/r"><span class="btn__label">Read all 343 on Google</span></a>
+      </div>
+      <figure class="rtx__book">
+        <svg class="rtx__svg" role="group" aria-label="A tally of 343 strokes: 68 full gates of five and three more strokes"></svg>
+        <figcaption class="rtx__cap"><span>One stroke per review, five to a gate.</span> <span class="rtx__tip" aria-live="polite"></span></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  
+  <div class="ver r2x" data-v="2" hidden>
+    <div class="wrap">
+      <div class="r2x__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h2-i">Three hundred and <span class="acc">forty-three stars.</span></h2>
+        <p class="t-lead reviews__lead">One for every review on our Google listing. Together they make the average: <strong><span class="nums">4.8</span> out of <span class="nums">5</span></strong>. Run your cursor through them; they always come back.</p>
+      </div>
+      <div class="r2x__sky">
+        <canvas class="r2x__cv" aria-hidden="true"></canvas>
+        <p class="r2x__fallback nums" aria-hidden="true">4.8</p>
+        <svg class="r2x__roofs" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><path d="M0 120 V92 H70 L110 60 L150 92 H230 V74 L290 40 L350 74 V92 H430 L470 66 L510 92 H600 V70 L660 34 L720 70 V92 H800 L840 62 L880 92 H960 V78 L1010 46 L1060 78 V92 H1200 V120 Z"/></svg>
+        <p class="r2x__legend"><span class="nums">343</span> Google reviews &middot; average <span class="nums">4.8</span> out of <span class="nums">5</span></p>
+      </div>
+      <div class="r2x__acts">
+        <a class="btn r2x__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/orbit/sparkle/r"><span class="btn__label">Read them on Google</span></a>
+        <button type="button" class="btn btn--ghost r2x__scatter" data-rx="~sun/spin/burst/l"><span class="btn__label">Scatter the stars</span></button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver r3x" data-v="3" hidden>
+    <div class="wrap r3x__grid">
+      <div class="r3x__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h3-i">The needle settles <span class="acc">on 4.8.</span></h2>
+        <p class="t-lead reviews__lead">That is the average of <span class="nums">343</span> Google reviews. Push the needle anywhere you like; it comes back.</p>
+        <div class="r3x__acts">
+          <a class="btn r3x__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~magnifier/hoist/flash/r"><span class="btn__label">Read the 343 on Google</span></a>
+          <button type="button" class="btn btn--ghost r3x__flick" data-rx="~bulb/pop/flash/l"><span class="btn__label">Flick the needle</span></button>
+        </div>
+      </div>
+      <div class="r3x__dial" role="meter" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.8" aria-valuetext="4.8 out of 5" aria-label="Google rating, 4.8 out of 5, from 343 reviews">
+        <svg class="r3x__svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+        <p class="r3x__read" aria-hidden="true"><span class="r3x__val nums">4.8</span><span class="r3x__unit">of <span class="nums">5</span> &middot; <span class="nums">343</span> Google reviews</span></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ver rsh" data-v="4" hidden>
+    <div class="wrap rsh__grid">
+      <div class="rsh__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h-sh">A roof of <span class="acc">343 reviews.</span></h2>
+        <p class="t-lead reviews__lead">One shingle for every review on our Google listing, laid course by course as you scroll. Together they average <strong><span class="nums">4.8</span> out of <span class="nums">5</span></strong>.</p>
+        <p class="rsh__count" aria-live="off"><span class="rsh__n nums">0</span> <span>of <span class="nums">343</span> shingles laid</span></p>
+        <a class="btn rsh__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~ladder/hoist/tick/r"><span class="btn__label">Read the 343 on Google</span></a>
+      </div>
+      <svg class="rsh__svg" viewBox="0 0 800 440" role="img" aria-label="A hip roof of 343 shingles in 14 courses, one shingle per Google review"></svg>
+    </div>
+  </div>
+
+  
+  <div class="ver rpr" data-v="5" hidden>
+    <div class="wrap">
+      <div class="rpr__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h-pr">The paint stops <span class="acc">at 4.8.</span></h2>
+        <p class="t-lead reviews__lead">Five stars, stencilled. Drag the roller (or use the arrow keys) and paint them in: it will not go past <span class="nums">4.8</span>, the average of our <span class="nums">343</span> Google reviews, and it always rolls back there.</p>
+      </div>
+      <div class="rpr__wall">
+        <svg class="rpr__svg" viewBox="0 0 1000 220" aria-hidden="true" focusable="false"></svg>
+        <div class="rpr__roller" role="slider" tabindex="0" aria-label="Paint roller, star rating painted" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="0 of 5" data-rx="native:roller-drag">
+          <svg viewBox="0 0 60 150" aria-hidden="true" focusable="false"><rect class="rpr__nap" x="4" y="2" width="52" height="40" rx="8"/><path class="rpr__frame" d="M56 22 H62 V70 H30 V96"/><rect class="rpr__grip" x="22" y="96" width="16" height="52" rx="6"/></svg>
+        </div>
+      </div>
+      <div class="rpr__foot">
+        <p class="rpr__read"><span class="rpr__v nums">0.0</span> <span>painted of <span class="nums">5</span></span></p>
+        <a class="btn rpr__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~bucket/drop/drip/r"><span class="btn__label">See the reviews on Google</span></a>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver rsf" data-v="6" hidden>
+    <div class="wrap rsf__grid">
+      <div class="rsf__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h-sf">The sign out front <span class="acc">says it plainly.</span></h2>
+        <p class="t-lead reviews__lead">Our Google rating and review count, on a job-site board. Refresh it and every flap turns over until it lands on the real figures.</p>
+        <div class="rsf__acts">
+          <button type="button" class="btn btn--ghost rsf__go" data-rx="~swap/spin/tick/l"><span class="btn__label">Refresh the sign</span></button>
+          <a class="btn rsf__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~flag/swing/flash/r"><span class="btn__label">Check it on Google</span></a>
+        </div>
+      </div>
+      <figure class="rsf__sign">
+        <div class="rsf__board" role="img" aria-label="Google rating 4.8 out of 5, from 343 reviews">
+          <p class="rsf__row"><span class="rsf__k">Google rating</span><span class="rsf__flaps" data-to="4.8"></span><span class="rsf__u">of 5</span></p>
+          <p class="rsf__row"><span class="rsf__k">Reviews</span><span class="rsf__flaps" data-to="343"></span><span class="rsf__u">on Google</span></p>
+        </div>
+        <svg class="rsf__posts" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="70" y="0" width="18" height="112"/><rect x="312" y="0" width="18" height="112"/><path class="rsf__ground" d="M0 112 H400"/></svg>
+      </figure>
+    </div>
+  </div>
+
+  
+  <div class="ver rtg" data-v="7" hidden>
+    <div class="wrap rtg__grid">
+      <div class="rtg__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h-tg">Every job gets a tag. <span class="acc">So does our record.</span></h2>
+        <p class="t-lead reviews__lead">Pull the tag down (or press it) and it springs back and turns over. One side holds the average, the other the count.</p>
+        <a class="btn rtg__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~tag/swing/wobble/r"><span class="btn__label">Read the reviews on Google</span></a>
+      </div>
+      <div class="rtg__hang">
+        <svg class="rtg__str" viewBox="0 0 200 400" aria-hidden="true" focusable="false"><circle class="rtg__hook" cx="100" cy="14" r="9"/><path class="rtg__line" d="M100 22 L100 120"/></svg>
+        <button type="button" class="rtg__tag" aria-pressed="false" data-rx="native:tag-pull" aria-label="Inspection tag: 4.8 out of 5. Press to turn it over">
+          <span class="rtg__face rtg__face--a"><span class="rtg__eye" aria-hidden="true"></span><span class="rtg__k">Google rating</span><span class="rtg__big nums">4.8</span><span class="rtg__s">out of <span class="nums">5</span></span><span class="rtg__line2">Elbaz Construction</span></span>
+          <span class="rtg__face rtg__face--b" aria-hidden="true"><span class="rtg__eye"></span><span class="rtg__k">Reviews</span><span class="rtg__big nums">343</span><span class="rtg__s">on our Google listing</span><span class="rtg__line2">Read them all</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver rnl" data-v="8" hidden>
+    <div class="wrap">
+      <div class="rnl__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h-nl">Five nails, <span class="acc">driven 4.8 deep.</span></h2>
+        <p class="t-lead reviews__lead">Strike them in one at a time. Four go flush; the fifth stops at eight tenths, because our average across <span class="nums">343</span> Google reviews is <span class="nums">4.8</span>, not <span class="nums">5</span>.</p>
+      </div>
+      <svg class="rnl__svg" viewBox="0 0 1000 300" aria-hidden="true" focusable="false"></svg>
+      <div class="rnl__foot">
+        <p class="rnl__read" aria-live="polite"><span class="rnl__v nums">0.0</span> <span>driven of <span class="nums">5</span></span></p>
+        <div class="rnl__acts">
+          <button type="button" class="btn rnl__hit" data-rx="~nut/jack/squash/l"><span class="btn__label">Strike the next nail</span></button>
+          <button type="button" class="btn btn--ghost rnl__pull" data-rx="~plug/peek/puff/l"><span class="btn__label">Pull them and start again</span></button>
+          <a class="btn btn--ghost rnl__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~toolbox/pop/chips/r"><span class="btn__label">The 343 reviews on Google</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ver rt" data-v="b2" hidden>
     <div class="wrap rt__grid">
       <div class="rt__side">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
@@ -6773,7 +7110,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver reviews2" data-v="2" hidden>
+  <div class="ver reviews2" data-v="b3" hidden>
     <div class="wrap">
       <div class="reviews2__head">
         <h2 class="t-head" id="reviews-h2">Three hundred and forty-three stars.</h2>
@@ -6792,7 +7129,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver reviews3" data-v="3" hidden>
+  <div class="ver reviews3" data-v="b4" hidden>
     <div class="wrap reviews3__grid">
       <div class="reviews3__side">
         <h2 class="t-head" id="reviews-h3">The needle settles on 4.8.</h2>
@@ -13676,9 +14013,423 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   var COUNT = 343, AVG = 4.8;
 
   EZ.section('reviews', {
+    /* slot 3 · Phase 5 improved version of b4 */
+    3: { init: function (root, k) {
+      var svg = root.querySelector('.r3x__svg'), dial = root.querySelector('.r3x__dial');
+      var C = 200, A0 = -120, SPAN = 240;                                  // 0 at -120deg, 5 at +120deg
+      function ang(v) { return A0 + v / 5 * SPAN; }
+      function pol(a, r) { var t = (a - 90) * Math.PI / 180; return [C + Math.cos(t) * r, C + Math.sin(t) * r]; }
+      var s = '<circle class="bezel" cx="200" cy="200" r="192"/><circle class="face" cx="200" cy="200" r="174"/>';
+      for (var i = 0; i <= 50; i++) {
+        var a = ang(i / 10), big = i % 10 === 0, mid = i % 5 === 0, p1 = pol(a, 164), p2 = pol(a, big ? 140 : mid ? 148 : 154);
+        s += '<path class="' + (big ? 'tk-m' : 'tk') + '" d="M' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + 'L' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1) + '"/>';
+        if (big) { var pl = pol(a, 122); s += '<text class="tl" x="' + pl[0].toFixed(1) + '" y="' + (pl[1] + 8).toFixed(1) + '" text-anchor="middle">' + (i / 10) + '</text>'; }
+      }
+      var pm = pol(ang(AVG), 178);
+      s += '<path class="mark" transform="translate(' + pm[0].toFixed(1) + ' ' + pm[1].toFixed(1) + ') rotate(' + ang(AVG) + ')" d="M0 -2L-7 -14H7Z"/>';
+      s += '<text class="cap-t" x="200" y="158" text-anchor="middle">GOOGLE RATING</text>';
+      s += '<g class="needle-g"><path class="needle" d="M196 236L200 52L204 236Z"/><circle class="hub" cx="200" cy="200" r="16"/><circle class="hub2" cx="200" cy="200" r="6"/></g>';
+      s += '<circle class="grab" cx="200" cy="200" r="190"/>';
+      svg.innerHTML = s;
+      var needle = svg.querySelector('.needle-g');
+      k.add(function () { svg.innerHTML = ''; });
+      gsap.set(needle, { rotation: ang(AVG), svgOrigin: '200 200' });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.r3x__side > *'));
+      // [AUDIT-01 F8 loser V3, P1] a real spring (stiffness 170, damping 26, 1/240s sub-steps) clamped to the printed scale,
+      // so no frame can read above 5.0 or below 0; it lands exactly on 110.4deg
+      var spin = null;
+      function settle(from) {
+        gsap.killTweensOf(needle);
+        if (spin) gsap.ticker.remove(spin);
+        var x = EZ.clamp(from, A0, A0 + SPAN), v = 0, to = ang(AVG);
+        spin = function (t, dtMs) {
+          var dt = Math.min(dtMs / 1000, 1 / 30), h = 1 / 240;
+          for (var acc = 0; acc < dt; acc += h) { v += (-170 * (x - to) - 26 * v) * h; x = EZ.clamp(x + v * h, A0, A0 + SPAN); }
+          if (Math.abs(x - to) < .02 && Math.abs(v) < .05) { x = to; gsap.ticker.remove(spin); spin = null; }
+          gsap.set(needle, { rotation: x, svgOrigin: '200 200' });
+        };
+        gsap.ticker.add(spin);
+      }
+      k.add(function () { if (spin) gsap.ticker.remove(spin); spin = null; });
+      gsap.set(needle, { rotation: A0, svgOrigin: '200 200' });
+      ScrollTrigger.create({ trigger: dial, start: 'top 75%', once: true, onEnter: function () { settle(A0); } });
+      // drag the needle anywhere on the dial; let go and it comes back to the average
+      var dragging = false;
+      function at(e) {
+        var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 400 - C, y = (e.clientY - r.top) / r.height * 400 - C;
+        var deg = Math.atan2(y, x) * 180 / Math.PI + 90;          // 0 = straight up, clockwise positive
+        if (deg > 180) deg -= 360;
+        return EZ.clamp(deg, A0, A0 + SPAN);
+      }
+      k.on(svg, 'pointerdown', function (e) { dragging = true; svg.setPointerCapture(e.pointerId); gsap.killTweensOf(needle); if (spin) { gsap.ticker.remove(spin); spin = null; } gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .12, overwrite: true }); });
+      k.on(svg, 'pointermove', function (e) { if (dragging) gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .08, overwrite: true }); });
+      function release() { if (!dragging) return; dragging = false; settle(gsap.getProperty(needle, 'rotation')); }
+      k.on(svg, 'pointerup', release);
+      k.on(svg, 'pointercancel', release);
+      k.on(root.querySelector('.r3x__flick'), 'click', function () {
+        var to = ang(.6 + Math.random() * 2.4);
+        gsap.timeline().to(needle, { rotation: to, svgOrigin: '200 200', duration: .18, ease: 'power3.out' }).add(function () { settle(to); });
+      });
+    } },
+
+    /* slot 2 · Phase 5 improved version of b3 */
+    2: { init: function (root, k) {
+      var sky = root.querySelector('.r2x__sky'), cv = root.querySelector('.r2x__cv');
+      var ctx = cv.getContext('2d'), stars = [], links = [], W = 0, H = 0, dpr = 1;
+      var ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0;
+      function sample() {
+        // the average, set in the display face, sampled for 343 evenly spaced points [S0687 counter/constellation FX]
+        var o = document.createElement('canvas'); o.width = W; o.height = H;
+        var c = o.getContext('2d');
+        c.fillStyle = '#121212'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Poppins", Arial, sans-serif';
+        c.fillText('4.8', W / 2, H * .53);
+        var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 160));
+        for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) if (d[(y * W + x) * 4 + 3] > 128) cand.push([x, y]);
+        // shuffle, then keep points no closer than gap; shrink gap until 343 fit
+        for (var i = cand.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = cand[i]; cand[i] = cand[j]; cand[j] = t; }
+        var gap = Math.sqrt(cand.length * step * step / COUNT) * .95, pts = [];
+        for (var tries = 0; tries < 8; tries++) {
+          pts = [];
+          for (var m = 0; m < cand.length && pts.length < COUNT; m++) {
+            var p = cand[m], ok = true;
+            for (var q = 0; q < pts.length; q++) { var dx = pts[q][0] - p[0], dy = pts[q][1] - p[1]; if (dx * dx + dy * dy < gap * gap) { ok = false; break; } }
+            if (ok) pts.push(p);
+          }
+          if (pts.length >= COUNT) break;
+          gap *= .85;
+        }
+        while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
+        return pts.slice(0, COUNT);
+      }
+      function layout(fresh) {
+        var r = sky.getBoundingClientRect();
+        W = Math.round(r.width); H = Math.round(r.height);
+        if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.25);                 // [Q41] DPR cap
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        var pts = sample();
+        pts.forEach(function (p, i) {
+          var s = stars[i];
+          if (!s || fresh) s = stars[i] = { x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, r: 1.2 + Math.random() * 1.6, ph: Math.random() * 6.28 };
+          s.tx = p[0]; s.ty = p[1];
+        });
+        // each star drawn to its nearest neighbour: the faint lines of a constellation
+        links = stars.map(function (s, i) {
+          var best = -1, bd = 1e9;
+          for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
+          return best;
+        });
+        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
+      }
+      function draw(t) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.strokeStyle = 'rgba(184, 66, 0, .22)'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (var i = 0; i < stars.length; i++) { var a = stars[i], b = stars[links[i]]; if (!b) continue; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
+        ctx.stroke();
+        for (var n = 0; n < stars.length; n++) {
+          var s = stars[n], tw = .65 + .35 * Math.sin(t * .003 + s.ph), r = s.r;
+          ctx.fillStyle = 'rgba(255, 95, 0, ' + tw.toFixed(2) + ')';   // --a-500, twinkling (the gold was off-palette)
+          // a four-point star
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y - r * 2.2); ctx.lineTo(s.x + r * .55, s.y - r * .55); ctx.lineTo(s.x + r * 2.2, s.y); ctx.lineTo(s.x + r * .55, s.y + r * .55);
+          ctx.lineTo(s.x, s.y + r * 2.2); ctx.lineTo(s.x - r * .55, s.y + r * .55); ctx.lineTo(s.x - r * 2.2, s.y); ctx.lineTo(s.x - r * .55, s.y - r * .55);
+          ctx.closePath(); ctx.fill();
+        }
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 25) return;                       // [Q41] 40fps ceiling, hidden-tab skip
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        var R = 90, R2 = R * R;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var ax = (s.tx - s.x) * .045, ay = (s.ty - s.y) * .045;
+          var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 3.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
+          s.x += s.vx * dt; s.y += s.vy * dt;
+        }
+        draw(t);
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(cx, cy) {
+        stars.forEach(function (s) {
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 14 + Math.random() * 18;
+          s.vx += dx / d * f; s.vy += dy / d * f;
+        });
+        run();
+      }
+      var ready = document.fonts && document.fonts.load ? document.fonts.load('600 100px "Poppins"').catch(function () {}) : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(sky, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; links = []; ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.on(sky, 'pointermove', function (e) { var r = sky.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; });
+      k.on(sky, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(sky, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = sky.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
+      k.on(root.querySelector('.r2x__scatter'), 'click', function () { if (k.motion) scatter(); });
+      k.io(sky, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
+      if (!k.motion) { root.querySelector('.r2x__scatter').hidden = true; k.add(function () { root.querySelector('.r2x__scatter').hidden = false; }); return; }
+      EZ.reveal(k, root.querySelectorAll('.r2x__head > *, .r2x__acts'));
+    } },
+
+    /* slot 1 · Phase 5 improved version of b2 */
+    1: { init: function (root, k) {
+      var svg = root.querySelector('.rtx__svg'), book = root.querySelector('.rtx__book'), tip = root.querySelector('.rtx__tip');
+      var strokes = [], gates = [], drawn = false;
+      function build() {
+        var per = EZ.mobile() ? 7 : 10, W = 600, gw = W / per, rows = Math.ceil(COUNT / 5 / per), rh = 64, H = rows * rh;
+        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        var s = '', n = 0;
+        for (var g = 0; n < COUNT; g++) {
+          var col = g % per, row = Math.floor(g / per), x = col * gw + gw * .2, y = row * rh + 12, from = n + 1, body = '', j;
+          for (j = 0; j < 4 && n < COUNT; j++, n++) {
+            var lean = ((g * 7 + j * 3) % 5 - 2) * .9, top = y + ((g + j) % 3), bot = y + 40 - ((g * 3 + j) % 4);
+            body += '<path class="st" d="M' + (x + j * 9) + ' ' + top + 'L' + (x + j * 9 + lean) + ' ' + bot + '"/>';
+          }
+          if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 33) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
+          var lbl = from === n ? 'Review ' + from : 'Reviews ' + from + '-' + n;
+          s += '<g class="gate" tabindex="0" role="img" data-rx="native:tally-gate" aria-label="' + lbl + '" data-l="' + lbl + '"><rect x="' + (x - 8) + '" y="' + (y - 4) + '" width="' + (gw * .82) + '" height="50" rx="4"/>' + body + '</g>';
+        }
+        svg.innerHTML = s;
+        strokes = Array.prototype.slice.call(svg.querySelectorAll('.st'));
+        gates = Array.prototype.slice.call(svg.querySelectorAll('.gate'));
+        gsap.set(strokes, { transformOrigin: '50% 100%' });
+        gsap.set(svg.querySelectorAll('.st--d'), { transformOrigin: '0% 100%' });
+      }
+      build();
+      var lastPer = EZ.mobile();
+      k.ro(book, function () { if (EZ.mobile() !== lastPer) { lastPer = EZ.mobile(); build(); } });
+      k.add(function () { svg.innerHTML = ''; tip.textContent = ''; });
+      function hot(g) { gates.forEach(function (x) { x.classList.toggle('is-hot', x === g); }); tip.textContent = g ? g.dataset.l : ''; }
+      k.on(svg, 'pointerover', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
+      k.on(svg, 'pointerleave', function () { if (!svg.contains(document.activeElement)) hot(null); });
+      k.on(svg, 'focusin', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
+      k.on(svg, 'focusout', function (e) { if (!svg.contains(e.relatedTarget)) hot(null); });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.rtx__side > *'));
+      // the draw-in runs once, and only for a tally that starts below the fold; a tally already on screen stays drawn
+      var r = book.getBoundingClientRect();
+      if (r.top < innerHeight * .9) return;
+      gsap.set(strokes, { scale: .1, autoAlpha: 0 });
+      ScrollTrigger.create({ trigger: book, start: 'top 85%', once: true, onEnter: function () {
+        drawn = true;
+        gsap.to(strokes, { scale: 1, autoAlpha: 1, duration: .15, ease: 'power2.out', stagger: .008 });
+      } });
+      k.add(function () { if (!drawn) gsap.set(strokes, { clearProps: 'all' }); });
+    } },
+
+    /* slot 4 · Phase 5 new · The roof: 14 courses of 31 down to 18 shingles is exactly 343 (31 + 30 + ... + 18), so the
+       hip shape is the count itself; each upper course overlaps the one below, and scrolling lays them bottom up */
+    4: { init: function (root, k) {
+      var svg = root.querySelector('.rsh__svg'), nEl = root.querySelector('.rsh__n');
+      var SW = 24, CH = 18, X0 = 28, Y0 = 368, out = '', made = 0;
+      out += '<rect class="chim" x="578" y="104" width="36" height="120"/>';
+      for (var r = 0; r < 14; r++) {
+        var cnt = 31 - r, x0 = X0 + r * SW / 2, y = Y0 - r * CH;
+        for (var c = 0; c < cnt; c++) {
+          var x = x0 + c * SW, t = (r * 7 + c * 13) % 11;
+          out += '<path class="sg' + (t === 0 ? ' t2' : t === 5 ? ' t3' : '') + '" d="M' + x + ' ' + y + 'H' + (x + SW) + 'V' + (y + 18) + 'Q' + (x + SW) + ' ' + (y + 22) + ' ' + (x + SW - 4) + ' ' + (y + 22) + 'H' + (x + 4) + 'Q' + x + ' ' + (y + 22) + ' ' + x + ' ' + (y + 18) + 'Z"/>';
+          made++;
+        }
+      }
+      out += '<rect class="ridge" x="' + (X0 + 13 * SW / 2 - 4) + '" y="' + (Y0 - 13 * CH - 8) + '" width="' + (18 * SW + 8) + '" height="10" rx="4"/>';
+      out += '<rect class="fascia" x="' + (X0 - 6) + '" y="390" width="' + (31 * SW + 12) + '" height="7"/>';
+      out += '<rect class="wall" x="70" y="397" width="660" height="42"/><rect class="win" x="130" y="405" width="70" height="26"/><rect class="win" x="600" y="405" width="70" height="26"/><rect class="win" x="365" y="405" width="70" height="34"/>';
+      svg.innerHTML = out;
+      var sg = svg.querySelectorAll('.sg');
+      // the drawing is the figure: refuse to show a roof that does not hold exactly the published count
+      if (made !== COUNT) { svg.innerHTML = ''; return; }
+      k.add(function () { svg.innerHTML = ''; nEl.textContent = '0'; });
+      EZ.reveal(k, root.querySelectorAll('.rsh__side > *'));
+      if (!k.motion) { nEl.textContent = COUNT; return; }
+      var tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 85%', end: 'bottom 50%', scrub: .4,
+        onUpdate: function (self) { nEl.textContent = Math.round(self.progress * COUNT); } } });
+      tl.from(sg, { autoAlpha: 0, y: -14, duration: .2, ease: 'power2.out', stagger: .01 });
+    } },
+
+    /* slot 5 · Phase 5 new · The paint roller: five stencils share one clip; the paint is a rect under it. The roller
+       drags (pointer or arrow keys) but cannot pass 4.8, and on release it rolls back to 4.8 */
+    5: { init: function (root, k) {
+      var svg = root.querySelector('.rpr__svg'), wall = root.querySelector('.rpr__wall'), rol = root.querySelector('.rpr__roller');
+      var read = root.querySelector('.rpr__v'), st = { v: 0 };
+      function star(cx, cy, R, r) { var p = ''; for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R; p += (i ? 'L' : 'M') + (cx + Math.cos(a) * rr).toFixed(1) + ' ' + (cy + Math.sin(a) * rr).toFixed(1); } return p + 'Z'; }
+      var stars = '';
+      for (var i = 0; i < 5; i++) stars += star(100 + i * 200, 118, 86, 36);
+      function vx(v) { if (v >= 5) return 986; var n = Math.floor(v); return 14 + n * 200 + (v - n) * 172; }
+      function xv(x) { var n = EZ.clamp(Math.floor((x - 14) / 200), 0, 4); return n + EZ.clamp((x - 14 - n * 200) / 172, 0, 1); }
+      var SX = vx(AVG).toFixed(1);
+      svg.innerHTML = '<defs><clipPath id="rpr-clip"><path d="' + stars + '"/></clipPath></defs>' +
+        '<rect class="tape" x="-6" y="0" width="70" height="20" transform="rotate(-8 30 10)"/><rect class="tape" x="936" y="0" width="70" height="20" transform="rotate(7 970 10)"/>' +
+        '<path class="stencil" d="' + stars + '"/><rect class="paint" clip-path="url(#rpr-clip)" x="0" y="0" width="0" height="220"/>' +
+        '<path class="stop" d="M' + SX + ' 22 V214"/><text class="stop-t" x="' + SX + '" y="16">' + AVG + '</text>';
+      var paint = svg.querySelector('.paint'), stop = svg.querySelector('.stop');
+      function draw() {
+        var x = vx(st.v);
+        paint.setAttribute('width', x.toFixed(1));
+        var w = wall.clientWidth, h = svg.getBoundingClientRect().height;
+        rol.style.left = (x / 1000 * w).toFixed(1) + 'px'; rol.style.top = (h * .3).toFixed(1) + 'px';
+        read.textContent = st.v.toFixed(1);
+        rol.setAttribute('aria-valuenow', st.v.toFixed(1)); rol.setAttribute('aria-valuetext', st.v.toFixed(1) + ' of 5 painted; the average is 4.8');
+      }
+      function to(v, d) { v = EZ.clamp(v, 0, AVG); if (!k.motion || !d) { gsap.killTweensOf(st); st.v = v; draw(); return; } k.ctx.add(function () { gsap.to(st, { v: v, duration: d, ease: 'power2.inOut', overwrite: true, onUpdate: draw }); }); }
+      function bump() { if (k.motion) k.ctx.add(function () { gsap.fromTo(stop, { x: 0 }, { x: 4, duration: .06, yoyo: true, repeat: 3 }); }); }
+      var drag = null;
+      k.on(rol, 'pointerdown', function (e) { drag = true; rol.setPointerCapture(e.pointerId); gsap.killTweensOf(st); e.preventDefault(); });
+      k.on(rol, 'pointermove', function (e) {
+        if (!drag) return;
+        var r = svg.getBoundingClientRect(), v = xv((e.clientX - r.left) / r.width * 1000);
+        if (v > AVG) bump();
+        st.v = EZ.clamp(v, 0, AVG); draw();
+      });
+      function up() { if (!drag) return; drag = null; k.timeout(function () { to(AVG, .9); }, 350); }
+      k.on(rol, 'pointerup', up); k.on(rol, 'pointercancel', up);
+      k.on(rol, 'keydown', function (e) {
+        var v = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? st.v + .2 : e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? st.v - .2 : e.key === 'Home' ? 0 : e.key === 'End' ? AVG : null;
+        if (v === null) return;
+        e.preventDefault(); if (v > AVG + .01) bump(); to(v, 0);
+      });
+      k.on(rol, 'blur', function () { to(AVG, .9); });
+      k.ro(wall, draw);
+      draw();
+      k.add(function () { svg.innerHTML = ''; rol.style.left = ''; rol.style.top = ''; read.textContent = '0.0'; });
+      EZ.reveal(k, root.querySelectorAll('.rpr__head > *, .rpr__foot'));
+      if (!k.motion) { to(AVG, 0); return; }
+      ScrollTrigger.create({ trigger: wall, start: 'top 75%', once: true, onEnter: function () { to(AVG, 1.8); } });
+    } },
+
+    /* slot 6 · Phase 5 new · The job-site sign: each digit is a flap that flips over blank a few times before it lands; it
+       never shows a number other than the published ones */
+    6: { init: function (root, k) {
+      var rows = Array.prototype.slice.call(root.querySelectorAll('.rsf__flaps')), flaps = [];
+      rows.forEach(function (r) {
+        r.innerHTML = r.dataset.to.split('').map(function (ch) { return '<span class="rsf__f' + (ch === '.' ? ' is-dot' : '') + '" data-to="' + ch + '">' + ch + '</span>'; }).join('');
+        r.querySelectorAll('.rsf__f').forEach(function (f) { if (f.dataset.to !== '.') flaps.push(f); });
+      });
+      function roll() {
+        flaps.forEach(function (f, i) {
+          var left = 6 + i * 3;
+          (function tick() {
+            f.classList.remove('is-flip'); void f.offsetWidth; f.classList.add('is-flip');
+            f.textContent = left > 0 ? '' : f.dataset.to;   // flaps turn blank until they land: the sign never shows a figure that is not ours
+            if (left-- > 0) k.timeout(tick, 75);
+          })();
+        });
+      }
+      if (k.motion) {
+        flaps.forEach(function (f) { f.textContent = ''; });
+        var io = false;
+        k.io(root.querySelector('.rsf__board'), function (en) { if (en.isIntersecting && !io) { io = true; roll(); } }, { threshold: .5 });
+        k.on(root.querySelector('.rsf__go'), 'click', roll);
+      } else root.querySelector('.rsf__go').hidden = true;
+      k.add(function () { rows.forEach(function (r) { r.innerHTML = ''; }); root.querySelector('.rsf__go').hidden = false; });
+      EZ.reveal(k, root.querySelectorAll('.rsf__side > *'));
+    } },
+
+    /* slot 7 · Phase 5 new · The inspection tag: drag it down on its string (or press it); it springs back with a swing
+       and turns over. Face: 4.8 of 5. Back: 343 reviews */
+    7: { init: function (root, k) {
+      var tag = root.querySelector('.rtg__tag'), line = root.querySelector('.rtg__line');
+      var flipped = false, dragged = false, down = null;
+      function wire() { line.setAttribute('d', 'M100 22 L100 ' + (160 + (+gsap.getProperty(tag, 'y') || 0)).toFixed(1)); }
+      function flip() {
+        flipped = !flipped;
+        tag.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+        tag.setAttribute('aria-label', flipped ? 'Inspection tag: 343 reviews on our Google listing. Press to turn it over' : 'Inspection tag: 4.8 out of 5. Press to turn it over');
+        tag.querySelector('.rtg__face--a').setAttribute('aria-hidden', flipped ? 'true' : 'false');
+        tag.querySelector('.rtg__face--b').setAttribute('aria-hidden', flipped ? 'false' : 'true');
+        if (k.motion) k.ctx.add(function () { gsap.to(tag, { rotationY: flipped ? 180 : 0, duration: .6, ease: 'power3.inOut' }); });
+        else gsap.set(tag, { rotationY: flipped ? 180 : 0 });
+      }
+      function spring(sw) {
+        k.ctx.add(function () {
+          gsap.to(tag, { y: 0, duration: 1, ease: 'elastic.out(1, .32)', onUpdate: wire, overwrite: 'auto' });
+          gsap.fromTo(tag, { rotation: sw }, { rotation: 0, duration: 1.2, ease: 'elastic.out(1, .3)' });
+        });
+      }
+      k.on(tag, 'pointerdown', function (e) { if (!k.motion) return; down = { y: e.clientY, x: e.clientX }; dragged = false; tag.setPointerCapture(e.pointerId); gsap.killTweensOf(tag, 'y,rotation'); });
+      k.on(tag, 'pointermove', function (e) {
+        if (!down) return;
+        var dy = Math.max(0, e.clientY - down.y);
+        if (dy > 6) dragged = true;
+        gsap.set(tag, { y: Math.min(130, dy * .7), rotation: EZ.clamp((e.clientX - down.x) * .05, -8, 8) }); wire();
+      });
+      function up(e) {
+        if (!down) return;
+        var far = (+gsap.getProperty(tag, 'y') || 0) > 40; down = null;
+        if (dragged) { spring((+gsap.getProperty(tag, 'rotation') || 0) * 1.5 + (Math.random() > .5 ? 6 : -6)); if (far) flip(); }
+      }
+      k.on(tag, 'pointerup', up); k.on(tag, 'pointercancel', up);
+      k.on(tag, 'click', function () {
+        if (dragged) { dragged = false; return; }
+        if (k.motion) k.ctx.add(function () { gsap.timeline().to(tag, { y: 50, duration: .14, ease: 'power2.in', onUpdate: wire }).add(function () { spring(7); }); });
+        flip();
+      });
+      wire();
+      k.add(function () {
+        flipped = false; gsap.set(tag, { clearProps: 'transform' }); wire();
+        tag.setAttribute('aria-pressed', 'false'); tag.setAttribute('aria-label', 'Inspection tag: 4.8 out of 5. Press to turn it over');
+        tag.querySelector('.rtg__face--a').removeAttribute('aria-hidden'); tag.querySelector('.rtg__face--b').setAttribute('aria-hidden', 'true');
+      });
+      EZ.reveal(k, root.querySelectorAll('.rtg__side > *'));
+      if (k.motion) gsap.from(tag, { y: -60, rotation: 10, autoAlpha: 0, duration: 1.1, ease: 'elastic.out(1, .4)', onUpdate: wire, scrollTrigger: { trigger: root.querySelector('.rtg__hang'), start: 'top 80%', once: true } });
+    } },
+
+    /* slot 8 · Phase 5 new · Five nails: each strike swings the hammer about its grip and drives the next nail; nails 1-4
+       go flush, nail 5 stops at eight tenths, so the readout ends on 4.8 */
+    8: { init: function (root, k) {
+      var svg = root.querySelector('.rnl__svg'), read = root.querySelector('.rnl__v'), hit = root.querySelector('.rnl__hit');
+      var TOP = 190, L = 66, NX = [140, 320, 500, 680, 860], DEP = [1, 1, 1, 1, .8], done = 0, busy = false;
+      var out = '';
+      NX.forEach(function (x, i) { out += '<g class="nail" transform="translate(' + x + ' ' + (TOP - L - 6) + ')"><rect class="nail-h" x="-15" y="0" width="30" height="7" rx="2"/><path class="nail-s" d="M-4 7 H4 V' + (L + 2) + ' L0 ' + (L + 10) + ' L-4 ' + (L + 2) + ' Z"/></g>'; });
+      out += '<rect class="plank" x="40" y="' + TOP + '" width="920" height="80" rx="4"/><path class="grain" d="M60 212 C260 202 420 224 620 210 S860 206 940 216 M60 238 C240 246 470 230 650 242 S880 248 940 236 M80 258 C300 252 520 262 920 254"/>';
+      NX.forEach(function (x, i) { out += '<text class="nl" x="' + x + '" y="294">' + (i + 1) + '</text>'; });
+      out += '<g class="hm" transform="translate(' + NX[0] + ' ' + (TOP - L - 6) + ')"><g class="hm-r" transform="rotate(35 150 -11)"><rect class="hm-g" x="-2" y="-15" width="152" height="9" rx="4"/><rect class="hm-h" x="-30" y="-24" width="60" height="24" rx="3"/></g></g>';
+      out += '<g class="spark"><path d="M-30 -4 L-46 -14 M30 -4 L46 -14 M-22 -14 L-30 -30 M22 -14 L30 -30"/></g>';
+      svg.innerHTML = out;
+      var nails = svg.querySelectorAll('.nail'), hm = svg.querySelector('.hm'), hr = svg.querySelector('.hm-r'), spark = svg.querySelector('.spark');
+      function headY(d) { return TOP - 7 - L * (1 - d); }
+      function total() { var t = 0; for (var i = 0; i < done; i++) t += DEP[i]; return t; }
+      function show() { read.textContent = total().toFixed(1); hit.querySelector('.btn__label').textContent = done < 5 ? 'Strike the next nail' : 'Strike the fifth again'; }
+      function strike() {
+        if (busy) return;
+        var i = Math.min(done, 4), again = done >= 5, y = headY(again ? DEP[4] : DEP[i]), x = NX[i];
+        function land() { if (!again) { nails[i].setAttribute('transform', 'translate(' + x + ' ' + y + ')'); done++; } show(); }
+        if (!k.motion) { land(); return; }
+        busy = true;
+        var a = { v: 35 }, ny = { v: headY(0) };
+        hm.setAttribute('transform', 'translate(' + x + ' ' + (again ? y : headY(0)) + ')');
+        k.ctx.add(function () {
+          gsap.timeline({ onComplete: function () { busy = false; } })
+            .to(a, { v: 0, duration: .16, ease: 'power3.in', onUpdate: function () { hr.setAttribute('transform', 'rotate(' + a.v.toFixed(2) + ' 150 -11)'); } })
+            .to(ny, { v: y, duration: again ? .01 : .09, ease: 'power2.out', onUpdate: function () {
+              if (!again) { nails[i].setAttribute('transform', 'translate(' + x + ' ' + ny.v.toFixed(1) + ')'); hm.setAttribute('transform', 'translate(' + x + ' ' + ny.v.toFixed(1) + ')'); }
+            } })
+            .add(function () { spark.setAttribute('transform', 'translate(' + x + ' ' + y + ')'); land(); })
+            .fromTo(spark, { opacity: 1 }, { opacity: 0, duration: .25 })
+            .to(a, { v: 35, duration: .3, ease: 'power2.out', onUpdate: function () { hr.setAttribute('transform', 'rotate(' + a.v.toFixed(2) + ' 150 -11)'); } }, '<');
+        });
+      }
+      function pull() {
+        done = 0; busy = false;
+        nails.forEach(function (n, i) { n.setAttribute('transform', 'translate(' + NX[i] + ' ' + headY(0) + ')'); });
+        hm.setAttribute('transform', 'translate(' + NX[0] + ' ' + headY(0) + ')'); hr.setAttribute('transform', 'rotate(35 150 -11)');
+        show();
+      }
+      k.on(hit, 'click', strike);
+      k.on(root.querySelector('.rnl__pull'), 'click', pull);
+      show();
+      k.add(function () { svg.innerHTML = ''; read.textContent = '0.0'; hit.querySelector('.btn__label').textContent = 'Strike the next nail'; });
+      EZ.reveal(k, root.querySelectorAll('.rnl__head > *, .rnl__foot'));
+    } },
+
     /* slot 1 · AUDIT-01 winner (copied from v1; F8): no ledger costume. Every stroke is on the page at rest (no false zero);
        with motion it draws in once on entry (8ms stagger, 150ms a stroke). Gates take focus and speak their range. */
-    1: { init: function (root, k) {
+    b2: { init: function (root, k) {
       var svg = root.querySelector('.rt__svg'), book = root.querySelector('.rt__book'), tip = root.querySelector('.rt__tip');
       var strokes = [], gates = [], drawn = false;
       function build() {
@@ -13782,7 +14533,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* v2 · The constellation: 343 stars assemble into the average; the pointer pushes them, they spring home */
-    2: { init: function (root, k) {
+    b3: { init: function (root, k) {
       var sky = root.querySelector('.reviews2__sky'), cv = root.querySelector('.reviews2__cv');
       var ctx = cv.getContext('2d'), stars = [], links = [], W = 0, H = 0, dpr = 1;
       var ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0;
@@ -13886,7 +14637,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* v3 · The calibration dial: the needle sweeps to 4.8; drag it and it springs back */
-    3: { init: function (root, k) {
+    b4: { init: function (root, k) {
       var svg = root.querySelector('.reviews3__svg'), dial = root.querySelector('.reviews3__dial');
       var C = 200, A0 = -120, SPAN = 240;                                  // 0 at -120deg, 5 at +120deg
       function ang(v) { return A0 + v / 5 * SPAN; }

@@ -1,4 +1,4 @@
-slots checked: hero[1,2,3,4,5,6,7,8,b4,b5,b6,b7,b8,b1,b2,b3] proof[1,2,3,4,5,6,7,8,b2,b3,b1,b4] services[1,2,3,4,5,6,7,8,b2,b1,b3,b4] ba[1,2,3,4,5,6,7,8,b2,b1,b3,b4] process[1,2,3,4,5,6,7,8,b2,b1,b3,b4] financing[1,2,3,4,5,6,7,8,b2,b3,b1,b4] work[1,2,3,b1] reviews[1,b1,2,3] towns[1,2,3,b1] consult[1,2,b1,3]
+slots checked: hero[1,2,3,4,5,6,7,8,b4,b5,b6,b7,b8,b1,b2,b3] proof[1,2,3,4,5,6,7,8,b2,b3,b1,b4] services[1,2,3,4,5,6,7,8,b2,b1,b3,b4] ba[1,2,3,4,5,6,7,8,b2,b1,b3,b4] process[1,2,3,4,5,6,7,8,b2,b1,b3,b4] financing[1,2,3,4,5,6,7,8,b2,b3,b1,b4] work[1,2,3,4,5,6,7,8,b2,b3,b4,b1] reviews[1,2,3,4,5,6,7,8,b2,b1,b3,b4] towns[1,2,3,b1] consult[1,2,b1,3]
 licence presentations off-lock: 0
 unlocked claims (52 / 30+ / owner names): 0
 photographed-project figures printed: 26 (proof1 proof2 proof8 proofb2 proofb3 proofb1)

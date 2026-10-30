@@ -284,3 +284,16 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
     - 8 ring-bound job binder.
   - New versions leave out the two photos whose subject does not match their title (owner item). Their counts are computed from what they show and never claim 26.
   - Test: `remodeling/src/tools/worktest.js` (both motion settings, 0 errors).
+- Reviews:
+  - Backups b2–b4 hold the former visible versions; b1 is unchanged.
+  - Improved slots:
+    - 1 tally: the closing stroke of each gate is in the accent, and the average is set on an accent rule.
+    - 2 constellation: a flat orange-tint sky over a Miami roofline in ink. The radial glow and the off-palette gold stars are gone.
+    - 3 dial: an orange bezel and a darker face caption.
+  - New slots use only 4.8, 343 and the Google link:
+    - 4 roof: 14 courses of 31 down to 18 shingles is exactly 343. The script refuses to draw a roof with any other count, and the roof is laid as you scroll.
+    - 5 paint roller: five stencils; the paint cannot pass 4.8 and rolls back there.
+    - 6 split-flap job sign: flaps turn over blank before landing, so no figure other than 4.8 or 343 is ever shown.
+    - 7 inspection tag: pull it or press it; it springs back and turns over.
+    - 8 five nails: four are driven flush and the fifth stops at eight tenths.
+  - Test: `remodeling/src/tools/reviewstest.js` (both motion settings, 0 errors).
