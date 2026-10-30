@@ -66,3 +66,23 @@
 .reviews3__val { font: 400 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/1 var(--f-display); padding: 2px 12px; background: #0B1418; color: #f2c230; border-radius: 3px; min-width: 2.6ch; text-align: center; }
 .reviews3__unit { font: 600 .6875rem/1.2 var(--f-text); letter-spacing: .14em; text-transform: uppercase; color: #4a5a5e; }
 @media (max-width: 1023px) { .reviews3__side, .reviews3__dial { grid-column: 1 / -1; } .reviews3__dial { margin-top: var(--s7); } }
+
+
+/* ---------- slot 1 · AUDIT-01 winner, from v1 (.reviews1 -> .rt); F8: no ruled paper or red margin, strokes on the section ground ---------- */
+.rt__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.rt__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
+.rt__avg { margin: 0; display: flex; align-items: flex-end; gap: 14px; }
+.rt__n { font: 400 clamp(5rem, 3rem + 6vw, 9rem)/.8 var(--f-display); color: var(--ink); }
+.rt__of { font: 500 .9375rem/1.35 var(--f-text); color: var(--muted); padding-bottom: .4em; }
+.rt__btn { justify-self: start; }
+.rt__book { grid-column: 6 / -1; margin: 0; }
+.rt__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rt__svg .st { stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.rt__svg .gate { cursor: default; outline: none; }
+.rt__svg .gate rect { fill: transparent; transition: fill 150ms ease-out; }
+.rt__svg .gate.is-hot .st { stroke: #9fd0d4; }
+.rt__svg .gate.is-hot rect { fill: rgba(119, 179, 184, .16); }
+.rt__svg .gate:focus-visible rect { stroke: #77b3b8; stroke-width: 2; }
+.rt__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); color: var(--muted); }
+.rt__tip { margin-left: auto; font-weight: 600; color: #9fd0d4; min-height: 1.3em; }
+@media (max-width: 1023px) { .rt__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); } .rt__book { grid-column: 1 / -1; } }

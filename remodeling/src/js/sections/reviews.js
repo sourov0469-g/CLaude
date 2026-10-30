@@ -6,8 +6,55 @@
   var COUNT = 343, AVG = 4.8;
 
   EZ.section('reviews', {
-    /* v1 · The tally ledger: 343 strokes in gates of five, scratched in with the scroll; hover a gate for its range */
+    /* slot 1 · AUDIT-01 winner (copied from v1; F8): no ledger costume. Every stroke is on the page at rest (no false zero);
+       with motion it draws in once on entry (8ms stagger, 150ms a stroke). Gates take focus and speak their range. */
     1: { init: function (root, k) {
+      var svg = root.querySelector('.rt__svg'), book = root.querySelector('.rt__book'), tip = root.querySelector('.rt__tip');
+      var strokes = [], gates = [], drawn = false;
+      function build() {
+        var per = EZ.mobile() ? 7 : 10, W = 600, gw = W / per, rows = Math.ceil(COUNT / 5 / per), rh = 64, H = rows * rh;
+        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        var s = '', n = 0;
+        for (var g = 0; n < COUNT; g++) {
+          var col = g % per, row = Math.floor(g / per), x = col * gw + gw * .2, y = row * rh + 12, from = n + 1, body = '', j;
+          for (j = 0; j < 4 && n < COUNT; j++, n++) {
+            var lean = ((g * 7 + j * 3) % 5 - 2) * .9, top = y + ((g + j) % 3), bot = y + 40 - ((g * 3 + j) % 4);
+            body += '<path class="st" d="M' + (x + j * 9) + ' ' + top + 'L' + (x + j * 9 + lean) + ' ' + bot + '"/>';
+          }
+          if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 33) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
+          var lbl = from === n ? 'Review ' + from : 'Reviews ' + from + '-' + n;
+          s += '<g class="gate" tabindex="0" role="img" data-rx="native:tally-gate" aria-label="' + lbl + '" data-l="' + lbl + '"><rect x="' + (x - 8) + '" y="' + (y - 4) + '" width="' + (gw * .82) + '" height="50" rx="4"/>' + body + '</g>';
+        }
+        svg.innerHTML = s;
+        strokes = Array.prototype.slice.call(svg.querySelectorAll('.st'));
+        gates = Array.prototype.slice.call(svg.querySelectorAll('.gate'));
+        gsap.set(strokes, { transformOrigin: '50% 100%' });
+        gsap.set(svg.querySelectorAll('.st--d'), { transformOrigin: '0% 100%' });
+      }
+      build();
+      var lastPer = EZ.mobile();
+      k.ro(book, function () { if (EZ.mobile() !== lastPer) { lastPer = EZ.mobile(); build(); } });
+      k.add(function () { svg.innerHTML = ''; tip.textContent = ''; });
+      function hot(g) { gates.forEach(function (x) { x.classList.toggle('is-hot', x === g); }); tip.textContent = g ? g.dataset.l : ''; }
+      k.on(svg, 'pointerover', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
+      k.on(svg, 'pointerleave', function () { if (!svg.contains(document.activeElement)) hot(null); });
+      k.on(svg, 'focusin', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
+      k.on(svg, 'focusout', function (e) { if (!svg.contains(e.relatedTarget)) hot(null); });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.rt__side > *'));
+      // the draw-in runs once, and only for a tally that starts below the fold; a tally already on screen stays drawn
+      var r = book.getBoundingClientRect();
+      if (r.top < innerHeight * .9) return;
+      gsap.set(strokes, { scale: .1, autoAlpha: 0 });
+      ScrollTrigger.create({ trigger: book, start: 'top 85%', once: true, onEnter: function () {
+        drawn = true;
+        gsap.to(strokes, { scale: 1, autoAlpha: 1, duration: .15, ease: 'power2.out', stagger: .008 });
+      } });
+      k.add(function () { if (!drawn) gsap.set(strokes, { clearProps: 'all' }); });
+    } },
+
+    /* v1 · The tally ledger: 343 strokes in gates of five, scratched in with the scroll; hover a gate for its range */
+    b1: { init: function (root, k) {
       var svg = root.querySelector('.reviews1__svg'), book = root.querySelector('.reviews1__book');
       var countEl = root.querySelector('.reviews1__count'), tip = root.querySelector('.reviews1__tip');
       var strokes = [], gates = [], shown = COUNT;
@@ -191,27 +238,40 @@
       gsap.set(needle, { rotation: ang(AVG), svgOrigin: '200 200' });
       if (!k.motion) return;
       EZ.reveal(k, root.querySelectorAll('.reviews3__side > *'));
-      function settle(from, dur) {
-        gsap.fromTo(needle, { rotation: from }, { rotation: ang(AVG), svgOrigin: '200 200', duration: dur || 1.2, ease: 'elastic.out(1, .4)', overwrite: true });
+      // [AUDIT-01 F8 loser V3, P1] a real spring (stiffness 170, damping 26, 1/240s sub-steps) clamped to the printed scale,
+      // so no frame can read above 5.0 or below 0; it lands exactly on 110.4deg
+      var spin = null;
+      function settle(from) {
+        gsap.killTweensOf(needle);
+        if (spin) gsap.ticker.remove(spin);
+        var x = EZ.clamp(from, A0, A0 + SPAN), v = 0, to = ang(AVG);
+        spin = function (t, dtMs) {
+          var dt = Math.min(dtMs / 1000, 1 / 30), h = 1 / 240;
+          for (var acc = 0; acc < dt; acc += h) { v += (-170 * (x - to) - 26 * v) * h; x = EZ.clamp(x + v * h, A0, A0 + SPAN); }
+          if (Math.abs(x - to) < .02 && Math.abs(v) < .05) { x = to; gsap.ticker.remove(spin); spin = null; }
+          gsap.set(needle, { rotation: x, svgOrigin: '200 200' });
+        };
+        gsap.ticker.add(spin);
       }
+      k.add(function () { if (spin) gsap.ticker.remove(spin); spin = null; });
       gsap.set(needle, { rotation: A0, svgOrigin: '200 200' });
-      ScrollTrigger.create({ trigger: dial, start: 'top 75%', once: true, onEnter: function () { settle(A0, 1.6); } });
+      ScrollTrigger.create({ trigger: dial, start: 'top 75%', once: true, onEnter: function () { settle(A0); } });
       // drag the needle anywhere on the dial; let go and it comes back to the average
       var dragging = false;
       function at(e) {
         var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 400 - C, y = (e.clientY - r.top) / r.height * 400 - C;
         var deg = Math.atan2(y, x) * 180 / Math.PI + 90;          // 0 = straight up, clockwise positive
         if (deg > 180) deg -= 360;
-        return EZ.clamp(deg, A0 - 10, A0 + SPAN + 10);
+        return EZ.clamp(deg, A0, A0 + SPAN);
       }
-      k.on(svg, 'pointerdown', function (e) { dragging = true; svg.setPointerCapture(e.pointerId); gsap.killTweensOf(needle); gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .12, overwrite: true }); });
+      k.on(svg, 'pointerdown', function (e) { dragging = true; svg.setPointerCapture(e.pointerId); gsap.killTweensOf(needle); if (spin) { gsap.ticker.remove(spin); spin = null; } gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .12, overwrite: true }); });
       k.on(svg, 'pointermove', function (e) { if (dragging) gsap.to(needle, { rotation: at(e), svgOrigin: '200 200', duration: .08, overwrite: true }); });
       function release() { if (!dragging) return; dragging = false; settle(gsap.getProperty(needle, 'rotation')); }
       k.on(svg, 'pointerup', release);
       k.on(svg, 'pointercancel', release);
       k.on(root.querySelector('.reviews3__flick'), 'click', function () {
         var to = ang(.6 + Math.random() * 2.4);
-        gsap.timeline().to(needle, { rotation: to, svgOrigin: '200 200', duration: .18, ease: 'power3.out' }).add(function () { settle(to, 1.3); });
+        gsap.timeline().to(needle, { rotation: to, svgOrigin: '200 200', duration: .18, ease: 'power3.out' }).add(function () { settle(to); });
       });
     } }
   });
