@@ -303,3 +303,118 @@ The cadence lock (C2) puts Reviews on --ink. Every version moves to it, which is
   - **Departures from Q164:**
     - It does not cruise forever ⟦S1314 §8⟧. It turns only when dragged or flung, with a 1.2s decay, or by a slow scroll-linked quarter turn.
     - The ring is aria-hidden, and the same facts sit beside it as a real list with the check links.
+
+## F3 / G: Work (written before the Work code)
+
+Ground stays --sky (C2). ba2 remains the only before/after pair on the page.
+
+### Winner V1 Filmstrip
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| P1 | Pause and Next must work; the helper covers them | ACCEPT | The helper's yield (C6) moves it off any control. `occl.mjs` checks this. |
+| 2 | Pause on hover | ACCEPT | Hover the strip and it holds; leave and it resumes (unless the visitor took control). The visitor reads what they point at ⟦S1314 §8⟧ (motion must not compete with reading), WCAG 2.2.2. |
+| 3 | Tile click 0.8s to 0.45s; arrows the same | ACCEPT | ⟦S0063⟧ Std 4. The arrow steps go 0.4s to 0.45s, so both moves share one value. |
+| 4 | Delete the pointer-follow glow; delete the rotating speed square | ACCEPT | Removal Test ⟦S1314⟧. Neither carries information; the tape and its ticks stay. |
+| 5 | Mobile: four bottom layers to three | ACCEPT | ⟦S1499⟧. The tape leaves on phones. The strip, the caption and the controls remain. |
+| 6 | Keep the drift, the .15s caption crossfade, brightness(.7), and a click that stops autoplay for good | ACCEPT | Unchanged. |
+| E3 | After a manual Next, autoplay looks paused but the control does not show it | ACCEPT, cause found | See E3 below. |
+| (D4) | The level bubble's infinite 1.4s hover loop | | It becomes one 0.6s drift. |
+| (D6) | Nail stagger | | 0.025s. |
+| (D2) | data-c="tile" | | The companion lays a tape across the tile. |
+
+**E3, cause and fix.**
+- **Cause:** a click intentionally stops autoplay, and the button swaps to its play icon, but its aria-label stays "Pause the moving photos". Under hover the play icon is also replaced by the level vial, so the state is easy to miss.
+- **Fix:**
+  - The label follows the state ("Play the moving photos").
+  - A held strip gives the button a filled ink face, so "stopped" reads at a glance ⟦S1314 §7⟧ (selections need a clear active state).
+
+### V2 Gable grid (weak)
+| Point | Verdict | Reason |
+|---|---|---|
+| Delete the chevron wallpaper | ACCEPT | ⟦S1314⟧ Removal Test. |
+| Full rectangles at rest; the roofline morph on hover only | ACCEPT | It already lowers only on hover. The rest state is checked to be a clean rectangle. |
+| Permanent small captions | ACCEPT | ⟦S1314 §7⟧ (hover must not be the only way to reveal information). |
+| ba2 before and after adjacent, labelled as one job | ACCEPT | ⟦S1314⟧ product truth. They become the two top tiles of one row, captioned "Same house, before" and "Same house, after". |
+| FLIP the container with a counter-scaled image, or a clip-path reveal at 0.45s | ACCEPT the first, at 0.45s | Flip already moves the container (`scale:true`). It now runs 0.45s on --ease-x, not 0.9s expo ⟦S0063⟧ ⟦S0089⟧. |
+| Overshoot on a spring, or drop it | DROP | The gable's back.out overshoot on a hover state is "bounce on an ordinary state change" ⟦S1314 §8⟧. It becomes ease-out. |
+
+### V3 Course blinds (fix)
+| Point | Verdict | Reason |
+|---|---|---|
+| Rest states: scrub 0 shows 100% BEFORE, scrub 1 shows 100% AFTER; labels agree | ACCEPT | The scrub is mapped so the ends hold real states ⟦S1314⟧ (product truth). The labels switch at 50% coverage. |
+| The wipe starts at the roofline | ACCEPT | The courses are laid from the roofline down, as shingles go on, reversing the bottom-up order. The hammer rides the leading course. |
+| Mobile spacing; keep the nail row; drop the drip | ACCEPT | Removal Test: the drip edge duplicates the nail row's job. |
+| Watch the wheel capture | ACCEPT | The frame is not pinned and takes no wheel listener. Checked: scroll is never trapped. |
+
+### New versions
+| Pack's direction | Verdict | Built |
+|---|---|---|
+| (a) Two-job honesty treatment: ba2 plus one real job as single photos, never a fake pair | ACCEPT | **V4 "Two jobs, told straight":** a two-column case file. Job 1 is ba2, its before and after shown together as the one genuine pair. Job 2 is one finished-roof photo, labelled "No before photo of this one". Each column carries what the photos are and what they are not. References: [BANK] Checklist 11 (say every photo is real work) and ⟦S1314⟧ (product truth). |
+| (b) A drag-driven filmstrip | REJECT | A drag filmstrip is V1's layout with a different input, so it is a variation (A3). Built instead: **V5 "Job index"** from [BANK] VERDE (an archive index of rows, each with a mini thumbnail, and a preview that follows the pointer through a 0.2s CSS transition). The six jobs become six rows. Hover or focus shows a large preview that glides after the pointer. Each row keeps its own small photo, so touch and keyboard lose nothing. No layout here repeats V1 to V4. |
+
+## F4 / G: Family (written before the Family code)
+
+The ground is --ink (C2). V1 is already ink; V2 (cream) and V3 (blue) move to it.
+
+### Winner V1 WALKER (polish only, the animation preserved)
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| P1 | The plate line at y=214 cuts faces: put it behind the photo clip or in the lower third | IMPROVE | See P1 below. |
+| P2 | .fm1-h at ~2 to 2.25rem | REJECT | See P2 below. |
+| P3 | Figure ≤52svh | ACCEPT | ⟦S1498⟧. Also brings the section toward the C4 height beat. |
+| P4 | Door press .35 to .22s; .fm1-call:active scale(.97) over 160ms | ACCEPT | ⟦S0063⟧ STANDARDS (press 100 to 160ms, .95 to .98). |
+| P5 | Clip or drop the web struts over A and K | DROP | Removal Test ⟦S1314⟧: the struts add no meaning to the truss outline. |
+| P6 | will-change only while animating | ACCEPT | ⟦S1315⟧ (optimize web animations). The static will-change on the SVG goes; GSAP's own transforms promote only while they run. |
+| P7 | A 2px year rail with sun fill | ACCEPT | ⟦S1325⟧ as a 2px rail beside the three facts, filling sun as they scroll through. It is small and local to the facts list, so it does not repeat How V1's full-section spine. |
+| P8 | Below 768px, rafters and plate only | ACCEPT | ⟦S1499⟧. |
+| (D2) | | | None of the eight hooks lives here. |
+
+**P1, the plate line.**
+- Behind the clip, the line still shows in the gaps between letters at face height. The lower third would still cross the letters.
+- **Instead:** the whole truss lifts so its bottom chord sits just above the letters' cap line (y=190). It then crosses no letter and no gap. The truss reads as a roof over the name, which was its job ⟦S1498⟧ (figure and ground).
+
+**P2, the heading size.**
+- C3 (the pack's own page-level rule) gives every H2 one size. A Family-only 32 to 36px H2 would bring back the role drift C3 removes ⟦S1500 Consistency⟧.
+- The giant WALKER is the display. The H2 stays at the 48px role, which is already under half the name's height.
+
+### V2 Statement (fix)
+| Point | Verdict | Reason |
+|---|---|---|
+| Once-play word reveal: y20, opacity 0, 0.8s (0.16,1,0.3,1), stagger .07, trigger at 20%, once | ACCEPT | ⟦S1329⟧ staggered word reveal, its own values. It replaces the scroll-scrubbed reveal. |
+| House DrawSVG: ridge and eave 0.9s power3.out, then 8 course lines .06 to .1s apart | ACCEPT | Course stagger 0.08. |
+| The say-line is the real h2 | ACCEPT | ⟦S1501⟧. The sr-only h2 goes. The statement takes the H2 role at 48px. |
+| Wobble becomes one 160ms tilt | ACCEPT | ⟦S0063⟧. |
+| Faces in the middle third | ACCEPT | object-position is re-set on the 4:5 crop. |
+| (C2) | | Ink ground; the skyline silhouette becomes a faint light tone. |
+
+### V3 Truss (fix)
+| Point | Verdict | Reason |
+|---|---|---|
+| The say line on its own row | ACCEPT | ⟦S1498⟧. |
+| Truss = family only (Bunk rafter, Wade king post, Rachel tie beam, "Today, the crew"); BBB, OC and the address move out | ACCEPT | ⟦S1499⟧. Proof belongs to Reviews and the address to Call. |
+| Crew photo crop on selection; Bunk pre-selected; hover preview dims the others to .55; spotlight brightness 1.6, r≈180 | ACCEPT | ⟦S1362⟧ ⟦S1314 §7⟧ (a clear selected state from the start). |
+| (C2) | | Ink ground. |
+
+### New versions
+| Pack's direction | Verdict | Built instead |
+|---|---|---|
+| (a) A family-only truss with photo payoffs | REJECT | It is V3 after its own fix list (family-only members, crop on selection), so it is a variation (A3). |
+| (b) The year rail (P7) as the spine | REJECT | A scroll-filled spine is How V1's mechanism (⟦S1325⟧). A second one on the same page repeats a trick ⟦S0626⟧ ("never the same anchor twice"). P7 keeps the rail small inside V1. |
+
+**Built instead (two wholly new concepts):**
+- **V4 "Three cards":**
+  - **Reference:** [BANK] Harvest [201], the CSS-only flip card (perspective 1000px, preserve-3d, backface hidden, rotateY(180deg), class toggle on click/tap; .4s ease-out, here .36s --ease-x).
+  - **What it is:** three cards from the family's own inventory ⟦S0095⟧.
+  - **Fronts:** a year and a name.
+  - **Backs:** the one sentence of fact. Rachel's back carries the phone link.
+  - Each card is a real button with aria-pressed. Reduced motion swaps the faces with no turn.
+- **V5 "Editorial panorama":**
+  - **Reference:** ⟦S1354⟧ agency-grid-layout-minimal (an oversized headline on a strict grid, a narrow metadata column, a panoramic image block, a slow image settle).
+  - **What it is:**
+    - A wide panoramic crop of the real crew photo.
+    - An oversized "One family since 1995." on the grid.
+    - A narrow column of the facts as a definition list.
+  - **Adaptations:**
+    - The skill's "tiny uppercase labels" are replaced by the page's one label role (C1).
+    - The skill's light neutrals are replaced by the section's ink ground (C2).
+    - The image settles once from scale 1.06 to 1.

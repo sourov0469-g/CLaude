@@ -1,0 +1,12 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch(); const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+await p.goto('file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html?v=work1'); await p.waitForTimeout(1200);
+await p.evaluate(() => document.getElementById('work').scrollIntoView()); await p.waitForTimeout(1500);
+const x = () => p.evaluate(() => Math.round(document.querySelector('.wv1-tile').getBoundingClientRect().left));
+const st = () => p.evaluate(() => ({ pressed: document.querySelector('.wv1-pause').getAttribute('aria-pressed'), label: document.querySelector('.wv1-pause').getAttribute('aria-label'), playIcon: getComputedStyle(document.querySelector('.wv1-pause .i-play')).display }));
+const a = await x(); await p.waitForTimeout(500); const a2 = await x();
+console.log('autoplay moving before:', a !== a2, await st());
+await p.locator('#work .wv-btn[data-dir="1"]').click(); await p.waitForTimeout(900);
+const c1 = await x(); await p.waitForTimeout(600); const c2 = await x();
+console.log('after Next: moving', c1 !== c2, await st());
+await b.close();

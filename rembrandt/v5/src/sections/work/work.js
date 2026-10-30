@@ -16,13 +16,13 @@ gsap.registerPlugin(Flip);
 // a pause toggle (WCAG 2.2.2); autoplay only with motion allowed; the loop rests while off screen.
 function tiles(root, c) {
   const strip = root.querySelector('.wv1-strip'), items = [...strip.children], cap = root.querySelector('.wv1-cap-t'), pause = root.querySelector('.wv1-pause');
-  const pat = root.querySelector('#wv1-ticks'), sq = root.querySelector('.wv1-sq');
-  let loop = null, held = !c.motion, seen = true, dead = false;
+  const pat = root.querySelector('#wv1-ticks');
+  let loop = null, held = !c.motion, seen = true, dead = false, over = false;
   if (c.motion) beats(root, [root.querySelector('.wv-h'), root.querySelector('.wv-note'), [strip, root.querySelector('.wv1-tape')], root.querySelector('.wv1-foot')]);
-  const apply = () => { if (loop) loop.paused(held || !seen); pause.setAttribute('aria-pressed', String(held)); };
+  // R3 E3: the control's label follows its state (it used to keep saying Pause after a click had stopped the strip)
+  const apply = () => { if (loop) loop.paused(held || over || !seen); pause.setAttribute('aria-pressed', String(held)); pause.setAttribute('aria-label', held ? 'Play the moving photos' : 'Pause the moving photos'); };
   const setCap = (el) => {
     items.forEach(t => t.classList.toggle('is-on', t === el));
-    sq.style.transform = `rotate(${(-4 * items.indexOf(el)).toFixed(0)}deg)`; // the speed square turns with the job on show
     const txt = el.dataset.cap; if (cap.textContent === txt) return;
     cap.textContent = txt; cap.classList.remove('is-new'); void cap.offsetWidth; cap.classList.add('is-new');
   };
@@ -37,7 +37,7 @@ function tiles(root, c) {
     gsap.ticker.add(tick); c.ctx.add(() => () => gsap.ticker.remove(tick));
   });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
-  const step = { duration: c.motion ? 0.4 : 0, ease: 'power1.inOut' };
+  const step = { duration: c.motion ? 0.45 : 0, ease: 'power1.inOut' }; // R3 F3: arrows and tile clicks share 0.45s
   const onClick = e => {
     if (!loop) return;
     const b = e.target.closest('.wv-btn'), t = e.target.closest('.wv1-tile');
@@ -46,21 +46,13 @@ function tiles(root, c) {
     held = true; apply();
     root.classList.remove('is-step'); void root.offsetWidth; root.classList.add('is-step'); // R16/R17 press: the tape hook snaps
     if (b) { loop.closestIndex(true); Number(b.dataset.dir) > 0 ? loop.next(step) : loop.previous(step); }
-    else loop.toIndex(items.indexOf(t), { duration: c.motion ? 0.8 : 0, ease: 'power1.inOut' });
+    else loop.toIndex(items.indexOf(t), { duration: c.motion ? 0.45 : 0, ease: 'power1.inOut' });
   };
   root.addEventListener('click', onClick);
-  // bg: a lit band follows the pointer along the tape, strongest when the pointer is close to it
-  const tape = root.querySelector('.wv1-tape'), glow = root.querySelector('.wv1-glow-m');
-  let onMove = null, onLeave = null;
-  if (c.fine && c.motion) {
-    const gx = gsap.quickTo(glow, 'x', { duration: 0.3, ease: 'power3.out' });
-    const go = gsap.quickTo(glow, 'opacity', { duration: 0.25, ease: 'power2.out' });
-    onMove = e => { if (e.pointerType !== 'mouse') return; const r = tape.getBoundingClientRect(), d = Math.abs(e.clientY - (r.top + r.height / 2)); gx(e.clientX - r.left - 120); go(Math.max(0, 1 - d / 260)); };
-    onLeave = () => go(0);
-    gsap.set(glow, { opacity: 0 });
-    root.addEventListener('pointermove', onMove); root.addEventListener('pointerleave', onLeave);
-  }
-  return () => { dead = true; if (loop) loop.destroy(); root.removeEventListener('click', onClick); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } };
+  // R3 F3: the strip holds while the pointer is over it (the visitor reads what they point at), and resumes on leave
+  const onIn = e => { if (e.pointerType === 'mouse') { over = true; apply(); } }, onOut = () => { over = false; apply(); };
+  strip.addEventListener('pointerenter', onIn); strip.addEventListener('pointerleave', onOut);
+  return () => { dead = true; if (loop) loop.destroy(); root.removeEventListener('click', onClick); strip.removeEventListener('pointerenter', onIn); strip.removeEventListener('pointerleave', onOut); };
 }
 
 // v2 [BANK] Q157 Push Animation on Grid Items (Codrops, demo 1; all three demo scripts read in the deep read; P80
@@ -74,18 +66,18 @@ function push(root, c) {
   const grid = root.querySelector('.wv2-grid'), full = root.querySelector('.wv2-full'), items = [...grid.querySelectorAll('.wv2-item')];
   const closed = root.querySelector('.wv2-closed'), open = root.querySelector('.wv2-open'), cap = root.querySelector('.wv2-cap'), closeBtn = root.querySelector('.wv2-close');
   if (c.motion) beats(root, [root.querySelector('.wv2-closed .wv-h'), root.querySelector('.wv2-closed .wv-note'), items]);
-  // [BANK] Q147 Shape Hover (chevron preset, 300ms back-out), inverted into a roof line: a gable cap of the section's
+  // [BANK] Q147 Shape Hover (chevron preset; R3: ease-out, the back-out overshoot dropped, S1314 §8), inverted into a roof line: a gable cap of the section's
   // colour lowers over the photo's top so the job sits under a drawn roof; the caption rises 50px -> 0 over 0.3s (CSS)
   const FLAT = ['M0 0 H180 V0 L90 0 L0 0 Z', 'M0 0 L90 0 L180 0'], GABLE = ['M0 0 H180 V96 L90 16 L0 96 Z', 'M0 96 L90 16 L180 96'];
   items.forEach(it => { const t = it.querySelector('.wv2-tag'); if (t) t.textContent = it.dataset.cap; });
-  const roofCap = (it, on) => { const [f, l] = it.querySelectorAll('.wv2-gc path'), sh = on ? GABLE : FLAT; gsap.to(f, { attr: { d: sh[0] }, duration: c.motion ? (on ? 0.3 : 0.22) : 0, ease: on ? 'back.out(1.4)' : 'power2.out', overwrite: 'auto' }); gsap.to(l, { attr: { d: sh[1] }, duration: c.motion ? (on ? 0.3 : 0.22) : 0, ease: on ? 'back.out(1.4)' : 'power2.out', overwrite: 'auto' }); };
+  const roofCap = (it, on) => { const [f, l] = it.querySelectorAll('.wv2-gc path'), sh = on ? GABLE : FLAT; gsap.to(f, { attr: { d: sh[0] }, duration: c.motion ? (on ? 0.24 : 0.2) : 0, ease: 'power3.out', overwrite: 'auto' }); gsap.to(l, { attr: { d: sh[1] }, duration: c.motion ? (on ? 0.24 : 0.2) : 0, ease: 'power3.out', overwrite: 'auto' }); };
   const onOver = e => { const it = e.target.closest('.wv2-item'); if (it && !current && (e.type === 'focusin' || e.pointerType === 'mouse')) roofCap(it, true); };
   const onOut = e => { const it = e.target.closest('.wv2-item'); if (it && (!e.relatedTarget || !it.contains(e.relatedTarget))) roofCap(it, false); };
   grid.addEventListener('pointerover', onOver); grid.addEventListener('pointerout', onOut); grid.addEventListener('focusin', onOver); grid.addEventListener('focusout', onOut);
   let current = null, busy = null;
   const flip = state => {
     if (busy) busy.progress(1);
-    busy = Flip.from(state, { duration: c.motion ? 0.9 : 0, ease: 'expo', scale: true, prune: true, onComplete: () => { busy = null; } });
+    busy = Flip.from(state, { duration: c.motion ? 0.45 : 0, ease: EASE, scale: true, prune: true, onComplete: () => { busy = null; } }); // R3 F3-V2: 0.45s, no expo tail
   };
   function show(item) {
     gsap.to(item.querySelectorAll('.wv2-gc'), { yPercent: -60, opacity: 0, duration: c.motion ? 0.25 : 0, ease: 'power2.out', onComplete: () => { gsap.set(item.querySelectorAll('.wv2-gc'), { clearProps: 'all' }); roofCap(item, false); } }); // the roof lifts off
@@ -105,7 +97,7 @@ function push(root, c) {
     root.classList.remove('is-open'); full.setAttribute('aria-hidden', 'true');
     closed.hidden = false; open.hidden = true; current = null;
     flip(state);
-    gsap.delayedCall(c.motion ? 0.9 : 0, () => { item.style.zIndex = ''; });
+    gsap.delayedCall(c.motion ? 0.45 : 0, () => { item.style.zIndex = ''; });
     item.focus({ preventScroll: true });
   }
   const onClick = e => {
@@ -120,7 +112,8 @@ function push(root, c) {
 
 // v3 [BANK] Q38 SVG Mask Transitions on Scroll, horizontal blinds (Codrops; L2-measured values): slits opening in a
 // scrubbed stagger (0.02), scrub 2.0 to 2.5 on desktop and about 1 on phones, crispEdges, mask rebuilt on resize, not
-// pinned. V7 adaptation: the slits are shingle courses and they go on bottom to top, the order a roofer lays them.
+// pinned. V7 adaptation: the slits are shingle courses (R3: laid from the roofline outward, so the first change you see
+// is the roof, not the lawn).
 // Each course unrolls from its top line down to a 3-tab bottom edge (keyway slots every half tab, offset each course),
 // so the leading edge you watch is a real shingle edge; the after photo is "re-roofed" over the before photo as you
 // scroll. A small hammer rides the course going on. Labels switch at half. Reduced motion: the pair side by side.
@@ -143,11 +136,13 @@ function blinds(root, c) {
   gsap.set(paths, { scaleY: 0, transformOrigin: '50% 0%' });
   const labels = [...root.querySelectorAll('.wv3-l')];
   const setLabel = after => labels.forEach(l => l.classList.toggle('is-on', (l.dataset.l === 'after') === after));
-  const order = paths.slice().reverse(); // bottom course first
+  // R3 F3-V3: the change starts at the roofline (the ridge sits ~22% down the frame): the ridge course first, then the
+  // courses below it in turn, then the sky courses above; scrub 0 is 100% before, scrub 1 100% after
+  const RIDGE = Math.floor(COURSES * 0.2), order = [...paths.slice(RIDGE), ...paths.slice(0, RIDGE).reverse()];
   const tl = gsap.timeline({ onUpdate() {
       const p = this.progress(); setLabel(p >= 0.5);
       // the hammer sits on the edge of the course going on, tapping as it goes
-      const k = Math.min(COURSES - 1, Math.floor(p * COURSES)), y = (COURSES - k) * h - (p * COURSES - k) * 0, x = 940 - (p * COURSES - k) * 40;
+      const k = Math.min(COURSES - 1, Math.floor(p * COURSES)), row = paths.indexOf(order[k]), y = (row + Math.min(1, p * COURSES - k)) * h, x = 940 - (p * COURSES - k) * 40;
       gsap.set(ham, { x, y: Math.max(16, y), rotation: Math.sin(p * COURSES * Math.PI * 2) * 14, svgOrigin: `${x + 8} ${y + 10}`, opacity: p > 0.985 || p < 0.01 ? 0 : 1 });
     },
     scrollTrigger: { trigger: root.querySelector('.wv3-frame'), start: 'top 70%', end: 'bottom 35%', scrub: c.wide ? 2.2 : 1, invalidateOnRefresh: true } });
@@ -161,7 +156,7 @@ function blinds(root, c) {
   const resume = () => { if (!held) return; held = false; off(); st.enable(false); };
   const onKey = e => { if (SCROLL_KEYS.includes(e.key) && !(e.target.closest && e.target.closest('button,a,input'))) resume(); };
   const off = () => { removeEventListener('wheel', resume); removeEventListener('touchstart', resume); removeEventListener('keydown', onKey); };
-  const outline = b => { hl.setAttribute('d', course(b.dataset.l === 'after' ? 0 : COURSES - 1)); };
+  const outline = b => { hl.setAttribute('d', course(b.dataset.l === 'after' ? 0 : RIDGE)); };
   const onOver = e => { const b = e.target.closest('.wv3-l'); if (b && (e.type === 'focusin' || e.pointerType === 'mouse')) { outline(b); hl.classList.add('is-on'); } };
   const onOut = e => { if (e.target.closest('.wv3-l')) hl.classList.remove('is-on'); };
   const onClick = e => {
@@ -192,4 +187,40 @@ function blinds(root, c) {
   return () => { off(); row.replaceChildren(); if (onMove) { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); } box.removeEventListener('pointerover', onOver); box.removeEventListener('pointerout', onOut); box.removeEventListener('focusin', onOver); box.removeEventListener('focusout', onOut); box.removeEventListener('click', onClick); };
 }
 
-export default { 1: tiles, 2: push, 3: blinds };
+// v4 (R3, new): [BANK] Checklist 11 + S1314 product truth. The two columns enter once (y 16, 300ms, 60ms apart) and each
+// photo opens on a clip-path inset (0.45s, --ease-x) as its column arrives.
+function honest(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.wv-h'), root.querySelector('.wv-note')]);
+  const jobs = [...root.querySelectorAll('.wv4-job')];
+  gsap.set(jobs, { autoAlpha: 0 });
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.wv4-grid'), start: 'top 82%', once: true, onEnter: () => {
+    gsap.fromTo(jobs, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform' });
+    gsap.fromTo(root.querySelectorAll('.wv4-ph img'), { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.45, ease: EASE, stagger: 0.06, clearProps: 'clipPath' });
+  } });
+  return () => st.kill();
+}
+
+// v5 (R3, new): [BANK] VERDE (deep read slice 4): an archive index of rows, mini thumbnails, and a preview follower whose
+// glide is a 0.2s CSS transition on transform (no JS lerp, as measured on the source). Over a row the follower shows that
+// row's photo (two layers crossfading 150ms when the row changes), offset 24px right of and above the pointer and kept
+// inside the viewport; it fades out when the pointer leaves the list. Fine pointers with motion only.
+function index(root, c) {
+  if (c.motion) beats(root, [root.querySelector('.wv-h'), root.querySelector('.wv-note'), root.querySelectorAll('.wv5-row')], { stagger: 0.04 });
+  if (!c.fine || !c.motion) return;
+  const list = root.querySelector('.wv5-list'), fol = root.querySelector('.wv5-follow'), [fa, fb] = fol.querySelectorAll('img');
+  let cur = '', front = fa;
+  const show = k => { if (k === cur) return; cur = k; const back = front === fa ? fb : fa; back.src = img(k); back.style.opacity = 1; front.style.opacity = 0; front = back; };
+  const move = e => {
+    const row = e.target.closest('.wv5-row'); if (!row) return;
+    show(row.dataset.k); root.classList.add('is-peek');
+    const w = fol.offsetWidth, h = fol.offsetHeight, x = Math.min(innerWidth - w - 16, e.clientX + 24), y = Math.max(16, Math.min(innerHeight - h - 16, e.clientY - h - 24));
+    fol.style.transform = `translate3d(${x}px,${y}px,0)`;
+  };
+  const leave = () => root.classList.remove('is-peek');
+  list.addEventListener('pointermove', move); list.addEventListener('pointerleave', leave);
+  const onScroll = () => root.classList.remove('is-peek'); addEventListener('scroll', onScroll, { passive: true });
+  return () => { list.removeEventListener('pointermove', move); list.removeEventListener('pointerleave', leave); removeEventListener('scroll', onScroll); };
+}
+
+export default { 1: tiles, 2: push, 3: blinds, 4: honest, 5: index };

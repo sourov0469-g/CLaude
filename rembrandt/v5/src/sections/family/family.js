@@ -21,6 +21,9 @@ function masked(root, c) {
   const cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
   beats(root, [root.querySelector('.fm1-frame'), root.querySelector('.fm1-h'), root.querySelectorAll('.fm1-facts li'), [root.querySelector('.fm1-call'), root.querySelector('.fm1-photo')]]);
+  // R3 P7 (S1325): the facts' rail fills sun as the list passes through the view
+  const facts = root.querySelector('.fm1-facts'); facts.style.setProperty('--rail', 0);
+  ScrollTrigger.create({ trigger: facts, start: 'top 85%', end: 'bottom 55%', scrub: true, onUpdate: s => facts.style.setProperty('--rail', s.progress.toFixed(3)) });
   gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 82%', once: true } })
     .fromTo(root.querySelectorAll('.fm1-frame path, .fm1-frame rect'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05 }, 0)
     .fromTo([im, root.querySelector('.fm1-under')], { y: 60 }, { y: 0, duration: 0.3, ease: EASE }, 0.1);
@@ -53,37 +56,26 @@ function masked(root, c) {
   return cleanup;
 }
 
-// v2 ⟦S1327⟧ scroll-scrubbed word reveal (STRONG): a marked-up passage becomes readable word by word as scroll advances:
-// word progress = clamp(reveal * N - i) with ~20% overlap; opacity 0.12 -> 1, blur 6px -> 0, y 0.12em -> 0; text nodes
-// split with a TreeWalker (never innerHTML); one untouched accessible copy kept; no easing in the scroll mapping.
-// Adapted: a short statement in the firm's voice (not a quote; attributed to no one). In step with it, a roof draws over
-// the passage: ridge first, then shingle courses from the eave up, the order they go on. Reduced motion: all shown.
+// v2, R3 F4-V2: ⟦S1329⟧ staggered word reveal (once): words rise from y 20 and fade in, 0.8s cubic-bezier(0.16,1,0.3,1),
+// 0.07s apart, when the statement reaches 80% of the view; the statement is the section's h2. The house draws once
+// with it: ridge and eave 0.9s power3.out, then the 8 courses 0.08s apart. Reduced motion: all shown.
 function statement(root, c) {
   const p = root.querySelector('.fm2-say'), ridge = root.querySelector('.fm2-ridge'), eave = root.querySelector('.fm2-eave'), courses = [...root.querySelectorAll('.fm2-courses path')];
-  const done = [];
-  const cleanup = () => done.forEach(f => f());
+  const done = [], cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
-  parallax(root); // the background courses travel at their own scroll rate (data-sy)
-  const copy = document.createElement('p'); copy.className = 'vh'; copy.textContent = p.textContent; p.after(copy); p.setAttribute('aria-hidden', 'true');
-  const walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT), nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
-  const words = [];
-  for (const n of nodes) {
-    const frag = document.createDocumentFragment();
-    for (const part of n.textContent.split(/(\s+)/)) { if (!part) continue; if (/^\s+$/.test(part)) { frag.append(part); continue; } const w = document.createElement('span'); w.className = 'w'; w.textContent = part; words.push(w); frag.append(w); }
-    n.replaceWith(frag);
-  }
-  done.push(() => { copy.remove(); p.removeAttribute('aria-hidden'); p.textContent = copy.textContent; });
-  const N = words.length, ord = courses.slice().reverse(); // bottom course first
-  gsap.set(ridge, { drawSVG: '0%' }); gsap.set(eave, { drawSVG: '50% 50%' }); gsap.set(ord, { drawSVG: '0%' });
-  const render = r => {
-    words.forEach((w, i) => { const k = gsap.utils.clamp(0, 1, (r * (N + 1.2) - i) / 1.2); w.style.opacity = (0.12 + 0.88 * k).toFixed(3); w.style.filter = k > 0.98 ? '' : `blur(${(6 * (1 - k)).toFixed(2)}px)`; w.style.transform = k > 0.98 ? '' : `translateY(${(0.12 * (1 - k)).toFixed(3)}em)`; });
-    gsap.set(eave, { drawSVG: `${50 - 50 * Math.min(1, r * 3)}% ${50 + 50 * Math.min(1, r * 3)}%` });
-    gsap.set(ridge, { drawSVG: `${100 * gsap.utils.clamp(0, 1, (r - 0.1) * 3)}%` });
-    ord.forEach((cp, i) => gsap.set(cp, { drawSVG: `${100 * gsap.utils.clamp(0, 1, (r - 0.35) * ord.length * 1.6 - i)}%` }));
-  };
-  render(0);
-  ScrollTrigger.create({ trigger: p, start: 'top 88%', end: 'bottom 38%', scrub: true, onUpdate: s => render(s.progress), onRefresh: s => render(s.progress) });
-  beats(root, [root.querySelector('.fm2-photo'), root.querySelector('.fm2-call')]); // the house start (top 94%): a later start left the call link invisible in the lowest quarter of the screen
+  parallax(root); // the skyline travels at its own scroll rate (data-sy)
+  const text = p.textContent, words = [];
+  p.setAttribute('aria-label', text); p.textContent = '';
+  text.split(/(\s+)/).forEach(part => { if (!part) return; if (/^\s+$/.test(part)) { p.append(part); return; } const w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden', 'true'); w.textContent = part; words.push(w); p.append(w); });
+  done.push(() => { p.textContent = text; p.removeAttribute('aria-label'); });
+  gsap.set(words, { y: 20, opacity: 0 }); gsap.set([ridge, ...courses], { drawSVG: '0%' }); gsap.set(eave, { drawSVG: '50% 50%' });
+  const st = ScrollTrigger.create({ trigger: p, start: 'top 80%', once: true, onEnter: () => {
+    gsap.to(words, { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out', stagger: 0.07 }); // expo.out = cubic-bezier(0.16,1,0.3,1)
+    gsap.timeline().to(ridge, { drawSVG: '100%', duration: 0.9, ease: 'power3.out' }, 0).to(eave, { drawSVG: '0% 100%', duration: 0.9, ease: 'power3.out' }, 0)
+      .to(courses.slice().reverse(), { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.08 }, 0.9);
+  } });
+  done.push(() => st.kill());
+  beats(root, [root.querySelector('.fm2-photo'), root.querySelector('.fm2-call')]);
   return cleanup;
 }
 
@@ -91,8 +83,10 @@ function statement(root, c) {
 // labels appearing in stages, connectors drawing; emphasis by brightness and line weight. Adapted: a king-post roof
 // truss on blueprint blue; each member carries one true fact (pills are the accessible control; the members mirror them
 // for the pointer). Plywood roof-deck sheets behind light up under the pointer.
-const ANCHOR = { bunk: [500, 62], wade: [500, 220], rachel: [300, 360], bbb: [395, 288], oc: [605, 288], addr: [937, 357] };
-const SAY = { bunk: 'Founded in 1995 by Franklin "Bunk" Walker.', wade: 'His son, Wade Walker, has been president since 2015.', rachel: 'Rachel answers the phone, Monday to Friday, 9 to 5.', bbb: 'BBB A+, accredited since 2001.', oc: 'An Owens Corning Platinum Preferred contractor.', addr: 'The office: 38 N Pioneer Blvd, Springboro, OH 45066.' };
+const ANCHOR = { bunk: [500, 62], wade: [500, 220], rachel: [300, 360], crew: [937, 357] };
+const SAY = { bunk: 'Founded in 1995 by Franklin "Bunk" Walker.', wade: 'His son, Wade Walker, has been president since 2015.', rachel: 'Rachel answers the phone, Monday to Friday, 9 to 5.', crew: 'Today, the crew in company shirts, under the Rembrandt sign.' };
+// R3 F4-V3: the crew photo's crop widens with each member (the sign, then the group, then everyone); never a face crop
+const CROP = { bunk: [1.7, '50%', '12%'], wade: [1.35, '50%', '35%'], rachel: [1.15, '50%', '55%'], crew: [1, '50%', '50%'] };
 function truss(root, c) {
   const svg = root.querySelector('.fm3-truss'), leads = root.querySelector('.fm3-leads'), say = root.querySelector('.fm3-say');
   const pills = [...root.querySelectorAll('.fm3-pill')], members = [...svg.querySelectorAll('.m')];
@@ -113,7 +107,9 @@ function truss(root, c) {
     members.forEach(m => m.classList.toggle('is-on', m.dataset.m === k));
     Object.entries(paths).forEach(([id, p]) => p.classList.toggle('is-on', id === k));
   };
-  const pin = k => { pinned = pinned === k ? null : k; pills.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === pinned))); show(pinned); say.textContent = pinned ? SAY[pinned] : ''; };
+  const crop = root.querySelector('.fm3-crop');
+  const pin = k => { pinned = pinned === k ? null : k; pills.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === pinned))); show(pinned); say.textContent = pinned ? SAY[pinned] : ''; const [z, ox, oy] = CROP[pinned || 'crew']; crop.style.setProperty('--z', z); crop.style.setProperty('--ox', ox); crop.style.setProperty('--oy', oy); };
+  pin('bunk'); // R3: Bunk is selected from the start (a clear selected state, S1314 §7)
   const over = e => { const t = e.target.closest('[data-m]'); if (t && (e.pointerType === 'mouse' || e.type === 'focusin')) show(t.dataset.m); };
   const out = e => { const t = e.target.closest('[data-m]'); if (t && (!e.relatedTarget || !e.relatedTarget.closest || e.relatedTarget.closest('[data-m]') !== t)) show(pinned); };
   const click = e => { const t = e.target.closest('[data-m]'); if (t) pin(t.dataset.m); };
@@ -129,7 +125,7 @@ function truss(root, c) {
   const cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
   beats(root, [root.querySelector('.fm3-h'), root.querySelector('.fm3-note')]);
-  // staged: the members draw, then the pills arrive by role (people, credentials, office) and their connectors draw
+  // staged: the members draw, then the pills arrive and their connectors draw
   gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 80%', once: true }, onComplete: layout })
     .fromTo(members, { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.05 }, 0)
     .fromTo(pills, { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform,opacity,visibility' }, 0.25)
@@ -137,4 +133,26 @@ function truss(root, c) {
   return cleanup;
 }
 
-export default { 1: masked, 2: statement, 3: truss };
+// v4 (R3, new): [BANK] Harvest [201] CSS-only flip card (deep read slice 8, entry 523): the turn is CSS (.36s --ease-x);
+// JS only toggles aria-pressed on click. The cards enter once, 60ms apart. Reduced motion swaps the faces (CSS).
+function cards(root, c) {
+  const btns = [...root.querySelectorAll('.fm4-card')];
+  const onClick = e => { const b = e.target.closest('.fm4-card'); if (b) b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); };
+  root.addEventListener('click', onClick);
+  if (c.motion) beats(root, [root.querySelector('.fm4-h'), root.querySelector('.fm4-note'), root.querySelectorAll('.fm4-li'), root.querySelector('.fm4-call')], { stagger: 0.06 });
+  return () => root.removeEventListener('click', onClick);
+}
+
+// v5 (R3, new): ⟦S1354⟧ agency-grid-layout-minimal: masked text reveals and a slow image settle, once. The headline lines
+// rise from yPercent 100 inside their masks (.5s, 60ms apart); the panorama settles from scale 1.06 to 1 over 1.2s.
+function pano(root, c) {
+  if (!c.motion) return;
+  const ln = root.querySelectorAll('.fm5-h .ln > span'), im = root.querySelector('.fm5-pano img');
+  gsap.set(ln, { yPercent: 100 }); gsap.set(im, { scale: 1.06 });
+  const a = ScrollTrigger.create({ trigger: root.querySelector('.fm5-h'), start: 'top 85%', once: true, onEnter: () => gsap.to(ln, { yPercent: 0, duration: 0.5, ease: EASE, stagger: 0.06 }) });
+  const b = ScrollTrigger.create({ trigger: root.querySelector('.fm5-pano'), start: 'top 90%', once: true, onEnter: () => gsap.to(im, { scale: 1, duration: 1.2, ease: 'power2.out' }) });
+  beats(root, [root.querySelectorAll('.fm5-row'), root.querySelector('.fm5-call')], { stagger: 0.05 });
+  return () => { a.kill(); b.kill(); };
+}
+
+export default { 1: masked, 2: statement, 3: truss, 4: cards, 5: pano };

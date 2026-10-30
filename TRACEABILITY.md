@@ -89,3 +89,33 @@ The challenge record (accept / improve / reject, with reasons) is AUDIT-R3.md. R
 8. Height beat ⟦S1498⟧ ⟦S1499⟧ (C4): V2 phone 1439 → 1106; V5 1440 797 → 934. FIXED.
 9. Occlusion ⟦S1306⟧ ⟦S1314 §2⟧: the helper missed controls that fade in after the last scroll (V3 link, V4 frame). FIXED: re-check every 250ms; 0 overlaps (check dwell 520ms).
 10. Responsive clipping ⟦S1314 §10⟧: V3 "Platinum" was cut in a half-width phone cell. FIXED (full-row cell). Facts gate updated so only backup B1 (the kept Constellation) is exempt from the "accredited" wording: PASS, FAILS 0; console 0.
+
+### R3 Work (rows written before the code; challenge in AUDIT-R3.md F3/G)
+| Slot | Version | Reference | Mechanism and parameters | Adaptation | Verification |
+|---|---|---|---|---|---|
+| 1 | V1 Filmstrip (fixed, default) | [BANK] Q361 horizontalLoop (unchanged) + pack F3 | 200px/s drift; pointerenter on the strip holds, pointerleave resumes unless held; tile click and arrows 0.45s power1.inOut; caption .15s; brightness(.7) off-centre; bubble one 0.6s drift on hover; nails 0.025s apart | glow and speed square removed; tape hidden on phones; pause label + filled face follow the held state (E3); data-c="tile" || PASS: holds while hovered and resumes on leave; Next settles in the 0.45s step; held state: label "Play the moving photos" + ink face (E3); 0 helper overlaps; tape hidden on phones |
+| 2 | V2 Gable grid (fixed) | [BANK] Q157 push grid + Q147 (pack F3-V2) | Flip.from 0.45s --ease-x (scale, prune); gable cap ease-out (no back overshoot) on hover only; captions always on (small) | wallpaper removed; ba2 before|after side by side in the top row as one job || PASS: ba2 before|after adjacent (top row, both widths); captions always on and wrapping at 320; Flip 0.45s; open/Esc returns focus |
+| 3 | V3 Course blinds (fixed) | [BANK] Q38 SVG mask blinds (pack F3-V3) | scrub 0 = 100% before, 1 = 100% after, courses laid roofline-first (top → bottom), labels switch at 50%; hammer rides the leading course | drip removed; nail row kept; phones tighter || PASS: scrub start 0 courses (before) / end 16 (after), labels agree; roofline-first order; 1440 height 1250 → 1160 |
+| 4 | V4 Two jobs, told straight (new) | [BANK] Checklist 11 + ⟦S1314⟧ product truth | two-column case file; job 1 ba2 before/after adjacent (one pair), job 2 one photo with "No before photo of this one"; columns enter once (y 16, 300ms, 60ms apart); photos clip-reveal inset 0.45s | captions say what each photo is and is not || PASS: one genuine pair + one photo labelled "No before photo of this one"; 0 overflow 320-1440 |
+| 5 | V5 Job index (new) | [BANK] VERDE (archive index rows with mini thumbnails; preview follower via 0.2s CSS transition on transform; no JS lerp) | six rows (job name, what the photo shows, a 3:2 mini thumbnail); hover/focus: a 360px preview follows the pointer (transform transition 0.2s --ease-x), crossfading between jobs 150ms; phones: no follower, the row thumbnail is the photo | the six real jobs, captions only from what the photos show || PASS: six rows with thumbnails (touch/keyboard lose nothing); follower on fine pointers only, 0.2s transform transition |
+
+### R3 Family (rows written before the code; challenge in AUDIT-R3.md F4/G)
+| Slot | Version | Reference | Mechanism and parameters | Adaptation | Verification |
+|---|---|---|---|---|---|
+| 1 | V1 WALKER (polished, default) | [BANK] Q95 Masked Heading (unchanged animation) + pack F4 P1-P8 | truss lifted so its plate sits at y=190, above the letters' cap line; web struts dropped; figure max 52svh; door press .22s, call :active .97 160ms; will-change removed from the SVG; 2px rail beside the facts filling sun (scrub, S1325); <768px rafters + plate only | ink; H2 at the role | |
+| 2 | V2 Statement (fixed) | ⟦S1329⟧ staggered word reveal (y20, 0.8s (0.16,1,0.3,1), stagger .07, start top 80%, once) + DrawSVG house | ridge/eave 0.9s power3.out, 8 courses .08 apart after; the statement is the h2 (role); call icon one 160ms tilt | ink; faces centred in the 4:5 crop | |
+| 3 | V3 Truss (fixed) | ⟦S1362⟧ technical wireframe (pack F4-V3) | members = Bunk rafter, Wade king post, Rachel tie beam, the crew; Bunk pre-selected; hover dims others to .55; spotlight brightness 1.6, r 180; crop follows the selection | BBB/OC/address pills removed; say line its own row; ink | |
+| 4 | V4 Three cards (new) | [BANK] Harvest [201] CSS flip card (perspective 1000px, preserve-3d, backface hidden, rotateY 180°, class toggle) | three buttons (aria-pressed): fronts 1995 Bunk / 2015 Wade / Today Rachel; backs the one-sentence fact; turn .36s --ease-x; reduced motion swaps faces without the turn; cards enter once 60ms apart | facts only; Rachel's back holds the tel: link | |
+| 5 | V5 Editorial panorama (new) | ⟦S1354⟧ agency-grid-layout-minimal | 12-col grid: H2 "One family since 1995." over cols 1-8, facts as a <dl> in cols 9-12 (label role terms), crew photo as a 21:9 panorama under; image settles scale 1.06→1 over 1.2s once; masked text rise (yPercent 100→0, .5s, 60ms apart) once | ink; label role instead of caps | |
+
+**R3 Work QA rounds** (`r3qa.mjs`, `workR.mjs`, `workE3.mjs`, `occl.mjs`; log `qa/gate/r3-work.log`):
+1. Overflow and clipping, 320-1440: V2's "Our truck at a ranch job" caption overran its tile at 320 (nowrap pill). FIXED: tags wrap inside the tile.
+2. Type roles ⟦S1500⟧: H2 48/32 everywhere. V2's title is centred because the symmetric gallery frame calls for it (the C3 exception). Kept.
+3. Contrast ⟦S1497⟧: 0 pairs under threshold. No change.
+4. Play state shown ⟦S1314 §7⟧ (E3): the control said "Pause" after a click had stopped the strip. FIXED: label and ink face follow the state.
+5. Hover hold (WCAG 2.2.2, ⟦S1314 §8⟧): the strip holds under the pointer and resumes after. PASS.
+6. Step timing ⟦S0063⟧ Std 4: arrows and tile clicks 0.45s (measured settle ~0.58s including polling). PASS.
+7. Honest end states ⟦S1314⟧ (product truth): V3 at scrub start shows 0 courses (all before), at the end 16 (all after); labels agree. PASS.
+8. Focus return ⟦S1314 §7⟧: V2 open moves focus to Close; Esc closes and returns focus to the tile. PASS.
+9. Occlusion ⟦S1306⟧: 5 versions × 2 windows, 0 helper overlaps (V1's pause/next included). PASS.
+10. Height beat ⟦S1498⟧ (C4): V3 1250 → 1160 at 1440 (frame capped at 62svh). FIXED. Console 0; facts gate PASS.

@@ -1,0 +1,45 @@
+work v1 @320: h 797 els 76 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v2 @320: h 845 els 49 ov 0 heads H2:32/700/C caps[] lowc[] clip[Our truck at a r] small[] err 0
+work v3 @320: h 704 els 78 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v4 @320: h 1045 els 20 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v5 @320: h 1084 els 37 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v1 @375: h 715 els 76 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v2 @375: h 935 els 49 ov 0 heads H2:32/700/C caps[] lowc[] clip[] small[] err 0
+work v3 @375: h 736 els 78 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v4 @375: h 1105 els 20 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v5 @375: h 1134 els 37 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+work v1 @768: h 872 els 76 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+work v2 @768: h 1019 els 49 ov 0 heads H2:38/700/C caps[] lowc[] clip[] small[] err 0
+work v3 @768: h 866 els 78 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+work v4 @768: h 1384 els 20 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+work v5 @768: h 1015 els 37 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+work v1 @1024: h 928 els 76 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+work v2 @1024: h 1069 els 49 ov 0 heads H2:44/700/C caps[] lowc[] clip[] small[] err 0
+work v3 @1024: h 1060 els 108 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+work v4 @1024: h 820 els 20 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+work v5 @1024: h 1071 els 37 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+work v1 @1440: h 1017 els 76 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v2 @1440: h 1148 els 49 ov 0 heads H2:48/700/C caps[] lowc[] clip[] small[] err 0
+work v3 @1440: h 1250 els 108 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v4 @1440: h 1026 els 20 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v5 @1440: h 1165 els 37 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v1 @1440 rm: h 1017 els 76 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v2 @1440 rm: h 1148 els 49 ov 0 heads H2:48/700/C caps[] lowc[] clip[] small[] err 0
+work v3 @1440 rm: h 938 els 26 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v4 @1440 rm: h 1026 els 20 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v5 @1440 rm: h 1165 els 37 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+work v1 @1440: 16 steps, overlaps 0
+work v2 @1440: 18 steps, overlaps 0
+work v3 @1440: 18 steps, overlaps 0
+work v4 @1440: 17 steps, overlaps 0
+work v5 @1440: 18 steps, overlaps 0
+work v1 @620: 14 steps, overlaps 0
+work v2 @620: 18 steps, overlaps 0
+work v3 @620: 14 steps, overlaps 0
+work v4 @620: 18 steps, overlaps 0
+work v5 @620: 20 steps, overlaps 0
+V1 hover: held while over true, moving after leave true; control false "Pause the moving photos" bg rgba(0, 0, 0, 0)
+V1 after Next: settled ~587ms; control true "Play the moving photos" bg rgb(11, 31, 77)
+V3 at scrub start: before courses laid 0; at scrub end: after courses laid 16
+V2 open: true "Same house, before" focus wv2-close rx; after Esc open false, focus wv2-item wa rx
+errors 0
