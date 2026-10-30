@@ -9,7 +9,11 @@ for (const [file, ids, max] of PAGES) {
   await p.goto(`file:///home/user/CLaude/rembrandt/v5/${file}`); await p.waitForTimeout(1200);
   const rows = [];
   for (const id of ids) {
-    await p.evaluate(id => { const s = document.getElementById(id); scrollTo(0, s.getBoundingClientRect().top + scrollY + 40); }, id); await p.waitForTimeout(700);
+    // scroll like a user (wheel, through Lenis) until the section sits at the screen centre; a native scrollTo while Lenis
+    // drives the page, right after height-changing swaps, left ScrollTrigger's "in view" behind (a test artefact, R5)
+    await p.mouse.move(720, 450); let mid = '';
+    for (let i = 0; i < 12 && mid !== id; i++) { const d = await p.evaluate(id => document.getElementById(id).getBoundingClientRect().top - innerHeight / 2 + 60, id); await p.mouse.wheel(0, d); await p.waitForTimeout(700);
+      mid = await p.evaluate(() => { const s = document.elementsFromPoint(innerWidth / 2, innerHeight / 2).map(e => e.closest && e.closest('section[data-section]')).find(Boolean); return s ? s.id : ''; }); }
     const got = [];
     for (let k = 1; k <= max; k++) { await p.keyboard.press(String(k)); await p.waitForTimeout(250); got.push(await p.evaluate(id => document.getElementById(id).dataset.v, id)); }
     let past = 'n/a'; if (max < 8) { await p.keyboard.press(String(max + 2)); await p.waitForTimeout(200); past = await p.evaluate(id => document.getElementById(id).dataset.v, id); }
@@ -17,7 +21,7 @@ for (const [file, ids, max] of PAGES) {
     const keysOk = got.every((v, i) => v === String(i + 1)), pastOk = past === 'n/a' || past === String(max), ok = keysOk && pastOk && click === '2';
     n++; if (!ok) bad++; rows.push(`${id}:${ok ? 'ok' : 'BAD keys ' + got.join('') + ' past ' + past + ' click ' + click}`);
   }
-  await p.keyboard.press('b'); await p.waitForTimeout(300);
+  await p.keyboard.press('b'); await p.waitForTimeout(900);
   const bk = await p.evaluate(() => [...document.querySelectorAll('.pick-bk')].filter(x => x.getBoundingClientRect().width > 0).length + '/' + document.querySelectorAll('.pick-bk').length);
   console.log(file, rows.join(' '), '| B key shows backup buttons:', bk, '| errors', errs.length ? errs.join(' | ').slice(0, 200) : 0); if (errs.length) bad++;
   await p.close();

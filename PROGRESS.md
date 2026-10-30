@@ -562,3 +562,34 @@ Then a design review of all 72 homepage versions and all 40 inner-page section v
 - **Towns V1 ring:** a few label pairs sit close at the 15-20 mile ring; their positions are the towns' true bearings, so moving them would misstate geography.
 - **Accent bands:** the orange band on most Call versions is the one committed accent ground, allowed by the directive.
 - **No backups for the close sections and Contact's area section:** they have no earlier generation, so nothing was faked.
+
+**Late findings from the final click-through** (fixed in the gate commit):
+- **A genuine shortcut bug (`qa/scripts/keytest.mjs`):** clicking a picker label focused its radio. The page's keyboard handler ignored every key while any input had focus, so after a click the 1-8 and B shortcuts went dead until the visitor clicked elsewhere. Now only text-entry fields swallow the shortcuts.
+- **Contact head V3:** the closed days' text was `--n500` on the tint (3.39:1), now `--n700`; the "Now" tag rose from 11px to 12px.
+- **Contact head V4:** the brand label was accent on the accent panel (1.88:1), now black.
+- **Close V5:** the phone links now have 44px hit areas.
+
+**Fresh gate evidence** (`rembrandt/v5/qa/gate/r5-final-*.log`):
+- **Tokens** (`r5-final-tokens.log`, `qa/scripts/tokengate.py`):
+  - 20 declared tokens; scanned 51 hex, 125 rgb(), 0 hsl(), 0 oklch() (40 oklch removed this round).
+  - 4 exceptions, none a UI colour: 2 alpha masks, 1 offscreen canvas sampled for alpha, 1 bank reference number in a comment.
+- **Light** (`r5-final-browser.log`, run with motion):
+  - 87 visible versions: homepage 9 sections x 8, Services 3 x 5, About 3 x 5, Contact 2 x 5 (one page load per version number).
+  - 0 black or near-black grounds, 0 large dark panels, 0 deep-green grounds. The lowest ground is the orange Call band (luminance 0.287).
+  - Every visible button keeps its ground.
+- **Logo:** header, footer and favicon on all four pages.
+- **Facts** (`r5-final-facts.log`): FAILS 0 on all four pages; 353-9711, 24/7 and "licen" occur 0 times; all eight Storm versions say the insurer decides.
+- **Integrity:**
+  - Homepage: 7 sections at 8 visible + 8 backups = 16; Services and Storm at 8 + 5 = 13 (they have no B1-B3 generation).
+  - Inner pages: sphero, abhero and cthero at 5 + 5; svcp and about at 5 + 5; spclose, abclose and contact at 5 + 0.
+  - Backups open: 66 of 66 existing homepage backups (`r5-final-bkopen.log`; the 6 "BAD" are the absent Services and Storm B1-B3); 25 of 25 inner-page backups (`r5-final-clickthrough.log`).
+  - No existing backup file changed or was deleted in R5 (`git diff --name-status 45ad7a2..HEAD -- '*/bk/*'` shows only additions), and no source file was deleted.
+- **Switchers** (`r5-final-keys.log`): all 17 sections switch by number key and by picker click; keys past a page's fifth version change nothing; B shows the backup buttons on every page; errors 0.
+- **Interactive click-through** (`r5-final-clickthrough.log`), errors 0 everywhere:
+  - The roof squares calculator: drag 21.2, sliders 45.3, keyboard 33.0, all matching the geometry.
+  - The How truck and work order; the Storm checklist and damage marks.
+  - The Towns radius, quilt and signs; the Call door and tear-off.
+  - The Contact card, week board, distance bands and town checker.
+- **Sweep** (`r5-final-sweep-all.log`, `r5-final-sweep-pages.log`, every visible version at 1440 and 375):
+  - Overflow 0, errors 0, one H1 per page.
+  - Left items are the judged residuals listed above (decorative wordmark, a star graphic at 3:1, inline text links, and the footer phone link, whose hit area the scanner cannot see).

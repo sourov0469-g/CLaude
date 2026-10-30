@@ -424,6 +424,6 @@ html.cmp-on .cmp{display:block}
 .sc5-facts,.ac5-facts{list-style:none;margin:6px 0 0;padding:0;display:grid;width:100%}
 .sc5-facts li,.ac5-facts li{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:12px;padding:12px 0;border-top:2px solid var(--black)}
 .sc5-facts b,.ac5-facts b{font:600 var(--t-label) var(--f-head);color:var(--a700)}
-.sc5-facts a,.ac5-facts a{color:var(--black);font-weight:700}
+.sc5-facts a,.ac5-facts a{display:inline-flex;align-items:center;min-height:44px;margin-block:-10px;color:var(--black);font-weight:700} /* R5: 44px hit area, row height unchanged */
 @media (max-width:760px){.sc1-card,.ac1-card{grid-template-columns:1fr}.sc1-card>.btn,.ac1-card>.btn{grid-column:1;grid-row:auto}.sc3,.ac3,.sc4,.ac4,.sc5,.ac5{grid-template-columns:1fr}.sc3-ph,.ac3-ph{max-width:260px}}
 @media (max-width:400px){.sc2-num,.ac2-num{font-size:2.125rem}}

@@ -169,7 +169,7 @@ function start(mods) {
   let inView = ORDER[0];
   for (const sec of ORDER) ScrollTrigger.create({ trigger: sec, start: 'top center', end: 'bottom center', onToggle: s => { if (s.isActive) inView = sec; } });
   addEventListener('keydown', e => {
-    if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable]')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input:not([type=radio],[type=checkbox],[type=range],[type=button]),textarea,select,[contenteditable]')) return; // R5: only text entry swallows the shortcuts (a clicked picker radio used to)
     if (/^[1-8]$/.test(e.key)) switchTo(inView, e.key);
     else if (e.key === 'b' || e.key === 'B') { const on = !document.documentElement.classList.toggle('bk-shown') ? false : true; for (const sec of ORDER) showBk(sec, on); }
     else if (e.key === 't' || e.key === 'T') document.documentElement.classList.toggle('picks-off');
