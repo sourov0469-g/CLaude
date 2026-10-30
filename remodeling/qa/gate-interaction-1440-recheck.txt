@@ -1,0 +1,19 @@
+width 1440: tested 110, failed 5, n/a at this width 0, not on screen/err 13, page errors 0
+FAIL work1 P‑01Navy Blue Shaker Kitchen ~t:P-01/frame/flash/tr hover true clear true click false job true 
+FAIL services2 Open the scope ~sander/rail/chips/r hover false clear true click false job true at 787,379 under=P.services2__p own=false rect=747,354,158,49 rx={"phase":"hover","hover":false,"drawn":false,"click":false} viewer=false pre=btn btn--ghost services2__toggle has-rx
+FAIL services2 Open the scope ~chisel/rail/chips/r hover false clear true click false job true at 787,400 under=H3.services2__h own=false rect=747,375,160,50 rx={"phase":"hover","hover":false,"drawn":false,"click":false} viewer=false pre=btn btn--ghost services2__toggle has-rx
+FAIL consult2 Send my request ~envelope/zip/burst/r hover true clear true click false job true 
+FAIL financing3 Ask which fits your project ~ruler/rail/tick/r hover true clear true click false job true 
+SKIP work1 P‑03Modern Farmhouse Whole-H ~t:P-03/frame/flash/tr not on screen {"x":960.09375,"y":-771.640625,"w":439.90625,"h":391.5625,"vis":true}
+SKIP work1 P‑05Polished-Concrete Primar ~t:P-05/frame/flash/tr not on screen {"x":500.046875,"y":-340.4375,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑07Emerald Shaker Kitchen R ~t:P-07/frame/flash/tr not on screen {"x":40,"y":-340.21875,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑09Chef-Grade Kitchen Remod ~t:P-09/frame/flash/tr not on screen {"x":960.09375,"y":-767.21875,"w":439.90625,"h":411.0625,"vis":true}
+SKIP work1 P‑11Modern Open-Concept Kitc ~t:P-11/frame/flash/tr not on screen {"x":500.046875,"y":-340,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑13Two-Tone Kitchen Remodel ~t:P-13/frame/flash/tr not on screen {"x":40,"y":-335.78125,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑15Two-Tone Navy & White Ki ~t:P-15/frame/flash/tr not on screen {"x":960.09375,"y":-771.78125,"w":439.90625,"h":411.0625,"vis":true}
+SKIP work1 P‑17Two-Tone Kitchen Remodel ~t:P-17/frame/flash/tr not on screen {"x":500.046875,"y":-340.5625,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑19Champagne Bronze & Marbl ~t:P-19/frame/flash/tr not on screen {"x":40,"y":-340.359375,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑21Floating Vanity Primary  ~t:P-21/frame/flash/tr not on screen {"x":960.09375,"y":-769.359375,"w":439.90625,"h":411.0625,"vis":true}
+SKIP work1 P‑23Navy Vanity Bathroom Rem ~t:P-23/frame/flash/tr not on screen {"x":500.046875,"y":-337.140625,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 P‑25Multi-Bathroom Renovatio ~t:P-25/frame/flash/tr not on screen {"x":40,"y":-339.921875,"w":439.890625,"h":411.046875,"vis":true}
+SKIP work1 Show the featured twelve ~grid/pop/burst/r not on screen {"x":40,"y":-698.875,"w":241.25,"h":52,"vis":true}

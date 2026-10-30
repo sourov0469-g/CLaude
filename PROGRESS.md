@@ -54,17 +54,19 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
 | C4 | "Every section gets 3 rebuilds unless they pass §4 with evidence" vs. the current file already being a full rebuild of the owner-reviewed versions. | Every version is re-audited against §4 (Phase 1). Versions whose design passes and whose defects are system-level (reactions, dosing, cursor) are fixed in place and must then pass the §12 gate; versions that fail on design, facts or trick repetition are rebuilt to a new reference. | The owner's rejection applied to the 68f8ff5 designs, all of which are already gone (baseline sheets). |
 | C5 | "NO plain or fixed cursor" vs. text fields needing a precise caret. | System arrow hidden on fine pointers while the companion is on; the companion carries an exact pointer tip that changes form per target. Text inputs keep the native I-beam (`cursor:text`) because caret placement must be exact; the companion still reacts there. Touch, reduced motion and "Off" restore the system cursor. | §1.13 nothing broken ships; a lagging tip over a text field breaks caret placement. |
 | C6 | Section switcher (1·2·3) and Settings buttons are review tools, not site UI, yet rule 5 says every button. | They get reactions too (one per section switcher, each digit drawn differently), tested like everything else. | Rule 5 has no exemption. |
+| C7 | §4 "not a document" share rule (centrepiece ≥ .35 of the version) vs Consult V3, whose job is the phone call: the giant number and ringing handset are the centrepiece, the call-back form sits beside it (share .18). | **Kept, recorded as an exception, not a pass of the rule.** Prose 43 ≤ 60 and it reacts (ptr 215). | §3B asks the sections to stop reading like documents; a contact section whose hero is the phone number meets that intent. Re-measuring the form as centrepiece to clear the number would be gaming the measure. |
 
 ---
 
 ## Open issues (live list)
 
-- [ ] Phase 1 re-audit rows (TRACEABILITY.md) for all 30.
-- [ ] Hero V2 restore + proof line + before/after comparison.
-- [ ] Reaction uniqueness: 218 interactive elements measured on baseline; many share reactions or have none (see Phase 3).
-- [ ] Repeated tricks (see PLAN-FULL §2).
-- [ ] Reveal dosing 0.15–0.3s across all sections.
-- [ ] Cursor: system arrow still shows (C5).
+- [x] Phase 1 re-audit rows (TRACEABILITY.md) for all 30.
+- [x] Hero V2 restore + proof line + before/after comparison.
+- [x] Reaction uniqueness: 273/273 covered, 0 duplicate specs (`gate-rxcheck.txt`).
+- [x] Repeated tricks (PLAN-FULL §2 register).
+- [x] Reveal dosing 0.15–0.3s (centrepiece mechanisms keep their reference timing: report §5).
+- [x] Cursor (C5 ruling; companion 162/0).
+- [ ] rxtest still flags five 1440 rows that pass by hand (report §5).
 
 ---
 
@@ -216,7 +218,7 @@ Tools: `remodeling/src/tools/` (gate.js, hygiene.js, scrollqa.js, rxtest.js, bud
 | 5 | Banned patterns | PASS | weight tweens 0; BA pairs 4; 3 refs per section |
 | 6 | Traceability + 3 random refs | PASS | Work V1/Q157, BA V3/Eleos, Services V3/Q91 re-opened and matched |
 | 7 | Switchers, forms | PASS | 30 switches, wrong 0, triggers 58→58; 3 forms: empty rejected, valid → 1 mailto to Sales@ |
-| 8 | Screenshots 30 × 2 widths | see below | `final-1440.jpg`, `final-375.jpg` |
+| 8 | Screenshots 30 × 2 widths | PASS | `remodeling/qa/final-1440.jpg`, `final-375.jpg` (60 frames, `final-shots/console.txt`: console clean); defects found and fixed are listed below |
 | 9 | Console, overflow, ids, companion, RM | PASS | scroll QA 12 runs errs 0 / overflow 0; hygiene 0 fails at 5 widths; ids 8/8; companion 162/0, touch + RM off |
 | 10 | Weight | PASS | 3,858,286 ≤ 3,865,525; media 2,996,362 · fonts 57,606 · code 804,318 (libraries 271,680) |
 
