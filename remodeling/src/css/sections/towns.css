@@ -6,33 +6,34 @@
 @media (max-width: 1023px) { .towns__head .t-head, .towns__head .towns__lead { grid-column: 1 / -1; } .towns__head .towns__lead { margin-top: var(--s4); } }
 
 /* ---------- v1 · The survey ---------- */
-.towns1__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.towns1__side { grid-column: 1 / span 6; display: grid; gap: var(--s6); }
+.towns1__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s6); }
+.towns1__head .t-head { grid-column: 1 / span 6; }
+.towns1__head .towns__lead { grid-column: 8 / span 5; }
+.towns1__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s4); }
 .towns1__tabs { display: flex; flex-wrap: wrap; gap: 10px; }
 .towns1__tab { min-height: 44px; padding: 0 16px; background: none; border: 0; box-shadow: inset 0 0 0 1px var(--line-soft); color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
 .towns1__tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
-.towns1__tab .nums { opacity: .7; margin-left: 4px; }
-.towns1__legend { min-height: 18rem; }
-.towns1__cols { columns: 3 150px; column-gap: var(--s5); }
-.towns1__legend p { margin: 0 0 12px; font: 400 1.5rem/1 var(--f-display); letter-spacing: .02em; }
-.towns1__cols span { display: block; padding: 4px 0; font-size: .9375rem; break-inside: avoid; border-bottom: 1px dashed var(--line-soft); }
-.towns1__cols span.is-hl { color: var(--accent); }
-.towns1__map { grid-column: 8 / -1; position: sticky; top: calc(var(--nav-h) + 20px); height: min(80vh, 760px); }
-.towns1__svg { width: 100%; height: 100%; overflow: visible; }
-.towns1__svg .cty { fill: rgba(119, 179, 184, .05); stroke: var(--line-soft); stroke-width: 2; cursor: pointer; transition: fill 240ms var(--ease-out); }
-.towns1__svg .cty-off { fill: none; stroke: var(--line-soft); stroke-width: 1; stroke-dasharray: 4 6; opacity: .6; pointer-events: none; }
-.towns1__svg .cty.is-on { fill: rgba(119, 179, 184, .16); stroke: var(--accent); }
-.towns1__svg .dot { fill: var(--muted); }
-.towns1__svg .pin path { fill: #e2412b; stroke: #0B1418; stroke-width: 1.4; }
-.towns1__svg .pin circle { fill: #fff; }
-.towns1__svg .office { fill: #f2c230; stroke: #0B1418; stroke-width: 2; }
+.towns1__count { margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.towns1__n { font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: #f2c230; }
+.towns1__of { font: 500 .9375rem/1.3 var(--f-text); color: var(--muted); }
+/* the map is the version */
+.towns1__map { position: relative; height: min(76vh, 760px); border-radius: 4px; overflow: hidden; outline: none; background: radial-gradient(90% 90% at 70% 40%, rgba(119, 179, 184, .07), transparent 70%); box-shadow: inset 0 0 0 1px var(--line-soft); cursor: crosshair; touch-action: pan-y; }
+.towns1__map:focus-visible { box-shadow: inset 0 0 0 3px #f2c230; }
+.towns1__svg { width: 100%; height: 100%; overflow: hidden; display: block; }
+.towns1__svg .cty { fill: rgba(119, 179, 184, .05); stroke: var(--line-soft); stroke-width: 2; cursor: pointer; transition: fill 240ms var(--ease-out); vector-effect: non-scaling-stroke; }
+.towns1__svg .cty.is-on { fill: rgba(119, 179, 184, .15); stroke: var(--accent); }
+.towns1__svg .clbl { font: 400 54px/1 var(--f-display); fill: var(--ink); opacity: .35; letter-spacing: 2px; pointer-events: none; }
+.towns1__svg .mk { fill: #0B1418; stroke: var(--accent); stroke-width: 2.5; vector-effect: non-scaling-stroke; transition: opacity 240ms; }
+.towns1__svg .mk.is-dim { opacity: .25; }
+.towns1__svg .mk.is-hot { fill: #f2c230; stroke: #0B1418; }
+.towns1__svg .office { fill: #f2c230; stroke: #0B1418; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .towns1__svg .olbl { font: 600 22px/1 var(--f-text); fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 6px; }
-.towns1__svg .clbl { font: 400 54px/1 var(--f-display); fill: var(--ink); opacity: .55; letter-spacing: 2px; pointer-events: none; }
-@media (max-width: 1023px) {
-  .towns1__side { grid-column: 1 / -1; }
-  .towns1__map { grid-column: 1 / -1; position: relative; top: auto; height: 52vh; margin-top: var(--s6); order: -1; }
-  .towns1__side { order: 1; }
-}
+.towns1__svg .flag { pointer-events: none; }
+.towns1__svg .flag .pole { stroke: #e8e4dc; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.towns1__svg .flag .pen { fill: #e2412b; stroke: #0B1418; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.towns1__svg .flag text { font-family: var(--f-display); fill: #fff; letter-spacing: .04em; }
+.towns1__read { position: absolute; left: 14px; bottom: 12px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+@media (max-width: 1023px) { .towns1__head .t-head, .towns1__head .towns__lead { grid-column: 1 / -1; } .towns1__head .towns__lead { margin-top: var(--s4); } .towns1__map { height: 64vh; } }
 
 /* ---------- v2 · Around the office ---------- */
 .towns2__stage { position: relative; aspect-ratio: 1 / 1; max-width: 860px; margin: 0 auto; }

@@ -1,19 +1,26 @@
 <section id="towns" class="sec towns g-base" data-section="towns" aria-labelledby="towns-h1">
 
-  <!-- v1 · The survey [BANK For Living material-by-region map (hover -> tap) + BANK KBF Neighborhood Drive index] -->
+  <!-- v1 · The survey map [BANK Q576 For Living region map: areas answer on hover (desktop), degrade to tap (touch)].
+       The map is the whole version: 104 survey marks; hover / tap / arrow keys raise a town's name on a survey flag. -->
   <div class="ver towns1" data-v="1">
-    <div class="wrap towns1__grid">
-      <div class="towns1__side">
+    <div class="wrap">
+      <div class="towns1__head">
         <h2 class="t-head" id="towns-h1">Do we build in your town?</h2>
-        <p class="t-lead towns__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
-        <div class="towns1__tabs" role="tablist" aria-label="Counties">
-          <button type="button" role="tab" class="towns1__tab" data-c="Miami-Dade" aria-selected="true" data-rx="~t:MD/hoist/hop/tr"><span class="btn__label">Miami&#8209;Dade <span class="nums">34</span></span></button>
-          <button type="button" role="tab" class="towns1__tab" data-c="Broward" aria-selected="false" data-rx="~t:BR/hoist/hop/tr"><span class="btn__label">Broward <span class="nums">31</span></span></button>
-          <button type="button" role="tab" class="towns1__tab" data-c="Palm Beach" aria-selected="false" data-rx="~t:PB/hoist/hop/tr"><span class="btn__label">Palm Beach <span class="nums">39</span></span></button>
-        </div>
-        <div class="towns1__legend" role="tabpanel" aria-live="polite"></div>
+        <p class="t-lead towns__lead">Every mark is one of the <span class="nums">104</span> municipalities we hold the licence to build in. Point at a mark to read it.</p>
       </div>
-      <div class="towns1__map"><svg class="towns1__svg" aria-hidden="true" focusable="false"></svg></div>
+      <div class="towns1__bar">
+        <div class="towns1__tabs" role="tablist" aria-label="Counties">
+          <button type="button" role="tab" class="towns1__tab" data-c="Miami-Dade" aria-selected="true" data-rx="~t:MD/hoist/hop/tr"><span class="btn__label">Miami&#8209;Dade</span></button>
+          <button type="button" role="tab" class="towns1__tab" data-c="Broward" aria-selected="false" data-rx="~t:BR/hoist/hop/tr"><span class="btn__label">Broward</span></button>
+          <button type="button" role="tab" class="towns1__tab" data-c="Palm Beach" aria-selected="false" data-rx="~t:PB/hoist/hop/tr"><span class="btn__label">Palm Beach</span></button>
+        </div>
+        <p class="towns1__count" aria-live="polite"><span class="towns1__n nums">34</span><span class="towns1__of">municipalities in <span class="towns1__cn">Miami&#8209;Dade</span></span></p>
+      </div>
+      <div class="towns1__map" data-buddy="image" tabindex="0" role="application" aria-label="Survey map of the service area. Left and right arrow keys move from town to town." data-rx="native:survey-flags">
+        <svg class="towns1__svg" aria-hidden="true" focusable="false"></svg>
+        <p class="towns1__read" aria-live="polite"></p>
+      </div>
+      <div class="towns1__sr sr-only"></div>
     </div>
   </div>
 

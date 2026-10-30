@@ -19,7 +19,8 @@
 }
 .nav__in {
   height: 100%;
-  display: flex; align-items: center; gap: var(--s6);
+  --ng: var(--s6);
+  display: flex; align-items: center; gap: var(--ng);
   max-width: 1760px; margin-inline: auto; padding-inline: var(--margin);
 }
 .nav__logo { display: block; flex: none; }
@@ -55,6 +56,7 @@
   .nav__logo img { width: 132px; }
 }
 @media (min-width: 1024px) { .nav .btn--call { display: none; } }
+@media (min-width: 1024px) and (max-width: 1279px) { .nav__in { --ng: var(--s4); } .nav__links { gap: var(--s4); } .nav__tel { display: none; } }
 @media (max-width: 767px) { .nav .nav__book { display: none; } }
 
 /* full-screen menu sheet (phone) */
@@ -76,7 +78,8 @@
 .sheet .seg { background: var(--surface); }
 .sheet .seg button { color: var(--ink); }
 .sheet .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
-@media (max-width: 767px) { .settings { display: none; } }
+@media (max-width: 1023px) { .settings { display: none; } }
+.settings__btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
 
 /* ---------- version switch: a real radiogroup [S1303 §9, S0006 §12, S1441] ---------- */
 /* docked in the header's free centre; only the switch of the section holding the viewport's middle is shown */
@@ -204,21 +207,22 @@
 }
 
 /* ---------- settings (theme + motion) [S1304 §6 hidden at rest, S1169/S1209 toggle] ---------- */
-.settings { position: fixed; right: var(--margin); bottom: 16px; z-index: 55; }
+/* docked at the end of the header so it never sits over a section */
+.settings { position: relative; flex: none; margin-left: calc(var(--s3) - var(--ng)); }
 .settings__btn {
-  min-height: 44px; padding: 0 14px;
+  width: 44px; height: 44px; display: grid; place-items: center; padding: 0;
   background: rgba(11, 20, 24, .82); color: #e8e4dc;
   border: 0; border-radius: var(--radius);
   box-shadow: 0 0 0 1px rgba(232, 228, 220, .14);
   font-size: .8125rem; font-weight: 560;
 }
 .settings__panel {
-  position: absolute; right: 0; bottom: calc(100% + 8px);
+  position: absolute; right: 0; top: calc(100% + 8px);
   width: 248px; padding: 16px;
   background: #12212a; color: #e8e4dc;
   border-radius: var(--radius);
   box-shadow: 0 0 0 1px rgba(232, 228, 220, .14), 0 20px 50px -20px rgba(0, 0, 0, .6);
-  transform-origin: bottom right;
+  transform-origin: top right;
   display: grid; gap: 14px;
 }
 .settings__panel[hidden] { display: none; }

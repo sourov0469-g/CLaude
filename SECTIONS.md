@@ -26,7 +26,7 @@ work 3 — REBUILD (built: seamless belts, Q161 + 364) — passes: NO
 reviews 1 — REBUILD (built: tally ledger) — passes: NO
 reviews 2 — REBUILD (built: 343-star constellation) — passes: NO
 reviews 3 — REBUILD (built: calibration dial) — passes: NO
-towns 1 — v2 REBUILD (For Living map, no list) — passes: NO
+towns 1 — v2 REBUILT (Q576 survey map: 104 marks, flags on hover/tap/keys, county zoom; gate pending) — passes: NO
 towns 2 — v2 DONE on audit (gate pending) — passes: NO
 towns 3 — v2 DONE on audit (gate pending) — passes: NO
 consult 1 — v2 DONE on audit (gate pending) — passes: NO

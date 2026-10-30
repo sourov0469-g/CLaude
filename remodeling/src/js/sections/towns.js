@@ -15,42 +15,84 @@
   }
 
   EZ.section('towns', {
-    /* v1 · The survey [BANK For Living + BANK KBF] */
+    /* v1 · The survey map [BANK Q576 For Living: the map answers on hover (desktop) and on tap (touch)] */
     1: { init: function (root, k) {
-      var D = geo(), svg = root.querySelector('.towns1__svg'), legend = root.querySelector('.towns1__legend');
+      var D = geo(), map = root.querySelector('.towns1__map'), svg = root.querySelector('.towns1__svg'), read = root.querySelector('.towns1__read');
+      var nEl = root.querySelector('.towns1__n'), cnEl = root.querySelector('.towns1__cn'), sr = root.querySelector('.towns1__sr');
       var tabs = Array.prototype.slice.call(root.querySelectorAll('.towns1__tab'));
       var miami = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0];
-      var s = '';
-      ORDER.forEach(function (c) {
-        var b = D.boxes[c];
-        s += '<path class="cty-off" d="' + D.counties[c] + '" transform="translate(10 10)"/><path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>';
-        s += '<text class="clbl" x="' + f((b[0] + b[2]) / 2 - 120) + '" y="' + f((b[1] + b[3]) / 2) + '">' + c.toUpperCase() + '</text>';
-      });
-      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { s += '<circle class="dot" cx="' + t[1] + '" cy="' + t[2] + '" r="6"/>'; }); });
-      s += '<g class="pins"></g>';
-      if (miami) s += '<g class="off"><rect class="office" x="' + (miami[1] - 12) + '" y="' + (miami[2] - 12) + '" width="24" height="24" transform="rotate(45 ' + miami[1] + ' ' + miami[2] + ')"/><text class="olbl" x="' + (miami[1] - 30) + '" y="' + (miami[2] + 8) + '" text-anchor="end">Our office</text></g>';
+      var s = '<g class="ctys">';
+      ORDER.forEach(function (c) { s += '<path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>'; });
+      s += '</g>';
+      ORDER.forEach(function (c) { var b = D.boxes[c]; s += '<text class="clbl" x="' + f(b[0] + 30) + '" y="' + f(b[3] - 40) + '">' + c.toUpperCase() + '</text>'; });
+      var all = [];
+      s += '<g class="mks">';
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t, i) { s += '<circle class="mk" data-c="' + c + '" data-i="' + i + '" cx="' + t[1] + '" cy="' + t[2] + '" r="6"/>'; all.push({ c: c, i: i, n: t[0], x: t[1], y: t[2] }); }); });
+      s += '</g>';
+      if (miami) s += '<rect class="office" x="-1" y="-1" width="2" height="2" transform="translate(' + miami[1] + ' ' + miami[2] + ') rotate(45)"/>';
+      s += '<g class="flag" opacity="0"><line class="pole" x1="0" y1="0" x2="0" y2="-52"/><g class="pw"><path class="pen"/><text y="-34" font-size="20"></text></g></g>';
       svg.innerHTML = s;
-      var pinsG = svg.querySelector('.pins'), paths = Array.prototype.slice.call(svg.querySelectorAll('.cty'));
-      k.add(function () { svg.innerHTML = ''; legend.innerHTML = ''; });
-      var cur = null;
-      function vb(c) { var b = D.boxes[c], pad = 120; return (b[0] - pad) + ' ' + (b[1] - pad) + ' ' + (b[2] - b[0] + pad * 2) + ' ' + (b[3] - b[1] + pad * 2); }
+      lists(sr);
+      var marks = Array.prototype.slice.call(svg.querySelectorAll('.mk')), paths = Array.prototype.slice.call(svg.querySelectorAll('.cty'));
+      var office = svg.querySelector('.office'), flag = svg.querySelector('.flag'), pole = flag.querySelector('.pole'), pw = flag.querySelector('.pw'), pen = flag.querySelector('.pen'), ftx = flag.querySelector('text');
+      k.add(function () { svg.innerHTML = ''; sr.innerHTML = ''; read.textContent = ''; });
+
+      var cur = null, hot = null, box = null, unit = 1;
+      function vbOf(c) { var b = D.boxes[c], p = 90; return [b[0] - p, b[1] - p, b[2] - b[0] + p * 2, b[3] - b[1] + p * 2]; }
+      // svg units per screen px for a viewBox under preserveAspectRatio meet
+      function unitOf(v) { var r = map.getBoundingClientRect(); return Math.max(v[2] / Math.max(1, r.width), v[3] / Math.max(1, r.height)); }
+      function sizeTo(u, tween) {
+        unit = u;
+        var r = { attr: { r: f(5.5 * u) } }, o = { attr: { transform: 'translate(' + (miami ? miami[1] + ' ' + miami[2] : '0 0') + ') rotate(45) scale(' + f(9 * u) + ')' } };
+        if (tween) { gsap.to(marks, Object.assign({ duration: .5, ease: 'power3.inOut' }, r)); gsap.to(office, Object.assign({ duration: .5, ease: 'power3.inOut' }, o)); }
+        else { gsap.set(marks, r); gsap.set(office, o); }
+      }
+      function hide(now) {
+        if (hot) hot.classList.remove('is-hot');
+        hot = null; read.textContent = '';
+        gsap.to(flag, { opacity: 0, duration: now || !k.motion ? 0 : .15, overwrite: true });
+      }
+      function raise(m) {
+        if (m === hot) return;
+        if (hot) hot.classList.remove('is-hot');
+        hot = m; m.classList.add('is-hot');
+        var t = all[marks.indexOf(m)];
+        ftx.textContent = t.n.toUpperCase();
+        var w = ftx.getComputedTextLength() + 26;
+        // pennant flies left when it would leave the map
+        var mr = m.getBoundingClientRect(), r = map.getBoundingClientRect(), left = mr.left + w + 30 > r.right;
+        pen.setAttribute('d', left ? 'M0 -52H' + (-w - 12) + 'L' + (-w) + '-40L' + (-w - 12) + '-28H0Z' : 'M0 -52H' + (w + 12) + 'L' + w + '-40L' + (w + 12) + '-28H0Z');
+        ftx.setAttribute('x', left ? -w + 10 : 13);
+        flag.setAttribute('transform', 'translate(' + t.x + ' ' + t.y + ') scale(' + f(unit) + ')');
+        read.textContent = t.n + ' · ' + t.c + ' County';
+        if (!k.motion) { gsap.set(flag, { opacity: 1 }); return; }
+        gsap.killTweensOf([flag, pole, pw]);
+        gsap.set(flag, { opacity: 1 });
+        gsap.fromTo(pole, { scaleY: 0, svgOrigin: '0 0' }, { scaleY: 1, duration: .16, ease: 'power2.out', svgOrigin: '0 0' });
+        gsap.fromTo(pw, { scaleX: 0, svgOrigin: '0 -40' }, { scaleX: 1, duration: .22, ease: 'back.out(2.4)', svgOrigin: '0 -40', delay: .1 });
+      }
+      function nearest(e, px) {
+        var ctm = svg.getScreenCTM(); if (!ctm) return null;
+        var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; pt = pt.matrixTransform(ctm.inverse());
+        var best = null, bd = px * unit;
+        marks.forEach(function (m, j) { if (all[j].c !== cur) return; var d = Math.hypot(all[j].x - pt.x, all[j].y - pt.y); if (d < bd) { bd = d; best = m; } });
+        return best;
+      }
       function select(c, focus) {
         if (c === cur) return;
-        cur = c;
+        cur = c; hide(true);
         tabs.forEach(function (t) { var on = t.dataset.c === c; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
         paths.forEach(function (p) { p.classList.toggle('is-on', p.dataset.c === c); });
-        var towns = D.towns[c];
-        legend.innerHTML = '<p>' + c.replace('-', '&#8209;') + ' &middot; <span class="nums">' + towns.length + '</span> municipalities</p><div class="towns1__cols">' + towns.map(function (t, i) { return '<span data-i="' + i + '">' + esc(t[0]) + '</span>'; }).join('') + '</div>';
-        var sc = (D.boxes[c][3] - D.boxes[c][1]) / 900;
-        pinsG.innerHTML = towns.map(function (t) {
-          return '<g class="pin" transform="translate(' + t[1] + ' ' + t[2] + ') scale(' + f(sc * 1.6) + ')"><g class="pi"><path d="M0 0C-2 -8 -9 -12 -9 -19a9 9 0 0 1 18 0C9 -12 2 -8 0 0Z"/><circle cy="-19" r="3.4"/></g></g>';
-        }).join('');
-        if (k.motion) {
-          k.ctx.add(function () {
-            gsap.to(svg, { attr: { viewBox: vb(c) }, duration: .6, ease: 'power3.inOut', overwrite: 'auto' });
-            gsap.fromTo(pinsG.querySelectorAll('.pi'), { y: -30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'back.out(2)', stagger: { each: .012, from: 'random' }, delay: .35 });
-          });
-        } else svg.setAttribute('viewBox', vb(c));
+        marks.forEach(function (m, j) { m.classList.toggle('is-dim', all[j].c !== c); });
+        cnEl.innerHTML = c.replace('-', '&#8209;');
+        var n = D.towns[c].length, v = vbOf(c);
+        box = v;
+        if (k.motion && nEl.textContent) {
+          var o = { v: +nEl.textContent || 0 };
+          gsap.to(o, { v: n, duration: .3, ease: 'power2.out', onUpdate: function () { nEl.textContent = Math.round(o.v); } });
+          gsap.to(svg, { attr: { viewBox: v.join(' ') }, duration: .5, ease: 'power3.inOut', overwrite: 'auto' });
+          sizeTo(unitOf(v), true);
+        } else { nEl.textContent = n; svg.setAttribute('viewBox', v.join(' ')); sizeTo(unitOf(v)); }
       }
       tabs.forEach(function (t, i) {
         k.on(t, 'click', function () { select(t.dataset.c); });
@@ -59,21 +101,27 @@
           if (d) { e.preventDefault(); select(tabs[(i + d + 3) % 3].dataset.c, true); }
         });
       });
-      paths.forEach(function (p) {
-        k.on(p, 'click', function () { select(p.dataset.c); });
-        k.on(p, 'pointerenter', function (e) { if (e.pointerType === 'mouse') select(p.dataset.c); });
+      k.on(map, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var m = nearest(e, 28); if (m) raise(m); else if (hot) hide(); });
+      k.on(map, 'pointerleave', function (e) { if (e.pointerType === 'mouse') hide(); });
+      k.on(map, 'click', function (e) {
+        var m = nearest(e, e.pointerType === 'mouse' ? 28 : 40);
+        if (m) { raise(m); return; }
+        var p = e.target.closest && e.target.closest('.cty');
+        if (p && p.dataset.c !== cur) select(p.dataset.c);
       });
-      k.on(legend, 'pointerover', function (e) {
-        var sp = e.target.closest('span[data-i]');
-        legend.querySelectorAll('.is-hl').forEach(function (x) { x.classList.remove('is-hl'); });
-        if (!sp) return;
-        sp.classList.add('is-hl');
-        var pi = pinsG.querySelectorAll('.pi')[+sp.dataset.i];
-        if (pi && k.motion) gsap.fromTo(pi, { scale: 1.8, transformOrigin: '50% 100%' }, { scale: 1, duration: .4, ease: 'elastic.out(1,.4)' });
+      k.on(map, 'keydown', function (e) {
+        var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!d && e.key !== 'Home' && e.key !== 'End') return;
+        e.preventDefault();
+        var own = marks.filter(function (m, j) { return all[j].c === cur; }), i = own.indexOf(hot);
+        i = e.key === 'Home' ? 0 : e.key === 'End' ? own.length - 1 : i < 0 ? (d > 0 ? 0 : own.length - 1) : (i + d + own.length) % own.length;
+        raise(own[i]);
       });
-      svg.setAttribute('viewBox', '0 0 ' + D.w + ' ' + D.h);
+      k.on(map, 'blur', function () { hide(); });
+      k.ro(map, function () { if (box) { sizeTo(unitOf(box)); if (hot) { var h = hot; hot = null; raise(h); } } });
       select('Miami-Dade');
-      EZ.reveal(k, root.querySelectorAll('.towns1__side > h2, .towns1__side > p'));
+      EZ.reveal(k, root.querySelectorAll('.towns1__head > *'));
+      if (k.motion) gsap.from(marks, { scale: 0, transformOrigin: '50% 50%', duration: .2, ease: 'back.out(3)', stagger: { each: .004, from: 'random' }, scrollTrigger: { trigger: map, start: 'top 75%', once: true } });
     } },
 
     /* v2 · Around the office [S0717] */
