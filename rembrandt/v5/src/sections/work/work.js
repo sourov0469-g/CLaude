@@ -206,6 +206,7 @@ function honest(root, c) {
 // row's photo (two layers crossfading 150ms when the row changes), offset 24px right of and above the pointer and kept
 // inside the viewport; it fades out when the pointer leaves the list. Fine pointers with motion only.
 function index(root, c) {
+  if (!c.fine) { const n = root.querySelector('.wv-note'); if (n) n.textContent = 'Every photo is a Rembrandt job.'; } // R5: no "point at a row" where there is no pointer
   if (c.motion) beats(root, [root.querySelector('.wv-h'), root.querySelector('.wv-note'), root.querySelectorAll('.wv5-row')], { stagger: 0.04 });
   if (!c.fine || !c.motion) return;
   const list = root.querySelector('.wv5-list'), fol = root.querySelector('.wv5-follow'), [fa, fb] = fol.querySelectorAll('img');

@@ -23,11 +23,11 @@
 .tw1-office rect{fill:var(--ink)}
 .mk{cursor:pointer}
 .mk .mk-h{fill:var(--sky);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;transition:transform .15s var(--ease-x),fill .15s var(--ease-x)}
-.mk text{font:700 19px/1 var(--f-head);fill:var(--paper);paint-order:stroke;stroke:var(--ink);stroke-width:5px;stroke-linejoin:round;pointer-events:none;font-family:var(--f-head)}
+.mk text{font:700 19px/1 var(--f-head);fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:6px;stroke-linejoin:round;pointer-events:none;font-family:var(--f-head)}
 .mk.is-hover .mk-h{transform:translateY(-6px) scale(1.25)}
 .mk.is-on .mk-h{fill:var(--sun);transform:translateY(-4px) scale(1.4)}
 .tw1-side{display:grid;gap:20px;align-content:start}
-.tw1-card{padding:20px 22px;border-radius:14px;background:rgb(20 20 20 / .06);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .16);color:var(--ink);min-height:118px}
+.tw1-card{padding:20px 22px;border-radius:14px;background:var(--a50);box-shadow:inset 0 0 0 2px var(--a100);color:var(--ink);min-height:118px}
 .tw1-card-t{font-size:1.5rem;font-weight:700;letter-spacing:-.01em}
 .tw1-card-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-dark-2)}
 .tw1-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
@@ -49,7 +49,7 @@
 .tw2-sb[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
 @media (hover:hover) and (pointer:fine){.tw2-sb[aria-pressed="false"]:hover{border-color:var(--sun)}}
 .tw2-cards{position:relative;list-style:none;margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px;max-width:1280px}
-.tw2-card{display:grid;gap:6px;padding:18px 18px 14px;border-radius:14px;background:rgb(20 20 20 / .05);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .14)}
+.tw2-card{display:grid;gap:6px;padding:18px 18px 14px;border-radius:14px;background:var(--a50);box-shadow:inset 0 0 0 2px var(--a100)}
 .tw2-card[hidden]{display:none}
 .tw2-card.is-old .tw2-y{color:var(--a700)}
 .tw2 .tw-note,.tw2 .tw-src,.tw2-yl,.tw2-m{color:var(--on-dark-2)}
@@ -175,7 +175,7 @@
 .tw5 .tw-note,.tw5 .tw-src{color:var(--on-dark-2)}
 .tw5-head{display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,4vw,48px);padding:0 var(--gutter)}
 .tw5-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
-.tw5-cell{padding:18px 20px;border-radius:14px;background:rgb(20 20 20 / .05);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .14);min-height:150px}
+.tw5-cell{padding:18px 20px;border-radius:14px;background:var(--a50);box-shadow:inset 0 0 0 2px var(--a100);min-height:150px}
 .tw5-cell h3{display:flex;align-items:center;gap:10px;font-size:1.125rem;font-weight:700;text-transform:none}
 .tw5-arr{width:22px;height:22px;flex:none;fill:var(--sun)}
 .tw5-cell ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px}
@@ -221,3 +221,5 @@
 .tw8-s--home .tw8-plate{background:var(--a500);box-shadow:inset 0 0 0 3px var(--a500),inset 0 0 0 5px var(--black)}
 .tw8-s--home .tw8-meta{color:var(--black)}
 @media (max-width:520px){.tw7-list{grid-template-columns:1fr}.tw8-plate{padding:10px 8px}.tw8-name{font-size:1rem}.tw8-meta{font-size:.8125rem}}
+/* R5 improve: the map labels and the town card were dark-ground leftovers (white text on an ink halo, an ink-tint card): now ink on a paper halo, the card on the accent tint; the chosen town's label turns accent */
+.mk.is-on text{fill:var(--a700)}

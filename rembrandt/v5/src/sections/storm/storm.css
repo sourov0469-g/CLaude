@@ -64,7 +64,7 @@
 .st4-wall{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);align-items:start;margin-top:clamp(32px,4vw,56px)}
 .st4-ex{margin:0;display:grid;gap:12px}
 .st4-ex--a{rotate:-1deg}.st4-ex--b{rotate:1deg;margin-top:clamp(20px,5vw,72px)}
-.st4-mat{padding:12px;border-radius:6px;background:var(--paper);box-shadow:0 24px 48px -24px rgb(16 24 40 / 0.39);transition:translate .2s var(--ease-x)}
+.st4-mat{padding:12px;border-radius:6px;background:var(--paper);box-shadow:0 24px 48px -24px rgb(20 20 20 / 0.39);transition:translate .2s var(--ease-x)}
 .st4-mat img{display:block;width:100%;height:auto;border-radius:2px}
 .st4-ex figcaption{font-size:var(--t-body);line-height:1.45;color:var(--on-blue-muted)}
 .st4-ex figcaption b{color:var(--a700)}

@@ -96,7 +96,7 @@
 .cl3-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
 .cl3-cs{left:0;top:0;width:100%;height:100%}
 .cl3-cs .rx-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2;opacity:0;transition:opacity .2s var(--ease-x)}
-.cl3-cs .rx-p{fill:oklch(0.7 0.02 262 / .6);opacity:0;transform-origin:center;transform-box:fill-box}
+.cl3-cs .rx-p{fill:color-mix(in srgb,var(--n500) 60%,transparent);opacity:0;transform-origin:center;transform-box:fill-box}
 @media (hover:hover) and (pointer:fine){.cl3-call:hover .cl3-cs .rx-h{opacity:1}}
 .cl3-call:focus-visible .cl3-cs .rx-h{opacity:1}
 .cl3-call.is-press .cl3-cs .rx-p{animation:cl-puff .3s var(--ease-out)}
@@ -120,7 +120,7 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl3-stack{fill:var(--a600);stroke:var(--ink);stroke-width:3}
 .cl3-cap{fill:var(--shingle);stroke:var(--ink);stroke-width:3}
 .cl3-brick{stroke:var(--ink);stroke-width:1.5;opacity:.45}
-.cl3-smoke circle{fill:oklch(0.85 0.01 262 / .7)}
+.cl3-smoke circle{fill:color-mix(in srgb,var(--n300) 70%,transparent)}
 .cl3-track{position:absolute;left:0;top:50%;display:flex;white-space:nowrap;translate:0 -50%;font-size:min(12vw,150px); /* R3: the whole number fits the viewport */font-weight:900;letter-spacing:-.02em;line-height:1}
 .cl3-it{display:inline-flex;align-items:center;padding-right:.4em}
 .cl3-it i{display:inline-block;width:.32em;height:.32em;margin-left:.4em;background:var(--sun);clip-path:polygon(50% 0,100% 60%,100% 100%,0 100%,0 60%)}
@@ -218,7 +218,8 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl8-phone{width:100%;max-width:400px;justify-self:center;height:auto;overflow:visible}
 .cl8-cord{fill:none;stroke:var(--a500);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
 .cl8-hand{fill:var(--black)}
-.cl8-base{fill:var(--a700)}.cl8-btn{fill:var(--a500)}
+/* R5 improve: a drawn receiver lifted off a desk-phone base (it was a blob) */
+.cl8-base{fill:var(--a700)}.cl8-btn{fill:var(--a500)}.cl8-ring{fill:none;stroke:var(--a300);stroke-width:8;stroke-dasharray:6 7}.cl8-cradle{fill:none;stroke:var(--a800);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
 .cl8-num{font:800 clamp(2.5rem,1.2rem + 5vw,5.5rem)/1 var(--f-head);letter-spacing:-.02em;white-space:nowrap}
 .cl8-num a{color:var(--black);text-decoration:none;background:linear-gradient(var(--a500),var(--a500)) 0 92%/100% .14em no-repeat}
 @media (max-width:899px){.cl8-phone{max-width:240px;grid-row:2}}

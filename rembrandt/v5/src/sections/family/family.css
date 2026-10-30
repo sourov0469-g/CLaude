@@ -132,7 +132,7 @@
 .fm4-li{perspective:1000px}
 .fm4-card{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;transition:transform .36s var(--ease-x)}
 .fm4-card[aria-pressed="true"]{transform:rotateY(180deg)}
-.fm4-face{position:absolute;inset:0;display:grid;align-content:space-between;padding:clamp(18px,2.2vw,28px);background:var(--cream);border-radius:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 22px 40px -24px oklch(0 0 0 / .7)}
+.fm4-face{position:absolute;inset:0;display:grid;align-content:space-between;padding:clamp(18px,2.2vw,28px);background:var(--cream);border-radius:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 22px 40px -24px rgb(20 20 20 / .7)}
 .fm4-back{transform:rotateY(180deg);background:var(--paper);align-content:center}
 .fm4-y{font-size:clamp(2.5rem,4.4vw,4rem);font-weight:700;line-height:1;letter-spacing:-.015em;color:var(--blue);font-family:var(--f-head)}
 .fm4-n{font-size:clamp(1.375rem,1rem + 1vw,1.75rem);font-weight:700;line-height:1.1;font-family:var(--f-head)}

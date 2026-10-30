@@ -81,10 +81,10 @@
 .pv3-roll{position:relative;display:inline-flex;align-items:flex-end;margin:0;padding-top:.22em;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;font-family:var(--f-head)}
 .pv3-stat--xl .pv3-roll{font-size:clamp(4.6rem,12vw,10.5rem);font-family:var(--f-head)}
 /* ridge-cap rail over the row of tabs */
-.pv3-roll::before,.pv3-word::before{content:"";position:absolute;left:-.06em;right:-.06em;top:0;height:.2em;border-radius:.1em .1em .04em .04em;background:repeating-linear-gradient(90deg,var(--sun) 0 .46em,color-mix(in srgb,var(--sun) 72%,var(--ink)) .46em .5em);box-shadow:0 .04em 0 oklch(0 0 0 / .35)}
+.pv3-roll::before,.pv3-word::before{content:"";position:absolute;left:-.06em;right:-.06em;top:0;height:.2em;border-radius:.1em .1em .04em .04em;background:repeating-linear-gradient(90deg,var(--sun) 0 .46em,color-mix(in srgb,var(--sun) 72%,var(--ink)) .46em .5em);box-shadow:0 .04em 0 rgb(20 20 20 / .35)}
 .pv3-col{position:relative;display:inline-block;height:1.2em;overflow:hidden;margin-right:.04em;border-radius:.03em}
 .pv3-strip{display:flex;flex-direction:column;transform:translateY(-1.2em);will-change:transform}
-.pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:var(--cream);background:linear-gradient(var(--shingle) 0 22%,color-mix(in srgb,var(--shingle) 86%,var(--paper)) 26%,var(--shingle) 100%);box-shadow:inset 0 -.04em 0 oklch(0 0 0 / .45),inset .04em 0 0 oklch(0 0 0 / .25)}
+.pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:var(--cream);background:linear-gradient(var(--shingle) 0 22%,color-mix(in srgb,var(--shingle) 86%,var(--paper)) 26%,var(--shingle) 100%);box-shadow:inset 0 -.04em 0 rgb(20 20 20 / .45),inset .04em 0 0 rgb(20 20 20 / .25)}
 .pv3-mark{display:inline-grid;place-items:center;height:1.2em;padding:0 .04em;color:var(--sun)}
 .pv3-word{position:relative;margin:0;padding:.22em .12em 0;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1.2;letter-spacing:-.005em;color:var(--ink);font-family:var(--f-head)}
 .pv3-lab{display:flex;align-items:center;gap:8px;margin:0;font-size:1.0625rem;font-weight:600;color:var(--on-dark-2)}
@@ -92,7 +92,7 @@
 .pv3-star{width:1em;height:1em;fill:var(--sun)}
 .pv3-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:16px 32px;padding-top:24px;border-top:1px solid rgb(20 20 20 / .14)}
 /* R15: five stars fly in along the link (hover); they settle with a pop (press) */
-.pv3-google{position:relative;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--a700);text-decoration:underline;text-decoration-color:oklch(0.85 0.15 80 / .45);text-underline-offset:6px}
+.pv3-google{position:relative;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--a700);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--a500) 45%,transparent);text-underline-offset:6px}
 .pv3-stars{left:0;bottom:calc(100% - 4px);width:110px;height:16px}
 .pv3-st{fill:var(--sun);opacity:0;transform:translateX(-28px);transition:opacity .15s var(--ease-x) calc(var(--i) * 30ms),transform .22s var(--ease-x) calc(var(--i) * 30ms)}
 @media (hover:hover) and (pointer:fine){.pv3-google:hover .pv3-st{opacity:1;transform:none}}
@@ -123,14 +123,14 @@
 .pv4-rail{position:absolute;left:0;top:0;width:100%;height:10px}
 .pv4-rail path{fill:none;stroke:var(--steel);stroke-width:3;vector-effect:non-scaling-stroke}
 .pv4-frame{position:relative;display:block;grid-column:span 4;padding:12px;background:var(--shingle);border-radius:3px;color:var(--ink);text-decoration:none;rotate:var(--r);
-  box-shadow:0 1px 0 rgb(20 20 20 / .12) inset,0 22px 40px -22px oklch(0 0 0 / .7);transition:rotate 240ms var(--ease-x),translate 240ms var(--ease-x)}
-.pv4-frame--big{grid-column:1 / span 6;grid-row:span 3;padding:16px;box-shadow:0 0 0 2px var(--sun),0 0 46px -12px oklch(0.85 0.16 80 / .55),0 22px 40px -22px oklch(0 0 0 / .7)}
+  box-shadow:0 1px 0 rgb(20 20 20 / .12) inset,0 22px 40px -22px rgb(20 20 20 / .7);transition:rotate 240ms var(--ease-x),translate 240ms var(--ease-x)}
+.pv4-frame--big{grid-column:1 / span 6;grid-row:span 3;padding:16px;box-shadow:0 0 0 2px var(--sun),0 0 46px -12px color-mix(in srgb,var(--a500) 55%,transparent),0 22px 40px -22px rgb(20 20 20 / .7)}
 .pv4-frame:nth-of-type(2){grid-column:7 / span 6}
 .pv4-frame:nth-of-type(3){grid-column:7 / span 3}
 .pv4-frame:nth-of-type(4){grid-column:10 / span 3}
 .pv4-wire{position:absolute;left:30%;width:40%;bottom:100%;height:34px;overflow:visible}
 .pv4-wire path{fill:none;stroke:var(--steel);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.pv4-mat{position:relative;display:grid;gap:8px;align-content:center;min-height:100%;padding:clamp(18px,2.4vw,30px);background:var(--cream);border:1px solid oklch(0 0 0 / .12);outline:1px solid oklch(0 0 0 / .08);outline-offset:-8px}
+.pv4-mat{position:relative;display:grid;gap:8px;align-content:center;min-height:100%;padding:clamp(18px,2.4vw,30px);background:var(--cream);border:1px solid rgb(20 20 20 / .12);outline:1px solid rgb(20 20 20 / .08);outline-offset:-8px}
 .pv4-frame--big .pv4-mat{padding:clamp(28px,4vw,52px);gap:12px}
 .pv4-fig{font-size:clamp(2.25rem,3.6vw,3.25rem);font-weight:700;line-height:1;letter-spacing:-.015em;font-family:var(--f-head)}
 .pv4-frame--big .pv4-fig{font-size:clamp(5rem,9vw,8rem);letter-spacing:-.02em;font-family:var(--f-head)}
@@ -183,7 +183,7 @@
 .pv5-list li{display:grid;gap:2px;padding:16px 0;border-top:1px solid rgb(20 20 20 / .16)}
 .pv5-list li:last-child{border-bottom:1px solid rgb(20 20 20 / .16)}
 .pv5-list b{font-size:var(--t-lead);font-weight:700}
-.pv5-check{justify-self:start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--a700);text-decoration:underline;text-decoration-color:oklch(0.85 0.15 80 / .45);text-underline-offset:5px;transition:text-decoration-color 200ms var(--ease-x)}
+.pv5-check{justify-self:start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--a700);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--a500) 45%,transparent);text-underline-offset:5px;transition:text-decoration-color 200ms var(--ease-x)}
 @media (hover:hover) and (pointer:fine){.pv5-check:hover{text-decoration-color:var(--a700)}}
 .pv5-hint{display:none;margin-top:16px;font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
 @media (hover:hover) and (pointer:fine){.pv5-hint{display:block}}

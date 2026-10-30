@@ -49,7 +49,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-pager{position:relative;z-index:3;display:flex;align-items:flex-start;gap:14px;padding:18px 18px 6px;border-bottom:2px solid var(--ink)}
 .hw2-tabs{flex:1;min-width:0;display:flex;gap:8px}
 .hw2-tab{flex:1 1 0;min-width:0;display:grid;gap:10px;min-height:44px;align-content:start;padding:0 0 8px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
-.hw2-bar{position:relative;display:block;height:3px;border-radius:2px;background:oklch(0.25 0.06 262 / .15);overflow:hidden}
+.hw2-bar{position:relative;display:block;height:3px;border-radius:2px;background:rgb(20 20 20 / .15);overflow:hidden}
 .hw2-prog{position:absolute;inset:0;background:var(--a100);transform:translate3d(calc(-100% - 1px),0,0)}
 .hw2-prog.is-animating{animation:hw2-story 5s linear infinite}
 .hw2-prog.is-done{animation:none;transform:translateZ(0)}
@@ -102,8 +102,8 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-call.is-press .hw2-cord{opacity:1;animation:hw2-coil .4s var(--ease-spring)}
 @keyframes hw2-coil{0%{transform:none}35%{transform:scaleX(.15)}100%{transform:none}}
 /* the three scenes */
-.hw2-far path{fill:oklch(0.25 0.06 262 / .06)}
-.hw2-s2 .hw2-far path{fill:none;stroke:oklch(0.25 0.06 262 / .08);stroke-width:1.5}
+.hw2-far path{fill:rgb(20 20 20 / .06)}
+.hw2-s2 .hw2-far path{fill:none;stroke:rgb(20 20 20 / .08);stroke-width:1.5}
 .hw2-gr{stroke:var(--ink);stroke-width:3}
 .s1-wall,.s3-wall{fill:var(--paper);stroke:var(--ink);stroke-width:3}
 .s1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
@@ -122,7 +122,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-item.is-visible .s1-hset{animation:hw2-lift .5s cubic-bezier(.3,1.5,.5,1) .7s both}
 @keyframes hw2-lift{to{transform:translate(-6px,-26px) rotate(-14deg)}}
 .s2-plane{fill:var(--wood);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
-.s2-seam{stroke:oklch(0.25 0.06 262 / .25);stroke-width:2}
+.s2-seam{stroke:rgb(20 20 20 / .25);stroke-width:2}
 .s2-dim{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
 .s2-blade{fill:var(--sun);stroke:var(--ink);stroke-width:2}
 .s2-tk{stroke:var(--ink);stroke-width:1.5}
@@ -248,7 +248,7 @@ a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-de
 @keyframes hw4-ring{0%,100%{rotate:0deg}25%{rotate:-10deg}75%{rotate:8deg}}
 .hw4-hs{transform-box:fill-box;transform-origin:50% 50%}
 .hw4-steps{list-style:none;margin:0;padding:0}
-.hw4-step{min-height:44svh;display:grid;align-content:center;gap:12px;padding:24px 0;border-top:1px solid oklch(0.2 0.05 262 / .14)}
+.hw4-step{min-height:44svh;display:grid;align-content:center;gap:12px;padding:24px 0;border-top:1px solid rgb(20 20 20 / .14)}
 .hw4-t{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;color:var(--muted);transition:color .2s var(--ease-x);font-family:var(--f-head)}
 .hw4-step.is-on .hw4-t{color:var(--ink)}
 .hw4-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch}
@@ -261,9 +261,9 @@ html[data-motion="reduced"] .hw4 .hw4-t{color:var(--ink)}
    figures, no names: an illustration, never a record), the real finished roof. */
 .hw5{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .hw5-head{max-width:1240px;margin:0 auto clamp(28px,4vw,48px)}
-.hw5-row{list-style:none;margin:0 auto;padding:0;max-width:1240px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.hw5-row{list-style:none;margin:0 auto;padding:0;max-width:1240px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.7fr);gap:clamp(16px,2.4vw,32px);align-items:end} /* R5 improve: the new roof (the payoff) leads; three equal cards was a flat hierarchy (S0650, S1501) */
 .hw5-a{display:grid;gap:16px;align-content:start}
-.hw5-art{position:relative;aspect-ratio:4/3;display:grid;place-items:center;background:var(--paper);box-shadow:inset 0 0 0 1px oklch(0.2 0.05 262 / .14);overflow:hidden}
+.hw5-art{position:relative;aspect-ratio:4/3;display:grid;place-items:center;background:var(--paper);box-shadow:inset 0 0 0 1px rgb(20 20 20 / .14);overflow:hidden}
 .hw5-art svg{width:72%;height:auto;overflow:visible}
 .hw5-ph{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .hw5-arc{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round}

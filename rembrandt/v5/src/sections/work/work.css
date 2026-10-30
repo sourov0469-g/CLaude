@@ -41,7 +41,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv2.is-open .wv2-full{pointer-events:auto;cursor:pointer}
 .wv2-full img{position:absolute;inset:0}
 .wv2-open{grid-area:2 / 2 / 3 / 4;align-self:end;z-index:6;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
-  margin:0;padding:16px;background:linear-gradient(transparent,rgba(17,24,48,.72));pointer-events:none}
+  margin:0;padding:16px;background:linear-gradient(transparent,rgb(20 20 20 / .72));pointer-events:none}
 .wv2-open>*{pointer-events:auto}
 .wv2-open[hidden],.wv2-closed[hidden]{display:none}
 .wv2-cap{color:var(--paper);font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.01em}
@@ -180,14 +180,14 @@ html[data-motion="reduced"] .wv1-pause{display:none}
    preview that follows the pointer, smoothed only by a 0.2s CSS transition on transform. Touch and keyboard keep the
    row thumbnails, so the follower is an enhancement, never the only way to see a photo. */
 .wv5-list{list-style:none;margin:0;padding:0 var(--gutter);counter-reset:none}
-.wv5-row{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) 112px;align-items:center;gap:24px;padding:14px 0;border-top:1px solid oklch(0.2 0.05 262 / .14);transition:background-color var(--dur-quick) var(--ease-x)}
-.wv5-row:last-child{border-bottom:1px solid oklch(0.2 0.05 262 / .14)}
+.wv5-row{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) 112px;align-items:center;gap:24px;padding:14px 0;border-top:1px solid rgb(20 20 20 / .14);transition:background-color var(--dur-quick) var(--ease-x)}
+.wv5-row:last-child{border-bottom:1px solid rgb(20 20 20 / .14)}
 .wv5-name{font-size:clamp(1.25rem,.9rem + 1.2vw,2rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;font-family:var(--f-head)}
 .wv5-what{color:var(--muted)}
 .wv5-th{width:112px;aspect-ratio:3/2;overflow:hidden;background:var(--mist)}
 .wv5-th img{width:100%;height:100%;object-fit:cover}
 .wv5-follow{position:fixed;left:0;top:0;z-index:70;width:min(360px,30vw);aspect-ratio:3/2;pointer-events:none;opacity:0;overflow:hidden;background:var(--mist);
-  box-shadow:0 24px 48px -24px oklch(0.2 0.06 262 / .6);transition:transform .2s var(--ease-x),opacity .15s var(--ease-x)}
+  box-shadow:0 24px 48px -24px rgb(20 20 20 / .6);transition:transform .2s var(--ease-x),opacity .15s var(--ease-x)}
 .wv5-follow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .15s var(--ease-x)}
 .wv5-fb{opacity:0}
 .wv5.is-peek .wv5-follow{opacity:1}
@@ -251,3 +251,5 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv8-t6{grid-column:9/13}.wv8-t6 .wv8-cut{aspect-ratio:4/3.6}
 @media (max-width:799px){.wv8-wall{grid-template-columns:1fr 1fr}.wv8-t{grid-column:auto!important}}
 .wv7-page[hidden]{display:none}
+/* R5 improve: on touch screens there is no pointer to follow, so the thumbnails themselves are large at every width */
+@media (hover:none) and (min-width:761px){.wv5-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) min(38%,320px)}.wv5-th{width:100%}}
