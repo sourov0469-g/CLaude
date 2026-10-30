@@ -5,13 +5,114 @@
   function data() { return (window.__DATA || {}).projects || []; }
 
   EZ.section('work', {
-    /* v1 · The plan room [BANK R10 grid-to-fullscreen + BANK 157 push grid via Flip] */
+    /* slot 1 · AUDIT-01 winner (copied from v3; F7): calm default. Drift 55px/s while in view and only until the first pointer
+       contact, which pauses that belt (200ms ramp) and parks both belts; no scroll boost; captions are permanent. */
     1: { init: function (root, k) {
+      var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
+      var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
+      var belts = Array.prototype.slice.call(root.querySelectorAll('.wb__belt'));
+      var hold = root.querySelector('.wb__hold');
+      var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
+      // project codes follow the plan-room numbering of version 1 (P-01 is the same room everywhere)
+      var CODE = {};
+      document.querySelectorAll('.work1__sheet').forEach(function (sh, i) { var im = sh.querySelector('img[data-img]'); if (im) CODE[im.dataset.img] = 'P-' + (i < 9 ? '0' : '') + (i + 1); });
+      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wb__foot'));
+      var loops = [];
+      belts.forEach(function (belt, bi) {
+        var track = belt.querySelector('.wb__track');
+        var list = P.filter(function (p) { return belt.dataset.c.indexOf(p.c) > -1; });
+        track.innerHTML = list.map(function (p) {
+          var code = CODE[p.key] || ('P-' + (p.no < 9 ? '0' : '') + (p.no + 1));
+          return '<button type="button" class="wb__tile" data-i="' + p.no + '" data-rx="~t:' + code + '/peek/flash/tl" style="aspect-ratio:' + p.w + ' / ' + p.h + '" aria-label="' + p.title.replace(/"/g, '&quot;') + ', ' + CAT[p.c] + ', open large">' +
+            '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"><span class="wb__cap" aria-hidden="true"><b>' + CAT[p.c] + '</b>' + p.title.replace(/</g, '') + '</span></button>';
+        }).join('');
+        k.on(track, 'click', function (e) { var t = e.target.closest('.wb__tile'); if (t) EZ.viewer.open(all, +t.dataset.i, t); });
+      });
+      k.add(function () { belts.forEach(function (b) { b.querySelector('.wb__track').innerHTML = ''; }); root.classList.remove('is-static'); });
+      if (EZ.bindReactions) EZ.bindReactions(root, k);
+      if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; k.add(function () { hold.hidden = false; }); return; }
+
+      var held = false, inView = false, touched = false;
+      var builtW = 0;
+      function build() {
+        // a rebuild keeps where each belt was, and starts from clean transforms (stale xPercent overlaps the tiles)
+        var prev = loops.map(function (l) { return { p: l.tl.progress(), slow: l.slow }; });
+        loops.forEach(function (l) { l.tl.kill(); });
+        builtW = root.querySelector('.wb__belts').clientWidth;
+        loops = belts.map(function (belt, bi) {
+          var items = belt.querySelectorAll('.wb__tile');
+          gsap.set(items, { clearProps: 'transform' });
+          var gap = parseFloat(getComputedStyle(belt.querySelector('.wb__track')).columnGap) || 16;
+          var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .55, paddingRight: gap });
+          // a photo is already cut by the left edge at rest [BANK 364 peek offset]
+          if (prev[bi]) tl.progress(prev[bi].p); else tl.time(tl.duration() * (bi ? .37 : .13));
+          if (bi) tl.reversed(true);
+          return { tl: tl, belt: belt, slow: prev[bi] ? prev[bi].slow : { v: 1 } };
+        });
+        sync();
+      }
+      function sync() {
+        loops.forEach(function (l) {
+          var ts = held ? 0 : l.slow.v;
+          l.tl.timeScale(Math.max(ts, .0001));
+          if (inView && !held) l.tl.paused(false); else l.tl.paused(true);
+        });
+      }
+      // each tile's image decodes before the loop measures widths
+      var imgs = root.querySelectorAll('.wb__tile img'), left = imgs.length;
+      imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
+      build();
+      k.ro(root.querySelector('.wb__belts'), function () { if (root.querySelector('.wb__belts').clientWidth !== builtW) build(); });
+      k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
+      loops.forEach(function (l, i) {
+        // first contact (hover or press) pauses that belt with a 200ms ramp and parks the other; Run the belts restarts them
+        function contact(e) {
+          if (e.type === 'pointerenter' && e.pointerType !== 'mouse') return;
+          gsap.to(loops[i].slow, { v: 0, duration: .2, ease: 'power1.out', onUpdate: sync, onComplete: park });
+        }
+        function park() {
+          if (held) return;
+          touched = true; held = true;
+          hold.setAttribute('aria-pressed', 'true'); hold.querySelector('.btn__label').textContent = 'Run the belts';
+          loops.forEach(function (o) { o.slow.v = 1; }); sync();
+        }
+        k.on(l.belt, 'pointerenter', contact);
+        k.on(l.belt, 'pointerdown', contact);
+        // a focused photo must be in view (WCAG focus not obscured): the belt stops and glides that photo to its centre
+        k.on(l.belt, 'focusin', function (e) {
+          loops[i].slow.v = 0; sync();
+          var t = e.target.closest('.wb__tile'); if (!t) return;
+          var br = l.belt.getBoundingClientRect(), tr = t.getBoundingClientRect();
+          var dx = (tr.left + tr.width / 2) - (br.left + br.width / 2), tl = loops[i].tl;
+          if (Math.abs(dx) < 8) return;
+          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
+          gsap.to(tl, { totalTime: tl.totalTime() + dx / 55, duration: k.motion ? .4 : 0, ease: 'power3.inOut', overwrite: true });
+        });
+        k.on(l.belt, 'focusout', function (e) { if (!l.belt.contains(e.relatedTarget) && !held) { loops[i].slow.v = 1; sync(); } });
+      });
+      k.on(hold, 'click', function () {
+        held = !held;
+        if (!held) loops.forEach(function (o) { o.slow.v = 1; });
+        hold.setAttribute('aria-pressed', held ? 'true' : 'false');
+        hold.querySelector('.btn__label').textContent = held ? 'Run the belts' : 'Hold the belts';
+        sync();
+      });
+      k.add(function () { hold.setAttribute('aria-pressed', 'false'); hold.querySelector('.btn__label').textContent = 'Hold the belts'; });
+      k.io(root.querySelector('.wb__belts'), function (en) { inView = en.isIntersecting; sync(); }, { threshold: 0 });
+      gsap.from(belts, { x: function (i) { return i ? -40 : 40; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.wb__belts'), start: 'top 85%', once: true } });
+    } },
+
+    /* v1 · The plan room [BANK R10 grid-to-fullscreen + BANK 157 push grid via Flip] */
+    2: { init: function (root, k) {
       var grid = root.querySelector('.work1__grid');
       var items = Array.prototype.slice.call(root.querySelectorAll('.work1__it'));
       var fbtns = Array.prototype.slice.call(root.querySelectorAll('.work1__f'));
       var more = root.querySelector('.work1__more'), moreLabel = more.querySelector('.btn__label');
       var filter = 'all', all = false, open = null;
+      // [AUDIT-01 F7 loser V1] label truth: the first chip says what it shows, featured 12 until all 26 are dealt
+      var chipLbl = fbtns[0].querySelector('.btn__label'), nFeat = items.filter(function (it) { return it.dataset.feat; }).length;
+      function chip() { chipLbl.innerHTML = all ? 'All <span class="nums">' + items.length + '</span>' : 'Featured <span class="nums">' + nFeat + '</span>'; }
+      chip();
       EZ.reveal(k, root.querySelectorAll('.work__head > *'));
       function flip(fn) {
         if (!k.motion) { fn(); return; }
@@ -48,6 +149,7 @@
         all = !all;
         more.setAttribute('aria-expanded', all ? 'true' : 'false');
         moreLabel.textContent = all ? 'Show the featured twelve' : 'Show all ' + items.length + ' projects';
+        chip();
         flip(apply);
       });
       items.forEach(function (it) {
@@ -58,12 +160,12 @@
         });
       });
       k.on(root, 'keydown', function (e) { if (e.key === 'Escape' && open) { var o = open; flip(function () { setOpen(null); }); o.querySelector('.work1__sheet').focus(); } });
-      k.add(function () { setOpen(null); items.forEach(function (it) { it.hidden = false; }); more.hidden = false; fbtns.forEach(function (x, i) { x.setAttribute('aria-pressed', i ? 'false' : 'true'); }); moreLabel.textContent = 'Show all ' + items.length + ' projects'; more.setAttribute('aria-expanded', 'false'); });
+      k.add(function () { setOpen(null); items.forEach(function (it) { it.hidden = false; }); more.hidden = false; fbtns.forEach(function (x, i) { x.setAttribute('aria-pressed', i ? 'false' : 'true'); }); moreLabel.textContent = 'Show all ' + items.length + ' projects'; more.setAttribute('aria-expanded', 'false'); all = false; chip(); });
       if (k.motion) gsap.from(items.filter(function (it) { return !it.hidden; }), { y: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .03, scrollTrigger: { trigger: grid, start: 'top 85%', once: true } });
     } },
 
     /* v2 · On the turntable [BANK 88] */
-    2: { init: function (root, k) {
+    3: { init: function (root, k) {
       var D = data(), stage = root.querySelector('.work2__stage'), track = root.querySelector('.work2__track');
       var arc = root.querySelector('.work2__arc'), n = root.querySelector('.work2__n'), t = root.querySelector('.work2__t');
       track.innerHTML = D.map(function (d, i) {
@@ -111,9 +213,19 @@
       // mouse drag-to-scroll (touch and trackpads scroll natively)
       if (k.fine) {
         var down = null;
-        k.on(track, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, l: track.scrollLeft, moved: false }; track.style.scrollSnapType = 'none'; track.setPointerCapture(e.pointerId); });
-        k.on(track, 'pointermove', function (e) { if (!down) return; var dx = e.clientX - down.x; if (Math.abs(dx) > 5) down.moved = true; track.scrollLeft = down.l - dx; });
-        function up() { if (!down) return; down = null; track.style.scrollSnapType = ''; go(cur); }
+        // [AUDIT-01 F7 loser V2] a drag carries its energy: the release velocity projects 300ms ahead and the nearest card there wins
+        k.on(track, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, l: track.scrollLeft, moved: false, v: 0, px: e.clientX, pt: e.timeStamp }; track.style.scrollSnapType = 'none'; track.setPointerCapture(e.pointerId); });
+        k.on(track, 'pointermove', function (e) {
+          if (!down) return; var dx = e.clientX - down.x; if (Math.abs(dx) > 5) down.moved = true; track.scrollLeft = down.l - dx;
+          var dt = e.timeStamp - down.pt; if (dt > 0) { down.v = .8 * ((e.clientX - down.px) / dt) + .2 * down.v; down.px = e.clientX; down.pt = e.timeStamp; }
+        });
+        function up() {
+          if (!down) return;
+          var proj = track.scrollLeft - down.v * 300 + track.clientWidth / 2, best = cur, bd = Infinity;
+          down = null; track.style.scrollSnapType = '';
+          cards.forEach(function (c, i) { var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - proj); if (d < bd) { bd = d; best = i; } });
+          go(best);
+        }
         k.on(track, 'pointerup', up); k.on(track, 'pointercancel', up);
         k.add(function () { track.style.scrollSnapType = ''; });
       }
@@ -124,7 +236,7 @@
     /* v3 · On the belts [BANK Q161 horizontalLoop, BANK 364 peek]: kitchens run left, bathrooms and whole homes run right,
        every photo at the same velocity; scroll speed adds to the belts, hovering a belt slows it to a quarter,
        a photo opens large in the viewer; belts stop off-screen; reduced motion leaves two scrollable rows */
-    3: { init: function (root, k) {
+    b1: { init: function (root, k) {
       var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
       var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
       var belts = Array.prototype.slice.call(root.querySelectorAll('.work3__belt'));

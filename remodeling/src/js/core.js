@@ -561,12 +561,15 @@
 
   /* ---------- viewer: Flip lightbox [S0184 Flip, pack pick #8] ---------- */
   EZ.viewer = (function () {
-    var box, img, title, count, closeBtn, items = [], idx = 0, from = null, prevFocus = null;
+    // [AUDIT-01 F7.3] visible Previous / Next (44px); no "4 of 26" count, the title alone names the photo
+    var box, img, title, nav, closeBtn, items = [], idx = 0, from = null, prevFocus = null;
     function init() {
       box = doc.getElementById('viewer');
       img = box.querySelector('.viewer__img'); title = box.querySelector('.viewer__title');
-      count = box.querySelector('.viewer__count'); closeBtn = box.querySelector('.viewer__close');
+      nav = box.querySelector('.viewer__nav'); closeBtn = box.querySelector('.viewer__close');
       closeBtn.addEventListener('click', close);
+      box.querySelector('.viewer__prev').addEventListener('click', function () { show(idx - 1); });
+      box.querySelector('.viewer__next').addEventListener('click', function () { show(idx + 1); });
       box.addEventListener('click', function (e) { if (e.target === box) close(); });
       box.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') close();
@@ -580,7 +583,7 @@
       var it = items[idx];
       img.src = EZ.img(it.key); img.alt = it.alt || it.title || '';
       title.textContent = it.title || '';
-      count.textContent = (idx + 1) + ' of ' + items.length;
+      nav.hidden = items.length < 2;
     }
     function open(list, i, fromEl) {
       items = list; from = fromEl || null; prevFocus = doc.activeElement;

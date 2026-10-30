@@ -111,3 +111,7 @@ m = re.search(r"EZ\.section\('" + re.escape(sec) + r"', \{\n", s)
 s = s[:m.end()] + '    /* slot 1 · AUDIT-01 winner (copied from v' + wv + '; fixes applied here) */\n' + dclone + '\n\n' + s[m.end():]
 open(jp, 'w').write(s)
 print('cloned', sec, 'v' + wv, '->', new, 'remap', remap)
+# a regex literal holding a quote can unbalance the def scan; the JS must still parse
+import subprocess
+r = subprocess.run(['node', '--check', jp], capture_output=True, text=True)
+if r.returncode: print('WARNING: ' + jp + ' does not parse after cloning; check the end of the copied def\n' + r.stderr[:400])

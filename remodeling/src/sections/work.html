@@ -1,7 +1,25 @@
 <section id="work" class="sec work g-base" data-section="work" aria-labelledby="work-h1">
 
   <!-- v1 · The plan room [BANK R10 Grid-to-Fullscreen + BANK 157 push grid (Flip)] -->
-  <div class="ver work1" data-v="1">
+  <!-- slot 1 · AUDIT-01 winner (copied from v3, fixes applied here; the original is in a backup slot) -->
+  <div class="ver wb" data-v="1">
+    <div class="wrap">
+      <div class="work__head">
+        <h2 class="t-head" id="work-h3-w">Twenty-six rooms, on the move.</h2>
+        <p class="t-lead work__lead">Kitchens run one way, bathrooms and whole homes the other. Pick any photo to see it large. Every image is our own work.</p>
+      </div>
+    </div>
+    <div class="wb__belts">
+      <div class="wb__belt" data-c="k" role="group" aria-label="Kitchen projects, slow belt"><div class="wb__track"></div></div>
+      <div class="wb__belt wb__belt--b" data-c="bw" role="group" aria-label="Bathroom and whole-home projects, slow belt"><div class="wb__track"></div></div>
+    </div>
+    <div class="wrap wb__foot">
+      <button type="button" class="btn btn--ghost wb__hold" aria-pressed="false" data-rx="~pause/peek/squash/l"><span class="btn__label">Hold the belts</span></button>
+      <a class="btn wb__btn" href="#consult" data-rx="masking"><span class="btn__label">Start your own project</span></a>
+    </div>
+  </div>
+
+  <div class="ver work1" data-v="2" hidden>
     <div class="wrap">
       <div class="work__head">
         <h2 class="t-head" id="work-h1">Real projects, photographed as delivered.</h2>
@@ -46,7 +64,7 @@
   </div>
 
   <!-- v2 · On the turntable [BANK 88 3D infinite carousel with reactive gradient: maxRot 28, depth 140, minScale .92, perspective 1800] -->
-  <div class="ver work2" data-v="2" hidden>
+  <div class="ver work2" data-v="3" hidden>
     <div class="work2__stage">
       <div class="wrap work__head">
         <h2 class="t-head" id="work-h2">Twenty-six rooms. Turn them over.</h2>
@@ -66,7 +84,7 @@
 
   <!-- v3 · On the belts [BANK Q161 GSAP seamless marquee: horizontalLoop "lift it whole", identical velocity per item (distance / px per s);
        BANK 364 CSS-only marquee: a photo already peeks in at rest; scroll velocity adds to belt speed] -->
-  <div class="ver work3" data-v="3" hidden>
+  <div class="ver work3" data-v="b1" hidden>
     <div class="wrap">
       <div class="work__head">
         <h2 class="t-head" id="work-h3">Twenty-six rooms, on the move.</h2>
