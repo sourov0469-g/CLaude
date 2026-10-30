@@ -565,3 +565,73 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 /* slot 5 improved: a sun and a roof line behind the three plates */
 .hox__house { position: relative; }
 .hox__house::before { content: ""; position: absolute; width: 34%; aspect-ratio: 1; right: -4%; top: -6%; border-radius: 50%; background: var(--a-200); z-index: 0; }
+
+/* ---------- slot 6 · NEW · Contractor card ---------- */
+.hcd__stage { min-height: 100svh; max-height: 1150px; display: grid; grid-template-rows: auto 1fr; padding-top: calc(var(--nav-h) + 28px); }
+.hcd__copy { display: grid; justify-items: center; text-align: center; gap: 14px; }
+.hcd__copy .hh .ln { display: inline; }
+.hcd__copy .hlead { max-width: 46ch; }
+.hcd__copy .hero__acts { justify-content: center; }
+.hcd__scene { position: relative; min-height: 380px; margin-top: 8px; }
+.hcd__art { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: 100vw; height: 100%; overflow: visible; }
+.hcd__sun { fill: var(--a-200); }
+.hcd__fence path { fill: none; stroke: var(--grey); stroke-width: 2; }
+.hcd__fence .rail { stroke: var(--ink-2); stroke-width: 4; }
+.hcd__ground { stroke: var(--ink); stroke-width: 3; }
+.hcd__palm path { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.hcd__palm .fr path { fill: var(--a-100); }
+.hcd__post { fill: var(--old); stroke: var(--ink); stroke-width: 3; }
+.hcd__card { position: absolute; left: 50%; bottom: 120px; translate: -50% 0; width: min(440px, 88vw); aspect-ratio: 16 / 10; perspective: 1400px; z-index: 2; }
+.hcd__face { position: absolute; inset: 0; margin: 0; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform 520ms var(--ease-out); }
+.hcd__front { background: var(--white); box-shadow: 0 0 0 3px var(--ink); padding: 18px 20px; display: grid; align-content: start; gap: 12px; }
+.hcd__back { transform: rotateY(180deg); overflow: hidden; box-shadow: 0 0 0 3px var(--ink); background: var(--white); }
+.hcd__back img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hcd__back figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 12px; background: var(--white); font: 500 .8125rem/1.3 var(--f-text); }
+.hcd__card.is-flip .hcd__front { transform: rotateY(-180deg); }
+.hcd__card.is-flip .hcd__back { transform: rotateY(0deg); }
+.hcd__brand { display: flex; align-items: center; gap: 10px; font: 700 1.125rem/1 var(--f-display); }
+.hcd__brand svg { width: 34px; height: 34px; } .hcd__brand .b { fill: var(--a-500); } .hcd__brand .e { fill: none; stroke: var(--white); stroke-width: 10; }
+.hcd__dl { margin: 0; display: grid; gap: 6px; }
+.hcd__dl div { display: grid; grid-template-columns: 82px 1fr; gap: 8px; padding-top: 6px; border-top: 1px solid var(--line-soft); }
+.hcd__dl dt { font: 600 .75rem/1.4 var(--f-text); color: var(--accent-text); }
+.hcd__dl dd { margin: 0; font: 500 .8125rem/1.4 var(--f-text); }
+.hcd__flip { position: absolute; left: 50%; bottom: 28px; translate: -50% 0; z-index: 3; background: var(--white); }
+@media (max-width: 767px) { .hcd__stage { padding-bottom: 80px; } .hcd__scene { min-height: 400px; } .hcd__card { bottom: 110px; } .hcd__dl div { grid-template-columns: 70px 1fr; } }
+@media (prefers-reduced-motion: reduce) { .hcd__face { transition: none; } }
+
+/* ---------- slot 7 · NEW · Street of rooftops ---------- */
+.hst__stage { min-height: 100svh; max-height: 1150px; display: grid; grid-template-rows: auto 1fr; padding-top: calc(var(--nav-h) + 28px); overflow: hidden; }
+.hst__copy { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
+.hst__l { grid-column: 1 / span 7; display: grid; gap: 14px; justify-items: start; }
+.hst__r { grid-column: 8 / -1; display: grid; gap: 14px; justify-items: start; }
+.hst__street { position: relative; min-height: 340px; margin-top: 20px; }
+.hst__back, .hst__mid { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; }
+.hst__back path { fill: var(--a-100); } .hst__mid path { fill: var(--a-200); }
+.hst__front { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; gap: clamp(16px, 4vw, 64px); padding-bottom: 0; border-bottom: 4px solid var(--ink); }
+.hst__house { width: clamp(150px, 17vw, 240px); padding: 0; border: 0; background: none; cursor: pointer; }
+.hst__house svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hst__house .rf { fill: none; stroke: var(--a-500); stroke-width: 9; stroke-linejoin: miter; }
+.hst__house .wl { fill: var(--white); stroke: var(--ink); stroke-width: 3; }
+.hst__house .dr { fill: var(--a-100); stroke: var(--ink); stroke-width: 3; }
+.hst__house .wn { fill: var(--a-50); stroke: var(--ink); stroke-width: 3; transition: fill 160ms ease-out; }
+.hst__house text { font: 600 14px/1 var(--f-text); fill: var(--ink); text-anchor: middle; }
+.hst__house[aria-pressed="true"] .wn { fill: var(--a-300); }
+@media (hover: hover) and (pointer: fine) { .hst__house:hover .wn { fill: var(--a-200); } }
+.hst__house:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; border-radius: 8px; }
+.hst__lens { position: absolute; z-index: 4; width: 260px; margin: 0; translate: -50% -100%; background: var(--white); padding: 8px 8px 10px; border-radius: 16px; box-shadow: 0 0 0 3px var(--ink); }
+.hst__lens img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.hst__lens figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); text-align: center; }
+.hst__hint { position: absolute; left: var(--margin); top: 8px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
+@media (max-width: 1023px) { .hst__l, .hst__r { grid-column: 1 / -1; } .hst__r { margin-top: 12px; } }
+@media (max-width: 767px) { .hst__stage { padding-bottom: 72px; } .hst__street { min-height: 260px; } .hst__house text { font-size: 18px; } .hst__lens { width: 200px; } }
+
+/* ---------- slot 8 · NEW · Built into the letters ---------- */
+.hlt__stage { min-height: 100svh; max-height: 1150px; display: grid; align-content: center; gap: 10px; padding-top: calc(var(--nav-h) + 20px); padding-bottom: 40px; }
+.hlt__word { margin: 0; font: 700 clamp(7rem, 2rem + 19vw, 21rem)/.86 "Poppins", Arial, sans-serif; letter-spacing: -.04em; color: var(--ink);
+  background-color: var(--ink); background-size: 135% auto; background-position: 50% 45%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hlt__stage .hh { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); }
+.hlt__stage .hh .ln { display: inline; }
+.hlt__row { display: grid; grid-template-columns: 7fr 5fr; gap: var(--gutter); align-items: start; padding-top: 18px; border-top: 4px solid var(--a-500); }
+.hlt__row > div { display: grid; gap: 14px; justify-items: start; }
+.hlt__note { margin: 0; font: 500 .8125rem/1.35 var(--f-text); color: var(--muted); }
+@media (max-width: 767px) { .hlt__row { grid-template-columns: 1fr; } .hlt__stage { padding-bottom: 80px; } }

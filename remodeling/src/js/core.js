@@ -249,6 +249,7 @@
     });
     // a backup in use stays visible in its switch even when the backup row is folded away
     s.switchEl.classList.toggle('is-bk', v.charAt(0) === 'b');
+    if (s.stepNow) s.stepNow.textContent = v.charAt(0) === 'b' ? 'B' + v.slice(1) : v + '/' + s.vis.length;
   }
   // user-driven swap [AUDIT-01 D.6; S0405, S0089, S0083]: outgoing fades + rises 4px in 120ms ease-in, incoming
   // arrives from 6px below in 180ms ease-out (<= 300ms total); a second click finishes the running swap first, so
@@ -308,6 +309,21 @@
       }
       inner.appendChild(digit(v, 'Version ' + v, v));
     });
+    // phones (OWNER MASTER DIRECTIVE, 8 visible versions): the digits collapse to a stepper, prev / current of total / next
+    var stepWrap = doc.createElement('span'); stepWrap.className = 'vswitch__step';
+    function stepBtn(dir, label, text) {
+      var b = doc.createElement('button'); b.type = 'button'; b.className = 'vswitch__st'; b.setAttribute('aria-label', label); b.textContent = text;
+      b.dataset.rx = 'native:vswitch-step';
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var list = s.current.charAt(0) === 'b' ? s.vis.concat(s.bk) : s.vis, i = list.indexOf(s.current);
+        swap(s.id, list[(i + dir + list.length) % list.length]);
+      });
+      return b;
+    }
+    var stNow = doc.createElement('span'); stNow.className = 'vswitch__now nums'; stNow.setAttribute('aria-live', 'polite');
+    stepWrap.appendChild(stepBtn(-1, 'Previous version', '\u2039')); stepWrap.appendChild(stNow); stepWrap.appendChild(stepBtn(1, 'Next version', '\u203A'));
+    s.stepNow = stNow;
     // hidden backup slots: reachable (B key, ?backups=1, or a backup in the URL), never the default view
     if (s.bk.length) {
       var bk = doc.createElement('span');
@@ -330,6 +346,7 @@
       if (nb) nb.focus();
     });
     wrap.appendChild(inner);
+    wrap.appendChild(stepWrap);
     // docked in the nav's free centre: the switch of the section in view is the one shown, and it covers no content
     (doc.querySelector('.nav__vs') || s.el).appendChild(wrap);
     s.switchEl = inner;

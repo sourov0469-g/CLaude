@@ -304,3 +304,13 @@
 .foot__line { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; color: var(--ink); }
 .foot__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
 .foot__tel { color: var(--ink); font-weight: 600; font-size: 1.0625rem; padding-block: 11px; }
+
+/* OWNER MASTER DIRECTIVE: eight visible versions. On phones the digit row becomes a stepper (prev, 3/8, next) with 44px
+   targets; desktop keeps the digits. */
+.vswitch__step { display: none; align-items: center; gap: 2px; pointer-events: auto; background: rgba(255, 255, 255, .78); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(18, 18, 18, .14); }
+.vswitch__st { min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink); font: 600 1.25rem/1 var(--f-text); cursor: pointer; }
+.vswitch__now { min-width: 34px; text-align: center; font: 600 .875rem/1 var(--f-text); color: var(--ink); }
+@media (max-width: 599px) {
+  .vswitch__in { display: none !important; }
+  .vswitch__step { display: inline-flex; }
+}

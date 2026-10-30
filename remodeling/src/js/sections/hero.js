@@ -66,6 +66,75 @@
   }
 
   EZ.section('hero', {
+    /* slot 6 · NEW · Contractor card: the card on the fence post carries the locked facts and turns to a real finished room */
+    6: { init: function (root, k) {
+      navOn(k, 'ground');
+      var fence = root.querySelector('.hcd__fence'), card = root.querySelector('.hcd__card'), btn = root.querySelector('.hcd__flip');
+      var d = '', x;
+      for (x = -20; x < 1240; x += 26) d += 'M' + x + ' 250 L' + (x + 154) + ' 404 M' + x + ' 404 L' + (x + 154) + ' 250 ';
+      fence.innerHTML = '<path d="' + d + '"/><path class="rail" d="M0 250 H1200 M0 404 H1200"/>' + [60, 300, 900, 1140].map(function (x) { return '<path class="rail" d="M' + x + ' 236 V404"/>'; }).join('');
+      k.add(function () { fence.innerHTML = ''; card.classList.remove('is-flip'); btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.btn__label').textContent = 'Turn the card: see what got built'; });
+      function flip() {
+        var on = !card.classList.contains('is-flip');
+        card.classList.toggle('is-flip', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.querySelector('.btn__label').textContent = on ? 'Turn it back: who built it' : 'Turn the card: see what got built';
+      }
+      k.on(btn, 'click', flip);
+      k.on(card, 'click', flip);
+      var tl = entrance(k, root, '.eyebrow');
+      if (tl) tl.from(card, { y: 40, rotation: -4, autoAlpha: 0, duration: .5, ease: HOUSE }, .1).from(root.querySelectorAll('.hcd__fence path, .hcd__ground'), { drawSVG: '0%', duration: .5, ease: 'power2.out', stagger: .01 }, 0);
+    } },
+
+    /* slot 7 · NEW · Street of rooftops: three depths of roofs with pointer parallax; a house's window opens a real room */
+    7: { init: function (root, k) {
+      navOn(k, 'ground');
+      function row(y, step, hmin, hmax, seed) {
+        var d = 'M0 300', x = 0, i = 0;
+        while (x < 1440) { var bw = step * (.7 + ((i * 37 + seed) % 7) / 10), h = hmin + ((i * 53 + seed) % 5) / 4 * (hmax - hmin), flat = (i + seed) % 3 === 0;
+          d += 'L' + x + ' ' + (y - h * .55) + (flat ? 'L' + (x + bw) + ' ' + (y - h * .55) : 'L' + (x + bw / 2) + ' ' + (y - h) + 'L' + (x + bw) + ' ' + (y - h * .55)) + 'L' + (x + bw) + ' ' + y;
+          x += bw + 8; i++; }
+        return '<path d="' + d + 'L1440 300Z"/>';
+      }
+      var back = root.querySelector('.hst__back'), mid = root.querySelector('.hst__mid');
+      back.innerHTML = row(300, 130, 120, 200, 3); mid.innerHTML = row(300, 110, 70, 130, 8);
+      var lens = root.querySelector('.hst__lens'), street = root.querySelector('.hst__street'), houses = Array.prototype.slice.call(root.querySelectorAll('.hst__house'));
+      function close() { lens.hidden = true; houses.forEach(function (h) { h.setAttribute('aria-pressed', 'false'); }); }
+      function open(h) {
+        if (h.getAttribute('aria-pressed') === 'true') { close(); return; }
+        close(); h.setAttribute('aria-pressed', 'true');
+        var sr = street.getBoundingClientRect(), r = h.querySelector('.wn').getBoundingClientRect();
+        lens.querySelector('img').src = EZ.img(h.dataset.k); lens.querySelector('img').alt = h.dataset.t + ', built by Elbaz';
+        lens.querySelector('figcaption').textContent = h.dataset.t;
+        lens.style.left = Math.min(Math.max(r.left + r.width / 2 - sr.left, 140), sr.width - 140) + 'px'; lens.style.top = (r.top - sr.top - 6) + 'px';
+        lens.hidden = false;
+        if (k.motion) gsap.fromTo(lens, { scale: .6, autoAlpha: 0, transformOrigin: '50% 100%' }, { scale: 1, autoAlpha: 1, duration: .26, ease: HOUSE });
+      }
+      houses.forEach(function (h) { k.on(h, 'click', function () { open(h); }); });
+      k.on(root, 'keydown', function (e) { if (e.key === 'Escape') close(); });
+      k.add(function () { back.innerHTML = ''; mid.innerHTML = ''; close(); });
+      if (k.motion && k.fine) {
+        var qb = gsap.quickTo(back, 'x', { duration: .6, ease: 'power3' }), qm = gsap.quickTo(mid, 'x', { duration: .6, ease: 'power3' });
+        k.on(root, 'pointermove', function (e) { var c = e.clientX / innerWidth - .5; qb(c * -10); qm(c * -22); });
+      }
+      var tl = entrance(k, root, '.eyebrow');
+      if (tl) tl.from([back, mid], { y: 60, duration: .5, ease: HOUSE, stagger: .08 }, 0).from(houses, { y: 50, autoAlpha: 0, duration: .4, ease: HOUSE, stagger: .07 }, .2);
+    } },
+
+    /* slot 8 · NEW · Built into the letters: a real kitchen inside the giant word, panning with the pointer */
+    8: { init: function (root, k) {
+      navOn(k, 'ground');
+      var w = root.querySelector('.hlt__word');
+      w.style.backgroundImage = 'url(' + EZ.img('k-navy-shaker-xl') + ')';
+      k.add(function () { w.style.backgroundImage = ''; w.style.backgroundPosition = ''; });
+      if (k.motion && k.fine) {
+        var o = { x: 50, y: 45 }, set = function () { w.style.backgroundPosition = o.x.toFixed(1) + '% ' + o.y.toFixed(1) + '%'; };
+        k.on(root, 'pointermove', function (e) { gsap.to(o, { x: 50 + (e.clientX / innerWidth - .5) * 40, y: 45 + (e.clientY / innerHeight - .5) * 30, duration: .6, ease: 'power3.out', overwrite: true, onUpdate: set }); });
+      }
+      var tl = entrance(k, root, '.eyebrow, .hlt__note');
+      if (tl) tl.from(w, { backgroundSize: '220% auto', duration: .6, ease: HOUSE }, 0).from(w, { y: 30, autoAlpha: 0, duration: .4, ease: HOUSE }, 0);
+    } },
+
     /* slot 5 · Phase 5 improved version of b8 */
     5: { init: function (root, k) {
       navOn(k, 'ground');
