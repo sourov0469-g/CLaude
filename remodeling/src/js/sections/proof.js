@@ -184,8 +184,7 @@
         'Florida Certified Building Contractor, licence CBC1265280, recognised by the Department of Business and Professional Regulation.',
         '4.8 stars on Google, based on 343 reviews.',
         '104 municipalities across Miami-Dade, Broward and Palm Beach, and the licence to build in all of them.',
-        '52 photographed projects, each with its own gallery. Every image is the firm’s own work.',
-        '30+ years of combined experience, in a business led by husband and wife Sean and Raz Elbaz.'
+        '26 projects photographed on this page, every image the firm’s own work.'
       ];
       var laser, dot, cur = 0, W = 0, H = 0;
       function build() {

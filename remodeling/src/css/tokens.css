@@ -6,6 +6,8 @@
 
 :root,
 [data-theme="evening"] {
+  --err-field: #ff8a75;   /* error text on ink / deep-teal grounds */
+  --err-paper: #b5341f;   /* error text on paper and cream grounds */
   --bg: #0B1418;            /* brand --ink */
   --surface: #12212a;       /* brand --ink-2, 2-6 L points off ground [S0095 §4] */
   --surface-2: #1c313b;     /* brand --ink-3 */

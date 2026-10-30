@@ -19,7 +19,8 @@
 .c-f input:focus + label, .c-f input:not(:placeholder-shown) + label, .c-f textarea:focus + label, .c-f textarea:not(:placeholder-shown) + label { transform: translateY(-24px) scale(.8); opacity: 1; }
 .c-f::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; background: var(--c-acc, #1d4a4e); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--ease-out); }
 .c-f:focus-within::after { transform: scaleX(1); }
-.c-err { display: block; font: 600 .8125rem/1.3 var(--f-text); color: #c8402e; margin-top: 6px; }
+.c-err { display: block; font: 600 .8125rem/1.3 var(--f-text); color: var(--err-field); margin-top: 6px; }
+.consult1__paper .c-err { color: var(--err-paper); }   /* errors: one value per ground, both AA at 13px [AUDIT-01 C.13; S1497] */
 .c-consent { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: .875rem; line-height: 1.45; cursor: pointer; }
 .c-consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: #1d4a4e; }
 .c-note { margin: 0; font-size: .8125rem; line-height: 1.45; opacity: .75; }
