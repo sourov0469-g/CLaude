@@ -279,3 +279,9 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | Change | Reference | Verification |
 |---|---|---|
 | the orange brand label (the logo's gable glyph + a sentence-case section line in --a700) above every H2 in 40 versions; a faint roofline contour artwork (stacked gables in --a200) in each section's corner; on Call's orange band the label is black | brand presence (directive); C1 label role (sentence case, 14px, 0 tracking) | `qa/r4d-labels-1440.jpg`; build 0 errors |
+### Reviews, new V6-V8
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | Shingle meter: the roof shingled to exactly 98% (4.9 of 5); 295 tiles, one per Google review (an aggregate count, no review text); check links | ⟦S1314⟧ product truth (the honest share, as F2.3); ⟦S0603⟧ evidence geometry | `qa/r4d-proof-new-1440.jpg`; errors 0 |
+| 7 | The yard sign: a roofer's lawn sign on stakes carries 4.9 / 295 and the phone; a checkable credential list beside it | ⟦S0095⟧ the trade's own artefact; [BANK] Anatomy F12 checkable proof | errors 0 |
+| 8 | Four numbers you can check: 4.9, 295, 2001, $2M as giant figures, each underlined by a painted brushstroke, each with its check link | [BANK] Checklist 14 (claims with their check); brand brush motif | errors 0 |

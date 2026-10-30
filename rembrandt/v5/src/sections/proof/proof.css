@@ -188,3 +188,50 @@
 .pv5-hint{display:none;margin-top:16px;font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
 @media (hover:hover) and (pointer:fine){.pv5-hint{display:block}}
 @media (max-width:899px){.pv5-in{grid-template-columns:1fr}.pv5-seal{width:min(100%,420px)}}
+
+/* ---------- R4 new versions (light ground; the accent carries every figure) */
+.pv6,.pv7,.pv8{--vbg:var(--paper);background:var(--paper);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
+.pv-h2{font-size:var(--t-h2);font-weight:700;line-height:1.08;letter-spacing:-.01em;font-family:var(--f-head);max-width:18ch}
+/* v6 shingle meter: the roof is shingled to 98% (4.9 of 5); 295 tiles, one per Google review */
+.pv6-head,.pv6-grid,.pv6-creds{max-width:1180px;margin-inline:auto}
+.pv6-sub{margin-top:12px;font-size:var(--t-lead);color:var(--muted);max-width:46ch}
+.pv6-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(28px,4vw,48px)}
+.pv6-meter{margin:0;display:grid;gap:12px}
+.pv6-roof{width:100%;height:auto}
+.pv6-bare{fill:var(--a50)}.pv6-on{fill:var(--a500)}
+.pv6-c,.pv6-k{stroke:var(--paper);stroke-width:3;fill:none}
+.pv6-edge{fill:none;stroke:var(--ink);stroke-width:4;stroke-linejoin:round}
+.pv6-meter figcaption{display:flex;align-items:baseline;gap:12px;font-family:var(--f-head);font-weight:600}
+.pv6-meter figcaption b{font-size:clamp(3rem,2rem + 3vw,4.5rem);line-height:1;color:var(--a700)}
+.pv6-tally{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;align-content:start}
+.pv6-tally i{aspect-ratio:1;border-radius:2px;background:var(--a400)}
+.pv6-tally i:nth-child(7n){background:var(--a600)}
+.pv6-creds{list-style:none;padding:0;margin-top:clamp(28px,4vw,48px);display:flex;flex-wrap:wrap;gap:10px 28px;font-size:var(--t-body)}
+.pv6-creds a,.pv7-list a,.pv8 a{display:inline-flex;align-items:center;min-height:44px;font-family:var(--f-head);font-weight:600;color:var(--a700);text-underline-offset:4px}
+@media (max-width:899px){.pv6-grid{grid-template-columns:1fr}}
+/* v7 the yard sign */
+.pv7{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,80px);align-items:center;max-width:1180px;margin-inline:auto;box-sizing:content-box}
+.pv7-sign svg{width:100%;max-width:440px;height:auto;display:block;transform-origin:50% 100%}
+.pv7-stake{stroke:var(--wood);stroke-width:14;stroke-linecap:round}
+.pv7-board{fill:var(--paper);stroke:var(--ink);stroke-width:5}
+.pv7-band{fill:var(--a500)}
+.pv7-gable{fill:none;stroke:var(--a500);stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.pv7-big{font:700 92px var(--f-head);fill:var(--ink)}
+.pv7-st{font:600 17px var(--f-head);fill:var(--ink)}
+.pv7-ph{font:700 24px var(--f-head);fill:var(--black)}
+.pv7-grass{fill:none;stroke:var(--a300);stroke-width:4}
+.pv7-lede{margin:14px 0 22px;font-size:var(--t-lead);max-width:42ch}
+.pv7-list{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.pv7-list li{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.3fr) auto;gap:8px 16px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.pv7-list b{font-family:var(--f-head);font-weight:600}
+@media (max-width:899px){.pv7{grid-template-columns:1fr}.pv7-sign svg{max-width:320px}.pv7-list li{grid-template-columns:1fr auto}.pv7-list span{grid-column:1}}
+/* v8 four big numbers, each underlined with a brushstroke */
+.pv8-head,.pv8-row,.pv8-oc{max-width:1280px;margin-inline:auto}
+.pv8-row{list-style:none;padding:0;margin-top:clamp(32px,4vw,56px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,3vw,40px)}
+.pv8-n{display:grid;gap:6px;align-content:start}
+.pv8-big{font-family:var(--f-head);font-size:clamp(3rem,1.6rem + 4.4vw,6rem);font-weight:700;line-height:.95;letter-spacing:-.02em}
+.pv8-brush{width:100%;height:14px}.pv8-brush path{fill:var(--a500)}
+.pv8-n:nth-child(2) .pv8-brush path{fill:var(--a400)}.pv8-n:nth-child(3) .pv8-brush path{fill:var(--a600)}
+.pv8-what{font-family:var(--f-head);font-weight:600;color:var(--muted)}
+.pv8-oc{margin-top:clamp(28px,4vw,48px);font-size:var(--t-body)}
+@media (max-width:899px){.pv8-row{grid-template-columns:1fr 1fr;row-gap:32px}}

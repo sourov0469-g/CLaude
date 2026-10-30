@@ -263,4 +263,26 @@ function seal(root, c) {
   return cleanup;
 }
 
-export default { 1: constellation, 2: ledger, 3: rollers, 4: wall, 5: seal };
+// R4 v6 (new) Shingle meter: 295 tiles, one per Google review (an aggregate count; no review text), placed once; the
+// roof fills to 98% (4.9 of 5, the honest share) as it enters (.9s), never past it
+function meter(root, c) {
+  const t = root.querySelector('.pv6-tally'); t.innerHTML = '<i></i>'.repeat(295);
+  if (!c.motion) return;
+  gsap.fromTo(root.querySelector('.pv6-fillrect'), { attr: { width: 0 } }, { attr: { width: 509.6 }, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.pv6-meter'), start: 'top 75%', once: true } });
+  gsap.from(t.children, { scale: 0, duration: 0.2, ease: 'back.out(2)', stagger: { each: 0.004, from: 'start' }, scrollTrigger: { trigger: t, start: 'top 80%', once: true } });
+  beats(root, [root.querySelector('.pv6-head'), root.querySelector('.pv6-creds')]);
+}
+// R4 v7 (new) The yard sign: the sign swings in on its stakes once (rotate -6 to 0 deg, back.out)
+function sign(root, c) {
+  if (!c.motion) return;
+  gsap.from(root.querySelector('.pv7-sign svg'), { rotate: -6, y: 24, autoAlpha: 0, duration: 0.6, ease: 'back.out(1.6)', scrollTrigger: { trigger: root, start: 'top 70%', once: true } });
+  beats(root, [root.querySelector('.pv7-copy')]);
+}
+// R4 v8 (new) Four big numbers: each brushstroke paints under its figure once, 120ms apart
+function numbers(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.pv8-head')]);
+  gsap.from(root.querySelectorAll('.pv8-brush'), { scaleX: 0, transformOrigin: '0 50%', duration: 0.45, ease: 'power2.out', stagger: 0.12, scrollTrigger: { trigger: root.querySelector('.pv8-row'), start: 'top 80%', once: true } });
+  beats(root, [root.querySelectorAll('.pv8-n'), root.querySelector('.pv8-oc')], { stagger: 0.08 });
+}
+export default { 1: constellation, 2: ledger, 3: rollers, 4: wall, 5: seal , 6: meter, 7: sign, 8: numbers };
