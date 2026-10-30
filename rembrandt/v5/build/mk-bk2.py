@@ -5,12 +5,14 @@
 import os, re, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); V5 = os.path.normpath(os.path.join(HERE, '..')); REPO = os.path.normpath(os.path.join(V5, '..', '..'))
 REV = '2ee2693'
-PFX = {'hero': 'hx', 'proof': 'pv', 'svc': 'sv', 'work': 'wv', 'family': 'fm', 'how': 'hw', 'storm': 'st', 'area': 'tw', 'call': 'cl'}
+PFX = {'hero': 'hx', 'proof': 'pv', 'svc': 'sv', 'work': 'wv', 'family': 'fm', 'how': 'hw', 'storm': 'st', 'area': 'tw', 'call': 'cl',
+       'svcp': 'sp', 'about': 'ab'}  # Phase 6: the Services and About pages' layouts as they stood before the redesign
 FROZEN = {f[:-3] for f in os.listdir(os.path.join(V5, 'src', 'js', 'frozen'))}
 def git(path): return subprocess.run(['git', '-C', REPO, 'show', f'{REV}:rembrandt/v5/src/{path}'], capture_output=True, text=True, check=True).stdout
 for sid, p in PFX.items():
     rx = re.compile(r'(?<![\w-])' + p + r'(?=\d|(?!\w))')
-    ren = lambda s: rx.sub('c' + p, s)
+    # image keys (data-img="ab-crew") are registry names, not classes: they are kept out of the rename
+    ren = lambda s: ''.join(x if x.startswith('data-img="') else rx.sub('c' + p, x) for x in re.split(r'(data-img="[^"]*")', s))
     d = os.path.join(V5, 'src', 'sections', sid, 'bk'); os.makedirs(d, exist_ok=True)
     for v in range(1, 6):
         open(os.path.join(d, f'b{v + 3}.html'), 'w').write(ren(git(f'sections/{sid}/v{v}.html')))
