@@ -3,6 +3,7 @@
    (S0400/S0652), UI under 300 ms, reveals once (S1321), pins desktop only, every drag has a key/tap path (S0070). */
 (() => {
   'use strict';
+  const TRAIL = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || 'currentColor';   // Rule 3: from the token
   const d = document, root = d.documentElement;
   const $ = (s, el = d) => el.querySelector(s);
   const $$ = (s, el = d) => Array.from(el.querySelectorAll(s));
@@ -992,7 +993,7 @@
       }
       cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.clearRect(0, 0, W, H);
       let alive = false;
-      M.forEach(m => { const age = now - m.t; if (age > 2.2) return; alive = true; const u = age / 2.2; const a = (u < 0.12 ? u / 0.12 : 1 - (u - 0.12) / 0.88) * 0.9; cx.globalAlpha = a; cx.fillStyle = '#EA3C39'; cx.beginPath(); cx.arc(m.x, m.y, 1.7 * m.s * (1 + u * 0.55), 0, 6.283); cx.fill(); });
+      M.forEach(m => { const age = now - m.t; if (age > 2.2) return; alive = true; const u = age / 2.2; const a = (u < 0.12 ? u / 0.12 : 1 - (u - 0.12) / 0.88) * 0.9; cx.globalAlpha = a; cx.fillStyle = TRAIL; cx.beginPath(); cx.arc(m.x, m.y, 1.7 * m.s * (1 + u * 0.55), 0, 6.283); cx.fill(); });
       cx.globalAlpha = 1;
       raf = (alive || inside) ? requestAnimationFrame(frame) : 0; if (!raf) last = 0;
     };

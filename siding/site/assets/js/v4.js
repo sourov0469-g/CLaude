@@ -8,6 +8,8 @@
    Everything here is decorative: aria-hidden, pointer-events none, and absent when motion is off. */
 (() => {
   'use strict';
+  // MASTER DIRECTIVE Rule 3: colours come from the declared CSS tokens, resolved once per name
+  const TOK = {}, tok = n => TOK[n] || (TOK[n] = getComputedStyle(document.documentElement).getPropertyValue(n).trim());
   const d = document, root = d.documentElement, G = window.gsap;
   const NS = 'http://www.w3.org/2000/svg';
   const mqFine = matchMedia('(hover: hover) and (pointer: fine)');
@@ -104,21 +106,21 @@
     chip: {
       name: 'Chip',
       svg: `<g class="pb">
-  <g data-back="0"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:#2A4F43"/></g>
-  <g data-back="1"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:#283849"/></g>
+  <g data-back="0"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:var(--accent-dd)"/></g>
+  <g data-back="1"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:var(--accent-d)"/></g>
   <g data-front>
-    <rect class="pk" x="15" y="4" width="18" height="36" rx="1.8" style="fill:#EDECE6"/>
-    <rect data-mid x="15.8" y="16.5" width="16.4" height="11" style="fill:#54504A"/>
-    <rect x="15.8" y="28" width="16.4" height="11.2" style="fill:#2F2F30"/>
+    <rect class="pk" x="15" y="4" width="18" height="36" rx="1.8" style="fill:var(--paper)"/>
+    <rect data-mid x="15.8" y="16.5" width="16.4" height="11" style="fill:var(--accent-300)"/>
+    <rect x="15.8" y="28" width="16.4" height="11.2" style="fill:var(--ink)"/>
     <rect class="pk pn" x="15" y="4" width="18" height="36" rx="1.8"/>
     <g data-head>
       <g data-eye="0" data-r="1.6"><circle class="pinkf" cx="21" cy="10.5" r="1.9"/></g>
       <g data-eye="1" data-r="1.6"><circle class="pinkf" cx="27" cy="10.5" r="1.9"/></g>
-      <rect class="plid" data-lid x="15.8" y="4.8" width="16.4" height="11.4" style="fill:#EDECE6"/>
+      <rect class="plid" data-lid x="15.8" y="4.8" width="16.4" height="11.4" style="fill:var(--paper)"/>
     </g>
     <rect class="pred" data-stripe x="15" y="41.5" width="18" height="2" rx="1"/>
   </g>
-  <circle class="pk" cx="24" cy="36.4" r="1.5" style="fill:#F3F2EE"/>
+  <circle class="pk" cx="24" cy="36.4" r="1.5" style="fill:var(--paper)"/>
 </g>`
     }
   };
@@ -155,7 +157,7 @@
       T(parts.lids, { scaleY: 0, transformOrigin: '50% 0%' }, k);
       if (kind === 'sash') { T(parts.ls, { y: 0 }, k); T(parts.mo, { attr: { y: 40.5, height: 0 } }, k); T(parts.br, { opacity: 0, scale: 1.3, transformOrigin: '50% 50%' }, k); T(parts.sheen, { opacity: 0, x: 0 }, k); }
       if (kind === 'gable') { T(parts.door, { scaleX: 1, transformOrigin: '0% 50%' }, k); T(parts.roof, { rotation: 0, scaleY: 1, y: 0, transformOrigin: '50% 100%' }, k); T(parts.wins, { scale: 1, transformOrigin: '50% 50%' }, k); }
-      if (kind === 'chip') { T(parts.back[0], { rotation: -9, svgOrigin: '24 36.4' }, k); T(parts.back[1], { rotation: 9, svgOrigin: '24 36.4' }, k); T(parts.front, { rotation: 0, scaleX: 1, svgOrigin: '24 36.4' }, k); T(parts.mid, { fill: '#54504A' }, k); T(parts.stripe, { x: -22, opacity: 0 }, k); }
+      if (kind === 'chip') { T(parts.back[0], { rotation: -9, svgOrigin: '24 36.4' }, k); T(parts.back[1], { rotation: 9, svgOrigin: '24 36.4' }, k); T(parts.front, { rotation: 0, scaleX: 1, svgOrigin: '24 36.4' }, k); T(parts.mid, { fill: tok('--accent-300') }, k); T(parts.stripe, { x: -22, opacity: 0 }, k); }
     }
     function pose(name, tgt) {
       rest();
@@ -163,11 +165,11 @@
       if (name === 'cta') {   // D.1: "looks at the booking": lower pane up 3 px, lids to 0.42, 140 ms ease-out (sash); the others lean in
         if (kind === 'sash') { T(parts.ls, { y: -3 }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
         if (kind === 'gable') { T(parts.wins, { scale: 1.12 }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
-        if (kind === 'chip') { T(parts.mid, { fill: '#D42125' }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
+        if (kind === 'chip') { T(parts.mid, { fill: tok('--accent') }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
       } else if (name === 'button') {
         if (kind === 'sash') { T(parts.ls, { y: -7 }, 0.26); T(parts.mo, { attr: { y: 33.5, height: 7 } }, 0.26); T(parts.sheen, { opacity: 1, x: 14, duration: 0.65, ease: 'power2.inOut' }); }
         if (kind === 'gable') T(parts.door, { scaleX: 0.16 }, 0.3, 'back.out(1.5)');
-        if (kind === 'chip') { T(parts.mid, { fill: '#D42125' }, 0.22); T(parts.front, { rotation: 8 * dir }, 0.3, 'back.out(1.5)'); }
+        if (kind === 'chip') { T(parts.mid, { fill: tok('--accent') }, 0.22); T(parts.front, { rotation: 8 * dir }, 0.3, 'back.out(1.5)'); }
       } else if (name === 'link') {
         if (kind === 'sash') T(parts.lids, { scaleY: 0.42 }, 0.2);
         if (kind === 'gable') T(parts.roof, { rotation: -12 * dir, transformOrigin: dir > 0 ? '100% 100%' : '0% 100%' }, 0.3, 'back.out(1.6)');
@@ -184,7 +186,7 @@
       } else if (name === 'card') {
         if (kind === 'sash') T(parts.body, { scale: 1.08 }, 0.3, 'back.out(1.5)');
         if (kind === 'gable') parts.lap.forEach((l, i) => G.fromTo(l, { x: 0 }, { x: i % 2 ? 1.6 : -1.6, duration: 0.14, delay: i * 0.04, yoyo: true, repeat: 1, ease: 'sine.inOut', overwrite: 'auto' }));
-        if (kind === 'chip') G.timeline().to(parts.front, { scaleX: 0, duration: 0.12, ease: 'power2.in' }).set(parts.mid, { fill: '#2A4F43' }).to(parts.front, { scaleX: 1, duration: 0.18, ease: 'power2.out' });
+        if (kind === 'chip') G.timeline().to(parts.front, { scaleX: 0, duration: 0.12, ease: 'power2.in' }).set(parts.mid, { fill: tok('--accent-300') }).to(parts.front, { scaleX: 1, duration: 0.18, ease: 'power2.out' });
       } else if (name === 'drag') {
         T(parts.body, { scaleY: 0.9, scaleX: 1.07 }, 0.2);
         if (kind === 'gable') T(parts.roof, { scaleY: 0.72 }, 0.2);
@@ -635,7 +637,7 @@
           const inner = svgEl('g', {}, c);
           const face = svgEl('rect', { x: -9, y: -13, width: 18, height: 26, rx: 1.5, class: 'f-chip' }, inner);
           svgEl('circle', { cx: 0, cy: -9, r: 1.6, class: 'f-punch' }, inner);
-          F.chips.push({ x, y, inner, face, hex: pal.length ? pal[i % pal.length] : '#CFCBC2', k: 0, row: i });
+          F.chips.push({ x, y, inner, face, hex: pal.length ? pal[i % pal.length] : tok('--stone'), k: 0, row: i });
         }
       },
       still(F) { F.chips.forEach((C, i) => { if (i % 7 === 0) this.set(C, 1); }); },
@@ -843,7 +845,7 @@
       const dv = DIVS[s.dataset.sec]; if (!dv || !i) return;
       const prev = secs[i - 1].querySelector('.stage > .v');
       const own = s.querySelector('.stage > .v');
-      const pb = bgOf(prev) || 'rgb(243, 242, 238)', ob = bgOf(own);
+      const pb = bgOf(prev) || tok('--paper'), ob = bgOf(own);
       // same colour on both sides: the profile takes a shade of it so the boundary still reads
       dv.style.setProperty('--sdv', pb === ob ? `color-mix(in srgb, ${pb} 90%, #000)` : pb);
       dv.style.setProperty('--sdv-line', getComputedStyle(own || s).color);
@@ -1005,7 +1007,7 @@
     const r = el.getBoundingClientRect();
     const c = d.createElement('div');
     c.className = 'rx-call'; c.setAttribute('aria-hidden', 'true');
-    c.innerHTML = '<b>(512) 550-0000</b><span>Monday-Friday 8-8, Saturday 8-6, Sunday 12-5</span>';
+    c.innerHTML = '<b>(512) 550-0000</b><span>Monday\u2013Friday 8\u20138, Saturday 8\u20136, Sunday 12\u20135</span>';
     d.body.appendChild(c);
     const w = Math.min(340, innerWidth - 32);
     G.set(c, { left: clamp(r.left + r.width / 2 - w / 2, 16, innerWidth - w - 16), top: clamp(r.top - 110, 12, innerHeight - 120), width: w });

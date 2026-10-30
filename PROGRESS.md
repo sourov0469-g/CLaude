@@ -427,3 +427,34 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
   - Details are in TRACEABILITY.md. Packed file: 4,160,204 B.
 - **Part G (two new versions per section):** deferred to the next round per the owner deadline.
 - Nothing is marked shipped.
+
+## CONSOLIDATED MASTER DIRECTIVE (2026-10-30): Phase 0 note
+- This directive supersedes today's deadline scope, design note, redesign directive, clarification and addendum.
+- **State at start:**
+  - Fix pass and QA rounds 1–3 committed.
+  - Fonts note landed (642195e).
+  - Phase 1 logo already committed (3068595) under the redesign directive; it is completed under this directive below.
+- **Accent:**
+  - Value: cobalt `--accent #2F66FF`, with a named scale `--accent-50/100/200/300/400`, `--accent-d #1A4FE0` and `--accent-dd #0E2C8A`.
+  - Why it fits a Texas siding company: cobalt is the James Hardie navy of the firm's own finished walls (the Rob Roy job leading the hero) lifted into Texas daylight. It is the colour of their work and of an open Austin sky, and it holds 4.7:1 for white on accent and 6.5:1 for the deep shade as text.
+- **Accent2:** none. Black + white + cobalt carries the brand. The stars and the logo's lit pane, which used sun yellow in the stage-1 draft, move to cobalt tints, because Rule 2 limits a second accent to primary CTAs and cobalt CTAs already lead.
+- **Logo concept:** an A-frame gable that is both the A of Austin and the firm's three trades in one shape:
+  - a lap-siding-clad gable wall (siding);
+  - a roof line with eave overhangs (roofing);
+  - a four-pane window with one lit pane (windows).
+- **Currently dark visible sections (to become light):**
+  - Near 1, Near 2 and Near 3 (night tone);
+  - Book 1, Book 2 and Book 3 (red tone);
+  - the footer (night).
+  - Components on night: Hero 3's photo stage panel, Built 3's warranty card, Money 1's selected plan card, the Hero 1 and 2 scrim plates, and Reviews' dark controls.
+- **Bespoke interactive concept:** "Clad the gable". The visitor picks a wall on a drawn Austin house and clads it course by course with the firm's real materials: James Hardie lap at the published exposures, the published Sherwin-Williams and ColorPlus colours, and a window from the firm's own lines. A live readout shows the nearest documented jobs with the same choices and their published price band. Only this firm, with its documented job record, can answer "what did a wall like mine cost here".
+- **Phase order:** 0 note → 1 logo (complete: mono marks + favicon) → 2 tokens + light → 3 design upgrade in page order → 4 bespoke interactive → 5 version expansion per section → 6 consolidation QA → report.
+- **Collisions logged (priority: locked facts > hard rules > design standards):**
+  - (a) Annex A gives the hours with en dashes, while Audit pack C.14 printed hyphens. Annex A wins, so the hours string is printed verbatim.
+  - (b) Annex A's address carries a comma after "Blvd". Annex A wins.
+  - (c) Phase 5 expects five current visible versions per section, but each section has three (Part G was deferred). The three are backed up byte-identical. The five improved versions are the three current ones plus two of the earlier backups, raised to the new standard, plus three new versions.
+  - (d) Backups therefore total six per section, not eight. Nothing is invented to fill slots.
+- **Amendment (Rule 1, backgrounds):**
+  - Pure black and near-black backgrounds are banned, and a deep green is allowed on at most a couple of sections.
+  - Deep-green sections used: **none**. The accent is cobalt and Rule 2 (one accent) stands, so a green ground beside it would be a second hue.
+  - The page stays light-only, with the cobalt tints carrying the depth. If the owner wants deep-green bands, the clean route is a green accent family across the whole palette; that is a palette decision for him.

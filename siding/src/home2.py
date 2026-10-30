@@ -18,8 +18,8 @@ import sheet
 
 H = 'assets/img/h/'
 EMAIL = 'info@austinprosiding.com'
-ADDRESS = '7801 N Lamar Blvd Suite C70, Austin, TX 78752'   # BRIEF-V5 §3, verbatim
-HOURS = 'Monday-Friday 8-8, Saturday 8-6, Sunday 12-5'       # BRIEF-V5 §3 figures; hyphens page-wide (Audit pack C.14, K2 closed)
+ADDRESS = '7801 N Lamar Blvd, Suite C70, Austin, TX 78752'   # MASTER DIRECTIVE Annex A, verbatim
+HOURS = 'Monday&ndash;Friday 8&ndash;8, Saturday 8&ndash;6, Sunday 12&ndash;5'   # MASTER DIRECTIVE Annex A verbatim (en dashes; locked facts outrank C.14's hyphens). Entities, so clean() keeps them
 
 
 def band(s):
@@ -1461,7 +1461,7 @@ def section(key, label, fns, names):
 def head():
     ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Austin Pro Siding, Windows & Roofing",
           "telephone": "+1-512-550-0000", "email": EMAIL, "url": LIVE,
-          "address": {"@type": "PostalAddress", "streetAddress": "7801 N Lamar Blvd Suite C70", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78752", "addressCountry": "US"},
+          "address": {"@type": "PostalAddress", "streetAddress": "7801 N Lamar Blvd, Suite C70", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78752", "addressCountry": "US"},
           "openingHours": ["Mo-Fr 08:00-20:00", "Sa 08:00-18:00", "Su 12:00-17:00"], "foundingDate": "2009",
           "aggregateRating": {"@type": "AggregateRating", "ratingValue": 4.9, "reviewCount": 474, "bestRating": 5}}
     return f'''<!doctype html>
@@ -1472,7 +1472,7 @@ def head():
 <title>Austin Pro Siding, Windows &amp; Roofing | Priced in public</title>
 <meta name="description" content="Siding, windows and roofing in Austin since 2009, with real prices from 886 documented jobs. A concept redesign with three versions of every section.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#F3F2EE">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/Poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Roboto-latin.woff2" as="font" type="font/woff2" crossorigin>

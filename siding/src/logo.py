@@ -2,14 +2,14 @@
 so the site build itself needs nothing new.
 
 Mark: a gable roof drawn as one bold chevron over a four-pane window, on an accent tile. The roof chevron doubles as
-the A of Austin; one pane is lit, the only place the logo uses the second (sun) colour. Wordmark: AUSTIN PRO in
+the A of Austin; one pane is lit in a pale cobalt tint. Wordmark: AUSTIN PRO in
 Poppins 700 with PRO in the accent, descriptor in Roboto 500. All text is outlined, so the files need no fonts."""
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, 'site/assets/fonts')
 OUT = os.path.join(ROOT, 'site/assets/img/brand')
-ACC, ACC_D, SUN, INK, INK2, WHITE = '#2F66FF', '#1A4FE0', '#FFC933', '#0E0F12', '#3D4350', '#FFFFFF'
+ACC, ACC_D, ACC_200, INK, INK2, WHITE = '#2F66FF', '#1A4FE0', '#C8D8FF', '#0E0F12', '#3D4350', '#FFFFFF'
 
 
 def run(font, text, size, x, y, track=0.0, wght=None):
@@ -35,7 +35,7 @@ def run(font, text, size, x, y, track=0.0, wght=None):
     return pen.getCommands(), cx - x - track * size
 
 
-def mark(x=0, y=0, k=1.0, wall=ACC, course=ACC_D, roof=INK, pane=WHITE, lit=SUN, courses=True, uid=''):
+def mark(x=0, y=0, k=1.0, wall=ACC, course=ACC_D, roof=INK, pane=WHITE, lit=ACC_200, courses=True, uid=''):
     """64 x 64 grid. An A-frame gable: the letter A of Austin and the three trades in one shape. The gable wall is
     clad in lap-siding courses (siding), a roof line caps it with an eave overhang (roofing), and a four-pane window
     sits where the A's crossbar would be, one pane lit (windows). courses=False drops the course lines for 16 px use."""
@@ -52,6 +52,20 @@ def mark(x=0, y=0, k=1.0, wall=ACC, course=ACC_D, roof=INK, pane=WHITE, lit=SUN,
     for i, (a, b) in enumerate([(24.5, 38.5), (32.5, 38.5), (24.5, 46.5), (32.5, 46.5)]):
         p.append(f'<rect x="{x + a * k:.2f}" y="{y + b * k:.2f}" width="{n(7)}" height="{n(7)}" fill="{lit if i == 1 else course}"/>')
     return ''.join(p)
+
+
+def mono(color, x=0, y=0, k=1.0, uid='m'):
+    """single-colour mark (black, white or accent): one fill, the course lines, the window frame and the lit pane are
+    knocked out of it, so the shape reads on any light or dark ground"""
+    t = lambda a, b: f'{x + a * k:.2f} {y + b * k:.2f}'
+    n = lambda v: f'{v * k:.2f}'
+    tri = f'M{t(32, 10)}L{t(57, 59)}L{t(7, 59)}Z'
+    ko = ''.join(f'<rect x="{x}" y="{y + c * k:.2f}" width="{n(64)}" height="{n(1.6)}" fill="#000"/>' for c in (27, 34, 41, 48))
+    ko += f'<rect x="{x + 22.5 * k:.2f}" y="{y + 36.5 * k:.2f}" width="{n(19)}" height="{n(19)}" fill="#000"/>'
+    panes = ''.join(f'<rect x="{x + a * k:.2f}" y="{y + b * k:.2f}" width="{n(7)}" height="{n(7)}" fill="{color}"/>' for a, b in [(24.5, 38.5), (24.5, 46.5), (32.5, 46.5)])
+    return (f'<mask id="apm{uid}"><rect x="{x}" y="{y}" width="{n(64)}" height="{n(64)}" fill="#fff"/>{ko}</mask>'
+            f'<path d="{tri}" fill="{color}" mask="url(#apm{uid})"/>{panes}'
+            f'<path d="M{t(3.5, 40)}L{t(32, 4.5)}L{t(60.5, 40)}" fill="none" stroke="{color}" stroke-width="{n(6.5)}" stroke-linecap="square" stroke-linejoin="miter"/>')
 
 
 def lockup(dark=INK, sub=INK2, acc=ACC_D):
@@ -80,4 +94,6 @@ if __name__ == '__main__':
     open(os.path.join(OUT, 'logo.svg'), 'w').write(svg(W, 64, body, 'Austin Pro Siding, Windows and Roofing'))
     open(os.path.join(OUT, 'logo-mark.svg'), 'w').write(svg(64, 64, mark(), 'Austin Pro'))
     open(os.path.join(OUT, 'favicon.svg'), 'w').write(svg(64, 64, mark(courses=False), 'Austin Pro'))
+    for nm, c in (('black', INK), ('white', WHITE), ('accent', ACC)):
+        open(os.path.join(OUT, f'logo-mark-{nm}.svg'), 'w').write(svg(64, 64, mono(c, uid=nm), 'Austin Pro'))
     print('logo.svg', W, 'x 64;', os.path.getsize(os.path.join(OUT, 'logo.svg')), 'B')
