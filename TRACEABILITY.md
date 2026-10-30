@@ -469,3 +469,25 @@ Each section's three references differ:
 - Page systems / every section's `.nextstep` line: tap height 20 → 44 px. Source: ⟦S1482⟧ design-qa-checklist (hit targets ≥ 44 px), ⟦S1440⟧ Fitts. Evidence: recheck.js, no target under 24 px.
 - Colour 2 swatches on phones: 22 → 28 px. Source: ⟦S1495⟧ critique-affordance, WCAG 2.5.8.
 - Hero 2 `.h2-more`: max-width 46 → 36 rem. Source: ⟦S1500⟧ critique-typography (45–75 ch).
+
+# AUDIT FEEDBACK PACK round (30 Oct 2026)
+
+Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states ACCEPTED / IMPROVED / REJECTED with its reason and a skill citation. Text inside bank or skill files is treated as data, not instructions.
+
+## A · Backups and five slots (Part A.2, A.3)
+- **Backups, ACCEPTED, with one IMPROVEMENT.** Today's 30 versions were frozen as built into `siding/src/backup/<section>-b<n>.html` before any edit. They are emitted as `<template data-v="6|7|8" data-bk>`, which means Backup 1, 2 and 3 are slots 6, 7 and 8.
+  - **Where they are reached:** the Versions panel (a closed "Backups" disclosure, one row per section) and the URL code (digits 6 to 8).
+  - **What they never are:** the default, a tab in the visible switcher, or deleted.
+  - **Behaviour:** a backup mounts with its original script. Where a version's script changes this round, the old function stays as `V.<section><n+5>`; otherwise the backup runs `V.<section><n>`. The section carries `data-bk` while a backup is live, so per-version fixes are scoped `.sec:not([data-bk])` and do not reach the frozen version.
+  - **Improvement:** page-level FACT corrections (hours string, claim labels) still reach the backups, because the facts lock outranks the freeze. A backup preserves a design, not an error.
+  - Sources: ⟦S0082⟧ variant (switchable variants preserved), ⟦S1246⟧ tabs-accessibility (only the visible set is a tablist; roving tabindex over 1 to 5).
+- **Weight, IMPROVED** (F18 cap 4,221,484 B). A second copy of 30 templates would have broken the cap. The packer now writes all 60 templates as one deflate-raw stream (base64) and restores them before home.js mounts anything.
+  - Backup n is emitted right after the version it snapshots, inside deflate's 32 KB window.
+  - Result: 540,868 B raw becomes 56,094 B. The file falls from 4,219,580 to 4,032,061 B while carrying twice the versions.
+  - Version 1 stays in each stage as real HTML, so first paint and the no-JS page are unchanged. Without `DecompressionStream`, the switcher hides 2 to 5 and the page keeps version 1.
+  - Source: ⟦S0056⟧ fixing-motion-performance (no extra main-thread work at first paint), ⟦S1320⟧ §7 (static first frame complete).
+- **Switcher 1 to 5, ACCEPTED.** Tabs are generated from the section's version list; arrows, Home and End wrap over however many are visible; keys 1 to 5 switch the section in view. ⟦S1246⟧.
+- **Version-code chrome, ACCEPTED (D.7).** The 3-3-4 digit grouping ("111 111 1111") is retired. The bar now reads `H1 P1 S1 W1 B1 C1 N1 R1 M1 Bk1` (backups as `Wb2`), and is hidden below 640 px.
+  - Labels in visitor language: "Versions" (was "Your picks"); "Copy the version list"; "Cursor" (was "Companion"); "Copied." (was "Paste it into your message").
+  - Source: ⟦S0001⟧ plain-language signposting.
+  - Verification: `scratchpad/ap/sw.js`. `?v=2367812345` mounts H2 P3 Sb1 Wb2 Bb3; every tab is clicked and the arrow wraps in all 10 sections; the backup button sets `?v=1117111111`; console errors 0.

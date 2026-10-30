@@ -1225,15 +1225,32 @@ def with_phone(key, v):
     return v[:i] + line + '\n' + v[i:]
 
 
+BK = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backup')
+BK_SLOT = 5   # backups live in slots 6, 7, 8: Backup n = slot 5 + n (Audit pack A.2)
+
+
+def backups(key):
+    """the pre-round versions of a section, frozen as built (backup/<key>-b<n>.html): never the default, never deleted"""
+    names = open(os.path.join(BK, f'{key}-names.txt'), encoding='utf-8').read().split('|')
+    return [(BK_SLOT + n, open(os.path.join(BK, f'{key}-b{n}.html'), encoding='utf-8').read(), names[n - 1]) for n in (1, 2, 3)]
+
+
 def section(key, label, fns, names):
     vs = [with_phone(key, f()) for f in fns]
+    bks = backups(key)
     tabs = ''.join(f'<button class="vsw-b" type="button" role="tab" id="{key}-tab{n}" aria-selected="{"true" if n == 1 else "false"}" aria-controls="{key}-stage" tabindex="{0 if n == 1 else -1}" data-v="{n}" aria-label="{label} version {n}: {e(nm)}">{n}</button>'
                    for n, nm in enumerate(names, 1))
-    tpl = ''.join(f'<template data-v="{n}">{v}</template>' for n, v in enumerate(vs, 1))
-    return f'''<section class="sec sec-{key}" id="{key}" data-sec="{key}" data-names="{e('|'.join(names))}" aria-label="{label}">
+    # visible versions and backups interleaved (v1, Backup 1, v2, Backup 2 ...) so the packer's deflate window pairs them
+    order = []
+    for n, v in enumerate(vs, 1):
+        order.append(f'<template data-v="{n}">{v}</template>')
+        if n <= 3:
+            order.append(f'<template data-v="{bks[n - 1][0]}" data-bk>{bks[n - 1][1]}</template>')
+    bk_names = '|'.join(nm for _n, _v, nm in bks)
+    return f'''<section class="sec sec-{key}" id="{key}" data-sec="{key}" data-names="{e('|'.join(names))}" data-bk-names="{e(bk_names)}" aria-label="{label}">
   <div class="vsw-rail"><div class="vsw" role="tablist" aria-label="{label} versions"><span class="vsw-l" aria-hidden="true"><b>{label}</b> <span>{e(names[0])}</span></span>{tabs}</div></div>
   <div class="stage" id="{key}-stage" role="tabpanel" aria-labelledby="{key}-tab1">{vs[0]}</div>
-  {tpl}
+  {''.join(order)}
 </section>'''
 
 
@@ -1278,17 +1295,25 @@ def header():
 '''
 
 
+CODE = {'hero': 'H', 'proof': 'P', 'services': 'S', 'work': 'W', 'built': 'B', 'colour': 'C', 'near': 'N', 'reviews': 'R', 'money': 'M', 'book': 'Bk'}
+
+
 def picks():
+    """version picker. The code reads H1 P1 S1 ... (Audit pack D.7: never grouped like a phone number). Backups sit
+    behind a closed disclosure: reachable, never the default (A.2)."""
     rows = ''.join(f'''<li><span>{label}</span><div class="pk-seg" role="radiogroup" aria-label="{label} version" data-for="{key}">{''.join(f'<button type="button" role="radio" aria-checked="{"true" if n == 1 else "false"}" data-v="{n}" title="{e(nm)}">{n}</button>' for n, nm in enumerate(names, 1))}</div></li>''' for key, label, _f, names in SECTIONS)
+    bk_rows = ''.join(f'''<li><span>{label}</span><div class="pk-bk" data-for="{key}">{''.join(f'<button type="button" aria-pressed="false" data-v="{v}" title="{e(nm)}">Backup {v - BK_SLOT}</button>' for v, _h, nm in backups(key))}</div></li>''' for key, label, _f, _n in SECTIONS)
+    code0 = ' '.join(f'{CODE[k]}1' for k, *_ in SECTIONS)
     return f'''<div class="picks">
-  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Your picks</span><b class="num" data-pk-code>111 111 1111</b></button><div class="pal-mini"><span aria-hidden="true">Companion</span><div class="pal-sw" role="radiogroup" aria-label="Cursor companion, quick switch"><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="sash">Sash</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="gable">Gable</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="chip">Chip</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="off">Off</button></div></div>
-  <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Your picks" hidden>
-    <p class="pk-h">Your picks</p>
-    <p class="pk-tip">Switch any section here or with its 1 2 3 buttons. Keys 1, 2 and 3 switch the section in view.</p>
+  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Versions</span><b class="num" data-pk-code>{code0}</b></button><div class="pal-mini"><span aria-hidden="true">Cursor</span><div class="pal-sw" role="radiogroup" aria-label="Cursor companion, quick switch"><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="sash">Sash</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="gable">Gable</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="chip">Chip</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="off">Off</button></div></div>
+  <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Versions" hidden>
+    <p class="pk-h">Versions</p>
+    <p class="pk-tip">Switch any section here or with its numbered buttons. Keys 1 to 5 switch the section in view.</p>
     <ul class="pk-list">{rows}</ul>
+    <details class="pk-more"><summary>Backups: the versions from before this round</summary><ul class="pk-list">{bk_rows}</ul></details>
     <label class="pk-motion"><input type="checkbox" data-motion checked><span>Motion</span></label>
     <div class="pk-pal"><span id="pk-pal-l">Cursor companion</span><div class="pal-sw" role="radiogroup" aria-labelledby="pk-pal-l"><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="sash">Sash</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="gable">Gable</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="chip">Chip</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="off">Off</button></div><p class="pk-pal-note">The companion follows a mouse pointer. It stays off on touch screens and with motion off.</p></div>
-    <div class="pk-act"><button class="btn btn-ink btn-sm" type="button" data-copy>Copy my picks</button><button class="tlink" type="button" data-reset>Reset</button></div>
+    <div class="pk-act"><button class="btn btn-ink btn-sm" type="button" data-copy>Copy the version list</button><button class="tlink" type="button" data-reset>Reset</button></div>
     <p class="pk-msg" aria-live="polite"></p>
   </div>
 </div>'''

@@ -1338,7 +1338,11 @@
   /* ========================================================================================
      SECTION CONTROLLER: 1/2/3 tabs, keys, picks panel, persistence (S0067, S0082, S1246)
      ======================================================================================== */
-  const SECS = $$('.sec').map(el => ({ el, key: el.dataset.sec, stage: $('.stage', el), tabs: $$('.vsw-b', el), label: $('.vsw-l span', el), names: el.dataset.names.split('|'), tpls: $$('template', el), v: 1, b: null, ctx: null, api: {}, switched: false }));
+  /* Audit pack A.2/A.3: visible versions 1-5 are tabs; Backups 1-3 (the pre-round versions) are slots 6-8, reachable
+     from the Versions panel and ?v=, never the default. A backup runs its original script: V.<key>(n+5) when a
+     version's script changed this round, else V.<key>n. */
+  const BKS = 5, CODE = { hero: 'H', proof: 'P', services: 'S', work: 'W', built: 'B', colour: 'C', near: 'N', reviews: 'R', money: 'M', book: 'Bk' };
+  const SECS = $$('.sec').map(el => ({ el, key: el.dataset.sec, stage: $('.stage', el), tabs: $$('.vsw-b', el), label: $('.vsw-l span', el), names: el.dataset.names.split('|'), bkNames: (el.dataset.bkNames || '').split('|'), tpl: Object.fromEntries($$('template', el).map(t => [+t.dataset.v, t])), v: 1, b: null, ctx: null, api: {}, switched: false }));
   const BY = Object.fromEntries(SECS.map(s => [s.key, s]));
 
   function unmount(s) {
@@ -1349,16 +1353,18 @@
   function mount(s, v, initial) {
     if (!initial) {
       unmount(s);
-      s.stage.replaceChildren(s.tpls[v - 1].content.cloneNode(true));
+      s.stage.replaceChildren(s.tpl[v].content.cloneNode(true));
       if (window.__apAsset) window.__apAsset(s.stage);
     }
-    s.v = v; s.el.dataset.v = v;
-    s.tabs.forEach(t => { const on = +t.dataset.v === v; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
-    s.stage.setAttribute('aria-labelledby', s.tabs[v - 1].id);
-    s.label.textContent = s.names[v - 1];
+    const bk = v > BKS;
+    s.v = v; s.el.dataset.v = v; s.el.toggleAttribute('data-bk', bk);
+    s.tabs.forEach(t => { const on = +t.dataset.v === v; t.setAttribute('aria-selected', on); t.tabIndex = on || (bk && +t.dataset.v === 1) ? 0 : -1; });
+    if (bk) { s.stage.removeAttribute('aria-labelledby'); s.stage.setAttribute('aria-label', `${s.el.getAttribute('aria-label')}, backup ${v - BKS}`); }
+    else { s.stage.removeAttribute('aria-label'); s.stage.setAttribute('aria-labelledby', s.tabs[v - 1].id); }
+    s.label.textContent = bk ? `Backup ${v - BKS}: ${s.bkNames[v - BKS - 1]}` : s.names[v - 1];
     const vr = s.stage.firstElementChild;
     s.b = bag();
-    const run = () => { heads(vr, s); const fn = V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
+    const run = () => { heads(vr, s); const fn = V[s.key + v] || (bk ? V[s.key + (v - BKS)] : null); if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
     /* K11: every scroll entrance a version sets up plays at reveal level (each element 0.3 s at most, staggers scaled
        with it); tweens marked data: 'k10' (data the visitor reads, and Work 1's sweep) keep their tempo */
     const cap = () => { if (!s.ctx || !s.ctx.getTweens) return; s.ctx.getTweens().forEach(t => { if (t.scrollTrigger && t.vars.data !== 'k10' && (t.vars.duration || 0) > REVEAL) t.timeScale(t.vars.duration / REVEAL); }); };
@@ -1367,15 +1373,16 @@
     } catch (err) { console.error(s.key + v, err); }
   }
   const code = () => SECS.map(s => s.v).join('');
-  const pretty = () => { const c = code(); return `${c.slice(0, 3)} ${c.slice(3, 6)} ${c.slice(6)}`; };
+  const pretty = () => SECS.map(s => CODE[s.key] + (s.v > BKS ? 'b' + (s.v - BKS) : s.v)).join(' ');   // D.7: never 3-3-4
+  const okV = (s, v) => !!s.tpl[v];
   function save() {
     store.set('ap-picks', code());
     try { const u = new URL(location.href); u.searchParams.set('v', code()); history.replaceState(null, '', u); } catch (e) { /* file URL or sandbox: the panel still shows the picks */ }
     syncPicks();
   }
   function switchTo(s, v, opts = {}) {
-    v = clamp(v | 0, 1, 3);
-    if (v === s.v) return;
+    v = v | 0;
+    if (!okV(s, v) || v === s.v) return;
     const y0 = s.el.getBoundingClientRect().top;
     s.switched = true;
     mount(s, v);
@@ -1388,15 +1395,15 @@
     const list = $('.vsw', s.el);
     list.addEventListener('click', e => { const t = e.target.closest('.vsw-b'); if (t) switchTo(s, +t.dataset.v); });
     list.addEventListener('keydown', e => {
-      const i = s.v - 1; let n = null;
-      if (e.key === 'ArrowRight') n = (i + 1) % 3; else if (e.key === 'ArrowLeft') n = (i + 2) % 3; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = 2;
+      const k = s.tabs.length, i = s.v > BKS ? 0 : s.v - 1; let n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % k; else if (e.key === 'ArrowLeft') n = (i + k - 1) % k; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = k - 1;
       if (n !== null) { e.preventDefault(); switchTo(s, n + 1, { focusTab: true }); }
     });
   });
 
-  /* keys 1, 2, 3 switch the section in view; never inside fields or with modifiers */
+  /* keys 1 to 5 switch the section in view; never inside fields or with modifiers */
   d.addEventListener('keydown', e => {
-    if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || !/^[123]$/.test(e.key)) return;
+    if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || !/^[1-5]$/.test(e.key)) return;
     const t = e.target;
     if (t.closest && t.closest('input, textarea, select, [contenteditable="true"], [role="slider"]')) return;
     const mid = window.innerHeight * 0.45;
@@ -1408,7 +1415,8 @@
   const pkBtn = $('.pk-btn'), pkPanel = $('#pk-panel'), pkCode = $('[data-pk-code]'), pkMsg = $('.pk-msg');
   function syncPicks() {
     pkCode.textContent = pretty();
-    $$('.pk-seg').forEach(g => { const s = BY[g.dataset.for]; $$('button', g).forEach(x => { const on = +x.dataset.v === s.v; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; }); });
+    $$('.pk-seg').forEach(g => { const s = BY[g.dataset.for]; $$('button', g).forEach(x => { const on = +x.dataset.v === s.v; x.setAttribute('aria-checked', on); x.tabIndex = on || (s.v > BKS && x.dataset.v === '1') ? 0 : -1; }); });
+    $$('.pk-bk').forEach(g => { const s = BY[g.dataset.for]; $$('button', g).forEach(x => x.setAttribute('aria-pressed', +x.dataset.v === s.v)); });
   }
   const pkOpen = on => { pkPanel.hidden = !on; pkBtn.setAttribute('aria-expanded', on); if (on) { syncPicks(); const f = $('.pk-seg [aria-checked="true"]', pkPanel); if (f) f.focus(); } };
   pkBtn.addEventListener('click', () => pkOpen(pkPanel.hidden));
@@ -1418,15 +1426,16 @@
     const s = BY[g.dataset.for];
     g.addEventListener('click', e => { const x = e.target.closest('button'); if (x) switchTo(s, +x.dataset.v); });
     g.addEventListener('keydown', e => {
-      let n = null; const i = s.v - 1;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % 3; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i + 2) % 3;
+      const k = $$('button', g).length, i = s.v > BKS ? 0 : s.v - 1; let n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % k; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i + k - 1) % k;
       if (n !== null) { e.preventDefault(); switchTo(s, n + 1); $(`button[data-v="${n + 1}"]`, g).focus(); }
     });
   });
+  $$('.pk-bk').forEach(g => { const s = BY[g.dataset.for]; g.addEventListener('click', e => { const x = e.target.closest('button'); if (x) switchTo(s, +x.dataset.v); }); });
   $('[data-copy]').addEventListener('click', () => {
-    const text = 'My picks: ' + SECS.map(s => `${s.el.getAttribute('aria-label')} ${s.v} (${s.names[s.v - 1]})`).join(', ');
-    const ok = () => { pkMsg.textContent = 'Copied. Paste it into your message.'; };
-    const fallback = () => { const t = d.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;opacity:0'; d.body.appendChild(t); t.select(); let done = false; try { done = d.execCommand('copy'); } catch (e) { done = false; } t.remove(); pkMsg.textContent = done ? 'Copied. Paste it into your message.' : text; };
+    const text = 'Versions: ' + SECS.map(s => `${s.el.getAttribute('aria-label')} ${s.v > BKS ? 'backup ' + (s.v - BKS) : s.v} (${s.v > BKS ? s.bkNames[s.v - BKS - 1] : s.names[s.v - 1]})`).join(', ');
+    const ok = () => { pkMsg.textContent = 'Copied.'; };
+    const fallback = () => { const t = d.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;opacity:0'; d.body.appendChild(t); t.select(); let done = false; try { done = d.execCommand('copy'); } catch (e) { done = false; } t.remove(); pkMsg.textContent = done ? 'Copied.' : text; };
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
   });
   $('[data-reset]').addEventListener('click', () => { SECS.forEach(s => switchTo(s, 1)); pkMsg.textContent = 'Every section is back to version 1.'; });
@@ -1473,10 +1482,19 @@
   /* boot: picks from ?v=, then saved picks, else all version 1 */
   let picks = null;
   try { picks = new URL(location.href).searchParams.get('v'); } catch (e) { picks = null; }
-  if (!/^[123]{10}$/.test(picks || '')) picks = store.get('ap-picks');
-  if (!/^[123]{10}$/.test(picks || '')) picks = '1111111111';
+  if (!/^[1-8]{10}$/.test(picks || '')) picks = store.get('ap-picks');
+  if (!/^[1-8]{10}$/.test(picks || '')) picks = '1111111111';
   lenisSync(); syncFx();
-  SECS.forEach((s, k) => mount(s, +picks[k], +picks[k] === 1));
+  /* single-file build: the templates arrive compressed (window.__apTpl). Version 1 is already in each stage, so the
+     page reads complete before they land; anything else mounts once they are restored. */
+  const ready = window.__apTpl || Promise.resolve(true);
+  SECS.forEach(s => mount(s, 1, true));
+  ready.then(ok => {
+    if (ok === false) { SECS.forEach(s => s.tabs.forEach(t => { if (t.dataset.v !== '1') t.hidden = true; })); return; }
+    SECS.forEach((s, k) => { const v = +picks[k]; if (v !== 1 && okV(s, v)) { s.switched = false; mount(s, v); } });
+    syncPicks();
+    if (ST) ST.refresh();
+  });
   syncPicks();
   if (ST) {
     if (d.fonts && d.fonts.ready) d.fonts.ready.then(() => ST.refresh());

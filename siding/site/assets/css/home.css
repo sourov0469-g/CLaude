@@ -931,6 +931,14 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 .pk-act .tlink { min-height: 44px; }
 .pk-msg { margin-top: 8px; color: #C9C6BE; font-size: .8125rem; min-height: 1.2em; }
 .picks :focus-visible { outline: 2px solid #fff; outline-offset: 2px; box-shadow: none; }
+/* Audit pack A.2: backups behind a closed disclosure in the Versions panel; D.7: the code reads H1 P1 S1, never 3-3-4 */
+.pk-more { margin-top: 10px; border-top: 1px solid rgba(243, 242, 238, .16); }
+.pk-more > summary { display: flex; align-items: center; min-height: 44px; color: #C9C6BE; font-size: .8125rem; font-weight: 650; cursor: pointer; }
+.pk-bk { display: flex; gap: 4px; }
+.pk-bk button { min-height: 40px; padding: 0 8px; border: 1px solid rgba(243, 242, 238, .22); border-radius: 999px; background: none; color: inherit; font-size: .75rem; font-weight: 650; }
+.pk-bk button[aria-pressed="true"] { background: #F3F2EE; color: #161616; }
+.pk-btn b { font-size: .75rem; letter-spacing: .02em; word-spacing: .1em; }
+@media (max-width: 639px) { .pk-btn b { display: none; } }
 
 @media not all and (hover: hover) and (pointer: fine) { [data-fine-only] { display: none; } }
 

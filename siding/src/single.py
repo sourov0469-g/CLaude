@@ -14,6 +14,7 @@ import os
 import re
 import shutil
 import subprocess
+import zlib
 
 from PIL import Image
 
@@ -124,6 +125,24 @@ def build():
         data, mime = squeeze(p)
         table[p] = base64.b64encode(data).decode()
         types[p] = mime
+    # 2b. version templates (Audit pack A.2/A.3: five visible versions + three backups per section). They are only ever
+    #     cloned by script, so they travel as ONE deflate-raw stream (base64) and are restored into their <template>s
+    #     before home.js mounts anything. Backup n sits right after the version it snapshots, inside deflate's 32 KB
+    #     window, so a backup costs little more than its diff. Without DecompressionStream the page keeps version 1.
+    tpls = []
+
+    def tpl_out(m):
+        tpls.append(m.group(2))
+        return f'<template{m.group(1)} data-z="{len(tpls) - 1}"></template>'
+    html = re.sub(r'<template(\s[^>]*)>(.*?)</template>', tpl_out, html, flags=re.S)
+    co = zlib.compressobj(9, zlib.DEFLATED, -15, 9)
+    zraw = co.compress(json.dumps(tpls, ensure_ascii=False, separators=(',', ':')).encode()) + co.flush()
+    tpl_tag = '<script type="application/octet-stream" id="ap-tpl">' + base64.b64encode(zraw).decode() + '</script>\n'
+    tpl_boot = '''<script>window.__apTpl=(function(){var el=document.getElementById('ap-tpl');if(!el||!window.DecompressionStream)return Promise.resolve(false);
+var s=atob(el.textContent),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);
+return new Response(new Blob([a]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text().then(function(t){var L=JSON.parse(t);
+[].forEach.call(document.querySelectorAll('template[data-z]'),function(x){x.innerHTML=L[+x.getAttribute('data-z')];x.removeAttribute('data-z');});return true;}).catch(function(){return false;});})();</script>
+'''
     # 3. start-up: asset table -> blob URLs, fill every data-asrc now and on demand
     boot = '''<script>(function(){var A=JSON.parse(document.getElementById('ap-assets').textContent),T=A.d,M=A.t,U={};
 function url(p){if(!p)return p;var k=p.replace(/^\\.\\//,'');if(U[k])return U[k];var b=T[k];if(!b)return p;var s=atob(b),n=s.length,a=new Uint8Array(n);for(var i=0;i<n;i++)a[i]=s.charCodeAt(i);
@@ -139,7 +158,7 @@ window.__apUrl=url;window.__apAsset=fill;fill(document);})();</script>
     for n in [f'{j}.min.js' for j in JS] + ['lenis.min.js', 'fx.js', 'v4.js', 'home.js']:
         scripts += f'<script>\n{script(n)}\n</script>\n'
     html = re.sub(r'(<script src="assets/js/[^"]+" defer></script>\n)+', '', html)
-    html = html.replace('</body>', asset_tag + boot + scripts + '</body>')
+    html = html.replace('</body>', asset_tag + boot + tpl_tag + tpl_boot + scripts + '</body>')
     # nothing may still point at the disk
     left = re.findall(r'(?<![-\w])(?:src|href)="assets/[^"]+"', html)
     assert not left, left[:5]
@@ -148,6 +167,7 @@ window.__apUrl=url;window.__apAsset=fill;fill(document);})();</script>
     imgs = sum(len(v) for v in table.values()) * 3 // 4
     kinds = {m: sum(1 for t in types.values() if t == m) for m in sorted(set(types.values()))}
     print('formats:', kinds)
+    print(f'templates: {len(tpls)}, {sum(len(t) for t in tpls)} B raw -> {len(zraw)} B deflated')
     print(f'{os.path.basename(OUT)} {os.path.getsize(OUT) / 1048576:.1f} MB; {len(table)} images ({imgs / 1048576:.1f} MB raw)')
 
 
