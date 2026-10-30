@@ -1,0 +1,250 @@
+{
+ "numbers_near_review": [
+  "1",
+  "12",
+  "2",
+  "2026",
+  "3",
+  "474",
+  "5,000",
+  "620",
+  "78752",
+  "886"
+ ],
+ "windows_with_numbers": [
+  "\"Siding & Exterior Painting\"}]}} Reviews Stream 1 2 3",
+  "12; } } /* REVIEWS 3: True Focus over",
+  "2026 From 474 Google reviews",
+  "32px; } } /* REVIEWS 2: one quote in",
+  "4.9 on 474 Google reviews",
+  "4.9 on 474 Google reviews 5,000+ Central Texas homeowners",
+  "4.9 on 474 Google reviews GAF Master Elite James",
+  "C70, Austin, TX 78752 Reviews 4.9 on 474 Google",
+  "proof strip (anatomy F1: rating + review count +",
+  "rating span:last-child { font-weight: 620;",
+  "reviews Record 886 documented projects,",
+  "var(--hl, #E8D9A8); } /* REVIEWS 1: Q161 marquee of",
+  "write 4.9 474 Google reviews Pause “Wow what a",
+  "you 1 2 3 Reviews 1 2 3 Money"
+ ],
+ "jsonld_reviewCount": [
+  "474"
+ ],
+ "phone_per_version": {
+  "hero1": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 1
+  },
+  "hero2": {
+   "tel_links": 2,
+   "phone_text": 2,
+   "booking": 1
+  },
+  "hero3": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 1
+  },
+  "proof1": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "proof2": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "proof3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "services1": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 1
+  },
+  "services2": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 11
+  },
+  "services3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "work1": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "work2": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "work3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "built1": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "built2": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "built3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "colour1": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 1
+  },
+  "colour2": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "colour3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "near1": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "near2": {
+   "tel_links": 7,
+   "phone_text": 7,
+   "booking": 7
+  },
+  "near3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "reviews1": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "reviews2": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "reviews3": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "money1": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "money2": {
+   "tel_links": 0,
+   "phone_text": 0,
+   "booking": 0
+  },
+  "money3": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 1
+  },
+  "book1": {
+   "tel_links": 1,
+   "phone_text": 2,
+   "booking": 2
+  },
+  "book2": {
+   "tel_links": 1,
+   "phone_text": 2,
+   "booking": 1
+  },
+  "book3": {
+   "tel_links": 1,
+   "phone_text": 1,
+   "booking": 1
+  }
+ },
+ "versions_without_phone": [
+  "proof1",
+  "proof2",
+  "proof3",
+  "services3",
+  "work1",
+  "work2",
+  "work3",
+  "built1",
+  "built2",
+  "built3",
+  "colour2",
+  "colour3",
+  "near1",
+  "near3",
+  "reviews1",
+  "reviews2",
+  "reviews3",
+  "money1",
+  "money2"
+ ],
+ "booking_without_phone": [],
+ "chrome_phone": {
+  "header": true,
+  "footer": true
+ },
+ "886_contexts": [
+  " 886 ",
+  " 886 documented jobs around Austin, each with its real",
+  " 886 documented projects, 2018-2026, each with its pr",
+  " 886 of those jobs are documented, each with ",
+  "74 more counted = 886 documented ",
+  "9 on 474 Google reviews Record 886 documented projects, 177 before-and-after pairs, ",
+  "e Elite Preferred Since 2009 Siding and windows, priced in public 886 documented jobs around Austin, each with its real",
+  "ice 312 on the map with photos + 574 more counted = 886 312 on the map, with photos + 5"
+ ],
+ "split_printed": true,
+ "address_verbatim_count": 2,
+ "address_variants": [
+  "7801 N Lamar Blvd Suite C70",
+  "7801 N Lamar Blvd Suite C70, Austin, TX 78752 ",
+  "7801 N Lamar Blvd Suite C70, Austin, TX 78752 Rev"
+ ],
+ "hours_verbatim_count": 8,
+ "hours_variants": [
+  "Monday–Friday 8–8"
+ ],
+ "since_2009": 10,
+ "merged_2018": 1,
+ "rating_49": 14,
+ "credentials_verbatim": {
+  "GAF Master Elite": 7,
+  "James Hardie Elite Preferred": 5,
+  "President's Club 2025": 0,
+  "Andersen Certified Premier": 0,
+  "GuildQuality Guildmaster": 1,
+  "BBB A+": 0
+ },
+ "credential_variants": [
+  "Andersen Certified Contractor, Premier",
+  "Andersen at the Premier",
+  "BBB Accredited, A+ Busi",
+  "GuildQuality Guildmaster Service",
+  "President's Club Award 2025 Sid"
+ ]
+}

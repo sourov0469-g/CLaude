@@ -1,0 +1,256 @@
+PASS hero1 #0 a "Book free inspection" dom 569 scroll focus btn btn-red rx-host:class btn btn-red rx-host:childList sec sec-book:tabindex
+PASS hero1 #1 a "Call (512) 550-0000" tel href tel:+15125500000
+PASS hero2 #0 a "SidingWhat it costs" dom 16 focus h2p rx-host:class h2p rx-host:childList IMG:src
+PASS hero2 #1 a "WindowsWhat it costs" dom 16 focus h2p rx-host:class h2p rx-host:childList IMG:src
+PASS hero2 #2 a "Shingle roofingWhat it costs" dom 16 scroll focus h2p rx-host:class h2p rx-host:childList IMG:src
+PASS hero2 #3 a "Exterior paintingWhat it costs" dom 16 scroll focus h2p rx-host:class h2p rx-host:childList IMG:src
+PASS hero2 #4 a "See all eleven trades" dom 610 scroll focus rx-host:class rx-host:childList sec sec-services:tabindex
+PASS hero2 #5 a "(512) 550-0000" tel href tel:+15125500000
+PASS hero3 #0 a "Book free inspection" dom 352 scroll focus btn btn-red rx-host:class btn btn-red rx-host:childList sec sec-book:tabindex
+PASS hero3 #1 a "Call (512) 550-0000" tel href tel:+15125500000
+SELECTED hero3 #2 button[button](tab) "Maple Run, Austin, Jul 2026"
+PASS hero3 #3 button[button](tab) "Buttercup Creek, Cedar Park, Mar 2025" dom 18 scroll focus h3-tab rx-host:class h3-tab rx-host:childList h3-tab:aria-selected
+PASS hero3 #4 button[button](tab) "Maple Run, Austin, Nov 2024" dom 18 scroll focus h3-tab rx-host:class h3-tab rx-host:childList h3-tab:aria-selected
+PASS hero3 #5 button[button](tab) "Tarrytown, Austin, Dec 2024" dom 18 scroll focus h3-tab rx-host:class h3-tab rx-host:childList h3-tab:aria-selected
+PASS hero3 #6 button[button](tab) "East Oak Hill, Austin, Sep 2026" dom 18 scroll focus h3-tab rx-host:class h3-tab rx-host:childList h3-tab:aria-selected
+PASS proof1 #0 a "See the work" dom 373 scroll focus btn btn-alt:childList sec sec-work:tabindex LI:style
+PASS proof2 #0 a "Read what they wrote" dom 140 scroll focus sec sec-reviews:tabindex w:style w:style
+PASS proof3 #0 a "Book free inspection" dom 251 scroll focus t:style t:style t:style
+SELECTED services1 #0 button[button](radio) "Siding"
+PASS services1 #1 button[button](radio) "Windows" dom 195 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS services1 #2 button[button](radio) "Roof" dom 195 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS services1 #3 button[button](radio) "Trim and paint" dom 138 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS services1 #4 button[button](radio) "Doors" dom 102 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS services1 #5 button[button](radio) "Deck" dom 95 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS services1 #6 a "Book a siding inspection" dom 386 scroll focus btn btn-ink sv1-book rx-host:class btn btn-ink sv1-book rx-host:childList sec sec-book:tabindex
+PASS services1 #7 a "Call (512) 550-0000" tel href tel:+15125500000
+PASS services2 #0 a "(512) 550-0000" tel href tel:+15125500000
+PASS services2 #1 a "Siding: 431 jobs, median job $10k-$15k. " dom 215 scroll focus B:childList ix-row:style ix-row:childList
+PASS services2 #2 a "Windows: 388 jobs, median job $10k-$15k." dom 248 scroll focus B:childList ix-row:style ix-row:childList
+PASS services2 #3 a "Exterior painting: 320 jobs, median job " dom 187 scroll focus B:childList ix-row:style ix-row:childList
+PASS services2 #4 a "Shingle roofing: 210 jobs, median job $1" dom 250 scroll focus B:childList ix-row:style ix-row:childList
+PASS services2 #5 a "Gutters: 121 jobs, median job $2k-$5k. B" dom 225 scroll focus B:childList ix-row:style ix-row:childList
+PASS services2 #6 a "Exterior doors: 109 jobs, median job $2k" dom 278 scroll focus B:childList B:childList sec sec-book:tabindex
+PASS services2 #7 a "Patio covers: 34 jobs, median job $15k-$" dom 277 scroll focus B:childList B:childList sec sec-book:tabindex
+PASS services2 #8 a "Metal roofing: 31 jobs, median job $20k-" dom 250 scroll focus B:childList B:childList sec sec-book:tabindex
+PASS services2 #9 a "Garage doors: 9 jobs, median job $2k-$5k" dom 290 scroll focus B:childList B:childList sec sec-book:tabindex
+PASS services2 #10 a "Decking: 5 priced, median job $20k-$25k." dom 352 scroll focus w:style w:style B:childList
+PASS services2 #11 a "Storm damage: free inspection, documente" dom 378 scroll focus w:style B:childList B:childList
+PASS services3 #0 div(slider) "Budget, from $0 to $50,000" dom 23 focus tape:childList num:childList tape:aria-valuenow
+PASS work1 #0 button[button](slider) "Before and after" dom 0 focus 
+PASS work1 #1 a "Job file" external href
+PASS work1 #2 button[button] "Rob Roy$15k-$20k" dom 2 scroll focus fs rx-host:class fs rx-host:childList
+PASS work1 #3 button[button] "Milwood$25k-$30k" dom 96 scroll focus fs rx-host:class fs rx-host:childList fs:aria-pressed
+PASS work1 #4 button[button] "Maple Run$10k-$15k" dom 96 scroll focus fs rx-host:class fs rx-host:childList fs:aria-pressed
+PASS work1 #5 button[button] "Maple Run$15k-$20k" dom 96 scroll focus fs rx-host:class fs rx-host:childList fs:aria-pressed
+PASS work1 #6 button[button] "Anderson Mill$15k-$20k" dom 96 scroll focus fs rx-host:class fs rx-host:childList fs:aria-pressed
+PASS work1 #7 button[button] "Ridgewood$10k-$15k" dom 96 scroll focus fs rx-host:class fs rx-host:childList fs:aria-pressed
+PASS work2 #0 button[button] "Run the survey" dom 35 bp-run btn btn-glass btn-sm:childList bp-run btn btn-glass btn-sm:disabled bp-b:src
+SELECTED work2 #1 button[button](radio) "01Rob Roy"
+PASS work2 #2 button[button](radio) "02Milwood" dom 46 focus bp-step rx-host:class bp-step rx-host:childList bp-step:aria-checked
+PASS work2 #3 button[button](radio) "03Maple Run" dom 48 focus bp-step rx-host:class bp-step rx-host:childList bp-step:aria-checked
+PASS work2 #4 button[button](radio) "04Maple Run" dom 48 focus bp-step rx-host:class bp-step rx-host:childList bp-step:aria-checked
+PASS work2 #5 button[button](radio) "05Anderson Mill" dom 44 focus bp-step rx-host:class bp-step rx-host:childList bp-step:aria-checked
+PASS work2 #6 button[button](radio) "06Ridgewood" dom 48 focus bp-step rx-host:class bp-step rx-host:childList bp-step:aria-checked
+PASS work3 #0 button[button] "Show before" dom 5 focus sp-toggle btn btn-glass btn-sm:childList sp-fig is-before:class sp-toggle btn btn-glass btn-sm:aria-pressed
+PASS work3 #1 button[button] "Show before" dom 5 focus sp-toggle btn btn-glass btn-sm:childList sp-fig is-before:class sp-toggle btn btn-glass btn-sm:aria-pressed
+PASS work3 #2 button[button] "Show before" dom 5 scroll focus sp-toggle btn btn-glass btn-sm:childList sp-fig is-before:class sp-toggle btn btn-glass btn-sm:aria-pressed
+PASS work3 #3 button[button] "Show before" dom 4 scroll focus sp-toggle btn btn-glass btn-sm:childList sp-toggle btn btn-glass btn-sm:aria-pressed sp-toggle btn btn-glass btn-sm:childList
+PASS work3 #4 button[button] "Show before" dom 4 scroll focus sp-toggle btn btn-glass btn-sm:childList sp-toggle btn btn-glass btn-sm:aria-pressed sp-toggle btn btn-glass btn-sm:childList
+PASS work3 #5 button[button] "Show before" dom 79 scroll focus w:style w:style sp-toggle btn btn-glass btn-sm:childList
+PASS built1 #0 button[button] "01Corner trim" dom 96 focus lg-b rx-host:class lg-b rx-host:childList btn btn-ink btn-sm:aria-pressed
+PASS built1 #1 button[button] "02HardiePlank lap" dom 93 focus lg-b rx-host:class lg-b rx-host:childList btn btn-ink btn-sm:aria-pressed
+PASS built1 #2 button[button] "03House wrap" dom 93 focus lg-b rx-host:class lg-b rx-host:childList btn btn-ink btn-sm:aria-pressed
+PASS built1 #3 button[button] "04Sheathing" dom 92 focus lg-b rx-host:class lg-b rx-host:childList btn btn-ink btn-sm:aria-pressed
+PASS built1 #4 button[button] "05Framing" dom 115 focus lg-b rx-host:class lg-b rx-host:childList btn btn-ink btn-sm:aria-pressed
+PASS built1 #5 button[button] "Take it apart" dom 109 focus btn btn-ink btn-sm rx-host:class btn btn-ink btn-sm rx-host:childList btn btn-ink btn-sm rx-host:aria-pressed
+SELECTED built3 #0 button[button](radio) "Lap · 301 of 415 jobs"
+PASS built3 #1 button[button](radio) "Board and batten · 27" dom 235 focus rx-host:class rx-host:childList BUTTON:aria-checked
+SELECTED colour1 #0 button[button](radio) "Our job photo"
+PASS colour1 #1 button[button](radio) "My house" dom 11 focus rx-host:class rx-host:childList BUTTON:aria-checked
+SELECTED colour1 #3 button[button](radio) "Siding"
+PASS colour1 #4 button[button](radio) "Gable" dom 8 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS colour1 #5 button[button](radio) "Trim" dom 8 focus rx-host:class rx-host:childList BUTTON:aria-checked
+PASS colour1 #9 button[button](radio) "Pure White, SW 7005" dom 86 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #10 button[button](radio) "Alabaster, SW 7008" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #11 button[button](radio) "Agreeable Gray, SW 7029" dom 86 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #12 button[button](radio) "Repose Gray, SW 7015" dom 86 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #13 button[button](radio) "Accessible Beige, SW 7036" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #14 button[button](radio) "Dovetail, SW 7018" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #15 button[button](radio) "Gauntlet Gray, SW 7019" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #16 button[button](radio) "Urbane Bronze, SW 7048" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #17 button[button](radio) "Iron Ore, SW 7069" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #18 button[button](radio) "Tricorn Black, SW 6258" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #19 button[button](radio) "In the Navy, SW 9178" dom 84 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #20 button[button](radio) "Hunt Club, SW 6468" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #21 button[button](radio) "Arctic White, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #22 button[button](radio) "Cobble Stone, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #23 button[button](radio) "Navajo Beige, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #24 button[button](radio) "Khaki Brown, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #25 button[button](radio) "Timber Bark, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #26 button[button](radio) "Rich Espresso, James Hardie ColorPlus" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #27 button[button](radio) "Mountain Sage, James Hardie ColorPlus" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #28 button[button](radio) "Light Mist, James Hardie ColorPlus" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #29 button[button](radio) "Pearl Gray, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #30 button[button](radio) "Gray Slate, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #31 button[button](radio) "Boothbay Blue, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #32 button[button](radio) "Evening Blue, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #33 button[button](radio) "Deep Ocean, James Hardie ColorPlus" dom 85 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #34 button[button](radio) "Aged Pewter, James Hardie ColorPlus" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #35 button[button](radio) "Night Gray, James Hardie ColorPlus" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #36 button[button](radio) "Iron Gray, James Hardie ColorPlus" dom 85 focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #37 button[button](radio) "Countrylane Red, James Hardie ColorPlus" dom 84 scroll focus sw:childList sw:aria-checked sw:tabindex
+PASS colour1 #38 a "Book a free siding inspection" dom 245 scroll focus btn btn-red c1t-book rx-host:class btn btn-red c1t-book rx-host:childList sec sec-book:tabindex
+PASS colour1 #39 a "Call (512) 550-0000" tel href tel:+15125500000
+PASS colour2 #0 button[button] "Pure White, SW 7005" dom 67 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw rx-host:aria-pressed
+PASS colour2 #1 button[button] "Alabaster, SW 7008" dom 67 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #2 button[button] "Agreeable Gray, SW 7029" dom 67 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #3 button[button] "Repose Gray, SW 7015" dom 69 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #4 button[button] "Accessible Beige, SW 7036" dom 67 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #5 button[button] "Dovetail, SW 7018" dom 67 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #6 button[button] "Gauntlet Gray, SW 7019" dom 66 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #7 button[button] "Urbane Bronze, SW 7048" dom 66 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #8 button[button] "Iron Ore, SW 7069" dom 66 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #9 button[button] "Tricorn Black, SW 6258" dom 66 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #10 button[button] "In the Navy, SW 9178" dom 65 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #11 button[button] "Hunt Club, SW 6468" dom 66 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #12 button[button] "Arctic White, James Hardie ColorPlus" dom 49 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw rx-host:aria-pressed
+PASS colour2 #13 button[button] "Cobble Stone, James Hardie ColorPlus" dom 47 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #14 button[button] "Navajo Beige, James Hardie ColorPlus" dom 51 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #15 button[button] "Khaki Brown, James Hardie ColorPlus" dom 51 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #16 button[button] "Timber Bark, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #17 button[button] "Rich Espresso, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #18 button[button] "Mountain Sage, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #19 button[button] "Light Mist, James Hardie ColorPlus" dom 51 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #20 button[button] "Pearl Gray, James Hardie ColorPlus" dom 51 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #21 button[button] "Gray Slate, James Hardie ColorPlus" dom 51 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #22 button[button] "Boothbay Blue, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #23 button[button] "Evening Blue, James Hardie ColorPlus" dom 49 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #24 button[button] "Deep Ocean, James Hardie ColorPlus" dom 49 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #25 button[button] "Aged Pewter, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #26 button[button] "Night Gray, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #27 button[button] "Iron Gray, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour2 #28 button[button] "Countrylane Red, James Hardie ColorPlus" dom 50 focus cmp-sw rx-host:class cmp-sw rx-host:childList cmp-sw:aria-pressed
+PASS colour3 #0 button[button] "Pure White, SW 7005. Open" dom 48 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #1 button[button] "Alabaster, SW 7008. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #2 button[button] "Agreeable Gray, SW 7029. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #3 button[button] "Repose Gray, SW 7015. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #4 button[button] "Accessible Beige, SW 7036. Open" dom 48 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #5 button[button] "Dovetail, SW 7018. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #6 button[button] "Gauntlet Gray, SW 7019. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #7 button[button] "Urbane Bronze, SW 7048. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #8 button[button] "Iron Ore, SW 7069. Open" dom 48 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #9 button[button] "Tricorn Black, SW 6258. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #10 button[button] "In the Navy, SW 9178. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #11 button[button] "Hunt Club, SW 6468. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #12 button[button] "Arctic White, ColorPlus. Open" dom 49 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #13 button[button] "Cobble Stone, ColorPlus. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #14 button[button] "Navajo Beige, ColorPlus. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #15 button[button] "Khaki Brown, ColorPlus. Open" dom 50 focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #16 button[button] "Timber Bark, ColorPlus. Open" dom 49 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #17 button[button] "Rich Espresso, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #18 button[button] "Mountain Sage, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #19 button[button] "Light Mist, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #20 button[button] "Pearl Gray, ColorPlus. Open" dom 49 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #21 button[button] "Gray Slate, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #22 button[button] "Boothbay Blue, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #23 button[button] "Evening Blue, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #24 button[button] "Deep Ocean, ColorPlus. Open" dom 49 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #25 button[button] "Aged Pewter, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #26 button[button] "Night Gray, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #27 button[button] "Iron Gray, ColorPlus. Open" dom 50 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS colour3 #28 button[button] "Countrylane Red, ColorPlus. Open" dom 127 scroll focus cb-t:childList cb-sheet:style cb-sheet:style
+PASS near1 #0 input[text](combobox) "" dom 175 focus circle:class circle:class circle:class
+PASS near1 #2 button[button] "Round Rock" dom 470 focus circle:class circle:class circle:class
+PASS near1 #3 button[button] "Cedar Park" dom 470 focus circle:class circle:class circle:class
+PASS near1 #4 button[button] "Milwood" dom 463 focus circle:class circle:class circle:class
+PASS near2 #0 button[button] "AustinDocumented jobs in the project fin" dom 1485 focus mx-row rx-host:class mx-row rx-host:childList mx-row rx-host:aria-expanded
+FAIL near2 #1 a "Book a free inspection in Austin" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #2 a "(512) 550-0000" tel href tel:+15125500000
+PASS near2 #3 button[button] "Round RockDocumented jobs in the project" dom 270 focus mx-row rx-host:class mx-row rx-host:childList mx-row rx-host:aria-expanded
+FAIL near2 #4 a "Book a free inspection in Round Rock" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #5 a "(512) 550-0000" tel href tel:+15125500000
+PASS near2 #6 button[button] "Cedar ParkDocumented jobs in the project" dom 95 scroll focus mx-row rx-host:class mx-row rx-host:childList mx-row rx-host:aria-expanded
+FAIL near2 #7 a "Book a free inspection in Cedar Park" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #8 a "(512) 550-0000" tel href tel:+15125500000
+PASS near2 #9 button[button] "PflugervilleDocumented jobs in the proje" dom 69 scroll focus mx-row rx-host:class mx-row rx-host:childList mx-row rx-host:aria-expanded
+FAIL near2 #10 a "Book a free inspection in Pflugerville" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #11 a "(512) 550-0000" tel href tel:+15125500000
+PASS near2 #12 button[button] "LeanderDocumented jobs in the project fi" dom 81 scroll focus mx-row rx-host:class mx-row rx-host:childList mx-row rx-host:aria-expanded
+FAIL near2 #13 a "Book a free inspection in Leander" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #14 a "(512) 550-0000" tel href tel:+15125500000
+PASS near2 #15 button[button] "GeorgetownDocumented jobs in the project" dom 37 scroll focus mx-row rx-host:class mx-row rx-host:childList mx-row rx-host:aria-expanded
+FAIL near2 #16 a "Book a free inspection in Georgetown" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #17 a "(512) 550-0000" tel href tel:+15125500000
+PASS near2 #18 button[button] "BudaDocumented jobs in the project finde" dom 86 scroll focus w:style mx-row rx-host:class mx-row rx-host:childList
+FAIL near2 #19 a "Book a free inspection in Buda" could not act: locator.click: Timeout 3000ms exceeded.
+PASS near2 #20 a "(512) 550-0000" tel href tel:+15125500000
+SELECTED near3 #0 button[button](radio) "Austin24 photographed"
+PASS near3 #1 button[button](radio) "Cedar Park5 photographed" dom 666 focus dv-chip rx-host:class dv-chip rx-host:childList dv-chip:aria-checked
+PASS near3 #2 button[button](radio) "Pflugerville4 photographed" dom 633 focus dv-chip rx-host:class dv-chip rx-host:childList dv-chip:aria-checked
+PASS near3 #3 button[button](radio) "Round Rock3 photographed" dom 648 focus dv-chip rx-host:class dv-chip rx-host:childList dv-chip:aria-checked
+PASS near3 #4 button[button](radio) "Georgetown2 photographed" dom 536 focus dv-chip rx-host:class dv-chip rx-host:childList dv-chip:aria-checked
+PASS reviews1 #0 button[button] "Pause" dom 162 focus circle:class circle:class circle:class
+PASS reviews2 #0 button[button] "Previous quote" dom 608 focus circle:class circle:class circle:class
+PASS reviews2 #1 button[button] "Next quote" dom 584 focus circle:class circle:class circle:class
+SELECTED reviews3 #0 button[button](radio) "Kevin"
+PASS reviews3 #1 button[button](radio) "Garrett" dom 411 focus circle:class circle:class circle:class
+PASS reviews3 #2 button[button](radio) "Tracy" dom 407 focus circle:class circle:class circle:class
+PASS reviews3 #3 button[button](radio) "Paul Hale" dom 389 focus circle:class circle:class circle:class
+PASS reviews3 #4 button[button](radio) "Paul Schantz" dom 334 focus circle:class circle:class circle:class
+PASS reviews3 #5 button[button](radio) "Taylor" dom 317 focus circle:class circle:class circle:class
+PASS reviews3 #6 button[button](radio) "Jake" dom 290 focus circle:class circle:class circle:class
+PASS reviews3 #7 button[button](radio) "Jerry" dom 284 focus circle:class circle:class circle:class
+PASS reviews3 #8 button[button](radio) "Maria" dom 286 focus circle:class circle:class circle:class
+PASS reviews3 #9 button[button](radio) "Shorty" dom 285 focus circle:class circle:class circle:class
+PASS reviews3 #10 button[button] "Show the rest" dom 602 scroll focus circle:class circle:class circle:class
+PASS money1 #0 input[range] "15000" dom 166 focus circle:class circle:class circle:class
+PASS money1 #1 button[button](radio) "0% APR24 months" dom 289 scroll focus circle:class circle:class circle:class
+PASS money1 #2 button[button](radio) "4.99% APR60 months" dom 246 scroll focus circle:class circle:class circle:class
+SELECTED money1 #3 button[button](radio) "7.99% APR120 monthsLowest monthly"
+SELECTED money2 #0 button[button](radio) "Siding415 jobs"
+PASS money2 #1 button[button](radio) "Windows376 jobs" dom 427 focus circle:class circle:class circle:class
+PASS money3 #0 input[checkbox] "on" dom 200 focus circle:class circle:class circle:class
+PASS money3 #1 input[checkbox] "on" dom 204 focus circle:class circle:class circle:class
+PASS money3 #2 a "Book a free inspection" dom 333 scroll focus circle:class circle:class circle:class
+PASS money3 #3 a "Call (512) 550-0000" tel href tel:+15125500000
+PASS money3 #4 input[text] "30,000" dom 313 scroll focus circle:class circle:class circle:class
+PASS book1 #0 a "(512) 550-0000" tel href tel:+15125500000
+PASS book1 #1 button[button] "Book free inspection online" dom 256 focus circle:class circle:class circle:class
+PASS book2 #0 a "(512) 550-0000" tel href tel:+15125500000
+PASS book2 #1 input[checkbox] "Siding" dom 149 focus circle:class circle:class circle:class
+PASS book2 #2 input[checkbox] "Windows" dom 156 focus circle:class circle:class circle:class
+PASS book2 #3 input[checkbox] "Shingle roofing" dom 212 focus circle:class circle:class circle:class
+PASS book2 #4 input[checkbox] "Metal roofing" dom 149 focus circle:class circle:class circle:class
+PASS book2 #5 input[checkbox] "Exterior doors" dom 237 scroll focus circle:class circle:class circle:class
+PASS book2 #6 input[checkbox] "Garage doors" dom 156 scroll focus circle:class circle:class circle:class
+PASS book2 #7 input[checkbox] "Gutters" dom 156 scroll focus circle:class circle:class circle:class
+PASS book2 #8 input[checkbox] "Patio covers" dom 149 scroll focus circle:class circle:class circle:class
+PASS book2 #9 input[checkbox] "Exterior painting" dom 156 scroll focus circle:class circle:class circle:class
+PASS book2 #10 input[checkbox] "Decking" dom 149 scroll focus circle:class circle:class circle:class
+PASS book2 #11 input[checkbox] "Storm damage" dom 156 scroll focus circle:class circle:class circle:class
+PASS book2 #22 button[button] "Continue" dom 198 scroll focus circle:class circle:class circle:class
+PASS book3 #0 input[text] "Your first name" dom 196 focus circle:class circle:class circle:class
+PASS book3 #1 select[select-one] "What to look at" dom 168 circle:class circle:class circle:class
+PASS book3 #2 input[text] "Your ZIP code" dom 189 focus circle:class circle:class circle:class
+PASS book3 #3 select[select-one] "Rough budget" dom 168 circle:class circle:class circle:class
+PASS book3 #4 input[tel] "Your phone number" dom 200 focus circle:class circle:class circle:class
+PASS book3 #5 button[submit] "Send my request" dom 184 focus circle:class circle:class circle:class
+PASS book3 #6 a "(512) 550-0000" tel href tel:+15125500000
+PASS chrome-header #0 a "Austin Pro Siding, Windows and Roofing, " dom 3 focus hd-logo rx-host:class hd-logo rx-host:childList MAIN:tabindex
+PASS chrome-header #7 a "Book free inspection" dom 468 scroll focus btn btn-red btn-sm hd-book rx-host:class btn btn-red btn-sm hd-book rx-host:childList sec sec-book:tabindex
+PASS chrome-header #8 button[button] "Menu" dom 5 focus hd-menu rx-host:class hd-menu rx-host:childList sheet:hidden
+PASS chrome-footer #0 a "(512) 550-0000" tel href tel:+15125500000
+PASS chrome-footer #1 a "info@austinprosiding.com" external href
+PASS chrome-footer #2 a "Work" dom 187 scroll focus circle:class circle:class circle:class
+PASS chrome-footer #3 a "Colour" dom 185 scroll focus circle:class circle:class circle:class
+PASS chrome-footer #4 a "Near you" dom 187 scroll focus circle:class circle:class circle:class
+PASS chrome-footer #5 a "Financing" dom 192 scroll focus circle:class circle:class circle:class
+PASS chrome-footer #6 a "Book" dom 190 scroll focus circle:class circle:class circle:class
+PASS chrome-footer #7 button[button] "Motion on" dom 836 scroll focus circle:class circle:class circle:class
+PASS chrome-picks #0 button[button] "Your picks111 111 1111" dom 63 focus pk-panel:hidden pk-btn:aria-expanded num:childList
+SELECTED chrome-switchers #0 button[button](tab) "Proof version 1: Record"
+PASS chrome-switchers #1 button[button](tab) "Proof version 2: At a glance" dom 90 url focus v proof-1 has-bgf:childList v proof-1 has-bgf:childList stage:childList
+PASS chrome-switchers #2 button[button](tab) "Proof version 3: Statement" dom 93 url focus v proof-1 has-bgf:childList v proof-1 has-bgf:childList stage:childList
+SUMMARY 375: PASS 236 FAIL 7 SELECTED 11 SKIP 0 DISABLED 0 | page errors: 0
+done

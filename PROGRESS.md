@@ -228,7 +228,7 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 Governing prompt: `BRIEF-V6.md`. Everything above this line is the V5 record. Its gate is a CLAIM to re-verify, not evidence.
 
 ## V6 state
-- **Phase:** 1 complete (measured, nothing fixed) → 2
+- **Phase:** DONE: the V6 Phase 4 full §12 gate passes on the final file (below)
 - **Baseline:** `siding/homepage-standalone.html` at df98d54, 4,221,484 B, sha256 d2c28a321f88491be50f1e7b5689972265abdce612f80dbe78dfe1e1ed687b12
 
 ## V6 Phase 0 record (30 Oct)
@@ -346,3 +346,35 @@ All runs use `file://…/delivered-df98d54.html`, a copy of the delivered file (
   - Screenshots `v5/fix/book.png`.
 - **Test update:** `qa/v6/sect.js` formRun now fills the ZIP in step 1.
 - The partial Phase-4 run was stopped, because it measured a pre-fix file. Phase 4 is re-run in FULL below.
+
+## V6 Phase 4: FULL §12 gate on the final file (30 Oct)
+
+- **Final file:** `siding/homepage-standalone.html`, 4,219,521 B, sha256 953fa9d51e5d2085519aab2cb98dc4d854e3a5d0be8a9db9f0871734d932f078.
+- **Raw outputs:** `siding/qa/v6/evidence/` (unprefixed files = Phase 4; `v6-*` = Phase 1). Contact sheets: `siding/qa/v6/<section>.webp`.
+
+| # | Item | Result | Evidence |
+|---|---|---|---|
+| 1 | Facts | PASS | `p4-facts.json`: the only review count is 474 (JSON-LD 474); versions without a phone = [], min 1 `tel:` per version, header + footer too; the 886 split printed; address ×2 and hours ×8 verbatim, no variants; since 2009 / merged 2018; the §3 credential strings GAF Master Elite 7, James Hardie Elite Preferred 5, President's Club 2025 1, Andersen Certified Premier 1, GuildQuality Guildmaster 1, BBB A+ 1. No false figure mid-animation (digit rise shows only the true digits). |
+| 2 | Logo | PASS | Asset-table bytes base64-decoded and sha256-compared with the repo's served files: PNG 24,829 B 64ab1b1b… equal; AVIF 9,570 B cb9c7306… equal. |
+| 3 | Banned | PASS | Three different references per section (TRACEABILITY). The only images in "before" slots are the six `work-*-b` true pairs; the 177 pill shows the Rob Roy pair. |
+| 4 | Traceability | PASS | 30 rows current (V6 final table). Random three (seed 202610304): Rogers (Book 1), Mad City (Book 2), #413 Tequila (Book 3). The first two failed on this gate's first run and were fixed; all three now match their Atlas / deep-read mechanisms. Earlier draws this session: Near 3 / KBF ✓, Work 3 / S1324 ✓, Services 3 / Codrops (fixed). |
+| 5 | Switchers | PASS | `sect.out` 90/90 (1440, 375, 1440 reduced motion): the other nine stages keep their node. |
+| 6 | Screenshots | PASS | `shots.out`: 60 shots (30 versions × 1440 / 375), console 0, no overflow; reviewed as contact sheets. Defects found this pass and fixed: D1 Built band, D2 rating count-up, Book 1 path weight, Book 2 ZIP order. No new defects on the final set. |
+| 7 | Integrity | PASS | Console 0 in every run. No overflow at 375. 6/6 script ids exist. `ctl-1440.out` PASS 290 FAIL 0 (+12 already selected); `ctl-375.out` PASS 282 FAIL 0 (+11): every control on a fresh load changes the DOM, scroll or focus, or is a verified `tel:` or external link. `vis` 180/180. Forms: every booking form refuses an empty step and reaches done when filled (ZIP-first); Colour 1 takes a file. |
+| 8 | Companion | PASS | `qa4.out` 159/159 (all three variants across the 30 versions, mini and picks switchers, off on touch at 375/320, reduced motion). `pal.out` 18/18 distinct poses. |
+| 9 | Weight | PASS | 4,219,521 B ≤ 4,221,484 B (−1,963): code and markup 879,795, media 3,339,726 (font 130,832). 73 images (58 AVIF, 14 WebP, 1 PNG, the served logo). |
+| 10 | AUDIT-V3 | PASS | "V6 FINAL verdicts": 8 KEPT, 22 FIXED, 0 REBUILT, three binary verdicts each; flags closed (below). |
+| F17 | Motion | PASS | `k11.out` "OVER 0.3: none". `still-pixels.txt`: at idle only the Reviews 1 marquee moves (10.55 %, allowed by the F17 exemplar); everything else is ≤ 0.01 % (the companion's blink). |
+
+### V6 flags closed
+- **G1 · 886 wording.** CLOSED. The page prints AUDIT-V3's recorded wording, "312 on the map with photos + 574 more counted = 886". §3 requires the meaning identical to that record; the arithmetic is unchanged.
+- **G2 · Licence line.** CLOSED, not added. Texas has no state licence for this work and the firm publishes none, so a number would be invented. The first screen carries rating, review count, installer tiers and since-year.
+- **G3 · Blinds.** CLOSED. Hero 1 is Q95; nothing plays on load (idle 0.00 %).
+- **G4 · Price overlap.** CLOSED. Services 1 carries no price. Hero 2 and Colour 1 both show the siding band, because the flagship reference requires the band in its own flow; they never meet unless both are picked.
+- **G5 · Flagship.** CLOSED. Colour 1, tested with a real file (`ctl`, `sect`).
+- **G6 · Motion.** CLOSED by evidence: entrances ≤ 0.3 s; at idle only the F17-exemplar marquee and the §4-required companion move.
+- **G7 · System cursor.** CLOSED, not changed (K5). A companion (three variants) plus a section halo always accompany a fine pointer. The OS arrow stays for pointing precision. Pointer events are never blocked (`qa4`).
+- **G8 · Reaction per element.** CLOSED, not changed. Uniqueness is guaranteed per section × role (11 × 6 table, no repeats within a role or a section, clicks never equal hovers). Elements of the same role in one section share their reaction; a distinct reaction for each of ~290 controls is not a coherent design. Logged.
+- **G9 · Elastic and bounce.** FIXED (kit eases).
+- **G10 · Ghost waves.** FIXED (hero field sleeps; also Hero 1 drift and the Book 1 folds, K12).
+- **G11 · Custom SVG.** CLOSED. Every SVG is a trade diagram, profile or motif (elevations, lap courses, sashes, shakes, roof plans, glyphs). No pictorial clip-art.

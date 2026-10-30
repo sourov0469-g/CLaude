@@ -7491,3 +7491,11 @@ Format: `⟦Sxxxx⟧ or [BANK] name — PICKED-FOR: <site, section, version> —
 - **[BANK] Q40 direction-aware reveal** — PICKED-FOR: the section entrance on every section (page system) — RESULT: **APPLIED (Phase 3)** — 0.3 s (F17, K4); from below scrolling down, from above scrolling up.
 - **Reaction kit v5** (section glyphs, 11 hover verbs × 11 click verbs over 6 roles) — PICKED-FOR: every interactive element (page system) — RESULT: **NEW BUILD (Phase 3)** — replaces the v4 13-kind kit, which reused glint, level, tape, chalk and morph.
 - **Per-section halo** (cursor effect) — PICKED-FOR: under the companion, in all ten sections — RESULT: **NEW BUILD (Phase 3)**.
+
+## V6 pass (30 Oct 2026): BRIEF-V6 fresh gate (see PROGRESS.md "V6")
+- **[BANK] Rogers Roofing (dual-path contact at equal weight)** — PICKED-FOR: Book V1 — RESULT: **FIXED** — the online path raised to the phone's type scale, side by side (it had been a small button).
+- **[BANK] Mad City Windows (ZIP-first, 3-question funnel)** — PICKED-FOR: Book V2 and Book V1's panel — RESULT: **FIXED** — the ZIP is now the first field (it had been in step 3).
+- **[BANK] Q95 Masked Heading** — PICKED-FOR: Hero V1 — RESULT: **KEPT, parameter dropped** — the 18 px perpetual drift removed under F17 (K12); the mask, rise and pointer parallax kept.
+- **⟦S1364⟧ atmosphere background** — PICKED-FOR: Book V1 — RESULT: **ADAPTED** — the folds advance with pointer travel and scroll, then rest (no clock loop, F17).
+- **Scrollable and Draggable Timeline (Codrops), Mode B** — PICKED-FOR: Services V3 — RESULT: **FIXED** — edgeResistance 1 as the reference; the scroll half deliberately not adapted (logged).
+- **Conversion anatomy §7b (Stronghold token set)** — PICKED-FOR: the F17 idle-motion judgement — RESULT: **APPLIED** — "marquee 60s linear infinite" keeps Reviews 1's marquee; the other idle loops removed.

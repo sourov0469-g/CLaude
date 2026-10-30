@@ -27,6 +27,43 @@ Page systems are judged once in Phase 3, not per version (conflict K9):
 - section field;
 - divider.
 
+## V6 FINAL verdicts (Phase 4 gate on the final file, sha 953fa9d5…)
+
+| Section | V | Governing reference | Final verdict | Deciding criterion | Facts grounded | Reference-intent match | Generic feel |
+|---|---|---|---|---|---|---|---|
+| Hero | 1 | Q95 Masked Heading | FIXED | F17: the perpetual Q95 drift is removed (K12); hero field ghost waves removed (page system) | YES | YES | NO |
+| Hero | 2 | Stronghold + Neil Kelly | KEPT | passes 1–9; only the hero field (page system) changed | YES | YES | NO |
+| Hero | 3 | Feldco + R33 | KEPT | passes 1–9; only the hero field (page system) changed | YES | YES | NO |
+| Proof | 1 | #317 + F12 + Q165 | FIXED | 1f: digit rise replaces the count-up (no false figure); ring 0.3 s; 1e §3 credential strings; 1b phone line | YES | YES | NO |
+| Proof | 2 | Georgia CG table | FIXED | 1e: §3 credential strings; 1b phone line | YES | YES | NO |
+| Proof | 3 | S1327 + #292 | FIXED | 3b: the 177 pill shows a genuine pair; 1e; 1b | YES | YES | NO |
+| Services | 1 | Neil Kelly + BLK 531 | KEPT | passes 1–9 | YES | YES | NO |
+| Services | 2 | Q571 + Q162 | KEPT | passes 1–9 | YES | YES | NO |
+| Services | 3 | Codrops timeline (Mode B) + R38 | FIXED | 4: edgeResistance 1 + an honest row (scroll half not adapted); 1b | YES | YES | NO |
+| Work | 1 | R28 draggable pairs | FIXED | 1b phone line | YES | YES | NO |
+| Work | 2 | S0468 blueprint | FIXED | 1b | YES | YES | NO |
+| Work | 3 | S1324 + Q125 | FIXED | 1b | YES | YES | NO |
+| Built | 1 | S0526 + S0504 | FIXED | 1b; the field band now rests in the margin (page system, D1) | YES | YES | NO |
+| Built | 2 | S1322 sticky stack | FIXED | 1b; D1 | YES | YES | NO |
+| Built | 3 | S0361 + S1361 | FIXED | 1b; D1 | YES | YES | NO |
+| Colour | 1 | Site 6 flagship + BLK 531 + R36 | KEPT | passes 1–9 (real-file upload) | YES | YES | NO |
+| Colour | 2 | R30 + Stronghold comparison | FIXED | 1b | YES | YES | NO |
+| Colour | 3 | Q48 grid-to-fullscreen | FIXED | 1b | YES | YES | NO |
+| Near you | 1 | firm map + S1323 | FIXED | 1b | YES | YES | NO |
+| Near you | 2 | West Shore matrix | KEPT | passes 1–9 | YES | YES | NO |
+| Near you | 3 | KBF fly-in | FIXED | 1b | YES | YES | NO |
+| Reviews | 1 | Q161 marquee | FIXED | 1b (the marquee is allowed by the F17 exemplar) | YES | YES | NO |
+| Reviews | 2 | R29 + S1329 | FIXED | 1b | YES | YES | NO |
+| Reviews | 3 | #300 True Focus + F13 | FIXED | 1b | YES | YES | NO |
+| Money | 1 | firm financing example + F10 | FIXED | 1b | YES | YES | NO |
+| Money | 2 | F7e distribution | FIXED | 1b | YES | YES | NO |
+| Money | 3 | R24 + FACTS Offers | KEPT | passes 1–9 | YES | YES | NO |
+| Book | 1 | Rogers + S1364 | FIXED | F17: folds advance only with the visitor; 4: phone and online booking at equal weight (Rogers) | YES | YES | NO |
+| Book | 2 | Mad City + S1442 | FIXED | 4: ZIP-first (Mad City) | YES | YES | NO |
+| Book | 3 | #413 Tequila | KEPT | passes 1–9 (reference re-check matches) | YES | YES | NO |
+
+**8 KEPT · 22 FIXED · 0 REBUILT.** Verification for every row is the Phase 4 run in `PROGRESS.md` and in `siding/qa/v6/evidence/`.
+
 ## V6 fresh gate verdicts (BRIEF-V6 Phase 1, 30 Oct 2026, on df98d54)
 
 All 30 rows below were re-read before judging. The V5 Verification lines further down are the earlier claims, superseded by this table and by the V6 Verification lines added after each fix.
