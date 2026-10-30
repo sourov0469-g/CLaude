@@ -1,7 +1,34 @@
 <section id="ba" class="sec ba g-base" data-section="ba" aria-labelledby="ba-h1">
 
   <!-- v1 · The stud wall [BANK CMK hand-built CSS slider + BANK Elbaz draggable pairs + BANK R28 touch-first keyboard]: the page's one signature interactive -->
-  <div class="ver ba1" data-v="1">
+  <!-- slot 1 · AUDIT-01 winner (copied from v1, fixes applied here; the original is in a backup slot) -->
+  <div class="ver bs" data-v="1">
+    <div class="wrap bs__grid">
+      <div class="bs__side">
+        <h2 class="t-head" id="ba-h1-w">Same room. Different house.</h2>
+        <p class="t-lead bs__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
+        <div class="bs__tabs" role="tablist" aria-label="Before and after projects">
+          <button type="button" role="tab" class="bs__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="bs__tl">Kitchen, grey Shaker</span><span class="bs__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="bs__tab" aria-selected="false" data-pair="1" data-rx="~shower/hinge/drip/tr"><span class="bs__tl">Bathroom</span><span class="bs__tt"><span class="nums">4&ndash;8</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="bs__tab" aria-selected="false" data-pair="2" data-rx="~sink/hinge/drip/tr"><span class="bs__tl">Kitchen, light cabinetry and island</span><span class="bs__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="bs__tab" aria-selected="false" data-pair="3" data-rx="~palm/hinge/wobble/tr"><span class="bs__tl">Outdoor living</span><span class="bs__tt">Backyard and pergola</span></button>
+        </div>
+      </div>
+      <div class="bs__stage" role="tabpanel" aria-label="Before and after">
+        <figure class="bs__img bs__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
+        <figure class="bs__img bs__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
+        <span class="bs__tag bs__tag--b">Before</span><span class="bs__tag bs__tag--a">After</span>
+        <div class="bs__stud" aria-hidden="true">
+          <svg class="bs__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" fill="#d8b47a" stroke="#0B1418" stroke-width="2"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke="#a8814a" stroke-width="1"/></svg>
+          <span class="bs__nail" style="top:12%"></span><span class="bs__nail" style="top:46%"></span><span class="bs__nail" style="top:82%"></span>
+          <svg class="bs__grip" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="29" fill="#77b3b8" stroke="#0B1418" stroke-width="3"/><path d="M14 32h36M14 32l7-7M14 32l7 7M50 32l-7-7M50 32l-7 7" fill="none" stroke="#0B1418" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <input class="bs__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="50% after" data-rx="native:stud-grip">
+      </div>
+    </div>
+  </div>
+
+  <div class="ver ba1" data-v="b1" hidden>
     <div class="wrap ba1__grid">
       <div class="ba1__side">
         <h2 class="t-head" id="ba-h1">Same room. Different house.</h2>

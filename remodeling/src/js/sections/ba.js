@@ -13,8 +13,55 @@
   var ELEOS = EZ.bezier(.625, .05, 0, 1);       // [BANK 178] house ease
 
   EZ.section('ba', {
-    /* v1 · The stud wall (signature interactive) */
+    /* slot 1 · AUDIT-01 winner (copied from v1; fixes applied here) */
     1: { init: function (root, k) {
+      var stage = root.querySelector('.bs__stage');
+      var range = root.querySelector('.bs__range');
+      var imgB = root.querySelector('.bs__img--before img'), imgA = root.querySelector('.bs__img--after img');
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('.bs__tab'));
+      function setPos(v) {
+        stage.style.setProperty('--pos', v + '%');
+        range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
+      }
+      setPos(+range.value);
+      k.on(range, 'input', function () { setPos(+range.value); });
+      k.on(range, 'pointerdown', function () { stage.classList.add('is-drag'); });
+      k.on(window, 'pointerup', function () { stage.classList.remove('is-drag'); });
+      k.add(function () { stage.classList.remove('is-drag'); stage.style.removeProperty('--pos'); range.value = 50; });
+      function select(i, focus) {
+        tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
+        if (focus) tabs[i].focus();
+        var p = PAIRS[i];
+        function swap() { imgB.src = EZ.img(p.b); imgB.alt = p.ba; imgA.src = EZ.img(p.a); imgA.alt = p.aa; }
+        if (!k.motion) { swap(); return; }
+        k.ctx.add(function () {
+          // [AUDIT-01 F4.2] one 120ms opacity dip (house ease-out); the stud keeps the split the visitor chose
+          gsap.timeline().set([imgB, imgA], { autoAlpha: .35, onComplete: swap })
+            .to([imgB, imgA], { autoAlpha: 1, duration: .12, ease: EZ.bezier(.23, 1, .32, 1) });
+        });
+      }
+      tabs.forEach(function (t, i) {
+        t.tabIndex = i === 0 ? 0 : -1;
+        k.on(t, 'click', function () { select(i); });
+        k.on(t, 'keydown', function (e) {
+          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+          if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
+        });
+      });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.bs__side > *'));
+      // [AUDIT-01 F4.1] first visit only: one swing 50 -> 34 -> 50, 700ms in all; never on a version re-activation
+      if (EZ._baHint) return;
+      var o = { v: 50 };
+      ScrollTrigger.create({ trigger: stage, start: 'top 70%', once: true, onEnter: function () {
+        EZ._baHint = true;
+        gsap.timeline().to(o, { v: 34, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
+          .to(o, { v: 50, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } });
+      } });
+    } },
+
+    /* v1 · The stud wall (signature interactive) */
+    b1: { init: function (root, k) {
       var stage = root.querySelector('.ba1__stage');
       var range = root.querySelector('.ba1__range');
       var imgB = root.querySelector('.ba1__img--before img'), imgA = root.querySelector('.ba1__img--after img');

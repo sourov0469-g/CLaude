@@ -11,8 +11,8 @@
 .ba1__lead { color: var(--muted); max-width: 32ch; }
 .ba1__tabs { display: grid; }
 .ba1__tab {
-  position: relative; display: grid; grid-template-columns: 2.5rem 1fr; column-gap: var(--s3); text-align: left;
-  padding: 14px 14px 14px 12px; background: none; border: 0; border-top: 1px solid var(--line-soft); color: var(--ink); cursor: pointer;
+  position: relative; display: grid; grid-template-columns: 1fr; text-align: left;
+  padding: 14px 36px 14px 12px; background: none; border: 0; border-top: 1px solid var(--line-soft); color: var(--ink); cursor: pointer;
 }
 .ba1__tab:last-child { border-bottom: 1px solid var(--line-soft); }
 .ba1__tn { grid-row: 1 / span 2; font: 400 1.125rem/1 var(--f-display); color: var(--accent); padding-top: .35em; }
@@ -82,3 +82,46 @@
   .ba3__stage, .ba3__side { grid-column: 1 / -1; }
   .ba3__side { margin-top: var(--s6); }
 }
+
+
+/* ---------- slot 1 · AUDIT-01 winner, copied from v1 (.ba1 -> .bs); fixes follow ---------- */
+.bs__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.bs__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); }
+.bs__lead { color: var(--muted); max-width: 32ch; }
+.bs__tabs { display: grid; }
+.bs__tab {
+  position: relative; display: grid; grid-template-columns: 1fr; text-align: left;
+  padding: 14px 36px 14px 12px; background: none; border: 0; border-top: 1px solid var(--line-soft); color: var(--ink); cursor: pointer;
+}
+.bs__tab:last-child { border-bottom: 1px solid var(--line-soft); }
+.bs__tl { font: 400 clamp(1.5rem, 1.1rem + 1vw, 2.125rem)/1 var(--f-display); letter-spacing: .01em; }
+.bs__tt { font-size: .875rem; color: var(--muted); margin-top: 4px; }
+.bs__tab::after { content: ""; position: absolute; right: 0; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line-soft); }
+.bs__tab[aria-selected="true"] { background: rgba(119, 179, 184, .08); }
+.bs__tab[aria-selected="true"] .bs__tl { color: var(--accent); }
+.bs__tab[aria-selected="true"]::after { background: #f2c230; box-shadow: none; }
+.bs__stage { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #0B1418; --pos: 50%; box-shadow: 0 0 0 1px var(--line-soft); }
+.bs__img { position: absolute; inset: 0; margin: 0; }
+.bs__img img { width: 100%; height: 100%; object-fit: cover; }
+.bs__img--after { clip-path: inset(0 0 0 var(--pos)); }
+.bs__tag { position: absolute; top: 14px; z-index: 2; font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: rgba(11, 20, 24, .78); color: #e8e4dc; pointer-events: none; }
+.bs__tag--b { left: 14px; }
+.bs__tag--a { right: 14px; background: #f2c230; color: #0B1418; }
+.bs__stud { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 24px; margin-left: -12px; z-index: 2; pointer-events: none; }
+.bs__wood { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(0, 0, 0, .55)); }
+.bs__nail { position: absolute; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #c9d1d3; box-shadow: inset 0 0 0 1.5px #0B1418; }
+.bs__grip { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 64px; height: 64px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .45)); transition: scale 200ms var(--ease-out); }
+.bs__stage.is-drag .bs__grip { scale: 1.12; }
+.bs__range { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.bs__range:focus-visible + * { outline: none; }
+.bs__stage:has(.bs__range:focus-visible) { box-shadow: 0 0 0 3px var(--accent); }
+@media (max-width: 1023px) {
+  .bs__side, .bs__stage { grid-column: 1 / -1; }
+  .bs__stage { margin-top: var(--s7); }
+}
+
+/* [AUDIT-01 F4] slot 1: unnumbered tabs; grip focus ring; stage capped so the 388-596px masters upscale at most ~1.6x */
+.bs__stage { max-width: 640px; }
+.bs__grip { transition: transform .15s ease-out; }
+.bs__range:focus-visible ~ .bs__stud .bs__grip, .bs__stage:has(.bs__range:focus-visible) .bs__grip { transform: scale(1.08); filter: drop-shadow(0 0 0 #77b3b8); }
+.bs__stage:has(.bs__range:focus-visible) .bs__grip circle { stroke: #77b3b8; stroke-width: 6; }

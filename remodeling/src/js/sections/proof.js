@@ -4,9 +4,31 @@
   var NS = 'http://www.w3.org/2000/svg';
 
   EZ.section('proof', {
-    /* v1 · Proof you can pick up [S0452 matterjs]: five credential blocks drop onto a deck, settle with weight
-       (restitution .08, friction .8), can be grabbed and thrown (desktop) or bumped (tap, Enter / Space) */
+    /* slot 1 · AUDIT-01 winner (copied from v2; fixes applied here) */
     1: { init: function (root, k) {
+      // [AUDIT-01 F2] the meters count ONCE, on first entry, 0 -> exact figure in 600ms (house curve); they never re-roll.
+      // Each meter is a link to its source; hover is a 180ms window step only. Reels are aria-hidden; the link's label speaks.
+      var meters = Array.prototype.slice.call(root.querySelectorAll('.pm__m'));
+      var EASE = EZ.bezier(.23, 1, .32, 1);
+      EZ.reveal(k, root.querySelectorAll('.pm__head > *, .pm__foot'));
+      if (!k.motion || EZ._pmCounted) return;
+      meters.forEach(function (m) {
+        var num = m.querySelector('.pm__num'), val = num.dataset.n, orig = num.innerHTML;
+        num.innerHTML = val.split('').map(function (ch) {
+          if (!/\d/.test(ch)) return '<span class="pm__cell pm__cell--dot"><span class="pm__strip"><span>' + ch + '</span></span></span>';
+          return '<span class="pm__cell" data-d="' + ch + '"><span class="pm__strip"></span></span>';
+        }).join('');
+        k.add(function () { num.innerHTML = orig; });
+        var reels = Array.prototype.slice.call(num.querySelectorAll('.pm__cell[data-d]')).map(function (c) { return { el: c.querySelector('.pm__strip'), d: +c.dataset.d }; });
+        reels.forEach(function (r) { var t = ''; for (var x = 0; x <= r.d; x++) t += '<span>' + x + '</span>'; r.el.innerHTML = t; });
+        ScrollTrigger.create({ trigger: m, start: 'top 88%', once: true, onEnter: function () {
+          EZ._pmCounted = true;
+          reels.forEach(function (r) { var h = r.el.firstChild.offsetHeight; gsap.fromTo(r.el, { y: 0 }, { y: -r.d * h, duration: .6, ease: EASE }); });
+        } });
+      });
+    } },
+
+    2: { init: function (root, k) {
       var M = window.Matter, site = root.querySelector('.proof1__site');
       var els = Array.prototype.slice.call(root.querySelectorAll('.proof1__blk'));
       EZ.reveal(k, root.querySelectorAll('.proof1__head > *, .proof1__foot'));
@@ -131,7 +153,7 @@
     } },
 
     /* v2 · The meter plate: odometer reels [BANK 279 roll mode] set in steel; hover / focus / tap runs a meter again */
-    2: { init: function (root, k) {
+    b1: { init: function (root, k) {
       var meters = Array.prototype.slice.call(root.querySelectorAll('.proof2__m'));
       var EASE = EZ.bezier(.33, 1, .68, 1);
       EZ.reveal(k, root.querySelectorAll('.proof2__head > *, .proof2__foot'));

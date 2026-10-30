@@ -121,3 +121,46 @@
   .services3__wall { order: -1; margin-bottom: var(--s7); }
 }
 @media (max-width: 767px) { .services3__tags span { font-size: .625rem; padding: 4px 6px 3px 14px; } .services3__tags { gap: 8px 6px; } }
+
+
+/* ---------- slot 1 · AUDIT-01 winner, copied from v1 (.services1 -> .sl); fixes follow ---------- */
+.sl__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.sl__card { display: grid; align-content: start; gap: var(--s4); padding-top: var(--s5); border-top: 2px solid var(--line-soft); }
+.sl__stage {
+  position: relative; display: block; width: 100%; aspect-ratio: 5 / 4; padding: 0; margin: 0 0 var(--s2);
+  background: radial-gradient(closest-side, rgba(119, 179, 184, .08), transparent); border: 0; cursor: pointer; color: inherit;
+}
+.sl__stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.sl__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.sl__h { margin: 0; font: 400 clamp(2rem, 1.4rem + 1.6vw, 3rem)/1 var(--f-display); letter-spacing: .01em; }
+.sl__p { margin: 0; color: var(--muted); max-width: 36ch; }
+.sl__layers { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sl__time { margin: 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink); }
+.sl__btn { justify-self: start; margin-top: var(--s2); }
+.sl__svg polygon { stroke: #0B1418; stroke-width: 1.1; stroke-linejoin: round; }
+.sl__svg .grid { fill: none; stroke: rgba(11, 20, 24, .35); stroke-width: .8; }
+.sl__svg .lbl { font: 600 17px/1 var(--f-text); fill: var(--ink); stroke: var(--surface); stroke-width: 5px; paint-order: stroke; }
+.sl__svg .ldr { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.sl__svg .dotl { fill: var(--accent); }
+@media (max-width: 1023px) {
+  .sl__grid { grid-template-columns: 1fr; gap: var(--s9); }
+  .sl__stage { max-width: 520px; }
+}
+
+/* [AUDIT-01 F3] slot 1 layout: the kitchen is the full-width hero drawing; bathroom and whole home offset 7 / 5. No hairline tops. */
+.sl__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); row-gap: var(--s8); }
+.sl__card { border-top: 0; padding-top: 0; grid-column: span 6; }
+.sl__card[data-asm="kitchen"] { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.sl__card[data-asm="kitchen"] .sl__stage { grid-column: 1 / span 8; aspect-ratio: 16 / 10; max-height: 560px; }
+.sl__card[data-asm="kitchen"] .sl__txt { grid-column: 9 / span 4; align-self: end; padding-bottom: var(--s6); }
+.sl__txt { display: grid; align-content: start; gap: var(--s4); }
+.sl__card[data-asm="bath"] { grid-column: 1 / span 7; }
+.sl__card[data-asm="home"] { grid-column: 8 / span 5; }
+.sl__stage { position: relative; }
+.sl__cap { position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 6px; font: 500 .8125rem/1 var(--f-text); color: var(--muted); pointer-events: none; }
+.sl__card.is-open .sl__cap { opacity: 0; transition: opacity .15s; }
+.sl__also { max-width: 72ch; }
+@media (max-width: 1023px) {
+  .sl__card, .sl__card[data-asm="bath"], .sl__card[data-asm="home"] { grid-column: 1 / -1; }
+  .sl__card[data-asm="kitchen"] .sl__stage, .sl__card[data-asm="kitchen"] .sl__txt { grid-column: 1 / -1; }
+}

@@ -68,8 +68,40 @@
   }
 
   EZ.section('services', {
-    /* v1 · Exploded assemblies [BANK 98 Silo] */
+    /* slot 1 · AUDIT-01 winner (copied from v1; fixes applied here) */
     1: { init: function (root, k) {
+      // [AUDIT-01 F3] one state owner per card: hover previews (fine pointers), click / tap / Enter pins it open;
+      // leaving a pinned card does nothing; scroll never changes it. Open 450ms / close 350ms, house curve, transforms only.
+      var HOUSE = EZ.bezier(.23, 1, .32, 1);
+      EZ.reveal(k, root.querySelectorAll('.services__head > *'));
+      root.querySelectorAll('.sl__card').forEach(function (card, ci) {
+        var def = ASM[card.dataset.asm], svg = card.querySelector('.sl__svg'), stage = card.querySelector('.sl__stage');
+        var A = buildAsm(svg, def), st = { p: k.motion ? 0 : 1 }, tw = null, pinned = !k.motion, preview = false;
+        k.add(function () { svg.innerHTML = ''; svg.removeAttribute('viewBox'); });
+        function render() {
+          A.layers.forEach(function (g, i) { var o = def.gap * i * st.p; g.setAttribute('transform', 'translate(' + (def.dir[0] * o).toFixed(1) + ' ' + (def.dir[1] * o).toFixed(1) + ')'); });
+          A.labs.forEach(function (l) { l.setAttribute('opacity', EZ.clamp((st.p - .35) / .5, 0, 1).toFixed(2)); });
+        }
+        render();
+        function sync() {
+          var p = pinned || preview ? 1 : 0;
+          stage.setAttribute('aria-expanded', pinned ? 'true' : 'false');
+          card.classList.toggle('is-open', p === 1);
+          if (!k.motion) { st.p = p; render(); return; }
+          if (tw) tw.kill();
+          tw = gsap.to(st, { p: p, duration: p ? .45 : .35, ease: HOUSE, onUpdate: render });
+        }
+        stage.setAttribute('aria-expanded', pinned ? 'true' : 'false');
+        k.on(stage, 'click', function () { pinned = !pinned; sync(); });
+        if (k.motion && k.fine) {
+          k.on(stage, 'pointerenter', function (e) { if (e.pointerType === 'mouse') { preview = true; sync(); } });
+          k.on(stage, 'pointerleave', function () { preview = false; sync(); });
+        }
+        if (k.motion) gsap.from(card, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', delay: ci * .05, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
+      });
+    } },
+
+    b1: { init: function (root, k) {
       EZ.reveal(k, root.querySelectorAll('.services__head > *'));
       root.querySelectorAll('.services1__card').forEach(function (card, ci) {
         var def = ASM[card.dataset.asm], svg = card.querySelector('.services1__svg'), stage = card.querySelector('.services1__stage');
