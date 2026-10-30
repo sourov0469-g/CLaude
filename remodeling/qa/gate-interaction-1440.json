@@ -116,7 +116,7 @@
    "where": "proof1",
    "name": "30+ years combined",
    "rx": "~nut/orbit/wobble/tr",
-   "top": 1632.6781005859375,
+   "top": 1632.578125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -578,7 +578,7 @@
    "where": "work1",
    "name": "P‑03Modern Farmhouse Whole-H",
    "rx": "~t:P-03/frame/flash/tr",
-   "top": 8618.64892578125,
+   "top": 8646.99755859375,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -586,7 +586,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-728.640625,\"w\":439.90625,\"h\":391.5625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-756.640625,\"w\":439.90625,\"h\":391.5625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -606,7 +606,7 @@
    "where": "work1",
    "name": "P‑05Polished-Concrete Primar",
    "rx": "~t:P-05/frame/flash/tr",
-   "top": 8657.4609375,
+   "top": 8628.4228515625,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -614,7 +614,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-335.4375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-306.4375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -634,7 +634,7 @@
    "where": "work1",
    "name": "P‑07Emerald Shaker Kitchen R",
    "rx": "~t:P-07/frame/flash/tr",
-   "top": 9083.007446289062,
+   "top": 9083.936279296875,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -642,7 +642,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-330.21875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-331.21875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -662,7 +662,7 @@
    "where": "work1",
    "name": "P‑09Chef-Grade Kitchen Remod",
    "rx": "~t:P-09/frame/flash/tr",
-   "top": 9493.609619140625,
+   "top": 9521.336669921875,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -670,7 +670,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-741.21875,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-768.21875,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -690,7 +690,7 @@
    "where": "work1",
    "name": "P‑11Modern Open-Concept Kitc",
    "rx": "~t:P-11/frame/flash/tr",
-   "top": 9513.06103515625,
+   "top": 9515.427001953125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -698,7 +698,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-329,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-331,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -718,7 +718,7 @@
    "where": "work1",
    "name": "P‑13Two-Tone Kitchen Remodel",
    "rx": "~t:P-13/frame/flash/tr",
-   "top": 9954.413818359375,
+   "top": 9949.5732421875,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -726,7 +726,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-338.78125,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-334.78125,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -746,7 +746,7 @@
    "where": "work1",
    "name": "P‑15Two-Tone Navy & White Ki",
    "rx": "~t:P-15/frame/flash/tr",
-   "top": 10379.971923828125,
+   "top": 10322.2861328125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -754,7 +754,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-764.78125,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-706.78125,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -774,7 +774,7 @@
    "where": "work1",
    "name": "P‑17Two-Tone Kitchen Remodel",
    "rx": "~t:P-17/frame/flash/tr",
-   "top": 10370.24072265625,
+   "top": 10384.111328125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -782,7 +782,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-323.5625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-337.5625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -802,7 +802,7 @@
    "where": "work1",
    "name": "P‑19Champagne Bronze & Marbl",
    "rx": "~t:P-19/frame/flash/tr",
-   "top": 10816.123291015625,
+   "top": 10814.912109375,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -810,7 +810,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-338.359375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-337.359375,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -830,7 +830,7 @@
    "where": "work1",
    "name": "P‑21Floating Vanity Primary ",
    "rx": "~t:P-21/frame/flash/tr",
-   "top": 11245.859619140625,
+   "top": 11243.80126953125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -838,7 +838,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":960.09375,\"y\":-768.359375,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
+   "note": "not on screen {\"x\":960.09375,\"y\":-766.359375,\"w\":439.90625,\"h\":411.0625,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -858,7 +858,7 @@
    "where": "work1",
    "name": "P‑23Navy Vanity Bathroom Rem",
    "rx": "~t:P-23/frame/flash/tr",
-   "top": 11228.326171875,
+   "top": 11235.87548828125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -866,7 +866,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":500.046875,\"y\":-319.140625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":500.046875,\"y\":-327.140625,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -886,7 +886,7 @@
    "where": "work1",
    "name": "P‑25Multi-Bathroom Renovatio",
    "rx": "~t:P-25/frame/flash/tr",
-   "top": 11677.79931640625,
+   "top": 11677.4501953125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -894,7 +894,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-337.921875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-336.921875,\"w\":439.890625,\"h\":411.046875,\"vis\":true}"
   },
   {
    "where": "work1",
@@ -914,7 +914,7 @@
    "where": "work1",
    "name": "Show the featured twelve",
    "rx": "~grid/pop/burst/r",
-   "top": 12497.87646484375,
+   "top": 12492.436767578125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -922,7 +922,7 @@
    "clear": null,
    "click": null,
    "job": null,
-   "note": "not on screen {\"x\":40,\"y\":-697.875,\"w\":241.25,\"h\":52,\"vis\":true}"
+   "note": "not on screen {\"x\":40,\"y\":-692.875,\"w\":241.25,\"h\":52,\"vis\":true}"
   },
   {
    "where": "reviews1",
@@ -1339,7 +1339,7 @@
    "href": null,
    "w": 1440,
    "hover": true,
-   "clear": true,
+   "clear": false,
    "click": true,
    "job": true,
    "note": ""
@@ -2146,7 +2146,7 @@
    "where": "financing3",
    "name": "Close the sheet",
    "rx": "~xbrace/pop/spinout/l",
-   "top": 5547.65625,
+   "top": 5547.645751953125,
    "fixed": false,
    "href": null,
    "w": 1440,
@@ -2879,7 +2879,7 @@
    "href": null,
    "w": 1440,
    "hover": true,
-   "clear": true,
+   "clear": false,
    "click": true,
    "job": true,
    "note": ""
@@ -3210,7 +3210,7 @@
    "where": "chrome",
    "name": "Process",
    "rx": "~gear/spin/spinout/b",
-   "top": 6000,
+   "top": 5850,
    "fixed": true,
    "href": "#process",
    "w": 1440,
@@ -3224,7 +3224,7 @@
    "where": "chrome",
    "name": "Financing",
    "rx": "~coin/jack/hop/b",
-   "top": 4103,
+   "top": 4035,
    "fixed": true,
    "href": "#financing",
    "w": 1440,
@@ -3238,7 +3238,7 @@
    "where": "chrome",
    "name": "Reviews",
    "rx": "~star/pop/sparkle/b",
-   "top": 4950,
+   "top": 4955,
    "fixed": true,
    "href": "#reviews",
    "w": 1440,
@@ -3252,7 +3252,7 @@
    "where": "chrome",
    "name": "(754) 236‑0675",
    "rx": "~cord/rail/sweep/b",
-   "top": 7155.375,
+   "top": 7149.375,
    "fixed": true,
    "href": "tel:+17542360675",
    "w": 1440,
@@ -3294,7 +3294,7 @@
    "where": "chrome",
    "name": "Evening",
    "rx": "~moon/roll/wobble/l",
-   "top": 8873,
+   "top": 8986,
    "fixed": true,
    "href": null,
    "w": 1440,

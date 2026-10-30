@@ -1,4 +1,4 @@
-width 375: tested 254, failed 13, n/a at this width 17, not on screen/err 2, page errors 0
+width 375: tested 254, failed 2, n/a at this width 17, not on screen/err 2, page errors 0
 NA chrome Services n/a: not shown at this width
 NA chrome Work n/a: not shown at this width
 NA chrome Process n/a: not shown at this width
@@ -16,18 +16,7 @@ NA chrome Traffic cone n/a: not shown at this width
 NA chrome No buddy n/a: not shown at this width
 NA chrome Settings: theme and motion n/a: not shown at this width
 NA chrome Close n/a: not shown at this width
-FAIL financing3 Close the sheet ~xbrace/pop/spinout/l hover false clear true click false job true 
-FAIL chrome Close ~xbrace/spin/ring/l hover false clear false click false job true 
-FAIL chrome Services ~wrench/tilt/wobble/r hover false clear true click false job true 
-FAIL chrome Before and after ~swap/hinge/spinout/r hover false clear true click false job true 
-FAIL chrome Process ~gear/roll/spinout/r hover false clear true click false job true 
-FAIL chrome Financing ~coin/bounce/hop/r hover false clear true click false job true 
-FAIL chrome Work ~camera/slide/flash/r hover false clear true click false job true 
-FAIL chrome Reviews ~star/neon/sparkle/r hover false clear true click false job true 
-FAIL chrome Service area ~compass/orbit/spinout/r hover false clear true click false job true 
-FAIL chrome Off ~pause/unfold/shake/r hover false clear true click false job true 
-FAIL chrome Book a consultation ~calendar/drop/tick/r hover false clear true click false job true 
-FAIL chrome (754) 236‑0675 ~handset/hoist/ring/r hover false clear true click false job true 
-FAIL chrome Book a consultation ~flag/hoist/wobble/tr hover false clear true click false job true 
-SKIP work1 Show the featured twelve ~grid/pop/burst/r not on screen {"x":16,"y":-64.40625,"w":241.25,"h":52,"vis":true}
+FAIL financing3 Close the sheet ~xbrace/pop/spinout/l hover false clear true click false job true tap 315,428 under=DIV.financing3__col own=false bound=true motion=on sheet=closed rx={"phase":"hover","hover":false,"drawn":false,"click":false}
+FAIL chrome Close ~xbrace/spin/ring/l hover true clear false click true job true 
+SKIP work1 Show the featured twelve ~grid/pop/burst/r not on screen {"x":16,"y":-54.40625,"w":241.25,"h":52,"vis":true}
 SKIP chrome Skip to content ~ladder/drop/hop/r not on screen {"x":12,"y":-62.150001525878906,"w":151.703125,"h":46.34375,"vis":true}

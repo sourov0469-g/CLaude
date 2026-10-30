@@ -1659,7 +1659,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .financing3__br--tr { right: 12px; top: 12px; border-width: 2px 2px 0 0; }
 .financing3__br--bl { left: 12px; bottom: 12px; border-width: 0 0 2px 2px; }
 .financing3__br--br { right: 12px; bottom: 12px; border-width: 0 2px 2px 0; }
-.financing3__close { position: absolute; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #1b2629; cursor: pointer; }
+.financing3__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #1b2629; cursor: pointer; }
 .financing3__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
 .financing3__col { border-top: 3px solid #1b2629; padding-top: 16px; }
 .financing3__col:last-child { border-top-color: #c8402e; }
@@ -1673,7 +1673,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .financing3__btn { background: #1b2629; color: #f3eee2; }
 .financing3__btn .rx { color: #1d4a4e; }
 @media (max-width: 1023px) { .financing3__intro .t-head, .financing3__intro .financing__lead { grid-column: 1 / -1; } .financing3__intro .financing__lead { margin-top: var(--s4); } }
-@media (max-width: 767px) { .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(27, 38, 41, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
+@media (max-width: 767px) { .financing3__sheet { padding-top: 76px; } .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(27, 38, 41, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
 
 
 .work__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
