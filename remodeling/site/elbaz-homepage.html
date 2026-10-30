@@ -293,7 +293,8 @@ input, textarea { caret-color: var(--accent); }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
 .eyebrow__roof { width: 20px; height: 12px; flex: none; overflow: visible; }
 .eyebrow__roof path { fill: none; stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
-.hh__a, .t-head .acc { color: var(--a-500); }
+.hh__a, .t-head .acc { color: var(--a-600); }   
+.eyebrow { grid-column: 1 / -1; justify-self: start; }
 
 
 
@@ -550,7 +551,7 @@ input, textarea { caret-color: var(--accent); }
 }
 
 
-.foot { background: var(--white); color: var(--ink); padding-block: 0 var(--s8); overflow: clip; }
+.foot { background: var(--a-50); color: var(--ink); padding-block: 0 var(--s8); overflow: clip; }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
@@ -559,8 +560,8 @@ input, textarea { caret-color: var(--accent); }
   font-size: clamp(3rem, 11.9vw, 14.5rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
-.foot__mark span:first-child { color: var(--a-700); }
-.foot__mark span:last-child { color: var(--a-700); opacity: .45; }   
+.foot__mark span:first-child { color: var(--ink); }
+.foot__mark span:last-child { color: var(--a-500); }   
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; } }
 [data-theme="daylight"] .foot { background: var(--white); color: var(--ink); }
 .foot .grid12 { row-gap: var(--s7); }
@@ -1155,7 +1156,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .hp__stage { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
 .hp__copy { grid-column: 1 / span 5; display: grid; gap: 18px; justify-items: start; position: relative; z-index: 2; }
 .hp__copy .hero__acts { gap: var(--s3) var(--s6); }
-.hh__a { color: var(--a-500); }
+.hh__a { color: var(--a-600); }
 .hp__art { grid-column: 6 / -1; position: relative; aspect-ratio: 10 / 9; max-height: calc(100svh - var(--nav-h) - 64px); justify-self: end; width: 100%; }
 .hp__sun { position: absolute; right: 2%; top: 4%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: var(--a-200); }
 .hp__band { position: absolute; left: 12%; right: 6%; top: 6%; bottom: 25%; overflow: hidden; background: var(--surface-2);
@@ -1425,6 +1426,16 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .pm__win { box-shadow: 0 0 0 1px var(--ink); border-radius: 4px; }
 .pm__m:focus-visible .pm__win { box-shadow: 0 0 0 3px var(--a-500); }
 @media (hover: hover) and (pointer: fine) { .pm__m:hover .pm__win { box-shadow: 0 0 0 3px var(--a-500); } }
+
+
+.pm__plate { position: relative; }
+.pm__seal { position: absolute; right: clamp(-10px, -1vw, 0px); top: -78px; width: clamp(120px, 12vw, 168px); height: auto; overflow: visible; z-index: 2; }
+.pm__seal-o { fill: var(--a-500); }
+.pm__seal-i { fill: none; stroke: var(--white); stroke-width: 2; stroke-dasharray: 3 5; }
+.pm__seal text { font: 600 15px/1 var(--f-text); fill: var(--white); letter-spacing: .02em; }
+.pm__seal-b { fill: var(--white); }
+.pm__seal-e { fill: none; stroke: var(--a-500); stroke-width: 7; stroke-linejoin: miter; }
+@media (max-width: 767px) { .pm__seal { top: -60px; right: -6px; width: 104px; } }
 
 
 .services__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
@@ -1720,6 +1731,15 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .bs__grip { transition: transform .15s ease-out; }
 .bs__range:focus-visible ~ .bs__stud .bs__grip, .bs__stage:has(.bs__range:focus-visible) .bs__grip { transform: scale(1.08); filter: drop-shadow(0 0 0 var(--a-500)); }
 .bs__stage:has(.bs__range:focus-visible) .bs__grip circle { stroke: var(--a-500); stroke-width: 6; }
+
+
+.bs__tape { position: absolute; left: 0; right: 0; top: 0; height: 30px; background: var(--a-500); z-index: 3; box-shadow: 0 1px 0 var(--ink); pointer-events: none; }
+.bs__tape svg { position: absolute; inset: 0 0 auto 0; width: 100%; height: 24px; overflow: visible; }
+.bs__ticks path { stroke: var(--ink); stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.bs__tn i { position: absolute; top: 12px; translate: -50% 0; font: 600 11px/1 var(--f-text); font-style: normal; color: var(--ink); }
+.bs__mark { position: absolute; top: 34px; left: var(--pos); translate: -50% 0; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: var(--white); font: 600 12px/1.2 var(--f-text); white-space: nowrap; }
+.bs__mark::before { content: ""; position: absolute; left: 50%; top: -7px; margin-left: -5px; border: 5px solid transparent; border-bottom-color: var(--ink); border-top: 0; }
+.bs__tag { top: 46px; }
 
 
 .process__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
@@ -2254,6 +2274,19 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .wb__tile:focus-visible { outline-color: var(--a-500); }
 
 
+.wb .work__head { position: relative; }
+.wb__cam { position: absolute; right: 0; bottom: 0; width: 112px; height: auto; overflow: visible; }
+.wb__legs { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.wb__head, .wb__top { fill: var(--ink); }
+.wb__body { fill: var(--a-500); }
+.wb__lens-o { fill: var(--ink); } .wb__lens-i { fill: var(--a-200); } .wb__glint { fill: var(--white); }
+.wb__flash { fill: var(--white); stroke: var(--ink); stroke-width: 2.4; }
+.wb__burst path { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linecap: round; opacity: 0; }
+.wb .work__lead { grid-column: 8 / span 4; }
+@media (max-width: 1023px) { .wb__cam { width: 88px; bottom: auto; top: 0; } }
+@media (max-width: 767px) { .wb__cam { display: none; } }
+
+
 .reviews__lead { color: var(--muted); max-width: 40ch; }
 .reviews__lead strong { color: var(--ink); font-weight: 600; }
 
@@ -2458,6 +2491,15 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .tc__go { position: relative; z-index: 6; }
 .tc__list li { transition: background-color 120ms ease-out; }
 .tc__hub { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--muted); max-width: 44ch; }
+
+
+.tc__map { position: absolute; right: 0; top: 50%; translate: 0 -50%; height: 150%; width: auto; aspect-ratio: 1000 / 2378; overflow: visible; z-index: 0; pointer-events: none; }
+.tc__cty { fill: var(--a-50); stroke: var(--a-300); stroke-width: 4; stroke-linejoin: round; }
+.tc__dot { fill: var(--a-300); }
+.tc__dot.is-on { fill: var(--a-600); stroke: var(--ink); stroke-width: 5; }
+.tc__sign { position: relative; z-index: 1; max-width: 520px; }
+.tc__ans { position: relative; z-index: 1; }
+@media (max-width: 767px) { .tc__map { height: 120%; opacity: .7; } }
 
 
 #consult .t-head { color: var(--field-ink); }
@@ -2937,10 +2979,17 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver pm" data-v="1">
     <div class="wrap">
       <div class="pm__head">
-        <h2 class="t-head" id="proof-h2-w">The numbers, metered.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Checkable proof</p>
+        <h2 class="t-head" id="proof-h2-w">The numbers, <span class="acc">metered.</span></h2>
         <p class="t-lead pm__lead">Four figures Elbaz publishes. Each meter opens its source.</p>
       </div>
       <div class="pm__plate">
+        <svg class="pm__seal" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+          <defs><path id="pm-ring" d="M100 100 m-78 0 a78 78 0 1 1 156 0 a78 78 0 1 1 -156 0"/></defs>
+          <circle class="pm__seal-o" cx="100" cy="100" r="96"/><circle class="pm__seal-i" cx="100" cy="100" r="62"/>
+          <g class="pm__seal-ring"><text><textPath href="#pm-ring" textLength="486">Licensed, bonded &amp; insured · CBC1265280 · Licensed, bonded &amp; insured · CBC1265280 ·</textPath></text></g>
+          <rect class="pm__seal-b" x="70" y="70" width="60" height="60" rx="12"/><path class="pm__seal-e" d="M118 98 L100 82 L85 95 V118 H116 M85 106 H110"/>
+        </svg>
         <ul class="pm__meters">
           <li><a class="pm__m" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/roll/spinout/tr" aria-label="Google rating 4.8 out of 5, read the reviews on Google"><span class="pm__win" aria-hidden="true"><span class="pm__num nums" data-n="4.8">4.8</span></span><span class="pm__lab" aria-hidden="true">Google rating, out of 5</span></a></li>
           <li><a class="pm__m" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~speech/roll/spinout/tr" aria-label="343 Google reviews, read them on Google"><span class="pm__win" aria-hidden="true"><span class="pm__num nums" data-n="343">343</span></span><span class="pm__lab" aria-hidden="true">Google reviews</span></a></li>
@@ -3057,7 +3106,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver sl" data-v="1">
     <div class="wrap">
       <div class="services__head">
-        <h2 class="t-head" id="services-h1-w">Whatever the scope, one team accountable for all of it.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>What we build</p>
+        <h2 class="t-head" id="services-h1-w">Whatever the scope, <span class="acc">one team</span> accountable for all of it.</h2>
         <p class="t-lead services__lead">Every job is a stack of trades. Point at a drawing to preview its layers; click or tap to keep it open.</p>
       </div>
       <div class="sl__grid">
@@ -3237,7 +3287,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver bs" data-v="1">
     <div class="wrap bs__grid">
       <div class="bs__side">
-        <h2 class="t-head" id="ba-h1-w">Same room. Different house.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h1-w">Same room. <span class="acc">Different house.</span></h2>
         <p class="t-lead bs__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
         <div class="bs__tabs" role="tablist" aria-label="Before and after projects">
           <button type="button" role="tab" class="bs__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="bs__tl">Kitchen, grey Shaker</span><span class="bs__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
@@ -3250,6 +3301,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         <figure class="bs__img bs__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
         <figure class="bs__img bs__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
         <span class="bs__tag bs__tag--b">Before</span><span class="bs__tag bs__tag--a">After</span>
+        <div class="bs__tape" aria-hidden="true"><svg viewBox="0 0 100 24" preserveAspectRatio="none" focusable="false"><g class="bs__ticks"><path d="M2.08333 0 V4"/><path d="M4.16667 0 V4"/><path d="M6.25 0 V4"/><path d="M8.33333 0 V4"/><path d="M10.4167 0 V4"/><path d="M12.5 0 V7"/><path d="M14.5833 0 V4"/><path d="M16.6667 0 V4"/><path d="M18.75 0 V4"/><path d="M20.8333 0 V4"/><path d="M22.9167 0 V4"/><path d="M25 0 V10"/><path d="M27.0833 0 V4"/><path d="M29.1667 0 V4"/><path d="M31.25 0 V4"/><path d="M33.3333 0 V4"/><path d="M35.4167 0 V4"/><path d="M37.5 0 V7"/><path d="M39.5833 0 V4"/><path d="M41.6667 0 V4"/><path d="M43.75 0 V4"/><path d="M45.8333 0 V4"/><path d="M47.9167 0 V4"/><path d="M50 0 V10"/><path d="M52.0833 0 V4"/><path d="M54.1667 0 V4"/><path d="M56.25 0 V4"/><path d="M58.3333 0 V4"/><path d="M60.4167 0 V4"/><path d="M62.5 0 V7"/><path d="M64.5833 0 V4"/><path d="M66.6667 0 V4"/><path d="M68.75 0 V4"/><path d="M70.8333 0 V4"/><path d="M72.9167 0 V4"/><path d="M75 0 V10"/><path d="M77.0833 0 V4"/><path d="M79.1667 0 V4"/><path d="M81.25 0 V4"/><path d="M83.3333 0 V4"/><path d="M85.4167 0 V4"/><path d="M87.5 0 V7"/><path d="M89.5833 0 V4"/><path d="M91.6667 0 V4"/><path d="M93.75 0 V4"/><path d="M95.8333 0 V4"/><path d="M97.9167 0 V4"/></g></svg><span class="bs__tn"><i style="left:25%">12</i><i style="left:50%">24</i><i style="left:75%">36</i></span><span class="bs__mark"><b class="nums">24</b> in</span></div>
         <div class="bs__stud" aria-hidden="true">
           <svg class="bs__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" fill="#C9B48F" stroke="#121212" stroke-width="2"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke="#5E5852" stroke-width="1"/></svg>
           <span class="bs__nail" style="top:12%"></span><span class="bs__nail" style="top:46%"></span><span class="bs__nail" style="top:82%"></span>
@@ -3332,7 +3384,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver pl" data-v="1">
     <div class="wrap">
       <div class="process__head">
-        <h2 class="t-head" id="process-h1-w">Eight stops between your first call and your keys.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h1-w">Eight stops between your first call and <span class="acc">your keys.</span></h2>
         <div class="pl__headtxt">
           <p class="t-lead process__lead">The route every Elbaz job drives, in order. Each stop says what happens there.</p>
           <p class="pl__note">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
@@ -3402,7 +3455,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver fr" data-v="1">
     <div class="wrap">
       <div class="financing__head">
-        <h2 class="t-head" id="financing-h2-w">Which partner fits your project?</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h2-w">Which partner <span class="acc">fits your project?</span></h2>
         <p class="t-lead financing__lead">Pick your project. The partners that usually fit it light up, with the reason underneath.</p>
       </div>
       <div class="fr__rig">
@@ -3562,8 +3616,18 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver wb" data-v="1">
     <div class="wrap">
       <div class="work__head">
-        <h2 class="t-head" id="work-h3-w">Twenty-six rooms, on the move.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h3-w">Twenty-six rooms, <span class="acc">on the move.</span></h2>
         <p class="t-lead work__lead">Kitchens run one way, bathrooms and whole homes the other. Pick any photo to see it large. Every image is our own work.</p>
+        <svg class="wb__cam" viewBox="0 0 220 230" aria-hidden="true" focusable="false">
+          <path class="wb__legs" d="M110 120 L58 226 M110 120 L162 226 M110 120 V226 M80 186 H140"/>
+          <rect class="wb__head" x="104" y="104" width="12" height="18" rx="2"/>
+          <rect class="wb__body" x="50" y="44" width="120" height="70" rx="10"/>
+          <rect class="wb__top" x="66" y="32" width="38" height="16" rx="4"/>
+          <circle class="wb__lens-o" cx="114" cy="79" r="28"/><circle class="wb__lens-i" cx="114" cy="79" r="16"/><circle class="wb__glint" cx="107" cy="72" r="4"/>
+          <rect class="wb__flash" x="138" y="52" width="22" height="12" rx="2"/>
+          <g class="wb__burst"><path d="M149 40 V20 M162 44 L176 30 M136 44 L122 30 M168 56 H190"/></g>
+        </svg>
       </div>
     </div>
     <div class="wb__belts">
@@ -3666,7 +3730,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver rt" data-v="1">
     <div class="wrap rt__grid">
       <div class="rt__side">
-        <h2 class="t-head" id="reviews-h1-w">343 Google reviews. Count them.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h1-w"><span class="acc">343</span> Google reviews. Count them.</h2>
         <p class="t-lead reviews__lead">One stroke for every review on our Google listing, tallied in gates of five. Point at or tab to a gate to see which reviews it holds.</p>
         <p class="rt__avg"><span class="rt__n nums">4.8</span><span class="rt__of">out of <span class="nums">5</span>,<br>the average across every review</span></p>
         <a class="btn rt__btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~ledger/swing/tick/r"><span class="btn__label">Read all 343 on Google</span></a>
@@ -3738,7 +3803,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver tc" data-v="1">
     <div class="wrap tc__grid">
       <div class="tc__side">
-        <h2 class="t-head" id="towns-h3-w">Type your town.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h3-w">Type <span class="acc">your town.</span></h2>
         <p class="t-lead towns__lead">Type yours, the sign answers.</p>
         <p class="tc__hub">104 municipalities in Miami-Dade, Broward and Palm Beach, from our office at 19 W Flagler St, Miami.</p>
         <form class="tc__form" novalidate>
@@ -3753,6 +3819,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         <p class="tc__call">Not sure? Call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>.</p>
       </div>
       <div class="tc__road">
+        <svg class="tc__map" viewBox="0 0 1000 2378" aria-hidden="true" focusable="false"></svg>
         <svg class="tc__sign" viewBox="0 0 520 300" aria-hidden="true" focusable="false"></svg>
         <p class="tc__ans" aria-live="polite"></p>
       </div>
@@ -3832,7 +3899,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   <div class="ver cp" data-v="1">
     <div class="wrap cp__grid">
       <div class="cp__side">
-        <h2 class="t-head cp__h" id="consult-h2-w">Tap the rooms you want to change.</h2>
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head cp__h" id="consult-h2-w">Tap the rooms <span class="acc">you want to change.</span></h2>
         <p class="t-lead consult__lead">Then tell us how to reach you. We will walk the property and give you an honest read on scope before anyone quotes a number.</p>
         <dl class="consult__facts cp__facts">
           <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
@@ -7064,6 +7132,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   EZ.section('proof', {
     /* slot 1 · AUDIT-01 winner (copied from v2; fixes applied here) */
     1: { init: function (root, k) {
+      var ring = root.querySelector('.pm__seal-ring');
+      var ro = { a: -40 }, rset = function () { ring.setAttribute('transform', 'rotate(' + ro.a.toFixed(2) + ' 100 100)'); };
+      if (ring && k.motion) { rset(); gsap.to(ro, { a: 40, ease: 'none', onUpdate: rset, scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: .6 } }); }
       // [AUDIT-01 F2] the meters count ONCE, on first entry, 0 -> exact figure in 600ms (house curve); they never re-roll.
       // Each meter is a link to its source; hover is a 180ms window step only. Reels are aria-hidden; the link's label speaks.
       var meters = Array.prototype.slice.call(root.querySelectorAll('.pm__m'));
@@ -7605,6 +7676,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       var tabs = Array.prototype.slice.call(root.querySelectorAll('.bs__tab'));
       function setPos(v) {
         stage.style.setProperty('--pos', v + '%');
+        var tm = root.querySelector('.bs__mark b'); if (tm) tm.textContent = Math.round(v * .48);
         range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
       }
       setPos(+range.value);
@@ -8348,6 +8420,13 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     1: { init: function (root, k) {
       var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
       var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
+      // the site camera fires once per opened photo (a 260ms flash), then rests
+      function flash() {
+        if (!k.motion) return;
+        var b = root.querySelectorAll('.wb__burst path'), fl = root.querySelector('.wb__flash');
+        gsap.timeline().fromTo(b, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .14, ease: 'power2.out' }).to(b, { opacity: 0, duration: .12 })
+          .fromTo(fl, { fill: '#FFF5EE' }, { fill: '#FF5F00', duration: .08, yoyo: true, repeat: 1 }, 0);
+      }
       var belts = Array.prototype.slice.call(root.querySelectorAll('.wb__belt'));
       var hold = root.querySelector('.wb__hold');
       var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
@@ -8364,7 +8443,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
           return '<button type="button" class="wb__tile" data-i="' + p.no + '" data-rx="~t:' + code + '/peek/flash/tl" style="aspect-ratio:' + p.w + ' / ' + p.h + '" aria-label="' + p.title.replace(/"/g, '&quot;') + ', ' + CAT[p.c] + ', open large">' +
             '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"><span class="wb__cap" aria-hidden="true"><b>' + CAT[p.c] + '</b>' + p.title.replace(/</g, '') + '</span></button>';
         }).join('');
-        k.on(track, 'click', function (e) { var t = e.target.closest('.wb__tile'); if (t) EZ.viewer.open(all, +t.dataset.i, t); });
+        k.on(track, 'click', function (e) { var t = e.target.closest('.wb__tile'); if (t) { flash(); EZ.viewer.open(all, +t.dataset.i, t); } });
       });
       k.add(function () { belts.forEach(function (b) { b.querySelector('.wb__track').innerHTML = ''; }); root.classList.remove('is-static'); });
       if (EZ.bindReactions) EZ.bindReactions(root, k);
@@ -8967,6 +9046,13 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       var D = geo(), form = root.querySelector('.tc__form'), inp = root.querySelector('.tc__in'), list = root.querySelector('.tc__list');
       var outline = root.querySelector('.tc__outline'), opath = outline.querySelector('path'), sign = root.querySelector('.tc__sign'), ans = root.querySelector('.tc__ans');
       lists(root.querySelector('.tc__all'));
+      // the three counties behind the sign, every municipality a survey mark; a hit lights its mark (the map proves the answer)
+      var map = root.querySelector('.tc__map');
+      map.innerHTML = ORDER.map(function (c) { return '<path class="tc__cty" d="' + D.counties[c] + '"/>'; }).join('') +
+        ORDER.map(function (c) { return D.towns[c].map(function (t) { return '<circle class="tc__dot" r="9" cx="' + t[1] + '" cy="' + t[2] + '" data-n="' + esc(t[0]) + '"/>'; }).join(''); }).join('');
+      var dots = map.querySelectorAll('.tc__dot');
+      function lightTown(n) { dots.forEach(function (c) { var on = c.getAttribute('data-n') === n; c.classList.toggle('is-on', on); if (on && k.motion) gsap.fromTo(c, { attr: { r: 40 } }, { attr: { r: 18 }, duration: .4, ease: 'power2.out' }); else c.setAttribute('r', on ? 18 : 9); }); }
+      k.add(function () { map.innerHTML = ''; });
       var ALL = [];
       ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { ALL.push({ n: t[0], c: c, k: norm(t[0]) }); }); });
       // Madoka outline: drawn round the field from the bottom-left on focus
@@ -9022,14 +9108,14 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
           '<text x="260" y="208" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? '#121212' : '#FFFFFF') + '">' + esc(verdict) + '</text></g></g>';
       }
       function show(t, raw) {
-        if (t) { draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
+        if (t) { lightTown(t.n); draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
         else { draw('NOT ON OUR LIST', raw ? '“' + raw + '”' : '', 'Call (754) 236-0675 to ask', false); ans.textContent = (raw || 'That town') + ' is not one of the 104 municipalities on our list. Call (754) 236-0675 to ask.'; }
         if (k.motion) k.ctx.add(function () {
           gsap.fromTo(sign.querySelector('.panel'), { y: -60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .28, ease: 'back.out(1.8)' });
           if (!t) gsap.fromTo(sign.querySelector('.posts'), { rotation: 0 }, { keyframes: [{ rotation: -1.2, duration: .05 }, { rotation: 1.2, duration: .07 }, { rotation: -.6, duration: .04 }, { rotation: 0, duration: .04 }], svgOrigin: '260 300', delay: .28 });
         });
       }
-      function rest() { draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true); ans.textContent = ''; }
+      function rest() { if (typeof lightTown === 'function') lightTown(null); draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true); ans.textContent = ''; }
       rest();
       k.add(function () { sign.innerHTML = ''; root.querySelector('.tc__all').innerHTML = ''; inp.value = ''; close(); gsap.set(opath, { clearProps: 'all' }); });
       EZ.reveal(k, root.querySelectorAll('.tc__side > h2, .tc__side > p'));
@@ -9329,14 +9415,14 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       var p1 = root.querySelector('.cp__p1'), p2 = root.querySelector('.cp__p2'), step = root.querySelector('.cp__step');
       var rooms = Array.prototype.slice.call(root.querySelectorAll('.cp__room')), whole = form.elements.whole;
       var picked = root.querySelector('.cp__picked'), err = root.querySelector('#c2-rooms-w-err'), touched = false;
-      var H1 = 'Tap the rooms you want to change.', H2 = 'How do we reach you?', S1 = 'Step 1 of 2, pick the rooms', S2 = 'Step 2 of 2, how to reach you';
+      var H1 = 'Tap the rooms <span class="acc">you want to change.</span>', H2 = 'How do we <span class="acc">reach you?</span>', S1 = 'Step 1 of 2, pick the rooms', S2 = 'Step 2 of 2, how to reach you';
       var HOUSE = EZ.bezier(.23, 1, .32, 1);
       liveClear(form, k);
       rooms.forEach(function (r) { if (!r.querySelector('span')) r.innerHTML = '<span>' + r.textContent + '</span>'; });
       svg.innerHTML = '<path class="wall" d="M12 12H588V408H12Z M282 12V150 M282 150H420 M420 12V216 M12 216H588 M354 216V408"/>' +
         '<path class="door" d="M282 110a40 40 0 0 1 40 40 M420 170a40 40 0 0 0 -40 40 M200 216a44 44 0 0 1 44 -44 M354 300a40 40 0 0 1 40 40"/>' +
         '<path class="fix" d="M30 30h220v36H30z M60 120h120v50H60z M300 30h50v30h-50z M370 90a18 22 0 1 0 0.1 0 M440 40h120v120h-120z M40 300h150v70H40z M380 240h180v140H380z"/>';
-      k.add(function () { svg.innerHTML = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); p1.hidden = false; p2.hidden = true; step.textContent = S1; head.textContent = H1; });
+      k.add(function () { svg.innerHTML = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); p1.hidden = false; p2.hidden = true; step.textContent = S1; head.innerHTML = H1; });
       function sel() { var s = rooms.filter(function (r) { return r.getAttribute('aria-pressed') === 'true'; }).map(function (r) { return r.dataset.room; }); if (whole.checked) s.unshift('Whole home'); return s; }
       function press(r, on) {
         r.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -9359,7 +9445,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       function go(to2) {
         var from = to2 ? p1 : p2, to = to2 ? p2 : p1;
         if (to2) picked.textContent = sel().join(' · ');
-        function swap() { step.textContent = to2 ? S2 : S1; head.textContent = to2 ? H2 : H1; }
+        function swap() { step.textContent = to2 ? S2 : S1; head.innerHTML = to2 ? H2 : H1; }
         if (!k.motion) { swap(); from.hidden = true; to.hidden = false; (to.querySelector('input, button') || to).focus(); return; }
         k.ctx.add(function () {
           gsap.timeline()

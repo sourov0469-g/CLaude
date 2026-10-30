@@ -66,14 +66,14 @@
       var p1 = root.querySelector('.cp__p1'), p2 = root.querySelector('.cp__p2'), step = root.querySelector('.cp__step');
       var rooms = Array.prototype.slice.call(root.querySelectorAll('.cp__room')), whole = form.elements.whole;
       var picked = root.querySelector('.cp__picked'), err = root.querySelector('#c2-rooms-w-err'), touched = false;
-      var H1 = 'Tap the rooms you want to change.', H2 = 'How do we reach you?', S1 = 'Step 1 of 2, pick the rooms', S2 = 'Step 2 of 2, how to reach you';
+      var H1 = 'Tap the rooms <span class="acc">you want to change.</span>', H2 = 'How do we <span class="acc">reach you?</span>', S1 = 'Step 1 of 2, pick the rooms', S2 = 'Step 2 of 2, how to reach you';
       var HOUSE = EZ.bezier(.23, 1, .32, 1);
       liveClear(form, k);
       rooms.forEach(function (r) { if (!r.querySelector('span')) r.innerHTML = '<span>' + r.textContent + '</span>'; });
       svg.innerHTML = '<path class="wall" d="M12 12H588V408H12Z M282 12V150 M282 150H420 M420 12V216 M12 216H588 M354 216V408"/>' +
         '<path class="door" d="M282 110a40 40 0 0 1 40 40 M420 170a40 40 0 0 0 -40 40 M200 216a44 44 0 0 1 44 -44 M354 300a40 40 0 0 1 40 40"/>' +
         '<path class="fix" d="M30 30h220v36H30z M60 120h120v50H60z M300 30h50v30h-50z M370 90a18 22 0 1 0 0.1 0 M440 40h120v120h-120z M40 300h150v70H40z M380 240h180v140H380z"/>';
-      k.add(function () { svg.innerHTML = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); p1.hidden = false; p2.hidden = true; step.textContent = S1; head.textContent = H1; });
+      k.add(function () { svg.innerHTML = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); p1.hidden = false; p2.hidden = true; step.textContent = S1; head.innerHTML = H1; });
       function sel() { var s = rooms.filter(function (r) { return r.getAttribute('aria-pressed') === 'true'; }).map(function (r) { return r.dataset.room; }); if (whole.checked) s.unshift('Whole home'); return s; }
       function press(r, on) {
         r.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -96,7 +96,7 @@
       function go(to2) {
         var from = to2 ? p1 : p2, to = to2 ? p2 : p1;
         if (to2) picked.textContent = sel().join(' · ');
-        function swap() { step.textContent = to2 ? S2 : S1; head.textContent = to2 ? H2 : H1; }
+        function swap() { step.textContent = to2 ? S2 : S1; head.innerHTML = to2 ? H2 : H1; }
         if (!k.motion) { swap(); from.hidden = true; to.hidden = false; (to.querySelector('input, button') || to).focus(); return; }
         k.ctx.add(function () {
           gsap.timeline()

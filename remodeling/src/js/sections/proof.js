@@ -6,6 +6,9 @@
   EZ.section('proof', {
     /* slot 1 · AUDIT-01 winner (copied from v2; fixes applied here) */
     1: { init: function (root, k) {
+      var ring = root.querySelector('.pm__seal-ring');
+      var ro = { a: -40 }, rset = function () { ring.setAttribute('transform', 'rotate(' + ro.a.toFixed(2) + ' 100 100)'); };
+      if (ring && k.motion) { rset(); gsap.to(ro, { a: 40, ease: 'none', onUpdate: rset, scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: .6 } }); }
       // [AUDIT-01 F2] the meters count ONCE, on first entry, 0 -> exact figure in 600ms (house curve); they never re-roll.
       // Each meter is a link to its source; hover is a 180ms window step only. Reels are aria-hidden; the link's label speaks.
       var meters = Array.prototype.slice.call(root.querySelectorAll('.pm__m'));

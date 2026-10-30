@@ -254,7 +254,7 @@
 }
 
 /* ---------- footer (chrome; Ft4 statement close) ---------- */
-.foot { background: var(--white); color: var(--ink); padding-block: 0 var(--s8); overflow: clip; }
+.foot { background: var(--a-50); color: var(--ink); padding-block: 0 var(--s8); overflow: clip; }
 /* giant two-tone wordmark: the brand stamp under the close [BANK pattern: OFFF Forum footer wordmark] */
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
@@ -263,8 +263,8 @@
   font-size: clamp(3rem, 11.9vw, 14.5rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
-.foot__mark span:first-child { color: var(--a-700); }
-.foot__mark span:last-child { color: var(--a-700); opacity: .45; }   /* [AUDIT-01 footer 2] clearly secondary, never a misprint */
+.foot__mark span:first-child { color: var(--ink); }
+.foot__mark span:last-child { color: var(--a-500); }   /* owner redesign: the accent carries the second word */
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; } }
 [data-theme="daylight"] .foot { background: var(--white); color: var(--ink); }
 .foot .grid12 { row-gap: var(--s7); }

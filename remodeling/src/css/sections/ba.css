@@ -125,3 +125,13 @@
 .bs__grip { transition: transform .15s ease-out; }
 .bs__range:focus-visible ~ .bs__stud .bs__grip, .bs__stage:has(.bs__range:focus-visible) .bs__grip { transform: scale(1.08); filter: drop-shadow(0 0 0 var(--a-500)); }
 .bs__stage:has(.bs__range:focus-visible) .bs__grip circle { stroke: var(--a-500); stroke-width: 6; }
+
+/* OWNER MASTER DIRECTIVE Phase 3: a 48-inch tape blade along the top edge of the stage; its hook follows the stud and
+   reads where the wall is being opened. */
+.bs__tape { position: absolute; left: 0; right: 0; top: 0; height: 30px; background: var(--a-500); z-index: 3; box-shadow: 0 1px 0 var(--ink); pointer-events: none; }
+.bs__tape svg { position: absolute; inset: 0 0 auto 0; width: 100%; height: 24px; overflow: visible; }
+.bs__ticks path { stroke: var(--ink); stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.bs__tn i { position: absolute; top: 12px; translate: -50% 0; font: 600 11px/1 var(--f-text); font-style: normal; color: var(--ink); }
+.bs__mark { position: absolute; top: 34px; left: var(--pos); translate: -50% 0; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: var(--white); font: 600 12px/1.2 var(--f-text); white-space: nowrap; }
+.bs__mark::before { content: ""; position: absolute; left: 50%; top: -7px; margin-left: -5px; border: 5px solid transparent; border-bottom-color: var(--ink); border-top: 0; }
+.bs__tag { top: 46px; }

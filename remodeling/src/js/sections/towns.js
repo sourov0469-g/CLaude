@@ -21,6 +21,13 @@
       var D = geo(), form = root.querySelector('.tc__form'), inp = root.querySelector('.tc__in'), list = root.querySelector('.tc__list');
       var outline = root.querySelector('.tc__outline'), opath = outline.querySelector('path'), sign = root.querySelector('.tc__sign'), ans = root.querySelector('.tc__ans');
       lists(root.querySelector('.tc__all'));
+      // the three counties behind the sign, every municipality a survey mark; a hit lights its mark (the map proves the answer)
+      var map = root.querySelector('.tc__map');
+      map.innerHTML = ORDER.map(function (c) { return '<path class="tc__cty" d="' + D.counties[c] + '"/>'; }).join('') +
+        ORDER.map(function (c) { return D.towns[c].map(function (t) { return '<circle class="tc__dot" r="9" cx="' + t[1] + '" cy="' + t[2] + '" data-n="' + esc(t[0]) + '"/>'; }).join(''); }).join('');
+      var dots = map.querySelectorAll('.tc__dot');
+      function lightTown(n) { dots.forEach(function (c) { var on = c.getAttribute('data-n') === n; c.classList.toggle('is-on', on); if (on && k.motion) gsap.fromTo(c, { attr: { r: 40 } }, { attr: { r: 18 }, duration: .4, ease: 'power2.out' }); else c.setAttribute('r', on ? 18 : 9); }); }
+      k.add(function () { map.innerHTML = ''; });
       var ALL = [];
       ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { ALL.push({ n: t[0], c: c, k: norm(t[0]) }); }); });
       // Madoka outline: drawn round the field from the bottom-left on focus
@@ -76,14 +83,14 @@
           '<text x="260" y="208" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? '#121212' : '#FFFFFF') + '">' + esc(verdict) + '</text></g></g>';
       }
       function show(t, raw) {
-        if (t) { draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
+        if (t) { lightTown(t.n); draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
         else { draw('NOT ON OUR LIST', raw ? '“' + raw + '”' : '', 'Call (754) 236-0675 to ask', false); ans.textContent = (raw || 'That town') + ' is not one of the 104 municipalities on our list. Call (754) 236-0675 to ask.'; }
         if (k.motion) k.ctx.add(function () {
           gsap.fromTo(sign.querySelector('.panel'), { y: -60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .28, ease: 'back.out(1.8)' });
           if (!t) gsap.fromTo(sign.querySelector('.posts'), { rotation: 0 }, { keyframes: [{ rotation: -1.2, duration: .05 }, { rotation: 1.2, duration: .07 }, { rotation: -.6, duration: .04 }, { rotation: 0, duration: .04 }], svgOrigin: '260 300', delay: .28 });
         });
       }
-      function rest() { draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true); ans.textContent = ''; }
+      function rest() { if (typeof lightTown === 'function') lightTown(null); draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true); ans.textContent = ''; }
       rest();
       k.add(function () { sign.innerHTML = ''; root.querySelector('.tc__all').innerHTML = ''; inp.value = ''; close(); gsap.set(opath, { clearProps: 'all' }); });
       EZ.reveal(k, root.querySelectorAll('.tc__side > h2, .tc__side > p'));

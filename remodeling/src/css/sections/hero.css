@@ -331,7 +331,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .hp__stage { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
 .hp__copy { grid-column: 1 / span 5; display: grid; gap: 18px; justify-items: start; position: relative; z-index: 2; }
 .hp__copy .hero__acts { gap: var(--s3) var(--s6); }
-.hh__a { color: var(--a-500); }
+.hh__a { color: var(--a-600); }
 .hp__art { grid-column: 6 / -1; position: relative; aspect-ratio: 10 / 9; max-height: calc(100svh - var(--nav-h) - 64px); justify-self: end; width: 100%; }
 .hp__sun { position: absolute; right: 2%; top: 4%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: var(--a-200); }
 .hp__band { position: absolute; left: 12%; right: 6%; top: 6%; bottom: 25%; overflow: hidden; background: var(--surface-2);

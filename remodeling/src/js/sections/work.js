@@ -10,6 +10,13 @@
     1: { init: function (root, k) {
       var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
       var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
+      // the site camera fires once per opened photo (a 260ms flash), then rests
+      function flash() {
+        if (!k.motion) return;
+        var b = root.querySelectorAll('.wb__burst path'), fl = root.querySelector('.wb__flash');
+        gsap.timeline().fromTo(b, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .14, ease: 'power2.out' }).to(b, { opacity: 0, duration: .12 })
+          .fromTo(fl, { fill: '#FFF5EE' }, { fill: '#FF5F00', duration: .08, yoyo: true, repeat: 1 }, 0);
+      }
       var belts = Array.prototype.slice.call(root.querySelectorAll('.wb__belt'));
       var hold = root.querySelector('.wb__hold');
       var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
@@ -26,7 +33,7 @@
           return '<button type="button" class="wb__tile" data-i="' + p.no + '" data-rx="~t:' + code + '/peek/flash/tl" style="aspect-ratio:' + p.w + ' / ' + p.h + '" aria-label="' + p.title.replace(/"/g, '&quot;') + ', ' + CAT[p.c] + ', open large">' +
             '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"><span class="wb__cap" aria-hidden="true"><b>' + CAT[p.c] + '</b>' + p.title.replace(/</g, '') + '</span></button>';
         }).join('');
-        k.on(track, 'click', function (e) { var t = e.target.closest('.wb__tile'); if (t) EZ.viewer.open(all, +t.dataset.i, t); });
+        k.on(track, 'click', function (e) { var t = e.target.closest('.wb__tile'); if (t) { flash(); EZ.viewer.open(all, +t.dataset.i, t); } });
       });
       k.add(function () { belts.forEach(function (b) { b.querySelector('.wb__track').innerHTML = ''; }); root.classList.remove('is-static'); });
       if (EZ.bindReactions) EZ.bindReactions(root, k);

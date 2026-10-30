@@ -21,6 +21,7 @@
       var tabs = Array.prototype.slice.call(root.querySelectorAll('.bs__tab'));
       function setPos(v) {
         stage.style.setProperty('--pos', v + '%');
+        var tm = root.querySelector('.bs__mark b'); if (tm) tm.textContent = Math.round(v * .48);
         range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
       }
       setPos(+range.value);

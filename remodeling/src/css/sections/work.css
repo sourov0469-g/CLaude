@@ -120,3 +120,17 @@
 .wb__cap { opacity: 1; transform: none; transition: none; }
 .wb__cap b { color: var(--a-700); letter-spacing: .08em; }
 .wb__tile:focus-visible { outline-color: var(--a-500); }
+
+/* OWNER MASTER DIRECTIVE Phase 3: the site camera. Photographed as delivered: the tripod camera fires its flash when a
+   photo is opened. */
+.wb .work__head { position: relative; }
+.wb__cam { position: absolute; right: 0; bottom: 0; width: 112px; height: auto; overflow: visible; }
+.wb__legs { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.wb__head, .wb__top { fill: var(--ink); }
+.wb__body { fill: var(--a-500); }
+.wb__lens-o { fill: var(--ink); } .wb__lens-i { fill: var(--a-200); } .wb__glint { fill: var(--white); }
+.wb__flash { fill: var(--white); stroke: var(--ink); stroke-width: 2.4; }
+.wb__burst path { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linecap: round; opacity: 0; }
+.wb .work__lead { grid-column: 8 / span 4; }
+@media (max-width: 1023px) { .wb__cam { width: 88px; bottom: auto; top: 0; } }
+@media (max-width: 767px) { .wb__cam { display: none; } }

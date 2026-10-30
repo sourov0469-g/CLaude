@@ -114,3 +114,12 @@
 .tc__go { position: relative; z-index: 6; }
 .tc__list li { transition: background-color 120ms ease-out; }
 .tc__hub { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--muted); max-width: 44ch; }
+
+/* OWNER MASTER DIRECTIVE Phase 3: the three counties drawn from the survey data behind the sign; a hit lights the town */
+.tc__map { position: absolute; right: 0; top: 50%; translate: 0 -50%; height: 150%; width: auto; aspect-ratio: 1000 / 2378; overflow: visible; z-index: 0; pointer-events: none; }
+.tc__cty { fill: var(--a-50); stroke: var(--a-300); stroke-width: 4; stroke-linejoin: round; }
+.tc__dot { fill: var(--a-300); }
+.tc__dot.is-on { fill: var(--a-600); stroke: var(--ink); stroke-width: 5; }
+.tc__sign { position: relative; z-index: 1; max-width: 520px; }
+.tc__ans { position: relative; z-index: 1; }
+@media (max-width: 767px) { .tc__map { height: 120%; opacity: .7; } }
