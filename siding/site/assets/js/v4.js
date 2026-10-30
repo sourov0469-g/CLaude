@@ -467,13 +467,12 @@
           F.waves.push({ x: lp.x, y: lp.y, t: now, s: sp }); F.trail.x = lp.x; F.trail.y = lp.y;
           if (F.waves.length > 14) F.waves.shift();
         }
-        // idle ghost waves every 1.5 s after 3 s without a cursor here (Q138 idle mode, 0.8 strength)
-        if (!inside && now - (F.ghost || 0) > 1500 && now - P.moved > 3000) {
-          F.ghost = now; const k = (now / 1500) | 0;
-          F.waves.push({ x: hash(k) * F.w, y: hash(k + 7) * F.h, t: now, s: 0.8 }); if (F.waves.length > 14) F.waves.shift();
-        }
+        // V6 (F17): no idle ghost waves; the courses move only for the cursor and the scroll, then the field sleeps
         F.waves = F.waves.filter(w => now - w.t < 2600);
-        const shift = (F.p - 0.5) * 70;
+        const shift = (F.p - 0.5) * 70, moved = Math.abs(shift - (F.lastShift ?? NaN)) > 0.1 || F.lastShift === undefined;
+        F.lastShift = shift;
+        if (!F.waves.length && !moved && !F.dirty) return false;
+        F.dirty = F.waves.length > 0;
         F.lines.forEach(L => {
           for (let i = 0; i < L.pts.length; i++) {
             const x = L.pts[i] + shift * L.dir;
@@ -486,7 +485,7 @@
           }
           this.write(F, L, shift);
         });
-        return true;
+        return F.waves.length > 0;
       }
     },
     /* Proof: a big double-hung window grid with a glass sheen that follows the cursor (372 Glare: -45 deg, screen) */
@@ -593,13 +592,16 @@
         F.band = F.svg.querySelector('.f-band'); F.bline = F.svg.querySelector('.f-bandline');
         F.bx = F.w / 2; F.bw = 0;
       },
-      still(F) { this.place(F, F.w * 0.62, 112); },
+      still(F) { const mg = clamp(F.w * 0.03, 12, 44); this.place(F, F.w - mg / 2, mg); },
       place(F, x, w) { [F.band, F.bline].forEach(r => { r.setAttribute('x', (x - w / 2).toFixed(1)); r.setAttribute('width', w.toFixed(1)); }); },
       tick(F, dt, now, inside) {
-        const target = inside ? F.lp.x : F.w * (0.15 + F.p * 0.7);
+        // V6 (screenshot defect D1): at rest and on touch the X-ray band sits in the right page margin and swells with the
+        // scroll; it only crosses the content where the cursor takes it
+        const mg = clamp(F.w * 0.03, 12, 44);
+        const target = inside ? F.lp.x : F.w - mg / 2;
         const a = 1 - Math.pow(1 - 0.12, dt * 60);
         F.bx += (target - F.bx) * a;
-        const tw = inside ? 112 : (mqFine.matches ? 56 : 112);
+        const tw = inside ? 112 : mg * (0.5 + 0.5 * Math.sin(Math.PI * F.p));
         F.bw += (tw - F.bw) * a;
         this.place(F, F.bx, F.bw);
         if (inside && (F.lp.x !== F.lastX || F.lp.y !== F.lastY)) { F.idle = now; F.lastX = F.lp.x; F.lastY = F.lp.y; }   // settles 680 ms after the pointer stops
@@ -907,11 +909,11 @@
   const HOVER = {   // 11 ways in
     pop: g => G.fromTo(g, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: 'back.out(2.2)', stagger: ST(g, 0.025) }),
     fly: g => G.fromTo(g, { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.02) }),
-    drop: g => G.fromTo(g, { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: 'bounce.out', stagger: ST(g, 0.02) }),
+    drop: g => G.fromTo(g, { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.02) }),
     rise: g => G.fromTo(g, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: 'power2.out', stagger: ST(g, 0.03) }),
     stretch: g => G.fromTo(g, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.22, ease: 'power3.out', stagger: ST(g, 0.02) }),
     spin: g => G.fromTo(g, { rotation: -160, scale: 0.3, opacity: 0 }, { rotation: 0, scale: 1, opacity: 1, duration: 0.3, ease: 'power3.out', stagger: ST(g, 0.03) }),
-    sway: g => G.fromTo(g, { rotation: 28, opacity: 0, transformOrigin: '50% 0%' }, { rotation: 0, opacity: 1, duration: 0.3, ease: 'elastic.out(1, 0.45)', stagger: ST(g, 0.03) }),
+    sway: g => G.fromTo(g, { rotation: 28, opacity: 0, transformOrigin: '50% 0%' }, { rotation: 0, opacity: 1, duration: 0.3, ease: 'back.out(1.7)', stagger: ST(g, 0.03) }),
     draw: g => { G.set(g, { opacity: 1 }); return G.fromTo(g.map(x => Array.from(x.querySelectorAll('.g-l'))).flat(), { strokeDasharray: '1 1', strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.28, ease: 'power2.out', stagger: 0.015 }); },
     grow: g => G.fromTo(g, { scale: 0.2, opacity: 0, transformOrigin: '50% 100%' }, { scale: 1, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.025) }),
     slip: g => G.fromTo(g, { x: 14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: { each: 0.02, from: 'end' } }),

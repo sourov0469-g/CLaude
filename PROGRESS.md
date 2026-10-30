@@ -317,3 +317,20 @@ All runs use `file://…/delivered-df98d54.html`, a copy of the delivered file (
 - **Page systems to FIX:** the kit eases (G9), the hero field (G10), the Built field (D1).
 - **Pass as they stand (KEPT on fresh evidence):** Services 1, Services 2, Colour 1, Near 2, Money 3, Book 2, Book 3.
 - **No REBUILD is needed:** every failure is a fact string, a missing contact path, a parameter or an idle loop, so the smallest fix applies (§10).
+
+## V6 Phase 2: fixes (30 Oct). The smallest change per failed item; no rebuilds needed
+- **1b phone.** `with_phone()` in the section builder ends any version without a `tel:` link on a one-line contact path: a section-specific lead, "Call (512) 550-0000", and "book a free inspection". Re-grep: versions without a phone = [] (was 19).
+- **1e credentials.** The CREDS and CRED_ROWS labels are now the §3 strings: "James Hardie President's Club 2025", "Andersen Certified Premier", "BBB A+". Re-grep: each ≥ 1.
+- **1f the rating count-up.** `countUp` is replaced by a digit rise: the true figure's digits rise in over 0.3 s, 0.05 s apart, so no false value is ever shown. The 4.9 ring now draws in 0.3 s (K10 no longer needed for Proof 1).
+- **3b the Proof 3 pill.** The "177 … have a before and after" pill shows a genuine pair (Rob Roy before left, after right, from the six pair files already packed). The p22 thumbnail left the file (−10 KB media).
+- **4 Services 3.** edgeResistance 0.85 → 1 (the reference value). The row now states the mechanism honestly: the drag half is adapted, the scroll half deliberately not.
+- **D1 the Built band.** At rest and on touch the X-ray band sits in the right page margin and swells with the scroll; it crosses the content only where the cursor takes it.
+- **F17 idle loops.**
+  - The hero field has no ghost waves and sleeps when settled.
+  - Hero 1 no longer has Q95's perpetual drift (conflict K12 logged; pointer parallax kept).
+  - Book 1's folds advance only with pointer travel or scroll and then rest.
+  - Re-measured with `still.js`: Hero 1–3 0.00 %, Built 0.00 %, Book 0.01 % (the companion's blink).
+- **G9 kit eases.** sway `elastic.out` → `back.out(1.7)`; drop `bounce.out` → `power3.out`.
+- **Weight.** Packed 4,217,917 B (ceiling 4,221,484 B): code 878,191, media 3,339,726.
+
+**K12 (§2: §4 over the reference's parameter).** Q95's drift of 18 is a perpetual idle animation. F17 allows only reveal-level motion plus one signature interactive, so the drift is dropped and Q95's pointer parallax stays. Applied the same way to S1364's clock-driven folds in Book 1 and to the v4 hero field's "ghost waves" (AUDIT-V4 #8).

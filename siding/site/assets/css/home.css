@@ -294,6 +294,9 @@ html.motion .h2-s2 { animation: h2s2 .24s cubic-bezier(0, 0, .2, 1) both; }
 .statement b { font-weight: 800; font-stretch: 80%; }
 .ipill { display: inline-block; width: 2.3em; height: .95em; border-radius: 999px; overflow: hidden; vertical-align: -.08em; background: var(--stone); }
 .ipill img { width: 100%; height: 100%; object-fit: cover; }
+.ipill-pair img { position: absolute; top: 0; width: 50%; }   /* one true pair: before left, after right, each its own half */
+.ipp-b { left: 0; }
+.ipp-a { right: 0; }
 
 /* ---------- SERVICES 2: Q571 AHA numbered services index (ordered list, CSS-counter numbers, intro column left) ---------- */
 .ix-head { display: grid; gap: 16px; align-content: start; margin-bottom: clamp(24px, 4vw, 48px); }
@@ -988,6 +991,7 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 .p1-ghost { display: block; font-size: clamp(14rem, 40vw, 44rem); font-weight: 800; font-stretch: 75%; line-height: .8; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1.5px var(--stone); }
 .rec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 16px; margin-top: clamp(28px, 4vw, 56px); }
 .rc { position: relative; display: grid; gap: 10px; align-content: end; }
+.rc b .dg { display: inline-block; }
 .rc b { display: block; font-weight: 790; font-stretch: 75%; line-height: .82; letter-spacing: -.04em; white-space: nowrap; }
 .rc > span { color: var(--fg2); max-width: 22ch; line-height: 1.4; }
 .rc-a { grid-column: 1 / -1; }
@@ -1579,3 +1583,8 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .cfx[data-sec="money"] { width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 2px dashed rgba(var(--ci), .3); -webkit-mask: none; mask: none; }
 .cfx[data-sec="book"] { width: 180px; height: 180px; margin: -90px 0 0 -90px; background: radial-gradient(rgba(255, 214, 150, .32), transparent 70%); }
 html:not(.motion) .cfx { display: none; }
+
+/* ---------- V6 contact line: closes any version that has no phone of its own (BRIEF-V6 §12.1) ---------- */
+.nextstep { grid-column: 1 / -1; position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: clamp(24px, 3vw, 40px) 0 0; padding-top: 14px; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); color: var(--fg2, var(--ink2)); font-size: var(--t-sm); }
+.nextstep .tlink { font-weight: 650; color: var(--fg, var(--ink)); }
+.ns-or { opacity: .7; }

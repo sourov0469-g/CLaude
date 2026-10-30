@@ -222,7 +222,8 @@ Sections are recorded in SECTIONS.md order.
 
 **S3 · Tape measure**
 - **Reference:** [BANK] Scrollable and Draggable Timeline (Codrops; master tween ease none, Draggable edgeResistance, Mode B without Club inertia; A2 + deep-reads-slice-4) + builder brief R38.
-- **Mechanism:** a draggable track mapped linearly to a value.
+- **Mechanism:** the reference couples two inputs, drag and page scroll, to ONE master tween with ease 'none', with Draggable edgeResistance 1 and no inertia (Mode B). The version adapts the drag half: a Draggable track (edgeResistance 1, no inertia) mapped linearly (ease none) to the value.
+- **Not adapted:** the scroll half. Here the value is the visitor's budget, not a scroll position, and page scroll driving a budget would move the answer while the visitor reads (logged as an adaptation, V6).
 - **Adaptations:** a $0–$50k tape against each trade's published middle half; tape case and end hook; slider role + keys (arrows, Shift, Page Up/Down, Home/End); key moves travel 0.24 s; nothing plays on arrival.
 - **Verdict:** KEPT in Phase 1 → **REBUILT** on re-verification (29 Oct).
   - M fail: a 1.6 s roll-out from $0 played on scroll (beyond F17's 0.3 s), and while it ran it overwrote keyboard input. Found by the section test (ArrowRight left the value at $15,000).

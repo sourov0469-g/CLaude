@@ -310,9 +310,9 @@ def hero3():
 
 # ---------- PROOF ----------
 CREDS = [('gaf-master-elite', 'GAF Master Elite', 357, 112), ('hardie-elite-preferred', 'James Hardie Elite Preferred', 300, 98),
-         ('hardie-presidents-club-2025', "James Hardie President's Club Award 2025", 140, 176),
-         ('andersen-certified-premier', 'Andersen Certified Contractor, Premier', 176, 168),
-         ('guildmaster-service-excellence', 'GuildQuality Guildmaster', 205, 164), ('bbb-a-plus', 'BBB Accredited, A+', 185, 120)]
+         ('hardie-presidents-club-2025', "James Hardie President's Club 2025", 140, 176),
+         ('andersen-certified-premier', 'Andersen Certified Premier', 176, 168),
+         ('guildmaster-service-excellence', 'GuildQuality Guildmaster', 205, 164), ('bbb-a-plus', 'BBB A+', 185, 120)]
 
 
 def creds(cls='creds'):
@@ -358,10 +358,10 @@ def proof1():
 CRED_ROWS = [
     ('gaf-master-elite', 'GAF Master Elite', 'Roofing', 'GAF says fewer than 2% of contractors nationwide hold it.'),
     ('hardie-elite-preferred', 'James Hardie Elite Preferred', 'Siding', "The top tier of the James Hardie contractor alliance. It can't be bought: James Hardie audits it, and it has to be re-earned."),
-    ('hardie-presidents-club-2025', "James Hardie President's Club Award 2025", 'Siding', 'Awarded by James Hardie for 2025.'),
-    ('andersen-certified-premier', 'Andersen Certified Contractor, Premier', 'Windows', 'Certified by Andersen at the Premier level.'),
+    ('hardie-presidents-club-2025', "James Hardie President's Club 2025", 'Siding', 'Awarded by James Hardie for 2025.'),
+    ('andersen-certified-premier', 'Andersen Certified Premier', 'Windows', 'Certified by Andersen at the Premier level.'),
     ('guildmaster-service-excellence', 'GuildQuality Guildmaster', 'Service', 'Award for Service Excellence, four years in a row, 2015 through 2018.'),
-    ('bbb-a-plus', 'BBB Accredited, A+', 'Business', 'Accredited Business, rated A+.'),
+    ('bbb-a-plus', 'BBB A+', 'Business', 'Accredited Business, rated A+.'),
 ]
 
 
@@ -398,10 +398,18 @@ def pill(i):
     return f'<span class="ipill" aria-hidden="true"><img src="{H}t/p{i}-320.webp" width="320" height="240" alt="" loading="lazy" decoding="async">{case}</span>'
 
 
+def pill_pair():
+    """the 177 pill shows a GENUINE pair (Rob Roy, Austin): before in the left pane, after in the right (§3 photos rule)"""
+    case = ('<svg class="ip-case" viewBox="0 0 46 19" preserveAspectRatio="none" focusable="false"><rect class="ip-sash" x="2" y="2" width="42" height="15"/>'
+            '<path class="ip-fr" d="M1 1H45V18H1ZM23 1V18"/></svg>')
+    return (f'<span class="ipill ipill-pair" aria-hidden="true"><img class="ipp-b" src="{H}work-robroy-b-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async">'
+            f'<img class="ipp-a" src="{H}work-robroy-a-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async">{case}</span>')
+
+
 def proof3():
     return f'''<div class="v proof-3" data-tone="ground2">
   <h2 class="h2s">The short version</h2>
-  <p class="statement" data-illuminate>Since 2009, Austin Pro has worked on <b>5,000+</b> Central Texas homes. <b>886</b> {pill(3)} of those jobs are documented, each with photos and a real price, and <b>177</b> {pill(22)} have a before and after. Homeowners rate the work <b>4.9</b> on <b>474</b> Google reviews.</p>
+  <p class="statement" data-illuminate>Since 2009, Austin Pro has worked on <b>5,000+</b> Central Texas homes. <b>886</b> {pill(3)} of those jobs are documented, each with photos and a real price, and <b>177</b> {pill_pair()} have a before and after. Homeowners rate the work <b>4.9</b> on <b>474</b> Google reviews.</p>
   <div class="stamps">{creds('creds creds-stamp')}{alt_btn('#book', 'Book free inspection')}</div>
 </div>'''
 
@@ -1197,8 +1205,25 @@ SECTIONS = [
 ]
 
 
+NEXT = {   # K7 / BRIEF-V6 §12.1: every version carries the phone in a contact path; a version without one ends on this line
+    'proof': 'Check any of this with the office.', 'services': 'One free inspection covers every trade on the house.',
+    'work': 'Want your house priced like these?', 'built': 'Questions about the board or the warranty?',
+    'colour': 'Want the samples in your hands?', 'near': 'Near you? Inspections are free.',
+    'reviews': 'Talk to the office yourself.', 'money': 'Questions about the plans or the offers?',
+}
+
+
+def with_phone(key, v):
+    if TEL in v:
+        return v
+    line = (f'<p class="nextstep"><span>{e(NEXT[key])}</span> <a class="tlink" href="{TEL}">Call {PHONE}</a>'
+            f' <span class="ns-or">or</span> <a class="tlink" href="#book" data-book>book a free inspection</a></p>')
+    i = v.rindex('</div>')
+    return v[:i] + line + '\n' + v[i:]
+
+
 def section(key, label, fns, names):
-    vs = [f() for f in fns]
+    vs = [with_phone(key, f()) for f in fns]
     tabs = ''.join(f'<button class="vsw-b" type="button" role="tab" id="{key}-tab{n}" aria-selected="{"true" if n == 1 else "false"}" aria-controls="{key}-stage" tabindex="{0 if n == 1 else -1}" data-v="{n}" aria-label="{label} version {n}: {e(nm)}">{n}</button>'
                    for n, nm in enumerate(names, 1))
     tpl = ''.join(f'<template data-v="{n}">{v}</template>' for n, v in enumerate(vs, 1))

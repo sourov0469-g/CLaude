@@ -116,20 +116,16 @@
     G.from(els, Object.assign({ y: 16, autoAlpha: 0, duration: 0.3, ease: ease.out, stagger: 0.05 }, opts));
   }
 
-  /* ---------- count-up trust stats (R20). One tempo for the page (Playbook 2): 1.4 s power2.out, inside Feldco's
-     1.2-1.6 s band. The final figure is written in the HTML; the counting copy is aria-hidden and an sr-only twin
-     keeps the real number. opts.st(el) returns a ScrollTrigger config when the count waits for the scroll. ---------- */
+  /* ---------- trust figures (V6): the TRUE figure is the only one ever on screen. Its digits rise in from below at
+     reveal level (0.3 s, 0.05 s apart, F17) instead of counting up through false values (a count-up showed "4.8" on
+     the way to 4.9). An sr-only twin carries the figure; the animated copy is aria-hidden. ---------- */
   function countUp(els, opts = {}) {
-    els.forEach((el, k) => {
-      const final = el.textContent.trim(), m = final.match(/^([^\d]*)([\d,]*\.?\d+)(.*)$/);
-      if (!m) return;
+    els.forEach(el => {
+      const final = el.textContent.trim();
       const sr = d.createElement('span'); sr.className = 'sr-only'; sr.textContent = final; el.before(sr); el.setAttribute('aria-hidden', 'true');
       if (!motionOK()) return;
-      const dec = (m[2].split('.')[1] || '').length, to = parseFloat(m[2].replace(/,/g, '')), o = { v: 0 };
-      const fmt = v => m[1] + v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[3];
-      el.textContent = fmt(0);
-      G.to(o, { v: to, duration: 1.4, ease: 'power2.out', data: 'k10', delay: (opts.delay || 0) + k * 0.08, scrollTrigger: opts.st ? opts.st(el) : undefined,
-        onUpdate: () => { el.textContent = fmt(o.v); }, onComplete: () => { el.textContent = final; } });
+      el.innerHTML = [...final].map(c => `<span class="dg">${esc(c)}</span>`).join('');
+      G.from($$('.dg', el), { yPercent: 60, autoAlpha: 0, duration: REVEAL, ease: 'power3.out', stagger: 0.05, scrollTrigger: opts.st ? opts.st(el) : undefined });
     });
   }
 
@@ -215,7 +211,7 @@
 
   /* HERO 1: [BANK] Q95 Masked Heading. The headline is a clipPath of text and the Rob Roy after photo shows through
      it: every letter is a window onto the finished wall, with a grille and a sill drawn over the glass. Q95's rise
-     reveal (cut to 0.3 s, stagger 0.05, F17), its pointer parallax (26) and drift (18) move the photo inside the
+     reveal (cut to 0.3 s, stagger 0.05, F17) and its pointer parallax (26) move the photo inside the
      glyphs; fine pointers only for the parallax, nothing moves under reduced motion. Words are split at run time
      from the measured layout so the clip and the casing rise together. */
   V.hero1 = (r, b) => {
@@ -252,9 +248,8 @@
         const fs = parseFloat(svg.style.getPropertyValue('--fs')) || 100;
         words(svg).forEach((trio, k) => G.from(trio, { y: fs * 0.55, duration: 0.3, ease: 'power3.out', delay: 0.1 + k * 0.05 }));
         G.from($$('.h1m-sill path', svg), { scaleX: 0, transformOrigin: '0 50%', duration: 0.3, ease: 'power2.out', stagger: 0.05, delay: 0.3 });
-        const par = $('.h1m-par', svg), img = $('.h1m-img', svg);
-        const drift = G.to(img, { x: 18, y: -9, duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true });
-        b.io(svg, ([en]) => { en.isIntersecting ? drift.play() : drift.pause(); });
+        const par = $('.h1m-par', svg);
+        // V6 (F17): Q95's idle drift is dropped (§4 outranks the reference's parameter); the photo moves only with the pointer
         if (mqFine.matches) {
           const qx = G.quickTo(par, 'x', { duration: 0.6, ease: 'power3.out' }), qy = G.quickTo(par, 'y', { duration: 0.6, ease: 'power3.out' });
           b.on(r, 'pointermove', e => { const rc = svg.getBoundingClientRect(); qx(((e.clientX - rc.left) / rc.width - 0.5) * -52); qy(((e.clientY - rc.top) / rc.height - 0.5) * -52); });
@@ -337,7 +332,7 @@
       b.add(() => { cancelAnimationFrame(raf2); nums.forEach(n => { n.style.textShadow = ''; }); });
     }
     G.from($$('.bq', r), { y: -14, autoAlpha: 0, duration: 0.45, ease: 'back.out(1.5)', stagger: 0.12, scrollTrigger: once($('.b886', r), 'top 92%') });
-    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: 1.4, ease: 'power2.out', data: 'k10', scrollTrigger: once(ring, 'top 92%') });
+    if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: REVEAL, ease: 'power2.out', scrollTrigger: once(ring, 'top 92%') });
     G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
     if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   };
@@ -437,7 +432,7 @@
   };
 
   /* SERVICES 3: [BANK] Scrollable and Draggable Timeline (Codrops), Mode B: Draggable on the strip with
-     edgeResistance 0.85 and no inertia, a linear map from strip x to the value (ease none), + builder brief R38.
+     edgeResistance 1 and no inertia, a linear map from strip x to the value (ease none), + builder brief R38.
      The tape reads $0 to $50,000; the red mark is your budget and every trade whose published middle half covers it
      lights up. Nothing plays on arrival: the tape rests at $15,000 until the visitor pulls it. Keys: arrows $500
      (Shift $5,000), Page Up/Down $5,000, Home/End; a key move travels in 0.24 s. The end hook catches at either end. */
@@ -469,7 +464,7 @@
     };
     if (window.Draggable) {
       drag = window.Draggable.create(strip, {
-        type: 'x', edgeResistance: 0.85, inertia: false, zIndexBoost: false, bounds: { minX: xOf(MAX), maxX: xOf(0) },
+        type: 'x', edgeResistance: 1, inertia: false, zIndexBoost: false, bounds: { minX: xOf(MAX), maxX: xOf(0) },
         onDrag() { read(vOf(this.x)); }, onDragEnd() { place(vOf(this.x), true); }
       })[0];
       b.add(() => drag.kill());
@@ -1259,12 +1254,17 @@
       rg.addColorStop(0, 'rgba(255,170,150,0.22)'); rg.addColorStop(1, 'rgba(255,170,150,0)');
       cx.fillStyle = rg; cx.fillRect(0, 0, W, H);
     }
-    const loop = t => { t0 = t / 1000; draw(t0); raf = on ? requestAnimationFrame(loop) : 0; };
+    /* V6 (F17): the folds no longer run on the clock. Their time advances with the visitor (pointer travel inside the
+       panel, page scroll) and eases to rest; with no input nothing moves */
+    let tt = 0, lx = null, ly = scrollY;
+    const loop = () => { t0 += (tt - t0) * 0.08; draw(t0); raf = on && (Math.abs(tt - t0) > 0.002 || Math.abs(leanT - lean) > 0.002) ? requestAnimationFrame(loop) : 0; };
+    const kick = () => { if (on && !raf) raf = requestAnimationFrame(loop); };
     size(); b.ro(host, size);
     if (!motionOK()) return;
-    b.io(host, ([en]) => { on = en.isIntersecting && !d.hidden; if (on && !raf) raf = requestAnimationFrame(loop); }, { threshold: 0 });
-    b.on(d, 'visibilitychange', () => { on = !d.hidden && on; if (on && !raf) raf = requestAnimationFrame(loop); });
-    if (mqFine.matches) b.on(host, 'pointermove', e => { const rc = host.getBoundingClientRect(); leanT = (e.clientX - rc.left) / rc.width * 2 - 1; });
+    b.io(host, ([en]) => { on = en.isIntersecting && !d.hidden; kick(); }, { threshold: 0 });
+    b.on(d, 'visibilitychange', () => { on = !d.hidden && on; kick(); });
+    b.on(window, 'scroll', () => { tt += Math.abs(scrollY - ly) / 500; ly = scrollY; kick(); }, { passive: true });
+    if (mqFine.matches) b.on(host, 'pointermove', e => { const rc = host.getBoundingClientRect(); leanT = (e.clientX - rc.left) / rc.width * 2 - 1; if (lx !== null) tt += Math.abs(e.clientX - lx) / 400; lx = e.clientX; kick(); });
     b.add(() => { on = false; cancelAnimationFrame(raf); });
   }
   V.book1 = (r, b, s) => {
