@@ -285,3 +285,9 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | Shingle meter: the roof shingled to exactly 98% (4.9 of 5); 295 tiles, one per Google review (an aggregate count, no review text); check links | ⟦S1314⟧ product truth (the honest share, as F2.3); ⟦S0603⟧ evidence geometry | `qa/r4d-proof-new-1440.jpg`; errors 0 |
 | 7 | The yard sign: a roofer's lawn sign on stakes carries 4.9 / 295 and the phone; a checkable credential list beside it | ⟦S0095⟧ the trade's own artefact; [BANK] Anatomy F12 checkable proof | errors 0 |
 | 8 | Four numbers you can check: 4.9, 295, 2001, $2M as giant figures, each underlined by a painted brushstroke, each with its check link | [BANK] Checklist 14 (claims with their check); brand brush motif | errors 0 |
+### Services, new V6-V8
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | The pegboard: six services drawn as tools on a shop wall (shingle bundle, hammer, hail gauge, clipboard, siding boards, gutter run); hover or focus lifts a tool off its peg; every line visible | ⟦S0095⟧ the trade's own artefacts; ⟦S0139⟧ flat | `qa/r4d-svc-new-1440.jpg`; errors 0 |
+| 7 | The Ohio year: a 12-month dial; Hail season / Freeze and thaw / Ice dams / Any month light their arc and fill the panel with the job each brings, all from the firm's own seasonal notes (19 hail days, April to July; freeze-thaw cracks aging shingles; ice dams from poor attic ventilation; the 20-year mark) | ⟦S0614⟧ calendar form; ⟦S1499⟧ | `dialtest`: 4/4 choices light their arc and fill the panel; errors 0 |
+| 8 | Three panels: Roofs / Storms / The rest of the house as full-height panels; the chosen one grows (flex .45s), the others narrow to their name | ⟦S1499⟧ chunking; real photography | errors 0 |

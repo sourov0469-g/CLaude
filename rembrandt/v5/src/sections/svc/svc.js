@@ -140,4 +140,34 @@ function squares(root, c) {
 }
 function houseAndSquares(root, c) { const a = house(root, c), b = squares(root, c); return () => { a && a(); b && b(); }; }
 
-export default { 1: houseAndSquares, 2: stack, 3: routes, 4: circles, 5: drum };
+// R4 v6 (new) The pegboard: tools lift off their pegs on hover/focus (CSS); they arrive 60ms apart once
+function pegboard(root, c) { if (!c.motion) return; beats(root, [root.querySelector('.sv6-head')]); beats(root, [root.querySelectorAll('.sv6-t'), root.querySelector('.sv-also')], { stagger: 0.06 }); }
+// R4 v7 (new) The Ohio year: a 12-month dial; each button lights its season's arc and fills the panel (the firm's own
+// seasonal notes: hail April to July, freeze-thaw November to March, ice dams January and February)
+function year(root, c) {
+  const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], R = 150, C = 200, NS = 'http://www.w3.org/2000/svg';
+  const pt = (a, r) => [C + r * Math.sin(a), C - r * Math.cos(a)], ang = m => (m / 12) * Math.PI * 2;
+  const arc = (from, to) => { const n = ((to - from + 12) % 12) + 1, a0 = ang(from) + 0.02, a1 = ang(from + n) - 0.02, [x0, y0] = pt(a0, R), [x1, y1] = pt(a1, R); return `M${x0.toFixed(1)} ${y0.toFixed(1)} A${R} ${R} 0 ${n > 6 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+  const data = [...root.querySelectorAll('.sv7-data li')], arcs = root.querySelector('.sv7-arcs');
+  arcs.innerHTML = data.map(d => `<path d="${+d.dataset.from === 0 && +d.dataset.to === 11 ? `M${C} ${C - R} A${R} ${R} 0 1 1 ${C - 0.1} ${C - R}` : arc(+d.dataset.from, +d.dataset.to)}"/>`).join('');
+  root.querySelector('.sv7-ticks').innerHTML = M.map((_, i) => { const [x0, y0] = pt(ang(i), R - 14), [x1, y1] = pt(ang(i), R + 14); return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} L${x1.toFixed(1)} ${y1.toFixed(1)}"/>`; }).join('');
+  root.querySelector('.sv7-mon').innerHTML = M.map((m, i) => { const [x, y] = pt(ang(i + 0.5), R + 32); return `<text x="${x.toFixed(1)}" y="${(y + 4).toFixed(1)}" text-anchor="middle">${m}</text>`; }).join('');
+  const bs = [...root.querySelectorAll('.sv7-b')], ps = [...arcs.children], w = root.querySelector('.sv7-when'), t = root.querySelector('.sv7-t'), d = root.querySelector('.sv7-d');
+  const pick = i => { bs.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i))); ps.forEach((p, k) => p.classList.toggle('is-on', k === i)); arcs.appendChild(ps[i]); w.textContent = data[i].dataset.when; t.textContent = data[i].dataset.t; d.textContent = data[i].dataset.d; };
+  pick(0);
+  const on = e => { const b = e.target.closest('.sv7-b'); if (b) pick(+b.dataset.i); };
+  root.addEventListener('click', on);
+  if (c.motion) { beats(root, [root.querySelector('.sv7-copy')]); gsap.from(ps, { drawSVG: '0%', duration: 0.6, ease: 'power2.out', stagger: 0.1, scrollTrigger: { trigger: root.querySelector('.sv7-dial'), start: 'top 75%', once: true } }); }
+  return () => root.removeEventListener('click', on);
+}
+// R4 v8 (new) Three panels: click, Enter or focus opens a panel (flex-grow .45s); one open at a time
+function panels(root, c) {
+  const ps = [...root.querySelectorAll('.sv8-p')];
+  const open = p => ps.forEach(x => x.classList.toggle('is-open', x === p));
+  const on = e => { const p = e.target.closest('.sv8-p'); if (p) open(p); };
+  const key = e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('sv8-p')) { e.preventDefault(); open(e.target); } };
+  root.addEventListener('click', on); root.addEventListener('keydown', key); root.addEventListener('focusin', on);
+  if (c.motion) beats(root, [root.querySelector('.sv8-head'), ps, root.querySelector('.sv-also')], { stagger: 0.08 });
+  return () => { root.removeEventListener('click', on); root.removeEventListener('keydown', key); root.removeEventListener('focusin', on); };
+}
+export default { 1: houseAndSquares, 2: stack, 3: routes, 4: circles, 5: drum , 6: pegboard, 7: year, 8: panels };
