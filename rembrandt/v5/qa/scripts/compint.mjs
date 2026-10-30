@@ -4,7 +4,7 @@
 // variants, Off, the H key, text fields, press, a touch device and reduced motion.
 import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
 const FILE = 'file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html';
-const SECS = ['hero', 'proof', 'work', 'family', 'how', 'area', 'call'];
+const SECS = ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'];
 const KIND = { hero: 'halo', proof: 'stars', work: 'finder', family: 'shavings', how: 'ripple', area: 'compass', call: 'signal' };
 const b = await chromium.launch(); const out = []; let fails = 0;
 for (const [w, h] of [[1440, 900], [375, 812]]) {

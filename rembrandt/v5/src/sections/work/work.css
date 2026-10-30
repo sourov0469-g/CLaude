@@ -1,8 +1,8 @@
 /* WORK: real jobs only. v1 [BANK] Q361 loop tiles (GreenSock xxQaRoX), v2 [BANK] Q157 push grid (Codrops, Flip),
    v3 [BANK] Q38 SVG horizontal blinds over the one genuine before/after pair (ba2). */
-.wv{position:relative;overflow:clip;background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.wv{position:relative;overflow:clip;background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .wv-head{display:grid;gap:12px;padding:0 var(--gutter);margin-bottom:clamp(32px,5vh,56px)}
-.wv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.wv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
 .wv-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:44ch}
 .wv-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--ink);border-radius:50%;background:none;color:var(--ink);cursor:pointer;
   transition:background-color var(--dur-quick) var(--ease-std),color var(--dur-quick) var(--ease-std)}
@@ -44,7 +44,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
   margin:0;padding:16px;background:linear-gradient(transparent,rgba(17,24,48,.72));pointer-events:none}
 .wv2-open>*{pointer-events:auto}
 .wv2-open[hidden],.wv2-closed[hidden]{display:none}
-.wv2-cap{color:#fff;font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.wv2-cap{color:#fff;font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.01em}
 .wv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;
   transition:background-color var(--dur-quick) var(--ease-std)}
 .wv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
@@ -172,7 +172,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv4-ph img{width:100%;aspect-ratio:3/2;object-fit:cover}
 .wv4-one img{aspect-ratio:4/3}
 .wv4-ph figcaption{position:absolute;left:10px;top:10px;padding:5px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:var(--t-label);font-weight:600;line-height:1.2}
-.wv4-t{margin-top:6px;font-size:clamp(1.375rem,1rem + 1vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.015em}
+.wv4-t{margin-top:6px;font-size:clamp(1.375rem,1rem + 1vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.007em;font-family:var(--f-head)}
 .wv4-d{max-width:46ch;font-size:var(--t-body);line-height:1.5;color:var(--muted)}
 @media (max-width:899px){.wv4-grid{grid-template-columns:1fr}}
 
@@ -182,7 +182,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv5-list{list-style:none;margin:0;padding:0 var(--gutter);counter-reset:none}
 .wv5-row{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) 112px;align-items:center;gap:24px;padding:14px 0;border-top:1px solid oklch(0.2 0.05 262 / .14);transition:background-color var(--dur-quick) var(--ease-x)}
 .wv5-row:last-child{border-bottom:1px solid oklch(0.2 0.05 262 / .14)}
-.wv5-name{font-size:clamp(1.25rem,.9rem + 1.2vw,2rem);font-weight:700;line-height:1.1;letter-spacing:-.015em}
+.wv5-name{font-size:clamp(1.25rem,.9rem + 1.2vw,2rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;font-family:var(--f-head)}
 .wv5-what{color:var(--muted)}
 .wv5-th{width:112px;aspect-ratio:3/2;overflow:hidden;background:var(--mist)}
 .wv5-th img{width:100%;height:100%;object-fit:cover}

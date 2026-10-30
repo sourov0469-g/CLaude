@@ -85,3 +85,26 @@ The owner's suggested set: Home, Services, About (the family), Reviews, Service 
 | Financing, Community, FAQ (pack §5.1 nav) | Not built | Financing has no published terms (pack "NEVER INVENT"). Community facts are outside the owner's lock list. FAQ is banned by BRIEF-v2. None is necessary. |
 
 **Final page list: 4 pages (Home, Services, About, Contact).** Each inner page gets five wholly different layouts behind the same 1 to 5 switcher, with backup slots ready (empty, since no page version has been replaced yet).
+
+## 3. Owner design note: the site reads as AI-made (type and polish)
+
+### Verdicts
+| Point | Verdict | Reason and citation |
+|---|---|---|
+| Replace the display and body fonts with everyday Google Fonts (Poppins or Roboto, or similar staples) | ACCEPT | **Epilogue (variable, 300 to 900) becomes Poppins (headings, numbers, buttons, labels, the pickers) plus Open Sans (reading text).** Both are top-ten Google Fonts, the pairing a small-business designer reaches for. One family per role, used the same way site-wide ⟦S1500⟧ Consistency. |
+| Hero V2's per-word weight needs a variable axis; Poppins ships fixed weights | CHALLENGE, closest alternative | The concept (a word thickens as the pointer nears it, [BANK] Variable Proximity) is kept. With fixed faces, the weight steps through Poppins' real weights, 300 to 700 in hundreds, instead of gliding. The rest state is unchanged: light words, "family roofers" at 700. Open Sans would keep a variable axis, but a body face in the headline would break the type roles. |
+| Leave the hidden backups as they are | ACCEPT | Epilogue stays embedded for them only. Backup stages keep Epilogue, their line height and their own tracking, with SVG labels included. Re-check `qa/gate/r4-backups.log`: 33 of 42 identical DOM and style. Six differ only in markup that does not show (as in R3). Three carry load-time measurement drift (Towns B1, two map labels; Call B1, a decorative drop 3px); their content and every computed style are the same. |
+| A de-AI pass on surface only; structure, versions, content and facts unchanged | ACCEPT | See the tells removed below. |
+
+### The AI tells found and removed (live and default versions, and everything new)
+1. **Tight negative tracking on every heading.** 62 letter-spacing values were set at -.02 to -.05em, the generated "display" look. All halved; Poppins sets wide, so headings now read at normal spacing.
+2. **Balanced headlines everywhere.** 11 `text-wrap:balance` were changed to `pretty`: no orphans, but no forced symmetric line lengths.
+3. **The blur-in reveal.** The shared line reveal rose out of an 8px blur, a Framer-template signature. The blur is dropped; lines simply rise.
+4. **Blue-tinted glow shadows.** Six coloured soft-glow shadows (nav pills, buttons, cards) become neutral, lighter shadows.
+5. **Uniform section rhythm.** Every section opened on the same top padding. Each section now has its own top padding on desktop (5 to 9.5rem). Phones keep the 5rem minimum, because the version picker sits there.
+6. **The magnetic button.** Call V1's call button pulled toward the cursor, a generated-site trope; the pull is removed (the button keeps its own press and hover).
+
+### Kept, with reasons (challenge protocol)
+- **The cursor companion, the dividers and the version pickers.** The owner asked for them, and they are structure, not surface.
+- **Reviews V4's glare sweep.** It is the version's proven concept ([BANK] 372 Glare Hover). It runs once per hover, with no glass or blur panels.
+- **Gradients.** The remaining ones are functional (photo caption scrims, ruler ticks, roller-cell shading), not decoration.

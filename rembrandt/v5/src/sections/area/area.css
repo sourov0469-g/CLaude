@@ -2,33 +2,33 @@
    (the map is the claim; plot only what is real); v2 [BANK] Q4 Ragged Edge metric-led cards + the Hippo genuinely-local
    doctrine; v3 [BANK] ROTTLER town finder + West London coverage checker, with a compass and a tape. */
 .tw{position:relative;overflow:clip}
-.tw-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.tw-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
 .tw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
 .tw-src{position:relative;max-width:1280px;margin:40px auto 0;padding:0 var(--gutter);font-size:.8125rem;line-height:1.5;color:var(--muted)}
 
 /* ---------- v1 (R3 F6-V1): the map is the claim, on the ink ground; the 8 nearest towns' labels sit radially; the list
    shows the 8 nearest and opens to all 24; phones keep the list only */
-.tw1{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.tw1{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .tw1 .tw-note,.tw1 .tw-src{color:var(--on-dark-2)}
 .tw1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:start;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
 .tw1-mapwrap{position:relative;aspect-ratio:1;max-height:78svh;margin-inline:auto;width:100%}
 .tw1-map{width:100%;height:100%;overflow:visible}
 .tw1-rings circle{fill:none;stroke:#fff;stroke-width:1.2;stroke-dasharray:3 6;opacity:.32;vector-effect:non-scaling-stroke}
-.tw1-rings text{font:600 16px/1 "Epilogue",sans-serif;fill:var(--on-dark-2)}
+.tw1-rings text{font:600 16px/1 var(--f-head);fill:var(--on-dark-2);font-family:var(--f-head)}
 .tw1-ripples circle{fill:none;stroke:var(--sun);stroke-width:2;vector-effect:non-scaling-stroke}
 .tw1-north path{fill:#fff}
-.tw1-north text{font:800 18px/1 "Epilogue",sans-serif;fill:#fff}
+.tw1-north text{font:800 18px/1 var(--f-head);fill:#fff;font-family:var(--f-head)}
 .tw1-line{fill:none;stroke:var(--sun);stroke-width:4;stroke-linecap:round}
 .tw1-office path{fill:var(--sun);stroke:#fff;stroke-width:2;stroke-linejoin:round}
 .tw1-office rect{fill:var(--ink)}
 .mk{cursor:pointer}
 .mk .mk-h{fill:var(--sky);stroke:#fff;stroke-width:1.5;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;transition:transform .15s var(--ease-x),fill .15s var(--ease-x)}
-.mk text{font:700 19px/1 "Epilogue",sans-serif;fill:#fff;paint-order:stroke;stroke:var(--ink);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.mk text{font:700 19px/1 var(--f-head);fill:#fff;paint-order:stroke;stroke:var(--ink);stroke-width:5px;stroke-linejoin:round;pointer-events:none;font-family:var(--f-head)}
 .mk.is-hover .mk-h{transform:translateY(-6px) scale(1.25)}
 .mk.is-on .mk-h{fill:var(--sun);transform:translateY(-4px) scale(1.4)}
 .tw1-side{display:grid;gap:20px;align-content:start}
 .tw1-card{padding:20px 22px;border-radius:14px;background:oklch(1 0 0 / .06);box-shadow:inset 0 0 0 1px oklch(1 0 0 / .16);color:#fff;min-height:118px}
-.tw1-card-t{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.tw1-card-t{font-size:1.5rem;font-weight:700;letter-spacing:-.01em}
 .tw1-card-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-dark-2)}
 .tw1-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .tw1-list li[hidden]{display:none}
@@ -42,7 +42,7 @@
 @media (max-width:640px){.tw1-mapwrap{display:none}}
 
 /* ---------- v2: metric-led cards; each carries its own decades chart, bars laid like shingle courses */
-.tw2{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw2{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .tw2-head{position:relative;display:grid;gap:14px;max-width:1280px;margin:0 auto clamp(32px,5vh,56px);padding:0 var(--gutter)}
 .tw2-sort{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .tw2-sb{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:2px solid oklch(1 0 0 / .6);border-radius:999px;background:none;color:#fff;font-weight:700;cursor:pointer;transition:background-color .18s var(--ease-x)}
@@ -54,7 +54,7 @@
 .tw2-card.is-old .tw2-y{color:var(--sun)}
 .tw2 .tw-note,.tw2 .tw-src,.tw2-yl,.tw2-m{color:var(--on-dark-2)}
 .tw2-more{justify-self:start;min-height:44px;margin:20px auto 0;display:block;max-width:1280px;padding:0 var(--gutter);border:0;background:none;color:var(--sun);font-weight:700;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
-.tw2-y{font-size:clamp(2.2rem,1.8rem + 1.4vw,3rem);font-weight:700;letter-spacing:-.04em;line-height:1}
+.tw2-y{font-size:clamp(2.2rem,1.8rem + 1.4vw,3rem);font-weight:700;letter-spacing:-.02em;line-height:1;font-family:var(--f-head)}
 .tw2-yl{font-size:.8125rem;font-weight:600;color:var(--on-dark-2)}
 .tw2-n{margin-top:6px;font-size:1.125rem;font-weight:700}
 .tw2-m{font-size:.875rem;color:var(--on-dark-2)}
@@ -63,12 +63,12 @@
 .tw2-bars .bar line{stroke:var(--ink);stroke-width:1.2}
 .tw2-bars .bar.is-old rect{fill:var(--chalk)}
 .tw2-bars .bar{transform-box:fill-box;transform-origin:50% 100%;transition:transform .25s var(--ease-x)}
-.tw2-bars text{font:600 9px/1 "Epilogue",sans-serif;fill:var(--on-dark-2)}
+.tw2-bars text{font:600 9px/1 var(--f-head);fill:var(--on-dark-2)}
 .tw2-bars .top{font-weight:700;fill:#fff}
 @media (hover:hover) and (pointer:fine){.tw2-card:hover .bar{transform:scaleY(1.12)}}
 
 /* ---------- v3: the town finder with a compass that turns to the town, a tape scaled to the miles, and a weathervane */
-.tw3{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.tw3{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .tw3-grid{position:relative;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);align-items:center;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
 .tw3-copy{display:grid;gap:22px}
 .tw3-form{display:grid;gap:8px;max-width:460px}
@@ -87,7 +87,7 @@
 @keyframes tw-hook{40%{transform:translateX(-7px)}}
 .tw3-field input:focus-visible{outline:none}
 .tw3-ans{min-height:96px}
-.tw3-ans-t{font-size:clamp(1.4rem,1rem + 1.4vw,2rem);font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.tw3-ans-t{font-size:clamp(1.4rem,1rem + 1.4vw,2rem);font-weight:700;line-height:1.15;letter-spacing:-.01em;font-family:var(--f-head)}
 .tw3-ans-d{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--on-dark-2)}
 /* R42: the number in the "not on our list" answer; a weathervane arrow swings round to point at it, press spins it */
 .tw3-tel{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:var(--sun);text-underline-offset:.18em;white-space:nowrap}
@@ -111,7 +111,7 @@
 .tw3-ring--in{stroke-dasharray:2 6}
 .tw3-ticks path{stroke:oklch(1 0 0 / .45);stroke-width:2;stroke-linecap:round}
 .tw3-pts path{fill:oklch(1 0 0 / .12);stroke:oklch(1 0 0 / .45);stroke-width:1.5;stroke-linejoin:round}
-.tw3-lt text{font:800 20px/1 "Epilogue",sans-serif;fill:#fff;text-anchor:middle}
+.tw3-lt text{font:800 20px/1 var(--f-head);fill:#fff;text-anchor:middle;font-family:var(--f-head)}
 .tw3-needle{transform-origin:200px 200px;transform-box:view-box}
 .tw3-n1{fill:var(--sun);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
 .tw3-n2{fill:#fff;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
@@ -123,7 +123,7 @@
 .tw3-tape-b{fill:var(--sun);stroke:var(--ink);stroke-width:2}
 .tw3-tape-tk path{stroke:var(--ink);stroke-width:1.5}
 .tw3-case{fill:var(--blue);stroke:#fff;stroke-width:2}
-.tw3-tape-l{font:700 14px/1 "Epilogue",sans-serif;fill:var(--on-dark-2)}
+.tw3-tape-l{font:700 14px/1 var(--f-head);fill:var(--on-dark-2);font-family:var(--f-head)}
 @media (max-width:900px){.tw3-grid{grid-template-columns:1fr}.tw3-rose{width:min(100%,300px)}} /* phones: the question and the field first, the compass after */
 .tw3 .tw-src{color:var(--on-dark-2)}
 /* R3 graft: a slim ring map under a Yes (V1's square-root rings), the town lit, the connector drawn */
@@ -145,7 +145,7 @@
 
 /* ---------- v4 (R3, new): the distance ruler. S0603 evidence doctrine: a zero baseline, direct labels, tabular figures.
    The list is the content; on wide screens each town is placed at its miles along one tape, labels in greedy lanes. */
-.tw4{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.tw4{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .tw4 .tw-note,.tw4 .tw-src,.tw4-read{color:var(--on-dark-2)}
 .tw4-head{display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,4vw,48px);padding:0 var(--gutter)}
 .tw4-wrap{position:relative;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
@@ -165,13 +165,13 @@
   .tw4-tape{display:block;position:absolute;left:var(--gutter);right:var(--gutter);width:calc(100% - 2 * var(--gutter));height:28px;overflow:visible}
   .tw4-blade{fill:var(--sun);width:100%;height:28px}
   .tw4-ticks path{stroke:var(--ink);stroke-width:1.4}
-  .tw4-ticks text{font:700 11px/1 "Epilogue",sans-serif;fill:var(--ink)}
+  .tw4-ticks text{font:700 11px/1 var(--f-head);fill:var(--ink)}
 }
 .tw4-read{max-width:1280px;margin:20px auto 0;padding:0 var(--gutter);min-height:1.5em;font-weight:600}
 
 /* ---------- v5 (R3, new): eight directions. S1499 chunking and scanning: the towns grouped by compass direction around
    the office, each list nearest first under an arrow turned to its bearing. */
-.tw5{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
+.tw5{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) 0 calc(clamp(4rem,3rem + 4vw,6rem) + var(--mbar))}
 .tw5 .tw-note,.tw5 .tw-src{color:var(--on-dark-2)}
 .tw5-head{display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,4vw,48px);padding:0 var(--gutter)}
 .tw5-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}

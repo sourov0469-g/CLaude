@@ -1,9 +1,19 @@
 /* Rembrandt v5 · macrostructure: Long-Scroll Narrative with a Poster Fold hero · mood: warm family trade, playful motion
  * arc: hook(H3) -> proof(data made visible) -> work(before/after) -> family -> how(F4) -> area(live check) -> close(C2 + Ft6)
- * palette: committed brand blue, sun for actions only · type: Epilogue variable 300-900 · see v5/PLAN.md */
+ * palette: committed brand blue, sun for actions only · see v5/PLAN.md
+ * R4 owner design note (AUDIT-R4.md §3): type is two everyday Google Fonts, Poppins for headings, numbers and buttons and
+ * Open Sans for reading text. Epilogue stays embedded only for the hidden backups, which are records. */
+@font-face{font-family:"Poppins";src:url("FONT_POPPINS_300") format("woff2");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("FONT_POPPINS_400") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("FONT_POPPINS_500") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("FONT_POPPINS_600") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("FONT_POPPINS_700") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("FONT_POPPINS_800") format("woff2");font-weight:800 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Open Sans";src:url("FONT_OPENSANS") format("woff2");font-weight:300 800;font-style:normal;font-display:swap}
 @font-face{font-family:"Epilogue";src:url("FONT_EPILOGUE") format("woff2");font-weight:300 900;font-style:normal;font-display:swap}
 
 :root{
+  --f-head:"Poppins",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; --f-body:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --blue:#1a4199; --blue-hi:#2453b8; --ink:#0b1f4d; --ink-2:#132a63; --sky:#f2f5fb; --mist:#dce4f3; --steel:#7a8090;
   --sun:#ffb81f; --sun-hi:#ffc84d; --white:#fff; --muted:#46557a; --on-blue-muted:#c9d6f2;
   /* R3 C2 colour lock (S1497 Palette Coherence): one pale surface (--sky), one cream (--cream, the hero's ground), --sun the
@@ -33,7 +43,7 @@
 @media (max-width:640px){:root{--mbar:84px}}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-padding-top:var(--nav-h)}
-body{margin:0;overflow-x:clip;background:var(--sky);color:var(--ink);font:400 var(--t-body)/1.55 "Epilogue",ui-sans-serif,system-ui,sans-serif;font-variant-numeric:lining-nums;-webkit-tap-highlight-color:transparent}
+body{margin:0;overflow-x:clip;background:var(--sky);color:var(--ink);font:400 var(--t-body)/1.6 var(--f-body);font-variant-numeric:lining-nums;-webkit-tap-highlight-color:transparent}
 img,canvas,svg{display:block;max-width:100%}
 img{height:auto}
 a{color:inherit;text-underline-offset:.18em;text-decoration-thickness:.08em}
@@ -48,13 +58,13 @@ button,input{font:inherit;color:inherit}
 .skip:focus{top:16px}
 
 /* type */
-.t-display{font-size:var(--t-display);font-weight:800;line-height:1;letter-spacing:-.035em;text-wrap:balance}
-.t-h2{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.t-display{font-size:var(--t-display);font-weight:800;line-height:1;letter-spacing:-.018em;text-wrap:pretty;font-family:var(--f-head)}
+.t-h2{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
 .t-label{font-size:var(--t-label);font-weight:600;line-height:1.3;letter-spacing:0;text-transform:none;color:var(--blue)}
 :is([data-tone=dark]) .t-label{color:var(--on-dark-2)}
 /* backups keep the type they were built with (audit pack A2: reachable as they were) */
 .sec.on-bk{--t-h2:clamp(2.125rem,4.4vw,4.5rem)}
-.sec.on-bk .t-h2{font-weight:800;line-height:1;letter-spacing:-.025em}
+.sec.on-bk .t-h2{font-weight:800;line-height:1;letter-spacing:-.025em;text-wrap:balance}
 .t-lead{font-size:var(--t-lead);line-height:1.4;text-wrap:pretty;max-width:34ch}
 .t-small{font-size:var(--t-small);line-height:1.45}
 .num{font-variant-numeric:tabular-nums lining-nums}
@@ -62,7 +72,7 @@ button,input{font:inherit;color:inherit}
 .ln>span{display:block}
 
 /* buttons: one press value site-wide (S0075) */
-.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px 0 22px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:1.0625rem;letter-spacing:-.005em;text-decoration:none;white-space:nowrap;cursor:pointer;
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px 0 22px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:1.0625rem;letter-spacing:-.003em;text-decoration:none;white-space:nowrap;cursor:pointer;
   transition:transform var(--dur-press) var(--ease-out),background-color var(--dur-quick) var(--ease-out),box-shadow var(--dur-quick) var(--ease-out);touch-action:manipulation}
 .btn:not(:disabled):active{scale:.97}
 /* R3 D3 (S0220, S1314 §7, S0063): the phone glyph's signal arcs draw in on hover and focus, 160ms ease-out */
@@ -80,9 +90,9 @@ button,input{font:inherit;color:inherit}
 /* nav: N3 floating pills (logo on white, exact bytes; call on sun) */
 .nav{position:fixed;inset:12px var(--gutter) auto;z-index:90;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
 .nav>*{pointer-events:auto}
-.nav-logo{display:flex;align-items:center;height:52px;padding:0 18px;background:#fff;border-radius:999px;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 8px 24px -12px oklch(0.2 0.08 262 / .35)}
+.nav-logo{display:flex;align-items:center;height:52px;padding:0 18px;background:#fff;border-radius:999px;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 8px 24px -12px rgb(16 24 40 / 0.19)}
 .nav-logo img{width:150px;height:auto}
-.nav .btn{min-height:52px;box-shadow:0 8px 24px -12px oklch(0.2 0.08 262 / .45);transition:transform var(--dur-press) var(--ease-out),background-color var(--dur-quick) var(--ease-out),opacity var(--dur-fast) var(--ease-out),translate var(--dur-fast) var(--ease-out),visibility 0s}
+.nav .btn{min-height:52px;box-shadow:0 8px 24px -12px rgb(16 24 40 / 0.25);transition:transform var(--dur-press) var(--ease-out),background-color var(--dur-quick) var(--ease-out),opacity var(--dur-fast) var(--ease-out),translate var(--dur-fast) var(--ease-out),visibility 0s}
 .nav--quiet .btn{opacity:0;translate:0 -8px;visibility:hidden;transition:opacity var(--dur-quick) var(--ease-out),translate var(--dur-quick) var(--ease-out),visibility 0s var(--dur-quick)}
 @media (max-width:640px){.nav-logo{height:46px;padding:0 14px}.nav-logo img{width:122px}.nav .btn{display:none}}
 
@@ -321,3 +331,13 @@ html.cmp-on .cmp{display:block}
 @keyframes ch-unroll{from{right:-12px;rotate:0deg}to{right:calc(100% - 4px);rotate:-540deg}}
 @keyframes ch-lay{to{transform:scaleX(1)}}
 @keyframes hx-snap{0%{transform:translateY(0)}25%{transform:translateY(2px)}50%{transform:translateY(-1.5px)}75%{transform:translateY(.8px)}100%{transform:translateY(0)}}
+
+/* R4 type roles: headings, numbers, buttons, labels and the pickers in Poppins; reading text in Open Sans (body) */
+:is(h1,h2,h3,h4,.btn,.num,legend,.pick,.ftr-k,.t-label){font-family:var(--f-head)}
+/* the hidden backups are records of the pre-R4 page: they keep Epilogue */
+.sec.on-bk .stage,.sec.on-bk .stage :is(h1,h2,h3,h4,.btn,.num,.t-label,.t-display,.t-h2){font-family:"Epilogue",ui-sans-serif,system-ui,sans-serif}
+.sec.on-bk .stage{line-height:1.55}.sec.on-bk .stage svg :is(text,tspan){font-family:"Epilogue",sans-serif} /* shared SVG label classes (.mk, .s1-hrs) */.sec.on-bk .stage .t-display{letter-spacing:-.035em;text-wrap:balance}.sec.on-bk .stage .btn{letter-spacing:-.005em}
+/* R4 de-AI: section rhythm varies by section (the top padding was one value everywhere) */
+#proof{--pad-t:clamp(5rem,4rem + 2.5vw,6.5rem)}#svc{--pad-t:clamp(5.5rem,3.5rem + 6vw,9rem)}#work{--pad-t:clamp(5rem,3.5rem + 4vw,7rem)}
+#family{--pad-t:clamp(5rem,3rem + 6vw,8.5rem)}#how{--pad-t:clamp(5rem,4rem + 2.5vw,6.5rem)}#storm{--pad-t:clamp(5.5rem,3.5rem + 6.5vw,9.5rem)}
+#area{--pad-t:clamp(5rem,3.5rem + 4vw,7.5rem)}#call{--pad-t:clamp(5rem,3rem + 6vw,8.5rem)} /* phones keep the 5rem minimum (the picker sits there) */

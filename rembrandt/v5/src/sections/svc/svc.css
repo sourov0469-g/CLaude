@@ -2,8 +2,8 @@
    Facts: the firm's own service lines (pack §5.6, flag C12), no prices, no warranties, no promises about claims.
    v1 [BANK] 523 ULTRAGRID hotspots on one drawn house + ⟦S0139⟧; v2 [BANK] R45 CSS sticky stack; v3 [BANK] Strike Force
    symptom routing as a table; v4 ⟦S0823⟧ circles with satellite buttons; v5 [BANK] Q55 drum (unpinned). */
-.sv{--vbg:var(--cream);position:relative;overflow:clip;background:var(--cream);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
-.sv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;max-width:16ch}
+.sv{--vbg:var(--cream);position:relative;overflow:clip;background:var(--cream);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
+.sv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;max-width:16ch;font-family:var(--f-head)}
 .sv-sub{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:42ch;margin-top:14px}
 .sv-also{max-width:1180px;margin:clamp(32px,4vw,48px) auto 0;font-size:var(--t-body);line-height:1.5;color:var(--muted)}
 .sv-also b{color:var(--ink)}
@@ -32,13 +32,13 @@
 .sv1-p.is-on .sv1-wall,.sv1-p.is-on .sv1-roof,.sv1-p.is-on .sv1-patch,.sv1-p.is-on .sv1-gut,.sv1-p.is-on .sv1-box,.sv1-p.is-on .sv1-paper,.sv1-p.is-on .sv1-hail circle{fill:var(--sun)}
 .sv1-p.is-on .sv1-spout{stroke:var(--sun)}
 .sv1-p.is-on .sv1-lap{stroke:oklch(0.62 0.13 75)}
-.sv1-hs{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;display:grid;place-items:center;width:44px;height:44px;padding:0;border:2.5px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);font:inherit;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 6px 16px -8px oklch(0.2 0.08 262 / .5);transition:background-color .15s var(--ease-x),scale .15s var(--ease-x)}
+.sv1-hs{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;display:grid;place-items:center;width:44px;height:44px;padding:0;border:2.5px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);font:inherit;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 6px 16px -8px rgb(16 24 40 / 0.28);transition:background-color .15s var(--ease-x),scale .15s var(--ease-x)}
 .sv1-hs[aria-pressed="true"]{background:var(--ink);color:#fff}
 @media (hover:hover) and (pointer:fine){.sv1-hs:hover{scale:1.08}}
 .sv1-hs:active{scale:.94}
 .sv1-panel{display:grid;gap:10px;padding:clamp(22px,2.6vw,32px);border-radius:16px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06)}
 .sv1-n{margin:0;font-size:var(--t-label);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
-.sv1-t{font-size:clamp(1.5rem,1.1rem + 1.2vw,2.125rem);font-weight:700;line-height:1.1;letter-spacing:-.015em}
+.sv1-t{font-size:clamp(1.5rem,1.1rem + 1.2vw,2.125rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;font-family:var(--f-head)}
 .sv1-d{font-size:var(--t-body);line-height:1.55}
 html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;margin:24px 0 0;white-space:normal}
 @media (max-width:899px){.sv1-wrap{grid-template-columns:1fr}}
@@ -49,12 +49,12 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv2-head{align-self:start;position:sticky;top:calc(var(--nav-h) + 40px)}
 .sv2-head .sv-also{margin:24px 0 0}
 .sv2-stack{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,6vh,64px)}
-.sv2-card{position:sticky;top:calc(var(--nav-h) + 40px + var(--i) * 18px);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"n i" "t t" "d d";gap:14px 16px;align-items:center;padding:clamp(24px,3vw,36px);border-radius:18px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 18px 40px -26px oklch(0.2 0.08 262 / .45);transform-origin:50% 0}
+.sv2-card{position:sticky;top:calc(var(--nav-h) + 40px + var(--i) * 18px);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"n i" "t t" "d d";gap:14px 16px;align-items:center;padding:clamp(24px,3vw,36px);border-radius:18px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 18px 40px -26px rgb(16 24 40 / 0.25);transform-origin:50% 0}
 .sv2-card:nth-child(even){background:var(--ink);color:#fff}
 .sv2-card:nth-child(even) .sv2-n{color:var(--on-dark-2)}
 .sv2-n{grid-area:n;font-size:var(--t-label);font-weight:700;color:var(--muted)}
 .sv2-card .ic-s{grid-area:i;justify-self:end;width:56px;height:56px}
-.sv2-t{grid-area:t;font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.08;letter-spacing:-.015em}
+.sv2-t{grid-area:t;font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.08;letter-spacing:-.007em;font-family:var(--f-head)}
 .sv2-d{grid-area:d;font-size:var(--t-body);line-height:1.55;max-width:46ch}
 @media (max-width:899px){.sv2{grid-template-columns:1fr}.sv2-head{position:static}.sv2-card{position:static}}
 
@@ -62,7 +62,7 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv3-head,.sv3-t{max-width:1180px;margin-inline:auto}
 .sv3-t{width:100%;margin-top:clamp(28px,4vw,48px);border-collapse:collapse;font-size:var(--t-body);line-height:1.5}
 .sv3-t thead th{padding:0 0 12px;text-align:left;font-size:var(--t-label);font-weight:600;color:var(--muted);border-bottom:2px solid var(--ink)}
-.sv3-t tbody th{width:42%;padding:22px 32px 22px 0;text-align:left;vertical-align:top;font-size:clamp(1.25rem,1rem + .9vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.sv3-t tbody th{width:42%;padding:22px 32px 22px 0;text-align:left;vertical-align:top;font-size:clamp(1.25rem,1rem + .9vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.005em;font-family:var(--f-head)}
 .sv3-t tbody th::after{content:"";display:inline-block;width:.7em;height:.7em;margin-left:.35em;vertical-align:.02em;background:var(--blue);clip-path:polygon(0 35%,55% 35%,55% 0,100% 50%,55% 100%,55% 65%,0 65%)}
 .sv3-t td{padding:22px 0;vertical-align:top}
 .sv3-t tbody tr{border-bottom:1px solid oklch(0.3 0.05 262 / .18);transition:background-color .15s var(--ease-x)}
@@ -77,7 +77,7 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv4-o{position:relative;display:grid;justify-items:center;gap:12px;text-align:center}
 .sv4-o--a{grid-column:1/5}.sv4-o--b{grid-column:5/9;margin-top:clamp(40px,8vw,120px)}.sv4-o--c{grid-column:9/13;margin-top:clamp(10px,2vw,30px)}
 .sv4-o--d{grid-column:2/5}.sv4-o--e{grid-column:6/9;margin-top:clamp(20px,4vw,60px)}.sv4-o--f{grid-column:10/13}
-.sv4-c{position:relative;width:var(--d);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 24px 48px -28px oklch(0.2 0.08 262 / .5)}
+.sv4-c{position:relative;width:var(--d);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 24px 48px -28px rgb(16 24 40 / 0.28)}
 .sv4-c img{width:100%;height:100%;object-fit:cover}
 .sv4-disc .sv4-c{display:grid;place-items:center;background:var(--blue);color:#fff}
 .sv4-o--e .sv4-c{background:var(--ink)}
@@ -98,7 +98,7 @@ html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;
 .sv5 .sv-also{grid-area:a;align-self:start;margin:0}
 .sv5-stage{grid-area:s;position:relative;display:grid;gap:20px;justify-items:center;perspective:70vw}
 .sv5-drum{position:relative;width:100%;height:clamp(280px,40vw,460px);transform-style:preserve-3d}
-.sv5-w{position:absolute;left:0;right:0;top:50%;margin-top:-.6em;text-align:center;font-size:clamp(1.375rem,.7rem + 3vw,3.25rem);font-weight:800;line-height:1.2;letter-spacing:-.03em;white-space:nowrap;backface-visibility:hidden;color:color-mix(in srgb,var(--ink) 30%,transparent);transition:color .2s var(--ease-x)}
+.sv5-w{position:absolute;left:0;right:0;top:50%;margin-top:-.6em;text-align:center;font-size:clamp(1.375rem,.7rem + 3vw,3.25rem);font-weight:800;line-height:1.2;letter-spacing:-.015em;white-space:nowrap;backface-visibility:hidden;color:color-mix(in srgb,var(--ink) 30%,transparent);transition:color .2s var(--ease-x);font-family:var(--f-head)}
 .sv5-w.is-front{color:var(--ink)}
 .sv5-w.is-front::after{content:"";position:absolute;left:50%;bottom:-.08em;width:2.2em;height:.12em;translate:-50% 0;border-radius:4px;background:var(--sun)}
 .sv5-read{min-height:4.6em;max-width:40ch;text-align:center;font-size:var(--t-body);line-height:1.55}

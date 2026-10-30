@@ -55,7 +55,7 @@ function wall(root, c) {
   }
   function mask(lines, fs) {
     const cn = document.createElement('canvas'); cn.width = W; cn.height = H; const x = cn.getContext('2d');
-    x.font = `900 ${fs}px Epilogue, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+    x.font = `900 ${fs}px Poppins, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
     if ('letterSpacing' in x) x.letterSpacing = `${-0.02 * fs}px`;
     const lh = fs * 0.86, top = (H - lh * lines.length) / 2;
     lines.forEach((l, i) => { const m = x.measureText(l); const asc = m.actualBoundingBoxAscent || fs * 0.72; x.fillText(l, W / 2, top + i * lh + (lh + asc) / 2 - fs * 0.04); });
@@ -89,7 +89,7 @@ function wall(root, c) {
         seedX: rnd() * 2 - 1, seedY: rnd() * 2 - 1, seedZ: rnd() * 2 - 1, phase: rnd() * 6.283 });
     }
     // one type size for both headlines, fitted to the wall (S0534: copy, type size and cell size are independent)
-    const probe = document.createElement('canvas').getContext('2d'); probe.font = `900 100px Epilogue, sans-serif`;
+    const probe = document.createElement('canvas').getContext('2d'); probe.font = `900 100px Poppins, sans-serif`;
     const widest = Math.max(...[...FRONT, ...REAR].map(l => probe.measureText(l).width)) / 100;
     const fs = Math.min((W * 0.86) / widest, (H * 0.55) / (2 * 0.86)); // R3 F1-V1: type capped at 55% of the wall height
     const mf = mask(FRONT, fs), mr = mask(REAR, fs);
@@ -220,7 +220,7 @@ function wall(root, c) {
     if (!c.motion) return;
     sweep = { t0: now() + (c.swap ? 0.25 : 0.9) }; schedule(null, 1, sweep.t0); wake();
   };
-  (document.fonts ? document.fonts.load('900 100px Epilogue').then(() => document.fonts.ready) : Promise.resolve()).then(start, start);
+  (document.fonts ? document.fonts.load('900 100px Poppins').then(() => document.fonts.ready) : Promise.resolve()).then(start, start);
   if (c.motion) {
     root.addEventListener('pointermove', onMove, { passive: true }); root.addEventListener('pointerleave', onLeave); host.addEventListener('pointerdown', onDown);
     done.push(() => { root.removeEventListener('pointermove', onMove); root.removeEventListener('pointerleave', onLeave); host.removeEventListener('pointerdown', onDown); });
@@ -251,10 +251,10 @@ function weighted(root, c) {
   // R3 QA (S1314 §8: hover must not shift nearby layout): a heavier word is wider, so its tracking tightens by the width it
   // gains (measured per word at 300 and 700), and its neighbours never move
   const calib = () => W.forEach(o => {
-    const st = o.el.style; st.fontVariationSettings = "'wght' 700"; st.letterSpacing = ''; const w1 = o.el.getBoundingClientRect().width;
-    st.fontVariationSettings = "'wght' 300"; const w0 = o.el.getBoundingClientRect().width;
+    const st = o.el.style; st.fontWeight = '700'; st.letterSpacing = ''; const w1 = o.el.getBoundingClientRect().width;
+    st.fontWeight = '300'; const w0 = o.el.getBoundingClientRect().width;
     o.comp = (w1 - w0) / Math.max(1, o.el.textContent.length);
-    st.fontVariationSettings = `'wght' ${o.w}`; st.letterSpacing = `calc(-.02em - ${(o.comp * o.level).toFixed(2)}px)`;
+    st.fontWeight = String(o.w); st.letterSpacing = `calc(-.02em - ${(o.comp * o.level).toFixed(2)}px)`;
   });
   const done = [], cleanup = () => done.forEach(f => f());
   function pitch() {
@@ -292,7 +292,7 @@ function weighted(root, c) {
       const b = o.el.getBoundingClientRect(), dx = Math.max(b.left - px, 0, px - b.right), dy = Math.max(b.top - py, 0, py - b.bottom);
       o.target = strength(Math.hypot(dx, dy), r);
       const dl = o.target - o.level; if (Math.abs(dl) < 0.002) o.level = o.target; else { o.level += dl * k; busy = true; }
-      const w = Math.round(VP.from + (VP.to - VP.from) * o.level); if (w !== o.w) { o.w = w; o.el.style.fontVariationSettings = `'wght' ${w}`; o.el.style.letterSpacing = `calc(-.02em - ${(o.comp * o.level).toFixed(2)}px)`; }
+      const w = Math.round((VP.from + (VP.to - VP.from) * o.level) / 100) * 100; if (w !== o.w) { o.w = w; o.el.style.fontWeight = String(w); /* R4: Poppins ships fixed weights, so the proximity weight steps 300-700 in 100s */ o.el.style.letterSpacing = `calc(-.02em - ${(o.comp * o.level).toFixed(2)}px)`; }
     }
     if (busy) raf = requestAnimationFrame(tick);
   }

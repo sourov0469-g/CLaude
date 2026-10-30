@@ -103,7 +103,8 @@ const registry = Object.fromEntries([...keys].filter(k => !inlined.has(k)).map(k
 // ---------- CSS
 const minCss = s => s.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(Boolean).join('').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}');
 let css = read('base.css') + SECTIONS.map(s => [`sections/${s.id}/bk/bk.css`, `sections/${s.id}/${s.id}.css`].filter(f => fs.existsSync(path.join(SRC, f))).map(read).join('\n')).join('\n');
-css = minCss(css).replace('FONT_EPILOGUE', `data:font/woff2;base64,${fs.readFileSync(path.join(V5, 'assets', 'fonts', 'epilogue.woff2')).toString('base64')}`);
+const font = f => `data:font/woff2;base64,${fs.readFileSync(path.join(V5, 'assets', 'fonts', f)).toString('base64')}`;
+css = minCss(css).replace('FONT_EPILOGUE', () => font('epilogue.woff2')).replace('FONT_OPENSANS', () => font('opensans-var.woff2')).replace(/FONT_POPPINS_(\d{3})/g, (m, w) => font(`poppins-${w}.woff2`)); // R4: Poppins + Open Sans (Epilogue for the backups)
 page = page.replace('/*CSS*/', () => css);
 page = page.replace('FAVICON', () => `data:image/png;base64,${fs.readFileSync(path.join(V5, 'assets', 'img', 'favicon.png')).toString('base64')}`);
 

@@ -4,7 +4,7 @@ import fs from 'node:fs'; import { execFileSync } from 'node:child_process';
 const [W, H, rm = '', shots = ''] = process.argv.slice(2);
 const b = await chromium.launch();
 const ctx = await b.newContext({ viewport: { width: +W, height: +H }, reducedMotion: rm === 'reduce' ? 'reduce' : 'no-preference', hasTouch: +W < 500, isMobile: +W < 500 });
-const ids = ['hero', 'proof', 'work', 'family', 'how', 'area', 'call'], out = [], files = [];
+const ids = ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'], out = [], files = [];
 fs.mkdirSync('sw', { recursive: true });
 for (const v of [1, 2, 3, 4, 5]) {
   const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });

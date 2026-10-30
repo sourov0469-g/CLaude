@@ -4,8 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export const EASE = 'power4.out';      // ≈ cubic-bezier(0.23,1,0.32,1), --ease-out
-// masked line rise: yPercent 100 -> 0, blur 8 -> 0, stagger 0.11, 1.0s (S1321 [data-motion-text="lines"])
-export const lines = (el, o = {}) => gsap.fromTo(el.querySelectorAll('.ln > span'), { yPercent: 100, autoAlpha: 0, filter: 'blur(8px)' }, { yPercent: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 1, ease: EASE, stagger: 0.11, ...o });
+// masked line rise: yPercent 100 -> 0 (R4: the blur-in is dropped, a generated-look tell), stagger 0.11, 1.0s (S1321 [data-motion-text="lines"])
+export const lines = (el, o = {}) => gsap.fromTo(el.querySelectorAll('.ln > span'), { yPercent: 100, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1, ease: EASE, stagger: 0.11, ...o });
 // group rise: 16px, 0.6s, stagger 0.1 between semantic chunks (S0075 staged entrance)
 export const rise = (els, o = {}, from = {}) => gsap.fromTo(els, { y: 16, autoAlpha: 0, ...from }, { y: 0, x: 0, autoAlpha: 1, duration: 0.6, ease: EASE, stagger: 0.1, ...o });
 // once-on-entry trigger (S1321 start "top 82%", once)

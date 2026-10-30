@@ -20,7 +20,7 @@
 .cl1-hours dt{font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted)}
 .cl1-hours dd{margin:0}
 @media (max-width:899px){.cl1-inner{grid-template-columns:1fr}}
-.cl1-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:14ch;text-wrap:balance}
+.cl1-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:14ch;text-wrap:pretty;font-family:var(--f-head)}
 .cl1-nw{white-space:nowrap}
 .cl1-p{font-size:var(--t-lead);line-height:1.45;max-width:46ch}
 .cl1-live{margin:0;font-size:var(--t-lead);font-weight:600;line-height:1.4}
@@ -47,18 +47,18 @@
 .cl1-addr:focus-visible .cl1-pin{transform:translateY(-6px)}
 .cl1-addr.is-press .cl1-pin{animation:cl-pin .25s var(--ease-x)}
 @keyframes cl-pin{0%{transform:translateY(-6px)}50%{transform:translateY(2px) scaleY(.85)}100%{transform:none}}
-.cl1-word{position:relative;display:grid;margin:clamp(40px,7vw,96px) 0 0;font-size:var(--t-mark-call,clamp(3.2rem,15.6vw,15rem));font-weight:900;letter-spacing:-.05em;line-height:.8;white-space:nowrap;text-align:center;user-select:none}
+.cl1-word{position:relative;display:grid;margin:clamp(40px,7vw,96px) 0 0;font-size:var(--t-mark-call,clamp(3.2rem,15.6vw,15rem));font-weight:900;letter-spacing:-.025em;line-height:.8;white-space:nowrap;text-align:center;user-select:none}
 .cl1-word span{grid-area:1/1}
 .cl1-word span:first-child{color:transparent;-webkit-text-stroke:2px oklch(1 0 0 / .35)}
 .cl1-word span:last-child{color:#fff;clip-path:inset(0 0 52% 0)}
 
 /* ---------- v2 (the morph is GSAP string interpolation between two 48-point paths of equal structure) */
-.cl2{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
+.cl2{--vbg:var(--blue);background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
 .cl2-dusk{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
 .cl2-dusk path{fill:var(--ink);opacity:.35}
 .cl2-win rect{fill:var(--sun);opacity:.8}
 .cl2-inner{position:relative;display:grid;justify-items:center;gap:18px;max-width:1100px;margin:0 auto;text-align:center}
-.cl2-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.cl2-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .cl2-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
 /* R3 F7-V2: the number reads at most of the disc's width; the details are a solid card below the stage */
 .cl2-stage{position:relative;width:min(100%,600px);aspect-ratio:600/420;margin-top:12px}
@@ -68,7 +68,7 @@
 .cl2-call{position:absolute;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;gap:6px;width:46%;color:var(--ink);text-decoration:none;font-weight:700}
 .cl2-hs{width:clamp(36px,7vw,52px);height:auto}
 .cl2-hs path{fill:var(--ink)}
-.cl2-num{font-size:clamp(1rem,3.4vw,2rem);letter-spacing:-.02em;white-space:nowrap}
+.cl2-num{font-size:clamp(1rem,3.4vw,2rem);letter-spacing:-.01em;white-space:nowrap}
 .cl2-card{width:min(100%,600px);padding:20px 24px;border-radius:14px;background:#fff;color:var(--ink);text-align:left}
 .cl2-card[hidden]{display:none}
 .cl2-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -90,9 +90,9 @@
 @media (max-width:640px){.cl2-list li{grid-template-columns:1fr;gap:2px}.cl2-list{gap:6px}}
 
 /* ---------- v3 */
-.cl3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(3rem,2rem + 3vw,5rem) + var(--mbar))}
+.cl3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(3rem,2rem + 3vw,5rem) + var(--mbar))}
 .cl3-top{display:grid;gap:16px;max-width:1280px;margin:0 auto clamp(48px,7vh,88px);padding:0 var(--gutter)}
-.cl3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.cl3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .cl3-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
 .cl3-cs{left:0;top:0;width:100%;height:100%}
 .cl3-cs .rx-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2;opacity:0;transition:opacity .2s var(--ease-x)}
@@ -121,7 +121,7 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl3-cap{fill:var(--shingle);stroke:var(--ink);stroke-width:3}
 .cl3-brick{stroke:var(--ink);stroke-width:1.5;opacity:.45}
 .cl3-smoke circle{fill:oklch(0.85 0.01 262 / .7)}
-.cl3-track{position:absolute;left:0;top:50%;display:flex;white-space:nowrap;translate:0 -50%;font-size:min(12vw,150px); /* R3: the whole number fits the viewport */font-weight:900;letter-spacing:-.04em;line-height:1}
+.cl3-track{position:absolute;left:0;top:50%;display:flex;white-space:nowrap;translate:0 -50%;font-size:min(12vw,150px); /* R3: the whole number fits the viewport */font-weight:900;letter-spacing:-.02em;line-height:1}
 .cl3-it{display:inline-flex;align-items:center;padding-right:.4em}
 .cl3-it i{display:inline-block;width:.32em;height:.32em;margin-left:.4em;background:var(--sun);clip-path:polygon(50% 0,100% 60%,100% 100%,0 100%,0 60%)}
 
@@ -133,16 +133,16 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl4{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .cl4-inner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,6vw,104px);align-items:center;max-width:1180px;margin:0 auto}
 .cl4-copy{display:grid;gap:18px;justify-items:start}
-.cl4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.cl4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .cl4-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
-.cl4-disp{display:flex;align-items:center;min-height:1.2em;margin:10px 0 4px;font-size:clamp(2rem,1rem + 4vw,3.5rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cl4-disp{display:flex;align-items:center;min-height:1.2em;margin:10px 0 4px;font-size:clamp(2rem,1rem + 4vw,3.5rem);font-weight:800;letter-spacing:-.01em;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--f-head)}
 .cl4-caret{display:none;width:3px;height:.9em;margin-left:4px;background:var(--sun)}
 .cl4.is-dialing .cl4-caret{display:inline-block}
 .cl4-act{display:flex}
 .cl4-pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.4vw,16px);width:min(100%,340px);justify-self:center}
 .cl4-k{--lit:0;display:grid;place-items:center;align-content:center;aspect-ratio:1;border-radius:50%;border:1.5px solid oklch(1 0 0 / .35);
   background:color-mix(in oklch,var(--sun) calc(var(--lit) * 100%),oklch(1 0 0 / .06));color:color-mix(in oklch,var(--ink) calc(var(--lit) * 100%),#fff);user-select:none}
-.cl4-k b{font-size:clamp(1.25rem,.9rem + 1.2vw,1.75rem);font-weight:700;line-height:1}
+.cl4-k b{font-size:clamp(1.25rem,.9rem + 1.2vw,1.75rem);font-weight:700;line-height:1;font-family:var(--f-head)}
 .cl4-k i{min-height:1em;font-style:normal;font-size:.6875rem;font-weight:600;letter-spacing:.08em;line-height:1.2;opacity:.75}
 .cl4-go{grid-column:2;background:var(--sun);border-color:var(--sun);color:var(--ink)}
 .cl4-go svg{width:42%;height:auto;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
@@ -152,11 +152,11 @@ html[data-motion="reduced"] .cl3-pause{display:none}
 .cl5{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .cl5-inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(40px,6vw,104px);align-items:start;max-width:1180px;margin:0 auto}
 .cl5-head{display:grid;gap:16px}
-.cl5-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:12ch;text-wrap:balance}
+.cl5-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:12ch;text-wrap:pretty;font-family:var(--f-head)}
 .cl5-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch;color:var(--on-blue-muted)}
 .cl5-board{grid-row:span 2;display:grid;gap:14px;padding:clamp(20px,2.6vw,32px);border-radius:16px;background:var(--ink)}
 .cl5-clock{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0}
-.cl5-time{font-size:clamp(2rem,1.2rem + 3vw,3.25rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+.cl5-time{font-size:clamp(2rem,1.2rem + 3vw,3.25rem);font-weight:800;letter-spacing:-.01em;line-height:1;font-family:var(--f-head)}
 .cl5-day{font-size:var(--t-lead);font-weight:600;color:var(--on-dark-2)}
 .cl5-say{margin:0 0 6px;font-size:var(--t-lead);line-height:1.4}
 .cl5-week{display:grid;gap:6px}

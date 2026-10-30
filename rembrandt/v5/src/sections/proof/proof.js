@@ -32,8 +32,8 @@ function constellation(root, c) {
   const glyph = (box) => { // sample the "4.9" glyph into N points on a staggered grid (densest spacing that still yields N)
     const ow = Math.max(40, Math.round(box.w / 2)), oh = Math.max(40, Math.round(box.h / 2));
     const oc = document.createElement('canvas'); oc.width = ow; oc.height = oh; const x = oc.getContext('2d');
-    let fs = oh * 1.25; x.font = `800 ${fs}px Epilogue, sans-serif`; const w = x.measureText('4.9').width; if (w > ow * 0.98) fs *= ow * 0.98 / w;
-    x.font = `800 ${fs}px Epilogue, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = '#000'; x.fillText('4.9', ow / 2, oh / 2 + fs * 0.04);
+    let fs = oh * 1.25; x.font = `800 ${fs}px Poppins, sans-serif`; const w = x.measureText('4.9').width; if (w > ow * 0.98) fs *= ow * 0.98 / w;
+    x.font = `800 ${fs}px Poppins, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = '#000'; x.fillText('4.9', ow / 2, oh / 2 + fs * 0.04);
     const data = x.getImageData(0, 0, ow, oh).data, A = (i, j) => (i < 0 || j < 0 || i >= ow || j >= oh ? 0 : data[(j * ow + i) * 4 + 3]);
     // stars trace the glyph's outline (295 marks read far better as a contour than as a sparse fill)
     const edge = [];
@@ -78,7 +78,7 @@ function constellation(root, c) {
     g.globalAlpha = 1;
   };
   const ro = new ResizeObserver(layout); ro.observe(cv);
-  (document.fonts ? document.fonts.load('800 100px Epilogue') : Promise.resolve()).then(layout, layout);
+  (document.fonts ? document.fonts.load('800 100px Poppins') : Promise.resolve()).then(layout, layout);
   if (c.motion) {
     // R3 F2-V1: the formation completes once the section is at least half in view, and holds (never scrubs back)
     const form = { p: 0 }; let formed = false;

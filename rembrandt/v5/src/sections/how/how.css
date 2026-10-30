@@ -3,11 +3,11 @@
    downspout; v2 [BANK] UZIK story pager (P74) over three drawn scenes; v3 [BANK] Q409 deliverable chips + Q411 three
    verbs + Q91 animated icons, joined by a roofer's ladder. */
 .hw{position:relative;overflow:clip}
-.hw-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.hw-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
 .hw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
 
 /* ---------- v1: the spine is a downspout that fills with water as you read; hangers are the step markers */
-.hw1{--vbg:var(--sky);background:var(--sky);color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,48px);max-width:1040px;margin-inline:auto;padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.hw1{--vbg:var(--sky);background:var(--sky);color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,48px);max-width:1040px;margin-inline:auto;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
 .hw1-head,.hw1-body{z-index:1}
 /* R3 F5-V1: the heading sits on the steps' axis (the step titles' left edge), above them, not in a sticky side column */
 .hw1-head{display:grid;gap:14px;padding-left:calc(92px + 2ch + 20px)}
@@ -22,7 +22,7 @@
 .hw1-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(56px,10vh,110px)} /* R3 C4 */
 .hw1-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:baseline;scroll-margin-top:calc(var(--nav-h) + 24px)}
 .hw1-n{font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
-.hw1-t{font-size:clamp(1.75rem,1.2rem + 2vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:color-mix(in srgb,var(--ink) 78%,transparent);transition:color .2s var(--ease-x)}
+.hw1-t{font-size:clamp(1.75rem,1.2rem + 2vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.015em;color:color-mix(in srgb,var(--ink) 78%,transparent);transition:color .2s var(--ease-x);font-family:var(--f-head)}
 html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw1-step[aria-current="step"] .hw1-t,.hw1-step.is-past .hw1-t{color:var(--ink)}
 .hw1-p{margin-top:10px;font-size:var(--t-lead);line-height:1.45;max-width:40ch}
@@ -42,7 +42,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 
 /* ---------- v2 [BANK] UZIK story pager (P74 Harvest [221]): stacked scenes crossfade 0.4s on the content curve; each
    step's bar fills 5s linear and that fill IS the dwell; chrome on the house curve at 300ms. Not pinned, nothing sticky. */
-.hw2{--vbg:var(--sky);--t-dur:300ms;--t-chrome:cubic-bezier(0.86,0.1,0.14,0.9);--t-diapo:cubic-bezier(0.25,0.1,0.25,1);background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.hw2{--vbg:var(--sky);--t-dur:300ms;--t-chrome:cubic-bezier(0.86,0.1,0.14,0.9);--t-diapo:cubic-bezier(0.25,0.1,0.25,1);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
 .hw2-in{max-width:1280px;margin:0 auto;display:grid;gap:clamp(28px,4vh,48px)}
 .hw2-head{display:grid;gap:12px}
 .hw2-story{position:relative;border-top:2px solid var(--ink);overflow:hidden} /* R3: rows, not a card */
@@ -91,7 +91,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .hw2-photo{display:block;width:100%;height:100%;aspect-ratio:960/420;object-fit:cover}
 .hw2-scene{display:block;width:100%;height:auto;aspect-ratio:960/420;align-self:stretch;background:#fff}
 .hw2-cap{display:grid;align-content:center;gap:18px;padding:32px clamp(24px,3vw,44px);border-left:2px solid var(--ink)}
-.hw2-t{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.6rem);font-weight:700;line-height:1.05;letter-spacing:-.03em}
+.hw2-t{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.6rem);font-weight:700;line-height:1.05;letter-spacing:-.015em;font-family:var(--f-head)}
 .hw2-cd{display:grid;gap:16px;font-size:var(--t-lead);line-height:1.45;max-width:46ch}
 .hw2-call{justify-self:start;display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:700;text-decoration:none}
 /* R41: a coiled phone cord stretches out of the link; press lets it spring back */
@@ -111,7 +111,7 @@ html[data-motion="reduced"] .hw1-t{color:var(--ink)}
 .s1-win,.s3-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
 .s1-door,.s3-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
 .s1-sign{fill:var(--ink)}
-.s1-hrs{font:800 15px/1 "Epilogue",sans-serif;fill:#fff;letter-spacing:.06em}
+.s1-hrs{font:800 15px/1 var(--f-head);fill:#fff;letter-spacing:.06em;font-family:var(--f-head)}
 .s1-disc{fill:var(--sun);stroke:var(--ink);stroke-width:3}
 .s1-base,.s1-hset{fill:#fff;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .s1-keys{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
@@ -159,7 +159,7 @@ html[data-motion="reduced"] .hw2-item,html[data-motion="reduced"] .hw2-item.is-v
 html[data-motion="reduced"] .hw2-bar,html[data-motion="reduced"] .hw2-pause{visibility:hidden}
 
 /* ---------- v3: three verbs, each with its own drawn tool and its deliverables; a ladder joins them */
-.hw3{--vbg:var(--sky);position:relative;overflow:hidden;background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.hw3{--vbg:var(--sky);position:relative;overflow:hidden;background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
 .hw3-head{position:relative;z-index:1;display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,5vh,56px)}
 /* Signal-A index rows: the list is the design. Grid: mono label | giant two-weight line | tool; chips under the line. */
 .hw3-rows{position:relative;z-index:1;list-style:none;margin:0 auto;padding:0;max-width:1280px}
@@ -172,7 +172,7 @@ html[data-motion="reduced"] .hw2-bar,html[data-motion="reduced"] .hw2-pause{visi
 .hw3-n span{display:block;font-size:1.5rem;font-weight:700;letter-spacing:0;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums}
 .hw3 .hw3-act{position:static}
 /* R3 F5: full ink, one weight per line, the H2 role (one size page-wide); only the first line is a link */
-.hw3-act{margin:0;color:var(--ink);text-decoration:none;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.hw3-act{margin:0;color:var(--ink);text-decoration:none;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
 a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:.08em;text-underline-offset:.14em}
 .hw3-line{display:block}
 .hw3-v{font-weight:700}
@@ -220,7 +220,7 @@ a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-de
 /* ---------- v4 (R3, new): one house, three states. S0441 gsap-scrolltrigger-storytelling: one pinned artefact whose
    states are revealed per label. The house is sticky beside the steps (CSS sticky); the step nearest the centre sets its
    state; states crossfade 200ms. Phones: the house sits above the steps, finished, no stickiness. */
-.hw4{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.hw4{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .hw4-head{display:grid;gap:12px;max-width:1240px;margin:0 auto clamp(24px,4vh,40px)}
 .hw4-body{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);max-width:1240px;margin:0 auto}
 .hw4-stage{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start}
@@ -249,7 +249,7 @@ a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-de
 .hw4-hs{transform-box:fill-box;transform-origin:50% 50%}
 .hw4-steps{list-style:none;margin:0;padding:0}
 .hw4-step{min-height:44svh;display:grid;align-content:center;gap:12px;padding:24px 0;border-top:1px solid oklch(0.2 0.05 262 / .14)}
-.hw4-t{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.1;letter-spacing:-.015em;color:var(--muted);transition:color .2s var(--ease-x)}
+.hw4-t{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;color:var(--muted);transition:color .2s var(--ease-x);font-family:var(--f-head)}
 .hw4-step.is-on .hw4-t{color:var(--ink)}
 .hw4-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch}
 .hw4-tel{justify-self:start;display:inline-flex;align-items:center;min-height:48px;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px}
@@ -259,7 +259,7 @@ html[data-motion="reduced"] .hw4 .hw4-t{color:var(--ink)}
 
 /* ---------- v5 (R3, new): three artefacts, no numerals. The handset with the number, a blank ruled estimate sheet (no
    figures, no names: an illustration, never a record), the real finished roof. */
-.hw5{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.hw5{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
 .hw5-head{max-width:1240px;margin:0 auto clamp(28px,4vw,48px)}
 .hw5-row{list-style:none;margin:0 auto;padding:0;max-width:1240px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
 .hw5-a{display:grid;gap:16px;align-content:start}
@@ -268,7 +268,7 @@ html[data-motion="reduced"] .hw4 .hw4-t{color:var(--ink)}
 .hw5-ph{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .hw5-arc{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round}
 .hw5-phone svg{width:52%;margin-top:-14%}
-.hw5-tel{position:absolute;left:0;right:0;bottom:12%;display:flex;align-items:center;justify-content:center;min-height:44px;text-align:center;font-size:clamp(1.25rem,.9rem + 1vw,1.75rem);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px}
+.hw5-tel{position:absolute;left:0;right:0;bottom:12%;display:flex;align-items:center;justify-content:center;min-height:44px;text-align:center;font-size:clamp(1.25rem,.9rem + 1vw,1.75rem);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px;font-family:var(--f-head)}
 .hw5-pg{fill:#fff;stroke:var(--ink);stroke-width:2.5}
 .hw5-hd{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
 .hw5-ln{stroke:var(--steel);stroke-width:2;stroke-linecap:round}

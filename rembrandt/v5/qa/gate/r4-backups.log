@@ -1,0 +1,122 @@
+same hero V1/B1 @1440: elements 23/23, style rows differing 0 [<div class="hx hx1" data-mood="umbrella" data-v="1">
+  <h1 c | <div class="bhx bhx1" data-mood="umbrella" data-v="b1">
+  <h]
+same hero V2/B2 @1440: elements 76/76, style rows differing 0 [<div class="hx hx2" data-mood="umbrella" data-v="2">
+  <div  | <div class="bhx bhx2" data-mood="umbrella" data-v="b2">
+  <d]
+same hero V3/B3 @1440: elements 32/32, style rows differing 0 [<div class="hx hx3" data-mood="umbrella" data-v="3">
+  <figu | <div class="bhx bhx3" data-mood="umbrella" data-v="b3">
+  <f]
+same proof V1/B1 @1440: elements 13/13, style rows differing 0 [<div class="pv pv1" data-v="1">
+  <canvas class="pv1-cv" ari | <div class="bpv bpv1" data-v="b1">
+  <canvas class="bpv1-cv"]
+same proof V2/B2 @1440: elements 107/107, style rows differing 0 [<div class="pv pv2" data-v="2">
+  <svg class="pv2-bg" aria-h | <div class="bpv bpv2" data-v="b2">
+  <svg class="bpv2-bg" ar]
+DIFF proof V3/B3 @1440: elements 151/151, style rows differing 0 html@6366: «ght="0"><defs><filter id="pv3fdmuhr-0" x="-10%" y="-40%" width="120%" » vs «ght="0"><defs><filter id="pv3fje1d3-0" x="-10%" y="-40%" width="120%" »
+DIFF work V1/B1 @1440: elements 73/73, style rows differing 0 html@781: «cap="This house, before"><img src="data:image/webp;base64,UklGRsAXAQBX» vs «cap="This house, before"><img width="1024" height="684" data-img="ba2-»
+same work V2/B2 @1440: elements 44/44, style rows differing 0 [<div class="wv wv2" data-v="2">
+  <svg class="wv2-hip" aria- | <div class="bwv bwv2" data-v="b2">
+  <svg class="bwv2-hip" a]
+same work V3/B3 @1440: elements 12/12, style rows differing 0 [<div class="wv wv3 is-still" data-v="3">
+  <div class="wv-he | <div class="bwv bwv3 is-still" data-v="b3">
+  <div class="bw]
+DIFF family V1/B1 @1440: elements 35/35, style rows differing 0 html@70879: «ure class="fm1-photo ph"><img src="data:image/webp;base64,UklGRnTIAABX» vs «ure class="fm1-photo ph"><img width="1088" height="801" data-img="team»
+same family V2/B2 @1440: elements 26/26, style rows differing 0 [<div class="fm fm2" data-v="2">
+  <svg class="fm2-bg" viewBo | <div class="bfm bfm2" data-v="b2">
+  <svg class="bfm2-bg" vi]
+same family V3/B3 @1440: elements 57/57, style rows differing 0 [<div class="fm fm3" data-v="3">
+  <svg class="fm3-deck" aria | <div class="bfm bfm3" data-v="b3">
+  <svg class="bfm3-deck" ]
+same how V1/B1 @1440: elements 40/40, style rows differing 0 [<div class="hw hw1" data-v="1">
+  <svg class="hw1-rain" aria | <div class="bhw bhw1" data-v="b1">
+  <svg class="bhw1-rain" ]
+same how V2/B2 @1440: elements 109/109, style rows differing 0 [<div class="hw hw2" data-v="2">
+  <div class="hw2-in">
+    < | <div class="bhw bhw2" data-v="b2">
+  <div class="bhw2-in">
+ ]
+same how V3/B3 @1440: elements 68/68, style rows differing 0 [<div class="hw hw3" data-v="3">
+  <svg class="hw3-raft" aria | <div class="bhw bhw3" data-v="b3">
+  <svg class="bhw3-raft" ]
+DIFF area V1/B1 @1440: elements 171/171, style rows differing 2 html@4937: « Z"></path><text x="851.7" y="200.9" text-anchor="start">Yellow Spring» vs « Z"></path><text x="851.7" y="184.9" text-anchor="start">Yellow Spring» css[85] rgb(11, 31, 77)|rgba(0, 0, 0, 0)|17px|400|Epilogue, ui-sans-serif, system-ui, sans-serif|1|inline|673|254|105|13 vs rgb(11, 31, 77)|rgba(0, 0, 0, 0)|17px|400|Epilogue, ui-sans-serif, system-ui, sans-serif|1|inline|673|244|105|22
+same area V2/B2 @1440: elements 1370/1370, style rows differing 0 [<div class="tw tw2" data-v="2">
+  <svg class="tw2-plan" aria | <div class="btw btw2" data-v="b2">
+  <svg class="btw2-plan" ]
+same area V3/B3 @1440: elements 92/92, style rows differing 0 [<div class="tw tw3" data-v="3">
+  <svg class="tw3-vane" view | <div class="btw btw3" data-v="b3">
+  <svg class="btw3-vane" ]
+DIFF call V1/B1 @1440: elements 33/33, style rows differing 5 [<div class="cl cl1" data-v="1">
+  <svg class="cl1-gut" viewB | <div class="bcl bcl1" data-v="b1">
+  <svg class="bcl1-gut" v] css[7] rgb(255, 255, 255)|rgba(0, 0, 0, 0)|17px|400|Epilogue, ui-sans-serif, system-ui, sans-serif|1|block|217|29|120|600 vs rgb(255, 255, 255)|rgba(0, 0, 0, 0)|17px|400|Epilogue, ui-sans-serif, system-ui, sans-serif|1|block|220|29|120|600
+same call V2/B2 @1440: elements 24/24, style rows differing 0 [<div class="cl cl2" data-v="2">
+  <svg class="cl2-dusk" view | <div class="bcl bcl2" data-v="b2">
+  <svg class="bcl2-dusk" ]
+same call V3/B3 @1440: elements 32/32, style rows differing 0 [<div class="cl cl3" data-v="3">
+  <div class="cl3-top">
+     | <div class="bcl bcl3" data-v="b3">
+  <div class="bcl3-top">
+]
+same hero V1/B1 @375: elements 23/23, style rows differing 0 [<div class="hx hx1" data-mood="umbrella" data-v="1">
+  <h1 c | <div class="bhx bhx1" data-mood="umbrella" data-v="b1">
+  <h]
+same hero V2/B2 @375: elements 76/76, style rows differing 0 [<div class="hx hx2" data-mood="umbrella" data-v="2">
+  <div  | <div class="bhx bhx2" data-mood="umbrella" data-v="b2">
+  <d]
+same hero V3/B3 @375: elements 32/32, style rows differing 0 [<div class="hx hx3" data-mood="umbrella" data-v="3">
+  <figu | <div class="bhx bhx3" data-mood="umbrella" data-v="b3">
+  <f]
+same proof V1/B1 @375: elements 13/13, style rows differing 0 [<div class="pv pv1" data-v="1">
+  <canvas class="pv1-cv" ari | <div class="bpv bpv1" data-v="b1">
+  <canvas class="bpv1-cv"]
+same proof V2/B2 @375: elements 110/110, style rows differing 0 [<div class="pv pv2" data-v="2">
+  <svg class="pv2-bg" aria-h | <div class="bpv bpv2" data-v="b2">
+  <svg class="bpv2-bg" ar]
+DIFF proof V3/B3 @375: elements 147/147, style rows differing 0 html@2577: «ght="0"><defs><filter id="pv3f7h31b-0" x="-10%" y="-40%" width="120%" » vs «ght="0"><defs><filter id="pv3fy7f1q-0" x="-10%" y="-40%" width="120%" »
+DIFF work V1/B1 @375: elements 73/73, style rows differing 0 html@787: «cap="This house, before"><img src="data:image/webp;base64,UklGRsAXAQBX» vs «cap="This house, before"><img width="1024" height="684" data-img="ba2-»
+same work V2/B2 @375: elements 44/44, style rows differing 0 [<div class="wv wv2" data-v="2">
+  <svg class="wv2-hip" aria- | <div class="bwv bwv2" data-v="b2">
+  <svg class="bwv2-hip" a]
+same work V3/B3 @375: elements 12/12, style rows differing 0 [<div class="wv wv3 is-still" data-v="3">
+  <div class="wv-he | <div class="bwv bwv3 is-still" data-v="b3">
+  <div class="bw]
+DIFF family V1/B1 @375: elements 35/35, style rows differing 0 html@70879: «ure class="fm1-photo ph"><img src="data:image/webp;base64,UklGRnTIAABX» vs «ure class="fm1-photo ph"><img width="1088" height="801" data-img="team»
+same family V2/B2 @375: elements 26/26, style rows differing 0 [<div class="fm fm2" data-v="2">
+  <svg class="fm2-bg" viewBo | <div class="bfm bfm2" data-v="b2">
+  <svg class="bfm2-bg" vi]
+same family V3/B3 @375: elements 50/50, style rows differing 0 [<div class="fm fm3" data-v="3">
+  <svg class="fm3-deck" aria | <div class="bfm bfm3" data-v="b3">
+  <svg class="bfm3-deck" ]
+same how V1/B1 @375: elements 40/40, style rows differing 0 [<div class="hw hw1" data-v="1">
+  <svg class="hw1-rain" aria | <div class="bhw bhw1" data-v="b1">
+  <svg class="bhw1-rain" ]
+same how V2/B2 @375: elements 109/109, style rows differing 0 [<div class="hw hw2" data-v="2">
+  <div class="hw2-in">
+    < | <div class="bhw bhw2" data-v="b2">
+  <div class="bhw2-in">
+ ]
+same how V3/B3 @375: elements 68/68, style rows differing 0 [<div class="hw hw3" data-v="3">
+  <svg class="hw3-raft" aria | <div class="bhw bhw3" data-v="b3">
+  <svg class="bhw3-raft" ]
+same area V1/B1 @375: elements 148/148, style rows differing 0 [<div class="tw tw1" data-v="1">
+  <div class="tw1-grid">
+    | <div class="btw btw1" data-v="b1">
+  <div class="btw1-grid">]
+same area V2/B2 @375: elements 1352/1352, style rows differing 0 [<div class="tw tw2" data-v="2">
+  <svg class="tw2-plan" aria | <div class="btw btw2" data-v="b2">
+  <svg class="btw2-plan" ]
+same area V3/B3 @375: elements 92/92, style rows differing 0 [<div class="tw tw3" data-v="3">
+  <svg class="tw3-vane" view | <div class="btw btw3" data-v="b3">
+  <svg class="btw3-vane" ]
+DIFF call V1/B1 @375: elements 33/33, style rows differing 5 [<div class="cl cl1" data-v="1">
+  <svg class="cl1-gut" viewB | <div class="bcl bcl1" data-v="b1">
+  <svg class="bcl1-gut" v] css[7] rgb(255, 255, 255)|rgba(0, 0, 0, 0)|17px|400|Epilogue, ui-sans-serif, system-ui, sans-serif|1|block|97|14|120|600 vs rgb(255, 255, 255)|rgba(0, 0, 0, 0)|17px|400|Epilogue, ui-sans-serif, system-ui, sans-serif|1|block|100|14|120|600
+same call V2/B2 @375: elements 24/24, style rows differing 0 [<div class="cl cl2" data-v="2">
+  <svg class="cl2-dusk" view | <div class="bcl bcl2" data-v="b2">
+  <svg class="bcl2-dusk" ]
+same call V3/B3 @375: elements 32/32, style rows differing 0 [<div class="cl cl3" data-v="3">
+  <div class="cl3-top">
+     | <div class="bcl bcl3" data-v="b3">
+  <div class="bcl3-top">
+]
+DIFFERING 9/42

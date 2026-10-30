@@ -136,9 +136,9 @@ export function switchTo(sec, v) {
 }
 
 export function boot(mods) {
-  // sections mount once the embedded Epilogue is ready (capped at 1.2s), so every init that measures or draws type
+  // sections mount once the embedded fonts are ready (capped at 1.2s), so every init that measures or draws type
   // (the Constellation's "4.9" outline, the hero canvases) runs on the real font, as it did in the owner-kept build
-  const fontReady = document.fonts ? Promise.race([Promise.all(['300', '800', '900'].map(w => document.fonts.load(`${w} 100px Epilogue`))), new Promise(r => setTimeout(r, 1200))]) : Promise.resolve();
+  const fontReady = document.fonts ? Promise.race([Promise.all([...['300', '700', '800'].map(w => document.fonts.load(`${w} 100px Poppins`)), document.fonts.load('400 16px "Open Sans"'), ...['300', '800', '900'].map(w => document.fonts.load(`${w} 100px Epilogue`))]) /* Epilogue: the backups measure it */, new Promise(r => setTimeout(r, 1200))]) : Promise.resolve();
   fontReady.then(() => start(mods), () => start(mods));
 }
 function start(mods) {

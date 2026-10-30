@@ -18,12 +18,12 @@
    Rows enter .15s 40ms apart; chalk rules draw .3s and snap; the five stars in sun are the section's one signature; the
    check links are the sun actions. The reel and the course background are gone (Removal Test). */
 .pv2{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,112px);
-  padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter);align-items:start}
+  padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter);align-items:start}
 .pv2-head{position:sticky;top:calc(var(--nav-h) + 40px);display:grid;gap:14px;justify-items:start}
-.pv2-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:9ch;margin-bottom:14px}
-.pv2-big{display:flex;align-items:baseline;font-weight:700;line-height:.9;letter-spacing:-.04em;color:#fff}
-.pv2-big .num{font-size:clamp(5rem,10vw,9rem)}
-.pv2-of{font-size:clamp(1.5rem,2.4vw,2.25rem);letter-spacing:-.02em;color:var(--on-dark-2);margin-left:.2em}
+.pv2-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:9ch;margin-bottom:14px;font-family:var(--f-head)}
+.pv2-big{display:flex;align-items:baseline;font-weight:700;line-height:.9;letter-spacing:-.02em;color:#fff}
+.pv2-big .num{font-size:clamp(5rem,10vw,9rem);font-family:var(--f-head)}
+.pv2-of{font-size:clamp(1.5rem,2.4vw,2.25rem);letter-spacing:-.01em;color:var(--on-dark-2);margin-left:.2em;font-family:var(--f-head)}
 .pv2-count{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.0625rem}
 .pv2-stars{width:120px;height:22px;flex:none}
 .pv2-st-off polygon{fill:oklch(1 0 0 / .16)}
@@ -35,7 +35,7 @@
   column-gap:24px;row-gap:4px;padding:26px 0 28px;align-items:end}
 .pv2-row:last-child::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:oklch(1 0 0 / .16)}
 .pv2-src{grid-area:src;font-size:var(--t-label);font-weight:600;letter-spacing:0;color:var(--on-dark-2);margin-bottom:8px}
-.pv2-fig{grid-area:fig;font-size:clamp(2.25rem,4vw,3.5rem);font-weight:700;line-height:1;letter-spacing:-.03em}
+.pv2-fig{grid-area:fig;font-size:clamp(2.25rem,4vw,3.5rem);font-weight:700;line-height:1;letter-spacing:-.015em;font-family:var(--f-head)}
 .pv2-what{grid-area:what;font-size:1.0625rem;color:var(--on-dark-2)}
 .pv2-check{grid-area:check;position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;color:var(--sun);text-decoration:none}
 .pv2-check svg{width:18px;height:18px;flex:none;transition:translate 200ms var(--ease-x)}
@@ -62,7 +62,7 @@
   .pv2{grid-template-columns:1fr;gap:22px;padding:clamp(3rem,2.5rem + 4vw,4.5rem) var(--gutter) calc(2.5rem + var(--mbar))}
   .pv2-head{position:relative;top:auto;gap:10px}
   .pv2-h{margin-bottom:4px}
-  .pv2-big .num{font-size:clamp(4rem,22vw,5.5rem)}
+  .pv2-big .num{font-size:clamp(4rem,22vw,5.5rem);font-family:var(--f-head)}
   .pv2-row{grid-template-areas:"src" "fig" "what" "check";grid-template-columns:1fr;align-items:start;padding:14px 0 6px;row-gap:0}
   .pv2-src{margin-bottom:2px}
   .pv2-fig{font-size:2.25rem}
@@ -72,21 +72,21 @@
 /* v3 (R3 F2-V3): the roller board on the ink ground. Only 4.9 and 295 roll (<= .6s, the strips blurred while they move, so
    no in-between number can be read); 2001 and $2M are set still; Owens Corning is a board cell; the kicker, the 1995 cell,
    the pointer sheen and the course background are gone. */
-.pv3{--vbg:var(--ink);position:relative;background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 5vw,6.5rem) + var(--mbar))}
+.pv3{--vbg:var(--ink);position:relative;background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4rem,3rem + 5vw,6.5rem) + var(--mbar))}
 .pv3-in{position:relative;max-width:1240px;margin:0 auto;display:grid;gap:clamp(36px,5vw,60px)}
-.pv3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:16ch}
+.pv3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:16ch;font-family:var(--f-head)}
 .pv3-board{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(28px,4vw,52px) clamp(20px,3vw,40px);align-items:end}
 .pv3-stat{grid-column:span 2;display:grid;gap:12px;justify-items:start}
 .pv3-stat--xl{grid-column:span 3}
-.pv3-roll{position:relative;display:inline-flex;align-items:flex-end;margin:0;padding-top:.22em;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums}
-.pv3-stat--xl .pv3-roll{font-size:clamp(4.6rem,12vw,10.5rem)}
+.pv3-roll{position:relative;display:inline-flex;align-items:flex-end;margin:0;padding-top:.22em;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;font-family:var(--f-head)}
+.pv3-stat--xl .pv3-roll{font-size:clamp(4.6rem,12vw,10.5rem);font-family:var(--f-head)}
 /* ridge-cap rail over the row of tabs */
 .pv3-roll::before,.pv3-word::before{content:"";position:absolute;left:-.06em;right:-.06em;top:0;height:.2em;border-radius:.1em .1em .04em .04em;background:repeating-linear-gradient(90deg,var(--sun) 0 .46em,color-mix(in srgb,var(--sun) 72%,var(--ink)) .46em .5em);box-shadow:0 .04em 0 oklch(0 0 0 / .35)}
 .pv3-col{position:relative;display:inline-block;height:1.2em;overflow:hidden;margin-right:.04em;border-radius:.03em}
 .pv3-strip{display:flex;flex-direction:column;transform:translateY(-1.2em);will-change:transform}
 .pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:var(--cream);background:linear-gradient(var(--shingle) 0 22%,color-mix(in srgb,var(--shingle) 86%,#fff) 26%,var(--shingle) 100%);box-shadow:inset 0 -.04em 0 oklch(0 0 0 / .45),inset .04em 0 0 oklch(0 0 0 / .25)}
 .pv3-mark{display:inline-grid;place-items:center;height:1.2em;padding:0 .04em;color:var(--sun)}
-.pv3-word{position:relative;margin:0;padding:.22em .12em 0;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1.2;letter-spacing:-.01em;color:var(--cream)}
+.pv3-word{position:relative;margin:0;padding:.22em .12em 0;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1.2;letter-spacing:-.005em;color:var(--cream);font-family:var(--f-head)}
 .pv3-lab{display:flex;align-items:center;gap:8px;margin:0;font-size:1.0625rem;font-weight:600;color:var(--on-dark-2)}
 .pv3-stat--xl .pv3-lab{font-size:1.25rem;color:#fff}
 .pv3-star{width:1em;height:1em;fill:var(--sun)}
@@ -103,9 +103,9 @@
 @media (max-width:760px){
   .pv3-board{grid-template-columns:repeat(2,minmax(0,1fr))}
   .pv3-stat,.pv3-stat--xl{grid-column:span 1}
-  .pv3-stat--xl .pv3-roll{font-size:clamp(3.6rem,17vw,6rem)}
+  .pv3-stat--xl .pv3-roll{font-size:clamp(3.6rem,17vw,6rem);font-family:var(--f-head)}
   .pv3-stat--word{grid-column:span 2;order:2}
-  .pv3-word{font-size:clamp(2.6rem,13vw,3.4rem)}
+  .pv3-word{font-size:clamp(2.6rem,13vw,3.4rem);font-family:var(--f-head)}
   .pv3-stat--xl .pv3-lab{font-size:1rem}
   .pv3-lab{gap:6px}
   .pv3-foot{justify-content:flex-start}
@@ -115,9 +115,9 @@
 /* ---------- v4 (R3, new): the office wall. [BANK] 514 The Record Institute (sheen sweep on hover/focus, the top tier
    alone glows) + [BANK] 372 Glare Hover (analytic streak profile). Typographic plaques hang from a picture rail on
    wires, a hair off level; hover or focus levels a frame and sweeps the glare across it once. */
-.pv4{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 5vw,6.5rem) + var(--mbar))}
+.pv4{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4rem,3rem + 5vw,6.5rem) + var(--mbar))}
 .pv4-in{max-width:1240px;margin:0 auto}
-.pv4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.pv4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .pv4-sub{margin-top:14px;max-width:46ch;font-size:var(--t-lead);line-height:1.45;color:var(--on-dark-2)}
 .pv4-wall{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:56px clamp(20px,3vw,40px);margin-top:clamp(56px,6vw,84px);padding-top:44px}
 .pv4-rail{position:absolute;left:0;top:0;width:100%;height:10px}
@@ -132,8 +132,8 @@
 .pv4-wire path{fill:none;stroke:var(--steel);stroke-width:1.5;vector-effect:non-scaling-stroke}
 .pv4-mat{position:relative;display:grid;gap:8px;align-content:center;min-height:100%;padding:clamp(18px,2.4vw,30px);background:var(--cream);border:1px solid oklch(0 0 0 / .12);outline:1px solid oklch(0 0 0 / .08);outline-offset:-8px}
 .pv4-frame--big .pv4-mat{padding:clamp(28px,4vw,52px);gap:12px}
-.pv4-fig{font-size:clamp(2.25rem,3.6vw,3.25rem);font-weight:700;line-height:1;letter-spacing:-.03em}
-.pv4-frame--big .pv4-fig{font-size:clamp(5rem,9vw,8rem);letter-spacing:-.04em}
+.pv4-fig{font-size:clamp(2.25rem,3.6vw,3.25rem);font-weight:700;line-height:1;letter-spacing:-.015em;font-family:var(--f-head)}
+.pv4-frame--big .pv4-fig{font-size:clamp(5rem,9vw,8rem);letter-spacing:-.02em;font-family:var(--f-head)}
 .pv4-stars{width:150px;height:28px}
 .pv4-off path{fill:var(--mist)}.pv4-on path{fill:var(--sun);stroke:var(--ink);stroke-width:.6}
 .pv4-what{font-size:1.0625rem;line-height:1.35;color:var(--ink)}
@@ -162,7 +162,7 @@
 /* ---------- v5 (R3, new): the seal. [BANK] Q164 Circular Text: letters set by measured arc around a ring that a drag
    turns and a fling carries (decaying in 1.2s); no endless cruise, a quarter turn with the section's scroll instead; the
    same four facts sit beside it as a real list with their check links. */
-.pv5{--vbg:var(--ink);background:var(--ink);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 5vw,6.5rem) + var(--mbar))}
+.pv5{--vbg:var(--ink);background:var(--ink);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4rem,3rem + 5vw,6.5rem) + var(--mbar))}
 .pv5-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:clamp(40px,6vw,96px);min-height:min(760px,78svh)}
 .pv5-seal{position:relative;width:min(100%,640px);aspect-ratio:1;justify-self:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .pv5-ring{position:absolute;inset:0;will-change:transform}
@@ -172,13 +172,13 @@
 .pv5-rules circle{fill:none;stroke:var(--sun);stroke-width:1.2;vector-effect:non-scaling-stroke}
 .pv5-rules circle+circle{stroke:oklch(1 0 0 / .2)}
 .pv5-core{position:absolute;inset:26%;display:grid;place-content:center;justify-items:center;gap:10px;text-align:center}
-.pv5-fig{font-size:clamp(3.6rem,8vw,6.5rem);font-weight:700;line-height:.9;letter-spacing:-.04em}
+.pv5-fig{font-size:clamp(3.6rem,8vw,6.5rem);font-weight:700;line-height:.9;letter-spacing:-.02em;font-family:var(--f-head)}
 .pv5-stars{width:clamp(96px,10vw,132px);height:auto}
 .pv5-off path{fill:oklch(1 0 0 / .16)}.pv5-on path{fill:var(--sun)}
 .pv5-k{font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
 .pv5-seal.is-drag{cursor:grabbing}
 @media (hover:hover) and (pointer:fine){.pv5-seal{cursor:grab}}
-.pv5-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.pv5-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
 .pv5-list{list-style:none;margin:26px 0 0;padding:0}
 .pv5-list li{display:grid;gap:2px;padding:16px 0;border-top:1px solid oklch(1 0 0 / .16)}
 .pv5-list li:last-child{border-bottom:1px solid oklch(1 0 0 / .16)}

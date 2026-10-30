@@ -2,8 +2,8 @@
    insurer decides the claim (⟦S1013⟧). Facts: the firm photographs damage for the adjuster, writes a line-item scope,
    can meet the adjuster, starts only approved work; Ohio 19 hail days a year, hail April to July, freeze-thaw November
    to March, ice dams January and February (the firm's own notes); Bunk built the firm restoring storm-damaged homes. */
-.st{--vbg:var(--blue);position:relative;overflow:clip;background:var(--blue);color:#fff;padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
-.st-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;max-width:18ch}
+.st{--vbg:var(--blue);position:relative;overflow:clip;background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
+.st-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;max-width:18ch;font-family:var(--f-head)}
 .st-sub{font-size:var(--t-lead);line-height:1.4;color:var(--on-blue-muted);max-width:44ch;margin-top:14px}
 .st .btn{flex:none}
 
@@ -28,7 +28,7 @@
 .st2-head,.st2-year,.st2-src,.st2-act{max-width:1180px;margin-inline:auto}
 .st2-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:end}
 .st2-fig{display:flex;align-items:baseline;gap:14px;max-width:22ch;font-size:var(--t-lead);line-height:1.3;color:var(--on-blue-muted)}
-.st2-big{font-size:clamp(4rem,2rem + 6vw,7rem);font-weight:800;line-height:.85;letter-spacing:-.04em;color:var(--sun)}
+.st2-big{font-size:clamp(4rem,2rem + 6vw,7rem);font-weight:800;line-height:.85;letter-spacing:-.02em;color:var(--sun);font-family:var(--f-head)}
 .st2-year{margin-top:clamp(32px,4vw,56px);overflow-x:auto}
 .st2-t{width:100%;min-width:640px;border-collapse:separate;border-spacing:4px 6px;table-layout:fixed}
 .st2-t thead th{padding:0 0 6px;font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted);text-align:center}
@@ -48,11 +48,11 @@
 
 /* ---------- v3 the honest line */
 .st3{display:grid;gap:clamp(20px,3vw,36px);max-width:1180px;margin-inline:auto;box-sizing:content-box}
-.st3-false{position:relative;justify-self:start;margin:0;font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--on-blue-muted)}
+.st3-false{position:relative;justify-self:start;margin:0;font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.01em;color:var(--on-blue-muted);font-family:var(--f-head)}
 .st3-false s{text-decoration:none}
 .st3-strike{position:absolute;left:-2%;top:6%;width:104%;height:80%;overflow:visible;pointer-events:none}
 .st3-strike path{fill:none;stroke:var(--sun);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.st3-true{font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.02em;max-width:22ch}
+.st3-true{font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:22ch;font-family:var(--f-head)}
 .st3-do{font-size:var(--t-lead);line-height:1.45;max-width:48ch;color:#fff}
 .st3-true em{font-style:normal;color:var(--sun)}
 .st3-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
@@ -63,7 +63,7 @@
 .st4-wall{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);align-items:start;margin-top:clamp(32px,4vw,56px)}
 .st4-ex{margin:0;display:grid;gap:12px}
 .st4-ex--a{rotate:-1deg}.st4-ex--b{rotate:1deg;margin-top:clamp(20px,5vw,72px)}
-.st4-mat{padding:12px;border-radius:6px;background:#fff;box-shadow:0 24px 48px -24px oklch(0.1 0.05 262 / .7);transition:translate .2s var(--ease-x)}
+.st4-mat{padding:12px;border-radius:6px;background:#fff;box-shadow:0 24px 48px -24px rgb(16 24 40 / 0.39);transition:translate .2s var(--ease-x)}
 .st4-mat img{display:block;width:100%;height:auto;border-radius:2px}
 .st4-ex figcaption{font-size:var(--t-body);line-height:1.45;color:var(--on-blue-muted)}
 .st4-ex figcaption b{color:#fff}

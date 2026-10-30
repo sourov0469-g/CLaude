@@ -4,7 +4,7 @@
 // cursor-effect layers, and the bare press class, do not count as a control working.
 import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
 const FILE = 'file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html';
-const SECS = ['hero', 'proof', 'work', 'family', 'how', 'area', 'call'];
+const SECS = ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'];
 const b = await chromium.launch(); const out = []; let fails = 0; const errs = [];
 const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage();
 p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
