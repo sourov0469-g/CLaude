@@ -291,3 +291,9 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 6 | The pegboard: six services drawn as tools on a shop wall (shingle bundle, hammer, hail gauge, clipboard, siding boards, gutter run); hover or focus lifts a tool off its peg; every line visible | ⟦S0095⟧ the trade's own artefacts; ⟦S0139⟧ flat | `qa/r4d-svc-new-1440.jpg`; errors 0 |
 | 7 | The Ohio year: a 12-month dial; Hail season / Freeze and thaw / Ice dams / Any month light their arc and fill the panel with the job each brings, all from the firm's own seasonal notes (19 hail days, April to July; freeze-thaw cracks aging shingles; ice dams from poor attic ventilation; the 20-year mark) | ⟦S0614⟧ calendar form; ⟦S1499⟧ | `dialtest`: 4/4 choices light their arc and fill the panel; errors 0 |
 | 8 | Three panels: Roofs / Storms / The rest of the house as full-height panels; the chosen one grows (flex .45s), the others narrow to their name | ⟦S1499⟧ chunking; real photography | errors 0 |
+### Work, new V6-V8 (photos are the firm's own; ba2 is shown only as the same house, before and after)
+| Slot | Concept | References | Verification |
+|---|---|---|---|
+| 6 | The pile: six prints scattered on the table; the top one straightens; clicking it, or Next, sends it under the pile; the count is announced | ⟦S0095⟧ artefact; Checklist 11 | `worktest`: 7 Next + 1 click cycle correctly; errors 0 |
+| 7 | The job clipboard: one job per page clipped to a board, with a job card (Job / In the photo / Photo); Previous / Next flip the page | ⟦S0095⟧ the jobsite clipboard; ⟦S1448⟧ | `worktest`: one page visible, forward and back; errors 0 |
+| 8 | Six roof shapes: each photo cut to a roof profile (gable, hip, shed, saltbox, flat) in an asymmetric 12-column wall | brand roof motif; ⟦S0995⟧ grid | `qa/r4d-work-new-1440.jpg`; errors 0 |

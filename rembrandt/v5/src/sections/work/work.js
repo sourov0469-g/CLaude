@@ -223,4 +223,36 @@ function index(root, c) {
   return () => { list.removeEventListener('pointermove', move); list.removeEventListener('pointerleave', leave); removeEventListener('scroll', onScroll); };
 }
 
-export default { 1: tiles, 2: push, 3: blinds, 4: honest, 5: index };
+// R4 v6 (new) The pile: six prints scattered; the top one straightens; a click on it, or Next, sends it to the bottom
+// (it slides out and settles back under the pile, .35s). The count is announced.
+function pile(root, c) {
+  const box = root.querySelector('.wv6-pile'), count = root.querySelector('.wv6-count'), next = root.querySelector('.wv6-next');
+  let order = [...box.children], n = 0;
+  const mark = () => { order.forEach((el, i) => { el.style.zIndex = String(order.length - i); el.classList.toggle('is-top', i === 0); }); count.textContent = `${(n % order.length) + 1} of ${order.length}`; };
+  const go = () => {
+    const top = order.shift(); order.push(top); n++;
+    if (c.motion) gsap.fromTo(top, { x: 0 }, { x: 260, duration: 0.18, ease: 'power2.in', onComplete: () => { mark(); gsap.to(top, { x: 0, duration: 0.2, ease: 'power2.out' }); } });
+    else mark();
+  };
+  order.reverse(); order = [...box.children]; mark();
+  const on = e => { if (e.target.closest('.wv6-card.is-top') || e.target.closest('.wv6-next')) go(); };
+  root.addEventListener('click', on);
+  if (c.motion) beats(root, [root.querySelector('.wv6-copy')]);
+  return () => root.removeEventListener('click', on);
+}
+// R4 v7 (new) The clipboard: Previous / Next turn the page (a .3s flip down from the clip); the page number is announced
+function clipboard(root, c) {
+  const pages = [...root.querySelectorAll('.wv7-page')], n = root.querySelector('.wv7-n'); let i = 0;
+  const show = d => {
+    const j = (i + d + pages.length) % pages.length, from = pages[i], to = pages[j]; i = j;
+    from.hidden = true; to.hidden = false; n.textContent = `Page ${i + 1} of ${pages.length}`;
+    if (c.motion) gsap.fromTo(to, { rotateX: d > 0 ? -70 : 70, autoAlpha: 0 }, { rotateX: 0, autoAlpha: 1, duration: 0.3, ease: 'power2.out' });
+  };
+  const on = e => { const b = e.target.closest('.wv7-b'); if (b) show(+b.dataset.d); };
+  root.addEventListener('click', on);
+  if (c.motion) beats(root, [root.querySelector('.wv7-copy'), root.querySelector('.wv7-board')]);
+  return () => root.removeEventListener('click', on);
+}
+// R4 v8 (new) House-shaped mosaic: tiles rise once, 60ms apart
+function shapes(root, c) { if (!c.motion) return; beats(root, [root.querySelector('.wv8-head')]); beats(root, [root.querySelectorAll('.wv8-t')], { stagger: 0.06 }); }
+export default { 1: tiles, 2: push, 3: blinds, 4: honest, 5: index , 6: pile, 7: clipboard, 8: shapes };
