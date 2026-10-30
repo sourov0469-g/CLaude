@@ -7539,3 +7539,12 @@ Rebuilt versions:
 - Process v3 **⟦S1443⟧ gesture patterns + the firm's week-ranged stages** — RESULT: **KEPT** — 12px activation, axis lock, 30% / .55 px/ms threshold, rubber-band return, buttons and keys as alternatives; tap deals the next card.
 - Towns v1 **[BANK] Q576 For Living hover → tap map** — RESULT: **ADAPTED** — the "areas" are 104 survey marks answering with a survey flag on hover (28px), tap (40px) or arrow keys; counties zoom the map; the on-screen list removed (kept for screen readers and in Towns v3).
 - Systems: the floating Settings pill covered content → docked in the header. Lesson: anything fixed over the page must be tested against every section's corners, not only the hero.
+
+### Elbaz Construction homepage — addendum full read + hygiene pass (30 Oct 2026)
+
+After the A-to-Z read of this map and both atlas parts (record: PROGRESS.md "Addendum"), the read's doctrines were applied as a checked fix list rather than new picks:
+- **[BANK] Anatomy §7b F17 / F18 + bench-log weight contrast (Elbaz 1.14 MB vs a 50 KB bespoke build)** — PICKED-FOR: weight and motion ceiling — RESULT: **APPLIED** — media and code weight reported separately; no new library added.
+- **[BANK] builder brief §8 anti-patterns + §9 QA** — PICKED-FOR: the gate — RESULT: **APPLIED** — new `hygiene.js` (overflow at 320/375/768/1024/1440, one exposed h1, duplicate ids, no-JS visibility, input size, target size, forced colours, daylight). Lesson: 320 px exposed four overflows that 375 px never showed (header row, contact list, a physics block tunnelling a wall, a signpost at the plan edge).
+- **[BANK] lane2 schema-vs-marketing + West Shore review-surface record** — PICKED-FOR: reviews — RESULT: **KEPT** — JSON-LD 4.8/343 equals the visible figure; one surface, one number.
+- **[BANK] high-end chunk patterns (publish real numbers or don't talk price; CTA = consultation)** — RESULT: **CONFIRMED** — no prices on the page beyond the lenders' published terms; every CTA reads "Book a consultation".
+- Lane4 siding scan rows: score-only, no mechanism to pick; read for the honesty doctrine only.
