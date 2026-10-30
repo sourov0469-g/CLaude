@@ -20,43 +20,42 @@
   /* nav: a blueprint roll unrolls a sheet under the label */
   R.blueprint = {
     art: function (w, h) {
-      var y = P + h + 5;
-      return '<g class="s" opacity="0"><rect x="' + P + '" y="' + y + '" width="' + w + '" height="11" fill="' + BLUE + '"/>' +
-        '<path d="M' + P + ' ' + (y + 3.5) + 'H' + (P + w) + 'M' + P + ' ' + (y + 7.5) + 'H' + (P + w) + '" stroke="#cfe3f2" stroke-width=".6" stroke-dasharray="3 3"/>' +
-        '<path d="M' + (P + 8) + ' ' + y + 'v11M' + (P + w * .5) + ' ' + y + 'v11" stroke="#cfe3f2" stroke-width=".6"/></g>' +
-        '<g class="r" opacity="0"><circle cx="0" cy="0" r="7.5" fill="' + BLUE + '" stroke="' + INK + '" stroke-width="1.4"/><circle r="3" fill="#cfe3f2"/></g>';
+      var y = P + h - 7;
+      return '<g class="s" opacity="0"><rect x="' + P + '" y="' + y + '" width="' + w + '" height="7" fill="' + DEEP + '"/>' +
+        '<path d="M' + P + ' ' + (y + 3.5) + 'H' + (P + w) + '" stroke="#e8e4dc" stroke-width=".7" stroke-dasharray="3 3"/></g>' +
+        '<g class="r" opacity="0"><circle cx="0" cy="0" r="5" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/><circle r="2" fill="#e8e4dc"/></g>';
     },
     hover: function (svg, w, h) {
       var s = one(svg, '.s'), r = one(svg, '.r');
-      gsap.set(r, { x: P, y: P + h + 10.5 });
+      gsap.set(r, { x: P, y: P + h - 3.5 });
       return gsap.timeline({ paused: true })
         .set([s, r], { opacity: 1 })
-        .fromTo(s, { scaleX: 0 }, { scaleX: 1, transformOrigin: '0 0', duration: .5, ease: 'expo.out' }, 0)
-        .fromTo(r, { x: P }, { x: P + w, duration: .5, ease: 'expo.out' }, 0)
-        .fromTo(r, { rotation: 0 }, { rotation: 540, transformOrigin: '50% 50%', duration: .5, ease: 'expo.out' }, 0);
+        .fromTo(s, { scaleX: 0 }, { scaleX: 1, transformOrigin: '0 0', duration: .28, ease: 'expo.out' }, 0)
+        .fromTo(r, { x: P }, { x: P + w, duration: .28, ease: 'expo.out' }, 0)
+        .fromTo(r, { rotation: 0 }, { rotation: 540, transformOrigin: '50% 50%', duration: .28, ease: 'expo.out' }, 0);
     },
     click: function (svg) {
-      return gsap.timeline().to(one(svg, '.r'), { y: '-=7', duration: .12, ease: 'power2.out', yoyo: true, repeat: 1 });
+      return gsap.timeline().to(one(svg, '.r'), { y: '-=5', duration: .12, ease: 'power2.out', yoyo: true, repeat: 1 });
     }
   };
 
   /* hero v1: a carpenter's pencil draws a box round the button; click stamps a tick */
   R.pencil = {
     art: function (w, h) {
-      var d = 'M' + (P - 6) + ' ' + (P - 6) + 'H' + (P + w + 6) + 'V' + (P + h + 6) + 'H' + (P - 6) + 'Z';
+      var d = 'M' + (P + 3) + ' ' + (P + 3) + 'H' + (P + w - 3) + 'V' + (P + h - 3) + 'H' + (P + 3) + 'Z';
       return '<path class="box" d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>' +
         '<g class="pc" opacity="0"><path d="M0 0 L-4 -9 L4 -9 Z" fill="#ecdcc4" stroke="' + INK + '" stroke-width="1"/><path d="M-1.3 -3 L0 0 L1.3 -3Z" fill="' + INK + '"/>' +
         '<rect x="-4" y="-34" width="8" height="25" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.1"/><rect x="-4" y="-38" width="8" height="4" fill="#d06a5a" stroke="' + INK + '" stroke-width="1.1"/></g>' +
-        '<path class="tk" d="M' + (P + w - 2) + ' ' + (P - 2) + 'l5 5l11 -12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>';
+        '<path class="tk" d="M' + (P + w - 22) + ' ' + (P + h / 2) + 'l5 5l11 -12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>';
     },
     hover: function (svg) {
       var box = one(svg, '.box'), pc = one(svg, '.pc');
       gsap.set(one(svg, '.tk'), { drawSVG: '0%' });
       return gsap.timeline({ paused: true })
-        .fromTo(box, { drawSVG: '0%' }, { drawSVG: '100%', duration: .55, ease: 'power2.inOut' }, 0)
+        .fromTo(box, { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' }, 0)
         .set(pc, { opacity: 1 }, 0)
-        .to(pc, { motionPath: { path: box, align: box, alignOrigin: [0, 0], autoRotate: 30 }, duration: .55, ease: 'power2.inOut' }, 0)
-        .to(pc, { opacity: 0, duration: .15 }, .5);
+        .to(pc, { motionPath: { path: box, align: box, alignOrigin: [0, 0], autoRotate: 30 }, duration: .3, ease: 'power2.out' }, 0)
+        .to(pc, { opacity: 0, duration: .1 }, .26);
     },
     click: function (svg) {
       return gsap.timeline().fromTo(one(svg, '.tk'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' })
@@ -67,39 +66,39 @@
   /* hero v3: a hex bolt screws into the top-right corner; click pulses its washer */
   R.bolt = {
     art: function (w, h) {
-      var cx = P + w - 2, cy = P + 2, hex = '';
+      var cx = P + w - 9, cy = P + 9, hex = '';
       for (var i = 0; i < 6; i++) { var a = Math.PI / 3 * i + Math.PI / 6; hex += (i ? 'L' : 'M') + f(cx + Math.cos(a) * 9) + ' ' + f(cy + Math.sin(a) * 9); }
       return '<circle class="ws" cx="' + cx + '" cy="' + cy + '" r="12" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0"/>' +
         '<g class="bt" opacity="0"><path d="' + hex + 'Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.4"/><circle cx="' + cx + '" cy="' + cy + '" r="4" fill="none" stroke="' + INK + '" stroke-width="1.1"/></g>';
     },
     hover: function (svg, w) {
-      var o = (P + w - 2) + ' ' + (P + 2);
+      var o = (P + w - 9) + ' ' + (P + 9);
       return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.bt'), { opacity: 0, scale: 1.7, rotation: -300 }, { opacity: 1, scale: 1, rotation: 0, svgOrigin: o, duration: .5, ease: 'power3.out' }, 0)
-        .fromTo(one(svg, '.ws'), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, svgOrigin: o, duration: .3, ease: 'power3.out' }, .3);
+        .fromTo(one(svg, '.bt'), { opacity: 0, scale: 1.7, rotation: -300 }, { opacity: 1, scale: .7, rotation: 0, svgOrigin: o, duration: .28, ease: 'power3.out' }, 0)
+        .fromTo(one(svg, '.ws'), { opacity: 0, scale: 1.4 }, { opacity: 1, scale: .7, svgOrigin: o, duration: .18, ease: 'power3.out' }, .18);
     },
     click: function (svg, w) {
-      return gsap.timeline().fromTo(one(svg, '.ws'), { scale: 1, opacity: 1 }, { scale: 2.6, opacity: 0, svgOrigin: (P + w - 2) + ' ' + (P + 2), duration: .5, ease: 'expo.out' })
-        .set(one(svg, '.ws'), { scale: 1, opacity: 1 });
+      return gsap.timeline().fromTo(one(svg, '.ws'), { scale: 1, opacity: 1 }, { scale: 2, opacity: 0, svgOrigin: (P + w - 9) + ' ' + (P + 9), duration: .3, ease: 'expo.out' })
+        .set(one(svg, '.ws'), { scale: .7, opacity: 1 });
     }
   };
 
   /* services v1: a screwdriver turns a screw at the left edge */
   R.screw = {
     art: function (w, h) {
-      var cx = P - 12, cy = P + h / 2;
+      var cx = P + 11, cy = P + h / 2;
       return '<g class="sw"><circle cx="' + cx + '" cy="' + cy + '" r="7" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.3"/><path class="sl" d="M' + (cx - 4.5) + ' ' + cy + 'h9M' + cx + ' ' + (cy - 4.5) + 'v9" stroke="' + INK + '" stroke-width="1.6"/></g>' +
         '<g class="dv" opacity="0"><path d="M' + (cx - 9) + ' ' + cy + 'h-14" stroke="' + STEEL + '" stroke-width="2.6"/><rect x="' + (cx - 44) + '" y="' + (cy - 5) + '" width="21" height="10" rx="3" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/></g>' +
         '<circle class="rg" cx="' + cx + '" cy="' + cy + '" r="9" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0"/>';
     },
     hover: function (svg, w, h) {
-      var o = (P - 12) + ' ' + (P + h / 2);
+      var o = (P + 11) + ' ' + (P + h / 2);
       return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.dv'), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: .22, ease: 'power3.out' }, 0)
-        .fromTo(one(svg, '.sl'), { rotation: 0 }, { rotation: 270, svgOrigin: o, duration: .5, ease: 'power2.inOut' }, .12);
+        .fromTo(one(svg, '.dv'), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: .14, ease: 'power3.out' }, 0)
+        .fromTo(one(svg, '.sl'), { rotation: 0 }, { rotation: 270, svgOrigin: o, duration: .2, ease: 'power2.out' }, .1);
     },
     click: function (svg, w, h) {
-      var o = (P - 12) + ' ' + (P + h / 2);
+      var o = (P + 11) + ' ' + (P + h / 2);
       return gsap.timeline().to(one(svg, '.sw'), { scale: .8, svgOrigin: o, duration: .12, yoyo: true, repeat: 1 })
         .fromTo(one(svg, '.rg'), { opacity: 1, scale: 1 }, { opacity: 0, scale: 2, svgOrigin: o, duration: .45, ease: 'expo.out' }, 0);
     }
@@ -109,13 +108,13 @@
   R.hook = {
     art: function (w) {
       var x = P + w / 2;
-      return '<g class="hk" opacity="0"><circle cx="' + x + '" cy="' + (P - 26) + '" r="3.2" fill="' + INK + '"/><path d="M' + x + ' ' + (P - 26) + 'V' + (P - 6) + 'q0 8 -7 8q-6 0 -6 -6" fill="none" stroke="' + STEEL + '" stroke-width="2.8" stroke-linecap="round"/></g>';
+      return '<g class="hk" opacity="0"><circle cx="' + x + '" cy="' + (P - 12) + '" r="3" fill="' + INK + '"/><path d="M' + x + ' ' + (P - 12) + 'V' + (P + 2) + 'q0 7 -6 7q-5 0 -5 -5" fill="none" stroke="' + STEEL + '" stroke-width="2.8" stroke-linecap="round"/></g>';
     },
     hover: function (svg, w) {
-      var hk = one(svg, '.hk'), o = (P + w / 2) + ' ' + (P - 26);
+      var hk = one(svg, '.hk'), o = (P + w / 2) + ' ' + (P - 12);
       return gsap.timeline({ paused: true })
-        .fromTo(hk, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: .3, ease: 'back.out(2)' }, 0)
-        .fromTo(hk, { rotation: 14 }, { rotation: 0, svgOrigin: o, duration: .7, ease: 'elastic.out(1,.35)' }, .1);
+        .fromTo(hk, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: .2, ease: 'power3.out' }, 0)
+        .fromTo(hk, { rotation: 12 }, { rotation: 0, svgOrigin: o, duration: .3, ease: 'back.out(2)' }, .1);
     },
     click: function (svg) {
       return gsap.timeline().to(one(svg, '.hk'), { y: -7, duration: .12, ease: 'power2.out', yoyo: true, repeat: 1 });
@@ -125,13 +124,13 @@
   /* before/after: a fan of paint swatches opens at the right edge; click lets a drip fall */
   R.swatch = {
     art: function (w, h) {
-      var x = P + w + 4, y = P + h - 2, cols = ['#ecdcc4', '#77b3b8', '#1d4a4e', '#c9a46a'], s = '';
+      var x = P + w - 16, y = P + h - 4, cols = ['#ecdcc4', '#77b3b8', '#1d4a4e', '#c9a46a'], s = '';
       for (var i = 0; i < 4; i++) s += '<rect class="sw' + i + '" x="' + (x - 3) + '" y="' + (y - 30) + '" width="9" height="30" rx="1" fill="' + cols[i] + '" stroke="' + INK + '" stroke-width="1"/>';
       return '<g class="fan" opacity="0">' + s + '<circle cx="' + (x + 1.5) + '" cy="' + (y - 4) + '" r="1.6" fill="' + INK + '"/></g><circle class="dp" cx="' + (x + 1.5) + '" cy="' + (y + 2) + '" r="2.6" fill="#77b3b8" opacity="0"/>';
     },
     hover: function (svg, w, h) {
-      var o = (P + w + 5.5) + ' ' + (P + h - 6), tl = gsap.timeline({ paused: true }).set(one(svg, '.fan'), { opacity: 1 }, 0);
-      [-48, -26, -6, 14].forEach(function (a, i) { tl.fromTo(one(svg, '.sw' + i), { rotation: 0 }, { rotation: a, svgOrigin: o, duration: .45, ease: 'back.out(1.8)' }, i * .03); });
+      var o = (P + w - 14.5) + ' ' + (P + h - 8), tl = gsap.timeline({ paused: true }).set(one(svg, '.fan'), { opacity: 1 }, 0);
+      [-48, -26, -6, 14].forEach(function (a, i) { tl.fromTo(one(svg, '.sw' + i), { rotation: 0 }, { rotation: a, svgOrigin: o, duration: .26, ease: 'power3.out' }, i * .03); });
       return tl;
     },
     click: function (svg) {
@@ -142,19 +141,19 @@
   /* work: viewfinder corners snap onto the button; click fires the shutter */
   R.viewfinder = {
     art: function (w, h) {
-      var a = P - 7, b = P + w + 7, c = P - 7, d = P + h + 7, L = 9;
+      var a = P + 3, b = P + w - 3, c = P + 3, d = P + h - 3, L = 8;
       return '<g class="vf" fill="none" stroke="currentColor" stroke-width="2"><path class="c0" d="M' + a + ' ' + (c + L) + 'V' + c + 'H' + (a + L) + '"/><path class="c1" d="M' + (b - L) + ' ' + c + 'H' + b + 'V' + (c + L) + '"/>' +
         '<path class="c2" d="M' + b + ' ' + (d - L) + 'V' + d + 'H' + (b - L) + '"/><path class="c3" d="M' + (a + L) + ' ' + d + 'H' + a + 'V' + (d - L) + '"/></g>' +
-        '<circle class="rec" cx="' + (P + w + 2) + '" cy="' + (P - 12) + '" r="3" fill="' + RED + '" opacity="0"/>' +
+        '<circle class="rec" cx="' + (P + w - 10) + '" cy="' + (P + 10) + '" r="2.5" fill="' + RED + '" opacity="0"/>' +
         '<rect class="fl" x="' + P + '" y="' + P + '" width="' + w + '" height="' + h + '" fill="#fff" opacity="0"/>';
     },
     hover: function (svg) {
       return gsap.timeline({ paused: true })
-        .fromTo(one(svg, '.c0'), { x: -10, y: -10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .35, ease: 'expo.out' }, 0)
-        .fromTo(one(svg, '.c1'), { x: 10, y: -10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .35, ease: 'expo.out' }, .03)
-        .fromTo(one(svg, '.c2'), { x: 10, y: 10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .35, ease: 'expo.out' }, .06)
-        .fromTo(one(svg, '.c3'), { x: -10, y: 10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .35, ease: 'expo.out' }, .09)
-        .fromTo(one(svg, '.rec'), { opacity: 0 }, { opacity: 1, duration: .1, repeat: 3, yoyo: true }, .2);
+        .fromTo(one(svg, '.c0'), { x: -10, y: -10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .21, ease: 'expo.out' }, 0)
+        .fromTo(one(svg, '.c1'), { x: 10, y: -10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .21, ease: 'expo.out' }, .03)
+        .fromTo(one(svg, '.c2'), { x: 10, y: 10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .21, ease: 'expo.out' }, .06)
+        .fromTo(one(svg, '.c3'), { x: -10, y: 10, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .21, ease: 'expo.out' }, .09)
+        .fromTo(one(svg, '.rec'), { opacity: 0 }, { opacity: 1, duration: .1 }, .2);
     },
     click: function (svg) {
       return gsap.timeline().fromTo(one(svg, '.fl'), { opacity: .7 }, { opacity: 0, duration: .35, ease: 'power2.out' });
@@ -167,7 +166,7 @@
       function strip(cx, cy, a, cls) {
         return '<g class="' + cls + '" transform="translate(' + cx + ' ' + cy + ') rotate(' + a + ')"><path d="M-20 -7 L20 -7 L22 -4 L19 -1 L22 2 L20 7 L-20 7 L-22 4 L-19 1 L-22 -2 Z" fill="#e9dfc2" fill-opacity=".9" stroke="#b9ad8c" stroke-width=".8"/></g>';
       }
-      return strip(P + 6, P + 2, -32, 'ta') + strip(P + w - 6, P + h - 2, -32, 'tb');
+      return strip(P + 10, P + 4, -32, 'ta') + strip(P + w - 10, P + h - 4, -32, 'tb');
     },
     hover: function (svg) {
       return gsap.timeline({ paused: true })
@@ -183,17 +182,40 @@
   /* consult v3: a ring of keys jingles at the left edge */
   R.keys = {
     art: function (w, h) {
-      var cx = P - 14, cy = P + 6;
+      var cx = P + 12, cy = P + 6;
       function key(a, col) { return '<g class="ky" transform="rotate(' + a + ' ' + cx + ' ' + cy + ')"><circle cx="' + cx + '" cy="' + (cy + 12) + '" r="4.5" fill="' + col + '" stroke="' + INK + '" stroke-width="1.1"/><path d="M' + cx + ' ' + (cy + 16) + 'v14m0 -4h4m-4 4h3" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/></g>'; }
       return '<g class="kr" opacity="0"><circle cx="' + cx + '" cy="' + cy + '" r="6" fill="none" stroke="' + STEEL + '" stroke-width="2"/>' + key(-20, YEL) + key(10, STEEL) + key(34, '#c9a46a') + '</g>';
     },
     hover: function (svg) {
       var tl = gsap.timeline({ paused: true }).fromTo(one(svg, '.kr'), { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: .25, ease: 'power3.out' }, 0);
-      q(svg, '.ky').forEach(function (k, i) { tl.fromTo(k, { rotation: 0 }, { rotation: (i - 1) * 16, transformOrigin: '50% 0%', duration: .5, ease: 'elastic.out(1,.3)' }, .1 + i * .04); });
+      q(svg, '.ky').forEach(function (k, i) { tl.fromTo(k, { rotation: 0 }, { rotation: (i - 1) * 16, transformOrigin: '50% 0%', duration: .18, ease: 'power3.out' }, .08 + i * .02); });
       return tl;
     },
     click: function (svg) {
       return gsap.timeline().to(q(svg, '.ky'), { rotation: '+=14', transformOrigin: '50% 0%', duration: .07, yoyo: true, repeat: 5, stagger: .02 });
+    }
+  };
+
+  /* every tel: link: one job, one signature [AUDIT-01 D.5; S1314 §7 same-job consistency, S0220 Axiom 2] */
+  R.phone = {
+    art: function (w, h) {
+      var x = P + w + 2, y = P + h - 2;
+      return '<path class="ul" d="M' + P + ' ' + (P + h + 1) + 'H' + (P + w) + '" stroke="currentColor" stroke-width="1.6" fill="none"/>' +
+        '<g class="hs" opacity="0"><path d="M' + (x + 2) + ' ' + (y - 13) + 'q-4 7 0 14l4-1.4 1.4-4.6-2.7-1.3q-.6-2 0-4l2.7-1.3-1.4-4.6z" fill="currentColor" stroke="' + INK + '" stroke-width="1"/></g>' +
+        '<g class="ar" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M' + (x + 10) + ' ' + (y - 10) + 'q3 4 0 8"/><path d="M' + (x + 14) + ' ' + (y - 13) + 'q5 7 0 14"/></g>';
+    },
+    hover: function (svg) {
+      var arcs = q(svg, '.ar path');
+      return gsap.timeline({ paused: true })
+        .fromTo(one(svg, '.ul'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .16, ease: 'power2.out' }, 0)
+        .fromTo(one(svg, '.hs'), { opacity: 0, y: 3 }, { opacity: 1, y: -2, duration: .16, ease: 'power2.out' }, 0)
+        .fromTo(arcs, { drawSVG: '0%', opacity: 1 }, { drawSVG: '100%', duration: .16, ease: 'power2.out', stagger: .04 }, .02);
+    },
+    click: function (svg) {
+      var arcs = q(svg, '.ar path'), hs = one(svg, '.hs');
+      return gsap.timeline()
+        .fromTo(arcs, { opacity: 1 }, { opacity: .2, duration: .08, yoyo: true, repeat: 1, stagger: .04 }, 0)
+        .to(hs, { keyframes: [{ rotation: -10 }, { rotation: 8 }, { rotation: 0 }], duration: .3, transformOrigin: '50% 50%' }, 0);
     }
   };
 
@@ -228,21 +250,23 @@
       var r = el.getBoundingClientRect();
       var nw = Math.round(r.width), nh = Math.round(r.height);
       if (!nw || !nh || (nw === w && nh === h)) return;
+      // a beat in flight is never cut by a redraw (a chip whose border grows on select, a toggle that relabels):
+      // the redraw waits for the beat, then runs [AUDIT-01 D.2.2]
+      if (clicking) { pending = true; return; }
       w = nw; h = nh;
       if (hoverTl) hoverTl.kill();
-      // a redraw during a click beat (a toggle whose label changes) releases the beat, or the drawing would stay on
-      if (clickTl) { clickTl.kill(); clickTl = null; clicking = false; }
       svg.setAttribute('width', w + P * 2); svg.setAttribute('height', h + P * 2);
       svg.setAttribute('viewBox', '0 0 ' + (w + P * 2) + ' ' + (h + P * 2));
-      svg.innerHTML = def.art(w, h);
+      svg.innerHTML = def.art(w, h, el);
       hoverTl = def.build ? def.build(svg, w, h) : def.hover(svg, w, h);
       hoverTl.eventCallback('onReverseComplete', rest);
       if (inside) hoverTl.progress(1); else rest();   // a redraw while resting never leaves the drawing switched on
     }
     // the drawing is only on stage while it acts: nothing sits beside a resting button
-    var clicking = false;
+    var clicking = false, pending = false;
     function rest() { if (!inside && !clicking) el.classList.remove('rx-on'); }
-    function enter() { inside = true; draw(); el.classList.add('rx-on'); if (hoverTl) hoverTl.timeScale(1).play(); }
+    // draw BEFORE marking inside: a first draw while inside used to jump the timeline to its end [AUDIT-01 D.11]
+    function enter() { draw(); inside = true; el.classList.add('rx-on'); if (hoverTl) hoverTl.timeScale(1).play(); }
     function leave() { inside = false; if (hoverTl) hoverTl.timeScale(2.5).reverse(); }   // in .5 / out .2 [BANK 229]
     function press(e) {
       if (!w) draw();
@@ -250,12 +274,16 @@
       el.classList.add('rx-on');
       clicking = true;
       clickTl = def.click(svg, w, h, el);
-      clickTl.eventCallback('onComplete', function () { clicking = false; if (!inside && (!hoverTl || hoverTl.progress() === 0)) rest(); });
+      clickTl.eventCallback('onComplete', function () {
+        clicking = false;
+        if (pending) { pending = false; draw(); }
+        if (!inside && (!hoverTl || hoverTl.progress() === 0)) rest();
+      });
       if (e && e.pointerType === 'touch') {
         // phones: the tap is the hover, then it settles back
         if (hoverTl) { hoverTl.timeScale(1.4).play(0); }
         clearTimeout(el._rxT);
-        el._rxT = setTimeout(function () { if (hoverTl && !inside) hoverTl.timeScale(2.5).reverse(); }, 900);
+        el._rxT = setTimeout(function () { if (hoverTl && !inside) hoverTl.timeScale(2.5).reverse(); }, 600);
       }
     }
     var offs = [];
@@ -285,6 +313,8 @@
     return dispose;
   }
 
+  // controls created after a version was bound (a success note's call link) bind themselves [AUDIT-01 D.2.4]
+  EZ.bindOne = function (el, kit) { if (EZ.motionOn() && el.dataset.rx) bind(el, kit); };
   EZ.rxValid = function (n) { return !!n && (n.indexOf('native:') === 0 || (n.charAt(0) === '~' ? !!EZ.rigDef(n, P) : !!R[n])); };
   // called by core on every version activation (kit-scoped) and once for chrome
   EZ.bindReactions = function (scope, kit) {

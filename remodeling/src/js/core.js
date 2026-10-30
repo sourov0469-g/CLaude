@@ -108,13 +108,23 @@
 
   /* ---------- section + version manager [S1303 §9, S0006 §12, S1441] ---------- */
   var LS_KEY = 'ez-versions';
+  // slots: visible versions are "1".."5", hidden backups "b1".."b3" (AUDIT-01 A.2: today's visible set becomes the backups)
+  function slotsOf(s) {
+    s.vis = []; s.bk = [];
+    s.el.querySelectorAll(':scope > .ver, :scope > .sec__body > .ver').forEach(function (el) {
+      var v = el.dataset.v;
+      (v.charAt(0) === 'b' ? s.bk : s.vis).push(v);
+    });
+  }
+  function valid(s, v) { v = String(v); return s.vis.indexOf(v) > -1 || s.bk.indexOf(v) > -1 ? v : null; }
   function readStored() {
-    var o = {};
-    try { o = JSON.parse(localStorage.getItem(LS_KEY) || '{}') || {}; } catch (e) {}
+    var o = {}, st = {};
+    try { st = JSON.parse(localStorage.getItem(LS_KEY) || '{}') || {}; } catch (e) {}
     var q = new URLSearchParams(location.search);
     Object.keys(EZ.sections).forEach(function (id) {
-      var v = parseInt(q.get(id), 10);
-      if (v >= 1 && v <= 3) o[id] = v;
+      var s = EZ.sections[id];
+      var v = valid(s, q.get(id)) || (st[id] != null && s.vis.indexOf(String(st[id])) > -1 ? String(st[id]) : null);
+      if (v) o[id] = v;
     });
     return o;
   }
@@ -123,7 +133,7 @@
     EZ.order.forEach(function (id) {
       var v = EZ.sections[id].current;
       o[id] = v;
-      if (v !== 1) q.set(id, v); else q.delete(id);
+      if (v !== EZ.sections[id].vis[0]) q.set(id, v); else q.delete(id);
     });
     try { localStorage.setItem(LS_KEY, JSON.stringify(o)); } catch (e) {}
     try {
@@ -189,7 +199,7 @@
     opts = opts || {};
     var s = EZ.sections[id];
     if (!s || !s.el) return;
-    v = EZ.clamp(v | 0, 1, 3);
+    v = valid(s, v) || s.vis[0];
     if (s.kit) s.kit.dispose();
     if (typeof s.cleanup === 'function') { try { s.cleanup(); } catch (e) { console.error(e); } }
     if (s.ctx) { try { s.ctx.revert(); } catch (e) { console.error('[' + id + '] revert', e); } }
@@ -198,19 +208,13 @@
     var vers = s.el.querySelectorAll(':scope > .ver, :scope > .sec__body > .ver');
     var verEl = null;
     vers.forEach(function (el) {
-      var on = +el.dataset.v === v;
+      var on = el.dataset.v === v;
       el.hidden = !on;
       if (on) verEl = el;
     });
     s.current = v;
     s.el.dataset.active = v;
-    if (s.switchEl) {
-      s.switchEl.querySelectorAll('[role="radio"]').forEach(function (b) {
-        var on = +b.dataset.v === v;
-        b.setAttribute('aria-checked', on ? 'true' : 'false');
-        b.tabIndex = on ? 0 : -1;
-      });
-    }
+    radios(s, v);
     if (!verEl) return;
     EZ.applyImages(verEl);
     var def = s.defs && s.defs[v];
@@ -230,6 +234,36 @@
     }
   }
   EZ.activate = activate;
+  function radios(s, v) {
+    if (!s.switchEl) return;
+    s.switchEl.querySelectorAll('[role="radio"]').forEach(function (b) {
+      var on = b.dataset.v === v;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+    // a backup in use stays visible in its switch even when the backup row is folded away
+    s.switchEl.classList.toggle('is-bk', v.charAt(0) === 'b');
+  }
+  // user-driven swap [AUDIT-01 D.6; S0405, S0089, S0083]: outgoing fades + rises 4px in 120ms ease-in, incoming
+  // arrives from 6px below in 180ms ease-out (<= 300ms total); a second click finishes the running swap first, so
+  // input is never blocked; reduced motion and Motion: Off keep the instant swap
+  function swap(id, v) {
+    var s = EZ.sections[id];
+    v = valid(s, v); if (!v) return;
+    if (s.swapTl) s.swapTl.progress(1);
+    if (v === s.current) return;
+    var old = s.el.querySelector('.ver[data-v="' + s.current + '"]');
+    if (!EZ.motionOn() || !old || old.hidden) { activate(id, v); return; }
+    radios(s, v);
+    s.swapTl = gsap.to(old, { opacity: 0, y: -4, duration: .12, ease: 'power1.in', onComplete: function () {
+      s.swapTl = null;
+      gsap.set(old, { clearProps: 'opacity,transform' });
+      activate(id, v);
+      var nw = s.el.querySelector('.ver[data-v="' + v + '"]');
+      if (nw) gsap.fromTo(nw, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .18, ease: 'power2.out', clearProps: 'opacity,transform' });
+    } });
+  }
+  EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
     financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation' };
@@ -248,33 +282,46 @@
     var nm = doc.createElement('span');
     nm.className = 'vswitch__name'; nm.setAttribute('aria-hidden', 'true'); nm.textContent = NAMES[s.id] || s.id;
     inner.appendChild(nm);
-    for (var i = 1; i <= 3; i++) {
-      if (i > 1) {
+    function digit(v, label, text, cls) {
+      var b = doc.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'radio');
+      b.setAttribute('aria-label', label);
+      b.dataset.v = v;
+      b.dataset.rx = '~t:' + text + '/' + (SW_RX[s.id] || 'pop') + '/hop/b';
+      b.dataset.buddySig = 'flip';
+      if (cls) b.className = cls;
+      b.textContent = text;
+      return b;
+    }
+    s.vis.forEach(function (v, i) {
+      if (i) {
         var sep = doc.createElement('span');
         sep.className = 'vswitch__sep'; sep.setAttribute('aria-hidden', 'true'); sep.textContent = '·';
         inner.appendChild(sep);
       }
-      var b = doc.createElement('button');
-      b.type = 'button';
-      b.setAttribute('role', 'radio');
-      b.setAttribute('aria-label', 'Version ' + i);
-      b.dataset.v = i;
-      b.dataset.cursor = 'link';
-      b.dataset.rx = '~t:' + i + '/' + (SW_RX[s.id] || 'pop') + '/hop/b';
-      b.textContent = i;
-      inner.appendChild(b);
+      inner.appendChild(digit(v, 'Version ' + v, v));
+    });
+    // hidden backup slots: reachable (B key, ?backups=1, or a backup in the URL), never the default view
+    if (s.bk.length) {
+      var bk = doc.createElement('span');
+      bk.className = 'vswitch__bks';
+      s.bk.forEach(function (v) { bk.appendChild(digit(v, 'Backup ' + v.slice(1), 'B' + v.slice(1), 'vswitch__bk')); });
+      inner.appendChild(bk);
     }
     inner.addEventListener('click', function (e) {
       var b = e.target.closest('[role="radio"]');
-      if (b && +b.dataset.v !== s.current) activate(s.id, +b.dataset.v);
+      if (b && b.dataset.v !== s.current) swap(s.id, b.dataset.v);
     });
     inner.addEventListener('keydown', function (e) {
       var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
       if (!d) return;
       e.preventDefault(); e.stopPropagation();
-      var nv = ((s.current - 1 + d + 3) % 3) + 1;
-      activate(s.id, nv);
-      inner.querySelector('[data-v="' + nv + '"]').focus();
+      var list = root.classList.contains('show-backups') || s.current.charAt(0) === 'b' ? s.vis.concat(s.bk) : s.vis;
+      var i = list.indexOf(s.current), nv = list[(i + d + list.length) % list.length];
+      swap(s.id, nv);
+      var nb = inner.querySelector('[data-v="' + nv + '"]');
+      if (nb) nb.focus();
     });
     wrap.appendChild(inner);
     // docked in the nav's free centre: the switch of the section in view is the one shown, and it covers no content
@@ -302,10 +349,12 @@
       var id = sectionInView();
       if (!id) return;
       var s = EZ.sections[id];
-      if (e.key === '1' || e.key === '2' || e.key === '3') { activate(id, +e.key); }
+      if (/^[1-9]$/.test(e.key) && s.vis.indexOf(e.key) > -1) { swap(id, e.key); }
+      else if (e.key === 'b' || e.key === 'B') { root.classList.toggle('show-backups'); }
       else if (e.key === 'r' || e.key === 'R') { activate(id, s.current); }
       else if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && (!t || t === doc.body || t.closest('.vswitch'))) {
-        activate(id, ((s.current - 1 + (e.key === 'ArrowRight' ? 1 : -1) + 3) % 3) + 1);
+        var i = s.vis.indexOf(s.current), n = s.vis.length;
+        swap(id, s.vis[((i < 0 ? 0 : i) + (e.key === 'ArrowRight' ? 1 : -1) + n) % n]);
       }
     });
   }
@@ -356,14 +405,12 @@
     });
   }
 
-  /* ---------- cursor: the plain ring is retired; the companion lives in buddy.js (PLAN-V3 §2.1) ---------- */
-  function setupCursor() {}
+  /* ---------- the companion lives in buddy.js; the retired cursor layer is deleted (AUDIT-01 D.2.5) ---------- */
   function refreshCursor() {
     if (EZ.buddy) EZ.buddy.refresh();
     if (EZ.fields) EZ.fields.refresh();
   }
   EZ.cursorState = function () { if (EZ.buddy) EZ.buddy.retarget(); };
-  EZ.cursorPin = function () {};
 
   /* ---------- per-element reactions (buttons never move; the old magnets are gone) ---------- */
   function bindMagnets(scope, kit) {
@@ -481,6 +528,32 @@
     EZ.order.forEach(function (id) { activate(id, EZ.sections[id].current, { initial: true }); });
     ScrollTrigger.sort();
     ScrollTrigger.refresh();
+  }
+
+  /* ---------- press state, page-wide [AUDIT-01 D.7; S0083 physics-active-state, S0063 scale(0.97)] ----------
+     Web Animations on the individual 'scale' property, so it composes with any transform GSAP or CSS already owns.
+     Down 60ms ease-out to .97 (switch digits .94 in 100ms, D.6), release 160ms ease-out. Off under reduced motion. */
+  function setupPress() {
+    var SEL = '.btn, button, [role="tab"], [role="radio"], [role="button"], summary, .chip, [data-press]';
+    var held = null;
+    function release() {
+      if (!held) return;
+      var el = held; held = null;
+      if (el._pa) el._pa.cancel();
+      el.animate([{ scale: el._ps }, { scale: '1' }], { duration: 160, easing: 'ease-out' });
+    }
+    doc.addEventListener('pointerdown', function (e) {
+      if (!EZ.motionOn() || e.button > 0) return;
+      var el = e.target.closest && e.target.closest(SEL);
+      if (!el || el.disabled || el.closest('[data-nopress], [role="application"]') || el.getBoundingClientRect().width > 640) return;
+      release();
+      held = el;
+      var sw = !!el.closest('.vswitch');
+      el._ps = sw ? '.94' : '.97';
+      el._pa = el.animate([{ scale: '1' }, { scale: el._ps }], { duration: sw ? 100 : 60, easing: 'ease-out', fill: 'forwards' });
+    }, { passive: true });
+    ['pointerup', 'pointercancel', 'dragstart'].forEach(function (ev) { doc.addEventListener(ev, release, { passive: true }); });
+    window.addEventListener('blur', release);
   }
 
   /* ---------- viewer: Flip lightbox [S0184 Flip, pack pick #8] ---------- */
@@ -682,14 +755,17 @@
       var id = el.dataset.section;
       var s = EZ.sections[id] || (EZ.sections[id] = { id: id });
       s.el = el;
+      slotsOf(s);
       EZ.order.push(id);
     });
+    if (new URLSearchParams(location.search).get('backups') === '1') root.classList.add('show-backups');
     var stored = readStored();
     EZ.order.forEach(function (id) {
       var s = EZ.sections[id];
       buildSwitch(s);
-      activate(id, stored[id] || 1, { initial: true });
+      activate(id, stored[id] || s.vis[0], { initial: true });
     });
+    setupPress();
     EZ.applyImages(doc.querySelector('.foot'));
     // the floating switch shows the section that holds the viewport's middle line
     var swIO = new IntersectionObserver(function (ens) {
@@ -698,7 +774,6 @@
     EZ.order.forEach(function (id) { swIO.observe(EZ.sections[id].el); });
 
     startLenis();
-    setupCursor();
     if (EZ.systemsBoot) EZ.systemsBoot();
     setupNav();
     setupSettings();

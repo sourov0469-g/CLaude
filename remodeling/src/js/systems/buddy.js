@@ -163,8 +163,8 @@
 
   var B = EZ.buddy = { variant: 'hat', on: false };
   var el, svg, inner, art, toolG, brackets, rafId = 0, last = 0;
-  var pos = { x: -200, y: -200 }, lean = 0, look = { x: 0, y: 0 }, bub = { x: 0, v: 0 };
-  var state = 'none', stateEl = null, dock = null, idleT = 0, nextAct = 0, nextBlink = 0, shown = false, scanTw = null;
+  var pos = { x: -200, y: -200 }, vel = { x: 0, y: 0 }, lean = 0, look = { x: 0, y: 0 }, bub = { x: 0, v: 0 };
+  var state = 'none', stateEl = null, dock = null, idleT = 0, nextAct = 0, nextBlink = 0, shown = false, scanTw = null, breathTw = null, pressed = false, sigEl = null, sig = '';
   var parts = {};
 
   function read() { try { var v = localStorage.getItem(LS); return VARIANTS.indexOf(v) > -1 ? v : 'hat'; } catch (e) { return 'hat'; } }
@@ -212,7 +212,7 @@
     if (now || !shown) { toolG.innerHTML = t; return; }
     gsap.to(toolG, { opacity: 0, y: 4, duration: .12, ease: 'power2.in', onComplete: function () {
       toolG.innerHTML = t;
-      gsap.fromTo(toolG, { opacity: 0, y: -6, scale: .6, svgOrigin: '27 18' }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: 'back.out(2.2)', svgOrigin: '27 18' });
+      gsap.fromTo(toolG, { opacity: 0, y: -6, scale: .6, svgOrigin: '27 18' }, { opacity: 1, y: 0, scale: 1, duration: .23, ease: 'back.out(1.6)', svgOrigin: '27 18' });
     } });
   }
   B.led = function (on) { var l = toolG.querySelector('.bd-led'); if (l) l.setAttribute('fill', on ? '#ff5a3c' : '#41545a'); };
@@ -225,6 +225,8 @@
     var f = t.closest('input, textarea, select, [contenteditable="true"]');
     if (f) return [f.type === 'range' ? 'drag' : (f.type === 'radio' || f.type === 'checkbox' ? 'button' : 'type'), f];
     var b = t.closest('button, .btn, [role="button"], [role="radio"], [role="tab"], [role="slider"], summary');
+    var pic = t.closest('img, picture, [data-img], [data-bg-img]');
+    if (b && pic && b.contains(pic) && b.getBoundingClientRect().width > 140) return ['image', b];
     if (b) return ['button', b];
     var a = t.closest('a[href]');
     if (a) return ['link', a];
@@ -251,14 +253,14 @@
       if (a.hat) gsap.to(a.hat, { rotation: 0, y: 0, duration: .2, ease: 'power3.out', svgOrigin: '-26 0' });
       gsap.to(a.eyes, { scaleY: 1, scaleX: 1, duration: .2, ease: 'power3.out', transformOrigin: '50% 50%' });
       gsap.to(brackets, { opacity: 0, scale: 1.25, duration: .2, ease: 'power3.out', svgOrigin: '0 0' });
-      gsap.to(inner, { scale: 1, opacity: 1, y: 0, duration: .2, ease: 'power3.out', svgOrigin: '0 0' });
+      gsap.to(inner, { scale: 1, opacity: 1, y: 0, rotation: 0, duration: .2, ease: 'power3.out', svgOrigin: '0 0' });
       if (a.vial) gsap.to(a.vial, { attr: { fill: '#d6ec8a' }, duration: .2 });
       if (a.mouth) gsap.to(a.mouth, { scaleY: 1, duration: .2, transformOrigin: '50% 50%' });
     }
     // enter presets (in .5)
     if (s === 'button') {
       if (B.variant === 'hat') {
-        gsap.to(a.hat, { rotation: -18, y: -5, duration: .5, ease: 'back.out(2)', svgOrigin: '-26 0' });
+        gsap.to(a.hat, { rotation: -18, y: -5, duration: .3, ease: 'back.out(1.6)', svgOrigin: '-26 0' });
         gsap.to(a.eyes, { scaleY: .55, duration: .3, ease: 'power3.out', transformOrigin: '50% 50%' });
         gsap.to(a.mouth, { scaleY: 1.8, duration: .3, ease: 'power3.out', transformOrigin: '50% 50%' });
       } else if (B.variant === 'level') {
@@ -274,14 +276,77 @@
     } else if (s === 'image') {
       gsap.to(brackets, { opacity: 1, scale: 1, duration: .5, ease: 'expo.out', svgOrigin: '0 0' });
       gsap.to(a.eyes, { scaleX: 1.2, scaleY: 1.25, duration: .4, ease: 'back.out(2)', transformOrigin: '50% 50%' });
-    } else if (s === 'heading') {
-      scanTw = gsap.fromTo(look, { x: -1 }, { x: 1, duration: .55, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     } else if (s === 'type') {
       gsap.to(inner, { scale: .62, opacity: .35, duration: .3, ease: 'power3.out', svgOrigin: '0 0' });
     } else if (s === 'drag') {
       gsap.to(a.eyes, { scaleX: 1.15, scaleY: 1.15, duration: .3, ease: 'back.out(2)', transformOrigin: '50% 50%' });
     }
     if (B.variant === 'cone' && s === 'link') gsap.fromTo(inner, { rotation: 0 }, { keyframes: [{ rotation: -10 }, { rotation: 8 }, { rotation: 0 }], duration: .4, svgOrigin: '0 27' });
+    signature(target);
+    breathe();
+  }
+
+  /* ---------- per-element signatures [AUDIT-01 D.1; S1314 §7, S1448]: the companion answers the element, not its kind.
+     The auditor's full table (lane file 06 §4) is not in this repo; these follow the pack's named list. */
+  var SIGS = {
+    // nav Book: a permit stamp comes down on the spot
+    stamp: function () {
+      gsap.timeline().to(inner, { y: 5, scaleY: .9, duration: .08, ease: 'power2.in', svgOrigin: '0 30' })
+        .to(inner, { y: 0, scaleY: 1, duration: .2, ease: 'power2.out', svgOrigin: '0 30' });
+      ring('#77b3b8');
+    },
+    // a drawing tool: the companion leans into the stroke
+    lean: function () { gsap.to(inner, { rotation: -10, duration: .2, ease: 'power2.out', svgOrigin: '0 30' }); },
+    // a rivet: flinch and blink
+    flinch: function () { blink(); gsap.fromTo(inner, { scale: .9 }, { scale: 1, duration: .18, ease: 'power2.out', svgOrigin: '0 0' }); },
+    // a bolt: the pupils orbit it once
+    orbit: function () { rollEyes(.5); },
+    // every phone link: the listening head-tilt, held while the pointer stays
+    tilt: function () { gsap.to(inner, { rotation: 12, duration: .2, ease: 'power2.out', svgOrigin: '0 20' }); },
+    // work photographs: the camera tool's record light comes on
+    led: function () { B.led(true); },
+    // towns tabs: a compass needle swings to the county's bearing
+    compass: function (t) {
+      var b = parseFloat(t.dataset.bearing || '0');
+      toolG.innerHTML = '<circle r="9" fill="#e8e4dc" stroke="' + INK + '" stroke-width="1.6"/><path class="bd-ndl" d="M0 -7 L2.2 0 L0 7 L-2.2 0 Z" fill="#e2412b" stroke="' + INK + '" stroke-width="1"/>';
+      toolG.dataset.zone = '__compass';
+      gsap.fromTo(toolG.querySelector('.bd-ndl'), { rotation: b - 200 }, { rotation: b, duration: .35, ease: 'power3.out', svgOrigin: '0 0' });
+    }
+  };
+  function ring(col) {
+    var c = doc.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('r', '14'); c.setAttribute('cx', '27'); c.setAttribute('cy', '18'); c.setAttribute('fill', 'none');
+    c.setAttribute('stroke', col); c.setAttribute('stroke-width', '2.4');
+    svg.appendChild(c);
+    gsap.fromTo(c, { scale: .4, opacity: 1, svgOrigin: '27 18' }, { scale: 1.2, opacity: 0, duration: .3, ease: 'power2.out', svgOrigin: '27 18', onComplete: function () { c.remove(); } });
+  }
+  function signature(t) {
+    var s2 = t && t.dataset ? (t.dataset.buddySig || (t.matches && t.matches('a[href^="tel:"]') ? 'tilt' : '') || (state === 'image' ? 'led' : '')) : '';
+    if (sigEl === t && sig === s2) return;
+    // leaving a signature: put the tool and the record light back
+    if (sig === 'compass' || toolG.dataset.zone === '__compass') { toolG.dataset.zone = '#'; applyTool(P.zone, true); }
+    if (sig === 'led') B.led(false);
+    sigEl = t; sig = s2;
+    if (s2 && SIGS[s2] && s2 !== 'flip') SIGS[s2](t);
+  }
+  // the switch digits: a mini sheet flips over the companion carrying the incoming version
+  doc.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-buddy-sig="flip"]');
+    if (!t || !B.on || !shown) return;
+    var g = doc.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.innerHTML = '<rect x="-11" y="-14" width="22" height="28" rx="2" fill="#e8e4dc" stroke="' + INK + '" stroke-width="1.6"/><text x="0" y="6" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="18" fill="' + INK + '">' + (t.textContent || '').trim().slice(0, 2).replace(/[<&]/g, '') + '</text>';
+    g.setAttribute('transform', 'translate(0 -30)');
+    svg.appendChild(g);
+    gsap.timeline({ onComplete: function () { g.remove(); } })
+      .fromTo(g, { scaleX: 0, opacity: 1, svgOrigin: '0 -30' }, { scaleX: 1, duration: .16, ease: 'power2.out', svgOrigin: '0 -30' })
+      .to(g, { opacity: 0, y: -6, duration: .2, ease: 'power2.in' }, .5);
+  }, true);
+  // idle breath: only while parked and unpressed [D.9; S1448, S0405]
+  function breathe() {
+    if (!art) return;
+    var idle = state === 'none' && !pressed;
+    if (idle && !breathTw) breathTw = gsap.fromTo(art, { scaleY: 1 }, { scaleY: 1.025, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1, svgOrigin: '0 30' });
+    else if (!idle && breathTw) { breathTw.kill(); breathTw = null; gsap.to(art, { scaleY: 1, duration: .12, svgOrigin: '0 30' }); }
   }
 
   /* ---------- the loop ---------- */
@@ -291,9 +356,9 @@
     gsap.timeline().to(target, { scaleY: .08, duration: .07, ease: 'power2.in', transformOrigin: '50% 50%' })
       .to(target, { scaleY: state === 'button' && B.variant === 'hat' ? .55 : 1, duration: .1, ease: 'power2.out', transformOrigin: '50% 50%' });
   }
-  function rollEyes() {
+  function rollEyes(d) {
     var o = { a: -Math.PI / 2 };
-    gsap.to(o, { a: Math.PI * 1.5, duration: .9, ease: 'sine.inOut', onUpdate: function () { look.roll = [Math.cos(o.a), Math.sin(o.a)]; }, onComplete: function () { look.roll = null; } });
+    gsap.to(o, { a: Math.PI * 1.5, duration: d || .9, ease: 'sine.inOut', onUpdate: function () { look.roll = [Math.cos(o.a), Math.sin(o.a)]; }, onComplete: function () { look.roll = null; } });
   }
   function action() {
     var a = parts;
@@ -316,16 +381,20 @@
     last = now;
     var W = innerWidth, H = innerHeight;
     // follow target: trailing below-right of the pointer, flipping near the edges
-    var ox = P.x > W - 110 ? -46 : 40, oy = P.y > H - 100 ? -44 : 38;
+    var ox = P.x > W - 120 ? -50 : 56, oy = P.y > H - 110 ? -48 : 54;
     var tx = P.x + ox, ty = P.y + oy;
     if (dock && stateEl && stateEl.isConnected) {
       var r = stateEl.getBoundingClientRect();
       if (dock === 'top') { tx = EZ.clamp(P.x, r.left + 30, r.right - 30); ty = r.top - 10; }
       else { tx = r.left - 24; ty = r.top + r.height / 2 - 4; }
     }
-    var k = 1 - Math.exp(-(dock ? 12 : 15) * dt);           // [BANK 344] frame-independent
-    pos.x += (tx - pos.x) * k; pos.y += (ty - pos.y) * k;
-    var speed = (tx - pos.x) / 40;
+    // spring, stiffness 500 / damping 30 (mass 1), integrated in fixed 1/240s sub-steps so it is frame-rate independent
+    for (var st = dt; st > 0; st -= 1 / 240) {
+      var hh = Math.min(st, 1 / 240);
+      vel.x += (500 * (tx - pos.x) - 30 * vel.x) * hh; vel.y += (500 * (ty - pos.y) - 30 * vel.y) * hh;
+      pos.x += vel.x * hh; pos.y += vel.y * hh;
+    }
+    var speed = vel.x / 600;
     var lt = dock ? 0 : EZ.clamp(speed * 9, -14, 14);   // docked: stands still
     if (state === 'card' && stateEl) {
       var cr = stateEl.getBoundingClientRect();
@@ -372,7 +441,7 @@
   function show() {
     if (shown) return;
     shown = true;
-    pos.x = P.x + 40; pos.y = P.y + 38;           // first frame lands beside the pointer, never flies in from 0,0
+    pos.x = P.x + 56; pos.y = P.y + 54; vel.x = vel.y = 0;   // first frame lands beside the pointer, never flies in from 0,0
     el.classList.add('is-on');
     if (tip) tip.classList.add('is-on');
     if (!rafId) { last = 0; rafId = requestAnimationFrame(tick); }
@@ -393,8 +462,8 @@
     else if (type === 'zone') { applyTool(P.zone); if (tip) tip.style.color = TIP_C[P.zone] || '#77b3b8'; }
     else if (type === 'down') { if (tip) tip.classList.add('is-down'); }
     if (type === 'up' && tip) tip.classList.remove('is-down');
-    if (type === 'down') gsap.to(inner, { scaleY: .86, scaleX: 1.1, duration: .1, ease: 'power2.out', svgOrigin: '0 30' });
-    else if (type === 'up') gsap.to(inner, { scaleY: 1, scaleX: 1, duration: .5, ease: 'elastic.out(1,.4)', svgOrigin: '0 30' });
+    if (type === 'down') { pressed = true; breathe(); gsap.to(inner, { scaleY: .86, scaleX: 1.1, duration: .1, ease: 'power2.out', svgOrigin: '0 30' }); gsap.to(el, { opacity: .35, duration: .1 }); }
+    else if (type === 'up') { pressed = false; breathe(); gsap.to(inner, { scaleY: 1, scaleX: 1, duration: .3, ease: 'power3.out', svgOrigin: '0 30' }); gsap.to(el, { opacity: 1, duration: .16 }); }
   });
 
   B.refresh = function () {

@@ -116,7 +116,7 @@
   box-shadow: 0 0 0 2px #f2c230, 0 0 0 12px rgba(242, 194, 48, .14), 0 30px 60px -20px rgba(0, 0, 0, .6);
   font: 400 1.75rem/1.05 var(--f-display); letter-spacing: .02em;
 }
-.financing3__orb:hover { box-shadow: 0 0 0 2px #f2c230, 0 0 0 18px rgba(242, 194, 48, .2), 0 30px 60px -20px rgba(0, 0, 0, .6); }
+@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #f2c230, 0 0 0 18px rgba(242, 194, 48, .2), 0 30px 60px -20px rgba(0, 0, 0, .6); } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .financing3__sheet {
   position: relative; width: 100%; padding: clamp(28px, 4vw, 52px);
   background: #f3eee2; color: #1b2629;

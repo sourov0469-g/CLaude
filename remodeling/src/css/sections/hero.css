@@ -89,7 +89,7 @@
 .hero1__cell dt { font: 600 .625rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; color: #9fc3df; margin-bottom: 6px; }
 .hero1__cell dd { margin: 0; font: 500 .9375rem/1.25 var(--f-text); color: #e8e4dc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hero1__cell a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: rgba(234, 244, 252, .45); }
-.hero1__cell a:hover { text-decoration-color: currentColor; }
+@media (hover: hover) and (pointer: fine) { .hero1__cell a:hover { text-decoration-color: currentColor; } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .hero1__cell--rate dd { font-size: 1.0625rem; }
 .hero1__star { color: #f2c230; margin-right: 4px; }
 
@@ -155,7 +155,8 @@
 .hero2__star { color: #f2c230; font-size: 1.25rem; line-height: 1; }
 .hero2__num { font: 400 1.75rem/1 var(--f-display); letter-spacing: .01em; }
 .hero2__sub { font: 500 1rem/1.2 var(--f-text); color: var(--muted); }
-.hero2__proof a:hover .hero2__sub, .hero2__proof a:focus-visible .hero2__sub { color: var(--ink); }
+.hero2__proof a:focus-visible .hero2__sub { color: var(--ink); }
+@media (hover: hover) and (pointer: fine) { .hero2__proof a:hover .hero2__sub { color: var(--ink); } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .hero2__row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
 .hero2__lead { grid-column: 1 / span 6; max-width: 40ch; color: var(--muted); font-size: clamp(1.0625rem, .95rem + .45vw, 1.375rem); }
 .hero2__row .hero__acts { grid-column: 8 / span 5; justify-content: flex-end; gap: var(--s4) var(--s6); }
@@ -207,7 +208,7 @@
 .hero3__board p { margin: 0; position: relative; }
 .hero3__board-h { font: 700 .6875rem/1 var(--f-text); letter-spacing: .16em; text-transform: uppercase; }
 .hero3__board-r a { font: 400 clamp(1.5rem, 1rem + 1vw, 2rem)/1 var(--f-display); color: #0B1418; text-decoration: none; letter-spacing: .01em; display: inline-flex; gap: 6px; align-items: baseline; min-height: 32px; }
-.hero3__board-r a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+@media (hover: hover) and (pointer: fine) { .hero3__board-r a:hover { text-decoration: underline; text-decoration-thickness: 2px; } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .hero3__board-l { font: 600 .8125rem/1.25 var(--f-text); }
 
 @media (max-width: 1023px) {

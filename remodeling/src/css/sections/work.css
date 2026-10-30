@@ -79,7 +79,8 @@
 .work3__tile img { display: block; height: 100%; width: auto; object-fit: cover; }
 .work3__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 22px 12px 10px; background: linear-gradient(transparent, rgba(11, 20, 24, .88)); color: #f3eee2; text-align: left; font: 500 .8125rem/1.3 var(--f-text); opacity: 0; transform: translateY(6px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
 .work3__cap b { display: block; font: 400 .875rem/1 var(--f-display); letter-spacing: .12em; color: #f2c230; margin-bottom: 3px; }
-.work3__tile:hover .work3__cap, .work3__tile:focus-visible .work3__cap { opacity: 1; transform: none; }
+.work3__tile:focus-visible .work3__cap { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) { .work3__tile:hover .work3__cap { opacity: 1; transform: none; } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .work3__tile:focus-visible { outline: 3px solid #f2c230; outline-offset: 3px; }
 .work3__foot { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; margin-top: var(--s7); }
 /* reduced motion / no JS motion: the belts are plain scrollable rows */

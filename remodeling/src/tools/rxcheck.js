@@ -41,7 +41,7 @@ const SEL = 'a[href],button,input:not([type=hidden]),select,textarea,[role=radio
     await p.close();
   }
   await b.close();
-  const dups = [...seen].filter(([k, l]) => l.length > 1 && !k.startsWith('native:'));
+  const dups = [...seen].filter(([k, l]) => l.length > 1 && !k.startsWith('native:') && k !== 'phone');   // AUDIT-01 D.5: every tel: link shares one signature by design
   // a radio group's wrapper label and its input are one control: collapse exact same element counted twice
   console.log('elements', [...seen.values()].reduce((a, l) => a + l.length, 0) + missing.length, 'covered', [...seen.values()].reduce((a, l) => a + l.length, 0), 'missing', missing.length, 'duplicate specs', dups.length);
   bad.forEach(e => console.log('INVALID', e.where, e.name, e.rx));

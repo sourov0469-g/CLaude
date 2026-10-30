@@ -21,7 +21,7 @@
 .ptip[data-state="link"] .pt-nib, .ptip[data-state="link"] .pt-ul,
 .ptip[data-state="button"] .pt-ring, .ptip[data-state="image"] .pt-cross, .ptip[data-state="heading"] .pt-rule,
 .ptip[data-state="card"] .pt-frame, .ptip[data-state="drag"] .pt-drag { opacity: 1; transform: none; }
-.ptip[data-state="button"] .pt-ring { animation: pt-pulse 1.2s ease-in-out infinite; }
+.ptip[data-state="button"] .pt-ring { animation: pt-pulse .3s ease-out 1; }   /* one pulse on enter, then static [AUDIT-01 D.8] */
 @keyframes pt-pulse { 50% { transform: scale(1.18); } }
 html.has-buddy, html.has-buddy * { cursor: none !important; }
 html.has-buddy :is(input:not([type="range"]):not([type="radio"]):not([type="checkbox"]), textarea, [contenteditable="true"]) { cursor: text !important; }
@@ -55,6 +55,8 @@ html.has-buddy select { cursor: default !important; }
   visibility: hidden;
 }
 .rx-on > .rx { visibility: visible; }
+.btn:not(.btn--ghost) > .rx { color: var(--accent-ink); }   /* drawn ON a teal button: ink lines, never teal on teal */
+.c-f > .rx, label > .rx { opacity: .6; }                      /* a field's drawing never wins over its label text [AUDIT-01 D.4] */
 .g-field .rx { color: var(--field-accent); }
 
 /* ---------- section fields ---------- */

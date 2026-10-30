@@ -95,11 +95,29 @@
       '<text x="0" y="4.5" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="14" fill="' + INK + '">' + t.replace(/[<&]/g, '') + '</text>';
   }
 
-  /* ---------- anchors: where on the element the subject lives ---------- */
+  /* ---------- anchors: where ON the element the subject lives [AUDIT-01 A.8: drawn on or in the control] ----------
+     corners sit on the control's own corner, sides on its own edge (half inside, half on the border) */
   function anchor(a, w, h, P) {
-    var m = { tl: [P - 4, P - 4], tr: [P + w + 4, P - 4], bl: [P - 4, P + h + 4], br: [P + w + 4, P + h + 4],
-      l: [P - 18, P + h / 2], r: [P + w + 18, P + h / 2], t: [P + w / 2, P - 16], b: [P + w / 2, P + h + 16] };
+    var m = { tl: [P + 4, P + 4], tr: [P + w - 4, P + 4], bl: [P + 4, P + h - 4], br: [P + w - 4, P + h - 4],
+      l: [P + 2, P + h / 2], r: [P + w - 2, P + h / 2], t: [P + w / 2, P + 1], b: [P + w / 2, P + h - 1] };
     return m[a] || m.r;
+  }
+  // the construction line the hover draws ON the control, starting at the anchor: an outline inset 2.5px on boxes,
+  // a dimension line with end ticks under text links (no box to draw on)
+  function face(a, w, h, P, box) {
+    if (!box) {
+      var y = P + h + 1;
+      return a === 'l' || a === 'tl' || a === 'bl'
+        ? 'M' + P + ' ' + (y - 3) + 'v6M' + P + ' ' + y + 'H' + (P + w) + 'M' + (P + w) + ' ' + (y - 3) + 'v6'
+        : 'M' + (P + w) + ' ' + (y - 3) + 'v6M' + (P + w) + ' ' + y + 'H' + P + 'M' + P + ' ' + (y - 3) + 'v6';
+    }
+    var i = 2.5, x0 = P + i, y0 = P + i, x1 = P + w - i, y1 = P + h - i;
+    var start = { tl: [x0, y0, 'H' + x1 + 'V' + y1 + 'H' + x0 + 'V' + y0], tr: [x1, y0, 'V' + y1 + 'H' + x0 + 'V' + y0 + 'H' + x1],
+      br: [x1, y1, 'H' + x0 + 'V' + y0 + 'H' + x1 + 'V' + y1], bl: [x0, y1, 'V' + y0 + 'H' + x1 + 'V' + y1 + 'H' + x0],
+      t: [P + w / 2, y0, 'H' + x1 + 'V' + y1 + 'H' + x0 + 'V' + y0 + 'H' + (P + w / 2)], b: [P + w / 2, y1, 'H' + x0 + 'V' + y0 + 'H' + x1 + 'V' + y1 + 'H' + (P + w / 2)],
+      l: [x0, P + h / 2, 'V' + y0 + 'H' + x1 + 'V' + y1 + 'H' + x0 + 'V' + (P + h / 2)], r: [x1, P + h / 2, 'V' + y1 + 'H' + x0 + 'V' + y0 + 'H' + x1 + 'V' + (P + h / 2)] }[a] || null;
+    if (!start) start = [x1, P + h / 2, 'V' + y1 + 'H' + x0 + 'V' + y0 + 'H' + x1 + 'V' + (P + h / 2)];
+    return 'M' + start[0] + ' ' + start[1] + start[2];
   }
 
   /* ---------- carriers: how the subject arrives (hover / focus) ---------- */
@@ -132,8 +150,8 @@
     unfold: function (g) { return gsap.timeline({ paused: true }).fromTo(g, { scaleY: 0, opacity: 0, transformOrigin: '50% 100%' }, { scaleY: 1, opacity: 1, duration: .24, ease: 'back.out(2)' }); },
     hoist: function (g, x) {
       return gsap.timeline({ paused: true }).set(x, { opacity: 1 }).fromTo(x, { scaleY: 0, transformOrigin: '50% 0%' }, { scaleY: 1, duration: .22, ease: 'power2.out' })
-        .fromTo(g, { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: .22, ease: 'power2.out' }, 0)
-        .fromTo(g, { rotation: 10, transformOrigin: '50% -150%' }, { rotation: 0, duration: .3, ease: 'elastic.out(1.2,.4)' }, .2);
+        .fromTo(g, { y: -28, opacity: 0 }, { y: 0, opacity: 1, duration: .2, ease: 'power2.out' }, 0)
+        .fromTo(g, { rotation: 8, transformOrigin: '50% -150%' }, { rotation: 0, duration: .14, ease: 'power2.out' }, .16);
     },
     pop: function (g) { return gsap.timeline({ paused: true }).fromTo(g, { scale: 0, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, opacity: 1, duration: .25, ease: 'back.out(3.4)' }); },
     tilt: function (g) { return gsap.timeline({ paused: true }).fromTo(g, { y: 14, rotation: 35, opacity: 0, transformOrigin: '0% 100%' }, { y: 0, rotation: 0, opacity: 1, duration: .26, ease: 'power3.out' }); },
@@ -154,14 +172,14 @@
   // carrier furniture drawn around the anchor (string, rail, box, line)
   function extra(cn, ax, ay, w, h, P) {
     switch (cn) {
-      case 'swing': return '<path d="M' + ax + ' ' + (ay - 34) + 'V' + (ay - 12) + '"' + N + '/>';
-      case 'hoist': return '<path d="M' + ax + ' 0V' + (ay - 12) + '"' + N + ' stroke-dasharray="2 2"/>';
-      case 'rail': return '<path d="M' + P + ' ' + (P + h + 3) + 'H' + (P + w) + '"' + o + ' stroke="currentColor" stroke-width="1.6"/>';
+      case 'swing': return '<path d="M' + ax + ' ' + (ay - 22) + 'V' + (ay - 9) + '"' + N + '/>';
+      case 'hoist': return '<path d="M' + ax + ' ' + (ay - 26) + 'V' + (ay - 9) + '"' + N + ' stroke-dasharray="2 2"/>';
+      case 'rail': return '<path d="M' + P + ' ' + (P + h - 3) + 'H' + (P + w) + '"' + o + ' stroke="currentColor" stroke-width="1.6"/>';
       case 'jack': return '<path d="M' + (ax - 6) + ' ' + (ay + 26) + 'l12-5-12-5 12-5"' + N + '/>';
       case 'lid': return '<rect x="' + (ax - 10) + '" y="' + (ay + 8) + '" width="20" height="9"' + c(RED) + '/><rect class="lid" x="' + (ax - 10) + '" y="' + (ay + 5) + '" width="20" height="3"' + c(RED) + '/>';
-      case 'zip': return '<path d="M' + (ax - 40) + ' ' + (ay - 40) + 'L' + ax + ' ' + ay + '"' + o + ' fill="none" stroke="currentColor" stroke-dasharray="3 3"/>';
+      case 'zip': return '<path d="M' + (ax - 24) + ' ' + (ay - 24) + 'L' + ax + ' ' + ay + '"' + o + ' fill="none" stroke="currentColor" stroke-dasharray="3 3"/>';
       case 'frame':
-        var k = 9, x0 = P - 5, y0 = P - 5, x1 = P + w + 5, y1 = P + h + 5;
+        var k = 8, x0 = P + 3, y0 = P + 3, x1 = P + w - 3, y1 = P + h - 3;
         return '<path d="M' + x0 + ' ' + (y0 + k) + 'V' + y0 + 'H' + (x0 + k) + '"' + o + ' fill="none" stroke="currentColor"/><path d="M' + (x1 - k) + ' ' + y0 + 'H' + x1 + 'V' + (y0 + k) + '"' + o + ' fill="none" stroke="currentColor"/>' +
           '<path d="M' + x1 + ' ' + (y1 - k) + 'V' + y1 + 'H' + (x1 - k) + '"' + o + ' fill="none" stroke="currentColor"/><path d="M' + (x0 + k) + ' ' + y1 + 'H' + x0 + 'V' + (y1 - k) + '"' + o + ' fill="none" stroke="currentColor"/>';
     }
@@ -195,7 +213,7 @@
       case 'drip': return '<path d="M' + ax + ' ' + (ay + 12) + 'q-4 6 0 8q4-2 0-8z" fill="' + BLUE + '"/>';
       case 'chips': for (i = 0; i < 5; i++) s += '<rect x="' + (ax - 2) + '" y="' + (ay + 8) + '" width="4" height="3" fill="' + WOOD + '"/>'; return s;
       case 'flash': return '<circle cx="' + ax + '" cy="' + ay + '" r="16" fill="' + YEL + '" opacity=".6"/>';
-      case 'sweep': return '<path d="M' + P + ' ' + (P + h + 6) + 'H' + (P + w) + '" stroke="' + YEL + '" stroke-width="3" stroke-linecap="round"/>';
+      case 'sweep': return '<path d="M' + (P + 4) + ' ' + (P + h - 4) + 'H' + (P + w - 4) + '" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>';
       case 'sparkle': for (i = 0; i < 3; i++) s += '<path transform="translate(' + (ax - 16 + i * 16) + ' ' + (ay - 18 + (i % 2) * 6) + ')" d="M0-5L1.4-1.4 5 0 1.4 1.4 0 5-1.4 1.4-5 0-1.4-1.4z" fill="' + YEL + '"/>'; return s;
     }
     return '';
@@ -209,13 +227,19 @@
     if (!spr || !C[cn] || !B[bn]) return null;
     var ax, ay;
     return {
-      art: function (w, h) {
+      art: function (w, h, el) {
         var A = anchor(an, w, h, P); ax = A[0]; ay = A[1];
-        return '<g class="rg-x" opacity="0">' + extra(cn, ax, ay, w, h, P) + '</g>' +
+        var box = !el || !el.matches('a:not(.btn)') || el.matches('[class*="__"]:not(.link)') && el.getBoundingClientRect().height > 30;
+        return '<path class="rg-f" d="' + face(an, w, h, P, box) + '" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/>' +
+          '<g class="rg-x" opacity="0">' + extra(cn, ax, ay, w, h, P) + '</g>' +
           '<g class="rg-b" opacity="0">' + beatArt(bn, ax, ay, w, h, P) + '</g>' +
-          '<g transform="translate(' + ax + ' ' + ay + ') scale(' + Math.max(.8, Math.min(1.35, h / 34)).toFixed(2) + ')"><g class="rg-s" opacity="0">' + spr + '</g></g>';
+          '<g transform="translate(' + ax + ' ' + ay + ') scale(' + Math.max(.55, Math.min(.85, h / 52)).toFixed(2) + ')"><g class="rg-s" opacity="0">' + spr + '</g></g>';
       },
-      hover: function (svg, w, h) { return C[cn](svg.querySelector('.rg-s'), svg.querySelector('.rg-x'), { w: w, h: h }); },
+      hover: function (svg, w, h) {
+        // the construction line is drawn on the control from the anchor, in step with the subject's arrival
+        return C[cn](svg.querySelector('.rg-s'), svg.querySelector('.rg-x'), { w: w, h: h })
+          .fromTo(svg.querySelector('.rg-f'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .2, ease: 'power2.out', immediateRender: true }, 0);
+      },
       click: function (svg) {
         var g = svg.querySelector('.rg-s'), x = svg.querySelector('.rg-b');
         gsap.set(g, { opacity: 1 });

@@ -71,8 +71,8 @@
 .consult2__room[aria-pressed="true"] { color: #0B1418; }
 .consult2__room > span { position: relative; padding: 4px 8px; background: #f3eee2; }
 .consult2__room:focus-visible { outline: 3px solid #f2c230; outline-offset: -6px; }
-.consult2__room:hover::before { opacity: .45; }
-.consult2__room[aria-pressed="true"]:hover::before { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .consult2__room:hover::before { opacity: .45; } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
+@media (hover: hover) and (pointer: fine) { .consult2__room[aria-pressed="true"]:hover::before { opacity: 1; } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .consult2__whole { display: inline-flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 600; }
 .consult2__whole input { width: 20px; height: 20px; accent-color: #f2c230; }
 .consult2__next, .consult2__go { justify-self: start; }
@@ -85,7 +85,7 @@
 .consult3__h { max-width: 22ch; }
 .consult3__num { display: flex; align-items: center; gap: clamp(10px, 2vw, 28px); margin: var(--s6) 0 var(--s7); color: var(--field-ink); text-decoration: none; white-space: nowrap; }
 .consult3__digits { font: 400 clamp(3.75rem, 1rem + 12.5vw, 17rem)/.85 var(--f-display); letter-spacing: -.01em; transform-origin: 0 50%; }
-.consult3__num:hover .consult3__digits { color: #f2c230; }
+@media (hover: hover) and (pointer: fine) { .consult3__num:hover .consult3__digits { color: #f2c230; } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .consult3__set { flex: none; width: clamp(56px, 8vw, 140px); height: auto; overflow: visible; }
 .consult3__row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
 .consult3__row .consult__facts { grid-column: 1 / span 5; }

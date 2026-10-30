@@ -129,6 +129,13 @@
   .nav__vs { min-width: 84px; }
 }
 @media (max-width: 400px) { .nav__logo img { width: 112px; } }
+/* backup slots: folded away (B key or ?backups=1 opens them); a backup in use keeps its row open [AUDIT-01 A.2] */
+.vswitch__bks { display: none; align-items: center; gap: 2px; margin-left: 6px; padding-left: 6px; box-shadow: inset 1px 0 0 rgba(232, 228, 220, .22); }
+.show-backups .vswitch__bks, .vswitch__in.is-bk .vswitch__bks { display: inline-flex; }
+.vswitch .vswitch__bk { width: auto; min-width: 30px; padding: 0 5px; font-size: .75rem; letter-spacing: .02em; }
+/* phones: five digits need the room the header Call button took; the fixed bar below carries Call / Text / Book */
+@media (max-width: 479px) { .nav .btn--call { display: none; } }
+@media (max-width: 767px) { .vswitch button::before { inset: -7px -9px; } }   /* >= 44px hit area per digit [AUDIT-01 D.14] */
 @media (max-width: 359px) { .nav__in { gap: var(--s2); } .nav__logo img { width: 96px; } .nav__vs { min-width: 76px; } .vswitch button { width: 24px; } .nav .btn--call { padding: 0 12px; } }
 
 /* ---------- cursor [S1321 cursor, S1375 #12, S0634 §A]: fine pointers only ---------- */
