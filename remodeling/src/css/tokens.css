@@ -30,8 +30,8 @@
   color-scheme: light;
 }
 
-/* the hidden backup slots are records: their section grounds and tokens stay as they were recorded */
-.sec:has(> .ver[data-v^="b"]:not([hidden])), .ver[data-v^="b"] {
+/* the dark-era backup slots (hero b1-b3, every other section b1) are records: their section grounds and tokens stay as they were recorded */
+#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden])), #hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"] {
   --err-field: #ff8a75; --err-paper: #b5341f;
   --bg: #0B1418; --surface: #15272f; --surface-2: #1c313b; --ink: #e8e4dc; --muted: #a9b6b9;
   --accent: #77b3b8; --accent-ink: #0B1418; --line: #77b3b8; --line-soft: rgba(119, 179, 184, .5);
@@ -132,7 +132,7 @@ input, textarea { caret-color: var(--accent); }
 }
 
 /* the hidden backup slots keep the type they were recorded with */
-.ver[data-v^="b"] { --f-display: "Bebas Neue", "Arial Narrow", sans-serif; --f-text: "Geist", ui-sans-serif, system-ui, sans-serif; font-family: var(--f-text); }
+#hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"] { --f-display: "Bebas Neue", "Arial Narrow", sans-serif; --f-text: "Geist", ui-sans-serif, system-ui, sans-serif; font-family: var(--f-text); }
 
 /* ---------- type roles ---------- */
 .t-display {
@@ -175,9 +175,9 @@ input, textarea { caret-color: var(--accent); }
 .g-base { background: var(--bg); color: var(--ink); }
 .g-surface { background: var(--surface); color: var(--ink); }
 .g-field { background: var(--field); color: var(--field-ink); --muted: var(--field-muted); }
-.sec:has(> .ver[data-v^="b"]:not([hidden])).g-base { background: #0B1418; color: #e8e4dc; }
-.sec:has(> .ver[data-v^="b"]:not([hidden])).g-surface { background: #15272f; color: #e8e4dc; }
-.sec:has(> .ver[data-v^="b"]:not([hidden])).g-field { background: #1d4a4e; color: #e8e4dc; --accent: #77b3b8; --muted: #a9b6b9; }
+:is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden]))).g-base { background: #0B1418; color: #e8e4dc; }
+:is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden]))).g-surface { background: #15272f; color: #e8e4dc; }
+:is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden]))).g-field { background: #1d4a4e; color: #e8e4dc; --accent: #77b3b8; --muted: #a9b6b9; }
 
 /* ---------- layout ---------- */
 .wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--margin); }
@@ -264,8 +264,8 @@ input, textarea { caret-color: var(--accent); }
 .t-display, .t-head, .t-figure { letter-spacing: -.01em; }
 .t-display { line-height: 1.02; }
 .t-head { line-height: 1.08; }
-.ver[data-v^="b"] .t-display, .ver[data-v^="b"] .t-figure { letter-spacing: .005em; line-height: .9; }
-.ver[data-v^="b"] .t-head { letter-spacing: .01em; line-height: .95; }
+:is(#hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"]) :is(.t-display, .t-figure) { letter-spacing: .005em; line-height: .9; }
+:is(#hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"]) .t-head { letter-spacing: .01em; line-height: .95; }
 
 /* OWNER MASTER DIRECTIVE: the section label, a brand element on every section. The logo's roof chevron in orange,
    then a sentence-case line in accent text. Never tracked caps. */

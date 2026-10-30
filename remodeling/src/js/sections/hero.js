@@ -66,8 +66,168 @@
   }
 
   EZ.section('hero', {
-    /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
+    /* slot 5 · Phase 5 improved version of b8 */
+    5: { init: function (root, k) {
+      navOn(k, 'ground');
+      var house = root.querySelector('.hox__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.hox__p'));
+      entrance(k, root, '.hox__p');
+      if (!k.motion || !k.fine) return;   // coarse pointers and reduced motion: the static triptych (CSS)
+      var tx = 0, ty = 0, st = ps.map(function () { return { x: { x: 0, v: 0 }, y: { x: 0, v: 0 } }; }), loop = null;
+      function go() {
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) {
+          var moving = false;
+          ps.forEach(function (p, i) {
+            var d = +p.dataset.depth, s2 = st[i];
+            if (spring(s2.x, tx * d, 170, 26, dt)) moving = true;
+            if (spring(s2.y, ty * d, 170, 26, dt)) moving = true;
+            p.style.transform = 'translate3d(' + s2.x.x.toFixed(2) + 'px,' + s2.y.x.toFixed(2) + 'px,0)';
+          });
+          if (!moving) return false;
+        });
+      }
+      k.on(root, 'pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = house.getBoundingClientRect();
+        tx = EZ.clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+        ty = EZ.clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+        go();
+      });
+      k.on(root, 'pointerleave', function () { tx = ty = 0; go(); });
+      k.add(function () { ps.forEach(function (p) { p.style.transform = ''; }); });
+    } },
+
+    /* slot 4 · Phase 5 improved version of b7 */
+    4: { init: function (root, k) {
+      navOn(k, 'ground');
+      var plate = root.querySelector('.hax__plate'), draw = root.querySelector('.hax__draw');
+      var rule = root.querySelector('.hax__rule'), range = root.querySelector('.hax__range');
+      draw.innerHTML = EZ.drawing('k-fluted-hero', { par: 'xMidYMid slice' });   // same crop as the photo: object-fit cover, centred [S1324 aligned pair]
+      var o = { x: +range.value, v: 0 }, target = o.x, loop = null;
+      function apply(v) { draw.style.clipPath = 'inset(0% ' + (100 - v).toFixed(2) + '% 0% 0%)'; rule.style.left = v.toFixed(2) + '%'; }
+      apply(o.x);
+      function go() {
+        if (!k.motion) { o.x = target; apply(o.x); return; }
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) { var moving = spring(o, target, 500, 30, dt); apply(o.x); if (!moving) { o.x = target; o.v = 0; apply(o.x); return false; } });
+      }
+      k.on(range, 'input', function () { target = +range.value; go(); });
+      // the grip answers the pointer and the keyboard (an input cannot carry a drawn reaction): it swells 8% in 150ms
+      var grip = root.querySelector('.hax__grip');
+      function lift(on) { if (k.motion) gsap.to(grip, { scale: on ? 1.08 : 1, duration: .15, ease: 'power2.out', overwrite: true }); }
+      k.on(range, 'pointerenter', function (e) { if (e.pointerType === 'mouse') lift(true); });
+      k.on(range, 'pointerleave', function () { lift(false); });
+      k.on(range, 'pointerdown', function () { lift(true); });
+      k.on(range, 'focus', function () { lift(true); });
+      k.on(range, 'blur', function () { lift(false); });
+      k.add(function () { draw.innerHTML = ''; draw.style.clipPath = ''; rule.style.left = ''; range.value = 38; });
+      entrance(k, root, '.hax__key');
+    } },
+
+    /* slot 3 · Phase 5 improved version of b6 */
+    3: { init: function (root, k) {
+      navOn(k, 'ground');
+      var svg = root.querySelector('.hsx__frame'), bay = root.querySelector('.hsx__bay');
+      var s = '';
+      [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
+      [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
+      s += '<path class="t br" d="M22 506L118 410M618 14L522 110"/>';
+      [[22, 14], [618, 14], [22, 506], [618, 506]].forEach(function (q) { s += '<rect class="cp" x="' + (q[0] - 7) + '" y="' + (q[1] - 7) + '" width="14" height="14" rx="2"/>'; });
+      svg.innerHTML = s;
+      k.add(function () { svg.innerHTML = ''; });
+      var tl = entrance(k, root);
+      if (tl) tl.fromTo(svg.querySelectorAll('.t'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, 0)
+        .from(svg.querySelectorAll('.cp'), { scale: 0, transformOrigin: '50% 50%', duration: .18, ease: 'power2.out', stagger: .03 }, .2)
+        .fromTo(bay, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .4, ease: HOUSE, clearProps: 'clipPath' }, .18);
+    } },
+
+    /* slot 2 · Phase 5 improved version of b5 */
+    2: { init: function (root, k) {
+      navOn(k, 'ground');
+      var opts = Array.prototype.slice.call(root.querySelectorAll('.hkx__opt'));
+      var imgs = Array.prototype.slice.call(root.querySelectorAll('.hkx__img'));
+      var cap = root.querySelector('.hkx__cap'), lbl = root.querySelector('.hero__cta .btn__label');
+      var CAP = { 'k-white-shaker': 'White Shaker kitchen', 'b-white-marble': 'White marble bathroom', 'w-farmhouse': 'Modern farmhouse, whole home' };
+      var CTA = { Kitchen: 'Book a kitchen consultation', Bathroom: 'Book a bathroom consultation', 'Whole home': 'Book a whole-home consultation' };
+      var plan = root.querySelector('.hkx__plan');
+      function pick(i, focus) {
+        opts.forEach(function (o, j) { o.setAttribute('aria-checked', j === i ? 'true' : 'false'); o.tabIndex = j === i ? 0 : -1; });
+        var key = opts[i].dataset.k;
+        if (plan) plan.setAttribute('data-on', opts[i].dataset.room);
+        imgs.forEach(function (im) { var on = im.dataset.img === key; im.classList.toggle('is-on', on); gsap.to(im, { autoAlpha: on ? 1 : 0, duration: k.motion ? .2 : 0, ease: 'power2.out', overwrite: true }); });
+        cap.textContent = CAP[key];
+        lbl.textContent = CTA[opts[i].dataset.room];
+        EZ.pickedRoom = opts[i].dataset.room;   // carried into Consult, which preselects it
+        if (focus) opts[i].focus();
+      }
+      opts.forEach(function (o, i) {
+        k.on(o, 'click', function () { pick(i); });
+        k.on(o, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault(); e.stopPropagation();
+          pick((i + d + opts.length) % opts.length, true);
+        });
+      });
+      gsap.set(imgs, { autoAlpha: 0 });
+      pick(0);
+      k.add(function () { gsap.set(imgs, { clearProps: 'opacity,visibility' }); delete EZ.pickedRoom; });
+      entrance(k, root, '.hkx__pick, .hkx__photo');
+    } },
+
+    /* slot 1 · Phase 5 improved version of b4 */
     1: { init: function (root, k) {
+      navOn(k, 'ground');
+      var win = root.querySelector('.hpx__win'), img = win.querySelector('img'), name = root.querySelector('.hpx__name');
+      var tl = entrance(k, root);
+      if (tl) {
+        tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
+          .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0)
+          .fromTo(root.querySelector('.hpx__roof path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: HOUSE }, .12)
+          .fromTo(root.querySelector('.hpx__sun'), { scale: .4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: HOUSE, clearProps: 'transform,opacity,visibility' }, .2)
+          .fromTo(root.querySelectorAll('.hpx__palm path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .04 }, .25)
+          .fromTo(root.querySelector('.hpx__dim path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .4, ease: HOUSE }, .4);
+      }
+      // [Phase 4] the Finish picker: each swatch is a crop of a real Elbaz kitchen; picking one puts that kitchen in the house
+      var FIN = [
+        { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
+        { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
+        { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
+        { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
+        { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
+        { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
+      ];
+      var P = (window.__DATA || {}).projects || [], title = function (key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; };
+      var box = root.querySelector('.hpx__sw'), cur = 0;
+      box.innerHTML = FIN.map(function (f, i) {
+        return '<button type="button" role="radio" class="hpx__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" data-rx="native:finish-swatch" style="background-image:url(' + EZ.img(f.d || f.k) + ');background-position:' + f.at + '"></button>';
+      }).join('');
+      var sws = Array.prototype.slice.call(box.children);
+      k.add(function () { box.innerHTML = ''; img.src = EZ.img('k-navy-shaker-xl'); img.style.objectPosition = ''; name.textContent = title('k-navy-shaker'); });
+      function pick(i, focus) {
+        if (i === cur) return;
+        cur = i; var f = FIN[i];
+        sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
+        if (focus) sws[i].focus();
+        name.textContent = title(f.d || f.k);
+        img.alt = title(f.d || f.k) + ', built by Elbaz';
+        EZ.pickedRoom = 'Kitchen';
+        var swap = function () { img.src = EZ.img(f.k); img.style.objectPosition = f.pos; };
+        if (!k.motion) { swap(); return; }
+        gsap.to(img, { opacity: 0, duration: .14, ease: 'power1.in', overwrite: true, onComplete: function () { swap(); gsap.to(img, { opacity: 1, duration: .26, ease: HOUSE }); } });
+        gsap.fromTo(sws[i], { scale: .86 }, { scale: 1, duration: .3, ease: 'back.out(2.4)' });
+      }
+      sws.forEach(function (s, i) {
+        k.on(s, 'click', function () { pick(i); });
+        k.on(s, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
+        });
+      });
+    } },
+
+    /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
+    b4: { init: function (root, k) {
       navOn(k, 'ground');
       var win = root.querySelector('.hp__win'), img = win.querySelector('img'), name = root.querySelector('.hp__name');
       var tl = entrance(k, root);
@@ -118,7 +278,7 @@
     } },
 
     /* 2 · Pick your room [Anatomy §1 F1 + F3]: the entry is a choice; the photo and the CTA answer it */
-    2: { init: function (root, k) {
+    b5: { init: function (root, k) {
       navOn(k, 'ground');
       var opts = Array.prototype.slice.call(root.querySelectorAll('.hk__opt'));
       var imgs = Array.prototype.slice.call(root.querySelectorAll('.hk__img'));
@@ -150,9 +310,9 @@
     } },
 
     /* 3 · Scaffold, cleaned: the tubes draw round a large real photograph, which rises into the bay (once) */
-    3: { init: function (root, k) {
+    b6: { init: function (root, k) {
       navOn(k, 'ground');
-      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hs__bay');
+      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hsbay');
       var s = '';
       [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
       [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
@@ -167,7 +327,7 @@
     } },
 
     /* 4 · As built (Direction A): a real range input drives the line between the traced drawing and the photograph */
-    4: { init: function (root, k) {
+    b7: { init: function (root, k) {
       navOn(k, 'ground');
       var plate = root.querySelector('.ha__plate'), draw = root.querySelector('.ha__draw');
       var rule = root.querySelector('.ha__rule'), range = root.querySelector('.ha__range');
@@ -194,7 +354,7 @@
     } },
 
     /* 5 · Open house (Direction B): three real rooms on three depth planes; the pointer opens the house a few pixels */
-    5: { init: function (root, k) {
+    b8: { init: function (root, k) {
       navOn(k, 'ground');
       var house = root.querySelector('.ho__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.ho__p'));
       entrance(k, root, '.ho__p');
@@ -231,12 +391,12 @@
       k.add(function () { alive = false; });
       var frame = root.querySelector('.hero1__frame');
       var plate = root.querySelector('.hero1__plate');
-      var bp = root.querySelector('.hero1__bp');
+      var bp = root.querySelector('.hero1bp');
       var linesEl = root.querySelector('.hero1__lines');
       var strokeSvg = root.querySelector('.hero1__stroke');
       var lead = root.querySelector('.hero1__lead');
       var acts = root.querySelector('.hero__acts').children;
-      var block = root.querySelector('.hero1__block');
+      var block = root.querySelector('.hero1block');
       linesEl.innerHTML = EZ.drawing('k-fluted-hero', { par: 'none' });
       var notesEl = root.querySelector('.hero1__notes'), notes = Array.prototype.slice.call(notesEl.querySelectorAll('.hero1__note'));
       var lines = linesEl.querySelectorAll('line');
@@ -332,7 +492,7 @@
     b2: { init: function (root, k) {
       navOn(k, 'ground');
       var stage = root.querySelector('.hero2__stage');
-      var band = root.querySelector('.hero2__band');
+      var band = root.querySelector('.hero2band');
       var win = root.querySelector('.hero2__window');
       var plate = root.querySelector('.hero2__plate');
       var h1 = root.querySelector('.hero2__h');
@@ -393,8 +553,8 @@
     b3: { init: function (root, k) {
       navOn(k, 'ground');
       var svg = root.querySelector('.hero3__scaffold');
-      var bay = root.querySelector('.hero3__bay');
-      var board = root.querySelector('.hero3__board');
+      var bay = root.querySelector('.hero3bay');
+      var board = root.querySelector('.hero3board');
       var depths = root.querySelectorAll('.hero3__depth');
       var faces = root.querySelectorAll('.hero3__face');
       var h1 = root.querySelector('.hero3__h');

@@ -53,7 +53,7 @@
 }
 
 
-.sec:has(> .ver[data-v^="b"]:not([hidden])), .ver[data-v^="b"] {
+#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden])), #hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"] {
   --err-field: #ff8a75; --err-paper: #b5341f;
   --bg: #0B1418; --surface: #15272f; --surface-2: #1c313b; --ink: #e8e4dc; --muted: #a9b6b9;
   --accent: #77b3b8; --accent-ink: #0B1418; --line: #77b3b8; --line-soft: rgba(119, 179, 184, .5);
@@ -154,7 +154,7 @@ input, textarea { caret-color: var(--accent); }
 }
 
 
-.ver[data-v^="b"] { --f-display: "Bebas Neue", "Arial Narrow", sans-serif; --f-text: "Geist", ui-sans-serif, system-ui, sans-serif; font-family: var(--f-text); }
+#hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"] { --f-display: "Bebas Neue", "Arial Narrow", sans-serif; --f-text: "Geist", ui-sans-serif, system-ui, sans-serif; font-family: var(--f-text); }
 
 
 .t-display {
@@ -197,9 +197,9 @@ input, textarea { caret-color: var(--accent); }
 .g-base { background: var(--bg); color: var(--ink); }
 .g-surface { background: var(--surface); color: var(--ink); }
 .g-field { background: var(--field); color: var(--field-ink); --muted: var(--field-muted); }
-.sec:has(> .ver[data-v^="b"]:not([hidden])).g-base { background: #0B1418; color: #e8e4dc; }
-.sec:has(> .ver[data-v^="b"]:not([hidden])).g-surface { background: #15272f; color: #e8e4dc; }
-.sec:has(> .ver[data-v^="b"]:not([hidden])).g-field { background: #1d4a4e; color: #e8e4dc; --accent: #77b3b8; --muted: #a9b6b9; }
+:is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden]))).g-base { background: #0B1418; color: #e8e4dc; }
+:is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden]))).g-surface { background: #15272f; color: #e8e4dc; }
+:is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:not(#hero):has(.ver[data-v="b1"]:not([hidden]))).g-field { background: #1d4a4e; color: #e8e4dc; --accent: #77b3b8; --muted: #a9b6b9; }
 
 
 .wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--margin); }
@@ -286,8 +286,8 @@ input, textarea { caret-color: var(--accent); }
 .t-display, .t-head, .t-figure { letter-spacing: -.01em; }
 .t-display { line-height: 1.02; }
 .t-head { line-height: 1.08; }
-.ver[data-v^="b"] .t-display, .ver[data-v^="b"] .t-figure { letter-spacing: .005em; line-height: .9; }
-.ver[data-v^="b"] .t-head { letter-spacing: .01em; line-height: .95; }
+:is(#hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"]) :is(.t-display, .t-figure) { letter-spacing: .005em; line-height: .9; }
+:is(#hero .ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]), .sec:not(#hero) .ver[data-v="b1"]) .t-head { letter-spacing: .01em; line-height: .95; }
 
 
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
@@ -1193,6 +1193,203 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   .hp__dim { left: 8%; right: 2%; bottom: 25%; } .hp__name { left: 4%; right: 0; bottom: calc(25% - 34px); font-size: .8125rem; }
   .hp__pick { left: 0; right: 0; } .hp__s { width: 40px; height: 40px; }
 }
+
+
+
+.hpx__stage { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
+.hpx__copy { grid-column: 1 / span 5; display: grid; gap: 18px; justify-items: start; position: relative; z-index: 2; }
+.hpx__copy .hero__acts { gap: var(--s3) var(--s6); }
+.hpx__art { grid-column: 6 / -1; position: relative; aspect-ratio: 10 / 9; max-height: calc(100svh - var(--nav-h) - 64px); justify-self: end; width: 100%; }
+.hpx__sun { position: absolute; right: 2%; top: 4%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: var(--a-200); }
+.hpx__band { position: absolute; left: 12%; right: 6%; top: 6%; bottom: 25%; overflow: hidden; background: var(--surface-2);
+  clip-path: polygon(0% 33%, 50% 0%, 100% 33%, 100% 100%, 0% 100%); }
+.hpx__win { position: absolute; inset: 0; overflow: hidden; }
+.hpx__win > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; transition: opacity 280ms var(--ease-out); }
+.hpx__roof { position: absolute; left: 12%; right: 6%; top: 6%; bottom: 25%; width: 88% !important; height: 69% !important; overflow: visible; pointer-events: none; }
+.hpx__roof path { fill: none; stroke: var(--a-500); stroke-width: 14px; stroke-linejoin: miter; stroke-linecap: butt; vector-effect: non-scaling-stroke; }
+.hpx__palm { position: absolute; left: 0; bottom: 18%; width: 22%; height: auto; overflow: visible; z-index: 1; }
+.hpx__palm path { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hpx__palm .fronds path { fill: var(--a-100); }
+.hpx__dim { position: absolute; left: 12%; right: 6%; bottom: 19%; height: 12px; }
+.hpx__dim svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hpx__dim path { fill: none; stroke: var(--ink); stroke-width: 1.4px; vector-effect: non-scaling-stroke; }
+.hpx__name { position: absolute; left: 12%; right: 6%; bottom: calc(19% - 30px); margin: 0; text-align: center; font: 500 .875rem/1.3 var(--f-text); color: var(--ink); }
+.hpx__name::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--a-500); vertical-align: 1px; }
+.hpx__pick { position: absolute; left: 12%; right: 6%; bottom: 0; display: grid; gap: 8px; justify-items: center; }
+.hpx__pick-l { margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
+.hpx__sw { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.hpx__s { width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; background-color: var(--surface-2); background-size: 1100%; background-repeat: no-repeat;
+  box-shadow: 0 0 0 2px var(--white), 0 0 0 3px var(--grey); transition: box-shadow 150ms ease-out; }
+.hpx__s[aria-checked="true"] { box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--a-500); }
+.hpx__s:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .hpx__s:not([aria-checked="true"]):hover { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--a-300); }
+}
+@media (max-width: 1023px) {
+  .hpx__stage { min-height: 0; max-height: none; grid-template-columns: 1fr; row-gap: 28px; padding-bottom: 88px; }
+  .hpx__copy, .hpx__art { grid-column: 1 / -1; }
+  .hpx__art { max-height: none; aspect-ratio: 10 / 10.5; }
+}
+@media (max-width: 767px) {
+  .hpx__copy { gap: 14px; }
+  .hpx__art { aspect-ratio: 10 / 12; }
+  .hpx__band { left: 8%; right: 2%; bottom: 30%; }
+  .hpx__roof { left: 8%; right: 2%; bottom: 30%; width: 90% !important; height: 64% !important; }
+  .hpx__dim { left: 8%; right: 2%; bottom: 25%; }
+  .hpx__name { left: 4%; right: 0; bottom: calc(25% - 34px); font-size: .8125rem; }
+  .hpx__pick { left: 0; right: 0; }
+  .hpx__s { width: 40px; height: 40px; }
+}
+
+
+
+.hkx__grid { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
+.hkx__copy { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; }
+.hkx__pick { border: 0; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }
+.hkx__q { padding: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--ink); }
+.hkx__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.hkx__opt { min-height: 44px; padding: 0 16px; border: 0; border-radius: var(--radius); background: none; color: var(--ink); font: 560 .9375rem/1 var(--f-text); box-shadow: inset 0 0 0 1.5px var(--line-soft); cursor: pointer; }
+.hkx__opt[aria-checked="true"] { background: var(--ink); color: var(--bg); box-shadow: none; }
+.hkx__photo { grid-column: 6 / -1; position: relative; margin: 0; aspect-ratio: 4 / 3; max-height: calc(100svh - var(--nav-h) - 64px); width: 100%; overflow: hidden; background: var(--white); }
+.hkx__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hkx__img:not(.is-on) { opacity: 0; }
+.hkx__cap { position: absolute; left: 0; bottom: 0; padding: 10px 14px; background: rgba(255, 255, 255, .82); color: var(--ink); font: 500 .8125rem/1.3 var(--f-text); }
+@media (max-width: 1023px) {
+  .hkx__copy, .hkx__photo, .hs__copy, .hs__rig, .ho__copy, .ho__house { grid-column: 1 / -1; }
+  .hkx__photo, .hs__rig, .ho__house { margin-top: 24px; }
+  .hkx__photo { aspect-ratio: 3 / 2; max-height: none; }
+}
+@media (max-width: 767px) {
+  .hkx__grid, .hs__grid, .ho__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hkx__copy, .hs__copy, .ho__copy { gap: 12px; }
+  .hkx__photo { aspect-ratio: 16 / 10; }
+}
+
+
+
+.hsx__grid { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
+.hsx__copy { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; }
+.hsx__rig { grid-column: 6 / -1; position: relative; aspect-ratio: 640 / 520; }
+.hsx__frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hsx__frame .t { fill: none; stroke: var(--old); stroke-width: 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.hsx__frame .br { stroke-width: 3; }
+.hsx__frame .cp { fill: var(--grey); stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.hsx__bay { position: absolute; left: 6%; right: 6%; top: 7%; bottom: 7%; margin: 0; overflow: hidden; background: var(--white); }
+.hsx__bay > img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1023px) {
+  .hk__copy, .hk__photo, .hsx__copy, .hsx__rig, .ho__copy, .ho__house { grid-column: 1 / -1; }
+  .hk__photo, .hsx__rig, .ho__house { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .hk__grid, .hsx__grid, .ho__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hk__copy, .hsx__copy, .ho__copy { gap: 12px; }
+  .hsx__rig { aspect-ratio: 640 / 460; }
+}
+@media (max-width: 1023px) {
+  .hkx__copy, .hkx__photo, .hsx__copy, .hsx__rig, .ho__copy, .ho__house { grid-column: 1 / -1; }
+  .hkx__photo, .hsx__rig, .ho__house { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .hkx__grid, .hsx__grid, .ho__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hkx__copy, .hsx__copy, .ho__copy { gap: 12px; }
+}
+
+
+
+.hax__stage { position: relative; height: 100svh; min-height: 600px; max-height: 1100px; padding-top: calc(var(--nav-h) + 4px); display: grid; }
+.hax__plate { position: relative; margin-inline: var(--margin); overflow: hidden; background: var(--white); touch-action: pan-y; }
+.hax__plate > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hax__draw { background: var(--white); }
+.hax__draw svg line { stroke: var(--a-500); stroke-opacity: .78; stroke-width: 1.15; }
+.hax__rule { position: absolute; top: 0; bottom: 0; left: 38%; width: 2px; margin-left: -1px; background: var(--white); pointer-events: none; }
+.hax__grip { position: absolute; top: 50%; left: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); transition: transform .15s ease-out; }
+.hax__grip::before, .hax__grip::after { content: ""; position: absolute; top: 50%; width: 0; height: 0; margin-top: -5px; border: 5px solid transparent; }
+.hax__grip::before { left: 8px; border-right-color: var(--ink); }
+.hax__grip::after { right: 8px; border-left-color: var(--ink); }
+.hax__range { position: absolute; left: var(--margin); right: var(--margin); top: calc(var(--nav-h) + 4px); bottom: 0; width: calc(100% - 2 * var(--margin)); height: auto; margin: 0; opacity: 0; cursor: ew-resize; z-index: 2; -webkit-appearance: none; appearance: none; background: none; }
+.hax__stage:has(.hax__range:focus-visible) .hax__grip { box-shadow: inset 0 0 0 2px var(--ink), 0 0 0 3px var(--a-500); transform: scale(1.08); }
+.hax__panel { position: absolute; right: calc(var(--margin) + 24px); bottom: 24px; z-index: 3; width: min(640px, 50vw); padding: 28px 30px 22px; background: var(--white); color: var(--ink); display: grid; gap: 14px; justify-items: start; }
+.hax__panel .hh, .hax__panel .hproof a { color: var(--ink); }
+.hax__panel .hlead, .hax__panel .hlic, .hax__key { color: var(--muted); }
+.hax__key { margin: 0; font: 500 .8125rem/1.35 var(--f-text); }
+@media (max-width: 767px) {
+  .hax__stage { height: auto; min-height: 0; max-height: none; display: block; padding-bottom: 80px; }
+  .hax__plate { height: 260px; margin-inline: 0; margin-top: 0; }
+  .hax__range { left: 0; right: 0; width: 100%; top: auto; bottom: 80px; height: 260px; }
+  .hax__panel { position: relative; right: auto; bottom: auto; width: auto; padding: 18px var(--margin) 0; gap: 12px; }
+  .hax__stage { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+}
+
+
+
+.hox__grid { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
+.hox__copy { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; position: relative; z-index: 2; }
+.hox__house { grid-column: 6 / -1; position: relative; aspect-ratio: 7 / 6; }
+.hox__p { position: absolute; margin: 0; overflow: hidden; background: var(--white); will-change: transform; box-shadow: none; }
+.hox__p img { width: 100%; height: 100%; object-fit: cover; }
+.hox__p figcaption { position: absolute; left: 0; bottom: 0; padding: 6px 10px; background: var(--white); color: var(--ink); font: 500 .8125rem/1.2 var(--f-text); }
+.hox__p--a { left: 0; top: 4%; width: 68%; height: 62%; z-index: 1; }
+.hox__p--b { right: 0; top: 0; width: 34%; height: 58%; z-index: 2; }
+.hox__p--c { left: 20%; bottom: 0; width: 56%; height: 40%; z-index: 3; }
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .hox__house { aspect-ratio: auto; display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 10px; align-items: end; }
+  .hox__p { position: relative; inset: auto; width: auto; height: auto; aspect-ratio: 3 / 4; will-change: auto; }
+  .hox__p--a { aspect-ratio: 4 / 5; }
+}
+[data-motion="off"] .hox__house { aspect-ratio: auto; display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 10px; align-items: end; }
+[data-motion="off"] .hox__p { position: relative; inset: auto; width: auto; height: auto; aspect-ratio: 3 / 4; }
+@media (max-width: 1023px) {
+  .hk__copy, .hk__photo, .hs__copy, .hs__rig, .hox__copy, .hox__house { grid-column: 1 / -1; }
+  .hk__photo, .hs__rig, .hox__house { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .hk__grid, .hs__grid, .hox__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hk__copy, .hs__copy, .hox__copy { gap: 12px; }
+  .hox__house { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+}
+@media (max-width: 1023px) {
+  .hkx__copy, .hkx__photo, .hs__copy, .hs__rig, .hox__copy, .hox__house { grid-column: 1 / -1; }
+  .hkx__photo, .hs__rig, .hox__house { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .hkx__grid, .hs__grid, .hox__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hkx__copy, .hs__copy, .hox__copy { gap: 12px; }
+}
+@media (max-width: 1023px) {
+  .hk__copy, .hk__photo, .hsx__copy, .hsx__rig, .hox__copy, .hox__house { grid-column: 1 / -1; }
+  .hk__photo, .hsx__rig, .hox__house { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .hk__grid, .hsx__grid, .hox__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hk__copy, .hsx__copy, .hox__copy { gap: 12px; }
+}
+@media (max-width: 1023px) {
+  .hkx__copy, .hkx__photo, .hsx__copy, .hsx__rig, .hox__copy, .hox__house { grid-column: 1 / -1; }
+  .hkx__photo, .hsx__rig, .hox__house { margin-top: 24px; }
+}
+@media (max-width: 767px) {
+  .hkx__grid, .hsx__grid, .hox__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
+  .hkx__copy, .hsx__copy, .hox__copy { gap: 12px; }
+}
+
+
+.hkx__copy, .hkx__photo { grid-row: 1; }
+.hkx__plan { grid-column: 6 / span 3; grid-row: 1; align-self: end; justify-self: start; z-index: 2; width: clamp(150px, 15vw, 210px); height: auto; translate: -28px 28px; background: var(--white); padding: 10px 10px 6px; border-radius: 12px; box-shadow: 0 0 0 1px var(--line-soft); overflow: visible; }
+.hkx__roof { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linejoin: miter; }
+.hkx__rm, .hkx__whole { fill: var(--white); stroke: var(--ink); stroke-width: 2; transition: fill 200ms ease-out; }
+.hkx__whole { fill: none; stroke-width: 3; }
+.hkx__plan text { font: 600 10px/1 var(--f-text); fill: var(--ink); text-anchor: middle; pointer-events: none; }
+.hkx__plan[data-on="Kitchen"] .hkx__rm[data-room="Kitchen"], .hkx__plan[data-on="Bathroom"] .hkx__rm[data-room="Bathroom"], .hkx__plan[data-on="Whole home"] .hkx__rm { fill: var(--a-200); }
+.hkx__opt[aria-checked="true"] { background: var(--a-500); color: var(--ink); }
+@media (max-width: 1023px) { .hkx__plan { display: none; } }
+
+
+.hsx__frame .t { stroke: var(--ink) !important; }
+.hsx__frame .cp { fill: var(--a-500) !important; stroke: var(--ink) !important; }
+
+
+.hox__house { position: relative; }
+.hox__house::before { content: ""; position: absolute; width: 34%; aspect-ratio: 1; right: -4%; top: -6%; border-radius: 50%; background: var(--a-200); z-index: 0; }
 
 
 #proof .t-head { color: var(--field-ink); }
@@ -2735,7 +2932,144 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 <section id="hero" class="sec hero" data-section="hero" aria-label="Opening">
 
   
-  <div class="ver hp" data-v="1">
+  
+  <div class="ver hpx" data-v="1">
+    <div class="hpx__stage wrap">
+      <div class="hpx__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Design, permits and construction under one contract</p>
+        <h1 class="hh" id="hero-hd1-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="hero__acts">
+          <a class="btn hero__cta" href="#consult" data-rx="~rivet/zip/burst/r" data-buddy-sig="flinch"><span class="btn__label">Book a consultation</span></a>
+          <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+        </div>
+        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/drop/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+      <div class="hpx__art">
+        <span class="hpx__sun" aria-hidden="true"></span>
+        <svg class="hpx__palm" viewBox="0 0 160 240" aria-hidden="true" focusable="false"><path class="trunk" d="M92 236 C88 190 84 150 74 112 C70 96 68 86 70 76"/><path class="trunk-r" d="M86 214 h10 M84 188 h10 M81 162 h10 M77 136 h9 M73 112 h8"/><g class="fronds"><path d="M70 76 C50 60 26 60 6 74 C26 66 48 70 70 76"/><path d="M70 76 C56 46 34 32 14 30 C34 40 52 56 70 76"/><path d="M70 76 C74 46 92 26 118 20 C98 34 82 52 70 76"/><path d="M70 76 C96 64 126 70 150 92 C124 80 98 76 70 76"/><path d="M70 76 C90 82 110 102 116 128 C102 106 88 90 70 76"/></g></svg>
+        <div class="hpx__band" data-buddy="image">
+          <div class="hpx__win"><img data-img="k-navy-shaker-xl" width="2400" height="1601" fetchpriority="high" decoding="async"
+               alt="Navy blue Shaker kitchen with a quartz waterfall island, brass hardware and a brass-banded range hood, built by Elbaz"></div>
+        </div>
+        <svg class="hpx__roof" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M-5 33 L50 -3.6 L105 33"/></svg>
+        <div class="hpx__dim" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none" focusable="false"><path d="M0.4 0 V12 M99.6 0 V12 M0.4 6 H99.6"/></svg></div>
+        <p class="hpx__name" aria-live="polite">Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood</p>
+        <div class="hpx__pick">
+          <p class="hpx__pick-l" id="hpx-pick-l-i">Pick a finish. Every swatch is a kitchen we built.</p>
+          <div class="hpx__sw" role="radiogroup" aria-labelledby="hpx-pick-l-i"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver hkx" data-v="2" hidden>
+    <div class="hkx__grid wrap">
+      <div class="hkx__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Pick a room, we book the visit</p>
+        <h1 class="hh" id="hero-hd2-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <fieldset class="hkx__pick">
+          <legend class="hkx__q">What are you changing?</legend>
+          <div class="hkx__opts" role="radiogroup" aria-label="What are you changing?">
+            <button type="button" role="radio" class="hkx__opt" aria-checked="true" data-room="Kitchen" data-k="k-white-shaker" data-rx="~sink/slide/drip/l">Kitchen</button>
+            <button type="button" role="radio" class="hkx__opt" aria-checked="false" data-room="Bathroom" data-k="b-white-marble" data-rx="~shower/slide/puff/l">Bathroom</button>
+            <button type="button" role="radio" class="hkx__opt" aria-checked="false" data-room="Whole home" data-k="w-farmhouse" data-rx="~house/slide/hop/l">Whole home</button>
+          </div>
+        </fieldset>
+        <div class="hero__acts">
+            <a class="btn hero__cta" href="#consult" data-rx="~calendar/rail/tick/b" data-buddy-sig="stamp"><span class="btn__label">Book a kitchen consultation</span></a>
+            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+          </div>
+        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/tilt/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+        <svg class="hkx__plan" viewBox="0 0 160 110" aria-hidden="true" focusable="false">
+          <path class="hkx__roof" d="M4 40 L80 4 L156 40"/>
+          <rect class="hkx__rm" data-room="Kitchen" x="12" y="40" width="80" height="62"/><rect class="hkx__rm" data-room="Bathroom" x="92" y="40" width="56" height="34"/><rect class="hkx__rm" data-room="Living" x="92" y="74" width="56" height="28"/>
+          <rect class="hkx__whole" x="12" y="40" width="136" height="62"/>
+          <text x="52" y="75">Kitchen</text><text x="120" y="61">Bath</text>
+        </svg>
+      <figure class="hkx__photo" data-buddy="image">
+        <img class="hkx__img is-on" data-img="k-white-shaker" width="1600" height="1067" decoding="async" alt="White Shaker kitchen remodel with a waterfall quartz island, by Elbaz">
+        <img class="hkx__img" data-img="b-white-marble" width="1600" height="1200" decoding="async" alt="White marble guest and primary bathroom remodel by Elbaz">
+        <img class="hkx__img" data-img="w-farmhouse" width="1600" height="1200" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz">
+        <figcaption class="hkx__cap" aria-live="polite">White Shaker kitchen</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  
+  <div class="ver hsx" data-v="3" hidden>
+    <div class="hsx__grid wrap">
+      <div class="hsx__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Building across three South Florida counties</p>
+        <h1 class="hh" id="hero-hd3-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="hero__acts">
+            <a class="btn hero__cta" href="#consult" data-rx="~nut/spin/spinout/tr" data-buddy-sig="orbit"><span class="btn__label">Book a consultation</span></a>
+            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+          </div>
+        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/spin/ring/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+      <div class="hsx__rig">
+        <svg class="hsx__frame" viewBox="0 0 640 520" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+        <figure class="hsx__bay" data-buddy="image"><img data-img="o-pergola-hero" width="1600" height="1000" decoding="async" alt="Covered outdoor pergola with dining and lounge seating in South Florida, built by Elbaz"></figure>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver hax" data-v="4" hidden>
+    <div class="hax__stage">
+      <div class="hax__plate plate" data-buddy="image">
+        <img data-img="k-fluted-hero" width="1600" height="1000" decoding="async" alt="Open kitchen with black fluted cabinetry, marble island and pendant lighting, built by Elbaz">
+        <div class="hax__draw plate" aria-hidden="true"></div>
+        <span class="hax__rule" aria-hidden="true"><span class="hax__grip"></span></span>
+      </div>
+      <label class="sr-only" for="hax-range-i">Move the line between the drawing and the finished kitchen</label>
+      <input class="hax__range" id="hax-range-i" type="range" min="0" max="100" step="1" value="38" data-rx="native:divider-grip">
+      <div class="hax__panel">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>As drawn, as built</p>
+        <h1 class="hh" id="hero-hd4-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <p class="hax__key">Left of the line: as drawn. Right of it: as built.</p>
+        <div class="hero__acts">
+            <a class="btn hero__cta" href="#consult" data-rx="~sketch/zip/tick/r" data-buddy-sig="lean"><span class="btn__label">Book a consultation</span></a>
+            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+          </div>
+        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/hoist/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver hox" data-v="5" hidden>
+    <div class="hox__grid wrap">
+      <div class="hox__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Open house: three rooms we built</p>
+        <h1 class="hh" id="hero-hd5-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="hero__acts">
+            <a class="btn hero__cta" href="#consult" data-rx="~plug/hinge/burst/r" data-buddy-sig="stamp"><span class="btn__label">Book a consultation</span></a>
+            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+          </div>
+        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/unfold/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+      <div class="hox__house" data-buddy="image">
+        <figure class="hox__p hox__p--a" data-depth="14"><img data-img="k-white-shaker" width="1600" height="1067" decoding="async" alt="White Shaker kitchen with a waterfall quartz island, remodeled by Elbaz"><figcaption>Kitchen</figcaption></figure>
+        <figure class="hox__p hox__p--b" data-depth="8"><img data-img="b-spa-guest" width="1200" height="1600" decoding="async" alt="Spa-style guest bathroom with backlit mirrors, remodeled by Elbaz"><figcaption>Bathroom</figcaption></figure>
+        <figure class="hox__p hox__p--c" data-depth="4"><img data-img="w-farmhouse" width="1600" height="1200" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz"><figcaption>Whole home</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="ver hp" data-v="b4" hidden>
     <div class="hp__stage wrap">
       <div class="hp__copy">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Design, permits and construction under one contract</p>
@@ -2767,7 +3101,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver hk" data-v="2" hidden>
+  <div class="ver hk" data-v="b5" hidden>
     <div class="hk__grid wrap">
       <div class="hk__copy">
         <h1 class="hh" id="hero-hd2"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
@@ -2797,7 +3131,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver hs" data-v="3" hidden>
+  <div class="ver hs" data-v="b6" hidden>
     <div class="hs__grid wrap">
       <div class="hs__copy">
         <h1 class="hh" id="hero-hd3"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
@@ -2817,7 +3151,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver ha" data-v="4" hidden>
+  <div class="ver ha" data-v="b7" hidden>
     <div class="ha__stage">
       <div class="ha__plate plate" data-buddy="image">
         <img data-img="k-fluted-hero" width="1600" height="1000" decoding="async" alt="Open kitchen with black fluted cabinetry, marble island and pendant lighting, built by Elbaz">
@@ -2841,7 +3175,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver ho" data-v="5" hidden>
+  <div class="ver ho" data-v="b8" hidden>
     <div class="ho__grid wrap">
       <div class="ho__copy">
         <h1 class="hh" id="hero-hd5"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
@@ -6716,8 +7050,168 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   }
 
   EZ.section('hero', {
-    /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
+    /* slot 5 · Phase 5 improved version of b8 */
+    5: { init: function (root, k) {
+      navOn(k, 'ground');
+      var house = root.querySelector('.hox__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.hox__p'));
+      entrance(k, root, '.hox__p');
+      if (!k.motion || !k.fine) return;   // coarse pointers and reduced motion: the static triptych (CSS)
+      var tx = 0, ty = 0, st = ps.map(function () { return { x: { x: 0, v: 0 }, y: { x: 0, v: 0 } }; }), loop = null;
+      function go() {
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) {
+          var moving = false;
+          ps.forEach(function (p, i) {
+            var d = +p.dataset.depth, s2 = st[i];
+            if (spring(s2.x, tx * d, 170, 26, dt)) moving = true;
+            if (spring(s2.y, ty * d, 170, 26, dt)) moving = true;
+            p.style.transform = 'translate3d(' + s2.x.x.toFixed(2) + 'px,' + s2.y.x.toFixed(2) + 'px,0)';
+          });
+          if (!moving) return false;
+        });
+      }
+      k.on(root, 'pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = house.getBoundingClientRect();
+        tx = EZ.clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+        ty = EZ.clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+        go();
+      });
+      k.on(root, 'pointerleave', function () { tx = ty = 0; go(); });
+      k.add(function () { ps.forEach(function (p) { p.style.transform = ''; }); });
+    } },
+
+    /* slot 4 · Phase 5 improved version of b7 */
+    4: { init: function (root, k) {
+      navOn(k, 'ground');
+      var plate = root.querySelector('.hax__plate'), draw = root.querySelector('.hax__draw');
+      var rule = root.querySelector('.hax__rule'), range = root.querySelector('.hax__range');
+      draw.innerHTML = EZ.drawing('k-fluted-hero', { par: 'xMidYMid slice' });   // same crop as the photo: object-fit cover, centred [S1324 aligned pair]
+      var o = { x: +range.value, v: 0 }, target = o.x, loop = null;
+      function apply(v) { draw.style.clipPath = 'inset(0% ' + (100 - v).toFixed(2) + '% 0% 0%)'; rule.style.left = v.toFixed(2) + '%'; }
+      apply(o.x);
+      function go() {
+        if (!k.motion) { o.x = target; apply(o.x); return; }
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) { var moving = spring(o, target, 500, 30, dt); apply(o.x); if (!moving) { o.x = target; o.v = 0; apply(o.x); return false; } });
+      }
+      k.on(range, 'input', function () { target = +range.value; go(); });
+      // the grip answers the pointer and the keyboard (an input cannot carry a drawn reaction): it swells 8% in 150ms
+      var grip = root.querySelector('.hax__grip');
+      function lift(on) { if (k.motion) gsap.to(grip, { scale: on ? 1.08 : 1, duration: .15, ease: 'power2.out', overwrite: true }); }
+      k.on(range, 'pointerenter', function (e) { if (e.pointerType === 'mouse') lift(true); });
+      k.on(range, 'pointerleave', function () { lift(false); });
+      k.on(range, 'pointerdown', function () { lift(true); });
+      k.on(range, 'focus', function () { lift(true); });
+      k.on(range, 'blur', function () { lift(false); });
+      k.add(function () { draw.innerHTML = ''; draw.style.clipPath = ''; rule.style.left = ''; range.value = 38; });
+      entrance(k, root, '.hax__key');
+    } },
+
+    /* slot 3 · Phase 5 improved version of b6 */
+    3: { init: function (root, k) {
+      navOn(k, 'ground');
+      var svg = root.querySelector('.hsx__frame'), bay = root.querySelector('.hsx__bay');
+      var s = '';
+      [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
+      [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
+      s += '<path class="t br" d="M22 506L118 410M618 14L522 110"/>';
+      [[22, 14], [618, 14], [22, 506], [618, 506]].forEach(function (q) { s += '<rect class="cp" x="' + (q[0] - 7) + '" y="' + (q[1] - 7) + '" width="14" height="14" rx="2"/>'; });
+      svg.innerHTML = s;
+      k.add(function () { svg.innerHTML = ''; });
+      var tl = entrance(k, root);
+      if (tl) tl.fromTo(svg.querySelectorAll('.t'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, 0)
+        .from(svg.querySelectorAll('.cp'), { scale: 0, transformOrigin: '50% 50%', duration: .18, ease: 'power2.out', stagger: .03 }, .2)
+        .fromTo(bay, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .4, ease: HOUSE, clearProps: 'clipPath' }, .18);
+    } },
+
+    /* slot 2 · Phase 5 improved version of b5 */
+    2: { init: function (root, k) {
+      navOn(k, 'ground');
+      var opts = Array.prototype.slice.call(root.querySelectorAll('.hkx__opt'));
+      var imgs = Array.prototype.slice.call(root.querySelectorAll('.hkx__img'));
+      var cap = root.querySelector('.hkx__cap'), lbl = root.querySelector('.hero__cta .btn__label');
+      var CAP = { 'k-white-shaker': 'White Shaker kitchen', 'b-white-marble': 'White marble bathroom', 'w-farmhouse': 'Modern farmhouse, whole home' };
+      var CTA = { Kitchen: 'Book a kitchen consultation', Bathroom: 'Book a bathroom consultation', 'Whole home': 'Book a whole-home consultation' };
+      var plan = root.querySelector('.hkx__plan');
+      function pick(i, focus) {
+        opts.forEach(function (o, j) { o.setAttribute('aria-checked', j === i ? 'true' : 'false'); o.tabIndex = j === i ? 0 : -1; });
+        var key = opts[i].dataset.k;
+        if (plan) plan.setAttribute('data-on', opts[i].dataset.room);
+        imgs.forEach(function (im) { var on = im.dataset.img === key; im.classList.toggle('is-on', on); gsap.to(im, { autoAlpha: on ? 1 : 0, duration: k.motion ? .2 : 0, ease: 'power2.out', overwrite: true }); });
+        cap.textContent = CAP[key];
+        lbl.textContent = CTA[opts[i].dataset.room];
+        EZ.pickedRoom = opts[i].dataset.room;   // carried into Consult, which preselects it
+        if (focus) opts[i].focus();
+      }
+      opts.forEach(function (o, i) {
+        k.on(o, 'click', function () { pick(i); });
+        k.on(o, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault(); e.stopPropagation();
+          pick((i + d + opts.length) % opts.length, true);
+        });
+      });
+      gsap.set(imgs, { autoAlpha: 0 });
+      pick(0);
+      k.add(function () { gsap.set(imgs, { clearProps: 'opacity,visibility' }); delete EZ.pickedRoom; });
+      entrance(k, root, '.hkx__pick, .hkx__photo');
+    } },
+
+    /* slot 1 · Phase 5 improved version of b4 */
     1: { init: function (root, k) {
+      navOn(k, 'ground');
+      var win = root.querySelector('.hpx__win'), img = win.querySelector('img'), name = root.querySelector('.hpx__name');
+      var tl = entrance(k, root);
+      if (tl) {
+        tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
+          .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0)
+          .fromTo(root.querySelector('.hpx__roof path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: HOUSE }, .12)
+          .fromTo(root.querySelector('.hpx__sun'), { scale: .4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: HOUSE, clearProps: 'transform,opacity,visibility' }, .2)
+          .fromTo(root.querySelectorAll('.hpx__palm path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .04 }, .25)
+          .fromTo(root.querySelector('.hpx__dim path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .4, ease: HOUSE }, .4);
+      }
+      // [Phase 4] the Finish picker: each swatch is a crop of a real Elbaz kitchen; picking one puts that kitchen in the house
+      var FIN = [
+        { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
+        { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
+        { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
+        { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
+        { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
+        { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
+      ];
+      var P = (window.__DATA || {}).projects || [], title = function (key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; };
+      var box = root.querySelector('.hpx__sw'), cur = 0;
+      box.innerHTML = FIN.map(function (f, i) {
+        return '<button type="button" role="radio" class="hpx__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" data-rx="native:finish-swatch" style="background-image:url(' + EZ.img(f.d || f.k) + ');background-position:' + f.at + '"></button>';
+      }).join('');
+      var sws = Array.prototype.slice.call(box.children);
+      k.add(function () { box.innerHTML = ''; img.src = EZ.img('k-navy-shaker-xl'); img.style.objectPosition = ''; name.textContent = title('k-navy-shaker'); });
+      function pick(i, focus) {
+        if (i === cur) return;
+        cur = i; var f = FIN[i];
+        sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
+        if (focus) sws[i].focus();
+        name.textContent = title(f.d || f.k);
+        img.alt = title(f.d || f.k) + ', built by Elbaz';
+        EZ.pickedRoom = 'Kitchen';
+        var swap = function () { img.src = EZ.img(f.k); img.style.objectPosition = f.pos; };
+        if (!k.motion) { swap(); return; }
+        gsap.to(img, { opacity: 0, duration: .14, ease: 'power1.in', overwrite: true, onComplete: function () { swap(); gsap.to(img, { opacity: 1, duration: .26, ease: HOUSE }); } });
+        gsap.fromTo(sws[i], { scale: .86 }, { scale: 1, duration: .3, ease: 'back.out(2.4)' });
+      }
+      sws.forEach(function (s, i) {
+        k.on(s, 'click', function () { pick(i); });
+        k.on(s, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
+        });
+      });
+    } },
+
+    /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
+    b4: { init: function (root, k) {
       navOn(k, 'ground');
       var win = root.querySelector('.hp__win'), img = win.querySelector('img'), name = root.querySelector('.hp__name');
       var tl = entrance(k, root);
@@ -6768,7 +7262,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* 2 · Pick your room [Anatomy §1 F1 + F3]: the entry is a choice; the photo and the CTA answer it */
-    2: { init: function (root, k) {
+    b5: { init: function (root, k) {
       navOn(k, 'ground');
       var opts = Array.prototype.slice.call(root.querySelectorAll('.hk__opt'));
       var imgs = Array.prototype.slice.call(root.querySelectorAll('.hk__img'));
@@ -6800,9 +7294,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* 3 · Scaffold, cleaned: the tubes draw round a large real photograph, which rises into the bay (once) */
-    3: { init: function (root, k) {
+    b6: { init: function (root, k) {
       navOn(k, 'ground');
-      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hs__bay');
+      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hsbay');
       var s = '';
       [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
       [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
@@ -6817,7 +7311,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* 4 · As built (Direction A): a real range input drives the line between the traced drawing and the photograph */
-    4: { init: function (root, k) {
+    b7: { init: function (root, k) {
       navOn(k, 'ground');
       var plate = root.querySelector('.ha__plate'), draw = root.querySelector('.ha__draw');
       var rule = root.querySelector('.ha__rule'), range = root.querySelector('.ha__range');
@@ -6844,7 +7338,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* 5 · Open house (Direction B): three real rooms on three depth planes; the pointer opens the house a few pixels */
-    5: { init: function (root, k) {
+    b8: { init: function (root, k) {
       navOn(k, 'ground');
       var house = root.querySelector('.ho__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.ho__p'));
       entrance(k, root, '.ho__p');
@@ -6881,12 +7375,12 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       k.add(function () { alive = false; });
       var frame = root.querySelector('.hero1__frame');
       var plate = root.querySelector('.hero1__plate');
-      var bp = root.querySelector('.hero1__bp');
+      var bp = root.querySelector('.hero1bp');
       var linesEl = root.querySelector('.hero1__lines');
       var strokeSvg = root.querySelector('.hero1__stroke');
       var lead = root.querySelector('.hero1__lead');
       var acts = root.querySelector('.hero__acts').children;
-      var block = root.querySelector('.hero1__block');
+      var block = root.querySelector('.hero1block');
       linesEl.innerHTML = EZ.drawing('k-fluted-hero', { par: 'none' });
       var notesEl = root.querySelector('.hero1__notes'), notes = Array.prototype.slice.call(notesEl.querySelectorAll('.hero1__note'));
       var lines = linesEl.querySelectorAll('line');
@@ -6982,7 +7476,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     b2: { init: function (root, k) {
       navOn(k, 'ground');
       var stage = root.querySelector('.hero2__stage');
-      var band = root.querySelector('.hero2__band');
+      var band = root.querySelector('.hero2band');
       var win = root.querySelector('.hero2__window');
       var plate = root.querySelector('.hero2__plate');
       var h1 = root.querySelector('.hero2__h');
@@ -7043,8 +7537,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     b3: { init: function (root, k) {
       navOn(k, 'ground');
       var svg = root.querySelector('.hero3__scaffold');
-      var bay = root.querySelector('.hero3__bay');
-      var board = root.querySelector('.hero3__board');
+      var bay = root.querySelector('.hero3bay');
+      var board = root.querySelector('.hero3board');
       var depths = root.querySelectorAll('.hero3__depth');
       var faces = root.querySelectorAll('.hero3__face');
       var h1 = root.querySelector('.hero3__h');

@@ -1,0 +1,8 @@
+hero2 1440: height 900, visible elements 32, overflow 0, console 0
+hero3 1440: height 900, visible elements 24, overflow 0, console 0
+hero4 1440: height 900, visible elements 28, overflow 0, console 0
+hero5 1440: height 900, visible elements 30, overflow 0, console 0
+hero2 375: height 856, visible elements 32, overflow 0, bar overlap 0px² (content bottom 538, bar top 748), console 0
+hero3 375: height 809, visible elements 24, overflow 0, bar overlap 0px² (content bottom 458, bar top 748), console 0
+hero4 375: height 834, visible elements 28, overflow 0, bar overlap 2203px² (content bottom 754, bar top 748), console 0
+hero5 375: height 709, visible elements 30, overflow 0, bar overlap 0px² (content bottom 458, bar top 748), console 0
