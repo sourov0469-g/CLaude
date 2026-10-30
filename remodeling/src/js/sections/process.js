@@ -21,10 +21,318 @@
   ];
   var RXS = ['speech', 'magnifier', 'sketch', 'ledger', 'badge', 'sawhorse', 'check', 'flag'];
 
+
+  // Phase 5: one answer panel for the new versions, printed from the shared stage data (titles, week marks, descriptions)
+  function panel(out, i) {
+    var st = S()[i]; if (!st) return;
+    out.innerHTML = '<span class="pstage__n nums">0' + (i + 1) + '</span><h3 class="pstage__t">' + st.t + '</h3><p class="pstage__w nums">' + st.w + '</p><p class="pstage__d">' + st.d + '</p>';
+  }
+  function radioRow(btns, k, pick) {
+    var cur = 0;
+    btns.forEach(function (b, i) {
+      b.setAttribute('role', 'radio'); b.tabIndex = i ? -1 : 0;
+      k.on(b, 'click', function () { pick(i); });
+      k.on(b, 'keydown', function (e) { var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0; if (d) { e.preventDefault(); var n = (cur + d + btns.length) % btns.length; pick(n); btns[n].focus(); } });
+    });
+    return function (i) { cur = i; btns.forEach(function (b, j) { b.setAttribute('aria-checked', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; }); };
+  }
+
   EZ.section('process', {
+    /* slot 4 · NEW · The dial: eight stages round a rotary dial; the stage under the pointer answers */
+    4: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.pdl__side > *'));
+      var svg = root.querySelector('.pdl__svg'), out = root.querySelector('.pdl__out'), st = S(), n = st.length, a0 = 0;
+      var g = '<circle class="face" cx="200" cy="200" r="190"/><g class="spin">';
+      st.forEach(function (x, i) { var a = i * 360 / n; g += '<g transform="rotate(' + a + ' 200 200)"><path class="tick" d="M200 18 V40"/><text x="200" y="66" transform="rotate(' + (-a) + ' 200 66)">0' + (i + 1) + '</text></g>'; });
+      g += '</g><circle class="inner" cx="200" cy="200" r="104"/><circle class="knob" cx="200" cy="200" r="54"/><circle class="hub" cx="200" cy="200" r="12"/>';
+      svg.innerHTML = g;
+      var spin = svg.querySelector('.spin'), btns = [];
+      var bx = root.querySelector('.pdl__btns'); bx.innerHTML = st.map(function (x, i) { return '<button type="button" aria-label="' + x.t + '" data-rx="native:dial-stop">' + (i + 1) + '</button>'; }).join(''); btns = Array.prototype.slice.call(bx.children);
+      var mark = radioRow(btns, k, go);
+      function setRot(a) { a0 = a; spin.setAttribute('transform', 'rotate(' + a.toFixed(2) + ' 200 200)'); }
+      function go(i) {
+        var to = -i * 360 / n, d = ((to - a0) % 360 + 540) % 360 - 180, o = { a: a0 };
+        mark(i); panel(out, i);
+        if (!k.motion) { setRot(a0 + d); return; }
+        gsap.to(o, { a: a0 + d, duration: .45, ease: EZ.bezier(.23, 1, .32, 1), onUpdate: function () { setRot(o.a); }, overwrite: true });
+      }
+      var drag = null;
+      k.on(svg, 'pointerdown', function (e) { var r = svg.getBoundingClientRect(); drag = { cx: r.left + r.width / 2, cy: r.top + r.height / 2, a: Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)), r0: a0 }; svg.setPointerCapture(e.pointerId); });
+      k.on(svg, 'pointermove', function (e) { if (!drag) return; var a = Math.atan2(e.clientY - drag.cy, e.clientX - drag.cx); setRot(drag.r0 + (a - drag.a) * 180 / Math.PI); });
+      k.on(svg, 'pointerup', function () { if (!drag) return; drag = null; var i = ((Math.round(-a0 / (360 / n)) % n) + n) % n; go(i); });
+      go(0);
+      k.add(function () { svg.innerHTML = ''; bx.innerHTML = ''; });
+    } },
+
+    /* slot 5 · NEW · The key ring: one tag per stage hangs on the ring; the picked tag swings up */
+    5: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.pkr__side > *'));
+      var box = root.querySelector('.pkr__tags'), out = root.querySelector('.pkr__out'), st = S();
+      box.innerHTML = st.map(function (x, i) { return '<button type="button" class="pkr__tag" aria-label="' + x.t + '" data-rx="native:ring-tag">' + (i + 1) + '</button>'; }).join('');
+      var tags = Array.prototype.slice.call(box.children), mark = radioRow(tags, k, go);
+      function go(i) { mark(i); panel(out, i); }
+      go(0);
+      if (k.motion) gsap.from(tags, { rotation: function (i) { return i % 2 ? 24 : -24; }, transformOrigin: '50% -30px', duration: .6, ease: 'elastic.out(1, .5)', stagger: .04, clearProps: 'rotation', scrollTrigger: { trigger: box, start: 'top 75%', once: true } });
+      k.add(function () { box.innerHTML = ''; });
+    } },
+
+    /* slot 6 · NEW · The elevator: a call panel sends the car to the stage's floor */
+    6: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.pel__side > *'));
+      var fl = root.querySelector('.pel__floors'), car = root.querySelector('.pel__car'), disp = root.querySelector('.pel__disp'), pnl = root.querySelector('.pel__panel'), out = root.querySelector('.pel__out'), st = S();
+      fl.innerHTML = st.slice().reverse().map(function (x, j) { return '<div><span>' + x.t + '</span><b class="nums">' + (st.length - j) + '</b></div>'; }).join('');
+      pnl.innerHTML = st.slice().reverse().map(function (x, j) { var i = st.length - 1 - j; return '<button type="button" data-i="' + i + '" aria-label="Floor ' + (i + 1) + ', ' + x.t + '" data-rx="native:lift-floor">' + (i + 1) + '</button>'; }).join('');
+      var btns = Array.prototype.slice.call(pnl.children).sort(function (a, b) { return a.dataset.i - b.dataset.i; }), mark = radioRow(btns, k, go);
+      function go(i) {
+        mark(i); panel(out, i);
+        var h = fl.clientHeight / st.length; car.style.transform = 'translateY(' + (-i * h).toFixed(1) + 'px)';
+        if (k.motion) { var o = { v: +disp.textContent }; gsap.to(o, { v: i + 1, duration: .6, ease: 'none', onUpdate: function () { disp.textContent = Math.round(o.v); } }); } else disp.textContent = i + 1;
+      }
+      go(0);
+      k.ro(fl, function () { var c = btns.filter(function (b) { return b.getAttribute('aria-checked') === 'true'; })[0]; if (c) car.style.transform = 'translateY(' + (-c.dataset.i * fl.clientHeight / st.length).toFixed(1) + 'px)'; });
+      k.add(function () { fl.innerHTML = ''; pnl.innerHTML = ''; car.style.transform = ''; });
+    } },
+
+    /* slot 7 · NEW · The folding ruler: each press unfolds the next segment, and the segment is the next stage */
+    7: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.pfr__side > *'));
+      var rule = root.querySelector('.pfr__rule'), out = root.querySelector('.pfr__out'), st = S(), open = 1;
+      rule.innerHTML = st.map(function (x, i) { return '<div class="pfr__seg" style="left:calc(' + i + ' * 100% / 8)">' + (i + 1) + '<span>' + x.t + '</span></div>'; }).join('');
+      var segs = Array.prototype.slice.call(rule.children);
+      function set() {
+        segs.forEach(function (sg, i) {
+          var on = i < open; sg.classList.toggle('is-open', on); sg.classList.toggle('is-fold', !on);
+          sg.style.setProperty('--fold', (i % 2 ? -1 : 1) * 3 + 'deg'); sg.style.setProperty('--fx', 'calc(' + (on ? 0 : -(i - open)) + ' * (100% + 4px))'); sg.style.zIndex = on ? 1 : 10 + i;
+        });
+        panel(out, open - 1);
+        root.querySelector('.pfr__next').disabled = open >= st.length; root.querySelector('.pfr__fold').disabled = open <= 1;
+      }
+      k.on(root.querySelector('.pfr__next'), 'click', function () { if (open < st.length) { open++; set(); } });
+      k.on(root.querySelector('.pfr__fold'), 'click', function () { open = 1; set(); });
+      set();
+      k.add(function () { rule.innerHTML = ''; });
+    } },
+
+    /* slot 8 · NEW · The wall calendar: each stage sits on the weeks its published mark names */
+    8: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.pcl__side > *'));
+      var wk = root.querySelector('.pcl__weeks'), rows = root.querySelector('.pcl__rows'), after = root.querySelector('.pcl__after'), out = root.querySelector('.pcl__out'), st = S();
+      wk.innerHTML = '<span></span>' + new Array(13).join('x').split('').map(function (x, i) { return '<span class="nums">' + (i + 1) + '</span>'; }).join('');
+      var all = [];
+      st.forEach(function (x, i) {
+        var m = /^Weeks? (\d+)(?:[^\d]+(\d+))?/.exec(plain(x.w));
+        if (m) {
+          var a = +m[1], b = +(m[2] || m[1]);
+          rows.insertAdjacentHTML('beforeend', '<button type="button" class="pcl__row" data-i="' + i + '" aria-label="' + x.t + ', ' + plain(x.w) + '" data-rx="native:cal-row"><span>' + x.t + '</span><span class="pcl__span" style="grid-column:' + (a + 1) + ' / ' + (b + 2) + '"></span></button>');
+        } else after.insertAdjacentHTML('beforeend', '<button type="button" data-i="' + i + '" aria-label="' + x.t + ', ' + plain(x.w) + '" data-rx="native:cal-row">' + x.t + ': ' + x.w + '</button>');
+      });
+      all = Array.prototype.slice.call(root.querySelectorAll('.pcl__rows button, .pcl__after button'));
+      var mark = radioRow(all, k, function (j) { mark(j); panel(out, +all[j].dataset.i); });
+      mark(0); panel(out, +all[0].dataset.i);
+      k.add(function () { wk.innerHTML = ''; rows.innerHTML = ''; after.innerHTML = ''; });
+    } },
+
+    /* slot 3 · Phase 5 improved version of b4 */
+    3: { init: function (root, k) {
+      var deck = root.querySelector('.p3x__deck'), nEl = root.querySelector('.p3x__n');
+      var st = S(), N = st.length, cur = 0;
+      EZ.reveal(k, root.querySelectorAll('.p3x__side > *'));
+      deck.innerHTML = st.map(function (s, i) {
+        return '<article class="p3x__card" data-i="' + i + '" aria-hidden="' + (i ? 'true' : 'false') + '">' +
+          '<div class="p3x__art"><svg viewBox="0 0 40 40" aria-hidden="true">' + ICONS[i] + '</svg><span class="p3x__stamp nums">' + s.w + '</span></div>' +
+          '<p class="p3x__cno nums">' + (i < 9 ? '0' : '') + (i + 1) + ' / ' + (N < 10 ? '0' : '') + N + '</p>' +
+          '<h3 class="p3x__t">' + s.t + '</h3><p class="p3x__d">' + s.d + '</p></article>';
+      }).join('');
+      var cards = Array.prototype.slice.call(deck.children);
+      // the gesture is discoverable: a hint under the deck until the first card is dealt [S1443]
+      var hint = document.createElement('p');
+      hint.className = 'p3x__hint'; hint.setAttribute('aria-hidden', 'true');
+      hint.innerHTML = '<svg viewBox="0 0 22 12"><path d="M7 1L2 6l5 5M15 1l5 5-5 5M2 6h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Swipe the card';
+      deck.appendChild(hint);
+      function layout(animate) {
+        cards.forEach(function (c, i) {
+          var n = i - cur, vars;
+          if (n < 0) vars = { x: '-115%', y: 0, scale: .96, autoAlpha: 0, zIndex: 0 };
+          else vars = { x: 0, y: Math.min(n, 3) * 14, scale: 1 - Math.min(n, 3) * .04, autoAlpha: n > 3 ? 0 : 1, zIndex: N - n };
+          c.setAttribute('aria-hidden', n === 0 ? 'false' : 'true');
+          if (animate && k.motion) gsap.to(c, Object.assign({ duration: .3, ease: 'power3.out', overwrite: true }, vars)); else gsap.set(c, vars);
+        });
+        nEl.textContent = (cur < 9 ? '0' : '') + (cur + 1);
+      }
+      function next(dir) {
+        if (cur >= N - 1) { cur = 0; layout(true); return; }      // the last card deals the deck again
+        var c = cards[cur];
+        cur++;
+        deck.classList.add('is-dealt');
+        if (k.motion) gsap.to(c, { x: (dir || -1) * 115 + '%', autoAlpha: 0, duration: .3, ease: 'power2.in', overwrite: true, onComplete: function () { gsap.set(c, { zIndex: 0 }); } });
+        layout(true);
+      }
+      function prev() { if (cur > 0) { cur--; layout(true); } }
+      layout(false);
+      k.on(root.querySelector('.p3x__next'), 'click', function () { next(-1); });
+      k.on(root.querySelector('.p3x__prev'), 'click', prev);
+      k.on(deck, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); next(-1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); } });
+      // the gesture: activation after 12px, axis locks; past 30% of the card width (or a fast flick) the card goes
+      var g = null;
+      k.on(deck, 'pointerdown', function (e) {
+        var c = cards[cur]; if (!c || !c.contains(e.target)) return;
+        g = { x: e.clientX, y: e.clientY, t: performance.now(), axis: null, c: c, w: c.offsetWidth, id: e.pointerId };
+      });
+      k.on(deck, 'pointermove', function (e) {
+        if (!g || e.pointerId !== g.id) return;
+        var dx = e.clientX - g.x, dy = e.clientY - g.y;
+        if (!g.axis) { if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return; g.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; if (g.axis === 'x') { try { deck.setPointerCapture(e.pointerId); } catch (er) {} } }
+        if (g.axis !== 'x') return;
+        e.preventDefault();
+        var pr = Math.min(1, Math.abs(dx) / (g.w * .3));
+        gsap.set(g.c, { x: dx, scale: 1 - pr * .02 });
+        if (cards[cur + 1]) gsap.set(cards[cur + 1], { y: 14 * (1 - pr), scale: .96 + .04 * pr });   // the threshold cue: the next card rises to meet it
+        g.dx = dx; g.v = dx / Math.max(1, performance.now() - g.t);
+      });
+      function end(e) {
+        if (!g) return;
+        // a tap (no travel, quick) deals the next card too: tap = select [S1443]
+        if (!g.axis && e && e.type === 'pointerup' && performance.now() - g.t < 450) { g = null; next(-1); return; }
+        var go = g.axis === 'x' && (Math.abs(g.dx || 0) > g.w * .3 || Math.abs(g.v || 0) > .55);
+        if (go) next((g.dx || -1) < 0 ? -1 : 1);
+        else if (g.axis === 'x') { gsap.to(g.c, { x: 0, scale: 1, duration: .45, ease: 'elastic.out(1, .55)', overwrite: true }); layout(true); }
+        g = null;
+      }
+      k.on(deck, 'pointerup', end);
+      k.on(deck, 'pointercancel', end);
+      k.add(function () { deck.innerHTML = ''; deck.classList.remove('is-dealt'); });
+      if (k.motion) gsap.from(cards.slice(0, 4), { y: 30, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: deck, start: 'top 80%', once: true }, onComplete: function () { layout(false); } });
+    } },
+
+    /* slot 2 · Phase 5 improved version of b3 */
+    2: { init: function (root, k) {
+      var svg = root.querySelector('.p2x__svg'), stage = root.querySelector('.p2x__stage');
+      var capNo = root.querySelector('.p2x__no'), capT = root.querySelector('.p2x__t'), capW = root.querySelector('.p2x__w');
+      // [AUDIT-01 F5 loser] the percentage readout is gone: equal bands under unequal durations made it a fabricated number
+      var grip = root.querySelector('.p2x__grip'), pipsEl = root.querySelector('.p2x__pips');
+      var st = S(), TOP = 150, BOT = 600, ys = st.map(function (s, i) { return BOT - (i + 1) / st.length * (BOT - TOP); });
+      EZ.reveal(k, root.querySelectorAll('.process__head > *'));
+      // the house, in section: footings, slab, walls, partition, door, windows, ceiling, truss roof, covering; site props
+      var built =
+        '<g class="soil"><rect x="0" y="560" width="1000" height="60"/></g>' +
+        '<rect class="footing" x="196" y="560" width="58" height="40"/><rect class="footing" x="746" y="560" width="58" height="40"/>' +
+        '<rect class="slab" x="190" y="538" width="620" height="22"/>' +
+        '<rect class="wall" x="200" y="330" width="22" height="208"/><rect class="wall" x="778" y="330" width="22" height="208"/><rect class="part" x="494" y="330" width="12" height="208"/>' +
+        '<rect class="win" x="270" y="396" width="110" height="72"/><path class="mull" d="M325 396v72M270 432h110"/>' +
+        '<rect class="win" x="610" y="396" width="110" height="72"/><path class="mull" d="M665 396v72M610 432h110"/>' +
+        '<rect class="door" x="532" y="420" width="62" height="118"/><circle class="knob" cx="582" cy="482" r="4"/>' +
+        '<rect class="ceil" x="190" y="322" width="620" height="10"/>' +
+        '<path class="truss" d="M170 330L500 152L830 330Z"/><path class="web" d="M260 330L335 240M335 240L420 330M420 330L500 152M500 152L580 330M580 330L665 240M665 240L740 330"/>' +
+        '<path class="cover" d="M160 334L500 146L840 334"/>' +
+        '<g class="stakes"><path d="M140 560v-34M860 560v-34"/><path class="flag" d="M140 528l16 5-16 5zM860 528l16 5-16 5z"/><path class="string" d="M140 532H860"/></g>' +
+        '<g class="gauge"><rect x="70" y="470" width="10" height="90"/><path d="M80 480h8M80 500h12M80 520h8M80 540h12"/><path class="flood" d="M40 548h80"/></g>' +
+        '<g class="permit"><rect class="post" x="900" y="460" width="8" height="100"/><rect class="card" x="878" y="452" width="52" height="40"/><path d="M886 464h36M886 472h36M886 480h22"/></g>';
+      var shoring = '';
+      [230, 360, 500, 640, 770].forEach(function (x, i) {
+        shoring += '<rect class="prop" x="' + (x - 5) + '" y="140" width="10" height="420"/>';
+        if (i < 4) shoring += '<path class="brace" d="M' + x + ' 520L' + (x + (i % 2 ? 130 : 140)) + ' 220M' + x + ' 220L' + (x + (i % 2 ? 130 : 140)) + ' 520"/>';
+      });
+      shoring += '<rect class="ledger" x="200" y="214" width="600" height="10"/><rect class="ledger" x="200" y="420" width="600" height="10"/>';
+      svg.innerHTML = '<defs><clipPath id="p2-below"><rect class="cb" x="0" y="600" width="1000" height="40"/></clipPath><clipPath id="p2-above"><rect class="ca" x="0" y="0" width="1000" height="600"/></clipPath></defs>' +
+        '<path class="ground" d="M0 560H1000"/>' +
+        '<g class="shore" clip-path="url(#p2-above)">' + shoring + '</g>' +
+        '<g class="built" clip-path="url(#p2-below)">' + built + '</g>' +
+        '<g class="plane"><path class="line" d="M0 600H1000"/><path class="cap" d="M190 600H810"/></g>';
+      var cb = svg.querySelector('.cb'), ca = svg.querySelector('.ca'), planeG = svg.querySelector('.plane');
+      pipsEl.innerHTML = st.map(function (s, i) {
+        return '<button type="button" class="p2x__pip" data-i="' + i + '" data-rx="~' + RXS[i] + '/pop/flash/t" aria-label="Stage ' + (i + 1) + ': ' + plain(s.t) + '"><span class="nums">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="p2x__pt">' + s.t + '</span></button>';
+      }).join('');
+      var pips = Array.prototype.slice.call(pipsEl.children);
+      if (EZ.bindReactions) EZ.bindReactions(root, k);
+      var Y = { y: BOT }, cur = -1;
+      function render() {
+        var y = EZ.clamp(Y.y, TOP, BOT);
+        cb.setAttribute('y', y); cb.setAttribute('height', 640 - y);
+        ca.setAttribute('height', y);
+        planeG.setAttribute('transform', 'translate(0 ' + (y - 600) + ')');
+        grip.style.top = (y / 620 * 100) + '%';
+        var n = 0; ys.forEach(function (t) { if (y <= t + .5) n++; });
+        var idx = Math.max(0, n - 1);
+        if (idx !== cur) {
+          cur = idx;
+          capNo.textContent = (idx < 9 ? '0' : '') + (idx + 1); capT.innerHTML = st[idx].t; capW.innerHTML = st[idx].w;
+          pips.forEach(function (p, j) { p.setAttribute('aria-pressed', j === idx ? 'true' : 'false'); p.classList.toggle('is-done', j < n); });
+        }
+        stage.classList.toggle('is-done', y <= TOP + .5);
+      }
+      var auto = null;
+      function go(i, dur) {
+        if (auto) { auto.kill(); auto = null; }
+        if (!k.motion) { Y.y = ys[i]; render(); return; }
+        gsap.to(Y, { y: ys[i], duration: dur == null ? .5 : dur, ease: 'power2.inOut', onUpdate: render, overwrite: true });
+      }
+      pips.forEach(function (p, i) { k.on(p, 'click', function () { go(i); }); });
+      // drag the line (S1340's scrub), or step it with the keys
+      var dragging = false;
+      function yAt(e) { var r = svg.getBoundingClientRect(); return (e.clientY - r.top) / r.height * 620; }
+      k.on(grip, 'pointerdown', function (e) { dragging = true; if (auto) { auto.kill(); auto = null; } gsap.killTweensOf(Y); try { grip.setPointerCapture(e.pointerId); } catch (er) {} e.preventDefault(); });
+      k.on(grip, 'pointermove', function (e) { if (dragging) { Y.y = EZ.clamp(yAt(e), TOP, BOT); render(); } });
+      k.on(grip, 'pointerup', function () { dragging = false; });
+      k.on(grip, 'pointercancel', function () { dragging = false; });
+      k.on(grip, 'keydown', function (e) {
+        var d = e.key === 'ArrowUp' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowDown' || e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return; e.preventDefault();
+        go(EZ.clamp(cur + d, 0, st.length - 1), .3);
+      });
+      k.add(function () { svg.innerHTML = ''; pipsEl.innerHTML = ''; grip.style.top = ''; stage.classList.remove('is-done'); });
+      if (!k.motion) { Y.y = TOP; render(); return; }
+      Y.y = BOT; render();
+      // the build runs once when the stage is in view: ~.45s per stage, a short beat on each [S1340 4-5s build]
+      ScrollTrigger.create({ trigger: stage, start: 'top 65%', once: true, onEnter: function () {
+        if (dragging) return;
+        auto = gsap.timeline({ onComplete: function () { auto = null; } });
+        ys.forEach(function (t) { auto.to(Y, { y: t, duration: .45, ease: 'power2.inOut', onUpdate: render }).to({}, { duration: .1 }); });
+      } });
+    } },
+
+    /* slot 1 · Phase 5 improved version of b2 */
+    1: { init: function (root, k) {
+      var plan = root.querySelector('.plx__plan'), svg = root.querySelector('.plx__svg'), signs = root.querySelector('.plx__signs'), list = root.querySelector('.plx__list');
+      var st = S(), road, done, truck, P = { p: 0 }, VW = 1200, VH = 520, scrub = null;
+      var pts = [[90, 420], [250, 250], [430, 380], [575, 190], [735, 350], [880, 170], [1030, 320], [1125, 120]];
+      EZ.reveal(k, root.querySelectorAll('.process__head .t-head, .plx__headtxt > *'));
+      signs.innerHTML = st.map(function (s, i) {
+        return '<li class="plx__stop' + (i % 2 === 0 ? ' is-below' : '') + '" style="left:' + (pts[i][0] / VW * 100) + '%;top:' + (pts[i][1] / VH * 100) + '%"><span class="plx__sign"><span class="plx__no nums">0' + (i + 1) + '</span><span class="plx__t">' + s.t + '</span></span></li>';
+      }).join('');
+      list.innerHTML = st.map(function (s, i) {
+        return '<li class="plx__item"><span class="plx__ino nums" aria-hidden="true">0' + (i + 1) + '</span><h3 class="plx__ih">' + s.t + '</h3><p class="plx__iw nums">' + s.w + '</p><p class="plx__id">' + s.d + '</p></li>';
+      }).join('');
+      var d = 'M' + pts[0][0] + ' ' + pts[0][1];
+      for (var i = 1; i < pts.length; i++) {
+        var a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1];
+        d += 'C' + f(a[0] + dx * .2) + ' ' + f(a[1] + dy * .8) + ' ' + f(b[0] - dx * .6) + ' ' + f(b[1] - dy * .3) + ' ' + b[0] + ' ' + b[1];
+      }
+      var pads = pts.map(function (p, n) { return '<g class="pad" transform="translate(' + p[0] + ' ' + p[1] + ')"><circle r="15"/><text y="5" text-anchor="middle">' + (n + 1) + '</text></g>'; }).join('');
+      var home = '<g class="home" transform="translate(' + (pts[7][0] + 40) + ' ' + (pts[7][1] - 46) + ')"><path d="M-30 10l30-24 30 24v26h-60z"/><rect class="win" x="-20" y="16" width="12" height="10"/><rect class="win" x="8" y="16" width="12" height="10"/></g>';
+      svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+      svg.innerHTML = '<path class="road-case" d="' + d + '"/><path class="road" d="' + d + '"/><path class="road-line" d="' + d + '"/><path class="road-done" d="' + d + '"/>' + pads + home + TRUCK;
+      road = svg.querySelector('.road'); done = svg.querySelector('.road-done'); truck = svg.querySelector('.truck');
+      function set() {
+        gsap.set(done, { drawSVG: '0% ' + (P.p * 100) + '%' });
+        gsap.set(truck, { motionPath: { path: road, align: road, alignOrigin: [.5, .5], autoRotate: true, start: 0, end: Math.max(.0001, P.p) } });
+        svg.classList.toggle('is-home', P.p > .995);
+      }
+      set();
+      k.add(function () { svg.innerHTML = ''; signs.innerHTML = ''; list.innerHTML = ''; if (scrub) scrub.kill(); });
+      if (!k.motion) return;
+      // one focal motion: the truck. Desktop only; a phone shows the plan parked at stop 01 above the list.
+      var mq = matchMedia('(min-width: 768px)');
+      function arm() {
+        if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; P.p = 0; set(); }
+        if (mq.matches) scrub = gsap.to(P, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: plan, start: 'top 70%', end: 'bottom 40%', scrub: .6 } });
+      }
+      arm();
+      k.on(mq, 'change', arm);
+    } },
+
     /* slot 1 · AUDIT-01 winner (copied from v1; F5 fixes): the plan is a graphic (teal road and truck, scroll-driven on desktop,
        parked at stop 01 on phones and under reduced motion); every stop's description is always on the page in the numbered list */
-    1: { init: function (root, k) {
+    b2: { init: function (root, k) {
       var plan = root.querySelector('.pl__plan'), svg = root.querySelector('.pl__svg'), signs = root.querySelector('.pl__signs'), list = root.querySelector('.pl__list');
       var st = S(), road, done, truck, P = { p: 0 }, VW = 1200, VH = 520, scrub = null;
       var pts = [[90, 420], [250, 250], [430, 380], [575, 190], [735, 350], [880, 170], [1030, 320], [1125, 120]];
@@ -160,7 +468,7 @@
     } },
 
     /* v2 · It builds itself [S1340]: a rising line; finished work below it, timber shoring waiting above it */
-    2: { init: function (root, k) {
+    b3: { init: function (root, k) {
       var svg = root.querySelector('.process2__svg'), stage = root.querySelector('.process2__stage');
       var capNo = root.querySelector('.process2__no'), capT = root.querySelector('.process2__t'), capW = root.querySelector('.process2__w');
       // [AUDIT-01 F5 loser] the percentage readout is gone: equal bands under unequal durations made it a fabricated number
@@ -246,7 +554,7 @@
     } },
 
     /* v3 · The deck [S1443]: swipe the top card away (12px activation, direction lock, threshold or rubber-band back) */
-    3: { init: function (root, k) {
+    b4: { init: function (root, k) {
       var deck = root.querySelector('.process3__deck'), nEl = root.querySelector('.process3__n');
       var st = S(), N = st.length, cur = 0;
       EZ.reveal(k, root.querySelectorAll('.process3__side > *'));

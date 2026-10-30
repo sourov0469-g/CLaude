@@ -3,7 +3,132 @@
   <!-- v1 · On the road [BANK Q54 responsive scroll-triggered curved path: a traveller rides a path generated through measured
        anchors (control multipliers .8/.3/.6/.2), scrub, ease none]. The route is the section: a site plan with eight signposts. -->
   <!-- slot 1 · AUDIT-01 winner (copied from v1, fixes applied here; the original is in a backup slot) -->
-  <div class="ver pl" data-v="1">
+  <!-- slot 1 · Phase 5 improved version of b2 (.pl -> .plx) -->
+  <div class="ver plx" data-v="1">
+    <div class="wrap">
+      <div class="process__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h1-w-i">Eight stops between your first call and <span class="acc">your keys.</span></h2>
+        <div class="plx__headtxt">
+          <p class="t-lead process__lead">The route every Elbaz job drives, in order. Each stop says what happens there.</p>
+          <p class="plx__note">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        </div>
+      </div>
+      <div class="plx__plan" aria-hidden="true">
+        <svg class="plx__svg" focusable="false"></svg>
+        <ol class="plx__signs"></ol>
+      </div>
+      <ol class="plx__list" aria-label="The eight stages of a project"></ol>
+    </div>
+  </div>
+
+  <!-- slot 2 · Phase 5 improved version of b3 (.process2 -> .p2x) -->
+  <div class="ver p2x" data-v="2" hidden>
+    <div class="wrap">
+      <div class="process__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h2-i">Watch a job go up, <span class="acc">stage by stage.</span></h2>
+        <p class="t-lead process__lead">Drag the orange line, or pick a stage. Everything below it is done.</p>
+      </div>
+      <div class="p2x__stage">
+        <svg class="p2x__svg" viewBox="0 0 1000 620" aria-hidden="true" focusable="false"></svg>
+        <div class="p2x__cap" aria-live="polite"><span class="p2x__no nums">01</span><span class="p2x__t">Consultation</span><span class="p2x__w nums">Week 1</span></div>
+        <button type="button" class="p2x__grip" aria-label="Build line: drag up or down, or use the arrow keys" data-rx="native:build-line"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18"/><path d="M22 10v24M15 17l7-7 7 7M15 27l7 7 7-7"/></svg></button>
+      </div>
+      <div class="p2x__pips" role="group" aria-label="Pick a stage"></div>
+      <p class="process__note">Timelines vary by scope and jurisdiction.</p>
+    </div>
+  </div>
+
+  <!-- slot 3 · Phase 5 improved version of b4 (.process3 -> .p3x) -->
+  <div class="ver p3x" data-v="3" hidden>
+    <div class="wrap p3x__grid">
+      <div class="p3x__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h3-i">Deal yourself <span class="acc">the whole job.</span></h2>
+        <p class="t-lead process__lead">Swipe a card away, or use the buttons. Every stage carries its published week mark.</p>
+        <p class="p3x__count nums" aria-live="polite"><span class="p3x__n">01</span> / 08</p>
+        <div class="p3x__ctrl">
+          <button type="button" class="btn btn--ghost p3x__prev" data-rx="~arrowL/hinge/shake/l"><span class="btn__label">Previous card</span></button>
+          <button type="button" class="btn p3x__next" data-rx="~arrowR/hinge/hop/r"><span class="btn__label">Next card</span></button>
+        </div>
+        <p class="process__note">Timelines vary by scope and jurisdiction.</p>
+      </div>
+      <div class="p3x__deck" tabindex="0" role="region" aria-roledescription="card deck" aria-label="Project stages, one card per stage. Left and right arrow keys move through them." data-rx="native:swipe-deck"></div>
+    </div>
+  </div>
+
+  <!-- slot 4 · NEW · The dial: the eight stages round a rotary dial; turn it (drag, arrow keys or the stage buttons) and the stage at the top pointer answers (mechanism: rotary dial with snap). -->
+  <div class="ver pdl" data-v="4" hidden>
+    <div class="wrap pdl__grid">
+      <div class="pdl__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h4">The combination <span class="acc">to your keys.</span></h2>
+        <p class="t-lead pdl__lead">Turn the dial. Eight stops, in order, from the first call to the keys.</p>
+        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        <div class="pdl__out" aria-live="polite"></div>
+      </div>
+      <div class="pdl__dial"><svg class="pdl__svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg><span class="pdl__ptr" aria-hidden="true"></span><div class="pdl__btns" role="radiogroup" aria-label="Stages"></div></div>
+    </div>
+  </div>
+
+  <!-- slot 5 · NEW · The key ring: eight tags hang on one ring, one per stage; pick a tag and it swings up to be read (mechanism: tags swing on a ring). -->
+  <div class="ver pkr" data-v="5" hidden>
+    <div class="wrap pkr__grid">
+      <div class="pkr__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h5">Eight tags, <span class="acc">one ring of keys.</span></h2>
+        <p class="t-lead pkr__lead">Every stage hangs on the ring that ends with your keys. Pick a tag.</p>
+        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        <div class="pkr__out" aria-live="polite"></div>
+      </div>
+      <div class="pkr__ring"><svg class="pkr__svg" viewBox="0 0 640 420" aria-hidden="true" focusable="false"><circle class="r" cx="320" cy="80" r="56"/><g class="key"><circle cx="320" cy="30" r="16"/><path d="M320 46 V100 M320 82 H334 M320 94 H330"/></g></svg><div class="pkr__tags" role="radiogroup" aria-label="Stages"></div></div>
+    </div>
+  </div>
+
+  <!-- slot 6 · NEW · The elevator: each stage is a floor; press a floor on the call panel and the car rides to it, its display counting the floors (mechanism: elevator car moves between floors). -->
+  <div class="ver pel" data-v="6" hidden>
+    <div class="wrap pel__grid">
+      <div class="pel__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h6">Going up: <span class="acc">eight floors.</span></h2>
+        <p class="t-lead pel__lead">Press a floor. The car rides up the job, one stage per floor.</p>
+        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        <div class="pel__out" aria-live="polite"></div>
+      </div>
+      <div class="pel__shaft"><div class="pel__floors"></div><div class="pel__car" aria-hidden="true"><span class="pel__disp nums">1</span><span class="pel__doors"></span></div><div class="pel__panel" role="radiogroup" aria-label="Floors, one per stage"></div></div>
+    </div>
+  </div>
+
+  <!-- slot 7 · NEW · The folding ruler: a carpenter's folding rule, folded; each press unfolds the next segment, and each segment is a stage (mechanism: hinged segments unfold in turn). -->
+  <div class="ver pfr" data-v="7" hidden>
+    <div class="wrap pfr__grid">
+      <div class="pfr__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h7">Unfold it <span class="acc">one stage at a time.</span></h2>
+        <p class="t-lead pfr__lead">A folding rule, eight segments, eight stages. Unfold the next one.</p>
+        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        <div class="pfr__out" aria-live="polite"></div>
+      </div>
+      <div class="pfr__rule" aria-hidden="true"></div><div class="pfr__acts"><button type="button" class="btn pfr__next" data-rx="~ruler/swing/tick/r"><span class="btn__label">Unfold the next stage</span></button><button type="button" class="btn btn--ghost pfr__fold" data-rx="~ruler/swing/wobble/l"><span class="btn__label">Fold it back</span></button></div>
+    </div>
+  </div>
+
+  <!-- slot 8 · NEW · The wall calendar: the twelve published weeks as a calendar strip; each stage sits on the weeks its mark names, and the open-ended stages hang after it (mechanism: hover or focus a stage to light its weeks). -->
+  <div class="ver pcl" data-v="8" hidden>
+    <div class="wrap pcl__grid">
+      <div class="pcl__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h8">On the calendar, <span class="acc">week by week.</span></h2>
+        <p class="t-lead pcl__lead">Each stage sits on the weeks it is published for. Pick one to light its weeks.</p>
+        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+        <div class="pcl__out" aria-live="polite"></div>
+      </div>
+      <div class="pcl__cal"><div class="pcl__weeks" aria-hidden="true"></div><div class="pcl__rows" role="radiogroup" aria-label="Stages"></div><div class="pcl__after"></div></div>
+    </div>
+  </div>
+
+  <div class="ver pl" data-v="b2" hidden>
     <div class="wrap">
       <div class="process__head">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
@@ -37,7 +162,7 @@
 
   <!-- v2 · It builds itself [S1340 "A Building That Builds Itself": one rising line reveals finished work below it while
        unbuilt work waits above; captions per stage and a quiet percentage; scrubbable]. Not pinned. -->
-  <div class="ver process2" data-v="2" hidden>
+  <div class="ver process2" data-v="b3" hidden>
     <div class="wrap">
       <div class="process__head">
         <h2 class="t-head" id="process-h2">Watch a job go up, stage by stage.</h2>
@@ -55,7 +180,7 @@
 
   <!-- v3 · The deck [S1443 gesture patterns: swipe responds as the finger moves, 12px activation with direction lock,
        threshold / rubber-band, button alternative] + [BANK Elbaz skeleton: the week-ranged 8-stage process]. -->
-  <div class="ver process3" data-v="3" hidden>
+  <div class="ver process3" data-v="b4" hidden>
     <div class="wrap process3__grid">
       <div class="process3__side">
         <h2 class="t-head" id="process-h3">Deal yourself the whole job.</h2>
