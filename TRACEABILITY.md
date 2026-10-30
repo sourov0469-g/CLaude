@@ -600,3 +600,42 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 - 5 · Phone yard sign: ACCEPTED. It is absolute over the photo's bottom-right at 264 px wide (container units: `top: calc(75cqw - 150px)`). The section is 785 px at 375. ⟦S1498⟧.
 - Kept: the sign's swing and the photo crossfade.
 - C.11 · "5,000+" is no longer the largest figure in this version (the stats row is gone).
+
+## F2 · Proof
+**V2, At a glance (winner).**
+- 1 · President's Club gloss: ACCEPTED, verbatim from the locked facts only: "Awarded by James Hardie for 2025, on top of Elite Preferred status." No award criteria invented. ⟦S1306⟧.
+- 2 · Phone height: ACCEPTED, with one IMPROVEMENT.
+  - Rows are padded 10, badges are 52 px, and "In business" shortens to "Since 2009; merged in 2018." (`.gl-short`).
+  - The trade pill and the "Read what they wrote" button hide below 760 px: Reviews is the next section and the name already says the trade.
+  - The lead "The credentials first, then the record…" is deleted everywhere: it explains a layout the visitor can see.
+  - Result: 1,424 px at 375 (was 1,539, and 1,706 once the checks landed). The ~1,300 target is missed by 124 px, because C.12's six check links (40 px each) outrank it.
+  - ⟦S1499⟧, ⟦S1306⟧.
+- 3 · Check links: ACCEPTED. URLs come only from profiles the firm itself links on austinprosiding.com (`work/raw`: about-us, gallery, reviews):
+  - Google reviews: place_id ChIJg1S9mOQrW4YREI2DIL1kcy0, "Read them on Google ↗" in the Reviews row.
+  - The BBB profile ("BBB profile ↗").
+  - James Hardie's contractor finder, which is where the firm's own Elite Preferred badge links, for both Hardie rows.
+  - GAF, Andersen and GuildQuality: the firm links no public profile, so per the pack their check is "Ask us: (512) 550-0000".
+  - Every external link opens in a new tab and says so to assistive tech.
+  - ⟦S1306⟧, ⟦S0220⟧ #5.
+- 4 · Next-step line: ACCEPTED. It sits inside the head column under the record, not under the table, and ends with the column. ⟦S1498⟧.
+- C.8 · Tone: ACCEPTED, night becomes ground2. The table is re-derived from the tone's own ink via `.proof-2[data-tone="ground2"]`, so Backup 2 stays night. ⟦S0650⟧ §4.11.
+- C.10/C.11 · The Record row prints K1: "886 documented projects: 312 on the map with photos + 574 more counted." The 5,000+ is attributed ("by the firm's own count") and comes last.
+
+**V1, Record.**
+- 1 · Ghost 886 and its ScrollTrigger: ACCEPTED, deleted. ⟦S1306⟧, ⟦S1314⟧ §5.
+- 2 · Static extrusion: ACCEPTED. A 3-step token extrusion (`--stone`, a mix, `--line`), with no pointer handler. Backup 1 keeps the live one. ⟦S0063⟧ Std 7.
+- 3 · Staggers 60/50 ms: ACCEPTED. ⟦S0063⟧, ⟦S0083⟧.
+- 4 · Sub-line: ACCEPTED: "documented projects since the 2018 merger, each with its price". ⟦S1306⟧.
+- 5 · Glosses grafted: ACCEPTED. `creds_glossed()` puts the six "what it means" lines under the badges (auto-fill grid, 48 px badge plates). ⟦S1306⟧.
+- C.11 · The 5,000+ tile drops to the smallest tier (max 64 px, under the 4.9) and reads "Central Texas homes since 2009, by the firm's own count".
+
+**V3, Statement.**
+- 1 · Floor 0.18 to 0.5, scrub top 88 % to bottom 65 %: ACCEPTED. ⟦S1501⟧, ⟦S1320⟧ §3.
+- 2 · Final clause as a 24 px line: ACCEPTED (`.st-tail`). The 5,000+ also moves out of the statement into that line.
+- 3 · No greyscale at rest, stamp stagger 60 ms: ACCEPTED. ⟦S1314⟧ §9.
+- 4 · Statement as the H2: ACCEPTED, with one IMPROVEMENT. The statement now leads with the documented figure: "Since the 2018 merger, 886 jobs are documented…". The label "The short version" is gone. ⟦S1500⟧.
+- 5 · Pill sash scrub: ACCEPTED, deleted, and the sash glass is hidden. ⟦S0063⟧ Std 1.
+
+**QA catch, all versions:** tall badges (President's Club, Andersen) overflowed their 64 px plates. The plate image is now fixed at 48 px.
+
+**C.11, claim by claim (Proof):** "5,000+" is SOURCED. It is FACTS.md line 18 and the firm's homepage meta: "Siding, windows and roofing for 5,000+ Central Texas homes since 2009" (`work/raw/home.html`). Because the firm's reviews page says "Over 5,000 projects" instead, it is printed as "homes… by the firm's own count" and is never the first or largest figure.

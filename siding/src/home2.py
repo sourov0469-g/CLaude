@@ -326,6 +326,13 @@ def creds(cls='creds'):
         f'<li><img src="assets/img/{f}.webp" width="{w}" height="{h}" alt="{e(n)}" loading="lazy" decoding="async"></li>' for f, n, w, h in CREDS) + '</ul>'
 
 
+def creds_glossed():
+    """Proof 1's badge row with Proof 2's "what it means" lines grafted under each badge (Audit pack F2 V1.5)"""
+    gl = {f: m for f, _n, _t, m in CRED_ROWS}
+    return '<ul class="creds creds-gl" aria-label="Certified, accredited and awarded">' + ''.join(
+        f'<li><span class="cg-b"><img src="assets/img/{f}.webp" width="{w}" height="{h}" alt="{e(n)}" loading="lazy" decoding="async"></span><span class="cg-t">{e(gl[f])}</span></li>' for f, n, w, h in CREDS) + '</ul>'
+
+
 def ring49():
     r = 40
     c = 2 * 3.14159265 * r
@@ -348,15 +355,14 @@ def boards886():
 def proof1():
     """#317 Digital Butlers "Proof, not promises" band (counts stated beside the offer) + anatomy F12 checkable arithmetic"""
     return f'''<div class="v proof-1 has-bgf" data-tone="ground">
-  <div class="bgf" aria-hidden="true"><div class="p1-gw" data-depth="-0.7"><span class="p1-ghost">886</span></div></div>
   <h2 class="h2x" data-split>On record since 2009</h2>
   <div class="rec">
-    <p class="rc rc-a"><b class="num" data-count>886</b><span>documented projects, 2018-2026, each with its price</span><span class="rc-sum num"><span class="sr-only">312 on the map with photos + 574 more counted = 886</span>{boards886()}</span></p>
+    <p class="rc rc-a"><b class="num" data-count>886</b><span>documented projects since the 2018 merger, each with its price</span><span class="rc-sum num"><span class="sr-only">312 on the map with photos + 574 more counted = 886</span>{boards886()}</span></p>
     <p class="rc rc-b"><b class="num" data-count>177</b><span>before-and-after pairs published</span></p>
     <p class="rc rc-c">{ring49()}<b class="num" data-count>4.9</b><span>on 474 Google reviews</span></p>
-    <p class="rc rc-d"><b class="num" data-count>5,000+</b><span>Central Texas homeowners</span></p>
+    <p class="rc rc-d"><b class="num" data-count>5,000+</b><span>Central Texas homes since 2009, by the firm's own count</span></p>
   </div>
-  <div class="p1-foot">{creds()}{alt_btn('#work', 'See the work')}</div>
+  <div class="p1-foot">{creds_glossed()}{alt_btn('#work', 'See the work')}</div>
 </div>'''
 
 
@@ -364,11 +370,35 @@ def proof1():
 CRED_ROWS = [
     ('gaf-master-elite', 'GAF Master Elite', 'Roofing', 'GAF says fewer than 2% of contractors nationwide hold it.'),
     ('hardie-elite-preferred', 'James Hardie Elite Preferred', 'Siding', "The top tier of the James Hardie contractor alliance. It can't be bought: James Hardie audits it, and it has to be re-earned."),
-    ('hardie-presidents-club-2025', "James Hardie President's Club 2025", 'Siding', 'Awarded by James Hardie for 2025.'),
+    ('hardie-presidents-club-2025', "James Hardie President's Club 2025", 'Siding', 'Awarded by James Hardie for 2025, on top of Elite Preferred status.'),
     ('andersen-certified-premier', 'Andersen Certified Premier', 'Windows', 'Certified by Andersen at the Premier level.'),
     ('guildmaster-service-excellence', 'GuildQuality Guildmaster', 'Service', 'Award for Service Excellence, four years in a row, 2015 through 2018.'),
     ('bbb-a-plus', 'BBB A+', 'Business', 'Accredited Business, rated A+.'),
 ]
+
+
+# Audit pack C.12 / F2.3: one working check per row, from the profiles the firm itself links to on austinprosiding.com
+# (work/raw: about-us, gallery, reviews pages). Where the firm publishes no public profile, the check is the phone.
+G_REVIEWS = 'https://www.google.com/maps/place/?q=place_id:ChIJg1S9mOQrW4YREI2DIL1kcy0'
+CHECK = {
+    'gaf-master-elite': None,
+    'hardie-elite-preferred': ('https://contractors.jameshardie.com/', "James Hardie's contractor finder"),
+    'hardie-presidents-club-2025': ('https://contractors.jameshardie.com/', "James Hardie's contractor finder"),
+    'andersen-certified-premier': None,
+    'guildmaster-service-excellence': None,
+    'bbb-a-plus': ('https://www.bbb.org/us/tx/austin/profile/siding-contractors/austin-pro-siding-windows-roofing-0825-90090599', 'BBB profile'),
+}
+
+
+def ext(href, label, cls='chk'):
+    return f'<a class="{cls}" href="{href}" target="_blank" rel="noopener">{label}<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></a>'
+
+
+def check_link(f, cls='chk'):
+    c = CHECK.get(f)
+    if not c:
+        return f'<a class="{cls} {cls}-tel" href="{TEL}">Ask us: {PHONE}</a>'
+    return ext(c[0], e(c[1]), cls)
 
 
 def proof2():
@@ -376,19 +406,19 @@ def proof2():
     tier above review volume (builder brief 2.3)"""
     dims = {f: (w, h) for f, n, w, h in CREDS}
     rows = ''.join(f'''<tr><td class="gl-b"><img src="assets/img/{f}.webp" width="{dims[f][0]}" height="{dims[f][1]}" alt="" loading="lazy" decoding="async"><svg class="gl-ld" viewBox="0 0 40 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ld-l" pathLength="1" d="M2 6H36"/><path class="ld-t" d="M2 1V11M38 6L32 2.5V9.5Z"/></svg></td>
-      <th scope="row">{e(n)}<span class="gl-t">{t}</span></th><td class="gl-m">{e(m)}</td></tr>''' for f, n, t, m in CRED_ROWS)
-    base = [('In business', 'Since 2009. Austin Pro Siding &amp; Windows (2009) and Sanders Roofing &amp; Exteriors (2010) merged in 2018.'),
+      <th scope="row">{e(n)}<span class="gl-t">{t}</span></th><td class="gl-m">{e(m)} {check_link(f)}</td></tr>''' for f, n, t, m in CRED_ROWS)
+    base = [('In business', '<span class="gl-long">Since 2009. Austin Pro Siding &amp; Windows (2009) and Sanders Roofing &amp; Exteriors (2010) merged in 2018.</span><span class="gl-short">Since 2009; merged in 2018.</span>'),
             ('Office', ADDRESS),
-            ('Reviews', '<b class="num">4.9</b> on 474 Google reviews'),
-            ('Record', '886 documented projects, 177 before-and-after pairs, 5,000+ Central Texas homeowners')]
+            ('Reviews', '<b class="num">4.9</b> on 474 Google reviews ' + ext(G_REVIEWS, 'Read them on Google')),
+            ('Record', '886 documented projects: 312 on the map with photos + 574 more counted. 177 before-and-after pairs. 5,000+ Central Texas homes since 2009, by the firm\'s own count.')]
     base_rows = ''.join(f'<div class="gl-r"><dt>{k}</dt><dd>{v}</dd></div>' for k, v in base)
-    return f'''<div class="v proof-2" data-tone="night">
+    return f'''<div class="v proof-2" data-tone="ground2">
   <div class="gl">
     <div class="gl-head">
       <h2 class="h2x" data-split>Austin Pro at a glance</h2>
-      <p class="gl-lead">The credentials first, then the record. Badges as the firm publishes them.</p>
       <dl class="gl-base">{base_rows}</dl>
       {alt_btn('#reviews', 'Read what they wrote')}
+      <p class="nextstep"><span>{e(NEXT['proof'])}</span> <a class="tlink" href="{TEL}">Call {PHONE}</a> <span class="ns-or">or</span> <a class="tlink" href="#book" data-book>book a free inspection</a></p>
     </div>
     <table class="gl-table"><caption class="sr-only">Certified, accredited and awarded</caption>
       <thead><tr><th scope="col"><span class="sr-only">Badge</span></th><th scope="col">Credential</th><th scope="col">What it means</th></tr></thead>
@@ -414,8 +444,8 @@ def pill_pair():
 
 def proof3():
     return f'''<div class="v proof-3" data-tone="ground2">
-  <h2 class="h2s">The short version</h2>
-  <p class="statement" data-illuminate>Since 2009, Austin Pro has worked on <b>5,000+</b> Central Texas homes. <b>886</b> {pill(3)} of those jobs are documented, each with photos and a real price, and <b>177</b> {pill_pair()} have a before and after. Homeowners rate the work <b>4.9</b> on <b>474</b> Google reviews.</p>
+  <h2 class="statement" data-illuminate>Since the 2018 merger, <b>886</b> {pill(3)} jobs are documented, each with photos and a real price, and <b>177</b> {pill_pair()} have a before and after.</h2>
+  <p class="st-tail">Homeowners rate the work <b>4.9</b> on <b>474</b> Google reviews. In business since 2009, on 5,000+ Central Texas homes by the firm's own count.</p>
   <div class="stamps">{creds('creds creds-stamp')}{alt_btn('#book', 'Book free inspection')}</div>
 </div>'''
 

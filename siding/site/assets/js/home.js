@@ -320,13 +320,14 @@
   /* PROOF 1: #317 Digital Butlers "Proof, not promises": the counts, with the map's own arithmetic printed under
      886 (anatomy F12). Count-ups at the page's one tempo (R20); 4.9 as a ring drawn to 98 % (S0197: r 40, stroke 8,
      round cap, -90 deg); credentials rise 0.1 s apart */
-  V.proof1 = (r, b) => {
+  V.proof1 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 1 keeps the ghost 886, the pointer extrusion and the old staggers (A.2)
     const ring = $('.r49-v', r), ghost = $('.p1-ghost', r);
     countUp($$('[data-count]', r), { st: el => once(el, 'top 92%') });
     if (!motionOK()) return;
     /* v4 3D where earned (Q165 Depth Text, CSS only): the counts are extruded signs whose depth turns away from the
        pointer, lerp 0.14, 12 layers; loop sleeps when settled; a still pose without motion or on touch */
-    if (mqFine.matches) {
+    if (bk && mqFine.matches) {   // F2 V1.2: the live extrusion is gone; the CSS 3-step extrusion is static
       const nums = $$('.rc b', r), D = { x: 1, y: 1, tx: 1, ty: 1 }, shade = i => { const p = i / 11; return `rgb(${Math.round(207 - p * p * 80)},${Math.round(203 - p * p * 82)},${Math.round(194 - p * p * 82)})`; };
       let raf2 = 0;
       const paint = () => {
@@ -341,10 +342,10 @@
       b.on(r, 'pointerleave', () => { D.tx = 1; D.ty = 1; if (!raf2) raf2 = requestAnimationFrame(paint); });
       b.add(() => { cancelAnimationFrame(raf2); nums.forEach(n => { n.style.textShadow = ''; }); });
     }
-    G.from($$('.bq', r), { y: -14, autoAlpha: 0, duration: 0.45, ease: 'back.out(1.5)', stagger: 0.12, scrollTrigger: once($('.b886', r), 'top 92%') });
+    G.from($$('.bq', r), { y: -14, autoAlpha: 0, duration: 0.45, ease: 'back.out(1.5)', stagger: bk ? 0.12 : 0.06, scrollTrigger: once($('.b886', r), 'top 92%') });
     if (ring) G.fromTo(ring, { strokeDashoffset: () => ring.style.getPropertyValue('--c') }, { strokeDashoffset: () => ring.style.getPropertyValue('--off'), duration: REVEAL, ease: 'power2.out', scrollTrigger: once(ring, 'top 92%') });
-    G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
-    if (ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+    G.from($$('.creds li', r), { y: 24, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: bk ? 0.1 : 0.05, scrollTrigger: once($('.p1-foot', r), 'top 92%') });
+    if (bk && ghost && mqDesk.matches && ST) G.to(ghost, { yPercent: -22, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   };
   /* PROOF 2: Georgia Contractor Group's "at a glance" table: the credentials as one scannable unit, the record beside
      it. Rows enter as a staggered group (R5, never static); pointing at a row lifts its badge (CSS scale-in .18 s) */
@@ -354,16 +355,18 @@
     G.from($$('.gl-lead, .gl-base .gl-r, .gl-head .btn-alt', r), { y: 14, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.gl-head', r), 'top 80%') });
   };
   /* PROOF 3: one sentence lit word by word on scroll (S1327, #292 Scroll Reveal), then the credentials press in like stamps */
-  V.proof3 = (r, b) => {
+  V.proof3 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 3 keeps its 0.18 floor, sash scrub and 0.12 stamp stagger (A.2)
     const p = $('.statement', r);
     if (!motionOK()) return;
     const walker = d.createTreeWalker(p, NodeFilter.SHOW_TEXT);
     const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => { const f = d.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.appendChild(d.createTextNode(t)); else { const s = d.createElement('span'); s.className = 't'; s.textContent = t; f.appendChild(s); } }); n.replaceWith(f); });
-    G.fromTo($$('.t, .ipill', p), { opacity: 0.18 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: p, start: 'top 82%', end: 'bottom 50%', scrub: 0.4 } });
-    // v4: each photo pill is a casement window; its sash swings open as its word lights (scrub, linear)
-    $$('.ip-sash', p).forEach(sa => G.fromTo(sa, { scaleX: 1 }, { scaleX: 0.12, ease: 'none', scrollTrigger: { trigger: sa.closest('.ipill'), start: 'top 78%', end: 'top 58%', scrub: 0.4 } }));
-    G.from($$('.creds-stamp li', r), { scale: 1.3, autoAlpha: 0, duration: 0.3, ease: 'power4.out', stagger: 0.12, scrollTrigger: once($('.stamps', r), 'top 88%') });   // pressed in, never rotated (builder brief 6)
+    // F2 V3.1: the resting frame is legible (floor 0.5) and the scrub finishes while the sentence is still low on screen
+    G.fromTo($$('.t, .ipill', p), { opacity: bk ? 0.18 : 0.5 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: p, start: bk ? 'top 82%' : 'top 88%', end: bk ? 'bottom 50%' : 'bottom 65%', scrub: 0.4 } });
+    // v4: each photo pill is a casement window; its sash swings open as its word lights (scrub, linear). F2 V3.5: gone
+    if (bk) $$('.ip-sash', p).forEach(sa => G.fromTo(sa, { scaleX: 1 }, { scaleX: 0.12, ease: 'none', scrollTrigger: { trigger: sa.closest('.ipill'), start: 'top 78%', end: 'top 58%', scrub: 0.4 } }));
+    G.from($$('.creds-stamp li', r), { scale: 1.3, autoAlpha: 0, duration: 0.3, ease: 'power4.out', stagger: bk ? 0.12 : 0.06, scrollTrigger: once($('.stamps', r), 'top 88%') });   // pressed in, never rotated (builder brief 6)
   };
   /* SERVICES 1: [BANK] Neil Kelly (configure the project before reading) + [BANK] 531 BLK Design Your Own (ONE inline
      SVG; the picked zone re-fills in the same frame, ease (0.645, 0.045, 0.355, 1)). The traced Rob Roy elevation:

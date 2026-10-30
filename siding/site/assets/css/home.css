@@ -1646,3 +1646,50 @@ html.js:not(.motion) *, html.js:not(.motion) ::before, html.js:not(.motion) ::af
   .sec:not([data-bk]) .h3-stage { container-type: inline-size; }
   .sec:not([data-bk]) .h3-sign { position: absolute; top: calc(75cqw - 150px); right: 10px; margin: 0; }
 }
+
+/* ================= F2 PROOF (Audit pack). Scoped off the backups. ================= */
+/* check links (C.12): one per row, from the firm's own profiles or the phone */
+.chk { display: inline-flex; align-items: center; min-height: 44px; color: var(--red-d); font-size: .9375rem; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; white-space: nowrap; }
+.chk-tel { color: var(--fg, var(--ink)); }
+@media (hover: hover) and (pointer: fine) { .chk:hover { text-decoration-thickness: 2px; } }
+/* V2 on ground2 (C.8): the night colours re-derived from the tone's own ink */
+.proof-2[data-tone="ground2"] { --gl-rule: color-mix(in srgb, var(--ink) 16%, transparent); }
+.proof-2[data-tone="ground2"] .gl-lead, .proof-2[data-tone="ground2"] .gl-r dt, .proof-2[data-tone="ground2"] .gl-table thead th, .proof-2[data-tone="ground2"] .gl-m { color: var(--ink2); }
+.proof-2[data-tone="ground2"] .gl-r dd { color: var(--ink); }
+.proof-2[data-tone="ground2"] .gl-base, .proof-2[data-tone="ground2"] .gl-r, .proof-2[data-tone="ground2"] .gl-table tbody tr, .proof-2[data-tone="ground2"] .gl-table tbody tr:last-child { border-color: var(--gl-rule); }
+.proof-2[data-tone="ground2"] .gl-t { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink2); }
+.proof-2[data-tone="ground2"] .gl-head .btn-alt { --fg: var(--ink); --bg: var(--ground2); }
+.proof-2[data-tone="ground2"] .gl-b img { box-shadow: 0 0 0 1px var(--stone); }
+.proof-2[data-tone="ground2"] .gl-m .chk { display: flex; min-height: 40px; }
+.proof-2[data-tone="ground2"] .gl-r .chk { min-height: 0; margin-left: 6px; }
+.proof-2[data-tone="ground2"] .gl-head .nextstep { margin-top: 4px; }
+@media (hover: hover) and (pointer: fine) { .proof-2[data-tone="ground2"] .gl-table tbody tr:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); } }
+.gl-short { display: none; }
+@media (max-width: 760px) {   /* F2 V2.2: the longest proof on phones compresses */
+  .proof-2[data-tone="ground2"] .gl-table tbody tr { padding: 10px 0; column-gap: 12px; grid-template-columns: 52px 1fr; }
+  .proof-2[data-tone="ground2"] .gl-b img { width: 52px; height: 42px; padding: 4px; }
+  .proof-2[data-tone="ground2"] .gl-r { padding: 9px 0; }
+  .proof-2[data-tone="ground2"] .gl-long { display: none; }
+  .proof-2[data-tone="ground2"] .gl-short { display: inline; }
+  .proof-2[data-tone="ground2"] .gl-m { margin-top: 2px; }
+  .proof-2[data-tone="ground2"] .gl-t, .proof-2[data-tone="ground2"] .gl-head .btn-alt { display: none; }   /* the name says the trade; Reviews is the next section */
+  .proof-2[data-tone="ground2"] .gl-table tbody th { font-size: 1.0625rem; }
+}
+/* V1: no ghost; badges carry their glosses (graft from V2) */
+.creds-gl { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); align-items: start; gap: 20px 16px; width: 100%; }
+.creds-gl li { display: grid; gap: 8px; height: auto; padding: 0; background: none; place-items: start; }
+.creds-gl .cg-b { display: grid; place-items: center; width: 100%; height: 64px; padding: 8px 12px; border-radius: 10px; background: var(--sheet); }
+.creds-gl .cg-b img { height: 100%; }
+.creds-gl .cg-t { color: var(--ink2); font-size: .8125rem; line-height: 1.35; }
+.sec:not([data-bk]) .proof-1 .p1-foot { display: grid; gap: 24px; justify-items: start; }
+/* V3: the statement is the H2 at the H2 step; the reviews clause is its own 24 px line; badges in colour at rest */
+.sec:not([data-bk]) .proof-3 .statement { max-width: 24ch; line-height: 1.06; letter-spacing: -.03em; font-stretch: 92%; }
+.sec:not([data-bk]) .proof-3 .statement b { font-weight: 780; font-stretch: 76%; }
+.st-tail { max-width: 44rem; margin: 20px 0 0; color: var(--ink2); font-size: 1.5rem; line-height: 1.35; }
+.st-tail b { color: var(--ink); font-weight: 650; }
+.sec:not([data-bk]) .creds-stamp li { filter: none; }
+.sec:not([data-bk]) .proof-3 .ip-sash { display: none; }
+.creds-gl .cg-b img { width: auto; max-width: 100%; height: 48px; max-height: 48px; object-fit: contain; }
+.sec:not([data-bk]) .proof-1 .rc-d b { font-size: clamp(2.25rem, 1rem + 3.2vw, 4rem); }   /* the firm's own count: the smallest tier, never the largest figure (C.11) */
+.sec:not([data-bk]) .proof-1 .rc-d > span { max-width: 18ch; }
+.creds li > img { height: 48px; width: auto; max-width: 132px; }   /* the badge sits inside its 64 px plate (QA: tall badges overflowed) */
