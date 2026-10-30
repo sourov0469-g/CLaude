@@ -473,7 +473,10 @@
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'level'], ['consult', 'footing']];
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'level'], ['consult', 'footing'],
+    // inner pages: a different divider under each section of a page
+    ['kitchen-intro', 'dimension'], ['kitchen-scope', 'tile'], ['bath-intro', 'conduit'], ['bath-build', 'level'],
+    ['reno-intro', 'roofs'], ['reno-services', 'truss'], ['contact-form', 'footing'], ['contact-visit', 'beam']];
   var dividers = [];
 
   function drawDivider(d) {

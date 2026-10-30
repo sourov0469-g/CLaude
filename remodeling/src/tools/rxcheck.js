@@ -2,7 +2,7 @@
 // An interactive element is covered when it, or the label / field wrapper it sits in, carries data-rx.
 const { chromium } = require('playwright');
 const FILE = process.env.FILE || 'file:///home/user/CLaude/remodeling/site/elbaz-homepage.html';
-const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult'.split(',');
+const SECS = (process.env.SECS || 'hero,proof,services,ba,process,financing,work,reviews,towns,consult').split(',');
 const SEL = 'a[href],button,input:not([type=hidden]),select,textarea,[role=radio],[role=tab],[tabindex="0"]';
 (async () => {
   const w = +(process.argv[2] || 1440);

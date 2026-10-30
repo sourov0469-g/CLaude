@@ -20,7 +20,7 @@ const SECS = (process.argv[3] || 'hero,proof,services,ba,process,financing,work,
     const vis = slots.filter(s => /^\d$/.test(s)), bk = slots.filter(s => /^b/.test(s));
     // switcher
     const sw = await p.evaluate(id => { const s = document.querySelector('.vswitch[data-for="' + id + '"]'); return s ? [...s.querySelectorAll('button')].map(x => x.textContent.trim()).filter(t => /^\d$/.test(t)) : []; }, id);
-    let swOk = sw.join('') === '12345678';
+    let swOk = sw.join('') === (process.env.SW || '12345678');   // inner-page sections switch 1-5 (SW=12345)
     for (const n of sw) {
       const ok = await p.evaluate(([id, n]) => { const s = document.querySelector('.vswitch[data-for="' + id + '"]'); const btn = [...s.querySelectorAll('button')].find(x => x.textContent.trim() === n); btn.click(); return true; }, [id, n]);
       await p.waitForTimeout(250);
@@ -109,7 +109,7 @@ const SECS = (process.argv[3] || 'hero,proof,services,ba,process,financing,work,
   }
   out.push('', 'page errors: ' + errs.length, ...errs.slice(0, 5), 'FAILS: ' + fails.length);
   fs.mkdirSync('/home/user/CLaude/remodeling/qa', { recursive: true });
-  fs.writeFileSync('/home/user/CLaude/remodeling/qa/phase6-' + TAG + '.txt', out.join('\n') + '\n');
+  fs.writeFileSync('/home/user/CLaude/remodeling/qa/' + (process.env.PREFIX || 'phase6-') + TAG + '.txt', out.join('\n') + '\n');
   console.log(out.filter(l => /FAIL|LOW|errors|backup .*FAIL/.test(l)).join('\n'));
   console.log('FAILS', fails.length);
   await b.close();

@@ -1,0 +1,160 @@
+<section id="kitchen-work" class="sec kwork g-field" data-section="kitchen-work" aria-labelledby="kitchen-work-h-1">
+  <!-- Kitchens page, section 3. The firm's own kitchen photographs and both kitchen before/after pairs (shown no larger than
+       ~1.4x their published size); the financing note follows the firm's /financing/ page. Built in JS from one list. -->
+
+  <!-- v1 · Grid and sliders: a photo grid with two wide tiles, then both before/after pairs as drag sliders side by side -->
+  <div class="ver kw1" data-v="1">
+    <div class="wrap">
+      <div class="kw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-1">Real kitchens, <span class="acc">photographed as delivered.</span></h2>
+        <p class="t-lead kw__lead">Every image is our own work. Select one to see it large.</p>
+      </div>
+      <div class="kw1__grid"></div>
+      <h3 class="kw__h3">Before and after</h3>
+      <div class="kw1__bas"></div>
+      <div class="kfin"></div>
+    </div>
+  </div>
+
+  <!-- v2 · Before/after first: one large comparison that follows the pointer, two pair tabs; the projects run in a strip -->
+  <div class="ver kw2" data-v="2" hidden>
+    <div class="wrap kw2__top">
+      <div class="kw__head kw2__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-2">Same room. <span class="acc">Before and after.</span></h2>
+        <p class="t-lead kw__lead">Two of our kitchens, photographed before we started and after we finished. Move across the photo to compare.</p>
+        <div class="kw2__tabs" role="tablist" aria-label="Before and after pairs"></div>
+      </div>
+      <div class="kw2__ba"></div>
+    </div>
+    <div class="kw2__strip" tabindex="0" role="region" aria-label="Kitchen projects, scroll sideways" data-rx="native:kw2-strip"></div>
+    <div class="wrap"><div class="kfin"></div></div>
+  </div>
+
+  <!-- v3 · Pinned prints: photos pinned to a board at small angles; the pairs are cards that flip from before to after -->
+  <div class="ver kw3" data-v="3" hidden>
+    <div class="wrap">
+      <div class="kw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-3">Pinned to <span class="acc">the site board.</span></h2>
+        <p class="t-lead kw__lead">Our kitchens as delivered. Select a print to see it large; turn a card to see the kitchen before we started.</p>
+      </div>
+      <div class="kw3__board"></div>
+      <div class="kw3__cards"></div>
+      <div class="kfin"></div>
+    </div>
+  </div>
+
+  <!-- v4 · The index: project titles in a list with a preview that follows focus; a lamp switch shows each pair before or after -->
+  <div class="ver kw4" data-v="4" hidden>
+    <div class="wrap kw4__grid">
+      <div class="kw4__left">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-4">The kitchen index, <span class="acc">by project title.</span></h2>
+        <ol class="kw4__list"></ol>
+      </div>
+      <div class="kw4__right">
+        <figure class="kw4__prev"><img class="kw4__img" alt=""><figcaption class="kw4__cap"></figcaption></figure>
+        <div class="kw4__pairs"></div>
+      </div>
+    </div>
+    <div class="wrap"><div class="kfin"></div></div>
+  </div>
+
+  <!-- v5 · Spotlight: one large photo and a rail of thumbnails (arrow keys move along it); the pairs wipe top to bottom -->
+  <div class="ver kw5" data-v="5" hidden>
+    <div class="wrap">
+      <div class="kw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-5">One kitchen <span class="acc">at a time.</span></h2>
+        <p class="t-lead kw__lead">Every image is our own work.</p>
+      </div>
+      <figure class="kw5__spot"><img class="kw5__img" alt=""><figcaption class="kw5__cap" aria-live="polite"></figcaption>
+        <svg class="kw5__crop" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 8 V0 H8 M92 0 H100 V8 M100 92 V100 H92 M8 100 H0 V92"/></svg>
+      </figure>
+      <div class="kw5__rail" role="listbox" aria-label="Choose a kitchen" tabindex="0" data-rx="native:kw5-rail"></div>
+      <h3 class="kw__h3">Before and after</h3>
+      <div class="kw5__bas"></div>
+      <div class="kfin"></div>
+    </div>
+  </div>
+<!-- b1 · release record of slot 1 (.kw1 -> .kw1r) -->
+  <div class="ver kw1r" data-v="b1" hidden>
+    <div class="wrap">
+      <div class="kw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-1-r">Real kitchens, <span class="acc">photographed as delivered.</span></h2>
+        <p class="t-lead kw__lead">Every image is our own work. Select one to see it large.</p>
+      </div>
+      <div class="kw1r__grid"></div>
+      <h3 class="kw__h3">Before and after</h3>
+      <div class="kw1r__bas"></div>
+      <div class="kfin"></div>
+    </div>
+  </div>
+
+<!-- b2 · release record of slot 2 (.kw2 -> .kw2r) -->
+  <div class="ver kw2r" data-v="b2" hidden>
+    <div class="wrap kw2r__top">
+      <div class="kw__head kw2r__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-2-r">Same room. <span class="acc">Before and after.</span></h2>
+        <p class="t-lead kw__lead">Two of our kitchens, photographed before we started and after we finished. Move across the photo to compare.</p>
+        <div class="kw2r__tabs" role="tablist" aria-label="Before and after pairs"></div>
+      </div>
+      <div class="kw2r__ba"></div>
+    </div>
+    <div class="kw2r__strip" tabindex="0" role="region" aria-label="Kitchen projects, scroll sideways" data-rx="native:kw2r-strip"></div>
+    <div class="wrap"><div class="kfin"></div></div>
+  </div>
+
+<!-- b3 · release record of slot 3 (.kw3 -> .kw3r) -->
+  <div class="ver kw3r" data-v="b3" hidden>
+    <div class="wrap">
+      <div class="kw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-3-r">Pinned to <span class="acc">the site board.</span></h2>
+        <p class="t-lead kw__lead">Our kitchens as delivered. Select a print to see it large; turn a card to see the kitchen before we started.</p>
+      </div>
+      <div class="kw3r__board"></div>
+      <div class="kw3r__cards"></div>
+      <div class="kfin"></div>
+    </div>
+  </div>
+
+<!-- b4 · release record of slot 4 (.kw4 -> .kw4r) -->
+  <div class="ver kw4r" data-v="b4" hidden>
+    <div class="wrap kw4r__grid">
+      <div class="kw4r__left">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-4-r">The kitchen index, <span class="acc">by project title.</span></h2>
+        <ol class="kw4r__list"></ol>
+      </div>
+      <div class="kw4r__right">
+        <figure class="kw4r__prev"><img class="kw4r__img" alt=""><figcaption class="kw4r__cap"></figcaption></figure>
+        <div class="kw4r__pairs"></div>
+      </div>
+    </div>
+    <div class="wrap"><div class="kfin"></div></div>
+  </div>
+
+<!-- b5 · release record of slot 5 (.kw5 -> .kw5r) -->
+  <div class="ver kw5r" data-v="b5" hidden>
+    <div class="wrap">
+      <div class="kw__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Kitchens we built</p>
+        <h2 class="t-head" id="kitchen-work-h-5-r">One kitchen <span class="acc">at a time.</span></h2>
+        <p class="t-lead kw__lead">Every image is our own work.</p>
+      </div>
+      <figure class="kw5r__spot"><img class="kw5r__img" alt=""><figcaption class="kw5r__cap" aria-live="polite"></figcaption>
+        <svg class="kw5r__crop" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 8 V0 H8 M92 0 H100 V8 M100 92 V100 H92 M8 100 H0 V92"/></svg>
+      </figure>
+      <div class="kw5r__rail" role="listbox" aria-label="Choose a kitchen" tabindex="0" data-rx="native:kw5r-rail"></div>
+      <h3 class="kw__h3">Before and after</h3>
+      <div class="kw5r__bas"></div>
+      <div class="kfin"></div>
+    </div>
+  </div>
+
+</section>

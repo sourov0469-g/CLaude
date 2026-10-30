@@ -19,6 +19,50 @@ IMG = os.path.join(ROOT, "assets", "img")
 OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
 SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
+
+# OWNER ORDER (full site): five pages; every inner page is a set of sections, each section with its own five versions
+PAGES = {
+    "home": {"out": "elbaz-homepage.html", "sections": SECTIONS, "book": "#consult",
+             "title": "Elbaz Construction | Kitchen, Bathroom and Whole-Home Remodeling in South Florida",
+             "desc": "Licensed design-build remodeler for kitchens, bathrooms and whole homes across Miami-Dade, Broward and Palm Beach. Licensed, bonded &amp; insured · CBC1265280. Call (754) 236-0675.",
+             "url": "https://elbazconstructioncorp.com/"},
+    "kitchens": {"out": "kitchens.html", "sections": ["kitchen-intro", "kitchen-scope", "kitchen-work"], "book": "contact.html#contact-form",
+                 "title": "Kitchen Remodeling in South Florida | Elbaz Construction",
+                 "desc": "Kitchen remodeling across Miami-Dade, Broward and Palm Beach: layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope. Licensed, bonded &amp; insured · CBC1265280.",
+                 "url": "https://elbazconstructioncorp.com/kitchen-remodeling-miami/"},
+    "bathrooms": {"out": "bathrooms.html", "sections": ["bath-intro", "bath-build", "bath-work"], "book": "contact.html#contact-form",
+                  "title": "Bathroom Remodeling in South Florida | Elbaz Construction",
+                  "desc": "Bathroom remodeling across Miami-Dade, Broward and Palm Beach: waterproofing done properly, tile set square, glass and fixtures that still look right in year five. Licensed, bonded &amp; insured · CBC1265280.",
+                  "url": "https://elbazconstructioncorp.com/bathroom-remodeling-miami/"},
+    "renovation": {"out": "renovation.html", "sections": ["reno-intro", "reno-services", "reno-permits"], "book": "contact.html#contact-form",
+                   "title": "Whole-Home Renovation, Additions and Exterior Work | Elbaz Construction",
+                   "desc": "Whole-home renovation, ADUs and additions, new construction, commercial remodeling, flooring, roofing, windows and doors, outdoor living, planning and permitting. Licensed, bonded &amp; insured · CBC1265280.",
+                   "url": "https://elbazconstructioncorp.com/residential-remodling-miami/"},
+    "contact": {"out": "contact.html", "sections": ["contact-form", "contact-visit", "contact-area"], "book": "#contact-form",
+                "title": "Book a Consultation | Elbaz Construction, Miami",
+                "desc": "Book a consultation with Elbaz Construction: (754) 236-0675, Sales@elbazconstruction.com, 19 W Flagler St #310, Miami, FL 33130. Sun to Fri 7am to 7pm, Saturday closed.",
+                "url": "https://elbazconstructioncorp.com/contact/"},
+}
+LINKS = [("kitchens", "Kitchens", "hood"), ("bathrooms", "Bathrooms", "shower"), ("renovation", "Renovation", "house"), ("contact", "Contact", "speech")]
+HOME_ANCHORS = [("#services", "Services", "~wrench/tilt/wobble/r"), ("#ba", "Before and after", "~swap/hinge/spinout/r"), ("#process", "Process", "~gear/roll/spinout/r"),
+                ("#financing", "Financing", "~coin/bounce/hop/r"), ("#work", "Work", "~camera/slide/flash/r"), ("#reviews", "Reviews", "~star/neon/sparkle/r"),
+                ("#towns", "Service area", "~compass/orbit/spinout/r")]
+
+
+def chrome(page):
+    """site navigation for one page: nav links, the menu sheet, the footer page column (aria-current on the page itself)"""
+    href = lambda k: "#top" if k == page else PAGES[k]["out"]
+    cur = lambda k: ' aria-current="page"' if k == page else ""
+    nav = "".join('<li><a href="%s"%s data-rx="~%s/%s/b">%s</a></li>' % (href(k), cur(k), sp, rx, name)
+                  for (k, name, sp), rx in zip(LINKS, ["swing/wobble", "drop/flash", "spin/spinout", "jack/hop"]))
+    sheet = '<ul class="sheet__pages"><li><a href="%s"%s data-rx="~crane/tilt/wobble/r">Home</a></li>' % (href("home"), cur("home"))
+    sheet += "".join('<li><a href="%s"%s data-rx="~%s/%s/r">%s</a></li>' % (href(k), cur(k), sp, rx, name)
+                     for (k, name, sp), rx in zip(LINKS, ["tilt/tick", "hinge/spinout", "roll/spinout", "bounce/hop"]))
+    sheet += "</ul>"
+    if page == "home":
+        sheet += '<p class="sheet__h">On this page</p><ul>' + "".join('<li><a href="%s" data-rx="%s">%s</a></li>' % a for a in HOME_ANCHORS) + "</ul>"
+    foot = "".join('<a href="%s"%s data-rx="~%s/peek/tick/r">%s</a>' % (href(k), cur(k), sp, name) for (k, name, sp) in LINKS)
+    return nav, sheet, foot
 SYSTEMS = ["buddy", "rig", "react", "fields"]   # companion, reaction rig + reactions, section fields + dividers
 VENDOR = ["gsap", "ScrollTrigger", "DrawSVGPlugin", "Flip", "MotionPathPlugin"]   # matter.js out [AUDIT-01 C.10]   # only the plugins the sections call (F18)
 
@@ -63,10 +107,23 @@ def script_safe(s):
 
 
 def main():
-    html = read("base.html")
-    sections, out = SECTIONS, OUT
+    pages = [sys.argv[sys.argv.index("--page") + 1]] if "--page" in sys.argv else list(PAGES)
     if "--only" in sys.argv:
-        only = sys.argv[sys.argv.index("--only") + 1]
+        return build("home", only=sys.argv[sys.argv.index("--only") + 1])
+    for pg in pages:
+        build(pg)
+
+
+def build(page, only=None):
+    html = read("base.html")
+    P = PAGES[page]
+    sections, out = P["sections"], os.path.join(ROOT, "site", P["out"])
+    nav, sheet, foot = chrome(page)
+    html = (html.replace("{{TITLE}}", P["title"]).replace("{{DESC}}", P["desc"]).replace("{{URL}}", P["url"])
+            .replace("{{HOME}}", "#top" if page == "home" else PAGES["home"]["out"])
+            .replace("{{HOME_LABEL}}", "Elbaz Construction, back to top" if page == "home" else "Elbaz Construction, home page")
+            .replace("{{NAV}}", nav).replace("{{SHEET}}", sheet).replace("{{FOOTNAV}}", foot).replace("{{BOOK}}", P["book"]))
+    if only:
         sections = [only]
         out = os.path.join(ROOT, "site", "dev", only + ".html")
 
@@ -90,6 +147,9 @@ def main():
            b64(os.path.join(HERE, "fonts", "bebas-neue-latin.woff2")),
            b64(os.path.join(HERE, "fonts", "geist-wght.woff2")))
     )
+    if page != "home":
+        # inner pages hold no dark-era backups: the two retired faces are not shipped there
+        fonts = fonts[:fonts.index("@font-face{font-family:'Bebas Neue'")]
 
     css = [read("css", "tokens.css"), read("css", "chrome.css"), read("css", "systems.css")]
     sections_html, js = [], []
@@ -106,7 +166,8 @@ def main():
     page_text = "\n".join(sections_html) + "\n".join(js)
     for m in re.finditer(r"data-(?:bg-)?img=\"([a-z0-9-]+)\"|EZ\.img\('([a-z0-9-]+)'\)", page_text):
         used.add(m.group(1) or m.group(2))
-    data_text = "".join(open(os.path.join(HERE, "data", n)).read() for n in os.listdir(os.path.join(HERE, "data")) if n.endswith(".json"))
+    # the homepage's data tables name every photo; inner pages ship only the photos their own markup and scripts name
+    data_text = "".join(open(os.path.join(HERE, "data", n)).read() for n in os.listdir(os.path.join(HERE, "data")) if n.endswith(".json")) if page == "home" else ""
     # keys named in JS data (e.g. before/after pair tables) count as used too
     for name in os.listdir(IMG):
         key, ext = os.path.splitext(name)
@@ -123,7 +184,7 @@ def main():
 
     lines = {}
     ldir = os.path.join(HERE, "data", "lines")
-    if os.path.isdir(ldir):
+    if os.path.isdir(ldir) and page == "home":
         for name in sorted(os.listdir(ldir)):
             if name.endswith(".json"):
                 lines[name[:-5]] = json.load(open(os.path.join(ldir, name)))

@@ -4,7 +4,10 @@
                                                          only its slot name changes (data-v + hidden, JS key), nothing else
   expand.py improve <sec> <bk> <old> <new> <slot>       copy backup <bk> into visible <slot> under class prefix <new>
                                                          (HTML block ids suffixed -i, CSS rules naming <old>, JS def)
-New visible blocks are inserted before the first backup block, in slot order."""
+  expand.py record  <sec> <slot> <old> <new> <bk>       copy visible <slot> into hidden backup <bk> under class prefix <new> as the
+                                                         release record (ids suffixed -r); used by the inner pages, whose
+                                                         sections had no earlier versions to keep
+New visible blocks are inserted before the first backup block, in slot order; records go to the end of the section."""
 import re, sys, os, subprocess
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 cmd, sec = sys.argv[1], sys.argv[2]
@@ -42,20 +45,27 @@ if cmd == 'backup':
     open(hp, 'w').write(H); open(jp, 'w').write(J)
     print('backed up', vis, '->', ['b%d' % (k + n) for n in range(len(vis))])
 
-elif cmd == 'improve':
-    bk, old, new, slot = sys.argv[3:7]
+elif cmd in ('improve', 'record'):
+    # improve: backup <src> -> visible slot <dst>; record: visible slot <src> -> backup <dst> (the release record)
+    if cmd == 'improve': src, old, new, dst = sys.argv[3:7]; sfx = '-i'
+    else: src, old, new, dst = sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6]; sfx = '-r'
     rn = lambda t: re.sub(r'(?<![\w-])' + re.escape(old) + r'(?=__|[\s."\'\-:{,)\]]|$)', new, t)
-    i, j = block(H, bk)
+    i, j = block(H, src)
     blk = rn(H[i:j])
-    blk = re.sub(r'data-v="' + bk + '" hidden>', 'data-v="' + slot + '"' + (' hidden' if slot != '1' else '') + '>', blk, count=1)
+    vis = not dst.startswith('b')
+    blk = re.sub(r'data-v="' + src + '"( hidden)?>', 'data-v="' + dst + '"' + ('' if dst == '1' else ' hidden') + '>', blk, count=1)
     for d in re.findall(r'\sid="([^"]+)"', blk):
-        blk = re.sub(r'(\s(?:id|for|aria-controls|aria-describedby|aria-labelledby)=")' + re.escape(d) + r'"', r'\g<1>' + d + '-i"', blk)
-        blk = blk.replace('href="#' + d + '"', 'href="#' + d + '-i"').replace("url(#" + d + ")", "url(#" + d + "-i)")
-    first_bk = re.search(r'<div class="ver [^"]*" data-v="b\d"', H).start()
-    # keep visible blocks in slot order: insert before the first visible block with a higher slot, else before the backups
-    later = [m.start() for m in re.finditer(r'<div class="ver [^"]*" data-v="(\d)"', H) if int(m.group(1)) > int(slot)]
-    at = min(later) if later else first_bk
-    H = H[:at] + '<!-- slot ' + slot + ' · Phase 5 improved version of ' + bk + ' (.' + old + ' -> .' + new + ') -->\n  ' + blk + '\n\n  ' + H[at:]
+        nd = (d[:-4] + sfx + '-err') if d.endswith('-err') else d + sfx   # keep the validator's "<input id>-err" pairing
+        blk = re.sub(r'(\s(?:id|for|aria-controls|aria-describedby|aria-labelledby)=")' + re.escape(d) + r'"', r'\g<1>' + nd + '"', blk)
+        blk = blk.replace('href="#' + d + '"', 'href="#' + nd + '"').replace("url(#" + d + ")", "url(#" + nd + ")")
+    note = ('Phase 5 improved version of ' + src) if cmd == 'improve' else ('release record of slot ' + src)
+    if vis:
+        first_bk = re.search(r'<div class="ver [^"]*" data-v="b\d+"', H).start()
+        later = [m.start() for m in re.finditer(r'<div class="ver [^"]*" data-v="(\d)"', H) if int(m.group(1)) > int(dst)]
+        at = min(later) if later else first_bk
+    else:
+        at = H.rindex('</section>')
+    H = H[:at] + '<!-- ' + dst + ' · ' + note + ' (.' + old + ' -> .' + new + ') -->\n  ' + blk + '\n\n' + ('  ' if vis else '') + H[at:]
     pat = re.compile(r'(?<![\w-])' + re.escape(old) + r'(?=__|[\s.:{,\[]|$)')
     out = []
     def rules(text):
@@ -75,14 +85,23 @@ elif cmd == 'improve':
         if sel.startswith('@media') or sel.startswith('@supports'):
             inner = [rn(s2) + ' {' + rn(b2) + '}' for s2, b2 in rules(body) if pat.search(s2)]
             if inner: out.append(sel + ' {\n  ' + '\n  '.join(inner) + '\n}')
-        elif sel.startswith('@keyframes'): continue
+        elif sel.startswith('@keyframes'):
+            if pat.search(sel): out.append(rn(sel) + ' {' + rn(body) + '}')
         elif pat.search(sel): out.append(rn(sel) + ' {' + rn(body) + '}')
-    C += '\n\n/* ---------- slot ' + slot + ' · Phase 5 improved version of ' + bk + ' (.' + old + ' -> .' + new + '); improvements follow ---------- */\n' + '\n'.join(out) + '\n'
-    a, b, body = defspan(J, bk)
+    C += '\n\n/* ---------- ' + dst + ' · ' + note + ' (.' + old + ' -> .' + new + ') ---------- */\n' + '\n'.join(out) + '\n'
+    a, b, body = defspan(J, src)
     d = rn(body)
-    d = re.sub(r'^(\s*)' + re.escape(bk) + r': \{', r'\g<1>' + slot + ': {', d, count=1)
-    m = re.search(r"EZ\.section\('" + re.escape(sec) + r"', \{\n", J)
-    J = J[:m.end()] + '    /* slot ' + slot + ' · Phase 5 improved version of ' + bk + ' */\n' + d + '\n\n' + J[m.end():]
+    d = re.sub(r'^(\s*)' + re.escape(src) + r': \{', r'\g<1>' + dst + ': {', d, count=1)
+    for d0 in re.findall(r"'#([\w-]+)'", d):   # ids named in the script follow the markup
+        if re.search(r'\sid="' + re.escape(d0) + sfx + '"', blk): d = d.replace("'#" + d0 + "'", "'#" + d0 + sfx + "'")
+    if vis:
+        m = re.search(r"EZ\.section\('" + re.escape(sec) + r"', \{\n", J)
+        J = J[:m.end()] + '    /* slot ' + dst + ' · ' + note + ' */\n' + d + '\n\n' + J[m.end():]
+    else:
+        m = list(re.finditer(r'\n  \}\);', J))[-1]
+        head = J[:m.start()].rstrip()
+        if not head.endswith(','): head += ','
+        J = head + '\n\n    /* ' + dst + ' · ' + note + ' */\n' + d.rstrip().rstrip(',') + J[m.start():]
     open(hp, 'w').write(H); open(cp, 'w').write(C); open(jp, 'w').write(J)
     r = subprocess.run(['node', '--check', jp], capture_output=True, text=True)
-    print('improved', bk, '->', slot, 'as .' + new, '' if not r.returncode else 'WARNING JS: ' + r.stderr[:300])
+    print(cmd, src, '->', dst, 'as .' + new, '' if not r.returncode else 'WARNING JS: ' + r.stderr[:300])

@@ -351,3 +351,40 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
   - `gatecheck.js`: light, logo, facts and integrity all pass; deep green none.
   - `consulttest.js`: honest on 8/8.
   - `pickertest.js`: updated to the improved hero prefix, passes.
+
+---
+
+# OWNER ORDER (2026-10-30): finish the full website + OWNER CLARIFICATION (per-section versions)
+
+**Page list.** Settled from the firm's published services (FACTS.md "Services") under "necessary pages only, all services covered". The site has 5 pages.
+
+| Page | File | Sections (each: 5 visible versions + 5 hidden backups) | Services covered |
+|---|---|---|---|
+| Home | `elbaz-homepage.html` | existing 10 sections (8 versions each), unchanged apart from site navigation | overview of all |
+| Kitchens | `kitchens.html` | `kitchen-intro`, `kitchen-scope`, `kitchen-work` | Kitchen Remodeling and its 10 published sub-services, incl. Outdoor Kitchen Construction |
+| Bathrooms | `bathrooms.html` | `bath-intro`, `bath-build`, `bath-work` | Bathroom Remodeling and its 10 published sub-services |
+| Renovation | `renovation.html` | `reno-intro`, `reno-services`, `reno-permits` | Whole-Home Renovation, ADUs & Additions, New Construction, Commercial Remodeling, Flooring, Roofing, Windows & Doors, Outdoor Living, Planning & Permitting |
+| Contact | `contact.html` | `contact-form`, `contact-visit`, `contact-area` | consultation (mailto), office and hours, the 104 municipalities |
+
+**Pages deliberately not built:**
+- Projects, Process, Financing, Reviews and Service-area pages would only repeat homepage sections that already hold eight versions each.
+- The four inner pages link back to those sections.
+
+**How the clarification is applied:**
+- Each inner page is a set of sections, and every section works exactly like a homepage section: one `.sec`, five visible `.ver` blocks (slots 1–5), its own switcher in the nav, and `?section=v` deep links.
+- The five versions differ in layout, composition and mechanism, not only in skin.
+- **Hidden backups:** inner sections had no earlier versions, so each section's backups b1–b5 are the release record of its five versions. They are cloned at release with `tools/expand.py record`, under their own class prefix, with their own CSS rules and JS definition. Later fixes therefore go only to the visible versions, and `backupcheck.py` proves each record is unchanged.
+- That gives 10 versions per inner section (5 visible + 5 backups), and nothing is deleted.
+
+**Rules carried over unchanged:**
+- Light grounds only, with no deep green.
+- Colour from tokens only.
+- Poppins and Roboto only.
+- The roof-E logo.
+- Locked facts verbatim.
+- No invented content:
+  - Sub-services the firm publishes only by name stay names, with no invented descriptions.
+  - Services without photographs (roofing, windows, ADUs, new construction, commercial) get drawings, never stock or borrowed photos.
+  - The two mismatched photos (k-walnut-marble, k-emerald-shaker) are not used on the new pages.
+
+**Site navigation** (all pages): Kitchens, Bathrooms, Renovation, Contact, phone, "Book a consultation" (homepage `#consult`; elsewhere `contact.html#contact-form`). On the homepage, the menu sheet also keeps its "on this page" section links.

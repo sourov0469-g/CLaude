@@ -1,0 +1,210 @@
+/* Kitchens page, section 1 · kitchen-intro: five intro versions (OWNER ORDER, per-section versions) */
+.kintro { padding-top: calc(var(--nav-h) + clamp(28px, 4vw, 56px)); }   /* the first section of a page clears the fixed nav */
+.kproof { margin: 0; display: flex; flex-wrap: wrap; column-gap: 18px; row-gap: 2px; font: 500 .875rem/1.5 var(--f-text); color: var(--ink-2); }
+.kproof p { margin: 0; }
+.kproof .nums { font-weight: 600; color: var(--ink); }
+.kproof__star { color: var(--a-700); }
+.kproof__sep { color: var(--muted); margin: 0 6px; }
+
+/* ---------- v1 · Split poster ---------- */
+.ki1__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ki1__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ki1__h { font-size: clamp(2.5rem, 1.4rem + 3.4vw, 4.75rem); }
+.ki1__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+.ki1__fig { position: relative; margin: 0; }
+.ki1__fig img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; }
+.ki1__dims { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ki1__dl { fill: none; stroke: var(--a-500); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.ki1__tick { fill: none; stroke: var(--white); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.ki1__cap { margin-top: 10px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) { .ki1__grid { grid-template-columns: 1fr; } }
+
+/* ---------- v2 · Full-bleed photo with a title card ---------- */
+.ki2 { margin-top: calc((var(--nav-h) + clamp(28px, 4vw, 56px)) * -1); }
+.ki2__stage { padding-top: var(--nav-h); }
+.ki2__stage { position: relative; min-height: min(86vh, 820px); display: grid; align-items: end; }
+.ki2__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ki2__wrap { position: relative; padding-block: clamp(24px, 5vw, 72px); }
+.ki2__card { display: grid; gap: var(--s4); justify-items: start; max-width: 620px; padding: clamp(22px, 3vw, 40px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink), 12px 12px 0 var(--a-500); }
+.ki2__hood { width: 96px; height: auto; overflow: visible; }
+.ki2__hood path { fill: none; stroke: var(--a-500); stroke-width: 4; stroke-linejoin: round; }
+.ki2__h { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 4rem); }
+.ki2__lead { margin: 0; font: 400 1.0625rem/1.5 var(--f-text); color: var(--ink-2); max-width: 46ch; }
+.ki2__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
+.ki2__credit { position: absolute; right: 16px; bottom: 16px; margin: 0; padding: 6px 10px; background: var(--white); font: 600 .75rem/1.2 var(--f-text); color: var(--ink); }
+@media (max-width: 767px) { .ki2__stage { min-height: 0; display: block; } .ki2__img { position: relative; height: 56vw; } .ki2__wrap { padding-block: 0 var(--s6); } .ki2__card { margin-top: -40px; position: relative; } .ki2__credit { position: static; display: inline-block; margin: 8px 0 0 16px; font-size: .6875rem; } }
+
+/* ---------- v3 · The cabinet run ---------- */
+.ki3__h { font-size: clamp(2.25rem, 1.2rem + 3.4vw, 4.75rem); max-width: 22ch; margin-top: var(--s4); }
+.ki3__row { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gutter); align-items: end; margin-top: var(--s6); }
+.ki3__lead { color: var(--muted); max-width: 46ch; }
+.ki3__acts { display: grid; gap: var(--s4); justify-items: start; }
+.ki3__run { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: var(--s7); padding: 0 var(--margin); }
+.ki3__counter { position: absolute; left: 0; right: 0; top: -20px; width: 100%; height: 22px; }
+.ki3__counter rect { fill: var(--grey); }
+.ki3__counter path { stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ki3__bay { position: relative; aspect-ratio: 3 / 4; perspective: 1200px; background: var(--surface-2); overflow: hidden; }
+.ki3__bay img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ki3__door { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; cursor: pointer; background: var(--white); box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 16px var(--white), inset 0 0 0 18px var(--grey); transform-origin: 0% 50%; transition: transform 600ms cubic-bezier(.3, 1.3, .5, 1); }
+.ki3__door::after { content: ""; position: absolute; right: 22px; top: 50%; width: 6px; height: 54px; margin-top: -27px; background: var(--a-500); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.ki3__bay.is-open .ki3__door { transform: rotateY(-78deg); }
+.ki3__cap { position: absolute; left: 8px; right: 8px; bottom: 8px; padding: 6px 8px; background: var(--white); font: 600 .75rem/1.3 var(--f-text); opacity: 0; transition: opacity 200ms var(--ease-out); }
+.ki3__bay.is-open .ki3__cap { opacity: 1; transition-delay: 250ms; }
+@media (max-width: 1023px) { .ki3__row { grid-template-columns: 1fr; } .ki3__run { grid-template-columns: repeat(5, 62vw); overflow-x: auto; scroll-snap-type: x mandatory; } .ki3__bay { scroll-snap-align: start; } .ki3__counter { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ki3__door { transition: none; } }
+
+/* ---------- v4 · Plan and photo ---------- */
+.ki4__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ki4__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ki4__h { font-size: clamp(2.25rem, 1.3rem + 2.8vw, 4.25rem); }
+.ki4__lead { color: var(--muted); }
+.ki4__sw { display: inline-flex; padding: 4px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ki4__opt { min-height: 44px; padding: 0 18px; border: 0; background: transparent; color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.ki4__opt[aria-checked="true"] { background: var(--a-500); }
+.ki4__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+.ki4__frame { position: relative; aspect-ratio: 3 / 2; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ki4__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 400ms var(--ease-out); }
+.ki4__plan { position: absolute; inset: 6%; width: 88%; height: 88%; overflow: visible; transition: opacity 400ms var(--ease-out); }
+.ki4.is-room .ki4__img { opacity: 1; }
+.ki4.is-room .ki4__plan { opacity: 0; }
+.ki4__wall { fill: var(--a-50); stroke: var(--ink); stroke-width: 6; }
+.ki4__run { fill: var(--a-100); stroke: var(--ink); stroke-width: 2.5; }
+.ki4__isl { fill: var(--a-200); stroke: var(--ink); stroke-width: 2.5; }
+.ki4__fx { fill: none; stroke: var(--a-700); stroke-width: 2; }
+.ki4__door { fill: none; stroke: var(--a-500); stroke-width: 2; stroke-dasharray: 5 5; }
+.ki4__t { font: 600 13px/1 var(--f-text); fill: var(--ink-2); text-anchor: middle; }
+.ki4__note { position: absolute; left: 12px; bottom: 10px; margin: 0; font: 500 .75rem/1.2 var(--f-text); color: var(--muted); transition: opacity 300ms; }
+.ki4.is-room .ki4__note { opacity: 0; }
+@media (max-width: 1023px) { .ki4__grid { grid-template-columns: 1fr; } }
+
+/* ---------- v5 · The backsplash ---------- */
+.ki5 { margin-top: calc((var(--nav-h) + clamp(28px, 4vw, 56px)) * -1); }
+.ki5__band { padding-top: calc(var(--nav-h) + clamp(48px, 8vw, 120px)) !important; }
+.ki5__band { position: relative; overflow: hidden; background: var(--a-100); padding-block: clamp(48px, 8vw, 120px); }
+.ki5__tiles { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ki5__tiles rect { fill: var(--a-50); stroke: var(--a-200); stroke-width: 2; transition: fill 300ms var(--ease-out), transform 300ms var(--ease-out); transform-box: fill-box; transform-origin: 50% 50%; }
+.ki5__tiles rect.is-up { fill: var(--a-300); }
+.ki5__wrap { position: relative; pointer-events: none; }
+.ki5__plate { display: grid; gap: var(--s5); justify-items: start; max-width: 720px; padding: clamp(22px, 3.4vw, 44px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); pointer-events: auto; }
+.ki5__h { font-size: clamp(2.5rem, 1.4rem + 3.4vw, 5rem); }
+.ki5__lead { color: var(--ink-2); max-width: 44ch; }
+.ki5__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+.ki5__strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, .8fr); gap: var(--gutter); align-items: end; margin-top: var(--s6); }
+.ki5__strip figure { margin: 0; }
+.ki5__strip img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.ki5__strip figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) { .ki5__strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ki5__strip .kproof { grid-column: 1 / -1; } }
+
+
+/* ---------- b1 · release record of slot 1 (.ki1 -> .ki1r) ---------- */
+.ki1r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ki1r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ki1r__h { font-size: clamp(2.5rem, 1.4rem + 3.4vw, 4.75rem); }
+.ki1r__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+.ki1r__fig { position: relative; margin: 0; }
+.ki1r__fig img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; }
+.ki1r__dims { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ki1r__dl { fill: none; stroke: var(--a-500); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.ki1r__tick { fill: none; stroke: var(--white); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.ki1r__cap { margin-top: 10px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) {
+  .ki1r__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ---------- b2 · release record of slot 2 (.ki2 -> .ki2r) ---------- */
+.ki2r { margin-top: calc((var(--nav-h) + clamp(28px, 4vw, 56px)) * -1); }
+.ki2r__stage { padding-top: var(--nav-h); }
+.ki2r__stage { position: relative; min-height: min(86vh, 820px); display: grid; align-items: end; }
+.ki2r__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ki2r__wrap { position: relative; padding-block: clamp(24px, 5vw, 72px); }
+.ki2r__card { display: grid; gap: var(--s4); justify-items: start; max-width: 620px; padding: clamp(22px, 3vw, 40px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink), 12px 12px 0 var(--a-500); }
+.ki2r__hood { width: 96px; height: auto; overflow: visible; }
+.ki2r__hood path { fill: none; stroke: var(--a-500); stroke-width: 4; stroke-linejoin: round; }
+.ki2r__h { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 4rem); }
+.ki2r__lead { margin: 0; font: 400 1.0625rem/1.5 var(--f-text); color: var(--ink-2); max-width: 46ch; }
+.ki2r__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
+.ki2r__credit { position: absolute; right: 16px; bottom: 16px; margin: 0; padding: 6px 10px; background: var(--white); font: 600 .75rem/1.2 var(--f-text); color: var(--ink); }
+@media (max-width: 767px) {
+  .ki2r__stage { min-height: 0; display: block; }
+  .ki2r__img { position: relative; height: 56vw; }
+  .ki2r__wrap { padding-block: 0 var(--s6); }
+  .ki2r__card { margin-top: -40px; position: relative; }
+  .ki2r__credit { position: static; display: inline-block; margin: 8px 0 0 16px; font-size: .6875rem; }
+}
+
+
+/* ---------- b3 · release record of slot 3 (.ki3 -> .ki3r) ---------- */
+.ki3r__h { font-size: clamp(2.25rem, 1.2rem + 3.4vw, 4.75rem); max-width: 22ch; margin-top: var(--s4); }
+.ki3r__row { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gutter); align-items: end; margin-top: var(--s6); }
+.ki3r__lead { color: var(--muted); max-width: 46ch; }
+.ki3r__acts { display: grid; gap: var(--s4); justify-items: start; }
+.ki3r__run { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: var(--s7); padding: 0 var(--margin); }
+.ki3r__counter { position: absolute; left: 0; right: 0; top: -20px; width: 100%; height: 22px; }
+.ki3r__counter rect { fill: var(--grey); }
+.ki3r__counter path { stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ki3r__bay { position: relative; aspect-ratio: 3 / 4; perspective: 1200px; background: var(--surface-2); overflow: hidden; }
+.ki3r__bay img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ki3r__door { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; cursor: pointer; background: var(--white); box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 16px var(--white), inset 0 0 0 18px var(--grey); transform-origin: 0% 50%; transition: transform 600ms cubic-bezier(.3, 1.3, .5, 1); }
+.ki3r__door::after { content: ""; position: absolute; right: 22px; top: 50%; width: 6px; height: 54px; margin-top: -27px; background: var(--a-500); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.ki3r__bay.is-open .ki3r__door { transform: rotateY(-78deg); }
+.ki3r__cap { position: absolute; left: 8px; right: 8px; bottom: 8px; padding: 6px 8px; background: var(--white); font: 600 .75rem/1.3 var(--f-text); opacity: 0; transition: opacity 200ms var(--ease-out); }
+.ki3r__bay.is-open .ki3r__cap { opacity: 1; transition-delay: 250ms; }
+@media (max-width: 1023px) {
+  .ki3r__row { grid-template-columns: 1fr; }
+  .ki3r__run { grid-template-columns: repeat(5, 62vw); overflow-x: auto; scroll-snap-type: x mandatory; }
+  .ki3r__bay { scroll-snap-align: start; }
+  .ki3r__counter { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ki3r__door { transition: none; }
+}
+
+
+/* ---------- b4 · release record of slot 4 (.ki4 -> .ki4r) ---------- */
+.ki4r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ki4r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ki4r__h { font-size: clamp(2.25rem, 1.3rem + 2.8vw, 4.25rem); }
+.ki4r__lead { color: var(--muted); }
+.ki4r__sw { display: inline-flex; padding: 4px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ki4r__opt { min-height: 44px; padding: 0 18px; border: 0; background: transparent; color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.ki4r__opt[aria-checked="true"] { background: var(--a-500); }
+.ki4r__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+.ki4r__frame { position: relative; aspect-ratio: 3 / 2; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ki4r__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 400ms var(--ease-out); }
+.ki4r__plan { position: absolute; inset: 6%; width: 88%; height: 88%; overflow: visible; transition: opacity 400ms var(--ease-out); }
+.ki4r.is-room .ki4r__img { opacity: 1; }
+.ki4r.is-room .ki4r__plan { opacity: 0; }
+.ki4r__wall { fill: var(--a-50); stroke: var(--ink); stroke-width: 6; }
+.ki4r__run { fill: var(--a-100); stroke: var(--ink); stroke-width: 2.5; }
+.ki4r__isl { fill: var(--a-200); stroke: var(--ink); stroke-width: 2.5; }
+.ki4r__fx { fill: none; stroke: var(--a-700); stroke-width: 2; }
+.ki4r__door { fill: none; stroke: var(--a-500); stroke-width: 2; stroke-dasharray: 5 5; }
+.ki4r__t { font: 600 13px/1 var(--f-text); fill: var(--ink-2); text-anchor: middle; }
+.ki4r__note { position: absolute; left: 12px; bottom: 10px; margin: 0; font: 500 .75rem/1.2 var(--f-text); color: var(--muted); transition: opacity 300ms; }
+.ki4r.is-room .ki4r__note { opacity: 0; }
+@media (max-width: 1023px) {
+  .ki4r__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ---------- b5 · release record of slot 5 (.ki5 -> .ki5r) ---------- */
+.ki5r { margin-top: calc((var(--nav-h) + clamp(28px, 4vw, 56px)) * -1); }
+.ki5r__band { padding-top: calc(var(--nav-h) + clamp(48px, 8vw, 120px)) !important; }
+.ki5r__band { position: relative; overflow: hidden; background: var(--a-100); padding-block: clamp(48px, 8vw, 120px); }
+.ki5r__tiles { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ki5r__tiles rect { fill: var(--a-50); stroke: var(--a-200); stroke-width: 2; transition: fill 300ms var(--ease-out), transform 300ms var(--ease-out); transform-box: fill-box; transform-origin: 50% 50%; }
+.ki5r__tiles rect.is-up { fill: var(--a-300); }
+.ki5r__wrap { position: relative; pointer-events: none; }
+.ki5r__plate { display: grid; gap: var(--s5); justify-items: start; max-width: 720px; padding: clamp(22px, 3.4vw, 44px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); pointer-events: auto; }
+.ki5r__h { font-size: clamp(2.5rem, 1.4rem + 3.4vw, 5rem); }
+.ki5r__lead { color: var(--ink-2); max-width: 44ch; }
+.ki5r__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+.ki5r__strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, .8fr); gap: var(--gutter); align-items: end; margin-top: var(--s6); }
+.ki5r__strip figure { margin: 0; }
+.ki5r__strip img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.ki5r__strip figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) {
+  .ki5r__strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ki5r__strip .kproof { grid-column: 1 / -1; }
+}

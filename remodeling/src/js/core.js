@@ -273,11 +273,18 @@
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation' };
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    // inner pages (OWNER ORDER: full site), each section with its own five versions
+    'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-work': 'Kitchen projects',
+    'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-work': 'Bath projects',
+    'reno-intro': 'Whole home', 'reno-services': 'Services', 'reno-permits': 'Permits and approvals',
+    'contact-form': 'Consultation', 'contact-visit': 'Visit and call', 'contact-area': 'Service area' };
 
   // each section's switcher digits arrive by their own carrier, so no two switch buttons react alike [FULL Phase 3]
   var SW_RX = { hero: 'drop', proof: 'swing', services: 'spin', ba: 'jack', process: 'hinge', financing: 'roll',
-    work: 'lid', reviews: 'zip', towns: 'unfold', consult: 'hoist' };
+    work: 'lid', reviews: 'zip', towns: 'unfold', consult: 'hoist',
+    'kitchen-intro': 'drop', 'kitchen-scope': 'swing', 'kitchen-work': 'lid', 'bath-intro': 'drop', 'bath-build': 'hinge', 'bath-work': 'lid',
+    'reno-intro': 'drop', 'reno-services': 'spin', 'reno-permits': 'roll', 'contact-form': 'hoist', 'contact-visit': 'jack', 'contact-area': 'unfold' };
   function buildSwitch(s) {
     var wrap = doc.createElement('div');
     wrap.className = 'vswitch';
