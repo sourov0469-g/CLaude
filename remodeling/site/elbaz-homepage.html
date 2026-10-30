@@ -4003,8 +4003,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .reviews2__head .reviews__lead { grid-column: 8 / span 5; }
 .reviews2__sky {
   position: relative; height: clamp(360px, 48vw, 600px); overflow: hidden; border-radius: 4px;
-  background: var(--a-50);
-  box-shadow: inset 0 0 0 1px var(--line-soft);
+  background: radial-gradient(120% 90% at 50% 100%, var(--a-500) 0%, var(--white) 70%);
+  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .12);
 }
 .reviews2__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .reviews2__fallback { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font: 400 clamp(10rem, 30vw, 26rem)/1 var(--f-display); color: var(--a-700); opacity: 0; pointer-events: none; }
@@ -4366,6 +4366,242 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .tc__sign { position: relative; z-index: 1; max-width: 520px; }
 .tc__ans { position: relative; z-index: 1; }
 @media (max-width: 767px) { .tc__map { height: 120%; opacity: .7; } }
+
+
+
+.tcx__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.tcx__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
+.tcx__form { display: grid; gap: var(--s4); justify-items: start; }
+.tcx__field { position: relative; width: 100%; }
+.tcx__lbl { display: block; font: 600 .875rem/1 var(--f-text); color: var(--muted); margin-bottom: 10px; }
+.tcx__in { width: 100%; min-height: 64px; padding: 0 18px; background: transparent; border: 0; color: var(--ink); font: 400 clamp(1.75rem, 1.3rem + 1.2vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; outline: none; box-shadow: inset 0 -2px 0 var(--line-soft); }
+.tcx__outline { position: absolute; left: 0; bottom: 0; width: 100%; height: 64px; pointer-events: none; overflow: visible; }
+.tcx__outline path { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.tcx__list { position: absolute; left: 0; right: 0; top: 100%; z-index: 5; margin: 6px 0 0; padding: 4px; list-style: none; background: var(--surface); box-shadow: 0 0 0 1px var(--line-soft), var(--shadow); }
+.tcx__list li { padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+.tcx__list li span { color: var(--muted); font-size: .8125rem; }
+.tcx__list li[aria-selected="true"] { background: var(--a-100); }
+.tcx__call { margin: 0; color: var(--muted); }
+.tcx__road { grid-column: 7 / -1; position: relative; }
+.tcx__sign { width: 100%; height: auto; overflow: visible; display: block; }
+.tcx__ans { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.tcx__all { margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.tcx__all details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.tcx__all summary { cursor: pointer; font: 400 1.375rem/1 var(--f-display); letter-spacing: -.005em; min-height: 44px; }
+.tcx__all p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 1023px) {
+  .tcx__side, .tcx__road { grid-column: 1 / -1; }
+  .tcx__road { margin-top: var(--s7); }
+  .tcx__all { grid-template-columns: 1fr; }
+}
+.tcx__in { font: 500 1.25rem/1.2 var(--f-text); letter-spacing: 0; }
+.tcx__go { position: relative; z-index: 6; }
+.tcx__list li { transition: background-color 120ms ease-out; }
+.tcx__hub { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.tcx__map { position: absolute; right: 0; top: 50%; translate: 0 -50%; height: 150%; width: auto; aspect-ratio: 1000 / 2378; overflow: visible; z-index: 0; pointer-events: none; }
+.tcx__cty { fill: var(--a-50); stroke: var(--a-300); stroke-width: 4; stroke-linejoin: round; }
+.tcx__dot { fill: var(--a-300); }
+.tcx__dot.is-on { fill: var(--a-600); stroke: var(--ink); stroke-width: 5; }
+.tcx__sign { position: relative; z-index: 1; max-width: 520px; }
+.tcx__ans { position: relative; z-index: 1; }
+@media (max-width: 767px) {
+  .tcx__map { height: 120%; opacity: .7; }
+}
+
+
+
+.t1x__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s6); }
+.t1x__head .t-head { grid-column: 1 / span 6; }
+.t1x__head .towns__lead { grid-column: 8 / span 5; }
+.t1x__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s4); }
+.t1x__tabs { display: flex; flex-wrap: wrap; gap: 10px; }
+.t1x__tab { min-height: 44px; padding: 0 16px; background: none; border: 0; box-shadow: inset 0 0 0 1px var(--line-soft); color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.t1x__tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.t1x__count { margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.t1x__n { font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: var(--a-700); }
+.t1x__of { font: 500 .9375rem/1.3 var(--f-text); color: var(--muted); }
+.t1x__map { position: relative; height: min(76vh, 760px); border-radius: 4px; overflow: hidden; outline: none; background: var(--white); box-shadow: inset 0 0 0 1px var(--line-soft); cursor: crosshair; touch-action: pan-y; }
+.t1x__map:focus-visible { box-shadow: inset 0 0 0 3px var(--a-500); }
+.t1x__svg { width: 100%; height: 100%; overflow: hidden; display: block; }
+.t1x__svg .cty { fill: var(--a-50); stroke: var(--line-soft); stroke-width: 2; cursor: pointer; transition: fill 240ms var(--ease-out); vector-effect: non-scaling-stroke; }
+.t1x__svg .cty.is-on { fill: var(--a-100); stroke: var(--accent); }
+.t1x__svg .clbl { font: 400 54px/1 var(--f-display); fill: var(--ink); opacity: .35; letter-spacing: 2px; pointer-events: none; }
+.t1x__svg .mk { fill: var(--ink); stroke: var(--accent); stroke-width: 2.5; vector-effect: non-scaling-stroke; transition: opacity 240ms; }
+.t1x__svg .mk.is-dim { opacity: .25; }
+.t1x__svg .mk.is-hot { fill: var(--a-500); stroke: var(--ink); }
+.t1x__svg .office { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.t1x__svg .olbl { font: 600 22px/1 var(--f-text); fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 6px; }
+.t1x__svg .flag { pointer-events: none; }
+.t1x__svg .flag .pole { stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.t1x__svg .flag .pen { fill: var(--err); stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.t1x__svg .flag text { font-family: var(--f-display); fill: var(--white); letter-spacing: -.005em; }
+.t1x__read { position: absolute; left: 14px; bottom: 12px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); pointer-events: none; }
+@media (max-width: 1023px) {
+  .t1x__head .t-head, .t1x__head .towns__lead { grid-column: 1 / -1; }
+  .t1x__head .towns__lead { margin-top: var(--s4); }
+  .t1x__map { height: 64vh; }
+}
+
+
+
+.t2x__stage { position: relative; aspect-ratio: 1 / 1; max-width: 860px; margin: 0 auto; }
+.t2x__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.t2x__svg .ring { fill: none; stroke: var(--line-soft); stroke-width: 1; }
+.t2x__svg .td { fill: var(--muted); }
+.t2x__svg .td.is-hl { fill: var(--a-500); }
+.t2x__svg .mark { stroke: var(--err); stroke-width: 2; }
+.t2x__svg .rlbl { font: 600 13px/1 var(--f-text); fill: var(--muted); letter-spacing: 1.5px; }
+.t2x__hub { position: absolute; left: 50%; top: 50%; translate: -50% -50%; text-align: center; display: grid; gap: 4px; }
+.t2x__n { margin: 0; font: 400 clamp(4rem, 2rem + 6vw, 7rem)/.85 var(--f-display); }
+.t2x__nl { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--muted); }
+.t2x__addr { margin: 6px 0 0; font-size: .8125rem; color: var(--muted); }
+.t2x__read { list-style: none; margin: 0; padding: 0; position: absolute; left: 50%; top: 0; translate: -50% 0; display: grid; gap: 6px; justify-items: center; pointer-events: none; }
+.t2x__read li { font: 600 .875rem/1.2 var(--f-text); padding: 4px 9px; background: var(--white); color: var(--ink); white-space: nowrap; box-shadow: inset 3px 0 0 var(--a-500); }
+[data-theme="daylight"] .t2x__read li { background: var(--white); }
+.t2x__read li b { color: var(--a-700); font-weight: 600; margin-right: 6px; }
+.t2x__pause { display: flex; margin: var(--s5) auto 0; }
+.t2x__lists { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.t2x__lists details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.t2x__lists summary { cursor: pointer; font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; min-height: 44px; }
+.t2x__lists p { margin: 10px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 767px) {
+  .t2x__lists { grid-template-columns: 1fr; }
+  .t2x__read li { font-size: .75rem; }
+  .t2x__stage { aspect-ratio: auto; height: 100vw; }
+}
+
+
+.t1x__head .eyebrow { grid-column: 1 / -1; }
+
+
+.taz__head, .tlb__head, .tns__head, .tac__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.taz__head .t-head, .tlb__head .t-head, .tns__head .t-head, .tac__head .t-head { grid-column: 1 / span 7; }
+.taz__head .towns__lead, .tlb__head .towns__lead, .tns__head .towns__lead, .tac__head .towns__lead { grid-column: 9 / span 4; }
+@media (max-width: 1023px) {
+  .taz__head > *, .tlb__head > *, .tns__head > *, .tac__head > * { grid-column: 1 / -1 !important; }
+  .taz__head .towns__lead, .tlb__head .towns__lead, .tns__head .towns__lead, .tac__head .towns__lead { margin-top: var(--s4); }
+}
+
+
+.tdr__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.tdr__side { display: grid; gap: var(--s5); justify-items: start; }
+.tdr__field { display: grid; gap: 10px; width: min(100%, 420px); }
+.tdr__lbl { font: 600 .875rem/1 var(--f-text); color: var(--muted); }
+.tdr__sel { min-height: 56px; padding: 0 44px 0 16px; border: 0; border-radius: 0; background: var(--white); color: var(--ink); font: 500 1.125rem/1.2 var(--f-text); box-shadow: inset 0 0 0 2px var(--ink); appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 12'%3E%3Cpath d='M2 2 L10 10 L18 2' fill='none' stroke='%23FF5F00' stroke-width='3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 18px 11px; }
+.tdr__sel:focus-visible { outline: 3px solid var(--a-500); outline-offset: 2px; }
+.tdr__ans { margin: 0; min-height: 2.6em; font: 500 1.0625rem/1.35 var(--f-text); color: var(--ink-2); }
+.tdr__ans b { font: 600 1.375rem/1.2 var(--f-display); color: var(--a-700); display: block; }
+.tdr__map { display: flex; justify-content: center; }
+.tdr__svg { height: clamp(460px, 72vh, 720px); width: auto; aspect-ratio: 1000 / 2378; overflow: visible; }
+.tdr__svg .cty { fill: var(--a-50); stroke: var(--a-300); stroke-width: 4; stroke-linejoin: round; }
+.tdr__svg .cl { font: 600 44px/1 var(--f-text); fill: var(--muted); letter-spacing: 3px; }
+.tdr__svg .dot { fill: var(--a-300); }
+.tdr__svg .dot.is-on { fill: var(--a-600); stroke: var(--ink); stroke-width: 6; }
+.tdr__svg .route { fill: none; stroke: var(--ink); stroke-width: 9; stroke-dasharray: 22 14; stroke-linecap: round; }
+.tdr__svg .office { fill: var(--a-500); stroke: var(--ink); stroke-width: 6; }
+.tdr__svg .olbl { font: 600 40px/1 var(--f-text); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 10px; }
+.tdr__svg .van-b { fill: var(--a-500); stroke: var(--ink); stroke-width: 5; }
+.tdr__svg .van-w { fill: var(--ink); }
+.tdr__svg .van-g { fill: var(--a-50); stroke: var(--ink); stroke-width: 4; }
+@media (max-width: 1023px) { .tdr__grid { grid-template-columns: 1fr; } .tdr__svg { height: 560px; } }
+
+
+.taz__book { display: grid; grid-template-columns: auto minmax(0, 1fr); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.taz__tabs { display: grid; grid-template-columns: repeat(2, 44px); align-content: start; gap: 4px; padding: 14px; background: var(--a-100); box-shadow: inset -2px 0 0 var(--ink); }
+.taz__t { min-height: 44px; border: 0; background: var(--white); color: var(--ink); font: 600 1rem/1 var(--f-display); cursor: pointer; box-shadow: inset 0 0 0 1px var(--grey); }
+.taz__t[aria-selected="true"] { background: var(--a-500); color: var(--accent-ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.taz__page { position: relative; padding: clamp(20px, 3vw, 40px); min-height: 360px; outline: none; }
+.taz__page:focus-visible { box-shadow: inset 0 0 0 3px var(--a-500); }
+.taz__fold { position: absolute; right: 0; top: 0; width: 44px; height: 44px; }
+.taz__fold-b { fill: var(--paper); }
+.taz__fold-f { fill: var(--a-200); stroke: var(--ink); stroke-width: 2; }
+.taz__big { margin: 0 0 var(--s4); font: 600 clamp(4rem, 2.5rem + 5vw, 7rem)/.9 var(--f-display); color: var(--a-500); }
+.taz__list { list-style: none; margin: 0; padding: 0; columns: 3 220px; column-gap: var(--s6); }
+.taz__list li { break-inside: avoid; display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; box-shadow: inset 0 -1px 0 var(--line-soft); font: 500 1rem/1.3 var(--f-text); }
+.taz__list li span { font: 600 .75rem/1.6 var(--f-text); color: var(--a-800); white-space: nowrap; }
+.taz__tot { margin: var(--s5) 0 0; font: 500 .9375rem/1.4 var(--f-text); color: var(--muted); }
+@media (min-width: 1024px) { .taz__tabs { grid-template-columns: repeat(3, 44px); } }
+@media (max-width: 767px) {
+  .taz__book { grid-template-columns: 1fr; }
+  .taz__tabs { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); box-shadow: inset 0 -2px 0 var(--ink); }
+}
+
+
+.tlb__rule { display: block; width: calc(100% - var(--tlb-name)); margin-left: var(--tlb-name); height: 34px; }
+.tlb { --tlb-name: clamp(120px, 16vw, 220px); }
+.tlb__rule .tk { stroke: var(--ink); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.tlb__rule text { font: 600 10px/1 var(--f-text); fill: var(--muted); }
+.tlb__rule .base { fill: var(--a-100); }
+.tlb__boards { display: grid; gap: 18px; margin-top: 8px; }
+.tlb__row { display: grid; grid-template-columns: var(--tlb-name) minmax(0, 1fr); align-items: center; }
+.tlb__name { margin: 0; font: 600 1.0625rem/1.2 var(--f-display); }
+.tlb__name b { display: block; font-size: clamp(1.75rem, 1.2rem + 1.5vw, 2.5rem); color: var(--a-700); }
+.tlb__board { display: block; width: 100%; height: auto; overflow: visible; outline: none; touch-action: pan-y; }
+.tlb__board:focus-visible { outline: 3px solid var(--a-500); outline-offset: 4px; }
+.tlb__board .wood { fill: var(--a-200); stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.tlb__board .gr { fill: none; stroke: var(--a-300); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tlb__board .nt { stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.tlb__board .nt.is-on { stroke: var(--a-500); stroke-width: 5; }
+.tlb__board .hit { fill: transparent; cursor: crosshair; }
+.tlb__board .end { fill: var(--a-500); }
+.tlb__read { margin: var(--s5) 0 0; min-height: 1.5em; font: 500 1.0625rem/1.4 var(--f-text); color: var(--ink-2); }
+.tlb__read b { font: 600 1.375rem/1.2 var(--f-display); color: var(--a-700); margin-right: 8px; }
+.tlb__lists { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.tlb__lists details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.tlb__lists summary { cursor: pointer; font: 600 1.125rem/1 var(--f-display); min-height: 44px; }
+.tlb__lists p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 767px) { .tlb { --tlb-name: 96px; } .tlb__lists { grid-template-columns: 1fr; } }
+
+
+.tns__road { position: relative; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; outline: none; padding: 0 0 4px; }
+.tns__road:focus-visible { box-shadow: inset 0 0 0 3px var(--a-500); }
+.tns__list { list-style: none; margin: 0; padding: 0 max(var(--gutter), calc((100vw - 1320px) / 2)); display: flex; align-items: end; gap: 14px; width: max-content; position: relative; }
+.tns__list::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: var(--ink-2); z-index: 0; }
+.tns__list::before { content: ""; position: absolute; left: 0; right: 0; bottom: 14px; height: 0; border-top: 3px dashed var(--a-300); z-index: 1; }
+.tns__p { position: relative; z-index: 2; display: grid; justify-items: center; scroll-snap-align: start; padding-bottom: 30px; }
+.tns__plate { display: grid; gap: 4px; min-width: 140px; max-width: 180px; padding: 10px 12px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); text-align: center; }
+.tns__plate b { font: 600 1rem/1.15 var(--f-display); }
+.tns__plate span { font: 600 .6875rem/1 var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.tns__post { width: 6px; height: 46px; background: var(--ink); }
+.tns__p.is-cty .tns__plate { background: var(--a-500); min-width: 170px; }
+.tns__p.is-cty .tns__plate b { font-size: 1.125rem; }
+.tns__p.is-cty .tns__plate span { color: var(--ink); }
+.tns__p.is-cty .tns__post { height: 70px; }
+.tns__p.is-hq .tns__plate { box-shadow: inset 0 0 0 2px var(--ink), inset 0 -6px 0 var(--a-500); }
+.tns__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-top: var(--s5); }
+.tns__at { margin: 0; font: 500 1rem/1.4 var(--f-text); color: var(--ink-2); }
+.tns__at b { color: var(--a-700); }
+.tns__btns { display: flex; gap: var(--s3); }
+
+
+.tac__row { display: flex; gap: 10px; height: clamp(520px, 64vh, 640px); }
+.tac__p { position: relative; flex: 1 1 0; min-width: 0; display: flex; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); transition: flex-grow 500ms var(--ease-out); overflow: hidden; }
+.tac__p.is-open { flex-grow: 6; background: var(--a-50); }
+.tac__tab { flex: none; width: 92px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 18px 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.tac__p.is-open .tac__tab { background: var(--a-500); }
+.tac__n { font: 600 2.5rem/1 var(--f-display); }
+.tac__nm { writing-mode: vertical-rl; transform: rotate(180deg); font: 600 1.375rem/1 var(--f-display); white-space: nowrap; }
+.tac__body { flex: 1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s6); padding: var(--s6); opacity: 0; visibility: hidden; transition: opacity 300ms var(--ease-out); }
+.tac__p.is-open .tac__body { opacity: 1; visibility: visible; transition-delay: 200ms; }
+.tac__shape { width: 100%; height: 100%; max-height: 520px; overflow: visible; }
+.tac__shape .cty { fill: var(--a-200); stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.tac__shape .dot { fill: var(--ink); }
+.tac__shape .hq { fill: var(--a-500); stroke: var(--ink); stroke-width: 5; }
+.tac__list { list-style: none; margin: 0; padding: 0; columns: 2 180px; column-gap: var(--s5); align-self: start; overflow: auto; max-height: 100%; }
+.tac__list li { break-inside: avoid; padding: 7px 0; box-shadow: inset 0 -1px 0 var(--line-soft); font: 500 .9375rem/1.3 var(--f-text); }
+@media (max-width: 1023px) {
+  .tac__row { flex-direction: column; height: auto; }
+  .tac__p { flex-direction: column; }
+  .tac__tab { width: 100%; flex-direction: row; padding: 14px 18px; min-height: 64px; }
+  .tac__nm { writing-mode: horizontal-tb; transform: none; }
+  .tac__body { display: none; grid-template-columns: 1fr; }
+  .tac__p.is-open .tac__body { display: grid; }
+  .tac__shape { max-height: 280px; }
+  .tac__list { max-height: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tac__p, .tac__body { transition: none; } }
+@media (max-width: 1023px) { .tac__p { flex: none; } }
 
 
 #consult .t-head { color: var(--field-ink); }
@@ -7151,7 +7387,161 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 
   
   
-  <div class="ver tc" data-v="1">
+  
+  <div class="ver tcx" data-v="1">
+    <div class="wrap tcx__grid">
+      <div class="tcx__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h3-w-i">Type <span class="acc">your town.</span></h2>
+        <p class="t-lead towns__lead">Type yours and the sign answers straight away.</p>
+        <p class="tcx__hub">104 municipalities in Miami-Dade, Broward and Palm Beach, from our office at 19 W Flagler St, Miami.</p>
+        <form class="tcx__form" novalidate>
+          <div class="tcx__field">
+            <label class="tcx__lbl" for="tcx-q-w-i">Your town or city</label>
+            <input class="tcx__in" id="tcx-q-w-i" type="text" autocomplete="address-level2" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="tcx-list-w-i" spellcheck="false" data-rx="native:madoka-outline">
+            <svg class="tcx__outline" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path/></svg>
+            <ul class="tcx__list" id="tcx-list-w-i" role="listbox" hidden></ul>
+          </div>
+          <button type="submit" class="btn tcx__go" data-rx="~compass/jack/ring/r"><span class="btn__label">Check it</span></button>
+        </form>
+        <p class="tcx__call">Not sure? Call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>.</p>
+      </div>
+      <div class="tcx__road">
+        <svg class="tcx__map" viewBox="0 0 1000 2378" aria-hidden="true" focusable="false"></svg>
+        <svg class="tcx__sign" viewBox="0 0 520 300" aria-hidden="true" focusable="false"></svg>
+        <p class="tcx__ans" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="wrap"><div class="tcx__all"></div></div>
+  </div>
+
+  
+  <div class="ver t1x" data-v="2" hidden>
+    <div class="wrap">
+      <div class="t1x__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h1-i">Do we build <span class="acc">in your town?</span></h2>
+        <p class="t-lead towns__lead">Every mark is one of the <span class="nums">104</span> municipalities we build in. Point at a mark to read it.</p>
+      </div>
+      <div class="t1x__bar">
+        <div class="t1x__tabs" role="tablist" aria-label="Counties">
+          <button type="button" role="tab" class="t1x__tab" data-c="Miami-Dade" aria-selected="true" data-rx="~t:MD/hoist/hop/tr"><span class="btn__label">Miami&#8209;Dade</span></button>
+          <button type="button" role="tab" class="t1x__tab" data-c="Broward" aria-selected="false" data-rx="~t:BR/hoist/hop/tr"><span class="btn__label">Broward</span></button>
+          <button type="button" role="tab" class="t1x__tab" data-c="Palm Beach" aria-selected="false" data-rx="~t:PB/hoist/hop/tr"><span class="btn__label">Palm Beach</span></button>
+        </div>
+        <p class="t1x__count" aria-live="polite"><span class="t1x__n nums">34</span><span class="t1x__of">municipalities in <span class="t1x__cn">Miami&#8209;Dade</span></span></p>
+      </div>
+      <div class="t1x__map" data-buddy="image" tabindex="0" role="application" aria-label="Survey map of the service area. Left and right arrow keys move from town to town." data-rx="native:survey-flags">
+        <svg class="t1x__svg" aria-hidden="true" focusable="false"></svg>
+        <p class="t1x__read" aria-live="polite"></p>
+      </div>
+      <div class="t1x__sr sr-only"></div>
+    </div>
+  </div>
+
+  
+  <div class="ver t2x" data-v="3" hidden>
+    <div class="wrap">
+      <div class="towns__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h2-i">Three counties, <span class="acc">circling one office.</span></h2>
+        <p class="t-lead towns__lead">Every dot is a municipality we build in. The names surface as they pass the survey mark.</p>
+      </div>
+      <div class="t2x__stage">
+        <svg class="t2x__svg" aria-hidden="true" focusable="false"></svg>
+        <div class="t2x__hub"><p class="t2x__n nums">104</p><p class="t2x__nl">municipalities</p><p class="t2x__addr">From 19 W Flagler St, Miami</p></div>
+        <ul class="t2x__read" aria-hidden="true"><li data-r="2"></li><li data-r="1"></li><li data-r="0"></li></ul>
+      </div>
+      <button type="button" class="btn btn--ghost t2x__pause" aria-pressed="false" data-rx="~pause/hinge/squash/l"><span class="btn__label">Pause the rings</span></button>
+      <div class="t2x__lists"></div>
+    </div>
+  </div>
+  
+  <div class="ver tdr" data-v="4" hidden>
+    <div class="wrap tdr__grid">
+      <div class="tdr__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-dr">From our office <span class="acc">to your street.</span></h2>
+        <p class="t-lead towns__lead">Pick your town. The van plots the drive from our office at 19 W Flagler St, Miami, and your town lights up on the map.</p>
+        <div class="tdr__field">
+          <label class="tdr__lbl" for="tdr-sel">Your town or city</label>
+          <select id="tdr-sel" class="tdr__sel" data-rx="native:route-pick"></select>
+        </div>
+        <p class="tdr__ans" aria-live="polite"></p>
+        <a class="btn tdr__btn" href="#consult" data-rx="~house2/hoist/ring/r"><span class="btn__label">Book a visit in your town</span></a>
+      </div>
+      <div class="tdr__map"><svg class="tdr__svg" viewBox="0 0 1000 2378" role="img" aria-label="Map of Palm Beach, Broward and Miami-Dade counties with our 104 municipalities and our Miami office"></svg></div>
+    </div>
+  </div>
+
+  
+  <div class="ver taz" data-v="5" hidden>
+    <div class="wrap">
+      <div class="taz__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-az">Look yourself up, <span class="acc">A to Z.</span></h2>
+        <p class="t-lead towns__lead">All <span class="nums">104</span> municipalities we build in, filed by first letter like a directory. Pick a letter.</p>
+      </div>
+      <div class="taz__book">
+        <div class="taz__tabs" role="tablist" aria-label="First letter of the town"></div>
+        <div class="taz__page" role="tabpanel" id="taz-page" tabindex="0" data-rx="native:directory-page">
+          <svg class="taz__fold" viewBox="0 0 60 60" aria-hidden="true" focusable="false"><path class="taz__fold-b" d="M0 0 H60 V60 Z"/><path class="taz__fold-f" d="M0 0 L60 60 H0 Z"/></svg>
+          <p class="taz__big" aria-hidden="true"></p>
+          <ul class="taz__list"></ul>
+        </div>
+      </div>
+      <p class="taz__tot">Miami&#8209;Dade <span class="nums">34</span> &middot; Broward <span class="nums">31</span> &middot; Palm Beach <span class="nums">39</span> &middot; <span class="nums">104</span> in all</p>
+    </div>
+  </div>
+
+  
+  <div class="ver tlb" data-v="6" hidden>
+    <div class="wrap">
+      <div class="tlb__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-lb">Three boards, <span class="acc">cut to count.</span></h2>
+        <p class="t-lead towns__lead">Each board is as long as the number of towns we build in across that county, one notch per town. Point at a notch, or focus a board and use the arrow keys.</p>
+      </div>
+      <svg class="tlb__rule" viewBox="0 0 400 34" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+      <div class="tlb__boards"></div>
+      <p class="tlb__read" aria-live="polite">Point at a notch to read its town.</p>
+      <div class="tlb__lists"></div>
+    </div>
+  </div>
+
+  
+  <div class="ver tns" data-v="7" hidden>
+    <div class="wrap">
+      <div class="tns__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-ns">North to south, <span class="acc">town by town.</span></h2>
+        <p class="t-lead towns__lead">Our <span class="nums">104</span> municipalities in order from the north of Palm Beach County to the south of Miami&#8209;Dade. Scroll the road or use the buttons.</p>
+      </div>
+    </div>
+    <div class="tns__road" tabindex="0" role="region" aria-label="Municipalities from north to south, scroll sideways" data-rx="native:road-scroll"><ol class="tns__list"></ol></div>
+    <div class="wrap tns__bar">
+      <p class="tns__at" aria-live="polite"></p>
+      <div class="tns__btns">
+        <button type="button" class="btn btn--ghost tns__prev" data-rx="~arrowL/rail/tick/l"><span class="btn__label">Further north</span></button>
+        <button type="button" class="btn tns__next" data-rx="~arrowR/rail/tick/r"><span class="btn__label">Further south</span></button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver tac" data-v="8" hidden>
+    <div class="wrap">
+      <div class="tac__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-ac">Open a county. <span class="acc">Read every town.</span></h2>
+        <p class="t-lead towns__lead">Three counties, <span class="nums">104</span> municipalities. Open a panel to see the county's outline and every town in it we build in.</p>
+      </div>
+      <div class="tac__row"></div>
+    </div>
+  </div>
+
+
+  <div class="ver tc" data-v="b2" hidden>
     <div class="wrap tc__grid">
       <div class="tc__side">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
@@ -7178,7 +7568,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     <div class="wrap"><div class="tc__all"></div></div>
   </div>
 
-  <div class="ver towns1" data-v="2" hidden>
+  <div class="ver towns1" data-v="b3" hidden>
     <div class="wrap">
       <div class="towns1__head">
         <h2 class="t-head" id="towns-h1">Do we build in your town?</h2>
@@ -7201,7 +7591,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver towns2" data-v="3" hidden>
+  <div class="ver towns2" data-v="b4" hidden>
     <div class="wrap">
       <div class="towns__head">
         <h2 class="t-head" id="towns-h2">Three counties, circling one office.</h2>
@@ -14715,9 +15105,408 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   }
 
   EZ.section('towns', {
+    /* slot 3 · Phase 5 improved version of b4 */
+    3: { init: function (root, k) {
+      var D = geo(), svg = root.querySelector('.t2x__svg'), stage = root.querySelector('.t2x__stage');
+      var reads = root.querySelectorAll('.t2x__read li'), pause = root.querySelector('.t2x__pause'), pl = pause.querySelector('.btn__label');
+      lists(root.querySelector('.t2x__lists'));
+      svg.setAttribute('viewBox', '-500 -500 1000 1000');
+      var R = [205, 300, 395], SP = [60, 90, 180], s = '', rings = [];
+      ORDER.forEach(function (c, ri) {
+        var n = D.towns[c].length, dots = '';
+        for (var i = 0; i < n; i++) { var a = i / n * Math.PI * 2; dots += '<circle class="td" cx="' + f(Math.cos(a) * R[ri]) + '" cy="' + f(Math.sin(a) * R[ri]) + '" r="5"/>'; }
+        s += '<circle class="ring" r="' + R[ri] + '"/><g class="rg" data-r="' + ri + '">' + dots + '</g>';
+        s += '<text class="rlbl" x="0" y="' + (R[ri] + 26) + '" text-anchor="middle">' + c.toUpperCase() + ' ' + n + '</text>';
+      });
+      s += '<path class="mark" d="M0 -430V-170"/><path class="mark" d="M-10 -430h20"/>';
+      svg.innerHTML = s;
+      ORDER.forEach(function (c, ri) { rings.push({ g: svg.querySelector('.rg[data-r="' + ri + '"]'), dots: svg.querySelectorAll('.rg[data-r="' + ri + '"] .td'), rot: ri * 40, n: D.towns[c].length, hl: -1, towns: D.towns[c], c: c }); });
+      k.add(function () { svg.innerHTML = ''; root.querySelector('.t2x__lists').innerHTML = ''; });
+      function update() {
+        rings.forEach(function (r, ri) {
+          r.g.setAttribute('transform', 'rotate(' + f(r.rot) + ')');
+          // which town sits under the survey mark (12 o'clock)
+          var step = 360 / r.n, idx = Math.round(((-90 - r.rot) % 360 + 720) % 360 / step) % r.n;
+          if (idx !== r.hl) {
+            if (r.hl > -1) r.dots[r.hl].classList.remove('is-hl');
+            r.hl = idx; r.dots[idx].classList.add('is-hl');
+            reads[2 - ri].innerHTML = '<b>' + r.c.replace('-', '&#8209;') + '</b>' + esc(r.towns[idx][0]);
+          }
+        });
+      }
+      update();
+      if (!k.motion) { pause.hidden = true; k.add(function () { pause.hidden = false; }); return; }
+      var paused = false, hover = false;
+      var loop = k.raf(function (dt) {
+        if (paused || hover) return;
+        rings.forEach(function (r, ri) { r.rot += 360 / SP[ri] * dt; });
+        update();
+      });
+      k.io(stage, function (en) { en.isIntersecting ? loop.start() : loop.stop(); });
+      k.on(stage, 'pointerenter', function (e) { if (e.pointerType === 'mouse') hover = true; });
+      k.on(stage, 'pointerleave', function () { hover = false; });
+      k.on(pause, 'click', function () { paused = !paused; pause.setAttribute('aria-pressed', paused ? 'true' : 'false'); pl.textContent = paused ? 'Run the rings' : 'Pause the rings'; });
+      k.add(function () { pause.setAttribute('aria-pressed', 'false'); pl.textContent = 'Pause the rings'; });
+      EZ.reveal(k, root.querySelectorAll('.towns__head > *'));
+      gsap.from(svg.querySelectorAll('.ring'), { scale: .4, autoAlpha: 0, transformOrigin: '50% 50%', duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: stage, start: 'top 75%', once: true } });
+    } },
+
+    /* slot 2 · Phase 5 improved version of b3 */
+    2: { init: function (root, k) {
+      var D = geo(), map = root.querySelector('.t1x__map'), svg = root.querySelector('.t1x__svg'), read = root.querySelector('.t1x__read');
+      var nEl = root.querySelector('.t1x__n'), cnEl = root.querySelector('.t1x__cn'), sr = root.querySelector('.t1x__sr');
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('.t1x__tab'));
+      var miami = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0];
+      var s = '<g class="ctys">';
+      ORDER.forEach(function (c) { s += '<path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>'; });
+      s += '</g>';
+      ORDER.forEach(function (c) { var b = D.boxes[c]; s += '<text class="clbl" x="' + f(b[0] + 30) + '" y="' + f(b[3] - 40) + '">' + c.toUpperCase() + '</text>'; });
+      var all = [];
+      s += '<g class="mks">';
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t, i) { s += '<circle class="mk" data-c="' + c + '" data-i="' + i + '" cx="' + t[1] + '" cy="' + t[2] + '" r="6"/>'; all.push({ c: c, i: i, n: t[0], x: t[1], y: t[2] }); }); });
+      s += '</g>';
+      if (miami) s += '<rect class="office" x="-1" y="-1" width="2" height="2" transform="translate(' + miami[1] + ' ' + miami[2] + ') rotate(45)"/>';
+      s += '<g class="flag" opacity="0"><line class="pole" x1="0" y1="0" x2="0" y2="-52"/><g class="pw"><path class="pen"/><text y="-34" font-size="20"></text></g></g>';
+      svg.innerHTML = s;
+      lists(sr);
+      var marks = Array.prototype.slice.call(svg.querySelectorAll('.mk')), paths = Array.prototype.slice.call(svg.querySelectorAll('.cty'));
+      var office = svg.querySelector('.office'), flag = svg.querySelector('.flag'), pole = flag.querySelector('.pole'), pw = flag.querySelector('.pw'), pen = flag.querySelector('.pen'), ftx = flag.querySelector('text');
+      k.add(function () { svg.innerHTML = ''; sr.innerHTML = ''; read.textContent = ''; });
+
+      var cur = null, hot = null, box = null, unit = 1;
+      function vbOf(c) { var b = D.boxes[c], p = 90; return [b[0] - p, b[1] - p, b[2] - b[0] + p * 2, b[3] - b[1] + p * 2]; }
+      // svg units per screen px for a viewBox under preserveAspectRatio meet
+      function unitOf(v) { var r = map.getBoundingClientRect(); return Math.max(v[2] / Math.max(1, r.width), v[3] / Math.max(1, r.height)); }
+      function sizeTo(u, tween) {
+        unit = u;
+        var r = { attr: { r: f(5.5 * u) } }, o = { attr: { transform: 'translate(' + (miami ? miami[1] + ' ' + miami[2] : '0 0') + ') rotate(45) scale(' + f(9 * u) + ')' } };
+        if (tween) { gsap.to(marks, Object.assign({ duration: .5, ease: 'power3.inOut' }, r)); gsap.to(office, Object.assign({ duration: .5, ease: 'power3.inOut' }, o)); }
+        else { gsap.set(marks, r); gsap.set(office, o); }
+      }
+      function hide(now) {
+        if (hot) hot.classList.remove('is-hot');
+        hot = null; read.textContent = '';
+        gsap.to(flag, { opacity: 0, duration: now || !k.motion ? 0 : .15, overwrite: true });
+      }
+      function raise(m) {
+        if (m === hot) return;
+        if (hot) hot.classList.remove('is-hot');
+        hot = m; m.classList.add('is-hot');
+        var t = all[marks.indexOf(m)];
+        ftx.textContent = t.n.toUpperCase();
+        var w = ftx.getComputedTextLength() + 26;
+        // pennant flies left when it would leave the map
+        var mr = m.getBoundingClientRect(), r = map.getBoundingClientRect(), left = mr.left + w + 30 > r.right;
+        pen.setAttribute('d', left ? 'M0 -52H' + (-w - 12) + 'L' + (-w) + '-40L' + (-w - 12) + '-28H0Z' : 'M0 -52H' + (w + 12) + 'L' + w + '-40L' + (w + 12) + '-28H0Z');
+        ftx.setAttribute('x', left ? -w + 10 : 13);
+        flag.setAttribute('transform', 'translate(' + t.x + ' ' + t.y + ') scale(' + f(unit) + ')');
+        read.textContent = t.n + ' · ' + t.c + ' County';
+        if (!k.motion) { gsap.set(flag, { opacity: 1 }); return; }
+        gsap.killTweensOf([flag, pole, pw]);
+        gsap.set(flag, { opacity: 1 });
+        gsap.fromTo(pole, { scaleY: 0, svgOrigin: '0 0' }, { scaleY: 1, duration: .16, ease: 'power2.out', svgOrigin: '0 0' });
+        gsap.fromTo(pw, { scaleX: 0, svgOrigin: '0 -40' }, { scaleX: 1, duration: .22, ease: 'back.out(2.4)', svgOrigin: '0 -40', delay: .1 });
+      }
+      function nearest(e, px) {
+        var ctm = svg.getScreenCTM(); if (!ctm) return null;
+        var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; pt = pt.matrixTransform(ctm.inverse());
+        var best = null, bd = px * unit;
+        marks.forEach(function (m, j) { if (all[j].c !== cur) return; var d = Math.hypot(all[j].x - pt.x, all[j].y - pt.y); if (d < bd) { bd = d; best = m; } });
+        return best;
+      }
+      function select(c, focus) {
+        if (c === cur) return;
+        cur = c; hide(true);
+        tabs.forEach(function (t) { var on = t.dataset.c === c; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+        paths.forEach(function (p) { p.classList.toggle('is-on', p.dataset.c === c); });
+        marks.forEach(function (m, j) { m.classList.toggle('is-dim', all[j].c !== c); });
+        cnEl.innerHTML = c.replace('-', '&#8209;');
+        var n = D.towns[c].length, v = vbOf(c);
+        box = v;
+        if (k.motion && svg.getAttribute('viewBox')) {
+          var o = { v: +nEl.textContent || 0 };
+          gsap.to(o, { v: n, duration: .3, ease: 'power2.out', onUpdate: function () { nEl.textContent = Math.round(o.v); } });
+          gsap.to(svg, { attr: { viewBox: v.join(' ') }, duration: .5, ease: 'power3.inOut', overwrite: 'auto' });
+          sizeTo(unitOf(v), true);
+        } else { nEl.textContent = n; svg.setAttribute('viewBox', v.join(' ')); sizeTo(unitOf(v)); }
+      }
+      tabs.forEach(function (t, i) {
+        k.on(t, 'click', function () { select(t.dataset.c); });
+        k.on(t, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (d) { e.preventDefault(); select(tabs[(i + d + 3) % 3].dataset.c, true); }
+        });
+      });
+      k.on(map, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var m = nearest(e, 28); if (m) raise(m); else if (hot) hide(); });
+      k.on(map, 'pointerleave', function (e) { if (e.pointerType === 'mouse') hide(); });
+      k.on(map, 'click', function (e) {
+        var m = nearest(e, e.pointerType === 'mouse' ? 28 : 40);
+        if (m) { raise(m); return; }
+        var p = e.target.closest && e.target.closest('.cty');
+        if (p && p.dataset.c !== cur) select(p.dataset.c);
+      });
+      k.on(map, 'keydown', function (e) {
+        var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!d && e.key !== 'Home' && e.key !== 'End') return;
+        e.preventDefault();
+        var own = marks.filter(function (m, j) { return all[j].c === cur; }), i = own.indexOf(hot);
+        i = e.key === 'Home' ? 0 : e.key === 'End' ? own.length - 1 : i < 0 ? (d > 0 ? 0 : own.length - 1) : (i + d + own.length) % own.length;
+        raise(own[i]);
+      });
+      k.on(map, 'blur', function () { hide(); });
+      k.ro(map, function () { if (box) { sizeTo(unitOf(box)); if (hot) { var h = hot; hot = null; raise(h); } } });
+      select('Miami-Dade');
+      EZ.reveal(k, root.querySelectorAll('.t1x__head > *'));
+      if (k.motion) gsap.from(marks, { scale: 0, transformOrigin: '50% 50%', duration: .2, ease: 'back.out(3)', stagger: { each: .004, from: 'random' }, scrollTrigger: { trigger: map, start: 'top 75%', once: true } });
+    } },
+
+    /* slot 1 · Phase 5 improved version of b2 */
+    1: { init: function (root, k) {
+      var D = geo(), form = root.querySelector('.tcx__form'), inp = root.querySelector('.tcx__in'), list = root.querySelector('.tcx__list');
+      var outline = root.querySelector('.tcx__outline'), opath = outline.querySelector('path'), sign = root.querySelector('.tcx__sign'), ans = root.querySelector('.tcx__ans');
+      lists(root.querySelector('.tcx__all'));
+      // the three counties behind the sign, every municipality a survey mark; a hit lights its mark (the map proves the answer)
+      var map = root.querySelector('.tcx__map');
+      map.innerHTML = ORDER.map(function (c) { return '<path class="tcx__cty" d="' + D.counties[c] + '"/>'; }).join('') +
+        ORDER.map(function (c) { return D.towns[c].map(function (t) { return '<circle class="tcx__dot" r="9" cx="' + t[1] + '" cy="' + t[2] + '" data-n="' + esc(t[0]) + '"/>'; }).join(''); }).join('');
+      var dots = map.querySelectorAll('.tcx__dot');
+      function lightTown(n) { dots.forEach(function (c) { var on = c.getAttribute('data-n') === n; c.classList.toggle('is-on', on); if (on && k.motion) gsap.fromTo(c, { attr: { r: 40 } }, { attr: { r: 18 }, duration: .4, ease: 'power2.out' }); else c.setAttribute('r', on ? 18 : 9); }); }
+      k.add(function () { map.innerHTML = ''; });
+      var ALL = [];
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { ALL.push({ n: t[0], c: c, k: norm(t[0]) }); }); });
+      // Madoka outline: drawn round the field from the bottom-left on focus
+      function shapeOutline() { var w = outline.clientWidth, h = outline.clientHeight; outline.setAttribute('viewBox', '0 0 ' + w + ' ' + h); opath.setAttribute('d', 'M1 ' + (h - 1) + 'V1H' + (w - 1) + 'V' + (h - 1) + 'H1'); }
+      k.ro(outline, shapeOutline);
+      shapeOutline();
+      gsap.set(opath, { drawSVG: '0%' });
+      k.on(inp, 'focus', function () { if (k.motion) gsap.to(opath, { drawSVG: '100%', duration: .18, ease: EZ.bezier(.23, 1, .32, 1) }); else gsap.set(opath, { drawSVG: '100%' }); });
+      k.on(inp, 'blur', function () { if (!inp.value) gsap.to(opath, { drawSVG: '0%', duration: k.motion ? .3 : 0 }); k.timeout(close, 150); });
+
+      var opts = [], act = -1;
+      function close() { list.hidden = true; inp.setAttribute('aria-expanded', 'false'); act = -1; inp.removeAttribute('aria-activedescendant'); }
+      function suggest() {
+        var q = norm(inp.value);
+        if (!q) { close(); rest(); return; }
+        opts = ALL.filter(function (t) { return t.k.indexOf(q) === 0; }).concat(ALL.filter(function (t) { return t.k.indexOf(q) > 0; })).slice(0, 4);
+        if (!opts.length) { close(); return; }
+        list.innerHTML = opts.map(function (t, i) { return '<li role="option" id="tco' + i + '" aria-selected="false">' + esc(t.n) + '<span>' + t.c + '</span></li>'; }).join('');
+        list.hidden = false; inp.setAttribute('aria-expanded', 'true'); act = -1;
+      }
+      function mark(i) {
+        act = i;
+        list.querySelectorAll('li').forEach(function (li, j) { li.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+        if (i > -1) inp.setAttribute('aria-activedescendant', 'tco' + i);
+      }
+      k.on(inp, 'input', suggest);
+      k.on(inp, 'keydown', function (e) {
+        if (list.hidden) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); mark((act + 1) % opts.length); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); mark((act - 1 + opts.length) % opts.length); }
+        else if (e.key === 'Escape') { close(); }
+        else if (e.key === 'Enter' && act > -1) { e.preventDefault(); var t = opts[act]; inp.value = t.n; close(); show(t); }
+      });
+      k.on(list, 'pointerdown', function (e) { var li = e.target.closest('li'); if (!li) return; e.preventDefault(); var t = opts[+li.id.slice(3)]; inp.value = t.n; close(); show(t); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var q = norm(inp.value);
+        if (!q) { inp.focus(); return; }
+        var hit = ALL.filter(function (t) { return t.k === q; })[0] || (opts.length === 1 ? opts[0] : null);
+        close();
+        show(hit || null, inp.value.trim());
+      });
+
+      function fit(txt, max, w) { return Math.min(max, Math.floor(w / Math.max(1, txt.length * .68))); }
+      function draw(main, sub, verdict, yes) {
+        var fs = fit(main, 64, 440);
+        sign.innerHTML =
+          '<g class="posts"><path d="M150 236V300M370 236V300" stroke="#C9C1B6" stroke-width="12"/><path d="M150 236V300M370 236V300" stroke="#121212" stroke-width="2" opacity=".3"/>' +
+          '<g class="panel"><rect x="20" y="20" width="480" height="230" rx="18" fill="' + (yes === false ? '#FF5F00' : '#FF5F00') + '" stroke="#121212" stroke-width="3"/>' +
+          '<rect x="32" y="32" width="456" height="206" rx="12" fill="none" stroke="' + (yes === false ? '#121212' : '#FFFFFF') + '" stroke-width="4"/>' +
+          '<text x="260" y="' + (110 + fs * .1) + '" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + (yes === false ? '#121212' : '#FFFFFF') + '">' + esc(main) + '</text>' +
+          '<text x="260" y="160" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="600" font-size="24" fill="' + (yes === false ? '#121212' : '#121212') + '">' + esc(sub) + '</text>' +
+          '<text x="260" y="208" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? '#121212' : '#FFFFFF') + '">' + esc(verdict) + '</text></g></g>';
+      }
+      function show(t, raw) {
+        if (t) { lightTown(t.n); draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }
+        else { draw('NOT ON OUR LIST', raw ? '“' + raw + '”' : '', 'Call (754) 236-0675 to ask', false); ans.textContent = (raw || 'That town') + ' is not one of the 104 municipalities on our list. Call (754) 236-0675 to ask.'; }
+        if (k.motion) k.ctx.add(function () {
+          gsap.fromTo(sign.querySelector('.panel'), { y: -60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .28, ease: 'back.out(1.8)' });
+          if (!t) gsap.fromTo(sign.querySelector('.posts'), { rotation: 0 }, { keyframes: [{ rotation: -1.2, duration: .05 }, { rotation: 1.2, duration: .07 }, { rotation: -.6, duration: .04 }, { rotation: 0, duration: .04 }], svgOrigin: '260 300', delay: .28 });
+        });
+      }
+      function rest() { if (typeof lightTown === 'function') lightTown(null); draw('YOUR TOWN', 'Miami-Dade, Broward, Palm Beach', '104 municipalities', true); ans.textContent = ''; }
+      rest();
+      k.add(function () { sign.innerHTML = ''; root.querySelector('.tcx__all').innerHTML = ''; inp.value = ''; close(); gsap.set(opath, { clearProps: 'all' }); });
+      EZ.reveal(k, root.querySelectorAll('.tcx__side > h2, .tcx__side > p'));
+    } },
+
+    /* slot 4 · Phase 5 new · The van route: the select lists all 104 under their counties; a pick lights the town,
+       plots a road-like route (north-south first, then across) from the Miami office and drives the van along it */
+    4: { init: function (root, k) {
+      var D = geo(), svg = root.querySelector('.tdr__svg'), sel = root.querySelector('.tdr__sel'), ans = root.querySelector('.tdr__ans');
+      var miami = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0], s = '', idx = [];
+      ORDER.forEach(function (c) { s += '<path class="cty" d="' + D.counties[c] + '"/>'; var b = D.boxes[c]; s += '<text class="cl" x="' + f(b[0] + 30) + '" y="' + f(b[1] + 70) + '">' + c.toUpperCase() + '</text>'; });
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { idx.push({ n: t[0], c: c, x: t[1], y: t[2] }); s += '<circle class="dot" cx="' + t[1] + '" cy="' + t[2] + '" r="11"/>'; }); });
+      s += '<path class="route" d=""/>';
+      s += '<rect class="office" x="-20" y="-20" width="40" height="40" transform="translate(' + miami[1] + ' ' + miami[2] + ') rotate(45)"/><text class="olbl" x="' + (miami[1] - 40) + '" y="' + (miami[2] + 80) + '" text-anchor="end">Our office</text>';
+      s += '<g class="van" transform="translate(' + miami[1] + ' ' + miami[2] + ')"><rect class="van-b" x="-46" y="-34" width="64" height="40" rx="6"/><path class="van-b" d="M18 -24 H36 L46 -8 V6 H18 Z"/><path class="van-g" d="M22 -20 H34 L41 -8 H22 Z"/><circle class="van-w" cx="-28" cy="8" r="10"/><circle class="van-w" cx="30" cy="8" r="10"/></g>';
+      svg.innerHTML = s;
+      var dots = svg.querySelectorAll('.dot'), route = svg.querySelector('.route'), van = svg.querySelector('.van');
+      sel.innerHTML = '<option value="">Choose your town</option>' + ORDER.map(function (c) {
+        return '<optgroup label="' + c + ' (' + D.towns[c].length + ')">' + idx.map(function (t, i) { return t.c === c ? '<option value="' + i + '">' + esc(t.n) + '</option>' : ''; }).join('') + '</optgroup>';
+      }).join('');
+      function go() {
+        dots.forEach(function (d) { d.classList.remove('is-on'); });
+        if (sel.value === '') { route.setAttribute('d', ''); ans.textContent = ''; van.setAttribute('transform', 'translate(' + miami[1] + ' ' + miami[2] + ')'); return; }
+        var t = idx[+sel.value]; dots[+sel.value].classList.add('is-on');
+        ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b>' + esc(t.c) + ' is one of our three counties, and ' + esc(t.n) + ' is on our list of 104.';
+        var d = 'M' + miami[1] + ' ' + miami[2] + ' V' + t.y + ' H' + t.x;
+        route.setAttribute('d', d);
+        var L = route.getTotalLength(), p = { v: 0 };
+        function place() { var pt = route.getPointAtLength(p.v * L); van.setAttribute('transform', 'translate(' + f(pt.x) + ' ' + f(pt.y) + ')'); }
+        if (!k.motion || L < 1) { p.v = 1; place(); return; }
+        k.ctx.add(function () {
+          gsap.fromTo(route, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.1, ease: 'power2.inOut', overwrite: true });
+          gsap.to(p, { v: 1, duration: 1.1, ease: 'power2.inOut', onUpdate: place, overwrite: true });
+        });
+      }
+      k.on(sel, 'change', go);
+      k.add(function () { svg.innerHTML = ''; sel.innerHTML = ''; ans.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.tdr__side > *'));
+    } },
+
+    /* slot 5 · Phase 5 new · The directory: one index tab per first letter that has towns; roving focus on the tabs
+       (arrow keys, Home, End); the page shows the letter large and each town with its county */
+    5: { init: function (root, k) {
+      var D = geo(), tabs = root.querySelector('.taz__tabs'), list = root.querySelector('.taz__list'), big = root.querySelector('.taz__big');
+      var all = [];
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { all.push({ n: t[0], c: c }); }); });
+      all.sort(function (a, b) { return a.n.localeCompare(b.n); });
+      var L = []; all.forEach(function (t) { var l = norm(t.n).charAt(0).toUpperCase(); if (L.indexOf(l) < 0) L.push(l); });
+      tabs.innerHTML = L.map(function (l, i) { return '<button type="button" class="taz__t" role="tab" id="taz-t-' + l + '" aria-controls="taz-page" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '" data-l="' + l + '" data-rx="native:directory-tab">' + l + '</button>'; }).join('');
+      var bt = Array.prototype.slice.call(tabs.querySelectorAll('.taz__t'));
+      if (EZ.bindReactions) EZ.bindReactions(tabs, k);
+      function pick(i, focus, anim) {
+        bt.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; });
+        var l = L[i], hit = all.filter(function (t) { return norm(t.n).charAt(0).toUpperCase() === l; });
+        big.textContent = l;
+        root.querySelector('.taz__page').setAttribute('aria-labelledby', 'taz-t-' + l);
+        list.innerHTML = hit.map(function (t) { return '<li>' + esc(t.n) + '<span>' + t.c.replace('-', '&#8209;') + '</span></li>'; }).join('');
+        if (focus) bt[i].focus();
+        if (anim && k.motion) k.ctx.add(function () { gsap.from(list.children, { x: 12, autoAlpha: 0, duration: .22, ease: 'power2.out', stagger: .02 }); gsap.from(big, { y: -16, autoAlpha: 0, duration: .25, ease: 'back.out(2)' }); });
+      }
+      k.on(tabs, 'click', function (e) { var b = e.target.closest('.taz__t'); if (b) pick(bt.indexOf(b), false, true); });
+      k.on(tabs, 'keydown', function (e) {
+        var i = bt.indexOf(document.activeElement); if (i < 0) return;
+        var n = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? i + 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? bt.length - 1 : null;
+        if (n === null) return; e.preventDefault(); pick((n + bt.length) % bt.length, true, true);
+      });
+      pick(0, false, false);
+      k.add(function () { tabs.innerHTML = ''; list.innerHTML = ''; big.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.taz__head > *, .taz__book'));
+    } },
+
+    /* slot 6 · Phase 5 new · Cut to count: a shared 0-40 rule; each board is n units long (34, 31, 39), one notch per
+       town in map order north to south; pointer or arrow keys walk the notches */
+    6: { init: function (root, k) {
+      var D = geo(), host = root.querySelector('.tlb__boards'), read = root.querySelector('.tlb__read'), rule = root.querySelector('.tlb__rule');
+      var r = '<rect class="base" x="0" y="0" width="400" height="34"/>';
+      for (var i = 0; i <= 40; i++) r += '<path class="tk" d="M' + i * 10 + ' 34 V' + (i % 10 ? (i % 5 ? 26 : 20) : 10) + '"/>' + (i % 10 ? '' : '<text x="' + (i * 10 + (i ? -14 : 3)) + '" y="9">' + i + '</text>');
+      rule.innerHTML = r;
+      host.innerHTML = ORDER.map(function (c) {
+        var T = D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }), n = T.length, w = n * 10, s = '';
+        s += '<rect class="wood" x="0" y="4" width="' + w + '" height="32"/><path class="gr" d="M6 14 C' + w * .3 + ' 10 ' + w * .6 + ' 18 ' + (w - 6) + ' 13 M6 27 C' + w * .4 + ' 31 ' + w * .7 + ' 23 ' + (w - 6) + ' 28"/>';
+        T.forEach(function (t, j) { s += '<path class="nt" d="M' + (j * 10 + 5) + ' 4 V16"/><rect class="hit" data-j="' + j + '" x="' + j * 10 + '" y="0" width="10" height="40"/>'; });
+        s += '<rect class="end" x="' + (w - 3) + '" y="4" width="3" height="32"/>';
+        return '<div class="tlb__row"><p class="tlb__name">' + c.replace('-', '&#8209;') + ' <b class="nums">' + n + '</b></p><svg class="tlb__board" viewBox="0 0 400 40" tabindex="0" role="slider" aria-label="' + c + ', ' + n + ' towns, one notch each; arrow keys read them" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="1" data-c="' + c + '" data-rx="native:board-notch">' + s + '</svg></div>';
+      }).join('');
+      lists(root.querySelector('.tlb__lists'));
+      var boards = Array.prototype.slice.call(host.querySelectorAll('.tlb__board'));
+      if (EZ.bindReactions) EZ.bindReactions(host, k);
+      function T(c) { return D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }); }
+      function show(b, j) {
+        var c = b.dataset.c, t = T(c)[j];
+        host.querySelectorAll('.nt.is-on').forEach(function (n) { n.classList.remove('is-on'); });
+        b.querySelectorAll('.nt')[j].classList.add('is-on');
+        b.dataset.j = j; b.setAttribute('aria-valuenow', j + 1); b.setAttribute('aria-valuetext', t[0] + ', ' + (j + 1) + ' of ' + T(c).length + ' in ' + c);
+        read.innerHTML = '<b>' + esc(t[0]) + '</b>' + c + ', notch ' + (j + 1) + ' of ' + T(c).length + ' (north to south)';
+      }
+      boards.forEach(function (b) {
+        k.on(b, 'pointermove', function (e) { var h = e.target.closest('.hit'); if (h) show(b, +h.dataset.j); });
+        k.on(b, 'focus', function () { show(b, +(b.dataset.j || 0)); });
+        k.on(b, 'keydown', function (e) {
+          var n = T(b.dataset.c).length, j = +(b.dataset.j || 0);
+          var m = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? j + 1 : e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? j - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : null;
+          if (m === null) return; e.preventDefault(); show(b, EZ.clamp(m, 0, n - 1));
+        });
+      });
+      k.add(function () { host.innerHTML = ''; rule.innerHTML = ''; root.querySelector('.tlb__lists').innerHTML = ''; read.textContent = 'Point at a notch to read its town.'; });
+      EZ.reveal(k, root.querySelectorAll('.tlb__head > *'));
+      // the boards are sawn to length from the left as they come into view
+      if (k.motion) gsap.from(host.querySelectorAll('.wood, .gr, .end'), { scaleX: 0, transformOrigin: '0% 50%', duration: .7, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: host, start: 'top 85%', once: true } });
+    } },
+
+    /* slot 7 · Phase 5 new · North to south: the 104 sorted by map latitude; a county-line sign is posted where the road
+       crosses into the next county; the readout names the sign nearest the middle of the view */
+    7: { init: function (root, k) {
+      var D = geo(), road = root.querySelector('.tns__road'), ol = root.querySelector('.tns__list'), at = root.querySelector('.tns__at');
+      var all = [];
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { all.push({ n: t[0], c: c, y: t[2] }); }); });
+      all.sort(function (a, b) { return a.y - b.y; });
+      var h = '', last = '';
+      all.forEach(function (t, i) {
+        if (t.c !== last) { h += '<li class="tns__p is-cty"><span class="tns__plate"><span>Entering</span><b>' + t.c.replace('-', '&#8209;') + ' County</b><span class="nums">' + D.towns[t.c].length + ' towns</span></span><span class="tns__post"></span></li>'; last = t.c; }
+        h += '<li class="tns__p' + (t.n === 'Miami' ? ' is-hq' : '') + '" data-i="' + i + '"><span class="tns__plate"><b>' + esc(t.n) + '</b><span>' + (t.n === 'Miami' ? 'Our office' : t.c) + '</span></span><span class="tns__post"></span></li>';
+      });
+      ol.innerHTML = h;
+      var posts = Array.prototype.slice.call(ol.querySelectorAll('.tns__p[data-i]'));
+      function where() {
+        var mid = road.getBoundingClientRect().left + road.clientWidth / 2, best = 0, bd = 1e9;
+        posts.forEach(function (p, i) { var r = p.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid); if (d < bd) { bd = d; best = i; } });
+        var t = all[best];
+        at.innerHTML = '<b>' + esc(t.n) + '</b>, ' + t.c + ' &middot; stop ' + (best + 1) + ' of ' + all.length + ', north to south';
+      }
+      var pend = false;
+      k.on(road, 'scroll', function () { if (!pend) { pend = true; requestAnimationFrame(function () { pend = false; where(); }); } }, { passive: true });
+      function step(d) { road.scrollBy({ left: d * road.clientWidth * .8, behavior: k.motion ? 'smooth' : 'auto' }); }
+      k.on(root.querySelector('.tns__prev'), 'click', function () { step(-1); });
+      k.on(root.querySelector('.tns__next'), 'click', function () { step(1); });
+      k.on(road, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
+      where();
+      k.add(function () { ol.innerHTML = ''; at.textContent = ''; road.scrollLeft = 0; });
+      EZ.reveal(k, root.querySelectorAll('.tns__head > *, .tns__bar'));
+      if (k.motion) gsap.from(ol.querySelectorAll('.tns__plate'), { y: -30, autoAlpha: 0, duration: .4, ease: 'back.out(2)', stagger: .015, scrollTrigger: { trigger: road, start: 'top 85%', once: true } });
+    } },
+
+    /* slot 8 · Phase 5 new · The county panels: one panel open at a time (widens on desktop, unfolds on phones); the
+       body shows the county outline from the map data, its towns as dots, and the town list */
+    8: { init: function (root, k) {
+      var D = geo(), row = root.querySelector('.tac__row');
+      var miami = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0];
+      row.innerHTML = ORDER.map(function (c, i) {
+        var b = D.boxes[c], T = D.towns[c], id = 'tac-b-' + i;
+        var dots = T.map(function (t) { return t[0] === 'Miami' ? '' : '<circle class="dot" cx="' + t[1] + '" cy="' + t[2] + '" r="9"/>'; }).join('');
+        if (c === 'Miami-Dade') dots += '<rect class="hq" x="-18" y="-18" width="36" height="36" transform="translate(' + miami[1] + ' ' + miami[2] + ') rotate(45)"/>';
+        return '<div class="tac__p' + (i ? '' : ' is-open') + '"><button type="button" class="tac__tab" aria-expanded="' + (i ? 'false' : 'true') + '" aria-controls="' + id + '" data-rx="native:county-open"><span class="tac__n nums">' + T.length + '</span><span class="tac__nm">' + c.replace('-', '&#8209;') + '</span></button>' +
+          '<div class="tac__body" id="' + id + '"><svg class="tac__shape" viewBox="' + f(b[0] - 20) + ' ' + f(b[1] - 20) + ' ' + f(b[2] - b[0] + 40) + ' ' + f(b[3] - b[1] + 40) + '" aria-hidden="true" focusable="false"><path class="cty" d="' + D.counties[c] + '"/>' + dots + '</svg>' +
+          '<ul class="tac__list" aria-label="' + T.length + ' municipalities in ' + c + '">' + T.map(function (t) { return '<li>' + esc(t[0]) + (t[0] === 'Miami' ? ' (our office)' : '') + '</li>'; }).join('') + '</ul></div></div>';
+      }).join('');
+      var P = Array.prototype.slice.call(row.querySelectorAll('.tac__p'));
+      if (EZ.bindReactions) EZ.bindReactions(row, k);
+      P.forEach(function (p) {
+        k.on(p.querySelector('.tac__tab'), 'click', function () {
+          if (p.classList.contains('is-open')) return;
+          P.forEach(function (q) { var on = q === p; q.classList.toggle('is-open', on); q.querySelector('.tac__tab').setAttribute('aria-expanded', on ? 'true' : 'false'); });
+          if (k.motion) k.ctx.add(function () { gsap.fromTo(p.querySelectorAll('.tac__shape .dot, .tac__shape .hq'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .3, ease: 'back.out(2.5)', stagger: .008, delay: .25 }); });
+        });
+      });
+      k.add(function () { row.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.tac__head > *, .tac__row'));
+    } },
+
     /* slot 1 · AUDIT-01 winner (copied from v3; F9): clearing the field resets the sign and the live region, the list never
        covers Check it, the outline draws in 180ms, the sign swaps in 280ms and a miss shakes the posts once */
-    1: { init: function (root, k) {
+    b2: { init: function (root, k) {
       var D = geo(), form = root.querySelector('.tc__form'), inp = root.querySelector('.tc__in'), list = root.querySelector('.tc__list');
       var outline = root.querySelector('.tc__outline'), opath = outline.querySelector('path'), sign = root.querySelector('.tc__sign'), ans = root.querySelector('.tc__ans');
       lists(root.querySelector('.tc__all'));
@@ -14797,7 +15586,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* v1 · The survey map [BANK Q576 For Living: the map answers on hover (desktop) and on tap (touch)] */
-    2: { init: function (root, k) {
+    b3: { init: function (root, k) {
       var D = geo(), map = root.querySelector('.towns1__map'), svg = root.querySelector('.towns1__svg'), read = root.querySelector('.towns1__read');
       var nEl = root.querySelector('.towns1__n'), cnEl = root.querySelector('.towns1__cn'), sr = root.querySelector('.towns1__sr');
       var tabs = Array.prototype.slice.call(root.querySelectorAll('.towns1__tab'));
@@ -14906,7 +15695,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* v2 · Around the office [S0717] */
-    3: { init: function (root, k) {
+    b4: { init: function (root, k) {
       var D = geo(), svg = root.querySelector('.towns2__svg'), stage = root.querySelector('.towns2__stage');
       var reads = root.querySelectorAll('.towns2__read li'), pause = root.querySelector('.towns2__pause'), pl = pause.querySelector('.btn__label');
       lists(root.querySelector('.towns2__lists'));

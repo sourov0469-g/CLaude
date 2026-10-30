@@ -3,7 +3,161 @@
   <!-- v1 · The survey map [BANK Q576 For Living region map: areas answer on hover (desktop), degrade to tap (touch)].
        The map is the whole version: 104 survey marks; hover / tap / arrow keys raise a town's name on a survey flag. -->
   <!-- slot 1 · AUDIT-01 winner (copied from v3, fixes applied here; the original is in a backup slot) -->
-  <div class="ver tc" data-v="1">
+  <!-- slot 1 · Phase 5 improved version of b2 (.tc -> .tcx) -->
+  <div class="ver tcx" data-v="1">
+    <div class="wrap tcx__grid">
+      <div class="tcx__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h3-w-i">Type <span class="acc">your town.</span></h2>
+        <p class="t-lead towns__lead">Type yours and the sign answers straight away.</p>
+        <p class="tcx__hub">104 municipalities in Miami-Dade, Broward and Palm Beach, from our office at 19 W Flagler St, Miami.</p>
+        <form class="tcx__form" novalidate>
+          <div class="tcx__field">
+            <label class="tcx__lbl" for="tcx-q-w-i">Your town or city</label>
+            <input class="tcx__in" id="tcx-q-w-i" type="text" autocomplete="address-level2" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="tcx-list-w-i" spellcheck="false" data-rx="native:madoka-outline">
+            <svg class="tcx__outline" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path/></svg>
+            <ul class="tcx__list" id="tcx-list-w-i" role="listbox" hidden></ul>
+          </div>
+          <button type="submit" class="btn tcx__go" data-rx="~compass/jack/ring/r"><span class="btn__label">Check it</span></button>
+        </form>
+        <p class="tcx__call">Not sure? Call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>.</p>
+      </div>
+      <div class="tcx__road">
+        <svg class="tcx__map" viewBox="0 0 1000 2378" aria-hidden="true" focusable="false"></svg>
+        <svg class="tcx__sign" viewBox="0 0 520 300" aria-hidden="true" focusable="false"></svg>
+        <p class="tcx__ans" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="wrap"><div class="tcx__all"></div></div>
+  </div>
+
+  <!-- slot 2 · Phase 5 improved version of b3 (.towns1 -> .t1x) -->
+  <div class="ver t1x" data-v="2" hidden>
+    <div class="wrap">
+      <div class="t1x__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h1-i">Do we build <span class="acc">in your town?</span></h2>
+        <p class="t-lead towns__lead">Every mark is one of the <span class="nums">104</span> municipalities we build in. Point at a mark to read it.</p>
+      </div>
+      <div class="t1x__bar">
+        <div class="t1x__tabs" role="tablist" aria-label="Counties">
+          <button type="button" role="tab" class="t1x__tab" data-c="Miami-Dade" aria-selected="true" data-rx="~t:MD/hoist/hop/tr"><span class="btn__label">Miami&#8209;Dade</span></button>
+          <button type="button" role="tab" class="t1x__tab" data-c="Broward" aria-selected="false" data-rx="~t:BR/hoist/hop/tr"><span class="btn__label">Broward</span></button>
+          <button type="button" role="tab" class="t1x__tab" data-c="Palm Beach" aria-selected="false" data-rx="~t:PB/hoist/hop/tr"><span class="btn__label">Palm Beach</span></button>
+        </div>
+        <p class="t1x__count" aria-live="polite"><span class="t1x__n nums">34</span><span class="t1x__of">municipalities in <span class="t1x__cn">Miami&#8209;Dade</span></span></p>
+      </div>
+      <div class="t1x__map" data-buddy="image" tabindex="0" role="application" aria-label="Survey map of the service area. Left and right arrow keys move from town to town." data-rx="native:survey-flags">
+        <svg class="t1x__svg" aria-hidden="true" focusable="false"></svg>
+        <p class="t1x__read" aria-live="polite"></p>
+      </div>
+      <div class="t1x__sr sr-only"></div>
+    </div>
+  </div>
+
+  <!-- slot 3 · Phase 5 improved version of b4 (.towns2 -> .t2x) -->
+  <div class="ver t2x" data-v="3" hidden>
+    <div class="wrap">
+      <div class="towns__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h2-i">Three counties, <span class="acc">circling one office.</span></h2>
+        <p class="t-lead towns__lead">Every dot is a municipality we build in. The names surface as they pass the survey mark.</p>
+      </div>
+      <div class="t2x__stage">
+        <svg class="t2x__svg" aria-hidden="true" focusable="false"></svg>
+        <div class="t2x__hub"><p class="t2x__n nums">104</p><p class="t2x__nl">municipalities</p><p class="t2x__addr">From 19 W Flagler St, Miami</p></div>
+        <ul class="t2x__read" aria-hidden="true"><li data-r="2"></li><li data-r="1"></li><li data-r="0"></li></ul>
+      </div>
+      <button type="button" class="btn btn--ghost t2x__pause" aria-pressed="false" data-rx="~pause/hinge/squash/l"><span class="btn__label">Pause the rings</span></button>
+      <div class="t2x__lists"></div>
+    </div>
+  </div>
+  <!-- slot 4 · Phase 5 new · The van route: pick a town; a route is plotted from our office and the van drives it -->
+  <div class="ver tdr" data-v="4" hidden>
+    <div class="wrap tdr__grid">
+      <div class="tdr__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-dr">From our office <span class="acc">to your street.</span></h2>
+        <p class="t-lead towns__lead">Pick your town. The van plots the drive from our office at 19 W Flagler St, Miami, and your town lights up on the map.</p>
+        <div class="tdr__field">
+          <label class="tdr__lbl" for="tdr-sel">Your town or city</label>
+          <select id="tdr-sel" class="tdr__sel" data-rx="native:route-pick"></select>
+        </div>
+        <p class="tdr__ans" aria-live="polite"></p>
+        <a class="btn tdr__btn" href="#consult" data-rx="~house2/hoist/ring/r"><span class="btn__label">Book a visit in your town</span></a>
+      </div>
+      <div class="tdr__map"><svg class="tdr__svg" viewBox="0 0 1000 2378" role="img" aria-label="Map of Palm Beach, Broward and Miami-Dade counties with our 104 municipalities and our Miami office"></svg></div>
+    </div>
+  </div>
+
+  <!-- slot 5 · Phase 5 new · The directory: index tabs A to Z down a ledger page; a letter opens its towns -->
+  <div class="ver taz" data-v="5" hidden>
+    <div class="wrap">
+      <div class="taz__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-az">Look yourself up, <span class="acc">A to Z.</span></h2>
+        <p class="t-lead towns__lead">All <span class="nums">104</span> municipalities we build in, filed by first letter like a directory. Pick a letter.</p>
+      </div>
+      <div class="taz__book">
+        <div class="taz__tabs" role="tablist" aria-label="First letter of the town"></div>
+        <div class="taz__page" role="tabpanel" id="taz-page" tabindex="0" data-rx="native:directory-page">
+          <svg class="taz__fold" viewBox="0 0 60 60" aria-hidden="true" focusable="false"><path class="taz__fold-b" d="M0 0 H60 V60 Z"/><path class="taz__fold-f" d="M0 0 L60 60 H0 Z"/></svg>
+          <p class="taz__big" aria-hidden="true"></p>
+          <ul class="taz__list"></ul>
+        </div>
+      </div>
+      <p class="taz__tot">Miami&#8209;Dade <span class="nums">34</span> &middot; Broward <span class="nums">31</span> &middot; Palm Beach <span class="nums">39</span> &middot; <span class="nums">104</span> in all</p>
+    </div>
+  </div>
+
+  <!-- slot 6 · Phase 5 new · Cut to count: three boards, each as long as its county's number of towns, one notch per town -->
+  <div class="ver tlb" data-v="6" hidden>
+    <div class="wrap">
+      <div class="tlb__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-lb">Three boards, <span class="acc">cut to count.</span></h2>
+        <p class="t-lead towns__lead">Each board is as long as the number of towns we build in across that county, one notch per town. Point at a notch, or focus a board and use the arrow keys.</p>
+      </div>
+      <svg class="tlb__rule" viewBox="0 0 400 34" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+      <div class="tlb__boards"></div>
+      <p class="tlb__read" aria-live="polite">Point at a notch to read its town.</p>
+      <div class="tlb__lists"></div>
+    </div>
+  </div>
+
+  <!-- slot 7 · Phase 5 new · North to south: the towns as signposts along one road, Palm Beach County down to Miami-Dade -->
+  <div class="ver tns" data-v="7" hidden>
+    <div class="wrap">
+      <div class="tns__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-ns">North to south, <span class="acc">town by town.</span></h2>
+        <p class="t-lead towns__lead">Our <span class="nums">104</span> municipalities in order from the north of Palm Beach County to the south of Miami&#8209;Dade. Scroll the road or use the buttons.</p>
+      </div>
+    </div>
+    <div class="tns__road" tabindex="0" role="region" aria-label="Municipalities from north to south, scroll sideways" data-rx="native:road-scroll"><ol class="tns__list"></ol></div>
+    <div class="wrap tns__bar">
+      <p class="tns__at" aria-live="polite"></p>
+      <div class="tns__btns">
+        <button type="button" class="btn btn--ghost tns__prev" data-rx="~arrowL/rail/tick/l"><span class="btn__label">Further north</span></button>
+        <button type="button" class="btn tns__next" data-rx="~arrowR/rail/tick/r"><span class="btn__label">Further south</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 8 · Phase 5 new · The county panels: three upright panels; open one and it widens to show its outline and every town -->
+  <div class="ver tac" data-v="8" hidden>
+    <div class="wrap">
+      <div class="tac__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-ac">Open a county. <span class="acc">Read every town.</span></h2>
+        <p class="t-lead towns__lead">Three counties, <span class="nums">104</span> municipalities. Open a panel to see the county's outline and every town in it we build in.</p>
+      </div>
+      <div class="tac__row"></div>
+    </div>
+  </div>
+
+
+  <div class="ver tc" data-v="b2" hidden>
     <div class="wrap tc__grid">
       <div class="tc__side">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Where we build</p>
@@ -30,7 +184,7 @@
     <div class="wrap"><div class="tc__all"></div></div>
   </div>
 
-  <div class="ver towns1" data-v="2" hidden>
+  <div class="ver towns1" data-v="b3" hidden>
     <div class="wrap">
       <div class="towns1__head">
         <h2 class="t-head" id="towns-h1">Do we build in your town?</h2>
@@ -53,7 +207,7 @@
   </div>
 
   <!-- v2 · Around the office [S0717 motion-frames: concentric rings at 60 / 90 / 180s, labels stay upright] -->
-  <div class="ver towns2" data-v="3" hidden>
+  <div class="ver towns2" data-v="b4" hidden>
     <div class="wrap">
       <div class="towns__head">
         <h2 class="t-head" id="towns-h2">Three counties, circling one office.</h2>

@@ -297,3 +297,17 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
     - 7 inspection tag: pull it or press it; it springs back and turns over.
     - 8 five nails: four are driven flush and the fifth stops at eight tenths.
   - Test: `remodeling/src/tools/reviewstest.js` (both motion settings, 0 errors).
+- Towns:
+  - Backups b2–b4 hold the former visible versions; b1 is unchanged.
+  - Improved slots:
+    - 1 town sign: a longer lead.
+    - 2 county map: eyebrow and accent. Flat white map ground instead of the radial glow; token fills instead of rgba. The lead now says "we build in" rather than "we hold the licence to build in".
+    - 3 rings: eyebrow and accent; read-outs on flat white with an accent rule.
+  - New slots:
+    - 4 van route: a select holding all 104, a route drawn from the office, and a van that drives it.
+    - 5 A–Z directory: index tabs with roving focus; the letters sum to 104.
+    - 6 boards cut to count: 34, 31 and 39 notches on a shared 0–40 rule.
+    - 7 north-to-south road: 104 signposts plus three county-line signs.
+    - 8 county panels: outline, dots and every town.
+  - Test: `remodeling/src/tools/townstest.js`.
+- Backup integrity fix: an earlier Reviews edit had changed the backup's `.reviews2__sky` ground in place. It is restored. `backupcheck.py` now also proves that each section's CSS at the reference commit is untouched (Phase 5 only appends). All ten sections pass against the pre-Phase-5 commit.

@@ -26,4 +26,10 @@ for pair in mp.split(','):
     ok = a == b and ja == jb
     bad += not ok
     print('%s %s -> %s: html %s, js %s' % (sec, o, n, 'same' if a == b else 'DIFFERS', 'same' if ja == jb else 'DIFFERS'))
+# CSS: Phase 5 only appends. Every rule the section had at <ref> (backups' rules included) must still be there, unchanged,
+# as the head of the current file; a later in-place edit to a backup's rule shows up here
+oc, nc = show('css/sections/%s.css' % sec), open(os.path.join(HERE, 'css', 'sections', sec + '.css')).read()
+css_ok = nc.startswith(oc.rstrip('\n'))
+bad += not css_ok
+print('%s css: rules at ref %s' % (sec, 'untouched (append-only)' if css_ok else 'CHANGED'))
 print('backups differing:', bad)

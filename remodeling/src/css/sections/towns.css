@@ -123,3 +123,239 @@
 .tc__sign { position: relative; z-index: 1; max-width: 520px; }
 .tc__ans { position: relative; z-index: 1; }
 @media (max-width: 767px) { .tc__map { height: 120%; opacity: .7; } }
+
+
+/* ---------- slot 1 · Phase 5 improved version of b2 (.tc -> .tcx); improvements follow ---------- */
+.tcx__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
+.tcx__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
+.tcx__form { display: grid; gap: var(--s4); justify-items: start; }
+.tcx__field { position: relative; width: 100%; }
+.tcx__lbl { display: block; font: 600 .875rem/1 var(--f-text); color: var(--muted); margin-bottom: 10px; }
+.tcx__in { width: 100%; min-height: 64px; padding: 0 18px; background: transparent; border: 0; color: var(--ink); font: 400 clamp(1.75rem, 1.3rem + 1.2vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; outline: none; box-shadow: inset 0 -2px 0 var(--line-soft); }
+.tcx__outline { position: absolute; left: 0; bottom: 0; width: 100%; height: 64px; pointer-events: none; overflow: visible; }
+.tcx__outline path { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.tcx__list { position: absolute; left: 0; right: 0; top: 100%; z-index: 5; margin: 6px 0 0; padding: 4px; list-style: none; background: var(--surface); box-shadow: 0 0 0 1px var(--line-soft), var(--shadow); }
+.tcx__list li { padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+.tcx__list li span { color: var(--muted); font-size: .8125rem; }
+.tcx__list li[aria-selected="true"] { background: var(--a-100); }
+.tcx__call { margin: 0; color: var(--muted); }
+.tcx__road { grid-column: 7 / -1; position: relative; }
+.tcx__sign { width: 100%; height: auto; overflow: visible; display: block; }
+.tcx__ans { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.tcx__all { margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.tcx__all details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.tcx__all summary { cursor: pointer; font: 400 1.375rem/1 var(--f-display); letter-spacing: -.005em; min-height: 44px; }
+.tcx__all p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 1023px) {
+  .tcx__side, .tcx__road { grid-column: 1 / -1; }
+  .tcx__road { margin-top: var(--s7); }
+  .tcx__all { grid-template-columns: 1fr; }
+}
+.tcx__in { font: 500 1.25rem/1.2 var(--f-text); letter-spacing: 0; }
+.tcx__go { position: relative; z-index: 6; }
+.tcx__list li { transition: background-color 120ms ease-out; }
+.tcx__hub { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.tcx__map { position: absolute; right: 0; top: 50%; translate: 0 -50%; height: 150%; width: auto; aspect-ratio: 1000 / 2378; overflow: visible; z-index: 0; pointer-events: none; }
+.tcx__cty { fill: var(--a-50); stroke: var(--a-300); stroke-width: 4; stroke-linejoin: round; }
+.tcx__dot { fill: var(--a-300); }
+.tcx__dot.is-on { fill: var(--a-600); stroke: var(--ink); stroke-width: 5; }
+.tcx__sign { position: relative; z-index: 1; max-width: 520px; }
+.tcx__ans { position: relative; z-index: 1; }
+@media (max-width: 767px) {
+  .tcx__map { height: 120%; opacity: .7; }
+}
+
+
+/* ---------- slot 2 · Phase 5 improved version of b3 (.towns1 -> .t1x); improvements follow ---------- */
+.t1x__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s6); }
+.t1x__head .t-head { grid-column: 1 / span 6; }
+.t1x__head .towns__lead { grid-column: 8 / span 5; }
+.t1x__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s4); }
+.t1x__tabs { display: flex; flex-wrap: wrap; gap: 10px; }
+.t1x__tab { min-height: 44px; padding: 0 16px; background: none; border: 0; box-shadow: inset 0 0 0 1px var(--line-soft); color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.t1x__tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.t1x__count { margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.t1x__n { font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: var(--a-700); }
+.t1x__of { font: 500 .9375rem/1.3 var(--f-text); color: var(--muted); }
+.t1x__map { position: relative; height: min(76vh, 760px); border-radius: 4px; overflow: hidden; outline: none; background: var(--white); box-shadow: inset 0 0 0 1px var(--line-soft); cursor: crosshair; touch-action: pan-y; }
+.t1x__map:focus-visible { box-shadow: inset 0 0 0 3px var(--a-500); }
+.t1x__svg { width: 100%; height: 100%; overflow: hidden; display: block; }
+.t1x__svg .cty { fill: var(--a-50); stroke: var(--line-soft); stroke-width: 2; cursor: pointer; transition: fill 240ms var(--ease-out); vector-effect: non-scaling-stroke; }
+.t1x__svg .cty.is-on { fill: var(--a-100); stroke: var(--accent); }
+.t1x__svg .clbl { font: 400 54px/1 var(--f-display); fill: var(--ink); opacity: .35; letter-spacing: 2px; pointer-events: none; }
+.t1x__svg .mk { fill: var(--ink); stroke: var(--accent); stroke-width: 2.5; vector-effect: non-scaling-stroke; transition: opacity 240ms; }
+.t1x__svg .mk.is-dim { opacity: .25; }
+.t1x__svg .mk.is-hot { fill: var(--a-500); stroke: var(--ink); }
+.t1x__svg .office { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.t1x__svg .olbl { font: 600 22px/1 var(--f-text); fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 6px; }
+.t1x__svg .flag { pointer-events: none; }
+.t1x__svg .flag .pole { stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.t1x__svg .flag .pen { fill: var(--err); stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.t1x__svg .flag text { font-family: var(--f-display); fill: var(--white); letter-spacing: -.005em; }
+.t1x__read { position: absolute; left: 14px; bottom: 12px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); pointer-events: none; }
+@media (max-width: 1023px) {
+  .t1x__head .t-head, .t1x__head .towns__lead { grid-column: 1 / -1; }
+  .t1x__head .towns__lead { margin-top: var(--s4); }
+  .t1x__map { height: 64vh; }
+}
+
+
+/* ---------- slot 3 · Phase 5 improved version of b4 (.towns2 -> .t2x); improvements follow ---------- */
+.t2x__stage { position: relative; aspect-ratio: 1 / 1; max-width: 860px; margin: 0 auto; }
+.t2x__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.t2x__svg .ring { fill: none; stroke: var(--line-soft); stroke-width: 1; }
+.t2x__svg .td { fill: var(--muted); }
+.t2x__svg .td.is-hl { fill: var(--a-500); }
+.t2x__svg .mark { stroke: var(--err); stroke-width: 2; }
+.t2x__svg .rlbl { font: 600 13px/1 var(--f-text); fill: var(--muted); letter-spacing: 1.5px; }
+.t2x__hub { position: absolute; left: 50%; top: 50%; translate: -50% -50%; text-align: center; display: grid; gap: 4px; }
+.t2x__n { margin: 0; font: 400 clamp(4rem, 2rem + 6vw, 7rem)/.85 var(--f-display); }
+.t2x__nl { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--muted); }
+.t2x__addr { margin: 6px 0 0; font-size: .8125rem; color: var(--muted); }
+.t2x__read { list-style: none; margin: 0; padding: 0; position: absolute; left: 50%; top: 0; translate: -50% 0; display: grid; gap: 6px; justify-items: center; pointer-events: none; }
+.t2x__read li { font: 600 .875rem/1.2 var(--f-text); padding: 4px 9px; background: var(--white); color: var(--ink); white-space: nowrap; box-shadow: inset 3px 0 0 var(--a-500); }
+[data-theme="daylight"] .t2x__read li { background: var(--white); }
+.t2x__read li b { color: var(--a-700); font-weight: 600; margin-right: 6px; }
+.t2x__pause { display: flex; margin: var(--s5) auto 0; }
+.t2x__lists { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.t2x__lists details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.t2x__lists summary { cursor: pointer; font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; min-height: 44px; }
+.t2x__lists p { margin: 10px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 767px) {
+  .t2x__lists { grid-template-columns: 1fr; }
+  .t2x__read li { font-size: .75rem; }
+  .t2x__stage { aspect-ratio: auto; height: 100vw; }
+}
+
+/* ---------- Phase 5 improvements, slots 1-3 ---------- */
+.t1x__head .eyebrow { grid-column: 1 / -1; }
+
+/* shared head for the new versions 5-8 */
+.taz__head, .tlb__head, .tns__head, .tac__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.taz__head .t-head, .tlb__head .t-head, .tns__head .t-head, .tac__head .t-head { grid-column: 1 / span 7; }
+.taz__head .towns__lead, .tlb__head .towns__lead, .tns__head .towns__lead, .tac__head .towns__lead { grid-column: 9 / span 4; }
+@media (max-width: 1023px) {
+  .taz__head > *, .tlb__head > *, .tns__head > *, .tac__head > * { grid-column: 1 / -1 !important; }
+  .taz__head .towns__lead, .tlb__head .towns__lead, .tns__head .towns__lead, .tac__head .towns__lead { margin-top: var(--s4); }
+}
+
+/* ---------- slot 4 · Phase 5 new · The van route ---------- */
+.tdr__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.tdr__side { display: grid; gap: var(--s5); justify-items: start; }
+.tdr__field { display: grid; gap: 10px; width: min(100%, 420px); }
+.tdr__lbl { font: 600 .875rem/1 var(--f-text); color: var(--muted); }
+.tdr__sel { min-height: 56px; padding: 0 44px 0 16px; border: 0; border-radius: 0; background: var(--white); color: var(--ink); font: 500 1.125rem/1.2 var(--f-text); box-shadow: inset 0 0 0 2px var(--ink); appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 12'%3E%3Cpath d='M2 2 L10 10 L18 2' fill='none' stroke='%23FF5F00' stroke-width='3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 18px 11px; }
+.tdr__sel:focus-visible { outline: 3px solid var(--a-500); outline-offset: 2px; }
+.tdr__ans { margin: 0; min-height: 2.6em; font: 500 1.0625rem/1.35 var(--f-text); color: var(--ink-2); }
+.tdr__ans b { font: 600 1.375rem/1.2 var(--f-display); color: var(--a-700); display: block; }
+.tdr__map { display: flex; justify-content: center; }
+.tdr__svg { height: clamp(460px, 72vh, 720px); width: auto; aspect-ratio: 1000 / 2378; overflow: visible; }
+.tdr__svg .cty { fill: var(--a-50); stroke: var(--a-300); stroke-width: 4; stroke-linejoin: round; }
+.tdr__svg .cl { font: 600 44px/1 var(--f-text); fill: var(--muted); letter-spacing: 3px; }
+.tdr__svg .dot { fill: var(--a-300); }
+.tdr__svg .dot.is-on { fill: var(--a-600); stroke: var(--ink); stroke-width: 6; }
+.tdr__svg .route { fill: none; stroke: var(--ink); stroke-width: 9; stroke-dasharray: 22 14; stroke-linecap: round; }
+.tdr__svg .office { fill: var(--a-500); stroke: var(--ink); stroke-width: 6; }
+.tdr__svg .olbl { font: 600 40px/1 var(--f-text); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 10px; }
+.tdr__svg .van-b { fill: var(--a-500); stroke: var(--ink); stroke-width: 5; }
+.tdr__svg .van-w { fill: var(--ink); }
+.tdr__svg .van-g { fill: var(--a-50); stroke: var(--ink); stroke-width: 4; }
+@media (max-width: 1023px) { .tdr__grid { grid-template-columns: 1fr; } .tdr__svg { height: 560px; } }
+
+/* ---------- slot 5 · Phase 5 new · The directory ---------- */
+.taz__book { display: grid; grid-template-columns: auto minmax(0, 1fr); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.taz__tabs { display: grid; grid-template-columns: repeat(2, 44px); align-content: start; gap: 4px; padding: 14px; background: var(--a-100); box-shadow: inset -2px 0 0 var(--ink); }
+.taz__t { min-height: 44px; border: 0; background: var(--white); color: var(--ink); font: 600 1rem/1 var(--f-display); cursor: pointer; box-shadow: inset 0 0 0 1px var(--grey); }
+.taz__t[aria-selected="true"] { background: var(--a-500); color: var(--accent-ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.taz__page { position: relative; padding: clamp(20px, 3vw, 40px); min-height: 360px; outline: none; }
+.taz__page:focus-visible { box-shadow: inset 0 0 0 3px var(--a-500); }
+.taz__fold { position: absolute; right: 0; top: 0; width: 44px; height: 44px; }
+.taz__fold-b { fill: var(--paper); }
+.taz__fold-f { fill: var(--a-200); stroke: var(--ink); stroke-width: 2; }
+.taz__big { margin: 0 0 var(--s4); font: 600 clamp(4rem, 2.5rem + 5vw, 7rem)/.9 var(--f-display); color: var(--a-500); }
+.taz__list { list-style: none; margin: 0; padding: 0; columns: 3 220px; column-gap: var(--s6); }
+.taz__list li { break-inside: avoid; display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; box-shadow: inset 0 -1px 0 var(--line-soft); font: 500 1rem/1.3 var(--f-text); }
+.taz__list li span { font: 600 .75rem/1.6 var(--f-text); color: var(--a-800); white-space: nowrap; }
+.taz__tot { margin: var(--s5) 0 0; font: 500 .9375rem/1.4 var(--f-text); color: var(--muted); }
+@media (min-width: 1024px) { .taz__tabs { grid-template-columns: repeat(3, 44px); } }
+@media (max-width: 767px) {
+  .taz__book { grid-template-columns: 1fr; }
+  .taz__tabs { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); box-shadow: inset 0 -2px 0 var(--ink); }
+}
+
+/* ---------- slot 6 · Phase 5 new · Cut to count ---------- */
+.tlb__rule { display: block; width: calc(100% - var(--tlb-name)); margin-left: var(--tlb-name); height: 34px; }
+.tlb { --tlb-name: clamp(120px, 16vw, 220px); }
+.tlb__rule .tk { stroke: var(--ink); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.tlb__rule text { font: 600 10px/1 var(--f-text); fill: var(--muted); }
+.tlb__rule .base { fill: var(--a-100); }
+.tlb__boards { display: grid; gap: 18px; margin-top: 8px; }
+.tlb__row { display: grid; grid-template-columns: var(--tlb-name) minmax(0, 1fr); align-items: center; }
+.tlb__name { margin: 0; font: 600 1.0625rem/1.2 var(--f-display); }
+.tlb__name b { display: block; font-size: clamp(1.75rem, 1.2rem + 1.5vw, 2.5rem); color: var(--a-700); }
+.tlb__board { display: block; width: 100%; height: auto; overflow: visible; outline: none; touch-action: pan-y; }
+.tlb__board:focus-visible { outline: 3px solid var(--a-500); outline-offset: 4px; }
+.tlb__board .wood { fill: var(--a-200); stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.tlb__board .gr { fill: none; stroke: var(--a-300); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tlb__board .nt { stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.tlb__board .nt.is-on { stroke: var(--a-500); stroke-width: 5; }
+.tlb__board .hit { fill: transparent; cursor: crosshair; }
+.tlb__board .end { fill: var(--a-500); }
+.tlb__read { margin: var(--s5) 0 0; min-height: 1.5em; font: 500 1.0625rem/1.4 var(--f-text); color: var(--ink-2); }
+.tlb__read b { font: 600 1.375rem/1.2 var(--f-display); color: var(--a-700); margin-right: 8px; }
+.tlb__lists { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.tlb__lists details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.tlb__lists summary { cursor: pointer; font: 600 1.125rem/1 var(--f-display); min-height: 44px; }
+.tlb__lists p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 767px) { .tlb { --tlb-name: 96px; } .tlb__lists { grid-template-columns: 1fr; } }
+
+/* ---------- slot 7 · Phase 5 new · North to south ---------- */
+.tns__road { position: relative; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; outline: none; padding: 0 0 4px; }
+.tns__road:focus-visible { box-shadow: inset 0 0 0 3px var(--a-500); }
+.tns__list { list-style: none; margin: 0; padding: 0 max(var(--gutter), calc((100vw - 1320px) / 2)); display: flex; align-items: end; gap: 14px; width: max-content; position: relative; }
+.tns__list::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: var(--ink-2); z-index: 0; }
+.tns__list::before { content: ""; position: absolute; left: 0; right: 0; bottom: 14px; height: 0; border-top: 3px dashed var(--a-300); z-index: 1; }
+.tns__p { position: relative; z-index: 2; display: grid; justify-items: center; scroll-snap-align: start; padding-bottom: 30px; }
+.tns__plate { display: grid; gap: 4px; min-width: 140px; max-width: 180px; padding: 10px 12px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); text-align: center; }
+.tns__plate b { font: 600 1rem/1.15 var(--f-display); }
+.tns__plate span { font: 600 .6875rem/1 var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.tns__post { width: 6px; height: 46px; background: var(--ink); }
+.tns__p.is-cty .tns__plate { background: var(--a-500); min-width: 170px; }
+.tns__p.is-cty .tns__plate b { font-size: 1.125rem; }
+.tns__p.is-cty .tns__plate span { color: var(--ink); }
+.tns__p.is-cty .tns__post { height: 70px; }
+.tns__p.is-hq .tns__plate { box-shadow: inset 0 0 0 2px var(--ink), inset 0 -6px 0 var(--a-500); }
+.tns__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-top: var(--s5); }
+.tns__at { margin: 0; font: 500 1rem/1.4 var(--f-text); color: var(--ink-2); }
+.tns__at b { color: var(--a-700); }
+.tns__btns { display: flex; gap: var(--s3); }
+
+/* ---------- slot 8 · Phase 5 new · The county panels ---------- */
+.tac__row { display: flex; gap: 10px; height: clamp(520px, 64vh, 640px); }
+.tac__p { position: relative; flex: 1 1 0; min-width: 0; display: flex; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); transition: flex-grow 500ms var(--ease-out); overflow: hidden; }
+.tac__p.is-open { flex-grow: 6; background: var(--a-50); }
+.tac__tab { flex: none; width: 92px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 18px 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.tac__p.is-open .tac__tab { background: var(--a-500); }
+.tac__n { font: 600 2.5rem/1 var(--f-display); }
+.tac__nm { writing-mode: vertical-rl; transform: rotate(180deg); font: 600 1.375rem/1 var(--f-display); white-space: nowrap; }
+.tac__body { flex: 1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s6); padding: var(--s6); opacity: 0; visibility: hidden; transition: opacity 300ms var(--ease-out); }
+.tac__p.is-open .tac__body { opacity: 1; visibility: visible; transition-delay: 200ms; }
+.tac__shape { width: 100%; height: 100%; max-height: 520px; overflow: visible; }
+.tac__shape .cty { fill: var(--a-200); stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.tac__shape .dot { fill: var(--ink); }
+.tac__shape .hq { fill: var(--a-500); stroke: var(--ink); stroke-width: 5; }
+.tac__list { list-style: none; margin: 0; padding: 0; columns: 2 180px; column-gap: var(--s5); align-self: start; overflow: auto; max-height: 100%; }
+.tac__list li { break-inside: avoid; padding: 7px 0; box-shadow: inset 0 -1px 0 var(--line-soft); font: 500 .9375rem/1.3 var(--f-text); }
+@media (max-width: 1023px) {
+  .tac__row { flex-direction: column; height: auto; }
+  .tac__p { flex-direction: column; }
+  .tac__tab { width: 100%; flex-direction: row; padding: 14px 18px; min-height: 64px; }
+  .tac__nm { writing-mode: horizontal-tb; transform: none; }
+  .tac__body { display: none; grid-template-columns: 1fr; }
+  .tac__p.is-open .tac__body { display: grid; }
+  .tac__shape { max-height: 280px; }
+  .tac__list { max-height: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tac__p, .tac__body { transition: none; } }
+@media (max-width: 1023px) { .tac__p { flex: none; } }
