@@ -357,3 +357,33 @@ Evidence per item is in `PROGRESS.md` "V6 Phase 1".
 - the booking form is ZIP-first.
 
 **Phase-0 flags G1–G11:** all closed with their reasons in `PROGRESS.md` ("V6 flags closed").
+
+## V6 addendum re-check (30 Oct 2026, after the total read of BANK-MAP + atlas parts 1 and 2)
+The full read produced a re-check list (READ-V6.md). It was run on the delivered file with `qa/v6/recheck.js` across all 30 versions at 1440 px, 375 px and 320 px, with reduced motion and with JS off. Result before fixes: **225 pass, 0 fail**, plus three measured items under the bank's own thresholds:
+- Each section's "next step" line had phone and booking links only 20 px tall. Raised to 44 px with `inline-flex` (design-qa-checklist ⟦S1482⟧, Fitts ⟦S1440⟧).
+- Colour 2's Sherwin-Williams swatches were 22 px on phones. Raised to 28 px, gap 6 px (WCAG 2.5.8; ⟦S1495⟧ touch targets).
+- Hero 2's note ran about 85 characters per line. Held to 36 rem (readable measure 45–75 ch, ⟦S1500⟧).
+
+Verified after the fixes, on the repacked file (4,219,580 B ≤ 4,221,484 B):
+- `recheck.js`: 225 pass, 0 fail; no target under 24 px.
+- `sect.js` on all 10 sections × 3 versions × (1440 / 375 / 1440 reduced motion): 90 of 90 pass, console 0.
+- `facts.py`: unchanged (474 is the only review count; every version carries the phone; 312 + 574 = 886 printed).
+
+Checks confirmed passing (no change needed):
+- One h1 and one `<main>`; no duplicate ids; no focusable element inside `aria-hidden`.
+- The 1·2·3 switcher follows the tablist pattern (arrow keys move focus and selection).
+- Every slider has `aria-valuenow/min/max`, a tab stop and a name.
+- No rotated element carries text.
+- JSON-LD carries the exact address, hours and 4.9 / 474.
+- `tel:+15125500000` everywhere.
+- No other-trade or placeholder words.
+- Every section has `scroll-margin-top: 64px`.
+- The hero uses `svh`; two above-the-fold images use `fetchpriority=high` and none is lazy.
+- Reviews 1's marquee has a visible Pause control and runs 0 animations off-screen.
+- Under reduced motion: no Lenis, no infinite animation, text visible in all 30 versions.
+- With JS off: content is visible and 474 / 886 are printed.
+- No horizontal overflow at 320 px or 375 px.
+- Book fields are labelled, ≥ 16 px, with no autofocus and a live region present.
+- The system cursor is kept.
+
+Result: **0 KEPT changes reverted · 3 FIXED (CSS only) · 0 REBUILT.**

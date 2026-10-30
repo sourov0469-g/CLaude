@@ -464,3 +464,8 @@ Each section's three references differ:
 - **Reviews:** Q161 / R29 + S1329 / #300 + F13.
 - **Money:** firm financing example / F7e / R24.
 - **Book:** Rogers + S1364 / Mad City + S1442 / Q413.
+
+## V6 addendum fixes (30 Oct, after the total bank read)
+- Page systems / every section's `.nextstep` line: tap height 20 → 44 px. Source: ⟦S1482⟧ design-qa-checklist (hit targets ≥ 44 px), ⟦S1440⟧ Fitts. Evidence: recheck.js, no target under 24 px.
+- Colour 2 swatches on phones: 22 → 28 px. Source: ⟦S1495⟧ critique-affordance, WCAG 2.5.8.
+- Hero 2 `.h2-more`: max-width 46 → 36 rem. Source: ⟦S1500⟧ critique-typography (45–75 ch).

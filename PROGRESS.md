@@ -398,3 +398,17 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
 - **Money:** B 175–195 (Playbook 6) + B 5900 #314, 5086/7056 Allied, 6916 anatomy §3, 6998 checklist 21. A1 S1435 Von Restorff, S0907/S1245 accessible tables, S1001 Intl currency. A2 6040 anatomy §3 F7(e) invoiced distributions, 622/6513 Austin Pro worked APR ($181.91/mo on $15k) and median band, 856/2984 #314, 3592 #409 tiers with a "Best for" line, 6491 Allied (validity in hero, disqualifier).
 - **Book:** B 199–244 (Playbooks 7–8) + B 5906 #348, 5921 #317, 6778 budget radios, 6964 checklist 10. A1 S1442 form design, S1455 state machine, S1456 Tesler, S1494 ux-writing, S0661, S1056. A2 712/3047 Digital Butlers (proof band → radios → consent → response promise), 748/3002 #348 (button reflects the real submit state), 766/3909 Iper, 775 Mad City ZIP-first, 6049 anatomy §4, 6067 anatomy §6, 6728 siding doctrine (converts on the quote form; sticky "written quote").
 - **Page systems (motion, reduced motion, cursor companion, dividers, nav):** B 268–359 (Playbook 10 + families) + B 6931 F17/F18, 6745 gate-loader anti-pattern. A1 S1321/S1322/S1328, S1465 motion system, S1190 reduced motion, S1209 scrolljacking, S1246 tabs ARIA, S1450 navigation, S1482 design QA. A2 6085 anatomy §7b F17 (0.15–0.28 s ease-out, one marquee 60 s, one signature interactive), 6691–6714 builder brief (never hide content in CSS; JS sets start states only in a no-preference branch; scroll-lock must release), 4249–4991 parameter library P01–P85, 4995–5471 3D/SVG library S01–S55, 2170 Q107 one reduced-motion flag, 3648 Patio, 3819 Codapress, 5533 small follower with the system cursor kept usable.
+
+## V6 Addendum: phases continued after the read (30 Oct)
+- The re-check list from the read was run on the delivered file with `siding/qa/v6/recheck.js`: 225 pass, 0 fail.
+- Three bank-threshold items fixed in CSS only:
+  - `.nextstep` links raised to 44 px;
+  - Colour 2 swatches 28 px on phones;
+  - Hero 2 note held to 36 rem.
+- Repacked: 4,219,580 B ≤ 4,221,484 B.
+- Re-verified:
+  - recheck.js 225 / 0;
+  - sect.js 90 / 90 with console 0;
+  - facts.py unchanged.
+- AUDIT-V3, TRACEABILITY and the BANK-MAP usage log are updated.
+- Sub-agents: none.

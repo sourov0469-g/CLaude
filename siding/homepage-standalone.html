@@ -194,7 +194,7 @@ html.js.motion [data-split]:not(.is-split) { visibility: hidden; }
   .h2p:hover .h2p-go { text-decoration: underline; text-underline-offset: 3px; }
 }
 .h2p:active { transform: scale(.985); }
-.h2-more { max-width: 46rem; margin: 20px auto 0; color: var(--ink2); font-size: var(--t-sm); text-align: center; }
+.h2-more { max-width: 36rem; margin: 20px auto 0; color: var(--ink2); font-size: var(--t-sm); text-align: center; }
 .h2-s2 { display: grid; max-width: 1100px; margin: clamp(28px, 4vw, 44px) auto 0; border-radius: 20px; overflow: hidden; background: var(--sheet); box-shadow: 0 0 0 1px var(--stone); }
 html.motion .h2-s2 { animation: h2s2 .24s cubic-bezier(0, 0, .2, 1) both; }
 @keyframes h2s2 { from { opacity: 0; transform: translateX(16px); } }
@@ -541,8 +541,8 @@ html.motion .h2-s2 { animation: h2s2 .24s cubic-bezier(0, 0, .2, 1) both; }
   .cmp thead td:first-child, .cmp tbody th { width: 24%; }
   .cmp tbody th, .cmp tbody td { padding: 10px 2px; font-size: .8125rem; }
   .cmp-sys { font-size: .75rem; }
-  .cmp-sw { width: 22px; height: 22px; }
-  .cmp-set { gap: 5px; }
+  .cmp-sw { width: 28px; height: 28px; }
+  .cmp-set { gap: 6px; }
   .cmp-now { min-height: 96px; padding: 10px; border-radius: 12px 12px 0 0; }
   .cmp-now b { font-size: 1.125rem; }
   .cb-sheet { position: fixed; z-index: 60; inset: calc(var(--hd) + 12px) 12px 12px; }
@@ -1603,8 +1603,8 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 html:not(.motion) .cfx { display: none; }
 
 /* ---------- V6 contact line: closes any version that has no phone of its own (BRIEF-V6 §12.1) ---------- */
-.nextstep { grid-column: 1 / -1; position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: clamp(24px, 3vw, 40px) 0 0; padding-top: 14px; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); color: var(--fg2, var(--ink2)); font-size: var(--t-sm); }
-.nextstep .tlink { font-weight: 650; color: var(--fg, var(--ink)); }
+.nextstep { grid-column: 1 / -1; position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: clamp(24px, 3vw, 40px) 0 0; padding-top: 14px; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); color: var(--fg2, var(--ink2)); font-size: var(--t-sm); }
+.nextstep .tlink { display: inline-flex; align-items: center; min-height: 44px; font-weight: 650; color: var(--fg, var(--ink)); }
 .ns-or { opacity: .7; }
 
 </style>
