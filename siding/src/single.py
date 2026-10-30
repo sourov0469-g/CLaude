@@ -121,7 +121,7 @@ def build():
     css = ':root{' + ';'.join(f'{v}:url("{data_uri(k)}")' for k, v in urls.items()) + '}\n' + css
     html = html.replace('<link rel="stylesheet" href="assets/css/home.css">', f'<style>\n{css}\n</style>')
     html = re.sub(r'<link rel="preload" href="assets/fonts/[^"]+"[^>]*>\n?', '', html)
-    html = html.replace('<link rel="icon" href="assets/img/favicon.png">', f'<link rel="icon" href="{data_uri("assets/img/favicon.png")}">')
+    html = html.replace('<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">', f'<link rel="icon" href="{data_uri("assets/img/brand/favicon.svg")}" type="image/svg+xml">')
     # 2. images: one src per tag, no srcset (the single file carries one size of each photo)
     html = re.sub(r'\s(?:srcset|sizes)="[^"]*"', '', html)
     used = set()

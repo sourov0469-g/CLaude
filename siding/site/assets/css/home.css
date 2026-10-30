@@ -14,6 +14,9 @@
   --red: #D42125; --red-d: #B5161B; --red-on-night: #EA3C39;
   /* Audit pack C.1: three role tokens join the fourteen; every other UI colour is one of the 17 or mixed from them */
   --dwg: #3B6FB6; --star: #F2C230; --tape: #8A6A3E;
+  /* Owner redesign directive (2026-10-30): the brand accent and its scale. Cobalt, the colour of the James Hardie navy
+     walls in the firm's own photos lifted to daylight; sun is the second colour, kept to the lit pane and the stars */
+  --acc-50: #F2F6FF; --acc-100: #E3ECFF; --acc-200: #C8D8FF; --acc-300: #9DB9FF; --acc-400: #5F8DFF; --acc: #2F66FF; --acc-d: #1A4FE0; --acc-dd: #0E2C8A; --sun: #FFC933;
   --f: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --fh: "Poppins", "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --t-sm: clamp(.8125rem, .79rem + .1vw, .875rem);
@@ -82,6 +85,17 @@ html.js.motion [data-split]:not(.is-split) { visibility: hidden; }
 .hd { position: sticky; top: 0; z-index: 50; height: var(--hd); display: flex; align-items: center; gap: 16px; padding: 0 var(--m); padding-left: max(var(--m), env(safe-area-inset-left)); padding-right: max(var(--m), env(safe-area-inset-right)); background: var(--ground); }
 .hd-logo { display: block; flex: none; min-height: 44px; display: flex; align-items: center; }
 .hd-logo img { height: 30px; width: auto; }
+/* the new logo lockup: inline A-frame mark + live Poppins wordmark (owner redesign directive) */
+.brand { display: inline-flex; align-items: center; gap: .5em; color: var(--ink); text-decoration: none; }
+.hd-logo { text-decoration: none; }
+.brand-mark { flex: none; width: 2.2em; height: 2.2em; overflow: visible; }
+.brand-w { display: inline-grid; gap: .32em; line-height: 1; }
+.brand-n { font-family: var(--fh); font-weight: 700; font-size: 1.3em; letter-spacing: .02em; white-space: nowrap; }
+.brand-n b { color: var(--acc-d); font-weight: inherit; }
+.brand-d { font: 500 .3em/1 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--ink2); white-space: nowrap; text-align: justify; text-align-last: justify; }
+.brand--hd { font-size: 17px; }
+.brand--hd .brand-d { display: none; }
+.brand--ft { font-size: clamp(22px, 2.6vw, 34px); }
 .hd-nav { display: none; gap: 4px; margin-left: auto; }
 .hd-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; text-decoration: none; font-weight: 560; font-size: .9375rem; border-radius: 999px; transition: background-color var(--t-hover) ease; }
 .hd-tel { display: none; font-weight: 650; font-size: .9375rem; text-decoration: none; padding: 0 8px; }
@@ -897,7 +911,7 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 /* ---------- footer ---------- */
 .ft { padding: clamp(56px, 8vw, 112px) var(--m) calc(96px + env(safe-area-inset-bottom)); background: var(--night); color: var(--on-night); }
 .ft-top { display: grid; gap: 24px; margin-bottom: 48px; }
-.ft-logo { width: min(320px, 70vw); height: auto; }
+.ft-logo { margin: 0; }
 .ft-big a { font-size: clamp(2.5rem, 1rem + 6vw, 7rem); font-weight: 800; font-stretch: 76%; line-height: .9; letter-spacing: -.03em; text-decoration: none; font-variant-numeric: tabular-nums; }
 .ft-grid { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .ft-grid p, .ft-grid nav { display: grid; gap: 4px; align-content: start; color: var(--on-night2); }

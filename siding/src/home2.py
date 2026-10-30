@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from parts import NEAR, HOME_PAIRS, SVC_PAIRS, PHOTOS, REVIEWS, LIVE, PHONE, TEL, TRADES, e, SITE, clean
 from pages_inner import SW, COLORPLUS
 import elevation
+from logo import mark as logo_mark
 import iso
 import sheet
 
@@ -1472,7 +1473,7 @@ def head():
 <meta name="description" content="Siding, windows and roofing in Austin since 2009, with real prices from 886 documented jobs. A concept redesign with three versions of every section.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#F3F2EE">
-<link rel="icon" href="assets/img/favicon.png">
+<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/Poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/home.css">
@@ -1484,11 +1485,19 @@ def head():
 '''
 
 
+def brand(cls, tag='span'):
+    """Owner redesign directive: the new logo. The A-frame mark is inline SVG (no request, about 1 KB); the wordmark is
+    live Poppins text, so it stays crisp and costs nothing. The outlined master files are in assets/img/brand/."""
+    return (f'<{tag} class="brand {cls}"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">'
+            f'{logo_mark(k=1, uid=cls)}</svg><span class="brand-w"><span class="brand-n">AUSTIN <b>PRO</b></span>'
+            f'<span class="brand-d">Siding · Windows · Roofing · Patio covers</span></span></{tag}>')
+
+
 def header():
     links = [('#work', 'Work'), ('#colour', 'Colour'), ('#near', 'Near you'), ('#money', 'Financing')]
     nav = ''.join(f'<a href="{h}">{t}</a>' for h, t in links)
     return f'''<header class="hd">
-  <a class="hd-logo" href="#main" aria-label="Austin Pro Siding, Windows and Roofing, top of page"><img src="assets/img/served/65246f239b165c29151e6f9f_AP_HORIZONTAL-LOGO_COLOR-V2-p-1080.png" width="1080" height="262" alt=""></a>
+  <a class="hd-logo" href="#main" aria-label="Austin Pro Siding, Windows and Roofing, top of page">{brand("brand--hd")}</a>
   <nav class="hd-nav" aria-label="Sections">{nav}</nav>
   <button class="hd-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button>
   <a class="hd-tel" href="{TEL}">{PHONE}</a>
@@ -1525,7 +1534,7 @@ def picks():
 
 def footer():
     return f'''<footer class="ft" data-tone="night">
-  <div class="ft-top"><img class="ft-logo" src="assets/img/served/AP_HORIZONTAL-LOGO_WHT-p-500.avif" width="500" height="122" alt="Austin Pro Siding, Windows and Roofing" loading="lazy">
+  <div class="ft-top"><p class="ft-logo" role="img" aria-label="Austin Pro Siding, Windows and Roofing">{brand("brand--ft")}</p>
     <p class="ft-big"><a href="{TEL}">{PHONE}</a></p></div>
   <div class="ft-grid">
     <p><b>Office</b>{ADDRESS}</p>
