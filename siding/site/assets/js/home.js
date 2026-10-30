@@ -222,7 +222,8 @@
      reveal (cut to 0.3 s, stagger 0.05, F17) and its pointer parallax (26) move the photo inside the
      glyphs; fine pointers only for the parallax, nothing moves under reduced motion. Words are split at run time
      from the measured layout so the clip and the casing rise together. */
-  V.hero1 = (r, b) => {
+  V.hero1 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 1 keeps its original sill delay and whole-hero parallax (Audit pack A.2)
     riseIn($$('.pstrip, .h1m-foot > *', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
     const sills = svg => $$('.h1m-case text', svg).forEach((t, i) => {     // each sill runs under its own line only
       const p = $$('.h1m-sill path', svg)[i], x = +t.getAttribute('x'), y = p.getAttribute('d').split(' ')[1].split('H')[0];
@@ -255,13 +256,14 @@
         if (!motionOK()) return;
         const fs = parseFloat(svg.style.getPropertyValue('--fs')) || 100;
         words(svg).forEach((trio, k) => G.from(trio, { y: fs * 0.55, duration: 0.3, ease: 'power3.out', delay: 0.1 + k * 0.05 }));
-        G.from($$('.h1m-sill path', svg), { scaleX: 0, transformOrigin: '0 50%', duration: 0.3, ease: 'power2.out', stagger: 0.05, delay: 0.3 });
+        G.from($$('.h1m-sill path', svg), { scaleX: 0, transformOrigin: '0 50%', duration: 0.3, ease: 'power2.out', stagger: 0.05, delay: bk ? 0.3 : 0.15 });   // F1.5: done by ~700 ms
         const par = $('.h1m-par', svg);
         // V6 (F17): Q95's idle drift is dropped (§4 outranks the reference's parameter); the photo moves only with the pointer
         if (mqFine.matches) {
           const qx = G.quickTo(par, 'x', { duration: 0.6, ease: 'power3.out' }), qy = G.quickTo(par, 'y', { duration: 0.6, ease: 'power3.out' });
-          b.on(r, 'pointermove', e => { const rc = svg.getBoundingClientRect(); qx(((e.clientX - rc.left) / rc.width - 0.5) * -52); qy(((e.clientY - rc.top) / rc.height - 0.5) * -52); });
-          b.on(r, 'pointerleave', () => { qx(0); qy(0); });
+          const zone = bk ? r : svg;   // F1.5: the glazing moves only while the pointer is over the letters themselves
+          b.on(zone, 'pointermove', e => { const rc = svg.getBoundingClientRect(); qx(((e.clientX - rc.left) / rc.width - 0.5) * -52); qy(((e.clientY - rc.top) / rc.height - 0.5) * -52); });
+          b.on(zone, 'pointerleave', () => { qx(0); qy(0); });
         }
       });
     };
@@ -279,7 +281,7 @@
     const open = c => {
       const t = T[c.dataset.t]; from = c;
       const im = f('img'); im.src = AU(t.img); im.alt = t.alt;
-      ['name', 'n', 'med', 'mid', 'mo', 'cap'].forEach(k => { f(k).textContent = t[k]; });
+      ['name', 'n', 'tn', 'med', 'mid', 'mo', 'cap'].forEach(k => { if (f(k)) f(k).textContent = t[k]; });
       $('.h2-loc-l', s2).dataset.zone = t.zone;
       const bk = f('book'); bk.dataset.trade = t.book; bk.textContent = `Book a free ${t.name.toLowerCase()} inspection`;
       s1.hidden = true; s2.hidden = false; r.dataset.step = '2';
@@ -288,7 +290,7 @@
     };
     $$('.h2p', r).forEach(c => b.on(c, 'click', e => { e.preventDefault(); open(c); }));
     b.on(f('back'), 'click', () => { s2.hidden = true; s1.hidden = false; r.dataset.step = '1'; if (from) from.focus({ preventScroll: true }); });
-    riseIn($$('.pstrip, .lead, .h2-s1 > .h2-k, .h2-grid > li, .h2-more', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
+    riseIn($$('.pstrip, .lead, .h2-top .ctas, .h2-s1 > .h2-k, .h2-grid > li, .h2-more', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
   };
 
   /* HERO 3: [BANK] Feldco crown 2 as R33 poster frames, picked by the visitor: five job tabs set the photo (0.3 s

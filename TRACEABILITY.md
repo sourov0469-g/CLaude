@@ -563,3 +563,40 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 - **E.4 Header Motion toggle, ACCEPTED.** It shows from 900 px. Between 900 and 1239 px it is the switch glyph with its name kept for assistive tech. ⟦S0049⟧.
 - **E.5:** see F7.
 - **E.6 Dead code, ACCEPTED.** The whole `.sc-*` "scroll to install" block (22 rules) and `.zone.is-hot` are deleted. They had zero uses in the markup, the backups or the scripts.
+
+## F1 · Hero
+**V1, Window letters (winner).**
+- 1 · Stars at 98 %: ACCEPTED, via the shared C.9 component. ⟦S1306⟧.
+- 2 · Chip to a one-line caption: ACCEPTED. It now reads "Rob Roy, Austin, Jul 2026 · Siding portion $15k-$20k". The prose line ("The letters are glazed…") and the material line are gone; the hero has 4 text elements. ⟦S0650⟧ §4.7, ⟦S1306⟧.
+- 3a · H1 cap of 128 px on desktop: ACCEPTED. The viewBox is 1440×284 at `--fs` 128 on a 128-unit line pitch. The photo box scales with the letters (×0.762), so each letter frames the same part of the wall. ⟦S0650⟧ §9.B.
+- 3b · "Mobile: 3 lines at 92 px": REJECTED on geometry, IMPROVED instead.
+  - Measured: the glyph advance is 0.396 em per character, and the measure is 343 px.
+  - The shortest possible longest line in any 3-line split of the six words is 15 characters ("windows, priced"). At 92 px that is 546 px wide, which is 1.6× the screen.
+  - The largest size at which three lines fit is 57 px, which is smaller than today.
+  - Kept: four lines at 84 px, with the line pitch tightened from 76 to 70 units (SVG height 330 → 306).
+  - ⟦S1500⟧ (the measure decides the size), ⟦S1501⟧.
+- 4 · Phone proof strip: ACCEPTED. Below 640 px the GAF and Hardie spans hide (`.ps-c`); the rating and Since 2009 stay. ⟦S1499⟧.
+- 5 · Parallax and sill: ACCEPTED. The pointer listeners move from the whole hero to the H1 SVG. The sill delay goes from 300 to 150 ms. Backup 1 keeps both through `s.v > 5`. ⟦S0063⟧ Std 1, ⟦S1499⟧.
+- Kept, as the pack says: the magnetic CTA, the Call link's ring, the word-group drop and the sill draw.
+
+**V2, Pick your project.**
+- 1 · CTA row in step 1: ACCEPTED. `ctas()` (Book + Call) sits under the lead, and the riseIn includes it. ⟦S0650⟧ §4.7, ⟦S1501⟧.
+- 2 · Phone height: ACCEPTED, and measured.
+  - Below 900 px: card photos at 16/10, gap 10, a tighter plate, step-label margin 14/10, and a 58 px top padding.
+  - The lead's second sentence ("Pick your project to see what it usually costs.") is cut, because the step label says exactly that.
+  - Result: 805 px at 375 (was 967). ⟦S1499⟧.
+- 3 · 72 px headline: ACCEPTED, via `--t-h1`.
+- 4 · Move `.h2-more` to Services: IMPROVED to delete. Services 2 already lists all eleven trades with their counts; moving the line there would print them twice. The Removal Test, applied at its destination, removes it. ⟦S1306⟧.
+- 5 · Alt text: ACCEPTED. The windows and painting photos fall back to "{trades} at a home in {place}, {month}" from the caption data. ⟦S1320⟧ §2.
+- 6 · Denominator: ACCEPTED. The answer reads "Median job, from 415 priced siding jobs, of 886 documented projects", and likewise per trade (`data-f="tn"`). ⟦S0220⟧ #8.
+- Added · `:focus-visible` ignites the card's own zone and underlines "What it costs", mirroring hover. ⟦S0063⟧ Std 8.
+- C.5 exception · The step-2 answer title stays a level-2 heading (`role="heading" aria-level="2"`) at lead size, not 64 px. It is an answer card inside the hero; a second display-size heading under the H1 would make two primaries in one viewport. ⟦S1501⟧ (one primary emphasis zone).
+
+**V3, Real work.**
+- 1 · Stats row: ACCEPTED as deletion, the pack's preferred option. The 431/388/210/5,000+ row is gone; Proof is its home. ⟦S0220⟧ #8, ⟦S1306⟧.
+- 2 · Duplicate "Since 2009": ACCEPTED. `.h3-dated` is deleted. ⟦S1306⟧.
+- 3 · Tab labels: ACCEPTED. They read "Maple Run · Jul 26" / "Maple Run · Nov 24" (`short_when`), visible from 900 px. On phones the tabs stay thumbnails with the full aria-label: five 18-character labels cannot share 343 px. ⟦S1473⟧ H6.
+- 4 · 72 px: ACCEPTED (`--t-h1`).
+- 5 · Phone yard sign: ACCEPTED. It is absolute over the photo's bottom-right at 264 px wide (container units: `top: calc(75cqw - 150px)`). The section is 785 px at 375. ⟦S1498⟧.
+- Kept: the sign's swing and the photo crossfade.
+- C.11 · "5,000+" is no longer the largest figure in this version (the stats row is gone).
