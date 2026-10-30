@@ -149,7 +149,7 @@ A finding survives only if a catalog entry supports it. Survivors are fixed and 
 
 **D9, companion occlusion and label.**
 - **Accepted as asked:** the rest offset moves from +22/+22 to +34/+34, and the character fades to 35% while the pointer is down.
-- **The label choice:** the label speaks once per section per session, with a 150ms fade, rather than being removed. It is the only place the companion says what a control does.
+- **The label choice:** the label bubble is removed. On inspection no element carries a label (`data-cursor-label` appears nowhere), so the bubble has no job. Removal Test ⟦S1314⟧.
 
 **D10, the hammer strike.**
 - ⟦S0063⟧ Std 3 bans ease-in on entering and exiting UI because it delays the moment the user watches.
@@ -174,3 +174,67 @@ A finding survives only if a catalog entry supports it. Survivors are fixed and 
 
 ## Parts F and G
 These are challenged section by section, in the per-section blocks below. Each block is written before that section's code.
+
+## F1 / G: Hero (written before the hero code)
+
+Measured first: at 60px, "Springboro's family roofers" sets 775px wide with "family roofers" bold. At 40px it is 520px. A 375 phone gives 343px.
+
+### Winner V2, fix list
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| 1 | 60px above 1024, two lines; 40px on phones with the same break | IMPROVE | See F1.1 below. |
+| 2 | Bold exactly one phrase; never split a word's weight | ACCEPT, and keep the interaction | See F1.2 below. |
+| 3 | The 17-word sub | ACCEPT | Facts-locked. "Runs it today" agrees with "president since 2015". The hours stay in Call and the footer ⟦S0650⟧ (subtext ≤20 words). |
+| 4 | Remove the eyebrow; at most 4 text elements | ACCEPT, with item 8 folded in | See F1.4 below. |
+| 5 | Keep the diagonal edge and one ruler rule; delete the grid and per-line ticks | ACCEPT | Removal Test ⟦S1314⟧. The rafter grid (`.hx2-raft`) and the three course lines with keyway ticks repeat one job, so they go. A single ruler rule (ticks every 8px, majors every 40px) stays under the headline block. |
+| 6 | Mobile: 24px bottom padding; photo top ≤812px | ACCEPT | ⟦S1499⟧ content priority. Checked at 375×812. |
+| 7 | Load choreography once, never on re-entry | ACCEPT | See F1.7 below. |
+| 8 | Proof line "4.9 stars from 295 Google reviews" | ACCEPT, as the secondary link | See item 4. |
+
+**F1.1, the headline size and break.**
+- The two-line set needs a 780px text column, which a split hero can only give from about 1200px up.
+- On phones, 40px with the same break is impossible (520px of text in 343px of space).
+- **The rule kept is the phrase break:** the lines only ever break at "Springboro's / family roofers / since 1995."
+- **Sizes:** 60px from 1024px up (the hero role). The two-line set runs from 1200px, where the text column is fixed at ≥880px. Between 1024 and 1199px, and at 40px on phones, the same phrases set as three lines.
+- ⟦S1500⟧ (no orphaned breaks), ⟦S0650⟧ (headline 2 to 3 lines).
+
+**F1.2, the one bold phrase.**
+- The per-letter thickening split words into heavy and light halves, which reads as a rendering fault ⟦S1500 Consistency⟧.
+- **The proximity mechanism is kept and quantised per word:**
+  - A word thickens as a whole when the pointer nears its centre.
+  - At rest, only "family roofers" is bold (700). The rest is light (300).
+  - The thickening tops out at 700, so the bold phrase is never outweighed.
+- The idle gust wave is deleted. It is perpetual motion competing with reading ⟦S1314 §8⟧, and its job passes to the one-time load choreography.
+
+**F1.4, the four text elements.**
+- They are: the H1, the sub, the Call button, and one secondary link.
+- The proof line (item 8) becomes that secondary link, "4.9 stars from 295 Google reviews", pointing to #proof. It replaces "Get a written estimate".
+- **Why:**
+  - The hero carries one checkable fact ⟦S1303⟧.
+  - The page's estimate claim (flag C11) leaves the hero.
+  - The count stays at four ⟦S0650⟧.
+- The 14px label role is used, not 13px: C1 makes one label role page-wide.
+
+**F1.7, load choreography.**
+- Lines rise 14px with a 320ms fade, 90ms apart.
+- The sub and CTA follow at +180ms.
+- The photo edge wipes on a clip-path over 480ms --ease-x.
+- The proof link's underline draws over 250ms (background-size).
+- On a switcher re-entry the version arrives static. Re-running an entrance on a deliberate tool action is motion with no information ⟦S0063⟧ (frequency) ⟦S1314 §8⟧.
+
+### V1 and V3
+| Version | Point | Verdict | Reason |
+|---|---|---|---|
+| V1 | Pin the proposition as static text, 28 to 32px, in the cream band | IMPROVE | The pinned H1 is made visible. C3 sets the graphic-hero H1 at 36 to 48px (`--t-h1`), and the pack's own C3 overrules its 28 to 32. The canvas keeps its sweep. ⟦S1501⟧: the proposition must not depend on a canvas. |
+| V1 | Cap canvas type at ~55% of the wall height | ACCEPT | ⟦S1498⟧ balance. |
+| V1 | Same 17-word sub; delete the CTA glow; keep sun to sun-hi; one tab flap of 0.45s on enter | ACCEPT | ⟦S0063⟧ ⟦S1314 §8⟧. The flap's #d99a06 becomes --sun (C2). |
+| V1 | One-time band entrance (10 to 12px rise, 240ms, 60ms stagger); no scroll cue | ACCEPT | ⟦S0063⟧ STANDARDS stagger 30 to 80ms. There is no scroll cue to remove. |
+| V1 | Wall under-colour #070d1c | (C2) | Becomes --ink, in both CSS and canvas. |
+| V3 | Delete the counter; a 220ms crossfade in a one-line mask, not a vertical roll; 72px cap; keep the pause button | ACCEPT | ⟦S1314 §8⟧. The blur-roll per letter was the slow part (0.45s + 0.8s per change). |
+| V3 | Cadence | (C2) | The full-bleed dark photo breaks the cream hero ground. V3 is recomposed on cream: headline and copy above, the job photo as a wide band across the lower part. This is also a composition unlike V2's split ⟦S0626⟧ (never the same anchor twice). |
+
+### New versions
+| Pack's direction | Verdict | Built instead |
+|---|---|---|
+| (a) V1's shingle wall with the proposition pinned from the start | REJECT | This is V1 after its own fix list. A slot holding it would be a variation, which A3 forbids. Built instead: **V4 "Stitched headline"** ⟦S0218⟧ inline image typography. Real job photos sit between the words of the headline at type height ("Springboro's [photo] family roofers [photo] since 1995."). Each photo widens on hover or focus to show more of the job. On phones the photos leave the line and stack as a strip under it, as the skill directs. No split, no canvas, no band. |
+| (b) A pure typographic poster in the F5-V3 grammar at hero scale | ACCEPT | **V5 "Poster lines"**: no photo and no canvas. The H1 sits at the hero role. Under it, three index rows carry the family facts as dated lines (1995 Bunk Walker founded it; 2015 Wade runs it; Today Rachel answers the phone), separated by ridge zigzag rules that draw in once. The last row is the Call link. The idea comes from the subject's own inventory ⟦S0095⟧ (name, year, rituals). |

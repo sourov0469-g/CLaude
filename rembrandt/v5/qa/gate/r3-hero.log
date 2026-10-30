@@ -1,0 +1,80 @@
+hero v1 @320: h 812 els 28 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @320: h 878 els 29 ov 0 heads H1:40/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @320: h 812 els 42 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @320: h 718 els 27 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @320: h 740 els 20 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @375: h 812 els 28 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @375: h 878 els 29 ov 0 heads H1:40/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @375: h 812 els 42 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @375: h 738 els 27 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @375: h 740 els 20 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @768: h 900 els 28 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @768: h 860 els 29 ov 0 heads H1:49/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @768: h 900 els 42 ov 0 heads H1:49/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @768: h 833 els 27 ov 0 heads H1:49/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @768: h 900 els 20 ov 0 heads H1:49/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @1024: h 900 els 28 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @1024: h 900 els 29 ov 0 heads H1:60/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @1024: h 900 els 42 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @1024: h 900 els 27 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @1024: h 900 els 20 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @1440: h 900 els 28 ov 0 heads H1:47/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @1440: h 900 els 29 ov 0 heads H1:60/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @1440: h 900 els 42 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @1440: h 900 els 27 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @1440: h 900 els 20 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @1440 rm: h 900 els 28 ov 0 heads H1:47/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @1440 rm: h 900 els 29 ov 0 heads H1:60/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @1440 rm: h 900 els 42 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @1440 rm: h 900 els 27 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @1440 rm: h 900 els 20 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+# after fixes
+hero v1 @320: h 812 els 28 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @320: h 878 els 29 ov 0 heads H1:40/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @320: h 812 els 42 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @320: h 718 els 27 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @320: h 740 els 20 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @375: h 812 els 28 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @375: h 878 els 29 ov 0 heads H1:40/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @375: h 812 els 42 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @375: h 738 els 27 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @375: h 740 els 20 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @768: h 900 els 28 ov 0 heads H1:36/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @768: h 860 els 29 ov 0 heads H1:49/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @768: h 900 els 42 ov 0 heads H1:49/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @768: h 833 els 27 ov 0 heads H1:49/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @768: h 900 els 20 ov 0 heads H1:49/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @1024: h 900 els 28 ov 0 heads H1:40/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @1024: h 900 els 29 ov 0 heads H1:60/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @1024: h 900 els 42 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @1024: h 900 els 27 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @1024: h 900 els 20 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @1440: h 900 els 28 ov 0 heads H1:47/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @1440: h 900 els 29 ov 0 heads H1:60/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @1440: h 900 els 42 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @1440: h 900 els 27 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @1440: h 900 els 20 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v1 @1440 rm: h 900 els 28 ov 0 heads H1:47/700 caps[] lowc[] clip[] small[] err 0
+hero v2 @1440 rm: h 900 els 29 ov 0 heads H1:60/300 caps[] lowc[] clip[] small[] err 0
+hero v3 @1440 rm: h 900 els 42 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v4 @1440 rm: h 900 els 27 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+hero v5 @1440 rm: h 900 els 20 ov 0 heads H1:60/700 caps[] lowc[] clip[] small[] err 0
+V3 fit @320: all fit
+V3 fit @375: all fit
+V3 fit @1024: all fit
+V3 fit @1440: all fit
+re-entry V2 after 60ms: 1,1 pre false
+re-entry V4 after 60ms: 1,1
+re-entry V5 after 60ms: 1,1,1
+first load V2: line 2 opacity at start 0.984, after 900ms 1 pre false underline 100% 1.5px
+rm V3: Roofers for 24 towns around Springboro. | pause hidden true
+hero v1 @1440: 15 steps, overlaps 0
+hero v2 @1440: 15 steps, overlaps 0
+hero v3 @1440: 15 steps, overlaps 0
+hero v4 @1440: 15 steps, overlaps 0
+hero v5 @1440: 15 steps, overlaps 0
+hero v1 @620: 14 steps, overlaps 0
+hero v2 @620: 14 steps, overlaps 0
+hero v3 @620: 14 steps, overlaps 0
+hero v4 @620: 13 steps, overlaps 0
+hero v5 @620: 12 steps, overlaps 0

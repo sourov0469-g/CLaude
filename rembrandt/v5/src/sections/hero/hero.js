@@ -3,7 +3,7 @@
 // president since 2015, Rachel answers the phone, Monday to Friday 9 to 5, (937) 746-7377, the 24 service towns.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EASE, beats } from '../../js/fx.js';
+import { EASE } from '../../js/fx.js';
 import { TOWNS } from '../../data/towns.js';
 
 const clamp01 = u => (u < 0 ? 0 : u > 1 ? 1 : u);
@@ -22,7 +22,7 @@ const inView = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.i
 // wind); the reference's sweep runs once on load, and a press anywhere on the wall sends a flip wave out from that
 // point. Canvas 2D, drawn only while something moves; it sleeps at rest and off screen.
 const WALL = { falloff: 1.4, depth: 80, tilt: 28, flip: 0.75, bounce: 0.15, sweep: 2.6, sweepPow: 4, noise: 2 };
-const SHADES = { under: '#070d1c', dark: ['#202a40', '#2b3650', '#323e5a'], front: ['#cfc6b1', '#ece5d3', '#f6f1e4'], rear: ['#e09a00', '#ffb81f', '#ffc94f'] };
+const SHADES = { under: '#0b1f4d', dark: ['#202a40', '#2b3650', '#323e5a'], front: ['#cfc6b1', '#ece5d3', '#f6f1e4'], rear: ['#e09a00', '#ffb81f', '#ffc94f'] };
 function wall(root, c) {
   const host = root.querySelector('.hx1-wall'), plate = root.querySelector('.hx1-plate'), cv = root.querySelector('.hx1-cv');
   const ctx = cv.getContext && cv.getContext('2d');
@@ -91,7 +91,7 @@ function wall(root, c) {
     // one type size for both headlines, fitted to the wall (S0534: copy, type size and cell size are independent)
     const probe = document.createElement('canvas').getContext('2d'); probe.font = `900 100px Epilogue, sans-serif`;
     const widest = Math.max(...[...FRONT, ...REAR].map(l => probe.measureText(l).width)) / 100;
-    const fs = Math.min((W * 0.86) / widest, (H * 0.82) / (2 * 0.86));
+    const fs = Math.min((W * 0.86) / widest, (H * 0.55) / (2 * 0.86)); // R3 F1-V1: type capped at 55% of the wall height
     const mf = mask(FRONT, fs), mr = mask(REAR, fs);
     faces = [face(SHADES.front, mf), face(SHADES.rear, mr)];
     // which tiles carry ink (either headline): eligibility and peak, from the masks' alpha (downsampled)
@@ -228,177 +228,165 @@ function wall(root, c) {
     const onVis = () => wake(); document.addEventListener('visibilitychange', onVis); done.push(() => document.removeEventListener('visibilitychange', onVis));
     // the wall leaves at its own rate (S1321 parallax 0.18 of the viewport)
     gsap.fromTo(plate, { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
-    beats(root, [root.querySelector('.hx1-sub'), root.querySelector('.hx1-call')], { now: true, delay: c.swap ? 0 : 0.15 });
+    // R3 F1-V1: the band enters once (first load only): rise 12px, 240ms, 60ms apart
+    if (!c.swap) gsap.fromTo([root.querySelector('.hx1-h'), root.querySelector('.hx1-sub'), root.querySelector('.hx1-call')], { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.24, ease: EASE, stagger: 0.06, delay: 0.15, clearProps: 'transform' });
   }
   done.push(() => cancelAnimationFrame(raf));
   return cleanup;
 }
 const FRONT = ['FAMILY', 'ROOFERS'], REAR = ['SINCE', '1995'];
 
-// v2 [BANK] Variable Proximity (React Bits; deep read slice 4 #171, full source mined). Each letter's
-// font-variation-settings eases toward a target set by its distance to the pointer: gaussian falloff
-// (e^(-2(d/r)²) − e⁻²)/(1 − e⁻²), cut at d ≥ r; damping level += (target − level)(1 − exp(−Δt/(0.2·400))), Δt ≤ 64ms,
-// snap within 0.002; letters reset to the rest weight before measuring. After 500ms with nothing near, an idle wave
-// mixes in (τ 600ms): phase ((x + 0.6y)/span − t/3.2)·2π, amplitude 0.7·((1 + cos)/2)^2.2, span max(220, 0.85 × width);
-// the loop stops when everything settles. Adapted: Epilogue's own wght axis 300 → 900, radius = 1.0 × font-size; the
-// headline stands on drawn shingle courses whose keyways lift under heavy letters; the wave (a gust over the roof)
-// runs two passes then rests until the pointer moves again (WCAG 2.2.2); the Call label thickens as the pointer
-// approaches; a rafter drawing behind turns toward the pointer; the Tudor job photo is cut along a 6/12 roof pitch.
-const VP = { from: 300, to: 900, smoothing: 0.2, period: 3.2, peak: 0.7, edge: Math.exp(-2) };
+// v2 [BANK] Variable Proximity (React Bits; deep read slice 4 #171), R3 F1: quantised per WORD, so a word's weight never
+// splits. Light words (300) ease toward 300 + 400·g, g = (e^(-2(d/r)²) − e⁻²)/(1 − e⁻²) cut at d ≥ r, d = the pointer's
+// distance to the word's box, r = 1.0 × font-size; damping level += (target − level)(1 − e^(−Δt/80)), Δt ≤ 64ms. The bold
+// phrase "family roofers" rests at 700 and is the ceiling, so it is never outweighed. No idle wave (S1314 §8).
+// Load (pack F1.7, once, never on a switcher re-entry): lines rise 14px + fade 320ms, 90ms apart; sub and CTA at +180ms;
+// the photo wipes in on a clip-path 480ms --ease-x; the proof link's underline draws 250ms. The photo's top edge follows
+// a 6/12 roof pitch; the plate leaves at 0.18 of the viewport.
+const VP = { from: 300, to: 700, edge: Math.exp(-2) };
 function weighted(root, c) {
-  const h = root.querySelector('.hx2-vis'), lines = [...root.querySelectorAll('.hx2-l')], photo = root.querySelector('.hx2-photo');
+  const h = root.querySelector('.hx2-h'), photo = root.querySelector('.hx2-photo'), plate = root.querySelector('.hx2-plate');
   const cut = root.querySelector('.hx2-cut'), cutL = cut.querySelector('.hx2-cut-l'), cutC = cut.querySelector('.hx2-cut-c');
-  const NS = 'http://www.w3.org/2000/svg', done = [];
-  const cleanup = () => done.forEach(f => f());
-  // split into letters (an sr-only copy already carries the sentence) and give each line its course drawing
-  const L = [];
-  lines.forEach((ln, li) => {
-    const text = ln.textContent; ln.textContent = '';
-    for (const ch of text) { const s = document.createElement('span'); s.className = ch === ' ' ? 'hx2-sp' : 'hx2-ch'; s.textContent = ch; ln.append(s); if (ch !== ' ') L.push({ el: s, line: li, x: 0, y: 0, level: 0, target: 0, w: '' }); }
-    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'hx2-course'); svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<path class="hx2-course-l"/>'; ln.append(svg);
+  const W = [...root.querySelectorAll('.hx2-w:not(.hx2-b)')].map(el => ({ el, level: 0, target: 0, w: 300, comp: 0 }));
+  // R3 QA (S1314 §8: hover must not shift nearby layout): a heavier word is wider, so its tracking tightens by the width it
+  // gains (measured per word at 300 and 700), and its neighbours never move
+  const calib = () => W.forEach(o => {
+    const st = o.el.style; st.fontVariationSettings = "'wght' 700"; st.letterSpacing = ''; const w1 = o.el.getBoundingClientRect().width;
+    st.fontVariationSettings = "'wght' 300"; const w0 = o.el.getBoundingClientRect().width;
+    o.comp = (w1 - w0) / Math.max(1, o.el.textContent.length);
+    st.fontVariationSettings = `'wght' ${o.w}`; st.letterSpacing = `calc(-.02em - ${(o.comp * o.level).toFixed(2)}px)`;
   });
-  const courses = lines.map(ln => ln.querySelector('.hx2-course-l'));
-  const write = (o, v) => { const w = Math.round(VP.from + (VP.to - VP.from) * v); if (w !== o.w) { o.w = w; o.el.style.fontVariationSettings = `'wght' ${w}`; } };
-  let fs = 80, span = 220, geom = [];
-  function measure() {
-    L.forEach(o => { o.el.style.fontVariationSettings = `'wght' ${VP.from}`; o.w = VP.from; });
-    const hr = h.getBoundingClientRect(); fs = parseFloat(getComputedStyle(h).fontSize);
-    L.forEach(o => { const r = o.el.getBoundingClientRect(); o.x = r.left - hr.left + r.width / 2; o.y = r.top - hr.top + r.height / 2; o.w0 = r.width; });
-    span = Math.max(220, hr.width * 0.85);
-    geom = lines.map((ln, li) => { const r = ln.getBoundingClientRect(); return { x0: r.left - hr.left, w: r.width, letters: L.filter(o => o.line === li) }; });
-    L.forEach(o => write(o, o.level));
-    courses.forEach((p, i) => p.closest('svg').setAttribute('viewBox', `0 0 ${Math.max(1, geom[i].w).toFixed(0)} 14`));
-    drawCourses(true);
-    // the photo's top edge follows a 6/12 roof pitch: it rises half the panel's width across the panel
+  const done = [], cleanup = () => done.forEach(f => f());
+  function pitch() {
     const pr = photo.getBoundingClientRect(), rise = Math.min(pr.height * 0.42, pr.width * 0.5);
     photo.style.setProperty('--rise', rise.toFixed(1) + 'px');
     cut.setAttribute('viewBox', `0 0 ${pr.width.toFixed(0)} ${pr.height.toFixed(0)}`);
-    const d = `M0 ${rise.toFixed(1)} L${pr.width.toFixed(1)} 0`;
-    cutL.setAttribute('d', d); cutC.setAttribute('d', d);
+    const d = `M0 ${rise.toFixed(1)} L${pr.width.toFixed(1)} 0`; cutL.setAttribute('d', d); cutC.setAttribute('d', d);
   }
-  let lastCourse = '';
-  function drawCourses(force) { // keyway notches every ~0.42em, each lifted 4px × the level of the letter above it
-    const key = L.map(o => o.level.toFixed(2)).join(''); if (!force && key === lastCourse) return; lastCourse = key;
-    courses.forEach((p, i) => {
-      const g = geom[i]; if (!g) return; const step = fs * 0.42, n = Math.max(2, Math.floor(g.w / step));
-      let d = 'M0 9'; for (let k = 1; k < n; k++) {
-        const x = (k * g.w) / n, gx = g.x0 + x; let lv = 0, best = 1e9;
-        for (const o of g.letters) { const dd = Math.abs(o.x - gx); if (dd < best) { best = dd; lv = o.level; } }
-        const lift = 4 * lv; d += `H${(x - 2).toFixed(1)}V${(9 - 6 - lift).toFixed(1)}H${(x + 2).toFixed(1)}V9`;
-      }
-      p.setAttribute('d', d + `H${g.w.toFixed(1)}`);
-    });
+  pitch();
+  const ro = new ResizeObserver(() => { if (root.isConnected) pitch(); }); ro.observe(photo); done.push(() => ro.disconnect());
+  if (!c.motion) return cleanup;
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { if (root.isConnected) calib(); });
+  let lastW = 0; const ro2 = new ResizeObserver(([e]) => { const w = Math.round(e.contentRect.width); if (w !== lastW && root.isConnected) { lastW = w; calib(); } }); ro2.observe(root); done.push(() => ro2.disconnect());
+  // ---------- load choreography (first mount only)
+  if (!c.swap) {
+    root.classList.add('is-pre');
+    const tl = gsap.timeline({ delay: 0.1, onComplete: () => root.classList.remove('is-pre') });
+    tl.fromTo(root.querySelectorAll('.hx2-l'), { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: EASE, stagger: 0.09, clearProps: 'transform' }, 0)
+      .fromTo(root.querySelector('.hx2-rule'), { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, duration: 0.32, ease: EASE, clearProps: 'transform' }, 0.18)
+      .fromTo([root.querySelector('.hx2-sub'), root.querySelector('.hx2-cta')], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: EASE, stagger: 0.06, clearProps: 'transform' }, 0.18)
+      .fromTo(plate, { clipPath: 'inset(0% 0% 0% 100%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.48, ease: EASE, clearProps: 'clipPath' }, 0)
+      .fromTo([cutL, cutC], { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.48, ease: EASE }, 0)
+      .add(() => root.classList.remove('is-pre'), 0.5);
+    done.push(() => tl.kill());
   }
+  // ---------- per-word proximity
+  let px = -1e4, py = -1e4, raf = 0, last = 0, seen = true;
   const strength = (d, r) => (d >= r ? 0 : (Math.exp(-2 * (d / r) ** 2) - VP.edge) / (1 - VP.edge));
-  if (!c.motion) { // a designed still: "since 1995." set heavy
-    measure(); L.forEach(o => { o.level = o.line === 2 ? 1 : 0; write(o, o.level); }); drawCourses(true);
-    const ro0 = new ResizeObserver(() => { measure(); L.forEach(o => { o.level = o.line === 2 ? 1 : 0; write(o, o.level); }); drawCourses(true); }); ro0.observe(root); done.push(() => ro0.disconnect());
-    return cleanup;
-  }
-  let px = -1e4, py = -1e4, raf = 0, last = 0, idleSince = performance.now(), waveMix = 0, waveStart = 0, waveDone = false, seen = true;
-  const call = root.querySelector('.hx2-call'), callT = root.querySelector('.hx2-call-t'); let callW = 600;
   function tick(t) {
     raf = 0; if (!seen || document.hidden) return;
     const dt = Math.min(64, last ? t - last : 16); last = t;
-    const hr = h.getBoundingClientRect(), r = fs * 1.0;
-    let near = false, busy = false;
-    for (const o of L) { const d = Math.hypot(px - (hr.left + o.x), py - (hr.top + o.y)); o.target = strength(d, r); if (o.target > 0) near = true; }
-    if (near) { idleSince = t; waveStart = 0; waveDone = false; }
-    const idle = t - idleSince > 500 && !waveDone;
-    if (idle && !waveStart) waveStart = t;
-    if (waveStart && t - waveStart > VP.period * 2000) { waveDone = true; waveStart = 0; }
-    const wTarget = idle ? 1 : 0; waveMix += (wTarget - waveMix) * (1 - Math.exp(-dt / 600)); if (Math.abs(wTarget - waveMix) < 0.002) waveMix = wTarget;
-    const k = 1 - Math.exp(-dt / (VP.smoothing * 400)), ts = t / 1000;
-    for (const o of L) {
-      let tg = o.target;
-      if (waveMix > 0.001) { const ph = ((o.x + o.y * 0.6) / span - ts / VP.period) * Math.PI * 2; tg = Math.max(tg, VP.peak * Math.pow((1 + Math.cos(ph)) / 2, 2.2) * waveMix); }
-      const dl = tg - o.level; if (Math.abs(dl) < 0.002) o.level = tg; else { o.level += dl * k; busy = true; }
-      write(o, o.level);
+    const r = parseFloat(getComputedStyle(h).fontSize), k = 1 - Math.exp(-dt / 80);
+    let busy = false;
+    for (const o of W) {
+      const b = o.el.getBoundingClientRect(), dx = Math.max(b.left - px, 0, px - b.right), dy = Math.max(b.top - py, 0, py - b.bottom);
+      o.target = strength(Math.hypot(dx, dy), r);
+      const dl = o.target - o.level; if (Math.abs(dl) < 0.002) o.level = o.target; else { o.level += dl * k; busy = true; }
+      const w = Math.round(VP.from + (VP.to - VP.from) * o.level); if (w !== o.w) { o.w = w; o.el.style.fontVariationSettings = `'wght' ${w}`; o.el.style.letterSpacing = `calc(-.02em - ${(o.comp * o.level).toFixed(2)}px)`; }
     }
-    drawCourses(false);
-    // R09: the Call label thickens as the pointer approaches the button
-    const cr = call.getBoundingClientRect(), cd = Math.hypot(px - (cr.left + cr.width / 2), py - (cr.top + cr.height / 2));
-    const cw = Math.round(600 + 300 * strength(Math.max(0, cd - cr.width * 0.35), 170)); if (cw !== callW) { callW = cw; callT.style.fontVariationSettings = `'wght' ${cw}`; busy = true; }
-    if (busy || waveMix > 0.001 || (idle && !waveDone)) raf = requestAnimationFrame(tick);
+    if (busy) raf = requestAnimationFrame(tick);
   }
   const wake = () => { if (!raf && seen) { last = 0; raf = requestAnimationFrame(tick); } };
-  const onMove = e => { px = e.clientX; py = e.clientY; if (e.pointerType === 'mouse' || e.pointerType === 'pen') waveDone = false; wake(); };
-  const onTouch = e => { const t = e.touches && e.touches[0]; if (t) { px = t.clientX; py = t.clientY; wake(); } };
+  const onMove = e => { if (e.pointerType !== 'mouse' && e.pointerType !== 'pen') return; px = e.clientX; py = e.clientY; wake(); };
   const onEnd = () => { px = py = -1e4; wake(); };
-  addEventListener('pointermove', onMove, { passive: true }); addEventListener('touchmove', onTouch, { passive: true }); addEventListener('touchend', onEnd, { passive: true });
-  document.documentElement.addEventListener('mouseleave', onEnd);
-  done.push(() => { removeEventListener('pointermove', onMove); removeEventListener('touchmove', onTouch); removeEventListener('touchend', onEnd); document.documentElement.removeEventListener('mouseleave', onEnd); cancelAnimationFrame(raf); });
+  addEventListener('pointermove', onMove, { passive: true }); document.documentElement.addEventListener('mouseleave', onEnd);
+  done.push(() => { removeEventListener('pointermove', onMove); document.documentElement.removeEventListener('mouseleave', onEnd); cancelAnimationFrame(raf); });
   done.push(inView(root, v => { seen = v; if (v) wake(); }));
-  const go = () => { if (!root.isConnected) return; measure(); idleSince = performance.now() - 520; wake(); };
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
-  const ro = new ResizeObserver(() => { if (root.isConnected) { measure(); wake(); } }); ro.observe(root); done.push(() => ro.disconnect());
-  // the rafter drawing turns toward the pointer (±1.5°); the photo plate leaves at 0.18 of the viewport
-  const raft = root.querySelector('.hx2-raft'), qr = gsap.quickTo(raft, 'rotation', { duration: 0.8, ease: 'power3.out' });
-  const onRaft = e => { if (e.pointerType === 'mouse') qr((e.clientX / innerWidth - 0.5) * 3); };
-  root.addEventListener('pointermove', onRaft, { passive: true }); done.push(() => root.removeEventListener('pointermove', onRaft));
-  gsap.fromTo(root.querySelector('.hx2-plate'), { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
-  beats(root, [root.querySelector('.hx2-kick'), lines, root.querySelector('.hx2-sub'), root.querySelector('.hx2-cta'), photo], { now: true, delay: c.swap ? 0 : 0.1 });
+  gsap.fromTo(plate, { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
   return cleanup;
 }
 
-// v3 [BANK] 289 Rotating Text (React Bits, STRONG: "services-list hero pattern"; deep read slice 5 #289) with the
-// [BANK] P73 Harvest [204] word-rotator values. A fixed sentence with one word slot; the slot's characters split; in
-// 'wait' mode the old word leaves completely before the new one enters; a highlight block behind the active word
-// resizes to fit each new word; pause on hover. P73: out 0.45s sine.in, yPercent −100, blur 12px, stagger 0.04; in
-// 0.8s sine.out, yPercent 100 → 0, blur 20 → 0, stagger 0.05; interval 3.2s. Adapted: the slot cycles the 24 real
-// service towns (towns.js order, Springboro first); the highlight is a sun-yellow 3-tab shingle tab (keyway slots on its
-// bottom edge) whose two nails pop at each change; a counter ticks; each town rests readable for 2s after it lands
-// (the interval runs from the end of the entry, so long names like West Carrollton read as long as short ones); a
-// visible pause button (WCAG 2.2.2), hover/focus pause and off-screen rest. Reduced motion: a static line.
+// v3 [BANK] 289 Rotating Text: a fixed sentence with one word slot and a highlight that resizes to each word. R3 F1-V3:
+// the per-letter blur roll (P73: 0.45s out + 0.8s in) is replaced by a 220ms crossfade of two stacked words inside a
+// one-line mask (the slot clips), the tab resizing in the same 220ms; each town rests 2.6s; the counter is gone. The
+// highlight is a sun 3-tab shingle tab (keyway slots on its bottom edge). Pause button (WCAG 2.2.2), hover/focus on the
+// headline pauses, off screen rests. Reduced motion: a static line, "Roofers for 24 towns around Springboro."
 function rotator(root, c) {
-  const word = root.querySelector('.hx3-word'), slot = root.querySelector('.hx3-slot'), tab = root.querySelector('.hx3-tab');
-  const tabS = tab.querySelector('.hx3-tab-s'), nails = [...tab.querySelectorAll('.hx3-nail')], count = root.querySelector('.hx3-count b');
-  const pause = root.querySelector('.hx3-pause'), h1 = root.querySelector('.hx3-h');
-  const names = TOWNS.map(t => t.name), done = [];
-  const cleanup = () => done.forEach(f => f());
-  const box = { w: 0, h: 0 };
+  const slot = root.querySelector('.hx3-slot'), tab = root.querySelector('.hx3-tab'), tabS = tab.querySelector('.hx3-tab-s');
+  const nails = [...tab.querySelectorAll('.hx3-nail')], pause = root.querySelector('.hx3-pause'), h1 = root.querySelector('.hx3-h');
+  let [cur, nxt] = root.querySelectorAll('.hx3-word');
+  const names = TOWNS.map(t => t.name), done = [], cleanup = () => done.forEach(f => f());
   function shape(w, hgt) { // a 3-tab shingle tab: flat top, two keyway slots in the bottom edge
-    box.w = w; box.h = hgt; tab.setAttribute('viewBox', `0 0 ${w.toFixed(1)} ${hgt.toFixed(1)}`); tab.style.width = w + 'px'; tab.style.height = hgt + 'px';
+    tab.setAttribute('viewBox', `0 0 ${w.toFixed(1)} ${hgt.toFixed(1)}`); tab.style.width = w + 'px'; tab.style.height = hgt + 'px';
     const s = Math.max(5, hgt * 0.13), k = 3.2, a = w / 3, b = (2 * w) / 3, y = hgt;
     tabS.setAttribute('d', `M0 0H${w}V${y}H${b + k}V${y - s}H${b - k}V${y}H${a + k}V${y - s}H${a - k}V${y}H0Z`);
     nails[0].setAttribute('cx', Math.min(14, w * 0.12)); nails[1].setAttribute('cx', w - Math.min(14, w * 0.12));
     nails.forEach(n => n.setAttribute('cy', Math.max(7, hgt * 0.16)));
   }
-  const fit = () => { const r = slot.getBoundingClientRect(); return [r.width, r.height]; }; // the padded slot is the tab
-  const split = text => { word.textContent = ''; return [...text].map(ch => { const s = document.createElement('span'); s.className = 'hx3-c'; s.textContent = ch === ' ' ? ' ' : ch; word.append(s); return s; }); };
-  if (!c.motion) { word.textContent = '24 towns'; root.querySelector('.hx3-dot').textContent = ' around Springboro.'; count.parentElement.hidden = true; pause.hidden = true; requestAnimationFrame(() => shape(...fit())); return cleanup; }
-  let i = 0, held = false, hover = false, seen = true, timer = null, busy = false, dead = false;
-  let chars = split(names[0]);
-  const fonts = (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { if (!dead) shape(...fit()); });
-  const tw = { w: 0 };
+  const pad = () => parseFloat(getComputedStyle(slot).paddingLeft) * 2;
+  const fit = el => [el.getBoundingClientRect().width + pad(), slot.getBoundingClientRect().height];
+  const size = () => { slot.style.width = ''; const [w, hgt] = fit(cur); slot.style.width = w + 'px'; shape(w, hgt * 0.94); };
+  if (!c.motion) { cur.textContent = '24 towns'; root.querySelector('.hx3-dot').textContent = ' around Springboro.'; pause.hidden = true; requestAnimationFrame(size); return cleanup; }
+  let i = 0, held = false, hover = false, seen = true, timer = null, dead = false;
+  const fonts = (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { if (!dead) size(); });
+  const box = { w: 0 };
   function next() {
     timer = null; if (held || hover || !seen || dead) return;
-    busy = true; i = (i + 1) % names.length;
-    const tl = gsap.timeline({ onComplete: () => { busy = false; arm(); } });
-    tl.to(chars, { yPercent: -100, filter: 'blur(12px)', opacity: 0, duration: 0.45, ease: 'sine.in', stagger: { each: 0.04, from: 'end' } });
-    tl.add(() => {
-      const prev = box.w; chars = split(names[i]); const [w, hgt] = fit(); gsap.set(chars, { yPercent: 100, filter: 'blur(20px)', opacity: 0 });
-      tw.w = prev; gsap.to(tw, { w, duration: 0.3, ease: EASE, onUpdate: () => shape(tw.w, hgt) });
-      gsap.fromTo(nails, { scale: 0.4, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.06, delay: 0.18 });
-      count.textContent = i + 1;
-    });
-    tl.to({}, { duration: 0.12 });
-    tl.add(() => gsap.to(chars, { yPercent: 0, filter: 'blur(0px)', opacity: 1, duration: 0.8, ease: 'sine.out', stagger: 0.05 }));
-    tl.to({}, { duration: 0.8 + chars.length * 0.05 });
+    i = (i + 1) % names.length; nxt.textContent = names[i];
+    const [w, hgt] = fit(nxt); box.w = parseFloat(slot.style.width) || w;
+    gsap.timeline({ onComplete: () => { [cur, nxt] = [nxt, cur]; arm(); } })
+      // R3 QA (S0063 STANDARDS: a crossfade that shows two states gets blur(2px) to read as one change)
+      .fromTo(cur, { filter: 'blur(0px)' }, { opacity: 0, filter: 'blur(2px)', duration: 0.22, ease: 'power2.out', clearProps: 'filter' }, 0)
+      .fromTo(nxt, { opacity: 0, filter: 'blur(2px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.22, ease: 'power2.out', clearProps: 'filter' }, 0)
+      .to(box, { w, duration: 0.22, ease: EASE, onUpdate: () => { slot.style.width = box.w + 'px'; shape(box.w, hgt * 0.94); } }, 0);
   }
-  function arm() { clearTimeout(timer); timer = null; if (!held && !hover && seen && !busy && !dead) timer = setTimeout(next, 2000); }
+  function arm() { clearTimeout(timer); timer = null; if (!held && !hover && seen && !dead) timer = setTimeout(next, 2600); }
   const setHeld = v => { held = v; pause.setAttribute('aria-pressed', String(v)); pause.setAttribute('aria-label', v ? 'Play the town names' : 'Pause the town names'); root.classList.toggle('is-held', v); if (!v) arm(); else { clearTimeout(timer); timer = null; } };
   const onPause = () => setHeld(!held);
   const onIn = () => { hover = true; clearTimeout(timer); timer = null; }, onOut = () => { hover = false; arm(); };
   pause.addEventListener('click', onPause); h1.addEventListener('pointerenter', onIn); h1.addEventListener('pointerleave', onOut);
   done.push(() => { dead = true; clearTimeout(timer); pause.removeEventListener('click', onPause); h1.removeEventListener('pointerenter', onIn); h1.removeEventListener('pointerleave', onOut); });
   done.push(inView(root, v => { seen = v; if (v) arm(); else { clearTimeout(timer); timer = null; } }));
-  const ro = new ResizeObserver(() => { if (!busy && root.isConnected) shape(...fit()); }); ro.observe(slot); done.push(() => ro.disconnect());
-  fonts.then(() => { if (!dead) { arm(); } });
-  gsap.fromTo(root.querySelector('.hx3-plate'), { y: 0 }, { y: () => innerHeight * 0.18, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
-  beats(root, [root.querySelector('.hx3-kick'), root.querySelector('.hx3-h'), root.querySelector('.hx3-row'), root.querySelector('.hx3-sub'), root.querySelector('.hx3-cta')], { now: true, delay: c.swap ? 0 : 0.1 });
+  const ro = new ResizeObserver(() => { if (root.isConnected) size(); }); ro.observe(root); done.push(() => ro.disconnect());
+  fonts.then(() => { if (!dead) arm(); });
+  gsap.fromTo(root.querySelector('.hx3-plate'), { y: 0 }, { y: () => innerHeight * 0.12, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+  if (!c.swap) gsap.fromTo([h1, root.querySelector('.hx3-sub'), root.querySelector('.hx3-cta')], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: EASE, stagger: 0.09, delay: 0.1, clearProps: 'transform' });
   return cleanup;
 }
 
-export default { 1: wall, 2: weighted, 3: rotator };
+// v4 (R3, new) ⟦S0218⟧ stitch-design-taste, Inline Image Typography: photos between the headline's words at type height,
+// rounded, "visual punctuation"; on phones they stack below the headline. Load (first mount only): the lines rise 14px +
+// fade 320ms, 90ms apart; then each inline photo opens from its centre (clip-path inset 50% -> 0, 360ms --ease-x).
+// Hover (CSS, fine pointers): a photo lifts to 2.4x in place over 240ms, so no word moves (S1314 §8).
+function stitched(root, c) {
+  if (!c.motion || c.swap) return;
+  const tl = gsap.timeline({ delay: 0.1 });
+  tl.fromTo(root.querySelectorAll('.hx4-l'), { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: EASE, stagger: 0.09, clearProps: 'transform' }, 0)
+    .fromTo(root.querySelectorAll('.hx4-pic, .hx4-sp'), { clipPath: 'inset(0% 50% 0% 50%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.36, ease: EASE, stagger: 0.09, clearProps: 'clipPath' }, 0.24)
+    .fromTo([root.querySelector('.hx4-sub'), root.querySelector('.hx4-cta')], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: EASE, stagger: 0.06, clearProps: 'transform' }, 0.18);
+  return () => tl.kill();
+}
+
+// v5 (R3, new): poster lines at hero scale, in How V3's grammar (index rows with a numeral column; [BANK] Q409/Q411 as
+// built there) and ⟦S0095⟧'s rule that the idea comes from the subject's own inventory (the years, the names, the phone).
+// Each row's top rule is a ridge zigzag (period 18px, amplitude 4px) sized to its row; on first load they draw once,
+// left to right, 60ms apart (DrawSVG 0.5s), with the rows rising 8px + fading 300ms, 50ms apart (pack F5.7's values).
+function poster(root, c) {
+  const ridges = [...root.querySelectorAll('.hx5-ridge')], done = [], cleanup = () => done.forEach(f => f());
+  const draw = () => ridges.forEach(svg => {
+    const w = Math.max(10, Math.round(svg.getBoundingClientRect().width)); svg.setAttribute('viewBox', `0 0 ${w} 10`);
+    let d = 'M0 5'; for (let x = 9; x <= w; x += 9) d += `L${x} ${(x / 9) % 2 ? 1 : 9}`;
+    svg.firstElementChild.setAttribute('d', d);
+  });
+  draw(); const ro = new ResizeObserver(() => { if (root.isConnected) draw(); }); ro.observe(root); done.push(() => ro.disconnect());
+  if (c.motion && !c.swap) {
+    const tl = gsap.timeline({ delay: 0.1 });
+    tl.fromTo(root.querySelector('.hx5-h'), { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: EASE, clearProps: 'transform' }, 0)
+      .fromTo(ridges.map(r => r.firstElementChild), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.5, ease: EASE, stagger: 0.06 }, 0.16)
+      .fromTo(root.querySelectorAll('.hx5-n, .hx5-line'), { y: 8, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.05, clearProps: 'transform' }, 0.2);
+    done.push(() => tl.kill());
+  }
+  return cleanup;
+}
+
+export default { 1: wall, 2: weighted, 3: rotator, 4: stitched, 5: poster };

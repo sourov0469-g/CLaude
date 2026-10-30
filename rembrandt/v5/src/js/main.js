@@ -66,6 +66,11 @@ function paintBg(sec, root) {
   let bg = cs.getPropertyValue('--vbg').trim();
   if (!bg) { const c = cs.backgroundColor; bg = c && c !== 'rgba(0, 0, 0, 0)' && c !== 'transparent' ? c : getComputedStyle(document.documentElement).getPropertyValue('--sky').trim(); }
   sec.style.setProperty('--sec-bg', bg);
+  // R3: the ground's tone (focus ring colour, label colour) from its luminance
+  const probe = document.createElement('i'); probe.style.color = bg; document.body.append(probe);
+  const m = getComputedStyle(probe).color.match(/[\d.]+/g) || [255, 255, 255]; probe.remove();
+  const L = m.slice(0, 3).map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; });
+  sec.dataset.tone = 0.2126 * L[0] + 0.7152 * L[1] + 0.0722 * L[2] < 0.25 ? 'dark' : 'light';
   const next = sec.nextElementSibling || document.getElementById('foot');
   if (next) next.style.setProperty('--prev-bg', bg);
   const prev = sec.previousElementSibling; if (prev && prev.matches('[data-section]')) prev.style.setProperty('--next-bg', bg);
