@@ -1,0 +1,45 @@
+how v1 @320: h 1044 els 36 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v2 @320: h 942 els 93 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v3 @320: h 1273 els 65 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v4 @320: h 1212 els 44 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v5 @320: h 1166 els 29 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[(937) 746-7377:31] err 0
+how v1 @375: h 936 els 36 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v2 @375: h 943 els 93 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v3 @375: h 1155 els 65 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v4 @375: h 1226 els 44 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+how v5 @375: h 1225 els 29 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[(937) 746-7377:31] err 0
+how v1 @768: h 835 els 36 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+how v2 @768: h 996 els 93 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+how v3 @768: h 928 els 65 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[Call. Rachel a:40] err 0
+how v4 @768: h 1440 els 44 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+how v5 @768: h 1701 els 29 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[(937) 746-7377:34] err 0
+how v1 @1024: h 1071 els 36 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+how v2 @1024: h 806 els 93 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+how v3 @1024: h 976 els 65 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+how v4 @1024: h 1888 els 44 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+how v5 @1024: h 741 els 29 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[(937) 746-7377:38] err 0
+how v1 @1440: h 1243 els 36 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v2 @1440: h 1010 els 93 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v3 @1440: h 1101 els 65 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v4 @1440: h 1987 els 44 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v5 @1440: h 923 els 29 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[(937) 746-7377:43] err 0
+how v1 @1440 rm: h 1243 els 36 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v2 @1440 rm: h 1010 els 93 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v3 @1440 rm: h 1101 els 65 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v4 @1440 rm: h 1987 els 44 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+how v5 @1440 rm: h 923 els 29 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[(937) 746-7377:43] err 0
+how v1 @1440: 18 steps, overlaps 0
+how v2 @1440: 16 steps, overlaps 0
+how v3 @1440: 17 steps, overlaps 0
+how v4 @1440: 25 steps, overlaps 0
+how v5 @1440: 16 steps, overlaps 0
+how v1 @620: 14 steps, overlaps 0
+how v2 @620: 16 steps, overlaps 0
+how v3 @620: 15 steps, overlaps 0
+how v4 @620: 19 steps, overlaps 0
+how v5 @620: 20 steps, overlaps 0
+V3 active ridge per reading position: ON-- | -ON- | --ON
+V3 links 1, line weights 700, line colour rgb(11, 31, 77)
+V2 after tab click: pressed true "Play the steps" panel hw2-p2
+V4 house state per step: 1,2,3; stage sticky sticky
+errors 0

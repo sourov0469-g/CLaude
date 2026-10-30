@@ -19,7 +19,7 @@
 .hw1-hangers path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transition:transform .15s var(--ease-x),stroke .15s var(--ease-x)}
 .hw1-hangers path.is-on{stroke:var(--blue)}
 .hw1-drop{fill:var(--chalk);stroke:var(--ink);stroke-width:1.5}
-.hw1-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(72px,14vh,160px)}
+.hw1-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(56px,10vh,110px)} /* R3 C4 */
 .hw1-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:baseline;scroll-margin-top:calc(var(--nav-h) + 24px)}
 .hw1-n{font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
 .hw1-t{font-size:clamp(1.75rem,1.2rem + 2vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:color-mix(in srgb,var(--ink) 78%,transparent);transition:color .2s var(--ease-x)}
@@ -173,7 +173,7 @@ html[data-motion="reduced"] .hw2-bar,html[data-motion="reduced"] .hw2-pause{visi
 .hw3 .hw3-act{position:static}
 /* R3 F5: full ink, one weight per line, the H2 role (one size page-wide); only the first line is a link */
 .hw3-act{margin:0;color:var(--ink);text-decoration:none;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
-a.hw3-act{text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:.08em;text-underline-offset:.14em}
+a.hw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:.08em;text-underline-offset:.14em}
 .hw3-line{display:block}
 .hw3-v{font-weight:700}
 .hw3-l{font-weight:700}
@@ -248,7 +248,7 @@ a.hw3-act{text-decoration:underline;text-decoration-color:var(--sun);text-decora
 @keyframes hw4-ring{0%,100%{rotate:0deg}25%{rotate:-10deg}75%{rotate:8deg}}
 .hw4-hs{transform-box:fill-box;transform-origin:50% 50%}
 .hw4-steps{list-style:none;margin:0;padding:0}
-.hw4-step{min-height:52svh;display:grid;align-content:center;gap:12px;padding:24px 0;border-top:1px solid oklch(0.2 0.05 262 / .14)}
+.hw4-step{min-height:44svh;display:grid;align-content:center;gap:12px;padding:24px 0;border-top:1px solid oklch(0.2 0.05 262 / .14)}
 .hw4-t{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.1;letter-spacing:-.015em;color:var(--muted);transition:color .2s var(--ease-x)}
 .hw4-step.is-on .hw4-t{color:var(--ink)}
 .hw4-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch}
@@ -268,7 +268,7 @@ html[data-motion="reduced"] .hw4 .hw4-t{color:var(--ink)}
 .hw5-ph{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
 .hw5-arc{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round}
 .hw5-phone svg{width:52%;margin-top:-14%}
-.hw5-tel{position:absolute;left:0;right:0;bottom:14%;text-align:center;font-size:clamp(1.25rem,.9rem + 1vw,1.75rem);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px}
+.hw5-tel{position:absolute;left:0;right:0;bottom:12%;display:flex;align-items:center;justify-content:center;min-height:44px;text-align:center;font-size:clamp(1.25rem,.9rem + 1vw,1.75rem);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px}
 .hw5-pg{fill:#fff;stroke:var(--ink);stroke-width:2.5}
 .hw5-hd{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
 .hw5-ln{stroke:var(--steel);stroke-width:2;stroke-linecap:round}
@@ -276,4 +276,4 @@ html[data-motion="reduced"] .hw4 .hw4-t{color:var(--ink)}
 .hw5-roof img{width:100%;height:100%;object-fit:cover}
 .hw5-cap{font-size:var(--t-lead);line-height:1.4;color:var(--muted)}
 .hw5-cap b{color:var(--ink);font-weight:700}
-@media (max-width:860px){.hw5-row{grid-template-columns:1fr}.hw5-art{aspect-ratio:16/9}}
+@media (max-width:760px){.hw5-row{grid-template-columns:1fr}.hw5-art{aspect-ratio:16/9}}

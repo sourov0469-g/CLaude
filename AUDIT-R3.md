@@ -485,3 +485,67 @@ The ground is --sky (C2). V3's #fff and V2's #eef3fb move to it.
 - The estimate sheet is drawn as blank ruled lines and a sign-off line. It carries no figures and no names, so it is an illustration, not a fake record ⟦S1314⟧.
 - The finished roof is a real job photo.
 - References: ⟦S0095⟧ (the subject's own artefacts) and ⟦S1314⟧ (product truth).
+
+## F6 / G: Towns (written before the Towns code)
+
+The ground is --ink (C2). V3 is already ink; V1 (light) and V2 (white) move to it. Every number on these versions comes from `data/towns.js` (Census / ACS), and the source is printed.
+
+### Winner V3 Town finder (keep + graft)
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| 1 | The tape at rest is broken: seat it in its case, or hide it until a selection | ACCEPT, hidden | ⟦S1314⟧: a resting tape with no town says nothing. |
+| 2 | The vane art bleeds: mask it or drop it | DROP | Removal Test ⟦S1314⟧. |
+| 3 | Compass ~25% smaller, or the readout in the rose centre | ACCEPT, smaller | 420px becomes 315px ⟦S1498⟧. |
+| 4 | Needle parked neutral at 45° and 40% opacity until a selection | ACCEPT | ⟦S1314 §7⟧ (no false state). |
+| 5 | Chips 44×44 | ACCEPT | ⟦S1139⟧ (44px taps). |
+| 6 (E1, E2) | Clear on empty; ~150ms debounce | ACCEPT | See E1/E2 below. |
+| motion | Needle spring ≤500ms with the tape in the same beat; answer crossfade ≤200ms; chip press .97 for 60 to 80ms; a miss is a ±4° shake over 200ms | ACCEPT | ⟦S0063⟧ ⟦S0089⟧. Needle and tape both run 0.45s, back.out(1.2) on the needle. |
+| GRAFT | After a "Yes", reveal a slim V1 ring map with the town's house lit and the connector drawn | ACCEPT | ⟦S0083⟧ ⟦S1499⟧. A 240px ring map (V1's honest square-root rings) opens under the answer. The connector draws in 0.25s. It closes on a miss or an empty field. |
+| (D2) | data-c="chip" | | The companion's pin bounces once. |
+
+**E1/E2, the field.**
+- Emptying the field resets everything: the answer line, the needle (parked), the tape (hidden), the chips and the map.
+- The debounce drops from 300ms to 150ms.
+- The answer reads the field's value at the moment it settles, so it can never answer a stale query.
+
+### V1 Census map (fix)
+| Point | Verdict | Reason |
+|---|---|---|
+| Radial label offsets for the 8 inner towns | ACCEPT | Their labels sit on the line from the office through the house, pushed outward. |
+| Scale labels to the west axis | IMPROVE | The labels on the west side (end-anchored) were the ones colliding. The collision pass now tries radial positions first, then steps along the axis. |
+| Below 640px: label the 8 nearest radially, or hide the map | HIDE | At 0.38× scale no label reaches 12px. The list carries every name and mile ⟦S1499⟧. |
+| Hover 140 to 160ms both ways | ACCEPT | 150ms --ease-x; the spring goes ⟦S0063⟧. |
+| Chips cut to the nearest 8 | IMPROVE | The 8 nearest show. A "Show all 24" button reveals the rest, because the list is the keyboard path to every town ⟦S1499⟧ (progressive disclosure, never removal). |
+| One-line footnote | ACCEPT | Verbatim from the pack. |
+| Connector draw 200 to 250ms plus one ripple | ACCEPT | 0.22s, then one ring from the chosen house. The pointer-ripple background goes (Removal Test, D11). |
+| Chips fade as one group | ACCEPT | |
+| (C2) | | Ink ground. |
+
+### V2 Town cards (weak, mined)
+| Point | Verdict | Reason |
+|---|---|---|
+| Wrong question | ACCEPT | The section must answer "do they work in my town?". The heading becomes "We work in all 24 of these towns." House age becomes the sort, not the question. |
+| Identical cards; label the histogram peak or delete it | ACCEPT, labelled | The peak share is already labelled, and the bars now grow on entry. The oldest-homes cards (median before 1980) carry a --sun year so the set is not uniform ⟦S1497 Semantic⟧. |
+| Delete the blueprint background | ACCEPT | Removal Test. |
+| Salvage median year and pre-1980 for the winner | ACCEPT | V3's answer line already prints both (`fact()`). |
+| If a grid survives: FLIP sort, bars grow, 8 oldest plus "Show all 24" | ACCEPT | |
+| (C2) | | Ink ground. |
+
+### New versions
+| Pack's direction | Verdict | Built instead |
+|---|---|---|
+| (a) V3 plus the grafted ring map as a full version | REJECT | That is V3 after its own graft, so it is a variation (A3). See V4 below. |
+| (b) V1's map with mobile solved and the chip list cut | REJECT | That is V1's fix list. See V5 below. |
+
+**V4 "Distance ruler" (built instead of (a)):**
+- **Reference:** ⟦S0603⟧ evidence doctrine (zero baseline, direct labels, tabular figures).
+- **What it is:** all 24 towns placed on one horizontal tape by their real miles, 0 to 25.
+  - Labels sit in lanes above and below the tape, assigned greedily so none overlap.
+  - Hover or focus shows direction and county.
+- **On phones:** the tape turns vertical and becomes a plain ordered list.
+
+**V5 "Eight directions" (built instead of (b)):**
+- **Reference:** ⟦S1499⟧ (chunk into scannable groups; scanning pattern).
+- **What it is:** the towns grouped into the eight compass directions from Springboro, each a short list sorted by miles under an arrow turned to its bearing.
+  - An empty direction says so.
+  - The office sits in the centre cell.
