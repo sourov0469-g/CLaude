@@ -399,3 +399,13 @@ Result: **0 KEPT changes reverted · 3 FIXED (CSS only) · 0 REBUILT.**
   - facts lock holds (phone ×107, K1 ×6, hours ×12, 474 everywhere);
   - 4,160,204 B.
 - Not marked shipped.
+
+## Master directive (30 Oct 2026), final gate on the final file
+- **Tokens:** 10 declared UI tokens and no stray UI hex.
+- **Light:** 0 dark backgrounds in 80 visible versions; no deep-green sections.
+- **Logo:** new mark in header, footer and favicon.
+- **Facts:** Annex A verbatim.
+- **Integrity:** 8 visible + 6 backups per section, 140/140 open, nothing deleted. 6 backups rather than 8, as logged in PROGRESS.md.
+- **Bespoke interactive:** Clad the gable, clicked end to end.
+- **Regression:** v8 suite 225/0 on three consecutive runs.
+- Not marked shipped.

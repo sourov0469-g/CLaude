@@ -1150,7 +1150,7 @@
     let held = false;
     const sync = () => rows.classList.toggle('is-held', held);
     b.on(btn, 'click', () => { held = !held; btn.setAttribute('aria-pressed', held); btn.textContent = held ? 'Play' : 'Pause'; sync(); });
-    b.io(rows, ([en]) => rows.classList.toggle('is-off', !en.isIntersecting));
+    b.io(rows, ([en]) => { rows.classList.toggle('is-off', !en.isIntersecting); rows.classList.add('is-seen'); });   // paused until the observer has answered once
   };
 
   /* REVIEWS 2: builder brief R29 (one quote at a time, manual, cards in HTML) + ⟦S1329⟧ staggered words. The quote
@@ -1602,6 +1602,7 @@
     const chk = $$('[data-nv-chk]', vr), chkN = $('[data-nv-chk-n]', vr);
     chk.forEach(li => b.on($('[data-nv-chk-a]', li), 'click', () => { li.classList.add('is-checked'); if (chkN) chkN.textContent = chk.filter(x => x.classList.contains('is-checked')).length; }));
     $$('[data-nv-open]', vr).forEach(el => { const t = openNow(); if (t) el.textContent = t; });
+    $$('.nv-tk', vr).forEach(t => b.io(t, ([en]) => t.classList.toggle('is-on', en.isIntersecting)));   // the band never runs off screen
     $$('[data-nv-until]', vr).forEach(el => {
       const end = new Date(el.dataset.nvUntil + 'T23:59:59-06:00'), days = Math.max(0, Math.floor((end - Date.now()) / 864e5)), l = $('[data-nv-until-l]', vr);
       el.textContent = days; if (l) l.textContent = days === 1 ? 'day left' : days ? 'days left' : 'the offer date has passed';
@@ -1851,4 +1852,5 @@
     window.addEventListener('load', () => ST.refresh());
   }
   mqDesk.addEventListener('change', () => { lenisSync(); remountAll(); });
+  root.dataset.apReady = '1';   // the scripts arrive inflated, so tests and tools wait for this instead of 'load'
 })();

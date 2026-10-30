@@ -1201,3 +1201,35 @@ Converted from dark to light:
 - recheck.js: 225/0.
 - `qa/v8/facts.py`: Annex A verbatim, 0 invented phones, 0 "312 siding".
 - File size: 4,100,533 B ≤ 4,221,484 B.
+
+## MASTER DIRECTIVE Phase 6: consolidation QA (final file, 4,100,8xx B ≤ 4,221,484 B)
+
+**Switchers and backups:** `qa/v8/slots.js` shows each section's tabs 1–8 and its backups 9–14 opening, 140 of 140 states with 0 console errors. Era-a backups carry `data-bk="a"` and the record palette; era b carries `data-bk="b"`.
+
+**Light:** `qa/v8/light.js` finds 0 black, near-black or large dark backgrounds across 80 visible versions plus header, footer and picker. Deep-green sections used: none.
+
+**Contrast and focus:**
+- Versions 1–8 swept. Two real hits on the new versions were fixed: Built 5's selected layer number and Book 7's caption.
+- The remaining flags are the two documented false positives from round 2: Services 3's transparent tape overlay and Colour 3's composited plate.
+
+**Targets:** four sub-44 px targets were found and fixed: Hero 8 and Book 4's phone, Proof 8's pause control, Near 3's inline link, and Book 3's sentence fields at 400 px and below.
+
+**Book form:** the fix-pass behaviour is unchanged (`book.js`):
+- grouped errors per step;
+- the phone formatted only on blur;
+- an honest done message carrying the Annex hours.
+
+**Robustness:**
+- The scripts now boot from a deflate stream, which opened two timing windows; both were found by the suite and closed.
+  - The Reviews 1 strip now starts paused until its observer answers, and the Proof 8 band pauses off screen.
+  - The page sets `data-ap-ready` once the controller is live. `qa/v8/recheck.js` is the v7 suite waiting for that signal: 225/0 on three consecutive runs.
+- Separately, a late 700 ms timer in the button-reaction kit was guarded.
+
+**Gate evidence:**
+- **Tokens** (`qa/v8/tokens.py`): 10 declared UI tokens. 0 hex values in CSS outside the token blocks, 0 in JS. Markup holds only token values, the 29 published paint colours (content) and record colours inside backups.
+- **Logo** (`qa/v8/logo.js`): the new mark is in the header, the footer and the favicon; 0 old logo images remain.
+- **Facts** (`qa/v8/facts.py`): visible states print the Annex A strings verbatim.
+  - Phone ×116, address ×4, hours ×15, 886 wording ×8, "474" ×31.
+  - 0 other phone numbers, 0 "312 siding"/"574 roofing", 0 em dashes, 0 stray en dashes, 0 other ratings or review counts.
+  - Price bands are only the published ones.
+- **Bespoke interactive** (`qa/v8/clad.js`): end-to-end with 0 errors; the counts match the pins.

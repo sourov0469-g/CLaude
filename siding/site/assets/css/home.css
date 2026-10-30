@@ -2652,3 +2652,8 @@ html.motion .sec:not([data-bk="a"]) .fd-list:not([hidden]) { animation: fdOpen 1
 .nv-tick .tlink { min-height: 44px; display: inline-flex; align-items: center; }
 .nv-op-tel { display: inline-flex; align-items: center; min-height: 48px; }
 .nv-dl-s { cursor: pointer; }
+/* Phase 6: targets that slipped under 44 px after the type changes */
+.v:not([data-bk="a"] *) .tlink { padding-block: 2px; }
+@media (max-width: 400px) { .snt:not([data-bk="a"] *) input, .snt:not([data-bk="a"] *) select { min-height: 44px; } }
+.sk-rows:not(.is-seen) .sk-track { animation-play-state: paused; }   /* the strip waits for its observer, so it never runs unseen */
+.nv-tk:not(.is-on) .nv-tk-in { animation-play-state: paused !important; }

@@ -466,3 +466,13 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
     - 8 visible in total.
   - Built's version 4 is the Phase 4 interactive, so Built needs four more.
   - Backups per section: 6 (3 era a + 3 era b). Nothing is deleted.
+- **Master directive phases done:**
+  - Phase 0 note.
+  - Phase 1 logo (3068595, 17ec193).
+  - Phase 2 tokens + light (17ec193).
+  - Phase 3 street, eyebrows and trade objects (ef2471a, then the section commit).
+  - Phase 5 groundwork (651e6ba).
+  - Phase 4 Clad the gable (4b6eea7).
+  - Phase 5 expansion (5df18ae).
+  - Phase 6 QA (this commit).
+- **Final gate evidence:** in TRACEABILITY.md under "Phase 6". Nothing is marked shipped.
