@@ -332,3 +332,22 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
 - Phase 5 complete:
   - Hero: 16 versions (8 visible plus b1–b8).
   - Sections 2–10: 12 versions each (8 visible plus b1–b4; the logged collision).
+
+## Phase 6: three QA rounds under the new skin (2026-10-30)
+- Tool: `tools/p6qa.js`. For every section and slots 1–8, it measures text contrast against the composited ground (canvas-resolved colours, opacity included), checks the switcher (exactly 1–8, each showing its version) and opens every backup.
+  - r1: 66 below AA.
+  - r2: 9 below AA.
+  - r3: 0 below AA; 1,680 items measured; 242 inside SVG art or over photos, counted and spot-checked.
+  - Every round: 10/10 switchers, 44/44 backups, 0 page errors.
+- Fixes are appended overrides scoped to presented classes:
+  - Accent numerals moved to `--a-700`.
+  - The faded lender row now uses a dashed rule instead of opacity.
+  - The stamp is on a white plate.
+  - The title-block keys on orange use full ink.
+  - The turntable tint is lighter.
+  - The hero rating star is fixed on visible slots only.
+- Final gate: `MASTER-DIRECTIVE-REPORT.md`.
+  - `tokencheck.py`: 0 off-token. Fixed along the way: `theme-color` was the old #0B1418 and is now paper; the `.btn:active` shade now uses ink's RGB.
+  - `gatecheck.js`: light, logo, facts and integrity all pass; deep green none.
+  - `consulttest.js`: honest on 8/8.
+  - `pickertest.js`: updated to the improved hero prefix, passes.

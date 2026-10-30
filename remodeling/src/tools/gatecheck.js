@@ -15,10 +15,10 @@ const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consul
   const out = [], fail = [];
   // logo
   const logo = await p.evaluate(() => {
-    const nav = document.querySelector('.nav img[data-logo], header img[data-logo]'), foot = document.querySelector('.foot img[data-logo], footer img[data-logo]');
+    const nav = document.querySelector('.nav__logo img'), foot = document.querySelector('.foot img[data-logo], footer img[data-logo]');
     const ico = document.querySelector('link[rel~="icon"]');
     const svg = s => !!s && /^data:image\/svg\+xml/.test(s);
-    const txt = s => { try { return decodeURIComponent(s.split(',')[1] || ''); } catch (e) { return atob((s.split(',')[1] || '')); } };
+    const txt = s => { const [h, d] = [s.slice(0, s.indexOf(',')), s.slice(s.indexOf(',') + 1)]; return /;base64/.test(h) ? atob(d) : decodeURIComponent(d); };
     return { header: nav && svg(nav.src), footer: foot && svg(foot.src), favicon: ico && svg(ico.href), sameMark: ico && nav && /M80 47 L50 21 L25 42 V80 H76/.test(txt(ico.href)) && /M80 47 L50 21 L25 42 V80 H76/.test(txt(nav.src)), footSrcIsNav: foot && nav && foot.src === nav.src };
   });
   out.push('logo: ' + JSON.stringify(logo));
@@ -41,6 +41,9 @@ const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consul
           if (e instanceof SVGElement && e.tagName !== 'svg') return;
           const cs = getComputedStyle(e), c = rgba(cs.backgroundColor); if (c[3] < .5) return;
           const r = e.getBoundingClientRect(); if (e !== sec && e !== ver && r.width * r.height < area * .2) return;
+          if (/text/.test(cs.backgroundClip || cs.webkitBackgroundClip || '')) return;   // a fill clipped to letters is type, not a ground
+          // a box whose face is a photo (a frame round an image) shows its colour only as the frame
+          if ([...e.querySelectorAll('img, canvas')].some(m => { const q = m.getBoundingClientRect(); return q.width * q.height >= r.width * r.height * .8; })) return;
           const L = lum(c);
           if (L < .05) dark.push((e.className.baseVal !== undefined ? e.className.baseVal : e.className).toString().split(' ')[0] + ' ' + cs.backgroundColor);
           else if (L < .2 && c[1] > c[0] * 1.15 && c[1] > c[2]) green.push(cs.backgroundColor);
