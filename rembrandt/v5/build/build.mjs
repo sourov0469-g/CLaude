@@ -1,8 +1,10 @@
 // Builds the v5 homepage as ONE self-contained HTML file: rembrandt/v5/rembrandt-homepage.html
 // Everything is inside: CSS, the Epilogue font, GSAP 3.13 (core, ScrollTrigger, SplitText), Lenis, the app, every photo.
 // Usage: TOOLS=<dir holding node_modules with esbuild, gsap, lenis> node build/build.mjs
-// Each section lives in src/sections/<id>/ as v1.html, v2.html, v3.html, <id>.css and <id>.js. Version 1 is rendered into
-// the page (so it works without JS); versions 2 and 3 ship as <template>s and are mounted by the section's 1 · 2 · 3 picker.
+// Each section lives in src/sections/<id>/ as v1.html ... v5.html, <id>.css and <id>.js. The section's default version (its
+// audit winner, `def` below) is rendered into the page (so it works without JS); the others ship as <template>s mounted by
+// the section's 1-5 picker. Audit pack 2026-10-30 A2: src/sections/<id>/bk/ holds the versions as they stood before the
+// round (b1-b3.html, bk.css, bk.js); they ship as templates behind the picker's hidden Backup buttons, never the default.
 import fs from 'node:fs'; import path from 'node:path'; import { createRequire } from 'node:module'; import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -14,17 +16,17 @@ const esbuild = require('esbuild');
 const read = f => fs.readFileSync(path.join(SRC, f), 'utf8');
 
 export const SECTIONS = [
-  { id: 'hero', name: 'Hero', label: 'Rembrandt Roofing & Restoration' },
-  { id: 'proof', name: 'Reviews', label: 'Reviews and credentials' },
-  { id: 'work', name: 'Work', label: 'Our work' },
-  { id: 'family', name: 'Family', label: 'The family' },
-  { id: 'how', name: 'Steps', label: 'How it works' },
-  { id: 'area', name: 'Towns', label: 'Where we work' },
-  { id: 'call', name: 'Call', label: 'Call Rembrandt' },
+  { id: 'hero', name: 'Hero', label: 'Rembrandt Roofing & Restoration', def: 2 },
+  { id: 'proof', name: 'Reviews', label: 'Reviews and credentials', def: 2 },
+  { id: 'work', name: 'Work', label: 'Our work', def: 1 },
+  { id: 'family', name: 'Family', label: 'The family', def: 1 },
+  { id: 'how', name: 'Steps', label: 'How it works', def: 3 },
+  { id: 'area', name: 'Towns', label: 'Where we work', def: 3 },
+  { id: 'call', name: 'Call', label: 'Call Rembrandt', def: 1 },
 ].filter(s => fs.existsSync(path.join(SRC, 'sections', s.id)) && (!ONLY || ONLY.includes(s.id)));
 
 const ICONS = {
-  ICON_PHONE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 3.4 5.2 1.6 1.6 0 0 1 5 3.5z"/></svg>',
+  ICON_PHONE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 3.4 5.2 1.6 1.6 0 0 1 5 3.5z"/><path class="ic-arc" pathLength="1" d="M14.6 2.6a7.2 7.2 0 0 1 6.8 6.8"/><path class="ic-arc" pathLength="1" d="M14.3 6.2a3.6 3.6 0 0 1 3.5 3.5"/></svg>',
   ICON_SPLIT: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg>',
   ICON_ARROW: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
 };
@@ -55,18 +57,31 @@ function images(html, live) {
 }
 
 // ---------- markup
-const pick = s => `<div class="pick-rail"><fieldset class="pick"><legend class="vh">${s.name} section: choose a version</legend><span class="pick-l" aria-hidden="true">${s.name}</span>` +
-  [1, 2, 3].map(v => `<input type="radio" name="v-${s.id}" id="v-${s.id}-${v}" value="${v}"${v === 1 ? ' checked' : ''}><label for="v-${s.id}-${v}" data-cursor="pick"><span class="vh">Version </span>${v}</label>`).join('') +
+const has = (s, f) => fs.existsSync(path.join(SRC, 'sections', s.id, f));
+const VERS = s => [1, 2, 3, 4, 5].filter(v => has(s, `v${v}.html`)).map(String);
+const BKS = s => [1, 2, 3].filter(v => has(s, `bk/b${v}.html`)).map(v => 'b' + v);
+const radio = (s, v, txt) => `<input type="radio" name="v-${s.id}" id="v-${s.id}-${v}" value="${v}"${v === String(s.def) ? ' checked' : ''}><label for="v-${s.id}-${v}" data-cursor="pick" data-c="pick">${txt}</label>`;
+// R3 D7: each picker carries a 14px section glyph that plays once on every switch (its moving part is .g-m)
+const GLYPH = {
+  hero: '<path d="M1 10h14v4H1z"/><path class="g-m" d="M1 6h8v3.4H1z"/>',
+  proof: '<path class="g-m" d="M8 1.5l1.9 4 4.4.5-3.3 3 .9 4.4L8 11.2l-3.9 2.2.9-4.4-3.3-3 4.4-.5z"/>',
+  work: '<rect x="1" y="4" width="9" height="8" rx="2.5"/><path class="g-m" d="M10 9.5h5v2h-5z"/>',
+  family: '<path d="M3 10a5 5 0 0 1 10 0z"/><path class="g-m" d="M1 10.5h14v2H1z"/>',
+  how: '<path d="M2 14l1-4 8-8 3 3-8 8z"/><circle class="g-m" cx="13.5" cy="13.5" r="1.6"/>',
+  area: '<path class="g-m" d="M8 15s-5-5.2-5-8.6a5 5 0 0 1 10 0C13 9.8 8 15 8 15zm0-6.6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill-rule="evenodd"/>',
+  call: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
+};
+const pick = s => `<div class="pick-rail"><fieldset class="pick"><legend class="vh">${s.name} section: choose a version</legend><span class="pick-l" aria-hidden="true"><svg class="pick-g pick-g--${s.id}" viewBox="0 0 16 16" focusable="false">${GLYPH[s.id] || ''}</svg>${s.name}</span>` +
+  VERS(s).map(v => radio(s, v, `<span class="vh">Version </span>${v}`)).join('') +
+  (BKS(s).length ? `<button type="button" class="pick-more" aria-expanded="false" aria-controls="bk-${s.id}"><span class="vh">Show the backups</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="3" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="13" cy="8" r="1.6"/></svg></button><span class="pick-bk" id="bk-${s.id}">` +
+  BKS(s).map(v => radio(s, v, `<span class="vh">Backup </span>B${v.slice(1)}`)).join('') + `</span>` : '') +
   `</fieldset></div>`;
-const ver = (s, v) => icons(read(`sections/${s.id}/v${v}.html`)).trim();
+const ver = (s, v) => icons(read(`sections/${s.id}/${String(v)[0] === 'b' ? `bk/${v}` : `v${v}`}.html`)).trim();
 let sections = '', templates = '';
 for (const s of SECTIONS) {
-  sections += `<section id="${s.id}" class="sec sec--${s.id}" data-section="${s.id}" aria-label="${s.label.replace(/&/g, '&amp;')}">\n${pick(s)}\n<div class="stage">\n${images(ver(s, 1), true)}\n</div>\n</section>\n`;
+  sections += `<section id="${s.id}" class="sec sec--${s.id}" data-section="${s.id}" data-def="${s.def}" aria-label="${s.label.replace(/&/g, '&amp;')}">\n${pick(s)}\n<div class="stage">\n${images(ver(s, s.def), true)}\n</div>\n</section>\n`;
 }
-for (const s of SECTIONS) for (const v of [2, 3]) {
-  const f = path.join(SRC, 'sections', s.id, `v${v}.html`);
-  if (fs.existsSync(f)) templates += `<template id="tpl-${s.id}-${v}">${images(ver(s, v), false)}</template>\n`;
-}
+for (const s of SECTIONS) for (const v of [...VERS(s), ...BKS(s)]) if (v !== String(s.def)) templates += `<template id="tpl-${s.id}-${v}">${images(ver(s, v), false)}</template>\n`;
 let page = icons(read('index.html'));
 page = page.replace(/<img\b[^>]*>/g, m => images(m, true));
 page = page.replace('<!--SECTIONS-->', () => sections).replace('<!--TEMPLATES-->', () => templates);
@@ -76,13 +91,15 @@ const registry = Object.fromEntries([...keys].filter(k => !inlined.has(k)).map(k
 
 // ---------- CSS
 const minCss = s => s.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(Boolean).join('').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}');
-let css = read('base.css') + SECTIONS.map(s => { const f = `sections/${s.id}/${s.id}.css`; return fs.existsSync(path.join(SRC, f)) ? read(f) : ''; }).join('\n');
+let css = read('base.css') + SECTIONS.map(s => [`sections/${s.id}/bk/bk.css`, `sections/${s.id}/${s.id}.css`].filter(f => fs.existsSync(path.join(SRC, f))).map(read).join('\n')).join('\n');
 css = minCss(css).replace('FONT_EPILOGUE', `data:font/woff2;base64,${fs.readFileSync(path.join(V5, 'assets', 'fonts', 'epilogue.woff2')).toString('base64')}`);
 page = page.replace('/*CSS*/', () => css);
 page = page.replace('FAVICON', () => `data:image/png;base64,${fs.readFileSync(path.join(V5, 'assets', 'img', 'favicon.png')).toString('base64')}`);
 
 // ---------- JS
-const entry = `import { boot } from './js/main.js';\n` + SECTIONS.map(s => `import ${s.id} from './sections/${s.id}/${s.id}.js';`).join('\n') + `\nboot({ ${SECTIONS.map(s => s.id).join(', ')} });\n`;
+const bkJs = s => has(s, 'bk/bk.js');
+const entry = `import { boot } from './js/main.js';\n` + SECTIONS.map(s => `import ${s.id} from './sections/${s.id}/${s.id}.js';` + (bkJs(s) ? `\nimport ${s.id}Bk from './sections/${s.id}/bk/bk.js';` : '')).join('\n') +
+  `\nboot({ ${SECTIONS.map(s => bkJs(s) ? `${s.id}: { ...${s.id}, b1: ${s.id}Bk[1], b2: ${s.id}Bk[2], b3: ${s.id}Bk[3] }` : s.id).join(', ')} });\n`;
 const js = (await esbuild.build({ stdin: { contents: entry, resolveDir: SRC, loader: 'js' }, bundle: true, minify: true, format: 'iife', target: 'es2020', write: false, nodePaths: [path.join(TOOLS, 'node_modules')], legalComments: 'none', logLevel: 'error' })).outputFiles[0].text;
 const scripts = [`window.__IMG=${JSON.stringify(registry)};`, js].map(s => `<script>${s.replace(/<\/script/gi, '<\\/script')}</script>`).join('\n');
 page = page.replace('<!--SCRIPTS-->', () => scripts);

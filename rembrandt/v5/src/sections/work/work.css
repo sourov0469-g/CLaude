@@ -2,14 +2,14 @@
    v3 [BANK] Q38 SVG horizontal blinds over the one genuine before/after pair (ba2). */
 .wv{position:relative;overflow:clip;background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
 .wv-head{display:grid;gap:12px;padding:0 var(--gutter);margin-bottom:clamp(32px,5vh,56px)}
-.wv-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.wv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
 .wv-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:44ch}
 .wv-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--ink);border-radius:50%;background:none;color:var(--ink);cursor:pointer;
   transition:background-color var(--dur-quick) var(--ease-std),color var(--dur-quick) var(--ease-std)}
 .wv-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .wv-btn .i-play{fill:currentColor;stroke:none}
 .wv-btn[aria-pressed="false"] .i-play,.wv-btn[aria-pressed="true"] .i-pause{display:none}
-@media (hover:hover){.wv-btn:hover{background:var(--ink);color:#fff}}
+@media (hover:hover) and (pointer:fine){.wv-btn:hover{background:var(--ink);color:#fff}}
 .wv-btn:active{scale:.96}
 
 /* v1 Q361: an endless strip at 200 px/s, the centre tile lit, the rest at brightness(0.7); the caption follows */
@@ -48,7 +48,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;
   transition:background-color var(--dur-quick) var(--ease-std)}
 .wv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
-@media (hover:hover){.wv2-close:hover{background:var(--mist)}}
+@media (hover:hover) and (pointer:fine){.wv2-close:hover{background:var(--mist)}}
 @media (max-width:640px){
   .wv2-grid{gap:8px;height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:40vw 46vw 38vw 46vw 40vw}
   .wv2.is-open .wv2-grid{grid-template-columns:1fr 1fr;grid-template-rows:14vw 14vw 154vw 14vw 14vw}
@@ -64,7 +64,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv3-stage>*{width:100%;max-width:calc(72svh * 1024 / 600);margin-inline:auto}
 .wv3-labels{display:flex;justify-content:space-between;margin-bottom:14px;font-size:.9375rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .wv3-l{min-height:44px;padding:0 2px;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--muted);cursor:pointer;transition:color .15s ease}
-@media (hover:hover){.wv3-l:hover{color:var(--ink)}}
+@media (hover:hover) and (pointer:fine){.wv3-l:hover{color:var(--ink)}}
 .wv3-hl{fill:none;stroke:var(--sun);stroke-width:4;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:0;pointer-events:none;transition:opacity .18s var(--ease-x)}
 .wv3-hl.is-on{opacity:1}
 .wv3-hl.is-flash{animation:wv3-flash .5s var(--ease-x)}
@@ -103,11 +103,11 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv1-tile{position:relative}
 .wv1-nails{will-change:transform;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .wv1-nails circle{fill:#d8dde8;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
-@media (hover:hover){.wv1-tile:hover .wv1-nails circle{opacity:1;transform:scale(1)}.wv1-tile:hover .wv1-nails circle:nth-child(2){transition-delay:.03s}.wv1-tile:hover .wv1-nails circle:nth-child(3){transition-delay:.06s}.wv1-tile:hover .wv1-nails circle:nth-child(4){transition-delay:.09s}}
+@media (hover:hover) and (pointer:fine){.wv1-tile:hover .wv1-nails circle{opacity:1;transform:scale(1)}.wv1-tile:hover .wv1-nails circle:nth-child(2){transition-delay:.03s}.wv1-tile:hover .wv1-nails circle:nth-child(3){transition-delay:.06s}.wv1-tile:hover .wv1-nails circle:nth-child(4){transition-delay:.09s}}
 .wv-btn{position:relative}
 .wv-btn .i-sq{opacity:0;fill:none;stroke-width:2.2}
 .wv-btn .i-arw,.wv-btn .i-sq{transition:opacity .18s var(--ease-x)}
-@media (hover:hover){.wv-btn[data-dir]:hover .i-arw{opacity:0}.wv-btn[data-dir]:hover .i-sq{opacity:1}}
+@media (hover:hover) and (pointer:fine){.wv-btn[data-dir]:hover .i-arw{opacity:0}.wv-btn[data-dir]:hover .i-sq{opacity:1}}
 .wv-btn[data-dir]:focus-visible .i-arw{opacity:0}.wv-btn[data-dir]:focus-visible .i-sq{opacity:1}
 .wv-btn.is-press{animation:wv-tick .3s var(--ease-spring)}
 @keyframes wv-tick{0%{scale:.9}100%{scale:1}}
@@ -119,7 +119,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv1-pause .i-bub{fill:currentColor;stroke:none;transition:translate .3s var(--ease-spring)}
 .wv1-pause .i-play{transition:opacity .15s var(--ease-x)}
 @keyframes wv-bub{0%,100%{translate:-3.4px 0}50%{translate:3.4px 0}}
-@media (hover:hover){
+@media (hover:hover) and (pointer:fine){
   .wv1-pause:hover .i-pause{display:block;transform:rotate(90deg)}
   .wv1-pause:hover .i-level{opacity:1}
   .wv1-pause:hover .i-play{opacity:0}
@@ -141,14 +141,14 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv2-gc-f{fill:var(--sky)}
 .wv2-gc-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .wv2-tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:700;line-height:1.2;opacity:0;transform:translateY(16px);transition:opacity .2s var(--ease-x),transform .3s var(--ease-x);pointer-events:none;text-align:left;max-width:calc(100% - 24px)}
-@media (hover:hover){.wv2-item:hover .wv2-tag{opacity:1;transform:none}}
+@media (hover:hover) and (pointer:fine){.wv2-item:hover .wv2-tag{opacity:1;transform:none}}
 .wv2-item:focus-visible .wv2-tag{opacity:1;transform:none}
 .wv2.is-open .wv2-gc,.wv2.is-open .wv2-tag{opacity:0}
 .wv2-close{position:relative}
 .wv2-close .i-raf{opacity:0}
 .wv2-close .i-raf path{fill:var(--wood);stroke:currentColor;stroke-width:1.2}
 .wv2-close .i-x,.wv2-close .i-raf{transition:opacity .18s var(--ease-x)}
-@media (hover:hover){.wv2-close:hover .i-x{opacity:0}.wv2-close:hover .i-raf{opacity:1}}
+@media (hover:hover) and (pointer:fine){.wv2-close:hover .i-x{opacity:0}.wv2-close:hover .i-raf{opacity:1}}
 .wv2-close:focus-visible .i-x{opacity:0}.wv2-close:focus-visible .i-raf{opacity:1}
 .wv2-close.is-press .i-raf{animation:wv-fold .3s var(--ease-x)}
 @keyframes wv-fold{0%{transform:scaleY(1)}50%{transform:scaleY(.2)}100%{transform:scaleY(1)}}

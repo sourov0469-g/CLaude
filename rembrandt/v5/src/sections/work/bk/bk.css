@@ -1,0 +1,171 @@
+/* Backups B1-B3 of the work section: the versions as they stood before the 2026-10-30 audit round, verbatim except the prefix wv -> bwv. Never edit. */
+/* WORK: real jobs only. v1 [BANK] Q361 loop tiles (GreenSock xxQaRoX), v2 [BANK] Q157 push grid (Codrops, Flip),
+   v3 [BANK] Q38 SVG horizontal blinds over the one genuine before/after pair (ba2). */
+.bwv{position:relative;overflow:clip;background:var(--sky);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.bwv-head{display:grid;gap:12px;padding:0 var(--gutter);margin-bottom:clamp(32px,5vh,56px)}
+.bwv-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.bwv-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:44ch}
+.bwv-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--ink);border-radius:50%;background:none;color:var(--ink);cursor:pointer;
+  transition:background-color var(--dur-quick) var(--ease-std),color var(--dur-quick) var(--ease-std)}
+.bwv-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bwv-btn .i-play{fill:currentColor;stroke:none}
+.bwv-btn[aria-pressed="false"] .i-play,.bwv-btn[aria-pressed="true"] .i-pause{display:none}
+@media (hover:hover){.bwv-btn:hover{background:var(--ink);color:#fff}}
+.bwv-btn:active{scale:.96}
+
+/* v1 Q361: an endless strip at 200 px/s, the centre tile lit, the rest at brightness(0.7); the caption follows */
+.bwv1-strip{display:flex;gap:24px;overflow:hidden;padding:4px 0}
+.bwv1-tile{flex:none;width:min(30em,78vw);aspect-ratio:4/3;margin:0;overflow:hidden;background:var(--mist);filter:brightness(.7);transition:filter .15s ease}
+.bwv1-tile.is-on{filter:none}
+.bwv1-tile img{width:100%;height:100%;object-fit:cover}
+.bwv1-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px var(--gutter) 0}
+.bwv1-cap{font-size:var(--t-lead);font-weight:700;min-height:1.4em}
+.bwv1-cap.is-new{animation:bwv-in .15s ease both}
+.bwv1-ctl{display:flex;gap:8px}
+html[data-motion="reduced"] .bwv1-pause{display:none}
+@keyframes bwv-in{from{opacity:0;translate:0 6px}}
+
+/* v2 Q157 (v2 audit): the layout is the animation data. The six jobs frame the title as a dense gallery wall (no empty cell);
+   opening one moves its image into the centre and changes the grid tracks so the frame is pushed to thin edges; Flip plays
+   the difference. Desktop 4 x 3 (wide tiles top and bottom, tall tiles at the sides), phone 2 x 5. */
+.bwv2-grid{position:relative;display:grid;gap:12px;padding:0 var(--gutter);height:min(86svh,860px);min-height:560px;
+  grid-template-columns:1fr 1.15fr 1.15fr 1fr;grid-template-rows:1fr 1.5fr 1fr}
+.bwv2.is-open .bwv2-grid{grid-template-columns:.42fr 1.6fr 1.6fr .42fr;grid-template-rows:.36fr 2.4fr .36fr}
+.bwv2-item{position:relative;padding:0;border:0;background:none;overflow:hidden;cursor:pointer;min-height:0}
+.bwv2-item.wa{grid-area:1 / 1 / 2 / 3}.bwv2-item.wb{grid-area:1 / 3 / 2 / 5}.bwv2-item.we{grid-area:2 / 1 / 3 / 2}
+.bwv2-item.wf{grid-area:2 / 4 / 3 / 5}.bwv2-item.wc{grid-area:3 / 1 / 4 / 3}.bwv2-item.wd{grid-area:3 / 3 / 4 / 5}
+.bwv2-item img,.bwv2-full img{width:100%;height:100%;object-fit:cover;display:block}
+.bwv2-item:focus-visible{outline-offset:2px}
+.bwv2-closed{grid-area:2 / 2 / 3 / 4;display:grid;align-content:center;justify-items:center;gap:14px;padding:clamp(16px,3vw,40px);text-align:center;z-index:1}
+.bwv2-closed .bwv-note{max-width:30ch}
+.bwv2-full{grid-area:2 / 2 / 3 / 4;position:relative;z-index:5;pointer-events:none;overflow:hidden}
+.bwv2.is-open .bwv2-full{pointer-events:auto;cursor:pointer}
+.bwv2-full img{position:absolute;inset:0}
+.bwv2-open{grid-area:2 / 2 / 3 / 4;align-self:end;z-index:6;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+  margin:0;padding:16px;background:linear-gradient(transparent,rgba(17,24,48,.72));pointer-events:none}
+.bwv2-open>*{pointer-events:auto}
+.bwv2-open[hidden],.bwv2-closed[hidden]{display:none}
+.bwv2-cap{color:#fff;font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.bwv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;
+  transition:background-color var(--dur-quick) var(--ease-std)}
+.bwv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+@media (hover:hover){.bwv2-close:hover{background:var(--mist)}}
+@media (max-width:640px){
+  .bwv2-grid{gap:8px;height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:40vw 46vw 38vw 46vw 40vw}
+  .bwv2.is-open .bwv2-grid{grid-template-columns:1fr 1fr;grid-template-rows:14vw 14vw 154vw 14vw 14vw}
+  .bwv2-item.wa{grid-area:1 / 1 / 2 / 3}.bwv2-item.we{grid-area:2 / 1 / 3 / 2}.bwv2-item.wf{grid-area:2 / 2 / 3 / 3}
+  .bwv2-item.wc{grid-area:4 / 1 / 5 / 2}.bwv2-item.wd{grid-area:4 / 2 / 5 / 3}.bwv2-item.wb{grid-area:5 / 1 / 6 / 3}
+  .bwv2-closed,.bwv2-full,.bwv2-open{grid-area:3 / 1 / 4 / 3}
+  .bwv2-closed{padding:24px 8px}
+}
+
+/* v3 Q38: thirty horizontal slits open in a scrubbed stagger, crisp edges; the labels sit outside the frame and switch at
+   half. Reduced motion: the pair side by side. */
+.bwv3-stage{padding:0 var(--gutter)}
+.bwv3-stage>*{width:100%;max-width:calc(72svh * 1024 / 600);margin-inline:auto}
+.bwv3-labels{display:flex;justify-content:space-between;margin-bottom:14px;font-size:.9375rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.bwv3-l{min-height:44px;padding:0 2px;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--muted);cursor:pointer;transition:color .15s ease}
+@media (hover:hover){.bwv3-l:hover{color:var(--ink)}}
+.bwv3-hl{fill:none;stroke:var(--sun);stroke-width:4;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:0;pointer-events:none;transition:opacity .18s var(--ease-x)}
+.bwv3-hl.is-on{opacity:1}
+.bwv3-hl.is-flash{animation:bwv3-flash .5s var(--ease-x)}
+@keyframes bwv3-flash{0%{opacity:1;stroke-width:7}100%{opacity:0;stroke-width:4}}
+.bwv3-l.is-on{color:var(--ink)}
+.bwv3-l.is-on::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;background:var(--blue);vertical-align:.08em}
+.bwv3-frame{width:100%;height:auto;aspect-ratio:1024/600;background:var(--mist)}
+.bwv3-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bwv3-pair[hidden]{display:none}
+.bwv3-pair figure{margin:0;display:grid;gap:10px}
+.bwv3-pair img{width:100%;aspect-ratio:1024/684;object-fit:cover}
+.bwv3-pair figcaption{font-size:.9375rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.bwv3.is-still .bwv3-frame,.bwv3.is-still .bwv3-labels{display:none}
+@media (max-width:640px){.bwv3-pair{grid-template-columns:1fr}}
+
+/* ---------- V7 upgrades (PLAN-V7 §6 Work) */
+.bwv{--vbg:var(--sky)}
+.bwv-head,.bwv1-strip,.bwv1-foot,.bwv1-tape,.bwv2-grid,.bwv3-stage{position:relative;z-index:1}
+/* v1: a roofer's tape runs under the loop, its ticks travelling with the track; the caption rides the hook; a faint
+   speed square behind turns with the job on show */
+.bwv1-square{position:absolute;right:-60px;top:40px;width:min(42vw,520px);height:auto;z-index:0;pointer-events:none}
+.bwv1-sq{transform-origin:40px 360px;transform-box:view-box;transition:transform .6s var(--ease-x)}
+.bwv1-sq path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;opacity:.09;vector-effect:non-scaling-stroke}
+.bwv1-sq .bwv1-sq-lip{opacity:.07}
+.bwv1-tape{will-change:transform;height:28px;margin-top:18px;padding:0}
+.bwv1-blade{display:block;width:100%;height:28px}
+.bwv1-blade-bg{fill:var(--sun)}
+.bwv1-blade-tk{stroke:var(--ink);stroke-width:1.4}
+#bwv1-ticks path{stroke:var(--ink);stroke-width:1.4}
+.bwv1-cap{display:flex;align-items:center;gap:12px}
+.bwv1-hook{width:22px;height:28px;flex:none;overflow:visible}
+.bwv1-hook path{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.bwv1-hook rect{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.bwv1.is-step .bwv1-hook{animation:bwv-hook .3s var(--ease-x)}
+@keyframes bwv-hook{0%{transform:translateX(0)}40%{transform:translateX(10px)}100%{transform:translateX(0)}}
+.bwv1-tile{position:relative}
+.bwv1-nails{will-change:transform;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.bwv1-nails circle{fill:#d8dde8;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
+@media (hover:hover){.bwv1-tile:hover .bwv1-nails circle{opacity:1;transform:scale(1)}.bwv1-tile:hover .bwv1-nails circle:nth-child(2){transition-delay:.03s}.bwv1-tile:hover .bwv1-nails circle:nth-child(3){transition-delay:.06s}.bwv1-tile:hover .bwv1-nails circle:nth-child(4){transition-delay:.09s}}
+.bwv-btn{position:relative}
+.bwv-btn .i-sq{opacity:0;fill:none;stroke-width:2.2}
+.bwv-btn .i-arw,.bwv-btn .i-sq{transition:opacity .18s var(--ease-x)}
+@media (hover:hover){.bwv-btn[data-dir]:hover .i-arw{opacity:0}.bwv-btn[data-dir]:hover .i-sq{opacity:1}}
+.bwv-btn[data-dir]:focus-visible .i-arw{opacity:0}.bwv-btn[data-dir]:focus-visible .i-sq{opacity:1}
+.bwv-btn.is-press{animation:bwv-tick .3s var(--ease-spring)}
+@keyframes bwv-tick{0%{scale:.9}100%{scale:1}}
+/* R18: the pause bars turn through 90 degrees into the walls of a level vial; its bubble drifts while the strip runs;
+   pressed (held) the bubble centres and stays */
+.bwv1-pause .i-pause{transform-box:view-box;transform-origin:12px 12px;transition:transform .25s var(--ease-x),opacity .15s var(--ease-x)}
+.bwv1-pause .i-level{opacity:0;transition:opacity .15s var(--ease-x)}
+.bwv1-pause .i-lv-tk{stroke-width:1.2}
+.bwv1-pause .i-bub{fill:currentColor;stroke:none;transition:translate .3s var(--ease-spring)}
+.bwv1-pause .i-play{transition:opacity .15s var(--ease-x)}
+@keyframes bwv-bub{0%,100%{translate:-3.4px 0}50%{translate:3.4px 0}}
+@media (hover:hover){
+  .bwv1-pause:hover .i-pause{display:block;transform:rotate(90deg)}
+  .bwv1-pause:hover .i-level{opacity:1}
+  .bwv1-pause:hover .i-play{opacity:0}
+  .bwv1-pause[aria-pressed="false"]:hover .i-bub{animation:bwv-bub 1.4s ease-in-out infinite}
+}
+.bwv1-pause:focus-visible .i-pause{display:block;transform:rotate(90deg)}
+.bwv1-pause:focus-visible .i-level{opacity:1}
+.bwv1-pause:focus-visible .i-play{opacity:0}
+.bwv1-pause[aria-pressed="false"]:focus-visible .i-bub{animation:bwv-bub 1.4s ease-in-out infinite}
+.bwv1-pause.is-press .i-bub,.bwv1-pause[aria-pressed="true"] .i-bub{animation:none;translate:0 0}
+/* bg: a lit band follows the pointer along the tape; the ticks under it turn blue and thicken */
+.bwv1-blade-lit{fill:#fff6cf}
+.bwv1-blade-hot{stroke:var(--blue);stroke-width:2.6}
+.bwv1-tape svg{overflow:hidden}
+/* v2: a gable cap lowers over a photo on hover (Q147 chevron, inverted into a roof line); opening lifts the roof off */
+.bwv2-hip{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#bwv2-hp path{fill:none;stroke:var(--ink);stroke-width:1;opacity:.07}
+.bwv2-gc{will-change:transform;position:absolute;left:0;top:0;width:100%;height:46%;pointer-events:none;overflow:visible}
+.bwv2-gc-f{fill:var(--sky)}
+.bwv2-gc-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bwv2-tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:700;line-height:1.2;opacity:0;transform:translateY(16px);transition:opacity .2s var(--ease-x),transform .3s var(--ease-x);pointer-events:none;text-align:left;max-width:calc(100% - 24px)}
+@media (hover:hover){.bwv2-item:hover .bwv2-tag{opacity:1;transform:none}}
+.bwv2-item:focus-visible .bwv2-tag{opacity:1;transform:none}
+.bwv2.is-open .bwv2-gc,.bwv2.is-open .bwv2-tag{opacity:0}
+.bwv2-close{position:relative}
+.bwv2-close .i-raf{opacity:0}
+.bwv2-close .i-raf path{fill:var(--wood);stroke:currentColor;stroke-width:1.2}
+.bwv2-close .i-x,.bwv2-close .i-raf{transition:opacity .18s var(--ease-x)}
+@media (hover:hover){.bwv2-close:hover .i-x{opacity:0}.bwv2-close:hover .i-raf{opacity:1}}
+.bwv2-close:focus-visible .i-x{opacity:0}.bwv2-close:focus-visible .i-raf{opacity:1}
+.bwv2-close.is-press .i-raf{animation:bwv-fold .3s var(--ease-x)}
+@keyframes bwv-fold{0%{transform:scaleY(1)}50%{transform:scaleY(.2)}100%{transform:scaleY(1)}}
+.bwv2-close .i-raf{transform-origin:12px 11px;transform-box:view-box}
+/* v3: the after photo laid over the before, course by course, bottom to top; a small hammer rides the course going
+   on; the frame sits on a drawn drip edge and starter strip */
+.bwv3-ham{pointer-events:none}
+.bwv3-ham-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2}
+.bwv3-ham-c{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.bwv3-ham-s{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.bwv3-drip{display:block;width:100%;height:18px;margin-top:-2px;overflow:visible}
+.bwv3-drip-e,.bwv3-drip-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.bwv3-starter{fill:none;stroke:var(--chalk);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.bwv3.is-still .bwv3-drip,.bwv3.is-still .bwv3-nailrow{display:none}
+/* bg: a row of nail heads along the starter strip; the ones near the pointer lift off the strip and turn their bright side up */
+.bwv3-nailrow{display:flex;justify-content:space-between;height:12px;margin-top:-13px;padding:0 1.2%;pointer-events:none}
+.bwv3-nail{width:10px;height:10px;overflow:visible;will-change:transform}
+.bwv3-nail-h{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.2}
+.bwv3-nail-g{fill:none;stroke:#fff;stroke-width:1.2;stroke-linecap:round;opacity:.9}

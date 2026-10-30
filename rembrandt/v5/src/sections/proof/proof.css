@@ -16,7 +16,7 @@
 .pv2{background:#fff;color:var(--ink);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,112px);
   padding:clamp(5rem,3rem + 7vw,9rem) var(--gutter);align-items:start}
 .pv2-head{position:sticky;top:calc(var(--nav-h) + 40px);display:grid;gap:14px;justify-items:start}
-.pv2-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;max-width:9ch;margin-bottom:18px}
+.pv2-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:9ch;margin-bottom:18px}
 .pv2-big{display:flex;align-items:baseline;font-weight:800;line-height:.9;letter-spacing:-.05em;color:var(--blue)}
 .pv2-big .num{font-size:clamp(5.5rem,11vw,10rem)}
 .pv2-of{font-size:clamp(1.5rem,2.4vw,2.25rem);letter-spacing:-.02em;color:var(--ink);margin-left:.2em}
@@ -36,7 +36,7 @@
 .pv2-check{grid-area:check;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;color:var(--blue);text-decoration:underline;
   text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);transition:text-decoration-color var(--dur-quick) var(--ease-std)}
 .pv2-check svg{width:18px;height:18px;flex:none;transition:translate var(--dur-quick) var(--ease-std)}
-@media (hover:hover){.pv2-check:hover{text-decoration-color:currentColor}.pv2-check:hover svg{translate:3px 0}}
+@media (hover:hover) and (pointer:fine){.pv2-check:hover{text-decoration-color:currentColor}.pv2-check:hover svg{translate:3px 0}}
 @media (prefers-reduced-motion:no-preference){
   .pv2.is-armed .pv2-row{opacity:0;translate:0 6px}
   .pv2.is-armed .pv2-row::before{transform:scaleX(0)}
@@ -77,7 +77,7 @@
 .pv2-ul .rx-h{fill:none;stroke:var(--chalk);stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke;clip-path:inset(0 100% 0 0);transition:clip-path .18s var(--ease-x)}
 .pv2-check .rx-h{clip-path:inset(0 0 0 0)}
 .pv2-check:not(:hover):not(:focus-visible) .rx-h{clip-path:inset(0 100% 0 0)}
-@media (hover:hover){.pv2-check:hover .pv2-ul .rx-h{animation:hx-snap .26s .14s ease-out}}
+@media (hover:hover) and (pointer:fine){.pv2-check:hover .pv2-ul .rx-h{animation:hx-snap .26s .14s ease-out}}
 .pv2-tick{right:-24px;top:50%;width:20px;height:20px;translate:0 -50%}
 .pv2-tick .rx-p{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;opacity:0}
 .pv2-check.is-press .pv2-tick .rx-p{animation:pv-tick .45s var(--ease-x) forwards}
@@ -95,7 +95,7 @@
 .pv3-courses path{fill:none;stroke:oklch(1 0 0 / .05);stroke-width:1.5}
 .pv3-in{position:relative;max-width:1240px;margin:0 auto;display:grid;gap:clamp(36px,5vw,64px)}
 .pv3-kick{font-size:.875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sun)}
-.pv3-h{margin-top:10px;font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.025em;max-width:16ch}
+.pv3-h{margin-top:10px;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:16ch}
 .pv3-board{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(28px,4vw,56px) clamp(20px,3vw,40px);align-items:end}
 .pv3-stat{grid-column:span 2;display:grid;gap:12px;justify-items:start}
 .pv3-stat--xl{grid-column:span 3}
@@ -116,7 +116,7 @@
 .pv3-google{position:relative;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:#fff;text-decoration:underline;text-decoration-color:oklch(1 0 0 / .35);text-underline-offset:6px}
 .pv3-stars{left:0;bottom:calc(100% - 4px);width:110px;height:16px}
 .pv3-st{fill:var(--sun);opacity:0;transform:translateX(-28px);transition:opacity .15s var(--ease-x) calc(var(--i) * 30ms),transform .25s var(--ease-x) calc(var(--i) * 30ms)}
-@media (hover:hover){.pv3-google:hover .pv3-st{opacity:1;transform:none}}
+@media (hover:hover) and (pointer:fine){.pv3-google:hover .pv3-st{opacity:1;transform:none}}
 .pv3-google:focus-visible .pv3-st{opacity:1;transform:none}
 .pv3-google.is-press .pv3-st{opacity:1;transform:none;animation:pv3-pop .3s var(--ease-spring) calc(var(--i) * 40ms)}
 .pv3-st path{transform-box:fill-box;transform-origin:50% 50%}

@@ -1,0 +1,122 @@
+/* Backups B1-B3 of the call section: the versions as they stood before the 2026-10-30 audit round, verbatim except the prefix cl -> bcl. Never edit. */
+/* CALL (PLAN-V7 §6), the close (peak-end, S1452): one primary action, the phone. v1 anatomy F9/F14 + OFFF two-tone
+   wordmark + a gutter whose drops gather and fall to the button (gooey pinch-off, S1350); v2 [BANK] Shazam-like
+   morphing button: the round call morphs into a house-shaped card; v3 [BANK] Q114 giant marquee CTA on a standing-seam
+   roof band with a chimney. The NAP record lives in the shared footer below (Bakstad #319). */
+.bcl{position:relative;overflow:clip}
+
+/* ---------- v1 */
+.bcl1{--vbg:var(--blue);background:var(--blue);color:#fff;padding:0 0 calc(clamp(2rem,1rem + 3vw,4rem) + var(--mbar))}
+.bcl1-gut{display:block;width:100%;height:clamp(60px,9vw,110px)}
+.bcl1-fascia{stroke:oklch(1 0 0 / .5);stroke-width:2}
+.bcl1-trough{fill:#e8ecf4;stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.bcl1-lip{fill:none;stroke:#fff;stroke-width:5;vector-effect:non-scaling-stroke}
+.bcl1-hangers path{stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.bcl1-inner{display:grid;gap:22px;justify-items:start;max-width:1280px;margin:0 auto;padding:clamp(2.5rem,1.5rem + 4vw,5rem) var(--gutter) 0}
+.bcl1-kick{font-weight:700;font-size:.9375rem;color:var(--on-blue-muted)}
+.bcl1-h{font-size:clamp(2.6rem,1.6rem + 4.4vw,6rem);font-weight:850;line-height:.98;letter-spacing:-.045em;max-width:14ch;text-wrap:balance}
+.bcl1-nw{white-space:nowrap}
+.bcl1-p{font-size:var(--t-lead);line-height:1.45;max-width:46ch}
+.bcl1-live{display:block;color:var(--on-blue-muted)}
+.bcl1-act{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:8px}
+.bcl1-drops{position:absolute;left:0;top:calc(clamp(60px,9vw,110px) * .3 - 4px);width:120px;height:600px;pointer-events:none;display:none;overflow:visible}
+.bcl1-lipg{fill:#e8ecf4}
+.bcl1-d{fill:var(--chalk)}
+.bcl1-fall{fill:var(--chalk);stroke:var(--ink);stroke-width:1.2;opacity:0}
+.bcl1-call{font-size:1.25rem;min-height:64px;padding:0 32px 0 26px}
+.bcl1-cs{left:0;top:0;width:100%;height:100%}
+.bcl1-cs .rx-h{fill:var(--chalk);stroke:var(--ink);stroke-width:1.2;opacity:0;transform:translateY(-14px);transition:opacity .2s var(--ease-x),transform .25s var(--ease-x)}
+.bcl1-cs .rx-p{fill:none;stroke:#fff;stroke-width:2;opacity:0;transform-origin:center;transform-box:fill-box}
+@media (hover:hover){.bcl1-call:hover .bcl1-cs .rx-h{opacity:1;transform:translateY(-4px)}}
+.bcl1-call:focus-visible .bcl1-cs .rx-h{opacity:1;transform:translateY(-4px)}
+.bcl1-call.is-press .bcl1-cs .rx-p{animation:bcl-splash .45s ease-out}
+@keyframes bcl-splash{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+.bcl1-addr{display:inline-flex;align-items:center;gap:10px;min-height:48px;font-weight:700;color:#fff}
+.bcl1-pin{width:20px;height:25px;overflow:visible}
+.bcl1-pin path{fill:var(--sun);stroke:var(--ink);stroke-width:1.6}
+.bcl1-pin circle{fill:var(--ink)}
+.bcl1-pin{transition:transform .25s var(--ease-spring)}
+@media (hover:hover){.bcl1-addr:hover .bcl1-pin{transform:translateY(-6px)}}
+.bcl1-addr:focus-visible .bcl1-pin{transform:translateY(-6px)}
+.bcl1-addr.is-press .bcl1-pin{animation:bcl-pin .35s var(--ease-spring)}
+@keyframes bcl-pin{0%{transform:translateY(-6px)}50%{transform:translateY(2px) scaleY(.85)}100%{transform:none}}
+.bcl1-word{position:relative;display:grid;margin:clamp(40px,7vw,96px) 0 0;font-size:clamp(3.2rem,15.6vw,15rem);font-weight:900;letter-spacing:-.05em;line-height:.8;white-space:nowrap;text-align:center;user-select:none}
+.bcl1-word span{grid-area:1/1}
+.bcl1-word span:first-child{color:transparent;-webkit-text-stroke:2px oklch(1 0 0 / .35)}
+.bcl1-word span:last-child{color:#fff;clip-path:inset(0 0 52% 0)}
+
+/* ---------- v2 (the morph is GSAP string interpolation between two 48-point paths of equal structure) */
+.bcl2{--vbg:#141c3d;background:linear-gradient(to bottom,#0b1f4d,#25346e 70%,#3b3f78);color:#fff;padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
+.bcl2-dusk{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
+.bcl2-dusk path{fill:#0b1328}
+.bcl2-win rect{fill:var(--sun);opacity:.8}
+.bcl2-inner{position:relative;display:grid;justify-items:center;gap:18px;max-width:1100px;margin:0 auto;text-align:center}
+.bcl2-h{font-size:clamp(2.6rem,1.6rem + 4.4vw,6rem);font-weight:850;line-height:.98;letter-spacing:-.045em}
+.bcl2-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
+.bcl2-stage{position:relative;width:min(100%,600px);aspect-ratio:600/420;margin-top:12px}
+.bcl2-shape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.bcl2-body{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.bcl2-ripple{fill:none;stroke:var(--sun);stroke-width:2;opacity:0}
+.bcl2-call{position:absolute;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;gap:8px;color:var(--ink);text-decoration:none;font-weight:800}
+.bcl2-hs{width:64px;height:64px}
+.bcl2-hs path{fill:var(--ink)}
+.bcl2-num{font-size:1.25rem;letter-spacing:-.01em}
+.bcl2-card{position:absolute;inset:26% 9% 7%;display:grid;align-content:center;color:var(--ink);text-align:left}
+.bcl2-card[hidden]{display:none}
+.bcl2-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.bcl2-list li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:12px;align-items:baseline;font-size:1rem;line-height:1.35}
+.bcl2-list b{font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase}
+.bcl2-list a{font-weight:800;color:var(--ink)}
+.bcl2.is-open .bcl2-call{opacity:0;visibility:hidden}
+.bcl2-tog{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid #fff;border-radius:999px;background:none;color:#fff;font-weight:700;cursor:pointer}
+.bcl2-tog-i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.bcl2-tog .i-x{display:none}
+/* hover redraws the toggle's icon stroke by stroke (house outline, or the crossed rafters when open); press morphs the card */
+.bcl2-tog-i path{stroke-dasharray:100;stroke-dashoffset:0}
+@media (hover:hover){.bcl2-tog:hover .bcl2-tog-i path{animation:bcl-redraw .4s var(--ease-x)}}
+@keyframes bcl-redraw{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}
+.bcl2.is-open .bcl2-tog .i-x{display:block}.bcl2.is-open .bcl2-tog .i-open{display:none}
+@media (hover:hover){.bcl2-tog:hover{background:oklch(1 0 0 / .12)}}
+/* R36 press: the handset buzzes sideways like a phone on vibrate (Family V2 already wobbles a handset by rotation) */
+.bcl2-call.is-press .bcl2-hs{animation:bcl-buzz .32s steps(8)}
+@keyframes bcl-buzz{0%,100%{translate:0 0}12%,62%{translate:-3px 0}37%,87%{translate:3px 0}}
+@media (max-width:640px){.bcl2-card{inset:24% 6% 5%}.bcl2-list li{grid-template-columns:1fr;gap:2px}.bcl2-list{gap:6px}.bcl2-list li{font-size:.875rem}}
+
+/* ---------- v3 */
+.bcl3{--vbg:#fff;background:#fff;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) 0 calc(clamp(3rem,2rem + 3vw,5rem) + var(--mbar))}
+.bcl3-top{display:grid;gap:16px;max-width:1280px;margin:0 auto clamp(48px,7vh,88px);padding:0 var(--gutter)}
+.bcl3-h{font-size:clamp(2.6rem,1.6rem + 4.4vw,6rem);font-weight:850;line-height:.98;letter-spacing:-.045em}
+.bcl3-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--muted)}
+.bcl3-cs{left:0;top:0;width:100%;height:100%}
+.bcl3-cs .rx-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2;opacity:0;transition:opacity .2s var(--ease-x)}
+.bcl3-cs .rx-p{fill:oklch(0.7 0.02 262 / .6);opacity:0;transform-origin:center;transform-box:fill-box}
+@media (hover:hover){.bcl3-call:hover .bcl3-cs .rx-h{opacity:1}}
+.bcl3-call:focus-visible .bcl3-cs .rx-h{opacity:1}
+.bcl3-call.is-press .bcl3-cs .rx-p{animation:bcl-puff .5s ease-out}
+@keyframes bcl-puff{0%{opacity:1;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-14px) scale(1.6)}}
+.bcl3-pause{display:grid;place-items:center;width:48px;height:48px;padding:0;border:2px solid var(--ink);border-radius:50%;background:none;color:var(--ink);cursor:pointer}
+.bcl3-pause svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.bcl3-pause .i-play{fill:currentColor;stroke:none}
+.bcl3-pause[aria-pressed="false"] .i-play,.bcl3-pause[aria-pressed="true"] .i-pause{display:none}
+.bcl3-pause .i-pause{stroke-dasharray:12}
+@media (hover:hover){.bcl3-pause:hover .i-pause{animation:bcl-draw .25s var(--ease-x)}}
+@keyframes bcl-draw{from{stroke-dashoffset:12}}
+/* R40 press: the icon bounces inside the ring */
+.bcl3-pause.is-press svg{animation:bcl-bounce .35s var(--ease-spring)}
+@keyframes bcl-bounce{0%{translate:0 0}35%{translate:0 -6px}100%{translate:0 0}}
+html[data-motion="reduced"] .bcl3-pause{display:none}
+.bcl3-band{position:relative;display:block;height:clamp(140px,19vw,300px);background:var(--ink);color:#fff;text-decoration:none;overflow:hidden}
+.bcl3-roof{position:absolute;inset:0;width:100%;height:100%}
+#bcl3-seam path{stroke:oklch(1 0 0 / .14);stroke-width:3}
+.bcl3-band::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,oklch(1 0 0 / .14) 45%,transparent 60%);transform:translateX(-100%);transition:transform .8s var(--ease-x)}
+@media (hover:hover){.bcl3-band:hover::before{transform:translateX(100%)}}
+.bcl3-chim{will-change:transform;position:absolute;right:clamp(24px,8vw,140px);bottom:100%;width:clamp(48px,6vw,84px);height:auto;margin-bottom:-2px;overflow:visible}
+.bcl3-band{overflow:visible}
+.bcl3-stack{fill:#b85a38;stroke:var(--ink);stroke-width:3}
+.bcl3-cap{fill:var(--shingle);stroke:var(--ink);stroke-width:3}
+.bcl3-brick{stroke:var(--ink);stroke-width:1.5;opacity:.45}
+.bcl3-smoke circle{fill:oklch(0.85 0.01 262 / .7)}
+.bcl3-track{position:absolute;left:0;top:50%;display:flex;white-space:nowrap;translate:0 -50%;font-size:clamp(60px,13vw,272px);font-weight:900;letter-spacing:-.04em;line-height:1}
+.bcl3-it{display:inline-flex;align-items:center;padding-right:.4em}
+.bcl3-it i{display:inline-block;width:.32em;height:.32em;margin-left:.4em;background:var(--sun);clip-path:polygon(50% 0,100% 60%,100% 100%,0 100%,0 60%)}
+.bcl3-band:focus-visible{outline:4px solid var(--sun);outline-offset:-4px}

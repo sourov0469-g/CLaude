@@ -104,27 +104,43 @@ const P = {
   },
 };
 
-// host section id -> [profile, type]. Reviews never hosts one, so Constellation keeps every pixel.
-export const DIVIDERS = { hero: ['roofline', 'rise'], work: ['shingles', 'hang'], family: ['chevrons', 'hang'], how: ['rafters', 'hang'], area: ['steps', 'hang'], call: ['scales', 'hang'], foot: ['gutter', 'hang'] };
+// R3 C5 (S1498 Rhythm, S1314 §1): one entry per boundary, [host, profile, type, height in px at 1440]. The shape is always
+// drawn in the DARKER of the two grounds (the cadence alternates light and dark), so a pale band never hangs over a dark
+// version. Types: hang = from the host's top edge, in the ground above (--prev-bg); rise = up from the host's bottom
+// edge, in the ground below (--next-bg); drop = below the host's bottom edge, in the host's own ground (Reviews owns its
+// edge, drawn below its box, so the kept Constellation's own box is exactly as it was). Rise profiles that
+// are drawn as hangs are flipped (flip). Each boundary has its own height, so the cadence varies down the page.
+export const DIVIDERS = [
+  ['hero', 'roofline', 'rise', 104],
+  ['proof', 'shingles', 'drop', 56],
+  ['work', 'chevrons', 'rise', 80, 'flip'],
+  ['how', 'rafters', 'hang', 120],
+  ['how', 'steps', 'rise', 64, 'flip'],
+  ['call', 'scales', 'hang', 72],
+  ['foot', 'gutter', 'hang', 48],
+];
 
 export function initDividers() {
   const rm = matchMedia('(prefers-reduced-motion: reduce)'), fine = matchMedia('(hover: hover) and (pointer: fine)');
-  for (const [id, [name, type]] of Object.entries(DIVIDERS)) {
+  for (const [id, name, type, hpx, flip] of DIVIDERS) {
     const host = document.getElementById(id); if (!host) continue;
-    if (type === 'hang') host.dataset.div = name; else host.dataset.divRise = name;
-    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', `div div--${type} div--${name}`); svg.setAttribute('fill-rule', 'evenodd');
+    const hv = `clamp(${Math.round(hpx * 0.5)}px,${(hpx / 14.4).toFixed(2)}vw,${hpx}px)`;
+    if (type === 'hang') { host.dataset.div = name; host.style.setProperty('--div-h', hv); }
+    else if (type === 'rise') { host.dataset.divRise = name; host.style.setProperty('--div-hr', hv); }
+    else { host.dataset.divDrop = name; host.style.setProperty('--div-hd', hv); const nx = host.nextElementSibling; if (nx) { nx.classList.add('after-drop'); nx.style.setProperty('--div-hd', hv); } }
+    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', `div div--${type} div--${name}${flip ? ' div--flip' : ''}`); svg.setAttribute('fill-rule', 'evenodd');
     svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false'); svg.setAttribute('preserveAspectRatio', 'none');
     // hanging profiles cast a soft shadow line 4px below their edge (shingles read as shingles, not a comb)
-    const shade = type === 'hang' ? document.createElementNS(NS, 'path') : null;
+    const shade = type !== 'rise' || flip ? document.createElementNS(NS, 'path') : null;
     if (shade) { shade.setAttribute('class', 'div-shade'); shade.setAttribute('transform', 'translate(0 4)'); svg.append(shade); }
-    const path = document.createElementNS(NS, 'path'); svg.append(path); host.prepend(svg);
+    const path = document.createElementNS(NS, 'path'); svg.append(path); if (type === 'hang') host.prepend(svg); else host.append(svg);
     const st = { t: rm.matches ? 1 : 0, W: 1, H: 1, px: -1e4, amp: 0, ampT: 0, raf: 0 };
     const lift = x => (st.amp < 0.01 ? 0 : st.amp * Math.max(0, 1 - Math.abs(x - st.px) / 140) ** 2);
     const render = () => { const d = P[name](st.t, st.W, st.H, lift); path.setAttribute('d', d); if (shade) shade.setAttribute('d', d); };
     const size = () => { const r = svg.getBoundingClientRect(); st.W = Math.max(1, Math.round(r.width)); st.H = Math.max(1, Math.round(r.height)); svg.setAttribute('viewBox', `0 0 ${st.W} ${st.H}`); render(); };
     new ResizeObserver(size).observe(svg); size();
     // Q53: scrub "top bottom" -> the profile is complete well inside reachable scroll (R8 production fix)
-    const trig = type === 'rise' ? { trigger: host, start: 'bottom bottom', end: 'bottom 45%' } : { trigger: host, start: 'top bottom', end: 'top 40%' };
+    const trig = type === 'hang' ? { trigger: host, start: 'top bottom', end: 'top 40%' } : type === 'rise' ? { trigger: host, start: 'bottom bottom', end: 'bottom 45%' } : { trigger: host, start: 'bottom bottom', end: 'bottom 40%' };
     const p = { t: st.t };
     const tw = gsap.to(p, { t: 1, ease: 'none', paused: rm.matches, scrollTrigger: rm.matches ? undefined : { ...trig, scrub: true }, onUpdate: () => { st.t = p.t; render(); } });
     rm.addEventListener('change', () => { if (rm.matches) { tw.scrollTrigger && tw.scrollTrigger.disable(); st.t = 1; render(); } else { tw.scrollTrigger && tw.scrollTrigger.enable(); } });

@@ -10,7 +10,6 @@ import Lenis from 'lenis';
 import { initDepth } from './depth.js';
 import { initMagnet } from './magnet.js';
 import { initCompanion } from './companion.js';
-import { initCursorFx } from './cursorfx.js';
 import { initDividers } from './dividers.js';
 
 gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
@@ -57,6 +56,7 @@ function mount(sec, v, swap) {
     return init ? init(root, { ...ctx.conditions, swap, sec, id, ctx }) : undefined;
   }, root);
   live.set(id, { mm, v });
+  const bk = String(v)[0] === 'b'; sec.classList.toggle('on-bk', bk); if (bk) showBk(sec, true);
   paintBg(sec, root);
 }
 // PLAN-V7 §4b: each section paints its active version's background (--vbg on the version root, else its computed
@@ -74,7 +74,7 @@ function paintBg(sec, root) {
 const announce = t => { const a = document.getElementById('announce'); a.textContent = ''; requestAnimationFrame(() => { a.textContent = t; }); };
 function setUrl() {
   const u = new URL(location.href);
-  const v = [...live].filter(([, s]) => s.v !== 1).map(([id, s]) => id + s.v).join(',');
+  const v = [...live].filter(([id, s]) => s.v !== DEF(id)).map(([id, s]) => id + s.v).join(',');
   if (v) u.searchParams.set('v', v); else u.searchParams.delete('v');
   try { history.replaceState(null, '', u); } catch (e) { /* file:// in some browsers */ }
 }
@@ -82,15 +82,37 @@ function setUrl() {
 // T hides or shows the controls, R resets to defaults. One knob per section (its version).
 const KEY = 'tweaks-rembrandt-home';
 const store = { get() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* private mode */ } } };
-function save() { const o = { companion: store.get().companion }; for (const [id, s] of live) if (s.v !== 1) o[id] = s.v; store.set(o); }
-function readUrl() { // ?v=hero2,proof3 (strict: unknown ids or versions are ignored)
+function save() { const o = { companion: store.get().companion }; for (const [id, s] of live) if (s.v !== DEF(id)) o[id] = s.v; store.set(o); }
+// versions are strings: '1'-'5' visible, 'b1'-'b3' the backups (audit pack 2026-10-30 A2); each section's default is its
+// audit winner (data-def, set by the build)
+const DEF = id => document.getElementById(id).dataset.def || '1';
+const valid = (id, v) => !!(MODS[id] && document.getElementById(`v-${id}-${v}`));
+function readUrl() { // ?v=hero2,proofb1 (strict: unknown ids or versions are ignored)
   const out = {}; let raw = '';
   try { raw = new URL(location.href).searchParams.get('v') || ''; } catch (e) { return out; }
-  for (const part of raw.split(',')) { const m = /^([a-z]+)([123])$/.exec(part.trim()); if (m && MODS[m[1]]) out[m[1]] = +m[2]; }
+  for (const part of raw.split(',')) { const m = /^([a-z]+?)([1-5]|b[1-3])$/.exec(part.trim()); if (m && valid(m[1], m[2])) out[m[1]] = m[2]; }
   return out;
 }
+// the hidden Backup buttons: the picker's "more" button (or the B key for every section) shows them; a section showing a
+// backup keeps its backup buttons visible so the way back is in view
+function showBk(sec, on) {
+  const b = sec.querySelector('.pick-more'); if (!b) return;
+  on = on ?? b.getAttribute('aria-expanded') !== 'true';
+  if (!on && sec.classList.contains('on-bk')) return;
+  b.setAttribute('aria-expanded', String(on)); sec.querySelector('.pick').classList.toggle('show-bk', on); placeInd(sec);
+}
+// R3 D7: the picker's sliding indicator sits under the checked label; the glyph plays once on a switch
+function placeInd(sec, play) {
+  const pk = sec.querySelector('.pick'); let ind = pk.querySelector('.pick-ind');
+  if (!ind) { ind = document.createElement('span'); ind.className = 'pick-ind'; ind.setAttribute('aria-hidden', 'true'); pk.classList.add('has-ind', 'no-anim'); pk.prepend(ind); requestAnimationFrame(() => requestAnimationFrame(() => pk.classList.remove('no-anim'))); }
+  const l = pk.querySelector('input:checked + label'); if (!l || !l.offsetParent) { ind.style.opacity = '0'; return; }
+  ind.style.opacity = ''; ind.style.translate = `${l.offsetLeft}px 0`; ind.style.top = `${l.offsetTop}px`;
+  if (play) { pk.classList.remove('is-sw'); void pk.offsetWidth; pk.classList.add('is-sw'); clearTimeout(pk._sw); pk._sw = setTimeout(() => pk.classList.remove('is-sw'), 320); }
+}
 export function switchTo(sec, v) {
+  v = String(v);
   const id = sec.dataset.section, cur = live.get(id);
+  if (!valid(id, v)) return;
   if (!cur || cur.v === v) return;
   const before = sec.getBoundingClientRect().top;
   if (lenis) lenis.stop();
@@ -102,8 +124,10 @@ export function switchTo(sec, v) {
   if (lenis) { lenis.scrollTo(y, { immediate: true, force: true }); lenis.start(); } else window.scrollTo(0, y);
   ScrollTrigger.update();
   const p = sec.querySelector(`input[value="${v}"]`); if (p && !p.checked) p.checked = true;
+  placeInd(sec, true);
   setUrl(); save();
-  announce(`${sec.querySelector('legend').textContent.replace(': choose a version', '')}: version ${v} of 3`);
+  const n = sec.querySelectorAll('.pick > input').length;
+  announce(`${sec.querySelector('legend').textContent.replace(': choose a version', '')}: ${v[0] === 'b' ? `backup ${v.slice(1)}` : `version ${v} of ${n}`}`);
 }
 
 export function boot(mods) {
@@ -117,7 +141,7 @@ function start(mods) {
   document.querySelectorAll('img[data-img][src]').forEach(i => { IMG[i.dataset.img] = IMG[i.dataset.img] || i.getAttribute('src'); });
   ORDER = [...document.querySelectorAll('[data-section]')];
   for (const sec of ORDER) { // version 1 is live markup; keep a pristine copy so it can come back
-    const t = document.createElement('template'); t.id = `tpl-${sec.dataset.section}-1`;
+    const t = document.createElement('template'); t.id = `tpl-${sec.dataset.section}-${sec.dataset.def || 1}`;
     t.innerHTML = sec.querySelector('.stage').innerHTML; document.body.append(t);
   }
   startLenis();
@@ -126,26 +150,32 @@ function start(mods) {
   const flag = () => { document.documentElement.dataset.motion = RM.matches ? 'reduced' : 'full'; };
   flag(); RM.addEventListener('change', flag);
   const saved = store.get(), url = readUrl();
-  const want = Object.keys(url).length ? url : Object.fromEntries(Object.entries(saved).filter(([id, v]) => MODS[id] && [1, 2, 3].includes(v)));
+  const want = Object.keys(url).length ? url : Object.fromEntries(Object.entries(saved).filter(([id, v]) => id !== 'companion' && valid(id, String(v))).map(([id, v]) => [id, String(v)]));
   initDividers();
-  for (const sec of ORDER) mount(sec, want[sec.dataset.section] || 1, !!want[sec.dataset.section] && want[sec.dataset.section] !== 1);
+  for (const sec of ORDER) { const id = sec.dataset.section, w = want[id]; mount(sec, w || DEF(id), !!w && w !== DEF(id)); }
   for (const sec of ORDER) {
     const p = sec.querySelector(`input[value="${live.get(sec.dataset.section).v}"]`); if (p) p.checked = true;
-    sec.querySelector('.pick').addEventListener('change', e => switchTo(sec, +e.target.value));
+    sec.querySelector('.pick').addEventListener('change', e => switchTo(sec, e.target.value));
+    const more = sec.querySelector('.pick-more'); if (more) more.addEventListener('click', () => showBk(sec));
+    placeInd(sec);
   }
-  // keys 1, 2, 3 switch the section in view (S1303 picker spec); T and R per S0736
+  addEventListener('resize', () => ORDER.forEach(s => placeInd(s)));
+  // keys 1-5 switch the section in view (S1303 picker spec); B shows every section's backup buttons; T and R per S0736
   let inView = ORDER[0];
   for (const sec of ORDER) ScrollTrigger.create({ trigger: sec, start: 'top center', end: 'bottom center', onToggle: s => { if (s.isActive) inView = sec; } });
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable]')) return;
-    if (/^[123]$/.test(e.key)) switchTo(inView, +e.key);
+    if (/^[1-5]$/.test(e.key)) switchTo(inView, e.key);
+    else if (e.key === 'b' || e.key === 'B') { const on = !document.documentElement.classList.toggle('bk-shown') ? false : true; for (const sec of ORDER) showBk(sec, on); }
     else if (e.key === 't' || e.key === 'T') document.documentElement.classList.toggle('picks-off');
-    else if (e.key === 'r' || e.key === 'R') { for (const sec of ORDER) if (live.get(sec.dataset.section).v !== 1) switchTo(sec, 1); store.set({ companion: store.get().companion }); }
+    else if (e.key === 'r' || e.key === 'R') { for (const sec of ORDER) if (live.get(sec.dataset.section).v !== DEF(sec.dataset.section)) switchTo(sec, DEF(sec.dataset.section)); store.set({ companion: store.get().companion }); }
   });
   // one filled call per view (S1435, G6 #1): the nav's call button waits until the hero's own has scrolled away
   const nav = document.querySelector('.nav'), hero = document.getElementById('hero');
   if (nav && hero) ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom 35%', onToggle: s => nav.classList.toggle('nav--quiet', s.isActive) });
-  initDepth(); initMagnet(); initCompanion(store); initCursorFx();
+  // R3 D11: the per-section cursor effects are retired (Removal Test, S1314: the companion's mood accessories already do
+  // their job; S1331: no trail or ripple layer); js/cursorfx.js is kept, unmounted
+  initDepth(); initMagnet(); initCompanion(store);
   // PLAN-V7 §4d: every reaction element (.rx) gets a press state on pointer-down and on Enter/Space, separate from
   // its hover state; the section's CSS draws the press. One delegated listener for the page.
   const press = e => {

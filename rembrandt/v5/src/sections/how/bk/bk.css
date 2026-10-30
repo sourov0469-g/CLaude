@@ -1,0 +1,217 @@
+/* Backups B1-B3 of the how section: the versions as they stood before the 2026-10-30 audit round, verbatim except the prefix hw -> bhw. Never edit. */
+/* HOW. Facts: 1 call Rachel, Monday to Friday 9 to 5; 2 a written, line-by-line estimate, nothing starts without written
+   approval; 3 the roof, Owens Corning Platinum Preferred, $2M liability insurance. v1 ⟦S1325⟧ progress spine as a
+   downspout; v2 [BANK] UZIK story pager (P74) over three drawn scenes; v3 [BANK] Q409 deliverable chips + Q411 three
+   verbs + Q91 animated icons, joined by a roofer's ladder. */
+.bhw{position:relative;overflow:clip}
+.bhw-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.bhw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
+
+/* ---------- v1: the spine is a downspout that fills with water as you read; hangers are the step markers */
+.bhw1{--vbg:var(--sky);background:var(--sky);color:var(--ink);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+/* bg: faint rain behind the steps, drifting with scroll (data-sy) and leaning with pointer depth (data-pd) */
+.bhw1-rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#bhw1-rn path{stroke:var(--blue);stroke-width:1.6;stroke-linecap:round;opacity:.09}
+.bhw1-head,.bhw1-body{z-index:1}
+.bhw1-head{position:sticky;top:calc(var(--nav-h) + 48px);align-self:start;display:grid;gap:14px}
+.bhw1-body{position:relative;padding-left:92px}
+.bhw1-pipe{position:absolute;left:0;top:0;width:92px;height:100%;overflow:visible;pointer-events:none}
+.bhw1-gut{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.bhw1-tube{fill:#fff;stroke:var(--ink);stroke-width:3}
+.bhw1-water{fill:var(--chalk)}
+.bhw1-hangers path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transition:transform .2s var(--ease-x)}
+.bhw1-hangers path.is-on{stroke:var(--blue)}
+.bhw1-drop{fill:var(--chalk);stroke:var(--ink);stroke-width:1.5}
+.bhw1-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(72px,14vh,160px)}
+.bhw1-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:baseline;scroll-margin-top:calc(var(--nav-h) + 24px)}
+.bhw1-n{font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.bhw1-t{font-size:clamp(1.75rem,1.2rem + 2vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:oklch(0.25 0.06 262 / .55);transition:color .2s var(--ease-x)}
+.bhw1-step[aria-current="step"] .bhw1-t,.bhw1-step.is-past .bhw1-t{color:var(--ink)}
+.bhw1-p{margin-top:10px;font-size:var(--t-lead);line-height:1.45;max-width:40ch}
+.bhw1-link{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:10px;font-weight:800;font-size:1.25rem;color:var(--blue)}
+/* R25: a gutter-hanger bracket swings down and clamps over the link's corner; press turns its screw */
+.bhw1-hg{right:-30px;top:-10px;width:32px;height:24px;opacity:0;transform:translate(8px,-12px) rotate(28deg);transform-origin:90% 70%;transition:opacity .15s var(--ease-x),transform .28s var(--ease-spring)}
+.bhw1-hg-s,.bhw1-hg-l{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.bhw1-hg-k circle{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.6}
+.bhw1-hg-k path{stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+.bhw1-hg-k{transform-box:fill-box;transform-origin:center}
+@media (hover:hover){.bhw1-link:hover .bhw1-hg{opacity:1;transform:none}}
+.bhw1-link:focus-visible .bhw1-hg{opacity:1;transform:none}
+.bhw1-link.is-press .bhw1-hg{opacity:1;transform:none}
+.bhw1-link.is-press .bhw1-hg-k{animation:bhw-screw .4s var(--ease-x)}
+@keyframes bhw-screw{to{transform:rotate(180deg)}}
+@media (max-width:860px){.bhw1{grid-template-columns:1fr}.bhw1-head{position:static}.bhw1-body{padding-left:64px}.bhw1-pipe{width:64px}}
+
+/* ---------- v2 [BANK] UZIK story pager (P74 Harvest [221]): stacked scenes crossfade 0.4s on the content curve; each
+   step's bar fills 5s linear and that fill IS the dwell; chrome on the house curve at 300ms. Not pinned, nothing sticky. */
+.bhw2{--vbg:#eef3fb;--t-dur:300ms;--t-chrome:cubic-bezier(0.86,0.1,0.14,0.9);--t-diapo:cubic-bezier(0.25,0.1,0.25,1);background:#eef3fb;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.bhw2-in{max-width:1280px;margin:0 auto;display:grid;gap:clamp(28px,4vh,48px)}
+.bhw2-head{display:grid;gap:12px}
+.bhw2-story{position:relative;border-radius:24px;background:#fff;box-shadow:0 0 0 2px var(--ink);overflow:hidden}
+.bhw2-pager{position:relative;z-index:3;display:flex;align-items:flex-start;gap:14px;padding:18px 18px 6px;border-bottom:2px solid var(--ink)}
+.bhw2-tabs{flex:1;min-width:0;display:flex;gap:8px}
+.bhw2-tab{flex:1 1 0;min-width:0;display:grid;gap:10px;min-height:44px;align-content:start;padding:0 0 8px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.bhw2-bar{position:relative;display:block;height:3px;border-radius:2px;background:oklch(0.25 0.06 262 / .15);overflow:hidden}
+.bhw2-prog{position:absolute;inset:0;background:var(--ink);transform:translate3d(calc(-100% - 1px),0,0)}
+.bhw2-prog.is-animating{animation:bhw2-story 5s linear infinite}
+.bhw2-prog.is-done{animation:none;transform:translateZ(0)}
+@keyframes bhw2-story{0%{transform:translate3d(calc(-100% - 1px),0,0)}to{transform:translateZ(0)}}
+.bhw2-tl{font-size:.9375rem;font-weight:700;line-height:1.2;opacity:.5;transition:opacity var(--t-dur) var(--t-chrome)}
+.bhw2-tl .num{color:var(--muted)}
+.bhw2-tab[aria-selected="true"] .bhw2-tl{opacity:1}
+/* R26: a length of step flashing bends around the tab's corner; press snaps it flat, then it re-bends */
+.bhw2-fl{right:-7px;top:-6px;width:22px;height:22px;opacity:0;transition:opacity var(--t-dur) var(--t-chrome)}
+.bhw2-fl path{fill:none;stroke:#8a93a8;stroke-width:3.4;stroke-linecap:square}
+.bhw2-fl-v{transform-box:view-box;transform-origin:19px 3px;transform:rotate(-90deg);transition:transform var(--t-dur) var(--t-chrome)}
+@media (hover:hover){.bhw2-tab:hover .bhw2-fl{opacity:1}.bhw2-tab:hover .bhw2-fl-v{transform:none}}
+.bhw2-tab:focus-visible .bhw2-fl{opacity:1}.bhw2-tab:focus-visible .bhw2-fl-v{transform:none}
+.bhw2-tab.is-press .bhw2-fl{opacity:1}
+.bhw2-tab.is-press .bhw2-fl-v{animation:bhw2-snap .36s var(--t-chrome)}
+@keyframes bhw2-snap{0%{transform:none}35%,65%{transform:rotate(-90deg)}100%{transform:none}}
+/* R27: the pause bars become two shingle tabs; press flips them */
+.bhw2-pause{position:relative;flex:none;display:grid;place-items:center;width:44px;height:44px;margin-top:-10px;padding:0;border:2px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer}
+.bhw2-pause svg{width:18px;height:18px;overflow:visible}
+.bhw2-pz{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.bhw2-py{fill:currentColor}
+.bhw2-pz,.bhw2-py,.bhw2-tb{transition:opacity .15s var(--t-chrome)}
+.bhw2-pause[aria-pressed="false"] .bhw2-py,.bhw2-pause[aria-pressed="true"] .bhw2-pz{display:none}
+.bhw2-tb{opacity:0}
+.bhw2-tb path{fill:var(--shingle);stroke:var(--ink);stroke-width:1.4}
+.bhw2-tb1,.bhw2-tb2{transform-box:fill-box;transform-origin:50% 0}
+@media (hover:hover){.bhw2-pause:hover .bhw2-tb{opacity:1}.bhw2-pause:hover .bhw2-pz,.bhw2-pause:hover .bhw2-py{opacity:0}}
+.bhw2-pause:focus-visible .bhw2-tb{opacity:1}.bhw2-pause:focus-visible .bhw2-pz,.bhw2-pause:focus-visible .bhw2-py{opacity:0}
+.bhw2-pause.is-press .bhw2-tb{opacity:1}
+.bhw2-pause.is-press .bhw2-tb1{animation:bhw2-flip .36s var(--t-chrome)}
+.bhw2-pause.is-press .bhw2-tb2{animation:bhw2-flip .36s var(--t-chrome) .06s}
+@keyframes bhw2-flip{50%{transform:scaleY(-1)}}
+/* the diapo: every step in one grid cell, the visible one fades in over the others */
+.bhw2-diapo{display:grid}
+.bhw2-item{grid-area:1/1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);opacity:0;transition:opacity .4s var(--t-diapo)}
+.bhw2-item.is-visible{opacity:1}
+.bhw2-scene{display:block;width:100%;height:auto;aspect-ratio:960/420;align-self:stretch;background:linear-gradient(#f4f8ff,#fff)}
+.bhw2-cap{display:grid;align-content:center;gap:18px;padding:32px clamp(24px,3vw,44px);border-left:2px solid var(--ink)}
+.bhw2-t{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.6rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}
+.bhw2-cd{display:grid;gap:16px;font-size:var(--t-lead);line-height:1.45;max-width:46ch}
+.bhw2-call{justify-self:start;display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:800;text-decoration:none}
+/* R41: a coiled phone cord stretches out of the link; press lets it spring back */
+.bhw2-cord{left:calc(100% - 4px);top:50%;width:60px;height:18px;margin-top:-9px;opacity:0;transform:scaleX(.18);transform-origin:0 50%;transition:opacity .15s var(--t-chrome),transform .4s var(--ease-spring)}
+.bhw2-cord path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover){.bhw2-call:hover .bhw2-cord{opacity:1;transform:none}}
+.bhw2-call:focus-visible .bhw2-cord{opacity:1;transform:none}
+.bhw2-call.is-press .bhw2-cord{opacity:1;animation:bhw2-coil .4s var(--ease-spring)}
+@keyframes bhw2-coil{0%{transform:none}35%{transform:scaleX(.15)}100%{transform:none}}
+/* the three scenes */
+.bhw2-far path{fill:oklch(0.25 0.06 262 / .06)}
+.bhw2-s2 .bhw2-far path{fill:none;stroke:oklch(0.25 0.06 262 / .08);stroke-width:1.5}
+.bhw2-gr{stroke:var(--ink);stroke-width:3}
+.s1-wall,.s3-wall{fill:#fff;stroke:var(--ink);stroke-width:3}
+.s1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-fas{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
+.s1-win,.s3-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
+.s1-door,.s3-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
+.s1-sign{fill:var(--ink)}
+.s1-hrs{font:800 15px/1 "Epilogue",sans-serif;fill:#fff;letter-spacing:.06em}
+.s1-disc{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.s1-base,.s1-hset{fill:#fff;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-keys{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.s1-hset{transform-box:fill-box;transform-origin:15% 100%}
+/* step 1 plays: the office lights come on, then the handset lifts off its base (the call is answered) */
+.bhw2-item.is-visible .s1-win{animation:bhw2-lit .3s var(--t-chrome) .25s both}
+@keyframes bhw2-lit{to{fill:#ffd36b}}
+.bhw2-item.is-visible .s1-hset{animation:bhw2-lift .5s cubic-bezier(.3,1.5,.5,1) .7s both}
+@keyframes bhw2-lift{to{transform:translate(-6px,-26px) rotate(-14deg)}}
+.s2-plane{fill:#d9b98a;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s2-seam{stroke:oklch(0.25 0.06 262 / .25);stroke-width:2}
+.s2-dim{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
+.s2-blade{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.s2-tk{stroke:var(--ink);stroke-width:1.5}
+.s2-hook{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.s2-case{fill:var(--blue);stroke:var(--ink);stroke-width:3}
+.s2-hub{fill:#fff;stroke:var(--ink);stroke-width:3}
+/* step 2 plays: the tape runs out of its case across the eave, then the dimension lines draw along ridge and rake */
+.bhw2-item.is-visible .s2-tape{animation:bhw2-pull .9s cubic-bezier(.2,.8,.2,1) .2s both}
+@keyframes bhw2-pull{from{transform:translateX(-572px)}}
+.bhw2-item.is-visible .s2-dim{animation:bhw2-draw .5s var(--t-chrome) both}
+.bhw2-item.is-visible .s2-dim1{animation-delay:1s}.bhw2-item.is-visible .s2-dim2{animation-delay:1.3s}
+@keyframes bhw2-draw{from{stroke-dashoffset:900}}
+.s3-sun{fill:var(--sun)}
+.s3-sh{fill:var(--shingle)}
+.s3-crs{fill:none;stroke:oklch(1 0 0 / .22);stroke-width:1.5}
+.s3-edge{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.s3-ridge{fill:none;stroke:var(--ink);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.s3-puff{fill:#fff;stroke:var(--ink);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:50% 100%}
+/* step 3 plays: the finished roof comes down onto the walls, settles, and a puff of dust leaves each eave */
+.bhw2-item.is-visible .s3-roof{animation:bhw2-set .7s cubic-bezier(.3,1.5,.5,1) .2s both}
+@keyframes bhw2-set{from{transform:translateY(-150px);opacity:0}40%{opacity:1}}
+.bhw2-item.is-visible .s3-puff{animation:bhw2-puff .7s ease-out .6s both}
+@keyframes bhw2-puff{0%{opacity:0;transform:scale(.3)}30%{opacity:1}100%{opacity:0;transform:translateY(-8px) scale(1.2)}}
+@media (max-width:900px){
+  .bhw2-item{grid-template-columns:1fr}
+  .bhw2-cap{border-left:0;border-top:2px solid var(--ink);padding:22px 20px 26px}
+}
+@media (max-width:760px){
+  .bhw2-pager{padding:14px 14px 4px;gap:10px}
+  .bhw2-tl{font-size:.8125rem}
+  .bhw2-scene{aspect-ratio:16/9}
+}
+html[data-motion="reduced"] .bhw2-item{transition:none}
+html[data-motion="reduced"] .bhw2-bar,html[data-motion="reduced"] .bhw2-pause{visibility:hidden}
+
+/* ---------- v3: three verbs, each with its own drawn tool and its deliverables; a ladder joins them */
+.bhw3{--vbg:#fff;position:relative;overflow:hidden;background:#fff;color:var(--ink);padding:clamp(5rem,3rem + 6vw,8.5rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.bhw3-raft{position:absolute;inset:-4%;width:108%;height:108%;pointer-events:none;z-index:0}
+.bhw3-raft path{fill:none;stroke:var(--ink);stroke-width:1.5;opacity:.06;vector-effect:non-scaling-stroke}
+.bhw3-head{position:relative;z-index:1;display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,5vh,56px)}
+/* Signal-A index rows: the list is the design. Grid: mono label | giant two-weight line | tool; chips under the line. */
+.bhw3-rows{position:relative;z-index:1;list-style:none;margin:0 auto;padding:0;max-width:1280px}
+.bhw3-row{position:relative;display:grid;grid-template-columns:clamp(96px,10vw,150px) minmax(0,1fr);column-gap:clamp(16px,2.5vw,40px);row-gap:14px;padding:clamp(26px,4vh,44px) clamp(112px,12vw,170px) clamp(26px,4vh,44px) 0}
+.bhw3-ridge{position:absolute;left:0;right:0;top:-12px;width:100%;height:24px;overflow:visible;pointer-events:none}
+.bhw3-rl{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.bhw3-rt{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:.55}
+.bhw3-ro{fill:none;stroke:var(--sun);stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.bhw3-n{grid-row:1 / span 2;align-self:start;margin:.5em 0 0;font-weight:700;font-size:.8125rem;line-height:1.3;letter-spacing:.08em;font-variant-numeric:tabular-nums;text-transform:uppercase;color:var(--muted)}
+.bhw3-n span{display:block;font-size:1.5rem;letter-spacing:0;color:var(--ink);margin-bottom:4px}
+.bhw3 .bhw3-act{position:static}
+.bhw3-act{color:var(--ink);text-decoration:none;font-size:clamp(2.75rem,1.4rem + 5.6vw,7rem);line-height:.95;letter-spacing:-.045em;text-wrap:balance}
+.bhw3-line{display:block}
+.bhw3-v{font-weight:800}
+.bhw3-l{font-weight:300;letter-spacing:-.035em}
+.bhw3-act:focus-visible{outline-offset:6px}
+.bhw3-ico{position:absolute;right:0;top:50%;width:clamp(88px,9vw,128px);height:clamp(88px,9vw,128px);margin-top:calc(clamp(88px,9vw,128px) / -2);overflow:visible;pointer-events:none}
+.bhw3-ico *{transform-box:fill-box}
+.i-base{fill:var(--shingle)}
+.i-hand path{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.i-hand{transform-origin:50% 100%;transition:transform .2s var(--ease-x)}
+.i-ring{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0}
+.i-seg rect{fill:var(--sun);stroke:var(--ink);stroke-width:2.5}
+.i-seg path{stroke:var(--ink);stroke-width:2}
+.i-pin{fill:var(--ink)}
+.i-seg2{transform-origin:0% 50%;transition:transform .25s var(--ease-x)}
+.bhw3-ico--rule .i-seg2{transform:rotate(-150deg)}
+.bhw3-ico--rule .i-seg2{transform-origin:0 50%}
+.i-board{stroke:var(--wood);stroke-width:8;stroke-linecap:round}
+.i-nail path{fill:#8a93a8}
+.i-hammer rect{stroke:var(--ink);stroke-width:2.5}
+.i-hd{fill:var(--shingle)}.i-hl{fill:var(--sun)}
+.i-hammer{transform-origin:100% 100%;transition:transform .2s var(--ease-x)}
+@media (hover:hover){
+  .bhw3-act:hover .i-hand{transform:translateY(-8px) rotate(-6deg)}
+  .bhw3-act:hover .bhw3-ico--rule .i-seg2{transform:rotate(0)}
+  .bhw3-act:hover .i-hammer{transform:rotate(-18deg)}
+}
+.bhw3-act:focus-visible .i-hand{transform:translateY(-8px) rotate(-6deg)}
+.bhw3-act:focus-visible .bhw3-ico--rule .i-seg2{transform:rotate(0)}
+.bhw3-act:focus-visible .i-hammer{transform:rotate(-18deg)}
+.bhw3-act.is-press .i-ring{animation:bhw-ring .2s steps(1) 3}
+@keyframes bhw-ring{0%{opacity:1}50%{opacity:0}}
+.bhw3-act.is-press .i-hand{animation:bhw-shake .3s linear}
+@keyframes bhw-shake{0%,100%{translate:0 0}25%{translate:-2px 0}75%{translate:2px 0}}
+.bhw3-act.is-press .bhw3-ico--rule .i-seg1{animation:bhw-meas .3s var(--ease-x)}
+@keyframes bhw-meas{50%{translate:-6px 0}}
+.bhw3-act.is-press .i-hammer{animation:bhw-strike .3s var(--ease-x)}
+.bhw3-act.is-press .i-nail{animation:bhw-drive .3s var(--ease-x) forwards}
+@keyframes bhw-strike{0%{transform:rotate(-18deg)}40%{transform:rotate(14deg)}100%{transform:rotate(0)}}
+@keyframes bhw-drive{0%,35%{translate:0 0}60%,100%{translate:0 8px}}
+.bhw3-chips{grid-column:2;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.bhw3-chips li{padding:8px 12px;border-radius:999px;background:var(--sky);font-weight:700;font-size:.9375rem;line-height:1.2}
+@media (max-width:700px){.bhw3-row{grid-template-columns:1fr;padding:28px 0 30px}.bhw3-n{grid-row:auto;margin:0;display:flex;gap:10px;align-items:baseline}.bhw3-n span{display:inline;font-size:1.125rem;margin:0}.bhw3-chips{grid-column:1}.bhw3-act{padding-right:84px;display:block}.bhw3-ico{width:72px;height:72px;margin-top:0;top:22px}}

@@ -26,7 +26,7 @@
 .hx1-tab-s{fill:#d99a06;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round}
 .hx1-tab-g{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;opacity:.45}
 .hx1-tab-sp{fill:var(--ink);opacity:0}
-@media (hover:hover){.hx1-call:hover .hx1-tab-flap{opacity:1;transform:none;animation:hx1-flap .9s ease-in-out infinite}}
+@media (hover:hover) and (pointer:fine){.hx1-call:hover .hx1-tab-flap{opacity:1;transform:none;animation:hx1-flap .9s ease-in-out infinite}}
 .hx1-call:focus-visible .hx1-tab-flap{opacity:1;transform:none}
 .hx1-call.is-press .hx1-tab-flap{opacity:1;animation:hx1-slap .35s var(--ease-x) forwards}
 .hx1-call.is-press .hx1-tab-sp1{animation:hx1-speck1 .45s ease-out}
@@ -69,7 +69,7 @@
 .hx2-pitch{left:50%;bottom:calc(100% - 8px);width:40px;height:14px;translate:-50% 0}
 .hx2-pitch-g{transform-box:fill-box;transform-origin:50% 100%;transition:transform .2s var(--ease-x)}
 .hx2-pitch path{fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:44;stroke-dashoffset:44;transition:stroke-dashoffset .25s var(--ease-x)}
-@media (hover:hover){.hx2-est:hover .hx2-pitch path{stroke-dashoffset:0}}
+@media (hover:hover) and (pointer:fine){.hx2-est:hover .hx2-pitch path{stroke-dashoffset:0}}
 .hx2-est:focus-visible .hx2-pitch path,.hx2-est.is-press .hx2-pitch path{stroke-dashoffset:0}
 .hx2-est.is-press .hx2-pitch-g{transform:scaleY(1.9)}
 .hx2-photo{position:relative;margin:0;overflow:hidden;clip-path:polygon(0 var(--rise,30%),100% 0,100% 100%,0 100%)}
@@ -115,7 +115,7 @@
 .hx3-play{display:none;fill:currentColor;stroke:none}
 .hx3.is-held .hx3-bars,.hx3.is-held .hx3-nails{display:none}
 .hx3.is-held .hx3-play{display:block}
-@media (hover:hover){.hx3-pause:hover .hx3-bars{opacity:0}.hx3-pause:hover .hx3-nails{opacity:1;transform:none}}
+@media (hover:hover) and (pointer:fine){.hx3-pause:hover .hx3-bars{opacity:0}.hx3-pause:hover .hx3-nails{opacity:1;transform:none}}
 .hx3-pause.is-press .hx3-nails{opacity:1;animation:hx3-hammer .3s var(--ease-x)}
 @keyframes hx3-hammer{0%{transform:translateY(-5px)}60%{transform:translateY(3px)}100%{transform:translateY(2px)}}
 .hx3-sub{margin:0;font-size:var(--t-lead);line-height:1.45;color:oklch(1 0 0 / .9)}
@@ -126,7 +126,7 @@
 .hx3-sign-b{fill:#fff;stroke:var(--ink);stroke-width:1.5}
 .hx3-sign-post{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
 .hx3-sign-r{fill:none;stroke:var(--blue);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
-@media (hover:hover){.hx3-call:hover .hx3-sign-g{opacity:1;transform:none}}
+@media (hover:hover) and (pointer:fine){.hx3-call:hover .hx3-sign-g{opacity:1;transform:none}}
 .hx3-call:focus-visible .hx3-sign-g{opacity:1;transform:none}
 .hx3-call.is-press .hx3-sign-g{opacity:1;transform:none;animation:hx3-wobble .5s var(--ease-x)}
 @keyframes hx3-wobble{0%{rotate:0deg}25%{rotate:-9deg}55%{rotate:6deg}80%{rotate:-2deg}100%{rotate:0deg}}
@@ -135,7 +135,7 @@
 .hx3-road{left:calc(100% + 8px);top:50%;width:72px;height:16px;translate:0 -50%;overflow:visible}
 .hx3-road-l{fill:none;stroke:var(--sun);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:6 6;clip-path:inset(0 100% 0 0);transition:clip-path .25s var(--ease-x)}
 .hx3-road-a{fill:none;stroke:var(--sun);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s var(--ease-x) .1s}
-@media (hover:hover){.hx3-towns:hover .hx3-road-l{clip-path:inset(0)}.hx3-towns:hover .hx3-road-a{opacity:1}}
+@media (hover:hover) and (pointer:fine){.hx3-towns:hover .hx3-road-l{clip-path:inset(0)}.hx3-towns:hover .hx3-road-a{opacity:1}}
 .hx3-towns:focus-visible .hx3-road-l{clip-path:inset(0)}
 .hx3-towns.is-press .hx3-road-l{clip-path:inset(0)}
 .hx3-towns.is-press .hx3-road-a{opacity:1;animation:hx3-fly .45s var(--ease-x) forwards}

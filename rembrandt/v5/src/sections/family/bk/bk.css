@@ -1,0 +1,108 @@
+/* Backups B1-B3 of the family section: the versions as they stood before the 2026-10-30 audit round, verbatim except the prefix fm -> bfm. Never edit. */
+/* FAMILY (PLAN-V7 §6). v1 [BANK] Q95 Masked Heading: WALKER filled with the crew photo, under drawn roof framing;
+   v2 ⟦S1327⟧ scroll-scrubbed word reveal under a roof that draws with it; v3 ⟦S1362⟧ technical wireframe with
+   annotation pills: a king-post truss whose members carry the family's facts. No portraits (nobody is identified). */
+.bfm{position:relative;overflow:clip}
+
+/* ---------- v1: ink field, the name as a window onto the crew */
+.bfm1{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,56px);padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.bfm1-stage{max-width:1240px;width:100%;margin:0 auto}
+.bfm1-name{will-change:transform;width:100%;height:auto;overflow:visible}
+.bfm1-tx,.bfm1-rim{font:900 300px/1 "Epilogue",sans-serif;letter-spacing:-.02em}
+.bfm1-under{fill:var(--blue)}
+.bfm1-rim{fill:none;stroke:oklch(1 0 0 / .55);stroke-width:2;vector-effect:non-scaling-stroke}
+.bfm1-frame path,.bfm1-frame rect{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bfm1-frame .bfm1-plate{stroke:var(--sun);stroke-width:5}
+.bfm1-frame .bfm1-raf{stroke-width:5}
+.bfm1-frame .bfm1-tie,.bfm1-frame .bfm1-kp,.bfm1-frame .bfm1-web{stroke:oklch(1 0 0 / .55)}
+.bfm1-frame .bfm1-ridge{fill:var(--ink)}
+.bfm1-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px 48px;max-width:1240px;width:100%;margin:0 auto}
+.bfm1-h{grid-column:1/-1;font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.bfm1-facts{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:var(--t-lead);line-height:1.4}
+.bfm1-facts li{display:grid;grid-template-columns:5.2ch minmax(0,1fr);gap:16px;align-items:baseline}
+.bfm1-facts b{color:var(--sun);font-weight:800}
+.bfm1-call{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 22px 0 14px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
+.bfm1-ico{width:32px;height:32px;flex:none;overflow:visible}
+.bfm1-ico-r{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.bfm1-ico-w{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.bfm1-ico-win{fill:var(--sky);stroke:var(--ink);stroke-width:1.5;transition:fill .18s var(--ease-x)}
+.bfm1-ico-door{fill:var(--ink);transform-origin:0 50%;transform-box:fill-box}
+@media (hover:hover){.bfm1-call:hover .bfm1-ico-win{fill:var(--sun)}}
+.bfm1-call:focus-visible .bfm1-ico-win{fill:var(--sun)}
+.bfm1-call.is-press .bfm1-ico-door{animation:bfm-door .35s var(--ease-x)}
+@keyframes bfm-door{0%{transform:scaleX(1)}40%{transform:scaleX(.15)}100%{transform:scaleX(1)}}
+.bfm1-photo{max-width:1240px;width:100%;margin:0 auto;aspect-ratio:1088/801;max-height:70svh}
+.bfm1-photo img{object-position:50% 70%}
+@media (max-width:760px){.bfm1-copy{grid-template-columns:1fr}.bfm1-call{justify-self:start}}
+
+/* ---------- v2: warm white, the statement sharpens word by word while a roof draws over it */
+.bfm2{--vbg:#fffaf0;background:#fffaf0;color:var(--ink);padding:clamp(5rem,3rem + 6vw,9rem) var(--gutter) calc(clamp(5rem,3rem + 6vw,9rem) + var(--mbar))}
+.bfm2-bg{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
+.bfm2-bg path{fill:oklch(0.9 0.03 80 / .55)}
+.bfm2-grid{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:center;max-width:1280px;margin:0 auto}
+.bfm2-photo{position:relative;margin:0}
+/* a plain frame: Hero V2 already crops its photo to a roof pitch, so this one does not (§4, no trick twice) */
+.bfm2-pic{aspect-ratio:4/5;overflow:hidden;background:var(--mist)}
+.bfm2-pic img{width:100%;height:100%;object-fit:cover;object-position:46% 60%}
+.bfm2-text{display:grid;gap:28px}
+.bfm2-house{width:min(100%,560px);height:auto;overflow:visible}
+.bfm2-ridge,.bfm2-eave{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bfm2-eave{stroke:var(--blue);stroke-width:5}
+.bfm2-courses path{stroke:var(--shingle);stroke-width:7;opacity:.85}
+.bfm2-say{font-size:clamp(1.9rem,1.2rem + 2.4vw,3.6rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:22ch;text-wrap:pretty}
+.bfm2-say .w{display:inline-block}
+.bfm2-call{display:inline-flex;align-items:center;gap:12px;justify-self:start;min-height:52px;padding:0 20px 0 24px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none}
+.bfm2-hs{width:28px;height:28px;overflow:visible}
+.bfm2-hs-b{fill:var(--sun);stroke:var(--sun);stroke-width:1.5;stroke-linejoin:round;transform-origin:50% 50%;transform-box:fill-box}
+.bfm2-ring{fill:none;stroke:var(--sun);stroke-width:2.2;stroke-linecap:round;opacity:0}
+@media (hover:hover){.bfm2-call:hover .bfm2-hs-b{animation:bfm-wob .4s ease-in-out}}
+.bfm2-call:focus-visible .bfm2-hs-b{animation:bfm-wob .4s ease-in-out}
+@keyframes bfm-wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}50%{transform:rotate(9deg)}75%{transform:rotate(-5deg)}}
+.bfm2-call.is-press .bfm2-ring{animation:bfm-ring .45s ease-out}
+@keyframes bfm-ring{0%{opacity:1;transform:scale(.8)}100%{opacity:0;transform:scale(1.3)}}
+.bfm2-ring{transform-origin:20px 12px;transform-box:view-box}
+@media (max-width:860px){.bfm2-grid{grid-template-columns:1fr}.bfm2-photo{max-width:420px}}
+
+/* ---------- v3: blueprint blue, a king-post truss whose members carry the facts; plywood deck behind */
+.bfm3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,8rem) + var(--mbar))}
+.bfm3-deck{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#bfm3-ply path{fill:none;stroke:oklch(1 0 0 / .08);stroke-width:1.5}
+.bfm3-deck--hi{inset:auto;left:0;top:0;width:440px;height:440px;will-change:transform;opacity:0;-webkit-mask-image:radial-gradient(circle 220px at 50% 50%,#000,transparent);mask-image:radial-gradient(circle 220px at 50% 50%,#000,transparent);filter:brightness(3);transition:opacity .3s var(--ease-x)}
+/* a 440px window that moves on the compositor; the pattern inside is counter-shifted so it stays registered to the deck */
+.bfm3.is-ptr .bfm3-deck--hi{opacity:1}
+.bfm3-head{position:relative;display:grid;gap:12px;max-width:1240px;margin:0 auto clamp(28px,4vh,48px)}
+.bfm3-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.bfm3-note{font-size:var(--t-lead);line-height:1.4;color:var(--on-blue-muted);max-width:46ch}
+.bfm3-stage{position:relative;max-width:1100px;margin:0 auto;padding:56px 0}
+.bfm3-truss{width:100%;height:auto;overflow:visible}
+.m{fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;cursor:pointer;transition:stroke .22s var(--ease-x),opacity .22s var(--ease-x)}
+.m--plate{fill:var(--sun);stroke:var(--ink);stroke-width:2.5}
+.bfm3-truss.has-m .m{opacity:.35}
+.bfm3-truss.has-m .m.is-on{opacity:1;stroke:var(--sun)}
+.bfm3-truss.has-m .m--plate.is-on{stroke:var(--ink);fill:#fff}
+.bfm3-leads path{fill:none;stroke:oklch(1 0 0 / .7);stroke-width:1.6;stroke-dasharray:5 6;vector-effect:non-scaling-stroke}
+.bfm3-leads path.is-on{stroke:var(--sun);stroke-dasharray:none;stroke-width:2.4}
+.bfm3-pills{position:absolute;inset:0;pointer-events:none}
+.bfm3-pill{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:2px solid #fff;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:.9375rem;white-space:nowrap;cursor:pointer;transition:background-color .18s var(--ease-x),color .18s var(--ease-x),border-color .18s var(--ease-x)}
+.bfm3-pill b{color:var(--sun)}
+.bfm3-pill:nth-child(3){translate:0 -50%}.bfm3-pill:nth-child(4){translate:-100% -50%}
+@media (hover:hover){.bfm3-pill:hover{border-color:var(--sun)}}
+.bfm3-pill[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+.bfm3-pill[aria-pressed="true"] b{color:var(--ink)}
+/* R24: hover lights the member and its leader glows; press drives a roofing tack through the pill's top edge and it
+   stays while the pill is pinned */
+.bfm3-leads path.is-on{filter:drop-shadow(0 0 5px var(--sun))}
+.bfm3-tack{position:absolute;left:14px;top:-15px;width:14px;height:22px;overflow:visible;opacity:0;translate:0 -10px;pointer-events:none;transition:opacity .15s var(--ease-x),translate .25s var(--ease-x)}
+.bfm3-tack-s{fill:none;stroke:#c9cfdb;stroke-width:2.4;stroke-linecap:round}
+.bfm3-tack-h{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.4}
+.bfm3-tack-g{fill:none;stroke:#fff;stroke-width:1.2;stroke-linecap:round}
+.bfm3-pill[aria-pressed="true"] .bfm3-tack{opacity:1;translate:0 0}
+.bfm3-pill[aria-pressed="true"].is-press .bfm3-tack{animation:bfm-tack .3s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bfm-tack{0%{translate:0 -16px;opacity:0}55%{translate:0 2px;opacity:1}100%{translate:0 0}}
+.bfm3-say{position:relative;max-width:1100px;margin:16px auto 0;min-height:1.5em;font-size:var(--t-lead);font-weight:600;text-align:center}
+@media (max-width:900px){
+  .bfm3-stage{padding:0}
+  .bfm3-pills{position:static;display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;pointer-events:auto}
+  .bfm3-pill,.bfm3-pill:nth-child(3),.bfm3-pill:nth-child(4){position:relative;left:auto;top:auto;translate:none;white-space:normal;text-align:left}
+  .bfm3-leads{display:none}
+}

@@ -16,7 +16,7 @@
 .fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-web{stroke:oklch(1 0 0 / .55)}
 .fm1-frame .fm1-ridge{fill:var(--ink)}
 .fm1-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px 48px;max-width:1240px;width:100%;margin:0 auto}
-.fm1-h{grid-column:1/-1;font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.fm1-h{grid-column:1/-1;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
 .fm1-facts{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:var(--t-lead);line-height:1.4}
 .fm1-facts li{display:grid;grid-template-columns:5.2ch minmax(0,1fr);gap:16px;align-items:baseline}
 .fm1-facts b{color:var(--sun);font-weight:800}
@@ -26,7 +26,7 @@
 .fm1-ico-w{fill:#fff;stroke:var(--ink);stroke-width:2.5}
 .fm1-ico-win{fill:var(--sky);stroke:var(--ink);stroke-width:1.5;transition:fill .18s var(--ease-x)}
 .fm1-ico-door{fill:var(--ink);transform-origin:0 50%;transform-box:fill-box}
-@media (hover:hover){.fm1-call:hover .fm1-ico-win{fill:var(--sun)}}
+@media (hover:hover) and (pointer:fine){.fm1-call:hover .fm1-ico-win{fill:var(--sun)}}
 .fm1-call:focus-visible .fm1-ico-win{fill:var(--sun)}
 .fm1-call.is-press .fm1-ico-door{animation:fm-door .35s var(--ease-x)}
 @keyframes fm-door{0%{transform:scaleX(1)}40%{transform:scaleX(.15)}100%{transform:scaleX(1)}}
@@ -54,7 +54,7 @@
 .fm2-hs{width:28px;height:28px;overflow:visible}
 .fm2-hs-b{fill:var(--sun);stroke:var(--sun);stroke-width:1.5;stroke-linejoin:round;transform-origin:50% 50%;transform-box:fill-box}
 .fm2-ring{fill:none;stroke:var(--sun);stroke-width:2.2;stroke-linecap:round;opacity:0}
-@media (hover:hover){.fm2-call:hover .fm2-hs-b{animation:fm-wob .4s ease-in-out}}
+@media (hover:hover) and (pointer:fine){.fm2-call:hover .fm2-hs-b{animation:fm-wob .4s ease-in-out}}
 .fm2-call:focus-visible .fm2-hs-b{animation:fm-wob .4s ease-in-out}
 @keyframes fm-wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}50%{transform:rotate(9deg)}75%{transform:rotate(-5deg)}}
 .fm2-call.is-press .fm2-ring{animation:fm-ring .45s ease-out}
@@ -70,7 +70,7 @@
 /* a 440px window that moves on the compositor; the pattern inside is counter-shifted so it stays registered to the deck */
 .fm3.is-ptr .fm3-deck--hi{opacity:1}
 .fm3-head{position:relative;display:grid;gap:12px;max-width:1240px;margin:0 auto clamp(28px,4vh,48px)}
-.fm3-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em}
+.fm3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
 .fm3-note{font-size:var(--t-lead);line-height:1.4;color:var(--on-blue-muted);max-width:46ch}
 .fm3-stage{position:relative;max-width:1100px;margin:0 auto;padding:56px 0}
 .fm3-truss{width:100%;height:auto;overflow:visible}
@@ -85,7 +85,7 @@
 .fm3-pill{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:2px solid #fff;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:.9375rem;white-space:nowrap;cursor:pointer;transition:background-color .18s var(--ease-x),color .18s var(--ease-x),border-color .18s var(--ease-x)}
 .fm3-pill b{color:var(--sun)}
 .fm3-pill:nth-child(3){translate:0 -50%}.fm3-pill:nth-child(4){translate:-100% -50%}
-@media (hover:hover){.fm3-pill:hover{border-color:var(--sun)}}
+@media (hover:hover) and (pointer:fine){.fm3-pill:hover{border-color:var(--sun)}}
 .fm3-pill[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
 .fm3-pill[aria-pressed="true"] b{color:var(--ink)}
 /* R24: hover lights the member and its leader glows; press drives a roofing tack through the pill's top edge and it

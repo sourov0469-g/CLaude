@@ -3,7 +3,7 @@
    downspout; v2 [BANK] UZIK story pager (P74) over three drawn scenes; v3 [BANK] Q409 deliverable chips + Q411 three
    verbs + Q91 animated icons, joined by a roofer's ladder. */
 .hw{position:relative;overflow:clip}
-.hw-h{font-size:var(--t-h2);font-weight:800;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.hw-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
 .hw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
 
 /* ---------- v1: the spine is a downspout that fills with water as you read; hangers are the step markers */
@@ -34,7 +34,7 @@
 .hw1-hg-k circle{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.6}
 .hw1-hg-k path{stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
 .hw1-hg-k{transform-box:fill-box;transform-origin:center}
-@media (hover:hover){.hw1-link:hover .hw1-hg{opacity:1;transform:none}}
+@media (hover:hover) and (pointer:fine){.hw1-link:hover .hw1-hg{opacity:1;transform:none}}
 .hw1-link:focus-visible .hw1-hg{opacity:1;transform:none}
 .hw1-link.is-press .hw1-hg{opacity:1;transform:none}
 .hw1-link.is-press .hw1-hg-k{animation:hw-screw .4s var(--ease-x)}
@@ -62,7 +62,7 @@
 .hw2-fl{right:-7px;top:-6px;width:22px;height:22px;opacity:0;transition:opacity var(--t-dur) var(--t-chrome)}
 .hw2-fl path{fill:none;stroke:#8a93a8;stroke-width:3.4;stroke-linecap:square}
 .hw2-fl-v{transform-box:view-box;transform-origin:19px 3px;transform:rotate(-90deg);transition:transform var(--t-dur) var(--t-chrome)}
-@media (hover:hover){.hw2-tab:hover .hw2-fl{opacity:1}.hw2-tab:hover .hw2-fl-v{transform:none}}
+@media (hover:hover) and (pointer:fine){.hw2-tab:hover .hw2-fl{opacity:1}.hw2-tab:hover .hw2-fl-v{transform:none}}
 .hw2-tab:focus-visible .hw2-fl{opacity:1}.hw2-tab:focus-visible .hw2-fl-v{transform:none}
 .hw2-tab.is-press .hw2-fl{opacity:1}
 .hw2-tab.is-press .hw2-fl-v{animation:hw2-snap .36s var(--t-chrome)}
@@ -77,7 +77,7 @@
 .hw2-tb{opacity:0}
 .hw2-tb path{fill:var(--shingle);stroke:var(--ink);stroke-width:1.4}
 .hw2-tb1,.hw2-tb2{transform-box:fill-box;transform-origin:50% 0}
-@media (hover:hover){.hw2-pause:hover .hw2-tb{opacity:1}.hw2-pause:hover .hw2-pz,.hw2-pause:hover .hw2-py{opacity:0}}
+@media (hover:hover) and (pointer:fine){.hw2-pause:hover .hw2-tb{opacity:1}.hw2-pause:hover .hw2-pz,.hw2-pause:hover .hw2-py{opacity:0}}
 .hw2-pause:focus-visible .hw2-tb{opacity:1}.hw2-pause:focus-visible .hw2-pz,.hw2-pause:focus-visible .hw2-py{opacity:0}
 .hw2-pause.is-press .hw2-tb{opacity:1}
 .hw2-pause.is-press .hw2-tb1{animation:hw2-flip .36s var(--t-chrome)}
@@ -95,7 +95,7 @@
 /* R41: a coiled phone cord stretches out of the link; press lets it spring back */
 .hw2-cord{left:calc(100% - 4px);top:50%;width:60px;height:18px;margin-top:-9px;opacity:0;transform:scaleX(.18);transform-origin:0 50%;transition:opacity .15s var(--t-chrome),transform .4s var(--ease-spring)}
 .hw2-cord path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-@media (hover:hover){.hw2-call:hover .hw2-cord{opacity:1;transform:none}}
+@media (hover:hover) and (pointer:fine){.hw2-call:hover .hw2-cord{opacity:1;transform:none}}
 .hw2-call:focus-visible .hw2-cord{opacity:1;transform:none}
 .hw2-call.is-press .hw2-cord{opacity:1;animation:hw2-coil .4s var(--ease-spring)}
 @keyframes hw2-coil{0%{transform:none}35%{transform:scaleX(.15)}100%{transform:none}}
@@ -193,7 +193,7 @@ html[data-motion="reduced"] .hw2-bar,html[data-motion="reduced"] .hw2-pause{visi
 .i-hammer rect{stroke:var(--ink);stroke-width:2.5}
 .i-hd{fill:var(--shingle)}.i-hl{fill:var(--sun)}
 .i-hammer{transform-origin:100% 100%;transition:transform .2s var(--ease-x)}
-@media (hover:hover){
+@media (hover:hover) and (pointer:fine){
   .hw3-act:hover .i-hand{transform:translateY(-8px) rotate(-6deg)}
   .hw3-act:hover .hw3-ico--rule .i-seg2{transform:rotate(0)}
   .hw3-act:hover .i-hammer{transform:rotate(-18deg)}
