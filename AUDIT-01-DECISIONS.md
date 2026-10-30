@@ -42,3 +42,30 @@ Ground rules I am working to:
 | D.2.1 Image state unreachable | **ACCEPT** | `classify()` reads a photo inside a button wider than 140px as `image` (brackets + crosshair + the LED signature). Rebuilt heroes mark their photo frames `data-buddy="image"`. | |
 | D.12 Hover motion gate | **ACCEPT** | 9 rules moved behind `(hover:hover) and (pointer:fine)`; their `:focus-visible` halves stay outside. | ⟦S0063 Standard 8⟧. |
 | D.14 No trail layer | **ACCEPT** | None added. | ⟦S1331⟧. |
+
+## C · Section fix lists (deadline step 1)
+
+| Point | Ruling | What was built | Reason + citation |
+|---|---|---|---|
+| F2–F10 winners into slot 1 | **ACCEPT** | Each winner copied into slot 1 under a new prefix with its fix list applied; the untouched original is backup b1 (see TRACEABILITY rows). | Backup mechanism A.2; ⟦S1306⟧. |
+| F5.2 descriptions "under each sign" | **PARTIAL** | Descriptions are always on the page in a numbered list directly under the plan, keyed by the same numbers as the signs. | Eight 62–147-character descriptions cannot sit on a 1200×640 plan without covering the road; a keyed list keeps them static and readable at 14px+ ⟦S1499⟧. |
+| F5.6 timeline honesty | **PARTIAL** | Week marks kept verbatim from the single data source; the disclosure now says what they count from and that construction depends on scope. | Rewriting them as durations would mean deriving new figures the firm never published ⟦S1306⟧; the derived "19–26 weeks call-to-keys" stays out for the same reason. |
+| F6 "pre-check Kitchen" | **ACCEPT** | Kitchen pre-picked, its reason showing. | ⟦S1499⟧. |
+| F6.2 selection outline gold | **PARTIAL** | Teal, not gold. | C.4 colour lock (teal is the only action accent) outranks the fix line's colour. |
+| F7.1 "pause that belt" | **PARTIAL** | First contact pauses that belt (200ms) and parks both; the Hold button flips to "Run the belts". | One moving belt beside a stopped one still asks for a click on a moving target ⟦S1306⟧. |
+| F9.6 sub-line with em dash | **PARTIAL** | "Type yours, the sign answers." | Zero em dashes in visible copy (standing rule). |
+| F10.4 hover outline #f2c230 | **PARTIAL** | 2px teal outline. | C.4 colour lock. |
+| F10.6 fixtures cross walls | **REJECT (measured)** | Nothing changed. | Checked every fixture path against the wall lines and the room hit areas (e.g. bath oval at 370,90 inside 282–420 × 12–150): none cross. The audit's evidence shots are not in this container to show otherwise. |
+| C.10 weight | **ACCEPT** | 4.03 MB → 2.35 MB (2.44 MB after the font change): AVIF q45, long edge 1400px (1920 for the -xl plate), logo once, Matter.js out. | Target ≤ ~2.6 MB met. Initial-parse split (≤1.2 MB) is **deferred**: it needs the image store moved out of the parse path. |
+| C.8 / C.9 | **ACCEPT** | Surface ground #15272f (was #12212a); the ten themed dividers are replaced by one CSS hairline present in the first frame. | ⟦S1498⟧ ⟦S1306⟧. |
+| C.4 / C.6 | **PARTIAL (in progress)** | Gold taken off the presented winners' controls (process, financing, work, consult, proof focus); 13 tracked-caps labels to sentence case. Full hex count and the red unification are not done this round. | Deferred with the QA rounds. |
+
+## D · Owner design note (fonts + de-AI)
+
+| Point | Ruling | What was built | Reason |
+|---|---|---|---|
+| Fonts | **ACCEPT** | Bebas Neue + Geist → **Poppins SemiBold** (display) + **Roboto** (text), self-hosted OFL files. Poppins is loaded as a size-adjusted face (74%) so the size tokens written for a condensed face land at normal Poppins sizes without rewriting every rule. | Owner instruction; both are among the most-used Google Fonts. |
+| Backups untouched | **ACCEPT** | Backup slots get Bebas/Geist back through scoped variables; their rules are skipped by the de-AI pass. | Owner: backups are records. |
+| De-AI pass | **ACCEPT** | Positive tracking off the display face (34 rules), tracked caps to sentence case (13), large soft drop shadows removed (11), brushed-steel proof plate flattened, pattern backgrounds unmounted, themed animated dividers retired. | Owner instruction; ⟦S1306 Removal Test⟧. |
+| Kept despite the note | **CHALLENGE** | The cursor companion and the per-control reactions stay. | They are owner-ordered features (Part D), not surface polish; removing them would undo a separate owner decision. Say the word and they go. |
+| Kept despite the note | **CHALLENGE** | The 12-column head (headline left, lead right) stays on every section. | The note says keep structure and layout; this is the layout. A varied rhythm can come with the new versions in slots 4–5. |
