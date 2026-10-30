@@ -360,3 +360,9 @@ html.cmp-on .cmp{display:block}
 .ic-s{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ic-s circle{fill:currentColor;stroke:none}
 .ic-s .ic-f{fill:var(--sun);stroke:none}
+/* R4 inner pages: the closing call panel every page ends on */
+.sp-close{max-width:1180px;margin:clamp(56px,7vw,96px) auto 0;padding:clamp(28px,4vw,48px);border-radius:18px;background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 32px;align-items:center}
+.sp-close-h{font-family:var(--f-head);font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.15}
+.sp-close p{grid-column:1;color:var(--on-dark-2)}
+.sp-act{grid-column:2;grid-row:1/3}
+@media (max-width:700px){.sp-close{grid-template-columns:1fr}.sp-act{grid-column:1;grid-row:auto}}

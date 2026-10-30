@@ -130,4 +130,99 @@ def write(page, gens):
         open(os.path.join(d, f'v{i}.html'), 'w').write(g())
     print(page, len(gens))
 
+
+# ---------------------------------------------------------------- about (facts lock only: 1995 Bunk; Wade president
+# since 2015; Rachel answers; BBB A+ since 2001; Owens Corning Platinum Preferred; $2M liability; 4.9 / 295 Google;
+# Bunk built the firm restoring storm-damaged homes, pack §3)
+GOOGLE = 'https://www.google.com/maps/search/?api=1&amp;query=Rembrandt+Roofing+%26+Restoration+Springboro+OH'
+BBB = 'https://www.bbb.org/search?find_country=USA&amp;find_text=Rembrandt%20Roofing&amp;find_loc=Springboro%2C%20OH'
+OC = 'https://www.owenscorning.com/en-us/roofing/contractors'
+CRED = [('4.9 stars', 'from 295 Google reviews', GOOGLE, 'Check it on Google'), ('BBB A+', 'accredited since 2001', BBB, 'Check it on bbb.org'),
+        ('Owens Corning', 'Platinum Preferred', OC, 'Check it in their contractor finder'), ('$2M', 'liability insurance', TEL, 'Ask Rachel for the certificate')]
+PEOPLE = [('Bunk and Wade Walker', 'ab-bunkwade', 'Bunk and Wade Walker at a Rembrandt Roofing stand', 'Franklin "Bunk" Walker founded Rembrandt in 1995. His son, Wade, has been president since 2015.'),
+          ('Rachel', 'ab-rachel', 'Rachel, who answers the phone at Rembrandt Roofing', 'Rachel answers the phone, Monday to Friday, 9 to 5.'),
+          ('The crew', 'ab-crew', 'The Rembrandt crew lined up beside their truck at a job', 'The crew that does the work, on a Rembrandt job.')]
+YEARS = [('1995', 'Franklin "Bunk" Walker founds Rembrandt. He builds its name restoring storm-damaged homes.'),
+         ('2001', 'BBB A+ accredited since 2001.'),
+         ('2015', 'His son, Wade Walker, becomes president.'),
+         ('Today', 'Rachel answers the phone. Owens Corning Platinum Preferred, with 4.9 stars from 295 Google reviews.')]
+AH1 = 'The Walker family, roofing since 1995.'
+ASUB = 'Rembrandt Roofing & Restoration is a family firm in Springboro, Ohio. ' + HOURS
+def ext(href): return '' if href.startswith('tel:') else ' target="_blank" rel="noopener"'
+def creds(cls):
+    return f'<ul class="{cls}" role="list">' + ''.join(f'<li><b class="num">{E(a)}</b><span>{E(b)}</span><a class="ab-chk rx" href="{h}"{ext(h)}>{E(t)}{"" if h.startswith("tel:") else "<span class=vh> (opens in a new tab)</span>"}</a></li>' for a, b, h, t in CRED) + '</ul>'
+def aclose(cls):
+    return f'<div class="{cls}"><h2 class="sp-close-h">Talk to the family firm.</h2><p>Call Rachel at the office. Monday to Friday, 9 to 5.</p><div class="sp-act">{CALL_BTN}</div></div>'
+def fig(k, alt, cls): return f'<figure class="{cls}"><img data-img="{k}" alt="{E(alt)}" decoding="async"></figure>'
+
+def ab_v1():  # people first
+    cards = ''.join(f'<li class="ab1-card">{fig(k, alt, "ab1-ph")}<h2 class="ab1-n">{E(n)}</h2><p>{E(t)}</p></li>' for n, k, alt, t in PEOPLE)
+    return f'''<div class="ab ab1">
+  <header class="ab-hero"><h1 class="ab-h1">{E(AH1)}</h1><p class="ab-sub">{E(ASUB)}</p></header>
+  <ul class="ab1-cards" role="list">{cards}</ul>
+  <section class="ab1-proof" aria-labelledby="ab1-ph"><h2 class="ab-h2" id="ab1-ph">The record, and where to check it.</h2>{creds("ab1-creds")}</section>
+  {aclose("sp-close")}
+</div>
+'''
+
+def ab_v2():  # the years
+    stops = ''.join(f'<li class="ab2-stop"><span class="ab2-dot" aria-hidden="true"></span><p class="ab2-y num">{E(y)}</p><p class="ab2-t">{E(t)}</p></li>' for y, t in YEARS)
+    return f'''<div class="ab ab2">
+  <header class="ab-hero"><h1 class="ab-h1">{E(AH1)}</h1><p class="ab-sub">{E(ASUB)}</p></header>
+  <div class="ab2-line"><svg class="ab2-ridge" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ab2-ridge-bg" d="M0 34 L125 8 L375 34 L625 8 L875 34 L1000 22"/><path class="ab2-ridge-fg" d="M0 34 L125 8 L375 34 L625 8 L875 34 L1000 22"/></svg><ol class="ab2-stops" role="list">{stops}</ol></div>
+  <div class="ab2-pair">{fig("ab-bunkwade", PEOPLE[0][2], "ab2-ph ab2-ph--a")}{fig("ab-crew", PEOPLE[2][2], "ab2-ph ab2-ph--b")}</div>
+  <section class="ab2-proof" aria-labelledby="ab2-ph"><h2 class="ab-h2" id="ab2-ph">Check the record yourself.</h2>{creds("ab2-creds")}</section>
+  {aclose("sp-close")}
+</div>
+'''
+
+def ab_v3():  # at a glance
+    rows = [('Founded', '1995, by Franklin "Bunk" Walker'), ('President', 'Wade Walker, since 2015'), ('On the phone', 'Rachel, Monday to Friday, 9 to 5'),
+            ('Phone', None), ('Office', '38 N Pioneer Blvd, Springboro, OH 45066'), ('Google', None), ('Better Business Bureau', None), ('Owens Corning', None), ('Insurance', None)]
+    out = []
+    for k, v in rows:
+        if k == 'Phone': v = f'<a class="rx" href="{TEL}">(937) 746-7377</a>'
+        elif k == 'Google': v = f'4.9 stars from 295 reviews. <a class="ab-chk rx" href="{GOOGLE}" target="_blank" rel="noopener">Check it<span class="vh"> on Google (opens in a new tab)</span></a>'
+        elif k == 'Better Business Bureau': v = f'A+, accredited since 2001. <a class="ab-chk rx" href="{BBB}" target="_blank" rel="noopener">Check it<span class="vh"> on bbb.org (opens in a new tab)</span></a>'
+        elif k == 'Owens Corning': v = f'Platinum Preferred contractor. <a class="ab-chk rx" href="{OC}" target="_blank" rel="noopener">Check it<span class="vh"> in their contractor finder (opens in a new tab)</span></a>'
+        elif k == 'Insurance': v = '$2M liability insurance. Ask Rachel for the certificate.'
+        else: v = E(v)
+        out.append(f'<div class="ab3-row"><dt>{E(k)}</dt><dd>{v}</dd></div>')
+    return f'''<div class="ab ab3">
+  <header class="ab-hero"><h1 class="ab-h1">Rembrandt at a glance.</h1><p class="ab-sub">{E(ASUB)}</p></header>
+  <div class="ab3-wrap"><dl class="ab3-dl">{''.join(out)}</dl>{fig("ab-bunkwade", PEOPLE[0][2], "ab3-ph")}</div>
+  {aclose("sp-close")}
+</div>
+'''
+
+def ab_v4():  # sticky photo story
+    chs = [('1995', 'Bunk Walker starts Rembrandt.', 'He builds the firm\'s name restoring storm-damaged homes. Franklin "Bunk" Walker founded Rembrandt Roofing & Restoration in 1995.', 0),
+           ('2015', 'Wade takes over as president.', 'His son, Wade Walker, has been president since 2015.', 0),
+           ('Today', 'Rachel answers the phone.', 'Call the office, Monday to Friday, 9 to 5, and Rachel picks up.', 1),
+           ('On the job', 'The crew does the work.', 'Owens Corning Platinum Preferred, with $2M liability insurance.', 2),
+           ('The record', '4.9 stars from 295 Google reviews.', 'BBB A+ accredited since 2001. Every figure has a link to check it.', 2)]
+    imgs = ''.join(f'<img class="ab4-img{" is-on" if i == 0 else ""}" data-img="{k}" alt="{E(alt)}" decoding="async" data-i="{i}">' for i, (n, k, alt, t) in enumerate(PEOPLE))
+    chap = ''.join(f'<section class="ab4-ch" data-ph="{im}"><p class="ab4-k num">{E(k)}</p><h2 class="ab4-t">{E(t)}</h2><p>{E(b)}</p>{creds("ab4-creds") if k == "The record" else ""}</section>' for k, t, b, im in chs)
+    return f'''<div class="ab ab4">
+  <header class="ab-hero"><h1 class="ab-h1">{E(AH1)}</h1><p class="ab-sub">{E(ASUB)}</p></header>
+  <div class="ab4-wrap"><div class="ab4-stage">{imgs}</div><div class="ab4-chs">{chap}</div></div>
+  {aclose("sp-close")}
+</div>
+'''
+
+def ab_v5():  # magazine
+    return f'''<div class="ab ab5">
+  <header class="ab5-head"><h1 class="ab5-h1">One family. Springboro. Since 1995.</h1></header>
+  {fig("ab-crew", PEOPLE[2][2], "ab5-pan")}
+  <div class="ab5-grid">
+    <dl class="ab5-meta"><div><dt>Founded</dt><dd>1995</dd></div><div><dt>President</dt><dd>Wade Walker, since 2015</dd></div><div><dt>Office</dt><dd>38 N Pioneer Blvd, Springboro, OH 45066</dd></div><div><dt>Hours</dt><dd>Monday to Friday, 9 to 5</dd></div></dl>
+    <div class="ab5-col"><p class="ab5-lede">Franklin "Bunk" Walker founded Rembrandt in 1995, and built its name restoring storm-damaged homes.</p><p>His son, Wade Walker, has been president since 2015. When you call the office, Rachel answers.</p></div>
+    <div class="ab5-col"><p class="ab5-big"><span class="num">4.9</span> stars from <span class="num">295</span> Google reviews.</p><p>BBB A+ accredited since 2001. Owens Corning Platinum Preferred. $2M liability insurance.</p>{creds("ab5-creds")}</div>
+  </div>
+  <div class="ab5-two">{fig("ab-bunkwade", PEOPLE[0][2], "ab5-ph")}{fig("ab-rachel", PEOPLE[1][2], "ab5-ph")}</div>
+  {aclose("sp-close")}
+</div>
+'''
+
 write('svcp', [svc_v1, svc_v2, svc_v3, svc_v4, svc_v5])
+write('about', [ab_v1, ab_v2, ab_v3, ab_v4, ab_v5])

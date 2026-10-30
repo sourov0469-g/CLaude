@@ -243,11 +243,11 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 **About page (`about`)**, the family, the credentials and the review aggregate.
 | Slot | Layout | Reference | Mechanism | Verification |
 |---|---|---|---|---|
-| 1 (default) | People first | [BANK] Q22 Monolith Studio (team cards, 5-star strip) | crew photo hero; three cards (Bunk and Wade, Rachel, the crew); a star strip with 4.9 / 295 and the credentials | |
-| 2 | The years | ⟦S1325⟧ scroll-progress timeline (unpinned) | a ridge-line timeline 1995, 2001, 2015, Today; the line fills with scroll | |
-| 3 | At a glance | ⟦S0603⟧ evidence doctrine (direct labels, one focal relationship) | a fact sheet (dl) beside one photo; every row checkable | |
-| 4 | Sticky photo story | ⟦S0441⟧ (one sticky artefact, states per label) | the photo on the left swaps as each chapter on the right passes (crossfade .3s) | |
-| 5 | Magazine | ⟦S1354⟧ agency grid (oversized headline, panoramic image, narrow metadata column) | a full-bleed crew photo, big headline, two-column text with the 4.9 / 295 figure | |
+| 1 (default) | People first | [BANK] Q22 Monolith Studio (team cards, 5-star strip) | crew photo hero; three cards (Bunk and Wade, Rachel, the crew); a star strip with 4.9 / 295 and the credentials | PASS: 0 overflow, errors 0, 1440 and 375 |
+| 2 | The years | ⟦S1325⟧ scroll-progress timeline (unpinned) | a ridge-line timeline 1995, 2001, 2015, Today; the line fills with scroll | PASS: vertical rail on phones |
+| 3 | At a glance | ⟦S0603⟧ evidence doctrine (direct labels, one focal relationship) | a fact sheet (dl) beside one photo; every row checkable | PASS |
+| 4 | Sticky photo story | ⟦S0441⟧ (one sticky artefact, states per label) | the photo on the left swaps as each chapter on the right passes (crossfade .3s) | PASS: on phones the photo sits above the chapters, unswapped |
+| 5 | Magazine | ⟦S1354⟧ agency grid (oversized headline, panoramic image, narrow metadata column) | a full-bleed crew photo, big headline, two-column text with the 4.9 / 295 figure | PASS |
 
 **Contact page (`contact`)**: phone, office, hours, the 24 towns (data/towns.js). No form: a form with nowhere to send would be a fake action.
 | Slot | Layout | Reference | Mechanism | Verification |
@@ -263,3 +263,5 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 2. Drawn service icons rendered as solid black squares: their CSS lived in the homepage section file. FIXED: the icon rules moved to base.css (shared).
 3. A blank photo in a full-page phone capture was a capture artefact: every image reports loaded (`imgchk.mjs`).
 4. Facts: every line comes from build/gen-pages.py's one fact list (flag C12 lines, facts lock); no prices, warranties or guarantees; the claims copy says the insurer decides.
+
+**R4 About page QA** (`pageshot.mjs`; sheets `qa/r4-about-1440.jpg`, `qa/r4-about-375.jpg`): overflow 0, errors 0, one H1 in all five layouts at both widths. Facts: only the lock (1995 Bunk, Wade since 2015, Rachel, BBB A+ 2001, Owens Corning Platinum Preferred, $2M, 4.9 / 295) plus pack §3's storm-restoration line; the check links are the homepage Reviews V2 links. The closing call panel moved to base.css (shared by every page).
