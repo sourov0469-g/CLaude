@@ -265,3 +265,44 @@ Final verdicts and verification evidence are appended below as each section pass
 - F6: the two drawings (different mechanisms, photographic middle);
 - F7: the month build (K10);
 - F8: Lenis (kept as the one engine, desktop only).
+
+---
+
+## V6 fresh gate, Phase 1 (BRIEF-V6, 30 Oct 2026, on df98d54, measured before any fix)
+
+Evidence per item is in `PROGRESS.md` "V6 Phase 1".
+- **Result:** 7 KEPT on fresh evidence; 23 FIX (none needs a rebuild).
+- **Failing items:** 1b phone, 1e credential strings, 1f the rating count-up, 3b the Proof 3 pill, 4 the Services 3 row, 6 the Built band, the F17 idle loops, G9 the kit eases.
+
+| Section | V | Governing reference | Fresh verdict (Phase 1) | Criterion / evidence |
+|---|---|---|---|---|
+| Hero | 1 | Q95 Masked Heading | FIX | F17: perpetual photo drift (1.08 % idle pixels) + hero field ghost waves |
+| Hero | 2 | Stronghold + Neil Kelly | FIX (page system) | F17: hero field ghost waves at idle (0.08 %); version itself passes 1–9 |
+| Hero | 3 | Feldco + R33 | FIX (page system) | F17: hero field ghost waves at idle (0.04 %); version itself passes 1–9 |
+| Proof | 1 | #317 + F12 + Q165 | FIX | 1f: rating counts up through false values (4.8 seen); 1e credential strings; 1b no phone |
+| Proof | 2 | Georgia CG table | FIX | 1e: credentials not §3-verbatim; 1b no phone |
+| Proof | 3 | S1327 + #292 | FIX | 3b: single photo beside "have a before and after"; 1e; 1b |
+| Services | 1 | Neil Kelly + BLK 531 | KEPT | passes 1–9 (ctl, vis, sect, facts, shots) |
+| Services | 2 | Q571 + Q162 | KEPT | passes 1–9 |
+| Services | 3 | Codrops timeline (Mode B) + R38 | FIX | 4: row overstates the reference (edgeResistance 0.85 vs 1; scroll half not adapted); 1b |
+| Work | 1 | R28 draggable pairs | FIX | 1b no phone |
+| Work | 2 | S0468 blueprint | FIX | 1b |
+| Work | 3 | S1324 + Q125 | FIX | 1b (reference re-check PASS) |
+| Built | 1 | S0526 + S0504 | FIX | 1b; D1 field band (page system) |
+| Built | 2 | S1322 sticky stack | FIX | 1b; D1 |
+| Built | 3 | S0361 + S1361 | FIX | 1b; D1 |
+| Colour | 1 | Site 6 flagship + BLK 531 + R36 | KEPT | passes 1–9 incl. real-file upload |
+| Colour | 2 | R30 + Stronghold comparison | FIX | 1b |
+| Colour | 3 | Q48 grid-to-fullscreen | FIX | 1b |
+| Near you | 1 | firm map + S1323 | FIX | 1b |
+| Near you | 2 | West Shore matrix | KEPT | passes 1–9 (inert rows open first) |
+| Near you | 3 | KBF fly-in | FIX | 1b (reference re-check PASS) |
+| Reviews | 1 | Q161 marquee | FIX | 1b (marquee allowed by F17 exemplar) |
+| Reviews | 2 | R29 + S1329 | FIX | 1b |
+| Reviews | 3 | #300 True Focus + F13 | FIX | 1b |
+| Money | 1 | firm financing example + F10 | FIX | 1b |
+| Money | 2 | F7e distribution | FIX | 1b |
+| Money | 3 | R24 + FACTS Offers | KEPT | passes 1–9 |
+| Book | 1 | Rogers + S1364 | FIX | F17: atmosphere folds loop at idle (0.28 %) |
+| Book | 2 | Mad City + S1442 | KEPT | passes 1–9 |
+| Book | 3 | #413 Tequila | KEPT | passes 1–9 |

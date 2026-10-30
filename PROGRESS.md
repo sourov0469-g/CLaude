@@ -228,7 +228,7 @@ Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.
 Governing prompt: `BRIEF-V6.md`. Everything above this line is the V5 record. Its gate is a CLAIM to re-verify, not evidence.
 
 ## V6 state
-- **Phase:** 0 → 1
+- **Phase:** 1 complete (measured, nothing fixed) → 2
 - **Baseline:** `siding/homepage-standalone.html` at df98d54, 4,221,484 B, sha256 d2c28a321f88491be50f1e7b5689972265abdce612f80dbe78dfe1e1ed687b12
 
 ## V6 Phase 0 record (30 Oct)
@@ -257,3 +257,63 @@ Governing prompt: `BRIEF-V6.md`. Everything above this line is the V5 record. It
 - [ ] **G9 (AUDIT-V4 #7) · No elastic or bounce (S0544).** The V5 kit uses `elastic.out` (sway) and `bounce.out` (drop). Re-check.
 - [ ] **G10 (AUDIT-V4 #8) · The hero's ghost waves as a perpetual loop.** Re-check against F17.
 - [ ] **G11 (AUDIT-V4 #4) · Custom SVG vs "no model-drawn illustration".** Owner rule wins; re-check that it is a trade diagram, not clip-art.
+
+## V6 Phase 1: fresh §12 gate on df98d54 (measure only, 30 Oct)
+
+All runs use `file://…/delivered-df98d54.html`, a copy of the delivered file (sha d2c28a…). Scripts are in `siding/qa/v6/` (new) and `siding/qa/v5/`.
+
+| # | Item | Result | Evidence |
+|---|---|---|---|
+| 1a | 474 the only review count | PASS | `facts.py` (text + own scripts + JSON): numbers near "review", other than the 474 count, are switcher digits, the 4.9 rating, adjacent figures (5,000+, 886) or a CSS comment. JSON-LD reviewCount 474. |
+| 1b | Phone in every version's contact paths (strict: every version) | **FAIL** | 19 of 30 versions carry no `tel:` of their own: Proof 1–3, Services 3, Work 1–3, Built 1–3, Colour 2–3, Near 1, Near 3, Reviews 1–3, Money 1–2. Header and footer carry it. On phones the header shows only Book and Menu. |
+| 1c | 886 with its §3 split | PASS | "312 on the map with photos + 574 more counted = 886" (AUDIT-V3's record, K1). |
+| 1d | Address and hours verbatim | PASS | Address ×2 and hours ×8 verbatim; no variants. |
+| 1e | Credentials verbatim (§3 strings) | **FAIL** | "President's Club 2025" 0, "Andersen Certified Premier" 0, "BBB A+" 0. The page prints "President's Club Award 2025", "Andersen Certified Contractor, Premier" and "BBB Accredited, A+". |
+| 1f | No false fact on screen at any moment | **FAIL** | Proof 1 counts the 4.9 rating up from 0, so the screenshots show "4.8 on 474 Google reviews" mid-animation. |
+| 2 | Logo | PASS | sha256 of the bytes embedded in the asset table vs the repo's served files: colour PNG 64ab1b1b… == disk; white AVIF cb9c7306… == disk. Header uses the PNG, footer the AVIF; no other logo in the file. |
+| 3a | Three references per section | PASS | TRACEABILITY rows |
+| 3b | No unpaired photo as before/after | **FAIL** | Proof 3: "177 … have a before and after" sits next to a single photo (p22) in a two-pane casement frame. Work 1–3 use the six true pairs only. Hero 1 and Colour 1 show the Rob Roy after photo alone. |
+| 4 | Traceability, 3 random references | **FAIL (1 of 3)** | Drawn with seed 20261030, excluding V5's three: Near 3 / KBF matches; Work 3 / S1324 + Q125 matches (radius min(260, max(140, 0.22w)), eases 0.1 / 0.14, direct under reduced motion). Services 3 / Codrops does not: the Atlas mechanism is drag *and* scroll driving one ease-none tween with edgeResistance 1; the version adapts only the drag half, with edgeResistance 0.85, and its row overstates this. |
+| 5 | Switchers swap only their section | PASS | `sect.js` 90/90 (1440, 375, reduced motion); console 0 ×30 |
+| 6 | Screenshots ×60 vs §4 | **FAIL** | `v5/v6shots` (60 shots, console 0, no overflow). Defects: D1, the Built field X-ray band reads as a stray beige stripe through the content (375 and 1440); D2, the Proof 1 rating count-up (1f). |
+| 7a | Console 0 / overflow | PASS | All runs, page errors 0; no overflow at 375 |
+| 7b | Script-referenced ids exist | PASS | 6/6 (b1-panel, h3p, home-data, pay-amt, pk-panel, sheet) |
+| 7c | Every control changes the DOM | PASS | `ctl.js` clicks each control on a fresh load. 1440: 251 PASS + 12 already selected; 375: 243 PASS + 11 already selected; 0 dead. The first run failed 7 Near 2 links inside collapsed rows; those rows are `inert` by design, and the crawler was taught to open them first (21/21 at both widths). |
+| 7d | Every text visible after its entrance | PASS | `vis.js` (new): 180/180 (scroll down, scroll up and reduced motion × 2 widths) |
+| 7e | Forms | PASS | `sect.js` submits every booking form empty (refused) and filled (done); Colour 1 takes a real file |
+| 8 | Companion | PASS | `qa4` 159/159 (all variants in all versions, touch at 375/320, reduced motion). `pal.js` (new): in each variant the six poses (idle, button, link, heading, image, card) are all distinct (18/18). |
+| 9 | Weight | PASS | 4,221,484 B (= the limit): code 871,726, media 3,349,758 (font 130,832) |
+| 10 | AUDIT-V3 final verdicts and flags | **FAIL (pending)** | V6 verdicts not yet written |
+| F17 | Nothing moves at idle except the allowed | **FAIL** | `still.js` pixel diff 1.2 s apart, pointer parked: Hero 1 1.08 % (Q95 photo drift), Hero 2 0.08 % and Hero 3 0.04 % (hero field ghost waves), Book 1 0.28 % (atmosphere folds). Reviews 1 at 10.5 % is the marquee, which F17's own exemplar set allows ("marquee 60s linear infinite"). The remaining ~0.01 % is the companion's idle blink, which §4 requires. |
+| G9 | No elastic or bounce (AUDIT-V4 #7 record) | **FAIL** | The V5 kit uses `elastic.out` (sway) and `bounce.out` (drop), contradicting the recorded V4 standard. |
+
+**Differences from the V5 self-run gate's claims:**
+1. V5 tested the phone only on versions with a booking button (it called that K7). Strictly, 19 versions have no phone of their own.
+2. V5 never checked the §3 credential strings verbatim; three are not printed as written.
+3. V5's facts grep did not catch a false figure *during* an animation (4.8).
+4. V5 passed item 3 without looking at Proof 3's 177 pill.
+5. V5's random references were drawn so that Services 3's overstated row was not re-checked.
+6. V5 found no screenshot defect in the Built band.
+7. V5 claimed the ceilings passed by measuring durations only, not idle motion; three perpetual loops remain.
+8. V5's kit contradicts AUDIT-V4 #7.
+9. Confirmed as claimed: logo, switchers, console, overflow, ids, companion, weight, entrance timing.
+10. Newly evidenced, and passing: every-control click-through and text visibility.
+
+### Fresh verdicts (the AUDIT-V3 V6 table carries the same)
+- **To FIX:**
+  - Proof 1: 1e, 1f, 1b
+  - Proof 2: 1e, 1b
+  - Proof 3: 3b, 1e, 1b
+  - Services 3: item 4 row/parameter, 1b
+  - Work 1–3: 1b
+  - Built 1–3: 1b, D1
+  - Colour 2, Colour 3: 1b
+  - Near 1, Near 3: 1b
+  - Reviews 1–3: 1b
+  - Money 1, Money 2: 1b
+  - Hero 1: F17 drift, plus the hero field
+  - Hero 2, Hero 3: the hero field (page system)
+  - Book 1: F17 folds
+- **Page systems to FIX:** the kit eases (G9), the hero field (G10), the Built field (D1).
+- **Pass as they stand (KEPT on fresh evidence):** Services 1, Services 2, Colour 1, Near 2, Money 3, Book 2, Book 3.
+- **No REBUILD is needed:** every failure is a fact string, a missing contact path, a parameter or an idle loop, so the smallest fix applies (§10).
