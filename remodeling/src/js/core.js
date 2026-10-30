@@ -646,18 +646,7 @@
     });
   };
 
-  // mask-rise lines: wraps each line of a SplitText in an overflow mask [S1321 line reveal]
-  EZ.riseLines = function (el, opts) {
-    opts = opts || {};
-    var split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'ln' });
-    var tw = gsap.from(split.lines, {
-      yPercent: 105, duration: opts.duration || .3, ease: opts.ease || 'power2.out',
-      stagger: opts.stagger || .05, delay: opts.delay || 0,
-      scrollTrigger: opts.trigger ? { trigger: opts.trigger, start: 'top 82%', once: true } : undefined,
-      onComplete: function () { if (opts.revert !== false) split.revert(); }
-    });
-    return { split: split, tween: tw };
-  };
+
 
   // clip-path inset tween through a proxy: browsers collapse "inset(0% 0% 0% 0%)" to "inset(0%)", which makes
   // string interpolation pair the wrong numbers. from/to are [top, right, bottom, left] in %, from may be a function.
@@ -685,7 +674,7 @@
     if (EZ.booted) return;
     EZ.booted = true;
     buildImages();
-    gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip, MotionPathPlugin);
+    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, Flip, MotionPathPlugin);
     gsap.defaults({ ease: 'power3.out', duration: .3 });   // §4 dosing default
     ScrollTrigger.config({ ignoreMobileResize: true });
 

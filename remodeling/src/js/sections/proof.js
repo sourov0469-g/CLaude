@@ -1,26 +1,128 @@
-/* proof: v1 inspection record (P14 stamp), v2 meter plate (Count Up 279 roll mode), v3 survey station (True Focus 300 + Heron grid).
+/* proof: v1 credential blocks on a job-site deck (S0452 matterjs), v2 meter plate (Count Up 279 roll mode), v3 survey station (True Focus 300 + Heron grid).
    Entrances dosed at .3s (FULL §4); the stamp thud and the focus jump keep their reference tempo as the centrepiece actions. */
 (function () {
   var NS = 'http://www.w3.org/2000/svg';
-  var STAMP = EZ.bezier(.2, 1.6, .4, 1);          // [BANK P14] overshoot keyframe
 
   EZ.section('proof', {
-    /* v1 · Inspection record */
+    /* v1 · Proof you can pick up [S0452 matterjs]: five credential blocks drop onto a deck, settle with weight
+       (restitution .08, friction .8), can be grabbed and thrown (desktop) or bumped (tap, Enter / Space) */
     1: { init: function (root, k) {
-      var card = root.querySelector('.proof1__paper');
-      var stamps = root.querySelectorAll('.proof1__stamp');
-      var rows = root.querySelectorAll('.proof1__table tbody tr');
-      if (!k.motion) return;
-      EZ.reveal(k, root.querySelectorAll('.proof1__intro > *'));
-      gsap.from(root.querySelector('.proof1__card'), { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.proof1__card'), start: 'top 85%', once: true } });
-      gsap.fromTo(root.querySelectorAll('.proof1__string'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
-      gsap.set(stamps, { autoAlpha: 0, scale: 1.9 });
-      var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 80%', once: true } });
-      stamps.forEach(function (st, i) {
-        var at = i * .16;
-        tl.to(st, { autoAlpha: .92, scale: 1, duration: .3, ease: STAMP }, at)
-          .fromTo(rows[i], { backgroundColor: 'rgba(200,64,46,.10)' }, { backgroundColor: 'rgba(200,64,46,0)', duration: .3, ease: 'power2.out' }, at + .12)
-          .fromTo(card, { y: 0 }, { y: 2, duration: .05, yoyo: true, repeat: 1, ease: 'power1.inOut' }, at + .1);
+      var M = window.Matter, site = root.querySelector('.proof1__site');
+      var els = Array.prototype.slice.call(root.querySelectorAll('.proof1__blk'));
+      EZ.reveal(k, root.querySelectorAll('.proof1__head > *, .proof1__foot'));
+      if (!M) { root.classList.add('is-static'); return; }
+      var engine, bodies = [], W = 0, H = 0, sc = 1, loop = null, drag = null, inView = false, dropped = false;
+      var DECK = 72;
+      function build(settle) {
+        W = site.clientWidth; H = site.clientHeight;
+        if (!W) return;
+        sc = EZ.clamp(W / 1100, .58, 1);
+        if (engine) { M.Composite.clear(engine.world, false); M.Engine.clear(engine); }
+        engine = M.Engine.create({ enableSleeping: true });
+        engine.gravity.y = 1;
+        var floorY = H - DECK;
+        var walls = [
+          M.Bodies.rectangle(W / 2, floorY + 40, W * 3, 80, { isStatic: true, friction: .9 }),
+          M.Bodies.rectangle(-40, H / 2, 80, H * 4, { isStatic: true }),
+          M.Bodies.rectangle(W + 40, H / 2, 80, H * 4, { isStatic: true }),
+          M.Bodies.rectangle(W / 2, -40, W * 3, 80, { isStatic: true })
+        ];
+        bodies = els.map(function (el, i) {
+          var w = +el.dataset.w * sc, h = +el.dataset.h * sc;
+          el.style.width = w + 'px'; el.style.height = h + 'px';
+          var sp = startPos(i, { h: h });
+          var body = M.Bodies.rectangle(sp.x, sp.y, w, h, { chamfer: { radius: 4 * sc }, restitution: .08, friction: .8, frictionStatic: 1, frictionAir: .015, density: .0015 });
+          // the facts always read level: blocks fall, slide, stack and fly, but never turn (no rotated text)
+          M.Body.setInertia(body, Infinity);
+          body.el = el; body.w = w; body.h = h;
+          return body;
+        });
+        // blocks join the world only when released (a body created static never regains its mass in Matter)
+        M.Composite.add(engine.world, settle ? walls.concat(bodies) : walls);
+        if (settle) {
+          // reduced motion and re-layout: let the pile settle off-screen, then show it still
+          for (var n = 0; n < 900; n++) M.Engine.update(engine, 1000 / 60);
+          sync();
+        } else sync();
+      }
+      function sync() {
+        bodies.forEach(function (b) {
+          b.el.style.transform = 'translate(' + (b.position.x - b.w / 2).toFixed(1) + 'px,' + (b.position.y - b.h / 2).toFixed(1) + 'px) rotate(' + b.angle.toFixed(4) + 'rad)';
+        });
+      }
+      function run() {
+        if (!k.motion || !inView) return;
+        if (loop) { loop.start(); return; }
+        loop = k.raf(function (dt) {
+          M.Engine.update(engine, Math.min(dt * 1000, 1000 / 30));
+          sync();
+          var still = !drag && bodies.every(function (b) { return b.isSleeping || engine.world.bodies.indexOf(b) < 0; });
+          if (still && dropped) return false;
+        });
+        loop.start();
+      }
+      // start positions never overlap: two staggered rows on wide screens, a loose tower on phones
+      function startPos(i, b) {
+        if (W < 600) return { x: W * (.3 + .4 * (i % 2)), y: 30 + b.h / 2 + i * (H - DECK - 60) / 6 };
+        return { x: W * (.1 + .2 * i), y: 24 + b.h / 2 + (i % 2) * (H - DECK) * .38 };
+      }
+      function drop() {
+        dropped = true;
+        bodies.forEach(function (b, i) { k.timeout(function () { if (engine.world.bodies.indexOf(b) < 0) M.Composite.add(engine.world, b); M.Sleeping.set(b, false); run(); }, i * 140); });
+        gsap.to(els, { autoAlpha: 1, duration: .2, stagger: .14, overwrite: true });
+        run();
+      }
+      function bump(b, dir) {
+        if (engine.world.bodies.indexOf(b) < 0) M.Composite.add(engine.world, b);
+        M.Sleeping.set(b, false);
+        M.Body.setVelocity(b, { x: (dir || (Math.random() - .5)) * 6 * sc, y: -12 * sc });
+        run();
+      }
+      k.add(function () { if (engine) { M.Composite.clear(engine.world, false); M.Engine.clear(engine); } els.forEach(function (el) { el.style.cssText = ''; }); gsap.set(els, { clearProps: 'opacity,visibility' }); root.classList.remove('is-static'); });
+
+      if (!k.motion) { root.classList.add('is-static'); build(true); k.ro(site, function () { if (site.clientWidth !== W) build(true); }); return; }
+
+      build(false);
+      gsap.set(els, { autoAlpha: 0 });
+      k.ro(site, function () { if (site.clientWidth !== W && W) { build(true); dropped = true; gsap.set(els, { autoAlpha: 1 }); } });
+      k.io(site, function (en) { inView = en.isIntersecting; if (inView) run(); else if (loop) loop.stop(); }, { threshold: 0 });
+      ScrollTrigger.create({ trigger: site, start: 'top 75%', once: true, onEnter: drop });
+
+      // grab and throw (mouse / pen): a spring constraint from the pointer to the point grabbed [S0452 MouseConstraint]
+      function local(e) { var r = site.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+      els.forEach(function (el, i) {
+        var b = function () { return bodies[i]; };
+        k.on(el, 'pointerdown', function (e) {
+          if (!dropped) return;
+          if (e.pointerType === 'touch') { el._t = [e.clientX, e.clientY]; return; }
+          e.preventDefault();
+          var p = local(e), body = b();
+          if (engine.world.bodies.indexOf(body) < 0) M.Composite.add(engine.world, body);
+          M.Sleeping.set(body, false);
+          var off = M.Vector.rotate(M.Vector.sub(p, body.position), -body.angle);
+          drag = M.Constraint.create({ pointA: p, bodyB: body, pointB: off, stiffness: .18, damping: .12, length: 0 });
+          M.Composite.add(engine.world, drag);
+          try { el.setPointerCapture(e.pointerId); } catch (er) {}
+          run();
+        });
+        k.on(el, 'pointermove', function (e) { if (drag && drag.bodyB === b()) { drag.pointA = local(e); } });
+        function release() { if (drag && drag.bodyB === b()) { M.Composite.remove(engine.world, drag); drag = null; run(); } }
+        k.on(el, 'pointerup', function (e) {
+          if (e.pointerType === 'touch' && el._t && Math.hypot(e.clientX - el._t[0], e.clientY - el._t[1]) < 10) bump(b());
+          el._t = null; release();
+        });
+        k.on(el, 'pointercancel', release);
+        k.on(el, 'keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && dropped) { e.preventDefault(); bump(b()); } });
+      });
+      k.on(root.querySelector('.proof1__restack'), 'click', function () {
+        dropped = false;
+        bodies.forEach(function (bd, i) {
+          M.Composite.remove(engine.world, bd);
+          M.Body.setPosition(bd, startPos(i, bd));
+          M.Body.setVelocity(bd, { x: 0, y: 0 });
+        });
+        sync();
+        drop();
       });
     } },
 

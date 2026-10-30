@@ -20,7 +20,7 @@ OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
 SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
 SYSTEMS = ["buddy", "rig", "react", "fields"]   # companion, reaction rig + reactions, section fields + dividers
-VENDOR = ["gsap", "ScrollTrigger", "SplitText", "DrawSVGPlugin", "Flip", "MotionPathPlugin"]   # only the plugins the sections call (F18)
+VENDOR = ["gsap", "ScrollTrigger", "DrawSVGPlugin", "Flip", "MotionPathPlugin", "matter"]   # only the plugins the sections call (F18)
 
 
 def read(*p):

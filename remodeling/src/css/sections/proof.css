@@ -2,53 +2,55 @@
 #proof .t-head { color: var(--field-ink); }
 #proof .t-lead { color: var(--field-muted); }
 
-/* ---------- v1 · Inspection record ---------- */
-.proof1__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.proof1__intro { grid-column: 1 / span 5; position: sticky; top: calc(var(--nav-h) + var(--s8)); display: grid; gap: var(--s6); justify-items: start; }
-.proof1__lead { max-width: 36ch; }
-.proof1__card { grid-column: 7 / -1; position: relative; padding-top: 64px; }
-.proof1__nail { position: absolute; left: 50%; top: 0; width: 120px; height: 80px; translate: -50% 0; overflow: visible; z-index: 2; }
-.proof1__string { fill: none; stroke: #c9a46a; stroke-width: 2.2; }
-.proof1__paper {
-  position: relative;
-  background: #f3eee2; color: #1b2629;
-  padding: 44px clamp(18px, 2.4vw, 34px) 26px;
-  box-shadow: 0 2px 0 #d9d1bd, 0 36px 70px -28px rgba(0, 0, 0, .6);
-  background-image: linear-gradient(rgba(27, 38, 41, .045) 1px, transparent 1px);
-  background-size: 100% 28px;
+/* ---------- v1 · Proof you can pick up [S0452 matterjs] ---------- */
+.proof1__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s6); }
+.proof1__head .t-head { grid-column: 1 / span 6; }
+.proof1__lead { grid-column: 8 / span 5; max-width: 36ch; }
+/* the job site: blocks fall onto a plywood deck; the stage is the physics world */
+.proof1__site { position: relative; height: clamp(420px, 40vw, 560px); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.proof1__deck { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 72px; overflow: visible; }
+.proof1__deck .ply { fill: #c9a46a; stroke: #0B1418; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.proof1__deck .grain { stroke: rgba(11, 20, 24, .18); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+.proof1__deck .seam { stroke: #0B1418; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.proof1__deck .joist { stroke: rgba(201, 164, 106, .55); stroke-width: 10; vector-effect: non-scaling-stroke; }
+.proof1__blocks { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.proof1__blk {
+  position: absolute; left: 0; top: 0; display: grid; place-content: center; justify-items: center; gap: 2px;
+  cursor: grab; touch-action: pan-y; will-change: transform; color: #0B1418; text-align: center;
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, .35));
 }
-.proof1__hole { position: absolute; left: 50%; top: 12px; width: 16px; height: 16px; translate: -50% 0; border-radius: 50%; background: var(--field); box-shadow: inset 0 2px 3px rgba(0, 0, 0, .4); }
-.proof1__head { border-bottom: 3px solid #c8402e; padding-bottom: 12px; margin-bottom: 4px; }
-.proof1__title { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.2vw, 2.375rem)/1 var(--f-display); letter-spacing: .04em; }
-.proof1__sub { margin: 6px 0 0; font: 500 .8125rem/1.3 var(--f-text); color: #4a5a5e; }
-.proof1__table { width: 100%; border-collapse: collapse; font: 400 .9375rem/1.4 var(--f-text); }
-.proof1__table thead th { font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; color: #6a787b; text-align: left; padding: 14px 0 8px; }
-.proof1__table tbody tr { border-bottom: 1px solid rgba(27, 38, 41, .16); }
-.proof1__table tbody th { text-align: left; font: 600 .8125rem/1.3 var(--f-text); color: #1b2629; padding: 14px 14px 14px 0; width: 30%; vertical-align: middle; }
-.proof1__table td { padding: 14px 10px 14px 0; vertical-align: middle; }
-.proof1__table td:last-child { width: 108px; text-align: right; padding-right: 0; }
-.proof1__table a { color: #1d4a4e; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px; white-space: nowrap; display: inline-block; padding-block: 10px; margin-block: -10px; }
-.proof1__big { font: 400 1.625rem/1 var(--f-display); letter-spacing: .01em; vertical-align: -2px; margin-right: 2px; }
-.proof1__stamp {
-  display: inline-block; padding: 4px 10px 1px;
-  border: 2.5px solid #c8402e; color: #c8402e;
-  font: 400 1.25rem/1 var(--f-display); letter-spacing: .14em;
-  filter: url(#proof1-ink);
-}
-.proof1__ink { position: absolute; }
-
-@media (max-width: 1023px) {
-  .proof1__intro { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); }
-  .proof1__card { grid-column: 1 / -1; }
-}
-@media (max-width: 767px) {
-  .proof1__table thead { display: none; }
-  .proof1__table tbody tr { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; padding: 12px 0; }
-  .proof1__table tbody th { grid-column: 1; width: auto; padding: 0 0 4px; }
-  .proof1__table td { grid-column: 1; padding: 0; }
-  .proof1__table td:last-child { grid-column: 2; grid-row: 1 / span 2; align-self: center; width: auto; }
-  .proof1__stamp { font-size: 1rem; padding: 3px 7px 0; }
-}
+.proof1__blk:active { cursor: grabbing; }
+.proof1__blk > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.proof1__blk > span { position: relative; z-index: 1; pointer-events: none; }
+.proof1__blk:focus-visible { outline: 3px solid #f2c230; outline-offset: 4px; }
+.proof1__v { font: 400 clamp(1.75rem, 1rem + 2vw, 2.75rem)/1 var(--f-display); letter-spacing: .02em; }
+.proof1__k { font: 600 .6875rem/1.15 var(--f-text); letter-spacing: .14em; text-transform: uppercase; }
+.proof1__blk .cmu { fill: #b9bcb6; stroke: #0B1418; stroke-width: 2; }
+.proof1__blk .core { fill: #8d918b; stroke: rgba(11, 20, 24, .5); stroke-width: 1.5; }
+.proof1__blk--cmu .proof1__v { background: rgba(185, 188, 182, .92); padding: 0 6px; }
+.proof1__blk--cmu .proof1__k { background: rgba(185, 188, 182, .92); padding: 2px 6px; }
+.proof1__blk .wood { fill: #d9b27a; stroke: #0B1418; stroke-width: 2; }
+.proof1__blk .ring { fill: none; stroke: rgba(122, 78, 36, .45); stroke-width: 2; }
+.proof1__blk--wood { grid-auto-flow: column; gap: 12px; align-items: center; }
+.proof1__blk--wood .proof1__v { color: #7a2e12; }
+.proof1__blk .brick { fill: #b65a3c; stroke: #0B1418; stroke-width: 2; }
+.proof1__blk .frog { fill: none; stroke: rgba(11, 20, 24, .3); stroke-width: 2; }
+.proof1__blk--brick { color: #fbf3ea; }
+.proof1__blk .tile { fill: #77b3b8; stroke: #0B1418; stroke-width: 2; }
+.proof1__blk .glaze { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 3; stroke-linecap: round; }
+.proof1__blk--tile .proof1__k { max-width: 9ch; }
+.proof1__blk .steel { fill: #8f9a9d; stroke: #0B1418; stroke-width: 2; }
+.proof1__blk .bolt { fill: #c9d1d3; stroke: #0B1418; stroke-width: 1.2; }
+.proof1__blk--steel { color: #0B1418; grid-auto-flow: column; gap: 10px; align-items: center; }
+.proof1__blk--steel .proof1__v, .proof1__blk--steel .proof1__k { background: rgba(201, 209, 211, .9); padding: 2px 6px; }
+.proof1__foot { margin-top: var(--s6); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4) var(--s6); }
+.proof1__cred { margin: 0; font: 500 .9375rem/1.3 var(--f-text); color: var(--field-muted); }
+.proof1__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
+.proof1__link { color: var(--field-ink); }
+/* static (reduced motion / no physics): the settled pile is placed by script; until then a simple row */
+.proof1.is-static .proof1__restack { display: none; }
+@media (max-width: 1023px) { .proof1__head .t-head, .proof1__lead { grid-column: 1 / -1; } .proof1__lead { margin-top: var(--s4); } }
+@media (max-width: 767px) { .proof1__site { height: 520px; } .proof1__k { font-size: .5625rem; } }
 
 /* ---------- v2 · The meter plate [BANK 279 roll mode] ---------- */
 .proof2__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
