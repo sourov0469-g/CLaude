@@ -3,7 +3,7 @@
 // president since 2015, Rachel answers the phone, Monday to Friday 9 to 5, (937) 746-7377, the 24 service towns.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EASE } from '../../js/fx.js';
+import { EASE, beats } from '../../js/fx.js';
 import { TOWNS } from '../../data/towns.js';
 
 const clamp01 = u => (u < 0 ? 0 : u > 1 ? 1 : u);
@@ -389,4 +389,42 @@ function poster(root, c) {
   return cleanup;
 }
 
-export default { 1: wall, 2: weighted, 3: rotator, 4: stitched, 5: poster };
+// R4 Phase 3: Hero V2's Before/After toggle, a roofer-only control on the one genuine pair (ba2). Two pressed-state
+// buttons; the photos crossfade .35s in CSS; the choice is announced through the buttons' state.
+function beforeAfter(root) {
+  const bs = [...root.querySelectorAll('.hx2-ba-b')]; if (!bs.length) return () => {};
+  const set = s => { root.classList.toggle('is-before', s === 'before'); bs.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.s === s))); };
+  const on = e => { const b = e.target.closest('.hx2-ba-b'); if (b) set(b.dataset.s); };
+  root.addEventListener('click', on); return () => root.removeEventListener('click', on);
+}
+function weightedBA(root, c) { const a = weighted(root, c), b = beforeAfter(root); return () => { a && a(); b(); }; }
+
+// v6 (R4 new) The big drawing: the illustration builds once on load: walls, then roof courses laid one by one up the
+// slope (.08s apart), the orange ridge stroke drawn last (DrawSVG .6s), the roofer and ladder settle. No loop.
+function drawing(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.hx6-copy')], { now: true });
+  const q = s => root.querySelectorAll(s);
+  gsap.timeline({ delay: 0.15 })
+    .from(q('.hx6-sun'), { scale: 0.6, autoAlpha: 0, transformOrigin: '50% 50%', duration: 0.5, ease: EASE })
+    .from(q('.hx6-wall, .hx6-lap, .hx6-win, .hx6-door, .hx6-gut, .hx6-spout'), { y: 18, autoAlpha: 0, duration: 0.35, ease: EASE, stagger: 0.04 }, 0.1)
+    .from(q('.hx6-roofbase'), { autoAlpha: 0, duration: 0.3 }, 0.35)
+    .from(q('.hx6-courses path'), { scaleX: 0, transformOrigin: '50% 50%', duration: 0.3, ease: EASE, stagger: 0.08 }, 0.45)
+    .fromTo(q('.hx6-ridge'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 0.6, ease: 'power2.inOut' }, 0.9)
+    .from(q('.hx6-chim, .hx6-chimcap'), { y: 12, autoAlpha: 0, duration: 0.3, ease: EASE }, 1.1)
+    .from(q('.hx6-ladder, .hx6-roofer'), { x: 30, autoAlpha: 0, duration: 0.4, ease: EASE, stagger: 0.1 }, 1.2);
+}
+// v7 (R4 new) Postcard: the two cards drop onto the table once, the stamp lands last
+function postcard(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.hx7-copy')], { now: true });
+  gsap.from(root.querySelectorAll('.hx7-card'), { y: -40, rotate: 0, autoAlpha: 0, duration: 0.5, ease: 'back.out(1.4)', stagger: 0.15, delay: 0.2 });
+  gsap.from(root.querySelector('.hx7-stamp'), { scale: 1.6, autoAlpha: 0, duration: 0.3, ease: 'power3.in', delay: 0.75 });
+}
+// v8 (R4 new) The brushstroke: the brand gable paints across the hero once (DrawSVG 1s), then the house photo rises
+function brush(root, c) {
+  if (!c.motion) return;
+  gsap.fromTo(root.querySelector('.hx8-gable'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1, ease: 'power2.inOut', delay: 0.1 });
+  beats(root, [root.querySelector('.hx8-copy'), root.querySelector('.hx8-house')], { now: true, delay: 0.5 });
+}
+export default { 1: wall, 2: weightedBA, 3: rotator, 4: stitched, 5: poster, 6: drawing, 7: postcard, 8: brush };

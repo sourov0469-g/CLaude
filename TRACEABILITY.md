@@ -265,3 +265,13 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 4. Facts: every line comes from build/gen-pages.py's one fact list (flag C12 lines, facts lock); no prices, warranties or guarantees; the claims copy says the insurer decides.
 
 **R4 About page QA** (`pageshot.mjs`; sheets `qa/r4-about-1440.jpg`, `qa/r4-about-375.jpg`): overflow 0, errors 0, one H1 in all five layouts at both widths. Facts: only the lock (1995 Bunk, Wade since 2015, Rachel, BBB A+ 2001, Owens Corning Platinum Preferred, $2M, 4.9 / 295) plus pack §3's storm-restoration line; the check links are the homepage Reviews V2 links. The closing call panel moved to base.css (shared by every page).
+
+## R4 master directive, Phases 3+5 (rows before code; per section: B4-B8 = pre-redesign records, V1-V5 improved, V6-V8 new)
+### Hero
+| Slot | Version | Change / concept | References | Verification |
+|---|---|---|---|---|
+| 1-5 | improved | the orange brand label (gable glyph + sentence-case line) on every version; faint roofline contour artwork (stacked gable lines in --a200) behind V2-V5; accent heading phrase; orange CTAs | Phase 3 standards; ⟦S1497⟧ semantic colour | 8-version sheet `qa/r4d-hero-1440.jpg`; errors 0 |
+| 2 | improved + bespoke | Before / After toggle on the photo using the ba2 pair (the one genuine pair), pressed-state buttons, .35s crossfade, caption "The same house, before and after its new roof" | business-only interactivity (directive); Checklist 11 (real photos) | toggles both ways; aria-pressed follows |
+| 6 | NEW The big drawing | a multi-part SVG illustration as the centrepiece (house, courses laid one by one, the orange ridge drawn last, chimney, ladder, roofer, sun, tree); built once on load, no loop | directive design lesson (illustration centrepiece); ⟦S0139⟧ flat; ⟦S1448⟧ one sequence | errors 0 |
+| 7 | NEW Postcard from Springboro | two real job photos as tilted postcards with a brand stamp (the mark, 1995) and a postmark; hover straightens a card | ⟦S0095⟧ (the subject's own artefacts); real photography rule | errors 0 |
+| 8 | NEW The brushstroke | the logo's gable painted huge across the hero (DrawSVG 1s, once); a real photo in a house-shaped clip | brand presence (directive); ⟦S0218⟧-style type and image pairing | errors 0 |

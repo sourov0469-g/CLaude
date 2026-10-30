@@ -183,3 +183,87 @@
 .hx5-tel:focus-visible{text-decoration-thickness:.2em}
 .hx5-tel.is-press{text-decoration-thickness:.32em}
 @media (max-width:640px){.hx5-row{grid-template-columns:1fr;gap:4px}.hx5-n{font-size:var(--t-label);font-weight:600;letter-spacing:0}.hx5{align-items:start;min-height:0}}
+
+/* ---------- R4 directive Phase 3 (hero, all versions): the brand label, roofline contour artwork, accent heading
+   phrase; V2 adds the Before/After toggle on the ba2 pair (the one genuine pair) as a business-only control */
+.hx-lab{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;margin:0;font-family:var(--f-head);font-size:var(--t-label);font-weight:600;color:var(--a700)}
+.hx-lab svg{width:28px;height:auto;fill:var(--a500)}
+.hx-contour{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hx-contour path{fill:none;stroke:var(--a200);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.hx2-text{z-index:1}
+.hx2-b{color:var(--a600)}
+.hx2-img{position:absolute;inset:0;transition:opacity .35s var(--ease-x)}
+.hx2-img--before{opacity:0}
+.hx2.is-before .hx2-img--before{opacity:1}.hx2.is-before .hx2-img--after{opacity:0}
+.hx2-ba{position:absolute;right:clamp(16px,3vw,40px);bottom:clamp(64px,8vw,104px);z-index:2;display:flex;gap:4px;padding:5px;border-radius:999px;background:var(--paper);box-shadow:0 10px 30px -12px rgb(20 20 20 / .45)}
+.hx2-ba-b{min-height:44px;min-width:84px;padding:0 18px;border:0;border-radius:999px;background:none;color:var(--ink);font:600 .9375rem/1 var(--f-head);cursor:pointer;transition:background-color .15s var(--ease-x),color .15s var(--ease-x)}
+.hx2-ba-b[aria-pressed="true"]{background:var(--a500);color:var(--black)}
+@media (hover:hover) and (pointer:fine){.hx2-ba-b[aria-pressed="false"]:hover{background:var(--a50)}}
+.hx2-ba-b:active{scale:.96}
+.hx2-cap-t{position:absolute;right:clamp(16px,3vw,40px);bottom:calc(clamp(64px,8vw,104px) + 64px);z-index:2;max-width:min(60%,280px);text-align:right;padding:8px 14px;border-radius:10px;background:rgb(255 255 255 / .9);font-size:var(--t-small);font-weight:600;color:var(--ink)}
+.hx2-cut-l{stroke:var(--a500)}
+.hx2-cut-c{stroke:var(--ink)}
+@media (max-width:899px){.hx2-ba{bottom:16px;right:16px}.hx2-cap-t{display:none}}
+.hx3-copy,.hx4-in,.hx5-in{position:relative;z-index:1}
+.hx1-copy .hx-lab{margin-bottom:10px}
+.hx5-n{color:var(--a600)}
+.hx3-word{color:var(--a700)}
+
+/* ---------- v6 The big drawing (R4 new): a multi-part SVG illustration as the centrepiece; courses lay in once */
+.hx6{--vbg:var(--a50);min-height:max(640px,100svh);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,48px);align-items:center;padding:calc(var(--nav-h) + 32px) var(--gutter) calc(var(--div-h) + 32px);background:var(--a50);color:var(--ink)}
+.hx6-copy{display:grid;gap:20px;justify-items:start}
+.hx6-h{font-size:var(--t-hero);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:13ch;font-family:var(--f-head)}
+.hx6-a,.hx7-a,.hx8-a{color:var(--a600)}
+.hx6-sub,.hx7-sub,.hx8-sub{font-size:var(--t-lead);line-height:1.45;color:var(--muted);max-width:40ch}
+.hx6-cta,.hx7-cta,.hx8-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+.hx6-proof,.hx8-proof{display:inline-flex;align-items:center;min-height:44px;font-family:var(--f-head);font-weight:600;font-size:var(--t-label);color:var(--a700);text-underline-offset:5px}
+.hx6-art{width:100%;height:auto;overflow:visible}
+.hx6-art *{vector-effect:non-scaling-stroke}
+.hx6-sun{fill:var(--a300)}
+.hx6-hills path{fill:var(--a100)}
+.hx6-trunk{stroke:var(--ink);stroke-width:6}
+.hx6-tree circle{fill:var(--a200);stroke:var(--ink);stroke-width:3}
+.hx6-wall{fill:var(--paper);stroke:var(--ink);stroke-width:3}
+.hx6-lap{stroke:var(--line);stroke-width:2}
+.hx6-door{fill:var(--a500);stroke:var(--ink);stroke-width:3}.hx6-knob{fill:var(--ink)}
+.hx6-win rect{fill:var(--a50);stroke:var(--ink);stroke-width:3}.hx6-win path{stroke:var(--ink);stroke-width:2.5}
+.hx6-gut{fill:var(--paper);stroke:var(--ink);stroke-width:3}.hx6-spout{stroke:var(--ink);stroke-width:8;stroke-linecap:round}
+.hx6-roofbase{fill:var(--ink-2);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.hx6-courses path{stroke:var(--n700);stroke-width:3}
+.hx6-ridge{fill:none;stroke:var(--a500);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+.hx6-chim{fill:var(--a600);stroke:var(--ink);stroke-width:3}.hx6-chimcap{fill:var(--ink)}
+.hx6-rail{stroke:var(--wood);stroke-width:7;stroke-linecap:round}.hx6-rung{stroke:var(--wood);stroke-width:5;stroke-linecap:round}
+.hx6-head{fill:var(--a200);stroke:var(--ink);stroke-width:3}.hx6-hat{fill:var(--a500);stroke:var(--ink);stroke-width:2.5}
+.hx6-body{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.hx6-shingle{fill:var(--n700);stroke:var(--ink);stroke-width:2}
+@media (max-width:899px){.hx6{grid-template-columns:1fr;min-height:0}.hx6-art{max-width:560px}}
+
+/* ---------- v7 Postcard from Springboro (R4 new): two real photos as tilted postcards, a brand stamp and postmark */
+.hx7{--vbg:var(--paper);min-height:max(640px,100svh);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center;padding:calc(var(--nav-h) + 32px) var(--gutter) calc(var(--div-h) + 32px);background:var(--paper);color:var(--ink)}
+.hx7-copy{display:grid;gap:20px;justify-items:start}
+.hx7-h{font-size:var(--t-hero);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:14ch;font-family:var(--f-head)}
+.hx7-hrs{font-family:var(--f-head);font-weight:600;color:var(--muted)}
+.hx7-cards{position:relative;min-height:clamp(360px,44vw,580px)}
+.hx7-card{position:absolute;margin:0;padding:14px 14px 48px;background:var(--paper);border-radius:6px;box-shadow:0 30px 60px -30px rgb(20 20 20 / .55),0 0 0 1px var(--line);transition:rotate .3s var(--ease-x),translate .3s var(--ease-x)}
+.hx7-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px}
+.hx7-card--a{left:4%;top:10%;width:72%;rotate:-3deg;z-index:2}
+.hx7-card--b{right:0;top:0;width:52%;rotate:5deg;background:var(--a100)}
+@media (hover:hover) and (pointer:fine){.hx7-card:hover{rotate:0deg;translate:0 -6px;z-index:3}}
+.hx7-card figcaption{position:absolute;left:18px;bottom:14px;font-family:var(--f-head);font-weight:600;font-size:.9375rem}
+.hx7-stamp{position:absolute;right:20px;top:20px;display:grid;justify-items:center;gap:2px;width:84px;padding:8px 6px 6px;background:var(--paper);outline:2px dashed var(--a500);outline-offset:-6px;rotate:4deg}
+.hx7-stamp svg{width:52px;height:52px}.hx7-stamp .num{font:700 .8125rem var(--f-head);color:var(--a700)}
+.hx7-post{position:absolute;right:96px;top:44px;width:150px;height:auto;opacity:.75}
+.hx7-post circle,.hx7-post path{fill:none;stroke:var(--ink);stroke-width:2}
+.hx7-post text{font:700 11px var(--f-head);fill:var(--ink)}
+@media (max-width:899px){.hx7{grid-template-columns:1fr;min-height:0}.hx7-cards{min-height:min(110vw,520px)}.hx7-post{display:none}}
+
+/* ---------- v8 The brushstroke (R4 new): the logo's gable drawn huge across the hero; the photo sits in a house shape */
+.hx8{--vbg:var(--a50);position:relative;min-height:max(640px,100svh);padding:calc(var(--nav-h) + 24px) var(--gutter) calc(var(--div-h) + 32px);background:var(--a50);color:var(--ink);display:grid;align-items:end}
+.hx8-stroke{position:absolute;left:0;right:0;top:calc(var(--nav-h) + 8px);width:100%;height:clamp(140px,22vw,300px);pointer-events:none}
+.hx8-gable{fill:none;stroke:var(--a500);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.hx8-grid{position:relative;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end;max-width:1280px;margin:clamp(120px,18vw,260px) auto 0;width:100%}
+.hx8-copy{display:grid;gap:20px;justify-items:start}
+.hx8-h{font-size:clamp(2.75rem,1rem + 5vw,4.5rem);font-weight:700;line-height:1.02;letter-spacing:-.015em;max-width:14ch;font-family:var(--f-head)}
+.hx8-house{margin:0;aspect-ratio:4/4.4;clip-path:polygon(50% 0,100% 34%,100% 100%,0 100%,0 34%);overflow:hidden;background:var(--a200)}
+.hx8-house img{width:100%;height:100%;object-fit:cover}
+@media (max-width:899px){.hx8-grid{grid-template-columns:1fr;margin-top:clamp(90px,24vw,160px)}.hx8-house{max-width:420px}}
