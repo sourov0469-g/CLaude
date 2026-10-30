@@ -1001,3 +1001,21 @@ Tools: `scratchpad/ap/qa2.js` (WCAG contrast of every visible text node against 
 - no-JS content;
 - no overflow and no sub-24 px targets at 320 and 375;
 - every booking field labelled, with autocomplete and inputmode.
+
+## QA round 3 (2026-10-30)
+
+**Raised**
+- (a) Backups 6–8 in all ten sections: console errors, overflow, small targets.
+- (b) Cursor must-fixes D.1–D.3 live.
+- (c) Photo quality at AVIF q46.
+- (d) Legacy `sect.js` failures.
+- (e) Mobile winners at 375.
+
+**Killed / kept as records**
+- (a) 0 console errors and 0 overflow across the 30 frozen states. The small targets inside backups are frozen records. Per the audit pack (backups are never deleted and stay as recorded) and the owner design note ("leave the hidden backups as they are"), they are left untouched. ⟦S0071⟧
+- (d) Every legacy `sect.js` failure checks a pre-pack expectation that was replaced on purpose (old H2 sizes, old tones, the removed version code). These are outdated expectations, not defects. `qa/v7/recheck.js` is the current suite.
+
+**Verified**
+- (b) D.1: the lids settle at 0.42. D.2: `--cw` and `--ch` are cleared outside the hero. D.3: the resolver stays false under reduced motion and in a fresh session.
+- (c) Spot-checked at 2x: no banding or blocking visible on the roof, siding or face photos.
+- (e) No new defects at 375 in any winner. Re-check suite 225/0.
