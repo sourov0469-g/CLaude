@@ -93,7 +93,7 @@
       const r = el.getBoundingClientRect();
       ring.style.setProperty('--cw', (r.width + 14) + 'px');
       ring.style.setProperty('--ch', (r.height + 14) + 'px');
-    }
+    } else { ring.style.removeProperty('--cw'); ring.style.removeProperty('--ch'); }   // Audit pack D.2: no size leak
     if (next === 'paint') ring.style.setProperty('--paint', API.paint);
   }
 

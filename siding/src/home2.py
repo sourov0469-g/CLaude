@@ -18,7 +18,7 @@ import sheet
 H = 'assets/img/h/'
 EMAIL = 'info@austinprosiding.com'
 ADDRESS = '7801 N Lamar Blvd Suite C70, Austin, TX 78752'   # BRIEF-V5 §3, verbatim
-HOURS = 'Monday–Friday 8–8, Saturday 8–6, Sunday 12–5'       # BRIEF-V5 §3, verbatim
+HOURS = 'Monday-Friday 8-8, Saturday 8-6, Sunday 12-5'       # BRIEF-V5 §3 figures; hyphens page-wide (Audit pack C.14, K2 closed)
 
 
 def band(s):
@@ -168,10 +168,11 @@ def map_svg(cls='map-svg', label='Map of 312 photographed, documented Austin Pro
 
 # ---------- HERO ----------
 def pstrip(cls=''):
-    """anatomy F1 proof strip: rating + review count + installer tier + since-year, in or above every hero"""
+    """anatomy F1 proof strip: rating + review count + installer tier + since-year, in or above every hero. The stars
+    are the shared 98 % component (Audit pack C.9); below 640 px only the rating and Since 2009 stay (F1 fix 4)."""
     c = f' {cls}' if cls else ''
-    return (f'<p class="pstrip{c}"><span><span class="ps-st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><b>4.9</b> on 474 Google reviews</span>'
-            '<span>GAF Master Elite</span><span>James Hardie Elite Preferred</span><span>Since 2009</span></p>')
+    return (f'<p class="pstrip{c}"><span class="ps-r">{stars("ps-st")}<b>4.9</b> on 474 Google reviews</span>'
+            '<span class="ps-c">GAF Master Elite</span><span class="ps-c">James Hardie Elite Preferred</span><span>Since 2009</span></p>')
 
 
 def pmt(P, apr=0.0799, n=120):
@@ -912,9 +913,15 @@ def at_name(text, n):
 SOURCE = 'Google, 2026'   # where and when each excerpt was posted, as the firm publishes it (no number beside "review")
 
 
-def stars():
-    s = '<path d="M10 1.6l2.47 5.3 5.8.62-4.32 3.93 1.2 5.7L10 14.3l-5.15 2.85 1.2-5.7L1.73 7.52l5.8-.62z"/>'
-    return '<span class="stars" aria-hidden="true">' + ''.join(f'<svg viewBox="0 0 20 20">{s}</svg>' for _ in range(5)) + '</span>'
+STAR = '<path d="M10 1.6l2.47 5.3 5.8.62-4.32 3.93 1.2 5.7L10 14.3l-5.15 2.85 1.2-5.7L1.73 7.52l5.8-.62z"/>'
+
+
+def stars(cls=''):
+    """the one star component (Audit pack C.9): five outlines under five fills clipped to 98 % of the row, so the
+    graphic says 4.9 of 5 and never 5.0. Proof 1's ring (98.0 %) is the reference it matches."""
+    row = ''.join(f'<svg viewBox="0 0 20 20">{STAR}</svg>' for _ in range(5))
+    c = f' {cls}' if cls else ''
+    return f'<span class="stars{c}" aria-hidden="true"><span class="st-0">{row}</span><span class="st-1">{row}</span></span>'
 
 
 def shake(k):
@@ -1229,10 +1236,26 @@ BK = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backup')
 BK_SLOT = 5   # backups live in slots 6, 7, 8: Backup n = slot 5 + n (Audit pack A.2)
 
 
+OLD_STARS = re.compile(r'<span class="stars" aria-hidden="true">(?:<svg viewBox="0 0 20 20"><path d="[^"]+"/></svg>){5}</span>')
+
+
+def facts_pass(html):
+    """corrections of FACT reach the frozen backups too (the facts lock outranks the freeze): the star graphics say 4.9,
+    not 5.0 (C.9). Design stays as it was built."""
+    html = html.replace('<span class="ps-st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>', stars('ps-st'))
+    html = OLD_STARS.sub(lambda m: stars(), html)
+    for a, b in FACT_FIX:
+        html = html.replace(a, b)
+    return html
+
+
+FACT_FIX = []   # (old, new) pairs added as Part C/F fact corrections land
+
+
 def backups(key):
     """the pre-round versions of a section, frozen as built (backup/<key>-b<n>.html): never the default, never deleted"""
     names = open(os.path.join(BK, f'{key}-names.txt'), encoding='utf-8').read().split('|')
-    return [(BK_SLOT + n, open(os.path.join(BK, f'{key}-b{n}.html'), encoding='utf-8').read(), names[n - 1]) for n in (1, 2, 3)]
+    return [(BK_SLOT + n, facts_pass(open(os.path.join(BK, f'{key}-b{n}.html'), encoding='utf-8').read()), names[n - 1]) for n in (1, 2, 3)]
 
 
 def section(key, label, fns, names):
@@ -1305,7 +1328,7 @@ def picks():
     bk_rows = ''.join(f'''<li><span>{label}</span><div class="pk-bk" data-for="{key}">{''.join(f'<button type="button" aria-pressed="false" data-v="{v}" title="{e(nm)}">Backup {v - BK_SLOT}</button>' for v, _h, nm in backups(key))}</div></li>''' for key, label, _f, _n in SECTIONS)
     code0 = ' '.join(f'{CODE[k]}1' for k, *_ in SECTIONS)
     return f'''<div class="picks">
-  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Versions</span><b class="num" data-pk-code>{code0}</b></button><div class="pal-mini"><span aria-hidden="true">Cursor</span><div class="pal-sw" role="radiogroup" aria-label="Cursor companion, quick switch"><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="sash">Sash</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="gable">Gable</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="chip">Chip</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-pal="off">Off</button></div></div>
+  <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Versions</span><b class="num" data-pk-code>{code0}</b></button>
   <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Versions" hidden>
     <p class="pk-h">Versions</p>
     <p class="pk-tip">Switch any section here or with its numbered buttons. Keys 1 to 5 switch the section in view.</p>
@@ -1340,8 +1363,8 @@ def build():
     js = ['gsap', 'ScrollTrigger', 'DrawSVGPlugin', 'MorphSVGPlugin', 'Draggable', 'InertiaPlugin', 'CustomEase']
     body += ''.join(f'<script src="assets/js/{n}.min.js" defer></script>\n' for n in js)
     body += '<script src="assets/js/lenis.min.js" defer></script>\n<script src="assets/js/fx.js" defer></script>\n<script src="assets/js/v4.js" defer></script>\n<script src="assets/js/home.js" defer></script>\n</body>\n</html>\n'
-    # house style turns en dashes into hyphens; the §3 hours string is restored verbatim afterwards (K2)
-    out = clean(body).replace(clean(HOURS), HOURS)
+    # house style turns en dashes into hyphens, the hours string included (Audit pack C.14 closes K2)
+    out = clean(body)
     with open(os.path.join(SITE, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(out)
     words = len(re.sub(r'<[^>]+>', ' ', re.sub(r'<template.*?</template>|<script.*?</script>|<style.*?</style>', ' ', out, flags=re.S)).split())

@@ -18,7 +18,15 @@
   const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
   const mqFine = matchMedia('(hover: hover) and (pointer: fine)');
   const mqDesk = matchMedia('(min-width: 900px)');
-  let userMotion = store.get('ap-motion');
+  /* Audit pack D.3: the OS reduced-motion signal is a ceiling. A stored "on" only counts where the OS does not ask for
+     less motion; turning motion on inside a reduced-motion session lasts for that session only (sessionStorage). */
+  const sess = {
+    get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* blocked: the choice lasts until reload */ } }
+  };
+  const readMotion = () => { const st = store.get('ap-motion'); return mqReduce.matches ? (sess.get('ap-motion') || (st === 'off' ? 'off' : null)) : st; };
+  let userMotion = readMotion();
+  const keepMotion = v => { userMotion = v; if (mqReduce.matches && v === 'on') sess.set('ap-motion', v); else { store.set('ap-motion', v); sess.set('ap-motion', ''); } };
   const motionOK = () => !!G && (userMotion ? userMotion === 'on' : !mqReduce.matches);
   const setMotionClass = () => root.classList.toggle('motion', motionOK());
   setMotionClass();
@@ -1443,7 +1451,7 @@
   motionBox.checked = motionOK();
   function remountAll() { SECS.forEach(s => { const v = s.v; s.switched = true; mount(s, v, false); }); if (ST) ST.refresh(); }
   motionBox.addEventListener('change', () => {
-    userMotion = motionBox.checked ? 'on' : 'off'; store.set('ap-motion', userMotion);
+    keepMotion(motionBox.checked ? 'on' : 'off');
     setMotionClass(); lenisSync(); syncFx(); remountAll();
     pkMsg.textContent = motionBox.checked ? 'Motion on.' : 'Motion off: every section shows its finished state.';
   });
@@ -1452,7 +1460,7 @@
   motionBtns.forEach(b => b.addEventListener('click', () => { motionBox.checked = !motionOK(); motionBox.dispatchEvent(new Event('change')); paintMotionBtns(); }));
   motionBox.addEventListener('change', paintMotionBtns);
   paintMotionBtns();
-  mqReduce.addEventListener('change', () => { if (userMotion) return; motionBox.checked = motionOK(); setMotionClass(); lenisSync(); syncFx(); remountAll(); });
+  mqReduce.addEventListener('change', () => { userMotion = readMotion(); if (userMotion) return; motionBox.checked = motionOK(); setMotionClass(); lenisSync(); syncFx(); remountAll(); });
 
   /* in-page links: smooth with Lenis, focus moves to the target (S0915); booking links can preselect a trade */
   d.addEventListener('click', e => {

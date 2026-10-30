@@ -491,3 +491,75 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
   - Labels in visitor language: "Versions" (was "Your picks"); "Copy the version list"; "Cursor" (was "Companion"); "Copied." (was "Paste it into your message").
   - Source: ⟦S0001⟧ plain-language signposting.
   - Verification: `scratchpad/ap/sw.js`. `?v=2367812345` mounts H2 P3 Sb1 Wb2 Bb3; every tab is clicked and the arrow wraps in all 10 sections; the backup button sets `?v=1117111111`; console errors 0.
+
+## C · Page-level fixes
+- **C.1 Colour lock, ACCEPTED, with one IMPROVEMENT.** The `<style>` layer drops from 82 distinct hexes to the 17 tokens.
+  - The 14 tokens stay; `--dwg #3B6FB6`, `--star #F2C230` and `--tape #8A6A3E` are added. The tape survives, because Services 3's tape measure is kept.
+  - Every other UI colour is a `color-mix()` of two tokens. Examples: glass = `--dwg` 22 % into `--sheet`; the shake cards = `--tape` 18 / 24 / 32 % into `--sheet`; the iso faces = `--stone`/`--ground2`/`--ground` steps; the red tints = `--red` 8 / 16 / 28 % into `--sheet`.
+  - Improvement: the pack proposed `rgba()` for the red tints. `color-mix` keeps those fills opaque on SVG faces that overlap, where an alpha fill would show the face behind it.
+  - `#FFF` maps to `--sheet` and `#000` to `--ink`, including mask stops, which are alpha only.
+  - The 5 paint colours the cursor halo cycles through moved to a marked `PAINT DATA` block at the end of the CSS. The 29 swatches travel as `data-hex` attributes from FACTS.md, as product data.
+  - Outside `:root` and that block: 0 hexes.
+  - In JS: the near-field glow now uses `var(--star)`. Left as they are: the paint-chip companion's colours (paint data), the canvas mask `#fff` (an alpha channel), and the `--red` value GSAP tweens.
+  - ⟦S1497⟧ critique-color, ⟦S0241⟧ ui-review.
+- **C.2 `--line` never text, ACCEPTED.** `.sv1-fc` (the Services caption) and `.mx-none` now use `--ink2`. The other `--line` uses are borders, hatching or SVG shapes. ⟦S1497⟧.
+- **C.3 Review brown to `--ink2`, ACCEPTED.** `.sk figcaption span` changes from `#6B5A44` to `--ink2`; `.sk p` changes from `#2A2116` to `--ink`. ⟦S1497⟧.
+- **C.4 Accent discipline, ACCEPTED in part; the rest is in the section rows.**
+  - Done here: the Colour 1 median changes from `--red` to `--ink`. Small red text on light grounds (`.h2p-go`, the `.mx-t` hover, `.b1-open` pressed) moves to `--red-d`.
+  - Not changed: large red figures at weight 780+ (`.h2-med`, `.ix-count`) pass the large-text floor and are the data emphasis.
+  - The Money/Book "washes" are handled in F9/F10 against the rendered panels.
+  - ⟦S1497⟧.
+- **C.5 Type-role lock, ACCEPTED, with one point REJECTED.**
+  - One H1 step, `--t-h1` = clamp(40 px, …, 72 px) at weight 780. The Hero 1 window letters stay the visual layer at their own size, per the pack.
+  - Every H2 is `--t-h2` (64 px) at 780; H3 and below are 650. This lands through a scoped rule (`.sec:not([data-bk]) .stage h1/h2/h3`); the backups keep their type.
+  - `.display` drops from 800 to 780.
+  - REJECTED: "Built 2 has no H2". Measured live: `h2.h2x` "Built for Texas", 64/780. The real defect is the 82.6 px card H3s outranking it, fixed in F5.
+  - ⟦S1500⟧, ⟦S1501⟧, ⟦S0241⟧. Evidence: `scratchpad/ap/heads.js`.
+- **C.7 Dividers, IMPROVED.** The pack's premise ("zero exist") holds for the static file only. With script, every section already hangs a different trade profile from its top edge (v4.js `DIV`: gable, shingle tabs, battens, paint drips, transom, gutter, shakes, dentils, skyline), coloured in the section above.
+  - Kept: the motifs, which are already all different.
+  - Added the treatment family the pack asks for: a 1 px `--line` rule at every seam, in CSS, so it holds without script and in every version (`.sec + .sec > .stage > .v`, `.ft`).
+  - The profile zone shrinks from 26–56 px to 16–24 px.
+  - ⟦S1498⟧, ⟦S1314⟧ §1.
+- **C.9 Stars at 98 %, ACCEPTED.** There is now one component, `stars()`: five outlines under five fills clipped `inset(0 2% 0 0)`. On the 108 px row the fill ends at 105.8 px.
+  - The hero proof strip moves from five ★ glyphs to the component, coloured `--star`.
+  - The reviews header uses the same component.
+  - The backups get it too through `facts_pass()`: a star graphic is a statement of fact.
+  - ⟦S1306⟧, ⟦S1314⟧ §9.
+- **C.13 Reduced motion in CSS, ACCEPTED.** `@media (prefers-reduced-motion: reduce)` sets every transition and animation to 0 while `html` lacks `.motion` (the no-JS case or the OS setting). It also hides the companion, ring and halo.
+  - `html.js:not(.motion)` applies the same layer when the toggle is off.
+  - The toggle can only add motion back, as an explicit choice.
+  - ⟦S0063⟧, ⟦S0242⟧.
+- **C.14 Hours hyphens, ACCEPTED.** `HOURS` = "Monday-Friday 8-8, Saturday 8-6, Sunday 12-5", and `clean()` no longer restores en dashes (K2 closed). The Book-callout copy in v4.js matches.
+  - Rendered en dashes: 0. Em dashes: 0.
+  - ⟦S0650⟧ §9.G.
+- **C.15 Protect, ACCEPTED.** Eyebrows stay at 0. Ship checklist: switcher tabs are 36×36 visual with a 44×44 effective target (`.vsw-b::after` at −4 px); no edit may shrink it. ⟦S0241⟧.
+- C.6, C.8, C.10, C.11 and C.12 land per section; see the F rows.
+
+## D · Cursor and interaction
+- **D.1 CTA pose, ACCEPTED.** The companion has a new `cta` state for `[data-cur="hero"], .btn-red`, ranked first in `classify`.
+  - Sash: lower pane up 3 px and lids to 0.42 in 140 ms power2.out.
+  - Gable and chip: lids 0.42, with windows swell or the chip's middle turning red.
+  - The blink rests at 0.42 in this state. Switcher and swatch swells are untouched.
+  - ⟦S0220⟧ Axiom 2, ⟦S1448⟧.
+- **D.2 Ring size leak, ACCEPTED.** `setState` removes `--cw`/`--ch` from the ring whenever the state is not `hero`, so every other state sizes from its class again. ⟦S1314⟧ §7, ⟦S0405⟧.
+- **D.3 OS reduced motion as a ceiling, ACCEPTED.** Under `prefers-reduced-motion`, a stored "on" is ignored; a stored "off" still counts. Turning motion on inside such a session goes to `sessionStorage`, so it lasts only that session. ⟦S0063⟧ Std 8.
+- **D.4 Spring follow, ACCEPTED.** The companion body follows on a semi-implicit spring: k 400, c 25, m 1, 4 ms substeps. Velocity carries through direction changes. The halo and ring keep their eased lag. ⟦S0089⟧.
+- **D.5 Duration stragglers, ACCEPTED.**
+  - `.ix-gl` changes from 450 to 250 ms, and its draw keyframes from 500 to 220 ms.
+  - `.m-pins circle` changes from 350 ms to `--t-ui` (240).
+  - The six literal `.28s cubic-bezier(.4,0,.2,1)` values become `var(--t-ui) var(--ease)`; `.bp-pane` fill too.
+  - `.cfx` is now one 128 px halo sized by the `scale` property (`--cs` per section; border widths compensated). No width, height or margin is animated anywhere.
+  - `.sc-b` 900 ms: the rule had no markup, so it was deleted (E.6).
+  - ⟦S0050⟧, ⟦S0063⟧ Std 7, ⟦S0056⟧.
+- **D.6 Hover gates and press value, ACCEPTED.** `.creds-stamp li:hover` and the two `.gl-table tr:hover` reveals move under `(hover:hover) and (pointer:fine)`. `:focus-within` stays ungated, so keyboard users keep the reveal. `.sw:active` changes from 0.92 to 0.95. ⟦S0063⟧ Std 8, ⟦S0083⟧.
+- **D.7: see A.** Also: the bar's companion quick-switch pill (`.pal-mini`) is REMOVED by the Removal Test. It duplicated the Versions panel's cursor control and made up half the bottom-left chrome. ⟦S1306⟧.
+- **D.8 1.03× breathing loop, REJECTED.** It would be the page's only idle infinite loop. The brief's F17 bans idle loops, and the pack itself credits the page for zero `repeat:-1`. The companion already has blink, gaze and an eye-roll tic; breath adds motion budget without information. ⟦S0063⟧ (frequency: a loop the user did not cause), ⟦S1331⟧ (perpetual layers double the motion budget).
+- **D.9 No cursor trail, ACCEPTED** (nothing added). **D.10 Keep the passing items:** blink timing, touch guards and the toggle sync are unchanged.
+
+## E · Quirks
+- **E.1 Switch height deltas, ACCEPTED as analysed.** `switchTo` already holds the switched section's top edge (`jumpBy`), so the viewport does not jump. The Built +2,952 px is fixed at its source in F5.
+- **E.2 Ring crossfade:** no action, as the pack says.
+- **E.3 Chrome covering content, ACCEPTED, with one IMPROVEMENT.** Below 640 px, the Versions button moves bottom-right at 44 px tall and shows no code. The quick-switch pill is gone everywhere (D.7). Desktop chrome falls from ~560 px wide to ~330 px. ⟦S1306⟧, ⟦S0049⟧ (sticky overlays).
+- **E.4 Header Motion toggle, ACCEPTED.** It shows from 900 px. Between 900 and 1239 px it is the switch glyph with its name kept for assistive tech. ⟦S0049⟧.
+- **E.5:** see F7.
+- **E.6 Dead code, ACCEPTED.** The whole `.sc-*` "scroll to install" block (22 rules) and `.zone.is-hot` are deleted. They had zero uses in the markup, the backups or the scripts.

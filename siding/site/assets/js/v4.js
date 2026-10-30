@@ -126,7 +126,7 @@
 
   const Pal = (() => {
     let el = null, svg = null, kind = 'off', on = false, parts = {};
-    const S = { x: 0, y: 0, ox: 24, oy: 22, lean: 0, hx: [], state: 'idle', target: null, shown: false, gx: 0, gy: 0, sleep: false, read: 0 };
+    const S = { x: 0, y: 0, vx: 0, vy: 0, ox: 24, oy: 22, lean: 0, hx: [], state: 'idle', target: null, shown: false, gx: 0, gy: 0, sleep: false, read: 0 };
     let timers = [];
     function build() {
       el = d.createElement('div');
@@ -160,7 +160,11 @@
     function pose(name, tgt) {
       rest();
       const dir = tgt ? Math.sign(tgt.left + tgt.width / 2 - S.x - 24) || 1 : 1;
-      if (name === 'button') {
+      if (name === 'cta') {   // D.1: "looks at the booking": lower pane up 3 px, lids to 0.42, 140 ms ease-out (sash); the others lean in
+        if (kind === 'sash') { T(parts.ls, { y: -3 }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
+        if (kind === 'gable') { T(parts.wins, { scale: 1.12 }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
+        if (kind === 'chip') { T(parts.mid, { fill: '#D42125' }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
+      } else if (name === 'button') {
         if (kind === 'sash') { T(parts.ls, { y: -7 }, 0.26); T(parts.mo, { attr: { y: 33.5, height: 7 } }, 0.26); T(parts.sheen, { opacity: 1, x: 14, duration: 0.65, ease: 'power2.inOut' }); }
         if (kind === 'gable') T(parts.door, { scaleX: 0.16 }, 0.3, 'back.out(1.5)');
         if (kind === 'chip') { T(parts.mid, { fill: '#D42125' }, 0.22); T(parts.front, { rotation: 8 * dir }, 0.3, 'back.out(1.5)'); }
@@ -192,7 +196,7 @@
     }
     function blink() {
       if (!on || S.sleep || !S.shown || !parts.lids.length) return;
-      const base = S.state === 'link' && kind === 'sash' ? 0.42 : S.state === 'heading' ? 0.25 : 0;
+      const base = (S.state === 'link' && kind === 'sash') || S.state === 'cta' ? 0.42 : S.state === 'heading' ? 0.25 : 0;
       G.timeline({ overwrite: 'auto' }).to(parts.lids, { scaleY: 1, duration: 0.11, ease: 'power2.in', transformOrigin: '50% 0%' })
         .to(parts.lids, { scaleY: base, duration: 0.19, ease: 'power2.out' }, '+=0.04');
     }
@@ -230,6 +234,7 @@
     function clear() { timers.forEach(clearTimeout); timers = []; clearTimeout(napT); }
 
     const sel = {
+      cta: '[data-cur="hero"], .btn-red',   // Audit pack D.1: the money buttons get the companion's first pose
       drag: '[role="slider"], .cmp-handle, [data-cur="drag"], .tape-strip',
       card: '[role="radio"], [role="option"], [role="tab"], .h2p, .ix-row, .mx-row, .sw, .cmp-sw, .cb-t, .cr-n, .dv-chip, .pay-t, .dt, .lg-b, .bp-step, .fs, .sp-toggle, [data-card]',
       button: '.btn, button, [role="button"], input[type="submit"]',
@@ -239,7 +244,7 @@
     };
     function classify(t) {
       if (!t || !t.closest) return [null, 'idle'];
-      for (const k of ['drag', 'card', 'button', 'link', 'image', 'heading']) { const x = t.closest(sel[k]); if (x && !x.closest('.pal-sw, .picks')) return [x, k]; }
+      for (const k of ['cta', 'drag', 'card', 'button', 'link', 'image', 'heading']) { const x = t.closest(sel[k]); if (x && !x.closest('.pal-sw, .picks')) return [x, k]; }
       return [null, 'idle'];
     }
     let lastSec = null, napT = 0;
@@ -262,7 +267,7 @@
         el.classList.toggle('pal--red', tone === 'red');
         if (S.shown) { S.x = mix(S.x, P.x + S.ox, 0.6); S.y = mix(S.y, P.y + S.oy, 0.6); }   // S1333: never streak across a section edge
       }
-      if (!S.shown) { S.x = P.x + S.ox; S.y = P.y + S.oy; S.shown = true; el.classList.add('is-on'); }
+      if (!S.shown) { S.x = P.x + S.ox; S.y = P.y + S.oy; S.vx = S.vy = 0; S.shown = true; el.classList.add('is-on'); }
     }
     function press(e) {
       if (!on || (e.pointerType && e.pointerType !== 'mouse')) { if (e.pointerType === 'touch') hide(); return; }
@@ -283,9 +288,15 @@
       const ao = 1 - Math.pow(1 - 0.12, dt * 60);
       S.ox += (wantOx - S.ox) * ao; S.oy += (wantOy - S.oy) * ao;
       const tx = clamp(P.x + S.ox, 2, innerWidth - 50), ty = clamp(P.y + S.oy, 2, innerHeight - 50);
+      /* Audit pack D.4: a velocity-preserving spring (stiffness 400, damping 25, mass 1, semi-implicit Euler in 4 ms
+         substeps) instead of a lerp that restarts on every turn; S0089 spring-for-interruptible */
       const a = 1 - Math.pow(1 - 0.14, dt * 60);
       const px = S.x, py = S.y;
-      S.x += (tx - S.x) * a; S.y += (ty - S.y) * a;
+      for (let t = Math.min(dt, 0.05); t > 1e-6; t -= 0.004) {
+        const h = Math.min(0.004, t);
+        S.vx += ((tx - S.x) * 400 - S.vx * 25) * h; S.vy += ((ty - S.y) * 400 - S.vy * 25) * h;
+        S.x += S.vx * h; S.y += S.vy * h;
+      }
       const vx = (S.x - px) / Math.max(dt, 1e-3) / 60;
       // body lean from velocity, head counter-leans 110 ms later at 0.45 (follow-through by delay, S0489)
       const leanT = clamp(vx * 0.9, -8, 8);
@@ -749,7 +760,7 @@
         const pw = (dw - 54) / 2, ph = [0.2, 0.34, 0.28].map(k => (dh - 72) * k);
         let panels = '', y = dy + 18;
         ph.forEach(h => { panels += `<rect x="${dx + 18}" y="${y}" width="${pw}" height="${h}"/><rect x="${dx + 36 + pw}" y="${y}" width="${pw}" height="${h}"/>`; y += h + 18; });
-        F.svg.innerHTML = `<defs><radialGradient id="${id}"><stop offset="0" stop-color="#FFE9B8" stop-opacity=".5"/><stop offset=".45" stop-color="#FFE9B8" stop-opacity=".16"/><stop offset="1" stop-color="#FFE9B8" stop-opacity="0"/></radialGradient></defs>
+        F.svg.innerHTML = `<defs><radialGradient id="${id}"><stop offset="0" style="stop-color:var(--star)" stop-opacity=".34"/><stop offset=".45" style="stop-color:var(--star)" stop-opacity=".1"/><stop offset="1" style="stop-color:var(--star)" stop-opacity="0"/></radialGradient></defs>
 <circle class="f-pool" r="${clamp(F.w * 0.22, 160, 320)}" cx="${F.w * 0.7}" cy="${F.h * 0.3}" fill="url(#${id})"/>
 <g class="f-door" style="transform-origin:${dx + dw}px ${dy + dh / 2}px"><rect class="f-jamb" x="${dx - 8}" y="${dy - 8}" width="${dw + 16}" height="${dh + 8}"/><rect class="f-leaf" x="${dx}" y="${dy}" width="${dw}" height="${dh}"/>${panels}<circle class="f-knob" cx="${dx + 16}" cy="${dy + dh * 0.53}" r="5"/></g>`;
         F.pool = F.svg.querySelector('.f-pool'); F.door = F.svg.querySelector('.f-door');
@@ -994,7 +1005,7 @@
     const r = el.getBoundingClientRect();
     const c = d.createElement('div');
     c.className = 'rx-call'; c.setAttribute('aria-hidden', 'true');
-    c.innerHTML = '<b>(512) 550-0000</b><span>Monday–Friday 8–8, Saturday 8–6, Sunday 12–5</span>';
+    c.innerHTML = '<b>(512) 550-0000</b><span>Monday-Friday 8-8, Saturday 8-6, Sunday 12-5</span>';
     d.body.appendChild(c);
     const w = Math.min(340, innerWidth - 32);
     G.set(c, { left: clamp(r.left + r.width / 2 - w / 2, 16, innerWidth - w - 16), top: clamp(r.top - 110, 12, innerHeight - 120), width: w });
