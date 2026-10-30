@@ -150,12 +150,12 @@
       if (!k.motion) return;
       // the number grows from a line of text to the size of the room as it comes up the screen
       gsap.fromTo(digits, { scale: .3 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: num, start: 'top bottom', end: 'top 40%', scrub: true } });
-      // the handset rings every few seconds while it is on screen
-      var ring = gsap.timeline({ repeat: -1, repeatDelay: 2.6, paused: true })
+      // the handset rings twice when it comes on screen (under 5s), and again whenever the pointer reaches the number
+      var ring = gsap.timeline({ repeat: 1, repeatDelay: 2.6, paused: true })
         .to(hs, { keyframes: [{ rotation: -14, duration: .06 }, { rotation: 12, duration: .06 }, { rotation: -10, duration: .06 }, { rotation: 8, duration: .06 }, { rotation: -6, duration: .06 }, { rotation: 0, duration: .08 }], svgOrigin: '28 40' }, 0)
         .fromTo(waves, { drawSVG: '50% 50%', opacity: 0 }, { drawSVG: '0% 100%', opacity: 1, duration: .3, stagger: .08 }, 0)
         .to(waves, { opacity: 0, duration: .4 }, .7);
-      k.io(num, function (en) { en.isIntersecting ? ring.play() : ring.pause(); });
+      k.io(num, function (en) { en.isIntersecting ? ring.restart() : ring.pause(); });
       k.on(num, 'pointerenter', function () { ring.restart(); });
     } }
   });

@@ -232,9 +232,10 @@
       k.add(function () { gsap.set(focus, { clearProps: 'all' }); targets.forEach(function (el) { el.classList.remove('is-on'); }); root.classList.remove('is-cycling'); });
 
       // True Focus [BANK 300]: hold 1s, move .5s; manual on hover / focus; paused offscreen
-      var timer = null, manual = false, inView = false;
-      function next() { aim((cur + 1) % targets.length); }
-      function run() { stop(); if (k.motion && inView && !manual) { root.classList.add('is-cycling'); timer = setInterval(next, 1500); } }
+      var timer = null, manual = false, inView = false, steps = 0;
+      // self-running for three moves (4.5s) per visit, then it holds: nothing moves past 5s unasked
+      function next() { aim((cur + 1) % targets.length); if (++steps >= 3) stop(); }
+      function run() { stop(); steps = 0; if (k.motion && inView && !manual) { root.classList.add('is-cycling'); timer = setInterval(next, 1500); } }
       function stop() { clearInterval(timer); timer = null; }
       k.add(stop);
       targets.forEach(function (t, i) {

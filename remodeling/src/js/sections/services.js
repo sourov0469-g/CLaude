@@ -188,10 +188,10 @@
       EZ.reveal(k, root.querySelectorAll('.services3__side > *'));
       gsap.from(tools, { y: -20, autoAlpha: 0, duration: .3, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
       gsap.from(root.querySelectorAll('.services3__tags span'), { y: -10, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .03, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
-      // phones: the tools take turns as the wall comes into view
+      // phones: the tools take one turn each as the wall comes into view, then stop (no motion runs past 5s unasked)
       if (!k.fine) {
         var n = 0, t = null;
-        k.io(wall, function (en) { clearInterval(t); if (en.isIntersecting) t = setInterval(function () { pick(n++ % 3, true); }, 2200); }, { threshold: .5 });
+        k.io(wall, function (en) { clearInterval(t); if (en.isIntersecting && n < 3) { pick(n++, true); t = setInterval(function () { if (n >= 3) { clearInterval(t); return; } pick(n++, true); }, 1600); } }, { threshold: .5 });
         k.add(function () { clearInterval(t); });
         return;
       }

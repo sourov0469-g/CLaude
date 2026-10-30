@@ -93,7 +93,7 @@
         k.ctx.add(function () {
           gsap.fromTo(ws, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .75, ease: 'power2.inOut', stagger: .08, onComplete: function () {
             ws.forEach(function (w) { w.style.strokeDasharray = '10px 8px'; w.style.strokeDashoffset = '0px'; });
-            flow = gsap.fromTo(ws, { strokeDashoffset: 0 }, { strokeDashoffset: -36, duration: .7, ease: 'none', repeat: -1 });
+            flow = gsap.fromTo(ws, { strokeDashoffset: 0 }, { strokeDashoffset: -36, duration: .7, ease: 'none', repeat: 5 });   // flows ~4s, then rests (no motion past 5s unasked)
           } });
         });
       }
