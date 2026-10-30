@@ -62,10 +62,10 @@ for r in rows: print(f'{r[0]}  {r[1]:<{w}}  {r[2]}')
 print('FAILS:', sum(r[0] == 'FAIL' for r in rows))
 
 # R4 owner lock for the new sections: no promise of claim approval or outcome; every Storm version says the insurer decides
-for v in ['1','2','3','4','5']:
+for v in ['1','2','3','4','5','6','7','8']:
     blk = (live.get('storm','') if v == '1' else dict(((a+b), c) for a, b, c in tpl).get('storm'+v, ''))
     t = H.unescape(re.sub(r'<[^>]+>', ' ', blk))
     rows.append((('PASS' if re.search(r'insur\w* (company )?decides|decision is your insurer', t, re.I) else 'FAIL'), f'storm v{v}: says the insurer decides the claim', ''))
 # counted in the raw source: every occurrence must sit inside <s> (Storm V3, and its verbatim backup B6, strike it out)
 chk('no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)', n(r"(?<!<s>)we('ll| will) get your claim approved|guarantee[ds]? (your )?(claim|approval)", src) == 0, f'{n(r"get your claim approved", src)} struck')
-for r in rows[-6:]: print(f'{r[0]:5} {r[1]:<110} {r[2]}')
+for r in rows[-9:]: print(f'{r[0]:5} {r[1]:<110} {r[2]}')

@@ -69,4 +69,34 @@ function rainy(root, c) {
   return () => { cancelAnimationFrame(raf); vis.kill(); tw.kill(); };
 }
 
-export default { 1: split, 2: year, 3: honest, 4: evidence, 5: rainy };
+// R4 v6 (new) The after-storm checklist: real checkboxes; each tick lays one shingle course on the drawn roof (bottom
+// up, in tick count) and the count is announced. The insurer's step is tinted: it is the one the firm does not control.
+function checklist(root) {
+  const box = [...root.querySelectorAll('.st6-item input')], rows = [...root.querySelectorAll('.st6-row')], out = root.querySelector('.st6-count');
+  const sync = () => { const n = box.filter(b => b.checked).length; rows.forEach((r, i) => r.classList.toggle('is-on', i < n)); out.textContent = `${n} of ${box.length} done`; };
+  root.addEventListener('change', sync); sync();
+  return () => root.removeEventListener('change', sync);
+}
+// R4 v7 (new) What to look for: four marks on a drawn house (torn tabs, a dented vent, grit at the downspout, a fallen
+// limb); a mark shows its note. Idle marks pulse (CSS, off under reduced motion); the chosen one turns black.
+function spotter(root, c) {
+  const spots = [...root.querySelectorAll('.st7-spot')], notes = [...root.querySelectorAll('.st7-note')];
+  const on = e => { const b = e.target.closest('.st7-spot'); if (!b) return; const i = +b.dataset.i;
+    spots.forEach((s, j) => s.setAttribute('aria-pressed', String(j === i))); notes.forEach((n, j) => { n.hidden = j !== i; });
+    if (c.motion) gsap.fromTo(notes[i], { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.24, ease: 'power2.out', clearProps: 'transform' }); };
+  root.addEventListener('click', on);
+  if (c.motion) beats(root, [root.querySelector('.st7-head'), root.querySelector('.st7-body')]);
+  return () => root.removeEventListener('click', on);
+}
+// R4 v8 (new) The report: the scope lines write themselves left to right (60ms apart), then the stamp lands (from 1.4,
+// .22s, a small overshoot). Once.
+function report(root, c) {
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.st8-copy')]);
+  const ln = root.querySelectorAll('.st8-lines i'), stamp = root.querySelector('.st8-stamp');
+  gsap.set(ln, { scaleX: 0.001 }); gsap.set(stamp, { autoAlpha: 0, scale: 1.4 });
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.st8-sheet'), start: 'top 75%', once: true, onEnter: () =>
+    gsap.timeline().to(ln, { scaleX: 1, duration: 0.3, ease: EASE, stagger: 0.06 }).to(stamp, { autoAlpha: 1, scale: 1, duration: 0.22, ease: 'back.out(2)' }, '+=0.05') });
+  return () => st.kill();
+}
+export default { 1: split, 2: year, 3: honest, 4: evidence, 5: rainy, 6: checklist, 7: spotter, 8: report };
