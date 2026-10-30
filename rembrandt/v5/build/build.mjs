@@ -18,9 +18,11 @@ const read = f => fs.readFileSync(path.join(SRC, f), 'utf8');
 export const SECTIONS = [
   { id: 'hero', name: 'Hero', label: 'Rembrandt Roofing & Restoration', def: 2 },
   { id: 'proof', name: 'Reviews', label: 'Reviews and credentials', def: 2 },
+  { id: 'svc', name: 'Services', label: 'What we do', def: 1 },
   { id: 'work', name: 'Work', label: 'Our work', def: 1 },
   { id: 'family', name: 'Family', label: 'The family', def: 1 },
   { id: 'how', name: 'Steps', label: 'How it works', def: 3 },
+  { id: 'storm', name: 'Storm', label: 'Storm damage and insurance', def: 1 },
   { id: 'area', name: 'Towns', label: 'Where we work', def: 3 },
   { id: 'call', name: 'Call', label: 'Call Rembrandt', def: 1 },
 ].filter(s => fs.existsSync(path.join(SRC, 'sections', s.id)) && (!ONLY || ONLY.includes(s.id)));
@@ -29,6 +31,13 @@ const ICONS = {
   ICON_PHONE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 3.4 5.2 1.6 1.6 0 0 1 5 3.5z"/><path class="ic-arc" pathLength="1" d="M14.6 2.6a7.2 7.2 0 0 1 6.8 6.8"/><path class="ic-arc" pathLength="1" d="M14.3 6.2a3.6 3.6 0 0 1 3.5 3.5"/></svg>',
   ICON_SPLIT: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg>',
   ICON_ARROW: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  // R4 service icons (⟦S0139⟧ flat: solid planes, one stroke weight), shared by the Services versions and the Services page
+  ICON_SREPLACE: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="ic-f" d="M6 24 24 9l18 15v3H6z"/><path d="M6 24 24 9l18 15M11 23v17h26V23M20 40V30h8v10"/></svg>',
+  ICON_SREPAIR: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M6 30 24 14l18 16"/><path class="ic-f" d="M22 21h9v7h-9z"/><path d="M22 21h9v7h-9zM34 8l6 6-12 12-6-6z"/></svg>',
+  ICON_SHAIL: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="ic-f" d="M13 26a8 8 0 0 1 1-16 11 11 0 0 1 21 3 6.5 6.5 0 0 1 0 13z"/><path d="M13 26a8 8 0 0 1 1-16 11 11 0 0 1 21 3 6.5 6.5 0 0 1 0 13z"/><circle cx="16" cy="34" r="2.4"/><circle cx="26" cy="38" r="2.4"/><circle cx="34" cy="33" r="2.4"/></svg>',
+  ICON_SCLAIM: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="ic-f" d="M12 6h18l8 8v28H12z"/><path d="M12 6h18l8 8v28H12zM30 6v8h8M18 22h14M18 28h14M18 34h8"/></svg>',
+  ICON_SSIDING: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="ic-f" d="M8 10h32v28H8z"/><path d="M8 10h32v28H8zM8 17h32M8 24h32M8 31h32"/></svg>',
+  ICON_SGUTTER: '<svg class="ic-s" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M4 12 24 4l20 8"/><path class="ic-f" d="M6 14h36v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"/><path d="M6 14h36v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3zM36 22v16"/><path class="ic-f" d="M36 42c-2 0-3-1.4-3-3 0-2 3-5 3-5s3 3 3 5c0 1.6-1 3-3 3z"/></svg>',
 };
 const icons = s => s.replace(/ICON_[A-Z]+/g, k => { if (!ICONS[k]) throw new Error('unknown icon ' + k); return ICONS[k]; });
 
@@ -69,6 +78,8 @@ const GLYPH = {
   family: '<path d="M3 10a5 5 0 0 1 10 0z"/><path class="g-m" d="M1 10.5h14v2H1z"/>',
   how: '<path d="M2 14l1-4 8-8 3 3-8 8z"/><circle class="g-m" cx="13.5" cy="13.5" r="1.6"/>',
   area: '<path class="g-m" d="M8 15s-5-5.2-5-8.6a5 5 0 0 1 10 0C13 9.8 8 15 8 15zm0-6.6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill-rule="evenodd"/>',
+  svc: '<path d="M2 8 8 3l6 5v6H2z"/><rect class="g-m" x="6" y="9" width="4" height="5"/>',
+  storm: '<path d="M4.5 9a3 3 0 0 1 .5-6 4 4 0 0 1 7.5 1A2.5 2.5 0 0 1 12 9z"/><circle class="g-m" cx="8" cy="13" r="1.6"/>',
   call: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
 };
 const pick = s => `<div class="pick-rail"><fieldset class="pick"><legend class="vh">${s.name} section: choose a version</legend><span class="pick-l" aria-hidden="true"><svg class="pick-g pick-g--${s.id}" viewBox="0 0 16 16" focusable="false">${GLYPH[s.id] || ''}</svg>${s.name}</span>` +

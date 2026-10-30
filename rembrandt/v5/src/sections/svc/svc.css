@@ -1,0 +1,110 @@
+/* SERVICES (R4, AUDIT-R4.md): the six main services and the wider menu, on --cream between Reviews (ink) and Work (sky).
+   Facts: the firm's own service lines (pack §5.6, flag C12), no prices, no warranties, no promises about claims.
+   v1 [BANK] 523 ULTRAGRID hotspots on one drawn house + ⟦S0139⟧; v2 [BANK] R45 CSS sticky stack; v3 [BANK] Strike Force
+   symptom routing as a table; v4 ⟦S0823⟧ circles with satellite buttons; v5 [BANK] Q55 drum (unpinned). */
+.sv{--vbg:var(--cream);position:relative;overflow:clip;background:var(--cream);color:var(--ink);padding:clamp(5rem,3rem + 6vw,8rem) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
+.sv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;max-width:16ch}
+.sv-sub{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:42ch;margin-top:14px}
+.sv-also{max-width:1180px;margin:clamp(32px,4vw,48px) auto 0;font-size:var(--t-body);line-height:1.5;color:var(--muted)}
+.sv-also b{color:var(--ink)}
+.ic-s{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ic-s circle{fill:currentColor;stroke:none}
+.ic-s .ic-f{fill:var(--sun);stroke:none}
+
+/* ---------- v1 one house: hotspot buttons over a flat drawing; the chosen part fills sun */
+.sv1-head,.sv1-wrap{max-width:1180px;margin-inline:auto}
+.sv1-wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(28px,4vw,64px);align-items:center;margin-top:clamp(28px,4vw,48px)}
+.sv1-fig{position:relative}
+.sv1-house{display:block;width:100%;height:auto;overflow:visible}
+.sv1-house *{vector-effect:non-scaling-stroke}
+.sv1-ground{stroke:var(--ink);stroke-width:2.5}
+.sv1-wall{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.sv1-lap{stroke:var(--mist);stroke-width:2}
+.sv1-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
+.sv1-win rect{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}.sv1-win path{stroke:var(--ink);stroke-width:2}
+.sv1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.sv1-course{stroke:oklch(1 0 0 / .18);stroke-width:2}
+.sv1-patch{fill:#5b6478;stroke:var(--ink);stroke-width:2}
+.sv1-hail circle{fill:#fff;stroke:var(--ink);stroke-width:1.5}
+.sv1-gut{fill:#fff;stroke:var(--ink);stroke-width:2.5}.sv1-spout{stroke:var(--ink);stroke-width:8;stroke-linecap:round}
+.sv1-post{stroke:var(--ink);stroke-width:4}.sv1-box{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}.sv1-paper{fill:#fff;stroke:var(--ink);stroke-width:2}
+.sv1-p *{transition:fill .2s var(--ease-x),stroke .2s var(--ease-x)}
+.sv1-p.is-on .sv1-wall,.sv1-p.is-on .sv1-roof,.sv1-p.is-on .sv1-patch,.sv1-p.is-on .sv1-gut,.sv1-p.is-on .sv1-box,.sv1-p.is-on .sv1-paper,.sv1-p.is-on .sv1-hail circle{fill:var(--sun)}
+.sv1-p.is-on .sv1-spout{stroke:var(--sun)}
+.sv1-p.is-on .sv1-lap{stroke:oklch(0.62 0.13 75)}
+.sv1-hs{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%;display:grid;place-items:center;width:44px;height:44px;padding:0;border:2.5px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);font:inherit;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 6px 16px -8px oklch(0.2 0.08 262 / .5);transition:background-color .15s var(--ease-x),scale .15s var(--ease-x)}
+.sv1-hs[aria-pressed="true"]{background:var(--ink);color:#fff}
+@media (hover:hover) and (pointer:fine){.sv1-hs:hover{scale:1.08}}
+.sv1-hs:active{scale:.94}
+.sv1-panel{display:grid;gap:10px;padding:clamp(22px,2.6vw,32px);border-radius:16px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06)}
+.sv1-n{margin:0;font-size:var(--t-label);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.sv1-t{font-size:clamp(1.5rem,1.1rem + 1.2vw,2.125rem);font-weight:700;line-height:1.1;letter-spacing:-.015em}
+.sv1-d{font-size:var(--t-body);line-height:1.55}
+html.no-js .sv1-list{position:static!important;width:auto;height:auto;clip:auto;margin:24px 0 0;white-space:normal}
+@media (max-width:899px){.sv1-wrap{grid-template-columns:1fr}}
+
+
+/* ---------- v2 stacked cards (R45: CSS sticky only; the scale-back is a scrubbed tween on the card underneath) */
+.sv2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,88px);max-width:1180px;margin-inline:auto;box-sizing:content-box}
+.sv2-head{align-self:start;position:sticky;top:calc(var(--nav-h) + 40px)}
+.sv2-head .sv-also{margin:24px 0 0}
+.sv2-stack{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,6vh,64px)}
+.sv2-card{position:sticky;top:calc(var(--nav-h) + 40px + var(--i) * 18px);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"n i" "t t" "d d";gap:14px 16px;align-items:center;padding:clamp(24px,3vw,36px);border-radius:18px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 18px 40px -26px oklch(0.2 0.08 262 / .45);transform-origin:50% 0}
+.sv2-card:nth-child(even){background:var(--ink);color:#fff}
+.sv2-card:nth-child(even) .sv2-n{color:var(--on-dark-2)}
+.sv2-n{grid-area:n;font-size:var(--t-label);font-weight:700;color:var(--muted)}
+.sv2-card .ic-s{grid-area:i;justify-self:end;width:56px;height:56px}
+.sv2-t{grid-area:t;font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.08;letter-spacing:-.015em}
+.sv2-d{grid-area:d;font-size:var(--t-body);line-height:1.55;max-width:46ch}
+@media (max-width:899px){.sv2{grid-template-columns:1fr}.sv2-head{position:static}.sv2-card{position:static}}
+
+/* ---------- v3 by what you see: a routing table */
+.sv3-head,.sv3-t{max-width:1180px;margin-inline:auto}
+.sv3-t{width:100%;margin-top:clamp(28px,4vw,48px);border-collapse:collapse;font-size:var(--t-body);line-height:1.5}
+.sv3-t thead th{padding:0 0 12px;text-align:left;font-size:var(--t-label);font-weight:600;color:var(--muted);border-bottom:2px solid var(--ink)}
+.sv3-t tbody th{width:42%;padding:22px 32px 22px 0;text-align:left;vertical-align:top;font-size:clamp(1.25rem,1rem + .9vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.sv3-t tbody th::after{content:"";display:inline-block;width:.7em;height:.7em;margin-left:.35em;vertical-align:.02em;background:var(--blue);clip-path:polygon(0 35%,55% 35%,55% 0,100% 50%,55% 100%,55% 65%,0 65%)}
+.sv3-t td{padding:22px 0;vertical-align:top}
+.sv3-t tbody tr{border-bottom:1px solid oklch(0.3 0.05 262 / .18);transition:background-color .15s var(--ease-x)}
+@media (hover:hover) and (pointer:fine){.sv3-t tbody tr:hover{background:oklch(1 0 0 / .65)}}
+@media (max-width:700px){.sv3-t thead{display:none}.sv3-t tbody tr{display:grid;gap:6px;padding:18px 0}.sv3-t tbody th,.sv3-t td{width:auto;padding:0}}
+
+/* ---------- v4 circles (⟦S0823⟧: 50% circles, white satellite buttons docked at the circle, arcs between) */
+.sv4-head{max-width:1180px;margin-inline:auto}
+.sv4-field{position:relative;list-style:none;margin:clamp(32px,4vw,56px) auto 0;padding:0;max-width:1180px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:16px;row-gap:24px;align-items:start}
+.sv4-arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.sv4-arcs path{fill:none;stroke:var(--steel);stroke-width:1.5;stroke-dasharray:4 6}
+.sv4-o{position:relative;display:grid;justify-items:center;gap:12px;text-align:center}
+.sv4-o--a{grid-column:1/5}.sv4-o--b{grid-column:5/9;margin-top:clamp(40px,8vw,120px)}.sv4-o--c{grid-column:9/13;margin-top:clamp(10px,2vw,30px)}
+.sv4-o--d{grid-column:2/5}.sv4-o--e{grid-column:6/9;margin-top:clamp(20px,4vw,60px)}.sv4-o--f{grid-column:10/13}
+.sv4-c{position:relative;width:var(--d);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 24px 48px -28px oklch(0.2 0.08 262 / .5)}
+.sv4-c img{width:100%;height:100%;object-fit:cover}
+.sv4-disc .sv4-c{display:grid;place-items:center;background:var(--blue);color:#fff}
+.sv4-o--e .sv4-c{background:var(--ink)}
+.sv4-disc .ic-s{width:38%;height:38%}
+.sv4-t{font-size:clamp(1.125rem,1rem + .4vw,1.375rem);font-weight:700;line-height:1.2}
+.sv4-sat{position:absolute;top:calc(var(--d) * .78);left:calc(50% + var(--d) * .32);display:grid;place-items:center;width:52px;height:52px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 24px oklch(0 0 0 / .12)}
+.sv4-sat svg{width:22px;height:22px;transition:rotate .2s var(--ease-x)}
+.sv4-sat[aria-expanded="true"]{background:var(--sun)}
+.sv4-sat[aria-expanded="true"] svg{rotate:90deg}
+@media (hover:hover) and (pointer:fine){.sv4-sat:hover svg{translate:2px 0}}
+.sv4-sat:active{scale:.95}
+.sv4-d{max-width:30ch;font-size:var(--t-body);line-height:1.5;color:var(--ink)}
+@media (max-width:899px){.sv4-field{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px}.sv4-o{grid-column:auto!important;margin-top:0!important}.sv4-o:nth-child(even){margin-top:36px!important}.sv4-c{width:min(var(--d),42vw)}.sv4-sat{top:calc(min(var(--d),42vw) * .76);left:calc(50% + min(var(--d),42vw) * .3);width:46px;height:46px}.sv4-arcs{display:none}}
+
+/* ---------- v5 the drum ([BANK] Q55: CSS 3D, backface hidden, perspective 70vw / 400px under 768px) */
+.sv5{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:"h s" "a s";gap:24px clamp(32px,5vw,80px);max-width:1180px;margin-inline:auto;box-sizing:content-box;align-items:center}
+.sv5-head{grid-area:h;align-self:end}
+.sv5 .sv-also{grid-area:a;align-self:start;margin:0}
+.sv5-stage{grid-area:s;position:relative;display:grid;gap:20px;justify-items:center;perspective:70vw}
+.sv5-drum{position:relative;width:100%;height:clamp(280px,40vw,460px);transform-style:preserve-3d}
+.sv5-w{position:absolute;left:0;right:0;top:50%;margin-top:-.6em;text-align:center;font-size:clamp(1.375rem,.7rem + 3vw,3.25rem);font-weight:800;line-height:1.2;letter-spacing:-.03em;white-space:nowrap;backface-visibility:hidden;color:color-mix(in srgb,var(--ink) 30%,transparent);transition:color .2s var(--ease-x)}
+.sv5-w.is-front{color:var(--ink)}
+.sv5-w.is-front::after{content:"";position:absolute;left:50%;bottom:-.08em;width:2.2em;height:.12em;translate:-50% 0;border-radius:4px;background:var(--sun)}
+.sv5-read{min-height:4.6em;max-width:40ch;text-align:center;font-size:var(--t-body);line-height:1.55}
+.sv5-list{grid-column:1/-1;position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.sv5-list li{margin-top:12px}
+html[data-motion="reduced"] .sv5-stage,html.no-js .sv5-stage{display:none}
+html[data-motion="reduced"] .sv5-list,html.no-js .sv5-list{position:static;width:auto;height:auto;overflow:visible;clip:auto;list-style:none;padding:0;display:grid;gap:4px;font-size:var(--t-body);line-height:1.55}
+@media (max-width:899px){.sv5{grid-template-columns:1fr;grid-template-areas:"h" "s" "a"}}
+@media (max-width:768px){.sv5-stage{perspective:400px}}

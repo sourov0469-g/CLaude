@@ -43,7 +43,7 @@ chk('BBB wording: every visible BBB mention says "accredited" (only backup B1, t
 chk('Founded 1995 / Bunk / Wade 2015 / Rachel present', all(k in text for k in ('1995', 'Bunk', 'Wade', '2015', 'Rachel')), '')
 chk('Owens Corning Platinum Preferred present', 'Platinum Preferred' in text, '')
 chk('$2M liability present', n(r'\$2M liability') > 0, str(n(r'\$2M liability')))
-chk('no prices / % discounts / financing terms invented', n(r'\$\d{2,}[,\d]*|\b\d+%\s*off\b|\bAPR\b') == 0, str(re.findall(r'\$\d{2,}[,\d]*|\b\d+%\s*off\b|\bAPR\b', both)[:5]))
+chk('no prices / % discounts / financing terms invented', n(r'\$\d{2,}[,\d]*|\b\d+%\s*off\b|(?-i:\bAPR\b)') == 0, str(re.findall(r'\$\d{2,}[,\d]*|\b\d+%\s*off\b|(?-i:\bAPR\b)', both, re.I)[:5])) # R4: APR case-sensitive (Storm V2 prints the month Apr))
 # per version contact path: every version that offers a phone path uses 746-7377; list which versions carry a tel link
 per = {f'{s}1': live.get(s, '') for s in live}; per.update({f'{s}{v}': m for s, v, m in tpl})
 withtel = sorted(k for k, m in per.items() if 'tel:+19377467377' in m)
@@ -55,8 +55,16 @@ chk('no FAQ section', n(r'\bFAQ\b|frequently asked') == 0, str(n(r'\bFAQ\b|frequ
 chk('no service picker / bento services', n(r'service picker|bento|our services') == 0, str(n(r'service picker|bento|our services')))
 chk('no estimate-paper / leak-story / proof-strip', n(r'estimate paper|leak story|proof[- ]strip') == 0, str(n(r'estimate paper|leak story|proof[- ]strip')))
 order = re.findall(r'data-section="([a-z]+)"', src)
-chk('section sequence is not the v1-v4 skeleton', order == ['hero', 'proof', 'work', 'family', 'how', 'area', 'call'], ' > '.join(order))
+chk('section sequence is the owner-approved order (not the v1-v4 skeleton)', order == ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'], ' > '.join(order))  # R4 owner order: Services after Reviews, Storm after How
 chk('no roof-anatomy lesson (Rule 11): no named layer lists', n(r'underlayment|drip edge|ice and water|ridge vent|starter strip', text) == 0, str(re.findall(r'underlayment|drip edge|ice and water|ridge vent|starter strip', text, re.I)[:5]))
 w = max(len(r[1]) for r in rows)
 for r in rows: print(f'{r[0]}  {r[1]:<{w}}  {r[2]}')
 print('FAILS:', sum(r[0] == 'FAIL' for r in rows))
+
+# R4 owner lock for the new sections: no promise of claim approval or outcome; every Storm version says the insurer decides
+for v in ['1','2','3','4','5']:
+    blk = (live.get('storm','') if v == '1' else dict(((a+b), c) for a, b, c in tpl).get('storm'+v, ''))
+    t = H.unescape(re.sub(r'<[^>]+>', ' ', blk))
+    rows.append((('PASS' if re.search(r'insur\w* (company )?decides|decision is your insurer', t, re.I) else 'FAIL'), f'storm v{v}: says the insurer decides the claim', ''))
+chk('no promise of claim approval (outside the struck sentence in Storm V3)', n(r"(?<!<s>)we('ll| will) get your claim approved|guarantee[ds]? (your )?(claim|approval)") <= 1, str(n(r"get your claim approved")))
+for r in rows[-6:]: print(f'{r[0]:5} {r[1]:<110} {r[2]}')

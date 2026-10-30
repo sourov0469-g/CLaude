@@ -195,3 +195,35 @@ The challenge record (accept / improve / reject, with reasons) is AUDIT-R3.md. R
 8. V5 "Now" tag ⟦S1500⟧: it first sat above the mark, over the row above. FIXED: a white tag beside the mark, flipped left after 8 pm; inside its track at all six times.
 9. Footer balance ⟦S1498⟧: the NAP runs as one four-key row at ≥900 with 0 overlaps. The phone link stretched to the column height, so the bead sat a line low, and a round cap showed as a dot at rest. FIXED: the link aligns to its text (bead 103 = text 103); the bead is invisible until drawn.
 10. Occlusion ⟦S1306⟧ and gates: 5 versions × 2 windows, 0 overlaps; console 0; facts gate PASS (746-7377 only; 353-9711 ×0; 24/7 ×0).
+
+## R4 (finish the site; challenge log AUDIT-R4.md; rows written before the code)
+
+### R4 Services (`svc`, after Reviews, --cream)
+| Slot | Version | Reference | Mechanism and parameters | Adaptation | Verification |
+|---|---|---|---|---|---|
+| 1 | V1 One house (default) | [BANK] 523 ULTRAGRID + ⟦S0139⟧ | flat SVG house elevation; 6 numbered hotspot buttons on their parts (roof field, roof patch, hail marks, paperwork on the porch, siding, gutter); aria-pressed; the chosen part fills sun, its line shows in a panel (crossfade .2s); the wider menu as a plain line below; arrow keys move between hotspots | the plain list is the no-JS / screen-reader path | PASS: 6 hotspots ≥44px (phone 40px raised in QA), roving arrows, panel crossfade; 0 overflow |
+| 2 | V2 Stacked cards | [BANK] R45 + ⟦S1239⟧ | 6 cards position:sticky, top offsets 18px apart, each card scales .96 as the next arrives (CSS scroll-driven where supported, otherwise static); no GSAP pin | phones: plain stack (no sticky) | PASS: sticky stack, no pin; 2190px at 1440 is the stack's scroll story (C4 correction for scroll stories) |
+| 3 | V3 By what you see | [BANK] Strike Force HVAC + ⟦S1499⟧ | a 2-column table (th scope=row): what you're seeing, then what we do; rows enter 40ms apart once; row hover tints | wording describes the homeowner's situation only, never a claim | PASS: real table (th scope), rows stack under 700px |
+| 4 | V4 Circles | ⟦S0823⟧ | 3 photo circles (replacement aerial, Adam's repair, crew laying shingles) + 3 flat discs (storm, claims, siding and gutters split as two small discs), asymmetric; satellite button on each opens its line; arcs drawn between circles | the cream canvas is the section ground | PASS, built as 3 photo circles (replacement, repair, storm) + 3 flat discs (claims, siding, gutters); satellites aria-expanded; arcs hidden on phones |
+| 5 | V5 The drum | [BANK] Q55 (unpinned circle variant) | 6 names on a rotateX drum, radius 0.4 × min(vw,vh) capped, perspective 70vw (400px ≤768), backface hidden; progress across the viewport turns it, scrub 1; front item lit, its line shown | aria-hidden drum; a real list carries the content; reduced motion = flat list | PASS after QA: word size cut to clamp(1.375rem,…,3.25rem) (the drum words overran at 320-1024) |
+
+### R4 Storm and Insurance (`storm`, after How, --blue)
+| Slot | Version | Reference | Mechanism and parameters | Adaptation | Verification |
+|---|---|---|---|---|---|
+| 1 | V1 Who does what (default) | ⟦S1013⟧ + ⟦S1291⟧ + [BANK] Checklist 14 | two columns with a seam that draws .4s; left list (4 items) ticks in 60ms apart once; right column on ink; the disclaimer line under both at body size | the insurer column says what it decides, nothing more | PASS: facts gate checks every Storm version says the insurer decides |
+| 2 | V2 The weather year | ⟦S0603⟧ + ⟦S0614⟧ | 12 month cells; bands: hail Apr-Jul (sun), freeze-thaw Nov-Mar (light), ice dams Jan-Feb (stripe); this month outlined (local clock); "19" figure | source line: Rembrandt's own seasonal notes | PASS: real table; current month tagged "Now"; instrument flags on the visually hidden "yes" cells are false positives |
+| 3 | V3 The honest line | ⟦S1013⟧ + Checklist 14 + ⟦S1448⟧ | the false promise set in the H2 role, a hand-drawn strike path DrawSVG .45s once at 60% in view, then the true sentence fades up .3s | the struck sentence is marked up with <s> and an sr note | PASS after QA: the H2 is now the short true sentence at the --t-h2 role (it was a 30-word H2 off the role); the what-we-do line is a paragraph |
+| 4 | V4 The evidence | Checklist 11 + ⟦S1314⟧ | two photo exhibits with mat and caption, tilt -1/+1deg, hover lifts 4px .2s | captions describe what is visible only | PASS: the firm's own photos, credited |
+| 5 | V5 Through the window | ⟦S1341⟧ (SVG port) + ⟦S1314 §8⟧ | 40 rain streaks in an SVG window; they fall while the section enters and stop as it reaches 40% (scrubbed opacity and speed), glass clears; reduced motion: clear glass | no lightning, no loop after entry | PASS: rAF only while on screen and raining; reduced motion = clear glass |
+
+**R4 Services and Storm QA rounds** (`r3qa.mjs`, `occl.mjs`, `factsgate.py`; log `qa/gate/r4-sections.log`; sheet `qa/r4-sections-1440.jpg`):
+1. Overflow, 320-1440: 0 on all ten. PASS.
+2. Clipping ⟦S1314 §10⟧: Services V5's drum words ran past the stage at 320-1024. FIXED (smaller drum type).
+3. Type roles ⟦S1500⟧: Storm V3 set a 30-word H2 off the role (28-52px). FIXED: a short H2 at --t-h2 plus a paragraph.
+4. Tap targets ⟦S1139⟧: Services V1 hotspots were 40px on phones. FIXED: 44px at every width.
+5. Contrast ⟦S1497⟧: no real failures; Storm V2's flags are the visually hidden "yes" cell labels (false positive, logged).
+6. Occlusion ⟦S1306⟧: 10 versions x 2 windows, 0 overlaps.
+7. Facts ⟦S1314⟧ (owner lock): facts gate FAILS 0; every Storm version says the insurer decides; the approval promise exists only struck through in Storm V3; 0 prices, 0 warranties, 0 guarantees, 0 other numbers. The gate's "APR" test was case-insensitive and matched the month "Apr": FIXED in the gate.
+8. Reduced motion ⟦S1314 §8⟧: Services V5 shows the flat list; Storm V5 clear glass; every other version is visible by default.
+9. Height beat (C4): all at 580-1390 except Services V2 (the sticky stack, a scroll story, by design).
+10. Console errors: 0 in all ten.

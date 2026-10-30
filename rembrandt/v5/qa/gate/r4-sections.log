@@ -1,0 +1,89 @@
+# R4 Services and Storm: r3qa (pre-fix run), occl, facts
+svc v1 @320: h 961 els 71 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[1Roof replacem:40|2Roof repair:40|3Storm and hai:40|4Insurance cla:40|5Siding:40|6Gutters:40] err 0
+svc v2 @320: h 2308 els 54 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+svc v3 @320: h 1521 els 36 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+svc v4 @320: h 1221 els 76 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+svc v5 @320: h 876 els 33 ov 0 heads H2:32/700 caps[] lowc[] clip[Roof replacement|Roof repair|Storm and hail|Insurance claims] small[] err 0
+svc v1 @375: h 969 els 71 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[1Roof replacem:40|2Roof repair:40|3Storm and hai:40|4Insurance cla:40|5Siding:40|6Gutters:40] err 0
+svc v2 @375: h 2152 els 54 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+svc v3 @375: h 1370 els 36 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+svc v4 @375: h 1234 els 76 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+svc v5 @375: h 825 els 33 ov 0 heads H2:32/700 caps[] lowc[] clip[Roof replacement|Roof repair|Storm and hail|Insurance claims|Siding] small[] err 0
+svc v1 @768: h 1136 els 71 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+svc v2 @768: h 2128 els 54 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+svc v3 @768: h 1181 els 36 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+svc v4 @768: h 1230 els 76 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+svc v5 @768: h 839 els 33 ov 0 heads H2:38/700 caps[] lowc[] clip[Roof replacement|Roof repair|Storm and hail|Insurance claims|Siding] small[] err 0
+svc v1 @1024: h 943 els 71 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+svc v2 @1024: h 2028 els 54 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+svc v3 @1024: h 1199 els 36 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+svc v4 @1024: h 1121 els 76 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+svc v5 @1024: h 818 els 33 ov 0 heads H2:44/700 caps[] lowc[] clip[Roof repair|Storm and hail|Insurance claims|Siding] small[] err 0
+svc v1 @1440: h 1109 els 71 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v2 @1440: h 2192 els 54 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v3 @1440: h 1237 els 36 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v4 @1440: h 1389 els 76 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v5 @1440: h 942 els 33 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v1 @1440 rm: h 1109 els 71 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v2 @1440 rm: h 2192 els 54 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v3 @1440 rm: h 1237 els 36 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v4 @1440 rm: h 1389 els 76 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v5 @1440 rm: h 887 els 33 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+storm v1 @320: h 1195 els 35 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+storm v2 @320: h 943 els 88 ov 0 heads H2:32/700 caps[] lowc[yes(1.73)|yes(1.73)|yes(1.73)|yes(1.73)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)] clip[yes|yes|yes|yes|yes] small[] err 0
+storm v3 @320: h 696 els 15 ov 0 heads H2:28/700 caps[] lowc[] clip[] small[] err 0
+storm v4 @320: h 1073 els 22 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+storm v5 @320: h 732 els 63 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+storm v1 @375: h 1089 els 35 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+storm v2 @375: h 884 els 88 ov 0 heads H2:32/700 caps[] lowc[yes(1.73)|yes(1.73)|yes(1.73)|yes(1.73)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)] clip[yes|yes|yes|yes] small[] err 0
+storm v3 @375: h 664 els 15 ov 0 heads H2:28/700 caps[] lowc[] clip[] small[] err 0
+storm v4 @375: h 1114 els 22 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+storm v5 @375: h 745 els 63 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+storm v1 @768: h 894 els 35 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+storm v2 @768: h 789 els 88 ov 0 heads H2:38/700 caps[] lowc[yes(1.73)|yes(1.73)|yes(1.73)|yes(1.73)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)] clip[] small[] err 0
+storm v3 @768: h 582 els 15 ov 0 heads H2:36/700 caps[] lowc[] clip[] small[] err 0
+storm v4 @768: h 851 els 22 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+storm v5 @768: h 1013 els 63 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+storm v1 @1024: h 972 els 35 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+storm v2 @1024: h 821 els 88 ov 0 heads H2:44/700 caps[] lowc[yes(1.73)|yes(1.73)|yes(1.73)|yes(1.73)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)] clip[] small[] err 0
+storm v3 @1024: h 685 els 15 ov 0 heads H2:42/700 caps[] lowc[] clip[] small[] err 0
+storm v4 @1024: h 940 els 22 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+storm v5 @1024: h 622 els 63 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+storm v1 @1440: h 1075 els 35 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+storm v2 @1440: h 933 els 88 ov 0 heads H2:48/700 caps[] lowc[yes(1.73)|yes(1.73)|yes(1.73)|yes(1.73)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)] clip[] small[] err 0
+storm v3 @1440: h 820 els 15 ov 0 heads H2:52/700 caps[] lowc[] clip[] small[] err 0
+storm v4 @1440: h 1123 els 22 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+storm v5 @1440: h 767 els 63 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+storm v1 @1440 rm: h 1075 els 35 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+storm v2 @1440 rm: h 933 els 88 ov 0 heads H2:48/700 caps[] lowc[yes(1.73)|yes(1.73)|yes(1.73)|yes(1.73)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)|yes(1.33)] clip[] small[] err 0
+storm v3 @1440 rm: h 820 els 15 ov 0 heads H2:52/700 caps[] lowc[] clip[] small[] err 0
+storm v4 @1440 rm: h 1123 els 22 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+storm v5 @1440 rm: h 767 els 23 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+svc v1 @1440: 17 steps, overlaps 0
+svc v2 @1440: 26 steps, overlaps 0
+svc v3 @1440: 18 steps, overlaps 0
+svc v4 @1440: 20 steps, overlaps 0
+svc v5 @1440: 16 steps, overlaps 0
+svc v1 @620: 16 steps, overlaps 0
+svc v2 @620: 24 steps, overlaps 0
+svc v3 @620: 17 steps, overlaps 0
+svc v4 @620: 17 steps, overlaps 0
+svc v5 @620: 14 steps, overlaps 0
+storm v1 @1440: 17 steps, overlaps 0
+storm v2 @1440: 16 steps, overlaps 0
+storm v3 @1440: 15 steps, overlaps 0
+storm v4 @1440: 17 steps, overlaps 0
+storm v5 @1440: 14 steps, overlaps 0
+storm v1 @620: 15 steps, overlaps 0
+storm v2 @620: 14 steps, overlaps 0
+storm v3 @620: 12 steps, overlaps 0
+storm v4 @620: 18 steps, overlaps 0
+storm v5 @620: 15 steps, overlaps 0
+PASS  no roof-anatomy lesson (Rule 11): no named layer lists                                                        []
+FAILS: 0
+PASS  storm v1: says the insurer decides the claim                                                                   
+PASS  storm v2: says the insurer decides the claim                                                                   
+PASS  storm v3: says the insurer decides the claim                                                                   
+PASS  storm v4: says the insurer decides the claim                                                                   
+PASS  storm v5: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (outside the struck sentence in Storm V3)                                         1

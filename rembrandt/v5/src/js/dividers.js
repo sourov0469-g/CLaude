@@ -80,6 +80,28 @@ const P = {
     pts.push([0, base]);
     return 'M' + pts.map(([a, b]) => `${f(a)},${f(b)}`).join('L') + 'Z';
   },
+  // R4 services -> work: lap siding boards rising into Work's ground; each board's lower edge bevels like a real lap
+  siding(t, W, H, lift) {
+    const k = ease(t), pts = [[0, H]];
+    for (let x = 0, i = 0; x < W + 40; i++) {
+      const w = 180 + ((i * 71) % 120), top = H - H * (0.28 + 0.18 * ((i * 3) % 4) / 3) * k;
+      const a = x, b = x + w;
+      pts.push([a, top + 6 * k - 6 * lift(a)], [a + 10, top - 6 * lift(a + 10)], [b, top - 6 * lift(b)]);
+      x = b;
+    }
+    pts.push([W + 40, H]);
+    return 'M' + pts.map(([a, b]) => `${f(a)},${f(b)}`).join('L') + 'Z';
+  },
+  // R4 storm -> towns: the tops of storm clouds, rounded bumps of different sizes rising into the Towns ground
+  clouds(t, W, H, lift) {
+    const k = ease(t); let d = `M0,${f(H)}`, x = 0, i = 0;
+    while (x < W + 60) {
+      const r = (34 + ((i * 29) % 46)) * Math.min(1, H / 90), cy = H - H * (0.12 + 0.3 * ((i * 7) % 5) / 4) * k - 6 * lift(x + r);
+      d += `L${f(x)},${f(cy + r * 0.25)}A${f(r)},${f(r * (0.35 + 0.65 * k))} 0 0 1 ${f(x + 2 * r)},${f(cy + r * 0.25)}`;
+      x += 2 * r * 0.82; i++;
+    }
+    return d + `L${f(x)},${f(H)}Z`;
+  },
   // towns -> call: fish-scale (half-round) shingles, two offset rows; the scallops deepen
   scales(t, W, H, lift) {
     const w = 56, n = Math.ceil(W / w) + 1, band = H * 0.12, dep = H * 0.5 * ease(t);
@@ -113,9 +135,11 @@ const P = {
 export const DIVIDERS = [
   ['hero', 'roofline', 'rise', 104],
   ['proof', 'shingles', 'drop', 56],
+  ['svc', 'siding', 'rise', 72],
   ['work', 'chevrons', 'rise', 80, 'flip'],
   ['how', 'rafters', 'hang', 120],
   ['how', 'steps', 'rise', 64, 'flip'],
+  ['storm', 'clouds', 'rise', 88],
   ['call', 'scales', 'hang', 72],
   ['foot', 'gutter', 'hang', 48],
 ];
