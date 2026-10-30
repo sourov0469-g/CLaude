@@ -488,3 +488,17 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - Services and Storm have no B1-B3.
   - Contact has no backups.
   - Merging versions stays parked, as ordered.
+
+## R5 owner order: full-site QA, improve and finalize (2026-10-30)
+### How the owner clarification on inner pages is applied (inner pages are versioned per SECTION)
+- Each inner page becomes a set of sections, and each section has five genuinely different versions, its own 1-5 switcher and the hidden-backup mechanism, exactly as on the homepage:
+  - **Services:** `sphero` (page head, H1) > `svcp` (the six services) > `spclose` (the call close).
+  - **About:** `abhero` (page head, H1) > `about` (the family and the record) > `abclose` (the call close).
+  - **Contact:** `cthero` (page head with the phone and hours, H1) > `contact` (the office and the 24 towns). Two sections are enough here: the page has two jobs.
+- **Where the versions come from:** the five whole-page layouts are decomposed, so nothing is lost.
+  - Their bodies become the five versions of `svcp`, `about` and `contact`. Those sections keep their ids, so their existing backups (B4-B8, pre-redesign) stay attached and byte-identical.
+  - Header and close variants feed the head and close sections. New versions are written where five distinct ones did not exist.
+- **Nothing deleted:** the five whole-page layouts as they stood before this restructure (R4 final, 45ad7a2) are kept as hidden backups B1-B5 of each page's head section (`sphero`, `abhero`, `cthero`). They use a frozen, prefixed copy of their CSS and JS (`build/mk-bk3.py`, class prefix sp/ab/ct becomes esp/eab/ect), so later improvements cannot reach them.
+  - Opening one shows the old whole page in the head slot (it carries its own H1). They are records, not states the page ships in.
+  - The close sections are new and have no earlier generation, so they carry no backups; this is reported, not faked.
+- **Facts:** the same locked fact lists in `build/gen-pages.py` feed every version. Merging or mixing versions stays parked.
