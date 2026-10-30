@@ -180,6 +180,14 @@ function start(mods) {
   if (nav && hero) ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom 35%', onToggle: s => nav.classList.toggle('nav--quiet', s.isActive) });
   // R3 D11: the per-section cursor effects are retired (Removal Test, S1314: the companion's mood accessories already do
   // their job; S1331: no trail or ripple layer); js/cursorfx.js is kept, unmounted
+  // R4 nav menu (below 900px): the Menu button opens the page links; Escape or a click elsewhere closes it
+  const np = document.querySelector('.nav-pages'), nm = np && np.querySelector('.nav-menu');
+  if (nm) {
+    const setOpen = o => { np.classList.toggle('is-open', o); nm.setAttribute('aria-expanded', String(o)); };
+    nm.addEventListener('click', () => setOpen(nm.getAttribute('aria-expanded') !== 'true'));
+    addEventListener('keydown', e => { if (e.key === 'Escape' && np.classList.contains('is-open')) { setOpen(false); nm.focus(); } });
+    addEventListener('click', e => { if (!np.contains(e.target)) setOpen(false); });
+  }
   initDepth(); initMagnet(); initCompanion(store);
   // PLAN-V7 §4d: every reaction element (.rx) gets a press state on pointer-down and on Enter/Space, separate from
   // its hover state; the section's CSS draws the press. One delegated listener for the page.

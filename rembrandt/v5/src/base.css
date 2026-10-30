@@ -341,3 +341,22 @@ html.cmp-on .cmp{display:block}
 #proof{--pad-t:clamp(5rem,4rem + 2.5vw,6.5rem)}#svc{--pad-t:clamp(5.5rem,3.5rem + 6vw,9rem)}#work{--pad-t:clamp(5rem,3.5rem + 4vw,7rem)}
 #family{--pad-t:clamp(5rem,3rem + 6vw,8.5rem)}#how{--pad-t:clamp(5rem,4rem + 2.5vw,6.5rem)}#storm{--pad-t:clamp(5.5rem,3.5rem + 6.5vw,9.5rem)}
 #area{--pad-t:clamp(5rem,3.5rem + 4vw,7.5rem)}#call{--pad-t:clamp(5rem,3rem + 6vw,8.5rem)} /* phones keep the 5rem minimum (the picker sits there) */
+/* R4 nav: page links (Home, Services, About, Contact). A white pill of links on wide screens; a Menu button with a
+   panel below 900px. The current page is marked (aria-current) with a sky fill. */
+.nav-pages{position:relative}
+.nav-list{display:flex;gap:2px;list-style:none;margin:0;padding:6px;background:#fff;border-radius:999px;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 8px 24px -12px rgb(16 24 40 / .19)}
+.nav-list a{display:flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;font-family:var(--f-head);font-weight:600;font-size:.9375rem;color:var(--ink);text-decoration:none;transition:background-color .15s var(--ease-x)}
+.nav-list a[aria-current="page"]{background:var(--sky);box-shadow:inset 0 -2px 0 var(--sun)}
+@media (hover:hover) and (pointer:fine){.nav-list a:hover{background:var(--sky)}}
+.nav-menu{display:none;align-items:center;gap:10px;min-height:46px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:var(--ink);font:600 .9375rem/1 var(--f-head);cursor:pointer;box-shadow:0 0 0 1px oklch(0 0 0 / .06),0 8px 24px -12px rgb(16 24 40 / .19)}
+.nav-menu svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+@media (max-width:899px){
+  .nav-menu{display:inline-flex}
+  .nav-list{display:none;position:absolute;right:0;top:calc(100% + 8px);flex-direction:column;min-width:210px;border-radius:16px}
+  .nav-list a{min-height:46px}
+  .nav-pages.is-open .nav-list{display:flex}
+}
+/* R4 service icons (⟦S0139⟧ flat), shared by the Services section and the Services page */
+.ic-s{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ic-s circle{fill:currentColor;stroke:none}
+.ic-s .ic-f{fill:var(--sun);stroke:none}

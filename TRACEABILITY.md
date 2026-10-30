@@ -227,3 +227,39 @@ The challenge record (accept / improve / reject, with reasons) is AUDIT-R3.md. R
 8. Reduced motion ⟦S1314 §8⟧: Services V5 shows the flat list; Storm V5 clear glass; every other version is visible by default.
 9. Height beat (C4): all at 580-1390 except Services V2 (the sticky stack, a scroll story, by design).
 10. Console errors: 0 in all ten.
+
+### R4 pages (AUDIT-R4.md §2: Home, Services, About, Contact). Rows written before the code.
+Shared for every page: the homepage shell (nav with page links, phone bar, footer, companion, picker), Poppins + Open Sans, the facts lock. Each page body is one section with five whole-page layouts behind the 1-5 picker. Backup slots are ready and empty (no page layout has been replaced yet).
+
+**Services page (`svcp`)**, all six main services plus the wider menu. Copy comes from the firm's published lines (pack §5.6, flag C12). No prices, no warranties; the insurer decides claims.
+| Slot | Layout | Reference | Mechanism | Verification |
+|---|---|---|---|---|
+| 1 (default) | Index and chapters | [BANK] Q153 GSAP Pin Sidebar (rail segments light in sequence; here CSS sticky, no pin) + [BANK] Q571 AHA (numbered index, 01 of 06) | sticky numbered index on the left; chapters on the right; the index item of the chapter in view lights (ScrollTrigger toggle) | PASS: 1440 3369px, 375 index as a 2-column grid; 0 overflow; errors 0 |
+| 2 | Alternating chapters | [BANK] Anatomy §7 service-page pattern + ⟦S1375⟧ editorial chapters | full-width rows, photo and copy alternating sides; storm and claims share one blue band | PASS: 0 overflow; errors 0 |
+| 3 | Tabs | ⟦S0931⟧ (tabs: roles, roving arrows) | one service per tab panel (role=tablist, arrow keys, Home/End); the wider menu below | PASS: tabs 2 per row on phones; errors 0 |
+| 4 | Three groups | ⟦S1499⟧ chunking + [BANK] Roofix skeleton | Roofs / After a storm / The rest of the house, as three bands, each service a column | PASS: errors 0 |
+| 5 | The menu board | [BANK] Q30 Tom Miller (services list with the promise inside the copy) + [BANK] Q14 dirt (services list as the page) | a strip of three real photos, then every service (11) as a dotted-leader menu line with its one-line description, no prices | PASS: leaders drop on phones; errors 0 |
+
+**About page (`about`)**, the family, the credentials and the review aggregate.
+| Slot | Layout | Reference | Mechanism | Verification |
+|---|---|---|---|---|
+| 1 (default) | People first | [BANK] Q22 Monolith Studio (team cards, 5-star strip) | crew photo hero; three cards (Bunk and Wade, Rachel, the crew); a star strip with 4.9 / 295 and the credentials | |
+| 2 | The years | ⟦S1325⟧ scroll-progress timeline (unpinned) | a ridge-line timeline 1995, 2001, 2015, Today; the line fills with scroll | |
+| 3 | At a glance | ⟦S0603⟧ evidence doctrine (direct labels, one focal relationship) | a fact sheet (dl) beside one photo; every row checkable | |
+| 4 | Sticky photo story | ⟦S0441⟧ (one sticky artefact, states per label) | the photo on the left swaps as each chapter on the right passes (crossfade .3s) | |
+| 5 | Magazine | ⟦S1354⟧ agency grid (oversized headline, panoramic image, narrow metadata column) | a full-bleed crew photo, big headline, two-column text with the 4.9 / 295 figure | |
+
+**Contact page (`contact`)**: phone, office, hours, the 24 towns (data/towns.js). No form: a form with nowhere to send would be a fake action.
+| Slot | Layout | Reference | Mechanism | Verification |
+|---|---|---|---|---|
+| 1 (default) | Phone first | [BANK] Q114 (the number in giant type) + [BANK] Harvest [114] (giant CTA shrinks to phone size) | the number as the headline (a tel link), live hours line, office card with map link, the 24 towns as a list | |
+| 2 | Office and towns by distance | ⟦S0603⟧ (tabular figures, direct labels) + [BANK] Austin Pro map (the coverage as evidence) | the office card, then all 24 towns nearest first with miles, beside a mini ring map | |
+| 3 | The week board | pack G-call (b) + ⟦S1314⟧ (no fake live state) | Springboro time, a Monday to Friday 9 to 5 week strip with "Now", the phone and the office; towns in columns | |
+| 4 | The business card | [BANK] Harvest [201] flip card | a card that turns (button, aria-pressed) from the phone and hours side to the office side; towns as chips | |
+| 5 | Do we come to you? | [BANK] ROTTLER finder + West London checker (CROWN) | an ink panel with phone, hours and office; a town field answers yes, with miles, for the 24 towns, and otherwise says to call | |
+
+**R4 Services page QA** (`pageshot.mjs`, `imgchk.mjs`; sheets `qa/r4-services-1440.jpg`, `qa/r4-services-375.jpg`):
+1. Overflow 0 and console errors 0 in all five layouts at 1440 and 375; one H1 each.
+2. Drawn service icons rendered as solid black squares: their CSS lived in the homepage section file. FIXED: the icon rules moved to base.css (shared).
+3. A blank photo in a full-page phone capture was a capture artefact: every image reports loaded (`imgchk.mjs`).
+4. Facts: every line comes from build/gen-pages.py's one fact list (flag C12 lines, facts lock); no prices, warranties or guarantees; the claims copy says the insurer decides.

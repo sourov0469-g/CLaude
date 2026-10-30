@@ -15,7 +15,7 @@ const require = createRequire(path.join(TOOLS, 'node_modules', 'x.js'));
 const esbuild = require('esbuild');
 const read = f => fs.readFileSync(path.join(SRC, f), 'utf8');
 
-export const SECTIONS = [
+export const REGISTRY = [
   { id: 'hero', name: 'Hero', label: 'Rembrandt Roofing & Restoration', def: 2 },
   { id: 'proof', name: 'Reviews', label: 'Reviews and credentials', def: 2 },
   { id: 'svc', name: 'Services', label: 'What we do', def: 1 },
@@ -25,7 +25,24 @@ export const SECTIONS = [
   { id: 'storm', name: 'Storm', label: 'Storm damage and insurance', def: 1 },
   { id: 'area', name: 'Towns', label: 'Where we work', def: 3 },
   { id: 'call', name: 'Call', label: 'Call Rembrandt', def: 1 },
-].filter(s => fs.existsSync(path.join(SRC, 'sections', s.id)) && (!ONLY || ONLY.includes(s.id)));
+  // R4 inner pages: each page body is one section with five whole-page layouts behind the same 1-5 picker
+  { id: 'svcp', name: 'Page', label: 'Services', def: 1 },
+  { id: 'about', name: 'Page', label: 'About the family', def: 1 },
+  { id: 'contact', name: 'Page', label: 'Contact and service area', def: 1 },
+];
+// R4 (AUDIT-R4.md §2): four pages. The homepage keeps its file name; the inner pages sit beside it.
+const HOME = 'rembrandt-homepage.html';
+export const PAGES = [
+  { key: 'home', file: HOME, ids: ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'], home: '#hero', est: '#call',
+    title: 'Rembrandt Roofing &amp; Restoration, Springboro, Ohio', desc: "Springboro's family roofers since 1995. 4.9 stars from 295 Google reviews, BBB A+ accredited since 2001. Call Rachel at (937) 746-7377, Monday to Friday, 9 to 5." },
+  { key: 'services', file: 'services.html', ids: ['svcp'], home: HOME, est: 'contact.html',
+    title: 'Roofing, storm damage, siding and gutters | Rembrandt Roofing &amp; Restoration', desc: 'Roof replacement, roof repair, storm and hail damage, insurance claims, siding and gutters in Springboro and Greater Dayton. Call Rachel at (937) 746-7377, Monday to Friday, 9 to 5.' },
+  { key: 'about', file: 'about.html', ids: ['about'], home: HOME, est: 'contact.html',
+    title: 'About the Walker family | Rembrandt Roofing &amp; Restoration', desc: 'Founded in 1995 by Franklin "Bunk" Walker; his son Wade has been president since 2015. BBB A+ accredited since 2001, Owens Corning Platinum Preferred, 4.9 stars from 295 Google reviews.' },
+  { key: 'contact', file: 'contact.html', ids: ['contact'], home: HOME, est: 'tel:+19377467377',
+    title: 'Contact and service area | Rembrandt Roofing &amp; Restoration', desc: 'Call Rachel at (937) 746-7377, Monday to Friday, 9 to 5. Office at 38 N Pioneer Blvd, Springboro, OH 45066. We work in 24 towns around Springboro.' },
+].filter(p => !process.env.PAGE || process.env.PAGE.split(',').includes(p.key));
+let SECTIONS = [];
 
 const ICONS = {
   ICON_PHONE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 3.4 5.2 1.6 1.6 0 0 1 5 3.5z"/><path class="ic-arc" pathLength="1" d="M14.6 2.6a7.2 7.2 0 0 1 6.8 6.8"/><path class="ic-arc" pathLength="1" d="M14.3 6.2a3.6 3.6 0 0 1 3.5 3.5"/></svg>',
@@ -55,7 +72,7 @@ const size = k => { // width and height from the file header (webp VP8/VP8L/VP8X
   if (c === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
   throw new Error('unknown image format ' + k);
 };
-const inlined = new Set();
+let inlined = new Set();
 function images(html, live) {
   return html.replace(/<img\b([^>]*?)data-img="([a-z0-9-]+)"([^>]*)>/g, (m, a, k, b) => {
     const attrs = a + b; let out = `<img${a}data-img="${k}"${b}`;
@@ -80,6 +97,9 @@ const GLYPH = {
   area: '<path class="g-m" d="M8 15s-5-5.2-5-8.6a5 5 0 0 1 10 0C13 9.8 8 15 8 15zm0-6.6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill-rule="evenodd"/>',
   svc: '<path d="M2 8 8 3l6 5v6H2z"/><rect class="g-m" x="6" y="9" width="4" height="5"/>',
   storm: '<path d="M4.5 9a3 3 0 0 1 .5-6 4 4 0 0 1 7.5 1A2.5 2.5 0 0 1 12 9z"/><circle class="g-m" cx="8" cy="13" r="1.6"/>',
+  svcp: '<path d="M2 8 8 3l6 5v6H2z"/><rect class="g-m" x="6" y="9" width="4" height="5"/>',
+  about: '<circle cx="5" cy="5" r="2.4"/><circle cx="11" cy="5" r="2.4"/><path class="g-m" d="M1 14a4 4 0 0 1 8 0zM7 14a4 4 0 0 1 8 0z"/>',
+  contact: '<path class="g-m" d="M8 15s-5-5.2-5-8.6a5 5 0 0 1 10 0C13 9.8 8 15 8 15zm0-6.6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill-rule="evenodd"/>',
   call: '<path d="M3.5 1.5h2.6l1.2 3.2-1.5 1a8 8 0 0 0 4.5 4.5l1-1.5 3.2 1.2v2.6a1.2 1.2 0 0 1-1.3 1.2A12 12 0 0 1 2.3 2.8a1.2 1.2 0 0 1 1.2-1.3z"/><circle class="g-m" cx="13" cy="3" r="2"/>',
 };
 const pick = s => `<div class="pick-rail"><fieldset class="pick"><legend class="vh">${s.name} section: choose a version</legend><span class="pick-l" aria-hidden="true"><svg class="pick-g pick-g--${s.id}" viewBox="0 0 16 16" focusable="false">${GLYPH[s.id] || ''}</svg>${s.name}</span>` +
@@ -88,43 +108,52 @@ const pick = s => `<div class="pick-rail"><fieldset class="pick"><legend class="
   BKS(s).map(v => radio(s, v, `<span class="vh">Backup </span>B${v.slice(1)}`)).join('') + `</span>` : '') +
   `</fieldset></div>`;
 const ver = (s, v) => icons(read(`sections/${s.id}/${String(v)[0] === 'b' ? `bk/${v}` : `v${v}`}.html`)).trim();
-let sections = '', templates = '';
-for (const s of SECTIONS) {
-  sections += `<section id="${s.id}" class="sec sec--${s.id}" data-section="${s.id}" data-def="${s.def}" aria-label="${s.label.replace(/&/g, '&amp;')}">\n${pick(s)}\n<div class="stage">\n${images(ver(s, s.def), true)}\n</div>\n</section>\n`;
+for (const P of PAGES) {
+  SECTIONS = P.ids.map(id => REGISTRY.find(r => r.id === id)).filter(x => x && fs.existsSync(path.join(SRC, 'sections', x.id)) && (!ONLY || ONLY.includes(x.id)));
+  inlined = new Set();
+  let sections = '', templates = '';
+  for (const s of SECTIONS) {
+    sections += `<section id="${s.id}" class="sec sec--${s.id}" data-section="${s.id}" data-def="${s.def}" aria-label="${s.label.replace(/&/g, '&amp;')}">\n${pick(s)}\n<div class="stage">\n${images(ver(s, s.def), true)}\n</div>\n</section>\n`;
+  }
+  for (const s of SECTIONS) for (const v of [...VERS(s), ...BKS(s)]) if (v !== String(s.def)) templates += `<template id="tpl-${s.id}-${v}">${images(ver(s, v), false)}</template>\n`;
+  let page = icons(read('index.html'));
+  const cur = k => P.key === k ? ' aria-current="page"' : '';
+  page = page.replace('PAGE_TITLE', () => P.title).replace('PAGE_DESC', () => P.desc).replaceAll('HOME_HREF', P.home).replaceAll('HOME_LABEL', P.key === 'home' ? 'back to top' : 'home page')
+    .replace('EST_HREF', P.est).replace(/NAV_(home|services|about|contact)/g, (m, k) => cur(k));
+  page = page.replace(/<img\b[^>]*>/g, m => images(m, true));
+  page = page.replace('<!--SECTIONS-->', () => sections).replace('<!--TEMPLATES-->', () => templates);
+  // photos not embedded in the live page go into one registry the scripts read
+  const keys = new Set([...page.matchAll(/data-(?:img|fill)="([a-z0-9-]+)"/g)].map(m => m[1]));
+  const registry = Object.fromEntries([...keys].filter(k => !inlined.has(k)).map(k => [k, dataUri(k)]));
+
+  // ---------- CSS
+  const minCss = s => s.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(Boolean).join('').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}');
+  let css = read('base.css') + SECTIONS.map(s => [`sections/${s.id}/bk/bk.css`, `sections/${s.id}/${s.id}.css`].filter(f => fs.existsSync(path.join(SRC, f))).map(read).join('\n')).join('\n');
+  const font = f => `data:font/woff2;base64,${fs.readFileSync(path.join(V5, 'assets', 'fonts', f)).toString('base64')}`;
+  css = minCss(css).replace('FONT_EPILOGUE', () => font('epilogue.woff2')).replace('FONT_OPENSANS', () => font('opensans-var.woff2')).replace(/FONT_POPPINS_(\d{3})/g, (m, w) => font(`poppins-${w}.woff2`)); // R4: Poppins + Open Sans (Epilogue for the backups)
+  page = page.replace('/*CSS*/', () => css);
+  page = page.replace('FAVICON', () => `data:image/png;base64,${fs.readFileSync(path.join(V5, 'assets', 'img', 'favicon.png')).toString('base64')}`);
+
+  // ---------- JS
+  const bkJs = s => has(s, 'bk/bk.js');
+  const entry = `import { boot } from './js/main.js';\n` + SECTIONS.map(s => `import ${s.id} from './sections/${s.id}/${s.id}.js';` + (bkJs(s) ? `\nimport ${s.id}Bk from './sections/${s.id}/bk/bk.js';` : '')).join('\n') +
+    `\nboot({ ${SECTIONS.map(s => bkJs(s) ? `${s.id}: { ...${s.id}, b1: ${s.id}Bk[1], b2: ${s.id}Bk[2], b3: ${s.id}Bk[3] }` : s.id).join(', ')} });\n`;
+  const js = (await esbuild.build({ stdin: { contents: entry, resolveDir: SRC, loader: 'js' }, bundle: true, minify: true, format: 'iife', target: 'es2020', write: false, nodePaths: [path.join(TOOLS, 'node_modules')], legalComments: 'none', logLevel: 'error' })).outputFiles[0].text;
+  const scripts = [`window.__IMG=${JSON.stringify(registry)};`, js].map(s => `<script>${s.replace(/<\/script/gi, '<\\/script')}</script>`).join('\n');
+  page = page.replace('<!--SCRIPTS-->', () => scripts);
+
+  // ---------- gates
+  const visible = page.replace(/<(script|style)[\s\S]*?<\/\1>/g, '').replace(/<template[\s\S]*?<\/template>/g, m => m.replace(/<[^>]+>/g, ' ')).replace(/<[^>]+>/g, ' ');
+  const attrsText = [...page.replace(/<(script|style)[\s\S]*?<\/\1>/g, '').matchAll(/\s(?:alt|aria-label|title|content)="([^"]*)"/g)].map(m => m[1]).join(' ');
+  const fails = [];
+  if (/[—–]/.test(visible + attrsText)) fails.push('em or en dash in visible text');
+  if (/·/.test(visible + attrsText)) fails.push('middle dot in visible text');
+  if (/transition:\s*all|will-change:\s*all/.test(css)) fails.push('transition: all / will-change: all');
+  if (/scale\(0\)/.test(css + js)) fails.push('scale(0)');
+  if (fails.length) { console.error('GATE FAIL:\n- ' + fails.join('\n- ')); process.exit(1); }
+  const OUTF = P.key === 'home' ? OUT : path.join(path.dirname(OUT), P.file);
+  fs.writeFileSync(OUTF, page);
+  const kb = n => (n / 1024).toFixed(0) + ' KB';
+  console.log(`${OUTF}  ${kb(Buffer.byteLength(page))}  (css ${kb(css.length)}, js ${kb(js.length)}, ${inlined.size} live images, ${Object.keys(registry).length} in registry, ${SECTIONS.length} sections)`);
+
 }
-for (const s of SECTIONS) for (const v of [...VERS(s), ...BKS(s)]) if (v !== String(s.def)) templates += `<template id="tpl-${s.id}-${v}">${images(ver(s, v), false)}</template>\n`;
-let page = icons(read('index.html'));
-page = page.replace(/<img\b[^>]*>/g, m => images(m, true));
-page = page.replace('<!--SECTIONS-->', () => sections).replace('<!--TEMPLATES-->', () => templates);
-// photos not embedded in the live page go into one registry the scripts read
-const keys = new Set([...page.matchAll(/data-(?:img|fill)="([a-z0-9-]+)"/g)].map(m => m[1]));
-const registry = Object.fromEntries([...keys].filter(k => !inlined.has(k)).map(k => [k, dataUri(k)]));
-
-// ---------- CSS
-const minCss = s => s.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(Boolean).join('').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}');
-let css = read('base.css') + SECTIONS.map(s => [`sections/${s.id}/bk/bk.css`, `sections/${s.id}/${s.id}.css`].filter(f => fs.existsSync(path.join(SRC, f))).map(read).join('\n')).join('\n');
-const font = f => `data:font/woff2;base64,${fs.readFileSync(path.join(V5, 'assets', 'fonts', f)).toString('base64')}`;
-css = minCss(css).replace('FONT_EPILOGUE', () => font('epilogue.woff2')).replace('FONT_OPENSANS', () => font('opensans-var.woff2')).replace(/FONT_POPPINS_(\d{3})/g, (m, w) => font(`poppins-${w}.woff2`)); // R4: Poppins + Open Sans (Epilogue for the backups)
-page = page.replace('/*CSS*/', () => css);
-page = page.replace('FAVICON', () => `data:image/png;base64,${fs.readFileSync(path.join(V5, 'assets', 'img', 'favicon.png')).toString('base64')}`);
-
-// ---------- JS
-const bkJs = s => has(s, 'bk/bk.js');
-const entry = `import { boot } from './js/main.js';\n` + SECTIONS.map(s => `import ${s.id} from './sections/${s.id}/${s.id}.js';` + (bkJs(s) ? `\nimport ${s.id}Bk from './sections/${s.id}/bk/bk.js';` : '')).join('\n') +
-  `\nboot({ ${SECTIONS.map(s => bkJs(s) ? `${s.id}: { ...${s.id}, b1: ${s.id}Bk[1], b2: ${s.id}Bk[2], b3: ${s.id}Bk[3] }` : s.id).join(', ')} });\n`;
-const js = (await esbuild.build({ stdin: { contents: entry, resolveDir: SRC, loader: 'js' }, bundle: true, minify: true, format: 'iife', target: 'es2020', write: false, nodePaths: [path.join(TOOLS, 'node_modules')], legalComments: 'none', logLevel: 'error' })).outputFiles[0].text;
-const scripts = [`window.__IMG=${JSON.stringify(registry)};`, js].map(s => `<script>${s.replace(/<\/script/gi, '<\\/script')}</script>`).join('\n');
-page = page.replace('<!--SCRIPTS-->', () => scripts);
-
-// ---------- gates
-const visible = page.replace(/<(script|style)[\s\S]*?<\/\1>/g, '').replace(/<template[\s\S]*?<\/template>/g, m => m.replace(/<[^>]+>/g, ' ')).replace(/<[^>]+>/g, ' ');
-const attrsText = [...page.replace(/<(script|style)[\s\S]*?<\/\1>/g, '').matchAll(/\s(?:alt|aria-label|title|content)="([^"]*)"/g)].map(m => m[1]).join(' ');
-const fails = [];
-if (/[—–]/.test(visible + attrsText)) fails.push('em or en dash in visible text');
-if (/·/.test(visible + attrsText)) fails.push('middle dot in visible text');
-if (/transition:\s*all|will-change:\s*all/.test(css)) fails.push('transition: all / will-change: all');
-if (/scale\(0\)/.test(css + js)) fails.push('scale(0)');
-if (fails.length) { console.error('GATE FAIL:\n- ' + fails.join('\n- ')); process.exit(1); }
-fs.writeFileSync(OUT, page);
-const kb = n => (n / 1024).toFixed(0) + ' KB';
-console.log(`${OUT}  ${kb(Buffer.byteLength(page))}  (css ${kb(css.length)}, js ${kb(js.length)}, ${inlined.size} live images, ${Object.keys(registry).length} in registry, ${SECTIONS.length} sections)`);

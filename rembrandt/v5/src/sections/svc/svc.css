@@ -7,9 +7,6 @@
 .sv-sub{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:42ch;margin-top:14px}
 .sv-also{max-width:1180px;margin:clamp(32px,4vw,48px) auto 0;font-size:var(--t-body);line-height:1.5;color:var(--muted)}
 .sv-also b{color:var(--ink)}
-.ic-s{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.ic-s circle{fill:currentColor;stroke:none}
-.ic-s .ic-f{fill:var(--sun);stroke:none}
 
 /* ---------- v1 one house: hotspot buttons over a flat drawing; the chosen part fills sun */
 .sv1-head,.sv1-wrap{max-width:1180px;margin-inline:auto}
