@@ -1233,3 +1233,39 @@ Converted from dark to light:
   - 0 other phone numbers, 0 "312 siding"/"574 roofing", 0 em dashes, 0 stray en dashes, 0 other ratings or review counts.
   - Price bands are only the published ones.
 - **Bespoke interactive** (`qa/v8/clad.js`): end-to-end with 0 errors; the counts match the pins.
+
+## OWNER ORDER: the full website, final gate (2026-10-30)
+
+**Pages:** 9 in all (index plus 8 inner pages); the page list is in PROGRESS.md. Every inner section has five versions (A–E) with its own switcher, per the owner's clarification.
+
+| Page | Sections | Versions | Backup records |
+|---|---|---|---|
+| siding | 8 | 40 | 6 |
+| windows | 8 | 40 | 6 |
+| roofing | 5 | 25 | 0 |
+| outdoor | 4 | 20 | 0 |
+| projects | 4 | 20 | 3 |
+| financing | 4 | 20 | 2 |
+| about | 5 | 25 | 0 |
+| contact | 4 | 20 | 0 |
+| **Total** | **42** | **210** | **17** |
+
+**Backups:**
+- Records are the firm's earlier pages, kept byte-identical as `siding-record.html`, `windows-record.html`, `projects-record.html` and `plan-record.html`. Each backup entry opens the matching section there.
+- Sections with no earlier counterpart (all of roofing, outdoor, about and contact, plus some new sections elsewhere) show "No earlier version". No record was invented.
+
+**Evidence:**
+- **Integrity** (`qa/v8/pages.js`): every section's tabs 1–5 open with 0 console errors, every backup link resolves to its anchor, and 0 broken images. 227/227 checks pass on the multi-file site, on the standalone files and at 375 px.
+- **Light:** 0 black or near-black backgrounds in all 210 inner versions. No deep green used.
+- **Tokens** (`qa/v8/tokens.py` on each standalone page): no hex outside the token blocks in CSS, none in JS; markup holds token values only, plus the 29 published paint colours on siding.
+- **Logo:** the new mark in the header and footer of every page (contact also has it on its office card), and `favicon.svg` on every page. Exactly one H1 per page.
+- **Facts** (`qa/v8/facts.py` on each standalone page):
+  - Annex A strings verbatim.
+  - 0 phone numbers other than the firm's.
+  - 0 "312 siding" / "574 roofing".
+  - 0 hours printed any other way; Contact's answers were fixed to keep the en dashes.
+  - 0 em dashes and 0 stray en dashes.
+  - 0 ratings other than 4.9 and 0 review counts other than 474.
+  - Only published price bands.
+- **Homepage, unchanged on its gate:** 140/140 states open, light 0, v8 suite 225/0.
+- **Sizes:** every standalone file is under 4,221,484 B. The homepage is 4,117,279 B; the largest inner page is projects at 2,653,154 B.

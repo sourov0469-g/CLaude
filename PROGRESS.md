@@ -505,3 +505,7 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
   - Section content is page-specific: each page's own trades, figures, photos, FAQs and reviews.
   - **Hidden backups per section:** where the firm's earlier page had a matching section, that old section is the backup record. The old pages are kept byte-identical as `*-record.html`, and each backup entry opens its section there. Sections that never existed before have no backup record, and nothing is invented for them.
   - The whole-page A–E plan above is superseded by this.
+- **Full website built:**
+  - Shared shell commit 976c55b.
+  - One commit per page: 825621c siding, d40b738 windows, 63c7153 roofing, 70dd821 outdoor, 102f44c projects, b77d31c financing, 4bac558 about, 48c49c6 contact.
+  - Final gate evidence is in TRACEABILITY.md. Nothing is marked shipped.
