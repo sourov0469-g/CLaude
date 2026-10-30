@@ -237,7 +237,7 @@
 .pm__seal { position: absolute; right: clamp(-10px, -1vw, 0px); top: -78px; width: clamp(120px, 12vw, 168px); height: auto; overflow: visible; z-index: 2; }
 .pm__seal-o { fill: var(--a-500); }
 .pm__seal-i { fill: none; stroke: var(--white); stroke-width: 2; stroke-dasharray: 3 5; }
-.pm__seal text { font: 600 15px/1 var(--f-text); fill: var(--white); letter-spacing: .02em; }
+.pm__seal text { font: 600 17px/1 var(--f-text); fill: var(--white); letter-spacing: .02em; }
 .pm__seal-b { fill: var(--white); }
 .pm__seal-e { fill: none; stroke: var(--a-500); stroke-width: 7; stroke-linejoin: miter; }
 @media (max-width: 767px) { .pm__seal { top: -60px; right: -6px; width: 104px; } }
