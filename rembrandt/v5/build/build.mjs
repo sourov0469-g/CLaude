@@ -87,8 +87,8 @@ function images(html, live) {
 
 // ---------- markup
 const has = (s, f) => fs.existsSync(path.join(SRC, 'sections', s.id, f));
-const VERS = s => [1, 2, 3, 4, 5].filter(v => has(s, `v${v}.html`)).map(String);
-const BKS = s => [1, 2, 3].filter(v => has(s, `bk/b${v}.html`)).map(v => 'b' + v);
+const VERS = s => [1, 2, 3, 4, 5, 6, 7, 8].filter(v => has(s, `v${v}.html`)).map(String);
+const BKS = s => [1, 2, 3, 4, 5, 6, 7, 8].filter(v => has(s, `bk/b${v}.html`)).map(v => 'b' + v);
 const radio = (s, v, txt) => `<input type="radio" name="v-${s.id}" id="v-${s.id}-${v}" value="${v}"${v === String(s.def) ? ' checked' : ''}><label for="v-${s.id}-${v}" data-cursor="pick" data-c="pick">${txt}</label>`;
 // R3 D7: each picker carries a 14px section glyph that plays once on every switch (its moving part is .g-m)
 const GLYPH = {
@@ -131,16 +131,16 @@ for (const P of PAGES) {
 
   // ---------- CSS
   const minCss = s => s.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(Boolean).join('').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}');
-  let css = read('base.css') + SECTIONS.map(s => [`sections/${s.id}/bk/bk.css`, `sections/${s.id}/${s.id}.css`].filter(f => fs.existsSync(path.join(SRC, f))).map(read).join('\n')).join('\n');
+  let css = read('base.css') + SECTIONS.map(s => [`sections/${s.id}/bk/bk.css`, `sections/${s.id}/bk/bk2.css`, `sections/${s.id}/${s.id}.css`].filter(f => fs.existsSync(path.join(SRC, f))).map(read).join('\n')).join('\n');
   const font = f => `data:font/woff2;base64,${fs.readFileSync(path.join(V5, 'assets', 'fonts', f)).toString('base64')}`;
   css = minCss(css).replace('FONT_EPILOGUE', () => font('epilogue.woff2')).replace('FONT_OPENSANS', () => font('opensans-var.woff2')).replace(/FONT_POPPINS_(\d{3})/g, (m, w) => font(`poppins-${w}.woff2`)); // R4: Poppins + Open Sans (Epilogue for the backups)
   page = page.replace('/*CSS*/', () => css);
   page = page.replace('FAVICON', () => `data:image/png;base64,${fs.readFileSync(path.join(V5, 'assets', 'img', 'favicon.png')).toString('base64')}`);
 
   // ---------- JS
-  const bkJs = s => has(s, 'bk/bk.js');
-  const entry = `import { boot } from './js/main.js';\n` + SECTIONS.map(s => `import ${s.id} from './sections/${s.id}/${s.id}.js';` + (bkJs(s) ? `\nimport ${s.id}Bk from './sections/${s.id}/bk/bk.js';` : '')).join('\n') +
-    `\nboot({ ${SECTIONS.map(s => bkJs(s) ? `${s.id}: { ...${s.id}, b1: ${s.id}Bk[1], b2: ${s.id}Bk[2], b3: ${s.id}Bk[3] }` : s.id).join(', ')} });\n`;
+  const bkJs = s => has(s, 'bk/bk.js'), bk2Js = s => has(s, 'bk/bk2.js');
+  const entry = `import { boot } from './js/main.js';\n` + SECTIONS.map(s => `import ${s.id} from './sections/${s.id}/${s.id}.js';` + (bkJs(s) ? `\nimport ${s.id}Bk from './sections/${s.id}/bk/bk.js';` : '') + (bk2Js(s) ? `\nimport ${s.id}Bk2 from './sections/${s.id}/bk/bk2.js';` : '')).join('\n') +
+    `\nboot({ ${SECTIONS.map(s => (bkJs(s) || bk2Js(s)) ? `${s.id}: { ...${s.id}${[bkJs(s) && `${s.id}Bk`, bk2Js(s) && `${s.id}Bk2`].filter(Boolean).map(m => `, ...Object.fromEntries(Object.entries(${m}).map(([k, f]) => ['b' + k, f]))`).join('')} }` : s.id).join(', ')} });\n`;
   const js = (await esbuild.build({ stdin: { contents: entry, resolveDir: SRC, loader: 'js' }, bundle: true, minify: true, format: 'iife', target: 'es2020', write: false, nodePaths: [path.join(TOOLS, 'node_modules')], legalComments: 'none', logLevel: 'error' })).outputFiles[0].text;
   const scripts = [`window.__IMG=${JSON.stringify(registry)};`, js].map(s => `<script>${s.replace(/<\/script/gi, '<\\/script')}</script>`).join('\n');
   page = page.replace('<!--SCRIPTS-->', () => scripts);

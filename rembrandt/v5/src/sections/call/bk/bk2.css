@@ -1,0 +1,178 @@
+/* Backups B4-B8 of the call section (R4 directive Phase 5): the pre-redesign versions from 2ee2693, verbatim except the prefix cl -> ccl. Never edit. */
+/* CALL (PLAN-V7 §6), the close (peak-end, S1452): one primary action, the phone. v1 anatomy F9/F14 + OFFF two-tone
+   wordmark + a gutter whose drops gather and fall to the button (gooey pinch-off, S1350); v2 [BANK] Shazam-like
+   morphing button: the round call morphs into a house-shaped card; v3 [BANK] Q114 giant marquee CTA on a standing-seam
+   roof band with a chimney. The NAP record lives in the shared footer below (Bakstad #319). */
+.ccl{position:relative;overflow:clip}
+
+/* ---------- v1 */
+.ccl1{--vbg:var(--blue);background:var(--blue);color:#fff;padding:0 0 calc(clamp(2rem,1rem + 3vw,4rem) + var(--mbar))}
+.ccl1-gut{display:block;width:clamp(280px,32vw,460px);height:clamp(60px,9vw,110px);margin-left:var(--gutter)} /* R3 F7.2: a short segment over the call, not the full width */
+.ccl1-fascia{stroke:oklch(1 0 0 / .5);stroke-width:2}
+.ccl1-trough{fill:#e8ecf4;stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.ccl1-lip{fill:none;stroke:#fff;stroke-width:5;vector-effect:non-scaling-stroke}
+.ccl1-hangers path{stroke:var(--ink);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.ccl1-inner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px clamp(32px,5vw,80px);align-items:center;max-width:1280px;margin:0 auto;padding:clamp(2.5rem,1.5rem + 4vw,5rem) var(--gutter) 0}
+.ccl1-main{display:grid;gap:22px;justify-items:start}
+/* R3 F7.1: the bordered office-status panel (the live line and the hours) */
+.ccl1-status{display:grid;gap:14px;padding:clamp(20px,2.4vw,28px);border:1.5px solid oklch(1 0 0 / .45);border-radius:14px}
+.ccl1-hours{margin:0;display:grid;gap:8px}
+.ccl1-hours div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:10px}
+.ccl1-hours dt{font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted)}
+.ccl1-hours dd{margin:0}
+@media (max-width:899px){.ccl1-inner{grid-template-columns:1fr}}
+.ccl1-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:14ch;text-wrap:pretty;font-family:var(--f-head)}
+.ccl1-nw{white-space:nowrap}
+.ccl1-p{font-size:var(--t-lead);line-height:1.45;max-width:46ch}
+.ccl1-live{margin:0;font-size:var(--t-lead);font-weight:600;line-height:1.4}
+.ccl1-act{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:8px}
+.ccl1-drops{position:absolute;left:0;top:calc(clamp(60px,9vw,110px) * .3 - 4px);width:120px;height:600px;pointer-events:none;display:none;overflow:visible}
+.ccl1-lipg{fill:#e8ecf4}
+.ccl1-d{fill:var(--chalk)}
+.ccl1-fall{fill:var(--chalk);stroke:var(--ink);stroke-width:1.2;opacity:0}
+.ccl1-call{font-size:1.25rem;min-height:64px;padding:0 32px 0 26px;transition:scale 60ms var(--ease-out),background-color var(--dur-quick) var(--ease-out)}
+.ccl1-call:active{scale:.97}
+.ccl1-cs{left:0;top:0;width:100%;height:100%}
+.ccl1-cs .rx-h{fill:var(--chalk);stroke:var(--ink);stroke-width:1.2;opacity:0;transform:translateY(-14px);transition:opacity .2s var(--ease-x),transform .25s var(--ease-x)}
+.ccl1-cs .rx-p{fill:none;stroke:#fff;stroke-width:2;opacity:0;transform-origin:center;transform-box:fill-box}
+@media (hover:hover) and (pointer:fine){.ccl1-call:hover .ccl1-cs .rx-h{opacity:1;transform:translateY(-4px)}}
+.ccl1-call:focus-visible .ccl1-cs .rx-h{opacity:1;transform:translateY(-4px)}
+.ccl1-call.is-press .ccl1-cs .rx-p{animation:ccl-splash .3s var(--ease-out)}
+@keyframes ccl-splash{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+.ccl1-addr{display:inline-flex;align-items:center;gap:10px;min-height:48px;font-weight:700;color:#fff}
+.ccl1-pin{width:20px;height:25px;overflow:visible}
+.ccl1-pin path{fill:var(--sun);stroke:var(--ink);stroke-width:1.6}
+.ccl1-pin circle{fill:var(--ink)}
+.ccl1-pin{transition:transform .25s var(--ease-spring)}
+@media (hover:hover) and (pointer:fine){.ccl1-addr:hover .ccl1-pin{transform:translateY(-6px)}}
+.ccl1-addr:focus-visible .ccl1-pin{transform:translateY(-6px)}
+.ccl1-addr.is-press .ccl1-pin{animation:ccl-pin .25s var(--ease-x)}
+@keyframes ccl-pin{0%{transform:translateY(-6px)}50%{transform:translateY(2px) scaleY(.85)}100%{transform:none}}
+.ccl1-word{position:relative;display:grid;margin:clamp(40px,7vw,96px) 0 0;font-size:var(--t-mark-call,clamp(3.2rem,15.6vw,15rem));font-weight:900;letter-spacing:-.025em;line-height:.8;white-space:nowrap;text-align:center;user-select:none}
+.ccl1-word span{grid-area:1/1}
+.ccl1-word span:first-child{color:transparent;-webkit-text-stroke:2px oklch(1 0 0 / .35)}
+.ccl1-word span:last-child{color:#fff;clip-path:inset(0 0 52% 0)}
+
+/* ---------- v2 (the morph is GSAP string interpolation between two 48-point paths of equal structure) */
+.ccl2{--vbg:var(--blue);background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8rem) + var(--mbar))}
+.ccl2-dusk{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none}
+.ccl2-dusk path{fill:var(--ink);opacity:.35}
+.ccl2-win rect{fill:var(--sun);opacity:.8}
+.ccl2-inner{position:relative;display:grid;justify-items:center;gap:18px;max-width:1100px;margin:0 auto;text-align:center}
+.ccl2-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
+.ccl2-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
+/* R3 F7-V2: the number reads at most of the disc's width; the details are a solid card below the stage */
+.ccl2-stage{position:relative;width:min(100%,600px);aspect-ratio:600/420;margin-top:12px}
+.ccl2-shape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ccl2-body{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.ccl2-ripple{fill:none;stroke:var(--sun);stroke-width:2;opacity:0}
+.ccl2-call{position:absolute;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;gap:6px;width:46%;color:var(--ink);text-decoration:none;font-weight:700}
+.ccl2-hs{width:clamp(36px,7vw,52px);height:auto}
+.ccl2-hs path{fill:var(--ink)}
+.ccl2-num{font-size:clamp(1rem,3.4vw,2rem);letter-spacing:-.01em;white-space:nowrap}
+.ccl2-card{width:min(100%,600px);padding:20px 24px;border-radius:14px;background:#fff;color:var(--ink);text-align:left}
+.ccl2-card[hidden]{display:none}
+.ccl2-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ccl2-list li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:12px;align-items:baseline;font-size:1rem;line-height:1.35}
+.ccl2-list b{font-size:var(--t-label);font-weight:600;color:var(--muted)}
+.ccl2-list a{font-weight:800;color:var(--ink)}
+.ccl2-tog{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid #fff;border-radius:999px;background:none;color:#fff;font-weight:700;cursor:pointer}
+.ccl2-tog-i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ccl2-tog .i-x{display:none}
+/* hover redraws the toggle's icon stroke by stroke (house outline, or the crossed rafters when open); press morphs the card */
+.ccl2-tog-i path{stroke-dasharray:100;stroke-dashoffset:0}
+@media (hover:hover) and (pointer:fine){.ccl2-tog:hover .ccl2-tog-i path{animation:ccl-redraw .4s var(--ease-x)}}
+@keyframes ccl-redraw{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}
+.ccl2.is-open .ccl2-tog .i-x{display:block}.ccl2.is-open .ccl2-tog .i-open{display:none}
+@media (hover:hover) and (pointer:fine){.ccl2-tog:hover{background:oklch(1 0 0 / .12)}}
+/* R36 press: the handset buzzes sideways like a phone on vibrate (Family V2 already wobbles a handset by rotation) */
+.ccl2-call.is-press .ccl2-hs{animation:ccl-buzz .24s steps(8)}
+@keyframes ccl-buzz{0%,100%{translate:0 0}12%,62%{translate:-3px 0}37%,87%{translate:3px 0}}
+@media (max-width:640px){.ccl2-list li{grid-template-columns:1fr;gap:2px}.ccl2-list{gap:6px}}
+
+/* ---------- v3 */
+.ccl3{--vbg:var(--blue);background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(3rem,2rem + 3vw,5rem) + var(--mbar))}
+.ccl3-top{display:grid;gap:16px;max-width:1280px;margin:0 auto clamp(48px,7vh,88px);padding:0 var(--gutter)}
+.ccl3-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
+.ccl3-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
+.ccl3-cs{left:0;top:0;width:100%;height:100%}
+.ccl3-cs .rx-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2;opacity:0;transition:opacity .2s var(--ease-x)}
+.ccl3-cs .rx-p{fill:oklch(0.7 0.02 262 / .6);opacity:0;transform-origin:center;transform-box:fill-box}
+@media (hover:hover) and (pointer:fine){.ccl3-call:hover .ccl3-cs .rx-h{opacity:1}}
+.ccl3-call:focus-visible .ccl3-cs .rx-h{opacity:1}
+.ccl3-call.is-press .ccl3-cs .rx-p{animation:ccl-puff .3s var(--ease-out)}
+@keyframes ccl-puff{0%{opacity:1;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-14px) scale(1.6)}}
+.ccl3-pause{display:grid;place-items:center;width:48px;height:48px;padding:0;border:2px solid #fff;border-radius:50%;background:none;color:#fff;cursor:pointer}
+.ccl3-pause svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.ccl3-pause .i-play{fill:currentColor;stroke:none}
+.ccl3-pause[aria-pressed="false"] .i-play,.ccl3-pause[aria-pressed="true"] .i-pause{display:none}
+.ccl3-pause .i-pause{stroke-dasharray:12}
+@media (hover:hover) and (pointer:fine){.ccl3-pause:hover .i-pause{animation:ccl-draw .25s var(--ease-x)}}
+@keyframes ccl-draw{from{stroke-dashoffset:12}}
+/* R40 press: the icon bounces inside the ring */
+.ccl3-pause.is-press svg{animation:ccl-bounce .24s var(--ease-x)}
+@keyframes ccl-bounce{0%{translate:0 0}35%{translate:0 -6px}100%{translate:0 0}}
+html[data-motion="reduced"] .ccl3-pause{display:none}
+.ccl3-band{position:relative;display:block;height:clamp(110px,16vw,240px);background:var(--ink);color:#fff;text-decoration:none;overflow:hidden}
+.ccl3-roof{position:absolute;inset:0;width:100%;height:100%}
+#ccl3-seam path{stroke:oklch(1 0 0 / .14);stroke-width:3}
+.ccl3-chim{will-change:transform;position:absolute;right:clamp(24px,8vw,140px);bottom:100%;width:clamp(48px,6vw,84px);height:auto;margin-bottom:-2px;overflow:visible}
+.ccl3-band{overflow:visible}
+.ccl3-stack{fill:#b85a38;stroke:var(--ink);stroke-width:3}
+.ccl3-cap{fill:var(--shingle);stroke:var(--ink);stroke-width:3}
+.ccl3-brick{stroke:var(--ink);stroke-width:1.5;opacity:.45}
+.ccl3-smoke circle{fill:oklch(0.85 0.01 262 / .7)}
+.ccl3-track{position:absolute;left:0;top:50%;display:flex;white-space:nowrap;translate:0 -50%;font-size:min(12vw,150px); /* R3: the whole number fits the viewport */font-weight:900;letter-spacing:-.02em;line-height:1}
+.ccl3-it{display:inline-flex;align-items:center;padding-right:.4em}
+.ccl3-it i{display:inline-block;width:.32em;height:.32em;margin-left:.4em;background:var(--sun);clip-path:polygon(50% 0,100% 60%,100% 100%,0 100%,0 60%)}
+
+
+/* R3 F7.4: on phones the giant word clears the action bar */
+@media (max-width:899px){.ccl1-word{padding-bottom:calc(var(--mbar) + 12px)}}
+
+/* ---------- v4 The keypad (R3 new): ⟦S0095⟧ the action's own artefact; one dial on entry (⟦S1448⟧) */
+.ccl4{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.ccl4-inner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,6vw,104px);align-items:center;max-width:1180px;margin:0 auto}
+.ccl4-copy{display:grid;gap:18px;justify-items:start}
+.ccl4-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;font-family:var(--f-head)}
+.ccl4-p{font-size:var(--t-lead);line-height:1.45;max-width:40ch;color:var(--on-blue-muted)}
+.ccl4-disp{display:flex;align-items:center;min-height:1.2em;margin:10px 0 4px;font-size:clamp(2rem,1rem + 4vw,3.5rem);font-weight:800;letter-spacing:-.01em;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--f-head)}
+.ccl4-caret{display:none;width:3px;height:.9em;margin-left:4px;background:var(--sun)}
+.ccl4.is-dialing .ccl4-caret{display:inline-block}
+.ccl4-act{display:flex}
+.ccl4-pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.4vw,16px);width:min(100%,340px);justify-self:center}
+.ccl4-k{--lit:0;display:grid;place-items:center;align-content:center;aspect-ratio:1;border-radius:50%;border:1.5px solid oklch(1 0 0 / .35);
+  background:color-mix(in oklch,var(--sun) calc(var(--lit) * 100%),oklch(1 0 0 / .06));color:color-mix(in oklch,var(--ink) calc(var(--lit) * 100%),#fff);user-select:none}
+.ccl4-k b{font-size:clamp(1.25rem,.9rem + 1.2vw,1.75rem);font-weight:700;line-height:1;font-family:var(--f-head)}
+.ccl4-k i{min-height:1em;font-style:normal;font-size:.6875rem;font-weight:600;letter-spacing:.08em;line-height:1.2;opacity:.75}
+.ccl4-go{grid-column:2;background:var(--sun);border-color:var(--sun);color:var(--ink)}
+.ccl4-go svg{width:42%;height:auto;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+@media (max-width:899px){.ccl4-inner{grid-template-columns:1fr}.ccl4-pad{width:min(100%,280px)}}
+
+/* ---------- v5 Office status (R3 new): the week, the hours on it, and where Springboro's clock is now (⟦S1314⟧: no pulse) */
+.ccl5{--vbg:var(--blue);background:var(--blue);color:#fff;padding:clamp(4.5rem,3rem + 5vw,7.5rem) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.ccl5-inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(40px,6vw,104px);align-items:start;max-width:1180px;margin:0 auto}
+.ccl5-head{display:grid;gap:16px}
+.ccl5-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;max-width:12ch;text-wrap:pretty;font-family:var(--f-head)}
+.ccl5-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch;color:var(--on-blue-muted)}
+.ccl5-board{grid-row:span 2;display:grid;gap:14px;padding:clamp(20px,2.6vw,32px);border-radius:16px;background:var(--ink)}
+.ccl5-clock{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0}
+.ccl5-time{font-size:clamp(2rem,1.2rem + 3vw,3.25rem);font-weight:800;letter-spacing:-.01em;line-height:1;font-family:var(--f-head)}
+.ccl5-day{font-size:var(--t-lead);font-weight:600;color:var(--on-dark-2)}
+.ccl5-say{margin:0 0 6px;font-size:var(--t-lead);line-height:1.4}
+.ccl5-week{display:grid;gap:6px}
+.ccl5-row,.ccl5-scale{display:grid;grid-template-columns:2.75rem minmax(0,1fr);gap:12px;align-items:center}
+.ccl5-dn{font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
+.ccl5-row.is-today .ccl5-dn{color:#fff;font-weight:800}
+.ccl5-tr{position:relative;height:18px;border-radius:4px;background:oklch(1 0 0 / .08)}
+.ccl5-blk{position:absolute;left:37.5%;width:33.333%;top:0;bottom:0;border-radius:4px;background:var(--sun)}
+.ccl5-now{position:absolute;top:-6px;bottom:-6px;width:3px;margin-left:-1.5px;background:#fff;border-radius:2px;box-shadow:0 0 0 2px var(--ink)}
+.ccl5-now span{position:absolute;top:50%;left:calc(100% + 5px);translate:0 -50%;padding:2px 6px;border-radius:4px;background:#fff;color:var(--ink);font-size:.75rem;font-weight:700;line-height:1.2;white-space:nowrap}
+.ccl5-now.is-end span{left:auto;right:calc(100% + 5px)} /* late evening: the tag sits left of the mark so it stays in the track */
+.ccl5-sc{position:relative;height:1.2em;font-size:.75rem;color:var(--on-dark-2)}
+.ccl5-sc i{position:absolute;top:0;font-style:normal;white-space:nowrap;translate:-50% 0}
+.ccl5-sc i:first-child{translate:0 0}.ccl5-sc i:last-child{translate:-100% 0}
+.ccl5-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;align-self:end}
+.ccl5-addr{display:inline-flex;align-items:center;min-height:48px;font-weight:700;color:#fff;text-underline-offset:4px}
+@media (hover:hover) and (pointer:fine){.ccl5-addr:hover{text-decoration-thickness:3px}}
+@media (max-width:899px){.ccl5-inner{grid-template-columns:1fr}.ccl5-board{grid-row:auto}.ccl5-act{align-self:start}}

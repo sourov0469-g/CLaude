@@ -1,0 +1,87 @@
+/* Backups B4-B8 of the storm section (R4 directive Phase 5): the pre-redesign versions from 2ee2693, verbatim except the prefix st -> cst. Never edit. */
+/* STORM AND INSURANCE (R4, AUDIT-R4.md): on --blue between How (sky) and Towns (ink). Every version states that the
+   insurer decides the claim (⟦S1013⟧). Facts: the firm photographs damage for the adjuster, writes a line-item scope,
+   can meet the adjuster, starts only approved work; Ohio 19 hail days a year, hail April to July, freeze-thaw November
+   to March, ice dams January and February (the firm's own notes); Bunk built the firm restoring storm-damaged homes. */
+.cst{--vbg:var(--blue);position:relative;overflow:clip;background:var(--blue);color:#fff;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) clamp(5rem,3rem + 6vw,8rem)}
+.cst-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;max-width:18ch;font-family:var(--f-head)}
+.cst-sub{font-size:var(--t-lead);line-height:1.4;color:var(--on-blue-muted);max-width:44ch;margin-top:14px}
+.cst .btn{flex:none}
+
+/* ---------- v1 who does what */
+.cst1-head,.cst1-split,.cst1-act{max-width:1180px;margin-inline:auto}
+.cst1-split{display:grid;grid-template-columns:minmax(0,1fr) 12px minmax(0,1fr);gap:clamp(24px,4vw,56px);margin-top:clamp(32px,4vw,56px);align-items:stretch}
+.cst1-k{font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted);margin-bottom:18px}
+.cst1-them .cst1-k{color:var(--on-dark-2)}
+.cst1-list{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.cst1-us li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start;font-size:clamp(1.125rem,1rem + .5vw,1.375rem);font-weight:600;line-height:1.35}
+.cst1-tick{width:28px;height:28px;fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cst1-seam{width:12px;height:100%}
+.cst1-seam path{stroke:oklch(1 0 0 / .45);stroke-width:2;stroke-dasharray:6 8;vector-effect:non-scaling-stroke}
+.cst1-them{padding:clamp(22px,2.6vw,32px);border-radius:16px;background:var(--ink)}
+.cst1-them li{font-size:clamp(1.125rem,1rem + .5vw,1.375rem);font-weight:600;line-height:1.35}
+.cst1-note{margin-top:22px;padding-top:18px;border-top:1px solid oklch(1 0 0 / .2);font-size:var(--t-body);line-height:1.5;color:var(--on-dark-2)}
+.cst1-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:clamp(32px,4vw,48px)}
+.cst1-hrs{color:var(--on-blue-muted)}
+@media (max-width:767px){.cst1-split{grid-template-columns:1fr}.cst1-seam{display:none}}
+
+/* ---------- v2 the weather year */
+.cst2-head,.cst2-year,.cst2-src,.cst2-act{max-width:1180px;margin-inline:auto}
+.cst2-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:end}
+.cst2-fig{display:flex;align-items:baseline;gap:14px;max-width:22ch;font-size:var(--t-lead);line-height:1.3;color:var(--on-blue-muted)}
+.cst2-big{font-size:clamp(4rem,2rem + 6vw,7rem);font-weight:800;line-height:.85;letter-spacing:-.02em;color:var(--sun);font-family:var(--f-head)}
+.cst2-year{margin-top:clamp(32px,4vw,56px);overflow-x:auto}
+.cst2-t{width:100%;min-width:640px;border-collapse:separate;border-spacing:4px 6px;table-layout:fixed}
+.cst2-t thead th{padding:0 0 6px;font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted);text-align:center}
+.cst2-t thead th:first-child{width:9.5rem}
+.cst2-t thead th.is-now{color:#fff}
+.cst2-t tbody th{padding-right:12px;text-align:left;font-size:var(--t-body);font-weight:700;line-height:1.2;white-space:nowrap}
+.cst2-t td{height:40px;border-radius:6px;background:oklch(1 0 0 / .08)}
+.cst2-r--hail td.on{background:var(--sun)}
+.cst2-r--freeze td.on{background:#cfe0ff}
+.cst2-r--ice td.on{background:repeating-linear-gradient(135deg,#fff 0 6px,#cfe0ff 6px 12px)}
+.cst2-t td.is-now,.cst2-t thead th.is-now{box-shadow:inset 0 0 0 2px #fff}
+.cst2-now-tag{display:block;font-size:.75rem;font-weight:700;color:#fff}
+.cst2-src{margin-top:14px;font-size:var(--t-small);color:var(--on-blue-muted)}
+.cst2-act{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin-top:clamp(28px,4vw,48px);padding-top:24px;border-top:1px solid oklch(1 0 0 / .2)}
+.cst2-act p{max-width:52ch;font-size:var(--t-body);line-height:1.5}
+@media (max-width:767px){.cst2-head{grid-template-columns:1fr}}
+
+/* ---------- v3 the honest line */
+.cst3{display:grid;gap:clamp(20px,3vw,36px);max-width:1180px;margin-inline:auto;box-sizing:content-box}
+.cst3-false{position:relative;justify-self:start;margin:0;font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.01em;color:var(--on-blue-muted);font-family:var(--f-head)}
+.cst3-false s{text-decoration:none}
+.cst3-strike{position:absolute;left:-2%;top:6%;width:104%;height:80%;overflow:visible;pointer-events:none}
+.cst3-strike path{fill:none;stroke:var(--sun);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.cst3-true{font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:22ch;font-family:var(--f-head)}
+.cst3-do{font-size:var(--t-lead);line-height:1.45;max-width:48ch;color:#fff}
+.cst3-true em{font-style:normal;color:var(--sun)}
+.cst3-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+.cst3-act p{color:var(--on-blue-muted)}
+
+/* ---------- v4 the evidence */
+.cst4-head,.cst4-wall,.cst4-act{max-width:1180px;margin-inline:auto}
+.cst4-wall{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);align-items:start;margin-top:clamp(32px,4vw,56px)}
+.cst4-ex{margin:0;display:grid;gap:12px}
+.cst4-ex--a{rotate:-1deg}.cst4-ex--b{rotate:1deg;margin-top:clamp(20px,5vw,72px)}
+.cst4-mat{padding:12px;border-radius:6px;background:#fff;box-shadow:0 24px 48px -24px rgb(16 24 40 / 0.39);transition:translate .2s var(--ease-x)}
+.cst4-mat img{display:block;width:100%;height:auto;border-radius:2px}
+.cst4-ex figcaption{font-size:var(--t-body);line-height:1.45;color:var(--on-blue-muted)}
+.cst4-ex figcaption b{color:#fff}
+@media (hover:hover) and (pointer:fine){.cst4-ex:hover .cst4-mat{translate:0 -4px}}
+.cst4-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:clamp(28px,4vw,48px)}
+.cst4-act p{color:var(--on-blue-muted)}
+@media (max-width:767px){.cst4-wall{grid-template-columns:1fr}.cst4-ex--b{margin-top:0}}
+
+/* ---------- v5 through the window (⟦S1341⟧ ported to SVG: rain eases off and stops; no lightning, no loop) */
+.cst5{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:center;max-width:1180px;margin-inline:auto;box-sizing:content-box}
+.cst5-win{position:relative;aspect-ratio:600/420;border-radius:10px;overflow:hidden;background:#2a3f72}
+.cst5-glass,.cst5-frame{position:absolute;inset:0;width:100%;height:100%}
+.cst5-clear{fill:#9fc0f0;opacity:0}
+.cst5-rain line{stroke:#cfe0ff;stroke-width:1.6;stroke-linecap:round;opacity:.55}
+.cst5-frame rect{fill:none;stroke:#fff;stroke-width:16}
+.cst5-frame path{stroke:#fff;stroke-width:10}
+.cst5-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:24px}
+.cst5-act p{color:var(--on-blue-muted)}
+html[data-motion="reduced"] .cst5-clear{opacity:.85}html[data-motion="reduced"] .cst5-rain{display:none}
+@media (max-width:899px){.cst5{grid-template-columns:1fr}}

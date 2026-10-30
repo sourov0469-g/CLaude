@@ -1,0 +1,280 @@
+/* Backups B4-B8 of the how section (R4 directive Phase 5): the pre-redesign versions from 2ee2693, verbatim except the prefix hw -> chw. Never edit. */
+/* HOW. Facts: 1 call Rachel, Monday to Friday 9 to 5; 2 a written, line-by-line estimate, nothing starts without written
+   approval; 3 the roof, Owens Corning Platinum Preferred, $2M liability insurance. v1 ⟦S1325⟧ progress spine as a
+   downspout; v2 [BANK] UZIK story pager (P74) over three drawn scenes; v3 [BANK] Q409 deliverable chips + Q411 three
+   verbs + Q91 animated icons, joined by a roofer's ladder. */
+.chw{position:relative;overflow:clip}
+.chw-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
+.chw-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:40ch}
+
+/* ---------- v1: the spine is a downspout that fills with water as you read; hangers are the step markers */
+.chw1{--vbg:var(--sky);background:var(--sky);color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,48px);max-width:1040px;margin-inline:auto;padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.chw1-head,.chw1-body{z-index:1}
+/* R3 F5-V1: the heading sits on the steps' axis (the step titles' left edge), above them, not in a sticky side column */
+.chw1-head{display:grid;gap:14px;padding-left:calc(92px + 2ch + 20px)}
+.chw1-body{position:relative;padding-left:92px}
+.chw1-pipe{position:absolute;left:0;top:0;width:92px;height:100%;overflow:visible;pointer-events:none}
+.chw1-gut{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.chw1-tube{fill:#fff;stroke:var(--ink);stroke-width:3}
+.chw1-water{fill:var(--chalk)}
+.chw1-hangers path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transition:transform .15s var(--ease-x),stroke .15s var(--ease-x)}
+.chw1-hangers path.is-on{stroke:var(--blue)}
+.chw1-drop{fill:var(--chalk);stroke:var(--ink);stroke-width:1.5}
+.chw1-steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(56px,10vh,110px)} /* R3 C4 */
+.chw1-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:baseline;scroll-margin-top:calc(var(--nav-h) + 24px)}
+.chw1-n{font-size:.875rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.chw1-t{font-size:clamp(1.75rem,1.2rem + 2vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.015em;color:color-mix(in srgb,var(--ink) 78%,transparent);transition:color .2s var(--ease-x);font-family:var(--f-head)}
+html[data-motion="reduced"] .chw1-t{color:var(--ink)}
+.chw1-step[aria-current="step"] .chw1-t,.chw1-step.is-past .chw1-t{color:var(--ink)}
+.chw1-p{margin-top:10px;font-size:var(--t-lead);line-height:1.45;max-width:40ch}
+.chw1-link{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:10px;font-weight:800;font-size:1.25rem;color:var(--blue)}
+/* R25: a gutter-hanger bracket swings down and clamps over the link's corner; press turns its screw */
+.chw1-hg{right:-30px;top:-10px;width:32px;height:24px;opacity:0;transform:translate(8px,-12px) rotate(28deg);transform-origin:90% 70%;transition:opacity .15s var(--ease-x),transform .28s var(--ease-spring)}
+.chw1-hg-s,.chw1-hg-l{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.chw1-hg-k circle{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.6}
+.chw1-hg-k path{stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+.chw1-hg-k{transform-box:fill-box;transform-origin:center}
+@media (hover:hover) and (pointer:fine){.chw1-link:hover .chw1-hg{opacity:1;transform:none}}
+.chw1-link:focus-visible .chw1-hg{opacity:1;transform:none}
+.chw1-link.is-press .chw1-hg{opacity:1;transform:none}
+.chw1-link.is-press .chw1-hg-k{animation:chw-screw .4s var(--ease-x)}
+@keyframes chw-screw{to{transform:rotate(180deg)}}
+@media (max-width:860px){.chw1-head{padding-left:0}.chw1-body{padding-left:64px}.chw1-pipe{width:64px}.chw1-steps{gap:56px}}
+
+/* ---------- v2 [BANK] UZIK story pager (P74 Harvest [221]): stacked scenes crossfade 0.4s on the content curve; each
+   step's bar fills 5s linear and that fill IS the dwell; chrome on the house curve at 300ms. Not pinned, nothing sticky. */
+.chw2{--vbg:var(--sky);--t-dur:300ms;--t-chrome:cubic-bezier(0.86,0.1,0.14,0.9);--t-diapo:cubic-bezier(0.25,0.1,0.25,1);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.chw2-in{max-width:1280px;margin:0 auto;display:grid;gap:clamp(28px,4vh,48px)}
+.chw2-head{display:grid;gap:12px}
+.chw2-story{position:relative;border-top:2px solid var(--ink);overflow:hidden} /* R3: rows, not a card */
+.chw2-pager{position:relative;z-index:3;display:flex;align-items:flex-start;gap:14px;padding:18px 18px 6px;border-bottom:2px solid var(--ink)}
+.chw2-tabs{flex:1;min-width:0;display:flex;gap:8px}
+.chw2-tab{flex:1 1 0;min-width:0;display:grid;gap:10px;min-height:44px;align-content:start;padding:0 0 8px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.chw2-bar{position:relative;display:block;height:3px;border-radius:2px;background:oklch(0.25 0.06 262 / .15);overflow:hidden}
+.chw2-prog{position:absolute;inset:0;background:var(--ink);transform:translate3d(calc(-100% - 1px),0,0)}
+.chw2-prog.is-animating{animation:chw2-story 5s linear infinite}
+.chw2-prog.is-done{animation:none;transform:translateZ(0)}
+@keyframes chw2-story{0%{transform:translate3d(calc(-100% - 1px),0,0)}to{transform:translateZ(0)}}
+.chw2-tl{font-size:.9375rem;font-weight:700;line-height:1.2;color:var(--muted);transition:color var(--t-dur) var(--t-chrome)}
+.chw2-tab:active{scale:.98}
+.chw2-tl .num{color:var(--muted)}
+.chw2-tab[aria-selected="true"] .chw2-tl{color:var(--ink)}
+/* R26: a length of step flashing bends around the tab's corner; press snaps it flat, then it re-bends */
+.chw2-fl{right:-7px;top:-6px;width:22px;height:22px;opacity:0;transition:opacity var(--t-dur) var(--t-chrome)}
+.chw2-fl path{fill:none;stroke:#8a93a8;stroke-width:3.4;stroke-linecap:square}
+.chw2-fl-v{transform-box:view-box;transform-origin:19px 3px;transform:rotate(-90deg);transition:transform var(--t-dur) var(--t-chrome)}
+@media (hover:hover) and (pointer:fine){.chw2-tab:hover .chw2-fl{opacity:1}.chw2-tab:hover .chw2-fl-v{transform:none}}
+.chw2-tab:focus-visible .chw2-fl{opacity:1}.chw2-tab:focus-visible .chw2-fl-v{transform:none}
+.chw2-tab.is-press .chw2-fl{opacity:1}
+.chw2-tab.is-press .chw2-fl-v{animation:chw2-snap .36s var(--t-chrome)}
+@keyframes chw2-snap{0%{transform:none}35%,65%{transform:rotate(-90deg)}100%{transform:none}}
+/* R27: the pause bars become two shingle tabs; press flips them */
+.chw2-pause{position:relative;flex:none;display:grid;place-items:center;width:44px;height:44px;margin-top:-10px;padding:0;border:2px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer}
+.chw2-pause svg{width:18px;height:18px;overflow:visible}
+.chw2-pz{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.chw2-py{fill:currentColor}
+.chw2-pz,.chw2-py,.chw2-tb{transition:opacity .15s var(--t-chrome)}
+.chw2-pause[aria-pressed="false"] .chw2-py,.chw2-pause[aria-pressed="true"] .chw2-pz{display:none}
+.chw2-tb{opacity:0}
+.chw2-tb path{fill:var(--shingle);stroke:var(--ink);stroke-width:1.4}
+.chw2-tb1,.chw2-tb2{transform-box:fill-box;transform-origin:50% 0}
+@media (hover:hover) and (pointer:fine){.chw2-pause:hover .chw2-tb{opacity:1}.chw2-pause:hover .chw2-pz,.chw2-pause:hover .chw2-py{opacity:0}}
+.chw2-pause:focus-visible .chw2-tb{opacity:1}.chw2-pause:focus-visible .chw2-pz,.chw2-pause:focus-visible .chw2-py{opacity:0}
+.chw2-pause.is-press .chw2-tb{opacity:1}
+.chw2-pause.is-press .chw2-tb1{animation:chw2-flip .36s var(--t-chrome)}
+.chw2-pause.is-press .chw2-tb2{animation:chw2-flip .36s var(--t-chrome) .06s}
+@keyframes chw2-flip{50%{transform:scaleY(-1)}}
+/* the diapo: every step in one grid cell, the visible one fades in over the others */
+.chw2-diapo{display:grid}
+/* R3 F5-V2: the step changes by a clip-path inset reveal, 250ms */
+.chw2-item{grid-area:1/1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);visibility:hidden;clip-path:inset(0 0 0 100%);transition:clip-path .25s var(--ease-x),visibility 0s .25s}
+.chw2-item.is-visible{visibility:visible;clip-path:inset(0);transition:clip-path .25s var(--ease-x),visibility 0s}
+.chw2-photo{display:block;width:100%;height:100%;aspect-ratio:960/420;object-fit:cover}
+.chw2-scene{display:block;width:100%;height:auto;aspect-ratio:960/420;align-self:stretch;background:#fff}
+.chw2-cap{display:grid;align-content:center;gap:18px;padding:32px clamp(24px,3vw,44px);border-left:2px solid var(--ink)}
+.chw2-t{font-size:clamp(1.6rem,1.1rem + 1.8vw,2.6rem);font-weight:700;line-height:1.05;letter-spacing:-.015em;font-family:var(--f-head)}
+.chw2-cd{display:grid;gap:16px;font-size:var(--t-lead);line-height:1.45;max-width:46ch}
+.chw2-call{justify-self:start;display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--sun);color:var(--ink);font-weight:700;text-decoration:none}
+/* R41: a coiled phone cord stretches out of the link; press lets it spring back */
+.chw2-cord{left:calc(100% - 4px);top:50%;width:60px;height:18px;margin-top:-9px;opacity:0;transform:scaleX(.18);transform-origin:0 50%;transition:opacity .15s var(--t-chrome),transform .4s var(--ease-spring)}
+.chw2-cord path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover) and (pointer:fine){.chw2-call:hover .chw2-cord{opacity:1;transform:none}}
+.chw2-call:focus-visible .chw2-cord{opacity:1;transform:none}
+.chw2-call.is-press .chw2-cord{opacity:1;animation:chw2-coil .4s var(--ease-spring)}
+@keyframes chw2-coil{0%{transform:none}35%{transform:scaleX(.15)}100%{transform:none}}
+/* the three scenes */
+.chw2-far path{fill:oklch(0.25 0.06 262 / .06)}
+.chw2-s2 .chw2-far path{fill:none;stroke:oklch(0.25 0.06 262 / .08);stroke-width:1.5}
+.chw2-gr{stroke:var(--ink);stroke-width:3}
+.s1-wall,.s3-wall{fill:#fff;stroke:var(--ink);stroke-width:3}
+.s1-roof{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-fas{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
+.s1-win,.s3-win{fill:var(--sky);stroke:var(--ink);stroke-width:2.5}
+.s1-door,.s3-door{fill:var(--blue);stroke:var(--ink);stroke-width:2.5}
+.s1-sign{fill:var(--ink)}
+.s1-hrs{font:800 15px/1 var(--f-head);fill:#fff;letter-spacing:.06em;font-family:var(--f-head)}
+.s1-disc{fill:var(--sun);stroke:var(--ink);stroke-width:3}
+.s1-base,.s1-hset{fill:#fff;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s1-keys{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.s1-hset{transform-box:fill-box;transform-origin:15% 100%}
+/* step 1 plays: the office lights come on, then the handset lifts off its base (the call is answered) */
+.chw2-item.is-visible .s1-win{animation:chw2-lit .3s var(--t-chrome) .25s both}
+@keyframes chw2-lit{to{fill:#ffd36b}}
+.chw2-item.is-visible .s1-hset{animation:chw2-lift .5s cubic-bezier(.3,1.5,.5,1) .7s both}
+@keyframes chw2-lift{to{transform:translate(-6px,-26px) rotate(-14deg)}}
+.s2-plane{fill:#d9b98a;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.s2-seam{stroke:oklch(0.25 0.06 262 / .25);stroke-width:2}
+.s2-dim{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
+.s2-blade{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.s2-tk{stroke:var(--ink);stroke-width:1.5}
+.s2-hook{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.s2-case{fill:var(--blue);stroke:var(--ink);stroke-width:3}
+.s2-hub{fill:#fff;stroke:var(--ink);stroke-width:3}
+/* step 2 plays: the tape runs out of its case across the eave, then the dimension lines draw along ridge and rake */
+.chw2-item.is-visible .s2-tape{animation:chw2-pull .9s cubic-bezier(.2,.8,.2,1) .2s both}
+@keyframes chw2-pull{from{transform:translateX(-572px)}}
+.chw2-item.is-visible .s2-dim{animation:chw2-draw .5s var(--t-chrome) both}
+.chw2-item.is-visible .s2-dim1{animation-delay:1s}.chw2-item.is-visible .s2-dim2{animation-delay:1.3s}
+@keyframes chw2-draw{from{stroke-dashoffset:900}}
+.s3-sun{fill:var(--sun)}
+.s3-sh{fill:var(--shingle)}
+.s3-crs{fill:none;stroke:oklch(1 0 0 / .22);stroke-width:1.5}
+.s3-edge{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.s3-ridge{fill:none;stroke:var(--ink);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.s3-puff{fill:#fff;stroke:var(--ink);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:50% 100%}
+/* step 3 plays: the finished roof comes down onto the walls, settles, and a puff of dust leaves each eave */
+.chw2-item.is-visible .s3-roof{animation:chw2-set .7s cubic-bezier(.3,1.5,.5,1) .2s both}
+@keyframes chw2-set{from{transform:translateY(-150px);opacity:0}40%{opacity:1}}
+.chw2-item.is-visible .s3-puff{animation:chw2-puff .7s ease-out .6s both}
+@keyframes chw2-puff{0%{opacity:0;transform:scale(.3)}30%{opacity:1}100%{opacity:0;transform:translateY(-8px) scale(1.2)}}
+@media (max-width:900px){
+  .chw2-item{grid-template-columns:1fr}
+  .chw2-cap{border-left:0;border-top:2px solid var(--ink);padding:22px 20px 26px}
+}
+@media (max-width:760px){
+  .chw2-pager{padding:14px 14px 4px;gap:10px}
+  .chw2-tl{font-size:.8125rem}
+  .chw2-scene{aspect-ratio:16/9}
+}
+html[data-motion="reduced"] .chw2-item,html[data-motion="reduced"] .chw2-item.is-visible{transition:none}
+html[data-motion="reduced"] .chw2-bar,html[data-motion="reduced"] .chw2-pause{visibility:hidden}
+
+/* ---------- v3: three verbs, each with its own drawn tool and its deliverables; a ladder joins them */
+.chw3{--vbg:var(--sky);position:relative;overflow:hidden;background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) var(--gutter) calc(clamp(5rem,3rem + 6vw,8.5rem) + var(--mbar))}
+.chw3-head{position:relative;z-index:1;display:grid;gap:12px;max-width:1280px;margin:0 auto clamp(28px,5vh,56px)}
+/* Signal-A index rows: the list is the design. Grid: mono label | giant two-weight line | tool; chips under the line. */
+.chw3-rows{position:relative;z-index:1;list-style:none;margin:0 auto;padding:0;max-width:1280px}
+.chw3-row{position:relative;display:grid;grid-template-columns:clamp(96px,10vw,150px) minmax(0,1fr);column-gap:clamp(16px,2.5vw,40px);row-gap:14px;padding:clamp(26px,4vh,44px) clamp(112px,12vw,170px) clamp(26px,4vh,44px) 0}
+.chw3-ridge{position:absolute;left:0;right:0;top:-12px;width:100%;height:24px;overflow:visible;pointer-events:none}
+.chw3-rl{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.chw3-rt{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:.55}
+.chw3-ro{fill:none;stroke:var(--sun);stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.chw3-n{grid-row:1 / span 2;align-self:start;margin:.6em 0 0;font-size:var(--t-label);font-weight:600;line-height:1.3;letter-spacing:0;color:var(--muted)}
+.chw3-n span{display:block;font-size:1.5rem;font-weight:700;letter-spacing:0;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.chw3 .chw3-act{position:static}
+/* R3 F5: full ink, one weight per line, the H2 role (one size page-wide); only the first line is a link */
+.chw3-act{margin:0;color:var(--ink);text-decoration:none;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
+a.chw3-act{display:inline-block;min-height:44px;text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:.08em;text-underline-offset:.14em}
+.chw3-line{display:block}
+.chw3-v{font-weight:700}
+.chw3-l{font-weight:700}
+.chw3-act:focus-visible{outline-offset:6px}
+.chw3-ico{position:absolute;right:0;top:50%;width:clamp(88px,9vw,128px);height:clamp(88px,9vw,128px);margin-top:calc(clamp(88px,9vw,128px) / -2);overflow:visible;pointer-events:none}
+.chw3-ico *{transform-box:fill-box}
+.i-base{fill:var(--shingle)}
+.i-hand path{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.i-hand{transform-origin:50% 100%;transition:transform .2s var(--ease-x)}
+.i-ring{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0}
+.i-seg rect{fill:var(--sun);stroke:var(--ink);stroke-width:2.5}
+.i-seg path{stroke:var(--ink);stroke-width:2}
+.i-pin{fill:var(--ink)}
+.i-seg2{transform-origin:0% 50%;transition:transform .25s var(--ease-x)}
+.chw3-ico--rule .i-seg2{transform:rotate(-150deg)}
+.chw3-ico--rule .i-seg2{transform-origin:0 50%}
+.i-board{stroke:var(--wood);stroke-width:8;stroke-linecap:round}
+.i-nail path{fill:#8a93a8}
+.i-hammer rect{stroke:var(--ink);stroke-width:2.5}
+.i-hd{fill:var(--shingle)}.i-hl{fill:var(--sun)}
+.i-hammer{transform-origin:100% 100%;transition:transform .2s var(--ease-x)}
+@media (hover:hover) and (pointer:fine){
+  .chw3-act:hover .i-hand{transform:translateY(-8px) rotate(-6deg)}
+  .chw3-act:hover .chw3-ico--rule .i-seg2{transform:rotate(0)}
+  .chw3-act:hover .i-hammer{transform:rotate(-18deg)}
+}
+.chw3-act:focus-visible .i-hand{transform:translateY(-8px) rotate(-6deg)}
+.chw3-act:focus-visible .chw3-ico--rule .i-seg2{transform:rotate(0)}
+.chw3-act:focus-visible .i-hammer{transform:rotate(-18deg)}
+.chw3-act.is-press .i-ring{animation:chw-ring .2s steps(1) 3}
+@keyframes chw-ring{0%{opacity:1}50%{opacity:0}}
+.chw3-act.is-press .i-hand{animation:chw-shake .3s linear}
+@keyframes chw-shake{0%,100%{translate:0 0}25%{translate:-2px 0}75%{translate:2px 0}}
+.chw3-act.is-press .chw3-ico--rule .i-seg1{animation:chw-meas .3s var(--ease-x)}
+@keyframes chw-meas{50%{translate:-6px 0}}
+.chw3-act.is-press .i-hammer{animation:chw-strike .3s var(--ease-x)}
+.chw3-act.is-press .i-nail{animation:chw-drive .3s var(--ease-x) forwards}
+@keyframes chw-strike{0%{transform:rotate(-18deg)}40%{transform:rotate(14deg)}100%{transform:rotate(0)}}
+@keyframes chw-drive{0%,35%{translate:0 0}60%,100%{translate:0 8px}}
+.chw3-chips{grid-column:2;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chw3-chips li{padding:8px 12px;border-radius:999px;background:var(--sky);font-weight:700;font-size:.9375rem;line-height:1.2}
+@media (max-width:700px){.chw3-row{grid-template-columns:1fr;padding:28px 0 30px}.chw3-n{grid-row:auto;margin:0;display:flex;gap:10px;align-items:baseline}.chw3-n span{display:inline;font-size:1.125rem;margin:0}.chw3-chips{grid-column:1}.chw3-act{padding-right:84px;display:block}.chw3-ico{width:72px;height:72px;margin-top:0;top:22px}}
+
+/* ---------- v4 (R3, new): one house, three states. S0441 gsap-scrolltrigger-storytelling: one pinned artefact whose
+   states are revealed per label. The house is sticky beside the steps (CSS sticky); the step nearest the centre sets its
+   state; states crossfade 200ms. Phones: the house sits above the steps, finished, no stickiness. */
+.chw4{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.chw4-head{display:grid;gap:12px;max-width:1240px;margin:0 auto clamp(24px,4vh,40px)}
+.chw4-body{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);max-width:1240px;margin:0 auto}
+.chw4-stage{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start}
+.chw4-house{display:block;width:100%;height:auto;overflow:visible}
+.chw4-gr{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.chw4-wall{fill:#fff;stroke:var(--ink);stroke-width:3}
+.chw4-win{fill:var(--mist);stroke:var(--ink);stroke-width:2.5}
+.chw4-door{fill:var(--ink)}
+.chw4-roof-old{fill:var(--shingle);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.chw4-new{fill:var(--blue)}
+.chw4-c{stroke:var(--chalk);stroke-width:2.5}
+.chw4-courses>*{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .3s var(--ease-x)}
+.chw4-courses>.chw4-c{transform:none;opacity:0;transition:opacity .2s var(--ease-x)}
+.chw4-edge{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.chw4-m{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-dasharray:6 6}
+.chw4-mk{fill:var(--blue)}
+.chw4-meas{opacity:0;transition:opacity .2s var(--ease-x)}
+.chw4-phone{opacity:0;transition:opacity .2s var(--ease-x)}
+.chw4-hs{fill:var(--sun);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.chw4-arc{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.chw4[data-st="1"] .chw4-phone,.chw4[data-st="2"] .chw4-meas{opacity:1}
+.chw4[data-st="3"] .chw4-courses>*{transform:none}
+.chw4[data-st="3"] .chw4-courses>.chw4-c{opacity:1}
+.chw4[data-st="1"] .chw4-hs{animation:chw4-ring .3s var(--ease-x)}
+@keyframes chw4-ring{0%,100%{rotate:0deg}25%{rotate:-10deg}75%{rotate:8deg}}
+.chw4-hs{transform-box:fill-box;transform-origin:50% 50%}
+.chw4-steps{list-style:none;margin:0;padding:0}
+.chw4-step{min-height:44svh;display:grid;align-content:center;gap:12px;padding:24px 0;border-top:1px solid oklch(0.2 0.05 262 / .14)}
+.chw4-t{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;color:var(--muted);transition:color .2s var(--ease-x);font-family:var(--f-head)}
+.chw4-step.is-on .chw4-t{color:var(--ink)}
+.chw4-p{font-size:var(--t-lead);line-height:1.45;max-width:36ch}
+.chw4-tel{justify-self:start;display:inline-flex;align-items:center;min-height:48px;font-size:1.25rem;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px}
+html[data-motion="reduced"] .chw4 .chw4-courses>*{transform:none;opacity:1;transition:none}
+html[data-motion="reduced"] .chw4 .chw4-t{color:var(--ink)}
+@media (max-width:899px){.chw4-body{grid-template-columns:1fr}.chw4-stage{position:relative;top:auto}.chw4-step{min-height:0}.chw4 .chw4-courses>*{transform:none;opacity:1}.chw4 .chw4-t{color:var(--ink)}}
+
+/* ---------- v5 (R3, new): three artefacts, no numerals. The handset with the number, a blank ruled estimate sheet (no
+   figures, no names: an illustration, never a record), the real finished roof. */
+.chw5{--vbg:var(--sky);background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8rem)) var(--gutter) calc(clamp(4.5rem,3rem + 5vw,7rem) + var(--mbar))}
+.chw5-head{max-width:1240px;margin:0 auto clamp(28px,4vw,48px)}
+.chw5-row{list-style:none;margin:0 auto;padding:0;max-width:1240px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.chw5-a{display:grid;gap:16px;align-content:start}
+.chw5-art{position:relative;aspect-ratio:4/3;display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 1px oklch(0.2 0.05 262 / .14);overflow:hidden}
+.chw5-art svg{width:72%;height:auto;overflow:visible}
+.chw5-ph{fill:var(--sun);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.chw5-arc{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round}
+.chw5-phone svg{width:52%;margin-top:-14%}
+.chw5-tel{position:absolute;left:0;right:0;bottom:12%;display:flex;align-items:center;justify-content:center;min-height:44px;text-align:center;font-size:clamp(1.25rem,.9rem + 1vw,1.75rem);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:3px;text-underline-offset:6px;font-family:var(--f-head)}
+.chw5-pg{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.chw5-hd{stroke:var(--ink);stroke-width:5;stroke-linecap:round}
+.chw5-ln{stroke:var(--steel);stroke-width:2;stroke-linecap:round}
+.chw5-sg{stroke:var(--blue);stroke-width:2.5;stroke-linecap:round}
+.chw5-roof img{width:100%;height:100%;object-fit:cover}
+.chw5-cap{font-size:var(--t-lead);line-height:1.4;color:var(--muted)}
+.chw5-cap b{color:var(--ink);font-weight:700}
+@media (max-width:760px){.chw5-row{grid-template-columns:1fr}.chw5-art{aspect-ratio:16/9}}

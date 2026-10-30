@@ -342,8 +342,8 @@ html.cmp-on .cmp{display:block}
 /* R4 type roles: headings, numbers, buttons, labels and the pickers in Poppins; reading text in Open Sans (body) */
 :is(h1,h2,h3,h4,.btn,.num,legend,.pick,.ftr-k,.t-label){font-family:var(--f-head)}
 /* the hidden backups are records of the pre-R4 page: they keep Epilogue */
-.sec.on-bk .stage,.sec.on-bk .stage :is(h1,h2,h3,h4,.btn,.num,.t-label,.t-display,.t-h2){font-family:"Epilogue",ui-sans-serif,system-ui,sans-serif}
-.sec.on-bk .stage{line-height:1.55}.sec.on-bk .stage svg :is(text,tspan){font-family:"Epilogue",sans-serif} /* shared SVG label classes (.mk, .s1-hrs) */.sec.on-bk .stage .t-display{letter-spacing:-.035em;text-wrap:balance}.sec.on-bk .stage .btn{letter-spacing:-.005em}
+.sec.on-bk-old .stage,.sec.on-bk-old .stage :is(h1,h2,h3,h4,.btn,.num,.t-label,.t-display,.t-h2){font-family:"Epilogue",ui-sans-serif,system-ui,sans-serif}
+.sec.on-bk-old .stage{line-height:1.55}.sec.on-bk-old .stage svg :is(text,tspan){font-family:"Epilogue",sans-serif} /* shared SVG label classes (.mk, .s1-hrs) */.sec.on-bk-old .stage .t-display{letter-spacing:-.035em;text-wrap:balance}.sec.on-bk-old .stage .btn{letter-spacing:-.005em}
 /* R4 de-AI: section rhythm varies by section (the top padding was one value everywhere) */
 #proof{--pad-t:clamp(5rem,4rem + 2.5vw,6.5rem)}#svc{--pad-t:clamp(5.5rem,3.5rem + 6vw,9rem)}#work{--pad-t:clamp(5rem,3.5rem + 4vw,7rem)}
 #family{--pad-t:clamp(5rem,3rem + 6vw,8.5rem)}#how{--pad-t:clamp(5rem,4rem + 2.5vw,6.5rem)}#storm{--pad-t:clamp(5.5rem,3.5rem + 6.5vw,9.5rem)}

@@ -1,0 +1,200 @@
+/* Backups B4-B8 of the work section (R4 directive Phase 5): the pre-redesign versions from 2ee2693, verbatim except the prefix wv -> cwv. Never edit. */
+/* WORK: real jobs only. v1 [BANK] Q361 loop tiles (GreenSock xxQaRoX), v2 [BANK] Q157 push grid (Codrops, Flip),
+   v3 [BANK] Q38 SVG horizontal blinds over the one genuine before/after pair (ba2). */
+.cwv{position:relative;overflow:clip;background:var(--sky);color:var(--ink);padding:var(--pad-t,clamp(5rem,3rem + 6vw,8.5rem)) 0 calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.cwv-head{display:grid;gap:12px;padding:0 var(--gutter);margin-bottom:clamp(32px,5vh,56px)}
+.cwv-h{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
+.cwv-note{font-size:var(--t-lead);line-height:1.4;color:var(--muted);max-width:44ch}
+.cwv-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--ink);border-radius:50%;background:none;color:var(--ink);cursor:pointer;
+  transition:background-color var(--dur-quick) var(--ease-std),color var(--dur-quick) var(--ease-std)}
+.cwv-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cwv-btn .i-play{fill:currentColor;stroke:none}
+.cwv-btn[aria-pressed="false"] .i-play,.cwv-btn[aria-pressed="true"] .i-pause{display:none}
+@media (hover:hover) and (pointer:fine){.cwv-btn:hover{background:var(--ink);color:#fff}}
+.cwv-btn:active{scale:.96}
+
+/* v1 Q361: an endless strip at 200 px/s, the centre tile lit, the rest at brightness(0.7); the caption follows */
+.cwv1-strip{display:flex;gap:24px;overflow:hidden;padding:4px 0}
+.cwv1-tile{flex:none;width:min(30em,78vw);aspect-ratio:4/3;margin:0;overflow:hidden;background:var(--mist);filter:brightness(.7);transition:filter .15s var(--ease-x)}
+.cwv1-tile.is-on{filter:none}
+.cwv1-tile img{width:100%;height:100%;object-fit:cover}
+.cwv1-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px var(--gutter) 0}
+.cwv1-cap{font-size:var(--t-lead);font-weight:700;min-height:1.4em}
+.cwv1-cap.is-new{animation:cwv-in .15s var(--ease-x) both}
+.cwv1-ctl{display:flex;gap:8px}
+html[data-motion="reduced"] .cwv1-pause{display:none}
+@keyframes cwv-in{from{opacity:0;translate:0 6px}}
+
+/* v2 Q157 (v2 audit): the layout is the animation data. The six jobs frame the title as a dense gallery wall (no empty cell);
+   opening one moves its image into the centre and changes the grid tracks so the frame is pushed to thin edges; Flip plays
+   the difference. Desktop 4 x 3 (wide tiles top and bottom, tall tiles at the sides), phone 2 x 5. */
+.cwv2-grid{position:relative;display:grid;gap:12px;padding:0 var(--gutter);height:min(86svh,860px);min-height:560px;
+  grid-template-columns:1fr 1.15fr 1.15fr 1fr;grid-template-rows:1fr 1.5fr 1fr}
+.cwv2.is-open .cwv2-grid{grid-template-columns:.42fr 1.6fr 1.6fr .42fr;grid-template-rows:.36fr 2.4fr .36fr}
+.cwv2-item{position:relative;padding:0;border:0;background:none;overflow:hidden;cursor:pointer;min-height:0}
+.cwv2-item.wa{grid-area:1 / 1 / 2 / 3}.cwv2-item.wb{grid-area:1 / 3 / 2 / 5}.cwv2-item.we{grid-area:2 / 1 / 3 / 2}
+.cwv2-item.wf{grid-area:2 / 4 / 3 / 5}.cwv2-item.wc{grid-area:3 / 1 / 4 / 3}.cwv2-item.wd{grid-area:3 / 3 / 4 / 5}
+.cwv2-item img,.cwv2-full img{width:100%;height:100%;object-fit:cover;display:block}
+.cwv2-item:focus-visible{outline-offset:2px}
+.cwv2-closed{grid-area:2 / 2 / 3 / 4;display:grid;align-content:center;justify-items:center;gap:14px;padding:clamp(16px,3vw,40px);text-align:center;z-index:1}
+.cwv2-closed .cwv-note{max-width:30ch}
+.cwv2-full{grid-area:2 / 2 / 3 / 4;position:relative;z-index:5;pointer-events:none;overflow:hidden}
+.cwv2.is-open .cwv2-full{pointer-events:auto;cursor:pointer}
+.cwv2-full img{position:absolute;inset:0}
+.cwv2-open{grid-area:2 / 2 / 3 / 4;align-self:end;z-index:6;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+  margin:0;padding:16px;background:linear-gradient(transparent,rgba(17,24,48,.72));pointer-events:none}
+.cwv2-open>*{pointer-events:auto}
+.cwv2-open[hidden],.cwv2-closed[hidden]{display:none}
+.cwv2-cap{color:#fff;font-size:clamp(1.125rem,.9rem + 1vw,1.75rem);font-weight:800;line-height:1.1;letter-spacing:-.01em}
+.cwv2-close{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;
+  transition:background-color var(--dur-quick) var(--ease-std)}
+.cwv2-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+@media (hover:hover) and (pointer:fine){.cwv2-close:hover{background:var(--mist)}}
+@media (max-width:640px){
+  .cwv2-grid{gap:8px;height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:34vw 46vw 38vw 46vw}
+  .cwv2.is-open .cwv2-grid{grid-template-columns:1fr 1fr;grid-template-rows:14vw 14vw 154vw 14vw}
+  .cwv2-item.wa{grid-area:1 / 1 / 2 / 2}.cwv2-item.wb{grid-area:1 / 2 / 2 / 3}.cwv2-item.we{grid-area:2 / 1 / 3 / 2}.cwv2-item.wf{grid-area:2 / 2 / 3 / 3}
+  .cwv2-item.wc{grid-area:4 / 1 / 5 / 2}.cwv2-item.wd{grid-area:4 / 2 / 5 / 3}
+  .cwv2-closed,.cwv2-full,.cwv2-open{grid-area:3 / 1 / 4 / 3}
+  .cwv2-closed{padding:24px 8px}
+}
+
+/* v3 Q38: thirty horizontal slits open in a scrubbed stagger, crisp edges; the labels sit outside the frame and switch at
+   half. Reduced motion: the pair side by side. */
+.cwv3-stage{padding:0 var(--gutter)}
+.cwv3-stage>*{width:100%;max-width:calc(62svh * 1024 / 600);margin-inline:auto} /* R3 C4: the section within the ~1150px beat */
+.cwv3-labels{display:flex;justify-content:space-between;margin-bottom:10px;font-size:var(--t-label);font-weight:700;letter-spacing:0}
+.cwv3-l{min-height:44px;padding:0 2px;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--muted);cursor:pointer;transition:color .15s var(--ease-x)}
+@media (hover:hover) and (pointer:fine){.cwv3-l:hover{color:var(--ink)}}
+.cwv3-hl{fill:none;stroke:var(--sun);stroke-width:4;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:0;pointer-events:none;transition:opacity .18s var(--ease-x)}
+.cwv3-hl.is-on{opacity:1}
+.cwv3-hl.is-flash{animation:cwv3-flash .5s var(--ease-x)}
+@keyframes cwv3-flash{0%{opacity:1;stroke-width:7}100%{opacity:0;stroke-width:4}}
+.cwv3-l.is-on{color:var(--ink)}
+.cwv3-l.is-on::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;background:var(--blue);vertical-align:.08em}
+.cwv3-frame{width:100%;height:auto;aspect-ratio:1024/600;background:var(--mist)}
+.cwv3-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cwv3-pair[hidden]{display:none}
+.cwv3-pair figure{margin:0;display:grid;gap:10px}
+.cwv3-pair img{width:100%;aspect-ratio:1024/684;object-fit:cover}
+.cwv3-pair figcaption{font-size:var(--t-label);font-weight:700}
+.cwv3.is-still .cwv3-frame,.cwv3.is-still .cwv3-labels{display:none}
+@media (max-width:640px){.cwv3-pair{grid-template-columns:1fr}.cwv3-stage{padding:0 12px}.cwv3 .cwv-head{margin-bottom:20px}}
+
+/* ---------- V7 upgrades (PLAN-V7 §6 Work) */
+.cwv{--vbg:var(--sky)}
+.cwv-head,.cwv1-strip,.cwv1-foot,.cwv1-tape,.cwv2-grid,.cwv3-stage{position:relative;z-index:1}
+/* v1: a roofer's tape runs under the loop, its ticks travelling with the track; the caption rides the hook */
+.cwv1-tape{will-change:transform;height:28px;margin-top:18px;padding:0}
+.cwv1-blade{display:block;width:100%;height:28px}
+.cwv1-blade-bg{fill:var(--sun)}
+.cwv1-blade-tk{stroke:var(--ink);stroke-width:1.4}
+#cwv1-ticks path{stroke:var(--ink);stroke-width:1.4}
+.cwv1-cap{display:flex;align-items:center;gap:12px}
+.cwv1-hook{width:22px;height:28px;flex:none;overflow:visible}
+.cwv1-hook path{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.cwv1-hook rect{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.cwv1.is-step .cwv1-hook{animation:cwv-hook .3s var(--ease-x)}
+@keyframes cwv-hook{0%{transform:translateX(0)}40%{transform:translateX(10px)}100%{transform:translateX(0)}}
+.cwv1-tile{position:relative}
+.cwv1-nails{will-change:transform;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.cwv1-nails circle{fill:#d8dde8;stroke:var(--ink);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:0;transform:scale(.01);transform-box:fill-box;transform-origin:center;transition:opacity .15s var(--ease-x),transform .25s var(--ease-spring)}
+@media (hover:hover) and (pointer:fine){.cwv1-tile:hover .cwv1-nails circle{opacity:1;transform:scale(1)}.cwv1-tile:hover .cwv1-nails circle:nth-child(2){transition-delay:.025s}.cwv1-tile:hover .cwv1-nails circle:nth-child(3){transition-delay:.05s}.cwv1-tile:hover .cwv1-nails circle:nth-child(4){transition-delay:.075s}}
+.cwv-btn{position:relative}
+.cwv-btn .i-sq{opacity:0;fill:none;stroke-width:2.2}
+.cwv-btn .i-arw,.cwv-btn .i-sq{transition:opacity .18s var(--ease-x)}
+@media (hover:hover) and (pointer:fine){.cwv-btn[data-dir]:hover .i-arw{opacity:0}.cwv-btn[data-dir]:hover .i-sq{opacity:1}}
+.cwv-btn[data-dir]:focus-visible .i-arw{opacity:0}.cwv-btn[data-dir]:focus-visible .i-sq{opacity:1}
+.cwv-btn.is-press{animation:cwv-tick .3s var(--ease-spring)}
+@keyframes cwv-tick{0%{scale:.9}100%{scale:1}}
+/* R18: the pause bars turn through 90 degrees into the walls of a level vial; its bubble drifts while the strip runs;
+   pressed (held) the bubble centres and stays */
+.cwv1-pause .i-pause{transform-box:view-box;transform-origin:12px 12px;transition:transform .25s var(--ease-x),opacity .15s var(--ease-x)}
+.cwv1-pause .i-level{opacity:0;transition:opacity .15s var(--ease-x)}
+.cwv1-pause .i-lv-tk{stroke-width:1.2}
+.cwv1-pause .i-bub{fill:currentColor;stroke:none;transition:translate .3s var(--ease-spring)}
+.cwv1-pause .i-play{transition:opacity .15s var(--ease-x)}
+/* R3 D4: one 0.6s drift of the bubble on enter, never a loop */
+@keyframes cwv-bub{0%{translate:-3.4px 0}100%{translate:0 0}}
+@media (hover:hover) and (pointer:fine){
+  .cwv1-pause:hover .i-pause{display:block;transform:rotate(90deg)}
+  .cwv1-pause:hover .i-level{opacity:1}
+  .cwv1-pause:hover .i-play{opacity:0}
+  .cwv1-pause[aria-pressed="false"]:hover .i-bub{animation:cwv-bub .6s var(--ease-x)}
+}
+.cwv1-pause:focus-visible .i-pause{display:block;transform:rotate(90deg)}
+.cwv1-pause:focus-visible .i-level{opacity:1}
+.cwv1-pause:focus-visible .i-play{opacity:0}
+.cwv1-pause[aria-pressed="false"]:focus-visible .i-bub{animation:cwv-bub .6s var(--ease-x)}
+.cwv1-pause.is-press .i-bub,.cwv1-pause[aria-pressed="true"] .i-bub{animation:none;translate:0 0}
+/* R3 E3 (S1314 §7): a held strip shows on the control itself, a filled ink face */
+.cwv1-pause[aria-pressed="true"]{background:var(--ink);color:#fff}
+/* R3 F3: phones keep three bottom layers (strip, caption, controls); the tape leaves */
+@media (max-width:640px){.cwv1-tape{display:none}}
+.cwv1-tape svg{overflow:hidden}
+/* v2: a gable cap lowers over a photo on hover (Q147 chevron, inverted into a roof line); opening lifts the roof off */
+.cwv2-gc{will-change:transform;position:absolute;left:0;top:0;width:100%;height:46%;pointer-events:none;overflow:visible}
+.cwv2-gc-f{fill:var(--sky)}
+.cwv2-gc-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+/* R3 F3-V2: captions always on, small (hover is never the only way to read them, S1314 §7) */
+.cwv2-tag{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);padding:5px 9px;border-radius:12px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:600;line-height:1.2;pointer-events:none;text-align:left}
+.cwv2.is-open .cwv2-gc,.cwv2.is-open .cwv2-tag{opacity:0}
+.cwv2-close{position:relative}
+.cwv2-close .i-raf{opacity:0}
+.cwv2-close .i-raf path{fill:var(--wood);stroke:currentColor;stroke-width:1.2}
+.cwv2-close .i-x,.cwv2-close .i-raf{transition:opacity .18s var(--ease-x)}
+@media (hover:hover) and (pointer:fine){.cwv2-close:hover .i-x{opacity:0}.cwv2-close:hover .i-raf{opacity:1}}
+.cwv2-close:focus-visible .i-x{opacity:0}.cwv2-close:focus-visible .i-raf{opacity:1}
+.cwv2-close.is-press .i-raf{animation:cwv-fold .3s var(--ease-x)}
+@keyframes cwv-fold{0%{transform:scaleY(1)}50%{transform:scaleY(.2)}100%{transform:scaleY(1)}}
+.cwv2-close .i-raf{transform-origin:12px 11px;transform-box:view-box}
+/* v3: the after photo laid over the before, course by course, bottom to top; a small hammer rides the course going
+   on; the frame sits on a drawn drip edge and starter strip */
+.cwv3-ham{pointer-events:none}
+.cwv3-ham-h{fill:var(--shingle);stroke:var(--ink);stroke-width:2}
+.cwv3-ham-c{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.cwv3-ham-s{fill:var(--sun);stroke:var(--ink);stroke-width:2}
+.cwv3-drip{display:block;width:100%;height:18px;margin-top:-2px;overflow:visible}
+.cwv3-drip-e,.cwv3-drip-l{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.cwv3-starter{fill:none;stroke:var(--chalk);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.cwv3.is-still .cwv3-nailrow{display:none}
+/* bg: a row of nail heads along the starter strip; the ones near the pointer lift off the strip and turn their bright side up */
+.cwv3-nailrow{display:flex;justify-content:space-between;height:12px;margin-top:-6px;padding:0 1.2%;pointer-events:none}
+.cwv3-nail{width:10px;height:10px;overflow:visible;will-change:transform}
+.cwv3-nail-h{fill:#c9cfdb;stroke:var(--ink);stroke-width:1.2}
+.cwv3-nail-g{fill:none;stroke:#fff;stroke-width:1.2;stroke-linecap:round;opacity:.9}
+
+/* ---------- v4 (R3, new): two jobs, told straight. [BANK] Checklist 11 (say every photo is real work) and S1314 product
+   truth: one column holds the one genuine pair, the other a single finished photo that says it has no before. */
+.cwv4-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);padding:0 var(--gutter);align-items:start}
+.cwv4-job{display:grid;gap:14px}
+.cwv4-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cwv4-ph{position:relative;margin:0;overflow:hidden;background:var(--mist)}
+.cwv4-ph img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.cwv4-one img{aspect-ratio:4/3}
+.cwv4-ph figcaption{position:absolute;left:10px;top:10px;padding:5px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:var(--t-label);font-weight:600;line-height:1.2}
+.cwv4-t{margin-top:6px;font-size:clamp(1.375rem,1rem + 1vw,1.75rem);font-weight:700;line-height:1.15;letter-spacing:-.007em;font-family:var(--f-head)}
+.cwv4-d{max-width:46ch;font-size:var(--t-body);line-height:1.5;color:var(--muted)}
+@media (max-width:899px){.cwv4-grid{grid-template-columns:1fr}}
+
+/* ---------- v5 (R3, new): the job index. [BANK] VERDE: the whole portfolio as an index of rows with mini thumbnails, and a
+   preview that follows the pointer, smoothed only by a 0.2s CSS transition on transform. Touch and keyboard keep the
+   row thumbnails, so the follower is an enhancement, never the only way to see a photo. */
+.cwv5-list{list-style:none;margin:0;padding:0 var(--gutter);counter-reset:none}
+.cwv5-row{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) 112px;align-items:center;gap:24px;padding:14px 0;border-top:1px solid oklch(0.2 0.05 262 / .14);transition:background-color var(--dur-quick) var(--ease-x)}
+.cwv5-row:last-child{border-bottom:1px solid oklch(0.2 0.05 262 / .14)}
+.cwv5-name{font-size:clamp(1.25rem,.9rem + 1.2vw,2rem);font-weight:700;line-height:1.1;letter-spacing:-.007em;font-family:var(--f-head)}
+.cwv5-what{color:var(--muted)}
+.cwv5-th{width:112px;aspect-ratio:3/2;overflow:hidden;background:var(--mist)}
+.cwv5-th img{width:100%;height:100%;object-fit:cover}
+.cwv5-follow{position:fixed;left:0;top:0;z-index:70;width:min(360px,30vw);aspect-ratio:3/2;pointer-events:none;opacity:0;overflow:hidden;background:var(--mist);
+  box-shadow:0 24px 48px -24px oklch(0.2 0.06 262 / .6);transition:transform .2s var(--ease-x),opacity .15s var(--ease-x)}
+.cwv5-follow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .15s var(--ease-x)}
+.cwv5-fb{opacity:0}
+.cwv5.is-peek .cwv5-follow{opacity:1}
+@media (hover:hover) and (pointer:fine){.cwv5-row:hover{background:color-mix(in srgb,var(--mist) 45%,transparent)}.cwv5-row:hover .cwv5-name{color:var(--blue)}}
+@media (max-width:760px){
+  .cwv5-row{grid-template-columns:minmax(0,1fr) 38%;grid-template-areas:"name th" "what th";gap:2px 14px}
+  .cwv5-name{grid-area:name;align-self:end}.cwv5-what{grid-area:what;align-self:start;font-size:.9375rem}.cwv5-th{grid-area:th;width:100%}
+  .cwv5-follow{display:none}
+}

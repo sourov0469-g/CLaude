@@ -56,7 +56,7 @@ function mount(sec, v, swap) {
     return init ? init(root, { ...ctx.conditions, swap, sec, id, ctx }) : undefined;
   }, root);
   live.set(id, { mm, v });
-  const bk = String(v)[0] === 'b'; sec.classList.toggle('on-bk', bk); if (bk) showBk(sec, true);
+  const bk = String(v)[0] === 'b'; sec.classList.toggle('on-bk', bk); sec.classList.toggle('on-bk-old', bk && +String(v).slice(1) <= 3); // R4: B1-B3 are the Epilogue-era records if (bk) showBk(sec, true);
   paintBg(sec, root);
 }
 // PLAN-V7 §4b: each section paints its active version's background (--vbg on the version root, else its computed
@@ -95,7 +95,7 @@ const valid = (id, v) => !!(MODS[id] && document.getElementById(`v-${id}-${v}`))
 function readUrl() { // ?v=hero2,proofb1 (strict: unknown ids or versions are ignored)
   const out = {}; let raw = '';
   try { raw = new URL(location.href).searchParams.get('v') || ''; } catch (e) { return out; }
-  for (const part of raw.split(',')) { const m = /^([a-z]+?)([1-5]|b[1-3])$/.exec(part.trim()); if (m && valid(m[1], m[2])) out[m[1]] = m[2]; }
+  for (const part of raw.split(',')) { const m = /^([a-z]+?)([1-8]|b[1-8])$/.exec(part.trim()); if (m && valid(m[1], m[2])) out[m[1]] = m[2]; }
   return out;
 }
 // the hidden Backup buttons: the picker's "more" button (or the B key for every section) shows them; a section showing a
@@ -170,7 +170,7 @@ function start(mods) {
   for (const sec of ORDER) ScrollTrigger.create({ trigger: sec, start: 'top center', end: 'bottom center', onToggle: s => { if (s.isActive) inView = sec; } });
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable]')) return;
-    if (/^[1-5]$/.test(e.key)) switchTo(inView, e.key);
+    if (/^[1-8]$/.test(e.key)) switchTo(inView, e.key);
     else if (e.key === 'b' || e.key === 'B') { const on = !document.documentElement.classList.toggle('bk-shown') ? false : true; for (const sec of ORDER) showBk(sec, on); }
     else if (e.key === 't' || e.key === 'T') document.documentElement.classList.toggle('picks-off');
     else if (e.key === 'r' || e.key === 'R') { for (const sec of ORDER) if (live.get(sec.dataset.section).v !== DEF(sec.dataset.section)) switchTo(sec, DEF(sec.dataset.section)); store.set({ companion: store.get().companion }); }
