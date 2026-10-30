@@ -84,9 +84,12 @@ def main(debug=None):
         return m
 
     def shade(name, m, gamma=.9):
+        # Audit pack F6 V1.2: the photo's own light reaches the whole zone; the keyed area fades to neutral over ~24 px
+        # (a feathered weight), so no rectangular seam where the colour key stopped and the zone mask carried on
         med = np.median(lum[m])
         s = np.clip(.5 * (lum / med) ** gamma, 0, 1)
-        s = np.where(m, s, .5)
+        k = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(25)).filter(ImageFilter.GaussianBlur(12))).astype(np.float32) / 255
+        s = .5 + (s - .5) * k
         im = Image.fromarray((s * 255).astype(np.uint8))
         for w in (760, 1400):
             im.resize((w, w * 10 // 16), Image.LANCZOS).save(os.path.join(OUT, f'shade-{name}-{w}.webp'), quality=82)
@@ -95,7 +98,8 @@ def main(debug=None):
     write('body', body)
     write('gable', gable)
     write('trim', trim, .8)
-    shade('body', body | gable)
+    shade('body', body)
+    shade('gable', gable)   # F6 V1.2: the gable gets its own light, not the wall's
     shade('trim', trim, 1.0)
     for w in (760, 1400):
         img.resize((w, w * 10 // 16), Image.LANCZOS).save(os.path.join(OUT, f'base-{w}.webp'), quality=80)

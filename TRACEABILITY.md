@@ -748,3 +748,28 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 - 2 · Segmented control: ACCEPTED. 48 px tall, labelled "Lap · 301 jobs" / "Batten · 27 jobs". ⟦S0220⟧ Axis 7.
 - 3 · Batten values: ACCEPTED. They are printed in both modes and greyed when inactive (`--ink2` at 0.75, not `--line`, per C.2). ⟦S1499⟧.
 - Clutter · Title blocks: ACCEPTED, both deleted ("DWG APS-S1 · REV 03 …" and "VARIABLES"). The dimension grammar stays.
+
+## F6 · Colour
+**V1, Try it on your house (winner).**
+- 1 · Targets: ACCEPTED. `.sw` buttons are 44×44 around a 32 px disc, and `.seg` buttons are 44 px min (live versions; Built 3's control is 48). ⟦S0220⟧ Axis 7.
+- 2 · Lighting: ACCEPTED, done at the asset. `studio_masks.py` now computes each zone's shade from the photo's own luminance over the whole zone, so there is no rectangular seam. The keyed area fades to neutral through a feathered weight (25 px dilate, 12 px blur). The gable gets its own shade file, with its own median light (0.077 vs the wall's 0.141); before, it borrowed the wall's. ⟦S1306⟧, ⟦S1314⟧ §6.
+- 3 · Cost card: ACCEPTED. The sticky aside (red median, six levers, its own CTA) is gone. The studio takes the full width, and one line under the swatches reads "Paint or ColorPlus is one of six things that move a siding price (median $10k-$15k from 415 priced jobs). See what people paid →" linking to #money. C.4's red figure goes with it. ⟦S1499⟧, ⟦S1501⟧.
+- 4 · Wipe: ACCEPTED. The colour blooms as a circle (the Studio's existing `circle()` path) from the middle of the zone it lands on: siding 60/62 %, gable 75/22 %, trim 50/42 %. The swatches sit outside the photo, so the "point where the visitor acted" is the part they chose. Same 0.3 s. Backup 1 keeps the left wipe. ⟦S0063⟧ Std 5.
+
+**V2, Paint or ColorPlus.**
+- 1 · Targets: ACCEPTED. 44×44 buttons with a 30 px disc inside; the double ring stays, now on the disc. ⟦S0220⟧ Axis 7.
+- 2 · Pressed defaults: ACCEPTED. The two colours the headers announce (SW index 10, ColorPlus index 11) ship `aria-pressed="true"`. ⟦S0049⟧.
+- 3 · Class collision: ACCEPTED. The table is `class="fin"`; the slider rules are now `figure.cmp`, and the table rules are `table.cmp, .fin` so Backup 2 keeps its look. The JS finds `.fin, table.cmp`. ⟦S1306⟧.
+- 4 · Phone type: ACCEPTED. Values hold 14 px and wrap (`overflow-wrap: anywhere`). ⟦S1500⟧.
+
+**V3, Colour book.**
+- C.8 · Tone: ACCEPTED, night becomes ground. The tiles carry their own colour on the ground.
+- 1 · Contrast: ACCEPTED, computed rather than hand-listed.
+  - The tile ink is whichever of #161616 and white has the higher WCAG contrast (`ink_best`), so Boothbay Blue gets #161616 at 4.53:1.
+  - Any tile where neither ink reaches 4.5:1 carries its name and code on a `rgba(16,16,16,.78)` plate (Aged Pewter).
+  - `.cb-c` opacity goes from 0.75 to 1.
+  - ⟦S0071⟧.
+- 2 · Focus return: ACCEPTED. `shut()` focuses the invoking tile first, then runs the closing tween. ⟦S0049⟧.
+- 3 · Sheet focus: ACCEPTED. A 2 px inset `:focus-visible` outline in ink. ⟦S0049⟧.
+
+**E.3, follow-up (found while checking Colour 1).** The desktop Versions bar still sat over Colour 1's part buttons. The bar is now a small "Versions" pill everywhere, and the version code prints inside the open panel. ⟦S1306⟧, ⟦S0049⟧.

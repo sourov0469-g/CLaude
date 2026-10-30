@@ -735,7 +735,7 @@ def built3():
 # ---------- COLOUR ----------
 def zones():
     out = ''
-    for z, sh in (('body', 'body'), ('gable', 'body'), ('trim', 'trim')):
+    for z, sh in (('body', 'body'), ('gable', 'gable'), ('trim', 'trim')):   # F6 V1.2: the gable has its own shade
         out += (f'<div class="zone zone-{z}" data-zone="{z}"><span class="paint p0"></span><span class="paint p1"></span>'
                 f'<img class="shade" src="assets/img/studio/shade-{sh}-1400.webp" width="1400" height="875" alt="" loading="lazy" decoding="async"></div>')
     return out
@@ -791,15 +791,8 @@ def colour1():
         {c1_chips()}
       </div>
     </div>
-    <aside class="c1t-ans" aria-label="What siding costs">
-      <p class="c1t-k">Then, what it costs</p>
-      <p class="c1t-med"><span>Median Austin Pro siding job, from {t['n']} priced jobs</span><b class="num">{med(t)}</b></p>
-      <p class="c1t-mid">Half of them landed between ${t['lo']}k and ${t['hi']}k, materials and labour, before discounts and tax.</p>
-      <p class="c1t-lk">Six things move the price</p>
-      <ol class="c1t-lev">{lev}</ol>
-      <div class="c1t-cta">{btn_book('btn btn-red c1t-book', 'Book a free siding inspection', 'Siding')}<a class="tlink" href="{TEL}">Call {PHONE}</a></div>
-    </aside>
   </div>
+  <p class="c1t-money">Paint or ColorPlus is one of six things that move a siding price (median {med(t)} from {t['n']} priced jobs). <a class="tlink" href="#money">See what people paid</a></p>
   <p class="fine">A colour preview using colours the firm publishes. Real paint reads differently in Texas sun; the inspection brings physical samples.</p>
 </div>'''
 
@@ -810,11 +803,35 @@ def ink_on(h):
     return '#161616' if 0.2126 * r + 0.7152 * g + 0.0722 * b_ > 0.5 else '#FFFFFF'
 
 
+def lum(h):
+    def ch(v):
+        v /= 255
+        return v / 12.92 if v <= .03928 else ((v + .055) / 1.055) ** 2.4
+    r, g, b_ = (int(h[i:i + 2], 16) for i in (1, 3, 5))
+    return .2126 * ch(r) + .7152 * ch(g) + .0722 * ch(b_)
+
+
+def contrast(a, b_):
+    la, lb = sorted((lum(a), lum(b_)), reverse=True)
+    return (la + .05) / (lb + .05)
+
+
+def ink_best(h):
+    """F6 V3.1: the tile ink with the higher WCAG contrast (Boothbay Blue reads 4.53:1 in #161616, not 3.99:1 in white)"""
+    return '#161616' if contrast(h, '#161616') >= contrast(h, '#FFFFFF') else '#FFFFFF'
+
+
+def plate(h):
+    """mid-tones where neither ink reaches 4.5:1 carry their name on a dark plate, like Work's photo tags"""
+    return max(contrast(h, '#161616'), contrast(h, '#FFFFFF')) < 4.5
+
+
 def colour2():
     """builder-brief R30 comparison table (Other vs Us, JS 0; Stronghold's live comparison block) adapted to the firm's
     two published finish systems; each column carries its own published swatches"""
-    sw = ''.join(f'<button class="cmp-sw" type="button" aria-pressed="false" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="{e(c)}" style="--c:{h}" aria-label="{e(n)}, {e(c)}"></button>' for n, c, h in SW)
-    cp = ''.join(f'<button class="cmp-sw" type="button" aria-pressed="false" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="ColorPlus" style="--c:{h}" aria-label="{e(n)}, James Hardie ColorPlus"></button>' for n, c, h in COLORPLUS)
+    # F6 V2.2: the two colours the headers announce start pressed
+    sw = ''.join(f'<button class="cmp-sw" type="button" aria-pressed="{"true" if k == 10 else "false"}" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="{e(c)}" style="--c:{h}" aria-label="{e(n)}, {e(c)}"><i aria-hidden="true"></i></button>' for k, (n, c, h) in enumerate(SW))
+    cp = ''.join(f'<button class="cmp-sw" type="button" aria-pressed="{"true" if k == 11 else "false"}" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="ColorPlus" style="--c:{h}" aria-label="{e(n)}, James Hardie ColorPlus"><i aria-hidden="true"></i></button>' for k, (n, c, h) in enumerate(COLORPLUS))
     rows = [('How it is finished', 'Painted on site, after the boards go up', 'Baked on at the factory'),
             ('Colours', '1,700+ Sherwin-Williams colours', '17 colours for Austin'),
             ('Matching', 'Free colour matching', '-'),
@@ -827,7 +844,7 @@ def colour2():
     return f'''<div class="v colour-2" data-tone="ground2">
   <div class="cmp-head"><h2 class="h2x" data-split>Paint on site, or ColorPlus</h2>
     <p>Every Hardie board gets one of two finishes. Here they are side by side, from what the firm publishes. Paint or ColorPlus is one of the six things that move the price.</p></div>
-  <table class="cmp">
+  <table class="fin">
     <caption class="sr-only">Painted on site compared with James Hardie ColorPlus</caption>
     <thead><tr><td></td>
       <th scope="col" class="cmp-col" style="--c:{h0};--ink:{ink_on(h0)}"><svg class="c2-d" viewBox="0 0 200 64" aria-hidden="true" focusable="false"><g class="c2-boards"><rect class="c2-b" x="4" y="6" width="150" height="16"/><rect class="c2-b" x="4" y="24" width="150" height="16"/><rect class="c2-b c2-wet" x="4" y="42" width="96" height="16"/><rect class="c2-raw" x="100" y="42" width="54" height="16"/><path class="c2-sh" d="M4 21H154M4 39H154M4 57H154"/></g><g class="c2-tool"><path class="c2-h" d="M100 40V62H128"/><rect class="c2-roll" x="94" y="32" width="12" height="28" rx="5"/></g></svg><span class="cmp-sys">Painted on site</span><span class="cmp-now"><b data-now>{e(n0)}</b><span data-code>{e(c0)}</span></span></th>
@@ -847,8 +864,8 @@ def colour3():
         sysn = 'Sherwin-Williams' if c != 'ColorPlus' else 'James Hardie ColorPlus'
         code = c if c != 'ColorPlus' else 'ColorPlus'
         tiles += (f'<li><button class="cb-t" type="button" data-hex="{h}" data-ink="{ink_on(h)}" data-name="{e(n)}" data-code="{e(code)}" data-sys="{e(sysn)}" '
-                  f'style="--c:{h};--ink:{ink_on(h)}" aria-label="{e(n)}, {e(code)}. Open"><svg class="cb-ph" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><circle cx="12" cy="6" r="3.6"/><path d="M0 11.5H24"/></svg><span class="cb-n">{e(n)}</span><span class="cb-c">{e(code)}</span></button></li>')
-    return f'''<div class="v colour-3" data-tone="night">
+                  f'style="--c:{h};--ink:{ink_best(h)}"{" data-plate" if plate(h) else ""} aria-label="{e(n)}, {e(code)}. Open"><svg class="cb-ph" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><circle cx="12" cy="6" r="3.6"/><path d="M0 11.5H24"/></svg><span class="cb-n">{e(n)}</span><span class="cb-c">{e(code)}</span></button></li>')
+    return f'''<div class="v colour-3" data-tone="ground">
   <div class="cb-head"><h2 class="h2x" data-split>The colour book</h2>
     <p>All 29 colours the firm publishes for Hardie siding: twelve Sherwin-Williams paints and the seventeen ColorPlus colours for Austin. Open one to see it big.</p></div>
   <div class="cb-stage">
@@ -1402,7 +1419,7 @@ def picks():
     return f'''<div class="picks">
   <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Versions</span><b class="num" data-pk-code>{code0}</b></button>
   <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Versions" hidden>
-    <p class="pk-h">Versions</p>
+    <p class="pk-h">Versions</p><p class="pk-code num" data-pk-code2>{code0}</p>
     <p class="pk-tip">Switch any section here or with its numbered buttons. Keys 1 to 5 switch the section in view.</p>
     <ul class="pk-list">{rows}</ul>
     <details class="pk-more"><summary>Backups: the versions from before this round</summary><ul class="pk-list">{bk_rows}</ul></details>

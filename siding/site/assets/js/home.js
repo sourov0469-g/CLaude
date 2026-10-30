@@ -780,7 +780,7 @@
      is the firm's own job photo with its traced zones (Studio). "My house" loads a local photo into a canvas; the
      visitor brushes where the walls are and the picked colour lands as a colour blend with a light multiply, so the
      photo keeps its own light. The file is read with an object URL and never leaves the device. */
-  V.colour1 = (r, b) => {
+  V.colour1 = (r, b, s0) => {
     const frame = $('.st-frame', r), S = Studio(frame), o = k => $(`[data-c1="${k}"]`, r);
     const mine = $('.c1t-mine', r), cv = $('.c1t-cv', r), file = $('.c1t-file', r), empty = $('.c1t-empty', r), brushBar = $('.c1t-brush', r), parts = $('.c1t-parts', r);
     const chips = $('.c1t-chips', r);
@@ -841,7 +841,10 @@
       say();
     });
     radios(parts, b, it => { part = it.dataset.part; say(); });
-    radios(chips, b, it => { pick = it; if (src === 'job') S.paint(part, it.dataset.hex); else queue(); say(); }, '.sw');
+    /* F6 V1.4: the colour blooms as a circle from the middle of the part it lands on (Backup 1 keeps the left wipe) */
+    const MID = { body: [0.6, 0.62], gable: [0.75, 0.22], trim: [0.5, 0.42] };
+    const from = z => { if (s0 && s0.v > 5) return {}; const m = MID[z], rc = frame.getBoundingClientRect(); return { x: m[0] * rc.width, y: m[1] * rc.height }; };
+    radios(chips, b, it => { pick = it; if (src === 'job') S.paint(part, it.dataset.hex, from(part)); else queue(); say(); }, '.sw');
   };
 
   /* COLOUR 2: R30 comparison table (Other vs Us) adapted to the firm's two finish systems. Each column's swatches
@@ -863,7 +866,8 @@
         now.textContent = sw.dataset.name; code.textContent = sw.dataset.code;
       }));
     });
-    if (motionOK()) G.from($$('.cmp tbody tr', r), { y: 14, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.06, scrollTrigger: once($('.cmp', r), 'top 82%') });
+    const tbl = $('.fin, table.cmp', r);   // F6 V2.3: the table is .fin now (Work's slider owns .cmp); backups keep table.cmp
+    if (motionOK()) G.from($$('tbody tr', tbl), { y: 14, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.06, scrollTrigger: once(tbl, 'top 82%') });
   };
 
   /* COLOUR 3: Grid-to-Fullscreen (Codrops) as builder-brief R10's DOM port: the tile's bounds are measured at click
@@ -892,6 +896,7 @@
     };
     const shut = () => {
       if (sheet.hidden) return;
+      if (from) from.focus({ preventScroll: true });   // F6 V3.2: focus is back on the tile at once, not after the tween
       const done = () => { sheet.hidden = true; G.set(sheet, { clearProps: 'clipPath,opacity,visibility,transform' }); if (from) from.focus({ preventScroll: true }); };
       if (tw) tw.kill();
       if (!motionOK()) { done(); return; }
@@ -1477,7 +1482,7 @@
   /* picks panel */
   const pkBtn = $('.pk-btn'), pkPanel = $('#pk-panel'), pkCode = $('[data-pk-code]'), pkMsg = $('.pk-msg');
   function syncPicks() {
-    pkCode.textContent = pretty();
+    pkCode.textContent = pretty(); const c2 = $('[data-pk-code2]'); if (c2) c2.textContent = pretty();
     $$('.pk-seg').forEach(g => { const s = BY[g.dataset.for]; $$('button', g).forEach(x => { const on = +x.dataset.v === s.v; x.setAttribute('aria-checked', on); x.tabIndex = on || (s.v > BKS && x.dataset.v === '1') ? 0 : -1; }); });
     $$('.pk-bk').forEach(g => { const s = BY[g.dataset.for]; $$('button', g).forEach(x => x.setAttribute('aria-pressed', +x.dataset.v === s.v)); });
   }
