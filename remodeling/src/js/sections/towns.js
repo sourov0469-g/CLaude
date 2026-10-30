@@ -87,7 +87,7 @@
         cnEl.innerHTML = c.replace('-', '&#8209;');
         var n = D.towns[c].length, v = vbOf(c);
         box = v;
-        if (k.motion && nEl.textContent) {
+        if (k.motion && svg.getAttribute('viewBox')) {
           var o = { v: +nEl.textContent || 0 };
           gsap.to(o, { v: n, duration: .3, ease: 'power2.out', onUpdate: function () { nEl.textContent = Math.round(o.v); } });
           gsap.to(svg, { attr: { viewBox: v.join(' ') }, duration: .5, ease: 'power3.inOut', overwrite: 'auto' });

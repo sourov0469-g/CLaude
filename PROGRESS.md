@@ -150,3 +150,7 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
 | Process V3 | 50 → 24 | .12 → .47 | 0 → 1 |
 | Towns V1 | 82 → 26 | .37 → .71 | 0 → 1 |
 All five now meet the Phase 1 rule (prose ≤ 60 and centre share ≥ .35). The `ptr` column (DOM changes during a straight hover sweep) reads 0 for Proof V1, Process V2/V3 and Towns V1: these centrepieces answer to grab, drag, swipe or a pointer near a mark, not to a passing sweep. Their interactions are proven by the scripted grab/drag/swipe/hover tests above and in the interaction table, not by this column.
+
+## v2 Phase 5 — companion re-test (`buddyqa.js`, `remodeling/qa/v2-buddyqa.txt`)
+- 162 desktop checks (3 variants × 30 versions × button/heading/image + leave), **0 fails**; text field keeps the caret; touch (375) and reduced motion: buddy, tip and cursor hiding all off.
+- Kept visible: the run logged 3 console messages, so it did not pass the zero-console rule: (1) Matter.js warned that a frame delta exceeded 16.667 ms (Proof V1 stepped a slow frame in one 33 ms step); (2–3) `<svg> attribute viewBox: Unexpected end of attribute` ×2: Towns V1's first county zoom tweened from an SVG that had no viewBox yet. Fixed: Proof V1 now steps a slow frame in fixed sub-steps of at most 1/60 s; Towns V1 sets the first view without a tween. Re-check (proof 1, towns 1, towns 3, full scroll at 1440): 0 console messages. The full buddyqa run is repeated in the §12 gate.

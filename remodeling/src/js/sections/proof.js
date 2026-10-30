@@ -54,7 +54,8 @@
         if (!k.motion || !inView) return;
         if (loop) { loop.start(); return; }
         loop = k.raf(function (dt) {
-          M.Engine.update(engine, Math.min(dt * 1000, 1000 / 30));
+          // fixed sub-steps of at most 1/60 s (Matter's stability limit); a slow frame takes two or three
+          for (var ms = Math.min(dt * 1000, 50); ms > .5; ms -= 1000 / 60) M.Engine.update(engine, Math.min(ms, 1000 / 60));
           sync();
           var still = !drag && bodies.every(function (b) { return b.isSleeping || engine.world.bodies.indexOf(b) < 0; });
           if (still && dropped) return false;
