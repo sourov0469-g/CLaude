@@ -7,7 +7,10 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const FILE = process.env.FILE || 'file:///home/user/CLaude/remodeling/site/elbaz-homepage.html';
-const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult'.split(',');
+const SECS = (process.env.SECS || 'hero,proof,services,ba,process,financing,work,reviews,towns,consult').split(',');
+// inner pages: BACKUPS=1 light-checks the b-slots too (their records are light copies); PAIRS=skip where the page has no pair registry
+const BACKUPS = !!process.env.BACKUPS, PAIRS = process.env.PAIRS || '4';
+const OUT = process.env.OUT || '/home/user/CLaude/remodeling/qa/gatecheck.txt';
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
@@ -29,7 +32,7 @@ const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consul
     const slots = await p.evaluate(id => [...document.querySelectorAll('#' + id + ' .ver')].map(v => v.dataset.v), id);
     const vis = slots.filter(s => /^\d$/.test(s)), bk = slots.filter(s => /^b/.test(s));
     out.push(id + ' versions: visible ' + vis.sort().join('') + ' (' + vis.length + '), backups ' + bk.length + ', total ' + slots.length);
-    for (const v of vis) {
+    for (const v of BACKUPS ? vis.concat(bk) : vis) {
       await p.evaluate(([id, v]) => EZ.activate(id, v), [id, v]); await p.waitForTimeout(300);
       const r = await p.evaluate(([id, v]) => {
         const cv = document.createElement('canvas'); cv.width = cv.height = 1; const cx = cv.getContext('2d', { willReadFrequently: true });
@@ -49,7 +52,7 @@ const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consul
           else if (L < .2 && c[1] > c[0] * 1.15 && c[1] > c[2]) green.push(cs.backgroundColor);
         });
         const t = ver.innerText;
-        return { dark, green, ratings: (t.match(/\b[0-5]\.\d(?=\s*(?:out of|of|★|stars|\/\s*5|average|Google))/g) || []), counts: (t.match(/\b\d{2,4}(?=\s+(?:Google\s+)?reviews)/gi) || []) };
+        return { dark, green, ratings: (t.match(/\b[0-5]\.\d(?=\s*(?:out of|of|★|stars|\/\s*5|average|Google|·\s*\d+\s+Google))/g) || []), counts: (t.match(/\b\d{2,4}(?=\s+(?:Google\s+)?reviews)/gi) || []) };
       }, [id, v]);
       r.ratings.forEach(x => ratings.add(x)); r.counts.forEach(x => counts.add(x));
       if (r.dark.length) { out.push('  DARK ' + id + v + ': ' + r.dark.join('; ')); fail.push('dark ' + id + v); }
@@ -59,9 +62,9 @@ const SECS = 'hero,proof,services,ba,process,financing,work,reviews,towns,consul
   }
   const pairs = await p.evaluate(() => (EZ.PAIRS || []).length);
   out.push('ratings printed: ' + [...ratings].join(', ') + ' | review counts printed: ' + [...counts].join(', ') + ' | before/after pairs: ' + pairs);
-  if ([...ratings].some(x => x !== '4.8') || [...counts].some(x => x !== '343') || pairs !== 4) fail.push('facts');
+  if ([...ratings].some(x => x !== '4.8') || [...counts].some(x => x !== '343') || (PAIRS !== 'skip' && pairs !== +PAIRS)) fail.push('facts');
   out.push('GATE FAILS: ' + fail.length + (fail.length ? ' ' + fail.join(', ') : ''));
-  fs.writeFileSync('/home/user/CLaude/remodeling/qa/gatecheck.txt', out.join('\n') + '\n');
+  fs.writeFileSync(OUT, out.join('\n') + '\n');
   console.log(out.join('\n'));
   await b.close();
 })();

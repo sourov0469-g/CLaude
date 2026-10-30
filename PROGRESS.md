@@ -463,3 +463,18 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
 **Site-wide fix found while building Contact**
 - A legacy homepage rule gave any non-hero section's b1 backup the old dark ground and the Bebas/Geist fonts.
 - It is now scoped to the nine homepage sections it was written for, so inner-page records keep their light grounds and Poppins/Roboto (commit 3bd343c).
+
+## Site final gate (owner order closed)
+
+`SITE-REPORT.md` holds the evidence. Every check passes on all five pages:
+- Tokens: 0 off-token literals.
+- Light: 0 dark grounds, with the inner-page records included.
+- Logo: header, footer and favicon.
+- Facts: 0 fails per page.
+- Switchers: 1–8 on the homepage, 1–5 on the inner pages.
+- Backups open: 44 + 4×15.
+- Records: 60/60 unchanged since release.
+- Contrast: 0 below AA.
+- Reactions: full coverage, 0 duplicates.
+- Mechanisms: pass in both motion modes.
+- Links resolve; 0 em dashes.

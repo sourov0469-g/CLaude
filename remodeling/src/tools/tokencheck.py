@@ -9,6 +9,8 @@ import re, os, glob
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 R = lambda p: open(os.path.join(HERE, p)).read()
 SECS = 'hero proof services ba process financing work reviews towns consult'.split()
+# inner pages: their b1-b5 records are light copies of their own versions, so every line is scanned, records included
+INNER = 'kitchen-intro kitchen-scope kitchen-work bath-intro bath-build bath-work reno-intro reno-services reno-permits contact-form contact-visit contact-area'.split()
 
 def rules(text):
     text = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
@@ -90,6 +92,10 @@ for s in SECS:
     for m in re.finditer(r'\n    (\d): \{ init: function', J):
         nxt = re.search(r'\n    (?:/\*.*?\*/\s*)*[0-9a-z]+: \{ init: function|\n  \}\);', J[m.end():], re.S)
         scan('%s.js slot %s' % (s, m.group(1)), J[m.start():m.end() + nxt.start()], bad)
+for s in INNER:
+    for f in ('sections/%s.html', 'css/sections/%s.css', 'js/sections/%s.js'):
+        scan(f % s, R(f % s), bad)
+print('sections scanned: homepage', len(SECS), '(presented code), inner', len(INNER), '(all code, records included)')
 print('token set:', len(TOK), 'values')
 seen = {}
 for w, c in bad: seen.setdefault(c.upper(), []).append(w)

@@ -1,0 +1,13 @@
+kitchen-intro  records b1,b2,b3,b4,b5 (ki1r ki2r ki3r ki4r ki5r): unchanged since 24682e1
+kitchen-scope  records b1,b2,b3,b4,b5 (ks1r ks2r ks3r ks4r ks5r): unchanged since 24682e1
+kitchen-work   records b1,b2,b3,b4,b5 (kw1r kw2r kw3r kw4r kw5r): unchanged since 24682e1
+bath-intro     records b1,b2,b3,b4,b5 (bi1r bi2r bi3r bi4r bi5r): unchanged since e38aec8
+bath-build     records b1,b2,b3,b4,b5 (bb1r bb2r bb3r bb4r bb5r): unchanged since e38aec8
+bath-work      records b1,b2,b3,b4,b5 (bw1r bw2r bw3r bw4r bw5r): unchanged since e38aec8
+reno-intro     records b1,b2,b3,b4,b5 (ri1r ri2r ri3r ri4r ri5r): unchanged since 3740be1
+reno-services  records b1,b2,b3,b4,b5 (rs1r rs2r rs3r rs4r rs5r): unchanged since 3740be1
+reno-permits   records b1,b2,b3,b4,b5 (rp1r rp2r rp3r rp4r rp5r): unchanged since 3740be1
+contact-form   records b1,b2,b3,b4,b5 (fm1r fm2r fm3r fm4r fm5r): unchanged since 140eac9
+contact-visit  records b1,b2,b3,b4,b5 (vs1r vs2r vs3r vs4r vs5r): unchanged since 140eac9
+contact-area   records b1,b2,b3,b4,b5 (sa1r sa2r sa3r sa4r sa5r): unchanged since 140eac9
+RECORD FAILS: 0
