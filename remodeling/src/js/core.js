@@ -52,11 +52,14 @@
     var store;
     try { store = JSON.parse(el.textContent); } catch (e) { store = {}; }
     Object.keys(store).forEach(function (k) {
-      var bin = atob(store[k]), n = bin.length, u8 = new Uint8Array(n);
+      var s = store[k], bin = atob(s.slice(1)), n = bin.length, u8 = new Uint8Array(n);
       for (var i = 0; i < n; i++) u8[i] = bin.charCodeAt(i);
-      urls[k] = URL.createObjectURL(new Blob([u8], { type: 'image/webp' }));
+      urls[k] = URL.createObjectURL(new Blob([u8], { type: s.charAt(0) === 'a' ? 'image/avif' : 'image/webp' }));
     });
     el.textContent = '';
+    // the logo ships once (nav); the menu sheet and footer copy it
+    var logo = doc.querySelector('.nav__logo img');
+    if (logo) doc.querySelectorAll('img[data-logo]').forEach(function (im) { im.src = logo.src; });
   }
   EZ.img = function (k) { return urls[k] || ''; };
   EZ.applyImages = function (scope) {

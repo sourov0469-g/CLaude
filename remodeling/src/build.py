@@ -38,6 +38,25 @@ def b64(path):
         return base64.b64encode(f.read()).decode("ascii")
 
 
+def store_entry(path):
+    """[AUDIT-01 C.10] AVIF q45, long edge capped at 1400px (1920 for the -xl hero plate), cached beside the sources;
+    used when smaller than the WebP. The first character of the entry names the type."""
+    key = os.path.splitext(os.path.basename(path))[0]
+    cache = os.path.join(os.path.dirname(path) + "-avif", key + ".q45.avif")
+    if not os.path.exists(cache) or os.path.getmtime(cache) < os.path.getmtime(path):
+        from PIL import Image
+        os.makedirs(os.path.dirname(cache), exist_ok=True)
+        im = Image.open(path).convert("RGB")
+        cap = 1920 if key.endswith("-xl") else 1400
+        if max(im.size) > cap:
+            r = cap / max(im.size)
+            im = im.resize((round(im.size[0] * r), round(im.size[1] * r)), Image.LANCZOS)
+        im.save(cache, "AVIF", quality=45, speed=4)
+    if os.path.getsize(cache) < os.path.getsize(path):
+        return "a" + b64(cache)
+    return "w" + b64(path)
+
+
 def script_safe(s):
     # keep inline scripts from closing early
     return s.replace("</script", "<\\/script")
@@ -85,7 +104,7 @@ def main():
     for name in sorted(os.listdir(IMG)):
         key, ext = os.path.splitext(name)
         if ext == ".webp" and (key in used or "--all-images" in sys.argv):
-            store[key] = b64(os.path.join(IMG, name))
+            store[key] = store_entry(os.path.join(IMG, name))
     missing = sorted(k for k in used if k not in store)
     if missing:
         print("WARNING missing images:", missing)
@@ -104,15 +123,13 @@ def main():
             extra[name[:-5]] = json.load(open(os.path.join(ddir, name)))
 
     vendor = "\n".join(read("vendor", v + ".min.js") for v in VENDOR) + "\n" + read("vendor", "lenis.min.js")
-    hero_src = "data:image/webp;base64," + store.get("k-navy-shaker", "")   # hero first frame paints before the store boots
     logo_src = "data:image/webp;base64," + b64(os.path.join(IMG, "logo-lossless.webp"))   # lossless WebP of logo.png, 7KB vs 25KB
 
     html = (html
             .replace("/*{{FONTS}}*/", fonts)
             .replace("/*{{CSS}}*/", "\n".join(css))
             .replace("<!--{{SECTIONS}}-->", "\n".join(sections_html))
-            .replace("{{HERO_SRC}}", hero_src)
-            .replace("{{LOGO_SRC}}", logo_src)
+            .replace("{{LOGO_SRC}}", logo_src, 1).replace('src="{{LOGO_SRC}}"', 'src="" data-logo')   # [AUDIT-01 C.10] the logo ships once
             .replace("/*{{VENDOR}}*/", script_safe(vendor))
             .replace("/*{{DATA}}*/", "window.__LINES=" + json.dumps(lines, separators=(",", ":")) + ";window.__DATA=" + json.dumps(extra, separators=(",", ":")) + ";")
             .replace("/*{{CORE}}*/", script_safe(read("js", "core.js") + "\n" + "\n".join(read("js", "systems", n + ".js") for n in SYSTEMS)))
