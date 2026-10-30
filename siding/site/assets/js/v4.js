@@ -1045,7 +1045,8 @@
   API.mount = (vr, key, b) => {
     const offs = [];
     if (!vr) return;
-    if (BUILDERS[key]) offs.push(makeField(vr, key));
+    // Audit pack F3: the dashed house watermark behind Services fails the Removal Test; backups keep theirs
+    if (BUILDERS[key] && !(key === 'services' && !vr.closest('[data-bk]'))) offs.push(makeField(vr, key));
     if (DIV[key] && key !== 'ft') offs.push(makeDivider(vr, key));
     if (API.motion && G) { rxize(vr, key, b); lapHeads(vr, b); }
     recolor();

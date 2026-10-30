@@ -454,11 +454,11 @@ def proof3():
 # the six parts of the Rob Roy house the instrument can light, mapped to the firm's trades (FACTS.md counts and bands)
 SV1 = [   # (part, label, trade for booking, photo slug, facts as the firm publishes them: FACTS.md product sections)
     ('siding', 'Siding', 'Siding', 'siding', ['James Hardie fiber cement on every priced siding job',
-                                             '301 of 415 used the HardiePlank lap 8.25″ board; 27 went board and batten',
+                                             '301 of 415 priced siding jobs used the HardiePlank lap 8.25″ board; 27 went board and batten',
                                              'Select Cedarmill texture on 286 of 415, Smooth on 36',
                                              '30-year non-prorated Hardie warranty, plus lifetime workmanship on labour']),
     ('windows', 'Windows', 'Windows', 'windows', ['Four brands cover 361 of 376 priced window jobs',
-                                                  'NT Windows 238 · Simonton 54 · Andersen 38 · Pella 31',
+                                                  'Priced window jobs by brand: NT Windows 238 · Simonton 54 · Andersen 38 · Pella 31',
                                                   'Frames: 214 vinyl, 64 aluminum, 33 Fibrex composite',
                                                   'Most window-only jobs take two days on site']),
     ('roof', 'Roof', 'Shingle roofing', 'shingle-roofing', ['GAF Master Elite; GAF on 200 documented projects',
@@ -470,9 +470,12 @@ SV1 = [   # (part, label, trade for booking, photo slug, facts as the firm publi
                                                                          'Painted in the same job on 297 of 415 priced siding jobs']),
     ('doors', 'Doors', 'Exterior doors', 'doors', ['109 exterior door jobs documented',
                                                    '18% of priced window jobs replaced doors too']),
-    ('deck', 'Deck', 'Decking', '', ['Decking is one of the firm\'s eleven trades',
-                                     '5 priced decking jobs in the firm\'s cost data, 2018–2026']),
 ]
+# Audit pack F3 V1.3: the photographed house has no gutter run, patio cover or metal roof to point at, so those
+# trades join as chips with their own job photo and counts instead of parts drawn onto a house that lacks them.
+DOCS = {'siding': 431, 'windows': 388, 'shingle-roofing': 210, 'metal-roofing': 31, 'patio-covers': 34, 'doors': 109,
+        'garage-doors': 9, 'exterior-painting': 320, 'gutters': 121}   # FACTS.md "documented projects" line
+SV1_MORE = [('gutters', 'Gutters'), ('patio-covers', 'Patio covers'), ('metal-roofing', 'Metal roofing')]
 SV1_HATCH = (   # material hatches, as a section drawing marks them: lap courses, glazing, shingle tabs, trim cross-hatch, door stiles, deck boards
     '<pattern id="sv1-h-siding" width="28" height="18" patternUnits="userSpaceOnUse"><path d="M0 17H28M0 14.5H28"/></pattern>'
     '<pattern id="sv1-h-windows" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)"><path d="M0 4H22M0 9H10"/></pattern>'
@@ -489,15 +492,27 @@ def services1():
     data = {}
     for part, label, trade, slug, facts in SV1:
         data[part] = dict(label=label, trade=trade, facts=facts, img=tphoto(slug) if slug else '', cap=tcap(slug) if slug else '')
+    for slug, label in SV1_MORE:
+        t = TBY[slug]
+        data[slug] = dict(label=label, trade=t['name'], img=tphoto(slug), cap=tcap(slug), off=1,
+                          facts=[f"{DOCS[slug]} documented {t['name'].lower()} jobs; {t['n']} of them priced", f"Median {med(t)}, middle half {mid(t)}",
+                                 'Not on this house: the job photo shows one the firm did'])
     chips = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == 0 else "false"}" data-part="{p}">{lab}</button>' for k, (p, lab, *_r) in enumerate(SV1))
+    chips += ''.join(f'<button type="button" role="radio" aria-checked="false" data-part="{p}" class="sv1-more">{lab}</button>' for p, lab in SV1_MORE)
     d0 = data['siding']
     li = ''.join(f'<li>{e(x)}</li>' for x in d0['facts'])
-    draw = elevation.svg('sv1el', 'elev sv1-el', 'The Rob Roy house as a line drawing; each part of it opens the matching trade', hits=True).replace('<defs>', '<defs>' + SV1_HATCH, 1)
+    draw = elevation.svg('sv1el', 'elev sv1-el', 'The Rob Roy house, Austin: point at a part of it to open the matching trade', hits=True).replace('<defs>', '<defs>' + SV1_HATCH, 1)
+    # F3 V1.4: the parts map sits over the real job photograph; the traced paths are only hit areas and hatch masks
+    draw = re.sub(r'(<svg [^>]*>)', r'\1<image class="sv1-photo" href="assets/img/studio/base-1400.webp" width="1400" height="875"/>', draw, count=1)
+    draw = re.sub(r'<path data-hit="deck" d="[^"]*"/>', '', draw).replace('data-part="deck"', 'data-part="none"')
+    # F3 V1.2: shared edges are a no-hit gutter 16 units wide (8 each side), so neighbours stop stealing the pointer
+    hit_d = ''.join(re.findall(r'<path data-hit="[^"]+" d="([^"]*)"/>', draw))
+    draw = draw.replace('</g></svg>', f'</g><path class="sv1-gap" d="{hit_d}"/></svg>', 1)
     js = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
     return f'''<div class="v services-1" data-tone="ground">
   <div class="sv1-head"><h2 class="h2x" data-split>What needs work?</h2><p class="sv1-sub">Point at a part of the house to see what Austin Pro puts there, counted from the firm's own job files.</p></div>
   <div class="sv1-grid">
-    <figure class="sv1-fig" data-cur="view">{draw}<figcaption class="sv1-fc">Rob Roy, Austin, traced from the job photo</figcaption></figure>
+    <figure class="sv1-fig" data-cur="view">{draw}<figcaption class="sv1-fc">Rob Roy, Austin, {ROB['when']}: the firm's own job photo</figcaption></figure>
     <div class="sv1-card" aria-live="polite">
       <div class="sv1-parts" role="radiogroup" aria-label="Part of the house">{chips}</div>
       <h3 class="sv1-t" data-s1="label">{d0['label']}</h3>
@@ -516,9 +531,9 @@ IX_SYMS = '<symbol id="ixg-siding" viewBox="0 0 48 32"><path pathLength="1" d="M
 def services2():
     """Q571 AHA: the numbered services index (11 rows, 01 OF 11 counter by CSS counters, intro column left)"""
     rows = ''
-    for slug in TRADE_ORDER:
+    for slug in sorted(TRADE_ORDER, key=lambda x: -TBY[x]['n']):   # F3 V2.4: the numbers are ranks by priced jobs
         t = TBY[slug]
-        cnt = f"{t['doc']} jobs" if t['doc'] else f"{t['n']} priced"
+        cnt = f"{t['n']} priced jobs"
         im = f' data-img="{tphoto(slug)}"' if slug in TRADE_PHOTO else ''
         th = f'<img class="ix-th" src="{tphoto(slug)}" width="800" height="600" alt="" loading="lazy" decoding="async">' if slug in TRADE_PHOTO else '<span class="ix-th ix-th-none" aria-hidden="true"></span>'
         rows += f'''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="{e(t['name'])}"{im} aria-label="{e(t['name'])}: {cnt}, median job {med(t)}. Book an inspection">
@@ -526,7 +541,7 @@ def services2():
     rows += '''<li><a class="ix-row" href="#book" data-book data-cur="view" data-trade="Storm damage" aria-label="Storm damage: free inspection, documented for your insurer. Book an inspection">
       <svg class="ix-gl" aria-hidden="true" focusable="false"><use href="#ixg-storm"/></svg><span class="ix-name" data-chars>Storm damage</span><span class="ix-meta"><span>Hail and wind</span><b>Free inspection</b></span><span class="ix-th ix-th-none" aria-hidden="true"></span></a></li>'''
     return f'''<div class="v services-2" data-tone="ground">
-  <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Job counts and median prices from the firm's own documented jobs, 2018-2026.</p>
+  <div class="ix-head"><h2 class="h2x" data-split>Eleven trades, one inspection</h2><p>Ranked by priced jobs. Median price band from the firm's own priced jobs, 2018-2026.</p>
     <p class="ix-count num" aria-hidden="true"><b data-ix-now>01</b><span>of 11</span></p><p class="ix-call">Pick a trade to book its free inspection, or call <a class="tlink" href="{TEL}">{PHONE}</a>.</p></div>
   <svg class="ix-defs" aria-hidden="true" focusable="false">{IX_SYMS}</svg>
   <ol class="ix">{rows}</ol>
@@ -534,23 +549,28 @@ def services2():
 </div>'''
 
 
+TAPE = 30   # F3 V3.3: a $0-$30k tape; the two trades whose middle half runs past it print their full range
+
+
 def services3():
     rows = ''
     for slug in TRADE_ORDER:
         t = TBY[slug]
         lo, hi = t['lo'], t['hi']
-        rows += f'''<li class="tm-t" data-lo="{lo}" data-hi="{hi}"><span class="tm-n">{e(t['name'])}</span><span class="tm-bar" style="--a:{lo / 50:.3f};--b:{hi / 50:.3f}" aria-hidden="true"><i></i></span><span class="tm-r num">{mid(t)}</span></li>'''
-    ticks = ''.join(f'<i class="tk{" tk-m" if k % 5 == 0 else ""}" style="--k:{k}">{f"<b>${k}k</b>" if k % 5 == 0 else ""}</i>' for k in range(0, 51))
+        over = ' tm-over' if hi > TAPE else ''
+        rows += (f'''<li class="tm-t{over}" data-lo="{lo}" data-hi="{hi}"><span class="tm-n">{e(t['name'])}</span><a class="tm-go" href="#book" data-book data-trade="{e(t['name'])}" tabindex="-1">Book a {e(t['name'].lower())} inspection</a>'''
+                 f'''<span class="tm-bar" style="--a:{lo / TAPE:.3f};--b:{min(hi, TAPE) / TAPE:.3f};--m:{sum(t['med']) / 2 / TAPE:.3f}" aria-hidden="true"><i></i></span><span class="tm-r num">{mid(t)}<small>median {med(t)}</small></span></li>''')
+    ticks = ''.join(f'<i class="tk{" tk-m" if k % 5 == 0 else ""}" style="--k:{k}">{f"<b>${k}k</b>" if k % 5 == 0 else ""}</i>' for k in range(0, TAPE + 1))
     return f'''<div class="v services-3" data-tone="ground2">
   <div class="tm-head"><h2 class="h2x" data-split>Pull the tape to your budget</h2>
     <p class="tm-say" aria-live="polite"><b class="num" data-tm-v>$15,000</b> <span data-tm-n>6 of 10 trades usually land here.</span></p></div>
-  <div class="tape" role="slider" tabindex="0" data-cur="drag" aria-label="Budget, from $0 to $50,000" aria-valuemin="0" aria-valuemax="50000" aria-valuenow="15000" aria-valuetext="$15,000">
+  <div class="tape" role="slider" tabindex="0" data-cur="drag" aria-label="Budget, from $0 to $30,000 or more" aria-valuemin="0" aria-valuemax="30000" aria-valuenow="15000" aria-valuetext="$15,000" data-max="30000">
     <div class="tape-band"><div class="tape-strip" aria-hidden="true"><svg class="tape-hook" viewBox="0 0 30 96" focusable="false"><path class="th-tab" d="M30 4H8C5 4 4 5 4 8V88C4 91 5 92 8 92H30"/><path class="th-lip" d="M4 10V86"/><circle class="th-rv" cx="20" cy="30" r="2.6"/><circle class="th-rv" cx="20" cy="66" r="2.6"/></svg>{ticks}</div></div>
     <i class="tape-mark" aria-hidden="true"></i>
     <svg class="tape-case" viewBox="0 0 120 52" aria-hidden="true" focusable="false"><path class="tc-body" d="M10 4H104C111 4 116 9 116 16V40C116 45 112 48 107 48H14C8 48 4 44 4 38V10C4 7 7 4 10 4Z"/><rect class="tc-win" x="52" y="30" width="16" height="16" rx="2"/><path class="tc-lock" d="M20 14H44"/><circle class="tc-rv" cx="104" cy="16" r="3"/><circle class="tc-rv" cx="104" cy="36" r="3"/><path class="tc-mark" d="M60 30V48"/></svg>
   </div>
   <ul class="tm-list" aria-label="Middle half of each trade's priced jobs">{rows}</ul>
-  <p class="fine">The bar is the middle half of each trade's individually priced jobs, materials and labour before discounts, excluding tax. Your price comes from the free inspection.</p>
+  <p class="fine">Each bar is the middle half of that trade's priced jobs, with its median band marked: the same published figures as everywhere on this page. Materials and labour before discounts, excluding tax. Your price comes from the free inspection.</p>
 </div>'''
 
 

@@ -639,3 +639,45 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 **QA catch, all versions:** tall badges (President's Club, Andersen) overflowed their 64 px plates. The plate image is now fixed at 48 px.
 
 **C.11, claim by claim (Proof):** "5,000+" is SOURCED. It is FACTS.md line 18 and the firm's homepage meta: "Siding, windows and roofing for 5,000+ Central Texas homes since 2009" (`work/raw/home.html`). Because the firm's reviews page says "Over 5,000 projects" instead, it is printed as "homes… by the firm's own count" and is never the first or largest figure.
+
+## F3 · Services
+**V2, Index (winner).**
+- 1 · Peek: ACCEPTED, with one IMPROVEMENT. The quickTo follow goes from 0.45 s to 0.2 s, and the peek is clamped so it never enters the 64 px band under the header (the switcher's sticky band).
+  - Improvement: the overlap with "the hovered row's own price" is solved by side. When the pointer is in the row's right half, where the count and median live, the peek sits left of the pointer.
+  - Backup 2 keeps 0.45 s.
+  - ⟦S0089⟧ duration-max-300ms, ⟦S1306⟧.
+- 2 · Dimming: ACCEPTED. Only the names and glyphs of the other rows dim, to 0.65; counts and medians stay at full strength. ⟦S1500⟧, ⟦S1306⟧.
+- 3 · Timing: ACCEPTED. The glyph draw is 220 ms (`ixDraw`), `--d` 250 ms, and the background sweep goes from 320 to 240 ms. ⟦S0083⟧.
+- 4 · Row numbers: IMPROVED by taking both options. The rows sort by priced jobs (415, 376, 317, 204, 109, 96, 33, 29, 6, 5, then Storm damage as the free-inspection row), so 01–11 now encode rank. The head says "Ranked by priced jobs". ⟦S0001⟧, ⟦S1314⟧ §4.
+- 5 · Band reconciliation (C.10): ACCEPTED.
+  - The one published system is the firm's homepage "Compare all 10 trades" table (FACTS.md §"Priced projects per trade, middle half and median band"): priced count, middle half, median band.
+  - V2 rows now print "415 priced jobs · Median $10k-$15k" instead of the unlabelled documented "431 jobs".
+  - V3 prints the same rows' middle half AND median band.
+  - Hero 2 prints the same median with "of 886 documented projects".
+  - ⟦S0220⟧ #8.
+
+**V1, Point at it.**
+- 1 · Deck: ACCEPTED as "remove". The firm has no photographed decking job (no decking photo in TRADE_PHOTO), and the deck in the Rob Roy photo is not documented as Austin Pro's work, so the deck hit area, pill and card are gone. The drawing group keeps no part. ⟦S1306⟧.
+- 2 · Hit overlaps: ACCEPTED, done structurally. Every hit region's outline is drawn once more on top as a 16-unit transparent stroke with `pointer-events: stroke` (`.sv1-gap`). The pointer at a junction lands on the gap, so the part under it stays as it was: an effective 8-unit inset on each side, without re-tracing. ⟦S1306⟧.
+- 3 · "Add a gutter line + a patio-cover outline": REJECTED as written, IMPROVED.
+  - The photographed Rob Roy house has no gutter run and no patio cover; drawing them onto it would invent parts of a real house. ⟦S1306⟧, ⟦S1320⟧ §2.
+  - Instead, Gutters, Patio covers and Metal roofing join as chips (dashed, off-house). Each opens its own job photo and counts: documented, priced, median, middle half, and "Not on this house: the job photo shows one the firm did". The house dims while one is open.
+  - Coverage: 5 parts on the house + 3 chips = 8 trades.
+- 4 · Artwork: ACCEPTED. The parts map now sits on the real job photograph (studio base, 1400×875, the photo the paths were traced from). The traced lines are hidden except as the lit part's outline; the hatch masks lay over the photo. The caption reads "Rob Roy, Austin, Jul 2026: the firm's own job photo". ⟦S1320⟧ §2.
+- 5 · Brand counts (C.11): SOURCED and labelled.
+  - "Priced window jobs by brand: NT Windows 238 · Simonton 54 · Andersen 38 · Pella 31": FACTS.md lines 63 and 80, the firm's windows cost data. Its sum of 361 of 376 is stated in the line above it.
+  - "Sherwin-Williams on 320 documented projects": FACTS.md line 104, the firm's brand list.
+  - Siding facts carry "of 415 priced siding jobs".
+- Motion: ACCEPTED. The dim is 150 ms; the chips get `:active` scale 0.97 at 140 ms. ⟦S0063⟧.
+- Watermark: ACCEPTED, deleted for V1–V3. The Services cursor field (dashed elevations) no longer mounts on live versions; backups keep it. ⟦S1306⟧.
+
+**V3, Tape measure.**
+- 1 · Inertia: ACCEPTED. Draggable `inertia: true` (InertiaPlugin now registered), snapping to the nearest $500 at settle. The readout updates during the throw. Reduced motion and Backup 3 keep the plain drag. ⟦S0089⟧.
+- 2 · Lit rows as links: ACCEPTED. A lit row is one `<a href="#book" data-book data-trade>` covering the whole row ("Book a siding inspection"), with a visible "Book →" cue after the name. Unlit rows are not links (tabindex −1, not rendered). ⟦S0220⟧ Axiom 2.
+- 3 · Scale: the log scale is REJECTED; the $0–$30k range is ACCEPTED.
+  - A log tape breaks the 1:1 dollars-to-distance honesty the pack itself credits this version for. ⟦S1306⟧.
+  - The tape now runs $0–$30k at the same 60 px per $1k, so the cheap trades' bars are 1.67× wider. The two trades whose middle half runs past $30k (metal, decking) print their full range and their bar ends flat at the edge. At $30k the readout says "(and up)".
+  - Band figures print at full opacity lit or not; each bar marks its median band.
+  - ⟦S1499⟧.
+- 4 · Bands: ACCEPTED (see V2.5).
+- Added · Edge tick: as a row lights, its bar's leading edge ticks out 6 px in 150 ms (a `--tick` custom property tween, transform/opacity only). ⟦S0089⟧.

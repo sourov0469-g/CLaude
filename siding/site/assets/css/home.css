@@ -1460,7 +1460,7 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 @media (max-width: 899px) { .ix-gl { display: none; } }
 @media (hover: hover) and (pointer: fine) {
   html.motion .ix-row:hover .ix-gl { animation: ixDraw .22s var(--ease); }
-  .ix-row::after { content: ""; position: absolute; z-index: -1; inset: 0 -14px; border-radius: 12px; background: var(--ground2); transform: scaleY(0); transform-origin: 50% var(--edge, 0%); transition: transform .32s cubic-bezier(.16, 1, .3, 1); }
+  .ix-row::after { content: ""; position: absolute; z-index: -1; inset: 0 -14px; border-radius: 12px; background: var(--ground2); transform: scaleY(0); transform-origin: 50% var(--edge, 0%); transition: transform .24s cubic-bezier(.16, 1, .3, 1); }
   .ix-row:hover::after { transform: scaleY(1); }
 }
 @keyframes ixDraw { from { --d: 1; } to { --d: 0; } }
@@ -1693,3 +1693,42 @@ html.js:not(.motion) *, html.js:not(.motion) ::before, html.js:not(.motion) ::af
 .sec:not([data-bk]) .proof-1 .rc-d b { font-size: clamp(2.25rem, 1rem + 3.2vw, 4rem); }   /* the firm's own count: the smallest tier, never the largest figure (C.11) */
 .sec:not([data-bk]) .proof-1 .rc-d > span { max-width: 18ch; }
 .creds li > img { height: 48px; width: auto; max-width: 132px; }   /* the badge sits inside its 64 px plate (QA: tall badges overflowed) */
+
+/* ================= F3 SERVICES (Audit pack). Scoped off the backups. ================= */
+/* V1: the parts map over the real job photograph; the lines are only the lit part's outline; junctions are a no-hit gutter */
+.sv1-photo { pointer-events: none; }
+.sec:not([data-bk]) .sv1-el g[data-part] path { opacity: 0; }
+.sec:not([data-bk]) .sv1-el g.is-on path { opacity: 1; stroke: var(--sheet); stroke-width: 2; }
+.sec:not([data-bk]) .sv1-el g[data-part] path { transition: opacity 150ms var(--ease), stroke var(--t-ui) ease; }   /* F3 V1: dim 150 ms, the hatch is the deliberate phase */
+.sec:not([data-bk]) .sv1-el pattern path { stroke: var(--sheet); opacity: .8; stroke-width: 1.3; }
+.sec:not([data-bk]) .sv1-el .sv1-h { opacity: .85; }
+.sec:not([data-bk]) .sv1-el[data-on="none"] .sv1-photo { opacity: .55; transition: opacity 150ms var(--ease); }
+.sec:not([data-bk]) .sv1-fig { background: var(--night); }
+.sv1-gap { fill: none; stroke: transparent; stroke-width: 16; pointer-events: stroke; }
+.sec:not([data-bk]) .sv1-parts button { transition: transform var(--t-press) var(--ease), background-color var(--t-hover) var(--ease); }
+.sec:not([data-bk]) .sv1-parts button:active { transform: scale(.97); }
+.sv1-parts .sv1-more { border-style: dashed; }
+/* V2: dim the names only, to .65; the counts and medians stay at full strength (they are the comparison) */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .sec:not([data-bk]) .ix:hover .ix-row:not(:hover) > * { opacity: 1; }
+  .sec:not([data-bk]) .ix:hover .ix-row:not(:hover) .ix-name, .sec:not([data-bk]) .ix:hover .ix-row:not(:hover) .ix-gl { opacity: .65; }
+}
+/* V3: band figures at full strength lit or not; the median band marked on every bar; lit rows carry their booking link */
+.sec:not([data-bk]) .tm-t { opacity: 1; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr) 7.5rem; }
+.sec:not([data-bk]) .tm-n { white-space: nowrap; }
+.sec:not([data-bk]) .tm-t:not(.is-on) .tm-n, .sec:not([data-bk]) .tm-t:not(.is-on) .tm-bar { opacity: .5; }
+.sec:not([data-bk]) .tm-n { grid-row: 1; }
+.tm-r small { display: block; color: var(--ink2); font-size: .75rem; }
+.tm-r > span { color: var(--ink2); }
+.tm-bar i::after { content: ""; position: absolute; right: -2px; top: -4px; bottom: -4px; width: 3px; border-radius: 2px; background: inherit; transform: translateX(calc(var(--tick, 0) * 6px)); opacity: var(--tick, 0); }
+.tm-bar::before { content: ""; position: absolute; top: -3px; bottom: -3px; left: calc(var(--m) * 100%); width: 2px; margin-left: -1px; background: var(--sheet); box-shadow: 0 0 0 1px var(--ink2); z-index: 1; }
+.tm-over .tm-bar i { border-radius: 999px 0 0 999px; }
+.tape[data-max="30000"] .tape-strip { width: 1800px; }   /* 60 px per $1k, as before, over $0-$30k */
+.tape[data-max="30000"] .tape-strip .tk { left: calc(var(--k) * 100% / 30); }
+.tm-t { position: relative; }
+.tm-go { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* F3 V3.2: a lit row IS the booking link: the link covers the row; its name gains a visible "Book" cue */
+.tm-t.is-on .tm-go { inset: -3px -8px; width: auto; height: auto; z-index: 2; clip-path: none; border-radius: 10px; color: transparent; }
+.tm-t.is-on .tm-go:focus-visible { outline: 3px solid var(--ink); outline-offset: 0; }
+.tm-t.is-on .tm-n::after { content: "Book \2192"; margin-left: 10px; color: var(--red-d); font-size: .8125rem; font-weight: 650; }
+@media (hover: hover) and (pointer: fine) { .tm-t.is-on:hover .tm-n::after { text-decoration: underline; text-underline-offset: 3px; } .tm-t.is-on:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); border-radius: 10px; } }

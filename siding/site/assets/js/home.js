@@ -8,6 +8,7 @@
   const $$ = (s, el = d) => Array.from(el.querySelectorAll(s));
   const G = window.gsap, ST = window.ScrollTrigger;
   if (G && ST) G.registerPlugin(ST);
+  if (G && window.InertiaPlugin) G.registerPlugin(window.InertiaPlugin);
   const DATA = JSON.parse($('#home-data').textContent);
   const PINS = DATA.map.pins;
 
@@ -388,7 +389,7 @@
     let committed = 'siding', shown = '';
     const show = (part, anim) => {
       const t = D[part]; if (!t || part === shown) return;
-      shown = part; svg.dataset.on = part;
+      shown = part; svg.dataset.on = t.off ? 'none' : part;   // F3 V1.3: a trade not on this house lights no part
       $$('g[data-part]', svg).forEach(g => g.classList.toggle('is-on', g.dataset.part === part));
       Object.entries(hatch).forEach(([k, p]) => p.classList.toggle('on', k === part));
       o('label').textContent = t.label;
@@ -410,7 +411,8 @@
   /* SERVICES 2: Q571 AHA's numbered services index: an ordered list numbered by CSS counters, with the current /
      total counter (01 of 11) in the intro column following the row you point at or tab to. Trade names answer the
      cursor on Mona Sans's weight and width axes (variable axes); a photo follows the pointer (S1321 hover zoom). */
-  V.services2 = (r, b) => {
+  V.services2 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 2 keeps its 0.45 s peek (A.2)
     const list = $('.ix', r), rows = $$('.ix-row', r), now = $('[data-ix-now]', r);
     rows.forEach((row, k) => { const set = () => { now.textContent = String(k + 1).padStart(2, '0'); }; b.on(row, 'pointerenter', set); b.on(row, 'focus', set); });
     // v4 K72 edge-aware band: the hover band grows from the edge the pointer came in through
@@ -430,11 +432,23 @@
     b.on(list, 'pointerleave', () => { px = py = -999; if (!raf) raf = requestAnimationFrame(field); });
     b.add(() => cancelAnimationFrame(raf));
     const peek = $('.ix-peek', r), pim = $('img', peek);
-    const qx = G.quickTo(peek, 'x', { duration: 0.45, ease: 'power3' }), qy = G.quickTo(peek, 'y', { duration: 0.45, ease: 'power3' });
+    const pd = bk ? 0.45 : 0.2;   // F3 V2.1: a 200 ms follow
+    const qx = G.quickTo(peek, 'x', { duration: pd, ease: 'power3' }), qy = G.quickTo(peek, 'y', { duration: pd, ease: 'power3' });
     let src = '';
-    b.on(list, 'pointermove', e => { const rc = r.getBoundingClientRect(); qx(e.clientX - rc.left + 28); qy(e.clientY - rc.top - peek.offsetHeight * 0.5); });
+    /* F3 V2.1: the peek never enters the top 64 px under the header (the switcher's band) and sits on the side of the
+       pointer away from the row's count and median, which live at the row's right end */
+    const at = e => {
+      const rc = r.getBoundingClientRect(), w = peek.offsetWidth, h = peek.offsetHeight;
+      let x = e.clientX - rc.left + 28, y = e.clientY - rc.top - h * 0.5;
+      if (!bk) {
+        if (e.clientX > rc.left + rc.width * 0.5) x = e.clientX - rc.left - w - 28;
+        y = Math.max(y, hdH() + 64 - rc.top);
+      }
+      return { x, y };
+    };
+    b.on(list, 'pointermove', e => { const p = at(e); qx(p.x); qy(p.y); });
     rows.forEach(row => b.on(row, 'pointerenter', e => {
-      if (+G.getProperty(peek, 'opacity') < 0.05) { const rc = r.getBoundingClientRect(); G.set(peek, { x: e.clientX - rc.left + 28, y: e.clientY - rc.top - peek.offsetHeight * 0.5 }); }   // first show starts at the pointer
+      if (+G.getProperty(peek, 'opacity') < 0.05) G.set(peek, at(e));   // first show starts at the pointer
       const s = row.dataset.img;
       if (!s) { G.to(peek, { autoAlpha: 0, duration: 0.2 }); return; }
       if (s !== src) { pim.src = AU(s); src = s; }
@@ -449,11 +463,12 @@
      The tape reads $0 to $50,000; the red mark is your budget and every trade whose published middle half covers it
      lights up. Nothing plays on arrival: the tape rests at $15,000 until the visitor pulls it. Keys: arrows $500
      (Shift $5,000), Page Up/Down $5,000, Home/End; a key move travels in 0.24 s. The end hook catches at either end. */
-  V.services3 = (r, b) => {
+  V.services3 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 3 keeps the $50k tape with no inertia (A.2)
     const tape = $('.tape', r), strip = $('.tape-strip', r), band = $('.tape-band', r), list = $('.tm-list', r), rows = $$('.tm-t', r), hook = $('.tape-hook', r);
     const vOut = $('[data-tm-v]', r), nOut = $('[data-tm-n]', r);
-    const MAX = 50000, STEP = 500;
-    const px = () => strip.offsetWidth / 50;                     // one $1k tick = 2 % of the strip
+    const MAX = +(tape.dataset.max || 50000), STEP = 500, K = MAX / 1000;
+    const px = () => strip.offsetWidth / K;                      // one $1k tick
     const xOf = v => band.clientWidth / 2 - v / 1000 * px();
     const vOf = x => clamp((band.clientWidth / 2 - x) / px() * 1000, 0, MAX);
     let val = 15000, atEnd = false, drag = null;
@@ -463,8 +478,13 @@
       vOut.textContent = f; tape.setAttribute('aria-valuenow', val); tape.setAttribute('aria-valuetext', f);
       list.style.setProperty('--v', (val / MAX).toFixed(4));
       let n = 0;
-      rows.forEach(rw => { const on = val >= +rw.dataset.lo * 1000 && val <= +rw.dataset.hi * 1000; rw.classList.toggle('is-on', on); n += on; });
-      nOut.textContent = `${n} of ${rows.length} trades usually ${n === 1 ? 'lands' : 'land'} here.`;
+      rows.forEach(rw => {
+        const on = val >= +rw.dataset.lo * 1000 && val <= +rw.dataset.hi * 1000, was = rw.classList.contains('is-on');
+        rw.classList.toggle('is-on', on); n += on;
+        const go = $('.tm-go', rw); if (go) go.tabIndex = on ? 0 : -1;   // F3 V3.2: a lit row is a booking link
+        if (on && !was && !bk && motionOK()) { const bar = $('.tm-bar i', rw); if (bar) G.fromTo(bar, { '--tick': 0 }, { '--tick': 1, duration: 0.15, ease: 'power2.out' }); }   // F3 V3 add: the edge ticks out 6 px
+      });
+      nOut.textContent = `${n} of ${rows.length} trades usually ${n === 1 ? 'lands' : 'land'} here${val === MAX && !bk ? ' (and up)' : ''}.`;
       const end = val === 0 || val === MAX;
       if (end && !atEnd && motionOK() && hook) G.fromTo(hook, { rotation: 0 }, { rotation: val ? 14 : -14, duration: 0.14, ease: 'power2.out', yoyo: true, repeat: 1 });
       atEnd = end;
@@ -476,9 +496,13 @@
       else { G.set(strip, { x }); if (drag) drag.update(); }
     };
     if (window.Draggable) {
+      /* F3 V3.1: a flicked tape keeps its velocity (InertiaPlugin) and settles on a $500 mark */
+      const throwOK = !bk && !!window.InertiaPlugin && motionOK();
       drag = window.Draggable.create(strip, {
-        type: 'x', edgeResistance: 1, inertia: false, zIndexBoost: false, bounds: { minX: xOf(MAX), maxX: xOf(0) },
-        onDrag() { read(vOf(this.x)); }, onDragEnd() { place(vOf(this.x), true); }
+        type: 'x', edgeResistance: 1, inertia: throwOK, zIndexBoost: false, bounds: { minX: xOf(MAX), maxX: xOf(0) },
+        snap: throwOK ? { x: x => xOf(Math.round(vOf(x) / STEP) * STEP) } : undefined,
+        onDrag() { read(vOf(this.x)); }, onThrowUpdate() { read(vOf(this.x)); },
+        onDragEnd() { if (!throwOK || !this.tween) place(vOf(this.x), true); }, onThrowComplete() { place(vOf(this.x)); }
       })[0];
       b.add(() => drag.kill());
     }
