@@ -127,7 +127,7 @@ def svc_v5():  # the menu board
 # R4 directive Phase 6 (redesign layer, as on the homepage sections): the brand label over the H1, the contour artwork
 # on the root, and a drawn roofline closing the page header (accent at the ridge, a dashed tint along the eaves)
 GABLE = 'M4 50 C 18 39 33 24 49 8 C 51 6.6 53.4 6.6 55 8.2 C 70 23 84 36 97 45 C 98.6 46.2 97.6 49 95.6 48.6 C 81 44.6 66 35 52.6 24.4 C 39 36 23 47 7.4 54.6 C 5.2 55.6 2.6 52.2 4 50 Z'
-LABEL = {'svcp': 'Our services', 'about': 'The family firm', 'contact': 'Call or come by'}
+LABEL = {'svcp': 'What we do', 'about': 'The family firm', 'contact': 'Call or come by'}
 RIDGE = '<svg class="pg-ridge" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="pg-ridge-e" d="M0 76 L600 6 L1200 76"/><path class="pg-ridge-a" d="M360 34 L600 6 L840 34"/></svg>'
 def dress(page, h):
     lab = f'<p class="r4-lab"><svg viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg>{LABEL[page]}</p>'

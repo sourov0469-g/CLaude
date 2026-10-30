@@ -1,7 +1,7 @@
 # §12 items 1-2: facts and banned patterns, on the built file. Text = everything outside <script>/<style> (live versions,
 # every <template> version, chrome, footer, aria-labels, alt text) plus the string literals in the bundled JS that render
 # visible text. Run: python3 -I qa/scripts/factsgate.py rembrandt-homepage.html
-import re, sys, html as H
+import os, re, sys, html as H
 src = open(sys.argv[1], encoding='utf-8').read()
 scripts = re.findall(r'<script\b[^>]*>(.*?)</script>', src, re.S)
 body = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', ' ', src, flags=re.S)
@@ -15,7 +15,11 @@ tpl = re.findall(r'<template id="tpl-([a-z]+)-(b?\d)">(.*?)</template>', src, re
 live = {}  # live version-1 markup per section: the <section data-section> minus its templates
 for m in re.finditer(r'<section[^>]*data-section="([a-z]+)"[^>]*>(.*?)</section>', src, re.S): live[m.group(1)] = re.sub(r'<template.*?</template>', '', m.group(2), flags=re.S)
 rows = []
-def chk(name, ok, detail): rows.append((('PASS' if ok else 'FAIL'), name, detail))
+# R4 Phase 6: the inner pages run every ban; the homepage-only checks (its section order, the Storm section, the review
+# figures it must show) report n/a there
+HOME = 'homepage' in os.path.basename(sys.argv[1])
+HOME_ONLY = ('"295" present', '"4.9" present', 'section sequence', 'storm v')
+def chk(name, ok, detail): rows.append((('n/a' if not HOME and name.startswith(HOME_ONLY) else 'PASS' if ok else 'FAIL'), name, detail))
 P353 = r'353[\s.)-]*9711'
 chk('353-9711 appears 0 times (any spacing/format)', n(P353) == 0 and n(r'9373539711') == 0, f"{n(P353)} / {n(r'9373539711')}")
 chk('only one phone number: every tel: link is +19377467377', set(re.findall(r'tel:([+\d]+)', src)) == {'+19377467377'}, str(sorted(set(re.findall(r'tel:([+\d]+)', src)))))
@@ -65,7 +69,7 @@ print('FAILS:', sum(r[0] == 'FAIL' for r in rows))
 for v in ['1','2','3','4','5','6','7','8']:
     blk = (live.get('storm','') if v == '1' else dict(((a+b), c) for a, b, c in tpl).get('storm'+v, ''))
     t = H.unescape(re.sub(r'<[^>]+>', ' ', blk))
-    rows.append((('PASS' if re.search(r'insur\w* (company )?decides|decision is your insurer', t, re.I) else 'FAIL'), f'storm v{v}: says the insurer decides the claim', ''))
+    chk(f'storm v{v}: says the insurer decides the claim', bool(re.search(r'insur\w* (company )?decides|decision is your insurer', t, re.I)), '')
 # counted in the raw source: every occurrence must sit inside <s> (Storm V3, and its verbatim backup B6, strike it out)
 chk('no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)', n(r"(?<!<s>)we('ll| will) get your claim approved|guarantee[ds]? (your )?(claim|approval)", src) == 0, f'{n(r"get your claim approved", src)} struck')
 for r in rows[-9:]: print(f'{r[0]:5} {r[1]:<110} {r[2]}')
