@@ -1487,7 +1487,7 @@ def section(key, label, fns, names):
 </section>'''
 
 
-def head():
+def head(title='Austin Pro Siding, Windows &amp; Roofing | Priced in public', desc='Siding, windows and roofing in Austin since 2009, with real prices from 886 documented jobs. A concept redesign with versions of every section.', page='home'):
     ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Austin Pro Siding, Windows & Roofing",
           "telephone": "+1-512-550-0000", "email": EMAIL, "url": LIVE,
           "address": {"@type": "PostalAddress", "streetAddress": "7801 N Lamar Blvd, Suite C70", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78752", "addressCountry": "US"},
@@ -1498,8 +1498,8 @@ def head():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Austin Pro Siding, Windows &amp; Roofing | Priced in public</title>
-<meta name="description" content="Siding, windows and roofing in Austin since 2009, with real prices from 886 documented jobs. A concept redesign with three versions of every section.">
+<title>{title}</title>
+<meta name="description" content="{desc}">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
@@ -1509,7 +1509,7 @@ def head():
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{json.dumps(ld)}</script>
 </head>
-<body>
+<body data-page="{page}">
 <a class="skip" href="#main">Skip to content</a>
 '''
 
@@ -1522,18 +1522,23 @@ def brand(cls, tag='span'):
             f'<span class="brand-d">Siding · Windows · Roofing · Patio covers</span></span></{tag}>')
 
 
-def header():
-    links = [('#work', 'Work'), ('#colour', 'Colour'), ('#near', 'Near you'), ('#money', 'Financing')]
-    nav = ''.join(f'<a href="{h}">{t}</a>' for h, t in links)
+SITE_NAV = [('siding.html', 'Siding', 'siding'), ('windows.html', 'Windows &amp; doors', 'windows'), ('roofing.html', 'Roofing', 'roofing'),
+            ('outdoor.html', 'Patios &amp; decks', 'outdoor'), ('projects.html', 'Our work', 'projects'), ('financing.html', 'Financing', 'financing'),
+            ('about.html', 'About', 'about')]
+
+
+def header(page='home'):
+    """the site's own navigation on every page (owner order: the full website); the current page is marked"""
+    nav = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if k == page else ""}>{t}</a>' for h, t, k in SITE_NAV)
     return f'''<header class="hd">
-  <a class="hd-logo" href="#main" aria-label="Austin Pro Siding, Windows and Roofing, top of page">{brand("brand--hd")}</a>
-  <nav class="hd-nav" aria-label="Sections">{nav}</nav>
+  <a class="hd-logo" href="{'#main' if page == 'home' else 'index.html'}" aria-label="Austin Pro Siding, Windows and Roofing, {'top of page' if page == 'home' else 'home'}">{brand("brand--hd")}</a>
+  <nav class="hd-nav" aria-label="Site">{nav}</nav>
   <button class="hd-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button>
   <a class="hd-tel" href="{TEL}">{PHONE}</a>
-  <a class="btn btn-red btn-sm hd-book" href="#book" data-book aria-label="Book free inspection"><span class="long">Book free inspection</span><span class="short" aria-hidden="true">Book</span></a>
+  <a class="btn btn-red btn-sm hd-book" href="{'#book' if page == 'home' else 'contact.html'}"{' data-book' if page == 'home' else ''} aria-label="Book free inspection"><span class="long">Book free inspection</span><span class="short" aria-hidden="true">Book</span></a>
   <button class="hd-menu" type="button" aria-expanded="false" aria-controls="sheet">Menu</button>
 </header>
-<div class="sheet" id="sheet" hidden><nav aria-label="Sections, mobile">{nav}<a href="#book">Book free inspection</a><a href="{TEL}">Call {PHONE}</a><button class="sh-motion" type="button" data-motion-btn aria-pressed="true"><span data-motion-t>Motion on</span></button></nav></div>
+<div class="sheet" id="sheet" hidden><nav aria-label="Site, mobile">{nav}<a href="{'#book' if page == 'home' else 'contact.html'}">Book free inspection</a><a href="{TEL}">Call {PHONE}</a><button class="sh-motion" type="button" data-motion-btn aria-pressed="true"><span data-motion-t>Motion on</span></button></nav></div>
 '''
 
 
@@ -1561,7 +1566,8 @@ def picks():
 </div>'''
 
 
-def footer():
+def footer(page='home'):
+    site = ''.join(f'<a href="{h}">{t}</a>' for h, t, _k in SITE_NAV) + '<a href="contact.html">Contact &amp; booking</a>'
     return f'''<footer class="ft" data-tone="night">
   <div class="ft-top"><p class="ft-logo" role="img" aria-label="Austin Pro Siding, Windows and Roofing">{brand("brand--ft")}</p>
     <p class="ft-big"><a href="{TEL}">{PHONE}</a></p></div>
@@ -1569,7 +1575,7 @@ def footer():
     <p><b>Office</b>{ADDRESS}</p>
     <p><b>Hours</b>{HOURS}</p>
     <p><b>Write</b><a href="mailto:{EMAIL}">{EMAIL}</a></p>
-    <nav aria-label="Footer"><b>On this page</b><a href="#work">Work</a><a href="#colour">Colour</a><a href="#near">Near you</a><a href="#money">Financing</a><a href="#book">Book</a><button class="ft-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button></nav>
+    {'' if page != 'home' else '''<nav aria-label="Footer"><b>On this page</b><a href="#work">Work</a><a href="#colour">Colour</a><a href="#near">Near you</a><a href="#money">Financing</a><a href="#book">Book</a><button class="ft-motion" type="button" data-motion-btn aria-pressed="true"><svg viewBox="0 0 22 14" aria-hidden="true" focusable="false"><rect class="mt-k" x="1" y="1" width="20" height="12" rx="6"/><circle class="mt-d" cx="15" cy="7" r="3.6"/></svg><span data-motion-t>Motion on</span></button></nav>'''}<nav aria-label="Site"><b>The site</b><a href="index.html">Home</a>{site}</nav>
   </div>
   <p class="ft-note">Concept redesign for a design portfolio, not affiliated with or endorsed by Austin Pro Siding, Windows &amp; Roofing. Every figure, photo and colour comes from austinprosiding.com, read 29 Oct 2026. Financing on approved credit through GreenSky. Prices are materials and labour before discounts, excluding tax.</p>
 </footer>'''

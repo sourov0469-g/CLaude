@@ -1572,9 +1572,9 @@
     } catch (err) { return ''; }
     return '';
   }
-  function nv(vr, b) {
+  function nv(vr, b, auto) {
     $$('[data-nv-pick]', vr).forEach(grp => nvRadio(grp, b, o => {
-      for (const [k, v] of Object.entries(o.dataset)) if (k.startsWith('o') && k.length > 1) { const key = k[1].toLowerCase() + k.slice(2); $$(`[data-o="${key}"]`, vr).forEach(t => { if (grp.hasAttribute('data-nv-html')) t.innerHTML = v; else t.textContent = v; }); }
+      for (const [k, v] of Object.entries(o.dataset)) if (k.startsWith('o') && k.length > 1) { const key = k[1].toLowerCase() + k.slice(2); $$(`[data-o="${key}"]`, vr).forEach(t => { if (t.hasAttribute('data-nv-href')) t.setAttribute('href', v); else if (grp.hasAttribute('data-nv-html')) t.innerHTML = v; else t.textContent = v; }); }
       if (grp.hasAttribute('data-nv-pickc')) vr.style.setProperty('--pick', o.dataset.c);
       if (o.dataset.l) vr.dataset.l = o.dataset.l;
       if (grp.hasAttribute('data-nv-dial')) vr.dataset.i = o.dataset.i;
@@ -1607,6 +1607,22 @@
       const end = new Date(el.dataset.nvUntil + 'T23:59:59-06:00'), days = Math.max(0, Math.floor((end - Date.now()) / 864e5)), l = $('[data-nv-until-l]', vr);
       el.textContent = days; if (l) l.textContent = days === 1 ? 'day left' : days ? 'days left' : 'the offer date has passed';
     });
+    // cycler: previous / next through [data-cyc-i] items, with a live count
+    (vr.matches('[data-nv-cyc]') ? [vr] : $$('[data-nv-cyc]', vr)).forEach(sc => {
+      const items = $$('[data-cyc-i]', sc), n = $('[data-cyc-n]', sc); let i = 0;
+      $$('[data-cyc]', sc).forEach(btn => b.on(btn, 'click', () => { i = (i + +btn.dataset.cyc + items.length) % items.length; items.forEach((x, k) => x.classList.toggle('on', k === i)); if (n) n.textContent = i + 1; }));
+    });
+    // search: an input filters [data-f] items by their text
+    (vr.matches('[data-nv-filter]') ? [vr] : $$('[data-nv-filter]', vr)).forEach(sc => {
+      const inp = $('[data-nv-filter-in]', sc), items = $$('[data-f]', sc), n = $('[data-nv-filter-n]', sc);
+      b.on(inp, 'input', () => { const q = inp.value.trim().toLowerCase(); let k = 0; items.forEach(x => { const on = !q || x.dataset.f.includes(q); x.hidden = !on; k += on; }); if (n) n.textContent = k; });
+    });
+    // components that carry their own script initialise by class when no section-keyed script has claimed the version
+    if (auto) {
+      const AUTO = [['.cl', 'built4'], ['.nv-flip', 'work4'], ['.nv-story', 'work6'], ['.nv-side:not([data-nv-cyc])', 'work8'], ['.nv-dial', 'built6'], ['.nv-steps', 'built8'],
+        ['.nv-bodytrim', 'colour5'], ['.nv-shade', 'colour6'], ['.nv-paint', 'colour7'], ['.nv-shuffle', 'colour8'], ['.nv-field', 'reviews8'], ['.nv-chat', 'book8'], ['.nv-two', 'services8'], ['.nv-street', 'hero4']];
+      AUTO.forEach(([sel, fn]) => { if (vr.matches(sel) && V[fn]) V[fn](vr, b); });
+    }
     $$('[data-nv-go]', vr).forEach(btn => b.on(btn, 'click', () => { const t = $(`.vsw-b[data-v="${btn.dataset.nvGo}"]`, vr.closest('.sec')); if (t) { t.click(); setTimeout(() => { const f = $('.sec#book input, .sec#book select', d); if (f) f.focus({ preventScroll: false }); }, 400); } }));
   }
 
@@ -1694,6 +1710,7 @@
   const BKS = 8, CODE = { hero: 'H', proof: 'P', services: 'S', work: 'W', built: 'B', colour: 'C', near: 'N', reviews: 'R', money: 'M', book: 'Bk' };
   const SECS = $$('.sec').map(el => ({ el, key: el.dataset.sec, stage: $('.stage', el), tabs: $$('.vsw-b', el), label: $('.vsw-l span', el), names: el.dataset.names.split('|'), bkNames: (el.dataset.bkNames || '').split('|'), tpl: Object.fromEntries($$('template', el).map(t => [+t.dataset.v, t])), v: 1, b: null, ctx: null, api: {}, switched: false }));
   const BY = Object.fromEntries(SECS.map(s => [s.key, s]));
+  const PKEY = 'ap-picks' + (d.body.dataset.page && d.body.dataset.page !== 'home' ? ':' + d.body.dataset.page : '');   // each page keeps its own picks
 
   function unmount(s) {
     if (s.b) s.b.clear();
@@ -1715,7 +1732,7 @@
     s.label.textContent = bk ? `Backup ${v - BKS}: ${s.bkNames[v - BKS - 1]}` : s.names[v - 1];
     const vr = s.stage.firstElementChild;
     s.b = bag();
-    const run = () => { heads(vr, s); const fn = bk ? V[s.key + ((v - BKS - 1) % 3 + 1)] : V[s.key + v]; if (fn) fn(vr, s.b, s); if (!bk) nv(vr, s.b); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
+    const run = () => { heads(vr, s); const fn = bk ? V[s.key + ((v - BKS - 1) % 3 + 1)] : V[s.key + v]; if (fn) fn(vr, s.b, s); if (!bk) nv(vr, s.b, !fn); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
     /* K11: every scroll entrance a version sets up plays at reveal level (each element 0.3 s at most, staggers scaled
        with it); tweens marked data: 'k10' (data the visitor reads, and Work 1's sweep) keep their tempo */
     const cap = () => { if (!s.ctx || !s.ctx.getTweens) return; s.ctx.getTweens().forEach(t => { if (t.scrollTrigger && t.vars.data !== 'k10' && (t.vars.duration || 0) > REVEAL) t.timeScale(t.vars.duration / REVEAL); }); };
@@ -1724,10 +1741,10 @@
     } catch (err) { console.error(s.key + v, err); }
   }
   const code = () => SECS.map(s => s.v.toString(16)).join('');   // one character a section: 1-8 visible, 9 and a-e backups
-  const pretty = () => SECS.map(s => CODE[s.key] + (s.v > BKS ? 'b' + (s.v - BKS) : s.v)).join(' ');   // D.7: never 3-3-4
+  const pretty = () => SECS.map(s => (CODE[s.key] || s.el.dataset.code || s.key[0].toUpperCase()) + (s.v > BKS ? 'b' + (s.v - BKS) : s.v)).join(' ');   // D.7: never 3-3-4
   const okV = (s, v) => !!s.tpl[v];
   function save() {
-    store.set('ap-picks', code());
+    store.set(PKEY, code());
     try { const u = new URL(location.href); u.searchParams.set('v', code()); history.replaceState(null, '', u); } catch (e) { /* file URL or sandbox: the panel still shows the picks */ }
     syncPicks();
   }
@@ -1833,8 +1850,9 @@
   /* boot: picks from ?v=, then saved picks, else all version 1 */
   let picks = null;
   try { picks = new URL(location.href).searchParams.get('v'); } catch (e) { picks = null; }
-  if (!/^[1-9a-e]{10}$/.test(picks || '')) picks = store.get('ap-picks');
-  if (!/^[1-9a-e]{10}$/.test(picks || '')) picks = '1111111111';
+  const CODE_RE = new RegExp(`^[1-9a-e]{${SECS.length}}$`);   // one character a section, on any page
+  if (!CODE_RE.test(picks || '')) picks = store.get(PKEY);
+  if (!CODE_RE.test(picks || '')) picks = '1'.repeat(SECS.length);
   lenisSync(); syncFx();
   /* single-file build: the templates arrive compressed (window.__apTpl). Version 1 is already in each stage, so the
      page reads complete before they land; anything else mounts once they are restored. */

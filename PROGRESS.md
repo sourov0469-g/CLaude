@@ -476,3 +476,32 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
   - Phase 5 expansion (5df18ae).
   - Phase 6 QA (this commit).
 - **Final gate evidence:** in TRACEABILITY.md under "Phase 6". Nothing is marked shipped.
+
+## OWNER ORDER: finish the full website (2026-10-30)
+**Page list, settled from the firm's real services.** 9 pages in all: the homepage plus 8 inner pages. Every service the firm sells sits on exactly one page.
+
+| Page | File | Services and topics |
+|---|---|---|
+| Home | index.html | done; final gate stands |
+| Siding & painting | siding.html | James Hardie siding (lap, board and batten), exterior painting (Sherwin-Williams, ColorPlus) |
+| Windows & doors | windows.html | replacement windows (NT Windows, Simonton, Andersen, Pella), exterior doors, garage doors |
+| Roofing & gutters | roofing.html | shingle roofing (GAF Master Elite), standing-seam metal roofing, gutters, storm damage |
+| Patios & decks | outdoor.html | patio covers (Renaissance Patio), decking |
+| Our work | projects.html | the 886 documented jobs, the 177 pairs, the map, one job start to finish |
+| Financing & offers | financing.html | GreenSky plans, the published discounts, the referral |
+| About | about.html | since 2009 and the 2018 merger, credentials, reviews, the office |
+| Contact & booking | contact.html | the free inspection, the form, hours, address, phone |
+
+- **Each inner page** is one section with five wholly different layout versions behind the switcher (1–5):
+  - A editorial, B data-led, C photo-led, D tool-first, E guide or question-led.
+- **Hidden backups** are the firm's earlier pages, kept byte-identical as records and opened from the Versions panel:
+  - old siding.html, windows.html, projects.html, and plan.html (whose money content moves to Financing).
+- **Pages that had no earlier version** (roofing, outdoor, about, contact) have no backup to show. Nothing is invented to fill the slot, and the gate reports this.
+- **All master-directive rules carry over:** light only, tokens, Poppins and Roboto, the new logo, Annex A facts verbatim, published figures only.
+- One commit per page.
+- **Owner clarification (per-section versions), and how it is applied:**
+  - Every inner page is a set of sections, and every section carries five versions with its own switcher (1–5) and its own entries in the page's Versions panel, exactly as on the homepage.
+  - The five versions of a section are five different renderers of that section's job. For example, a cost section can render as a range ruler, a median card with a payment pick, a comparison ledger, a "what moves the price" list, or a band dial. They differ in layout and mechanism, never only in skin.
+  - Section content is page-specific: each page's own trades, figures, photos, FAQs and reviews.
+  - **Hidden backups per section:** where the firm's earlier page had a matching section, that old section is the backup record. The old pages are kept byte-identical as `*-record.html`, and each backup entry opens its section there. Sections that never existed before have no backup record, and nothing is invented for them.
+  - The whole-page A–E plan above is superseded by this.

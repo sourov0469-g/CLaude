@@ -11,6 +11,7 @@ import glob
 import io
 import json
 import os
+import sys
 import re
 import shutil
 import subprocess
@@ -104,8 +105,19 @@ def script(n):
     return src.replace('</script', '<\\/script')
 
 
-def build():
-    html = rd('index.html')
+PAGES = ['index', 'siding', 'windows', 'roofing', 'outdoor', 'projects', 'financing', 'about', 'contact']
+
+
+def out_name(page):
+    return 'homepage-standalone.html' if page == 'index' else f'{page}-standalone.html'
+
+
+def build(page='index'):
+    OUT = os.path.join(os.path.dirname(HERE), out_name(page))
+    html = rd(f'{page}.html')
+    # owner order (full website): page links go to the sibling standalone files; record pages stay in site/
+    html = re.sub(r'href="((?:' + '|'.join(PAGES) + r'))\.html(#[^"]*)?"', lambda m: f'href="{out_name(m.group(1))}{m.group(2) or ""}"', html)
+    html = re.sub(r'href="([a-z]+-record\.html(?:#[^"]*)?)"', r'href="site/\1"', html)
     # 1. CSS inline. The font goes in as a data URI (var() is not allowed in @font-face); every other url() is written
     #    once as a custom property on :root and referenced by var(), so a mask used by two properties is stored once.
     css = rd('assets/css/home.css')
@@ -204,4 +216,5 @@ new Response(new Blob([a]).stream().pipeThrough(new DecompressionStream('deflate
 
 
 if __name__ == '__main__':
-    build()
+    for pg in (sys.argv[1:] or ['index']):
+        build(pg)
