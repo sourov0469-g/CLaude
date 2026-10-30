@@ -387,3 +387,15 @@ Checks confirmed passing (no change needed):
 - The system cursor is kept.
 
 Result: **0 KEPT changes reverted · 3 FIXED (CSS only) · 0 REBUILT.**
+
+## Audit feedback pack round (30 Oct 2026), status
+- Steps done:
+  - Fix pass (A, C, D, E, F1–F10).
+  - QA rounds 1–3: sweep clean, contrast survivors fixed, backups clean.
+  - Owner design note: type and de-AI pass, see TRACEABILITY.md.
+- Deferred: QA rounds 4–10 and Part G.
+- Current measures:
+  - re-check 225/0;
+  - facts lock holds (phone ×107, K1 ×6, hours ×12, 474 everywhere);
+  - 4,160,204 B.
+- Not marked shipped.

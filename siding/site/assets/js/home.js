@@ -420,7 +420,7 @@
     rows.forEach(row => b.on(row, 'pointerenter', e => { const rc = row.getBoundingClientRect(); row.style.setProperty('--edge', e.clientY - rc.top < rc.height / 2 ? '0%' : '100%'); }));
     if (motionOK()) G.from(rows, { yPercent: 40, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.04, scrollTrigger: once(list, 'top 85%') });
     if (!(mqFine.matches && mqDesk.matches) || !G || !motionOK()) return;
-    const names = $$('[data-chars]', r);
+    const names = bk ? $$('[data-chars]', r) : [];   // owner design note: the axis swell stays on the backup only
     names.forEach(n => {
       if (n.dataset.done) return;
       n.dataset.done = '1';

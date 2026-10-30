@@ -1019,3 +1019,34 @@ Tools: `scratchpad/ap/qa2.js` (WCAG contrast of every visible text node against 
 - (b) D.1: the lids settle at 0.42. D.2: `--cw` and `--ch` are cleared outside the hero. D.3: the resolver stays false under reduced motion and in a fresh session.
 - (c) Spot-checked at 2x: no banding or blocking visible on the roof, siding or face photos.
 - (e) No new defects at 375 in any winner. Re-check suite 225/0.
+
+## OWNER DESIGN NOTE (2026-10-30): everyday type and a de-AI surface pass
+
+**Scope:** live versions and page chrome only. Backups 6–8 keep Mona Sans and every effect they had, because they are records. This is done through `--f` / `--fh` and `font-family` on `.sec[data-bk]`, and through `:not([data-bk] *)` on every live override. Verified: with `?v=6666666666`, headings and body both compute to Mona Sans; on live versions, headings compute to Poppins and body to Roboto.
+
+**Fonts.** Old: Mona Sans variable (one family for everything), set at 75–92 % width through `font-stretch`, with weight and width axes morphing under the cursor. New:
+- Poppins 500/600/700 for headings (H1/H2/H3, legends, display lines and big figures).
+- Roboto variable for body and UI.
+- Both are self-hosted latin woff2 under OFL. Provenance is in `site/assets/fonts/FONTS.txt`. The preloads now point at Poppins 700 and Roboto.
+
+**Kept to the concept (challenge protocol).**
+- Hero 1's window letters keep the masked-photo concept. Poppins 700 is about a third wider than condensed Mona Sans, so the desktop size goes 128 → 120 px and phones go 84 → 66 px, with the line pitch opened to 1.27× and the sills dropped below Poppins's descenders (fs × .32). Measured: 1221 of 1392 px on desktop, 349 of 359 px on phones.
+- The large figures keep their role. Money 1's payment steps down to a 10 rem ceiling; at 400 px and below, Book 1's phone, Book 3's sentence and Built 2's card titles step down so nothing breaks its line. A fit check at 1440, 1024, 375 and 320 shows 0 text overflow and 0 document overflow. The only items it flags are Services 3's ruler ticks, which sit on an intentional off-screen tape.
+
+**Tracking and leading.** The −.03 to −.05 em tracking and sub-1 leading written for condensed Mona Sans are relaxed to −.01 / −.02 em, with 1.1 leading on headings and 1.0 on single-line figures.
+
+**AI tells removed (live versions):**
+1. The variable-axis "swell" on headings and Services 2's trade names, where weight and width followed the cursor. Removed in CSS; `fx.js` and `home.js` now run it only on backups.
+2. Proof 1's stepped, extruded text-shadow on the figures.
+3. The moving gradient sheen and the glowing radial light pool in the section background fields. The drawn courses, studs and lines stay.
+4. Cursor-halo glows: Colour's blurred rainbow conic, and the soft radial glows on Reviews, Book and Built. Each is now a drawn pattern or a plain ring.
+5. The metronome rhythm: one identical `--gap` padding on every section. Padding now varies by section, from 0.7× to 1.3×.
+6. Condensed, ultra-tight display type at 780–860 weight. It is now everyday Poppins at 700.
+
+**Not changed:** structure, layout, versions, switchers, content and facts.
+
+**Checks:**
+- facts.py: phone ×107, other phone-shaped numbers 0, K1 ×6, hours ×12, 474 in every reviews state, stars all clipped.
+- recheck.js: 225 / 0.
+- Packed file: 4,160,204 B ≤ 4,221,484 B. Fonts added about 99 KB.
+- ⟦S0095⟧ type steps, ⟦S1433⟧ type scale, ⟦S1500⟧ contrast, ⟦S0071⟧ roles.

@@ -412,3 +412,18 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
   - facts.py unchanged.
 - AUDIT-V3, TRACEABILITY and the BANK-MAP usage log are updated.
 - Sub-agents: none.
+
+## Audit feedback pack round + owner notes (30 Oct)
+- **Step 1 fix pass (owner deadline):** committed and reported. It covered:
+  - facts/P1;
+  - the winner fix lists F1–F10;
+  - the page-level fixes C;
+  - the cursor fixes D;
+  - quirks E.
+- **QA rounds 1–3:** committed (32ed85b, 3b67eae, 4d57db1). Rounds 4–10 are deferred to the next round, not cancelled.
+- **Owner design note:**
+  - Poppins (headings) + Roboto (body) replace Mona Sans on live versions; backups keep Mona Sans.
+  - De-AI pass: axis hover swell, extruded figure shadow, background sheen and glow pool, cursor glow halos, and the uniform section padding all removed.
+  - Details are in TRACEABILITY.md. Packed file: 4,160,204 B.
+- **Part G (two new versions per section):** deferred to the next round per the owner deadline.
+- Nothing is marked shipped.

@@ -190,7 +190,7 @@ def h1_mask(sid, vw, vh, lines, fs, x0, img_box):
     def txt(cls):
         return ''.join(f'<text class="{cls}" x="{x0}" y="{y}">' + ' '.join(f'<tspan>{e(w)}</tspan>' for w in ws) + '</text>' for y, ws in lines)
     ix, iy, iw, ih = img_box
-    sills = ''.join(f'<path d="M{x0} {y + fs * .16:.0f}H{vw - x0}"/>' for y, _ in lines)   # trimmed to each line's measured length at run time
+    sills = ''.join(f'<path d="M{x0} {y + fs * .32:.0f}H{vw - x0}"/>' for y, _ in lines)   # below Poppins's descenders   # trimmed to each line's measured length at run time
     return (f'<svg class="h1m-svg h1m-{sid}" viewBox="0 0 {vw} {vh}" style="--fs:{fs}px" aria-hidden="true" focusable="false"><defs>'
             f'<clipPath id="h1m-c-{sid}">{txt("h1m-t h1m-cl")}</clipPath>'
             f'<pattern id="h1m-g-{sid}" width="{fs * .5:.0f}" height="{fs * .62:.0f}" patternUnits="userSpaceOnUse"><path d="M0 .5H{fs * .5:.0f}M.5 0V{fs * .62:.0f}"/></pattern></defs>'
@@ -205,8 +205,8 @@ def hero1():
     pointer parallax 26, drift 18), proof strip above, lead + both contact paths below"""
     # Audit pack F1.3: 168 -> 128 px desktop (the photo box scales with the letters, so the framing holds); phones keep
     # four lines (three at 92 px cannot fit a 343 px measure, see TRACEABILITY) on a tighter 70-unit pitch
-    d = h1_mask('d', 1440, 284, [(114, ['Siding', 'and', 'windows,']), (242, ['priced', 'in', 'public'])], 128, 24, (-754, -437, 1903, 1189))
-    m = h1_mask('m', 375, 306, [(70, ['Siding', 'and']), (140, ['windows,']), (210, ['priced', 'in']), (280, ['public'])], 84, 8, (-369, -181, 931, 582))
+    d = h1_mask('d', 1440, 318, [(112, ['Siding', 'and', 'windows,']), (264, ['priced', 'in', 'public'])], 120, 24, (-754, -437, 1903, 1189))
+    m = h1_mask('m', 375, 326, [(58, ['Siding', 'and']), (138, ['windows,']), (218, ['priced', 'in']), (298, ['public'])], 66, 8, (-369, -181, 931, 582))   # owner design note: Poppins 700 is wider than condensed Mona Sans, so 66 px fits 359 px
     return f'''<div class="v hero-1" data-tone="ground">
   <div class="h1m-top">{pstrip()}</div>
   <h1 class="h1m"><span class="sr-only">{H1_TEXT}</span>{d}{m}</h1>
@@ -1473,7 +1473,8 @@ def head():
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#F3F2EE">
 <link rel="icon" href="assets/img/favicon.png">
-<link rel="preload" href="assets/fonts/MonaSans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/home.css">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{json.dumps(ld)}</script>

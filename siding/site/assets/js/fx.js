@@ -127,13 +127,14 @@
     el._mq[1]((e.clientY - (r.top + r.height / 2)) * 0.18);
   }
 
-  /* ---------- headings answer the passing cursor: word weight on the variable axis (S0184 split, Mona Sans wght) ---------- */
+  /* ---------- headings answer the passing cursor: word weight on the variable axis (S0184 split, Mona Sans wght).
+     Owner design note 2026-10-30: backups only; live headings are plain Poppins with no axis morphing ---------- */
   let headRAF = 0, lastHead = null;
   function heads(e) {
     if (headRAF) return;
     headRAF = requestAnimationFrame(() => {
       headRAF = 0;
-      const h = e.target.closest && e.target.closest('.sec [data-split].is-split');
+      const h = e.target.closest && e.target.closest('.sec[data-bk] [data-split].is-split');
       if (lastHead && lastHead !== h) relax(lastHead);
       lastHead = h;
       if (!h) return;

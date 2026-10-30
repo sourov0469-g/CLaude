@@ -1,6 +1,12 @@
 /* Austin Pro homepage v2. Direction: DIRECTION-HOME-V2.md. Tokens follow the Skill Pack notes:
    colour roles (S0095/S0071), type steps (S0095/S1433), motion tokens (S0652/S0410/S1465), spacing 4-based (S1432). */
+/* Owner design note (2026-10-30): headings in Poppins, body in Roboto (Google Fonts, OFL, self-hosted). Mona Sans stays
+   loaded only for the hidden backups, which are records and keep their original face. */
 @font-face { font-family: "Mona Sans"; src: url(../fonts/MonaSans-latin.woff2) format("woff2"); font-weight: 200 900; font-stretch: 75% 125%; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url(../fonts/Poppins-500-latin.woff2) format("woff2"); font-weight: 500; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Poppins"; src: url(../fonts/Poppins-600-latin.woff2) format("woff2"); font-weight: 600; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Poppins"; src: url(../fonts/Poppins-700-latin.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Roboto"; src: url(../fonts/Roboto-latin.woff2) format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
 :root {
   --ground: #F3F2EE; --ground2: #E7E5DF; --sheet: #FBFAF7; --stone: #CFCBC2; --line: #8F8A80;
@@ -8,7 +14,8 @@
   --red: #D42125; --red-d: #B5161B; --red-on-night: #EA3C39;
   /* Audit pack C.1: three role tokens join the fourteen; every other UI colour is one of the 17 or mixed from them */
   --dwg: #3B6FB6; --star: #F2C230; --tape: #8A6A3E;
-  --f: "Mona Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --fh: "Poppins", "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --t-sm: clamp(.8125rem, .79rem + .1vw, .875rem);
   --t-body: clamp(1rem, .96rem + .2vw, 1.125rem);
   --t-lead: clamp(1.125rem, 1rem + .55vw, 1.5rem);
@@ -135,7 +142,7 @@ html.js.motion [data-split]:not(.is-split) { visibility: hidden; }
 .h1m { margin: 0; }
 .h1m-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .h1m-m { display: none; }
-.h1m-t { font-family: "Mona Sans", system-ui, sans-serif; font-size: var(--fs); font-weight: 860; font-stretch: 80%; letter-spacing: -.02em; }
+.h1m-t { font-family: var(--fh); font-size: var(--fs); font-weight: 860; font-stretch: 80%; letter-spacing: -.02em; }
 .h1m-solid { fill: var(--ink); }
 .h1m-grille path { fill: none; stroke: var(--sheet); stroke-opacity: .5; stroke-width: 2.4; }
 .h1m-case { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; }
@@ -1964,3 +1971,54 @@ html.motion .sec:not([data-bk]) .fd-list:not([hidden]) { animation: fdOpen 160ms
 .cr-k { opacity: 1; }
 .sec:not([data-bk]) .rcp-l.is-off { opacity: .66; }
 .sec:not([data-bk]) .b1-pk { opacity: 1; }
+
+/* ===== Owner design note (2026-10-30): everyday type. Headings, display lines and big figures are set in Poppins
+   (--fh); body and UI in Roboto (--f). Backups keep Mona Sans through the two tokens, so they stay as recorded. ===== */
+.sec[data-bk] { --f: "Mona Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --fh: var(--f); font-family: var(--f); }
+:is(h1, h2, h3, h4, legend, .statement, .display, .h2x, .sheet a, .pchip b, .h1m-t, .h2-med > b, .h3-stats b, .ci b, .statement b, .ix-name, .ix-count b, .bud-out, .bc-none b, .bc-name, .cmp-price, .c1t-med b, .cmp-now b, .cb-big, .n1-count .num, .mx-t, .rating > b, .cr-n, .pay-big, .rcp-tot b, .bk-step legend, .bk-done-h, .b1-tel, .b1-open, .snt, .ft-big a, .p1-ghost, .rc b, .sv1-t, .tm-say b, .tape-strip .tk b, .bp-k, .ts-h, .ts-w b, .spec-r b, .dd-med b) { font-family: var(--fh); }
+/* Poppins is a normal-width face: the condensed tracking and sub-1 leading written for Mona Sans at 75-90 % width
+   are relaxed to what a designer sets Poppins at. Live versions only. */
+:is(.bk-step legend:not([data-bk] *), .h1m-t:not([data-bk] *), .display:not([data-bk] *), .mx-t:not([data-bk] *), .h2x:not([data-bk] *), .sv1-t:not([data-bk] *), .ix-name:not([data-bk] *), .bk-done-h:not([data-bk] *), .ts-h:not([data-bk] *)) { letter-spacing: -.02em; }
+:is(.sheet a:not([data-bk] *), .pchip b:not([data-bk] *), .h2-med > b:not([data-bk] *), .h3-stats b:not([data-bk] *), .ci b:not([data-bk] *), .statement b:not([data-bk] *), .ix-count b:not([data-bk] *), .bud-out:not([data-bk] *), .bc-none b:not([data-bk] *), .bc-name:not([data-bk] *), .cmp-price:not([data-bk] *), .c1t-med b:not([data-bk] *), .cmp-now b:not([data-bk] *), .cb-big:not([data-bk] *), .n1-count .num:not([data-bk] *), .rating > b:not([data-bk] *), .cr-n:not([data-bk] *), .pay-big:not([data-bk] *), .rcp-tot b:not([data-bk] *), .b1-tel:not([data-bk] *), .b1-open:not([data-bk] *), .snt:not([data-bk] *), .ft-big a:not([data-bk] *), .p1-ghost:not([data-bk] *), .rc b:not([data-bk] *), .tm-say b:not([data-bk] *), .tape-strip .tk b:not([data-bk] *), .bp-k:not([data-bk] *), .ts-w b:not([data-bk] *), .spec-r b:not([data-bk] *), .dd-med b:not([data-bk] *)) { letter-spacing: -.01em; }
+:is(h1:not([data-bk] *), h2:not([data-bk] *), h3:not([data-bk] *), .statement:not([data-bk] *)) { letter-spacing: -.015em; }
+:is(.display:not([data-bk] *), .h2x:not([data-bk] *), .ix-name:not([data-bk] *), .mx-t:not([data-bk] *), .sv1-t:not([data-bk] *), .ts-h:not([data-bk] *)) { line-height: 1.1; }
+:is(.h2-med > b:not([data-bk] *), .ci b:not([data-bk] *), .ix-count b:not([data-bk] *), .bud-out:not([data-bk] *), .bc-none b:not([data-bk] *), .cmp-price:not([data-bk] *), .c1t-med b:not([data-bk] *), .cb-big:not([data-bk] *), .n1-count .num:not([data-bk] *), .rating > b:not([data-bk] *), .pay-big:not([data-bk] *), .rcp-tot b:not([data-bk] *), .b1-tel:not([data-bk] *), .b1-open:not([data-bk] *), .ft-big a:not([data-bk] *), .p1-ghost:not([data-bk] *), .rc b:not([data-bk] *), .ts-w b:not([data-bk] *), .dd-med b:not([data-bk] *)) { line-height: 1; }
+/* the variable-axis hover swell (weight and width following the cursor) is gone on live versions: a plain face, no morphing */
+:is(.display .w, .h2x .w, .ix-name .ch):not([data-bk] *) { font-variation-settings: normal; transition: none; }
+.h3-stats b:not([data-bk] *), .rating > b:not([data-bk] *) { font-weight: 700; }
+/* Poppins sets about a third wider than Mona Sans at 75 % width: the biggest figures step down so they keep their line */
+.pay-big:not([data-bk] *) { font-size: clamp(3.25rem, 1rem + 10vw, 10rem); }
+.tape-strip .tk b:not([data-bk] *) { left: -28px; width: 56px; font-size: 1rem; }
+@media (max-width: 400px) {
+  .b1-tel:not([data-bk] *), .b1-open:not([data-bk] *) { font-size: 2rem; }
+  .snt:not([data-bk] *) { font-size: 1.375rem; }
+  .built-2 .ts-h:not([data-bk] *) { font-size: 1.5rem; hyphens: auto; }
+  .h2x:not([data-bk] *) { overflow-wrap: break-word; }
+}
+
+/* ===== Owner design note (2026-10-30): de-AI surface pass. Structure, versions, switchers, content and facts are
+   untouched; only effects that read as generated go, on the live versions and the page chrome. Backups keep theirs. ===== */
+/* 1. Proof 1's stepped "extruded" shadow on the figures: plain ink figures, as a printer would set them */
+.proof-1 .rc b:not([data-bk] *) { text-shadow: none; }
+/* 2. the moving gradient sheen and the glowing light pool in the section backgrounds: the drawn lines and studs stay,
+      the glow goes */
+.f-sheen:not([data-bk] *), .f-pool:not([data-bk] *) { display: none; }
+/* 3. cursor halo: no blurred rainbow, no soft glows. Every section's halo is a drawn pattern or a plain ring */
+.cfx[data-sec="colour"] { background: none; border: 2px solid rgba(var(--ci), .4); filter: none; -webkit-mask: none; mask: none; }
+.cfx[data-sec="colour"].is-on { opacity: 1; }
+.cfx[data-sec="built"] { background: repeating-linear-gradient(90deg, rgba(var(--ci), .16) 0 2px, transparent 2px 18px); }
+.cfx[data-sec="reviews"] { --cs: 0.5; background: none; border: 2px solid color-mix(in srgb, var(--star) 80%, var(--ink)); -webkit-mask: none; mask: none; }
+.cfx[data-sec="book"] { --cs: 0.5; background: none; border: 2px solid rgba(var(--ci), .35); -webkit-mask: none; mask: none; }
+/* 4. one identical padding on every section made a metronome. Each section now takes the room its content needs:
+      tight under the hero and around the short bands, more air before the reviews and the close */
+#proof > .stage > .v:not([data-bk] *) { padding-top: calc(var(--gap) * .7); }
+#services > .stage > .v:not([data-bk] *) { padding-bottom: calc(var(--gap) * .8); }
+#work > .stage > .v:not([data-bk] *) { padding-top: calc(var(--gap) * 1.15); }
+#built > .stage > .v:not([data-bk] *) { padding-top: calc(var(--gap) * .85); padding-bottom: calc(var(--gap) * .85); }
+#colour > .stage > .v:not([data-bk] *) { padding-bottom: calc(var(--gap) * 1.2); }
+#near > .stage > .v:not([data-bk] *) { padding-top: calc(var(--gap) * .75); padding-bottom: calc(var(--gap) * .75); }
+#reviews > .stage > .v:not([data-bk] *) { padding-top: calc(var(--gap) * 1.2); }
+#money > .stage > .v:not([data-bk] *) { padding-top: calc(var(--gap) * .9); padding-bottom: calc(var(--gap) * .9); }
+#book > .stage > .v:not([data-bk] *) { padding-bottom: calc(var(--gap) * 1.3); }
+/* 5. odometer digits sit centred in their column, so a narrow Poppins figure leaves no hole beside it */
+.odo .os > span:not([data-bk] *) { text-align: center; }
