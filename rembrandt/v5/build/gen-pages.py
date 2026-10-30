@@ -1,5 +1,5 @@
 # R4 inner pages: writes src/sections/<page>/v1-v5.html from ONE fact list per page, so the five layouts of a page carry
-# the same, traceable copy (AUDIT-R4.md §1 facts; TRACEABILITY.md "R4 pages"). Run: python3 -I build/gen-pages.py
+# the same, traceable copy (AUDIT-R4.md §1 facts; TRACEABILITY.md "R4 pages"). Run: python3 -I build/gen-pages.py [svcp about contact]
 # Every sentence below comes from the facts lock or the firm's own published lines (rembrandt-pack.md §3/§5.6, flag C12).
 # No prices, no warranties, no guarantees, no promise about insurance claims.
 import os, re, html
@@ -233,5 +233,53 @@ def ab_v5():  # magazine
 </div>
 '''
 
-write('svcp', [svc_v1, svc_v2, svc_v3, svc_v4, svc_v5])
-write('about', [ab_v1, ab_v2, ab_v3, ab_v4, ab_v5])
+# ---------------------------------------------------------------- contact (facts lock only: (937) 746-7377; Rachel
+# answers; Monday to Friday, 9 to 5; 38 N Pioneer Blvd, Springboro, OH 45066; the 24 towns from data/towns.js, filled
+# in by contact.js). No form: a form with nowhere to send would be a fake action. No "open now" claim anywhere.
+MAP = 'https://www.google.com/maps/search/?api=1&amp;query=38+N+Pioneer+Blvd+Springboro+OH+45066'
+NUM = '(937) 746-7377'
+def maplink(cls='ct-map'): return f'<a class="{cls} rx" href="{MAP}" target="_blank" rel="noopener">Open the office in Google Maps<span class="vh"> (opens in a new tab)</span></a>'
+def office(cls, hid):
+    return f'<section class="ct-office {cls}" aria-labelledby="{hid}"><h2 class="ct-h2" id="{hid}">The office</h2><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address><p>Rachel answers the phone, Monday to Friday, 9 to 5.</p>{maplink()}</section>'
+HRS = '<p class="ct-hours" data-hours>Office hours: Monday to Friday, 9 to 5.</p>'
+TSRC = '<p class="ct-src">Miles from the centre of Springboro, from US Census 2023 Gazetteer positions.</p>'
+
+def ct_v1():  # phone first
+    return f'''<div class="ct ct1">
+  <header class="ct-hero"><h1 class="ct-h1">Call Rachel.</h1><p class="ct1-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p>{HRS}<p class="ct-sub">Ask for a written, line-by-line estimate. No form to fill in: a person answers.</p></header>
+  <div class="ct1-row">{office('ct1-office', 'ct1-o')}<section class="ct1-towns" aria-labelledby="ct1-t"><h2 class="ct-h2" id="ct1-t">The 24 towns we serve</h2><ul class="ct-towns ct-towns--az" data-towns="az" role="list"></ul></section></div>
+</div>'''
+def ct_v2():  # office and towns by distance
+    return f'''<div class="ct ct2">
+  <header class="ct-hero"><h1 class="ct-h1">Where we are, and how far we go.</h1><p class="ct-sub">One office in Springboro. 24 towns around it, the farthest 24.4 miles away. Call Rachel at <a class="rx" href="{TEL}" data-c="call">{NUM}</a>.</p></header>
+  <div class="ct2-grid">{office('ct2-office', 'ct2-o')}<figure class="ct2-ring"><svg class="ct-ring" data-ring viewBox="-130 -130 260 260" role="img" aria-label="The 24 towns around Springboro, at their true distance and direction"><circle class="ct-ring-c" r="50"/><circle class="ct-ring-c" r="100"/><text class="ct-ring-t" x="4" y="-52">10 mi</text><text class="ct-ring-t" x="4" y="-102">20 mi</text><g class="ct-ring-dots"></g><path class="ct-ring-home" d="M-9 4 L0 -6 L9 4 V12 H-9 Z"/></svg><figcaption>Each dot is a town we serve, at its real distance and direction from the office.</figcaption></figure>
+  <section class="ct2-list" aria-labelledby="ct2-t"><h2 class="ct-h2" id="ct2-t">Nearest first</h2><ol class="ct-towns ct-towns--near" data-towns="near" role="list"></ol>{TSRC}</section></div>
+</div>'''
+def ct_v3():  # the week board
+    days = ''.join(f'<li class="ct3-day{" ct3-day--off" if i > 4 else ""}" data-d="{i}"><b>{d}</b><span class="ct3-bar"><i class="ct3-on"></i></span><span class="ct3-h">{"9 to 5" if i < 5 else "Closed"}</span></li>' for i, d in enumerate(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']))
+    return f'''<div class="ct ct3">
+  <header class="ct-hero"><h1 class="ct-h1">Monday to Friday, 9 to 5.</h1>{HRS}<p class="ct-sub">That's when Rachel answers <a class="rx" href="{TEL}" data-c="call">{NUM}</a>.</p></header>
+  <div class="ct3-board"><div class="ct3-scale" aria-hidden="true"><span>Midnight</span><span>9 am</span><span>5 pm</span><span>Midnight</span></div><ol class="ct3-week" role="list">{days}</ol><span class="ct3-now" aria-hidden="true" hidden><span>Now</span></span></div>
+  <div class="ct3-row">{office('ct3-office', 'ct3-o')}<section class="ct3-towns" aria-labelledby="ct3-t"><h2 class="ct-h2" id="ct3-t">Towns we serve</h2><ul class="ct-towns ct-towns--cols" data-towns="az" role="list"></ul></section></div>
+</div>'''
+def ct_v4():  # the business card
+    return f'''<div class="ct ct4">
+  <header class="ct-hero"><h1 class="ct-h1">Our card, both sides.</h1><p class="ct-sub">Everything you need to reach us fits on a business card.</p></header>
+  <div class="ct4-stage"><div class="ct4-card">
+    <div class="ct4-face ct4-front"><svg class="ct4-mark" viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg><p class="ct4-name">Rembrandt Roofing &amp; Restoration</p><p class="ct4-who">Rachel answers</p><p class="ct4-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p class="ct4-hrs">Monday to Friday, 9 to 5</p></div>
+    <div class="ct4-face ct4-back"><p class="ct4-name">The office</p><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address><p class="ct4-hrs">A family firm since 1995</p>{maplink('ct4-map')}</div>
+  </div><button class="ct4-turn rx" type="button" aria-pressed="false">Turn the card</button></div>
+  <section class="ct4-towns" aria-labelledby="ct4-t"><h2 class="ct-h2" id="ct4-t">The 24 towns we serve</h2><ul class="ct-chips" data-towns="near" role="list"></ul>{TSRC}</section>
+</div>'''
+def ct_v5():  # do we come to you?
+    return f'''<div class="ct ct5">
+  <header class="ct-hero"><h1 class="ct-h1">Do we come to you?</h1><p class="ct-sub">Type your town. We serve 24 towns around Springboro.</p></header>
+  <div class="ct5-grid"><div class="ct5-find"><label class="ct5-lab" for="ct5-in">Your town</label><input class="ct5-in" id="ct5-in" type="text" list="ct5-list" autocomplete="address-level2" spellcheck="false"><datalist id="ct5-list"></datalist><p class="ct5-out" aria-live="polite"></p></div>
+  <aside class="ct5-panel" aria-labelledby="ct5-p"><h2 class="ct-h2" id="ct5-p">Call Rachel</h2><p class="ct5-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p>Monday to Friday, 9 to 5.</p><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address>{maplink()}</aside></div>
+</div>'''
+
+import sys
+want = sys.argv[1:] or ['svcp', 'about', 'contact']
+if 'svcp' in want: write('svcp', [svc_v1, svc_v2, svc_v3, svc_v4, svc_v5])
+if 'about' in want: write('about', [ab_v1, ab_v2, ab_v3, ab_v4, ab_v5])
+if 'contact' in want: write('contact', [ct_v1, ct_v2, ct_v3, ct_v4, ct_v5])

@@ -254,11 +254,11 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 **Contact page (`contact`)**: phone, office, hours, the 24 towns (data/towns.js). No form: a form with nowhere to send would be a fake action.
 | Slot | Layout | Reference | Mechanism | Verification |
 |---|---|---|---|---|
-| 1 (default) | Phone first | [BANK] Q114 (the number in giant type) + [BANK] Harvest [114] (giant CTA shrinks to phone size) | the number as the headline (a tel link), live hours line, office card with map link, the 24 towns as a list | |
-| 2 | Office and towns by distance | ⟦S0603⟧ (tabular figures, direct labels) + [BANK] Austin Pro map (the coverage as evidence) | the office card, then all 24 towns nearest first with miles, beside a mini ring map | |
-| 3 | The week board | pack G-call (b) + ⟦S1314⟧ (no fake live state) | Springboro time, a Monday to Friday 9 to 5 week strip with "Now", the phone and the office; towns in columns | |
-| 4 | The business card | [BANK] Harvest [201] flip card | a card that turns (button, aria-pressed) from the phone and hours side to the office side; towns as chips | |
-| 5 | Do we come to you? | [BANK] ROTTLER finder + West London checker (CROWN) | an ink panel with phone, hours and office; a town field answers yes, with miles, for the 24 towns, and otherwise says to call | |
+| 1 (default) | Phone first | [BANK] Q114 (the number in giant type) + [BANK] Harvest [114] (giant CTA shrinks to phone size) | the number as the headline (a tel link), live hours line, office card with map link, the 24 towns as a list | `pageshot` 1440/375: overflow 0, one H1, errors 0; the hours line reads the Springboro clock and names no "open" state |
+| 2 | Office and towns by distance | ⟦S0603⟧ (tabular figures, direct labels) + [BANK] Austin Pro map (the coverage as evidence) | the office card, then all 24 towns nearest first with miles, beside a mini ring map | `qa/scripts/contacttest.mjs`: 23 dots + the office, 24 towns listed; errors 0 |
+| 3 | The week board | pack G-call (b) + ⟦S1314⟧ (no fake live state) | Springboro time, a Monday to Friday 9 to 5 week strip with "Now", the phone and the office; towns in columns | `contacttest.mjs`: today's row marked; "Now" line at 8.03h for a clock reading 8:02 am; first shot had the scale ignoring the hours column and the pill over the day above (fixed) |
+| 4 | The business card | [BANK] Harvest [201] flip card | a card that turns (button, aria-pressed) from the phone and hours side to the office side; towns as chips | `contacttest.mjs`: click and Enter turn it; the hidden face is inert each way |
+| 5 | Do we come to you? | [BANK] ROTTLER finder + West London checker (CROWN) | an ink panel with phone, hours and office; a town field answers yes, with miles, for the 24 towns, and otherwise says to call | Amended: an accent panel, not ink (the amended Rule 1 bans dark panels). `contacttest.mjs`: Franklin, "yellow springs" and Springboro answer yes with miles; Cincinnati says it is not on the list and to call; 24 options |
 
 **R4 Services page QA** (`pageshot.mjs`, `imgchk.mjs`; sheets `qa/r4-services-1440.jpg`, `qa/r4-services-375.jpg`):
 1. Overflow 0 and console errors 0 in all five layouts at 1440 and 375; one H1 each.

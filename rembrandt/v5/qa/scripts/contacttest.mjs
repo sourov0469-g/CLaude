@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); const errs = []; p.on('pageerror', e => errs.push(e.message));
+const F = 'file:///home/user/CLaude/rembrandt/v5/contact.html?v=';
+await p.goto(F + 'contact5'); await p.waitForTimeout(1000);
+const ask = async q => { await p.fill('.ct5-in', q); await p.waitForTimeout(100); return p.evaluate(() => [document.querySelector('.ct5-out').className.includes('is-yes'), document.querySelector('.ct5-out').textContent]); };
+console.log('v5', JSON.stringify([await ask('Franklin'), await ask('yellow springs'), await ask('Springboro'), await ask('Cincinnati'), await ask('')]));
+console.log('v5 options', await p.evaluate(() => document.querySelectorAll('#ct5-list option').length));
+await p.goto(F + 'contact4'); await p.waitForTimeout(1000);
+const st = () => p.evaluate(() => [document.querySelector('.ct4-turn').getAttribute('aria-pressed'), document.querySelector('.ct4-front').inert, document.querySelector('.ct4-back').inert]);
+const a = await st(); await p.click('.ct4-turn'); await p.waitForTimeout(700); const bb = await st(); await p.keyboard.press('Enter'); await p.waitForTimeout(700); const c = await st();
+console.log('v4 front/back', JSON.stringify([a, bb, c]));
+await p.goto(F + 'contact3'); await p.waitForTimeout(1000);
+console.log('v3', await p.evaluate(() => { const n = document.querySelector('.ct3-now'), t = document.querySelector('.ct3-day.is-today'), r = n.getBoundingClientRect(), bar = t.querySelector('.ct3-bar').getBoundingClientRect();
+  return [t.querySelector('b').textContent, !n.hidden, ((r.left - bar.left) / bar.width * 24).toFixed(2) + 'h', document.querySelector('[data-hours]').textContent]; }));
+await p.goto(F + 'contact2'); await p.waitForTimeout(1000); console.log('v2 dots', await p.evaluate(() => document.querySelectorAll('.ct-ring-dot').length), 'list', await p.evaluate(() => document.querySelectorAll('.ct2-list li').length));
+console.log('errors', errs.length ? errs : 0); await b.close();
