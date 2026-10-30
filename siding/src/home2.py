@@ -1408,7 +1408,8 @@ def with_phone(key, v):
 
 
 BK = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'backup')
-BK_SLOT = 5   # backups live in slots 6, 7, 8: Backup n = slot 5 + n (Audit pack A.2)
+BK_SLOT = 8   # MASTER DIRECTIVE Phase 5: visible versions 1-8; backups live in slots 9-14, Backup n = slot 8 + n.
+           # Backups 1-3 are the pre-audit-round versions (era a), Backups 4-6 the versions frozen before the redesign (era b)
 
 
 OLD_STARS = re.compile(r'<span class="stars" aria-hidden="true">(?:<svg viewBox="0 0 20 20"><path d="[^"]+"/></svg>){5}</span>')
@@ -1437,7 +1438,9 @@ FACT_FIX = [   # (old, new) pairs: corrections of fact or honesty that also reac
 def backups(key):
     """the pre-round versions of a section, frozen as built (backup/<key>-b<n>.html): never the default, never deleted"""
     names = open(os.path.join(BK, f'{key}-names.txt'), encoding='utf-8').read().split('|')
-    return [(BK_SLOT + n, facts_pass(open(os.path.join(BK, f'{key}-b{n}.html'), encoding='utf-8').read()), names[n - 1]) for n in (1, 2, 3)]
+    rd = lambda n: open(os.path.join(BK, f'{key}-b{n}.html'), encoding='utf-8').read()
+    # era a passes through the facts fix it always had; era b was frozen after every fix and is served byte-identical
+    return [(BK_SLOT + n, facts_pass(rd(n)) if n <= 3 else rd(n), names[n - 1]) for n in range(1, len(names) + 1)]
 
 
 EYEBROW = {'proof': 'The record', 'services': 'What we install', 'work': 'Before, after, priced', 'built': 'How it is built',
@@ -1460,8 +1463,9 @@ def section(key, label, fns, names):
     order = []
     for n, v in enumerate(vs, 1):
         order.append(f'<template data-v="{n}">{v}</template>')
-        if n <= 3:
-            order.append(f'<template data-v="{bks[n - 1][0]}" data-bk>{bks[n - 1][1]}</template>')
+        for bv, bh, _nm in bks:   # each backup sits next to the visible version it descends from (deflate window)
+            if (bv - BK_SLOT - 1) % 3 + 1 == n and n <= 3:
+                order.append(f'<template data-v="{bv}" data-bk>{bh}</template>')
     bk_names = '|'.join(nm for _n, _v, nm in bks)
     return f'''<section class="sec sec-{key}" id="{key}" data-sec="{key}" data-names="{e('|'.join(names))}" data-bk-names="{e(bk_names)}" aria-label="{label}">
   <div class="vsw-rail"><div class="vsw" role="tablist" aria-label="{label} versions"><span class="vsw-l" aria-hidden="true"><b>{label}</b> <span>{e(names[0])}</span></span>{tabs}</div></div>
@@ -1533,7 +1537,7 @@ def picks():
   <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-panel"><span>Versions</span><b class="num" data-pk-code>{code0}</b></button>
   <div class="pk-panel" id="pk-panel" role="dialog" aria-label="Versions" hidden>
     <p class="pk-h">Versions</p><p class="pk-code num" data-pk-code2>{code0}</p>
-    <p class="pk-tip">Switch any section here or with its numbered buttons. Keys 1 to 5 switch the section in view.</p>
+    <p class="pk-tip">Switch any section here or with its numbered buttons. Keys 1 to 8 switch the section in view.</p>
     <ul class="pk-list">{rows}</ul>
     <details class="pk-more"><summary>Backups: the versions from before this round</summary><ul class="pk-list">{bk_rows}</ul></details>
     <label class="pk-motion"><input type="checkbox" data-motion checked><span>Motion</span></label>

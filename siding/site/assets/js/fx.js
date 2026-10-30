@@ -134,7 +134,7 @@
     if (headRAF) return;
     headRAF = requestAnimationFrame(() => {
       headRAF = 0;
-      const h = e.target.closest && e.target.closest('.sec[data-bk] [data-split].is-split');
+      const h = e.target.closest && e.target.closest('.sec[data-bk="a"] [data-split].is-split');
       if (lastHead && lastHead !== h) relax(lastHead);
       lastHead = h;
       if (!h) return;

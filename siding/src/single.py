@@ -119,6 +119,10 @@ def build():
         return f'var({urls[k]})'
     css = re.sub(r'url\((\.\./[^)]+)\)', to_var, css)
     css = ':root{' + ';'.join(f'{v}:url("{data_uri(k)}")' for k, v in urls.items()) + '}\n' + css
+    # Phase 5 weight: comments and layout whitespace go (the source keeps them; the packed file does not need them)
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+    css = re.sub(r'\s+', ' ', css)
+    css = re.sub(r'\s*([{};])\s*', r'\1', css).replace(';}', '}')
     html = html.replace('<link rel="stylesheet" href="assets/css/home.css">', f'<style>\n{css}\n</style>')
     html = re.sub(r'<link rel="preload" href="assets/fonts/[^"]+"[^>]*>\n?', '', html)
     html = html.replace('<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">', f'<link rel="icon" href="{data_uri("assets/img/brand/favicon.svg")}" type="image/svg+xml">')
@@ -174,9 +178,17 @@ window.__apUrl=url;window.__apAsset=fill;fill(document);})();</script>
 '''
     asset_tag = '<script type="application/json" id="ap-assets">' + json.dumps({'t': types, 'd': table}, separators=(',', ':')) + '</script>\n'
     # 4. scripts inline in load order, after the asset start-up
-    scripts = ''
-    for n in [f'{j}.min.js' for j in JS] + ['lenis.min.js', 'fx.js', 'v4.js', 'home.js']:
-        scripts += f'<script>\n{script(n)}\n</script>\n'
+    # Phase 5 weight: the libraries and the site scripts travel as one deflate-raw stream and run in load order once
+    # inflated (each as its own <script> element, so they behave exactly as inline scripts at the end of the body)
+    codes = [script(n).replace('<\\/script', '</script') for n in [f'{j}.min.js' for j in JS] + ['lenis.min.js', 'fx.js', 'v4.js', 'home.js']]
+    cj = zlib.compressobj(9, zlib.DEFLATED, -15, 9)
+    zjs = cj.compress(json.dumps(codes, ensure_ascii=False, separators=(',', ':')).encode()) + cj.flush()
+    scripts = ('<script type="application/octet-stream" id="ap-js">' + base64.b64encode(zjs).decode() + '</script>\n'
+               '''<script>(function(){var el=document.getElementById('ap-js');if(!el||!window.DecompressionStream)return;
+var s=atob(el.textContent),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);
+new Response(new Blob([a]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text().then(function(t){JSON.parse(t).forEach(function(c){var x=document.createElement('script');x.textContent=c;document.body.appendChild(x);});});})();</script>
+''')
+    print(f'scripts: {sum(len(c) for c in codes)} B -> {len(zjs)} B deflated')
     html = re.sub(r'(<script src="assets/js/[^"]+" defer></script>\n)+', '', html)
     html = html.replace('</body>', asset_tag + boot + tpl_tag + tpl_boot + scripts + '</body>')
     # nothing may still point at the disk

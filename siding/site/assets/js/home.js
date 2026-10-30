@@ -3,6 +3,9 @@
    (S0400/S0652), UI under 300 ms, reveals once (S1321), pins desktop only, every drag has a key/tap path (S0070). */
 (() => {
   'use strict';
+  // Phase 5: slots 9-11 are the pre-audit backups (era a) that keep their original behaviour; 12-14 are the versions
+  // frozen before the redesign (era b), which run today's scripts unchanged
+  const OLD = s => !!s && s.v >= 9 && s.v <= 11;
   const TRAIL = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || 'currentColor';   // Rule 3: from the token
   // Phase 3 artwork: a section is marked once it scrolls into view, so its drawing can finish itself (CSS, motion only)
   if ('IntersectionObserver' in window) {
@@ -231,7 +234,7 @@
      glyphs; fine pointers only for the parallax, nothing moves under reduced motion. Words are split at run time
      from the measured layout so the clip and the casing rise together. */
   V.hero1 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 1 keeps its original sill delay and whole-hero parallax (Audit pack A.2)
+    const bk = OLD(s);   // Backup 1 keeps its original sill delay and whole-hero parallax (Audit pack A.2)
     riseIn($$('.pstrip, .h1m-foot > *', r), { delay: 0.2, duration: 0.3, stagger: 0.05 });
     const sills = svg => $$('.h1m-case text', svg).forEach((t, i) => {     // each sill runs under its own line only
       const p = $$('.h1m-sill path', svg)[i], x = +t.getAttribute('x'), y = p.getAttribute('d').split(' ')[1].split('H')[0];
@@ -329,7 +332,7 @@
      886 (anatomy F12). Count-ups at the page's one tempo (R20); 4.9 as a ring drawn to 98 % (S0197: r 40, stroke 8,
      round cap, -90 deg); credentials rise 0.1 s apart */
   V.proof1 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 1 keeps the ghost 886, the pointer extrusion and the old staggers (A.2)
+    const bk = OLD(s);   // Backup 1 keeps the ghost 886, the pointer extrusion and the old staggers (A.2)
     const ring = $('.r49-v', r), ghost = $('.p1-ghost', r);
     countUp($$('[data-count]', r), { st: el => once(el, 'top 92%') });
     if (!motionOK()) return;
@@ -364,7 +367,7 @@
   };
   /* PROOF 3: one sentence lit word by word on scroll (S1327, #292 Scroll Reveal), then the credentials press in like stamps */
   V.proof3 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 3 keeps its 0.18 floor, sash scrub and 0.12 stamp stagger (A.2)
+    const bk = OLD(s);   // Backup 3 keeps its 0.18 floor, sash scrub and 0.12 stamp stagger (A.2)
     const p = $('.statement', r);
     if (!motionOK()) return;
     const walker = d.createTreeWalker(p, NodeFilter.SHOW_TEXT);
@@ -419,7 +422,7 @@
      total counter (01 of 11) in the intro column following the row you point at or tab to. Trade names answer the
      cursor on Mona Sans's weight and width axes (variable axes); a photo follows the pointer (S1321 hover zoom). */
   V.services2 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 2 keeps its 0.45 s peek (A.2)
+    const bk = OLD(s);   // Backup 2 keeps its 0.45 s peek (A.2)
     const list = $('.ix', r), rows = $$('.ix-row', r), now = $('[data-ix-now]', r);
     rows.forEach((row, k) => { const set = () => { now.textContent = String(k + 1).padStart(2, '0'); }; b.on(row, 'pointerenter', set); b.on(row, 'focus', set); });
     // v4 K72 edge-aware band: the hover band grows from the edge the pointer came in through
@@ -471,7 +474,7 @@
      lights up. Nothing plays on arrival: the tape rests at $15,000 until the visitor pulls it. Keys: arrows $500
      (Shift $5,000), Page Up/Down $5,000, Home/End; a key move travels in 0.24 s. The end hook catches at either end. */
   V.services3 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 3 keeps the $50k tape with no inertia (A.2)
+    const bk = OLD(s);   // Backup 3 keeps the $50k tape with no inertia (A.2)
     const tape = $('.tape', r), strip = $('.tape-strip', r), band = $('.tape-band', r), list = $('.tm-list', r), rows = $$('.tm-t', r), hook = $('.tape-hook', r);
     const vOut = $('[data-tm-v]', r), nOut = $('[data-tm-n]', r);
     const MAX = +(tape.dataset.max || 50000), STEP = 500, K = MAX / 1000;
@@ -530,7 +533,7 @@
     /* Audit pack F4 V1: the value is the share of the AFTER photo showing (0 = all before, 100 = all after) and the
        after sits left of the line, so the arrow keys move the line the way they read. Rest is v = 100: one complete
        finished house. Backup 1 keeps the before-share mapping and its 50/50 rest. */
-    const ab = !(s && s.v > 5), REST = ab ? 100 : 50;
+    const ab = !OLD(s), REST = ab ? 100 : 50;
     const fig = $('.cmp', r), A = $('.cmp-a', fig), B = $('.cmp-b', fig), h = $('.cmp-handle', fig), info = $('.cmp-info', r);
     const P = JSON.parse($('.pairs-data', r).textContent);
     const panes = $$('.pane', fig);
@@ -584,7 +587,7 @@
      Photos swap only under the drawing. The visitor runs it: "Run the survey" or a job number plays that job once
      (no auto-advance, F17 / AUDIT-V3 G6). */
   V.work2 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 2 replays the full survey on every switch (A.2)
+    const bk = OLD(s);   // Backup 2 replays the full survey on every switch (A.2)
     const P = JSON.parse($('.pairs-data', r).textContent), fig = $('.bp-fig', r), run = $('.bp-run', fig);
     const B = $('.bp-b', fig), Pl = $('.bp-p', fig), A = $('.bp-a', fig), dim = $('.bp-dim', fig), dimT = $('[data-bp-dim]', fig);
     const kEl = $('[data-bp-k]', r), nmEl = $('[data-bp-name]', r), fxEl = $('[data-bp-fix]', r), tabs = $$('.bp-step', r);
@@ -638,7 +641,7 @@
     load(0); S.a = motionOK() && bk ? 0 : 100; S.c = motionOK() && bk ? 0 : 100; paint();   // F4: rest is the finished wall
   };
   V.work3 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 3 keeps its 0.06 s stagger and ±43 px columns (A.2)
+    const bk = OLD(s);   // Backup 3 keeps its 0.06 s stagger and ±43 px columns (A.2)
     $$('.sp-fig', r).forEach(fig => {
       const btn = $('.sp-toggle', fig);
       b.on(btn, 'click', () => { const on = fig.classList.toggle('is-before'); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Show after' : 'Show before'; });
@@ -668,7 +671,7 @@
      35 ms stagger, outermost leaves first and closes last; the selected layer is the one lit part, the rest step
      down; it moves only when asked (no idle tour, F17); transforms removed at rest. */
   V.built1 = (r, b, s0) => {
-    const bk = s0 && s0.v > 5, SPREAD = bk ? 1 : 2.2;   // F5 V1: the explode reads as apart (offsets x2.2); Backup 1 keeps 1x
+    const bk = OLD(s0), SPREAD = bk ? 1 : 2.2;   // F5 V1: the explode reads as apart (offsets x2.2); Backup 1 keeps 1x
     const svg = $('svg.iso', r), asm = $$('.asm', svg), btns = $$('.lg-b', r), ex = $('[data-explode]', r), read = $('[data-readout]', r);
     const R = JSON.parse($('.b1x-data', r).textContent), ORDER = ['trim', 'siding', 'wrap', 'sheath', 'studs'];
     const sp = {};
@@ -719,7 +722,7 @@
      trapped). On desktop, as the next card travels from 78 % to 24 % of the viewport, the covered card settles back:
      scale toward 0.92 (+0.015 per index), opacity 0.72, 24 px up, scrubbed linearly (parameter library). */
   V.built2 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 2 keeps the five-card stack and the 0.6 s / 0.08 s diagrams (A.2)
+    const bk = OLD(s);   // Backup 2 keeps the five-card stack and the 0.6 s / 0.08 s diagrams (A.2)
     // v4: each card's test diagram draws as the card arrives (F5.4: 0.28 s, 0.03 s apart; final drawing without motion)
     if (motionOK()) $$('.tx-d', r).forEach(dg => { const ps = $$('path', dg); if (!ps.length) return; G.fromTo(ps, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: bk ? 0.6 : 0.28, ease: 'power2.out', stagger: bk ? 0.08 : 0.03, scrollTrigger: once(dg, 'top 85%') }); });
     const cards = $$(bk ? '.ts-card' : '.ts > .ts-card', r);
@@ -741,7 +744,7 @@
     const setStyle = (style, anim) => {
       svg.setAttribute('viewBox', frameFor(style));
       lap.toggleAttribute('hidden', style !== 'lap'); bb.toggleAttribute('hidden', style !== 'bb');
-      rows.forEach(rw => { if (rw.closest('.sec[data-bk]')) rw.hidden = rw.dataset.set !== style; else rw.classList.toggle('is-off', rw.dataset.set !== style); });
+      rows.forEach(rw => { if (rw.closest('.sec[data-bk="a"]')) rw.hidden = rw.dataset.set !== style; else rw.classList.toggle('is-off', rw.dataset.set !== style); });
       const to = style === 'lap' ? morph.dataset.lap : morph.dataset.bb;
       if (anim && motionOK() && window.MorphSVGPlugin) G.to(morph, { morphSVG: { shape: to, type: 'linear', map: 'position' }, duration: UI, ease: 'power2.inOut', overwrite: true });
       else morph.setAttribute('d', to);
@@ -850,7 +853,7 @@
     radios(parts, b, it => { part = it.dataset.part; say(); });
     /* F6 V1.4: the colour blooms as a circle from the middle of the part it lands on (Backup 1 keeps the left wipe) */
     const MID = { body: [0.6, 0.62], gable: [0.75, 0.22], trim: [0.5, 0.42] };
-    const from = z => { if (s0 && s0.v > 5) return {}; const m = MID[z], rc = frame.getBoundingClientRect(); return { x: m[0] * rc.width, y: m[1] * rc.height }; };
+    const from = z => { if (OLD(s0)) return {}; const m = MID[z], rc = frame.getBoundingClientRect(); return { x: m[0] * rc.width, y: m[1] * rc.height }; };
     radios(chips, b, it => { pick = it; if (src === 'job') S.paint(part, it.dataset.hex, from(part)); else queue(); say(); }, '.sw');
   };
 
@@ -1020,7 +1023,7 @@
     b.add(() => cancelAnimationFrame(raf));
   }
   V.near1 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 1 keeps the count-up and the plain finder (A.2)
+    const bk = OLD(s);   // Backup 1 keeps the count-up and the plain finder (A.2)
     const svg = $('.map-svg', r), M = MapView(svg), cnt = $('[data-count]', r), when = $('[data-when]', r);
     const TD = bk ? null : JSON.parse($('.n1-data', r).textContent), pay = $('.n1-pay', r);
     const when0 = when.textContent;
@@ -1104,7 +1107,7 @@
   /* NEAR 3: KBF's Neighborhood Drive. Pick a place (radio chips): the job map flies in to it (viewBox tween, 0.8 s
      power3.inOut), its photographed pins light, and the chapter rail shows only the jobs photographed there. */
   V.near3 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 3 keeps its two-leg 0.6 s fly (A.2)
+    const bk = OLD(s);   // Backup 3 keeps its two-leg 0.6 s fly (A.2)
     const D = JSON.parse($('.dv-data', r).textContent), svg = $('.dv-svg', r), M = MapView(svg), rail = $('[data-dv-rail]', r), kEl = $('[data-dv-k]', r), cap = $('[data-dv-cap]', r);
     const view = t => { const w = 170, h = 192; const x = clamp(t.x - w / 2, 0, 566 - w), y = clamp(t.y - h / 2, 0, 640 - h); return `${x.toFixed(1)} ${y.toFixed(1)} ${w} ${h}`; };
     let tw = null;
@@ -1155,7 +1158,7 @@
      drops away from the new one (0.16 s) while the words step in 0.03 s apart. Arrows, the buttons or a sideways
      swipe; position is the lit pane, never a number. */
   V.reviews2 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 2 keeps the marked names and the plain carousel (A.2)
+    const bk = OLD(s);   // Backup 2 keeps the marked names and the plain carousel (A.2)
     const ALL = JSON.parse($('.dh-data', r).textContent), fig = $('.dh', r), q = $('.dh-q', r), sash = $('.dh-sash', r), pips = $$('.pp', r), cap = $('[data-dh-cap]', r);
     const COUNT = { Kevin: 9, Garrett: 8, Tracy: 4, 'Paul Hale': 3, 'Paul Schantz': 2, Taylor: 2, Jake: 1, Jerry: 1, Maria: 1, Shorty: 1 };   // CREW_COUNT, home2.py
     let Q = ALL, i = 0, busy = false;
@@ -1283,7 +1286,7 @@
      two are boxes. Offers add, as the firm's example does (10 + 5 + 10 = 25 %). When the total changes, a pen line
      strikes the old figure (0.15 s) and the new one is written in from the left (0.15 s). */
   V.money3 = (r, b, s) => {
-    const bk = s && s.v > 5;   // Backup 3 keeps its pre-ticked boxes and its undated Holiday line (A.2)
+    const bk = OLD(s);   // Backup 3 keeps its pre-ticked boxes and its undated Holiday line (A.2)
     const amt = $('.rcp-amt input', r), boxes = $$('.rcp-opts input', r), now = $('[data-now]', r), pen = $('.rcp-strike path', r);
     const save = $('[data-save]', r), list = $('[data-list]', r), lines = { 5: $('[data-line="5"]', r), p: $('[data-line="p"]', r), h: $('[data-line="h"]', r) }, capNote = $('#rcp-capnote', r);
     /* F9 V3.1: Holiday Savings applies only on contracts signed through Nov 30, 2026, Austin time */
@@ -1401,7 +1404,7 @@
     const cv = $('.b1-folds', r); if (cv) folds(cv, r, b);
     const open = $('.b1-open', r), panel = $('#b1-panel', r), pre = Form($('form', r), b);
     const toggle = (on, focus) => {
-      open.setAttribute('aria-expanded', on); panel.hidden = !on; open.textContent = on ? 'hide the form' : (s.v > 5 ? 'Book free inspection online' : 'book online');
+      open.setAttribute('aria-expanded', on); panel.hidden = !on; open.textContent = on ? 'hide the form' : (OLD(s) ? 'Book free inspection online' : 'book online');
       if (on && motionOK()) G.fromTo(panel, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: UI, ease: ease.out, overwrite: true });
       if (on && focus) { const f = $('input', panel); if (f) f.focus({ preventScroll: true }); }
     };
@@ -1421,7 +1424,7 @@
   /* BOOK 3: Q413 Tequila's conversational form: one sentence with inline fields. Validated on Send, then live while
      fixing (S0661); the errors are listed in plain words under the sentence and the first bad field takes focus. */
   V.book3 = (r, b, s) => {
-    const bk = s.v > 5;
+    const bk = OLD(s);
     /* F10 V3.4: each blank answers in its own way, transform/opacity/dash only, each under 0.3 s: the name's line
        draws left to right (dashoffset, 0.18 s); the ZIP fills five ticks, one per digit; the phone line settles in one
        0.16 s scaleX from the end you typed at. Backup 3 keeps the shared chalk pluck. */
@@ -1487,7 +1490,7 @@
   /* Audit pack A.2/A.3: visible versions 1-5 are tabs; Backups 1-3 (the pre-round versions) are slots 6-8, reachable
      from the Versions panel and ?v=, never the default. A backup runs its original script: V.<key>(n+5) when a
      version's script changed this round, else V.<key>n. */
-  const BKS = 5, CODE = { hero: 'H', proof: 'P', services: 'S', work: 'W', built: 'B', colour: 'C', near: 'N', reviews: 'R', money: 'M', book: 'Bk' };
+  const BKS = 8, CODE = { hero: 'H', proof: 'P', services: 'S', work: 'W', built: 'B', colour: 'C', near: 'N', reviews: 'R', money: 'M', book: 'Bk' };
   const SECS = $$('.sec').map(el => ({ el, key: el.dataset.sec, stage: $('.stage', el), tabs: $$('.vsw-b', el), label: $('.vsw-l span', el), names: el.dataset.names.split('|'), bkNames: (el.dataset.bkNames || '').split('|'), tpl: Object.fromEntries($$('template', el).map(t => [+t.dataset.v, t])), v: 1, b: null, ctx: null, api: {}, switched: false }));
   const BY = Object.fromEntries(SECS.map(s => [s.key, s]));
 
@@ -1503,14 +1506,15 @@
       if (window.__apAsset) window.__apAsset(s.stage);
     }
     const bk = v > BKS;
-    s.v = v; s.el.dataset.v = v; s.el.toggleAttribute('data-bk', bk);
+    s.v = v; s.el.dataset.v = v;
+    if (bk) s.el.setAttribute('data-bk', v <= 11 ? 'a' : 'b'); else s.el.removeAttribute('data-bk');
     s.tabs.forEach(t => { const on = +t.dataset.v === v; t.setAttribute('aria-selected', on); t.tabIndex = on || (bk && +t.dataset.v === 1) ? 0 : -1; });
     if (bk) { s.stage.removeAttribute('aria-labelledby'); s.stage.setAttribute('aria-label', `${s.el.getAttribute('aria-label')}, backup ${v - BKS}`); }
     else { s.stage.removeAttribute('aria-label'); s.stage.setAttribute('aria-labelledby', s.tabs[v - 1].id); }
     s.label.textContent = bk ? `Backup ${v - BKS}: ${s.bkNames[v - BKS - 1]}` : s.names[v - 1];
     const vr = s.stage.firstElementChild;
     s.b = bag();
-    const run = () => { heads(vr, s); const fn = V[s.key + v] || (bk ? V[s.key + (v - BKS)] : null); if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
+    const run = () => { heads(vr, s); const fn = bk ? V[s.key + ((v - BKS - 1) % 3 + 1)] : V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
     /* K11: every scroll entrance a version sets up plays at reveal level (each element 0.3 s at most, staggers scaled
        with it); tweens marked data: 'k10' (data the visitor reads, and Work 1's sweep) keep their tempo */
     const cap = () => { if (!s.ctx || !s.ctx.getTweens) return; s.ctx.getTweens().forEach(t => { if (t.scrollTrigger && t.vars.data !== 'k10' && (t.vars.duration || 0) > REVEAL) t.timeScale(t.vars.duration / REVEAL); }); };
@@ -1518,7 +1522,7 @@
       if (G) { s.ctx = G.context(() => {}); s.ctx.add(run); cap(); } else run();
     } catch (err) { console.error(s.key + v, err); }
   }
-  const code = () => SECS.map(s => s.v).join('');
+  const code = () => SECS.map(s => s.v.toString(16)).join('');   // one character a section: 1-8 visible, 9 and a-e backups
   const pretty = () => SECS.map(s => CODE[s.key] + (s.v > BKS ? 'b' + (s.v - BKS) : s.v)).join(' ');   // D.7: never 3-3-4
   const okV = (s, v) => !!s.tpl[v];
   function save() {
@@ -1547,9 +1551,9 @@
     });
   });
 
-  /* keys 1 to 5 switch the section in view; never inside fields or with modifiers */
+  /* keys 1 to 8 switch the section in view; never inside fields or with modifiers */
   d.addEventListener('keydown', e => {
-    if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || !/^[1-5]$/.test(e.key)) return;
+    if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || !/^[1-8]$/.test(e.key)) return;
     const t = e.target;
     if (t.closest && t.closest('input, textarea, select, [contenteditable="true"], [role="slider"]')) return;
     const mid = window.innerHeight * 0.45;
@@ -1628,8 +1632,8 @@
   /* boot: picks from ?v=, then saved picks, else all version 1 */
   let picks = null;
   try { picks = new URL(location.href).searchParams.get('v'); } catch (e) { picks = null; }
-  if (!/^[1-8]{10}$/.test(picks || '')) picks = store.get('ap-picks');
-  if (!/^[1-8]{10}$/.test(picks || '')) picks = '1111111111';
+  if (!/^[1-9a-e]{10}$/.test(picks || '')) picks = store.get('ap-picks');
+  if (!/^[1-9a-e]{10}$/.test(picks || '')) picks = '1111111111';
   lenisSync(); syncFx();
   /* single-file build: the templates arrive compressed (window.__apTpl). Version 1 is already in each stage, so the
      page reads complete before they land; anything else mounts once they are restored. */
@@ -1637,7 +1641,7 @@
   SECS.forEach(s => mount(s, 1, true));
   ready.then(ok => {
     if (ok === false) { SECS.forEach(s => s.tabs.forEach(t => { if (t.dataset.v !== '1') t.hidden = true; })); return; }
-    SECS.forEach((s, k) => { const v = +picks[k]; if (v !== 1 && okV(s, v)) { s.switched = false; mount(s, v); } });
+    SECS.forEach((s, k) => { const v = parseInt(picks[k], 16); if (v !== 1 && okV(s, v)) { s.switched = false; mount(s, v); } });
     syncPicks();
     if (ST) ST.refresh();
   });
