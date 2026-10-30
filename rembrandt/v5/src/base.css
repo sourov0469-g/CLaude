@@ -237,6 +237,8 @@ html.cmp-on .cmp{display:block}
 .ftr-k{color:var(--on-blue-muted);font-weight:700}
 .ftr a{color:#fff;font-weight:700}
 @media (max-width:640px){.ftr{padding-bottom:calc(48px + var(--mbar))}}
+/* R3 footer (⟦S1498⟧ balance): on wide screens the logo sits left and the four NAP pairs run as one row across the rest */
+@media (min-width:900px){.ftr-in{flex-wrap:nowrap}.ftr-nap{flex:1 1 0;max-width:none;grid-template-columns:max-content max-content max-content minmax(0,1fr);grid-template-rows:auto auto;grid-auto-flow:column;gap:6px clamp(28px,4vw,64px)}}
 /* footer (rendered by the call section) */
 .foot{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;padding:28px var(--gutter) 40px;font-size:var(--t-small)}
 .foot img{width:132px;height:auto}
@@ -294,10 +296,11 @@ html.cmp-on .cmp{display:block}
 .ch-up.is-press .ch-ladder{opacity:1;translate:0 0}
 .ch-up.is-press .ch-l-rung{animation:ch-rung .45s var(--ease-x) calc(var(--i) * 70ms) both}
 @keyframes ch-rung{0%,100%{stroke:#fff}40%{stroke:var(--sun)}}
-.ch-ftel{position:relative;display:inline-block}
+.ch-ftel{position:relative;display:inline-block;justify-self:start;align-self:start} /* R3 footer: the bead spans the number, not the column */
 /* R06 footer phone: a bead of sealant draws under the number; press tools it flat */
 .ch-bead{left:0;top:100%;width:100%;height:8px}
-.ch-bead path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .3s var(--ease-x)}
+.ch-bead path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:100;stroke-dashoffset:100;opacity:0;transition:stroke-dashoffset .3s var(--ease-x),opacity 0s .3s}
+:is(.ch-ftel:hover,.ch-ftel:focus-visible,.ch-ftel.is-press) .ch-bead path{opacity:1;transition:stroke-dashoffset .3s var(--ease-x),opacity 0s} /* R3: no resting cap dot */
 @media (hover:hover) and (pointer:fine){.ch-ftel:hover .ch-bead path{stroke-dashoffset:0}}
 .ch-ftel:focus-visible .ch-bead path{stroke-dashoffset:0}
 .ch-ftel.is-press .ch-bead path{stroke-dashoffset:0}

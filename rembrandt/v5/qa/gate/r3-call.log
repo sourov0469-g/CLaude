@@ -1,0 +1,72 @@
+# r3qa call 1-5
+call v1 @320: h 1151 els 50 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+call v2 @320: h 681 els 32 ov 0 heads H2:32/700/C caps[] lowc[(937) 746-7377(1.72)] clip[] small[] err 0
+call v3 @320: h 645 els 40 ov 0 heads H2:32/700 caps[] lowc[] clip[(937) 746-7377|Rachel answers|(937) 746-7377|Monday to Friday] small[] err 0
+call v4 @320: h 1056 els 54 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+call v5 @320: h 1038 els 54 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+call v1 @375: h 1106 els 50 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+call v2 @375: h 720 els 32 ov 0 heads H2:32/700/C caps[] lowc[(937) 746-7377(1.72)] clip[] small[] err 0
+call v3 @375: h 585 els 40 ov 0 heads H2:32/700 caps[] lowc[] clip[(937) 746-7377|Rachel answers|(937) 746-7377|Monday to Friday] small[] err 0
+call v4 @375: h 1056 els 54 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+call v5 @375: h 1013 els 54 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+call v1 @768: h 857 els 50 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+call v2 @768: h 852 els 32 ov 0 heads H2:38/700/C caps[] lowc[(937) 746-7377(1.72)] clip[] small[] err 0
+call v3 @768: h 549 els 40 ov 0 heads H2:38/700 caps[] lowc[] clip[(937) 746-7377|Rachel answers|(937) 746-7377|Monday to Friday] small[] err 0
+call v4 @768: h 1001 els 54 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+call v5 @768: h 858 els 54 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+call v1 @1024: h 798 els 50 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+call v2 @1024: h 902 els 32 ov 0 heads H2:44/700/C caps[] lowc[(937) 746-7377(1.72)] clip[] small[] err 0
+call v3 @1024: h 632 els 40 ov 0 heads H2:44/700 caps[] lowc[] clip[(937) 746-7377|Rachel answers|(937) 746-7377|Monday to Friday] small[] err 0
+call v4 @1024: h 826 els 54 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+call v5 @1024: h 653 els 54 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+call v1 @1440: h 895 els 50 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+call v2 @1440: h 981 els 32 ov 0 heads H2:48/700/C caps[] lowc[(937) 746-7377(1.72)] clip[] small[] err 0
+call v3 @1440: h 772 els 40 ov 0 heads H2:48/700 caps[] lowc[] clip[(937) 746-7377|Rachel answers|(937) 746-7377|Monday to Friday] small[] err 0
+call v4 @1440: h 881 els 54 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+call v5 @1440: h 700 els 54 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+call v1 @1440 rm: h 895 els 50 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+call v2 @1440 rm: h 981 els 32 ov 0 heads H2:48/700/C caps[] lowc[(937) 746-7377(1.72)] clip[] small[] err 0
+call v3 @1440 rm: h 772 els 40 ov 0 heads H2:48/700 caps[] lowc[] clip[Rachel answers|(937) 746-7377|Monday to Friday] small[] err 0
+call v4 @1440 rm: h 881 els 54 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+call v5 @1440 rm: h 700 els 54 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+# callR
+ok   V1 rm word clip inset(0px 0px 52%)
+ok   V1 motion word end clip inset(0px 0px 52%)
+ok   V2 @320 number 79% of the disc, colour rgb(11, 31, 77) on sun
+ok   V2 @375 number 66% of the disc, colour rgb(11, 31, 77) on sun
+ok   V2 @1440 number 75% of the disc, colour rgb(11, 31, 77) on sun
+ok   V3 @320 number item 317px <= 320
+ok   V3 @375 number item 371px <= 375
+ok   V3 @1440 number item 1237px <= 1440
+ok   V3 @375 rm number item 371px <= 375, shown at 0..371
+ok   V3 rm full number in view
+ok   V3 @1440 rm number item 1237px <= 1440, shown at 0..1237
+ok   V3 rm full number in view
+ok   V4 display builds to (937) 746-7377 in 10 steps
+ok   V4 key gaps ms 103,82,98,83,83,100,83,100,83
+ok   V4 after dial: pill opacity 1, dialing false
+ok   V4 dials once (re-entry keeps "(937) 746-7377")
+ok   V4 rm: "(937) 746-7377", pill 1, pad aria-hidden true
+ok   V5 2026-10-30T04:43:00-04:00: 4:43 am Friday in Springboro | That is outside office hours. Rachel is back today at 9. | mark on Fri at 19.65%, tag in track true
+ok   V5 2026-10-28T10:05:00-04:00: 10:05 am Wednesday in Springboro | That is within office hours. | mark on Wed at 42.01%, tag in track true
+ok   V5 2026-10-31T12:00:00-04:00: 12:00 pm Saturday in Springboro | That is outside office hours. Rachel is back Monday at 9. | mark on Sat at 50%, tag in track true
+ok   V5 2026-10-30T17:00:00-04:00: 5:00 pm Friday in Springboro | That is outside office hours. Rachel is back Monday at 9. | mark on Fri at 70.83%, tag in track true
+ok   V5 2026-10-29T18:30:00-04:00: 6:30 pm Thursday in Springboro | That is outside office hours. Rachel is back tomorrow at 9. | mark on Thu at 77.08%, tag in track true
+ok   V5 2026-10-27T23:10:00-04:00: 11:10 pm Tuesday in Springboro | That is outside office hours. Rachel is back tomorrow at 9. | mark on Tue at 96.53%, tag in track true
+ok   V5 no running CSS animation (no pulse)
+ok   footer @900: bead 103 vs text 103, key rows 1, overlaps 0
+ok   footer @1024: bead 103 vs text 103, key rows 1, overlaps 0
+ok   footer @1440: bead 103 vs text 103, key rows 1, overlaps 0
+ok   footer @375: bead 103 vs text 103, key rows 4, overlaps 0
+FAILS 0
+# occl
+call v1 @1440: 15 steps, overlaps 0
+call v2 @1440: 16 steps, overlaps 0
+call v3 @1440: 14 steps, overlaps 0
+call v4 @1440: 15 steps, overlaps 0
+call v5 @1440: 14 steps, overlaps 0
+call v1 @620: 16 steps, overlaps 0
+call v2 @620: 15 steps, overlaps 0
+call v3 @620: 12 steps, overlaps 0
+call v4 @620: 16 steps, overlaps 0
+call v5 @620: 15 steps, overlaps 0

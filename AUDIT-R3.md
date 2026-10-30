@@ -549,3 +549,71 @@ The ground is --ink (C2). V3 is already ink; V1 (light) and V2 (white) move to i
 - **What it is:** the towns grouped into the eight compass directions from Springboro, each a short list sorted by miles under an arrow turned to its bearing.
   - An empty direction says so.
   - The office sits in the centre cell.
+
+## F7 / G: Call and Footer (written before the Call code)
+
+The ground is --blue (C2), the page's close. V2's dusk gradient and V3's white move to it.
+
+### Winner V1 Gutter close (keep)
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| 1 | A bordered office-status panel in the right column (the live line plus the hours) | ACCEPT | ⟦S1498⟧ (balance) ⟦S1314⟧. The live line is computed from Springboro time and never says "open now" (a holiday could make that untrue). That rule stands. |
+| 2 | Delete the full-width gutter bar; keep the drip or a short left segment | ACCEPT, short segment | ⟦S1314⟧ Removal Test. The gutter shrinks to a segment over the call button, so the drop still falls to it. |
+| 3 | Drop the "The next step" kicker | ACCEPT | C1. |
+| 4 | Mobile: .cl1-word bottom padding = the bar height at ≤899px | ACCEPT | It is var(--mbar), plus 12px. |
+| 5 | Reduced motion rests the giant word in its FINAL filled state | VERIFIED | See F7.5 below. |
+| 6 | Call :active scale(.97) over ~60ms | ACCEPT | ⟦S0063⟧. |
+| (D2) | data-c="addr" on the address link | | |
+
+**F7.5, the giant word under reduced motion.**
+- The word's final state is the lower 48% filled (the clip-path inset(0 0 52% 0) that the entrance tween ends on).
+- That same inset is the CSS default. Under reduced motion no tween runs, so the word rests in exactly the final state ⟦S1314 §8⟧ (reduced motion is a stable final state).
+- Checked in QA.
+
+### V2 House morph (weak)
+| Point | Verdict | Reason |
+|---|---|---|
+| "Rebuild only as a NEW version" (with G (a): "V2 sun-disc rebuilt under the F7-V2 rules") | REJECT the slot move | See F7-V2 below. |
+| Solid card full-width below the stage; number ≥25% of the disc diameter; card shows only what is new; drop the morph; buzz ≤.24s; one ring ≤.6s; card reveal ≤.3s | ACCEPT | ⟦S0063⟧ ⟦S1499⟧. The card lists only Office and Estimates; the hours and phone are already on the stage. |
+| (C2) | | Blue ground. |
+
+**F7-V2, why the rebuild stays in slot 2.** A rebuilt V2 in a new slot would be a variation, which A3 forbids. So the F7-V2 rules are applied to V2 in place, and slots 4 and 5 hold new concepts.
+
+### V3 Number marquee (heavy fix)
+| Point | Verdict | Reason |
+|---|---|---|
+| Top zone takes the page blue | ACCEPT | C2. The whole version is blue. |
+| The full number must fit the viewport at 375 and 1440 (cap the size; crawl or static, 20s+ loop); if it can't fit, it doesn't ship | ACCEPT | See F7-V3 below. |
+| The band is not a link (aria-hidden) | ACCEPT | ⟦S1314 §7⟧. The pill above is the one action. |
+| Shine ≤.3s or remove | REMOVE | Removal Test. |
+| Smoke once on entry | ACCEPT | |
+| The reduced-motion frame shows the full number | ACCEPT | |
+| End state: headline, sub, pill, band | ACCEPT | |
+
+**F7-V3, fitting the number.**
+- The number sets at min(12vw, 150px) so "(937) 746-7377" fits whole within the viewport width. (The first figure, min(13vw, 160px), measured 402px at 375, wider than the screen; corrected in QA round 4.)
+- The crawl runs a 24s loop, so every item is fully readable each pass ⟦S1314 §8⟧ (a marquee must not hide content).
+- The number is also static text in the sub.
+
+### New versions
+| Pack's direction | Verdict | Built |
+|---|---|---|
+| (a) The V2 sun disc rebuilt under the F7-V2 rules | REJECT as a new slot | See F7-V2 above. Built instead: **V4 "The keypad"**. |
+| (b) Built entirely on the live office-status panel | ACCEPT | **V5 "Office status"**. |
+
+**V4 "The keypad":**
+- **What it is:** a phone keypad, an artefact of the action ⟦S0095⟧. On entry it dials 937 746 7377 once: each key lights in turn, 90ms apart. Then the Call button and the number settle beside it ⟦S1448⟧ (micro-interaction spec, one purposeful sequence).
+- **Accessibility:** the keys are aria-hidden decoration. The real tel: link is the action.
+- **Reduced motion:** the keypad rests with the number shown.
+
+**V5 "Office status":**
+- **What it is:** the live line made the whole close. Springboro's current time and day, a Monday-to-Friday 9-to-5 week strip with "now" marked on it, and a plain statement of whether that time falls inside the hours.
+- **Truth limits ⟦S1314⟧:** never "open now"; no pulsing dot pretending to be live (⟦S1314 §7⟧); computed from the real clock and recomputed every minute.
+
+### Footer (fix)
+| Point | Verdict | Reason |
+|---|---|---|
+| Content perfect; add nothing | ACCEPT | |
+| Rebalance the desktop width (~55% dead beside the right-pinned NAP) | ACCEPT | ⟦S1498⟧. The logo stays left; the four NAP pairs run as a four-column row across the remaining width. |
+| The phone's bead-wave underline sized to the link width | ACCEPT | It spans the text only, not a fixed 100px. |
+| The giant scroll-fill word belongs to Call V1 | ACCEPT | It stays in V1 and is not repeated in the footer. |
