@@ -1,0 +1,10 @@
+hero b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+proof b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+svc b1:BAD(1,) b2:BAD(1,) b3:BAD(1,) b4:ok b5:ok b6:ok b7:ok b8:ok
+work b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+family b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+how b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+storm b1:BAD(1,) b2:BAD(1,) b3:BAD(1,) b4:ok b5:ok b6:ok b7:ok b8:ok
+area b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+call b1:ok b2:ok b3:ok b4:ok b5:ok b6:ok b7:ok b8:ok
+BAD 6

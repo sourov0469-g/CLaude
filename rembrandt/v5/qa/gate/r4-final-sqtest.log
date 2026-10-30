@@ -1,0 +1,5 @@
+start {"n":"16.8","pit":"6","len":"50","wid":"30","d":"M70 200 L260 141.1 L450 200 Z"} expect 16.8
+drag up -> pitch 12, 21.2 squares (expect 21.2), roof M70 200 L260 82.2 L450 200 Z
+80x40 -> 45.3 (expect 45.3)
+keyboard to min pitch 3 -> 33.0 (expect 33.0)
+errors 0

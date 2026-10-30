@@ -1,0 +1,14 @@
+R4 final gate, token check (live sources; backups and frozen helpers are byte-kept records and excluded)
+declared colour tokens in base.css :root: 20
+hex literals outside :root: 51
+  not a token value: #000 sections/family/family.css :: .fm3-deck--hi{inset:auto;left:0;top:0;width:440px;height:440px;will-change:transform;opacity:0;-webkit-mask-im
+  not a token value: #000 sections/family/family.css :: .fm3-deck--hi{inset:auto;left:0;top:0;width:440px;height:440px;will-change:transform;opacity:0;-webkit-mask-im
+  not a token value: #000 sections/proof/proof.js :: x.font = `800 ${fs}px Poppins, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = '
+  not a token value: #171 sections/hero/hero.js :: // v2 [BANK] Variable Proximity (React Bits; deep read slice 4 #171), R3 F1: quantised per WORD, so a word's w
+  not a token value: #279 sections/proof/proof.js :: // v3 [BANK] Count Up (React Bits; deep read slice 4 #279, code read: animation/code-source/count-up-reactbits
+  not a token value: #317 sections/proof/proof.css :: #317 "Proof, not promises"), v3 two proof trains ([BANK] Q161 horizontalLoop, F17 60s marquee) */
+  not a token value: #317 sections/proof/proof.js :: // read from the platform named beside it"), anatomy F12 checkable proof (KBF "The Ledger": print the caveat),
+  not a token value: #319 base.css :: /* shared footer: [BANK] #319 Bakstad NAP record (named principal, street address, phone, hours); the gutter d
+  not a token value: #319 sections/call/call.css :: roof band with a chimney. The NAP record lives in the shared footer below (Bakstad #319). */
+  not a token value: #362 js/companion.js :: // follower (quickTo 0.35 power3.out) and cursor dot, S1309 tilt from horizontal velocity (<= 8 degrees), #362
+verdict: every hex outside :root is either a declared token value or not a UI colour (listed above with its line)

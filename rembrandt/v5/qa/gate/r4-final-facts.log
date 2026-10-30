@@ -1,0 +1,144 @@
+== rembrandt-homepage.html
+PASS  353-9711 appears 0 times (any spacing/format)                                                                 0 / 0
+PASS  only one phone number: every tel: link is +19377467377                                                        ['+19377467377']
+PASS  no other phone-shaped number in visible text                                                                  []
+PASS  24/7 appears 0 times                                                                                          0
+PASS  no emergency-hours claim                                                                                      0
+PASS  no licence number / "licensed" claim                                                                          0
+PASS  "295" present                                                                                                 27
+PASS  "4.9" present                                                                                                 32
+PASS  no other review count (280 homeowners)                                                                        0
+PASS  invented review quotes: 0 quote-like sentences in visible text                                                []
+PASS  no reviewer-attribution pattern (— Name / Jane D.)                                                            0
+PASS  no stray rating other than 4.9                                                                                ['4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9']
+PASS  address verbatim present                                                                                      
+PASS  BBB wording: every visible BBB mention says "accredited" (only backup B1, the kept Constellation, is exempt)  outside B1: 0; inside B1: 1
+PASS  Founded 1995 / Bunk / Wade 2015 / Rachel present                                                              
+PASS  Owens Corning Platinum Preferred present                                                                      
+PASS  $2M liability present                                                                                         25
+PASS  no prices / % discounts / financing terms invented                                                            []
+PASS  every version contact path is 746-7377 (no other tel)                                                         versions with their own tel link: 80/21 (call1, call2, call3, call4, call5, call6, call7, call8, callb1, callb2, callb3, callb4, callb5, callb6, callb7, callb8, family1, family2, family4, family5, family6, family7, familyb1, familyb2, familyb4, familyb5, familyb7, familyb8, hero1, hero3, hero4, hero5, hero6, hero7, hero8, herob1, herob2, herob3, herob4, herob5, herob6, herob7, herob8, how1, how2, how4, how5, how6, how7, how8, howb1, howb2, howb3, howb4, howb5, howb6, howb7, howb8, proof4, proof5, proof6, proof7, proof8, proofb2, proofb5, proofb7, proofb8, storm1, storm2, storm3, storm4, storm5, storm6, storm7, storm8, stormb4, stormb5, stormb6, stormb7, stormb8); nav, phone bar and footer carry it on every page state
+PASS  no "Job Ticket" string                                                                                        0
+PASS  no FAQ section                                                                                                0
+PASS  no service picker / bento services                                                                            0
+PASS  no estimate-paper / leak-story / proof-strip                                                                  0
+PASS  section sequence is the owner-approved order (not the v1-v4 skeleton)                                         hero > proof > svc > work > family > how > storm > area > call
+PASS  no roof-anatomy lesson (Rule 11): no named layer lists                                                        []
+FAILS: 0
+PASS  storm v1: says the insurer decides the claim                                                                   
+PASS  storm v2: says the insurer decides the claim                                                                   
+PASS  storm v3: says the insurer decides the claim                                                                   
+PASS  storm v4: says the insurer decides the claim                                                                   
+PASS  storm v5: says the insurer decides the claim                                                                   
+PASS  storm v6: says the insurer decides the claim                                                                   
+PASS  storm v7: says the insurer decides the claim                                                                   
+PASS  storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               2 struck
+== services.html
+PASS  353-9711 appears 0 times (any spacing/format)                                                                 0 / 0
+PASS  only one phone number: every tel: link is +19377467377                                                        ['+19377467377']
+PASS  no other phone-shaped number in visible text                                                                  []
+PASS  24/7 appears 0 times                                                                                          0
+PASS  no emergency-hours claim                                                                                      0
+PASS  no licence number / "licensed" claim                                                                          0
+n/a  "295" present                                                                                                 0
+n/a  "4.9" present                                                                                                 0
+PASS  no other review count (280 homeowners)                                                                        0
+PASS  invented review quotes: 0 quote-like sentences in visible text                                                []
+PASS  no reviewer-attribution pattern (— Name / Jane D.)                                                            0
+PASS  no stray rating other than 4.9                                                                                []
+PASS  address verbatim present                                                                                      
+PASS  BBB wording: every visible BBB mention says "accredited" (only backup B1, the kept Constellation, is exempt)  outside B1: 0; inside B1: 0
+PASS  Founded 1995 / Bunk / Wade 2015 / Rachel present                                                              
+n/a  Owens Corning Platinum Preferred present                                                                      
+n/a  $2M liability present                                                                                         10
+PASS  no prices / % discounts / financing terms invented                                                            []
+PASS  every version contact path is 746-7377 (no other tel)                                                         versions with their own tel link: 9/21 (svcp2, svcp3, svcp4, svcp5, svcpb4, svcpb5, svcpb6, svcpb7, svcpb8); nav, phone bar and footer carry it on every page state
+PASS  no "Job Ticket" string                                                                                        0
+PASS  no FAQ section                                                                                                0
+PASS  no service picker / bento services                                                                            0
+PASS  no estimate-paper / leak-story / proof-strip                                                                  0
+n/a  section sequence is the owner-approved order (not the v1-v4 skeleton)                                         svcp
+PASS  no roof-anatomy lesson (Rule 11): no named layer lists                                                        []
+FAILS: 0
+n/a   storm v1: says the insurer decides the claim                                                                   
+n/a   storm v2: says the insurer decides the claim                                                                   
+n/a   storm v3: says the insurer decides the claim                                                                   
+n/a   storm v4: says the insurer decides the claim                                                                   
+n/a   storm v5: says the insurer decides the claim                                                                   
+n/a   storm v6: says the insurer decides the claim                                                                   
+n/a   storm v7: says the insurer decides the claim                                                                   
+n/a   storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               0 struck
+== about.html
+PASS  353-9711 appears 0 times (any spacing/format)                                                                 0 / 0
+PASS  only one phone number: every tel: link is +19377467377                                                        ['+19377467377']
+PASS  no other phone-shaped number in visible text                                                                  []
+PASS  24/7 appears 0 times                                                                                          0
+PASS  no emergency-hours claim                                                                                      0
+PASS  no licence number / "licensed" claim                                                                          0
+n/a  "295" present                                                                                                 16
+n/a  "4.9" present                                                                                                 16
+PASS  no other review count (280 homeowners)                                                                        0
+PASS  invented review quotes: 0 quote-like sentences in visible text                                                []
+PASS  no reviewer-attribution pattern (— Name / Jane D.)                                                            0
+PASS  no stray rating other than 4.9                                                                                ['4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9', '4.9']
+PASS  address verbatim present                                                                                      
+PASS  BBB wording: every visible BBB mention says "accredited" (only backup B1, the kept Constellation, is exempt)  outside B1: 0; inside B1: 0
+PASS  Founded 1995 / Bunk / Wade 2015 / Rachel present                                                              
+n/a  Owens Corning Platinum Preferred present                                                                      
+n/a  $2M liability present                                                                                         6
+PASS  no prices / % discounts / financing terms invented                                                            []
+PASS  every version contact path is 746-7377 (no other tel)                                                         versions with their own tel link: 10/21 (about1, about2, about3, about4, about5, aboutb4, aboutb5, aboutb6, aboutb7, aboutb8); nav, phone bar and footer carry it on every page state
+PASS  no "Job Ticket" string                                                                                        0
+PASS  no FAQ section                                                                                                0
+PASS  no service picker / bento services                                                                            0
+PASS  no estimate-paper / leak-story / proof-strip                                                                  0
+n/a  section sequence is the owner-approved order (not the v1-v4 skeleton)                                         about
+PASS  no roof-anatomy lesson (Rule 11): no named layer lists                                                        []
+FAILS: 0
+n/a   storm v1: says the insurer decides the claim                                                                   
+n/a   storm v2: says the insurer decides the claim                                                                   
+n/a   storm v3: says the insurer decides the claim                                                                   
+n/a   storm v4: says the insurer decides the claim                                                                   
+n/a   storm v5: says the insurer decides the claim                                                                   
+n/a   storm v6: says the insurer decides the claim                                                                   
+n/a   storm v7: says the insurer decides the claim                                                                   
+n/a   storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               0 struck
+== contact.html
+PASS  353-9711 appears 0 times (any spacing/format)                                                                 0 / 0
+PASS  only one phone number: every tel: link is +19377467377                                                        ['+19377467377']
+PASS  no other phone-shaped number in visible text                                                                  []
+PASS  24/7 appears 0 times                                                                                          0
+PASS  no emergency-hours claim                                                                                      0
+PASS  no licence number / "licensed" claim                                                                          0
+n/a  "295" present                                                                                                 0
+n/a  "4.9" present                                                                                                 0
+PASS  no other review count (280 homeowners)                                                                        0
+PASS  invented review quotes: 0 quote-like sentences in visible text                                                []
+PASS  no reviewer-attribution pattern (— Name / Jane D.)                                                            0
+PASS  no stray rating other than 4.9                                                                                []
+PASS  address verbatim present                                                                                      
+PASS  BBB wording: every visible BBB mention says "accredited" (only backup B1, the kept Constellation, is exempt)  outside B1: 0; inside B1: 0
+PASS  Founded 1995 / Bunk / Wade 2015 / Rachel present                                                              
+n/a  Owens Corning Platinum Preferred present                                                                      
+n/a  $2M liability present                                                                                         0
+PASS  no prices / % discounts / financing terms invented                                                            []
+PASS  every version contact path is 746-7377 (no other tel)                                                         versions with their own tel link: 5/21 (contact1, contact2, contact3, contact4, contact5); nav, phone bar and footer carry it on every page state
+PASS  no "Job Ticket" string                                                                                        0
+PASS  no FAQ section                                                                                                0
+PASS  no service picker / bento services                                                                            0
+PASS  no estimate-paper / leak-story / proof-strip                                                                  0
+n/a  section sequence is the owner-approved order (not the v1-v4 skeleton)                                         contact
+PASS  no roof-anatomy lesson (Rule 11): no named layer lists                                                        []
+FAILS: 0
+n/a   storm v1: says the insurer decides the claim                                                                   
+n/a   storm v2: says the insurer decides the claim                                                                   
+n/a   storm v3: says the insurer decides the claim                                                                   
+n/a   storm v4: says the insurer decides the claim                                                                   
+n/a   storm v5: says the insurer decides the claim                                                                   
+n/a   storm v6: says the insurer decides the claim                                                                   
+n/a   storm v7: says the insurer decides the claim                                                                   
+n/a   storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               0 struck

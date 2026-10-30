@@ -455,3 +455,36 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - **Wiring:** the build, the URL (`?v=hero8`, `?v=heroB8`), the 1-8 keys and the pickers handle 8 visible versions and 8 backups.
   - **Check:** `qa/gate/r4-bkopen.log` shows every backup opening.
   - **Gap, reported:** Services and Storm were created in R4 and have no earlier generation, so they hold 5 genuine backups (B4-B8), not 8. Nothing is fabricated to fill B1-B3.
+
+### R4 directive: Phases 5 and 6 complete, and the FINAL GATE (evidence in `rembrandt/v5/qa/gate/r4-final-*.log`)
+- **Phase 5 done:** every homepage section shows eight versions (V1-V5 improved, V6-V8 new), each committed per section with traceability rows written before the code and an interaction test where the version is interactive (`qa/scripts/howtest.mjs`, `stormtest.mjs`, `areatest.mjs`, `calltest.mjs`, plus the earlier work and services tests).
+- **Phase 6 done:** four pages, Home, Services, About and Contact (fewer is better; every service is on Services). Services and About gained the redesign layer: label, contour art, and a drawn roofline header. They also gained backups B4-B8, their pre-redesign layouts from 2ee2693. Contact is new and has five layouts: phone first, by distance, week board, business card, and town checker. It has no form and makes no "open now" claim.
+- **Deep green (amended Rule 1):** used on no section of any page. Reason as in the Phase 0 note: one colour world, with orange as the only hue.
+- **Final gate:**
+  1. **Token check** (`r4-final-tokens.log`): 20 colour tokens are declared in `:root`. 51 hex literals appear outside it. Every one is a token value except 10, and none of those 10 is a UI colour:
+     - 7 are bank reference numbers in comments (#171, #279, #317, #319, #362).
+     - 2 are an alpha mask (`#000` in `mask-image`, Family V3).
+     - 1 is an offscreen canvas that is only sampled for alpha (Reviews V1 glyph).
+  2. **Light check** (`r4-final-browser.log`, `qa/scripts/finalgate.mjs`): all 87 visible versions were checked (homepage 9 sections x 8, plus 3 pages x 5). There are 0 black or near-black grounds and 0 large dark panels. The lowest ground is the orange accent band on Call (relative luminance 0.287). Deep-green grounds: none.
+  3. **Logo:** the header, the footer and the favicon (data PNG) carry the logo on all four pages.
+  4. **Facts** (`r4-final-facts.log`): FAILS 0 on all four pages. 353-9711, 24/7 and "licen" each occur 0 times in every file. Every Storm version (1-8) says the insurer decides the claim. The only "claim approved" sentences are struck through: Storm V3 and its backup B6.
+  5. **Integrity:**
+     - Every homepage section has 8 visible versions switching 1-8 (87 of 87 mount at the right version).
+     - Backups B1-B8 exist for 7 sections, which makes 16 versions each.
+     - Services and Storm have B4-B8 only (13 versions each). They were born in R4, so they have no B1-B3 generation, and nothing was fabricated to fill those slots.
+     - Pages: Services and About have 5 visible and 5 backups (10 each). Contact has 5 visible and 0 backups, being new.
+     - `r4-final-bkopen.log`: 66 of 66 existing homepage backups open. The 6 "BAD" rows are the absent Services and Storm B1-B3. `pagebk.mjs`: 10 of 10 page backups open.
+     - Nothing deleted: `git log --diff-filter=D d2c171b^..HEAD -- rembrandt/v5/src` is empty.
+  6. **Bespoke interactive** (`r4-final-sqtest.log`): the roof squares calculator matches the geometry on drag (pitch 12, 21.2 squares), on the footprint sliders (80x40, 45.3 squares) and on the keyboard (minimum pitch, 33.0 squares), with errors 0. More business-only interactives in the new versions: the truck drive (How V6), the after-storm checklist (Storm V6), the damage spotter (Storm V7), the radius slider (Towns V7), the tear-off flyer (Call V7) and the town checker (Contact V5).
+  7. **Commits per phase:**
+     - Phases 1-2: d2c171b.
+     - Phase 4: fbb874a.
+     - Phase 5 infrastructure: 8b27202.
+     - Phases 3 and 5 for Hero, plus the label and art layer: 8f2beec, ef232f4.
+     - Phase 5 per section: fb90299 (Reviews), 0c85031 (Services), 8f479df (Work), 5f9a300 (Family), ca6833f (How), 722b613 (Storm), 488c4fe (Towns), b75a84e (Call).
+     - Phase 6: 42c782f (page backups), 8b91cd7 and 4815584 (page redesign layer and label fix), fb2af11 (Contact), 6e1dc0a (facts gate scope).
+- **Open, reported, not hidden:**
+  - Pixel drift on Towns B1 and Call B1 after the font change (logged earlier).
+  - Services and Storm have no B1-B3.
+  - Contact has no backups.
+  - Merging versions stays parked, as ordered.
