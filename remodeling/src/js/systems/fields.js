@@ -256,7 +256,9 @@
     return { el: el };
   };
 
-  var MAP = { proof: 'contours', services: 'axo', ba: 'studs', process: 'chalk', financing: 'plumb', work: 'marks', reviews: 'plywood', towns: 'compass', consult: 'laser', footer: 'rebar' };
+  // [OWNER DESIGN NOTE] de-AI: no decorative pattern behind every section (contours, graph paper, studs, flags...): the grounds are flat.
+  // The field drawings stay in this file, unmounted.
+  var MAP = {};
   var fields = {};
 
   function mount(id, host) {
@@ -439,7 +441,9 @@
       } };
   };
 
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'tape'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'brick'], ['consult', 'footing']];
+  // [OWNER DESIGN NOTE + AUDIT-01 C.9] one divider weight, present in the static first frame: a CSS hairline between sections.
+  // The ten themed animated bands (hazard tape and brick among them) are retired; their drawings stay in this file, unmounted.
+  var ORDER = [];
   var dividers = [];
 
   function drawDivider(d) {

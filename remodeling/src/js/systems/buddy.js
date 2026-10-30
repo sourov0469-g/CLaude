@@ -334,7 +334,7 @@
     var t = e.target.closest && e.target.closest('[data-buddy-sig="flip"]');
     if (!t || !B.on || !shown) return;
     var g = doc.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.innerHTML = '<rect x="-11" y="-14" width="22" height="28" rx="2" fill="#e8e4dc" stroke="' + INK + '" stroke-width="1.6"/><text x="0" y="6" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="18" fill="' + INK + '">' + (t.textContent || '').trim().slice(0, 2).replace(/[<&]/g, '') + '</text>';
+    g.innerHTML = '<rect x="-11" y="-14" width="22" height="28" rx="2" fill="#e8e4dc" stroke="' + INK + '" stroke-width="1.6"/><text x="0" y="6" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="600" font-size="18" fill="' + INK + '">' + (t.textContent || '').trim().slice(0, 2).replace(/[<&]/g, '') + '</text>';
     g.setAttribute('transform', 'translate(0 -30)');
     svg.appendChild(g);
     gsap.timeline({ onComplete: function () { g.remove(); } })

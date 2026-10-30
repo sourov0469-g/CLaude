@@ -31,8 +31,8 @@
 .towns1__svg .flag { pointer-events: none; }
 .towns1__svg .flag .pole { stroke: #e8e4dc; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .towns1__svg .flag .pen { fill: #e2412b; stroke: #0B1418; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.towns1__svg .flag text { font-family: var(--f-display); fill: #fff; letter-spacing: .04em; }
-.towns1__read { position: absolute; left: 14px; bottom: 12px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+.towns1__svg .flag text { font-family: var(--f-display); fill: #fff; letter-spacing: -.005em; }
+.towns1__read { position: absolute; left: 14px; bottom: 12px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); pointer-events: none; }
 @media (max-width: 1023px) { .towns1__head .t-head, .towns1__head .towns__lead { grid-column: 1 / -1; } .towns1__head .towns__lead { margin-top: var(--s4); } .towns1__map { height: 64vh; } }
 
 /* ---------- v2 · Around the office ---------- */
@@ -45,7 +45,7 @@
 .towns2__svg .rlbl { font: 600 13px/1 var(--f-text); fill: var(--muted); letter-spacing: 1.5px; }
 .towns2__hub { position: absolute; left: 50%; top: 50%; translate: -50% -50%; text-align: center; display: grid; gap: 4px; }
 .towns2__n { margin: 0; font: 400 clamp(4rem, 2rem + 6vw, 7rem)/.85 var(--f-display); }
-.towns2__nl { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: .1em; color: var(--muted); }
+.towns2__nl { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--muted); }
 .towns2__addr { margin: 6px 0 0; font-size: .8125rem; color: var(--muted); }
 .towns2__read { list-style: none; margin: 0; padding: 0; position: absolute; left: 50%; top: 0; translate: -50% 0; display: grid; gap: 6px; justify-items: center; pointer-events: none; }
 .towns2__read li { font: 600 .875rem/1.2 var(--f-text); padding: 4px 9px; background: rgba(11, 20, 24, .85); color: #e8e4dc; white-space: nowrap; }
@@ -54,7 +54,7 @@
 .towns2__pause { display: flex; margin: var(--s5) auto 0; }
 .towns2__lists { margin-top: var(--s7); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
 .towns2__lists details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
-.towns2__lists summary { cursor: pointer; font: 400 1.5rem/1 var(--f-display); letter-spacing: .02em; min-height: 44px; }
+.towns2__lists summary { cursor: pointer; font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; min-height: 44px; }
 .towns2__lists p { margin: 10px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
 @media (max-width: 767px) { .towns2__lists { grid-template-columns: 1fr; } .towns2__read li { font-size: .75rem; } .towns2__stage { aspect-ratio: auto; height: 100vw; } }
 
@@ -88,7 +88,7 @@
 .tc__form { display: grid; gap: var(--s4); justify-items: start; }
 .tc__field { position: relative; width: 100%; }
 .tc__lbl { display: block; font: 600 .875rem/1 var(--f-text); color: var(--muted); margin-bottom: 10px; }
-.tc__in { width: 100%; min-height: 64px; padding: 0 18px; background: transparent; border: 0; color: var(--ink); font: 400 clamp(1.75rem, 1.3rem + 1.2vw, 2.5rem)/1 var(--f-display); letter-spacing: .02em; outline: none; box-shadow: inset 0 -2px 0 var(--line-soft); }
+.tc__in { width: 100%; min-height: 64px; padding: 0 18px; background: transparent; border: 0; color: var(--ink); font: 400 clamp(1.75rem, 1.3rem + 1.2vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; outline: none; box-shadow: inset 0 -2px 0 var(--line-soft); }
 .tc__outline { position: absolute; left: 0; bottom: 0; width: 100%; height: 64px; pointer-events: none; overflow: visible; }
 .tc__outline path { fill: none; stroke: var(--accent); stroke-width: 2.5; }
 .tc__list { position: absolute; left: 0; right: 0; top: 100%; z-index: 5; margin: 6px 0 0; padding: 4px; list-style: none; background: var(--surface); box-shadow: 0 0 0 1px var(--line-soft), var(--shadow); }
@@ -101,7 +101,7 @@
 .tc__ans { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .tc__all { margin-top: var(--s8); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
 .tc__all details { border-top: 1px solid var(--line-soft); padding-top: 12px; }
-.tc__all summary { cursor: pointer; font: 400 1.375rem/1 var(--f-display); letter-spacing: .02em; min-height: 44px; }
+.tc__all summary { cursor: pointer; font: 400 1.375rem/1 var(--f-display); letter-spacing: -.005em; min-height: 44px; }
 .tc__all p { margin: 8px 0 0; font-size: .875rem; line-height: 1.7; color: var(--muted); }
 @media (max-width: 1023px) {
   .tc__side, .tc__road { grid-column: 1 / -1; }

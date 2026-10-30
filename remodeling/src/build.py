@@ -70,12 +70,24 @@ def main():
         sections = [only]
         out = os.path.join(ROOT, "site", "dev", only + ".html")
 
+    # [OWNER DESIGN NOTE] everyday Google staples for the presented site: Poppins SemiBold for display, Roboto for text.
+    # 'Elbaz Display' is Poppins 600 with size-adjust 74% so the size tokens written for a condensed face land at normal
+    # Poppins sizes. Bebas Neue and Geist stay embedded only for the hidden backup slots (records, not the presented site).
     fonts = (
+        "@font-face{font-family:'Elbaz Display';src:url(data:font/woff2;base64,%s) format('woff2');"
+        "font-weight:100 900;font-style:normal;font-display:swap;size-adjust:74%%}"
+        "@font-face{font-family:'Poppins';src:url(data:font/woff2;base64,%s) format('woff2');font-weight:500;font-display:swap}"
+        "@font-face{font-family:'Poppins';src:url(data:font/woff2;base64,%s) format('woff2');font-weight:600 900;font-display:swap}"
+        "@font-face{font-family:'Roboto';src:url(data:font/woff2;base64,%s) format('woff2');font-weight:100 900;font-display:swap}"
         "@font-face{font-family:'Bebas Neue';src:url(data:font/woff2;base64,%s) format('woff2');"
         "font-weight:400;font-style:normal;font-display:swap}"
         "@font-face{font-family:'Geist';src:url(data:font/woff2;base64,%s) format('woff2');"
         "font-weight:100 900;font-display:swap}"
-        % (b64(os.path.join(HERE, "fonts", "bebas-neue-latin.woff2")),
+        % (b64(os.path.join(HERE, "fonts", "poppins-latin-600-normal.woff2")),
+           b64(os.path.join(HERE, "fonts", "poppins-latin-500-normal.woff2")),
+           b64(os.path.join(HERE, "fonts", "poppins-latin-600-normal.woff2")),
+           b64(os.path.join(HERE, "fonts", "roboto-latin-wght-normal.woff2")),
+           b64(os.path.join(HERE, "fonts", "bebas-neue-latin.woff2")),
            b64(os.path.join(HERE, "fonts", "geist-wght.woff2")))
     )
 

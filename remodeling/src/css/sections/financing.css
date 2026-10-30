@@ -26,7 +26,7 @@
 .financing1__tk.is-glare::after { opacity: 1; animation: fin1-rim 650ms var(--ease-out); }
 @keyframes fin1-rim { 30% { box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .75); } 100% { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0); } }
 .financing1__main { padding: 22px 20px 18px; border-bottom: 2px dashed rgba(27, 38, 41, .4); min-width: 0; }
-.financing1__name { margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: .02em; }
+.financing1__name { margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: -.005em; }
 .financing1__kind { margin: 6px 0 0; font: 600 .75rem/1.3 var(--f-text); color: #1d4a4e; }
 .financing1__fig { margin: 18px 0 0; font: 400 clamp(3rem, 2rem + 2.6vw, 4.5rem)/.9 var(--f-display); letter-spacing: -.005em; white-space: nowrap; }
 .financing1__per { margin: 6px 0 0; font-size: .8125rem; line-height: 1.35; color: #4a5a5e; }
@@ -98,12 +98,12 @@
   background: #f3eee2; color: #1b2629;
   background-image: linear-gradient(rgba(27, 38, 41, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(27, 38, 41, .06) 1px, transparent 1px);
   background-size: 24px 24px;
-  box-shadow: 0 30px 60px -34px rgba(0, 0, 0, .7);
+  box-shadow: none;
 }
 .financing3__ground::after { content: ""; position: absolute; left: 50%; top: 22px; bottom: 22px; border-left: 1.5px dashed rgba(27, 38, 41, .45); }
 .financing3__half { padding: clamp(28px, 4vw, 56px); display: grid; align-content: space-between; }
 .financing3__half:last-child { text-align: right; }
-.financing3__gk { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: .01em; }
+.financing3__gk { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; }
 .financing3__half:first-child .financing3__gk { border-top: 3px solid #1b2629; padding-top: 12px; }
 .financing3__half:last-child .financing3__gk { border-top: 3px solid #c8402e; padding-top: 12px; }
 .financing3__gn { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: #3a4a4e; }
@@ -113,10 +113,10 @@
   position: relative; z-index: 1;
   width: 240px; height: 240px; border-radius: 50%; border: 0; padding: 30px;
   background: #0B1418; color: #e8e4dc; cursor: pointer;
-  box-shadow: 0 0 0 2px #f2c230, 0 0 0 12px rgba(242, 194, 48, .14), 0 30px 60px -20px rgba(0, 0, 0, .6);
-  font: 400 1.75rem/1.05 var(--f-display); letter-spacing: .02em;
+  box-shadow: 0 0 0 2px #f2c230, 0 0 0 12px rgba(242, 194, 48, .14);
+  font: 400 1.75rem/1.05 var(--f-display); letter-spacing: -.005em;
 }
-@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #f2c230, 0 0 0 18px rgba(242, 194, 48, .2), 0 30px 60px -20px rgba(0, 0, 0, .6); } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
+@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #f2c230, 0 0 0 18px rgba(242, 194, 48, .2); } }   /* hover motion behind the fine-pointer gate [AUDIT-01 D.12] */
 .financing3__sheet {
   position: relative; width: 100%; padding: clamp(28px, 4vw, 52px);
   background: #f3eee2; color: #1b2629;
@@ -130,7 +130,7 @@
 .financing3__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #1b2629; cursor: pointer; }
 .financing3__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
 .financing3__col { border-top: 3px solid #1b2629; padding-top: 16px; }
-.financing3__k { margin: 0 0 12px; font: 400 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: .01em; }
+.financing3__k { margin: 0 0 12px; font: 400 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; }
 .financing3__col dl { margin: 0; display: grid; gap: 14px; }
 .financing3__col dt { font: 700 .9375rem/1.2 var(--f-text); }
 .financing3__col dd { margin: 4px 0 0; font-size: .9375rem; line-height: 1.45; color: #3a4a4e; }
@@ -168,7 +168,7 @@
 }
 .fr__l::before { content: ""; position: absolute; inset: 0; background: rgba(90, 182, 230, .28); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
 .fr__l strong, .fr__l span { position: relative; }
-.fr__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: .02em; }
+.fr__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; }
 .fr__l span { font-size: .8125rem; color: var(--field-muted); }
 .fr__l.is-on { box-shadow: inset 0 0 0 2px #5ab6e6; }
 .fr__l.is-off { opacity: .45; }

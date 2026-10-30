@@ -71,9 +71,9 @@
           '<g class="posts"><path d="M150 236V300M370 236V300" stroke="#9fb0b5" stroke-width="12"/><path d="M150 236V300M370 236V300" stroke="#0B1418" stroke-width="2" opacity=".3"/>' +
           '<g class="panel"><rect x="20" y="20" width="480" height="230" rx="18" fill="' + (yes === false ? '#f2c230' : '#1e6b3a') + '" stroke="#0B1418" stroke-width="3"/>' +
           '<rect x="32" y="32" width="456" height="206" rx="12" fill="none" stroke="' + (yes === false ? '#0B1418' : '#fff') + '" stroke-width="4"/>' +
-          '<text x="260" y="' + (110 + fs * .1) + '" text-anchor="middle" font-family="Geist, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + (yes === false ? '#0B1418' : '#fff') + '">' + esc(main) + '</text>' +
-          '<text x="260" y="160" text-anchor="middle" font-family="Geist, sans-serif" font-weight="600" font-size="24" fill="' + (yes === false ? '#0B1418' : '#e4f1e7') + '">' + esc(sub) + '</text>' +
-          '<text x="260" y="208" text-anchor="middle" font-family="Geist, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? '#0B1418' : '#fff') + '">' + esc(verdict) + '</text></g></g>';
+          '<text x="260" y="' + (110 + fs * .1) + '" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + (yes === false ? '#0B1418' : '#fff') + '">' + esc(main) + '</text>' +
+          '<text x="260" y="160" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="600" font-size="24" fill="' + (yes === false ? '#0B1418' : '#e4f1e7') + '">' + esc(sub) + '</text>' +
+          '<text x="260" y="208" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? '#0B1418' : '#fff') + '">' + esc(verdict) + '</text></g></g>';
       }
       function show(t, raw) {
         if (t) { draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }

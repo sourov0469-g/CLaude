@@ -121,7 +121,7 @@
         var o = document.createElement('canvas'); o.width = W; o.height = H;
         var c = o.getContext('2d');
         c.fillStyle = '#000'; c.textAlign = 'center'; c.textBaseline = 'middle';
-        c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Bebas Neue", sans-serif';
+        c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Poppins", Arial, sans-serif';
         c.fillText('4.8', W / 2, H * .53);
         var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 160));
         for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) if (d[(y * W + x) * 4 + 3] > 128) cand.push([x, y]);
@@ -202,7 +202,7 @@
         });
         run();
       }
-      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      var ready = document.fonts && document.fonts.load ? document.fonts.load('600 100px "Poppins"').catch(function () {}) : Promise.resolve();
       ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
       k.ro(sky, function () { if (W) layout(false); });
       k.add(function () { stop(); stars = []; links = []; ctx.clearRect(0, 0, cv.width, cv.height); });

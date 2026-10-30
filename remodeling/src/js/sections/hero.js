@@ -15,7 +15,7 @@
     });
   }
   function fontsReady() {
-    return document.fonts && document.fonts.load ? document.fonts.load('100px "Bebas Neue"').catch(function () {}) : Promise.resolve();
+    return document.fonts && document.fonts.load ? document.fonts.load('600 100px "Elbaz Display"').catch(function () {}) : Promise.resolve();
   }
 
   /* Stroke Text [BANK 167]: per-letter outlines (dash = fontSize x 7) draw, then each line wipes to solid */

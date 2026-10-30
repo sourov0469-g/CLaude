@@ -92,7 +92,7 @@
   function textSprite(t) {
     var w = Math.max(18, t.length * 7 + 8);
     return '<rect x="' + (-w / 2) + '" y="-9" width="' + w + '" height="18" rx="2"' + c(YEL) + '/>' +
-      '<text x="0" y="4.5" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="14" fill="' + INK + '">' + t.replace(/[<&]/g, '') + '</text>';
+      '<text x="0" y="4.5" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="600" font-size="11" fill="' + INK + '">' + t.replace(/[<&]/g, '') + '</text>';
   }
 
   /* ---------- anchors: where ON the element the subject lives [AUDIT-01 A.8: drawn on or in the control] ----------

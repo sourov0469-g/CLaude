@@ -297,7 +297,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .ho__grid { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
 .ho__copy { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; position: relative; z-index: 2; }
 .ho__house { grid-column: 6 / -1; position: relative; aspect-ratio: 7 / 6; }
-.ho__p { position: absolute; margin: 0; overflow: hidden; background: #0B1418; will-change: transform; box-shadow: 0 24px 50px -30px rgba(0, 0, 0, .8); }
+.ho__p { position: absolute; margin: 0; overflow: hidden; background: #0B1418; will-change: transform; box-shadow: none; }
 .ho__p img { width: 100%; height: 100%; object-fit: cover; }
 .ho__p figcaption { position: absolute; left: 0; bottom: 0; padding: 6px 10px; background: #0B1418; color: #e8e4dc; font: 500 .8125rem/1.2 var(--f-text); }
 .ho__p--a { left: 0; top: 4%; width: 68%; height: 62%; z-index: 1; }

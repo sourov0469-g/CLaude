@@ -1,53 +1,61 @@
-tested 52, snapped 0
-ok   Book a consultation [pencil] first@10ms=0.17 end=1.00
-ok   (754) 236‑0675 [phone] first@14ms=0.33 end=1.00
-ok   ★4.8 · 343 Google reviews [~star/drop/sparkle/r] first@22ms=0.37 end=1.00
-ok   Licensed, bonded & insured · C [~shield/drop/tick/r] first@13ms=0.29 end=1.00
-ok   Restack the blocks [~sawhorse/drop/squash/l] first@6ms=0.00 end=1.00
-ok   Verify the licence [~badge/unfold/tick/r] first@27ms=0.43 end=1.00
-ok   Read the reviews [~star/lid/sparkle/r] first@4ms=0.00 end=1.00
-ok   02Bathroom4–8 weeks of constru [~shower/hinge/drip/tr] first@11ms=0.30 end=1.00
-ok   03Kitchen6–12 weeks of constru [~sink/hinge/drip/tr] first@13ms=0.22 end=1.00
-ok   04Outdoor livingBackyard and p [~palm/hinge/wobble/tr] first@17ms=0.31 end=1.00
-ok   All 26 [viewfinder] first@16ms=0.46 end=1.00
-ok   Kitchens 10 [~hood/drop/flash/tr] first@14ms=0.29 end=1.00
-ok   Bathrooms 12 [~shower/drop/flash/tr] first@13ms=0.28 end=1.00
-ok   Whole home and outdoor 4 [~house/drop/flash/tr] first@15ms=0.30 end=1.00
-ok   P‑01Navy Blue Shaker Kitchen w [~t:P-01/frame/flash/tr] first@15ms=0.13 end=1.00
-ok   P‑02Black Marble Primary Bathr [~t:P-02/frame/flash/tr] first@15ms=0.14 end=1.00
-ok   P‑03Modern Farmhouse Whole-Hom [~t:P-03/frame/flash/tr] first@16ms=0.14 end=1.00
-ok   P‑04Open-Concept Kitchen Remod [~t:P-04/frame/flash/tr] first@11ms=0.13 end=1.00
-ok   P‑05Polished-Concrete Primary  [~t:P-05/frame/flash/tr] first@13ms=0.13 end=1.00
-ok   P‑06Waterfront Backyard & Outd [~t:P-06/frame/flash/tr] first@12ms=0.13 end=1.00
-ok   P‑07Emerald Shaker Kitchen Rem [~t:P-07/frame/flash/tr] first@12ms=0.13 end=1.00
-ok   P‑08Spa-Style Guest Bathroom R [~t:P-08/frame/flash/tr] first@12ms=0.13 end=1.00
-ok   P‑09Chef-Grade Kitchen Remodel [~t:P-09/frame/flash/tr] first@13ms=0.12 end=1.00
-ok   P‑10Contemporary Primary Bath  [~t:P-10/frame/flash/tr] first@14ms=0.14 end=1.00
-ok   P‑11Modern Open-Concept Kitche [~t:P-11/frame/flash/tr] first@13ms=0.13 end=1.00
-ok   P‑12White Shaker Kitchen Remod [~t:P-12/frame/flash/tr] first@16ms=0.14 end=1.00
-ok   Show all 26 projects [~grid/pop/burst/r] first@13ms=0.36 end=1.00
-ok   Miami‑DadeMD [~t:MD/hoist/hop/tr] first@14ms=0.30 end=1.00
-ok   BrowardBR [~t:BR/hoist/hop/tr] first@12ms=0.26 end=1.00
-ok   Palm BeachPB [~t:PB/hoist/hop/tr] first@15ms=0.27 end=1.00
-ok   Whole home [~house/unfold/tick/t] first@17ms=0.38 end=1.00
-ok   Something else [~question/unfold/tick/t] first@10ms=0.31 end=1.00
-ok   Full name * [~badge/slide/sweep/tr] first@11ms=0.26 end=1.00
-ok   Phone * [~handset/slide/sweep/tr] first@15ms=0.27 end=1.00
-ok   Email * [~envelope/slide/sweep/tr] first@11ms=0.26 end=1.00
-ok   Property address * [~house2/slide/sweep/tr] first@14ms=0.27 end=1.00
-ok   What do you want to change? * [~sketch/slide/sweep/tr] first@13ms=0.27 end=1.00
-ok   Phone [~handset/unfold/hop/t] first@12ms=0.29 end=1.00
-ok   Email [~envelope/unfold/hop/t] first@12ms=0.29 end=1.00
-ok   Text [~speech/unfold/hop/t] first@15ms=0.31 end=1.00
-ok   I agree to be contacted by Elb [~check/pop/tick/l] first@14ms=0.35 end=1.00
-ok   Send the work order [~mailbox/hoist/burst/r] first@14ms=0.26 end=1.00
-ok   Book a consultation [~flag/hoist/wobble/tr] first@14ms=0.26 end=1.00
-ok   (754) 236‑0675 [phone] first@13ms=0.32 end=1.00
+tested 60, snapped 0
+ok   Book a consultation [~rivet/zip/burst/r] first@17ms=0.28 end=1.00
 ok   (754) 236‑0675 [phone] first@12ms=0.32 end=1.00
-ok   Sales@elbazconstruction.com [~envelope/slide/hop/r] first@13ms=0.27 end=1.00
-ok   Español [~globe/slide/spinout/r] first@13ms=0.27 end=1.00
-ok   Instagram [~camera/peek/flash/r] first@12ms=0.24 end=1.00
-ok   Facebook [~speech/peek/hop/r] first@14ms=0.24 end=1.00
-ok   LinkedIn [~briefcase/peek/squash/r] first@12ms=0.25 end=1.00
-ok   YouTube [~play/peek/ring/r] first@12ms=0.25 end=1.00
-ok   Verify a Florida licence [~shield/rail/tick/r] first@11ms=0.24 end=1.00
+ok   ★4.8 · 343 Google reviews [~star/drop/sparkle/r] first@19ms=0.34 end=1.00
+ok   Google rating 4.8 out of 5, re [~star/roll/spinout/tr] first@14ms=0.22 end=1.00
+ok   343 Google reviews, read them  [~speech/roll/spinout/tr] first@14ms=0.22 end=1.00
+ok   104 municipalities, see the se [~compass/roll/spinout/tr] first@14ms=0.22 end=1.00
+ok   26 projects photographed on th [~camera/roll/spinout/tr] first@14ms=0.22 end=1.00
+ok   Read the 343 reviews [~star/bounce/sparkle/r] first@13ms=0.14 end=1.00
+ok   Check the licence [~magnifier/tilt/flash/r] first@14ms=0.26 end=1.00
+ok   Bathroom4–8 weeks of construct [~shower/hinge/drip/tr] first@15ms=0.27 end=1.00
+ok   Kitchen, light cabinetry and i [~sink/hinge/drip/tr] first@14ms=0.27 end=1.00
+ok   Outdoor livingBackyard and per [~palm/hinge/wobble/tr] first@16ms=0.29 end=1.00
+ok   Kitchen [~hood/jack/squash/tr] first@12ms=0.22 end=1.00
+ok   Bathroom [~shower/jack/squash/tr] first@14ms=0.23 end=1.00
+ok   Roof, windows or doors [~window/jack/squash/tr] first@14ms=0.23 end=1.00
+ok   Whole home [~house/jack/squash/tr] first@13ms=0.22 end=1.00
+ok   Talk it through with us [~speech/hoist/ring/r] first@10ms=0.25 end=1.00
+ok   Two-Tone Kitchen Remodel with  [~t:P-13/peek/flash/tl] first@2ms=0.00 end=1.00
+ok   Gray Shaker Kitchen Remodel wi [~t:P-14/peek/flash/tl] first@11ms=0.22 end=1.00
+ok   Two-Tone Navy & White Kitchen  [~t:P-15/peek/flash/tl] first@12ms=0.24 end=1.00
+ok   Chef-Grade Kitchen Remodel wit [~t:P-09/peek/flash/tl] first@10ms=0.24 end=1.00
+ok   Two-Tone Kitchen Remodel with  [~t:P-16/peek/flash/tl] first@7ms=0.24 end=1.00
+ok   Two-Tone Kitchen Remodel with  [~t:P-17/peek/flash/tl] first@6ms=0.24 end=1.00
+ok   Black Marble Primary Bathroom  [~t:P-02/peek/flash/tl] first@18ms=0.26 end=1.00
+ok   Polished-Concrete Primary Bath [~t:P-05/peek/flash/tl] first@12ms=0.24 end=1.00
+ok   Spa-Style Guest Bathroom Remod [~t:P-08/peek/flash/tl] first@9ms=0.24 end=1.00
+ok   Emerald Tile Walk-In Shower Ba [~t:P-18/peek/flash/tl] first@14ms=0.25 end=1.00
+ok   Contemporary Primary Bath Remo [~t:P-10/peek/flash/tl] first@15ms=0.24 end=1.00
+ok   Champagne Bronze & Marble-Look [~t:P-19/peek/flash/tl] first@15ms=0.24 end=1.00
+ok   Walk-In Shower Bathroom Remode [~t:P-20/peek/flash/tl] first@10ms=0.99 end=0.00
+ok   Floating Vanity Primary Bath w [~t:P-21/peek/flash/tl] first@12ms=0.24 end=1.00
+ok   Sea-Glass Glazed Tile Bathroom [~t:P-22/peek/flash/tl] first@14ms=0.25 end=1.00
+ok   Navy Vanity Bathroom Remodel w [~t:P-23/peek/flash/tl] first@14ms=0.24 end=1.00
+ok   White Marble Guest Bath & Grey [~t:P-24/peek/flash/tl] first@13ms=0.24 end=1.00
+ok   Multi-Bathroom Renovation with [~t:P-25/peek/flash/tl] first@10ms=0.25 end=1.00
+ok   Modern Farmhouse Whole-Home Re [~t:P-03/peek/flash/tl] first@14ms=0.24 end=1.00
+ok   Whole-Home Bathroom Renovation [~t:P-26/peek/flash/tl] first@10ms=0.22 end=1.00
+ok   Modern Open-Concept Kitchen an [~t:P-11/peek/flash/tl] first@12ms=0.21 end=1.00
+ok   Waterfront Backyard & Outdoor  [~t:P-06/peek/flash/tl] first@10ms=0.24 end=1.00
+ok   Run the belts [~pause/peek/squash/l] first@11ms=0.24 end=1.00
+ok   Start your own project [masking] first@16ms=0.32 end=1.00
+ok   Check it [~compass/jack/ring/r] first@11ms=0.22 end=1.00
+ok   (754) 236‑0675 [phone] first@12ms=0.32 end=1.00
+ok   Kitchen [~hood/lid/puff/tr] first@15ms=0.14 end=1.00
+ok   Bathroom [~shower/lid/puff/tr] first@15ms=0.13 end=1.00
+ok   Bedroom [~bed/lid/puff/tr] first@14ms=0.12 end=1.00
+ok   Living area [~sofa/lid/puff/tr] first@14ms=0.13 end=1.00
+ok   Outdoor living [~palm/lid/puff/tr] first@14ms=0.12 end=1.00
+ok   The whole home [~house/pop/sparkle/r] first@13ms=0.31 end=1.00
+ok   Next: how to reach you [~stairs/jack/hop/r] first@12ms=0.22 end=1.00
+ok   Book a consultation [~flag/hoist/wobble/tr] first@13ms=0.25 end=1.00
+ok   (754) 236‑0675 [phone] first@13ms=0.30 end=1.00
+ok   (754) 236‑0675 [phone] first@13ms=0.30 end=1.00
+ok   Sales@elbazconstruction.com [~envelope/slide/hop/r] first@14ms=0.26 end=1.00
+ok   Español [~globe/slide/spinout/r] first@13ms=0.26 end=1.00
+ok   Instagram [~camera/peek/flash/r] first@10ms=0.24 end=1.00
+ok   Facebook [~speech/peek/hop/r] first@13ms=0.24 end=1.00
+ok   LinkedIn [~briefcase/peek/squash/r] first@12ms=0.24 end=1.00
+ok   YouTube [~play/peek/ring/r] first@10ms=0.24 end=1.00
+ok   Verify a Florida licence [~shield/rail/tick/r] first@10ms=0.23 end=1.00
