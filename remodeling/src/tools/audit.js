@@ -8,10 +8,10 @@ const { chromium } = require('playwright');
 const FILE = process.env.FILE || 'file:///home/user/CLaude/remodeling/site/elbaz-homepage.html';
 const CENTRE = {
   hero1: '.hero1__plate', hero2: '.hero2__band', hero3: '.hero3__rig',
-  proof1: '.proof1__paper', proof2: '.proof2__plate', proof3: '.proof3__plan',
+  proof1: '.proof1__site', proof2: '.proof2__plate', proof3: '.proof3__plan',
   services1: '.services1__grid', services2: '.services2__stack', services3: '.services3__wall',
   ba1: '.ba1__stage', ba2: '.ba2__grid', ba3: '.ba3__stage',
-  process1: '.process1__route', process2: '.process2__svg', process3: '.process3__tape',
+  process1: '.process1__plan', process2: '.process2__stage', process3: '.process3__deck',
   financing1: '.financing1__row', financing2: '.financing2__rig', financing3: '.financing3__stage',
   work1: '.work1__grid', work2: '.work2__stage', work3: '.work3__belts',
   reviews1: '.reviews1__book', reviews2: '.reviews2__sky', reviews3: '.reviews3__dial',

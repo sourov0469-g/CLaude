@@ -7527,3 +7527,15 @@ Rebuilt versions:
 - Financing v3 closed state + **⟦S1383⟧ light paper technical** — RESULT: **ADAPTED** — the two kinds of money laid out on technical paper behind the orb, so the morph opens from a page that already reads.
 - Consult v2 — RESULT: **CHANGED** — the 255 morph between steps was a second morph on the page; replaced with a paper fold.
 - Dividers: scaffold → electrical conduit; trowel MotionPath follower → tile course; plumb bob → shingle course (each repeated a trick owned by a section or a field).
+
+### Elbaz Construction homepage — FULL BUILD v2 (owner verdict re-applied, 30 Oct 2026)
+
+**Governing brief:** FULL BUILD PROMPT v2 §1–§14 (`PROMPT-V2.md`). Re-audit result: Proof V1, Process V1–V3 and Towns V1 still read as documents; Hero V1's traced-line move had no named reference. Traceability rows in `TRACEABILITY.md`.
+
+- Hero v1 traced lines **⟦S1362⟧ technical-wireframe-info-layout** — PICKED-FOR: owner flag 2 (the move needed a named reference) — RESULT: **ADAPTED** — annotation pills on dashed connectors, drawn in stages (dot → connector → pill) only while the X-ray slit holds them; labels limited to the words FACTS.md gives that photograph.
+- Proof v1 **⟦S0452⟧ Matter.js** — PICKED-FOR: credentials as something to handle, not read — RESULT: **ADAPTED** — five credential materials drop onto a deck; spring-constraint grab and throw on desktop, tap bump on touch, keyboard bump, Restack; rotation locked so no text rests turned; static settled pile under reduced motion. Lesson: bodies created static never regain mass when released; add them to the world on release.
+- Process v1 **[BANK] Q54 responsive curved path** — RESULT: **KEPT** — the path through measured anchors with the entry's multipliers; the traveller is a pickup on a site plan, anchors are eight signposts.
+- Process v2 **⟦S1340⟧ A Building That Builds Itself** — RESULT: **ADAPTED** — 2D house section under a rising line, timber shoring above (not a steel scaffold, which Hero v3 owns); runs once in view, then draggable; not pinned.
+- Process v3 **⟦S1443⟧ gesture patterns + the firm's week-ranged stages** — RESULT: **KEPT** — 12px activation, axis lock, 30% / .55 px/ms threshold, rubber-band return, buttons and keys as alternatives; tap deals the next card.
+- Towns v1 **[BANK] Q576 For Living hover → tap map** — RESULT: **ADAPTED** — the "areas" are 104 survey marks answering with a survey flag on hover (28px), tap (40px) or arrow keys; counties zoom the map; the on-screen list removed (kept for screen readers and in Towns v3).
+- Systems: the floating Settings pill covered content → docked in the header. Lesson: anything fixed over the page must be tested against every section's corners, not only the hero.
