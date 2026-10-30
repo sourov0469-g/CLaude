@@ -334,3 +334,15 @@ All runs use `file://…/delivered-df98d54.html`, a copy of the delivered file (
 - **Weight.** Packed 4,217,917 B (ceiling 4,221,484 B): code 878,191, media 3,339,726.
 
 **K12 (§2: §4 over the reference's parameter).** Q95's drift of 18 is a perpetual idle animation. F17 allows only reveal-level motion plus one signature interactive, so the drift is dropped and Q95's pointer parallax stays. Applied the same way to S1364's clock-driven folds in Book 1 and to the v4 hero field's "ghost waves" (AUDIT-V4 #8).
+
+## V6 Phase 4, first run (30 Oct): stopped, two failures fixed, full re-run follows
+- **Item 4, three references drawn at random** (seed 202610304, excluding the six checked earlier): Book 1 / Rogers, Book 2 / Mad City, Book 3 / #413 Tequila.
+  - **#413 matches.** The deep-read describes the conversational form ("Hey Tequila, I'm… I'm looking for…") with a reply promise.
+  - **Rogers FAILED.** The reference is "phone OR self-scheduling at equal weight"; Book 1's online path was a small button under a giant phone. Fix: two paths at the same type scale, side by side.
+  - **Mad City FAILED.** The reference device is "ZIP-first"; the form asked for the ZIP last. Fix: the ZIP is the first field of step 1, with the trade (shared form engine, so Book 1's panel and Book 2 both change). Bug introduced and fixed along the way: the ZIP's live re-check had called the step-3 validator.
+- **Evidence after the fix:**
+  - `sect.js book` 9/9, console 0, both forms submitted.
+  - Book 1 panel fits and nothing overflows at 1440, 375 and 320.
+  - Screenshots `v5/fix/book.png`.
+- **Test update:** `qa/v6/sect.js` formRun now fills the ZIP in step 1.
+- The partial Phase-4 run was stopped, because it measured a pre-fix file. Phase 4 is re-run in FULL below.

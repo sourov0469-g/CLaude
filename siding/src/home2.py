@@ -1133,14 +1133,14 @@ def form(pref, theme='', panes=False):
     radios = ''.join(f'<label class="ck"><input type="radio" name="{pref}-band" value="{b}"><span>{b}</span></label>' for b in BANDS)
     return f'''<form class="bk {theme}" data-form novalidate aria-label="Request a free inspection">
       <p class="bk-k num" aria-live="polite">{PANES3 if panes else ''}<span>1</span> of 3</p>
-      <fieldset class="bk-step is-on" data-step="1"><legend>What should we look at?</legend>
+      <fieldset class="bk-step is-on" data-step="1"><legend>Where is the house, and what should we look at?</legend>
+        <div class="fld"><label for="{pref}-zip">ZIP code</label><input id="{pref}-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" required aria-describedby="{pref}-zip-e"><p class="bk-err" id="{pref}-zip-e" hidden>ZIP codes have 5 digits, like 78752.</p></div>
         <div class="cks">{chips}</div><p class="bk-err" id="{pref}-e1" hidden>Pick at least one, so the right person comes out.</p></fieldset>
       <fieldset class="bk-step" data-step="2" hidden><legend>Roughly what budget?</legend>
         <div class="cks">{radios}</div><p class="bk-err" id="{pref}-e2" hidden>Pick a band, or "Not sure yet".</p></fieldset>
       <fieldset class="bk-step" data-step="3" hidden><legend>Where should we call you?</legend>
         <div class="fld"><label for="{pref}-name">First name</label><input id="{pref}-name" name="name" autocomplete="given-name" required aria-describedby="{pref}-name-e"><p class="bk-err" id="{pref}-name-e" hidden>Add your first name.</p></div>
         <div class="fld"><label for="{pref}-tel">Phone</label><input id="{pref}-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="{pref}-tel-e"><p class="bk-err" id="{pref}-tel-e" hidden>Phone numbers have 10 digits, like (512) 550-0000.</p></div>
-        <div class="fld"><label for="{pref}-zip">ZIP code</label><input id="{pref}-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" required aria-describedby="{pref}-zip-e"><p class="bk-err" id="{pref}-zip-e" hidden>ZIP codes have 5 digits, like 78752.</p></div>
       </fieldset>
       <div class="bk-done" tabindex="-1" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25l7 7 15-16"/></svg><p class="bk-done-h">Request saved, <span data-done-name>thanks</span></p><p>The office calls you back to pick a time: {HOURS}.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
       <div class="bk-nav"><button class="bk-back tlink" type="button" hidden>Back</button><button class="btn btn-ink bk-next" type="button">Continue</button><button class="btn btn-red bk-send" type="submit" hidden>Request my inspection</button></div>
@@ -1152,9 +1152,12 @@ def book1():
   <div class="bgf" aria-hidden="true"><canvas class="b1-folds"></canvas></div>
   <h2 class="h2x b1-h" data-split>See your price in writing</h2>
   <p class="b1-sub">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price.</p>
-  <span class="mag" data-magnet><svg class="b1-door" aria-hidden="true" focusable="false"><rect class="bd-o" x="0" y="0" width="100%" height="100%" rx="4"/><rect class="bd-i" x="12" y="12" width="100%" height="100%" rx="2"/></svg><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
-  <p class="b1-hours">Office hours: {HOURS}</p>
-  <div class="b1-act"><button class="btn btn-white b1-open" type="button" aria-expanded="false" aria-controls="b1-panel">Book free inspection online</button></div>
+  <div class="b1-paths">
+    <div class="b1-path"><p class="b1-pk">Call the office</p><span class="mag" data-magnet><svg class="b1-door" aria-hidden="true" focusable="false"><rect class="bd-o" x="0" y="0" width="100%" height="100%" rx="4"/><rect class="bd-i" x="12" y="12" width="100%" height="100%" rx="2"/></svg><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
+      <p class="b1-hours">Office hours: {HOURS}</p></div>
+    <div class="b1-path b1-act"><p class="b1-pk">Or book it yourself</p><button class="b1-open" type="button" aria-expanded="false" aria-controls="b1-panel">Book online</button>
+      <p class="b1-hours">Pick a time in about a minute; the inspection is free.</p></div>
+  </div>
   <div class="b1-panel" id="b1-panel" hidden>{form('b1', 'bk-card')}</div>
 </div>'''
 

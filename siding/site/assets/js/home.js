@@ -1197,9 +1197,14 @@
     const err = (id, on) => { const e = $('#' + id, form) || $(`[id="${id}"]`, form); if (e) e.hidden = !on; };
     const fid = $('.bk-err', form).id.replace(/-e1$/, '');
     function valid(n, focus) {
-      if (n === 0) { const ok = $$('input[name="trade"]:checked', form).length > 0; err(`${fid}-e1`, !ok); if (!ok && focus) $('input[name="trade"]', form).focus(); return ok; }
+      if (n === 0) {   // V6 (Mad City, ZIP-first): the ZIP is the funnel's first field, then the trade
+        const z = $('input[name="zip"]', form), zok = /^\d{5}$/.test(z.value.trim()); z.setAttribute('aria-invalid', !zok); err(z.getAttribute('aria-describedby'), !zok);
+        const ok = $$('input[name="trade"]:checked', form).length > 0; err(`${fid}-e1`, !ok);
+        if (focus) { if (!zok) z.focus(); else if (!ok) $('input[name="trade"]', form).focus(); }
+        return zok && ok;
+      }
       if (n === 1) { const ok = !!$(`input[type="radio"]:checked`, form); err(`${fid}-e2`, !ok); if (!ok && focus) $('input[type="radio"]', form).focus(); return ok; }
-      const f = [['name', v => v.trim().length > 0], ['tel', v => v.replace(/\D/g, '').length === 10], ['zip', v => /^\d{5}$/.test(v.trim())]];
+      const f = [['name', v => v.trim().length > 0], ['tel', v => v.replace(/\D/g, '').length === 10]];
       let first = null;
       f.forEach(([nm, test]) => { const inp = $(`input[name="${nm}"]`, form), ok = test(inp.value); inp.setAttribute('aria-invalid', !ok); err(inp.getAttribute('aria-describedby'), !ok); if (!ok && !first) first = inp; });
       if (first && focus) first.focus();
@@ -1215,7 +1220,7 @@
     b.on(next, 'click', () => { if (valid(i, true)) show(i + 1, 1); else shake(); });
     b.on(back, 'click', () => show(i - 1, -1));
     b.on(form, 'change', () => { if (i < 2) { const e = $$('.bk-err', steps[i])[0]; if (e && !e.hidden) valid(i, false); } });
-    $$('input[name="name"], input[name="tel"], input[name="zip"]', form).forEach(inp => b.on(inp, 'input', () => { if (inp.getAttribute('aria-invalid') === 'true') valid(2, false); }));
+    $$('input[name="name"], input[name="tel"], input[name="zip"]', form).forEach(inp => b.on(inp, 'input', () => { if (inp.getAttribute('aria-invalid') === 'true') valid(inp.name === 'zip' ? 0 : 2, false); }));
     const tel = $('input[name="tel"]', form);
     b.on(tel, 'input', () => { const v = tel.value.replace(/\D/g, '').slice(0, 10); tel.value = v.length > 6 ? `(${v.slice(0, 3)}) ${v.slice(3, 6)}-${v.slice(6)}` : v.length > 3 ? `(${v.slice(0, 3)}) ${v.slice(3)}` : v; });
     b.on(form, 'submit', e => {

@@ -388,14 +388,18 @@ Sections are recorded in SECTIONS.md order.
 **K1 · Call**
 - **Reference:** [BANK] Rogers Roofing (dual-path contact, phone OR self-scheduling at equal weight; A2 + `roofing/structure-uiux/roofing.md`) + ⟦S1364⟧ atmosphere background (slow folds).
 - **Mechanism:** the phone and online booking side by side.
-- **Adaptations:** giant phone on a raised door panel; the booking panel opens in place; folds canvas.
+- **Adaptations:**
+  - Two paths at EQUAL weight (V6 fix, after the Phase-4 re-check found the online path under-weighted against the reference): the phone on a raised door panel and "Book online" at the same type scale, side by side, the booking panel opening in place.
+  - The folds canvas advances only with the visitor (K12).
 - **Verdict:** KEPT. R ✓, S ✓, T ✓ (owns the folds), F ✓ (phone; hours via K2), D ✓, P ✓.
 - **Verification:** PASS (29 Oct). Screenshot `book1-d/-m.png`. The panel opens (aria-expanded), its form refuses an empty Continue and reaches 'Request saved' with valid data. Defect fixed: the door panel behind the phone was capped by the global svg max-width and the number overhung it; now it fits at 1440, 375 and 320. `sect.js book` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); hours print the §3 string verbatim.
 
 **K2 · Form**
 - **Reference:** [BANK] Mad City Windows (siding scan: ZIP-first, 3-question funnel; A2) + ⟦S1442⟧ / ⟦S0661⟧ (validate on blur/continue; step indicator).
 - **Mechanism:** a short multi-step form with a step indicator.
-- **Adaptations:** trade, budget band, contact; steps as three glazing panes; ring feedback on submit.
+- **Adaptations:**
+  - ZIP-FIRST as the reference (V6 fix: the ZIP had been in step 3): step 1 asks for the ZIP and the trade, step 2 the budget band, step 3 name and phone.
+  - Steps as three glazing panes; ring feedback on submit.
 - **Verdict:** KEPT. R ✓, S ✓, T ✓, F ✓, D ✓, P ✓.
 - **Verification:** PASS (29 Oct). Screenshot `book2-d/-m.png`. Empty Continue shows the step error; a full valid run reaches done. `sect.js book` PASS at 1440, 375 and 1440 reduced motion (switch isolation, console 0, no overflow); hours print the §3 string verbatim.
 

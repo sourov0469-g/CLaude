@@ -857,10 +857,16 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 .book-1 { display: grid; gap: 18px; justify-items: start; }
 .b1-h { font-size: clamp(2.5rem, 1rem + 5vw, 5.5rem); max-width: 12ch; }
 .b1-sub { font-size: var(--t-lead); max-width: 34ch; }
-.b1-tel { font-size: clamp(3rem, 1rem + 8.4vw, 9.5rem); font-weight: 800; font-stretch: 76%; line-height: .9; letter-spacing: -.035em; text-decoration: none; margin: 12px 0 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.b1-tel { font-size: clamp(2.5rem, 1rem + 4.4vw, 5.5rem); font-weight: 800; font-stretch: 76%; line-height: .9; letter-spacing: -.035em; text-decoration: none; margin: 12px 0 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (hover: hover) and (pointer: fine) { .b1-tel:hover { text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .08em; } }
 .b1-hours { opacity: 1; font-weight: 520; }
-.b1-act { margin-top: 12px; }
+.b1-paths { display: grid; gap: 28px; margin-top: 8px; }   /* Rogers Roofing: phone OR self-scheduling, at equal weight (V6) */
+.b1-path { display: grid; gap: 10px; align-content: start; justify-items: start; }
+.b1-pk { margin: 0; font-size: var(--t-sm); font-weight: 650; opacity: .85; }
+.b1-open { margin-top: 12px; padding: .06em .32em .1em; border: 3px solid rgba(255, 255, 255, .85); border-radius: 14px; background: none; color: #fff; font: inherit; font-size: clamp(2.5rem, 1rem + 4.4vw, 5.5rem); font-weight: 800; font-stretch: 76%; line-height: .9; letter-spacing: -.035em; cursor: pointer; transition: background-color var(--t-ui) var(--ease), color var(--t-ui) var(--ease); }
+.b1-open[aria-expanded="true"], .b1-open:active { background: #fff; color: var(--red); }
+@media (hover: hover) and (pointer: fine) { .b1-open:hover { background: rgba(255, 255, 255, .14); } }
+@media (min-width: 900px) { .b1-paths { grid-template-columns: repeat(2, max-content); column-gap: clamp(40px, 6vw, 96px); } }
 .b1-panel { width: 100%; max-width: 640px; margin-top: 8px; }
 .b1-panel .btn-red { background: var(--red); }
 
