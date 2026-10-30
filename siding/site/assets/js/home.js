@@ -1311,7 +1311,9 @@
     const steps = $$('.bk-step', form), kEl = $('.bk-k', form), k = $('.bk-k span', form), next = $('.bk-next', form), back = $('.bk-back', form), send = $('.bk-send', form), done = $('.bk-done', form);
     let i = 0;
     const err = (id, on) => { const e = $('#' + id, form) || $(`[id="${id}"]`, form); if (e) e.hidden = !on; };
-    const fid = $('.bk-err', form).id.replace(/-e1$/, '');
+    // Audit pack F10.1: the group errors are found by their own ids (the old prefix guess read "b1-zip-e" and looked up
+    // "b1-zip-e-e1", which never existed, so a blocked step stated no reason)
+    const fid = ($('[id$="-e1"]', form) || $('.bk-err', form)).id.replace(/-e1$/, '');
     function valid(n, focus) {
       if (n === 0) {   // V6 (Mad City, ZIP-first): the ZIP is the funnel's first field, then the trade
         const z = $('input[name="zip"]', form), zok = /^\d{5}$/.test(z.value.trim()); z.setAttribute('aria-invalid', !zok); err(z.getAttribute('aria-describedby'), !zok);
@@ -1338,11 +1340,12 @@
     b.on(form, 'change', () => { if (i < 2) { const e = $$('.bk-err', steps[i])[0]; if (e && !e.hidden) valid(i, false); } });
     $$('input[name="name"], input[name="tel"], input[name="zip"]', form).forEach(inp => b.on(inp, 'input', () => { if (inp.getAttribute('aria-invalid') === 'true') valid(inp.name === 'zip' ? 0 : 2, false); }));
     const tel = $('input[name="tel"]', form);
-    b.on(tel, 'input', () => { const v = tel.value.replace(/\D/g, '').slice(0, 10); tel.value = v.length > 6 ? `(${v.slice(0, 3)}) ${v.slice(3, 6)}-${v.slice(6)}` : v.length > 3 ? `(${v.slice(0, 3)}) ${v.slice(3)}` : v; });
+    // F10.3: the number is formatted once the visitor leaves the field, never rewritten under their fingers
+    b.on(tel, 'blur', () => { const v = tel.value.replace(/\D/g, ''); if (v.length === 10) tel.value = `(${v.slice(0, 3)}) ${v.slice(3, 6)}-${v.slice(6)}`; });
     b.on(form, 'submit', e => {
       e.preventDefault();
       if (!valid(2, true)) { shake(); return; }
-      $('[data-done-name]', form).textContent = $('input[name="name"]', form).value.trim() || 'thanks';
+      $('[data-done-name]', form).textContent = $('input[name="name"]', form).value.trim() || 'there';
       steps.forEach(s => { s.hidden = true; }); [kEl, $('.bk-nav', form)].forEach(x => { x.hidden = true; });
       done.hidden = false; done.focus();
       if (motionOK()) { const p = $('path', done), L = p.getTotalLength(); G.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: UI, ease: ease.out, delay: 0.1 }); G.from($$('p', done), { y: 10, autoAlpha: 0, duration: UI, ease: ease.out, stagger: 0.06 }); }
@@ -1392,7 +1395,7 @@
     const cv = $('.b1-folds', r); if (cv) folds(cv, r, b);
     const open = $('.b1-open', r), panel = $('#b1-panel', r), pre = Form($('form', r), b);
     const toggle = (on, focus) => {
-      open.setAttribute('aria-expanded', on); panel.hidden = !on; open.textContent = on ? 'Hide the form' : 'Book free inspection online';
+      open.setAttribute('aria-expanded', on); panel.hidden = !on; open.textContent = on ? 'hide the form' : (s.v > 5 ? 'Book free inspection online' : 'book online');
       if (on && motionOK()) G.fromTo(panel, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: UI, ease: ease.out, overwrite: true });
       if (on && focus) { const f = $('input', panel); if (f) f.focus({ preventScroll: true }); }
     };
@@ -1412,8 +1415,28 @@
   /* BOOK 3: Q413 Tequila's conversational form: one sentence with inline fields. Validated on Send, then live while
      fixing (S0661); the errors are listed in plain words under the sentence and the first bad field takes focus. */
   V.book3 = (r, b, s) => {
+    const bk = s.v > 5;
+    /* F10 V3.4: each blank answers in its own way, transform/opacity/dash only, each under 0.3 s: the name's line
+       draws left to right (dashoffset, 0.18 s); the ZIP fills five ticks, one per digit; the phone line settles in one
+       0.16 s scaleX from the end you typed at. Backup 3 keeps the shared chalk pluck. */
+    if (!bk) $$('.snt-in', r).forEach(w => {
+      const inp = $('input', w), svg = $('.snt-ch', w), path = $('path', svg), kind = inp.name;
+      path.setAttribute('d', 'M0 5H100'); path.setAttribute('pathLength', '1'); path.style.strokeDasharray = '1 1';
+      const line = on => { if (motionOK()) G.to(path, { strokeDashoffset: on ? 0 : 1, duration: 0.18, ease: 'power2.out', overwrite: true }); else path.style.strokeDashoffset = on ? 0 : 1; };
+      if (kind === 'zip') {
+        const NS = 'http://www.w3.org/2000/svg', ticks = [0, 1, 2, 3, 4].map(k => { const t = d.createElementNS(NS, 'rect'); t.setAttribute('class', 'snt-tk'); t.setAttribute('x', k * 20 + 2); t.setAttribute('y', 2); t.setAttribute('width', 16); t.setAttribute('height', 6); svg.appendChild(t); return t; });
+        path.style.strokeDashoffset = 0; path.style.opacity = 0.35;
+        b.on(inp, 'input', () => { const n = inp.value.replace(/\D/g, '').length; ticks.forEach((t, k) => t.classList.toggle('on', k < n)); });
+      } else if (kind === 'tel') {
+        path.style.strokeDashoffset = 0;
+        b.on(inp, 'blur', () => { if (inp.value.replace(/\D/g, '').length === 10) { const v = inp.value.replace(/\D/g, ''); inp.value = `(${v.slice(0, 3)}) ${v.slice(3, 6)}-${v.slice(6)}`; if (motionOK()) G.fromTo(svg, { scaleX: 0 }, { scaleX: 1, transformOrigin: '100% 50%', duration: 0.16, ease: 'power2.out' }); } });
+      } else {
+        path.style.strokeDashoffset = 1;
+        b.on(inp, 'input', () => line(inp.value.trim().length > 0));
+      }
+    });
     // v4 (Q163 pluck): each blank hangs as a slack chalk line; filling it snaps the line taut with a short decaying pluck
-    $$('.snt-in', r).forEach(w => {
+    if (bk) $$('.snt-in', r).forEach(w => {
       const inp = $('input', w), path = $('.snt-ch path', w);
       let taut = false;
       const set = sag => path.setAttribute('d', `M0 4Q50 ${(4 + sag).toFixed(2)} 100 4`);
@@ -1432,7 +1455,7 @@
     const check = focus => {
       const bad = rules.filter(([n, ok]) => !ok(F(n).value));
       rules.forEach(([n, ok]) => F(n).setAttribute('aria-invalid', !ok(F(n).value)));
-      errs.hidden = !bad.length; errs.innerHTML = bad.map(x => `<li>${x[2]}</li>`).join('');
+      errs.hidden = !bad.length; errs.innerHTML = bad.map(x => `<li id="snt-e-${x[0]}">${x[2]}</li>`).join('');   // F10 V3.1: each field's aria-describedby names its own message
       if (bad.length && focus) F(bad[0][0]).focus();
       return !bad.length;
     };
@@ -1440,8 +1463,9 @@
     b.on(form, 'submit', e => {
       e.preventDefault(); tried = true;
       if (!check(true)) return;
-      $('[data-snt-name]', done).textContent = F('name').value.trim();
-      $$('.snt, .snt-go', form).forEach(el => { el.hidden = true; });
+      $('[data-snt-name]', done).textContent = F('name').value.trim() || 'there';
+      $$('.snt, .snt-go, .snt-err', form).forEach(el => { el.hidden = true; });
+      form.classList.add('is-done');   // F10 V3.2: the whole sentence container goes, not just its children
       done.hidden = false; done.focus();
     });
     s.api.book = trade => {

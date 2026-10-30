@@ -1304,45 +1304,48 @@ PANES3 = ('<svg class="bk-panes" viewBox="0 0 66 30" aria-hidden="true" focusabl
           + '<path class="bp-sill" d="M-2 31H68"/></svg>')
 
 
+# Audit pack F10.2: the prototype says what it is BEFORE the first field, and its last step never claims a save
+PROTO = f'Concept site: this form is a working prototype and sends nothing. To book for real, call {PHONE}.'
+
+
 def form(pref, theme='', panes=False):
     chips = ''.join(f'<label class="ck"><input type="checkbox" name="trade" value="{t}"><span>{t}</span></label>' for t in BOOK_TRADES)
     radios = ''.join(f'<label class="ck"><input type="radio" name="{pref}-band" value="{b}"><span>{b}</span></label>' for b in BANDS)
     return f'''<form class="bk {theme}" data-form novalidate aria-label="Request a free inspection">
+      <p class="bk-proto">{PROTO}</p>
       <p class="bk-k num" aria-live="polite">{PANES3 if panes else ''}<span>1</span> of 3</p>
-      <fieldset class="bk-step is-on" data-step="1"><legend>Where is the house, and what should we look at?</legend>
+      <fieldset class="bk-step is-on" data-step="1" aria-describedby="{pref}-e1"><legend>Where is the house, and what should we look at?</legend>
         <div class="fld"><label for="{pref}-zip">ZIP code</label><input id="{pref}-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" required aria-describedby="{pref}-zip-e"><p class="bk-err" id="{pref}-zip-e" hidden>ZIP codes have 5 digits, like 78752.</p></div>
         <div class="cks">{chips}</div><p class="bk-err" id="{pref}-e1" hidden>Pick at least one, so the right person comes out.</p></fieldset>
-      <fieldset class="bk-step" data-step="2" hidden><legend>Roughly what budget?</legend>
+      <fieldset class="bk-step" data-step="2" hidden aria-describedby="{pref}-e2"><legend>Roughly what budget?</legend>
         <div class="cks">{radios}</div><p class="bk-err" id="{pref}-e2" hidden>Pick a band, or "Not sure yet".</p></fieldset>
       <fieldset class="bk-step" data-step="3" hidden><legend>Where should we call you?</legend>
-        <div class="fld"><label for="{pref}-name">First name</label><input id="{pref}-name" name="name" autocomplete="given-name" required aria-describedby="{pref}-name-e"><p class="bk-err" id="{pref}-name-e" hidden>Add your first name.</p></div>
+        <div class="fld"><label for="{pref}-name">First name</label><input id="{pref}-name" name="name" type="text" autocomplete="given-name" required aria-describedby="{pref}-name-e"><p class="bk-err" id="{pref}-name-e" hidden>Add your first name.</p></div>
         <div class="fld"><label for="{pref}-tel">Phone</label><input id="{pref}-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="{pref}-tel-e"><p class="bk-err" id="{pref}-tel-e" hidden>Phone numbers have 10 digits, like (512) 550-0000.</p></div>
       </fieldset>
-      <div class="bk-done" tabindex="-1" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25l7 7 15-16"/></svg><p class="bk-done-h">Request saved, <span data-done-name>thanks</span></p><p>The office calls you back to pick a time: {HOURS}.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
+      <div class="bk-done" tabindex="-1" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25l7 7 15-16"/></svg><p class="bk-done-h">Thanks, <span data-done-name>there</span>. Nothing was sent.</p><p>This form is a design prototype, so your answers stayed on this page. To book for real, call <a class="tlink" href="{TEL}">{PHONE}</a>: {HOURS}.</p></div>
       <div class="bk-nav"><button class="bk-back tlink" type="button" hidden>Back</button><button class="btn btn-ink bk-next" type="button">Continue</button><button class="btn btn-red bk-send" type="submit" hidden>Request my inspection</button></div>
     </form>'''
 
 
 def book1():
     return f'''<div class="v book-1 has-bgf" data-tone="red">
-  <div class="bgf" aria-hidden="true"><canvas class="b1-folds"></canvas></div>
   <h2 class="h2x b1-h" data-split>See your price in writing</h2>
   <p class="b1-sub">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price.</p>
-  <div class="b1-paths">
-    <div class="b1-path"><p class="b1-pk">Call the office</p><span class="mag" data-magnet><svg class="b1-door" aria-hidden="true" focusable="false"><rect class="bd-o" x="0" y="0" width="100%" height="100%" rx="4"/><rect class="bd-i" x="12" y="12" width="100%" height="100%" rx="2"/></svg><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a></span>
-      <p class="b1-hours">Office hours: {HOURS}</p></div>
-    <div class="b1-path b1-act"><p class="b1-pk">Or book it yourself</p><button class="b1-open" type="button" aria-expanded="false" aria-controls="b1-panel">Book online</button>
-      <p class="b1-hours">Pick a time in about a minute; the inspection is free.</p></div>
+  <div class="b1-paths b1-one">
+    <div class="b1-path"><p class="b1-pk">Call the office</p><a class="b1-tel" href="{TEL}" data-cur="alt" data-cur-label="Call">{PHONE}</a>
+      <p class="b1-hours">Office hours: {HOURS}</p>
+      <p class="b1-or">Or <button class="b1-open tlink" type="button" aria-expanded="false" aria-controls="b1-panel">book online</button>: two minutes of questions; the office calls back with times.</p></div>
   </div>
   <div class="b1-panel" id="b1-panel" hidden>{form('b1', 'bk-card')}</div>
 </div>'''
 
 
 def book2():
-    return f'''<div class="v book-2" data-tone="ground">
+    return f'''<div class="v book-2" data-tone="red">
   <div class="b2-grid">
-    <figure class="b2-ph">{img(H + 'book-1000.webp', 1000, 625, alt(HOME_PAIRS[0]['aa']))}<figcaption>{e(HOME_PAIRS[0]['p'])}, {e(HOME_PAIRS[0]['w'])}. {e(HOME_PAIRS[0]['bl'])} {band(HOME_PAIRS[0]['b'])}</figcaption></figure>
-    <div class="b2-form"><h2 class="h2x" data-split>See your price in writing</h2><p class="b2-sub">Free inspection, 30 to 60 minutes, no obligation. Or call <a class="tlink" href="{TEL}">{PHONE}</a>.</p>{form('b2', 'bk-card', panes=True)}</div>
+    <figure class="b2-ph">{img(H + 'book-1000.webp', 1000, 625, alt(HOME_PAIRS[0]['aa']))}<figcaption><b>After</b> {e(HOME_PAIRS[0]['p'])}, {e(HOME_PAIRS[0]['w'])}. {e(HOME_PAIRS[0]['bl'])} {band(HOME_PAIRS[0]['b'])}</figcaption></figure>
+    <div class="b2-form"><h2 class="h2x" data-split>See your price in writing</h2><p class="b2-sub">Free inspection, 30 to 60 minutes, no obligation. Or call <a class="tlink b2-tel" href="{TEL}">{PHONE}</a>.</p>{form('b2', 'bk-card', panes=True)}</div>
   </div>
 </div>'''
 
@@ -1352,18 +1355,19 @@ def book3():
     in the firm's own words (30 to 60 minute inspection; scope, materials and price; office hours)"""
     trades = ''.join(f'<option{" selected" if t == "Siding" else ""}>{e(t)}</option>' for t in BOOK_TRADES)
     bands = ''.join(f'<option{" selected" if b_ == "Not sure yet" else ""}>{e(b_)}</option>' for b_ in BANDS)
-    return f'''<div class="v book-3" data-tone="night">
+    return f'''<div class="v book-3" data-tone="red">
   <form class="snt-form" data-snt novalidate aria-labelledby="snt-h">
-    <h2 class="snt-k" id="snt-h">Book a free inspection, in one sentence</h2>
-    <p class="snt">Hi Austin Pro, I'm <span class="snt-in"><input name="name" autocomplete="given-name" aria-label="Your first name" placeholder="your name" size="9" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.
+    <h2 class="h2x snt-h" id="snt-h" data-split>Book it in one sentence</h2>
+    <p class="snt-proto">{PROTO}</p>
+    <p class="snt">Hi Austin Pro, I'm <span class="snt-in"><input name="name" type="text" autocomplete="given-name" aria-label="Your first name" placeholder="your name" size="9" required aria-describedby="snt-e-name"><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.
       Could you look at my <span class="snt-sel"><select name="trade" aria-label="What to look at">{trades}</select></span>
-      in <span class="snt-in"><input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-label="Your ZIP code" placeholder="ZIP" size="5" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>?
+      in <span class="snt-in"><input name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-label="Your ZIP code" placeholder="ZIP" size="5" required aria-describedby="snt-e-zip"><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>?
       My budget is roughly <span class="snt-sel"><select name="band" aria-label="Rough budget">{bands}</select></span>.
-      Call me on <span class="snt-in"><input name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-label="Your phone number" placeholder="phone" size="12" required><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.</p>
+      Call me on <span class="snt-in"><input name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-label="Your phone number" placeholder="phone" size="12" required aria-describedby="snt-e-tel"><svg class="snt-ch" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4Q50 9 100 4"/></svg></span>.</p>
     <ul class="snt-err" aria-live="polite" hidden></ul>
     <div class="snt-go"><button class="btn btn-red snt-send" type="submit" data-cur="hero">Send my request</button>
       <p class="snt-promise">Free inspection, 30 to 60 minutes, no obligation. You get the scope, materials and price in writing. The office calls you back to pick a time: {HOURS}.</p></div>
-    <div class="snt-done" tabindex="-1" hidden><p class="bk-done-h">Request saved, <span data-snt-name>thanks</span></p><p>The office calls you back to pick a time.</p><p class="fine">Concept site: this form is a working prototype and sends nothing.</p></div>
+    <div class="snt-done" tabindex="-1" hidden><p class="bk-done-h">Thanks, <span data-snt-name>there</span>. Nothing was sent.</p><p>This sentence is a design prototype, so it stayed on this page. To book for real, call <a class="tlink on-dark" href="{TEL}">{PHONE}</a>: {HOURS}.</p></div>
   </form>
   <p class="b3-call">Rather talk? <a class="tlink on-dark" href="{TEL}">{PHONE}</a></p>
 </div>'''
@@ -1418,7 +1422,14 @@ def facts_pass(html):
     return html
 
 
-FACT_FIX = []   # (old, new) pairs added as Part C/F fact corrections land
+FACT_FIX = [   # (old, new) pairs: corrections of fact or honesty that also reach the frozen backups
+    ('Request saved, <span data-done-name>thanks</span>', 'Thanks, <span data-done-name>there</span>. Nothing was sent'),   # F10.2
+    ('Request saved, <span data-snt-name>thanks</span>', 'Thanks, <span data-snt-name>there</span>. Nothing was sent'),
+    ('The office calls you back to pick a time', 'This is a design prototype; to book for real, call (512) 550-0000'),
+    ('Half of them landed between', 'The middle half of them landed between'),   # F9.1: the published middle half, said as such
+    ('<p class="cr-sub">Point at a name to read what people wrote about them, word for word.</p>',   # F8 V3.1/2: 474 in every reviews state
+     '<p class="cr-sub">Point at a name to read what people wrote about them, in their own words, shortened where you see …</p><p class="rating"><b class="num">4.9</b> on 474 Google reviews</p>'),
+]
 
 
 def backups(key):

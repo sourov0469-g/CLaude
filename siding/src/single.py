@@ -27,7 +27,7 @@ MIME = {'.webp': 'image/webp', '.avif': 'image/avif', '.png': 'image/png', '.jpg
 # format, quality), first match wins. Job photos go to AVIF at 50 (about 40 % under WebP at the same look) and at most
 # 1120 px wide (the widest place one shows is the Hero 3 panel); the traced blueprint plates are two-tone line art,
 # stored lossless as ink on sheet; badges, logos and the font are untouched.
-SQUEEZE = [(r'assets/img/photos/p\d+-1400\.webp$', 1120, 'AVIF', 50), (r'assets/img/h/bp-', 1000, 'PLATE', 0),
+SQUEEZE = [(r'assets/img/photos/p\d+-1400\.webp$', 1120, 'AVIF', 46), (r'assets/img/h/bp-', 1000, 'PLATE', 0),
            (r'assets/img/h/t/', 320, 'AVIF', 55), (r'assets/img/h/trade-', 640, 'AVIF', 50),
            (r'assets/img/(h/(work|book)|pairs/|studio/base)', 1440, 'AVIF', 50)]
 TERSER = os.environ.get('TERSER') or shutil.which('terser')   # optional: minify the two site scripts when terser is on PATH
@@ -53,9 +53,29 @@ def data_uri(p):
     return f'data:{MIME[ext]};base64,' + base64.b64encode(raw).decode()
 
 
+CACHE = os.path.join(HERE, '.squeeze-cache')   # re-encodes keyed by source bytes + rule; AVIF at speed 2 is slow
+
+
 def squeeze(p):
     """(bytes, mime) for the packed copy of an image; the original when re-encoding would not make it smaller"""
+    import hashlib
     raw = rd(p, 'rb')
+    rule = next(((rx, w, fmt, q) for rx, w, fmt, q in SQUEEZE if re.search(rx, p)), None)
+    key = hashlib.sha1(raw + repr(rule).encode()).hexdigest()
+    hit = os.path.join(CACHE, key)
+    if os.path.exists(hit):
+        with open(hit, 'rb') as f:
+            data = f.read()
+        mime, _, body = data.partition(b'\n')
+        return body, mime.decode()
+    out = _squeeze(p, raw)
+    os.makedirs(CACHE, exist_ok=True)
+    with open(hit, 'wb') as f:
+        f.write(out[1].encode() + b'\n' + out[0])
+    return out
+
+
+def _squeeze(p, raw):
     for rx, w, fmt, q in SQUEEZE:
         if re.search(rx, p):
             im = Image.open(io.BytesIO(raw)).convert('RGB')
@@ -69,7 +89,7 @@ def squeeze(p):
                 im.save(buf, 'WEBP', lossless=True, method=6)
                 mime = 'image/webp'
             else:
-                im.save(buf, 'AVIF', quality=q, speed=4)
+                im.save(buf, 'AVIF', quality=q, speed=2)
                 mime = 'image/avif'
             if buf.tell() < len(raw):
                 return buf.getvalue(), mime

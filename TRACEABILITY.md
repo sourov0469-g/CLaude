@@ -868,3 +868,52 @@ The review texts stay exactly as the firm publishes them, typos included. No sen
 - 2 · "Strike-redraw on every keystroke": REJECTED as a finding. The code already passes `anim=false` on `input` (keystrokes update the numeral plainly) and draws the strike only on `blur` and on box changes. It is verified in the source and unchanged. ⟦S0089⟧.
 - 3 · Left column: ACCEPTED. The firm's worked example is a static mini-receipt ($30,000, −10 %, −5 %, −10 %, $22,500). ⟦S1501⟧.
 - 4 · Cap: ACCEPTED. "up to $500,000" is printed under Project. Above it, a visible note says "Estimates here stop at $500,000." on blur. ⟦S0049⟧.
+
+## F10 · Book
+**Shared form P1s (Book 1 and 2's `bk` engine, and Book 3).**
+- 1 · Group errors: ACCEPTED, root-caused.
+  - The engine guessed the error-id prefix from the first `.bk-err` it met (`b1-zip-e`), then looked up `b1-zip-e-e1`, which never exists.
+  - It now finds the group errors by their own ids (`[id$="-e1"]`), and each fieldset carries `aria-describedby` to its error.
+  - Demonstrated (`scratchpad/ap/book.js`): ZIP 78752 with no trade, then Continue, shows "Pick at least one, so the right person comes out."; no band, then Continue, shows "Pick a band, or "Not sure yet"."
+  - The fix is in the shared engine, so the backups get it too: a blocked step with no stated reason is a defect, not a design.
+  - ⟦S0049⟧ Forms, ⟦S0070⟧.
+- 2 · Dead-end forms: route taken: DISCLOSURE-FIRST plus HONEST SUCCESS COPY (no network destination is wired).
+  - The first line of every form, before any field, reads "Concept site: this form is a working prototype and sends nothing. To book for real, call (512) 550-0000."
+  - The end state reads "Thanks, Jamie. Nothing was sent. This form is a design prototype, so your answers stayed on this page. To book for real, call (512) 550-0000: Monday-Friday 8-8, Saturday 8-6, Sunday 12-5."
+  - "Request saved" appears 0 times in any state, backups included (`FACT_FIX`).
+  - ⟦S1306⟧, ⟦S1314⟧ §10.
+- 3 · Nits: ACCEPTED. Name inputs declare `type="text"`. The phone formats on blur only, so typing "5125550000" stays as typed and becomes "(512) 555-0000" on leaving the field. ⟦S0070⟧.
+
+**V2, Form (winner).**
+- Phone link: ACCEPTED. `.b2-tel` is an inline-flex target at 44 px minimum. ⟦S0070⟧.
+- Pane outline: a decorative 90 px overhang below the card was not found in the current CSS (the `.bk-panes` step counter is a 52×24 icon). No change; left for the QA rounds to re-measure.
+- "After": ACCEPTED, as a visible caption tag. "After" now prints as a plate before the place and date; the pair stays Work's. ⟦S1306⟧.
+- C.8 · Tone: ground becomes red. The card stays sheet, and the copy around it takes the red tone's ink.
+
+**V1, Call.**
+- 1 · ACCEPTED. "Book online" is a text link inside the line under the hours: "Or book online: two minutes of questions; the office calls back with times." (copy 5, verbatim). ⟦S0220⟧ Axiom 1, ⟦S0001⟧.
+- 3 · ACCEPTED. The form opens full width under the phone and hours, not in a side column. ⟦S1501⟧.
+- 4 · Label collisions: ACCEPTED, by removing the frame. The door-frame SVG is gone, so no rule crosses "Call the office" or the hours line. ⟦S1314⟧ §2.
+- 6 · Phone target: ACCEPTED. 48 px min-height at ≤899 px. ⟦S0220⟧ Axis 7.
+- Declutter: ACCEPTED. The canvas folds and the door frame are deleted. What remains is the headline, phone, hours and one text-link door, plus the page-level divider. ⟦S1306⟧.
+- C.5 · The H2 drops from 88 to 64 px through the type lock.
+- 2 · Header Book pill yielding to Call in this version: REJECTED for this round. The header is page chrome shared by all 50 states; hiding its primary CTA while one section version is mounted would make the global header change under the visitor's feet. ⟦S1473⟧ H4 (consistency).
+
+**V3, One sentence.**
+- 1 · Inline errors: ACCEPTED. The messages print directly under the sentence. Each `li` has an id that the field's `aria-describedby` names, and the failing blank's underline turns dashed ink. ⟦S0049⟧, ⟦S0070⟧.
+- 2 · Done state: ACCEPTED. `.snt-form.is-done` hides every child but the done note and the heading. ⟦S1314⟧ §10.
+- 3 · Placeholders: ACCEPTED, white at 0.62 on red. ⟦S0650⟧ §4.5.
+- 4 · Per-blank reactions: ACCEPTED.
+  - Name: the line draws left to right (dashoffset, 180 ms).
+  - ZIP: five ticks, one filling per digit.
+  - Phone: on a valid blur, one 160 ms scaleX from the right, and the number formats.
+  - No path-`d` animation remains; Backup 3 keeps the pluck.
+  - ⟦S0083⟧, ⟦S0063⟧ Std 7.
+- 5 · Glow: ACCEPTED, the field behind the sentence is 20 % dimmer. ⟦S1500⟧.
+- C.5 · Heading: ACCEPTED. A real 64/780 H2, "Book it in one sentence", replaces the 14 px label.
+- C.8 · Tone: night becomes red, with the sentence re-inked white.
+
+**Facts pass to backups, added in this step:**
+- "Half of them landed between" becomes "The middle half of them landed between": it is the firm's published middle half, said as such.
+- The crew backup gains "4.9 on 474 Google reviews", so 474 is present in every reviews state.
+- "Request saved" is replaced by honest copy everywhere.
