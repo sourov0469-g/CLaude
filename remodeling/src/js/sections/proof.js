@@ -47,6 +47,9 @@
       }
       function sync() {
         bodies.forEach(function (b) {
+          // a fast throw can tunnel a few pixels into a side wall: hold every block inside the site
+          var x = EZ.clamp(b.position.x, b.w / 2, Math.max(b.w / 2, W - b.w / 2));
+          if (x !== b.position.x) { M.Body.setPosition(b, { x: x, y: b.position.y }); M.Body.setVelocity(b, { x: 0, y: b.velocity.y }); }
           b.el.style.transform = 'translate(' + (b.position.x - b.w / 2).toFixed(1) + 'px,' + (b.position.y - b.h / 2).toFixed(1) + 'px) rotate(' + b.angle.toFixed(4) + 'rad)';
         });
       }

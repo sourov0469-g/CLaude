@@ -197,12 +197,12 @@
       }
       // grid-magnetic holes [S0634: radius 100, pull .3]
       var px = -999, py = -999, inside = false;
-      var loop = k.raf(function () {
-        var moving = false, R = 100;
+      var loop = k.raf(function (dt) {
+        var moving = false, R = 100, kf = 1 - Math.pow(1 - .2, dt * 60);
         for (var i = 0; i < holes.length; i++) {
           var o = holes[i], tx = 0, ty = 0;
           if (inside) { var dx = px - o.x, dy = py - o.y, d = Math.sqrt(dx * dx + dy * dy); if (d < R) { var f = .3 * (1 - d / R); tx = dx * f; ty = dy * f; } }
-          var nx = o.dx + (tx - o.dx) * .2, ny = o.dy + (ty - o.dy) * .2;
+          var nx = o.dx + (tx - o.dx) * kf, ny = o.dy + (ty - o.dy) * kf;
           if (Math.abs(nx - o.dx) > .02 || Math.abs(ny - o.dy) > .02) { moving = true; o.dx = nx; o.dy = ny; o.el.setAttribute('transform', 'translate(' + nx.toFixed(2) + ' ' + ny.toFixed(2) + ')'); }
         }
         if (!moving && !inside) return false;

@@ -30,6 +30,9 @@
   opacity: .55; transition: opacity 200ms var(--ease-out), background-color 200ms var(--ease-out);
 }
 .process1__sign::after { content: ""; position: absolute; left: 50%; top: 100%; width: 4px; height: 22px; margin-left: -2px; background: #8a5a33; }
+.process1__sign { margin-left: var(--dx, 0px); }
+.process1__sign::after { margin-left: calc(-2px - var(--dx, 0px)); }
+.process1__d { margin-left: var(--dd, 0px); }
 .process1__stop.is-below .process1__sign { bottom: auto; top: 22px; }
 .process1__stop.is-below .process1__sign::after { top: auto; bottom: 100%; }
 .process1__stop.is-on .process1__sign { opacity: 1; }

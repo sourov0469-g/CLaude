@@ -6,6 +6,12 @@
 <title>Elbaz Construction | Kitchen, Bathroom and Whole-Home Remodeling in South Florida</title>
 <meta name="description" content="Licensed design-build remodeler for kitchens, bathrooms and whole homes across Miami-Dade, Broward and Palm Beach. Florida licence CBC1265280. Call (754) 236-0675.">
 <meta name="theme-color" content="#0B1418">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%230B1418%27/%3E%3Cpath d=%27M9 7h14v4H14v3h8v4h-8v3h9v4H9z%27 fill=%27%2377b3b8%27/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Elbaz Construction">
+<meta property="og:title" content="Elbaz Construction | Kitchen, Bathroom and Whole-Home Remodeling in South Florida">
+<meta property="og:description" content="Licensed design-build remodeler across Miami-Dade, Broward and Palm Beach. Florida licence CBC1265280. 4.8 stars from 343 Google reviews.">
+<meta property="og:url" content="https://elbazconstructioncorp.com/">
 <script>
   // pre-paint: theme + motion preference before first paint [S1303 §4]
   (function () {
@@ -389,6 +395,7 @@ input, textarea { caret-color: var(--accent); }
   .nav__vs { min-width: 84px; }
 }
 @media (max-width: 400px) { .nav__logo img { width: 112px; } }
+@media (max-width: 359px) { .nav__in { gap: var(--s2); } .nav__logo img { width: 96px; } .nav__vs { min-width: 76px; } .vswitch button { width: 24px; } .nav .btn--call { padding: 0 12px; } }
 
 
 .cursor { position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none; display: none; }
@@ -524,6 +531,7 @@ input, textarea { caret-color: var(--accent); }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 560; color: #a9b6b9; margin-bottom: 4px; }
+.foot__addr { font-style: normal; display: grid; gap: var(--s2); }
 .foot__col a { text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
 .foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: #a9b6b9; padding-top: var(--s5); }
 @media (max-width: 1023px) {
@@ -1406,6 +1414,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   opacity: .55; transition: opacity 200ms var(--ease-out), background-color 200ms var(--ease-out);
 }
 .process1__sign::after { content: ""; position: absolute; left: 50%; top: 100%; width: 4px; height: 22px; margin-left: -2px; background: #8a5a33; }
+.process1__sign { margin-left: var(--dx, 0px); }
+.process1__sign::after { margin-left: calc(-2px - var(--dx, 0px)); }
+.process1__d { margin-left: var(--dd, 0px); }
 .process1__stop.is-below .process1__sign { bottom: auto; top: 22px; }
 .process1__stop.is-below .process1__sign::after { top: auto; bottom: 100%; }
 .process1__stop.is-on .process1__sign { opacity: 1; }
@@ -1909,7 +1920,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .consult__facts { margin: 0; display: grid; gap: 14px; }
 .consult__facts div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 12px; align-items: baseline; }
 .consult__facts dt { font: 400 1rem/1 var(--f-display); letter-spacing: .14em; color: var(--field-accent); }
-.consult__facts dd { margin: 0; color: var(--field-ink); }
+.consult__facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; color: var(--field-ink); }
+@media (max-width: 359px) { .consult__facts div { grid-template-columns: 1fr; gap: 4px; } }
 .consult__facts .link { color: var(--field-ink); }
 
 
@@ -3033,8 +3045,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     </div>
     <div class="foot__col">
       <h3>Visit</h3>
-      <span>19 W Flagler St #310</span>
-      <span>Miami, FL 33130</span>
+      <address class="foot__addr"><span>19 W Flagler St #310</span>
+      <span>Miami, FL 33130</span></address>
       <span>Sun&ndash;Fri 7am&ndash;7pm</span>
       <span>Saturday closed</span>
     </div>
@@ -4226,8 +4238,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       var m = Math.min(1, d / 60);
       lx = dx / d * m; ly = dy / d * m;
     }
-    look.cx = (look.cx || 0) + (lx - (look.cx || 0)) * .12;
-    look.cy = (look.cy || 0) + (ly - (look.cy || 0)) * .12;
+    var ke = 1 - Math.pow(1 - .12, dt * 60);   // .12 per 60 Hz frame, same feel at any refresh rate
+    look.cx = (look.cx || 0) + (lx - (look.cx || 0)) * ke;
+    look.cy = (look.cy || 0) + (ly - (look.cy || 0)) * ke;
     var pr = B.variant === 'level' ? 1.5 : 2.1;
     for (var i = 0; i < parts.pupils.length; i++) parts.pupils[i].setAttribute('transform', 'translate(' + (look.cx * pr).toFixed(2) + ' ' + (look.cy * pr).toFixed(2) + ')');
 
@@ -5636,8 +5649,8 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         .from(board, { y: -24, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, .55);
 
       if (k.fine) {
-        var raf = k.raf(function () {
-          ang += (tang - ang) * .14;          // smoothing .14 [BANK 165]
+        var raf = k.raf(function (dt) {
+          ang += (tang - ang) * (1 - Math.pow(1 - .14, dt * 60));          // smoothing .14 per 60 Hz frame [BANK 165]
           paint();
           if (Math.abs(tang - ang) < .2) return false;
         });
@@ -5702,6 +5715,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       }
       function sync() {
         bodies.forEach(function (b) {
+          // a fast throw can tunnel a few pixels into a side wall: hold every block inside the site
+          var x = EZ.clamp(b.position.x, b.w / 2, Math.max(b.w / 2, W - b.w / 2));
+          if (x !== b.position.x) { M.Body.setPosition(b, { x: x, y: b.position.y }); M.Body.setVelocity(b, { x: 0, y: b.velocity.y }); }
           b.el.style.transform = 'translate(' + (b.position.x - b.w / 2).toFixed(1) + 'px,' + (b.position.y - b.h / 2).toFixed(1) + 'px) rotate(' + b.angle.toFixed(4) + 'rad)';
         });
       }
@@ -6105,12 +6121,12 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       }
       // grid-magnetic holes [S0634: radius 100, pull .3]
       var px = -999, py = -999, inside = false;
-      var loop = k.raf(function () {
-        var moving = false, R = 100;
+      var loop = k.raf(function (dt) {
+        var moving = false, R = 100, kf = 1 - Math.pow(1 - .2, dt * 60);
         for (var i = 0; i < holes.length; i++) {
           var o = holes[i], tx = 0, ty = 0;
           if (inside) { var dx = px - o.x, dy = py - o.y, d = Math.sqrt(dx * dx + dy * dy); if (d < R) { var f = .3 * (1 - d / R); tx = dx * f; ty = dy * f; } }
-          var nx = o.dx + (tx - o.dx) * .2, ny = o.dy + (ty - o.dy) * .2;
+          var nx = o.dx + (tx - o.dx) * kf, ny = o.dy + (ty - o.dy) * kf;
           if (Math.abs(nx - o.dx) > .02 || Math.abs(ny - o.dy) > .02) { moving = true; o.dx = nx; o.dy = ny; o.el.setAttribute('transform', 'translate(' + nx.toFixed(2) + ' ' + ny.toFixed(2) + ')'); }
         }
         if (!moving && !inside) return false;
@@ -6337,7 +6353,25 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
           li.classList.toggle('is-below', !mob && i % 2 === 0);
           li.classList.toggle('is-left', mob && pts[i][0] > 200);
         });
+        fit(mob);
         set();
+      }
+      // keep every sign and its note inside the plan at any width (phones narrow the sign, wider screens slide it in)
+      function fit(mob) {
+        var W = plan.clientWidth, pad = 6;
+        stops.forEach(function (li) {
+          var x = li.offsetLeft, b = li.querySelector('.process1__sign');
+          b.style.width = ''; li.style.removeProperty('--dx');
+          if (mob) {
+            var room = (li.classList.contains('is-left') ? x : W - x) - 20 - pad;
+            if (room < 150) b.style.width = Math.max(110, room) + 'px';
+          } else {
+            var sw = b.offsetWidth, l = x - sw / 2, r = x + sw / 2;
+            li.style.setProperty('--dx', (l < pad ? pad - l : r > W - pad ? W - pad - r : 0) + 'px');
+          }
+          var dw = mob ? Math.min(260, innerWidth * .7) : 250, dl = x - dw / 2, dr = x + dw / 2;
+          li.style.setProperty('--dd', (dl < pad ? pad - dl : dr > W - pad ? W - pad - dr : 0) + 'px');
+        });
       }
       function set() {
         if (!road) return;
@@ -7441,6 +7475,13 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   }
   function liveClear(form, k) {
     form.querySelectorAll('input, textarea').forEach(function (el) {
+      // a filled field is checked when it is left; an empty one is only flagged on send (no nagging on tab-through)
+      k.on(el, 'blur', function () {
+        if (!el.value || !LABEL[el.name]) return;
+        var e = check(form, [el.name])[0], b = el.id && form.querySelector('#' + el.id + '-err');
+        if (!e || !e.msg || !b) return;
+        b.textContent = e.msg; b.hidden = false; el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', b.id);
+      });
       k.on(el, 'input', function () { var b = el.id && form.querySelector('#' + el.id + '-err'); if (b && !b.hidden) { b.hidden = true; el.setAttribute('aria-invalid', 'false'); } });
       k.on(el, 'change', function () { var b = el.id && form.querySelector('#' + el.id + '-err'); if (b && !b.hidden && el.checked) { b.hidden = true; } });
     });
@@ -7467,8 +7508,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
         if (!k.motion) { EZ.consultMail(url); done(form); return; }
         // pill -> 56px circle -> ring draws -> tick, then the email opens [BANK 348]
         var w = btn.offsetWidth;
+        form.setAttribute('aria-busy', 'true');
         k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { EZ.consultMail(url); done(form); } })
+          gsap.timeline({ onComplete: function () { form.removeAttribute('aria-busy'); EZ.consultMail(url); done(form); } })
             .to(label, { autoAlpha: 0, duration: .15 })
             .fromTo(btn, { width: w, minWidth: 0 }, { width: 56, minWidth: 0, paddingLeft: 0, paddingRight: 0, borderRadius: 28, duration: .35, ease: 'power3.inOut' })
             .set(ring, { opacity: 1 })

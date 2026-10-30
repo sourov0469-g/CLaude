@@ -68,7 +68,25 @@
           li.classList.toggle('is-below', !mob && i % 2 === 0);
           li.classList.toggle('is-left', mob && pts[i][0] > 200);
         });
+        fit(mob);
         set();
+      }
+      // keep every sign and its note inside the plan at any width (phones narrow the sign, wider screens slide it in)
+      function fit(mob) {
+        var W = plan.clientWidth, pad = 6;
+        stops.forEach(function (li) {
+          var x = li.offsetLeft, b = li.querySelector('.process1__sign');
+          b.style.width = ''; li.style.removeProperty('--dx');
+          if (mob) {
+            var room = (li.classList.contains('is-left') ? x : W - x) - 20 - pad;
+            if (room < 150) b.style.width = Math.max(110, room) + 'px';
+          } else {
+            var sw = b.offsetWidth, l = x - sw / 2, r = x + sw / 2;
+            li.style.setProperty('--dx', (l < pad ? pad - l : r > W - pad ? W - pad - r : 0) + 'px');
+          }
+          var dw = mob ? Math.min(260, innerWidth * .7) : 250, dl = x - dw / 2, dr = x + dw / 2;
+          li.style.setProperty('--dd', (dl < pad ? pad - dl : dr > W - pad ? W - pad - dr : 0) + 'px');
+        });
       }
       function set() {
         if (!road) return;

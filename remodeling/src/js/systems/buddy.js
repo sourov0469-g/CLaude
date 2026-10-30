@@ -345,8 +345,9 @@
       var m = Math.min(1, d / 60);
       lx = dx / d * m; ly = dy / d * m;
     }
-    look.cx = (look.cx || 0) + (lx - (look.cx || 0)) * .12;
-    look.cy = (look.cy || 0) + (ly - (look.cy || 0)) * .12;
+    var ke = 1 - Math.pow(1 - .12, dt * 60);   // .12 per 60 Hz frame, same feel at any refresh rate
+    look.cx = (look.cx || 0) + (lx - (look.cx || 0)) * ke;
+    look.cy = (look.cy || 0) + (ly - (look.cy || 0)) * ke;
     var pr = B.variant === 'level' ? 1.5 : 2.1;
     for (var i = 0; i < parts.pupils.length; i++) parts.pupils[i].setAttribute('transform', 'translate(' + (look.cx * pr).toFixed(2) + ' ' + (look.cy * pr).toFixed(2) + ')');
 

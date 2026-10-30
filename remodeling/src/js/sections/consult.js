@@ -41,6 +41,13 @@
   }
   function liveClear(form, k) {
     form.querySelectorAll('input, textarea').forEach(function (el) {
+      // a filled field is checked when it is left; an empty one is only flagged on send (no nagging on tab-through)
+      k.on(el, 'blur', function () {
+        if (!el.value || !LABEL[el.name]) return;
+        var e = check(form, [el.name])[0], b = el.id && form.querySelector('#' + el.id + '-err');
+        if (!e || !e.msg || !b) return;
+        b.textContent = e.msg; b.hidden = false; el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', b.id);
+      });
       k.on(el, 'input', function () { var b = el.id && form.querySelector('#' + el.id + '-err'); if (b && !b.hidden) { b.hidden = true; el.setAttribute('aria-invalid', 'false'); } });
       k.on(el, 'change', function () { var b = el.id && form.querySelector('#' + el.id + '-err'); if (b && !b.hidden && el.checked) { b.hidden = true; } });
     });
@@ -67,8 +74,9 @@
         if (!k.motion) { EZ.consultMail(url); done(form); return; }
         // pill -> 56px circle -> ring draws -> tick, then the email opens [BANK 348]
         var w = btn.offsetWidth;
+        form.setAttribute('aria-busy', 'true');
         k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { EZ.consultMail(url); done(form); } })
+          gsap.timeline({ onComplete: function () { form.removeAttribute('aria-busy'); EZ.consultMail(url); done(form); } })
             .to(label, { autoAlpha: 0, duration: .15 })
             .fromTo(btn, { width: w, minWidth: 0 }, { width: 56, minWidth: 0, paddingLeft: 0, paddingRight: 0, borderRadius: 28, duration: .35, ease: 'power3.inOut' })
             .set(ring, { opacity: 1 })

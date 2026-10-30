@@ -4,7 +4,8 @@
 .consult__facts { margin: 0; display: grid; gap: 14px; }
 .consult__facts div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 12px; align-items: baseline; }
 .consult__facts dt { font: 400 1rem/1 var(--f-display); letter-spacing: .14em; color: var(--field-accent); }
-.consult__facts dd { margin: 0; color: var(--field-ink); }
+.consult__facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; color: var(--field-ink); }
+@media (max-width: 359px) { .consult__facts div { grid-template-columns: 1fr; gap: 4px; } }
 .consult__facts .link { color: var(--field-ink); }
 
 /* shared paper fields: label floats, underline grows (Madoka-style) */

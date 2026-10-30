@@ -282,8 +282,8 @@
         .from(board, { y: -24, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, .55);
 
       if (k.fine) {
-        var raf = k.raf(function () {
-          ang += (tang - ang) * .14;          // smoothing .14 [BANK 165]
+        var raf = k.raf(function (dt) {
+          ang += (tang - ang) * (1 - Math.pow(1 - .14, dt * 60));          // smoothing .14 per 60 Hz frame [BANK 165]
           paint();
           if (Math.abs(tang - ang) < .2) return false;
         });

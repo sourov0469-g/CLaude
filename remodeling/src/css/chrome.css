@@ -126,6 +126,7 @@
   .nav__vs { min-width: 84px; }
 }
 @media (max-width: 400px) { .nav__logo img { width: 112px; } }
+@media (max-width: 359px) { .nav__in { gap: var(--s2); } .nav__logo img { width: 96px; } .nav__vs { min-width: 76px; } .vswitch button { width: 24px; } .nav .btn--call { padding: 0 12px; } }
 
 /* ---------- cursor [S1321 cursor, S1375 #12, S0634 §A]: fine pointers only ---------- */
 .cursor { position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none; display: none; }
@@ -261,6 +262,7 @@
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 560; color: #a9b6b9; margin-bottom: 4px; }
+.foot__addr { font-style: normal; display: grid; gap: var(--s2); }
 .foot__col a { text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
 .foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: #a9b6b9; padding-top: var(--s5); }
 @media (max-width: 1023px) {
