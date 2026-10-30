@@ -987,8 +987,8 @@
         return s;
       };
       const g = () => Array.from(el._rx.svg.querySelectorAll('.rg'));
-      const over = () => { if (el._rx.on) return; const s = ensure(); if (!s) return; el._rx.on = true; G.killTweensOf(g()); HOVER[v.hover](g()); };
-      const out = () => { if (!el._rx.on || !el._rx.svg) return; el._rx.on = false; G.killTweensOf(g()); G.to(g(), { opacity: 0, duration: 0.18, ease: 'power2.in', stagger: { each: 0.015, from: 'end' } }); };
+      const over = () => { if (!el._rx || el._rx.on) return; const s = ensure(); if (!s) return; el._rx.on = true; G.killTweensOf(g()); HOVER[v.hover](g()); };
+      const out = () => { if (!el._rx || !el._rx.on || !el._rx.svg) return; /* a late timer after the version was unmounted */ el._rx.on = false; G.killTweensOf(g()); G.to(g(), { opacity: 0, duration: 0.18, ease: 'power2.in', stagger: { each: 0.015, from: 'end' } }); };
       b.on(el, 'pointerenter', e => { if (e.pointerType !== 'touch') over(); });
       b.on(el, 'pointerleave', e => { if (e.pointerType !== 'touch') out(); });
       b.on(el, 'focus', () => { if (el.matches(':focus-visible')) over(); });
@@ -996,7 +996,7 @@
       b.on(el, 'click', () => {
         if (role === 'tel') phoneCard(el);
         const s = ensure(); if (!s) return;
-        if (!el._rx.on) { G.set(g(), { opacity: 1 }); el._rx.on = true; setTimeout(out, 700); }
+        if (el._rx && !el._rx.on) { G.set(g(), { opacity: 1 }); el._rx.on = true; setTimeout(out, 700); }
         CLICK[v.click](g());
       });
       b.add(() => { if (el._rx && el._rx.svg) el._rx.svg.remove(); el.classList.remove('rx-host'); delete el._rx; });

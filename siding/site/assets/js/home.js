@@ -1546,6 +1546,144 @@
     paint(); record();
   };
 
+  /* ===== MASTER DIRECTIVE Phase 5: the new versions. Generic hooks (data-nv-*) first, then the few with their own script. ===== */
+  const nvRadio = (grp, b, onPick) => {   // one tab stop, arrows move, click picks (APG radio group)
+    const opts = $$('[role="radio"]', grp);
+    const pick = (o, focus) => { opts.forEach(x => { const on = x === o; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; }); if (focus) o.focus(); onPick(o); };
+    opts.forEach(o => b.on(o, 'click', () => pick(o)));
+    b.on(grp, 'keydown', e => {
+      const i = opts.findIndex(o => o.getAttribute('aria-checked') === 'true'); let n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % opts.length; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + opts.length) % opts.length;
+      if (n !== null) { e.preventDefault(); pick(opts[n], true); }
+    });
+    return pick;
+  };
+  const AUS = () => { // the office's clock (Austin), from the published hours: Mon-Fri 8-8, Sat 8-6, Sun 12-5
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday), h: +p.hour + (+p.minute) / 60 };
+  };
+  const HRS = [[12, 17], [8, 20], [8, 20], [8, 20], [8, 20], [8, 20], [8, 18]], DAYN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const fmtH = h => `${h % 12 || 12} ${h < 12 ? 'am' : 'pm'}`;
+  function openNow() {
+    try {
+      const { day, h } = AUS(), [a, z] = HRS[day];
+      if (h >= a && h < z) return `Open now in Austin, until ${fmtH(z)}.`;
+      let d = day, first = h < a; for (let k = 0; k < 7; k++) { if (!first) d = (d + 1) % 7; first = false; return `Closed now in Austin. Opens ${d === day ? 'today' : DAYN[d]} at ${fmtH(HRS[d][0])}.`; }
+    } catch (err) { return ''; }
+    return '';
+  }
+  function nv(vr, b) {
+    $$('[data-nv-pick]', vr).forEach(grp => nvRadio(grp, b, o => {
+      for (const [k, v] of Object.entries(o.dataset)) if (k.startsWith('o') && k.length > 1) { const key = k[1].toLowerCase() + k.slice(2); $$(`[data-o="${key}"]`, vr).forEach(t => { if (grp.hasAttribute('data-nv-html')) t.innerHTML = v; else t.textContent = v; }); }
+      if (grp.hasAttribute('data-nv-pickc')) vr.style.setProperty('--pick', o.dataset.c);
+      if (o.dataset.l) vr.dataset.l = o.dataset.l;
+      if (grp.hasAttribute('data-nv-dial')) vr.dataset.i = o.dataset.i;
+    }));
+    $$('[data-nv-tabs]', vr).forEach(list => {
+      const tabs = $$('[role="tab"]', list);
+      const show = (t, focus) => { tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; const p = $('#' + x.getAttribute('aria-controls'), vr); if (p) p.hidden = !on; }); if (focus) t.focus(); };
+      tabs.forEach(t => b.on(t, 'click', () => show(t)));
+      b.on(list, 'keydown', e => { const i = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true'); let n = null; if (e.key === 'ArrowRight') n = (i + 1) % tabs.length; else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length; if (n !== null) { e.preventDefault(); show(tabs[n], true); } });
+    });
+    $$('[data-nv-hold]', vr).forEach(btn => {
+      const sc = btn.closest('[data-nv-scope]') || vr, on = v => { sc.classList.toggle('is-held', v); btn.setAttribute('aria-pressed', v); };
+      b.on(btn, 'pointerdown', () => on(true)); ['pointerup', 'pointerleave', 'pointercancel', 'blur'].forEach(ev => b.on(btn, ev, () => on(false)));
+      b.on(btn, 'keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); on(true); } }); b.on(btn, 'keyup', () => on(false));
+    });
+    $$('[data-nv-flip]', vr).forEach(btn => b.on(btn, 'click', () => btn.setAttribute('aria-pressed', btn.getAttribute('aria-pressed') !== 'true')));
+    $$('[data-nv-set]', vr).forEach(btn => b.on(btn, 'click', () => {
+      const [k, v] = btn.dataset.nvSet.split(':'), sc = btn.closest('[data-nv-scope]') || vr; sc.dataset[k] = v;
+      $$('[data-nv-set]', btn.parentElement).forEach(x => x.setAttribute('aria-pressed', x === btn));
+    }));
+    $$('[data-nv-toggle]', vr).forEach(btn => b.on(btn, 'click', () => {
+      const sc = btn.closest('[data-nv-scope]') || vr, on = sc.classList.toggle(btn.dataset.nvToggle); btn.setAttribute('aria-pressed', on);
+      if (btn.dataset.nvToggle === 'is-paused') btn.textContent = on ? 'Play the band' : 'Pause the band';
+    }));
+    const chk = $$('[data-nv-chk]', vr), chkN = $('[data-nv-chk-n]', vr);
+    chk.forEach(li => b.on($('[data-nv-chk-a]', li), 'click', () => { li.classList.add('is-checked'); if (chkN) chkN.textContent = chk.filter(x => x.classList.contains('is-checked')).length; }));
+    $$('[data-nv-open]', vr).forEach(el => { const t = openNow(); if (t) el.textContent = t; });
+    $$('[data-nv-until]', vr).forEach(el => {
+      const end = new Date(el.dataset.nvUntil + 'T23:59:59-06:00'), days = Math.max(0, Math.floor((end - Date.now()) / 864e5)), l = $('[data-nv-until-l]', vr);
+      el.textContent = days; if (l) l.textContent = days === 1 ? 'day left' : days ? 'days left' : 'the offer date has passed';
+    });
+    $$('[data-nv-go]', vr).forEach(btn => b.on(btn, 'click', () => { const t = $(`.vsw-b[data-v="${btn.dataset.nvGo}"]`, vr.closest('.sec')); if (t) { t.click(); setTimeout(() => { const f = $('.sec#book input, .sec#book select', d); if (f) f.focus({ preventScroll: false }); }, 400); } }));
+  }
+
+  V.hero4 = (r, b) => {
+    const say = JSON.parse(r.dataset.say), out = $('[data-nv-say]', r);
+    $$('.ar-h', r).forEach(h => {
+      h.setAttribute('tabindex', '0'); h.setAttribute('role', 'button'); h.setAttribute('aria-label', h.dataset.trade);
+      const go = () => { out.textContent = say[h.dataset.trade]; $$('.ar-h', r).forEach(x => x.classList.toggle('is-on', x === h)); };
+      b.on(h, 'click', go); b.on(h, 'keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+  };
+  V.services8 = (r, b) => {
+    const SVN = { 'Exterior doors': 'Doors' }, svn = n => SVN[n] || n.replace(/\b\w/g, c => c.toUpperCase());
+    const bit = n => { const i = DATA.map.sv.indexOf(svn(n)); return i < 0 ? 0 : 1 << i; };
+    const sel = { a: 'Siding', b: 'Windows' };
+    const run = () => {
+      const m = bit(sel.a) | bit(sel.b), hits = PINS.filter(p => (p[3] & m) === m), same = sel.a === sel.b;
+      $('[data-two-n]', r).textContent = hits.length;
+      $('[data-two-t]', r).textContent = same ? `${sel.a.toLowerCase()} (pick a different second trade)` : `${sel.a.toLowerCase()} and ${sel.b.toLowerCase()}`;
+      const p = hits[hits.length - 1]; $('[data-two-last]', r).textContent = p ? `Latest: ${DATA.map.names[p[4]]}, ${MONTHS[p[2] % 100 - 1]} 20${Math.floor(p[2] / 100)}.` : 'None of the photographed jobs combined these two.';
+    };
+    $$('[role="radiogroup"]', r).forEach(g => nvRadio(g, b, o => { if (o.dataset.a) sel.a = o.dataset.a; if (o.dataset.b) sel.b = o.dataset.b; run(); }));
+    run();
+  };
+  V.work4 = (r, b) => {
+    const btn = $('[data-nv-flipside]', r);
+    b.on(btn, 'click', () => { const a = r.dataset.side !== 'a'; r.dataset.side = a ? 'a' : 'b'; btn.textContent = a ? 'Show before' : 'Show after'; });
+    nvRadio($('[data-nv-job]', r), b, o => $$('.nv-fl-f', r).forEach(f => f.classList.toggle('on', f.dataset.i === o.dataset.i)));
+  };
+  V.work6 = (r, b) => {
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const k = +en.target.dataset.beat; $$('[data-beat]', r).forEach(x => x.classList.toggle('on', x === en.target)); $('.nv-st-a', r).classList.toggle('on', k >= 2); } }), { rootMargin: '-45% 0px -45% 0px' });
+    $$('[data-beat]', r).forEach(li => io.observe(li)); b.add(() => io.disconnect());
+  };
+  V.work8 = (r, b) => {
+    const items = $$('.nv-sb-i', r), n = $('[data-sb-n]', r); let i = 0;
+    $$('[data-sb]', r).forEach(btn => b.on(btn, 'click', () => { i = (i + +btn.dataset.sb + items.length) % items.length; items.forEach((x, k) => x.classList.toggle('on', k === i)); n.textContent = i + 1; }));
+  };
+  V.built6 = (r, b) => $$('.nv-dl-s', r).forEach(seg => b.on(seg, 'click', () => { const t = $(`[role="radio"][data-i="${seg.dataset.i}"]`, r); if (t) t.click(); }));
+  V.built8 = (r, b) => {
+    const N = +r.dataset.n, ss = $$('.nv-is-s', r);
+    $$('[data-is]', r).forEach(btn => b.on(btn, 'click', () => { const k = Math.max(0, Math.min(N - 1, +r.dataset.step + +btn.dataset.is)); r.dataset.step = k; ss.forEach((x, j) => { x.hidden = j !== k; }); }));
+  };
+  V.colour5 = (r, b) => $$('[role="radiogroup"]', r).forEach(g => nvRadio(g, b, o => { if (o.dataset.body) r.style.setProperty('--body', o.dataset.body); if (o.dataset.trim) r.style.setProperty('--trim', o.dataset.trim); }));
+  V.colour6 = (r, b) => {
+    const C = JSON.parse(r.dataset.cols), inp = $('[data-sh]', r);
+    b.on(inp, 'input', () => { const [n, c, h] = C[+inp.value]; r.style.setProperty('--pick', h); $('[data-sh-n]', r).textContent = n; $('[data-sh-c]', r).textContent = c; inp.setAttribute('aria-valuetext', `${n}, ${c}`); });
+  };
+  V.colour7 = (r, b) => {
+    let paint = getComputedStyle(r).getPropertyValue('--paint').trim(); const done = new Set();
+    nvRadio($('[role="radiogroup"]', r), b, o => { paint = o.dataset.paint; r.style.setProperty('--paint', paint); });
+    $$('.ar-h', r).forEach(h => {
+      h.setAttribute('tabindex', '0'); h.setAttribute('role', 'button'); h.setAttribute('aria-label', `Paint the ${h.dataset.trade} house`);
+      const go = () => { $$('.ar-wall', h).forEach(w => { w.style.fill = paint; }); done.add(h); $('[data-paint-n]', r).textContent = done.size; };
+      b.on(h, 'click', go); b.on(h, 'keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+  };
+  V.colour8 = (r, b) => {
+    const CP = JSON.parse(r.dataset.cp), SWS = JSON.parse(r.dataset.sw), pickOne = a => a[Math.floor(Math.random() * a.length)];
+    b.on($('[data-sf]', r), 'click', () => { const [bn, bh] = pickOne(CP), [tn, tc, th] = pickOne(SWS); $('.nv-sf-b', r).style.setProperty('--c', bh); $('.nv-sf-t', r).style.setProperty('--c', th); $('[data-sf-bn]', r).textContent = bn; $('[data-sf-tn]', r).textContent = tn; $('[data-sf-tc]', r).textContent = tc; });
+  };
+  V.reviews8 = (r, b) => {
+    const R = JSON.parse(r.dataset.rv), q = $('[data-fl-q]', r), by = $('[data-fl-by]', r);
+    b.on($('.fl-d', r), 'click', e => { const c = e.target.closest('circle'); if (!c) return; const k = +c.dataset.k, rv = R[k % R.length]; $$('.fl-d circle.on', r).forEach(x => x.classList.remove('on')); c.classList.add('on'); q.textContent = `“${rv[0]}”`; by.textContent = `${rv[1]}, ${rv[2]}`; });
+  };
+  V.book8 = (r, b) => {
+    const log = $('[data-nv-chat]', r), f = $('[data-nv-chatf]', r), inp = $('input', f), ans = [];
+    const Q = [['Thanks, {0}. What needs work: siding, windows, roofing or something else?', 'off', 'text'], ['Got it. What ZIP code is the house in?', 'postal-code', 'numeric'], ['And the best number for the office to call you back on?', 'tel', 'tel'], ['Thanks, {0}. Nothing was sent: this is a working prototype. To book for real, call (512) 550-0000.', '', '']];
+    const say = (t, who) => { const p = d.createElement('p'); p.className = `nv-ct-b nv-ct-${who}`; p.textContent = t; log.appendChild(p); };
+    b.on(f, 'submit', e => {
+      e.preventDefault(); const v = inp.value.trim(); if (!v) { inp.setAttribute('aria-invalid', 'true'); return; }
+      inp.removeAttribute('aria-invalid'); say(v, 'me'); ans.push(v); inp.value = '';
+      const [t, ac, im] = Q[ans.length - 1]; say(t.replace('{0}', ans[0]), 'them');
+      if (ans.length >= Q.length) { f.hidden = true; return; }
+      inp.setAttribute('autocomplete', ac); inp.setAttribute('inputmode', im); inp.type = im === 'tel' ? 'tel' : 'text';
+    });
+  };
+
   /* ========================================================================================
      SECTION CONTROLLER: 1/2/3 tabs, keys, picks panel, persistence (S0067, S0082, S1246)
      ======================================================================================== */
@@ -1576,7 +1714,7 @@
     s.label.textContent = bk ? `Backup ${v - BKS}: ${s.bkNames[v - BKS - 1]}` : s.names[v - 1];
     const vr = s.stage.firstElementChild;
     s.b = bag();
-    const run = () => { heads(vr, s); const fn = bk ? V[s.key + ((v - BKS - 1) % 3 + 1)] : V[s.key + v]; if (fn) fn(vr, s.b, s); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
+    const run = () => { heads(vr, s); const fn = bk ? V[s.key + ((v - BKS - 1) % 3 + 1)] : V[s.key + v]; if (fn) fn(vr, s.b, s); if (!bk) nv(vr, s.b); if (window.APFX) s.b.add(window.APFX.depth(vr)); if (window.APV4) window.APV4.mount(vr, s.key, s.b); };
     /* K11: every scroll entrance a version sets up plays at reveal level (each element 0.3 s at most, staggers scaled
        with it); tweens marked data: 'k10' (data the visitor reads, and Work 1's sweep) keep their tempo */
     const cap = () => { if (!s.ctx || !s.ctx.getTweens) return; s.ctx.getTweens().forEach(t => { if (t.scrollTrigger && t.vars.data !== 'k10' && (t.vars.duration || 0) > REVEAL) t.timeScale(t.vars.duration / REVEAL); }); };

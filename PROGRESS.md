@@ -458,3 +458,11 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
   - Pure black and near-black backgrounds are banned, and a deep green is allowed on at most a couple of sections.
   - Deep-green sections used: **none**. The accent is cobalt and Rule 2 (one accent) stands, so a green ground beside it would be a second hue.
   - The page stays light-only, with the cobalt tints carrying the depth. If the owner wants deep-green bands, the clean route is a green accent family across the whole palette; that is a palette decision for him.
+- **Phase 5 collision (challenge protocol):**
+  - Each section's era-a backups 1–3 are earlier states of the same three concepts as visible 1–3 (the names match one for one). "Five improved versions" would therefore duplicate concepts.
+  - Closest alternative in the same spirit, applied to every section:
+    - **3 improved versions**, one per concept, raised by Phase 3 (accent system, eyebrow, artwork, light composition);
+    - **5 new versions** whose layout, composition and mechanism differ from every existing version;
+    - 8 visible in total.
+  - Built's version 4 is the Phase 4 interactive, so Built needs four more.
+  - Backups per section: 6 (3 era a + 3 era b). Nothing is deleted.

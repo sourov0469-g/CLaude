@@ -1160,3 +1160,44 @@ Converted from dark to light:
   - The match counts equal an independent recount of the pins: siding 228; siding + metal 3; siding + metal + windows 0, which shows the honest "none" line; siding + shingle + windows 14.
   - Keyboard arrows move every radio group.
   - Clad-all, strip and the hand-off all work.
+
+## MASTER DIRECTIVE Phase 5: version expansion (all ten sections)
+
+**Structure, per section:**
+- **Visible 1–3:** the improved versions. Same concept, raised by Phases 2–3 (palette, accent system, numbered eyebrow, trade-object artwork, light composition).
+- **Visible 4–8:** new versions. For Built, 4 is Phase 4's Clad the gable and 5–8 are new.
+- **Backups 9–11:** era a, the pre-audit records in the record palette.
+- **Backups 12–14:** era b, the versions frozen before the redesign, served byte-identical.
+- **Totals:** 8 visible + 6 backups = 14 per section. Nothing was deleted.
+- **Collision logged in PROGRESS.md:** the era-a backups are earlier states of the same three concepts, so the three improved versions are joined by five new ones, not two.
+
+**New versions.** Each is a concept absent from its section before.
+
+| Section | New versions (number: name, mechanism) |
+|---|---|
+| Hero | 4 Street: the drawn street is the hero, and a house you click answers with its trade's record. 5 Hold for before: press-and-hold reveal on one true pair. 6 Ledger: the headline beside a ledger of six finished jobs with bands. 7 Numbers first: 886 / 4.9 / 2009 set huge over a cobalt band. 8 Open now: the phone as hero, with live open or closed status from the Annex hours in Austin time. |
+| Proof | 4 Plaques: flip tiles to read what each credential means. 5 Timeline 2009–2026: snap-scrolling. 6 886 squares: 312 filled + 574 outlined, with a highlight toggle. 7 Check it yourself: outside links that tick as you check them. 8 Ticker: a credential band with a pause control, plus a definitions grid. |
+| Services | 4 Rail: snap cards with photo, count and band. 5 Chart: bars of documented jobs, pick one. 6 Brands: makers set as typography. 7 By part of the house: an accordion. 8 Pick two: counts the photographed jobs that did both trades, from the pins. |
+| Work | 4 Flip: one button wipes before to after, with a job picker. 5 Six walls: hover or tap reveal grid. 6 One job, three beats: a sticky photo with scrolling story. 7 By band: jobs filed under their published band. 8 Side by side: before and after next to each other, with previous and next. |
+| Built | 5 Wall section: a five-layer cut, pick a layer. 6 Texas dial: a radial dial of the five Texas threats. 7 Warranty line: 30 years against lifetime on one axis. 8 Built in five steps: a stepper that adds each layer. |
+| Colour | 4 Light to dark: all 29 colours by luminance. 5 Body and trim: a ColorPlus body and a Sherwin-Williams trim on a drawn house. 6 Shade slider: one range across the 29. 7 Paint the street: click a house to clad it in a ColorPlus colour. 8 Shuffle: a random published pairing. |
+| Near | 4 Ranking: towns by documented jobs. 5 Month by month: a heat strip of the 312 photographed jobs. 6 Rings from the office: 5/10/20/40-mile counts measured on the firm's map. 7 Town cards: a rail with each town's latest photographed job. 8 The latest twelve: a feed. |
+| Reviews | 4 Aggregate: 4.9 and 474 led, with the Google link. 5 Words that recur: counts across the 30 quoted reviews, read in place. 6 By trade: tabs. 7 Wall of words: nine in full. 8 474 dots: one per review; a dot opens one of the 30 quoted. |
+| Money | 4 Three plans, one table: pick an amount. 5 Median job by the month: per trade. 6 Cash or finance: pay-in-full −10% against 0% for 24 months. 7 Questions: an accordion. 8 Holiday clock: days left to November 30, 2026. |
+| Book | 4 The week: an hours bar chart with live status. 5 What happens: staggered steps. 6 Visit: address with a drawn N Lamar map and a directions link. 7 Two doors: Call, or open the form (switches to Book 2). 8 Chat: a call-back prototype that says it sends nothing. |
+
+**Facts discipline:**
+- Every figure is read from the page's own data: TRADES, PHOTOS, PAIRS6, REVIEWS, the map pins, CRED_ROWS, TEXAS and TERMS.
+- Bands are never summed.
+- One unverifiable phrase was removed ("the way most jobs are specified").
+- The gutters band uses the page's published "Under $5k".
+
+**Checks:**
+- `qa/v8/slots.js`: 140 of 140 states open with 0 errors.
+- `qa/v8/nv.js`: every new mechanism clicked, with 0 errors. A pre-existing race in the button-reaction kit (a 700 ms timer firing after unmount) was found and guarded.
+- `qa/v8/light.js`: 0 dark backgrounds in all 80 visible versions.
+- Contrast and focus sweep on versions 4–8: two hits fixed.
+- Tap-target sweep: two hits fixed.
+- recheck.js: 225/0.
+- `qa/v8/facts.py`: Annex A verbatim, 0 invented phones, 0 "312 siding".
+- File size: 4,100,533 B ≤ 4,221,484 B.

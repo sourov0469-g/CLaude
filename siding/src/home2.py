@@ -1395,6 +1395,13 @@ SECTIONS = [
     ('book', 'Book', [book1, book2, book3], ['Call', 'Form', 'One sentence']),
 ]
 
+# MASTER DIRECTIVE Phase 5: five new versions per section (src/versions.py) join the three improved ones; Built's fourth
+# is Phase 4's Clad the gable, so it takes four. The switcher runs 1-8.
+import versions
+for _i, (_k, _l, _f, _n) in enumerate(SECTIONS):
+    _new = versions.BUILDERS[_k](sys.modules[__name__])[:8 - len(_f)]
+    SECTIONS[_i] = (_k, _l, _f + [(lambda h=h: h) for _nm, h in _new], _n + [nm for nm, _h in _new])
+
 
 NEXT = {   # K7 / BRIEF-V6 §12.1: every version carries the phone in a contact path; a version without one ends on this line
     'proof': 'Check any of this with the office.', 'services': 'One free inspection covers every trade on the house.',
@@ -1456,7 +1463,7 @@ EYEBROW = {'proof': 'The record', 'services': 'What we install', 'work': 'Before
 def section(key, label, fns, names):
     vs = [with_phone(key, f()) for f in fns]
     if key == 'hero':   # Phase 3: the drawn street is the hero's centrepiece band in every visible version
-        vs = [v[:v.rfind('</div>')] + f'<div class="art-band art-band--street">{art.street(f"st{n}")}</div></div>' for n, v in enumerate(vs, 1)]
+        vs = [v if 'nv-street' in v else v[:v.rfind('</div>')] + f'<div class="art-band art-band--street">{art.street(f"st{n}")}</div></div>' for n, v in enumerate(vs, 1)]
     else:               # Phase 3: an accent eyebrow over the first heading, and the section's trade-object drawing
         num = [k for k, *_ in SECTIONS].index(key) + 1
         eb = f'<p class="eyebrow" aria-hidden="true"><span>{num:02d}</span>{EYEBROW[key]}</p>'
