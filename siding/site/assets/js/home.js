@@ -1484,6 +1484,68 @@
     if (motionOK()) G.from($$('.snt-k, .snt, .snt-go', form), { y: 18, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.1, scrollTrigger: once(form, 'top 80%') });
   };
 
+  /* MASTER DIRECTIVE Phase 4, Clad the gable: each press nails the next course at the 7 in exposure (or the next 12 in
+     board); the choices re-dress the drawing; the record answers from the firm's own map pins and published bands only. */
+  V.built4 = (r, b) => {
+    const svg = $('.cl-svg', r), panel = $('.cl-panel', r), NS = 'http://www.w3.org/2000/svg';
+    const N = { lap: +panel.dataset.lap, bb: +panel.dataset.bb }, st = { board: 'lap', tex: 'cedar', roof: 'keep', win: 'keep', n: 0 };
+    const nEl = $('[data-cl-n]', r), ofEl = $('[data-cl-of]', r), unitEl = $('[data-cl-unit]', r), nail = $('[data-cl-nail]', r), heads = $('.cl-nails', svg);
+    const SV = DATA.map.sv, bit = name => 1 << SV.indexOf(name);
+    const paint = () => {
+      $$('.cl-co', svg).forEach((g, k) => g.classList.toggle('on', st.board === 'lap' && k < st.n));
+      $$('.cl-bb', svg).forEach((g, k) => g.classList.toggle('on', st.board === 'bb' && k < st.n));
+      nEl.textContent = st.n; ofEl.textContent = N[st.board]; unitEl.textContent = st.board === 'lap' ? 'courses' : 'boards';
+      const done = st.n >= N[st.board];
+      nail.textContent = done ? 'Clad. Strip it and go again' : st.board === 'lap' ? 'Nail the next course' : 'Nail the next board';
+      r.classList.toggle('is-done', done);
+    };
+    const tap = k => {   // nail heads at every 16 in stud on the course just hung, then they settle into the board
+      if (st.board !== 'lap' || !motionOK()) return;
+      const rect = $$('.cl-co', svg)[k].firstElementChild, y = +rect.getAttribute('y') + 3;
+      $$('.cl-stud', svg).forEach(sd => { const x = +sd.getAttribute('d').split(' ')[0].slice(1); const c = d.createElementNS(NS, 'circle'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 2.2); heads.appendChild(c); setTimeout(() => c.remove(), 700); });
+    };
+    const record = () => {
+      let mask = bit('Siding'); const parts = ['siding'];
+      if (st.roof === 'shingle') { mask |= bit('Shingle Roofing'); parts.push('a shingle roof'); }
+      if (st.roof === 'metal') { mask |= bit('Metal Roofing'); parts.push('a metal roof'); }
+      if (st.win === 'new') { mask |= bit('Windows'); parts.push('new windows'); }
+      const hits = PINS.filter(p => (p[3] & mask) === mask);
+      $('[data-cl-match]', r).textContent = hits.length;
+      $('[data-cl-trades]', r).textContent = parts.length > 1 ? parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1] : parts[0];
+      const last = hits.slice(-2).reverse().map(p => `${DATA.map.names[p[4]]}, ${MONTHS[p[2] % 100 - 1]} 20${Math.floor(p[2] / 100)}`);
+      $('[data-cl-latest]', r).textContent = last.length ? `Latest: ${last.join('; ')}.` : 'None of the photographed jobs combined exactly these.';
+      $$('[data-cl-band]', r).forEach(li => { const n = li.dataset.clBand; li.hidden = !(n === 'Siding' || (n === 'Shingle roofing' && st.roof === 'shingle') || (n === 'Metal roofing' && st.roof === 'metal') || (n === 'Windows' && st.win === 'new')); });
+    };
+    const step = () => { if (st.n >= N[st.board]) { st.n = 0; paint(); return; } st.n++; paint(); tap(st.n - 1); };
+    b.on(nail, 'click', step);
+    b.on(svg, 'click', step);
+    b.on($('[data-cl-all]', r), 'click', () => { st.n = N[st.board]; paint(); });
+    b.on($('[data-cl-strip]', r), 'click', () => { st.n = 0; paint(); });
+    // radio groups: click or arrow keys; one tab stop each
+    $$('[role="radiogroup"]', panel).forEach(grp => {
+      const opts = $$('[role="radio"]', grp);
+      const pick = (o, focus) => {
+        opts.forEach(x => { const on = x === o; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; });
+        if (focus) o.focus();
+        if (o.dataset.c) { r.style.setProperty('--cl-c', o.dataset.c); $('[data-cl-cname]', r).textContent = o.getAttribute('aria-label').replace(', ColorPlus', ''); }
+        for (const k of ['board', 'tex', 'roof', 'win']) if (o.dataset[k]) {
+          if (k === 'board' && st.board !== o.dataset.board) st.n = Math.round(st.n / N[st.board] * N[o.dataset.board]);
+          st[k] = o.dataset[k]; r.dataset[k] = st[k];
+        }
+        paint(); record();
+      };
+      opts.forEach(o => b.on(o, 'click', () => pick(o)));
+      b.on(grp, 'keydown', e => {
+        const i = opts.findIndex(o => o.getAttribute('aria-checked') === 'true'); let n = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % opts.length; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + opts.length) % opts.length;
+        if (n !== null) { e.preventDefault(); pick(opts[n], true); }
+      });
+    });
+    const c0 = $('.cl-sw', r); if (c0) r.style.setProperty('--cl-c', c0.dataset.c);
+    Object.assign(r.dataset, { board: st.board, tex: st.tex, roof: st.roof, win: st.win });
+    paint(); record();
+  };
+
   /* ========================================================================================
      SECTION CONTROLLER: 1/2/3 tabs, keys, picks panel, persistence (S0067, S0082, S1246)
      ======================================================================================== */

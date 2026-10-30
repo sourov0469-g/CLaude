@@ -1119,3 +1119,44 @@ Converted from dark to light:
 - Annex A hours (en dashes) and address (comma after "Blvd") are printed verbatim and outrank Audit pack C.14's hyphens.
 - The hours go through `&ndash;` entities so the house-style cleaner keeps them.
 - Backups keep their recorded forms.
+
+## MASTER DIRECTIVE Phase 3 (design upgrade) and Phase 4 (bespoke interactive)
+
+**Phase 3.** Upgraded every visible version; structure, facts and switchers are unchanged.
+- **Hero centrepiece:** a drawn Austin street (`src/art.py`). Six houses each show one trade the firm installs: lap siding, windows, shingle roofing, patio covers, metal roofing, and board and batten.
+  - The courses draw in and the windows light up.
+  - Pointing at a house lifts it and names its trade.
+  - It sits as a full-bleed artwork band at the foot of all three heroes.
+- **Hero 3 recomposed light:**
+  - The text sits on paper at the left; the dark scrim is gone.
+  - The photograph sits at the right under a roof-pitch corner that echoes the logo's gable, with the yard sign overlapping it.
+- **Every other section:**
+  - A numbered accent eyebrow (02–10) over its heading.
+  - One drawn trade object in accent tints behind the content, drawn in on entry:
+    - Proof: a spirit level with its bubble settling.
+    - Services: a framing square over lap boards.
+    - Work: a chalk line snapping.
+    - Built: a stack of lap boards in end view.
+    - Colour: a fan deck.
+    - Near: a compass over a street grid.
+    - Reviews: a yard sign with stars.
+    - Money: a price tag cut as a house.
+    - Book: an inspection clipboard ticking off.
+- Dividers stay per section, as before. Real photography stays in the hero and the work sections.
+
+**Phase 4: "Clad the gable"** (`src/clad.py`, `V.built4`; Built version 4 until Phase 5 re-slots it).
+- **What it is:** the visitor clads a 16 ft gable end, drawn to scale, course by course.
+  - Each press, or each click on the wall, nails the next HardiePlank course at the published 7 in exposure (25 courses), or the next 12 in board of board and batten (16 boards). Nail heads land on the 16 in studs.
+  - The board choice carries the firm's own counts: 301 of 415 lap and 27 of 415 board and batten. The texture choice does too: Select Cedarmill 286 of 415 and Smooth 36 of 415.
+  - Colours: the 17 published ColorPlus colours.
+  - Roof: keep, shingle (210 documented) or standing-seam metal (31 documented).
+  - Windows: keep or new (388 documented).
+- **The readout uses only the firm's record:**
+  - It counts how many of the 312 photographed jobs on its map carried exactly the chosen trades, from the pin bitmasks, and names the latest two by place and month.
+  - It lists each chosen trade's published band and median, never added together.
+  - It hands off to the booking form with Siding pre-ticked.
+- **Why only this firm could offer it:** it answers "what did a wall like mine look like and cost here" from this company's own documented jobs, boards, colours and published bands.
+- **Verified by `qa/v8/clad.js`:** the full click-through gives 0 console errors.
+  - The match counts equal an independent recount of the pins: siding 228; siding + metal 3; siding + metal + windows 0, which shows the honest "none" line; siding + shingle + windows 14.
+  - Keyboard arrows move every radio group.
+  - Clad-all, strip and the hand-off all work.

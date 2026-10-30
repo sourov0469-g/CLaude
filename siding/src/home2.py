@@ -14,6 +14,7 @@ from pages_inner import SW, COLORPLUS
 import elevation
 from logo import mark as logo_mark
 import art
+import clad
 import iso
 import sheet
 
@@ -641,6 +642,11 @@ READ = {'trim': 'Corner trim: where the courses stop',
         'wrap': 'House wrap: the water line behind the boards',
         'sheath': 'Sheathing: what rot reaches first under old siding',
         'studs': 'Framing: what the whole wall hangs on'}
+
+
+def built_clad():
+    """MASTER DIRECTIVE Phase 4: the business-only interactive (src/clad.py)"""
+    return clad.html(TRADES, COLORPLUS)
 
 
 def built1():
@@ -1381,7 +1387,7 @@ SECTIONS = [
     ('proof', 'Proof', [proof1, proof2, proof3], ['Record', 'At a glance', 'Statement']),
     ('services', 'Services', [services1, services2, services3], ['Point at it', 'Index', 'Tape measure']),
     ('work', 'Work', [work1, work2, work3], ['Drag', 'Blueprint', 'Lens']),
-    ('built', 'Built', [built1, built2, built3], ['Taken apart', 'Built for Texas', 'To the inch']),
+    ('built', 'Built', [built1, built2, built3, built_clad], ['Taken apart', 'Built for Texas', 'To the inch', 'Clad the gable']),
     ('colour', 'Colour', [colour1, colour2, colour3], ['Try it on your house', 'Paint or ColorPlus', 'Colour book']),
     ('near', 'Near you', [near1, near2, near3], ['Survey', 'Town by town', 'Neighbourhood drive']),
     ('reviews', 'Reviews', [reviews1, reviews2, reviews3], ['Stream', 'One', 'The crew']),
