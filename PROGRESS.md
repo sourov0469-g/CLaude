@@ -202,3 +202,36 @@ Where each homepage section's shortlist now comes from:
 - **Towns:** BANK-MAP Playbook 5 (L154); atlas-2 Q576 For Living map (L1370), KBF neighbourhood index (L6616), West London postcode checker (L6376); atlas-1 ⟦S0717⟧ motion-frames rings (L6517), ⟦S1357⟧ framed grid (L12805).
 - **Consult:** BANK-MAP Playbooks 6–7 (L175, L199); atlas-2 Digital Butlers 317 (L712/L3047), Iper 561 (L766/L3909), Olha + Max Q15 (L802/L1718), 348 progress button (L3002), 310 input effects (L2966), Renewal by Andersen journey router (L317/L6464), Anatomy §4 quote forms (L6049) + §6 sticky call (L6067); atlas-1 ⟦S1442⟧ form design (L13617).
 - **Page systems (cross-section):** atlas-2 Anatomy §7b F17 motion ceiling / F18 weight tax (L6085), builder brief anti-patterns + QA, bench log weight contrast (Elbaz 1.14 MB vs a 50 KB bespoke build, L8771); BANK-MAP Playbook 8–10 (L224, L248, L268).
+
+## §12 gate v2 — final evidence (after the addendum read)
+
+Tools: `remodeling/src/tools/` (gate.js, hygiene.js, scrollqa.js, rxtest.js, buddyqa.js, rxcheck.js, audit.js). Outputs: `remodeling/qa/`. Report: `remodeling/DELIVERY-FULL-V2.md`.
+
+| # | Gate item | Result | Evidence |
+|---|---|---|---|
+| 1 | Facts | PASS | `gate-checks.txt` 1–9: licence 17×, all CBC1265280; credential verbatim ×7; printed line present; 4.8 ×12, 343 ×15; other ratings 0; names 0; quotes 0; em dashes 0 |
+| 2 | Verdict | PASS | hero2-before-after.jpg; proof line IN FIRST SCREEN ×6 (`gate-checks.txt` 10–15) |
+| 3 | Centrepiece per section | PASS (Consult V3 share exception) | `v2-audit-after-rebuild.txt`; report §3 |
+| 4 | Interaction table | PASS after hand verification | rxcheck 273/273; rxtest 1440: 239 tested / 5 flagged; 375: 254 / 2 flagged; see below |
+| 5 | Banned patterns | PASS | weight tweens 0; BA pairs 4; 3 refs per section |
+| 6 | Traceability + 3 random refs | PASS | Work V1/Q157, BA V3/Eleos, Services V3/Q91 re-opened and matched |
+| 7 | Switchers, forms | PASS | 30 switches, wrong 0, triggers 58→58; 3 forms: empty rejected, valid → 1 mailto to Sales@ |
+| 8 | Screenshots 30 × 2 widths | see below | `final-1440.jpg`, `final-375.jpg` |
+| 9 | Console, overflow, ids, companion, RM | PASS | scroll QA 12 runs errs 0 / overflow 0; hygiene 0 fails at 5 widths; ids 8/8; companion 162/0, touch + RM off |
+| 10 | Weight | PASS | 3,858,286 ≤ 3,865,525; media 2,996,362 · fonts 57,606 · code 804,318 (libraries 271,680) |
+
+Defects the gate found and fixed in this pass:
+- 320 px: header row, contact list, Proof V1 block tunnelling the side wall, Process V1 signposts past the plan edge (hygiene.js; commit 4802143).
+- Menu sheet on a 375×812 phone was 894 px tall and could not scroll: the call button was unreachable (ff58cc3).
+- Financing V3 Close sat under the first column on phones: taps never reached it (c00ad66).
+- Self-running motion over 5 s without a pause control: Services V3 (phones), Financing V2 flow, Consult V3 handset, Proof V3 focus cycle, now each under 5 s per visit.
+- Per-frame smoothing tied to refresh rate (Hero V3, Services V3 holes, companion eyes), now frame-rate independent.
+
+Interaction flags verified by hand (Playwright probe, `scratchpad dbg5.js`; log = class changes and events on the element):
+- Consult V2 "Send my request" (1440): `ON@4393, pointerdown, click, ON@4915, off@5338`: hover draws, click beat fires, leaving clears.
+- Financing V3 "Ask which fits your project" (1440): `ON@3946, pointerdown, click, ON@4455, off@5346`.
+- Services V2 "Open the scope" (1440): `ON@3474, pointerdown, click, ON@4586, off@4598`.
+- Work V1 P-01 sheet (1440): `ON, click, ON`.
+- Financing V3 Close (375) after the fix: `pointerdown, ON@3937, click, off@4380`; the sheet closes.
+- Header Close / menu links (375): the beat fires, then the control closes the sheet (the test now records this as a pass with a note).
+The rxtest rows for the first four stay flagged because the control's own job (open, morph, submit, relabel) moves or re-renders it inside the test's 150 ms click window; the hand probes show the reactions work.
