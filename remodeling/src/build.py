@@ -135,7 +135,8 @@ def main():
             extra[name[:-5]] = json.load(open(os.path.join(ddir, name)))
 
     vendor = "\n".join(read("vendor", v + ".min.js") for v in VENDOR) + "\n" + read("vendor", "lenis.min.js")
-    logo_src = "data:image/webp;base64," + b64(os.path.join(IMG, "logo-lossless.webp"))   # lossless WebP of logo.png, 7KB vs 25KB
+    # [OWNER REDESIGN] the new roof-E lockup (brand/make_logo.py), outlined Poppins, one SVG data URI shipped once
+    logo_src = "data:image/svg+xml;base64," + b64(os.path.join(ROOT, "brand", "elbaz-logo.svg"))
 
     html = (html
             .replace("/*{{FONTS}}*/", fonts)

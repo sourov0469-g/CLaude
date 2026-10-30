@@ -24,7 +24,7 @@
   max-width: 1760px; margin-inline: auto; padding-inline: var(--margin);
 }
 .nav__logo { display: block; flex: none; }
-.nav__logo img { width: 156px; height: auto; }
+.nav__logo img { width: 150px; height: auto; }
 .nav__links { display: flex; gap: var(--s5); list-style: none; }
 .nav__links a {
   position: relative; display: inline-flex; align-items: center; min-height: 44px;
