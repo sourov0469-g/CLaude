@@ -55,9 +55,9 @@
 .tw2 .tw-note,.tw2 .tw-src,.tw2-yl,.tw2-m{color:var(--on-dark-2)}
 .tw2-more{justify-self:start;min-height:44px;margin:20px auto 0;display:block;max-width:1280px;padding:0 var(--gutter);border:0;background:none;color:var(--sun);font-weight:700;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
 .tw2-y{font-size:clamp(2.2rem,1.8rem + 1.4vw,3rem);font-weight:700;letter-spacing:-.04em;line-height:1}
-.tw2-yl{font-size:.8125rem;font-weight:600;color:var(--muted)}
+.tw2-yl{font-size:.8125rem;font-weight:600;color:var(--on-dark-2)}
 .tw2-n{margin-top:6px;font-size:1.125rem;font-weight:700}
-.tw2-m{font-size:.875rem;color:var(--muted)}
+.tw2-m{font-size:.875rem;color:var(--on-dark-2)}
 .tw2-bars{width:100%;height:auto;margin-top:8px;overflow:visible}
 .tw2-bars .bar rect{fill:oklch(1 0 0 / .3)}
 .tw2-bars .bar line{stroke:var(--ink);stroke-width:1.2}

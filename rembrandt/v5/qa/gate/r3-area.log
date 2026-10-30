@@ -1,0 +1,49 @@
+area v1 @320: h 1167 els 173 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+area v2 @320: h 3262 els 1257 ov 0 heads H2:32/700 caps[] lowc[median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Clinton County, (2.84)|median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Greene County, 2(2.84)|median year buil(2.84)|Warren County, 1(2.84)|median year buil(2.84)|Butler County, 8(2.84)|median year buil(2.84)|Warren County, 3(2.84)|median year buil(2.84)|Greene County, 2(2.84)] clip[] small[] err 0
+area v3 @320: h 1666 els 125 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[Type your town:26] err 0
+area v4 @320: h 1671 els 79 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+area v5 @320: h 2139 els 119 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+area v1 @375: h 1023 els 173 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+area v2 @375: h 3421 els 1257 ov 0 heads H2:32/700 caps[] lowc[median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Clinton County, (2.84)|median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Greene County, 2(2.84)|median year buil(2.84)|Warren County, 1(2.84)|median year buil(2.84)|Butler County, 8(2.84)|median year buil(2.84)|Warren County, 3(2.84)|median year buil(2.84)|Greene County, 2(2.84)] clip[] small[] err 0
+area v3 @375: h 1537 els 125 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[Type your town:26] err 0
+area v4 @375: h 1618 els 79 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+area v5 @375: h 2120 els 119 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+area v1 @768: h 1471 els 173 ov 0 heads  caps[] lowc[] clip[] small[] err 0
+area v2 @768: h 1919 els 1257 ov 0 heads H2:38/700 caps[] lowc[median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Clinton County, (2.84)|median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Greene County, 2(2.84)|median year buil(2.84)|Warren County, 1(2.84)|median year buil(2.84)|Butler County, 8(2.84)|median year buil(2.84)|Warren County, 3(2.84)|median year buil(2.84)|Greene County, 2(2.84)] clip[] small[] err 0
+area v3 @768: h 1174 els 125 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[Type your town:26] err 0
+area v4 @768: h 1500 els 79 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+area v5 @768: h 982 els 119 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+area v1 @1024: h 937 els 173 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+area v2 @1024: h 1565 els 1257 ov 0 heads H2:44/700 caps[] lowc[median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Clinton County, (2.84)|median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Greene County, 2(2.84)|median year buil(2.84)|Warren County, 1(2.84)|median year buil(2.84)|Butler County, 8(2.84)|median year buil(2.84)|Warren County, 3(2.84)|median year buil(2.84)|Greene County, 2(2.84)] clip[] small[] err 0
+area v3 @1024: h 991 els 125 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[Type your town:26] err 0
+area v4 @1024: h 902 els 111 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+area v5 @1024: h 1024 els 119 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+area v1 @1440: h 941 els 173 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+area v2 @1440: h 1264 els 1257 ov 0 heads H2:48/700 caps[] lowc[median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Clinton County, (2.84)|median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Greene County, 2(2.84)|median year buil(2.84)|Warren County, 1(2.84)|median year buil(2.84)|Butler County, 8(2.84)|median year buil(2.84)|Warren County, 3(2.84)|median year buil(2.84)|Greene County, 2(2.84)] clip[] small[] err 0
+area v3 @1440: h 873 els 125 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[Type your town:26] err 0
+area v4 @1440: h 949 els 111 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+area v5 @1440: h 1072 els 119 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+area v1 @1440 rm: h 941 els 173 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+area v2 @1440 rm: h 1264 els 1257 ov 0 heads H2:48/700 caps[] lowc[median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Clinton County, (2.84)|median year buil(2.84)|Montgomery Count(2.84)|median year buil(2.84)|Greene County, 2(2.84)|median year buil(2.84)|Warren County, 1(2.84)|median year buil(2.84)|Butler County, 8(2.84)|median year buil(2.84)|Warren County, 3(2.84)|median year buil(2.84)|Greene County, 2(2.84)] clip[] small[] err 0
+area v3 @1440 rm: h 873 els 125 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[Type your town:26] err 0
+area v4 @1440 rm: h 949 els 111 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+area v5 @1440 rm: h 1072 els 119 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+area v1 @1440: 16 steps, overlaps y-180:Waynesville7.9 m/Germantown8.5 mi
+area v2 @1440: 19 steps, overlaps 0
+area v3 @1440: 15 steps, overlaps 0
+area v4 @1440: 16 steps, overlaps 0
+area v5 @1440: 17 steps, overlaps 0
+area v1 @620: 14 steps, overlaps 0
+area v2 @620: 23 steps, overlaps y880:Show all 24
+area v3 @620: 18 steps, overlaps y-560:Type your town y-440: y-320:Miamisburg/Centerville
+area v4 @620: 20 steps, overlaps 0
+area v5 @620: 24 steps, overlaps 0
+rest: town false yes false needle 45deg op 0.4 tape 0 "24 towns, from Franklin to Yellow Springs."
+typed Bellbrook: town true yes true needle 56deg op 1 tape 1 "Yes. Bellbrook is on our list."
+cleared (E1): town false yes false needle 45deg op 0.4 tape 0 "24 towns, from Franklin to Yellow Springs."
+miss: town false yes false needle 45deg op 0.4 tape 0 "Cincinnati isn't on our list of 24."
+fast type Mason (260ms): town true yes true needle 169deg op 0.990107 tape 0.983511 "Yes. Mason is on our list."
+chip size 110x44; rose 315
+errors 0
+1440 overlapping label pairs 0; wrap h 448
+1024 overlapping label pairs 0; wrap h 448

@@ -12,7 +12,7 @@ for (const [w, h] of [[1440, 900], [620, 800]]) for (const v of vs.split(',')) {
     const r = await p.evaluate(id => {
       const pk = document.querySelector('.cmp-pick'); if (!pk || getComputedStyle(pk).display === 'none' || +getComputedStyle(pk).opacity < 0.5) return null;
       const a = pk.getBoundingClientRect(); const s = document.getElementById(id);
-      return [...s.querySelectorAll('.stage a[href],.stage button,.stage input:not([type=radio]),.stage label')].filter(e => { const b = e.getBoundingClientRect(); return b.width && b.height && !(b.right < a.left || b.left > a.right || b.bottom < a.top || b.top > a.bottom) && getComputedStyle(e).visibility !== 'hidden'; }).map(e => (e.textContent || e.getAttribute('aria-label') || e.className).trim().slice(0, 16));
+      return [...s.querySelectorAll('.stage a[href],.stage button,.stage input:not([type=radio]),.stage label')].filter(e => { const b = e.getBoundingClientRect(); const ox = Math.min(b.right, a.right) - Math.max(b.left, a.left), oy = Math.min(b.bottom, a.bottom) - Math.max(b.top, a.top); return b.width && b.height && ox >= 4 && oy >= 4 && getComputedStyle(e).visibility !== 'hidden'; }) /* a real overlap: >= 4px each way, not an edge contact */.map(e => (e.textContent || e.getAttribute('aria-label') || e.className).trim().slice(0, 16));
     }, id);
     if (r && r.length) hits.push(`y${Math.round(y - top)}:${r.join('/')}`);
   }

@@ -310,11 +310,11 @@ export function initCompanion(store) {
       // layout box (offset*), not the translated one, so a yielded helper checks where it would sit
       const r = { left: pick.offsetLeft, top: pick.offsetTop, width: pick.offsetWidth, height: pick.offsetHeight }; let hit = false;
       pick.style.visibility = 'hidden';
-      for (const [fx, fy] of [[0.08, 0.5], [0.5, 0.5], [0.92, 0.5], [0.3, 0.1], [0.7, 0.9]]) {
+      for (let i = 0; i <= 8 && !hit; i++) for (const fy of [0.08, 0.5, 0.92]) { const fx = 0.01 + i * 0.1225; // a 9x3 grid (about every 30px) over the pill's box
         const el = document.elementFromPoint(r.left + r.width * fx, r.top + r.height * fy);
         const c = el && el.closest(CTRL);
         if (c && !c.closest('.cmp-pick') && c.closest('main,footer')) { hit = true; break; }
-      }
+        if (hit) break; }
       pick.style.visibility = '';
       pick.classList.toggle('is-yield', hit);
     };

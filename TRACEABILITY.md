@@ -144,11 +144,11 @@ The challenge record (accept / improve / reject, with reasons) is AUDIT-R3.md. R
 ### R3 Towns (rows written before the code; challenge in AUDIT-R3.md F6/G)
 | Slot | Version | Reference | Mechanism and parameters | Adaptation | Verification |
 |---|---|---|---|---|---|
-| 1 | V1 Census map (fixed) | [BANK] Austin Pro project map (pack F6-V1) | radial label offsets for the 8 nearest, collision pass radial-first; hover 150ms --ease-x; connector DrawSVG 0.22s + one ripple; list = nearest 8 + "Show all 24"; list fades as one group | ink; pointer ripples removed; map hidden <640px; footnote verbatim | |
-| 2 | V2 Town cards (mined) | [BANK] Q4 Ragged Edge + ⟦S1420⟧ (pack F6-V2) | 8 oldest first + "Show all 24" (Flip 0.3s); bars grow scaleY 0→1 (0.3s, 20ms apart) on entry; peak share labelled; pre-1980 median years in sun | ink; plan background removed; heading answers coverage | |
-| 3 | V3 Town finder (fixed + graft, default) | [BANK] ROTTLER + West London checker + ⟦S1453⟧ (pack F6) | debounce 150ms; empty field resets all; needle parked 45° at .4 opacity; needle 0.45s back.out(1.2) and tape 0.45s together; answer crossfade .2s; miss: needle shake ±4° .2s; chip press .97 70ms; after Yes a 240px ring map opens (rings sqrt scale, office, the town lit sun, connector DrawSVG .25s) | vane removed; rose 315px; tape hidden until a town; chips 44px; data-c chip | |
-| 4 | V4 Distance ruler (new) | ⟦S0603⟧ evidence doctrine (zero baseline, direct labels, tabular nums) | ordered list; desktop: each town absolutely placed at mi/25 along a tape (ticks every mile, majors every 5), labels in greedy lanes (3 above, 3 below) with leader ticks; hover/focus shows "N mi direction, County"; phones: vertical list | 24 real towns; source line | |
-| 5 | V5 Eight directions (new) | ⟦S1499⟧ chunking / scanning pattern | 3×3 grid: eight direction cells around the office cell, each with an arrow rotated to its bearing and its towns sorted by miles; empty direction says "None on our list"; cells enter once 40ms apart | ink | |
+| 1 | V1 Census map (fixed) | [BANK] Austin Pro project map (pack F6-V1) | radial label offsets for the 8 nearest, collision pass radial-first; hover 150ms --ease-x; connector DrawSVG 0.22s + one ripple; list = nearest 8 + "Show all 24"; list fades as one group | ink; pointer ripples removed; map hidden <640px; footnote verbatim || PASS: ink; radial labels for the 8 nearest; list 8 + "Show all 24"; connector .22s + one ripple; map hidden <640; footnote verbatim |
+| 2 | V2 Town cards (mined) | [BANK] Q4 Ragged Edge + ⟦S1420⟧ (pack F6-V2) | 8 oldest first + "Show all 24" (Flip 0.3s); bars grow scaleY 0→1 (0.3s, 20ms apart) on entry; peak share labelled; pre-1980 median years in sun | ink; plan background removed; heading answers coverage || PASS: heading answers coverage; 8 oldest + Show all 24; bars grow; small labels 2.84:1 → 9.3:1 (on-dark-2) |
+| 3 | V3 Town finder (fixed + graft, default) | [BANK] ROTTLER + West London checker + ⟦S1453⟧ (pack F6) | debounce 150ms; empty field resets all; needle parked 45° at .4 opacity; needle 0.45s back.out(1.2) and tape 0.45s together; answer crossfade .2s; miss: needle shake ±4° .2s; chip press .97 70ms; after Yes a 240px ring map opens (rings sqrt scale, office, the town lit sun, connector DrawSVG .25s) | vane removed; rose 315px; tape hidden until a town; chips 44px; data-c chip || PASS: rest = needle 45°/.4, tape hidden; Yes opens the ring map; empty field resets (E1); fast typing answers the settled value (E2); miss shake; chips 44px; rose 315px |
+| 4 | V4 Distance ruler (new) | ⟦S0603⟧ evidence doctrine (zero baseline, direct labels, tabular nums) | ordered list; desktop: each town absolutely placed at mi/25 along a tape (ticks every mile, majors every 5), labels in greedy lanes (3 above, 3 below) with leader ticks; hover/focus shows "N mi direction, County"; phones: vertical list | 24 real towns; source line || PASS: 0 overlapping label pairs at 1440 and 1024 (adaptive lanes); leaders behind labels; phones a plain list |
+| 5 | V5 Eight directions (new) | ⟦S1499⟧ chunking / scanning pattern | 3×3 grid: eight direction cells around the office cell, each with an arrow rotated to its bearing and its towns sorted by miles; empty direction says "None on our list"; cells enter once 40ms apart | ink || PASS: eight sectors around the office cell, nearest first; empty direction says so |
 
 **R3 How QA rounds** (`r3qa.mjs`, `howR3.mjs`, `occl.mjs`; log `qa/gate/r3-how.log`):
 1. Overflow and clipping, 320-1440: 0 on all five. No change.
@@ -161,3 +161,15 @@ The challenge record (accept / improve / reject, with reasons) is AUDIT-R3.md. R
 8. Pinned story bound ⟦S1314 §8⟧: V4's sticky stage spans only its three steps (44svh each) and releases. PASS.
 9. Height beat ⟦S1498⟧ (C4): V1 1243 → ~1150; V5 at 768 1701 → three columns to 760. FIXED. V4 is a pinned story, measured by its viewport (C4 correction).
 10. Occlusion ⟦S1306⟧: 5 versions × 2 windows, 0 overlaps. PASS. Console 0; facts gate PASS.
+
+**R3 Towns QA rounds** (`r3qa.mjs`, `areaR.mjs`, `rulerR.mjs`, `occl.mjs`; log `qa/gate/r3-area.log`):
+1. Overflow and clipping, 320-1440: 0 on all five. No change.
+2. Type roles ⟦S1500⟧: H2 48/32; answer and card figures 700. No change.
+3. Contrast ⟦S1497⟧: V2's small labels measured 2.84:1 (a later rule kept the light-ground muted). FIXED: --on-dark-2.
+4. Field states ⟦S1314 §7⟧ (E1/E2): empty field resets everything; fast typing answers the settled value; a miss shakes ±4°. PASS.
+5. Honest rest state ⟦S1314⟧: needle parked at 45° and 40%, tape hidden, until a town is chosen. PASS.
+6. Tap targets ⟦S1139⟧: chips 44px tall (110×44 measured); V1 list 44px. FIXED in the pass. ("Type your town" is a label for a 56px field.)
+7. Label collisions ⟦S1500⟧ readability: V4's ruler first placed 8 overlapping pairs (lane height under the label height). FIXED: adaptive lanes; 0 pairs at 1440 and 1024.
+8. Occlusion ⟦S1306⟧ ⟦S1314 §2⟧: the helper's 5-point sampling missed partial overlaps (V1 list at 1440, V2/V3 at 620). FIXED page-wide: a 9×3 sampling grid; the check now counts real overlaps (≥4px), 0 on all five.
+9. Data honesty ⟦S1314⟧: every figure from data/towns.js, source line on every version. PASS.
+10. Density ⟦S1499⟧ (C4): V2 shows 8 cards (all 24 behind "Show all 24"). V3 1440 is 873 after the smaller rose: the density-dial exception, no padding added. Console 0; facts gate PASS.
