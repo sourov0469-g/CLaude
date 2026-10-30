@@ -577,15 +577,16 @@ def services3():
 # ---------- WORK ----------
 def work1():
     p = PAIRS6[0]
-    strip = ''.join(f'''<li><button class="fs" type="button" data-i="{k}" aria-pressed="{'true' if k == 0 else 'false'}"><img src="{H}work-{q['id']}-a-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async"><span>{e(q['place'].split(',')[0])}</span><b>{q['band']}</b></button></li>''' for k, q in enumerate(PAIRS6))
+    # F4 V1 graft: the filmstrip takes Work 3's permanent caption format (place, portion, price, date)
+    strip = ''.join(f'''<li><button class="fs" type="button" data-i="{k}" aria-pressed="{'true' if k == 0 else 'false'}"><img src="{H}work-{q['id']}-a-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async"><span>{e(q['place'])}</span><b>{e(q['bl'])} {q['band']}</b><small>{e(q['when'])}</small></button></li>''' for k, q in enumerate(PAIRS6))
     data = json.dumps([dict(id=q['id'], place=q['place'], when=q['when'], what=q['what'], band=q['band'], bl=q['bl'], href=q['href'], ab=q['ab'].replace('—', ','), aa=q['aa'].replace('—', ',')) for q in PAIRS6], ensure_ascii=False).replace('</', '<\\/')
     return f'''<div class="v work-1" data-tone="ground">
   <div class="w1-head"><h2 class="h2x" data-split>Before, after, and the price</h2><p class="w1-sub">Six of the 177 before-and-after pairs the firm publishes, each with its own price.</p></div>
-  <figure class="cmp" data-cmp data-cur="drag" style="--split:50%">
+  <figure class="cmp cmp--ab" data-cmp data-cur="drag" style="--split:100%">
     {pimg(p, 'a', 'cmp-a')}{pimg(p, 'b', 'cmp-b')}
-    <span class="cmp-line" aria-hidden="true"><svg class="cmp-trim" viewBox="0 0 16 100" preserveAspectRatio="none" focusable="false"><rect class="ct-b" x="1" y="0" width="14" height="100"/><rect class="ct-s" x="11.5" y="0" width="3.5" height="100"/><path class="ct-g" d="M5 0C4 30 7 60 5 100M9 0C10 40 8 70 9.5 100"/></svg><svg class="cmp-nails" focusable="false">{''.join(f'<circle cx="8" cy="{y}%" r="2.2"/>' for y in (8, 24, 40, 60, 76, 92))}</svg></span>
-    <button class="cmp-handle" type="button" role="slider" aria-label="Before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half before, half after"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg><svg class="cmp-lev" viewBox="0 0 44 12" aria-hidden="true" focusable="false"><rect class="cl-b" x="1" y="1" width="42" height="10" rx="3"/><rect class="cl-v" x="14" y="2.5" width="16" height="7" rx="3.5"/><path class="cl-m" d="M19 2.5V9.5M25 2.5V9.5"/><circle class="cl-bub" cx="22" cy="6" r="2.4"/></svg></button>
-    <span class="ptag ptag-b" aria-hidden="true">Before</span><span class="ptag ptag-a" aria-hidden="true">After</span>
+    <span class="cmp-line" aria-hidden="true"><svg class="cmp-trim" viewBox="0 0 16 100" preserveAspectRatio="none" focusable="false"><rect class="ct-b" x="1" y="0" width="14" height="100"/><rect class="ct-s" x="11.5" y="0" width="3.5" height="100"/><path class="ct-g" d="M5 0C4 30 7 60 5 100M9 0C10 40 8 70 9.5 100"/></svg></span>
+    <button class="cmp-handle" type="button" role="slider" aria-label="Before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% of the after photo showing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg><svg class="cmp-lev" viewBox="0 0 44 12" aria-hidden="true" focusable="false"><rect class="cl-b" x="1" y="1" width="42" height="10" rx="3"/><rect class="cl-v" x="14" y="2.5" width="16" height="7" rx="3.5"/><path class="cl-m" d="M19 2.5V9.5M25 2.5V9.5"/><circle class="cl-bub" cx="22" cy="6" r="2.4"/></svg></button>
+    <span class="ptag ptag-a" aria-hidden="true">After</span><span class="ptag ptag-b" aria-hidden="true">Before</span>
     <i class="pane pane-tl"></i><i class="pane pane-tr"></i><i class="pane pane-bl"></i><i class="pane pane-br"></i>
   </figure>
   <div class="cmp-info" aria-live="polite"><p class="cmp-price num">{p['band']}</p><p class="cmp-what"><b>{e(p['bl'])}, {e(p['place'])}</b><span>{e(p['what'])}, {e(p['when'])}. <a class="tlink" href="{p['href']}" target="_blank" rel="noopener">Job file</a></span></p></div>
@@ -602,13 +603,14 @@ def work2():
     data = json.dumps([dict(id=q['id'], place=q['place'], when=q['when'], what=q['what'], band=q['band'], bl=q['bl'], ab=q['ab'].replace('—', ','), aa=q['aa'].replace('—', ',')) for q in PAIRS6], ensure_ascii=False).replace('</', '<\\/')
     p = PAIRS6[0]
     return f'''<div class="v work-2" data-tone="ground">
-  <div class="bp-head"><h2 class="h2x" data-split>Survey, draw, rebuild</h2><p class="bp-sub">The old house, a drawing traced from the finished photo, then the finished wall.</p></div>
+  <div class="bp-head"><h2 class="h2x" data-split>Survey, trace, rebuild</h2><p class="bp-sub">The old house, an edge tracing of the finished photo in blueprint ink, then the finished wall.</p></div>
+  <svg class="bp-defs" aria-hidden="true" focusable="false"><filter id="bp-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".753 0 0 0 .231  .545 0 0 0 .435  .255 0 0 0 .714  0 0 0 1 0"/></filter></svg>
   <figure class="bp-fig" data-cur="view">
     <img class="bp-b" src="{H}work-{p['id']}-b-1000.webp" width="1000" height="625" alt="{alt(p['ab'])}" loading="lazy" decoding="async">
     <img class="bp-p" src="{H}bp-{p['id']}-1000.webp" width="1000" height="625" alt="" loading="lazy" decoding="async">
     <img class="bp-a" src="{H}work-{p['id']}-a-1000.webp" width="1000" height="625" alt="{alt(p['aa'])}" loading="lazy" decoding="async">
     <i class="bp-scan" aria-hidden="true"></i>
-    <p class="bp-dim" aria-hidden="true"><span data-bp-dim>{e(p['bl']).upper()} · {p['band'].upper()}</span></p>
+    <p class="bp-dim" aria-hidden="true"><span data-bp-dim>{e(p['bl'])} {p['band']}</span></p>
     <button class="bp-run btn btn-glass btn-sm" type="button">Run the survey</button>
   </figure>
   <div class="bp-band" aria-live="polite"><p class="bp-k num" data-bp-k>01</p><p class="bp-name" data-bp-name>{e(p['place'])}</p><p class="bp-fix" data-bp-fix>{e(p['what'])}, {e(p['when'])}. {e(p['bl'])} {p['band']}.</p></div>

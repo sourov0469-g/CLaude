@@ -681,3 +681,38 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
   - ⟦S1499⟧.
 - 4 · Bands: ACCEPTED (see V2.5).
 - Added · Edge tick: as a row lights, its bar's leading edge ticks out 6 px in 150 ms (a `--tick` custom property tween, transform/opacity only). ⟦S0089⟧.
+
+## F4 · Work
+**V1, Drag (winner).**
+- 1 · Mapping and rest: ACCEPTED, with one IMPROVEMENT.
+  - The value is now the share of the AFTER photo showing (0 = all before, 100 = all after). The valuetext reads "N% of the after photo showing". Rest is v = 100: one complete finished house.
+  - The pack's `--split = 100 − v` would have left the after on the right, so ArrowRight (value up) would move the line LEFT. Instead the after sits LEFT of the line (`.cmp--ab`: the after is clipped, the before lies under it). The line moves the way the arrow keys read, and `--split = v`.
+  - The tags swap sides. A tag hides when its photo is under 8 % visible, so at rest no "Before" tag sits on a finished house.
+  - The handle clamps 30 px inside the edges, so at rest it sits at the right edge, whole.
+  - The intro is one sweep from 0 to 100 in 1.1 s, expo.out (was 100 → 50 in 1.3 s, power4.inOut).
+  - Backup 1 keeps the old mapping.
+  - ⟦S1320⟧ §3, ⟦S0089⟧, ⟦S1246⟧/APG slider direction.
+- 2 · Price capped at 3.5 rem: ACCEPTED. ⟦S1501⟧, ⟦S1500⟧.
+- 3 · `.ptag` at top 72 px: ACCEPTED. ⟦S0049⟧ sticky overlays.
+- 4 · Level settle at 0.3 s: ACCEPTED. The drag-time 0.18 s answer stays. ⟦S0063⟧ Std 4.
+- Clutter · Nails: ACCEPTED, removed from the markup; the trim and level stay. ⟦S1306⟧.
+- Graft · The filmstrip takes V3's caption format: place, portion and band, then date. ⟦S1499⟧.
+
+**V2, Blueprint.**
+- 1 · Run discipline: ACCEPTED.
+  - A job switch is now a 0.2 s out plus 0.45 s expo.out in, with one fast scan pass, landing on the finished wall.
+  - The 4.3 s survey runs only from "Run the survey".
+  - Clicking the figure mid-run skips to the end (`tl.progress(1)`).
+  - Rest is the finished wall, which also keeps the reduced-motion behaviour.
+  - ⟦S0063⟧ Std 2.
+- 2 · "Redraw as true line work": REJECTED as written, IMPROVED.
+  - No measured elevations exist for these six houses. Drawing walls, openings and dimension lines by hand would invent geometry and dimensions for real buildings. ⟦S1306⟧, ⟦S1320⟧ §2.
+  - The honest fix is the name and the ink. The stage is renamed "Survey, trace, rebuild", and the sub says what it is: "an edge tracing of the finished photo".
+  - The plate renders in blueprint ink through an SVG colour-matrix filter, so ink maps to `--dwg` and paper to `--sheet`.
+- 3 · Pill: ACCEPTED. Sentence case in the house sans, tabular numerals, `--dwg` ink. ⟦S0001⟧.
+- Clutter · ACCEPTED in part. On V2 the Work field drops to half opacity and loses its vertical stud rules. Keeping the grid inside the figure's mat would need a second field system for one version; with the rules gone and the dots halved, the grid no longer competes. ⟦S1314⟧ §5.
+
+**V3, Lens.**
+- Stagger: ACCEPTED, from 0.06 to 0.045 s. ⟦S0083⟧, ⟦S0063⟧.
+- Column parallax: ACCEPTED, capped at ±18 px (was ±18/±43/±29). ⟦S1314⟧ §8.
+- Offsets: ACCEPTED, from 88/104 to 48 px. Phone gap goes from 32 to 20 px. The section measures 1,739 px (was 1,835). ⟦S1499⟧.

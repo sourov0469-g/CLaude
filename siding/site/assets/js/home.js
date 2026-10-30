@@ -519,15 +519,20 @@
 
   /* WORK 1: drag the divider; a flick past 300 px/s or a release 50 px from an edge commits to that side (S0197);
      arrows step 5 % (Shift 10 %); pairs change through the logo window panes. */
-  V.work1 = (r, b) => {
+  V.work1 = (r, b, s) => {
+    /* Audit pack F4 V1: the value is the share of the AFTER photo showing (0 = all before, 100 = all after) and the
+       after sits left of the line, so the arrow keys move the line the way they read. Rest is v = 100: one complete
+       finished house. Backup 1 keeps the before-share mapping and its 50/50 rest. */
+    const ab = !(s && s.v > 5), REST = ab ? 100 : 50;
     const fig = $('.cmp', r), A = $('.cmp-a', fig), B = $('.cmp-b', fig), h = $('.cmp-handle', fig), info = $('.cmp-info', r);
     const P = JSON.parse($('.pairs-data', r).textContent);
     const panes = $$('.pane', fig);
     // v4: the level on the handle reads the drag; its bubble runs against the motion and settles back (back.out, S0544)
     const bub = $('.cl-bub', fig), lev = $('.cmp-lev', fig);
-    const tilt = v => { if (!motionOK() || !bub) return; const k = clamp(v / 1600, -1, 1); G.to(bub, { x: -k * 7, duration: v ? 0.18 : 0.6, ease: v ? 'power2.out' : 'back.out(1.6)', overwrite: true }); G.to(lev, { rotation: k * 6, duration: v ? 0.18 : 0.6, ease: v ? 'power2.out' : 'back.out(1.6)', overwrite: true }); };
-    const st = { v: 50 };
-    const set = v => { st.v = clamp(v, 0, 100); fig.style.setProperty('--split', st.v + '%'); h.setAttribute('aria-valuenow', Math.round(st.v)); h.setAttribute('aria-valuetext', `${Math.round(st.v)}% of the before photo showing`); };
+    const settle = ab ? 0.3 : 0.6;   // F4 V1.4: the level settles in 0.3 s
+    const tilt = v => { if (!motionOK() || !bub) return; const k = clamp(v / 1600, -1, 1); G.to(bub, { x: -k * 7, duration: v ? 0.18 : settle, ease: v ? 'power2.out' : 'back.out(1.6)', overwrite: true }); G.to(lev, { rotation: k * 6, duration: v ? 0.18 : settle, ease: v ? 'power2.out' : 'back.out(1.6)', overwrite: true }); };
+    const st = { v: REST };
+    const set = v => { st.v = clamp(v, 0, 100); fig.style.setProperty('--split', st.v + '%'); if (ab) { fig.classList.toggle('all-a', st.v > 92); fig.classList.toggle('all-b', st.v < 8); } h.setAttribute('aria-valuenow', Math.round(st.v)); h.setAttribute('aria-valuetext', `${Math.round(st.v)}% of the ${ab ? 'after' : 'before'} photo showing`); };
     const toX = e => { const rc = fig.getBoundingClientRect(); return (e.clientX - rc.left) / rc.width * 100; };
     let vx = 0, lx = 0, lt = 0;
     hdrag(fig, b, {
@@ -544,7 +549,9 @@
       }
     });
     sliderKeys(h, b, () => st.v, v => { G && G.killTweensOf(st); set(v); });   // a key press ends the opening sweep, never fights it
-    if (motionOK()) { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, data: 'k10', onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); }
+    // F4 V1.1: one opening sweep from all-before to all-after, 1.1 s expo.out (Backup 1: 100 -> 50 in 1.3 s)
+    if (motionOK()) { if (ab) { set(0); G.to(st, { v: 100, duration: 1.1, ease: 'expo.out', data: 'k10', onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); } else { set(100); G.to(st, { v: 50, duration: 1.3, ease: ease.io, data: 'k10', onUpdate: () => set(st.v), scrollTrigger: once(fig, 'top 70%') }); } }
+    else set(REST);
     let cur = 0, busy = false;
     const fill = p => {
       A.src = AU(`assets/img/h/work-${p.id}-a-1000.webp`); A.alt = p.aa; B.src = AU(`assets/img/h/work-${p.id}-b-1000.webp`); B.alt = p.ab;
@@ -555,11 +562,11 @@
     $$('.fs', r).forEach(btn => b.on(btn, 'click', () => {
       const k = +btn.dataset.i; if (k === cur || busy) return;
       $$('.fs', r).forEach(x => x.setAttribute('aria-pressed', x === btn)); cur = k;
-      if (!motionOK()) { fill(P[k]); set(50); return; }
+      if (!motionOK()) { fill(P[k]); set(REST); return; }
       busy = true;
       G.timeline({ onComplete: () => { busy = false; } })
         .to(panes, { scale: 1, duration: UI, ease: 'power4.in', stagger: 0.04 })
-        .add(() => { fill(P[k]); set(50); return null; })
+        .add(() => { fill(P[k]); set(REST); return null; })
         .add(() => Promise.all([A, B].map(i => i.decode ? i.decode().catch(() => {}) : 0)))
         .to(panes, { scale: 0, duration: UI, ease: 'power4.out', stagger: 0.04 }, '+=0.12');
     }));
@@ -569,7 +576,8 @@
      (edge lines from the firm's own photo); one dimension label draws; a second scan builds the finished wall.
      Photos swap only under the drawing. The visitor runs it: "Run the survey" or a job number plays that job once
      (no auto-advance, F17 / AUDIT-V3 G6). */
-  V.work2 = (r, b) => {
+  V.work2 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 2 replays the full survey on every switch (A.2)
     const P = JSON.parse($('.pairs-data', r).textContent), fig = $('.bp-fig', r), run = $('.bp-run', fig);
     const B = $('.bp-b', fig), Pl = $('.bp-p', fig), A = $('.bp-a', fig), dim = $('.bp-dim', fig), dimT = $('[data-bp-dim]', fig);
     const kEl = $('[data-bp-k]', r), nmEl = $('[data-bp-name]', r), fxEl = $('[data-bp-fix]', r), tabs = $$('.bp-step', r);
@@ -581,7 +589,7 @@
       B.src = AU(`assets/img/h/work-${p.id}-b-1000.webp`); B.alt = p.ab; Pl.src = AU(`assets/img/h/bp-${p.id}-1000.webp`);
       A.src = AU(`assets/img/h/work-${p.id}-a-1000.webp`); A.alt = p.aa;
       if (window.__apAsset) window.__apAsset(fig);
-      dimT.textContent = `${p.bl} · ${p.band}`.toUpperCase();
+      dimT.textContent = bk ? `${p.bl} · ${p.band}`.toUpperCase() : `${p.bl} ${p.band}`;
       kEl.textContent = '0' + (k + 1); nmEl.textContent = p.place; fxEl.textContent = `${p.what}, ${p.when}. ${p.bl} ${p.band}.`;
       tabs.forEach((t, n) => { t.setAttribute('aria-checked', n === k); t.tabIndex = n === k ? 0 : -1; });
     };
@@ -601,13 +609,29 @@
         .to(dim, { autoAlpha: 0, duration: 0.35 }, '-=0.3')
         .add(() => { S.s = 0; paint(); });
     };
-    radios($('.bp-steps', r), b, it => play(+it.dataset.k), '.bp-step');
-    b.on(run, 'click', () => play(i));
+    /* F4 V2.1: a job switch is a 0.45 s expo.out crossfade with one fast scan pass, never the 4 s survey; the survey
+       runs only from its button; clicking the drawing mid-run skips to the finished wall */
+    const swap = k => {
+      if (tl) tl.kill();
+      i = k;
+      if (!motionOK()) { load(k); S.a = 100; S.c = 100; S.s = 0; paint(); return; }
+      run.disabled = false;
+      const imgs = [B, Pl, A];
+      tl = G.timeline()
+        .to(imgs, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' })
+        .add(() => { load(k); S.a = 100; S.c = 100; S.s = 0; paint(); })
+        .to(imgs, { autoAlpha: 1, duration: 0.45, ease: 'expo.out' })
+        .fromTo(S, { s: 0 }, { s: 100, duration: 0.45, ease: 'expo.out', onUpdate: paint, onComplete: () => { S.s = 0; paint(); } }, '<');
+    };
+    radios($('.bp-steps', r), b, it => (bk ? play : swap)(+it.dataset.k), '.bp-step');
+    b.on(run, 'click', e => { e.stopPropagation(); play(i); });
+    if (!bk) b.on(fig, 'click', () => { if (tl && tl.isActive()) { tl.progress(1); run.disabled = false; } });
     b.add(() => { if (tl) tl.kill(); });
     if (!motionOK()) run.hidden = true;
-    load(0); S.a = motionOK() ? 0 : 100; S.c = motionOK() ? 0 : 100; paint();
+    load(0); S.a = motionOK() && bk ? 0 : 100; S.c = motionOK() && bk ? 0 : 100; paint();   // F4: rest is the finished wall
   };
-  V.work3 = (r, b) => {
+  V.work3 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 3 keeps its 0.06 s stagger and ±43 px columns (A.2)
     $$('.sp-fig', r).forEach(fig => {
       const btn = $('.sp-toggle', fig);
       b.on(btn, 'click', () => { const on = fig.classList.toggle('is-before'); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Show after' : 'Show before'; });
@@ -628,9 +652,9 @@
       b.add(() => cancelAnimationFrame(raf));
     });
     if (!motionOK()) return;
-    G.from($$('.sp-fig, .sp-cap', r), { y: 40, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: 0.06, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
+    G.from($$('.sp-fig, .sp-cap', r), { y: 40, autoAlpha: 0, duration: 0.6, ease: ease.out, stagger: bk ? 0.06 : 0.045, scrollTrigger: { trigger: $('.spots', r), start: 'top 80%', once: true } });
     // S1321 layered scroll: the three columns travel at different speeds, so the pairs sit at different depths
-    if (mqDesk.matches && ST) $$('.sp', r).forEach((li, k) => { const s = [0.5, 1.2, 0.8][k % 3] * 36; G.fromTo(li, { y: s }, { y: -s, ease: 'none', scrollTrigger: { trigger: $('.spots', r), start: 'top bottom', end: 'bottom top', scrub: 1.2 } }); });
+    if (mqDesk.matches && ST) $$('.sp', r).forEach((li, k) => { const s = bk ? [0.5, 1.2, 0.8][k % 3] * 36 : [0.5, 1, 0.75][k % 3] * 18; /* F4 V3: capped at ±18 px */ G.fromTo(li, { y: s }, { y: -s, ease: 'none', scrollTrigger: { trigger: $('.spots', r), start: 'top bottom', end: 'bottom top', scrub: 1.2 } }); });
   };
 
   /* BUILT 1: the wall, taken apart (S0526 exploded view): one spring per layer, stiffness 64, drag 14.2, 4 sub-steps,

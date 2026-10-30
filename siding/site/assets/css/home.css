@@ -1732,3 +1732,27 @@ html.js:not(.motion) *, html.js:not(.motion) ::before, html.js:not(.motion) ::af
 .tm-t.is-on .tm-go:focus-visible { outline: 3px solid var(--ink); outline-offset: 0; }
 .tm-t.is-on .tm-n::after { content: "Book \2192"; margin-left: 10px; color: var(--red-d); font-size: .8125rem; font-weight: 650; }
 @media (hover: hover) and (pointer: fine) { .tm-t.is-on:hover .tm-n::after { text-decoration: underline; text-underline-offset: 3px; } .tm-t.is-on:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); border-radius: 10px; } }
+
+/* ================= F4 WORK (Audit pack). Scoped off the backups. ================= */
+/* V1: after left of the line, before right; --split is the share of the after photo; rest is the whole after */
+.cmp--ab .cmp-b { clip-path: none; }
+.cmp--ab .cmp-a { z-index: 1; clip-path: inset(0 calc(100% - var(--split)) 0 0); }
+.cmp--ab .cmp-handle { left: clamp(30px, var(--split), calc(100% - 30px)); }
+.cmp--ab .ptag-a { left: 16px; right: auto; } .cmp--ab .ptag-b { right: 16px; left: auto; }
+.sec:not([data-bk]) .cmp .ptag { top: 72px; }                                    /* F4 V1.3: clear of the sticky switcher */
+.sec:not([data-bk]) .cmp-price { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 3.5rem); }   /* F4 V1.2: capped at 3.5rem */
+.sec:not([data-bk]) .fs { grid-template-rows: auto auto auto auto; }
+.sec:not([data-bk]) .fs small { color: var(--ink2); font-size: .75rem; }
+.sec:not([data-bk]) .fs b { color: var(--ink); font-weight: 600; }
+/* V2: the tracing in blueprint ink; sentence-case dimension in the house sans; the field quieter, without its rules */
+.bp-defs { position: absolute; width: 0; height: 0; }
+.sec:not([data-bk]) .bp-p { filter: url(#bp-ink); }
+.sec:not([data-bk]) .bp-dim span { font: 650 .875rem/1 var(--f); font-variant-numeric: tabular-nums; letter-spacing: 0; color: var(--dwg); }
+.sec:not([data-bk]) .bp-dim::before, .sec:not([data-bk]) .bp-dim::after { border-color: var(--dwg); }
+.sec:not([data-bk]) .work-2 .sfx-work { opacity: .5; }
+.sec:not([data-bk]) .work-2 .sfx-work .f-studs { display: none; }
+/* V3: offsets 48 px; phones gap 20 px */
+@media (min-width: 900px) { .sec:not([data-bk]) .sp-1 { margin-top: 48px; } .sec:not([data-bk]) .sp-5 { margin-top: 48px; } .sec:not([data-bk]) .sp-3 { margin-top: 24px; } }
+@media (max-width: 899px) { .sec:not([data-bk]) .spots { gap: 20px 16px; } }
+.cmp--ab .ptag { transition: opacity var(--t-hover) var(--ease); }
+.cmp--ab.all-a .ptag-b, .cmp--ab.all-b .ptag-a { opacity: 0; }   /* a tag names only a photo that is showing */
