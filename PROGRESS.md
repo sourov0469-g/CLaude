@@ -388,3 +388,45 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
   - The two mismatched photos (k-walnut-marble, k-emerald-shaker) are not used on the new pages.
 
 **Site navigation** (all pages): Kitchens, Bathrooms, Renovation, Contact, phone, "Book a consultation" (homepage `#consult`; elsewhere `contact.html#contact-form`). On the homepage, the menu sheet also keeps its "on this page" section links.
+
+## Page build log (owner order)
+
+**Kitchens** (`kitchens.html`, commit 24682e1)
+- Sections: `kitchen-intro`, `kitchen-scope`, `kitchen-work`, each with 5 visible versions and b1–b5 records.
+- QA: contrast 0 below AA, facts 0 fails, reactions fully covered with no duplicates, switchers 1–5, 15/15 backups open, `tools/kitchenstest.js` passes in both motion modes.
+
+**Bathrooms** (`bathrooms.html`, commit e38aec8)
+- Sections: `bath-intro`, `bath-build`, `bath-work`, each with 5 visible versions and b1–b5 records.
+- QA: same checks as Kitchens, all clean; `tools/bathroomstest.js` passes in both motion modes.
+
+**Renovation** (`renovation.html`)
+- `reno-intro`:
+  1. farmhouse photo with roofline
+  2. "One disruption. Not five." comparison (labelled as an illustration, not a schedule)
+  3. collage with giant type
+  4. three expanding panels
+  5. house section with rooms filling
+- `reno-services` (all nine published services):
+  1. card grid
+  2. house elevation with hotspots and a permit board, plus an "also" list
+  3. vertical tabs
+  4. numbered index with disclosures
+  5. outdoor before/after slider with the rest as a run
+- `reno-permits`:
+  1. county radios with map; HVHZ hatched and keyed
+  2. site-evaluation checklist
+  3. four financing partners by kind of work, citing only what each partner's published list names
+  4. week ruler for the four published pre-construction stages
+  5. permit Q&A carrying the long-form licence sentence
+- Records `ri1r`–`ri5r`, `rs1r`–`rs5r`, `rp1r`–`rp5r` (b1–b5).
+- Fixes from the screenshot review:
+  - Floating hotspots: added a permit board drawing and moved the dots onto real parts of the house.
+  - Hatch legend added to the map.
+  - The week ruler redraws at its own width, so the labels are readable at 375px; the cursor runs behind the bars.
+  - The Q&A answer spacing was collapsing out of the details element; fixed.
+- QA:
+  - `qa/site-renovation-r1.txt` and `-r2.txt`: contrast 0 below AA, switchers 1–5, 15/15 backups open, 0 page errors.
+  - `qa/facts-renovation.txt`: 0 fails.
+  - Reactions: 99 + 18 covered, 0 missing, 0 duplicates.
+  - `tools/renovationtest.js` passes in both motion modes, before and after recording.
+- Weight: 1.0 MB.

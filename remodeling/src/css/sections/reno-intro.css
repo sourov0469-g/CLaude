@@ -1,0 +1,198 @@
+/* Renovation page, section 1 · reno-intro: whole-home renovation, five versions */
+.rintro { padding-top: calc(var(--nav-h) + clamp(28px, 4vw, 56px)); }   /* the first section of a page clears the fixed nav */
+.rproof { display: flex; flex-wrap: wrap; column-gap: 18px; row-gap: 2px; font: 500 .875rem/1.5 var(--f-text); color: var(--ink-2); }
+.rproof p { margin: 0; }
+.rproof .nums { font-weight: 600; color: var(--ink); }
+.rproof__star { color: var(--a-700); }
+
+/* ---------- v1 · The farmhouse ---------- */
+.ri1__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ri1__fig { position: relative; margin: 0; }
+.ri1__fig img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.ri1__roof { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.ri1__roof path { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
+.ri1__fig figcaption { margin-top: 10px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.ri1__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ri1__h { font-size: clamp(2.5rem, 1.4rem + 3.2vw, 4.5rem); }
+.ri1__lead { color: var(--muted); }
+.ri1__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+@media (max-width: 1023px) { .ri1__grid { grid-template-columns: 1fr; } }
+
+/* ---------- v2 · One disruption, not five ---------- */
+.ri2__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ri2__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ri2__h { font-size: clamp(2.5rem, 1.4rem + 3.2vw, 4.5rem); }
+.ri2__lead { color: var(--muted); }
+.ri2__sw { display: inline-flex; padding: 4px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ri2__o { min-height: 44px; padding: 0 16px; border: 0; background: transparent; color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.ri2__o[aria-checked="true"] { background: var(--a-500); }
+.ri2__acts { display: grid; gap: var(--s4); justify-items: start; }
+.ri2__chart { margin: 0; padding: var(--s5); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ri2__chart svg { width: 100%; height: auto; }
+.ri2__ax { stroke: var(--ink); stroke-width: 2; }
+.ri2__five rect { fill: var(--a-100); stroke: var(--ink); stroke-width: 2; }
+.ri2__gap { stroke: var(--err); stroke-width: 2; stroke-dasharray: 4 4; }
+.ri2__one rect { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; }
+.ri2__one text { font: 600 20px/1 var(--f-display); fill: var(--ink); text-anchor: middle; }
+.ri2__t { font: 600 13px/1 var(--f-text); fill: var(--muted); }
+.ri2__five, .ri2__one { transition: opacity 400ms var(--ease-out); }
+.ri2.is-five .ri2__one, .ri2:not(.is-five) .ri2__five { opacity: 0; }
+.ri2__cap { margin-top: 12px; font: 500 .8125rem/1.45 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) { .ri2__grid { grid-template-columns: 1fr; } }
+
+/* ---------- v3 · The collage ---------- */
+.ri3__wrap { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+.ri3__eye { grid-column: 1 / -1; }
+.ri3__h { grid-column: 1 / -1; position: relative; z-index: 2; margin: var(--s4) 0 0; font: 600 clamp(2.5rem, 1rem + 5.4vw, 6.75rem)/1 var(--f-display); letter-spacing: -.02em; }
+.ri3__h span { display: block; }
+.ri3__h span:last-child { text-align: right; }
+.ri3__a { grid-column: 2 / span 5; margin: calc(var(--s7) * -1) 0 0; position: relative; z-index: 1; }
+.ri3__b { grid-column: 8 / span 5; margin: var(--s8) 0 0; position: relative; z-index: 1; }
+.ri3__a img, .ri3__b img { display: block; width: 100%; object-fit: cover; }
+.ri3__a img { aspect-ratio: 1 / 1; }
+.ri3__b img { aspect-ratio: 3 / 2; }
+.ri3__a figcaption, .ri3__b figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.ri3__frame { position: absolute; right: var(--margin); top: 38%; width: min(22vw, 260px); height: auto; overflow: visible; z-index: 0; }
+.ri3__frame path { fill: var(--a-100); stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
+.ri3__foot { grid-column: 1 / span 6; display: grid; gap: var(--s4); justify-items: start; margin-top: var(--s6); }
+.ri3__lead { color: var(--muted); }
+@media (max-width: 1023px) { .ri3__a, .ri3__b, .ri3__foot { grid-column: 1 / -1; margin-top: var(--s5); } .ri3__frame { display: none; } .ri3__h span:last-child { text-align: left; } }
+
+/* ---------- v4 · Three panels ---------- */
+.ri4__head { display: grid; grid-template-columns: 1fr auto; gap: var(--s4) var(--gutter); align-items: end; margin-bottom: var(--s6); }
+.ri4__head .eyebrow, .ri4__head .t-head { grid-column: 1; }
+.ri4__acts { grid-column: 2; grid-row: 2; display: flex; align-items: center; gap: var(--s5); }
+.ri4__row { display: flex; gap: 10px; height: min(64vh, 600px); }
+.ri4__p { position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: 0; overflow: hidden; cursor: pointer; background: var(--surface-2); transition: flex-grow 500ms var(--ease-out); text-align: left; color: var(--ink); }
+.ri4__p.is-on { flex-grow: 4; }
+.ri4__p img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ri4__n { position: absolute; left: 14px; top: 14px; padding: 6px 10px; background: var(--a-500); font: 600 1rem/1 var(--f-display); }
+.ri4__t { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 10px 12px; background: var(--white); font: 600 clamp(1rem, .8rem + .8vw, 1.5rem)/1.2 var(--f-display); box-shadow: inset 4px 0 0 var(--a-500); }
+.ri4__p:not(.is-on) .ri4__t { font-size: .9375rem; }
+.ri4__note { margin: 12px 0 var(--s4); font: 500 .8125rem/1.4 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) { .ri4__head { grid-template-columns: 1fr; } .ri4__acts { grid-column: 1; grid-row: auto; } .ri4__row { flex-direction: column; height: auto; } .ri4__p { flex: none; height: 46vw; } .ri4__p.is-on { height: 70vw; } }
+@media (prefers-reduced-motion: reduce) { .ri4__p { transition: none; } }
+
+/* ---------- v5 · The house section ---------- */
+.ri5__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ri5__copy { display: grid; gap: var(--s4); justify-items: start; }
+.ri5__h { font-size: clamp(2.5rem, 1.4rem + 3.2vw, 4.5rem); }
+.ri5__lead { color: var(--muted); }
+.ri5__house { width: 100%; height: auto; overflow: visible; }
+.ri5__shell { fill: var(--white); stroke: var(--ink); stroke-width: 4; stroke-linejoin: miter; }
+.ri5__rm { fill: var(--a-100); }
+.ri5__plan { stroke: var(--a-500); stroke-width: 6; stroke-linecap: round; }
+.ri5__house text { font: 600 14px/1 var(--f-text); fill: var(--ink-2); text-anchor: middle; }
+.ri5__photos { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
+.ri5__photos figure { margin: 0; }
+.ri5__photos img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.ri5__photos figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) { .ri5__grid { grid-template-columns: 1fr; } .ri5__photos { grid-template-columns: 1fr; } }
+
+
+/* ---------- b1 · release record of slot 1 (.ri1 -> .ri1r) ---------- */
+.ri1r__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ri1r__fig { position: relative; margin: 0; }
+.ri1r__fig img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.ri1r__roof { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.ri1r__roof path { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
+.ri1r__fig figcaption { margin-top: 10px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.ri1r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ri1r__h { font-size: clamp(2.5rem, 1.4rem + 3.2vw, 4.5rem); }
+.ri1r__lead { color: var(--muted); }
+.ri1r__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s5); }
+@media (max-width: 1023px) {
+  .ri1r__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ---------- b2 · release record of slot 2 (.ri2 -> .ri2r) ---------- */
+.ri2r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ri2r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.ri2r__h { font-size: clamp(2.5rem, 1.4rem + 3.2vw, 4.5rem); }
+.ri2r__lead { color: var(--muted); }
+.ri2r__sw { display: inline-flex; padding: 4px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ri2r__o { min-height: 44px; padding: 0 16px; border: 0; background: transparent; color: var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.ri2r__o[aria-checked="true"] { background: var(--a-500); }
+.ri2r__acts { display: grid; gap: var(--s4); justify-items: start; }
+.ri2r__chart { margin: 0; padding: var(--s5); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.ri2r__chart svg { width: 100%; height: auto; }
+.ri2r__ax { stroke: var(--ink); stroke-width: 2; }
+.ri2r__five rect { fill: var(--a-100); stroke: var(--ink); stroke-width: 2; }
+.ri2r__gap { stroke: var(--err); stroke-width: 2; stroke-dasharray: 4 4; }
+.ri2r__one rect { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; }
+.ri2r__one text { font: 600 20px/1 var(--f-display); fill: var(--ink); text-anchor: middle; }
+.ri2r__t { font: 600 13px/1 var(--f-text); fill: var(--muted); }
+.ri2r__five, .ri2r__one { transition: opacity 400ms var(--ease-out); }
+.ri2r.is-five .ri2r__one, .ri2r:not(.is-five) .ri2r__five { opacity: 0; }
+.ri2r__cap { margin-top: 12px; font: 500 .8125rem/1.45 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) {
+  .ri2r__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ---------- b3 · release record of slot 3 (.ri3 -> .ri3r) ---------- */
+.ri3r__wrap { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+.ri3r__eye { grid-column: 1 / -1; }
+.ri3r__h { grid-column: 1 / -1; position: relative; z-index: 2; margin: var(--s4) 0 0; font: 600 clamp(2.5rem, 1rem + 5.4vw, 6.75rem)/1 var(--f-display); letter-spacing: -.02em; }
+.ri3r__h span { display: block; }
+.ri3r__h span:last-child { text-align: right; }
+.ri3r__a { grid-column: 2 / span 5; margin: calc(var(--s7) * -1) 0 0; position: relative; z-index: 1; }
+.ri3r__b { grid-column: 8 / span 5; margin: var(--s8) 0 0; position: relative; z-index: 1; }
+.ri3r__a img, .ri3r__b img { display: block; width: 100%; object-fit: cover; }
+.ri3r__a img { aspect-ratio: 1 / 1; }
+.ri3r__b img { aspect-ratio: 3 / 2; }
+.ri3r__a figcaption, .ri3r__b figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.ri3r__frame { position: absolute; right: var(--margin); top: 38%; width: min(22vw, 260px); height: auto; overflow: visible; z-index: 0; }
+.ri3r__frame path { fill: var(--a-100); stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
+.ri3r__foot { grid-column: 1 / span 6; display: grid; gap: var(--s4); justify-items: start; margin-top: var(--s6); }
+.ri3r__lead { color: var(--muted); }
+@media (max-width: 1023px) {
+  .ri3r__a, .ri3r__b, .ri3r__foot { grid-column: 1 / -1; margin-top: var(--s5); }
+  .ri3r__frame { display: none; }
+  .ri3r__h span:last-child { text-align: left; }
+}
+
+
+/* ---------- b4 · release record of slot 4 (.ri4 -> .ri4r) ---------- */
+.ri4r__head { display: grid; grid-template-columns: 1fr auto; gap: var(--s4) var(--gutter); align-items: end; margin-bottom: var(--s6); }
+.ri4r__head .eyebrow, .ri4r__head .t-head { grid-column: 1; }
+.ri4r__acts { grid-column: 2; grid-row: 2; display: flex; align-items: center; gap: var(--s5); }
+.ri4r__row { display: flex; gap: 10px; height: min(64vh, 600px); }
+.ri4r__p { position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: 0; overflow: hidden; cursor: pointer; background: var(--surface-2); transition: flex-grow 500ms var(--ease-out); text-align: left; color: var(--ink); }
+.ri4r__p.is-on { flex-grow: 4; }
+.ri4r__p img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ri4r__n { position: absolute; left: 14px; top: 14px; padding: 6px 10px; background: var(--a-500); font: 600 1rem/1 var(--f-display); }
+.ri4r__t { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 10px 12px; background: var(--white); font: 600 clamp(1rem, .8rem + .8vw, 1.5rem)/1.2 var(--f-display); box-shadow: inset 4px 0 0 var(--a-500); }
+.ri4r__p:not(.is-on) .ri4r__t { font-size: .9375rem; }
+.ri4r__note { margin: 12px 0 var(--s4); font: 500 .8125rem/1.4 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) {
+  .ri4r__head { grid-template-columns: 1fr; }
+  .ri4r__acts { grid-column: 1; grid-row: auto; }
+  .ri4r__row { flex-direction: column; height: auto; }
+  .ri4r__p { flex: none; height: 46vw; }
+  .ri4r__p.is-on { height: 70vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ri4r__p { transition: none; }
+}
+
+
+/* ---------- b5 · release record of slot 5 (.ri5 -> .ri5r) ---------- */
+.ri5r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.ri5r__copy { display: grid; gap: var(--s4); justify-items: start; }
+.ri5r__h { font-size: clamp(2.5rem, 1.4rem + 3.2vw, 4.5rem); }
+.ri5r__lead { color: var(--muted); }
+.ri5r__house { width: 100%; height: auto; overflow: visible; }
+.ri5r__shell { fill: var(--white); stroke: var(--ink); stroke-width: 4; stroke-linejoin: miter; }
+.ri5r__rm { fill: var(--a-100); }
+.ri5r__plan { stroke: var(--a-500); stroke-width: 6; stroke-linecap: round; }
+.ri5r__house text { font: 600 14px/1 var(--f-text); fill: var(--ink-2); text-anchor: middle; }
+.ri5r__photos { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
+.ri5r__photos figure { margin: 0; }
+.ri5r__photos img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.ri5r__photos figcaption { margin-top: 8px; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+@media (max-width: 1023px) {
+  .ri5r__grid { grid-template-columns: 1fr; }
+  .ri5r__photos { grid-template-columns: 1fr; }
+}

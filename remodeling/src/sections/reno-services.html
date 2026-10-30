@@ -1,0 +1,161 @@
+<section id="reno-services" class="sec rserv g-surface" data-section="reno-services" aria-labelledby="reno-services-h-1">
+  <!-- Renovation page, section 2 · the other services. Every service the firm publishes beyond kitchens and bathrooms; text is
+       only what the firm publishes about each (FACTS.md "Services", FAQ code context, /financing/). ADUs & Additions, New
+       Construction and Commercial Remodeling are published by name only: they carry a drawing, not invented copy. Built in JS. -->
+
+  <!-- v1 · The card grid: nine services, each with its own line drawing -->
+  <div class="ver rs1" data-v="1">
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-1">Beyond kitchens and baths, <span class="acc">the rest of the house.</span></h2>
+        <p class="t-lead rs__lead">Every service we publish beyond kitchens and bathrooms. Whatever the scope, one team accountable for all of it.</p>
+      </div>
+      <ul class="rs1__grid"></ul>
+    </div>
+  </div>
+
+  <!-- v2 · The elevation: a house drawn front-on with a hotspot on each part we build; the panel reads out the service -->
+  <div class="ver rs2" data-v="2" hidden>
+    <div class="wrap rs2__grid">
+      <div class="rs2__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-2">Point at the house. <span class="acc">We build that part.</span></h2>
+        <div class="rs2__out" aria-live="polite"><svg class="rs2__ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path/></svg><p class="rs2__n"></p><p class="rs2__d"></p></div>
+      </div>
+      <div class="rs2__stage">
+        <svg class="rs2__house" viewBox="0 0 660 380" aria-hidden="true" focusable="false">
+          <path class="rs2__ground" d="M0 350 H660"/>
+          <path class="rs2__main" d="M150 350 V170 L290 70 L430 170 V350 Z"/>
+          <path class="rs2__roofs" d="M130 184 L290 56 L450 184"/>
+          <rect class="rs2__win" x="185" y="210" width="60" height="60"/><rect class="rs2__win" x="335" y="210" width="60" height="60"/><path class="rs2__win" d="M215 210 V270 M185 240 H245 M365 210 V270 M335 240 H395"/>
+          <rect class="rs2__door" x="265" y="270" width="50" height="80"/>
+          <path class="rs2__add" d="M430 350 V230 L500 190 L560 230 V350 Z"/><rect class="rs2__win" x="475" y="260" width="40" height="40"/>
+          <path class="rs2__perg" d="M30 230 H140 M40 230 V350 M130 230 V350 M50 220 V230 M70 220 V230 M90 220 V230 M110 220 V230"/>
+          <path class="rs2__floor" d="M160 340 H420 M175 340 V350 M215 340 V350 M255 340 V350 M295 340 V350 M335 340 V350 M375 340 V350"/>
+          <path class="rs2__post" d="M620 290 V350"/><rect class="rs2__board" x="592" y="248" width="56" height="42"/><path class="rs2__post" d="M600 260 H640 M600 270 H632 M600 280 H626"/>
+        </svg>
+        <div class="rs2__dots" role="group" aria-label="Parts of the house"></div>
+      </div>
+      <ul class="rs2__also" aria-label="Also under one contract"></ul>
+    </div>
+  </div>
+
+  <!-- v3 · Tabs down the side: the service list on the left, the chosen one large on the right with its drawing (and photo where one exists) -->
+  <div class="ver rs3" data-v="3" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-3">Nine services, <span class="acc">one team.</span></h2>
+      </div>
+      <div class="rs3__grid">
+        <div class="rs3__tabs" role="tablist" aria-orientation="vertical" aria-label="Services"></div>
+        <div class="rs3__panel" role="tabpanel" id="rs3-panel" tabindex="0" data-rx="native:rs3-panel"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- v4 · The index: full-width rows with big numbers; a row opens to its drawing and what we publish about it -->
+  <div class="ver rs4" data-v="4" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-4">The service index, <span class="acc">one to nine.</span></h2>
+        <p class="t-lead rs__lead">Open a row to read what we publish about it.</p>
+      </div>
+      <div class="rs4__rows"></div>
+    </div>
+  </div>
+
+  <!-- v5 · Outdoor first: the outdoor before/after pair large, the waterfront project beside it; the rest of the services in a compact run -->
+  <div class="ver rs5" data-v="5" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Outdoor living and more</p>
+        <h2 class="t-head" id="reno-services-h-5">Out the back door, <span class="acc">and the rest of the house.</span></h2>
+        <p class="t-lead rs__lead">A backyard we turned into covered outdoor living, before and after. Drag across it to compare.</p>
+      </div>
+      <div class="rs5__top"><div class="rs5__ba"></div><figure class="rs5__fig"><img data-img="o-waterfront" width="1600" height="1200" alt="Waterfront Backyard &amp; Outdoor Living Transformation, an Elbaz project" loading="lazy"><figcaption>Waterfront Backyard &amp; Outdoor Living Transformation</figcaption></figure></div>
+      <h3 class="rs5__h3">Also under one contract</h3>
+      <ul class="rs5__run"></ul>
+    </div>
+  </div>
+<!-- b1 · release record of slot 1 (.rs1 -> .rs1r) -->
+  <div class="ver rs1r" data-v="b1" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-1-r">Beyond kitchens and baths, <span class="acc">the rest of the house.</span></h2>
+        <p class="t-lead rs__lead">Every service we publish beyond kitchens and bathrooms. Whatever the scope, one team accountable for all of it.</p>
+      </div>
+      <ul class="rs1r__grid"></ul>
+    </div>
+  </div>
+
+<!-- b2 · release record of slot 2 (.rs2 -> .rs2r) -->
+  <div class="ver rs2r" data-v="b2" hidden>
+    <div class="wrap rs2r__grid">
+      <div class="rs2r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-2-r">Point at the house. <span class="acc">We build that part.</span></h2>
+        <div class="rs2r__out" aria-live="polite"><svg class="rs2r__ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path/></svg><p class="rs2r__n"></p><p class="rs2r__d"></p></div>
+      </div>
+      <div class="rs2r__stage">
+        <svg class="rs2r__house" viewBox="0 0 660 380" aria-hidden="true" focusable="false">
+          <path class="rs2r__ground" d="M0 350 H660"/>
+          <path class="rs2r__main" d="M150 350 V170 L290 70 L430 170 V350 Z"/>
+          <path class="rs2r__roofs" d="M130 184 L290 56 L450 184"/>
+          <rect class="rs2r__win" x="185" y="210" width="60" height="60"/><rect class="rs2r__win" x="335" y="210" width="60" height="60"/><path class="rs2r__win" d="M215 210 V270 M185 240 H245 M365 210 V270 M335 240 H395"/>
+          <rect class="rs2r__door" x="265" y="270" width="50" height="80"/>
+          <path class="rs2r__add" d="M430 350 V230 L500 190 L560 230 V350 Z"/><rect class="rs2r__win" x="475" y="260" width="40" height="40"/>
+          <path class="rs2r__perg" d="M30 230 H140 M40 230 V350 M130 230 V350 M50 220 V230 M70 220 V230 M90 220 V230 M110 220 V230"/>
+          <path class="rs2r__floor" d="M160 340 H420 M175 340 V350 M215 340 V350 M255 340 V350 M295 340 V350 M335 340 V350 M375 340 V350"/>
+          <path class="rs2r__post" d="M620 290 V350"/><rect class="rs2r__board" x="592" y="248" width="56" height="42"/><path class="rs2r__post" d="M600 260 H640 M600 270 H632 M600 280 H626"/>
+        </svg>
+        <div class="rs2r__dots" role="group" aria-label="Parts of the house"></div>
+      </div>
+      <ul class="rs2r__also" aria-label="Also under one contract"></ul>
+    </div>
+  </div>
+
+<!-- b3 · release record of slot 3 (.rs3 -> .rs3r) -->
+  <div class="ver rs3r" data-v="b3" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-3-r">Nine services, <span class="acc">one team.</span></h2>
+      </div>
+      <div class="rs3r__grid">
+        <div class="rs3r__tabs" role="tablist" aria-orientation="vertical" aria-label="Services"></div>
+        <div class="rs3r__panel" role="tabpanel" id="rs3r-panel-r" tabindex="0" data-rx="native:rs3r-panel"></div>
+      </div>
+    </div>
+  </div>
+
+<!-- b4 · release record of slot 4 (.rs4 -> .rs4r) -->
+  <div class="ver rs4r" data-v="b4" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Under one contract</p>
+        <h2 class="t-head" id="reno-services-h-4-r">The service index, <span class="acc">one to nine.</span></h2>
+        <p class="t-lead rs__lead">Open a row to read what we publish about it.</p>
+      </div>
+      <div class="rs4r__rows"></div>
+    </div>
+  </div>
+
+<!-- b5 · release record of slot 5 (.rs5 -> .rs5r) -->
+  <div class="ver rs5r" data-v="b5" hidden>
+    <div class="wrap">
+      <div class="rs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Outdoor living and more</p>
+        <h2 class="t-head" id="reno-services-h-5-r">Out the back door, <span class="acc">and the rest of the house.</span></h2>
+        <p class="t-lead rs__lead">A backyard we turned into covered outdoor living, before and after. Drag across it to compare.</p>
+      </div>
+      <div class="rs5r__top"><div class="rs5r__ba"></div><figure class="rs5r__fig"><img data-img="o-waterfront" width="1600" height="1200" alt="Waterfront Backyard &amp; Outdoor Living Transformation, an Elbaz project" loading="lazy"><figcaption>Waterfront Backyard &amp; Outdoor Living Transformation</figcaption></figure></div>
+      <h3 class="rs5r__h3">Also under one contract</h3>
+      <ul class="rs5r__run"></ul>
+    </div>
+  </div>
+
+</section>
