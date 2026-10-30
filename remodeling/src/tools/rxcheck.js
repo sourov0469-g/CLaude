@@ -8,7 +8,8 @@ const SEL = 'a[href],button,input:not([type=hidden]),select,textarea,[role=radio
   const w = +(process.argv[2] || 1440);
   const b = await chromium.launch();
   const seen = new Map(), missing = [], bad = [];
-  for (const v of [1, 2, 3]) {
+  // SLOTS env (e.g. 4,5,6,7,8) checks further slots; a section without that slot falls back and is skipped
+  for (const v of (process.env.SLOTS || '1,2,3').split(',').map(Number)) {
     const p = await b.newPage({ viewport: { width: w, height: 900 } });
     await p.goto(FILE + '?' + SECS.map(s => s + '=' + v).join('&'));
     await p.waitForTimeout(1500);
@@ -21,6 +22,7 @@ const SEL = 'a[href],button,input:not([type=hidden]),select,textarea,[role=radio
       document.querySelectorAll(SEL).forEach(e => {
         const ver = e.closest('.ver');
         if (ver && ver.hidden) return;
+        if (ver && ver.dataset.v !== String(v)) return;
         if (!ver && v > 1) return;                     // chrome counted once
         if (e.closest('.rx')) return;
         const host = e.closest('[data-rx]');

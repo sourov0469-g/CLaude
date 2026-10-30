@@ -267,3 +267,20 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
 **Phase 4 evidence (Finish picker):** `remodeling/qa/pickertest.txt`, `remodeling/qa/picker-turquoise.jpg`, `remodeling/src/tools/pickertest.js`.
 - Six swatches, six distinct photos, each printing a real project title from `data/projects.json`.
 - Arrow keys wrap around the row; reduced motion swaps instantly; 0 page errors.
+
+**Phase 5 log (per section; commits carry the detail).** Each section's backups are proven byte-identical to the pre-Phase-5 commit with `remodeling/src/tools/backupcheck.py`.
+- Hero: 7e95579, 017f6b6. Proof: eedadff, 68567bc. Services: 76b96be. Before/after: 125bc19. Process: 9c2cb57. Financing: 053da7c.
+- Work:
+  - Backups b2–b4 hold the former visible versions; b1 is unchanged.
+  - Improved slots:
+    - 1 belts: a running tread whose chevrons stop with the belt, flat caption tabs, no fade gradients, and the mobile lead column fixed.
+    - 2 plan room: eyebrow, accent and a drawing-sheet title block.
+    - 3 turntable: a flat stage tint instead of the radial glow, plus a readable protractor.
+  - New slots:
+    - 4 floor plan: pick a room and its photos follow.
+    - 5 gallery wall: crooked frames are set level by a spirit level, then open.
+    - 6 tile bond: stack, running and basket weave layouts, with cut pieces.
+    - 7 plumb-line index.
+    - 8 ring-bound job binder.
+  - New versions leave out the two photos whose subject does not match their title (owner item). Their counts are computed from what they show and never claim 26.
+  - Test: `remodeling/src/tools/worktest.js` (both motion settings, 0 errors).

@@ -134,3 +134,268 @@
 .wb .work__lead { grid-column: 8 / span 4; }
 @media (max-width: 1023px) { .wb__cam { width: 88px; bottom: auto; top: 0; } }
 @media (max-width: 767px) { .wb__cam { display: none; } }
+
+
+/* ---------- slot 1 · Phase 5 improved version of b2 (.wb -> .wbx); improvements follow ---------- */
+.wbx__belts { display: grid; gap: clamp(12px, 1.6vw, 22px); margin-top: var(--s7); }
+.wbx__belt { overflow: hidden; position: relative; }
+.wbx__belt::before, .wbx__belt::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(24px, 6vw, 90px); z-index: 2; pointer-events: none; }
+.wbx__track { display: flex; gap: clamp(12px, 1.6vw, 22px); width: max-content; }
+.wbx__tile { --h: clamp(190px, 26vw, 340px); position: relative; flex: none; height: var(--h); padding: 0; border: 0; background: var(--white); cursor: pointer; overflow: visible; }
+.wbx__belt--b .wbx__tile { --h: clamp(160px, 20vw, 270px); }
+.wbx__tile img { display: block; height: 100%; width: auto; object-fit: cover; }
+.wbx__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 22px 12px 10px; background: var(--white); color: var(--ink); text-align: left; font: 500 .8125rem/1.3 var(--f-text); opacity: 0; transform: translateY(6px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+.wbx__cap b { display: block; font: 400 .875rem/1 var(--f-display); letter-spacing: -.005em; color: var(--a-700); margin-bottom: 3px; }
+.wbx__tile:focus-visible .wbx__cap { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .wbx__tile:hover .wbx__cap { opacity: 1; transform: none; }
+}
+.wbx__tile:focus-visible { outline: 3px solid var(--a-500); outline-offset: 3px; }
+.wbx__foot { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; margin-top: var(--s7); }
+.wbx.is-static .wbx__belt { overflow-x: auto; scrollbar-width: thin; }
+.wbx.is-static .wbx__track { padding-left: var(--margin); }
+@media (max-width: 767px) {
+  .wbx__cap { opacity: 1; transform: none; padding: 16px 8px 6px; }
+  .wbx__ct { display: none; }
+  .wbx__cap b { margin: 0; }
+}
+.wbx__cap { opacity: 1; transform: none; transition: none; }
+.wbx__cap b { color: var(--a-700); letter-spacing: .08em; }
+.wbx__tile:focus-visible { outline-color: var(--a-500); }
+.wbx .work__head { position: relative; }
+.wbx__cam { position: absolute; right: 0; bottom: 0; width: 112px; height: auto; overflow: visible; }
+.wbx__legs { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.wbx__head, .wbx__top { fill: var(--ink); }
+.wbx__body { fill: var(--a-500); }
+.wbx__lens-o { fill: var(--ink); }
+.wbx__lens-i { fill: var(--a-200); }
+.wbx__glint { fill: var(--white); }
+.wbx__flash { fill: var(--white); stroke: var(--ink); stroke-width: 2.4; }
+.wbx__burst path { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linecap: round; opacity: 0; }
+.wbx .work__lead { grid-column: 8 / span 4; }
+@media (max-width: 1023px) {
+  .wbx__cam { width: 88px; bottom: auto; top: 0; }
+}
+@media (max-width: 767px) {
+  .wbx__cam { display: none; }
+}
+
+
+/* ---------- slot 2 · Phase 5 improved version of b3 (.work1 -> .w1x); improvements follow ---------- */
+.w1x__filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: var(--s6); }
+.w1x__f { min-height: 44px; padding: 0 16px; background: none; border: 0; box-shadow: inset 0 0 0 1px var(--line-soft); color: var(--ink); font: 600 .875rem/1 var(--f-text); cursor: pointer; }
+.w1x__f[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.w1x__f .nums { opacity: .7; margin-left: 4px; }
+.w1x__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.w1x__it[hidden] { display: none; }
+.w1x__it.is-open { grid-column: 1 / -1; }
+.w1x__sheet {
+  position: relative; display: grid; width: 100%; padding: 12px 12px 14px; text-align: left; cursor: pointer;
+  background: var(--surface); border: 0; color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+.w1x__sheet::before, .w1x__sheet::after { content: ""; position: absolute; width: 14px; height: 14px; border: 0 solid var(--accent); pointer-events: none; }
+.w1x__sheet::before { left: -5px; top: -5px; border-width: 1.5px 0 0 1.5px; }
+.w1x__sheet::after { right: -5px; bottom: -5px; border-width: 0 1.5px 1.5px 0; }
+.w1x__ph { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--white); }
+.w1x__ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.w1x__it.is-open .w1x__ph { aspect-ratio: 16 / 8; }
+.w1x__it.is-open .w1x__ph img { object-fit: contain; background: var(--white); }
+.w1x__meta { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; padding-top: 12px; }
+.w1x__no { grid-row: 1 / span 2; font: 400 1rem/1 var(--f-display); letter-spacing: -.005em; color: var(--accent); padding-top: 2px; }
+.w1x__t { font: 500 .9375rem/1.3 var(--f-text); }
+.w1x__c { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
+.w1x__it.is-open .w1x__t { font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1.02 var(--f-display); letter-spacing: -.005em; }
+.w1x__more { margin-top: var(--s7); }
+@media (max-width: 767px) {
+  .w1x__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .w1x__sheet { padding: 8px 8px 10px; }
+  .w1x__t { font-size: .8125rem; }
+  .w1x__it.is-open .w1x__ph { aspect-ratio: 4 / 3; }
+}
+
+
+/* ---------- slot 3 · Phase 5 improved version of b4 (.work2 -> .w2x); improvements follow ---------- */
+.w2x { margin-block: calc(var(--section-y) * -1); }
+.w2x__stage { --tint: var(--a-500); padding-block: var(--section-y); }
+.w2x__arc { display: block; width: min(800px, 92%); height: auto; margin: 0 auto -8px; overflow: visible; }
+.w2x__arc .tk { stroke: var(--line-soft); stroke-width: 1.2; }
+.w2x__arc .tkm { stroke: var(--ink); stroke-width: 1.6; }
+.w2x__arc .arc { fill: none; stroke: var(--line-soft); stroke-width: 1.2; }
+.w2x__arc .ndl { fill: var(--a-500); stroke: var(--ink); stroke-width: 1.5; }
+.w2x__track {
+  display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding: 40px calc(50% - min(26vw, 210px)); perspective: 1800px; perspective-origin: 50% 50%;
+  outline: none;
+}
+.w2x__track::-webkit-scrollbar { display: none; }
+.w2x__track:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+.w2x__card { flex: none; width: min(52vw, 420px); aspect-ratio: 4 / 5; scroll-snap-align: center; transform-style: preserve-3d; will-change: transform; margin: 0; }
+.w2x__card img { width: 100%; height: 100%; object-fit: cover; display: block; box-shadow: none; pointer-events: none; }
+.w2x__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-top: var(--s6); }
+.w2x__cap { margin: 0; display: grid; gap: 4px; max-width: 60ch; }
+.w2x__n { font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--accent); }
+.w2x__t { font: 400 clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem)/1.05 var(--f-display); letter-spacing: -.005em; }
+.w2x__btns { display: flex; gap: var(--s3); }
+@media (max-width: 767px) {
+  .w2x__card { width: 70vw; }
+  .w2x__track { padding-inline: 15vw; }
+}
+
+/* ---------- Phase 5 improvements, slots 1-3 ---------- */
+/* slot 1: flat paper ends instead of fade gradients; a rubber tread under the kitchen belt and over the bath belt,
+   its chevrons running the way the belt runs and stopping when the belt stops */
+.wbx__belt::before, .wbx__belt::after { display: none; }
+.wbx__tread { display: block; width: 100%; height: 22px; margin-top: 10px; overflow: hidden; }
+.wbx__belt--b .wbx__tread { margin: 0 0 10px; }
+.wbx__tread-bg { fill: var(--a-100); }
+.wbx__tread path { fill: none; stroke: var(--a-500); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.wbx__tread-mk { animation: wbx-tread .51s linear infinite; animation-play-state: paused; }
+.wbx__belt--b .wbx__tread-mk { animation-direction: reverse; }
+.wbx__belt.is-run .wbx__tread-mk { animation-play-state: running; }
+@keyframes wbx-tread { to { transform: translateX(-28px); } }
+.wbx__cap { left: 8px; right: auto; bottom: 8px; max-width: calc(100% - 16px); padding: 7px 10px 8px 12px; background: var(--white); box-shadow: inset 3px 0 0 var(--a-500); }
+@media (max-width: 767px) { .wbx__cap { padding: 5px 8px 6px 10px; } }
+
+/* slot 2: the plan room gets its drawing-sheet title block */
+.w1x__tb { grid-column: 9 / span 4; width: 100%; max-width: 360px; height: auto; margin-top: var(--s5); overflow: visible; }
+.w1x__tb-f { fill: var(--white); stroke: var(--ink); stroke-width: 1.5; }
+.w1x__tb-l { fill: none; stroke: var(--ink); stroke-width: 1; }
+.w1x__tb-roof { fill: none; stroke: var(--a-500); stroke-width: 4; stroke-linejoin: miter; }
+.w1x__tb-k { font: 600 9px/1 var(--f-text); fill: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.w1x__tb-v { font: 500 12px/1 var(--f-text); fill: var(--ink); }
+.w1x__tb-n { font: 600 22px/1 var(--f-display); fill: var(--a-700); }
+@media (max-width: 1023px) { .w1x__tb { grid-column: 1 / -1; } }
+.w1x__f[aria-pressed="true"] { box-shadow: inset 0 -3px 0 var(--ink); }
+
+/* slot 3: a flat stage tint (no radial glow), a readable protractor */
+.w2x__stage { background: color-mix(in oklab, var(--tint) 16%, var(--paper)); transition: background-color .5s var(--ease-out); }
+.w2x__arc .tk { stroke: var(--ink-2); stroke-width: 1.2; }
+.w2x__arc .arc { stroke: var(--grey); stroke-width: 1.5; }
+.w2x__card img { box-shadow: inset 0 0 0 1px var(--line-soft); }
+.w2x__n { color: var(--a-700); }
+
+/* ---------- slot 4 · Phase 5 new · The floor plan ---------- */
+.wfp__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+.wfp__plan { position: relative; display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: auto auto; background: var(--white); box-shadow: inset 0 0 0 6px var(--ink); padding: 6px; }
+.wfp__room { position: relative; display: grid; align-content: end; justify-items: start; gap: 2px; min-height: 180px; padding: 16px; text-align: left; border: 0; background: transparent; color: var(--ink); cursor: pointer; transition: background-color 200ms var(--ease-out); }
+.wfp__room--k { box-shadow: inset -3px -3px 0 var(--ink); }
+.wfp__room--b { box-shadow: inset 0 -3px 0 var(--ink); }
+.wfp__room--w { grid-column: 1 / -1; min-height: 150px; }
+.wfp__room[aria-pressed="true"] { background: var(--a-100); }
+@media (hover: hover) { .wfp__room:hover { background: var(--a-50); } .wfp__room[aria-pressed="true"]:hover { background: var(--a-100); } }
+.wfp__fx { position: absolute; inset: 10px 10px auto 10px; width: calc(100% - 20px); height: calc(100% - 64px); overflow: visible; }
+.wfp__ln { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+.wfp__deck { fill: none; stroke: var(--grey); stroke-width: 1.5; }
+.wfp__room[aria-pressed="true"] .wfp__ln { stroke: var(--a-700); }
+.wfp__name { position: relative; font: 600 1.0625rem/1.15 var(--f-display); }
+.wfp__n { position: relative; font: 500 .8125rem/1.2 var(--f-text); color: var(--muted); }
+.wfp__room[aria-pressed="true"] .wfp__n { color: var(--a-800); }
+.wfp__fig { margin: 0; }
+.wfp__fig img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--surface-2); }
+.wfp__cap { display: flex; gap: 10px; align-items: baseline; padding-top: 12px; font: 500 1rem/1.35 var(--f-text); }
+.wfp__code { flex: none; font: 600 .875rem/1 var(--f-display); color: var(--a-700); }
+.wfp__thumbs { display: flex; gap: 8px; margin-top: var(--s4); overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: thin; }
+.wfp__th { flex: none; width: 72px; height: 54px; padding: 0; border: 0; background: var(--surface-2); cursor: pointer; box-shadow: inset 0 0 0 1px var(--line-soft); }
+.wfp__th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.wfp__th[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--a-500); }
+.wfp__btns { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
+@media (max-width: 1023px) { .wfp__grid { grid-template-columns: 1fr; } .wfp__room { min-height: 130px; } .wfp__room--w { min-height: 110px; } }
+@media (max-width: 479px) { .wfp__name { font-size: .9375rem; } .wfp__room { padding: 10px; } }
+
+/* ---------- slot 5 · Phase 5 new · The gallery wall ---------- */
+/* a picture rail runs along every row of frames (it spans the gaps so the rail reads as one moulding) */
+.wgh__wall { --cg: clamp(20px, 3vw, 48px); list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--cg); row-gap: clamp(28px, 4vw, 56px); }
+.wgh__it { position: relative; padding-top: 56px; }
+.wgh__it::before { content: ""; position: absolute; left: calc(var(--cg) / -2); right: calc(var(--cg) / -2); top: -4px; height: 10px; background: var(--a-100); box-shadow: inset 0 2px 0 var(--ink); }
+.wgh__wire { position: absolute; left: 50%; top: 0; width: 120px; height: 60px; margin-left: -60px; overflow: visible; pointer-events: none; }
+.wgh__wire path { fill: none; stroke: var(--ink-2); stroke-width: 1.2; }
+.wgh__wire circle { fill: var(--ink); }
+.wgh__fr { position: relative; display: block; width: 100%; padding: 10px; border: 0; background: var(--white); cursor: pointer; box-shadow: inset 0 0 0 4px var(--ink), 0 10px 0 -4px var(--line-soft); transform-origin: 50% -46px; transform: rotate(var(--tilt, 0deg)); transition: transform 600ms cubic-bezier(.34, 1.56, .64, 1); }
+.wgh__fr img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.wgh__it.is-level .wgh__fr { --tilt: 0deg; }
+.wgh__cap { display: flex; gap: 8px; align-items: baseline; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); }
+.wgh__cap b { flex: none; font: 600 .8125rem/1 var(--f-display); color: var(--a-700); }
+.wgh__lv { position: absolute; left: 50%; top: 44px; width: 120px; height: 28px; margin-left: -60px; overflow: visible; opacity: 0; pointer-events: none; z-index: 2; }
+.wgh__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-top: var(--s7); }
+.wgh__tally { display: flex; align-items: center; gap: 10px; margin: 0; font: 500 1rem/1.3 var(--f-text); }
+.wgh__count { font: 600 1.5rem/1 var(--f-display); color: var(--a-700); }
+.wgh__lvl, .wgh__lv { overflow: visible; }
+.wgh__lvl { width: 72px; height: 17px; }
+.wgh__lvl-b { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; }
+.wgh__lvl-v { fill: var(--a-50); stroke: var(--ink); stroke-width: 1.5; }
+.wgh__lvl-bub { fill: var(--white); stroke: var(--ink); stroke-width: 1.5; }
+.wgh__lvl-m { stroke: var(--ink); stroke-width: 1.2; }
+.wgh__btns { display: flex; gap: var(--s3); }
+@media (max-width: 767px) { .wgh__wall { --cg: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); } .wgh__fr { padding: 6px; } .wgh__cap { font-size: .8125rem; } }
+@media (prefers-reduced-motion: reduce) { .wgh__fr { transition: none; } }
+
+/* ---------- slot 6 · Phase 5 new · The tile bond ---------- */
+.wbd__bonds { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: var(--s6); }
+.wbd__b { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line-soft); font: 600 .875rem/1 var(--f-text); cursor: pointer; }
+.wbd__b svg { width: 36px; height: 20px; flex: none; }
+.wbd__b path { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.wbd__b[aria-pressed="true"] { background: var(--a-500); color: var(--accent-ink); box-shadow: none; }
+.wbd__floor { position: relative; width: 100%; overflow: hidden; background: var(--a-200); box-shadow: inset 0 0 0 6px var(--ink); }
+.wbd__t { position: absolute; left: 0; top: 0; padding: 0; border: 0; background: var(--a-200); cursor: pointer; }
+.wbd__t img { position: absolute; inset: 3px; width: calc(100% - 6px); height: calc(100% - 6px); object-fit: cover; display: block; }
+.wbd__t::after { content: ""; position: absolute; inset: 3px; box-shadow: inset 0 0 0 0 var(--a-500); transition: box-shadow 160ms var(--ease-out); pointer-events: none; }
+@media (hover: hover) { .wbd__t:hover::after { box-shadow: inset 0 0 0 4px var(--a-500); } }
+.wbd__t:focus-visible::after { box-shadow: inset 0 0 0 4px var(--a-500); }
+.wbd__cut { position: absolute; top: 0; background: var(--a-100); pointer-events: none; }
+.wbd__cut svg { width: 100%; height: 100%; display: block; }
+.wbd__cut path { stroke: var(--a-300); stroke-width: 1.5; }
+.wbd__cap { margin: var(--s4) 0 0; font: 500 .9375rem/1.4 var(--f-text); color: var(--ink-2); min-height: 1.4em; }
+.wbd__cap b { font: 600 .875rem/1 var(--f-display); color: var(--a-700); margin-right: 8px; }
+
+/* ---------- slot 7 · Phase 5 new · The plumb line ---------- */
+.wix__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+.wix__fig { position: sticky; top: 96px; margin: 0; }
+.wix__ph { position: relative; aspect-ratio: 4 / 3; background: var(--surface-2); overflow: hidden; box-shadow: inset 0 0 0 1px var(--line-soft); }
+.wix__ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wix__cap { display: flex; gap: 12px; align-items: baseline; padding-top: 14px; font: 500 1.0625rem/1.35 var(--f-text); }
+.wix__code { flex: none; font: 600 1rem/1 var(--f-display); color: var(--a-700); }
+.wix__list { position: relative; padding-left: 44px; }
+.wix__line { position: absolute; left: 0; top: 0; width: 40px; height: 100%; overflow: visible; pointer-events: none; }
+.wix__str { fill: none; stroke: var(--ink-2); stroke-width: 1.2; }
+.wix__bob path { fill: var(--a-500); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+.wix__bob circle { fill: var(--ink); }
+.wix__ol, .wix__sub { list-style: none; margin: 0; padding: 0; }
+.wix__h { margin: var(--s5) 0 6px; font: 600 .75rem/1.2 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.wix__h:first-child { margin-top: 0; }
+.wix__row { display: grid; grid-template-columns: 44px 1fr; gap: 8px; align-items: baseline; width: 100%; min-height: 44px; padding: 10px 8px; border: 0; background: none; text-align: left; color: var(--ink); font: 500 .9375rem/1.3 var(--f-text); cursor: pointer; box-shadow: inset 0 -1px 0 var(--line-soft); }
+.wix__row b { font: 600 .8125rem/1 var(--f-display); color: var(--muted); }
+.wix__row.is-on { background: var(--a-50); }
+.wix__row.is-on b { color: var(--a-700); }
+@media (max-width: 1023px) {
+  .wix__grid { grid-template-columns: 1fr; }
+  .wix__fig { top: 64px; z-index: 2; background: var(--bg); padding-bottom: 8px; }
+  .wix__ph { aspect-ratio: 16 / 9; }
+  .wix__cap { font-size: .875rem; padding-top: 8px; }
+}
+
+/* ---------- slot 8 · Phase 5 new · The job binder ---------- */
+.wfb__book { position: relative; max-width: 880px; margin: 0 auto; }
+.wfb__rings { display: block; width: 100%; height: 40px; margin-bottom: -18px; position: relative; z-index: 3; overflow: visible; }
+.wfb__rings .rg { fill: none; stroke: var(--ink); stroke-width: 3.5; stroke-linecap: round; }
+.wfb__rings .hl { fill: var(--paper); stroke: var(--ink-2); stroke-width: 1.2; }
+.wfb__pages { position: relative; perspective: 1600px; }
+.wfb__under { position: absolute; inset: 0; background: var(--white); box-shadow: inset 0 0 0 1px var(--line-soft); transform: translate(8px, 8px); }
+.wfb__under--2 { transform: translate(16px, 16px); background: var(--a-100); }
+.wfb__page { position: relative; margin: 0; padding: 28px 18px 18px; background: var(--white); box-shadow: inset 0 0 0 1px var(--grey); transform-origin: 50% 0; }
+.wfb__ph { aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-2); }
+.wfb__ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wfb__cap { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: baseline; padding-top: 14px; }
+.wfb__tab { grid-row: 1 / span 2; align-self: start; padding: 6px 10px; background: var(--a-500); color: var(--accent-ink); font: 600 .875rem/1 var(--f-display); }
+.wfb__t { font: 600 clamp(1.0625rem, .9rem + .5vw, 1.375rem)/1.25 var(--f-display); }
+.wfb__c { font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }
+.wfb__ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s4); margin-top: var(--s7); }
+.wfb__scrub { display: grid; gap: 6px; min-width: min(320px, 100%); font: 500 .875rem/1.2 var(--f-text); color: var(--ink-2); }
+.wfb__range { width: 100%; accent-color: var(--a-500); min-height: 44px; }
+@media (max-width: 767px) { .wfb__page { padding: 22px 10px 12px; } .wfb__ctl { gap: var(--s3); } .wfb__scrub { order: -1; flex-basis: 100%; } }
+/* slot 1 fix: the lead's desktop column must give way below 1024px (the old rule outranked the shared one) */
+@media (max-width: 1023px) { .wbx .work__lead { grid-column: 1 / -1; padding-right: 100px; } }
+@media (max-width: 767px) { .wbx .work__lead { padding-right: 0; } }
+/* slot 4 fix: the thumb strip scrolls inside its column instead of widening the single mobile column */
+@media (max-width: 1023px) { .wfp__grid { grid-template-columns: minmax(0, 1fr); } }
+.wfp__view { min-width: 0; }

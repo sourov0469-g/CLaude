@@ -24,7 +24,7 @@ def defspan(s, key):
     if not m: raise SystemExit('def ' + key + ' not found')
     i = m.start() + 1
     # the def ends where the next sibling def (or the section map's close) begins at the same indent
-    nxt = re.search(r'\n    (?:/\*[^\n]*\n\s*)*[0-9a-z]+: \{ init: function|\n  \}\);', s[m.end():])
+    nxt = re.search(r'\n    (?:/\*.*?\*/\s*)*[0-9a-z]+: \{ init: function|\n  \}\);', s[m.end():], re.S)
     end = m.end() + nxt.start()
     body = s[i:end].rstrip()
     if not body.endswith(','): body += ','

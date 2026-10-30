@@ -2,7 +2,215 @@
 
   <!-- v1 · The plan room [BANK R10 Grid-to-Fullscreen + BANK 157 push grid (Flip)] -->
   <!-- slot 1 · AUDIT-01 winner (copied from v3, fixes applied here; the original is in a backup slot) -->
-  <div class="ver wb" data-v="1">
+  <!-- slot 1 · Phase 5 improved version of b2 (.wb -> .wbx) -->
+  <div class="ver wbx" data-v="1">
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h3-w-i">Twenty-six rooms, <span class="acc">on the move.</span></h2>
+        <p class="t-lead work__lead">Kitchens run one way, bathrooms and whole homes the other. Pick any photo to see it large. Every image is our own work.</p>
+        <svg class="wbx__cam" viewBox="0 0 220 230" aria-hidden="true" focusable="false">
+          <path class="wbx__legs" d="M110 120 L58 226 M110 120 L162 226 M110 120 V226 M80 186 H140"/>
+          <rect class="wbx__head" x="104" y="104" width="12" height="18" rx="2"/>
+          <rect class="wbx__body" x="50" y="44" width="120" height="70" rx="10"/>
+          <rect class="wbx__top" x="66" y="32" width="38" height="16" rx="4"/>
+          <circle class="wbx__lens-o" cx="114" cy="79" r="28"/><circle class="wbx__lens-i" cx="114" cy="79" r="16"/><circle class="wbx__glint" cx="107" cy="72" r="4"/>
+          <rect class="wbx__flash" x="138" y="52" width="22" height="12" rx="2"/>
+          <g class="wbx__burst"><path d="M149 40 V20 M162 44 L176 30 M136 44 L122 30 M168 56 H190"/></g>
+        </svg>
+      </div>
+    </div>
+    <div class="wbx__belts">
+      <div class="wbx__belt" data-c="k" role="group" aria-label="Kitchen projects, slow belt"><div class="wbx__track"></div><svg class="wbx__tread" viewBox="0 0 1600 22" preserveAspectRatio="xMinYMid slice" aria-hidden="true" focusable="false"><defs><pattern id="wbx-tr-k" width="28" height="22" patternUnits="userSpaceOnUse"><path d="M18 5 L10 11 L18 17"/></pattern></defs><rect class="wbx__tread-bg" width="1600" height="22" rx="11"/><rect class="wbx__tread-mk" x="-56" width="1712" height="22" fill="url(#wbx-tr-k)"/></svg></div>
+      <div class="wbx__belt wbx__belt--b" data-c="bw" role="group" aria-label="Bathroom and whole-home projects, slow belt"><svg class="wbx__tread" viewBox="0 0 1600 22" preserveAspectRatio="xMinYMid slice" aria-hidden="true" focusable="false"><defs><pattern id="wbx-tr-b" width="28" height="22" patternUnits="userSpaceOnUse"><path d="M10 5 L18 11 L10 17"/></pattern></defs><rect class="wbx__tread-bg" width="1600" height="22" rx="11"/><rect class="wbx__tread-mk" x="-56" width="1712" height="22" fill="url(#wbx-tr-b)"/></svg><div class="wbx__track"></div></div>
+    </div>
+    <div class="wrap wbx__foot">
+      <button type="button" class="btn btn--ghost wbx__hold" aria-pressed="false" data-rx="~pause/peek/squash/l"><span class="btn__label">Hold the belts</span></button>
+      <a class="btn wbx__btn" href="#consult" data-rx="masking"><span class="btn__label">Start your own project</span></a>
+    </div>
+  </div>
+
+  <!-- slot 2 · Phase 5 improved version of b3 (.work1 -> .w1x) -->
+  <div class="ver w1x" data-v="2" hidden>
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h1-i">Real projects, <span class="acc">photographed as delivered.</span></h2>
+        <p class="t-lead work__lead">Every image is our own work. Open a sheet and the rest of the set moves over to make room.</p>
+        <svg class="w1x__tb" viewBox="0 0 360 96" aria-hidden="true" focusable="false"><rect class="w1x__tb-f" x="1" y="1" width="358" height="94"/><path class="w1x__tb-l" d="M1 40 H359 M150 40 V95 M262 40 V95"/><path class="w1x__tb-roof" d="M14 30 L30 14 L46 30"/><text class="w1x__tb-k" x="58" y="18">Drawing sheet</text><text class="w1x__tb-v" x="58" y="32">Our work, as delivered</text><text class="w1x__tb-k" x="12" y="58">Projects</text><text class="w1x__tb-n" x="12" y="84">26</text><text class="w1x__tb-k" x="162" y="58">Rooms shown</text><text class="w1x__tb-v" x="162" y="80">Kitchen, bath, home</text><text class="w1x__tb-k" x="274" y="58">Sheet</text><text class="w1x__tb-n" x="274" y="84">W&#8209;1</text></svg>
+      </div>
+      <div class="w1x__filters" role="group" aria-label="Filter projects">
+        <button type="button" class="w1x__f" aria-pressed="true" data-f="all" data-rx="viewfinder"><span class="btn__label">All <span class="nums">26</span></span></button>
+        <button type="button" class="w1x__f" aria-pressed="false" data-f="k" data-rx="~hood/drop/flash/tr"><span class="btn__label">Kitchens <span class="nums">10</span></span></button>
+        <button type="button" class="w1x__f" aria-pressed="false" data-f="b" data-rx="~shower/drop/flash/tr"><span class="btn__label">Bathrooms <span class="nums">12</span></span></button>
+        <button type="button" class="w1x__f" aria-pressed="false" data-f="w" data-rx="~house/drop/flash/tr"><span class="btn__label">Whole home and outdoor <span class="nums">4</span></span></button>
+      </div>
+      <ol class="w1x__grid">
+          <li class="w1x__it" data-c="k" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-01/frame/flash/tr"><span class="w1x__ph"><img data-img="k-navy-shaker" width="1600" height="1067" loading="lazy" alt="Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;01</span><span class="w1x__t">Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="b" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-02/frame/flash/tr"><span class="w1x__ph"><img data-img="b-black-marble" width="1200" height="1600" loading="lazy" alt="Black Marble Primary Bathroom with Freestanding Tub &amp; Glass Wet Room, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;02</span><span class="w1x__t">Black Marble Primary Bathroom with Freestanding Tub &amp; Glass Wet Room</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="w" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-03/frame/flash/tr"><span class="w1x__ph"><img data-img="w-farmhouse" width="1600" height="1200" loading="lazy" alt="Modern Farmhouse Whole-Home Renovation, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;03</span><span class="w1x__t">Modern Farmhouse Whole-Home Renovation</span><span class="w1x__c">Whole home and outdoor</span></span></button></li>
+          <li class="w1x__it" data-c="k" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-04/frame/flash/tr"><span class="w1x__ph"><img data-img="k-walnut-marble" width="1600" height="1067" loading="lazy" alt="Open-Concept Kitchen Remodel with Fluted Walnut Cabinetry and Bookmatched Marble, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;04</span><span class="w1x__t">Open-Concept Kitchen Remodel with Fluted Walnut Cabinetry and Bookmatched Marble</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="b" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-05/frame/flash/tr"><span class="w1x__ph"><img data-img="b-polished-concrete" width="1600" height="1067" loading="lazy" alt="Polished-Concrete Primary Bath with Curbless Walk-In Shower, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;05</span><span class="w1x__t">Polished-Concrete Primary Bath with Curbless Walk-In Shower</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="w" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-06/frame/flash/tr"><span class="w1x__ph"><img data-img="o-waterfront" width="1600" height="1200" loading="lazy" alt="Waterfront Backyard &amp; Outdoor Living Transformation, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;06</span><span class="w1x__t">Waterfront Backyard &amp; Outdoor Living Transformation</span><span class="w1x__c">Whole home and outdoor</span></span></button></li>
+          <li class="w1x__it" data-c="k" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-07/frame/flash/tr"><span class="w1x__ph"><img data-img="k-emerald-shaker" width="1067" height="1600" loading="lazy" alt="Emerald Shaker Kitchen Remodel with Wolf &amp; Sub-Zero Appliance Suite, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;07</span><span class="w1x__t">Emerald Shaker Kitchen Remodel with Wolf &amp; Sub-Zero Appliance Suite</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="b" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-08/frame/flash/tr"><span class="w1x__ph"><img data-img="b-spa-guest" width="1200" height="1600" loading="lazy" alt="Spa-Style Guest Bathroom Remodel with Curbless Shower &amp; Backlit Mirrors, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;08</span><span class="w1x__t">Spa-Style Guest Bathroom Remodel with Curbless Shower &amp; Backlit Mirrors</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="k" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-09/frame/flash/tr"><span class="w1x__ph"><img data-img="k-chef" width="1600" height="1067" loading="lazy" alt="Chef-Grade Kitchen Remodel with Waterfall Quartz Island, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;09</span><span class="w1x__t">Chef-Grade Kitchen Remodel with Waterfall Quartz Island</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="b" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-10/frame/flash/tr"><span class="w1x__ph"><img data-img="b-fluted-vanity" width="1200" height="1600" loading="lazy" alt="Contemporary Primary Bath Remodel with Fluted Vanity &amp; Freestanding Tub, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;10</span><span class="w1x__t">Contemporary Primary Bath Remodel with Fluted Vanity &amp; Freestanding Tub</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="w" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-11/frame/flash/tr"><span class="w1x__ph"><img data-img="r-openplan" width="1600" height="1600" loading="lazy" alt="Modern Open-Concept Kitchen and Living Area Renovation, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;11</span><span class="w1x__t">Modern Open-Concept Kitchen and Living Area Renovation</span><span class="w1x__c">Whole home and outdoor</span></span></button></li>
+          <li class="w1x__it" data-c="k" data-feat="1"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-12/frame/flash/tr"><span class="w1x__ph"><img data-img="k-white-shaker" width="1600" height="1067" loading="lazy" alt="White Shaker Kitchen Remodel with Waterfall Quartz Island, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;12</span><span class="w1x__t">White Shaker Kitchen Remodel with Waterfall Quartz Island</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="k"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-13/frame/flash/tr"><span class="w1x__ph"><img data-img="k-turquoise" width="1600" height="1067" loading="lazy" alt="Two-Tone Kitchen Remodel with Turquoise Herringbone Backsplash, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;13</span><span class="w1x__t">Two-Tone Kitchen Remodel with Turquoise Herringbone Backsplash</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="k"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-14/frame/flash/tr"><span class="w1x__ph"><img data-img="k-gray-shaker" width="1600" height="1067" loading="lazy" alt="Gray Shaker Kitchen Remodel with Wolf Range &amp; Farmhouse Sink, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;14</span><span class="w1x__t">Gray Shaker Kitchen Remodel with Wolf Range &amp; Farmhouse Sink</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="k"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-15/frame/flash/tr"><span class="w1x__ph"><img data-img="k-navy-white" width="1600" height="900" loading="lazy" alt="Two-Tone Navy &amp; White Kitchen Remodel with Waterfall Quartz Island, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;15</span><span class="w1x__t">Two-Tone Navy &amp; White Kitchen Remodel with Waterfall Quartz Island</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="k"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-16/frame/flash/tr"><span class="w1x__ph"><img data-img="k-brass-hood" width="1600" height="1067" loading="lazy" alt="Two-Tone Kitchen Remodel with Custom Brass-Banded Range Hood, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;16</span><span class="w1x__t">Two-Tone Kitchen Remodel with Custom Brass-Banded Range Hood</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="k"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-17/frame/flash/tr"><span class="w1x__ph"><img data-img="k-stone-island" width="1600" height="1067" loading="lazy" alt="Two-Tone Kitchen Remodel with Waterfall Stone Island, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;17</span><span class="w1x__t">Two-Tone Kitchen Remodel with Waterfall Stone Island</span><span class="w1x__c">Kitchen</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-18/frame/flash/tr"><span class="w1x__ph"><img data-img="b-emerald" width="1067" height="1600" loading="lazy" alt="Emerald Tile Walk-In Shower Bathroom Remodel, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;18</span><span class="w1x__t">Emerald Tile Walk-In Shower Bathroom Remodel</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-19/frame/flash/tr"><span class="w1x__ph"><img data-img="b-champagne" width="900" height="1600" loading="lazy" alt="Champagne Bronze &amp; Marble-Look Tile Bathroom Renovation, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;19</span><span class="w1x__t">Champagne Bronze &amp; Marble-Look Tile Bathroom Renovation</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-20/frame/flash/tr"><span class="w1x__ph"><img data-img="b-copper" width="1600" height="1067" loading="lazy" alt="Walk-In Shower Bathroom Remodel with Copper Mosaic Tile Accents, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;20</span><span class="w1x__t">Walk-In Shower Bathroom Remodel with Copper Mosaic Tile Accents</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-21/frame/flash/tr"><span class="w1x__ph"><img data-img="b-floating-soak" width="1200" height="1600" loading="lazy" alt="Floating Vanity Primary Bath with Soaking Tub &amp; Walk-In Shower, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;21</span><span class="w1x__t">Floating Vanity Primary Bath with Soaking Tub &amp; Walk-In Shower</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-22/frame/flash/tr"><span class="w1x__ph"><img data-img="b-sea-glass" width="1200" height="1600" loading="lazy" alt="Sea-Glass Glazed Tile Bathroom Remodel with Double Vanity, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;22</span><span class="w1x__t">Sea-Glass Glazed Tile Bathroom Remodel with Double Vanity</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-23/frame/flash/tr"><span class="w1x__ph"><img data-img="b-navy-niche" width="1067" height="1600" loading="lazy" alt="Navy Vanity Bathroom Remodel with Backlit Tile Niche, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;23</span><span class="w1x__t">Navy Vanity Bathroom Remodel with Backlit Tile Niche</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-24/frame/flash/tr"><span class="w1x__ph"><img data-img="b-white-marble" width="1600" height="1200" loading="lazy" alt="White Marble Guest Bath &amp; Grey Stone Primary Suite Renovation, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;24</span><span class="w1x__t">White Marble Guest Bath &amp; Grey Stone Primary Suite Renovation</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="b"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-25/frame/flash/tr"><span class="w1x__ph"><img data-img="b-multi-brass" width="1600" height="1067" loading="lazy" alt="Multi-Bathroom Renovation with Freestanding Tub &amp; Brass-Accented Showers, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;25</span><span class="w1x__t">Multi-Bathroom Renovation with Freestanding Tub &amp; Brass-Accented Showers</span><span class="w1x__c">Bathroom</span></span></button></li>
+          <li class="w1x__it" data-c="w"><button type="button" class="w1x__sheet" aria-expanded="false" data-rx="~t:P-26/frame/flash/tr"><span class="w1x__ph"><img data-img="w-bath-whole" width="1600" height="1067" loading="lazy" alt="Whole-Home Bathroom Renovation with Spa Showers &amp; a Freestanding Soaking Tub, an Elbaz project"></span><span class="w1x__meta"><span class="w1x__no nums">P&#8209;26</span><span class="w1x__t">Whole-Home Bathroom Renovation with Spa Showers &amp; a Freestanding Soaking Tub</span><span class="w1x__c">Whole home and outdoor</span></span></button></li>
+      </ol>
+      <button type="button" class="btn btn--ghost w1x__more" aria-expanded="false" data-rx="~grid/pop/burst/r"><span class="btn__label">Show all 26 projects</span></button>
+    </div>
+  </div>
+
+  <!-- slot 3 · Phase 5 improved version of b4 (.work2 -> .w2x) -->
+  <div class="ver w2x" data-v="3" hidden>
+    <div class="w2x__stage">
+      <div class="wrap work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h2-i">Twenty-six rooms. <span class="acc">Turn them over.</span></h2>
+        <p class="t-lead work__lead">Drag, swipe or use the buttons. The room behind picks up the colour of the room in front.</p>
+      </div>
+      <svg class="w2x__arc" viewBox="0 0 800 70" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"></svg>
+      <div class="w2x__track" tabindex="0" data-rx="native:turntable-drag" role="region" aria-label="Projects carousel, scroll sideways"></div>
+      <div class="wrap w2x__bar">
+        <p class="w2x__cap" aria-live="polite"><span class="w2x__n nums">01 / 26</span> <span class="w2x__t"></span></p>
+        <div class="w2x__btns">
+          <button type="button" class="btn btn--ghost w2x__prev" data-rx="~arrowL/roll/spinout/l"><span class="btn__label">Previous</span></button>
+          <button type="button" class="btn w2x__next" data-rx="~arrowR/roll/spinout/r"><span class="btn__label">Next room</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slot 4 · Phase 5 new · The floor plan: pick a room on a drawn plan, see the photographed projects of that kind -->
+  <div class="ver wfp" data-v="4" hidden>
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h-fp">Pick a room on the plan. <span class="acc">See what we built there.</span></h2>
+        <p class="t-lead work__lead">Choose the kitchen, the bathroom or the whole house. The photos switch to our own projects of that kind.</p>
+      </div>
+      <div class="wfp__grid">
+        <div class="wfp__plan" role="group" aria-label="House plan, choose a room type">
+          <button type="button" class="wfp__room wfp__room--k" data-c="k" aria-pressed="true" data-rx="native:plan-room">
+            <svg class="wfp__fx" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><path class="wfp__ln" d="M14 14 H226 V44 H44 V136 H14 Z"/><rect class="wfp__ln" x="96" y="78" width="96" height="36"/><circle class="wfp__ln" cx="62" cy="26" r="7"/><circle class="wfp__ln" cx="84" cy="26" r="7"/><path class="wfp__ln" d="M150 20 h40 v18 h-40 z M170 20 v18"/></svg>
+            <span class="wfp__name">Kitchen</span><span class="wfp__n nums"></span>
+          </button>
+          <button type="button" class="wfp__room wfp__room--b" data-c="b" aria-pressed="false" data-rx="native:plan-room">
+            <svg class="wfp__fx" viewBox="0 0 150 150" aria-hidden="true" focusable="false"><rect class="wfp__ln" x="14" y="14" width="56" height="110" rx="20"/><path class="wfp__ln" d="M96 14 h40 v24 h-40 z"/><ellipse class="wfp__ln" cx="116" cy="58" rx="12" ry="15"/><path class="wfp__ln" d="M136 86 V136 H96"/></svg>
+            <span class="wfp__name">Bathroom</span><span class="wfp__n nums"></span>
+          </button>
+          <button type="button" class="wfp__room wfp__room--w" data-c="w" aria-pressed="false" data-rx="native:plan-room">
+            <svg class="wfp__fx" viewBox="0 0 400 110" aria-hidden="true" focusable="false"><path class="wfp__ln" d="M20 30 h110 v24 h-110 z M20 30 v54 h24 v-54 M130 30 v54 h-24"/><rect class="wfp__ln" x="58" y="64" width="34" height="22"/><path class="wfp__deck" d="M236 18 H384 M236 34 H384 M236 50 H384 M236 66 H384 M236 82 H384 M236 98 H384"/><circle class="wfp__ln" cx="200" cy="56" r="22"/><path class="wfp__ln" d="M200 34 V78 M178 56 H222"/></svg>
+            <span class="wfp__name">Whole home and outdoor</span><span class="wfp__n nums"></span>
+          </button>
+        </div>
+        <div class="wfp__view">
+          <figure class="wfp__fig"><img class="wfp__img" alt="" width="1600" height="1067"><figcaption class="wfp__cap" aria-live="polite"><span class="wfp__code nums"></span> <span class="wfp__t"></span></figcaption></figure>
+          <div class="wfp__thumbs" role="group" aria-label="Projects in this room type"></div>
+          <div class="wfp__btns">
+            <button type="button" class="btn btn--ghost wfp__open" data-rx="~camera/peek/flash/tl"><span class="btn__label">See this photo large</span></button>
+            <a class="btn wfp__btn" href="#consult" data-rx="~house/hoist/ring/r"><span class="btn__label">Plan this room with us</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 5 · Phase 5 new · The gallery wall: frames hang a little crooked; pick one, a spirit level sets it true, then it opens -->
+  <div class="ver wgh" data-v="5" hidden>
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h-gh">Nothing leaves our hands <span class="acc">until it is level.</span></h2>
+        <p class="t-lead work__lead">Our own photographs, hung on a picture rail. Pick a frame and the level sets it straight before it opens large.</p>
+      </div>
+      <ul class="wgh__wall" role="list"></ul>
+      <div class="wgh__bar">
+        <p class="wgh__tally" aria-live="polite"><svg class="wgh__lvl" viewBox="0 0 120 28" aria-hidden="true" focusable="false"><rect class="wgh__lvl-b" x="1" y="1" width="118" height="26" rx="4"/><rect class="wgh__lvl-v" x="42" y="7" width="36" height="14" rx="7"/><circle class="wgh__lvl-bub" cx="60" cy="14" r="5"/><path class="wgh__lvl-m" d="M54 7 V21 M66 7 V21"/></svg><span class="wgh__count nums">0</span> <span>of <span class="wgh__of nums"></span> frames set level</span></p>
+        <div class="wgh__btns">
+          <button type="button" class="btn btn--ghost wgh__prev" data-rx="~arrowL/hoist/shake/l"><span class="btn__label">Previous wall</span></button>
+          <button type="button" class="btn wgh__next" data-rx="~arrowR/hoist/hop/r"><span class="btn__label">Next wall</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 6 · Phase 5 new · The tile bond: the photos are laid like tile, and the bond can be changed (stack, running, basket weave) -->
+  <div class="ver wbd" data-v="6" hidden>
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h-bd">Laid out the way <span class="acc">a tile setter would.</span></h2>
+        <p class="t-lead work__lead">Every tile is one of our own project photos. Change the bond and watch them reset; pick any tile to see it large.</p>
+      </div>
+      <div class="wbd__bonds" role="group" aria-label="Tile bond">
+        <button type="button" class="wbd__b" data-b="stack" aria-pressed="true" data-rx="native:bond-pick"><svg viewBox="0 0 36 20" aria-hidden="true" focusable="false"><path d="M1 1 H35 V19 H1 Z M1 10 H35 M12 1 V19 M24 1 V19"/></svg><span class="btn__label">Stack bond</span></button>
+        <button type="button" class="wbd__b" data-b="run" aria-pressed="false" data-rx="native:bond-pick"><svg viewBox="0 0 36 20" aria-hidden="true" focusable="false"><path d="M1 1 H35 V19 H1 Z M1 10 H35 M12 1 V10 M24 1 V10 M6 10 V19 M18 10 V19 M30 10 V19"/></svg><span class="btn__label">Running bond</span></button>
+        <button type="button" class="wbd__b" data-b="basket" aria-pressed="false" data-rx="native:bond-pick"><svg viewBox="0 0 36 20" aria-hidden="true" focusable="false"><path d="M1 1 H35 V19 H1 Z M10 1 V19 M19 1 V19 M28 1 V19 M1 10 H10 M19 10 H28 M14.5 1 V19 M32.5 1 V19"/></svg><span class="btn__label">Basket weave</span></button>
+      </div>
+      <div class="wbd__floor" role="group" aria-label="Project photos laid as tile"></div>
+    </div>
+  </div>
+
+  <!-- slot 7 · Phase 5 new · The plumb line: a project index; a plumb bob drops to the row you point at and the photo follows -->
+  <div class="ver wix" data-v="7" hidden>
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h-ix">The project index, <span class="acc">read straight down.</span></h2>
+        <p class="t-lead work__lead">Point at a project or move through the list with the arrow keys. The plumb bob drops to it and the photo follows. Select to see it large.</p>
+      </div>
+      <div class="wix__grid">
+        <figure class="wix__fig"><div class="wix__ph"><img class="wix__img" alt="" width="1600" height="1067"></div><figcaption class="wix__cap"><span class="wix__code nums"></span><span class="wix__t"></span></figcaption></figure>
+        <div class="wix__list">
+          <svg class="wix__line" aria-hidden="true" focusable="false"><path class="wix__str"/><g class="wix__bob"><path d="M0 -14 L9 0 L0 18 L-9 0 Z"/><circle cx="0" cy="-14" r="2.5"/></g></svg>
+          <ol class="wix__ol"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 8 · Phase 5 new · The job binder: a ring-bound flipbook of our photos; scrub the pages or turn them one at a time -->
+  <div class="ver wfb" data-v="8" hidden>
+    <div class="wrap">
+      <div class="work__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h-fb">Flip through <span class="acc">the job binder.</span></h2>
+        <p class="t-lead work__lead">One project per page, all our own photographs. Drag the page slider to flip fast, or turn the pages one by one.</p>
+      </div>
+      <div class="wfb__book">
+        <svg class="wfb__rings" viewBox="0 0 880 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"></svg>
+        <div class="wfb__pages">
+          <div class="wfb__under" aria-hidden="true"></div><div class="wfb__under wfb__under--2" aria-hidden="true"></div>
+          <figure class="wfb__page"><div class="wfb__ph"><img class="wfb__img" alt="" width="1600" height="1067"></div><figcaption class="wfb__cap"><span class="wfb__tab nums"></span><span class="wfb__t"></span><span class="wfb__c"></span></figcaption></figure>
+        </div>
+      </div>
+      <div class="wfb__ctl">
+        <button type="button" class="btn btn--ghost wfb__prev" data-rx="~arrowL/peek/spinout/l"><span class="btn__label">Turn back</span></button>
+        <label class="wfb__scrub" data-rx="native:binder-scrub"><span class="wfb__sl">Page <span class="wfb__pg nums">1</span> of <span class="wfb__of nums"></span></span><input type="range" class="wfb__range" min="1" max="2" value="1" step="1" aria-label="Binder page"></label>
+        <button type="button" class="btn wfb__next" data-rx="~arrowR/peek/spinout/r"><span class="btn__label">Turn the page</span></button>
+        <button type="button" class="btn btn--ghost wfb__open" data-rx="~camera/pop/flash/tr"><span class="btn__label">See it large</span></button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ver wb" data-v="b2" hidden>
     <div class="wrap">
       <div class="work__head">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Our work</p>
@@ -29,7 +237,7 @@
     </div>
   </div>
 
-  <div class="ver work1" data-v="2" hidden>
+  <div class="ver work1" data-v="b3" hidden>
     <div class="wrap">
       <div class="work__head">
         <h2 class="t-head" id="work-h1">Real projects, photographed as delivered.</h2>
@@ -74,7 +282,7 @@
   </div>
 
   <!-- v2 · On the turntable [BANK 88 3D infinite carousel with reactive gradient: maxRot 28, depth 140, minScale .92, perspective 1800] -->
-  <div class="ver work2" data-v="3" hidden>
+  <div class="ver work2" data-v="b4" hidden>
     <div class="work2__stage">
       <div class="wrap work__head">
         <h2 class="t-head" id="work-h2">Twenty-six rooms. Turn them over.</h2>
