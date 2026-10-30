@@ -58,13 +58,14 @@ function evidence(root, c) {
 function rainy(root, c) {
   const g = root.querySelector('.st5-rain'), clear = root.querySelector('.st5-clear');
   if (!c.motion) return;
+  root.style.setProperty('--st5-sun', '0'); // R5: the sun waits behind the rain (not --sun: that is the accent token)
   const NS = 'http://www.w3.org/2000/svg', drops = [];
   for (let i = 0; i < 40; i++) { const l = document.createElementNS(NS, 'line'); const x = (i * 97) % 600, len = 14 + (i % 5) * 4; l.setAttribute('x1', x); l.setAttribute('x2', x - 4); l.setAttribute('y1', 0); l.setAttribute('y2', len); g.append(l); drops.push({ l, x, y: (i * 53) % 420, v: 5 + (i % 4) }); }
   const s = { amt: 1 }; let raf = 0, on = false;
   const tick = () => { for (const d of drops) { d.y = (d.y + d.v * (0.4 + s.amt)) % 440; d.l.setAttribute('transform', `translate(0 ${d.y.toFixed(1)})`); } g.style.opacity = s.amt.toFixed(3); raf = on && s.amt > 0.02 ? requestAnimationFrame(tick) : 0; };
   const go = v => { on = v; if (on && !raf && s.amt > 0.02) raf = requestAnimationFrame(tick); };
   const vis = ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onToggle: t => go(t.isActive) });
-  const tw = gsap.to(s, { amt: 0, ease: 'none', scrollTrigger: { trigger: root, start: 'top 85%', end: 'top 25%', scrub: true }, onUpdate: () => { clear.style.opacity = ((1 - s.amt) * 0.85).toFixed(3); if (s.amt <= 0.02) g.style.opacity = '0'; else go(on); } });
+  const tw = gsap.to(s, { amt: 0, ease: 'none', scrollTrigger: { trigger: root, start: 'top 85%', end: 'top 25%', scrub: true }, onUpdate: () => { clear.style.opacity = ((1 - s.amt) * 0.35).toFixed(3); root.style.setProperty('--st5-sun', (1 - s.amt).toFixed(3)); if (s.amt <= 0.02) g.style.opacity = '0'; else go(on); } });
   beats(root, [root.querySelector('.st5-sill')]);
   return () => { cancelAnimationFrame(raf); vis.kill(); tw.kill(); };
 }

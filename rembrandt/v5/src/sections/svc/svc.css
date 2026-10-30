@@ -183,7 +183,9 @@ html[data-motion="reduced"] .sv5-list,html.no-js .sv5-list{position:static;width
 .sv8-p{position:relative;flex:1;min-width:0;border-radius:18px;overflow:hidden;background:var(--ink-2);transition:flex-grow .45s var(--ease-x);cursor:pointer;outline-offset:3px}
 .sv8-p.is-open{flex:3.2}
 .sv8-p img,.sv8-draw{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sv8-draw rect{fill:var(--a100)}.sv8-lap{stroke:var(--a200);stroke-width:3}.sv8-g{fill:var(--paper);stroke:var(--ink);stroke-width:3}.sv8-sp{stroke:var(--ink);stroke-width:12}
+/* R5 improve: the third panel is a drawn wall (lap siding, a trimmed window, fascia, gutter, downspout), not faint stripes */
+.sv8-wall{fill:var(--a50)}.sv8-shade{stroke:var(--a300);stroke-width:4}.sv8-lap{stroke:var(--paper);stroke-width:1.5}.sv8-fascia{fill:var(--a700)}.sv8-soffit{fill:var(--a800)}
+.sv8-g{fill:var(--a500);stroke:var(--ink);stroke-width:3}.sv8-sp{fill:none;stroke:var(--a500);stroke-width:14;stroke-linecap:round}.sv8-trim{fill:var(--paper);stroke:var(--ink);stroke-width:3}.sv8-win{fill:var(--a100)}.sv8-mun{stroke:var(--ink);stroke-width:4}
 .sv8-tx{position:absolute;left:12px;right:12px;bottom:12px;padding:18px 20px;border-radius:14px;background:var(--paper);color:var(--ink)}
 .sv8-tx h3{font-size:clamp(1.25rem,1rem + .8vw,1.75rem);font-weight:700}
 .sv8-tx p{margin-top:8px;font-size:var(--t-body);line-height:1.45;max-width:46ch}

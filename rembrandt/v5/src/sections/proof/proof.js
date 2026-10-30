@@ -28,6 +28,7 @@ function constellation(root, c) {
       su: rnd(), sv: rnd(), tx: 0, ty: 0, ox: { p: 0, v: 0 }, oy: { p: 0, v: 0 }, ph: rnd() * 6.28, tw: rnd() < 0.3 ? 0.6 + rnd() * 1.4 : 0 };
   });
   let stopIo = null;
+  let gly = null, glyCol = getComputedStyle(root).getPropertyValue('--a100').trim() || 'transparent';
   let W = 0, H = 0, dpr = 1, prog = c.motion ? 0 : 1, rect = null, ptr = { x: -1e4, y: -1e4, nx: 0, ny: 0 }, ready = false, lp = null, time = 0;
   const glyph = (box) => { // sample the "4.9" glyph into N points on a staggered grid (densest spacing that still yields N)
     const ow = Math.max(40, Math.round(box.w / 2)), oh = Math.max(40, Math.round(box.h / 2));
@@ -50,6 +51,7 @@ function constellation(root, c) {
     };
     let lo = 1, hi = 40, pts = thin(lo);
     for (let it = 0; it < 18; it++) { const mid = (lo + hi) / 2, k = thin(mid); if (k.length >= N) { lo = mid; pts = k; } else hi = mid; }
+    gly = { fs: fs * 2, x: box.x + ow, y: box.y + oh + fs * 0.08 }; // R5: the filled glyph the stars trace, drawn faintly beneath them
     const out = pts.slice(0, N).map(p => [box.x + p[0] * 2, box.y + p[1] * 2]);
     while (out.length < N) out.push(out[out.length % Math.max(1, pts.length)] || [box.x + ow, box.y + oh]);
     for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; } // mixed tiers across the glyph
@@ -66,6 +68,9 @@ function constellation(root, c) {
   };
   const draw = () => {
     if (!ready) return; g.clearRect(0, 0, W, H);
+    // R5 improve: 295 stars on an outline read as a constellation but the number itself was faint (the 9 read as an
+    // "e"). A filled 4.9 in the lightest accent tint fades in under them as they form, so the figure reads at a glance.
+    if (gly) { g.globalAlpha = Math.min(1, prog) * 0.9; g.fillStyle = glyCol; g.font = `800 ${gly.fs}px Poppins, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('4.9', gly.x, gly.y); g.globalAlpha = 1; }
     for (const s of stars) {
       const t = Math.min(1, Math.max(0, (prog - s.d) / 0.65)), e = 1 - Math.pow(1 - t, 3);
       const sx = s.su * W * 1.3 - W * 0.15, sy = s.sv * H * 1.3 - H * 0.15, depth = [0.4, 1, 1.8][s.tier];

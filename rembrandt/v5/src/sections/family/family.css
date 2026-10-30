@@ -206,3 +206,7 @@
 .fm8-s span{font-size:1.0625rem;line-height:1.4;max-width:30ch}
 .fm8-s.is-on{border-color:var(--a500)}.fm8-s.is-on b{color:var(--a700)}
 @media (max-width:899px){.fm8-grid{grid-template-columns:1fr}}
+/* R5 improve: the three card fronts were identical and empty in the middle (S0001 card-kit trait); each now carries a
+   drawn glyph of its era and a folded corner that says the card turns */
+.fm4-g{position:absolute;right:clamp(18px,2.4vw,28px);bottom:clamp(18px,2.4vw,26px);width:clamp(56px,6vw,84px);height:auto;fill:none;stroke:var(--a500);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.fm4-front::after{content:"";position:absolute;top:0;right:0;width:36px;height:36px;border-radius:0 6px 0 8px;background:linear-gradient(225deg,var(--paper) 50%,var(--a200) 50%)}
