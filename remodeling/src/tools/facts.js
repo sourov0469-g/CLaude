@@ -55,7 +55,7 @@ const PRIV = 'We use your details only to respond to this enquiry. No lists, no 
         if (/Sean|Raz\b/.test(all)) claims.push('owner names');
         const proj = (all.match(/(\d+)\s+(?:photographed projects|projects photographed)/gi) || []).map(x => parseInt(x));
         let consult = null;
-        if (id === 'consult') consult = { tel: !!ver.querySelector('a[href="tel:+17542360675"]'), hours: /Sun.Fri 7am.7pm/.test(all) && /Saturday closed/.test(all), office: /19 W Flagler St #310, Miami, FL 33130/.test(all), priv: all.includes(PRIV) };
+        if (id === 'consult' || id === 'contact-form') consult = { tel: !!ver.querySelector('a[href="tel:+17542360675"]'), hours: /Sun.Fri 7am.7pm/.test(all) && /Saturday closed/.test(all), office: /19 W Flagler St #310, Miami, FL 33130/.test(all), priv: all.includes(PRIV) };
         return { bad, claims, proj, consult };
       }, [id, v, LOCK, LONG, PRIV]);
       r.bad.forEach(x => licBad.push(id + v + ': ' + x));
