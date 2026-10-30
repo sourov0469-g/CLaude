@@ -4,7 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EASE, beats } from '../../js/fx.js';
 
-const hero = (root, c) => { if (c.motion) beats(root, [root.querySelector('.sp-hero')], { now: true }); };
+// R4 Phase 6: the header's roofline draws out from the ridge (.8s) as the header arrives
+const hero = (root, c) => { if (!c.motion) return; beats(root, [root.querySelector('.sp-hero')], { now: true }); gsap.fromTo(root.querySelectorAll('.pg-ridge path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 0.8, ease: EASE, delay: 0.15 }); };
 const rows = (root, sel, c) => { if (c.motion) beats(root, [...root.querySelectorAll(sel)].map(x => [x])); };
 
 // v1 [BANK] Q153 (the rail item of the chapter in view lights) + Q571 numbered index; CSS sticky, no pin

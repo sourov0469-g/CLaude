@@ -249,6 +249,8 @@ Shared for every page: the homepage shell (nav with page links, phone bar, foote
 | 4 | Sticky photo story | ⟦S0441⟧ (one sticky artefact, states per label) | the photo on the left swaps as each chapter on the right passes (crossfade .3s) | PASS: on phones the photo sits above the chapters, unswapped |
 | 5 | Magazine | ⟦S1354⟧ agency grid (oversized headline, panoramic image, narrow metadata column) | a full-bleed crew photo, big headline, two-column text with the 4.9 / 295 figure | PASS |
 
+**R4 directive Phase 6, redesign layer on the Services and About pages** (rows before code): every visible layout gets (a) the brand label (gable glyph, sentence case, --a700) over the H1, as on the homepage sections; (b) the contour artwork (`r4-art`) on the root; (c) a bespoke drawn roofline closing the header (dashed --a300 eaves, a --a500 ridge) that draws out from the peak in .8s (reduced motion: drawn). Backups B4-B8 keep the pre-redesign layouts (commit 42c782f). Verification: `pageshot.mjs` all ten layouts at 1440 and 375: overflow 0, one H1, errors 0; Services V4's grid header places the new label and roofline explicitly (first shot had the label alone in its own cell; fixed).
+
 **Contact page (`contact`)**: phone, office, hours, the 24 towns (data/towns.js). No form: a form with nowhere to send would be a fake action.
 | Slot | Layout | Reference | Mechanism | Verification |
 |---|---|---|---|---|

@@ -67,6 +67,7 @@
 
 /* ---------- v4 three groups (⟦S1499⟧ chunking) */
 .sp4 .sp-hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:24px 56px;align-items:end}
+.sp4 .sp-hero>*{grid-column:1}.sp4 .sp-hero>.sp4-ev{grid-column:2;grid-row:1/span 3}.sp4 .sp-hero>.pg-ridge{grid-column:1/-1} /* R4 Phase 6: label and roofline placed explicitly */
 .sp4-ev{padding:20px 22px;border-radius:14px;background:var(--paper)}
 .sp4-g{margin:0 calc(var(--gutter) * -1);padding:clamp(40px,5vw,72px) var(--gutter)}
 .sp4-g--roof{background:var(--paper)}.sp4-g--storm{background:var(--a100);color:var(--ink)}.sp4-g--house{background:var(--cream)}
@@ -81,7 +82,7 @@
 .sp4-lede{font-family:var(--f-head);font-weight:500;color:var(--blue)}
 .sp4-g--storm .sp4-lede{color:var(--sun)}
 .sp4-s--more ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-@media (max-width:799px){.sp4 .sp-hero{grid-template-columns:1fr}}
+@media (max-width:799px){.sp4 .sp-hero{grid-template-columns:1fr}.sp4 .sp-hero>.sp4-ev{grid-column:1;grid-row:auto}}
 
 /* ---------- v5 the menu board ([BANK] Q30/Q14: the list is the page) */
 .sp5-strip{display:grid;grid-template-columns:2fr 1.3fr 1fr;gap:10px;height:clamp(180px,24vw,320px);margin:0 calc(var(--gutter) * -1) clamp(32px,4vw,56px);padding:0 var(--gutter)}
