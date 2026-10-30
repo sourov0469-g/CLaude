@@ -2,7 +2,144 @@
 
   <!-- v1 · The stud wall [BANK CMK hand-built CSS slider + BANK Elbaz draggable pairs + BANK R28 touch-first keyboard]: the page's one signature interactive -->
   <!-- slot 1 · AUDIT-01 winner (copied from v1, fixes applied here; the original is in a backup slot) -->
-  <div class="ver bs" data-v="1">
+  <!-- slot 1 · Phase 5 improved version of b2 (.bs -> .bsx) -->
+  <div class="ver bsx" data-v="1">
+    <div class="wrap bsx__grid">
+      <div class="bsx__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h1-w-i">Same room. <span class="acc">Different house.</span></h2>
+        <p class="t-lead bsx__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
+        <div class="bsx__tabs" role="tablist" aria-label="Before and after projects">
+          <button type="button" role="tab" class="bsx__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="bsx__tl">Kitchen, grey Shaker</span><span class="bsx__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="bsx__tab" aria-selected="false" data-pair="1" data-rx="~shower/hinge/drip/tr"><span class="bsx__tl">Bathroom</span><span class="bsx__tt"><span class="nums">4&ndash;8</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="bsx__tab" aria-selected="false" data-pair="2" data-rx="~sink/hinge/drip/tr"><span class="bsx__tl">Kitchen, light cabinetry and island</span><span class="bsx__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
+          <button type="button" role="tab" class="bsx__tab" aria-selected="false" data-pair="3" data-rx="~palm/hinge/wobble/tr"><span class="bsx__tl">Outdoor living</span><span class="bsx__tt">Backyard and pergola</span></button>
+        </div>
+      </div>
+      <div class="bsx__stage" role="tabpanel" aria-label="Before and after">
+        <figure class="bsx__img bsx__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
+        <figure class="bsx__img bsx__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
+        <span class="bsx__tag bsx__tag--b">Before</span><span class="bsx__tag bsx__tag--a">After</span>
+        <div class="bsx__tape" aria-hidden="true"><svg viewBox="0 0 100 24" preserveAspectRatio="none" focusable="false"><g class="bsx__ticks"><path d="M2.08333 0 V4"/><path d="M4.16667 0 V4"/><path d="M6.25 0 V4"/><path d="M8.33333 0 V4"/><path d="M10.4167 0 V4"/><path d="M12.5 0 V7"/><path d="M14.5833 0 V4"/><path d="M16.6667 0 V4"/><path d="M18.75 0 V4"/><path d="M20.8333 0 V4"/><path d="M22.9167 0 V4"/><path d="M25 0 V10"/><path d="M27.0833 0 V4"/><path d="M29.1667 0 V4"/><path d="M31.25 0 V4"/><path d="M33.3333 0 V4"/><path d="M35.4167 0 V4"/><path d="M37.5 0 V7"/><path d="M39.5833 0 V4"/><path d="M41.6667 0 V4"/><path d="M43.75 0 V4"/><path d="M45.8333 0 V4"/><path d="M47.9167 0 V4"/><path d="M50 0 V10"/><path d="M52.0833 0 V4"/><path d="M54.1667 0 V4"/><path d="M56.25 0 V4"/><path d="M58.3333 0 V4"/><path d="M60.4167 0 V4"/><path d="M62.5 0 V7"/><path d="M64.5833 0 V4"/><path d="M66.6667 0 V4"/><path d="M68.75 0 V4"/><path d="M70.8333 0 V4"/><path d="M72.9167 0 V4"/><path d="M75 0 V10"/><path d="M77.0833 0 V4"/><path d="M79.1667 0 V4"/><path d="M81.25 0 V4"/><path d="M83.3333 0 V4"/><path d="M85.4167 0 V4"/><path d="M87.5 0 V7"/><path d="M89.5833 0 V4"/><path d="M91.6667 0 V4"/><path d="M93.75 0 V4"/><path d="M95.8333 0 V4"/><path d="M97.9167 0 V4"/></g></svg><span class="bsx__tn"><i style="left:25%">12</i><i style="left:50%">24</i><i style="left:75%">36</i></span><span class="bsx__mark"><b class="nums">24</b> in</span></div>
+        <div class="bsx__stud" aria-hidden="true">
+          <svg class="bsx__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" fill="#C9B48F" stroke="#121212" stroke-width="2"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke="#5E5852" stroke-width="1"/></svg>
+          <span class="bsx__nail" style="top:12%"></span><span class="bsx__nail" style="top:46%"></span><span class="bsx__nail" style="top:82%"></span>
+          <svg class="bsx__grip" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="29" fill="#FF5F00" stroke="#121212" stroke-width="3"/><path d="M14 32h36M14 32l7-7M14 32l7 7M50 32l-7-7M50 32l-7 7" fill="none" stroke="#121212" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <input class="bsx__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="50% after" data-rx="native:stud-grip">
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 2 · Phase 5 improved version of b3 (.ba2 -> .b2x) -->
+  <div class="ver b2x" data-v="2" hidden>
+    <div class="wrap">
+      <div class="ba__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h2-i">Rolled on, <span class="acc">room by room.</span></h2>
+        <p class="t-lead ba__lead">Scroll, and the after goes on over the before like a fresh coat. Each panel also has its own switch. Four real pairs, nothing staged.</p>
+      </div>
+      <div class="b2x__grid">
+        <figure class="b2x__panel" data-pair="0"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~caulk/slide/drip/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Dated kitchen with cream cabinets and tiled counters, renovated with grey shaker cabinetry and quartz counters.</span></figure>
+        <figure class="b2x__panel" data-pair="1"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Bathroom</strong> <span class="nums">4&ndash;8</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~sander/slide/sweep/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Dated bathroom with an alcove tub and shower curtain, renovated with a frameless glass shower and round backlit mirror.</span></figure>
+        <figure class="b2x__panel" data-pair="2"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~hose/peek/drip/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Kitchen with dated oak cabinetry and tiled counters, renovated with light cabinetry, a range hood and island seating.</span></figure>
+        <figure class="b2x__panel" data-pair="3"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Outdoor living</strong> backyard and pergola</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~leaf/peek/sweep/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Backyard with worn lawn and open patio, transformed into a covered pergola with dining and bar seating and a turfed backyard.</span></figure>
+      </div>
+      <a class="btn b2x__btn" href="#consult" data-rx="~bucket/drop/drip/r"><span class="btn__label">Plan your own after</span></a>
+    </div>
+  </div>
+
+  <!-- slot 3 · Phase 5 improved version of b4 (.ba3 -> .b3x) -->
+  <div class="ver b3x" data-v="3" hidden>
+    <div class="wrap b3x__grid">
+      <div class="b3x__stage">
+        <figure class="b3x__img"><img class="b3x__photo" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
+        <div class="b3x__shutters" aria-hidden="true"></div>
+        <span class="b3x__state" aria-live="polite">Before</span>
+      </div>
+      <div class="b3x__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h3-i">Shutters down. <span class="acc">Shutters up.</span></h2>
+        <p class="t-lead ba__lead">In South Florida the shutters come down before a storm. Here they come down on the old room and go up on the new one.</p>
+        <p class="b3x__cap"><strong class="b3x__name">Kitchen</strong> <span class="b3x__time"><span class="nums">6&ndash;12</span> weeks of construction</span></p>
+        <div class="b3x__ctrl">
+          <button type="button" class="btn btn--ghost b3x__prev" data-rx="~arrowL/tilt/shake/l"><span class="btn__label">Previous</span></button>
+          <button type="button" class="btn btn--ghost b3x__tog" aria-pressed="false" data-rx="~window/tilt/squash/t"><span class="btn__label">Show the after</span></button>
+          <button type="button" class="btn b3x__next" data-rx="~arrowR/tilt/hop/r"><span class="btn__label">Next room</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 4 · NEW · The swing door: the after photograph is a door hung over the before; open it and it swings on its hinge to show the room it replaced (mechanism: 3D hinge). -->
+  <div class="ver bdr" data-v="4" hidden>
+    <div class="wrap bdr__grid">
+      <div class="bdr__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h4">Behind <span class="acc">every door.</span></h2>
+        <p class="t-lead bdr__lead">The finished room is the door. Swing it open to see what was there before.</p>
+        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
+        <button type="button" class="btn bdr__open" aria-pressed="false" data-rx="~lock/hinge/tick/r"><span class="btn__label">Open the door</span></button>
+      </div>
+      <div class="bdr__frame"><figure class="bdr__before"><img alt=""><figcaption>Before</figcaption></figure><figure class="bdr__door"><img alt=""><span class="bdr__knob" aria-hidden="true"></span><figcaption>After</figcaption></figure></div>
+    </div>
+  </div>
+
+  <!-- slot 5 · NEW · The paint roller: drag across the before and the after rolls on wherever you paint (mechanism: canvas mask painted by the pointer; a button paints it all for keyboards). -->
+  <div class="ver brl" data-v="5" hidden>
+    <div class="wrap brl__grid">
+      <div class="brl__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h5">Roll on <span class="acc">the new room.</span></h2>
+        <p class="t-lead brl__lead">Drag across the photograph to paint the after over the before.</p>
+        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
+        <div class="brl__acts"><button type="button" class="btn brl__all" data-rx="~bucket/zip/drip/r"><span class="btn__label">Paint it all</span></button><button type="button" class="btn btn--ghost brl__reset" data-rx="~sander/zip/sweep/r"><span class="btn__label">Start over</span></button></div>
+      </div>
+      <div class="brl__stage"><img class="brl__a" alt=""><canvas class="brl__c" aria-hidden="true"></canvas><span class="brl__tool" aria-hidden="true"><svg viewBox="0 0 60 70"><rect x="4" y="4" width="52" height="20" rx="8"/><path d="M30 24 V40 M30 40 H44 V70"/></svg></span></div>
+    </div>
+  </div>
+
+  <!-- slot 6 · NEW · Four flip cards: all four genuine pairs at once, each a card showing the before; tap one and it flips to
+       the after (mechanism: per-card 3D flip; no tabs). -->
+  <div class="ver bpc" data-v="6" hidden>
+    <div class="wrap">
+      <div class="bpc__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h6">Four rooms. <span class="acc">Flip each one.</span></h2>
+        <p class="t-lead bpc__lead">Each card shows the room before. Turn it over for the room Elbaz built.</p>
+      </div>
+      <div class="bpc__grid"></div>
+    </div>
+  </div>
+
+  <!-- slot 7 · NEW · The blinds: window blinds hang over the after; pull the cord (a range) and the slats tilt open to show it (mechanism: slat rotation by a range). -->
+  <div class="ver bbl" data-v="7" hidden>
+    <div class="wrap bbl__grid">
+      <div class="bbl__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h7">Open the blinds <span class="acc">on the new room.</span></h2>
+        <p class="t-lead bbl__lead">Behind the blinds is the room after. Pull the cord to tilt them open.</p>
+        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
+        <label class="bbl__lab" for="bbl-cord">The cord</label><input class="bbl__cord" id="bbl-cord" type="range" min="0" max="100" value="0" aria-valuetext="Blinds closed" data-rx="native:blind-cord">
+      </div>
+      <div class="bbl__win"><img class="bbl__a" alt=""><div class="bbl__slats" aria-hidden="true"></div><span class="bbl__rail" aria-hidden="true"></span></div>
+    </div>
+  </div>
+
+  <!-- slot 8 · NEW · The lens: the before fills the frame; a round lens follows the pointer (or arrow keys) and shows the after at the same spot (mechanism: circular clip that follows the pointer). -->
+  <div class="ver bln" data-v="8" hidden>
+    <div class="wrap bln__grid">
+      <div class="bln__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
+        <h2 class="t-head" id="ba-h8">Look through <span class="acc">the lens.</span></h2>
+        <p class="t-lead bln__lead">Move over the before. The lens shows the same spot after Elbaz finished.</p>
+        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
+      </div>
+      <div class="bln__stage" tabindex="0" role="img" aria-label="Before photograph with a lens showing the after; use the arrow keys to move the lens" data-rx="native:lens-move"><img class="bln__b" alt=""><img class="bln__a" alt=""><span class="bln__ring" aria-hidden="true"></span></div>
+    </div>
+  </div>
+
+  <div class="ver bs" data-v="b2" hidden>
     <div class="wrap bs__grid">
       <div class="bs__side">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
@@ -57,7 +194,7 @@
   </div>
 
   <!-- v2 · Rolled on [BANK 148 Superhero wavy reveal: feTurbulence displacement on the reveal edge] -->
-  <div class="ver ba2" data-v="2" hidden>
+  <div class="ver ba2" data-v="b3" hidden>
     <div class="wrap">
       <div class="ba__head">
         <h2 class="t-head" id="ba-h2">Rolled on, room by room.</h2>
@@ -74,7 +211,7 @@
   </div>
 
   <!-- v3 · Storm shutters [BANK 178 Eleos column shutters: yPercent -100, .8s, stagger .06, ease (.625,.05,0,1)] -->
-  <div class="ver ba3" data-v="3" hidden>
+  <div class="ver ba3" data-v="b4" hidden>
     <div class="wrap ba3__grid">
       <div class="ba3__stage">
         <figure class="ba3__img"><img class="ba3__photo" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>

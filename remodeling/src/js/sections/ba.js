@@ -13,9 +13,229 @@
   ];
   var ELEOS = EZ.bezier(.625, .05, 0, 1);       // [BANK 178] house ease
 
+
+  // Phase 5: the pair tabs shared by the new versions (the four genuine pairs, never a fifth)
+  function pairTabs(root, k, cb) {
+    var box = root.querySelector('.bpairs'), cur = 0;
+    if (!box) { cb(0); return; }
+    box.innerHTML = PAIRS.map(function (p, i) { return '<button type="button" role="tab" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" data-rx="native:pair-tab">' + p.name + (p.name === 'Kitchen' ? ' ' + (i < 2 ? '1' : '2') : '') + '</button>'; }).join('');
+    var bs = Array.prototype.slice.call(box.children);
+    function go(i, focus) { cur = i; bs.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; }); if (focus) bs[i].focus(); cb(i); }
+    bs.forEach(function (b, i) {
+      k.on(b, 'click', function () { go(i); });
+      k.on(b, 'keydown', function (e) { var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); go((cur + d + bs.length) % bs.length, true); } });
+    });
+    k.add(function () { box.innerHTML = ''; });
+    go(0);
+  }
+
   EZ.section('ba', {
-    /* slot 1 · AUDIT-01 winner (copied from v1; fixes applied here) */
+    /* slot 4 · NEW · The swing door */
+    4: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.bdr__side > *'));
+      var bi = root.querySelector('.bdr__before img'), di = root.querySelector('.bdr__door img'), btn = root.querySelector('.bdr__open');
+      function set(on) { root.classList.toggle('is-open', on); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.querySelector('.btn__label').textContent = on ? 'Close the door' : 'Open the door'; }
+      pairTabs(root, k, function (i) { var p = PAIRS[i]; set(false); bi.src = EZ.img(p.b); bi.alt = p.ba; di.src = EZ.img(p.a); di.alt = p.aa; });
+      k.on(btn, 'click', function () { set(!root.classList.contains('is-open')); });
+      k.on(root.querySelector('.bdr__door'), 'click', function () { set(!root.classList.contains('is-open')); });
+      k.add(function () { set(false); });
+    } },
+
+    /* slot 5 · NEW · The paint roller: the before is painted on a canvas over the after; rolling erases it */
+    5: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.brl__side > *'));
+      var st = root.querySelector('.brl__stage'), a = root.querySelector('.brl__a'), cv = root.querySelector('.brl__c'), cx = cv.getContext('2d'), tool = root.querySelector('.brl__tool');
+      var before = new Image(), down = false, last = null, cur = 0;
+      function paintBefore() { var r = st.getBoundingClientRect(); cv.width = Math.round(r.width); cv.height = Math.round(r.height); if (!before.complete || !before.naturalWidth) return;
+        var s = Math.max(cv.width / before.naturalWidth, cv.height / before.naturalHeight), w = before.naturalWidth * s, h = before.naturalHeight * s;
+        cx.globalCompositeOperation = 'source-over'; cx.drawImage(before, (cv.width - w) / 2, (cv.height - h) / 2, w, h); }
+      before.onload = paintBefore;
+      pairTabs(root, k, function (i) { cur = i; var p = PAIRS[i]; a.src = EZ.img(p.a); a.alt = p.aa; st.setAttribute('aria-label', p.ba + '; paint to reveal: ' + p.aa); before.src = EZ.img(p.b); if (before.complete) paintBefore(); });
+      st.setAttribute('role', 'img');
+      function roll(x, y) {
+        cx.globalCompositeOperation = 'destination-out'; cx.lineCap = 'round'; cx.lineWidth = Math.max(60, cv.width * .12);
+        cx.beginPath(); cx.moveTo(last ? last.x : x, last ? last.y : y); cx.lineTo(x, y); cx.stroke(); last = { x: x, y: y };
+      }
+      function pos(e) { var r = st.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+      k.on(st, 'pointerdown', function (e) { down = true; last = null; st.setPointerCapture(e.pointerId); var q = pos(e); roll(q.x, q.y); });
+      k.on(st, 'pointermove', function (e) { var q = pos(e); tool.style.transform = 'translate(' + q.x + 'px,' + q.y + 'px)'; if (down) roll(q.x, q.y); });
+      k.on(st, 'pointerup', function () { down = false; last = null; });
+      k.on(root.querySelector('.brl__all'), 'click', function () {
+        if (!k.motion) { cx.clearRect(0, 0, cv.width, cv.height); return; }
+        var o = { y: 0 }; gsap.to(o, { y: 1, duration: .8, ease: 'power1.inOut', onUpdate: function () { var y = o.y * cv.height; last = { x: 0, y: y }; roll(cv.width, y); last = null; } });
+      });
+      k.on(root.querySelector('.brl__reset'), 'click', paintBefore);
+      k.ro(st, paintBefore);
+      k.add(function () { cx.clearRect(0, 0, cv.width, cv.height); });
+    } },
+
+    /* slot 6 · NEW · Four flip cards: every pair at once, before on the front, after on the back */
+    6: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.bpc__head > *'));
+      var g = root.querySelector('.bpc__grid');
+      g.innerHTML = PAIRS.map(function (p) {
+        return '<button type="button" class="bpc__card" aria-pressed="false" aria-label="' + p.name + ': show the after" data-rx="native:flip-card"><figure class="bpc__f bpc__front"><img src="' + EZ.img(p.b) + '" alt="' + p.ba + '"><span>' + p.name + '<b>Before</b></span></figure><figure class="bpc__f bpc__back"><img src="' + EZ.img(p.a) + '" alt="' + p.aa + '"><span>' + p.name + '<b>After</b></span></figure></button>';
+      }).join('');
+      g.querySelectorAll('.bpc__card').forEach(function (c) { k.on(c, 'click', function () { var on = c.getAttribute('aria-pressed') !== 'true'; c.setAttribute('aria-pressed', on ? 'true' : 'false'); c.setAttribute('aria-label', c.getAttribute('aria-label').replace(on ? 'show the after' : 'show the before', on ? 'show the before' : 'show the after')); }); });
+      if (EZ.bindReactions) EZ.bindReactions(root, k);
+      k.add(function () { g.innerHTML = ''; });
+    } },
+
+    /* slot 7 · NEW · The blinds: the cord tilts twelve slats open over the after */
+    7: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.bbl__side > *'));
+      var sl = root.querySelector('.bbl__slats'), img = root.querySelector('.bbl__a'), cord = root.querySelector('.bbl__cord');
+      sl.innerHTML = new Array(13).join('<i></i>');
+      function set() { var v = +cord.value / 100; sl.style.setProperty('--t', v.toFixed(3)); sl.querySelectorAll('i').forEach(function (s) { s.style.setProperty('--t', v.toFixed(3)); }); cord.setAttribute('aria-valuetext', v < .05 ? 'Blinds closed' : v > .95 ? 'Blinds open' : 'Blinds ' + Math.round(v * 100) + '% open'); }
+      pairTabs(root, k, function (i) { var p = PAIRS[i]; img.src = EZ.img(p.a); img.alt = p.aa; cord.value = 0; set(); });
+      k.on(cord, 'input', set); set();
+      k.add(function () { sl.innerHTML = ''; });
+    } },
+
+    /* slot 8 · NEW · The lens: a round window onto the after follows the pointer or the arrow keys */
+    8: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.bln__side > *'));
+      var st = root.querySelector('.bln__stage'), b = root.querySelector('.bln__b'), a = root.querySelector('.bln__a'), P = { x: 60, y: 45 };
+      function set() { st.style.setProperty('--x', P.x + '%'); st.style.setProperty('--y', P.y + '%'); }
+      pairTabs(root, k, function (i) { var p = PAIRS[i]; b.src = EZ.img(p.b); b.alt = p.ba; a.src = EZ.img(p.a); a.alt = p.aa; });
+      k.on(st, 'pointermove', function (e) { var r = st.getBoundingClientRect(); P.x = EZ.clamp((e.clientX - r.left) / r.width * 100, 0, 100); P.y = EZ.clamp((e.clientY - r.top) / r.height * 100, 0, 100); set(); });
+      k.on(st, 'keydown', function (e) { var d = { ArrowLeft: [-5, 0], ArrowRight: [5, 0], ArrowUp: [0, -5], ArrowDown: [0, 5] }[e.key]; if (!d) return; e.preventDefault(); P.x = EZ.clamp(P.x + d[0], 0, 100); P.y = EZ.clamp(P.y + d[1], 0, 100); set(); });
+      set();
+    } },
+
+    /* slot 3 · Phase 5 improved version of b4 */
+    3: { init: function (root, k) {
+      var box = root.querySelector('.b3x__shutters'), photo = root.querySelector('.b3x__photo'), state = root.querySelector('.b3x__state');
+      var name = root.querySelector('.b3x__name'), time = root.querySelector('.b3x__time');
+      var tog = root.querySelector('.b3x__tog'), N = 8, h = '';
+      for (var i = 0; i < N; i++) h += '<span class="b3x__panel"></span>';
+      box.innerHTML = h;
+      var panels = box.querySelectorAll('.b3x__panel');
+      k.add(function () { box.innerHTML = ''; });
+      // [AUDIT-01 F4 loser P1] no autoplay and no counter: the rest state is the photograph; shutters run only on a press, 380ms, 30ms stagger
+      var cur = { pair: 0, after: false }, busy = false;
+      function paint() {
+        var p = PAIRS[cur.pair];
+        photo.src = EZ.img(cur.after ? p.a : p.b); photo.alt = cur.after ? p.aa : p.ba;
+        state.textContent = cur.after ? 'After' : 'Before';
+        state.classList.toggle('is-after', cur.after);
+        name.textContent = p.name; time.innerHTML = p.time;
+        tog.setAttribute('aria-pressed', cur.after ? 'true' : 'false');
+        tog.querySelector('.btn__label').textContent = cur.after ? 'Show the before' : 'Show the after';
+      }
+      function go(next) {
+        if (busy) return;
+        if (!k.motion) { cur = next; paint(); return; }
+        busy = true;
+        box.classList.remove('is-up');
+        k.ctx.add(function () {
+          gsap.timeline({ onComplete: function () { busy = false; box.classList.add('is-up'); } })
+            .fromTo(panels, { yPercent: -100 }, { yPercent: 0, duration: .38, ease: ELEOS, stagger: .03 })
+            .add(function () { cur = next; paint(); })
+            .to(panels, { yPercent: -100, duration: .38, ease: ELEOS, stagger: .03 }, '+=.06');
+        });
+      }
+      gsap.set(panels, { yPercent: -100 });
+      box.classList.add('is-up');
+      paint();
+      k.on(root.querySelector('.b3x__next'), 'click', function () { go({ pair: (cur.pair + 1) % 4, after: false }); });
+      k.on(root.querySelector('.b3x__prev'), 'click', function () { go({ pair: (cur.pair + 3) % 4, after: false }); });
+      k.on(tog, 'click', function () { go({ pair: cur.pair, after: !cur.after }); });
+      EZ.reveal(k, root.querySelectorAll('.b3x__side > *'));
+    } },
+
+    /* slot 2 · Phase 5 improved version of b3 */
+    2: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.ba__head > *'));
+      root.querySelectorAll('.b2x__panel').forEach(function (panel) {
+        var i = +panel.dataset.pair, p = PAIRS[i], svg = panel.querySelector('.b2x__svg');
+        svg.setAttribute('viewBox', '0 0 400 300');
+        svg.innerHTML =
+          '<defs><filter id="b2x-w' + i + '" x="-10%" y="-20%" width="120%" height="140%"><feTurbulence type="turbulence" baseFrequency=".035 .08" numOctaves="2" seed="' + (i + 3) + '" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="26"/></filter>' +
+          '<mask id="b2x-m' + i + '"><rect class="mk" x="-20" y="-40" width="440" height="40" fill="#FFFFFF" filter="url(#b2x-w' + i + ')"/></mask>' +
+          '<clipPath id="b2x-c' + i + '"><rect width="400" height="300"/></clipPath></defs>' +
+          '<g clip-path="url(#b2x-c' + i + ')"><image href="' + EZ.img(p.b) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice"/>' +
+          '<image href="' + EZ.img(p.a) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice" mask="url(#b2x-m' + i + ')"/></g>' +
+          '<rect width="400" height="300" fill="none" stroke="rgba(18, 18, 18, .25)"/>' +
+          '<g class="rl"><path d="M386 -2 v-34 h-26 v-30" fill="none" stroke="#C9C1B6" stroke-width="5" stroke-linejoin="round"/><rect x="352" y="-104" width="16" height="40" rx="6" fill="#FF5F00" stroke="#121212" stroke-width="2.5"/>' +
+          '<rect x="6" y="-14" width="388" height="22" rx="11" fill="#FFFFFF" stroke="#121212" stroke-width="2.5"/><rect x="6" y="-2" width="388" height="10" rx="5" fill="#FF5F00" opacity=".55"/></g>' +
+          '<text class="tg" x="12" y="22" font-family="Roboto, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#FFFFFF" stroke="#121212" stroke-width="3" paint-order="stroke">BEFORE</text>';
+        // [AUDIT-01 F4 loser P1] reduced motion rests on the complete after photograph, never a half wipe
+        var mk = svg.querySelector('.mk'), rl = svg.querySelector('.rl'), tg = svg.querySelector('.tg'), st = { p: k.motion ? 0 : 1 };
+        var btn = panel.querySelector('.b2x__tog'), scrub = null;
+        function set() {
+          var y = st.p * 340;
+          mk.setAttribute('height', Math.max(0, y + 40));
+          rl.setAttribute('transform', 'translate(0 ' + Math.min(300, y).toFixed(1) + ')');
+          rl.style.display = (st.p > .01 && st.p < .99 && k.motion) ? '' : 'none';
+          tg.textContent = st.p > .92 ? 'AFTER' : 'BEFORE';
+          btn.setAttribute('aria-pressed', st.p > .5 ? 'true' : 'false');
+          btn.querySelector('.btn__label').textContent = st.p > .5 ? 'Show the before' : 'Show the after';
+        }
+        set();
+        k.add(function () { svg.innerHTML = ''; });
+        // per-panel control: one press takes the panel to the other end and hands it over from scroll to the visitor
+        k.on(btn, 'click', function () {
+          var to = st.p > .5 ? 0 : 1;
+          if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; }
+          if (!k.motion) { st.p = to; set(); return; }
+          gsap.to(st, { p: to, duration: .6, ease: EZ.bezier(.23, 1, .32, 1), onUpdate: set, overwrite: true });
+        });
+        if (!k.motion) return;
+        scrub = gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: panel, start: 'top 72%', end: 'bottom 50%', scrub: .8 } });
+      });
+    } },
+
+    /* slot 1 · Phase 5 improved version of b2 */
     1: { init: function (root, k) {
+      var stage = root.querySelector('.bsx__stage');
+      var range = root.querySelector('.bsx__range');
+      var imgB = root.querySelector('.bsx__img--before img'), imgA = root.querySelector('.bsx__img--after img');
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('.bsx__tab'));
+      function setPos(v) {
+        stage.style.setProperty('--pos', v + '%');
+        var tm = root.querySelector('.bsx__mark b'); if (tm) tm.textContent = Math.round(v * .48);
+        range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
+      }
+      setPos(+range.value);
+      k.on(range, 'input', function () { setPos(+range.value); });
+      k.on(range, 'pointerdown', function () { stage.classList.add('is-drag'); });
+      k.on(window, 'pointerup', function () { stage.classList.remove('is-drag'); });
+      k.add(function () { stage.classList.remove('is-drag'); stage.style.removeProperty('--pos'); range.value = 50; });
+      function select(i, focus) {
+        tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
+        if (focus) tabs[i].focus();
+        var p = PAIRS[i];
+        function swap() { imgB.src = EZ.img(p.b); imgB.alt = p.ba; imgA.src = EZ.img(p.a); imgA.alt = p.aa; }
+        if (!k.motion) { swap(); return; }
+        k.ctx.add(function () {
+          // [AUDIT-01 F4.2] one 120ms opacity dip (house ease-out); the stud keeps the split the visitor chose
+          gsap.timeline().set([imgB, imgA], { autoAlpha: .35, onComplete: swap })
+            .to([imgB, imgA], { autoAlpha: 1, duration: .12, ease: EZ.bezier(.23, 1, .32, 1) });
+        });
+      }
+      tabs.forEach(function (t, i) {
+        t.tabIndex = i === 0 ? 0 : -1;
+        k.on(t, 'click', function () { select(i); });
+        k.on(t, 'keydown', function (e) {
+          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+          if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
+        });
+      });
+      if (!k.motion) return;
+      EZ.reveal(k, root.querySelectorAll('.bsx__side > *'));
+      // [AUDIT-01 F4.1] first visit only: one swing 50 -> 34 -> 50, 700ms in all; never on a version re-activation
+      if (EZ._baHint) return;
+      var o = { v: 50 };
+      ScrollTrigger.create({ trigger: stage, start: 'top 70%', once: true, onEnter: function () {
+        EZ._baHint = true;
+        gsap.timeline().to(o, { v: 34, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
+          .to(o, { v: 50, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } });
+      } });
+    } },
+
+    /* slot 1 · AUDIT-01 winner (copied from v1; fixes applied here) */
+    b2: { init: function (root, k) {
       var stage = root.querySelector('.bs__stage');
       var range = root.querySelector('.bs__range');
       var imgB = root.querySelector('.bs__img--before img'), imgA = root.querySelector('.bs__img--after img');
@@ -109,7 +329,7 @@
     } },
 
     /* v2 · Rolled on [BANK 148 wavy reveal] */
-    2: { init: function (root, k) {
+    b3: { init: function (root, k) {
       EZ.reveal(k, root.querySelectorAll('.ba__head > *'));
       root.querySelectorAll('.ba2__panel').forEach(function (panel) {
         var i = +panel.dataset.pair, p = PAIRS[i], svg = panel.querySelector('.ba2__svg');
@@ -151,7 +371,7 @@
     } },
 
     /* v3 · Storm shutters [BANK 178] */
-    3: { init: function (root, k) {
+    b4: { init: function (root, k) {
       var box = root.querySelector('.ba3__shutters'), photo = root.querySelector('.ba3__photo'), state = root.querySelector('.ba3__state');
       var name = root.querySelector('.ba3__name'), time = root.querySelector('.ba3__time');
       var tog = root.querySelector('.ba3__tog'), N = 8, h = '';
