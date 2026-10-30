@@ -240,6 +240,7 @@
   function buildSwitch(s) {
     var wrap = doc.createElement('div');
     wrap.className = 'vswitch';
+    wrap.dataset.for = s.id;
     var inner = doc.createElement('div');
     inner.className = 'vswitch__in';
     inner.setAttribute('role', 'radiogroup');
@@ -259,7 +260,7 @@
       b.setAttribute('aria-label', 'Version ' + i);
       b.dataset.v = i;
       b.dataset.cursor = 'link';
-      b.dataset.rx = '~t:' + i + '/' + (SW_RX[s.id] || 'pop') + '/hop/t';
+      b.dataset.rx = '~t:' + i + '/' + (SW_RX[s.id] || 'pop') + '/hop/b';
       b.textContent = i;
       inner.appendChild(b);
     }
@@ -276,7 +277,8 @@
       inner.querySelector('[data-v="' + nv + '"]').focus();
     });
     wrap.appendChild(inner);
-    s.el.insertBefore(wrap, s.el.firstChild);
+    // docked in the nav's free centre: the switch of the section in view is the one shown, and it covers no content
+    (doc.querySelector('.nav__vs') || s.el).appendChild(wrap);
     s.switchEl = inner;
   }
 
@@ -392,10 +394,7 @@
       onUpdate: function (self) {
         var y = self.scroll();
         nav.classList.toggle('is-solid', y > 120);
-        var down = y > lastY + 2, up = y < lastY - 2;
-        if (down && y > 320 && !nav.contains(doc.activeElement)) nav.classList.add('is-hidden');
-        else if (up || y <= 320) nav.classList.remove('is-hidden');
-        lastY = y;
+        // the header stays: it carries the phone, Book and the version switch (sticky contact, Anatomy §6)
         tape.style.transform = 'scaleX(' + self.progress.toFixed(4) + ')';
       }
     });

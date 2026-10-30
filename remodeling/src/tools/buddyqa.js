@@ -22,7 +22,7 @@ const SECS = ['hero','proof','services','ba','process','financing','work','revie
   for (const variant of ['hat', 'level', 'cone']) {
     await p.evaluate(v => EZ.buddy.set(v), variant);
     for (const s of SECS) for (const v of [1, 2, 3]) {
-      await p.evaluate(([s, v]) => { const sec = document.getElementById(s); sec.querySelector('.vswitch [data-v="' + v + '"]').click(); sec.scrollIntoView(); }, [s, v]);
+      await p.evaluate(([s, v]) => { const sec = document.getElementById(s); document.querySelector('.vswitch[data-for="' + s + '"] [data-v="' + v + '"]').click(); sec.scrollIntoView(); }, [s, v]);
       await p.waitForTimeout(1000);   // a re-initialised version finishes its .3s entrances first
       // targets inside the active version
       const targets = await p.evaluate(s => {
@@ -76,7 +76,7 @@ const SECS = ['hero','proof','services','ba','process','financing','work','revie
   if (await p.evaluate(() => getComputedStyle(document.body).cursor) === 'none') fails.push('system cursor still hidden while Off');
   await p.evaluate(() => EZ.buddy.set('hat'));
   // text fields keep the native caret
-  await p.evaluate(() => { document.querySelector('#consult .vswitch [data-v="1"]').click(); document.getElementById('c1-name').scrollIntoView({ block: 'center' }); });
+  await p.evaluate(() => { document.querySelector('.vswitch[data-for="consult"] [data-v="1"]').click(); document.getElementById('c1-name').scrollIntoView({ block: 'center' }); });
   await p.waitForTimeout(400);
   const ib = await p.$eval('#c1-name', e => { const r = e.getBoundingClientRect(); return [r.left + 30, r.top + r.height / 2]; });
   await p.mouse.move(ib[0], ib[1], { steps: 2 }); await p.waitForTimeout(200);

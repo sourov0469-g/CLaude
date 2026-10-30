@@ -45,12 +45,12 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
       const info = await p.evaluate(sel => {
         const el = document.querySelector(sel);
         const ver = el.closest('.ver');
-        const where = ver ? ver.closest('section').id + ver.dataset.v : (el.closest('.vswitch') ? el.closest('section').id + ':switch' : 'chrome');
+        const where = ver ? ver.closest('section').id + ver.dataset.v : (el.closest('.vswitch') ? el.closest('.vswitch').dataset.for + ':switch' : 'chrome');
         const r = el.getBoundingClientRect(); const sw = el.closest('.vswitch');
         // a section's switch floats while that section holds the viewport's middle
-        const sr = sw && sw.closest('section').getBoundingClientRect();
+        const sr = sw && document.getElementById(sw.dataset.for).getBoundingClientRect();
         const top = sw ? sr.top + scrollY + Math.min(sr.height / 2, 600) : r.top + scrollY;
-        const fixed = !!el.closest('.nav, .mbar, .settings, .sheet');
+        const fixed = !!el.closest('.nav, .mbar, .settings, .sheet') && !sw;
         return { where, name: (el.getAttribute('aria-label') || el.textContent || el.querySelector('input')?.name || '').trim().replace(/\s+/g, ' ').slice(0, 28), rx: el.dataset.rx, top, fixed, href: el.getAttribute('href') };
       }, sel);
       const row = { ...info, w, hover: null, clear: null, click: null, job: null, note: '' };

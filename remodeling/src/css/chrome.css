@@ -24,7 +24,7 @@
 }
 .nav__logo { display: block; flex: none; }
 .nav__logo img { width: 156px; height: auto; }
-.nav__links { display: flex; gap: var(--s5); list-style: none; margin-left: auto; }
+.nav__links { display: flex; gap: var(--s5); list-style: none; }
 .nav__links a {
   position: relative; display: inline-flex; align-items: center; min-height: 44px;
   font-size: .9375rem; font-weight: 500; text-decoration: none; color: inherit;
@@ -48,7 +48,6 @@
 @media (max-width: 1023px) {
   .nav__links, .nav__tel { display: none; }
   .nav__in { gap: var(--s3); }
-  .nav .btn--call { margin-left: auto; }
   .nav__menu {
     display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px;
     background: none; border: 0; font-weight: 560; font-size: .9375rem; color: inherit;
@@ -80,18 +79,18 @@
 @media (max-width: 767px) { .settings { display: none; } }
 
 /* ---------- version switch: a real radiogroup [S1303 §9, S0006 §12, S1441] ---------- */
-/* one floating pill at bottom left: only the switch of the section under the viewport's middle is shown,
-   so it never sits over a heading (FULL: the sticky top switch covered leads and headings at rest) */
+/* docked in the header's free centre; only the switch of the section holding the viewport's middle is shown */
+.nav__vs { flex: 1 1 auto; position: relative; align-self: stretch; min-width: 96px; }
 .vswitch {
-  position: fixed; left: var(--margin); bottom: 16px;
-  z-index: 55;
-  display: flex; align-items: center;
-  visibility: hidden; opacity: 0; transform: translateY(8px);
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  visibility: hidden; opacity: 0; transform: translateY(-6px);
   transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s linear 200ms;
   pointer-events: none;
 }
 .vswitch.is-current { visibility: visible; opacity: 1; transform: none; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s; }
 .vswitch__name { font: 600 .6875rem/1 var(--f-text); letter-spacing: .12em; text-transform: uppercase; padding: 0 8px 0 10px; opacity: .8; white-space: nowrap; }
+@media (max-width: 1279px) { .vswitch__name { display: none; } }
 .vswitch__in {
   pointer-events: auto;
   display: inline-flex; align-items: center; gap: 2px;
@@ -119,9 +118,11 @@
   .vswitch button:hover { opacity: 1; }
 }
 @media (max-width: 767px) {
-  .vswitch { left: 10px; bottom: calc(76px + env(safe-area-inset-bottom)); }
-  .vswitch button { width: 32px; height: 32px; }
+  .vswitch button { width: 26px; height: 30px; }
+  .vswitch__sep { display: none; }
+  .nav__vs { min-width: 84px; }
 }
+@media (max-width: 400px) { .nav__logo img { width: 112px; } }
 
 /* ---------- cursor [S1321 cursor, S1375 #12, S0634 §A]: fine pointers only ---------- */
 .cursor { position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none; display: none; }

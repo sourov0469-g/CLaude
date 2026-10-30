@@ -153,7 +153,7 @@ const NAMES = ['RIo Norman', 'Rio Norman', 'Damian Nunez', 'Alan Schroeder', 'An
     const t0 = await p.evaluate(() => ScrollTrigger.getAll().length);
     const bad = [];
     for (const s of SECS) for (const v of [2, 3, 1]) {
-      await p.evaluate(([s, v]) => document.querySelector('#' + s + ' .vswitch [data-v="' + v + '"]').click(), [s, v]);
+      await p.evaluate(([s, v]) => document.querySelector('.vswitch[data-for="' + s + '"] [data-v="' + v + '"]').click(), [s, v]);
       await p.waitForTimeout(250);
       const shown = await p.evaluate(s => [...document.querySelectorAll('#' + s + ' .ver')].filter(x => !x.hidden).map(x => +x.dataset.v), s);
       if (shown.length !== 1 || shown[0] !== v) bad.push(s + v + ':' + shown);

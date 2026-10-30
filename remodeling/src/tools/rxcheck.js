@@ -25,7 +25,7 @@ const SEL = 'a[href],button,input:not([type=hidden]),select,textarea,[role=radio
         if (e.closest('.rx')) return;
         const host = e.closest('[data-rx]');
         const near = host && (host === e || host.contains(e) && (host.tagName === 'LABEL' || host.matches('.c-f, .rx-host')));
-        const where = ver ? ver.closest('section').id + ver.dataset.v : (e.closest('.vswitch') ? e.closest('section').id + ':switch' : 'chrome');
+        const where = ver ? ver.closest('section').id + ver.dataset.v : (e.closest('.vswitch') ? e.closest('.vswitch').dataset.for + ':switch' : 'chrome');
         const name = (e.getAttribute('aria-label') || e.textContent || e.value || e.name || e.type || '').trim().replace(/\s+/g, ' ').slice(0, 30);
         out.push({ valid: near ? EZ.rxValid(host.dataset.rx) : false, where, tag: e.tagName.toLowerCase() + (e.type && e.tagName === 'INPUT' ? '/' + e.type : ''), name, rx: near ? host.dataset.rx : null });
       });
