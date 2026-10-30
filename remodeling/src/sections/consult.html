@@ -2,7 +2,338 @@
 
   <!-- v1 · The work order [BANK R21 radio pattern (no prices) + BANK 310 Madoka underline + BANK 348 circular progress button] -->
   <!-- slot 1 · AUDIT-01 winner (copied from v2, fixes applied here; the original is in a backup slot) -->
-  <div class="ver cp" data-v="1">
+  <!-- slot 1 · Phase 5 improved version of b2 (.cp -> .cpx) -->
+  <div class="ver cpx" data-v="1">
+    <div class="wrap cpx__grid">
+      <div class="cpx__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head cpx__h" id="consult-h2-w-i">Tap the rooms <span class="acc">you want to change.</span></h2>
+        <p class="t-lead consult__lead">Then tell us how to reach you. We will walk the property and give you an honest read on scope before anyone quotes a number.</p>
+        <dl class="consult__facts cpx__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="cpx__form c-form" novalidate>
+        <p class="cpx__step" aria-live="polite">Step 1 of 2, pick the rooms</p>
+        <div class="cpx__p1">
+          <div class="cpx__plan">
+            <svg class="cpx__north" viewBox="0 0 34 46" aria-hidden="true" focusable="false"><text x="17" y="11">N</text><path d="M17 15 L27 42 L17 35 L7 42 Z"/></svg>
+            <svg class="cpx__svg" viewBox="0 0 600 420" aria-hidden="true" focusable="false"></svg>
+            <div class="cpx__rooms" role="group" aria-label="Rooms to change">
+              <button type="button" class="cpx__room" style="--x:2%;--y:3%;--w:44%;--h:46%" aria-pressed="false" data-room="Kitchen" data-rx="~hood/lid/puff/tr">Kitchen</button>
+              <button type="button" class="cpx__room" style="--x:47%;--y:3%;--w:22%;--h:30%" aria-pressed="false" data-room="Bathroom" data-rx="~shower/lid/puff/tr">Bathroom</button>
+              <button type="button" class="cpx__room" style="--x:70%;--y:3%;--w:28%;--h:46%" aria-pressed="false" data-room="Bedroom" data-rx="~bed/lid/puff/tr">Bedroom</button>
+              <button type="button" class="cpx__room" style="--x:2%;--y:51%;--w:56%;--h:46%" aria-pressed="false" data-room="Living area" data-rx="~sofa/lid/puff/tr">Living area</button>
+              <button type="button" class="cpx__room" style="--x:59%;--y:51%;--w:39%;--h:46%" aria-pressed="false" data-room="Outdoor living" data-rx="~palm/lid/puff/tr">Outdoor living</button>
+            </div>
+          </div>
+          <label class="cpx__whole" data-rx="~house/pop/sparkle/r"><input type="checkbox" name="whole" value="Whole home"><span>The whole home</span></label>
+          <span class="c-err" id="c2-rooms-w-i-err" hidden></span>
+          <button type="button" class="btn cpx__next" data-rx="~stairs/jack/hop/r"><span class="btn__label">Next: how to reach you</span></button>
+        </div>
+        <div class="cpx__p2" hidden>
+          <p class="cpx__picked"></p>
+          <div class="c-f" data-rx="~badge/drop/sweep/tr"><input id="c2-name-w-i" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c2-name-w-i">Full name *</label><span class="c-err" id="c2-name-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/drop/sweep/tr"><input id="c2-phone-w-i" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c2-phone-w-i">Phone *</label><span class="c-err" id="c2-phone-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~envelope/drop/sweep/tr"><input id="c2-email-w-i" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c2-email-w-i">Email *</label><span class="c-err" id="c2-email-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~house2/drop/sweep/tr"><input id="c2-address-w-i" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c2-address-w-i">Property address *</label><span class="c-err" id="c2-address-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~ruler/drop/sweep/tr"><textarea id="c2-notes-w-i" name="notes" rows="3" placeholder=" "></textarea><label for="c2-notes-w-i">Anything we should know? (optional)</label></div>
+          <fieldset class="cpx__how">
+            <legend>Preferred contact</legend>
+            <label data-rx="~handset/peek/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/peek/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/peek/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+          <label class="c-consent" data-rx="~check/spin/tick/l"><input type="checkbox" name="consent" id="c2-consent-w-i"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c2-consent-w-i-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <div class="cpx__acts">
+            <button type="button" class="btn btn--ghost cpx__back" data-rx="~arrowL/jack/shake/l"><span class="btn__label">Back to the plan</span></button>
+            <button type="submit" class="btn cpx__go" data-rx="~envelope/zip/burst/r"><span class="btn__label">Send my request</span></button>
+          </div>
+          <p class="cpx__call">or just call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></p>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- slot 2 · Phase 5 improved version of b3 (.consult1 -> .c1x) -->
+  <div class="ver c1x" data-v="2" hidden>
+    <div class="wrap c1x__grid">
+      <div class="c1x__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h1-i">Let&rsquo;s talk about <span class="acc">what you want to change.</span></h2>
+        <p class="t-lead consult__lead">Book a consultation and we will walk the property, talk through scope honestly, and tell you what it really takes, including the parts other contractors leave until after you have signed.</p>
+        <dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <div class="c1x__board">
+        <svg class="c1x__clip" viewBox="0 0 220 70" aria-hidden="true" focusable="false"><rect x="30" y="22" width="160" height="40" rx="8" fill="#C9C1B6" stroke="#121212" stroke-width="3"/><path class="c1x__lever" d="M50 34h120" stroke="#C9C1B6" stroke-width="8" stroke-linecap="round"/><circle cx="110" cy="16" r="12" fill="none" stroke="#C9C1B6" stroke-width="6"/></svg>
+        <form class="c1x__paper c-form" novalidate>
+          <p class="c1x__title">Work order</p>
+          <p class="c1x__sub">A real consultation, not a sales visit. Fields marked * are needed.</p>
+          <fieldset class="c1x__type">
+            <legend>The job</legend>
+            <label data-rx="~hood/unfold/tick/t"><input type="radio" name="type" value="Kitchen" checked><span>Kitchen</span></label>
+            <label data-rx="~shower/unfold/tick/t"><input type="radio" name="type" value="Bathroom"><span>Bathroom</span></label>
+            <label data-rx="~house/unfold/tick/t"><input type="radio" name="type" value="Whole home"><span>Whole home</span></label>
+            <label data-rx="~question/unfold/tick/t"><input type="radio" name="type" value="Something else"><span>Something else</span></label>
+          </fieldset>
+          <div class="c1x__row">
+            <div class="c-f" data-rx="~badge/slide/sweep/tr"><input id="c1-name-i" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c1-name-i">Full name *</label><span class="c-err" id="c1-name-i-err" hidden></span></div>
+            <div class="c-f" data-rx="~handset/slide/sweep/tr"><input id="c1-phone-i" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c1-phone-i">Phone *</label><span class="c-err" id="c1-phone-i-err" hidden></span></div>
+          </div>
+          <div class="c1x__row">
+            <div class="c-f" data-rx="~envelope/slide/sweep/tr"><input id="c1-email-i" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c1-email-i">Email *</label><span class="c-err" id="c1-email-i-err" hidden></span></div>
+            <div class="c-f" data-rx="~house2/slide/sweep/tr"><input id="c1-address-i" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c1-address-i">Property address *</label><span class="c-err" id="c1-address-i-err" hidden></span></div>
+          </div>
+          <div class="c-f" data-rx="~sketch/slide/sweep/tr"><textarea id="c1-project-i" name="project" rows="3" placeholder=" " required></textarea><label for="c1-project-i">What do you want to change? *</label><span class="c-err" id="c1-project-i-err" hidden></span></div>
+          <fieldset class="c1x__how">
+            <legend>Preferred contact</legend>
+            <label data-rx="~handset/unfold/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/unfold/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/unfold/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+          <label class="c-consent" data-rx="~check/pop/tick/l"><input type="checkbox" name="consent" id="c1-consent-i"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c1-consent-i-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c1x__go" data-rx="~mailbox/hoist/burst/r"><span class="btn__label">Send the work order</span><svg class="c1x__ring" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="26"/><path d="M19 31l7 7l15-16"/></svg></button>
+          <p class="c-done" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 3 · Phase 5 improved version of b4 (.consult3 -> .c3x) -->
+  <div class="ver c3x" data-v="3" hidden>
+    <div class="wrap">
+      <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+      <h2 class="t-head c3x__h" id="consult-h3-i">Call. <span class="acc">You will get a real answer,</span> not a callback form.</h2>
+      <a class="c3x__num nums" href="tel:+17542360675" data-rx="native:ringing-handset"><svg class="c3x__set" viewBox="0 0 80 80" aria-hidden="true" focusable="false"><g class="c3x__hs"><path d="M22 14q-10 26 0 52l12-4 4-16-8-3q-3-7 0-13l8-3-4-16z" fill="#FF5F00" stroke="#121212" stroke-width="3" stroke-linejoin="round"/></g><g class="c3x__waves" fill="none" stroke="#FF5F00" stroke-width="4" stroke-linecap="round"><path d="M46 28q6 12 0 24"/><path d="M56 20q11 20 0 40"/><path d="M66 12q16 28 0 56"/></g></svg><span class="c3x__digits">(754)&nbsp;236&#8209;0675</span></a>
+      <p class="c3x__open"><svg class="c3x__lamp" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7"/></svg><span class="c3x__st">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+      <div class="c3x__row">
+        <dl class="consult__facts">
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~envelope/swing/drip/r">Sales@elbazconstruction.com</a></dd></div>
+        </dl>
+        <form class="c3x__form c-form" novalidate>
+          <p class="c3x__or">Or leave your details and we will call you, usually the same or next working day.</p>
+          <div class="c-f" data-rx="~badge/neon/sweep/tr"><input id="c3-name-i" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c3-name-i">Full name *</label><span class="c-err" id="c3-name-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/neon/sweep/tr"><input id="c3-phone-i" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c3-phone-i">Phone *</label><span class="c-err" id="c3-phone-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~sketch/neon/sweep/tr"><textarea id="c3-project-i" name="project" rows="2" placeholder=" " required></textarea><label for="c3-project-i">What do you want to change? *</label><span class="c-err" id="c3-project-i-err" hidden></span></div>
+          <label class="c-consent" data-rx="~check/neon/tick/l"><input type="checkbox" name="consent" id="c3-consent-i"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c3-consent-i-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c3x__go" data-rx="keys"><span class="btn__label">Ask for a call back</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- slot 4 · Phase 5 new · One question at a time: each answer joins the thread above; the last step asks consent and sends -->
+  <div class="ver ccv" data-v="4" hidden>
+    <div class="wrap ccv__grid">
+      <div class="ccv__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-cv">Five quick questions. <span class="acc">Then we call.</span></h2>
+        <p class="t-lead consult__lead">One at a time, no long form. Your answers build up as you go, so you can check them before anything is sent.</p>
+        <dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="ccv__form c-form" novalidate>
+        <svg class="ccv__prog" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ccv__track" d="M6 12 H294"/><path class="ccv__fill" d="M6 12 H294"/></svg>
+        <p class="ccv__step" aria-live="polite">Question 1 of 5</p>
+        <ol class="ccv__log" aria-label="Your answers so far"></ol>
+        <div class="ccv__q" data-k="project">
+          <p class="ccv__ask">What do you want to change?</p>
+          <div class="ccv__chips" role="group" aria-label="Quick answers"><button type="button" class="ccv__chip" data-rx="native:chip-kitchen">Kitchen</button><button type="button" class="ccv__chip" data-rx="native:chip-bath">Bathroom</button><button type="button" class="ccv__chip" data-rx="native:chip-whole">Whole home</button><button type="button" class="ccv__chip" data-rx="native:chip-outdoor">Outdoor living</button></div>
+          <div class="c-f" data-rx="native:field-project"><textarea id="c4-project" name="project" rows="3" placeholder=" " required></textarea><label for="c4-project">What do you want to change? *</label><span class="c-err" id="c4-project-err" hidden></span></div>
+        </div>
+        <div class="ccv__q" data-k="name" hidden><p class="ccv__ask">Who are we talking to?</p><div class="c-f" data-rx="native:field-name"><input id="c4-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c4-name">Full name *</label><span class="c-err" id="c4-name-err" hidden></span></div></div>
+        <div class="ccv__q" data-k="phone" hidden><p class="ccv__ask">Best number to call you on?</p><div class="c-f" data-rx="native:field-phone"><input id="c4-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c4-phone">Phone *</label><span class="c-err" id="c4-phone-err" hidden></span></div></div>
+        <div class="ccv__q" data-k="email" hidden><p class="ccv__ask">And an email address?</p><div class="c-f" data-rx="native:field-email"><input id="c4-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c4-email">Email *</label><span class="c-err" id="c4-email-err" hidden></span></div></div>
+        <div class="ccv__q" data-k="address" hidden><p class="ccv__ask">Where is the property?</p><div class="c-f" data-rx="native:field-address"><input id="c4-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c4-address">Property address *</label><span class="c-err" id="c4-address-err" hidden></span></div></div>
+        <div class="ccv__q ccv__q--end" data-k="end" hidden>
+          <p class="ccv__ask">That is everything. Check your answers, then send.</p>
+          <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c4-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c4-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c4__go" data-rx="~speech/zip/burst/r"><span class="btn__label">Send my request</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+        <div class="ccv__nav">
+          <button type="button" class="btn btn--ghost ccv__back" data-rx="native:conv-back" hidden><span class="btn__label">Back</span></button>
+          <button type="button" class="btn ccv__next" data-rx="native:conv-next"><span class="btn__label">Next question</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- slot 5 · Phase 5 new · The postcard: message on the left, return address on the right, our office printed as the addressee;
+       a postmark lands on the stamp after sending -->
+  <div class="ver cpc" data-v="5" hidden>
+    <div class="wrap">
+      <div class="cpc__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-pc">Drop us <span class="acc">a postcard.</span></h2>
+        <p class="t-lead consult__lead">Write what you want to change on the left and where to find you on the right. It goes by email, not by mail: sending opens your email app with the card filled in.</p>
+      </div>
+      <form class="cpc__card c-form" novalidate>
+        <div class="cpc__msg">
+          <p class="cpc__hi">Dear Elbaz Construction,</p>
+          <div class="c-f" data-rx="native:field-project"><textarea id="c5-project" name="project" rows="3" placeholder=" " required></textarea><label for="c5-project">What do you want to change? *</label><span class="c-err" id="c5-project-err" hidden></span></div>
+          <fieldset class="cpc__how"><legend>Reply by</legend>
+            <label data-rx="native:reply-phone"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="native:reply-email"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="native:reply-text"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+        </div>
+        <div class="cpc__addr">
+          <svg class="cpc__stamp" viewBox="0 0 120 140" aria-hidden="true" focusable="false"><path class="cpc__perf" d=""/><rect class="cpc__sf" x="12" y="12" width="96" height="116"/><rect class="cpc__mk" x="36" y="34" width="48" height="48" rx="10"/><path class="cpc__e" d="M75 52 L60 39 L47 50 V72 H73 M47 61 H68"/><text class="cpc__st" x="60" y="110">MIAMI</text><g class="cpc__pm"><circle cx="34" cy="96" r="26"/><path d="M58 84 C74 78 88 90 104 84 M58 96 C74 90 88 102 104 96 M58 108 C74 102 88 114 104 108"/><text x="34" y="100">SENT</text></g></svg>
+          <p class="cpc__to"><span>To</span>Elbaz Construction<br>19 W Flagler St #310, Miami, FL 33130</p>
+          <div class="cpc__from"><span class="cpc__fl">From</span>
+            <div class="c-f" data-rx="native:field-name"><input id="c5-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c5-name">Full name *</label><span class="c-err" id="c5-name-err" hidden></span></div>
+            <div class="c-f" data-rx="native:field-phone"><input id="c5-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c5-phone">Phone *</label><span class="c-err" id="c5-phone-err" hidden></span></div>
+            <div class="c-f" data-rx="native:field-email"><input id="c5-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c5-email">Email *</label><span class="c-err" id="c5-email-err" hidden></span></div>
+            <div class="c-f" data-rx="native:field-address"><input id="c5-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c5-address">Property address *</label><span class="c-err" id="c5-address-err" hidden></span></div>
+          </div>
+        </div>
+        <div class="cpc__foot">
+          <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c5-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c5-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c5__go" data-rx="~mailbox/drop/flash/r"><span class="btn__label">Send the postcard</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </form>
+      <div class="cpc__facts"><dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl></div>
+    </div>
+  </div>
+
+  <!-- slot 6 · Phase 5 new · The visit window: our week drawn from the published hours; pick a preferred day and window (a preference,
+       confirmed by phone, never a booking) -->
+  <div class="ver cvt" data-v="6" hidden>
+    <div class="wrap cvt__grid">
+      <div class="cvt__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-vt">Pick a time <span class="acc">we are on site.</span></h2>
+        <p class="t-lead consult__lead">Our week is below, straight from our hours. Choose a day and a window that suits you for the walk-through. It is a preference, not a booking: we call to confirm.</p>
+        <svg class="cvt__week" viewBox="0 0 420 250" role="img" aria-label="Our hours: Sunday to Friday 7am to 7pm, Saturday closed"></svg>
+        <dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="cvt__form c-form" novalidate>
+        <fieldset class="cvt__days"><legend>Preferred day</legend><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Sun"><span>Sun</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Mon" checked><span>Mon</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Tue"><span>Tue</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Wed"><span>Wed</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Thu"><span>Thu</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Fri"><span>Fri</span></label><span class="cvt__sat" aria-hidden="true"><span>Sat</span>Closed</span></fieldset>
+        <fieldset class="cvt__wins"><legend>Preferred window</legend>
+          <label data-rx="native:visit-win"><input type="radio" name="win" value="Morning, 7 to 11am" checked><span>Morning<small>7&ndash;11am</small></span></label>
+          <label data-rx="native:visit-win"><input type="radio" name="win" value="Midday, 11am to 3pm"><span>Midday<small>11am&ndash;3pm</small></span></label>
+          <label data-rx="native:visit-win"><input type="radio" name="win" value="Afternoon, 3 to 7pm"><span>Afternoon<small>3&ndash;7pm</small></span></label>
+        </fieldset>
+        <div class="c-f" data-rx="native:field-name"><input id="c6-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c6-name">Full name *</label><span class="c-err" id="c6-name-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-phone"><input id="c6-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c6-phone">Phone *</label><span class="c-err" id="c6-phone-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-email"><input id="c6-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c6-email">Email *</label><span class="c-err" id="c6-email-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-address"><input id="c6-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c6-address">Property address *</label><span class="c-err" id="c6-address-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-project"><textarea id="c6-project" name="project" rows="3" placeholder=" " required></textarea><label for="c6-project">What do you want to change? *</label><span class="c-err" id="c6-project-err" hidden></span></div>
+        <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c6-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c6-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c6__go" data-rx="~calendar/swing/tick/r"><span class="btn__label">Ask for this window</span></button>
+          <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- slot 7 · Phase 5 new · The blueprint: every completed field inks one part of the house; the consent tick raises the flag -->
+  <div class="ver cbp" data-v="7" hidden>
+    <div class="wrap">
+      <div class="cbp__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-bp">Fill it in. <span class="acc">Watch the house go up.</span></h2>
+        <p class="t-lead consult__lead">Each detail you give us draws one more part of the house. When it is complete, your request is ready to send.</p>
+      </div>
+      <div class="cbp__sheet">
+        <svg class="cbp__draw" viewBox="0 0 400 340" aria-hidden="true" focusable="false">
+          <path class="cbp__grid" d="M0 40 H400 M0 80 H400 M0 120 H400 M0 160 H400 M0 200 H400 M0 240 H400 M0 280 H400 M40 0 V340 M80 0 V340 M120 0 V340 M160 0 V340 M200 0 V340 M240 0 V340 M280 0 V340 M320 0 V340 M360 0 V340"/>
+          <path class="cbp__p" data-k="address" d="M30 300 H370 M50 300 V312 H350 V300"/>
+          <path class="cbp__p" data-k="name" d="M80 300 V170 H320 V300"/>
+          <path class="cbp__p" data-k="phone" d="M60 176 L200 70 L340 176"/>
+          <path class="cbp__p" data-k="email" d="M180 300 V232 H220 V300 M110 200 H150 V240 H110 Z M250 200 H290 V240 H250 Z"/>
+          <path class="cbp__p" data-k="project" d="M270 116 V74 H296 V136"/>
+          <g class="cbp__flag" data-k="consent"><path class="cbp__pole" d="M200 70 V30"/><path class="cbp__pen" d="M200 30 L232 38 L200 46 Z"/></g>
+          <text class="cbp__dim" x="200" y="332">Elevation, not to scale</text>
+        </svg>
+        <form class="cbp__form c-form" novalidate>
+          <p class="cbp__count" aria-live="polite"><span class="nums">0</span> of 6 parts drawn</p>
+          <div class="c-f" data-rx="native:field-address"><input id="c7-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c7-address">Property address *</label><span class="c-err" id="c7-address-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-name"><input id="c7-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c7-name">Full name *</label><span class="c-err" id="c7-name-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-phone"><input id="c7-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c7-phone">Phone *</label><span class="c-err" id="c7-phone-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-email"><input id="c7-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c7-email">Email *</label><span class="c-err" id="c7-email-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-project"><textarea id="c7-project" name="project" rows="3" placeholder=" " required></textarea><label for="c7-project">What do you want to change? *</label><span class="c-err" id="c7-project-err" hidden></span></div>
+          <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c7-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c7-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c7__go" data-rx="~sketch/unfold/sweep/r"><span class="btn__label">Send the drawing</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </form>
+        <div class="cbp__tb"><dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slot 8 · Phase 5 new · The sentence: one paragraph with blanks; each blank grows with what you type and is underlined in orange -->
+  <div class="ver cml" data-v="8" hidden>
+    <div class="wrap">
+      <div class="cml__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-ml">Say it <span class="acc">in one sentence.</span></h2>
+        <p class="t-lead consult__lead">Fill in the blanks. It reads like a note because it is one: it becomes the email we receive.</p>
+      </div>
+      <form class="cml__form c-form" novalidate>
+        <p class="cml__s">Hi, my name is <span class="cml__b rx-host" data-rx="native:blank-name"><input id="c8-name" name="name" type="text" autocomplete="name" aria-label="Full name, required" placeholder="your full name" size="14" required></span>.
+          I would like to change <span class="cml__b rx-host" data-rx="native:blank-project"><input id="c8-project" name="project" type="text" aria-label="What you want to change, required" placeholder="the kitchen, a bathroom..." size="22" required></span>
+          at <span class="cml__b rx-host" data-rx="native:blank-address"><input id="c8-address" name="address" type="text" autocomplete="street-address" aria-label="Property address, required" placeholder="the property address" size="22" required></span>.
+          You can reach me on <span class="cml__b rx-host" data-rx="native:blank-phone"><input id="c8-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-label="Phone, required" placeholder="phone number" size="14" required></span>
+          or at <span class="cml__b rx-host" data-rx="native:blank-email"><input id="c8-email" name="email" type="email" autocomplete="email" aria-label="Email, required" placeholder="email address" size="20" required></span>.</p>
+        <ul class="cml__errs">
+          <li><span class="c-err" id="c8-name-err" hidden></span></li><li><span class="c-err" id="c8-project-err" hidden></span></li><li><span class="c-err" id="c8-address-err" hidden></span></li><li><span class="c-err" id="c8-phone-err" hidden></span></li><li><span class="c-err" id="c8-email-err" hidden></span></li>
+        </ul>
+        <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c8-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c8-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c8__go" data-rx="~envelope/hinge/sparkle/r"><span class="btn__label">Send this sentence</span></button>
+          <p class="c-done" role="status" hidden></p>
+      </form>
+      <div class="cml__facts"><dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl></div>
+    </div>
+  </div>
+
+
+  <div class="ver cp" data-v="b2" hidden>
     <div class="wrap cp__grid">
       <div class="cp__side">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
@@ -58,7 +389,7 @@
     </div>
   </div>
 
-  <div class="ver consult1" data-v="2" hidden>
+  <div class="ver consult1" data-v="b3" hidden>
     <div class="wrap consult1__grid">
       <div class="consult1__side">
         <h2 class="t-head" id="consult-h1">Let&rsquo;s talk about what you want to change.</h2>
@@ -155,7 +486,7 @@
   </div>
 
   <!-- v3 · Phone first [BANK JC Suzanne giant CTA (60 -> 272px) + BANK Anatomy §6 sticky contact] -->
-  <div class="ver consult3" data-v="3" hidden>
+  <div class="ver consult3" data-v="b4" hidden>
     <div class="wrap">
       <h2 class="t-head consult3__h" id="consult-h3">Call. You will get a real answer, not a callback form.</h2>
       <a class="consult3__num nums" href="tel:+17542360675" data-rx="native:ringing-handset"><svg class="consult3__set" viewBox="0 0 80 80" aria-hidden="true" focusable="false"><g class="consult3__hs"><path d="M22 14q-10 26 0 52l12-4 4-16-8-3q-3-7 0-13l8-3-4-16z" fill="#FF5F00" stroke="#121212" stroke-width="3" stroke-linejoin="round"/></g><g class="consult3__waves" fill="none" stroke="#FF5F00" stroke-width="4" stroke-linecap="round"><path d="M46 28q6 12 0 24"/><path d="M56 20q11 20 0 40"/><path d="M66 12q16 28 0 56"/></g></svg><span class="consult3__digits">(754)&nbsp;236&#8209;0675</span></a>

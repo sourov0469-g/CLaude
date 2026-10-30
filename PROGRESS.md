@@ -311,3 +311,24 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
     - 8 county panels: outline, dots and every town.
   - Test: `remodeling/src/tools/townstest.js`.
 - Backup integrity fix: an earlier Reviews edit had changed the backup's `.reviews2__sky` ground in place. It is restored. `backupcheck.py` now also proves that each section's CSS at the reference commit is untouched (Phase 5 only appends). All ten sections pass against the pre-Phase-5 commit.
+- Consult:
+  - Backups b2–b4 hold the former visible versions; b1 is unchanged.
+  - The clones' error-box ids were repaired (`x-err-i` → `x-i-err`) so the validator finds them.
+  - Improved slots:
+    - 1 room plan: a north arrow.
+    - 2 work order: eyebrow and accent.
+    - 3 phone first: eyebrow and accent, plus a live open/closed line computed only from the published hours in Miami time.
+  - New slots:
+    - 4 one question at a time.
+    - 5 postcard with a postmark after sending.
+    - 6 preferred visit day and window, on a week chart drawn from the published hours. Saturday is crossed out, and the copy says "a preference, not a booking".
+    - 7 blueprint that inks a part of the house per completed field.
+    - 8 fill-in-the-sentence.
+  - Every version keeps the mailto route, the exact privacy sentence, and phone, hours and office (facts.js).
+  - `remodeling/src/tools/consulttest.js`, slots 1–8:
+    - An empty send opens nothing.
+    - A valid send composes exactly one mailto to Sales@elbazconstruction.com.
+    - The note says the email app should now be open; it never says "sent".
+- Phase 5 complete:
+  - Hero: 16 versions (8 visible plus b1–b8).
+  - Sections 2–10: 12 versions each (8 visible plus b1–b4; the logged collision).

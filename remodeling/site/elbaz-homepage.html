@@ -4761,6 +4761,250 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .cp__call { margin: var(--s3) 0 0; font-size: 1rem; color: var(--muted); }
 .cp__form { --c-acc: var(--a-500); }
 
+
+
+.cpx__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.cpx__side { grid-column: 1 / span 4; display: grid; gap: var(--s5); }
+.cpx__step { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--a-700); }
+.cpx__form { grid-column: 6 / -1; --c-acc: var(--a-500); color: var(--field-ink); }
+.cpx__p1, .cpx__p2 { display: grid; gap: 18px; }
+.cpx__plan { position: relative; aspect-ratio: 600 / 420; background: var(--white); box-shadow: none; }
+.cpx__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cpx__svg .wall { fill: none; stroke: var(--ink); stroke-width: 8; stroke-linecap: square; }
+.cpx__svg .door { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.cpx__svg .fix { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.cpx__rooms { position: absolute; inset: 0; }
+.cpx__room {
+  position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h);
+  display: grid; place-items: center; background: transparent; border: 0; cursor: pointer;
+  font: 400 clamp(1.125rem, .9rem + .8vw, 1.625rem)/1 var(--f-display); letter-spacing: -.005em; color: var(--ink);
+}
+.cpx__room::before { content: ""; position: absolute; inset: 6px; background: repeating-linear-gradient(45deg, rgba(255, 95, 0, .5) 0 2px, transparent 2px 9px); opacity: 0; transition: opacity 200ms; }
+.cpx__room[aria-pressed="true"]::before { opacity: 1; }
+.cpx__room[aria-pressed="true"] { color: var(--ink); }
+.cpx__room > span { position: relative; padding: 4px 8px; background: var(--white); }
+.cpx__room:focus-visible { outline: 3px solid var(--a-500); outline-offset: -6px; }
+@media (hover: hover) and (pointer: fine) {
+  .cpx__room:hover::before { opacity: .45; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .cpx__room[aria-pressed="true"]:hover::before { opacity: 1; }
+}
+.cpx__whole { display: inline-flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 600; }
+.cpx__whole input { width: 20px; height: 20px; accent-color: var(--a-500); }
+.cpx__next, .cpx__go { justify-self: start; }
+.cpx__picked { margin: 0; font: 400 1.5rem/1.1 var(--f-display); letter-spacing: -.005em; color: var(--a-700); }
+.cpx__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
+.cpx .c-done { background: rgba(255, 255, 255, .3); }
+@media (max-width: 1023px) {
+  .cpx__side, .cpx__form { grid-column: 1 / -1; }
+  .cpx__form { margin-top: var(--s6); }
+}
+.cpx__step { margin: 0 0 var(--s4); font: 600 .875rem/1.3 var(--f-text); letter-spacing: 0; color: var(--ink); }
+.cpx__room::before { transition: none; }
+@media (hover: hover) and (pointer: fine) {
+  .cpx__room:hover::before, .cpx__room[aria-pressed="true"]:hover::before { opacity: 0; }
+  .cpx__room[aria-pressed="true"]:hover::before { opacity: 1; }
+  .cpx__room:hover { box-shadow: inset 0 0 0 2px var(--a-500); }
+}
+.cpx__room[aria-pressed="true"] > span { background: var(--a-500); color: var(--ink); }
+.cpx__room:focus-visible { outline-color: var(--a-500); }
+.cpx__how { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cpx__how legend { font: 600 .875rem/1.3 var(--f-text); color: var(--ink); margin-bottom: 8px; padding: 0; }
+.cpx__how label { position: relative; cursor: pointer; }
+.cpx__how input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.cpx__how span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; box-shadow: inset 0 0 0 1.5px var(--line-soft); font: 600 .875rem/1 var(--f-text); color: var(--ink); }
+.cpx__how input:checked + span { background: var(--white); color: var(--ink); box-shadow: none; }
+.cpx__how input:focus-visible + span { outline: 2px solid var(--a-500); outline-offset: 2px; }
+.cpx__call { margin: var(--s3) 0 0; font-size: 1rem; color: var(--muted); }
+.cpx__form { --c-acc: var(--a-500); }
+
+
+
+.c1x__paper .c-err { color: var(--err-paper); }
+.c1x__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.c1x__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
+.c1x__board { grid-column: 7 / -1; position: relative; padding: 46px 22px 22px; background: var(--a-300); box-shadow: inset 0 0 0 3px var(--a-800); border-radius: 10px; }
+.c1x__clip { position: absolute; left: 50%; top: -18px; width: 220px; translate: -50% 0; overflow: visible; z-index: 2; }
+.c1x__paper { --c-acc: var(--a-500); background: var(--white); color: var(--ink); padding: 34px clamp(18px, 3vw, 36px) 28px; background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px); background-size: 100% 32px; }
+.c1x__title { margin: 0; font: 400 2.25rem/1 var(--f-display); letter-spacing: -.005em; border-bottom: 3px solid var(--err); padding-bottom: 8px; }
+.c1x__sub { margin: -4px 0 0; font-size: .8125rem; color: var(--muted); }
+.c1x__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.c1x__type, .c1x__how { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.c1x__type legend, .c1x__how legend { font: 600 .75rem/1 var(--f-text); letter-spacing: 0; color: var(--muted); margin-bottom: 8px; padding: 0; }
+.c1x__type label, .c1x__how label { position: relative; cursor: pointer; }
+.c1x__type input, .c1x__how input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.c1x__type span, .c1x__how span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; box-shadow: inset 0 0 0 1.5px var(--ink); font: 600 .875rem/1 var(--f-text); }
+.c1x__type input:checked + span, .c1x__how input:checked + span { background: var(--white); color: var(--ink); }
+.c1x__type input:focus-visible + span, .c1x__how input:focus-visible + span { outline: 2px solid var(--a-500); outline-offset: 2px; }
+.c1x__go { justify-self: start; position: relative; background: var(--white); color: var(--ink); min-width: 220px; }
+.c1x__ring { position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; translate: -50% -50%; opacity: 0; pointer-events: none; }
+.c1x__ring circle { fill: none; stroke: var(--a-500); stroke-width: 4; }
+.c1x__ring path { fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 1023px) {
+  .c1x__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s8); }
+  .c1x__board { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .c1x__row { grid-template-columns: 1fr; }
+  .c1x__board { padding: 40px 10px 10px; }
+}
+
+
+
+.c3x__h { max-width: 22ch; }
+.c3x__num { display: flex; align-items: center; gap: clamp(10px, 2vw, 28px); margin: var(--s6) 0 var(--s7); color: var(--field-ink); text-decoration: none; white-space: nowrap; }
+.c3x__digits { font: 400 clamp(3.75rem, 1rem + 12.5vw, 17rem)/.85 var(--f-display); letter-spacing: -.01em; transform-origin: 0 50%; }
+@media (hover: hover) and (pointer: fine) {
+  .c3x__num:hover .c3x__digits { color: var(--a-700); }
+}
+.c3x__set { flex: none; width: clamp(56px, 8vw, 140px); height: auto; overflow: visible; }
+.c3x__row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.c3x__row .consult__facts { grid-column: 1 / span 5; }
+.c3x__form { grid-column: 7 / -1; --c-acc: var(--a-500); color: var(--field-ink); }
+.c3x__or { margin: 0; font-size: 1.0625rem; }
+.c3x__go { justify-self: start; }
+.c3x .c-done { background: rgba(255, 255, 255, .3); }
+@media (max-width: 767px) {
+  .c3x__digits { font-size: 11.5vw; }
+  .c3x__set { width: 44px; }
+  .c3x__num { gap: 8px; }
+}
+@media (max-width: 1023px) {
+  .c3x__row .consult__facts, .c3x__form { grid-column: 1 / -1; }
+  .c3x__form { margin-top: var(--s7); }
+}
+
+
+
+.cpx__north { position: absolute; right: 10px; bottom: 10px; width: 34px; height: 46px; pointer-events: none; }
+.cpx__north path { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+.cpx__north text { font: 600 11px/1 var(--f-text); fill: var(--ink); text-anchor: middle; }
+.cpx__plan { position: relative; }
+
+.c3x__open { display: flex; align-items: center; gap: 10px; margin: 6px 0 var(--s6); font: 600 1rem/1.3 var(--f-text); color: var(--ink-2); }
+.c3x__lamp { width: 18px; height: 18px; flex: none; }
+.c3x__lamp circle { fill: var(--grey); stroke: var(--ink); stroke-width: 2; }
+.c3x__open.is-open .c3x__lamp circle { fill: var(--a-500); }
+.c3x__open.is-open .c3x__st { color: var(--a-800); }
+
+
+.cpc__head, .cbp__head, .cml__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.cpc__head > .eyebrow, .cbp__head > .eyebrow, .cml__head > .eyebrow { grid-column: 1 / -1; }
+.cpc__head .t-head, .cbp__head .t-head, .cml__head .t-head { grid-column: 1 / span 6; }
+.cpc__head .consult__lead, .cbp__head .consult__lead, .cml__head .consult__lead { grid-column: 8 / span 5; }
+@media (max-width: 1023px) { .cpc__head > *, .cbp__head > *, .cml__head > * { grid-column: 1 / -1 !important; } .cpc__head .consult__lead, .cbp__head .consult__lead, .cml__head .consult__lead { margin-top: var(--s4); } }
+.ccv__side, .cvt__side { display: grid; gap: var(--s5); align-content: start; }
+.ccv__form, .cpc__card, .cvt__form, .cbp__form, .cml__form { background: var(--white); color: var(--ink); }
+.ccv__form .c-done, .cpc__card .c-done, .cvt__form .c-done, .cbp__form .c-done, .cml__form .c-done { background: var(--a-100); }
+
+
+.ccv__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+.ccv__form { padding: clamp(20px, 3vw, 36px); box-shadow: inset 0 0 0 2px var(--ink); }
+.ccv__prog { width: 100%; height: 24px; overflow: visible; }
+.ccv__track { stroke: var(--line-soft); stroke-width: 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.ccv__fill { stroke: var(--a-500); stroke-width: 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.ccv__step { margin: -6px 0 0; font: 600 .8125rem/1 var(--f-text); color: var(--muted); }
+.ccv__log { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ccv__log li { justify-self: end; max-width: 85%; padding: 8px 12px; background: var(--a-100); font: 500 .9375rem/1.35 var(--f-text); box-shadow: inset 3px 0 0 var(--a-500); overflow-wrap: anywhere; }
+.ccv__log li span { display: block; font: 600 .6875rem/1.2 var(--f-text); color: var(--a-800); text-transform: uppercase; letter-spacing: .06em; }
+.ccv__ask { margin: 0; font: 600 clamp(1.25rem, 1rem + .8vw, 1.625rem)/1.2 var(--f-display); }
+.ccv__q { display: grid; gap: 10px; }
+.ccv__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.ccv__chip { min-height: 40px; padding: 0 14px; border: 0; background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); font: 600 .875rem/1 var(--f-text); cursor: pointer; }
+@media (hover: hover) { .ccv__chip:hover { background: var(--a-100); } }
+.ccv__nav { display: flex; gap: var(--s3); justify-content: flex-end; }
+@media (max-width: 1023px) { .ccv__grid { grid-template-columns: 1fr; } }
+
+
+.cpc__card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "msg addr" "foot foot"; gap: 0; padding: clamp(18px, 3vw, 36px); box-shadow: inset 0 0 0 2px var(--ink), 10px 10px 0 var(--a-300); }
+.cpc__msg { grid-area: msg; display: grid; gap: 14px; align-content: start; padding-right: clamp(16px, 3vw, 36px); box-shadow: inset -2px 0 0 var(--ink); }
+.cpc__hi { margin: 0; font: 600 1.25rem/1.2 var(--f-display); }
+.cpc__how { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+.cpc__how legend { float: left; margin-right: 8px; font: 600 .875rem/2 var(--f-text); color: var(--muted); }
+.cpc__how label { display: inline-flex; gap: 6px; align-items: center; min-height: 44px; cursor: pointer; font: 500 .9375rem/1 var(--f-text); }
+.cpc__how input { accent-color: var(--a-500); width: 18px; height: 18px; }
+.cpc__addr { grid-area: addr; position: relative; display: grid; gap: 12px; align-content: start; padding-left: clamp(16px, 3vw, 36px); }
+.cpc__stamp { justify-self: end; width: 104px; height: auto; overflow: visible; }
+.cpc__sf { fill: var(--a-100); stroke: var(--ink); stroke-width: 2; }
+.cpc__perf { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; }
+.cpc__mk { fill: var(--a-500); }
+.cpc__e { fill: none; stroke: var(--white); stroke-width: 6; stroke-linejoin: miter; stroke-linecap: square; }
+.cpc__st { font: 600 13px/1 var(--f-display); fill: var(--ink); text-anchor: middle; letter-spacing: 2px; }
+.cpc__pm { opacity: 0; }
+.cpc__pm circle, .cpc__pm path { fill: none; stroke: var(--a-700); stroke-width: 3; }
+.cpc__pm text { font: 600 12px/1 var(--f-text); fill: var(--a-700); text-anchor: middle; letter-spacing: 1px; }
+.cpc__card.is-sent .cpc__pm { opacity: 1; }
+.cpc__to { margin: 0; font: 600 1rem/1.4 var(--f-text); }
+.cpc__to span, .cpc__fl { display: block; font: 600 .75rem/1.2 var(--f-text); text-transform: uppercase; letter-spacing: .08em; color: var(--a-800); }
+.cpc__from { display: grid; gap: 4px; margin-top: 8px; }
+.cpc__foot { grid-area: foot; display: grid; gap: 14px; margin-top: var(--s6); padding-top: var(--s5); box-shadow: inset 0 2px 0 var(--ink); justify-items: start; }
+.cpc__facts { margin-top: var(--s7); }
+.cpc__facts .consult__facts { grid-template-columns: repeat(3, auto); justify-content: start; column-gap: var(--s7); }
+@media (max-width: 767px) {
+  .cpc__card { grid-template-columns: 1fr; grid-template-areas: "addr" "msg" "foot"; }
+  .cpc__msg { padding: var(--s5) 0 0; box-shadow: inset 0 2px 0 var(--ink); margin-top: var(--s5); }
+  .cpc__addr { padding: 0; }
+  .cpc__facts .consult__facts { grid-template-columns: 1fr; }
+}
+
+
+.cvt__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+.cvt__week { width: 100%; max-width: 440px; height: auto; overflow: visible; }
+.cvt__week .ax { stroke: var(--ink); stroke-width: 1.5; }
+.cvt__week .gl { stroke: var(--line-soft); stroke-width: 1; }
+.cvt__week .bar { fill: var(--white); stroke: var(--ink); stroke-width: 1.5; }
+.cvt__week .win { fill: var(--a-500); }
+.cvt__week .x { stroke: var(--a-700); stroke-width: 3; stroke-linecap: round; }
+.cvt__week text { font: 600 11px/1 var(--f-text); fill: var(--ink-2); text-anchor: middle; }
+.cvt__week .hl { text-anchor: end; fill: var(--muted); }
+.cvt__form { padding: clamp(20px, 3vw, 36px); box-shadow: inset 0 0 0 2px var(--ink); }
+.cvt__days, .cvt__wins { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cvt__days legend, .cvt__wins legend { width: 100%; margin-bottom: 8px; font: 600 .875rem/1 var(--f-text); color: var(--muted); }
+.cvt__d, .cvt__wins label { position: relative; cursor: pointer; }
+.cvt__d input, .cvt__wins input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.cvt__d span, .cvt__wins label > span, .cvt__sat { display: grid; place-items: center; min-width: 52px; min-height: 48px; padding: 6px 10px; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--ink); font: 600 .9375rem/1.1 var(--f-text); text-align: center; }
+.cvt__wins label > span small { display: block; font: 500 .75rem/1.2 var(--f-text); color: var(--muted); }
+.cvt__d input:checked + span, .cvt__wins input:checked + span { background: var(--a-500); }
+.cvt__wins input:checked + span small { color: var(--ink); }
+.cvt__d input:focus-visible + span, .cvt__wins input:focus-visible + span { outline: 3px solid var(--a-700); outline-offset: 2px; }
+.cvt__sat { color: var(--muted); background: var(--surface-2); box-shadow: inset 0 0 0 1.5px var(--grey); font-size: .6875rem; }
+.cvt__sat span { font-size: .9375rem; text-decoration: line-through; }
+@media (max-width: 1023px) { .cvt__grid { grid-template-columns: 1fr; } }
+
+
+.cbp__sheet { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-areas: "draw form" "tb form"; gap: var(--s5) clamp(24px, 4vw, 64px); padding: clamp(18px, 3vw, 36px); background: var(--a-50); box-shadow: inset 0 0 0 2px var(--ink); }
+.cbp__draw { grid-area: draw; width: 100%; height: auto; background: var(--white); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.cbp__grid { stroke: var(--a-100); stroke-width: 1; }
+.cbp__p { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.cbp__pole { stroke: var(--ink); stroke-width: 3; }
+.cbp__pen { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; }
+.cbp__dim { font: 600 11px/1 var(--f-text); fill: var(--muted); text-anchor: middle; }
+.cbp__form { grid-area: form; padding: clamp(16px, 2.4vw, 28px); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.cbp__count { margin: 0; font: 600 .9375rem/1 var(--f-text); color: var(--ink-2); }
+.cbp__count .nums { font: 600 1.75rem/1 var(--f-display); color: var(--a-700); }
+.cbp__tb { grid-area: tb; padding: 14px; background: var(--white); box-shadow: inset 0 0 0 1.5px var(--ink); }
+@media (max-width: 1023px) { .cbp__sheet { grid-template-columns: 1fr; grid-template-areas: "draw" "form" "tb"; } .cbp__draw { max-width: 420px; justify-self: center; } }
+
+
+.cml__form { padding: clamp(22px, 4vw, 56px); box-shadow: inset 0 0 0 2px var(--ink); }
+.cml__s { margin: 0; font: 500 clamp(1.375rem, 1rem + 1.4vw, 2.25rem)/1.75 var(--f-display); color: var(--ink); }
+.cml__b { display: inline-block; position: relative; }
+.cml__b input { font: inherit; color: var(--a-700); border: 0; background: transparent; padding: 0 4px; min-width: 4ch; max-width: 100%; box-shadow: inset 0 -3px 0 var(--grey); outline: none; }
+.cml__b input::placeholder { color: var(--muted); opacity: .8; }
+.cml__b input:focus { box-shadow: inset 0 -3px 0 var(--a-500); background: var(--a-50); }
+.cml__b input.is-filled { box-shadow: inset 0 -3px 0 var(--a-500); }
+.cml__b input[aria-invalid="true"] { box-shadow: inset 0 -3px 0 var(--err); }
+.cml__errs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.cml__errs .c-err { color: var(--err); }
+.cml__facts { margin-top: var(--s7); }
+.cml__facts .consult__facts { grid-template-columns: repeat(3, auto); justify-content: start; column-gap: var(--s7); }
+@media (max-width: 767px) { .cml__b input { max-width: 100%; } .cml__facts .consult__facts { grid-template-columns: 1fr; } }
+
+.cml__form { grid-template-columns: minmax(0, 1fr); }
+.cml__b { max-width: 100%; }
+.cml__b input { max-width: 100%; box-sizing: border-box; }
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["HomeAndConstructionBusiness","GeneralContractor"],"name":"Elbaz Construction and Remodeling","url":"https://elbazconstructioncorp.com/","telephone":"+1-754-236-0675","email":"Sales@elbazconstruction.com","address":{"@type":"PostalAddress","streetAddress":"19 W Flagler St, Suite 310","addressLocality":"Miami","addressRegion":"FL","postalCode":"33130","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"19:00"}],"areaServed":[{"@type":"AdministrativeArea","name":"Miami-Dade County"},{"@type":"AdministrativeArea","name":"Broward County"},{"@type":"AdministrativeArea","name":"Palm Beach County"}],"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"license","name":"Florida Certified Building Contractor","identifier":"CBC1265280"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"343"},"sameAs":["https://www.instagram.com/elbazconstruction/","https://www.facebook.com/elbazconstruction/"]}
@@ -7637,7 +7881,336 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 
   
   
-  <div class="ver cp" data-v="1">
+  
+  <div class="ver cpx" data-v="1">
+    <div class="wrap cpx__grid">
+      <div class="cpx__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head cpx__h" id="consult-h2-w-i">Tap the rooms <span class="acc">you want to change.</span></h2>
+        <p class="t-lead consult__lead">Then tell us how to reach you. We will walk the property and give you an honest read on scope before anyone quotes a number.</p>
+        <dl class="consult__facts cpx__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="cpx__form c-form" novalidate>
+        <p class="cpx__step" aria-live="polite">Step 1 of 2, pick the rooms</p>
+        <div class="cpx__p1">
+          <div class="cpx__plan">
+            <svg class="cpx__north" viewBox="0 0 34 46" aria-hidden="true" focusable="false"><text x="17" y="11">N</text><path d="M17 15 L27 42 L17 35 L7 42 Z"/></svg>
+            <svg class="cpx__svg" viewBox="0 0 600 420" aria-hidden="true" focusable="false"></svg>
+            <div class="cpx__rooms" role="group" aria-label="Rooms to change">
+              <button type="button" class="cpx__room" style="--x:2%;--y:3%;--w:44%;--h:46%" aria-pressed="false" data-room="Kitchen" data-rx="~hood/lid/puff/tr">Kitchen</button>
+              <button type="button" class="cpx__room" style="--x:47%;--y:3%;--w:22%;--h:30%" aria-pressed="false" data-room="Bathroom" data-rx="~shower/lid/puff/tr">Bathroom</button>
+              <button type="button" class="cpx__room" style="--x:70%;--y:3%;--w:28%;--h:46%" aria-pressed="false" data-room="Bedroom" data-rx="~bed/lid/puff/tr">Bedroom</button>
+              <button type="button" class="cpx__room" style="--x:2%;--y:51%;--w:56%;--h:46%" aria-pressed="false" data-room="Living area" data-rx="~sofa/lid/puff/tr">Living area</button>
+              <button type="button" class="cpx__room" style="--x:59%;--y:51%;--w:39%;--h:46%" aria-pressed="false" data-room="Outdoor living" data-rx="~palm/lid/puff/tr">Outdoor living</button>
+            </div>
+          </div>
+          <label class="cpx__whole" data-rx="~house/pop/sparkle/r"><input type="checkbox" name="whole" value="Whole home"><span>The whole home</span></label>
+          <span class="c-err" id="c2-rooms-w-i-err" hidden></span>
+          <button type="button" class="btn cpx__next" data-rx="~stairs/jack/hop/r"><span class="btn__label">Next: how to reach you</span></button>
+        </div>
+        <div class="cpx__p2" hidden>
+          <p class="cpx__picked"></p>
+          <div class="c-f" data-rx="~badge/drop/sweep/tr"><input id="c2-name-w-i" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c2-name-w-i">Full name *</label><span class="c-err" id="c2-name-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/drop/sweep/tr"><input id="c2-phone-w-i" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c2-phone-w-i">Phone *</label><span class="c-err" id="c2-phone-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~envelope/drop/sweep/tr"><input id="c2-email-w-i" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c2-email-w-i">Email *</label><span class="c-err" id="c2-email-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~house2/drop/sweep/tr"><input id="c2-address-w-i" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c2-address-w-i">Property address *</label><span class="c-err" id="c2-address-w-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~ruler/drop/sweep/tr"><textarea id="c2-notes-w-i" name="notes" rows="3" placeholder=" "></textarea><label for="c2-notes-w-i">Anything we should know? (optional)</label></div>
+          <fieldset class="cpx__how">
+            <legend>Preferred contact</legend>
+            <label data-rx="~handset/peek/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/peek/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/peek/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+          <label class="c-consent" data-rx="~check/spin/tick/l"><input type="checkbox" name="consent" id="c2-consent-w-i"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c2-consent-w-i-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <div class="cpx__acts">
+            <button type="button" class="btn btn--ghost cpx__back" data-rx="~arrowL/jack/shake/l"><span class="btn__label">Back to the plan</span></button>
+            <button type="submit" class="btn cpx__go" data-rx="~envelope/zip/burst/r"><span class="btn__label">Send my request</span></button>
+          </div>
+          <p class="cpx__call">or just call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></p>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver c1x" data-v="2" hidden>
+    <div class="wrap c1x__grid">
+      <div class="c1x__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h1-i">Let&rsquo;s talk about <span class="acc">what you want to change.</span></h2>
+        <p class="t-lead consult__lead">Book a consultation and we will walk the property, talk through scope honestly, and tell you what it really takes, including the parts other contractors leave until after you have signed.</p>
+        <dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <div class="c1x__board">
+        <svg class="c1x__clip" viewBox="0 0 220 70" aria-hidden="true" focusable="false"><rect x="30" y="22" width="160" height="40" rx="8" fill="#C9C1B6" stroke="#121212" stroke-width="3"/><path class="c1x__lever" d="M50 34h120" stroke="#C9C1B6" stroke-width="8" stroke-linecap="round"/><circle cx="110" cy="16" r="12" fill="none" stroke="#C9C1B6" stroke-width="6"/></svg>
+        <form class="c1x__paper c-form" novalidate>
+          <p class="c1x__title">Work order</p>
+          <p class="c1x__sub">A real consultation, not a sales visit. Fields marked * are needed.</p>
+          <fieldset class="c1x__type">
+            <legend>The job</legend>
+            <label data-rx="~hood/unfold/tick/t"><input type="radio" name="type" value="Kitchen" checked><span>Kitchen</span></label>
+            <label data-rx="~shower/unfold/tick/t"><input type="radio" name="type" value="Bathroom"><span>Bathroom</span></label>
+            <label data-rx="~house/unfold/tick/t"><input type="radio" name="type" value="Whole home"><span>Whole home</span></label>
+            <label data-rx="~question/unfold/tick/t"><input type="radio" name="type" value="Something else"><span>Something else</span></label>
+          </fieldset>
+          <div class="c1x__row">
+            <div class="c-f" data-rx="~badge/slide/sweep/tr"><input id="c1-name-i" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c1-name-i">Full name *</label><span class="c-err" id="c1-name-i-err" hidden></span></div>
+            <div class="c-f" data-rx="~handset/slide/sweep/tr"><input id="c1-phone-i" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c1-phone-i">Phone *</label><span class="c-err" id="c1-phone-i-err" hidden></span></div>
+          </div>
+          <div class="c1x__row">
+            <div class="c-f" data-rx="~envelope/slide/sweep/tr"><input id="c1-email-i" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c1-email-i">Email *</label><span class="c-err" id="c1-email-i-err" hidden></span></div>
+            <div class="c-f" data-rx="~house2/slide/sweep/tr"><input id="c1-address-i" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c1-address-i">Property address *</label><span class="c-err" id="c1-address-i-err" hidden></span></div>
+          </div>
+          <div class="c-f" data-rx="~sketch/slide/sweep/tr"><textarea id="c1-project-i" name="project" rows="3" placeholder=" " required></textarea><label for="c1-project-i">What do you want to change? *</label><span class="c-err" id="c1-project-i-err" hidden></span></div>
+          <fieldset class="c1x__how">
+            <legend>Preferred contact</legend>
+            <label data-rx="~handset/unfold/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/unfold/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/unfold/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+          <label class="c-consent" data-rx="~check/pop/tick/l"><input type="checkbox" name="consent" id="c1-consent-i"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c1-consent-i-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c1x__go" data-rx="~mailbox/hoist/burst/r"><span class="btn__label">Send the work order</span><svg class="c1x__ring" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="26"/><path d="M19 31l7 7l15-16"/></svg></button>
+          <p class="c-done" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver c3x" data-v="3" hidden>
+    <div class="wrap">
+      <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+      <h2 class="t-head c3x__h" id="consult-h3-i">Call. <span class="acc">You will get a real answer,</span> not a callback form.</h2>
+      <a class="c3x__num nums" href="tel:+17542360675" data-rx="native:ringing-handset"><svg class="c3x__set" viewBox="0 0 80 80" aria-hidden="true" focusable="false"><g class="c3x__hs"><path d="M22 14q-10 26 0 52l12-4 4-16-8-3q-3-7 0-13l8-3-4-16z" fill="#FF5F00" stroke="#121212" stroke-width="3" stroke-linejoin="round"/></g><g class="c3x__waves" fill="none" stroke="#FF5F00" stroke-width="4" stroke-linecap="round"><path d="M46 28q6 12 0 24"/><path d="M56 20q11 20 0 40"/><path d="M66 12q16 28 0 56"/></g></svg><span class="c3x__digits">(754)&nbsp;236&#8209;0675</span></a>
+      <p class="c3x__open"><svg class="c3x__lamp" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7"/></svg><span class="c3x__st">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+      <div class="c3x__row">
+        <dl class="consult__facts">
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~envelope/swing/drip/r">Sales@elbazconstruction.com</a></dd></div>
+        </dl>
+        <form class="c3x__form c-form" novalidate>
+          <p class="c3x__or">Or leave your details and we will call you, usually the same or next working day.</p>
+          <div class="c-f" data-rx="~badge/neon/sweep/tr"><input id="c3-name-i" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c3-name-i">Full name *</label><span class="c-err" id="c3-name-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/neon/sweep/tr"><input id="c3-phone-i" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c3-phone-i">Phone *</label><span class="c-err" id="c3-phone-i-err" hidden></span></div>
+          <div class="c-f" data-rx="~sketch/neon/sweep/tr"><textarea id="c3-project-i" name="project" rows="2" placeholder=" " required></textarea><label for="c3-project-i">What do you want to change? *</label><span class="c-err" id="c3-project-i-err" hidden></span></div>
+          <label class="c-consent" data-rx="~check/neon/tick/l"><input type="checkbox" name="consent" id="c3-consent-i"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c3-consent-i-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c3x__go" data-rx="keys"><span class="btn__label">Ask for a call back</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ver ccv" data-v="4" hidden>
+    <div class="wrap ccv__grid">
+      <div class="ccv__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-cv">Five quick questions. <span class="acc">Then we call.</span></h2>
+        <p class="t-lead consult__lead">One at a time, no long form. Your answers build up as you go, so you can check them before anything is sent.</p>
+        <dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="ccv__form c-form" novalidate>
+        <svg class="ccv__prog" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="ccv__track" d="M6 12 H294"/><path class="ccv__fill" d="M6 12 H294"/></svg>
+        <p class="ccv__step" aria-live="polite">Question 1 of 5</p>
+        <ol class="ccv__log" aria-label="Your answers so far"></ol>
+        <div class="ccv__q" data-k="project">
+          <p class="ccv__ask">What do you want to change?</p>
+          <div class="ccv__chips" role="group" aria-label="Quick answers"><button type="button" class="ccv__chip" data-rx="native:chip-kitchen">Kitchen</button><button type="button" class="ccv__chip" data-rx="native:chip-bath">Bathroom</button><button type="button" class="ccv__chip" data-rx="native:chip-whole">Whole home</button><button type="button" class="ccv__chip" data-rx="native:chip-outdoor">Outdoor living</button></div>
+          <div class="c-f" data-rx="native:field-project"><textarea id="c4-project" name="project" rows="3" placeholder=" " required></textarea><label for="c4-project">What do you want to change? *</label><span class="c-err" id="c4-project-err" hidden></span></div>
+        </div>
+        <div class="ccv__q" data-k="name" hidden><p class="ccv__ask">Who are we talking to?</p><div class="c-f" data-rx="native:field-name"><input id="c4-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c4-name">Full name *</label><span class="c-err" id="c4-name-err" hidden></span></div></div>
+        <div class="ccv__q" data-k="phone" hidden><p class="ccv__ask">Best number to call you on?</p><div class="c-f" data-rx="native:field-phone"><input id="c4-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c4-phone">Phone *</label><span class="c-err" id="c4-phone-err" hidden></span></div></div>
+        <div class="ccv__q" data-k="email" hidden><p class="ccv__ask">And an email address?</p><div class="c-f" data-rx="native:field-email"><input id="c4-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c4-email">Email *</label><span class="c-err" id="c4-email-err" hidden></span></div></div>
+        <div class="ccv__q" data-k="address" hidden><p class="ccv__ask">Where is the property?</p><div class="c-f" data-rx="native:field-address"><input id="c4-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c4-address">Property address *</label><span class="c-err" id="c4-address-err" hidden></span></div></div>
+        <div class="ccv__q ccv__q--end" data-k="end" hidden>
+          <p class="ccv__ask">That is everything. Check your answers, then send.</p>
+          <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c4-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c4-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c4__go" data-rx="~speech/zip/burst/r"><span class="btn__label">Send my request</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+        <div class="ccv__nav">
+          <button type="button" class="btn btn--ghost ccv__back" data-rx="native:conv-back" hidden><span class="btn__label">Back</span></button>
+          <button type="button" class="btn ccv__next" data-rx="native:conv-next"><span class="btn__label">Next question</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver cpc" data-v="5" hidden>
+    <div class="wrap">
+      <div class="cpc__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-pc">Drop us <span class="acc">a postcard.</span></h2>
+        <p class="t-lead consult__lead">Write what you want to change on the left and where to find you on the right. It goes by email, not by mail: sending opens your email app with the card filled in.</p>
+      </div>
+      <form class="cpc__card c-form" novalidate>
+        <div class="cpc__msg">
+          <p class="cpc__hi">Dear Elbaz Construction,</p>
+          <div class="c-f" data-rx="native:field-project"><textarea id="c5-project" name="project" rows="3" placeholder=" " required></textarea><label for="c5-project">What do you want to change? *</label><span class="c-err" id="c5-project-err" hidden></span></div>
+          <fieldset class="cpc__how"><legend>Reply by</legend>
+            <label data-rx="native:reply-phone"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="native:reply-email"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="native:reply-text"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+        </div>
+        <div class="cpc__addr">
+          <svg class="cpc__stamp" viewBox="0 0 120 140" aria-hidden="true" focusable="false"><path class="cpc__perf" d=""/><rect class="cpc__sf" x="12" y="12" width="96" height="116"/><rect class="cpc__mk" x="36" y="34" width="48" height="48" rx="10"/><path class="cpc__e" d="M75 52 L60 39 L47 50 V72 H73 M47 61 H68"/><text class="cpc__st" x="60" y="110">MIAMI</text><g class="cpc__pm"><circle cx="34" cy="96" r="26"/><path d="M58 84 C74 78 88 90 104 84 M58 96 C74 90 88 102 104 96 M58 108 C74 102 88 114 104 108"/><text x="34" y="100">SENT</text></g></svg>
+          <p class="cpc__to"><span>To</span>Elbaz Construction<br>19 W Flagler St #310, Miami, FL 33130</p>
+          <div class="cpc__from"><span class="cpc__fl">From</span>
+            <div class="c-f" data-rx="native:field-name"><input id="c5-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c5-name">Full name *</label><span class="c-err" id="c5-name-err" hidden></span></div>
+            <div class="c-f" data-rx="native:field-phone"><input id="c5-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c5-phone">Phone *</label><span class="c-err" id="c5-phone-err" hidden></span></div>
+            <div class="c-f" data-rx="native:field-email"><input id="c5-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c5-email">Email *</label><span class="c-err" id="c5-email-err" hidden></span></div>
+            <div class="c-f" data-rx="native:field-address"><input id="c5-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c5-address">Property address *</label><span class="c-err" id="c5-address-err" hidden></span></div>
+          </div>
+        </div>
+        <div class="cpc__foot">
+          <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c5-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c5-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c5__go" data-rx="~mailbox/drop/flash/r"><span class="btn__label">Send the postcard</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </form>
+      <div class="cpc__facts"><dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl></div>
+    </div>
+  </div>
+
+  
+  <div class="ver cvt" data-v="6" hidden>
+    <div class="wrap cvt__grid">
+      <div class="cvt__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-vt">Pick a time <span class="acc">we are on site.</span></h2>
+        <p class="t-lead consult__lead">Our week is below, straight from our hours. Choose a day and a window that suits you for the walk-through. It is a preference, not a booking: we call to confirm.</p>
+        <svg class="cvt__week" viewBox="0 0 420 250" role="img" aria-label="Our hours: Sunday to Friday 7am to 7pm, Saturday closed"></svg>
+        <dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="cvt__form c-form" novalidate>
+        <fieldset class="cvt__days"><legend>Preferred day</legend><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Sun"><span>Sun</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Mon" checked><span>Mon</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Tue"><span>Tue</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Wed"><span>Wed</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Thu"><span>Thu</span></label><label class="cvt__d" data-rx="native:visit-day"><input type="radio" name="day" value="Fri"><span>Fri</span></label><span class="cvt__sat" aria-hidden="true"><span>Sat</span>Closed</span></fieldset>
+        <fieldset class="cvt__wins"><legend>Preferred window</legend>
+          <label data-rx="native:visit-win"><input type="radio" name="win" value="Morning, 7 to 11am" checked><span>Morning<small>7&ndash;11am</small></span></label>
+          <label data-rx="native:visit-win"><input type="radio" name="win" value="Midday, 11am to 3pm"><span>Midday<small>11am&ndash;3pm</small></span></label>
+          <label data-rx="native:visit-win"><input type="radio" name="win" value="Afternoon, 3 to 7pm"><span>Afternoon<small>3&ndash;7pm</small></span></label>
+        </fieldset>
+        <div class="c-f" data-rx="native:field-name"><input id="c6-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c6-name">Full name *</label><span class="c-err" id="c6-name-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-phone"><input id="c6-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c6-phone">Phone *</label><span class="c-err" id="c6-phone-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-email"><input id="c6-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c6-email">Email *</label><span class="c-err" id="c6-email-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-address"><input id="c6-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c6-address">Property address *</label><span class="c-err" id="c6-address-err" hidden></span></div>
+        <div class="c-f" data-rx="native:field-project"><textarea id="c6-project" name="project" rows="3" placeholder=" " required></textarea><label for="c6-project">What do you want to change? *</label><span class="c-err" id="c6-project-err" hidden></span></div>
+        <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c6-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c6-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c6__go" data-rx="~calendar/swing/tick/r"><span class="btn__label">Ask for this window</span></button>
+          <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver cbp" data-v="7" hidden>
+    <div class="wrap">
+      <div class="cbp__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-bp">Fill it in. <span class="acc">Watch the house go up.</span></h2>
+        <p class="t-lead consult__lead">Each detail you give us draws one more part of the house. When it is complete, your request is ready to send.</p>
+      </div>
+      <div class="cbp__sheet">
+        <svg class="cbp__draw" viewBox="0 0 400 340" aria-hidden="true" focusable="false">
+          <path class="cbp__grid" d="M0 40 H400 M0 80 H400 M0 120 H400 M0 160 H400 M0 200 H400 M0 240 H400 M0 280 H400 M40 0 V340 M80 0 V340 M120 0 V340 M160 0 V340 M200 0 V340 M240 0 V340 M280 0 V340 M320 0 V340 M360 0 V340"/>
+          <path class="cbp__p" data-k="address" d="M30 300 H370 M50 300 V312 H350 V300"/>
+          <path class="cbp__p" data-k="name" d="M80 300 V170 H320 V300"/>
+          <path class="cbp__p" data-k="phone" d="M60 176 L200 70 L340 176"/>
+          <path class="cbp__p" data-k="email" d="M180 300 V232 H220 V300 M110 200 H150 V240 H110 Z M250 200 H290 V240 H250 Z"/>
+          <path class="cbp__p" data-k="project" d="M270 116 V74 H296 V136"/>
+          <g class="cbp__flag" data-k="consent"><path class="cbp__pole" d="M200 70 V30"/><path class="cbp__pen" d="M200 30 L232 38 L200 46 Z"/></g>
+          <text class="cbp__dim" x="200" y="332">Elevation, not to scale</text>
+        </svg>
+        <form class="cbp__form c-form" novalidate>
+          <p class="cbp__count" aria-live="polite"><span class="nums">0</span> of 6 parts drawn</p>
+          <div class="c-f" data-rx="native:field-address"><input id="c7-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="c7-address">Property address *</label><span class="c-err" id="c7-address-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-name"><input id="c7-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="c7-name">Full name *</label><span class="c-err" id="c7-name-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-phone"><input id="c7-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="c7-phone">Phone *</label><span class="c-err" id="c7-phone-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-email"><input id="c7-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="c7-email">Email *</label><span class="c-err" id="c7-email-err" hidden></span></div>
+          <div class="c-f" data-rx="native:field-project"><textarea id="c7-project" name="project" rows="3" placeholder=" " required></textarea><label for="c7-project">What do you want to change? *</label><span class="c-err" id="c7-project-err" hidden></span></div>
+          <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c7-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c7-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c7__go" data-rx="~sketch/unfold/sweep/r"><span class="btn__label">Send the drawing</span></button>
+          <p class="c-done" role="status" hidden></p>
+        </form>
+        <div class="cbp__tb"><dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver cml" data-v="8" hidden>
+    <div class="wrap">
+      <div class="cml__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-ml">Say it <span class="acc">in one sentence.</span></h2>
+        <p class="t-lead consult__lead">Fill in the blanks. It reads like a note because it is one: it becomes the email we receive.</p>
+      </div>
+      <form class="cml__form c-form" novalidate>
+        <p class="cml__s">Hi, my name is <span class="cml__b rx-host" data-rx="native:blank-name"><input id="c8-name" name="name" type="text" autocomplete="name" aria-label="Full name, required" placeholder="your full name" size="14" required></span>.
+          I would like to change <span class="cml__b rx-host" data-rx="native:blank-project"><input id="c8-project" name="project" type="text" aria-label="What you want to change, required" placeholder="the kitchen, a bathroom..." size="22" required></span>
+          at <span class="cml__b rx-host" data-rx="native:blank-address"><input id="c8-address" name="address" type="text" autocomplete="street-address" aria-label="Property address, required" placeholder="the property address" size="22" required></span>.
+          You can reach me on <span class="cml__b rx-host" data-rx="native:blank-phone"><input id="c8-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-label="Phone, required" placeholder="phone number" size="14" required></span>
+          or at <span class="cml__b rx-host" data-rx="native:blank-email"><input id="c8-email" name="email" type="email" autocomplete="email" aria-label="Email, required" placeholder="email address" size="20" required></span>.</p>
+        <ul class="cml__errs">
+          <li><span class="c-err" id="c8-name-err" hidden></span></li><li><span class="c-err" id="c8-project-err" hidden></span></li><li><span class="c-err" id="c8-address-err" hidden></span></li><li><span class="c-err" id="c8-phone-err" hidden></span></li><li><span class="c-err" id="c8-email-err" hidden></span></li>
+        </ul>
+        <label class="c-consent" data-rx="native:consent"><input type="checkbox" name="consent" id="c8-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="c8-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <button type="submit" class="btn c8__go" data-rx="~envelope/hinge/sparkle/r"><span class="btn__label">Send this sentence</span></button>
+          <p class="c-done" role="status" hidden></p>
+      </form>
+      <div class="cml__facts"><dl class="consult__facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl></div>
+    </div>
+  </div>
+
+
+  <div class="ver cp" data-v="b2" hidden>
     <div class="wrap cp__grid">
       <div class="cp__side">
         <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
@@ -7693,7 +8266,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     </div>
   </div>
 
-  <div class="ver consult1" data-v="2" hidden>
+  <div class="ver consult1" data-v="b3" hidden>
     <div class="wrap consult1__grid">
       <div class="consult1__side">
         <h2 class="t-head" id="consult-h1">Let&rsquo;s talk about what you want to change.</h2>
@@ -7790,7 +8363,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   </div>
 
   
-  <div class="ver consult3" data-v="3" hidden>
+  <div class="ver consult3" data-v="b4" hidden>
     <div class="wrap">
       <h2 class="t-head consult3__h" id="consult-h3">Call. You will get a real answer, not a callback form.</h2>
       <a class="consult3__num nums" href="tel:+17542360675" data-rx="native:ringing-handset"><svg class="consult3__set" viewBox="0 0 80 80" aria-hidden="true" focusable="false"><g class="consult3__hs"><path d="M22 14q-10 26 0 52l12-4 4-16-8-3q-3-7 0-13l8-3-4-16z" fill="#FF5F00" stroke="#121212" stroke-width="3" stroke-linejoin="round"/></g><g class="consult3__waves" fill="none" stroke="#FF5F00" stroke-width="4" stroke-linecap="round"><path d="M46 28q6 12 0 24"/><path d="M56 20q11 20 0 40"/><path d="M66 12q16 28 0 56"/></g></svg><span class="consult3__digits">(754)&nbsp;236&#8209;0675</span></a>
@@ -15871,10 +16444,285 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   if (!EZ.consultMail) EZ.consultMail = function (url) { window.location.href = url; };   // tests replace this to intercept the mailto navigation
 
   EZ.section('consult', {
+    /* slot 3 · Phase 5 improved version of b4 */
+    3: { init: function (root, k) {
+      // open or closed right now, from the published hours only (Sunday to Friday 7am to 7pm, Saturday closed), in Miami time
+      var openP = root.querySelector('.c3x__open'), openT = root.querySelector('.c3x__st');
+      function openNow() {
+        var parts = {};
+        try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; }); } catch (e) { return; }
+        var day = parts.weekday, h = +parts.hour % 24, open = day !== 'Sat' && h >= 7 && h < 19;
+        openP.classList.toggle('is-open', open);
+        openT.textContent = open ? 'Open now, until 7pm Miami time' : day === 'Sat' ? 'Closed on Saturdays. We open again Sunday at 7am' : 'Closed now. We open at 7am Miami time' + (day === 'Fri' && h >= 19 ? ' on Sunday' : '');
+      }
+      openNow();
+      var openTimer = setInterval(openNow, 60000);
+      k.add(function () { clearInterval(openTimer); openP.classList.remove('is-open'); openT.textContent = 'Sun\u2013Fri 7am\u20137pm, Miami time'; });
+      var form = root.querySelector('.c3x__form'), num = root.querySelector('.c3x__num'), digits = root.querySelector('.c3x__digits');
+      var hs = root.querySelector('.c3x__hs'), waves = root.querySelectorAll('.c3x__waves path');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'project', 'consent']), form, k)) return;
+        EZ.consultMail(compose(['Please call me back.', 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Project: ' + v(form, 'project')], v(form, 'name')));
+        done(form);
+      });
+      EZ.reveal(k, root.querySelectorAll('.c3x__h'));
+      if (!k.motion) return;
+      // the number grows from a line of text to the size of the room as it comes up the screen
+      gsap.fromTo(digits, { scale: .3 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: num, start: 'top bottom', end: 'top 40%', scrub: true } });
+      // the handset rings twice when it comes on screen (under 5s), and again whenever the pointer reaches the number
+      var ring = gsap.timeline({ repeat: 1, repeatDelay: 2.6, paused: true })
+        .to(hs, { keyframes: [{ rotation: -14, duration: .06 }, { rotation: 12, duration: .06 }, { rotation: -10, duration: .06 }, { rotation: 8, duration: .06 }, { rotation: -6, duration: .06 }, { rotation: 0, duration: .08 }], svgOrigin: '28 40' }, 0)
+        .fromTo(waves, { drawSVG: '50% 50%', opacity: 0 }, { drawSVG: '0% 100%', opacity: 1, duration: .3, stagger: .08 }, 0)
+        .to(waves, { opacity: 0, duration: .4 }, .7);
+      k.io(num, function (en) { en.isIntersecting ? ring.restart() : ring.pause(); });
+      k.on(num, 'pointerenter', function () { ring.restart(); });
+    } },
+
+    /* slot 2 · Phase 5 improved version of b3 */
+
+    2: { init: function (root, k) {
+      var form = root.querySelector('.c1x__paper'), btn = root.querySelector('.c1x__go'), ring = root.querySelector('.c1x__ring'), label = btn.querySelector('.btn__label');
+      liveClear(form, k);
+      EZ.reveal(k, root.querySelectorAll('.c1x__side > *'));
+      if (k.motion) {
+        gsap.from(root.querySelector('.c1x__board'), { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: root.querySelector('.c1x__board'), start: 'top 85%', once: true } });
+        gsap.from(root.querySelector('.c1x__lever'), { rotation: -20, svgOrigin: '170 34', duration: .3, ease: 'back.out(3)', delay: .2, scrollTrigger: { trigger: root.querySelector('.c1x__board'), start: 'top 85%', once: true } });
+      }
+      k.add(function () { gsap.set([btn, label, ring], { clearProps: 'all' }); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'email', 'address', 'project', 'consent']), form, k)) return;
+        var type = (form.querySelector('[name="type"]:checked') || {}).value || '', how = (form.querySelector('[name="contact"]:checked') || {}).value || '';
+        var url = compose(['The job: ' + type, 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Project: ' + v(form, 'project'), 'Preferred contact: ' + how], v(form, 'name'));
+        // [AUDIT-01 F10 loser V1, P1] the send fires FIRST; the ceremony plays afterwards as confirmation, 600ms in all
+        EZ.consultMail(url); done(form);
+        if (!k.motion) return;
+        var w = btn.offsetWidth;
+        k.ctx.add(function () {
+          gsap.timeline()
+            .to(label, { autoAlpha: 0, duration: .08 })
+            .fromTo(btn, { width: w, minWidth: 0 }, { width: 56, minWidth: 0, paddingLeft: 0, paddingRight: 0, borderRadius: 28, duration: .18, ease: 'power3.inOut' })
+            .set(ring, { opacity: 1 })
+            .fromTo(ring.querySelector('circle'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .22, ease: 'power1.inOut' })
+            .fromTo(ring.querySelector('path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .12, ease: 'power2.out' });
+        });
+      });
+    } },
+
+    /* slot 1 · Phase 5 improved version of b2 */
+    1: { init: function (root, k) {
+      var form = root.querySelector('.cpx__form'), svg = root.querySelector('.cpx__svg'), head = root.querySelector('.cpx__h');
+      var p1 = root.querySelector('.cpx__p1'), p2 = root.querySelector('.cpx__p2'), step = root.querySelector('.cpx__step');
+      var rooms = Array.prototype.slice.call(root.querySelectorAll('.cpx__room')), whole = form.elements.whole;
+      var picked = root.querySelector('.cpx__picked'), err = root.querySelector('#c2-rooms-w-i-err'), touched = false;
+      var H1 = 'Tap the rooms <span class="acc">you want to change.</span>', H2 = 'How do we <span class="acc">reach you?</span>', S1 = 'Step 1 of 2, pick the rooms', S2 = 'Step 2 of 2, how to reach you';
+      var HOUSE = EZ.bezier(.23, 1, .32, 1);
+      liveClear(form, k);
+      rooms.forEach(function (r) { if (!r.querySelector('span')) r.innerHTML = '<span>' + r.textContent + '</span>'; });
+      svg.innerHTML = '<path class="wall" d="M12 12H588V408H12Z M282 12V150 M282 150H420 M420 12V216 M12 216H588 M354 216V408"/>' +
+        '<path class="door" d="M282 110a40 40 0 0 1 40 40 M420 170a40 40 0 0 0 -40 40 M200 216a44 44 0 0 1 44 -44 M354 300a40 40 0 0 1 40 40"/>' +
+        '<path class="fix" d="M30 30h220v36H30z M60 120h120v50H60z M300 30h50v30h-50z M370 90a18 22 0 1 0 0.1 0 M440 40h120v120h-120z M40 300h150v70H40z M380 240h180v140H380z"/>';
+      k.add(function () { svg.innerHTML = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); p1.hidden = false; p2.hidden = true; step.textContent = S1; head.innerHTML = H1; });
+      function sel() { var s = rooms.filter(function (r) { return r.getAttribute('aria-pressed') === 'true'; }).map(function (r) { return r.dataset.room; }); if (whole.checked) s.unshift('Whole home'); return s; }
+      function press(r, on) {
+        r.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (k.motion && on) gsap.fromTo(r.querySelector('span'), { scale: 1.12 }, { scale: 1, duration: .18, ease: 'power2.out' });
+      }
+      rooms.forEach(function (r) { k.on(r, 'click', function () { touched = true; press(r, r.getAttribute('aria-pressed') !== 'true'); err.hidden = true; }); });
+      // whole home reads as five picks: a 40ms cascade
+      k.on(whole, 'change', function () {
+        touched = true; err.hidden = true;
+        rooms.forEach(function (r, i) { if (k.motion) k.timeout(function () { press(r, whole.checked); }, i * 40); else press(r, whole.checked); });
+      });
+      // a room chosen in the hero arrives pressed, until the visitor touches the plan themselves
+      function carry() {
+        if (touched || !EZ.pickedRoom) return;
+        if (EZ.pickedRoom === 'Whole home') { whole.checked = true; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'true'); }); return; }
+        rooms.forEach(function (r) { r.setAttribute('aria-pressed', r.dataset.room === EZ.pickedRoom ? 'true' : 'false'); });
+      }
+      carry();
+      k.io(root, function (en) { if (en.isIntersecting) carry(); }, { threshold: 0 });
+      function go(to2) {
+        var from = to2 ? p1 : p2, to = to2 ? p2 : p1;
+        if (to2) picked.textContent = sel().join(' · ');
+        function swap() { step.textContent = to2 ? S2 : S1; head.innerHTML = to2 ? H2 : H1; }
+        if (!k.motion) { swap(); from.hidden = true; to.hidden = false; (to.querySelector('input, button') || to).focus(); return; }
+        k.ctx.add(function () {
+          gsap.timeline()
+            .to([from, head, step], { autoAlpha: 0, duration: .1, ease: 'power1.in', onComplete: function () { swap(); from.hidden = true; gsap.set(from, { clearProps: 'all' }); to.hidden = false; } })
+            .fromTo(to, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: .2, ease: HOUSE, clearProps: 'all', onComplete: function () { (to.querySelector('input, button') || to).focus(); } })
+            .to([head, step], { autoAlpha: 1, duration: .2, ease: HOUSE, clearProps: 'opacity,visibility' }, '<');
+        });
+      }
+      k.on(root.querySelector('.cpx__next'), 'click', function () {
+        if (!sel().length) { err.textContent = 'Tap at least one room, or tick the whole home.'; err.hidden = false; return; }
+        go(true);
+      });
+      k.on(root.querySelector('.cpx__back'), 'click', function () { go(false); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'email', 'address', 'consent']), form, k)) return;
+        var lines = ['Rooms: ' + sel().join(', '), 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Preferred contact: ' + v(form, 'contact')];
+        if (v(form, 'notes')) lines.push('Notes: ' + v(form, 'notes'));
+        EZ.consultMail(compose(lines, v(form, 'name')));
+        done(form);
+      });
+      EZ.reveal(k, root.querySelectorAll('.cpx__side > *'));
+      if (k.motion) gsap.fromTo(svg.querySelectorAll('.wall, .door, .fix'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    } },
+
+    /* slot 4 · Phase 5 new · One question at a time: each step checks only its own field; an answer joins the thread;
+       the last step shows consent and the note, and the send runs the full check like every other version */
+    4: { init: function (root, k) {
+      var form = root.querySelector('.ccv__form'), Q = Array.prototype.slice.call(root.querySelectorAll('.ccv__q'));
+      var log = root.querySelector('.ccv__log'), step = root.querySelector('.ccv__step'), back = root.querySelector('.ccv__back'), next = root.querySelector('.ccv__next');
+      var fill = root.querySelector('.ccv__fill'), at = 0, ASK = { project: 'The job', name: 'Name', phone: 'Phone', email: 'Email', address: 'Property' };
+      liveClear(form, k);
+      function bar(anim) { var p = Math.min(at, 5) / 5; if (anim && k.motion) k.ctx.add(function () { gsap.to(fill, { drawSVG: (p * 100) + '%', duration: .4, ease: 'power2.out' }); }); else gsap.set(fill, { drawSVG: (p * 100) + '%' }); }
+      function render(anim) {
+        Q.forEach(function (q, i) { q.hidden = i !== at; });
+        back.hidden = at === 0; next.hidden = at === Q.length - 1;
+        step.textContent = at < 5 ? 'Question ' + (at + 1) + ' of 5' : 'Ready to send';
+        log.innerHTML = Q.slice(0, at).map(function (q) { var key = q.dataset.k; return '<li><span>' + ASK[key] + '</span>' + v(form, key).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</li>'; }).join('');
+        bar(anim);
+        var f = Q[at].querySelector('input, textarea');
+        if (anim) { if (f) f.focus(); else Q[at].querySelector('.c-consent input').focus(); }
+        if (anim && k.motion) k.ctx.add(function () { gsap.from(Q[at], { y: 14, autoAlpha: 0, duration: .25, ease: 'power2.out' }); if (log.lastElementChild) gsap.from(log.lastElementChild, { x: 20, autoAlpha: 0, duration: .25, ease: 'back.out(2)' }); });
+      }
+      function forward() { var key = Q[at].dataset.k; if (!show(check(form, [key]), form, k)) return; at++; render(true); }
+      k.on(next, 'click', forward);
+      k.on(back, 'click', function () { at = Math.max(0, at - 1); render(true); });
+      k.on(form, 'keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox' && at < Q.length - 1) { e.preventDefault(); forward(); } });
+      root.querySelectorAll('.ccv__chip').forEach(function (c) { k.on(c, 'click', function () { var t = form.elements.project; t.value = (t.value ? t.value.replace(/\s+$/, '') + ', ' : '') + c.textContent; t.dispatchEvent(new Event('input', { bubbles: true })); t.focus(); }); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var errs = check(form, ['project', 'name', 'phone', 'email', 'address', 'consent']), bad = errs.filter(function (x) { return x.msg && x.el.name !== 'consent'; })[0];
+        if (bad) { at = Q.map(function (q) { return q.dataset.k; }).indexOf(bad.el.name); render(true); show(check(form, [bad.el.name]), form, k); return; }
+        if (!show(errs, form, k)) return;
+        EZ.consultMail(compose(['Project: ' + v(form, 'project'), 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address')], v(form, 'name')));
+        done(form);
+      });
+      render(false);
+      k.add(function () { at = 0; log.innerHTML = ''; Q.forEach(function (q, i) { q.hidden = i !== 0; }); back.hidden = true; next.hidden = false; step.textContent = 'Question 1 of 5'; gsap.set(fill, { clearProps: 'all' }); });
+      EZ.reveal(k, root.querySelectorAll('.ccv__side > *'));
+    } },
+
+    /* slot 5 · Phase 5 new · The postcard: the stamp's perforation is drawn from its frame; after a valid send the
+       postmark is struck over the stamp (the email is composed first, the postmark is only confirmation) */
+    5: { init: function (root, k) {
+      var form = root.querySelector('.cpc__card'), perf = root.querySelector('.cpc__perf'), pm = root.querySelector('.cpc__pm');
+      var d = '';
+      for (var x = 8; x <= 112; x += 8) d += 'M' + x + ' 6 l0 0 M' + x + ' 134 l0 0 ';
+      for (var y = 14; y <= 126; y += 8) d += 'M6 ' + y + ' l0 0 M114 ' + y + ' l0 0 ';
+      perf.setAttribute('d', d);
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['project', 'name', 'phone', 'email', 'address', 'consent']), form, k)) return;
+        var how = (form.querySelector('[name="contact"]:checked') || {}).value || '';
+        EZ.consultMail(compose(['Dear Elbaz Construction,', v(form, 'project'), '', 'From: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Reply by: ' + how], v(form, 'name')));
+        done(form);
+        form.classList.add('is-sent');
+        if (k.motion) k.ctx.add(function () { gsap.fromTo(pm, { scale: 1.6, rotation: -18, transformOrigin: '50% 50%', autoAlpha: 0 }, { scale: 1, rotation: -8, autoAlpha: 1, duration: .32, ease: 'back.out(2.5)' }); });
+      });
+      k.add(function () { form.classList.remove('is-sent'); perf.setAttribute('d', ''); gsap.set(pm, { clearProps: 'all' }); });
+      EZ.reveal(k, root.querySelectorAll('.cpc__head > *'));
+      if (k.motion) gsap.from(form, { rotation: -2.5, y: 30, autoAlpha: 0, duration: .5, ease: 'back.out(1.6)', scrollTrigger: { trigger: form, start: 'top 85%', once: true } });
+    } },
+
+    /* slot 6 · Phase 5 new · The visit window: the week chart is drawn from the published hours only (Sunday to Friday
+       7am to 7pm; Saturday crossed out); the chosen day and window are filled in the chart */
+    6: { init: function (root, k) {
+      var form = root.querySelector('.cvt__form'), svg = root.querySelector('.cvt__week');
+      var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], X0 = 60, CW = 50, Y0 = 20, HH = 16;   // 7am at Y0, one hour = 16
+      var s = '';
+      [7, 11, 15, 19].forEach(function (hr) { var y = Y0 + (hr - 7) * HH; s += '<path class="gl" d="M' + (X0 - 6) + ' ' + y + ' H' + (X0 + 7 * CW) + '"/><text class="hl" x="' + (X0 - 10) + '" y="' + (y + 4) + '">' + (hr > 12 ? hr - 12 + 'pm' : hr + 'am') + '</text>'; });
+      DAYS.forEach(function (d, i) {
+        var x = X0 + i * CW + 8;
+        if (d === 'Sat') s += '<path class="x" d="M' + x + ' ' + (Y0 + 70) + ' l34 50 M' + (x + 34) + ' ' + (Y0 + 70) + ' l-34 50"/>';
+        else s += '<rect class="bar" x="' + x + '" y="' + Y0 + '" width="34" height="' + 12 * HH + '"/><rect class="win" data-d="' + d + '" x="' + x + '" y="' + Y0 + '" width="34" height="0"/>';
+        s += '<text x="' + (x + 17) + '" y="' + (Y0 + 12 * HH + 20) + '">' + d + '</text>';
+      });
+      s += '<text x="' + (X0 + 6 * CW + 25) + '" y="' + (Y0 + 12 * HH + 36) + '">closed</text>';
+      svg.innerHTML = s;
+      var WIN = { 'Morning, 7 to 11am': [7, 11], 'Midday, 11am to 3pm': [11, 15], 'Afternoon, 3 to 7pm': [15, 19] };
+      function paint(anim) {
+        var day = (form.querySelector('[name="day"]:checked') || {}).value, w = WIN[(form.querySelector('[name="win"]:checked') || {}).value];
+        svg.querySelectorAll('.win').forEach(function (r) {
+          var on = r.dataset.d === day, to = { attr: { y: Y0 + (w[0] - 7) * HH, height: on ? (w[1] - w[0]) * HH : 0 } };
+          if (anim && k.motion) k.ctx.add(function () { gsap.to(r, Object.assign(to, { duration: .3, ease: 'power2.out' })); }); else gsap.set(r, to);
+        });
+      }
+      k.on(form, 'change', function (e) { if (e.target.name === 'day' || e.target.name === 'win') paint(true); });
+      paint(false);
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'email', 'address', 'project', 'consent']), form, k)) return;
+        var day = (form.querySelector('[name="day"]:checked') || {}).value, win = (form.querySelector('[name="win"]:checked') || {}).value;
+        EZ.consultMail(compose(['Preferred visit: ' + day + ', ' + win + ' (a preference; please call to confirm)', 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Project: ' + v(form, 'project')], v(form, 'name')));
+        done(form);
+      });
+      k.add(function () { svg.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.cvt__side > *'));
+    } },
+
+    /* slot 7 · Phase 5 new · The blueprint: a field that passes its own check inks its part of the elevation
+       (address: footing, name: walls, phone: roof, email: door and windows, project: chimney, consent: the flag) */
+    7: { init: function (root, k) {
+      var form = root.querySelector('.cbp__form'), parts = {}, cnt = root.querySelector('.cbp__count .nums'), drawn = {};
+      root.querySelectorAll('.cbp__p, .cbp__flag').forEach(function (p) { parts[p.dataset.k] = p; });
+      function set(key, on) {
+        if (!!drawn[key] === on) return; drawn[key] = on;
+        var p = parts[key], tg = p.tagName === 'g' ? p.querySelectorAll('path') : [p];
+        if (k.motion) k.ctx.add(function () { gsap.to(tg, { drawSVG: on ? '100%' : '0%', duration: .5, ease: 'power2.inOut' }); if (key === 'consent') gsap.to(p.querySelector('.cbp__pen'), { scaleX: on ? 1 : 0, transformOrigin: '0% 50%', duration: .4, ease: on ? 'back.out(2)' : 'power2.in', delay: on ? .3 : 0 }); });
+        else { gsap.set(tg, { drawSVG: on ? '100%' : '0%' }); if (key === 'consent') gsap.set(p.querySelector('.cbp__pen'), { scaleX: on ? 1 : 0, transformOrigin: '0% 50%' }); }
+        cnt.textContent = Object.keys(drawn).filter(function (x) { return drawn[x]; }).length;
+      }
+      function judge() {
+        ['address', 'name', 'phone', 'email', 'project'].forEach(function (key) { var e = check(form, [key])[0]; set(key, !!e && !e.msg); });
+        set('consent', form.elements.consent.checked);
+      }
+      gsap.set(root.querySelectorAll('.cbp__p, .cbp__flag path'), { drawSVG: '0%' });
+      gsap.set(root.querySelector('.cbp__pen'), { scaleX: 0, transformOrigin: '0% 50%' });   // the pennant is a filled shape: it shows only once consent is ticked
+      k.on(form, 'input', judge); k.on(form, 'change', judge);
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['address', 'name', 'phone', 'email', 'project', 'consent']), form, k)) return;
+        EZ.consultMail(compose(['Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Project: ' + v(form, 'project')], v(form, 'name')));
+        done(form);
+      });
+      k.add(function () { drawn = {}; cnt.textContent = '0'; gsap.set(root.querySelectorAll('.cbp__p, .cbp__flag path, .cbp__pen'), { clearProps: 'all' }); });
+      EZ.reveal(k, root.querySelectorAll('.cbp__head > *'));
+    } },
+
+    /* slot 8 · Phase 5 new · The sentence: each blank grows with its text (size follows the value) and is underlined in
+       the accent once filled; the email body is the sentence itself plus the same lines every version sends */
+    8: { init: function (root, k) {
+      var form = root.querySelector('.cml__form'), blanks = Array.prototype.slice.call(form.querySelectorAll('.cml__b input'));
+      var base = blanks.map(function (b) { return b.size; });
+      function grow(b, i) { b.size = Math.max(base[i], Math.min(40, (b.value || '').length + 2)); b.classList.toggle('is-filled', !!b.value.trim()); }
+      blanks.forEach(function (b, i) { k.on(b, 'input', function () { grow(b, i); }); });
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'project', 'address', 'phone', 'email', 'consent']), form, k)) return;
+        var line = 'Hi, my name is ' + v(form, 'name') + '. I would like to change ' + v(form, 'project') + ' at ' + v(form, 'address') + '. You can reach me on ' + v(form, 'phone') + ' or at ' + v(form, 'email') + '.';
+        EZ.consultMail(compose([line, '', 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Project: ' + v(form, 'project')], v(form, 'name')));
+        done(form);
+      });
+      k.add(function () { blanks.forEach(function (b, i) { b.size = base[i]; b.classList.remove('is-filled'); }); });
+      EZ.reveal(k, root.querySelectorAll('.cml__head > *'));
+      if (k.motion) gsap.from(blanks, { scaleX: 0, transformOrigin: '0% 50%', duration: .4, ease: 'power2.out', stagger: .08, scrollTrigger: { trigger: form, start: 'top 85%', once: true } });
+    } },
+
     /* slot 1 · AUDIT-01 winner (copied from v2; F10 grafts and fixes): step text in the form column with its content, the
        headline follows the step, hover is an outline only, steps crossfade with a 12px rise in 200ms (text swaps at the
        midpoint), step 2 adds notes, preferred contact and a plain call line; a room picked in the hero arrives pre-pressed. */
-    1: { init: function (root, k) {
+    b2: { init: function (root, k) {
       var form = root.querySelector('.cp__form'), svg = root.querySelector('.cp__svg'), head = root.querySelector('.cp__h');
       var p1 = root.querySelector('.cp__p1'), p2 = root.querySelector('.cp__p2'), step = root.querySelector('.cp__step');
       var rooms = Array.prototype.slice.call(root.querySelectorAll('.cp__room')), whole = form.elements.whole;
@@ -15935,7 +16783,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       if (k.motion) gsap.fromTo(svg.querySelectorAll('.wall, .door, .fix'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
     } },
 
-    2: { init: function (root, k) {
+    b3: { init: function (root, k) {
       var form = root.querySelector('.consult1__paper'), btn = root.querySelector('.consult1__go'), ring = root.querySelector('.consult1__ring'), label = btn.querySelector('.btn__label');
       liveClear(form, k);
       EZ.reveal(k, root.querySelectorAll('.consult1__side > *'));
@@ -16014,7 +16862,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     } },
 
     /* v3 · Phone first [BANK JC Suzanne giant CTA] */
-    3: { init: function (root, k) {
+    b4: { init: function (root, k) {
       var form = root.querySelector('.consult3__form'), num = root.querySelector('.consult3__num'), digits = root.querySelector('.consult3__digits');
       var hs = root.querySelector('.consult3__hs'), waves = root.querySelectorAll('.consult3__waves path');
       liveClear(form, k);
