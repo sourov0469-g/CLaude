@@ -8,8 +8,8 @@
   "verTop": 0,
   "verH": 900,
   "idle": 0,
-  "ptr": 39,
-  "scroll": 44
+  "ptr": 42,
+  "scroll": 46
  },
  {
   "id": "proof1",
@@ -21,7 +21,7 @@
   "verH": 744.375,
   "idle": 0,
   "ptr": 8,
-  "scroll": 117
+  "scroll": 130
  },
  {
   "id": "services1",
@@ -32,8 +32,8 @@
   "verTop": 2243.546875,
   "verH": 1015.625,
   "idle": 0,
-  "ptr": 522,
-  "scroll": 40
+  "ptr": 574,
+  "scroll": 28
  },
  {
   "id": "ba1",
@@ -45,7 +45,7 @@
   "verH": 638.625,
   "idle": 0,
   "ptr": 2,
-  "scroll": 46
+  "scroll": 40
  },
  {
   "id": "process1",
@@ -57,7 +57,7 @@
   "verH": 1419.890625,
   "idle": 0,
   "ptr": 0,
-  "scroll": 1226
+  "scroll": 1208
  },
  {
   "id": "financing1",
@@ -81,7 +81,7 @@
   "verH": 2111.09375,
   "idle": 0,
   "ptr": 18,
-  "scroll": 134
+  "scroll": 138
  },
  {
   "id": "reviews1",
@@ -117,7 +117,7 @@
   "verH": 837.84375,
   "idle": 0,
   "ptr": 24,
-  "scroll": 138
+  "scroll": 140
  },
  {
   "id": "hero2",
@@ -127,9 +127,9 @@
   "found": true,
   "verTop": 0,
   "verH": 2160,
-  "idle": 34,
+  "idle": 31,
   "ptr": 0,
-  "scroll": 283
+  "scroll": 247
  },
  {
   "id": "proof2",
@@ -140,8 +140,8 @@
   "verTop": 2386.390625,
   "verH": 560.28125,
   "idle": 0,
-  "ptr": 667,
-  "scroll": 384
+  "ptr": 668,
+  "scroll": 331
  },
  {
   "id": "services2",
@@ -153,7 +153,7 @@
   "verH": 2339.59375,
   "idle": 0,
   "ptr": 0,
-  "scroll": 86
+  "scroll": 98
  },
  {
   "id": "ba2",
@@ -165,7 +165,7 @@
   "verH": 1740.96875,
   "idle": 12,
   "ptr": 0,
-  "scroll": 419
+  "scroll": 356
  },
  {
   "id": "process2",
@@ -177,7 +177,7 @@
   "verH": 3567.28125,
   "idle": 0,
   "ptr": 0,
-  "scroll": 860
+  "scroll": 862
  },
  {
   "id": "financing2",
@@ -201,7 +201,7 @@
   "verH": 1258.59375,
   "idle": 0,
   "ptr": 0,
-  "scroll": 98
+  "scroll": 96
  },
  {
   "id": "reviews2",
@@ -213,11 +213,11 @@
   "verH": 872.375,
   "idle": 0,
   "ptr": 0,
-  "scroll": 137
+  "scroll": 140
  },
  {
   "id": "towns2",
-  "words": 213,
+  "words": 17,
   "share": 0.42,
   "ctrls": 0,
   "found": true,
@@ -237,7 +237,7 @@
   "verH": 666.890625,
   "idle": 0,
   "ptr": 11,
-  "scroll": 143
+  "scroll": 146
  },
  {
   "id": "hero3",
@@ -260,8 +260,8 @@
   "verTop": 1126.390625,
   "verH": 915.1875,
   "idle": 0,
-  "ptr": 306,
-  "scroll": 113
+  "ptr": 308,
+  "scroll": 116
  },
  {
   "id": "services3",
@@ -272,8 +272,8 @@
   "verTop": 2414.359375,
   "verH": 648.984375,
   "idle": 0,
-  "ptr": 4322,
-  "scroll": 631
+  "ptr": 4321,
+  "scroll": 510
  },
  {
   "id": "ba3",
@@ -283,9 +283,9 @@
   "found": true,
   "verTop": 3452.125,
   "verH": 588.6875,
-  "idle": 0,
-  "ptr": 0,
-  "scroll": 52
+  "idle": 15,
+  "ptr": 169,
+  "scroll": 65
  },
  {
   "id": "process3",
@@ -297,7 +297,7 @@
   "verH": 779.671875,
   "idle": 0,
   "ptr": 0,
-  "scroll": 122
+  "scroll": 112
  },
  {
   "id": "financing3",
@@ -309,7 +309,7 @@
   "verH": 573.28125,
   "idle": 0,
   "ptr": 0,
-  "scroll": 96
+  "scroll": 94
  },
  {
   "id": "work3",
@@ -319,9 +319,9 @@
   "found": true,
   "verTop": 6540.109375,
   "verH": 920.375,
-  "idle": 650,
-  "ptr": 223,
-  "scroll": 1195
+  "idle": 624,
+  "ptr": 255,
+  "scroll": 1230
  },
  {
   "id": "reviews3",
@@ -333,11 +333,11 @@
   "verH": 560,
   "idle": 0,
   "ptr": 0,
-  "scroll": 144
+  "scroll": 142
  },
  {
   "id": "towns3",
-  "words": 212,
+  "words": 16,
   "share": 0.38,
   "ctrls": 0,
   "found": true,
@@ -345,7 +345,7 @@
   "verH": 662.078125,
   "idle": 0,
   "ptr": 0,
-  "scroll": 147
+  "scroll": 145
  },
  {
   "id": "consult3",
@@ -355,8 +355,8 @@
   "found": true,
   "verTop": 9816.90625,
   "verH": 883.390625,
-  "idle": 30,
-  "ptr": 193,
-  "scroll": 114
+  "idle": 33,
+  "ptr": 188,
+  "scroll": 115
  }
 ]

@@ -32,7 +32,8 @@ const SECS = ['hero', 'proof', 'services', 'ba', 'process', 'financing', 'work',
       const id = s + v, sel = CENTRE[id];
       const base = await p.evaluate(([s, sel]) => {
         const ver = document.querySelector('#' + s + ' .ver:not([hidden])'), c = ver.querySelector(sel);
-        const skip = n => n.closest('h1,h2,h3,button,a,label,svg,canvas,.btn,input,textarea,select,[aria-hidden="true"]') || (c && c.contains(n));
+        // rendered prose only: closed accordions, visually-hidden text and anything not laid out do not count
+        const skip = n => n.closest('h1,h2,h3,button,a,label,svg,canvas,.btn,input,textarea,select,[aria-hidden="true"],.sr-only,summary') || (c && c.contains(n)) || (n.closest('details') && !n.closest('details').open) || !n.getClientRects().length;
         const w = document.createTreeWalker(ver, NodeFilter.SHOW_TEXT);
         let words = 0, n;
         while ((n = w.nextNode())) { const el = n.parentElement; if (skip(el)) continue; words += (n.nodeValue.trim().match(/\S+/g) || []).length; }

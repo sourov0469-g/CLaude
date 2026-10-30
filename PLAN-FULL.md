@@ -43,3 +43,19 @@ Animated tip at the exact pointer (nib that leans into motion; becomes a nail po
 ## 6. Weight
 
 Cap 3,874,583 bytes (b07f0b8). Quotes removed, unused reactions deleted; if code growth pushes past the cap, the WebP store is re-encoded (quality step) until under. Report code and media separately.
+
+## v2 (2026-10-30) — plan for the REMAINING work only
+
+Phase 1 result (PROGRESS.md "v2 Phase 1"): rebuild Proof V1, Process V1–V3, Towns V1; close Hero V1 flag 2; re-run the interaction table on the final build.
+
+| Version | Reference | Mechanism + parameters | Adaptation | NOT A DOCUMENT centrepiece |
+|---|---|---|---|---|
+| Hero V1 (flag 2) | ⟦S1362⟧ technical-wireframe-info-layout | outlined linework object, annotation pills on connector lines appearing in stages, calm tempo | the line layer inside the X-ray slit becomes the ⟦S1362⟧ object: the room's traced lines + pills naming only what the project title states; pills appear as the slit reaches them | the slit itself (unchanged) |
+| Proof V1 | ⟦S0452⟧ Matter.js | Engine/Runner/Bodies/Composite/Mouse/MouseConstraint; gravity default; static ground; restitution .08, friction .8 | five credential materials drop onto a deck on entry; grab/throw (desktop), tap-bump (touch); Restack; RM = settled pile | the pile of credential blocks |
+| Process V1 | [BANK] Q54 curved path | path through measured anchors; multipliers .8/.3/.6/.2; caps 800/80; scrub true; ease none | anchors = 8 signposts on a site plan; the truck drives the road; signposts carry name + week; description on demand | the site plan + truck |
+| Process V2 | ⟦S1340⟧ building builds itself | rising clip plane between stage heights; captions; percentage; scrubbable | 2D SVG house section; finished below, drawing above; auto-run once in view (~.5s/stage), drag the line or pick a pip; not pinned | the self-building house |
+| Process V3 | ⟦S1443⟧ gesture patterns + Elbaz week-ranged stages | 10–15px activation, direction lock, threshold/rubber-band, button alternative | deck of 8 stage cards with drawn vignettes; swipe/drag/keys/buttons deal the next | the swipe deck |
+| Towns V1 | [BANK] Q576 For Living hover→tap map | region map answering hover/tap | 104 survey marks; name on hover/focus/tap; county zoom + count; no list | the survey map |
+
+Weight: Matter.js 0.20.0 (~80 KB) is the only new library; the cap (3,865,525 B) is held by re-encoding the WebP store one quality step and dropping code no longer used by the rebuilt versions. No other new dependency (swipe and line-drag are hand-written pointer handlers).
+Trick register additions: physics pile (Proof V1), signposted route (Process V1, keeps MotionPath), rising build line (Process V2), swipe deck (Process V3), hover-flag map (Towns V1). None repeats another owner in PLAN-FULL §2.
