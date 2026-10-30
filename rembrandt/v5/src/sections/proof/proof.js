@@ -240,7 +240,7 @@ function seal(root, c) {
   const chars = [...SEAL].map(ch => { const s = document.createElement('span'); s.className = 'pv5-ch' + (ch === '\u2605' ? ' is-star' : ''); s.textContent = ch; ring.append(s); return s; });
   const lay = () => {
     const size = seal.getBoundingClientRect().width; if (!size) return;
-    const fs = Math.max(10, Math.min(19, size * 0.034)); ring.style.setProperty('--fs', fs + 'px');
+    const fs = Math.max(12, Math.min(19, size * 0.034)); // R5 QA: 12px floor (WEB-SKILLS §3.2) ring.style.setProperty('--fs', fs + 'px');
     const ws = chars.map(s => s.offsetWidth || fs * 0.5) /* layout width: a rotated span's bounding box is not its width */, total = ws.reduce((a, b) => a + b, 0);
     let acc = 0; chars.forEach((s, i) => { const a = ((acc + ws[i] / 2) / total) * 360; acc += ws[i]; s.style.transform = `translateX(-50%) rotate(${a.toFixed(2)}deg)`; s.style.height = (size / 2 - size * 0.035) + 'px'; s.style.top = (size * 0.035) + 'px'; });
   };

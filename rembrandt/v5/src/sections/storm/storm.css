@@ -28,7 +28,7 @@
 .st2-head,.st2-year,.st2-src,.st2-act{max-width:1180px;margin-inline:auto}
 .st2-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:end}
 .st2-fig{display:flex;align-items:baseline;gap:14px;max-width:22ch;font-size:var(--t-lead);line-height:1.3;color:var(--on-blue-muted)}
-.st2-big{font-size:clamp(4rem,2rem + 6vw,7rem);font-weight:800;line-height:.85;letter-spacing:-.02em;color:var(--sun);font-family:var(--f-head)}
+.st2-big{font-size:clamp(4rem,2rem + 6vw,7rem);font-weight:800;line-height:.85;letter-spacing:-.02em;color:var(--a700);font-family:var(--f-head)}
 .st2-year{margin-top:clamp(32px,4vw,56px);overflow-x:auto}
 .st2-t{width:100%;min-width:640px;border-collapse:separate;border-spacing:4px 6px;table-layout:fixed}
 .st2-t thead th{padding:0 0 6px;font-size:var(--t-label);font-weight:600;color:var(--on-blue-muted);text-align:center}
@@ -40,7 +40,7 @@
 .st2-r--freeze td.on{background:var(--a200)}
 .st2-r--ice td.on{background:repeating-linear-gradient(135deg,var(--paper) 0 6px,var(--a300) 6px 12px)}
 .st2-t td.is-now,.st2-t thead th.is-now{box-shadow:inset 0 0 0 2px var(--paper)}
-.st2-now-tag{display:block;font-size:.75rem;font-weight:700;color:var(--paper)}
+.st2-now-tag{display:block;font-size:.75rem;font-weight:700;color:var(--black)}
 .st2-src{margin-top:14px;font-size:var(--t-small);color:var(--on-blue-muted)}
 .st2-act{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin-top:clamp(28px,4vw,48px);padding-top:24px;border-top:1px solid rgb(20 20 20 / .2)}
 .st2-act p{max-width:52ch;font-size:var(--t-body);line-height:1.5}
@@ -54,7 +54,7 @@
 .st3-strike path{fill:none;stroke:var(--sun);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .st3-true{font-size:var(--t-h2);font-weight:700;line-height:1.1;letter-spacing:-.01em;max-width:22ch;font-family:var(--f-head)}
 .st3-do{font-size:var(--t-lead);line-height:1.45;max-width:48ch;color:var(--ink)}
-.st3-true em{font-style:normal;color:var(--sun)}
+.st3-true em{font-style:normal;color:var(--a700)}
 .st3-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
 .st3-act p{color:var(--on-blue-muted)}
 
@@ -66,7 +66,7 @@
 .st4-mat{padding:12px;border-radius:6px;background:var(--paper);box-shadow:0 24px 48px -24px rgb(16 24 40 / 0.39);transition:translate .2s var(--ease-x)}
 .st4-mat img{display:block;width:100%;height:auto;border-radius:2px}
 .st4-ex figcaption{font-size:var(--t-body);line-height:1.45;color:var(--on-blue-muted)}
-.st4-ex figcaption b{color:var(--paper)}
+.st4-ex figcaption b{color:var(--a700)}
 @media (hover:hover) and (pointer:fine){.st4-ex:hover .st4-mat{translate:0 -4px}}
 .st4-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:clamp(28px,4vw,48px)}
 .st4-act p{color:var(--on-blue-muted)}

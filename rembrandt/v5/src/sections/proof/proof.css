@@ -37,7 +37,7 @@
 .pv2-src{grid-area:src;font-size:var(--t-label);font-weight:600;letter-spacing:0;color:var(--on-dark-2);margin-bottom:8px}
 .pv2-fig{grid-area:fig;font-size:clamp(2.25rem,4vw,3.5rem);font-weight:700;line-height:1;letter-spacing:-.015em;font-family:var(--f-head)}
 .pv2-what{grid-area:what;font-size:1.0625rem;color:var(--on-dark-2)}
-.pv2-check{grid-area:check;position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;color:var(--sun);text-decoration:none}
+.pv2-check{grid-area:check;position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700;color:var(--a700);text-decoration:none}
 .pv2-check svg{width:18px;height:18px;flex:none;transition:translate 200ms var(--ease-x)}
 @media (hover:hover) and (pointer:fine){.pv2-check:hover svg{translate:3px 0}}
 @media (prefers-reduced-motion:no-preference){
@@ -86,13 +86,13 @@
 .pv3-strip{display:flex;flex-direction:column;transform:translateY(-1.2em);will-change:transform}
 .pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:var(--cream);background:linear-gradient(var(--shingle) 0 22%,color-mix(in srgb,var(--shingle) 86%,var(--paper)) 26%,var(--shingle) 100%);box-shadow:inset 0 -.04em 0 oklch(0 0 0 / .45),inset .04em 0 0 oklch(0 0 0 / .25)}
 .pv3-mark{display:inline-grid;place-items:center;height:1.2em;padding:0 .04em;color:var(--sun)}
-.pv3-word{position:relative;margin:0;padding:.22em .12em 0;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1.2;letter-spacing:-.005em;color:var(--cream);font-family:var(--f-head)}
+.pv3-word{position:relative;margin:0;padding:.22em .12em 0;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1.2;letter-spacing:-.005em;color:var(--ink);font-family:var(--f-head)}
 .pv3-lab{display:flex;align-items:center;gap:8px;margin:0;font-size:1.0625rem;font-weight:600;color:var(--on-dark-2)}
 .pv3-stat--xl .pv3-lab{font-size:1.25rem;color:var(--ink)}
 .pv3-star{width:1em;height:1em;fill:var(--sun)}
 .pv3-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:16px 32px;padding-top:24px;border-top:1px solid rgb(20 20 20 / .14)}
 /* R15: five stars fly in along the link (hover); they settle with a pop (press) */
-.pv3-google{position:relative;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--sun);text-decoration:underline;text-decoration-color:oklch(0.85 0.15 80 / .45);text-underline-offset:6px}
+.pv3-google{position:relative;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--a700);text-decoration:underline;text-decoration-color:oklch(0.85 0.15 80 / .45);text-underline-offset:6px}
 .pv3-stars{left:0;bottom:calc(100% - 4px);width:110px;height:16px}
 .pv3-st{fill:var(--sun);opacity:0;transform:translateX(-28px);transition:opacity .15s var(--ease-x) calc(var(--i) * 30ms),transform .22s var(--ease-x) calc(var(--i) * 30ms)}
 @media (hover:hover) and (pointer:fine){.pv3-google:hover .pv3-st{opacity:1;transform:none}}
@@ -183,8 +183,8 @@
 .pv5-list li{display:grid;gap:2px;padding:16px 0;border-top:1px solid rgb(20 20 20 / .16)}
 .pv5-list li:last-child{border-bottom:1px solid rgb(20 20 20 / .16)}
 .pv5-list b{font-size:var(--t-lead);font-weight:700}
-.pv5-check{justify-self:start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--sun);text-decoration:underline;text-decoration-color:oklch(0.85 0.15 80 / .45);text-underline-offset:5px;transition:text-decoration-color 200ms var(--ease-x)}
-@media (hover:hover) and (pointer:fine){.pv5-check:hover{text-decoration-color:var(--sun)}}
+.pv5-check{justify-self:start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--a700);text-decoration:underline;text-decoration-color:oklch(0.85 0.15 80 / .45);text-underline-offset:5px;transition:text-decoration-color 200ms var(--ease-x)}
+@media (hover:hover) and (pointer:fine){.pv5-check:hover{text-decoration-color:var(--a700)}}
 .pv5-hint{display:none;margin-top:16px;font-size:var(--t-label);font-weight:600;color:var(--on-dark-2)}
 @media (hover:hover) and (pointer:fine){.pv5-hint{display:block}}
 @media (max-width:899px){.pv5-in{grid-template-columns:1fr}.pv5-seal{width:min(100%,420px)}}
