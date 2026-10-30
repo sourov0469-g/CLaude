@@ -218,3 +218,8 @@ html.has-buddy select { cursor: default !important; }
 .dv-bar { fill: none; stroke: var(--a-200); stroke-width: 2; }
 .dv-rebar { fill: var(--a-200); }
 .dv-sh { fill: var(--muted); stroke: var(--bg); stroke-width: 1.5; }
+
+/* new dividers (owner master directive) */
+.dv-r3 { fill: var(--a-100); } .dv-r2 { fill: var(--a-200); } .dv-r1 { fill: var(--paper); stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
+.dv-lv { fill: var(--a-500); } .dv-vial { fill: var(--white); stroke: var(--ink); stroke-width: 1.4; } .dv-mk { stroke: var(--ink); stroke-width: 1.4; } .dv-bub { fill: var(--a-200); stroke: var(--ink); stroke-width: 1.2; }
+.dv { background: transparent; }

@@ -69,10 +69,52 @@
     /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
     1: { init: function (root, k) {
       navOn(k, 'ground');
-      var win = root.querySelector('.hp__win'), img = win.querySelector('img');
+      var win = root.querySelector('.hp__win'), img = win.querySelector('img'), name = root.querySelector('.hp__name');
       var tl = entrance(k, root);
-      if (tl) tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
-        .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0);
+      if (tl) {
+        tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
+          .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0)
+          .fromTo(root.querySelector('.hp__roof path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: HOUSE }, .12)
+          .fromTo(root.querySelector('.hp__sun'), { scale: .4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: HOUSE, clearProps: 'transform,opacity,visibility' }, .2)
+          .fromTo(root.querySelectorAll('.hp__palm path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .04 }, .25)
+          .fromTo(root.querySelector('.hp__dim path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .4, ease: HOUSE }, .4);
+      }
+      // [Phase 4] the Finish picker: each swatch is a crop of a real Elbaz kitchen; picking one puts that kitchen in the house
+      var FIN = [
+        { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
+        { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
+        { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
+        { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
+        { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
+        { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
+      ];
+      var P = (window.__DATA || {}).projects || [], title = function (key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; };
+      var box = root.querySelector('.hp__sw'), cur = 0;
+      box.innerHTML = FIN.map(function (f, i) {
+        return '<button type="button" role="radio" class="hp__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" data-rx="native:finish-swatch" style="background-image:url(' + EZ.img(f.d || f.k) + ');background-position:' + f.at + '"></button>';
+      }).join('');
+      var sws = Array.prototype.slice.call(box.children);
+      k.add(function () { box.innerHTML = ''; img.src = EZ.img('k-navy-shaker-xl'); img.style.objectPosition = ''; name.textContent = title('k-navy-shaker'); });
+      function pick(i, focus) {
+        if (i === cur) return;
+        cur = i; var f = FIN[i];
+        sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
+        if (focus) sws[i].focus();
+        name.textContent = title(f.d || f.k);
+        img.alt = title(f.d || f.k) + ', built by Elbaz';
+        EZ.pickedRoom = 'Kitchen';
+        var swap = function () { img.src = EZ.img(f.k); img.style.objectPosition = f.pos; };
+        if (!k.motion) { swap(); return; }
+        gsap.to(img, { opacity: 0, duration: .14, ease: 'power1.in', overwrite: true, onComplete: function () { swap(); gsap.to(img, { opacity: 1, duration: .26, ease: HOUSE }); } });
+        gsap.fromTo(sws[i], { scale: .86 }, { scale: 1, duration: .3, ease: 'back.out(2.4)' });
+      }
+      sws.forEach(function (s, i) {
+        k.on(s, 'click', function () { pick(i); });
+        k.on(s, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
+        });
+      });
     } },
 
     /* 2 · Pick your room [Anatomy §1 F1 + F3]: the entry is a choice; the photo and the CTA answer it */

@@ -343,6 +343,36 @@
           .from(svg.querySelectorAll('.dv-bolt'), { scale: 0.4, opacity: 0, transformOrigin: '50% 50%', duration: .3, stagger: .015, ease: 'back.out(3)' }, .5);
       } };
   };
+  // 3 services -> before/after (OWNER MASTER DIRECTIVE, replaces barrier tape): a layered band of South Florida rooftops,
+  // three depths in accent tints, the front row in orange line work with the logo's gable; rises on scroll
+  DIV.roofs = function (w) {
+    function row(y, step, hmin, hmax, seed) {
+      var d = 'M0 ' + y, x = 0, i = 0;
+      while (x < w) { var bw = step * (.7 + ((i * 37 + seed) % 7) / 10), h = hmin + ((i * 53 + seed) % 5) / 4 * (hmax - hmin);
+        var flat = (i + seed) % 3 === 0;
+        d += 'L' + f(x) + ' ' + f(y - h * .55) + (flat ? 'L' + f(x + bw) + ' ' + f(y - h * .55) : 'L' + f(x + bw / 2) + ' ' + f(y - h) + 'L' + f(x + bw) + ' ' + f(y - h * .55)) + 'L' + f(x + bw) + ' ' + y;
+        x += bw + 6; i++; }
+      return d + 'L' + w + ' ' + y + 'V' + (y + 40) + 'H0Z';
+    }
+    return { h: 120, svg: '<path class="dv-r3" d="' + row(104, 120, 40, 70, 3) + '"/><path class="dv-r2" d="' + row(110, 96, 30, 56, 11) + '"/><path class="dv-r1" d="' + row(118, 150, 26, 48, 5) + '"/>',
+      anim: function (svg, st) {
+        st.scrub = .8; st.start = 'top 98%'; st.end = 'bottom 55%';
+        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-r3'), { y: 40 }, { y: 0, ease: 'none' }, 0)
+          .fromTo(svg.querySelector('.dv-r2'), { y: 26 }, { y: 0, ease: 'none' }, 0).fromTo(svg.querySelector('.dv-r1'), { y: 14 }, { y: 0, ease: 'none' }, 0);
+      } };
+  };
+  // 9 towns -> consult (replaces the brick course): a spirit level across the page; its bubble drifts in and settles level
+  DIV.level = function (w) {
+    var L = Math.min(w - 40, 900), x0 = (w - L) / 2, y = 40;
+    return { h: 80, svg: '<rect class="dv-lv" x="' + f(x0) + '" y="' + (y - 14) + '" width="' + f(L) + '" height="28" rx="6"/>' +
+      '<rect class="dv-vial" x="' + f(w / 2 - 46) + '" y="' + (y - 8) + '" width="92" height="16" rx="8"/><path class="dv-mk" d="M' + f(w / 2 - 14) + ' ' + (y - 8) + 'v16M' + f(w / 2 + 14) + ' ' + (y - 8) + 'v16"/>' +
+      '<ellipse class="dv-bub" cx="' + f(w / 2) + '" cy="' + y + '" rx="10" ry="5"/><path class="dv-l" d="M0 ' + y + 'H' + f(x0 - 8) + 'M' + f(x0 + L + 8) + ' ' + y + 'H' + w + '"/>',
+      anim: function (svg, st) {
+        st.scrub = .6; st.start = 'top 95%'; st.end = 'bottom 50%';
+        return gsap.fromTo(svg.querySelector('.dv-bub'), { x: 34 }, { x: 0, ease: 'none', scrollTrigger: st });
+      } };
+  };
+  // (retired) barrier tape: kept, unmounted
   // 3 services -> before/after: barrier tape sags, then pulls taut (stripes only: no lettering bent round a curve)
   DIV.tape = function (w) {
     var d = function (sag) { return 'M-20 30 Q' + f(w / 2) + ' ' + f(30 + sag) + ' ' + (w + 20) + ' 30'; };
@@ -441,9 +471,9 @@
       } };
   };
 
-  // [OWNER DESIGN NOTE + AUDIT-01 C.9] one divider weight, present in the static first frame: a CSS hairline between sections.
-  // The ten themed animated bands (hazard tape and brick among them) are retired; their drawings stay in this file, unmounted.
-  var ORDER = [];
+  // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
+  // (AUDIT-01 C.9); rooftops and the spirit level take their places.
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'level'], ['consult', 'footing']];
   var dividers = [];
 
   function drawDivider(d) {

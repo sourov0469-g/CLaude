@@ -288,7 +288,12 @@ input, textarea { caret-color: var(--accent); }
 .t-head { line-height: 1.08; }
 .ver[data-v^="b"] .t-display, .ver[data-v^="b"] .t-figure { letter-spacing: .005em; line-height: .9; }
 .ver[data-v^="b"] .t-head { letter-spacing: .01em; line-height: .95; }
-.sec + .sec, .sec + .dv + .sec { box-shadow: inset 0 1px 0 rgba(232, 228, 220, .1); }
+
+
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
+.eyebrow__roof { width: 20px; height: 12px; flex: none; overflow: visible; }
+.eyebrow__roof path { fill: none; stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
+.hh__a, .t-head .acc { color: var(--a-500); }
 
 
 
@@ -818,6 +823,11 @@ html.has-buddy select { cursor: default !important; }
 .dv-sh { fill: var(--muted); stroke: var(--bg); stroke-width: 1.5; }
 
 
+.dv-r3 { fill: var(--a-100); } .dv-r2 { fill: var(--a-200); } .dv-r1 { fill: var(--paper); stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
+.dv-lv { fill: var(--a-500); } .dv-vial { fill: var(--white); stroke: var(--ink); stroke-width: 1.4; } .dv-mk { stroke: var(--ink); stroke-width: 1.4; } .dv-bub { fill: var(--a-200); stroke: var(--ink); stroke-width: 1.2; }
+.dv { background: transparent; }
+
+
 
 #hero { padding: 0; }
 .plate { position: absolute; inset: 0; }
@@ -1057,15 +1067,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .hlic { margin: 0; font: 500 .8125rem/1.3 var(--f-text); color: var(--muted); }   
 
 
-.hp__stage { height: 100svh; min-height: 600px; max-height: 1100px; display: grid; grid-template-rows: minmax(0, 1fr) auto; padding-top: calc(var(--nav-h) + 4px); background: var(--bg); }
-.hp__band { position: relative; margin-inline: var(--margin); overflow: hidden; background: var(--white); }
-.hp__win { position: absolute; inset: 0; overflow: hidden; }
-.hp__win > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
-.hp__copy { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; padding-top: clamp(18px, 3vh, 32px); padding-bottom: clamp(20px, 3.4vh, 40px); }
-.hp__copy .hh { grid-column: 1 / span 7; }
-.hp__stack { grid-column: 8 / span 5; display: grid; gap: 16px; justify-items: start; padding-top: .35em; }
-.hp__stack .hero__acts { gap: var(--s3) var(--s6); }
-.hp__stack .hproof { margin-top: -4px; }
 
 
 .hk__grid { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
@@ -1130,8 +1131,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 
 
 @media (max-width: 1023px) {
-  .hp__copy .hh, .hp__stack { grid-column: 1 / -1; }
-  .hp__stack { padding-top: 0; }
   .hk__copy, .hk__photo, .hs__copy, .hs__rig, .ho__copy, .ho__house { grid-column: 1 / -1; }
   .hk__photo, .hs__rig, .ho__house { margin-top: 24px; }
   .hk__photo { aspect-ratio: 3 / 2; max-height: none; }
@@ -1139,10 +1138,6 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 @media (max-width: 767px) {
   .hh { font-size: clamp(2.5rem, 1.2rem + 6vw, 2.875rem); }
   .hlead { font-size: 1rem; }
-  .hp__stage { height: auto; min-height: 0; max-height: none; grid-template-rows: auto auto; padding-bottom: 80px; }
-  .hp__band { height: 240px; margin-inline: 0; }
-  .hp__copy { row-gap: 16px; padding-top: 16px; padding-bottom: 0; }
-  .hp__stack { gap: 12px; }
   
   .hk__grid, .hs__grid, .ho__grid { min-height: 0; padding-top: calc(var(--nav-h) + 16px); padding-bottom: 80px; align-items: start; }
   .hk__copy, .hs__copy, .ho__copy { gap: 12px; }
@@ -1154,6 +1149,48 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
   .ha__range { left: 0; right: 0; width: 100%; top: auto; bottom: 80px; height: 260px; }
   .ha__panel { position: relative; right: auto; bottom: auto; width: auto; padding: 18px var(--margin) 0; gap: 12px; }
   .ha__stage { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+}
+
+
+.hp__stage { min-height: 100svh; max-height: 1100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; padding-top: calc(var(--nav-h) + 24px); padding-bottom: 40px; }
+.hp__copy { grid-column: 1 / span 5; display: grid; gap: 18px; justify-items: start; position: relative; z-index: 2; }
+.hp__copy .hero__acts { gap: var(--s3) var(--s6); }
+.hh__a { color: var(--a-500); }
+.hp__art { grid-column: 6 / -1; position: relative; aspect-ratio: 10 / 9; max-height: calc(100svh - var(--nav-h) - 64px); justify-self: end; width: 100%; }
+.hp__sun { position: absolute; right: 2%; top: 4%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: var(--a-200); }
+.hp__band { position: absolute; left: 12%; right: 6%; top: 6%; bottom: 25%; overflow: hidden; background: var(--surface-2);
+  clip-path: polygon(0% 33%, 50% 0%, 100% 33%, 100% 100%, 0% 100%); }
+.hp__win { position: absolute; inset: 0; overflow: hidden; }
+.hp__win > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; transition: opacity 280ms var(--ease-out); }
+.hp__roof { position: absolute; left: 12%; right: 6%; top: 6%; bottom: 25%; width: 88% !important; height: 69% !important; overflow: visible; pointer-events: none; }
+.hp__roof path { fill: none; stroke: var(--a-500); stroke-width: 14px; stroke-linejoin: miter; stroke-linecap: butt; vector-effect: non-scaling-stroke; }
+.hp__palm { position: absolute; left: 0; bottom: 18%; width: 22%; height: auto; overflow: visible; z-index: 1; }
+.hp__palm path { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hp__palm .fronds path { fill: var(--a-100); }
+.hp__dim { position: absolute; left: 12%; right: 6%; bottom: 19%; height: 12px; }
+.hp__dim svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hp__dim path { fill: none; stroke: var(--ink); stroke-width: 1.4px; vector-effect: non-scaling-stroke; }
+.hp__name { position: absolute; left: 12%; right: 6%; bottom: calc(19% - 30px); margin: 0; text-align: center; font: 500 .875rem/1.3 var(--f-text); color: var(--ink); }
+.hp__name::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--a-500); vertical-align: 1px; }
+.hp__pick { position: absolute; left: 12%; right: 6%; bottom: 0; display: grid; gap: 8px; justify-items: center; }
+.hp__pick-l { margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
+.hp__sw { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.hp__s { width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; background-color: var(--surface-2); background-size: 1100%; background-repeat: no-repeat;
+  box-shadow: 0 0 0 2px var(--white), 0 0 0 3px var(--grey); transition: box-shadow 150ms ease-out; }
+.hp__s[aria-checked="true"] { box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--a-500); }
+.hp__s:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--ink); }
+@media (hover: hover) and (pointer: fine) { .hp__s:not([aria-checked="true"]):hover { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--a-300); } }
+@media (max-width: 1023px) {
+  .hp__stage { min-height: 0; max-height: none; grid-template-columns: 1fr; row-gap: 28px; padding-bottom: 88px; }
+  .hp__copy, .hp__art { grid-column: 1 / -1; }
+  .hp__art { max-height: none; aspect-ratio: 10 / 10.5; }
+}
+@media (max-width: 767px) {
+  .hp__copy { gap: 14px; }
+  .hp__art { aspect-ratio: 10 / 12; }
+  .hp__band { left: 8%; right: 2%; bottom: 30%; } .hp__roof { left: 8%; right: 2%; bottom: 30%; width: 90% !important; height: 64% !important; }
+  .hp__dim { left: 8%; right: 2%; bottom: 25%; } .hp__name { left: 4%; right: 0; bottom: calc(25% - 34px); font-size: .8125rem; }
+  .hp__pick { left: 0; right: 0; } .hp__s { width: 40px; height: 40px; }
 }
 
 
@@ -2657,21 +2694,31 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 
   
   <div class="ver hp" data-v="1">
-    <div class="hp__stage">
-      <div class="hp__band" data-buddy="image">
-        <div class="hp__win"><img data-img="k-navy-shaker-xl" width="2400" height="1601" fetchpriority="high" decoding="async"
-             alt="Navy blue Shaker kitchen with a quartz waterfall island, brass hardware and a brass-banded range hood, built by Elbaz"></div>
+    <div class="hp__stage wrap">
+      <div class="hp__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Design, permits and construction under one contract</p>
+        <h1 class="hh" id="hero-hd1"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="hero__acts">
+          <a class="btn hero__cta" href="#consult" data-rx="~rivet/zip/burst/r" data-buddy-sig="flinch"><span class="btn__label">Book a consultation</span></a>
+          <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+        </div>
+        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/drop/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
       </div>
-      <div class="hp__copy wrap">
-        <h1 class="hh" id="hero-hd1"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
-        <div class="hp__stack">
-          <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-          <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~rivet/zip/burst/r" data-buddy-sig="flinch"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-          <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/drop/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      <div class="hp__art">
+        <span class="hp__sun" aria-hidden="true"></span>
+        <svg class="hp__palm" viewBox="0 0 160 240" aria-hidden="true" focusable="false"><path class="trunk" d="M92 236 C88 190 84 150 74 112 C70 96 68 86 70 76"/><path class="trunk-r" d="M86 214 h10 M84 188 h10 M81 162 h10 M77 136 h9 M73 112 h8"/><g class="fronds"><path d="M70 76 C50 60 26 60 6 74 C26 66 48 70 70 76"/><path d="M70 76 C56 46 34 32 14 30 C34 40 52 56 70 76"/><path d="M70 76 C74 46 92 26 118 20 C98 34 82 52 70 76"/><path d="M70 76 C96 64 126 70 150 92 C124 80 98 76 70 76"/><path d="M70 76 C90 82 110 102 116 128 C102 106 88 90 70 76"/></g></svg>
+        <div class="hp__band" data-buddy="image">
+          <div class="hp__win"><img data-img="k-navy-shaker-xl" width="2400" height="1601" fetchpriority="high" decoding="async"
+               alt="Navy blue Shaker kitchen with a quartz waterfall island, brass hardware and a brass-banded range hood, built by Elbaz"></div>
+        </div>
+        <svg class="hp__roof" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M-5 33 L50 -3.6 L105 33"/></svg>
+        <div class="hp__dim" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none" focusable="false"><path d="M0.4 0 V12 M99.6 0 V12 M0.4 6 H99.6"/></svg></div>
+        <p class="hp__name" aria-live="polite">Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood</p>
+        <div class="hp__pick">
+          <p class="hp__pick-l" id="hp-pick-l">Pick a finish. Every swatch is a kitchen we built.</p>
+          <div class="hp__sw" role="radiogroup" aria-labelledby="hp-pick-l"></div>
         </div>
       </div>
     </div>
@@ -6360,6 +6407,36 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
           .from(svg.querySelectorAll('.dv-bolt'), { scale: 0.4, opacity: 0, transformOrigin: '50% 50%', duration: .3, stagger: .015, ease: 'back.out(3)' }, .5);
       } };
   };
+  // 3 services -> before/after (OWNER MASTER DIRECTIVE, replaces barrier tape): a layered band of South Florida rooftops,
+  // three depths in accent tints, the front row in orange line work with the logo's gable; rises on scroll
+  DIV.roofs = function (w) {
+    function row(y, step, hmin, hmax, seed) {
+      var d = 'M0 ' + y, x = 0, i = 0;
+      while (x < w) { var bw = step * (.7 + ((i * 37 + seed) % 7) / 10), h = hmin + ((i * 53 + seed) % 5) / 4 * (hmax - hmin);
+        var flat = (i + seed) % 3 === 0;
+        d += 'L' + f(x) + ' ' + f(y - h * .55) + (flat ? 'L' + f(x + bw) + ' ' + f(y - h * .55) : 'L' + f(x + bw / 2) + ' ' + f(y - h) + 'L' + f(x + bw) + ' ' + f(y - h * .55)) + 'L' + f(x + bw) + ' ' + y;
+        x += bw + 6; i++; }
+      return d + 'L' + w + ' ' + y + 'V' + (y + 40) + 'H0Z';
+    }
+    return { h: 120, svg: '<path class="dv-r3" d="' + row(104, 120, 40, 70, 3) + '"/><path class="dv-r2" d="' + row(110, 96, 30, 56, 11) + '"/><path class="dv-r1" d="' + row(118, 150, 26, 48, 5) + '"/>',
+      anim: function (svg, st) {
+        st.scrub = .8; st.start = 'top 98%'; st.end = 'bottom 55%';
+        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-r3'), { y: 40 }, { y: 0, ease: 'none' }, 0)
+          .fromTo(svg.querySelector('.dv-r2'), { y: 26 }, { y: 0, ease: 'none' }, 0).fromTo(svg.querySelector('.dv-r1'), { y: 14 }, { y: 0, ease: 'none' }, 0);
+      } };
+  };
+  // 9 towns -> consult (replaces the brick course): a spirit level across the page; its bubble drifts in and settles level
+  DIV.level = function (w) {
+    var L = Math.min(w - 40, 900), x0 = (w - L) / 2, y = 40;
+    return { h: 80, svg: '<rect class="dv-lv" x="' + f(x0) + '" y="' + (y - 14) + '" width="' + f(L) + '" height="28" rx="6"/>' +
+      '<rect class="dv-vial" x="' + f(w / 2 - 46) + '" y="' + (y - 8) + '" width="92" height="16" rx="8"/><path class="dv-mk" d="M' + f(w / 2 - 14) + ' ' + (y - 8) + 'v16M' + f(w / 2 + 14) + ' ' + (y - 8) + 'v16"/>' +
+      '<ellipse class="dv-bub" cx="' + f(w / 2) + '" cy="' + y + '" rx="10" ry="5"/><path class="dv-l" d="M0 ' + y + 'H' + f(x0 - 8) + 'M' + f(x0 + L + 8) + ' ' + y + 'H' + w + '"/>',
+      anim: function (svg, st) {
+        st.scrub = .6; st.start = 'top 95%'; st.end = 'bottom 50%';
+        return gsap.fromTo(svg.querySelector('.dv-bub'), { x: 34 }, { x: 0, ease: 'none', scrollTrigger: st });
+      } };
+  };
+  // (retired) barrier tape: kept, unmounted
   // 3 services -> before/after: barrier tape sags, then pulls taut (stripes only: no lettering bent round a curve)
   DIV.tape = function (w) {
     var d = function (sag) { return 'M-20 30 Q' + f(w / 2) + ' ' + f(30 + sag) + ' ' + (w + 20) + ' 30'; };
@@ -6458,9 +6535,9 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
       } };
   };
 
-  // [OWNER DESIGN NOTE + AUDIT-01 C.9] one divider weight, present in the static first frame: a CSS hairline between sections.
-  // The ten themed animated bands (hazard tape and brick among them) are retired; their drawings stay in this file, unmounted.
-  var ORDER = [];
+  // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
+  // (AUDIT-01 C.9); rooftops and the spirit level take their places.
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'level'], ['consult', 'footing']];
   var dividers = [];
 
   function drawDivider(d) {
@@ -6574,10 +6651,52 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
     /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
     1: { init: function (root, k) {
       navOn(k, 'ground');
-      var win = root.querySelector('.hp__win'), img = win.querySelector('img');
+      var win = root.querySelector('.hp__win'), img = win.querySelector('img'), name = root.querySelector('.hp__name');
       var tl = entrance(k, root);
-      if (tl) tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
-        .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0);
+      if (tl) {
+        tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
+          .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0)
+          .fromTo(root.querySelector('.hp__roof path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: HOUSE }, .12)
+          .fromTo(root.querySelector('.hp__sun'), { scale: .4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: HOUSE, clearProps: 'transform,opacity,visibility' }, .2)
+          .fromTo(root.querySelectorAll('.hp__palm path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .04 }, .25)
+          .fromTo(root.querySelector('.hp__dim path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .4, ease: HOUSE }, .4);
+      }
+      // [Phase 4] the Finish picker: each swatch is a crop of a real Elbaz kitchen; picking one puts that kitchen in the house
+      var FIN = [
+        { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
+        { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
+        { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
+        { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
+        { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
+        { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
+      ];
+      var P = (window.__DATA || {}).projects || [], title = function (key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; };
+      var box = root.querySelector('.hp__sw'), cur = 0;
+      box.innerHTML = FIN.map(function (f, i) {
+        return '<button type="button" role="radio" class="hp__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" data-rx="native:finish-swatch" style="background-image:url(' + EZ.img(f.d || f.k) + ');background-position:' + f.at + '"></button>';
+      }).join('');
+      var sws = Array.prototype.slice.call(box.children);
+      k.add(function () { box.innerHTML = ''; img.src = EZ.img('k-navy-shaker-xl'); img.style.objectPosition = ''; name.textContent = title('k-navy-shaker'); });
+      function pick(i, focus) {
+        if (i === cur) return;
+        cur = i; var f = FIN[i];
+        sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
+        if (focus) sws[i].focus();
+        name.textContent = title(f.d || f.k);
+        img.alt = title(f.d || f.k) + ', built by Elbaz';
+        EZ.pickedRoom = 'Kitchen';
+        var swap = function () { img.src = EZ.img(f.k); img.style.objectPosition = f.pos; };
+        if (!k.motion) { swap(); return; }
+        gsap.to(img, { opacity: 0, duration: .14, ease: 'power1.in', overwrite: true, onComplete: function () { swap(); gsap.to(img, { opacity: 1, duration: .26, ease: HOUSE }); } });
+        gsap.fromTo(sws[i], { scale: .86 }, { scale: 1, duration: .3, ease: 'back.out(2.4)' });
+      }
+      sws.forEach(function (s, i) {
+        k.on(s, 'click', function () { pick(i); });
+        k.on(s, 'keydown', function (e) {
+          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+          if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
+        });
+      });
     } },
 
     /* 2 · Pick your room [Anatomy §1 F1 + F3]: the entry is a choice; the photo and the CTA answer it */
