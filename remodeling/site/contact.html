@@ -843,7 +843,602 @@ html.has-buddy select { cursor: default !important; }
 .dv { background: transparent; }
 
 
+.cform { padding-top: calc(var(--nav-h) + clamp(28px, 4vw, 56px)); }   
+.fm__h { font-size: clamp(2.25rem, 1.3rem + 3vw, 4.25rem); }
+.fm__lead { color: var(--muted); }
 
+
+.c-form { display: grid; gap: 18px; }
+.c-f { position: relative; padding-top: 18px; }
+.c-f input, .c-f textarea { width: 100%; padding: 8px 0; background: transparent; border: 0; border-bottom: 1.5px solid currentColor; border-radius: 0; color: inherit; font: 400 1.0625rem/1.4 var(--f-text); outline: none; resize: vertical; }
+.c-f label { position: absolute; left: 0; top: 26px; font: 500 1rem/1 var(--f-text); color: var(--ink-2); pointer-events: none; transform-origin: 0 0; transition: transform 200ms var(--ease-out); }
+.c-f input:focus + label, .c-f input:not(:placeholder-shown) + label, .c-f textarea:focus + label, .c-f textarea:not(:placeholder-shown) + label { transform: translateY(-24px) scale(.8); color: var(--ink); }
+.c-f::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; background: var(--a-500); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--ease-out); }
+.c-f:focus-within::after { transform: scaleX(1); }
+.c-err { display: block; margin-top: 6px; font: 600 .8125rem/1.3 var(--f-text); color: var(--err); }
+.c-consent { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font: 400 .875rem/1.45 var(--f-text); cursor: pointer; }
+.c-consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--a-500); }
+.c-note { margin: 0; font: 400 .8125rem/1.45 var(--f-text); color: var(--ink-2); }
+.c-done { margin: 0; padding: 14px 16px; background: var(--a-100); font: 400 .9375rem/1.5 var(--f-text); color: var(--ink); }
+.fm-facts { margin: 0; display: grid; gap: 12px; }
+.fm-facts div { display: grid; grid-template-columns: 5rem 1fr; gap: 12px; align-items: baseline; }
+.fm-facts dt { font: 600 .9375rem/1.2 var(--f-display); color: var(--a-700); }
+.fm-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font: 400 1rem/1.45 var(--f-text); color: var(--ink); }
+.fm-proof { display: flex; flex-wrap: wrap; column-gap: 18px; row-gap: 2px; font: 500 .875rem/1.5 var(--f-text); color: var(--ink-2); }
+.fm-proof p { margin: 0; }
+.fm-proof .nums { font-weight: 600; color: var(--ink); }
+.fm-proof__star { color: var(--a-700); }
+.fm-how { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border: 0; }
+.fm-how legend { width: 100%; margin-bottom: 8px; padding: 0; font: 600 .875rem/1.3 var(--f-text); }
+.fm-how label { position: relative; cursor: pointer; }
+.fm-how input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.fm-how span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); font: 600 .9375rem/1 var(--f-text); }
+.fm-how input:checked + span { background: var(--a-500); }
+.fm-how input:focus-visible + span { outline: 3px solid var(--a-700); outline-offset: 2px; }
+
+
+.fm1__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 88px); align-items: start; }
+.fm1__side { display: grid; gap: var(--s5); justify-items: start; position: sticky; top: calc(var(--nav-h) + 24px); }
+.fm1__sheet { padding: clamp(22px, 3vw, 44px); background: var(--white); box-shadow: inset 0 6px 0 var(--a-500), inset 0 0 0 1.5px var(--line-soft), 14px 14px 0 var(--a-100); }
+.fm1__title { margin: 0; padding-bottom: 10px; box-shadow: inset 0 -2px 0 var(--ink); font: 600 1.25rem/1.2 var(--f-display); }
+.fm1__two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+.fm1__go { justify-self: start; }
+@media (max-width: 1023px) { .fm1__grid { grid-template-columns: minmax(0, 1fr); } .fm1__side { position: static; } }
+@media (max-width: 599px) { .fm1__two { grid-template-columns: minmax(0, 1fr); } }
+
+
+.fm2__wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 5vw, 88px); row-gap: var(--s5); align-items: start; }
+.fm2__wrap > .eyebrow { grid-column: 1; grid-row: 1; }
+.fm2__wrap > .t-head { grid-column: 1; grid-row: 2; }
+.fm2__strip { grid-column: 1; grid-row: 3; flex-direction: column; }
+.fm2__form { grid-column: 2; grid-row: 1 / span 3; width: 100%; padding: clamp(20px, 3vw, 40px); background: var(--paper); box-shadow: inset 0 0 0 2px var(--ink); }
+.fm2__tape { position: relative; height: 56px; background: var(--a-200); box-shadow: inset 0 0 0 1.5px var(--ink); overflow: hidden; }
+.fm2__fill { position: absolute; inset: 0; background: var(--a-500); transform: scaleX(.2); transform-origin: left; }
+.fm2__svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.fm2__edge, .fm2__tk { stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.fm2__tk--big { stroke-width: 2.5; }
+.fm2__n { font: 600 14px/1 var(--f-text); fill: var(--ink); }
+.fm2__count { margin: 0; font: 600 .9375rem/1 var(--f-text); color: var(--a-800); }
+.fm2__step { margin: 0; padding: 0; border: 0; min-width: 0; display: grid; gap: 14px; }
+.fm2__q { padding: 0; margin-bottom: 4px; font: 600 clamp(1.5rem, 1.1rem + 1.4vw, 2.5rem)/1.15 var(--f-display); }
+.fm2__acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.fm2__strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; font: 500 1rem/1.4 var(--f-text); color: var(--ink-2); }
+.fm2__strip li { padding-left: 14px; box-shadow: inset 3px 0 0 var(--a-500); }
+@media (max-width: 1023px) { .fm2__wrap { grid-template-columns: minmax(0, 1fr); } .fm2__wrap > * { grid-column: 1 !important; grid-row: auto !important; } }
+
+
+.fm3__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 88px); align-items: start; }
+.fm3__side { display: grid; gap: var(--s5); justify-items: start; }
+.fm3__paper { display: grid; gap: 18px; padding: clamp(24px, 4vw, 56px); background: var(--white); box-shadow: 0 0 0 1.5px var(--line-soft), 0 18px 40px -24px rgba(18, 18, 18, .35); }
+.fm3__to { margin: 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink-2); }
+.fm3__letter { margin: 0; font: 400 clamp(1.25rem, 1rem + .9vw, 1.75rem)/2 var(--f-display); color: var(--ink); }
+.fm3__blank { --u: 1; position: relative; display: inline-block; max-width: 100%; vertical-align: baseline; }
+.fm3__blank::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2.5px; background: var(--a-500); transform: scaleX(var(--u)); transform-origin: left; }
+.fm3__blank input, .fm3__blank select { max-width: 100%; padding: 0 2px; background: transparent; border: 0; border-radius: 0; color: var(--a-800); font: 600 1em/1.4 var(--f-display); outline: none; }
+.fm3__blank input::placeholder { color: var(--muted); font-weight: 400; }
+.fm3__blank select { appearance: none; padding-right: 18px; background: linear-gradient(45deg, transparent 50%, var(--ink) 50%) right 6px center / 7px 7px no-repeat; cursor: pointer; }
+.fm3__blank:focus-within { outline: 3px solid var(--a-700); outline-offset: 3px; }
+.fm3__blank:has([aria-invalid="true"])::after { background: var(--err); height: 3.5px; }
+.fm3__errs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.fm3__errs .c-err { margin: 0; }
+.fm3__go { justify-self: start; }
+@media (max-width: 1023px) { .fm3__grid { grid-template-columns: minmax(0, 1fr); } .fm3__blank input { width: 100%; } }
+
+
+.fm4__head { display: grid; gap: var(--s4); justify-items: start; margin-bottom: var(--s6); }
+.fm4__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.fm4__chip { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px 0 12px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); font: 600 1rem/1.1 var(--f-text); cursor: pointer; }
+.fm4__chip .rx-l { display: inline-flex; align-items: center; gap: 8px; }
+.fm4__tick { flex: none; width: 18px; height: 18px; }
+.fm4__tick path { fill: none; stroke: var(--grey); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.fm4__chip[aria-pressed="true"] { background: var(--a-500); }
+.fm4__chip[aria-pressed="true"] .fm4__tick path { stroke: var(--ink); }
+.fm4__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); margin-top: var(--s6); align-items: start; }
+.fm4__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+.fm4__fields .c-f:last-child { grid-column: 1 / -1; }
+.fm4__send { display: grid; gap: 16px; padding: var(--s5); background: var(--a-50); box-shadow: inset 4px 0 0 var(--a-500); }
+.fm4__picked { margin: 0; font: 600 1rem/1.45 var(--f-text); }
+.fm4__go { justify-self: start; }
+.fm4__facts { margin: 0; font: 400 .9375rem/1.6 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) { .fm4__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 599px) { .fm4__fields { grid-template-columns: minmax(0, 1fr); } }
+
+
+.fm5__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.fm5__call { display: grid; gap: var(--s5); justify-items: start; }
+.fm5__call .fm__lead { margin-top: calc(var(--s4) * -1); }
+.fm5__num { display: inline-block; padding: 6px 0; color: var(--ink); text-decoration: none; font: 600 clamp(2.5rem, 1rem + 6vw, 6.5rem)/1 var(--f-display); letter-spacing: -.02em; box-shadow: inset 0 -10px 0 var(--a-300); }
+.fm5__num:hover { box-shadow: inset 0 -22px 0 var(--a-300); }
+.fm5__open { display: flex; align-items: center; gap: 10px; margin: 0; font: 600 1rem/1.3 var(--f-text); color: var(--ink-2); }
+.fm5__lamp { width: 20px; height: 20px; }
+.fm5__lamp circle { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
+.fm5__open.is-open .fm5__lamp circle { fill: var(--a-500); }
+.fm5__open.is-open .fm5__st { color: var(--a-800); }
+.fm5__hours { margin: 0; font: 400 1rem/1.6 var(--f-text); color: var(--ink-2); }
+.fm5__card { padding: clamp(22px, 3vw, 36px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.fm5__ct { margin: 0; font: 600 1.375rem/1.2 var(--f-display); }
+.fm5__go { justify-self: start; }
+@media (max-width: 1023px) { .fm5__grid { grid-template-columns: minmax(0, 1fr); } }
+
+
+
+.fm1r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 88px); align-items: start; }
+.fm1r__side { display: grid; gap: var(--s5); justify-items: start; position: sticky; top: calc(var(--nav-h) + 24px); }
+.fm1r__sheet { padding: clamp(22px, 3vw, 44px); background: var(--white); box-shadow: inset 0 6px 0 var(--a-500), inset 0 0 0 1.5px var(--line-soft), 14px 14px 0 var(--a-100); }
+.fm1r__title { margin: 0; padding-bottom: 10px; box-shadow: inset 0 -2px 0 var(--ink); font: 600 1.25rem/1.2 var(--f-display); }
+.fm1r__two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+.fm1r__go { justify-self: start; }
+@media (max-width: 1023px) {
+  .fm1r__grid { grid-template-columns: minmax(0, 1fr); }
+  .fm1r__side { position: static; }
+}
+@media (max-width: 599px) {
+  .fm1r__two { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+
+.fm2r__wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 5vw, 88px); row-gap: var(--s5); align-items: start; }
+.fm2r__wrap > .eyebrow { grid-column: 1; grid-row: 1; }
+.fm2r__wrap > .t-head { grid-column: 1; grid-row: 2; }
+.fm2r__strip { grid-column: 1; grid-row: 3; flex-direction: column; }
+.fm2r__form { grid-column: 2; grid-row: 1 / span 3; width: 100%; padding: clamp(20px, 3vw, 40px); background: var(--paper); box-shadow: inset 0 0 0 2px var(--ink); }
+.fm2r__tape { position: relative; height: 56px; background: var(--a-200); box-shadow: inset 0 0 0 1.5px var(--ink); overflow: hidden; }
+.fm2r__fill { position: absolute; inset: 0; background: var(--a-500); transform: scaleX(.2); transform-origin: left; }
+.fm2r__svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.fm2r__edge, .fm2r__tk { stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.fm2r__tk--big { stroke-width: 2.5; }
+.fm2r__n { font: 600 14px/1 var(--f-text); fill: var(--ink); }
+.fm2r__count { margin: 0; font: 600 .9375rem/1 var(--f-text); color: var(--a-800); }
+.fm2r__step { margin: 0; padding: 0; border: 0; min-width: 0; display: grid; gap: 14px; }
+.fm2r__q { padding: 0; margin-bottom: 4px; font: 600 clamp(1.5rem, 1.1rem + 1.4vw, 2.5rem)/1.15 var(--f-display); }
+.fm2r__acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.fm2r__strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; font: 500 1rem/1.4 var(--f-text); color: var(--ink-2); }
+.fm2r__strip li { padding-left: 14px; box-shadow: inset 3px 0 0 var(--a-500); }
+@media (max-width: 1023px) {
+  .fm2r__wrap { grid-template-columns: minmax(0, 1fr); }
+  .fm2r__wrap > * { grid-column: 1 !important; grid-row: auto !important; }
+}
+
+
+
+.fm3r__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 88px); align-items: start; }
+.fm3r__side { display: grid; gap: var(--s5); justify-items: start; }
+.fm3r__paper { display: grid; gap: 18px; padding: clamp(24px, 4vw, 56px); background: var(--white); box-shadow: 0 0 0 1.5px var(--line-soft), 0 18px 40px -24px rgba(18, 18, 18, .35); }
+.fm3r__to { margin: 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink-2); }
+.fm3r__letter { margin: 0; font: 400 clamp(1.25rem, 1rem + .9vw, 1.75rem)/2 var(--f-display); color: var(--ink); }
+.fm3r__blank { --u: 1; position: relative; display: inline-block; max-width: 100%; vertical-align: baseline; }
+.fm3r__blank::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2.5px; background: var(--a-500); transform: scaleX(var(--u)); transform-origin: left; }
+.fm3r__blank input, .fm3r__blank select { max-width: 100%; padding: 0 2px; background: transparent; border: 0; border-radius: 0; color: var(--a-800); font: 600 1em/1.4 var(--f-display); outline: none; }
+.fm3r__blank input::placeholder { color: var(--muted); font-weight: 400; }
+.fm3r__blank select { appearance: none; padding-right: 18px; background: linear-gradient(45deg, transparent 50%, var(--ink) 50%) right 6px center / 7px 7px no-repeat; cursor: pointer; }
+.fm3r__blank:focus-within { outline: 3px solid var(--a-700); outline-offset: 3px; }
+.fm3r__blank:has([aria-invalid="true"])::after { background: var(--err); height: 3.5px; }
+.fm3r__errs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.fm3r__errs .c-err { margin: 0; }
+.fm3r__go { justify-self: start; }
+@media (max-width: 1023px) {
+  .fm3r__grid { grid-template-columns: minmax(0, 1fr); }
+  .fm3r__blank input { width: 100%; }
+}
+
+
+
+.fm4r__head { display: grid; gap: var(--s4); justify-items: start; margin-bottom: var(--s6); }
+.fm4r__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.fm4r__chip { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px 0 12px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); font: 600 1rem/1.1 var(--f-text); cursor: pointer; }
+.fm4r__chip .rx-l { display: inline-flex; align-items: center; gap: 8px; }
+.fm4r__tick { flex: none; width: 18px; height: 18px; }
+.fm4r__tick path { fill: none; stroke: var(--grey); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.fm4r__chip[aria-pressed="true"] { background: var(--a-500); }
+.fm4r__chip[aria-pressed="true"] .fm4r__tick path { stroke: var(--ink); }
+.fm4r__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); margin-top: var(--s6); align-items: start; }
+.fm4r__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+.fm4r__fields .c-f:last-child { grid-column: 1 / -1; }
+.fm4r__send { display: grid; gap: 16px; padding: var(--s5); background: var(--a-50); box-shadow: inset 4px 0 0 var(--a-500); }
+.fm4r__picked { margin: 0; font: 600 1rem/1.45 var(--f-text); }
+.fm4r__go { justify-self: start; }
+.fm4r__facts { margin: 0; font: 400 .9375rem/1.6 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) {
+  .fm4r__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 599px) {
+  .fm4r__fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+
+.fm5r__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.fm5r__call { display: grid; gap: var(--s5); justify-items: start; }
+.fm5r__call .fm__lead { margin-top: calc(var(--s4) * -1); }
+.fm5r__num { display: inline-block; padding: 6px 0; color: var(--ink); text-decoration: none; font: 600 clamp(2.5rem, 1rem + 6vw, 6.5rem)/1 var(--f-display); letter-spacing: -.02em; box-shadow: inset 0 -10px 0 var(--a-300); }
+.fm5r__num:hover { box-shadow: inset 0 -22px 0 var(--a-300); }
+.fm5r__open { display: flex; align-items: center; gap: 10px; margin: 0; font: 600 1rem/1.3 var(--f-text); color: var(--ink-2); }
+.fm5r__lamp { width: 20px; height: 20px; }
+.fm5r__lamp circle { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
+.fm5r__open.is-open .fm5r__lamp circle { fill: var(--a-500); }
+.fm5r__open.is-open .fm5r__st { color: var(--a-800); }
+.fm5r__hours { margin: 0; font: 400 1rem/1.6 var(--f-text); color: var(--ink-2); }
+.fm5r__card { padding: clamp(22px, 3vw, 36px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.fm5r__ct { margin: 0; font: 600 1.375rem/1.2 var(--f-display); }
+.fm5r__go { justify-self: start; }
+@media (max-width: 1023px) {
+  .fm5r__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+.vs__lead { color: var(--muted); }
+.vs__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.vs__head > .eyebrow { grid-column: 1 / -1; }
+.vs__head .t-head { grid-column: 1 / span 7; }
+.vs__head .vs__lead { grid-column: 9 / span 4; }
+@media (max-width: 1023px) { .vs__head > * { grid-column: 1 / -1 !important; } .vs__head .vs__lead { margin-top: var(--s4); } }
+
+
+.vs1__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.vs1__copy { display: grid; gap: var(--s5); justify-items: start; }
+.vs1__stage { perspective: 1600px; padding: 24px 0; }
+.vs1__card { position: relative; width: min(100%, 560px); aspect-ratio: 1.75; margin-inline: auto; transform-style: preserve-3d; }
+.vs1__face { position: absolute; inset: 0; display: grid; align-content: center; gap: 10px; padding: clamp(20px, 4vw, 44px); background: var(--white); box-shadow: inset 0 0 0 1.5px var(--line-soft), 0 24px 50px -28px rgba(18, 18, 18, .45); backface-visibility: hidden; }
+.vs1__front { box-shadow: inset 0 0 0 1.5px var(--line-soft), inset 0 -10px 0 var(--a-500), 0 24px 50px -28px rgba(18, 18, 18, .45); }
+.vs1__back { transform: rotateY(180deg); background: var(--a-50); }
+.vs1__card.is-over .vs1__front { visibility: hidden; }
+.vs1__card.is-over .vs1__back { transform: none; }
+.vs1__logo { width: clamp(150px, 40%, 220px); height: auto; margin-bottom: 8px; }
+.vs1__l { margin: 0; font: 600 clamp(1rem, .9rem + .5vw, 1.375rem)/1.3 var(--f-display); overflow-wrap: anywhere; }
+.vs1__w { margin: 4px 0 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink-2); }
+.vs1__dl { margin: 0; display: grid; gap: 12px; }
+.vs1__dl div { display: grid; grid-template-columns: 4.5rem 1fr; gap: 12px; }
+.vs1__dl dt { font: 600 .9375rem/1.3 var(--f-display); color: var(--a-700); }
+.vs1__dl dd { margin: 0; font: 500 1rem/1.4 var(--f-text); }
+.vs1__lic { margin: 10px 0 0; padding-top: 10px; box-shadow: inset 0 1.5px 0 var(--ink); font: 600 .9375rem/1.3 var(--f-text); }
+@media (max-width: 1023px) { .vs1__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 479px) { .vs1__card { aspect-ratio: auto; height: 300px; } }
+
+
+.vs2__week { position: relative; display: grid; gap: 8px; padding: 34px 0 0; }
+.vs2__ax { position: absolute; top: 0; left: 9rem; right: 0; height: 24px; }
+.vs2__ax span { position: absolute; top: 0; translate: -50% 0; font: 600 .75rem/1 var(--f-text); color: var(--ink-2); }
+.vs2__ax span:first-child { translate: 0 0; } .vs2__ax span:last-child { translate: -100% 0; }
+.vs2__row { display: grid; grid-template-columns: 9rem 1fr; align-items: center; min-height: 48px; }
+.vs2__d { font: 600 1.0625rem/1 var(--f-display); }
+.vs2__track { position: relative; height: 40px; background: var(--paper); background-image: linear-gradient(to right, var(--line-soft) 1px, transparent 1px); background-size: calc(100% / 24) 100%; box-shadow: inset 0 0 0 1px var(--line-soft); }
+.vs2__bar { position: absolute; top: 6px; bottom: 6px; left: calc(7 / 24 * 100%); width: calc(12 / 24 * 100%); display: grid; place-items: center; background: var(--a-200); box-shadow: inset 0 0 0 1.5px var(--ink); font: 600 .8125rem/1 var(--f-text); color: var(--ink); }
+.vs2__closed { position: absolute; inset: 0; display: grid; place-items: center; font: 600 .875rem/1 var(--f-text); color: var(--ink-2); background: repeating-linear-gradient(45deg, transparent 0 8px, var(--line-soft) 8px 9px); }
+.vs2__row.is-today .vs2__d { color: var(--a-800); }
+.vs2__row.is-today .vs2__d::after { content: " \00B7 today"; font: 500 .8125rem/1 var(--f-text); color: var(--ink-2); }
+.vs2__row.is-today .vs2__track { box-shadow: inset 0 0 0 2.5px var(--ink); }
+.vs2__row.is-today .vs2__bar { background: var(--a-500); }
+.vs2__line { position: absolute; top: -6px; bottom: -6px; width: 3px; margin-left: -1.5px; background: var(--ink); }
+.vs2__now { margin: var(--s5) 0 0; font: 600 1.125rem/1.4 var(--f-text); color: var(--a-800); }
+.vs2__facts { list-style: none; margin: var(--s4) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 32px; font: 500 1rem/1.4 var(--f-text); }
+@media (max-width: 599px) { .vs2__row { grid-template-columns: 5.5rem 1fr; } .vs2__ax { left: 5.5rem; } .vs2__d { font-size: .9375rem; } .vs2__row.is-today .vs2__d::after { content: ""; } .vs2__bar span { display: none; } }
+
+
+.vs3__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.vs3__copy { display: grid; gap: var(--s5); justify-items: start; }
+.vs3__call { margin: 0; font: 500 1.0625rem/1.4 var(--f-text); }
+.vs3__label { position: relative; display: grid; gap: var(--s4); padding: clamp(24px, 4vw, 52px); background: var(--white); box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 9px var(--white), inset 0 0 0 10.5px var(--ink); }
+.vs3__label::before { content: ""; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; margin-left: -55px; background: var(--a-300); opacity: .85; transform: rotate(-3deg); }
+.vs3__from { margin: 0; font: 600 .875rem/1.2 var(--f-text); color: var(--a-800); letter-spacing: .08em; text-transform: uppercase; }
+.vs3__addr { font: 600 clamp(1.75rem, 1.1rem + 2.4vw, 3.25rem)/1.12 var(--f-display); font-style: normal; letter-spacing: -.01em; }
+.vs3__acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.vs3__st { margin: 0; min-height: 1.4em; font: 500 .9375rem/1.4 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) { .vs3__grid { grid-template-columns: minmax(0, 1fr); } }
+
+
+.vs4__rows { list-style: none; margin: 0; padding: 0; box-shadow: inset 0 2px 0 var(--ink); }
+.vs4__r { display: grid; grid-template-columns: minmax(7rem, 2fr) minmax(0, 7fr) 48px; align-items: center; gap: var(--s4); min-height: 76px; padding: 10px 0; box-shadow: inset 0 -2px 0 var(--ink); color: var(--ink); text-decoration: none; }
+.vs4__k { font: 600 .9375rem/1 var(--f-text); color: var(--a-700); }
+.vs4__v { font: 600 clamp(1.125rem, .9rem + 1.1vw, 2rem)/1.15 var(--f-display); overflow-wrap: anywhere; }
+.vs4__a { width: 40px; height: 20px; justify-self: end; transition: transform 220ms var(--ease-out); }
+.vs4__a path { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.vs4__r:hover, .vs4__r:focus-visible { background: var(--a-50); }
+.vs4__r:hover .vs4__a, .vs4__r:focus-visible .vs4__a { transform: translateX(6px); }
+@media (max-width: 599px) { .vs4__r { grid-template-columns: 1fr 32px; } .vs4__k { grid-column: 1 / -1; } }
+
+
+.vs5__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.vs5__dial { width: min(100%, 480px); justify-self: center; overflow: visible; }
+.vs5__face { fill: var(--white); stroke: var(--ink); stroke-width: 3; }
+.vs5__open { fill: none; stroke: var(--a-500); stroke-width: 12; stroke-linecap: butt; }
+.vs5__open--pm { stroke: var(--a-300); }
+.vs5__tk { stroke: var(--ink-2); stroke-width: 1; }
+.vs5__tk--h { stroke: var(--ink); stroke-width: 2.5; }
+.vs5__n { font: 600 16px/1 var(--f-display); fill: var(--ink); text-anchor: middle; }
+.vs5__key { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; font: 500 .9375rem/1.3 var(--f-text); color: var(--ink-2); }
+.vs5__sw { width: 22px; height: 10px; background: var(--a-500); box-shadow: inset 0 0 0 1px var(--ink); }
+.vs5__ki { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+.vs5__sw--pm { background: var(--a-300); }
+.vs5__hh, .vs5__mh { stroke: var(--ink); stroke-linecap: round; }
+.vs5__hh { stroke-width: 6; } .vs5__mh { stroke-width: 3.5; }
+.vs5__pin { fill: var(--a-700); }
+.vs5__copy { display: grid; gap: var(--s5); justify-items: start; }
+.vs5__st { margin: 0; padding: 10px 14px; background: var(--a-100); font: 600 1.0625rem/1.4 var(--f-text); color: var(--ink); }
+.vs5__dl { margin: 0; display: grid; gap: 12px; }
+.vs5__dl div { display: grid; grid-template-columns: 4.5rem 1fr; gap: 12px; }
+.vs5__dl dt { font: 600 .9375rem/1.3 var(--f-display); color: var(--a-700); }
+.vs5__dl dd { margin: 0; font: 400 1rem/1.45 var(--f-text); }
+.vs5__lic { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) { .vs5__grid { grid-template-columns: minmax(0, 1fr); } .vs5__dial { max-width: 340px; } }
+
+
+
+.vs1r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.vs1r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.vs1r__stage { perspective: 1600px; padding: 24px 0; }
+.vs1r__card { position: relative; width: min(100%, 560px); aspect-ratio: 1.75; margin-inline: auto; transform-style: preserve-3d; }
+.vs1r__face { position: absolute; inset: 0; display: grid; align-content: center; gap: 10px; padding: clamp(20px, 4vw, 44px); background: var(--white); box-shadow: inset 0 0 0 1.5px var(--line-soft), 0 24px 50px -28px rgba(18, 18, 18, .45); backface-visibility: hidden; }
+.vs1r__front { box-shadow: inset 0 0 0 1.5px var(--line-soft), inset 0 -10px 0 var(--a-500), 0 24px 50px -28px rgba(18, 18, 18, .45); }
+.vs1r__back { transform: rotateY(180deg); background: var(--a-50); }
+.vs1r__card.is-over .vs1r__front { visibility: hidden; }
+.vs1r__card.is-over .vs1r__back { transform: none; }
+.vs1r__logo { width: clamp(150px, 40%, 220px); height: auto; margin-bottom: 8px; }
+.vs1r__l { margin: 0; font: 600 clamp(1rem, .9rem + .5vw, 1.375rem)/1.3 var(--f-display); overflow-wrap: anywhere; }
+.vs1r__w { margin: 4px 0 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink-2); }
+.vs1r__dl { margin: 0; display: grid; gap: 12px; }
+.vs1r__dl div { display: grid; grid-template-columns: 4.5rem 1fr; gap: 12px; }
+.vs1r__dl dt { font: 600 .9375rem/1.3 var(--f-display); color: var(--a-700); }
+.vs1r__dl dd { margin: 0; font: 500 1rem/1.4 var(--f-text); }
+.vs1r__lic { margin: 10px 0 0; padding-top: 10px; box-shadow: inset 0 1.5px 0 var(--ink); font: 600 .9375rem/1.3 var(--f-text); }
+@media (max-width: 1023px) {
+  .vs1r__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 479px) {
+  .vs1r__card { aspect-ratio: auto; height: 300px; }
+}
+
+
+
+.vs2r__week { position: relative; display: grid; gap: 8px; padding: 34px 0 0; }
+.vs2r__ax { position: absolute; top: 0; left: 9rem; right: 0; height: 24px; }
+.vs2r__ax span { position: absolute; top: 0; translate: -50% 0; font: 600 .75rem/1 var(--f-text); color: var(--ink-2); }
+.vs2r__ax span:first-child { translate: 0 0; }
+.vs2r__ax span:last-child { translate: -100% 0; }
+.vs2r__row { display: grid; grid-template-columns: 9rem 1fr; align-items: center; min-height: 48px; }
+.vs2r__d { font: 600 1.0625rem/1 var(--f-display); }
+.vs2r__track { position: relative; height: 40px; background: var(--paper); background-image: linear-gradient(to right, var(--line-soft) 1px, transparent 1px); background-size: calc(100% / 24) 100%; box-shadow: inset 0 0 0 1px var(--line-soft); }
+.vs2r__bar { position: absolute; top: 6px; bottom: 6px; left: calc(7 / 24 * 100%); width: calc(12 / 24 * 100%); display: grid; place-items: center; background: var(--a-200); box-shadow: inset 0 0 0 1.5px var(--ink); font: 600 .8125rem/1 var(--f-text); color: var(--ink); }
+.vs2r__closed { position: absolute; inset: 0; display: grid; place-items: center; font: 600 .875rem/1 var(--f-text); color: var(--ink-2); background: repeating-linear-gradient(45deg, transparent 0 8px, var(--line-soft) 8px 9px); }
+.vs2r__row.is-today .vs2r__d { color: var(--a-800); }
+.vs2r__row.is-today .vs2r__d::after { content: " \00B7 today"; font: 500 .8125rem/1 var(--f-text); color: var(--ink-2); }
+.vs2r__row.is-today .vs2r__track { box-shadow: inset 0 0 0 2.5px var(--ink); }
+.vs2r__row.is-today .vs2r__bar { background: var(--a-500); }
+.vs2r__line { position: absolute; top: -6px; bottom: -6px; width: 3px; margin-left: -1.5px; background: var(--ink); }
+.vs2r__now { margin: var(--s5) 0 0; font: 600 1.125rem/1.4 var(--f-text); color: var(--a-800); }
+.vs2r__facts { list-style: none; margin: var(--s4) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 32px; font: 500 1rem/1.4 var(--f-text); }
+@media (max-width: 599px) {
+  .vs2r__row { grid-template-columns: 5.5rem 1fr; }
+  .vs2r__ax { left: 5.5rem; }
+  .vs2r__d { font-size: .9375rem; }
+  .vs2r__row.is-today .vs2r__d::after { content: ""; }
+  .vs2r__bar span { display: none; }
+}
+
+
+
+.vs3r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.vs3r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.vs3r__call { margin: 0; font: 500 1.0625rem/1.4 var(--f-text); }
+.vs3r__label { position: relative; display: grid; gap: var(--s4); padding: clamp(24px, 4vw, 52px); background: var(--white); box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 9px var(--white), inset 0 0 0 10.5px var(--ink); }
+.vs3r__label::before { content: ""; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; margin-left: -55px; background: var(--a-300); opacity: .85; transform: rotate(-3deg); }
+.vs3r__from { margin: 0; font: 600 .875rem/1.2 var(--f-text); color: var(--a-800); letter-spacing: .08em; text-transform: uppercase; }
+.vs3r__addr { font: 600 clamp(1.75rem, 1.1rem + 2.4vw, 3.25rem)/1.12 var(--f-display); font-style: normal; letter-spacing: -.01em; }
+.vs3r__acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.vs3r__st { margin: 0; min-height: 1.4em; font: 500 .9375rem/1.4 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) {
+  .vs3r__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+
+.vs4r__rows { list-style: none; margin: 0; padding: 0; box-shadow: inset 0 2px 0 var(--ink); }
+.vs4r__r { display: grid; grid-template-columns: minmax(7rem, 2fr) minmax(0, 7fr) 48px; align-items: center; gap: var(--s4); min-height: 76px; padding: 10px 0; box-shadow: inset 0 -2px 0 var(--ink); color: var(--ink); text-decoration: none; }
+.vs4r__k { font: 600 .9375rem/1 var(--f-text); color: var(--a-700); }
+.vs4r__v { font: 600 clamp(1.125rem, .9rem + 1.1vw, 2rem)/1.15 var(--f-display); overflow-wrap: anywhere; }
+.vs4r__a { width: 40px; height: 20px; justify-self: end; transition: transform 220ms var(--ease-out); }
+.vs4r__a path { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.vs4r__r:hover, .vs4r__r:focus-visible { background: var(--a-50); }
+.vs4r__r:hover .vs4r__a, .vs4r__r:focus-visible .vs4r__a { transform: translateX(6px); }
+@media (max-width: 599px) {
+  .vs4r__r { grid-template-columns: 1fr 32px; }
+  .vs4r__k { grid-column: 1 / -1; }
+}
+
+
+
+.vs5r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.vs5r__dial { width: min(100%, 480px); justify-self: center; overflow: visible; }
+.vs5r__face { fill: var(--white); stroke: var(--ink); stroke-width: 3; }
+.vs5r__open { fill: none; stroke: var(--a-500); stroke-width: 12; stroke-linecap: butt; }
+.vs5r__open--pm { stroke: var(--a-300); }
+.vs5r__tk { stroke: var(--ink-2); stroke-width: 1; }
+.vs5r__tk--h { stroke: var(--ink); stroke-width: 2.5; }
+.vs5r__n { font: 600 16px/1 var(--f-display); fill: var(--ink); text-anchor: middle; }
+.vs5r__key { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; font: 500 .9375rem/1.3 var(--f-text); color: var(--ink-2); }
+.vs5r__sw { width: 22px; height: 10px; background: var(--a-500); box-shadow: inset 0 0 0 1px var(--ink); }
+.vs5r__ki { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+.vs5r__sw--pm { background: var(--a-300); }
+.vs5r__hh, .vs5r__mh { stroke: var(--ink); stroke-linecap: round; }
+.vs5r__hh { stroke-width: 6; }
+.vs5r__mh { stroke-width: 3.5; }
+.vs5r__pin { fill: var(--a-700); }
+.vs5r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.vs5r__st { margin: 0; padding: 10px 14px; background: var(--a-100); font: 600 1.0625rem/1.4 var(--f-text); color: var(--ink); }
+.vs5r__dl { margin: 0; display: grid; gap: 12px; }
+.vs5r__dl div { display: grid; grid-template-columns: 4.5rem 1fr; gap: 12px; }
+.vs5r__dl dt { font: 600 .9375rem/1.3 var(--f-display); color: var(--a-700); }
+.vs5r__dl dd { margin: 0; font: 400 1rem/1.45 var(--f-text); }
+.vs5r__lic { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--ink-2); }
+@media (max-width: 1023px) {
+  .vs5r__grid { grid-template-columns: minmax(0, 1fr); }
+  .vs5r__dial { max-width: 340px; }
+}
+
+
+.sa__lead { color: var(--muted); }
+.sa__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
+.sa__head > .eyebrow { grid-column: 1 / -1; }
+.sa__head .t-head { grid-column: 1 / span 7; }
+.sa__head .sa__lead { grid-column: 9 / span 4; }
+@media (max-width: 1023px) { .sa__head > * { grid-column: 1 / -1 !important; } .sa__head .sa__lead { margin-top: var(--s4); } }
+
+
+.sa1__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.sa1__copy { display: grid; gap: var(--s5); justify-items: start; }
+.sa1__box { display: grid; gap: 12px; padding: clamp(22px, 3vw, 40px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink), 12px 12px 0 var(--a-200); }
+.sa1__lbl { font: 600 1rem/1.2 var(--f-text); }
+.sa1__row { display: flex; flex-wrap: wrap; gap: 12px; }
+.sa1__f { flex: 1 1 260px; display: block; }
+.sa1__f input { width: 100%; min-height: 52px; padding: 0 16px; border: 0; background: var(--paper); box-shadow: inset 0 0 0 2px var(--ink); color: var(--ink); font: 500 1.125rem/1 var(--f-text); outline: none; }
+.sa1__f input:focus-visible { box-shadow: inset 0 0 0 3px var(--a-700); }
+.sa1__out { min-height: 88px; padding-top: 8px; }
+.sa1__out p { margin: 0; font: 500 1.0625rem/1.5 var(--f-text); }
+.sa1__a { color: var(--ink-2); }
+.sa1__y { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--a-100); font-weight: 600 !important; }
+.sa1__y svg { flex: none; width: 24px; height: 24px; }
+.sa1__y path { fill: none; stroke: var(--a-700); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.sa1__nn { padding: 14px 16px; background: var(--paper); box-shadow: inset 4px 0 0 var(--ink-2); }
+@media (max-width: 1023px) { .sa1__grid { grid-template-columns: minmax(0, 1fr); } }
+
+
+.sa2__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.sa2__col { padding-top: 14px; box-shadow: inset 0 4px 0 var(--ink); }
+.sa2__h { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 14px; font: 600 1.5rem/1.1 var(--f-display); }
+.sa2__h .nums { font-size: 2.5rem; color: var(--a-700); }
+.sa2__ul { list-style: none; margin: 0; padding: 0; }
+.sa2__ul li { padding: 7px 0; box-shadow: inset 0 -1px 0 var(--line-soft); font: 400 1rem/1.3 var(--f-text); }
+@media (max-width: 899px) { .sa2__cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 559px) { .sa2__cols { grid-template-columns: minmax(0, 1fr); } }
+
+
+.sa3__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 4fr); gap: clamp(28px, 5vw, 88px); align-items: start; }
+.sa3__copy { display: grid; gap: var(--s5); justify-items: start; }
+.sa3__sw { display: flex; flex-wrap: wrap; gap: 8px; }
+.sa3__b { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 16px 0 12px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.sa3__led { width: 14px; height: 14px; border-radius: 50%; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.sa3__b[aria-pressed="true"] .sa3__led { background: var(--a-500); }
+.sa3__b[aria-pressed="false"] { color: var(--ink-2); box-shadow: inset 0 0 0 2px var(--grey); }
+.sa3__n { margin: 0; font: 600 1.125rem/1 var(--f-text); color: var(--a-800); }
+.sa3__names { margin: 0; font: 400 .9375rem/1.7 var(--f-text); color: var(--ink-2); }
+.sa3__map { width: 100%; max-height: 760px; }
+.sa3__cty { fill: var(--white); stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.sa3__dot { fill: var(--a-500); stroke: var(--ink); stroke-width: 3; }
+.sa3__g { transition: opacity 250ms; }
+.sa3__g.is-off { opacity: .08; }
+@media (max-width: 1023px) { .sa3__grid { grid-template-columns: minmax(0, 1fr); } .sa3__map { max-height: 520px; } }
+
+
+.sa4__bar { display: flex; gap: 6px; }
+.sa4__p { display: grid; align-content: space-between; justify-items: start; gap: 18px; min-width: 0; min-height: 150px; padding: 14px 16px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); text-align: left; cursor: pointer; }
+.sa4__p[aria-checked="true"] { background: var(--a-500); }
+.sa4__n { font: 600 clamp(2.25rem, 1.4rem + 3vw, 4.5rem)/1 var(--f-display); }
+.sa4__c { font: 600 1rem/1.2 var(--f-text); overflow-wrap: anywhere; }
+.sa4__out { margin-top: var(--s6); }
+.sa4__t { margin: 0 0 var(--s4); font: 600 1.375rem/1.2 var(--f-display); }
+.sa4__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sa4__tags li { padding: 8px 12px; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line-soft); font: 500 .9375rem/1.2 var(--f-text); }
+@media (max-width: 599px) { .sa4__p { min-height: 110px; padding: 10px; } .sa4__c { font-size: .8125rem; } }
+
+
+.sa5__stop { margin-top: calc(var(--s5) * -1); margin-bottom: var(--s6); }
+.sa5__rows { display: grid; gap: 14px; overflow: hidden; }
+.sa5__row { overflow: hidden; padding: 16px 0; background: var(--white); box-shadow: inset 0 2px 0 var(--ink), inset 0 -2px 0 var(--ink); }
+.sa5__row--rev { background: var(--a-100); }
+.sa5__run { display: flex; width: max-content; }
+.sa5__set { display: flex; align-items: center; flex: none; }
+.sa5__set > span, .sa5__c { white-space: nowrap; padding: 0 22px; font: 600 clamp(1.25rem, 1rem + 1vw, 2rem)/1 var(--f-display); }
+.sa5__set > span + span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin: 0 22px 0 -22px; translate: -5px -4px; background: var(--a-500); transform: rotate(45deg); }
+.sa5__c { color: var(--a-700); }
+.sa5__rows.is-still .sa5__run { width: auto; }
+.sa5__rows.is-still .sa5__set { flex-wrap: wrap; row-gap: 12px; padding-inline: var(--gutter); }
+
+
+
+.sa1r__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
+.sa1r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.sa1r__box { display: grid; gap: 12px; padding: clamp(22px, 3vw, 40px); background: var(--white); box-shadow: inset 0 0 0 2px var(--ink), 12px 12px 0 var(--a-200); }
+.sa1r__lbl { font: 600 1rem/1.2 var(--f-text); }
+.sa1r__row { display: flex; flex-wrap: wrap; gap: 12px; }
+.sa1r__f { flex: 1 1 260px; display: block; }
+.sa1r__f input { width: 100%; min-height: 52px; padding: 0 16px; border: 0; background: var(--paper); box-shadow: inset 0 0 0 2px var(--ink); color: var(--ink); font: 500 1.125rem/1 var(--f-text); outline: none; }
+.sa1r__f input:focus-visible { box-shadow: inset 0 0 0 3px var(--a-700); }
+.sa1r__out { min-height: 88px; padding-top: 8px; }
+.sa1r__out p { margin: 0; font: 500 1.0625rem/1.5 var(--f-text); }
+.sa1r__a { color: var(--ink-2); }
+.sa1r__y { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--a-100); font-weight: 600 !important; }
+.sa1r__y svg { flex: none; width: 24px; height: 24px; }
+.sa1r__y path { fill: none; stroke: var(--a-700); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.sa1r__nn { padding: 14px 16px; background: var(--paper); box-shadow: inset 4px 0 0 var(--ink-2); }
+@media (max-width: 1023px) {
+  .sa1r__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+
+.sa2r__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.sa2r__col { padding-top: 14px; box-shadow: inset 0 4px 0 var(--ink); }
+.sa2r__h { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 14px; font: 600 1.5rem/1.1 var(--f-display); }
+.sa2r__h .nums { font-size: 2.5rem; color: var(--a-700); }
+.sa2r__ul { list-style: none; margin: 0; padding: 0; }
+.sa2r__ul li { padding: 7px 0; box-shadow: inset 0 -1px 0 var(--line-soft); font: 400 1rem/1.3 var(--f-text); }
+@media (max-width: 899px) {
+  .sa2r__cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 559px) {
+  .sa2r__cols { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+
+.sa3r__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 4fr); gap: clamp(28px, 5vw, 88px); align-items: start; }
+.sa3r__copy { display: grid; gap: var(--s5); justify-items: start; }
+.sa3r__sw { display: flex; flex-wrap: wrap; gap: 8px; }
+.sa3r__b { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 16px 0 12px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); font: 600 .9375rem/1 var(--f-text); cursor: pointer; }
+.sa3r__led { width: 14px; height: 14px; border-radius: 50%; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.sa3r__b[aria-pressed="true"] .sa3r__led { background: var(--a-500); }
+.sa3r__b[aria-pressed="false"] { color: var(--ink-2); box-shadow: inset 0 0 0 2px var(--grey); }
+.sa3r__n { margin: 0; font: 600 1.125rem/1 var(--f-text); color: var(--a-800); }
+.sa3r__names { margin: 0; font: 400 .9375rem/1.7 var(--f-text); color: var(--ink-2); }
+.sa3r__map { width: 100%; max-height: 760px; }
+.sa3r__cty { fill: var(--white); stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.sa3r__dot { fill: var(--a-500); stroke: var(--ink); stroke-width: 3; }
+.sa3r__g { transition: opacity 250ms; }
+.sa3r__g.is-off { opacity: .08; }
+@media (max-width: 1023px) {
+  .sa3r__grid { grid-template-columns: minmax(0, 1fr); }
+  .sa3r__map { max-height: 520px; }
+}
+
+
+
+.sa4r__bar { display: flex; gap: 6px; }
+.sa4r__p { display: grid; align-content: space-between; justify-items: start; gap: 18px; min-width: 0; min-height: 150px; padding: 14px 16px; border: 0; background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); text-align: left; cursor: pointer; }
+.sa4r__p[aria-checked="true"] { background: var(--a-500); }
+.sa4r__n { font: 600 clamp(2.25rem, 1.4rem + 3vw, 4.5rem)/1 var(--f-display); }
+.sa4r__c { font: 600 1rem/1.2 var(--f-text); overflow-wrap: anywhere; }
+.sa4r__out { margin-top: var(--s6); }
+.sa4r__t { margin: 0 0 var(--s4); font: 600 1.375rem/1.2 var(--f-display); }
+.sa4r__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sa4r__tags li { padding: 8px 12px; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line-soft); font: 500 .9375rem/1.2 var(--f-text); }
+@media (max-width: 599px) {
+  .sa4r__p { min-height: 110px; padding: 10px; }
+  .sa4r__c { font-size: .8125rem; }
+}
+
+
+
+.sa5r__stop { margin-top: calc(var(--s5) * -1); margin-bottom: var(--s6); }
+.sa5r__rows { display: grid; gap: 14px; overflow: hidden; }
+.sa5r__row { overflow: hidden; padding: 16px 0; background: var(--white); box-shadow: inset 0 2px 0 var(--ink), inset 0 -2px 0 var(--ink); }
+.sa5r__row--rev { background: var(--a-100); }
+.sa5r__run { display: flex; width: max-content; }
+.sa5r__set { display: flex; align-items: center; flex: none; }
+.sa5r__set > span, .sa5r__c { white-space: nowrap; padding: 0 22px; font: 600 clamp(1.25rem, 1rem + 1vw, 2rem)/1 var(--f-display); }
+.sa5r__set > span + span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin: 0 22px 0 -22px; translate: -5px -4px; background: var(--a-500); transform: rotate(45deg); }
+.sa5r__c { color: var(--a-700); }
+.sa5r__rows.is-still .sa5r__run { width: auto; }
+.sa5r__rows.is-still .sa5r__set { flex-wrap: wrap; row-gap: 12px; padding-inline: var(--gutter); }
 
 </style>
 <script type="application/ld+json">
@@ -904,8 +1499,755 @@ html.has-buddy select { cursor: default !important; }
 
 <main id="main">
 <span id="top"></span>
+<section id="contact-form" class="sec cform g-base" data-section="contact-form" aria-labelledby="contact-h1-1">
+  
+
+  
+  <div class="ver fm1" data-v="1">
+    <div class="wrap fm1__grid">
+      <div class="fm1__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-1">A real consultation, <span class="acc">not a sales visit.</span></h1>
+        <p class="t-lead fm__lead">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/drop/sweep/r">Sales@elbazconstruction.com</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+        <div class="fm-proof"><p><span class="fm-proof__star" aria-hidden="true">&#9733;</span> <span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</p><p>Licensed, bonded &amp; insured &middot; CBC1265280</p></div>
+      </div>
+      <form class="fm1__sheet c-form" novalidate>
+        <p class="fm1__title">Consultation request</p>
+        <div class="fm1__two">
+          <div class="c-f" data-rx="~badge/rail/sweep/tr"><input id="fm1-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm1-name">Full name *</label><span class="c-err" id="fm1-name-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/rail/sweep/tr"><input id="fm1-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm1-phone">Phone *</label><span class="c-err" id="fm1-phone-err" hidden></span></div>
+        </div>
+        <div class="fm1__two">
+          <div class="c-f" data-rx="~envelope/rail/sweep/tr"><input id="fm1-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm1-email">Email *</label><span class="c-err" id="fm1-email-err" hidden></span></div>
+          <div class="c-f" data-rx="~house2/rail/sweep/tr"><input id="fm1-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm1-address">Property address *</label><span class="c-err" id="fm1-address-err" hidden></span></div>
+        </div>
+        <div class="c-f" data-rx="~sketch/rail/sweep/tr"><textarea id="fm1-project" name="project" rows="4" placeholder=" " required></textarea><label for="fm1-project">Project description *</label><span class="c-err" id="fm1-project-err" hidden></span></div>
+        <fieldset class="fm-how">
+          <legend>Preferred contact method</legend>
+          <label data-rx="~handset/frame/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+          <label data-rx="~envelope/frame/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+          <label data-rx="~speech/frame/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+        </fieldset>
+        <label class="c-consent" data-rx="~check/frame/tick/l"><input type="checkbox" name="consent" id="fm1-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm1-consent-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm1__go" data-rx="~mailbox/zip/burst/r"><span class="btn__label">Send my request</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver fm2" data-v="2" hidden>
+    <div class="wrap fm2__wrap">
+      <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+      <h1 class="t-head fm__h" id="contact-h1-2">Let&rsquo;s talk about <span class="acc">what you want to change.</span></h1>
+      <form class="fm2__form c-form" novalidate>
+        <div class="fm2__tape" aria-hidden="true"><svg class="fm2__svg" viewBox="0 0 1000 56" preserveAspectRatio="none" focusable="false"></svg><span class="fm2__fill"></span></div>
+        <p class="fm2__count" aria-live="polite">Step <span class="nums">1</span> of <span class="nums">5</span></p>
+        <fieldset class="fm2__step" data-step="1">
+          <legend class="fm2__q">What do you want to change?</legend>
+          <div class="c-f" data-rx="~sketch/unfold/sweep/tr"><textarea id="fm2-project" name="project" rows="4" placeholder=" " required></textarea><label for="fm2-project">Project description *</label><span class="c-err" id="fm2-project-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="2" hidden>
+          <legend class="fm2__q">Where is the property?</legend>
+          <div class="c-f" data-rx="~house2/unfold/sweep/tr"><input id="fm2-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm2-address">Property address *</label><span class="c-err" id="fm2-address-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="3" hidden>
+          <legend class="fm2__q">Who are we talking to?</legend>
+          <div class="c-f" data-rx="~badge/unfold/sweep/tr"><input id="fm2-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm2-name">Full name *</label><span class="c-err" id="fm2-name-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="4" hidden>
+          <legend class="fm2__q">How do we reach you?</legend>
+          <div class="c-f" data-rx="~handset/unfold/sweep/tr"><input id="fm2-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm2-phone">Phone *</label><span class="c-err" id="fm2-phone-err" hidden></span></div>
+          <div class="c-f" data-rx="~envelope/unfold/sweep/tr"><input id="fm2-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm2-email">Email *</label><span class="c-err" id="fm2-email-err" hidden></span></div>
+          <fieldset class="fm-how fm2__how"><legend>Preferred contact method</legend>
+            <label data-rx="~handset/bounce/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/bounce/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/bounce/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="5" hidden>
+          <legend class="fm2__q">One last thing.</legend>
+          <label class="c-consent" data-rx="~check/bounce/tick/l"><input type="checkbox" name="consent" id="fm2-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="fm2-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        </fieldset>
+        <div class="fm2__acts">
+          <button type="button" class="btn btn--ghost fm2__back" data-rx="~arrowL/bounce/shake/l" hidden><span class="btn__label">Back</span></button>
+          <button type="button" class="btn fm2__next" data-rx="~arrowR/bounce/hop/r"><span class="btn__label">Next</span></button>
+          <button type="submit" class="btn fm2__go" data-rx="~envelope/hoist/burst/r" hidden><span class="btn__label">Send my request</span></button>
+        </div>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+      <ul class="fm2__strip">
+        <li><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></li>
+        <li>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</li>
+        <li>19 W Flagler St #310, Miami, FL 33130</li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <div class="ver fm3" data-v="3" hidden>
+    <div class="wrap fm3__grid">
+      <div class="fm3__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-3">Write to us <span class="acc">in one paragraph.</span></h1>
+        <p class="t-lead fm__lead">Send us a message to get a free consultation. Don&rsquo;t worry, we won&rsquo;t charge a dime.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="fm3__paper" novalidate>
+        <p class="fm3__to">To: Sales@elbazconstruction.com</p>
+        <p class="fm3__letter">Hello Elbaz Construction, my name is
+          <span class="fm3__blank rx-host" data-rx="~badge/neon/sweep/b"><label class="sr-only" for="fm3-name">Full name</label><input id="fm3-name" name="name" type="text" autocomplete="name" placeholder="your full name" size="16"></span>.
+          I would like to talk about
+          <span class="fm3__blank fm3__blank--wide rx-host" data-rx="~sketch/neon/sweep/b"><label class="sr-only" for="fm3-project">Project description</label><input id="fm3-project" name="project" type="text" placeholder="what you want to change" size="26"></span>
+          at
+          <span class="fm3__blank fm3__blank--wide rx-host" data-rx="~house2/neon/sweep/b"><label class="sr-only" for="fm3-address">Property address</label><input id="fm3-address" name="address" type="text" autocomplete="street-address" placeholder="the property address" size="26"></span>.
+          The best way to reach me is by
+          <span class="fm3__blank rx-host" data-rx="native:fm3-how"><label class="sr-only" for="fm3-contact">Preferred contact method</label><select id="fm3-contact" name="contact"><option>phone</option><option>email</option><option>text</option></select></span>;
+          my phone is
+          <span class="fm3__blank rx-host" data-rx="~handset/neon/sweep/b"><label class="sr-only" for="fm3-phone">Phone</label><input id="fm3-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(000) 000-0000" size="14"></span>
+          and my email is
+          <span class="fm3__blank fm3__blank--wide rx-host" data-rx="~envelope/neon/sweep/b"><label class="sr-only" for="fm3-email">Email</label><input id="fm3-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" size="22"></span>.
+        </p>
+        <ul class="fm3__errs" aria-live="polite">
+          <li class="c-err" id="fm3-name-err" hidden></li><li class="c-err" id="fm3-project-err" hidden></li><li class="c-err" id="fm3-address-err" hidden></li>
+          <li class="c-err" id="fm3-phone-err" hidden></li><li class="c-err" id="fm3-email-err" hidden></li><li class="c-err" id="fm3-consent-err" hidden></li>
+        </ul>
+        <label class="c-consent" data-rx="~check/neon/tick/l"><input type="checkbox" name="consent" id="fm3-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <p class="c-note">Sending opens your email app with this letter addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm3__go" data-rx="~envelope/neon/burst/r"><span class="btn__label">Send the letter</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver fm4" data-v="4" hidden>
+    <div class="wrap">
+      <div class="fm4__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-4">Start with <span class="acc">the work.</span></h1>
+        <p class="t-lead fm__lead">Pick everything the project touches. Honest scope and budget guidance comes at the walkthrough.</p>
+      </div>
+      <form class="fm4__form c-form" novalidate>
+        <div class="fm4__chips" role="group" aria-label="Services the project touches"></div>
+        <span class="c-err" id="fm4-work-err" hidden></span>
+        <div class="fm4__grid">
+          <div class="fm4__fields">
+            <div class="c-f" data-rx="~badge/swing/sweep/tr"><input id="fm4-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm4-name">Full name *</label><span class="c-err" id="fm4-name-err" hidden></span></div>
+            <div class="c-f" data-rx="~handset/swing/sweep/tr"><input id="fm4-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm4-phone">Phone *</label><span class="c-err" id="fm4-phone-err" hidden></span></div>
+            <div class="c-f" data-rx="~envelope/swing/sweep/tr"><input id="fm4-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm4-email">Email *</label><span class="c-err" id="fm4-email-err" hidden></span></div>
+            <div class="c-f" data-rx="~house2/swing/sweep/tr"><input id="fm4-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm4-address">Property address *</label><span class="c-err" id="fm4-address-err" hidden></span></div>
+            <div class="c-f" data-rx="~sketch/swing/sweep/tr"><textarea id="fm4-notes" name="notes" rows="3" placeholder=" "></textarea><label for="fm4-notes">Anything we should know? (optional)</label></div>
+          </div>
+          <div class="fm4__send">
+            <p class="fm4__picked" aria-live="polite">Nothing picked yet.</p>
+            <label class="c-consent" data-rx="~check/swing/tick/l"><input type="checkbox" name="consent" id="fm4-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+            <span class="c-err" id="fm4-consent-err" hidden></span>
+            <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+            <button type="submit" class="btn fm4__go" data-rx="~tag/zip/burst/r"><span class="btn__label">Send my request</span></button>
+            <p class="c-done" role="status" hidden></p>
+            <p class="fm4__facts"><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a><br>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver fm5" data-v="5" hidden>
+    <div class="wrap fm5__grid">
+      <div class="fm5__call">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-5">You will get <span class="acc">a real answer.</span></h1>
+        <p class="t-lead fm__lead">Not a callback form.</p>
+        <a class="fm5__num nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+        <p class="fm5__open"><svg class="fm5__lamp" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7"/></svg><span class="fm5__st">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+        <p class="fm5__hours">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+      </div>
+      <form class="fm5__card c-form" novalidate>
+        <p class="fm5__ct">Or leave your number</p>
+        <div class="c-f" data-rx="~badge/tilt/sweep/tr"><input id="fm5-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm5-name">Full name *</label><span class="c-err" id="fm5-name-err" hidden></span></div>
+        <div class="c-f" data-rx="~handset/tilt/sweep/tr"><input id="fm5-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm5-phone">Phone *</label><span class="c-err" id="fm5-phone-err" hidden></span></div>
+        <div class="c-f" data-rx="~sketch/tilt/sweep/tr"><textarea id="fm5-project" name="project" rows="3" placeholder=" " required></textarea><label for="fm5-project">Project description *</label><span class="c-err" id="fm5-project-err" hidden></span></div>
+        <label class="c-consent" data-rx="~check/tilt/tick/l"><input type="checkbox" name="consent" id="fm5-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm5-consent-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm5__go" data-rx="~handset/zip/ring/r"><span class="btn__label">Ask us to call me</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="ver fm1r" data-v="b1" hidden>
+    <div class="wrap fm1r__grid">
+      <div class="fm1r__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-1-r">A real consultation, <span class="acc">not a sales visit.</span></h1>
+        <p class="t-lead fm__lead">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/drop/sweep/r">Sales@elbazconstruction.com</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+        <div class="fm-proof"><p><span class="fm-proof__star" aria-hidden="true">&#9733;</span> <span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</p><p>Licensed, bonded &amp; insured &middot; CBC1265280</p></div>
+      </div>
+      <form class="fm1r__sheet c-form" novalidate>
+        <p class="fm1r__title">Consultation request</p>
+        <div class="fm1r__two">
+          <div class="c-f" data-rx="~badge/rail/sweep/tr"><input id="fm1r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm1r-name-r">Full name *</label><span class="c-err" id="fm1r-name-r-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/rail/sweep/tr"><input id="fm1r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm1r-phone-r">Phone *</label><span class="c-err" id="fm1r-phone-r-err" hidden></span></div>
+        </div>
+        <div class="fm1r__two">
+          <div class="c-f" data-rx="~envelope/rail/sweep/tr"><input id="fm1r-email-r" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm1r-email-r">Email *</label><span class="c-err" id="fm1r-email-r-err" hidden></span></div>
+          <div class="c-f" data-rx="~house2/rail/sweep/tr"><input id="fm1r-address-r" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm1r-address-r">Property address *</label><span class="c-err" id="fm1r-address-r-err" hidden></span></div>
+        </div>
+        <div class="c-f" data-rx="~sketch/rail/sweep/tr"><textarea id="fm1r-project-r" name="project" rows="4" placeholder=" " required></textarea><label for="fm1r-project-r">Project description *</label><span class="c-err" id="fm1r-project-r-err" hidden></span></div>
+        <fieldset class="fm-how">
+          <legend>Preferred contact method</legend>
+          <label data-rx="~handset/frame/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+          <label data-rx="~envelope/frame/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+          <label data-rx="~speech/frame/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+        </fieldset>
+        <label class="c-consent" data-rx="~check/frame/tick/l"><input type="checkbox" name="consent" id="fm1r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm1r-consent-r-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm1r__go" data-rx="~mailbox/zip/burst/r"><span class="btn__label">Send my request</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
 
 
+  <div class="ver fm2r" data-v="b2" hidden>
+    <div class="wrap fm2r__wrap">
+      <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+      <h1 class="t-head fm__h" id="contact-h1-2-r">Let&rsquo;s talk about <span class="acc">what you want to change.</span></h1>
+      <form class="fm2r__form c-form" novalidate>
+        <div class="fm2r__tape" aria-hidden="true"><svg class="fm2r__svg" viewBox="0 0 1000 56" preserveAspectRatio="none" focusable="false"></svg><span class="fm2r__fill"></span></div>
+        <p class="fm2r__count" aria-live="polite">Step <span class="nums">1</span> of <span class="nums">5</span></p>
+        <fieldset class="fm2r__step" data-step="1">
+          <legend class="fm2r__q">What do you want to change?</legend>
+          <div class="c-f" data-rx="~sketch/unfold/sweep/tr"><textarea id="fm2r-project-r" name="project" rows="4" placeholder=" " required></textarea><label for="fm2r-project-r">Project description *</label><span class="c-err" id="fm2r-project-r-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="2" hidden>
+          <legend class="fm2r__q">Where is the property?</legend>
+          <div class="c-f" data-rx="~house2/unfold/sweep/tr"><input id="fm2r-address-r" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm2r-address-r">Property address *</label><span class="c-err" id="fm2r-address-r-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="3" hidden>
+          <legend class="fm2r__q">Who are we talking to?</legend>
+          <div class="c-f" data-rx="~badge/unfold/sweep/tr"><input id="fm2r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm2r-name-r">Full name *</label><span class="c-err" id="fm2r-name-r-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="4" hidden>
+          <legend class="fm2r__q">How do we reach you?</legend>
+          <div class="c-f" data-rx="~handset/unfold/sweep/tr"><input id="fm2r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm2r-phone-r">Phone *</label><span class="c-err" id="fm2r-phone-r-err" hidden></span></div>
+          <div class="c-f" data-rx="~envelope/unfold/sweep/tr"><input id="fm2r-email-r" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm2r-email-r">Email *</label><span class="c-err" id="fm2r-email-r-err" hidden></span></div>
+          <fieldset class="fm-how fm2r__how"><legend>Preferred contact method</legend>
+            <label data-rx="~handset/bounce/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/bounce/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/bounce/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="5" hidden>
+          <legend class="fm2r__q">One last thing.</legend>
+          <label class="c-consent" data-rx="~check/bounce/tick/l"><input type="checkbox" name="consent" id="fm2r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="fm2r-consent-r-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        </fieldset>
+        <div class="fm2r__acts">
+          <button type="button" class="btn btn--ghost fm2r__back" data-rx="~arrowL/bounce/shake/l" hidden><span class="btn__label">Back</span></button>
+          <button type="button" class="btn fm2r__next" data-rx="~arrowR/bounce/hop/r"><span class="btn__label">Next</span></button>
+          <button type="submit" class="btn fm2r__go" data-rx="~envelope/hoist/burst/r" hidden><span class="btn__label">Send my request</span></button>
+        </div>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+      <ul class="fm2r__strip">
+        <li><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></li>
+        <li>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</li>
+        <li>19 W Flagler St #310, Miami, FL 33130</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="ver fm3r" data-v="b3" hidden>
+    <div class="wrap fm3r__grid">
+      <div class="fm3r__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-3-r">Write to us <span class="acc">in one paragraph.</span></h1>
+        <p class="t-lead fm__lead">Send us a message to get a free consultation. Don&rsquo;t worry, we won&rsquo;t charge a dime.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="fm3r__paper" novalidate>
+        <p class="fm3r__to">To: Sales@elbazconstruction.com</p>
+        <p class="fm3r__letter">Hello Elbaz Construction, my name is
+          <span class="fm3r__blank rx-host" data-rx="~badge/neon/sweep/b"><label class="sr-only" for="fm3r-name-r">Full name</label><input id="fm3r-name-r" name="name" type="text" autocomplete="name" placeholder="your full name" size="16"></span>.
+          I would like to talk about
+          <span class="fm3r__blank fm3r__blank--wide rx-host" data-rx="~sketch/neon/sweep/b"><label class="sr-only" for="fm3r-project-r">Project description</label><input id="fm3r-project-r" name="project" type="text" placeholder="what you want to change" size="26"></span>
+          at
+          <span class="fm3r__blank fm3r__blank--wide rx-host" data-rx="~house2/neon/sweep/b"><label class="sr-only" for="fm3r-address-r">Property address</label><input id="fm3r-address-r" name="address" type="text" autocomplete="street-address" placeholder="the property address" size="26"></span>.
+          The best way to reach me is by
+          <span class="fm3r__blank rx-host" data-rx="native:fm3r-how"><label class="sr-only" for="fm3r-contact-r">Preferred contact method</label><select id="fm3r-contact-r" name="contact"><option>phone</option><option>email</option><option>text</option></select></span>;
+          my phone is
+          <span class="fm3r__blank rx-host" data-rx="~handset/neon/sweep/b"><label class="sr-only" for="fm3r-phone-r">Phone</label><input id="fm3r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(000) 000-0000" size="14"></span>
+          and my email is
+          <span class="fm3r__blank fm3r__blank--wide rx-host" data-rx="~envelope/neon/sweep/b"><label class="sr-only" for="fm3r-email-r">Email</label><input id="fm3r-email-r" name="email" type="email" autocomplete="email" placeholder="you@example.com" size="22"></span>.
+        </p>
+        <ul class="fm3r__errs" aria-live="polite">
+          <li class="c-err" id="fm3r-name-r-err" hidden></li><li class="c-err" id="fm3r-project-r-err" hidden></li><li class="c-err" id="fm3r-address-r-err" hidden></li>
+          <li class="c-err" id="fm3r-phone-r-err" hidden></li><li class="c-err" id="fm3r-email-r-err" hidden></li><li class="c-err" id="fm3r-consent-r-err" hidden></li>
+        </ul>
+        <label class="c-consent" data-rx="~check/neon/tick/l"><input type="checkbox" name="consent" id="fm3r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <p class="c-note">Sending opens your email app with this letter addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm3r__go" data-rx="~envelope/neon/burst/r"><span class="btn__label">Send the letter</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="ver fm4r" data-v="b4" hidden>
+    <div class="wrap">
+      <div class="fm4r__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-4-r">Start with <span class="acc">the work.</span></h1>
+        <p class="t-lead fm__lead">Pick everything the project touches. Honest scope and budget guidance comes at the walkthrough.</p>
+      </div>
+      <form class="fm4r__form c-form" novalidate>
+        <div class="fm4r__chips" role="group" aria-label="Services the project touches"></div>
+        <span class="c-err" id="fm4r-work-r-err" hidden></span>
+        <div class="fm4r__grid">
+          <div class="fm4r__fields">
+            <div class="c-f" data-rx="~badge/swing/sweep/tr"><input id="fm4r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm4r-name-r">Full name *</label><span class="c-err" id="fm4r-name-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~handset/swing/sweep/tr"><input id="fm4r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm4r-phone-r">Phone *</label><span class="c-err" id="fm4r-phone-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~envelope/swing/sweep/tr"><input id="fm4r-email-r" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm4r-email-r">Email *</label><span class="c-err" id="fm4r-email-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~house2/swing/sweep/tr"><input id="fm4r-address-r" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm4r-address-r">Property address *</label><span class="c-err" id="fm4r-address-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~sketch/swing/sweep/tr"><textarea id="fm4r-notes-r" name="notes" rows="3" placeholder=" "></textarea><label for="fm4r-notes-r">Anything we should know? (optional)</label></div>
+          </div>
+          <div class="fm4r__send">
+            <p class="fm4r__picked" aria-live="polite">Nothing picked yet.</p>
+            <label class="c-consent" data-rx="~check/swing/tick/l"><input type="checkbox" name="consent" id="fm4r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+            <span class="c-err" id="fm4r-consent-r-err" hidden></span>
+            <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+            <button type="submit" class="btn fm4r__go" data-rx="~tag/zip/burst/r"><span class="btn__label">Send my request</span></button>
+            <p class="c-done" role="status" hidden></p>
+            <p class="fm4r__facts"><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a><br>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="ver fm5r" data-v="b5" hidden>
+    <div class="wrap fm5r__grid">
+      <div class="fm5r__call">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-5-r">You will get <span class="acc">a real answer.</span></h1>
+        <p class="t-lead fm__lead">Not a callback form.</p>
+        <a class="fm5r__num nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+        <p class="fm5r__open"><svg class="fm5r__lamp" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7"/></svg><span class="fm5r__st">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+        <p class="fm5r__hours">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+      </div>
+      <form class="fm5r__card c-form" novalidate>
+        <p class="fm5r__ct">Or leave your number</p>
+        <div class="c-f" data-rx="~badge/tilt/sweep/tr"><input id="fm5r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm5r-name-r">Full name *</label><span class="c-err" id="fm5r-name-r-err" hidden></span></div>
+        <div class="c-f" data-rx="~handset/tilt/sweep/tr"><input id="fm5r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm5r-phone-r">Phone *</label><span class="c-err" id="fm5r-phone-r-err" hidden></span></div>
+        <div class="c-f" data-rx="~sketch/tilt/sweep/tr"><textarea id="fm5r-project-r" name="project" rows="3" placeholder=" " required></textarea><label for="fm5r-project-r">Project description *</label><span class="c-err" id="fm5r-project-r-err" hidden></span></div>
+        <label class="c-consent" data-rx="~check/tilt/tick/l"><input type="checkbox" name="consent" id="fm5r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm5r-consent-r-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm5r__go" data-rx="~handset/zip/ring/r"><span class="btn__label">Ask us to call me</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<section id="contact-visit" class="sec cvisit g-surface" data-section="contact-visit" aria-labelledby="contact-visit-h-1">
+  
+
+  
+  <div class="ver vs1" data-v="1">
+    <div class="wrap vs1__grid">
+      <div class="vs1__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-1">Everything you need <span class="acc">on one card.</span></h2>
+        <p class="t-lead vs__lead">The number, the inbox, the office and the hours. Turn the card over for the rest.</p>
+        <button type="button" class="btn btn--ghost vs1__turn" aria-pressed="false" data-rx="~card/swing/wobble/r"><span class="btn__label">Turn the card over</span></button>
+      </div>
+      <div class="vs1__stage">
+        <div class="vs1__card">
+          <div class="vs1__face vs1__front">
+            <img class="vs1__logo" src="" data-logo alt="Elbaz Construction" width="292" height="100">
+            <p class="vs1__l"><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></p>
+            <p class="vs1__l"><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/swing/sweep/r">Sales@elbazconstruction.com</a></p>
+            <p class="vs1__w">elbazconstructioncorp.com</p>
+          </div>
+          <div class="vs1__face vs1__back">
+            <dl class="vs1__dl">
+              <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+              <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+            </dl>
+            <p class="vs1__lic">Licensed, bonded &amp; insured &middot; CBC1265280</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver vs2" data-v="2" hidden>
+    <div class="wrap">
+      <div class="vs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-2">Six days a week, <span class="acc">seven to seven.</span></h2>
+        <p class="t-lead vs__lead">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed. Miami time.</p>
+      </div>
+      <div class="vs2__week" role="img" aria-label="Opening hours: Sunday to Friday 7am to 7pm, Saturday closed"></div>
+      <p class="vs2__now" aria-live="polite"></p>
+      <ul class="vs2__facts">
+        <li><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></li>
+        <li>19 W Flagler St #310, Miami, FL 33130</li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <div class="ver vs3" data-v="3" hidden>
+    <div class="wrap vs3__grid">
+      <div class="vs3__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-3">Downtown Miami, <span class="acc">on Flagler.</span></h2>
+        <p class="t-lead vs__lead">Our office, Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed.</p>
+        <p class="vs3__call">Call first: <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></p>
+      </div>
+      <div class="vs3__label">
+        <p class="vs3__from">Elbaz Construction</p>
+        <address class="vs3__addr">19 W Flagler St #310<br>Miami, FL 33130</address>
+        <div class="vs3__acts">
+          <button type="button" class="btn vs3__cp" data-rx="~clamp/drop/tick/r"><span class="btn__label">Copy the address</span></button>
+          <a class="btn btn--ghost" href="https://www.google.com/maps?cid=17916885921843924422" target="_blank" rel="noopener" data-rx="~map/unfold/flash/r"><span class="btn__label">Open in Google Maps</span></a>
+        </div>
+        <p class="vs3__st" role="status"></p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver vs4" data-v="4" hidden>
+    <div class="wrap">
+      <div class="vs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-4">Seven places <span class="acc">to find us.</span></h2>
+        <p class="t-lead vs__lead">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed, at 19 W Flagler St #310, Miami, FL 33130.</p>
+      </div>
+      <ul class="vs4__rows">
+        <li><a class="vs4__r" href="tel:+17542360675" data-rx="phone"><span class="vs4__k">Call</span><span class="vs4__v nums">(754)&nbsp;236&#8209;0675</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4__r" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/slide/sweep/l"><span class="vs4__k">Email</span><span class="vs4__v">Sales@elbazconstruction.com</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4__r" href="https://www.google.com/maps/place/Elbaz+Construction+%26+Bathroom+Remodeling/@25.7744577,-80.1939141,17z/data=!4m8!3m7!1s0x88d9ad9ece57c53f:0xf8a590d174b44dc6!8m2!3d25.7744577!4d-80.1939141!9m1!1b1!16s%2Fg%2F11tc2l_6dz" target="_blank" rel="noopener" data-rx="~star/slide/sparkle/l"><span class="vs4__k">Google</span><span class="vs4__v"><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4__r" href="https://www.instagram.com/elbazconstruction" target="_blank" rel="noopener" data-rx="~camera/slide/flash/l"><span class="vs4__k">Instagram</span><span class="vs4__v">@elbazconstruction</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4__r" href="https://www.facebook.com/elbazconstruction" target="_blank" rel="noopener" data-rx="~speech/slide/puff/l"><span class="vs4__k">Facebook</span><span class="vs4__v">elbazconstruction</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4__r" href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling" target="_blank" rel="noopener" data-rx="~briefcase/slide/tick/l"><span class="vs4__k">LinkedIn</span><span class="vs4__v">Elbaz Construction</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4__r" href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A" target="_blank" rel="noopener" data-rx="~play/slide/ring/l"><span class="vs4__k">YouTube</span><span class="vs4__v">Elbaz Construction</span><svg class="vs4__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <div class="ver vs5" data-v="5" hidden>
+    <div class="wrap vs5__grid">
+      <svg class="vs5__dial" viewBox="-120 -120 240 240" aria-hidden="true" focusable="false"></svg>
+      <div class="vs5__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-5">Seven in the morning <span class="acc">to seven at night.</span></h2>
+        <p class="vs5__key"><span class="vs5__ki"><span class="vs5__sw" aria-hidden="true"></span>Outer ring: 7am to noon</span> <span class="vs5__ki"><span class="vs5__sw vs5__sw--pm" aria-hidden="true"></span>Inner ring: noon to 7pm</span></p>
+        <p class="vs5__st" aria-live="polite">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</p>
+        <dl class="vs5__dl">
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+        <p class="vs5__lic">Licensed, bonded &amp; insured &middot; CBC1265280</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ver vs1r" data-v="b1" hidden>
+    <div class="wrap vs1r__grid">
+      <div class="vs1r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-1-r">Everything you need <span class="acc">on one card.</span></h2>
+        <p class="t-lead vs__lead">The number, the inbox, the office and the hours. Turn the card over for the rest.</p>
+        <button type="button" class="btn btn--ghost vs1r__turn" aria-pressed="false" data-rx="~card/swing/wobble/r"><span class="btn__label">Turn the card over</span></button>
+      </div>
+      <div class="vs1r__stage">
+        <div class="vs1r__card">
+          <div class="vs1r__face vs1r__front">
+            <img class="vs1r__logo" src="" data-logo alt="Elbaz Construction" width="292" height="100">
+            <p class="vs1r__l"><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></p>
+            <p class="vs1r__l"><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/swing/sweep/r">Sales@elbazconstruction.com</a></p>
+            <p class="vs1r__w">elbazconstructioncorp.com</p>
+          </div>
+          <div class="vs1r__face vs1r__back">
+            <dl class="vs1r__dl">
+              <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+              <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+            </dl>
+            <p class="vs1r__lic">Licensed, bonded &amp; insured &middot; CBC1265280</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ver vs2r" data-v="b2" hidden>
+    <div class="wrap">
+      <div class="vs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-2-r">Six days a week, <span class="acc">seven to seven.</span></h2>
+        <p class="t-lead vs__lead">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed. Miami time.</p>
+      </div>
+      <div class="vs2r__week" role="img" aria-label="Opening hours: Sunday to Friday 7am to 7pm, Saturday closed"></div>
+      <p class="vs2r__now" aria-live="polite"></p>
+      <ul class="vs2r__facts">
+        <li><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></li>
+        <li>19 W Flagler St #310, Miami, FL 33130</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="ver vs3r" data-v="b3" hidden>
+    <div class="wrap vs3r__grid">
+      <div class="vs3r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-3-r">Downtown Miami, <span class="acc">on Flagler.</span></h2>
+        <p class="t-lead vs__lead">Our office, Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed.</p>
+        <p class="vs3r__call">Call first: <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></p>
+      </div>
+      <div class="vs3r__label">
+        <p class="vs3r__from">Elbaz Construction</p>
+        <address class="vs3r__addr">19 W Flagler St #310<br>Miami, FL 33130</address>
+        <div class="vs3r__acts">
+          <button type="button" class="btn vs3r__cp" data-rx="~clamp/drop/tick/r"><span class="btn__label">Copy the address</span></button>
+          <a class="btn btn--ghost" href="https://www.google.com/maps?cid=17916885921843924422" target="_blank" rel="noopener" data-rx="~map/unfold/flash/r"><span class="btn__label">Open in Google Maps</span></a>
+        </div>
+        <p class="vs3r__st" role="status"></p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ver vs4r" data-v="b4" hidden>
+    <div class="wrap">
+      <div class="vs__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-4-r">Seven places <span class="acc">to find us.</span></h2>
+        <p class="t-lead vs__lead">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed, at 19 W Flagler St #310, Miami, FL 33130.</p>
+      </div>
+      <ul class="vs4r__rows">
+        <li><a class="vs4r__r" href="tel:+17542360675" data-rx="phone"><span class="vs4r__k">Call</span><span class="vs4r__v nums">(754)&nbsp;236&#8209;0675</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4r__r" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/slide/sweep/l"><span class="vs4r__k">Email</span><span class="vs4r__v">Sales@elbazconstruction.com</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4r__r" href="https://www.google.com/maps/place/Elbaz+Construction+%26+Bathroom+Remodeling/@25.7744577,-80.1939141,17z/data=!4m8!3m7!1s0x88d9ad9ece57c53f:0xf8a590d174b44dc6!8m2!3d25.7744577!4d-80.1939141!9m1!1b1!16s%2Fg%2F11tc2l_6dz" target="_blank" rel="noopener" data-rx="~star/slide/sparkle/l"><span class="vs4r__k">Google</span><span class="vs4r__v"><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4r__r" href="https://www.instagram.com/elbazconstruction" target="_blank" rel="noopener" data-rx="~camera/slide/flash/l"><span class="vs4r__k">Instagram</span><span class="vs4r__v">@elbazconstruction</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4r__r" href="https://www.facebook.com/elbazconstruction" target="_blank" rel="noopener" data-rx="~speech/slide/puff/l"><span class="vs4r__k">Facebook</span><span class="vs4r__v">elbazconstruction</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4r__r" href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling" target="_blank" rel="noopener" data-rx="~briefcase/slide/tick/l"><span class="vs4r__k">LinkedIn</span><span class="vs4r__v">Elbaz Construction</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+        <li><a class="vs4r__r" href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A" target="_blank" rel="noopener" data-rx="~play/slide/ring/l"><span class="vs4r__k">YouTube</span><span class="vs4r__v">Elbaz Construction</span><svg class="vs4r__a" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 10 H36 M28 3 L36 10 L28 17"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="ver vs5r" data-v="b5" hidden>
+    <div class="wrap vs5r__grid">
+      <svg class="vs5r__dial" viewBox="-120 -120 240 240" aria-hidden="true" focusable="false"></svg>
+      <div class="vs5r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Visit and call</p>
+        <h2 class="t-head" id="contact-visit-h-5-r">Seven in the morning <span class="acc">to seven at night.</span></h2>
+        <p class="vs5r__key"><span class="vs5r__ki"><span class="vs5r__sw" aria-hidden="true"></span>Outer ring: 7am to noon</span> <span class="vs5r__ki"><span class="vs5r__sw vs5r__sw--pm" aria-hidden="true"></span>Inner ring: noon to 7pm</span></p>
+        <p class="vs5r__st" aria-live="polite">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</p>
+        <dl class="vs5r__dl">
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+        <p class="vs5r__lic">Licensed, bonded &amp; insured &middot; CBC1265280</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section id="contact-area" class="sec carea g-base" data-section="contact-area" aria-labelledby="contact-area-h-1">
+  
+
+  
+  <div class="ver sa1" data-v="1">
+    <div class="wrap sa1__grid">
+      <div class="sa1__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-1">Is your town <span class="acc">on our list?</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <form class="sa1__box" novalidate>
+        <label class="sa1__lbl" for="sa1-town">Your town or city</label>
+        <div class="sa1__row">
+          <span class="sa1__f rx-host" data-rx="~magnifier/rail/ring/l"><input id="sa1-town" type="text" list="sa1-list" autocomplete="address-level2" placeholder="Start typing, e.g. Coral Gables"></span>
+          <button type="submit" class="btn sa1__go" data-rx="~compass/spin/ring/r"><span class="btn__label">Check</span></button>
+        </div>
+        <datalist id="sa1-list"></datalist>
+        <div class="sa1__out" role="status"><p class="sa1__a">Miami&#8209;Dade <span class="nums">34</span> &middot; Broward <span class="nums">31</span> &middot; Palm Beach <span class="nums">39</span></p></div>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="ver sa2" data-v="2" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-2">Three counties, <span class="acc">every town named.</span></h2>
+        <p class="t-lead sa__lead">All <span class="nums">104</span> municipalities we build in, listed by county.</p>
+      </div>
+      <div class="sa2__cols"></div>
+    </div>
+  </div>
+
+  
+  <div class="ver sa3" data-v="3" hidden>
+    <div class="wrap sa3__grid">
+      <div class="sa3__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-3">From Palm Beach <span class="acc">to Miami&#8209;Dade.</span></h2>
+        <p class="t-lead sa__lead">Switch a county on or off. Every dot is one of the municipalities we build in.</p>
+        <div class="sa3__sw" role="group" aria-label="Counties shown"></div>
+        <p class="sa3__n" aria-live="polite"></p>
+        <p class="sa3__names"></p>
+      </div>
+      <svg class="sa3__map" aria-hidden="true" focusable="false"></svg>
+    </div>
+  </div>
+
+  
+  <div class="ver sa4" data-v="4" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-4"><span class="nums">104</span> municipalities, <span class="acc">in three parts.</span></h2>
+        <p class="t-lead sa__lead">Pick a county on the bar to read its towns.</p>
+      </div>
+      <div class="sa4__bar" role="radiogroup" aria-label="County"></div>
+      <div class="sa4__out" aria-live="polite"><p class="sa4__t"></p><ul class="sa4__tags"></ul></div>
+    </div>
+  </div>
+
+  
+  <div class="ver sa5" data-v="5" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-5">Wherever you are <span class="acc">in South Florida.</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <button type="button" class="btn btn--ghost sa5__stop" aria-pressed="false" data-rx="~pause/hinge/squash/r"><span class="btn__label">Stop the rows</span></button>
+    </div>
+    <div class="sa5__rows"></div>
+  </div>
+
+  <div class="ver sa1r" data-v="b1" hidden>
+    <div class="wrap sa1r__grid">
+      <div class="sa1r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-1-r">Is your town <span class="acc">on our list?</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <form class="sa1r__box" novalidate>
+        <label class="sa1r__lbl" for="sa1r-town-r">Your town or city</label>
+        <div class="sa1r__row">
+          <span class="sa1r__f rx-host" data-rx="~magnifier/rail/ring/l"><input id="sa1r-town-r" type="text" list="sa1r-list" autocomplete="address-level2" placeholder="Start typing, e.g. Coral Gables"></span>
+          <button type="submit" class="btn sa1r__go" data-rx="~compass/spin/ring/r"><span class="btn__label">Check</span></button>
+        </div>
+        <datalist id="sa1r-list-r"></datalist>
+        <div class="sa1r__out" role="status"><p class="sa1r__a">Miami&#8209;Dade <span class="nums">34</span> &middot; Broward <span class="nums">31</span> &middot; Palm Beach <span class="nums">39</span></p></div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="ver sa2r" data-v="b2" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-2-r">Three counties, <span class="acc">every town named.</span></h2>
+        <p class="t-lead sa__lead">All <span class="nums">104</span> municipalities we build in, listed by county.</p>
+      </div>
+      <div class="sa2r__cols"></div>
+    </div>
+  </div>
+
+
+  <div class="ver sa3r" data-v="b3" hidden>
+    <div class="wrap sa3r__grid">
+      <div class="sa3r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-3-r">From Palm Beach <span class="acc">to Miami&#8209;Dade.</span></h2>
+        <p class="t-lead sa__lead">Switch a county on or off. Every dot is one of the municipalities we build in.</p>
+        <div class="sa3r__sw" role="group" aria-label="Counties shown"></div>
+        <p class="sa3r__n" aria-live="polite"></p>
+        <p class="sa3r__names"></p>
+      </div>
+      <svg class="sa3r__map" aria-hidden="true" focusable="false"></svg>
+    </div>
+  </div>
+
+
+  <div class="ver sa4r" data-v="b4" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-4-r"><span class="nums">104</span> municipalities, <span class="acc">in three parts.</span></h2>
+        <p class="t-lead sa__lead">Pick a county on the bar to read its towns.</p>
+      </div>
+      <div class="sa4r__bar" role="radiogroup" aria-label="County"></div>
+      <div class="sa4r__out" aria-live="polite"><p class="sa4r__t"></p><ul class="sa4r__tags"></ul></div>
+    </div>
+  </div>
+
+
+  <div class="ver sa5r" data-v="b5" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-5-r">Wherever you are <span class="acc">in South Florida.</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <button type="button" class="btn btn--ghost sa5r__stop" aria-pressed="false" data-rx="~pause/hinge/squash/r"><span class="btn__label">Stop the rows</span></button>
+    </div>
+    <div class="sa5r__rows"></div>
+  </div>
+
+</section>
 
 </main>
 
@@ -3511,8 +4853,707 @@ html.has-buddy select { cursor: default !important; }
   };
 })();
 </script>
-<script>
+<script>/* Contact page, section 1 · contact-form. No server in this file: validate inline, then compose an email to the firm (said
+   before sending). The helpers are the homepage consult helpers, copied so this page does not load the homepage section. */
+(function () {
+  var TO = 'Sales@elbazconstruction.com';
+  var LABEL = { name: 'your full name', phone: 'a phone number', email: 'an email address', address: 'the property address', project: 'what you want to change' };
+  // the firm's published services, in its own order (FACTS.md "Services")
+  var WORK = [['Kitchen Remodeling', 'hood'], ['Bathroom Remodeling', 'shower'], ['Whole-Home Renovation', 'house'], ['ADUs & Additions', 'stairs'],
+    ['New Construction', 'crane'], ['Commercial Remodeling', 'briefcase'], ['Flooring', 'grid'], ['Roofing', 'ladder'], ['Windows & Doors', 'window'],
+    ['Outdoor Living', 'palm'], ['Planning & Permitting', 'ledger']];
+  function check(form, names) {
+    var f = form.elements, errs = [];
+    names.forEach(function (n) {
+      var el = f[n]; if (!el || n === 'consent') return;
+      var v = (el.value || '').trim(), msg = '';
+      if (!v) msg = 'Please add ' + LABEL[n] + '.';
+      else if (n === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) msg = 'That email address does not look complete.';
+      else if (n === 'phone' && v.replace(/\D/g, '').length < 10) msg = 'Please include the area code.';
+      errs.push({ el: el, msg: msg });
+    });
+    var c = f.consent;
+    if (c && names.indexOf('consent') > -1) errs.push({ el: c, msg: c.checked ? '' : 'Please tick the box so we may contact you about this enquiry.' });
+    return errs;
+  }
+  function show(errs, form, k) {
+    errs.forEach(function (e) {
+      var box = form.querySelector('#' + e.el.id + '-err');
+      e.el.setAttribute('aria-invalid', e.msg ? 'true' : 'false');
+      if (box) { box.textContent = e.msg; box.hidden = !e.msg; e.el.setAttribute('aria-describedby', box.id); }
+    });
+    var first = errs.filter(function (e) { return e.msg; })[0];
+    if (first) {
+      first.el.focus();
+      if (k && k.motion) gsap.fromTo(first.el.closest('.c-f, .c-consent, .fm3__blank') || first.el, { x: 0 }, { keyframes: [{ x: 6, duration: .08 }, { x: -6, duration: .08 }, { x: 4, duration: .06 }, { x: 0, duration: .06 }] });
+    }
+    return !first;
+  }
+  function v(form, n) { var el = form.elements[n]; return el ? (el.value || '').trim() : ''; }
+  function compose(form, head) {
+    var lines = (head || []).slice();
+    [['name', 'Name'], ['phone', 'Phone'], ['email', 'Email'], ['address', 'Property address'], ['project', 'Project'], ['notes', 'Notes'], ['contact', 'Preferred contact']].forEach(function (p) {
+      var x = v(form, p[0]); if (x) lines.push(p[1] + ': ' + x);
+    });
+    lines.push('', 'I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.');
+    return 'mailto:' + TO + '?subject=' + encodeURIComponent('Consultation request from ' + v(form, 'name')) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+  function done(form) {
+    var d = form.querySelector('.c-done');
+    d.innerHTML = 'Your email app should now be open with your request to ' + TO + '. Send it from there and we will come back to you, usually the same or next working day. If it is urgent, call <a class="link" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>.';
+    d.hidden = false;
+    if (EZ.bindOne) EZ.bindOne(d.querySelector('a'), form._kit);
+  }
+  function liveClear(form, k) {
+    form._kit = k;
+    form.querySelectorAll('input, textarea').forEach(function (el) {
+      // a filled field is checked when it is left; an empty one is only flagged on send
+      k.on(el, 'blur', function () {
+        if (!el.value || !LABEL[el.name]) return;
+        var e = check(form, [el.name])[0], b = el.id && form.querySelector('#' + el.id + '-err');
+        if (!e || !e.msg || !b) return;
+        b.textContent = e.msg; b.hidden = false; el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', b.id);
+      });
+      k.on(el, 'input', function () { var b = el.id && form.querySelector('#' + el.id + '-err'); if (b && !b.hidden) { b.hidden = true; el.setAttribute('aria-invalid', 'false'); } });
+      k.on(el, 'change', function () { var b = el.id && form.querySelector('#' + el.id + '-err'); if (b && !b.hidden && el.checked) { b.hidden = true; } });
+    });
+    k.add(function () { form.reset(); form.querySelectorAll('.c-err, .c-done').forEach(function (b) { b.hidden = true; }); form.querySelectorAll('[aria-invalid]').forEach(function (el) { el.removeAttribute('aria-invalid'); }); });
+  }
+  function send(form, url) { (EZ.consultMail || function (u) { window.location.href = u; })(url); done(form); }
+  if (!EZ.consultMail) EZ.consultMail = function (url) { window.location.href = url; };   // tests replace this to intercept the mailto navigation
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
+  EZ.section('contact-form', {
+    /* v1 · The request sheet: every published field at once */
+    1: { init: function (root, k) {
+      var form = root.querySelector('form');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'email', 'address', 'project', 'consent']), form, k)) return;
+        send(form, compose(form));
+      });
+      EZ.reveal(k, root.querySelectorAll('.fm1__side > *'));
+      if (k.motion) gsap.from(root.querySelector('.fm1__sheet'), { y: 24, rotate: -1.2, opacity: 0, duration: .7, ease: 'power3.out', delay: .15 });
+    } },
+
+    /* v2 · One question at a time along a tape measure */
+    2: { init: function (root, k) {
+      var form = root.querySelector('form'), steps = Array.prototype.slice.call(root.querySelectorAll('.fm2__step'));
+      var back = root.querySelector('.fm2__back'), next = root.querySelector('.fm2__next'), go = root.querySelector('.fm2__go');
+      var count = root.querySelector('.fm2__count .nums'), fill = root.querySelector('.fm2__fill'), svg = root.querySelector('.fm2__svg');
+      var NEED = [['project'], ['address'], ['name'], ['phone', 'email'], ['consent']], at = 0;
+      var s = '<path class="fm2__edge" d="M0 55 H1000"/>';
+      for (var i = 0; i <= 100; i++) s += '<path class="fm2__tk' + (i % 20 === 0 ? ' fm2__tk--big' : '') + '" d="M' + (i * 10) + ' 55 V' + (i % 20 === 0 ? 20 : i % 2 ? 44 : 36) + '"/>';
+      for (var j = 1; j <= 5; j++) s += '<text class="fm2__n" x="' + (j * 200 - 12) + '" y="16">' + j + '</text>';
+      svg.innerHTML = s;
+      function to(n, focus) {
+        at = n;
+        steps.forEach(function (st, i) { st.hidden = i !== n; });
+        back.hidden = n === 0; next.hidden = n === 4; go.hidden = n !== 4;
+        count.textContent = n + 1;
+        if (k.motion) k.ctx.add(function () { gsap.to(fill, { scaleX: (n + 1) / 5, duration: .45, ease: 'power3.out' }); }); else fill.style.transform = 'scaleX(' + (n + 1) / 5 + ')';
+        if (focus) { var f = steps[n].querySelector('input:not([type=radio]), textarea'); if (f) f.focus(); }
+      }
+      function forward() { if (show(check(form, NEED[at]), form, k)) to(at + 1, true); }
+      liveClear(form, k);
+      k.on(next, 'click', forward);
+      k.on(back, 'click', function () { to(at - 1, true); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (at < 4) { forward(); return; }   // Enter in a field moves along instead of sending early
+        if (!show(check(form, ['consent']), form, k)) return;
+        send(form, compose(form));
+      });
+      to(0);
+      k.add(function () { svg.innerHTML = ''; steps.forEach(function (st, i) { st.hidden = i !== 0; }); back.hidden = true; next.hidden = false; go.hidden = true; fill.style.transform = ''; });
+      EZ.reveal(k, root.querySelectorAll('.fm2__wrap > .eyebrow, .fm2__wrap > h1'));
+    } },
+
+    /* v3 · The letter: blanks inside the sentence; errors listed under it */
+    3: { init: function (root, k) {
+      var form = root.querySelector('form');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'project', 'address', 'phone', 'email', 'consent']), form, k)) return;
+        send(form, compose(form));
+      });
+      EZ.reveal(k, root.querySelectorAll('.fm3__side > *'));
+      if (k.motion) gsap.from(root.querySelectorAll('.fm3__blank'), { '--u': 0, duration: .5, stagger: .08, ease: 'power2.out', delay: .3 });
+    } },
+
+    /* v4 · Pick the work first: toggles for the published services; the picked ones head the email */
+    4: { init: function (root, k) {
+      var form = root.querySelector('form'), chips = root.querySelector('.fm4__chips'), picked = root.querySelector('.fm4__picked'), err = root.querySelector('.fm4__chips + .c-err');
+      chips.innerHTML = WORK.map(function (w, i) { return '<button type="button" class="fm4__chip" aria-pressed="false" data-i="' + i + '" data-rx="~' + w[1] + '/pop/chips/t"><svg class="fm4__tick" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 L6.5 12 L13 4.5"/></svg>' + esc(w[0]) + '</button>'; }).join('');
+      var C = Array.prototype.slice.call(chips.children);
+      function list() { return C.filter(function (c) { return c.getAttribute('aria-pressed') === 'true'; }).map(function (c) { return WORK[+c.dataset.i][0]; }); }
+      C.forEach(function (c) {
+        k.on(c, 'click', function () {
+          var on = c.getAttribute('aria-pressed') !== 'true';
+          c.setAttribute('aria-pressed', on ? 'true' : 'false');
+          var l = list(); picked.textContent = l.length ? 'Picked: ' + l.join(', ') + '.' : 'Nothing picked yet.';
+          if (l.length) err.hidden = true;
+          if (on && k.motion) k.ctx.add(function () { gsap.fromTo(c.querySelector('.fm4__tick'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .25, ease: 'power2.out' }); });
+        });
+      });
+      if (EZ.bindReactions) EZ.bindReactions(chips, k);
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var l = list();
+        err.textContent = l.length ? '' : 'Please pick at least one kind of work.'; err.hidden = !!l.length;
+        var ok = show(check(form, ['name', 'phone', 'email', 'address', 'consent']), form, k);
+        if (!l.length) { C[0].focus(); return; }
+        if (!ok) return;
+        send(form, compose(form, ['Work: ' + l.join(', ')]));
+      });
+      k.add(function () { chips.innerHTML = ''; picked.textContent = 'Nothing picked yet.'; err.hidden = true; });
+      EZ.reveal(k, root.querySelectorAll('.fm4__head > *'));
+      if (k.motion) gsap.from(C, { y: 14, opacity: 0, duration: .4, stagger: .04, ease: 'power3.out', delay: .2 });
+    } },
+
+    /* v5 · Call first: open or closed right now from the published hours (Sun to Fri 7am to 7pm, Saturday closed), Miami time */
+    5: { init: function (root, k) {
+      var openP = root.querySelector('.fm5__open'), openT = root.querySelector('.fm5__st');
+      function openNow() {
+        var parts = {};
+        try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; }); } catch (e) { return; }
+        var day = parts.weekday, h = +parts.hour % 24, open = day !== 'Sat' && h >= 7 && h < 19;
+        openP.classList.toggle('is-open', open);
+        openT.textContent = open ? 'Open now, until 7pm Miami time' : day === 'Sat' ? 'Closed on Saturdays. We open again Sunday at 7am' : 'Closed now. We open at 7am Miami time' + (day === 'Fri' && h >= 19 ? ' on Sunday' : '');
+      }
+      openNow();
+      var t = setInterval(openNow, 60000);
+      k.add(function () { clearInterval(t); openP.classList.remove('is-open'); openT.textContent = 'Sun–Fri 7am–7pm, Miami time'; });
+      var form = root.querySelector('form');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'project', 'consent']), form, k)) return;
+        send(form, compose(form, ['Please call me back.']));
+      });
+      EZ.reveal(k, root.querySelectorAll('.fm5__call > *'));
+      if (k.motion) gsap.from(root.querySelector('.fm5__card'), { x: 30, opacity: 0, duration: .7, ease: 'power3.out', delay: .2 });
+    } },
+
+    /* b1 · release record of slot 1 */
+    b1: { init: function (root, k) {
+      var form = root.querySelector('form');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'email', 'address', 'project', 'consent']), form, k)) return;
+        send(form, compose(form));
+      });
+      EZ.reveal(k, root.querySelectorAll('.fm1r__side > *'));
+      if (k.motion) gsap.from(root.querySelector('.fm1r__sheet'), { y: 24, rotate: -1.2, opacity: 0, duration: .7, ease: 'power3.out', delay: .15 });
+    } },
+
+    /* b2 · release record of slot 2 */
+    b2: { init: function (root, k) {
+      var form = root.querySelector('form'), steps = Array.prototype.slice.call(root.querySelectorAll('.fm2r__step'));
+      var back = root.querySelector('.fm2r__back'), next = root.querySelector('.fm2r__next'), go = root.querySelector('.fm2r__go');
+      var count = root.querySelector('.fm2r__count .nums'), fill = root.querySelector('.fm2r__fill'), svg = root.querySelector('.fm2r__svg');
+      var NEED = [['project'], ['address'], ['name'], ['phone', 'email'], ['consent']], at = 0;
+      var s = '<path class="fm2r__edge" d="M0 55 H1000"/>';
+      for (var i = 0; i <= 100; i++) s += '<path class="fm2r__tk' + (i % 20 === 0 ? ' fm2r__tk--big' : '') + '" d="M' + (i * 10) + ' 55 V' + (i % 20 === 0 ? 20 : i % 2 ? 44 : 36) + '"/>';
+      for (var j = 1; j <= 5; j++) s += '<text class="fm2r__n" x="' + (j * 200 - 12) + '" y="16">' + j + '</text>';
+      svg.innerHTML = s;
+      function to(n, focus) {
+        at = n;
+        steps.forEach(function (st, i) { st.hidden = i !== n; });
+        back.hidden = n === 0; next.hidden = n === 4; go.hidden = n !== 4;
+        count.textContent = n + 1;
+        if (k.motion) k.ctx.add(function () { gsap.to(fill, { scaleX: (n + 1) / 5, duration: .45, ease: 'power3.out' }); }); else fill.style.transform = 'scaleX(' + (n + 1) / 5 + ')';
+        if (focus) { var f = steps[n].querySelector('input:not([type=radio]), textarea'); if (f) f.focus(); }
+      }
+      function forward() { if (show(check(form, NEED[at]), form, k)) to(at + 1, true); }
+      liveClear(form, k);
+      k.on(next, 'click', forward);
+      k.on(back, 'click', function () { to(at - 1, true); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (at < 4) { forward(); return; }   // Enter in a field moves along instead of sending early
+        if (!show(check(form, ['consent']), form, k)) return;
+        send(form, compose(form));
+      });
+      to(0);
+      k.add(function () { svg.innerHTML = ''; steps.forEach(function (st, i) { st.hidden = i !== 0; }); back.hidden = true; next.hidden = false; go.hidden = true; fill.style.transform = ''; });
+      EZ.reveal(k, root.querySelectorAll('.fm2r__wrap > .eyebrow, .fm2r__wrap > h1'));
+    } },
+
+    /* b3 · release record of slot 3 */
+    b3: { init: function (root, k) {
+      var form = root.querySelector('form');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'project', 'address', 'phone', 'email', 'consent']), form, k)) return;
+        send(form, compose(form));
+      });
+      EZ.reveal(k, root.querySelectorAll('.fm3r__side > *'));
+      if (k.motion) gsap.from(root.querySelectorAll('.fm3r__blank'), { '--u': 0, duration: .5, stagger: .08, ease: 'power2.out', delay: .3 });
+    } },
+
+    /* b4 · release record of slot 4 */
+    b4: { init: function (root, k) {
+      var form = root.querySelector('form'), chips = root.querySelector('.fm4r__chips'), picked = root.querySelector('.fm4r__picked'), err = root.querySelector('.fm4r__chips + .c-err');
+      chips.innerHTML = WORK.map(function (w, i) { return '<button type="button" class="fm4r__chip" aria-pressed="false" data-i="' + i + '" data-rx="~' + w[1] + '/pop/chips/t"><svg class="fm4r__tick" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 L6.5 12 L13 4.5"/></svg>' + esc(w[0]) + '</button>'; }).join('');
+      var C = Array.prototype.slice.call(chips.children);
+      function list() { return C.filter(function (c) { return c.getAttribute('aria-pressed') === 'true'; }).map(function (c) { return WORK[+c.dataset.i][0]; }); }
+      C.forEach(function (c) {
+        k.on(c, 'click', function () {
+          var on = c.getAttribute('aria-pressed') !== 'true';
+          c.setAttribute('aria-pressed', on ? 'true' : 'false');
+          var l = list(); picked.textContent = l.length ? 'Picked: ' + l.join(', ') + '.' : 'Nothing picked yet.';
+          if (l.length) err.hidden = true;
+          if (on && k.motion) k.ctx.add(function () { gsap.fromTo(c.querySelector('.fm4r__tick'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .25, ease: 'power2.out' }); });
+        });
+      });
+      if (EZ.bindReactions) EZ.bindReactions(chips, k);
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var l = list();
+        err.textContent = l.length ? '' : 'Please pick at least one kind of work.'; err.hidden = !!l.length;
+        var ok = show(check(form, ['name', 'phone', 'email', 'address', 'consent']), form, k);
+        if (!l.length) { C[0].focus(); return; }
+        if (!ok) return;
+        send(form, compose(form, ['Work: ' + l.join(', ')]));
+      });
+      k.add(function () { chips.innerHTML = ''; picked.textContent = 'Nothing picked yet.'; err.hidden = true; });
+      EZ.reveal(k, root.querySelectorAll('.fm4r__head > *'));
+      if (k.motion) gsap.from(C, { y: 14, opacity: 0, duration: .4, stagger: .04, ease: 'power3.out', delay: .2 });
+    } },
+
+    /* b5 · release record of slot 5 */
+    b5: { init: function (root, k) {
+      var openP = root.querySelector('.fm5r__open'), openT = root.querySelector('.fm5r__st');
+      function openNow() {
+        var parts = {};
+        try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; }); } catch (e) { return; }
+        var day = parts.weekday, h = +parts.hour % 24, open = day !== 'Sat' && h >= 7 && h < 19;
+        openP.classList.toggle('is-open', open);
+        openT.textContent = open ? 'Open now, until 7pm Miami time' : day === 'Sat' ? 'Closed on Saturdays. We open again Sunday at 7am' : 'Closed now. We open at 7am Miami time' + (day === 'Fri' && h >= 19 ? ' on Sunday' : '');
+      }
+      openNow();
+      var t = setInterval(openNow, 60000);
+      k.add(function () { clearInterval(t); openP.classList.remove('is-open'); openT.textContent = 'Sun–Fri 7am–7pm, Miami time'; });
+      var form = root.querySelector('form');
+      liveClear(form, k);
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'project', 'consent']), form, k)) return;
+        send(form, compose(form, ['Please call me back.']));
+      });
+      EZ.reveal(k, root.querySelectorAll('.fm5r__call > *'));
+      if (k.motion) gsap.from(root.querySelector('.fm5r__card'), { x: 30, opacity: 0, duration: .7, ease: 'power3.out', delay: .2 });
+    } }
+  });
+})();
+
+/* Contact page, section 2 · contact-visit. Open or closed comes only from the published hours (Sun to Fri 7am to 7pm,
+   Saturday closed), read in Miami time. */
+(function () {
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function miami() {
+    var o = {};
+    try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date()).forEach(function (p) { o[p.type] = p.value; }); } catch (e) { return null; }
+    var d = DAYS.indexOf(o.weekday), h = +o.hour % 24, m = +o.minute;
+    return { d: d, h: h, m: m, open: d !== 6 && h >= 7 && h < 19 };
+  }
+  function status(t) {
+    if (!t) return 'Sun–Fri 7am–7pm · Saturday closed';
+    if (t.open) return 'Open now, until 7pm Miami time.';
+    if (t.d === 6) return 'Closed on Saturdays. We open again Sunday at 7am.';
+    return 'Closed now. We open at 7am Miami time' + (t.d === 5 && t.h >= 19 ? ' on Sunday.' : '.');
+  }
+
+  EZ.section('contact-visit', {
+    /* v1 · The business card: the button turns it; the hidden face is inert so the tab order follows what is seen */
+    1: { init: function (root, k) {
+      var btn = root.querySelector('.vs1__turn'), card = root.querySelector('.vs1__card'), front = root.querySelector('.vs1__front'), back = root.querySelector('.vs1__back');
+      function set(over) {
+        btn.setAttribute('aria-pressed', over ? 'true' : 'false');
+        btn.querySelector('.btn__label').textContent = over ? 'Turn back to the front' : 'Turn the card over';
+        front.inert = over; back.inert = !over;
+        front.setAttribute('aria-hidden', over ? 'true' : 'false'); back.setAttribute('aria-hidden', over ? 'false' : 'true');
+        if (k.motion) k.ctx.add(function () { gsap.to(card, { rotateY: over ? 180 : 0, duration: .7, ease: 'power3.inOut' }); });
+        else card.classList.toggle('is-over', over);
+      }
+      k.on(btn, 'click', function () { set(btn.getAttribute('aria-pressed') !== 'true'); });
+      set(false);
+      k.add(function () { gsap.set(card, { clearProps: 'transform' }); card.classList.remove('is-over'); front.inert = false; back.inert = false; front.removeAttribute('aria-hidden'); back.removeAttribute('aria-hidden'); btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.btn__label').textContent = 'Turn the card over'; });
+      EZ.reveal(k, root.querySelectorAll('.vs1__copy > *'));
+      if (k.motion) gsap.from(card, { rotate: -6, y: 40, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
+    } },
+
+    /* v2 · The week: bars from 7 to 19 on a 0 to 24 rule, Saturday empty; today outlined; the now line moves every minute */
+    2: { init: function (root, k) {
+      var wk = root.querySelector('.vs2__week'), now = root.querySelector('.vs2__now');
+      wk.innerHTML = '<div class="vs2__ax" aria-hidden="true">' + [0, 6, 12, 18, 24].map(function (h) { return '<span style="left:' + (h / 24 * 100) + '%">' + (h === 0 || h === 24 ? '12am' : h === 12 ? '12pm' : h < 12 ? h + 'am' : (h - 12) + 'pm') + '</span>'; }).join('') + '</div>' +
+        DAYS.map(function (d, i) { return '<div class="vs2__row" data-d="' + i + '"><span class="vs2__d">' + LONG[i] + '</span><span class="vs2__track">' + (i === 6 ? '<span class="vs2__closed">Closed</span>' : '<span class="vs2__bar"><span>7am&ndash;7pm</span></span>') + '<span class="vs2__line" hidden></span></span></div>'; }).join('');
+      var rows = Array.prototype.slice.call(wk.querySelectorAll('.vs2__row'));
+      function tick() {
+        var t = miami(); now.textContent = status(t);
+        rows.forEach(function (r, i) {
+          var on = t && t.d === i, ln = r.querySelector('.vs2__line');
+          r.classList.toggle('is-today', !!on); ln.hidden = !on;
+          if (on) ln.style.left = ((t.h + t.m / 60) / 24 * 100) + '%';
+        });
+      }
+      tick();
+      var timer = setInterval(tick, 60000);
+      k.add(function () { clearInterval(timer); wk.innerHTML = ''; now.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.vs__head > *'));
+      if (k.motion) gsap.from(wk.querySelectorAll('.vs2__bar'), { scaleX: 0, transformOrigin: '0% 50%', duration: .6, stagger: .07, ease: 'power3.out', scrollTrigger: { trigger: wk, start: 'top 80%', once: true } });
+    } },
+
+    /* v3 · The address label: the copy button writes the address to the clipboard and says whether that worked */
+    3: { init: function (root, k) {
+      var btn = root.querySelector('.vs3__cp'), st = root.querySelector('.vs3__st'), ADDR = '19 W Flagler St #310, Miami, FL 33130';
+      function say(t) { st.textContent = t; }
+      k.on(btn, 'click', function () {
+        var ok = function () { say('Copied: ' + ADDR + '.'); }, no = function () { say('Copying is blocked here. The address is ' + ADDR + '.'); };
+        try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ADDR).then(ok, no); else no(); } catch (e) { no(); }
+      });
+      k.add(function () { st.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.vs3__copy > *'));
+      if (k.motion) gsap.from(root.querySelector('.vs3__label'), { rotate: 3, y: 30, opacity: 0, duration: .7, ease: 'back.out(1.4)', scrollTrigger: { trigger: root.querySelector('.vs3__label'), start: 'top 85%', once: true } });
+    } },
+
+    /* v4 · The channel board: rows slide in; the arrow travels on hover (CSS) */
+    4: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.vs__head > *'));
+      if (k.motion) gsap.from(root.querySelectorAll('.vs4__rows li'), { x: -40, opacity: 0, duration: .5, stagger: .06, ease: 'power3.out', scrollTrigger: { trigger: root.querySelector('.vs4__rows'), start: 'top 85%', once: true } });
+    } },
+
+    /* v5 · The clock: twelve-hour dial; the published span 7 to 7 shaded as two arcs (morning and afternoon); hands at Miami time */
+    5: { init: function (root, k) {
+      var svg = root.querySelector('.vs5__dial'), st = root.querySelector('.vs5__st'), R = 100;
+      function pt(a, r) { return [Math.sin(a) * r, -Math.cos(a) * r]; }
+      function arc(h0, h1, r) { var a0 = h0 / 12 * Math.PI * 2, a1 = h1 / 12 * Math.PI * 2, p0 = pt(a0, r), p1 = pt(a1, r); return 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > Math.PI ? 1 : 0) + ' 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1); }
+      var s = '<circle class="vs5__face" r="' + R + '"/>';
+      // 7am to 12 (outer ring) then 12 to 7pm (inner ring): the whole published day
+      s += '<path class="vs5__open" d="' + arc(7, 12, R - 10) + '"/><path class="vs5__open vs5__open--pm" d="' + arc(0, 7, R - 26) + '"/>';
+      for (var i = 0; i < 60; i++) { var a = i / 60 * Math.PI * 2, p0 = pt(a, R - (i % 5 ? 4 : 9)), p1 = pt(a, R); s += '<path class="vs5__tk' + (i % 5 ? '' : ' vs5__tk--h') + '" d="M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' L' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + '"/>'; }
+      [12, 3, 6, 9].forEach(function (h) { var p = pt(h / 12 * Math.PI * 2, R - 44); s += '<text class="vs5__n" x="' + p[0].toFixed(1) + '" y="' + (p[1] + 6).toFixed(1) + '">' + h + '</text>'; });
+      s += '<path class="vs5__hh" d="M0 8 V-48"/><path class="vs5__mh" d="M0 12 V-74"/><circle class="vs5__pin" r="5"/>';
+      svg.innerHTML = s;
+      var hh = svg.querySelector('.vs5__hh'), mh = svg.querySelector('.vs5__mh');
+      function tick() {
+        var t = miami(); st.textContent = status(t);
+        if (!t) return;
+        hh.setAttribute('transform', 'rotate(' + ((t.h % 12) * 30 + t.m / 2) + ')'); mh.setAttribute('transform', 'rotate(' + t.m * 6 + ')');
+        svg.classList.toggle('is-open', t.open);
+      }
+      tick();
+      var timer = setInterval(tick, 30000);
+      k.add(function () { clearInterval(timer); svg.innerHTML = ''; st.textContent = 'Sun–Fri 7am–7pm · Saturday closed'; });
+      EZ.reveal(k, root.querySelectorAll('.vs5__copy > *'));
+      if (k.motion) gsap.from(svg.querySelectorAll('.vs5__open'), { drawSVG: '0%', duration: 1, stagger: .3, ease: 'power2.inOut', scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    } },
+
+    /* b1 · release record of slot 1 */
+    b1: { init: function (root, k) {
+      var btn = root.querySelector('.vs1r__turn'), card = root.querySelector('.vs1r__card'), front = root.querySelector('.vs1r__front'), back = root.querySelector('.vs1r__back');
+      function set(over) {
+        btn.setAttribute('aria-pressed', over ? 'true' : 'false');
+        btn.querySelector('.btn__label').textContent = over ? 'Turn back to the front' : 'Turn the card over';
+        front.inert = over; back.inert = !over;
+        front.setAttribute('aria-hidden', over ? 'true' : 'false'); back.setAttribute('aria-hidden', over ? 'false' : 'true');
+        if (k.motion) k.ctx.add(function () { gsap.to(card, { rotateY: over ? 180 : 0, duration: .7, ease: 'power3.inOut' }); });
+        else card.classList.toggle('is-over', over);
+      }
+      k.on(btn, 'click', function () { set(btn.getAttribute('aria-pressed') !== 'true'); });
+      set(false);
+      k.add(function () { gsap.set(card, { clearProps: 'transform' }); card.classList.remove('is-over'); front.inert = false; back.inert = false; front.removeAttribute('aria-hidden'); back.removeAttribute('aria-hidden'); btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.btn__label').textContent = 'Turn the card over'; });
+      EZ.reveal(k, root.querySelectorAll('.vs1r__copy > *'));
+      if (k.motion) gsap.from(card, { rotate: -6, y: 40, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
+    } },
+
+    /* b2 · release record of slot 2 */
+    b2: { init: function (root, k) {
+      var wk = root.querySelector('.vs2r__week'), now = root.querySelector('.vs2r__now');
+      wk.innerHTML = '<div class="vs2r__ax" aria-hidden="true">' + [0, 6, 12, 18, 24].map(function (h) { return '<span style="left:' + (h / 24 * 100) + '%">' + (h === 0 || h === 24 ? '12am' : h === 12 ? '12pm' : h < 12 ? h + 'am' : (h - 12) + 'pm') + '</span>'; }).join('') + '</div>' +
+        DAYS.map(function (d, i) { return '<div class="vs2r__row" data-d="' + i + '"><span class="vs2r__d">' + LONG[i] + '</span><span class="vs2r__track">' + (i === 6 ? '<span class="vs2r__closed">Closed</span>' : '<span class="vs2r__bar"><span>7am&ndash;7pm</span></span>') + '<span class="vs2r__line" hidden></span></span></div>'; }).join('');
+      var rows = Array.prototype.slice.call(wk.querySelectorAll('.vs2r__row'));
+      function tick() {
+        var t = miami(); now.textContent = status(t);
+        rows.forEach(function (r, i) {
+          var on = t && t.d === i, ln = r.querySelector('.vs2r__line');
+          r.classList.toggle('is-today', !!on); ln.hidden = !on;
+          if (on) ln.style.left = ((t.h + t.m / 60) / 24 * 100) + '%';
+        });
+      }
+      tick();
+      var timer = setInterval(tick, 60000);
+      k.add(function () { clearInterval(timer); wk.innerHTML = ''; now.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.vs__head > *'));
+      if (k.motion) gsap.from(wk.querySelectorAll('.vs2r__bar'), { scaleX: 0, transformOrigin: '0% 50%', duration: .6, stagger: .07, ease: 'power3.out', scrollTrigger: { trigger: wk, start: 'top 80%', once: true } });
+    } },
+
+    /* b3 · release record of slot 3 */
+    b3: { init: function (root, k) {
+      var btn = root.querySelector('.vs3r__cp'), st = root.querySelector('.vs3r__st'), ADDR = '19 W Flagler St #310, Miami, FL 33130';
+      function say(t) { st.textContent = t; }
+      k.on(btn, 'click', function () {
+        var ok = function () { say('Copied: ' + ADDR + '.'); }, no = function () { say('Copying is blocked here. The address is ' + ADDR + '.'); };
+        try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ADDR).then(ok, no); else no(); } catch (e) { no(); }
+      });
+      k.add(function () { st.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.vs3r__copy > *'));
+      if (k.motion) gsap.from(root.querySelector('.vs3r__label'), { rotate: 3, y: 30, opacity: 0, duration: .7, ease: 'back.out(1.4)', scrollTrigger: { trigger: root.querySelector('.vs3r__label'), start: 'top 85%', once: true } });
+    } },
+
+    /* b4 · release record of slot 4 */
+    b4: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.vs__head > *'));
+      if (k.motion) gsap.from(root.querySelectorAll('.vs4r__rows li'), { x: -40, opacity: 0, duration: .5, stagger: .06, ease: 'power3.out', scrollTrigger: { trigger: root.querySelector('.vs4r__rows'), start: 'top 85%', once: true } });
+    } },
+
+    /* b5 · release record of slot 5 */
+    b5: { init: function (root, k) {
+      var svg = root.querySelector('.vs5r__dial'), st = root.querySelector('.vs5r__st'), R = 100;
+      function pt(a, r) { return [Math.sin(a) * r, -Math.cos(a) * r]; }
+      function arc(h0, h1, r) { var a0 = h0 / 12 * Math.PI * 2, a1 = h1 / 12 * Math.PI * 2, p0 = pt(a0, r), p1 = pt(a1, r); return 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > Math.PI ? 1 : 0) + ' 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1); }
+      var s = '<circle class="vs5r__face" r="' + R + '"/>';
+      // 7am to 12 (outer ring) then 12 to 7pm (inner ring): the whole published day
+      s += '<path class="vs5r__open" d="' + arc(7, 12, R - 10) + '"/><path class="vs5r__open vs5r__open--pm" d="' + arc(0, 7, R - 26) + '"/>';
+      for (var i = 0; i < 60; i++) { var a = i / 60 * Math.PI * 2, p0 = pt(a, R - (i % 5 ? 4 : 9)), p1 = pt(a, R); s += '<path class="vs5r__tk' + (i % 5 ? '' : ' vs5r__tk--h') + '" d="M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' L' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + '"/>'; }
+      [12, 3, 6, 9].forEach(function (h) { var p = pt(h / 12 * Math.PI * 2, R - 44); s += '<text class="vs5r__n" x="' + p[0].toFixed(1) + '" y="' + (p[1] + 6).toFixed(1) + '">' + h + '</text>'; });
+      s += '<path class="vs5r__hh" d="M0 8 V-48"/><path class="vs5r__mh" d="M0 12 V-74"/><circle class="vs5r__pin" r="5"/>';
+      svg.innerHTML = s;
+      var hh = svg.querySelector('.vs5r__hh'), mh = svg.querySelector('.vs5r__mh');
+      function tick() {
+        var t = miami(); st.textContent = status(t);
+        if (!t) return;
+        hh.setAttribute('transform', 'rotate(' + ((t.h % 12) * 30 + t.m / 2) + ')'); mh.setAttribute('transform', 'rotate(' + t.m * 6 + ')');
+        svg.classList.toggle('is-open', t.open);
+      }
+      tick();
+      var timer = setInterval(tick, 30000);
+      k.add(function () { clearInterval(timer); svg.innerHTML = ''; st.textContent = 'Sun–Fri 7am–7pm · Saturday closed'; });
+      EZ.reveal(k, root.querySelectorAll('.vs5r__copy > *'));
+      if (k.motion) gsap.from(svg.querySelectorAll('.vs5r__open'), { drawSVG: '0%', duration: 1, stagger: .3, ease: 'power2.inOut', scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    } }
+  });
+})();
+
+/* Contact page, section 3 · contact-area. Town names, counties and map positions come only from the map data. */
+(function () {
+  var ORDER = ['Palm Beach', 'Broward', 'Miami-Dade'];
+  function geo() { return (window.__DATA || {}).southfl; }
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function nb(c) { return c.replace('-', '‑'); }
+  function norm(t) { return String(t).toLowerCase().replace(/[^a-z]/g, ''); }
+
+  EZ.section('contact-area', {
+    /* v1 · The town finder: a native list of all 104 suggests as you type; Check answers from the list only */
+    1: { init: function (root, k) {
+      var D = geo(), list = root.querySelector('datalist'), form = root.querySelector('form'), input = root.querySelector('#' + root.querySelector('.sa1__lbl').htmlFor), out = root.querySelector('.sa1__out');
+      input.setAttribute('list', list.id);   // the record copy renames ids; keep the pair together
+      var all = [];
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { all.push({ n: t[0], c: c }); }); });
+      list.innerHTML = all.map(function (t) { return '<option value="' + esc(t.n) + '">'; }).join('');
+      var base = out.innerHTML;
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var q = norm(input.value);
+        if (!q) { out.innerHTML = '<p class="sa1__a">Type a town or city first.</p>'; input.focus(); return; }
+        var hit = all.filter(function (t) { return norm(t.n) === q; })[0];
+        if (hit) out.innerHTML = '<p class="sa1__y"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12.5 L9.5 18 L20 6"/></svg>Yes. ' + esc(hit.n) + ' is in ' + nb(hit.c) + ' County, one of the <span class="nums">104</span> municipalities we build in.</p>';
+        else out.innerHTML = '<p class="sa1__nn">' + esc(input.value.trim()) + ' is not on our published list of <span class="nums">104</span>. Call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a> and ask.</p>';
+        var a = out.querySelector('a'); if (a && EZ.bindOne) EZ.bindOne(a, k);
+        if (k.motion) k.ctx.add(function () { gsap.from(out.firstChild, { y: 10, opacity: 0, duration: .35, ease: 'power2.out' }); });
+      });
+      k.add(function () { list.innerHTML = ''; out.innerHTML = base; form.reset(); });
+      EZ.reveal(k, root.querySelectorAll('.sa1__copy > *'));
+    } },
+
+    /* v2 · The three columns: each county printed in full, the count at the head */
+    2: { init: function (root, k) {
+      var D = geo(), cols = root.querySelector('.sa2__cols');
+      cols.innerHTML = ORDER.map(function (c) {
+        return '<div class="sa2__col"><h3 class="sa2__h">' + nb(c) + ' <span class="nums">' + D.towns[c].length + '</span></h3><ul class="sa2__ul">' + D.towns[c].map(function (t) { return '<li>' + esc(t[0]) + '</li>'; }).join('') + '</ul></div>';
+      }).join('');
+      k.add(function () { cols.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.sa__head > *'));
+      if (k.motion) gsap.from(cols.querySelectorAll('.sa2__col'), { y: 30, opacity: 0, duration: .6, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: cols, start: 'top 85%', once: true } });
+    } },
+
+    /* v3 · The map with switches: toggle buttons per county; the dots and the list follow */
+    3: { init: function (root, k) {
+      var D = geo(), svg = root.querySelector('.sa3__map'), sw = root.querySelector('.sa3__sw'), n = root.querySelector('.sa3__n'), names = root.querySelector('.sa3__names');
+      svg.setAttribute('viewBox', '-30 -30 ' + (D.w + 60) + ' ' + (D.h + 60));
+      svg.innerHTML = ORDER.map(function (c) { return '<path class="sa3__cty" d="' + D.counties[c] + '"/>'; }).join('') +
+        ORDER.map(function (c) { return '<g class="sa3__g" data-c="' + c + '">' + D.towns[c].map(function (t) { return '<circle class="sa3__dot" r="13" cx="' + t[1] + '" cy="' + t[2] + '"/>'; }).join('') + '</g>'; }).join('');
+      sw.innerHTML = ORDER.map(function (c, i) { return '<button type="button" class="sa3__b" aria-pressed="true" data-c="' + c + '" data-rx="~' + ['flag', 'compass', 'map'][i] + '/lid/chips/t"><span class="sa3__led" aria-hidden="true"></span>' + nb(c) + ' <span class="nums">' + D.towns[c].length + '</span></button>'; }).join('');
+      var B = Array.prototype.slice.call(sw.children), G = Array.prototype.slice.call(svg.querySelectorAll('.sa3__g'));
+      function draw() {
+        var on = B.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return b.dataset.c; });
+        G.forEach(function (g) { g.classList.toggle('is-off', on.indexOf(g.dataset.c) < 0); });
+        var t = []; on.forEach(function (c) { D.towns[c].forEach(function (x) { t.push(x[0]); }); });
+        n.innerHTML = '<span class="nums">' + t.length + '</span> of <span class="nums">104</span> shown';
+        names.textContent = t.length ? t.join(' · ') : 'Switch a county on to list its towns.';
+      }
+      B.forEach(function (b) { k.on(b, 'click', function () { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); draw(); }); });
+      if (EZ.bindReactions) EZ.bindReactions(sw, k);
+      draw();
+      k.add(function () { svg.innerHTML = ''; sw.innerHTML = ''; n.textContent = ''; names.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.sa3__copy > .eyebrow, .sa3__copy > h2, .sa3__copy > .t-lead'));
+      if (k.motion) gsap.from(svg.querySelectorAll('.sa3__dot'), { scale: 0, transformOrigin: '50% 50%', duration: .3, stagger: .006, ease: 'back.out(2)', scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    } },
+
+    /* v4 · The proportion bar: three radio parts sized by count; the picked county's towns as tags */
+    4: { init: function (root, k) {
+      var D = geo(), bar = root.querySelector('.sa4__bar'), t = root.querySelector('.sa4__t'), tags = root.querySelector('.sa4__tags');
+      bar.innerHTML = ORDER.map(function (c, i) { var m = D.towns[c].length; return '<button type="button" role="radio" class="sa4__p" style="flex:' + m + '" aria-checked="false" tabindex="-1" data-c="' + c + '" data-rx="native:sa4-county"><span class="sa4__n nums">' + m + '</span><span class="sa4__c">' + nb(c) + '</span></button>'; }).join('');
+      var P = Array.prototype.slice.call(bar.children);
+      function pick(c, focus) {
+        P.forEach(function (p) { var on = p.dataset.c === c; p.setAttribute('aria-checked', on ? 'true' : 'false'); p.tabIndex = on ? 0 : -1; if (on && focus) p.focus(); });
+        t.innerHTML = nb(c) + ': <span class="nums">' + D.towns[c].length + '</span> of <span class="nums">104</span>';
+        tags.innerHTML = D.towns[c].map(function (x) { return '<li>' + esc(x[0]) + '</li>'; }).join('');
+        if (k.motion) k.ctx.add(function () { gsap.from(tags.children, { y: 8, opacity: 0, duration: .25, stagger: .012, ease: 'power2.out' }); });
+      }
+      P.forEach(function (p, i) {
+        k.on(p, 'click', function () { pick(p.dataset.c); });
+        k.on(p, 'keydown', function (e) { var m = /Arrow(Right|Down)/.test(e.key) ? i + 1 : /Arrow(Left|Up)/.test(e.key) ? i - 1 : null; if (m === null) return; e.preventDefault(); pick(P[(m + 3) % 3].dataset.c, true); });
+      });
+      pick('Miami-Dade');
+      k.add(function () { bar.innerHTML = ''; t.textContent = ''; tags.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.sa__head > *'));
+      if (k.motion) gsap.from(P, { scaleX: 0, transformOrigin: '0% 50%', duration: .6, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: bar, start: 'top 85%', once: true } });
+    } },
+
+    /* v5 · The moving rows: each row holds its county twice so the loop is seamless; Stop holds them; reduced motion wraps them still */
+    5: { init: function (root, k) {
+      var D = geo(), rows = root.querySelector('.sa5__rows'), btn = root.querySelector('.sa5__stop');
+      rows.innerHTML = ORDER.map(function (c, i) {
+        var one = '<span class="sa5__set"><b class="sa5__c">' + nb(c) + ' <span class="nums">' + D.towns[c].length + '</span></b>' + D.towns[c].map(function (t) { return '<span>' + esc(t[0]) + '</span>'; }).join('') + '</span>';
+        return '<div class="sa5__row' + (i === 1 ? ' sa5__row--rev' : '') + '"><div class="sa5__run">' + one + (k.motion ? one.replace('<span class="sa5__set">', '<span class="sa5__set" aria-hidden="true">') : '') + '</div></div>';
+      }).join('');
+      var tw = [];
+      if (k.motion) {
+        Array.prototype.slice.call(rows.querySelectorAll('.sa5__run')).forEach(function (r, i) {
+          var dir = i === 1 ? 1 : -1;
+          k.ctx.add(function () { tw.push(gsap.fromTo(r, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, duration: [70, 60, 80][i], ease: 'none', repeat: -1 })); });
+        });
+        k.on(btn, 'click', function () {
+          var stop = btn.getAttribute('aria-pressed') !== 'true';
+          btn.setAttribute('aria-pressed', stop ? 'true' : 'false');
+          btn.querySelector('.btn__label').textContent = stop ? 'Start the rows' : 'Stop the rows';
+          tw.forEach(function (t) { if (stop) t.pause(); else t.play(); });
+        });
+      } else { btn.hidden = true; rows.classList.add('is-still'); }
+      k.add(function () { rows.innerHTML = ''; rows.classList.remove('is-still'); btn.hidden = false; btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.btn__label').textContent = 'Stop the rows'; });
+      EZ.reveal(k, root.querySelectorAll('.sa__head > *'));
+    } },
+
+    /* b1 · release record of slot 1 */
+    b1: { init: function (root, k) {
+      var D = geo(), list = root.querySelector('datalist'), form = root.querySelector('form'), input = root.querySelector('#' + root.querySelector('.sa1r__lbl').htmlFor), out = root.querySelector('.sa1r__out');
+      input.setAttribute('list', list.id);   // the record copy renames ids; keep the pair together
+      var all = [];
+      ORDER.forEach(function (c) { D.towns[c].forEach(function (t) { all.push({ n: t[0], c: c }); }); });
+      list.innerHTML = all.map(function (t) { return '<option value="' + esc(t.n) + '">'; }).join('');
+      var base = out.innerHTML;
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var q = norm(input.value);
+        if (!q) { out.innerHTML = '<p class="sa1r__a">Type a town or city first.</p>'; input.focus(); return; }
+        var hit = all.filter(function (t) { return norm(t.n) === q; })[0];
+        if (hit) out.innerHTML = '<p class="sa1r__y"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12.5 L9.5 18 L20 6"/></svg>Yes. ' + esc(hit.n) + ' is in ' + nb(hit.c) + ' County, one of the <span class="nums">104</span> municipalities we build in.</p>';
+        else out.innerHTML = '<p class="sa1r__nn">' + esc(input.value.trim()) + ' is not on our published list of <span class="nums">104</span>. Call <a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a> and ask.</p>';
+        var a = out.querySelector('a'); if (a && EZ.bindOne) EZ.bindOne(a, k);
+        if (k.motion) k.ctx.add(function () { gsap.from(out.firstChild, { y: 10, opacity: 0, duration: .35, ease: 'power2.out' }); });
+      });
+      k.add(function () { list.innerHTML = ''; out.innerHTML = base; form.reset(); });
+      EZ.reveal(k, root.querySelectorAll('.sa1r__copy > *'));
+    } },
+
+    /* b2 · release record of slot 2 */
+    b2: { init: function (root, k) {
+      var D = geo(), cols = root.querySelector('.sa2r__cols');
+      cols.innerHTML = ORDER.map(function (c) {
+        return '<div class="sa2r__col"><h3 class="sa2r__h">' + nb(c) + ' <span class="nums">' + D.towns[c].length + '</span></h3><ul class="sa2r__ul">' + D.towns[c].map(function (t) { return '<li>' + esc(t[0]) + '</li>'; }).join('') + '</ul></div>';
+      }).join('');
+      k.add(function () { cols.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.sa__head > *'));
+      if (k.motion) gsap.from(cols.querySelectorAll('.sa2r__col'), { y: 30, opacity: 0, duration: .6, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: cols, start: 'top 85%', once: true } });
+    } },
+
+    /* b3 · release record of slot 3 */
+    b3: { init: function (root, k) {
+      var D = geo(), svg = root.querySelector('.sa3r__map'), sw = root.querySelector('.sa3r__sw'), n = root.querySelector('.sa3r__n'), names = root.querySelector('.sa3r__names');
+      svg.setAttribute('viewBox', '-30 -30 ' + (D.w + 60) + ' ' + (D.h + 60));
+      svg.innerHTML = ORDER.map(function (c) { return '<path class="sa3r__cty" d="' + D.counties[c] + '"/>'; }).join('') +
+        ORDER.map(function (c) { return '<g class="sa3r__g" data-c="' + c + '">' + D.towns[c].map(function (t) { return '<circle class="sa3r__dot" r="13" cx="' + t[1] + '" cy="' + t[2] + '"/>'; }).join('') + '</g>'; }).join('');
+      sw.innerHTML = ORDER.map(function (c, i) { return '<button type="button" class="sa3r__b" aria-pressed="true" data-c="' + c + '" data-rx="~' + ['flag', 'compass', 'map'][i] + '/lid/chips/t"><span class="sa3r__led" aria-hidden="true"></span>' + nb(c) + ' <span class="nums">' + D.towns[c].length + '</span></button>'; }).join('');
+      var B = Array.prototype.slice.call(sw.children), G = Array.prototype.slice.call(svg.querySelectorAll('.sa3r__g'));
+      function draw() {
+        var on = B.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return b.dataset.c; });
+        G.forEach(function (g) { g.classList.toggle('is-off', on.indexOf(g.dataset.c) < 0); });
+        var t = []; on.forEach(function (c) { D.towns[c].forEach(function (x) { t.push(x[0]); }); });
+        n.innerHTML = '<span class="nums">' + t.length + '</span> of <span class="nums">104</span> shown';
+        names.textContent = t.length ? t.join(' · ') : 'Switch a county on to list its towns.';
+      }
+      B.forEach(function (b) { k.on(b, 'click', function () { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); draw(); }); });
+      if (EZ.bindReactions) EZ.bindReactions(sw, k);
+      draw();
+      k.add(function () { svg.innerHTML = ''; sw.innerHTML = ''; n.textContent = ''; names.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.sa3r__copy > .eyebrow, .sa3r__copy > h2, .sa3r__copy > .t-lead'));
+      if (k.motion) gsap.from(svg.querySelectorAll('.sa3r__dot'), { scale: 0, transformOrigin: '50% 50%', duration: .3, stagger: .006, ease: 'back.out(2)', scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    } },
+
+    /* b4 · release record of slot 4 */
+    b4: { init: function (root, k) {
+      var D = geo(), bar = root.querySelector('.sa4r__bar'), t = root.querySelector('.sa4r__t'), tags = root.querySelector('.sa4r__tags');
+      bar.innerHTML = ORDER.map(function (c, i) { var m = D.towns[c].length; return '<button type="button" role="radio" class="sa4r__p" style="flex:' + m + '" aria-checked="false" tabindex="-1" data-c="' + c + '" data-rx="native:sa4r-county"><span class="sa4r__n nums">' + m + '</span><span class="sa4r__c">' + nb(c) + '</span></button>'; }).join('');
+      var P = Array.prototype.slice.call(bar.children);
+      function pick(c, focus) {
+        P.forEach(function (p) { var on = p.dataset.c === c; p.setAttribute('aria-checked', on ? 'true' : 'false'); p.tabIndex = on ? 0 : -1; if (on && focus) p.focus(); });
+        t.innerHTML = nb(c) + ': <span class="nums">' + D.towns[c].length + '</span> of <span class="nums">104</span>';
+        tags.innerHTML = D.towns[c].map(function (x) { return '<li>' + esc(x[0]) + '</li>'; }).join('');
+        if (k.motion) k.ctx.add(function () { gsap.from(tags.children, { y: 8, opacity: 0, duration: .25, stagger: .012, ease: 'power2.out' }); });
+      }
+      P.forEach(function (p, i) {
+        k.on(p, 'click', function () { pick(p.dataset.c); });
+        k.on(p, 'keydown', function (e) { var m = /Arrow(Right|Down)/.test(e.key) ? i + 1 : /Arrow(Left|Up)/.test(e.key) ? i - 1 : null; if (m === null) return; e.preventDefault(); pick(P[(m + 3) % 3].dataset.c, true); });
+      });
+      pick('Miami-Dade');
+      k.add(function () { bar.innerHTML = ''; t.textContent = ''; tags.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.sa__head > *'));
+      if (k.motion) gsap.from(P, { scaleX: 0, transformOrigin: '0% 50%', duration: .6, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: bar, start: 'top 85%', once: true } });
+    } },
+
+    /* b5 · release record of slot 5 */
+    b5: { init: function (root, k) {
+      var D = geo(), rows = root.querySelector('.sa5r__rows'), btn = root.querySelector('.sa5r__stop');
+      rows.innerHTML = ORDER.map(function (c, i) {
+        var one = '<span class="sa5r__set"><b class="sa5r__c">' + nb(c) + ' <span class="nums">' + D.towns[c].length + '</span></b>' + D.towns[c].map(function (t) { return '<span>' + esc(t[0]) + '</span>'; }).join('') + '</span>';
+        return '<div class="sa5r__row' + (i === 1 ? ' sa5r__row--rev' : '') + '"><div class="sa5r__run">' + one + (k.motion ? one.replace('<span class="sa5r__set">', '<span class="sa5r__set" aria-hidden="true">') : '') + '</div></div>';
+      }).join('');
+      var tw = [];
+      if (k.motion) {
+        Array.prototype.slice.call(rows.querySelectorAll('.sa5r__run')).forEach(function (r, i) {
+          var dir = i === 1 ? 1 : -1;
+          k.ctx.add(function () { tw.push(gsap.fromTo(r, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, duration: [70, 60, 80][i], ease: 'none', repeat: -1 })); });
+        });
+        k.on(btn, 'click', function () {
+          var stop = btn.getAttribute('aria-pressed') !== 'true';
+          btn.setAttribute('aria-pressed', stop ? 'true' : 'false');
+          btn.querySelector('.btn__label').textContent = stop ? 'Start the rows' : 'Stop the rows';
+          tw.forEach(function (t) { if (stop) t.pause(); else t.play(); });
+        });
+      } else { btn.hidden = true; rows.classList.add('is-still'); }
+      k.add(function () { rows.innerHTML = ''; rows.classList.remove('is-still'); btn.hidden = false; btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.btn__label').textContent = 'Stop the rows'; });
+      EZ.reveal(k, root.querySelectorAll('.sa__head > *'));
+    } }
+  });
+})();
 </script>
 <script>EZ.boot();</script>
 </body>

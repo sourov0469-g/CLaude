@@ -1,0 +1,150 @@
+<section id="contact-area" class="sec carea g-base" data-section="contact-area" aria-labelledby="contact-area-h-1">
+  <!-- Contact page, section 3 · the service area. The 104 municipalities come from the map data (the firm's published lists:
+       Miami-Dade 34, Broward 31, Palm Beach 39); the line about the licence is the firm's own. -->
+
+  <!-- v1 · The town finder: type a town; the answer says which county it is in, or that it is not on the published list -->
+  <div class="ver sa1" data-v="1">
+    <div class="wrap sa1__grid">
+      <div class="sa1__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-1">Is your town <span class="acc">on our list?</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <form class="sa1__box" novalidate>
+        <label class="sa1__lbl" for="sa1-town">Your town or city</label>
+        <div class="sa1__row">
+          <span class="sa1__f rx-host" data-rx="~magnifier/rail/ring/l"><input id="sa1-town" type="text" list="sa1-list" autocomplete="address-level2" placeholder="Start typing, e.g. Coral Gables"></span>
+          <button type="submit" class="btn sa1__go" data-rx="~compass/spin/ring/r"><span class="btn__label">Check</span></button>
+        </div>
+        <datalist id="sa1-list"></datalist>
+        <div class="sa1__out" role="status"><p class="sa1__a">Miami&#8209;Dade <span class="nums">34</span> &middot; Broward <span class="nums">31</span> &middot; Palm Beach <span class="nums">39</span></p></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- v2 · The three columns: every municipality printed in full under its county, like a county directory page -->
+  <div class="ver sa2" data-v="2" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-2">Three counties, <span class="acc">every town named.</span></h2>
+        <p class="t-lead sa__lead">All <span class="nums">104</span> municipalities we build in, listed by county.</p>
+      </div>
+      <div class="sa2__cols"></div>
+    </div>
+  </div>
+
+  <!-- v3 · The map with switches: each county's towns shown or hidden on the map, the shown names listed under it -->
+  <div class="ver sa3" data-v="3" hidden>
+    <div class="wrap sa3__grid">
+      <div class="sa3__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-3">From Palm Beach <span class="acc">to Miami&#8209;Dade.</span></h2>
+        <p class="t-lead sa__lead">Switch a county on or off. Every dot is one of the municipalities we build in.</p>
+        <div class="sa3__sw" role="group" aria-label="Counties shown"></div>
+        <p class="sa3__n" aria-live="polite"></p>
+        <p class="sa3__names"></p>
+      </div>
+      <svg class="sa3__map" aria-hidden="true" focusable="false"></svg>
+    </div>
+  </div>
+
+  <!-- v4 · The proportion bar: one bar split 34 / 31 / 39; pick a part to read its towns -->
+  <div class="ver sa4" data-v="4" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-4"><span class="nums">104</span> municipalities, <span class="acc">in three parts.</span></h2>
+        <p class="t-lead sa__lead">Pick a county on the bar to read its towns.</p>
+      </div>
+      <div class="sa4__bar" role="radiogroup" aria-label="County"></div>
+      <div class="sa4__out" aria-live="polite"><p class="sa4__t"></p><ul class="sa4__tags"></ul></div>
+    </div>
+  </div>
+
+  <!-- v5 · The moving rows: one row of names per county, drifting at its own pace; a button stops them (still when motion is reduced) -->
+  <div class="ver sa5" data-v="5" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-5">Wherever you are <span class="acc">in South Florida.</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <button type="button" class="btn btn--ghost sa5__stop" aria-pressed="false" data-rx="~pause/hinge/squash/r"><span class="btn__label">Stop the rows</span></button>
+    </div>
+    <div class="sa5__rows"></div>
+  </div>
+<!-- b1 · release record of slot 1 (.sa1 -> .sa1r) -->
+  <div class="ver sa1r" data-v="b1" hidden>
+    <div class="wrap sa1r__grid">
+      <div class="sa1r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-1-r">Is your town <span class="acc">on our list?</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <form class="sa1r__box" novalidate>
+        <label class="sa1r__lbl" for="sa1r-town-r">Your town or city</label>
+        <div class="sa1r__row">
+          <span class="sa1r__f rx-host" data-rx="~magnifier/rail/ring/l"><input id="sa1r-town-r" type="text" list="sa1r-list" autocomplete="address-level2" placeholder="Start typing, e.g. Coral Gables"></span>
+          <button type="submit" class="btn sa1r__go" data-rx="~compass/spin/ring/r"><span class="btn__label">Check</span></button>
+        </div>
+        <datalist id="sa1r-list-r"></datalist>
+        <div class="sa1r__out" role="status"><p class="sa1r__a">Miami&#8209;Dade <span class="nums">34</span> &middot; Broward <span class="nums">31</span> &middot; Palm Beach <span class="nums">39</span></p></div>
+      </form>
+    </div>
+  </div>
+
+<!-- b2 · release record of slot 2 (.sa2 -> .sa2r) -->
+  <div class="ver sa2r" data-v="b2" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-2-r">Three counties, <span class="acc">every town named.</span></h2>
+        <p class="t-lead sa__lead">All <span class="nums">104</span> municipalities we build in, listed by county.</p>
+      </div>
+      <div class="sa2r__cols"></div>
+    </div>
+  </div>
+
+<!-- b3 · release record of slot 3 (.sa3 -> .sa3r) -->
+  <div class="ver sa3r" data-v="b3" hidden>
+    <div class="wrap sa3r__grid">
+      <div class="sa3r__copy">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-3-r">From Palm Beach <span class="acc">to Miami&#8209;Dade.</span></h2>
+        <p class="t-lead sa__lead">Switch a county on or off. Every dot is one of the municipalities we build in.</p>
+        <div class="sa3r__sw" role="group" aria-label="Counties shown"></div>
+        <p class="sa3r__n" aria-live="polite"></p>
+        <p class="sa3r__names"></p>
+      </div>
+      <svg class="sa3r__map" aria-hidden="true" focusable="false"></svg>
+    </div>
+  </div>
+
+<!-- b4 · release record of slot 4 (.sa4 -> .sa4r) -->
+  <div class="ver sa4r" data-v="b4" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-4-r"><span class="nums">104</span> municipalities, <span class="acc">in three parts.</span></h2>
+        <p class="t-lead sa__lead">Pick a county on the bar to read its towns.</p>
+      </div>
+      <div class="sa4r__bar" role="radiogroup" aria-label="County"></div>
+      <div class="sa4r__out" aria-live="polite"><p class="sa4r__t"></p><ul class="sa4r__tags"></ul></div>
+    </div>
+  </div>
+
+<!-- b5 · release record of slot 5 (.sa5 -> .sa5r) -->
+  <div class="ver sa5r" data-v="b5" hidden>
+    <div class="wrap">
+      <div class="sa__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Service area</p>
+        <h2 class="t-head" id="contact-area-h-5-r">Wherever you are <span class="acc">in South Florida.</span></h2>
+        <p class="t-lead sa__lead"><span class="nums">104</span> municipalities across three counties, and we hold the licence to build in all of them.</p>
+      </div>
+      <button type="button" class="btn btn--ghost sa5r__stop" aria-pressed="false" data-rx="~pause/hinge/squash/r"><span class="btn__label">Stop the rows</span></button>
+    </div>
+    <div class="sa5r__rows"></div>
+  </div>
+
+</section>

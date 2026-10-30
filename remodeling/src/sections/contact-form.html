@@ -1,0 +1,384 @@
+<section id="contact-form" class="sec cform g-base" data-section="contact-form" aria-labelledby="contact-h1-1">
+  <!-- Contact page, section 1 · the consultation request. Fields, consent, privacy line and framing are the firm's own (FACTS.md
+       "Contact"). No server: every version checks the fields, then composes an email to Sales@elbazconstruction.com and says so. -->
+
+  <!-- v1 · The request sheet: the firm's contact facts on the left, every published field on a ruled sheet on the right -->
+  <div class="ver fm1" data-v="1">
+    <div class="wrap fm1__grid">
+      <div class="fm1__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-1">A real consultation, <span class="acc">not a sales visit.</span></h1>
+        <p class="t-lead fm__lead">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/drop/sweep/r">Sales@elbazconstruction.com</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+        <div class="fm-proof"><p><span class="fm-proof__star" aria-hidden="true">&#9733;</span> <span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</p><p>Licensed, bonded &amp; insured &middot; CBC1265280</p></div>
+      </div>
+      <form class="fm1__sheet c-form" novalidate>
+        <p class="fm1__title">Consultation request</p>
+        <div class="fm1__two">
+          <div class="c-f" data-rx="~badge/rail/sweep/tr"><input id="fm1-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm1-name">Full name *</label><span class="c-err" id="fm1-name-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/rail/sweep/tr"><input id="fm1-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm1-phone">Phone *</label><span class="c-err" id="fm1-phone-err" hidden></span></div>
+        </div>
+        <div class="fm1__two">
+          <div class="c-f" data-rx="~envelope/rail/sweep/tr"><input id="fm1-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm1-email">Email *</label><span class="c-err" id="fm1-email-err" hidden></span></div>
+          <div class="c-f" data-rx="~house2/rail/sweep/tr"><input id="fm1-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm1-address">Property address *</label><span class="c-err" id="fm1-address-err" hidden></span></div>
+        </div>
+        <div class="c-f" data-rx="~sketch/rail/sweep/tr"><textarea id="fm1-project" name="project" rows="4" placeholder=" " required></textarea><label for="fm1-project">Project description *</label><span class="c-err" id="fm1-project-err" hidden></span></div>
+        <fieldset class="fm-how">
+          <legend>Preferred contact method</legend>
+          <label data-rx="~handset/frame/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+          <label data-rx="~envelope/frame/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+          <label data-rx="~speech/frame/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+        </fieldset>
+        <label class="c-consent" data-rx="~check/frame/tick/l"><input type="checkbox" name="consent" id="fm1-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm1-consent-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm1__go" data-rx="~mailbox/zip/burst/r"><span class="btn__label">Send my request</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- v2 · One question at a time: five short steps along a tape measure; Back and Next move along it -->
+  <div class="ver fm2" data-v="2" hidden>
+    <div class="wrap fm2__wrap">
+      <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+      <h1 class="t-head fm__h" id="contact-h1-2">Let&rsquo;s talk about <span class="acc">what you want to change.</span></h1>
+      <form class="fm2__form c-form" novalidate>
+        <div class="fm2__tape" aria-hidden="true"><svg class="fm2__svg" viewBox="0 0 1000 56" preserveAspectRatio="none" focusable="false"></svg><span class="fm2__fill"></span></div>
+        <p class="fm2__count" aria-live="polite">Step <span class="nums">1</span> of <span class="nums">5</span></p>
+        <fieldset class="fm2__step" data-step="1">
+          <legend class="fm2__q">What do you want to change?</legend>
+          <div class="c-f" data-rx="~sketch/unfold/sweep/tr"><textarea id="fm2-project" name="project" rows="4" placeholder=" " required></textarea><label for="fm2-project">Project description *</label><span class="c-err" id="fm2-project-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="2" hidden>
+          <legend class="fm2__q">Where is the property?</legend>
+          <div class="c-f" data-rx="~house2/unfold/sweep/tr"><input id="fm2-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm2-address">Property address *</label><span class="c-err" id="fm2-address-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="3" hidden>
+          <legend class="fm2__q">Who are we talking to?</legend>
+          <div class="c-f" data-rx="~badge/unfold/sweep/tr"><input id="fm2-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm2-name">Full name *</label><span class="c-err" id="fm2-name-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="4" hidden>
+          <legend class="fm2__q">How do we reach you?</legend>
+          <div class="c-f" data-rx="~handset/unfold/sweep/tr"><input id="fm2-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm2-phone">Phone *</label><span class="c-err" id="fm2-phone-err" hidden></span></div>
+          <div class="c-f" data-rx="~envelope/unfold/sweep/tr"><input id="fm2-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm2-email">Email *</label><span class="c-err" id="fm2-email-err" hidden></span></div>
+          <fieldset class="fm-how fm2__how"><legend>Preferred contact method</legend>
+            <label data-rx="~handset/bounce/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/bounce/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/bounce/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+        </fieldset>
+        <fieldset class="fm2__step" data-step="5" hidden>
+          <legend class="fm2__q">One last thing.</legend>
+          <label class="c-consent" data-rx="~check/bounce/tick/l"><input type="checkbox" name="consent" id="fm2-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="fm2-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        </fieldset>
+        <div class="fm2__acts">
+          <button type="button" class="btn btn--ghost fm2__back" data-rx="~arrowL/bounce/shake/l" hidden><span class="btn__label">Back</span></button>
+          <button type="button" class="btn fm2__next" data-rx="~arrowR/bounce/hop/r"><span class="btn__label">Next</span></button>
+          <button type="submit" class="btn fm2__go" data-rx="~envelope/hoist/burst/r" hidden><span class="btn__label">Send my request</span></button>
+        </div>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+      <ul class="fm2__strip">
+        <li><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></li>
+        <li>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</li>
+        <li>19 W Flagler St #310, Miami, FL 33130</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- v3 · The letter: the request written as a short letter, with the blanks filled in where they stand -->
+  <div class="ver fm3" data-v="3" hidden>
+    <div class="wrap fm3__grid">
+      <div class="fm3__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-3">Write to us <span class="acc">in one paragraph.</span></h1>
+        <p class="t-lead fm__lead">Send us a message to get a free consultation. Don&rsquo;t worry, we won&rsquo;t charge a dime.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="fm3__paper" novalidate>
+        <p class="fm3__to">To: Sales@elbazconstruction.com</p>
+        <p class="fm3__letter">Hello Elbaz Construction, my name is
+          <span class="fm3__blank rx-host" data-rx="~badge/neon/sweep/b"><label class="sr-only" for="fm3-name">Full name</label><input id="fm3-name" name="name" type="text" autocomplete="name" placeholder="your full name" size="16"></span>.
+          I would like to talk about
+          <span class="fm3__blank fm3__blank--wide rx-host" data-rx="~sketch/neon/sweep/b"><label class="sr-only" for="fm3-project">Project description</label><input id="fm3-project" name="project" type="text" placeholder="what you want to change" size="26"></span>
+          at
+          <span class="fm3__blank fm3__blank--wide rx-host" data-rx="~house2/neon/sweep/b"><label class="sr-only" for="fm3-address">Property address</label><input id="fm3-address" name="address" type="text" autocomplete="street-address" placeholder="the property address" size="26"></span>.
+          The best way to reach me is by
+          <span class="fm3__blank rx-host" data-rx="native:fm3-how"><label class="sr-only" for="fm3-contact">Preferred contact method</label><select id="fm3-contact" name="contact"><option>phone</option><option>email</option><option>text</option></select></span>;
+          my phone is
+          <span class="fm3__blank rx-host" data-rx="~handset/neon/sweep/b"><label class="sr-only" for="fm3-phone">Phone</label><input id="fm3-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(000) 000-0000" size="14"></span>
+          and my email is
+          <span class="fm3__blank fm3__blank--wide rx-host" data-rx="~envelope/neon/sweep/b"><label class="sr-only" for="fm3-email">Email</label><input id="fm3-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" size="22"></span>.
+        </p>
+        <ul class="fm3__errs" aria-live="polite">
+          <li class="c-err" id="fm3-name-err" hidden></li><li class="c-err" id="fm3-project-err" hidden></li><li class="c-err" id="fm3-address-err" hidden></li>
+          <li class="c-err" id="fm3-phone-err" hidden></li><li class="c-err" id="fm3-email-err" hidden></li><li class="c-err" id="fm3-consent-err" hidden></li>
+        </ul>
+        <label class="c-consent" data-rx="~check/neon/tick/l"><input type="checkbox" name="consent" id="fm3-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <p class="c-note">Sending opens your email app with this letter addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm3__go" data-rx="~envelope/neon/burst/r"><span class="btn__label">Send the letter</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- v4 · Pick the work first: the firm's published services as toggles; the picked ones head the request -->
+  <div class="ver fm4" data-v="4" hidden>
+    <div class="wrap">
+      <div class="fm4__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-4">Start with <span class="acc">the work.</span></h1>
+        <p class="t-lead fm__lead">Pick everything the project touches. Honest scope and budget guidance comes at the walkthrough.</p>
+      </div>
+      <form class="fm4__form c-form" novalidate>
+        <div class="fm4__chips" role="group" aria-label="Services the project touches"></div>
+        <span class="c-err" id="fm4-work-err" hidden></span>
+        <div class="fm4__grid">
+          <div class="fm4__fields">
+            <div class="c-f" data-rx="~badge/swing/sweep/tr"><input id="fm4-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm4-name">Full name *</label><span class="c-err" id="fm4-name-err" hidden></span></div>
+            <div class="c-f" data-rx="~handset/swing/sweep/tr"><input id="fm4-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm4-phone">Phone *</label><span class="c-err" id="fm4-phone-err" hidden></span></div>
+            <div class="c-f" data-rx="~envelope/swing/sweep/tr"><input id="fm4-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm4-email">Email *</label><span class="c-err" id="fm4-email-err" hidden></span></div>
+            <div class="c-f" data-rx="~house2/swing/sweep/tr"><input id="fm4-address" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm4-address">Property address *</label><span class="c-err" id="fm4-address-err" hidden></span></div>
+            <div class="c-f" data-rx="~sketch/swing/sweep/tr"><textarea id="fm4-notes" name="notes" rows="3" placeholder=" "></textarea><label for="fm4-notes">Anything we should know? (optional)</label></div>
+          </div>
+          <div class="fm4__send">
+            <p class="fm4__picked" aria-live="polite">Nothing picked yet.</p>
+            <label class="c-consent" data-rx="~check/swing/tick/l"><input type="checkbox" name="consent" id="fm4-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+            <span class="c-err" id="fm4-consent-err" hidden></span>
+            <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+            <button type="submit" class="btn fm4__go" data-rx="~tag/zip/burst/r"><span class="btn__label">Send my request</span></button>
+            <p class="c-done" role="status" hidden></p>
+            <p class="fm4__facts"><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a><br>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- v5 · Call first: the number as the main act with whether the office is open right now (published hours), a short form beside it -->
+  <div class="ver fm5" data-v="5" hidden>
+    <div class="wrap fm5__grid">
+      <div class="fm5__call">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-5">You will get <span class="acc">a real answer.</span></h1>
+        <p class="t-lead fm__lead">Not a callback form.</p>
+        <a class="fm5__num nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+        <p class="fm5__open"><svg class="fm5__lamp" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7"/></svg><span class="fm5__st">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+        <p class="fm5__hours">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+      </div>
+      <form class="fm5__card c-form" novalidate>
+        <p class="fm5__ct">Or leave your number</p>
+        <div class="c-f" data-rx="~badge/tilt/sweep/tr"><input id="fm5-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm5-name">Full name *</label><span class="c-err" id="fm5-name-err" hidden></span></div>
+        <div class="c-f" data-rx="~handset/tilt/sweep/tr"><input id="fm5-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm5-phone">Phone *</label><span class="c-err" id="fm5-phone-err" hidden></span></div>
+        <div class="c-f" data-rx="~sketch/tilt/sweep/tr"><textarea id="fm5-project" name="project" rows="3" placeholder=" " required></textarea><label for="fm5-project">Project description *</label><span class="c-err" id="fm5-project-err" hidden></span></div>
+        <label class="c-consent" data-rx="~check/tilt/tick/l"><input type="checkbox" name="consent" id="fm5-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm5-consent-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm5__go" data-rx="~handset/zip/ring/r"><span class="btn__label">Ask us to call me</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+<!-- b1 · release record of slot 1 (.fm1 -> .fm1r) -->
+  <div class="ver fm1r" data-v="b1" hidden>
+    <div class="wrap fm1r__grid">
+      <div class="fm1r__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-1-r">A real consultation, <span class="acc">not a sales visit.</span></h1>
+        <p class="t-lead fm__lead">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:Sales@elbazconstruction.com" data-rx="~mailbox/drop/sweep/r">Sales@elbazconstruction.com</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+        <div class="fm-proof"><p><span class="fm-proof__star" aria-hidden="true">&#9733;</span> <span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</p><p>Licensed, bonded &amp; insured &middot; CBC1265280</p></div>
+      </div>
+      <form class="fm1r__sheet c-form" novalidate>
+        <p class="fm1r__title">Consultation request</p>
+        <div class="fm1r__two">
+          <div class="c-f" data-rx="~badge/rail/sweep/tr"><input id="fm1r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm1r-name-r">Full name *</label><span class="c-err" id="fm1r-name-r-err" hidden></span></div>
+          <div class="c-f" data-rx="~handset/rail/sweep/tr"><input id="fm1r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm1r-phone-r">Phone *</label><span class="c-err" id="fm1r-phone-r-err" hidden></span></div>
+        </div>
+        <div class="fm1r__two">
+          <div class="c-f" data-rx="~envelope/rail/sweep/tr"><input id="fm1r-email-r" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm1r-email-r">Email *</label><span class="c-err" id="fm1r-email-r-err" hidden></span></div>
+          <div class="c-f" data-rx="~house2/rail/sweep/tr"><input id="fm1r-address-r" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm1r-address-r">Property address *</label><span class="c-err" id="fm1r-address-r-err" hidden></span></div>
+        </div>
+        <div class="c-f" data-rx="~sketch/rail/sweep/tr"><textarea id="fm1r-project-r" name="project" rows="4" placeholder=" " required></textarea><label for="fm1r-project-r">Project description *</label><span class="c-err" id="fm1r-project-r-err" hidden></span></div>
+        <fieldset class="fm-how">
+          <legend>Preferred contact method</legend>
+          <label data-rx="~handset/frame/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+          <label data-rx="~envelope/frame/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+          <label data-rx="~speech/frame/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+        </fieldset>
+        <label class="c-consent" data-rx="~check/frame/tick/l"><input type="checkbox" name="consent" id="fm1r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm1r-consent-r-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm1r__go" data-rx="~mailbox/zip/burst/r"><span class="btn__label">Send my request</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+<!-- b2 · release record of slot 2 (.fm2 -> .fm2r) -->
+  <div class="ver fm2r" data-v="b2" hidden>
+    <div class="wrap fm2r__wrap">
+      <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+      <h1 class="t-head fm__h" id="contact-h1-2-r">Let&rsquo;s talk about <span class="acc">what you want to change.</span></h1>
+      <form class="fm2r__form c-form" novalidate>
+        <div class="fm2r__tape" aria-hidden="true"><svg class="fm2r__svg" viewBox="0 0 1000 56" preserveAspectRatio="none" focusable="false"></svg><span class="fm2r__fill"></span></div>
+        <p class="fm2r__count" aria-live="polite">Step <span class="nums">1</span> of <span class="nums">5</span></p>
+        <fieldset class="fm2r__step" data-step="1">
+          <legend class="fm2r__q">What do you want to change?</legend>
+          <div class="c-f" data-rx="~sketch/unfold/sweep/tr"><textarea id="fm2r-project-r" name="project" rows="4" placeholder=" " required></textarea><label for="fm2r-project-r">Project description *</label><span class="c-err" id="fm2r-project-r-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="2" hidden>
+          <legend class="fm2r__q">Where is the property?</legend>
+          <div class="c-f" data-rx="~house2/unfold/sweep/tr"><input id="fm2r-address-r" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm2r-address-r">Property address *</label><span class="c-err" id="fm2r-address-r-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="3" hidden>
+          <legend class="fm2r__q">Who are we talking to?</legend>
+          <div class="c-f" data-rx="~badge/unfold/sweep/tr"><input id="fm2r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm2r-name-r">Full name *</label><span class="c-err" id="fm2r-name-r-err" hidden></span></div>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="4" hidden>
+          <legend class="fm2r__q">How do we reach you?</legend>
+          <div class="c-f" data-rx="~handset/unfold/sweep/tr"><input id="fm2r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm2r-phone-r">Phone *</label><span class="c-err" id="fm2r-phone-r-err" hidden></span></div>
+          <div class="c-f" data-rx="~envelope/unfold/sweep/tr"><input id="fm2r-email-r" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm2r-email-r">Email *</label><span class="c-err" id="fm2r-email-r-err" hidden></span></div>
+          <fieldset class="fm-how fm2r__how"><legend>Preferred contact method</legend>
+            <label data-rx="~handset/bounce/hop/t"><input type="radio" name="contact" value="Phone" checked><span>Phone</span></label>
+            <label data-rx="~envelope/bounce/hop/t"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+            <label data-rx="~speech/bounce/hop/t"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+          </fieldset>
+        </fieldset>
+        <fieldset class="fm2r__step" data-step="5" hidden>
+          <legend class="fm2r__q">One last thing.</legend>
+          <label class="c-consent" data-rx="~check/bounce/tick/l"><input type="checkbox" name="consent" id="fm2r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="fm2r-consent-r-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        </fieldset>
+        <div class="fm2r__acts">
+          <button type="button" class="btn btn--ghost fm2r__back" data-rx="~arrowL/bounce/shake/l" hidden><span class="btn__label">Back</span></button>
+          <button type="button" class="btn fm2r__next" data-rx="~arrowR/bounce/hop/r"><span class="btn__label">Next</span></button>
+          <button type="submit" class="btn fm2r__go" data-rx="~envelope/hoist/burst/r" hidden><span class="btn__label">Send my request</span></button>
+        </div>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+      <ul class="fm2r__strip">
+        <li><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></li>
+        <li>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</li>
+        <li>19 W Flagler St #310, Miami, FL 33130</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- b3 · release record of slot 3 (.fm3 -> .fm3r) -->
+  <div class="ver fm3r" data-v="b3" hidden>
+    <div class="wrap fm3r__grid">
+      <div class="fm3r__side">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-3-r">Write to us <span class="acc">in one paragraph.</span></h1>
+        <p class="t-lead fm__lead">Send us a message to get a free consultation. Don&rsquo;t worry, we won&rsquo;t charge a dime.</p>
+        <dl class="fm-facts">
+          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></dd></div>
+          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+        </dl>
+      </div>
+      <form class="fm3r__paper" novalidate>
+        <p class="fm3r__to">To: Sales@elbazconstruction.com</p>
+        <p class="fm3r__letter">Hello Elbaz Construction, my name is
+          <span class="fm3r__blank rx-host" data-rx="~badge/neon/sweep/b"><label class="sr-only" for="fm3r-name-r">Full name</label><input id="fm3r-name-r" name="name" type="text" autocomplete="name" placeholder="your full name" size="16"></span>.
+          I would like to talk about
+          <span class="fm3r__blank fm3r__blank--wide rx-host" data-rx="~sketch/neon/sweep/b"><label class="sr-only" for="fm3r-project-r">Project description</label><input id="fm3r-project-r" name="project" type="text" placeholder="what you want to change" size="26"></span>
+          at
+          <span class="fm3r__blank fm3r__blank--wide rx-host" data-rx="~house2/neon/sweep/b"><label class="sr-only" for="fm3r-address-r">Property address</label><input id="fm3r-address-r" name="address" type="text" autocomplete="street-address" placeholder="the property address" size="26"></span>.
+          The best way to reach me is by
+          <span class="fm3r__blank rx-host" data-rx="native:fm3r-how"><label class="sr-only" for="fm3r-contact-r">Preferred contact method</label><select id="fm3r-contact-r" name="contact"><option>phone</option><option>email</option><option>text</option></select></span>;
+          my phone is
+          <span class="fm3r__blank rx-host" data-rx="~handset/neon/sweep/b"><label class="sr-only" for="fm3r-phone-r">Phone</label><input id="fm3r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(000) 000-0000" size="14"></span>
+          and my email is
+          <span class="fm3r__blank fm3r__blank--wide rx-host" data-rx="~envelope/neon/sweep/b"><label class="sr-only" for="fm3r-email-r">Email</label><input id="fm3r-email-r" name="email" type="email" autocomplete="email" placeholder="you@example.com" size="22"></span>.
+        </p>
+        <ul class="fm3r__errs" aria-live="polite">
+          <li class="c-err" id="fm3r-name-r-err" hidden></li><li class="c-err" id="fm3r-project-r-err" hidden></li><li class="c-err" id="fm3r-address-r-err" hidden></li>
+          <li class="c-err" id="fm3r-phone-r-err" hidden></li><li class="c-err" id="fm3r-email-r-err" hidden></li><li class="c-err" id="fm3r-consent-r-err" hidden></li>
+        </ul>
+        <label class="c-consent" data-rx="~check/neon/tick/l"><input type="checkbox" name="consent" id="fm3r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <p class="c-note">Sending opens your email app with this letter addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm3r__go" data-rx="~envelope/neon/burst/r"><span class="btn__label">Send the letter</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+<!-- b4 · release record of slot 4 (.fm4 -> .fm4r) -->
+  <div class="ver fm4r" data-v="b4" hidden>
+    <div class="wrap">
+      <div class="fm4r__head">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-4-r">Start with <span class="acc">the work.</span></h1>
+        <p class="t-lead fm__lead">Pick everything the project touches. Honest scope and budget guidance comes at the walkthrough.</p>
+      </div>
+      <form class="fm4r__form c-form" novalidate>
+        <div class="fm4r__chips" role="group" aria-label="Services the project touches"></div>
+        <span class="c-err" id="fm4r-work-r-err" hidden></span>
+        <div class="fm4r__grid">
+          <div class="fm4r__fields">
+            <div class="c-f" data-rx="~badge/swing/sweep/tr"><input id="fm4r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm4r-name-r">Full name *</label><span class="c-err" id="fm4r-name-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~handset/swing/sweep/tr"><input id="fm4r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm4r-phone-r">Phone *</label><span class="c-err" id="fm4r-phone-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~envelope/swing/sweep/tr"><input id="fm4r-email-r" name="email" type="email" autocomplete="email" placeholder=" " required><label for="fm4r-email-r">Email *</label><span class="c-err" id="fm4r-email-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~house2/swing/sweep/tr"><input id="fm4r-address-r" name="address" type="text" autocomplete="street-address" placeholder=" " required><label for="fm4r-address-r">Property address *</label><span class="c-err" id="fm4r-address-r-err" hidden></span></div>
+            <div class="c-f" data-rx="~sketch/swing/sweep/tr"><textarea id="fm4r-notes-r" name="notes" rows="3" placeholder=" "></textarea><label for="fm4r-notes-r">Anything we should know? (optional)</label></div>
+          </div>
+          <div class="fm4r__send">
+            <p class="fm4r__picked" aria-live="polite">Nothing picked yet.</p>
+            <label class="c-consent" data-rx="~check/swing/tick/l"><input type="checkbox" name="consent" id="fm4r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+            <span class="c-err" id="fm4r-consent-r-err" hidden></span>
+            <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+            <button type="submit" class="btn fm4r__go" data-rx="~tag/zip/burst/r"><span class="btn__label">Send my request</span></button>
+            <p class="c-done" role="status" hidden></p>
+            <p class="fm4r__facts"><a class="link nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a><br>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!-- b5 · release record of slot 5 (.fm5 -> .fm5r) -->
+  <div class="ver fm5r" data-v="b5" hidden>
+    <div class="wrap fm5r__grid">
+      <div class="fm5r__call">
+        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Book a consultation</p>
+        <h1 class="t-head fm__h" id="contact-h1-5-r">You will get <span class="acc">a real answer.</span></h1>
+        <p class="t-lead fm__lead">Not a callback form.</p>
+        <a class="fm5r__num nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+        <p class="fm5r__open"><svg class="fm5r__lamp" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7"/></svg><span class="fm5r__st">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+        <p class="fm5r__hours">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed<br>19 W Flagler St #310, Miami, FL 33130</p>
+      </div>
+      <form class="fm5r__card c-form" novalidate>
+        <p class="fm5r__ct">Or leave your number</p>
+        <div class="c-f" data-rx="~badge/tilt/sweep/tr"><input id="fm5r-name-r" name="name" type="text" autocomplete="name" placeholder=" " required><label for="fm5r-name-r">Full name *</label><span class="c-err" id="fm5r-name-r-err" hidden></span></div>
+        <div class="c-f" data-rx="~handset/tilt/sweep/tr"><input id="fm5r-phone-r" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label for="fm5r-phone-r">Phone *</label><span class="c-err" id="fm5r-phone-r-err" hidden></span></div>
+        <div class="c-f" data-rx="~sketch/tilt/sweep/tr"><textarea id="fm5r-project-r" name="project" rows="3" placeholder=" " required></textarea><label for="fm5r-project-r">Project description *</label><span class="c-err" id="fm5r-project-r-err" hidden></span></div>
+        <label class="c-consent" data-rx="~check/tilt/tick/l"><input type="checkbox" name="consent" id="fm5r-consent-r"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+        <span class="c-err" id="fm5r-consent-r-err" hidden></span>
+        <p class="c-note">Sending opens your email app with this request addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+        <button type="submit" class="btn fm5r__go" data-rx="~handset/zip/ring/r"><span class="btn__label">Ask us to call me</span></button>
+        <p class="c-done" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+
+</section>

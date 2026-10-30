@@ -430,3 +430,36 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
   - Reactions: 99 + 18 covered, 0 missing, 0 duplicates.
   - `tools/renovationtest.js` passes in both motion modes, before and after recording.
 - Weight: 1.0 MB.
+
+**Contact** (`contact.html`)
+- `contact-form`: all five versions compose an email to Sales@elbazconstruction.com and say so before sending, then show the published reply text. None claims a message was sent.
+  1. request sheet with every published field
+  2. one question at a time along a tape measure
+  3. the request as a letter, with blanks to fill in
+  4. pick the published services first
+  5. call first, with whether the office is open now, plus a short form
+- Every `contact-form` version carries the phone link, the hours, the office and the exact privacy sentence. `tools/facts.js` now checks `contact-form` the same way it checks `consult`.
+- `contact-visit`:
+  1. business card that turns over
+  2. the week on a 24-hour rule, with today and a now line
+  3. address label with copy and Google Maps
+  4. the seven published channels
+  5. clock with the published span shaded
+- `contact-area` (all 104 municipalities from the map data):
+  1. town finder (exact match against the published list only)
+  2. three county columns
+  3. map with county switches
+  4. 34 / 31 / 39 proportion bar
+  5. moving rows with a Stop button; still when motion is reduced
+- Records `fm1r`–`fm5r`, `vs1r`–`vs5r`, `sa1r`–`sa5r` (b1–b5).
+- QA:
+  - `qa/site-contact-r1.txt` and `-r2.txt`: contrast 0 below AA, switchers 1–5, 15/15 backups open, 0 page errors.
+  - `qa/facts-contact.txt`: 0 fails.
+  - Reactions: 114 + 37 covered, 0 missing, 0 duplicates.
+  - `tools/contacttest.js` passes in both motion modes. It covers validation, the mailto hand-off (intercepted), steps, chips, card, week, copy, finder, switches, bar and rows.
+  - Two backups were opened and exercised directly.
+- Weight: 0.66 MB.
+
+**Site-wide fix found while building Contact**
+- A legacy homepage rule gave any non-hero section's b1 backup the old dark ground and the Bebas/Geist fonts.
+- It is now scoped to the nine homepage sections it was written for, so inner-page records keep their light grounds and Poppins/Roboto (commit 3bd343c).

@@ -1,0 +1,36 @@
+contact-form switcher: [1,2,3,4,5] ok
+contact-form slot 1: text measured 30, below AA 0, unmeasured 0
+contact-form slot 2: text measured 12, below AA 0, unmeasured 5
+contact-form slot 3: text measured 21, below AA 0, unmeasured 0
+contact-form slot 4: text measured 26, below AA 0, unmeasured 0
+contact-form slot 5: text measured 14, below AA 0, unmeasured 0
+contact-form backup b1: opens (683px)
+contact-form backup b2: opens (443px)
+contact-form backup b3: opens (667px)
+contact-form backup b4: opens (734px)
+contact-form backup b5: opens (588px)
+contact-visit switcher: [1,2,3,4,5] ok
+contact-visit slot 1: text measured 13, below AA 0, unmeasured 0
+contact-visit slot 2: text measured 25, below AA 0, unmeasured 1
+contact-visit slot 3: text measured 10, below AA 0, unmeasured 0
+contact-visit slot 4: text measured 20, below AA 0, unmeasured 0
+contact-visit slot 5: text measured 13, below AA 0, unmeasured 4
+contact-visit backup b1: opens (368px)
+contact-visit backup b2: opens (710px)
+contact-visit backup b3: opens (358px)
+contact-visit backup b4: opens (703px)
+contact-visit backup b5: opens (480px)
+contact-area switcher: [1,2,3,4,5] ok
+contact-area slot 1: text measured 11, below AA 0, unmeasured 0
+contact-area slot 2: text measured 115, below AA 0, unmeasured 0
+contact-area slot 3: text measured 14, below AA 0, unmeasured 0
+contact-area slot 4: text measured 48, below AA 0, unmeasured 0
+contact-area slot 5: text measured 115, below AA 0, unmeasured 0
+contact-area backup b1: opens (263px)
+contact-area backup b2: opens (1633px)
+contact-area backup b3: opens (768px)
+contact-area backup b4: opens (547px)
+contact-area backup b5: opens (420px)
+
+page errors: 0
+FAILS: 0
