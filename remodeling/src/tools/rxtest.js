@@ -113,8 +113,8 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
           const nb = await p.$eval(sel, e => { const r = e.getBoundingClientRect(); return [r.left + Math.min(r.width / 2, 40), r.top + r.height / 2]; });
           const pre = await p.$eval(sel, e => e.className);
           await p.mouse.move(nb[0], nb[1], { steps: 2 });
-          await p.waitForTimeout(400);
-          row.hover = native ? await p.evaluate(() => window.__mut > 0) : await p.evaluate(() => window.__rx.hover && window.__rx.drawn);
+          // a reaction may switch on a frame late (the pointer lands while a scroll settles): read it for up to a second
+          for (let t = 0; t < 4; t++) { await p.waitForTimeout(t ? 200 : 400); row.hover = native ? await p.evaluate(() => window.__mut > 0) : await p.evaluate(() => window.__rx.hover && window.__rx.drawn); if (row.hover) break; }
           if (!row.hover) row.dbg = await p.evaluate(([sel, x, y]) => { const u = document.elementFromPoint(x, y), e = document.querySelector(sel), r = e.getBoundingClientRect(); return 'at ' + Math.round(x) + ',' + Math.round(y) + ' under=' + (u && (u.tagName + '.' + (u.className.baseVal === undefined ? u.className : 'svg')).slice(0, 50)) + ' own=' + (u && e.contains(u)) + ' rect=' + [r.left, r.top, r.width, r.height].map(Math.round) + ' rx=' + JSON.stringify(window.__rx) + ' viewer=' + !document.getElementById('viewer').hidden; }, [sel, nb[0], nb[1]]) + ' pre=' + pre;
           await p.mouse.move(2, mob ? 400 : 450, { steps: 2 });
           await p.waitForTimeout(700);
@@ -150,8 +150,9 @@ const ALL = 'hero,proof,services,ba,process,financing,work,reviews,towns,consult
           }
           return window.__mut > 0;
         }, [sel, info.href]);
-        // put things back: escape closes sheets/dialogs, return to the top of the scope
+        // put things back: escape closes sheets/dialogs; a tested Motion "Off" is switched back on, or every later reaction is (correctly) unbound
         await p.keyboard.press('Escape');
+        await p.evaluate(() => { if (document.documentElement.dataset.motion === 'off') { const on = document.querySelector('[data-setting="motion"] [data-value="on"]'); on && on.click(); } });
       } catch (e) { row.note = 'ERR ' + e.message.split('\n')[0].slice(0, 90); }
       rows.push(row);
     }

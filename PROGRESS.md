@@ -108,6 +108,32 @@ Per-section state at baseline (b07f0b8): every version except Hero V2 is a PLAN-
 - Fixed while testing: a control that fades in under a resting pointer was not re-classified → the companion now re-hit-tests every 350ms while the pointer rests. The buddy switcher showed in Settings under reduced motion and on touch tablets → hidden there.
 - `remodeling/src/tools/buddyqa.js`: 162 checks (3 variants × 30 versions × button/heading/image targets + leave), **0 fails, 0 console errors**; tip lands on the pointer to ±1px; text field keeps `cursor: text`; Off restores the system cursor; touch (375) → buddy off, tip off, cursor auto; reduced motion → buddy off, tip off, cursor auto.
 
+## v2 Phase 1 — verdict checklist and 30-version re-audit
+
+Written late: TRACEABILITY.md and PLAN-FULL.md pointed here at commit f7046fe, but this record was never written into PROGRESS at that commit. The measures existed in `remodeling/qa/v2-audit-measures.txt` (tool `audit.js`, 1440×900: prose = running words outside the centrepiece; share = centrepiece area ÷ version area; ctrls, ptr, scroll and idle as defined in the tool header). Rule used: a non-hero version passes §4 "not a document" when prose ≤ 60 and share ≥ .35 and it has a working interactive centrepiece.
+
+§3B checklist at the start of v2:
+| §3B item | State at v2 start | Evidence |
+|---|---|---|
+| Hero V2 kept, gains only the proof line | DONE | Phase 2 before/after `remodeling/qa/hero2-before-after.jpg`; C2/C3 rulings |
+| Hero V1 and V3 rebuilt from named references | V3 DONE; V1 NOT DONE on flag 2 (the traced-line layer had no named reference) | TRACEABILITY rows; closed in "v2 Phase 2" below (⟦S1362⟧) |
+| Non-hero sections must not read as documents | 19 of 24 DONE on measures; 5 NOT DONE | table below |
+| Every button has its own designed SVG reaction, tested at both widths | DONE on coverage (rxcheck 273/273); per-element table re-run in the gate | `remodeling/qa/gate-rxcheck.txt`, `gate-interaction-*.txt` |
+| Flag 1: proof line in the first screen ×3 | DONE | gate.js, 6 measurements (3 heroes × 2 widths) |
+| Flag 2: Hero V1 lines need a named reference | NOT DONE → closed in v2 Phase 2 | commit 418fc24 |
+| Flag 3: dead Bebas weight effects | DONE | V2 dead tween deleted (C2); V1 stroke-drawn letters, V3 34-layer extrusion; gate "weight-trick tweens: 0" |
+
+Versions judged NOT DONE from the measures (all others passed the rule):
+| Version | prose | share | ctrls | Why it failed |
+|---|---|---|---|---|
+| Proof V1 | 28 | .43 | 4 | passed the numbers, but barely answered the pointer (ptr 8) and is the credentials section the owner's "document" verdict names first; rebuilt rather than kept on a borderline measure |
+| Process V1 | 25 | .73 | 0 | no controls: a route to watch, nothing to do |
+| Process V2 | 195 | .09 | 0 | prose-led tab panels |
+| Process V3 | 50 | .12 | 0 | text cards; centrepiece too small |
+| Towns V1 | 82 | .37 | 0 | the municipality list was the content |
+
+Measured but kept: Consult V3 share .18 (the giant phone number and ringing handset are the centrepiece; the call-back form is counted outside it). It is a form section whose job is the call, prose 43 ≤ 60, and it reacts (ptr 188). This is recorded as an exception to the share rule, not as a pass of it.
+
 ## v2 Phase 2 — Hero V1 flag 2 (traced lines now governed by ⟦S1362⟧)
 - Inside the X-ray slit the room's traced linework is now the ⟦S1362⟧ object: three annotation pills on dashed connector lines, each drawn in stages (dot .15s → connector .22s → pill .2s) when the slit reaches its part, and withdrawn when it leaves. A pill only shows while it fits wholly inside the band.
 - Labels use only the words FACTS.md gives this photograph ("Open kitchen with black fluted cabinetry, marble island and pendant lighting"): Fluted cabinetry · Pendant lighting · Marble island.
