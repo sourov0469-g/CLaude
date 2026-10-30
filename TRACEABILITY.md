@@ -68,3 +68,24 @@ The challenge record (accept / improve / reject, with reasons) is AUDIT-R3.md. R
 8. Timing budget ⟦S0063⟧ Std 4: V1 slap .35→.22s, granule specks .45→.30s; the only hero motion over .3s is the pack's .45s flap. FIXED.
 9. Occlusion ⟦S1306⟧ ⟦S1314 §2⟧: helper against hero controls, 5 versions × (1440, 620 mouse window), 0 overlaps. No change.
 10. UI pass ⟦S0218⟧ (inline images legible at type height): V4's pills at 1.6em read as blobs. FIXED to 2.4em × .82em; hover lift 1.9×. Facts gate: hero items PASS; console 0; hover blocks 8 gated, 0 ungated.
+
+### R3 Reviews (rows written before the code; challenge in AUDIT-R3.md F2/G)
+| Slot | Version | Reference | Mechanism and parameters | Adaptation | Verification |
+|---|---|---|---|---|---|
+| 1 | V1 Constellation (fixed working copy; original kept as B1) | owner-kept build (⟦S0687⟧ family) + pack F2-V1 | formation tween 0→1 over 1.6s power3.out when ≥50% in view (IntersectionObserver), then held; glyph box desktop {x .36W, y .22H, w .54W, h .52H}, phones {x .05W, y .14H, w .9W, h .34H}; credentials rise stagger 0.05; reduced motion: formed | ink ground; locked wording; H2 at the role || PASS: glyph-region ink 537 (22% in view) → 4802 once ≥50% in view → 4800 after scrolling back (held); locked wording; ink; H2 48/32; B1 = the kept original |
+| 2 | V2 Ledger (fixed, default) | [BANK] Cenco DEEP 5 + Anatomy F12 + #317 (unchanged mechanism) + pack F2 | rows enter .15s 40ms apart; chalk rules draw .3s; check link: underline snap .18s no delay, tick .30s; hover --ease-x ≤ .3s; stars clip 115.0/120 (4 + .9 stars) | ink ground; reel and course background removed; label-role sources; sun stars (signature) and sun links (actions); phones ≤1150px || PASS: clip 115/120; phone height 1439 → 1106; sources at the label role; 0 low-contrast pairs; tick .30s, snap .18s no delay |
+| 3 | V3 Roller board (fixed) | [BANK] Count Up roll mode + Q409 (unchanged) + pack F2-V3 | only 4.9 and 295 roll, total ≤.6s, blur 3px on the moving strips; 2001 and $2M set still; row 2 = 2001 / Platinum Preferred / $2M | ink ground; kicker deleted; 1995 removed; rail sun || PASS: 4.9 and 295 roll and settle inside the .6s budget with blur while moving; 2001 and $2M set still; Platinum cell full-row on phones |
+| 4 | V4 Office wall (new) | [BANK] 514 The Record Institute (sheen sweep on hover/focus; top tier alone glows gold; beziers (.25,1,.5,1)/(.23,1,.32,1)) + [BANK] 372 Glare Hover (streak = bump(.5,.06+.16s) + .32·bump(.5,.5) as a linear-gradient, sweep 650ms) | four framed plaques on the wall (one per checkable fact), the 4.9/295 frame twice the size and the only one with the sun glow; sweep 600ms (.25,1,.5,1) on hover/focus, once; each plaque is its check link; frames hang on drawn wires | typographic plaques only (no logos, no certificate replicas); ink wall || PASS: four plaques (the facts are four; the row said five), big frame alone glows; glare = Q372 33-stop profile, 600ms once per hover/focus; helper yields over frames |
+| 5 | V5 The seal (new) | [BANK] Q164 Circular Text (letters placed by measured arc; drag samples pointer angle, dead radius 6%; fling decays; on-screen only; still under reduced motion) | a seal ring of the four credentials in sentence case, 4.9 in the centre; turns only by drag/fling (decay 1.2s) and a scroll-linked 90° over the section's pass; ring aria-hidden; the same facts as a list with check links beside it | no endless cruise (S1314 §8); ink ground, sun ring rule || PASS: ring letters set by layout width (offsetWidth) after the rotated-box bug; drag/fling on fine pointers only; 1440 height 797 → 934 |
+
+**R3 Reviews QA rounds** (`r3qa.mjs`, `proofR.mjs`, `occl.mjs`; log `qa/gate/r3-proof.log`):
+1. Overflow and clipping, 320-1440: 0 overflow on all five. No change.
+2. Type roles ⟦S1500⟧: every H2 48/700 (32 on phones). No change.
+3. Contrast ⟦S1497⟧: 0 pairs under threshold on the ink ground (--on-dark-2 9.3:1, sun 9.2:1). No change.
+4. Honest rating graphic ⟦S1314⟧ (product truth): the pack's 117.6/120 clip would paint 5.0 stars; set to 115.0 (4 + 90% of the fifth) in V2, V4, V5. FIXED.
+5. Formation hold ⟦S1314 §8⟧: V1 forms at ≥50% in view and stays formed when scrolled back. PASS.
+6. Roll budget ⟦S0063⟧ Std 4: V3 settles within .6s, intermediates blurred; 2001/$2M never roll. PASS.
+7. Seal readability ⟦S1500⟧: letters overlapped (widths read from rotated boxes). FIXED with layout widths.
+8. Height beat ⟦S1498⟧ ⟦S1499⟧ (C4): V2 phone 1439 → 1106; V5 1440 797 → 934. FIXED.
+9. Occlusion ⟦S1306⟧ ⟦S1314 §2⟧: the helper missed controls that fade in after the last scroll (V3 link, V4 frame). FIXED: re-check every 250ms; 0 overlaps (check dwell 520ms).
+10. Responsive clipping ⟦S1314 §10⟧: V3 "Platinum" was cut in a half-width phone cell. FIXED (full-row cell). Facts gate updated so only backup B1 (the kept Constellation) is exempt from the "accredited" wording: PASS, FAILS 0; console 0.

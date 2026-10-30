@@ -8,7 +8,7 @@ for (const [w, h] of [[1440, 900], [620, 800]]) for (const v of vs.split(',')) {
   const [top, height] = await p.evaluate(id => { const s = document.getElementById(id), r = s.getBoundingClientRect(); return [r.top + scrollY, r.height]; }, id);
   let hits = [], steps = 0;
   for (let y = top - h; y < top + height; y += 120) {
-    await p.evaluate(y => window.scrollTo(0, y), Math.max(0, y)); await p.waitForTimeout(260); steps++;
+    await p.evaluate(y => window.scrollTo(0, y), Math.max(0, y)); await p.waitForTimeout(520); steps++;
     const r = await p.evaluate(id => {
       const pk = document.querySelector('.cmp-pick'); if (!pk || getComputedStyle(pk).display === 'none' || +getComputedStyle(pk).opacity < 0.5) return null;
       const a = pk.getBoundingClientRect(); const s = document.getElementById(id);

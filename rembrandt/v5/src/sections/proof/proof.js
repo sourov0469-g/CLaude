@@ -27,6 +27,7 @@ function constellation(root, c) {
     return { tier, size: s0 + rnd() * (s1 - s0), op: o0 + rnd() * (o1 - o0), col: Math.floor(rnd() * COLORS.length), d: rnd() * 0.35,
       su: rnd(), sv: rnd(), tx: 0, ty: 0, ox: { p: 0, v: 0 }, oy: { p: 0, v: 0 }, ph: rnd() * 6.28, tw: rnd() < 0.3 ? 0.6 + rnd() * 1.4 : 0 };
   });
+  let stopIo = null;
   let W = 0, H = 0, dpr = 1, prog = c.motion ? 0 : 1, rect = null, ptr = { x: -1e4, y: -1e4, nx: 0, ny: 0 }, ready = false, lp = null, time = 0;
   const glyph = (box) => { // sample the "4.9" glyph into N points on a staggered grid (densest spacing that still yields N)
     const ow = Math.max(40, Math.round(box.w / 2)), oh = Math.max(40, Math.round(box.h / 2));
@@ -57,7 +58,9 @@ function constellation(root, c) {
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; if (!W || !H) return;
     dpr = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const box = W >= 900 ? { x: W * 0.42, y: H * 0.15, w: W * 0.52, h: H * 0.54 } : { x: W * 0.05, y: H * 0.1, w: W * 0.9, h: H * 0.36 };
+    // R3 F2-V1: lower-left of the old box, toward the copy; phones: directly above the copy, no gap
+    let box = { x: W * 0.4, y: H * 0.2, w: W * 0.54, h: H * 0.5 };
+    if (W < 900) { const cr = root.querySelector('.pv1-copy h2').getBoundingClientRect(), top = cr.top - r.top, h = Math.min(H * 0.34, W * 0.5); box = { x: W * 0.05, y: Math.max(16, top - h - 12), w: W * 0.9, h }; }
     glyph(box).forEach((p, i) => { stars[i].tx = p[0]; stars[i].ty = p[1]; });
     rect = null; ready = true; draw();
   };
@@ -77,9 +80,13 @@ function constellation(root, c) {
   const ro = new ResizeObserver(layout); ro.observe(cv);
   (document.fonts ? document.fonts.load('800 100px Epilogue') : Promise.resolve()).then(layout, layout);
   if (c.motion) {
-    gsap.to({ p: 0 }, { p: 1, ease: 'none', scrollTrigger: { trigger: root, start: 'top 85%', end: 'center 55%', scrub: 1 }, onUpdate() { prog = this.targets()[0].p; if (lp) lp.wake(); } });
+    // R3 F2-V1: the formation completes once the section is at least half in view, and holds (never scrubs back)
+    const form = { p: 0 }; let formed = false;
+    const io = new IntersectionObserver(([e]) => { if (formed || e.intersectionRatio < 0.5) return; formed = true; io.disconnect();
+      gsap.to(form, { p: 1, duration: 1.6, ease: 'power3.out', onUpdate: () => { prog = form.p; if (lp) lp.wake(); } }); }, { threshold: [0, 0.5, 0.75] });
+    io.observe(root); stopIo = () => io.disconnect();
     lines(root.querySelector('h2'), { scrollTrigger: onEnter(root, { start: 'top 55%' }) });
-    rise(root.querySelectorAll('.pv-cred li'), { scrollTrigger: onEnter(root, { start: 'top 45%' }), stagger: 0.08, delay: 0.3 });
+    rise(root.querySelectorAll('.pv-cred li'), { scrollTrigger: onEnter(root, { start: 'top 45%' }), stagger: 0.05, delay: 0.3 });
     lp = loop(cv, dt => {
       time += dt;
       for (const s of stars) {
@@ -94,46 +101,25 @@ function constellation(root, c) {
   const leave = () => { ptr.x = ptr.y = -1e4; ptr.nx = ptr.ny = 0; if (lp) lp.wake(); };
   const scrolled = () => { rect = null; };
   if (c.fine && c.motion) { root.addEventListener('pointermove', move); root.addEventListener('pointerleave', leave); addEventListener('scroll', scrolled, { passive: true }); }
-  return () => { ro.disconnect(); if (lp) lp.stop(); root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('scroll', scrolled); };
+  return () => { ro.disconnect(); if (lp) lp.stop(); if (stopIo) stopIo(); root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); removeEventListener('scroll', scrolled); };
 }
 
 // v2 the ledger: [BANK] Cenco Roofing DEEP 5 (every credential carries a link to its issuer; live: "Every figure is
 // read from the platform named beside it"), anatomy F12 checkable proof (KBF "The Ledger": print the caveat), [BANK] #317
 // Digital Butlers "Proof, not promises". Rows arrive once at the F17 dose (CSS, proof.css). V7: each rule is a roofer's
 // chalk line, drawn taut (DrawSVG 0.3s) then snapped (a 90ms, 2px vibration of the line's sag) as its row arrives; the
-// reel's crank turns while it feeds. Behind, faint shingle courses recede in perspective and lift 2px near the pointer.
+// R3 F2: the reel and the shingle-course background are removed (Removal Test, S1314); ink ground; stars clip 115/120.
 const NS = 'http://www.w3.org/2000/svg';
 function ledger(root, c) {
-  const done = [];
-  // background courses: rows closer together far up the roof, wider near the eave; keyway ticks staggered per course
-  const bg = root.querySelector('.pv2-bg');
-  const paint = () => {
-    const W = root.clientWidth, H = root.clientHeight; bg.setAttribute('viewBox', `0 0 ${W} ${H}`); bg.innerHTML = '';
-    const rows = []; for (let y = 24, g = 14, i = 0; y < H; y += g, g *= 1.12, i++) rows.push([y, g, i]);
-    for (const [y, g, i] of rows) {
-      const tab = g * 2.6, off = i % 2 ? tab / 2 : 0;
-      let d = `M0 ${y.toFixed(1)}H${W}`; for (let x = off; x < W; x += tab) d += `M${x.toFixed(1)} ${y.toFixed(1)}v${(-g * 0.85).toFixed(1)}`;
-      const p = document.createElementNS(NS, 'path'); p.setAttribute('class', 'crs'); p.setAttribute('d', d); p.dataset.y = y; bg.append(p);
-    }
-  };
-  paint(); const ro = new ResizeObserver(paint); ro.observe(root); done.push(() => ro.disconnect());
-  if (c.fine && c.motion) {
-    let last = null;
-    const move = e => { const r = root.getBoundingClientRect(), y = e.clientY - r.top; bg.querySelectorAll('.crs').forEach(p => p.classList.toggle('is-up', Math.abs(+p.dataset.y - y) < 46)); };
-    const leave = () => bg.querySelectorAll('.crs.is-up').forEach(p => p.classList.remove('is-up'));
-    root.addEventListener('pointermove', move, { passive: true }); root.addEventListener('pointerleave', leave);
-    done.push(() => { root.removeEventListener('pointermove', move); root.removeEventListener('pointerleave', leave); });
-  }
-  const cleanup = () => done.forEach(f => f());
+  const done = [], cleanup = () => done.forEach(f => f());
   if (!c.motion) return cleanup;
   beats(root, [root.querySelector('.pv2-h'), [root.querySelector('.pv2-big'), root.querySelector('.pv2-count')], root.querySelector('.pv2-note')]); // G1
   root.classList.add('is-armed');
-  const lines = [...root.querySelectorAll('.pv2-cl')], dust = [...root.querySelectorAll('.pv2-dust')], crank = root.querySelector('.pv2-crank');
+  const lines = [...root.querySelectorAll('.pv2-cl')], dust = [...root.querySelectorAll('.pv2-dust')];
   gsap.set(lines, { drawSVG: '0%' }); gsap.set(dust, { opacity: 0 });
   ScrollTrigger.create({ trigger: root.querySelector('.pv2-ledger'), start: 'top 80%', once: true, onEnter: () => {
     root.classList.add('is-in');
-    const tl = gsap.timeline();
-    tl.to(crank, { rotation: 360 * lines.length, duration: 0.3 + 0.04 * lines.length + 0.2, ease: 'power2.out', svgOrigin: '24 24' }, 0);
+    const tl = gsap.timeline(); done.push(() => tl.kill());
     lines.forEach((l, i) => {
       const at = i * 0.04;
       tl.to(l, { drawSVG: '100%', duration: 0.3, ease: 'power3.out' }, at)
@@ -159,7 +145,7 @@ const bezier = (x1, y1, x2, y2) => { // cubic-bezier easing (Newton–Raphson on
   const sx = t => ((ax * t + bx) * t + cx) * t, sy = t => ((ay * t + by) * t + cy) * t, dx = t => (3 * ax * t + 2 * bx) * t + cx;
   return u => { if (u <= 0) return 0; if (u >= 1) return 1; let t = u; for (let k = 0; k < 6; k++) { const e = sx(t) - u, d = dx(t); if (Math.abs(e) < 1e-5 || !d) break; t -= e / d; } return sy(t); };
 };
-const ROLL = { cell: 1.2, stagger: 0.07, total: 1.4, ease: bezier(0.33, 1, 0.68, 1) };
+const ROLL = { cell: 1.2, stagger: 0.05, total: 0.6, ease: bezier(0.33, 1, 0.68, 1) }; // R3 F2-V3: <= .6s
 const mod10 = n => ((n % 10) + 10) % 10;
 function rollModel(el) { // digits become columns; anything else ($, ., M) is a fixed mark
   const text = el.dataset.to, digits = [...text].filter(ch => /\d/.test(ch)), to = +digits.join(''), cols = [];
@@ -196,20 +182,11 @@ function rollers(root, c) {
     col.strip.style.transform = `translateY(${(-(1 + pos - base) * ROLL.cell).toFixed(4)}em)`;
   };
   const land = m => m.cols.forEach(col => { set(col, col.delta); col.strip.style.filter = ''; });
-  // courses behind the board, and the sheen that follows the pointer
-  const courses = root.querySelector('.pv3-courses'), NS = 'http://www.w3.org/2000/svg';
-  const paint = () => {
-    const W = root.clientWidth, H = root.clientHeight; courses.setAttribute('viewBox', `0 0 ${W} ${H}`); courses.innerHTML = '';
-    for (let y = 30, i = 0; y < H; y += 46, i++) { const p = document.createElementNS(NS, 'path'); let d = `M0 ${y}H${W}`; for (let x = (i % 2) * 46; x < W; x += 92) d += `M${x} ${y}v-14`; p.setAttribute('d', d); courses.append(p); }
-  };
-  paint(); const ro = new ResizeObserver(paint); ro.observe(root); done.push(() => ro.disconnect());
   if (!c.motion) { models.forEach(land); return cleanup; }
-  const sheen = root.querySelector('.pv3-sheen'), qx = gsap.quickTo(sheen, 'x', { duration: 0.9, ease: 'power3.out' });
-  const onMove = e => { if (e.pointerType !== 'mouse') return; const r = root.getBoundingClientRect(); qx(e.clientX - r.left - r.width / 2); };
-  root.addEventListener('pointermove', onMove, { passive: true }); done.push(() => root.removeEventListener('pointermove', onMove));
   beats(root, [root.querySelector('.pv3-head'), root.querySelectorAll('.pv3-lab'), root.querySelector('.pv3-foot')]);
   // each number rolls once, when it enters the view
   models.forEach((m, k) => {
+    if (els[k].hasAttribute('data-still')) { land(m); return; } // R3: 2001 and $2M are set, not rolled
     m.cols.forEach(col => set(col, 0));
     const n = m.cols.length, stagger = n > 1 ? Math.min(ROLL.stagger, (ROLL.total * 0.4) / (n - 1)) : 0, span = ROLL.total - stagger * (n - 1);
     const fontPx = () => parseFloat(getComputedStyle(els[k]).fontSize);
@@ -222,7 +199,7 @@ function rollers(root, c) {
           set(col, pos); if (u < 1) live = true;
           const u0 = Math.max(0, u - 0.004), u1 = Math.min(1, u + 0.004);
           const speed = u1 > u0 ? (col.delta * Math.abs(ROLL.ease(u1) - ROLL.ease(u0))) / (u1 - u0) / span : 0;
-          const sigma = u > 0 && u < 1 ? Math.min(cell * 0.05, (speed * cell) / 600) : 0;
+          const sigma = u > 0 && u < 0.92 ? Math.max(3, Math.min(cell * 0.12, (speed * cell) / 300)) : 0; // R3: illegible while moving
           if (Math.abs(sigma - col.sigma) > 0.05 || (sigma === 0 && col.sigma !== 0)) { col.sigma = sigma; if (sigma > 0.2) { col.blur.setAttribute('stdDeviation', `0 ${sigma.toFixed(2)}`); col.strip.style.filter = `url(#${col.fid})`; } else col.strip.style.filter = ''; }
         });
         if (live) raf = requestAnimationFrame(tick); else land(m);
@@ -234,4 +211,56 @@ function rollers(root, c) {
   return cleanup;
 }
 
-export default { 1: constellation, 2: ledger, 3: rollers };
+// v4 (R3, new): [BANK] 514 The Record Institute + [BANK] 372 Glare Hover. The glare is Q372's analytic streak profile,
+// streak(t) = bump(t, .5, .06 + .16·softness) + .32·bump(t, .5, .5), bump = smootherstep(1 − |t − c|/h), written as a
+// 33-stop linear-gradient (softness .5, peak alpha .6) and swept across a frame once per hover/focus (CSS, 600ms
+// (.25,1,.5,1), the Record Institute's dominant bezier). Frames enter once, 60ms apart, rising 12px.
+const smoother = t => t * t * t * (t * (6 * t - 15) + 10);
+const bump = (t, c, h) => { const u = 1 - Math.abs(t - c) / h; return u <= 0 ? 0 : smoother(Math.min(1, u)); };
+function wall(root, c) {
+  const stops = Array.from({ length: 33 }, (_, i) => { const t = i / 32, a = Math.min(1, bump(t, 0.5, 0.06 + 0.16 * 0.5) + 0.32 * bump(t, 0.5, 0.5)) * 0.6; return `rgba(255,255,255,${a.toFixed(3)}) ${(t * 100).toFixed(1)}%`; });
+  root.style.setProperty('--glare', `linear-gradient(105deg,${stops.join(',')})`);
+  if (!c.motion) return;
+  beats(root, [root.querySelector('.pv4-h'), root.querySelector('.pv4-sub')]);
+  const frames = root.querySelectorAll('.pv4-frame');
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.pv4-wall'), start: 'top 82%', once: true, onEnter: () => gsap.fromTo(frames, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform,opacity,visibility' }) });
+  gsap.set(frames, { autoAlpha: 0 });
+  return () => st.kill();
+}
+
+// v5 (R3, new): [BANK] Q164 Circular Text (React Bits; deep read slice 3). Letters are DOM spans set around the ring, each
+// given an arc proportional to its measured width (Q164's non-fill mode), so the ring reads evenly; the ring turns by a
+// drag (the pointer's angle about the centre; dead radius 6% of the size) and a release keeps the drag's angular
+// velocity, decaying with tau 0.3s (settled in ~1.2s). Departures: no endless cruise (S1314 §8); instead a quarter turn
+// scroll-linked across the section's pass. Coarse pointers never drag (the seal must not trap a scrolling thumb).
+// Reduced motion: still.
+const SEAL = 'Owens Corning Platinum Preferred \u2605 $2M liability insurance \u2605 4.9 stars from 295 Google reviews \u2605 BBB A+ accredited since 2001 \u2605 ';
+function seal(root, c) {
+  const seal = root.querySelector('.pv5-seal'), ring = root.querySelector('.pv5-ring'), done = [], cleanup = () => done.forEach(f => f());
+  const chars = [...SEAL].map(ch => { const s = document.createElement('span'); s.className = 'pv5-ch' + (ch === '\u2605' ? ' is-star' : ''); s.textContent = ch; ring.append(s); return s; });
+  const lay = () => {
+    const size = seal.getBoundingClientRect().width; if (!size) return;
+    const fs = Math.max(10, Math.min(19, size * 0.034)); ring.style.setProperty('--fs', fs + 'px');
+    const ws = chars.map(s => s.offsetWidth || fs * 0.5) /* layout width: a rotated span's bounding box is not its width */, total = ws.reduce((a, b) => a + b, 0);
+    let acc = 0; chars.forEach((s, i) => { const a = ((acc + ws[i] / 2) / total) * 360; acc += ws[i]; s.style.transform = `translateX(-50%) rotate(${a.toFixed(2)}deg)`; s.style.height = (size / 2 - size * 0.035) + 'px'; s.style.top = (size * 0.035) + 'px'; });
+  };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { if (root.isConnected) lay(); });
+  const ro = new ResizeObserver(lay); ro.observe(seal); done.push(() => ro.disconnect());
+  if (!c.motion) return cleanup;
+  let base = 0, drag = 0, vel = 0, raf = 0, last = 0, held = null;
+  const paint = () => { ring.style.transform = `rotate(${(base + drag).toFixed(2)}deg)`; };
+  const st = ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onUpdate: s => { base = s.progress * 90; paint(); } });
+  done.push(() => st.kill());
+  beats(root, [root.querySelector('.pv5-h'), root.querySelectorAll('.pv5-list li')]);
+  if (!c.fine) return cleanup;
+  const ang = e => { const r = seal.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; return Math.hypot(x, y) < r.width * 0.06 ? null : Math.atan2(y, x) * 180 / Math.PI; };
+  const coast = t => { raf = 0; const dt = Math.min(0.05, (t - last) / 1000 || 0.016); last = t; drag += vel * dt; vel *= Math.exp(-dt / 0.3); paint(); if (Math.abs(vel) > 2) raf = requestAnimationFrame(coast); };
+  const down = e => { if (e.pointerType !== 'mouse' && e.pointerType !== 'pen') return; const a = ang(e); if (a === null) return; cancelAnimationFrame(raf); raf = 0; held = { a, t: performance.now(), v: 0 }; seal.classList.add('is-drag'); seal.setPointerCapture(e.pointerId); };
+  const move = e => { if (!held) return; const a = ang(e); if (a === null) return; let d = a - held.a; d = ((d + 540) % 360) - 180; const now = performance.now(), dt = Math.max(1, now - held.t) / 1000; held.v = d / dt; held.a = a; held.t = now; drag += d; paint(); };
+  const up = () => { if (!held) return; vel = performance.now() - held.t < 80 ? held.v : 0; held = null; seal.classList.remove('is-drag'); last = performance.now(); if (Math.abs(vel) > 2) raf = requestAnimationFrame(coast); };
+  seal.addEventListener('pointerdown', down); seal.addEventListener('pointermove', move); seal.addEventListener('pointerup', up); seal.addEventListener('pointercancel', up);
+  done.push(() => { cancelAnimationFrame(raf); seal.removeEventListener('pointerdown', down); seal.removeEventListener('pointermove', move); seal.removeEventListener('pointerup', up); seal.removeEventListener('pointercancel', up); });
+  return cleanup;
+}
+
+export default { 1: constellation, 2: ledger, 3: rollers, 4: wall, 5: seal };

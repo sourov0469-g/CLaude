@@ -320,6 +320,7 @@ export function initCompanion(store) {
     };
     const later = () => { if (!q) q = requestAnimationFrame(check); };
     addEventListener('scroll', later, { passive: true }); addEventListener('resize', later); document.addEventListener('versionswap', () => setTimeout(later, 60));
+    setInterval(() => { if (!document.hidden) later(); }, 250); // controls that fade in after the last scroll
     later();
   }
   gsap.set(root, { autoAlpha: 0 });

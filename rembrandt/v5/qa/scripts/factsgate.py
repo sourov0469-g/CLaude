@@ -11,7 +11,7 @@ text = H.unescape(re.sub(r'<[^>]+>', ' ', body) + ' ' + attrs)
 js = ' '.join(scripts); js = re.sub(r'data:[a-z/+.-]+;base64,[A-Za-z0-9+/=]+', 'DATAURI', js)
 both = text + ' ' + js
 def n(pat, s=both, f=re.I): return len(re.findall(pat, s, f))
-tpl = re.findall(r'<template id="tpl-([a-z]+)-(\d)">(.*?)</template>', src, re.S)
+tpl = re.findall(r'<template id="tpl-([a-z]+)-(b?\d)">(.*?)</template>', src, re.S)
 live = {}  # live version-1 markup per section: the <section data-section> minus its templates
 for m in re.finditer(r'<section[^>]*data-section="([a-z]+)"[^>]*>(.*?)</section>', src, re.S): live[m.group(1)] = re.sub(r'<template.*?</template>', '', m.group(2), flags=re.S)
 rows = []
@@ -33,10 +33,13 @@ chk('invented review quotes: 0 quote-like sentences in visible text', not quotes
 chk('no reviewer-attribution pattern (— Name / Jane D.)', n(r'[—–-]\s?[A-Z][a-z]+ [A-Z]\.', text, 0) == 0, str(n(r'[—–-]\s?[A-Z][a-z]+ [A-Z]\.', text, 0)))
 chk('no stray rating other than 4.9', not [r for r in re.findall(r'\b([1-5]\.\d)\s*(?:stars?|★)', text) if r != '4.9'], str(re.findall(r'\b([1-5]\.\d)\s*(?:stars?|★)', text)))
 chk('address verbatim present', '38 N Pioneer Blvd' in text and 'OH 45066' in text, '')
-pv1 = H.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'<(script|style)\b[^>]*>.*?</\1>', ' ', live.get('proof', ''), flags=re.S)))
-vis = [t for t in re.findall(r'.{0,60}BBB.{0,40}', text) if 'accredited' not in t]
-exempt = [t for t in vis if re.sub(r'\s+', ' ', t).strip()[-30:] and 'BBB A+ since 2001' in re.sub(r'\s+', ' ', t) and 'BBB A+ since 2001' in re.sub(r'\s+', ' ', pv1)]
-chk('BBB wording: every visible BBB mention says "accredited" (Reviews V1 Constellation exempt by Rule 4, flagged)', len(vis) == len(exempt) <= 1, f"non-accredited mentions {len(vis)}, all in the Constellation: {len(vis) == len(exempt)}")
+# R3: the Constellation as kept lives on only as backup B1 (tpl-proof-b1, frozen by rule); its two old wordings are the one
+# exemption. Every other version, the live working copy of V1 included, must say "accredited".
+nob1 = re.sub(r'<template id="tpl-proof-b1">.*?</template>', ' ', body, flags=re.S)
+tx = H.unescape(re.sub(r'<[^>]+>', ' ', nob1))
+vis = [t for t in re.findall(r'.{0,60}BBB.{0,40}', tx) if 'accredited' not in t]
+b1 = [t for t in re.findall(r'.{0,60}BBB.{0,40}', text) if 'accredited' not in t]
+chk('BBB wording: every visible BBB mention says "accredited" (only backup B1, the kept Constellation, is exempt)', not vis, f"outside B1: {len(vis)}; inside B1: {len(b1) - len(vis)}")
 chk('Founded 1995 / Bunk / Wade 2015 / Rachel present', all(k in text for k in ('1995', 'Bunk', 'Wade', '2015', 'Rachel')), '')
 chk('Owens Corning Platinum Preferred present', 'Platinum Preferred' in text, '')
 chk('$2M liability present', n(r'\$2M liability') > 0, str(n(r'\$2M liability')))

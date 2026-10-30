@@ -1,0 +1,44 @@
+proof v1 @320: h 633 els 12 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v2 @320: h 1122 els 87 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v3 @320: h 861 els 131 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v4 @320: h 1350 els 49 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v5 @320: h 1142 els 164 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v1 @375: h 633 els 12 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v2 @375: h 1106 els 87 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v3 @375: h 858 els 131 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v4 @375: h 1327 els 49 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v5 @375: h 1102 els 164 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+proof v1 @768: h 702 els 12 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+proof v2 @768: h 1060 els 87 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+proof v3 @768: h 712 els 131 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+proof v4 @768: h 1119 els 49 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+proof v5 @768: h 1178 els 164 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+proof v1 @1024: h 936 els 12 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+proof v2 @1024: h 855 els 87 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+proof v3 @1024: h 847 els 131 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+proof v4 @1024: h 986 els 49 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+proof v5 @1024: h 747 els 164 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+proof v1 @1440: h 936 els 12 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v2 @1440: h 952 els 87 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v3 @1440: h 1004 els 131 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v4 @1440: h 1053 els 49 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v5 @1440: h 797 els 164 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v1 @1440 rm: h 936 els 12 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v2 @1440 rm: h 952 els 87 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v3 @1440 rm: h 1004 els 131 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v4 @1440 rm: h 1053 els 49 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v5 @1440 rm: h 797 els 164 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+proof v1 @1440: 16 steps, overlaps 0
+proof v2 @1440: 16 steps, overlaps 0
+proof v3 @1440: 16 steps, overlaps y60:Read the reviews
+proof v4 @1440: 17 steps, overlaps y-300:A+Better Busines
+proof v5 @1440: 15 steps, overlaps 0
+proof v1 @620: 12 steps, overlaps 0
+proof v2 @620: 17 steps, overlaps 0
+proof v3 @620: 15 steps, overlaps 0
+proof v4 @620: 17 steps, overlaps 0
+proof v5 @620: 17 steps, overlaps 0
+V1 glyph-region ink pixels: 22% in view 538, >=50% in view after 2.2s 4800, scrolled back to 15% 4801 (held if ~equal to formed)
+V2 clip 115/120; height @375 1106
+V3 4.9/295 settled within ~727ms (poll), blur seen while moving: true
+V3 still numbers: 12349012901201232001 $1234M$2M

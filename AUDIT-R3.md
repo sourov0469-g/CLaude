@@ -238,3 +238,68 @@ Measured first: at 60px, "Springboro's family roofers" sets 775px wide with "fam
 |---|---|---|
 | (a) V1's shingle wall with the proposition pinned from the start | REJECT | This is V1 after its own fix list. A slot holding it would be a variation, which A3 forbids. Built instead: **V4 "Stitched headline"** ⟦S0218⟧ inline image typography. Real job photos sit between the words of the headline at type height ("Springboro's [photo] family roofers [photo] since 1995."). Each photo widens on hover or focus to show more of the job. On phones the photos leave the line and stack as a strip under it, as the skill directs. No split, no canvas, no band. |
 | (b) A pure typographic poster in the F5-V3 grammar at hero scale | ACCEPT | **V5 "Poster lines"**: no photo and no canvas. The H1 sits at the hero role. Under it, three index rows carry the family facts as dated lines (1995 Bunk Walker founded it; 2015 Wade runs it; Today Rachel answers the phone), separated by ridge zigzag rules that draw in once. The last row is the Call link. The idea comes from the subject's own inventory ⟦S0095⟧ (name, year, rituals). |
+
+## F2 / G: Reviews (written before the Reviews code)
+
+The cadence lock (C2) puts Reviews on --ink. Every version moves to it, which is two-thirds of the set already (V1 blue, V3 near-ink).
+
+### Winner V2 Ledger
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| 1 | Remove the tape-measure reel | ACCEPT | Removal Test ⟦S1314⟧: it decorates a rule that already draws itself. The faint shingle-course background goes by the same test (A6). |
+| 2 | Mobile 1439px down to ≤1150px; tighten rows; un-stick the head | ACCEPT | ⟦S1499⟧ ⟦S1498⟧. The head is already static on phones; the rows, the figure scale and the note tighten. |
+| 3 | Star clip at exactly 98% (117.6/120) | REJECT the number, keep the intent | See F2.3 below. |
+| 4 | Hover ≤300ms on (0.23,1,0.32,1); press tick ≤.3s | ACCEPT | ⟦S0063⟧ ⟦S0089⟧. The check link's snap loses its .14s delay and runs .18s (D6). The tick goes .45s to .30s. Hover transitions move to --ease-x. |
+| 5 | Source labels: lift the colour or drop the tracking | ACCEPT, both | They take the one label role: 14px, sentence case, 0 tracking, --on-dark-2 at 9.3:1 (C1). |
+| 6 | No count-up on 4.9 | ACCEPT | There is none in V2, and none is added. |
+| (C7) | Accent | | The five stars in sun are the section's one signature moment. The check links take sun as the action colour. |
+
+**F2.3, the star clip.**
+- The five stars are laid out from x=1 to x=117 of the 120-wide box.
+- A 117.6 clip would paint all five stars fully, which shows 5.0 for a 4.9 rating ⟦S1314⟧ ("product truth: metrics specific and honest").
+- The honest clip is four full stars plus 90% of the fifth: the fifth spans 97 to 117, so the clip is 97 + 0.9 × 20 = **115.0**.
+- The current 115.4 is replaced by exactly 115.0.
+
+### V1 Constellation
+| Point | Verdict | Reason |
+|---|---|---|
+| Formation from visibility; rebalance; mobile gap; 40 to 60ms credential stagger; reduced-motion state stays | ACCEPT, with the conflict resolved | See V1 below. |
+
+**V1, the conflict and its resolution.**
+- **The conflict:** BRIEF-v2 rule 4 says the Constellation stays pixel-untouched. The pack, the user's latest word, asks for fixes.
+- **Resolution, through the backup mechanism (A2):**
+  - B1 holds the Constellation exactly as kept, proven pixel-identical in `qa/gate/r3-backups.log`.
+  - Slot 1 is a working copy, and the fixes go there.
+  - Rule 4's intent (never lose the owner's build) holds. The pack's fixes ship.
+- **Formation:** it completes when the section is ≥50% in view and then holds. It is no longer scrubbed back and forth with scroll ⟦S1314 §8⟧ (scroll effects must explain something; reversing a formed "4.9" explains nothing).
+- **Composition:** the glyph moves left and down, toward the copy. Phones lose the gap between glyph and copy.
+- **Credential lines:** staggered 50ms.
+- **Ground:** --ink (C2).
+- **Wording:** the copy also takes the locked wording this round ("BBB A+ accredited since 2001", "$2M liability insurance"). This was flag 1 of the last report; it could not be fixed while the build was untouchable.
+
+### V3 Roller board
+| Point | Verdict | Reason |
+|---|---|---|
+| Roll only 4.9 and 295, illegible intermediates, ≤600ms | ACCEPT | ⟦S0063⟧ Std 4. Intermediate digits pass under a 3px motion blur. |
+| 2001 and 1995 fixed; Owens Corning becomes a board cell; 1995 leaves | ACCEPT | "Family-run since 1995" is the Family section's fact. On the board it repeats rather than proves ⟦S1499⟧. |
+| Cut the dead quarter; delete the kicker | ACCEPT | ⟦S1498⟧ ⟦S0001⟧. The second row becomes three equal cells: 2001, Platinum Preferred, $2M. |
+| (C2) | | #1d2536 becomes --ink. The rail's #d99a06/#b47e04 become --sun and a sun-ink mix. The cell greys move to the --shingle family. |
+
+### New versions
+| Pack's direction | Verdict | Built instead |
+|---|---|---|
+| (a) V1's formation completing on visibility, as a full version | REJECT | It is V1 after its fix list, so a slot holding it would be a variation (A3). |
+| (b) V3's flap on 4.9/295 plus V2's verification links | REJECT | It splices two existing versions, again a variation. |
+
+**Built instead (two wholly new concepts):**
+- **V4 "Office wall":**
+  - **References:** [BANK] 514 The Record Institute (artefact cards: a metallic sheen sweeps on hover and focus; the top tier alone glows gold) and [BANK] 372 Glare Hover (an analytic streak profile, 650ms sweep).
+  - **What it is:** each credential is a framed plaque on the office wall at 38 N Pioneer Blvd. They are typographic plaques, not replicas of anyone's certificate or logo.
+  - **Hierarchy:** the 4.9 / 295 plaque is the large frame and the only one that glows sun.
+  - **Interaction:** hover or focus sweeps a glare across a frame. Each plaque links to its check.
+- **V5 "The seal":**
+  - **Reference:** [BANK] Q164 Circular Text (a ring of letters; a drag spins it and a fling carries momentum, decaying to the cruise speed; it spins only on screen; still under reduced motion).
+  - **What it is:** one roofer's seal. "4.9" sits in the centre, and the ring carries every credential in sentence case: "4.9 stars from 295 Google reviews · BBB A+ accredited since 2001 · Owens Corning Platinum Preferred · $2M liability insurance".
+  - **Departures from Q164:**
+    - It does not cruise forever ⟦S1314 §8⟧. It turns only when dragged or flung, with a 1.2s decay, or by a slow scroll-linked quarter turn.
+    - The ring is aria-hidden, and the same facts sit beside it as a real list with the check links.
