@@ -381,3 +381,26 @@ Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, 
   - The Constellation's caption says "BBB A+ since 2001" and "$2M liability cover". §3 wording is "accredited since 2001" and "liability insurance", but the Constellation is untouchable by rule 4.
   - Code weight is over F18's band.
   - C11: the estimate claim and the Census data.
+
+### v2 §12 gate rerun on the final file (task #31)
+1. **Facts grep:** PASS, 25 checks, 0 fails (`qa/gate/facts.log`).
+   - 353-9711: 0. "24/7": 0. Licence: 0. "295" ×4, "4.9" ×5. Quotes and reviewer names: 0.
+   - Every tel link is +19377467377. The address is verbatim.
+2. **Banned patterns:** PASS (`qa/gate/facts.log`). No Job Ticket, FAQ, service picker, bento, estimate paper, leak story, proof strip or skeleton sequence; no named roof-layer lists.
+3. **Traceability audit:** 3 rows drawn at random (`random.seed(20261030)`): Towns V3, Work V2, Call V3. Their cited references were re-opened in the atlas:
+   - **Towns V3:** ROTTLER at atlas2 3693 is a town/postcode finder ("finder ×2"); West London at 6376 is a postcode coverage checker. The row's instant answer plus not-on-the-list state matches.
+   - **Work V2:** P80 at 4945 (Flip.from, scale, prune, 0.9 s, expo; push classes move items to edges) and S51 at 5433 (path morph on hover, back-out). The row matches and states its one deviation, push on tracks.
+   - **Call V3:** Q114 at 2188 is a giant-type email marquee footer CTA (60 px phone → 272 px desktop; hover colour swap 300 ms). Q161 at 2487 is a seamless marquee. The Stronghold 60 s token is at 6346. The row matches.
+4. **Switchers:** PASS, 63/63 runs "swaps only <section>; overflow 0; errors 0" at 1440, 375 and 1440 reduced (`qa/gate/switchers.log`). DOM gate: 21/21 labels change their own section.
+5. **Screenshots:** all 21 versions at 1440, 375 and 1440 reduced, re-shot (`qa/<sec><v>-*.jpg`).
+   - New contact sheets `qa/gate/sheet-{1440,375}.jpg`, built by `qa/scripts/sheets.py`.
+   - Compared against §4. The audit found two defects, Work V2 (sparse) and How V3 (generic), both fixed. Also found in checks: the Work V2 phone open state used desktop tracks, and the How V3 icon slid onto its text. Both fixed.
+6. **Console 0, overflow 0, ids, controls, forms:** PASS, 0 fails (`qa/gate/dom.log`).
+   - The gate first failed on Work V2's Close (0 mutations). Close only renders while a photo is open, and the gate clicked it after the six photo toggles had left the grid closed.
+   - The gate now opens a photo first for controls inside a `[hidden]` block, and Close passes (478 mutations). `workint.mjs` had already shown it closing the photo.
+7. **Companion and reduced motion:** `qa/compint.log` FAILS 0 (42 version × width runs, variants, touch, reduced). `qa/gate/reduced.log` FAILS 0.
+8. **Constellation untouched:**
+   - Pixels: `constel.mjs` diff bbox None, max 0 at 1440 and 375 against the e685bee checkpoint.
+   - Source: `constellation()` body brace-matched and SHA-256 hashed, identical at e685bee and HEAD (752e073b…). This hash method differs from the earlier e7d174cd one, which hashed a different slice; both show identity.
+   - `proof/v1.html`, `gl.js` and `spring.js`: 0 diff lines.
+9. **Weight:** 1509 KB total (951 KB gzip). Code 437 KB (markup 75 + CSS 92 + JS 271; 134 KB gzip). Media 1072 KB in 10 URIs. One scroll engine (Lenis); 0 ScrollTrigger pins; no MorphSVG, three.js or jQuery (`qa/gate/weight.log`).

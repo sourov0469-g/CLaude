@@ -40,7 +40,12 @@ for (const s of SECS) for (const v of [1, 2, 3]) {
     await p.evaluate(s => document.getElementById(s).scrollIntoView({ block: 'start' }), s); await p.waitForTimeout(300);
     await p.evaluate(() => { window.__mut = 0; window.__mo && window.__mo.disconnect(); window.__mo = new MutationObserver(list => { for (const m of list) { const t = m.target.nodeType === 1 ? m.target : m.target.parentElement; if (!t || t.closest('.cmp,.cfx') || t === document.documentElement) continue; if (m.type === 'attributes' && m.attributeName === 'class') { const a = (m.oldValue || '').split(/\s+/).filter(x => x && x !== 'is-press').sort().join(' '), z = [...t.classList].filter(x => x !== 'is-press').sort().join(' '); if (a === z) continue; } window.__mut++; } }); window.__mo.observe(document.body, { subtree: true, childList: true, attributes: true, attributeOldValue: true, characterData: true }); });
     if (c.tag === 'input' && (c.type === 'text' || c.type === 'search' || !c.type)) { await p.evaluate(k => { const i = document.querySelector(`[data-gate="${k}"]`); i.focus(); i.value = 'Bellbrook'; i.dispatchEvent(new Event('input', { bubbles: true })); i.form && i.form.requestSubmit(); }, c.k); }
-    else await p.evaluate(k => document.querySelector(`[data-gate="${k}"]`).click(), c.k);
+    else {
+      // a control that only renders in an open state (inside a [hidden] block) is tested in that state: open it first
+      const opener = await p.evaluate(k => { const e = document.querySelector(`[data-gate="${k}"]`); if (!e.closest('[hidden]')) return ''; const ROOT = e.closest('.wv2'); return ROOT ? '.wv2-item' : ''; }, c.k);
+      if (opener) { await p.evaluate(() => window.__mo.disconnect()); await p.evaluate(s => document.querySelector(s).click(), opener); await p.waitForTimeout(1200); await p.evaluate(() => { window.__mut = 0; window.__mo.observe(document.body, { subtree: true, childList: true, attributes: true, attributeOldValue: true, characterData: true }); }); }
+      await p.evaluate(k => document.querySelector(`[data-gate="${k}"]`).click(), c.k);
+    }
     await p.waitForTimeout(700);
     const m = await p.evaluate(() => { window.__mo.disconnect(); return window.__mut; });
     res.push([m > 0, `${c.tag}${c.type && c.tag === 'input' ? '[' + c.type + ']' : ''} "${c.label}" (${m} mutations)`]);
