@@ -264,16 +264,17 @@
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: #77b3b8; }
-.foot__mark span:last-child { color: #1d4a4e; }
+.foot__mark span:last-child { color: #77b3b8; opacity: .45; }   /* [AUDIT-01 footer 2] clearly secondary, never a misprint */
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; } }
 [data-theme="daylight"] .foot { background: #0B1418; color: #e8e4dc; }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 5; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 560; color: #a9b6b9; margin-bottom: 4px; }
 .foot__addr { font-style: normal; display: grid; gap: var(--s2); }
 .foot__col a { text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.foot__col a[href^="mailto:"] { overflow-wrap: anywhere; word-break: break-word; }   /* [AUDIT-01 footer 3] */
 .foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: #a9b6b9; padding-top: var(--s5); }
 @media (max-width: 1023px) {
   .foot__brand { grid-column: 1 / -1; }

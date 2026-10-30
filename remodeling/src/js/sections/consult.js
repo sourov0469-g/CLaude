@@ -58,8 +58,71 @@
   if (!EZ.consultMail) EZ.consultMail = function (url) { window.location.href = url; };   // tests replace this to intercept the mailto navigation
 
   EZ.section('consult', {
-    /* v1 · The work order [BANK 348 circular progress] */
+    /* slot 1 · AUDIT-01 winner (copied from v2; F10 grafts and fixes): step text in the form column with its content, the
+       headline follows the step, hover is an outline only, steps crossfade with a 12px rise in 200ms (text swaps at the
+       midpoint), step 2 adds notes, preferred contact and a plain call line; a room picked in the hero arrives pre-pressed. */
     1: { init: function (root, k) {
+      var form = root.querySelector('.cp__form'), svg = root.querySelector('.cp__svg'), head = root.querySelector('.cp__h');
+      var p1 = root.querySelector('.cp__p1'), p2 = root.querySelector('.cp__p2'), step = root.querySelector('.cp__step');
+      var rooms = Array.prototype.slice.call(root.querySelectorAll('.cp__room')), whole = form.elements.whole;
+      var picked = root.querySelector('.cp__picked'), err = root.querySelector('#c2-rooms-w-err'), touched = false;
+      var H1 = 'Tap the rooms you want to change.', H2 = 'How do we reach you?', S1 = 'Step 1 of 2, pick the rooms', S2 = 'Step 2 of 2, how to reach you';
+      var HOUSE = EZ.bezier(.23, 1, .32, 1);
+      liveClear(form, k);
+      rooms.forEach(function (r) { if (!r.querySelector('span')) r.innerHTML = '<span>' + r.textContent + '</span>'; });
+      svg.innerHTML = '<path class="wall" d="M12 12H588V408H12Z M282 12V150 M282 150H420 M420 12V216 M12 216H588 M354 216V408"/>' +
+        '<path class="door" d="M282 110a40 40 0 0 1 40 40 M420 170a40 40 0 0 0 -40 40 M200 216a44 44 0 0 1 44 -44 M354 300a40 40 0 0 1 40 40"/>' +
+        '<path class="fix" d="M30 30h220v36H30z M60 120h120v50H60z M300 30h50v30h-50z M370 90a18 22 0 1 0 0.1 0 M440 40h120v120h-120z M40 300h150v70H40z M380 240h180v140H380z"/>';
+      k.add(function () { svg.innerHTML = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); p1.hidden = false; p2.hidden = true; step.textContent = S1; head.textContent = H1; });
+      function sel() { var s = rooms.filter(function (r) { return r.getAttribute('aria-pressed') === 'true'; }).map(function (r) { return r.dataset.room; }); if (whole.checked) s.unshift('Whole home'); return s; }
+      function press(r, on) {
+        r.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (k.motion && on) gsap.fromTo(r.querySelector('span'), { scale: 1.12 }, { scale: 1, duration: .18, ease: 'power2.out' });
+      }
+      rooms.forEach(function (r) { k.on(r, 'click', function () { touched = true; press(r, r.getAttribute('aria-pressed') !== 'true'); err.hidden = true; }); });
+      // whole home reads as five picks: a 40ms cascade
+      k.on(whole, 'change', function () {
+        touched = true; err.hidden = true;
+        rooms.forEach(function (r, i) { if (k.motion) k.timeout(function () { press(r, whole.checked); }, i * 40); else press(r, whole.checked); });
+      });
+      // a room chosen in the hero arrives pressed, until the visitor touches the plan themselves
+      function carry() {
+        if (touched || !EZ.pickedRoom) return;
+        if (EZ.pickedRoom === 'Whole home') { whole.checked = true; rooms.forEach(function (r) { r.setAttribute('aria-pressed', 'true'); }); return; }
+        rooms.forEach(function (r) { r.setAttribute('aria-pressed', r.dataset.room === EZ.pickedRoom ? 'true' : 'false'); });
+      }
+      carry();
+      k.io(root, function (en) { if (en.isIntersecting) carry(); }, { threshold: 0 });
+      function go(to2) {
+        var from = to2 ? p1 : p2, to = to2 ? p2 : p1;
+        if (to2) picked.textContent = sel().join(' · ');
+        function swap() { step.textContent = to2 ? S2 : S1; head.textContent = to2 ? H2 : H1; }
+        if (!k.motion) { swap(); from.hidden = true; to.hidden = false; (to.querySelector('input, button') || to).focus(); return; }
+        k.ctx.add(function () {
+          gsap.timeline()
+            .to([from, head, step], { autoAlpha: 0, duration: .1, ease: 'power1.in', onComplete: function () { swap(); from.hidden = true; gsap.set(from, { clearProps: 'all' }); to.hidden = false; } })
+            .fromTo(to, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: .2, ease: HOUSE, clearProps: 'all', onComplete: function () { (to.querySelector('input, button') || to).focus(); } })
+            .to([head, step], { autoAlpha: 1, duration: .2, ease: HOUSE, clearProps: 'opacity,visibility' }, '<');
+        });
+      }
+      k.on(root.querySelector('.cp__next'), 'click', function () {
+        if (!sel().length) { err.textContent = 'Tap at least one room, or tick the whole home.'; err.hidden = false; return; }
+        go(true);
+      });
+      k.on(root.querySelector('.cp__back'), 'click', function () { go(false); });
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!show(check(form, ['name', 'phone', 'email', 'address', 'consent']), form, k)) return;
+        var lines = ['Rooms: ' + sel().join(', '), 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Preferred contact: ' + v(form, 'contact')];
+        if (v(form, 'notes')) lines.push('Notes: ' + v(form, 'notes'));
+        EZ.consultMail(compose(lines, v(form, 'name')));
+        done(form);
+      });
+      EZ.reveal(k, root.querySelectorAll('.cp__side > *'));
+      if (k.motion) gsap.fromTo(svg.querySelectorAll('.wall, .door, .fix'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    } },
+
+    2: { init: function (root, k) {
       var form = root.querySelector('.consult1__paper'), btn = root.querySelector('.consult1__go'), ring = root.querySelector('.consult1__ring'), label = btn.querySelector('.btn__label');
       liveClear(form, k);
       EZ.reveal(k, root.querySelectorAll('.consult1__side > *'));
@@ -73,23 +136,23 @@
         if (!show(check(form, ['name', 'phone', 'email', 'address', 'project', 'consent']), form, k)) return;
         var type = (form.querySelector('[name="type"]:checked') || {}).value || '', how = (form.querySelector('[name="contact"]:checked') || {}).value || '';
         var url = compose(['The job: ' + type, 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Address: ' + v(form, 'address'), 'Project: ' + v(form, 'project'), 'Preferred contact: ' + how], v(form, 'name'));
-        if (!k.motion) { EZ.consultMail(url); done(form); return; }
-        // pill -> 56px circle -> ring draws -> tick, then the email opens [BANK 348]
+        // [AUDIT-01 F10 loser V1, P1] the send fires FIRST; the ceremony plays afterwards as confirmation, 600ms in all
+        EZ.consultMail(url); done(form);
+        if (!k.motion) return;
         var w = btn.offsetWidth;
-        form.setAttribute('aria-busy', 'true');
         k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { form.removeAttribute('aria-busy'); EZ.consultMail(url); done(form); } })
-            .to(label, { autoAlpha: 0, duration: .15 })
-            .fromTo(btn, { width: w, minWidth: 0 }, { width: 56, minWidth: 0, paddingLeft: 0, paddingRight: 0, borderRadius: 28, duration: .35, ease: 'power3.inOut' })
+          gsap.timeline()
+            .to(label, { autoAlpha: 0, duration: .08 })
+            .fromTo(btn, { width: w, minWidth: 0 }, { width: 56, minWidth: 0, paddingLeft: 0, paddingRight: 0, borderRadius: 28, duration: .18, ease: 'power3.inOut' })
             .set(ring, { opacity: 1 })
-            .fromTo(ring.querySelector('circle'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .7, ease: 'power1.inOut' })
-            .fromTo(ring.querySelector('path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' });
+            .fromTo(ring.querySelector('circle'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .22, ease: 'power1.inOut' })
+            .fromTo(ring.querySelector('path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .12, ease: 'power2.out' });
         });
       });
     } },
 
     /* v2 · Pick the rooms [BANK Neil Kelly picker]; the plan folds into the contact step (the morph belongs to Financing V3) */
-    2: { init: function (root, k) {
+    b1: { init: function (root, k) {
       var form = root.querySelector('.consult2__form'), svg = root.querySelector('.consult2__svg');
       var p1 = root.querySelector('.consult2__p1'), p2 = root.querySelector('.consult2__p2'), step = root.querySelector('.consult2__step');
       var rooms = Array.prototype.slice.call(root.querySelectorAll('.consult2__room')), whole = form.elements.whole;
