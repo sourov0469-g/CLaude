@@ -106,4 +106,38 @@ function drum(root, c) {
   return () => removeEventListener('resize', place);
 }
 
-export default { 1: house, 2: stack, 3: routes, 4: circles, 5: drum };
+// R4 Phase 4: "How many squares is your roof?" (the homepage's business-only interactive). Roof area of a simple gable
+// = footprint x slope factor, where the slope factor for a pitch of r in 12 is sqrt(1 + (r/12)^2); one square is 100
+// sq ft. The ridge on the drawing is draggable (pointer) and mirrors the pitch slider (keyboard and touch). Geometry
+// only: the copy says it is a rough guide and the written estimate measures the real roof. No price is shown.
+function squares(root, c) {
+  const box = root.querySelector('.sq'); if (!box) return () => {};
+  const len = box.querySelector('.sq-len'), wid = box.querySelector('.sq-wid'), pit = box.querySelector('.sq-pit');
+  const outs = box.querySelectorAll('.sq-v'), num = box.querySelector('.sq-out b'), svg = box.querySelector('.sq-svg');
+  const roof = box.querySelector('.sq-roof'), course = box.querySelector('.sq-course'), run = box.querySelector('.sq-run'), lbl = box.querySelector('.sq-lbl-p'), grip = box.querySelector('.sq-grip');
+  const EAVE = 200, HALF = 190, CX = 260; // drawing units: the gable spans 70..450 at the eave line
+  const yOf = r => EAVE - HALF * (r / 12) * 0.62; // apex height drawn from the pitch (scaled so 12 in 12 fits the frame)
+  const render = () => {
+    const L = +len.value, W = +wid.value, R = +pit.value, slope = Math.sqrt(1 + (R / 12) ** 2), sq = (L * W * slope) / 100, y = yOf(R);
+    outs[0].textContent = `${L} ft`; outs[1].textContent = `${W} ft`; outs[2].textContent = `${R} in 12`;
+    num.textContent = sq.toFixed(1); lbl.textContent = `${R} in 12`;
+    roof.setAttribute('d', `M70 ${EAVE} L${CX} ${y.toFixed(1)} L450 ${EAVE} Z`); run.setAttribute('d', `M${CX} ${EAVE} V${y.toFixed(1)}`);
+    let d = ''; for (let k = 1; k < 5; k++) { const yy = EAVE - (EAVE - y) * k / 5, half = HALF * (1 - k / 5) + 20 * (1 - k / 5); d += `M${(CX - half).toFixed(1)} ${yy.toFixed(1)}H${(CX + half).toFixed(1)}`; } course.setAttribute('d', d);
+    grip.setAttribute('transform', `translate(0 ${(y - 105).toFixed(1)})`);
+    lbl.setAttribute('y', (EAVE + 26).toFixed(1));
+  };
+  const onInput = () => render();
+  [len, wid, pit].forEach(i => i.addEventListener('input', onInput));
+  let dragging = false;
+  const toPitch = e => { const r = svg.getBoundingClientRect(), y = (e.clientY - r.top) * (330 / r.height); const p = Math.round(((EAVE - y) / (HALF * 0.62)) * 12); return Math.max(3, Math.min(12, p)); };
+  const down = e => { dragging = true; box.classList.add('is-drag'); grip.setPointerCapture?.(e.pointerId); pit.value = toPitch(e); render(); };
+  const move = e => { if (!dragging) return; const p = toPitch(e); if (+pit.value !== p) { pit.value = p; render(); } };
+  const up = () => { dragging = false; box.classList.remove('is-drag'); };
+  grip.addEventListener('pointerdown', down); addEventListener('pointermove', move); addEventListener('pointerup', up);
+  render();
+  if (c.motion) beats(root, [box]);
+  return () => { [len, wid, pit].forEach(i => i.removeEventListener('input', onInput)); grip.removeEventListener('pointerdown', down); removeEventListener('pointermove', move); removeEventListener('pointerup', up); };
+}
+function houseAndSquares(root, c) { const a = house(root, c), b = squares(root, c); return () => { a && a(); b && b(); }; }
+
+export default { 1: houseAndSquares, 2: stack, 3: routes, 4: circles, 5: drum };

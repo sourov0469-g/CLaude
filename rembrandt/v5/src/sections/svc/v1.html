@@ -37,5 +37,32 @@
     <li><b>Siding.</b> James Hardie and vinyl siding, with house wrap and flashed J-channel.</li>
     <li><b>Gutters.</b> Seamless aluminum gutters, cut to length on site, and gutter guards.</li>
   </ol>
+  <section class="sq" aria-labelledby="sq-h">
+    <div class="sq-copy">
+      <h3 class="sq-h" id="sq-h">How many squares is your roof?</h3>
+      <p class="sq-p">Roofers measure in squares: one square is 100 square feet of roof. Set your house's footprint, drag the ridge to your roof's pitch, and watch the count change.</p>
+      <div class="sq-ctl">
+        <label class="sq-f"><span>Length</span><input type="range" class="sq-len" min="20" max="90" step="1" value="50" aria-describedby="sq-out"><output class="sq-v num">50 ft</output></label>
+        <label class="sq-f"><span>Width</span><input type="range" class="sq-wid" min="16" max="60" step="1" value="30" aria-describedby="sq-out"><output class="sq-v num">30 ft</output></label>
+        <label class="sq-f"><span>Pitch</span><input type="range" class="sq-pit" min="3" max="12" step="1" value="6" aria-describedby="sq-out"><output class="sq-v num">6 in 12</output></label>
+      </div>
+      <p class="sq-out" id="sq-out" aria-live="polite"><b class="num">16.8</b> squares, roughly</p>
+      <p class="sq-note">A rough guide from geometry alone: real roofs add overhangs, dormers and waste, so the written estimate measures yours.</p>
+    </div>
+    <div class="sq-art">
+      <svg class="sq-svg" viewBox="0 0 520 330" aria-hidden="true" focusable="false">
+        <path class="sq-ground" d="M10 300 H510"/>
+        <rect class="sq-wall" x="90" y="200" width="340" height="100"/>
+        <path class="sq-lap" d="M90 220H430M90 240H430M90 260H430M90 280H430"/>
+        <rect class="sq-door" x="238" y="236" width="44" height="64" rx="2"/>
+        <path class="sq-roof" d="M70 200 L260 105 L450 200 Z"/>
+        <path class="sq-course" d=""/>
+        <path class="sq-run" d="M260 200 V105"/><path class="sq-rise-l" d="M260 200 H450"/>
+        <text class="sq-lbl sq-lbl-p" x="272" y="226">6 in 12</text>
+        <g class="sq-grip" tabindex="-1"><circle class="sq-grip-o" cx="260" cy="105" r="18"/><circle class="sq-grip-i" cx="260" cy="105" r="7"/><path class="sq-grip-a" d="M260 79 l-6 7 h12 z M260 131 l-6 -7 h12 z"/></g>
+      </svg>
+      <p class="sq-hint">Drag the ridge up or down.</p>
+    </div>
+  </section>
   <p class="sv-also"><b>Also:</b> commercial roofing, EPDM and TPO, roof coatings, gutter cleaning, blown-in insulation, brick veneer, skylights and loft ventilation.</p>
 </div>

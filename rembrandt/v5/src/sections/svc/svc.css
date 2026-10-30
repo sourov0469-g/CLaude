@@ -105,3 +105,35 @@ html[data-motion="reduced"] .sv5-stage,html.no-js .sv5-stage{display:none}
 html[data-motion="reduced"] .sv5-list,html.no-js .sv5-list{position:static;width:auto;height:auto;overflow:visible;clip:auto;list-style:none;padding:0;display:grid;gap:4px;font-size:var(--t-body);line-height:1.55}
 @media (max-width:899px){.sv5{grid-template-columns:1fr;grid-template-areas:"h" "s" "a"}}
 @media (max-width:768px){.sv5-stage{perspective:400px}}
+
+/* ---------- R4 Phase 4, the bespoke interactive: "How many squares is your roof?" A roofer's own unit (1 square =
+   100 sq ft of roof). Footprint and pitch sliders plus a draggable ridge on a drawn gable; geometry only, no prices. */
+.sq{max-width:1180px;margin:clamp(40px,5vw,72px) auto 0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center;padding:clamp(24px,3.5vw,44px);border-radius:24px;background:var(--paper);box-shadow:0 0 0 1px var(--line)}
+.sq-h{font-size:clamp(1.5rem,1.1rem + 1.3vw,2.25rem);font-weight:700;line-height:1.12}
+.sq-p{margin-top:10px;color:var(--muted);max-width:46ch}
+.sq-ctl{display:grid;gap:14px;margin-top:22px}
+.sq-f{display:grid;grid-template-columns:5rem minmax(0,1fr) 6.5rem;align-items:center;gap:14px;font-family:var(--f-head);font-weight:600}
+.sq-f input{width:100%;accent-color:var(--a500);height:44px}
+.sq-v{justify-self:end;font-weight:700}
+.sq-out{margin-top:20px;font-family:var(--f-head);font-size:1.25rem;font-weight:600}
+.sq-out b{font-size:clamp(2.75rem,2rem + 2.5vw,4rem);font-weight:700;line-height:1;color:var(--a700);margin-right:6px;font-variant-numeric:tabular-nums}
+.sq-note{margin-top:10px;font-size:var(--t-small);color:var(--muted);max-width:52ch}
+.sq-art{position:relative;border-radius:18px;background:var(--a50);padding:12px}
+.sq-svg{display:block;width:100%;height:auto;overflow:visible;touch-action:none}
+.sq-svg *{vector-effect:non-scaling-stroke}
+.sq-ground{stroke:var(--ink);stroke-width:2.5}
+.sq-wall{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
+.sq-lap{stroke:var(--line);stroke-width:2}
+.sq-door{fill:var(--a500);stroke:var(--ink);stroke-width:2.5}
+.sq-roof{fill:var(--ink-2);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.sq-course{stroke:rgb(255 255 255 / .16);stroke-width:2;fill:none}
+.sq-run,.sq-rise-l{stroke:var(--a500);stroke-width:2.5;stroke-dasharray:6 6}
+.sq-lbl{font:700 18px var(--f-head);fill:var(--a700)}
+.sq-grip{cursor:ns-resize}
+.sq-grip-o{fill:var(--a500);stroke:var(--ink);stroke-width:2.5;transition:r .15s var(--ease-x)}
+.sq-grip-i{fill:var(--paper)}
+.sq-grip-a{fill:var(--ink)}
+@media (hover:hover) and (pointer:fine){.sq-grip:hover .sq-grip-o{r:21}}
+.sq.is-drag .sq-grip-o{r:22}
+.sq-hint{margin-top:6px;font-size:var(--t-small);font-weight:600;color:var(--a700);text-align:center}
+@media (max-width:899px){.sq{grid-template-columns:1fr}.sq-art{order:-1}}
