@@ -660,13 +660,14 @@
   /* BUILT 1: the wall, taken apart (S0526 exploded view): one spring per layer, stiffness 64, drag 14.2, 4 sub-steps,
      35 ms stagger, outermost leaves first and closes last; the selected layer is the one lit part, the rest step
      down; it moves only when asked (no idle tour, F17); transforms removed at rest. */
-  V.built1 = (r, b) => {
+  V.built1 = (r, b, s0) => {
+    const bk = s0 && s0.v > 5, SPREAD = bk ? 1 : 2.2;   // F5 V1: the explode reads as apart (offsets x2.2); Backup 1 keeps 1x
     const svg = $('svg.iso', r), asm = $$('.asm', svg), btns = $$('.lg-b', r), ex = $('[data-explode]', r), read = $('[data-readout]', r);
     const R = JSON.parse($('.b1x-data', r).textContent), ORDER = ['trim', 'siding', 'wrap', 'sheath', 'studs'];
     const sp = {};
     asm.forEach(g => { sp[g.dataset.asm] = { x: 0, v: 0, t: 0, at: 0, el: g, mx: +g.dataset.mx, my: +g.dataset.my }; });
     let apart = false, clock = 0, raf = 0, last = 0, sel = '';
-    const write = s => { if (Math.abs(s.x) < 1e-4) s.el.removeAttribute('transform'); else s.el.setAttribute('transform', `translate(${(s.mx * s.x).toFixed(2)} ${(s.my * s.x).toFixed(2)})`); };
+    const write = s => { if (Math.abs(s.x) < 1e-4) s.el.removeAttribute('transform'); else s.el.setAttribute('transform', `translate(${(s.mx * s.x * SPREAD).toFixed(2)} ${(s.my * s.x * SPREAD).toFixed(2)})`); };
     const tick = now => {
       const dt = last ? Math.min(1 / 30, (now - last) / 1000) : 1 / 60; last = now; clock += dt;
       let moving = false;
@@ -704,16 +705,17 @@
       b.on(g, 'click', () => { stopTour(); if (!apart) go(true); select(g.dataset.asm); });
     });
     b.add(() => cancelAnimationFrame(raf));
-    if (motionOK()) G.from(asm.slice().reverse(), { y: -30, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.09, scrollTrigger: once(svg, 'top 80%') });
+    if (motionOK()) G.from(asm.slice().reverse(), { y: -30, autoAlpha: 0, duration: bk ? 0.5 : 0.26, ease: ease.out, stagger: bk ? 0.09 : 0.035, scrollTrigger: once(svg, 'top 80%') });
   };
 
   /* BUILT 2: S1322 sticky stack cards (R45: CSS sticky does the stacking, never a GSAP pin, so phones can't be
      trapped). On desktop, as the next card travels from 78 % to 24 % of the viewport, the covered card settles back:
      scale toward 0.92 (+0.015 per index), opacity 0.72, 24 px up, scrubbed linearly (parameter library). */
-  V.built2 = (r, b) => {
-    // v4: each card's test diagram draws as the card arrives (stroke draw 0.6 s, stagger 0.08; final drawing without motion)
-    if (motionOK()) $$('.tx-d', r).forEach(dg => { const ps = $$('path', dg); if (!ps.length) return; G.fromTo(ps, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.inOut', stagger: 0.08, scrollTrigger: once(dg, 'top 85%') }); });
-    const cards = $$('.ts-card', r);
+  V.built2 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 2 keeps the five-card stack and the 0.6 s / 0.08 s diagrams (A.2)
+    // v4: each card's test diagram draws as the card arrives (F5.4: 0.28 s, 0.03 s apart; final drawing without motion)
+    if (motionOK()) $$('.tx-d', r).forEach(dg => { const ps = $$('path', dg); if (!ps.length) return; G.fromTo(ps, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: bk ? 0.6 : 0.28, ease: 'power2.out', stagger: bk ? 0.08 : 0.03, scrollTrigger: once(dg, 'top 85%') }); });
+    const cards = $$(bk ? '.ts-card' : '.ts > .ts-card', r);
     if (!motionOK()) return;
     G.from($$('.ts-head > *', r), { y: 16, autoAlpha: 0, duration: 0.5, ease: ease.out, stagger: 0.08, scrollTrigger: once(r, 'top 80%') });
     if (!mqDesk.matches || !ST) return;
@@ -732,7 +734,7 @@
     const setStyle = (style, anim) => {
       svg.setAttribute('viewBox', frameFor(style));
       lap.toggleAttribute('hidden', style !== 'lap'); bb.toggleAttribute('hidden', style !== 'bb');
-      rows.forEach(rw => { rw.hidden = rw.dataset.set !== style; });
+      rows.forEach(rw => { if (rw.closest('.sec[data-bk]')) rw.hidden = rw.dataset.set !== style; else rw.classList.toggle('is-off', rw.dataset.set !== style); });
       const to = style === 'lap' ? morph.dataset.lap : morph.dataset.bb;
       if (anim && motionOK() && window.MorphSVGPlugin) G.to(morph, { morphSVG: { shape: to, type: 'linear', map: 'position' }, duration: UI, ease: 'power2.inOut', overwrite: true });
       else morph.setAttribute('d', to);

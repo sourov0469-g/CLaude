@@ -1756,3 +1756,41 @@ html.js:not(.motion) *, html.js:not(.motion) ::before, html.js:not(.motion) ::af
 @media (max-width: 899px) { .sec:not([data-bk]) .spots { gap: 20px 16px; } }
 .cmp--ab .ptag { transition: opacity var(--t-hover) var(--ease); }
 .cmp--ab.all-a .ptag-b, .cmp--ab.all-b .ptag-a { opacity: 0; }   /* a tag names only a photo that is showing */
+
+/* ================= F5 BUILT (Audit pack). Scoped off the backups. ================= */
+/* V2: two stacked cards, a two-up row, the warranty closer; card heads 44 px at the H3 weight (C.5) */
+.sec:not([data-bk]) .built-2 .ts-h { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem); font-weight: 650; font-stretch: 84%; line-height: 1; }
+.ts-pair { display: grid; gap: 16px; margin-top: 16px; }
+.ts-mini { display: grid; border-radius: 22px; overflow: hidden; background: var(--sheet); box-shadow: 0 0 0 1px var(--stone); }
+.ts-mini .ts-mfig img { aspect-ratio: 16 / 9; }
+.ts-mini .ts-txt { grid-template-columns: minmax(0, 1fr) 120px; grid-template-areas: "n d" "h d" "t d"; align-items: center; column-gap: 16px; padding: 20px 24px 24px; }
+.ts-mini .ts-n { grid-area: n; } .ts-mini .ts-h { grid-area: h; } .ts-mini .ts-tag { grid-area: t; } .ts-mini .tx-d { grid-area: d; width: 120px; height: auto; }
+.built-2 > .ts-end { margin-top: 16px; }
+.ts-bleed { position: relative; }
+.ts-bleed .ts-txt { position: absolute; left: 16px; bottom: 16px; padding: 16px 20px 18px; border-radius: 16px; background: rgba(16, 16, 16, .78); color: var(--sheet); }
+.ts-bleed .ts-n span, .ts-bleed .ts-n { color: var(--on-night2); }
+.ts-bleed .ts-tag { background: rgba(255, 255, 255, .14); color: var(--sheet); }
+.ts-bleed .ts-fig figcaption { left: auto; right: 12px; }
+.ts-split .tx-d { width: min(100%, 360px); height: auto; }
+@media (min-width: 900px) {
+  .sec:not([data-bk]) .built-2 .ts { gap: 4vh; }
+  .sec:not([data-bk]) .built-2 .ts-card { height: min(44vh, 440px); }
+  .ts-bleed { grid-template-columns: 1fr; }
+  .ts-bleed .ts-fig, .ts-bleed .ts-fig img { height: 100%; }
+  .ts-split { grid-template-columns: 5fr 7fr; }
+  .ts-pair { grid-template-columns: 1fr 1fr; }
+  .sec:not([data-bk]) .built-2 > .ts-end { height: auto; }
+}
+.ts-close { display: grid; border-radius: 22px; overflow: hidden; }
+/* V3: the choice made by eye first (a real lap job), verified by dimension second; 48 px control; batten greyed */
+.sec:not([data-bk]) .b3x-seg button { min-height: 48px; padding: 0 18px; }
+.b3x-eye { display: grid; gap: 16px; margin-bottom: 24px; }
+.b3x-ph { display: grid; gap: 8px; margin: 0; }
+.b3x-ph img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 16px; }
+.b3x-ph figcaption, .b3x-none { color: var(--ink2); font-size: var(--t-sm); }
+.b3x-ph b, .b3x-none b { display: block; color: var(--ink); font-size: var(--t-body); font-weight: 650; }
+.b3x-none { align-self: end; max-width: 30ch; padding: 16px 0 0; border-top: 2px solid var(--ink); }
+@media (min-width: 900px) { .b3x-eye { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: end; } }
+.spec-r.is-off span, .spec-r.is-off b { color: var(--ink2); }
+.spec-r.is-off { opacity: .75; }   /* greyed, still 4.5:1 (C.2: --line is never text) */
+.spec-r.is-off b { font-weight: 650; }

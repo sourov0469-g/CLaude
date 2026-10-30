@@ -645,7 +645,6 @@ def built1():
     btns = ''.join(f'<li><button type="button" class="lg-b" data-asm="{k}" aria-pressed="false"><span class="num">0{i + 1}</span>{n}</button></li>' for i, (k, n) in enumerate(LEGEND))
     data = json.dumps(READ).replace('</', '<\\/')
     return f'''<div class="v built-1 has-bgf" data-tone="ground">
-  <div class="bgf" aria-hidden="true"><div class="grid3" data-depth="-0.5"></div></div>
   <div class="b1-grid">
     <div class="b1x-side">
       <h2 class="h2x" data-split>The wall, taken apart</h2>
@@ -654,7 +653,6 @@ def built1():
       <div class="b1x-act"><button class="btn btn-ink btn-sm" type="button" data-explode aria-pressed="false">Take it apart</button></div>
     </div>
     <figure class="b1x-fig card-fig" data-cur="view">
-      <p class="fig-n" aria-hidden="true">Fig 1</p><p class="fig-t" aria-hidden="true">Corner of wall</p>
       {iso.wall_assembly('isowall')}
       <p class="fig-r num" aria-live="polite" data-readout>Assembled · 5 layers</p>
     </figure>
@@ -676,27 +674,39 @@ TX_DIAG = [   # one test diagram per published property (PLAN B2), 160 x 90; the
 ]
 
 
+def ph_alt(ph):
+    """the descriptive alt pattern for a job photo, from its caption data when the firm's own alt is empty (F5.5)"""
+    return alt(ph['alt']) or e(f"{ph['trades']} at a home in {ph['place']}, {ph['when']}")
+
+
 def built2():
     """S1322 sticky stack cards (CROWN) = builder-brief R45 (CSS sticky core, never a GSAP pin): the published
-    Built-for-Texas five, one card each with a real job photo, closed by the warranty pair"""
-    cards = ''
-    for k, (t, tag, i) in enumerate(TEXAS):
+    Built-for-Texas five, each with a real job photo, closed by the warranty pair. Audit pack F5: the stack holds two
+    cards (warp: a full-bleed photo; rot: the diagram large), burn and termites run as one two-up row, the dark
+    warranty card closes; card heads at 44 px."""
+    def fig(i, cls='ts-fig'):
         ph = PHOTOS[i]
-        cards += f'''<li class="ts-card">
-      <figure class="ts-fig"><img src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{alt(ph['alt'])}" loading="lazy" decoding="async"><figcaption>{e(ph['place'])}, {e(ph['when'])}</figcaption></figure>
-      <div class="ts-txt"><p class="ts-n num">0{k + 1}<span> of 05</span></p><h3 class="ts-h">{e(t)}</h3><p class="ts-tag">{e(tag)}</p>
-        <svg class="tx-d" viewBox="0 0 160 90" aria-hidden="true" focusable="false">{TX_DIAG[k].replace('<path ', '<path pathLength="1" ')}</svg></div>
-    </li>'''
-    cards += '''<li class="ts-card ts-end">
-      <div class="ts-txt"><p class="ts-n">The warranty pair</p>
+        return f'<figure class="{cls}"><img src="assets/img/photos/p{i}-1400.webp" width="1400" height="1050" alt="{ph_alt(ph)}" loading="lazy" decoding="async"><figcaption>{e(ph["place"])}, {e(ph["when"])}</figcaption></figure>'
+    def txt(k, extra=''):
+        t, tag, _i = TEXAS[k]
+        dg = f'<svg class="tx-d" viewBox="0 0 160 90" aria-hidden="true" focusable="false">{TX_DIAG[k].replace("<path ", "<path pathLength=\"1\" ")}</svg>' if extra != 'nodiag' else ''
+        return f'<div class="ts-txt"><p class="ts-n num">0{k + 1}<span> of 05</span></p><h3 class="ts-h">{e(t)}</h3><p class="ts-tag">{e(tag)}</p>{dg}</div>'
+    photo = {0: 3, 1: 28, 2: 2, 3: 0}   # card 3 now carries a siding job (F5.5)
+    cards = (f'<li class="ts-card ts-bleed">{fig(photo[0])}{txt(0, "nodiag")}</li>'
+             f'<li class="ts-card ts-split">{txt(1)}{fig(photo[1])}</li>')
+    pair = ''.join(f'<li class="ts-mini">{fig(photo[k], "ts-fig ts-mfig")}{txt(k)}</li>' for k in (2, 3))
+    end = '''<div class="ts-end ts-close">
+      <div class="ts-txt"><p class="ts-n">05 of 05 · The warranty pair</p>
         <p class="ts-w"><b class="num">30</b><span>year non-prorated James Hardie siding warranty, when an Elite Preferred contractor installs</span></p>
         <p class="ts-w"><b>Lifetime</b><span>Austin Pro workmanship warranty on the labour</span></p>
         <p class="ts-fine">Whole walls or the whole house, never patches. 1 to 2 weeks on site, paint included.</p></div>
-    </li>'''
+    </div>'''
     return f'''<div class="v built-2" data-tone="ground2">
   <div class="ts-head"><h2 class="h2x" data-split>Built for Texas</h2>
     <p>Every priced siding job is James Hardie fiber cement. What the board stands up to here, as the firm publishes it, on its own jobs.</p></div>
   <ol class="ts">{cards}</ol>
+  <ul class="ts-pair">{pair}</ul>
+  {end}
 </div>'''
 
 
@@ -705,14 +715,19 @@ SPEC = [('L1', 'Board', '8.25 in', 'lap'), ('X1', 'Exposure', '7 in', 'lap'), ('
 
 
 def built3():
-    rows = ''.join(f'<li class="spec-r" data-code="{c}" data-set="{st}" tabindex="0"{" hidden" if st == "bb" else ""}><span class="num">{c}</span><span>{n}</span><b class="num">{v}</b></li>' for c, n, v, st in SPEC)
+    # F5 V3.3: the batten values print in both modes, greyed when lap is shown (never hidden)
+    rows = ''.join(f'<li class="spec-r{" is-off" if st == "bb" else ""}" data-code="{c}" data-set="{st}" tabindex="0"><span class="num">{c}</span><span>{n}</span><b class="num">{v}</b></li>' for c, n, v, st in SPEC)
+    ph = PHOTOS[3]
     return f'''<div class="v built-3 has-bgf" data-tone="ground">
-  <div class="bgf" aria-hidden="true"><div class="grid3 grid3-p" data-depth="-0.4"></div></div>
   <div class="b3x-head"><h2 class="h2x" data-split>Lap or batten, to the inch</h2>
-    <div class="seg b3x-seg" role="radiogroup" aria-label="Siding style"><button type="button" role="radio" aria-checked="true" data-style="lap">Lap · 301 of 415 jobs</button><button type="button" role="radio" aria-checked="false" data-style="bb">Board and batten · 27</button></div></div>
+    <div class="seg b3x-seg" role="radiogroup" aria-label="Siding style"><button type="button" role="radio" aria-checked="true" data-style="lap">Lap · 301 jobs</button><button type="button" role="radio" aria-checked="false" data-style="bb">Batten · 27 jobs</button></div></div>
+  <div class="b3x-eye">
+    <figure class="b3x-ph"><img src="assets/img/photos/p3-1400.webp" width="1400" height="1050" alt="{ph_alt(ph)}" loading="lazy" decoding="async"><figcaption><b>Lap</b> {e(ph['place'])}, {e(ph['when'])}: HardiePlank lap, the board on 301 of 415 priced siding jobs</figcaption></figure>
+    <p class="b3x-none"><b>Batten</b> 27 of 415 priced siding jobs went board and batten. None of the jobs photographed on this page is one, so it is shown here as its drawing only.</p>
+  </div>
   <div class="b3x-grid">
-    <figure class="b3x-sheet"><p class="tb num" aria-hidden="true"><span>DWG APS-S1</span><span>REV 03</span><span>UNITS IN</span><span>SOURCE austinprosiding.com</span></p>{sheet.svg()}</figure>
-    <div class="b3x-spec"><p class="tb num" aria-hidden="true"><span>VARIABLES</span></p><ul class="spec" aria-label="Published dimensions">{rows}</ul>
+    <figure class="b3x-sheet">{sheet.svg()}</figure>
+    <div class="b3x-spec"><ul class="spec" aria-label="Published dimensions">{rows}</ul>
       <p class="fine">Every value is the one the firm publishes for James Hardie siding. Thicknesses it does not publish stay [TBD].</p></div>
   </div>
 </div>'''

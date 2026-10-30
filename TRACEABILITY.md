@@ -716,3 +716,35 @@ Source: `AUDIT-PACK-2026-10-30.md` (the pack, verbatim). Every row below states 
 - Stagger: ACCEPTED, from 0.06 to 0.045 s. ⟦S0083⟧, ⟦S0063⟧.
 - Column parallax: ACCEPTED, capped at ±18 px (was ±18/±43/±29). ⟦S1314⟧ §8.
 - Offsets: ACCEPTED, from 88/104 to 48 px. Phone gap goes from 32 to 20 px. The section measures 1,739 px (was 1,835). ⟦S1499⟧.
+
+## F5 · Built
+**V2, Built for Texas (winner).**
+- 1 · Card heads: IMPROVED. The size drops from 82.6 px to 44 px max, giving H2:H3 = 1.45×. The weight is 650 (C.5's H3 role) rather than the pack's 760: the page has one H3 weight, and a third heading weight is what C.5 retires. ⟦S1500⟧, ⟦S1501⟧.
+- 2 · Collapse: ACCEPTED, with one IMPROVEMENT.
+  - The sticky stack is warp + rot at 44vh (max 440 px). Burn + termites run as one two-up row beneath it.
+  - Improvement on the pack's "stack = warp/rot/warranty": the dark warranty card stays LAST, after the two-up row, so the closer still closes.
+  - Measured: 2,388 px at 1440 (was 4,004), under the 2,600 hard cap.
+  - ⟦S1314⟧ §8, ⟦S1499⟧.
+- 3 · Vary the treatments: ACCEPTED.
+  - Warp is a full-bleed photo with its text on a dark plate and no diagram.
+  - Rot is split 5fr/7fr with the diagram large.
+  - Burn and termites are compact cards, each with a small diagram.
+  - The warranty card is dark.
+  - ⟦S0220⟧ Banned #3, ⟦S1314⟧ §3.
+- 4 · Diagrams at 280 ms / 30 ms: ACCEPTED, the pack's first option. The diagram stays where it adds a reading (rot: water runs off). ⟦S0089⟧, ⟦S0083⟧.
+- 5 · Photos: ACCEPTED. Card 3 ("Doesn't burn") is now photo 2, a Siding & Exterior Painting job in Anderson Mill West, Cedar Park. Every photo takes the descriptive alt pattern (`ph_alt`). ⟦S1320⟧ §2.
+
+**V1, Taken apart (weak; kept as the spring-engineering version, with the pack's "if it survives" list).**
+- Offsets ×2.2: ACCEPTED (`SPREAD`; the spring itself is untouched, k 64 / c 14.2).
+- Entrance: ACCEPTED, from 500/90 ms to 260/35 ms.
+- Graph-paper grid and nameplate: ACCEPTED, deleted ("Fig 1" / "Corner of wall").
+- Ruler strip and the material strip on the plinth: NOT DONE this round. They are part of the iso model's base geometry (`iso.py`), and the pack ranks V1 as a donor, not a winner. Logged for the QA rounds. ⟦S1306⟧.
+
+**V3, To the inch.**
+- 1 · Photos head the sheet: IMPROVED.
+  - The lap house is a real lap job, photo 3: Maple Run, Austin, Jul 2026. It sits at 21:9 with its caption tying it to "301 of 415".
+  - No job photographed on this page is board and batten. No caption says so, and the harvested photos show none by eye. A lap photo labelled "batten" would be invented, so the batten side states the absence: "27 of 415… None of the jobs photographed on this page is one, so it is shown here as its drawing only".
+  - ⟦S1306⟧, ⟦S1314⟧ §9.
+- 2 · Segmented control: ACCEPTED. 48 px tall, labelled "Lap · 301 jobs" / "Batten · 27 jobs". ⟦S0220⟧ Axis 7.
+- 3 · Batten values: ACCEPTED. They are printed in both modes and greyed when inactive (`--ink2` at 0.75, not `--line`, per C.2). ⟦S1499⟧.
+- Clutter · Title blocks: ACCEPTED, both deleted ("DWG APS-S1 · REV 03 …" and "VARIABLES"). The dimension grammar stays.
