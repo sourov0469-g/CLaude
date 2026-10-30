@@ -130,7 +130,6 @@
 .financing3__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #1b2629; cursor: pointer; }
 .financing3__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
 .financing3__col { border-top: 3px solid #1b2629; padding-top: 16px; }
-.financing3__col:last-child { border-top-color: #c8402e; }
 .financing3__k { margin: 0 0 12px; font: 400 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: .01em; }
 .financing3__col dl { margin: 0; display: grid; gap: 14px; }
 .financing3__col dt { font: 700 .9375rem/1.2 var(--f-text); }
@@ -142,3 +141,79 @@
 .financing3__btn .rx { color: #1d4a4e; }
 @media (max-width: 1023px) { .financing3__intro .t-head, .financing3__intro .financing__lead { grid-column: 1 / -1; } .financing3__intro .financing__lead { margin-top: var(--s4); } }
 @media (max-width: 767px) { .financing3__sheet { padding-top: 76px; } .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(27, 38, 41, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
+
+
+/* ---------- slot 1 · AUDIT-01 winner, copied from v2 (.financing2 -> .fr); fixes follow ---------- */
+.fr__rig { position: relative; display: grid; grid-template-columns: minmax(180px, 1fr) 2fr minmax(200px, 1fr); align-items: stretch; min-height: 420px; }
+.fr__src { grid-column: 1; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
+.fr__v {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 64px;
+  background: rgba(11, 20, 24, .35); color: var(--field-ink); border: 0; box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .3); cursor: pointer; text-align: left;
+  font: 600 .9375rem/1.2 var(--f-text);
+}
+.fr__v svg { width: 40px; height: 40px; flex: none; overflow: visible; }
+.fr__v .wheel { fill: none; stroke: #e2412b; stroke-width: 3; }
+.fr__v .hub { fill: #0B1418; }
+.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #f2c230; background: rgba(11, 20, 24, .55); }
+.fr__pipes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.fr__pipes .p { fill: none; stroke: #5f7176; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+.fr__pipes .p-in { fill: none; stroke: #0B1418; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+.fr__pipes .w { fill: none; stroke: #5ab6e6; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 8; opacity: 0; }
+.fr__pipes .j { fill: #c9d1d3; stroke: #0B1418; stroke-width: 2; }
+.fr__pipes .man { fill: #5f7176; stroke: #0B1418; stroke-width: 2; }
+.fr__dst { grid-column: 3; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
+.fr__l {
+  position: relative; overflow: hidden; display: grid; gap: 2px; padding: 12px 14px; min-height: 64px; align-content: center;
+  background: rgba(11, 20, 24, .45); box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .3); color: var(--field-ink);
+}
+.fr__l::before { content: ""; position: absolute; inset: 0; background: rgba(90, 182, 230, .28); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
+.fr__l strong, .fr__l span { position: relative; }
+.fr__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: .02em; }
+.fr__l span { font-size: .8125rem; color: var(--field-muted); }
+.fr__l.is-on { box-shadow: inset 0 0 0 2px #5ab6e6; }
+.fr__l.is-off { opacity: .45; }
+.fr__why { margin: var(--s6) 0 0; min-height: 3em; max-width: 64ch; color: var(--field-ink); font-size: 1.0625rem; }
+.fr__btn { margin-top: var(--s5); }
+@media (max-width: 767px) {
+  .fr__rig { grid-template-columns: 1fr 64px 1fr; min-height: 380px; column-gap: 0; }
+  .fr__v { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; font-size: .8125rem; }
+  .fr__v svg { width: 30px; height: 30px; }
+  .fr__l { padding: 10px; }
+  .fr__l strong { font-size: 1.125rem; }
+  .fr__l span { font-size: .6875rem; }
+}
+
+/* [AUDIT-01 F6] slot 1: ink wheels, teal 2px selection, no water; partners crossfade 200ms; qualifier lines at one size */
+.fr__v { transition: box-shadow 150ms ease, background-color 150ms ease; }
+.fr__v .wheel { stroke: #0B1418; }
+.fr__v .hub { fill: #e8e4dc; }
+.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #77b3b8; }
+.fr__pipes .p { stroke: rgba(232, 228, 220, .22); stroke-width: 3; }
+.fr__pipes .w { stroke: #77b3b8; stroke-width: 3; stroke-dasharray: none; opacity: 1; animation: fr-in 200ms ease-out both; }
+@keyframes fr-in { from { opacity: 0; } }
+.fr__l { transition: opacity 200ms ease-out, box-shadow 200ms ease-out; }
+.fr__l::before { content: none; }
+.fr__l.is-on { box-shadow: inset 0 0 0 2px #77b3b8; }
+.fr__l .fr__q { display: block; font-size: .875rem; line-height: 1.45; color: var(--field-muted); margin-top: 6px; }
+.fr__rig { grid-template-columns: minmax(180px, 1fr) 1fr minmax(280px, 1.4fr); }
+.fr__note { max-width: 72ch; }
+@media (prefers-reduced-motion: reduce) { .fr__pipes .w { animation: none; } .fr__l, .fr__v { transition: none; } }
+.fr__l.is-off { opacity: .62; }
+@media (max-width: 767px) {
+  .fr__rig { grid-template-columns: 1fr 1fr; column-gap: 8px; row-gap: var(--s5); min-height: 0; }
+  .fr__src { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; align-content: start; }
+  .fr__v { flex-direction: row; align-items: center; min-height: 52px; }
+  .fr__pipes { display: none; }
+  .fr__dst { grid-column: 1 / -1; align-content: start; }
+  .fr__l strong { font-size: 1.25rem; }
+  .fr__l .fr__q { font-size: .875rem; }
+}
+
+/* [AUDIT-01 F6 loser V1, P1] a maximum is printed at the size of its qualifier, never as a hero figure; the stub figures lose the red */
+.financing1__fig { margin: 18px 0 0; font: 600 .9375rem/1.35 var(--f-text); color: #0B1418; white-space: normal; }
+.financing1__per { margin-top: 0; font-size: .9375rem; }
+.financing1__sfig { font: 600 .9375rem/1.35 var(--f-text); color: #0B1418; }
+.financing1__kind { font-size: .8125rem; }
+/* [AUDIT-01 F6 loser V3, P1] the orb is a small plain control, no glow, no gold ring */
+.financing3__orb { width: 132px; height: 132px; padding: 16px; font-size: 1rem; box-shadow: 0 0 0 2px #0B1418; }
+@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px #77b3b8; } }

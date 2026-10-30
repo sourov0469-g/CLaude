@@ -10,8 +10,58 @@
   ];
 
   EZ.section('financing', {
-    /* v1 · Four tickets [S0882 + BANK 372] */
+    /* slot 1 · AUDIT-01 winner (copied from v2; F6 de-theatre): the settled diagram is the answer. Selection outline 150ms,
+       partners light or dim in 200ms, the reason swaps at once. No wheel spin, no water, no flow loop. Kitchen is pre-picked. */
     1: { init: function (root, k) {
+      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
+      var rig = root.querySelector('.fr__rig'), svg = root.querySelector('.fr__pipes');
+      var vs = Array.prototype.slice.call(root.querySelectorAll('.fr__v'));
+      var ls = Array.prototype.slice.call(root.querySelectorAll('.fr__l'));
+      var why = root.querySelector('.fr__why');
+      var G = null, cur = -1;
+      function geo() {
+        var rr = rig.getBoundingClientRect();
+        if (!rr.width) return;
+        svg.setAttribute('viewBox', '0 0 ' + rr.width + ' ' + rr.height);
+        var S = vs.map(function (v) { var r = v.getBoundingClientRect(); return [r.right - rr.left, r.top - rr.top + r.height / 2]; });
+        var L = ls.map(function (l) { var r = l.getBoundingClientRect(); return [r.left - rr.left, r.top - rr.top + r.height / 2]; });
+        var mx = (S[0][0] + L[0][0]) / 2, base = '';
+        S.forEach(function (p) { base += 'M' + f(p[0]) + ' ' + f(p[1]) + 'H' + f(mx); });
+        L.forEach(function (p) { base += 'M' + f(mx) + ' ' + f(p[1]) + 'H' + f(p[0]); });
+        var top = Math.min(S[0][1], L[0][1]), bot = Math.max(S[3][1], L[3][1]);
+        svg.innerHTML = '<path class="p" d="' + base + 'M' + f(mx) + ' ' + f(top) + 'V' + f(bot) + '"/><g class="ws"></g>';
+        G = { S: S, L: L, mx: mx, ws: svg.querySelector('.ws') };
+        if (cur > -1) route(cur);
+      }
+      function route(i) {
+        if (!G) return;
+        var s = G.S[i];
+        G.ws.innerHTML = ROUTES[i].map(function (j) { var l = G.L[j]; return '<path class="w" d="M' + f(s[0]) + ' ' + f(s[1]) + 'H' + f(G.mx) + 'V' + f(l[1]) + 'H' + f(l[0]) + '"/>'; }).join('');
+      }
+      function pick(i, focus) {
+        if (i === cur) return;
+        cur = i;
+        vs.forEach(function (v, j) { v.setAttribute('aria-checked', j === i ? 'true' : 'false'); v.tabIndex = j === i ? 0 : -1; });
+        if (focus) vs[i].focus();
+        why.textContent = WHY[i];
+        ls.forEach(function (l, j) { var on = ROUTES[i].indexOf(j) > -1; l.classList.toggle('is-on', on); l.classList.toggle('is-off', !on); });
+        route(i);
+      }
+      vs.forEach(function (v, i) {
+        k.on(v, 'click', function () { pick(i); });
+        k.on(v, 'keydown', function (e) {
+          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+          if (d) { e.preventDefault(); pick((Math.max(cur, 0) + d + 4) % 4, true); }
+        });
+      });
+      k.ro(rig, geo);
+      geo();
+      pick(0);
+      k.add(function () { svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); });
+    } },
+
+    /* v1 · Four tickets [S0882 + BANK 372] */
+    2: { init: function (root, k) {
       EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
       var tks = root.querySelectorAll('.financing1__tk');
       // [BANK 372] Glare Hover, streak profile: 33 stops from bump(t,.5,.06+.16*softness) + .32*bump(t,.5,.5),
@@ -62,7 +112,7 @@
     } },
 
     /* v2 · Pipe the money */
-    2: { init: function (root, k) {
+    b1: { init: function (root, k) {
       EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
       var rig = root.querySelector('.financing2__rig'), svg = root.querySelector('.financing2__pipes');
       var vs = Array.prototype.slice.call(root.querySelectorAll('.financing2__v'));
@@ -132,7 +182,9 @@
       EZ.reveal(k, root.querySelectorAll('.financing3__intro > *'));
       var stage = root.querySelector('.financing3__stage'), orb = root.querySelector('.financing3__orb'), sheet = root.querySelector('.financing3__sheet');
       var close = root.querySelector('.financing3__close'), busy = false;
-      var OPEN = EZ.bezier(.8, -.6, .2, 1), CONTENT = EZ.bezier(.7, 0, .3, 1), SHUT = EZ.bezier(.4, 1, .3, 1);
+      // [AUDIT-01 F6 loser V3, P1] the sheet is OPEN at rest: terms and the disclosure are on the page before any click.
+      // The orb only re-opens a sheet the visitor folded; no negative-overshoot curve on a system reveal.
+      var OPEN = EZ.bezier(.23, 1, .32, 1), CONTENT = EZ.bezier(.7, 0, .3, 1), SHUT = EZ.bezier(.4, 1, .3, 1);
       function rel(el) { var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect(); return { left: r.left - s.left, top: r.top - s.top, width: r.width, height: r.height }; }
       function shape(from) {
         var d = document.createElement('div');
@@ -177,13 +229,11 @@
           } });
         });
       }
+      orb.hidden = true; sheet.hidden = false; orb.setAttribute('aria-expanded', 'true');
       k.on(orb, 'click', open);
       k.on(close, 'click', shut);
       k.on(sheet, 'keydown', function (e) { if (e.key === 'Escape') shut(); });
       k.add(function () { sheet.hidden = true; orb.hidden = false; orb.style.visibility = ''; sheet.style.visibility = ''; orb.setAttribute('aria-expanded', 'false'); busy = false; stage.querySelectorAll(':scope > div[aria-hidden]').forEach(function (d) { d.remove(); }); });
-      if (k.motion) {
-        gsap.from(orb, { scale: .8, autoAlpha: 0, duration: .3, ease: 'back.out(1.8)', scrollTrigger: { trigger: stage, start: 'top 80%', once: true } });
-      }
     } }
   });
 })();

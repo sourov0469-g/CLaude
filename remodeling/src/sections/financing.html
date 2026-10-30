@@ -1,7 +1,35 @@
 <section id="financing" class="sec financing g-field" data-section="financing" aria-labelledby="financing-h1">
 
   <!-- v1 · Four tickets [S0882 ticket / perforation + BANK 372 Glare Hover steel sheen] -->
-  <div class="ver financing1" data-v="1">
+  <!-- slot 1 · AUDIT-01 winner (copied from v2, fixes applied here; the original is in a backup slot) -->
+  <div class="ver fr" data-v="1">
+    <div class="wrap">
+      <div class="financing__head">
+        <h2 class="t-head" id="financing-h2-w">Which partner fits your project?</h2>
+        <p class="t-lead financing__lead">Pick your project. The partners that usually fit it light up, with the reason underneath.</p>
+      </div>
+      <div class="fr__rig">
+        <div class="fr__src" role="radiogroup" aria-label="Your project">
+          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="0" data-rx="~hood/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Kitchen</span></button>
+          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="1" data-rx="~shower/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Bathroom</span></button>
+          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="2" data-rx="~window/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Roof, windows or doors</span></button>
+          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="3" data-rx="~house/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Whole home</span></button>
+        </div>
+        <svg class="fr__pipes" aria-hidden="true" focusable="false"></svg>
+        <ul class="fr__dst" role="list">
+          <li class="fr__l" data-l="0"><strong>Synchrony</strong><span class="fr__q">Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</span></li>
+          <li class="fr__l" data-l="1"><strong>Service Finance</strong><span class="fr__q">Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS 140908.</span></li>
+          <li class="fr__l" data-l="2"><strong>Ygrene</strong><span class="fr__q">Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</span></li>
+          <li class="fr__l" data-l="3"><strong>Renew Financial</strong><span class="fr__q">RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS 1788120.</span></li>
+        </ul>
+      </div>
+      <p class="fr__why" aria-live="polite"></p>
+      <a class="btn fr__btn" href="#consult" data-rx="~speech/hoist/ring/r"><span class="btn__label">Talk it through with us</span></a>
+      <p class="financing__note fr__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
+    </div>
+  </div>
+
+  <div class="ver financing1" data-v="2" hidden>
     <div class="wrap">
       <div class="financing__head">
         <h2 class="t-head" id="financing-h1">Four financing partners, not one.</h2>
@@ -22,7 +50,7 @@
         <article class="financing1__tk" data-card>
           <div class="financing1__main">
             <h3 class="financing1__name">Service Finance</h3>
-            <p class="financing1__kind">Fixed installment loan</p>
+            <p class="financing1__kind">Fixed installment loan · NMLS <span class="nums">140908</span></p>
             <p class="financing1__fig nums">30</p>
             <p class="financing1__per">days after completion until the first payment</p>
           </div>
@@ -44,7 +72,7 @@
         <article class="financing1__tk" data-card>
           <div class="financing1__main">
             <h3 class="financing1__name">Renew Financial</h3>
-            <p class="financing1__kind">RenewPACE assessment</p>
+            <p class="financing1__kind">RenewPACE assessment · NMLS <span class="nums">1788120</span></p>
             <p class="financing1__fig nums">$250K</p>
             <p class="financing1__per">published maximum, up to 20% of property value</p>
           </div>
@@ -58,7 +86,7 @@
   </div>
 
   <!-- v2 · Pipe the money [BANK TruGreen problem-picker + Codrops curved-path draw] -->
-  <div class="ver financing2" data-v="2" hidden>
+  <div class="ver financing2" data-v="b1" hidden>
     <div class="wrap">
       <div class="financing__head">
         <h2 class="t-head" id="financing-h2">Which partner fits your project?</h2>
@@ -81,7 +109,7 @@
       </div>
       <p class="financing2__why" aria-live="polite">Pick a project to see the usual routes.</p>
       <a class="btn financing2__btn" href="#consult" data-rx="~speech/hoist/ring/r"><span class="btn__label">Talk it through with us</span></a>
-      <p class="financing__note">Elbaz Construction is not a lender. Every rate, term and approval decision comes from the financing partner.</p>
+      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
     </div>
   </div>
 
@@ -101,7 +129,7 @@
         <button type="button" class="financing3__orb" aria-expanded="false" aria-controls="fin3-sheet" data-rx="native:morph"><span class="financing3__orb-t">See the two kinds of money</span></button>
         <div class="financing3__sheet" id="fin3-sheet" role="region" aria-label="Financing partners by kind" hidden>
           <i class="financing3__br financing3__br--tl"></i><i class="financing3__br financing3__br--tr"></i><i class="financing3__br financing3__br--bl"></i><i class="financing3__br financing3__br--br"></i>
-          <button type="button" class="financing3__close" aria-label="Close the sheet" data-rx="~xbrace/pop/spinout/l"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+          <button type="button" class="financing3__close" aria-label="Fold the sheet away" data-rx="~xbrace/pop/spinout/l"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
           <div class="financing3__cols">
             <div class="financing3__col">
               <p class="financing3__k">Consumer credit</p>
@@ -121,7 +149,7 @@
             </div>
           </div>
           <div class="financing3__foot">
-            <p>Elbaz Construction is not a lender and does not approve, decline or fund applications.</p>
+            <p>Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
             <a class="btn financing3__btn" href="#consult" data-rx="~ruler/rail/tick/r"><span class="btn__label">Ask which fits your project</span></a>
           </div>
         </div>
