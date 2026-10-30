@@ -1,0 +1,46 @@
+family v1 @320: h 925 els 41 ov 0 heads H2:32/700 caps[] lowc[] clip[Call Rachel at (] small[] err 0
+family v2 @320: h 1123 els 47 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v3 @320: h 1041 els 53 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v4 @320: h 924 els 34 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v5 @320: h 829 els 20 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v1 @375: h 960 els 41 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v2 @375: h 1100 els 47 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v3 @375: h 1062 els 53 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v4 @375: h 1006 els 34 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v5 @375: h 863 els 20 ov 0 heads H2:32/700 caps[] lowc[] clip[] small[] err 0
+family v1 @768: h 1212 els 41 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+family v2 @768: h 1242 els 47 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+family v3 @768: h 1220 els 53 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+family v4 @768: h 1478 els 34 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+family v5 @768: h 975 els 20 ov 0 heads H2:38/700 caps[] lowc[] clip[] small[] err 0
+family v1 @1024: h 1245 els 41 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+family v2 @1024: h 731 els 47 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+family v3 @1024: h 1152 els 53 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+family v4 @1024: h 609 els 34 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+family v5 @1024: h 978 els 20 ov 0 heads H2:44/700 caps[] lowc[] clip[] small[] err 0
+family v1 @1440: h 1437 els 41 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v2 @1440: h 890 els 47 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v3 @1440: h 1276 els 53 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v4 @1440: h 720 els 34 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v5 @1440: h 1132 els 20 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v1 @1440 rm: h 1437 els 41 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v2 @1440 rm: h 890 els 28 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v3 @1440 rm: h 1276 els 53 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v4 @1440 rm: h 720 els 34 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v5 @1440 rm: h 1132 els 20 ov 0 heads H2:48/700 caps[] lowc[] clip[] small[] err 0
+family v1 @1440: 20 steps, overlaps 0
+family v2 @1440: 15 steps, overlaps 0
+family v3 @1440: 19 steps, overlaps 0
+family v4 @1440: 14 steps, overlaps 0
+family v5 @1440: 17 steps, overlaps 0
+family v1 @620: 17 steps, overlaps 0
+family v2 @620: 18 steps, overlaps 0
+family v3 @620: 17 steps, overlaps 0
+family v4 @620: 18 steps, overlaps 0
+family v5 @620: 15 steps, overlaps 0
+V1 rail 0.012 -> 1.000; plate y 190 vs letters top 225 (bbox top 173); web struts 0; photo h 436 (52svh = 468)
+V3 pre-selected bunk; say "Founded in 1995 by Franklin "Bunk" Walker."; crop z 1.7; pills 4
+V3 gap between the last pill and the say row: 4px (must be > 0)
+V4 after click: pressed true, transform matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+V2 words min opacity after the reveal 0.9962, after scrolling back up 1 (once: stays 1); h2 is the statement fm2-say
+errors 0

@@ -58,8 +58,9 @@ function spine(root, c) {
 function pager(root, c) {
   const tabs = [...root.querySelectorAll('.hw2-tab')], items = [...root.querySelectorAll('.hw2-item')], bars = tabs.map(t => t.querySelector('.hw2-prog'));
   const pause = root.querySelector('.hw2-pause'), list = root.querySelector('.hw2-tabs'), story = root.querySelector('.hw2-story');
-  let cur = 0, held = !c.motion, seen = false, keyed = false;
-  const run = () => { bars[cur].style.animationPlayState = c.motion && !held && seen && !keyed ? 'running' : 'paused'; pause.setAttribute('aria-pressed', String(held)); };
+  let cur = 0, held = !c.motion, seen = false, keyed = false, over = false;
+  // R3 F5-V2: hover or focus on the story pauses it; choosing a tab stops the timer for good (the pause shows it)
+  const run = () => { bars[cur].style.animationPlayState = c.motion && !held && seen && !keyed && !over ? 'running' : 'paused'; pause.setAttribute('aria-pressed', String(held)); pause.setAttribute('aria-label', held ? 'Play the steps' : 'Pause the steps'); };
   const go = i => {
     cur = (i + items.length) % items.length;
     items.forEach((it, k) => { const on = k === cur; it.classList.toggle('is-visible', on); it.inert = !on; });
@@ -68,44 +69,88 @@ function pager(root, c) {
     run();
   };
   const onIter = e => { if (e.target === bars[cur]) go(cur + 1); };
-  const onClick = e => { const t = e.target.closest('.hw2-tab'); if (t) { go(tabs.indexOf(t)); return; } if (e.target.closest('.hw2-pause')) { held = !held; run(); } };
+  const onClick = e => { const t = e.target.closest('.hw2-tab'); if (t) { held = true; go(tabs.indexOf(t)); return; } if (e.target.closest('.hw2-pause')) { held = !held; run(); } };
+  const onIn = e => { if (e.pointerType === 'mouse') { over = true; run(); } }, onOut = () => { over = false; run(); };
+  story.addEventListener('pointerenter', onIn); story.addEventListener('pointerleave', onOut);
   const KEYS = { ArrowRight: 1, ArrowLeft: -1, Home: 'first', End: 'last' };
-  const onKey = e => { const k = KEYS[e.key]; if (k === undefined) return; e.preventDefault(); go(k === 'first' ? 0 : k === 'last' ? items.length - 1 : cur + k); tabs[cur].focus(); };
+  const onKey = e => { const k = KEYS[e.key]; if (k === undefined) return; e.preventDefault(); held = true; go(k === 'first' ? 0 : k === 'last' ? items.length - 1 : cur + k); tabs[cur].focus(); };
   const onFocus = e => { keyed = !!(e.target.matches && e.target.matches(':focus-visible')); run(); };
   const onBlur = e => { if (!list.contains(e.relatedTarget)) { keyed = false; run(); } };
   list.addEventListener('animationiteration', onIter); root.addEventListener('click', onClick); list.addEventListener('keydown', onKey); list.addEventListener('focusin', onFocus); list.addEventListener('focusout', onBlur);
   const io = new IntersectionObserver(([e]) => { seen = e.isIntersecting; run(); }, { threshold: 0.35 }); io.observe(story);
   go(0);
   if (c.motion) beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note'), story]);
-  return () => { io.disconnect(); list.removeEventListener('animationiteration', onIter); root.removeEventListener('click', onClick); list.removeEventListener('keydown', onKey); list.removeEventListener('focusin', onFocus); list.removeEventListener('focusout', onBlur); };
+  return () => { io.disconnect(); story.removeEventListener('pointerenter', onIn); story.removeEventListener('pointerleave', onOut); list.removeEventListener('animationiteration', onIter); root.removeEventListener('click', onClick); list.removeEventListener('keydown', onKey); list.removeEventListener('focusin', onFocus); list.removeEventListener('focusout', onBlur); };
 }
 
-// v3 (v2 audit, rebuilt layout) [BANK] Q409 Grow My Business process (CROWN): numbered steps, each naming what the
+// v3 (R3 F5 fixed; v2 audit layout) [BANK] Q409 Grow My Business process (CROWN): numbered steps, each naming what the
 // customer gets as deliverable chips; reveals trail the scroll by a hair (scrub 0.2, start "top bottom-=10%"). With
 // [BANK] Q411 NVRMND (three verbs are the whole process) and [BANK] Signal-A case-study index rows (the list is the
 // design: a small label beside a giant line whose weight changes inside the line). [BANK] S18 SVG scroll hairlines:
 // each row's ridge-cap rule draws itself scrubbed, linear (scrubbed motion is always linear). Each verb is a real link
 // with its own drawn tool (R28: hover readies it, press uses it); hover also runs a sun overstroke along the row's ridge.
 function verbs(root, c) {
-  const rows = [...root.querySelectorAll('.hw3-row')];
-  const over = rows.map(r => r.querySelector('.hw3-ro'));
+  // R3 F5: lines rest at full ink; the emphasis is the ridge filling sun (300ms). The active row is the one nearest the
+  // viewport centre (it advances as you read; no timer, S1314 §8), or the hovered/focused one while that lasts.
+  const rows = [...root.querySelectorAll('.hw3-row')], over = rows.map(r => r.querySelector('.hw3-ro'));
   gsap.set(over, { drawSVG: '0%' });
+  let read = -1, held = -1, shown = -1;
+  const paint = () => {
+    const k = held >= 0 ? held : read; if (k === shown) return; shown = k;
+    over.forEach((o, i) => gsap.to(o, i === k ? { drawSVG: '0% 100%', duration: c.motion ? 0.3 : 0, ease: EASE, overwrite: 'auto' } : { drawSVG: '0%', duration: c.motion ? 0.22 : 0, ease: 'power2.out', overwrite: 'auto' }));
+  };
+  const ls = [];
   rows.forEach((row, i) => {
-    const a = row.querySelector('.hw3-act');
-    const on = () => gsap.to(over[i], { drawSVG: '0% 100%', duration: c.motion ? 0.3 : 0, ease: EASE, overwrite: 'auto' });
-    const off = () => gsap.to(over[i], { drawSVG: '0%', duration: c.motion ? 0.22 : 0, ease: 'power2.out', overwrite: 'auto' });
-    a.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') on(); }); a.addEventListener('pointerleave', off);
-    a.addEventListener('focus', on); a.addEventListener('blur', off);
+    const on = e => { if (e.type === 'focusin' || e.pointerType === 'mouse') { held = i; paint(); } }, off = () => { if (held === i) { held = -1; paint(); } };
+    row.addEventListener('pointerenter', on); row.addEventListener('pointerleave', off); row.addEventListener('focusin', on); row.addEventListener('focusout', off);
+    ls.push(() => { row.removeEventListener('pointerenter', on); row.removeEventListener('pointerleave', off); row.removeEventListener('focusin', on); row.removeEventListener('focusout', off); });
   });
-  if (!c.motion) return () => {};
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.hw3-rows'), start: 'top 70%', end: 'bottom 30%', onUpdate: () => {
+    const mid = innerHeight / 2; let best = -1, d = 1e9; rows.forEach((r, i) => { const b = r.getBoundingClientRect(), m = Math.abs(b.top + b.height / 2 - mid); if (m < d) { d = m; best = i; } }); read = best; paint();
+  }, onLeave: () => { read = -1; paint(); }, onLeaveBack: () => { read = -1; paint(); } });
+  ls.push(() => st.kill());
+  const cleanup = () => ls.forEach(f => f());
+  if (!c.motion) return cleanup;
   beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]);
-  const tweens = [];
+  // the rules draw and the rows enter once (y 8 + opacity, 40ms apart)
   rows.forEach(row => {
-    const rule = row.querySelectorAll('.hw3-rl, .hw3-rt'), body = [row.querySelector('.hw3-n'), row.querySelector('.hw3-line'), row.querySelector('.hw3-chips')];
-    tweens.push(gsap.fromTo(rule, { drawSVG: '0%' }, { drawSVG: '0% 100%', ease: 'none', scrollTrigger: { trigger: row, start: 'top bottom-=10%', end: 'top 55%', scrub: 0.2 } }));
-    tweens.push(gsap.fromTo(body, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, ease: 'none', stagger: 0.08, scrollTrigger: { trigger: row, start: 'top bottom-=10%', end: 'top 60%', scrub: 0.2 } }));
+    const rule = row.querySelectorAll('.hw3-rl, .hw3-rt'), body = [row.querySelector('.hw3-n'), row.querySelector('.hw3-act'), row.querySelector('.hw3-chips')];
+    gsap.set(rule, { drawSVG: '0%' }); gsap.set(body, { autoAlpha: 0 });
+    const t = ScrollTrigger.create({ trigger: row, start: 'top 88%', once: true, onEnter: () => {
+      gsap.to(rule, { drawSVG: '0% 100%', duration: 0.5, ease: EASE });
+      gsap.fromTo(body, { y: 8, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.04, clearProps: 'transform' });
+    } });
+    ls.push(() => t.kill());
   });
-  return () => tweens.forEach(t => { if (t.scrollTrigger) t.scrollTrigger.kill(); t.kill(); });
+  return cleanup;
 }
 
-export default { 1: spine, 2: pager, 3: verbs };
+// v4 (R3, new): ⟦S0441⟧ gsap-scrolltrigger-storytelling: one artefact held in view (CSS sticky) while its states are
+// revealed per label. Each step's ScrollTrigger (centre line) sets data-st on the root; CSS crossfades the house's layers
+// in 200ms (phone at the door rings once; measuring lines; new courses lay, 50ms apart). Steps enter once.
+function house(root, c) {
+  const steps = [...root.querySelectorAll('.hw4-step')], cs = [...root.querySelectorAll('.hw4-courses > *')];
+  cs.forEach((el, i) => { el.style.transitionDelay = `${i * 0.05}s`; });
+  if (!c.motion) { root.dataset.st = '3'; return; }
+  const set = i => { root.dataset.st = String(i + 1); steps.forEach((s, k) => s.classList.toggle('is-on', k === i)); };
+  const sts = steps.map((s, i) => ScrollTrigger.create({ trigger: s, start: 'top center', end: 'bottom center', onToggle: t => { if (t.isActive) set(i); } }));
+  set(0);
+  beats(root, [root.querySelector('.hw-h'), root.querySelector('.hw-note')]);
+  return () => sts.forEach(t => t.kill());
+}
+
+// v5 (R3, new): three artefacts (pack G-how (b); S0095 the subject's artefacts; S1314 product truth). The panels enter once,
+// 60ms apart; the sheet's ruled lines then draw left to right, 40ms apart (DrawSVG .3s).
+function artefacts(root, c) {
+  if (!c.motion) return;
+  const items = root.querySelectorAll('.hw5-a'), lines = root.querySelectorAll('.hw5-hd, .hw5-ln, .hw5-sg');
+  gsap.set(items, { autoAlpha: 0 }); gsap.set(lines, { drawSVG: '0%' });
+  beats(root, [root.querySelector('.hw-h')]);
+  const st = ScrollTrigger.create({ trigger: root.querySelector('.hw5-row'), start: 'top 82%', once: true, onEnter: () => {
+    gsap.fromTo(items, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: EASE, stagger: 0.06, clearProps: 'transform' });
+    gsap.to(lines, { drawSVG: '100%', duration: 0.3, ease: EASE, stagger: 0.04, delay: 0.25 });
+  } });
+  return () => st.kill();
+}
+
+export default { 1: spine, 2: pager, 3: verbs, 4: house, 5: artefacts };

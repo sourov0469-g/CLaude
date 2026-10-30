@@ -4,8 +4,8 @@
 .fm{position:relative;overflow:clip}
 
 /* ---------- v1: ink field, the name as a window onto the crew */
-.fm1{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,56px);padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
-.fm1-stage{max-width:1240px;width:100%;margin:0 auto}
+.fm1{--vbg:var(--ink);background:var(--ink);color:#fff;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"stage stage" "copy photo";column-gap:clamp(28px,4vw,56px);row-gap:clamp(28px,4vw,48px);max-width:1352px;margin-inline:auto;padding:clamp(4.5rem,3rem + 5vw,8rem) var(--gutter) calc(clamp(4rem,3rem + 4vw,6.5rem) + var(--mbar))}
+.fm1-stage{grid-area:stage;max-width:1240px;width:100%;margin:0 auto}
 .fm1-name{width:100%;height:auto;overflow:visible} /* R3 P6: no static will-change */
 .fm1-tx,.fm1-rim{font:900 300px/1 "Epilogue",sans-serif;letter-spacing:-.02em}
 .fm1-under{fill:var(--blue)}
@@ -15,7 +15,7 @@
 .fm1-frame .fm1-raf{stroke-width:5}
 .fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-web{stroke:oklch(1 0 0 / .55)}
 .fm1-frame .fm1-ridge{fill:var(--ink)}
-.fm1-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px 48px;max-width:1240px;width:100%;margin:0 auto}
+.fm1-copy{grid-area:copy;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:24px;width:100%}
 .fm1-h{grid-column:1/-1;font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.02em}
 /* R3 P7 (S1325): a 2px rail beside the facts fills sun as they pass */
 .fm1-facts{position:relative;list-style:none;margin:0;padding:0 0 0 22px;display:grid;gap:12px;font-size:var(--t-lead);line-height:1.4}
@@ -35,9 +35,11 @@
 .fm1-call{transition:scale 160ms var(--ease-out)}
 .fm1-call:active{scale:.97}
 @keyframes fm-door{0%{transform:scaleX(1)}40%{transform:scaleX(.15)}100%{transform:scaleX(1)}}
-.fm1-photo{max-width:1240px;width:100%;margin:0 auto;aspect-ratio:1088/801;max-height:52svh}
+.fm1-photo{grid-area:photo;align-self:start;width:100%;margin:0;aspect-ratio:1088/801;max-height:52svh} /* R3 P3 + C4: beside the copy */
 .fm1-photo img{object-position:50% 70%}
-@media (max-width:760px){.fm1-copy{grid-template-columns:1fr}.fm1-call{justify-self:start}}
+@media (max-width:899px){.fm1{grid-template-columns:minmax(0,1fr);grid-template-areas:"stage" "copy" "photo"}}
+.fm1-call{justify-self:start}
+@media (max-width:380px){.fm1-call{white-space:normal;line-height:1.2;padding-block:8px}}
 /* R3 P8: phones keep the rafters and the plate only */
 @media (max-width:767px){.fm1-frame .fm1-tie,.fm1-frame .fm1-kp,.fm1-frame .fm1-ridge{display:none}}
 
@@ -128,7 +130,7 @@
 .fm4-note{margin-top:12px;font-size:var(--t-lead);color:var(--on-dark-2)}
 .fm4-cards{list-style:none;margin:clamp(36px,5vw,64px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
 .fm4-li{perspective:1000px}
-.fm4-card{position:relative;display:block;width:100%;aspect-ratio:7/4;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;transition:transform .36s var(--ease-x)}
+.fm4-card{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;transition:transform .36s var(--ease-x)}
 .fm4-card[aria-pressed="true"]{transform:rotateY(180deg)}
 .fm4-face{position:absolute;inset:0;display:grid;align-content:space-between;padding:clamp(18px,2.2vw,28px);background:var(--cream);border-radius:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 22px 40px -24px oklch(0 0 0 / .7)}
 .fm4-back{transform:rotateY(180deg);background:#fff;align-content:center}

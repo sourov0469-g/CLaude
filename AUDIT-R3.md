@@ -418,3 +418,70 @@ The ground is --ink (C2). V1 is already ink; V2 (cream) and V3 (blue) move to it
     - The skill's "tiny uppercase labels" are replaced by the page's one label role (C1).
     - The skill's light neutrals are replaced by the section's ink ground (C2).
     - The image settles once from scale 1.06 to 1.
+
+## F5 / G: How (written before the How code)
+
+The ground is --sky (C2). V3's #fff and V2's #eef3fb move to it.
+
+### Winner V3 "Poster lines"
+| # | Point | Verdict | Reason and citation |
+|---|---|---|---|
+| 1 | Kill the rotating dim cycle; all lines full ink; emphasis by the ridge filling in accent over 300ms, advancing every ~4s, pausing on hover/focus | IMPROVE | See F5.1 below. |
+| 2 | Only line 1 (tel:) is a link | ACCEPT | ⟦S1314 §7⟧. "Estimate." and "Roof." looked like actions but jumped to other sections. |
+| 3 | One weight per line | ACCEPT | ⟦S1500⟧ (over-use of bold; two weights mixed in one line). |
+| 4 | Pale tint, not #FFFFFF | ACCEPT | It is --sky (C2). |
+| 5 | Numerals stay; descriptors sentence case at 13px/700 | ACCEPT, at the label role | The one label role page-wide is 14px/600 (C1). |
+| 6 | Delete the diagonal hatch; keep the ridge zigzag | ACCEPT | Removal Test ⟦S1314⟧. |
+| 7 | Entrances: 30 to 50ms stagger, translateY(8px) plus opacity, once | ACCEPT | ⟦S0063⟧ STANDARDS (stagger 30 to 80ms). It replaces the y40 scroll-scrub. |
+
+**F5.1, the emphasis cycle.**
+- The audit's "dim" is the scroll-linked mid-state (E4). There is no timer in the build.
+- **Kept:** the lines rest at full ink, and the emphasis moves to the ridge, which fills in sun over 300ms.
+- **Changed, the 4s timer:** an endless timed cycle is perpetual motion that competes with reading ⟦S1314 §8⟧. So the emphasis advances with reading instead: the row nearest the viewport centre is the active one.
+- Hover or focus on a row takes the emphasis while it lasts. Nothing moves on its own.
+
+### V1 Downspout spine (fallback)
+| Point | Verdict | Reason |
+|---|---|---|
+| Inactive titles at alpha ≥.78 | ACCEPT | ⟦S1497⟧. Measured: .78 of ink on sky is 7.9:1. |
+| A 200ms crossfade at viewport centre | ACCEPT | |
+| Hanger tick in 120 to 180ms | ACCEPT | |
+| Reduced motion at full ink | ACCEPT | |
+| The heading in the steps' axis | ACCEPT | ⟦S1498⟧ continuity. The head stops being a sticky side column and sits above the steps on their left edge. |
+| Visible focus on the phone link | ACCEPT | ⟦S1049⟧. |
+| Mobile gaps 48 to 64px | ACCEPT | |
+| Cut the rain dashes | ACCEPT | Removal Test. |
+
+### V2 Step pager (weak)
+| Point | Verdict | Reason |
+|---|---|---|
+| Inactive tab contrast | ACCEPT | Labels at --muted (6.8:1), not 50% opacity. |
+| Pause on hover/focus; a manual selection stops the timer | ACCEPT | WCAG 2.2.2, ⟦S1314 §8⟧. |
+| Rows, not cards | ACCEPT | The rounded, ringed panel chrome goes. A rule sits above the pager instead. |
+| No duplicated hours | ACCEPT | Checked: the hours appear once. |
+| A real artefact in the panel | ACCEPT | Step 3 shows the real finished-roof photo in place of the drawn roof ⟦S1314⟧ (product truth). Steps 1 and 2 keep their drawn scenes: there is no real photo of a phone call or an estimate. |
+| Remove the bracket artefact | ACCEPT | The dimension brackets in scene 2. |
+| Clip-path inset reveal at 250ms | ACCEPT | It replaces the 0.4s crossfade ⟦S0063⟧. |
+| Tabs :active scale(.98) | ACCEPT | |
+
+### New versions
+| Pack's direction | Verdict | Built instead |
+|---|---|---|
+| (a) V1's gutter pipe with contrast decoupled from scroll, heading in-axis | REJECT | That is exactly V1's fix list, so it is a variation (A3). See V4 below. |
+| (b) No numbers, three artefact panels (phone / estimate sheet / finished roof) | ACCEPT | See V5 below. |
+
+**V4 "One house, three states" (built instead of (a)):**
+- **Reference:** ⟦S0441⟧ gsap-scrolltrigger-storytelling (one pinned artefact, its states revealed per label).
+- **What it is:** a single drawn house elevation in a sticky stage, with the three steps scrolling beside it. Each step changes the same house:
+  - 1: a phone rings at the door.
+  - 2: measuring lines run along the roof.
+  - 3: new courses lay across the roof.
+- **Limits:**
+  - The pin spans only the three steps, so the user is never trapped ⟦S1314 §8⟧.
+  - Reduced motion shows the finished state with all three steps.
+
+**V5 "Three artefacts" (the pack's (b)):**
+- Three side-by-side panels with no numerals: the phone with the number; an estimate sheet; the finished roof.
+- The estimate sheet is drawn as blank ruled lines and a sign-off line. It carries no figures and no names, so it is an illustration, not a fake record ⟦S1314⟧.
+- The finished roof is a real job photo.
+- References: ⟦S0095⟧ (the subject's own artefacts) and ⟦S1314⟧ (product truth).
