@@ -122,37 +122,51 @@
           '<g class="rl"><path d="M386 -2 v-34 h-26 v-30" fill="none" stroke="#c9d1d3" stroke-width="5" stroke-linejoin="round"/><rect x="352" y="-104" width="16" height="40" rx="6" fill="#1d4a4e" stroke="#0B1418" stroke-width="2.5"/>' +
           '<rect x="6" y="-14" width="388" height="22" rx="11" fill="#e8e4dc" stroke="#0B1418" stroke-width="2.5"/><rect x="6" y="-2" width="388" height="10" rx="5" fill="#77b3b8" opacity=".55"/></g>' +
           '<text class="tg" x="12" y="22" font-family="Geist, sans-serif" font-size="11" font-weight="600" letter-spacing="1.6" fill="#e8e4dc" stroke="#0B1418" stroke-width="3" paint-order="stroke">BEFORE</text>';
-        var mk = svg.querySelector('.mk'), rl = svg.querySelector('.rl'), tg = svg.querySelector('.tg'), st = { p: k.motion ? 0 : .5 };
+        // [AUDIT-01 F4 loser P1] reduced motion rests on the complete after photograph, never a half wipe
+        var mk = svg.querySelector('.mk'), rl = svg.querySelector('.rl'), tg = svg.querySelector('.tg'), st = { p: k.motion ? 0 : 1 };
+        var btn = panel.querySelector('.ba2__tog'), scrub = null;
         function set() {
           var y = st.p * 340;
           mk.setAttribute('height', Math.max(0, y + 40));
           rl.setAttribute('transform', 'translate(0 ' + Math.min(300, y).toFixed(1) + ')');
           rl.style.display = (st.p > .01 && st.p < .99 && k.motion) ? '' : 'none';
           tg.textContent = st.p > .92 ? 'AFTER' : 'BEFORE';
+          btn.setAttribute('aria-pressed', st.p > .5 ? 'true' : 'false');
+          btn.querySelector('.btn__label').textContent = st.p > .5 ? 'Show the before' : 'Show the after';
         }
         set();
         k.add(function () { svg.innerHTML = ''; });
+        // per-panel control: one press takes the panel to the other end and hands it over from scroll to the visitor
+        k.on(btn, 'click', function () {
+          var to = st.p > .5 ? 0 : 1;
+          if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; }
+          if (!k.motion) { st.p = to; set(); return; }
+          gsap.to(st, { p: to, duration: .6, ease: EZ.bezier(.23, 1, .32, 1), onUpdate: set, overwrite: true });
+        });
         if (!k.motion) return;
-        gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: panel, start: 'top 72%', end: 'bottom 50%', scrub: .8 } });
+        scrub = gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: panel, start: 'top 72%', end: 'bottom 50%', scrub: .8 } });
       });
     } },
 
     /* v3 · Storm shutters [BANK 178] */
     3: { init: function (root, k) {
       var box = root.querySelector('.ba3__shutters'), photo = root.querySelector('.ba3__photo'), state = root.querySelector('.ba3__state');
-      var no = root.querySelector('.ba3__no'), name = root.querySelector('.ba3__name'), time = root.querySelector('.ba3__time');
-      var play = root.querySelector('.ba3__play'), N = 8, h = '';
+      var name = root.querySelector('.ba3__name'), time = root.querySelector('.ba3__time');
+      var tog = root.querySelector('.ba3__tog'), N = 8, h = '';
       for (var i = 0; i < N; i++) h += '<span class="ba3__panel"></span>';
       box.innerHTML = h;
       var panels = box.querySelectorAll('.ba3__panel');
       k.add(function () { box.innerHTML = ''; });
-      var cur = { pair: 0, after: false }, busy = false, playing = k.motion, inView = false, timer = null;
+      // [AUDIT-01 F4 loser P1] no autoplay and no counter: the rest state is the photograph; shutters run only on a press, 380ms, 30ms stagger
+      var cur = { pair: 0, after: false }, busy = false;
       function paint() {
         var p = PAIRS[cur.pair];
         photo.src = EZ.img(cur.after ? p.a : p.b); photo.alt = cur.after ? p.aa : p.ba;
         state.textContent = cur.after ? 'After' : 'Before';
         state.classList.toggle('is-after', cur.after);
-        no.textContent = '0' + (cur.pair + 1) + ' / 04'; name.textContent = p.name; time.innerHTML = p.time;
+        name.textContent = p.name; time.innerHTML = p.time;
+        tog.setAttribute('aria-pressed', cur.after ? 'true' : 'false');
+        tog.querySelector('.btn__label').textContent = cur.after ? 'Show the before' : 'Show the after';
       }
       function go(next) {
         if (busy) return;
@@ -160,31 +174,18 @@
         busy = true;
         box.classList.remove('is-up');
         k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { busy = false; box.classList.add('is-up'); schedule(); } })
-            .fromTo(panels, { yPercent: -100 }, { yPercent: 0, duration: .8, ease: ELEOS, stagger: .06 })
-            .add(function () { cur = next; paint(); }, '+=.15')
-            .to(panels, { yPercent: -100, duration: .8, ease: ELEOS, stagger: .06 }, '+=.2');
+          gsap.timeline({ onComplete: function () { busy = false; box.classList.add('is-up'); } })
+            .fromTo(panels, { yPercent: -100 }, { yPercent: 0, duration: .38, ease: ELEOS, stagger: .03 })
+            .add(function () { cur = next; paint(); })
+            .to(panels, { yPercent: -100, duration: .38, ease: ELEOS, stagger: .03 }, '+=.06');
         });
       }
-      function advance() { go(cur.after ? { pair: (cur.pair + 1) % 4, after: false } : { pair: cur.pair, after: true }); }
-      function schedule() { clearTimeout(timer); if (playing && inView && k.motion) timer = setTimeout(advance, cur.after ? 2600 : 1800); }
-      k.add(function () { clearTimeout(timer); });
       gsap.set(panels, { yPercent: -100 });
       box.classList.add('is-up');
       paint();
       k.on(root.querySelector('.ba3__next'), 'click', function () { go({ pair: (cur.pair + 1) % 4, after: false }); });
       k.on(root.querySelector('.ba3__prev'), 'click', function () { go({ pair: (cur.pair + 3) % 4, after: false }); });
-      if (!k.motion) { play.hidden = true; k.add(function () { play.hidden = false; }); return; }
-      k.on(play, 'click', function () {
-        playing = !playing;
-        play.setAttribute('aria-pressed', playing ? 'false' : 'true');
-        play.querySelector('.btn__label').textContent = playing ? 'Pause' : 'Play';
-        schedule();
-      });
-      k.add(function () { play.setAttribute('aria-pressed', 'false'); play.querySelector('.btn__label').textContent = 'Pause'; });
-      k.on(root.querySelector('.ba3__stage'), 'pointerenter', function (e) { if (e.pointerType === 'mouse') clearTimeout(timer); });
-      k.on(root.querySelector('.ba3__stage'), 'pointerleave', function (e) { if (e.pointerType === 'mouse') schedule(); });
-      k.io(root.querySelector('.ba3__stage'), function (en) { inView = en.isIntersecting; if (inView) schedule(); else clearTimeout(timer); }, { threshold: .4 });
+      k.on(tog, 'click', function () { go({ pair: cur.pair, after: !cur.after }); });
       EZ.reveal(k, root.querySelectorAll('.ba3__side > *'));
     } }
   });
