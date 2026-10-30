@@ -1,5 +1,5 @@
 scroll re-hit: none,DIV
 text field: cursor=text tip=type
-desktop checks 162, fails 0, errs ["matter-js: Matter.Engine.update: delta argument is recommended to be less than or equal to 16.667 ms.","Error: <svg> attribute viewBox: Unexpected end of attribute. Expected number, \"\".","Error: <svg> attribute viewBox: Unexpected end of attribute. Expected number, \"\"."]
+desktop checks 162, fails 0, errs 0
 touch: buddy on=false,false,false,none,false,auto
 reduced motion: buddy on=false,false,false,none,false,auto

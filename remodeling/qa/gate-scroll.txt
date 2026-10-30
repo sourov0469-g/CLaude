@@ -1,12 +1,12 @@
-1440 v1: stuck=[] overflow=0 spacers=0 emdash=0 H=14168 errs=0
-1440 v2: stuck=[] overflow=0 spacers=1 emdash=0 H=19373 errs=0
-1440 v3: stuck=[] overflow=0 spacers=0 emdash=0 H=11887 errs=0
-1440 RM v1: stuck=[] overflow=0 spacers=0 emdash=0 H=14168 errs=0
-1440 RM v2: stuck=[] overflow=0 spacers=0 emdash=0 H=18037 errs=0
-1440 RM v3: stuck=[] overflow=0 spacers=0 emdash=0 H=11887 errs=0
-375 v1: stuck=[] overflow=0 spacers=0 emdash=0 H=19475 errs=0
-375 v2: stuck=[] overflow=0 spacers=0 emdash=0 H=16452 errs=0
-375 v3: stuck=[] overflow=0 spacers=0 emdash=0 H=12215 errs=0
-375 RM v1: stuck=[] overflow=0 spacers=0 emdash=0 H=19475 errs=0
-375 RM v2: stuck=[] overflow=0 spacers=0 emdash=0 H=16308 errs=0
-375 RM v3: stuck=[] overflow=0 spacers=0 emdash=0 H=12083 errs=0
+1440 v1: stuck=[] overflow=0 spacers=0 emdash=0 H=13916 errs=0
+1440 v2: stuck=[] overflow=0 spacers=1 emdash=0 H=16773 errs=0
+1440 v3: stuck=[] overflow=0 spacers=0 emdash=0 H=11667 errs=0
+1440 RM v1: stuck=[] overflow=0 spacers=0 emdash=0 H=13916 errs=0
+1440 RM v2: stuck=[] overflow=0 spacers=0 emdash=0 H=15437 errs=0
+1440 RM v3: stuck=[] overflow=0 spacers=0 emdash=0 H=11667 errs=0
+375 v1: stuck=[] overflow=0 spacers=0 emdash=0 H=17419 errs=0
+375 v2: stuck=[] overflow=0 spacers=0 emdash=0 H=14329 errs=0
+375 v3: stuck=[] overflow=0 spacers=0 emdash=0 H=12267 errs=0
+375 RM v1: stuck=[] overflow=0 spacers=0 emdash=0 H=17351 errs=0
+375 RM v2: stuck=[] overflow=0 spacers=0 emdash=0 H=14185 errs=0
+375 RM v3: stuck=[] overflow=0 spacers=0 emdash=0 H=12135 errs=0
