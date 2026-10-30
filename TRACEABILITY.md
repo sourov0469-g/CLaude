@@ -835,3 +835,36 @@ The review texts stay exactly as the firm publishes them, typos included. No sen
 - 4 · Duplicates: ACCEPTED. Each review is filed once, under the person it names first. Its card says "+ also names Garrett, Maria". The cards drop from 32 to the unique set. ⟦S0220⟧ Axiom 3.
 - 5 · Transition: ACCEPTED. Opacity at 180 ms on `cubic-bezier(.23,1,.32,1)`. ⟦S0089⟧.
 - 6 · Uneven sets: ACCEPTED. Every name prints its count ("Jake · 1"). People with no review filed under them drop out of the line.
+
+## F9 · Money
+**V2, What people paid (winner).**
+- 1 · The "half" sentence: ACCEPTED, and computed from the chart's own data at build time.
+  - It now reads "About two-thirds of them, 269 of 415 (64.8%), landed between $5k and $20k", and for windows "255 of 376 (67.8%)… between $5k and $25k".
+  - A build assert pins both figures, so the sentence cannot drift from the bars.
+  - Hero 2's "Half of them" becomes "The middle half of them": it states the firm's published middle-half statistic, which is half by definition.
+  - ⟦S0220⟧ #5, ⟦S1306⟧.
+- 2 · The 15-job gap: ACCEPTED. A row "All other brands: 15 jobs" closes 361 to 376. ⟦S1306⟧.
+- 3 · Dates: ACCEPTED, verbatim: "Charts show 2022-2026 jobs from the 2018-2026 project file." ⟦S1499⟧.
+- 4 · 01–06 numerals: ACCEPTED, dropped; the hairlines group the rows. ⟦S0001⟧.
+- 5 · Blue tick: ACCEPTED, removed. The bar is red and labelled. ⟦S0650⟧ §4.2.
+- C.8 · Tone: night becomes ground2. The bars, labels and median are re-derived from the ink (median `--red-d`, bar `--red`). Backup 2 stays night.
+- Removal Test · Median stated three times: the old sentence was replaced by the share sentence, which adds information the bar and block do not give.
+
+**V1, Amount.**
+- 1 · Total repayable: ACCEPTED.
+  - A line under the sub reads "Total paid: $21,829.20, of which $6,829.20 is interest", or "no interest" at 0 %.
+  - Every plan card prints its own total: $15,000.00 / $16,980.00 / $21,829.20 at $15k. These are computed from the same `pmt()` rounded to the cent, and update with the slider.
+  - ⟦S1306⟧.
+- 2 · Default plan: ACCEPTED, taking BOTH options. The section opens on 0 % for 24 months ($625.00/mo), and the 120-month badge reads "Lowest payment, highest total cost". ⟦S1501⟧.
+- 3 · Dead zone: the fine print already sits in the control column under the plan cards at ≥1024 px. No change needed; measured in the screenshot.
+- 4 · Footer strip: ACCEPTED. `with_phone()` omits "book a free inspection" for Money, so the next-step line is Call only. ⟦S0650⟧ §4.5.
+
+**V3, Receipt.**
+- 1 · Defaults: ACCEPTED.
+  - Both boxes are unchecked, under the line "Tick only what applies to you".
+  - Holiday Savings is a dated line, "on contracts signed through November 30, 2026". JS applies it only while the date in America/Chicago is on or before 2026-11-30; after that it shows "ended" and adds 0 %.
+  - The default receipt is $30,000 → $27,000 today.
+  - ⟦S1306⟧.
+- 2 · "Strike-redraw on every keystroke": REJECTED as a finding. The code already passes `anim=false` on `input` (keystrokes update the numeral plainly) and draws the strike only on `blur` and on box changes. It is verified in the source and unchanged. ⟦S0089⟧.
+- 3 · Left column: ACCEPTED. The firm's worked example is a static mini-receipt ($30,000, −10 %, −5 %, −10 %, $22,500). ⟦S1501⟧.
+- 4 · Cap: ACCEPTED. "up to $500,000" is printed under Project. Above it, a visible note says "Estimates here stop at $500,000." on blur. ⟦S0049⟧.

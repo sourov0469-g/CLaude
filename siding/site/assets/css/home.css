@@ -1877,3 +1877,35 @@ html.motion .sec:not([data-bk]) .fd-list:not([hidden]) { animation: fdOpen 160ms
 .sec:not([data-bk]) .cr-n.is-soft { filter: none; opacity: .38; font-weight: 650; }
 .cr-k { color: var(--ink2); font-size: .45em; font-weight: 650; vertical-align: .6em; }
 .cr-also { display: block; color: var(--ink2); font-size: .8125rem; }
+
+/* ================= F9 MONEY (Audit pack). Scoped off the backups. ================= */
+/* V1: the total paid under the payment and on every plan; the badge says both halves */
+.pay-tot { margin: 6px 0 0; color: var(--ink); font-weight: 650; }
+.pay-t em { display: block; margin-top: 4px; color: var(--ink2); font-size: .8125rem; font-style: normal; font-weight: 600; }
+/* V2 on ground2 (C.8); no numerals on a list that is not a sequence; no blue tick */
+.money-2[data-tone="ground2"] .dt { border-color: var(--line); color: var(--ink); }
+.money-2[data-tone="ground2"] .dt[aria-checked="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.money-2[data-tone="ground2"] .db i { background: color-mix(in srgb, var(--ink) 22%, transparent); }
+.money-2[data-tone="ground2"] .db.is-med i { background: var(--red); }
+.money-2[data-tone="ground2"] .db-n, .money-2[data-tone="ground2"] .db-l { color: var(--ink2); }
+.money-2[data-tone="ground2"] .db.is-med .db-n, .money-2[data-tone="ground2"] .db.is-med .db-l { color: var(--ink); }
+.money-2[data-tone="ground2"] .db-l { border-top-color: var(--line); }
+.money-2[data-tone="ground2"] .dd-cap, .money-2[data-tone="ground2"] .dd-med span, .money-2[data-tone="ground2"] .dd-mid, .money-2[data-tone="ground2"] .dd-moves li { color: var(--ink2); }
+.money-2[data-tone="ground2"] .dd-cap b, .money-2[data-tone="ground2"] .dd-mid b { color: var(--ink); }
+.money-2[data-tone="ground2"] .dd-med b { color: var(--red-d); }
+.money-2[data-tone="ground2"] .dd-moves, .money-2[data-tone="ground2"] .dd-moves li { border-color: color-mix(in srgb, var(--ink) 16%, transparent); }
+.money-2[data-tone="ground2"] .dd-moves li { grid-template-columns: 1fr; }
+.money-2[data-tone="ground2"] .dd-moves li::before { content: none; }
+.money-2[data-tone="ground2"] .db-chalk { display: none; }
+.money-2[data-tone="ground2"] .db-nl circle { fill: var(--line); stroke: var(--ground2); }
+/* V3: the worked example as a static mini-receipt; the cap printed */
+.rcp-mini { display: grid; gap: 0; max-width: 22rem; margin: 4px 0 8px; padding: 14px 16px; border-radius: 12px; background: var(--sheet); box-shadow: 0 0 0 1px var(--stone); font-size: var(--t-sm); }
+.rcp-mini p { display: flex; justify-content: space-between; gap: 12px; margin: 0; padding: 4px 0; color: var(--ink2); }
+.rcp-mini b { color: var(--ink); font-weight: 650; }
+.rcp-mini .rcp-mk { color: var(--ink); font-weight: 650; }
+.rcp-mini .rcp-mt { margin-top: 4px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.rcp-ask { margin: 8px 0 0; font-weight: 650; }
+.rcp-cap { display: block; color: var(--ink2); font-size: .75rem; font-weight: 500; }
+.rcp-capnote { margin: 0; color: var(--red-d); font-size: .8125rem; font-weight: 600; }
+.rcp-l.is-off { opacity: .45; text-decoration: line-through; }
+.pay-t[aria-checked="true"] em { color: var(--on-night2); }

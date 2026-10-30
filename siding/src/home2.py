@@ -262,7 +262,7 @@ def hero2():
       <p class="h2-k"><span class="h2-pips" aria-hidden="true"><i class="on"></i><i class="on"></i></span>Step 2 of 2</p>
       <p class="h2-ah" tabindex="-1" data-f="head" role="heading" aria-level="2"><span data-f="name">{f['name']}</span>: what Austin Pro jobs cost</p>
       <div class="h2-row">{locator(f['zone'], 'h2-loc h2-loc-l')}<p class="h2-med"><span>Median job, from <b data-f="n">{f['n']}</b> priced <span data-f="tn">{f['tn']}</span> jobs, of 886 documented projects</span><b class="num" data-f="med">{f['med']}</b></p></div>
-      <p class="h2-mid">Half of them landed between <span data-f="mid">{f['mid']}</span>. Materials and labour, before discounts and tax.</p>
+      <p class="h2-mid">The middle half of them landed between <span data-f="mid">{f['mid']}</span>. Materials and labour, before discounts and tax.</p>
       <p class="h2-mo">About <b data-f="mo">{f['mo']}</b> a month at 7.99% APR over 120 months, on approved credit.</p>
       <div class="h2-cta"><a class="btn btn-red" href="#book" data-book data-trade="{f['book']}" data-cur="hero" data-f="book">Book a free siding inspection</a><a class="tlink" href="{TEL}">Call {PHONE}</a><button class="tlink h2-back" type="button" data-f="back">Pick another project</button></div>
     </div>
@@ -1177,17 +1177,22 @@ def money1():
     """Austin Pro's worked financing example (portfolio plan Site 6; FACTS: $15,000 at 7.99% APR for 120 months =
     $181.91) + anatomy F10 (financing as its own section): the payment for any amount on the three published plans,
     the figure on the odometer, and the term drawn as one window pane per monthly payment, a row of twelve per year"""
-    panes = ''.join(f'<rect x="{(k % 12) * 14}" y="{(k // 12) * 12}" width="12" height="10" rx="1"/>' for k in range(120))
-    plans = ''.join(f'''<button class="pay-t" type="button" role="radio" aria-checked="{'true' if n == 120 else 'false'}" tabindex="{0 if n == 120 else -1}" data-apr="{apr}" data-n="{n}"><b>{a}</b><span>{m}</span>{'<i>Lowest monthly</i>' if n == 120 else ''}</button>''' for apr, n, a, m in TERMS)
+    panes = ''.join(f'<rect x="{(k % 12) * 14}" y="{(k // 12) * 12}" width="12" height="10" rx="1"{" class=\"off\"" if k >= 24 else ""}/>' for k in range(120))
+    # F9 V1.1/V1.2: every plan prints its total paid, and the page opens on the cheapest credit (0% for 24 months);
+    # the 120-month badge says both halves of the truth
+    def tot(apr, n, P=15000):
+        return P if apr == 0 else round(pmt(P, apr, n), 2) * n
+    plans = ''.join(f'''<button class="pay-t" type="button" role="radio" aria-checked="{'true' if n == 24 else 'false'}" tabindex="{0 if n == 24 else -1}" data-apr="{apr}" data-n="{n}"><b>{a}</b><span>{m}</span><em class="num" data-tot>Total paid ${tot(apr, n):,.2f}</em>{'<i>Lowest payment, highest total cost</i>' if n == 120 else ''}</button>''' for apr, n, a, m in TERMS)
     return f'''<div class="v money-1" data-tone="ground">
   <h2 class="h2x" data-split>The monthly maths, done</h2>
   <div class="pay-grid">
     <div class="pay-fig">
-      <p class="pay-big num" aria-hidden="true"><span class="odo" data-odo>$181.91</span><small>/mo</small></p>
-      <p class="pay-sub" data-pay="sub">$15,000 over 120 months at 7.99% APR</p>
+      <p class="pay-big num" aria-hidden="true"><span class="odo" data-odo>$625.00</span><small>/mo</small></p>
+      <p class="pay-sub" data-pay="sub">$15,000 over 24 months at 0% APR</p>
+      <p class="pay-tot num" data-pay="tot">Total paid: $15,000.00, no interest</p>
       <p class="sr-only" aria-live="polite" data-pay="sr"></p>
       <figure class="pay-term"><svg class="pay-panes" viewBox="0 0 166 118" data-pay="panes" aria-hidden="true" focusable="false">{panes}</svg>
-        <figcaption data-pay="cap">120 monthly payments, one pane each; a row is a year</figcaption></figure>
+        <figcaption data-pay="cap">24 monthly payments, one pane each; a row is a year</figcaption></figure>
     </div>
     <div class="pay-ctl">
       <label class="lab" for="pay-amt">Project amount <output class="num" for="pay-amt" data-pay="amt">$15,000</output></label>
@@ -1203,13 +1208,17 @@ BANDS13 = ['Under $2k', '$2k-$5k', '$5k-$10k', '$10k-$15k', '$15k-$20k', '$20k-$
 SHORT13 = ['<2k', '2-5k', '5-10k', '10-15k', '15-20k', '20-25k', '25-30k', '30-40k', '40-50k', '50-60k', '60-75k', '75-100k', '100k+']
 DIST = {
     'siding': dict(name='Siding', n=415, c=[12, 33, 70, 107, 92, 53, 22, 19, 4, 1, 2, 0, 0], med=3, mid='$5k and $20k', cities=31,
-                   moves=['Wall area and stories', "What's under the old siding (rot, sheathing)", 'Whole house or a few walls', 'Trim, soffit and fascia', 'Paint or ColorPlus', 'Profile and details'],
+                   lo=2, hi=4, moves=['Wall area and stories', "What's under the old siding (rot, sheathing)", 'Whole house or a few walls', 'Trim, soffit and fascia', 'Paint or ColorPlus', 'Profile and details'],
                    moves_h='What moves a siding price, as the firm lists it'),
     'windows': dict(name='Windows', n=376, c=[12, 40, 96, 79, 50, 30, 19, 30, 13, 4, 0, 2, 1], med=3, mid='$5k and $25k', cities=40,
-                    moves=['NT Windows: 238 jobs, median $10k-$15k', 'Simonton: 54 jobs, median $10k-$15k', 'Andersen: 38 jobs, median $20k-$25k', 'Pella: 31 jobs, median $5k-$10k'],
+                    lo=2, hi=5, moves=['NT Windows: 238 jobs, median $10k-$15k', 'Simonton: 54 jobs, median $10k-$15k', 'Andersen: 38 jobs, median $20k-$25k', 'Pella: 31 jobs, median $5k-$10k', 'All other brands: 15 jobs'],
                     moves_h='Median by brand, from the same job files'),
 }
 assert sum(DIST['siding']['c']) == 415 and sum(DIST['windows']['c']) == 376
+for _d in DIST.values():   # F9 V2.1: the sentence states the chart's own share (siding 269/415 = 64.8 %, windows 255/376 = 67.8 %)
+    _k = sum(_d['c'][_d['lo']:_d['hi'] + 1])
+    _d['share'] = f"{_k} of {_d['n']} ({_k / _d['n'] * 100:.1f}%)"
+assert DIST['siding']['share'].startswith('269 of 415 (64.8%') and DIST['windows']['share'].startswith('255 of 376 (67.8%')
 
 
 BOARD_I = ('<svg class="db-bd" viewBox="0 0 10 100" preserveAspectRatio="none" focusable="false"><rect class="db-sh" x="7.6" width="2.4" height="100"/><path class="db-g" d="M3 0C2 30 4 60 3 100M6 0C7 40 5 70 6.4 100"/></svg>'
@@ -1229,7 +1238,7 @@ def money2():
     js = json.dumps(DIST).replace('</', '<\\/')
     tabs = ''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == "siding" else "false"}" tabindex="{0 if k == "siding" else -1}" class="dt" data-k="{k}">{v["name"]}<span class="num">{v["n"]} jobs</span></button>' for k, v in DIST.items())
     moves = ''.join(f'<li>{e(m)}</li>' for m in d['moves'])
-    return f'''<div class="v money-2" data-tone="night">
+    return f'''<div class="v money-2" data-tone="ground2">
   <div class="dd-top">
     <h2 class="h2x" data-split>What people actually paid</h2>
     <div class="dd-tabs" role="radiogroup" aria-label="Trade">{tabs}</div>
@@ -1241,12 +1250,12 @@ def money2():
     </figure>
     <div class="dd-side">
       <p class="dd-med"><span>Median band</span><b class="num" data-dd-med>{BANDS13[d['med']]}</b></p>
-      <p class="dd-mid">Half of them landed between <b data-dd-mid>{d['mid']}</b>.</p>
+      <p class="dd-mid">About two-thirds of them, <span data-dd-share>{d['share']}</span>, landed between <b data-dd-mid>{d['mid']}</b>.</p>
       <p class="dd-mh" data-dd-mh>{e(d['moves_h'])}</p>
       <ol class="dd-moves" data-dd-moves>{moves}</ol>
     </div>
   </div>
-  <p class="fine">A documented sample, not every job since 2009: 1,590 individually priced trades on 886 documented projects, 2018-2026. Bands are materials and labour, before discounts, excluding tax.</p>
+  <p class="fine">Charts show 2022-2026 jobs from the 2018-2026 project file. A documented sample, not every job since 2009: 1,590 individually priced trades on 886 documented projects. Bands are materials and labour, before discounts, excluding tax.</p>
   <script type="application/json" class="dd-data">{js}</script>
 </div>'''
 
@@ -1260,22 +1269,25 @@ def money3():
   <div class="rcp-grid">
     <div class="rcp-side">
       <h2 class="h2x" data-split>Three discounts, stacked</h2>
-      <p>The firm's own example: a $30,000 project with all three comes to $22,500.</p>
+      <div class="rcp-mini" aria-label="The firm's own worked example"><p class="rcp-mk">The firm's own example</p>
+        <p><span>Project</span><b class="num">$30,000</b></p><p><span>Holiday Savings</span><b class="num">-10%</b></p><p><span>Hometown Heroes</span><b class="num">-5%</b></p><p><span>Pay in full</span><b class="num">-10%</b></p><p class="rcp-mt"><span>With all three</span><b class="num">$22,500</b></p></div>
+      <p class="rcp-ask">Tick only what applies to you:</p>
       <div class="rcp-opts">
-        <label class="tick"><input type="checkbox" data-pct="5" checked><span>Hometown Heroes: veterans and military, teachers, seniors, first responders</span></label>
-        <label class="tick"><input type="checkbox" data-pct="10" checked><span>Pay in full by cash, check or ACH (not with financing)</span></label>
+        <label class="tick"><input type="checkbox" data-pct="5"><span>Hometown Heroes: veterans and military, teachers, seniors, first responders</span></label>
+        <label class="tick"><input type="checkbox" data-pct="10"><span>Pay in full by cash, check or ACH (not with financing)</span></label>
       </div>
       <div class="rcp-cta">{btn_book('btn btn-ink', 'Book a free inspection')}<a class="tlink" href="{TEL}">Call {PHONE}</a></div>
     </div>
     <div class="rcp">
       <svg class="rcp-perf" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 5H400"/></svg>
       <p class="rcp-h">Your estimate</p>
-      <div class="rcp-l rcp-amt"><span>Project</span><label class="rcp-in"><span class="sr-only">Project amount in dollars</span>$<input type="text" inputmode="numeric" value="30,000" autocomplete="off"></label></div>
-      <div class="rcp-l"><span>Holiday Savings, through November 30</span><b>-10%</b></div>
+      <div class="rcp-l rcp-amt"><span>Project <small class="rcp-cap">up to $500,000</small></span><label class="rcp-in"><span class="sr-only">Project amount in dollars, up to $500,000</span>$<input type="text" inputmode="numeric" value="30,000" autocomplete="off" aria-describedby="rcp-capnote"></label></div>
+      <p class="rcp-capnote" id="rcp-capnote" aria-live="polite" hidden>Estimates here stop at $500,000.</p>
+      <div class="rcp-l" data-line="h"><span>Holiday Savings, on contracts signed through November 30, 2026</span><b>-10%</b></div>
       <div class="rcp-l" data-line="5"><span>Hometown Heroes</span><b>-5%</b></div>
       <div class="rcp-l" data-line="p"><span>Pay in full</span><b>-10%</b></div>
-      <div class="rcp-tot" aria-live="polite"><span>You pay</span><b class="num"><span class="rcp-now" data-now>$22,500</span><svg class="rcp-strike" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 13C30 9 64 12 98 6"/></svg></b></div>
-      <p class="rcp-save num">You save <b data-save>$7,500</b> on <span data-list>$30,000</span></p>
+      <div class="rcp-tot" aria-live="polite"><span>You pay</span><b class="num"><span class="rcp-now" data-now>$27,000</span><svg class="rcp-strike" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 13C30 9 64 12 98 6"/></svg></b></div>
+      <p class="rcp-save num">You save <b data-save>$3,000</b> on <span data-list>$30,000</span></p>
       <svg class="rcp-torn" viewBox="0 0 400 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="{torn}"/></svg>
     </div>
   </div>
@@ -1383,8 +1395,8 @@ NEXT = {   # K7 / BRIEF-V6 §12.1: every version carries the phone in a contact 
 def with_phone(key, v):
     if TEL in v:
         return v
-    line = (f'<p class="nextstep"><span>{e(NEXT[key])}</span> <a class="tlink" href="{TEL}">Call {PHONE}</a>'
-            f' <span class="ns-or">or</span> <a class="tlink" href="#book" data-book>book a free inspection</a></p>')
+    book = '' if key == 'money' else ' <span class="ns-or">or</span> <a class="tlink" href="#book" data-book>book a free inspection</a>'   # F9 V1.4: no third booking intent inside financing
+    line = f'<p class="nextstep"><span>{e(NEXT[key])}</span> <a class="tlink" href="{TEL}">Call {PHONE}</a>{book}</p>'
     i = v.rindex('</div>')
     return v[:i] + line + '\n' + v[i:]
 

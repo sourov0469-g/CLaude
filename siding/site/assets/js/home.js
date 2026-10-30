@@ -1224,8 +1224,8 @@
      pane per monthly payment, twelve to a row, and a plan change lights its panes in under 0.3 s. */
   V.money1 = (r, b) => {
     const inp = $('#pay-amt', r), o = k => $(`[data-pay="${k}"]`, r), odo = Odo($('[data-odo]', r));
-    const panes = $$('rect', o('panes'));
-    let apr = 0.0799, n = 120, lit = 120;
+    const panes = $$('rect', o('panes')), on = $('.pay-t[aria-checked="true"]', r);
+    let apr = +on.dataset.apr, n = +on.dataset.n, lit = n;   // the plan the markup opens on (F9 V1.2: 0% for 24 months)
     const term = () => {
       const was = lit; lit = n;
       o('panes').setAttribute('viewBox', `0 0 166 ${Math.ceil(n / 12) * 12 - 2}`);
@@ -1240,6 +1240,10 @@
       odo(usd2.format(m));
       o('sub').textContent = `${f} over ${n} months at ${apr ? (apr * 100).toFixed(2) + '%' : '0%'} APR`;
       srSay(o('sr'), `${usd2.format(m)} a month for ${n} months`);
+      /* F9 V1.1: the material term printed, for the chosen plan and on every plan card */
+      const T = (a, k) => Math.round(pmt(A, a, k) * 100) / 100 * k;
+      if (o('tot')) { const t = T(apr, n); o('tot').textContent = t - A > 0.005 ? `Total paid: ${usd2.format(t)}, of which ${usd2.format(t - A)} is interest` : `Total paid: ${usd2.format(A)}, no interest`; }
+      $$('.pay-t', r).forEach(x => { const e = $('[data-tot]', x); if (e) e.textContent = `Total paid ${usd2.format(T(+x.dataset.apr, +x.dataset.n))}`; });
     };
     radios($('.pay-plans', r), b, it => { apr = +it.dataset.apr; n = +it.dataset.n; term(); upd(); });
     b.on(inp, 'input', upd);
@@ -1262,7 +1266,7 @@
       });
       list.setAttribute('aria-label', `Priced ${d.name.toLowerCase()} jobs by price band, 2022-2026`);
       f('cap').innerHTML = `<b class="num">${d.n}</b> priced ${d.name.toLowerCase()} jobs, 2022-2026, in ${d.cities} Central Texas cities`;
-      f('med').textContent = B[d.med]; f('mid').textContent = d.mid; f('mh').textContent = d.moves_h;
+      f('med').textContent = B[d.med]; f('mid').textContent = d.mid; f('mh').textContent = d.moves_h; if (f('share')) f('share').textContent = d.share;
       f('moves').innerHTML = d.moves.map(m => `<li>${esc(m)}</li>`).join('');
     };
     radios($('.dd-tabs', r), b, it => show(it.dataset.k), '.dt');
@@ -1272,14 +1276,20 @@
   /* MONEY 3: R24 configurator on a receipt. The Holiday Savings line always applies (through November 30); the other
      two are boxes. Offers add, as the firm's example does (10 + 5 + 10 = 25 %). When the total changes, a pen line
      strikes the old figure (0.15 s) and the new one is written in from the left (0.15 s). */
-  V.money3 = (r, b) => {
+  V.money3 = (r, b, s) => {
+    const bk = s && s.v > 5;   // Backup 3 keeps its pre-ticked boxes and its undated Holiday line (A.2)
     const amt = $('.rcp-amt input', r), boxes = $$('.rcp-opts input', r), now = $('[data-now]', r), pen = $('.rcp-strike path', r);
-    const save = $('[data-save]', r), list = $('[data-list]', r), lines = { 5: $('[data-line="5"]', r), p: $('[data-line="p"]', r) };
+    const save = $('[data-save]', r), list = $('[data-list]', r), lines = { 5: $('[data-line="5"]', r), p: $('[data-line="p"]', r), h: $('[data-line="h"]', r) }, capNote = $('#rcp-capnote', r);
+    /* F9 V3.1: Holiday Savings applies only on contracts signed through Nov 30, 2026, Austin time */
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(new Date());
+    const holiday = bk || today <= '2026-11-30';
+    if (lines.h && !holiday) { lines.h.classList.add('is-off'); $('span', lines.h).textContent = 'Holiday Savings ended November 30, 2026'; }
     let shown = now.textContent;
     const upd = anim => {
-      const A = Math.min(500000, +amt.value.replace(/[^\d]/g, '') || 0), heroes = boxes[0].checked, full = boxes[1].checked;
+      const raw = +amt.value.replace(/[^\d]/g, '') || 0, A = Math.min(500000, raw), heroes = boxes[0].checked, full = boxes[1].checked;
+      if (capNote && anim) capNote.hidden = raw <= 500000;   // F9 V3.4: the cap is printed, and said when hit
       lines[5].classList.toggle('is-off', !heroes); lines.p.classList.toggle('is-off', !full);
-      const pct = 10 + (heroes ? 5 : 0) + (full ? 10 : 0), price = Math.round(A * (100 - pct) / 100), txt = usd.format(price);
+      const pct = (holiday ? 10 : 0) + (heroes ? 5 : 0) + (full ? 10 : 0), price = Math.round(A * (100 - pct) / 100), txt = usd.format(price);
       save.textContent = usd.format(A - price); list.textContent = usd.format(A);
       if (txt === shown) return;
       shown = txt;
