@@ -482,7 +482,7 @@
       rows.forEach(rw => {
         const on = val >= +rw.dataset.lo * 1000 && val <= +rw.dataset.hi * 1000, was = rw.classList.contains('is-on');
         rw.classList.toggle('is-on', on); n += on;
-        const go = $('.tm-go', rw); if (go) go.tabIndex = on ? 0 : -1;   // F3 V3.2: a lit row is a booking link
+        const go = $('.tm-go', rw); if (go) { go.tabIndex = on ? 0 : -1; go.hidden = !on; }   // QA R1: an unlit row is not a link, for screen readers too   // F3 V3.2: a lit row is a booking link
         if (on && !was && !bk && motionOK()) { const bar = $('.tm-bar i', rw); if (bar) G.fromTo(bar, { '--tick': 0 }, { '--tick': 1, duration: 0.15, ease: 'power2.out' }); }   // F3 V3 add: the edge ticks out 6 px
       });
       nOut.textContent = `${n} of ${rows.length} trades usually ${n === 1 ? 'lands' : 'land'} here${val === MAX && !bk ? ' (and up)' : ''}.`;

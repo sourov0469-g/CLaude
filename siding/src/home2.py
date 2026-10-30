@@ -558,7 +558,7 @@ def services3():
         t = TBY[slug]
         lo, hi = t['lo'], t['hi']
         over = ' tm-over' if hi > TAPE else ''
-        rows += (f'''<li class="tm-t{over}" data-lo="{lo}" data-hi="{hi}"><span class="tm-n">{e(t['name'])}</span><a class="tm-go" href="#book" data-book data-trade="{e(t['name'])}" tabindex="-1">Book a {e(t['name'].lower())} inspection</a>'''
+        rows += (f'''<li class="tm-t{over}" data-lo="{lo}" data-hi="{hi}"><span class="tm-n">{e(t['name'])}</span><a class="tm-go" href="#book" data-book data-trade="{e(t['name'])}" tabindex="-1" hidden>Book a {e(t['name'].lower())} inspection</a>'''
                  f'''<span class="tm-bar" style="--a:{lo / TAPE:.3f};--b:{min(hi, TAPE) / TAPE:.3f};--m:{sum(t['med']) / 2 / TAPE:.3f}" aria-hidden="true"><i></i></span><span class="tm-r num">{mid(t)}<small>median {med(t)}</small></span></li>''')
     ticks = ''.join(f'<i class="tk{" tk-m" if k % 5 == 0 else ""}" style="--k:{k}">{f"<b>${k}k</b>" if k % 5 == 0 else ""}</i>' for k in range(0, TAPE + 1))
     return f'''<div class="v services-3" data-tone="ground2">

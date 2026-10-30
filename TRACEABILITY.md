@@ -917,3 +917,42 @@ The review texts stay exactly as the firm publishes them, typos included. No sen
 - "Half of them landed between" becomes "The middle half of them landed between": it is the firm's published middle half, said as such.
 - The crew backup gains "4.9 on 474 Google reviews", so 474 is present in every reviews state.
 - "Request saved" is replaced by honest copy everywhere.
+
+## Owner deadline (30 Oct): revised scope for this round
+1. The fixes above are COMMITTED (2aac5dd).
+2. Three QA rounds per section follow; rounds 4–10 are DEFERRED to the next round, not cancelled.
+3. Part G's twenty new versions run only if time remains; otherwise they move to the next round.
+
+The challenge protocol, backups, traceability and the facts lock all still apply.
+
+## QA round 1 (all 10 sections × versions 1–3; 1440, 375 and 1440 reduced motion)
+Tools: `scratchpad/ap/qa.js` (static sweep of every state) and the legacy `qa/v6/sect.js` control checks.
+
+**Raised:**
+- (a) "Overflow" flags on field and divider SVG internals.
+- (b) Proof 2 check links 23–40 px tall.
+- (c) The Services 1 and Money 3 Call links beside their CTA at 24–27 px.
+- (d) Services 3's unlit-row links: tabindex −1, but still exposed to screen readers.
+- (e) Reviews 3 phone names at 40 px.
+- (f) Sections over the 1,350 px budget: Work 1 at 1,684, Colour 1 at 1,706, Work 3, Built 2/3, Near 2 on phones.
+- (g) The legacy checks fail on Work 1 sweep keys, the Built 2 card count, the Reviews 1 loop count and the Money 3 start total.
+
+**Killed by the catalog or by evidence:**
+- (a) Those layers sit inside `overflow:hidden` wrappers, and `scrollWidth` equals the viewport in every state. Not an overflow. ⟦S1306⟧ (verify before fixing).
+- (g) Each failure is the old expectation of a behaviour this round changed on purpose: the after-share slider, the two-card stack plus a two-up row, one marquee row, unticked discounts. These are not defects.
+- (f), partly: Built 2 (2,388 px) is inside the pack's own hard cap of 2,600 px. Work 3 and Near 2 are not winners and are queued for the deferred rounds. ⟦S1499⟧.
+
+**Landed:**
+- (b) The Reviews-row check link is an inline link in its sentence (the WCAG 2.5.8 exception); the table checks are 44 px. ⟦S0070⟧.
+- (c) Call links beside a CTA are 44 px inline-flex. ⟦S0220⟧ Axis 7.
+- (d) Unlit rows carry `hidden` on their link, so it exists only while lit. ⟦S0049⟧.
+- (e) 44 px names on phones. ⟦S0220⟧ Axis 7.
+- (f) Work 1's figure goes to 16:7.4 at ≥900 px (1,684 → 1,612 px). Colour 1's studio is capped at 1,120 px (1,706 → 1,560 px). Both stay over the 1,350 budget: the before/after and the paint studio are each one photograph at a legible size, and the Removal Test finds nothing in them to remove. ⟦S0650⟧ density dial; recorded against C.6.
+
+**Measured after the round:**
+- Console errors: 0.
+- Sub-44 px targets: 0.
+- Images without alt: 0.
+- Document overflow: 0.
+- Every H1 is 71/780 (72 px step); every H2 is 64/780 desktop and 32/780 at 375.
+- C.6 visible-element budget (≤300): met in every version. The largest are Near 2 (216), Services 2 (213) and Reviews 1 (185, the marquee clones). The pack measured 599 / 513 / ~504 in Near / Reviews / Work; those are now 30–216 / 58–185 / 49–75.
