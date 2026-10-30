@@ -4,8 +4,141 @@
   var NS = 'http://www.w3.org/2000/svg';
 
   EZ.section('proof', {
-    /* slot 1 · AUDIT-01 winner (copied from v2; fixes applied here) */
+    /* slot 3 · Phase 5 improved version of b4 */
+    3: { init: function (root, k) {
+      var plan = root.querySelector('.psx__plan');
+      var svg = root.querySelector('.psx__svg');
+      var targets = Array.prototype.slice.call(root.querySelectorAll('.psx__t'));
+      var focus = root.querySelector('.psx__focus');
+      var station = root.querySelector('.psx__station');
+      var headG = root.querySelector('.psx__head-g');
+      var readK = root.querySelector('.psx__read-k'), readV = root.querySelector('.psx__read-v');
+      var TEXT = [
+        'Florida Certified Building Contractor, licence CBC1265280, recognised by the Department of Business and Professional Regulation.',
+        '4.8 stars on Google, based on 343 reviews.',
+        '104 municipalities across Miami-Dade, Broward and Palm Beach, and the licence to build in all of them.',
+        '26 projects photographed on this page, every image the firm’s own work.'
+      ];
+      var laser, dot, cur = 0, W = 0, H = 0;
+      function build() {
+        W = plan.clientWidth; H = plan.clientHeight;
+        if (!W) return;
+        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        var c = 22, s = '';
+        [[8, 8, 1, 1], [W - 8, 8, -1, 1], [W - 8, H - 8, -1, -1], [8, H - 8, 1, -1]].forEach(function (p) {
+          s += '<path class="corner" d="M' + p[0] + ' ' + (p[1] + c * p[3]) + 'V' + p[1] + 'H' + (p[0] + c * p[2]) + 'M' + (p[0] + 10 * p[2]) + ' ' + (p[1] + 10 * p[3]) + 'm-5 0h10m-5 -5v10"/>';
+        });
+        s += '<line class="laser" x1="0" y1="0" x2="0" y2="0"/><circle class="dot" cx="0" cy="0" r="4"/>';
+        svg.innerHTML = s;
+        laser = svg.querySelector('.laser'); dot = svg.querySelector('.dot');
+        aim(cur, true);
+      }
+      function centre(el) {
+        var pr = plan.getBoundingClientRect(), r = el.getBoundingClientRect();
+        return { x: r.left - pr.left + r.width / 2, y: r.top - pr.top + 24, r: r, pr: pr };
+      }
+      function tip() {
+        var pr = plan.getBoundingClientRect(), r = station.getBoundingClientRect(), sc = r.width / 120;
+        return { x: r.left - pr.left + 60 * sc, y: r.top - pr.top + 37 * sc, sc: sc };
+      }
+      function aim(i, now) {
+        cur = i;
+        var t = targets[i];
+        targets.forEach(function (el, j) { el.classList.toggle('is-on', j === i); });
+        readK.textContent = 'Target 0' + (i + 1);
+        readV.textContent = TEXT[i];
+        var c = centre(t), pad = 8;
+        var box = { x: c.r.left - c.pr.left - pad, y: c.r.top - c.pr.top - pad, width: c.r.width + pad * 2, height: c.r.height + pad * 2 };
+        var d = now || !k.motion ? 0 : .5;
+        gsap.to(focus, { x: box.x, y: box.y, width: box.width, height: box.height, duration: d, ease: 'power3.inOut', overwrite: 'auto' });
+        if (!laser || EZ.mobile()) return;
+        var o = tip(), ang = Math.atan2(c.y - o.y, c.x - o.x) * 180 / Math.PI;
+        gsap.to(headG, { rotation: EZ.clamp(ang, -60, 30), svgOrigin: '60 37', duration: d, ease: 'power3.inOut', overwrite: 'auto' });
+        var sx = o.x + Math.cos(ang * Math.PI / 180) * 42 * o.sc, sy = o.y + Math.sin(ang * Math.PI / 180) * 42 * o.sc;
+        gsap.to(laser, { attr: { x1: sx, y1: sy, x2: c.x, y2: c.y }, duration: d, ease: 'power3.inOut', overwrite: 'auto' });
+        gsap.to(dot, { attr: { cx: c.x, cy: c.y }, duration: d, ease: 'power3.inOut', overwrite: 'auto' });
+        if (!now && k.motion) gsap.fromTo(dot, { scale: 2.4, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, delay: d, ease: 'expo.out' });
+      }
+      k.ro(plan, build);
+      build();
+      k.add(function () { gsap.set(focus, { clearProps: 'all' }); targets.forEach(function (el) { el.classList.remove('is-on'); }); root.classList.remove('is-cycling'); });
+
+      // True Focus [BANK 300]: hold 1s, move .5s; manual on hover / focus; paused offscreen
+      var timer = null, manual = false, inView = false, steps = 0;
+      // self-running for three moves (4.5s) per visit, then it holds: nothing moves past 5s unasked
+      function next() { aim((cur + 1) % targets.length); if (++steps >= 3) stop(); }
+      function run() { stop(); steps = 0; if (k.motion && inView && !manual) { root.classList.add('is-cycling'); timer = setInterval(next, 1500); } }
+      function stop() { clearInterval(timer); timer = null; }
+      k.add(stop);
+      targets.forEach(function (t, i) {
+        k.on(t, 'pointerenter', function (e) { if (e.pointerType === 'mouse') { manual = true; stop(); root.classList.add('is-cycling'); aim(i); } });
+        k.on(t, 'focus', function () { manual = true; stop(); root.classList.add('is-cycling'); aim(i); });
+        k.on(t, 'click', function () { manual = true; stop(); aim(i); });
+      });
+      k.on(plan, 'pointerleave', function () { manual = false; run(); });
+      k.on(plan, 'focusout', function (e) { if (!plan.contains(e.relatedTarget)) { manual = false; run(); } });
+      k.io(plan, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: .3 });
+      if (k.motion) {
+        EZ.reveal(k, root.querySelectorAll('.psx__head > *'));
+        gsap.from(targets, { scale: .8, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: plan, start: 'top 75%', once: true } });
+        gsap.from(station, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: plan, start: 'top 75%', once: true } });
+      }
+    } },
+
+    /* slot 2 · Phase 5 improved version of b3 */
+
+    2: { init: function (root, k) {
+      // [Phase 5 improved] the blocks without the physics engine: laid as a tidy stack on the deck, level and readable;
+      // Restack deals them into a new order and drops each one into place (a short drop, 60ms stagger)
+      var site = root.querySelector('.pbx__site'), els = Array.prototype.slice.call(root.querySelectorAll('.pbx__blk')), order = els.slice();
+      EZ.reveal(k, root.querySelectorAll('.pbx__head > *, .pbx__foot'));
+      function layout(anim) {
+        var W = site.clientWidth, H = site.clientHeight, sc = EZ.clamp(W / 1100, .58, 1), deck = 72, x = 16 * sc, y = H - deck, rowH = 0, gap = 14 * sc;
+        order.forEach(function (el, i) {
+          var w = +el.dataset.w * sc, h = +el.dataset.h * sc;
+          el.style.width = w + 'px'; el.style.height = h + 'px';
+          if (x + w > W - 16) { x = 16 * sc; y -= rowH + gap; rowH = 0; }
+          var tx = x, ty = y - h;
+          x += w + gap; rowH = Math.max(rowH, h);
+          if (anim && k.motion) gsap.fromTo(el, { x: tx, y: ty - 120, autoAlpha: 0 }, { x: tx, y: ty, autoAlpha: 1, duration: .32, ease: 'power2.in', delay: i * .06, overwrite: true });
+          else gsap.set(el, { x: tx, y: ty, autoAlpha: 1 });
+        });
+      }
+      layout(false);
+      k.ro(site, function () { layout(false); });
+      k.on(root.querySelector('.pbx__restack'), 'click', function () { order.push(order.shift()); order.reverse(); layout(true); });
+      k.add(function () { gsap.set(els, { clearProps: 'all' }); });
+    } },
+
+    /* slot 1 · Phase 5 improved version of b2 */
     1: { init: function (root, k) {
+      var ring = root.querySelector('.pmx__seal-ring');
+      var ro = { a: -40 }, rset = function () { ring.setAttribute('transform', 'rotate(' + ro.a.toFixed(2) + ' 100 100)'); };
+      if (ring && k.motion) { rset(); gsap.to(ro, { a: 40, ease: 'none', onUpdate: rset, scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: .6 } }); }
+      // [AUDIT-01 F2] the meters count ONCE, on first entry, 0 -> exact figure in 600ms (house curve); they never re-roll.
+      // Each meter is a link to its source; hover is a 180ms window step only. Reels are aria-hidden; the link's label speaks.
+      var meters = Array.prototype.slice.call(root.querySelectorAll('.pmx__m'));
+      var EASE = EZ.bezier(.23, 1, .32, 1);
+      EZ.reveal(k, root.querySelectorAll('.pmx__head > *, .pmx__foot'));
+      if (!k.motion || EZ._pmCounted) return;
+      meters.forEach(function (m) {
+        var num = m.querySelector('.pmx__num'), val = num.dataset.n, orig = num.innerHTML;
+        num.innerHTML = val.split('').map(function (ch) {
+          if (!/\d/.test(ch)) return '<span class="pmx__cell pmx__cell--dot"><span class="pmx__strip"><span>' + ch + '</span></span></span>';
+          return '<span class="pmx__cell" data-d="' + ch + '"><span class="pmx__strip"></span></span>';
+        }).join('');
+        k.add(function () { num.innerHTML = orig; });
+        var reels = Array.prototype.slice.call(num.querySelectorAll('.pmx__cell[data-d]')).map(function (c) { return { el: c.querySelector('.pmx__strip'), d: +c.dataset.d }; });
+        reels.forEach(function (r) { var t = ''; for (var x = 0; x <= r.d; x++) t += '<span>' + x + '</span>'; r.el.innerHTML = t; });
+        ScrollTrigger.create({ trigger: m, start: 'top 88%', once: true, onEnter: function () {
+          EZ._pmCounted = true;
+          reels.forEach(function (r) { var h = r.el.firstChild.offsetHeight; gsap.fromTo(r.el, { y: 0 }, { y: -r.d * h, duration: .6, ease: EASE }); });
+        } });
+      });
+    } },
+
+    /* slot 1 · AUDIT-01 winner (copied from v2; fixes applied here) */
+    b2: { init: function (root, k) {
       var ring = root.querySelector('.pm__seal-ring');
       var ro = { a: -40 }, rset = function () { ring.setAttribute('transform', 'rotate(' + ro.a.toFixed(2) + ' 100 100)'); };
       if (ring && k.motion) { rset(); gsap.to(ro, { a: 40, ease: 'none', onUpdate: rset, scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: .6 } }); }
@@ -31,9 +164,9 @@
       });
     } },
 
-    2: { init: function (root, k) {
+    b3: { init: function (root, k) {
       var M = window.Matter, site = root.querySelector('.proof1__site');
-      var els = Array.prototype.slice.call(root.querySelectorAll('.proof1__blk'));
+      var els = Array.prototype.slice.call(root.querySelectorAll('.proof1blk'));
       EZ.reveal(k, root.querySelectorAll('.proof1__head > *, .proof1__foot'));
       if (!M) { root.classList.add('is-static'); return; }
       var engine, bodies = [], W = 0, H = 0, sc = 1, loop = null, drag = null, inView = false, dropped = false;
@@ -197,7 +330,7 @@
     } },
 
     /* v3 · Survey station */
-    3: { init: function (root, k) {
+    b4: { init: function (root, k) {
       var plan = root.querySelector('.proof3__plan');
       var svg = root.querySelector('.proof3__svg');
       var targets = Array.prototype.slice.call(root.querySelectorAll('.proof3__t'));
