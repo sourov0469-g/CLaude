@@ -36,6 +36,10 @@
   --color-danger-subtle: var(--red-3); --color-danger-border: var(--red-7); --color-danger-solid: var(--red-9); --color-danger-text: var(--red-11);
   /* illustration and data marks: neutral line art, so the drawings rest instead of competing with the accent */
   --color-art-line: var(--neutral-11); --color-art-line-strong: var(--neutral-12); --color-rating: var(--neutral-12); --color-logo-mark: var(--teal-9);
+  /* data marks (QA round 2, S1435 + S0071 peers stay neutral): every mark in a chart is neutral; the accent marks only
+     the one mark the chart is about, or the one the visitor picked */
+  --color-art-fill: var(--neutral-4); --color-art-fill-strong: var(--neutral-9);
+  --color-data-mark: var(--neutral-9); --color-data-mark-muted: var(--neutral-8); --color-data-fill: var(--neutral-4); --color-data-highlight: var(--teal-9);
   --f: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --fh: "Poppins", "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   /* text hierarchy (S1434): four levels, adjacent levels at least 1.5x apart or a clear weight step */
@@ -2939,3 +2943,19 @@ body { font-size: var(--t-body); color: var(--color-text); }
 /* the FAQ search field removed its outline on focus and its teal focus border lost to the control-border rule: it
    had no visible focus at all. It takes the standard mark like every other control. */
 .pg-srch input:focus-visible:not([data-bk] *) { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
+
+/* REBRAND QA round 2, isolation inflation (S1435; measured on screenshots of all 290 views, qa/v9/teal.py): charts
+   painted every mark teal, so the accent stopped meaning anything there. The 886 squares (6.9% of the view in solid
+   teal), the month heatmap, the warranty bars, the job dots and the payment panes now draw in the neutral data
+   tokens; the accent stays on the picked mark and the one mark a chart is about. */
+.nv-886 .g-m { fill: var(--color-data-mark); } .nv-886 .g-c { stroke: var(--color-data-mark-muted); }
+.hm-c { fill: color-mix(in srgb, var(--color-data-mark) calc(var(--a) * 100%), var(--color-bg-subtle)); stroke: var(--color-border-subtle); }
+.nv-wl-h { background: var(--color-data-fill); } .nv-wl-l:not([data-bk] *) { background: var(--color-bg-panel); color: var(--color-text); }
+.rg-d circle { fill: var(--color-data-mark); opacity: .6; }
+.fl-d circle { fill: var(--color-data-mark-muted); } .fl-d circle:hover, .fl-d circle.on { fill: var(--color-data-highlight); }
+.pay-panes rect:nth-child(12n+1):not([data-bk] *) { fill: var(--color-data-mark); stroke: var(--color-art-line-strong); }
+/* drawings keep to neutral line art (declared hierarchy; window glass alone keeps the accent's lightest tint, as in the
+   street and the gable): the body-and-trim house's teal-12 roof and teal door, and the wall layers' teal siding, were
+   brand colour used as decoration; the door read as a button */
+.bt-roof { fill: var(--color-art-line); } .bt-door { fill: var(--color-art-fill-strong); }
+.ly-studs { fill: var(--color-art-fill); } .ly-sheath { fill: var(--color-bg-panel-strong); } .ly-siding { fill: var(--color-art-fill-strong); } .ly-trim { fill: var(--color-art-line-strong); }
