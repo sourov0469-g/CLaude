@@ -1228,5 +1228,5 @@ Every text element is paired with the nearest painted background behind it, as r
 |---|---|
 | 85374e2 | Stage 1: steel ramps at hue 248; primitives renamed `--steel-N`; every role token repointed; logo files re-coloured; audits read the live accent tokens |
 | 7b355b3 | Stage 2: challenge fixes (selected tint was grey-equivalent; band read powder-blue); light-step chroma retuned; logo at steel-9 #396791; drift windows and photo masking in the pixel audit |
-| (stage 3) | Stage 3: repacked standalone files, this brand-sheet section, gate evidence |
+| 0244d2f | Stage 3: repacked standalone files, this brand-sheet section, gate evidence |
 
