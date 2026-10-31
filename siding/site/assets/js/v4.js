@@ -271,23 +271,45 @@
       }
       if (!S.shown) { S.x = P.x + S.ox; S.y = P.y + S.oy; S.vx = S.vy = 0; S.shown = true; el.classList.add('is-on'); }
     }
+    /* REBRAND step 6 (S1436): the press is one interruptible pair, down 80 ms, up 160 ms; a new press kills the last
+       one instead of stacking timelines, and every way a press can end releases it */
+    let down = false;
     function press(e) {
       if (!on || (e.pointerType && e.pointerType !== 'mouse')) { if (e.pointerType === 'touch') hide(); return; }
-      G.timeline({ overwrite: 'auto' }).to(svg, { scale: 0.84, duration: 0.1, ease: 'power2.in', transformOrigin: '21% 14%' }).to(svg, { scale: 1, duration: 0.22, ease: 'power2.out' });
+      down = true;
+      G.killTweensOf(svg);
+      G.to(svg, { scale: 0.9, duration: 0.08, ease: 'power2.out', transformOrigin: '21% 14%' });
     }
-    function hide() { if (!el) return; S.shown = false; el.classList.remove('is-on'); }
+    function release() {
+      if (!down || !svg) return;
+      down = false;
+      G.killTweensOf(svg);
+      G.to(svg, { scale: 1, duration: 0.16, ease: 'power2.out', transformOrigin: '21% 14%' });
+    }
+    // the page can move under a still pointer (wheel, an in-page link, a version swap): re-read what is under it
+    let scanQ = 0;
+    function rescan(scrolled) {
+      if (scrolled) S.scrollT = performance.now();
+      if (!on || !S.shown || scanQ) return;
+      scanQ = requestAnimationFrame(() => { scanQ = 0; const t = P.in && d.elementFromPoint(P.x, P.y); if (t) move({ target: t }); wake(); });
+    }
+    function hide() { release(); if (!el) return; S.shown = false; el.classList.remove('is-on'); }
     function tick(dt, now) {
       if (!on || !S.shown) return false;
       if (S.target) { if (S.target.isConnected) S.tr = S.target.getBoundingClientRect(); else { S.target = S.tr = null; S.state = 'idle'; pose('idle'); } }
       // keep clear of the viewport edge: the offset swings to the other side (S1047 never cover what you point at)
       let wantOx = P.x > innerWidth - 90 ? -72 : 24, wantOy = P.y > innerHeight - 90 ? -70 : 22;
       // over a small target the companion steps aside to the target's edge instead of sitting on it (S0546 drift aside)
-      if (S.tr && S.tr.width < 380 && S.tr.height < 220) {
+      // only while the pointer is still on the target: a target scrolled out from under a still pointer must not drag
+      // the companion away with it (REBRAND step 6: the 470 px drift after an in-page link)
+      if (S.tr && S.tr.width < 380 && S.tr.height < 220 && P.x > S.tr.left - 12 && P.x < S.tr.right + 12 && P.y > S.tr.top - 12 && P.y < S.tr.bottom + 12) {
         const right = S.tr.right + 10 - P.x, left = S.tr.left - 58 - P.x;
         wantOx = S.tr.right + 60 < innerWidth ? Math.max(24, right) : Math.min(-72, left);
         wantOy = clamp(wantOy, S.tr.top - 20 - P.y, S.tr.bottom - 20 - P.y);
       }
-      const ao = 1 - Math.pow(1 - 0.12, dt * 60);
+      // while the page scrolls under a still pointer the offset holds, so the companion rests by the pointer instead
+      // of dancing round each element that passes under it; it glides to its new side once the page stops
+      const ao = now - (S.scrollT || 0) < 220 ? 0 : 1 - Math.pow(1 - 0.12, dt * 60);
       S.ox += (wantOx - S.ox) * ao; S.oy += (wantOy - S.oy) * ao;
       const tx = clamp(P.x + S.ox, 2, innerWidth - 50), ty = clamp(P.y + S.oy, 2, innerHeight - 50);
       /* Audit pack D.4: a velocity-preserving spring (stiffness 400, damping 25, mass 1, semi-implicit Euler in 4 ms
@@ -339,7 +361,7 @@
       else if (want && on && el.dataset.kind !== kind) { draw(); }
       else if (!want && on) { on = false; clear(); subs.delete(tick); hide(); root.classList.remove('has-pal'); }
     }
-    return { move, press, hide, set, sync, get kind() { return kind; }, pose: n => { S.state = n; pose(n); }, blink };
+    return { move, press, release, rescan, hide, set, sync, get kind() { return kind; }, pose: n => { S.state = n; pose(n); }, blink };
   })();
 
   /* ======================================================================================
@@ -505,7 +527,8 @@
     proof: {
       build(F) {
         const id = uid('pg');
-        F.svg.innerHTML = `<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".42" stop-color="#fff" stop-opacity=".0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset=".58" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>`;
+        const sheen = F.vr.closest('[data-bk]') ? '#fff' : 'var(--color-surface)';   // REBRAND: the role token live; backups keep their own white
+        F.svg.innerHTML = `<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:${sheen}" stop-opacity="0"/><stop offset=".42" style="stop-color:${sheen}" stop-opacity=".0"/><stop offset=".5" style="stop-color:${sheen}" stop-opacity=".55"/><stop offset=".58" style="stop-color:${sheen}" stop-opacity="0"/><stop offset="1" style="stop-color:${sheen}" stop-opacity="0"/></linearGradient></defs>`;
         const cols = F.w > 900 ? 4 : 2, rows = 2, m = 18, gw = (F.w - m * 2) / cols, gh = (F.h - m * 2) / rows;
         const g = svgEl('g', { class: 'f-mun' }, F.svg);
         for (let c = 0; c <= cols; c++) svgEl('line', { x1: m + c * gw, y1: m, x2: m + c * gw, y2: F.h - m }, g);
@@ -932,18 +955,19 @@
     slip: g => G.fromTo(g, { x: 14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: { each: 0.02, from: 'end' } }),
     unfold: g => G.fromTo(g, { scaleY: 0, opacity: 0, transformOrigin: '50% 0%' }, { scaleY: 1, opacity: 1, duration: 0.24, ease: 'power3.out', stagger: ST(g, 0.025) })
   };
-  const CLICK = {   // 11 different answers to a press
-    hammer: g => G.fromTo(g, { scaleY: 1 }, { scaleY: 0.4, duration: 0.07, ease: 'power2.in', yoyo: true, repeat: 1, transformOrigin: '50% 100%' }),
-    scatter: g => g.forEach((x, i) => { const a = hash(i + 3) * Math.PI * 2; G.fromTo(x, { x: 0, y: 0 }, { x: Math.cos(a) * 10, y: Math.sin(a) * 10, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1 }); }),
-    hop: g => G.fromTo(g, { y: 0 }, { y: -7, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, stagger: 0.03 }),
-    twirl: g => G.fromTo(g, { rotation: 0 }, { rotation: 360, duration: 0.3, ease: 'power2.inOut', stagger: 0.02 }),
-    swell: g => G.fromTo(g, { scale: 1 }, { scale: 1.6, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, stagger: { each: 0.03, from: 'center' } }),
-    slide: g => G.fromTo(g, { x: 0 }, { x: 12, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, stagger: 0.02 }),
-    shrink: g => G.fromTo(g, { scale: 1 }, { scale: 0.3, duration: 0.12, ease: 'power2.in', yoyo: true, repeat: 1 }),
-    tilt: g => G.fromTo(g, { rotation: 0 }, { rotation: -25, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1, transformOrigin: '0% 100%' }),
-    blink: g => G.fromTo(g, { opacity: 1 }, { opacity: 0.15, duration: 0.07, ease: 'none', yoyo: true, repeat: 3 }),
-    burst: g => G.fromTo(g, { scale: 1, opacity: 1 }, { scale: 2, opacity: 0, duration: 0.24, ease: 'power2.out', onComplete: () => G.set(g, { scale: 1, opacity: 1 }) }),
-    nod: g => G.fromTo(g, { rotation: 0 }, { rotation: 18, duration: 0.09, ease: 'power1.inOut', yoyo: true, repeat: 3 })
+  const CLICK = {   // 11 different answers to a press; REBRAND step 6: each one settles inside 250 ms (S1436 short),
+    // returns to rest, and never flickers opacity (the old blink and burst verbs flashed the glyphs)
+    hammer: g => G.fromTo(g, { scaleY: 1 }, { scaleY: 0.5, duration: 0.07, ease: 'power2.in', yoyo: true, repeat: 1, transformOrigin: '50% 100%' }),
+    scatter: g => g.forEach((x, i) => { const a = hash(i + 3) * Math.PI * 2; G.fromTo(x, { x: 0, y: 0 }, { x: Math.cos(a) * 6, y: Math.sin(a) * 6, duration: 0.09, ease: 'power2.out', yoyo: true, repeat: 1 }); }),
+    hop: g => G.fromTo(g, { y: 0 }, { y: -5, duration: 0.09, ease: 'power2.out', yoyo: true, repeat: 1, stagger: 0.015 }),
+    twirl: g => G.fromTo(g, { rotation: 0 }, { rotation: 180, duration: 0.2, ease: 'power2.inOut', stagger: 0.01 }),
+    swell: g => G.fromTo(g, { scale: 1 }, { scale: 1.3, duration: 0.09, ease: 'power2.out', yoyo: true, repeat: 1, stagger: { each: 0.015, from: 'center' } }),
+    slide: g => G.fromTo(g, { x: 0 }, { x: 6, duration: 0.09, ease: 'power2.out', yoyo: true, repeat: 1, stagger: 0.01 }),
+    shrink: g => G.fromTo(g, { scale: 1 }, { scale: 0.6, duration: 0.09, ease: 'power2.in', yoyo: true, repeat: 1 }),
+    tilt: g => G.fromTo(g, { rotation: 0 }, { rotation: -18, duration: 0.09, ease: 'power2.out', yoyo: true, repeat: 1, transformOrigin: '0% 100%' }),
+    blink: g => G.fromTo(g, { y: 0 }, { y: 3, duration: 0.07, ease: 'power2.in', yoyo: true, repeat: 1 }),
+    burst: g => G.fromTo(g, { scale: 1 }, { scale: 1.45, duration: 0.1, ease: 'power2.out', yoyo: true, repeat: 1 }),
+    nod: g => G.fromTo(g, { rotation: 0 }, { rotation: 14, duration: 0.08, ease: 'power1.inOut', yoyo: true, repeat: 1 })
   };
   const HV = Object.keys(HOVER), CK = Object.keys(CLICK);
   /* the table: section i, role r -> hover HV[(i + 3r) % 11], click CK[(i + 5r + 1) % 11]; both are distinct across
@@ -996,7 +1020,9 @@
       b.on(el, 'click', () => {
         if (role === 'tel') phoneCard(el);
         const s = ensure(); if (!s) return;
-        if (el._rx && !el._rx.on) { G.set(g(), { opacity: 1 }); el._rx.on = true; setTimeout(out, 700); }
+        // finish any hover tween first so the click verb starts from the shown state, never from a half-way one
+        G.getTweensOf(g()).forEach(t => t.progress(1).kill());
+        if (el._rx && !el._rx.on) { G.set(g(), { opacity: 1 }); el._rx.on = true; setTimeout(() => { if (!el.matches(':hover')) out(); }, 600); }
         CLICK[v.click](g());
       });
       b.add(() => { if (el._rx && el._rx.svg) el._rx.svg.remove(); el.classList.remove('rx-host'); delete el._rx; });
@@ -1088,8 +1114,13 @@
     Pal.set(PAL_ORDER.includes(saved) ? saved : 'sash');
     d.addEventListener('pointermove', onMove, { passive: true });
     d.addEventListener('pointerdown', e => Pal.press(e), { passive: true });
+    ['pointerup', 'pointercancel'].forEach(ev => d.addEventListener(ev, () => Pal.release(), { passive: true }));
+    d.addEventListener('visibilitychange', () => { if (d.hidden) Pal.release(); });
+    addEventListener('scroll', () => Pal.rescan(true), { passive: true });
+    d.addEventListener('click', () => Pal.rescan(), { passive: true });
+    d.addEventListener('pointermove', e => { if (!e.buttons) Pal.release(); }, { passive: true });
     root.addEventListener('pointerleave', () => { P.in = false; Pal.hide(); Halo.hide(); });
-    addEventListener('blur', () => { P.in = false; Pal.hide(); Halo.hide(); });
+    addEventListener('blur', () => { P.in = false; Pal.release(); Pal.hide(); Halo.hide(); });
     mqFine.addEventListener('change', () => Pal.sync());
     addEventListener('resize', () => recolor(), { passive: true });
   }

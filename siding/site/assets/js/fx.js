@@ -100,10 +100,11 @@
   function onMove(e) {
     if (e.pointerType && e.pointerType !== 'mouse') return;
     px = e.clientX; py = e.clientY;
+    if (pressed && !e.buttons) onUp();
     const [el, st] = resolve(e.target);
     setState(st, el);
     qx(px); qy(py);
-    if (state === 'hero' && host) {
+    if (state === 'hero' && host && host.isConnected) {   // a detached host measures 0,0: never fly to the corner
       const r = host.getBoundingClientRect();
       rx(r.left + r.width / 2 + (px - (r.left + r.width / 2)) * 0.18);
       ry(r.top + r.height / 2 + (py - (r.top + r.height / 2)) * 0.18);
@@ -149,8 +150,23 @@
   }
   function relax(h) { h.querySelectorAll('.w').forEach(w => w.style.setProperty('--hw', '0')); }
 
-  function onDown(e) { if (e.pointerType !== 'mouse') return; pressed = true; cur.classList.add('is-down'); if (state === 'drag') setGlyph('minus'); if (state === 'view') setGlyph('plus', 45); }
-  function onUp() { pressed = false; if (!cur) return; cur.classList.remove('is-down'); const s = STATES[state] || STATES['']; setGlyph(s.g, s.r); }
+  /* REBRAND step 6 (S1436 micro 50-100 ms): a press only toggles one class; CSS scales the ring with the independent
+     `scale` property in 80 ms, so it never fights GSAP's x/y transform, never changes size or glyph, and is
+     released by every way a press can end (up, cancel, window blur, tab hidden, a move with no button held). After the
+     click the state is re-read from the element now under the pointer, because the click may have replaced it. */
+  function onDown(e) { if (e.pointerType !== 'mouse' || !cur) return; pressed = true; cur.classList.add('is-down'); }
+  function onUp() {
+    if (!cur) return;
+    pressed = false; cur.classList.remove('is-down');
+    requestAnimationFrame(() => { if (!enabled || px < 0) return; const t = d.elementFromPoint(px, py); const [el, st] = resolve(t); setState(st, el); });
+  }
+  function onVis() { if (d.hidden) onUp(); }
+  // the page can move under a still pointer: re-read the element under it once per frame while scrolling
+  let scanQ = 0;
+  function onScroll() {
+    if (scanQ || px < 0) return;
+    scanQ = requestAnimationFrame(() => { scanQ = 0; if (!enabled) return; const [el, st] = resolve(d.elementFromPoint(px, py)); setState(st, el); if (state !== 'hero') { rx(px); ry(py); } });
+  }
   function onLeaveDoc() { if (!cur) return; cur.classList.add('is-gone'); }
   function onEnterDoc() { if (!cur) return; cur.classList.remove('is-gone'); }
   // S1333: reset the follower when the pointer crosses into another section so it never streaks across
@@ -198,6 +214,9 @@
     d.addEventListener('pointerover', onOver, { passive: true });
     d.addEventListener('pointerdown', onDown, { passive: true });
     d.addEventListener('pointerup', onUp, { passive: true });
+    d.addEventListener('pointercancel', onUp, { passive: true });
+    d.addEventListener('visibilitychange', onVis);
+    addEventListener('scroll', onScroll, { passive: true });
     root.addEventListener('pointerleave', onLeaveDoc);
     root.addEventListener('pointerenter', onEnterDoc);
     window.addEventListener('blur', onUp);
@@ -213,6 +232,10 @@
     d.removeEventListener('pointerover', onOver);
     d.removeEventListener('pointerdown', onDown);
     d.removeEventListener('pointerup', onUp);
+    d.removeEventListener('pointercancel', onUp);
+    d.removeEventListener('visibilitychange', onVis);
+    removeEventListener('scroll', onScroll);
+    if (cur) { pressed = false; cur.classList.remove('is-down'); }
     root.removeEventListener('pointerleave', onLeaveDoc);
     root.removeEventListener('pointerenter', onEnterDoc);
     window.removeEventListener('blur', onUp);
