@@ -136,7 +136,7 @@
 .hx3-plate{position:absolute;left:-24px;right:-24px;top:-24px;bottom:-18%;will-change:transform}
 .hx3-img{width:100%;height:100%;object-fit:cover;object-position:62% 58%}
 /* phones: the longest town ("West Carrollton") must fit one line in the mask, so this headline steps down to 36px */
-@media (max-width:640px){.hx3-h{font-size:2.25rem}.hx3-fix{display:block}.hx3-slot{margin-left:-.24em}.hx3-img{object-position:80% 50%}.hx3{grid-template-rows:auto minmax(240px,1fr)}}
+@media (max-width:640px){.hx3-h{font-size:2.5rem}.hx3-fix{display:block}.hx3-slot{margin-left:-.24em}.hx3-img{object-position:80% 50%}.hx3{grid-template-rows:auto minmax(240px,1fr)}}
 
 /* ---------- v4 (R3, new): S0218 inline image typography. Real job photos sit between the headline's words at type
    height as visual punctuation; hovering one lifts a larger look in place (a transform, so no word moves); on phones the
@@ -175,7 +175,7 @@
 .hx5-row{position:relative;display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);align-items:baseline;gap:8px 24px;padding:clamp(16px,2vw,24px) 0}
 .hx5-ridge{position:absolute;left:0;top:-5px;width:100%;height:10px;overflow:visible}
 .hx5-ridge path{fill:none;stroke:var(--color-accent-solid);stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.hx5-n{margin:0;font-size:var(--t-h2);font-weight:300;line-height:1.05;letter-spacing:-.01em;color:var(--color-accent-text);font-variant-numeric:lining-nums tabular-nums;font-family:var(--f-head)}
+.hx5-n{margin:0;font-size:var(--t-h2);font-weight:300;line-height:1.05;letter-spacing:-.01em;color:var(--color-text);font-variant-numeric:lining-nums tabular-nums;font-family:var(--f-head)}
 .hx5-line{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;font-size:var(--t-h2);font-weight:700;line-height:1.08;letter-spacing:-.01em;font-family:var(--f-head)}
 .hx5-d{font-size:var(--t-label);font-weight:600;letter-spacing:0;color:var(--color-text-secondary)}
 .hx5-tel{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--color-accent-text);text-decoration-thickness:.09em;text-underline-offset:.14em;transition:text-decoration-thickness var(--dur-fast) var(--ease-x)}
@@ -186,7 +186,7 @@
 
 /* ---------- R4 directive Phase 3 (hero, all versions): the brand label, roofline contour artwork, accent heading
    phrase; V2 adds the Before/After toggle on the ba2 pair (the one genuine pair) as a business-only control */
-.hx-lab{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;margin:0;font-family:var(--f-head);font-size:var(--t-label);font-weight:600;color:var(--color-accent-text)}
+.hx-lab{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;margin:0;font-family:var(--f-head);font-size:var(--t-label);font-weight:600;color:var(--color-text-secondary)}
 .hx-lab svg{width:28px;height:auto;fill:var(--color-illustration-accent)}
 .hx-contour{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .hx-contour path{fill:none;stroke:var(--color-border);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
@@ -206,8 +206,8 @@
 @media (max-width:899px){.hx2-ba{bottom:16px;right:16px}.hx2-cap-t{display:none}}
 .hx3-copy,.hx4-in,.hx5-in{position:relative;z-index:1}
 .hx1-copy .hx-lab{margin-bottom:10px}
-.hx5-n{color:var(--color-accent-text)}
-.hx3-word{color:var(--color-accent-text)}
+.hx5-n{color:var(--color-text)}
+.hx3-word{color:var(--color-text)}
 
 /* ---------- v6 The big drawing (R4 new): a multi-part SVG illustration as the centrepiece; courses lay in once */
 .hx6{--vbg:var(--color-bg-subtle);min-height:max(640px,100svh);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,48px);align-items:center;padding:calc(var(--nav-h) + 32px) var(--gutter) calc(var(--div-h) + 32px);background:var(--color-bg-subtle);color:var(--color-text)}
@@ -251,7 +251,7 @@
 @media (hover:hover) and (pointer:fine){.hx7-card:hover{rotate:0deg;translate:0 -6px;z-index:3}}
 .hx7-card figcaption{position:absolute;left:18px;bottom:14px;font-family:var(--f-head);font-weight:600;font-size:.9375rem}
 .hx7-stamp{position:absolute;right:20px;top:20px;display:grid;justify-items:center;gap:2px;width:84px;padding:8px 6px 6px;background:var(--color-bg-surface);outline:2px dashed var(--color-accent-solid);outline-offset:-6px;rotate:4deg}
-.hx7-stamp svg{width:52px;height:52px;color:var(--color-accent-solid)}.hx7-stamp .num{font:700 .8125rem var(--f-head);color:var(--color-accent-text)}
+.hx7-stamp svg{width:52px;height:52px;color:var(--color-accent-solid)}.hx7-stamp .num{font:700 .8125rem var(--f-head);color:var(--color-text)}
 .hx7-post{position:absolute;right:96px;top:44px;width:150px;height:auto;opacity:.75}
 .hx7-post circle,.hx7-post path{fill:none;stroke:var(--color-border-strong);stroke-width:2}
 .hx7-post text{font:700 11px var(--f-head);fill:var(--color-illustration-line)}

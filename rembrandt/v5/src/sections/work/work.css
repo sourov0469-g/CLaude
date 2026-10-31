@@ -228,7 +228,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 .wv7-page{display:grid;gap:14px;padding:16px;background:var(--color-bg-surface);border-radius:4px;transform-origin:50% 0}
 .wv7-page img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:2px}
 .wv7-card{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border-top:2px solid var(--color-border-strong);padding-top:10px}
-.wv7-card dt{font:600 var(--t-label) var(--f-head);color:var(--color-accent-text)}.wv7-card dd{margin:2px 0 0;font-weight:600}
+.wv7-card dt{font:600 var(--t-label) var(--f-head);color:var(--color-text-secondary)}.wv7-card dd{margin:2px 0 0;font-weight:600}
 @media (max-width:899px){.wv7{grid-template-columns:1fr}.wv7-card{grid-template-columns:1fr 1fr}}
 /* v8 house-shaped mosaic */
 .wv8-head,.wv8-wall{max-width:1280px;margin-inline:auto}

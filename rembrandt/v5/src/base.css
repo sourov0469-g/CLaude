@@ -48,7 +48,11 @@
      graphic hero, --t-h2 every H2 (48px at 1440; one step under the hero, 2.8x the body), all weight 700; --t-mark the
      display graphics that are not headings (Call V1's giant word); --t-label the one label role (sentence case, 14px, 0
      tracking), replacing every tracked caps kicker (C1) */
-  --t-hero:clamp(2.5rem,.5rem + 5.3vw,3.75rem); --t-h1:clamp(2.25rem,1.5rem + 1.6vw,3rem); --t-h2:clamp(2rem,1.2rem + 2.4vw,3rem);
+  --t-hero:clamp(2.5rem,.5rem + 5.3vw,3.75rem); --t-h1:var(--t-hero); --t-h2:clamp(1.625rem,1.1rem + 1.9vw,2.5rem);
+  /* R6 hierarchy (visual-hierarchy S1434): four levels, adjacent levels 1.5x apart or a weight step. L1 page title (the
+     H1 of every hero and inner head, 60px at 1440, 40px on phones), L2 section heading (40px / 26px: 1.5x and 1.54x under
+     L1), L3 body (17px, 400; L2 is 2.35x), L4 labels and fine print (14px, weight 600 against the body's 400, secondary
+     colour). Records shown as backups keep the scale they were built with (below). */
   --t-mark:clamp(5rem,14vw,13rem); --t-label:.875rem;
   --t-body:1.0625rem; --t-small:.875rem;
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s12:48px;--s16:64px;--s24:96px;--s32:128px;--s40:160px;--s48:192px;
@@ -77,10 +81,11 @@ button,input{font:inherit;color:inherit}
 /* type */
 .t-display{font-size:var(--t-display);font-weight:800;line-height:1;letter-spacing:-.018em;text-wrap:pretty;font-family:var(--f-head)}
 .t-h2{font-size:var(--t-h2);font-weight:700;line-height:1.05;letter-spacing:-.01em;text-wrap:pretty;font-family:var(--f-head)}
-.t-label{font-size:var(--t-label);font-weight:600;line-height:1.3;letter-spacing:0;text-transform:none;color:var(--color-accent-text)}
+.t-label{font-size:var(--t-label);font-weight:600;line-height:1.3;letter-spacing:0;text-transform:none;color:var(--color-text-secondary)}
 :is([data-tone=dark]) .t-label{color:var(--color-text-secondary)}
 /* backups keep the type they were built with (audit pack A2: reachable as they were) */
-.sec.on-bk{--t-h2:clamp(2.125rem,4.4vw,4.5rem)}
+.sec.on-bk{--t-h2:clamp(2.125rem,4.4vw,4.5rem);--t-h1:clamp(2.25rem,1.5rem + 1.6vw,3rem)}
+.sec.on-rec{--t-h1:clamp(2.25rem,1.5rem + 1.6vw,3rem);--t-h2:clamp(2rem,1.2rem + 2.4vw,3rem)} /* R6: the R4 records keep their type */
 .sec.on-bk .t-h2{font-weight:800;line-height:1;letter-spacing:-.025em;text-wrap:balance}
 .t-lead{font-size:var(--t-lead);line-height:1.4;text-wrap:pretty;max-width:34ch}
 .t-small{font-size:var(--t-small);line-height:1.45}
@@ -395,7 +400,7 @@ html.cmp-on .cmp{display:block}
 
 /* R4 directive Phase 6: the inner pages' header closes on a drawn roofline (gen-pages.py dress()) */
 .pg-ridge{display:block;width:100%;height:clamp(26px,3.6vw,48px);margin-top:clamp(20px,2.6vw,32px);overflow:visible}
-.pg-ridge-e{fill:none;stroke:var(--color-accent-border);stroke-width:2;stroke-dasharray:8 8;vector-effect:non-scaling-stroke}
+.pg-ridge-e{fill:none;stroke:var(--color-border);stroke-width:2;stroke-dasharray:8 8;vector-effect:non-scaling-stroke}
 .pg-ridge-a{fill:none;stroke:var(--color-accent-solid);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 /* R5 inner pages, versioned per section (body and close sections open at 4.5rem minimum: the picker sits there): the page-head sections (sphero, abhero, cthero) and the close sections
    (spclose, abclose) share their ground, measure and type; each version adds its own layout in its section file */
@@ -425,14 +430,14 @@ html.cmp-on .cmp{display:block}
 .sc4-k,.ac4-k{margin:0;padding:12px 20px;background:var(--color-accent-subtle);color:var(--color-text);font:700 1.0625rem var(--f-head)}
 .sc4-rows,.ac4-rows{margin:0;padding:6px 20px 20px}
 .sc4-rows div,.ac4-rows div{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px dashed var(--color-border)}
-.sc4-rows dt,.ac4-rows dt{font:600 var(--t-label) var(--f-head);color:var(--color-accent-text)}
+.sc4-rows dt,.ac4-rows dt{font:600 var(--t-label) var(--f-head);color:var(--color-text-secondary)}
 .sc4-rows dd,.ac4-rows dd{margin:0;font-weight:600}.sc4-rows a,.ac4-rows a{color:var(--color-text)}
 /* v5 a photo and the three facts */
 .sc5,.ac5{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:center}
 .sc5-ph,.ac5-ph{margin:0;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--color-bg-subtle)}
 .sc5-facts,.ac5-facts{list-style:none;margin:6px 0 0;padding:0;display:grid;width:100%}
 .sc5-facts li,.ac5-facts li{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:12px;padding:12px 0;border-top:2px solid var(--color-border-strong)}
-.sc5-facts b,.ac5-facts b{font:600 var(--t-label) var(--f-head);color:var(--color-accent-text)}
+.sc5-facts b,.ac5-facts b{font:600 var(--t-label) var(--f-head);color:var(--color-text)}
 .sc5-facts a,.ac5-facts a{display:inline-flex;align-items:center;min-height:44px;margin-block:-10px;color:var(--color-text);font-weight:700} /* R5: 44px hit area, row height unchanged */
 @media (max-width:760px){.sc1-card,.ac1-card{grid-template-columns:1fr}.sc1-card>.btn,.ac1-card>.btn{grid-column:1;grid-row:auto}.sc3,.ac3,.sc4,.ac4,.sc5,.ac5{grid-template-columns:1fr}.sc3-ph,.ac3-ph{max-width:260px}}
 @media (max-width:400px){.sc2-num,.ac2-num{font-size:2.125rem}}

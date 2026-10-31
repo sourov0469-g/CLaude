@@ -33,7 +33,7 @@
 
 .ct-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .ct-chips li{padding:8px 14px;border-radius:999px;background:var(--color-bg-subtle);box-shadow:inset 0 0 0 1px var(--color-border);font-weight:600;font-size:.9375rem}
-.ct-chips li .num{margin-left:6px;color:var(--color-accent-text)}
+.ct-chips li .num{margin-left:6px;color:var(--color-text)}
 
 .ct5-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,4fr);gap:clamp(24px,4vw,64px);align-items:start}
 .ct5-find{display:grid;gap:10px}
@@ -41,7 +41,7 @@
 .ct5-in{width:100%;min-height:60px;padding:0 18px;border:2px solid var(--color-border-strong);border-radius:14px;background:var(--color-bg-surface);font:600 1.375rem var(--f-body);color:var(--color-text)}
 .ct5-in:focus-visible{outline:none;box-shadow:var(--focus)}
 .ct5-out{min-height:3.2em;font-size:var(--t-lead);line-height:1.45;font-weight:600}
-.ct5-out.is-yes{color:var(--color-accent-text)}
+.ct5-out.is-yes{color:var(--color-text)}
 .ct5-out a{color:var(--color-accent-text)}
 
 @media (max-width:899px){.ct1-row,.ct3-row,.ct5-grid{grid-template-columns:1fr}.ct2-grid{grid-template-columns:1fr}.ct2-ring{max-width:360px;justify-self:center}}

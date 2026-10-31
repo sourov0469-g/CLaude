@@ -177,7 +177,13 @@ function start(mods) {
   });
   // one filled call per view (S1435, G6 #1): the nav's call button waits until the hero's own has scrolled away
   const nav = document.querySelector('.nav'), hero = document.getElementById('hero');
-  if (nav && hero) ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom 35%', onToggle: s => nav.classList.toggle('nav--quiet', s.isActive) });
+  // R6: quiet while the shown hero version's own filled call is on screen (Hero V8 sets its call low, past the old 35% line)
+  if (nav && hero) {
+    const heroCall = () => [...hero.querySelectorAll('.btn--sun')].find(b => b.offsetParent && !b.closest('.on-bk,[hidden]'));
+    const quiet = () => { const b = heroCall(), r = b ? b.getBoundingClientRect() : hero.getBoundingClientRect(); nav.classList.toggle('nav--quiet', b ? r.bottom > 0 && r.top < innerHeight : r.bottom > innerHeight * 0.35); };
+    let qf = 0; const q = () => { if (!qf) qf = requestAnimationFrame(() => { qf = 0; quiet(); }); };
+    addEventListener('scroll', q, { passive: true }); addEventListener('resize', q); document.addEventListener('versionswap', () => setTimeout(q, 60)); quiet(); ScrollTrigger.addEventListener('refresh', q);
+  }
   // R3 D11: the per-section cursor effects are retired (Removal Test, S1314: the companion's mood accessories already do
   // their job; S1331: no trail or ripple layer); js/cursorfx.js is kept, unmounted
   // R4 nav menu (below 900px): the Menu button opens the page links; Escape or a click elsewhere closes it

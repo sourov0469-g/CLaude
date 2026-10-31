@@ -1,0 +1,16 @@
+== rembrandt-homepage.html
+PASS  storm v7: says the insurer decides the claim                                                                   
+PASS  storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               2 struck
+== services.html
+n/a   storm v7: says the insurer decides the claim                                                                   
+n/a   storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               0 struck
+== about.html
+n/a   storm v7: says the insurer decides the claim                                                                   
+n/a   storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               0 struck
+== contact.html
+n/a   storm v7: says the insurer decides the claim                                                                   
+n/a   storm v8: says the insurer decides the claim                                                                   
+PASS  no promise of claim approval (every occurrence struck through, as in Storm V3 and its backup B6)               0 struck

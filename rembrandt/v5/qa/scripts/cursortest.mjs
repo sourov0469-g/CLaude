@@ -8,7 +8,10 @@ import { createRequire } from 'node:module'; const require = createRequire(impor
 const PAGES = [['rembrandt-homepage.html', ['hero', 'proof', 'svc', 'work', 'family', 'how', 'storm', 'area', 'call'], 8], ['services.html', ['sphero', 'svcp', 'spclose'], 5], ['about.html', ['abhero', 'about', 'abclose'], 5], ['contact.html', ['cthero', 'contact'], 5]];
 const SEL = 'a[href],button,label[for],input:not([type=hidden]),select,[role=tab],summary,[tabindex]:not([tabindex="-1"])';
 const b = await chromium.launch(); const rows = []; let clicks = 0, bad = 0; const worst = { delay: 0 };
+// parallel workers: ONLY=file:1,2,3 runs just those states; NOEXTRA=1 skips the touch / reduced-motion block
+const ONLY = process.env.ONLY ? Object.fromEntries(process.env.ONLY.split(';').map(x => { const [f, vs] = x.split(':'); return [f, vs.split(',').map(Number)]; })) : null;
 for (const [file, ids, n] of PAGES) for (let v = 1; v <= n; v++) {
+  if (ONLY && !(ONLY[file] || []).includes(v)) continue;
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
   await p.goto(`file:///home/user/CLaude/rembrandt/v5/${file}?v=${ids.map(i => i + v).join(',')}`); await p.waitForTimeout(1200);
   await p.mouse.move(700, 450); await p.mouse.move(720, 460, { steps: 4 }); await p.waitForTimeout(200);
@@ -64,7 +67,7 @@ for (const [file, ids, n] of PAGES) for (let v = 1; v <= n; v++) {
   await ctx.close();
 }
 // touch and reduced motion: the native cursor, untouched
-for (const [label, opts] of [['touch', { hasTouch: true, isMobile: true, viewport: { width: 390, height: 844 } }], ['reduced motion', { reducedMotion: 'reduce', viewport: { width: 1440, height: 900 } }]]) {
+for (const [label, opts] of process.env.NOEXTRA ? [] : [['touch', { hasTouch: true, isMobile: true, viewport: { width: 390, height: 844 } }], ['reduced motion', { reducedMotion: 'reduce', viewport: { width: 1440, height: 900 } }]]) {
   const ctx = await b.newContext(opts); const p = await ctx.newPage(); await p.goto('file:///home/user/CLaude/rembrandt/v5/rembrandt-homepage.html'); await p.waitForTimeout(1000);
   if (label !== 'touch') { await p.mouse.move(600, 400); await p.mouse.move(640, 420, { steps: 3 }); }
   const r = await p.evaluate(() => ({ on: document.documentElement.classList.contains('cmp-on'), cur: getComputedStyle(document.body).cursor, shown: getComputedStyle(document.querySelector('.cmp')).display }));

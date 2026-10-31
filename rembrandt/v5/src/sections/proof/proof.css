@@ -2,7 +2,7 @@
    #317 "Proof, not promises"), v3 two proof trains ([BANK] Q161 horizontalLoop, F17 60s marquee) */
 .pv{position:relative;overflow:clip}
 .pv-cred{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-weight:600;font-size:var(--t-lead);line-height:1.35}
-.pv-cred li::before{content:"";display:inline-block;width:.42em;height:.42em;margin-right:.6em;border-radius:2px;background:var(--color-illustration-accent);vertical-align:.12em}
+.pv-cred li::before{content:"";display:inline-block;width:.42em;height:.42em;margin-right:.6em;border-radius:2px;background:var(--color-illustration-fill-strong);vertical-align:.12em}
 
 /* v1: blue field, the canvas spans the section; copy bottom-left */
 /* R3 F2-V1 (working copy; the kept original is backup B1): ink ground (C2), formation completes once the section is half
@@ -85,7 +85,7 @@
 .pv3-col{position:relative;display:inline-block;height:1.2em;overflow:hidden;margin-right:.04em;border-radius:.03em}
 .pv3-strip{display:flex;flex-direction:column;transform:translateY(-1.2em);will-change:transform}
 .pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:var(--color-text-inverse);background:linear-gradient(var(--color-illustration-accent-deep) 0 22%,color-mix(in srgb,var(--color-illustration-accent-deep) 86%,var(--color-bg-surface)) 26%,var(--color-illustration-accent-deep) 100%);box-shadow:inset 0 -.04em 0 color-mix(in oklab,var(--color-shadow) 45%,transparent),inset .04em 0 0 color-mix(in oklab,var(--color-shadow) 25%,transparent)}
-.pv3-mark{display:inline-grid;place-items:center;height:1.2em;padding:0 .04em;color:var(--color-accent-text)}
+.pv3-mark{display:inline-grid;place-items:center;height:1.2em;padding:0 .04em;color:var(--color-text)}
 .pv3-word{position:relative;margin:0;padding:.22em .12em 0;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1.2;letter-spacing:-.005em;color:var(--color-text);font-family:var(--f-head)}
 .pv3-lab{display:flex;align-items:center;gap:8px;margin:0;font-size:1.0625rem;font-weight:600;color:var(--color-text-secondary)}
 .pv3-stat--xl .pv3-lab{font-size:1.25rem;color:var(--color-text)}
@@ -138,7 +138,7 @@
 .pv4-off path{fill:var(--color-illustration-fill)}.pv4-on path{fill:var(--color-illustration-accent);stroke:var(--color-border-strong);stroke-width:.6}
 .pv4-what{font-size:1.0625rem;line-height:1.35;color:var(--color-text)}
 .pv4-frame--big .pv4-what{font-size:var(--t-lead)}
-.pv4-by{margin-top:6px;font-size:var(--t-label);font-weight:600;color:var(--color-accent-text);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.pv4-by{margin-top:6px;font-size:var(--t-label);font-weight:600;color:var(--color-text-secondary);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
 .pv4-glare{position:absolute;inset:12px;pointer-events:none;overflow:hidden;opacity:0}
 .pv4-frame--big .pv4-glare{inset:16px}
 .pv4-glare::before{content:"";position:absolute;inset:-20% -60%;background:var(--glare,linear-gradient(105deg,transparent 35%,color-mix(in oklab,var(--color-shadow) 55%,transparent) 50%,transparent 65%));translate:-100% 0;mix-blend-mode:soft-light}
@@ -202,7 +202,7 @@
 .pv6-c,.pv6-k{stroke:var(--color-bg-surface);stroke-width:3;fill:none}
 .pv6-edge{fill:none;stroke:var(--color-border-strong);stroke-width:4;stroke-linejoin:round}
 .pv6-meter figcaption{display:flex;align-items:baseline;gap:12px;font-family:var(--f-head);font-weight:600}
-.pv6-meter figcaption b{font-size:clamp(3rem,2rem + 3vw,4.5rem);line-height:1;color:var(--color-accent-text)}
+.pv6-meter figcaption b{font-size:clamp(3rem,2rem + 3vw,4.5rem);line-height:1;color:var(--color-text)}
 .pv6-tally{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;align-content:start}
 .pv6-tally i{aspect-ratio:1;border-radius:2px;background:var(--color-illustration-accent-soft)}
 .pv6-tally i:nth-child(7n){background:var(--color-accent-solid-hover)}
