@@ -979,7 +979,7 @@ The site has two custom cursor layers, both `pointer-events: none` over the nati
 | 9a70add | Step 6: the cursor click made stable (ring, companion, click verbs); `qa/v9/cursor.js` |
 | 3621246 | QA round 2, part 1: press CSS, selected rings, focus marks, halo and sheen tokens, phone-width hierarchy, `mood.md` and `voice.md`, QA scripts |
 | 78447a7 | QA round 2, part 2: isolation inflation removed from charts and drawings (`qa/v9/teal.js`/`.py`, `accent.js`) |
-| (final) | QA round 2, part 3: paint-label ink as a role token (`--neutral-13`), teal headings and labels made neutral, all 9 standalone files repacked, this brand sheet and the gate evidence |
+| 5ff9b8a | QA round 2, part 3: paint-label ink as a role token (`--neutral-13`), teal headings and labels made neutral, all 9 standalone files repacked, this brand sheet and the gate evidence |
 
 ## Facts
 The facts grep still passes exactly as before.
