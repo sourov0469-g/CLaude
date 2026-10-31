@@ -32,7 +32,7 @@ export function initCursorFx() {
   const tone = new WeakMap(); // live version root -> is its background dark? (a swap brings a new root, so a fresh reading)
   const dark = (sec, root) => { // the section's painted background (--sec-bg, set by main.js paintBg for the live version)
     if (tone.has(root)) return tone.get(root);
-    const probe = document.createElement('i'); probe.style.cssText = 'position:absolute;width:0;height:0;color:var(--sec-bg,#fff)'; sec.append(probe);
+    const probe = document.createElement('i'); probe.style.cssText = 'position:absolute;width:0;height:0;color:var(--sec-bg,var(--color-bg))'; sec.append(probe);
     const m = getComputedStyle(probe).color.match(/[\d.]+/g) || [255, 255, 255]; probe.remove();
     const [r, g, b] = m.map(Number).map(v => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
     const d = 0.2126 * r + 0.7152 * g + 0.0722 * b < 0.25; tone.set(root, d); return d;

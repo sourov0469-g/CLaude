@@ -97,7 +97,7 @@
 .fm3-pill:nth-child(3){translate:0 -50%}.fm3-pill:nth-child(4){translate:-100% -50%}
 @media (hover:hover) and (pointer:fine){.fm3-pill:hover{border-color:var(--color-accent-solid)}}
 .fm3-pill[aria-pressed="true"]{background:var(--color-accent-solid);color:var(--color-text-on-accent);border-color:var(--color-accent-solid)}
-.fm3-pill[aria-pressed="true"] b{color:var(--color-text)}
+.fm3-pill[aria-pressed="true"] b{color:var(--color-text-on-accent)}
 /* R24: hover lights the member and its leader glows; press drives a roofing tack through the pill's top edge and it
    stays while the pill is pinned */
 .fm3-leads path.is-on{filter:drop-shadow(0 0 5px var(--color-accent-border))}

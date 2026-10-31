@@ -200,7 +200,7 @@
 .hx2-ba-b[aria-pressed="true"]{background:var(--color-accent-solid);color:var(--color-text-on-accent)}
 @media (hover:hover) and (pointer:fine){.hx2-ba-b[aria-pressed="false"]:hover{background:var(--color-bg-subtle)}}
 .hx2-ba-b:active{scale:.96}
-.hx2-cap-t{position:absolute;right:clamp(16px,3vw,40px);bottom:calc(clamp(64px,8vw,104px) + 64px);z-index:2;max-width:min(60%,280px);text-align:right;padding:8px 14px;border-radius:10px;background:rgb(255 255 255 / .9);font-size:var(--t-small);font-weight:600;color:var(--color-text)}
+.hx2-cap-t{position:absolute;right:clamp(16px,3vw,40px);bottom:calc(clamp(64px,8vw,104px) + 64px);z-index:2;max-width:min(60%,280px);text-align:right;padding:8px 14px;border-radius:10px;background:color-mix(in oklab,var(--color-bg-surface) 90%,transparent);font-size:var(--t-small);font-weight:600;color:var(--color-text)}
 .hx2-cut-l{stroke:var(--color-accent-solid)}
 .hx2-cut-c{stroke:var(--color-border-strong)}
 @media (max-width:899px){.hx2-ba{bottom:16px;right:16px}.hx2-cap-t{display:none}}

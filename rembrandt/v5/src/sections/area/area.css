@@ -36,7 +36,7 @@
 .tw1-list button .mi{font-weight:600;color:var(--color-text-secondary);margin-left:6px}
 @media (hover:hover) and (pointer:fine){.tw1-list button:hover{border-color:var(--color-accent-solid)}}
 .tw1-list button[aria-pressed="true"]{background:var(--color-accent-solid);color:var(--color-text-on-accent);border-color:var(--color-accent-solid)}
-.tw1-list button[aria-pressed="true"] .mi{color:var(--color-text)}
+.tw1-list button[aria-pressed="true"] .mi{color:var(--color-text-on-accent)} /* R6: on the solid accent, the label colour (was 3.21:1) */
 .tw1-more{justify-self:start;min-height:44px;padding:0;border:0;background:none;color:var(--color-accent-text);font-weight:700;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
 @media (max-width:900px){.tw1-grid{grid-template-columns:1fr}.tw1-mapwrap{max-height:none}}
 @media (max-width:640px){.tw1-mapwrap{display:none}}

@@ -54,7 +54,7 @@ export const VARIANTS = {
     <ellipse class="sh" cx="32" cy="61.5" rx="14" ry="2.6" fill="${INK}" opacity=".16"/>
     <g class="bd">
       <path class="drp" d="M32 5 C 38 15 50 27 50 40.5 A 18 18 0 0 1 14 40.5 C 14 27 26 15 32 5 Z" fill="${CHALK}" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>
-      <path class="hl" d="M21 37 C 21 31 23.5 27 26 24.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".85"/>
+      <path class="hl" d="M21 37 C 21 31 23.5 27 26 24.5" fill="none" stroke="${PAPER}" stroke-width="2.6" stroke-linecap="round" opacity=".85"/>
       ${eye(26, 42, 4.2, CHALK)}${eye(38.5, 42, 4.2, CHALK)}
       <path class="mouth" d="M29 50.5 Q 32 53 35 50.5" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round"/>
       <g class="beads" fill="${CHALK}" stroke="${INK}" stroke-width="1.4" opacity="0"><circle cx="20" cy="-2" r="2.6"/><circle cx="32" cy="-6" r="3"/><circle cx="44" cy="-2" r="2.6"/></g>
@@ -107,7 +107,7 @@ const R = {
     hover: {
       button: ch => gsap.to(Q(ch, '.roof,.ridge,.chim'), { y: -5, rotation: -9, transformOrigin: '0% 100%', duration: 0.22, ease: 'power3.out' }),
       link: (ch, dir) => gsap.to(Q(ch, '.bd'), { rotation: 9 * dir, transformOrigin: '50% 100%', duration: 0.25, ease: 'power3.out' }),
-      image: ch => gsap.timeline().to(Q(ch, '.lid'), { scaleY: 1, duration: 0.05, ease: 'none' }).to(Q(ch, '.lid'), { scaleY: 0, duration: 0.05, ease: 'none' }).fromTo(Q(ch, '.win rect:first-child'), { fill: '#fff' }, { fill: SKY, duration: 0.3 }, '<'),
+      image: ch => gsap.timeline().to(Q(ch, '.lid'), { scaleY: 1, duration: 0.05, ease: 'none' }).to(Q(ch, '.lid'), { scaleY: 0, duration: 0.05, ease: 'none' }).fromTo(Q(ch, '.win rect:first-child'), { fill: PAPER }, { fill: SKY, duration: 0.3 }, '<'),
       card: ch => gsap.to(Q(ch, '.bd'), { scaleY: 0.86, y: 4, transformOrigin: '50% 100%', duration: 0.22, ease: 'power3.out' }),
     },
     press: {
@@ -174,15 +174,16 @@ export function initCompanion(store) {
   const look = { x: 0, y: 0 };
   // R3 D5 (S0089): velocity-keeping springs for the character (x, y) and its tilt; k 500, c 30, m 1 (zeta ~0.67)
   const SK = 500, SC = 30, sp = { x: -200, y: -200, vx: 0, vy: 0, r: 0, vr: 0 };
-  let sigTw = null, blinkTw = null;
+  let sigTw = null, blinkTw = null, pressTw = null;
   const blink = () => { if (rmQ.matches) return; if (blinkTw) blinkTw.kill(); const l = ch.querySelectorAll('.lid'); blinkTw = gsap.timeline().to(l, { scaleY: 1, duration: 0.09, ease: 'power2.out' }).to(l, { scaleY: 0, duration: 0.09, ease: 'power2.out' }); };
 
-  const want = () => { const s = store.get().companion; return VARIANTS[s] || s === 'off' ? s : rmQ.matches ? 'off' : 'house'; };
+  // R6 Step 6: reduced motion always gets the native cursor back, whatever was stored; touch is handled by fineQ in apply()
+  const want = () => { if (rmQ.matches) return 'off'; const s = store.get().companion; return VARIANTS[s] || s === 'off' ? s : 'house'; };
   function fx(kind) { // small effects outside the character: spark lines, splash ring, a falling droplet
     const r = document.createElementNS(NS, 'g'), x = cx + 23, y = cy + 44;
     r.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`); fxl.append(r);
-    if (kind === 'spark') { r.innerHTML = [0, 1, 2].map(i => `<path d="M0 0 L${[14, 0, -14][i]} ${[-8, -16, -8][i]}" stroke="${SUN}" stroke-width="2.5" stroke-linecap="round"/>`).join(''); gsap.fromTo(r.children, { scale: 0.3, opacity: 1, transformOrigin: '0 0' }, { scale: 1.2, opacity: 0, duration: 0.35, ease: 'power2.out', onComplete: () => r.remove() }); }
-    else if (kind === 'splash') { r.innerHTML = `<ellipse rx="6" ry="2" fill="none" stroke="${CHALK}" stroke-width="2"/>`; gsap.to(r.firstChild, { attr: { rx: 22, ry: 6 }, opacity: 0, duration: 0.45, ease: 'power2.out', onComplete: () => r.remove() }); }
+    if (kind === 'spark') { r.innerHTML = [0, 1, 2].map(i => `<path d="M0 0 L${[14, 0, -14][i]} ${[-8, -16, -8][i]}" stroke="${SUN}" stroke-width="2.5" stroke-linecap="round"/>`).join(''); gsap.fromTo(r.children, { scale: 0.3, opacity: 1, transformOrigin: '0 0' }, { scale: 1.2, opacity: 0, duration: 0.22, ease: 'power2.out', onComplete: () => r.remove() }); }
+    else if (kind === 'splash') { r.innerHTML = `<ellipse rx="6" ry="2" fill="none" stroke="${CHALK}" stroke-width="2"/>`; gsap.to(r.firstChild, { attr: { rx: 22, ry: 6 }, opacity: 0, duration: 0.25, ease: 'power2.out', onComplete: () => r.remove() }); }
     else if (kind === 'drip') { r.innerHTML = `<path d="M0 -6 C 2 -3 3 -1 3 1 A3 3 0 0 1 -3 1 C -3 -1 -2 -3 0 -6Z" fill="${CHALK}" stroke="${INK}" stroke-width="1.2"/>`; gsap.fromTo(r.firstChild, { y: 0, opacity: 1 }, { y: 34, opacity: 0, duration: 0.7, ease: 'power2.in', onComplete: () => r.remove() }); }
   }
   function setMood(id, sec) {
@@ -194,6 +195,14 @@ export function initCompanion(store) {
     if (m && on && !rmQ.matches) { gsap.fromTo(acc, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: 'back.out(1.7)' }); blink(); }
   }
   function resetParts() { gsap.killTweensOf(ch.querySelectorAll('*')); gsap.set(ch.querySelectorAll('.bd,.bd *'), { clearProps: 'transform,opacity' }); ch.querySelectorAll('.lid').forEach(l => gsap.set(l, { scaleY: 0 })); const lv = ch.querySelector('.lvl'), tk = ch.querySelector('.ticks'), be = ch.querySelector('.beads'), le = ch.querySelector('.lens'); [lv, tk, be].forEach(e => e && gsap.set(e, { opacity: 0 })); if (le) gsap.set(le, { opacity: 0 }); }
+  // R6 Step 6: the parts glide home in 120ms (S1436 short band) instead of snapping, so a click that changes what is under
+  // the pointer (a version swap, a tab) never makes the character jump
+  function settleParts() {
+    const parts = ch.querySelectorAll('.bd,.bd *'); gsap.killTweensOf(parts);
+    gsap.to(parts, { x: 0, y: 0, rotation: 0, scale: 1, scaleX: 1, scaleY: 1, opacity: 1, duration: 0.12, ease: 'power2.out', overwrite: true });
+    ch.querySelectorAll('.lid').forEach(l => gsap.to(l, { scaleY: 0, duration: 0.08, overwrite: true }));
+    [ch.querySelector('.lvl'), ch.querySelector('.ticks'), ch.querySelector('.beads'), ch.querySelector('.lens')].forEach(e => e && gsap.to(e, { opacity: 0, duration: 0.08, overwrite: true }));
+  }
   function build(v) {
     ch.innerHTML = VARIANTS[v].svg; mood = '';
     resetParts();
@@ -202,7 +211,7 @@ export function initCompanion(store) {
   function setHover(k, el) {
     if (k === hoverKind && el === hoverEl) return;
     if (hoverTw) { hoverTw.kill(); hoverTw = null; }
-    if (hoverKind) { resetParts(); if (idleTw) { idleTw.kill(); idleTw = R[mode].idle(ch); } }
+    if (hoverKind) { settleParts(); if (idleTw) { idleTw.kill(); idleTw = R[mode].idle(ch); } }
     if (sigTw) { sigTw.progress(1).kill(); sigTw = null; } sig.innerHTML = ''; gsap.set(sig, { clearProps: 'all' });
     hoverKind = k; hoverEl = el; root.dataset.hover = k || '';
     if (!k || rmQ.matches) return;
@@ -214,11 +223,10 @@ export function initCompanion(store) {
   function onDown(e) {
     if (!on || e.pointerType !== 'mouse') return;
     nail.classList.add('is-down'); // the nail head sets on press (precise, no lag)
-    gsap.to(pos, { opacity: 0.35, duration: 0.1, overwrite: 'auto' }); // R3 D9: see through it while pressing
     if (rmQ.matches) return;
-    const k = kindOf(e.target); if (!k || !R[mode].press[k[0]]) return;
-    const r = k[1].getBoundingClientRect(), dir = r.left + r.width / 2 < cx ? -1 : 1;
-    R[mode].press[k[0]](ch, dir, fx);
+    const k = kindOf(e.target); if (!k) return;
+    pressTw = gsap.timeline({ overwrite: true }).to(ch, { scale: 0.9, transformOrigin: '50% 100%', duration: 0.07, ease: 'power2.out' }).to(ch, { scale: 1, duration: 0.16, ease: 'power2.out' });
+    if (mode === 'hammer') fx('spark'); else if (mode === 'drop') fx('splash');
   }
   function solo() {
     const list = R[mode].solo; soloTw = list[Math.floor(Math.random() * list.length)](ch, fx);
@@ -294,7 +302,8 @@ export function initCompanion(store) {
   });
   addEventListener('pointermove', onMove, { passive: true });
   addEventListener('pointerdown', onDown, { passive: true });
-  addEventListener('pointerup', () => { nail.classList.remove('is-down'); gsap.to(pos, { opacity: 1, duration: 0.15, overwrite: 'auto' }); }, { passive: true });
+  addEventListener('pointerup', () => { nail.classList.remove('is-down'); }, { passive: true });
+  addEventListener('pointercancel', () => { nail.classList.remove('is-down'); if (pressTw) pressTw.progress(1); }, { passive: true }); // R6: never a stuck press
   addEventListener('scroll', () => { if (!on || px < -100) return; const el = document.elementFromPoint(px, py); const k = kindOf(el); setHover(k ? k[0] : null, k ? k[1] : null); }, { passive: true });
   document.addEventListener('pointerleave', () => { html.classList.remove('cmp-live'); gsap.to(root, { autoAlpha: 0, duration: 0.15 }); setHover(null, null); });
   addEventListener('blur', () => gsap.to(root, { autoAlpha: 0, duration: 0.15 }));
