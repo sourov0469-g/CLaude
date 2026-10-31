@@ -23,9 +23,9 @@
   --color-surface-rgb: 255 255 255; --color-shadow-rgb: 34 41 40;
   /* text */
   --color-text: var(--neutral-12); --color-text-secondary: var(--neutral-11); --color-text-disabled: var(--neutral-8);
-  --color-text-on-panel: var(--neutral-12); --color-text-on-panel-secondary: var(--neutral-11); --color-text-on-accent: var(--white);
+  --color-text-on-panel: var(--neutral-12); --color-text-on-panel-secondary: var(--neutral-11); --color-text-on-accent: var(--white); --color-text-on-plate: var(--neutral-12);
   /* borders */
-  --color-border-subtle: var(--neutral-6); --color-border: var(--neutral-7); --color-border-strong: var(--neutral-8); --color-separator: var(--neutral-6);
+  --color-border-subtle: var(--neutral-6); --color-border: var(--neutral-7); --color-border-strong: var(--neutral-8); --color-separator: var(--neutral-6); --color-border-control: var(--neutral-9);
   --color-focus-ring: var(--teal-9);
   /* accent: the one filled primary action, key highlights, interactive and selected states */
   --color-accent-subtle: var(--teal-3); --color-accent-subtle-hover: var(--teal-4); --color-accent-border: var(--teal-7); --color-accent-border-strong: var(--teal-8);
@@ -2887,3 +2887,13 @@ body { font-size: var(--t-body); color: var(--color-text); }
 .v:not([data-bk] *) h3 { font-size: var(--t-h3); font-weight: 600; line-height: 1.25; }
 .v:not([data-bk] *) .lead { font-size: var(--t-lead); color: var(--color-text-secondary); }
 :is(.nextstep, .nv-fine, .pg-mc-n, .pg-lv-b, .ft-note, .pk-tip, .nv-lg-note, .pg-key, .cl-note):not([data-bk] *) { font-size: var(--t-sm); color: var(--color-text-secondary); }
+/* QA round 1 fixes (measured, S0071 / S0248) */
+.v:not([data-bk] *) :is(input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea) { border-color: var(--color-border-control); }
+.cb-t[data-plate] :is(.cb-n, .cb-c):not([data-bk] *) { color: var(--color-text-on-plate); }
+.bp-step[aria-checked="true"]:not([data-bk] *) span { color: var(--color-selected-text); }
+.book-3 .snt-send:not([data-bk] *) { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
+.book-3 .snt-err:not([data-bk] *) { background: var(--color-danger-subtle); color: var(--color-danger-text); box-shadow: inset 0 0 0 1.5px var(--color-danger-border); }
+/* errors carry the danger status colour and keep their written message (S1497: never colour alone) */
+.bk-err:not([data-bk] *), .snt-e:not([data-bk] *), .fe:not([data-bk] *) { color: var(--color-danger-text); }
+.v:not([data-bk] *) [aria-invalid="true"] { border-color: var(--color-danger-solid); }
+.sec:not([data-bk]) .built-2 .ts-h { font-size: var(--t-h3); font-weight: 600; line-height: 1.2; }   /* S1434: card titles are level 3 */

@@ -872,7 +872,7 @@
       const col = $$('.cmp-col', r)[k], now = $('[data-now]', col), code = $('[data-code]', col), sws = $$('.cmp-sw', set);
       sws.forEach(sw => b.on(sw, 'click', () => {
         sws.forEach(x => x.setAttribute('aria-pressed', x === sw));
-        col.style.setProperty('--c', sw.dataset.hex); col.style.setProperty('--ink', sw.dataset.ink);
+        col.style.setProperty('--c', sw.dataset.hex); col.style.setProperty('--color-text', sw.dataset.ink);
         now.textContent = sw.dataset.name; code.textContent = sw.dataset.code;
       }));
     });
@@ -890,7 +890,7 @@
     const box = t => { const g = stage.getBoundingClientRect(), q = t.getBoundingClientRect(); return `inset(${q.top - g.top}px ${g.right - q.right}px ${g.bottom - q.bottom}px ${q.left - g.left}px round 10px)`; };
     const open = t => {
       from = t;
-      sheet.style.setProperty('--c', t.dataset.hex); sheet.style.setProperty('--ink', t.dataset.ink);
+      sheet.style.setProperty('--c', t.dataset.hex); sheet.style.setProperty('--color-text', t.dataset.ink);
       f('sys').textContent = t.dataset.sys; f('name').textContent = t.dataset.name; f('code').textContent = t.dataset.code; f('hex').textContent = t.dataset.hex;
       f('note').textContent = t.dataset.sys === 'Sherwin-Williams' ? 'Painted on site, with free colour matching.' : 'Baked on at the factory, with Arctic White trim.';
       sheet.hidden = false;
