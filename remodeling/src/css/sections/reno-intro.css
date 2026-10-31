@@ -34,7 +34,7 @@
 .ri2__gap { stroke: var(--color-art-accent); stroke-width: 2; stroke-dasharray: 4 4; }
 .ri2__one rect { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 2; }
 .ri2__one text { font: 600 20px/1 var(--f-display); fill: var(--color-art-line); text-anchor: middle; }
-.ri2__t { font: 600 13px/1 var(--f-text); fill: var(--color-art-line-soft); }
+.ri2__t { font: 600 13px/1 var(--f-text); fill: var(--color-art-line); }
 .ri2__five, .ri2__one { transition: opacity 400ms var(--ease-out); }
 .ri2.is-five .ri2__one, .ri2:not(.is-five) .ri2__five { opacity: 0; }
 .ri2__cap { margin-top: 12px; font: 600 .8125rem/1.45 var(--f-text); color: var(--color-text-secondary); }
@@ -82,7 +82,7 @@
 .ri5__shell { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 4; stroke-linejoin: miter; }
 .ri5__rm { fill: var(--color-art-fill); }
 .ri5__plan { stroke: var(--color-art-accent); stroke-width: 6; stroke-linecap: round; }
-.ri5__house text { font: 600 14px/1 var(--f-text); fill: var(--color-art-line-soft); text-anchor: middle; }
+.ri5__house text { font: 600 14px/1 var(--f-text); fill: var(--color-art-line); text-anchor: middle; }
 .ri5__photos { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
 .ri5__photos figure { margin: 0; }
 .ri5__photos img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }

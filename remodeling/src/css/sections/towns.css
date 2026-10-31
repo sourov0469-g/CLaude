@@ -207,7 +207,7 @@
 .t2x__svg .td { fill: var(--color-art-line-soft); }
 .t2x__svg .td.is-hl { fill: var(--color-art-accent); }
 .t2x__svg .mark { stroke: var(--color-art-accent); stroke-width: 2; }
-.t2x__svg .rlbl { font: 600 13px/1 var(--f-text); fill: var(--color-art-line-soft); letter-spacing: 1.5px; }
+.t2x__svg .rlbl { font: 600 13px/1 var(--f-text); fill: var(--color-art-line); letter-spacing: 1.5px; }
 .t2x__hub { position: absolute; left: 50%; top: 50%; translate: -50% -50%; text-align: center; display: grid; gap: 4px; }
 .t2x__n { margin: 0; font: 400 clamp(4rem, 2rem + 6vw, 7rem)/.85 var(--f-display); }
 .t2x__nl { margin: 0; font: 400 1.25rem/1 var(--f-display); letter-spacing: -.005em; color: var(--color-text-secondary); }
@@ -252,7 +252,7 @@
 .tdr__map { display: flex; justify-content: center; }
 .tdr__svg { height: clamp(460px, 72vh, 720px); width: auto; aspect-ratio: 1000 / 2378; overflow: visible; }
 .tdr__svg .cty { fill: var(--color-art-fill); stroke: var(--color-art-accent-soft); stroke-width: 4; stroke-linejoin: round; }
-.tdr__svg .cl { font: 600 44px/1 var(--f-text); fill: var(--color-art-line-soft); letter-spacing: 3px; }
+.tdr__svg .cl { font: 600 44px/1 var(--f-text); fill: var(--color-art-line); letter-spacing: 3px; }
 .tdr__svg .dot { fill: var(--color-art-accent-soft); }
 .tdr__svg .dot.is-on { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 6; }
 .tdr__svg .route { fill: none; stroke: var(--color-art-line); stroke-width: 9; stroke-dasharray: 22 14; stroke-linecap: round; }
@@ -288,7 +288,7 @@
 .tlb__rule { display: block; width: calc(100% - var(--tlb-name)); margin-left: var(--tlb-name); height: 34px; }
 .tlb { --tlb-name: clamp(120px, 16vw, 220px); }
 .tlb__rule .tk { stroke: var(--color-art-line); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
-.tlb__rule text { font: 600 10px/1 var(--f-text); fill: var(--color-art-line-soft); }
+.tlb__rule text { font: 600 10px/1 var(--f-text); fill: var(--color-art-line); }
 .tlb__rule .base { fill: var(--color-art-fill); }
 .tlb__boards { display: grid; gap: 18px; margin-top: 8px; }
 .tlb__row { display: grid; grid-template-columns: var(--tlb-name) minmax(0, 1fr); align-items: center; }

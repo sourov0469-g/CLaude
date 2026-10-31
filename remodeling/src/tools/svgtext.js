@@ -36,7 +36,9 @@ const FILE = process.env.FILE, SECS = process.env.SECS.split(','), SLOTS = (proc
         if (!bg) for (const e of document.elementsFromPoint(x, y)) {
           if (e === t || t.contains(e)) continue;
           const ecs = getComputedStyle(e);
-          const c = e instanceof SVGElement && e.tagName !== 'svg' ? (e.tagName === 'text' ? null : rgba(ecs.fill === 'none' ? 'transparent' : ecs.fill)) : rgba(ecs.backgroundColor);
+          // an open path or a line paints no fill area (only its stroke): it is not the ground behind the text
+          const open = (e.tagName === 'line' || e.tagName === 'polyline' || (e.tagName === 'path' && !/[zZ]/.test(e.getAttribute('d') || '')));
+          const c = e instanceof SVGElement && e.tagName !== 'svg' ? (e.tagName === 'text' || open ? null : rgba(ecs.fill === 'none' ? 'transparent' : ecs.fill)) : rgba(ecs.backgroundColor);
           if (c && c[3] >= .5) { bg = c; break; }
         }
         if (!bg) { const sec = ver.closest('section'); bg = rgba(getComputedStyle(sec).backgroundColor); }

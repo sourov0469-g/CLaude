@@ -1,0 +1,18 @@
+contact-form1	head 62.2px (H1)	body 24px w400	fine 11.1px w600	head/body 2.59	body/fine 2.16 wstep 200	pass
+contact-form2	head 62.2px (H1)	body 16px w400	fine 14px w600	head/body 3.88	body/fine 1.14 wstep 200	pass
+contact-form3	head 62.2px (H1)	body 20.7px w400	fine 11.1px w600	head/body 3.00	body/fine 1.86 wstep 200	pass
+contact-form4	head 62.2px (H1)	body 24px w400	fine 13px w600	head/body 2.59	body/fine 1.85 wstep 200	pass
+contact-form5	head 62.2px (H1)	body 16px w400	fine 13px w600	head/body 3.88	body/fine 1.23 wstep 200	pass
+contact-visit1	head 37.9px (H2)	body 24px w400	fine 14px w600	head/body 1.58	body/fine 1.71 wstep 200	pass
+contact-visit2	head 37.9px (H2)	body 16px w400	fine 12.6px w600	head/body 2.37	body/fine 1.27 wstep 200	pass
+contact-visit3	head 37.9px (H2)	body 24px w400	fine 14px w600	head/body 1.58	body/fine 1.71 wstep 200	pass
+contact-visit4	head 37.9px (H2)	body 22.4px w600	fine 14px w600	head/body 1.69	body/fine 1.60 wstep 0	pass
+contact-visit5	head 37.9px (H2)	body 15px w400	fine 11.1px w600	head/body 2.53	body/fine 1.35 wstep 200	pass
+contact-area1	head 37.9px (H2)	body 24px w400	fine 14px w600	head/body 1.58	body/fine 1.71 wstep 200	pass
+contact-area2	head 37.9px (H2)	body 16px w400	fine 14px w600	head/body 2.37	body/fine 1.14 wstep 200	pass
+contact-area3	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+contact-area4	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+contact-area5	head 37.9px (H2)	body 22.5px w600	fine 14px w600	head/body 1.68	body/fine 1.61 wstep 0	pass
+
+page: L1 h1 62.2px vs median L2 h2 37.9px = 1.64
+version fails: 0

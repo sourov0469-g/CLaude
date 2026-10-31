@@ -644,3 +644,250 @@ Tools:
 - **Tokens:** L1 `--t-display` 35–62px visual; L2 `--t-head` 22–41px (L1/L2 measured 1.64 on every page); L3 `--t-body` 18–20px.
 - **Pins:** every visible h1 is pinned to L1 and every section h2 to L2.
 - **L4 weight step:** all presented text under 15px is set at weight 600 against 400 body text (125 font shorthands plus 48 standalone `font-size` rules). This is the "clear weight step" [S1434], applied by construction rather than per screen.
+
+## QA round 2 (re-measured after the round-1 fixes, all five pages)
+
+| check | result |
+|---|---|
+| Contrast, rendered HTML text (`p6qa.js`) | **0** pairs below AA on all five pages (round 1: 32 on the homepage) |
+| Contrast, SVG `<text>` (`svgtext.js`, new this round) | **0 of 129** below threshold. See the notes below the table. |
+| Accent area | 1 version above 5%: consult v8 at 6.0%, and that 6.0% is its one primary button, the role the accent exists for. Every other version is ≤ 5% (round 1: 20 versions, worst 78%). |
+| Hue drift (rendered) | **0** colours outside clay 25–50 / danger 13–23 at chroma ≥ .03 |
+| Text hierarchy (`rbtype.js`) | **0** failing versions; L1/L2 = 1.64 on every page; every version's L2/L3 ≥ 1.5 and L3→L4 ≥ 1.5× or a 200 weight step |
+| Grayscale and squint sheets (`qa/rebrand-sheets/`) | The primary button is the darkest solid mass in each view. Heading, body and fine print separate under a 6px blur. |
+
+**SVG text notes.** The tool was built this round because the contrast tool skipped SVG text; [S0071] says to measure or report "Not verified". Its first pass found 9 low pairs, all fixed:
+- Text drawn in the drawing accent (clay-500, 3.1–3.5:1) moved to `--color-accent-text`.
+- Plan labels in the soft line colour moved to the full line colour.
+- A white-on-clay-500 seal ring moved to the clay-600 fill (5.31:1).
+- The selected bar on the week ruler became the subtle state fill.
+
+Two flags were tool artefacts and the tool was corrected:
+- A halo label: white text with a dark painted outline.
+- A label over an open grid path whose default fill reads black but paints nothing.
+
+### Round 2 fixes worth naming
+
+- **The old logo was still drawn inside a visible version.** Proof v1's licence seal had the roof-E at its centre. It now carries the new mark in single-colour white, and a search of every visible block and script found no other drawn copy.
+- **Towns v1's answer sign** was a 7.4%-of-view clay slab with 3.51:1 white text on it. It now uses the clay wash with dark text and a clay ring.
+- **Fine print that was really reading text** (financing ticket text, the "per" line) went back to L3 at weight 400. The L4 weight step must not make paragraphs bold.
+
+### Challenge, round 2
+
+- **Is the one 6% version a problem?** No. The accent rule is "the one filled primary action", and consult v8's primary button is simply large. Shrinking it to pass a percentage would be the tail wagging the dog.
+- **Is the type weight step honest?** It meets the letter of [S1434] ("a clear weight step") for fine print and labels. Where long copy was caught by it, the copy was moved up to L3 instead.
+- **No HIGH-severity colour finding remains.** [S0071] reporting verdict: **Approve.**
+
+## Step 6: cursor and interaction QA [S1436]
+
+**The cursor.** On fine pointers with motion on, the cursor is the exact pointer tip:
+- It is drawn at the hotspot, follows 1:1 with no easing, and leans only by rotation about the hotspot.
+- It has `pointer-events: none`, so it can never be clicked.
+- Its form changes per target in 140–160ms.
+- The press squash runs 120ms; the button pulse was cut from .3s to .2s.
+
+**Simplified.** The trailing cursor "buddy" character (springs, bounces, idle eye-rolls of 0.3–1.6s) is now opt-in and off by default:
+- It kept the page moving and did not meet "quick and interruptible" [S1436].
+- When chosen, its press/release tweens are 80ms and 150–180ms with `overwrite: 'auto'`, so rapid clicks never stack.
+
+**Stuck-state fix.** The press state used to clear only on `pointerup`. It now also clears on `pointercancel`, `lostpointercapture`, `dragend` and window blur.
+
+**Touch and reduced motion:** the native cursor returns untouched. There is no `has-buddy` class and no tip; a button computes `cursor: pointer`.
+
+**Click test** (`tools/cursortest.js`): every interactive element in every visible version of all five pages, plus nav and footer. For each element it hovers, then checks the tip sits on the pointer, presses and releases, records the click in the capture phase, and checks the tip is not left pressed.
+
+| page | elements click-tested | click reached the element | tip exactly on the pointer | stuck after release | max click delay after pointerup |
+|---|---|---|---|---|---|
+| Home | 227 | 227 | 227 | 0 | 0.9 ms |
+| Kitchens | 84 | 84 | 84 | 0 | 0.3 ms |
+| Bathrooms | 85 | 85 | 85 | 0 | 0.2 ms |
+| Renovation | 71 | 71 | 71 | 0 | 0.6 ms |
+| Contact | 94 | 94 | 94 | 0 | 0.3 ms |
+
+- **Cancelled press:** pressed during, not pressed after `pointercancel`.
+- **Skipped elements are listed by name in `qa/rb3-*-cursor.txt`.** They are not displayed at test time:
+  - closed menu-sheet items
+  - hidden form steps
+  - the back face of a turned card
+  - the tape flags that only appear when pulled (`aria-hidden`, `pointer-events: none`, by design)
+
+  Elements covered mid-animation were re-tested after a settle and passed.
+
+## FINAL BRAND SHEET
+
+### Logo: "the open course"
+
+**Rationale** [S1422 law of closure]:
+- **The bracket.** It draws the spine and two arms of an E and leaves the right side open; the eye closes it into a square, a room in plan.
+- **The tile.** It sits where the E's middle arm would be, but apart from the spine; the eye completes the arm, and the block reads as a clay tile laid in its course.
+
+Nothing the eye can supply is drawn: no container, roof or outline. "Icons do not need to be fully enclosed to be recognised" [S1422].
+
+**Proof of use:**
+- **Tested sizes:** 16/24/32/48/96 px, plus the header lockup.
+- **Versions:** pure black, pure white and the accent each keep both shapes [S0011 logo variants].
+- **Favicon:** adapts to a dark tab.
+
+**Name:** "Elbaz Construction", unchanged (Poppins Bold / Medium, outlined).
+
+**Files:**
+- `brand/v2/` holds the mark, the lockup, the stacked lockup, the single-colour versions and `favicon.svg`.
+- The old roof-E files are in `brand/v1-roof-e/`. The old mark survives only inside hidden backups.
+
+### Colour: ramps and tokens [S0071, S1418]
+
+**Accent ramp, clay**, OKLCH hue 36, generated (`brand/v2/ramps.py`):
+- 50 `#FEF3F0`
+- 100 `#F9E3DD`
+- 200 `#F5D1C6`
+- 300 `#ECB3A4`
+- 400 `#DB917C`
+- 500 `#C5735C`
+- 600 `#A45540`
+- 700 `#884432`
+- 800 `#6C3527`
+- 900 `#50291E`
+- 950 `#371C15`
+
+**Neutral ramp, sand**, hue ~70:
+- 50 `#FCF8F5`
+- 100 `#F6F0EA`
+- 200 `#EBE3DB`
+- 300 `#D9D0C7`
+- 400 `#B8B0A6`
+- 500 `#928B83`
+- 600 `#746D66`
+- 700 `#5A544E`
+- 800 `#413C38`
+- 900 `#2B2825`
+- 950 `#1B1916`
+
+**Status:** danger-600 `#B12A3E` (hue 18), form errors only.
+
+**Semantic tokens** (the only colour names in presented code; full table in `brand/v2/tokens.md`):
+
+| group | tokens |
+|---|---|
+| surfaces | `--color-bg`, `--color-bg-subtle`, `--color-bg-muted`, `--color-surface`, `--color-surface-sunken`, `--color-bg-inverse`, `--color-overlay` |
+| text | `--color-text`, `--color-text-secondary`, `--color-text-disabled`, `--color-text-inverse`, `--color-text-on-accent` |
+| borders | `--color-border-subtle`, `--color-separator`, `--color-border`, `--color-border-strong`, `--color-focus-ring` |
+| accent | `--color-accent-subtle`, `--color-accent-subtle-hover`, `--color-accent-border`, `--color-accent-solid`, `--color-accent-solid-hover`, `--color-accent-text` |
+| status | `--color-danger-text` |
+| drawings | `--color-art-line`, `--color-art-line-soft`, `--color-art-fill`, `--color-art-wash`, `--color-art-accent`, `--color-art-accent-soft` |
+
+**One accent hue, no second:** nothing on this site must be distinguished from the accent at a glance [S0071].
+
+**Measured hue numbers** (the distinctness gate):
+- Clay spans 35.2–37.7° across all 11 steps, a spread of 2.4°.
+- Nearest approach to the sister sites:
+
+| comparison | distance |
+|---|---|
+| Rembrandt green (167) | at least 129.3° |
+| Austin steel blue (248) | at least 147.2° |
+| danger hue | 17.2° (rule ≥ 15) |
+
+**Saturation:**
+- Clay chroma peaks at 0.109; the retired orange measured 0.210.
+- No rendered colour on any page falls outside the clay/danger windows.
+- No version carries more than 5% clay except one primary button at 6.0%.
+
+### Declared colour hierarchy
+
+See "Stage 2: the declared colour hierarchy" above. In short:
+- **Clay:** the one filled primary action, interactive state, and the one highlight in a drawing.
+- **Sand:** everything else.
+- **Never coloured:** headings, labels, body text, grounds, dividers, bullets, decorative surfaces and peer buttons.
+- **Danger:** form errors only.
+- **Dark sections:** none.
+
+### Text hierarchy [S1434]
+
+**Typefaces:** Poppins (display) and Roboto (text). These are 2 of the standing list; Bebas and Geist ship only for the homepage backups' records.
+
+| level | role | token | visual size | weight |
+|---|---|---|---|---|
+| L1 | page title, primary CTA | `--t-display` | 35–62px | 600 |
+| L2 | section heading | `--t-head` | 22–41px | 600 |
+| L3 | body / supporting | `--t-body` | 18–20px (supporting 15–17px) | 400 |
+| L4 | labels, fine print | under 15px | 12–14px | 600 |
+
+**Measured:** L1/L2 = 1.64, and 0 failing versions.
+
+### Measured contrast table: token pairs (`qa/brand-tokens.md`, from the shipped tokens.css)
+
+| text | `--color-text` #1B1916 | `--color-bg` #FCF8F5 | 16.61:1 | 4.5 | pass |
+| text | `--color-text` #1B1916 | `--color-bg-subtle` #F6F0EA | 15.51:1 | 4.5 | pass |
+| text | `--color-text` #1B1916 | `--color-bg-muted` #EBE3DB | 13.82:1 | 4.5 | pass |
+| text | `--color-text` #1B1916 | `--color-surface` #FFFFFF | 17.54:1 | 4.5 | pass |
+| text | `--color-text` #1B1916 | `--color-accent-subtle` #F9E3DD | 14.25:1 | 4.5 | pass |
+| text | `--color-text` #1B1916 | `--color-accent-subtle-hover` #F5D1C6 | 12.38:1 | 4.5 | pass |
+| text | `--color-text-secondary` #5A544E | `--color-bg` #FCF8F5 | 7.07:1 | 4.5 | pass |
+| text | `--color-text-secondary` #5A544E | `--color-bg-subtle` #F6F0EA | 6.60:1 | 4.5 | pass |
+| text | `--color-text-secondary` #5A544E | `--color-bg-muted` #EBE3DB | 5.88:1 | 4.5 | pass |
+| text | `--color-text-secondary` #5A544E | `--color-surface` #FFFFFF | 7.47:1 | 4.5 | pass |
+| text | `--color-text-secondary` #5A544E | `--color-accent-subtle` #F9E3DD | 6.06:1 | 4.5 | pass |
+| text | `--color-text-secondary` #5A544E | `--color-accent-subtle-hover` #F5D1C6 | 5.27:1 | 4.5 | pass |
+| text | `--color-accent-text` #884432 | `--color-bg` #FCF8F5 | 6.81:1 | 4.5 | pass |
+| text | `--color-accent-text` #884432 | `--color-bg-subtle` #F6F0EA | 6.36:1 | 4.5 | pass |
+| text | `--color-accent-text` #884432 | `--color-bg-muted` #EBE3DB | 5.67:1 | 4.5 | pass |
+| text | `--color-accent-text` #884432 | `--color-surface` #FFFFFF | 7.19:1 | 4.5 | pass |
+| text | `--color-accent-text` #884432 | `--color-accent-subtle` #F9E3DD | 5.84:1 | 4.5 | pass |
+| text | `--color-accent-text` #884432 | `--color-accent-subtle-hover` #F5D1C6 | 5.08:1 | 4.5 | pass |
+| text | `--color-danger-text` #B12A3E | `--color-bg` #FCF8F5 | 6.08:1 | 4.5 | pass |
+| text | `--color-danger-text` #B12A3E | `--color-bg-subtle` #F6F0EA | 5.68:1 | 4.5 | pass |
+| text | `--color-danger-text` #B12A3E | `--color-surface` #FFFFFF | 6.42:1 | 4.5 | pass |
+| text | `--color-danger-text` #B12A3E | `--color-accent-subtle` #F9E3DD | 5.22:1 | 4.5 | pass |
+| text | `--color-text-on-accent` #FFFFFF | `--color-accent-solid` #A45540 | 5.31:1 | 4.5 | pass |
+| text | `--color-text-on-accent` #FFFFFF | `--color-accent-solid-hover` #884432 | 7.19:1 | 4.5 | pass |
+| text | `--color-text-inverse` #FCF8F5 | `--color-bg-inverse` #413C38 | 10.31:1 | 4.5 | pass |
+| text | `--color-text-inverse` #FCF8F5 | `--color-accent-solid` #A45540 | 5.03:1 | 4.5 | pass |
+| ui | `--color-accent-solid` #A45540 | `--color-bg` #FCF8F5 | 5.03:1 | 3.0 | pass |
+| ui | `--color-accent-solid` #A45540 | `--color-bg-subtle` #F6F0EA | 4.70:1 | 3.0 | pass |
+| ui | `--color-accent-solid` #A45540 | `--color-surface` #FFFFFF | 5.31:1 | 3.0 | pass |
+| ui | `--color-border-strong` #746D66 | `--color-bg` #FCF8F5 | 4.82:1 | 3.0 | pass |
+| ui | `--color-border-strong` #746D66 | `--color-bg-subtle` #F6F0EA | 4.51:1 | 3.0 | pass |
+| ui | `--color-border-strong` #746D66 | `--color-bg-muted` #EBE3DB | 4.01:1 | 3.0 | pass |
+| ui | `--color-border-strong` #746D66 | `--color-surface` #FFFFFF | 5.09:1 | 3.0 | pass |
+| ui | `--color-focus-ring` #A45540 | `--color-bg` #FCF8F5 | 5.03:1 | 3.0 | pass |
+| ui | `--color-focus-ring` #A45540 | `--color-bg-subtle` #F6F0EA | 4.70:1 | 3.0 | pass |
+| ui | `--color-focus-ring` #A45540 | `--color-bg-muted` #EBE3DB | 4.19:1 | 3.0 | pass |
+| ui | `--color-focus-ring` #A45540 | `--color-surface` #FFFFFF | 5.31:1 | 3.0 | pass |
+| ui | `--color-focus-ring` #A45540 | `--color-accent-subtle` #F9E3DD | 4.32:1 | 3.0 | pass |
+| ui | `--color-focus-ring` #A45540 | `--color-accent-subtle-hover` #F5D1C6 | 3.75:1 | 3.0 | pass |
+| ui | `--color-accent-border` #A45540 | `--color-surface` #FFFFFF | 5.31:1 | 3.0 | pass |
+| ui | `--color-accent-border` #A45540 | `--color-accent-subtle` #F9E3DD | 4.32:1 | 3.0 | pass |
+| ui | `--color-accent-border` #A45540 | `--color-accent-subtle-hover` #F5D1C6 | 3.75:1 | 3.0 | pass |
+| graphic | `--color-art-line` #2B2825 | `--color-bg` #FCF8F5 | 13.88:1 | 3.0 | pass |
+| graphic | `--color-art-line` #2B2825 | `--color-surface` #FFFFFF | 14.66:1 | 3.0 | pass |
+| graphic | `--color-art-line` #2B2825 | `--color-art-fill` #F6F0EA | 12.96:1 | 3.0 | pass |
+| graphic | `--color-art-accent` #C5735C | `--color-bg` #FCF8F5 | 3.32:1 | 3.0 | pass |
+
+Rendered pairs: 0 failures (HTML text) and 0 failures (SVG text) across all 140 visible versions; see the QA rounds above.
+
+### Facts
+
+The facts check (`tools/facts.js`) passes with **FACTS FAILS: 0** on all five pages, exactly as before the rebrand:
+- 4.8 / 343 aggregate only
+- the licence line verbatim
+- 26 photographed projects, never 52 or 30+
+- exactly 4 before/after pairs
+- 104 municipalities (34/31/39)
+- every form carries the phone, the hours, the office and the privacy sentence, and hands off to Sales@elbazconstruction.com without claiming a send
+
+The gate check (`gatecheck.js`) reads:
+- **Homepage:** rating 4.8, reviews 343, pairs 4.
+- **All five pages:** GATE FAILS 0, including the new logo in header, footer and favicon, and no dark grounds, backups included on inner pages.
+
+### Integrity
+
+- **Backups:** all 104 hidden backups are byte-identical to 3781ab8, the last pre-rebrand commit (`tools/backupintegrity.py`). Their HTML, JS and own CSS rules are unchanged; they inherit the new token layer through record aliases.
+- **Structure unchanged:** versions, switchers and interactives are unchanged. The gate counts 10 sections × (8 + backups) on the homepage and 12 × 10 on the inner pages.
+
+### Commits
+
+- 157e825: stage 1, ramps, token tiers and logo
+- d7c3eb2: stage 2, presented code on semantic tokens, type levels and cursor tip
+- 1aa4770: QA round 1
+- 6600137: QA round 2 fixes
+- this commit: final verification, SVG text tool and brand sheet

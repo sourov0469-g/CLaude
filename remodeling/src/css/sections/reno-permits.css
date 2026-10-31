@@ -60,9 +60,9 @@
 .rp4__rule { display: block; width: 100%; height: auto; overflow: visible; padding: var(--s4); background: var(--color-surface); box-shadow: inset 0 0 0 2px var(--color-border-strong); box-sizing: border-box; }
 .rp4__rule .ax { stroke: var(--color-art-line); stroke-width: 2; }
 .rp4__rule .tk { stroke: var(--color-art-line); stroke-width: 1.5; }
-.rp4__rule .wk { font: 600 13px/1 var(--f-text); fill: var(--color-art-line-soft); text-anchor: middle; }
+.rp4__rule .wk { font: 600 13px/1 var(--f-text); fill: var(--color-art-line); text-anchor: middle; }
 .rp4__rule .bar { fill: var(--color-art-fill); stroke: var(--color-art-line); stroke-width: 1.5; transition: fill 200ms; }
-.rp4__rule .bar.is-on { fill: var(--color-art-accent); }
+.rp4__rule .bar.is-on { fill: var(--color-accent-subtle-hover); stroke: var(--color-accent-border); stroke-width: 2.5; }   /* the selected stage: state, label stays 10:1 */
 .rp4__rule .bl { font: 600 12px/1 var(--f-text); fill: var(--color-art-line); }
 .rp4__rule .cur { stroke: var(--color-art-accent); stroke-width: 3; stroke-dasharray: 5 4; }
 .rp4__range { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; margin-top: var(--s4); font: 600 .9375rem/1 var(--f-text); }

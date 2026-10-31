@@ -34,7 +34,7 @@
 .ks2__plan .rng { fill: var(--color-surface); stroke: var(--color-art-accent); stroke-width: 2.5; }
 .ks2__plan .sink { fill: var(--color-surface); stroke: var(--color-art-accent); stroke-width: 2.5; }
 .ks2__plan .pipe { fill: none; stroke: var(--color-art-accent); stroke-width: 3; stroke-dasharray: 6 5; opacity: 0; }
-.ks2__plan .lbl { font: 600 15px/1 var(--f-text); fill: var(--color-art-line-soft); text-anchor: middle; }
+.ks2__plan .lbl { font: 600 15px/1 var(--f-text); fill: var(--color-art-line); text-anchor: middle; }
 .ks2__range { display: grid; gap: 6px; }
 .ks2__rl { font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
 .ks2__range input { width: 100%; min-height: 44px; accent-color: var(--color-accent-solid); }

@@ -193,7 +193,7 @@ html.has-buddy select { cursor: default !important; }
 .dv { position: relative; width: 100%; overflow: hidden; color: var(--color-text-secondary); background: var(--color-bg); }
 .dv svg { display: block; overflow: visible; max-width: none; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
-.dv-t { font: 500 12px/1 var(--f-text); letter-spacing: .08em; fill: var(--color-art-line-soft); }
+.dv-t { font: 500 12px/1 var(--f-text); letter-spacing: .08em; fill: var(--color-art-line); }
 .dv-bg { fill: var(--color-surface); }
 .dv-steel { fill: var(--color-art-fill); stroke: var(--color-art-line-soft); stroke-width: 1; }
 .dv-web { fill: var(--color-surface); }
