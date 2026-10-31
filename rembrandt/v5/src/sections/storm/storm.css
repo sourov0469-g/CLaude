@@ -148,7 +148,7 @@ html[data-motion="reduced"] .st5-clear{opacity:.35}html[data-motion="reduced"] .
 .st8-hrs{color:var(--color-text-secondary)}
 .st8-sheet{position:relative;display:grid;gap:14px;padding:clamp(18px,3vw,32px);background:var(--color-bg-surface);border-radius:6px;rotate:1.2deg;box-shadow:0 0 0 1px var(--color-border-subtle),0 36px 60px -36px color-mix(in oklab,var(--color-shadow) 55%,transparent)}
 .st8-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid var(--color-border-strong);font:600 .9375rem/1.2 var(--f-head)}
-.st8-top svg{width:34px;fill:var(--color-illustration-accent)}.st8-top b{font-size:1.125rem}.st8-top span{margin-left:auto;color:var(--color-text-secondary)}
+.st8-top svg{width:34px;fill:none}.st8-top b{font-size:1.125rem}.st8-top span{margin-left:auto;color:var(--color-text-secondary)}
 .st8-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .st8-photos figure{margin:0;display:grid;gap:6px}
 .st8-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;background:var(--color-bg-subtle)}

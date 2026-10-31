@@ -25,7 +25,7 @@
 .ct-ring{width:100%;height:auto;overflow:visible}
 .ct-ring-c{fill:none;stroke:var(--color-border);stroke-dasharray:3 4}
 .ct-ring-t{font:600 9px var(--f-head);fill:var(--color-illustration-accent-deep)}
-.ct-ring-dot{fill:var(--color-illustration-accent)}.ct-ring-home{fill:var(--color-illustration-line)}
+.ct-ring-dot{fill:var(--color-illustration-accent-deep)} /* R7: data points need 3:1; lime dots on white were 1.58 */.ct-ring-home{fill:var(--color-illustration-line)}
 .ct-towns--near li{padding:7px 0}
 
 .ct-towns--cols{display:block;columns:3 10rem;column-gap:28px}

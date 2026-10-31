@@ -124,7 +124,7 @@ html[data-motion="reduced"] .sv5-list,html.no-js .sv5-list{position:static;width
 .sq-ground{stroke:var(--color-border-strong);stroke-width:2.5}
 .sq-wall{fill:var(--color-illustration-paper);stroke:var(--color-border-strong);stroke-width:2.5}
 .sq-lap{stroke:var(--color-border-subtle);stroke-width:2}
-.sq-door{fill:var(--color-illustration-accent);stroke:var(--color-border-strong);stroke-width:2.5}
+.sq-door{fill:var(--color-illustration-fill);stroke:var(--color-border-strong);stroke-width:2.5}
 .sq-roof{fill:var(--color-illustration-line);stroke:var(--color-border-strong);stroke-width:2.5;stroke-linejoin:round}
 .sq-course{stroke:color-mix(in oklab,var(--color-bg-surface) 16%,transparent);stroke-width:2;fill:none}
 .sq-run,.sq-rise-l{stroke:var(--color-accent-solid);stroke-width:2.5;stroke-dasharray:6 6}

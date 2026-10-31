@@ -86,7 +86,7 @@ html[data-motion="reduced"] .wv1-pause{display:none}
 /* v1: a roofer's tape runs under the loop, its ticks travelling with the track; the caption rides the hook */
 .wv1-tape{will-change:transform;height:28px;margin-top:18px;padding:0}
 .wv1-blade{display:block;width:100%;height:28px}
-.wv1-blade-bg{fill:var(--color-illustration-accent)}
+.wv1-blade-bg{fill:var(--color-highlight-soft)} /* R7: a full-width tape in lime was lime wasted (S1435); the pale step keeps the tape, the hook keeps the pop */
 .wv1-blade-tk{stroke:var(--color-border-strong);stroke-width:1.4}
 #wv1-ticks path{stroke:var(--color-border-strong);stroke-width:1.4}
 .wv1-cap{display:flex;align-items:center;gap:12px}

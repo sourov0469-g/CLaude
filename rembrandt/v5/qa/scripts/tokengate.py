@@ -1,6 +1,6 @@
 # R6 token gate (critique-brand-consistency S1496 token compliance; better-colors S0071 two tiers). In every LIVE source
 # (backups and frozen helpers are byte-kept records, excluded):
-#  1. components reference colour only through the semantic tier (--color-*); primitives (--teal-*, --neutral-*,
+#  1. components reference colour only through the semantic tier (--color-*); primitives (--green-*, --lime-*, --neutral-*,
 #     --white) appear only where the tier is defined (:root and the theme scopes that repoint it);
 #  2. no legacy R4 alias (--a500, --sun, --ink, --paper ...) is referenced outside the backup-only palette blocks;
 #  3. no colour literal (hex, rgb(), hsl(), oklch()) outside :root, except alpha masks / sampling canvases, listed.
@@ -9,7 +9,7 @@ import re, glob, os
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'src'))
 live = sorted(f for f in glob.glob('**/*.css', recursive=True) + glob.glob('**/*.js', recursive=True) + glob.glob('**/*.html', recursive=True) if '/bk/' not in f and '/frozen/' not in f)
 LEGACY = r'--(a[1-9]00|a50|sun|sun-hi|ink|ink-2|paper|black|blue|blue-hi|cream|muted|n[357]00|line|sky|mist|steel|shingle|chalk|wood|on-dark-2|on-blue-muted|accent)\b'
-PRIM = r'var\(--(teal|neutral)-\d+\)|var\(--white\)'
+PRIM = r'var\(--(green|lime|teal|neutral)-\d+\)|var\(--white\)'
 def scopes(text):
     """yield (selector, body) for every rule; :root and theme scopes are where the tier is defined"""
     for m in re.finditer(r'([^{}]*)\{([^{}]*)\}', text): yield m.group(1).strip().split('\n')[-1], m.group(2)

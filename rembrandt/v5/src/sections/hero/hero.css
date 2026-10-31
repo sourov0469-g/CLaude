@@ -187,7 +187,7 @@
 /* ---------- R4 directive Phase 3 (hero, all versions): the brand label, roofline contour artwork, accent heading
    phrase; V2 adds the Before/After toggle on the ba2 pair (the one genuine pair) as a business-only control */
 .hx-lab{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;margin:0;font-family:var(--f-head);font-size:var(--t-label);font-weight:600;color:var(--color-text-secondary)}
-.hx-lab svg{width:28px;height:auto;fill:var(--color-illustration-accent)}
+.hx-lab svg{width:28px;height:auto;fill:none} /* R7: the open closure mark is never filled (the old gable was) */
 .hx-contour{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .hx-contour path{fill:none;stroke:var(--color-border);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .hx2-text{z-index:1}

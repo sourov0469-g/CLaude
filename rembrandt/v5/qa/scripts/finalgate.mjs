@@ -27,7 +27,7 @@ for (const [file, ids, n] of PAGES) {
     let deepN = 0;
     for (const x of r) {
       if (x.v !== String(v) || !x.kids) { bad++; fail.push(`${file} ${x.id}${v}: v=${x.v} kids=${x.kids}`); }
-      // R6: the deep accent ground (teal-800, L 0.065) is listed and capped at two sections per page; anything else under
+      // R6/R7: the deep ground (R7 green-900 #0e3b2c, L 0.034, HSL hue 160) is listed and capped at two sections per page; anything else under
       // L 0.05, or a large near-black panel, fails
       if (x.L < 0.12 && x.hue >= 150 && x.hue <= 200 && !x.big.length) { green.push(`${file.split('.')[0].replace('rembrandt-homepage', 'home')} ${x.id}${v} L=${x.L}`); deepN++; }
       else if (x.L < 0.05 || x.big.length) { dark.push(`${x.id}${v} L=${x.L} ${x.big.join(',')}`); bad++; }

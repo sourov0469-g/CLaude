@@ -15,29 +15,36 @@
 :root{
   --f-head:"Poppins",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; --f-body:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   /* R6 REBRAND (owner's rebrand directive; PROGRESS.md "R6 brand sheet"). Two tiers (better-colors S0071 token naming):
-     primitives are ramps named by hue and step, computed in OKLCH by build/mk-tokens.py (hue 192 held end to end, never
-     picked by eye, S0071 + color-system S1418); semantics name a ROLE and are the only tier components reference.
-     One accent ramp (teal, verdigris: the hue band the site's photographs leave empty, S1435) and one neutral ramp tinted
-     toward it (chroma 0.004-0.012, S0071 "Neutrals"). No status ramps: the site renders no status states. */
-  --teal-50:#f1f9f8; --teal-100:#d8f2f0; --teal-200:#ade9e6; --teal-300:#86d7d3; --teal-400:#61bbb7; --teal-500:#429d99; --teal-600:#347e7b; --teal-700:#2c6663; --teal-800:#274e4d; --teal-900:#1f3a38; --teal-950:#162626;
-  --neutral-50:#f7fbfa; --neutral-100:#edf2f2; --neutral-200:#e0e5e5; --neutral-300:#ccd3d3; --neutral-400:#9ea7a6; --neutral-500:#798282; --neutral-600:#5c6665; --neutral-700:#464f4f; --neutral-800:#303938; --neutral-900:#1f2727; --neutral-950:#111817;
+     primitives are ramps named by hue and step, computed in OKLCH by build/mk-tokens.py (each ramp holds its anchor's hue end
+     to end, never picked by eye, S0071 + color-system S1418); semantics name a ROLE and are the only tier components use.
+     R7 (owner's approved Figma colours, replacing the R6 teal): GREEN, anchored at green-900 = #0e3b2c (hue 167), carries the
+     primary: the solid action, selected states, brand surfaces; LIME, anchored at lime-300 = #b5db6e (hue 125), is the
+     highlight accent: the one pop per view (S1435). One neutral ramp, tinted to the green (chroma 0.004-0.012). Lime is a
+     LIGHT colour: lime fills carry deep-green text, never white (white on lime 1.58:1). No status ramps: no status states. */
+  --green-50:#f1f9f5; --green-100:#d8f4e7; --green-200:#bce7d4; --green-300:#9bd5bd; --green-400:#73ba9e; --green-500:#4b9f80; --green-600:#2a8264; --green-700:#146b50; --green-800:#19523f; --green-900:#0e3b2c; --green-950:#11281f;
+  --lime-50:#f4f9ec; --lime-100:#e2f4c7; --lime-200:#cbe998; --lime-300:#b5db6e; --lime-400:#93b941; --lime-500:#779b1c; --lime-600:#5f7c15; --lime-700:#4d6517; --lime-800:#3c4e19; --lime-900:#2d3916; --lime-950:#1e2610;
+  --neutral-50:#f7fbf9; --neutral-100:#eef2f0; --neutral-200:#e0e5e3; --neutral-300:#cdd3d0; --neutral-400:#9fa7a3; --neutral-500:#7a827f; --neutral-600:#5d6662; --neutral-700:#474f4c; --neutral-800:#313935; --neutral-900:#202724; --neutral-950:#121815;
   --white:#ffffff;
   /* surfaces */
   --color-bg:var(--neutral-50); --color-bg-subtle:var(--neutral-100); --color-bg-sunken:var(--neutral-200); --color-bg-surface:var(--white);
-  --color-bg-inverse:var(--teal-800);  /* the one deep ground (in the accent's own hue, reads teal, never black): a couple of sections per page at most */
+  --color-bg-inverse:var(--green-900);  /* the one deep ground, the owner's deep green (C 0.056, reads green, never black): a couple of sections per page at most */
   /* text: four hierarchy levels (visual-hierarchy S1434) sit on these */
   --color-text:var(--neutral-900); --color-text-secondary:var(--neutral-700); --color-text-tertiary:var(--neutral-600); --color-text-disabled:var(--neutral-500);
-  --color-text-inverse:var(--white); --color-text-inverse-secondary:var(--teal-100); --color-text-on-accent:var(--white);
+  --color-text-inverse:var(--white); --color-text-inverse-secondary:var(--green-100); --color-text-on-accent:var(--white);
   /* borders */
   --color-border-subtle:var(--neutral-200); --color-border:var(--neutral-300); --color-border-control:var(--neutral-600); --color-border-strong:var(--neutral-900);
-  --color-border-focus:var(--teal-600); --color-separator:var(--neutral-200);
-  /* accent: the ONE filled primary action per view, key highlights, interactive and selected states (S0071, S1435) */
-  --color-accent-subtle:var(--teal-50); --color-accent-subtle-hover:var(--teal-100); --color-accent-border:var(--teal-300);
-  --color-accent-solid:var(--teal-600); --color-accent-solid-hover:var(--teal-700); --color-accent-text:var(--teal-700);
+  --color-border-focus:var(--green-700); --color-separator:var(--neutral-200);
+  /* primary (deep green): the ONE filled action per view, links, interactive and selected states (S0071) */
+  --color-accent-subtle:var(--green-50); --color-accent-subtle-hover:var(--green-100); --color-accent-border:var(--green-300);
+  --color-accent-solid:var(--green-900); --color-accent-solid-hover:var(--green-800); --color-accent-text:var(--green-700);
+  /* highlight (lime): the one pop per view, markers, focal marks (S1435 "lime everywhere is lime nowhere"); always under
+     deep-green text or on a deep-green ground */
+  --color-highlight:var(--lime-300); --color-highlight-soft:var(--lime-100); --color-text-on-highlight:var(--green-900);
+  --color-icon-on-accent:var(--white); /* R7 challenge: a lime glyph on the persistent call put a second pop in every view; the pop belongs to content */
   /* illustration roles: the drawings rest in neutrals; the accent marks one focal part (S1435 "earned, not scattered") */
   --color-illustration-line:var(--neutral-900); --color-illustration-paper:var(--white); --color-illustration-fill:var(--neutral-200);
-  --color-illustration-fill-strong:var(--neutral-600); --color-illustration-accent:var(--teal-500); --color-illustration-accent-soft:var(--teal-200);
-  --color-illustration-accent-deep:var(--teal-800);
+  --color-illustration-fill-strong:var(--neutral-600); --color-illustration-accent:var(--lime-300); --color-illustration-accent-soft:var(--lime-100);
+  --color-illustration-accent-deep:var(--green-900);
   --color-shadow:var(--neutral-950);
   /* F17 trade motion law (anatomy §7b, Stronghold's measured CSS): enter/exit .15s ease, accordion .2-.28s ease-out,
      scale-in .18s ease-out, beziers (.4,0,.2,1) and (0,0,.2,1) */
@@ -73,7 +80,7 @@ button,input{font:inherit;color:inherit}
 ::selection{background:var(--color-accent-subtle-hover);color:var(--color-text)}
 /* R3 QA (S1049: focus ring at 3:1): sun on the light grounds measured 1.55:1, so light sections ring in ink, dark ones in sun */
 :focus-visible{outline:3px solid var(--focus-c,var(--color-border-strong));outline-offset:3px;border-radius:4px}
-[data-tone=dark],.ftr,.mbar,.pick,.cmp-pick{--focus-c:var(--color-illustration-accent)}
+[data-tone=dark],.ftr,.mbar,.pick,.cmp-pick{--focus-c:var(--color-border-focus)} /* R7: was the drawing accent; lime would fail 3:1 on light */
 .vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .skip{position:fixed;left:16px;top:-80px;z-index:200;background:var(--color-bg-subtle);color:var(--color-text);padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none}
 .skip:focus{top:16px}
@@ -101,6 +108,7 @@ button,input{font:inherit;color:inherit}
 .ic-arc{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 160ms var(--ease-out)}
 :is(a,button):focus-visible .ic-arc{stroke-dashoffset:0}
 .btn--sun{background:var(--color-accent-solid);color:var(--color-text-on-accent)}
+.btn--sun>svg:first-child{color:var(--color-icon-on-accent)}
 .btn--ink{background:var(--color-bg-subtle);color:var(--color-text)}
 .btn--white{background:var(--color-bg-surface);color:var(--color-text)}
 .btn svg{width:1.15em;height:1.15em;flex:none}
@@ -382,7 +390,7 @@ html.cmp-on .cmp{display:block}
 /* R4 service icons (⟦S0139⟧ flat), shared by the Services section and the Services page */
 .ic-s{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ic-s circle{fill:currentColor;stroke:none}
-.ic-s .ic-f{fill:var(--color-illustration-accent);stroke:none}
+.ic-s .ic-f{fill:var(--color-illustration-fill);stroke:none} /* R7: six lime icons in one view was lime everywhere (S1435) */
 /* R4 inner pages: the closing call panel every page ends on */
 .sp-close{max-width:1180px;margin:clamp(56px,7vw,96px) auto 0;padding:clamp(28px,4vw,48px);border-radius:18px;background:var(--color-bg-subtle);color:var(--color-text);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 32px;align-items:center}
 .sp-close-h{font-family:var(--f-head);font-size:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);font-weight:700;line-height:1.15}
@@ -458,25 +466,27 @@ html.cmp-on .cmp{display:block}
 /* R6 deep ground (the directive's "deep, clearly-coloured section in the accent's own hue", at most a couple per page):
    the Call band (V1-V5, V7), the inner pages' close V2 band, Contact head V4 and the back of its card. The semantic tier is
    repointed inside it (S0071: a theme repoints semantics, never components), so text, surfaces, lines and the one filled
-   action all invert together: the primary action becomes the light fill with the deep label (9.2:1). */
+   action all invert together: on the deep green the action becomes the lime fill with the deep-green label (7.93:1). */
 .cl1,.cl2,.cl3,.cl4,.cl5,.cl7,.sc2-band,.ac2-band,.kt4-panel,.kt2-back{
-  --color-bg:var(--teal-800); --color-bg-subtle:var(--teal-700); --color-bg-sunken:var(--teal-900); --color-bg-surface:var(--teal-700);
-  --color-text:var(--white); --color-text-secondary:var(--teal-100); --color-text-tertiary:var(--teal-200); --color-text-disabled:var(--teal-300);
-  --color-border-subtle:var(--teal-700); --color-border:var(--teal-600); --color-border-control:var(--teal-300); --color-border-strong:var(--teal-100);
-  --color-border-focus:var(--white); --color-separator:var(--teal-700);
-  --color-accent-subtle:var(--teal-700); --color-accent-subtle-hover:var(--teal-600); --color-accent-border:var(--teal-400);
-  --color-accent-solid:var(--white); --color-accent-solid-hover:var(--teal-50); --color-accent-text:var(--teal-100); --color-text-on-accent:var(--teal-800);
-  --color-illustration-line:var(--teal-50); --color-illustration-paper:var(--teal-50); --color-illustration-fill:var(--teal-700);
-  --color-illustration-fill-strong:var(--teal-500); --color-illustration-accent:var(--teal-300); --color-illustration-accent-soft:var(--teal-600);
-  --color-illustration-accent-deep:var(--teal-900); color:var(--color-text)}
+  --color-bg:var(--green-900); --color-bg-subtle:var(--green-800); --color-bg-sunken:var(--green-950); --color-bg-surface:var(--green-800);
+  --color-text:var(--white); --color-text-secondary:var(--green-100); --color-text-tertiary:var(--green-200); --color-text-disabled:var(--green-300);
+  --color-border-subtle:var(--green-800); --color-border:var(--green-700); --color-border-control:var(--green-300); --color-border-strong:var(--green-100);
+  --color-border-focus:var(--lime-300); --color-separator:var(--green-800);
+  --color-accent-subtle:var(--green-800); --color-accent-subtle-hover:var(--green-700); --color-accent-border:var(--green-400);
+  --color-accent-solid:var(--lime-300); --color-accent-solid-hover:var(--lime-200); --color-accent-text:var(--lime-200); --color-text-on-accent:var(--green-900);
+  --color-highlight:var(--lime-300); --color-highlight-soft:var(--green-800); --color-text-on-highlight:var(--green-900); --color-icon-on-accent:var(--green-900);
+  --color-illustration-line:var(--green-50); --color-illustration-paper:var(--green-50); --color-illustration-fill:var(--green-800);
+  --color-illustration-fill-strong:var(--green-400); --color-illustration-accent:var(--lime-300); --color-illustration-accent-soft:var(--green-700);
+  --color-illustration-accent-deep:var(--green-950); color:var(--color-text)}
 /* R6 brand mark (assets/brand/mark.svg; law-of-closure S1422): one stroke weight, coloured by role. In the logo the mark is
-   the brand accent (a graphic: 4.56:1 on the page, over the 3:1 floor) and the wordmark is text; elsewhere it takes currentColor */
+   the brand primary, deep green (a graphic: 11.97:1 on the page, over the 3:1 floor) and the wordmark is text; elsewhere it takes currentColor */
 .mk-g,.logo .lg-m{fill:none;stroke:currentColor;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .logo .lg-m{stroke:var(--color-accent-solid)}.logo .lg-w{fill:var(--color-text)}.logo .lg-s{fill:var(--color-text-secondary)}
 /* R6 one filled primary per view (better-colors S0071 "Fill exactly one action per view", von-restorff S1435): the persistent
    call (nav on desktop, bottom bar on phones) carries the filled accent; a section's own call button is the neutral
    secondary. The hero keeps its filled call: the nav's waits until the hero's has scrolled away (main.js). */
 .sec:not(#hero) .stage .btn--sun{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 2px var(--color-border-strong)}
+.sec:not(#hero) .stage .btn--sun>svg:first-child{color:inherit}
 @media (hover:hover) and (pointer:fine){.sec:not(#hero) .stage .btn--sun:hover{background:var(--color-bg-subtle)}}
 /* a paper object pinned to a deep band keeps the light theme (Call V7's flyer) */
-.cl7-flyer{--color-bg:var(--neutral-50); --color-bg-subtle:var(--neutral-100); --color-bg-sunken:var(--neutral-200); --color-bg-surface:var(--white); --color-bg-inverse:var(--teal-800);  /* the one deep ground (in the accent's own hue, reads teal, never black): a couple of sections per page at most */ --color-text:var(--neutral-900); --color-text-secondary:var(--neutral-700); --color-text-tertiary:var(--neutral-600); --color-text-disabled:var(--neutral-500); --color-text-inverse:var(--white); --color-text-inverse-secondary:var(--teal-100); --color-text-on-accent:var(--white); --color-border-subtle:var(--neutral-200); --color-border:var(--neutral-300); --color-border-control:var(--neutral-600); --color-border-strong:var(--neutral-900); --color-border-focus:var(--teal-600); --color-separator:var(--neutral-200); --color-accent-subtle:var(--teal-50); --color-accent-subtle-hover:var(--teal-100); --color-accent-border:var(--teal-300); --color-accent-solid:var(--teal-600); --color-accent-solid-hover:var(--teal-700); --color-accent-text:var(--teal-700); --color-illustration-line:var(--neutral-900); --color-illustration-paper:var(--white); --color-illustration-fill:var(--neutral-200); --color-illustration-fill-strong:var(--neutral-600); --color-illustration-accent:var(--teal-500); --color-illustration-accent-soft:var(--teal-200); --color-illustration-accent-deep:var(--teal-800); --color-shadow:var(--neutral-950); --focus:0 0 0 3px var(--color-bg-surface),0 0 0 6px var(--color-border-focus); --mbar:0px; color:var(--color-text)}
+.cl7-flyer{--color-bg:var(--neutral-50); --color-bg-subtle:var(--neutral-100); --color-bg-sunken:var(--neutral-200); --color-bg-surface:var(--white); --color-bg-inverse:var(--green-900); --color-text:var(--neutral-900); --color-text-secondary:var(--neutral-700); --color-text-tertiary:var(--neutral-600); --color-text-disabled:var(--neutral-500); --color-text-inverse:var(--white); --color-text-inverse-secondary:var(--green-100); --color-text-on-accent:var(--white); --color-border-subtle:var(--neutral-200); --color-border:var(--neutral-300); --color-border-control:var(--neutral-600); --color-border-strong:var(--neutral-900); --color-border-focus:var(--green-700); --color-separator:var(--neutral-200); --color-accent-subtle:var(--green-50); --color-accent-subtle-hover:var(--green-100); --color-accent-border:var(--green-300); --color-accent-solid:var(--green-900); --color-accent-solid-hover:var(--green-800); --color-accent-text:var(--green-700); --color-highlight:var(--lime-300); --color-highlight-soft:var(--lime-100); --color-text-on-highlight:var(--green-900); --color-icon-on-accent:var(--white); --color-illustration-line:var(--neutral-900); --color-illustration-paper:var(--white); --color-illustration-fill:var(--neutral-200); --color-illustration-fill-strong:var(--neutral-600); --color-illustration-accent:var(--lime-300); --color-illustration-accent-soft:var(--lime-100); --color-illustration-accent-deep:var(--green-900); --color-shadow:var(--neutral-950); --focus:0 0 0 3px var(--color-bg-surface),0 0 0 6px var(--color-border-focus); --mbar:0px; color:var(--color-text)}

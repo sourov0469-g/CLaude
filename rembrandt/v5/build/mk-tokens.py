@@ -1,13 +1,15 @@
-# R6 rebrand (REBRAND DIRECTIVE): the colour system is computed, never picked by eye (better-colors S0071 "Hold the hue
-# across the ramp ... build it with a color library"; color-system S1418 "full tonal scales"). One accent ramp and one
-# tinted neutral ramp, Tailwind 50-950 steps, in OKLCH: hue held constant end to end, chroma a fixed share of what sRGB
-# allows at each lightness (peaks mid-ramp, near-neutral at both ends), light end stepped finer (0.035-0.05 in L).
-# Prints the ramps as hex with their OKLCH coordinates and the measured WCAG 2 pairs. Run: python3 -I build/mk-tokens.py
+# R7 colour change (owner decision, supersedes the R6 teal): the system is rebuilt around the owner's approved Figma colours,
+# deep green #0e3b2c (primary: solid actions, brand surfaces) and lime #b5db6e (highlight accent: the one pop per view).
+# Still computed, never picked by eye (better-colors S0071 "hold the hue across the ramp"; color-system S1418 "full tonal
+# scales"): each ramp holds its anchor's OKLCH hue end to end, chroma a fixed share of what sRGB allows at each lightness
+# (the share is the anchor's own, so the ramp keeps the anchor's character), tapered at both ends. Each anchor is placed at
+# the step its lightness falls on and kept exact (green-900 = #0e3b2c, lime-300 = #b5db6e). One tinted neutral ramp,
+# re-tinted to the green's hue. Prints the ramps and the measured WCAG 2 pairs. Run: python3 -I build/mk-tokens.py
 import math, sys
-HUE = 192        # verdigris / patina teal: the hue band the site's photographs leave empty (see PROGRESS.md, R6 brand sheet)
+G_HEX, G_STEP = '#0e3b2c', 900     # deep green, the primary
+Y_HEX, Y_STEP = '#b5db6e', 300     # lime, the highlight accent
 L_ACC = {50: .975, 100: .942, 200: .893, 300: .826, 400: .735, 500: .64, 600: .545, 700: .47, 800: .395, 900: .325, 950: .255}
 L_NEU = {50: .984, 100: .958, 200: .918, 300: .862, 400: .72, 500: .6, 600: .5, 700: .42, 800: .335, 900: .265, 950: .2}
-SHARE = .78      # share of the sRGB chroma ceiling the accent uses (eye comfort: never the gamut edge)
 def to_lin(c): return c / 12.92 if c <= .04045 else ((c + .055) / 1.055) ** 2.4
 def to_srgb(c): return 12.92 * c if c <= .0031308 else 1.055 * c ** (1 / 2.4) - .055
 def oklch_to_rgb(L, C, H):
@@ -29,15 +31,32 @@ def ramp(Ls, H, chroma):
     for k, L in Ls.items():
         C = chroma(k, L); out[k] = (hexof(oklch_to_rgb(L, C, H)), L, C)
     return out
-# accent chroma: a share of the ceiling, tapered toward both ends so the 50 does not glow and the 950 is not ink (S0071)
+def lch_of(h):
+    r, g, b = (to_lin(int(h[i:i + 2], 16) / 255) for i in (1, 3, 5))
+    l, m, q = (.4122214708 * r + .5363137098 * g + .0514459929 * b) ** (1 / 3), (.2119034982 * r + .6806995451 * g + .1073969566 * b) ** (1 / 3), (.0883024619 * r + .2817188376 * g + .6299787005 * b) ** (1 / 3)
+    L, A, B = .2104542553 * l + .793617785 * m - .0040720468 * q, 1.9779984951 * l - 2.428592205 * m + .4505937099 * q, .0259040371 * l + .7827717662 * m - .808675766 * q
+    return L, math.hypot(A, B), math.degrees(math.atan2(B, A)) % 360
+# chroma taper toward both ends so the 50 does not glow and the 950 is not ink (S0071)
 taper = {50: .3, 100: .4, 200: .55, 300: .72, 400: .88, 500: 1, 600: 1, 700: .95, 800: .85, 900: .75, 950: .65}
-ACC = ramp(L_ACC, HUE, lambda k, L: min(.11, cmax(L, HUE) * SHARE) * taper[k])
-# neutral: tinted toward the accent hue, chroma 0.004-0.012 (S0071 "enough to measure, not enough to name")
+def anchored(hexa, step, cap):
+    L0, C0, H = lch_of(hexa); Ls = dict(L_ACC); Ls[step] = L0
+    share = C0 / (cmax(L0, H) * taper[step])          # the anchor's own share of the ceiling, held along the ramp
+    R = ramp(Ls, H, lambda k, L: min(cmax(L, H) * .98, cmax(L, H) * share, cap) * taper[k])
+    R[step] = (hexa, L0, C0); return R, H
+# the green is the calm, structural colour: chroma capped at 0.095 so its middle never turns mint (eye comfort; the pop is
+# lime's job, S1435). Lime keeps its own character up to the anchor's chroma.
+GREEN, HG = anchored(G_HEX, G_STEP, .095)
+LIME, HY = anchored(Y_HEX, Y_STEP, .2)
+HUE = HG
+# neutral: tinted toward the green's hue, chroma 0.004-0.012 (S0071 "enough to measure, not enough to name")
 NEU = ramp(L_NEU, HUE, lambda k, L: {50: .004, 100: .005, 200: .006, 300: .008, 400: .010, 500: .011, 600: .012, 700: .012, 800: .012, 900: .011, 950: .010}[k])
 if __name__ == '__main__':
-    for name, R in (('teal', ACC), ('neutral', NEU)):
-        for k, (h, L, C) in R.items(): print(f'--{name}-{k}: {h};  /* oklch({L:.3f} {C:.3f} {HUE}) */')
-    W, N50 = '#ffffff', NEU[50][0]
+    for name, R, H in (('green', GREEN, HG), ('lime', LIME, HY), ('neutral', NEU, HUE)):
+        print('  ' + ' '.join(f'--{name}-{k}:{h};' for k, (h, L, C) in R.items()))
+        for k, (h, L, C) in R.items(): print(f'    {name}-{k} {h} oklch({L:.3f} {C:.3f} {H:.0f})')
+    W, N50, N100 = '#ffffff', NEU[50][0], NEU[100][0]
     print('\nmeasured WCAG 2 pairs (ratio : 1)')
-    for k in (500, 600, 700, 800): print(f'white on teal-{k}: {cr(W, ACC[k][0]):.2f}   teal-{k} on neutral-50: {cr(ACC[k][0], N50):.2f}')
-    for k in (500, 600, 700, 800, 900, 950): print(f'neutral-{k} on neutral-50: {cr(NEU[k][0], N50):.2f}   on white: {cr(NEU[k][0], W):.2f}   on neutral-100: {cr(NEU[k][0], NEU[100][0]):.2f}')
+    for k in (500, 600, 700, 800, 900, 950): print(f'white on green-{k}: {cr(W, GREEN[k][0]):.2f}   green-{k} on neutral-50: {cr(GREEN[k][0], N50):.2f}  on neutral-100: {cr(GREEN[k][0], N100):.2f}')
+    for k in (100, 200, 300, 400, 500): print(f'green-900 on lime-{k}: {cr(GREEN[900][0], LIME[k][0]):.2f}   black on lime-{k}: {cr("#000000", LIME[k][0]):.2f}   white on lime-{k}: {cr(W, LIME[k][0]):.2f}   lime-{k} on green-900: {cr(LIME[k][0], GREEN[900][0]):.2f}   lime-{k} on white: {cr(LIME[k][0], W):.2f}')
+    for k in (100, 200): print(f'green-{k} on green-900: {cr(GREEN[k][0], GREEN[900][0]):.2f}')
+    for k in (500, 600, 700, 800, 900, 950): print(f'neutral-{k} on neutral-50: {cr(NEU[k][0], N50):.2f}   on white: {cr(NEU[k][0], W):.2f}   on neutral-100: {cr(NEU[k][0], N100):.2f}')

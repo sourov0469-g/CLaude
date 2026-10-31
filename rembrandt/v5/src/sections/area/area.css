@@ -163,7 +163,7 @@
   .tw4-t:hover,.tw4-t:focus-visible{color:var(--color-accent-text)}
   .tw4-t:hover::after,.tw4-t:focus-visible::after{background:var(--color-illustration-accent)}
   .tw4-tape{display:block;position:absolute;left:var(--gutter);right:var(--gutter);width:calc(100% - 2 * var(--gutter));height:28px;overflow:visible}
-  .tw4-blade{fill:var(--color-illustration-accent);width:100%;height:28px}
+  .tw4-blade{fill:var(--color-highlight-soft);width:100%;height:28px}
   .tw4-ticks path{stroke:var(--color-border-strong);stroke-width:1.4}
   .tw4-ticks text{font:700 11px/1 var(--f-head);fill:var(--color-illustration-line)}
 }

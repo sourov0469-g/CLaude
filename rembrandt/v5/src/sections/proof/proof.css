@@ -81,7 +81,7 @@
 .pv3-roll{position:relative;display:inline-flex;align-items:flex-end;margin:0;padding-top:.22em;font-weight:900;font-size:clamp(2.8rem,5.4vw,5rem);line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;font-family:var(--f-head)}
 .pv3-stat--xl .pv3-roll{font-size:clamp(4.6rem,12vw,10.5rem);font-family:var(--f-head)}
 /* ridge-cap rail over the row of tabs */
-.pv3-roll::before,.pv3-word::before{content:"";position:absolute;left:-.06em;right:-.06em;top:0;height:.2em;border-radius:.1em .1em .04em .04em;background:repeating-linear-gradient(90deg,var(--color-illustration-accent) 0 .46em,color-mix(in srgb,var(--color-illustration-accent) 72%,var(--color-bg-inverse)) .46em .5em);box-shadow:0 .04em 0 color-mix(in oklab,var(--color-shadow) 35%,transparent)}
+.pv3-roll::before,.pv3-word::before{content:"";position:absolute;left:-.06em;right:-.06em;top:0;height:.2em;border-radius:.1em .1em .04em .04em;background:repeating-linear-gradient(90deg,var(--color-accent-border) 0 .46em,color-mix(in srgb,var(--color-accent-border) 72%,var(--color-bg-inverse)) .46em .5em);box-shadow:0 .04em 0 color-mix(in oklab,var(--color-shadow) 35%,transparent)}
 .pv3-col{position:relative;display:inline-block;height:1.2em;overflow:hidden;margin-right:.04em;border-radius:.03em}
 .pv3-strip{display:flex;flex-direction:column;transform:translateY(-1.2em);will-change:transform}
 .pv3-cell{display:grid;place-items:center;height:1.2em;width:.78em;color:var(--color-text-inverse);background:linear-gradient(var(--color-illustration-accent-deep) 0 22%,color-mix(in srgb,var(--color-illustration-accent-deep) 86%,var(--color-bg-surface)) 26%,var(--color-illustration-accent-deep) 100%);box-shadow:inset 0 -.04em 0 color-mix(in oklab,var(--color-shadow) 45%,transparent),inset .04em 0 0 color-mix(in oklab,var(--color-shadow) 25%,transparent)}
@@ -122,7 +122,7 @@
 .pv4-wall{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:56px clamp(20px,3vw,40px);margin-top:clamp(56px,6vw,84px);padding-top:44px}
 .pv4-rail{position:absolute;left:0;top:0;width:100%;height:10px}
 .pv4-rail path{fill:none;stroke:var(--color-border-control);stroke-width:3;vector-effect:non-scaling-stroke}
-.pv4-frame{position:relative;display:block;grid-column:span 4;padding:12px;background:var(--color-illustration-accent-deep);border-radius:3px;color:var(--color-text);text-decoration:none;rotate:var(--r);
+.pv4-frame{position:relative;display:block;grid-column:span 4;padding:12px;background:var(--color-illustration-fill-strong);border-radius:3px;color:var(--color-text);text-decoration:none;rotate:var(--r);
   box-shadow:0 1px 0 color-mix(in oklab,var(--color-shadow) 12%,transparent) inset,0 22px 40px -22px color-mix(in oklab,var(--color-shadow) 70%,transparent);transition:rotate 240ms var(--ease-x),translate 240ms var(--ease-x)}
 .pv4-frame--big{grid-column:1 / span 6;grid-row:span 3;padding:16px;box-shadow:0 0 0 2px var(--color-accent-border),0 0 46px -12px color-mix(in srgb,var(--color-accent-border) 55%,transparent),0 22px 40px -22px color-mix(in oklab,var(--color-shadow) 70%,transparent)}
 .pv4-frame:nth-of-type(2){grid-column:7 / span 6}
