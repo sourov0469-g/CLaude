@@ -17,6 +17,7 @@ const BASE = process.env.QBASE || 'http://127.0.0.1:8765/';
       await p.evaluate(([id, v]) => { const t = document.querySelector(`#${id} .vsw-b[data-v="${v}"]`); if (t) t.click(); document.getElementById(id).scrollIntoView(); }, [s.id, v]);
       await p.waitForTimeout(350);
       await p.evaluate(async id => { const imgs = [...document.getElementById(id).querySelectorAll('img')]; await Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; setTimeout(r, 3000); }))); }, s.id);
+      if (process.env.HIDE_MEDIA) await p.addStyleTag({ content: 'img, picture, video, canvas, [style*="background-image"] { visibility: hidden !important; }' });   // UI paint only: the photos carry their own blues
       const el = await p.$(`#${s.id} .stage > .v`) || await p.$(`#${s.id}`);
       try { await el.screenshot({ path: path.join(OUT, `${pg}__${s.id}__${v}.png`), animations: 'disabled' }); n++; } catch (e) { console.log('skip', pg, s.id, v, e.message.slice(0, 80)); }
     }

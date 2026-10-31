@@ -137,7 +137,7 @@ def lockup2(name_fill, desc_fill, mark_fill):
 
 
 def write_rebrand():
-    accent, ink, ink2, white = '#3C678F', '#24282C', '#484E53', '#FFFFFF'   # steel-9, neutral-12, neutral-11 (steel tokens, 2026-10-31)
+    accent, ink, ink2, white = '#396791', '#24282C', '#484E53', '#FFFFFF'   # steel-9, neutral-12, neutral-11 (steel tokens, 2026-10-31)
     out = os.path.join(OUT, '2026-10-31')
     os.makedirs(out, exist_ok=True)
     W, body = lockup2(ink, ink2, accent)

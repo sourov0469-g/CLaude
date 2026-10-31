@@ -48,7 +48,9 @@ for f in sorted(glob.glob(os.path.join(sys.argv[1], '*.png'))):
     L, C, H = oklch(img); n = L.size
     dh = np.abs((H - ACC + 180) % 360 - 180)
     teal = (dh < 20) & (C > 0.03)
-    rows.append((os.path.basename(f)[:-4], 100 * (teal & (L < 0.62)).sum() / n, 100 * (teal & (L >= 0.62)).sum() / n, 100 * (C > 0.08).sum() / n))
+    win = lambda h0: 100 * ((np.abs((H - h0 + 180) % 360 - 180) < 20) & (C > 0.03)).sum() / n   # drift check: old teal 185, greens 145
+    rows.append((os.path.basename(f)[:-4], 100 * (teal & (L < 0.62)).sum() / n, 100 * (teal & (L >= 0.62)).sum() / n, 100 * (C > 0.08).sum() / n, win(185), win(145)))
 rows.sort(key=lambda r: -(r[1] + r[2]))
 print(f'views {len(rows)}; mean solid accent {np.mean([r[1] for r in rows]):.2f}% tint {np.mean([r[2] for r in rows]):.2f}%; views over 5% accent: {sum(1 for r in rows if r[1] + r[2] > 5)}')
+print(f'drift: mean share within 20 deg of 185 (old teal) {np.mean([r[4] for r in rows]):.3f}%, max {max(r[4] for r in rows):.2f}%; of 145 (green) {np.mean([r[5] for r in rows]):.3f}%, max {max(r[5] for r in rows):.2f}% ({max(rows, key=lambda r: r[5])[0]})')
 for r in rows[:25]: print(f'{r[0]:40s} solid {r[1]:5.2f}%  tint {r[2]:5.2f}%  any saturated {r[3]:5.2f}%')

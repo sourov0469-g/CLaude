@@ -12,11 +12,11 @@
   /* STEEL 2026-10-31 (owner decision; supersedes the rebrand's teal, which clashed with Rembrandt's). Two tiers
      (S0071 token-naming): primitives named by hue and step, never used in a component; semantic tokens named by role,
      the only tier components read. One accent ramp, steel blue at OKLCH hue 248 (between James Hardie Deep Ocean,
-     239.5, and slate, 248; 63 degrees from the old teal, 185), chroma held low as steel is (0.08 at step 9); one
+     239.5, and slate, 248; 63 degrees from the old teal, 185), chroma held low as steel is (0.085 at step 9; light steps 0.012-0.044: the band tint stays at 0.020 so it reads as steel sheet, not powder blue; the selected tint at 0.028 sits dE 0.022 from its grey neighbour); one
      neutral ramp tinted to the same hue at chroma 0.002-0.011 so the greys read as steel and concrete, not warm; one
      status ramp (danger: the booking form's errors, hue 27, 139 degrees away). */
   --white: #FFFFFF;
-  --steel-1: #FAFCFE; --steel-2: #EDF3F8; --steel-3: #E0E9F2; --steel-4: #D3E0EC; --steel-5: #C6D6E6; --steel-6: #B7CADE; --steel-7: #A2BBD4; --steel-8: #6D90B2; --steel-9: #3C678F; --steel-10: #315A80; --steel-11: #2C5071; --steel-12: #17293A;
+  --steel-1: #FAFCFE; --steel-2: #ECF3FA; --steel-3: #DEE9F5; --steel-4: #D0E0F0; --steel-5: #C2D6EB; --steel-6: #B2CBE4; --steel-7: #9CBCDB; --steel-8: #6790B8; --steel-9: #396791; --steel-10: #2E5A82; --steel-11: #295073; --steel-12: #16293B;
   --neutral-1: #FBFCFD; --neutral-2: #F0F2F4; --neutral-3: #E5E8EB; --neutral-4: #DBDEE2; --neutral-5: #D0D4D8; --neutral-6: #C4C8CD; --neutral-7: #B4B9BE; --neutral-8: #888D92; --neutral-9: #5E6469; --neutral-10: #52575D; --neutral-11: #484E53; --neutral-12: #24282C;
   --neutral-13: #131619;   /* one role needs it: label ink on mid-value published paints (#778184 reads 4.55:1) */
   --red-3: #FFEFED; --red-7: #DC8C83; --red-9: #B63B35; --red-11: #9E2D28;
@@ -34,7 +34,7 @@
   /* accent: the one filled primary action, key highlights, interactive and selected states */
   --color-accent-subtle: var(--steel-3); --color-accent-subtle-hover: var(--steel-4); --color-accent-border: var(--steel-7); --color-accent-border-strong: var(--steel-8);
   --color-accent-solid: var(--steel-9); --color-accent-solid-hover: var(--steel-10); --color-accent-text: var(--steel-11); --color-accent-text-strong: var(--steel-12);
-  --color-accent-text-on-panel: var(--steel-11); --color-accent-rgb: 60 103 143;
+  --color-accent-text-on-panel: var(--steel-11); --color-accent-rgb: 57 103 145;
   --color-selected-bg: var(--steel-4); --color-selected-text: var(--steel-12); --color-selected-border: var(--steel-11);
   /* status: danger */
   --color-danger-subtle: var(--red-3); --color-danger-border: var(--red-7); --color-danger-solid: var(--red-9); --color-danger-text: var(--red-11);
