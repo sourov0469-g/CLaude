@@ -1,0 +1,41 @@
+rembrandt-homepage.html logo header 1 footer 1 favicon data:image/png;
+rembrandt-homepage.html v1 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.88) how:ok(L0.956) storm:ok(L0.88) area:ok(L1) call:ok(L0.034)
+rembrandt-homepage.html v2 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.88) how:ok(L0.956) storm:ok(L0.88) area:ok(L1) call:ok(L0.034)
+rembrandt-homepage.html v3 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.88) how:ok(L0.956) storm:ok(L0.88) area:ok(L1) call:ok(L0.034)
+rembrandt-homepage.html v4 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.88) how:ok(L0.956) storm:ok(L0.88) area:ok(L1) call:ok(L0.034)
+rembrandt-homepage.html v5 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.88) how:ok(L0.956) storm:ok(L0.88) area:ok(L1) call:ok(L0.034)
+rembrandt-homepage.html v6 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.956) how:ok(L0.956) storm:ok(L0.88) area:ok(L0.956) call:ok(L0.88)
+rembrandt-homepage.html v7 hero:ok(L1) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.956) how:ok(L0.956) storm:ok(L0.88) area:ok(L0.956) call:ok(L0.034)
+rembrandt-homepage.html v8 hero:ok(L0.88) proof:ok(L1) svc:ok(L0.88) work:ok(L0.956) family:ok(L0.956) how:ok(L0.956) storm:ok(L0.88) area:ok(L0.956) call:ok(L1)
+services.html logo header 1 footer 1 favicon data:image/png;
+services.html v1 sphero:ok(L1) svcp:ok(L0.956) spclose:ok(L1)
+services.html v2 sphero:ok(L1) svcp:ok(L0.956) spclose:ok(L1)
+services.html v3 sphero:ok(L1) svcp:ok(L0.956) spclose:ok(L1)
+services.html v4 sphero:ok(L1) svcp:ok(L0.956) spclose:ok(L1)
+services.html v5 sphero:ok(L1) svcp:ok(L0.956) spclose:ok(L1)
+about.html logo header 1 footer 1 favicon data:image/png;
+about.html v1 abhero:ok(L1) about:ok(L0.956) abclose:ok(L1)
+about.html v2 abhero:ok(L1) about:ok(L0.956) abclose:ok(L1)
+about.html v3 abhero:ok(L1) about:ok(L0.956) abclose:ok(L1)
+about.html v4 abhero:ok(L1) about:ok(L0.956) abclose:ok(L1)
+about.html v5 abhero:ok(L1) about:ok(L0.956) abclose:ok(L1)
+contact.html logo header 1 footer 1 favicon data:image/png;
+contact.html v1 cthero:ok(L1) contact:ok(L1)
+contact.html v2 cthero:ok(L1) contact:ok(L1)
+contact.html v3 cthero:ok(L1) contact:ok(L1)
+contact.html v4 cthero:ok(L1) contact:ok(L1)
+contact.html v5 cthero:ok(L1) contact:ok(L1)
+dark grounds or panels: none
+deep-accent grounds (cap 2 per page view): [
+  'home call1 L=0.034 sat=0.62',
+  'home call2 L=0.034 sat=0.62',
+  'home call3 L=0.034 sat=0.62',
+  'home call4 L=0.034 sat=0.62',
+  'home call5 L=0.034 sat=0.62',
+  'home call7 L=0.034 sat=0.62',
+  'services spclose2 panel sc2-band',
+  'about abclose2 panel ac2-band',
+  'contact cthero4 panel kt4-panel'
+]
+switch/mount failures: none
+bad 0

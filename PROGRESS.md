@@ -969,3 +969,256 @@ teal-500 measures 3.22, so teal-500 never carries text. **FAIL rows: 0** (27 ren
 - 8396f55: stage 3. QA round 1-2 fixes: one meaning for the accent, honest type levels, one filled call per view.
 - 45be6f8: stage 4. Final gates, the R6 gate updates (finalgate deep-accent cap and ring-aware button check, cursor
   test timing), and this brand sheet.
+
+## R7 colour change (owner decision, 2026-10-31): deep green + lime replace the R6 teal
+
+The owner ruled the teal clash with Austin Pro Siding an issue: Austin keeps teal. This site moves to the colours from the
+owner's own Figma design, now explicitly approved for it: **deep green #0e3b2c** (primary) and **lime #b5db6e**
+(highlight accent). It was rebuilt as a system under better-colors ⟦S0071⟧, color-system ⟦S1418⟧, design-token-contrast
+⟦S0248⟧ and critique-color ⟦S1497⟧.
+- **Unchanged:** structure, versions, switchers, interactives, facts, type levels and the fixed cursor.
+- **Backups:** byte-identical (`git diff --name-status dd994a0 -- '*/bk/*'` lists 0 files).
+- **This section supersedes** the R6 colour parts above (teal ramp, teal hierarchy, R6 contrast table). The R6 logo
+  shape, type hierarchy and cursor work stand.
+
+### Ramps (`build/mk-tokens.py`, OKLCH, computed)
+**Anchors, measured:**
+- Deep green #0e3b2c is OKLCH L 0.317, C 0.056, hue 167. Lime #b5db6e is L 0.841, C 0.143, hue 125.
+- Each ramp holds its anchor's hue end to end, and each anchor sits exactly on the step its lightness falls on:
+  green-900 and lime-300.
+- Chroma along each ramp is the anchor's own share of the sRGB ceiling, tapered at both ends.
+
+**Green chroma cap:** the green is capped at C 0.095.
+- The first, uncapped run turned the middle of the ramp mint (green-400 #15c695 at C 0.148). That breaks eye comfort
+  and is off-character for a forest green.
+- Capped, the ramp runs pale sage → jade → forest: green-50 #f1f9f5 … green-500 #4b9f80 … green-700 #146b50 … green-900
+  #0e3b2c.
+
+**Lime ramp:** keeps the anchor's character: lime-100 #e2f4c7, lime-200 #cbe998, lime-300 #b5db6e, lime-400 #93b941.
+
+**Neutral:** one neutral ramp, re-tinted to the green's hue at C 0.004-0.012 (neutral-50 #f7fbf9 … neutral-900 #202724).
+
+Full table: `brand/tokens.md`.
+
+### Semantic tier (same names, repointed; components barely changed)
+| Role | Light theme | Deep-green band |
+|---|---|---|
+| Ground | `bg` neutral-50, `bg-surface` white, `bg-inverse` **green-900** | green-900; surface green-800 |
+| Text | neutral-900 / 700 / 600 | white / green-100 / green-200 |
+| Primary action (`accent-solid`) | **green-900** fill, white label; hover green-800 | **lime-300** fill, green-900 label; hover lime-200 |
+| Links (`accent-text`) | green-700 | lime-200 |
+| Selected / pressed / checked states | green-900 fill, white label | lime fill, green-900 label |
+| Focus (`border-focus`) | green-700 ring + neutral-900 outline | lime-300 |
+| Highlight (new: `highlight`, `highlight-soft`, `text-on-highlight`) | lime-300 / lime-100, deep-green text | lime-300 |
+| Drawing focal mark (`illustration-accent`) | lime-300 inside ink outlines | lime-300 |
+| Drawing deep part (`illustration-accent-deep`) | green-900 | green-950 |
+
+**Other changes:**
+- **Logo:** the R6 closure mark, now in four colours: `mark.svg` deep green, `mark-lime.svg`, `mark-black.svg` and
+  `mark-white.svg`.
+  - Header and footer use deep green on light (11.97:1).
+  - The lime mark is for deep-green grounds only (7.93:1); on white it would be 1.58:1, so it never goes there.
+- **Favicon:** the lime mark on a deep-green tile, both brand colours, legible on light and dark browser tabs.
+- **Theme colour:** #f7fbf9.
+
+### Declared colour hierarchy (R7)
+1. **Light grounds:** white and neutral-50/100 carry every page.
+2. **Deep green, the primary:**
+   - The one filled call per view (nav and hero; section calls are outlines).
+   - Links, selected, pressed and checked states, and focus.
+   - The deep-green brand bands: at most one per page view. Measured by the light gate: the homepage Call band in
+     V1-V5 and V7; Services and About close V2; Contact head V4.
+   - Deep green reads green, never black: HSL saturation 0.62 against 0.10-0.14 for the near-black neutrals. The light
+     gate now checks this rather than assuming it.
+3. **Lime, the highlight:** one pop per view at most.
+   - A drawing's focal part (inside ink outlines).
+   - A data highlight (hail season, open hours, each with a deep-green edge).
+   - A marker (the phone underline on Contact, Hero V3's highlighter behind the town name).
+   - The action fill on a deep-green band.
+   - Never text colour on light, never under white text.
+4. **Ink:** neutral-900 headings, neutral-700 body.
+
+### Rules measured on the rendered pages
+- **White on lime:** never.
+  - `qa/scripts/limewhite.mjs` finds every visible text element whose ground is lime, HTML or SVG, across all 46 states.
+  - Result: 144 such elements, all deep green or dark, all ≥ 4.5:1; **0 white**.
+  - The contrast table lists white on lime-300 (1.58) and lime-200 (1.34) as banned reference rows.
+- **White on deep green:** 12.50:1 (green-900), 9.05:1 (green-800 hover).
+- **One filled primary per view:** 0 views with two (`accentaudit.mjs`).
+- **Lime pops per view:** of 141 measured views, 105 have none, 36 have exactly one, and none have two or more.
+
+### critique-color ⟦S1497⟧ challenge round on the new palette
+**Round 1** (first build of green + lime, before fixes). Evidence: contrast table, `accentaudit.mjs`, quarter-scale contact
+sheets of all 46 visible states, grayscale captures, and a lime-on-photo measurement.
+
+| Dimension | Rating | Finding (measured) |
+|---|---|---|
+| Contrast, text | pass | Every rendered and token text pair ≥ 4.5 on the first run, white on lime never rendered. |
+| Contrast, graphics and focus | **major** | Contact V2's 23 town dots were lime on white, **1.58:1**: data needs 3:1. The focus outline for the footer, mobile bar and pickers pointed at the drawing role and would have turned lime (1.58, under the 3:1 focus floor); caught in the token tier before it rendered. |
+| Palette coherence | minor | The uncapped green ramp went mint in the middle (green-400 #15c695, C 0.148): off-character for a forest green and a high-chroma field. |
+| Semantic use | **major** | Proof V4's credential frames took exactly the call's deep green (four large deep-green objects competing with the one solid action). Two R6 label rules still *filled* the open logo mark, so the R's bowl flooded with lime (Hero V3/V6/V8, Storm V8). |
+| Lime discipline (S1435) | **major** | **Waste across the homepage:** lime full-width tapes (Work V1, Towns V4), a lime fill in all six service icons, lime caps on all eight scoreboard tiles (Proof V3) and a lime door next to the lime drag handle (squares calculator). **Planned pop:** a lime phone glyph on the persistent nav call, which would have put a second pop in every view. |
+| Grayscale | minor | Lime-only data marks (hail-season cells, open-hours bars) fell to 1.58:1 against white with nothing else to carry them. |
+
+**Fixes:**
+- **Contrast:** the ring dots are deep green (11.97-12.50:1 on the light grounds). The focus outline now uses `border-focus`.
+- **Coherence:** green chroma capped at 0.095.
+- **Frames and marks:** the credential frames are neutral, and the label glyphs are never filled.
+- **Lime discipline:**
+  - The tapes take the pale lime-100.
+  - The service icons rest in neutral fill.
+  - The scoreboard caps take the green border step.
+  - The calculator door is neutral; only the handle you drag stays lime.
+  - The call's glyph stays white: the pop belongs to content, not chrome.
+- **Grayscale:** the hail cells and hours bars got a deep-green edge.
+
+**Round 2** (after the fixes, same instruments):
+
+| Dimension | Rating | Measured |
+|---|---|---|
+| Contrast | pass | Contrast table FAIL 0 (28 rendered pairs, 44 token pairs; table below). 144 text elements on lime, 0 white, all ≥ 4.5 (`r7-final-limewhite.log`). The sweep shows no new contrast flags against the R6 baseline. |
+| Palette coherence | pass | Two hues, one neutral. The only accent paints outside a declared role are data marks: hail cells, star glyph, tally, the "Now" marker. |
+| Semantic use | pass | 0 views with two filled actions. Deep green is used only for the action, states, links, focus, brand bands and the drawings' deep parts. Credential frames are neutral. |
+| Lime discipline | pass | Of 141 views: 105 with no lime, 36 with one pop, 0 with two or more. |
+| Grayscale | pass | The call stays the darkest solid object. Lime data marks keep a 12.5:1 edge (verified on grayscale captures). |
+| Light-dominant | pass | 0 near-black grounds. Each page view has at most one deep-green band, and every one reads green (HSL saturation 0.62). |
+
+No HIGH colour finding is open.
+
+**Challenge questions:**
+1. **Is green + lime right for a roofing company?**
+   - Yes, with one caution.
+   - Deep green reads as stable and established, fitting a family firm since 1995, and it is the colour of the
+     properties the crew works on. Lime is the fresh "new roof" note that keeps the deep green from turning sombre.
+   - The caution is that lime shares its hue with the lawns in the firm's own photos. Measured: lawn-band pixels are 19% of
+     the 14 job photos, at median L 0.52 and C 0.074. Lime-300 is L 0.84 and C 0.143, and only 0.3% of photo pixels
+     resemble it.
+   - So lime stays distinct by lightness and chroma, not hue. Hence the rule: lime is never laid on a photo.
+   - Against the clash the owner ruled on: deep green sits 25° from the old teal and far darker (L 0.32 against the teal
+     action's 0.55).
+2. **Does it survive grayscale?**
+   - Yes. The hierarchy never depends on lime.
+   - Deep green becomes the darkest solid on the page (luminance 0.034), so the one call still reads first.
+   - Lime becomes light grey. That only survives where an ink outline, deep-green text or a deep-green edge carries the
+     shape, which is now everywhere lime appears.
+3. **Where is lime being wasted?** Round 1's list:
+   - Tapes, icons, scoreboard caps, the calculator door and the chrome glyph.
+   - Plus lime on data dots, where it was also too weak.
+   - All fixed; the pop count is the proof: never more than one per view.
+
+### Measured contrast table (R7, final build; `qa/scripts/contrasttable.mjs` → `qa/gate/r7-contrast-table.md`)
+- Floors: body 4.5, large text 3, UI and focus 3.
+- White sits only on green-800/900 (9.05 / 12.50).
+- Lime carries deep green (7.93 on lime-300) or near-black. White on lime is listed only as a banned reference: it is
+  never rendered.
+
+| Rendered pair | Level | Foreground | Ground | Ratio | Need | Result |
+|---|---|---|---|---|---|---|
+| Page title (H1, hero) | primary | #202724 | #eef2f0 | 13.50 | 3 | pass |
+| Filled primary call: label on accent-solid | primary | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| Filled primary call: fill vs page ground | UI | #0e3b2c | #eef2f0 | 11.06 | 3 | pass |
+| Filled primary call: phone glyph on the fill | UI | #ffffff | #0e3b2c | 12.50 | 3 | pass |
+| Section heading (H2) | secondary | #202724 | #ffffff | 15.25 | 3 | pass |
+| Body copy | tertiary | #474f4c | #f7fbf9 | 8.08 | 4.5 | pass |
+| Fine print / source note | quaternary | #474f4c | #ffffff | 8.43 | 4.5 | pass |
+| Section label (brand glyph row) | quaternary | #474f4c | #ffffff | 8.43 | 4.5 | pass |
+| Link in body (accent text) | tertiary | #146b50 | #eef2f0 | 5.72 | 4.5 | pass |
+| Secondary (section) call: label | secondary action | #202724 | #eef2f0 | 13.50 | 4.5 | pass |
+| Secondary call: 2px outline (inset ring) vs ground | UI | #202724 | #eef2f0 | 13.50 | 3 | pass |
+| Picker: checked number on the accent indicator | state | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| Picker: idle number on the pill | UI | #202724 | #ffffff | 15.25 | 4.5 | pass |
+| Nav link | tertiary | #202724 | #ffffff | 15.25 | 4.5 | pass |
+| Nav call (persistent filled primary): label | primary | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| Footer label | quaternary | #474f4c | #eef2f0 | 7.47 | 4.5 | pass |
+| Footer value | tertiary | #202724 | #eef2f0 | 13.50 | 4.5 | pass |
+| Logo mark (graphic) vs nav plate | UI | #0e3b2c | #ffffff | 12.50 | 3 | pass |
+| Logo wordmark vs nav plate | primary | #202724 | #ffffff | 15.25 | 4.5 | pass |
+| Focus outline (site-wide, 3px) vs page ground | UI | #202724 | #f7fbf9 | 14.61 | 3 | pass |
+| Deep band: heading (white on green-900) | secondary | #ffffff | #0e3b2c | 12.50 | 3 | pass |
+| Deep band: body (green-100 on green-900) | tertiary | #d8f4e7 | #0e3b2c | 10.72 | 4.5 | pass |
+| Deep band: secondary call label on the band | secondary action | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| Deep band: secondary call ring vs band | UI | #d8f4e7 | #0e3b2c | 10.72 | 3 | pass |
+| Town chip pressed: label on accent-solid | state | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| Town field: input border vs ground | UI | #202724 | #ffffff | 15.25 | 3 | pass |
+| Town field: typed text | tertiary | #202724 | #ffffff | 15.25 | 4.5 | pass |
+| Focus ring (outer ring, accent) vs page ground | UI | #146b50 | #ffffff | 6.46 | 3 | pass |
+
+| Token pair (S0248) | Foreground | Ground | Ratio | Need | Result |
+|---|---|---|---|---|---|
+| --color-text on --color-bg | #202724 | #f7fbf9 | 14.61 | 4.5 | pass |
+| --color-text on --color-bg-subtle | #202724 | #eef2f0 | 13.50 | 4.5 | pass |
+| --color-text on --color-bg-surface | #202724 | #ffffff | 15.25 | 4.5 | pass |
+| --color-text on --color-accent-subtle | #202724 | #f1f9f5 | 14.24 | 4.5 | pass |
+| --color-text on --color-accent-subtle-hover | #202724 | #d8f4e7 | 13.08 | 4.5 | pass |
+| --color-text on --color-highlight-soft | #202724 | #e2f4c7 | 13.07 | 4.5 | pass |
+| --color-text-secondary on --color-bg | #474f4c | #f7fbf9 | 8.08 | 4.5 | pass |
+| --color-text-secondary on --color-bg-subtle | #474f4c | #eef2f0 | 7.47 | 4.5 | pass |
+| --color-text-secondary on --color-bg-surface | #474f4c | #ffffff | 8.43 | 4.5 | pass |
+| --color-text-secondary on --color-accent-subtle | #474f4c | #f1f9f5 | 7.87 | 4.5 | pass |
+| --color-text-secondary on --color-accent-subtle-hover | #474f4c | #d8f4e7 | 7.23 | 4.5 | pass |
+| --color-text-secondary on --color-highlight-soft | #474f4c | #e2f4c7 | 7.23 | 4.5 | pass |
+| --color-text-tertiary on --color-bg | #5d6662 | #f7fbf9 | 5.68 | 4.5 | pass |
+| --color-text-tertiary on --color-bg-subtle | #5d6662 | #eef2f0 | 5.25 | 4.5 | pass |
+| --color-text-tertiary on --color-bg-surface | #5d6662 | #ffffff | 5.93 | 4.5 | pass |
+| --color-text-tertiary on --color-accent-subtle | #5d6662 | #f1f9f5 | 5.54 | 4.5 | pass |
+| --color-text-tertiary on --color-accent-subtle-hover | #5d6662 | #d8f4e7 | 5.09 | 4.5 | pass |
+| --color-text-tertiary on --color-highlight-soft | #5d6662 | #e2f4c7 | 5.08 | 4.5 | pass |
+| --color-accent-text on --color-bg | #146b50 | #f7fbf9 | 6.19 | 4.5 | pass |
+| --color-accent-text on --color-bg-subtle | #146b50 | #eef2f0 | 5.72 | 4.5 | pass |
+| --color-accent-text on --color-bg-surface | #146b50 | #ffffff | 6.46 | 4.5 | pass |
+| --color-accent-text on --color-accent-subtle | #146b50 | #f1f9f5 | 6.04 | 4.5 | pass |
+| --color-accent-text on --color-accent-subtle-hover | #146b50 | #d8f4e7 | 5.55 | 4.5 | pass |
+| --color-accent-text on --color-highlight-soft | #146b50 | #e2f4c7 | 5.54 | 4.5 | pass |
+| text-on-accent (white) on accent-solid | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| text-on-accent (white) on accent-solid-hover | #ffffff | #19523f | 9.05 | 4.5 | pass |
+| accent-solid (fill) on bg | #0e3b2c | #f7fbf9 | 11.97 | 3 | pass |
+| border-control on bg | #5d6662 | #f7fbf9 | 5.68 | 3 | pass |
+| border-focus on bg-surface | #146b50 | #ffffff | 6.46 | 3 | pass |
+| border-focus on bg-subtle | #146b50 | #eef2f0 | 5.72 | 3 | pass |
+| icon-on-accent (glyph) on accent-solid | #ffffff | #0e3b2c | 12.50 | 3 | pass |
+| text-on-highlight (deep green) on highlight | #0e3b2c | #b5db6e | 7.93 | 4.5 | pass |
+| text-on-highlight (deep green) on highlight-soft | #0e3b2c | #e2f4c7 | 10.71 | 4.5 | pass |
+| black text on highlight | #121815 | #b5db6e | 11.41 | 4.5 | pass |
+| deep: text (white) on bg-inverse | #ffffff | #0e3b2c | 12.50 | 4.5 | pass |
+| deep: text-secondary on bg-inverse | #d8f4e7 | #0e3b2c | 10.72 | 4.5 | pass |
+| deep: text-tertiary on bg-inverse | #bce7d4 | #0e3b2c | 9.23 | 4.5 | pass |
+| deep: link (accent-text) on bg-inverse | #cbe998 | #0e3b2c | 9.31 | 4.5 | pass |
+| deep: text on surface on surface | #ffffff | #19523f | 9.05 | 4.5 | pass |
+| deep: secondary on surface on surface | #d8f4e7 | #19523f | 7.76 | 4.5 | pass |
+| deep: action label (deep green) on action fill (lime) | #0e3b2c | #b5db6e | 7.93 | 4.5 | pass |
+| deep: action label on hover on action hover (lime) | #0e3b2c | #cbe998 | 9.31 | 4.5 | pass |
+| deep: focus ring (lime) on bg-inverse | #b5db6e | #0e3b2c | 7.93 | 3 | pass |
+| deep: border-control on bg-inverse | #9bd5bd | #0e3b2c | 7.52 | 3 | pass |
+| BANNED, never rendered: white text on lime-300 | #ffffff | #b5db6e | 1.58 | 4.5 | banned (not used) |
+| BANNED, never rendered: white text on lime-200 | #ffffff | #cbe998 | 1.34 | 4.5 | banned (not used) |
+
+### R7 gates (logs in `rembrandt/v5/qa/gate/r7-final-*.log`)
+- **Facts** (`r7-final-facts.log`): FAILS 0 on all four pages. "353-9711", "24/7" and "licen" each occur 0 times. The
+  facts grep still passes.
+- **Tokens** (`r7-final-tokens.log`): 1534 semantic references, 0 primitives, 0 legacy names, 1 allowed literal.
+- **Contrast** (`r7-contrast-table.md`): FAIL 0. **White on lime** (`r7-final-limewhite.log`): 0 of 144.
+- **Accent audit** (`r7-final-accent.log`): 0 views with two filled actions. Lime pops per view are at most 1. Highest
+  chroma behind body text is C 0.068 (deep-green card).
+- **Light check** (`r7-final-browser.log`):
+  - bad 0; dark grounds or panels: none.
+  - Deep-green bands are listed, at most one per page view.
+  - The logo is in the header and footer of all four pages; the favicon is set.
+  - Every visible button keeps a fill or a ring.
+- **Hierarchy** (`r7-final-hierarchy.log`): 0 failures in 92 states.
+- **Sweep** (`r7-final-sweep.log`, `qa/qa5/fullqa-r7b.json`): overflow 0, errors 0, one H1 per page. No new flags against
+  the R6 baseline.
+- **Switchers** (`r7-final-keys.log`): 17 of 17; errors 0.
+- **Click-throughs** (`r7-final-clickthrough.log`): errors 0 everywhere; inner-page backups 25 of 25.
+- **Backups** (`r7-final-bkopen.log`):
+  - Every existing homepage backup opens; the 6 BAD rows are the Services and Storm B1-B3 slots that never existed.
+  - Backup files are byte-identical: 0 changed since R5.
+- **Cursor** (`r7-final-cursor.log`):
+  - The R6 fix is untouched. With the custom cursor live: 1,201 clicks in 23 states, 0 failures, worst release-to-click
+    2.2 ms.
+  - After the final edge change, the two affected states were re-run alone: 125 clicks, 0 failures.
+  - Touch and reduced motion keep the native cursor.
+
+### R7 commits
+- 9db68b1: stage 1. Green + lime system rebuild, logo set and favicon, lime-discipline fixes, new QA checks.
+- fb0f8d4: stage 2. Grayscale-safe lime data marks, the light gate learns deep green, brand docs, gate logs.
+- (this commit): stage 3. Challenge round, R7 contrast table and brand sheet in PROGRESS.

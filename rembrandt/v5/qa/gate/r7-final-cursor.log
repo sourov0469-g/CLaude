@@ -28,3 +28,7 @@ about.html v5: cursor live true, clicked 26, failures 0
 touch: custom cursor off true, native cursor true, companion hidden true -> ok
 reduced motion: custom cursor off true, native cursor true, companion hidden true -> ok
 clicks tested 270; worst click delay 1.8ms; failures 0
+# after the grayscale edges (final build), the two states they touch, run alone
+rembrandt-homepage.html v2: cursor live true, clicked 102, failures 0
+contact.html v3: cursor live true, clicked 23, failures 0
+clicks tested 125; worst click delay 0.2ms; failures 0
