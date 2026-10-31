@@ -1,32 +1,94 @@
-/* Elbaz homepage: tokens and base.
-   Identity lock [S0006 §12]: ink #0B1418 ground with deep-teal fields, logo teal #77B3B8 as the only accent,
+/* Elbaz Construction: tokens and base (rebranded 2026-10-31, see the REBRAND block below).
+   History: the first identity was ink #0B1418 with teal #77B3B8,
    Bebas Neue display (the firm's own type spec: "Display typography is Bebas Neue only", one weight, separated by
    size and tracking) + Geist text, sharp 2px radius [S0650 §4.4], Elbaz's own photographs.
    Colours are the brand's own CSS tokens (elbazconstructioncorp.com) [S0650 §11.C, S1304 §3]. */
 
+/* REBRAND DIRECTIVE (2026-10-31): the brand layer is rebuilt. One neutral ramp + ONE accent ramp, hue held constant
+   [S0071 "a system is ramps, not colors"; S1418 tonal scales 50-950]. Generated in OKLCH by remodeling/brand/v2/ramps.py.
+   clay  = the accent: fired clay / terracotta, OKLCH hue 36 (+-1.3 measured), chroma peaking at 0.11 (muted, never signal orange)
+   sand  = tinted neutrals: stucco / sand, OKLCH hue ~70, chroma 0.006-0.017 (enough to measure, not enough to name)
+   danger = the one status hue the site renders (form errors), 18 deg from clay [S0071: >= 15 deg], always with a text message.
+   Tier 1 primitives are named by hue + step and are NEVER used in a component. Tier 2 semantics are named by role and are
+   the only colour names components use [S0071 token-naming; S1496 token compliance]. */
 :root {
-  /* OWNER REDESIGN: light only. Black + white + one orange accent with its tints; near-black text on a warm off-white page.
-     Accent #FF5F00 = 3.05:1 on white (large type, fills, rules); #B84200 (a-700) carries accent TEXT at 5.5:1. */
-  --grey: #C9C1B6;  --white: #FFFFFF;  --err: #C42B1C;
-  --a-50: #FFF5EE;  --a-100: #FFE7D6;  --a-200: #FFC9A3;  --a-300: #FF9C5E;
-  --a-500: #FF5F00; --a-600: #E95600;  --a-700: #B84200;  --a-800: #7A2C00;
-  --paper: #FAF7F2;          /* warm off-white page ground */
-  --err-field: #C42B1C;      /* one error red, 5.6:1 on paper */
-  --err-paper: #C42B1C;
-  --bg: var(--paper);
-  --surface: #FFFFFF;
-  --surface-2: #F1ECE4;
-  --ink: #121212;            /* 18.4:1 on paper */
-  --ink-2: #3A3633;
-  --muted: #5E5852;          /* 6.6:1 on paper */
-  --accent: var(--a-500);
-  --accent-text: var(--a-700);
-  --accent-ink: #121212;     /* text on an orange fill, 6.1:1 */
-  --line: var(--a-500);
-  --line-soft: #E3DBCF;
-  --old: #c9b48f;
-  --scrim: rgba(18, 18, 18, .4);
-  --shadow: 0 2px 0 rgba(18, 18, 18, .06), 0 10px 24px -14px rgba(18, 18, 18, .25);
+  /* ---- tier 1: primitives ---- */
+  --clay-50: #FEF3F0;
+  --clay-100: #F9E3DD;
+  --clay-200: #F5D1C6;
+  --clay-300: #ECB3A4;
+  --clay-400: #DB917C;
+  --clay-500: #C5735C;
+  --clay-600: #A45540;
+  --clay-700: #884432;
+  --clay-800: #6C3527;
+  --clay-900: #50291E;
+  --clay-950: #371C15;
+  --sand-50: #FCF8F5;
+  --sand-100: #F6F0EA;
+  --sand-200: #EBE3DB;
+  --sand-300: #D9D0C7;
+  --sand-400: #B8B0A6;
+  --sand-500: #928B83;
+  --sand-600: #746D66;
+  --sand-700: #5A544E;
+  --sand-800: #413C38;
+  --sand-900: #2B2825;
+  --sand-950: #1B1916;
+  --white: #FFFFFF;
+  --danger-600: #B12A3E;
+
+  /* ---- tier 2: semantics (the only tier components reference) ---- */
+  /* surfaces */
+  --color-bg: var(--sand-50);                 /* page ground */
+  --color-bg-subtle: var(--sand-100);         /* alternate section ground, panels */
+  --color-bg-muted: var(--sand-200);          /* quiet fills: chart bars, tracks */
+  --color-surface: var(--white);              /* cards, sheets, inputs */
+  --color-surface-sunken: var(--sand-100);    /* wells */
+  --color-bg-inverse: var(--sand-800);        /* small inverse chips only, never a ground */
+  --color-overlay: rgb(27 25 22 / .45);       /* scrim: sand-950 at 45% */
+  --color-shadow: var(--sand-950);
+  /* text */
+  --color-text: var(--sand-950);              /* 16.6:1 on bg */
+  --color-text-secondary: var(--sand-700);    /* >= 5.27:1 on every light surface, incl. accent-subtle-hover */
+  --color-text-disabled: var(--sand-500);
+  --color-text-inverse: var(--sand-50);
+  --color-text-on-accent: var(--white);       /* 5.31:1 on accent-solid, 7.19:1 on its hover */
+  /* borders */
+  --color-border-subtle: var(--sand-200);
+  --color-separator: var(--sand-200);
+  --color-border: var(--sand-300);
+  --color-border-strong: var(--sand-600);     /* controls: >= 4.5:1 on every light surface (UI needs 3:1) */
+  --color-focus-ring: var(--clay-600);        /* >= 3.75:1 against every light surface */
+  /* accent: the one primary action, interactive states, key highlights */
+  --color-accent-subtle: var(--clay-100);
+  --color-accent-subtle-hover: var(--clay-200);
+  --color-accent-border: var(--clay-600);
+  --color-accent-solid: var(--clay-600);
+  --color-accent-solid-hover: var(--clay-700);
+  --color-accent-text: var(--clay-700);       /* >= 5.08:1 on every light surface */
+  /* status */
+  --color-danger-text: var(--danger-600);     /* >= 4.53:1 on every light surface */
+  /* drawings: line art stays neutral; the accent marks the one thing a drawing is about */
+  --color-art-line: var(--sand-900);
+  --color-art-line-soft: var(--sand-600);
+  --color-art-fill: var(--sand-100);
+  --color-art-accent: var(--clay-500);
+  --color-art-accent-soft: var(--clay-300);
+  --shadow-card: 0 1px 0 rgb(27 25 22 / .05), 0 12px 28px -18px rgb(27 25 22 / .28);
+
+  /* ---- record aliases: the pre-rebrand names, kept ONLY so the hidden backups (byte-identical records) still resolve.
+     No presented code uses them; tools/tokencheck.py fails if it does. ---- */
+  --grey: var(--sand-300); --err: var(--danger-600);
+  --a-50: var(--clay-50); --a-100: var(--clay-100); --a-200: var(--clay-200); --a-300: var(--clay-300);
+  --a-500: var(--clay-500); --a-600: var(--clay-600); --a-700: var(--clay-700); --a-800: var(--clay-800);
+  --paper: var(--sand-50); --err-field: var(--danger-600); --err-paper: var(--danger-600);
+  --bg: var(--sand-50); --surface: var(--white); --surface-2: var(--sand-100);
+  --ink: var(--sand-950); --ink-2: var(--sand-800); --muted: var(--sand-700);
+  --accent: var(--clay-500); --accent-text: var(--clay-700); --accent-ink: var(--sand-950);
+  --line: var(--clay-500); --line-soft: var(--sand-200); --old: var(--sand-400);
+  --scrim: rgb(27 25 22 / .4);
+  --shadow: 0 2px 0 rgb(27 25 22 / .06), 0 10px 24px -14px rgb(27 25 22 / .25);
   color-scheme: light;
 }
 
@@ -41,11 +103,8 @@
 }
 
 :root {
-  /* the committed teal field keeps its own ink in both themes */
-  --field: var(--a-100);    /* the accent ground: lively, light */
-  --field-ink: #121212;
-  --field-muted: #5E5852;
-  --field-accent: var(--a-700);
+  /* record aliases for the backups' field grounds */
+  --field: var(--sand-100); --field-ink: var(--sand-950); --field-muted: var(--sand-700); --field-accent: var(--clay-700);
 
   /* type [S0074, S1433, S0095 §4, S0006 §1: display max 6rem] */
   /* [OWNER DESIGN NOTE] Poppins (display, via the size-adjusted 'Elbaz Display' face) + Roboto (text); was Bebas Neue + Geist */
@@ -91,13 +150,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   scroll-padding-top: calc(var(--nav-h) + 16px);
-  background: var(--bg);
+  background: var(--color-bg);
 }
 body {
   margin: 0;
   overflow-x: clip;
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--f-text);
   font-size: var(--t-body);
   line-height: 1.55;
@@ -113,18 +172,18 @@ p { margin: 0; text-wrap: pretty; }
 h1, h2, h3, h4 { margin: 0; font-weight: inherit; text-wrap: balance; }
 ul, ol { margin: 0; padding: 0; }
 figure { margin: 0; }
-::selection { background: var(--accent); color: var(--accent-ink); }
-html { scrollbar-color: var(--surface-2) var(--bg); }
-input, textarea { caret-color: var(--accent); }
+::selection { background: var(--color-accent-subtle-hover); color: var(--color-text); }
+html { scrollbar-color: var(--color-border) var(--color-bg); }
+input, textarea { caret-color: var(--color-accent-text); }
 [hidden] { display: none !important; }
 
 :focus { outline: none; }
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--color-focus-ring);
   outline-offset: 3px;
   border-radius: var(--radius);
 }
-.g-field :focus-visible { outline-color: var(--field-accent); }
+.g-field :focus-visible { outline-color: var(--color-focus-ring); }
 
 .sr-only {
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -166,15 +225,16 @@ input, textarea { caret-color: var(--accent); }
   font-variant-numeric: tabular-nums;
 }
 .t-label { font-family: var(--f-display); font-size: 1.125rem; letter-spacing: .12em; line-height: 1; font-weight: 400; }  /* firm spec: .12em tracking at small sizes */
-.muted { color: var(--muted); }
-.g-field .muted { color: var(--field-muted); }
+.muted { color: var(--color-text-secondary); }
+.g-field .muted { color: var(--color-text-secondary); }
 .nums { font-variant-numeric: tabular-nums; }
 .nowrap { white-space: nowrap; }
 
 /* ---------- grounds: one separation mechanism, lightness steps [S0095 §4] ---------- */
-.g-base { background: var(--bg); color: var(--ink); }
-.g-surface { background: var(--surface); color: var(--ink); }
-.g-field { background: var(--field); color: var(--field-ink); --muted: var(--field-muted); }
+/* grounds: three light neutrals from the sand ramp; no section is coloured [REBRAND: light-dominant, eye comfort] */
+.g-base { background: var(--color-bg); color: var(--color-text); }
+.g-surface { background: var(--color-surface); color: var(--color-text); }
+.g-field { background: var(--color-bg-subtle); color: var(--color-text); }
 :is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:is(#proof, #services, #ba, #process, #financing, #work, #reviews, #towns, #consult):has(.ver[data-v="b1"]:not([hidden]))).g-base { background: #0B1418; color: #e8e4dc; }
 :is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:is(#proof, #services, #ba, #process, #financing, #work, #reviews, #towns, #consult):has(.ver[data-v="b1"]:not([hidden]))).g-surface { background: #15272f; color: #e8e4dc; }
 :is(#hero:has(.ver:is([data-v="b1"], [data-v="b2"], [data-v="b3"]):not([hidden])), .sec:is(#proof, #services, #ba, #process, #financing, #work, #reviews, #towns, #consult):has(.ver[data-v="b1"]:not([hidden]))).g-field { background: #1d4a4e; color: #e8e4dc; --accent: #77b3b8; --muted: #a9b6b9; }
@@ -203,10 +263,10 @@ input, textarea { caret-color: var(--accent); }
   padding: 0 24px;
   border: 0;
   border-radius: var(--radius);
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--color-accent-solid);     /* the ONE filled primary action per view [S0071, S1435] */
+  color: var(--color-text-on-accent);        /* 5.31:1 measured */
   font-family: var(--f-text);
-  font-weight: 560;
+  font-weight: 600;
   font-size: 1rem;
   letter-spacing: -.005em;
   text-decoration: none;
@@ -215,21 +275,22 @@ input, textarea { caret-color: var(--accent); }
   -webkit-tap-highlight-color: transparent;
   transition: background-color var(--t-hover) ease, color var(--t-hover) ease, box-shadow var(--t-press) ease;   /* no transform transition: GSAP owns transforms */
 }
-.btn:active { box-shadow: inset 0 0 0 999px rgba(18, 18, 18, .12); transition-duration: 0ms; }   /* --ink at 12% */
+.btn:active { background: var(--color-accent-solid-hover); transition-duration: 0ms; }
 .btn--ghost {
   background: transparent;
-  color: var(--ink);
-  box-shadow: inset 0 0 0 1.5px currentColor;
+  color: var(--color-text);
+  box-shadow: inset 0 0 0 1.5px var(--color-border-strong);   /* secondary: neutral [S0071] */
 }
+.btn--ghost:active { background: var(--color-bg-muted); }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
 /* the drawn per-element reaction IS the hover (AUDIT-01 D.4); the shared tint survives only where reactions are off */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .btn:hover { background: color-mix(in oklab, var(--accent) 86%, var(--ink)); }
-  .btn--ghost:hover { background: color-mix(in oklab, var(--ink) 10%, transparent); }
+  .btn:hover { background: var(--color-accent-solid-hover); }
+  .btn--ghost:hover { background: var(--color-bg-muted); }
 }
 @media (hover: hover) and (pointer: fine) {
-  [data-motion="off"] .btn:hover { background: color-mix(in oklab, var(--accent) 86%, var(--ink)); }
-  [data-motion="off"] .btn--ghost:hover { background: color-mix(in oklab, var(--ink) 10%, transparent); }
+  [data-motion="off"] .btn:hover { background: var(--color-accent-solid-hover); }
+  [data-motion="off"] .btn--ghost:hover { background: var(--color-bg-muted); }
 }
 .link {
   color: inherit;
@@ -240,13 +301,13 @@ input, textarea { caret-color: var(--accent); }
   transition: text-decoration-color var(--t-hover) ease;
 }
 @media (hover: hover) and (pointer: fine) {
-  .link:hover { text-decoration-color: var(--accent); }
+  .link:hover { color: var(--color-accent-text); text-decoration-color: var(--color-accent-text); }
 }
 
 /* ---------- media ---------- */
-.ph { position: relative; overflow: clip; background: var(--surface); }
+.ph { position: relative; overflow: clip; background: var(--color-bg-muted); }
 .ph > img { width: 100%; height: 100%; object-fit: cover; }
-.cap { font-size: var(--t-small); color: var(--muted); margin-top: var(--s3); }
+.cap { font-size: var(--t-small); color: var(--color-text-secondary); margin-top: var(--s3); }
 
 /* drawings: line art traced from a real photo, registered to it */
 .draw line, .draw path, .draw polyline, .draw rect, .draw circle {

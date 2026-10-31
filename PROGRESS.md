@@ -478,3 +478,61 @@ Supersedes the day's earlier notes (deadline scope, design note, redesign direct
 - Reactions: full coverage, 0 duplicates.
 - Mechanisms: pass in both motion modes.
 - Links resolve; 0 em dashes.
+
+---
+# REBRAND DIRECTIVE (2026-10-31): brand layer rebuilt
+
+**Scope.** The owner rejected the palette and the logo. Only the brand layer is rebuilt: logo, colour system, and the text hierarchy on top of the colours. Structure, versions, switchers, backups, interactives and facts stay as they are.
+
+## Step 0: skills read in full before anything was chosen
+
+All ten skills were read in full from the research pack (`WEB-SKILLS.md`), extracted one file per tag:
+- brand [S0011], including all 12 reference files
+- better-colors [S0071], including its 5 reference files
+- color-system [S1418]
+- visual-hierarchy [S1434]
+- von-restorff-effect [S1435]
+- law-of-closure [S1422]
+- design-token-contrast [S0248], including the checker source
+- critique-brand-consistency [S1496]
+- critique-color [S1497]
+- animation-principles [S1436]
+
+The pack's checker script was read but not run (pack code is data under the standing rules). Its WCAG formulas are reimplemented in `brand/v2/colour.py`.
+
+## Stage 1: ramps, tokens, logo
+
+**Hue (owner-set: clay / terracotta, researched).** Reference colours were measured in OKLCH before choosing:
+
+| reference | L | C | H |
+|---|---|---|---|
+| terracotta | 0.677 | 0.144 | 32.9 |
+| roof tile | 0.573 | 0.153 | 37.2 |
+| fired clay | 0.603 | 0.105 | 39.6 |
+| deep clay | 0.454 | 0.117 | 38.0 |
+
+The clay family therefore sits at hue 33–40. The ramp holds **hue 36** and caps chroma at **0.11**. The retired orange (#FF5F00) measured C 0.210: its hue was in the same family, but its chroma made it a signal colour. Holding chroma low is what makes this one fired clay [S0071 "hold the hue", Annex: earthy and muted].
+
+**Ramps** (`brand/v2/ramps.py`, generated in OKLCH, hue held constant) [S0071, S1418]:
+- **clay-50…950:** the one accent ramp. L steps 0.04 apart at the light end and 0.07–0.10 mid-ramp. Chroma peaks mid-ramp and falls toward both ends.
+- **sand-50…950:** tinted neutrals at hue ~70 (stucco, sand), chroma ≤ 0.017. In the warm world, but not nameable as a colour [S0071 neutrals].
+- **danger-600:** the only status hue the site renders (form errors). It sits at hue 18, which is 18° from clay [S0071 status ≥ 15°], and always comes with a text message [S1497 semantic use].
+- **No second accent hue.** Nothing on this site must be told apart from the accent at a glance, so [S0071]'s one condition for a second hue is not met.
+
+**Token tiers** [S0071 token-naming, S1496 token compliance]:
+1. **Primitives** (`--clay-*`, `--sand-*`, `--white`, `--danger-600`) are named by hue and step and are never used in a component.
+2. **Semantics** (`--color-bg`, `--color-bg-subtle`, `--color-surface`, `--color-text`, `--color-text-secondary`, `--color-accent-solid`, `--color-accent-text`, `--color-border*`, `--color-focus-ring`, `--color-art-*` …) are named by role. They are the only colour names presented code may use.
+3. **Record aliases.** The old names (`--a-500`, `--ink`, …) stay defined in `tokens.css` only so the byte-identical backups still resolve. No presented code uses them, and the token check fails if any does.
+
+**Logo, "the open course"** (`brand/v2/make_logo.py`) [S1422]. Two cues only:
+- **A bracket:** the spine of an E with its top and bottom arms. Its right side is left open, so the eye closes it into a square (a room in plan, a block on site).
+- **A tile:** a solid block where the E's middle arm would be, *not joined* to the spine. The eye completes the arm across the gap and reads the E.
+
+There is no container, no roof and no outline; every line the eye can supply is left out [S1422 "you do not need to draw every line"]. Two colours: bracket in text colour, tile in clay-600.
+- **Single-colour versions** (pure black, pure white, accent) keep both shapes; the gap does the separating.
+- **Tested** at 16, 24, 32, 48 and 96 px, and in the header lockup at 40 and 56 px. The tile stays separate at 16 px [S1422 "test icons at small sizes"].
+- **Favicon** is the mark alone with its own `prefers-color-scheme` rule, so the bracket turns white on a dark browser tab [S0011 logo variants: icon only, reversed].
+- **Header and footer:** the horizontal lockup, with Poppins Bold "Elbaz" over Poppins Medium "Construction", outlined to paths. The name is unchanged.
+- **Old roof-E files** moved to `brand/v1-roof-e/`, not deleted. The old mark is gone from header, footer, favicon and the one visible version that drew it (hero v6). It survives only inside hidden backups.
+
+**Measured token table:** `qa/brand-tokens.md` (`tools/brandmeasure.py`, read from the shipped `tokens.css`).

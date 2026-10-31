@@ -196,8 +196,8 @@ def build(page, only=None):
             extra[name[:-5]] = json.load(open(os.path.join(ddir, name)))
 
     vendor = "\n".join(read("vendor", v + ".min.js") for v in VENDOR) + "\n" + read("vendor", "lenis.min.js")
-    # [OWNER REDESIGN] the new roof-E lockup (brand/make_logo.py), outlined Poppins, one SVG data URI shipped once
-    logo_src = "data:image/svg+xml;base64," + b64(os.path.join(ROOT, "brand", "elbaz-logo.svg"))
+    # [REBRAND] the "open course" lockup (brand/v2/make_logo.py), outlined Poppins, one SVG data URI shipped once
+    logo_src = "data:image/svg+xml;base64," + b64(os.path.join(ROOT, "brand", "v2", "elbaz-logo.svg"))
 
     html = (html
             .replace("/*{{FONTS}}*/", fonts)

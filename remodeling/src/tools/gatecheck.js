@@ -22,7 +22,7 @@ const OUT = process.env.OUT || '/home/user/CLaude/remodeling/qa/gatecheck.txt';
     const ico = document.querySelector('link[rel~="icon"]');
     const svg = s => !!s && /^data:image\/svg\+xml/.test(s);
     const txt = s => { const [h, d] = [s.slice(0, s.indexOf(',')), s.slice(s.indexOf(',') + 1)]; return /;base64/.test(h) ? atob(d) : decodeURIComponent(d); };
-    return { header: nav && svg(nav.src), footer: foot && svg(foot.src), favicon: ico && svg(ico.href), sameMark: ico && nav && /M80 47 L50 21 L25 42 V80 H76/.test(txt(ico.href)) && /M80 47 L50 21 L25 42 V80 H76/.test(txt(nav.src)), footSrcIsNav: foot && nav && foot.src === nav.src };
+    return { header: nav && svg(nav.src), footer: foot && svg(foot.src), favicon: ico && svg(ico.href), sameMark: ico && nav && /M38 7.5 H10 V40.5 H38/.test(txt(ico.href)) && /M38 7.5 H10 V40.5 H38/.test(txt(nav.src)), footSrcIsNav: foot && nav && foot.src === nav.src };
   });
   out.push('logo: ' + JSON.stringify(logo));
   if (!(logo.header && logo.footer && logo.favicon && logo.sameMark)) fail.push('logo');

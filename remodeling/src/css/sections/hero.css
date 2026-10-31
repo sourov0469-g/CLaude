@@ -590,7 +590,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--ink); }
 .hcd__card.is-flip .hcd__front { transform: rotateY(-180deg); }
 .hcd__card.is-flip .hcd__back { transform: rotateY(0deg); }
 .hcd__brand { display: flex; align-items: center; gap: 10px; font: 700 1.125rem/1 var(--f-display); }
-.hcd__brand svg { width: 34px; height: 34px; } .hcd__brand .b { fill: var(--a-500); } .hcd__brand .e { fill: none; stroke: var(--white); stroke-width: 10; }
+.hcd__brand svg { width: 34px; height: 34px; } .hcd__brand .k { fill: none; stroke: var(--color-text); stroke-width: 7; stroke-linejoin: miter; } .hcd__brand .t { fill: var(--color-accent-solid); }   /* the REBRAND mark */
 .hcd__dl { margin: 0; display: grid; gap: 6px; }
 .hcd__dl div { display: grid; grid-template-columns: 82px 1fr; gap: 8px; padding-top: 6px; border-top: 1px solid var(--line-soft); }
 .hcd__dl dt { font: 600 .75rem/1.4 var(--f-text); color: var(--accent-text); }
