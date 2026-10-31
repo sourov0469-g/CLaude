@@ -1,0 +1,20 @@
+ACCENT PAINTS BY ROLE {"logo/brand glyph":194,"picker state":104,"action fill":61,"illustration focal mark":239,"interactive (link/state/ring)":294,"deep band":51,"OTHER":310}
+OTHER (non-role accent) 310
+  home storm td.on bg teal-500 | v2 "yes"
+  home proof span.pv5-ch text teal-700 | v5 "★"
+  home proof i. bg teal-200 | v6 ""
+  home proof i. bg teal-700 | v6 ""
+  contact cthero i.kt3-on bg teal-500 | v3 ""
+  contact cthero span.kt3-now bg teal-800 | v3 "Now"
+  contact cthero span. bg teal-800 | v3 "Now"
+VIEWS WITH >1 FILLED ACCENT ACTION 0
+HIGHEST-CHROMA GROUND BEHIND BODY TEXT (OKLCH C):
+  0.061 rembrandt-homepage.html v5 y8100 call #2c6663
+  0.044 rembrandt-homepage.html v1 y9000 call #274e4d
+  0.044 rembrandt-homepage.html v1 y9900 call #274e4d
+  0.044 rembrandt-homepage.html v2 y9000 call #274e4d
+  0.044 rembrandt-homepage.html v3 y8100 call #274e4d
+  0.044 rembrandt-homepage.html v3 y9000 call #274e4d
+  0.044 rembrandt-homepage.html v4 y9000 call #274e4d
+  0.044 rembrandt-homepage.html v4 y9900 call #274e4d
+ACC_DONE

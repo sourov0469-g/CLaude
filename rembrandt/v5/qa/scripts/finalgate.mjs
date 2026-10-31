@@ -20,18 +20,24 @@ for (const [file, ids, n] of PAGES) {
         return { id, v: s.dataset.v, kids: root.childElementCount, g, L: +lum(g).toFixed(3), hue: Math.round(hue(g)), big: big.map(x => x[0]).slice(0, 2) }; });
     }, ids);
     const H = await p.evaluate(() => document.documentElement.scrollHeight); for (let y = 0; y < H; y += 600) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(120); } await p.waitForTimeout(600);
-    const nobg = await p.evaluate(() => [...document.querySelectorAll('section .btn')].filter(a => a.getBoundingClientRect().width && getComputedStyle(a).backgroundColor === 'rgba(0, 0, 0, 0)' && !a.closest('[aria-hidden="true"]')).map(a => a.closest('section').id + ':' + a.className));
+    // R6: a secondary call is transparent by design (outline ring), so a button fails only with no fill, no ring and no border
+    const nobg = await p.evaluate(() => [...document.querySelectorAll('section .btn')].filter(a => { const c = getComputedStyle(a); return a.getBoundingClientRect().width && c.backgroundColor === 'rgba(0, 0, 0, 0)' && c.boxShadow === 'none' && !(parseFloat(c.borderTopWidth) > 0 && c.borderTopColor !== 'rgba(0, 0, 0, 0)') && !a.closest('[aria-hidden="true"]'); }).map(a => a.closest('section').id + ':' + a.className));
     if (nobg.length) { bad++; fail.push(`${file} v${v}: buttons without a ground: ${nobg.join(', ')}`); }
     const logo = await p.evaluate(() => [document.querySelectorAll('.nav svg.logo, header svg.logo').length, document.querySelectorAll('footer svg.logo, .ftr svg.logo').length, (document.querySelector('link[rel="icon"]')?.getAttribute('href') || '').slice(0, 15)]);
+    let deepN = 0;
     for (const x of r) {
       if (x.v !== String(v) || !x.kids) { bad++; fail.push(`${file} ${x.id}${v}: v=${x.v} kids=${x.kids}`); }
-      if (x.L < 0.05 || x.big.length) { if (x.hue >= 90 && x.hue <= 170 && !x.big.length) green.push(`${x.id}${v}`); else { dark.push(`${x.id}${v} L=${x.L} ${x.big.join(',')}`); bad++; } }
+      // R6: the deep accent ground (teal-800, L 0.065) is listed and capped at two sections per page; anything else under
+      // L 0.05, or a large near-black panel, fails
+      if (x.L < 0.12 && x.hue >= 150 && x.hue <= 200 && !x.big.length) { green.push(`${file.split('.')[0].replace('rembrandt-homepage', 'home')} ${x.id}${v} L=${x.L}`); deepN++; }
+      else if (x.L < 0.05 || x.big.length) { dark.push(`${x.id}${v} L=${x.L} ${x.big.join(',')}`); bad++; }
     }
+    if (deepN > 2) { bad++; fail.push(`${file} v${v}: ${deepN} deep-accent sections (cap 2)`); }
     if (v === 1) console.log(file, 'logo header', logo[0], 'footer', logo[1], 'favicon', logo[2]);
     if (errs.length) { bad++; fail.push(`${file} v${v}: ${errs.join(' | ').slice(0, 160)}`); }
     console.log(file, 'v' + v, r.map(x => `${x.id}:${x.v === String(v) ? 'ok' : 'BAD'}(L${x.L})`).join(' '));
     await p.close();
   }
 }
-console.log('dark grounds or panels:', dark.length ? dark : 'none'); console.log('deep-green grounds:', green.length ? green : 'none');
+console.log('dark grounds or panels:', dark.length ? dark : 'none'); console.log('deep-accent grounds (cap 2 per page view):', green.length ? green : 'none');
 console.log('switch/mount failures:', fail.length ? fail : 'none'); console.log('bad', bad); await b.close();

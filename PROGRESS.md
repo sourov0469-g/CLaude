@@ -593,3 +593,379 @@ Then a design review of all 72 homepage versions and all 40 inner-page section v
 - **Sweep** (`r5-final-sweep-all.log`, `r5-final-sweep-pages.log`, every visible version at 1440 and 375):
   - Overflow 0, errors 0, one H1 per page.
   - Left items are the judged residuals listed above (decorative wordmark, a star graphic at 3:1, inline text links, and the footer phone link, whose hit area the scanner cannot see).
+
+## R6 rebrand directive (2026-10-31): brand sheet
+
+The owner scrapped the R4/R5 orange palette ("the colours hurt his eyes") and the old logo. Only the brand layer was rebuilt:
+the logo, the colour system and the text hierarchy on top of it. Structure, versions, switchers, interactives and facts are
+unchanged; hidden backups are byte-identical (`git diff --name-status 2e9bd16~1 -- '*/bk/*'` lists no modified or deleted
+file). Step 0 reading: brand ⟦S0011⟧, better-colors ⟦S0071⟧, color-system ⟦S1418⟧, law-of-closure ⟦S1422⟧, design-token-contrast
+⟦S0248⟧, visual-hierarchy ⟦S1434⟧, von-restorff-effect ⟦S1435⟧, animation-principles ⟦S1436⟧, critique-brand-consistency
+⟦S1496⟧, critique-color ⟦S1497⟧ (from the reassembled WEB-SKILLS.md, read as data). S0248's bundled checker was not run (bank
+code is never run); its method (every foreground token against every ground it sits on) is implemented in
+`qa/scripts/contrasttable.mjs`.
+
+### Logo (Step 1, law-of-closure ⟦S1422⟧)
+- **Mark:** on a 48x48 grid, stroke 5, round caps, one colour. Two roof strokes stop short of each other at the apex (the eye
+  completes the ridge) over an R whose bowl never returns to its stem (the eye completes the letter). Closure does the
+  work, so the mark has no fill, no gradient and no detail finer than the stroke. That is why it holds at 16 px.
+- **Wordmark:** Poppins 700 "Rembrandt" with Poppins 500 "Roofing & Restoration" in the secondary text colour, so the
+  site keeps two families (standing rule).
+- **Versions:** `assets/brand/mark.svg` (accent, teal-600 #347e7b), `mark-black.svg`, `mark-white.svg`,
+  `logo.svg` (mark + wordmark).
+  - The mark draws in `currentColor` inside the site, so it takes the accent in the header and footer.
+  - It takes neutral ink in the section labels, and white or teal on the deep bands.
+- **Sizes tested:**
+  - Favicon (re-rendered at 64 px, read at 16 and 32 px).
+  - Header 176 px, section label glyph 22 px.
+  - The logo mark against the nav plate measures **4.76:1** (UI floor 3:1).
+- **Replaced:** header, footer and favicon on all four pages, and the label glyph in every live version file that carries one (87 of the 112). The old
+  logo, mark and favicon survive only in `assets/brand/archive-r4/` and in the hidden backups.
+
+### Colour system (Step 2: better-colors ⟦S0071⟧, color-system ⟦S1418⟧)
+- **Why teal (hue 192, verdigris):**
+  - It is the patina of a copper roof, a durable roofing material.
+  - It is the hue band the firm's own photographs leave empty. Chroma-weighted hue measurement of the live photos:
+    - 105-135° (lawns, trees): 37%
+    - 240-270° (sky, crew shirts): 37%
+    - 30-60° (brick, shingles): 12%
+    - 150-225°: ~0
+  - So the accent never blends into a photo and never fights one.
+- **Ramps:** computed in OKLCH by `build/mk-tokens.py`, never picked by eye.
+  - The hue is held at 192 end to end. Chroma is a fixed 78% share of the sRGB ceiling at each lightness, tapered at both
+    ends. The accent tops out at C 0.087, so nothing reaches the gamut edge (eye comfort).
+  - The neutral ramp is tinted to the same hue at C 0.004-0.012.
+  - The full table is in `brand/tokens.md`.
+- **Two tiers:** primitives are named by hue + step (`--teal-600`, `--neutral-900`). Semantics are named by role
+  (`--color-text`, `--color-accent-solid`, …). Components use only the semantic tier.
+  - `qa/scripts/tokengate.py` reports 1535 semantic references, 0 primitives, 0 legacy names and 1 literal in live
+    components.
+  - The literal is `proof.js:39 #000`, an offscreen alpha mask, never painted.
+- **Scopes:**
+  - The deep scope (Call band, Services/About close V2, Contact head V4 panel, the Contact card's back) repoints the same
+    semantic roles to the dark end. Its components need no second set of colours.
+  - Backups render through a legacy scope that maps every semantic role back to its R4 value, so a backup still opens as
+    the record it was.
+
+**Token list (semantic tier; primitives in `brand/tokens.md`):**
+
+| Role | Token → primitive |
+|---|---|
+| Grounds | `bg` neutral-50 · `bg-subtle` neutral-100 · `bg-sunken` neutral-200 · `bg-surface` white · `bg-inverse` teal-800 |
+| Text | `text` neutral-900 · `text-secondary` neutral-700 · `text-tertiary` neutral-600 · `text-disabled` neutral-500 · `text-inverse` white · `text-inverse-secondary` teal-100 · `text-on-accent` white |
+| Lines | `border-subtle` / `separator` neutral-200 · `border` neutral-300 · `border-control` neutral-600 · `border-strong` neutral-900 · `border-focus` teal-600 |
+| Accent | `accent-subtle` teal-50 · `accent-subtle-hover` teal-100 · `accent-border` teal-300 · `accent-solid` teal-600 · `accent-solid-hover` teal-700 · `accent-text` teal-700 |
+| Drawings | `illustration-line` neutral-900 · `-paper` white · `-fill` neutral-200 · `-fill-strong` neutral-600 · `-accent` teal-500 · `-accent-soft` teal-200 · `-accent-deep` teal-800 |
+| Shadow | `shadow` neutral-950 (always mixed to a low alpha) |
+
+**Declared colour hierarchy:**
+1. **Grounds:** white and off-white (neutral-50/100) carry every page. The deep teal-800 ground (C 0.045, a slate green,
+   not a vivid field) appears on at most two sections per page.
+   - Home: the Call band.
+   - Services and About: close V2.
+   - Contact: head V4's panel and the card's back face.
+2. **Ink:** neutral-900 headings, neutral-700 body, neutral-600 fine print.
+3. **The one filled action:** accent-solid (teal-600) with white text, one per view.
+   - The nav call is the persistent one; it stays quiet while the hero's own call is on screen.
+   - Every other section call is a neutral outline (secondary).
+4. **Interactive states and links:** accent text (teal-700, underlined in running text), accent rings, pressed chips,
+   checked pickers, focus ring.
+5. **Focal marks:** one accent part per drawing or data graphic (the roof being described, the hail-season cells, the
+   "Now" marker).
+
+Accent is never used for text emphasis, labels, years or headline words.
+
+### Text hierarchy (Step 3, visual-hierarchy ⟦S1434⟧)
+**Levels** (Poppins headings, Open Sans body):
+
+| Level | Role | Size: 1440 / 375 | Weight |
+|---|---|---|---|
+| L1 | Page title (every hero and inner-page H1) | 60 / 40 px | 700 |
+| L2 | Section heading | 40 / 26 px | 700 |
+| L3 | Body | 17 px | 400 |
+| L4 | Labels and fine print | 14 px | 600, secondary colour |
+
+**Measured steps** (`qa/scripts/hierarchy.mjs`, every visible version at 1440 and 375, 92 states):
+- L1/L2 = 1.50 (1.54 on phones).
+- L2/L3 = 2.35 at 1440, plus a weight step of 300.
+- L3/L4 is a 200 weight step.
+- Result: 0 failures. Squint test: in the grayscale captures the title, then the section heading, then the filled call
+  read first.
+
+**Changed this round:**
+- Round 1 measured an inversion: the homepage section H2 rendered at 48 px against a 47 px graphic-hero H1, and the inner
+  pages' H1 equalled H2 at 48 px.
+- Section H2 moved to `clamp(1.625rem,1.1rem + 1.9vw,2.5rem)`; every H1 now takes the hero role.
+- How V1's step titles came under L2 (48 → 32 px).
+- Hero V3's phone title went from 36 to 40 px.
+- The R4 records keep their own scale.
+
+### Buttons
+- **Primary:** accent-solid fill, white label (4.76:1). Fill against the page ground: 4.21:1.
+- **Secondary:** transparent with a 2px neutral-900 inset ring and a neutral-900 label (13.49:1 each). On deep bands it is
+  white on teal-800 (9.20:1).
+- **One filled primary per view:** `qa/scripts/accentaudit.mjs` scrolls every visible version one viewport at a time and
+  counts visible filled accent actions.
+  - Round 1 found 3 views with two. One was real: Hero V8 at 900 px, where the nav call returned while the hero's own call
+    was still on screen; it is fixed.
+  - The other two were selected tabs (How V7, Contact V3). Those are states, so the audit now counts them apart from
+    actions.
+  - Round 2 found 0.
+
+### QA round 1 (before fixes; critique-color ⟦S1497⟧, critique-brand-consistency ⟦S1496⟧)
+**Evidence:**
+- Rendered sweep `qa/qa5/fullqa-r6a.json`.
+- `qa/gate/r6-contrast-table.md` (first cut).
+- Accent audit `accentaudit.mjs` round 1.
+- Type measurement.
+- Full-page colour and grayscale captures of all four pages.
+
+**critique-color ⟦S1497⟧:**
+
+| Dimension | Rating | Finding (measured) |
+|---|---|---|
+| Contrast | **major** | Pressed town chip `.mi` and pressed family pill `b` labels at **3.21:1** (white on teal-500); text failing is HIGH under S0071. Every other rendered text pair passed (lowest token pair 5.05). |
+| Palette coherence | minor | One hue, two ramps, no stray hues. The accent was spread over labels, years, big numerals, ledes, list ticks, the head ridge and a headline word (hero V3 "Springboro"), so it read as decoration, not signal. |
+| Semantic use | **major** | Teal text meant "link" in one place and "emphasis" in the next (S0071 one colour, one meaning broken). One view (Hero V8 at 900 px) showed two filled accent calls. |
+| Accessibility | pass | Links are underlined; pressed, checked and selected states change fill and shape, not only hue. The focus ring is a 3px neutral-900 outline (14.61:1) plus a teal-600 ring (4.76:1). |
+
+**critique-brand-consistency ⟦S1496⟧** (against `brand/mood.md`, `brand/voice.md`, `brand/tokens.md`):
+
+| Dimension | Rating | Finding |
+|---|---|---|
+| Mood | minor | Calm, light grounds as declared. Two "Don'ts" were broken: an accent word inside a headline (Hero V3), and accent ticks and bullets that made lists shout (Storm V1, Proof V1, Services). |
+| Voice | pass | Copy unchanged by the rebrand. Facts gate FAILS 0; 353-9711, 24/7 and "licen" occur 0 times. |
+| Token compliance | pass | 0 primitives and 0 legacy names in live components; 1 allowed literal (offscreen mask). |
+| Hierarchy (S1434, measured) | **major** | The homepage section H2 rendered at 48 px against a 47 px page H1; the inner-page H1 equalled H2. |
+
+**Changes made between rounds:**
+- Commit abd9a66: the pressed chip and pill labels moved to `text-on-accent`, now 4.76:1.
+- Commit 8396f55, accent role:
+  - 43 rules moved from accent text to neutral text roles (strong values to `text`, labels, ledes and `dt` to
+    `text-secondary`).
+  - The ticks, bullets and the ridge's dashed sides went neutral.
+- Commit 8396f55, type and layout:
+  - The type scale was re-cut.
+  - The nav call now follows the shown hero version's own call.
+  - The Services V4 numerals were floored at 13 px.
+
+### QA round 2 (after fixes, same instruments)
+**critique-color ⟦S1497⟧:**
+
+| Dimension | Rating | Measured |
+|---|---|---|
+| Contrast | pass | Contrast table: every rendered pair and token pair passes (see below). The sweep (`qa/qa5/fullqa-r6b.json`, 92 states) still flags four kinds of item; each was checked by hand: picker numbers, the Call V1 word, the Call V2 number and the Hero V2 caption (details below the table). |
+| Palette coherence | pass | Accent paints outside a declared role: 7 kinds, all data or focal marks. They are the Storm V2 hail-calendar cells, the Proof V5 star glyph, the Proof V6 tally bars, and the Contact V3 "Now" marker with its line. |
+| Semantic use | pass | 0 views with more than one filled accent action. Accent text appears only on links, buttons and states. |
+| Accessibility | pass | As in round 1. The grayscale capture keeps the filled call (4.76 label, 4.21 vs ground), the outline secondary, and filled-vs-outlined states. |
+
+**Sweep items checked by hand (contrast row above):**
+- **Picker numbers:** a checked picker number reads 1.00 to the scanner because its accent disc is a sibling element.
+  Measured: 4.76.
+- **Call V1 word:** the hollow "REMBRANDT" is decorative and `aria-hidden`.
+- **Call V2 number:** sits on the white SVG disc, 9.20.
+- **Hero V2 caption:** sits on an `oklab()` plate the scanner cannot parse. #1f2727 on ~#fefefe, about 15:1, confirmed by
+  pixel capture.
+
+**critique-brand-consistency ⟦S1496⟧:**
+
+| Dimension | Rating | Measured |
+|---|---|---|
+| Mood | pass | No accent word in any headline. The highest-chroma ground behind body text anywhere is OKLCH C **0.061** (the Call V5 card, teal-700); the R4 orange Call band it replaces (#ff5a1f) measures C 0.211, 3.5x as saturated. |
+| Voice | pass | Unchanged; facts gate FAILS 0 on all four pages. |
+| Token compliance | pass | 1535 semantic references, 0 primitives, 0 legacy names, 1 allowed literal. |
+| Hierarchy | pass | 0 failures across 92 states (1440 and 375). |
+
+No HIGH colour finding is open.
+
+### Challenge questions (asked out loud)
+1. **Is the accent right for this trade?**
+   - Teal can read "clinic" or "tech". Against that:
+     - It is copper-roof verdigris, a roofing material.
+     - It is low in chroma (C ≤ 0.087; the deep band is a slate green at C 0.045).
+     - It was chosen by measurement: the photographs leave 150-225° empty, so the accent is the one colour on the page the
+       photos never supply.
+   - A red or orange would fight the brick and shingles (30-60°). A green would vanish into the lawns (105-135°). A blue
+     would vanish into the sky and the crew's shirts (240-270°).
+   - Verdict: keep.
+2. **Does it survive grayscale?**
+   - Yes. The hierarchy never relies on hue. The filled call stays a mid-grey slab with a white label (same 4.76:1). The
+     secondary call is an outline. Pressed and checked states are filled against outlined. Links are underlined.
+   - Checked on the full-page grayscale capture of the homepage.
+3. **Does the accent mean one thing?**
+   - After round 2, yes: "you can act here". That covers the one filled call, links, pressed, checked and selected states,
+     and the focus ring.
+   - Beyond that it is used only as the brand mark (S0011) and as one focal mark per drawing or data graphic.
+   - It is never text emphasis.
+4. **Where did isolation inflation creep in (von-restorff ⟦S1435⟧)?**
+   - **Labels:** the hero label on all eight heroes.
+   - **Years and numerals:** the family timelines, Hero V5 and V7, the About numbers, the Storm V2 "19", the Towns years
+     and counts.
+   - **Ledes and key labels:** the Services ledes and `dt` keys.
+   - **Markers:** the list ticks and bullets.
+   - **Ridges:** the dashed head ridge.
+   - **Headlines:** the Hero V3 headline word.
+   - Each competed with the one filled call for "the thing that is different". All are neutral now, so the call, the links
+     and the states are the only teal a visitor has to read.
+
+### Measured contrast table (Step 3; `qa/scripts/contrasttable.mjs` → `qa/gate/r6-contrast-table.md`, final build)
+Rendered pairs are read from the live page (computed colours on their real grounds). The token pairs follow
+design-token-contrast ⟦S0248⟧: every text token on every ground it is used on. Floors: body 4.5, large text 3, UI and
+focus 3. White appears only on accent steps of 4.5:1 or more (teal-600 4.76, teal-700 6.59, teal-800 9.20); white on
+teal-500 measures 3.22, so teal-500 never carries text. **FAIL rows: 0** (27 rendered pairs, 31 token pairs).
+
+| Rendered pair | Level | Foreground | Ground | Ratio | Need | Result |
+|---|---|---|---|---|---|---|
+| Page title (H1, hero) | primary | #1f2727 | #edf2f2 | 13.49 | 3 | pass |
+| Filled primary call: label on accent-solid | primary | #ffffff | #347e7b | 4.76 | 4.5 | pass |
+| Filled primary call: fill vs page ground | UI | #347e7b | #edf2f2 | 4.21 | 3 | pass |
+| Section heading (H2) | secondary | #1f2727 | #ffffff | 15.24 | 3 | pass |
+| Body copy | tertiary | #464f4f | #f7fbfa | 8.08 | 4.5 | pass |
+| Fine print / source note | quaternary | #464f4f | #ffffff | 8.43 | 4.5 | pass |
+| Section label (brand glyph row) | quaternary | #464f4f | #ffffff | 8.43 | 4.5 | pass |
+| Link in body (accent text) | tertiary | #2c6663 | #edf2f2 | 5.83 | 4.5 | pass |
+| Secondary (section) call: label | secondary action | #1f2727 | #edf2f2 | 13.49 | 4.5 | pass |
+| Secondary call: 2px outline (inset ring) vs ground | UI | #1f2727 | #edf2f2 | 13.49 | 3 | pass |
+| Picker: checked number on the accent indicator | state | #ffffff | #347e7b | 4.76 | 4.5 | pass |
+| Picker: idle number on the pill | UI | #1f2727 | #ffffff | 15.24 | 4.5 | pass |
+| Nav link | tertiary | #1f2727 | #ffffff | 15.24 | 4.5 | pass |
+| Nav call (persistent filled primary): label | primary | #ffffff | #347e7b | 4.76 | 4.5 | pass |
+| Footer label | quaternary | #464f4f | #edf2f2 | 7.46 | 4.5 | pass |
+| Footer value | tertiary | #1f2727 | #edf2f2 | 13.49 | 4.5 | pass |
+| Logo mark (graphic) vs nav plate | UI | #347e7b | #ffffff | 4.76 | 3 | pass |
+| Logo wordmark vs nav plate | primary | #1f2727 | #ffffff | 15.24 | 4.5 | pass |
+| Focus outline (site-wide, 3px) vs page ground | UI | #1f2727 | #f7fbfa | 14.61 | 3 | pass |
+| Deep band: heading (white on teal-800) | secondary | #ffffff | #274e4d | 9.20 | 3 | pass |
+| Deep band: body (teal-100 on teal-800) | tertiary | #d8f2f0 | #274e4d | 7.83 | 4.5 | pass |
+| Deep band: secondary call label on the band | secondary action | #ffffff | #274e4d | 9.20 | 4.5 | pass |
+| Deep band: secondary call ring vs band | UI | #d8f2f0 | #274e4d | 7.83 | 3 | pass |
+| Town chip pressed: label on accent-solid | state | #ffffff | #347e7b | 4.76 | 4.5 | pass |
+| Town field: input border vs ground | UI | #1f2727 | #ffffff | 15.24 | 3 | pass |
+| Town field: typed text | tertiary | #1f2727 | #ffffff | 15.24 | 4.5 | pass |
+| Focus ring (outer ring, accent) vs page ground | UI | #347e7b | #ffffff | 4.76 | 3 | pass |
+
+| Token pair (S0248) | Foreground | Ground | Ratio | Need | Result |
+|---|---|---|---|---|---|
+| --color-text on --color-bg | #1f2727 | #f7fbfa | 14.61 | 4.5 | pass |
+| --color-text on --color-bg-subtle | #1f2727 | #edf2f2 | 13.49 | 4.5 | pass |
+| --color-text on --color-bg-surface | #1f2727 | #ffffff | 15.24 | 4.5 | pass |
+| --color-text on --color-accent-subtle | #1f2727 | #f1f9f8 | 14.26 | 4.5 | pass |
+| --color-text on --color-accent-subtle-hover | #1f2727 | #d8f2f0 | 12.98 | 4.5 | pass |
+| --color-text-secondary on --color-bg | #464f4f | #f7fbfa | 8.08 | 4.5 | pass |
+| --color-text-secondary on --color-bg-subtle | #464f4f | #edf2f2 | 7.46 | 4.5 | pass |
+| --color-text-secondary on --color-bg-surface | #464f4f | #ffffff | 8.43 | 4.5 | pass |
+| --color-text-secondary on --color-accent-subtle | #464f4f | #f1f9f8 | 7.88 | 4.5 | pass |
+| --color-text-secondary on --color-accent-subtle-hover | #464f4f | #d8f2f0 | 7.18 | 4.5 | pass |
+| --color-text-tertiary on --color-bg | #5c6665 | #f7fbfa | 5.68 | 4.5 | pass |
+| --color-text-tertiary on --color-bg-subtle | #5c6665 | #edf2f2 | 5.24 | 4.5 | pass |
+| --color-text-tertiary on --color-bg-surface | #5c6665 | #ffffff | 5.93 | 4.5 | pass |
+| --color-text-tertiary on --color-accent-subtle | #5c6665 | #f1f9f8 | 5.54 | 4.5 | pass |
+| --color-text-tertiary on --color-accent-subtle-hover | #5c6665 | #d8f2f0 | 5.05 | 4.5 | pass |
+| --color-accent-text on --color-bg | #2c6663 | #f7fbfa | 6.32 | 4.5 | pass |
+| --color-accent-text on --color-bg-subtle | #2c6663 | #edf2f2 | 5.83 | 4.5 | pass |
+| --color-accent-text on --color-bg-surface | #2c6663 | #ffffff | 6.59 | 4.5 | pass |
+| --color-accent-text on --color-accent-subtle | #2c6663 | #f1f9f8 | 6.16 | 4.5 | pass |
+| --color-accent-text on --color-accent-subtle-hover | #2c6663 | #d8f2f0 | 5.61 | 4.5 | pass |
+| text-on-accent on accent-solid | #ffffff | #347e7b | 4.76 | 4.5 | pass |
+| text-on-accent on accent-solid-hover | #ffffff | #2c6663 | 6.59 | 4.5 | pass |
+| accent-solid (fill) on bg | #347e7b | #f7fbfa | 4.56 | 3 | pass |
+| border-control on bg | #5c6665 | #f7fbfa | 5.68 | 3 | pass |
+| border-focus on bg-surface | #347e7b | #ffffff | 4.76 | 3 | pass |
+| deep: text (white) on bg-inverse | #ffffff | #274e4d | 9.20 | 4.5 | pass |
+| deep: text-secondary on bg-inverse | #d8f2f0 | #274e4d | 7.83 | 4.5 | pass |
+| deep: text-tertiary on bg-inverse | #ade9e6 | #274e4d | 6.82 | 4.5 | pass |
+| deep: text on surface on surface | #ffffff | #2c6663 | 6.59 | 4.5 | pass |
+| deep: secondary on surface on surface | #d8f2f0 | #2c6663 | 5.61 | 4.5 | pass |
+| deep: action label on action fill | #274e4d | #ffffff | 9.20 | 4.5 | pass |
+
+### Step 4: applied everywhere
+- **Coverage:**
+  - All four pages and every visible version: 112 version files (homepage 9 sections x 8; Services, About and Contact
+    8 sections x 5). The header, footer and mobile bar on every page.
+  - The companion cursor and its effects read their colours from the tokens (`tok()`).
+  - The hero canvas shades and the proof stars read tokens too.
+  - The browser theme colour is the page ground (#f7fbfa).
+- **Backups:**
+  - 101 backup files exist, the same as R5.
+  - `git diff --name-status dd994a0 HEAD` over every `bk/` folder lists **0** files, so the backups are byte-identical.
+  - Each still opens as the record it was: `qa/gate/r6-final-bkopen.log` and `r6-final-clickthrough.log` (pagebk 25 of 25).
+  - The 6 "BAD" rows are the Services and Storm B1-B3 slots, which never existed (as in R5).
+- **Deep-accent grounds per page view** (`r6-final-browser.log`, the gate now caps them at 2):
+  - Homepage: only the Call band (L 0.064), in Call V1-V5 and V7.
+  - Inner pages: their teal-800 bands (close V2, Contact head V4 panel, the card's back) sit inside a light section.
+  - 0 black or near-black grounds; 0 large dark panels.
+
+### Step 6: the custom-cursor click glitch (animation-principles ⟦S1436⟧)
+**Cause** (from the R5 code, `git diff 2e9bd16 abd9a66 -- rembrandt/v5/src/js/companion.js`):
+- **The blink:** every pointerdown faded the whole companion to 35% opacity, and every release faded it back. So each
+  click made the cursor blink.
+- **Inconsistent press:** pointerdown also fired a separate press animation chosen per mode and per element kind. Some
+  kinds had none, and these animations ran alongside the hover pose with no overwrite. A quick second click could leave a
+  part mid-pose.
+- **Hover snap:** hover changes snapped every part back instantly (`resetParts`).
+- **Slow splash:** the splash effect ran 450 ms, longer than a double click.
+- **No real swallowing:** the companion layer is `pointer-events:none` (`.cmp`), so no click was ever swallowed. It looked
+  like one because the cursor blinked and stuttered at the moment of the click.
+
+**Fix** (`src/js/companion.js`):
+- **Press:** the same single tween for every interactive element: scale 0.9 in 70 ms (micro), back to 1 in 160 ms
+  (short), with `overwrite:true`.
+  - It is interruptible: a new press replaces the old one, and pointercancel jumps it to the end.
+  - The opacity fade is gone.
+- **Hover:** hover poses settle in 120 ms instead of snapping.
+- **Click effects:** the spark and splash effects last 220-250 ms.
+- **Native cursor:** reduced motion turns the companion off before anything mounts, so the native cursor returns; on
+  touch it never mounts.
+
+**Test** (`qa/scripts/cursortest.mjs`; log `qa/gate/r6-final-cursor.log`):
+- **Method:** with the custom cursor live, it clicks every interactive element in every visible version state on all four
+  pages: 23 states, 1,202 clicks (links, buttons, picker labels, inputs, tabs, summaries, the nav and the footer).
+- **Checks on every click:**
+  - The real click lands on the element aimed at.
+  - The click's delay.
+  - The companion, sampled every frame for 320 ms: opacity never dips below 0.98; press scale stays within 0.88-1.02 and
+    returns to 1; the press class clears; no jump over 24 px between frames with the pointer still.
+- **Result:** 1,202 clicks, every one landed. 0 flickers, 0 scale glitches, 0 stuck presses, 0 jumps.
+  - One row reported "121 ms" on Homepage V4. That figure ran from pointerdown, so it included the test's own 40 ms
+    hold, with four browsers sharing four CPUs.
+  - Measured from release to click, the delay a visitor feels, Homepage V4 re-run alone gives a worst case of **0.3 ms**.
+- **Touch and reduced motion:** the custom cursor stays off, the native cursor is untouched, and the companion is hidden.
+- **Earlier misses:** the first run reported three misses (two proof picker labels, the footer phone). They were test
+  artefacts: the target was measured while a version switch or a smooth scroll was still moving it. The test now waits
+  for the target's rect to hold still before aiming. Every click in those states lands.
+- **Verdict:** every state is rock-solid. The simplification that got it there is the one above: the opacity blink and
+  the per-kind press variety are gone, replaced by one press for everything.
+
+### Final gates (fresh, on the final build; logs in `rembrandt/v5/qa/gate/r6-final-*.log`)
+- **Facts** (`r6-final-facts.log`):
+  - FAILS 0 on all four pages.
+  - "353-9711", "24/7" and "licen" each occur 0 times across the four built pages.
+  - Storm V7 and V8 still say the insurer decides. The facts grep still passes.
+- **Tokens** (`r6-final-tokens.log`): 1535 semantic references, 0 primitives, 0 legacy names, 1 allowed literal.
+- **Contrast** (`r6-contrast-table.md`): 58 rows, FAIL 0.
+- **Sweep** (`r6-final-sweep.log`, `qa/qa5/fullqa-r6b.json`; 92 states at 1440 and 375):
+  - Overflow 0, errors 0, one H1 per page.
+  - The residual flags were checked by hand (see QA round 2).
+- **Hierarchy** (`r6-final-hierarchy.log`): 0 failures in 92 states.
+- **Accent audit** (`r6-final-accent.log`): 0 views with two filled actions; highest chroma behind body text C 0.061.
+- **Light check** (`r6-final-browser.log`):
+  - Every version switches and mounts.
+  - The logo is in the header and footer of all four pages, and the favicon is set.
+  - Every visible button keeps a fill or a ring with motion on.
+  - bad 0.
+- **Switchers** (`r6-final-keys.log`): 17 of 17 sections switch by key and by click; B shows the backups on every page;
+  errors 0.
+- **Click-throughs** (`r6-final-clickthrough.log`), errors 0 everywhere:
+  - Squares calculator: 21.2 / 45.3 / 33.0, as the geometry predicts.
+  - How truck and tabs, Storm checklist and spots, Towns radius, quilt and signs, Call week and tear-off.
+  - Contact: card, Now line, ring, bands and checker.
+  - Inner-page backups: 25 of 25.
+
+### R6 commits
+- 2e9bd16: stage 1. New closure logo and favicon; computed teal-192 ramps with a semantic tier; every visible version
+  migrated; mood, voice and tokens reference files.
+- abd9a66: stage 2. Stable single-tween cursor press; token-only cursor colours; contrast table and cursor click test;
+  pressed chip and pill labels fixed.
+- 8396f55: stage 3. QA round 1-2 fixes: one meaning for the accent, honest type levels, one filled call per view.
+- (this commit): stage 4. Final gates, the R6 gate updates (finalgate deep-accent cap and ring-aware button check, cursor
+  test timing), and this brand sheet.

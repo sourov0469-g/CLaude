@@ -17,8 +17,8 @@ for (const [file, ids, n] of PAGES) for (let v = 1; v <= n; v++) {
   await p.mouse.move(700, 450); await p.mouse.move(720, 460, { steps: 4 }); await p.waitForTimeout(200);
   const live = await p.evaluate(() => document.documentElement.classList.contains('cmp-live') && document.documentElement.classList.contains('cmp-on'));
   await p.evaluate(() => {
-    window.__clicks = []; window.__downs = [];
-    addEventListener('pointerdown', e => window.__downs.push(performance.now()), true);
+    window.__clicks = []; window.__downs = []; window.__ups = [];
+    addEventListener('pointerdown', e => window.__downs.push(performance.now()), true); addEventListener('pointerup', e => window.__ups.push(performance.now()), true);
     addEventListener('click', e => { window.__clicks.push([performance.now(), e.target]); const a = e.target.closest && e.target.closest('a[href]'); if (a) e.preventDefault(); }, true);
     window.__sample = () => { const s = []; const ch = document.querySelector('.cmp-ch'), root = document.querySelector('.cmp'), pos = document.querySelector('.cmp-pos'), nail = document.querySelector('.cmp-nail'); let f = 0;
       return new Promise(res => { const t0 = performance.now(); const step = () => { const m = getComputedStyle(ch).transform, sc = m === 'none' ? 1 : +m.match(/matrix\(([^,]+)/)[1];
@@ -44,10 +44,10 @@ for (const [file, ids, n] of PAGES) for (let v = 1; v <= n; v++) {
       if (!(await p.evaluate(([x, y]) => { const t = document.elementFromPoint(x, y); return t && (window.__el === t || window.__el.contains(t) || t.closest('label') === window.__el); }, last))) continue;
       await p.mouse.move(target.x - 6, target.y - 4, { steps: 3 }); await p.mouse.move(target.x, target.y, { steps: 2 }); await p.waitForTimeout(140);
       const samp = p.evaluate(() => window.__sample());
-      const before = await p.evaluate(() => [window.__clicks.length, window.__downs.length]);
+      const before = await p.evaluate(() => [window.__clicks.length, window.__ups.length]);
       await p.mouse.down(); await p.waitForTimeout(40); await p.mouse.up();
       const s = await samp; await p.waitForTimeout(60);
-      const res = await p.evaluate(([c0, d0]) => { const c = window.__clicks.slice(c0), d = window.__downs.slice(d0); const hit = c.find(([, t]) => window.__el === t || window.__el.contains(t) || (t.closest && t.closest('label') === window.__el) || (window.__el.tagName === 'LABEL' && t === document.getElementById(window.__el.htmlFor)));
+      const res = await p.evaluate(([c0, d0]) => { const c = window.__clicks.slice(c0), d = window.__ups.slice(d0); /* delay = release to click: what the visitor feels (the 40ms hold is the test's) */ const hit = c.find(([, t]) => window.__el === t || window.__el.contains(t) || (t.closest && t.closest('label') === window.__el) || (window.__el.tagName === 'LABEL' && t === document.getElementById(window.__el.htmlFor)));
         const miss = hit ? '' : c.map(([, t]) => t.tagName + '.' + String(t.className && t.className.baseVal !== undefined ? t.className.baseVal : t.className).split(' ')[0]).join('/');
         return { miss, landed: !!hit, delay: hit && d[0] ? hit[0] - d[0] : null, stillDown: document.querySelector('.cmp-nail').classList.contains('is-down') }; }, before);
       clicks++; n0++;
