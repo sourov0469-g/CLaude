@@ -7,7 +7,7 @@
    Mechanism refs: [BANK] 147 Shape Hover (backout), [BANK] 151 elastic two-stage press, S0634 click-burst/ripple,
    S0409 success check, [BANK] 229 asymmetric hover (in / out 2.5x). */
 (function () {
-  var INK = '#121212', YEL = '#FF5F00', STEEL = '#C9C1B6', BLUE = '#FF5F00', RED = '#C42B1C', WOOD = '#FF9C5E', TEAL = '#FF5F00', PAPER = '#121212', GRN = '#FF5F00';
+  var INK = EZ.c('--color-art-line'), YEL = EZ.c('--color-art-accent'), STEEL = EZ.c('--color-border'), BLUE = EZ.c('--color-art-accent'), RED = EZ.c('--color-art-accent'), WOOD = EZ.c('--color-art-accent-soft'), TEAL = EZ.c('--color-art-accent'), PAPER = EZ.c('--color-art-line'), GRN = EZ.c('--color-art-accent');
   var o = ' stroke="' + INK + '" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"';
   function c(fill) { return ' fill="' + fill + '"' + o; }
   var N = ' fill="none"' + o;
@@ -81,7 +81,7 @@
     tag: '<path d="M-12-6h16l8 6-8 6h-16z"' + c(PAPER) + '/><circle cx="6" cy="0" r="1.6" fill="' + INK + '"/>',
     mixer: '<path d="M-10 10l4-14h12l4 14z"' + c(STEEL) + '/><path d="M-4-4l4-8 4 8"' + N + '/>',
     goggles: '<rect x="-12" y="-5" width="10" height="10" rx="4"' + c(TEAL) + '/><rect x="2" y="-5" width="10" height="10" rx="4"' + c(TEAL) + '/><path d="M-2 0h4"' + N + '/>',
-    vest: '<path d="M-10-12l5 3h10l5-3v24h-20z"' + c('#FF5F00') + '/><path d="M-10 0h20"' + o + ' stroke="' + STEEL + '" stroke-width="2.4"/>',
+    vest: '<path d="M-10-12l5 3h10l5-3v24h-20z"' + c(EZ.c('--color-art-accent')) + '/><path d="M-10 0h20"' + o + ' stroke="' + STEEL + '" stroke-width="2.4"/>',
     gloves: '<path d="M-8 12v-12l-2-8 3-1 2 6v-8h3v8l1-9h3l-1 10 3-6 3 1-4 9v10z"' + c(YEL) + '/>',
     toolbox: '<rect x="-12" y="-4" width="24" height="14"' + c(RED) + '/><path d="M-5-4v-5h10v5M-12 2h24"' + N + '/>',
     plumb: '<path d="M0-13v8"' + N + '/><path d="M-5-5h10l-5 15z"' + c(YEL) + '/>',

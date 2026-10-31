@@ -9,7 +9,18 @@
   var mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
   var mqFine = matchMedia('(hover: hover) and (pointer: fine)');
 
+  // REBRAND: a semantic colour token resolved to its value, for the places CSS var() cannot reach (SVG attributes built
+  // in strings, canvas, tween targets). Source code names the role; the value lives only in tokens.css [S0071, S1496].
+  var tokCache = {};
+  function tok(name) {
+    if (tokCache[name]) return tokCache[name];
+    var v = getComputedStyle(root).getPropertyValue(name).trim();
+    if (v) tokCache[name] = v;
+    return v || 'currentColor';
+  }
+
   var EZ = window.EZ = {
+    c: tok,
     sections: {},     // id -> {defs, el, current, cleanup, ctx, switchEl}
     order: [],
     booted: false
@@ -522,7 +533,7 @@
       var m = root.dataset.motion === 'off' ? 'off' : 'on';
       doc.querySelectorAll('[data-setting="motion"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.value === m ? 'true' : 'false'); });
       var meta = doc.querySelector('meta[name="theme-color"]');
-      if (meta) meta.content = root.dataset.theme === 'daylight' ? '#F1ECE4' : '#121212';
+      if (meta) meta.content = tok(root.dataset.theme === 'daylight' ? '--color-surface' : '--color-bg');   // the browser bar matches the page ground
     }
     function toggle(open) {
       panel.hidden = !open;
@@ -625,7 +636,7 @@
           gsap.fromTo(img, { x: a.left + a.width / 2 - (b.left + b.width / 2), y: a.top + a.height / 2 - (b.top + b.height / 2), scale: Math.max(a.width / b.width, .2) },
             { x: 0, y: 0, scale: 1, duration: .3, ease: 'power2.inOut', clearProps: 'transform' });
         }
-        gsap.fromTo(box, { backgroundColor: 'rgba(18, 18, 18, 0)' }, { backgroundColor: 'rgba(18, 18, 18, .94)', duration: .25, clearProps: 'backgroundColor' });
+        gsap.fromTo(box, { opacity: 0 }, { opacity: 1, duration: .2, ease: 'power2.out', clearProps: 'opacity' });   // REBRAND: the viewer stays light; it fades in, never through near-black
       }
       closeBtn.focus();
     }

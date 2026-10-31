@@ -75,6 +75,7 @@
   --color-art-fill: var(--sand-100);
   --color-art-accent: var(--clay-500);
   --color-art-accent-soft: var(--clay-300);
+  --color-art-wash: var(--clay-100);           /* large drawing areas: a trace of clay, never a colour field */
   --shadow-card: 0 1px 0 rgb(27 25 22 / .05), 0 12px 28px -18px rgb(27 25 22 / .28);
 
   /* ---- record aliases: the pre-rebrand names, kept ONLY so the hidden backups (byte-identical records) still resolve.
@@ -110,11 +111,14 @@
   /* [OWNER DESIGN NOTE] Poppins (display, via the size-adjusted 'Elbaz Display' face) + Roboto (text); was Bebas Neue + Geist */
   --f-display: "Elbaz Display", "Poppins", Arial, sans-serif;
   --f-text: "Roboto", Arial, sans-serif;
-  --t-display: clamp(2.75rem, 1rem + 5.4vw, 6rem);
-  --t-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
-  --t-lead: clamp(1.25rem, 1.1rem + .7vw, 1.625rem);
-  --t-body: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
-  --t-small: clamp(.8125rem, .79rem + .1vw, .875rem);
+  /* REBRAND text hierarchy, four levels [S1434]: L1 page title, L2 section heading, L3 body / supporting, L4 fine print.
+     'Elbaz Display' renders at 74%, so the visual sizes are: L1 35-62px, L2 22-41px (L1/L2 >= 1.5 at every width),
+     L3 18-20px, L4 12-13px (L3/L4 >= 1.5). Measured per version by tools/rbtype.js. */
+  --t-display: clamp(3rem, 1.6rem + 4.4vw, 5.25rem);
+  --t-head: clamp(1.875rem, 1.4rem + 2vw, 3.5rem);
+  --t-lead: clamp(1.25rem, 1.1rem + .6vw, 1.5rem);
+  --t-body: clamp(1.125rem, 1.05rem + .25vw, 1.25rem);
+  --t-small: clamp(.75rem, .72rem + .1vw, .8125rem);
   --t-figure: clamp(3.5rem, 2rem + 6vw, 8rem);
 
   /* space: base-4 scale [S1432, S1303 §5] */
@@ -214,7 +218,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 }
 .t-lead { font-size: var(--t-lead); line-height: 1.35; max-width: 40ch; font-weight: 400; }
 .t-body { font-size: var(--t-body); line-height: 1.55; max-width: 62ch; }
-.t-small { font-size: var(--t-small); line-height: 1.45; font-weight: 500; }
+.t-small { font-size: var(--t-small); line-height: 1.45; font-weight: 600; }   /* L4: weight step from L3 */
 .t-figure {
   font-family: var(--f-display);
   font-size: var(--t-figure);
@@ -330,8 +334,17 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 /* OWNER MASTER DIRECTIVE: the section label, a brand element on every section. The logo's roof chevron in orange,
    then a sentence-case line in accent text. Never tracked caps. */
-.eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--accent-text); }
-.eyebrow__roof { width: 20px; height: 12px; flex: none; overflow: visible; }
+/* REBRAND: the section label is neutral (a label, not a highlight) [S1435: if everything pops, nothing does]; its glyph is
+   the logo's bracket alone, the quiet cue of the mark [S1422]. The second line of a heading steps down in tone, not in hue. */
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.eyebrow__mark { width: 12px; height: 12px; flex: none; overflow: visible; }
+.eyebrow__mark path { fill: none; stroke: currentColor; stroke-width: 8; stroke-linejoin: miter; }
+.eyebrow__roof { width: 20px; height: 12px; flex: none; overflow: visible; }   /* records only */
 .eyebrow__roof path { fill: none; stroke: var(--a-500); stroke-width: 3; stroke-linejoin: miter; }
-.hh__a, .t-head .acc { color: var(--a-600); }   /* 3.4:1 on paper, 3.0:1 on the orange tint: large-text AA */
+.hh__a, .t-head .acc { color: var(--color-text-secondary); }   /* 5.27:1 or better on every light surface */
 .eyebrow { grid-column: 1 / -1; justify-self: start; }
+
+/* REBRAND hierarchy pins: every page title is L1, every section heading is L2, whatever a version's own scale said
+   [S1434: adjacent levels >= 1.5x; one primary per view]. Records keep their own type (they are not .ver:not([data-v^="b"])). */
+.sec .ver:not([data-v^="b"]) h1 { font-size: var(--t-display); line-height: 1.04; }
+.sec .ver:not([data-v^="b"]) h2.t-head { font-size: var(--t-head); line-height: 1.1; }

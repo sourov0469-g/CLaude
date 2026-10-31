@@ -156,7 +156,7 @@
         if (!k.motion) return;
         var b = root.querySelectorAll('.wbx__burst path'), fl = root.querySelector('.wbx__flash');
         gsap.timeline().fromTo(b, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .14, ease: 'power2.out' }).to(b, { opacity: 0, duration: .12 })
-          .fromTo(fl, { fill: '#FFF5EE' }, { fill: '#FF5F00', duration: .08, yoyo: true, repeat: 1 }, 0);
+          .fromTo(fl, { fill: EZ.c('--color-art-fill') }, { fill: EZ.c('--color-art-accent'), duration: .08, yoyo: true, repeat: 1 }, 0);
       }
       var belts = Array.prototype.slice.call(root.querySelectorAll('.wbx__belt'));
       var hold = root.querySelector('.wbx__hold');

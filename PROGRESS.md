@@ -536,3 +536,54 @@ There is no container, no roof and no outline; every line the eye can supply is 
 - **Old roof-E files** moved to `brand/v1-roof-e/`, not deleted. The old mark is gone from header, footer, favicon and the one visible version that drew it (hero v6). It survives only inside hidden backups.
 
 **Measured token table:** `qa/brand-tokens.md` (`tools/brandmeasure.py`, read from the shipped `tokens.css`).
+
+## Stage 2: the declared colour hierarchy (what each colour is for)
+
+**The accent (clay) is for three things only** [S0071 one colour one meaning; S1435 isolation]:
+1. **The one filled primary action per view:** `.btn` on `--color-accent-solid` (clay-600) with a white label (5.31:1). The colour is on the button's background, never accent text on a neutral button. Secondary actions are ghost buttons with a neutral border.
+2. **Interactive state:**
+   - focus rings (`--color-focus-ring`)
+   - the selected, pressed or checked control
+   - the active slider handle, progress fill, focused-field underline, link hover
+   - the current version in the switcher
+
+   A checked segment is state, not emphasis [S0071 "selected states may use the accent"].
+3. **Key highlights in drawings:** `--color-art-accent` (clay-500) marks the one thing a drawing is about, such as a pin or a needle. Large drawing areas use `--color-art-wash` (clay-100), a trace of clay, never a colour field.
+
+**Neutrals (sand) carry everything else**, about 90% of every view [S0071 palette structure]:
+- **Grounds:** sand-50, white and sand-100, alternating. No coloured section anywhere.
+- **Text:** sand-950 for primary, sand-700 for secondary.
+- **Borders and dividers:** sand-200, sand-300, and sand-600 for controls.
+- **Line art:** sand-900 and sand-600.
+
+**Never coloured:**
+- headings, including the second line of a two-tone heading (it steps down in tone)
+- section labels (eyebrows)
+- body text and section grounds
+- dividers between sections
+- list bullets
+- decorative tags, plates, boards and stages
+- peer buttons
+
+**Danger** (danger-600, hue 18) means "this form field needs fixing" and nothing else. It always comes with a written message, never colour alone [S1497 semantic use]. Its 19 decorative uses (lasers, needles, stamps, flags) were moved to the clay drawing accent in QA round 1.
+
+**Dark sections:** none. The directive allows at most a couple per page in the accent's own hue family. The site does not need one: no content on it is improved by a dark ground, and the owner's complaint was eye strain.
+
+## Stage 2: migration of presented code (how the rebrand was applied without touching a backup)
+
+- **The engine.** `tools/rebrand.py` classifies every CSS rule:
+  - **presented:** names no backup-only prefix
+  - **record:** names a backup prefix or a `data-v="b…"` slot
+  - **mixed:** never touched; the 30 mixed rules carry no colour
+
+  It then rewrites every legacy token in presented rules to its semantic role, by property:
+  - text → `--color-text*`
+  - background → surface, ground or accent roles
+  - SVG fill/stroke → `--color-art-*`
+  - borders/shadows → `--color-border*`
+  - outline → `--color-focus-ring`
+
+  It does the same by state: a `[aria-pressed="true"]` or `:checked` rule maps to the accent, the same token at rest to a neutral. Visible HTML blocks had the old roof-chevron eyebrow glyph replaced by the new bracket. 2,357 token rewrites.
+- **Literals.** 277 colour literals in presented code were converted. JS that builds SVG or canvas reads tokens at run time through `EZ.c('--color-…')`. CSS rgba became `color-mix(in srgb, var(--color-…) N%, transparent)`. SVG presentation attributes moved into style properties. Data-URI drawings became token gradients.
+- **Token compliance** (`tools/tokencheck.py`): presented code across 22 sections plus chrome has **0** primitive references, **0** record names and **0** colour literals. The only literals left are in the token declarations, the favicon file and the `<meta theme-color>` that browsers need as a literal.
+- **Backups** (`tools/backupintegrity.py`): all **104** hidden backups are **byte-identical** to the last pre-rebrand commit (3781ab8), across HTML block, JS definition, and every record CSS rule and keyframes block. So is the token file's record scoping. Two slips caught by this check (a `b3` definition in ba.js and in financing.js) were restored from git before anything was committed.

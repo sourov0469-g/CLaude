@@ -13,9 +13,9 @@
   var VARIANTS = ['hat', 'level', 'cone', 'off'];
   var NAMES = { hat: 'Hard hat', level: 'Level', cone: 'Traffic cone', off: 'No buddy' };
   var ICONS = {
-    hat: '<path d="M4 15a8 8 0 0 1 16 0z" fill="#FF5F00" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="15" width="20" height="3" rx="1.5" fill="#FF5F00" stroke="currentColor" stroke-width="1.5"/>',
-    level: '<rect x="2" y="9" width="20" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="10.6" width="8" height="3.8" rx="1.9" fill="#FFC9A3"/><circle cx="12" cy="12.5" r="1.3" fill="currentColor"/>',
-    cone: '<path d="M10 3h4l5 16H5z" fill="#FF5F00" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11h8" stroke="#FFFFFF" stroke-width="2.4"/><rect x="3" y="18.5" width="18" height="3" rx="1" fill="#FF5F00" stroke="currentColor" stroke-width="1.3"/>',
+    hat: '<path d="M4 15a8 8 0 0 1 16 0z" fill="' + EZ.c('--color-art-accent') + '\" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="15" width="20" height="3" rx="1.5" fill="' + EZ.c('--color-art-accent') + '\" stroke="currentColor" stroke-width="1.5"/>',
+    level: '<rect x="2" y="9" width="20" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="10.6" width="8" height="3.8" rx="1.9" fill="' + EZ.c('--color-art-accent-soft') + '\"/><circle cx="12" cy="12.5" r="1.3" fill="currentColor"/>',
+    cone: '<path d="M10 3h4l5 16H5z" fill="' + EZ.c('--color-art-accent') + '\" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11h8" stroke="' + EZ.c('--color-surface') + '\" stroke-width="2.4"/><rect x="3" y="18.5" width="18" height="3" rx="1" fill="' + EZ.c('--color-art-accent') + '\" stroke="currentColor" stroke-width="1.3"/>',
     off: '<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 17.5l11-11" stroke="currentColor" stroke-width="1.6"/>'
   };
 
@@ -72,14 +72,19 @@
     window.addEventListener('scroll', queueHit, { passive: true });
     doc.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'touch') emit('down'); });
     doc.addEventListener('pointerup', function (e) { if (e.pointerType !== 'touch') emit('up'); });
+    // a press can end without a pointerup (a native drag takes over, the window loses focus): never leave the tip pressed
+    doc.addEventListener('pointercancel', function (e) { if (e.pointerType !== 'touch') emit('up'); });
+    doc.addEventListener('lostpointercapture', function () { emit('up'); }, true);
+    doc.addEventListener('dragend', function () { emit('up'); }, true);
+    window.addEventListener('blur', function () { emit('up'); });
   }
   EZ.ptr.rehit = queueHit;
 
   /* ---------- buddy artwork (viewBox -40 -40 80 80; outlines in ink so it reads on teal, ink and daylight grounds) ---------- */
-  var INK = '#121212', YEL = '#FF5F00', YEL_D = '#E95600', SKIN = '#E3DBCF', STEEL = '#C9C1B6', TEAL = '#FF5F00', DEEP = '#FF5F00';
+  var INK = EZ.c('--color-art-line'), YEL = EZ.c('--color-art-accent'), YEL_D = EZ.c('--color-art-accent'), SKIN = EZ.c('--color-border-subtle'), STEEL = EZ.c('--color-border'), TEAL = EZ.c('--color-art-accent'), DEEP = EZ.c('--color-art-accent');
   function eye(x, y, rx, ry) {
-    return '<g transform="translate(' + x + ' ' + y + ')"><g class="bd-eye"><ellipse rx="' + rx + '" ry="' + ry + '" fill="#FFFFFF" stroke="' + INK + '" stroke-width="1.4"/>' +
-      '<circle class="bd-pupil" r="' + (rx * .5).toFixed(2) + '" fill="' + INK + '"/><circle class="bd-glint" cx="-.9" cy="-1.3" r=".8" fill="#FFFFFF"/></g></g>';
+    return '<g transform="translate(' + x + ' ' + y + ')"><g class="bd-eye"><ellipse rx="' + rx + '" ry="' + ry + '" fill="' + EZ.c('--color-surface') + '\" stroke="' + INK + '" stroke-width="1.4"/>' +
+      '<circle class="bd-pupil" r="' + (rx * .5).toFixed(2) + '" fill="' + INK + '"/><circle class="bd-glint" cx="-.9" cy="-1.3" r=".8" fill="' + EZ.c('--color-surface') + '\"/></g></g>';
   }
   var ART = {
     hat:
@@ -100,32 +105,32 @@
         '<rect x="-31" y="-10" width="9" height="20" rx="3" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="2"/>' +
         '<rect x="22" y="-10" width="9" height="20" rx="3" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="2"/>' +
         '<path d="M-22 -10 V10 M22 -10 V10" stroke="' + INK + '" stroke-width="1"/>' +
-        '<rect class="bd-vial" x="-14" y="-6.2" width="28" height="12.4" rx="6.2" fill="#FFC9A3" stroke="' + INK + '" stroke-width="1.6"/>' +
+        '<rect class="bd-vial" x="-14" y="-6.2" width="28" height="12.4" rx="6.2" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + INK + '" stroke-width="1.6"/>' +
         '<g class="bd-bubble">' + eye(0, 0, 4.4, 3.6) + '</g>' +
         '<path d="M-5.2 -6.2 V6.2 M5.2 -6.2 V6.2" stroke="' + INK + '" stroke-width="1.2"/>' +
         '<circle cx="-17.5" cy="0" r="1.3" fill="' + INK + '"/><circle cx="17.5" cy="0" r="1.3" fill="' + INK + '"/>' +
       '</g>',
     cone:
       '<g class="bd-head">' +
-        '<path d="M-7 -27 H7 L20 20 H-20 Z" fill="#FF5F00" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/>' +
-        '<path d="M-11.6 -10 H11.6 L13.4 -3.5 H-13.4 Z" fill="#FFFFFF" stroke="' + INK + '" stroke-width="1.2"/>' +
+        '<path d="M-7 -27 H7 L20 20 H-20 Z" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/>' +
+        '<path d="M-11.6 -10 H11.6 L13.4 -3.5 H-13.4 Z" fill="' + EZ.c('--color-surface') + '\" stroke="' + INK + '" stroke-width="1.2"/>' +
         '<g class="bd-eyes">' + eye(-6, 6, 4.2, 4.8) + eye(6, 6, 4.2, 4.8) + '</g>' +
         '<path class="bd-mouth" d="M-3.5 14 Q0 16.4 3.5 14" fill="none" stroke="' + INK + '" stroke-width="1.5" stroke-linecap="round"/>' +
-        '<rect x="-26" y="20" width="52" height="7" rx="2" fill="#FF5F00" stroke="' + INK + '" stroke-width="2"/>' +
+        '<rect x="-26" y="20" width="52" height="7" rx="2" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + INK + '" stroke-width="2"/>' +
       '</g>'
   };
   // one small tool per section: the buddy picks it up as it enters (PLAN-V3 §2.3)
   var TOOLS = {
     hero: '<path d="M-7 5 L4 -6 L7.5 -2.5 L-3.5 8.5 Z" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.3" stroke-linejoin="round"/><path d="M-7 5 L-8.6 10 L-3.5 8.5 Z" fill="' + SKIN + '" stroke="' + INK + '" stroke-width="1.1" stroke-linejoin="round"/><path d="M4 -6 L7.5 -2.5" stroke="' + DEEP + '" stroke-width="2.4"/>',
-    proof: '<rect x="-8" y="-3.5" width="11" height="7" rx="1.5" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/><path d="M3 -4.5 L7 -6.5 V6.5 L3 4.5 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/><path class="bd-beam" d="M7 -6 L19 -11 V11 L7 6 Z" fill="#FFE7D6" opacity=".55"/>',
+    proof: '<rect x="-8" y="-3.5" width="11" height="7" rx="1.5" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2"/><path d="M3 -4.5 L7 -6.5 V6.5 L3 4.5 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/><path class="bd-beam" d="M7 -6 L19 -11 V11 L7 6 Z" fill="' + EZ.c('--color-art-fill') + '\" opacity=".55"/>',
     services: '<rect x="-9" y="-3" width="9" height="6" rx="2" fill="' + TEAL + '" stroke="' + INK + '" stroke-width="1.2"/><path d="M0 0 H9" stroke="' + STEEL + '" stroke-width="2.2"/><path d="M9 -1.6 L11.5 0 L9 1.6" fill="' + STEEL + '" stroke="' + INK + '" stroke-width=".8"/>',
-    ba: '<rect x="-7" y="-9" width="14" height="18" rx="3" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.3"/><rect x="-4" y="-6" width="8" height="5" rx="1" fill="#C9C1B6"/><circle class="bd-led" cx="0" cy="4" r="2" fill="#5E5852"/>',
-    process: '<circle cx="-2" cy="0" r="6.5" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.3"/><circle cx="-2" cy="0" r="2" fill="' + INK + '"/><path d="M4.5 0 H13" stroke="#FF5F00" stroke-width="1.4" stroke-dasharray="2 1.4"/>',
+    ba: '<rect x="-7" y="-9" width="14" height="18" rx="3" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.3"/><rect x="-4" y="-6" width="8" height="5" rx="1" fill="' + EZ.c('--color-border') + '\"/><circle class="bd-led" cx="0" cy="4" r="2" fill="' + EZ.c('--color-art-line-soft') + '\"/>',
+    process: '<circle cx="-2" cy="0" r="6.5" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.3"/><circle cx="-2" cy="0" r="2" fill="' + INK + '"/><path d="M4.5 0 H13" stroke="' + EZ.c('--color-art-accent') + '\" stroke-width="1.4" stroke-dasharray="2 1.4"/>',
     financing: '<path d="M0 -10 V-2" stroke="' + INK + '" stroke-width="1"/><path d="M-4 -2 H4 L0 9 Z" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.3" stroke-linejoin="round"/>',
     work: '<rect x="-9" y="-5" width="18" height="12" rx="2" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.3"/><rect x="-4" y="-8" width="7" height="3.5" rx="1" fill="' + STEEL + '" stroke="' + INK + '" stroke-width="1.1"/><circle cx="0" cy="1" r="3.6" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.1"/>',
-    reviews: '<path d="M-3 -9 L5 -3 L1 2 L-7 -4 Z" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/><path d="M-1 -1 L-6 9" stroke="' + INK + '" stroke-width="1.4"/><path class="bd-beam" d="M5 -3 L16 4 L8 11 L1 2 Z" fill="#FFE7D6" opacity=".6"/>',
-    towns: '<circle cx="0" cy="0" r="8" fill="#FFFFFF" stroke="' + INK + '" stroke-width="1.4"/><path class="bd-needle" d="M0 -6 L2 0 L0 6 L-2 0 Z" fill="#C42B1C" stroke="' + INK + '" stroke-width=".6"/>',
-    consult: '<rect x="-8" y="-5" width="13" height="10" rx="1.5" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.2"/><circle cx="5" cy="0" r="1.6" fill="#C42B1C"/><path d="M6.5 0 H16" stroke="#C42B1C" stroke-width="1.2"/>',
+    reviews: '<path d="M-3 -9 L5 -3 L1 2 L-7 -4 Z" fill="' + DEEP + '" stroke="' + INK + '" stroke-width="1.2" stroke-linejoin="round"/><path d="M-1 -1 L-6 9" stroke="' + INK + '" stroke-width="1.4"/><path class="bd-beam" d="M5 -3 L16 4 L8 11 L1 2 Z" fill="' + EZ.c('--color-art-fill') + '\" opacity=".6"/>',
+    towns: '<circle cx="0" cy="0" r="8" fill="' + EZ.c('--color-surface') + '\" stroke="' + INK + '" stroke-width="1.4"/><path class="bd-needle" d="M0 -6 L2 0 L0 6 L-2 0 Z" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + INK + '" stroke-width=".6"/>',
+    consult: '<rect x="-8" y="-5" width="13" height="10" rx="1.5" fill="' + YEL + '" stroke="' + INK + '" stroke-width="1.2"/><circle cx="5" cy="0" r="1.6" fill="' + EZ.c('--color-art-accent') + '\"/><path d="M6.5 0 H16" stroke="' + EZ.c('--color-art-accent') + '\" stroke-width="1.2"/>',
     footer: '<circle cx="-4" cy="0" r="4.6" fill="none" stroke="' + YEL + '" stroke-width="2.2"/><path d="M0.5 0 H10 M7 0 V3.5 M9.5 0 V3" stroke="' + YEL + '" stroke-width="2.2" stroke-linecap="round"/>'
   };
 
@@ -133,8 +138,8 @@
      Drawn at the hotspot (0,0 = the pointer). Forms: nib (rest), nib + underline (link), target ring (button),
      crosshair (image), rule (heading), frame (card), arrows (drag). Leans with velocity; squashes on press.
      Colour follows the section under it. */
-  var TIP_C = { hero: '#FF5F00', proof: '#FF5F00', services: '#FF5F00', ba: '#FF5F00', process: '#C9C1B6', financing: '#FF5F00',
-    work: '#FF5F00', reviews: '#FF5F00', towns: '#C42B1C', consult: '#FF5F00', footer: '#FF5F00' };
+  var TIP_C = { hero: EZ.c('--color-art-accent'), proof: EZ.c('--color-art-accent'), services: EZ.c('--color-art-accent'), ba: EZ.c('--color-art-accent'), process: EZ.c('--color-border'), financing: EZ.c('--color-art-accent'),
+    work: EZ.c('--color-art-accent'), reviews: EZ.c('--color-art-accent'), towns: EZ.c('--color-art-accent'), consult: EZ.c('--color-art-accent'), footer: EZ.c('--color-art-accent') };
   var tip, tipG, tipLean = 0;
   function buildTip() {
     tip = doc.createElement('div');
@@ -167,16 +172,18 @@
   var state = 'none', stateEl = null, dock = null, idleT = 0, nextAct = 0, nextBlink = 0, shown = false, scanTw = null, breathTw = null, pressed = false, sigEl = null, sig = '';
   var parts = {};
 
-  function read() { try { var v = localStorage.getItem(LS); return VARIANTS.indexOf(v) > -1 ? v : 'hat'; } catch (e) { return 'hat'; } }
+  // REBRAND Step 6 [S1436]: the exact pointer tip is the cursor; the trailing character is opt-in (Settings), off by default
+  function read() { try { var v = localStorage.getItem(LS); return VARIANTS.indexOf(v) > -1 ? v : 'off'; } catch (e) { return 'off'; } }
   function store(v) { try { localStorage.setItem(LS, v); } catch (e) {} }
-  function enabled() { return EZ.fine() && EZ.motionOn() && B.variant !== 'off'; }
+  function enabled() { return EZ.fine() && EZ.motionOn(); }            // the tip: fine pointers with motion on; touch and reduced motion keep the system cursor
+  function character() { return B.on && B.variant !== 'off'; }        // the trailing companion, only when chosen
 
   function build() {
     el = doc.createElement('div');
     el.className = 'buddy';
     el.setAttribute('aria-hidden', 'true');
     el.innerHTML = '<svg viewBox="-40 -40 80 80" width="64" height="64">' +
-      '<ellipse class="bd-shadow" cx="0" cy="33" rx="15" ry="2.6" fill="rgba(18, 18, 18, .28)"/>' +
+      '<ellipse class="bd-shadow" cx="0" cy="33" rx="15" ry="2.6" fill="' + EZ.c('--color-shadow') + '" fill-opacity=".28"/>' +
       '<g class="bd-brackets" opacity="0"><path d="M-34 -24 V-34 H-24 M24 -34 H34 V-24 M34 24 V34 H24 M-24 34 H-34 V24" fill="none" stroke="' + TEAL + '" stroke-width="2.4" stroke-linecap="square"/></g>' +
       '<g class="bd-inner"><g class="bd-art"></g></g>' +
       '<g class="bd-tool" transform="translate(27 18)"></g>' +
@@ -215,7 +222,7 @@
       gsap.fromTo(toolG, { opacity: 0, y: -6, scale: .6, svgOrigin: '27 18' }, { opacity: 1, y: 0, scale: 1, duration: .23, ease: 'back.out(1.6)', svgOrigin: '27 18' });
     } });
   }
-  B.led = function (on) { var l = toolG.querySelector('.bd-led'); if (l) l.setAttribute('fill', on ? '#C42B1C' : '#5E5852'); };
+  B.led = function (on) { var l = toolG.querySelector('.bd-led'); if (l) l.setAttribute('fill', on ? EZ.c('--color-art-accent') : EZ.c('--color-art-line-soft')); };
 
   /* ---------- states: what the element under the pointer is ---------- */
   function classify(t) {
@@ -254,7 +261,7 @@
       gsap.to(a.eyes, { scaleY: 1, scaleX: 1, duration: .2, ease: 'power3.out', transformOrigin: '50% 50%' });
       gsap.to(brackets, { opacity: 0, scale: 1.25, duration: .2, ease: 'power3.out', svgOrigin: '0 0' });
       gsap.to(inner, { scale: 1, opacity: 1, y: 0, rotation: 0, duration: .2, ease: 'power3.out', svgOrigin: '0 0' });
-      if (a.vial) gsap.to(a.vial, { attr: { fill: '#FFC9A3' }, duration: .2 });
+      if (a.vial) gsap.to(a.vial, { attr: { fill: EZ.c('--color-art-accent-soft') }, duration: .2 });
       if (a.mouth) gsap.to(a.mouth, { scaleY: 1, duration: .2, transformOrigin: '50% 50%' });
     }
     // enter presets (in .5)
@@ -293,7 +300,7 @@
     stamp: function () {
       gsap.timeline().to(inner, { y: 5, scaleY: .9, duration: .08, ease: 'power2.in', svgOrigin: '0 30' })
         .to(inner, { y: 0, scaleY: 1, duration: .2, ease: 'power2.out', svgOrigin: '0 30' });
-      ring('#FF5F00');
+      ring(EZ.c('--color-art-accent'));
     },
     // a drawing tool: the companion leans into the stroke
     lean: function () { gsap.to(inner, { rotation: -10, duration: .2, ease: 'power2.out', svgOrigin: '0 30' }); },
@@ -308,7 +315,7 @@
     // towns tabs: a compass needle swings to the county's bearing
     compass: function (t) {
       var b = parseFloat(t.dataset.bearing || '0');
-      toolG.innerHTML = '<circle r="9" fill="#FFFFFF" stroke="' + INK + '" stroke-width="1.6"/><path class="bd-ndl" d="M0 -7 L2.2 0 L0 7 L-2.2 0 Z" fill="#C42B1C" stroke="' + INK + '" stroke-width="1"/>';
+      toolG.innerHTML = '<circle r="9" fill="' + EZ.c('--color-surface') + '\" stroke="' + INK + '" stroke-width="1.6"/><path class="bd-ndl" d="M0 -7 L2.2 0 L0 7 L-2.2 0 Z" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + INK + '" stroke-width="1"/>';
       toolG.dataset.zone = '__compass';
       gsap.fromTo(toolG.querySelector('.bd-ndl'), { rotation: b - 200 }, { rotation: b, duration: .35, ease: 'power3.out', svgOrigin: '0 0' });
     }
@@ -334,7 +341,7 @@
     var t = e.target.closest && e.target.closest('[data-buddy-sig="flip"]');
     if (!t || !B.on || !shown) return;
     var g = doc.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.innerHTML = '<rect x="-11" y="-14" width="22" height="28" rx="2" fill="#FFFFFF" stroke="' + INK + '" stroke-width="1.6"/><text x="0" y="6" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="600" font-size="18" fill="' + INK + '">' + (t.textContent || '').trim().slice(0, 2).replace(/[<&]/g, '') + '</text>';
+    g.innerHTML = '<rect x="-11" y="-14" width="22" height="28" rx="2" fill="' + EZ.c('--color-surface') + '\" stroke="' + INK + '" stroke-width="1.6"/><text x="0" y="6" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="600" font-size="18" fill="' + INK + '">' + (t.textContent || '').trim().slice(0, 2).replace(/[<&]/g, '') + '</text>';
     g.setAttribute('transform', 'translate(0 -30)');
     svg.appendChild(g);
     gsap.timeline({ onComplete: function () { g.remove(); } })
@@ -442,8 +449,9 @@
     if (shown) return;
     shown = true;
     pos.x = P.x + 56; pos.y = P.y + 54; vel.x = vel.y = 0;   // first frame lands beside the pointer, never flies in from 0,0
-    el.classList.add('is-on');
     if (tip) tip.classList.add('is-on');
+    if (!character()) return;
+    el.classList.add('is-on');
     if (!rafId) { last = 0; rafId = requestAnimationFrame(tick); }
   }
   function hide() {
@@ -459,11 +467,13 @@
     if (type === 'enter' || type === 'move') { show(); tipMove(); }
     else if (type === 'leave') hide();
     else if (type === 'target') { var c = classify(P.target); setState(c[0], c[1]); }
-    else if (type === 'zone') { applyTool(P.zone); if (tip) tip.style.color = TIP_C[P.zone] || '#FF5F00'; }
+    else if (type === 'zone') { applyTool(P.zone); if (tip) tip.style.color = TIP_C[P.zone] || EZ.c('--color-art-accent'); }
     else if (type === 'down') { if (tip) tip.classList.add('is-down'); }
     if (type === 'up' && tip) tip.classList.remove('is-down');
-    if (type === 'down') { pressed = true; breathe(); gsap.to(inner, { scaleY: .86, scaleX: 1.1, duration: .1, ease: 'power2.out', svgOrigin: '0 30' }); gsap.to(el, { opacity: .35, duration: .1 }); }
-    else if (type === 'up') { pressed = false; breathe(); gsap.to(inner, { scaleY: 1, scaleX: 1, duration: .3, ease: 'power3.out', svgOrigin: '0 30' }); gsap.to(el, { opacity: 1, duration: .16 }); }
+    if (!character()) return;
+    // press / release: micro and short durations, each tween overwrites the last so a fast double click never stacks [S1436]
+    if (type === 'down') { pressed = true; breathe(); gsap.to(inner, { scaleY: .86, scaleX: 1.1, duration: .08, ease: 'power2.out', svgOrigin: '0 30', overwrite: 'auto' }); gsap.to(el, { opacity: .35, duration: .08, overwrite: 'auto' }); }
+    else if (type === 'up') { pressed = false; breathe(); gsap.to(inner, { scaleY: 1, scaleX: 1, duration: .18, ease: 'power3.out', svgOrigin: '0 30', overwrite: 'auto' }); gsap.to(el, { opacity: 1, duration: .15, overwrite: 'auto' }); }
   });
 
   B.refresh = function () {
@@ -472,7 +482,8 @@
     root.classList.toggle('has-buddy', on);
     if (!el) return;
     if (!on) { hide(); setState('none', null); return; }
-    if (P.has) { show(); var c = classify(P.target); state = ''; setState(c[0], c[1]); }
+    if (!character()) { el.classList.remove('is-on'); cancelAnimationFrame(rafId); rafId = 0; }
+    if (P.has) { shown = false; show(); var c = classify(P.target); state = ''; setState(c[0], c[1]); }
   };
   B.retarget = function () { if (B.on) { state = ''; stateEl = undefined; queueHit(); var c = classify(P.target); setState(c[0], c[1]); } };
   B.set = function (v) {

@@ -111,8 +111,8 @@
         orb.style.visibility = 'hidden';
         k.ctx.add(function () {
           gsap.timeline({ onComplete: function () { sh.remove(); busy = false; close.focus(); } })
-            .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#121212' },
-              { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#121212', duration: .4, ease: OPEN })
+            .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: EZ.c('--color-art-line') },
+              { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: EZ.c('--color-art-line'), duration: .4, ease: OPEN })
             .add(function () { orb.hidden = true; orb.style.visibility = ''; sheet.style.visibility = ''; })
             .from(sheet.children, { autoAlpha: 0, y: 14, duration: .4, ease: CONTENT, stagger: .03 });
         });
@@ -129,8 +129,8 @@
             sheet.hidden = true; gsap.set(sheet.children, { clearProps: 'opacity,visibility' });
             orb.hidden = false; orb.style.visibility = 'hidden';
             var a = rel(orb);
-            gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#121212' },
-              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#121212', duration: .4, ease: SHUT,
+            gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: EZ.c('--color-art-line') },
+              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: EZ.c('--color-art-line'), duration: .4, ease: SHUT,
                 onComplete: function () { sh.remove(); orb.style.visibility = ''; busy = false; orb.focus(); } });
           } });
         });
@@ -154,7 +154,7 @@
         var soft = .6, stops = [];
         for (var i = 0; i <= 32; i++) {
           var t = i / 32, a = Math.min(1, bump(t, .5, .06 + .16 * soft) + .32 * bump(t, .5, .5)) * .5;
-          stops.push('rgba(255,255,255,' + a.toFixed(3) + ') ' + (t * 100).toFixed(1) + '%');
+          stops.push('color-mix(in srgb, var(--color-surface) ' + (a * 100).toFixed(1) + '%, transparent) ' + (t * 100).toFixed(1) + '%');
         }
         return 'linear-gradient(-45deg, ' + stops.join(', ') + ')';
       })();

@@ -28,7 +28,7 @@
       var D = (window.__DATA || {}).southfl, svg = root.querySelector('.rp1__map'), btns = Array.prototype.slice.call(root.querySelectorAll('.rp1__c'));
       var z = root.querySelector('.rp1__z'), d = root.querySelector('.rp1__d');
       svg.setAttribute('viewBox', '-40 -40 1080 2460');
-      svg.innerHTML = '<defs><pattern id="rp1-hatch" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V24" stroke="#FF9C5E" stroke-width="6"/></pattern></defs>' +
+      svg.innerHTML = '<defs><pattern id="rp1-hatch" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V24" stroke="' + EZ.c('--color-art-accent-soft') + '\" stroke-width="6"/></pattern></defs>' +
         ['Palm Beach', 'Broward', 'Miami-Dade'].map(function (c) { return '<path class="rp1__cty-p" data-c="' + c + '" d="' + D.counties[c] + '"/>' + (ZONE[c][0].indexOf('Hurricane') > -1 ? '<path class="rp1__hatch" d="' + D.counties[c] + '"/>' : ''); }).join('') +
         ['Palm Beach', 'Broward', 'Miami-Dade'].map(function (c) { var b = D.boxes[c]; return '<text class="rp1__lbl" x="' + (b[0] + 60) + '" y="' + (b[1] + 110) + '">' + c.toUpperCase() + '</text>'; }).join('');
       var paths = Array.prototype.slice.call(svg.querySelectorAll('.rp1__cty-p'));

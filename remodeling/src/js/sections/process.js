@@ -4,10 +4,10 @@
   function f(n) { return Math.round(n * 10) / 10; }
   function S() { return (window.__DATA || {}).stages || []; }
   function plain(html) { var d = document.createElement('div'); d.innerHTML = html; return d.textContent; }
-  var TRUCK = '<g class="truck"><rect x="-26" y="-9" width="30" height="13" rx="2" fill="#FF5F00" stroke="#121212" stroke-width="2"/>' +
-    '<path d="M4 4 V-9 h11 l8 8 V4 Z" fill="#FF5F00" stroke="#121212" stroke-width="2" stroke-linejoin="round"/><path d="M8 -6 h6 l5 5 h-11 Z" fill="#FFFFFF" stroke="#121212" stroke-width="1.2"/>' +
-    '<circle cx="-16" cy="6" r="5" fill="#121212"/><circle cx="-16" cy="6" r="2" fill="#C9C1B6"/><circle cx="13" cy="6" r="5" fill="#121212"/><circle cx="13" cy="6" r="2" fill="#C9C1B6"/>' +
-    '<rect x="-24" y="-15" width="8" height="6" fill="#FFC9A3" stroke="#121212" stroke-width="1.2"/><rect x="-14" y="-15" width="8" height="6" fill="#FFC9A3" stroke="#121212" stroke-width="1.2"/></g>';
+  var TRUCK = '<g class="truck"><rect x="-26" y="-9" width="30" height="13" rx="2" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2"/>' +
+    '<path d="M4 4 V-9 h11 l8 8 V4 Z" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2" stroke-linejoin="round"/><path d="M8 -6 h6 l5 5 h-11 Z" fill="' + EZ.c('--color-surface') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.2"/>' +
+    '<circle cx="-16" cy="6" r="5" fill="' + EZ.c('--color-art-line') + '\"/><circle cx="-16" cy="6" r="2" fill="' + EZ.c('--color-border') + '\"/><circle cx="13" cy="6" r="5" fill="' + EZ.c('--color-art-line') + '\"/><circle cx="13" cy="6" r="2" fill="' + EZ.c('--color-border') + '\"/>' +
+    '<rect x="-24" y="-15" width="8" height="6" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.2"/><rect x="-14" y="-15" width="8" height="6" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.2"/></g>';
   // one drawn mark per stage (40x40): clipboard, flood gauge, set square, scope sheet, permit card, framing, level, keys
   var ICONS = [
     '<rect class="s" x="10" y="8" width="20" height="27" rx="2"/><rect class="f" x="15" y="5" width="10" height="6" rx="1.5"/><path class="s" d="M15 18h10M15 23h10M15 28h6"/>',
@@ -17,7 +17,7 @@
     '<rect class="f" x="9" y="24" width="22" height="7" rx="1"/><path class="s" d="M16 24v-8h8v8M14 16h12v-5a6 6 0 0 0-12 0z"/><path class="s r" d="M7 35h26"/>',
     '<path class="s" d="M6 36V16l14-10 14 10v20M6 16h28M13 36V22M20 36V22M27 36V22"/>',
     '<rect class="s" x="4" y="16" width="32" height="9" rx="2"/><rect class="f" x="15" y="18" width="10" height="5" rx="2.5"/><path class="s g" d="M14 8l4 4l8-8"/>',
-    '<circle class="f" cx="13" cy="20" r="7"/><circle cx="13" cy="20" r="2.4" fill="#121212"/><path class="s" d="M20 20h15M30 20v5M34 20v4"/>'
+    '<circle class="f" cx="13" cy="20" r="7"/><circle cx="13" cy="20" r="2.4" fill="' + EZ.c('--color-art-line') + '\"/><path class="s" d="M20 20h15M30 20v5M34 20v4"/>'
   ];
   var RXS = ['speech', 'magnifier', 'sketch', 'ledger', 'badge', 'sawhorse', 'check', 'flag'];
 

@@ -75,7 +75,7 @@
         // the average, set in the display face, sampled for 343 evenly spaced points [S0687 counter/constellation FX]
         var o = document.createElement('canvas'); o.width = W; o.height = H;
         var c = o.getContext('2d');
-        c.fillStyle = '#121212'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.fillStyle = EZ.c('--color-art-line'); c.textAlign = 'center'; c.textBaseline = 'middle';
         c.font = '400 ' + Math.round(Math.min(H * .95, W * .62)) + 'px "Poppins", Arial, sans-serif';
         c.fillText('4.8', W / 2, H * .53);
         var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 160));
@@ -119,13 +119,13 @@
       function draw(t) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, W, H);
-        ctx.strokeStyle = 'rgba(184, 66, 0, .22)'; ctx.lineWidth = 1;
+        ctx.strokeStyle = EZ.c('--color-art-accent'); ctx.globalAlpha = .22; ctx.lineWidth = 1;
         ctx.beginPath();
         for (var i = 0; i < stars.length; i++) { var a = stars[i], b = stars[links[i]]; if (!b) continue; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
         ctx.stroke();
         for (var n = 0; n < stars.length; n++) {
           var s = stars[n], tw = .65 + .35 * Math.sin(t * .003 + s.ph), r = s.r;
-          ctx.fillStyle = 'rgba(255, 95, 0, ' + tw.toFixed(2) + ')';   // --a-500, twinkling (the gold was off-palette)
+          ctx.globalAlpha = tw; ctx.fillStyle = EZ.c('--color-art-accent');   // twinkling, at the token's colour
           // a four-point star
           ctx.beginPath();
           ctx.moveTo(s.x, s.y - r * 2.2); ctx.lineTo(s.x + r * .55, s.y - r * .55); ctx.lineTo(s.x + r * 2.2, s.y); ctx.lineTo(s.x + r * .55, s.y + r * .55);

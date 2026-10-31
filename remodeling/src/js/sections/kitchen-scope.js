@@ -36,7 +36,7 @@
           gsap.to(pipe, { opacity: n >= 2 ? 1 : 0, duration: d });
           if (n >= 2 && d) gsap.fromTo(pipe, { drawSVG: '0%' }, { drawSVG: '100%', duration: .6, ease: 'power2.inOut' });
           gsap.to(wall, { opacity: n === 3 ? 0 : 1, duration: d });
-          gsap.to(beyond, { fill: n === 3 ? '#FFFFFF' : '#FAF7F2', duration: d });
+          gsap.to(beyond, { fill: n === 3 ? EZ.c('--color-surface') : EZ.c('--color-bg'), duration: d });
         });
       }
       k.on(input, 'input', function () { set(+input.value, true); });

@@ -32,6 +32,8 @@ def css_rules(text, base=0):
         d, k = 0, j
         while k < n:
             c = text[k]
+            if c == '/' and text.startswith('/*', k):
+                q = text.find('*/', k + 2); k = (q + 2) if q > 0 else n; continue
             if c == '{': d += 1
             elif c == '}':
                 d -= 1
@@ -140,6 +142,10 @@ def map_token(tok, kind, sel, prop, ctx):
         if tok in ('a-500', 'a-600', 'a-700', 'a-800', 'accent', 'accent-text', 'field-accent', 'line'): return 'color-accent-text' if st else 'color-text-secondary'
         if tok in ('a-50', 'a-100', 'a-200', 'a-300'): return 'color-text-inverse'
         if tok in ('err', 'err-field', 'err-paper'): return 'color-danger-text'
+    if kind == 'custom':
+        if 'tint' in prop: return 'color-accent-solid'
+        if 'acc' in prop: return 'color-accent-border'
+    if kind == 'text' and tok == 'line-soft': return 'color-text-secondary'
     if kind in ('line', 'custom', 'other', 'accentcolor'):
         if kind == 'accentcolor': return 'color-accent-solid'
         if prop.strip().startswith('outline'): return 'color-focus-ring'
@@ -229,6 +235,16 @@ def rewrite_css(text, bk, log):
     for a, b, nb in sorted(edits, reverse=True): text = text[:a] + nb + text[b:]
     return text, stats
 
+ROOF = '<svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>'
+MARK = '<svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>'
+def rewrite_html(h):
+    blocks = [(a, b) for p, v, a, b in html_blocks(h) if not v.startswith('b')]
+    n = 0
+    for a, b in sorted(blocks, reverse=True):
+        seg = h[a:b]; n += seg.count(ROOF)
+        h = h[:a] + seg.replace(ROOF, MARK) + h[b:]
+    return h, n
+
 if __name__ == '__main__':
     mode = sys.argv[1] if len(sys.argv) > 1 else 'report'
     total = {}
@@ -241,4 +257,11 @@ if __name__ == '__main__':
         mixed = [l for l in log if l[0] == 'MIXED']
         print('%-14s rules presented %3d record %3d mixed %2d  token rewrites %4d' % (sec, st['presented'], st['record'], st['mixed'], len([l for l in log if l[0] != 'MIXED'])))
         for m in mixed: print('   MIXED', m[1])
-        if mode == 'apply': W('css/sections/%s.css' % sec, new)
+        h, nroof = rewrite_html(R('sections/%s.html' % sec))
+        if mode == 'apply':
+            W('css/sections/%s.css' % sec, new); W('sections/%s.html' % sec, h)
+    for f in ('css/chrome.css', 'css/systems.css'):
+        log = []
+        new, st = rewrite_css(R(f), set(), log)
+        print('%-14s rules presented %3d record %3d  token rewrites %4d' % (f, st['presented'], st['record'], len(log)))
+        if mode == 'apply': W(f, new)
