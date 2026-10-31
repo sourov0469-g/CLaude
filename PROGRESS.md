@@ -1221,4 +1221,4 @@ No HIGH colour finding is open.
 ### R7 commits
 - 9db68b1: stage 1. Green + lime system rebuild, logo set and favicon, lime-discipline fixes, new QA checks.
 - fb0f8d4: stage 2. Grayscale-safe lime data marks, the light gate learns deep green, brand docs, gate logs.
-- (this commit): stage 3. Challenge round, R7 contrast table and brand sheet in PROGRESS.
+- 864a330: stage 3. Challenge round, R7 contrast table and brand sheet in PROGRESS.
