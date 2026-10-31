@@ -805,10 +805,16 @@ def colour1():
 </div>'''
 
 
+# REBRAND QA round 2 (S1496 token compliance): the label ink on a published paint is a role token, never a literal.
+# PAINT_DARK is --neutral-13 (OKLCH .199 .006 185, the tinted neutral at #161616's luminance) for the contrast maths.
+PAINT_DARK = '#131716'
+INK_TOKEN = {PAINT_DARK: 'var(--color-text-on-paint-dark)', '#FFFFFF': 'var(--color-text-on-paint-light)'}
+
+
 def ink_on(h):
     """text colour that reads on a swatch (relative luminance)"""
     r, g, b_ = (int(h[i:i + 2], 16) / 255 for i in (1, 3, 5))
-    return '#161616' if 0.2126 * r + 0.7152 * g + 0.0722 * b_ > 0.5 else '#FFFFFF'
+    return INK_TOKEN[PAINT_DARK if 0.2126 * r + 0.7152 * g + 0.0722 * b_ > 0.5 else '#FFFFFF']
 
 
 def lum(h):
@@ -826,12 +832,12 @@ def contrast(a, b_):
 
 def ink_best(h):
     """F6 V3.1: the tile ink with the higher WCAG contrast (Boothbay Blue reads 4.53:1 in #161616, not 3.99:1 in white)"""
-    return '#161616' if contrast(h, '#161616') >= contrast(h, '#FFFFFF') else '#FFFFFF'
+    return INK_TOKEN[PAINT_DARK if contrast(h, PAINT_DARK) >= contrast(h, '#FFFFFF') else '#FFFFFF']
 
 
 def plate(h):
     """mid-tones where neither ink reaches 4.5:1 carry their name on a dark plate, like Work's photo tags"""
-    return max(contrast(h, '#161616'), contrast(h, '#FFFFFF')) < 4.5
+    return max(contrast(h, PAINT_DARK), contrast(h, '#FFFFFF')) < 4.5
 
 
 def colour2():

@@ -16,6 +16,7 @@
   --white: #FFFFFF;
   --teal-1: #F5FEFD; --teal-2: #E5F6F3; --teal-3: #D4EEEA; --teal-4: #C3E7E1; --teal-5: #B1DED8; --teal-6: #9FD4CD; --teal-7: #87C6BD; --teal-8: #4C9C92; --teal-9: #00736A; --teal-10: #01655C; --teal-11: #005A52; --teal-12: #052F2A;
   --neutral-1: #FAFCFC; --neutral-2: #EFF3F2; --neutral-3: #E4E9E8; --neutral-4: #DADFDE; --neutral-5: #CFD5D4; --neutral-6: #C3CAC8; --neutral-7: #B2BAB9; --neutral-8: #868E8D; --neutral-9: #5D6564; --neutral-10: #515957; --neutral-11: #474F4E; --neutral-12: #222928;
+  --neutral-13: #131716;   /* one role needs it: label ink on mid-value published paints (#778184 reads 4.53:1) */
   --red-3: #FFEFED; --red-7: #DC8C83; --red-9: #B63B35; --red-11: #9E2D28;
   /* surfaces */
   --color-bg: var(--neutral-1); --color-bg-subtle: var(--neutral-2); --color-surface: var(--white); --color-bg-sunken: var(--neutral-3);
@@ -24,6 +25,7 @@
   /* text */
   --color-text: var(--neutral-12); --color-text-secondary: var(--neutral-11); --color-text-disabled: var(--neutral-8);
   --color-text-on-panel: var(--neutral-12); --color-text-on-panel-secondary: var(--neutral-11); --color-text-on-accent: var(--white); --color-text-on-plate: var(--neutral-12);
+  --color-text-on-paint-dark: var(--neutral-13); --color-text-on-paint-light: var(--white);
   /* borders */
   --color-border-subtle: var(--neutral-6); --color-border: var(--neutral-7); --color-border-strong: var(--neutral-8); --color-separator: var(--neutral-6); --color-border-control: var(--neutral-9);
   --color-focus-ring: var(--neutral-12);   /* QA round 2: its own role, so a swatch's local --color-text never recolours it */
@@ -2913,7 +2915,7 @@ body { font-size: var(--t-body); color: var(--color-text); }
 
 /* REBRAND QA round 2 (S1497 semantic use, grayscale survival): the teal tint alone differed from an unselected chip by
    1.2-2.0:1 in luminance, so "selected" was carried by hue. Every live selected control now also draws a 2px ring in
-   --color-selected-border (teal-11): 4.0:1 against the unselected neutral-7 border, 6.1:1 against its own tint,
+   --color-selected-border (teal-11): 4.1:1 against the unselected neutral-7 border, 6.1:1 against its own tint,
    8.1:1 against white. Colour swatches take the ring outside, over a white gap, so it reads on any paint colour.
    Focus stays the separate outer outline (S0248: the two indicators never share a shape). */
 :is([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"]):is(button, a, [role="tab"], [role="radio"], [role="option"], [role="switch"], [role="checkbox"]):not([data-bk] *) { box-shadow: inset 0 0 0 2px var(--color-selected-border); }
@@ -2934,7 +2936,7 @@ body { font-size: var(--t-body); color: var(--color-text); }
    and footer tones, the hero 3 stage, the Versions panel and the chat-booking sentence used a white focus mark made
    for the old dark grounds; on today's light panels it measured 1.03-1.22:1. Live versions and the chrome now draw the
    standard mark everywhere except over photographs: a 3px neutral-12 outline with a white halo (14.4:1 on neutral-1,
-   12.0:1 on the panel), and the sentence form's underline in neutral-12. */
+   12.1:1 on the panel), and the sentence form's underline in neutral-12. */
 :is(.v[data-tone="night"], .v[data-tone="red"]):not([data-bk] *) :focus-visible, .ft :focus-visible, .h3-stage:not([data-bk] *) :focus-visible { outline-color: var(--color-focus-ring); box-shadow: 0 0 0 3px var(--color-surface); }
 .picks :focus-visible, .pal-sw :focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-surface); }
 .snt:not([data-bk] *) :is(input, select):focus { border-bottom-color: var(--color-focus-ring); }
@@ -2959,3 +2961,8 @@ body { font-size: var(--t-body); color: var(--color-text); }
    brand colour used as decoration; the door read as a button */
 .bt-roof { fill: var(--color-art-line); } .bt-door { fill: var(--color-art-fill-strong); }
 .ly-studs { fill: var(--color-art-fill); } .ly-sheath { fill: var(--color-bg-panel-strong); } .ly-siding { fill: var(--color-art-fill-strong); } .ly-trim { fill: var(--color-art-line-strong); }
+/* headings and labels are never coloured (declared hierarchy; qa/v9/accent.js found 7 teal H3s, term and row labels):
+   the answer headings of the cost tools, the chooser's output heading, the proof tiles' labels, the office card's
+   terms and the plain-language list's labels are neutral; the accent stays on numerals that index and the one figure */
+.nv-bt-o h3, .nv-ch-out h3 { color: var(--color-text); }
+.nv-pl-f i, .pg-bc dt, .pg-nll span { color: var(--color-text-secondary); }

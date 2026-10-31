@@ -1269,3 +1269,35 @@ Converted from dark to light:
   - Only published price bands.
 - **Homepage, unchanged on its gate:** 140/140 states open, light 0, v8 suite 225/0.
 - **Sizes:** every standalone file is under 4,221,484 B. The homepage is 4,117,279 B; the largest inner page is projects at 2,653,154 B.
+
+
+## REBRAND DIRECTIVE (2026-10-31): gate evidence
+**Scope.** Only the brand layer changed: logo, colour system and text hierarchy. The full brand sheet, both QA rounds and the cursor report are in PROGRESS.md under "REBRAND DIRECTIVE".
+
+**Skills applied:** ⟦S0011⟧ ⟦S0071⟧ ⟦S1418⟧ ⟦S1434⟧ ⟦S1435⟧ ⟦S1422⟧ ⟦S0248⟧ ⟦S1496⟧ ⟦S1497⟧ ⟦S1436⟧.
+
+**Gates on the final build.**
+- Packed files are the standalone pages. The multi-file site was served over HTTP so its fonts load.
+
+| Gate | Script | Result |
+|---|---|---|
+| Rendered text contrast, 1440 px | `qa/v9/brand.js` | 5,141 text elements, 75 distinct pairs, 0 failing (lowest 4.53:1) |
+| Rendered text contrast, 375 px | `VW=375 qa/v9/brand.js` | 5,053 text elements, 70 distinct pairs, 0 failing |
+| One filled primary per view | `qa/v9/brand.js` | 0 views with more than one, at both widths |
+| Control edges ≥ 3:1 | `qa/v9/brand.js` | 0 under 3:1, at both widths |
+| Focus indicators ≥ 3:1 (keyboard focus, every version) | `qa/v9/focus.js` | 1,257 distinct indicators, 0 under 3:1 |
+| Selected states with a non-hue cue ≥ 3:1 (grayscale survival) | `qa/v9/states.js` | 75/75 |
+| Forced colours: selected state visible | probe | 5/5 on the default homepage |
+| Token compliance | `qa/v9/tokens.py` | 0 colour literals in live CSS, 0 in live JS, 0 primitives outside `:root`; live markup carries only the published paint colours |
+| Accent discipline, rendered pixels (290 views) | `qa/v9/teal.js` + `teal.py` | Mean 0.45% solid teal per view; 1 view over 5% teal (the booking tint band) |
+| Teal text outside controls | `qa/v9/accent.js` | 751 items, all index numerals or key figures; 0 headings, 0 labels, 0 underlined |
+| Logo | `qa/v9/logo.js` (multi-file and packed) | New mark in header and footer, `favicon.svg`, name "Austin Pro" on all 9 pages; old mark outside backups 0 |
+| Backups byte-identical | template diff against a11f3b1 | 60/60 homepage backup templates identical; the 4 record pages unchanged |
+| Cursor: companion, every interactive element, every version | `qa/v9/cursor.js` | 1,869 clicked, 0 failures, 0 console errors (48 version states) |
+| Cursor: companion on packed files | `STANDALONE=1 VMAX=1 qa/v9/cursor.js index,contact,siding` | 371 clicked, 0 failures |
+| Cursor: ring on packed files | `MODE=ring STANDALONE=1 qa/v9/cursor.js` | 756 clicked, 0 failures, largest ring step 1.6 px/frame |
+| Cursor off on touch and under reduced motion | `MODE=env STANDALONE=1 qa/v9/cursor.js` | 18/18 pass; native cursor never hidden |
+| Facts | `qa/v8/facts.py` on every packed page | Annex A verbatim (homepage: phone ×116, address ×4, hours ×15, 886 wording ×8, "474" ×31); 0 other phones, ratings or review counts; 0 em dashes; 0 stray en dashes. Identical to the pre-rebrand gate |
+| Homepage regressions | `qa/v8/slots.js`, `light.js`, `clad.js`, `nv.js`, `recheck.js` | 140/140 slots; 0 dark backgrounds; clad 0 errors; nv 0 errors; 225/0 |
+| Inner pages | `qa/v8/pages.js`, packed, at 1440 and at 375 | 227/227 at each width, 0 dark |
+| Sizes | — | Homepage 4,146,327 B; largest inner page projects at 2,681,126 B; all under 4,221,484 B |

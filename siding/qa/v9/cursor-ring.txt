@@ -1,0 +1,10 @@
+MODE ring TOTAL {"tested":756,"fail":0,"occluded":9,"gone":3,"states":9,"maxPal":0,"maxRing":1.6360604939916035,"maxFar":0,"errors":0}
+index: {"tested":191,"fail":0,"occluded":1,"gone":3,"withPal":0,"withRing":190,"maxPal":0,"maxRing":1.6360604939916035,"maxFar":0,"errors":0,"states":1,"maxSettle":477,"lastDesc":"button.ft-motion \"Motion off\" @chrome","scrolled":16}
+siding: {"tested":126,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":125,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":462,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+windows: {"tested":91,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":90,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":461,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+roofing: {"tested":59,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":58,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":432,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+outdoor: {"tested":51,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":50,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":441,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+projects: {"tested":58,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":57,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":468,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+financing: {"tested":60,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":59,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":446,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+about: {"tested":66,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":65,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":435,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}
+contact: {"tested":54,"fail":0,"occluded":1,"gone":0,"withPal":0,"withRing":53,"maxPal":0,"maxRing":0,"maxFar":0,"errors":0,"states":1,"maxSettle":428,"lastDesc":"button.hd-motion \"Motion on\" @chrome"}

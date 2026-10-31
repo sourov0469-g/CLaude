@@ -23,7 +23,7 @@ const BASE = process.env.QBASE || 'http://127.0.0.1:8765/';
           if (TINT.includes(c.backgroundColor) && !selected && !(el.parentElement && TINT.includes(getComputedStyle(el.parentElement).backgroundColor))) tints.push(el.className.toString().split(' ')[0] || el.tagName);
           if (SOLID.includes(c.backgroundColor)) solids.push(el.className.toString().split(' ')[0] || el.tagName);
           const own = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim());
-          if (own && TXT.includes(c.color) && !el.closest('a, button, [role], label, summary, input, select')) texts.push({ t: el.textContent.trim().slice(0, 24), cls: el.className.toString().split(' ')[0] || el.tagName, u: c.textDecorationLine.includes('underline') });
+          if (own && TXT.includes(c.color) && !el.closest('a, button, [role="button"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="option"], [role="slider"], label, summary, input, select')) texts.push({ t: el.textContent.trim().slice(0, 24), cls: el.className.toString().split(' ')[0] || el.tagName, u: c.textDecorationLine.includes('underline') });
         }
         res({ tints, solids, texts });
       }, 250); }), [s.id, v]);
