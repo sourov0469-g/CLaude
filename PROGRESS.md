@@ -587,3 +587,60 @@ There is no container, no roof and no outline; every line the eye can supply is 
 - **Literals.** 277 colour literals in presented code were converted. JS that builds SVG or canvas reads tokens at run time through `EZ.c('--color-…')`. CSS rgba became `color-mix(in srgb, var(--color-…) N%, transparent)`. SVG presentation attributes moved into style properties. Data-URI drawings became token gradients.
 - **Token compliance** (`tools/tokencheck.py`): presented code across 22 sections plus chrome has **0** primitive references, **0** record names and **0** colour literals. The only literals left are in the token declarations, the favicon file and the `<meta theme-color>` that browsers need as a literal.
 - **Backups** (`tools/backupintegrity.py`): all **104** hidden backups are **byte-identical** to the last pre-rebrand commit (3781ab8), across HTML block, JS definition, and every record CSS rule and keyframes block. So is the token file's record scoping. Two slips caught by this check (a `b3` definition in ba.js and in financing.js) were restored from git before anything was committed.
+
+## QA round 1 (measured on the rendered pages, all five, every visible version)
+
+Tools:
+- `p6qa.js`: every text node against the background it actually renders on.
+- `rbaudit.js`: accent area per version and every rendered colour's OKLCH hue.
+- `rbtype.js`: hierarchy levels.
+- `rbsheet.js/.py`: contact sheets in colour and grayscale.
+
+### critique-color [S1497]
+
+| dimension | before round 1 | after round-1 fixes | rating after |
+|---|---|---|---|
+| **Contrast** | 32 text pairs below AA on the homepage (3.30:1 = sand-950 on the clay-600 fill; 1.00–1.13:1 = text on a same-colour chest); 0 on the inner pages | 1 left (consult v6 "7–11am", 3.30:1), fixed in 1b | **minor → re-measured in round 2** |
+| **Palette coherence: saturation discipline** | 20 of 140 versions had more than 5% of their area in clay; worst services v2 78%, process v3 59%, services v5 54%, reviews v6 38% | 6 versions above 5% (bath-build v1, contact-area v4, reviews v4, towns v1/v8, consult v8), worked in 1b | **minor** |
+| **Palette coherence: hue drift** | 0 rendered colours outside the clay window (25–50) or the danger window (13–23) at chroma ≥ .03, on all five pages | same | **pass** |
+| **Semantic use** | danger (form-error red) used for 19 decorative things: laser, plumb line, needles, stamps, flags, the pointer-field dot. **HIGH** [S0071: "a semantic color used against its meaning"] | danger only on `.c-err` and invalid fields | **pass** |
+| **Accessibility** | colour-only state? The selected controls also carry `aria-pressed/checked/selected`, a ring or fill change and the label. Error messages are written text. | unchanged | **pass** |
+
+**Root cause of the round-1 contrast and saturation failures.** The migration mapped every old orange *surface* to the action fill. The fix is not a darker text colour but the hierarchy itself. A non-interactive surface never wears the action colour [S0071 "fill exactly one action per view"]:
+- 44 rules moved to neutral grounds, the subtle clay tint, or the drawing wash.
+- Text on them returns to `--color-text`.
+
+### critique-brand-consistency [S1496] (against `brand/v2/mood.md`, `voice.md`, `tokens.md`)
+
+| dimension | observation | rating |
+|---|---|---|
+| **Mood** | Neutral grounds and clay on one action per view read warm and calm. Before the fixes, illustration fields in saturated clay and the bouncing cursor character contradicted "comfort first"; both were addressed. | **minor → pass after 1b** |
+| **Voice** | No copy was changed by the rebrand (the directive keeps copy meaning). The facts grep runs at the end. | **pass** |
+| **Token compliance** | 0 primitives, 0 record names, 0 literals in presented code (`tokencheck.py`). | **pass** |
+
+### Challenges raised and answered (round 1)
+
+- **Is clay right for this trade and this business?** Yes, and it is measured, not asserted:
+  - The hue window was taken from the trade's own materials (terracotta tile, fired clay, stucco) before any token was written.
+  - The firm's photographs are mostly white and grey kitchens, navy and walnut cabinets, and blue-green pools. A warm clay accent sits beside them without fighting.
+  - The retired #FF5F00 fought every navy kitchen photograph.
+- **Does the system survive grayscale?** The grayscale contact sheets show the primary button as the darkest solid mass in each view (clay-600 has L 0.54 against grounds at L 0.96–0.98). Selected states keep their ring and label change. The hierarchy reads without hue [S1435 "differentiation should survive grayscale"].
+- **Does the accent still mean one thing?** Before round 1 it did not: clay also meant "decorative surface", and danger red also meant "laser". After the fixes the audit finds clay fills only on the primary button, selected controls, slider handles, progress and focus; drawing accents are the paler art steps.
+- **Where did isolation inflation creep in?** [S1435]:
+  - the clay dots and strokes on the section dividers (between every section)
+  - the clay eyebrow glyph and accent eyebrow text on every section
+  - the accent second line of every heading
+
+  All three were neutralised. Each one was harmless alone; together they put clay in every screen-height of the page.
+- **Criticism rejected:** "the subtle clay tint behind selected controls is too weak to show state." The tint is not the state indicator: the 2px clay ring (≥ 4.32:1 against the tint, ≥ 5.31:1 against white) and the label are. The tint only quiets the surface.
+
+### Text hierarchy (Step 3) [S1434]
+
+**Problems found:**
+- On every inner page the page title (h1) and the section headings (h2) rendered at the same visual size (47.4px). L1 and L2 were indistinguishable.
+- Fine print sat at 13–14px weight 400–500 beside 15–17px supporting text: about 1.1× apart with no weight step.
+
+**Fixes:**
+- **Tokens:** L1 `--t-display` 35–62px visual; L2 `--t-head` 22–41px (L1/L2 measured 1.64 on every page); L3 `--t-body` 18–20px.
+- **Pins:** every visible h1 is pinned to L1 and every section h2 to L2.
+- **L4 weight step:** all presented text under 15px is set at weight 600 against 400 body text (125 font shorthands plus 48 standalone `font-size` rules). This is the "clear weight step" [S1434], applied by construction rather than per screen.

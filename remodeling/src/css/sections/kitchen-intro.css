@@ -32,7 +32,7 @@
 .ki2__lead { margin: 0; font: 400 1.0625rem/1.5 var(--f-text); color: var(--color-text-secondary); max-width: 46ch; }
 .ki2__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
 .ki2__credit { position: absolute; right: 16px; bottom: 16px; margin: 0; padding: 6px 10px; background: var(--color-surface); font: 600 .75rem/1.2 var(--f-text); color: var(--color-text); }
-@media (max-width: 767px) { .ki2__stage { min-height: 0; display: block; } .ki2__img { position: relative; height: 56vw; } .ki2__wrap { padding-block: 0 var(--s6); } .ki2__card { margin-top: -40px; position: relative; } .ki2__credit { position: static; display: inline-block; margin: 8px 0 0 16px; font-size: .6875rem; } }
+@media (max-width: 767px) { .ki2__stage { min-height: 0; display: block; } .ki2__img { position: relative; height: 56vw; } .ki2__wrap { padding-block: 0 var(--s6); } .ki2__card { margin-top: -40px; position: relative; } .ki2__credit { position: static; display: inline-block; margin: 8px 0 0 16px; font-size: .6875rem; font-weight: 600; } }
 
 /* ---------- v3 · The cabinet run ---------- */
 .ki3__h { font-size: clamp(2.25rem, 1.2rem + 3.4vw, 4.75rem); max-width: 22ch; margin-top: var(--s4); }

@@ -1,0 +1,18 @@
+contact-form1	accent area 1.2%	largest 0.9% (btn)	filled primaries 1
+contact-form2	accent area 1.8%	largest 1.2% (fm2__fill)	filled primaries 1
+contact-form3	accent area 0.8%	largest 0.8% (btn)	filled primaries 1
+contact-form4	accent area 0.8%	largest 0.8% (btn)	filled primaries 1
+contact-form5	accent area 1.0%	largest 1.0% (btn)	filled primaries 1
+contact-visit1	accent area 0.0%	largest 0.0% ()	filled primaries 0
+contact-visit2	accent area 0.0%	largest 0.0% ()	filled primaries 0
+contact-visit3	accent area 1.7%	largest 1.7% (btn)	filled primaries 1
+contact-visit4	accent area 0.0%	largest 0.0% ()	filled primaries 0
+contact-visit5	accent area 0.1%	largest 0.0% (vs5__pin)	filled primaries 0
+contact-area1	accent area 1.3%	largest 1.3% (btn)	filled primaries 1
+contact-area2	accent area 0.0%	largest 0.0% ()	filled primaries 0
+contact-area3	accent area 0.4%	largest 0.0% (sa3__led)	filled primaries 0
+contact-area4	accent area 8.8%	largest 8.8% (sa4__p)	filled primaries 0
+contact-area5	accent area 0.0%	largest 0.0% ()	filled primaries 0
+
+OFF-WINDOW COLOURS (chroma >= .03, outside clay 25-50 and danger 13-23):
+none

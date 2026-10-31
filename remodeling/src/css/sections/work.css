@@ -204,13 +204,13 @@
 .w1x__meta { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; padding-top: 12px; }
 .w1x__no { grid-row: 1 / span 2; font: 400 1rem/1 var(--f-display); letter-spacing: -.005em; color: var(--color-text-secondary); padding-top: 2px; }
 .w1x__t { font: 400 .9375rem/1.3 var(--f-text); }
-.w1x__c { font-size: .8125rem; color: var(--color-text-secondary); margin-top: 2px; }
+.w1x__c { font-size: .8125rem; color: var(--color-text-secondary); margin-top: 2px; font-weight: 600; }
 .w1x__it.is-open .w1x__t { font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1.02 var(--f-display); letter-spacing: -.005em; }
 .w1x__more { margin-top: var(--s7); }
 @media (max-width: 767px) {
   .w1x__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .w1x__sheet { padding: 8px 8px 10px; }
-  .w1x__t { font-size: .8125rem; }
+  .w1x__t { font-size: .8125rem; font-weight: 600; }
   .w1x__it.is-open .w1x__ph { aspect-ratio: 4 / 3; }
 }
 
@@ -327,7 +327,7 @@
 .wgh__lvl-bub { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 1.5; }
 .wgh__lvl-m { stroke: var(--color-art-line); stroke-width: 1.2; }
 .wgh__btns { display: flex; gap: var(--s3); }
-@media (max-width: 767px) { .wgh__wall { --cg: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); } .wgh__fr { padding: 6px; } .wgh__cap { font-size: .8125rem; } }
+@media (max-width: 767px) { .wgh__wall { --cg: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); } .wgh__fr { padding: 6px; } .wgh__cap { font-size: .8125rem; font-weight: 600; } }
 @media (prefers-reduced-motion: reduce) { .wgh__fr { transition: none; } }
 
 /* ---------- slot 6 · Phase 5 new · The tile bond ---------- */
@@ -371,7 +371,7 @@
   .wix__grid { grid-template-columns: 1fr; }
   .wix__fig { top: 64px; z-index: 2; background: var(--color-bg); padding-bottom: 8px; }
   .wix__ph { aspect-ratio: 16 / 9; }
-  .wix__cap { font-size: .875rem; padding-top: 8px; }
+  .wix__cap { font-size: .875rem; padding-top: 8px; font-weight: 600; }
 }
 
 /* ---------- slot 8 · Phase 5 new · The job binder ---------- */

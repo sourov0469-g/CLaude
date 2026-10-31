@@ -1,0 +1,36 @@
+kitchen-intro switcher: [1,2,3,4,5] ok
+kitchen-intro slot 1: text measured 11, below AA 0, unmeasured 1
+kitchen-intro slot 2: text measured 12, below AA 0, unmeasured 0
+kitchen-intro slot 3: text measured 10, below AA 0, unmeasured 0
+kitchen-intro slot 4: text measured 13, below AA 0, unmeasured 4
+kitchen-intro slot 5: text measured 15, below AA 0, unmeasured 0
+kitchen-intro backup b1: opens (502px)
+kitchen-intro backup b2: opens (774px)
+kitchen-intro backup b3: opens (801px)
+kitchen-intro backup b4: opens (558px)
+kitchen-intro backup b5: opens (1005px)
+kitchen-scope switcher: [1,2,3,4,5] ok
+kitchen-scope slot 1: text measured 24, below AA 0, unmeasured 0
+kitchen-scope slot 2: text measured 22, below AA 0, unmeasured 1
+kitchen-scope slot 3: text measured 13, below AA 0, unmeasured 0
+kitchen-scope slot 4: text measured 11, below AA 0, unmeasured 20
+kitchen-scope slot 5: text measured 10, below AA 0, unmeasured 0
+kitchen-scope backup b1: opens (824px)
+kitchen-scope backup b2: opens (762px)
+kitchen-scope backup b3: opens (571px)
+kitchen-scope backup b4: opens (883px)
+kitchen-scope backup b5: opens (553px)
+kitchen-work switcher: [1,2,3,4,5] ok
+kitchen-work slot 1: text measured 23, below AA 0, unmeasured 0
+kitchen-work slot 2: text measured 22, below AA 0, unmeasured 0
+kitchen-work slot 3: text measured 24, below AA 0, unmeasured 0
+kitchen-work slot 4: text measured 32, below AA 0, unmeasured 0
+kitchen-work slot 5: text measured 24, below AA 0, unmeasured 0
+kitchen-work backup b1: opens (2084px)
+kitchen-work backup b2: opens (1057px)
+kitchen-work backup b3: opens (1621px)
+kitchen-work backup b4: opens (1043px)
+kitchen-work backup b5: opens (1762px)
+
+page errors: 0
+FAILS: 0

@@ -27,7 +27,10 @@ const FILE = process.env.FILE, SECS = process.env.SECS.split(','), SLOTS = (proc
       }
       let body = 0, bodyN = 0; for (const k in w) if (+k >= 15 && w[k] > bodyN) { bodyN = w[k]; body = +k; }
       if (!body) for (const k in w) if (w[k] > bodyN) { bodyN = w[k]; body = +k; }
-      const bodyW = (() => { const tw2 = document.createTreeWalker(ver, NodeFilter.SHOW_TEXT); let m; while ((m = tw2.nextNode())) { const el = m.parentElement; if (el && !el.closest('h1,h2,h3,svg,button,.btn,label') && m.nodeValue.trim().length > 20 && Math.abs(size(getComputedStyle(el)) - body) < .2) return +getComputedStyle(el).fontWeight; } return 400; })();
+      const ww = {}; const tw3 = document.createTreeWalker(ver, NodeFilter.SHOW_TEXT); let q;
+      while ((q = tw3.nextNode())) { const t = q.nodeValue.trim(); const el = q.parentElement; if (!t || !el || !vis(el) || el.closest('h1,h2,h3,svg,button,.btn,[aria-hidden="true"],label')) continue;
+        const c = getComputedStyle(el); if (Math.abs(Math.round(size(c) * 10) / 10 - body) < .05) ww[c.fontWeight] = (ww[c.fontWeight] || 0) + t.length; }
+      let bodyW = 400, bwN = 0; for (const k in ww) if (ww[k] > bwN) { bwN = ww[k]; bodyW = +k; }
       return { head, headTag, body, small: small === 1e9 ? body : small, bodyW, smallW };
     }, [s, v]);
     const r1 = r.head / r.body, r2 = r.body / r.small, wstep = Math.abs(r.smallW - r.bodyW);

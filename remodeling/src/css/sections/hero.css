@@ -411,7 +411,7 @@ html:not([data-nav-on="photo"]) .nav:not(.is-solid) { color: var(--color-text); 
   .hpx__band { left: 8%; right: 2%; bottom: 30%; }
   .hpx__roof { left: 8%; right: 2%; bottom: 30%; width: 90% !important; height: 64% !important; }
   .hpx__dim { left: 8%; right: 2%; bottom: 25%; }
-  .hpx__name { left: 4%; right: 0; bottom: calc(25% - 34px); font-size: .8125rem; }
+  .hpx__name { left: 4%; right: 0; bottom: calc(25% - 34px); font-size: .8125rem; font-weight: 600; }
   .hpx__pick { left: 0; right: 0; }
   .hpx__s { width: 40px; height: 40px; }
 }

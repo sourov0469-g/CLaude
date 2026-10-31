@@ -1,0 +1,18 @@
+bath-intro1	accent area 2.2%	largest 1.3% (btn)	filled primaries 1
+bath-intro2	accent area 1.5%	largest 1.5% (btn)	filled primaries 1
+bath-intro3	accent area 1.0%	largest 0.8% (btn)	filled primaries 1
+bath-intro4	accent area 1.1%	largest 1.1% (btn)	filled primaries 1
+bath-intro5	accent area 1.2%	largest 1.2% (btn)	filled primaries 1
+bath-build1	accent area 8.6%	largest 2.1% (rect)	filled primaries 0
+bath-build2	accent area 0.0%	largest 0.0% ()	filled primaries 0
+bath-build3	accent area 0.8%	largest 0.8% (btn)	filled primaries 2
+bath-build4	accent area 0.0%	largest 0.0% ()	filled primaries 0
+bath-build5	accent area 0.0%	largest 0.0% ()	filled primaries 0
+bath-work1	accent area 0.0%	largest 0.0% (bba__h)	filled primaries 0
+bath-work2	accent area 0.4%	largest 0.4% (btn)	filled primaries 1
+bath-work3	accent area 0.0%	largest 0.0% ()	filled primaries 0
+bath-work4	accent area 0.1%	largest 0.1% (bw4__chip)	filled primaries 0
+bath-work5	accent area 0.5%	largest 0.5% (btn)	filled primaries 1
+
+OFF-WINDOW COLOURS (chroma >= .03, outside clay 25-50 and danger 13-23):
+none

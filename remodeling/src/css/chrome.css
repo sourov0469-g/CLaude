@@ -77,7 +77,7 @@
 .sheet__foot { margin-top: auto; display: grid; gap: var(--s4); }
 .sheet__settings { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s6); }
 .sheet__settings fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
-.sheet__settings legend { font-size: .8125rem; font-weight: 560; color: var(--color-text-secondary); padding: 0; margin-bottom: 4px; }
+.sheet__settings legend { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); padding: 0; margin-bottom: 4px; }
 .sheet .seg { background: var(--color-surface); }
 .sheet .seg button { color: var(--color-text); }
 .sheet .seg button[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
@@ -106,7 +106,7 @@
   border-radius: var(--radius);
   font-family: var(--f-text);
   font-size: .8125rem;
-  font-weight: 560;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 14%, transparent);
 }
@@ -132,7 +132,7 @@
 /* backup slots: folded away (B key or ?backups=1 opens them); a backup in use keeps its row open [AUDIT-01 A.2] */
 .vswitch__bks { display: none; align-items: center; gap: 2px; margin-left: 6px; padding-left: 6px; box-shadow: inset 1px 0 0 color-mix(in srgb, var(--color-shadow) 22%, transparent); }
 .show-backups .vswitch__bks, .vswitch__in.is-bk .vswitch__bks { display: inline-flex; }
-.vswitch .vswitch__bk { width: auto; min-width: 30px; padding: 0 5px; font-size: .75rem; letter-spacing: .02em; }
+.vswitch .vswitch__bk { width: auto; min-width: 30px; padding: 0 5px; font-size: .75rem; letter-spacing: .02em; font-weight: 600; }
 /* phones: five digits need the room the header Call button took; the fixed bar below carries Call / Text / Book */
 @media (max-width: 479px) { .nav .btn--call { display: none; } }
 @media (max-width: 767px) { .vswitch button::before { inset: -7px -9px; } }   /* >= 44px hit area per digit [AUDIT-01 D.14] */
@@ -224,7 +224,7 @@
   background: color-mix(in srgb, var(--color-surface) 82%, transparent); color: var(--color-text);
   border: 0; border-radius: var(--radius);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 14%, transparent);
-  font-size: .8125rem; font-weight: 560;
+  font-size: .8125rem; font-weight: 600;
 }
 .settings__panel {
   position: absolute; right: 0; top: calc(100% + 8px);
@@ -239,9 +239,9 @@
 .settings__panel.is-in { animation: pop-in 180ms var(--ease-out); }
 @keyframes pop-in { from { opacity: 0; transform: scale(.96); } }
 .settings fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
-.settings legend { font-size: .8125rem; font-weight: 560; padding: 0; margin-bottom: 4px; color: var(--color-text-secondary); }
+.settings legend { font-size: .8125rem; font-weight: 600; padding: 0; margin-bottom: 4px; color: var(--color-text-secondary); }
 .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; background: var(--color-surface); border-radius: var(--radius); }
-.seg button { min-height: 38px; border: 0; background: none; color: var(--color-text); border-radius: var(--radius); font-size: .875rem; font-weight: 500; opacity: .7; }
+.seg button { min-height: 38px; border: 0; background: none; color: var(--color-text); border-radius: var(--radius); font-size: .875rem; font-weight: 600; opacity: .7; }
 .seg button[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); opacity: 1; }
 
 /* ---------- progress tape (measuring tape) [S0634 scroll-progress as scaleX] ---------- */
@@ -263,17 +263,17 @@
 }
 .foot__mark span:first-child { color: var(--color-text); }
 .foot__mark span:last-child { color: var(--color-text-secondary); }   /* owner redesign: the accent carries the second word */
-@media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; } }
+@media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
 .foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
-.foot__col h3 { font-size: .8125rem; font-weight: 560; color: var(--color-text-secondary); margin-bottom: 4px; }
+.foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
 .foot__addr { font-style: normal; display: grid; gap: var(--s2); }
 .foot__col a { text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
 .foot__col a[href^="mailto:"] { overflow-wrap: anywhere; word-break: break-word; }   /* [AUDIT-01 footer 3] */
-.foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: var(--color-text-secondary); padding-top: var(--s5); }
+.foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: var(--color-text-secondary); padding-top: var(--s5); font-weight: 600; }
 @media (max-width: 1023px) {
   .foot__brand { grid-column: 1 / -1; }
   .foot__col { grid-column: span 6; }

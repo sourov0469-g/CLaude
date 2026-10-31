@@ -198,7 +198,7 @@
 .plx__svg.is-home .home .win { fill: var(--color-surface); }
 .plx__headtxt { grid-column: 9 / span 4; display: grid; gap: var(--s3); }
 .plx__headtxt .process__lead { grid-column: auto; }
-.plx__note { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--color-text-secondary); max-width: 40ch; }
+.plx__note { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--color-text-secondary); max-width: 40ch; font-weight: 600; }
 .plx__plan { position: relative; aspect-ratio: 1200 / 520; }
 .plx__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .plx__svg .road-done { stroke: var(--color-art-accent); stroke-width: 5; }
@@ -288,7 +288,7 @@
 .p2x__pip[aria-pressed="true"] { color: var(--color-accent-text); }
 @media (max-width: 767px) {
   .p2x__pips { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .p2x__pt { font-size: .6875rem; }
+  .p2x__pt { font-size: .6875rem; font-weight: 600; }
   .p2x__cap { grid-template-columns: auto; }
   .p2x__no { grid-row: auto; }
 }
@@ -380,7 +380,7 @@
 .pel__disp { position: absolute; top: 6px; font: 700 .9375rem/1 var(--f-display); }
 .pel__doors { position: absolute; left: 20%; right: 20%; bottom: 0; height: 60%; border: 3px solid var(--color-border-strong); border-bottom: 0; background: linear-gradient(90deg, transparent calc(50% - 1.5px), var(--color-bg-inverse) 0 calc(50% + 1.5px), transparent 0); }
 .pel__panel { display: grid; grid-template-rows: repeat(8, 1fr); align-items: center; justify-items: center; padding: 8px 0; border-radius: 12px; background: var(--color-bg-inverse); }
-@media (max-width: 1023px) { .pel__shaft { grid-column: 1 / -1; height: 520px; } .pel__car { height: calc((520px - 8px) / 8 - 10px); } .pel__floors div { padding-left: 100px; font-size: .8125rem; } }
+@media (max-width: 1023px) { .pel__shaft { grid-column: 1 / -1; height: 520px; } .pel__car { height: calc((520px - 8px) / 8 - 10px); } .pel__floors div { padding-left: 100px; font-size: .8125rem; font-weight: 600; } }
 @media (prefers-reduced-motion: reduce) { .pel__car { transition: none; } }
 
 /* slot 7 · the folding ruler */

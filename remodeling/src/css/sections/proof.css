@@ -290,7 +290,7 @@
   .pmx__lead { margin-top: var(--s4); }
   .pmx__num { font-size: clamp(2.5rem, 11vw, 3.5rem); }
   .pmx__lab b { font-size: 1.0625rem; }
-  .pmx__lab { font-size: .8125rem; }
+  .pmx__lab { font-size: .8125rem; font-weight: 600; }
 }
 .pmx__win::after { display: none; }
 .pmx__m { text-decoration: none; }
@@ -370,7 +370,7 @@
 }
 @media (max-width: 767px) {
   .pbx__site { height: 520px; }
-  .pbx__k { font-size: .5625rem; }
+  .pbx__k { font-size: .5625rem; font-weight: 600; }
 }
 
 

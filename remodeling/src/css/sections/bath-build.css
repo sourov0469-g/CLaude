@@ -12,9 +12,9 @@
 .bb1__k[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
 .bb1__wall { width: 100%; height: auto; max-height: 520px; overflow: visible; }
 .bb1__l { cursor: pointer; transition: opacity 200ms var(--ease-out); }
-.bb1__l[data-l="0"] rect { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 2; }
+.bb1__l[data-l="0"] rect { fill: var(--color-art-fill); stroke: var(--color-art-line); stroke-width: 2; }
 .bb1__l[data-l="1"] rect { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 2; }
-.bb1__l[data-l="2"] rect { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 1.5; }
+.bb1__l[data-l="2"] rect { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 1.5; }
 .bb1__l[data-l="3"] path { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 2; }
 .bb1__l[data-l="4"] rect, .bb1__l[data-l="4"] path { fill: var(--color-art-fill); stroke: var(--color-art-line); stroke-width: 2; }
 .bb1__wall.has-on .bb1__l:not(.is-on) { opacity: .3; }

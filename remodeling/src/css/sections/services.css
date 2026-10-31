@@ -286,7 +286,7 @@
   .s3x__wall { order: -1; margin-bottom: var(--s7); }
 }
 @media (max-width: 767px) {
-  .s3x__tags span { font-size: .625rem; padding: 4px 6px 3px 14px; }
+  .s3x__tags span { font-size: .625rem; padding: 4px 6px 3px 14px; font-weight: 600; }
   .s3x__tags { gap: 8px 6px; }
 }
 
@@ -364,7 +364,7 @@
 .shc__hs[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
 .shc__card { position: absolute; right: 0; top: 0; width: min(320px, 40%); padding: 16px 18px; border-radius: 16px; background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-border-strong); }
 .shc__card h3 { margin: 0 0 6px; font: 700 1.25rem/1.15 var(--f-display); } .shc__card p { margin: 0; font: 400 .9375rem/1.45 var(--f-text); }
-@media (max-width: 767px) { .shc__card { position: static; width: auto; margin-top: 14px; } .shc__hs { min-height: 30px; padding: 0 9px; font-size: .6875rem; } }
+@media (max-width: 767px) { .shc__card { position: static; width: auto; margin-top: 14px; } .shc__hs { min-height: 30px; padding: 0 9px; font-size: .6875rem; font-weight: 600; } }
 
 /* ---------- slot 8 · NEW · The duration bars ---------- */
 .sdb__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s6); }
@@ -382,5 +382,5 @@
 @media (max-width: 767px) { .sdb__scale { margin-left: 0; } .sdb__row { grid-template-columns: 64px 1fr; } .sdb__row img { width: 64px; } .sdb__track { grid-column: 1 / -1; } }
 
 /* Phase 6 QA r1: title-block keys and the sheet numbers to AA */
-.s2x__tb dt { color: var(--color-text); font-size: .625rem; }   /* on the orange block only full ink holds AA (6.1:1) */
+.s2x__tb dt { color: var(--color-text); font-size: .625rem; font-weight: 600; }   /* on the orange block only full ink holds AA (6.1:1) */
 .s3x__n { color: var(--color-text-secondary); }
