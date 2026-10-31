@@ -137,7 +137,7 @@ def build(page='index'):
     css = re.sub(r'\s*([{};])\s*', r'\1', css).replace(';}', '}')
     html = html.replace('<link rel="stylesheet" href="assets/css/home.css">', f'<style>\n{css}\n</style>')
     html = re.sub(r'<link rel="preload" href="assets/fonts/[^"]+"[^>]*>\n?', '', html)
-    html = html.replace('<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">', f'<link rel="icon" href="{data_uri("assets/img/brand/favicon.svg")}" type="image/svg+xml">')
+    html = re.sub(r'<link rel="icon" href="(assets/img/brand/[^"]+\.svg)" type="image/svg\+xml">', lambda m: f'<link rel="icon" href="{data_uri(m.group(1))}" type="image/svg+xml">', html)
     # 2. images: one src per tag, no srcset (the single file carries one size of each photo)
     html = re.sub(r'\s(?:srcset|sizes)="[^"]*"', '', html)
     used = set()

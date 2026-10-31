@@ -106,21 +106,21 @@
     chip: {
       name: 'Chip',
       svg: `<g class="pb">
-  <g data-back="0"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:var(--accent-dd)"/></g>
-  <g data-back="1"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:var(--accent-d)"/></g>
+  <g data-back="0"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:var(--color-accent-text-strong)"/></g>
+  <g data-back="1"><rect class="pk" x="16" y="5" width="16" height="34" rx="1.6" style="fill:var(--color-accent-text)"/></g>
   <g data-front>
-    <rect class="pk" x="15" y="4" width="18" height="36" rx="1.8" style="fill:var(--paper)"/>
-    <rect data-mid x="15.8" y="16.5" width="16.4" height="11" style="fill:var(--accent-300)"/>
-    <rect x="15.8" y="28" width="16.4" height="11.2" style="fill:var(--ink)"/>
+    <rect class="pk" x="15" y="4" width="18" height="36" rx="1.8" style="fill:var(--color-surface)"/>
+    <rect data-mid x="15.8" y="16.5" width="16.4" height="11" style="fill:var(--color-accent-border)"/>
+    <rect x="15.8" y="28" width="16.4" height="11.2" style="fill:var(--color-text)"/>
     <rect class="pk pn" x="15" y="4" width="18" height="36" rx="1.8"/>
     <g data-head>
       <g data-eye="0" data-r="1.6"><circle class="pinkf" cx="21" cy="10.5" r="1.9"/></g>
       <g data-eye="1" data-r="1.6"><circle class="pinkf" cx="27" cy="10.5" r="1.9"/></g>
-      <rect class="plid" data-lid x="15.8" y="4.8" width="16.4" height="11.4" style="fill:var(--paper)"/>
+      <rect class="plid" data-lid x="15.8" y="4.8" width="16.4" height="11.4" style="fill:var(--color-surface)"/>
     </g>
     <rect class="pred" data-stripe x="15" y="41.5" width="18" height="2" rx="1"/>
   </g>
-  <circle class="pk" cx="24" cy="36.4" r="1.5" style="fill:var(--paper)"/>
+  <circle class="pk" cx="24" cy="36.4" r="1.5" style="fill:var(--color-surface)"/>
 </g>`
     }
   };
@@ -157,7 +157,7 @@
       T(parts.lids, { scaleY: 0, transformOrigin: '50% 0%' }, k);
       if (kind === 'sash') { T(parts.ls, { y: 0 }, k); T(parts.mo, { attr: { y: 40.5, height: 0 } }, k); T(parts.br, { opacity: 0, scale: 1.3, transformOrigin: '50% 50%' }, k); T(parts.sheen, { opacity: 0, x: 0 }, k); }
       if (kind === 'gable') { T(parts.door, { scaleX: 1, transformOrigin: '0% 50%' }, k); T(parts.roof, { rotation: 0, scaleY: 1, y: 0, transformOrigin: '50% 100%' }, k); T(parts.wins, { scale: 1, transformOrigin: '50% 50%' }, k); }
-      if (kind === 'chip') { T(parts.back[0], { rotation: -9, svgOrigin: '24 36.4' }, k); T(parts.back[1], { rotation: 9, svgOrigin: '24 36.4' }, k); T(parts.front, { rotation: 0, scaleX: 1, svgOrigin: '24 36.4' }, k); T(parts.mid, { fill: tok('--accent-300') }, k); T(parts.stripe, { x: -22, opacity: 0 }, k); }
+      if (kind === 'chip') { T(parts.back[0], { rotation: -9, svgOrigin: '24 36.4' }, k); T(parts.back[1], { rotation: 9, svgOrigin: '24 36.4' }, k); T(parts.front, { rotation: 0, scaleX: 1, svgOrigin: '24 36.4' }, k); T(parts.mid, { fill: tok('--color-accent-border') }, k); T(parts.stripe, { x: -22, opacity: 0 }, k); }
     }
     function pose(name, tgt) {
       rest();
@@ -165,11 +165,11 @@
       if (name === 'cta') {   // D.1: "looks at the booking": lower pane up 3 px, lids to 0.42, 140 ms ease-out (sash); the others lean in
         if (kind === 'sash') { T(parts.ls, { y: -3 }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
         if (kind === 'gable') { T(parts.wins, { scale: 1.12 }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
-        if (kind === 'chip') { T(parts.mid, { fill: tok('--accent') }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
+        if (kind === 'chip') { T(parts.mid, { fill: tok('--color-accent-solid') }, 0.14, 'power2.out'); T(parts.lids, { scaleY: 0.42 }, 0.14, 'power2.out'); }
       } else if (name === 'button') {
         if (kind === 'sash') { T(parts.ls, { y: -7 }, 0.26); T(parts.mo, { attr: { y: 33.5, height: 7 } }, 0.26); T(parts.sheen, { opacity: 1, x: 14, duration: 0.65, ease: 'power2.inOut' }); }
         if (kind === 'gable') T(parts.door, { scaleX: 0.16 }, 0.3, 'back.out(1.5)');
-        if (kind === 'chip') { T(parts.mid, { fill: tok('--accent') }, 0.22); T(parts.front, { rotation: 8 * dir }, 0.3, 'back.out(1.5)'); }
+        if (kind === 'chip') { T(parts.mid, { fill: tok('--color-accent-solid') }, 0.22); T(parts.front, { rotation: 8 * dir }, 0.3, 'back.out(1.5)'); }
       } else if (name === 'link') {
         if (kind === 'sash') T(parts.lids, { scaleY: 0.42 }, 0.2);
         if (kind === 'gable') T(parts.roof, { rotation: -12 * dir, transformOrigin: dir > 0 ? '100% 100%' : '0% 100%' }, 0.3, 'back.out(1.6)');
@@ -186,7 +186,7 @@
       } else if (name === 'card') {
         if (kind === 'sash') T(parts.body, { scale: 1.08 }, 0.3, 'back.out(1.5)');
         if (kind === 'gable') parts.lap.forEach((l, i) => G.fromTo(l, { x: 0 }, { x: i % 2 ? 1.6 : -1.6, duration: 0.14, delay: i * 0.04, yoyo: true, repeat: 1, ease: 'sine.inOut', overwrite: 'auto' }));
-        if (kind === 'chip') G.timeline().to(parts.front, { scaleX: 0, duration: 0.12, ease: 'power2.in' }).set(parts.mid, { fill: tok('--accent-300') }).to(parts.front, { scaleX: 1, duration: 0.18, ease: 'power2.out' });
+        if (kind === 'chip') G.timeline().to(parts.front, { scaleX: 0, duration: 0.12, ease: 'power2.in' }).set(parts.mid, { fill: tok('--color-accent-border') }).to(parts.front, { scaleX: 1, duration: 0.18, ease: 'power2.out' });
       } else if (name === 'drag') {
         T(parts.body, { scaleY: 0.9, scaleX: 1.07 }, 0.2);
         if (kind === 'gable') T(parts.roof, { scaleY: 0.72 }, 0.2);
@@ -637,7 +637,7 @@
           const inner = svgEl('g', {}, c);
           const face = svgEl('rect', { x: -9, y: -13, width: 18, height: 26, rx: 1.5, class: 'f-chip' }, inner);
           svgEl('circle', { cx: 0, cy: -9, r: 1.6, class: 'f-punch' }, inner);
-          F.chips.push({ x, y, inner, face, hex: pal.length ? pal[i % pal.length] : tok('--stone'), k: 0, row: i });
+          F.chips.push({ x, y, inner, face, hex: pal.length ? pal[i % pal.length] : tok('--color-border-subtle'), k: 0, row: i });
         }
       },
       still(F) { F.chips.forEach((C, i) => { if (i % 7 === 0) this.set(C, 1); }); },
@@ -762,7 +762,7 @@
         const pw = (dw - 54) / 2, ph = [0.2, 0.34, 0.28].map(k => (dh - 72) * k);
         let panels = '', y = dy + 18;
         ph.forEach(h => { panels += `<rect x="${dx + 18}" y="${y}" width="${pw}" height="${h}"/><rect x="${dx + 36 + pw}" y="${y}" width="${pw}" height="${h}"/>`; y += h + 18; });
-        F.svg.innerHTML = `<defs><radialGradient id="${id}"><stop offset="0" style="stop-color:var(--star)" stop-opacity=".34"/><stop offset=".45" style="stop-color:var(--star)" stop-opacity=".1"/><stop offset="1" style="stop-color:var(--star)" stop-opacity="0"/></radialGradient></defs>
+        F.svg.innerHTML = `<defs><radialGradient id="${id}"><stop offset="0" style="stop-color:var(--color-rating)" stop-opacity=".34"/><stop offset=".45" style="stop-color:var(--color-rating)" stop-opacity=".1"/><stop offset="1" style="stop-color:var(--color-rating)" stop-opacity="0"/></radialGradient></defs>
 <circle class="f-pool" r="${clamp(F.w * 0.22, 160, 320)}" cx="${F.w * 0.7}" cy="${F.h * 0.3}" fill="url(#${id})"/>
 <g class="f-door" style="transform-origin:${dx + dw}px ${dy + dh / 2}px"><rect class="f-jamb" x="${dx - 8}" y="${dy - 8}" width="${dw + 16}" height="${dh + 8}"/><rect class="f-leaf" x="${dx}" y="${dy}" width="${dw}" height="${dh}"/>${panels}<circle class="f-knob" cx="${dx + 16}" cy="${dy + dh * 0.53}" r="5"/></g>`;
         F.pool = F.svg.querySelector('.f-pool'); F.door = F.svg.querySelector('.f-door');
@@ -845,13 +845,13 @@
       const dv = DIVS[s.dataset.sec]; if (!dv || !i) return;
       const prev = secs[i - 1].querySelector('.stage > .v');
       const own = s.querySelector('.stage > .v');
-      const pb = bgOf(prev) || tok('--paper'), ob = bgOf(own);
+      const pb = bgOf(prev) || tok('--color-surface'), ob = bgOf(own);
       // same colour on both sides: the profile takes a shade of it so the boundary still reads
       dv.style.setProperty('--sdv', pb === ob ? `color-mix(in srgb, ${pb} 90%, #000)` : pb);
       dv.style.setProperty('--sdv-line', getComputedStyle(own || s).color);
     });
     const ft = DIVS.ft;
-    if (ft) { const last = secs[secs.length - 1]; ft.style.setProperty('--sdv', bgOf(last && last.querySelector('.stage > .v')) || 'var(--ground)'); }
+    if (ft) { const last = secs[secs.length - 1]; ft.style.setProperty('--sdv', bgOf(last && last.querySelector('.stage > .v')) || 'var(--color-bg)'); }
   }
   function makeDivider(host, key) {
     const h = 56;

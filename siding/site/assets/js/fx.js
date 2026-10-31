@@ -13,7 +13,7 @@
   const mqFine = matchMedia('(hover: hover) and (pointer: fine)');
   const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
   let enabled = false;
-  const API = window.APFX = { on: false, paint: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), depthLayers: new Set(), motion: true };
+  const API = window.APFX = { on: false, paint: getComputedStyle(document.documentElement).getPropertyValue('--color-accent-solid').trim(), depthLayers: new Set(), motion: true };
 
   /* ---------- S0086 glyphs: exactly three lines in a 14 x 14 box; unused lines collapse to the centre ---------- */
   const C = { x1: 7, y1: 7, x2: 7, y2: 7, o: 0 };

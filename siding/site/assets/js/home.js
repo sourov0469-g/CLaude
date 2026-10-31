@@ -6,7 +6,7 @@
   // Phase 5: slots 9-11 are the pre-audit backups (era a) that keep their original behaviour; 12-14 are the versions
   // frozen before the redesign (era b), which run today's scripts unchanged
   const OLD = s => !!s && s.v >= 9 && s.v <= 11;
-  const TRAIL = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || 'currentColor';   // Rule 3: from the token
+  const TRAIL = getComputedStyle(document.documentElement).getPropertyValue('--color-accent-solid').trim() || 'currentColor';   // Rule 3: from the token
   // Phase 3 artwork: a section is marked once it scrolls into view, so its drawing can finish itself (CSS, motion only)
   if ('IntersectionObserver' in window) {
     const seen = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); seen.unobserve(en.target); } }), { rootMargin: '0px 0px -25% 0px' });

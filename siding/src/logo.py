@@ -88,7 +88,73 @@ def svg(w, h, body, title):
             f'<title>{title}</title>{body}</svg>\n')
 
 
-if __name__ == '__main__':
+# ===================================================================== REBRAND (2026-10-31): the course-gable mark
+# Law of closure (S1422): nothing outlines the house. Five lap courses, centred and lengthening downward, imply a gable
+# by their ends alone; a gap through the lowest two implies the doorway and the counter of an A. The eye completes the
+# house and the A of Austin from bars only, so the mark is one colour by construction: black, white or the accent.
+# Each course is cut at the roof pitch, so the course ends fall on two straight diagonals: the eye joins them into the
+# roof line and the gable closes without a single drawn edge (S1422). A doorway gap through the lowest two courses
+# reads as the door and as the counter of the A.
+APEX_Y, BASE_Y, HALF = 0.0, 64.0, 31.0          # implied gable: apex (32, 0), eaves 31 either side at the base
+
+
+def _x(yy):
+    return HALF * (yy - APEX_Y) / (BASE_Y - APEX_Y)
+
+
+def course_mark(fill='currentColor', n=5, gap=4.6, door=11.0, split_from=3, x=0, y=0, k=1.0):
+    pitch = (BASE_Y - APEX_Y + gap) / n
+    h = pitch - gap
+    out = []
+    for i in range(n):
+        t, b = APEX_Y + i * pitch, APEX_Y + i * pitch + h
+        tl, bl = 32 - _x(t), 32 - _x(b)
+        tr, br = 32 + _x(t), 32 + _x(b)
+        P = lambda pts: 'M' + 'L'.join(f'{x + px * k:.2f} {y + py * k:.2f}' for px, py in pts) + 'Z'
+        if i >= split_from:
+            d = door / 2
+            out.append(f'<path d="{P([(tl, t), (32 - d, t), (32 - d, b), (bl, b)])}" fill="{fill}"/>')
+            out.append(f'<path d="{P([(32 + d, t), (tr, t), (br, b), (32 + d, b)])}" fill="{fill}"/>')
+        else:
+            out.append(f'<path d="{P([(tl, t), (tr, t), (br, b), (bl, b)])}" fill="{fill}"/>')
+    return ''.join(out)
+
+
+def favicon_mark(fill):
+    """16 px: four heavier courses, wider door, still closing into the gable and the A"""
+    return course_mark(fill, n=4, gap=5.2, door=13.0, split_from=2)
+
+
+def lockup2(name_fill, desc_fill, mark_fill):
+    """horizontal lockup: mark + Austin Pro (Poppins 600) + descriptor (Roboto 500), every glyph outlined"""
+    pop, rob = os.path.join(FONTS, 'Poppins-600-latin.woff2'), os.path.join(FONTS, 'Roboto-latin.woff2')
+    x0 = 82
+    a, wa = run(pop, 'Austin Pro', 36, x0, 34, track=-0.005)
+    d_txt = 'SIDING · WINDOWS · ROOFING · PATIO COVERS'
+    _, w1 = run(rob, d_txt, 10, 0, 0, track=0.1, wght=500)
+    c, _ = run(rob, d_txt, 10 * wa / w1, x0 + 1, 56, track=0.1, wght=500)
+    return round(x0 + wa + 2), course_mark(mark_fill) + f'<path d="{a}" fill="{name_fill}"/><path d="{c}" fill="{desc_fill}"/>'
+
+
+def write_rebrand():
+    accent, ink, ink2, white = '#00736A', '#222928', '#474F4E', '#FFFFFF'   # accent-9, neutral-12, neutral-11 (rebrand tokens)
+    out = os.path.join(OUT, '2026-10-31')
+    os.makedirs(out, exist_ok=True)
+    W, body = lockup2(ink, ink2, accent)
+    open(os.path.join(out, 'logo.svg'), 'w').write(svg(W, 64, body, 'Austin Pro Siding, Windows and Roofing'))
+    W, body = lockup2(white, white, white)
+    open(os.path.join(out, 'logo-white.svg'), 'w').write(svg(W, 64, body, 'Austin Pro Siding, Windows and Roofing'))
+    W, body = lockup2('#000000', '#000000', '#000000')
+    open(os.path.join(out, 'logo-black.svg'), 'w').write(svg(W, 64, body, 'Austin Pro Siding, Windows and Roofing'))
+    for nm, c in (('accent', accent), ('black', '#000000'), ('white', white)):
+        open(os.path.join(out, f'mark-{nm}.svg'), 'w').write(svg(64, 64, course_mark(c), 'Austin Pro'))
+    open(os.path.join(out, 'favicon.svg'), 'w').write(svg(64, 64, favicon_mark(accent), 'Austin Pro'))
+    print('rebrand marks written to', out)
+
+
+if __name__ == '__main__' and os.environ.get('REBRAND'):
+    write_rebrand()
+elif __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     W, body = lockup()
     open(os.path.join(OUT, 'logo.svg'), 'w').write(svg(W, 64, body, 'Austin Pro Siding, Windows and Roofing'))

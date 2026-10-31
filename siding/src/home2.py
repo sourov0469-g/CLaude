@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from parts import NEAR, HOME_PAIRS, SVC_PAIRS, PHOTOS, REVIEWS, LIVE, PHONE, TEL, TRADES, e, SITE, clean
 from pages_inner import SW, COLORPLUS
 import elevation
-from logo import mark as logo_mark
+from logo import mark as logo_mark, course_mark
 import art
 import clad
 import iso
@@ -1502,7 +1502,7 @@ def head(title='Austin Pro Siding, Windows &amp; Roofing | Priced in public', de
 <meta name="description" content="{desc}">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/brand/2026-10-31/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/Poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/home.css">
@@ -1515,10 +1515,10 @@ def head(title='Austin Pro Siding, Windows &amp; Roofing | Priced in public', de
 
 
 def brand(cls, tag='span'):
-    """Owner redesign directive: the new logo. The A-frame mark is inline SVG (no request, about 1 KB); the wordmark is
-    live Poppins text, so it stays crisp and costs nothing. The outlined master files are in assets/img/brand/."""
+    """REBRAND 2026-10-31: the course-gable mark (law of closure, S1422) in currentColor, coloured by the
+    --color-logo-mark token; the wordmark is live Poppins set in the text token. Masters: assets/img/brand/2026-10-31/."""
     return (f'<{tag} class="brand {cls}"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">'
-            f'{logo_mark(k=1, uid=cls)}</svg><span class="brand-w"><span class="brand-n">AUSTIN <b>PRO</b></span>'
+            f'{course_mark("currentColor")}</svg><span class="brand-w"><span class="brand-n">Austin Pro</span>'
             f'<span class="brand-d">Siding · Windows · Roofing · Patio covers</span></span></{tag}>')
 
 
