@@ -2,7 +2,7 @@
 .process__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
 .process__head .t-head { grid-column: 1 / span 7; }
 .process__lead { grid-column: 9 / span 4; color: var(--color-text-secondary); max-width: 34ch; }
-.process__note { margin: var(--s6) 0 0; font-size: var(--t-small); color: var(--color-text-secondary); }
+.process__note { margin: var(--s6) 0 0; font-size: var(--t-small); color: var(--color-text-secondary); font-weight: 600; }
 @media (max-width: 1023px) { .process__head .t-head, .process__lead { grid-column: 1 / -1; } .process__lead { margin-top: var(--s4); } }
 
 /* ---------- v1 · On the road [Q54] ---------- */
@@ -318,7 +318,7 @@
 .p3x__art .w { stroke: var(--color-art-accent); }
 .p3x__art .g { stroke: var(--color-art-line-soft); }
 .p3x__art .r { stroke: var(--color-art-accent); }
-.p3x__stamp { position: absolute; right: 12px; bottom: 12px; padding: 4px 8px 3px; border: 2px solid var(--color-art-accent); color: var(--color-accent-text); background: color-mix(in srgb, var(--color-shadow) 46%, transparent); font: 400 1rem/1 var(--f-display); letter-spacing: 0; }
+.p3x__stamp { position: absolute; right: 12px; bottom: 12px; padding: 4px 8px 3px; border: 2px solid var(--color-art-accent); color: var(--color-accent-text); background: color-mix(in srgb, var(--color-shadow) 46%, transparent); font: 600 1rem/1 var(--f-display); letter-spacing: 0; }
 .p3x__cno { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .14em; color: var(--color-text-secondary); }
 .p3x__t { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/.95 var(--f-display); letter-spacing: -.005em; }
 .p3x__d { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--color-text); max-width: 44ch; }

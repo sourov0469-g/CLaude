@@ -1,0 +1,18 @@
+bath-intro1	head 62.2px (H1)	body 24px w400	fine 13px w600	head/body 2.59	body/fine 1.85 wstep 200	pass
+bath-intro2	head 62.2px (H1)	body 24px w400	fine 14px w600	head/body 2.59	body/fine 1.71 wstep 200	pass
+bath-intro3	head 62.2px (H1)	body 17px w400	fine 14px w600	head/body 3.66	body/fine 1.21 wstep 200	pass
+bath-intro4	head 62.2px (H1)	body 16px w400	fine 14px w600	head/body 3.88	body/fine 1.14 wstep 200	pass
+bath-intro5	head 62.2px (H1)	body 24px w400	fine 13px w600	head/body 2.59	body/fine 1.85 wstep 200	pass
+bath-build1	head 37.9px (H2)	body 16px w400	fine 14px w600	head/body 2.37	body/fine 1.14 wstep 200	pass
+bath-build2	head 37.9px (H2)	body 17px w400	fine 11.8px w600	head/body 2.23	body/fine 1.44 wstep 200	pass
+bath-build3	head 37.9px (H2)	body 17px w400	fine 14px w600	head/body 2.23	body/fine 1.21 wstep 200	pass
+bath-build4	head 37.9px (H2)	body 24px w400	fine 12.6px w600	head/body 1.58	body/fine 1.90 wstep 200	pass
+bath-build5	head 37.9px (H2)	body 17px w400	fine 14px w600	head/body 2.23	body/fine 1.21 wstep 200	pass
+bath-work1	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+bath-work2	head 37.9px (H2)	body 15px w400	fine 12px w600	head/body 2.53	body/fine 1.25 wstep 200	pass
+bath-work3	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+bath-work4	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+bath-work5	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+
+page: L1 h1 62.2px vs median L2 h2 37.9px = 1.64
+version fails: 0

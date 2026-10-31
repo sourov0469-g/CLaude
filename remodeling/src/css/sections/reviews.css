@@ -203,7 +203,7 @@
 .rpr__svg .mark { stroke: var(--color-art-line); stroke-width: 2; }
 .rpr__svg .ml { font: 600 15px/1 var(--f-display); fill: var(--color-art-line-soft); text-anchor: middle; }
 .rpr__svg .stop { stroke: var(--color-art-accent); stroke-width: 2.5; stroke-dasharray: 6 5; }
-.rpr__svg .stop-t { font: 600 14px/1 var(--f-text); fill: var(--color-art-accent); text-anchor: middle; }
+.rpr__svg .stop-t { font: 600 14px/1 var(--f-text); fill: var(--color-accent-text); text-anchor: middle; }
 .rpr__roller { position: absolute; top: 0; left: 0; width: clamp(40px, 5vw, 60px); margin-left: calc(clamp(40px, 5vw, 60px) / -2); cursor: grab; outline-offset: 4px; touch-action: none; }
 .rpr__roller:active { cursor: grabbing; }
 .rpr__roller svg { display: block; width: 100%; height: auto; overflow: visible; }

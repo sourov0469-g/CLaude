@@ -1,0 +1,92 @@
+elements tested 70 | click delivered to the element 70 | tip exactly on the pointer 70 | stuck pressed after release 0 | max click delay after pointerup 0.5ms | covered or hidden (skipped) 86
+cancelled press: pressed during true, still pressed after pointercancel false
+native cursor: {"reduced-motion":{"hasBuddyClass":false,"cursorOnButton":"pointer","tipShown":false},"touch":{"hasBuddyClass":false,"cursorOnButton":"pointer","tipShown":false}}
+page errors 0 
+PROBLEMS: none
+SKIPPED (not live at test time):
+bath-build1 not displayed #0
+bath-build1 not displayed #1
+bath-build1 not displayed #2
+bath-build1 not displayed #3
+bath-build1 not displayed #4
+bath-build3 covered at rest #2
+bath-work1 not displayed #0
+bath-work1 not displayed #1
+bath-work1 not displayed #2
+bath-work1 not displayed #3
+bath-work1 not displayed #4
+bath-work1 not displayed #5
+bath-work1 not displayed #6
+bath-work1 not displayed #7
+bath-work1 not displayed #8
+bath-work1 not displayed #9
+bath-work1 not displayed #10
+bath-work1 not displayed #11
+bath-work1 not displayed #12
+bath-work1 not displayed #13
+bath-work2 not displayed #0
+bath-work2 covered at rest #6
+bath-work2 covered at rest #7
+bath-work2 covered at rest #8
+bath-work2 covered at rest #9
+bath-work2 covered at rest #10
+bath-work2 covered at rest #11
+bath-work2 covered at rest #12
+bath-work2 covered at rest #13
+bath-work2 covered at rest #14
+bath-work4 not displayed #6
+bath-work4 not displayed #7
+bath-work4 not displayed #8
+bath-work4 not displayed #9
+bath-work4 not displayed #10
+bath-work4 not displayed #11
+bath-work4 not displayed #12
+bath-work4 not displayed #13
+bath-work4 not displayed #14
+bath-work4 not displayed #15
+bath-work4 not displayed #16
+bath-work4 not displayed #17
+bath-work4 not displayed #18
+bath-work4 not displayed #19
+chrome not displayed #1
+chrome not displayed #2
+chrome not displayed #3
+chrome not displayed #4
+chrome not displayed #5
+chrome not displayed #6
+chrome not displayed #7
+chrome not displayed #8
+chrome not displayed #9
+chrome not displayed #10
+chrome not displayed #11
+chrome not displayed #12
+chrome not displayed #13
+chrome not displayed #14
+chrome not displayed #15
+chrome not displayed #16
+chrome not displayed #17
+chrome not displayed #18
+chrome not displayed #19
+chrome not displayed #20
+chrome not displayed #21
+chrome not displayed #22
+chrome not displayed #23
+chrome not displayed #24
+chrome not displayed #27
+chrome not displayed #28
+chrome not displayed #29
+chrome not displayed #30
+chrome not displayed #31
+chrome not displayed #32
+chrome not displayed #33
+chrome not displayed #34
+chrome not displayed #35
+chrome not displayed #36
+chrome not displayed #42
+chrome not displayed #44
+chrome not displayed #45
+chrome not displayed #46
+chrome not displayed #47
+chrome not displayed #48
+chrome not displayed #49
+chrome not displayed #51

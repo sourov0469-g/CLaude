@@ -1,0 +1,137 @@
+hero switcher: [1,2,3,4,5,6,7,8] ok
+hero slot 1: text measured 14, below AA 0, unmeasured 0
+hero slot 2: text measured 16, below AA 0, unmeasured 3
+hero slot 3: text measured 12, below AA 0, unmeasured 0
+hero slot 4: text measured 14, below AA 0, unmeasured 0
+hero slot 5: text measured 15, below AA 0, unmeasured 0
+hero slot 6: text measured 24, below AA 0, unmeasured 0
+hero slot 7: text measured 12, below AA 0, unmeasured 4
+hero slot 8: text measured 13, below AA 0, unmeasured 1
+hero backup b4: opens (900px)
+hero backup b5: opens (900px)
+hero backup b6: opens (900px)
+hero backup b7: opens (900px)
+hero backup b8: opens (900px)
+hero backup b1: opens (900px)
+hero backup b2: opens (900px)
+hero backup b3: opens (900px)
+proof switcher: [1,2,3,4,5,6,7,8] ok
+proof slot 1: text measured 16, below AA 0, unmeasured 1
+proof slot 2: text measured 9, below AA 0, unmeasured 9
+proof slot 3: text measured 5, below AA 0, unmeasured 10
+proof slot 4: text measured 21, below AA 0, unmeasured 0
+proof slot 5: text measured 15, below AA 0, unmeasured 0
+proof slot 6: text measured 15, below AA 0, unmeasured 0
+proof slot 7: text measured 14, below AA 0, unmeasured 0
+proof slot 8: text measured 14, below AA 0, unmeasured 1
+proof backup b2: opens (506px)
+proof backup b3: opens (741px)
+proof backup b1: opens (520px)
+proof backup b4: opens (910px)
+services switcher: [1,2,3,4,5,6,7,8] ok
+services slot 1: text measured 32, below AA 0, unmeasured 16
+services slot 2: text measured 25, below AA 0, unmeasured 17
+services slot 3: text measured 23, below AA 0, unmeasured 0
+services slot 4: text measured 11, below AA 0, unmeasured 6
+services slot 5: text measured 15, below AA 0, unmeasured 0
+services slot 6: text measured 13, below AA 0, unmeasured 4
+services slot 7: text measured 14, below AA 0, unmeasured 0
+services slot 8: text measured 18, below AA 0, unmeasured 5
+services backup b2: opens (1870px)
+services backup b1: opens (981px)
+services backup b3: opens (2329px)
+services backup b4: opens (638px)
+ba switcher: [1,2,3,4,5,6,7,8] ok
+ba slot 1: text measured 21, below AA 0, unmeasured 1
+ba slot 2: text measured 24, below AA 0, unmeasured 4
+ba slot 3: text measured 10, below AA 0, unmeasured 1
+ba slot 4: text measured 11, below AA 0, unmeasured 0
+ba slot 5: text measured 10, below AA 0, unmeasured 0
+ba slot 6: text measured 20, below AA 0, unmeasured 0
+ba slot 7: text measured 9, below AA 0, unmeasured 0
+ba slot 8: text measured 8, below AA 0, unmeasured 0
+ba backup b2: opens (702px)
+ba backup b1: opens (703px)
+ba backup b3: opens (1845px)
+ba backup b4: opens (589px)
+process switcher: [1,2,3,4,5,6,7,8] ok
+process slot 1: text measured 53, below AA 0, unmeasured 8
+process slot 2: text measured 21, below AA 0, unmeasured 3
+process slot 3: text measured 14, below AA 0, unmeasured 12
+process slot 4: text measured 17, below AA 0, unmeasured 8
+process slot 5: text measured 17, below AA 0, unmeasured 0
+process slot 6: text measured 34, below AA 0, unmeasured 0
+process slot 7: text measured 10, below AA 0, unmeasured 16
+process slot 8: text measured 29, below AA 0, unmeasured 0
+process backup b2: opens (1217px)
+process backup b1: opens (971px)
+process backup b3: opens (954px)
+process backup b4: opens (560px)
+financing switcher: [1,2,3,4,5,6,7,8] ok
+financing slot 1: text measured 11, below AA 0, unmeasured 12
+financing slot 2: text measured 27, below AA 0, unmeasured 8
+financing slot 3: text measured 5, below AA 0, unmeasured 17
+financing slot 4: text measured 14, below AA 0, unmeasured 0
+financing slot 5: text measured 22, below AA 0, unmeasured 0
+financing slot 6: text measured 10, below AA 0, unmeasured 0
+financing slot 7: text measured 7, below AA 0, unmeasured 0
+financing slot 8: text measured 21, below AA 0, unmeasured 0
+financing backup b2: opens (913px)
+financing backup b3: opens (632px)
+financing backup b1: opens (848px)
+financing backup b4: opens (624px)
+work switcher: [1,2,3,4,5,6,7,8] ok
+work slot 1: text measured 57, below AA 0, unmeasured 0
+work slot 2: text measured 49, below AA 0, unmeasured 8
+work slot 3: text measured 8, below AA 0, unmeasured 0
+work slot 4: text measured 14, below AA 0, unmeasured 0
+work slot 5: text measured 27, below AA 0, unmeasured 0
+work slot 6: text measured 9, below AA 0, unmeasured 0
+work slot 7: text measured 57, below AA 0, unmeasured 0
+work slot 8: text measured 13, below AA 0, unmeasured 0
+work backup b2: opens (909px)
+work backup b3: opens (2095px)
+work backup b4: opens (1248px)
+work backup b1: opens (910px)
+reviews switcher: [1,2,3,4,5,6,7,8] ok
+reviews slot 1: text measured 9, below AA 0, unmeasured 0
+reviews slot 2: text measured 8, below AA 0, unmeasured 4
+reviews slot 3: text measured 11, below AA 0, unmeasured 7
+reviews slot 4: text measured 11, below AA 0, unmeasured 0
+reviews slot 5: text measured 10, below AA 0, unmeasured 1
+reviews slot 6: text measured 15, below AA 0, unmeasured 0
+reviews slot 7: text measured 14, below AA 0, unmeasured 0
+reviews slot 8: text measured 13, below AA 0, unmeasured 5
+reviews backup b2: opens (620px)
+reviews backup b1: opens (600px)
+reviews backup b3: opens (843px)
+reviews backup b4: opens (560px)
+towns switcher: [1,2,3,4,5,6,7,8] ok
+towns slot 1: text measured 18, below AA 0, unmeasured 3
+towns slot 2: text measured 20, below AA 0, unmeasured 0
+towns slot 3: text measured 19, below AA 0, unmeasured 6
+towns slot 4: text measured 6, below AA 0, unmeasured 4
+towns slot 5: text measured 35, below AA 0, unmeasured 1
+towns slot 6: text measured 20, below AA 0, unmeasured 5
+towns slot 7: text measured 226, below AA 0, unmeasured 0
+towns slot 8: text measured 45, below AA 0, unmeasured 0
+towns backup b2: opens (617px)
+towns backup b3: opens (887px)
+towns backup b4: opens (1124px)
+towns backup b1: opens (662px)
+consult switcher: [1,2,3,4,5,6,7,8] ok
+consult slot 1: text measured 18, below AA 0, unmeasured 1
+consult slot 2: text measured 13, below AA 0, unmeasured 16
+consult slot 3: text measured 18, below AA 0, unmeasured 0
+consult slot 4: text measured 18, below AA 0, unmeasured 0
+consult slot 5: text measured 26, below AA 0, unmeasured 1
+consult slot 6: text measured 34, below AA 0, unmeasured 12
+consult slot 7: text measured 20, below AA 0, unmeasured 1
+consult slot 8: text measured 14, below AA 0, unmeasured 0
+consult backup b2: opens (721px)
+consult backup b3: opens (838px)
+consult backup b1: opens (668px)
+consult backup b4: opens (811px)
+
+page errors: 0
+FAILS: 0

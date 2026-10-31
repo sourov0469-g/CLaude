@@ -1,0 +1,18 @@
+reno-intro1	accent area 1.7%	largest 1.7% (btn)	filled primaries 1
+reno-intro2	accent area 3.8%	largest 1.8% (rect)	filled primaries 1
+reno-intro3	accent area 0.6%	largest 0.6% (btn)	filled primaries 1
+reno-intro4	accent area 0.8%	largest 0.8% (btn)	filled primaries 1
+reno-intro5	accent area 0.7%	largest 0.7% (btn)	filled primaries 1
+reno-services1	accent area 0.0%	largest 0.0% ()	filled primaries 0
+reno-services2	accent area 0.1%	largest 0.1% (nums)	filled primaries 0
+reno-services3	accent area 0.0%	largest 0.0% ()	filled primaries 0
+reno-services4	accent area 0.0%	largest 0.0% ()	filled primaries 0
+reno-services5	accent area 0.1%	largest 0.1% (rba__h)	filled primaries 0
+reno-permits1	accent area 5.0%	largest 4.6% (rp1__cty-p)	filled primaries 0
+reno-permits2	accent area 0.0%	largest 0.0% ()	filled primaries 0
+reno-permits3	accent area 0.5%	largest 0.5% (rp3__w)	filled primaries 0
+reno-permits4	accent area 0.2%	largest 0.2% (bar)	filled primaries 0
+reno-permits5	accent area 0.0%	largest 0.0% ()	filled primaries 0
+
+OFF-WINDOW COLOURS (chroma >= .03, outside clay 25-50 and danger 13-23):
+none

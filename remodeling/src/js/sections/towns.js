@@ -230,11 +230,11 @@
         var fs = fit(main, 64, 440);
         sign.innerHTML =
           '<g class="posts"><path d="M150 236V300M370 236V300" stroke="' + EZ.c('--color-border') + '\" stroke-width="12"/><path d="M150 236V300M370 236V300" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2" opacity=".3"/>' +
-          '<g class="panel"><rect x="20" y="20" width="480" height="230" rx="18" fill="' + (yes === false ? EZ.c('--color-art-accent') : EZ.c('--color-art-accent')) + '" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="3"/>' +
-          '<rect x="32" y="32" width="456" height="206" rx="12" fill="none" stroke="' + (yes === false ? EZ.c('--color-art-line') : EZ.c('--color-surface')) + '" stroke-width="4"/>' +
-          '<text x="260" y="' + (110 + fs * .1) + '" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + (yes === false ? EZ.c('--color-art-line') : EZ.c('--color-surface')) + '">' + esc(main) + '</text>' +
+          '<g class="panel"><rect x="20" y="20" width="480" height="230" rx="18" fill="' + EZ.c('--color-art-wash') + '" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="3"/>' +
+          '<rect x="32" y="32" width="456" height="206" rx="12" fill="none" stroke="' + EZ.c('--color-accent-border') + '" stroke-width="4"/>' +
+          '<text x="260" y="' + (110 + fs * .1) + '" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + EZ.c('--color-text') + '">' + esc(main) + '</text>' +
           '<text x="260" y="160" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="600" font-size="24" fill="' + (yes === false ? EZ.c('--color-art-line') : EZ.c('--color-art-line')) + '">' + esc(sub) + '</text>' +
-          '<text x="260" y="208" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="26" fill="' + (yes === false ? EZ.c('--color-art-line') : EZ.c('--color-surface')) + '">' + esc(verdict) + '</text></g></g>';
+          '<text x="260" y="208" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-weight="700" font-size="26" fill="' + EZ.c('--color-accent-text') + '">' + esc(verdict) + '</text></g></g>';
       }
       function show(t, raw) {
         if (t) { lightTown(t.n); draw(t.n.toUpperCase(), t.c + ' County', 'We build here', true); ans.textContent = 'Yes. ' + t.n + ' is in ' + t.c + ' County, and Elbaz builds there.'; }

@@ -264,7 +264,7 @@
 .w1x__tb-roof { fill: none; stroke: var(--color-art-accent); stroke-width: 4; stroke-linejoin: miter; }
 .w1x__tb-k { font: 600 9px/1 var(--f-text); fill: var(--color-art-line-soft); letter-spacing: .06em; text-transform: uppercase; }
 .w1x__tb-v { font: 500 12px/1 var(--f-text); fill: var(--color-art-line); }
-.w1x__tb-n { font: 600 22px/1 var(--f-display); fill: var(--color-art-accent); }
+.w1x__tb-n { font: 600 22px/1 var(--f-display); fill: var(--color-accent-text); }
 @media (max-width: 1023px) { .w1x__tb { grid-column: 1 / -1; } }
 .w1x__f[aria-pressed="true"] { box-shadow: inset 0 -3px 0 var(--color-border-strong); }
 

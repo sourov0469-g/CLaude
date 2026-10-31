@@ -32,9 +32,10 @@ const SEL = 'a[href],button,input:not([type=hidden]),select,textarea,summary,[ro
     }, [scopeSel, SEL]);
     for (let i = 0; i < n; i++) {
       const sel = `${scopeSel} [data-ct="${i}"]`;
+      if (process.env.SETTLE) await p.waitForTimeout(+process.env.SETTLE);   // let a previous click's layout animation finish
       const box = await p.evaluate(s => { const e = document.querySelector(s); if (!e) return null; const v = e.closest('.ver'); if (v && v.hidden) return null;
         if (window.EZ && EZ.lenis) EZ.lenis.scrollTo(e, { immediate: true, offset: -innerHeight / 2 + 40, force: true }); else e.scrollIntoView({ block: 'center', inline: 'center' }); const r = e.getBoundingClientRect(); const cs = getComputedStyle(e);
-        if (r.width < 2 || r.height < 2 || cs.visibility === 'hidden' || cs.display === 'none') return null;
+        if (r.width < 2 || r.height < 2 || cs.visibility === 'hidden' || cs.display === 'none' || cs.pointerEvents === 'none' || +cs.opacity === 0 || e.closest('[aria-hidden="true"]')) return null;
         let x = r.left + r.width / 2, y = r.top + r.height / 2;
         const hit = document.elementFromPoint(x, y); if (!hit || !(e === hit || e.contains(hit) || hit.contains(e) || (hit.closest('label') && hit.closest('label').contains(e)))) return { cover: true };
         return { x, y, tag: e.tagName.toLowerCase(), name: (e.getAttribute('aria-label') || e.textContent || e.value || '').trim().replace(/\s+/g, ' ').slice(0, 30) }; }, sel);

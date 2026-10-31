@@ -329,7 +329,7 @@
 .cpc__st { font: 600 13px/1 var(--f-display); fill: var(--color-art-line); text-anchor: middle; letter-spacing: 2px; }
 .cpc__pm { opacity: 0; }
 .cpc__pm circle, .cpc__pm path { fill: none; stroke: var(--color-art-accent); stroke-width: 3; }
-.cpc__pm text { font: 600 12px/1 var(--f-text); fill: var(--color-art-accent); text-anchor: middle; letter-spacing: 1px; }
+.cpc__pm text { font: 600 12px/1 var(--f-text); fill: var(--color-accent-text); text-anchor: middle; letter-spacing: 1px; }
 .cpc__card.is-sent .cpc__pm { opacity: 1; }
 .cpc__to { margin: 0; font: 600 1rem/1.4 var(--f-text); }
 .cpc__to span, .cpc__fl { display: block; font: 600 .75rem/1.2 var(--f-text); text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-secondary); }

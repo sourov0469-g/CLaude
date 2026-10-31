@@ -1,0 +1,18 @@
+kitchen-intro1	head 62.2px (H1)	body 24px w400	fine 13px w600	head/body 2.59	body/fine 1.85 wstep 200	pass
+kitchen-intro2	head 62.2px (H1)	body 17px w400	fine 12px w600	head/body 3.66	body/fine 1.42 wstep 200	pass
+kitchen-intro3	head 62.2px (H1)	body 24px w400	fine 14px w600	head/body 2.59	body/fine 1.71 wstep 200	pass
+kitchen-intro4	head 62.2px (H1)	body 24px w400	fine 12px w600	head/body 2.59	body/fine 2.00 wstep 200	pass
+kitchen-intro5	head 62.2px (H1)	body 24px w400	fine 13px w600	head/body 2.59	body/fine 1.85 wstep 200	pass
+kitchen-scope1	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+kitchen-scope2	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+kitchen-scope3	head 37.9px (H2)	body 16px w400	fine 14px w600	head/body 2.37	body/fine 1.14 wstep 200	pass
+kitchen-scope4	head 37.9px (H2)	body 15px w400	fine 13.3px w600	head/body 2.53	body/fine 1.13 wstep 200	pass
+kitchen-scope5	head 37.9px (H2)	body 24px w400	fine 14px w600	head/body 1.58	body/fine 1.71 wstep 200	pass
+kitchen-work1	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+kitchen-work2	head 37.9px (H2)	body 15px w400	fine 13px w600	head/body 2.53	body/fine 1.15 wstep 200	pass
+kitchen-work3	head 37.9px (H2)	body 15px w400	fine 12px w600	head/body 2.53	body/fine 1.25 wstep 200	pass
+kitchen-work4	head 37.9px (H2)	body 15px w400	fine 14px w600	head/body 2.53	body/fine 1.07 wstep 200	pass
+kitchen-work5	head 37.9px (H2)	body 15px w400	fine 11px w600	head/body 2.53	body/fine 1.36 wstep 200	pass
+
+page: L1 h1 62.2px vs median L2 h2 37.9px = 1.64
+version fails: 0

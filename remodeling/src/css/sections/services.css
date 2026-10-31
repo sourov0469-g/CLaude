@@ -2,7 +2,7 @@
 .services__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
 .services__head .t-head { grid-column: 1 / span 7; }
 .services__lead { grid-column: 9 / span 4; color: var(--color-text-secondary); max-width: 34ch; }
-.services__also { margin: var(--s8) 0 0; color: var(--color-text-secondary); max-width: 70ch; font-size: var(--t-small); }
+.services__also { margin: var(--s8) 0 0; color: var(--color-text-secondary); max-width: 70ch; font-size: var(--t-small); font-weight: 600; }
 @media (max-width: 1023px) { .services__head .t-head, .services__lead { grid-column: 1 / -1; } .services__lead { margin-top: var(--s4); } }
 
 /* ---------- v1 · Exploded assemblies ---------- */

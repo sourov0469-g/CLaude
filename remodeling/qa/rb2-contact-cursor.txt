@@ -1,0 +1,62 @@
+elements tested 93 | click delivered to the element 93 | tip exactly on the pointer 93 | stuck pressed after release 0 | max click delay after pointerup 0.9ms | covered or hidden (skipped) 56
+cancelled press: pressed during true, still pressed after pointercancel false
+native cursor: {"reduced-motion":{"hasBuddyClass":false,"cursorOnButton":"pointer","tipShown":false},"touch":{"hasBuddyClass":false,"cursorOnButton":"pointer","tipShown":false}}
+page errors 0 
+PROBLEMS: none
+SKIPPED (not live at test time):
+contact-form2 not displayed #1
+contact-form2 not displayed #2
+contact-form2 not displayed #3
+contact-form2 not displayed #4
+contact-form2 not displayed #5
+contact-form2 not displayed #6
+contact-form2 not displayed #7
+contact-form2 not displayed #8
+contact-form2 not displayed #9
+contact-form2 not displayed #11
+contact-visit1 not displayed #0
+contact-visit1 a "(754) 236‑0675" covered after an earlier click by vs1__face vs1__front|DIV in #contact-visit
+contact-visit1 a "Sales@elbazconstruction.com" covered after an earlier click by vs1__l|P in #contact-visit
+chrome not displayed #1
+chrome not displayed #2
+chrome not displayed #3
+chrome not displayed #4
+chrome not displayed #5
+chrome not displayed #6
+chrome not displayed #7
+chrome not displayed #8
+chrome not displayed #9
+chrome not displayed #10
+chrome not displayed #11
+chrome not displayed #12
+chrome covered at rest #13
+chrome covered at rest #14
+chrome covered at rest #15
+chrome covered at rest #16
+chrome covered at rest #17
+chrome not displayed #18
+chrome not displayed #19
+chrome not displayed #20
+chrome not displayed #21
+chrome not displayed #22
+chrome not displayed #23
+chrome not displayed #24
+chrome not displayed #26
+chrome not displayed #27
+chrome not displayed #28
+chrome not displayed #29
+chrome not displayed #30
+chrome not displayed #31
+chrome not displayed #32
+chrome not displayed #33
+chrome not displayed #34
+chrome not displayed #35
+chrome not displayed #36
+chrome not displayed #42
+chrome not displayed #44
+chrome not displayed #45
+chrome not displayed #46
+chrome not displayed #47
+chrome not displayed #48
+chrome not displayed #49
+chrome not displayed #51

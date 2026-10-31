@@ -309,11 +309,11 @@
 }
 .pmx__plate { position: relative; }
 .pmx__seal { position: absolute; right: clamp(-10px, -1vw, 0px); top: -78px; width: clamp(120px, 12vw, 168px); height: auto; overflow: visible; z-index: 2; }
-.pmx__seal-o { fill: var(--color-art-accent); }
+.pmx__seal-o { fill: var(--color-accent-solid); }   /* white ring text 5.31:1 */
 .pmx__seal-i { fill: none; stroke: var(--color-surface); stroke-width: 2; stroke-dasharray: 3 5; }
 .pmx__seal text { font: 600 17px/1 var(--f-text); fill: var(--color-surface); letter-spacing: .02em; }
-.pmx__seal-b { fill: var(--color-surface); }
-.pmx__seal-e { fill: none; stroke: var(--color-art-accent); stroke-width: 7; stroke-linejoin: miter; }
+.pmx__seal-k { fill: none; stroke: var(--color-surface); stroke-width: 8.75; stroke-linejoin: miter; }   /* the REBRAND mark, single-colour white */
+.pmx__seal-t { fill: var(--color-surface); }
 @media (max-width: 767px) {
   .pmx__seal { top: -60px; right: -6px; width: 104px; }
 }

@@ -3,7 +3,7 @@
 .financing__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
 .financing__head .t-head { grid-column: 1 / span 6; }
 .financing__lead { grid-column: 8 / span 5; color: var(--color-text-secondary); max-width: 40ch; }
-.financing__note { margin: var(--s7) 0 0; max-width: 78ch; font-size: var(--t-small); color: var(--color-text-secondary); }
+.financing__note { margin: var(--s7) 0 0; max-width: 78ch; font-size: var(--t-small); color: var(--color-text-secondary); font-weight: 600; }
 @media (max-width: 1023px) { .financing__head .t-head, .financing__lead { grid-column: 1 / -1; } .financing__lead { margin-top: var(--s4); } }
 
 /* ---------- v1 · Four tickets ---------- */
@@ -312,7 +312,7 @@
 .f1x__stub { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 4%, transparent) 0 6px, transparent 6px 12px); }
 .f1x__sfig { margin: 0; font: 400 2rem/1 var(--f-display); color: var(--color-accent-text); }
 .f1x__sper { margin: 4px 0 0; font-size: .8125rem; color: var(--color-text-secondary); font-weight: 600; }
-.f1x__more { font-size: .875rem; line-height: 1.45; font-weight: 600; }
+.f1x__more { font-size: .9375rem; line-height: 1.5; font-weight: 400; }   /* L3: the reading text behind each ticket */
 .f1x__more p { margin: 0; }
 .js .f1x__more { visibility: hidden; }
 .f1x__tk.is-torn .f1x__more { visibility: visible; }
@@ -328,7 +328,7 @@
   .f1x__row { grid-template-columns: 1fr; }
 }
 .f1x__fig { margin: 18px 0 0; font: 600 .9375rem/1.35 var(--f-text); color: var(--color-text); white-space: normal; }
-.f1x__per { margin-top: 0; font-size: .9375rem; }
+.f1x__per { margin-top: 0; font-size: .9375rem; font-weight: 400; }
 .f1x__sfig { font: 600 .9375rem/1.35 var(--f-text); color: var(--color-text); }
 .f1x__kind { font-size: .8125rem; font-weight: 600; }
 
