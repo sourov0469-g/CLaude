@@ -26,12 +26,12 @@
   --color-text-on-panel: var(--neutral-12); --color-text-on-panel-secondary: var(--neutral-11); --color-text-on-accent: var(--white); --color-text-on-plate: var(--neutral-12);
   /* borders */
   --color-border-subtle: var(--neutral-6); --color-border: var(--neutral-7); --color-border-strong: var(--neutral-8); --color-separator: var(--neutral-6); --color-border-control: var(--neutral-9);
-  --color-focus-ring: var(--teal-9);
+  --color-focus-ring: var(--neutral-12);   /* QA round 2: its own role, so a swatch's local --color-text never recolours it */
   /* accent: the one filled primary action, key highlights, interactive and selected states */
   --color-accent-subtle: var(--teal-3); --color-accent-subtle-hover: var(--teal-4); --color-accent-border: var(--teal-7); --color-accent-border-strong: var(--teal-8);
   --color-accent-solid: var(--teal-9); --color-accent-solid-hover: var(--teal-10); --color-accent-text: var(--teal-11); --color-accent-text-strong: var(--teal-12);
   --color-accent-text-on-panel: var(--teal-11); --color-accent-rgb: 0 115 106;
-  --color-selected-bg: var(--teal-4); --color-selected-text: var(--teal-12); --color-selected-border: var(--teal-8);
+  --color-selected-bg: var(--teal-4); --color-selected-text: var(--teal-12); --color-selected-border: var(--teal-11);
   /* status: danger */
   --color-danger-subtle: var(--red-3); --color-danger-border: var(--red-7); --color-danger-solid: var(--red-9); --color-danger-text: var(--red-11);
   /* illustration and data marks: neutral line art, so the drawings rest instead of competing with the accent */
@@ -39,8 +39,8 @@
   --f: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --fh: "Poppins", "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   /* text hierarchy (S1434): four levels, adjacent levels at least 1.5x apart or a clear weight step */
-  --t-h1: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
-  --t-h2: clamp(1.75rem, 1.2rem + 1.9vw, 2.875rem);
+  --t-h1: clamp(2.8125rem, 1.6rem + 3.6vw, 4.5rem);
+  --t-h2: clamp(1.875rem, 1.2rem + 1.9vw, 2.875rem);
   --t-h3: clamp(1.25rem, 1.05rem + .6vw, 1.75rem);
   --t-lead: clamp(1.1875rem, 1.1rem + .3vw, 1.3125rem);
   --t-body: 1.125rem;
@@ -66,7 +66,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 figure { margin: 0; }
 [hidden] { display: none !important; }
 ::selection { background: var(--color-accent-subtle-hover); color: var(--color-text); }
-:focus-visible { outline: 3px solid var(--color-text); outline-offset: 3px; box-shadow: 0 0 0 3px var(--color-surface); }
+:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; box-shadow: 0 0 0 3px var(--color-surface); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 .skip { position: absolute; left: 16px; top: -64px; z-index: 100; padding: 12px 16px; background: var(--color-selected-bg); color: var(--color-selected-text); border-radius: 999px; font-weight: 650; text-decoration: none; }
 .skip:focus { top: 12px; }
@@ -502,7 +502,7 @@ figure.cmp .ptag { top: 16px; }
 .c1t-house path { fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linejoin: round; }
 .c1t-house .c1t-lap { stroke: var(--color-border); stroke-width: 1; }
 .c1t-pick { position: relative; cursor: pointer; }
-.c1t-pick:focus-within { outline: 2px solid var(--color-text); outline-offset: 3px; }
+.c1t-pick:focus-within { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
 .c1t-tools { display: grid; gap: 12px; }
 .c1t-parts { justify-self: start; }
 .c1t-brush { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
@@ -867,7 +867,7 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 .ck input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .ck span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 2px solid var(--color-border); border-radius: 999px; font-weight: 600; font-size: .9375rem; transition: background-color var(--t-ui) var(--ease), color var(--t-ui) var(--ease), border-color var(--t-ui) var(--ease); }
 .ck input:checked + span { background: var(--color-selected-bg); border-color: var(--color-selected-border); color: var(--color-selected-text); }
-.ck input:focus-visible + span { outline: 3px solid var(--color-text); outline-offset: 3px; }
+.ck input:focus-visible + span { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
 .fld { display: grid; gap: 6px; }
 .fld label { font-weight: 650; }
 .fld input { min-height: 52px; padding: 0 16px; border: 2px solid var(--color-border); border-radius: 14px; background: var(--color-surface); color: var(--color-text); font-size: 1rem; }
@@ -980,7 +980,7 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
    visible (builder brief 2.2: never hide it), so the small dot is not drawn */
 .cur { position: fixed; top: 0; left: 0; z-index: 200; pointer-events: none; }
 .cur.is-gone .cur-dot, .cur.is-gone .cur-ring { opacity: 0; }
-.cur-dot { display: none; position: absolute; top: 0; left: 0; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--color-surface); mix-blend-mode: difference; transition: opacity var(--t-ui) ease, transform var(--t-ui) var(--ease); }
+.cur-dot { display: none; position: absolute; top: 0; left: 0; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--color-surface); mix-blend-mode: difference; transition: opacity var(--t-ui) ease, scale var(--t-hover) var(--ease); }
 .cur-ring { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: var(--cw, 34px); height: var(--ch, 34px); margin: calc(var(--ch, 34px) / -2) 0 0 calc(var(--cw, 34px) / -2); border: 1.5px solid var(--color-surface); border-radius: 999px; mix-blend-mode: difference; color: var(--color-surface);
   transition: width var(--t-ui) var(--ease), height var(--t-ui) var(--ease), margin var(--t-ui) var(--ease), background-color var(--t-ui) ease, border-color var(--t-ui) ease, opacity var(--t-ui) ease; }
 .cur-g { width: 14px; height: 14px; overflow: visible; }
@@ -989,21 +989,20 @@ html:not(.motion) .cr-n.is-soft { filter: none; }
 .cur-t:empty { display: none; }
 .cur--link .cur-ring, .cur--view .cur-ring { --cw: 58px; --ch: 58px; }
 .cur--text .cur-ring { --cw: 18px; --ch: 18px; }
-.cur--text .cur-dot { transform: scale(0); }
+.cur--text .cur-dot { scale: 0; }
 .cur--drag .cur-ring { --cw: 72px; --ch: 72px; }
-.cur--drag.is-down .cur-ring { --cw: 92px; --ch: 56px; }
 .cur--map .cur-ring { --cw: 28px; --ch: 28px; border-style: dashed; }
 /* hero CTA: the ring snaps around the pill and fills red (normal blend so the red stays the brand red) */
 .cur--hero .cur-ring { mix-blend-mode: normal; border-color: var(--color-accent-solid); background: transparent; color: var(--color-accent-solid); }
 .cur--hero .cur-g { opacity: 0; }
-.cur--hero .cur-dot { transform: scale(0); }
+.cur--hero .cur-dot { scale: 0; }
 /* alternate CTAs: the ring shrinks to an ink chip with the arrow turned up and out */
 .cur--alt .cur-ring { --cw: 30px; --ch: 30px; mix-blend-mode: normal; border-color: var(--color-selected-border); background: var(--color-selected-bg); color: var(--color-selected-text); }
-.cur--alt .cur-dot { transform: scale(0); }
+.cur--alt .cur-dot { scale: 0; }
 /* paint: the ring carries the live colour */
 .cur--paint .cur-ring { --cw: 40px; --ch: 40px; mix-blend-mode: normal; background: var(--paint, var(--color-accent-solid)); border: 3px solid var(--color-surface); box-shadow: 0 2px 10px rgb(var(--color-shadow-rgb) / .25); }
-.cur--paint .cur-dot { transform: scale(0); }
-.cur.is-down .cur-dot { transform: scale(.6); }
+.cur--paint .cur-dot { scale: 0; }
+.cur.is-down .cur-dot { scale: .6; }
 
 /* magnetic wrapper (S1321: translate only; the button inside keeps its own press scale) */
 .mag { display: inline-block; will-change: transform; }
@@ -1622,18 +1621,18 @@ html:not(.motion) .ip-sash { transform: scaleX(.12); }
 .snt-ch path { fill: none; stroke: color-mix(in srgb, var(--color-art-line) 62%, var(--color-surface)); stroke-width: 2; vector-effect: non-scaling-stroke; }
 
 /* ---------- V5 cursor effect: one halo under the companion, a different ground per section ---------- */
-.cfx { --ci: 22, 22, 22; position: fixed; left: 0; top: 0; z-index: 190; width: 128px; height: 128px; margin: -64px 0 0 -64px; border-radius: 50%; pointer-events: none; opacity: 0; scale: var(--cs, 1); transition: opacity .2s ease, scale var(--t-ui) var(--ease);   /* D.5: one 128 px halo, sized by scale, never by width/height/margin */ -webkit-mask: radial-gradient(closest-side, var(--color-text) 55%, transparent); mask: radial-gradient(closest-side, var(--color-text) 55%, transparent); }
-.cfx.is-dark { --ci: 241, 239, 234; }
+.cfx { --ci: var(--color-shadow-rgb); position: fixed; left: 0; top: 0; z-index: 190; width: 128px; height: 128px; margin: -64px 0 0 -64px; border-radius: 50%; pointer-events: none; opacity: 0; scale: var(--cs, 1); transition: opacity .2s ease, scale var(--t-ui) var(--ease);   /* D.5: one 128 px halo, sized by scale, never by width/height/margin */ -webkit-mask: radial-gradient(closest-side, var(--color-text) 55%, transparent); mask: radial-gradient(closest-side, var(--color-text) 55%, transparent); }
+.cfx.is-dark { --ci: var(--color-surface-rgb); }
 .cfx.is-on { opacity: 1; }
-.cfx[data-sec="hero"] { background: repeating-linear-gradient(0deg, rgba(var(--ci), .16) 0 1.5px, transparent 1.5px 10px); }
-.cfx[data-sec="proof"] { --cs: 0.5625; border: 2.67px dotted rgba(var(--ci), .45); -webkit-mask: none; mask: none; }
+.cfx[data-sec="hero"] { background: repeating-linear-gradient(0deg, rgb(var(--ci) / .16) 0 1.5px, transparent 1.5px 10px); }
+.cfx[data-sec="proof"] { --cs: 0.5625; border: 2.67px dotted rgb(var(--ci) / .45); -webkit-mask: none; mask: none; }
 .cfx[data-sec="services"] { --cs: 0.75; background: linear-gradient(rgb(var(--color-accent-rgb) / .5), rgb(var(--color-accent-rgb) / .5)) center / 1px 100% no-repeat, linear-gradient(90deg, rgb(var(--color-accent-rgb) / .5), rgb(var(--color-accent-rgb) / .5)) center / 100% 1px no-repeat; }
-.cfx[data-sec="work"] { --cs: 0.75; background: linear-gradient(90deg, rgba(var(--ci), .12) 50%, rgb(var(--color-surface-rgb) / .22) 50%); }
-.cfx[data-sec="built"] { background: repeating-linear-gradient(90deg, rgba(var(--ci), .16) 0 2px, transparent 2px 18px), radial-gradient(rgba(var(--ci), .08), transparent 70%); }
+.cfx[data-sec="work"] { --cs: 0.75; background: linear-gradient(90deg, rgb(var(--ci) / .12) 50%, rgb(var(--color-surface-rgb) / .22) 50%); }
+.cfx[data-sec="built"] { background: repeating-linear-gradient(90deg, rgb(var(--ci) / .16) 0 2px, transparent 2px 18px), radial-gradient(rgb(var(--ci) / .08), transparent 70%); }
 .cfx[data-sec="colour"].is-on { opacity: .3; }
-.cfx[data-sec="near"] { --cs: 0.8125; background: repeating-conic-gradient(rgba(var(--ci), .5) 0 1.5deg, transparent 1.5deg 30deg); -webkit-mask: radial-gradient(closest-side, transparent 78%, var(--color-text) 80%, var(--color-text) 98%, transparent); mask: radial-gradient(closest-side, transparent 78%, var(--color-text) 80%, var(--color-text) 98%, transparent); }
+.cfx[data-sec="near"] { --cs: 0.8125; background: repeating-conic-gradient(rgb(var(--ci) / .5) 0 1.5deg, transparent 1.5deg 30deg); -webkit-mask: radial-gradient(closest-side, transparent 78%, var(--color-text) 80%, var(--color-text) 98%, transparent); mask: radial-gradient(closest-side, transparent 78%, var(--color-text) 80%, var(--color-text) 98%, transparent); }
 .cfx[data-sec="reviews"] { background: radial-gradient(color-mix(in srgb, var(--color-rating) 45%, transparent), transparent 70%); }
-.cfx[data-sec="money"] { --cs: 0.5; border: 4px dashed rgba(var(--ci), .3); -webkit-mask: none; mask: none; }
+.cfx[data-sec="money"] { --cs: 0.5; border: 4px dashed rgb(var(--ci) / .3); -webkit-mask: none; mask: none; }
 .cfx[data-sec="book"] { --cs: 1.406; background: radial-gradient(color-mix(in srgb, var(--color-rating) 26%, transparent), transparent 70%); }
 html:not(.motion) .cfx { display: none; }
 
@@ -2037,11 +2036,11 @@ html.motion .sec:not([data-bk="a"]) .fd-list:not([hidden]) { animation: fdOpen 1
       the glow goes */
 .f-sheen:not([data-bk="a"] *), .f-pool:not([data-bk="a"] *) { display: none; }
 /* 3. cursor halo: no blurred rainbow, no soft glows. Every section's halo is a drawn pattern or a plain ring */
-.cfx[data-sec="colour"] { background: none; border: 2px solid rgba(var(--ci), .4); filter: none; -webkit-mask: none; mask: none; }
+.cfx[data-sec="colour"] { background: none; border: 2px solid rgb(var(--ci) / .4); filter: none; -webkit-mask: none; mask: none; }
 .cfx[data-sec="colour"].is-on { opacity: 1; }
-.cfx[data-sec="built"] { background: repeating-linear-gradient(90deg, rgba(var(--ci), .16) 0 2px, transparent 2px 18px); }
+.cfx[data-sec="built"] { background: repeating-linear-gradient(90deg, rgb(var(--ci) / .16) 0 2px, transparent 2px 18px); }
 .cfx[data-sec="reviews"] { --cs: 0.5; background: none; border: 2px solid color-mix(in srgb, var(--color-rating) 80%, var(--color-text)); -webkit-mask: none; mask: none; }
-.cfx[data-sec="book"] { --cs: 0.5; background: none; border: 2px solid rgba(var(--ci), .35); -webkit-mask: none; mask: none; }
+.cfx[data-sec="book"] { --cs: 0.5; background: none; border: 2px solid rgb(var(--ci) / .35); -webkit-mask: none; mask: none; }
 /* 4. one identical padding on every section made a metronome. Each section now takes the room its content needs:
       tight under the hero and around the short bands, more air before the reviews and the close */
 #proof > .stage > .v:not([data-bk="a"] *) { padding-top: calc(var(--gap) * .7); }
@@ -2065,7 +2064,7 @@ html.motion .sec:not([data-bk="a"]) .fd-list:not([hidden]) { animation: fdOpen 1
   --color-art-line: #3B6FB6; --color-rating: #F2C230; --color-art-line-strong: #8A6A3E; --color-shadow-rgb: 22 22 22; --color-surface-rgb: 251 250 247;
   --color-selected-bg: #161616; --color-selected-text: #F3F2EE; --color-selected-border: #161616;
   --color-accent-subtle: #E3ECFF; --color-accent-subtle-hover: #C8D8FF; --color-accent-border: #9DB9FF; --color-accent-border-strong: #5F8DFF; --color-accent-text-strong: #0E2C8A;
-}
+ --color-focus-ring: #161616; }
 .sec[data-bk="b"] {   /* era b: the versions frozen before the 2026-10-30 redesign, as they rendered when frozen (cobalt) */
   --color-bg: #FFFFFF; --color-bg-subtle: #F2F6FF; --color-surface: #FFFFFF; --color-border-subtle: #D9E3FF; --color-border: #808285;
   --color-text: #0E0F12; --color-text-secondary: #3E3F41; --color-bg-panel: #E3ECFF; --color-bg-panel-strong: #C8D8FF;
@@ -2074,7 +2073,7 @@ html.motion .sec:not([data-bk="a"]) .fd-list:not([hidden]) { animation: fdOpen 1
   --color-art-line: #2F66FF; --color-rating: #2F66FF; --color-art-line-strong: #0E2C8A; --color-shadow-rgb: 14 15 18; --color-surface-rgb: 255 255 255;
   --color-selected-bg: #2F66FF; --color-selected-text: #FFFFFF; --color-selected-border: #2F66FF;
   --color-accent-subtle: #E3ECFF; --color-accent-subtle-hover: #C8D8FF; --color-accent-border: #9DB9FF; --color-accent-border-strong: #5F8DFF; --color-accent-text-strong: #0E2C8A;
-}
+ --color-focus-ring: #0E0F12; }
 /* light only: the former night tone is a cobalt tint; focus rings go to ink on it */
 :is(.v[data-tone="night"], .v[data-tone="photo"], .ft):not([data-bk="a"] *) :focus-visible { outline-color: var(--color-text); box-shadow: 0 0 0 3px var(--color-surface); }
 /* the close band: a clear cobalt tint with black type, the brightest band on the page */
@@ -2837,7 +2836,7 @@ html.motion .sec:not([data-bk="a"]) .fd-list:not([hidden]) { animation: fdOpen 1
 @media (hover: hover) and (pointer: fine) { .hd-book.btn-red:hover { background: var(--color-bg-subtle); } }
 /* chrome: the switchers and the Versions button are neutral; the selected tab uses the selected-state pair */
 .vsw { background: var(--color-surface); color: var(--color-text); box-shadow: 0 0 0 1.5px var(--color-border-subtle), 0 6px 18px rgb(var(--color-shadow-rgb) / .08); }
-.vsw-b[aria-selected="true"] { background: var(--color-selected-bg); color: var(--color-selected-text); box-shadow: inset 0 0 0 1.5px var(--color-selected-border); }
+.vsw-b[aria-selected="true"] { background: var(--color-selected-bg); color: var(--color-selected-text); box-shadow: inset 0 0 0 2px var(--color-selected-border); }
 .pk-btn, .pal-mini { background: var(--color-surface); color: var(--color-text); box-shadow: 0 0 0 1.5px var(--color-border-strong), 0 8px 20px rgb(var(--color-shadow-rgb) / .1); }
 /* labels and decoration go quiet */
 .eyebrow { color: var(--color-text-secondary); }
@@ -2897,3 +2896,46 @@ body { font-size: var(--t-body); color: var(--color-text); }
 .bk-err:not([data-bk] *), .snt-e:not([data-bk] *), .fe:not([data-bk] *) { color: var(--color-danger-text); }
 .v:not([data-bk] *) [aria-invalid="true"] { border-color: var(--color-danger-solid); }
 .sec:not([data-bk]) .built-2 .ts-h { font-size: var(--t-h3); font-weight: 600; line-height: 1.2; }   /* S1434: card titles are level 3 */
+
+/* REBRAND step 6, cursor + press (S1436 micro 50-100 ms): the ring's press is the independent `scale` property, so it
+   never fights GSAP's x/y transform and never changes the ring's size; it is released on any press end. Visible
+   versions and the chrome press without moving the hit box: a transform under the pointer could carry the
+   element's edge away between down and up and swallow the click, so the press is a shade, not a shrink. */
+.cur-ring { scale: 1; transition: width var(--t-ui) var(--ease), height var(--t-ui) var(--ease), margin var(--t-ui) var(--ease), background-color var(--t-ui) ease, border-color var(--t-ui) ease, opacity var(--t-ui) ease, scale 80ms var(--ease); }
+.cur.is-down .cur-ring { scale: .86; }
+:is(.btn, .btn-alt, .vsw-b, .h2p, .cmp-handle, .c3-handle, .fs, .sw, .cb-t, .rb, .pay-t, .pk-btn, .sv1-parts button, .dh-f):not(:disabled):active:not([data-bk] *) { transform: none; box-shadow: inset 0 2px 0 rgb(var(--color-shadow-rgb) / .14); filter: brightness(.95); }
+.btn-alt:not(:disabled):active:not([data-bk] *)::after { transform: none; }
+.fin .cmp-sw:active:not([data-bk] *) i { transform: none; }
+
+/* REBRAND QA round 2 (S1497 semantic use, grayscale survival): the teal tint alone differed from an unselected chip by
+   1.2-2.0:1 in luminance, so "selected" was carried by hue. Every live selected control now also draws a 2px ring in
+   --color-selected-border (teal-11): 4.0:1 against the unselected neutral-7 border, 6.1:1 against its own tint,
+   8.1:1 against white. Colour swatches take the ring outside, over a white gap, so it reads on any paint colour.
+   Focus stays the separate outer outline (S0248: the two indicators never share a shape). */
+:is([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"]):is(button, a, [role="tab"], [role="radio"], [role="option"], [role="switch"], [role="checkbox"]):not([data-bk] *) { box-shadow: inset 0 0 0 2px var(--color-selected-border); }
+:is([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"]):is(button, a, [role="tab"], [role="radio"], [role="option"], [role="switch"], [role="checkbox"]):not([data-bk] *):focus-visible { box-shadow: 0 0 0 3px var(--color-surface), inset 0 0 0 2px var(--color-selected-border); }
+:is(.sw, .cmp-sw, .nv-cs, .nv-dot, .cl-sw, .pal-mini, [style*="--c:"])[aria-checked="true"]:not([data-bk] *), :is(.sw, .cmp-sw, .nv-cs, .nv-dot, .cl-sw, [style*="--c:"])[aria-pressed="true"]:not([data-bk] *) { box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-selected-border); }
+/* Near 3 on the panel ground: the selected chip was a white fill against a transparent one, 1.23:1 apart and no hue
+   either. Same rule as every other chip now: neutral chip with a visible edge, selected tint with the teal-11 ring. */
+.near-3[data-tone="night"] .dv-chip:not([data-bk] *) { background: var(--color-surface); color: var(--color-text); box-shadow: inset 0 0 0 1px var(--color-border); }
+.near-3[data-tone="night"] .dv-chip:not([data-bk] *) span { color: var(--color-text-secondary); }
+.near-3[data-tone="night"] .dv-chip[aria-checked="true"]:not([data-bk] *) { background: var(--color-selected-bg); color: var(--color-selected-text); box-shadow: inset 0 0 0 2px var(--color-selected-border); }
+.near-3[data-tone="night"] .dv-chip[aria-checked="true"]:not([data-bk] *) span { color: var(--color-selected-text); }
+/* forced colours (S1497 accessibility: Windows High Contrast drops box-shadow): the selected ring becomes an outline
+   in the system Highlight colour, so the state survives there too */
+@media (forced-colors: active) {
+  :is([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"]):is(button, a, [role="tab"], [role="radio"], [role="option"], [role="switch"], [role="checkbox"]):not([data-bk] *) { outline: 2px solid Highlight; outline-offset: -2px; }
+}
+/* REBRAND QA round 2, focus (S0248, S1497 contrast: focus indicators >= 3:1 against what they sit on). The night, red
+   and footer tones, the hero 3 stage, the Versions panel and the chat-booking sentence used a white focus mark made
+   for the old dark grounds; on today's light panels it measured 1.03-1.22:1. Live versions and the chrome now draw the
+   standard mark everywhere except over photographs: a 3px neutral-12 outline with a white halo (14.4:1 on neutral-1,
+   12.0:1 on the panel), and the sentence form's underline in neutral-12. */
+:is(.v[data-tone="night"], .v[data-tone="red"]):not([data-bk] *) :focus-visible, .ft :focus-visible, .h3-stage:not([data-bk] *) :focus-visible { outline-color: var(--color-focus-ring); box-shadow: 0 0 0 3px var(--color-surface); }
+.picks :focus-visible, .pal-sw :focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-surface); }
+.snt:not([data-bk] *) :is(input, select):focus { border-bottom-color: var(--color-focus-ring); }
+.snt:not([data-bk] *) :is(input, select):focus-visible { box-shadow: 0 3px 0 0 var(--color-focus-ring); }
+.v .snt:not([data-bk] *) :is(input, select):focus-visible { border-bottom-color: var(--color-focus-ring); box-shadow: 0 3px 0 0 var(--color-focus-ring); }
+/* the FAQ search field removed its outline on focus and its teal focus border lost to the control-border rule: it
+   had no visible focus at all. It takes the standard mark like every other control. */
+.pg-srch input:focus-visible:not([data-bk] *) { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }

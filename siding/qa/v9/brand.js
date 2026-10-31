@@ -8,8 +8,8 @@ const PAGES = (process.argv[2] || 'index,siding,windows,roofing,outdoor,projects
 (async () => {
   const b = await chromium.launch(); const report = { fails: [], pairs: {}, primaries: [], accentArea: [], hierarchy: [], controls: [] };
   for (const pg of PAGES) {
-    const p = await b.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
-    await p.goto('file://' + path.resolve(__dirname, `../../site/${pg}.html`)); await p.waitForFunction(() => document.documentElement.dataset.apReady === '1', null, { timeout: 20000 });
+    const p = await b.newPage({ viewport: { width: +(process.env.VW || 1440), height: 900 }, reducedMotion: 'reduce' });
+    await p.goto((process.env.QBASE || 'http://127.0.0.1:8765/') + `site/${pg}.html`); await p.waitForFunction(() => document.documentElement.dataset.apReady === '1', null, { timeout: 20000 });
     const secs = await p.evaluate(() => [...document.querySelectorAll('.sec')].map(s => ({ id: s.id, n: s.querySelectorAll('.vsw-b').length })));
     for (const s of secs) for (let v = 1; v <= s.n; v++) {
       const r = await p.evaluate(async ([id, v]) => {
@@ -57,7 +57,7 @@ const PAGES = (process.argv[2] || 'index,siding,windows,roofing,outdoor,projects
     }
     await p.close();
   }
-  require('fs').writeFileSync(path.resolve(__dirname, 'brand-report.json'), JSON.stringify(report, null, 1));
+  require('fs').writeFileSync(path.resolve(__dirname, process.env.VW ? `brand-report-${process.env.VW}.json` : 'brand-report.json'), JSON.stringify(report, null, 1));
   const top = Object.entries(report.pairs).sort((a, b) => b[1].n - a[1].n);
   console.log('text pairs measured:', top.reduce((a, [, v]) => a + v.n, 0), '| distinct pairs:', top.length, '| failing:', report.fails.length);
   report.fails.slice(0, 40).forEach(f => console.log('  FAIL', f));
