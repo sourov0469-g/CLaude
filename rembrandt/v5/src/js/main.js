@@ -56,7 +56,7 @@ function mount(sec, v, swap) {
     return init ? init(root, { ...ctx.conditions, swap, sec, id, ctx }) : undefined;
   }, root);
   live.set(id, { mm, v });
-  const bk = String(v)[0] === 'b', rec = sec.hasAttribute('data-rec'); sec.classList.toggle('on-bk', bk && !rec); sec.classList.toggle('on-bk-old', bk && !rec && +String(v).slice(1) <= 3); /* R5: data-rec sections keep current-palette records (no old-palette restore) */ // R4: B1-B3 are the Epilogue-era records if (bk) showBk(sec, true);
+  const bk = String(v)[0] === 'b', rec = sec.hasAttribute('data-rec'); sec.classList.toggle('on-bk', bk && !rec); sec.classList.toggle('on-rec', bk && rec); sec.classList.toggle('on-bk-old', bk && !rec && +String(v).slice(1) <= 3); /* R5: data-rec sections keep current-palette records (no old-palette restore) */ // R4: B1-B3 are the Epilogue-era records if (bk) showBk(sec, true);
   paintBg(sec, root);
 }
 // PLAN-V7 §4b: each section paints its active version's background (--vbg on the version root, else its computed
@@ -64,7 +64,7 @@ function mount(sec, v, swap) {
 function paintBg(sec, root) {
   const cs = getComputedStyle(root);
   let bg = cs.getPropertyValue('--vbg').trim();
-  if (!bg) { const c = cs.backgroundColor; bg = c && c !== 'rgba(0, 0, 0, 0)' && c !== 'transparent' ? c : getComputedStyle(document.documentElement).getPropertyValue('--sky').trim(); }
+  if (!bg) { const c = cs.backgroundColor; bg = c && c !== 'rgba(0, 0, 0, 0)' && c !== 'transparent' ? c : getComputedStyle(document.documentElement).getPropertyValue('--color-bg').trim(); }
   sec.style.setProperty('--sec-bg', bg);
   // R3: the ground's tone (focus ring colour, label colour) from its luminance
   const probe = document.createElement('i'); probe.style.color = bg; document.body.append(probe);

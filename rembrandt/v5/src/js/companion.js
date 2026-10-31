@@ -15,19 +15,21 @@
 // (S0089); rest offset +34/+34 and 35% opacity while the pointer is down (S1314 §7, occlusion); no heading reactions and
 // no hover loops (S0063 frequency, S1314 §8); eight data-c hooks with their own signatures (S1448, S1314 §7), drawn in
 // the companion's own layers so they work for House, Hammer and Drop alike.
-// R4 brand: colour constants below mirror the CSS tokens (--black, --ink-2, --a700, --a500, --a300, --line), since SVG attributes set from JS cannot read custom properties.
+// R6 brand: SVG attributes set from JS cannot hold var(), so the colours are read from the role tokens at load.
 import { gsap } from 'gsap';
 
 const NS = 'http://www.w3.org/2000/svg';
-const INK = '#141414', BLUE = '#b53a0e', SUN = '#ff5a1f', SKY = '#ece3dc', CHALK = '#ffa27a', SH = '#2b2b2b';
-const eye = (x, y, r, lid) => `<g class="eye"><circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${INK}" stroke-width="2"/><circle class="p" cx="${x}" cy="${y}" r="${(r * 0.5).toFixed(1)}" fill="${INK}"/><circle class="lid" cx="${x}" cy="${y}" r="${r + 0.6}" fill="${lid}"/></g>`;
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim() || 'currentColor';
+// R6: the helpers' drawing colours are the illustration roles of the token system, read once at load
+const INK = tok('--color-illustration-line'), BLUE = tok('--color-illustration-accent-deep'), SUN = tok('--color-illustration-accent'), SKY = tok('--color-illustration-fill'), CHALK = tok('--color-illustration-accent-soft'), SH = tok('--color-illustration-fill-strong'), PAPER = tok('--color-illustration-paper');
+const eye = (x, y, r, lid) => `<g class="eye"><circle cx="${x}" cy="${y}" r="${r}" fill="${PAPER}" stroke="${INK}" stroke-width="2"/><circle class="p" cx="${x}" cy="${y}" r="${(r * 0.5).toFixed(1)}" fill="${INK}"/><circle class="lid" cx="${x}" cy="${y}" r="${r + 0.6}" fill="${lid}"/></g>`;
 export const VARIANTS = {
   house: { name: 'House', svg: `
     <ellipse class="sh" cx="32" cy="61" rx="17" ry="2.6" fill="${INK}" opacity=".16"/>
     <g class="bd">
       <g class="smk" fill="none" stroke="${CHALK}" stroke-width="2"></g>
       <rect class="chim" x="40" y="11" width="7.5" height="13" rx="1.5" fill="${SH}" stroke="${INK}" stroke-width="2.2"/>
-      <rect class="wall" x="14" y="28" width="36" height="31" rx="5" fill="#fff" stroke="${INK}" stroke-width="2.5"/>
+      <rect class="wall" x="14" y="28" width="36" height="31" rx="5" fill="${PAPER}" stroke="${INK}" stroke-width="2.5"/>
       <g class="win"><rect x="18.5" y="33" width="11" height="11" rx="3" fill="${SKY}" stroke="${INK}" stroke-width="2"/><circle class="p" cx="24" cy="38.5" r="2.5" fill="${INK}"/><rect class="lid" x="18.5" y="33" width="11" height="11" rx="3" fill="${BLUE}"/></g>
       <g class="win"><rect x="34.5" y="33" width="11" height="11" rx="3" fill="${SKY}" stroke="${INK}" stroke-width="2"/><circle class="p" cx="40" cy="38.5" r="2.5" fill="${INK}"/><rect class="lid" x="34.5" y="33" width="11" height="11" rx="3" fill="${BLUE}"/></g>
       <rect class="door" x="28" y="48" width="8" height="11" rx="3" fill="${INK}"/>
@@ -45,7 +47,7 @@ export const VARIANTS = {
         <rect class="face" x="45" y="9" width="7" height="18" rx="2.5" fill="${SH}" stroke="${INK}" stroke-width="2.5"/>
         ${eye(23.5, 18, 4.2, SH)}${eye(35, 18, 4.2, SH)}
       </g>
-      <g class="lvl" opacity="0"><rect x="9" y="0" width="46" height="7" rx="2" fill="${SUN}" stroke="${INK}" stroke-width="2"/><rect x="27" y="1.5" width="10" height="4" rx="2" fill="#fff" stroke="${INK}" stroke-width="1.2"/><circle class="bub" cx="30" cy="3.5" r="1.4" fill="${CHALK}"/></g>
+      <g class="lvl" opacity="0"><rect x="9" y="0" width="46" height="7" rx="2" fill="${SUN}" stroke="${INK}" stroke-width="2"/><rect x="27" y="1.5" width="10" height="4" rx="2" fill="${PAPER}" stroke="${INK}" stroke-width="1.2"/><circle class="bub" cx="30" cy="3.5" r="1.4" fill="${CHALK}"/></g>
       <g class="ticks" stroke="${INK}" stroke-width="2" stroke-linecap="round" opacity="0"><path d="M14 64v3M22 64v4M30 64v3M38 64v4M46 64v3"/></g>
     </g>` },
   drop: { name: 'Drop', svg: `
@@ -63,11 +65,11 @@ export const VARIANTS = {
 const ACC = {
   umbrella: `<path d="M2 11 A10 9 0 0 1 22 11 Z" fill="${BLUE}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 11v9a2.5 2.5 0 0 1-5 0" fill="none" stroke="${INK}" stroke-width="1.8" stroke-linecap="round"/><path d="M8.5 11 A4 9 0 0 1 12 2 A4 9 0 0 1 15.5 11" fill="none" stroke="${INK}" stroke-width="1.2" opacity=".5"/>`,
   visor: `<circle cx="12" cy="12" r="5" fill="${SUN}" stroke="${INK}" stroke-width="1.8"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/>`,
-  reel: `<circle cx="10" cy="12" r="7.5" fill="${CHALK}" stroke="${INK}" stroke-width="1.8"/><circle cx="10" cy="12" r="2" fill="#fff" stroke="${INK}" stroke-width="1.4"/><path d="M17.5 12H23" stroke="${CHALK}" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 2.5"/>`,
+  reel: `<circle cx="10" cy="12" r="7.5" fill="${CHALK}" stroke="${INK}" stroke-width="1.8"/><circle cx="10" cy="12" r="2" fill="${PAPER}" stroke="${INK}" stroke-width="1.4"/><path d="M17.5 12H23" stroke="${CHALK}" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 2.5"/>`,
   tape: `<rect x="2" y="5" width="15" height="14" rx="4" fill="${SUN}" stroke="${INK}" stroke-width="1.8"/><circle cx="9.5" cy="12" r="3" fill="none" stroke="${INK}" stroke-width="1.4"/><path d="M17 15h6v3h-2" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/>`,
   hat: `<path d="M3 17 A9 9 0 0 1 21 17 Z" fill="${SUN}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/><path d="M1 17.5h22" stroke="${INK}" stroke-width="2.2" stroke-linecap="round"/><path d="M12 8v9" stroke="${INK}" stroke-width="1.4" opacity=".6"/>`,
   belt: `<path d="M3 4 L14 15" stroke="${SH}" stroke-width="3.4" stroke-linecap="round"/><path d="M11 3 l4 -1 l3 3 l-2 3 l-4 -1 z" fill="${SH}" stroke="${INK}" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 20 L22 20 L22 9" fill="none" stroke="${SUN}" stroke-width="3" stroke-linejoin="round"/>`,
-  pin: `<path d="M12 22 C 12 22 4 13.5 4 9 A8 8 0 0 1 20 9 C 20 13.5 12 22 12 22 Z" fill="${SUN}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10 L12 6.5 L16 10 V13 H8 Z" fill="#fff" stroke="${INK}" stroke-width="1.2" stroke-linejoin="round"/>`,
+  pin: `<path d="M12 22 C 12 22 4 13.5 4 9 A8 8 0 0 1 20 9 C 20 13.5 12 22 12 22 Z" fill="${SUN}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10 L12 6.5 L16 10 V13 H8 Z" fill="${PAPER}" stroke="${INK}" stroke-width="1.2" stroke-linejoin="round"/>`,
   phone: `<path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 3.4 5.2 1.6 1.6 0 0 1 5 3.5z" fill="${SUN}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/>`,
 };
 const MOOD = { hero: 'umbrella', proof: 'reel', work: 'tape', family: 'hat', how: 'belt', area: 'pin', call: 'phone' };
@@ -90,7 +92,7 @@ const SIG = {
   call: g => { g.innerHTML = ACC.phone; return gsap.fromTo(g, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: 'power3.out' }); },
   addr: g => { g.innerHTML = `${ACC.pin}<ellipse class="ring" cx="12" cy="22" rx="2" ry=".8" fill="none" stroke="${INK}" stroke-width="1.4"/>`; return gsap.timeline().fromTo(g.firstElementChild, { y: -10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.18, ease: 'power3.out' }).fromTo(g.querySelector('.ring'), { attr: { rx: 2, ry: 0.8 }, opacity: 1 }, { attr: { rx: 11, ry: 3 }, opacity: 0, duration: 0.32, ease: 'power2.out' }); },
   chip: g => { g.innerHTML = ACC.pin; return gsap.timeline().fromTo(g, { y: 0, opacity: 1 }, { y: -7, duration: 0.12, ease: 'power2.out' }).to(g, { y: 0, duration: 0.16, ease: 'power3.in' }).to(g, { scaleY: 0.9, transformOrigin: '50% 100%', duration: 0.05, yoyo: true, repeat: 1 }); },
-  pick: (g, ch, r, f, txt) => { g.innerHTML = `<rect x="3" y="4" width="18" height="16" rx="3" fill="#fff" stroke="${INK}" stroke-width="1.8"/><text x="12" y="16.2" text-anchor="middle" font-size="10" font-weight="800" fill="${INK}" font-family="Poppins,sans-serif">${txt}</text>`; return gsap.fromTo(g, { rotationY: -90, opacity: 0, transformOrigin: '50% 50%' }, { rotationY: 0, opacity: 1, duration: 0.22, ease: 'power3.out' }); },
+  pick: (g, ch, r, f, txt) => { g.innerHTML = `<rect x="3" y="4" width="18" height="16" rx="3" fill="${PAPER}" stroke="${INK}" stroke-width="1.8"/><text x="12" y="16.2" text-anchor="middle" font-size="10" font-weight="800" fill="${INK}" font-family="Poppins,sans-serif">${txt}</text>`; return gsap.fromTo(g, { rotationY: -90, opacity: 0, transformOrigin: '50% 50%' }, { rotationY: 0, opacity: 1, duration: 0.22, ease: 'power3.out' }); },
   tile: (g, ch, r, f) => { const t = document.createElementNS(NS, 'g'); t.innerHTML = `<rect width="${r.width.toFixed(0)}" height="6" fill="${SUN}" stroke="${INK}" stroke-width="1.2"/><path d="${Array.from({ length: Math.floor(r.width / 12) }, (_, i) => `M${i * 12 + 6} 0v${i % 4 ? 2.5 : 4}`).join('')}" stroke="${INK}" stroke-width="1"/>`; t.setAttribute('transform', `translate(${r.left.toFixed(1)} ${(r.bottom - 14).toFixed(1)})`); f.append(t); return gsap.timeline({ onComplete: () => t.remove() }).fromTo(t.children, { scaleX: 0, transformOrigin: '0 0' }, { scaleX: 1, duration: 0.3, ease: 'power3.out' }).to(t, { opacity: 0, duration: 0.2 }, '+=0.5'); },
   step: g => { g.innerHTML = `<path d="M4 20 L17 7 L20 10 L7 23 L3 24 Z" fill="${SUN}" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/><path class="tick" d="M12 21 l3 3 l6 -8" fill="none" stroke="${BLUE}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`; return gsap.timeline().fromTo(g.firstElementChild, { rotation: 0 }, { rotation: -10, transformOrigin: '20% 90%', duration: 0.08, yoyo: true, repeat: 1 }).to(g.querySelector('.tick'), { attr: { 'stroke-dashoffset': 0 }, duration: 0.18, ease: 'power3.out' }, 0.06); },
   stars: (g, ch) => { const w = ch.querySelectorAll('.win rect:first-child'); if (w.length) { g.innerHTML = ''; return gsap.timeline().to(w, { fill: SUN, duration: 0.08, stagger: 0.09 }).to(w, { fill: SKY, duration: 0.24 }, '+=0.35'); } g.innerHTML = [0, 1, 2, 3, 4].map(i => `<circle cx="${3 + i * 4.5}" cy="12" r="1.7" fill="${SUN}" stroke="${INK}" stroke-width=".8"/>`).join(''); return gsap.fromTo(g.children, { opacity: 0.15 }, { opacity: 1, duration: 0.08, stagger: 0.09 }); },

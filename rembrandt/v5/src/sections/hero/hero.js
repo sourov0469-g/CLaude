@@ -22,7 +22,8 @@ const inView = (el, fn) => { const io = new IntersectionObserver(([e]) => fn(e.i
 // wind); the reference's sweep runs once on load, and a press anywhere on the wall sends a flip wave out from that
 // point. Canvas 2D, drawn only while something moves; it sleeps at rest and off screen.
 const WALL = { falloff: 1.4, depth: 80, tilt: 28, flip: 0.75, bounce: 0.15, sweep: 2.6, sweepPow: 4, noise: 2 };
-const SHADES = { under: '#ffe6d9', dark: ['#ffffff', '#fff4ee', '#ffe6d9'], front: ['#141414', '#2b2b2b', '#4a4542'], rear: ['#e8470f', '#ff5a1f', '#ff7c4a'] }; // R4 brand: a light tile field (white, --a50, --a100), letters in the accent, backs black
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SHADES = { get under() { return tok('--color-bg-subtle'); }, get dark() { return [tok('--color-bg-surface'), tok('--color-bg'), tok('--color-bg-subtle')]; }, get front() { return [tok('--color-text'), tok('--color-text-secondary'), tok('--color-illustration-fill-strong')]; }, get rear() { return [tok('--color-illustration-accent-deep'), tok('--color-accent-solid'), tok('--color-illustration-accent')]; } }; // R6: the tile wall in role tokens (light field, ink letters, accent backs) // R4 brand: a light tile field (white, --a50, --a100), letters in the accent, backs black
 function wall(root, c) {
   const host = root.querySelector('.hx1-wall'), plate = root.querySelector('.hx1-plate'), cv = root.querySelector('.hx1-cv');
   const ctx = cv.getContext && cv.getContext('2d');

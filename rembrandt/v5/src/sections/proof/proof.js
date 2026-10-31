@@ -14,7 +14,9 @@ const seeded = s => () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
 function constellation(root, c) {
   const cv = root.querySelector('.pv1-cv'), g = cv.getContext('2d'), N = 295, R = 130;
   const SPR = spring(2.2, 0.7), rnd = seeded(1995);
-  const COLORS = ['#ffffff', '#ffffff', '#ffffff', '#ffc9ae', '#ffa27a', '#ff5a1f'];
+  // R6: the stars are accent-ramp roles read from the tokens (three of six were white, invisible on the light ground)
+  const tk = n => getComputedStyle(root).getPropertyValue(n).trim();
+  const COLORS = ['--color-illustration-accent', '--color-illustration-accent', '--color-accent-solid', '--color-accent-solid', '--color-illustration-accent-deep', '--color-accent-border'].map(tk);
   const sprites = COLORS.map(col => { // pre-rendered once (S1377 cost rule): a soft five-point star
     const s = document.createElement('canvas'); s.width = s.height = 64; const x = s.getContext('2d');
     x.translate(32, 32); x.fillStyle = col; x.shadowColor = col; x.shadowBlur = 10; x.beginPath();
@@ -28,7 +30,7 @@ function constellation(root, c) {
       su: rnd(), sv: rnd(), tx: 0, ty: 0, ox: { p: 0, v: 0 }, oy: { p: 0, v: 0 }, ph: rnd() * 6.28, tw: rnd() < 0.3 ? 0.6 + rnd() * 1.4 : 0 };
   });
   let stopIo = null;
-  let gly = null, glyCol = getComputedStyle(root).getPropertyValue('--a100').trim() || 'transparent';
+  let gly = null, glyCol = getComputedStyle(root).getPropertyValue('--color-accent-subtle-hover').trim() || 'transparent';
   let W = 0, H = 0, dpr = 1, prog = c.motion ? 0 : 1, rect = null, ptr = { x: -1e4, y: -1e4, nx: 0, ny: 0 }, ready = false, lp = null, time = 0;
   const glyph = (box) => { // sample the "4.9" glyph into N points on a staggered grid (densest spacing that still yields N)
     const ow = Math.max(40, Math.round(box.w / 2)), oh = Math.max(40, Math.round(box.h / 2));

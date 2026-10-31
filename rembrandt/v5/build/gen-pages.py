@@ -126,11 +126,12 @@ def svc_v5():  # the menu board
 
 # R4 directive Phase 6 (redesign layer, as on the homepage sections): the brand label over the H1, the contour artwork
 # on the root, and a drawn roofline closing the page header (accent at the ridge, a dashed tint along the eaves)
-GABLE = 'M4 50 C 18 39 33 24 49 8 C 51 6.6 53.4 6.6 55 8.2 C 70 23 84 36 97 45 C 98.6 46.2 97.6 49 95.6 48.6 C 81 44.6 66 35 52.6 24.4 C 39 36 23 47 7.4 54.6 C 5.2 55.6 2.6 52.2 4 50 Z'
+# R6: the brand glyph is the new mark (assets/brand/mark.svg, law-of-closure S1422), drawn by class (.mk-g) in the tokens
+MARK = '<path class="lg-roof" d="M5 21 20.5 7.5M27.5 7.5 43 21"/><path class="lg-r" d="M15 25v18M15 25h9a7.5 7.5 0 0 1 0 15h-3M26 40l8 4.5"/>'
 LABEL = {'svcp': 'What we do', 'about': 'The family firm', 'contact': 'Call or come by'}
 RIDGE = '<svg class="pg-ridge" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="pg-ridge-e" d="M0 76 L600 6 L1200 76"/><path class="pg-ridge-a" d="M360 34 L600 6 L840 34"/></svg>'
 def dress(page, h):
-    lab = f'<p class="r4-lab"><svg viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg>{LABEL[page]}</p>'
+    lab = f'<p class="r4-lab"><svg class="mk-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false">{MARK}</svg>{LABEL[page]}</p>'
     h = re.sub(r'^<div class="([^"]+)"', r'<div class="\1 r4-art"', h, count=1)
     return h.replace('<h1', lab + '<h1', 1).replace('</header>', RIDGE + '</header>', 1)
 def write(page, gens):
@@ -266,7 +267,7 @@ def ct_v4():  # the business card
     return f'''<div class="ct ct4">
   <header class="ct-hero"><h1 class="ct-h1">Our card, both sides.</h1><p class="ct-sub">Everything you need to reach us fits on a business card.</p></header>
   <div class="ct4-stage"><div class="ct4-card">
-    <div class="ct4-face ct4-front"><svg class="ct4-mark" viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg><p class="ct4-name">Rembrandt Roofing &amp; Restoration</p><p class="ct4-who">Rachel answers</p><p class="ct4-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p class="ct4-hrs">Monday to Friday, 9 to 5</p></div>
+    <div class="ct4-face ct4-front"><svg class="ct4-mark mk-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false">{MARK}</svg><p class="ct4-name">Rembrandt Roofing &amp; Restoration</p><p class="ct4-who">Rachel answers</p><p class="ct4-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p class="ct4-hrs">Monday to Friday, 9 to 5</p></div>
     <div class="ct4-face ct4-back"><p class="ct4-name">The office</p><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address><p class="ct4-hrs">A family firm since 1995</p>{maplink('ct4-map')}</div>
   </div><button class="ct4-turn rx" type="button" aria-pressed="false">Turn the card</button></div>
   <section class="ct4-towns" aria-labelledby="ct4-t"><h2 class="ct-h2" id="ct4-t">The 24 towns we serve</h2><ul class="ct-chips" data-towns="near" role="list"></ul>{TSRC}</section>
@@ -345,7 +346,7 @@ def ah_v5():  # three people, three faces
 KHRS = '<p class="kt-hours" data-hours>Office hours: Monday to Friday, 9 to 5.</p>'
 def kt_v1(): return f'<div class="kt kt1">\n  <header class="kt-head"><h1 class="kt-h1">Call Rachel.</h1><p class="kt1-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p>{KHRS}<p class="kt-sub">Ask for a written, line-by-line estimate. No form to fill in: a person answers.</p></header>\n</div>\n'
 def kt_v2():
-    front = f'<div class="kt2-face kt2-front"><svg class="kt2-mark" viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg><p class="kt2-name">Rembrandt Roofing &amp; Restoration</p><p class="kt2-who">Rachel answers</p><p class="kt2-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p class="kt2-hrs">Monday to Friday, 9 to 5</p></div>'
+    front = f'<div class="kt2-face kt2-front"><svg class="kt2-mark mk-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false">{MARK}</svg><p class="kt2-name">Rembrandt Roofing &amp; Restoration</p><p class="kt2-who">Rachel answers</p><p class="kt2-num num"><a class="rx" href="{TEL}" data-c="call">{NUM}</a></p><p class="kt2-hrs">Monday to Friday, 9 to 5</p></div>'
     back = f'<div class="kt2-face kt2-back"><p class="kt2-name">The office</p><address>38 N Pioneer Blvd<br>Springboro, OH 45066</address><p class="kt2-hrs">A family firm since 1995</p>{maplink("kt2-map")}</div>'
     return f'<div class="kt kt2">\n  <header class="kt-head"><h1 class="kt-h1">Our card, both sides.</h1><p class="kt-sub">Everything you need to reach us fits on a business card.</p></header>\n  <div class="kt2-stage"><div class="kt2-card">{front}{back}</div><button class="kt2-turn rx" type="button" aria-pressed="false">Turn the card</button></div>\n</div>\n'
 def kt_v3():
@@ -373,7 +374,7 @@ def cb_v5():
 
 LABEL2 = {'sphero': 'What we do', 'abhero': 'The family firm', 'cthero': 'Call or come by'}
 def dress2(sid, h):
-    lab = f'<p class="r4-lab"><svg viewBox="0 0 100 56" aria-hidden="true" focusable="false"><path d="{GABLE}"/></svg>{LABEL2[sid]}</p>'
+    lab = f'<p class="r4-lab"><svg class="mk-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false">{MARK}</svg>{LABEL2[sid]}</p>'
     h = re.sub(r'^<div class="([^"]+)"', r'<div class="\1 r4-art"', h, count=1)
     return h.replace('<h1', lab + '<h1', 1).replace('</header>', RIDGE + '</header>', 1)
 def art2(h): return re.sub(r'^<div class="([^"]+)"', r'<div class="\1 r4-art"', h, count=1)

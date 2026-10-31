@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Rembrandt Roofing &amp; Restoration">
+<!-- Rembrandt Roofing & Restoration, R6 mark (law-of-closure S1422): two roof strokes that stop short of each other
+     (the eye completes the ridge) over an R whose bowl never returns to its stem (the eye completes the letter). -->
+<g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke="#ffffff"><path class="lg-roof" d="M5 21 20.5 7.5M27.5 7.5 43 21"/><path class="lg-r" d="M15 25v18M15 25h9a7.5 7.5 0 0 1 0 15h-3M26 40l8 4.5"/></g>
+</svg>
