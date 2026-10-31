@@ -31,7 +31,7 @@ const PAGES = (process.argv[2] || 'index,siding,windows,roofing,outdoor,projects
           const bgc = parse(cs.backgroundColor);
           if (bgc && bgc[3] > .5) { const [r, g, b2] = bgc; const mx = Math.max(r, g, b2), mn = Math.min(r, g, b2); if (mx - mn > 40 && g > r && b2 > r) out.accentPx += rc.width * rc.height; }
           // filled primaries: the accent-solid fill on an interactive element
-          if (el.matches('a, button') && bgc && hex(bgc) === getComputedStyle(document.documentElement).getPropertyValue('--teal-9').trim().toUpperCase()) out.prim++;
+          if (el.matches('a, button') && bgc && hex(bgc) === getComputedStyle(document.documentElement).getPropertyValue('--steel-9').trim().toUpperCase()) out.prim++;
           if (el.matches('input, select, textarea')) { const bg = bgOf(el.parentElement); if (bg.c) out.ctrl.push(['control border', hex(parse(cs.borderBottomColor)), hex(bg.c), +cr(parse(cs.borderBottomColor), bg.c).toFixed(2)]); }
           const own = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length > 1); if (!own) continue;
           const size = parseFloat(cs.fontSize), w = +cs.fontWeight;

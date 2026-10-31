@@ -9,7 +9,7 @@ css = open(os.path.join(ROOT, 'site/assets/css/home.css'), encoding='utf-8').rea
 css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
 css = re.sub(r'url\((?:"[^"]*"|\'[^\']*\'|[^)]*)\)', 'url()', css)
 LIT = re.compile(r'--[\w-]+:\s*\d{1,3},\s*\d{1,3},\s*\d{1,3}\b|#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch)\(\s*[\d.]|(?<![\w-])(?:white|black)(?![\w-])')
-PRIM = re.compile(r'var\(--(?:teal|neutral|red)-\d+\)|var\(--white\)')
+PRIM = re.compile(r'var\(--(?:steel|teal|neutral|red)-\d+\)|var\(--white\)')
 
 
 def rules(s):

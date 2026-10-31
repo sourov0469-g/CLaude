@@ -1,4 +1,4 @@
-"""Count accent pixels in each screenshot (OKLCH hue 165-205 with chroma > 0.03): solid (L < 0.62) and tint, plus
+"""Count accent pixels in each screenshot (OKLCH hue within 20 degrees of ACCENT_H, default 248 steel; 185 for the old teal; chroma > 0.03): solid (L < 0.62) and tint, plus
 every saturated pixel of any hue (C > 0.08) so photographs and product swatches are visible as such.
 Run: python3 -I qa/v9/teal.py SHOTDIR"""
 import glob, os, sys, zlib, struct
@@ -40,13 +40,15 @@ def oklch(img):
     L, a, b = lab[:, 0], lab[:, 1], lab[:, 2]
     return L, np.hypot(a, b), (np.degrees(np.arctan2(b, a)) + 360) % 360
 
+ACC = float(os.environ.get('ACCENT_H', 248))
 rows = []
 for f in sorted(glob.glob(os.path.join(sys.argv[1], '*.png'))):
     img = png(f)
     if img.shape[0] * img.shape[1] > 6_000_000: img = img[::2, ::2]
     L, C, H = oklch(img); n = L.size
-    teal = (H > 165) & (H < 205) & (C > 0.03)
+    dh = np.abs((H - ACC + 180) % 360 - 180)
+    teal = (dh < 20) & (C > 0.03)
     rows.append((os.path.basename(f)[:-4], 100 * (teal & (L < 0.62)).sum() / n, 100 * (teal & (L >= 0.62)).sum() / n, 100 * (C > 0.08).sum() / n))
 rows.sort(key=lambda r: -(r[1] + r[2]))
-print(f'views {len(rows)}; mean solid teal {np.mean([r[1] for r in rows]):.2f}% tint {np.mean([r[2] for r in rows]):.2f}%; views over 5% teal: {sum(1 for r in rows if r[1] + r[2] > 5)}')
+print(f'views {len(rows)}; mean solid accent {np.mean([r[1] for r in rows]):.2f}% tint {np.mean([r[2] for r in rows]):.2f}%; views over 5% accent: {sum(1 for r in rows if r[1] + r[2] > 5)}')
 for r in rows[:25]: print(f'{r[0]:40s} solid {r[1]:5.2f}%  tint {r[2]:5.2f}%  any saturated {r[3]:5.2f}%')

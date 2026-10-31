@@ -806,8 +806,8 @@ def colour1():
 
 
 # REBRAND QA round 2 (S1496 token compliance): the label ink on a published paint is a role token, never a literal.
-# PAINT_DARK is --neutral-13 (OKLCH .199 .006 185, the tinted neutral at #161616's luminance) for the contrast maths.
-PAINT_DARK = '#131716'
+# PAINT_DARK is --neutral-13 (OKLCH .199 .008 248, the steel-tinted neutral near #161616's luminance) for the contrast maths.
+PAINT_DARK = '#131619'
 INK_TOKEN = {PAINT_DARK: 'var(--color-text-on-paint-dark)', '#FFFFFF': 'var(--color-text-on-paint-light)'}
 
 

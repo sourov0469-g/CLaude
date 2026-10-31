@@ -9,19 +9,21 @@
 @font-face { font-family: "Roboto"; src: url(../fonts/Roboto-latin.woff2) format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
 :root {
-  /* REBRAND 2026-10-31. Two tiers (S0071 token-naming): primitives named by hue and step, never used in a component;
-     semantic tokens named by role, the only tier components read. One accent ramp (teal, OKLCH hue 185, chosen because
-     the firm's photographs carry 0% of their chroma within 30 degrees of it and it sits 158 degrees from danger red),
-     one neutral ramp tinted to the same hue (chroma 0.003-0.010), one status ramp (danger: the booking form's errors). */
+  /* STEEL 2026-10-31 (owner decision; supersedes the rebrand's teal, which clashed with Rembrandt's). Two tiers
+     (S0071 token-naming): primitives named by hue and step, never used in a component; semantic tokens named by role,
+     the only tier components read. One accent ramp, steel blue at OKLCH hue 248 (between James Hardie Deep Ocean,
+     239.5, and slate, 248; 63 degrees from the old teal, 185), chroma held low as steel is (0.08 at step 9); one
+     neutral ramp tinted to the same hue at chroma 0.002-0.011 so the greys read as steel and concrete, not warm; one
+     status ramp (danger: the booking form's errors, hue 27, 139 degrees away). */
   --white: #FFFFFF;
-  --teal-1: #F5FEFD; --teal-2: #E5F6F3; --teal-3: #D4EEEA; --teal-4: #C3E7E1; --teal-5: #B1DED8; --teal-6: #9FD4CD; --teal-7: #87C6BD; --teal-8: #4C9C92; --teal-9: #00736A; --teal-10: #01655C; --teal-11: #005A52; --teal-12: #052F2A;
-  --neutral-1: #FAFCFC; --neutral-2: #EFF3F2; --neutral-3: #E4E9E8; --neutral-4: #DADFDE; --neutral-5: #CFD5D4; --neutral-6: #C3CAC8; --neutral-7: #B2BAB9; --neutral-8: #868E8D; --neutral-9: #5D6564; --neutral-10: #515957; --neutral-11: #474F4E; --neutral-12: #222928;
-  --neutral-13: #131716;   /* one role needs it: label ink on mid-value published paints (#778184 reads 4.53:1) */
+  --steel-1: #FAFCFE; --steel-2: #EDF3F8; --steel-3: #E0E9F2; --steel-4: #D3E0EC; --steel-5: #C6D6E6; --steel-6: #B7CADE; --steel-7: #A2BBD4; --steel-8: #6D90B2; --steel-9: #3C678F; --steel-10: #315A80; --steel-11: #2C5071; --steel-12: #17293A;
+  --neutral-1: #FBFCFD; --neutral-2: #F0F2F4; --neutral-3: #E5E8EB; --neutral-4: #DBDEE2; --neutral-5: #D0D4D8; --neutral-6: #C4C8CD; --neutral-7: #B4B9BE; --neutral-8: #888D92; --neutral-9: #5E6469; --neutral-10: #52575D; --neutral-11: #484E53; --neutral-12: #24282C;
+  --neutral-13: #131619;   /* one role needs it: label ink on mid-value published paints (#778184 reads 4.55:1) */
   --red-3: #FFEFED; --red-7: #DC8C83; --red-9: #B63B35; --red-11: #9E2D28;
   /* surfaces */
   --color-bg: var(--neutral-1); --color-bg-subtle: var(--neutral-2); --color-surface: var(--white); --color-bg-sunken: var(--neutral-3);
   --color-bg-panel: var(--neutral-3); --color-bg-panel-strong: var(--neutral-4);
-  --color-surface-rgb: 255 255 255; --color-shadow-rgb: 34 41 40;
+  --color-surface-rgb: 255 255 255; --color-shadow-rgb: 36 40 44;
   /* text */
   --color-text: var(--neutral-12); --color-text-secondary: var(--neutral-11); --color-text-disabled: var(--neutral-8);
   --color-text-on-panel: var(--neutral-12); --color-text-on-panel-secondary: var(--neutral-11); --color-text-on-accent: var(--white); --color-text-on-plate: var(--neutral-12);
@@ -30,18 +32,18 @@
   --color-border-subtle: var(--neutral-6); --color-border: var(--neutral-7); --color-border-strong: var(--neutral-8); --color-separator: var(--neutral-6); --color-border-control: var(--neutral-9);
   --color-focus-ring: var(--neutral-12);   /* QA round 2: its own role, so a swatch's local --color-text never recolours it */
   /* accent: the one filled primary action, key highlights, interactive and selected states */
-  --color-accent-subtle: var(--teal-3); --color-accent-subtle-hover: var(--teal-4); --color-accent-border: var(--teal-7); --color-accent-border-strong: var(--teal-8);
-  --color-accent-solid: var(--teal-9); --color-accent-solid-hover: var(--teal-10); --color-accent-text: var(--teal-11); --color-accent-text-strong: var(--teal-12);
-  --color-accent-text-on-panel: var(--teal-11); --color-accent-rgb: 0 115 106;
-  --color-selected-bg: var(--teal-4); --color-selected-text: var(--teal-12); --color-selected-border: var(--teal-11);
+  --color-accent-subtle: var(--steel-3); --color-accent-subtle-hover: var(--steel-4); --color-accent-border: var(--steel-7); --color-accent-border-strong: var(--steel-8);
+  --color-accent-solid: var(--steel-9); --color-accent-solid-hover: var(--steel-10); --color-accent-text: var(--steel-11); --color-accent-text-strong: var(--steel-12);
+  --color-accent-text-on-panel: var(--steel-11); --color-accent-rgb: 60 103 143;
+  --color-selected-bg: var(--steel-4); --color-selected-text: var(--steel-12); --color-selected-border: var(--steel-11);
   /* status: danger */
   --color-danger-subtle: var(--red-3); --color-danger-border: var(--red-7); --color-danger-solid: var(--red-9); --color-danger-text: var(--red-11);
   /* illustration and data marks: neutral line art, so the drawings rest instead of competing with the accent */
-  --color-art-line: var(--neutral-11); --color-art-line-strong: var(--neutral-12); --color-rating: var(--neutral-12); --color-logo-mark: var(--teal-9);
+  --color-art-line: var(--neutral-11); --color-art-line-strong: var(--neutral-12); --color-rating: var(--neutral-12); --color-logo-mark: var(--steel-9);
   /* data marks (QA round 2, S1435 + S0071 peers stay neutral): every mark in a chart is neutral; the accent marks only
      the one mark the chart is about, or the one the visitor picked */
   --color-art-fill: var(--neutral-4); --color-art-fill-strong: var(--neutral-9);
-  --color-data-mark: var(--neutral-9); --color-data-mark-muted: var(--neutral-8); --color-data-fill: var(--neutral-4); --color-data-highlight: var(--teal-9);
+  --color-data-mark: var(--neutral-9); --color-data-mark-muted: var(--neutral-8); --color-data-fill: var(--neutral-4); --color-data-highlight: var(--steel-9);
   --f: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --fh: "Poppins", "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   /* text hierarchy (S1434): four levels, adjacent levels at least 1.5x apart or a clear weight step */
@@ -2913,16 +2915,16 @@ body { font-size: var(--t-body); color: var(--color-text); }
 .btn-alt:not(:disabled):active:not([data-bk] *)::after { transform: none; }
 .fin .cmp-sw:active:not([data-bk] *) i { transform: none; }
 
-/* REBRAND QA round 2 (S1497 semantic use, grayscale survival): the teal tint alone differed from an unselected chip by
+/* REBRAND QA round 2 (S1497 semantic use, grayscale survival): the steel tint alone differed from an unselected chip by
    1.2-2.0:1 in luminance, so "selected" was carried by hue. Every live selected control now also draws a 2px ring in
-   --color-selected-border (teal-11): 4.1:1 against the unselected neutral-7 border, 6.1:1 against its own tint,
+   --color-selected-border (steel-11): 4.1:1 against the unselected neutral-7 border, 6.1:1 against its own tint,
    8.1:1 against white. Colour swatches take the ring outside, over a white gap, so it reads on any paint colour.
    Focus stays the separate outer outline (S0248: the two indicators never share a shape). */
 :is([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"]):is(button, a, [role="tab"], [role="radio"], [role="option"], [role="switch"], [role="checkbox"]):not([data-bk] *) { box-shadow: inset 0 0 0 2px var(--color-selected-border); }
 :is([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"]):is(button, a, [role="tab"], [role="radio"], [role="option"], [role="switch"], [role="checkbox"]):not([data-bk] *):focus-visible { box-shadow: 0 0 0 3px var(--color-surface), inset 0 0 0 2px var(--color-selected-border); }
 :is(.sw, .cmp-sw, .nv-cs, .nv-dot, .cl-sw, .pal-mini, [style*="--c:"])[aria-checked="true"]:not([data-bk] *), :is(.sw, .cmp-sw, .nv-cs, .nv-dot, .cl-sw, [style*="--c:"])[aria-pressed="true"]:not([data-bk] *) { box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-selected-border); }
 /* Near 3 on the panel ground: the selected chip was a white fill against a transparent one, 1.23:1 apart and no hue
-   either. Same rule as every other chip now: neutral chip with a visible edge, selected tint with the teal-11 ring. */
+   either. Same rule as every other chip now: neutral chip with a visible edge, selected tint with the steel-11 ring. */
 .near-3[data-tone="night"] .dv-chip:not([data-bk] *) { background: var(--color-surface); color: var(--color-text); box-shadow: inset 0 0 0 1px var(--color-border); }
 .near-3[data-tone="night"] .dv-chip:not([data-bk] *) span { color: var(--color-text-secondary); }
 .near-3[data-tone="night"] .dv-chip[aria-checked="true"]:not([data-bk] *) { background: var(--color-selected-bg); color: var(--color-selected-text); box-shadow: inset 0 0 0 2px var(--color-selected-border); }
@@ -2942,13 +2944,13 @@ body { font-size: var(--t-body); color: var(--color-text); }
 .snt:not([data-bk] *) :is(input, select):focus { border-bottom-color: var(--color-focus-ring); }
 .snt:not([data-bk] *) :is(input, select):focus-visible { box-shadow: 0 3px 0 0 var(--color-focus-ring); }
 .v .snt:not([data-bk] *) :is(input, select):focus-visible { border-bottom-color: var(--color-focus-ring); box-shadow: 0 3px 0 0 var(--color-focus-ring); }
-/* the FAQ search field removed its outline on focus and its teal focus border lost to the control-border rule: it
+/* the FAQ search field removed its outline on focus and its steel focus border lost to the control-border rule: it
    had no visible focus at all. It takes the standard mark like every other control. */
 .pg-srch input:focus-visible:not([data-bk] *) { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
 
-/* REBRAND QA round 2, isolation inflation (S1435; measured on screenshots of all 290 views, qa/v9/teal.py): charts
-   painted every mark teal, so the accent stopped meaning anything there. The 886 squares (6.9% of the view in solid
-   teal), the month heatmap, the warranty bars, the job dots and the payment panes now draw in the neutral data
+/* REBRAND QA round 2, isolation inflation (S1435; measured on screenshots of all 290 views, qa/v9/steel.py): charts
+   painted every mark steel, so the accent stopped meaning anything there. The 886 squares (6.9% of the view in solid
+   steel), the month heatmap, the warranty bars, the job dots and the payment panes now draw in the neutral data
    tokens; the accent stays on the picked mark and the one mark a chart is about. */
 .nv-886 .g-m { fill: var(--color-data-mark); } .nv-886 .g-c { stroke: var(--color-data-mark-muted); }
 .hm-c { fill: color-mix(in srgb, var(--color-data-mark) calc(var(--a) * 100%), var(--color-bg-subtle)); stroke: var(--color-border-subtle); }
@@ -2957,11 +2959,11 @@ body { font-size: var(--t-body); color: var(--color-text); }
 .fl-d circle { fill: var(--color-data-mark-muted); } .fl-d circle:hover, .fl-d circle.on { fill: var(--color-data-highlight); }
 .pay-panes rect:nth-child(12n+1):not([data-bk] *) { fill: var(--color-data-mark); stroke: var(--color-art-line-strong); }
 /* drawings keep to neutral line art (declared hierarchy; window glass alone keeps the accent's lightest tint, as in the
-   street and the gable): the body-and-trim house's teal-12 roof and teal door, and the wall layers' teal siding, were
+   street and the gable): the body-and-trim house's steel-12 roof and steel door, and the wall layers' steel siding, were
    brand colour used as decoration; the door read as a button */
 .bt-roof { fill: var(--color-art-line); } .bt-door { fill: var(--color-art-fill-strong); }
 .ly-studs { fill: var(--color-art-fill); } .ly-sheath { fill: var(--color-bg-panel-strong); } .ly-siding { fill: var(--color-art-fill-strong); } .ly-trim { fill: var(--color-art-line-strong); }
-/* headings and labels are never coloured (declared hierarchy; qa/v9/accent.js found 7 teal H3s, term and row labels):
+/* headings and labels are never coloured (declared hierarchy; qa/v9/accent.js found 7 steel H3s, term and row labels):
    the answer headings of the cost tools, the chooser's output heading, the proof tiles' labels, the office card's
    terms and the plain-language list's labels are neutral; the accent stays on numerals that index and the one figure */
 .nv-bt-o h3, .nv-ch-out h3 { color: var(--color-text); }

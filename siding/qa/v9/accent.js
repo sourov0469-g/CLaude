@@ -1,5 +1,5 @@
 // REBRAND challenge (S1435 isolation inflation, S0071 one colour one meaning): in every visible version, count what
-// the accent paints. (1) teal fills: solid (the primary) and tint blocks that are not a selected state; (2) teal text
+// the accent paints. (1) accent fills: solid (the primary) and tint blocks that are not a selected state; (2) accent text
 // that is not inside something interactive, i.e. highlights a visitor could mistake for links.
 // NODE_PATH=$(npm root -g) node qa/v9/accent.js [pages]
 const { chromium } = require('playwright');
@@ -14,7 +14,8 @@ const BASE = process.env.QBASE || 'http://127.0.0.1:8765/';
     const secs = await p.evaluate(() => [...document.querySelectorAll('.sec:not([data-bk])')].map(s => ({ id: s.id, n: s.querySelectorAll('.vsw-b').length })));
     for (const s of secs) for (let v = 1; v <= Math.max(1, s.n); v++) {
       const r = await p.evaluate(([id, v]) => new Promise(res => { const sec = document.getElementById(id); const t = sec.querySelector(`.vsw-b[data-v="${v}"]`); if (t) t.click(); setTimeout(() => {
-        const TINT = ['rgb(212, 238, 234)', 'rgb(195, 231, 225)'], SOLID = ['rgb(0, 115, 106)', 'rgb(1, 101, 92)'], TXT = ['rgb(0, 90, 82)', 'rgb(5, 47, 42)', 'rgb(0, 115, 106)'];
+        const rgbOf = v => { const d = document.createElement('i'); d.style.color = `var(${v})`; document.body.appendChild(d); const c = getComputedStyle(d).color; d.remove(); return c; };   // the live accent tokens, whatever the ramp
+        const TINT = ['--color-accent-subtle', '--color-accent-subtle-hover'].map(rgbOf), SOLID = ['--color-accent-solid', '--color-accent-solid-hover'].map(rgbOf), TXT = ['--color-accent-text', '--color-accent-text-strong', '--color-accent-solid'].map(rgbOf);
         const st = sec.querySelector('.stage') || sec; const tints = [], solids = [], texts = [];
         for (const el of st.querySelectorAll('*')) {
           if (!el.checkVisibility() || el.closest('svg, [data-bk]')) continue;
@@ -36,6 +37,6 @@ const BASE = process.env.QBASE || 'http://127.0.0.1:8765/';
     }
     await p.close();
   }
-  const out = [`views ${tally.views}; tint blocks per view histogram ${JSON.stringify(tally.tintViews)}; max ${tally.tintMax}`, `teal text outside interactive elements: ${tally.textNonInt} (underlined ${tally.textNonIntUnderlined}); by class ${JSON.stringify(Object.entries(tally.samples).sort((a, b) => b[1] - a[1]).slice(0, 20))}`, ...rows];
+  const out = [`views ${tally.views}; tint blocks per view histogram ${JSON.stringify(tally.tintViews)}; max ${tally.tintMax}`, `accent text outside interactive elements: ${tally.textNonInt} (underlined ${tally.textNonIntUnderlined}); by class ${JSON.stringify(Object.entries(tally.samples).sort((a, b) => b[1] - a[1]).slice(0, 20))}`, ...rows];
   console.log(out.join('\n')); fs.writeFileSync(path.join(__dirname, 'accent.txt'), out.join('\n') + '\n'); await b.close();
 })();
