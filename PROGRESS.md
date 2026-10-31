@@ -3,7 +3,7 @@
 Governing prompt: `BRIEF-V5.md` (repo root). Memory files: this file, `SECTIONS.md`, `TRACEABILITY.md`, `siding/AUDIT-V3.md`, and the usage log at the end of `bank-index/BANK-MAP.md`.
 
 ## State
-- **Phase:** REBRAND DIRECTIVE (2026-10-31) done: brand sheet, two QA rounds and the cursor test at the end of this file. Earlier: §12 gate passed on the delivered file (evidence below)
+- **Phase:** STEEL COLOUR CHANGE (2026-10-31) done (owner decision, supersedes the teal accent); before it, REBRAND DIRECTIVE done: brand sheet, two QA rounds and the cursor test at the end of this file. Earlier: §12 gate passed on the delivered file (evidence below)
 - **Branch:** `claude/intelligent-keller-0n8afi`
 - **Baseline commit:** e20237b (v4 delivery)
 
@@ -513,6 +513,8 @@ Where each homepage section's shortlist now comes from (B = BANK-MAP line, A1 = 
 
 # REBRAND DIRECTIVE (2026-10-31): brand sheet, QA and cursor
 
+> **Superseded colour values.** The teal accent below was replaced by the steel colour world by owner decision; see "STEEL COLOUR CHANGE" at the end of this file. Logo geometry, the role-token system, the hierarchy, the QA method and the cursor fix below all still stand.
+
 **Scope.** Only the brand layer is rebuilt: logo, colour system, and the text hierarchy on top of the colours. Structure, layout, versions, switchers, backups, interactives and facts are unchanged.
 
 **Owner's verdict, taken as the requirement.** The colours hurt his eyes, the colour choices were bad everywhere, and the logo was bad. The old palette and mark are scrap. Nothing below was chosen by taste: each choice is derived from a skill rule and then measured.
@@ -993,4 +995,238 @@ The facts grep still passes exactly as before.
   - 0 em dashes;
   - 0 stray en dashes.
 - The name, Austin TX address, since 2009, GAF Master Elite and James Hardie Elite Preferred are unchanged.
+
+
+
+# STEEL COLOUR CHANGE (owner decision, 2026-10-31): supersedes the rebrand's teal
+**Why.** Both finished rebrands chose teal: this site's and Rembrandt's. The owner ruled the clash an issue.
+- Rembrandt moves to the owner's Figma green.
+- This site moves to a steel colour world.
+
+**Standing rule.** Branding colours are researched before they are chosen.
+
+**What changes.** Only the colour values change:
+- The accent ramp becomes steel blue.
+- The neutral ramp is re-tinted to the same hue.
+- The logo files are re-coloured.
+
+**What does not change:**
+- Every semantic role token keeps its name and job.
+- Components, structure, versions, switchers, the hidden backups (60/60 templates and the 4 record pages byte-identical to a11f3b1), facts and the cursor fix.
+
+The rebrand sections above still describe the system's structure, roles and QA method. Where they quote teal hexes or teal ratios, this section replaces them.
+
+## Research and hue numbers
+The brief's research: blue-grey and slate are the trust colours of the building trades. More concretely, siding and steel are sold in these colours.
+
+**Measured from the firm's own data:**
+
+| Colour | Source | Hex | OKLCH L | C | Hue |
+|---|---|---|---|---|---|
+| Boothbay Blue | James Hardie ColorPlus (this site's paint data) | #778184 | 0.596 | 0.013 | 217.6 |
+| Evening Blue | James Hardie ColorPlus | #5F696D | 0.514 | 0.014 | 223.7 |
+| Deep Ocean | James Hardie ColorPlus | #49545C | 0.439 | 0.019 | 239.5 |
+| Night Gray | James Hardie ColorPlus | #6A6D6F | 0.533 | 0.005 | 236.6 |
+| Iron Gray, Gray Slate | James Hardie ColorPlus | #575B59, #898A87 | 0.47, 0.63 | 0.005–0.006 | near-neutral; hue not meaningful |
+| CSS `steelblue` / `slategray` / `lightsteelblue` | web named colours | #4682B4 / #708090 / #B0C4DE | — | 0.099 / 0.031 / 0.043 | 245.7 / 248.3 / 255.0 |
+| CSS `darkslategray` | web named colour (rejected) | #2F4F4F | — | 0.038 | 195.8: a teal, which shows why the steel hue must stay above about 235 |
+| Old teal accent (superseded) | rebrand | #00736A | 0.500 | 0.088 | 185.4 |
+
+The steel-panel names in the brief (Burnished Slate, Charcoal Gray, Ash Gray, Harbor Blue) have no published hex in this site's data, so they are cited, not measured.
+
+**Chosen hue: OKLCH 248.**
+- It sits between Deep Ocean (239.5) and slate (248.3), next to CSS steelblue (245.7).
+- It is the material's own colour language: the ColorPlus blue-greys hold 218–240 at almost no chroma.
+- The steel accent carries the same hue with enough chroma (0.085) to act.
+
+**Distances from other colours:**
+
+| From | Hue | Distance |
+|---|---|---|
+| Old teal | 185 | 63° |
+| Greens | 120–165, wherever the owner's Figma green lands (its exact value is not in this repo) | at least 83° |
+| Danger red | 27 | 139° |
+
+## Ramps (⟦S0071⟧ ramps not colours, hue held; ⟦S1418⟧ primary/neutral/semantic layers)
+Both ramps are generated in OKLCH by `col.py` on the same role-defined lightness targets as before (.990 … .275), and gamut-fitted.
+
+| Step | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| steel (H 248) | #FAFCFE | #ECF3FA | #DEE9F5 | #D0E0F0 | #C2D6EB | #B2CBE4 | #9CBCDB | #6790B8 | #396791 | #2E5A82 | #295073 | #16293B |
+| steel chroma | .003 | .012 | .020 | .028 | .036 | .044 | .056 | .076 | .084 | .082 | .074 | .042 |
+| neutral (steel-tinted, C .002–.011) | #FBFCFD | #F0F2F4 | #E5E8EB | #DBDEE2 | #D0D4D8 | #C4C8CD | #B4B9BE | #888D92 | #5E6469 | #52575D | #484E53 | #24282C |
+
+- **Measured hue on every steel step: 247.6–250.4°.** The 8-bit rounding of the palest steps moves them less than 3°.
+- **`--neutral-13` = #131619.** It is the label ink on mid-value published paints: Boothbay Blue labels read 4.55:1.
+- **Danger is unchanged:** #FFEFED / #DC8C83 / #B63B35 / #9E2D28.
+- **Semantic tokens point at the same steps as before.** Components still read only the role tokens.
+- **`qa/v9/tokens.py`:** 0 colour literals in live CSS and JS, 0 primitives outside `:root`.
+
+**Logo.** `mark-accent`, `logo`, `favicon` are steel-9 #396791; `mark-black`/`logo-black` are #000000; `mark-white`/`logo-white` are white. The proof was rendered at 16, 24, 32 and 64 px and at header size, on white, on steel-9 (white mark, 5.96:1) and on steel-12, and in grayscale. All read. `qa/v9/logo.js` passes on all 9 packed pages.
+
+## Colour hierarchy (roles unchanged; the colour is now steel)
+- **Steel carries:**
+  - the one filled primary action per view (steel-9 behind white, 5.96:1);
+  - the interactive states (selected tint steel-4 with a steel-11 ring);
+  - the picked chart mark;
+  - index numerals and the key figure;
+  - the logo mark.
+- **Neutrals (steel and concrete greys) do the resting work:** grounds, all text and headings, borders and control edges, secondary buttons, chrome, the focus ring, illustrations, and chart marks.
+- **Window glass in drawings** keeps the lightest accent tint, now a steel-blue glass.
+- **Light-dominant:**
+  - Grounds are neutral-1/2 and the deepest surface is the neutral-3 panel.
+  - No deep steel section is used; the directive allows a couple per page, and none was needed.
+  - If one is added later, it takes steel-11/12 (#295073 / #16293B, C 0.074 / 0.042 at hue 248), which read as blue-grey steel, never black.
+
+## Measured contrast on steel (as rendered; `qa/v9/brand.js` at 1440 and 375 px, every visible version of all 9 pages)
+
+Every text element is paired with the nearest painted background behind it, as rendered (⟦S0071⟧, ⟦S0248⟧).
+- 5,141 text elements measured at 1440 px and 5,053 at 375 px.
+- 75 distinct pairs; **0 failing**; lowest 4.55:1 (a published paint swatch label).
+- "paint/photo plate" means a published paint colour or a photo-tag plate.
+
+| Foreground | Background | Kind | Measured | Needs | Elements at 1440 / 375 |
+|---|---|---|---|---|---|
+| neutral-13 `#131619` | paint/photo plate `#778184` | body text | **4.55:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#78736E` | body text | **4.69:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#7B7064` | body text | **4.83:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#706F5E` | body text | **5.09:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#6A6D6F` | body text | **5.21:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#898A87` | body text | **5.23:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#908A83` | body text | **5.32:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#5F696D` | large text | **5.63:1** | 3:1 | 1 / 0 |
+| white `#FFFFFF` | paint/photo plate `#5F696D` | body text | **5.63:1** | 4.5:1 | 3 / 4 |
+| neutral-13 `#131619` | paint/photo plate `#A28F7D` | body text | **5.85:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | steel-9 `#396791` | body text | **5.96:1** | 4.5:1 | 83 / 83 |
+| steel-9 `#396791` | white `#FFFFFF` | body text | **5.96:1** | 4.5:1 | 3 / 2 |
+| neutral-11 `#484E53` | steel-4 `#D0E0F0` | body text | **6.27:1** | 4.5:1 | 1 / 1 |
+| neutral-11 `#484E53` | paint/photo plate `#E0E2E4` | body text | **6.48:1** | 4.5:1 | 6 / 0 |
+| white `#FFFFFF` | paint/photo plate `#5F5A55` | body text | **6.82:1** | 4.5:1 | 2 / 2 |
+| neutral-11 `#484E53` | steel-3 `#DEE9F5` | body text | **6.86:1** | 4.5:1 | 8 / 8 |
+| steel-11 `#295073` | neutral-3 `#E5E8EB` | body text | **6.86:1** | 4.5:1 | 1 / 1 |
+| steel-11 `#295073` | neutral-3 `#E5E8EB` | large text | **6.86:1** | 3:1 | 2 / 2 |
+| neutral-11 `#484E53` | neutral-3 `#E5E8EB` | body text | **6.86:1** | 4.5:1 | 58 / 65 |
+| steel-11 `#295073` | steel-3 `#DEE9F5` | large text | **6.86:1** | 3:1 | 6 / 6 |
+| white `#FFFFFF` | paint/photo plate `#575B59` | body text | **6.89:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#714D47` | body text | **7.36:1** | 4.5:1 | 2 / 2 |
+| neutral-11 `#484E53` | neutral-2 `#F0F2F4` | body text | **7.51:1** | 4.5:1 | 769 / 729 |
+| neutral-11 `#484E53` | neutral-2 `#F0F2F4` | large text | **7.51:1** | 3:1 | 1 / 1 |
+| steel-11 `#295073` | neutral-2 `#F0F2F4` | body text | **7.52:1** | 4.5:1 | 152 / 152 |
+| steel-11 `#295073` | neutral-2 `#F0F2F4` | large text | **7.52:1** | 3:1 | 80 / 80 |
+| neutral-11 `#484E53` | paint/photo plate `#F2F2F2` | body text | **7.54:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#49545C` | body text | **7.76:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#54504A` | body text | **8.01:1** | 4.5:1 | 2 / 2 |
+| neutral-11 `#484E53` | neutral-1 `#FBFCFD` | body text | **8.21:1** | 4.5:1 | 775 / 738 |
+| steel-11 `#295073` | neutral-1 `#FBFCFD` | large text | **8.21:1** | 3:1 | 39 / 39 |
+| steel-11 `#295073` | neutral-1 `#FBFCFD` | body text | **8.21:1** | 4.5:1 | 128 / 128 |
+| neutral-11 `#484E53` | neutral-1 `#FBFCFD` | large text | **8.21:1** | 3:1 | 11 / 0 |
+| neutral-13 `#131619` | paint/photo plate `#B2AEA9` | body text | **8.23:1** | 4.5:1 | 2 / 2 |
+| neutral-11 `#484E53` | white `#FFFFFF` | body text | **8.43:1** | 4.5:1 | 163 / 162 |
+| steel-11 `#295073` | white `#FFFFFF` | body text | **8.44:1** | 4.5:1 | 35 / 35 |
+| steel-11 `#295073` | white `#FFFFFF` | large text | **8.44:1** | 3:1 | 64 / 64 |
+| white `#FFFFFF` | paint/photo plate `#2A4F43` | body text | **9.14:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#B6BAB5` | body text | **9.23:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#C6BEB0` | body text | **9.85:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#434341` | body text | **9.92:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#D1C7B8` | body text | **10.87:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#CCC9C0` | body text | **10.97:1** | 4.5:1 | 2 / 2 |
+| neutral-12 `#24282C` | neutral-4 `#DBDEE2` | large text | **11.00:1** | 3:1 | 1 / 1 |
+| neutral-12 `#24282C` | neutral-4 `#DBDEE2` | body text | **11.00:1** | 4.5:1 | 1 / 1 |
+| steel-12 `#16293B` | steel-4 `#D0E0F0` | body text | **11.03:1** | 4.5:1 | 59 / 59 |
+| neutral-13 `#131619` | paint/photo plate `#D5C9B2` | body text | **11.09:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#D1CBC1` | body text | **11.26:1** | 4.5:1 | 2 / 2 |
+| white `#FFFFFF` | paint/photo plate `#283849` | large text | **11.99:1** | 3:1 | 1 / 0 |
+| white `#FFFFFF` | paint/photo plate `#283849` | body text | **11.99:1** | 4.5:1 | 3 / 4 |
+| neutral-12 `#24282C` | steel-3 `#DEE9F5` | large text | **12.07:1** | 3:1 | 47 / 32 |
+| neutral-12 `#24282C` | steel-3 `#DEE9F5` | body text | **12.07:1** | 4.5:1 | 109 / 127 |
+| neutral-12 `#24282C` | neutral-3 `#E5E8EB` | large text | **12.07:1** | 3:1 | 25 / 25 |
+| neutral-12 `#24282C` | neutral-3 `#E5E8EB` | body text | **12.07:1** | 4.5:1 | 43 / 51 |
+| steel-12 `#16293B` | steel-3 `#DEE9F5` | body text | **12.08:1** | 4.5:1 | 10 / 10 |
+| steel-12 `#16293B` | steel-3 `#DEE9F5` | large text | **12.08:1** | 3:1 | 23 / 23 |
+| neutral-12 `#24282C` | neutral-2 `#F0F2F4` | body text | **13.23:1** | 4.5:1 | 577 / 643 |
+| neutral-12 `#24282C` | neutral-2 `#F0F2F4` | large text | **13.23:1** | 3:1 | 201 / 135 |
+| white `#FFFFFF` | paint/photo plate `#2F2F30` | body text | **13.37:1** | 4.5:1 | 2 / 2 |
+| neutral-12 `#24282C` | paint/photo plate `#F5F4F4` | body text | **13.53:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#E0E0D8` | body text | **13.68:1** | 4.5:1 | 2 / 2 |
+| neutral-12 `#24282C` | paint/photo plate `#F2F6FB` | body text | **13.69:1** | 4.5:1 | 4 / 4 |
+| neutral-12 `#24282C` | paint/photo plate `#F8FAFD` | large text | **14.20:1** | 3:1 | 8 / 0 |
+| neutral-12 `#24282C` | paint/photo plate `#F8FAFD` | body text | **14.20:1** | 4.5:1 | 8 / 16 |
+| neutral-12 `#24282C` | neutral-1 `#FBFCFD` | body text | **14.45:1** | 4.5:1 | 650 / 654 |
+| neutral-12 `#24282C` | neutral-1 `#FBFCFD` | large text | **14.45:1** | 3:1 | 201 / 196 |
+| neutral-12 `#24282C` | paint/photo plate `#FDFDFC` | body text | **14.53:1** | 4.5:1 | 2 / 2 |
+| neutral-12 `#24282C` | paint/photo plate `#FDFDFC` | large text | **14.53:1** | 3:1 | 2 / 2 |
+| neutral-12 `#24282C` | paint/photo plate `#FEFDFD` | large text | **14.65:1** | 3:1 | 4 / 4 |
+| neutral-12 `#24282C` | paint/photo plate `#FEFDFD` | body text | **14.65:1** | 4.5:1 | 6 / 6 |
+| neutral-12 `#24282C` | white `#FFFFFF` | large text | **14.84:1** | 3:1 | 102 / 29 |
+| neutral-12 `#24282C` | white `#FFFFFF` | body text | **14.84:1** | 4.5:1 | 599 / 663 |
+| steel-12 `#16293B` | white `#FFFFFF` | body text | **14.85:1** | 4.5:1 | 10 / 10 |
+| neutral-13 `#131619` | paint/photo plate `#EDEAE0` | body text | **15.09:1** | 4.5:1 | 2 / 2 |
+| neutral-13 `#131619` | paint/photo plate `#EDECE6` | body text | **15.34:1** | 4.5:1 | 2 / 2 |
+
+**UI components and indicators** (3:1 against adjacent surfaces):
+
+| Pair | Measured | Needs |
+|---|---|---|
+| Filled primary steel-9 against neutral-1 / neutral-2 / white | 5.80 / 5.31 / 5.96:1 | 3:1 |
+| Primary hover steel-10 with white label | 7.24:1 | 4.5:1 |
+| Mid-slate steel-8 with white (not used for text anywhere: 0 rendered occurrences) | 3.36:1 | — |
+| Control edge neutral-9 on white / neutral-3 panel | 6.00 / 4.87:1 | 3:1 |
+| Secondary button edge neutral-8 on white | 3.35:1 | 3:1 |
+| Selected ring steel-11 against white / its tint steel-4 / an unselected neutral-7 edge | 8.44 / 6.27 / 4.27:1 | 3:1 |
+| Focus ring neutral-12 (white halo) on neutral-1 / neutral-3 / steel-3 band | 14.45 / 12.07 / 12.07:1 | 3:1 |
+| Logo mark steel-9 on white; white mark on steel-9 | 5.96 / 5.96:1 | 3:1 |
+
+**Audits behind this table:**
+- `qa/v9/focus.js`: 1,257 distinct focus indicators, 0 under 3:1.
+- `qa/v9/states.js`: 75/75 selected states with a non-hue cue of at least 3:1.
+
+
+## critique-color challenge round on steel (⟦S1497⟧)
+| Question | Measured | Verdict and fix |
+|---|---|---|
+| Does steel collapse into "everything grey"? | First ramp: the selected tint steel-4 sat ΔE 0.015 from neutral-4, under the visible threshold, so selection read as grey | **Fixed (MEDIUM).** Light-step chroma raised: steel-4 is now C 0.028, ΔE 0.022 from its grey neighbour; step 9 rose 0.080 → 0.085. The primary is ΔE 0.074 from the equally light neutral-9. |
+| Does it read premium, or cold and dull anywhere? | At C 0.026 the booking band tint (steel-3) read as icy powder blue, the "cold" failure. The hero is grey-led with the steel button as the only colour, which reads calm and expensive, not dull | **Fixed (MEDIUM).** Band tint held at C 0.020 (#DEE9F5), which reads as steel sheet. Chosen by a side-by-side render of C .006–.034 at steps 2–4. Headings are neutral-12 #24282C (a near-black with a steel cast), not navy, so nothing reads "corporate SaaS". |
+| Does it survive grayscale? | Primary fill vs ground 5.80:1 in gray. Selected ring vs unselected edge 4.27:1 and vs its tint 6.27:1. Focus 12.07:1. Links are underlined (steel text vs body text is only 1.76:1 in gray, so the underline carries it). States 75/75 with a non-hue cue ≥ 3:1 (`qa/v9/states.js`) | **Pass** |
+| Colour-vision deficiency (Machado 2009) | Primary vs ground ≥ 5.38:1 and the selected ring ≥ 4.02:1 under protan, deutan and tritan. Steel vs danger falls to 1.01–1.35:1 | **Minor, accepted as before:** danger only ever appears with its error words and never next to a steel fill |
+| Drift toward Rembrandt's green? | Steel hue 247.6–250.4 on every step. Rendered pixels within 20° of hue 145: mean 0.134% with photographs (grass; max 1.83%) and 0.003% of UI paint alone | **Pass:** at least 83° from any green |
+| Drift back toward teal? | Rendered pixels within 20° of hue 185: mean 0.027% with photographs (max 1.43%) and 0.010% of UI paint alone. darkslategray (195.8) was rejected as a reference for exactly this reason | **Pass** |
+| Saturation discipline: the views-over-accent audit | Screenshots of all 290 views, steel = OKLCH hue within 20° of 248 at C > 0.03 (`qa/v9/teal.js` + `teal.py`).
+**UI paint (photographs masked):**
+- mean 0.51% solid steel and 0.16% steel tint per view;
+- 3 views over 5%. Two are the booking band's tint (homepage Book 4 and Contact Office 1; one tint band per page). The third, Services 1, is the firm's navy-siding photo drawn as an SVG image the mask cannot hide.
+- The other high readings are content too: the published paints In the Navy and Evening Blue, and the job photo inside the hero's window letters.
+
+**With photographs:** 28 views over 5%. Every one carries a job photo whose sky or blue-grey siding shares steel's hue. | **Pass on UI discipline.** The cost, stated:
+- Steel shares its hue with the firm's photographs: 35% of their chroma sits at 240–269° (teal had 0% overlap).
+- So the filled primary is isolated by being the only filled colour shape in the interface, not by its hue (⟦S1435⟧).
+- This is accepted as the owner's decision, and mitigated by keeping steel off every field that is not an action, a state or the one figure. |
+| Mid-slate fills with white text | White on steel-8 #6790B8 = 3.36:1, so steel-8 never carries white text (its role is the hovered border). White on steel-9 = 5.96:1, on steel-10 (hover) = 7.24:1. The rendered audit found 0 white text on steel-8 | **Pass** |
+| Steel text on light steel grounds | steel-11 on steel-3 6.86:1, on steel-4 6.27:1, on neutral-2 7.52:1, on neutral-1 8.21:1, on white 8.44:1; steel-12 on steel-4 11.03:1 | **Pass** |
+
+**Result.** No HIGH colour finding is open. ⟦S0071⟧ reporting verdict: **Approve**.
+
+## Regression on the steel build
+| Gate | Result |
+|---|---|
+| Rendered text contrast (`qa/v9/brand.js`) | 1440 px: 5,141 elements, 0 failing. 375 px: 5,053 elements, 0 failing. 0 views with more than one filled primary. 0 control edges under 3:1 |
+| Focus (`qa/v9/focus.js`) | 1,257 indicators, 0 under 3:1 |
+| Selected states in grayscale (`qa/v9/states.js`) | 75/75 |
+| Tokens (`qa/v9/tokens.py`) | 0 colour literals in live CSS or JS; 0 primitives outside `:root` |
+| Logo (`qa/v9/logo.js`, packed) | All 9 pages: steel mark in the header and footer, steel favicon, name "Austin Pro" |
+| Backups | 60/60 templates and the 4 record pages byte-identical to a11f3b1 |
+| Facts (`qa/v8/facts.py`, all 9 packed pages) | Identical to before. Homepage: phone ×116, address ×4, hours ×15, 886 wording ×8, "474" ×31. 0 other phones, ratings or review counts. 0 em dashes |
+| Cursor fix (code untouched): companion on every page, packed | 756 elements clicked, 0 failures, 0 console errors |
+| Cursor: touch and reduced motion | 18/18 pass; native cursor never hidden |
+| Homepage regressions | `slots.js` 140/140; `light.js` 0 dark backgrounds; `nv.js` 0 errors |
+| Inner pages (`pages.js`, packed) | 227/227 at 1440 px and at 375 px, 0 dark |
+| Sizes | Homepage 4,146,354 B; all files under 4,221,484 B |
+
+**One run note.** In a first companion pass run alongside the CPU-heavy pixel analysis, one element failed: after a version switch on Projects, the release tween read scale 0.9983 at the 320 ms check. That is the 160 ms return still finishing under load, not a stuck state. Re-run on an idle CPU, Projects passed twice (58/58), and the full pass was 756/0. The cursor code was not changed.
+
+## Commits (steel)
+| Commit | Stage |
+|---|---|
+| 85374e2 | Stage 1: steel ramps at hue 248; primitives renamed `--steel-N`; every role token repointed; logo files re-coloured; audits read the live accent tokens |
+| 7b355b3 | Stage 2: challenge fixes (selected tint was grey-equivalent; band read powder-blue); light-step chroma retuned; logo at steel-9 #396791; drift windows and photo masking in the pixel audit |
+| (stage 3) | Stage 3: repacked standalone files, this brand-sheet section, gate evidence |
 

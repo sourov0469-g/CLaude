@@ -12,13 +12,14 @@ aspiration the record cannot back.
 - **Local**: Austin streets, Central Texas light, the firm's own job photos.
 
 ## Colour feel
-- Light-dominant. Page grounds are the tinted neutral ramp (neutral-1/2), cards are white. Most of every page rests in
+- Light-dominant. Page grounds are the steel-and-concrete neutral ramp (neutral-1/2, faintly blue-tinted, never warm), cards are white. Most of every page rests in
   neutrals ⟦S0071⟧.
-- One accent, a deep teal (OKLCH hue 185): the colour of weathered copper flashing and of a painted front door. It
+- One accent, steel blue (OKLCH hue 248; owner decision 2026-10-31, replacing teal): the colour the material is sold
+  in, between James Hardie Deep Ocean and slate, held low in chroma so it reads industrial and steady. It
   appears where the visitor acts (the one filled button per view), where something is selected or focused, and in a
   few key figures. Never as a field behind body text, never on every card ⟦S1435⟧.
 - No black or near-black grounds. The deepest surface is the neutral panel (neutral-3); the deepest colour is
-  teal-12, used only for text on a teal tint.
+  steel-12, used only for text on a steel tint; a deep steel section, if ever used, reads blue-grey, never black.
 
 ## Imagery and illustration
 - The firm's own job photographs carry the colour of the page (blue sky, green yards, painted siding). The UI stays
@@ -31,7 +32,7 @@ aspiration the record cannot back.
   the A and a door ⟦S1422⟧. Accent on light, white on the accent, black or white where colour is not possible.
 
 ## Do
-- Let one teal action own each view; give everything else a neutral outline.
+- Let one steel action own each view; give everything else a neutral outline.
 - Show the measured thing: scale bars, exposures, counts with their source.
 
 ## Don't

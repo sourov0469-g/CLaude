@@ -1301,3 +1301,26 @@ Converted from dark to light:
 | Homepage regressions | `qa/v8/slots.js`, `light.js`, `clad.js`, `nv.js`, `recheck.js` | 140/140 slots; 0 dark backgrounds; clad 0 errors; nv 0 errors; 225/0 |
 | Inner pages | `qa/v8/pages.js`, packed, at 1440 and at 375 | 227/227 at each width, 0 dark |
 | Sizes | — | Homepage 4,146,327 B; largest inner page projects at 2,681,126 B; all under 4,221,484 B |
+
+
+## STEEL COLOUR CHANGE (2026-10-31): gate evidence
+The owner's decision supersedes the teal accent. The steel brand sheet, challenge round and contrast table are in PROGRESS.md under "STEEL COLOUR CHANGE".
+
+| Gate | Result |
+|---|---|
+| Accent ramp | Steel, OKLCH hue 248 (measured 247.6–250.4 on every step). Steel-9 #396791 with white label 5.96:1 |
+| Hue distances | 63° from the old teal (185); at least 83° from any green; 139° from danger |
+| Rendered text contrast, 1440 / 375 px | 5,141 / 5,053 elements, 0 failing, lowest 4.53:1 (a published paint label) |
+| Filled primaries | 0 views with more than one |
+| Control edges | 0 under 3:1 |
+| Focus indicators | 1,257, 0 under 3:1 |
+| Selected states with a non-hue cue (grayscale) | 75/75 |
+| UI steel per view (photos masked) | 0.51% solid + 0.16% tint; 3 views over 5% (2 booking tint bands, 1 unmasked photo) |
+| Drift | Old-teal window 0.010%, green window 0.003% of UI paint |
+| Tokens | 0 literals; 0 primitives outside `:root` |
+| Logo | Pass on all 9 packed pages |
+| Backups | 60/60 + 4 record pages byte-identical |
+| Facts | Identical to the previous gate on all 9 pages |
+| Cursor | Companion 756/0 on packed files; touch and reduced motion 18/18 |
+| Regressions | slots 140/0, light 0, pages 227/227 at both widths, nv 0 errors |
+| Sizes | All under the cap; homepage 4,146,354 B |
