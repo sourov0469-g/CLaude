@@ -967,5 +967,5 @@ teal-500 measures 3.22, so teal-500 never carries text. **FAIL rows: 0** (27 ren
 - abd9a66: stage 2. Stable single-tween cursor press; token-only cursor colours; contrast table and cursor click test;
   pressed chip and pill labels fixed.
 - 8396f55: stage 3. QA round 1-2 fixes: one meaning for the accent, honest type levels, one filled call per view.
-- (this commit): stage 4. Final gates, the R6 gate updates (finalgate deep-accent cap and ring-aware button check, cursor
+- 45be6f8: stage 4. Final gates, the R6 gate updates (finalgate deep-accent cap and ring-aware button check, cursor
   test timing), and this brand sheet.
