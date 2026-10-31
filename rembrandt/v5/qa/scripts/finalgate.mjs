@@ -17,7 +17,12 @@ for (const [file, ids, n] of PAGES) {
       return ids.map(id => { const s = document.getElementById(id), root = s.querySelector('.stage').firstElementChild, R = s.getBoundingClientRect();
         const g = ground(root), big = [...root.querySelectorAll('*')].filter(e => { const q = e.getBoundingClientRect(); return q.width * q.height > 0.3 * R.width * R.height && getComputedStyle(e).backgroundImage === 'none'; })
           .map(e => [e.className && e.className.baseVal === undefined ? e.className : '', rgb(getComputedStyle(e).backgroundColor)]).filter(([, a]) => (a.length === 3 || a[3] > 0.5) && lum(a.slice(0, 3)) < 0.05);
-        return { id, v: s.dataset.v, kids: root.childElementCount, g, L: +lum(g).toFixed(3), hue: Math.round(hue(g)), big: big.map(x => x[0]).slice(0, 2) }; });
+        // R7: a large deep-GREEN panel (HSL hue 150-200, saturation >= 0.4: green-900 is hue 160 / 0.62, where a near-black
+        // neutral is ~0.15) is a declared deep band, listed and counted toward the cap; any other dark panel fails
+        const sat = ([r, g, b]) => { const mx = Math.max(r, g, b) / 255, mn = Math.min(r, g, b) / 255, l = (mx + mn) / 2; return mx === mn ? 0 : (mx - mn) / (1 - Math.abs(2 * l - 1)); };
+        const isDeepGreen = a => { const h = hue(a.slice(0, 3)); return h >= 150 && h <= 200 && sat(a.slice(0, 3)) >= 0.4; };
+        const deepBig = big.filter(([, a]) => isDeepGreen(a)), darkBig = big.filter(([, a]) => !isDeepGreen(a));
+        return { id, v: s.dataset.v, kids: root.childElementCount, g, L: +lum(g).toFixed(3), hue: Math.round(hue(g)), gsat: +sat(g).toFixed(2), big: darkBig.map(x => x[0]).slice(0, 2), deepBig: deepBig.map(x => x[0]).slice(0, 2) }; });
     }, ids);
     const H = await p.evaluate(() => document.documentElement.scrollHeight); for (let y = 0; y < H; y += 600) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(120); } await p.waitForTimeout(600);
     // R6: a secondary call is transparent by design (outline ring), so a button fails only with no fill, no ring and no border
@@ -29,7 +34,8 @@ for (const [file, ids, n] of PAGES) {
       if (x.v !== String(v) || !x.kids) { bad++; fail.push(`${file} ${x.id}${v}: v=${x.v} kids=${x.kids}`); }
       // R6/R7: the deep ground (R7 green-900 #0e3b2c, L 0.034, HSL hue 160) is listed and capped at two sections per page; anything else under
       // L 0.05, or a large near-black panel, fails
-      if (x.L < 0.12 && x.hue >= 150 && x.hue <= 200 && !x.big.length) { green.push(`${file.split('.')[0].replace('rembrandt-homepage', 'home')} ${x.id}${v} L=${x.L}`); deepN++; }
+      if (x.deepBig.length) { green.push(`${file.split('.')[0].replace('rembrandt-homepage', 'home')} ${x.id}${v} panel ${x.deepBig[0].split(' ').pop()}`); deepN++; }
+      if (x.L < 0.12 && x.hue >= 150 && x.hue <= 200 && x.gsat >= 0.4 && !x.big.length) { green.push(`${file.split('.')[0].replace('rembrandt-homepage', 'home')} ${x.id}${v} L=${x.L} sat=${x.gsat}`); deepN++; }
       else if (x.L < 0.05 || x.big.length) { dark.push(`${x.id}${v} L=${x.L} ${x.big.join(',')}`); bad++; }
     }
     if (deepN > 2) { bad++; fail.push(`${file} v${v}: ${deepN} deep-accent sections (cap 2)`); }

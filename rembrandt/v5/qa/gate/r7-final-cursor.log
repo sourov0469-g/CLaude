@@ -1,0 +1,30 @@
+# R7 cursor click test, 4 parallel workers on the R7 build; delay = pointerup->click
+rembrandt-homepage.html v1: cursor live true, clicked 102, failures 0
+rembrandt-homepage.html v2: cursor live true, clicked 102, failures 0
+rembrandt-homepage.html v3: cursor live true, clicked 102, failures 0
+clicks tested 306; worst click delay 1.6ms; failures 0
+rembrandt-homepage.html v4: cursor live true, clicked 102, failures 0
+rembrandt-homepage.html v5: cursor live true, clicked 102, failures 0
+rembrandt-homepage.html v6: cursor live true, clicked 102, failures 0
+clicks tested 306; worst click delay 1.8ms; failures 0
+rembrandt-homepage.html v7: cursor live true, clicked 102, failures 0
+rembrandt-homepage.html v8: cursor live true, clicked 102, failures 0
+contact.html v1: cursor live true, clicked 23, failures 0
+contact.html v2: cursor live true, clicked 23, failures 0
+contact.html v3: cursor live true, clicked 23, failures 0
+contact.html v4: cursor live true, clicked 23, failures 0
+contact.html v5: cursor live true, clicked 23, failures 0
+clicks tested 319; worst click delay 2.2ms; failures 0
+services.html v1: cursor live true, clicked 28, failures 0
+services.html v2: cursor live true, clicked 28, failures 0
+services.html v3: cursor live true, clicked 28, failures 0
+services.html v4: cursor live true, clicked 28, failures 0
+services.html v5: cursor live true, clicked 28, failures 0
+about.html v1: cursor live true, clicked 26, failures 0
+about.html v2: cursor live true, clicked 26, failures 0
+about.html v3: cursor live true, clicked 26, failures 0
+about.html v4: cursor live true, clicked 26, failures 0
+about.html v5: cursor live true, clicked 26, failures 0
+touch: custom cursor off true, native cursor true, companion hidden true -> ok
+reduced motion: custom cursor off true, native cursor true, companion hidden true -> ok
+clicks tested 270; worst click delay 1.8ms; failures 0

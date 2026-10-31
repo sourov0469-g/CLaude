@@ -37,7 +37,7 @@
 .st2-t thead th.is-now{color:var(--color-text)}
 .st2-t tbody th{padding-right:12px;text-align:left;font-size:var(--t-body);font-weight:700;line-height:1.2;white-space:nowrap}
 .st2-t td{height:40px;border-radius:6px;background:color-mix(in oklab,var(--color-shadow) 8%,transparent)}
-.st2-r--hail td.on{background:var(--color-illustration-accent)}
+.st2-r--hail td.on{background:var(--color-illustration-accent);box-shadow:inset 0 0 0 2px var(--color-illustration-accent-deep)} /* R7: grayscale-safe edge */
 .st2-r--freeze td.on{background:var(--color-bg-sunken)}
 .st2-r--ice td.on{background:repeating-linear-gradient(135deg,var(--color-bg-surface) 0 6px,var(--color-accent-subtle-hover) 6px 12px)}
 .st2-t td.is-now,.st2-t thead th.is-now{box-shadow:inset 0 0 0 2px var(--color-bg-surface)}
