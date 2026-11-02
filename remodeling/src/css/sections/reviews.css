@@ -1,272 +1,37 @@
-/* reviews: aggregate-led only (FULL §3). v1 tally ledger / v2 star constellation / v3 calibration dial */
-.reviews__lead { color: var(--color-text-secondary); max-width: 40ch; }
-.reviews__lead strong { color: var(--color-text); font-weight: 600; }
+/* FINALIZE · Home 8 · Reviews: the stars come together (V2) beside the tally ledger (V1). One version. */
+.rv__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
+.rv__head .eyebrow { margin: 0 0 var(--s3); }
+.rv__head .t-head, .rv__lead { margin: 0; }
+.rv__lead { max-width: 46ch; color: var(--color-text-secondary); }
 
-/* ---------- v1 · The tally ledger [KBF Ledger, F12 checkable proof] ---------- */
-.reviews1__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.reviews1__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
-.reviews1__avg { margin: 0; display: flex; align-items: flex-end; gap: 14px; }
-.reviews1__n { font: 400 clamp(5rem, 3rem + 6vw, 9rem)/.8 var(--f-display); color: var(--ink); }
-.reviews1__of { font: 500 .9375rem/1.35 var(--f-text); color: var(--muted); padding-bottom: .4em; }
-.reviews1__btn { justify-self: start; }
-.reviews1__book {
-  grid-column: 6 / -1; margin: 0; position: relative;
-  background: #f4efe2; color: #1b2629; padding: clamp(18px, 2.6vw, 34px) clamp(14px, 2.6vw, 34px) 18px clamp(44px, 5vw, 70px);
-  background-image: linear-gradient(90deg, transparent calc(clamp(44px, 5vw, 70px) - 14px), rgba(200, 64, 46, .55) calc(clamp(44px, 5vw, 70px) - 14px), rgba(200, 64, 46, .55) calc(clamp(44px, 5vw, 70px) - 12px), transparent calc(clamp(44px, 5vw, 70px) - 12px)),
-    repeating-linear-gradient(180deg, transparent 0 31px, rgba(43, 106, 150, .22) 31px 32px);
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7);
+.rv__stage { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s7); align-items: center; margin-top: var(--s8); }
+.rv__sky { padding-block: var(--s5) 0; }
+.rv__sky { margin: 0; display: grid; gap: var(--s5); }
+.rv__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rv__svg .ms { fill: var(--clay-500, #C5735C); }
+.rv__svg .ms.is-in { fill: var(--color-accent-solid); }
+.rv__svg .big { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
+.rv__svg .gap { fill: none; stroke: var(--color-border-strong); stroke-width: 1.25; stroke-dasharray: 3 4; }
+.rv__avg { display: flex; align-items: baseline; gap: var(--s4); padding-top: var(--s4); border-top: 2px solid var(--color-text); }
+.rv__n { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-text); }
+.rv__of { font: 400 1rem/1.4 var(--f-text); color: var(--color-text-secondary); max-width: 28ch; }
+
+/* the ledger: a ruled page; gates of five */
+.rv__book { margin: 0; padding: var(--s5) var(--s5) var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); }
+.rv__tally { display: block; width: 100%; height: auto; }
+.rv__tally .st { fill: none; stroke: var(--color-text); stroke-width: 2.6; stroke-linecap: round; }
+.rv__tally .st--d { stroke: var(--color-accent-solid); }
+.rv__tally .gate rect { fill: transparent; stroke: none; rx: 4; transition: fill 150ms var(--ez-out); }
+.rv__tally .gate { outline: none; cursor: default; }
+.rv__tally .gate.is-hot rect { fill: color-mix(in srgb, var(--clay-100, #F9E3DD) 80%, transparent); }
+.rv__tally .gate:focus-visible rect { stroke: var(--color-focus-ring); stroke-width: 2; }
+.rv__cap { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); justify-content: space-between; margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--color-border); font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.rv__tip { font-weight: 600; color: var(--color-text); }
+
+.rv__acts { display: flex; gap: var(--s3); margin-top: var(--s6); }
+
+@media (max-width: 900px) {
+  .rv__head { grid-template-columns: 1fr; }
+  .rv__stage { grid-template-columns: 1fr; margin-top: var(--s6); gap: var(--s6); }
+  .rv__book { padding: var(--s4) var(--s3) var(--s3); }
 }
-.reviews1__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.reviews1__svg .st { stroke: #1b2629; stroke-width: 2.4; stroke-linecap: round; fill: none; }
-.reviews1__svg .gate { cursor: crosshair; }
-.reviews1__svg .gate rect { fill: transparent; }
-.reviews1__svg .gate.is-hot .st { stroke: #c8402e; }
-.reviews1__svg .gate.is-hot rect { fill: rgba(242, 194, 48, .28); }
-.reviews1__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); color: #4a5a5e; }
-.reviews1__count { font: 400 1.75rem/1 var(--f-display); color: #1b2629; }
-.reviews1__tip { margin-left: auto; font-weight: 600; color: #c8402e; min-height: 1.3em; }
-@media (max-width: 1023px) { .reviews1__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); } .reviews1__book { grid-column: 1 / -1; } }
-
-/* ---------- v2 · The constellation [S0687 starfield / particle assembly, Q41 caps] ---------- */
-.reviews2__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
-.reviews2__head .t-head { grid-column: 1 / span 6; }
-.reviews2__head .reviews__lead { grid-column: 8 / span 5; }
-.reviews2__sky {
-  position: relative; height: clamp(360px, 48vw, 600px); overflow: hidden; border-radius: 4px;
-  background: radial-gradient(120% 90% at 50% 100%, var(--a-500) 0%, var(--white) 70%);
-  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .12);
-}
-.reviews2__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.reviews2__fallback { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font: 400 clamp(10rem, 30vw, 26rem)/1 var(--f-display); color: var(--a-700); opacity: 0; pointer-events: none; }
-.reviews2.is-static .reviews2__fallback { opacity: 1; }
-.reviews2__legend { position: absolute; left: 18px; bottom: 14px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: rgba(18, 18, 18, .75); }
-.reviews2__acts { margin-top: var(--s6); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
-@media (max-width: 1023px) { .reviews2__head .t-head, .reviews2__head .reviews__lead { grid-column: 1 / -1; } .reviews2__head .reviews__lead { margin-top: var(--s4); } }
-
-/* ---------- v3 · The calibration dial [S1380 dial, S0928 meter] ---------- */
-.reviews3__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.reviews3__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
-.reviews3__acts { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
-.reviews3__dial { grid-column: 7 / -1; position: relative; max-width: 560px; width: 100%; justify-self: center; touch-action: none; }
-.reviews3__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.reviews3__svg .bezel { fill: var(--grey); stroke: var(--ink); stroke-width: 3; }
-.reviews3__svg .face { fill: var(--white); stroke: var(--grey); stroke-width: 2; }
-.reviews3__svg .tk { stroke: var(--ink); stroke-width: 1.4; }
-.reviews3__svg .tk-m { stroke: var(--ink); stroke-width: 3; }
-.reviews3__svg .tl { font: 400 22px/1 var(--f-display); fill: var(--ink); }
-.reviews3__svg .band { fill: none; stroke-width: 12; }
-.reviews3__svg .cap-t { font: 600 9.5px/1 var(--f-text); letter-spacing: .18em; fill: var(--grey); }
-.reviews3__svg .needle { fill: var(--err); stroke: var(--ink); stroke-width: 1.5; }
-.reviews3__svg .hub { fill: var(--ink); }
-.reviews3__svg .hub2 { fill: var(--a-500); }
-.reviews3__svg .grab { fill: transparent; cursor: grab; }
-.reviews3__svg .grab:active { cursor: grabbing; }
-.reviews3__svg .mark { fill: var(--a-500); stroke: var(--ink); stroke-width: 1.2; }
-.reviews3__read { position: absolute; left: 0; right: 0; top: 66%; margin: 0; display: grid; justify-items: center; gap: 2px; pointer-events: none; color: var(--ink); }
-.reviews3__val { font: 400 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/1 var(--f-display); padding: 2px 12px; background: var(--white); color: var(--a-700); border-radius: 3px; min-width: 2.6ch; text-align: center; }
-.reviews3__unit { font: 600 .6875rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); }
-@media (max-width: 1023px) { .reviews3__side, .reviews3__dial { grid-column: 1 / -1; } .reviews3__dial { margin-top: var(--s7); } }
-
-
-/* ---------- slot 1 · AUDIT-01 winner, from v1 (.reviews1 -> .rt); F8: no ruled paper or red margin, strokes on the section ground ---------- */
-.rt__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.rt__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
-.rt__avg { margin: 0; display: flex; align-items: flex-end; gap: 14px; }
-.rt__n { font: 400 clamp(5rem, 3rem + 6vw, 9rem)/.8 var(--f-display); color: var(--ink); }
-.rt__of { font: 500 .9375rem/1.35 var(--f-text); color: var(--muted); padding-bottom: .4em; }
-.rt__btn { justify-self: start; }
-.rt__book { grid-column: 6 / -1; margin: 0; }
-.rt__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rt__svg .st { stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; fill: none; }
-.rt__svg .gate { cursor: default; outline: none; }
-.rt__svg .gate rect { fill: transparent; transition: fill 150ms ease-out; }
-.rt__svg .gate.is-hot .st { stroke: var(--a-500); }
-.rt__svg .gate.is-hot rect { fill: rgba(255, 95, 0, .16); }
-.rt__svg .gate:focus-visible rect { stroke: var(--a-500); stroke-width: 2; }
-.rt__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 500 .875rem/1.3 var(--f-text); color: var(--muted); }
-.rt__tip { margin-left: auto; font-weight: 600; color: var(--a-700); min-height: 1.3em; }
-@media (max-width: 1023px) { .rt__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); } .rt__book { grid-column: 1 / -1; } }
-
-
-/* ---------- slot 1 · Phase 5 improved version of b2 (.rt -> .rtx); improvements follow ---------- */
-.rtx__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.rtx__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); position: sticky; top: calc(var(--nav-h) + var(--s7)); }
-.rtx__avg { margin: 0; display: flex; align-items: flex-end; gap: 14px; }
-.rtx__n { font: 400 clamp(5rem, 3rem + 6vw, 9rem)/.8 var(--f-display); color: var(--color-text); }
-.rtx__of { font: 400 .9375rem/1.35 var(--f-text); color: var(--color-text-secondary); padding-bottom: .4em; }
-.rtx__btn { justify-self: start; }
-.rtx__book { grid-column: 6 / -1; margin: 0; }
-.rtx__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rtx__svg .st { stroke: var(--color-art-line); stroke-width: 2.4; stroke-linecap: round; fill: none; }
-.rtx__svg .gate { cursor: default; outline: none; }
-.rtx__svg .gate rect { fill: transparent; transition: fill 150ms ease-out; }
-.rtx__svg .gate.is-hot .st { stroke: var(--color-art-accent); }
-.rtx__svg .gate.is-hot rect { fill: var(--color-art-fill); }
-.rtx__svg .gate:focus-visible rect { stroke: var(--color-art-accent); stroke-width: 2; }
-.rtx__cap { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 12px; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.rtx__tip { margin-left: auto; font-weight: 600; color: var(--color-text-secondary); min-height: 1.3em; }
-@media (max-width: 1023px) {
-  .rtx__side { grid-column: 1 / -1; position: static; margin-bottom: var(--s7); }
-  .rtx__book { grid-column: 1 / -1; }
-}
-
-
-/* ---------- slot 2 · Phase 5 improved version of b3 (.reviews2 -> .r2x); improvements follow ---------- */
-.r2x__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
-.r2x__head .t-head { grid-column: 1 / span 6; }
-.r2x__head .reviews__lead { grid-column: 8 / span 5; }
-.r2x__sky {
-  position: relative; height: clamp(360px, 48vw, 600px); overflow: hidden; border-radius: 4px;
-  background: var(--color-bg-subtle);
-  box-shadow: inset 0 0 0 1px var(--color-border-subtle);
-}
-.r2x__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.r2x__fallback { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font: 400 clamp(10rem, 30vw, 26rem)/1 var(--f-display); color: var(--color-text-secondary); opacity: 0; pointer-events: none; }
-.r2x.is-static .r2x__fallback { opacity: 1; }
-.r2x__legend { position: absolute; left: 18px; bottom: 14px; margin: 0; font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--color-text-inverse); z-index: 1; }
-.r2x__acts { margin-top: var(--s6); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
-@media (max-width: 1023px) {
-  .r2x__head .t-head, .r2x__head .reviews__lead { grid-column: 1 / -1; }
-  .r2x__head .reviews__lead { margin-top: var(--s4); }
-}
-
-
-/* ---------- slot 3 · Phase 5 improved version of b4 (.reviews3 -> .r3x); improvements follow ---------- */
-.r3x__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.r3x__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); }
-.r3x__acts { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
-.r3x__dial { grid-column: 7 / -1; position: relative; max-width: 560px; width: 100%; justify-self: center; touch-action: none; }
-.r3x__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.r3x__svg .bezel { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 3; }
-.r3x__svg .face { fill: var(--color-surface); stroke: var(--color-art-line-soft); stroke-width: 2; }
-.r3x__svg .tk { stroke: var(--color-art-line); stroke-width: 1.4; }
-.r3x__svg .tk-m { stroke: var(--color-art-line); stroke-width: 3; }
-.r3x__svg .tl { font: 400 22px/1 var(--f-display); fill: var(--color-art-line); }
-.r3x__svg .band { fill: none; stroke-width: 12; }
-.r3x__svg .cap-t { font: 600 9.5px/1 var(--f-text); letter-spacing: .18em; fill: var(--color-art-line); }
-.r3x__svg .needle { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 1.5; }
-.r3x__svg .hub { fill: var(--color-art-line); }
-.r3x__svg .hub2 { fill: var(--color-art-accent); }
-.r3x__svg .grab { fill: transparent; cursor: grab; }
-.r3x__svg .grab:active { cursor: grabbing; }
-.r3x__svg .mark { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 1.2; }
-.r3x__read { position: absolute; left: 0; right: 0; top: 66%; margin: 0; display: grid; justify-items: center; gap: 2px; pointer-events: none; color: var(--color-text); }
-.r3x__val { font: 400 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/1 var(--f-display); padding: 2px 12px; background: var(--color-surface); color: var(--color-text-secondary); border-radius: 3px; min-width: 2.6ch; text-align: center; }
-.r3x__unit { font: 600 .6875rem/1.2 var(--f-text); letter-spacing: 0; color: var(--color-text-secondary); }
-@media (max-width: 1023px) {
-  .r3x__side, .r3x__dial { grid-column: 1 / -1; }
-  .r3x__dial { margin-top: var(--s7); }
-}
-
-/* ---------- Phase 5 improvements, slots 1-3 ---------- */
-/* slot 1: every fifth stroke (the one that closes a gate) is drawn in the accent, so the gates read at a glance */
-.rtx__svg .st--d { stroke: var(--color-art-accent); }
-.rtx__avg { box-shadow: inset 4px 0 0 var(--color-border-strong); padding-left: 16px; }
-/* slot 2: a flat orange-tint sky over a Miami roofline in ink; no glow */
-.r2x__roofs { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: clamp(60px, 9vw, 120px); pointer-events: none; }
-.r2x__roofs path { fill: var(--color-art-line); }
-.r2x__head .eyebrow { grid-column: 1 / -1; }
-/* slot 3: an orange bezel and a darker caption on the face */
-.r3x__svg .bezel { fill: var(--color-art-fill); }
-.r3x__svg .cap-t { fill: var(--color-art-line-soft); }
-.r3x__side .eyebrow { margin-bottom: calc(var(--s6) * -.6); }
-
-/* shared head for the new full-width versions (5, 8) */
-.rpr__head, .rnl__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
-.rpr__head .t-head, .rnl__head .t-head { grid-column: 1 / span 6; }
-.rpr__head .reviews__lead, .rnl__head .reviews__lead { grid-column: 8 / span 5; }
-@media (max-width: 1023px) { .rpr__head .t-head, .rnl__head .t-head, .rpr__head .reviews__lead, .rnl__head .reviews__lead { grid-column: 1 / -1; } .rpr__head .reviews__lead, .rnl__head .reviews__lead { margin-top: var(--s4); } }
-
-/* ---------- slot 4 · Phase 5 new · The roof ---------- */
-.rsh__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
-.rsh__side { display: grid; gap: var(--s5); justify-items: start; }
-.rsh__count { margin: 0; display: flex; align-items: baseline; gap: 10px; font: 400 1rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.rsh__n { font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/1 var(--f-display); color: var(--color-text-secondary); min-width: 3ch; }
-.rsh__svg { width: 100%; height: auto; overflow: visible; }
-.rsh__svg .sg { fill: var(--color-art-fill); stroke: var(--color-surface); stroke-width: 1.5; }
-.rsh__svg .sg.t2 { fill: var(--color-art-wash); }
-.rsh__svg .sg.t3 { fill: var(--color-art-accent-soft); }
-.rsh__svg .ridge { fill: var(--color-art-line); }
-.rsh__svg .fascia { fill: var(--color-art-line); }
-.rsh__svg .wall { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 2; }
-.rsh__svg .win { fill: var(--color-art-fill); stroke: var(--color-art-line); stroke-width: 2; }
-.rsh__svg .chim { fill: var(--color-art-line-soft); }
-@media (max-width: 1023px) { .rsh__grid { grid-template-columns: 1fr; } }
-
-/* ---------- slot 5 · Phase 5 new · The paint roller ---------- */
-.rpr__wall { position: relative; padding: 0 0 140px; touch-action: pan-y; }
-.rpr__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rpr__svg .stencil { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 3; stroke-linejoin: round; }
-.rpr__svg .paint { fill: var(--color-art-wash); }
-.rpr__svg .drip { fill: var(--color-art-accent); }
-.rpr__svg .tape { fill: var(--color-art-fill); }
-.rpr__svg .mark { stroke: var(--color-art-line); stroke-width: 2; }
-.rpr__svg .ml { font: 600 15px/1 var(--f-display); fill: var(--color-art-line); text-anchor: middle; }
-.rpr__svg .stop { stroke: var(--color-art-accent); stroke-width: 2.5; stroke-dasharray: 6 5; }
-.rpr__svg .stop-t { font: 600 14px/1 var(--f-text); fill: var(--color-accent-text); text-anchor: middle; }
-.rpr__roller { position: absolute; top: 0; left: 0; width: clamp(40px, 5vw, 60px); margin-left: calc(clamp(40px, 5vw, 60px) / -2); cursor: grab; outline-offset: 4px; touch-action: none; }
-.rpr__roller:active { cursor: grabbing; }
-.rpr__roller svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rpr__nap { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 2.5; }
-.rpr__frame { fill: none; stroke: var(--color-art-line); stroke-width: 4; stroke-linejoin: round; }
-.rpr__grip { fill: var(--color-art-line); }
-.rpr__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); }
-.rpr__read { margin: 0; display: flex; align-items: baseline; gap: 10px; font: 400 1rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.rpr__v { font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/1 var(--f-display); color: var(--color-text-secondary); }
-@media (max-width: 767px) { .rpr__wall { padding-bottom: 96px; } }
-
-/* ---------- slot 6 · Phase 5 new · The job-site sign ---------- */
-.rsf__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
-.rsf__side { display: grid; gap: var(--s5); justify-items: start; }
-.rsf__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
-.rsf__sign { margin: 0; }
-.rsf__board { position: relative; z-index: 1; display: grid; gap: 18px; padding: clamp(18px, 3vw, 32px); background: var(--color-bg-muted); box-shadow: inset 0 0 0 6px var(--color-border-strong); color: var(--color-text); }
-.rsf__row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "k k" "f u"; align-items: end; column-gap: 14px; row-gap: 8px; margin: 0; }
-.rsf__k { grid-area: k; font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text); }
-.rsf__u { grid-area: u; font: 600 1rem/1.2 var(--f-text); color: var(--color-text); padding-bottom: 6px; }
-.rsf__flaps { grid-area: f; display: flex; gap: 6px; }
-.rsf__f { position: relative; display: grid; place-items: center; width: clamp(48px, 7vw, 76px); height: clamp(64px, 9.5vw, 104px); background: var(--color-surface); color: var(--color-text); font: 600 clamp(2.5rem, 1.6rem + 3vw, 4.25rem)/1 var(--f-display); box-shadow: inset 0 0 0 2px var(--color-border-strong); perspective: 300px; }
-.rsf__f::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--color-bg-inverse); opacity: .55; }
-.rsf__f.is-dot { width: clamp(22px, 3vw, 32px); }
-.rsf__f.is-flip { animation: rsf-flip 70ms linear; }
-@keyframes rsf-flip { 50% { transform: rotateX(-70deg); } }
-.rsf__posts { display: block; width: 100%; height: clamp(70px, 9vw, 120px); margin-top: -2px; }
-.rsf__posts rect { fill: var(--color-art-line); }
-.rsf__ground { stroke: var(--color-art-line-soft); stroke-width: 3; vector-effect: non-scaling-stroke; }
-@media (max-width: 1023px) { .rsf__grid { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .rsf__f.is-flip { animation: none; } }
-
-/* ---------- slot 7 · Phase 5 new · The inspection tag ---------- */
-.rtg__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
-.rtg__side { display: grid; gap: var(--s5); justify-items: start; }
-.rtg__hang { position: relative; height: 470px; }
-.rtg__str { position: absolute; left: 50%; top: 0; width: 200px; height: 400px; margin-left: -100px; overflow: visible; pointer-events: none; }
-.rtg__hook { fill: none; stroke: var(--color-art-line); stroke-width: 4; }
-.rtg__line { fill: none; stroke: var(--color-art-line-soft); stroke-width: 2; }
-.rtg__tag { position: absolute; left: 50%; top: 116px; width: 220px; height: 320px; margin-left: -110px; padding: 0; border: 0; background: none; cursor: grab; transform-style: preserve-3d; touch-action: none; transform-origin: 50% 0; }
-.rtg__tag:active { cursor: grabbing; }
-.rtg__face { position: absolute; inset: 0; display: grid; align-content: start; justify-items: center; gap: 6px; padding: 40px 18px 18px; background: var(--color-surface); color: var(--color-text); clip-path: polygon(22% 0, 78% 0, 100% 12%, 100% 100%, 0 100%, 0 12%); backface-visibility: hidden; box-shadow: inset 0 0 0 3px var(--color-border-strong); }
-.rtg__face--a { background: var(--color-accent-subtle); color: var(--color-text); }
-.rtg__face--b { transform: rotateY(180deg); background: var(--color-surface); }
-.rtg__eye { width: 22px; height: 22px; border-radius: 50%; background: var(--color-bg); box-shadow: inset 0 0 0 3px var(--color-border-strong); margin-bottom: 14px; }
-.rtg__k { font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; }
-.rtg__big { font: 600 5.5rem/1 var(--f-display); letter-spacing: -.02em; }
-.rtg__face--b .rtg__big { color: var(--color-text-secondary); }
-.rtg__s { font: 400 .9375rem/1.3 var(--f-text); text-align: center; }
-.rtg__line2 { margin-top: auto; padding-top: 10px; width: 100%; text-align: center; box-shadow: inset 0 2px 0 var(--color-border-strong); font: 600 .8125rem/1.2 var(--f-text); }
-@media (max-width: 1023px) { .rtg__grid { grid-template-columns: 1fr; } .rtg__hang { height: 450px; } }
-
-/* ---------- slot 8 · Phase 5 new · Five nails ---------- */
-.rnl__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rnl__svg .plank { fill: var(--color-art-fill); stroke: var(--color-art-line); stroke-width: 3; }
-.rnl__svg .grain { fill: none; stroke: var(--color-art-accent-soft); stroke-width: 1.5; }
-.rnl__svg .nail-h { fill: var(--color-art-line); }
-.rnl__svg .nail-s { fill: var(--color-art-line-soft); }
-.rnl__svg .nl { font: 600 16px/1 var(--f-display); fill: var(--color-art-line); text-anchor: middle; }
-.rnl__svg .hm-h { fill: var(--color-art-line); }
-.rnl__svg .hm-g { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 2.5; }
-.rnl__svg .spark { fill: none; stroke: var(--color-art-accent); stroke-width: 3; stroke-linecap: round; opacity: 0; }
-.rnl__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-top: var(--s6); }
-.rnl__read { margin: 0; display: flex; align-items: baseline; gap: 10px; font: 400 1rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.rnl__v { font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/1 var(--f-display); color: var(--color-text-secondary); }
-.rnl__acts { display: flex; flex-wrap: wrap; gap: var(--s3); }
