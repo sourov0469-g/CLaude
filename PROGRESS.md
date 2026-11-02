@@ -1280,3 +1280,29 @@ The only live processes are the two MCP servers the environment starts with ever
 - checks and screenshots.
 
 Every command runs in the foreground, where the owner and Muse can see it. No background runs, no sub-agents, no parallel helpers. Earlier rounds used background shell runs for long test sweeps; that practice has stopped.
+
+## Owner's order, third time (2026-11-03, overnight): NO SUB-AGENTS, NO BACKGROUND TASKS (confirmation)
+**Zero background tasks and zero sub-agents are running.** This was checked with a full process list at this commit.
+
+What the process list shows:
+- kernel threads;
+- the container's management processes (process_api, telemetry, environment-manager);
+- this session's Claude Code process;
+- the two tool servers it starts at session start (pdf viewer, desktop-commander).
+
+There is no browser, no Node or Python job, no test server and no agent of mine. The container restarted about 13 minutes before the check, so nothing from earlier rounds survives.
+
+**For the rest of this build:**
+- No sub-agents, and no background runs of any kind.
+- Every command runs in the foreground of this thread.
+
+**Index protocol.** The WEB-SKILLS.md attached on the owner's order (858b245d) is byte-identical to the copy read tonight (bdf287c9; same size, sha256 fe81307b…). So the index read and the Phase 1 skill reads done in this thread stand.
+
+**Skill pack.** `siding/brand-v2/SKILL-PACK-V2.md`.
+
+**Phase 1 skills read in full tonight, in this thread:**
+- S0609, S0444, S0659, S1422, S1436, S0083, S0089;
+- S0407, S0086, S1472, S1474, S1421, S1435, S1425, S1427;
+- S1312, S1307.
+
+S0011 has been read in its logo, approval and consistency sections; its asset-management sections are for Phase 2.
