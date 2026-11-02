@@ -121,7 +121,7 @@
 
 /* beat stage (pinned beats; max 4 per page, each pin <= 100vh, skip link, static under reduced motion) */
 .beat-stage{position:relative}
-.beat-stage .pin{position:sticky;top:0;min-height:100dvh;display:grid;align-content:center}
+.beat-stage .pin{position:sticky;top:var(--header-h,0px);min-height:calc(100dvh - var(--header-h,0px));display:grid;align-content:center}
 @media (prefers-reduced-motion:reduce){.beat-stage .pin{position:static;min-height:auto}}
 
 /* place list: towns and other plain lists of places; columns fill by width; the home town is bold with a pin */

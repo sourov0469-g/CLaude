@@ -1,0 +1,15 @@
+[
+ {"id": "home", "title": "Home", "sections": [
+   {"id": "hero", "default": 1},
+   {"id": "proof", "default": 1},
+   {"id": "nest", "default": 1},
+   {"id": "game", "default": 1},
+   {"id": "services", "default": 1},
+   {"id": "families", "default": 1},
+   {"id": "storm", "default": 1},
+   {"id": "reviews", "default": 1},
+   {"id": "price", "default": 1},
+   {"id": "area", "default": 1},
+   {"id": "call", "default": 1}
+ ]}
+]

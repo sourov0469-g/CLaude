@@ -1,0 +1,14 @@
+/* site layer: tokens only (lint-checked) */
+body{margin:0}
+svg.logo{display:block;width:100%;height:auto}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.skip-link{left:var(--space-16);top:var(--space-16)}
+main:focus{outline:none}
+.tel-btn{min-height:var(--space-40);padding:var(--space-8) var(--space-16);font-size:var(--step-m1)}
+@media (max-width:1023px){.owl-header .tel-btn{display:none}}
+.todo{padding:var(--section-minor) var(--gutter);border-top:1px dashed var(--line-control)}
+.vpanel{position:fixed;right:var(--space-16);bottom:var(--space-96);z-index:80;background:var(--surface-raised);border:1px solid var(--line-control);border-radius:var(--radius-m);box-shadow:var(--shadow-lifted);padding:var(--space-16);display:grid;gap:var(--space-8);max-height:70vh;overflow:auto;font:var(--type-small)}
+.vpanel[hidden]{display:none}
+.vrow{display:grid;grid-template-columns:7rem auto auto;gap:var(--space-8);align-items:center}
+.vrow button{font:700 var(--step-m1)/1 var(--font-display);min-height:var(--space-32);padding:0 var(--space-12);border-radius:var(--radius-pill);border:1.5px solid var(--text-primary);background:var(--surface-page);color:var(--text-primary);cursor:pointer}
+.vrow button[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-page)}

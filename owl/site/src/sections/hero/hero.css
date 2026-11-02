@@ -1,0 +1,62 @@
+/* ===== hero V1 · the house window ===== */
+.hero-v1{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0}
+.hero-v1 > .wrap{position:relative;z-index:1}
+.hv1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-64);align-items:end}
+.hv1-copy{display:grid;gap:var(--space-24);padding-bottom:var(--space-48)}
+.hv1-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.hv1-proof{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.hv1-house{margin:0;position:relative}
+.hv1-roof{display:block;width:100%;height:auto;overflow:visible;margin-bottom:calc(var(--space-2) * -1)}
+.hv1-roof path{fill:none;stroke:var(--text-primary);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+.hv1-gable{stroke-width:6}
+.hv1-eave{stroke-width:4}
+.hv1-roof .hv1-face{fill:var(--surface-page);stroke:none;stroke-dasharray:none} /* hides the chimney's base: the chimney sits behind the roof */
+.hv1-chimney{stroke-width:4;fill:var(--surface-page) !important}
+.hv1-courses path{stroke:var(--line-control) !important;stroke-width:2.5}
+.hero-v1.is-drawn .hv1-roof path{stroke-dashoffset:0;transition:stroke-dashoffset var(--dur-story) var(--ease-out)}
+.hero-v1.is-drawn .hv1-chimney{transition-delay:var(--dur-slow)}
+.hero-v1.is-drawn .hv1-courses path:nth-child(1){transition-delay:calc(var(--dur-normal) + var(--stagger) * 1)}
+.hero-v1.is-drawn .hv1-courses path:nth-child(2){transition-delay:calc(var(--dur-normal) + var(--stagger) * 3)}
+.hero-v1.is-drawn .hv1-courses path:nth-child(3){transition-delay:calc(var(--dur-normal) + var(--stagger) * 5)}
+.hero-v1.is-drawn .hv1-courses path:nth-child(4){transition-delay:calc(var(--dur-normal) + var(--stagger) * 7)}
+.hv1-wall{position:relative;margin:0 var(--space-32);border:4px solid var(--text-primary);border-top:0;border-bottom:0;background:var(--surface-alt)}
+.hv1-video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.hv1-vctl{position:absolute;right:var(--space-12);bottom:var(--space-12);display:grid;place-items:center;width:var(--space-48);height:var(--space-48);border-radius:50%;border:0;background:var(--surface-ink);color:var(--text-on-deep);cursor:pointer;transition:transform var(--dur-fast) var(--ease-out)}
+.hv1-vctl:hover{transform:scale(1.06)}
+.hv1-vctl:active{transform:scale(var(--press-scale))}
+.hv1-ground{display:block;width:100%;height:var(--space-24);overflow:visible}
+.hv1-ground path{stroke:var(--text-primary);stroke-width:4;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.hv1-house figcaption{font:var(--type-small);color:var(--text-muted);margin-top:var(--space-4);padding-left:var(--space-32)}
+.hv1-flow{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+@media (max-width:1023px){.hv1-grid{grid-template-columns:1fr;gap:var(--space-48)}.hv1-copy{padding-bottom:0}.hv1-wall{margin:0 var(--space-16)}}
+@media (prefers-reduced-motion:reduce){.hv1-roof path{stroke-dashoffset:0}}
+
+/* ===== hero V2 · the sequence (Scout's Sequence mechanism; Owl's footage; the line is the scrubber) ===== */
+.hero-v2{background:var(--surface-page)}
+.hv2-stage{position:relative;height:300vh}
+.hv2-pin{position:sticky;top:var(--header-h,0px);height:calc(100dvh - var(--header-h,0px));display:grid;grid-template-rows:1fr auto;gap:var(--space-16);padding:var(--space-16) var(--gutter) var(--space-24)}
+.hv2-frame{position:relative;overflow:hidden;border-radius:var(--radius-m);background:var(--surface-ink);min-height:0}
+.hv2-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hv2-scrim{position:absolute;inset:0;background:linear-gradient(to top,color-mix(in srgb,var(--surface-ink) 86%,transparent) 0%,color-mix(in srgb,var(--surface-ink) 58%,transparent) 42%,transparent 72%)}
+.hv2-copy{position:absolute;left:0;right:0;bottom:0;padding:var(--space-48) var(--space-48) var(--space-64);display:grid;gap:var(--space-24);color:var(--text-on-deep)}
+.hv2-lines{display:grid}
+.hv2-line{grid-area:1/1;max-width:20ch;color:var(--text-on-deep);opacity:0;transform:translateY(var(--space-12));transition:opacity var(--dur-normal) linear,transform var(--dur-slow) var(--ease-out)}
+.hv2-line.is-on{opacity:1;transform:none}
+.hv2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.hv2-text{--b-bg:transparent;--b-fg:var(--text-on-deep);--b-bd:var(--text-on-deep)}
+.hv2-track{position:absolute;left:var(--space-48);right:var(--space-48);bottom:var(--space-24);width:calc(100% - var(--space-96));height:var(--space-24);overflow:visible}
+.hv2-ticks circle{fill:var(--surface-ink);stroke:var(--text-on-deep);stroke-width:2;transition:fill var(--dur-fast) linear,stroke var(--dur-fast) linear}
+.hv2-ticks circle.is-passed{fill:var(--accent-fill);stroke:var(--accent-fill)}
+.hv2-proof{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8);align-items:center;max-width:none}
+.hv2-hint{margin-left:auto}
+@media (max-width:767px){
+  .hv2-pin{padding:var(--space-8) var(--space-8) calc(var(--space-80) + var(--space-8))}
+  .hv2-copy{padding:var(--space-24) var(--space-16) var(--space-48)}
+  .hv2-scrim{background:linear-gradient(to top,color-mix(in srgb,var(--surface-ink) 90%,transparent) 0%,color-mix(in srgb,var(--surface-ink) 78%,transparent) 58%,transparent 92%)} /* measured: text climbs higher on narrow screens */
+  .hv2-track{left:var(--space-16);right:var(--space-16);width:calc(100% - var(--space-32))}
+  .hv2-hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .hv2-stage{height:auto}.hv2-pin{position:relative;height:auto;min-height:100dvh}
+  .hv2-line{transition:none}.hv2-line[data-beat="0"]{opacity:1;transform:none}.hv2-line:not([data-beat="0"]){display:none}
+}
