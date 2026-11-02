@@ -286,7 +286,7 @@
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
     financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
-    'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-work': 'Kitchen projects',
+    'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-work': 'Bath projects',
     'reno-intro': 'Whole home', 'reno-services': 'Services', 'reno-permits': 'Permits and approvals',
     'contact-form': 'Consultation', 'contact-visit': 'Visit and call', 'contact-area': 'Service area' };

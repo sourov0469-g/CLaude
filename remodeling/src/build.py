@@ -26,7 +26,7 @@ PAGES = {
              "title": "Elbaz Construction | Kitchen, Bathroom and Whole-Home Remodeling in South Florida",
              "desc": "Licensed design-build remodeler for kitchens, bathrooms and whole homes across Miami-Dade, Broward and Palm Beach. Licensed, bonded &amp; insured · CBC1265280. Call (754) 236-0675.",
              "url": "https://elbazconstructioncorp.com/"},
-    "kitchens": {"out": "kitchens.html", "sections": ["kitchen-intro", "kitchen-scope", "kitchen-work"], "book": "contact.html#contact-form",
+    "kitchens": {"out": "kitchens.html", "sections": ["kitchen-intro", "kitchen-scope", "kitchen-sequence", "kitchen-work", "kitchen-close"], "book": "contact.html#contact-form",
                  "title": "Kitchen Remodeling in South Florida | Elbaz Construction",
                  "desc": "Kitchen remodeling across Miami-Dade, Broward and Palm Beach: layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope. Licensed, bonded &amp; insured · CBC1265280.",
                  "url": "https://elbazconstructioncorp.com/kitchen-remodeling-miami/"},
