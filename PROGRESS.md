@@ -85,7 +85,7 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 3 | Home sections, one at a time, in page order | **done**: ten `GATE-home-*.md`, `GATE-system-footer.md`, `GATE-system-dividers.md` |
 | 4 | Kitchens, then Bathrooms | **done**: `GATE-kitchens.md`, `GATE-bathrooms.md` |
 | 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
-| 6 | Polish pass on the defects the gate reports name as remaining (no Muse ruling received yet) | **in progress**: see Phase 6 log |
+| 6 | Polish pass on the defects the gate reports name as remaining (no Muse ruling received yet) | **done**: `GATE-phase6.md`; what is left needs Muse's judgement or is blocked |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -172,3 +172,4 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Gate reports amended**: every item the work above (or an earlier pass) closed is struck through in its gate with what fixed it (bathrooms, contact, kitchens, renovation, home-ba, home-process, home-proof, home-projects, home-reviews, system-companion-logo).
 - **Towns**: phones get a "See the route on the map" button in the answer (user-controlled; the drive replays in view); the list of 104 tightened to sit level with the map at 1440 (724 vs 702). `GATE-home-towns.md` amended.
 - **Financing on phones**: route-finder signposts as two-line boards (labels 8 → 10.1px); the ledger's margin label moves above its cells (quote wraps 6/7/7 → 4/5/6 lines). `GATE-home-financing.md` amended.
+- **Phase 6 closed**: `GATE-phase6.md` lists every fix with its measurement, and what remains open with the reason (Muse's judgement, or blocked). Zero background tasks, zero sub-agents.
