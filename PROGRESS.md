@@ -85,7 +85,7 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 3 | Home sections, one at a time, in page order | **done**: ten `GATE-home-*.md`, `GATE-system-footer.md`, `GATE-system-dividers.md` |
 | 4 | Kitchens, then Bathrooms | **done**: `GATE-kitchens.md`, `GATE-bathrooms.md` |
 | 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
-| 6 | Polish pass on the defects the gate reports name as remaining (no Muse ruling received yet) | **done**: `GATE-phase6.md`; what is left needs Muse's judgement or is blocked |
+| 6 | Polish pass on the defects the gate reports name as remaining (no Muse ruling received yet) | **corrected per Muse** (scorecard, skill tags, governing reference): `GATE-phase6.md`; awaiting re-judgement; what is left needs Muse's judgement or is blocked |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -173,3 +173,4 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Towns**: phones get a "See the route on the map" button in the answer (user-controlled; the drive replays in view); the list of 104 tightened to sit level with the map at 1440 (724 vs 702). `GATE-home-towns.md` amended.
 - **Financing on phones**: route-finder signposts as two-line boards (labels 8 → 10.1px); the ledger's margin label moves above its cells (quote wraps 6/7/7 → 4/5/6 lines). `GATE-home-financing.md` amended.
 - **Phase 6 closed**: `GATE-phase6.md` lists every fix with its measurement, and what remains open with the reason (Muse's judgement, or blocked). Zero background tasks, zero sub-agents.
+- **Muse: GATE-phase6.md did not pass as a scorecard gate.** Corrected: per-category self-rating (Design 7, Usability 8, Creativity 6, Content 9) with evidence and why-not-higher; WEB-SKILLS tags per mechanism; Lusion named as the governing reference, with what transfers (the ink-line carrier, sheet grammar, scrub drawing) and what does not (virtual scroll, WebGL, its ease). Citing the tags exposed two shortfalls, both fixed and measured: the Proof touch threshold was 8px, now 10px (S1443), and the Contact rows lacked masked edges (S0450). Muse's open judgement calls stay open, with no rulings invented. Phase 6 awaits Muse's re-judgement.

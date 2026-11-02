@@ -32,3 +32,5 @@
 - ~~**Dividers** on this page are the system set.~~ **Fixed in Phase 6:** conduit, coast, steps (the stage rail, first two marks filled), level, footing.
 
 Render evidence: `qa/finalize/contact/`. Zero console errors at 1440 and 390; no horizontal overflow.
+
+**Phase 6 correction:** the drifting rows now fade at both ends (40px masks) as S0450 asks; the search and still states stay unmasked. Evidence: `qa/finalize/phase6/contact-rows-masked-1440.png` and `-390.png`.

@@ -57,3 +57,5 @@
 - **Reference:** Scout (keyed sequence of evidence).
 
 Render evidence: `qa/finalize/home-proof/` (before V2; interaction sequence: arriving, landed, hover bend, held with tilt, stacked, thrown, settled, keyboard; mobile 390; reduced motion).
+
+**Phase 6 correction:** the touch activation threshold was 8px, below S1443's 10 to 15px. Raised to 10px; at 390 a 9px move is not held and a 12px move is. Keyboard parity re-verified (S1018).

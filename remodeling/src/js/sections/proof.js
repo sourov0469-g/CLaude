@@ -125,7 +125,7 @@
         var r = list.getBoundingClientRect();
         if (pend && !b.held) {
           var dx = e.clientX - pend.x, dy = e.clientY - pend.y;
-          if (dx * dx + dy * dy > 64) { if (Math.abs(dx) > Math.abs(dy)) grab(e, pend.x, pend.y); pend = null; }
+          if (dx * dx + dy * dy > 100) { if (Math.abs(dx) > Math.abs(dy)) grab(e, pend.x, pend.y); pend = null; } /* 10px activation [S1443] */
           return;
         }
         if (b.held) {

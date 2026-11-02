@@ -1047,6 +1047,8 @@ html.has-buddy select { cursor: default !important; }
 .ca__call { margin: var(--s5) 0 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
 @media (max-width: 900px) { .ca__head { grid-template-columns: 1fr; } .ca__row { grid-template-columns: 1fr; } .ca__cn { padding-left: var(--s4); } .ca__t { font-size: 1.0625rem; } }
 
+.ca:not(.is-search):not(.is-still) .ca__vp { -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
+
 
 .cx__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
 .cx__head .eyebrow { margin: 0 0 var(--s3); }
