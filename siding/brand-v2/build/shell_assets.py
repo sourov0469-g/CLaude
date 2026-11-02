@@ -3,7 +3,7 @@
 BASE_CSS = r'''
 [hidden]{display:none!important} *{box-sizing:border-box} html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--color-bg-page);color:var(--color-text-primary);font:400 var(--type-body-size)/var(--type-body-leading) var(--font-text);font-variant-numeric:tabular-nums}
-img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} :focus-visible{outline:3px solid var(--color-focus-ring);outline-offset:3px}
+img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} :focus-visible{outline:3px solid var(--color-focus-ring);outline-offset:3px} h1[tabindex="-1"]:focus{outline:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .skip:focus{position:fixed;left:8px;top:8px;width:auto;height:auto;clip:auto;z-index:99;background:var(--color-bg-page);padding:12px 16px;font-weight:700}
 .wrap{max-width:var(--layout-max-width);margin:0 auto;padding:0 var(--layout-gutter)}
 .wm{font:800 23px var(--font-display);letter-spacing:-.01em} .lk{max-width:100%;height:auto;display:block}
