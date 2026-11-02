@@ -653,6 +653,20 @@
 
   /* ---------- shared motion helpers ---------- */
   // GreenSock's official horizontalLoop helper (bank 361 / Q161), draggable path removed (Club plugins not used)
+  // FINALIZE · the published hours, one source of truth: Sun to Fri 7am to 7pm, Saturday closed, Miami time (FACTS.md).
+  // Returns { open, text, clock } computed only from the locked hours; used by the footer and the Consult desk.
+  EZ.openStatus = function (now) {
+    var parts = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(now || new Date()).forEach(function (p) { parts[p.type] = p.value; });
+    var d = parts.weekday, h = +parts.hour, m = parts.minute, open = d !== 'Sat' && h >= 7 && h < 19, t;
+    if (open) t = 'Open now, until 7pm Miami time';
+    else if (d === 'Sat') t = 'Closed today. Open Sunday from 7am Miami time';
+    else if (h < 7) t = 'Closed now. Open today from 7am Miami time';
+    else t = d === 'Fri' ? 'Closed now. Open Sunday from 7am Miami time' : 'Closed now. Open tomorrow from 7am Miami time';
+    var h12 = h % 12 || 12;
+    return { open: open, text: t, clock: 'Miami ' + h12 + ':' + m + (h < 12 ? 'am' : 'pm') };
+  };
   EZ.horizontalLoop = function (items, config) {
     items = gsap.utils.toArray(items);
     config = config || {};
@@ -823,6 +837,13 @@
     setupNav();
     setupSettings();
     EZ.viewer.init();
+    // the footer's live line (OH mechanism: the studio says whether it is open right now), refreshed every 30s
+    (function () {
+      var el = doc.querySelector('.foot__open'); if (!el) return;
+      var ck = el.querySelector('.foot__ck'), tx = el.querySelector('.foot__ot');
+      function upd() { var o = EZ.openStatus(); el.classList.toggle('is-open', o.open); ck.textContent = o.clock; tx.textContent = o.text; }
+      upd(); setInterval(upd, 30000);
+    })();
     bindAnchors();
     bindKeys();
     persist();

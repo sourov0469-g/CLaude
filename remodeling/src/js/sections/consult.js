@@ -112,16 +112,7 @@
       var firstR = form.querySelector('input[name="rooms"]'); firstR.id = 'cf-rooms';
       liveClear(form, k);
       // the phone desk: open or closed now, from the published hours (Sun to Fri 7am to 7pm, Saturday closed), Miami time
-      function status() {
-        var parts = {};
-        new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; });
-        var d = parts.weekday, h = +parts.hour, open = d !== 'Sat' && h >= 7 && h < 19, t;
-        if (open) t = 'Open now, until 7pm Miami time';
-        else if (d === 'Sat') t = 'Closed today. Open Sunday from 7am Miami time';
-        else if (h < 7) t = 'Closed now. Open today from 7am Miami time';
-        else t = d === 'Fri' ? 'Closed now. Open Sunday from 7am Miami time' : 'Closed now. Open tomorrow from 7am Miami time';
-        st.classList.toggle('is-open', open); stt.textContent = t;
-      }
+      function status() { var o = EZ.openStatus(); st.classList.toggle('is-open', o.open); stt.textContent = o.text; }
       status();
       (function tick() { k.timeout(function () { status(); tick(); }, 60000); })();
       form.querySelectorAll('input[name="rooms"]').forEach(function (c) { k.on(c, 'change', function () { form.querySelector('#cf-rooms-err').hidden = true; }); });

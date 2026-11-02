@@ -668,6 +668,13 @@ input, textarea { caret-color: var(--color-accent-text); }
 .foot__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
 .foot__tel { color: var(--color-text); font-weight: 600; font-size: 1.0625rem; padding-block: 11px; }
 
+.foot__lead { display: grid; gap: var(--s3); }
+.foot__open { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.foot__ck { color: var(--color-text); }
+.foot__lamp { width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-strong) 25%, transparent); }
+.foot__open.is-open .foot__lamp { background: var(--color-success, #2E7D4F); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success, #2E7D4F) 25%, transparent); }
+.foot__open.is-open .foot__ot { color: var(--color-text); }
+
 
 .vswitch__step { display: none; align-items: center; gap: 2px; pointer-events: auto; background: color-mix(in srgb, var(--color-surface) 78%, transparent); border-radius: var(--radius); box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 14%, transparent); }
 .vswitch__st { min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--color-text); font: 600 1.25rem/1 var(--f-text); cursor: pointer; }
@@ -2435,7 +2442,10 @@ html.has-buddy select { cursor: default !important; }
 <footer class="foot">
   <p class="foot__mark" aria-hidden="true"><span>Elbaz</span><span>Construction</span></p>
   <div class="wrap foot__cta">
-    <p class="foot__line">Built properly. Permitted correctly.</p>
+    <div class="foot__lead">
+      <p class="foot__line">Built properly. Permitted correctly.</p>
+      <p class="foot__open"><span class="foot__lamp" aria-hidden="true"></span><span class="foot__ck nums"></span><span class="foot__ot">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+    </div>
     <div class="foot__acts">
       <a class="btn foot__book" href="contact.html#contact-form" data-rx="~flag/hoist/wobble/tr"><span class="btn__label">Book a consultation</span></a>
       <a class="link nums foot__tel" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
@@ -2470,12 +2480,6 @@ html.has-buddy select { cursor: default !important; }
     <div class="foot__col">
       <h3>Pages</h3>
       <a href="#top" aria-current="page" data-rx="~hood/peek/tick/r">Kitchens</a><a href="bathrooms.html" data-rx="~shower/peek/tick/r">Bathrooms</a><a href="renovation.html" data-rx="~house/peek/tick/r">Renovation</a><a href="contact.html" data-rx="~speech/peek/tick/r">Contact</a>
-    </div>
-    <div class="foot__col">
-      <h3>Counties</h3>
-      <span>Miami-Dade</span>
-      <span>Broward</span>
-      <span>Palm Beach</span>
     </div>
     <div class="foot__legal">
       <span>Elbaz Construction and Remodeling</span>
@@ -3218,6 +3222,20 @@ html.has-buddy select { cursor: default !important; }
 
   /* ---------- shared motion helpers ---------- */
   // GreenSock's official horizontalLoop helper (bank 361 / Q161), draggable path removed (Club plugins not used)
+  // FINALIZE · the published hours, one source of truth: Sun to Fri 7am to 7pm, Saturday closed, Miami time (FACTS.md).
+  // Returns { open, text, clock } computed only from the locked hours; used by the footer and the Consult desk.
+  EZ.openStatus = function (now) {
+    var parts = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(now || new Date()).forEach(function (p) { parts[p.type] = p.value; });
+    var d = parts.weekday, h = +parts.hour, m = parts.minute, open = d !== 'Sat' && h >= 7 && h < 19, t;
+    if (open) t = 'Open now, until 7pm Miami time';
+    else if (d === 'Sat') t = 'Closed today. Open Sunday from 7am Miami time';
+    else if (h < 7) t = 'Closed now. Open today from 7am Miami time';
+    else t = d === 'Fri' ? 'Closed now. Open Sunday from 7am Miami time' : 'Closed now. Open tomorrow from 7am Miami time';
+    var h12 = h % 12 || 12;
+    return { open: open, text: t, clock: 'Miami ' + h12 + ':' + m + (h < 12 ? 'am' : 'pm') };
+  };
   EZ.horizontalLoop = function (items, config) {
     items = gsap.utils.toArray(items);
     config = config || {};
@@ -3388,6 +3406,13 @@ html.has-buddy select { cursor: default !important; }
     setupNav();
     setupSettings();
     EZ.viewer.init();
+    // the footer's live line (OH mechanism: the studio says whether it is open right now), refreshed every 30s
+    (function () {
+      var el = doc.querySelector('.foot__open'); if (!el) return;
+      var ck = el.querySelector('.foot__ck'), tx = el.querySelector('.foot__ot');
+      function upd() { var o = EZ.openStatus(); el.classList.toggle('is-open', o.open); ck.textContent = o.clock; tx.textContent = o.text; }
+      upd(); setInterval(upd, 30000);
+    })();
     bindAnchors();
     bindKeys();
     persist();

@@ -302,6 +302,13 @@
 .foot__line { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; color: var(--color-text); }
 .foot__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
 .foot__tel { color: var(--color-text); font-weight: 600; font-size: 1.0625rem; padding-block: 11px; }
+/* FINALIZE · the live line: Miami time and whether we are open right now, from the published hours */
+.foot__lead { display: grid; gap: var(--s3); }
+.foot__open { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.foot__ck { color: var(--color-text); }
+.foot__lamp { width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-strong) 25%, transparent); }
+.foot__open.is-open .foot__lamp { background: var(--color-success, #2E7D4F); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success, #2E7D4F) 25%, transparent); }
+.foot__open.is-open .foot__ot { color: var(--color-text); }
 
 /* OWNER MASTER DIRECTIVE: eight visible versions. On phones the digit row becomes a stepper (prev, 3/8, next) with 44px
    targets; desktop keeps the digits. */
