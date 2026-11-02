@@ -1,0 +1,19 @@
+/* ===== Storm damage and insurance (Longbow: numbered doctrine; Owl's own steps, in Owl's words) ===== */
+.storm-v1,.storm-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-default) 0}
+.storm-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.storm-v1 > .wrap{position:relative;z-index:1}
+.st1-top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.st1-sky{width:100%;height:auto;overflow:visible}
+.st1-steps{list-style:none;margin:var(--space-32) 0 0;padding:var(--space-32) 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-32);position:relative;border-top:3px dotted var(--line-control)}
+.st1-steps li{position:relative;display:grid;gap:var(--space-8);align-content:start}
+.st1-n{position:absolute;top:calc(var(--space-48) * -1 - var(--space-2));left:0;display:grid;place-items:center;width:var(--space-32);height:var(--space-32);border-radius:50%;background:var(--surface-page);border:2px solid var(--text-primary);font:700 var(--step-m1)/1 var(--font-display)}
+.st1-steps li:first-child .st1-n{background:var(--accent-fill);border-color:var(--accent-fill)}
+.st1-ins{margin-top:var(--space-48);display:flex;flex-wrap:wrap;gap:var(--space-24);align-items:center;justify-content:space-between;padding:var(--space-24);background:var(--surface-alt);border-radius:var(--radius-m)}
+.st1-ins .t-body{max-width:44rem;margin:0}
+@media (max-width:1023px){.st1-top{grid-template-columns:1fr}.st1-steps{grid-template-columns:1fr 1fr;row-gap:var(--space-48)}}
+@media (max-width:767px){.st1-steps{grid-template-columns:1fr;border-top:0;border-left:3px dotted var(--line-control);padding:0 0 0 var(--space-32);row-gap:var(--space-32)}.st1-n{top:0;left:calc(var(--space-48) * -1 - var(--space-2))}.st1-sky{max-width:22rem}}
+.st2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:start}
+.st2-lead{display:grid;gap:var(--space-24);position:sticky;top:calc(var(--header-h,0px) + var(--space-32))}
+.st2-icon{width:var(--space-64);height:var(--space-64);color:var(--text-primary)}
+.st2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+@media (max-width:1023px){.st2-grid{grid-template-columns:1fr}.st2-lead{position:static}}

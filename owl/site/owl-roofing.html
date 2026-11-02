@@ -527,6 +527,25 @@ main:focus{outline:none}
 @media (max-width:767px){.fv2-track{grid-auto-columns:88%}}
 @media (prefers-reduced-motion:reduce){.fv2-track{scroll-behavior:auto}}
 
+/* ===== Storm damage and insurance (Longbow: numbered doctrine; Owl's own steps, in Owl's words) ===== */
+.storm-v1,.storm-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-default) 0}
+.storm-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.storm-v1 > .wrap{position:relative;z-index:1}
+.st1-top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.st1-sky{width:100%;height:auto;overflow:visible}
+.st1-steps{list-style:none;margin:var(--space-32) 0 0;padding:var(--space-32) 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-32);position:relative;border-top:3px dotted var(--line-control)}
+.st1-steps li{position:relative;display:grid;gap:var(--space-8);align-content:start}
+.st1-n{position:absolute;top:calc(var(--space-48) * -1 - var(--space-2));left:0;display:grid;place-items:center;width:var(--space-32);height:var(--space-32);border-radius:50%;background:var(--surface-page);border:2px solid var(--text-primary);font:700 var(--step-m1)/1 var(--font-display)}
+.st1-steps li:first-child .st1-n{background:var(--accent-fill);border-color:var(--accent-fill)}
+.st1-ins{margin-top:var(--space-48);display:flex;flex-wrap:wrap;gap:var(--space-24);align-items:center;justify-content:space-between;padding:var(--space-24);background:var(--surface-alt);border-radius:var(--radius-m)}
+.st1-ins .t-body{max-width:44rem;margin:0}
+@media (max-width:1023px){.st1-top{grid-template-columns:1fr}.st1-steps{grid-template-columns:1fr 1fr;row-gap:var(--space-48)}}
+@media (max-width:767px){.st1-steps{grid-template-columns:1fr;border-top:0;border-left:3px dotted var(--line-control);padding:0 0 0 var(--space-32);row-gap:var(--space-32)}.st1-n{top:0;left:calc(var(--space-48) * -1 - var(--space-2))}.st1-sky{max-width:22rem}}
+.st2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:start}
+.st2-lead{display:grid;gap:var(--space-24);position:sticky;top:calc(var(--header-h,0px) + var(--space-32))}
+.st2-icon{width:var(--space-64);height:var(--space-64);color:var(--text-primary)}
+.st2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+@media (max-width:1023px){.st2-grid{grid-template-columns:1fr}.st2-lead{position:static}}
 
 
 
@@ -906,7 +925,43 @@ main:focus{outline:none}
     </ol>
   </div>
 </section>
-</div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">storm v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">storm v2: not built yet</p></div></div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
+</div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><section class="storm-v1" aria-labelledby="storm1-h">
+  <svg class="storm-bg" data-bg="lawn"></svg>
+  <div class="wrap">
+    <div class="st1-top">
+      <div class="sec-head"><h2 id="storm1-h" class="t-heading">After the hail.</h2><p class="t-body muted">"Home is where the heart is, not where the hail damage is! Rain or snow, our team is ready to tackle every level of storm damage."</p></div>
+      <svg class="st1-sky" viewBox="0 0 520 220" aria-hidden="true"></svg>
+    </div>
+    <ol class="st1-steps">
+      <li><span class="st1-n t-num">1</span><h3 class="t-sub">Contact our team</h3><p class="t-small">"When you reach out to Owl Roofing, you're not reaching out to the void. Our team responds promptly and consistently to all inquiries."</p></li>
+      <li><span class="st1-n t-num">2</span><h3 class="t-sub">A detailed inspection</h3><p class="t-small">"Our inspections are built to help you design a healthy roofing system by catching problem areas and early signs of roof damage."</p></li>
+      <li><span class="st1-n t-num">3</span><h3 class="t-sub">We review your estimate</h3><p class="t-small">"Our estimates are free, accurate, and designed to let you make an educated decision on what is best for your home."</p></li>
+      <li><span class="st1-n t-num">4</span><h3 class="t-sub">We install the roof</h3><p class="t-small">"We'll check in with you throughout the process, answering any questions."</p></li>
+    </ol>
+    <div class="st1-ins">
+      <p class="t-body"><b>Using insurance?</b> "We believe you DESERVE real customer service whether you're paying full price, financing, or using insurance – we make it easy."</p>
+      <a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="storm-v2" aria-labelledby="storm2-h">
+  <div class="wrap st2-grid">
+    <div class="st2-lead">
+      <svg class="icon st2-icon" aria-hidden="true"><use href="#icon-status-hail"/></svg>
+      <h2 id="storm2-h" class="t-title">Home is where the heart is, not where the hail damage is.</h2>
+      <p class="t-body muted">Owl Roofing are storm damage specialists. "Rain or snow, our team is ready to tackle every level of storm damage."</p>
+      <div class="st2-ctas"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn btn--secondary" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text a photo of the damage</a></div>
+    </div>
+    <div class="acc st2-acc">
+      <details open><summary>1 · Contact our team<svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></summary><div class="t-body">"When you reach out to Owl Roofing, you're not reaching out to the void. Our team responds promptly and consistently to all inquiries."</div></details>
+      <details><summary>2 · A detailed inspection<svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></summary><div class="t-body">"Our inspections are built to help you design a healthy roofing system by catching problem areas and early signs of roof damage." Owl's Wise Check includes an attic inspection and heat-sensor leak detection.</div></details>
+      <details><summary>3 · We review your estimate<svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></summary><div class="t-body">"Our estimates are free, accurate, and designed to let you make an educated decision on what is best for your home."</div></details>
+      <details><summary>4 · We install the roof<svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></summary><div class="t-body">"We'll check in with you throughout the process, answering any questions." Then the 3-Part Cleanup.</div></details>
+      <details><summary>Using insurance?<svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></summary><div class="t-body">"We believe you DESERVE real customer service whether you're paying full price, financing, or using insurance – we make it easy."</div></details>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
 </main>
 <div class="callbar"><a href="tel:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-phone"/></svg>Call</a><a href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text</a></div>
 <div class="vpanel" id="vpanel" hidden role="dialog" aria-label="Section versions"><b>Versions</b><div id="vlist"></div><p class="t-small">Shift+V toggles · URL: ?v=hero:2</p></div>
@@ -1708,6 +1763,25 @@ window.OwlNest = (function () {
   t.addEventListener('scroll', state, { passive: true }); addEventListener('resize', state); document.addEventListener('owl:version', state); state();
 })();
 
+/* storm V1: a drawn storm; the hailstones fall once when first seen (ease-in: falling things), then rest */
+(function () {
+  var r = document.querySelector('.storm-v1'); if (!r) return;
+  Owl.bg.lawn(r.querySelector('.storm-bg'), { sweep: false });
+  var NS = 'http://www.w3.org/2000/svg', svg = r.querySelector('.st1-sky');
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  el('path', { d: 'M150 96 A44 44 0 0 1 160 22 A58 58 0 0 1 268 26 A40 40 0 0 1 306 96 Z', fill: 'var(--surface-page)', 'stroke-width': 4, 'stroke-linejoin': 'round', style: 'stroke:var(--text-primary)' }, svg);
+  el('path', { d: 'M40 206 L260 120 L480 206', fill: 'none', 'stroke-width': 4, 'stroke-linejoin': 'round', style: 'stroke:var(--text-primary)' }, svg);
+  el('path', { d: 'M110 178 H410 M170 155 H350 M222 135 H298', 'stroke-width': 2, style: 'stroke:var(--line-control)' }, svg);
+  var stones = [];
+  for (var i = 0; i < 11; i++) { var x = 170 + (i * 37) % 150 + Owl.seeded(i, 61) * 20, land = 206 - Math.abs(x - 260) * 0.39 - 4; stones.push({ n: el('circle', { cx: x, cy: 0, r: 4 + (i % 3), fill: 'none', 'stroke-width': 2.5, style: 'stroke:var(--text-primary)' }, svg), y0: 100 + Owl.seeded(i, 62) * 10, y1: land, t: i * 0.05 }); }
+  var dents = [[218, 150], [262, 140], [300, 158]].map(function (d) { return el('ellipse', { cx: d[0], cy: d[1], rx: 7, ry: 3.5, fill: 'none', 'stroke-width': 2.5, style: 'stroke:var(--accent-fill);opacity:0' }, svg); });
+  function set(p) {
+    stones.forEach(function (s) { var t = Owl.EASE.in(Owl.seg(p, s.t, s.t + 0.45)); s.n.setAttribute('cy', (s.y0 + (s.y1 - s.y0) * t).toFixed(1)); s.n.style.opacity = t >= 1 ? 0 : 1; });
+    dents.forEach(function (d, i) { d.style.opacity = Owl.seg(p, 0.6 + i * 0.1, 0.8 + i * 0.1); });
+  }
+  set(Owl.reduced() ? 1 : 0);
+  new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); Owl.play(set, 1800); } }, { threshold: 0.5 }).observe(svg);
+})();
 
 
 
