@@ -70,3 +70,21 @@ Both were recorded as structure facts, not copied.
 - No generated people.
 - No third-party logos in any deliverable.
 - No image from any OUT reference (Oakâme, Igloo, Boffi and the rest).
+
+## 6. Reference observations for Phase 3 (REFERENCE, never shipped), 2026-11-02
+
+Frames are in `research/p3/`. Each reference is observed live in headless Chromium through the proxy.
+
+| # | Source (annex v3) | URL observed | Status | What was observed |
+|---|---|---|---|---|
+| R5 | MERSI | https://www.mersi-architecture.com/ | 200 | **Hero:** two 720 px columns of stacked slides, one per project. Inactive slides are hidden by `clip-path: inset()`: from the top in the left column, from the bottom in the right. **Input:** the wheel scrubs the next slide in continuously; both halves and the central label wipe at the same percentage (51.4% → 47.9%, lerp-settled), with no snap within 1 s and no auto-advance after 6 s idle. **Label card:** the project name, district, type and year, and an embossed monogram, on a colour plate that changes per project. **Stack:** Webflow + GSAP + a custom JS layer (`mersi.netlify.app/main.js`). |
+| R6 | Apple AirPods Pro | https://www.apple.com/airpods-pro/ | 200 | A light product stage. One sentence-scale headline per pinned beat. Text reveals with a colour ring. A paged "Take a closer look" carousel. Big comparative numerals ("2x"). |
+| R7 | Lusion | https://lusion.co/ | 200 | A counter preloader (to 100) with an L monogram. Then one rounded 3D panel that grows from an inset card to full bleed as you scroll; crosshair corner marks; "Scroll to explore". The flow is one object carried through the sections. |
+| R8 | Lando Norris | https://landonorris.com/ | 200 | A light contour-map field, and two-tone condensed type on a dark band. The archive is photos scattered across the contour field at different sizes. |
+| R9 | Cowboy | https://cowboy.com/ | 200 | Full-bleed footage with a single rider. Later an image is revealed in stepped horizontal slices under "Power so natural". Restrained colour; one named system per section. |
+| R10 | Ever | https://ever-live-here.com/en/ | 200 | Giant letterforms filled with photos; "Live here". Material sample spheres (brick, facade) beside "Simple shapes, expressive finishes". No before/after slider anywhere, as the annex states. |
+| R11 | Bruno Simon | https://bruno-simon.com/ | 200 | A loading ring on a grid; the 3D world did not render in headless capture. Scope stays: the map is the one explorable section. |
+| R12 | Rimowa UNIQUE | https://www.rimowa.com/us/en/unique.html | **403** (Akamai "Access Denied") | **Not observed.** The 4-step structure (profile → colour → trim → preview) is taken from the annex text only. To be re-tried before the visualiser section is built. |
+| R13 | Quiet Cubes | https://quietcubes.com/ | 200 | It opens on a "Select Your Pod" gate (four pod types) before any content: configurator-first. No 3D model rendered, which matches the annex note. **Identity not fully confirmed:** the Awwwards page (502) and Codrops (bot check) could not be reached to tie this domain to the Awwwards-listed project. |
+
+**Not used from any of them:** assets, colours, type or copy. Only structure and mechanism notes.
