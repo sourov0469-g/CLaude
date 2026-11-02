@@ -206,6 +206,7 @@ A section in Phase 3 that needs something not listed here reports **NO-COVERAGE*
 | **Accordion** | FAQ, process detail | Primary content | closed / open (arrow rotates 90°) | line-control rules |
 | **Service row** | Lists of services | Feature grids of 3 equal cards (banned) | hover: icon rises 4px, arrow moves 8px | icon 32, subheading |
 | **Beat stage** | The Protect Your Nest beats (max 4) | Anything else | pinned; static under reduced motion | sticky 100dvh |
+| **Video card** | Owl's own YouTube videos | Stock or third-party video | thumbnail with an amber play button; nothing from YouTube loads until click; then a youtube-nocookie player with focus moved to it | radius-m; accent-fill play; 16:9 |
 | **Place list** | Towns served; any plain list of places | Lists of services (use service rows) or proof (use chips) | static; the home town is bold with a pin | auto-fill columns ≥10rem; hairline rules; small type |
 | **Footer** | Every page | n/a | n/a | surface-night; Night-yard background below the copy |
 | **Bespoke: Sweep-the-lawn game** | Once, on the 3-Part Cleanup page or beat | Elsewhere | idle / playing / won; keyboard playable; reduced motion = a tap-to-reveal grid | magnetPass grammar |

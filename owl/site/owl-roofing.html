@@ -260,6 +260,17 @@
 .place-list li[data-home]{font-weight:700}
 .place-list li .icon{width:var(--space-16);height:var(--space-16);color:var(--text-muted)}
 
+/* video card: Owl's own YouTube videos only; nothing loads from YouTube until the visitor clicks (privacy + weight) */
+.vcard{position:relative;margin:0;display:grid;gap:var(--space-12)}
+.vcard-btn{position:relative;display:block;width:100%;padding:0;border:0;border-radius:var(--radius-m);overflow:hidden;cursor:pointer;background:var(--surface-ink);aspect-ratio:16/9}
+.vcard-btn img{display:block;width:100%;height:100%;object-fit:cover;transition:transform var(--dur-slow) var(--ease-out)}
+.vcard-btn:hover img{transform:scale(1.03)}
+.vcard-play{position:absolute;left:var(--space-16);bottom:var(--space-16);display:grid;place-items:center;width:var(--space-64);height:var(--space-64);border-radius:50%;background:var(--accent-fill);color:var(--accent-on-fill);transition:transform var(--dur-fast) var(--ease-out)}
+.vcard-btn:hover .vcard-play{transform:scale(1.08)}
+.vcard-btn:active .vcard-play{transform:scale(var(--press-scale))}
+.vcard iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius-m);background:var(--surface-ink)}
+.vcard figcaption{font:var(--type-small)}
+
 /* footer */
 .owl-footer{position:relative;overflow:hidden;background:var(--surface-night);color:var(--text-on-deep);padding:var(--section-default) var(--gutter) calc(var(--space-160) + var(--space-96))}
 .owl-footer > .owl-bg{top:auto;height:calc(var(--space-160) + var(--space-96))} /* treeline below the copy, never behind it */
@@ -547,6 +558,27 @@ main:focus{outline:none}
 .st2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
 @media (max-width:1023px){.st2-grid{grid-template-columns:1fr}.st2-lead{position:static}}
 
+/* ===== Reviews and videos (Lando: a curated archive in a strict grid with tags; Owl's own videos) ===== */
+.rev-v1,.rev-v2{position:relative;overflow:hidden;background:var(--surface-alt);padding:var(--section-default) 0}
+.rev-bg{position:absolute;inset:0}
+.rev-v1 > .wrap,.rev-v2 > .wrap{position:relative;z-index:1}
+.rv1-head{display:grid;gap:var(--space-12);margin-bottom:var(--space-48);max-width:44rem}
+.rv1-score{font:800 var(--step-5)/1 var(--font-display);letter-spacing:-0.02em}
+.rv1-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--space-24) var(--space-32);align-items:start}
+.rv1-lead{grid-column:1;grid-row:1/span 3}
+.rv1-grid .vcard:not(.rv1-lead) .vcard-play{width:var(--space-48);height:var(--space-48)}
+@media (max-width:1023px){.rv1-grid{grid-template-columns:1fr 1fr}.rv1-lead{grid-column:1/-1;grid-row:auto}}
+@media (max-width:767px){.rv1-grid{grid-template-columns:1fr}}
+.rv2-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:var(--space-48);align-items:start}
+.rv2-main{display:grid;gap:var(--space-16)}
+.rv2-chip{justify-self:start;margin:0}
+.rv2-list{display:grid;gap:var(--space-12);padding-top:var(--space-96)}
+.rv2-item{display:grid;grid-template-columns:var(--space-160) 1fr;gap:var(--space-12);align-items:center;padding:var(--space-8);border:1.5px solid transparent;border-radius:var(--radius-m);background:var(--surface-raised);text-align:left;font:var(--type-small);color:var(--text-primary);cursor:pointer;transition:border-color var(--dur-fast) linear}
+.rv2-item:hover{border-color:var(--line-control)}
+.rv2-item[aria-pressed="true"]{border-color:var(--text-primary)}
+.rv2-item img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-s);display:block}
+@media (max-width:1023px){.rv2-grid{grid-template-columns:1fr}.rv2-list{padding-top:0}}
+@media (max-width:767px){.rv2-item{grid-template-columns:var(--space-96) 1fr}}
 
 
 
@@ -961,7 +993,38 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
+</div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><section class="rev-v1" aria-labelledby="rev1-h">
+  <svg class="rev-bg" data-bg="rings"></svg>
+  <div class="wrap">
+    <div class="rv1-head">
+      <h2 id="rev1-h" class="t-heading"><span class="rv1-score t-num">5.0</span> · 90+ reviews</h2>
+      <p class="t-body muted">The rating as Owl states it. Below: a real customer's experience, and Owl answering homeowners' questions, on Owl's own channel.</p>
+    </div>
+    <div class="rv1-grid">
+      <figure class="vcard rv1-lead" data-yt="0lUgM6cp8tU" data-title="Real Customer Experience with Owl Roofing"><button class="vcard-btn" type="button" aria-label="Play: Real Customer Experience with Owl Roofing"><img src="assets/yt/0lUgM6cp8tU.jpg" alt="" loading="lazy" width="720" height="405"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption><span class="t-label">Customer story</span><br><b>Real Customer Experience with Owl Roofing</b> | Stress-Free Insurance Claim &amp; Beautiful Results</figcaption></figure>
+      <figure class="vcard" data-yt="msQB1mRpbTI" data-title="Why Choose Owl Roofing?"><button class="vcard-btn" type="button" aria-label="Play: Why Choose Owl Roofing?"><img src="assets/yt/msQB1mRpbTI.jpg" alt="" loading="lazy" width="720" height="405"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption><span class="t-label">About Owl</span><br><b>Why Choose Owl Roofing?</b> What makes Owl Roofing different?</figcaption></figure>
+      <figure class="vcard" data-yt="lp8BQIQ0e_Q" data-title="7 Questions Every Homeowner Should Ask Before Replacing a Roof"><button class="vcard-btn" type="button" aria-label="Play: 7 Questions Every Homeowner Should Ask Before Replacing a Roof"><img src="assets/yt/lp8BQIQ0e_Q.jpg" alt="" loading="lazy" width="720" height="405"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption><span class="t-label">Questions</span><br><b>7 Questions Every Homeowner Should Ask Before Replacing a Roof</b></figcaption></figure>
+      <figure class="vcard" data-yt="ehKLv5DF2TQ" data-title="Best Shingle Colors for 2026"><button class="vcard-btn" type="button" aria-label="Play: Best Shingle Colors for 2026"><img src="assets/yt/ehKLv5DF2TQ.jpg" alt="" loading="lazy" width="720" height="405"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption><span class="t-label">Choosing</span><br><b>Best Shingle Colors for 2026</b> (+ one to avoid)</figcaption></figure>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="rev-v2" aria-labelledby="rev2-h">
+  <svg class="rev-bg" data-bg="rings"></svg>
+  <div class="wrap rv2-grid">
+    <div class="rv2-main">
+      <h2 id="rev2-h" class="t-heading">Hear it from a homeowner.</h2>
+      <p class="chip rv2-chip"><svg class="icon" aria-hidden="true"><use href="#icon-status-star"/></svg>5.0 · 90+ reviews</p>
+      <figure class="vcard rv2-player" data-yt="0lUgM6cp8tU" data-title="Real Customer Experience with Owl Roofing"><button class="vcard-btn" type="button" aria-label="Play: Real Customer Experience with Owl Roofing"><img src="assets/yt/0lUgM6cp8tU.jpg" alt="" loading="lazy" width="720" height="405"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption class="rv2-cap"><b>Real Customer Experience with Owl Roofing</b> | Stress-Free Insurance Claim &amp; Beautiful Results</figcaption></figure>
+    </div>
+    <div class="rv2-list" role="list" aria-label="More from Owl's channel">
+      <button type="button" role="listitem" class="rv2-item" data-yt="0lUgM6cp8tU" data-title="Real Customer Experience with Owl Roofing" data-cap="Real Customer Experience with Owl Roofing | Stress-Free Insurance Claim &amp; Beautiful Results" aria-pressed="true"><img src="assets/yt/0lUgM6cp8tU.jpg" alt="" loading="lazy" width="720" height="405"><span><b>Customer story</b><br>Real Customer Experience</span></button>
+      <button type="button" role="listitem" class="rv2-item" data-yt="msQB1mRpbTI" data-title="Why Choose Owl Roofing?" data-cap="Why Choose Owl Roofing? What makes Owl Roofing different?" aria-pressed="false"><img src="assets/yt/msQB1mRpbTI.jpg" alt="" loading="lazy" width="720" height="405"><span><b>About Owl</b><br>Why Choose Owl Roofing?</span></button>
+      <button type="button" role="listitem" class="rv2-item" data-yt="lp8BQIQ0e_Q" data-title="7 Questions Every Homeowner Should Ask Before Replacing a Roof" data-cap="7 Questions Every Homeowner Should Ask Before Replacing a Roof" aria-pressed="false"><img src="assets/yt/lp8BQIQ0e_Q.jpg" alt="" loading="lazy" width="720" height="405"><span><b>Questions</b><br>7 Questions Before Replacing a Roof</span></button>
+      <button type="button" role="listitem" class="rv2-item" data-yt="ehKLv5DF2TQ" data-title="Best Shingle Colors for 2026" data-cap="Best Shingle Colors for 2026 (+ one to avoid)" aria-pressed="false"><img src="assets/yt/ehKLv5DF2TQ.jpg" alt="" loading="lazy" width="720" height="405"><span><b>Choosing</b><br>Best Shingle Colors for 2026</span></button>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
 </main>
 <div class="callbar"><a href="tel:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-phone"/></svg>Call</a><a href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text</a></div>
 <div class="vpanel" id="vpanel" hidden role="dialog" aria-label="Section versions"><b>Versions</b><div id="vlist"></div><p class="t-small">Shift+V toggles · URL: ?v=hero:2</p></div>
@@ -1352,7 +1415,18 @@ main:focus{outline:none}
     document.addEventListener('pointerdown', (e) => { if (!h.contains(e.target) && t.getAttribute('aria-expanded') === 'true') set(false); });
   }
 
-  window.Owl = { pinScrub, header, bg, logo, sweepLine, magnetPass, courses, nest, scrub, play, companion, seeded, seg, EASE, reduced };
+  // ---------- 10. video card: swap the thumbnail button for a youtube-nocookie player on click (Owl's own videos only)
+  function videoCard(fig) {
+    const btn = fig.querySelector('.vcard-btn'); if (!btn) return;
+    btn.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(fig.dataset.yt) + '?autoplay=1&rel=0';
+      f.title = fig.dataset.title || 'Owl Roofing video'; f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true;
+      btn.replaceWith(f); f.focus();
+    }, { once: true });
+  }
+
+  window.Owl = { videoCard, pinScrub, header, bg, logo, sweepLine, magnetPass, courses, nest, scrub, play, companion, seeded, seg, EASE, reduced };
 })();
 
 </script>
@@ -1783,6 +1857,21 @@ window.OwlNest = (function () {
   new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); Owl.play(set, 1800); } }, { threshold: 0.5 }).observe(svg);
 })();
 
+(function () {
+  document.querySelectorAll('.rev-bg').forEach(function (s) { Owl.bg.rings(s); });
+  document.querySelectorAll('.rev-v1 .vcard').forEach(function (f) { Owl.videoCard(f); });
+  var r = document.querySelector('.rev-v2'); if (!r) return;
+  var holder = r.querySelector('.rv2-main'), items = [].slice.call(r.querySelectorAll('.rv2-item'));
+  function mount(yt, title, cap) { // rebuild the player as a fresh thumbnail card for the chosen video
+    var old = holder.querySelector('.vcard'), img = r.querySelector('.rv2-item[data-yt="' + yt + '"] img').getAttribute('src');
+    var fig = document.createElement('figure'); fig.className = 'vcard rv2-player'; fig.dataset.yt = yt; fig.dataset.title = title;
+    fig.innerHTML = '<button class="vcard-btn" type="button"><img alt="" src="' + img + '"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption class="rv2-cap"></figcaption>';
+    fig.querySelector('.vcard-btn').setAttribute('aria-label', 'Play: ' + title); fig.querySelector('figcaption').innerHTML = cap;
+    old.replaceWith(fig); Owl.videoCard(fig);
+  }
+  Owl.videoCard(holder.querySelector('.vcard'));
+  items.forEach(function (b) { b.addEventListener('click', function () { items.forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); mount(b.dataset.yt, b.dataset.title, b.dataset.cap); holder.querySelector('.vcard-btn').focus(); }); });
+})();
 
 
 

@@ -384,5 +384,16 @@
     document.addEventListener('pointerdown', (e) => { if (!h.contains(e.target) && t.getAttribute('aria-expanded') === 'true') set(false); });
   }
 
-  window.Owl = { pinScrub, header, bg, logo, sweepLine, magnetPass, courses, nest, scrub, play, companion, seeded, seg, EASE, reduced };
+  // ---------- 10. video card: swap the thumbnail button for a youtube-nocookie player on click (Owl's own videos only)
+  function videoCard(fig) {
+    const btn = fig.querySelector('.vcard-btn'); if (!btn) return;
+    btn.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(fig.dataset.yt) + '?autoplay=1&rel=0';
+      f.title = fig.dataset.title || 'Owl Roofing video'; f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true;
+      btn.replaceWith(f); f.focus();
+    }, { once: true });
+  }
+
+  window.Owl = { videoCard, pinScrub, header, bg, logo, sweepLine, magnetPass, courses, nest, scrub, play, companion, seeded, seg, EASE, reduced };
 })();

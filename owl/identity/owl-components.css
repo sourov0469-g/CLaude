@@ -130,6 +130,17 @@
 .place-list li[data-home]{font-weight:700}
 .place-list li .icon{width:var(--space-16);height:var(--space-16);color:var(--text-muted)}
 
+/* video card: Owl's own YouTube videos only; nothing loads from YouTube until the visitor clicks (privacy + weight) */
+.vcard{position:relative;margin:0;display:grid;gap:var(--space-12)}
+.vcard-btn{position:relative;display:block;width:100%;padding:0;border:0;border-radius:var(--radius-m);overflow:hidden;cursor:pointer;background:var(--surface-ink);aspect-ratio:16/9}
+.vcard-btn img{display:block;width:100%;height:100%;object-fit:cover;transition:transform var(--dur-slow) var(--ease-out)}
+.vcard-btn:hover img{transform:scale(1.03)}
+.vcard-play{position:absolute;left:var(--space-16);bottom:var(--space-16);display:grid;place-items:center;width:var(--space-64);height:var(--space-64);border-radius:50%;background:var(--accent-fill);color:var(--accent-on-fill);transition:transform var(--dur-fast) var(--ease-out)}
+.vcard-btn:hover .vcard-play{transform:scale(1.08)}
+.vcard-btn:active .vcard-play{transform:scale(var(--press-scale))}
+.vcard iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:var(--radius-m);background:var(--surface-ink)}
+.vcard figcaption{font:var(--type-small)}
+
 /* footer */
 .owl-footer{position:relative;overflow:hidden;background:var(--surface-night);color:var(--text-on-deep);padding:var(--section-default) var(--gutter) calc(var(--space-160) + var(--space-96))}
 .owl-footer > .owl-bg{top:auto;height:calc(var(--space-160) + var(--space-96))} /* treeline below the copy, never behind it */
