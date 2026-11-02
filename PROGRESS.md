@@ -188,7 +188,24 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
 - **Proof 1, the hero:** DONE (`owl/GATE-hero.md`). V1 "house window" (default) and V2 "sequence", in the single file `owl/site/owl-roofing.html`; 27/27 tests pass.
 - **Proof 2, Protect Your Nest:** DONE (`owl/GATE-nest.md`). V1 pinned beats (default) and V2 route; 16/16 tests pass.
 - **Proof 3, Sweep the lawn:** DONE (`owl/GATE-game.md`). V1 side-view sweep (default) and V2 top-down find; 16/16 tests pass; continuous collision.
-- **All three proof sections are done.** Next: the full build, one section at a time, two versions each: proof strip, services, families, storm, reviews, price, area, call band + footer; then the 5 inner pages.
+- **All three proof sections are done.**
+- **HOMEPAGE COMPLETE:** 11 sections, exactly two versions each, in `owl/site/owl-roofing.html`.
+  - **Gates:**
+    - `GATE-hero`, `GATE-proof`, `GATE-nest`, `GATE-game`, `GATE-services`, `GATE-families`
+    - `GATE-storm`, `GATE-reviews`, `GATE-price`, `GATE-area`, `GATE-call`
+  - **Whole-page check (`hometest.mjs`), 8/8 pass:**
+    - full scroll at 1440/768/390, for the defaults and for all V2;
+    - no JS errors, no overflow, one h1;
+    - the surfaces alternate paper and cream, with exactly one deep block, at the end.
+  - **Weight:** the HTML is 540 KB, plus 5.4 MB of media. The media loads lazily (hero video 1.6 MB; frame sequence
+    2.1 MB, loaded only for hero V2).
+  - **Assets added during the build, under the closed-inventory rule:**
+    - the video card (click-to-load youtube-nocookie);
+    - the nest `onDeep` tones;
+    - frame images use `height:auto`.
+- **Next:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
+  Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
+  fall back to Home; this is noted in each gate.
 
 ### Page plan and reasoning (recorded here as the addendum requires)
 **Built from tasks inward** (⟦S1411⟧). A Twin Cities homeowner comes with one of four jobs:
