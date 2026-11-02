@@ -522,12 +522,64 @@
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink'); } };
   };
 
+  /* ---------- FINALIZE Phase 6 · inner-page seams: the same rule as Home (one ink line, the profile that belongs to the
+     hand-off, drawn with the scroll); no numerals on any of them ---------- */
+  // kitchens scope -> sequence: the plan's cabinet run, seen in elevation (base boxes under a counter line)
+  DIV.counter = function (w) {
+    var d = 'M0 22 H' + w, boxes = '';
+    for (var x = 24; x < w - 60; x += 92) boxes += 'M' + x + ' 26 V62 H' + (x + 84) + ' V26 M' + (x + 42) + ' 32 V56';
+    return { h: 76, svg: '<path class="dv-ink" d="' + d + '"/><path class="dv-ink2" d="' + boxes + '"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink, .dv-ink2'); } };
+  };
+  // -> projects: a measuring rule (ticks only), the tape the before/after print carries
+  DIV.rule = function (w) {
+    var t = '';
+    for (var x = 0, i = 0; x <= w; x += 12, i++) t += 'M' + x + ' 24 V' + (i % 8 === 0 ? 46 : i % 4 === 0 ? 40 : 32);
+    return { h: 64, svg: '<path class="dv-ink" d="M0 24 H' + w + '"/><path class="dv-ink2" d="' + t + '"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink, .dv-ink2'); } };
+  };
+  // bathrooms hero -> build: down to the studs (a stud row between two plates)
+  DIV.studs = function (w) {
+    var st2 = '';
+    for (var x = 16; x < w; x += 64) st2 += 'M' + x + ' 18 V58 M' + (x + 8) + ' 18 V58';
+    return { h: 72, svg: '<path class="dv-ink" d="M0 14 H' + w + ' M0 62 H' + w + '"/><path class="dv-ink2" d="' + st2 + '"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink, .dv-ink2'); } };
+  };
+  // bathrooms projects -> close: a row of week boxes, the strip the close draws in full
+  DIV.weeks = function (w) {
+    var b = '', n = Math.max(6, Math.floor(w / 96)), cw = (w - 40) / n;
+    for (var i = 0; i < n; i++) b += 'M' + f(20 + i * cw + 6) + ' 20 h' + f(cw - 12) + ' v32 h' + f(-(cw - 12)) + ' Z';
+    return { h: 72, svg: '<path class="dv-ink" d="' + b + '"/>', anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink'); } };
+  };
+  // renovation services -> disruption: five separate dashes close up into one line (one disruption, not five)
+  DIV.join = function (w) {
+    var segs = '', sw = w / 5;
+    for (var i = 0; i < 5; i++) segs += '<path class="dv-ink dv-seg" d="M' + f(i * sw + sw * .18) + ' 36 H' + f(i * sw + sw * .82) + '"/>';
+    return { h: 72, svg: segs + '<path class="dv-ink dv-one" d="M0 36 H' + w + '"/>',
+      anim: function (svg, st) {
+        var tl = gsap.timeline({ scrollTrigger: { trigger: st.trigger, start: 'top 96%', end: 'top 52%', scrub: .5 } });
+        tl.fromTo(svg.querySelectorAll('.dv-seg'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: 'none', stagger: .05 }, 0)
+          .fromTo(svg.querySelector('.dv-one'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .5, ease: 'none' }, .5)
+          .to(svg.querySelectorAll('.dv-seg'), { opacity: 0, duration: .2 }, .8);
+        return tl;
+      } };
+  };
+  // contact service area -> what happens next: the stage rail, the first two marks filled (the two stages that follow)
+  DIV.steps = function (w) {
+    var m = '';
+    for (var i = 0; i < 8; i++) { var x = f(w * .06 + i * w * .125); m += '<rect class="dv-mk' + (i < 2 ? ' dv-mk--on' : '') + '" x="' + (x - 6) + '" y="30" width="12" height="12"/>'; }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36 H' + w + '"/>' + m,
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.from(svg.querySelectorAll('.dv-mk'), { opacity: 0, duration: .2, stagger: .06 }, .1); }); } };
+  };
+
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
   var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
-    // inner pages: a different divider under each section of a page
-    ['kitchen-intro', 'dimension'], ['kitchen-scope', 'roofs'], ['kitchen-sequence', 'beam'], ['kitchen-work', 'tally'], ['bath-intro', 'conduit'], ['bath-build', 'tally'], ['bath-rooms', 'roofs'], ['bath-work', 'beam'],
-    ['reno-intro', 'roofs'], ['reno-services', 'beam'], ['reno-disruption', 'tally'], ['reno-permits', 'dimension'], ['contact-form', 'footing'], ['contact-visit', 'beam']];
+    // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
+    ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
+    ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
+    ['reno-intro', 'roofs'], ['reno-services', 'join'], ['reno-disruption', 'dimension'], ['reno-permits', 'truss'], ['reno-stories', 'footing'],
+    ['contact-form', 'conduit'], ['contact-visit', 'coast'], ['contact-area', 'steps'], ['contact-next', 'level'], ['contact-faq', 'footing']];
   var dividers = [];
 
   function drawDivider(d) {

@@ -193,6 +193,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-mk { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.5; }
 .dv-dash { fill: none; stroke: var(--color-border-strong); stroke-width: 1.4; stroke-dasharray: 6 6; }
 .dv-pin { fill: var(--color-surface); stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-linejoin: round; }
+.dv-mk--on { fill: var(--color-accent-solid); stroke: var(--color-text); }
 .dv-t { font: 500 12px/1 var(--f-text); letter-spacing: .08em; fill: var(--color-art-line); }
 .dv-bg { fill: var(--color-surface); }
 .dv-steel { fill: var(--color-art-fill); stroke: var(--color-art-line-soft); stroke-width: 1; }

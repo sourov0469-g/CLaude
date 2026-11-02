@@ -81,10 +81,11 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 |---|---|---|
 | 0 | Recite-back, ambiguities, KEEP/REMOVE inventory (`FINALIZE-PHASE0.md`, 12dedfc) | PASS (Muse) |
 | 1 | Skill pack read and digested; reference study; flow maps; storyboards; Financing concept; logo story; companion plan | **done**: `GATE-phase1.md` |
-| 2 | Companion and logo in a test harness | **done**: `GATE-system-companion-logo.md` (awaiting Muse) |
-| 3 | Home sections, one at a time, in page order | **in progress**: Hero, Proof, Services, Before/After done (`GATE-home-*.md`); next is Process |
-| 4 | Kitchens, then Bathrooms | pending |
-| 5 | Renovation, then Contact, then single-file assembly | pending |
+| 2 | Companion and logo in a test harness | **done**: `GATE-system-companion-logo.md` |
+| 3 | Home sections, one at a time, in page order | **done**: ten `GATE-home-*.md`, `GATE-system-footer.md`, `GATE-system-dividers.md` |
+| 4 | Kitchens, then Bathrooms | **done**: `GATE-kitchens.md`, `GATE-bathrooms.md` |
+| 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
+| 6 | Polish pass on the defects the gate reports name as remaining (no Muse ruling received yet) | **in progress**: see Phase 6 log |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -157,3 +158,9 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Renovation** (5 sections + footer; hero ×2, 2 NEW ×2): `GATE-renovation.md`. Collage / panels hero; sheet-stack services (firm names only); one disruption (collapse / house plan); permits ticked in order with county code context; whole-home stories (chapters / index) + CTA. Zero console errors at 1440/390. Zero background tasks, zero sub-agents.
 - **Contact** (5 sections + footer; visit ×2, 2 NEW ×2): `GATE-contact.md`. Call + letter hero with live line; card / label with live line; drifting county rows + search laying out all 104; what happens next (Process frames / thread); questions (accordion morph / tablist). Zero console errors at 1440/390. Zero background tasks, zero sub-agents.
 - **Single-file assembly**: `GATE-assembly.md`. `remodeling/site/elbaz-construction.html`, ONE file (3.68 MB), five isolated pages in one frame shell, shared images + GSAP stored once, in-file navigation with #/page deep links and back/forward, the logo's page-switch beat; 0 backup elements (the assembler refuses to build otherwise); 0 console errors across all frames. **Phase 5 complete: the finalize build is done, awaiting Muse's judgement.** Zero background tasks, zero sub-agents.
+
+
+## Phase 6 log (polish pass on recorded defects, while awaiting Muse)
+- Phase table brought up to date.
+- Dead CSS removed: the dark-era backup token block and the six selectors that themed the old `data-v="b…"` slots (they matched nothing; `tokens.css` now has zero backup selectors).
+- **Inner-page seams** (named as remaining in four page gates): every inner-page boundary now carries its hand-off, on the same rule as Home (one ink line, drawn with the scroll, no numerals), and every page's last section hands to the footer on the footing. New profiles: `counter` (Kitchens scope → sequence: the plan's run in elevation), `rule` (→ projects: the tape the before/after print carries), `studs` (Bathrooms hero → build), `weeks` (→ the week strip), `join` (Renovation services → one disruption: five dashes close into one line), `steps` (Contact area → what happens next: the stage rail, first two marks filled). Twenty inner seams verified drawn; zero console errors. Evidence: `qa/finalize/phase6/inner-page-seams.jpg`.
