@@ -1,0 +1,26 @@
+/* ===== Call band + footer: the one deep block, at the end (B3 Night yard; Lusion: the flow resolves) ===== */
+.call-v1,.call-v2{position:relative;overflow:hidden;background:var(--surface-deep);color:var(--text-on-deep);padding:var(--section-hero) 0 calc(var(--space-160) + var(--space-96))}
+.call-bg{position:absolute;left:0;right:0;bottom:0;top:auto;height:calc(var(--space-160) + var(--space-96))}
+.call-v1 > .wrap,.call-v2 > .wrap{position:relative;z-index:1}
+.cl1-band{display:grid;justify-items:center;text-align:center;gap:var(--space-16)}
+.cl1-nest{position:relative;width:min(100%,40rem);aspect-ratio:640/300;display:grid;place-items:center}
+.cl1-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cl1-num{position:absolute;z-index:1;left:50%;top:42%;transform:translate(-50%,-92%);white-space:nowrap;font:800 var(--step-4)/1 var(--font-display);letter-spacing:-0.01em;color:var(--text-on-deep);text-decoration:none;padding:var(--space-8) var(--space-12);border-radius:var(--radius-s)}
+.cl1-num:hover{color:var(--accent-text-on-deep)}
+.cl1-sub{margin:0}
+.cl1-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12);justify-content:center}
+.cl-text{--b-bg:transparent;--b-fg:var(--text-on-deep);--b-bd:var(--text-on-deep)}
+.cl-foot{display:grid;grid-template-columns:auto 1fr;gap:var(--space-24) var(--space-48);margin-top:var(--space-96);padding-top:var(--space-48);border-top:1px solid var(--line-on-deep);align-items:start}
+.cl-logo{width:var(--space-160);display:block}
+.cl-nav{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-24);justify-content:flex-end;font:700 var(--step-m1)/1.4 var(--font-display)}
+.cl-nav a,.cl-addr a{color:var(--text-on-deep)}
+.cl-addr{grid-column:1/-1;font-style:normal;color:var(--text-on-deep);line-height:1.8}
+@media (max-width:767px){.cl-foot{grid-template-columns:1fr}.cl-nav{justify-content:flex-start}.cl1-num{font-size:var(--step-3)}}
+.cl2-band{display:grid;gap:var(--space-16)}
+.cl2-kick{margin:0;color:var(--text-on-deep-muted)}
+.cl2-num{font:800 calc(var(--step-5) * 1.6)/1 var(--font-display);letter-spacing:-0.03em;color:var(--text-on-deep);text-decoration:none;justify-self:start}
+.cl2-num:hover{color:var(--accent-text-on-deep)}
+.cl2-line{display:block;width:100%;height:var(--space-24);overflow:visible}
+.cl2-row{display:flex;flex-wrap:wrap;gap:var(--space-24);align-items:center;justify-content:space-between}
+.cl2-row .t-body{max-width:36rem;margin:0}
+@media (max-width:767px){.cl2-num{font-size:var(--step-4)}}

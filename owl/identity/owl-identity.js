@@ -192,10 +192,10 @@
   }
 
   // ---------- 6. the nest: strands weave around the centre (the phone number sits there)
-  function nest(svg, { width = 640, height = 300, strands = 14, seed = 9 } = {}) {
+  function nest(svg, { width = 640, height = 300, strands = 14, seed = 9, onDeep = false } = {}) { // onDeep: tones that read on olive-700/900
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     const cx = width / 2, rimY = height * 0.42, rx = width * 0.36, rr = height * 0.1, depth = height * 0.42, out = [];
-    const tones = ['var(--line-control)', 'var(--graphic-warm)', 'var(--text-primary)'];
+    const tones = onDeep ? ['var(--line-on-deep)', 'var(--graphic-warm)', 'var(--text-on-deep)'] : ['var(--line-control)', 'var(--graphic-warm)', 'var(--text-primary)'];
     const add = (d, i, w, stroke, op = 1) => out.push(el('path', { d, fill: 'none', 'stroke-width': w, 'stroke-linecap': 'round', pathLength: 1, 'stroke-dasharray': '1 1', style: `stroke:${stroke};opacity:${op}` }, svg));
     // back rim (upper half of the rim ellipse), lighter: it sits behind
     for (let k = 0; k < 3; k++) { const o = (k - 1) * 5; add(`M${cx - rx - o} ${rimY} A${rx + o} ${rr + o * 0.4} 0 0 1 ${cx + rx + o} ${rimY}`, k, 1.6, tones[k], 0.55); }
