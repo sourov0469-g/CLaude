@@ -32,6 +32,6 @@
 
 ## Defects remaining (honest)
 - ~~**Phones, collapse:** the five collapsed bars truncate room names at 390.~~ **Fixed in Phase 6:** on narrow screens the resolved plan uses wider bars (38%, stepped across 80% of the chart). Measured: all five names fit at 390 and 1440 (`qa/finalize/phase6/renovation-collapse-phone-390.png`).
-- **Dividers** on this page reuse the system set.
+- ~~**Dividers** on this page reuse the system set.~~ **Fixed in Phase 6:** roofs, join (five dashes close into one line), dimension, truss, footing.
 
 Render evidence: `qa/finalize/renovation/`. Zero console errors at 1440 and 390; no horizontal overflow.

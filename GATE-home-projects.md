@@ -50,7 +50,7 @@
 
 ## Defects remaining (honest)
 - **Seams:** no ink-line underline carrier from Financing yet, and no hand-off to the Reviews tally yet (flow seams pass).
-- **Reduced motion, V1:** the frames keep their static tilt. It is a still look, not motion, but Muse may prefer them level there.
+- ~~**Reduced motion, V1:** the frames keep their static tilt. It is a still look, not motion, but Muse may prefer them level there.~~ **Fixed in Phase 6:** under reduced motion the frames hang level (and the spirit level is hidden).
 
 ## Skills applied
 - **Motion:** S0450 (marquee with a pause control, 2.2.2), BANK Q161 (seamless loop), S0362 (the leaf reads as one physical object; shade follows the turn).

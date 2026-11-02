@@ -52,6 +52,8 @@
 .pj.is-static .pj__row { overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: var(--s3); }
 .pj.is-static .pj__f { scroll-snap-align: start; }
 .pj.is-static .pj__rail { width: var(--rw, 100%); }
+.pj.is-static .pj__hang { rotate: 0deg; }   /* Phase 6: still means level (reduced motion) */
+.pj.is-static .pj__lvl { display: none; }
 
 @media (max-width: 900px) { .pj__head { grid-template-columns: 1fr; } .pj__rows { margin-top: var(--s6); gap: var(--s6); } .pj__f { --fw: 230px; } .pj__track { gap: var(--s5); } }
 

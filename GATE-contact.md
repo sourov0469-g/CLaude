@@ -29,6 +29,6 @@
 
 ## Defects remaining (honest)
 - ~~**Drifting rows** pause rather than decelerate (CSS animation).~~ **Fixed in Phase 6:** one smoothed speed per row (the Projects model). Measured: rows drift at 24 / 20 / 28 px/s (the middle one the other way); on hold they ease to rest (3 → 1 → 1 → 0 px per 150 ms), held delta 0; search lays them flat (transform none); reduced motion still.
-- **Dividers** on this page are the system set.
+- ~~**Dividers** on this page are the system set.~~ **Fixed in Phase 6:** conduit, coast, steps (the stage rail, first two marks filled), level, footing.
 
 Render evidence: `qa/finalize/contact/`. Zero console errors at 1440 and 390; no horizontal overflow.

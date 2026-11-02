@@ -105,18 +105,29 @@
     var hist = [];
     els.forEach(function (el, i) {
       var b = B[i], ox = 0, oy = 0;
-      k.on(el, 'pointerdown', function (e) {
-        if (e.button > 0) return;
-        e.preventDefault();
-        el.setPointerCapture(e.pointerId);
+      // touch: a direction lock (Phase 6). The block takes the gesture only if it starts sideways; a vertical start is
+      // left to the browser (touch-action: pan-y), so a thumb on a block still scrolls the page
+      var pend = null;
+      function grab(e, sx, sy) {
+        try { el.setPointerCapture(e.pointerId); } catch (x) {}   // a capture that cannot be taken never aborts the grab
         var r = list.getBoundingClientRect();
         b.held = true; b.live = true; b.bendT = 0; el.classList.add('is-held'); el.style.zIndex = 4;
-        ox = e.clientX - r.left - b.x; oy = e.clientY - r.top - b.y; hist = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
+        ox = sx - r.left - b.x; oy = sy - r.top - b.y; hist = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
         B.forEach(function (o) { if (o !== b) o.el.style.zIndex = ''; });
         wake();
+      }
+      k.on(el, 'pointerdown', function (e) {
+        if (e.button > 0) return;
+        if (e.pointerType === 'touch') { pend = { x: e.clientX, y: e.clientY }; return; }
+        e.preventDefault(); grab(e, e.clientX, e.clientY);
       });
       k.on(el, 'pointermove', function (e) {
         var r = list.getBoundingClientRect();
+        if (pend && !b.held) {
+          var dx = e.clientX - pend.x, dy = e.clientY - pend.y;
+          if (dx * dx + dy * dy > 64) { if (Math.abs(dx) > Math.abs(dy)) grab(e, pend.x, pend.y); pend = null; }
+          return;
+        }
         if (b.held) {
           var nx = Math.max(0, Math.min(W - b.w, e.clientX - r.left - ox)), ny = Math.max(-H * .6, Math.min(H - b.h, e.clientY - r.top - oy));
           b.vx = (nx - b.x) * 60; b.x = nx; b.y = ny;
@@ -130,6 +141,7 @@
       });
       k.on(el, 'pointerleave', function () { if (!b.held) { b.bendT = 0; wake(); } });
       function release() {
+        pend = null;
         if (!b.held) return;
         b.held = false; el.classList.remove('is-held');
         var a = hist[0], z = hist[hist.length - 1], dt = Math.max(16, z.t - a.t) / 1000;
@@ -174,6 +186,9 @@
       k.io(site, function (en) {
         if (!en.isIntersecting || started) return;
         started = true; clock = 0; B.forEach(function (b) { b.el.style.visibility = ''; }); place(true);
+        // Phase 6: during the arrival the site is clipped at its top edge, so the blocks drop in from the frame's edge
+        // instead of crossing the headline and lead above it; the clip lifts once they have landed (throws stay free)
+        site.classList.add('is-arriving'); k.timeout(function () { site.classList.remove('is-arriving'); }, 2200);
       }, { threshold: .35 });
     } else { started = true; place(false); }
     k.add(function () { els.forEach(function (el) { el.style.transform = el.style.width = el.style.height = el.style.zIndex = el.style.visibility = ''; }); });

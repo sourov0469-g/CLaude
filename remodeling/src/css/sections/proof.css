@@ -19,7 +19,7 @@
   position: absolute; left: 0; top: 0;
   display: flex; align-items: center; justify-content: center; gap: var(--s3);
   padding: var(--s3) var(--s4); box-sizing: border-box;
-  cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+  cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
   transform-origin: 50% 100%; will-change: transform;
   filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--color-shadow) 16%, transparent));
   transition: filter 200ms var(--ez-out);
@@ -67,3 +67,6 @@
   .pf__site { height: 400px; margin-top: var(--s5); }
 }
 @media (prefers-reduced-motion: reduce) { .pf__b { transition: none; will-change: auto; } }
+
+/* Phase 6: the arrival is clipped at the site's top edge (the blocks never cross the lead text while dropping in) */
+.pf__site.is-arriving { clip-path: inset(0 -100vw -200px -100vw); }

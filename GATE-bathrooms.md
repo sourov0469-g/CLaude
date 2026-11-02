@@ -35,6 +35,6 @@
 
 ## Defects remaining (honest)
 - ~~**Fixtures bay:** the head, valve and niche are drawn simply.~~ **Fixed in Phase 6:** redrawn in the same line language: shower arm and head with faint spray, valve trim plate and lever, a recessed niche with a shelf and two bottles, a linear drain, the handle on the glass, and a towel on its bar outside the glass (`qa/finalize/phase6/bath-fixtures-bay.png`). The build still steps 0→5 with the pin at top 0.
-- **Dividers** on this page reuse the system set; tuning is left for the assembly pass.
+- ~~**Dividers** on this page reuse the system set; tuning is left for the assembly pass.~~ **Fixed in Phase 6:** every boundary now carries its hand-off (studs, tile, rule, weeks, footing).
 
 Render evidence: `qa/finalize/bathrooms/` (12 captures). Zero console errors at 1440 and 390; no horizontal overflow.

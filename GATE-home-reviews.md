@@ -36,7 +36,7 @@
 
 ## Defects remaining (honest)
 - **No seam yet:** neither the upward rise in from Projects nor the 5-stars-to-pins hand-off out to Towns; scheduled for the flow seams pass.
-- **The dashed 0.8 line** is quiet. Muse may want it louder, or labelled.
+- ~~**The dashed 0.8 line** is quiet. Muse may want it louder, or labelled.~~ **Fixed in Phase 6:** the 0.8 mark is now a clay dashed line at 2px (no numeral added; the figure stays the published 4.8).
 
 ## Skills applied
 - **Motion:** S1326 (one scrubbed value, reversible), S0362 (outlines draw before the fill arrives).

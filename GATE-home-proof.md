@@ -45,8 +45,8 @@
 3. **Cycle 2, mobile:** a 520px stage left a large empty band. It is now 400px; measured no overflow, and every block stays inside the stage at 390px.
 
 ## Defects remaining (honest)
-- **During entry:** the blocks fall through the header area for a fraction of a second. It is momentary and reads as "dropped in", but they pass over the lead text.
-- **Touch:** a direction lock between page scroll and block drag is not implemented. Touching a block drags it rather than scrolling the page.
+- ~~**During entry:** the blocks fall through the header area for a fraction of a second. It is momentary and reads as "dropped in", but they pass over the lead text.~~ **Fixed in Phase 6:** during the arrival the site is clipped at its top edge, so the blocks drop in from the frame's edge (verified mid-arrival); throws stay free once they have landed.
+- ~~**Touch:** a direction lock between page scroll and block drag is not implemented. Touching a block drags it rather than scrolling the page.~~ **Fixed in Phase 6:** blocks use `touch-action: pan-y`; a touch grabs only if it starts sideways (> 8px, |dx| > |dy|). Measured: vertical start not held (the page scrolls), sideways start held, mouse grabs at once.
 - **Carrier:** the hero-frame-to-deck dock (a true carrier) is still to come when the flow seams are tuned across Home.
 
 ## Skills applied

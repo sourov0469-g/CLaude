@@ -32,7 +32,7 @@
 7. **Hero:** my rewrite dropped the `kintro` class that clears the nav. Restored.
 
 ## Defects remaining (honest)
-- **Kitchen-page dividers** reuse the system set; their hand-off tuning is left for the assembly pass.
+- ~~**Kitchen-page dividers** reuse the system set; their hand-off tuning is left for the assembly pass.~~ **Fixed in Phase 6:** dimension, counter (the run in elevation), rule (the tape on the print), level, footing.
 - **Scope plan wording:** the explanatory notes under each tier ("The run changes and an island comes in") illustrate the firm's tier definitions; they are not firm quotes. Muse may prefer the definitions alone.
 
 Render evidence: `qa/finalize/kitchens/` (12 captures). Zero console errors at 1440 and 390; no horizontal overflow.

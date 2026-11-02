@@ -52,7 +52,7 @@
 ## Defects remaining (honest)
 - **Drawing finesse:** the people are deliberately simple, and an illustrator would give them more character (hands, posture).
 - **No carrier line** from Before/After into this section, or out of it into Financing, yet; scheduled for the flow seams pass.
-- **The inherited divider** below this section (zig-zag teeth) is the old one, pending the dividers system.
+- ~~**The inherited divider** below this section (zig-zag teeth) is the old one, pending the dividers system.~~ **Fixed by the dividers pass:** the Process rail runs on and forks into the Financing routes.
 
 ## Skills applied
 - **Flow and motion:** S1326 (one value drives everything, reversible), S0186 (scrub with ease none on the master), S1209 (finite pin, about one viewport per frame), S0362 (strokes before fills).

@@ -167,3 +167,6 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Renovation collapse on phones**: the resolved one-plan bars widen on narrow screens; measured, all five room names fit at 390 and 1440 (no truncation). `GATE-renovation.md` amended.
 - **Contact drifting rows**: moved from CSS keyframes to one smoothed speed per row; they now decelerate to rest on pointer, focus, pause or search (measured 3 → 1 → 0 px per 150 ms) instead of stopping dead. `GATE-contact.md` amended.
 - **Bath fixtures bay**: redrawn (arm and head, valve trim and lever, niche with shelf, linear drain, glass handle, towel bar). `GATE-bathrooms.md` amended.
+- **Proof**: a touch direction lock (blocks take the gesture only when it starts sideways; a vertical start scrolls the page) and a clipped arrival (blocks no longer cross the lead text while dropping in). Measured with touch pointer events; zero errors.
+- **Small items**: level frames under reduced motion (Projects V1); a legible 0.8 mark (Reviews); the last 29 inert `data-rx` attributes stripped from the shared chrome.
+- **Gate reports amended**: every item the work above (or an earlier pass) closed is struck through in its gate with what fixed it (bathrooms, contact, kitchens, renovation, home-ba, home-process, home-proof, home-projects, home-reviews, system-companion-logo).

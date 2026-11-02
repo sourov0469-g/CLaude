@@ -1137,7 +1137,7 @@ html.has-buddy select { cursor: default !important; }
 </script>
 </head>
 <body>
-<a class="skip" href="#main" data-rx="~ladder/drop/hop/r">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav" id="nav">
   <div class="nav__in">
@@ -1145,43 +1145,43 @@ html.has-buddy select { cursor: default !important; }
 </a>
     <div class="nav__vs"></div>
     <ul class="nav__links"><li><a href="kitchens.html" data-rx="~hood/swing/wobble/b">Kitchens</a></li><li><a href="bathrooms.html" data-rx="~shower/drop/flash/b">Bathrooms</a></li><li><a href="renovation.html" data-rx="~house/spin/spinout/b">Renovation</a></li><li><a href="#top" aria-current="page" data-rx="~speech/jack/hop/b">Contact</a></li></ul>
-    <a class="nav__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-    <a class="btn btn--call" href="tel:+17542360675" data-rx="phone">Call</a>
-    <a class="btn nav__book" href="#contact-form" data-buddy-sig="stamp" data-rx="blueprint">Book a consultation</a>
+    <a class="nav__tel nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
+    <a class="btn btn--call" href="tel:+17542360675">Call</a>
+    <a class="btn nav__book" href="#contact-form" data-buddy-sig="stamp">Book a consultation</a>
     <div class="settings" id="settings">
       <div class="settings__panel" id="settings-panel" hidden>
         <fieldset>
           <legend>Motion</legend>
           <div class="seg" data-setting="motion">
-            <button type="button" data-rx="~play/roll/ring/l" data-value="on" aria-pressed="true">On</button>
-            <button type="button" data-rx="~pause/roll/shake/l" data-value="off" aria-pressed="false">Off</button>
+            <button type="button" data-value="on" aria-pressed="true">On</button>
+            <button type="button" data-value="off" aria-pressed="false">Off</button>
           </div>
         </fieldset>
       </div>
-      <button class="settings__btn" type="button" data-rx="~gear/orbit/spinout/l" aria-expanded="false" aria-controls="settings-panel" aria-label="Settings: theme and motion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l1.6 2.3 2.7-.8.4 2.8 2.7 1-1.2 2.5 1.6 2.3-2.5 1.3.1 2.8-2.8-.1-1.3 2.5-2.3-1.6-2.3 1.6-1.3-2.5-2.8.1.1-2.8L4.3 14l1.6-2.3-1.2-2.5 2.7-1 .4-2.8 2.7.8z"/><circle cx="12" cy="12" r="3.2"/></svg></button>
+      <button class="settings__btn" type="button" aria-expanded="false" aria-controls="settings-panel" aria-label="Settings: theme and motion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l1.6 2.3 2.7-.8.4 2.8 2.7 1-1.2 2.5 1.6 2.3-2.5 1.3.1 2.8-2.8-.1-1.3 2.5-2.3-1.6-2.3 1.6-1.3-2.5-2.8.1.1-2.8L4.3 14l1.6-2.3-1.2-2.5 2.7-1 .4-2.8 2.7.8z"/><circle cx="12" cy="12" r="3.2"/></svg></button>
     </div>
-    <button class="nav__menu" type="button" data-rx="~toolbox/lid/hop/l" aria-expanded="false" aria-controls="sheet">Menu</button>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="sheet">Menu</button>
   </div>
 </header>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu" hidden>
   <div class="sheet__top">
     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDUgNDgiIHdpZHRoPSIxNDUiIGhlaWdodD0iNDgiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iRWxiYXogQ29uc3RydWN0aW9uIj48dGl0bGU+RWxiYXogQ29uc3RydWN0aW9uPC90aXRsZT48cGF0aCBkPSJNMzggNy41IEgxMCBWNDAuNSBIMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFCMTkxNiIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbGluZWNhcD0iYnV0dCIvPjxyZWN0IHg9IjE4IiB5PSIyMC41IiB3aWR0aD0iMTMiIGhlaWdodD0iNyIgZmlsbD0iI0E0NTU0MCIvPjxwYXRoIGQ9Ik02OC4yOTEgMTAuNzQ1MDAwMDAwMDAwMDAxVjE0LjU3OUg3NC40NzRWMTguMTQzSDY4LjI5MVYyMi4zMDEwMDAwMDAwMDAwMDJINzUuMjg0VjI2LjBINjMuNjc0VjcuMDQ1OTk5OTk5OTk5OTk5SDc1LjI4NFYxMC43NDUwMDAwMDAwMDAwMDFaTTgyLjYyOCA2LjAyVjI2LjBINzguMDExMDAwMDAwMDAwMDFWNi4wMlpNOTQuOTY3MDAwMDAwMDAwMDEgMTAuNzE4UTk2LjgzMDAwMDAwMDAwMDAxIDEwLjcxOCA5OC4zNDIwMDAwMDAwMDAwMSAxMS42NjNROTkuODU0MDAwMDAwMDAwMDEgMTIuNjA4IDEwMC43MzE1MDAwMDAwMDAwMSAxNC4zNjMwMDAwMDAwMDAwMDFRMTAxLjYwOTAwMDAwMDAwMDAxIDE2LjExODAwMDAwMDAwMDAwMiAxMDEuNjA5MDAwMDAwMDAwMDEgMTguNDRRMTAxLjYwOTAwMDAwMDAwMDAxIDIwLjc2MiAxMDAuNzMxNTAwMDAwMDAwMDEgMjIuNTMwNVE5OS44NTQwMDAwMDAwMDAwMSAyNC4yOTkgOTguMzQyMDAwMDAwMDAwMDEgMjUuMjU3NVE5Ni44MzAwMDAwMDAwMDAwMSAyNi4yMTYgOTQuOTY3MDAwMDAwMDAwMDEgMjYuMjE2UTkzLjM3NDAwMDAwMDAwMDAxIDI2LjIxNiA5Mi4xODYgMjUuNTgxNVE5MC45OTggMjQuOTQ3IDkwLjMyMzAwMDAwMDAwMDAxIDIzLjg5NFYyNi4wSDg1LjcwNjAwMDAwMDAwMDAyVjYuMDJIOTAuMzIzMDAwMDAwMDAwMDFWMTMuMDY3UTkwLjk3MSAxMi4wMTQgOTIuMTg2IDExLjM2NlE5My40MDEwMDAwMDAwMDAwMSAxMC43MTggOTQuOTY3MDAwMDAwMDAwMDEgMTAuNzE4Wk05My41OSAxNC43NDFROTIuMjEzMDAwMDAwMDAwMDEgMTQuNzQxIDkxLjI1NDUwMDAwMDAwMDAxIDE1Ljc0UTkwLjI5NiAxNi43MzkgOTAuMjk2IDE4LjQ2N1E5MC4yOTYgMjAuMTk1IDkxLjI1NDUwMDAwMDAwMDAxIDIxLjE5NDAwMDAwMDAwMDAwM1E5Mi4yMTMwMDAwMDAwMDAwMSAyMi4xOTMgOTMuNTkgMjIuMTkzUTk0Ljk2NzAwMDAwMDAwMDAxIDIyLjE5MyA5NS45MzkwMDAwMDAwMDAwMiAyMS4xODA1MDAwMDAwMDAwMDJROTYuOTExMDAwMDAwMDAwMDIgMjAuMTY4IDk2LjkxMTAwMDAwMDAwMDAyIDE4LjQ0UTk2LjkxMTAwMDAwMDAwMDAyIDE2LjcxMiA5NS45NTI1MDAwMDAwMDAwMSAxNS43MjY1UTk0Ljk5NDAwMDAwMDAwMDAxIDE0Ljc0MSA5My41OSAxNC43NDFaTTEwOS40OTMwMDAwMDAwMDAwMSAxMC43MThRMTExLjA4NjAwMDAwMDAwMDAxIDEwLjcxOCAxMTIuMjg3NTAwMDAwMDAwMDIgMTEuMzY2UTExMy40ODkwMDAwMDAwMDAwMiAxMi4wMTQgMTE0LjEzNzAwMDAwMDAwMDAxIDEzLjA2N1YxMC45MzQwMDAwMDAwMDAwMDFIMTE4Ljc1NDAwMDAwMDAwMDAyVjI2LjBIMTE0LjEzNzAwMDAwMDAwMDAxVjIzLjg2N1ExMTMuNDYyMDAwMDAwMDAwMDIgMjQuOTIgMTEyLjI2MDUwMDAwMDAwMDAxIDI1LjU2OFExMTEuMDU5MDAwMDAwMDAwMDEgMjYuMjE2IDEwOS40NjYwMDAwMDAwMDAwMSAyNi4yMTZRMTA3LjYzMDAwMDAwMDAwMDAxIDI2LjIxNiAxMDYuMTE4MDAwMDAwMDAwMDEgMjUuMjU3NVExMDQuNjA2MDAwMDAwMDAwMDEgMjQuMjk5IDEwMy43Mjg1MDAwMDAwMDAwMSAyMi41MzA1UTEwMi44NTEwMDAwMDAwMDAwMSAyMC43NjIgMTAyLjg1MTAwMDAwMDAwMDAxIDE4LjQ0UTEwMi44NTEwMDAwMDAwMDAwMSAxNi4xMTgwMDAwMDAwMDAwMDIgMTAzLjcyODUwMDAwMDAwMDAxIDE0LjM2MzAwMDAwMDAwMDAwMVExMDQuNjA2MDAwMDAwMDAwMDEgMTIuNjA4IDEwNi4xMTgwMDAwMDAwMDAwMSAxMS42NjNRMTA3LjYzMDAwMDAwMDAwMDAxIDEwLjcxOCAxMDkuNDkzMDAwMDAwMDAwMDEgMTAuNzE4Wk0xMTAuODQzMDAwMDAwMDAwMDIgMTQuNzQxUTEwOS40NjYwMDAwMDAwMDAwMSAxNC43NDEgMTA4LjUwNzUwMDAwMDAwMDAxIDE1LjcyNjVRMTA3LjU0OSAxNi43MTIgMTA3LjU0OSAxOC40NFExMDcuNTQ5IDIwLjE2OCAxMDguNTA3NTAwMDAwMDAwMDEgMjEuMTgwNTAwMDAwMDAwMDAyUTEwOS40NjYwMDAwMDAwMDAwMSAyMi4xOTMgMTEwLjg0MzAwMDAwMDAwMDAyIDIyLjE5M1ExMTIuMjIwMDAwMDAwMDAwMDEgMjIuMTkzIDExMy4xNzg1MDAwMDAwMDAwMSAyMS4xOTQwMDAwMDAwMDAwMDNRMTE0LjEzNzAwMDAwMDAwMDAxIDIwLjE5NSAxMTQuMTM3MDAwMDAwMDAwMDEgMTguNDY3UTExNC4xMzcwMDAwMDAwMDAwMSAxNi43MzkgMTEzLjE3ODUwMDAwMDAwMDAxIDE1Ljc0UTExMi4yMjAwMDAwMDAwMDAwMSAxNC43NDEgMTEwLjg0MzAwMDAwMDAwMDAyIDE0Ljc0MVpNMTI2LjE1MjAwMDAwMDAwMDAyIDIyLjE5M0gxMzIuNjg2VjI2LjBIMTIwLjk5NTAwMDAwMDAwMDAyVjIyLjMyOEwxMjcuMjU5MDAwMDAwMDAwMDEgMTQuNzQxSDEyMS4wNDkwMDAwMDAwMDAwMlYxMC45MzQwMDAwMDAwMDAwMDFIMTMyLjU1MTAwMDAwMDAwMDAyVjE0LjYwNloiIGZpbGw9IiMxQjE5MTYiLz48cGF0aCBkPSJNNjcuMzgyNCAzMi40MTEyUTY4LjczNjYgMzIuNDExMiA2OS43OTE5IDMzLjA3NjFRNzAuODQ3MiAzMy43NDEgNzEuMzIzMDAwMDAwMDAwMDEgMzQuOTYxSDY5LjY1MTZRNjkuMzIyMiAzNC4yOSA2OC43MzY2IDMzLjk2MDZRNjguMTUxIDMzLjYzMTIgNjcuMzgyNCAzMy42MzEyUTY2LjU0MDYgMzMuNjMxMiA2NS44ODE4IDM0LjAwOTRRNjUuMjIzIDM0LjM4NzYgNjQuODUwOSAzNS4wOTUyUTY0LjQ3ODggMzUuODAyOCA2NC40Nzg4IDM2Ljc0MjJRNjQuNDc4OCAzNy42ODE2IDY0Ljg1MDkgMzguMzg5MlE2NS4yMjMgMzkuMDk2OCA2NS44ODE4IDM5LjQ4MTFRNjYuNTQwNiAzOS44NjU0IDY3LjM4MjQgMzkuODY1NFE2OC4xNTEgMzkuODY1NCA2OC43MzY2IDM5LjUzNlE2OS4zMjIyIDM5LjIwNjYgNjkuNjUxNiAzOC41MzU2SDcxLjMyMzAwMDAwMDAwMDAxUTcwLjg0NzIgMzkuNzU1NiA2OS43OTE5IDQwLjQxNDRRNjguNzM2NiA0MS4wNzMyIDY3LjM4MjQgNDEuMDczMlE2Ni4xODY4IDQxLjA3MzIgNjUuMTk4NiA0MC41MTgxMDAwMDAwMDAwMDRRNjQuMjEwNCAzOS45NjMgNjMuNjMwOTAwMDAwMDAwMDA0IDM4Ljk3NDhRNjMuMDUxNCAzNy45ODY2IDYzLjA1MTQgMzYuNzQyMlE2My4wNTE0IDM1LjQ5NzggNjMuNjMwOTAwMDAwMDAwMDA0IDM0LjUwOTZRNjQuMjEwNCAzMy41MjE0IDY1LjIwNDcgMzIuOTY2MzAwMDAwMDAwMDA0UTY2LjE5OSAzMi40MTEyIDY3LjM4MjQgMzIuNDExMlpNNzIuNjQwNiAzNy42MzI4UTcyLjY0MDYgMzYuNjA4MDAwMDAwMDAwMDA0IDczLjA5MjAwMDAwMDAwMDAxIDM1LjgxNVE3My41NDM0IDM1LjAyMiA3NC4zMjQyIDM0LjU5NVE3NS4xMDUgMzQuMTY4IDc2LjA2ODgwMDAwMDAwMDAxIDM0LjE2OFE3Ny4wMzI2IDM0LjE2OCA3Ny44MTM0IDM0LjU5NVE3OC41OTQyIDM1LjAyMiA3OS4wNDU2MDAwMDAwMDAwMSAzNS44MTVRNzkuNDk3IDM2LjYwODAwMDAwMDAwMDAwNCA3OS40OTcgMzcuNjMyOFE3OS40OTcgMzguNjU3NiA3OS4wMzM0IDM5LjQ1MDZRNzguNTY5OCA0MC4yNDM2IDc3Ljc3MDcgNDAuNjc2N1E3Ni45NzE2MDAwMDAwMDAwMSA0MS4xMDk4IDc2LjAwNzggNDEuMTA5OFE3NS4wNTYyIDQxLjEwOTggNzQuMjg3NiA0MC42NzY3UTczLjUxOSA0MC4yNDM2IDczLjA3OTggMzkuNDU2N1E3Mi42NDA2IDM4LjY2OTggNzIuNjQwNiAzNy42MzI4Wk03OC4wNjk2MDAwMDAwMDAwMSAzNy42MzI4UTc4LjA2OTYwMDAwMDAwMDAxIDM2LjkwMDgwMDAwMDAwMDAwNCA3Ny43ODkwMDAwMDAwMDAwMiAzNi4zOTQ1UTc3LjUwODQwMDAwMDAwMDAxIDM1Ljg4ODIgNzcuMDQ0ODAwMDAwMDAwMDEgMzUuNjMyUTc2LjU4MTIwMDAwMDAwMDAxIDM1LjM3NTggNzYuMDQ0NDAwMDAwMDAwMDEgMzUuMzc1OFE3NS41MDc2MDAwMDAwMDAwMSAzNS4zNzU4IDc1LjA1MDEwMDAwMDAwMDAxIDM1LjYzMlE3NC41OTI2IDM1Ljg4ODIgNzQuMzI0MiAzNi4zOTQ1UTc0LjA1NTggMzYuOTAwODAwMDAwMDAwMDA0IDc0LjA1NTggMzcuNjMyOFE3NC4wNTU4IDM4LjcxODYgNzQuNjEwOTAwMDAwMDAwMDIgMzkuMzEwM1E3NS4xNjYwMDAwMDAwMDAwMSAzOS45MDIgNzYuMDA3OCAzOS45MDJRNzYuNTQ0NiAzOS45MDIgNzcuMDE0MyAzOS42NDU4UTc3LjQ4NDAwMDAwMDAwMDAxIDM5LjM4OTYgNzcuNzc2ODAwMDAwMDAwMDEgMzguODc3MlE3OC4wNjk2MDAwMDAwMDAwMSAzOC4zNjQ4IDc4LjA2OTYwMDAwMDAwMDAxIDM3LjYzMjhaTTg3LjE3MDggMzcuMDM1VjQxLjBIODUuNzkyMlYzNy4yNDI0UTg1Ljc5MjIgMzYuMzM5NjAwMDAwMDAwMDA0IDg1LjM0MDggMzUuODU3N1E4NC44ODk0IDM1LjM3NTggODQuMTA4NiAzNS4zNzU4UTgzLjMyNzggMzUuMzc1OCA4Mi44NzAzIDM1Ljg1NzdRODIuNDEyOCAzNi4zMzk2MDAwMDAwMDAwMDQgODIuNDEyOCAzNy4yNDI0VjQxLjBIODEuMDIyVjM0LjI3NzhIODIuNDEyOFYzNS4wNDY0UTgyLjc1NDQgMzQuNjMxNiA4My4yODUxIDM0LjM5OThRODMuODE1OCAzNC4xNjggODQuNDEzNiAzNC4xNjhRODUuMjA2NiAzNC4xNjggODUuODM0OSAzNC40OTc0UTg2LjQ2MzIgMzQuODI2OCA4Ni44MTcwMDAwMDAwMDAwMSAzNS40NzM0UTg3LjE3MDggMzYuMTIgODcuMTcwOCAzNy4wMzVaTTg4LjcyMDIgMzguOTM4Mkg5MC4xNTk4UTkwLjE5NjQgMzkuMzY1MiA5MC41Njg1IDM5LjY1MTlROTAuOTQwNiAzOS45Mzg2IDkxLjUwMTggMzkuOTM4NlE5Mi4wODc0IDM5LjkzODYgOTIuNDEwNjk5OTk5OTk5OTkgMzkuNzEyOTAwMDAwMDAwMDA1UTkyLjczNCAzOS40ODcyIDkyLjczNCAzOS4xMzM0UTkyLjczNCAzOC43NTUyIDkyLjM3NDEgMzguNTcyMlE5Mi4wMTQyIDM4LjM4OTIgOTEuMjMzNCAzOC4xNjk2UTkwLjQ3NyAzNy45NjIyIDkwLjAwMTIwMDAwMDAwMDAxIDM3Ljc2N1E4OS41MjU0IDM3LjU3MTggODkuMTc3NyAzNy4xNjkyMDAwMDAwMDAwMDRRODguODMgMzYuNzY2NiA4OC44MyAzNi4xMDc4UTg4LjgzIDM1LjU3MSA4OS4xNDcyIDM1LjEyNTY5OTk5OTk5OTk5NVE4OS40NjQ0IDM0LjY4MDQgOTAuMDU2MSAzNC40MjQyUTkwLjY0NzggMzQuMTY4IDkxLjQxNjQgMzQuMTY4UTkyLjU2MzIgMzQuMTY4IDkzLjI2NDcgMzQuNzQ3NVE5My45NjYyIDM1LjMyNyA5NC4wMTUgMzYuMzI3NEg5Mi42MjQyUTkyLjU4NzYgMzUuODc2IDkyLjI1ODE5OTk5OTk5OTk5IDM1LjYwNzZROTEuOTI4OCAzNS4zMzkyIDkxLjM2NzYgMzUuMzM5MlE5MC44MTg2IDM1LjMzOTIgOTAuNTI1OCAzNS41NDY2UTkwLjIzMyAzNS43NTQgOTAuMjMzIDM2LjA5NTZROTAuMjMzIDM2LjM2NDAwMDAwMDAwMDAwNCA5MC40MjgyIDM2LjU0NzAwMDAwMDAwMDAwNFE5MC42MjM0IDM2LjczMDAwMDAwMDAwMDAwNCA5MC45MDQgMzYuODMzN1E5MS4xODQ2IDM2LjkzNzQgOTEuNzMzNiAzNy4wOTYwMDAwMDAwMDAwMDRROTIuNDY1NiAzNy4yOTEyIDkyLjkzNTMgMzcuNDkyNTAwMDAwMDAwMDFROTMuNDA1IDM3LjY5MzggOTMuNzQ2NiAzOC4wODQyUTk0LjA4ODIgMzguNDc0NiA5NC4xMDA0IDM5LjEyMTJROTQuMTAwNCAzOS42OTQ2IDkzLjc4MzIgNDAuMTQ2UTkzLjQ2NiA0MC41OTc0IDkyLjg4NjUgNDAuODUzNlE5Mi4zMDcgNDEuMTA5OCA5MS41MjYyIDQxLjEwOThROTAuNzMzMiA0MS4xMDk4IDkwLjEwNDkgNDAuODIzMVE4OS40NzY2IDQwLjUzNjQgODkuMTEwNiA0MC4wNDIzUTg4Ljc0NDYgMzkuNTQ4MiA4OC43MjAyIDM4LjkzODJaTTk3LjM2OTk5OTk5OTk5OTk5IDM1LjQxMjRWMzkuMTMzNFE5Ny4zNjk5OTk5OTk5OTk5OSAzOS41MTE2IDk3LjU0NjkgMzkuNjc2M1E5Ny43MjM4IDM5Ljg0MSA5OC4xNTA3OTk5OTk5OTk5OSAzOS44NDFIOTkuMDA0Nzk5OTk5OTk5OTlWNDEuMEg5Ny45MDY3OTk5OTk5OTk5OVE5Ni45Njc0IDQxLjAgOTYuNDY3MTk5OTk5OTk5OTkgNDAuNTYwOFE5NS45NjcgNDAuMTIxNiA5NS45NjcgMzkuMTMzNFYzNS40MTI0SDk1LjE3Mzk5OTk5OTk5OTk5VjM0LjI3NzhIOTUuOTY3VjMyLjYwNjRIOTcuMzY5OTk5OTk5OTk5OTlWMzQuMjc3OEg5OS4wMDQ3OTk5OTk5OTk5OVYzNS40MTI0Wk0xMDMuODM1OTk5OTk5OTk5OTggMzQuMTY4VjM1LjYwNzZIMTAzLjQ4MjE5OTk5OTk5OTk5UTEwMi42NjQ3OTk5OTk5OTk5OSAzNS42MDc2IDEwMi4yNDM5IDM2LjAyMjQwMDAwMDAwMDAwNVExMDEuODIzIDM2LjQzNzIwMDAwMDAwMDAwNCAxMDEuODIzIDM3LjQ2MlY0MS4wSDEwMC40MzIyVjM0LjI3NzhIMTAxLjgyM1YzNS4yNTM4UTEwMi4xMjc5OTk5OTk5OTk5OSAzNC43NDE0IDEwMi42MzQzIDM0LjQ1NDdRMTAzLjE0MDU5OTk5OTk5OTk5IDM0LjE2OCAxMDMuODM1OTk5OTk5OTk5OTggMzQuMTY4Wk0xMTEuMzUxMTk5OTk5OTk5OTggMzQuMjc3OFY0MS4wSDEwOS45NjAzOTk5OTk5OTk5OFY0MC4yMDdRMTA5LjYzMDk5OTk5OTk5OTk5IDQwLjYyMTggMTA5LjEwMDI5OTk5OTk5OTk4IDQwLjg1OTcwMDAwMDAwMDAwNFExMDguNTY5NTk5OTk5OTk5OTggNDEuMDk3NiAxMDcuOTcxNzk5OTk5OTk5OTkgNDEuMDk3NlExMDcuMTc4Nzk5OTk5OTk5OTggNDEuMDk3NiAxMDYuNTUwNDk5OTk5OTk5OTkgNDAuNzY4MlExMDUuOTIyMTk5OTk5OTk5OTkgNDAuNDM4OCAxMDUuNTYyMyAzOS43OTIyUTEwNS4yMDIzOTk5OTk5OTk5OCAzOS4xNDU2IDEwNS4yMDIzOTk5OTk5OTk5OCAzOC4yMzA2VjM0LjI3NzhIMTA2LjU4MDk5OTk5OTk5OTk5VjM4LjAyMzJRMTA2LjU4MDk5OTk5OTk5OTk5IDM4LjkyNiAxMDcuMDMyNCAzOS40MDc5UTEwNy40ODM3OTk5OTk5OTk5OSAzOS44ODk4IDEwOC4yNjQ1OTk5OTk5OTk5OSAzOS44ODk4UTEwOS4wNDUzOTk5OTk5OTk5OSAzOS44ODk4IDEwOS41MDI4OTk5OTk5OTk5OCAzOS40MDc5UTEwOS45NjAzOTk5OTk5OTk5OCAzOC45MjYgMTA5Ljk2MDM5OTk5OTk5OTk4IDM4LjAyMzJWMzQuMjc3OFpNMTE2LjE1Nzk5OTk5OTk5OTk5IDM0LjE2OFExMTcuMzc3OTk5OTk5OTk5OTkgMzQuMTY4IDExOC4xNzcwOTk5OTk5OTk5OCAzNC43NDc1UTExOC45NzYxOTk5OTk5OTk5OCAzNS4zMjcgMTE5LjI1Njc5OTk5OTk5OTk4IDM2LjQwMDZIMTE3Ljc1NjE5OTk5OTk5OTk4UTExNy41NzMxOTk5OTk5OTk5OSAzNS45MDA0IDExNy4xNzA1OTk5OTk5OTk5OCAzNS42MTk4UTExNi43Njc5OTk5OTk5OTk5OSAzNS4zMzkyIDExNi4xNTc5OTk5OTk5OTk5OSAzNS4zMzkyUTExNS4zMDM5OTk5OTk5OTk5OSAzNS4zMzkyIDExNC43OTc2OTk5OTk5OTk5OSAzNS45NDMxUTExNC4yOTEzOTk5OTk5OTk5OCAzNi41NDcgMTE0LjI5MTM5OTk5OTk5OTk4IDM3LjYzMjhRMTE0LjI5MTM5OTk5OTk5OTk4IDM4LjcxODYgMTE0Ljc5NzY5OTk5OTk5OTk5IDM5LjMyODZRMTE1LjMwMzk5OTk5OTk5OTk5IDM5LjkzODYgMTE2LjE1Nzk5OTk5OTk5OTk5IDM5LjkzODZRMTE3LjM2NTc5OTk5OTk5OTk4IDM5LjkzODYgMTE3Ljc1NjE5OTk5OTk5OTk4IDM4Ljg3NzJIMTE5LjI1Njc5OTk5OTk5OTk4UTExOC45NjM5OTk5OTk5OTk5OCAzOS45MDIgMTE4LjE1ODc5OTk5OTk5OTk5IDQwLjUwNTlRMTE3LjM1MzU5OTk5OTk5OTk5IDQxLjEwOTggMTE2LjE1Nzk5OTk5OTk5OTk5IDQxLjEwOThRMTE1LjE5NDE5OTk5OTk5OTk4IDQxLjEwOTggMTE0LjQ0OTk5OTk5OTk5OTk5IDQwLjY3NjdRMTEzLjcwNTc5OTk5OTk5OTk4IDQwLjI0MzYgMTEzLjI4NDkgMzkuNDU2N1ExMTIuODYzOTk5OTk5OTk5OTkgMzguNjY5OCAxMTIuODYzOTk5OTk5OTk5OTkgMzcuNjMyOFExMTIuODYzOTk5OTk5OTk5OTkgMzYuNTk1OCAxMTMuMjg0OSAzNS44MDg4OTk5OTk5OTk5OTRRMTEzLjcwNTc5OTk5OTk5OTk4IDM1LjAyMiAxMTQuNDQ5OTk5OTk5OTk5OTkgMzQuNTk1UTExNS4xOTQxOTk5OTk5OTk5OCAzNC4xNjggMTE2LjE1Nzk5OTk5OTk5OTk5IDM0LjE2OFpNMTIyLjQxNjU5OTk5OTk5OTk3IDM1LjQxMjRWMzkuMTMzNFExMjIuNDE2NTk5OTk5OTk5OTcgMzkuNTExNiAxMjIuNTkzNDk5OTk5OTk5OTggMzkuNjc2M1ExMjIuNzcwMzk5OTk5OTk5OTggMzkuODQxIDEyMy4xOTczOTk5OTk5OTk5NyAzOS44NDFIMTI0LjA1MTM5OTk5OTk5OTk3VjQxLjBIMTIyLjk1MzM5OTk5OTk5OTk3UTEyMi4wMTM5OTk5OTk5OTk5OCA0MS4wIDEyMS41MTM3OTk5OTk5OTk5NyA0MC41NjA4UTEyMS4wMTM1OTk5OTk5OTk5OCA0MC4xMjE2IDEyMS4wMTM1OTk5OTk5OTk5OCAzOS4xMzM0VjM1LjQxMjRIMTIwLjIyMDU5OTk5OTk5OTk4VjM0LjI3NzhIMTIxLjAxMzU5OTk5OTk5OTk4VjMyLjYwNjRIMTIyLjQxNjU5OTk5OTk5OTk3VjM0LjI3NzhIMTI0LjA1MTM5OTk5OTk5OTk3VjM1LjQxMjRaTTEyNS4yOTU3OTk5OTk5OTk5NyAzMi40OTY2UTEyNS4yOTU3OTk5OTk5OTk5NyAzMi4xMTg0IDEyNS41NTE5OTk5OTk5OTk5NiAzMS44NjIyUTEyNS44MDgxOTk5OTk5OTk5NyAzMS42MDYgMTI2LjE4NjM5OTk5OTk5OTk4IDMxLjYwNlExMjYuNTUyMzk5OTk5OTk5OTggMzEuNjA2IDEyNi44MDg1OTk5OTk5OTk5OCAzMS44NjIyUTEyNy4wNjQ3OTk5OTk5OTk5OCAzMi4xMTg0IDEyNy4wNjQ3OTk5OTk5OTk5OCAzMi40OTY2UTEyNy4wNjQ3OTk5OTk5OTk5OCAzMi44NzQ4IDEyNi44MDg1OTk5OTk5OTk5OCAzMy4xMzFRMTI2LjU1MjM5OTk5OTk5OTk4IDMzLjM4NzIgMTI2LjE4NjM5OTk5OTk5OTk4IDMzLjM4NzJRMTI1LjgwODE5OTk5OTk5OTk3IDMzLjM4NzIgMTI1LjU1MTk5OTk5OTk5OTk2IDMzLjEzMVExMjUuMjk1Nzk5OTk5OTk5OTcgMzIuODc0OCAxMjUuMjk1Nzk5OTk5OTk5OTcgMzIuNDk2NlpNMTI2Ljg2OTU5OTk5OTk5OTk4IDM0LjI3NzhWNDEuMEgxMjUuNDc4Nzk5OTk5OTk5OThWMzQuMjc3OFpNMTI4LjM5NDU5OTk5OTk5OTk3IDM3LjYzMjhRMTI4LjM5NDU5OTk5OTk5OTk3IDM2LjYwODAwMDAwMDAwMDAwNCAxMjguODQ1OTk5OTk5OTk5OTggMzUuODE1UTEyOS4yOTczOTk5OTk5OTk5OCAzNS4wMjIgMTMwLjA3ODE5OTk5OTk5OTk4IDM0LjU5NVExMzAuODU4OTk5OTk5OTk5OTggMzQuMTY4IDEzMS44MjI3OTk5OTk5OTk5NyAzNC4xNjhRMTMyLjc4NjU5OTk5OTk5OTk2IDM0LjE2OCAxMzMuNTY3Mzk5OTk5OTk5OTYgMzQuNTk1UTEzNC4zNDgxOTk5OTk5OTk5NiAzNS4wMjIgMTM0Ljc5OTU5OTk5OTk5OTk3IDM1LjgxNVExMzUuMjUwOTk5OTk5OTk5OTggMzYuNjA4MDAwMDAwMDAwMDA0IDEzNS4yNTA5OTk5OTk5OTk5OCAzNy42MzI4UTEzNS4yNTA5OTk5OTk5OTk5OCAzOC42NTc2IDEzNC43ODc0IDM5LjQ1MDZRMTM0LjMyMzc5OTk5OTk5OTk4IDQwLjI0MzYgMTMzLjUyNDY5OTk5OTk5OTk3IDQwLjY3NjdRMTMyLjcyNTU5OTk5OTk5OTk2IDQxLjEwOTggMTMxLjc2MTc5OTk5OTk5OTk3IDQxLjEwOThRMTMwLjgxMDE5OTk5OTk5OTk4IDQxLjEwOTggMTMwLjA0MTU5OTk5OTk5OTk2IDQwLjY3NjdRMTI5LjI3Mjk5OTk5OTk5OTk3IDQwLjI0MzYgMTI4LjgzMzc5OTk5OTk5OTk3IDM5LjQ1NjdRMTI4LjM5NDU5OTk5OTk5OTk3IDM4LjY2OTggMTI4LjM5NDU5OTk5OTk5OTk3IDM3LjYzMjhaTTEzMy44MjM1OTk5OTk5OTk5NyAzNy42MzI4UTEzMy44MjM1OTk5OTk5OTk5NyAzNi45MDA4MDAwMDAwMDAwMDQgMTMzLjU0Mjk5OTk5OTk5OTk1IDM2LjM5NDVRMTMzLjI2MjM5OTk5OTk5OTk2IDM1Ljg4ODIgMTMyLjc5ODc5OTk5OTk5OTk3IDM1LjYzMlExMzIuMzM1MTk5OTk5OTk5OTYgMzUuMzc1OCAxMzEuNzk4Mzk5OTk5OTk5OTYgMzUuMzc1OFExMzEuMjYxNTk5OTk5OTk5OTYgMzUuMzc1OCAxMzAuODA0MDk5OTk5OTk5OTUgMzUuNjMyUTEzMC4zNDY1OTk5OTk5OTk5NyAzNS44ODgyIDEzMC4wNzgxOTk5OTk5OTk5OCAzNi4zOTQ1UTEyOS44MDk3OTk5OTk5OTk5NyAzNi45MDA4MDAwMDAwMDAwMDQgMTI5LjgwOTc5OTk5OTk5OTk3IDM3LjYzMjhRMTI5LjgwOTc5OTk5OTk5OTk3IDM4LjcxODYgMTMwLjM2NDg5OTk5OTk5OTk4IDM5LjMxMDNRMTMwLjkxOTk5OTk5OTk5OTk2IDM5LjkwMiAxMzEuNzYxNzk5OTk5OTk5OTcgMzkuOTAyUTEzMi4yOTg1OTk5OTk5OTk5NiAzOS45MDIgMTMyLjc2ODI5OTk5OTk5OTk1IDM5LjY0NThRMTMzLjIzNzk5OTk5OTk5OTk3IDM5LjM4OTYgMTMzLjUzMDc5OTk5OTk5OTk3IDM4Ljg3NzJRMTMzLjgyMzU5OTk5OTk5OTk3IDM4LjM2NDggMTMzLjgyMzU5OTk5OTk5OTk3IDM3LjYzMjhaTTE0Mi45MjQ3OTk5OTk5OTk5NSAzNy4wMzVWNDEuMEgxNDEuNTQ2MTk5OTk5OTk5OTdWMzcuMjQyNFExNDEuNTQ2MTk5OTk5OTk5OTcgMzYuMzM5NjAwMDAwMDAwMDA0IDE0MS4wOTQ3OTk5OTk5OTk5NiAzNS44NTc3UTE0MC42NDMzOTk5OTk5OTk5NiAzNS4zNzU4IDEzOS44NjI1OTk5OTk5OTk5NiAzNS4zNzU4UTEzOS4wODE3OTk5OTk5OTk5NiAzNS4zNzU4IDEzOC42MjQyOTk5OTk5OTk5NSAzNS44NTc3UTEzOC4xNjY3OTk5OTk5OTk5NyAzNi4zMzk2MDAwMDAwMDAwMDQgMTM4LjE2Njc5OTk5OTk5OTk3IDM3LjI0MjRWNDEuMEgxMzYuNzc1OTk5OTk5OTk5OTVWMzQuMjc3OEgxMzguMTY2Nzk5OTk5OTk5OTdWMzUuMDQ2NFExMzguNTA4Mzk5OTk5OTk5OTcgMzQuNjMxNiAxMzkuMDM5MDk5OTk5OTk5OTYgMzQuMzk5OFExMzkuNTY5Nzk5OTk5OTk5OTYgMzQuMTY4IDE0MC4xNjc1OTk5OTk5OTk5NiAzNC4xNjhRMTQwLjk2MDU5OTk5OTk5OTk3IDM0LjE2OCAxNDEuNTg4ODk5OTk5OTk5OTcgMzQuNDk3NFExNDIuMjE3MTk5OTk5OTk5OTYgMzQuODI2OCAxNDIuNTcwOTk5OTk5OTk5OTcgMzUuNDczNFExNDIuOTI0Nzk5OTk5OTk5OTUgMzYuMTIgMTQyLjkyNDc5OTk5OTk5OTk1IDM3LjAzNVoiIGZpbGw9IiM1QTU0NEUiLz48L3N2Zz4K" alt="Elbaz Construction" width="145" height="48">
-    <button class="sheet__close" type="button" data-rx="~xbrace/spin/ring/l">Close</button>
+    <button class="sheet__close" type="button">Close</button>
   </div>
   <ul class="sheet__pages"><li><a href="elbaz-homepage.html" data-rx="~crane/tilt/wobble/r">Home</a></li><li><a href="kitchens.html" data-rx="~hood/tilt/tick/r">Kitchens</a></li><li><a href="bathrooms.html" data-rx="~shower/hinge/spinout/r">Bathrooms</a></li><li><a href="renovation.html" data-rx="~house/roll/spinout/r">Renovation</a></li><li><a href="#top" aria-current="page" data-rx="~speech/bounce/hop/r">Contact</a></li></ul>
   <div class="sheet__settings">
     <fieldset>
       <legend>Motion</legend>
       <div class="seg" data-setting="motion">
-        <button type="button" data-rx="~play/unfold/ring/r" data-value="on" aria-pressed="true">On</button>
-        <button type="button" data-rx="~pause/unfold/shake/r" data-value="off" aria-pressed="false">Off</button>
+        <button type="button" data-value="on" aria-pressed="true">On</button>
+        <button type="button" data-value="off" aria-pressed="false">Off</button>
       </div>
     </fieldset>
   </div>
   <div class="sheet__foot">
-    <a class="btn" href="#contact-form" data-rx="~calendar/drop/tick/r">Book a consultation</a>
-    <a class="btn btn--ghost nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+    <a class="btn" href="#contact-form">Book a consultation</a>
+    <a class="btn btn--ghost nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
   </div>
 </div>
 
@@ -1387,8 +1387,8 @@ html.has-buddy select { cursor: default !important; }
       <p class="foot__open"><span class="foot__lamp" aria-hidden="true"></span><span class="foot__ck nums"></span><span class="foot__ot">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
     </div>
     <div class="foot__acts">
-      <a class="btn foot__book" href="#contact-form" data-rx="~flag/hoist/wobble/tr"><span class="btn__label">Book a consultation</span></a>
-      <a class="link nums foot__tel" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+      <a class="btn foot__book" href="#contact-form"><span class="btn__label">Book a consultation</span></a>
+      <a class="link nums foot__tel" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
     </div>
   </div>
   <div class="wrap grid12">
@@ -1406,16 +1406,16 @@ html.has-buddy select { cursor: default !important; }
     </div>
     <div class="foot__col">
       <h3>Talk</h3>
-      <a class="nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-      <a href="mailto:Sales@elbazconstruction.com" data-rx="~envelope/slide/hop/r">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es" data-rx="~globe/slide/spinout/r">Español</a>
+      <a class="nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
+      <a href="mailto:Sales@elbazconstruction.com">Sales@elbazconstruction.com</a>
+      <a href="https://elbazconstructioncorp.com/es/" lang="es">Español</a>
     </div>
     <div class="foot__col">
       <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/" data-rx="~camera/peek/flash/r">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/" data-rx="~speech/peek/hop/r">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/" data-rx="~briefcase/peek/squash/r">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A" data-rx="~play/peek/ring/r">YouTube</a>
+      <a href="https://www.instagram.com/elbazconstruction/">Instagram</a>
+      <a href="https://www.facebook.com/elbazconstruction/">Facebook</a>
+      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/">LinkedIn</a>
+      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Pages</h3>
@@ -1425,22 +1425,22 @@ html.has-buddy select { cursor: default !important; }
       <span>Elbaz Construction and Remodeling</span>
       <span>Licensed, bonded &amp; insured &middot; CBC1265280</span>
       <span>Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.</span>
-      <a class="link" href="https://www.myfloridalicense.com/" data-rx="~shield/rail/tick/r">Verify a Florida licence</a>
+      <a class="link" href="https://www.myfloridalicense.com/">Verify a Florida licence</a>
     </div>
   </div>
 </footer>
 
 <nav class="mbar" aria-label="Contact">
-  <a href="tel:+17542360675" data-rx="phone">Call</a>
-  <a href="sms:+17542360675" data-rx="~speech/tilt/hop/t">Text</a>
-  <a href="#contact-form" class="mbar__book" data-rx="~calendar/tilt/tick/t">Book</a>
+  <a href="tel:+17542360675">Call</a>
+  <a href="sms:+17542360675">Text</a>
+  <a href="#contact-form" class="mbar__book">Book</a>
 </nav>
 
 
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Project photo" hidden>
-  <button class="viewer__close" type="button" data-rx="~xbrace/tilt/shake/l">Close</button>
+  <button class="viewer__close" type="button">Close</button>
   <img class="viewer__img" alt="">
-  <div class="viewer__bar"><p class="viewer__title t-small"></p><div class="viewer__nav"><button type="button" class="viewer__prev" data-rx="~arrowL/slide/shake/l">Previous</button><button type="button" class="viewer__next" data-rx="~arrowR/slide/hop/r">Next</button></div></div>
+  <div class="viewer__bar"><p class="viewer__title t-small"></p><div class="viewer__nav"><button type="button" class="viewer__prev">Previous</button><button type="button" class="viewer__next">Next</button></div></div>
 </div>
 
 <script id="img-store" type="application/json">{}</script>

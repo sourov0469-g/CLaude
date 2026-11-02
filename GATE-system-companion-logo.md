@@ -36,8 +36,8 @@
 
 ## Defects remaining (honest)
 - **Pose timing:** the companion's hover reactions are tuned on the harness. Each rebuilt section will retune `data-buddy` kinds where its content needs it (for example the BA seam handle takes `drag`).
-- **Logo page switch:** the shared-element page-switch beat is pending the single-file in-file navigation (Phase 5).
-- **Rx markup:** `data-rx` attributes remain in section markup as inert attributes. They are removed section by section as each section is rebuilt; nothing reads them now.
+- ~~**Logo page switch:** the shared-element page-switch beat is pending the single-file in-file navigation (Phase 5).~~ **Done in the assembly (`GATE-assembly.md`):** the bracket closes into the room on every page switch.
+- ~~**Rx markup:** `data-rx` attributes remain in section markup as inert attributes. They are removed section by section as each section is rebuilt; nothing reads them now.~~ **Done:** every rebuilt section is free of them, and Phase 6 stripped the last 29 from the shared nav, footer and mobile bar.
 
 ## References and skills
 - **References:**

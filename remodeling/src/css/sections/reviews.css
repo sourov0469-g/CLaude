@@ -11,7 +11,7 @@
 .rv__svg .ms { fill: var(--clay-500, #C5735C); }
 .rv__svg .ms.is-in { fill: var(--color-accent-solid); }
 .rv__svg .big { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
-.rv__svg .gap { fill: none; stroke: var(--color-border-strong); stroke-width: 1.25; stroke-dasharray: 3 4; }
+.rv__svg .gap { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-dasharray: 4 4; }   /* Phase 6: the 0.8 mark, legible (it was quiet) */
 .rv__avg { display: flex; align-items: baseline; gap: var(--s4); padding-top: var(--s4); border-top: 2px solid var(--color-text); }
 .rv__n { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-text); }
 .rv__of { font: 400 1rem/1.4 var(--f-text); color: var(--color-text-secondary); max-width: 28ch; }
