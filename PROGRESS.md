@@ -8,6 +8,17 @@ corrections in this session; before each phase I check for one, then proceed wit
 **Build home:** `owl/` (source material in `owl/assets/source/`, page-source recon in `owl/recon/`, skill pack + notes in
 `owl/skills/`, gate reports at `owl/GATE-*.md`).
 
+## Working method (owner's order, 2026-11-03): NO SUB-AGENTS
+- **No sub-agents and no background agents are in use.** Every part of this build is done by me, in this session, where the
+  owner and Muse can see it: research, reading, building and checking.
+- **What happened earlier tonight:** three background readers were started for the WEB-SKILLS index and skill notes.
+  - On the owner's order they were ended; TaskStop found none still running.
+  - Their three unverified output files were deleted unread and never committed.
+  - The index read and the skill pack were then redone by me, part by part, in this thread.
+- **The skill pack:** `owl/skills/SKILL-PACK.md`, 325 skills chosen from the full index.
+  - Every skill that governs a phase is read in full by its tag before that phase.
+  - Full reads are logged with the rules taken in `owl/skills/SKILL-READ-LOG.md`.
+
 ## Phase 1, job 1: the kept logo (recovered from the live site's source, 2026-11-03)
 - **Logo file URL:** `https://owlroofing.com/wp-content/uploads/2025/12/owl-roofing-logo.svg`.
   - The homepage `<img class="custom-logo">` serves it through the CDN
