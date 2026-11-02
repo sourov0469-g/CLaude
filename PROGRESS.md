@@ -1262,3 +1262,21 @@ Graza is the shared motion QUALITY BAR, as scoped by the annex.
 - the only locked-fact numbers present are the phone, 2009, and "312 on the map with photos + 574 more counted" (×2, exact wording). The other numbers are design specs, caption dates and reference metadata.
 
 **Next.** Nothing further is built until the territory is picked. Then come three concepts inside the picked territory.
+
+## Owner's order, second time (2026-11-02): NO SUB-AGENTS (confirmation)
+**No sub-agents are in use.** None have been spawned at any point in this AUSTIN-PROMPT-V2 round: no Agent tool calls and no delegated work.
+
+A process check at this commit found nothing of mine running:
+- no background shells;
+- no test server;
+- no browser.
+
+The only live processes are the two MCP servers the environment starts with every session (pdf viewer, desktop-commander). They were not launched by me.
+
+**Rule from here on.** Every step is done by me in this thread:
+- research (live site observation);
+- reading;
+- building;
+- checks and screenshots.
+
+Every command runs in the foreground, where the owner and Muse can see it. No background runs, no sub-agents, no parallel helpers. Earlier rounds used background shell runs for long test sweeps; that practice has stopped.
