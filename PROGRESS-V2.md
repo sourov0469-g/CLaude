@@ -100,7 +100,11 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
   - 26 icons and 4 backgrounds.
   - Cursor companion: 3 variants; A, the course tick, picked.
   - `BRAND.md`, plus a generation test that found 4 gaps, all closed.
-- **Phase 3a:** next. Concept visuals, animation storyboards and the flow map for the 6-page / 41-section plan.
+- **Phase 3a:** gate written (`GATE-PHASE-3a.md`): self-rated 7.25, PASS.
+  - Flow map: 6 pages, 41 sections, each with its annex reference; journeys; routing model.
+  - 7 key frames and 4 storyboards: `siding/brand-v2/phase3a-flow.html`.
+  - Live reference observations: registry §6; MERSI observed at code level; Rimowa 403.
+- **Phase 3b:** next. At most 3 proof sections: hero split-slider, before/after seam, wall assembly.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
