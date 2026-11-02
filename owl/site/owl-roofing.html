@@ -211,7 +211,7 @@
 
 /* image frame: fixed ratios; drawn corner ticks (the inspector's frame); caption says only what is true */
 .frame{position:relative;margin:0}
-.frame img,.frame video{display:block;width:100%;object-fit:cover;border-radius:var(--radius-m)}
+.frame img,.frame video{display:block;width:100%;height:auto;object-fit:cover;border-radius:var(--radius-m)} /* height:auto lets the ratio rules win over width/height attributes */
 /* the ratio sits on the media, so a caption never stretches the box */
 .frame--16x9 > img,.frame--16x9 > video{aspect-ratio:16/9}.frame--4x3 > img,.frame--4x3 > video{aspect-ratio:4/3}.frame--4x5 > img,.frame--4x5 > video{aspect-ratio:4/5}
 .frame::before{content:"";position:absolute;top:calc(var(--space-8) * -1);left:calc(var(--space-8) * -1);width:var(--space-24);height:var(--space-24);border:2px solid var(--text-primary);border-right:0;border-bottom:0;pointer-events:none} /* one inspector's corner */
@@ -498,6 +498,34 @@ main:focus{outline:none}
 .sv2-view .frame img{aspect-ratio:4/5}
 @media (max-width:1023px){.sv2-grid{grid-template-columns:1fr}.sv2-view{display:none}}
 
+/* ===== Our families (Cowboy: people in use, warmth through photography, chaptered proof) ===== */
+.fam-v1,.fam-v2{position:relative;overflow:hidden;background:var(--surface-alt);padding:var(--section-default) 0}
+.fam-bg{position:absolute;inset:0}
+.fam-v1 > .wrap,.fam-v2 > .wrap{position:relative;z-index:1}
+.fv1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-48) var(--space-64);align-items:start}
+.fv1-main img{aspect-ratio:645/311}
+.fv1-copy{display:grid;gap:var(--space-24)}
+.fv1-quote{margin:0;display:grid;gap:var(--space-12);padding-left:var(--space-16);border-left:3px solid var(--accent-fill)}
+.fv1-quote p{margin:0}
+.fv1-noah{margin:0;display:grid;grid-template-columns:var(--space-96) 1fr;gap:var(--space-16);align-items:center}
+.fv1-noah img{width:var(--space-96);height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;display:block} /* height:auto: the width/height attributes would otherwise beat aspect-ratio */
+.fv1-values{grid-column:1/-1;list-style:none;margin:0;padding:var(--space-24) 0 0;border-top:1px solid var(--line-control);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-24)}
+.fv1-values li{display:grid;gap:var(--space-4)}
+@media (max-width:1023px){.fv1-grid{grid-template-columns:1fr}.fv1-values{grid-template-columns:1fr}}
+.fv2-head{display:flex;justify-content:space-between;align-items:end;gap:var(--space-24);flex-wrap:wrap}
+.fv2-nav{display:flex;gap:var(--space-8);margin-bottom:var(--space-48)}
+.fv2-nav button{display:grid;place-items:center;width:var(--space-48);height:var(--space-48);border-radius:50%;border:1.5px solid var(--text-primary);background:var(--surface-page);color:var(--text-primary);cursor:pointer;transition:transform var(--dur-fast) var(--ease-out)}
+.fv2-nav button:active{transform:scale(var(--press-scale))}
+.fv2-nav button[disabled]{opacity:.4;cursor:default}
+.fv2-track{list-style:none;margin:0;padding:0 0 var(--space-16);display:grid;grid-auto-flow:column;grid-auto-columns:min(78%,40rem);gap:var(--space-24);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain}
+.fv2-track:focus-visible{outline:2px solid var(--focus-ring);outline-offset:var(--space-4)}
+.fv2-ch{scroll-snap-align:start;display:grid;gap:var(--space-16);align-content:start;background:var(--surface-raised);border:1px solid var(--line-hairline);border-radius:var(--radius-m);padding:var(--space-16)}
+.fv2-ch > img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-s);display:block}
+.fv2-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12)}
+.fv2-pair figure{margin:0}
+.fv2-pair img{width:100%;aspect-ratio:8/9;object-fit:cover;object-position:top;border-radius:var(--radius-s);display:block;background:var(--surface-alt)}
+@media (max-width:767px){.fv2-track{grid-auto-columns:88%}}
+@media (prefers-reduced-motion:reduce){.fv2-track{scroll-behavior:auto}}
 
 
 
@@ -848,7 +876,37 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-families" data-sec="families" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">families v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">families v2: not built yet</p></div></div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">storm v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">storm v2: not built yet</p></div></div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
+</div></div><div class="sec" id="s-families" data-sec="families" data-default="1"><div class="ver" data-v="1"><section class="fam-v1" aria-labelledby="fam1-h">
+  <svg class="fam-bg" data-bg="rings"></svg>
+  <div class="wrap fv1-grid">
+    <figure class="frame fv1-main"><img src="../assets/source/about-full.png" alt="The Brown and Bergland families together outdoors in autumn" loading="lazy" width="645" height="311"><figcaption>The two families behind Owl Roofing.</figcaption></figure>
+    <div class="fv1-copy">
+      <h2 id="fam1-h" class="t-heading">Birds of a feather roof together.</h2>
+      <blockquote class="fv1-quote t-body"><p>"Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes and realized that they had more in common than their due dates."</p><p>"So, when Noah decided to start his own roofing company, asking the Brown family to join him was a no-brainer."</p><footer class="t-small muted">Owl Roofing, Our Story</footer></blockquote>
+      <figure class="fv1-noah"><img src="../assets/source/noah-bergland-owl-roofing-768x596.jpg" alt="Noah Bergland on a ladder at a snowy roof edge" loading="lazy" width="768" height="596"><figcaption class="t-small"><b>Noah Bergland</b>, co-founder, on the job.</figcaption></figure>
+    </div>
+    <ul class="fv1-values" aria-label="Owl's values">
+      <li><b class="t-sub">Generosity</b><span class="t-small">"Be generous to our community and representatives."</span></li>
+      <li><b class="t-sub">Humility</b><span class="t-small">"Humility builds a strong foundation."</span></li>
+      <li><b class="t-sub">Integrity</b><span class="t-small">"Do the right thing even when it's hard."</span></li>
+    </ul>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fam-v2" aria-labelledby="fam2-h">
+  <svg class="fam-bg" data-bg="rings"></svg>
+  <div class="wrap">
+    <div class="fv2-head">
+      <div class="sec-head"><h2 id="fam2-h" class="t-heading">We're building a nest.</h2><p class="t-body muted">"…for our own family, and for the neighbors we live alongside every day."</p></div>
+      <div class="fv2-nav"><button type="button" class="fv2-prev" aria-label="Previous chapter" aria-controls="fv2-track"><svg class="icon" aria-hidden="true" style="transform:scaleX(-1)"><use href="#icon-navigation-arrow-right"/></svg></button><button type="button" class="fv2-next" aria-label="Next chapter" aria-controls="fv2-track"><svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></button></div>
+    </div>
+    <ol class="fv2-track" id="fv2-track" tabindex="0" aria-label="Our story in three chapters">
+      <li class="fv2-ch"><img src="../assets/source/about-full.png" alt="The Brown and Bergland families together outdoors" loading="lazy"><div><p class="t-label t-num">01 Origins</p><p class="t-body">"Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes…"</p></div></li>
+      <li class="fv2-ch"><div class="fv2-pair"><figure><img src="../assets/source/meet-the-browns-owl.webp" alt="The Brown family" loading="lazy"><figcaption class="t-small">The Browns</figcaption></figure><figure><img src="../assets/source/the-berglands-family-owned-roofing-company-shoreview.png" alt="The Bergland family" loading="lazy"><figcaption class="t-small">The Berglands</figcaption></figure></div><div><p class="t-label t-num">02 The families</p><p class="t-body">"Noah has worked in both the roofing and construction industries as a builder and project manager." The Browns bring "hard-won knowledge" about what makes a 5-star customer experience.</p></div></li>
+      <li class="fv2-ch"><img src="../assets/source/noah-bergland-owl-roofing-768x596.jpg" alt="Noah Bergland on a ladder at a snowy roof edge" loading="lazy"><div><p class="t-label t-num">03 Values</p><p class="t-body"><b>Generosity.</b> <b>Humility.</b> <b>Integrity:</b> "Do the right thing even when it's hard."</p></div></li>
+    </ol>
+  </div>
+</section>
+</div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">storm v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">storm v2: not built yet</p></div></div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
 </main>
 <div class="callbar"><a href="tel:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-phone"/></svg>Call</a><a href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text</a></div>
 <div class="vpanel" id="vpanel" hidden role="dialog" aria-label="Section versions"><b>Versions</b><div id="vlist"></div><p class="t-small">Shift+V toggles · URL: ?v=hero:2</p></div>
@@ -1640,6 +1698,15 @@ window.OwlNest = (function () {
   }
 })();
 
+(function () {
+  document.querySelectorAll('.fam-bg').forEach(function (s) { Owl.bg.rings(s); });
+  var r = document.querySelector('.fam-v2'); if (!r) return;
+  var t = r.querySelector('.fv2-track'), prev = r.querySelector('.fv2-prev'), next = r.querySelector('.fv2-next');
+  function step(d) { var c = t.querySelector('.fv2-ch'); t.scrollBy({ left: d * (c.getBoundingClientRect().width + (parseFloat(getComputedStyle(t).columnGap) || 0)), behavior: Owl.reduced() ? 'auto' : 'smooth' }); }
+  function state() { prev.disabled = t.scrollLeft < 4; next.disabled = t.scrollLeft + t.clientWidth > t.scrollWidth - 4; }
+  prev.addEventListener('click', function () { step(-1); }); next.addEventListener('click', function () { step(1); });
+  t.addEventListener('scroll', state, { passive: true }); addEventListener('resize', state); document.addEventListener('owl:version', state); state();
+})();
 
 
 
