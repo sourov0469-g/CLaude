@@ -10,6 +10,11 @@ This file is always the truth about the finalize run. The earlier full-build and
 5. `elbaz-owner-feedback.md` (the owner's shortlist and merge record: this is the direction).
 6. The WEB-SKILLS pack, which is the top judging authority for craft (`SKILL-PACK.md`, with digests in `docs/skills/`).
 
+## ZERO BACKGROUND TASKS RUNNING (verified 2026-11-02 19:10, after the owner's third order)
+- `TaskStop` was issued on every task ID from tonight: `bew4mvjkz` (screenshot shell job), `a251e51…`, `a542623…`, `a31f359…` and `a2bf3db…` (index readers). For every one, the harness answered "No task found", which means none is live.
+- A process listing shows no node, chromium, playwright, python or refshot process of mine. The only processes are the harness's own MCP servers (pdf-server and desktop-commander), which I did not start.
+- **For the rest of this build:** no sub-agents and no background tasks of any kind (no `run_in_background`, no Agent tool). Every command runs in the foreground in this thread.
+
 ## Working mode: no sub-agents
 The owner's order, given twice tonight, is that no sub-agents are used. **None are in use.**
 - Four index-reader agents were started before the first order. All four had finished and returned their nomination lists before that order arrived. No agent has been started since.
