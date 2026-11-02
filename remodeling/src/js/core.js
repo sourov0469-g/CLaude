@@ -69,7 +69,7 @@
     });
     el.textContent = '';
     // the logo ships once (nav); the menu sheet and footer copy it
-    var logo = doc.querySelector('.nav__logo img');
+    var logo = doc.querySelector('img[src^="data:image/svg"]');
     if (logo) doc.querySelectorAll('img[data-logo]').forEach(function (im) { im.src = logo.src; });
   }
   EZ.img = function (k) { return urls[k] || ''; };

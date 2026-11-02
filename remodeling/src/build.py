@@ -38,6 +38,8 @@ PAGES = {
                    "title": "Whole-Home Renovation, Additions and Exterior Work | Elbaz Construction",
                    "desc": "Whole-home renovation, ADUs and additions, new construction, commercial remodeling, flooring, roofing, windows and doors, outdoor living, planning and permitting. Licensed, bonded &amp; insured · CBC1265280.",
                    "url": "https://elbazconstructioncorp.com/residential-remodling-miami/"},
+    "harness": {"out": "harness-companion.html", "sections": ["harness-kit"], "book": "#harness-kit",
+                "title": "Companion harness (test only, not shipped)", "desc": "Test harness.", "url": "https://elbazconstructioncorp.com/"},
     "contact": {"out": "contact.html", "sections": ["contact-form", "contact-visit", "contact-area"], "book": "#contact-form",
                 "title": "Book a Consultation | Elbaz Construction, Miami",
                 "desc": "Book a consultation with Elbaz Construction: (754) 236-0675, Sales@elbazconstruction.com, 19 W Flagler St #310, Miami, FL 33130. Sun to Fri 7am to 7pm, Saturday closed.",
@@ -63,7 +65,7 @@ def chrome(page):
         sheet += '<p class="sheet__h">On this page</p><ul>' + "".join('<li><a href="%s" data-rx="%s">%s</a></li>' % a for a in HOME_ANCHORS) + "</ul>"
     foot = "".join('<a href="%s"%s data-rx="~%s/peek/tick/r">%s</a>' % (href(k), cur(k), sp, name) for (k, name, sp) in LINKS)
     return nav, sheet, foot
-SYSTEMS = ["buddy", "rig", "react", "fields"]   # companion, reaction rig + reactions, section fields + dividers
+SYSTEMS = ["buddy", "logo", "fields"]   # FINALIZE Phase 2: companion (two cursor things max: tip + companion), the living logo, section fields + dividers. rig/react (per-element hover sprites, the "third cursor thing") removed per the owner
 VENDOR = ["gsap", "ScrollTrigger", "DrawSVGPlugin", "Flip", "MotionPathPlugin"]   # matter.js out [AUDIT-01 C.10]   # only the plugins the sections call (F18)
 
 
@@ -198,11 +200,23 @@ def build(page, only=None):
     vendor = "\n".join(read("vendor", v + ".min.js") for v in VENDOR) + "\n" + read("vendor", "lenis.min.js")
     # [REBRAND] the "open course" lockup (brand/v2/make_logo.py), outlined Poppins, one SVG data URI shipped once
     logo_src = "data:image/svg+xml;base64," + b64(os.path.join(ROOT, "brand", "v2", "elbaz-logo.svg"))
+    # FINALIZE Phase 2: the nav and footer logos are inline so the mark can tell its story (bracket draws, tile is laid)
+    def logo_inline(where):
+        s = open(os.path.join(ROOT, "brand", "v2", "elbaz-logo.svg"), encoding="utf-8").read()
+        s = s.replace('role="img" aria-label="Elbaz Construction"', 'aria-hidden="true" focusable="false" class="lg lg--%s"' % where)
+        s = re.sub(r"<title>.*?</title>", "", s)
+        s = s.replace('width="145" height="48" ', '')
+        s = s.replace('stroke="#1B1916"', 'class="lg-br" pathLength="1"', 1)
+        s = s.replace('fill="#A45540"', 'class="lg-tile"', 1)
+        s = s.replace('fill="#1B1916"', 'class="lg-w1"', 1).replace('fill="#5A544E"', 'class="lg-w2"', 1)
+        assert "#" not in re.sub(r'xmlns="[^"]*"', "", s), "logo still carries a raw colour"
+        return s
 
     html = (html
             .replace("/*{{FONTS}}*/", fonts)
             .replace("/*{{CSS}}*/", "\n".join(css))
             .replace("<!--{{SECTIONS}}-->", "\n".join(sections_html))
+            .replace("{{LOGO_NAV}}", logo_inline("nav")).replace("{{LOGO_FOOT}}", logo_inline("foot"))
             .replace("{{LOGO_SRC}}", logo_src, 1).replace('src="{{LOGO_SRC}}"', 'src="" data-logo')   # [AUDIT-01 C.10] the logo ships once
             .replace("/*{{VENDOR}}*/", script_safe(vendor))
             .replace("/*{{DATA}}*/", "window.__LINES=" + json.dumps(lines, separators=(",", ":")) + ";window.__DATA=" + json.dumps(extra, separators=(",", ":")) + ";")

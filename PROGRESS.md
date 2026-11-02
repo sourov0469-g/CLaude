@@ -80,9 +80,9 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | phase | contents | state |
 |---|---|---|
 | 0 | Recite-back, ambiguities, KEEP/REMOVE inventory (`FINALIZE-PHASE0.md`, 12dedfc) | PASS (Muse) |
-| 1 | Skill pack read and digested; reference study; flow maps; storyboards; Financing concept; logo story; companion plan | **in progress** |
-| 2 | Companion and logo in a test harness | pending |
-| 3 | Home sections, one at a time, in page order | pending |
+| 1 | Skill pack read and digested; reference study; flow maps; storyboards; Financing concept; logo story; companion plan | **done**: `GATE-phase1.md` |
+| 2 | Companion and logo in a test harness | **done**: `GATE-system-companion-logo.md` (awaiting Muse) |
+| 3 | Home sections, one at a time, in page order | **next**: Hero |
 | 4 | Kitchens, then Bathrooms | pending |
 | 5 | Renovation, then Contact, then single-file assembly | pending |
 
@@ -121,3 +121,16 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - Ruling 5 covers the 104 inherited backups.
   - For versions superseded tonight, my default is to keep them in git history only, so the delivered file stays clean.
   - The addendum says "hidden in-file backups", so I will follow that if Muse prefers it.
+
+## Phase 2 log
+- **Companion rebuilt** (`js/systems/buddy.js`):
+  - two cursor things only;
+  - the hat is part of the head;
+  - 12 own reactions;
+  - spring body;
+  - physical entry and exit;
+  - touch and reduced motion off;
+  - default ON.
+- **rig.js and react.js** (hover sprites) are removed from the build. Zero console errors on all 5 pages.
+- **Living logo** (`js/systems/logo.js`, inline SVG): the load draw-and-lay, hover/focus closing the E, the press closing the room, scroll compaction, and the footer closing beat.
+- **Evidence:** `qa/finalize/phase2/`.

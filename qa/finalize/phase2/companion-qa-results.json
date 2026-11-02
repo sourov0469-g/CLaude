@@ -1,0 +1,266 @@
+{
+ "kinds": {
+  "k-text": {
+   "state": "none",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 7.8,
+   "hatGap": -7.8,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 388.29998779296875,
+    "y": 500.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 377.203125,
+    "y": 491.703125
+   }
+  },
+  "k-link": {
+   "state": "link",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 11.1,
+   "hatGap": -11.1,
+   "hotspotErr": 0.02,
+   "buddyRect": {
+    "x": 161.1999969482422,
+    "y": 413.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 150.1171875,
+    "y": 404.703125
+   }
+  },
+  "k-cta": {
+   "state": "cta",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 12.1,
+   "hatGap": -12.1,
+   "hotspotErr": 0.02,
+   "buddyRect": {
+    "x": 413.6000061035156,
+    "y": 413.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 402.6796875,
+    "y": 404.703125
+   }
+  },
+  "k-btn": {
+   "state": "button",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 7.8,
+   "hatGap": -7.8,
+   "hotspotErr": 0.03,
+   "buddyRect": {
+    "x": 649.2000122070312,
+    "y": 413.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 638.2734375,
+    "y": 404.703125
+   }
+  },
+  "k-tel": {
+   "state": "phone",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 14.2,
+   "hatGap": -14.2,
+   "hotspotErr": 0.04,
+   "buddyRect": {
+    "x": 859.2999877929688,
+    "y": 413.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 848.34375,
+    "y": 404.703125
+   }
+  },
+  "k-dis": {
+   "state": "disabled",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 7.8,
+   "hatGap": -7.8,
+   "hotspotErr": 0.04,
+   "buddyRect": {
+    "x": 1031,
+    "y": 413.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 1020.0390625,
+    "y": 404.703125
+   }
+  },
+  "k-img": {
+   "state": "image",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 10.5,
+   "hatGap": -10.5,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 211.29425048828125,
+    "y": 500.6942443847656,
+    "w": 66.01150512695312,
+    "h": 66.01150512695312
+   },
+   "ptr": {
+    "x": 200,
+    "y": 491.703125
+   }
+  },
+  "k-type": {
+   "state": "type",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 6.4,
+   "hatGap": -6.4,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 674.8400268554688,
+    "y": 464.6400146484375,
+    "w": 54.1199951171875,
+    "h": 54.1199951171875
+   },
+   "ptr": {
+    "x": 538,
+    "y": 491.703125
+   }
+  },
+  "k-radio": {
+   "state": "choice",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 7.8,
+   "hatGap": -7.8,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 740.5,
+    "y": 501.20001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 729.5,
+    "y": 492.203125
+   }
+  },
+  "k-slider": {
+   "state": "drag",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 7.8,
+   "hatGap": -7.8,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 181.1999969482422,
+    "y": 500.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 170,
+    "y": 491.703125
+   }
+  },
+  "k-drag": {
+   "state": "drag",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 7.8,
+   "hatGap": -7.8,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 418.8999938964844,
+    "y": 500.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 408,
+    "y": 491.703125
+   }
+  },
+  "k-town": {
+   "state": "point",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 11.1,
+   "hatGap": -11.1,
+   "hotspotErr": 0.02,
+   "buddyRect": {
+    "x": 589.5,
+    "y": 500.70001220703125,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 578.5234375,
+    "y": 491.703125
+   }
+  },
+  "k-watch": {
+   "state": "watch",
+   "buddyOn": true,
+   "tipOn": true,
+   "rxVisible": 0,
+   "hatOverlap": 11.1,
+   "hatGap": -11.1,
+   "hotspotErr": 0,
+   "buddyRect": {
+    "x": 1351,
+    "y": 811,
+    "w": 66,
+    "h": 66
+   },
+   "ptr": {
+    "x": 720,
+    "y": 491.703125
+   }
+  }
+ },
+ "checks": {
+  "logoTileX": "13.50",
+  "logoTileXOut": "18.00",
+  "footerClosed": "0px",
+  "touch": {
+   "hasBuddy": false,
+   "buddyVisible": "hidden",
+   "tipVisible": "hidden"
+  },
+  "reduced": {
+   "hasBuddy": false,
+   "buddyDisplay": "none"
+  }
+ },
+ "errors": []
+}
