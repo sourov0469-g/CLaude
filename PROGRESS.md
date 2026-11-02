@@ -98,11 +98,18 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - `notes-F-svg-illustration.md`
   - `notes-G-H-copy-a11y-qa.md`
 - [x] Reference captures: frames plus a code inventory for Lusion, Scout, AirPods, Immersive Garden, Graza, Boffi, Igloo, Bruno, Unseen, OH, Makhno and Shed.
-- [ ] Reference teardowns written: `REFERENCE-STUDY.md`.
-- [ ] Flow maps per page, storyboards, Financing concept, logo story, companion plan: `PHASE1-PLAN.md`.
-- [ ] `GATE-phase1.md`.
+- [x] Reference teardowns written: `REFERENCE-STUDY.md` (OH recaptured on www host; Boffi recaptured without cookie overlays; Makhno unreachable).
+- [x] Flow maps per page, storyboards, Financing concept, logo story, companion plan: `PHASE1-PLAN.md`.
+- [x] `GATE-phase1.md` written. Phase 1 boundary reached; next: Phase 2 (companion + logo harness).
+
+## Muse structural rule (applied)
+- **Section counts:** Home has 10 to 11 sections; every other page has at least 5 to 6. Page count stays at 5, as shortlisted. No service page earned its own page under the "fewer is better" rule.
+- **Home:** 10 sections plus the footer, which meets the rule.
+- **Kitchens, Bathrooms, Renovation, Contact:** each gets 2 new sections built only from published facts, giving 5 sections plus the footer on each page (see `PHASE1-PLAN.md`).
 
 ## Blockers and decisions (live)
+- **MERSI seam source:** the "Austin annex / REFERENCES-ALL" is not in the container (filesystem and bank searched). The seam is engineered from the annex's own wording (`REFERENCE-STUDY.md`). Muse to confirm.
+- **Makhno:** unreachable from the container (HTTP 000). Its mechanism comes from the annex's confirmed wording only.
 - **SCORECARD.md** is not in the container. I self-audit against the brief's stated bar and vetoes; Muse holds the full scorecard and judges.
 - **Before/after imagery:**
   - There is no image generation or stock source in the container, so no high-quality replacement imagery can be made here.
