@@ -104,7 +104,10 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
   - Flow map: 6 pages, 41 sections, each with its annex reference; journeys; routing model.
   - 7 key frames and 4 storyboards: `siding/brand-v2/phase3a-flow.html`.
   - Live reference observations: registry §6; MERSI observed at code level; Rimowa 403.
-- **Phase 3b:** next. At most 3 proof sections: hero split-slider, before/after seam, wall assembly.
+- **Phase 3b:** gate written (`GATE-PHASE-3b.md`): self-rated 7.40, PASS.
+  - Three working proof sections in `siding/brand-v2/phase3b-proof.html`: the MERSI hero split-slider, the before/after seam slider and the scroll-built wall.
+  - Each was tested by real scroll and keyboard input.
+- **Build:** next. One single HTML file, 6 pages, 41 sections, two versions per section, built one at a time.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
