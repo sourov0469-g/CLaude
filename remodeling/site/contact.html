@@ -1034,21 +1034,17 @@ html.has-buddy select { cursor: default !important; }
 .ca__cn { position: relative; z-index: 1; padding: var(--s3) var(--s4) var(--s3) var(--margin, 24px); background: var(--color-bg); font: 600 1rem/1.2 var(--f-display); }
 .ca__cn span { display: block; font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); margin-top: 4px; }
 .ca__vp { overflow: hidden; }
-.ca__track { display: flex; width: max-content; animation: ca-drift var(--dur, 90s) linear infinite; }
+.ca__track { display: flex; width: max-content; will-change: transform; }
 .ca__set { display: flex; gap: var(--s5); padding-right: var(--s5); }
 .ca__t { white-space: nowrap; font: 500 1.25rem/2.4 var(--f-display); color: var(--color-text-secondary); transition: color 150ms var(--ez-out), background-color 150ms var(--ez-out); border-radius: 3px; padding: 0 4px; }
-@keyframes ca-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.ca__row:nth-child(2) .ca__track { animation-direction: reverse; }
-.ca.is-held .ca__track, .ca__rows:hover .ca__track, .ca__rows:focus-within .ca__track { animation-play-state: paused; }
 
-.ca.is-search .ca__track, .ca.is-still .ca__track { animation: none; width: auto; }
+.ca.is-search .ca__track, .ca.is-still .ca__track { transform: none !important; width: auto; }
 .ca.is-search .ca__set + .ca__set, .ca.is-still .ca__set + .ca__set { display: none; }
 .ca.is-search .ca__set, .ca.is-still .ca__set { flex-wrap: wrap; gap: 2px var(--s3); padding: var(--s2) var(--margin, 24px) var(--s2) 0; }
 .ca.is-search .ca__t, .ca.is-still .ca__t { font-size: 1rem; line-height: 1.8; }
 .ca.is-search .ca__t { opacity: .35; }
 .ca.is-search .ca__t.is-hit { opacity: 1; color: var(--color-text-on-accent, #fff); background: var(--color-accent-solid); }
 .ca__call { margin: var(--s5) 0 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-@media (prefers-reduced-motion: reduce) { .ca__track { animation: none; } }
 @media (max-width: 900px) { .ca__head { grid-template-columns: 1fr; } .ca__row { grid-template-columns: 1fr; } .ca__cn { padding-left: var(--s4); } .ca__t { font-size: 1.0625rem; } }
 
 
@@ -3663,6 +3659,26 @@ html.has-buddy select { cursor: default !important; }
     }).join('');
     var spans = Array.prototype.slice.call(rows.querySelectorAll('.ca__set:first-child .ca__t'));
     if (!k.motion) { root.classList.add('is-still'); hold.hidden = true; }
+    // the drift (Phase 6): one smoothed speed per row, like the Projects rows: pointer, focus, the pause control or a
+    // search bring it down to rest (it decelerates, it does not stop dead), leaving brings it back up
+    var tracks = Array.prototype.slice.call(rows.querySelectorAll('.ca__track')), over = false;
+    var R = tracks.map(function (tr, i) { return { tr: tr, set: tr.querySelector('.ca__set'), x: i === 1 ? -0.5 : 0, s: 0, dir: i === 1 ? 1 : -1, base: [24, 20, 28][i] }; });
+    k.on(rows, 'pointerenter', function (e) { if (e.pointerType === 'mouse') over = true; });
+    k.on(rows, 'pointerleave', function () { over = false; });
+    if (k.motion) k.raf(function (dt) {
+      var r = root.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      var rest = over || rows.contains(document.activeElement) || root.classList.contains('is-held') || root.classList.contains('is-search');
+      R.forEach(function (o) {
+        var w = o.set.offsetWidth; if (!w) return;
+        if (o.x === -0.5) o.x = -w / 2;
+        var target = rest ? 0 : o.base;
+        o.s += (target - o.s) * Math.min(1, dt * (rest ? 4 : 1.5));
+        o.x += o.dir * o.s * dt;
+        if (o.x <= -w) o.x += w; else if (o.x > 0) o.x -= w;
+        o.tr.style.transform = 'translateX(' + o.x.toFixed(1) + 'px)';
+      });
+    });
+    k.add(function () { tracks.forEach(function (tr) { tr.style.transform = ''; }); });
     k.on(hold, 'click', function () { var on = hold.getAttribute('aria-pressed') !== 'true'; hold.setAttribute('aria-pressed', on ? 'true' : 'false'); hold.firstChild.textContent = on ? 'Run the rows' : 'Pause the rows'; root.classList.toggle('is-held', on); });
     k.on(inp, 'input', function () {
       var q = norm(inp.value);

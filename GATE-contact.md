@@ -17,7 +17,7 @@
 | category | /10 | evidence | why not higher |
 |---|---|---|---|
 | Fidelity to the plan | 9 | Every row of `PHASE1-PLAN.md` "CONTACT" delivered | |
-| Interaction | 8 | Letter form, live lines, area search, accordion morph, tablist | The drifting rows use CSS keyframes, not the GSAP loop, so they don't decelerate on hold; they pause |
+| Interaction | 8 | Letter form, live lines, area search, accordion morph, tablist; rows decelerate to rest (Phase 6) | |
 | Accessibility | 9 | Labelled blanks, `aria-invalid` errors, live answers, the region accordion, a still mode for reduced motion | |
 | Honesty and facts | 10 | Mailto never "sent"; hours derived only from the locked hours; numbers lock respected (no hit count) | |
 | Visual craft | 8 | One drawing language across pages (the Process frames reused) | |
@@ -28,7 +28,7 @@
 3. **Cleanup:** inherited `data-rx` attributes (the removed per-element reaction system) were stripped from the reused markup. One inherited `--ease-out` was harmonised to `--ez-out`.
 
 ## Defects remaining (honest)
-- **Drifting rows** pause rather than decelerate (CSS animation).
+- ~~**Drifting rows** pause rather than decelerate (CSS animation).~~ **Fixed in Phase 6:** one smoothed speed per row (the Projects model). Measured: rows drift at 24 / 20 / 28 px/s (the middle one the other way); on hold they ease to rest (3 → 1 → 1 → 0 px per 150 ms), held delta 0; search lays them flat (transform none); reduced motion still.
 - **Dividers** on this page are the system set.
 
 Render evidence: `qa/finalize/contact/`. Zero console errors at 1440 and 390; no horizontal overflow.

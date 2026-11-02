@@ -17,6 +17,26 @@
     }).join('');
     var spans = Array.prototype.slice.call(rows.querySelectorAll('.ca__set:first-child .ca__t'));
     if (!k.motion) { root.classList.add('is-still'); hold.hidden = true; }
+    // the drift (Phase 6): one smoothed speed per row, like the Projects rows: pointer, focus, the pause control or a
+    // search bring it down to rest (it decelerates, it does not stop dead), leaving brings it back up
+    var tracks = Array.prototype.slice.call(rows.querySelectorAll('.ca__track')), over = false;
+    var R = tracks.map(function (tr, i) { return { tr: tr, set: tr.querySelector('.ca__set'), x: i === 1 ? -0.5 : 0, s: 0, dir: i === 1 ? 1 : -1, base: [24, 20, 28][i] }; });
+    k.on(rows, 'pointerenter', function (e) { if (e.pointerType === 'mouse') over = true; });
+    k.on(rows, 'pointerleave', function () { over = false; });
+    if (k.motion) k.raf(function (dt) {
+      var r = root.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      var rest = over || rows.contains(document.activeElement) || root.classList.contains('is-held') || root.classList.contains('is-search');
+      R.forEach(function (o) {
+        var w = o.set.offsetWidth; if (!w) return;
+        if (o.x === -0.5) o.x = -w / 2;
+        var target = rest ? 0 : o.base;
+        o.s += (target - o.s) * Math.min(1, dt * (rest ? 4 : 1.5));
+        o.x += o.dir * o.s * dt;
+        if (o.x <= -w) o.x += w; else if (o.x > 0) o.x -= w;
+        o.tr.style.transform = 'translateX(' + o.x.toFixed(1) + 'px)';
+      });
+    });
+    k.add(function () { tracks.forEach(function (tr) { tr.style.transform = ''; }); });
     k.on(hold, 'click', function () { var on = hold.getAttribute('aria-pressed') !== 'true'; hold.setAttribute('aria-pressed', on ? 'true' : 'false'); hold.firstChild.textContent = on ? 'Run the rows' : 'Pause the rows'; root.classList.toggle('is-held', on); });
     k.on(inp, 'input', function () {
       var q = norm(inp.value);
