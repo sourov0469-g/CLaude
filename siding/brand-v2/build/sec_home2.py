@@ -5,7 +5,10 @@ from sec_home import _dots
 # ----------------------------------------------------------------------------------------------------------- 5 wall assembly
 def _wall_svg(cls=''):
     boards = ''.join(f'<path class="w-board w-p" data-k="{3 + (4 - i)}" d="M596 {150 + i * 104}L560 {262 + i * 104}H596Z"/>' for i in range(5))
-    return (f'<svg class="wall {cls}" viewBox="400 20 540 740" role="img" aria-label="Section drawing of a sided wall: stud, sheathing, weather wrap and five lapped boards">'
+    # the face of the same wall, left of the cut edge: one course per board, with the shadow line under its butt (the mark's idea, drawn out)
+    boards += ''.join(f'<g class="w-p" data-k="{3 + (4 - i)}"><rect class="w-face" x="404" y="{158 + i * 104}" width="152" height="104"/>'
+                      f'<path class="w-shadow" d="M404 {256 + i * 104}H556"/></g>' for i in range(5))
+    return (f'<svg class="wall {cls}" viewBox="400 20 540 740" role="img" aria-label="A sided wall cut at the corner: its face of five courses beside the section of stud, sheathing, weather wrap and five lapped boards">'
             f'<path class="w-line" d="M400 40H940" pathLength="1"/><rect class="w-p w-stud" data-k="0" x="620" y="110" width="150" height="600"/>'
             f'<path class="w-p w-sheath" data-k="1" d="M609 110V710"/><path class="w-p w-wrap" data-k="2" d="M598 110V710"/>{boards}'
             f'<path class="w-base" d="M560 726V740H940" pathLength="1"/>'
@@ -19,7 +22,7 @@ S5_CSS = """
 .wa-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-08);align-items:center;width:100%}
 .wall{width:100%;height:auto;max-height:calc(100vh - 150px)} .w-line,.w-base{fill:none;stroke:var(--steel-6);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1}
 .w-stud{fill:none;stroke:var(--steel-8);stroke-width:4} .w-sheath{stroke:var(--steel-9);stroke-width:16} .w-wrap{stroke:var(--steel-7);stroke-width:4;stroke-dasharray:12 9}
-.w-board{fill:var(--steel-12);stroke:var(--steel-6);stroke-width:4;stroke-linejoin:miter} .w-lab text{font:600 19px var(--font-text);letter-spacing:.08em;fill:var(--steel-6)}
+.w-board{fill:var(--steel-12);stroke:var(--steel-6);stroke-width:4;stroke-linejoin:miter} .w-face{fill:var(--steel-9)} .w-shadow{stroke:var(--steel-11);stroke-width:6} .w-lab text{font:600 19px var(--font-text);letter-spacing:.08em;fill:var(--steel-6)}
 .js [data-wa1] .w-p{opacity:0}
 .w-steps{list-style:none;padding:0;margin:var(--space-06) 0 0;display:grid;gap:6px;color:var(--steel-5);font:600 15px var(--font-text)}
 .w-steps li{padding-left:22px;position:relative} .w-steps li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--steel-10)} .w-steps li.done{color:#fff} .w-steps li.done::before{background:var(--steel-6)}

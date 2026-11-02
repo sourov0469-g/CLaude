@@ -93,4 +93,4 @@ def footer():
 <div>{lockup(fg="#fff", word="#fff", h=36, bg=P["steel-12"])}<p class="ftr-p">{esc(ADDRESS)}<br>{esc(HOURS)}</p></div>
 <div><p class="ftr-k">Call</p><p><a href="{TEL}">{PHONE}</a></p><p class="ftr-k">Email</p><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
 <div><p class="ftr-k">Pages</p><p class="ftr-nav"><a href="#/">Home</a>{"".join(f'<a href="#/{k}">{esc(t)}</a>' for k, t in NAV)}<a href="#/about/booking">Book an estimate</a></p></div></div>
-<div class="wrap ftr-base"><p>{esc(REVIEWS)} · {" · ".join(esc(c) for c in CREDS)}</p></div></footer>'''
+<div class="wrap ftr-base"><p>{esc(REVIEWS)} · {" · ".join(esc(c) for c in CREDS)}<button type="button" class="ftr-mo" data-motion aria-pressed="false">Pause animations</button></p></div></footer>'''

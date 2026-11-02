@@ -129,12 +129,15 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
   - **Build pass 1 complete** (`GATE-BUILD-1.md`): self-rated 7.30, PASS.
     - Built: all 6 pages, 41 sections and 82 versions; cursor companion A ported in.
     - Audit: 24 page states, 0 problems.
-  - **Next:** audit-improve cycle 2.
-    - Per section: re-open its reference beside the two versions.
-    - Use the B2 steel field once per page.
-    - Differentiate the inner heroes.
-    - Re-encode the images.
-    - Superseded versions go to `<template class="bk">`.
+  - **Cycle 2 complete** (`GATE-BUILD-2.md`): self-rated 7.58, PASS.
+    - Backups are live: 8 in the file, made by `build/snapshot.py`.
+    - The inner-page closes sit on the B2 steel field.
+    - The Windows and About heroes are differentiated.
+    - A Pause animations control was added, after Graza's.
+    - The wall face now sits beside the section.
+    - Image re-encode was declined (5% saving) and Rimowa re-tried (still 403).
+    - Audit: 24 page states, 0 problems.
+  - **Next:** cycle 3, a frame-by-frame reference re-check of all 41 sections.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)

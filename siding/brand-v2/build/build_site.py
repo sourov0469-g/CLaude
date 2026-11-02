@@ -42,7 +42,7 @@ def build():
     return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{esc(PAGES[0][1])}</title><meta name="description" content="Austin Pro Siding: siding, windows, roofing and painting in Austin. Since 2009.">'
             f'<script>document.documentElement.classList.add("js")</script><style>{FACES}{TOKENS_CSS}{BASE_CSS}{"".join(css)}</style></head><body>'
-            f'<a class="sr skip" href="#main">Skip to content</a>{header()}<main id="main">{"".join(body)}</main>{footer()}'
+            f'<a class="sr skip" href="#main">Skip to content</a><button type="button" class="sr skip2" data-motion aria-pressed="false">Pause animations</button>{header()}<main id="main">{"".join(body)}</main>{footer()}'
             f'<p id="live" class="sr" aria-live="polite"></p><script>{BASE_JS}{"".join(js)}</script></body></html>')
 
 

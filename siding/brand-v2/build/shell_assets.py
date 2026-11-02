@@ -32,7 +32,8 @@ img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} 
 .sec{position:relative} .sec-pad{padding:var(--layout-section-pad) 0}
 .rv{position:absolute;right:8px;top:8px;z-index:40;display:flex;background:var(--color-bg-page);border:1px solid var(--color-border-default);border-radius:var(--radius-sm);font:600 12px var(--font-text)}
 .rv button{min-width:44px;min-height:32px;border:0;background:transparent;cursor:pointer;font:inherit;color:var(--color-text-secondary)} .rv button[aria-pressed=true]{background:var(--color-bg-accent-subtle);color:var(--color-text-primary)}
-.clean .rv{display:none}
+.clean .rv{display:none} .skip2:focus{position:fixed;left:180px;top:8px;width:auto;height:auto;clip:auto;z-index:99;background:var(--color-bg-page);padding:12px 16px;font:700 16px var(--font-text);border:0}
+.ftr-mo{background:transparent;border:1px solid var(--steel-8);color:#fff;min-height:44px;padding:0 var(--space-04);border-radius:var(--radius-sm);font:600 14px var(--font-text);cursor:pointer;margin-left:var(--space-05)}
 /* footer */
 .ftr{position:relative;overflow:hidden;background:var(--color-bg-deep);color:var(--color-text-inverse);padding:var(--space-11) 0 var(--space-07)}
 .ftr canvas{position:absolute;inset:0;width:100%;height:100%} .ftr-in{position:relative;display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-08)}
@@ -54,7 +55,8 @@ if(new URLSearchParams(location.search).has('clean'))D.documentElement.classList
 // images: later uses are filled from the first use, so each image is embedded once
 D.querySelectorAll('img[data-img]').forEach(i=>{const s=D.querySelector(`img[data-key="${i.dataset.img}"]`);if(s)i.src=s.src;});
 // one scroll engine: pinned sections register a progress callback
-const reg=[];window.APS={pin(el,fn){reg.push({el,fn});},reduce,css};
+const reg=[],loops=[];window.APS={pin(el,fn){reg.push({el,fn});},reduce,css,paused:false,loop(f){loops.push(f);}};
+const P=()=>window.APS.paused;
 let ticking=false;function run(){ticking=false;for(const r of reg){if(!r.el.offsetParent)continue;const b=r.el.getBoundingClientRect(),len=r.el.offsetHeight-innerHeight;
   r.fn(len>0?Math.max(0,Math.min(1,-b.top/len)):(b.top<innerHeight?1:0));}}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(run);}},{passive:true});addEventListener('resize',run);
@@ -82,6 +84,9 @@ if(matchMedia('(pointer: fine)').matches){const cc=D.createElement('div');cc.cla
     else bar.style.transform=`translate(${x+12}px,${y+12}px) scale(${.1*press},${press})`;raf=requestAnimationFrame(frame);};
   addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;const t=e.target.closest&&e.target.closest(SEL);tgt=t&&!t.closest('.rv')?t:null;cc.classList.add('on');if(!raf)raf=requestAnimationFrame(frame);},{passive:true});
   D.addEventListener('pointerleave',()=>{cc.classList.remove('on');cancelAnimationFrame(raf);raf=0;});addEventListener('pointerdown',()=>press=.92);addEventListener('pointerup',()=>press=1);}
+// pause control (Graza's quality detail; WCAG 2.2.2): stops the two drifting fields; first focusable control and in the footer
+D.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>{const on=!APS.paused;APS.paused=on;D.querySelectorAll('[data-motion]').forEach(x=>{x.setAttribute('aria-pressed',on);x.textContent=on?'Play animations':'Pause animations';});
+  if(!on)loops.forEach(f=>f());}));
 window.APS.route=route;window.APS.watch=watch;window.APS.run=run;
 D.addEventListener('DOMContentLoaded',()=>route());if(D.readyState!=='loading')route();
 // B2 steel field: Bayer 4x4 ordered dither, palette steel-9..steel-12 only (white text >= 5.96:1); drifts only when visible
@@ -93,7 +98,7 @@ D.querySelectorAll('canvas.dither').forEach(cv=>{const ctx=cv.getContext('2d',{a
   function draw(t){const w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;if(cv.width!==w){cv.width=w;cv.height=h;}const c=7,cols=Math.ceil(w/c),rows=Math.ceil(h/c),dr=t*.02;
     for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const nx=(x/cols-.5)*2,ny=(y/rows-.5)*2,cl=fbm(nx*1.3+dr*.2+3,ny*1.6-dr*.1),m=ss(1.1,.1,Math.hypot(nx-.45,ny+.05));
       const v=Math.max(0,Math.min(.999,ss(.45,.9,cl)*.75+m*.45)),i=Math.min(3,Math.floor(Math.min(.999,v+B[(y%4)*4+x%4]*.25)*4));ctx.fillStyle=`rgb(${P[i]})`;ctx.fillRect(x*c,y*c,c,c);}}
-  const tick=ts=>{if(!vis||D.hidden){raf=0;return}draw(ts/1000);raf=requestAnimationFrame(tick);};
+  const tick=ts=>{if(!vis||D.hidden||P()){raf=0;return}draw(ts/1000);raf=requestAnimationFrame(tick);};APS.loop(()=>{if(vis&&!raf&&!reduce)raf=requestAnimationFrame(tick);});
   if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis){draw(0);if(!reduce&&!raf)raf=requestAnimationFrame(tick);}}).observe(cv);else draw(0);});
 // footer evening field (B4): source-over toward steel-9, so white text stays >= 5.96:1
 const ac=D.querySelector('.ftr canvas');if(ac){const ctx=ac.getContext('2d',{alpha:false}),off=D.createElement('canvas');const rgb=n=>{const h=css('--'+n);return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));};
@@ -103,7 +108,7 @@ const ac=D.querySelector('.ftr canvas');if(ac){const ctx=ac.getContext('2d',{alp
     for(let i=0;i<14;i++){const x=ow*(.25+.7*i/13)+Math.sin(t*.15+i*1.7)*ow*.03,bw=ow*(.05+.04*((i*7)%3)),g=o.createLinearGradient(0,0,0,oh);g.addColorStop(0,`rgba(${AF},0)`);g.addColorStop(1,`rgba(${AF},${.08+.1*i/13})`);o.fillStyle=g;o.fillRect(x-bw/2,0,bw,oh);}
     const r=o.createRadialGradient(ow*.92,oh*1.05,0,ow*.92,oh*1.05,ow*.45);r.addColorStop(0,`rgba(${AF},.55)`);r.addColorStop(1,`rgba(${AF},0)`);o.fillStyle=r;o.fillRect(0,0,ow,oh);
     ctx.imageSmoothingEnabled=true;ctx.drawImage(off,0,0,ac.width,ac.height);}
-  function tick(ts){if(!vis||D.hidden){raf=0;return}draw(ts/1000);raf=requestAnimationFrame(tick);}
+  function tick(ts){if(!vis||D.hidden||P()){raf=0;return}draw(ts/1000);raf=requestAnimationFrame(tick);}APS.loop(()=>{if(vis&&!raf&&!reduce)raf=requestAnimationFrame(tick);});
   draw(0);if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(tick);}).observe(ac);}
 })();
 '''
