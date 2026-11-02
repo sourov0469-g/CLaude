@@ -94,7 +94,13 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
   - Three concepts built in `siding/brand-v2/phase1-concepts.html`: C1 The Profile House, C2 Lap A, C3 Reveal Tile.
   - Recommended: C1, with C3 as the ready alternative.
   - Registry: `siding/brand-v2/IMAGE-REGISTRY.md`.
-- **Phase 2:** next. It proceeds on C1 unless a newer Muse message overrules the pick.
+- **Phase 2:** gate written (`GATE-PHASE-2.md`): self-rated 7.45, PASS, zero vetoes.
+  - Board: `siding/brand-v2/phase2-identity.html`.
+  - Tokens: DTCG and CSS, three tiers. Contrast: 28/28 pairs pass, measured twice.
+  - 26 icons and 4 backgrounds.
+  - Cursor companion: 3 variants; A, the course tick, picked.
+  - `BRAND.md`, plus a generation test that found 4 gaps, all closed.
+- **Phase 3a:** next. Concept visuals, animation storyboards and the flow map for the 6-page / 41-section plan.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
