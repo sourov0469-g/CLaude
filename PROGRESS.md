@@ -1,3 +1,69 @@
+# OWL ROOFING — overnight build (2026-11-03, owner's subject switch)
+
+**Authority:** `OVERNIGHT-ADDENDUM-OWL.md` + `OWL-ROOFING-PACK.md` + `REFERENCE-ANNEX-REMBRANDT.md` (the library governs this build; the
+filename predates the switch) + the WEB-SKILLS pack. The Rembrandt brief that reached this session earlier tonight is VOID;
+no Rembrandt name, fact, colour or material is used. Muse reviews the gate reports (`owl/GATE-PHASE-<n>.md`) and sends binding
+corrections in this session; before each phase I check for one, then proceed without waiting.
+
+**Build home:** `owl/` (source material in `owl/assets/source/`, page-source recon in `owl/recon/`, skill pack + notes in
+`owl/skills/`, gate reports at `owl/GATE-*.md`).
+
+## Phase 1, job 1: the kept logo (recovered from the live site's source, 2026-11-03)
+- **Logo file URL:** `https://owlroofing.com/wp-content/uploads/2025/12/owl-roofing-logo.svg`.
+  - The homepage `<img class="custom-logo">` serves it through the CDN
+    `https://d2if3j13w19mqs.cloudfront.net/6a4290a3d7378f9c545b2870/owlroofing.com/wp-uploads/2025/12/owl-roofing-logo.svg`, with
+    the wp-content URL as the fallback.
+  - Saved byte-for-byte as `owl/assets/source/owl-roofing-logo.svg` (17,943 bytes, md5 6a91538a2e5b…).
+- **Reversed logo:** the site also ships it, at `https://owlroofing.com/wp-content/uploads/2025/12/owl-logo-white.svg`
+  → `owl/assets/source/owl-logo-white.svg` (17,467 bytes, md5 07bb66b6b9df…).
+- **Form:**
+  - A horizontal wordmark lockup, 185×75 viewBox: a heavy, high-contrast "OWL" with spaced, wide "ROOFING" caps centred
+    beneath.
+  - The **O** is a solid ink oval holding a white owl, drawn as a figure with a knocked-out body and a diamond chest
+    pattern.
+  - The eyes are two amber discs: the only colour in the mark.
+  - The mark has no separate icon file on the site. The favicon is a JPG (`owl-roofing-favicon.jpg`).
+- **Colours, read from the SVG:**
+  - Full-colour logo: ink **#17111D** (16 fills) + amber **#EAA221** (2 fills, the eyes).
+  - Reversed logo: cream **#F1EFE6** only (eyes knocked out to the ground).
+  - Owl's own badges ("Owl Mom Approved", "Get It Right Guarantee") also use amber on a dark olive/brown. They are recorded
+    as material, not as the logo.
+- **Rule held from here on:** the logo artwork is never redrawn. Lockups, clear space, motion-in-place and every colour
+  decision are built around it.
+
+## Phase 1: material inventory (from the live source, not the text recon)
+- **Hero background video:** `Owl-BG-Condensed.mp4` (9.4 MB, 1280×720, h264, 15.6 s) + `.webm` (4.5 MB), poster
+  `happy-homeowners-owl-roofing.jpg`. Saved.
+  - Content, frame by frame: a crew in yellow Owl shirts walking GAF Timberline UHD bundles up to the roof; a crew member
+    in a wide-brim hat reviewing a tablet; a worker in an Owl jacket walking a finished dark-shingle roof by a brick
+    chimney; plywood decking lifted into place.
+  - Genuine Owl footage: Owl branding is visible on shirts and jackets.
+- **YouTube (Owl Roofing channel, verified by oEmbed):**
+  - `msQB1mRpbTI` "Why Choose Owl Roofing? What Makes Owl Roofing Different?" (homepage embed)
+  - `0lUgM6cp8tU` "Real Customer Experience with Owl Roofing | Stress-Free Insurance Claim & Beautiful Results" (the
+    homepage video review)
+  - `lp8BQIQ0e_Q` "7 Questions Every Homeowner Should Ask Before Replacing a Roof" (the homepage FAQ video)
+  - `ehKLv5DF2TQ` "Best Shingle Colors for 2026 (+ One to Avoid!)" (the pack's ID, verified)
+  - Their maxres thumbnails are saved in `owl/assets/source/yt/`.
+- **Genuine Owl photography:**
+  - The two founding families: `about-full.png`, `about-small.png`, `meet-the-browns-owl.webp`,
+    `the-berglands-…png`, `family-roofing-roseville-…webp`, plus the cutouts `owl-mom-cutout.webp`.
+  - Noah on a ladder on a snow-edged roof: `noah-bergland-owl-roofing-768x596.jpg`.
+  - The Protect Your Nest system, photographed:
+    - the catch-all tarp around a whole house (`owl-roofing-catchall.webp`)
+    - the "shingle tomb" aftercare box (`owl-aftercare-system.webp`).
+  - The crew on a tear-off: `owl-roofing-footer-bg.jpg`.
+  - Noah and a homeowner on a tablet: `happy-homeowners-owl-roofing.jpg`.
+  - Badges: `Owl-Mom-Approved.png`, `get-it-right-guarantee-owl-768x768.png`.
+  - Theme SVGs (backgrounds, play button): `cp-bg.svg`, `faq-bg.svg`, `footer-bg.svg`, `form-social-bg.svg`,
+    `what-part-banner.svg`, `play-circle-owl.svg`.
+- **Likely stock, kept apart and labelled:** the condensation-window, snow-guard and beige-siding photos (stock filenames).
+  The house exteriors (`a-new-roof-home-house.jpeg`, `owl-roofing-north-oaks.webp`, `owl-siding-.rosevillejpg.webp`,
+  `perfected-roofing-process.webp`, `owl-roofing-storm-damage-repair.webp`) are not provable as Owl jobs, so they are
+  treated as atmosphere, never as evidence.
+
+---
+
 # PROGRESS: Rembrandt homepage build (BRIEF-FULL.md, then BRIEF-FULL-v2.md from 2026-10-30)
 
 Memory file (BRIEF-FULL.md §11). Survivors after any reset: BRIEF-FULL.md §3, SECTIONS.md, this file, TRACEABILITY.md, the usage log at the end of `bank-index/BANK-MAP.md`. Re-read them and continue; never restart a finished section. Failed checks stay listed here until they pass.
