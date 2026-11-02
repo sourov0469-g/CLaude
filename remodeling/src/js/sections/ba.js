@@ -25,7 +25,7 @@
       var pc = Math.round(st.s * 100);
       range.value = pc;
       range.setAttribute('aria-valuetext', pc <= 2 ? 'All after' : pc >= 98 ? 'All before' : pc + ' percent before, ' + (100 - pc) + ' percent after');
-      read.textContent = Math.round(st.s * 48) + ' in';     // the tape is 48 inches across the print
+      read.textContent = st.s > .66 ? 'Mostly before' : st.s < .34 ? 'Mostly after' : 'Before | After';   // words, never a measurement (numbers lock)
     }
     function load(i) {
       var p = PAIRS[i];

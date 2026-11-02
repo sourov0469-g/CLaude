@@ -35,6 +35,7 @@
 
 ## Defects remaining (honest)
 - **Image quality:** this is bound by the published source size (owner's ask blocked).
+- **Amended after the seams pass:** the stud's live reading in inches ("43 in") was a number outside the fact lock, in the same class as a divider's live pixel count. It now reads in words: "Mostly before", "Before | After" or "Mostly after". The tape ticks stay.
 - **Divider:** the inherited shape divider above this section (old teeth) is still the old one, pending the dividers system pass.
 
 ## Skills applied

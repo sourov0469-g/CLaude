@@ -878,6 +878,14 @@ html.has-buddy select { cursor: default !important; }
 .dv { position: relative; width: 100%; overflow: hidden; color: var(--color-text-secondary); background: var(--color-bg); }
 .dv svg { display: block; overflow: visible; max-width: none; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
+
+.dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
+.dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
+.dv-hook, .dv-pinh { fill: var(--color-text); }
+.dv-mk { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.5; }
+.dv-dash { fill: none; stroke: var(--color-border-strong); stroke-width: 1.4; stroke-dasharray: 6 6; }
+.dv-pin { fill: var(--color-surface); stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-linejoin: round; }
 .dv-t { font: 500 12px/1 var(--f-text); letter-spacing: .08em; fill: var(--color-art-line); }
 .dv-bg { fill: var(--color-surface); }
 .dv-steel { fill: var(--color-art-fill); stroke: var(--color-art-line-soft); stroke-width: 1; }
@@ -4142,7 +4150,7 @@ html.has-buddy select { cursor: default !important; }
     var m = Math.max(16, w * .04), y = 46;
     return { h: 80, svg: '<g class="dv-draw"><path class="dv-l dv-a" d="M' + (w / 2) + ' ' + y + 'H' + m + '"/><path class="dv-l dv-a" d="M' + (w / 2) + ' ' + y + 'H' + (w - m) + '"/></g>' +
       '<path class="dv-l" d="M' + m + ' ' + (y - 16) + 'V' + (y + 16) + 'M' + (w - m) + ' ' + (y - 16) + 'V' + (y + 16) + 'M' + (m - 6) + ' ' + (y + 6) + 'l12 -12M' + (w - m - 6) + ' ' + (y + 6) + 'l12 -12"/>' +
-      '<rect class="dv-bg" x="' + (w / 2 - 70) + '" y="' + (y - 11) + '" width="140" height="22"/><text class="dv-t nums" x="' + (w / 2) + '" y="' + (y + 5) + '" text-anchor="middle">' + Math.round(w - 2 * m) + ' px</text>',
+      '<rect class="dv-bg" x="' + (w / 2 - 84) + '" y="' + (y - 11) + '" width="168" height="22"/><text class="dv-t" x="' + (w / 2) + '" y="' + (y + 5) + '" text-anchor="middle">MEASURED ON SITE</text>',   // FINALIZE: words, never a live pixel count (numbers lock)
       anim: function (svg, st) {
         return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelectorAll('.dv-a'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1, ease: 'power2.out' })
           .from(svg.querySelectorAll('.dv-t, .dv-bg'), { opacity: 0, duration: .4 }, .5);
@@ -4154,8 +4162,8 @@ html.has-buddy select { cursor: default !important; }
     for (var x = 60; x < w - 20; x += 120) bolts += '<circle class="dv-bolt" cx="' + x + '" cy="40" r="3.6"/><circle class="dv-bolt" cx="' + (x + 18) + '" cy="40" r="3.6"/>';
     return { h: 80, svg: '<g class="dv-beam"><rect class="dv-steel" x="0" y="18" width="' + w + '" height="7"/><rect class="dv-steel dv-web" x="0" y="25" width="' + w + '" height="30"/><rect class="dv-steel" x="0" y="55" width="' + w + '" height="7"/>' + bolts + '</g>',
       anim: function (svg, st) {
-        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-beam'), { x: -w * .35 }, { x: 0, duration: .9, ease: 'expo.out' })
-          .from(svg.querySelectorAll('.dv-bolt'), { scale: 0.4, opacity: 0, transformOrigin: '50% 50%', duration: .3, stagger: .015, ease: 'back.out(3)' }, .5);
+        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-beam'), { x: -w * .35 }, { x: 0, duration: .9, ease: 'power4.out' })
+          .from(svg.querySelectorAll('.dv-bolt'), { scale: 0.4, opacity: 0, transformOrigin: '50% 50%', duration: .3, stagger: .015, ease: 'power4.out' }, .5);
       } };
   };
   // 3 services -> before/after (OWNER MASTER DIRECTIVE, replaces barrier tape): a layered band of South Florida rooftops,
@@ -4206,9 +4214,9 @@ html.has-buddy select { cursor: default !important; }
     return { h: 92, svg: '<path class="dv-pipe" d="M0 ' + y + 'H' + w + '"/>' + boxes + straps,
       anim: function (svg, st) {
         return gsap.timeline({ scrollTrigger: st })
-          .from(svg.querySelectorAll('.dv-jb'), { scale: .4, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .05, ease: 'back.out(2.4)' })
+          .from(svg.querySelectorAll('.dv-jb'), { scale: .4, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .05, ease: 'power4.out' })
           .fromTo(svg.querySelector('.dv-pipe'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .5, ease: 'power2.inOut' }, .15)
-          .from(svg.querySelectorAll('.dv-strap'), { y: -12, opacity: 0, duration: .2, stagger: .03, ease: 'back.out(3)' }, .45);
+          .from(svg.querySelectorAll('.dv-strap'), { y: -12, opacity: 0, duration: .2, stagger: .03, ease: 'power4.out' }, .45);
       } };
   };
   // 5 process -> financing: a handsaw blade grows its teeth and cuts across
@@ -4249,7 +4257,7 @@ html.has-buddy select { cursor: default !important; }
     return { h: 92, svg: '<path class="dv-l" d="M0 70H' + w + '"/>' + t + '<path class="dv-grout" d="' + g + 'M0 30H' + w + 'M0 66H' + w + '"/>',
       anim: function (svg, st) {
         return gsap.timeline({ scrollTrigger: st })
-          .from(svg.querySelectorAll('.dv-tile'), { scaleY: 0, opacity: 0, transformOrigin: '50% 100%', duration: .2, stagger: { each: .02, from: 'start' }, ease: 'back.out(2)' })
+          .from(svg.querySelectorAll('.dv-tile'), { scaleY: 0, opacity: 0, transformOrigin: '50% 100%', duration: .2, stagger: { each: .02, from: 'start' }, ease: 'power4.out' })
           .fromTo(svg.querySelector('.dv-grout'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .4, ease: 'power2.out' }, '-=.1');
       } };
   };
@@ -4280,15 +4288,66 @@ html.has-buddy select { cursor: default !important; }
     for (var x2 = 0; x2 < w; x2 += 16) hatch += 'M' + x2 + ' 30l-10 10';
     return { h: 88, svg: '<path class="dv-l" d="M0 30H' + w + '"/><path class="dv-hatch" d="' + hatch + '"/><rect class="dv-footing" x="0" y="40" width="' + w + '" height="34"/><path class="dv-bar" d="M0 46H' + w + 'M0 66H' + w + '"/>' + dots,
       anim: function (svg, st) {
-        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-footing'), { scaleY: 0 }, { scaleY: 1, transformOrigin: '50% 0%', duration: .6, ease: 'expo.out' })
+        return gsap.timeline({ scrollTrigger: st }).fromTo(svg.querySelector('.dv-footing'), { scaleY: 0 }, { scaleY: 1, transformOrigin: '50% 0%', duration: .6, ease: 'power4.out' })
           .fromTo(svg.querySelector('.dv-bar'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .8, ease: 'power2.inOut' }, .2)
-          .from(svg.querySelectorAll('.dv-rebar'), { scale: .3, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .01, ease: 'back.out(3)' }, .5);
+          .from(svg.querySelectorAll('.dv-rebar'), { scale: .3, opacity: 0, transformOrigin: '50% 50%', duration: .25, stagger: .01, ease: 'power4.out' }, .5);
       } };
+  };
+
+  /* ---------- FINALIZE · the seams: each Home divider is ONE ink line drawing the profile that belongs to its hand-off,
+     drawn left to right with the scroll (scrubbed, reversible); strokes only, the line leads the eye [S0362, S1422] ---------- */
+  function scrubDraw(svg, st, sel, extra) {
+    var tl = gsap.timeline({ scrollTrigger: { trigger: st.trigger, start: 'top 96%', end: 'top 52%', scrub: .5 } });
+    tl.fromTo(svg.querySelectorAll(sel), { drawSVG: '0%' }, { drawSVG: '100%', duration: 1, ease: 'none', stagger: .04 }, 0);
+    if (extra) extra(tl);
+    return tl;
+  }
+  // 5 process -> financing: the process rail runs on, then forks into the two routes of the route finder
+  DIV.fork = function (w) {
+    var x = f(w * .56), y = 44;
+    var d = 'M0 ' + y + 'H' + x + ' M' + x + ' ' + y + 'C' + f(w * .66) + ' ' + y + ' ' + f(w * .7) + ' 18 ' + f(w * .8) + ' 18H' + w + ' M' + x + ' ' + y + 'C' + f(w * .66) + ' ' + y + ' ' + f(w * .7) + ' 70 ' + f(w * .8) + ' 70H' + w;
+    var marks = '';
+    for (var i = 0; i < 8; i++) { var mx = f(w * .04 + i * w * .065); marks += '<rect class="dv-mk" x="' + (mx - 5) + '" y="' + (y - 5) + '" width="10" height="10"/>'; }
+    return { h: 88, svg: '<path class="dv-ink" d="' + d + '"/>' + marks,
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.from(svg.querySelectorAll('.dv-mk'), { opacity: 0, duration: .2, stagger: .05 }, 0); }); } };
+  };
+  // 6 financing -> projects: the ink line becomes the picture rail the frames hang from; hooks and wires drop in
+  DIV.rail = function (w) {
+    var hooks = '', wires = '';
+    for (var x = 160; x < w - 60; x += 320) { hooks += '<circle class="dv-hook" cx="' + x + '" cy="22" r="3.5"/>'; wires += 'M' + (x - 70) + ' 58L' + x + ' 24L' + (x + 70) + ' 58'; }
+    return { h: 64, svg: '<path class="dv-ink" d="M0 18H' + w + '"/><path class="dv-ink2" d="M0 24H' + w + '"/><path class="dv-wire" d="' + wires + '"/>' + hooks,
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink, .dv-ink2', function (tl) { tl.fromTo(svg.querySelectorAll('.dv-wire'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: 'none' }, .5).from(svg.querySelectorAll('.dv-hook'), { opacity: 0, duration: .2, stagger: .03 }, .4); }); } };
+  };
+  // 7 projects -> reviews: the rows come to rest and a tally rises (the upward vector into the stars)
+  DIV.tally = function (w) {
+    var d = '', n = 0;
+    for (var x = 24; x < w - 20; x += 13, n++) {
+      var g = n % 6, hgt = 8 + 30 * (x / w);
+      if (g === 5) continue;                                   // a space between gates
+      if (g === 4) d += 'M' + f(x - 52) + ' ' + f(64 - hgt * .3) + 'L' + f(x + 2) + ' ' + f(64 - hgt * .9);   // the fifth stroke crosses the gate
+      else d += 'M' + x + ' 64V' + f(64 - hgt);
+    }
+    return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
+  };
+  // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
+  DIV.pins = function (w) {
+    var pins = '';
+    for (var i = 0; i < 5; i++) { var x = f(w * (.18 + i * .16)); pins += '<path class="dv-pin" d="M' + x + ' 52 C' + (x - 12) + ' 38 ' + (x - 12) + ' 22 ' + x + ' 22 C' + (x + 12) + ' 22 ' + (x + 12) + ' 38 ' + x + ' 52Z"/><circle class="dv-pinh" cx="' + x + '" cy="33" r="3.5"/>'; }
+    return { h: 72, svg: '<path class="dv-dash" d="M0 54H' + w + '"/>' + pins,
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-pin', function (tl) { tl.from(svg.querySelectorAll('.dv-pin, .dv-pinh'), { y: -16, duration: .4, ease: 'none', stagger: .06 }, 0); }); } };
+  };
+  // 9 towns -> consult: the coastline of the map, its wobble thinning out into one ink line
+  DIV.coast = function (w) {
+    var d = 'M0 36';
+    for (var x = 0; x <= w; x += 8) { var a = 14 * Math.pow(1 - x / w, 1.6); d += 'L' + x + ' ' + f(36 + Math.sin(x / 23) * a + Math.sin(x / 7.3) * a * .35); }
+    return { h: 72, svg: '<path class="dv-ink" d="' + d + '"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink'); } };
   };
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'saw'], ['financing', 'truss'], ['work', 'tile'], ['reviews', 'shingle'], ['towns', 'level'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages: a different divider under each section of a page
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'tile'], ['bath-intro', 'conduit'], ['bath-build', 'level'],
     ['reno-intro', 'roofs'], ['reno-services', 'truss'], ['contact-form', 'footing'], ['contact-visit', 'beam']];
