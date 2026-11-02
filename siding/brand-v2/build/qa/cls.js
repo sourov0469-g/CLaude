@@ -1,0 +1,5 @@
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1440,height:900}});
+await p.addInitScript(()=>{window.__s=[];new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)__s.push({v:+e.value.toFixed(3),t:Math.round(e.startTime),src:e.sources.map(s=>{const n=s.node;return n?(n.nodeName+'.'+(n.className&&n.className.baseVal===undefined?n.className:'')).slice(0,50)+' '+Math.round(s.previousRect.y)+'→'+Math.round(s.currentRect.y):'?'}).slice(0,3)})}).observe({type:'layout-shift',buffered:true});});
+await p.goto('file:///home/user/CLaude/siding/brand-v2/site.html#/about/booking',{waitUntil:'load'});await p.waitForTimeout(1500);console.log('before scroll',JSON.stringify(await p.evaluate(()=>__s)));
+const H=await p.evaluate(()=>document.body.scrollHeight);for(let y=0;y<H;y+=400){await p.evaluate(y=>scrollTo(0,y),y);await p.waitForTimeout(30);}
+const s=await p.evaluate(()=>__s);console.log('total',s.reduce((a,b)=>a+b.v,0).toFixed(3));s.filter(x=>x.v>0.01).slice(0,10).forEach(x=>console.log(JSON.stringify(x)));await b.close()})();

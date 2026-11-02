@@ -26,7 +26,7 @@ S5_CSS = """
 .js [data-wa1] .w-p{opacity:0}
 .w-steps{list-style:none;padding:0;margin:var(--space-06) 0 0;display:grid;gap:6px;color:var(--steel-5);font:600 15px var(--font-text)}
 .w-steps li{padding-left:22px;position:relative} .w-steps li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--steel-10)} .w-steps li.done{color:#fff} .w-steps li.done::before{background:var(--steel-6)}
-.wall2 .w-line,.wall2 .w-base{stroke-dashoffset:0} .wall2 .w-p{transition:opacity var(--duration-moderate) var(--ease-standard)} .wall2 .w-p.off{opacity:.12}
+.wall2 .w-line,.wall2 .w-base{stroke-dashoffset:0} .wall2 .w-p{transition:opacity var(--duration-moderate) var(--ease-standard)} .wall2 .w-p.off{opacity:.12} .wall2 text.w-p.off{opacity:1}
 .wa2-tl{display:grid;gap:6px;margin:var(--space-06) 0 var(--space-05)} .wa2-tl button{min-height:48px;text-align:left;padding:0 var(--space-05);background:transparent;border:1px solid var(--steel-10);color:var(--steel-3);font:600 16px var(--font-text);border-radius:var(--radius-sm);cursor:pointer}
 .wa2-tl button[aria-selected=true]{background:#fff;color:var(--color-text-primary);border-color:#fff}
 @media (max-width:900px){.wa-g{grid-template-columns:minmax(0,1fr);gap:var(--space-04)} .w-lab{display:none} .wall{max-height:46vh}

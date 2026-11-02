@@ -152,6 +152,17 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - The wall is now scroll-linked, not pinned, so the homepage pins 2 sections, per S0019.
     - The cursor companion is verified under real pointer movement.
     - The B4 banding is closed with no change needed.
+  - **GATE-BUILD-4 accepted by Muse.**
+  - **Cycle 5** (`GATE-BUILD-5.md`, 7.85, PASS, cited):
+    - Keyboard walkthrough: 537 stops, all with a visible ring, no traps.
+    - Rendered contrast sweep: 1,021 text elements and 574 rings, 0 failures after fixes.
+    - Fixed:
+      - footer rings, 2.49 → 14.85:1;
+      - layout shift, 0.625 → 0.001;
+      - plate counter, 4.43 → passing;
+      - dimmed SVG labels.
+    - Mobile total blocking time: median 178 ms at 4× CPU.
+    - QA scripts kept in `build/qa/`.
   - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
 - **Phases 2, 3a, 3b and the build:** not started.
 

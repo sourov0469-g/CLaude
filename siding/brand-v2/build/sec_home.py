@@ -1,4 +1,5 @@
 """Homepage sections, two versions each. Each function returns (title, v1_html, v2_html, css, js)."""
+import re
 from shell import IM, PLACE, ill, TEL, PHONE, REVIEWS, CREDS, RECORD, esc, icon, cline, section  # noqa: F401
 
 STEPS = ['Measure', 'Strip', 'Wrap', 'Lay the courses', 'Trim & paint', 'Walk-through']   # draft copy for the firm to confirm
@@ -33,6 +34,17 @@ def s1():
             f'<g class="hd-s" data-s="3">{boards}<path d="M190 410H280" class="hd-ld"/><text x="180" y="416" class="hd-t" text-anchor="end">COURSES</text></g>'
             f'<g class="hd-s" data-s="4"><path d="M262 92H306V114H262Z" class="hd-trim"/><path d="M190 500H230V103H262" class="hd-ld"/><text x="180" y="506" class="hd-t" text-anchor="end">TRIM</text></g>'
             f'<g class="hd-s" data-s="5"><path d="M130 600L152 622L190 578" class="hd-ok"/><text x="180" y="660" class="hd-t" text-anchor="end">WALK-THROUGH</text></g></svg>')
+    labs = []
+    def _pull(m):
+        g = m.group(0)
+        k = re.search(r'data-s="(\d)"', g).group(1)
+        parts = re.findall(r'<path d="[^"]*" class="hd-ld"/>|<text[^>]*>[^<]*</text>', g)
+        labs.append(f'<g data-s="{k}">' + ''.join(parts) + '</g>')
+        for x in parts:
+            g = g.replace(x, '')
+        return g
+    draw = re.sub(r'<g class="hd-s" data-s="\d">.*?</g>', _pull, draw)
+    draw = draw.replace('</svg>', f'<g class="hd-lab">{"".join(labs)}</g></svg>')
     v2 = (f'<div class="hero2" data-hero2><div class="h1-stick"><div class="h2-l">{IM.img("robroy-a", "Rob Roy, Austin: the finished wall after the work")}</div>'
           f'<div class="h2-r">{ill(draw)}</div><div class="pls pls2" aria-live="polite">{steps_pl}</div>{copy("One wall,<br>six steps.")}</div></div>')
     css = r'''
@@ -42,7 +54,7 @@ def s1():
 .hs-i{position:absolute;inset:0} .hs-i img{height:100%;width:200%;max-width:none;object-fit:cover;display:block} .hs-r .hs-i img{margin-left:-100%}
 .pls{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:min(420px,84vw);height:152px;z-index:3}
 .pl{position:absolute;inset:0;background:var(--color-bg-accent-field);color:var(--color-text-on-accent);padding:var(--space-05) var(--space-06)} .pl p{margin:0}
-.pl-k{font:800 24px/1.15 var(--font-display)} .pl-m{position:absolute;right:16px;top:14px;width:64px;height:64px} .pl-s{font:600 15px var(--font-text);margin:6px 0 10px!important} .pl .cline{margin:0;max-width:none} .pl-n{font:600 12px var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--steel-4);margin-top:8px!important}
+.pl-k{font:800 24px/1.15 var(--font-display)} .pl-m{position:absolute;right:16px;top:14px;width:64px;height:64px} .pl-s{font:600 15px var(--font-text);margin:6px 0 10px!important} .pl .cline{margin:0;max-width:none} .pl-n{font:600 12px var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--steel-2);margin-top:8px!important}
 .h1-copy{position:absolute;left:0;bottom:0;z-index:4;background:var(--color-bg-page);width:min(700px,100%);padding:var(--space-07) var(--space-07) var(--space-07) max(var(--layout-gutter),calc((100vw - var(--layout-max-width))/2 + var(--layout-gutter)))}
 .h1-copy .h1{margin-bottom:var(--space-06)}
 .h1-ctl{position:absolute;right:var(--layout-gutter);bottom:var(--space-06);z-index:4;display:flex;align-items:center;gap:var(--space-03);background:var(--color-bg-page);padding:6px}
@@ -55,6 +67,7 @@ def s1():
 .hd-wrap{stroke:var(--steel-7);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--steel-8);stroke-width:4} .hd-sh{stroke:var(--steel-9);stroke-width:14}
 .hd-b{fill:var(--steel-12);stroke:var(--steel-6);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--steel-6)} .hd-ok{fill:none;stroke:#fff;stroke-width:6}
 .hd-s{opacity:.18;transition:opacity var(--duration-normal) var(--ease-standard)} .hd-s.done{opacity:.55} .hd-s.cur{opacity:1}
+.hd-lab .hd-t{fill:var(--steel-5)} .hd-lab .cur .hd-t{fill:#fff;font-weight:700} .hd-lab .cur .hd-ld{stroke:#fff}
 @media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto;left:var(--layout-gutter);right:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)}
  .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:31%;width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:11px}
  .hero2 .h1-copy{height:auto;padding-top:var(--space-04)} .hero2 .h1-copy .h1{font-size:1.75rem;margin-bottom:var(--space-04)} .hero2 .h1-copy .btn-secondary{display:none}
@@ -79,7 +92,7 @@ function driver(root,n,paint,onIdx){let target=0,shown=0,raf=0,drag=false,y0=0,s
 const h1=document.querySelector('[data-hero1]');if(h1){const L=[...h1.querySelectorAll('.hs-l .hs-i')],R=[...h1.querySelectorAll('.hs-r .hs-i')],P=[...h1.querySelectorAll('.pl')];
   const num=h1.querySelector('.ctl-n b');window.__h1=driver(h1,L.length,wiper(h1,[L,R,P]),s=>{num.textContent=Math.round(s)+1;});}
 const h2=document.querySelector('[data-hero2]');if(h2){const P=[...h2.querySelectorAll('.pl')],S=[...h2.querySelectorAll('.hd-s')];
-  window.__h2=driver(h2,P.length,wiper(h2,[P]),s=>{const k=Math.round(s);S.forEach(g=>{const i=+g.dataset.s;g.classList.toggle('cur',i===k);g.classList.toggle('done',i<k);});});}
+  window.__h2=driver(h2,P.length,wiper(h2,[P]),s=>{const k=Math.round(s);S.forEach(g=>{const i=+g.dataset.s;g.classList.toggle('cur',i===k);g.classList.toggle('done',i<k);});h2.querySelectorAll('.hd-lab [data-s]').forEach(g=>g.classList.toggle('cur',+g.dataset.s===k));});}
 })();
 '''
     return 'Hero', v1, v2, css, js

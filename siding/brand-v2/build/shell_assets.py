@@ -40,7 +40,7 @@ img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} 
 /* footer */
 .ftr{position:relative;overflow:hidden;background:var(--color-bg-deep);color:var(--color-text-inverse);padding:var(--space-11) 0 var(--space-07)}
 .ftr canvas{position:absolute;inset:0;width:100%;height:100%} .ftr-in{position:relative;display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-08)}
-.ftr a{color:#fff;font-weight:600} .ftr-p{color:var(--color-text-inverse-secondary)} .ftr-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-inverse-secondary);margin:0 0 4px}
+.ftr a{color:#fff;font-weight:600} .ftr :focus-visible{outline-color:var(--color-focus-ring-on-dark)} .ftr-p{color:var(--color-text-inverse-secondary)} .ftr-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-inverse-secondary);margin:0 0 4px}
 .ftr-nav{display:grid;gap:6px} .ftr-nav a{min-height:32px;display:inline-flex;align-items:center} .ftr-base{position:relative;margin-top:var(--space-09);padding-top:var(--space-05);border-top:1px solid var(--steel-10);color:var(--color-text-inverse-secondary);font-size:14px}
 .cc{position:fixed;left:0;top:0;z-index:60;pointer-events:none;opacity:0;transition:opacity var(--duration-fast) linear} .cc.on{opacity:1}
 .cc i{position:absolute;left:0;top:0;width:100px;height:10px;transform-origin:0 50%;background:var(--color-accent-solid);will-change:transform}
@@ -106,13 +106,13 @@ D.querySelectorAll('canvas.dither').forEach(cv=>{const ctx=cv.getContext('2d',{a
   if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis){draw(0);if(!reduce&&!raf)raf=requestAnimationFrame(tick);}}).observe(cv);else draw(0);});
 // footer evening field (B4): source-over toward steel-9, so white text stays >= 5.96:1
 const ac=D.querySelector('.ftr canvas');if(ac){const ctx=ac.getContext('2d',{alpha:false}),off=D.createElement('canvas');const rgb=n=>{const h=css('--'+n);return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));};
-  const AB=rgb('steel-12'),AF=rgb('steel-9');let vis=false,raf=0;
+  const AB=rgb('steel-12'),AF=rgb('steel-9');let vis=false,raf=0,drawn=0;
   function draw(t){const w=ac.clientWidth,h=ac.clientHeight,d=Math.min(devicePixelRatio||1,1.5);if(ac.width!==Math.round(w*d)){ac.width=Math.round(w*d);ac.height=Math.round(h*d);}
     const ow=Math.max(8,Math.ceil(w/8)),oh=Math.max(8,Math.ceil(h/8));off.width=ow;off.height=oh;const o=off.getContext('2d');o.fillStyle=`rgb(${AB})`;o.fillRect(0,0,ow,oh);
     for(let i=0;i<14;i++){const x=ow*(.25+.7*i/13)+Math.sin(t*.15+i*1.7)*ow*.03,bw=ow*(.05+.04*((i*7)%3)),g=o.createLinearGradient(0,0,0,oh);g.addColorStop(0,`rgba(${AF},0)`);g.addColorStop(1,`rgba(${AF},${.08+.1*i/13})`);o.fillStyle=g;o.fillRect(x-bw/2,0,bw,oh);}
     const r=o.createRadialGradient(ow*.92,oh*1.05,0,ow*.92,oh*1.05,ow*.45);r.addColorStop(0,`rgba(${AF},.55)`);r.addColorStop(1,`rgba(${AF},0)`);o.fillStyle=r;o.fillRect(0,0,ow,oh);
     ctx.imageSmoothingEnabled=true;ctx.drawImage(off,0,0,ac.width,ac.height);}
   function tick(ts){if(!vis||D.hidden||P()){raf=0;return}draw(ts/1000);raf=requestAnimationFrame(tick);}APS.loop(()=>{if(vis&&!raf&&!reduce)raf=requestAnimationFrame(tick);});
-  draw(0);if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(tick);}).observe(ac);}
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis){if(!drawn){draw(0);drawn=1;}if(!reduce&&!raf)raf=requestAnimationFrame(tick);}}).observe(ac);else draw(0);}   // first frame waits until the footer is on screen
 })();
 '''
