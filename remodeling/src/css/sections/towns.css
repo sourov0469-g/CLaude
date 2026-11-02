@@ -7,7 +7,7 @@
 .tw__field { position: relative; display: grid; gap: var(--s2); margin-top: var(--s2); }
 .tw__lbl { font: 600 .9375rem/1.2 var(--f-text); }
 .tw__box { position: relative; }
-.tw__in { width: 100%; min-height: 52px; padding: 0 52px 0 var(--s4); font: 500 1.0625rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); box-sizing: border-box; }
+.tw__in { width: 100%; min-height: 52px; padding: 0 48px 0 var(--s4); font: 500 1.0625rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); box-sizing: border-box; }
 .tw__in::placeholder { color: var(--color-text-secondary); opacity: .8; }
 .tw__in:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
 .tw__clear { position: absolute; right: 4px; top: 4px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: var(--color-text); cursor: pointer; }
@@ -44,10 +44,10 @@
 
 /* all 104, at once: county by county, north to south */
 .tw__all { display: grid; gap: var(--s4); align-content: start; }
-.tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 6px; padding-bottom: 6px; border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
+.tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 8px; padding-bottom: 8px; border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
 .tw__c h3 span { font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
 .tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 2px; }
-.tw__t { padding: 2px 5px; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
+.tw__t { padding: 2px 4px; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
 .tw__t.is-hot { background: var(--clay-100, #F9E3DD); }
 .tw__t.is-on { background: var(--color-accent-solid); color: var(--color-text-on-accent, #fff); }
 

@@ -10,7 +10,7 @@
 .cx__arrow { align-self: center; margin-top: -4em; }
 .cx__arrow svg { width: 60px; height: 24px; } .cx__arrow path { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .cx__txt { display: grid; gap: var(--s2); }
-.cx__wk { margin: 0; justify-self: start; padding: 4px 10px; border: 1.5px solid var(--color-text); font: 600 .875rem/1.2 var(--f-text); }
+.cx__wk { margin: 0; justify-self: start; padding: 4px 12px; border: 1.5px solid var(--color-text); font: 600 .875rem/1.2 var(--f-text); }
 .cx__t { margin: 0; font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
 .cx__p { margin: 0; max-width: 46ch; color: var(--color-text-secondary); font: 400 1rem/1.5 var(--f-text); }
 /* the art kit */

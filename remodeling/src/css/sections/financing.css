@@ -105,7 +105,7 @@
 .km__r th { padding-left: 0; font: 600 .75rem/1.6 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
 .km__r td > * , .km__r td { transition: background-color 200ms var(--ez-out); }
 .km__r--q td { font-style: italic; color: var(--color-text-secondary); }
-.km__n { display: block; font: 600 2rem/1 var(--f-display); letter-spacing: -.03em; color: var(--color-accent-solid); margin-bottom: 6px; }
+.km__n { display: block; font: 600 2rem/1 var(--f-display); letter-spacing: -.03em; color: var(--color-accent-solid); margin-bottom: 8px; }
 .km__fl { display: block; font-size: .875rem; color: var(--color-text-secondary); }
 .km__t td.is-col, .km__t th.is-col { background-color: color-mix(in srgb, var(--clay-100, #F9E3DD) 55%, transparent); }
 .km__foot { margin: var(--s4) 0 0; font: 400 .75rem/1.45 var(--f-text); color: var(--color-text-secondary); }

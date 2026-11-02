@@ -85,7 +85,8 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 3 | Home sections, one at a time, in page order | **done**: ten `GATE-home-*.md`, `GATE-system-footer.md`, `GATE-system-dividers.md` |
 | 4 | Kitchens, then Bathrooms | **done**: `GATE-kitchens.md`, `GATE-bathrooms.md` |
 | 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
-| 6 | Polish pass on the defects the gate reports name as remaining (no Muse ruling received yet) | **corrected per Muse** (scorecard, skill tags, governing reference): `GATE-phase6.md`; awaiting re-judgement; what is left needs Muse's judgement or is blocked |
+| 6 | Polish pass on the defects the gate reports name as remaining | PASS (Muse), after the scorecard correction: `GATE-phase6.md` |
+| 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | **done**: `GATE-phase7.md`; three questions for Muse (hero word count, section rhythm tokens, the remaining geometry offsets) |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -174,3 +175,15 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Financing on phones**: route-finder signposts as two-line boards (labels 8 → 10.1px); the ledger's margin label moves above its cells (quote wraps 6/7/7 → 4/5/6 lines). `GATE-home-financing.md` amended.
 - **Phase 6 closed**: `GATE-phase6.md` lists every fix with its measurement, and what remains open with the reason (Muse's judgement, or blocked). Zero background tasks, zero sub-agents.
 - **Muse: GATE-phase6.md did not pass as a scorecard gate.** Corrected: per-category self-rating (Design 7, Usability 8, Creativity 6, Content 9) with evidence and why-not-higher; WEB-SKILLS tags per mechanism; Lusion named as the governing reference, with what transfers (the ink-line carrier, sheet grammar, scrub drawing) and what does not (virtual scroll, WebGL, its ease). Citing the tags exposed two shortfalls, both fixed and measured: the Proof touch threshold was 8px, now 10px (S1443), and the Contact rows lacked masked edges (S0450). Muse's open judgement calls stay open, with no rulings invented. Phase 6 awaits Muse's re-judgement.
+
+## Phase 7 log (conformance to the brief's numbers, after Muse accepted Phase 6)
+- **Why:** the brief's phases 0 to 5 were done; its AUDIT STANDARD numbers had never been measured site-wide. New tools in the repo: `remodeling/src/tools/conform.js` (copy, call, trust, contrast, pins, icons) and `ladder.py` (spacing). Raw output in `qa/finalize/phase7/`.
+- **Passed as found:** a visible `tel:` link at every sampled scroll position (5 pages, 1440 and 390); the licence line on every page; a wheel scroll reaches the end of every page at 390 (no pin trap).
+- **Proof beside every CTA:** 8 CTAs (both versions of Financing, Projects and Consult; Towns; the Contact letter) had no proof in their section. One component, `.vouch` (aggregate + licence, character-exact), now sits beside each.
+- **Copy:** three headlines of my own brought within 8 words; the bath hero's 9-word line is the firm's verbatim line and stays (the locks outrank the budget). Every primary CTA within 3 words with one name through the flow, "Book a consultation" (S1494); the mail submits read "Open in email". The bath callout's resting line was cut from 12 words to 8.
+- **Icons:** 8 icons put on the Carbon grid (24/1.5, 16/1) with non-scaling strokes.
+- **Spacing:** 117 off-ladder declarations down to 35, all geometry (centring offsets, insets, calc offsets). Ties rounded up; flip cards, the Towns list and the nav re-checked.
+- **Contrast:** 0 real AA failures; the tool's 3 flags are text on SVG grounds, measured by hand at 5.31:1 and 17.54:1.
+- **Dead code:** 17 `.vs1r__*` rules for a Contact card version that no longer exists, removed.
+- **For Muse (no ruling invented):** whether the 40-word hero budget counts locked content (authored copy passes on every page; strict counts do not); whether to move `--section-y` to the brief's three pair-tokens, which would change kept material's geometry (the spacing twin of ruling 7); whether the geometry offsets should be rewritten as `translate`.
+- Zero background tasks, zero sub-agents.

@@ -12,8 +12,8 @@
 .br__r { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); width: 100%; padding: var(--s3) 0; background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text-secondary); font: 600 clamp(1.75rem, 1rem + 2.4vw, 3.25rem)/1.05 var(--f-display); letter-spacing: -.025em; transition: color 200ms var(--ez-out), padding 300ms var(--ez-out); }
 button.br__r { cursor: pointer; }
 .br__r .nums { font: 600 .8125rem/1 var(--f-text); letter-spacing: 0; }
-.br__cam { width: 22px; height: 22px; flex: none; }
-.br__cam path, .br__cam circle { fill: none; stroke: currentColor; stroke-width: 1.8; }
+.br__cam { width: 24px; height: 24px; flex: none; }
+.br__cam path, .br__cam circle { fill: none; stroke: currentColor; stroke-width: 1.5; }
 .br__r.is-on { color: var(--color-text); padding-left: var(--s3); }
 .br__r.is-on .br__cam path, .br__r.is-on .br__cam circle { stroke: var(--color-accent-solid); }
 @media (hover: hover) and (pointer: fine) { button.br__r:hover { color: var(--color-text); } }

@@ -13,7 +13,7 @@
 .pr__item.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity 260ms var(--ez-out), transform 400ms var(--ez-out), visibility 0s; }
 .pr__n { margin: 0; display: flex; align-items: baseline; gap: var(--s4); }
 .pr__n > .nums { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
-.pr__wk { font: 600 .9375rem/1.2 var(--f-text); padding: 4px 10px; border: 1.5px solid var(--color-text); }
+.pr__wk { font: 600 .9375rem/1.2 var(--f-text); padding: 4px 12px; border: 1.5px solid var(--color-text); }
 .pr__t { margin: 0; font: 600 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1.05 var(--f-display); letter-spacing: -.02em; }
 .pr__p { margin: 0; max-width: 38ch; color: var(--color-text-secondary); font-size: 1.0625rem; line-height: 1.5; }
 

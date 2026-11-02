@@ -45,10 +45,10 @@
 .bx__wood::before { content: ""; position: absolute; inset: 0 5px; border-left: 1px solid var(--clay-300, #ECB3A4); border-right: 1px solid var(--clay-300, #ECB3A4); }
 .bx__nail { position: absolute; left: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--color-text); }
 .bx__grip { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: var(--color-accent-solid); border: 2px solid var(--color-text); display: grid; place-items: center; transition: transform 200ms var(--ez-out); }
-.bx__grip svg { width: 26px; height: 26px; }
-.bx__grip path { fill: none; stroke: var(--white, #fff); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.bx__grip svg { width: 24px; height: 24px; }
+.bx__grip path { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
 .bx__stage.is-drag .bx__grip { transform: scale(.9); }
-.bx__read { position: absolute; left: 50%; top: var(--s2); transform: translateX(-50%); padding: 3px 6px; background: var(--color-text); color: var(--color-surface); font: 600 .6875rem/1 var(--f-text); white-space: nowrap; }
+.bx__read { position: absolute; left: 50%; top: var(--s2); transform: translateX(-50%); padding: 4px 8px; background: var(--color-text); color: var(--color-surface); font: 600 .6875rem/1 var(--f-text); white-space: nowrap; }
 .bx__range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
 .bx__range:focus-visible ~ * , .bx__stage:has(.bx__range:focus-visible) { outline: none; }
 .bx__stage:has(.bx__range:focus-visible) .bx__grip { box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-accent-solid); }

@@ -252,7 +252,7 @@ input, textarea { caret-color: var(--color-accent-text); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   min-height: var(--h);
   padding: 0 24px;
   border: 0;
@@ -324,7 +324,7 @@ input, textarea { caret-color: var(--color-accent-text); }
    then a sentence-case line in accent text. Never tracked caps. */
 /* REBRAND: the section label is neutral (a label, not a highlight) [S1435: if everything pops, nothing does]; its glyph is
    the logo's bracket alone, the quiet cue of the mark [S1422]. The second line of a heading steps down in tone, not in hue. */
-.eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.eyebrow { display: inline-flex; align-items: center; gap: 12px; margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
 .eyebrow__mark { width: 12px; height: 12px; flex: none; overflow: visible; }
 .eyebrow__mark path { fill: none; stroke: currentColor; stroke-width: 8; stroke-linejoin: miter; }
 .eyebrow__roof { width: 20px; height: 12px; flex: none; overflow: visible; }   /* records only */

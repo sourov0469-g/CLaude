@@ -27,7 +27,7 @@
 .dp__o[aria-checked="true"] { background: var(--color-text); color: var(--color-surface); }
 .dp__o:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
 .dp__read { margin: 0; font: 400 1.0625rem/1.4 var(--f-text); }
-.dp__read b { font: 600 2rem/1 var(--f-display); color: var(--color-accent-solid); margin-right: 6px; }
+.dp__read b { font: 600 2rem/1 var(--f-display); color: var(--color-accent-solid); margin-right: 8px; }
 .dp__fig { margin: 0; padding: var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); }
 .dp__svg { display: block; width: 100%; height: auto; }
 .dp__svg .wl { fill: none; stroke: var(--color-text); stroke-width: 6; stroke-linejoin: miter; }
@@ -37,4 +37,4 @@
 .dp__svg .route { fill: none; stroke: var(--color-accent-solid); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
 .dp__svg .one { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 3; stroke-dasharray: 10 6; }
 .dp__svg .stop { fill: var(--color-accent-solid); stroke: var(--color-surface); stroke-width: 3; }
-@media (max-width: 900px) { .dc__head, .dp__grid { grid-template-columns: 1fr; } .dc__seg { font-size: .75rem; padding: 0 6px; } .dc__tag { width: 20px; height: 20px; font-size: .625rem; } .dc__bar { height: 44px; } }
+@media (max-width: 900px) { .dc__head, .dp__grid { grid-template-columns: 1fr; } .dc__seg { font-size: .75rem; padding: 0 8px; } .dc__tag { width: 20px; height: 20px; font-size: .625rem; } .dc__bar { height: 44px; } }

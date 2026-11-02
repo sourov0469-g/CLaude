@@ -224,3 +224,10 @@ html.has-buddy select { cursor: default !important; }
 .dv-r3 { fill: var(--color-art-fill); } .dv-r2 { fill: var(--color-border); } .dv-r1 { fill: var(--color-surface); stroke: var(--color-art-line-soft); stroke-width: 3; stroke-linejoin: miter; }
 .dv-lv { fill: var(--color-art-line-soft); } .dv-vial { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 1.4; } .dv-mk { stroke: var(--color-art-line); stroke-width: 1.4; } .dv-bub { fill: var(--color-border); stroke: var(--color-art-line); stroke-width: 1.2; }
 .dv { background: transparent; }
+
+/* Phase 7 · the conversion floor: proof beside every call to action (FINALIZE "CONVERSION FLOOR"). One line, two
+   halves that wrap as units: the aggregate, then the licence line character-exact. */
+.vouch { display: flex; flex-wrap: wrap; column-gap: var(--s4); row-gap: 0; margin: 0; font: 600 .8125rem/1.5 var(--f-text); color: var(--color-text-secondary); }
+.vouch > span { white-space: nowrap; }
+.vouch .nums { color: var(--color-text); }
+.go { display: grid; gap: var(--s2); justify-items: start; }

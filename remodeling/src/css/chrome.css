@@ -3,7 +3,7 @@
 
 .skip {
   position: fixed; left: 12px; top: 12px; z-index: 100;
-  padding: 10px 14px; background: var(--color-accent-solid); color: var(--color-text-on-accent);
+  padding: 12px 16px; background: var(--color-accent-solid); color: var(--color-text-on-accent);
   border-radius: var(--radius); font-weight: 560; text-decoration: none;
   transform: translateY(-160%);
   transition: transform var(--t-ui) var(--ease-out);
@@ -39,11 +39,11 @@
   .nav__links a:hover::after { transform: scaleX(1); }
 }
 .nav__tel { font-size: .9375rem; font-weight: 500; text-decoration: none; color: inherit; white-space: nowrap; }
-.nav .btn { --h: 44px; padding: 0 18px; font-size: .9375rem; }
+.nav .btn { --h: 44px; padding: 0 16px; font-size: .9375rem; }
 .nav__menu { display: none; }
 .nav.is-solid { background: var(--color-bg); color: var(--color-text); }
 .nav.is-solid .nav__logo img { filter: none; }
-[data-theme="daylight"] .nav.is-solid .nav__logo { background: var(--color-surface); padding: 6px 10px; margin-left: -10px; }
+[data-theme="daylight"] .nav.is-solid .nav__logo { background: var(--color-surface); padding: 8px 12px; margin-left: -10px; }
 .nav.is-hidden { transform: translateY(-100%); }
 
 @media (max-width: 1023px) {
@@ -76,13 +76,13 @@
 .sheet ul a { font-family: var(--f-display); font-size: 2.5rem; font-stretch: 82%; font-weight: 600; letter-spacing: -.02em; text-decoration: none; }
 .sheet__foot { margin-top: auto; display: grid; gap: var(--s4); }
 .sheet__settings { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s6); }
-.sheet__settings fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.sheet__settings fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
 .sheet__settings legend { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); padding: 0; margin-bottom: 4px; }
 .sheet .seg { background: var(--color-surface); }
 .sheet .seg button { color: var(--color-text); }
 .sheet .seg button[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
 @media (max-width: 1023px) { .settings { display: none; } }
-.settings__btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+.settings__btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; } /* Carbon 24 / 1.5 */
 
 /* ---------- version switch: a real radiogroup [S1303 §9, S0006 §12, S1441] ---------- */
 /* docked in the header's free centre; only the switch of the section holding the viewport's middle is shown */
@@ -95,12 +95,12 @@
   pointer-events: none;
 }
 .vswitch.is-current { visibility: visible; opacity: 1; transform: none; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s; }
-.vswitch__name { font: 600 .6875rem/1 var(--f-text); letter-spacing: 0; padding: 0 8px 0 10px; opacity: .8; white-space: nowrap; }
+.vswitch__name { font: 600 .6875rem/1 var(--f-text); letter-spacing: 0; padding: 0 8px 0 12px; opacity: .8; white-space: nowrap; }
 @media (max-width: 1279px) { .vswitch__name { display: none; } }
 .vswitch__in {
   pointer-events: auto;
   display: inline-flex; align-items: center; gap: 2px;
-  padding: 3px;
+  padding: 4px;
   background: color-mix(in srgb, var(--color-surface) 78%, transparent);
   color: var(--color-text);
   border-radius: var(--radius);
@@ -119,7 +119,7 @@
 }
 .vswitch button::before { content: ""; position: absolute; inset: -5px; }   /* 44px hit area */
 .vswitch button[aria-checked="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); opacity: 1; }
-.vswitch__sep { opacity: .4; padding: 0 1px; }
+.vswitch__sep { opacity: .4; padding: 0 2px; }
 @media (hover: hover) and (pointer: fine) {
   .vswitch button:hover { opacity: 1; }
 }
@@ -130,9 +130,9 @@
 }
 @media (max-width: 400px) { .nav__logo img { width: 112px; } }
 /* backup slots: folded away (B key or ?backups=1 opens them); a backup in use keeps its row open [AUDIT-01 A.2] */
-.vswitch__bks { display: none; align-items: center; gap: 2px; margin-left: 6px; padding-left: 6px; box-shadow: inset 1px 0 0 color-mix(in srgb, var(--color-shadow) 22%, transparent); }
+.vswitch__bks { display: none; align-items: center; gap: 2px; margin-left: 8px; padding-left: 8px; box-shadow: inset 1px 0 0 color-mix(in srgb, var(--color-shadow) 22%, transparent); }
 .show-backups .vswitch__bks, .vswitch__in.is-bk .vswitch__bks { display: inline-flex; }
-.vswitch .vswitch__bk { width: auto; min-width: 30px; padding: 0 5px; font-size: .75rem; letter-spacing: .02em; font-weight: 600; }
+.vswitch .vswitch__bk { width: auto; min-width: 30px; padding: 0 4px; font-size: .75rem; letter-spacing: .02em; font-weight: 600; }
 /* phones: five digits need the room the header Call button took; the fixed bar below carries Call / Text / Book */
 @media (max-width: 479px) { .nav .btn--call { display: none; } }
 @media (max-width: 767px) { .vswitch button::before { inset: -7px -9px; } }   /* >= 44px hit area per digit [AUDIT-01 D.14] */
@@ -213,7 +213,7 @@
     box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--color-shadow) 40%, transparent);
   }
   .mbar .mbar__book { background: var(--color-accent-solid); color: var(--color-text-on-accent); box-shadow: none; }
-  body { padding-bottom: 72px; }
+  body { padding-bottom: 80px; }
 }
 
 /* ---------- settings (theme + motion) [S1304 §6 hidden at rest, S1169/S1209 toggle] ---------- */
@@ -233,14 +233,14 @@
   border-radius: var(--radius);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 14%, transparent);
   transform-origin: top right;
-  display: grid; gap: 14px;
+  display: grid; gap: 16px;
 }
 .settings__panel[hidden] { display: none; }
 .settings__panel.is-in { animation: pop-in 180ms var(--ease-out); }
 @keyframes pop-in { from { opacity: 0; transform: scale(.96); } }
-.settings fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.settings fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
 .settings legend { font-size: .8125rem; font-weight: 600; padding: 0; margin-bottom: 4px; color: var(--color-text-secondary); }
-.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; background: var(--color-surface); border-radius: var(--radius); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 4px; background: var(--color-surface); border-radius: var(--radius); }
 .seg button { min-height: 38px; border: 0; background: none; color: var(--color-text); border-radius: var(--radius); font-size: .875rem; font-weight: 600; opacity: .7; }
 .seg button[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); opacity: 1; }
 
@@ -283,7 +283,7 @@
 .viewer {
   position: fixed; inset: 0; z-index: 70;
   display: grid; grid-template-rows: 1fr auto; gap: 12px;
-  padding: 72px var(--margin) 20px;
+  padding: 80px var(--margin) 24px;
   background: color-mix(in srgb, var(--color-surface) 94%, transparent);
   color: var(--color-text);
   overscroll-behavior: contain;
@@ -301,7 +301,7 @@
 .foot__cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); margin-bottom: var(--s8); padding-bottom: var(--s7); border-bottom: 1px solid color-mix(in srgb, var(--color-shadow) 14%, transparent); }
 .foot__line { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; color: var(--color-text); }
 .foot__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
-.foot__tel { color: var(--color-text); font-weight: 600; font-size: 1.0625rem; padding-block: 11px; }
+.foot__tel { color: var(--color-text); font-weight: 600; font-size: 1.0625rem; padding-block: 12px; }
 /* FINALIZE · the live line: Miami time and whether we are open right now, from the published hours */
 .foot__lead { display: grid; gap: var(--s3); }
 .foot__open { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--color-text-secondary); }
@@ -323,7 +323,7 @@
 /* OWNER ORDER (full site): the page you are on is marked in the nav, the sheet and the footer */
 .nav__links a[aria-current="page"] { color: var(--color-accent-text); box-shadow: inset 0 -3px 0 var(--color-accent-border); }
 .sheet__pages a[aria-current="page"], .foot__col a[aria-current="page"] { color: var(--color-accent-text); }
-.sheet__h { margin: 18px 0 6px; font: 600 .75rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
+.sheet__h { margin: 16px 0 8px; font: 600 .75rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
 
 /* FINALIZE: sections with one deepened version show no version switcher (desktop rail or mobile stepper) */
 .vswitch[data-count="1"] { display: none !important; }
