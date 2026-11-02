@@ -3,6 +3,7 @@ scoped). Pins show their city only: no months (captions are place-only until Mus
 from shell import IM, PAIRS, TRADE, RECORD, REVIEWS, CREDS, esc, icon, cline, home2
 from sec_home3 import _seam
 from sec_windows import close
+from sec_home import PL_MARK
 
 
 def _map_svg(cls):
@@ -101,7 +102,7 @@ def k4():
           f'<div class="wkp-s">{_seam("", 0)}</div><fieldset class="chips"><legend class="label">Pick a job · six of 177 genuine pairs</legend>{chips}</fieldset></div></div>')
     L = ''.join(f'<div class="hs-i">{IM.img(p["id"] + "-b", "Before: " + p["place"])}</div>' for p in PAIRS)
     R = ''.join(f'<div class="hs-i">{IM.img(p["id"] + "-a", "After: " + p["place"])}</div>' for p in PAIRS)
-    pl = ''.join(f'<div class="pl"><p class="pl-k">{esc(p["place"])}</p><p class="pl-s">Before, then after · {TRADE[p["id"]]}</p><p class="pl-n">Pair {i + 1} of 6</p></div>' for i, p in enumerate(PAIRS))
+    pl = ''.join(f'<div class="pl" style="background:var(--steel-{9 + i % 3})">{PL_MARK}<p class="pl-k">{esc(p["place"])}</p><p class="pl-s">Before, then after · {TRADE[p["id"]]}</p><p class="pl-n">Pair {i + 1} of 6</p></div>' for i, p in enumerate(PAIRS))
     v2 = (f'<div class="wkp2" data-wkp2><div class="h1-stick"><div class="hs"><div class="hs-col hs-l">{L}</div><div class="hs-col hs-r">{R}</div><div class="pls" aria-live="polite">{pl}</div></div>'
           f'<div class="h1-ctl"><button class="ctl" type="button" data-d="-1" aria-label="Previous pair">{icon("action-arrow-right", 20)}</button><span class="ctl-n" aria-hidden="true"><b>1</b> / 6</span>'
           f'<button class="ctl" type="button" data-d="1" aria-label="Next pair">{icon("action-arrow-right", 20)}</button></div></div></div>')

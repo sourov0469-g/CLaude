@@ -137,7 +137,12 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - The wall face now sits beside the section.
     - Image re-encode was declined (5% saving) and Rimowa re-tried (still 403).
     - Audit: 24 page states, 0 problems.
-  - **Next:** cycle 3, a frame-by-frame reference re-check of all 41 sections.
+  - **Cycle 3 complete:** all 41 sections checked against their reference (`siding/brand-v2/build/REFERENCE-CHECK.md`).
+    - 1 gap fixed: the MERSI plate now steps steel-9/10/11 per job, with the C1 mark tone-on-tone (home 1 V1 and Our work 4 V2, with backups).
+    - 1 deviation recorded: Roofing 5.
+    - Rimowa remains 403.
+    - Audit: 24 page states, 0 problems; 10 backups in the file.
+  - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
