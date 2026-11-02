@@ -1,0 +1,23 @@
+/* ===== Sweep the lawn (Bruno: one explorable section; Owl's own process) ===== */
+.game{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.gm-stage{position:relative;border-radius:var(--radius-m);background:var(--surface-page);border:1.5px solid var(--line-control);touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;outline-offset:var(--space-4)}
+.gm-stage:active{cursor:grabbing}
+.gm-stage:focus-visible{outline:2px solid var(--focus-ring)}
+.gm-svg{display:block;width:100%;height:auto;overflow:hidden}
+.gm-hint{position:absolute;left:var(--space-16);top:var(--space-12);display:flex;gap:var(--space-8);align-items:center;margin:0;color:var(--text-muted);transition:opacity var(--dur-normal) linear}
+.gm-hint .icon{width:var(--space-16);height:var(--space-16)}
+.gm-stage.is-playing .gm-hint{opacity:0}
+.gm-bar{display:flex;flex-wrap:wrap;gap:var(--space-12) var(--space-24);align-items:center;margin-top:var(--space-16)}
+.gm-bar .t-small{flex:1;min-width:14rem}
+.gm-count{margin:0}
+.gm-win{margin-top:var(--space-24);display:grid;gap:var(--space-12);max-width:var(--measure)}
+.gm-win:not([hidden]){animation:gm-in var(--dur-slow) var(--ease-out)}
+.gm-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+@keyframes gm-in{from{opacity:0;transform:translateY(var(--space-12))}}
+.gm2-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-48);align-items:start}
+.gm2-copy{display:grid;gap:var(--space-16);align-content:start}
+.gm2-copy .sec-head{margin-bottom:0}
+.gm2-copy .btn{justify-self:start}
+.gm2-stage{cursor:crosshair}
+@media (max-width:1023px){.gm2-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.gm-win:not([hidden]){animation:none}}

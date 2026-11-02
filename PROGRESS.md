@@ -160,7 +160,8 @@ corrections in this session; before each phase I check for one, then proceed wit
 **Phase 3b in progress:**
 - **Proof 1, the hero:** DONE (`owl/GATE-hero.md`). V1 "house window" (default) and V2 "sequence", in the single file `owl/site/owl-roofing.html`; 27/27 tests pass.
 - **Proof 2, Protect Your Nest:** DONE (`owl/GATE-nest.md`). V1 pinned beats (default) and V2 route; 16/16 tests pass.
-- **Next:** proof 3, the Sweep-the-lawn game.
+- **Proof 3, Sweep the lawn:** DONE (`owl/GATE-game.md`). V1 side-view sweep (default) and V2 top-down find; 16/16 tests pass; continuous collision.
+- **All three proof sections are done.** Next: the full build, one section at a time, two versions each: proof strip, services, families, storm, reviews, price, area, call band + footer; then the 5 inner pages.
 
 ### Page plan and reasoning (recorded here as the addendum requires)
 **Built from tasks inward** (⟦S1411⟧). A Twin Cities homeowner comes with one of four jobs:
