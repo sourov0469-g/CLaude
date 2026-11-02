@@ -16,6 +16,33 @@ corrections in this session; before each phase I check for one, then proceed wit
 - **For the rest of this build:** no sub-agent and no background task of any kind will be started. Every command runs in
   the foreground, in this thread, where the owner and Muse can see it.
 
+## Fourth order, 2026-11-02 21:18 UTC: background-task check after the panel showed 21 finished and 1 running
+**Running now: zero.**
+- **Processes:** `ps` shows only the harness's two MCP servers (pdf-server, desktop-commander), started 11 seconds before
+  the check. There is no node, chromium, ffmpeg, python or curl process of mine.
+- **TaskStop on the newest entry (`b11h8y9w8`):** "No task found".
+- **What that entry was:** the transient record of my own foreground `ls/ps` command. Every foreground Bash call
+  creates one while it runs, and it disappears when the call ends; the next check's own entry `bz4qcnwf0` appeared
+  and finished the same way.
+
+**The 21 finished entries in the panel, each accounted for:**
+- **17 sub-agent records from 2026-10-29:** the earlier Rembrandt rounds, before tonight's order.
+- **3 sub-agent records from 2026-11-02 18:55:** the three WEB-SKILLS readers started at the very start of the Owl build.
+  - Stopped on the owner's first order.
+  - Their output was never used; the index read was redone by me in this thread.
+- **1 shell task, `bkstz63zb` (20:15):** my identity-board render. The harness moved it to the background when a runaway
+  loop in my code made it slow. I stopped it at once; its output reads "[killed]".
+
+**What the "1 running" was:** no background task of mine. The most likely explanation is one of my long foreground test
+runs: the game, hero and nest suites took up to about 8 minutes each and show in the panel while running. They ran in
+this thread, with no `run_in_background`; nothing was left to fold back in.
+
+**Rule kept from here on:**
+- No sub-agents and no `run_in_background`.
+- Every command runs in the foreground, kept short and split, so nothing is ever handed to the background.
+- Processes are killed only by PID.
+- **Zero background tasks and zero sub-agents are running.**
+
 ## Binding corrections received tonight (via Muse, owner's orders)
 1. **Subject:** Owl Roofing. The Rembrandt brief is VOID.
    - Nothing Rembrandt is in this build: a text scan of `owl/` for its name, phone, address, people and colours returns 0
