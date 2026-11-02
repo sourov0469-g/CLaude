@@ -50,3 +50,37 @@ Format: tag, name, when read, and the rules taken. Rules are stated in words so 
   - **Note for Owl:** the live site already sits close to cluster 1 (cream ground) and uses tracked ALL-CAPS eyebrows
     ("THE TWIN CITIES TRUSTED ROOFING COMPANY", "OUR SERVICES", "COMPANY PROMISE"). The kept colours stay; the template
     chrome goes.
+- ⟦S0011⟧ brand: main text, logo-usage-rules.md and color-palette-management.md
+  - **Logo variants:** full colour on light; reversed on dark.
+  - **Clear space:** x = the mark's height.
+  - **Minimum sizes:** full logo 120px, icon 24/32px. Header 120-200px wide, footer 100-150px.
+  - **Approved grounds:** white, light, brand primary (reversed), dark #333+ (reversed); on photography, ensure contrast.
+  - **Absolute don'ts:** stretch, rotate, shadow, gradient, unapproved colour, outline, busy ground, crop, rearrange, add
+    elements.
+  - **Colour ratios:** primary 60-70%, secondary 20-30%, accent 5-10%, off-brand at most 20%. No pure #000 text. Test
+    every combination. Never colour-only meaning.
+
+## Phase 1b: design directions
+- ⟦S0330⟧ explore-design
+  - **One HTML file** with several directions side by side.
+  - **Variants explore STRUCTURE, not identity:** every variant wears the captured brand.
+  - **Distinctness:** each variant gets a distinct one-sentence thesis and names its tradeoff out loud.
+  - **Fixtures:** real copy; the same fixtures in every variant.
+  - **Output:** a decision row ("if you want X, pick A").
+  - **Style:** no dark "AI artifact" chrome; scoped CSS per variant.
+- ⟦S1474⟧ parallel-concepts
+  - Concepts differ in what the user DOES: sequence, unit of interaction, division of labour, entry point, commitment
+    point.
+  - Write the question the set answers first.
+  - Comparable fidelity; no strawmen; the visual language held constant.
+- ⟦S1472⟧ concept-selection
+  - Criteria are written BEFORE comparing, each marked threshold or trade-off.
+  - Evidence over volume.
+  - Name what the winner costs.
+  - Never graft losers onto the winner.
+  - For each rejected concept, record what it tested, what it lost on, and what would bring it back.
+- ⟦S0642⟧ reference-design-contract
+  - Every reference is split into Keep / Change / Do not copy.
+  - Claims are traceable; inferences labelled.
+  - One coherent stance, not a menu.
+  - Anti-patterns are exact.

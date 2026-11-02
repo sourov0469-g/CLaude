@@ -78,6 +78,41 @@ corrections in this session; before each phase I check for one, then proceed wit
 - **Remaining:** the annex captures to finish (Lando, Lusion, Bruno, Longbow); a search for Owl's own before/after
   photos.
 
+## Phase 1b: reference study and design directions, DONE (gate report `owl/GATE-PHASE-1.md`)
+- **Reference teardowns:** `owl/research/REFERENCE-TEARDOWNS.md`, all ten annex references.
+  - Captured live in the foreground: Scout, AirPods, Graza, Quiet Cubes, MERSI, Cowboy, Longbow, Lando and Bruno.
+  - Lusion is source-only: its Cloudflare challenge was refused through the proxy, and it was not bypassed.
+- **Criteria first:** `owl/phase1/DIRECTIONS-CRITERIA.md` (thresholds T1-T5, trade-offs W1-W5) was written before any
+  direction was drawn.
+- **Board:** `owl/phase1/directions.html`. Three directions on the kept identity, which differ in what the visitor DOES:
+  - A · The Crew (people first): 17/25.
+  - **B · The Nest (system first): 21/25, SELECTED.**
+  - C · The Instrument (price first): 16/25.
+  - All three pass T1-T5.
+- **Selected: B · The Nest.**
+  - **The idea:** one line, the magnet sweep from Owl's own 3-Part Cleanup, carries the page through the Protect Your Nest
+    system and weaves a nest around the phone number at the call.
+  - **The set pieces are one system:**
+    - Graza-bar scroll animation: the magnet picks up the nails.
+    - Bruno game: "Sweep the lawn".
+    - Lusion line: one line from hero to nest.
+    - Cursor: magnet or owl.
+  - **Costs accepted:**
+    - The families come mid-page.
+    - Pinned beats are capped at 4, each pin at most 100vh, with a skip link and a static reduced-motion path.
+- **Rejected:**
+  - A lost on distinctiveness and game fit.
+  - C lost on story and build depth: the price promise can't pay off without inventing prices.
+  - What would bring each back is recorded in the gate. There is no grafting between directions.
+- **Inner-page sweep** (sitemap plus 9 pages): Owl has **no before/after pair** on its site.
+  - Found and saved: the Wise Check, Get It Right Guarantee and Owl Mom Approved badges; Owl's service-area map; three
+    community photos.
+  - House photos are in `owl-pages/unproven/`.
+  - Details in `owl/assets/source/owl-pages/README.md`.
+- **Process check at this gate:** `ps` shows only the harness's two MCP servers. **Zero background tasks and zero
+  sub-agents.**
+- **Next: Phase 2,** the identity asset board on the kept identity, then `GATE-PHASE-2.md`.
+
 ## Phase 1: material inventory (from the live source, not the text recon)
 - **Hero background video:** `Owl-BG-Condensed.mp4` (9.4 MB, 1280×720, h264, 15.6 s) + `.webm` (4.5 MB), poster
   `happy-homeowners-owl-roofing.jpg`. Saved.

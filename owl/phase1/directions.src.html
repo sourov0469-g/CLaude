@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · three design directions on the kept identity (Phase 1b)</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17121D;--olive:#666B53;--olive-deep:#36402D;--olive-night:#282F21;--bark:#3F3130;--tan:#987861;--amber:#EAA222;--cream:#F1EFE6;--paper:#FCFBF5;--white:#fff;
+  --f-d:"Montserrat",system-ui,sans-serif;--f-b:"Lato",system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;color:var(--ink);font:400 17px/1.55 var(--f-b)}
+h1,h2,h3,h4{font-family:var(--f-d);margin:0}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.doc-head{background:var(--cream);padding:46px 0 40px}.doc-head h1{font-size:2.6rem;font-weight:800;line-height:1.05}.doc-head p{max-width:76ch;margin:.5em 0 0;color:#3d3a33}
+.q{margin-top:18px;background:var(--paper);border-left:4px solid var(--olive);padding:14px 18px;font:600 1.05rem/1.45 var(--f-d)}
+.dir{padding:64px 0 72px;border-top:1px solid #e3dfcf}
+.dir-head{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:end;margin-bottom:26px}
+.dir-head h2{font-size:2.4rem;font-weight:800;line-height:1.04}.dir-head .thesis{font-size:1.1rem;margin:.4em 0 0}
+.trade{font-size:.95rem;background:var(--cream);border-radius:6px;padding:14px 16px}
+.trade b{font-family:var(--f-d)}
+.frame{width:1200px;max-width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 30px 60px -38px rgba(23,18,29,.55);margin:0 auto}
+.flabel{font:700 12px var(--f-d);color:var(--olive);margin:26px 0 8px}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:26px}
+.card{background:#fff;outline:1px solid #e3dfcf;border-radius:6px;padding:16px;font-size:.9rem}
+.card h4{font-size:.95rem;margin-bottom:6px}
+.card ul{margin:.3em 0 0;padding-left:1.1em}.card li{margin:.15em 0}
+.refcard{grid-column:span 2}
+@media (max-width:1000px){.dir-head,.meta{grid-template-columns:1fr}.refcard{grid-column:auto}}
+/* the kept logo, inlined byte-for-byte; only its existing eye and pupil paths move */
+.logo{display:block}.logo .eye,.logo .pupil{transform-box:fill-box;transform-origin:50% 50%}
+@keyframes blink{0%,100%{transform:scaleY(1)}45%,55%{transform:scaleY(.08)}}
+.blink .eye,.blink .pupil{animation:blink 160ms var(--ease) both}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 15px var(--f-d);padding:15px 22px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.btn-amber{background:var(--amber);color:var(--ink)}.btn-ghost{color:var(--cream);box-shadow:inset 0 0 0 2px rgba(241,239,230,.7)}.btn-ink{background:var(--ink);color:var(--cream)}.btn-olive{background:var(--olive);color:#fff}
+.btn svg{width:18px;height:18px}
+.proof{display:inline-flex;gap:14px;align-items:center;font:600 14px var(--f-d)}
+.stars{color:var(--amber);letter-spacing:2px}
+
+/* ---------- A: THE CREW ---------- */
+.a-hero{background:var(--ink);color:var(--cream)}
+.a-hero video,.a-hero .poster{position:absolute;inset:44px 0 112px 0;width:100%;height:calc(100% - 156px);object-fit:cover}
+.a-sprocket{position:absolute;left:0;right:0;height:44px;background:var(--ink)}
+.a-sprocket svg{width:100%;height:100%}
+.a-top{top:0}.a-bot{bottom:112px}
+.a-strip{position:absolute;left:0;right:0;bottom:0;height:112px;display:flex;gap:8px;padding:12px 18px;background:var(--ink)}
+.a-strip figure{margin:0;flex:1;position:relative;border-radius:2px;overflow:hidden;outline:2px solid transparent}
+.a-strip figure.on{outline-color:var(--amber)}
+.a-strip img{width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.a-strip figcaption{position:absolute;left:8px;bottom:6px;font:700 11px var(--f-d);color:var(--cream);text-shadow:0 1px 2px #000}
+.a-nav{position:absolute;top:58px;left:36px;right:36px;display:flex;justify-content:space-between;align-items:center;z-index:3}
+.a-nav .logo{width:150px}
+.a-copy{position:absolute;left:36px;bottom:150px;z-index:3;max-width:620px}
+.a-copy h3{font-size:3.6rem;font-weight:800;line-height:.98;letter-spacing:-.015em;color:var(--paper);text-wrap:balance}
+.a-copy p{margin:.6em 0 1em;color:var(--cream);font-size:1.1rem;max-width:44ch}
+.a-shade{position:absolute;inset:44px 0 112px 0;background:linear-gradient(90deg,rgba(23,18,29,.78) 0,rgba(23,18,29,.35) 46%,rgba(23,18,29,0) 70%)}
+.a-sec{background:var(--paper)}
+.a-sec .rings{position:absolute;inset:0;background:url(../assets/source/faq-bg.svg) center/cover;opacity:.9}
+.a-fam{position:absolute;left:40px;bottom:0;width:430px}
+.a-fam2{position:absolute;left:400px;bottom:0;width:330px}
+.a-sec h3{position:absolute;right:70px;top:90px;font-size:3rem;font-weight:800;line-height:1;width:430px;color:var(--ink)}
+.a-sec .who{position:absolute;right:70px;top:250px;width:430px;font-size:1.05rem;color:#3d3a33}
+.a-sec .tag{position:absolute;font:700 12px var(--f-d);background:var(--cream);padding:6px 10px;border-radius:999px;color:var(--olive-deep)}
+.a-perf{position:absolute;left:0;right:0;bottom:22px;height:16px}
+
+/* ---------- B: THE NEST ---------- */
+.b-hero{background:var(--paper)}
+.b-win{position:absolute;right:40px;top:96px;width:690px;height:470px;border-radius:220px 220px 14px 14px;overflow:hidden}
+.b-win video,.b-win img{width:100%;height:100%;object-fit:cover}
+.b-nav{position:absolute;top:28px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:center}
+.b-nav .logo{width:150px}
+.b-copy{position:absolute;left:40px;top:150px;width:430px}
+.b-copy h3{font-size:4.2rem;font-weight:800;line-height:.95;letter-spacing:-.02em}
+.b-copy p{font-size:1.08rem;margin:.7em 0 1.2em;max-width:36ch;color:#3d3a33}
+.b-tree{position:absolute;left:0;right:0;bottom:0;height:64px;background:url(../assets/source/footer-bg.svg) center bottom/auto 100% repeat-x;opacity:.9}
+.b-line{position:absolute;inset:0;pointer-events:none}
+.b-sec{background:var(--cream)}
+.b-sec .num{position:absolute;left:70px;top:70px;font:800 15rem/0.8 var(--f-d);color:var(--olive-deep);letter-spacing:-.06em}
+.b-sec .numlab{position:absolute;left:84px;top:330px;font:800 2.1rem/1.05 var(--f-d);width:430px}
+.b-sec .numsub{position:absolute;left:84px;top:420px;width:400px;color:#3d3a33}
+.b-sec .lawn{position:absolute;right:60px;top:60px;width:600px;height:555px;border-radius:12px;overflow:hidden;background:#dfe0cf}
+.b-sec .lawn img{width:100%;height:100%;object-fit:cover}
+.b-steps{position:absolute;left:84px;bottom:54px;display:flex;gap:10px}
+.b-steps span{font:700 12px var(--f-d);padding:7px 12px;border-radius:999px;background:#fff;color:var(--olive-deep)}
+.b-steps span.on{background:var(--olive-deep);color:var(--cream)}
+
+/* ---------- C: THE INSTRUMENT ---------- */
+.c-hero{background:var(--paper)}
+.c-hero .rings{position:absolute;inset:0;background:url(../assets/source/faq-bg.svg) center/cover;opacity:.7}
+.c-nav{position:absolute;top:28px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:center;z-index:3}
+.c-nav .logo{width:150px}
+.c-inst{position:absolute;left:40px;top:110px;width:560px;bottom:40px;background:#fff;border-radius:14px;box-shadow:0 20px 50px -30px rgba(23,18,29,.5);padding:28px 30px;display:flex;flex-direction:column;gap:14px}
+.c-inst h3{font-size:2.3rem;font-weight:800;line-height:1}
+.c-pills{display:flex;gap:8px;flex-wrap:wrap}.c-pills span{font:700 13px var(--f-d);padding:9px 14px;border-radius:999px;background:var(--cream);color:var(--olive-deep)}.c-pills span.on{background:var(--olive-deep);color:var(--cream)}
+.c-roof{height:190px;background:var(--paper);border-radius:10px;position:relative}
+.c-read{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #e3dfcf;padding-top:12px}
+.c-read b{font:800 2.3rem/1 var(--f-d);font-variant-numeric:tabular-nums;white-space:nowrap}
+.c-read small{display:block;font:600 12px var(--f-d);color:var(--olive)}
+.c-vid{position:absolute;right:40px;top:110px;width:540px;bottom:40px;border-radius:14px;overflow:hidden}
+.c-vid img{width:100%;height:100%;object-fit:cover}
+.c-vid .cap{position:absolute;left:16px;bottom:14px;font:700 12px var(--f-d);background:rgba(252,251,245,.92);padding:7px 11px;border-radius:999px}
+.c-sec{background:var(--olive-deep);color:var(--cream)}
+.c-sec h3{position:absolute;left:60px;top:60px;font-size:2.6rem;font-weight:800;line-height:1.02;width:420px;color:var(--paper)}
+.c-sec p{position:absolute;left:60px;top:180px;width:390px;color:var(--cream)}
+.c-sec .found{position:absolute;left:60px;bottom:60px;font:800 3.4rem/1 var(--f-d);color:var(--amber)}
+.c-sec .found small{display:block;font:600 13px var(--f-d);color:var(--cream)}
+.c-sec .scene{position:absolute;right:50px;top:50px;width:640px;height:575px}
+</style>
+</head>
+<body>
+<header class="doc-head"><div class="wrap">
+  <img src="../assets/source/owl-roofing-logo.svg" alt="" style="height:64px">
+  <h1 style="margin-top:14px">Three design directions on Owl's kept identity</h1>
+  <p>Rebuild, not rebrand. Every frame wears Owl's own logo (unchanged), Owl's ten live colours, and the Montserrat/Lato stand-ins from Phase 1a. The directions differ in what the visitor <b>does</b>, not in how Owl looks (⟦S0330⟧, ⟦S1474⟧). The fixtures are identical in all three and every fact comes from the lock. Footage and photographs are Owl's own.</p>
+  <div class="q">The question: a Twin Cities homeowner lands here. What do they do first, and what carries them to calling or texting Owl?</div>
+</div></header>
+
+<!-- ================= A ================= -->
+<section class="dir"><div class="wrap">
+  <div class="dir-head">
+    <div><h2>A · The Crew</h2><p class="thesis">People first: you watch Owl's own crew at work, meet the two families who answer the phone, then call them.</p></div>
+    <div class="trade"><b>Tradeoff:</b> the warmest and most human; it puts Owl's footage and families to the hardest use. It gives up hands-on interaction until late in the page, and leans on photography where Owl has few job photos.</div>
+  </div>
+  <div class="flabel">FRAME A1 · Hero: the film gate</div>
+  <div class="frame a-hero" id="a1">
+    <div class="a-sprocket a-top"><svg viewBox="0 0 1200 44" preserveAspectRatio="none"><g fill="#2a2430">SPROCKETS</g></svg></div>
+    <video src="../assets/source/Owl-BG-Condensed.mp4" poster="../assets/source/frames/owl-bg-2.jpg" muted loop playsinline autoplay></video>
+    <div class="a-shade"></div>
+    <div class="a-sprocket a-bot"><svg viewBox="0 0 1200 44" preserveAspectRatio="none"><g fill="#2a2430">SPROCKETS</g></svg></div>
+    <div class="a-nav"><span class="logo-wrap">LOGO_WHITE</span><span style="display:flex;gap:12px"><a class="btn btn-ghost" href="#">Text your roofer</a><a class="btn btn-amber" href="#">PHONE_ICON Call (651) 977-6027</a></span></div>
+    <div class="a-copy"><h3>We actually answer the phone.</h3><p>Family-owned roofers in Shoreview. Storm damage, replacement, repair and siding across the Twin Cities.</p><span class="proof"><span class="stars">★★★★★</span> 5.0 · 90+ reviews <span style="opacity:.6">|</span> GAF Systems Plus Certified</span></div>
+    <div class="a-strip">
+      <figure class="on"><img src="../assets/source/frames/owl-bg-2.jpg" alt=""><figcaption>Tear-off</figcaption></figure>
+      <figure><img src="../assets/source/frames/owl-bg-5.jpg" alt=""><figcaption>Shingles up</figcaption></figure>
+      <figure><img src="../assets/source/frames/owl-bg-8.jpg" alt=""><figcaption>Check</figcaption></figure>
+      <figure><img src="../assets/source/frames/owl-bg-11.jpg" alt=""><figcaption>The finished roof</figcaption></figure>
+      <figure><img src="../assets/source/frames/owl-bg-14.jpg" alt=""><figcaption>Decking in</figcaption></figure>
+    </div>
+  </div>
+  <div class="flabel">FRAME A2 · Signature section: the people who answer</div>
+  <div class="frame a-sec">
+    <div class="rings"></div>
+    <img class="a-fam" src="../assets/source/owl-mom-cutout.webp" alt="">
+    <img class="a-fam2" src="../assets/source/meet-the-browns-owl.webp" alt="">
+    <span class="tag" style="left:150px;top:300px">The Berglands</span><span class="tag" style="left:520px;top:350px">The Browns</span>
+    <h3>Two families. One phone that rings.</h3>
+    <p class="who">Noah Bergland and Tim Brown met in a new-parents class and started Owl in 2025. When you call (651) 977-6027, one of them, or their crew, picks up.</p>
+    <svg class="a-perf" viewBox="0 0 1200 16"><g fill="#d9d4c4">PERFS</g></svg>
+  </div>
+  <div class="meta">
+    <div class="card"><h4>SVG system</h4><ul><li>Film-gate sprockets, with perforation rules running between sections</li><li>Owl's tree-ring contours (<code>faq-bg.svg</code>) as the people ground</li><li>A drawn frame counter on each chapter</li></ul></div>
+    <div class="card"><h4>Flow carrier (Lusion)</h4><p>The perforation strip: the film's edge leaves the hero and runs down the page as the seam between chapters, ending as the strip of the call band.</p></div>
+    <div class="card"><h4>Logo micro-motion</h4><p>The kept owl <b>blinks</b> on every film cut (eyes scaleY 0.08, 160ms). The artwork never changes; only its two eye paths move.</p><button onclick="document.querySelectorAll('#a1 .logo').forEach(l=>{l.classList.remove('blink');void l.offsetWidth;l.classList.add('blink')})" class="btn btn-ink" style="margin-top:8px;padding:9px 14px;font-size:12px">Blink now</button></div>
+    <div class="card"><h4>Structure (6 pages)</h4><ul><li>Home (11 sections: film → people → Protect Your Nest → services → reviews/videos → call)</li><li>Services (Replacement / Storm / Repair / Siding chapters)</li><li>Protect Your Nest</li><li>Our families</li><li>Reviews &amp; videos</li><li>Contact &amp; Price My Roof</li></ul></div>
+    <div class="card refcard"><h4>Reference card</h4><p><b>Primary: Scout Motors (mechanism)</b>: story as sequenced evidence, a film-roll strip of real moments. Teardown: one image and one line per beat; the filmstrip makes "there is more proof" tangible; do not import the archive collage or the aggressive end-cap. <b>Support:</b> Cowboy for warmth through people-in-use photography; Longbow for the Protect Your Nest doctrine row. <b>Distance:</b> Owl's own footage and families; no vintage archive; a short true spine (2025); Owl's colours and type; sprockets are Owl-drawn, not Scout's Viewfinder.</p></div>
+    <div class="card refcard"><h4>Set pieces it can hold</h4><ul><li>Custom scroll animation (Graza bar): the film advances frame by frame with scroll, chapter by chapter, from Owl's footage only</li><li>Game-like section (Bruno): weak fit; would have to be bolted on</li><li>Cursor companion: a small owl that tilts its head toward the playing frame</li></ul></div>
+  </div>
+</div></section>
+
+<!-- ================= B ================= -->
+<section class="dir"><div class="wrap">
+  <div class="dir-head">
+    <div><h2>B · The Nest</h2><p class="thesis">System first: one line, the magnet sweep, travels the whole page through the Protect Your Nest system, one pinned proof per beat, and weaves itself into a nest at the call.</p></div>
+    <div class="trade"><b>Tradeoff:</b> the most ownable (no other roofer has this system or this line) and the richest in custom animation. It gives up the families until mid-page, and pinned beats carry scroll-jacking risk if overused.</div>
+  </div>
+  <div class="flabel">FRAME B1 · Hero: the window and the line</div>
+  <div class="frame b-hero" id="b1">
+    <div class="b-nav"><span class="logo-wrap">LOGO_COLOUR</span><span style="display:flex;gap:12px;align-items:center"><span class="proof" style="color:var(--olive-deep)"><span class="stars">★★★★★</span> 5.0 · 90+ reviews</span><a class="btn btn-amber" href="#">PHONE_ICON (651) 977-6027</a></span></div>
+    <div class="b-copy"><h3>We give a hoot.</h3><p>Family-owned roofers in Shoreview. We actually answer the phone, then we protect your home at every stage of the job.</p><a class="btn btn-olive" href="#">See the Protect Your Nest system</a></div>
+    <div class="b-win"><video src="../assets/source/Owl-BG-Condensed.mp4" poster="../assets/source/frames/owl-bg-5.jpg" muted loop playsinline autoplay></video></div>
+    <div class="b-tree"></div>
+    <svg class="b-line" viewBox="0 0 1200 675"><path d="M44 520 C 160 600, 330 470, 452 568 S 600 640, 760 600 1080 560 1160 640" fill="none" stroke="#36402D" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 11"/><circle cx="44" cy="520" r="7" fill="#EAA222"/></svg>
+  </div>
+  <div class="flabel">FRAME B2 · Signature section: pinned beat 2 of 4, "First pass with the magnet"</div>
+  <div class="frame b-sec">
+    <div class="num">3</div>
+    <div class="numlab">sweeps of your lawn. Every job.</div>
+    <div class="numsub">The crew sweeps, then a roofing magnet goes over every inch, then the project manager checks it all again. As you scroll, the line drags the magnet across the lawn and the nails come up.</div>
+    <div class="lawn"><img src="../assets/source/owl-roofing-catchall.webp" alt=""><svg viewBox="0 0 600 555" style="position:absolute;inset:0"><path d="M30 470 C 160 430, 300 500, 570 440" fill="none" stroke="#EAA222" stroke-width="6" stroke-linecap="round"/><path d="M30 500 C 200 470, 330 530, 570 480" fill="none" stroke="rgba(252,251,245,.75)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/><g fill="#17121D"><rect x="120" y="455" width="10" height="3" rx="1.5" transform="rotate(20 125 456)"/><rect x="250" y="476" width="10" height="3" rx="1.5" transform="rotate(-30 255 477)"/><rect x="400" y="458" width="10" height="3" rx="1.5" transform="rotate(60 405 459)"/></g><g transform="translate(470 418)"><rect x="-26" y="-10" width="52" height="20" rx="4" fill="#36402D"/><rect x="-2" y="-46" width="4" height="38" fill="#36402D"/></g></svg></div>
+    <div class="b-steps"><span>1 · Nest-Protection wrap</span><span class="on">2 · 3-Part Cleanup</span><span>3 · Aftercare</span><span>4 · Get It Right Guarantee</span></div>
+  </div>
+  <div class="meta">
+    <div class="card"><h4>SVG system</h4><ul><li>The magnet sweep line: dotted while travelling, solid amber where it works</li><li>Nails and shingle courses as tiny drawn marks</li><li>Owl's treeline (<code>footer-bg.svg</code>) at the hero's foot; branches that become the nest</li></ul></div>
+    <div class="card"><h4>Flow carrier (Lusion)</h4><p>One line, start to end. It leaves the hero window, sweeps the lawn, wraps the house in the Nest-Protection beat, lays the shingle courses, and finally weaves the nest around the phone number in the call band.</p></div>
+    <div class="card"><h4>Logo micro-motion</h4><p>The owl's <b>pupils follow the line</b> (a translate of 1px or less within the existing pupil paths) and it blinks when a beat completes. The artwork never changes.</p><button onclick="document.querySelectorAll('#b1 .logo').forEach(l=>{l.classList.remove('blink');void l.offsetWidth;l.classList.add('blink')})" class="btn btn-ink" style="margin-top:8px;padding:9px 14px;font-size:12px">Blink now</button></div>
+    <div class="card"><h4>Structure (6 pages)</h4><ul><li>Home (11 sections, the line carrying all of them)</li><li>Protect Your Nest (the system in full)</li><li>Services (4 chapters)</li><li>Our families</li><li>Reviews &amp; videos</li><li>Contact &amp; Price My Roof</li></ul></div>
+    <div class="card refcard"><h4>Reference card</h4><p><b>Primary: Apple AirPods Pro (mechanism)</b>: a pinned stage, one proof per beat, numerals as full-screen events. Teardown: one idea per screen and the numeral IS the headline; do not import its 12-stage length or its footnote density. <b>Support:</b> Lusion for one continuous line as the journey; Graza for the bar (the line is drawn from this content only); Longbow for doctrine-plus-numbers. <b>Distance:</b> no product render; Owl's photographs; a light paper ground; 4 beats, not 12; the line comes from Owl's own 3-Part Cleanup.</p></div>
+    <div class="card refcard"><h4>Set pieces it can hold</h4><ul><li>Custom scroll animation (Graza bar): the magnet sweep picking up nails, made only for the 3-Part Cleanup</li><li>Game-like section (Bruno): "Sweep the lawn", dragging the magnet over a drawn lawn to find every nail (a small Owl-only game)</li><li>Cursor companion: the cursor IS a small magnet in sweep mode, or the owl</li></ul></div>
+  </div>
+</div></section>
+
+<!-- ================= C ================= -->
+<section class="dir"><div class="wrap">
+  <div class="dir-head">
+    <div><h2>C · The Instrument</h2><p class="thesis">Price first: you operate Owl's "Price My Roof" in the first viewport, measuring your own roof, and the measured roof hands you to a written estimate.</p></div>
+    <div class="trade"><b>Tradeoff:</b> the most useful and interactive, and the fastest path to a lead. It gives up the opening story, and it carries a trap: no invented prices, so the instrument may only measure and hand off.</div>
+  </div>
+  <div class="flabel">FRAME C1 · Hero: the instrument beside the footage</div>
+  <div class="frame c-hero" id="c1">
+    <div class="rings"></div>
+    <div class="c-nav"><span class="logo-wrap">LOGO_COLOUR</span><span style="display:flex;gap:12px;align-items:center"><span class="proof" style="color:var(--olive-deep)"><span class="stars">★★★★★</span> 5.0 · 90+ reviews</span><a class="btn btn-amber" href="#">PHONE_ICON (651) 977-6027</a></span></div>
+    <div class="c-inst">
+      <h3>Price my roof.</h3>
+      <div class="c-pills"><span class="on">Replacement</span><span>Storm damage</span><span>Repair</span><span>Siding</span></div>
+      <div class="c-roof"><svg viewBox="0 0 500 190" style="width:100%;height:100%"><path d="M60 150 L250 52 L440 150" fill="none" stroke="#17121D" stroke-width="5" stroke-linejoin="round"/><path d="M90 150 V178 H410 V150" fill="none" stroke="#17121D" stroke-width="4"/><g stroke="#987861" stroke-width="2" opacity=".7"><path d="M112 138 L388 138"/><path d="M140 124 L360 124"/><path d="M168 110 L332 110"/><path d="M196 95 L304 95"/><path d="M224 80 L276 80"/></g><circle cx="250" cy="52" r="12" fill="#EAA222" stroke="#17121D" stroke-width="3"/><text x="270" y="44" font-family="Montserrat" font-weight="700" font-size="13" fill="#36402D">Drag the ridge: 6/12 pitch</text></svg></div>
+      <div style="display:flex;gap:10px;font:600 13px var(--f-d);color:var(--olive-deep)"><span>House footprint</span><span style="flex:1;height:6px;background:var(--cream);border-radius:3px;margin-top:6px;position:relative"><span style="position:absolute;left:0;width:58%;height:100%;background:var(--olive-deep);border-radius:3px"></span></span><span>1,800 sq ft</span></div>
+      <div class="c-read"><div><small>1,800 sq ft × 1.118 (6/12 pitch) ÷ 100</small><b>≈ 20 squares</b></div><a class="btn btn-amber" href="#">Get my written estimate</a></div>
+    </div>
+    <div class="c-vid"><img src="../assets/source/frames/owl-bg-11.jpg" alt=""><span class="cap">Owl's crew, Twin Cities</span></div>
+  </div>
+  <div class="flabel">FRAME C2 · Signature section: the "Wise Check" game (find the hail hits)</div>
+  <div class="frame c-sec">
+    <h3>Can you spot hail damage?</h3>
+    <p>Owl's Wise Check inspection, as a game. Tap the roof where you think the hail hit. Then see what an inspector looks for, and book the real check.</p>
+    <div class="found">3 of 7<small>hits found</small></div>
+    <svg class="scene" viewBox="0 0 640 575"><path d="M40 330 L320 120 L600 330 Z" fill="#666B53"/><g stroke="#36402D" stroke-width="2" opacity=".55"><path d="M90 300 H550"/><path d="M130 270 H510"/><path d="M170 240 H470"/><path d="M210 210 H430"/><path d="M250 180 H390"/></g><rect x="80" y="330" width="480" height="210" fill="#F1EFE6"/><rect x="290" y="420" width="60" height="120" fill="#3F3130"/><g fill="none" stroke="#EAA222" stroke-width="3"><circle cx="210" cy="285" r="14"/><circle cx="420" cy="250" r="14"/><circle cx="330" cy="200" r="14"/></g><g fill="#17121D" opacity=".75"><circle cx="210" cy="285" r="4"/><circle cx="420" cy="250" r="4"/><circle cx="330" cy="200" r="4"/></g><path d="M0 575 C 100 530, 200 560, 320 540 S 540 520, 640 560 V575 Z" fill="#282F21"/></svg>
+  </div>
+  <div class="meta">
+    <div class="card"><h4>SVG system</h4><ul><li>The instrument roof: ridge handle, shingle courses re-spaced live by pitch</li><li>Owl's tree-ring contours as the topographic ground (Lando kinship)</li><li>Inspection marks: amber rings, ink dots</li></ul></div>
+    <div class="card"><h4>Flow carrier (Lusion)</h4><p>The contour lines: the tree rings flow from the instrument down through every section, tightening into the archive grid and opening out at the call.</p></div>
+    <div class="card"><h4>Logo micro-motion</h4><p>The owl's <b>pupils track the instrument's ridge handle</b> while you drag, and it blinks when the roof is measured.</p><button onclick="document.querySelectorAll('#c1 .logo').forEach(l=>{l.classList.remove('blink');void l.offsetWidth;l.classList.add('blink')})" class="btn btn-ink" style="margin-top:8px;padding:9px 14px;font-size:12px">Blink now</button></div>
+    <div class="card"><h4>Structure (6 pages)</h4><ul><li>Home (11 sections, instrument first)</li><li>Price My Roof (the full instrument)</li><li>Services (4 chapters, MERSI split-covers)</li><li>Protect Your Nest</li><li>Reviews, videos &amp; jobs (archive)</li><li>Contact</li></ul></div>
+    <div class="card refcard"><h4>Reference card</h4><p><b>Primary: Quiet Cubes (mechanism)</b>: a configurator-first instrument the site exists to operate. Teardown: the first act is a decision about your own case; do not import its blocking gate or its dark ground. <b>Support:</b> Bruno Simon for one explorable game section; Lando Norris for the archive gallery and contour ground; MERSI for service chapters across a seam. <b>Distance:</b> a roof instead of pods; light ground; no gate; no 3D render claim; Owl's own tree rings.</p></div>
+    <div class="card refcard"><h4>Set pieces it can hold</h4><ul><li>Custom scroll animation (Graza bar): weaker; the hero is hands-on, not scroll-driven</li><li>Game-like section (Bruno): the strongest fit, the Wise Check hail hunt</li><li>Cursor companion: an inspector's loupe over the roof, or the owl</li></ul></div>
+  </div>
+</div></section>
+</body>
+</html>
