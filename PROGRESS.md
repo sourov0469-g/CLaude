@@ -8,9 +8,33 @@ corrections in this session; before each phase I check for one, then proceed wit
 **Build home:** `owl/` (source material in `owl/assets/source/`, page-source recon in `owl/recon/`, skill pack + notes in
 `owl/skills/`, gate reports at `owl/GATE-*.md`).
 
-## Working method (owner's order, 2026-11-03): NO SUB-AGENTS
-- **No sub-agents and no background agents are in use.** Every part of this build is done by me, in this session, where the
-  owner and Muse can see it: research, reading, building and checking.
+## Working method (owner's final order, 2026-11-03): NO SUB-AGENTS, NO BACKGROUND TASKS
+- **Checked after the owner's third order:**
+  - `ps` shows no node, chromium, ffmpeg, curl or python process.
+  - TaskStop finds none of the earlier background task or agent IDs still registered.
+  - **Zero background tasks and zero sub-agents are running.**
+- **For the rest of this build:** no sub-agent and no background task of any kind will be started. Every command runs in
+  the foreground, in this thread, where the owner and Muse can see it.
+
+## Binding corrections received tonight (via Muse, owner's orders)
+1. **Subject:** Owl Roofing. The Rembrandt brief is VOID.
+   - Nothing Rembrandt is in this build: a text scan of `owl/` for its name, phone, address, people and colours returns 0
+     hits.
+2. **REBUILD, not rebrand.** Owl keeps its own logo (unchanged), its name and its existing brand colours as used on
+   owlroofing.com.
+   - No new logo concepts and no new identity.
+   - Phase 1 is brand recovery and audit. The design directions (layout, motion, SVG systems, structure) are built ON the
+     kept identity.
+3. **Asset rule:**
+   - **First choice:** Owl's own material first: the hero video designed into the hero, then Owl's own before/after and
+     work photos wherever good enough.
+   - **Fallback:** where they run short, unbranded photography from the earlier Rembrandt work (no Rembrandt branding
+     visible anywhere), the one genuine before/after pair from that work (unbranded), and stock, all as illustrative
+     imagery only.
+   - **Never:** an image showing Rembrandt branding; reused or stock photography presented as a specific Owl job; invented
+     captions (addresses, prices, dates); any Rembrandt fact.
+
+- **Earlier tonight:** the first order to stop sub-agents.
 - **What happened earlier tonight:** three background readers were started for the WEB-SKILLS index and skill notes.
   - On the owner's order they were ended; TaskStop found none still running.
   - Their three unverified output files were deleted unread and never committed.
