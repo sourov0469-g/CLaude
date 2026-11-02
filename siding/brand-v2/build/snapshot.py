@@ -24,6 +24,12 @@ def strip_images(h):
     return re.sub(r'data-key="([^"]+)" src="data:[^"]+"', r'data-img="\1"', h)
 
 
+def prefix_ids(h, tag):
+    """ids (and every reference to them) inside a backup get a prefix, so the file never repeats an id"""
+    h = re.sub(r'\b(id|for|aria-controls|aria-labelledby|aria-describedby)="([^"]+)"', lambda m: f'{m.group(1)}="' + ' '.join(f'bk{tag}-{x}' for x in m.group(2).split()) + '"', h)
+    return re.sub(r'url\(#([^)]+)\)', lambda m: f'url(#bk{tag}-{m.group(1)})', h)
+
+
 if __name__ == '__main__':
     os.makedirs(BK, exist_ok=True)
     allv = versions()
@@ -31,5 +37,5 @@ if __name__ == '__main__':
         sid, v = arg.split(':')
         rev = 1 + len([f for f in os.listdir(BK) if f.startswith(f'{sid}-v{v}-r')])
         p = os.path.join(BK, f'{sid}-v{v}-r{rev}.html')
-        open(p, 'w', encoding='utf-8').write(strip_images(allv[sid][v]))
+        open(p, 'w', encoding='utf-8').write(prefix_ids(strip_images(allv[sid][v]), f'{sid}v{v}r{rev}'.replace('-', '')))
         print('saved', os.path.relpath(p, HERE), len(allv[sid][v]) // 1024, 'KB before strip')

@@ -6,14 +6,15 @@ HERO_JOBS = ['robroy', 'siding0', 'siding2']
 # MERSI's plate changes colour per project and carries an embossed monogram; here the colour steps steel-9/10/11 (white
 # text >= 5.96:1 on all three) and the monogram is the C1 mark set tone-on-tone
 from shell import marks as _m
-PL_MARK = f'<svg class="pl-m" viewBox="0 0 64 64" aria-hidden="true" focusable="false">{_m.c1("rgba(255,255,255,.16)", "transparent")}</svg>'
+def PL_MARK():
+    return f'<svg class="pl-m" viewBox="0 0 64 64" aria-hidden="true" focusable="false">{_m.c1("rgba(255,255,255,.16)", "transparent")}</svg>'
 
 
 # ----------------------------------------------------------------------------------------------------------- 1 hero
 def s1():
     L = ''.join(f'<div class="hs-i">{IM.img(j + "-b", f"Before: {PLACE[j]}, the wall before the work", eager=(i == 0))}</div>' for i, j in enumerate(HERO_JOBS))
     R = ''.join(f'<div class="hs-i">{IM.img(j + "-a", f"After: {PLACE[j]}, the same wall after the work", eager=(i == 0))}</div>' for i, j in enumerate(HERO_JOBS))
-    plates = ''.join(f'<div class="pl" style="background:var(--steel-{9 + i % 3})">{PL_MARK}<p class="pl-k">{esc(PLACE[j])}</p><p class="pl-s">Before, then after</p>{cline("#fff", "")}<p class="pl-n">Job {i + 1} of {len(HERO_JOBS)}</p></div>' for i, j in enumerate(HERO_JOBS))
+    plates = ''.join(f'<div class="pl" style="background:var(--steel-{9 + i % 3})">{PL_MARK()}<p class="pl-k">{esc(PLACE[j])}</p><p class="pl-s">Before, then after</p>{cline("#fff", "")}<p class="pl-n">Job {i + 1} of {len(HERO_JOBS)}</p></div>' for i, j in enumerate(HERO_JOBS))
     copy = lambda h: (f'<div class="h1-copy"><p class="label">Siding · windows · roofing · painting in Austin</p><h1 class="h1">{h}</h1>'
                       f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a>'
                       f'<a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div>')
