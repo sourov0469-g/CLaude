@@ -1,5 +1,5 @@
 """Homepage sections, two versions each. Each function returns (title, v1_html, v2_html, css, js)."""
-from shell import IM, PLACE, TEL, PHONE, REVIEWS, CREDS, RECORD, esc, icon, cline, section  # noqa: F401
+from shell import IM, PLACE, ill, TEL, PHONE, REVIEWS, CREDS, RECORD, esc, icon, cline, section  # noqa: F401
 
 STEPS = ['Measure', 'Strip', 'Wrap', 'Lay the courses', 'Trim & paint', 'Walk-through']   # draft copy for the firm to confirm
 HERO_JOBS = ['robroy', 'siding0', 'siding2']
@@ -34,7 +34,7 @@ def s1():
             f'<g class="hd-s" data-s="4"><path d="M262 92H306V114H262Z" class="hd-trim"/><path d="M190 500H230V103H262" class="hd-ld"/><text x="180" y="506" class="hd-t" text-anchor="end">TRIM</text></g>'
             f'<g class="hd-s" data-s="5"><path d="M130 600L152 622L190 578" class="hd-ok"/><text x="180" y="660" class="hd-t" text-anchor="end">WALK-THROUGH</text></g></svg>')
     v2 = (f'<div class="hero2" data-hero2><div class="h1-stick"><div class="h2-l">{IM.img("robroy-a", "Rob Roy, Austin: the finished wall after the work")}</div>'
-          f'<div class="h2-r">{draw}</div><div class="pls pls2" aria-live="polite">{steps_pl}</div>{copy("One wall,<br>six steps.")}</div></div>')
+          f'<div class="h2-r">{ill(draw)}</div><div class="pls pls2" aria-live="polite">{steps_pl}</div>{copy("One wall,<br>six steps.")}</div></div>')
     css = r'''
 .hero1{height:260vh;position:relative} .hero2{height:320vh;position:relative}
 .h1-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;overflow:hidden}

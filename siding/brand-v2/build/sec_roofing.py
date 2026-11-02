@@ -1,6 +1,6 @@
 """Roofing, gutters & patio covers page: six sections, two versions each. Drawings only: the firm's photo set has no
 roofing or patio-cover jobs, so no photo stands in for one."""
-from shell import TEL, PHONE, CREDS, esc, icon, cline
+from shell import TEL, PHONE, CREDS, esc, icon, cline, ill
 from sec_windows import close
 
 GAF = CREDS[0]
@@ -18,6 +18,13 @@ def _roof(cls, pinned=False):
             f'<path class="rf-p" data-k="2" d="M40 326H110V340H40Z" fill="var(--steel-7)"/>{sh}'
             f'<path class="rf-p" data-k="11" d="M690 300L800 300V340H690Z" fill="var(--steel-6)" stroke="var(--steel-4)" stroke-width="2.5"/>{labels}</g></svg>')
 
+
+
+_roof_raw = _roof
+
+
+def _roof(*a, **k):
+    return ill(_roof_raw(*a, **k))
 
 def r1():
     v1 = (f'<div class="rh1 on-dark sec-pad"><div class="wrap"><p class="label on-dark-l">Roofing, gutters &amp; patio covers</p><h1 class="h1 on-dark-h">From the deck up.</h1>{cline("var(--steel-6)")}'
@@ -70,6 +77,13 @@ def _gutter(cls):
             f'<text x="630" y="100" class="gt-t">GUTTER</text><text x="600" y="300" class="gt-t">DOWNSPOUT</text><text x="720" y="400" class="gt-t">AWAY FROM THE WALL</text></svg>')
 
 
+
+_gutter_raw = _gutter
+
+
+def _gutter(*a, **k):
+    return ill(_gutter_raw(*a, **k))
+
 def r4():
     v1 = (f'<div class="gw1 sec-pad" data-gw><div class="wrap wa-g"><div><p class="label">Gutters</p><h2 class="h2">Where the water goes.</h2>'
           f'<p class="lead">Off the roof edge, into the gutter, down the downspout and away from the wall. The line follows it in once as the drawing comes into view.</p></div>{_gutter("gt-draw")}</div></div>')
@@ -95,6 +109,13 @@ def _patio(kind):
             f'{raft}<path d="M70 150H470" stroke="var(--steel-9)" stroke-width="12"/><path d="M460 150V330M300 150V330" stroke="var(--steel-9)" stroke-width="12"/>'
             f'<path d="M20 330H500" stroke="var(--color-border-default)" stroke-width="3"/></svg>')
 
+
+
+_patio_raw = _patio
+
+
+def _patio(*a, **k):
+    return ill(_patio_raw(*a, **k))
 
 def r5():
     parts = [('Posts', 'Carry the load to the ground.'), ('Beam', 'Runs across the posts.'), ('Rafters', 'Span from the beam to the house or a second beam.'), ('Roof', 'Sheds rain off the patio.')]

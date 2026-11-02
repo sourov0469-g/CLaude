@@ -66,6 +66,12 @@ def cline(color='var(--color-accent-line)', cls='draw'):
             f'<path d="M2 22.5L8 2H16V13H600" fill="none" stroke="{color}" stroke-width="3" vector-effect="non-scaling-stroke" pathLength="1"/></svg>')
 
 
+def ill(svg, cls=''):
+    """S0414 teardown: hidden or unspecified construction is identified as illustrative. Every construction drawing says so."""
+    return (f'<figure class="ill-f {cls}">{svg}<figcaption class="ill">Illustrative drawing of typical construction, '
+            f'not a specification for your home.</figcaption></figure>')
+
+
 def section(page, idx, title, v1, v2, cls='', backups=()):
     """one section with exactly two versions. V1 shows by default; the review switch flips it. Backups are templates."""
     sid = f'{page}-{idx}'

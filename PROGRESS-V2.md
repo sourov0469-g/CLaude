@@ -142,6 +142,10 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - 1 deviation recorded: Roofing 5.
     - Rimowa remains 403.
     - Audit: 24 page states, 0 problems; 10 backups in the file.
+  - **Muse correction (binding): GATE-BUILD-2 failed for citing no WEB-SKILLS tags.**
+    - **Remedied:** §6 of GATE-BUILD-2 now cites S0070, S0400, S0658, S1190, S0947, S1465, S1372, S0071, S0248, S1497, S0659, S0095, S1314, S1320, S0414, S0361 and S1421, each checked against its own text in the pack.
+    - **Rule from here on:** every gate cites WEB-SKILLS tags against the skill's own text.
+  - **Cycle 3b** (`GATE-BUILD-3.md`, 7.64, PASS, cited): the S0414 gap found while citing is fixed. All 15 construction drawings are labelled illustrative, with 14 versions backed up; 24 backups in the file.
   - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
 - **Phases 2, 3a, 3b and the build:** not started.
 

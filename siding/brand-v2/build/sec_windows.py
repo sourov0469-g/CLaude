@@ -1,5 +1,5 @@
 """Windows & doors page: six sections, two versions each. Shared helpers for the credential close and the pair seams."""
-from shell import IM, PAIRS, TEL, PHONE, CREDS, esc, icon, cline
+from shell import IM, PAIRS, TEL, PHONE, CREDS, esc, icon, cline, ill
 from sec_home3 import _seam
 
 ANDERSEN = CREDS[2]
@@ -45,6 +45,13 @@ def _window_section(cls):
                   for k, (_, _, t, y) in enumerate(parts))
     return f'<svg class="wn {cls}" viewBox="40 30 800 640" role="img" aria-label="A window drawn in elevation: frame, sash, two panes of glass with a spacer, and the sill">{art}{lab}</svg>'
 
+
+
+_window_section_raw = _window_section
+
+
+def _window_section(*a, **k):
+    return ill(_window_section_raw(*a, **k))
 
 def w1():
     v1 = (f'<div class="wh1"><div class="wh1-view">{IM.img("windows1-a", "Ridgewood, Cedar Park: new windows after the work", eager=True)}<span class="wh1-sash" aria-hidden="true"></span>'

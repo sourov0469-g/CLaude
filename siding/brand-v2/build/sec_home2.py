@@ -1,5 +1,5 @@
 """Homepage sections 5-8, two versions each. Each function returns (title, v1_html, v2_html, css, js)."""
-from shell import IM, RECORD, esc, icon, cline
+from shell import IM, RECORD, esc, icon, cline, ill
 from sec_home import _dots
 
 # ----------------------------------------------------------------------------------------------------------- 5 wall assembly
@@ -48,6 +48,13 @@ const t=document.querySelector('[data-wa2]');if(t){const tabs=[...t.querySelecto
 })();
 """
 
+
+
+_wall_svg_raw = _wall_svg
+
+
+def _wall_svg(*a, **k):
+    return ill(_wall_svg_raw(*a, **k))
 
 def s5():
     steps = ['Stud', 'Sheathing', 'Weather wrap', 'First course', 'Second course', 'Third course', 'Fourth course', 'Fifth course']
