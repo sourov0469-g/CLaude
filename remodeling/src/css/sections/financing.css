@@ -77,7 +77,7 @@
   .rf__why { order: 2; min-height: 0; }
   .rf__act { order: 3; }
 }
-@media (max-width: 560px) { .rf__cards { grid-template-columns: 1fr; } .rf__lotn { font-size: 18px; } .rf__bt { font-size: 15px; } }
+@media (max-width: 560px) { .rf__cards { grid-template-columns: 1fr; } .rf__lotn { font-size: 22px; } .rf__bt { font-size: 19px; } }
 
 /* ================= V2 · two kinds of money: an open ledger ================= */
 .km__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
@@ -122,6 +122,11 @@
 }
 @media (max-width: 900px) { .km__head { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
+  /* Phase 6: on phones the margin label sits above its two cells, so the partner columns get the full width */
+  .km__t thead tr, .km__t tr.km__r { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .km__t thead .km__gut { display: none; }
+  .km__r th { grid-column: 1 / -1; border-right: 0; padding: var(--s2) 0 0 !important; background-image: none; }
+  .km__r td:first-of-type, .km__t thead th:first-of-type { padding-left: 0; }
   .km__page { padding: var(--s5) var(--s3) var(--s4); }
   .km__t col, .km__gut { width: 84px; }
   .km__r th, .km__r td { padding: var(--s2) var(--s2); font-size: .875rem; }

@@ -34,6 +34,17 @@
       var edges = map.querySelectorAll('.rf__edge, .rf__pole, .rf__hw, .rf__hr, .rf__hd, .rf__lot');
       var marks = map.querySelectorAll('.rf__mid, .rf__spur, .rf__board, .rf__bt, .rf__lotn, .rf__ht');
       Object.keys(routes).forEach(function (p) { gsap.set(routes[p], { drawSVG: '0% 0%', opacity: 0 }); });
+      // Phase 6: on phones the signposts grow to two-line boards so their names read at ~11px (they were ~8px)
+      if (matchMedia('(max-width: 560px)').matches) {
+        map.querySelectorAll('.rf__post').forEach(function (g) {
+          var tx = g.querySelector('.rf__bt'), bd = g.querySelector('.rf__board'), x = +tx.getAttribute('x'), words = tx.textContent.split(' ');
+          var lines = words.length > 1 ? words : (tx.textContent === 'RenewPACE' ? ['Renew', 'PACE'] : [tx.textContent]);
+          tx.textContent = ''; lines.forEach(function (w, i) { var ts = document.createElementNS('http://www.w3.org/2000/svg', 'tspan'); ts.setAttribute('x', x); ts.setAttribute('dy', i ? 20 : 0); ts.textContent = w; tx.appendChild(ts); });
+          tx.setAttribute('y', lines.length > 1 ? 72 : 82);
+          bd.setAttribute('x', x - 60); bd.setAttribute('width', 120); bd.setAttribute('y', 52); bd.setAttribute('height', 52);
+          g.querySelector('.rf__pole').setAttribute('d', 'M' + x + ' 128 V104');
+        });
+      }
 
       if (k.motion) {
         // the plan draws itself as it arrives: lots and roads first, then the dashes, boards and words

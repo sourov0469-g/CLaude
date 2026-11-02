@@ -171,3 +171,4 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Small items**: level frames under reduced motion (Projects V1); a legible 0.8 mark (Reviews); the last 29 inert `data-rx` attributes stripped from the shared chrome.
 - **Gate reports amended**: every item the work above (or an earlier pass) closed is struck through in its gate with what fixed it (bathrooms, contact, kitchens, renovation, home-ba, home-process, home-proof, home-projects, home-reviews, system-companion-logo).
 - **Towns**: phones get a "See the route on the map" button in the answer (user-controlled; the drive replays in view); the list of 104 tightened to sit level with the map at 1440 (724 vs 702). `GATE-home-towns.md` amended.
+- **Financing on phones**: route-finder signposts as two-line boards (labels 8 → 10.1px); the ledger's margin label moves above its cells (quote wraps 6/7/7 → 4/5/6 lines). `GATE-home-financing.md` amended.

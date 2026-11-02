@@ -62,8 +62,8 @@
 
 ## Defects remaining (honest)
 - **No ink-line carrier** into or out of this section yet; scheduled for the flow seams pass.
-- **The V1 map at 390:** board labels render at about 8px. The map is `aria-hidden`, and the cards and reason carry the content.
-- **V2 at 390:** the three-column table is tight; the quotes wrap to 6–7 lines.
+- ~~**The V1 map at 390:** board labels render at about 8px.~~ **Improved in Phase 6:** on phones the signposts become two-line boards and the labels render at 10.1px (measured). Still small; the map stays `aria-hidden`, and the cards and reason carry the content.
+- ~~**V2 at 390:** the three-column table is tight; the quotes wrap to 6–7 lines.~~ **Improved in Phase 6:** on phones the margin label sits above its two cells, giving the partner columns the full width. Measured rendered lines for the four quotes: 4 / 5 / 6 / 2 (were 6 / 7 / 7 / 2). Table semantics kept.
 
 ## Skills applied
 - **Motion:** S0362 (the line leads the eye; strokes before fills), S0576 (mirrored in/out eases), S1326 (scrubbed, reversible).

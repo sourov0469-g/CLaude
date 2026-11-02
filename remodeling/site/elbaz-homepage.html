@@ -1362,7 +1362,7 @@ html.has-buddy select { cursor: default !important; }
   .rf__why { order: 2; min-height: 0; }
   .rf__act { order: 3; }
 }
-@media (max-width: 560px) { .rf__cards { grid-template-columns: 1fr; } .rf__lotn { font-size: 18px; } .rf__bt { font-size: 15px; } }
+@media (max-width: 560px) { .rf__cards { grid-template-columns: 1fr; } .rf__lotn { font-size: 22px; } .rf__bt { font-size: 19px; } }
 
 
 .km__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
@@ -1407,6 +1407,11 @@ html.has-buddy select { cursor: default !important; }
 }
 @media (max-width: 900px) { .km__head { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
+  
+  .km__t thead tr, .km__t tr.km__r { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .km__t thead .km__gut { display: none; }
+  .km__r th { grid-column: 1 / -1; border-right: 0; padding: var(--s2) 0 0 !important; background-image: none; }
+  .km__r td:first-of-type, .km__t thead th:first-of-type { padding-left: 0; }
   .km__page { padding: var(--s5) var(--s3) var(--s4); }
   .km__t col, .km__gut { width: 84px; }
   .km__r th, .km__r td { padding: var(--s2) var(--s2); font-size: .875rem; }
@@ -5344,6 +5349,17 @@ html.has-buddy select { cursor: default !important; }
       var edges = map.querySelectorAll('.rf__edge, .rf__pole, .rf__hw, .rf__hr, .rf__hd, .rf__lot');
       var marks = map.querySelectorAll('.rf__mid, .rf__spur, .rf__board, .rf__bt, .rf__lotn, .rf__ht');
       Object.keys(routes).forEach(function (p) { gsap.set(routes[p], { drawSVG: '0% 0%', opacity: 0 }); });
+      // Phase 6: on phones the signposts grow to two-line boards so their names read at ~11px (they were ~8px)
+      if (matchMedia('(max-width: 560px)').matches) {
+        map.querySelectorAll('.rf__post').forEach(function (g) {
+          var tx = g.querySelector('.rf__bt'), bd = g.querySelector('.rf__board'), x = +tx.getAttribute('x'), words = tx.textContent.split(' ');
+          var lines = words.length > 1 ? words : (tx.textContent === 'RenewPACE' ? ['Renew', 'PACE'] : [tx.textContent]);
+          tx.textContent = ''; lines.forEach(function (w, i) { var ts = document.createElementNS('http://www.w3.org/2000/svg', 'tspan'); ts.setAttribute('x', x); ts.setAttribute('dy', i ? 20 : 0); ts.textContent = w; tx.appendChild(ts); });
+          tx.setAttribute('y', lines.length > 1 ? 72 : 82);
+          bd.setAttribute('x', x - 60); bd.setAttribute('width', 120); bd.setAttribute('y', 52); bd.setAttribute('height', 52);
+          g.querySelector('.rf__pole').setAttribute('d', 'M' + x + ' 128 V104');
+        });
+      }
 
       if (k.motion) {
         // the plan draws itself as it arrives: lots and roads first, then the dashes, boards and words
