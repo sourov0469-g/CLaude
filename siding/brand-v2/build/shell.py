@@ -35,6 +35,14 @@ FACES = ''.join(f"@font-face{{font-family:'{f}';font-weight:{w};font-display:swa
 TOKENS_CSS = open(os.path.join(BV2, 'phase2', 'tokens.css')).read()
 
 
+def pair_alt(key):
+    """'After the work: siding job, Maple Run, Austin' for a pair photo key such as 'siding2-a'; None for anything else"""
+    pid, _, ab = key.rpartition('-')
+    if pid in PLACE and ab in ('a', 'b'):
+        return f'{"After" if ab == "a" else "Before"} the work: {TRADE[pid]} job, {PLACE[pid]}'
+    return None
+
+
 class Images:
     """each image is embedded once: the first use carries the data URI, every later use is filled from it by JS"""
     SRC = {**{f'{p["id"]}-{ab}': f'site/assets/img/h/work-{p["id"]}-{ab}-1000.webp' for p in PAIRS for ab in 'ab'}}
@@ -43,6 +51,7 @@ class Images:
         self.used = set()
 
     def img(self, key, alt, cls='', eager=False, w=1000, h=667):
+        alt = pair_alt(key) or alt   # S0914: one unambiguous pattern for every job photo (two jobs share Maple Run)
         a = f'alt="{esc(alt)}" width="{w}" height="{h}" class="{cls}"' + ('' if eager else ' loading="lazy" decoding="async"')
         if key not in self.used:
             self.used.add(key)
@@ -98,5 +107,5 @@ def footer():
     return f'''<footer class="ftr"><canvas class="atmos" aria-hidden="true"></canvas><div class="wrap ftr-in">
 <div>{lockup(fg="#fff", word="#fff", h=36, bg=P["steel-12"])}<p class="ftr-p">{esc(ADDRESS)}<br>{esc(HOURS)}</p></div>
 <div><p class="ftr-k">Call</p><p><a href="{TEL}">{PHONE}</a></p><p class="ftr-k">Email</p><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
-<div><p class="ftr-k">Pages</p><p class="ftr-nav"><a href="#/">Home</a>{"".join(f'<a href="#/{k}">{esc(t)}</a>' for k, t in NAV)}<a href="#/about/booking">Book an estimate</a></p></div></div>
+<nav aria-label="Footer"><p class="ftr-k" id="ftr-pages">Pages</p><p class="ftr-nav"><a href="#/">Home</a>{"".join(f'<a href="#/{k}">{esc(t)}</a>' for k, t in NAV)}<a href="#/about/booking">Book an estimate</a></p></nav></div>
 <div class="wrap ftr-base"><p>{esc(REVIEWS)} · {" · ".join(esc(c) for c in CREDS)}<button type="button" class="ftr-mo" data-motion aria-pressed="false">Pause animations</button></p></div></footer>'''

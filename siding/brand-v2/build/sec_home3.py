@@ -1,5 +1,5 @@
 """Homepage sections 9-11, two versions each. Each function returns (title, v1_html, v2_html, css, js)."""
-from shell import IM, PAIRS, PLACE, TRADE, TEL, PHONE, HOURS, REVIEWS, RECORD, CREDS, esc, icon, cline
+from shell import IM, pair_alt, PAIRS, PLACE, TRADE, TEL, PHONE, HOURS, REVIEWS, RECORD, CREDS, esc, icon, cline
 
 
 def pair_store():
@@ -13,8 +13,8 @@ def pair_store():
 
 def _seam(cls, start):
     p = PAIRS[start]
-    return (f'<div class="seam {cls}" data-seam data-i="{start}"><img class="sa" data-img="{p["id"]}-a" alt="After: {esc(p["place"])}" width="1000" height="667">'
-            f'<div class="sb-c"><img class="sb" data-img="{p["id"]}-b" alt="Before: {esc(p["place"])}" width="1000" height="667"></div>'
+    return (f'<div class="seam {cls}" data-seam data-i="{start}"><img class="sa" data-img="{p["id"]}-a" alt="{esc(pair_alt(p["id"] + "-a"))}" width="1000" height="667">'
+            f'<div class="sb-c"><img class="sb" data-img="{p["id"]}-b" alt="{esc(pair_alt(p["id"] + "-b"))}" width="1000" height="667"></div>'
             f'<div class="seam-l"><div class="seam-h" role="slider" tabindex="0" aria-label="Before and after divider" aria-valuemin="5" aria-valuemax="95" aria-valuenow="50" aria-valuetext="50% before">{icon("trade-seam", 28, "#fff")}</div></div>'
             f'<span class="tag tb">Before</span><span class="tag ta">After</span></div>')
 
@@ -54,14 +54,14 @@ document.querySelectorAll('[data-seam]').forEach(box=>{const c=box.querySelector
   const ev=e=>{const r=box.getBoundingClientRect();set((e.clientX-r.left)/r.width*100);};
   box.addEventListener('pointerdown',e=>{d=true;box.setPointerCapture(e.pointerId);ev(e);});box.addEventListener('pointermove',e=>{if(d)ev(e);});box.addEventListener('pointerup',()=>d=false);
   h.addEventListener('keydown',e=>{const m={ArrowLeft:-5,ArrowRight:5,ArrowDown:-5,ArrowUp:5,PageDown:-10,PageUp:10};if(e.key in m){set(x+m[e.key]);e.preventDefault();}else if(e.key==='Home'){set(5);e.preventDefault();}else if(e.key==='End'){set(95);e.preventDefault();}});
-  box._show=i=>{const p=PL[i],a=box.querySelector('.sa'),b=box.querySelector('.sb');const swap=()=>{a.src=src(p.id+'-a');b.src=src(p.id+'-b');a.alt='After: '+p.place;b.alt='Before: '+p.place;};
+  box._show=i=>{const p=PL[i],a=box.querySelector('.sa'),b=box.querySelector('.sb');const swap=()=>{a.src=src(p.id+'-a');b.src=src(p.id+'-b');a.alt='After the work: '+p.trade+' job, '+p.place;b.alt='Before the work: '+p.trade+' job, '+p.place;};
     if(A.reduce){swap();return;}const cv=document.createElement('div');cv.style.cssText='position:absolute;inset:0;z-index:5;background:var(--color-bg-accent-field)';box.appendChild(cv);
     cv.animate([{clipPath:'inset(0 0 100%% 0)'},{clipPath:'inset(0 0 0%% 0)'}],{duration:300,easing:A.css('--ease-draw'),fill:'forwards'}).finished.then(()=>{swap();return cv.animate([{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(100%% 0 0 0)'}],{duration:300,easing:A.css('--ease-draw'),fill:'forwards'}).finished;}).then(()=>cv.remove());};
   set(50);});
 document.querySelectorAll('input[name=sm1]').forEach(r=>r.addEventListener('change',()=>{const box=r.closest('.sm1').querySelector('[data-seam]');box._show(+r.value);r.closest('.sm1').querySelector('.sm-h').textContent=PL[+r.value].place;}));
 document.querySelectorAll('.sm2-l button').forEach(b=>b.addEventListener('click',()=>{const box=b.closest('.sm2').querySelector('[data-seam]');box._show(+b.dataset.i);b.closest('ol').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));}));
 })();
-""" % ('[' + ','.join(f'{{"id":"{p["id"]}","place":"{esc(p["place"])}"}}' for p in PAIRS) + ']')
+""" % ('[' + ','.join(f'{{"id":"{p["id"]}","place":"{esc(p["place"])}","trade":"{TRADE[p["id"]]}"}}' for p in PAIRS) + ']')
     return 'Before and after', v1, v2, css, js
 
 

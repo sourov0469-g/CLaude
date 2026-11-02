@@ -163,8 +163,12 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
       - dimmed SVG labels.
     - Mobile total blocking time: median 178 ms at 4× CPU.
     - QA scripts kept in `build/qa/`.
+  - **GATE-BUILD-5 accepted by Muse.**
+  - **Cycle 6** (`GATE-BUILD-6.md`, 7.87, PASS, cited): accessibility tree read from Chromium for every page and version.
+    - Fixed: the footer page links are now a `<nav aria-label="Footer">` landmark; pair-photo alts use one pattern ("After the work: trade job, place"), the seam swap included. 19 versions backed up; 45 backups in the file.
+    - Verified: one h1 per page, no heading skips, no nameless controls or images; route changes are announced politely and move focus to the h1.
+    - New QA scripts: `build/qa/ax.js`, `build/qa/live.js`.
   - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
-- **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
 **Governing documents:**

@@ -12,3 +12,5 @@ All checks run with Playwright and Chromium. Run each one with `node <script>` f
 | rm.js | Booking deep link and reduced motion. | Build 1 → |
 | pause.js, route.js | The Pause control stops and resumes motion; ambient motion stops on route change. | Build 2–3 |
 | ptr.js | Cursor companion under stepped real pointer movement. | Build 4 |
+| ax.js | Chromium's accessibility tree (what a screen reader is given), every page × both versions: h1 count, heading skips, landmarks and their names, controls or images with no name. | Build 6 |
+| live.js | Route change is announced through the polite live region and moves focus to the h1; pair-photo alts after a seam swap. | Build 6 |
