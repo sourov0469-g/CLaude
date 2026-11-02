@@ -13,11 +13,12 @@ import sec_siding  # noqa: E402
 import sec_windows  # noqa: E402
 import sec_roofing  # noqa: E402
 import sec_work  # noqa: E402
+import sec_about  # noqa: E402
 
 PAGES = [('home', 'Austin Pro Siding: siding, windows, roofing and painting in Austin', sec_home.HOME + [sec_home2.s5, sec_home2.s6, sec_home2.s7, sec_home2.s8, sec_home3.s9, sec_home3.s10, sec_home3.s11]),
          ('siding', 'Siding & painting · Austin Pro Siding', sec_siding.SIDING), ('windows', 'Windows & doors · Austin Pro Siding', sec_windows.WINDOWS),
          ('roofing', 'Roofing, gutters & patio covers · Austin Pro Siding', sec_roofing.ROOFING), ('work', 'Our work · Austin Pro Siding', sec_work.WORK),
-         ('about', 'About & booking · Austin Pro Siding', [])]
+         ('about', 'About & booking · Austin Pro Siding', sec_about.ABOUT)]
 
 
 def build():

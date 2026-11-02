@@ -126,7 +126,15 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - map copy held to what the facts support;
     - the film roll no longer uses recent job photos for the 2009 and 2018 frames;
     - the numeral is never counted up.
-  - **Next:** the Siding & painting page (6 sections × 2), then Windows, Roofing, Our work and About & booking.
+  - **Build pass 1 complete** (`GATE-BUILD-1.md`): self-rated 7.30, PASS.
+    - Built: all 6 pages, 41 sections and 82 versions; cursor companion A ported in.
+    - Audit: 24 page states, 0 problems.
+  - **Next:** audit-improve cycle 2.
+    - Per section: re-open its reference beside the two versions.
+    - Use the B2 steel field once per page.
+    - Differentiate the inner heroes.
+    - Re-encode the images.
+    - Superseded versions go to `<template class="bk">`.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)

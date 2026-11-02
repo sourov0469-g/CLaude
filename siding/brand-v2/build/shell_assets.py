@@ -38,6 +38,9 @@ img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} 
 .ftr canvas{position:absolute;inset:0;width:100%;height:100%} .ftr-in{position:relative;display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-08)}
 .ftr a{color:#fff;font-weight:600} .ftr-p{color:var(--color-text-inverse-secondary)} .ftr-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-inverse-secondary);margin:0 0 4px}
 .ftr-nav{display:grid;gap:6px} .ftr-nav a{min-height:32px;display:inline-flex;align-items:center} .ftr-base{position:relative;margin-top:var(--space-09);padding-top:var(--space-05);border-top:1px solid var(--steel-10);color:var(--color-text-inverse-secondary);font-size:14px}
+.cc{position:fixed;left:0;top:0;z-index:60;pointer-events:none;opacity:0;transition:opacity var(--duration-fast) linear} .cc.on{opacity:1}
+.cc i{position:absolute;left:0;top:0;width:100px;height:10px;transform-origin:0 50%;background:var(--color-accent-solid);will-change:transform}
+@media (pointer:coarse){.cc{display:none}}
 @media (max-width:1000px){.hdr-nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--color-bg-page);flex-direction:column;gap:0;padding:var(--space-03) var(--layout-gutter) var(--space-05);border-bottom:1px solid var(--color-border-default)}
  .hdr-nav.open{display:flex} .hdr-menu{display:grid} .hdr-call span{display:none} .hdr-call{margin-left:auto} .ftr-in{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:420px){.hdr-book{display:none}}
@@ -72,6 +75,13 @@ D.querySelector('.hdr-menu').addEventListener('click',e=>{const n=D.getElementBy
 // review switch: exactly two versions per section
 D.querySelectorAll('.rv').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const s=g.closest('.sec');
   s.querySelectorAll(':scope>.ver').forEach(v=>v.hidden=v.dataset.v!==b.dataset.v);g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));watch(s);run();}));
+// cursor companion A (Phase 2 pick): a steel tick that lays a course line under the hovered control; fine pointers only, system cursor kept
+if(matchMedia('(pointer: fine)').matches){const cc=D.createElement('div');cc.className='cc';cc.setAttribute('aria-hidden','true');cc.innerHTML='<i></i>';D.body.appendChild(cc);const bar=cc.firstChild;
+  let tx=0,ty=0,x=0,y=0,tgt=null,press=1,raf=0;const SEL='a,button,[role=tab],label.chip-in,label.vt,label.vc,summary,[role=slider]';
+  const frame=()=>{const k=reduce?1:.22;x+=(tx-x)*k;y+=(ty-y)*k;if(tgt&&tgt.isConnected){const b=tgt.getBoundingClientRect();bar.style.transform=`translate(${b.left}px,${b.bottom+4}px) scale(${b.width/100},${.3*press})`;}
+    else bar.style.transform=`translate(${x+12}px,${y+12}px) scale(${.1*press},${press})`;raf=requestAnimationFrame(frame);};
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;const t=e.target.closest&&e.target.closest(SEL);tgt=t&&!t.closest('.rv')?t:null;cc.classList.add('on');if(!raf)raf=requestAnimationFrame(frame);},{passive:true});
+  D.addEventListener('pointerleave',()=>{cc.classList.remove('on');cancelAnimationFrame(raf);raf=0;});addEventListener('pointerdown',()=>press=.92);addEventListener('pointerup',()=>press=1);}
 window.APS.route=route;window.APS.watch=watch;window.APS.run=run;
 D.addEventListener('DOMContentLoaded',()=>route());if(D.readyState!=='loading')route();
 // footer evening field (B4): source-over toward steel-9, so white text stays >= 5.96:1
