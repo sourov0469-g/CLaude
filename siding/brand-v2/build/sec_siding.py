@@ -2,6 +2,7 @@
 from shell import IM, PAIRS, PLACE, TEL, PHONE, CREDS, esc, icon, cline
 from sec_home2 import _house, PROFILES
 from sec_home3 import _seam
+from sec_windows import steel_close
 
 HARDIE = CREDS[1]
 
@@ -151,12 +152,13 @@ def p6():
     v1 = (f'<div class="sc1 sec-pad"><div class="wrap sc-g"><div><p class="label">Credential</p><p class="sc-c">{esc(HARDIE)}</p></div>'
           f'<div>{cline()}<h2 class="h2">Book the estimate.</h2><div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a>'
           f'<a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div></div>')
-    v2 = (f'<div class="sc2 on-dark sec-pad"><div class="wrap"><p class="label on-dark-l">{esc(HARDIE)}</p><h2 class="h1 on-dark-h">Book the estimate.</h2>'
-          f'<div class="row"><a class="btn btn-primary sc2-b" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="sc2-p" href="{TEL}">{PHONE}</a></div></div></div>')
+    v2 = steel_close(HARDIE)
     css = """
 .sc-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:var(--space-09);align-items:end} .sc-c{font:800 var(--type-h3-size)/1.25 var(--font-display);margin:0;max-width:20ch}
 .sc2 .btn-primary{background:#fff;color:var(--color-text-primary)} .sc2 .btn-primary:hover{background:var(--steel-2)} .sc2-p{color:#fff;font:700 22px var(--font-text);min-height:48px;display:inline-flex;align-items:center}
 .sc2 :focus-visible{outline-color:#fff} @media (max-width:900px){.sc-g{grid-template-columns:minmax(0,1fr)}}
+.scf{position:relative;overflow:hidden;background:var(--color-bg-accent-field);color:var(--color-text-on-accent)} .scf canvas{position:absolute;inset:0;width:100%;height:100%}
+.scf-c{position:relative} .scf-l{color:var(--steel-3)} .scf-h{color:#fff}
 """
     return 'Credential and close', v1, v2, css, ''
 

@@ -9,9 +9,14 @@ def close(cred, n):
     v1 = (f'<div class="sc1 sec-pad"><div class="wrap sc-g"><div><p class="label">Credential</p><p class="sc-c">{esc(cred)}</p></div>'
           f'<div>{cline()}<h2 class="h2">Book the estimate.</h2><div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a>'
           f'<a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div></div>')
-    v2 = (f'<div class="sc2 on-dark sec-pad"><div class="wrap"><p class="label on-dark-l">{esc(cred)}</p><h2 class="h1 on-dark-h">Book the estimate.</h2>'
-          f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="sc2-p" href="{TEL}">{PHONE}</a></div></div></div>')
-    return 'Credential and close', v1, v2, '', ''
+    return 'Credential and close', v1, steel_close(cred), '', ''
+
+
+def steel_close(cred):
+    """the page's one steel field (B2): ordered dither drawn only between steel-9 and steel-12, so white text is >= 5.96:1"""
+    return (f'<div class="sc2 scf sec-pad"><canvas class="dither" aria-hidden="true"></canvas><div class="wrap scf-c"><p class="label scf-l">{esc(cred)}</p>'
+            f'<h2 class="h1 scf-h">Book the estimate.</h2><div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a>'
+            f'<a class="sc2-p" href="{TEL}">{PHONE}</a></div></div></div>')
 
 
 def pairs_section(ids, name, label, h2b):
@@ -42,13 +47,21 @@ def _window_section(cls):
 
 
 def w1():
-    v1 = (f'<div class="sp1">{IM.img("windows1-a", "Ridgewood, Cedar Park: new windows after the work", eager=True)}<div class="wrap sp1-c"><div class="sp1-plate">'
-          f'<p class="label">Windows &amp; doors</p><h1 class="h1">Openings, fitted square.</h1>{cline()}<p class="lead">Window, exterior-door and garage-door replacement. {esc(ANDERSEN)}.</p>'
-          f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div></div>')
+    v1 = (f'<div class="wh1"><div class="wh1-view">{IM.img("windows1-a", "Ridgewood, Cedar Park: new windows after the work", eager=True)}<span class="wh1-sash" aria-hidden="true"></span>'
+          f'<span class="cap">Ridgewood, Cedar Park</span></div><div class="wh1-c"><p class="label">Windows &amp; doors</p><h1 class="h1">Openings, fitted square.</h1>{cline()}'
+          f'<p class="lead">Window, exterior-door and garage-door replacement. {esc(ANDERSEN)}.</p>'
+          f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div>')
     v2 = (f'<div class="wn2h on-dark sec-pad"><div class="wrap sp2-g"><div><p class="label on-dark-l">Windows &amp; doors</p><h1 class="h1 on-dark-h">Openings, fitted square.</h1>'
           f'<p class="lead on-dark-p">Window, exterior-door and garage-door replacement. {esc(ANDERSEN)}.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a></div></div>{_window_section("wn-static")}</div></div>')
-    return 'Windows hero', v1, v2, '.wn{width:100%;height:auto} .wn-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--steel-5)} .wn2h .btn-primary{background:#fff;color:var(--color-text-primary)}', ''
+    css = '''.wn{width:100%;height:auto} .wn-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--steel-5)} .wn2h .btn-primary{background:#fff;color:var(--color-text-primary)}
+.wh1{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);min-height:calc(100vh - 72px)} .wh1-view{position:relative;overflow:hidden;background:var(--color-bg-sunken)}
+.wh1-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wh1-sash{position:absolute;inset:0;border:clamp(18px,2.4vw,34px) solid var(--color-bg-page);box-shadow:inset 0 0 0 3px var(--color-accent-solid);
+ background:linear-gradient(var(--color-bg-page),var(--color-bg-page)) 50% 0/clamp(12px,1.6vw,22px) 100% no-repeat,linear-gradient(var(--color-bg-page),var(--color-bg-page)) 0 52%/100% clamp(14px,1.8vw,26px) no-repeat}
+.wh1-view .cap{left:auto;right:clamp(24px,3vw,42px);bottom:clamp(24px,3vw,42px)} .wh1-c{align-self:center;padding:var(--space-09) var(--layout-gutter) var(--space-09) var(--space-09)}
+@media (max-width:900px){.wh1{grid-template-columns:minmax(0,1fr)} .wh1-view{min-height:56vh} .wh1-c{padding:var(--space-07) var(--layout-gutter)}}'''
+    return 'Windows hero', v1, v2, css, ''
 
 
 def w2():

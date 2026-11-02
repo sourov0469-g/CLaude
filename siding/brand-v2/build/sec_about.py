@@ -7,14 +7,18 @@ TRADES = ['Siding', 'Painting', 'Windows', 'Doors', 'Roofing', 'Gutters', 'Patio
 
 
 def a1():
-    v1 = (f'<div class="sp1">{IM.img("home2-a", "Anderson Mill, Austin: the house after the work", eager=True)}<div class="wrap sp1-c"><div class="sp1-plate">'
-          f'<p class="label">About &amp; booking</p><h1 class="h1">Austin homes, since 2009.</h1>{cline()}<p class="lead">Siding, windows, roofing and painting, from one office on North Lamar.</p>'
+    v1 = (f'<div class="ah1"><div class="ah1-p">{IM.img("home2-a", "Anderson Mill, Austin: the house after the work", eager=True)}<span class="cap">Anderson Mill, Austin</span></div>'
+          f'<div class="wrap ah1-g"><div><p class="label">About &amp; booking</p><h1 class="h1">Austin homes, since 2009.</h1></div>'
+          f'<div>{cline()}<p class="lead">Siding, windows, roofing and painting, from one office on North Lamar.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div></div>')
     v2 = (f'<div class="ab2"><div class="wrap ab2-c"><p class="label">About &amp; booking</p><h1 class="h1">Austin homes, since 2009.</h1>{cline()}'
           f'<p class="lead">Siding, windows, roofing and painting, from one office on North Lamar.</p><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a></div></div>')
     css = """
 .ab2{position:relative;padding:var(--layout-section-pad) 0;background:repeating-linear-gradient(180deg,var(--neutral-1) 0 31px,var(--neutral-3) 31px 34px,var(--white) 34px 65px,var(--neutral-3) 65px 68px)}
 .ab2::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--color-bg-page) 0 50%,transparent 80%)} .ab2-c{position:relative}
+.ah1-p{position:relative;height:min(64vh,640px)} .ah1-p img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block} .ah1-p .cap{left:auto;right:var(--layout-gutter)}
+.ah1-g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:var(--space-08);align-items:end;padding-top:var(--space-08);padding-bottom:var(--space-09)}
+@media (max-width:900px){.ah1-g{grid-template-columns:minmax(0,1fr)}}
 """
     return 'About hero', v1, v2, css, ''
 

@@ -15,6 +15,8 @@ import sec_roofing  # noqa: E402
 import sec_work  # noqa: E402
 import sec_about  # noqa: E402
 
+BKDIR = os.path.join(HERE, 'backups')   # superseded versions, kept as hidden in-file templates
+
 PAGES = [('home', 'Austin Pro Siding: siding, windows, roofing and painting in Austin', sec_home.HOME + [sec_home2.s5, sec_home2.s6, sec_home2.s7, sec_home2.s8, sec_home3.s9, sec_home3.s10, sec_home3.s11]),
          ('siding', 'Siding & painting · Austin Pro Siding', sec_siding.SIDING), ('windows', 'Windows & doors · Austin Pro Siding', sec_windows.WINDOWS),
          ('roofing', 'Roofing, gutters & patio covers · Austin Pro Siding', sec_roofing.ROOFING), ('work', 'Our work · Austin Pro Siding', sec_work.WORK),
@@ -27,7 +29,10 @@ def build():
         parts = []
         for i, fn in enumerate(secs):
             t, v1, v2, c, j = fn()
-            parts.append(section(pid, i + 1, t, v1, v2))
+            sid = f'{pid}-{i + 1}'
+            bk = sorted(f for f in os.listdir(BKDIR) if f.startswith(sid + '-v')) if os.path.isdir(BKDIR) else []
+            backups = [(f.split('-v')[1][0], f.rsplit('-r', 1)[1].split('.')[0], open(os.path.join(BKDIR, f), encoding='utf-8').read()) for f in bk]
+            parts.append(section(pid, i + 1, t, v1, v2, backups=backups))
             css.append(c)
             js.append(j)
         if not secs:   # pages not yet built say so plainly

@@ -84,6 +84,17 @@ if(matchMedia('(pointer: fine)').matches){const cc=D.createElement('div');cc.cla
   D.addEventListener('pointerleave',()=>{cc.classList.remove('on');cancelAnimationFrame(raf);raf=0;});addEventListener('pointerdown',()=>press=.92);addEventListener('pointerup',()=>press=1);}
 window.APS.route=route;window.APS.watch=watch;window.APS.run=run;
 D.addEventListener('DOMContentLoaded',()=>route());if(D.readyState!=='loading')route();
+// B2 steel field: Bayer 4x4 ordered dither, palette steel-9..steel-12 only (white text >= 5.96:1); drifts only when visible
+D.querySelectorAll('canvas.dither').forEach(cv=>{const ctx=cv.getContext('2d',{alpha:false});const rgb=n=>{const h=css('--'+n);return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));};
+  const P=['steel-9','steel-10','steel-11','steel-12'].map(rgb),B=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5].map(v=>(v+.5)/16);
+  const n2=(x,y)=>{const v=Math.sin(x*127.1+y*311.7)*43758.5453;return v-Math.floor(v)},vn=(x,y)=>{const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,ux=fx*fx*(3-2*fx),uy=fy*fy*(3-2*fy);
+    return n2(ix,iy)*(1-ux)*(1-uy)+n2(ix+1,iy)*ux*(1-uy)+n2(ix,iy+1)*(1-ux)*uy+n2(ix+1,iy+1)*ux*uy},fbm=(x,y)=>{let v=0,a=.5,f=1;for(let o=0;o<4;o++){v+=vn(x*f,y*f)*a;f*=2.02;a*=.5}return v},
+    ss=(a,b,v)=>{const t=Math.max(0,Math.min(1,(v-a)/(b-a)));return t*t*(3-2*t)};let vis=false,raf=0;
+  function draw(t){const w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;if(cv.width!==w){cv.width=w;cv.height=h;}const c=7,cols=Math.ceil(w/c),rows=Math.ceil(h/c),dr=t*.02;
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const nx=(x/cols-.5)*2,ny=(y/rows-.5)*2,cl=fbm(nx*1.3+dr*.2+3,ny*1.6-dr*.1),m=ss(1.1,.1,Math.hypot(nx-.45,ny+.05));
+      const v=Math.max(0,Math.min(.999,ss(.45,.9,cl)*.75+m*.45)),i=Math.min(3,Math.floor(Math.min(.999,v+B[(y%4)*4+x%4]*.25)*4));ctx.fillStyle=`rgb(${P[i]})`;ctx.fillRect(x*c,y*c,c,c);}}
+  const tick=ts=>{if(!vis||D.hidden){raf=0;return}draw(ts/1000);raf=requestAnimationFrame(tick);};
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis){draw(0);if(!reduce&&!raf)raf=requestAnimationFrame(tick);}}).observe(cv);else draw(0);});
 // footer evening field (B4): source-over toward steel-9, so white text stays >= 5.96:1
 const ac=D.querySelector('.ftr canvas');if(ac){const ctx=ac.getContext('2d',{alpha:false}),off=D.createElement('canvas');const rgb=n=>{const h=css('--'+n);return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));};
   const AB=rgb('steel-12'),AF=rgb('steel-9');let vis=false,raf=0;
