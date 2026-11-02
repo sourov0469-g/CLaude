@@ -1,0 +1,35 @@
+/* ===== Wise Check + Price My Roof (Quiet Cubes: the instrument the visitor operates; it measures, never prices) ===== */
+.price-v1,.price-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-default) 0}
+.price-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.price-v1 > .wrap{position:relative;z-index:1}
+.pr1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:start}
+.pr1-wise{display:grid;gap:var(--space-16)}
+.pr1-badge{width:var(--space-80);height:auto}
+.pr1-parts{list-style:none;margin:var(--space-8) 0 0;padding:0;display:grid;gap:var(--space-16)}
+.pr1-parts li{display:grid;grid-template-columns:var(--space-48) 1fr;gap:var(--space-12);align-items:start}
+.pr1-card{display:grid;gap:var(--space-16);padding:var(--space-32);background:var(--surface-raised);border:1.5px solid var(--text-primary);border-radius:var(--radius-m);box-shadow:var(--shadow-lifted)}
+.pm-roof{display:block;width:100%;height:auto;overflow:visible}
+.pm-gable{fill:var(--surface-alt);stroke:var(--text-primary);stroke-width:4;stroke-linejoin:round;transition:d var(--dur-normal) var(--ease-travel)}
+.pm-courses{fill:none;stroke:var(--line-control);stroke-width:2;transition:d var(--dur-normal) var(--ease-travel)}
+.pm-form{display:grid;gap:var(--space-16)}
+.pm-svc{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.pm-svc legend{width:100%;margin-bottom:var(--space-8)}
+.pm-svc label{position:relative;display:inline-flex;align-items:center;min-height:var(--space-40);padding:0 var(--space-16);border:1.5px solid var(--line-control);border-radius:var(--radius-pill);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer}
+.pm-svc input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.pm-svc label:has(input:checked){background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-page)}
+.pm-svc label:has(input:focus-visible){outline:2px solid var(--focus-ring);outline-offset:3px}
+.pm-field input[type=range]{min-height:var(--space-32);accent-color:var(--text-primary);padding:0;border:0;background:none}
+.pm-read{margin:0;font:var(--type-subheading)}
+.pm-formula{color:var(--text-muted);font:var(--type-body)}
+.pm-sq{font:800 var(--step-3)/1 var(--font-display)}
+.pm-note{margin:0}
+.pm-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+@media (max-width:1023px){.pr1-grid{grid-template-columns:1fr}}
+@media (max-width:767px){.pr1-card{padding:var(--space-16)}}
+.pr2-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.pr2-roof{max-width:none}
+.pr2-wise{margin-top:var(--space-48);display:flex;flex-wrap:wrap;gap:var(--space-16) var(--space-24);align-items:center;padding:var(--space-24);background:var(--surface-alt);border-radius:var(--radius-m)}
+.pr2-wise img{width:var(--space-64);height:auto}
+.pr2-wise .t-body{flex:1;min-width:16rem;margin:0}
+@media (max-width:1023px){.pr2-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.pm-gable,.pm-courses{transition:none}}
