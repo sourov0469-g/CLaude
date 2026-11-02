@@ -1,0 +1,16 @@
+/* Roof replacement (Scout: a film strip of real moments as evidence / Longbow: doctrine backed by facts) */
+.rep-v1,.rep-v2{background:var(--surface-alt);padding:var(--section-default) 0}
+.rp1-strip{list-style:none;margin:0;padding:var(--space-16) 0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(14rem,1fr);gap:var(--space-12);overflow-x:auto;scroll-snap-type:x mandatory;border-top:3px dotted var(--line-control);border-bottom:3px dotted var(--line-control)}
+.rp1-strip li{scroll-snap-align:start}
+.rp1-strip figure{margin:0;display:grid;gap:var(--space-8)}
+.rp1-strip img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-s);display:block}
+.rp1-strip figcaption{font:var(--type-small)}
+.rp1-strip figcaption b{display:inline-grid;place-items:center;width:var(--space-24);height:var(--space-24);margin-right:var(--space-8);border-radius:50%;background:var(--text-primary);color:var(--surface-page);font:700 var(--step-m1)/1 var(--font-display)}
+.rp1-note{margin-top:var(--space-16)}
+.rp2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:center}
+.rp2-copy{display:grid;gap:var(--space-16)}
+.rp2-copy .btn{justify-self:start}
+.rp2-facts{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-12);font:var(--type-body)}
+.rp2-facts li{display:flex;gap:var(--space-12);align-items:center}
+.rp2-art{width:100%;height:auto;aspect-ratio:2/1}
+@media (max-width:1023px){.rp2-grid{grid-template-columns:1fr}}

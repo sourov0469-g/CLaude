@@ -1,0 +1,18 @@
+/* Roof repair (Longbow: doctrine backed by Owl's own facts; Owl's words) */
+.rpr-v1,.rpr-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-default) 0}
+.rpr-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.rpr-v1 > .wrap{position:relative;z-index:1}
+.rr1-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-64);align-items:start}
+.rr1-copy{display:grid;gap:var(--space-16)}
+.rr1-copy .btn{justify-self:start}
+.rr1-wise{display:grid;gap:var(--space-16);padding:var(--space-32);background:var(--surface-raised);border:1.5px solid var(--text-primary);border-radius:var(--radius-m)}
+.rr1-wise img{width:var(--space-64);height:auto}
+.rr1-wise ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-16)}
+.rr1-wise li{display:grid;grid-template-columns:var(--space-48) 1fr;gap:var(--space-12)}
+@media (max-width:1023px){.rr1-grid{grid-template-columns:1fr}}
+.rr2-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-24)}
+.rr2-grid li{display:grid;gap:var(--space-12);padding:var(--space-16);border-top:1.5px solid var(--text-primary)}
+.rr2-art{width:100%;height:auto;overflow:visible}
+.rr2-foot{display:flex;flex-wrap:wrap;gap:var(--space-24);align-items:center;justify-content:space-between;margin-top:var(--space-48)}
+.rr2-foot .t-body{margin:0;max-width:40rem}
+@media (max-width:1023px){.rr2-grid{grid-template-columns:1fr 1fr}}

@@ -1,0 +1,15 @@
+/* Gutters, windows and doors (Longbow: a spec row of Owl's own numbers) */
+.gut-v1,.gut-v2{background:var(--surface-page);padding:var(--section-default) 0}
+.gt1-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 var(--space-48)}
+.gt1-row > div{padding:0 var(--space-24);border-left:1px solid var(--line-control);display:grid;gap:var(--space-8);align-content:start}
+.gt1-row > div:first-child{border-left:0;padding-left:0}
+.gt1-num{font:800 var(--step-3)/1 var(--font-display);margin:0}
+.gt1-num small{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.gt1-row dd{margin:0;font:var(--type-small);color:var(--text-muted)}
+@media (max-width:1023px){.gt1-row{grid-template-columns:1fr 1fr;row-gap:var(--space-32)}.gt1-row > div:nth-child(3){border-left:0;padding-left:0}}
+@media (max-width:767px){.gt1-row{grid-template-columns:1fr}.gt1-row > div{border-left:0;padding-left:0;border-top:1px solid var(--line-control);padding-top:var(--space-16)}}
+.gt2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:center}
+.gt2-art{width:100%;height:auto;overflow:visible}
+.gt2-copy{display:grid;gap:var(--space-16)}
+.gt2-copy .btn{justify-self:start}
+@media (max-width:1023px){.gt2-grid{grid-template-columns:1fr}}

@@ -257,3 +257,21 @@ checks the built section against the rules and records any rule it does not meet
   - **Errors:** `aria-describedby`, `aria-invalid` and `aria-live` for errors.
   - **Focus:** restore focus sensibly.
   - **Media:** captions for videos with speech; no autoplay with sound.
+
+## Inner pages (read in full before building the Services page)
+- ⟦S0449⟧ landing-page
+  - **One intent per page.**
+  - **Above the fold:** headline (outcome + audience), subheadline, primary CTA (verb + what you get), one proof
+    signal, hero visual.
+  - **The argument:** problem → solution, benefits, how it works (3 steps), proof.
+  - **Objections:** FAQ and risk reversal.
+  - **Close:** a final CTA the same as the top.
+  - **Copy:** proof next to the claim it supports; specificity over vague value; no "Learn more" CTAs; avoid competing
+    CTAs above the fold.
+- ⟦S0076⟧ better-writing
+  - **Voice and vocabulary:** one voice, one vocabulary (the inventory first); address the reader as "you"; plain words.
+  - **Buttons and links:** verb-first buttons; links that name their destination (never two identical "Learn more"
+    links).
+  - **Errors and empty states:** errors say how to fix, beside the field; empty states point forward.
+  - **Placeholders:** show a realistic example.
+  - **Mechanics:** one capitalisation policy; no "successfully" and no "please"; no "Oops".

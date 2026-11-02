@@ -219,7 +219,20 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
     - reviews: captions unverifiable.
   - **Fix timing:** carried as fixes for when those components are reused on the inner pages.
   - **Rule from here on:** every section's skills are read **before** it is built, and its gate cites them.
-- **Next:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
+- **SERVICES PAGE COMPLETE** (`#/services`): 6 sections × 2 versions: cover, replacement, repair, siding, gutters, and
+  the page-end call band.
+  - **Gates:** `GATE-sp-cover`, `-replacement`, `-repair`, `-siding`, `-gutters`, `-sp-call`.
+  - **Skills read before building:** ⟦S0449⟧ landing-page and ⟦S0076⟧ better-writing.
+  - **Shared footer:** now one part (`src/footer.part`) used by every page's closing block.
+  - **Tests:**
+    - `routetest.mjs` 10/10: nav, `aria-current`, focus, chapter and deep links, 17 sections each with 2 versions, no
+      duplicate ids.
+    - The page with defaults and all-V2: no overflow at 1440/390, one h1, no errors.
+  - **Copy left out:** Owl's own "Nail-Free Guarantee" line, because it contradicts Owl's homepage cleanup text and is
+    not in the facts lock.
+- **Next:** the 4 remaining inner pages: Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Each
+  gets at least 6 sections × 2 versions, built one section at a time, with skills read before building.
+- **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.
 

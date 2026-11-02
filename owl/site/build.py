@@ -28,7 +28,7 @@ for page in PAGES:
         d = S + 'sections/' + sec['id'] + '/'
         vs = []
         for n in (1, 2):
-            body = read(d + f'v{n}.html')
+            body = read(d + f'v{n}.html').replace('{{FOOTER}}', read(S + 'footer.part'))
             if not body:
                 body = f'<div class="todo wrap"><p class="t-small muted">{sec["id"]} v{n}: not built yet</p></div>'
             vs.append(f'<div class="ver" data-v="{n}"{"" if n == sec.get("default", 1) else " hidden"}>{body}</div>')
