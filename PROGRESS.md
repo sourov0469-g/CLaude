@@ -157,7 +157,10 @@ corrections in this session; before each phase I check for one, then proceed wit
   - then `GATE-PHASE-3a.md`.
 
 ## Phase 3a: DONE (gate report `owl/GATE-PHASE-3a.md`, self-rated 7.40, PASS); storyboards and flow map in `owl/phase3a/storyboards.html`
-**Next: Phase 3b.** Three proof sections: the hero, the Protect Your Nest beats, and the Sweep-the-lawn game. Then the single-file build.
+**Phase 3b in progress:**
+- **Proof 1, the hero:** DONE (`owl/GATE-hero.md`). V1 "house window" (default) and V2 "sequence", in the single file `owl/site/owl-roofing.html`; 27/27 tests pass.
+- **Proof 2, Protect Your Nest:** DONE (`owl/GATE-nest.md`). V1 pinned beats (default) and V2 route; 16/16 tests pass.
+- **Next:** proof 3, the Sweep-the-lawn game.
 
 ### Page plan and reasoning (recorded here as the addendum requires)
 **Built from tasks inward** (⟦S1411⟧). A Twin Cities homeowner comes with one of four jobs:
