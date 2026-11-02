@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · identity asset board (Phase 2)</title>
+<link rel="icon" href="../assets/source/owl-roofing-favicon.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+{{TOKENS}}
+{{COMPONENTS}}
+/* ---- board chrome (also tokens only) ---- */
+body{margin:0}
+svg.logo{display:block;width:100%;height:auto}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.band{position:relative;padding:var(--section-default) 0;overflow:hidden}
+.band > .wrap{position:relative;z-index:1}
+.alt{background:var(--surface-alt)}
+.night{background:var(--surface-night);color:var(--text-on-deep)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-32)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-24)}
+@media (max-width:767px){.grid2,.grid3{grid-template-columns:1fr}}
+.note{font:var(--type-small);color:var(--text-muted);max-width:var(--measure)}
+.on-deep .note,.night .note{color:var(--text-on-deep-muted)}
+.refcard{border-top:2px solid var(--text-primary);padding-top:var(--space-12);font:var(--type-small);display:grid;gap:var(--space-4)}
+.on-deep .refcard,.night .refcard{border-color:var(--line-on-deep)}
+.refcard b{font-family:var(--font-display)}
+code{font:var(--type-small);font-family:ui-monospace,monospace;font-size:.82em}
+/* logo plates */
+.plates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-16)}
+@media (max-width:767px){.plates{grid-template-columns:1fr}}
+.plate{display:grid;place-items:center;min-height:var(--space-160);padding:var(--space-32);border-radius:var(--radius-m);position:relative}
+.plate .logo{width:var(--space-160);height:auto}
+.plate span{position:absolute;left:var(--space-12);bottom:var(--space-8);font:var(--type-small)}
+.p-paper{background:var(--surface-page);border:1px solid var(--line-hairline)}.p-cream{background:var(--surface-alt)}
+.p-deep{background:var(--surface-deep);color:var(--text-on-deep)}.p-bark{background:var(--surface-bark);color:var(--text-on-deep)}.p-ink{background:var(--surface-ink);color:var(--text-on-deep)}
+.p-wrong{background:var(--surface-ink);color:var(--text-on-deep);outline:3px dashed var(--accent-fill);outline-offset:-10px}
+.p-wrong .crop{width:var(--space-64);height:var(--space-64);overflow:hidden;border-radius:50%}
+.p-wrong .crop .logo{width:var(--space-160)}
+.clear{position:relative;display:inline-block;padding:var(--space-24);outline:1px dashed var(--line-control)}
+.min .logo{width:120px}
+/* ramps */
+.ramp{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:var(--space-8);margin-bottom:var(--space-16)}
+.swatch{border-radius:var(--radius-s);overflow:hidden;border:1px solid var(--line-hairline);font:var(--type-small);background:var(--surface-raised)}
+.swatch i{display:block;height:var(--space-64)}
+.swatch div{padding:var(--space-8)}
+.share{display:flex;border:1px solid var(--line-control);height:var(--space-24);border-radius:var(--radius-pill);overflow:hidden;margin:var(--space-16) 0 var(--space-8)}
+table{border-collapse:collapse;width:100%;font:var(--type-small)}
+th,td{text-align:left;padding:var(--space-8);border-bottom:1px solid var(--line-hairline);vertical-align:middle}
+tr.ban td{color:var(--text-muted)}
+.sw{display:inline-grid;place-items:center;width:var(--space-48);height:var(--space-32);border-radius:var(--radius-s);font:700 var(--step-0)/1 var(--font-display);border:1px solid var(--line-hairline)}
+.tablewrap{overflow-x:auto}
+/* type */
+.type-row{display:grid;grid-template-columns:16rem 1fr;gap:var(--space-24);padding:var(--space-24) 0;border-bottom:1px solid var(--line-hairline);align-items:baseline}
+@media (max-width:767px){.type-row{grid-template-columns:1fr}}
+.type-meta code{word-break:break-all}
+.sp-row{display:grid;grid-template-columns:8rem 1fr 4rem;gap:var(--space-16);align-items:center;padding:var(--space-4) 0}
+.sp-bar{height:var(--space-12);background:var(--text-muted);border-radius:var(--radius-pill)}
+/* icons */
+.ic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:var(--space-16)}
+.ic-cell{margin:0;padding:var(--space-16);background:var(--surface-raised);border:1px solid var(--line-hairline);border-radius:var(--radius-s)}
+.ic-sizes{display:flex;align-items:end;gap:var(--space-12);margin-bottom:var(--space-12)}
+/* motifs */
+.motif{background:var(--surface-raised);border:1px solid var(--line-hairline);border-radius:var(--radius-m);padding:var(--space-24);display:grid;gap:var(--space-16)}
+.motif svg.stage{width:100%;height:auto;display:block}
+.ctrl{display:flex;gap:var(--space-12);align-items:center;flex-wrap:wrap}
+.ctrl input[type=range]{flex:1;min-width:10rem;accent-color:var(--text-primary)}
+.ctrl button{font:700 var(--step-m1)/1 var(--font-display);min-height:var(--space-40);padding:0 var(--space-16);border-radius:var(--radius-pill);border:2px solid var(--text-primary);background:var(--surface-page);color:var(--text-primary);cursor:pointer}
+/* background demos: full-section scale */
+.bgdemo{position:relative;min-height:min(86vh,52rem);display:grid;align-items:end;overflow:hidden;border-top:1px solid var(--line-hairline)}
+.bgdemo .wrap{position:relative;z-index:1;padding-top:var(--space-96);padding-bottom:var(--space-96);width:100%}
+.bgdemo .copy{max-width:36rem;display:grid;gap:var(--space-16)}
+/* imagery */
+.img-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32) var(--space-24)}
+@media (max-width:767px){.img-grid{grid-template-columns:1fr}}
+.ban-frame{position:relative}
+.ban-frame img{filter:grayscale(1) contrast(.9);opacity:.75}
+.ban-frame .stamp{position:absolute;top:var(--space-16);left:var(--space-16);background:var(--surface-ink);color:var(--accent-text-on-deep);font:var(--type-label);letter-spacing:var(--track-label);padding:var(--space-8) var(--space-12);border-radius:var(--radius-s)}
+/* dials */
+.dials{display:grid;gap:var(--space-16)}
+.dial{display:grid;grid-template-columns:12rem 1fr 3rem;gap:var(--space-16);align-items:center}
+.dial .bar{display:grid;grid-template-columns:repeat(10,1fr);gap:var(--space-4)}
+.dial .bar i{height:var(--space-12);border-radius:var(--radius-pill);background:var(--line-hairline)}
+.dial .bar i.on{background:var(--text-primary)}
+@media (max-width:767px){.dial{grid-template-columns:1fr}}
+/* motion demos */
+.mrow{display:grid;grid-template-columns:10rem 1fr;gap:var(--space-16);align-items:center;padding:var(--space-8) 0}
+.track{height:var(--space-32);border-radius:var(--radius-pill);background:var(--surface-page);border:1px solid var(--line-hairline);position:relative}
+.track i{position:absolute;top:var(--space-4);left:var(--space-4);width:var(--space-24);height:var(--space-24);border-radius:50%;background:var(--text-primary)}
+.track.go i{transform:translateX(calc(100cqw - var(--space-32)))}
+.mtracks{container-type:inline-size}
+/* companion pad */
+.pad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-16);margin-top:var(--space-24)}
+@media (max-width:767px){.pad{grid-template-columns:1fr 1fr}}
+.pad > *{min-height:var(--space-96);border:1px dashed var(--line-control);border-radius:var(--radius-m);display:grid;place-items:center;padding:var(--space-16);text-align:center}
+.seg{display:inline-flex;border:2px solid var(--text-primary);border-radius:var(--radius-pill);overflow:hidden}
+.seg button{font:700 var(--step-m1)/1 var(--font-display);min-height:var(--space-40);padding:0 var(--space-16);border:0;background:transparent;color:var(--text-primary);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-page)}
+.toc{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-16);font:700 var(--step-m1)/1.4 var(--font-display)}
+.toc a{color:var(--text-primary)}
+.phone-mock{width:22rem;max-width:100%;aspect-ratio:9/16;border:10px solid var(--surface-ink);border-radius:var(--space-32);position:relative;overflow:hidden;background:var(--surface-page)}
+.phone-mock .callbar{display:grid;position:absolute}
+.owl-footer .logo{width:100%;height:auto;display:block}
+</style>
+</head>
+<body class="owl">
+{{ICONS}}
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">{{RINGS}}{{TREES}}</svg>
+
+<header class="owl-header" data-logo-host>
+  <a href="#top" aria-label="Owl Roofing, top of board">{{LOGO_COLOUR}}</a>
+  <nav aria-label="Board sections"><a href="#logo">Logo</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#icons">Icons</a><a href="#motifs">Motifs</a><a href="#backgrounds">Backgrounds</a><a href="#components">Components</a><a href="#companion">Companion</a></nav>
+  <a class="tel" href="tel:+16519776027">{{IC:communication-phone}}<span class="t-num">(651) 977-6027</span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7L20 7 M4 12L20 12 M4 17L20 17"/></svg></button>
+  <div class="menu-panel" id="menuPanel" hidden><a href="#logo">Logo</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#icons">Icons</a><a href="#motifs">Motifs</a><a href="#backgrounds">Backgrounds</a><a href="#components">Components</a><a href="#companion">Companion</a></div>
+</header>
+
+<main id="top">
+<section class="band">
+  <div class="wrap" style="display:grid;gap:var(--space-24)">
+    <h1 class="t-title">Owl Roofing identity asset board</h1>
+    <p class="t-body">Phase 2 of the rebuild. Everything on this page is rendered from the project's own asset files: <code>owl/identity/tokens.css</code>, <code>owl-components.css</code>, <code>icons.svg</code> and <code>owl-identity.js</code>, plus Owl's own logo, tree-ring and treeline SVGs, injected unchanged. The identity is <b>Owl's</b> (kept logo, live colours). What is new is the system around it: the line, the drawn pieces, the motion and the companion. Direction: <b>B · The Nest</b> (selected in <code>GATE-PHASE-1.md</code>).</p>
+    <nav class="toc" aria-label="Contents"><a href="#argument">Brand argument</a><a href="#logo">Logo set</a><a href="#colour">Colour ramps</a><a href="#contrast">Contrast pairs</a><a href="#type">Type</a><a href="#space">Spacing</a><a href="#icons">Icons</a><a href="#motifs">Motifs</a><a href="#backgrounds">Backgrounds</a><a href="#imagery">Imagery</a><a href="#components">Components</a><a href="#motion">Motion</a><a href="#dials">Dials</a><a href="#companion">Cursor companion</a></nav>
+  </div>
+</section>
+
+<!-- 1 brand argument -->
+<section class="band alt" id="argument">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Brand argument</h2><p class="t-body muted">Five short answers. No marketing prose.</p></div>
+    <div class="grid2">
+      <dl class="t-body" style="display:grid;gap:var(--space-16);margin:0">
+        <div><dt class="t-sub">What it represents</dt><dd style="margin:0">A family-owned Shoreview roofer that answers the phone and leaves the yard cleaner than it found it.</dd></div>
+        <div><dt class="t-sub">Core metaphor</dt><dd style="margin:0">The nest: Owl protects the home the way an owl guards its nest. Owl already calls its system "Protect Your Nest".</dd></div>
+        <div><dt class="t-sub">How the logo expresses it</dt><dd style="margin:0">The owl sits inside the O and watches, amber eyes open. The rebuild keeps it and lets it blink and glance in place.</dd></div>
+        <div><dt class="t-sub">How it scales</dt><dd style="margin:0">Page: the sweep line and the drawn pieces. Favicon: Owl's own JPG. Truck door or shirt: the white lockup on olive, as Owl's crew already wears it. Print: one colour, ink.</dd></div>
+        <div><dt class="t-sub">Why it is ownable</dt><dd style="margin:0">The line is Owl's 3-Part Cleanup, with the magnet pass included. No other roofer can claim the same drawing without claiming the same process.</dd></div>
+      </dl>
+      <div style="display:grid;gap:var(--space-24);align-content:start">
+        <div><h3 class="t-sub">Three adjectives</h3><p class="t-body"><b>Watchful.</b> <b>Neighbourly.</b> <b>Tidy.</b></p></div>
+        <div><h3 class="t-sub">Shape language</h3><p class="t-body">Monoline strokes with round caps, the same weight family as Owl's wordmark counters. Wedges and courses come from shingles; one loose curve comes from the sweep. Corners: 6px on fields and 10px on media, as Owl's live site already uses; pills for actions. Nothing glossy, no glass, no gradient fills, no 3D.</p></div>
+        <div class="refcard"><b>Illustration style (⟦S1421⟧)</b><span>Geometric-organic hybrid. Flat. Moderately detailed: a nail has a head, a shank and a point, and nothing more. Representational: real tools and real roof parts. Colour is a subset of the palette: ink lines, olive lawn, tan warmth, amber only where the magnet works.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 logo -->
+<section class="band" id="logo" data-logo-host>
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">The kept logo: variants, grounds and life</h2><p class="t-body muted">Owl's two files are injected byte-for-byte; only class names are added so that the existing eye and pupil paths can move. The artwork is never redrawn.</p></div>
+    <div class="plates">
+      <div class="plate p-paper">{{LOGO_COLOUR}}<span>Colour on paper (primary)</span></div>
+      <div class="plate p-cream">{{LOGO_COLOUR}}<span>Colour on cream</span></div>
+      <div class="plate p-deep">{{LOGO_WHITE}}<span>White on deep olive</span></div>
+      <div class="plate p-bark">{{LOGO_WHITE}}<span>White on bark</span></div>
+      <div class="plate p-ink">{{LOGO_WHITE}}<span>White on ink</span></div>
+      <div class="plate p-wrong">{{LOGO_COLOUR}}<span>WRONG: colour on ink (only the eyes survive)</span></div>
+    </div>
+    <div class="grid3" style="margin-top:var(--space-32);align-items:start">
+      <div class="refcard"><b>Clear space</b><div class="clear" style="background:var(--surface-page)">{{LOGO_COLOUR}}</div><span>x = 0.668 × lockup height on every side (from the O's measured geometry). Nothing enters it: not the phone number, not the menu.</span></div>
+      <div class="refcard"><b>Minimum size</b><div class="min">{{LOGO_COLOUR}}</div><span>120px wide on screen. Below that, "ROOFING" closes up. There is no icon-only variant: cropping the O is forbidden. The favicon stays Owl's own JPG.</span></div>
+      <div class="refcard"><b>Logo life (⟦S0489⟧)</b><span>It blinks once on first appear, then rests (no loop on chrome). The pupils glance at most 1 unit toward the pointer (480ms glide) and glide back after 1.2s. A press blinks: close 110ms, hold 40ms, open 190ms with ease-out.</span><div class="ctrl"><button type="button" id="blinkAll">Blink every logo</button></div></div>
+    </div>
+    <div class="plate p-paper" style="margin-top:var(--space-16);min-height:var(--space-96);outline:3px dashed var(--accent-fill);outline-offset:-10px"><div class="crop" style="width:var(--space-64);height:var(--space-64);overflow:hidden;border-radius:50%"><div style="width:var(--space-160)">{{LOGO_COLOUR}}</div></div><span>WRONG: cropping the O into an icon</span></div>
+  </div>
+</section>
+
+<!-- 3 colour -->
+<section class="band alt" id="colour">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Colour: Owl's ten, as ramps with roles</h2><p class="t-body muted">The primitives are named by hue; components only ever see the semantic names. Every derived step exists because a role needed it, and each one says which role.</p></div>
+    <h3 class="t-sub">Neutrals and grounds</h3>
+    <div class="ramp">
+      <div class="swatch"><i style="background:var(--owl-paper-50)"></i><div><b>paper-50</b> #FCFBF5<br>surface-page · live</div></div>
+      <div class="swatch"><i style="background:var(--owl-cream-100)"></i><div><b>cream-100</b> #F1EFE6<br>surface-alt, text-on-deep · live</div></div>
+      <div class="swatch"><i style="background:var(--owl-cream-200)"></i><div><b>cream-200</b> derived<br>line-hairline (decorative only)</div></div>
+      <div class="swatch"><i style="background:var(--owl-white)"></i><div><b>white</b><br>surface-raised, fields</div></div>
+      <div class="swatch"><i style="background:var(--owl-ink-900)"></i><div><b>ink-900</b> #17121D<br>text-primary · logo ink</div></div>
+    </div>
+    <h3 class="t-sub">Olive (brand primary) and warm deeps</h3>
+    <div class="ramp">
+      <div class="swatch"><i style="background:var(--owl-olive-300)"></i><div><b>olive-300</b> derived<br>muted text and lines on deep</div></div>
+      <div class="swatch"><i style="background:var(--owl-olive-500)"></i><div><b>olive-500</b> #666B53<br>text-muted, control borders · live, 82 uses</div></div>
+      <div class="swatch"><i style="background:var(--owl-olive-700)"></i><div><b>olive-700</b> #36402D<br>surface-deep · live</div></div>
+      <div class="swatch"><i style="background:var(--owl-olive-900)"></i><div><b>olive-900</b> #282F21<br>surface-night, footer · live</div></div>
+      <div class="swatch"><i style="background:var(--owl-bark-800)"></i><div><b>bark-800</b> #3F3130<br>surface-bark, error rule · live</div></div>
+      <div class="swatch"><i style="background:var(--owl-tan-500)"></i><div><b>tan-500</b> #987861<br>graphics, large text only · live</div></div>
+    </div>
+    <h3 class="t-sub">The one accent</h3>
+    <div class="ramp">
+      <div class="swatch"><i style="background:var(--owl-amber-400)"></i><div><b>amber-400</b> #EAA222<br>fills on light; text on deep only · live</div></div>
+      <div class="swatch"><i style="background:var(--owl-amber-700)"></i><div><b>amber-700</b> derived, hue held<br>accent as TEXT on light (links)</div></div>
+    </div>
+    <h3 class="t-sub">Pixel share per screen (⟦S0660⟧)</h3>
+    <div class="share" role="img" aria-label="Target pixel share: neutrals 82 percent, olive and deep grounds 11, amber 6, effects 1"><i style="flex:82;background:var(--surface-alt)"></i><i style="flex:11;background:var(--surface-deep)"></i><i style="flex:6;background:var(--accent-fill)"></i><i style="flex:1;background:var(--graphic-warm)"></i></div>
+    <p class="note">Neutrals 70-90%, olive grounds about 10%, ONE accent at 5-10%, effects under 1%. At most two visible amber uses per screen; links and focus rings count. Light-dominant: no more than two deep sections in any page view, never adjacent.</p>
+    <h3 class="t-sub" style="margin-top:var(--space-32)">Applied to real components</h3>
+    <div class="grid2">
+      <div style="display:flex;gap:var(--space-16);flex-wrap:wrap;align-items:center;padding:var(--space-32);background:var(--surface-page);border-radius:var(--radius-m)">
+        <a class="btn" href="tel:+16519776027">{{IC:communication-phone:icon icon--phone}}Call (651) 977-6027</a>
+        <a class="btn btn--secondary" href="sms:+16519776027">{{IC:communication-text}}Text us</a>
+        <span class="chip">{{IC:status-star}}5.0 · 90+ reviews</span>
+        <p class="t-body">Read about the <a class="link" href="#motifs">3-Part Cleanup</a>.</p>
+      </div>
+      <div class="on-deep" style="display:flex;gap:var(--space-16);flex-wrap:wrap;align-items:center;padding:var(--space-32);border-radius:var(--radius-m)">
+        <a class="btn btn--on-deep" href="tel:+16519776027">{{IC:communication-phone:icon icon--phone}}Call (651) 977-6027</a>
+        <span class="chip">{{IC:status-guarantee}}10-year Get It Right Guarantee</span>
+        <p class="t-body">We actually answer the phone. <a class="link" href="#companion">Try the companion</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 contrast -->
+<section class="band" id="contrast">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Contrast pairs, measured</h2><p class="t-body muted">Generated from the hex values by <code>gen-tokens.py</code> and printed from <code>contrast-pairs.csv</code>. A pair not listed here does not get used. Audit record: a derived third light ground ("moss") failed with amber-700 (4.38) and, rendered, could not be told from cream. The step was removed rather than nudged. amber-700 is derived, hue held, against cream, the darker light ground.</p></div>
+    <div class="tablewrap"><table><thead><tr><th>Sample</th><th>Pair</th><th>Ratio</th><th>Min</th><th>Result</th><th>Use</th></tr></thead><tbody>{{CONTRAST_ROWS}}</tbody></table></div>
+  </div>
+</section>
+
+<!-- 5 type -->
+<section class="band alt" id="type">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Type: Montserrat and Lato, on a generated fluid scale</h2><p class="t-body muted">Stand-ins for Owl's own Special Gothic Expanded and Texta, which cannot be used here (everyday-fonts rule; Texta is commercial). The scale uses the Utopia method: poles 360→1240px, base 18→20, ratio 1.2→1.25, with a rem term in every clamp and max ≤ 2.5× min. Weights loaded: 700 and 800 display, 400 and 700 body; none are synthesised. Five sizes in regular use: display, title, heading, body, small.</p></div>
+    {{TYPE_ROWS}}
+    <p class="note" style="margin-top:var(--space-24)">Every changing number (counters, the Price My Roof readout, phone numbers) uses <code>tabular-nums</code>. Measure: 66ch. Labels are the only uppercase, tracked +0.08em.</p>
+  </div>
+</section>
+
+<!-- 6 space -->
+<section class="band" id="space">
+  <div class="wrap grid2">
+    <div><div class="sec-head"><h2 class="t-heading">Spacing ladder</h2><p class="t-body muted">The Carbon ladder as primitives. Every padding, margin and gap in every asset and later section comes from it; an off-ladder value is a defect.</p></div>{{SPACE_ROWS}}</div>
+    <div style="display:grid;gap:var(--space-24);align-content:start">
+      <h3 class="t-sub">Section rhythm: exactly three fluid pairs</h3>
+      <div class="refcard"><b>--section-minor</b><span>48→64px. Thin bands: proof strip, divider rows.</span><span style="display:block;height:var(--section-minor);background:var(--surface-alt);border-radius:var(--radius-s)"></span></div>
+      <div class="refcard"><b>--section-default</b><span>64→96px. Most sections. Top and bottom always use the same token.</span><span style="display:block;height:var(--section-default);background:var(--surface-alt);border-radius:var(--radius-s)"></span></div>
+      <div class="refcard"><b>--section-hero</b><span>96→144px. The hero and the call band only.</span><span style="display:block;height:var(--section-hero);background:var(--surface-alt);border-radius:var(--radius-s)"></span></div>
+      <div class="refcard"><b>Spacing types (⟦S1432⟧)</b><span>Inset 16/24 (cards, fields). Stack 8/12 (related), 24/32 (groups), 48 (head to content). Inline 8 (icon to label). Grid gap 24/32. Page gutter 16px at every width.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 icons -->
+<section class="band alt" id="icons">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Icon set: drawn for Owl, one system</h2><p class="t-body muted">Carbon specification: 24px grid, 21px live area, 1.5 stroke at 24px (which renders 1px at 16px), round caps and joins, currentColor, one monoline style. Subjects come from Owl's own trade and process: the magnet, the nail, the wrap, the aftercare box, the Wise Check attic and heat-sensor, the nest. Named <code>icon-[category]-[name]</code>. Shown at 48, 32, 24 and 16px.</p></div>
+    <div class="ic-grid">{{ICON_GRID}}</div>
+    <div class="ctrl" style="margin-top:var(--space-24)"><button type="button" id="morphBtn" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="vertical-align:middle"><path id="morphPath" d="M4 7L20 7 M4 12L20 12 M4 17L20 17" style="transition:d var(--dur-normal) var(--ease-travel)"/></svg> Menu ↔ close: a real shape morph (same command structure), not a crossfade</button></div>
+  </div>
+</section>
+
+<!-- 8 motifs -->
+<section class="band" id="motifs">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Motifs: the drawn language, each a standalone working sample</h2><p class="t-body muted">Every motif is a function in <code>owl-identity.js</code> driven by one progress value p from 0 to 1. Scroll can scrub it both ways, and reduced motion renders p = 1 as a still, final drawing. Drag a slider or press play.</p></div>
+    <div style="display:grid;gap:var(--space-32)">
+      <div class="motif">
+        <h3 class="t-sub">M1 · The magnet pass (signature)</h3>
+        <svg class="stage" id="mPass" role="img" aria-label="A rolling roofing magnet crosses a lawn and lifts the nails onto its bar"></svg>
+        <div class="ctrl"><button type="button" data-play="mPass">Play the pass</button><input type="range" min="0" max="1000" value="0" aria-label="Scrub the magnet pass" data-scrub="mPass"><span class="t-small t-num" id="mPassCount">0 of 14 nails</span></div>
+        <div class="refcard"><b>Reference: Graza (custom-animation bar) + AirPods (pinned beat).</b><span><b>Follows closely:</b> Graza's rule that the scroll animation is made from this product's content only (here, Owl's second cleanup pass), and AirPods' one proof per pinned beat. <b>Original:</b> the sweeper drawing, the nails lifting onto the amber magnet face, and grass that bends under the bar.</span></div>
+      </div>
+      <div class="grid2">
+        <div class="motif">
+          <h3 class="t-sub">M2 · The sweep line</h3>
+          <svg class="stage" viewBox="0 0 600 220" id="mLine" role="img" aria-label="A dotted line becomes solid amber as it travels"><path id="mLinePath" d="M10 180 C 120 40 220 200 320 110 S 520 30 590 120"/></svg>
+          <div class="ctrl"><button type="button" data-play="mLine">Draw</button><input type="range" min="0" max="1000" value="0" aria-label="Scrub the sweep line" data-scrub="mLine"></div>
+          <div class="refcard"><b>Reference: Lusion (one continuous flow line).</b><span><b>Follows closely:</b> one line carries the eye through the whole page. <b>Original:</b> its two states (dotted while travelling, solid amber where it works) and its path, which runs through Owl's process.</span></div>
+        </div>
+        <div class="motif">
+          <h3 class="t-sub">M3 · Courses laying themselves</h3>
+          <svg class="stage" id="mCourses" role="img" aria-label="Shingle courses lay from the eave up, then the ridge cap"></svg>
+          <div class="ctrl"><button type="button" data-play="mCourses">Lay</button><input type="range" min="0" max="1000" value="0" aria-label="Scrub the courses" data-scrub="mCourses"></div>
+          <div class="refcard"><b>Reference: Longbow (doctrine plus numbers, in order).</b><span><b>Follows closely:</b> things arrive in a working order, eave first, exactly as they are built. <b>Original:</b> the courses, the tab slots and the ridge cap last.</span></div>
+        </div>
+        <div class="motif">
+          <h3 class="t-sub">M4 · The nest weave</h3>
+          <svg class="stage" id="mNest" role="img" aria-label="Strands weave a nest; the last strand is amber"></svg>
+          <div class="ctrl"><button type="button" data-play="mNest">Weave</button><input type="range" min="0" max="1000" value="0" aria-label="Scrub the nest" data-scrub="mNest"></div>
+          <div class="refcard"><b>Reference: Lusion (end of the flow).</b><span><b>Follows closely:</b> the journey line resolves into a final form. <b>Original:</b> the nest made from Owl's own metaphor, woven around the phone number in the call band; one amber strand.</span></div>
+        </div>
+        <div class="motif" style="background:var(--surface-alt)">
+          <h3 class="t-sub">M5 · Owl's tree rings and treeline</h3>
+          <svg class="stage" viewBox="0 0 600 260" role="img" aria-label="Owl's tree-ring contours above Owl's pine treeline"><use href="#owl-rings" x="80" y="-40" width="440" height="312" style="fill:var(--graphic-warm);opacity:.35"/><use href="#owl-trees" x="0" y="150" width="600" height="110" style="fill:var(--surface-deep)"/></svg>
+          <div class="refcard"><b>Owl's own artwork (<code>faq-bg.svg</code>, <code>footer-bg.svg</code>).</b><span>Injected unchanged, with the colour applied from tokens at use time. The rings ground people sections; the treeline closes pages. These are Owl's drawings; the rebuild only stages them.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 backgrounds -->
+<section id="backgrounds">
+  <div class="band" style="padding-bottom:var(--space-24)"><div class="wrap"><div class="sec-head" style="margin-bottom:0"><h2 class="t-heading">Backgrounds: three constructions at full-section scale</h2><p class="t-body muted">Each is layered and never flat, with one focal mass and edges that recede. Drift uses transform only, runs only while on screen and stops under reduced motion. No mesh gradients, no glass.</p></div></div></div>
+  <div class="bgdemo" style="background:var(--surface-page)"><svg data-bg="lawn"></svg><div class="wrap"><div class="copy"><h3 class="t-title">B1 · Lawn light</h3><p class="t-body">Paper ground. A receding underdrawing of shingle courses, the dotted sweep line, a lawn edge, and one warm tan glow low-right, opposite the copy. <b>Use:</b> the hero and the system beats (light). <b>Budget:</b> one SVG with two animated transforms.</p><div class="refcard"><b>Reference: ⟦S1364⟧ atmosphere (layered folds, one focal bloom), adapted to light.</b><span><b>Original:</b> the folds are roof courses and the bloom is late-afternoon sun on a lawn.</span></div></div></div></div>
+  <div class="bgdemo" style="background:var(--surface-alt)"><svg data-bg="rings"></svg><div class="wrap"><div class="copy"><h3 class="t-title">B2 · Rings</h3><p class="t-body">Cream ground. Owl's own tree-ring contours at two scales drifting against each other; the dense cluster on the right is the focal mass, and a radial mask lets the edges recede. <b>Use:</b> the families, reviews and FAQ sections (light). <b>Budget:</b> two &lt;use&gt; transforms.</p><div class="refcard"><b>Reference: Lando Norris (contour ground).</b><span><b>Follows closely:</b> topographic contours as a quiet, living ground. <b>Original:</b> the contours are Owl's own drawing.</span></div></div></div></div>
+  <div class="bgdemo on-deep"><svg data-bg="night"></svg><div class="wrap"><div class="copy"><h3 class="t-title">B3 · Night yard</h3><p class="t-body">Deep olive ground. Owl's treeline at three depths with parallax pan, and one amber porch-light glow low-right. <b>Use:</b> the call band and the footer only (deep; at most 2 per page, never adjacent). <b>Budget:</b> three linear transforms and one opacity-stable glow.</p><div class="refcard"><b>Reference: Scout Motors (dusk landscape as the closing frame).</b><span><b>Original:</b> Owl's own pines; the porch light says "someone's home, call".</span></div></div></div></div>
+</section>
+
+<!-- 10 imagery -->
+<section class="band alt" id="imagery">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Imagery direction</h2><p class="t-body muted">There are two classes. <b>EVIDENCE</b> (crews, jobs, people) is Owl's own real photography and footage only. Owl has no before/after pair on its site, so none is invented. <b>ATMOSPHERE</b> (textures, grounds) is drawn SVG; stock is allowed only as labelled illustration, never as an Owl job. Aim for daylight, working hands, Owl shirts in frame and Minnesota trees.</p></div>
+    <div class="img-grid">
+      <figure class="frame frame--16x9"><img src="../assets/source/frames/owl-bg-5.jpg" alt="An Owl crew member in a yellow Owl shirt carries a GAF Timberline UHD bundle up to the roof" loading="lazy"><figcaption>Evidence · Owl's hero footage, 5s. A bundle going up.</figcaption></figure>
+      <figure class="frame frame--16x9"><img src="../assets/source/frames/owl-bg-2.jpg" alt="Owl crew working on open rafters during a roof replacement" loading="lazy"><figcaption>Evidence · Owl's hero footage, 2s. Crew on the rafters.</figcaption></figure>
+      <figure class="frame frame--16x9"><img src="../assets/source/frames/owl-bg-11.jpg" alt="An Owl crew member walks a finished dark shingle roof beside a brick chimney" loading="lazy"><figcaption>Evidence · Owl's hero footage, 11s. The finished roof.</figcaption></figure>
+      <figure class="frame frame--4x3"><img src="../assets/source/owl-roofing-catchall.webp" alt="Owl's catch-all protection wrap around a house during a roofing job" loading="lazy"><figcaption>Evidence · Owl's photo of the Nest-Protection wrap.</figcaption></figure>
+      <figure class="frame frame--4x3"><img src="../assets/source/owl-aftercare-system.webp" alt="Owl's aftercare shingle box" loading="lazy"><figcaption>Evidence · Owl Roof Aftercare, the "shingle tomb".</figcaption></figure>
+      <figure class="frame frame--4x3"><img src="../assets/source/meet-the-browns-owl.webp" alt="The Brown family, co-founders of Owl Roofing" loading="lazy"><figcaption>Evidence · the Browns (Owl's About page).</figcaption></figure>
+    </div>
+    <h3 class="t-sub" style="margin:var(--space-48) 0 var(--space-24)">Three banned tropes, shown</h3>
+    <div class="img-grid">
+      <figure class="frame frame--4x3 ban-frame"><img src="../assets/source/owl-pages/unproven/owl-roofing-north-oaks.webp" alt="A pristine suburban house exterior" loading="lazy"><span class="stamp">Not as an Owl job</span><figcaption>A pristine house exterior captioned as "our work". Nothing ties it to an Owl job.</figcaption></figure>
+      <figure class="frame frame--4x3 ban-frame"><img src="../assets/source/owl-pages/unproven/drone-photo-roof.jpeg" alt="A drone over a roof" loading="lazy"><span class="stamp">Not as proof</span><figcaption>A stock drone shot passed off as the Wise Check. The real check is described in Owl's words, with drawn icons.</figcaption></figure>
+      <figure class="frame frame--4x3 ban-frame"><img src="../assets/source/Drops-of-condensate-and-black-mold-on-a-substandard-metal-plastic-window-768x509.jpg" alt="Stock close-up of condensation and mould on a window" loading="lazy"><span class="stamp">No fear stock</span><figcaption>Damage close-ups used to frighten. Owl's voice is calm; damage is shown as a drawn diagram.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 11 components -->
+<section class="band" id="components">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Components: a closed inventory</h2><p class="t-body muted">Each is a contract in <code>BRAND.md</code>: when to use, when not, states, and token bindings. In Phase 3, a needed component that is not on this list is reported as NO-COVERAGE; it is never improvised.</p></div>
+    <div class="grid2">
+      <div style="display:grid;gap:var(--space-24);align-content:start">
+        <h3 class="t-sub">Buttons, every state</h3>
+        <div style="display:flex;gap:var(--space-12);flex-wrap:wrap">
+          <a class="btn" href="#components">{{IC:communication-phone:icon icon--phone}}Rest</a>
+          <a class="btn" href="#components" style="transform:translateY(-2px);box-shadow:var(--shadow-raised)">Hover</a>
+          <a class="btn" href="#components" style="transform:scale(.97)">Active</a>
+          <a class="btn" href="#components" style="outline:2px solid var(--focus-ring);outline-offset:3px">Focus</a>
+          <button class="btn" disabled>Disabled</button>
+          <a class="btn btn--secondary" href="#components">Secondary{{IC:navigation-arrow-right:icon icon--arrow}}</a>
+        </div>
+        <h3 class="t-sub">Proof chips and seals (only what Owl states)</h3>
+        <div style="display:flex;gap:var(--space-12);flex-wrap:wrap;align-items:center">
+          <span class="chip">{{IC:status-star}}5.0 · 90+ reviews</span><span class="chip">GAF Systems Plus Certified</span><span class="chip">BBB Accredited</span><span class="chip t-num">MN licence #BC809662</span>
+          <img class="seal" src="../assets/source/get-it-right-guarantee-owl-768x768.png" alt="Owl's Get It Right Guarantee seal" loading="lazy">
+          <img class="seal" src="../assets/source/owl-pages/Wise-Check.png" alt="Owl's Wise Check badge" loading="lazy" style="border-radius:0;object-fit:contain">
+        </div>
+        <h3 class="t-sub">Field and error</h3>
+        <div class="field"><label for="f1">Your phone</label><input id="f1" inputmode="tel" autocomplete="tel" placeholder="(651) 555-0123"></div>
+        <div class="field" data-invalid><label for="f2">ZIP code</label><input id="f2" inputmode="numeric" value="5512" aria-describedby="f2e" aria-invalid="true"><span class="err" id="f2e">A ZIP code has 5 digits, like 55126.</span></div>
+      </div>
+      <div style="display:grid;gap:var(--space-24);align-content:start">
+        <h3 class="t-sub">Service rows</h3>
+        <div><a class="svc" href="#components">{{IC:content-house:icon icon--32}}<span><b class="t-sub">Roof replacement</b><br><span class="t-small muted">Tear-off to ridge cap, then the 3-Part Cleanup.</span></span>{{IC:navigation-arrow-right:icon icon--arrow}}</a><a class="svc" href="#components">{{IC:status-hail:icon icon--32}}<span><b class="t-sub">Storm damage</b><br><span class="t-small muted">Hail and wind, with help on the insurance claim.</span></span>{{IC:navigation-arrow-right:icon icon--arrow}}</a><a class="svc" href="#components">{{IC:status-leak:icon icon--32}}<span><b class="t-sub">Roof repair</b><br><span class="t-small muted">Leaks found with the Wise Check.</span></span>{{IC:navigation-arrow-right:icon icon--arrow}}</a></div>
+        <h3 class="t-sub">Accordion</h3>
+        <div class="acc"><details open><summary>What is the 3-Part Cleanup?{{IC:navigation-arrow-right}}</summary><div class="t-body">The crew does a first pass and gets everything in the dumpster. Then a roofing magnet collects nails and other metal scraps. Then a project manager does quality control.</div></details><details><summary>Can I text you instead of calling?{{IC:navigation-arrow-right}}</summary><div class="t-body">Yes. Owl says: "You can even text us throughout the process, if that's how you'd prefer to communicate."</div></details></div>
+        <h3 class="t-sub">Image frame and sweep divider</h3>
+        <figure class="frame frame--16x9"><img src="../assets/source/frames/owl-bg-14.jpg" alt="An Owl crew member carries a sheet of roof decking" loading="lazy"><figcaption>Owl's hero footage, 14s. New decking going in.</figcaption></figure>
+        <svg class="sweep-divider" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12H600" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 12" style="stroke:var(--line-control)"/></svg>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:var(--space-48);align-items:center">
+      <div><h3 class="t-sub">Mobile call bar: the conversion floor</h3><p class="t-body">On every page below 768px, Call and Text sit on ink at the bottom of the screen. On wider screens, the phone number lives in the header.</p></div>
+      <div class="phone-mock" role="img" aria-label="Phone-width preview of the call bar"><div style="padding:var(--space-24) var(--space-16);display:grid;gap:var(--space-16)"><div style="width:var(--space-96)">{{LOGO_COLOUR}}</div><p class="t-sub">We actually answer the phone.</p><p class="t-small muted">Family-owned roofers in Shoreview.</p></div><div class="callbar"><a href="tel:+16519776027">{{IC:communication-phone}}Call</a><a href="sms:+16519776027">{{IC:communication-text}}Text</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 motion -->
+<section class="band alt" id="motion">
+  <div class="wrap grid2">
+    <div><div class="sec-head"><h2 class="t-heading">Motion tokens</h2><p class="t-body muted">Every duration and curve is a token, and similar elements use the same one. User-initiated motion stays under 300ms; staggers are 40ms; everything is interruptible. Reduced motion sets every duration to 0 and shows final frames.</p></div>
+      <div class="mtracks">
+        <div class="mrow"><code>--dur-instant 80</code><div class="track" data-d="var(--dur-instant)" data-e="var(--ease-out)"><i></i></div></div>
+        <div class="mrow"><code>--dur-fast 160</code><div class="track" data-d="var(--dur-fast)" data-e="var(--ease-out)"><i></i></div></div>
+        <div class="mrow"><code>--dur-normal 240</code><div class="track" data-d="var(--dur-normal)" data-e="var(--ease-travel)"><i></i></div></div>
+        <div class="mrow"><code>--dur-slow 480</code><div class="track" data-d="var(--dur-slow)" data-e="var(--ease-travel)"><i></i></div></div>
+        <div class="mrow"><code>--dur-story 900</code><div class="track" data-d="var(--dur-story)" data-e="var(--ease-out)"><i></i></div></div>
+      </div>
+      <div class="ctrl" style="margin-top:var(--space-16)"><button type="button" id="runTracks">Run the durations</button></div>
+    </div>
+    <div class="refcard" style="align-self:start"><b>Curves</b>
+      <span><code>--ease-out</code> (.23,1,.32,1): entering, responding, arriving.</span>
+      <span><code>--ease-travel</code> (.77,0,.175,1): moving on screen, gaze, morphs.</span>
+      <span><code>--ease-in</code> (.55,0,1,.45): leaving only. Never on something the user waits for.</span>
+      <span><code>linear</code>: continuous pans and wheels.</span>
+      <b style="margin-top:var(--space-12)">Signature timings</b>
+      <span>Blink 110 / 40 / 190ms. Glance: 480ms glide (--dur-slow), then a 1.2s hold. Press: 0.97 scale in 100ms, back in 220ms. Pinned beats: at most 4 per page, each at most 100vh of scroll.</span>
+      <b style="margin-top:var(--space-12)">Frequency rule (⟦S0489⟧)</b>
+      <span>Navigation and buttons get minimal, fast changes. Motifs play once per visit. Full delight (the game, the nest) is kept to places people pass rarely.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 13 dials -->
+<section class="band" id="dials">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Design dials</h2><p class="t-body muted">The identity's position as numbers (⟦S0651⟧), so later sections inherit a position instead of re-deciding it.</p></div>
+    <div class="dials">
+      <div class="dial"><b>Design variance</b><div class="bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div><span class="t-num">6</span></div>
+      <p class="note">Offset, not chaos: asymmetric splits, varied media ratios and the line breaking the grid. A strict single column below 768px.</p>
+      <div class="dial"><b>Motion intensity</b><div class="bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="t-num">7</span></div>
+      <p class="note">Scroll-scrubbed motifs and pinned beats, but calm curves and no idle wobble on chrome.</p>
+      <div class="dial"><b>Visual density</b><div class="bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="t-num">4</span></div>
+      <p class="note">Airy enough that one proof fills a screen; never a cockpit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 companion -->
+<section class="band alt" id="companion">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Cursor companion: the native cursor plus one companion</h2><p class="t-body muted">The native cursor is never hidden, so the hotspot is always exact. One companion trails beside it with frame-rate-independent lag, so a fast flick never makes it jump. It turns off on touch, under reduced motion, and when you choose Off.</p></div>
+    <div style="display:flex;gap:var(--space-16);flex-wrap:wrap;align-items:center">
+      <div class="seg" role="group" aria-label="Choose the companion"><button type="button" data-comp="eyes" aria-pressed="false">Owl eyes</button><button type="button" data-comp="magnet" aria-pressed="false">Magnet</button><button type="button" data-comp="off" aria-pressed="false">Off</button></div>
+      <span class="t-small muted" id="compState"></span>
+    </div>
+    <div class="grid2" style="margin-top:var(--space-24)">
+      <div class="refcard"><b>Owl eyes</b><span>The logo's own eye motif (two amber irises on ink), not a redraw of the logo. The pupils look where you are heading and settle on the centre of a button. Over a link the eyes widen; a click blinks in the same frame; it never wobbles idly.</span></div>
+      <div class="refcard"><b>Magnet</b><span>A tiny roofing-magnet sweeper whose wheels roll by the distance travelled (angle = dx / r). It tilts toward a button. A click pulls three nails up onto the amber face in the same frame.</span></div>
+    </div>
+    <div class="pad">
+      <a class="link" href="#companion">A link: eyes widen</a>
+      <button type="button" class="btn">A button: look and tilt</button>
+      <div class="field"><label for="f3">A field: companion steps aside</label><input id="f3" placeholder="Type here"></div>
+      <div data-owl-busy>A busy scene (data-owl-busy): companion drifts aside</div>
+    </div>
+    <p class="note" style="margin-top:var(--space-16)">Press: an asymmetric tap that compresses to 0.84 in 0.1s and releases in 0.22s, pivoting on the corner nearest the pointer. Under a section's own animation (<code>data-owl-busy</code>) it drifts 46px further aside and fades to 45%. It pauses when the tab is hidden.</p>
+  </div>
+</section>
+
+<footer class="owl-footer"><svg data-bg="night"></svg>
+  <div class="wrap" style="position:relative;z-index:1;display:grid;gap:var(--space-16)">
+    <a href="#top" aria-label="Owl Roofing, top" style="width:var(--space-160);display:block" data-logo-host>{{LOGO_WHITE}}</a>
+    <p class="t-small">Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126 · <a href="tel:+16519776027" class="t-num">(651) 977-6027</a> · <a href="mailto:info@owlroofing.com">info@owlroofing.com</a> · Mon–Sat 8:00–18:00 · MN licence #BC809662</p>
+    <p class="t-small muted">Identity asset board, Phase 2 of the rebuild. Not a public page.</p>
+  </div>
+</footer>
+</main>
+<div class="callbar"><a href="tel:+16519776027">{{IC:communication-phone}}Call</a><a href="sms:+16519776027">{{IC:communication-text}}Text</a></div>
+
+<script>
+{{JS}}
+</script>
+<script>
+(function(){
+  Owl.header(document.querySelector('.owl-header'));
+  document.querySelectorAll('svg.logo').forEach(function(s){ s._life = Owl.logo(s); });
+  document.getElementById('blinkAll').addEventListener('click', function(){ document.querySelectorAll('svg.logo').forEach(function(s){ s._life && s._life.blink(); }); });
+  // motifs
+  var M = {
+    mPass: Owl.magnetPass(document.getElementById('mPass')),
+    mLine: Owl.sweepLine(document.getElementById('mLinePath')),
+    mCourses: Owl.courses(document.getElementById('mCourses')),
+    mNest: Owl.nest(document.getElementById('mNest'))
+  };
+  document.getElementById('mPass').addEventListener('owl:collected', function(e){ document.getElementById('mPassCount').textContent = e.detail.got + ' of ' + e.detail.total + ' nails'; });
+  if (Owl.reduced()) Object.keys(M).forEach(function(k){ M[k].set(1); });
+  var running = {};
+  document.querySelectorAll('[data-scrub]').forEach(function(r){ r.addEventListener('input', function(){ var k = r.dataset.scrub; running[k] && running[k].cancel(); M[k].set(r.value / 1000); }); });
+  document.querySelectorAll('[data-play]').forEach(function(b){ b.addEventListener('click', function(){ var k = b.dataset.play, r = document.querySelector('[data-scrub="'+k+'"]'); running[k] && running[k].cancel();
+    running[k] = Owl.play(function(p){ M[k].set(p); r.value = Math.round(p * 1000); }, k === 'mPass' ? 4200 : 1800); }); });
+  // play each motif once when it first enters the viewport (then it rests)
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { var b = document.querySelector('[data-play="'+e.target.id+'"]'); b && b.click(); io.unobserve(e.target); } }); }, { threshold: 0.5 });
+  Object.keys(M).forEach(function(k){ io.observe(document.getElementById(k === 'mLine' ? 'mLine' : k)); });
+  // backgrounds
+  document.querySelectorAll('svg[data-bg]').forEach(function(s){ Owl.bg[s.dataset.bg](s); });
+  // icon morph
+  var mb = document.getElementById('morphBtn'), mp = document.getElementById('morphPath');
+  mb.addEventListener('click', function(){ var on = mb.getAttribute('aria-pressed') !== 'true'; mb.setAttribute('aria-pressed', on); mp.setAttribute('d', on ? 'M5.5 5.5L18.5 18.5 M12 12L12 12 M5.5 18.5L18.5 5.5' : 'M4 7L20 7 M4 12L20 12 M4 17L20 17'); });
+  // duration tracks
+  document.getElementById('runTracks').addEventListener('click', function(){ document.querySelectorAll('.track').forEach(function(t){ var i = t.querySelector('i'); i.style.transition = 'transform ' + t.dataset.d + ' ' + t.dataset.e; t.classList.toggle('go'); }); });
+  // companion
+  var st = document.getElementById('compState');
+  function mark(k){ document.querySelectorAll('[data-comp]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.comp === k); }); st.textContent = Owl.companion.allowed() ? '' : 'Companion is off here: touch device or reduced motion.'; }
+  document.querySelectorAll('[data-comp]').forEach(function(b){ b.addEventListener('click', function(){ Owl.companion.set(b.dataset.comp); mark(b.dataset.comp); }); });
+  mark(Owl.companion.init('eyes'));
+})();
+</script>
+</body>
+</html>

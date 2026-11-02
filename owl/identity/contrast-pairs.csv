@@ -1,0 +1,33 @@
+pair,fg,bg,measured_ratio,minimum,result,use
+ink-900 on paper-50,#17121D,#FCFBF5,17.76,4.5,pass,body text
+ink-900 on cream-100,#17121D,#F1EFE6,15.98,4.5,pass,body text
+ink-900 on white,#17121D,#FFFFFF,18.41,4.5,pass,body text
+olive-500 on paper-50,#666B53,#FCFBF5,5.34,4.5,pass,muted body text
+olive-500 on cream-100,#666B53,#F1EFE6,4.81,4.5,pass,muted body text
+olive-500 on white,#666B53,#FFFFFF,5.54,4.5,pass,muted body text
+amber-700 on paper-50,#90610E,#FCFBF5,5.19,4.5,pass,accent text / links
+amber-700 on cream-100,#90610E,#F1EFE6,4.67,4.5,pass,accent text / links
+amber-700 on white,#90610E,#FFFFFF,5.38,4.5,pass,accent text / links
+ink-900 on amber-400,#17121D,#EAA222,8.49,4.5,pass,button label on amber
+cream-100 on olive-700,#F1EFE6,#36402D,9.45,4.5,pass,body on deep
+cream-100 on olive-900,#F1EFE6,#282F21,12.00,4.5,pass,body on night
+cream-100 on bark-800,#F1EFE6,#3F3130,10.77,4.5,pass,body on bark
+cream-100 on ink-900,#F1EFE6,#17121D,15.98,4.5,pass,body on ink
+white on olive-500,#FFFFFF,#666B53,5.54,4.5,pass,label on olive
+cream-100 on olive-500,#F1EFE6,#666B53,4.81,4.5,pass,label on olive
+olive-300 on olive-700,#A5A695,#36402D,4.40,3.0,pass,muted LARGE text / lines on deep
+olive-300 on olive-900,#A5A695,#282F21,5.59,4.5,pass,muted text on night
+amber-400 on olive-700,#EAA222,#36402D,5.03,4.5,pass,accent text on deep
+amber-400 on olive-900,#EAA222,#282F21,6.38,4.5,pass,accent text on night
+amber-400 on bark-800,#EAA222,#3F3130,5.72,4.5,pass,accent text on bark
+amber-400 on ink-900,#EAA222,#17121D,8.49,4.5,pass,accent text on ink
+tan-500 on paper-50,#987861,#FCFBF5,3.90,3.0,pass,LARGE text / graphics only
+tan-500 on cream-100,#987861,#F1EFE6,3.51,3.0,pass,LARGE text / graphics only
+olive-500 on paper-50,#666B53,#FCFBF5,5.34,3.0,pass,control border (UI 3:1)
+olive-500 on white,#666B53,#FFFFFF,5.54,3.0,pass,control border (UI 3:1)
+ink-900 on paper-50,#17121D,#FCFBF5,17.76,3.0,pass,focus ring on light
+amber-400 on olive-700,#EAA222,#36402D,5.03,3.0,pass,focus ring on deep
+amber-400 on paper-50,#EAA222,#FCFBF5,2.09,4.5,confirmed banned,BANNED: amber text on light
+amber-400 on cream-100,#EAA222,#F1EFE6,1.88,4.5,confirmed banned,BANNED: amber text on light
+white on amber-400,#FFFFFF,#EAA222,2.17,4.5,confirmed banned,BANNED: white on amber
+tan-500 on paper-50,#987861,#FCFBF5,3.90,4.5,confirmed banned,BANNED: tan body text

@@ -1,0 +1,8 @@
+role,step,min_px@360,max_px@1240,clamp,family,weight,line_height,tracking
+display,5,44.8,61.0,"clamp(2.7994rem, 2.3840rem + 1.8461vw, 3.8147rem)",display,800,1.1,-0.02em
+title,4,37.3,48.8,"clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem)",display,800,1.1,-0.015em
+heading,3,31.1,39.1,"clamp(1.9440rem, 1.7405rem + 0.9044vw, 2.4414rem)",display,700,1.2,-0.01em
+subheading,1,21.6,25.0,"clamp(1.3500rem, 1.2631rem + 0.3864vw, 1.5625rem)",display,700,1.3,0
+body,0,18.0,20.0,"clamp(1.1250rem, 1.0739rem + 0.2273vw, 1.2500rem)",body,400,1.55,0
+small,-1,15.0,16.0,"clamp(0.9375rem, 0.9119rem + 0.1136vw, 1.0000rem)",body,400,1.5,0
+label,-1,15.0,16.0,"clamp(0.9375rem, 0.9119rem + 0.1136vw, 1.0000rem)",display,700,1.2,0.08em

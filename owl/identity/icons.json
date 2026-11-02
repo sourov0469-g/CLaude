@@ -1,0 +1,86 @@
+[
+ {
+  "id": "icon-communication-phone",
+  "label": "Phone"
+ },
+ {
+  "id": "icon-communication-text",
+  "label": "Text message"
+ },
+ {
+  "id": "icon-action-magnet",
+  "label": "Roofing magnet"
+ },
+ {
+  "id": "icon-content-nail",
+  "label": "Nail"
+ },
+ {
+  "id": "icon-content-shingles",
+  "label": "Shingle courses"
+ },
+ {
+  "id": "icon-content-house",
+  "label": "Roof and house"
+ },
+ {
+  "id": "icon-content-attic",
+  "label": "Attic inspection"
+ },
+ {
+  "id": "icon-status-leak",
+  "label": "Leak"
+ },
+ {
+  "id": "icon-content-heat-sensor",
+  "label": "Heat-sensor leak detection"
+ },
+ {
+  "id": "icon-content-wrap",
+  "label": "Nest-Protection wrap"
+ },
+ {
+  "id": "icon-content-aftercare",
+  "label": "Aftercare shingle box"
+ },
+ {
+  "id": "icon-status-guarantee",
+  "label": "Guarantee"
+ },
+ {
+  "id": "icon-content-calendar",
+  "label": "Calendar"
+ },
+ {
+  "id": "icon-navigation-pin",
+  "label": "Location"
+ },
+ {
+  "id": "icon-status-star",
+  "label": "Star"
+ },
+ {
+  "id": "icon-status-hail",
+  "label": "Hail"
+ },
+ {
+  "id": "icon-content-ladder",
+  "label": "Ladder"
+ },
+ {
+  "id": "icon-content-nest",
+  "label": "Nest"
+ },
+ {
+  "id": "icon-navigation-arrow-right",
+  "label": ""
+ },
+ {
+  "id": "icon-navigation-menu",
+  "label": ""
+ },
+ {
+  "id": "icon-navigation-close",
+  "label": ""
+ }
+]
