@@ -30,7 +30,7 @@ PAGES = {
                  "title": "Kitchen Remodeling in South Florida | Elbaz Construction",
                  "desc": "Kitchen remodeling across Miami-Dade, Broward and Palm Beach: layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope. Licensed, bonded &amp; insured · CBC1265280.",
                  "url": "https://elbazconstructioncorp.com/kitchen-remodeling-miami/"},
-    "bathrooms": {"out": "bathrooms.html", "sections": ["bath-intro", "bath-build", "bath-work"], "book": "contact.html#contact-form",
+    "bathrooms": {"out": "bathrooms.html", "sections": ["bath-intro", "bath-build", "bath-rooms", "bath-work", "bath-close"], "book": "contact.html#contact-form",
                   "title": "Bathroom Remodeling in South Florida | Elbaz Construction",
                   "desc": "Bathroom remodeling across Miami-Dade, Broward and Palm Beach: waterproofing done properly, tile set square, glass and fixtures that still look right in year five. Licensed, bonded &amp; insured · CBC1265280.",
                   "url": "https://elbazconstructioncorp.com/bathroom-remodeling-miami/"},

@@ -19,10 +19,3 @@
 .ki1__cap { margin-top: 10px; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
 @media (max-width: 1023px) { .ki1__grid { grid-template-columns: 1fr; } }
 
-/* the room chapters (Boffi): three rooms, one strip; the room you are in carries a clay rule */
-.kch { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: var(--s6); border-bottom: 1px solid var(--color-border); }
-.kch__c { position: relative; display: inline-flex; align-items: baseline; gap: var(--s2); min-height: 44px; padding: var(--s3) var(--s5) var(--s3) 0; margin-right: var(--s5); font: 600 .9375rem/1.2 var(--f-text); color: var(--color-text-secondary); text-decoration: none; }
-.kch__c .nums { font-size: .75rem; color: var(--color-text-secondary); }
-.kch__c.is-on { color: var(--color-text); }
-.kch__c.is-on::after { content: ""; position: absolute; left: 0; right: var(--s5); bottom: -1px; height: 3px; background: var(--color-accent-solid); }
-@media (hover: hover) and (pointer: fine) { .kch__c:not(.is-on):hover { color: var(--color-text); } }

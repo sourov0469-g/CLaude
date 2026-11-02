@@ -287,7 +287,7 @@
     financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
-    'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-work': 'Bath projects',
+    'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
     'reno-intro': 'Whole home', 'reno-services': 'Services', 'reno-permits': 'Permits and approvals',
     'contact-form': 'Consultation', 'contact-visit': 'Visit and call', 'contact-area': 'Service area' };
 

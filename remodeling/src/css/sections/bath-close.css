@@ -1,0 +1,38 @@
+/* FINALIZE · Bathrooms 5 · Time, money, call. V1 three columns, V2 the week strip. */
+.bc .eyebrow, .bk__head .eyebrow { margin: 0 0 var(--s3); }
+.bc__h { margin: 0 0 var(--s7); max-width: 22ch; }
+.bc__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1.5px solid var(--color-text); }
+.bc__c { display: grid; gap: var(--s3); align-content: start; padding: var(--s5) var(--s6) var(--s5) 0; }
+.bc__c + .bc__c { padding-left: var(--s6); border-left: 1px solid var(--color-border); }
+.bc__k { margin: 0; font: 600 .8125rem/1 var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-secondary); }
+.bc__n { margin: 0; display: flex; align-items: baseline; gap: var(--s3); }
+.bc__n .nums { font: 600 clamp(4rem, 2.5rem + 4vw, 6.5rem)/.85 var(--f-display); letter-spacing: -.045em; color: var(--color-accent-solid); }
+.bc__u { font: 600 1.25rem/1 var(--f-display); }
+.bc__p { margin: 0; font: 400 1.0625rem/1.5 var(--f-text); max-width: 34ch; }
+.bc__s { margin: 0; font: 400 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); max-width: 36ch; }
+.bc__num { font: 600 clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem)/1 var(--f-display); letter-spacing: -.02em; color: var(--color-text); text-decoration: none; }
+.bc__c--call { justify-items: start; }
+.bc__proof { margin: 0; display: flex; flex-wrap: wrap; gap: 2px var(--s4); font: 600 .8125rem/1.5 var(--f-text); color: var(--color-text-secondary); }
+.bc__proof .nums { color: var(--color-text); }
+
+.bk__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.bk__head .t-head, .bk__lead { margin: 0; }
+.bk__lead { max-width: 40ch; color: var(--color-text); font-weight: 500; }
+.bk__strip { margin: 0; padding: var(--s6) var(--s5) var(--s4); background: var(--color-bg); border: 1.5px solid var(--color-text); }
+.bk__row { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: var(--s2); }
+.bk__w { height: clamp(48px, 7vw, 88px); border: 2px solid var(--color-text); background: var(--color-accent-solid); transform-origin: 0 50%; }
+.bk__w--m { background: repeating-linear-gradient(135deg, var(--clay-300, #ECB3A4) 0 6px, var(--color-surface) 6px 12px); }
+.bk__w--p { background: transparent; border-style: dashed; border-color: var(--color-border-strong); }
+.bk__lbls { display: grid; grid-template-columns: 4fr 4fr 2fr; gap: var(--s2); margin-top: var(--s3); font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.bk__l1 { grid-column: 2; border-top: 2px solid var(--clay-600, #A45540); padding-top: var(--s2); }
+.bk__l2 { grid-column: 3; border-top: 2px dashed var(--color-border-strong); padding-top: var(--s2); }
+.bk__foot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); margin-top: var(--s6); align-items: start; }
+.bk__money { margin: 0; font: 400 1rem/1.5 var(--f-text); color: var(--color-text-secondary); max-width: 48ch; }
+.bk__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4); }
+.bk__cta .bc__proof { flex-basis: 100%; }
+
+@media (max-width: 900px) {
+  .bc__cols, .bk__head, .bk__foot { grid-template-columns: 1fr; }
+  .bc__c, .bc__c + .bc__c { padding: var(--s5) 0; border-left: 0; border-bottom: 1px solid var(--color-border); }
+  .bk__row { gap: 6px; } .bk__lbls { gap: 6px; font-size: .75rem; } .bk__strip { padding: var(--s4) var(--s3) var(--s3); }   /* one row of ten still fits; the labels stay over their weeks */
+}

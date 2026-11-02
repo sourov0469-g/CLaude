@@ -1,154 +1,45 @@
-<section id="bath-work" class="sec bwork g-field" data-section="bath-work" aria-labelledby="bath-work-h-1">
-  <!-- Bathrooms page, section 3. The firm's own bathroom photographs (titles are its own), the one bathroom before/after pair
-       (shown no larger than ~1.4x its published size) and the financing note. Built in JS from one list. -->
-
-  <!-- v1 · Columns: the photos in masonry columns (they are mostly portrait); the pair as a drag slider beside the note -->
-  <div class="ver bw1" data-v="1">
+<section id="bath-work" class="sec bwork g-field" data-section="bath-work" aria-labelledby="bath-work-h">
+  <!-- FINALIZE · Bathrooms 4 · Projects: ONE version, the owner's recipe: V5's stacked images (click next) + V4's filter
+       only + a before/after seam copied from the kitchen approach (MERSI). The firm's one bath pair, its own bath
+       photographs, titles verbatim; the filter groups by words in the firm's own titles. Earlier versions in git history. -->
+  <div class="ver bw" data-v="1">
     <div class="wrap">
       <div class="bw__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-1">Real bathrooms, <span class="acc">photographed as delivered.</span></h2>
-        <p class="t-lead bw__lead">Every image is our own work. Select one to see it large.</p>
-      </div>
-      <div class="bw1__cols"></div>
-      <div class="bw1__foot"><div class="bw1__ba"></div><div class="bfin"></div></div>
-    </div>
-  </div>
-
-  <!-- v2 · The curtain: the before/after pair hangs behind a shower curtain that draws back; the projects run in a strip -->
-  <div class="ver bw2" data-v="2" hidden>
-    <div class="wrap bw2__top">
-      <div class="bw2__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-2">The curtain <span class="acc">came down.</span></h2>
-        <p class="t-lead bw__lead">The same bathroom before we started, with its alcove tub and shower curtain, and after we finished. Draw the curtain to change over.</p>
-        <button type="button" class="btn bw2__draw" aria-pressed="false" data-rx="native:bw2-curtain"><span class="btn__label">Draw the curtain</span></button>
-      </div>
-      <div class="bw2__frame"></div>
-    </div>
-    <div class="bw2__strip" tabindex="0" role="region" aria-label="Bathroom projects, scroll sideways" data-rx="native:bw2-strip"></div>
-    <div class="wrap"><div class="bfin"></div></div>
-  </div>
-
-  <!-- v3 · The filmstrip: a tall strip of photos scrolls in its own frame; the title list beside it follows along -->
-  <div class="ver bw3" data-v="3" hidden>
-    <div class="wrap bw3__grid">
-      <div class="bw3__left">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-3">Scroll the strip. <span class="acc">The list keeps up.</span></h2>
-        <ol class="bw3__list"></ol>
-      </div>
-      <div class="bw3__film" tabindex="0" role="region" aria-label="Bathroom photographs, scroll down" data-rx="native:bw3-film"></div>
-    </div>
-    <div class="wrap bw3__pair"></div>
-    <div class="wrap"><div class="bfin"></div></div>
-  </div>
-
-  <!-- v4 · Filters: chips made from words in the project titles narrow the grid; a switch shows the pair before or after -->
-  <div class="ver bw4" data-v="4" hidden>
-    <div class="wrap">
-      <div class="bw__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-4">Looking for <span class="acc">a walk-in shower?</span></h2>
-        <p class="t-lead bw__lead">Filter our bathrooms by what their titles name. Every image is our own work.</p>
-      </div>
-      <div class="bw4__chips" role="group" aria-label="Filter by feature"></div>
-      <div class="bw4__grid" aria-live="polite"></div>
-      <div class="bw4__foot"><div class="bw4__pair"></div><div class="bfin"></div></div>
-    </div>
-  </div>
-
-  <!-- v5 · The deck: bathrooms stacked like prints; Next sends the top one to the back; press and hold the pair to see the before -->
-  <div class="ver bw5" data-v="5" hidden>
-    <div class="wrap bw5__grid">
-      <div class="bw5__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-5">Deal through <span class="acc">the bathrooms.</span></h2>
-        <p class="bw5__cap" aria-live="polite"></p>
-        <div class="bw5__btns">
-          <button type="button" class="btn btn--ghost bw5__prev" data-rx="~arrowL/drop/shake/l"><span class="btn__label">Back one</span></button>
-          <button type="button" class="btn bw5__next" data-rx="~arrowR/drop/hop/r"><span class="btn__label">Next bathroom</span></button>
-          <button type="button" class="btn btn--ghost bw5__open" data-rx="~magnifier/pop/flash/r"><span class="btn__label">See it large</span></button>
+        <div>
+          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Bathrooms we built</p>
+          <h2 class="t-head" id="bath-work-h">Real bathrooms, <span class="acc">photographed as delivered.</span></h2>
         </div>
-        <div class="bw5__pair"></div>
+        <p class="t-lead bw__lead">One of them photographed before we started, too. Drag the stud to compare, then work through the stack.</p>
       </div>
-      <div class="bw5__deck" aria-hidden="true"></div>
-    </div>
-    <div class="wrap"><div class="bfin"></div></div>
-  </div>
-<!-- b1 · release record of slot 1 (.bw1 -> .bw1r) -->
-  <div class="ver bw1r" data-v="b1" hidden>
-    <div class="wrap">
-      <div class="bw__head">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-1-r">Real bathrooms, <span class="acc">photographed as delivered.</span></h2>
-        <p class="t-lead bw__lead">Every image is our own work. Select one to see it large.</p>
-      </div>
-      <div class="bw1r__cols"></div>
-      <div class="bw1r__foot"><div class="bw1r__ba"></div><div class="bfin"></div></div>
-    </div>
-  </div>
-
-<!-- b2 · release record of slot 2 (.bw2 -> .bw2r) -->
-  <div class="ver bw2r" data-v="b2" hidden>
-    <div class="wrap bw2r__top">
-      <div class="bw2r__copy">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-2-r">The curtain <span class="acc">came down.</span></h2>
-        <p class="t-lead bw__lead">The same bathroom before we started, with its alcove tub and shower curtain, and after we finished. Draw the curtain to change over.</p>
-        <button type="button" class="btn bw2r__draw" aria-pressed="false" data-rx="native:bw2r-curtain"><span class="btn__label">Draw the curtain</span></button>
-      </div>
-      <div class="bw2r__frame"></div>
-    </div>
-    <div class="bw2r__strip" tabindex="0" role="region" aria-label="Bathroom projects, scroll sideways" data-rx="native:bw2r-strip"></div>
-    <div class="wrap"><div class="bfin"></div></div>
-  </div>
-
-<!-- b3 · release record of slot 3 (.bw3 -> .bw3r) -->
-  <div class="ver bw3r" data-v="b3" hidden>
-    <div class="wrap bw3r__grid">
-      <div class="bw3r__left">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-3-r">Scroll the strip. <span class="acc">The list keeps up.</span></h2>
-        <ol class="bw3r__list"></ol>
-      </div>
-      <div class="bw3r__film" tabindex="0" role="region" aria-label="Bathroom photographs, scroll down" data-rx="native:bw3r-film"></div>
-    </div>
-    <div class="wrap bw3r__pair"></div>
-    <div class="wrap"><div class="bfin"></div></div>
-  </div>
-
-<!-- b4 · release record of slot 4 (.bw4 -> .bw4r) -->
-  <div class="ver bw4r" data-v="b4" hidden>
-    <div class="wrap">
-      <div class="bw__head">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-4-r">Looking for <span class="acc">a walk-in shower?</span></h2>
-        <p class="t-lead bw__lead">Filter our bathrooms by what their titles name. Every image is our own work.</p>
-      </div>
-      <div class="bw4r__chips" role="group" aria-label="Filter by feature"></div>
-      <div class="bw4r__grid" aria-live="polite"></div>
-      <div class="bw4r__foot"><div class="bw4r__pair"></div><div class="bfin"></div></div>
-    </div>
-  </div>
-
-<!-- b5 · release record of slot 5 (.bw5 -> .bw5r) -->
-  <div class="ver bw5r" data-v="b5" hidden>
-    <div class="wrap bw5r__grid">
-      <div class="bw5r__copy">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Bathrooms we built</p>
-        <h2 class="t-head" id="bath-work-h-5-r">Deal through <span class="acc">the bathrooms.</span></h2>
-        <p class="bw5r__cap" aria-live="polite"></p>
-        <div class="bw5r__btns">
-          <button type="button" class="btn btn--ghost bw5r__prev" data-rx="~arrowL/drop/shake/l"><span class="btn__label">Back one</span></button>
-          <button type="button" class="btn bw5r__next" data-rx="~arrowR/drop/hop/r"><span class="btn__label">Next bathroom</span></button>
-          <button type="button" class="btn btn--ghost bw5r__open" data-rx="~magnifier/pop/flash/r"><span class="btn__label">See it large</span></button>
+      <div class="bw__grid">
+        <div class="bw__seam">
+          <div class="kp__print bw__print">
+            <div class="kp__tape" aria-hidden="true"></div>
+            <div class="kp__stage bw__stage" style="--ar: 428 / 404">
+              <figure class="kp__img kp__img--b"><img data-img="ba-bath2-before" width="428" height="404" alt="Dated bathroom with alcove tub and shower curtain, before renovation"></figure>
+              <figure class="kp__img kp__img--a"><img data-img="ba-bath2-after" width="430" height="490" alt="Renovated bathroom with frameless glass shower and round backlit mirror"></figure>
+              <span class="kp__tag kp__tag--b" aria-hidden="true">Before</span><span class="kp__tag kp__tag--a" aria-hidden="true">After</span>
+              <span class="kp__stud" aria-hidden="true"><span class="kp__wood"></span><span class="kp__grip"><svg viewBox="0 0 26 26"><path d="M9 7 L4 13 L9 19 M17 7 L22 13 L17 19"/></svg></span></span>
+              <input class="kp__range" type="range" min="0" max="100" value="50" aria-label="Move the seam between before and after">
+            </div>
+            <p class="kp__cap">Before: a dated bathroom with an alcove tub and shower curtain. After: a frameless glass shower and a round backlit mirror. A single bathroom might run <span class="nums">4&ndash;8</span> weeks of construction.</p>
+          </div>
         </div>
-        <div class="bw5r__pair"></div>
+        <div class="bw__deck">
+          <div class="bw__filters" role="group" aria-label="Show">
+            <button type="button" class="bw__fl" aria-pressed="true" data-f="all">All</button>
+            <button type="button" class="bw__fl" aria-pressed="false" data-f="shower">Walk-in showers</button>
+            <button type="button" class="bw__fl" aria-pressed="false" data-f="tub">Freestanding tubs</button>
+            <button type="button" class="bw__fl" aria-pressed="false" data-f="vanity">Vanities</button>
+          </div>
+          <div class="bw__stack" role="group" aria-roledescription="stack of photographs" aria-label="Bathroom projects"></div>
+          <p class="bw__t" aria-live="polite"></p>
+          <div class="bw__ctl">
+            <button type="button" class="btn btn--ghost bw__prev"><span class="btn__label">Previous</span></button>
+            <button type="button" class="btn bw__next"><span class="btn__label">Next photo</span></button>
+          </div>
+        </div>
       </div>
-      <div class="bw5r__deck" aria-hidden="true"></div>
     </div>
-    <div class="wrap"><div class="bfin"></div></div>
   </div>
-
 </section>

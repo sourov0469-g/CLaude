@@ -1,0 +1,45 @@
+/* FINALIZE · Bathrooms 3 · Rooms we build. V1 the giant list, V2 the sample board. */
+.br__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
+.br__side { display: grid; gap: var(--s4); align-content: start; position: sticky; top: calc(var(--nav-h) + var(--s5)); }
+.br__side .eyebrow, .br__side .t-head, .br__lead { margin: 0; }
+.br__lead { max-width: 40ch; color: var(--color-text-secondary); }
+.br__prev { margin: var(--s3) 0 0; }
+.br__ph { position: relative; aspect-ratio: 4 / 5; max-height: 52svh; background: var(--sand-100, #F7F1EA); border: 1.5px solid var(--color-text); overflow: hidden; }
+.br__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 300ms var(--ez-out); }
+.br__prev.has-img .br__img { opacity: 1; }
+.br__cap { margin-top: var(--s2); min-height: 2.8em; font: 400 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.br__list { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--color-text); }
+.br__r { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); width: 100%; padding: var(--s3) 0; background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text-secondary); font: 600 clamp(1.75rem, 1rem + 2.4vw, 3.25rem)/1.05 var(--f-display); letter-spacing: -.025em; transition: color 200ms var(--ez-out), padding 300ms var(--ez-out); }
+button.br__r { cursor: pointer; }
+.br__r .nums { font: 600 .8125rem/1 var(--f-text); letter-spacing: 0; }
+.br__cam { width: 22px; height: 22px; flex: none; }
+.br__cam path, .br__cam circle { fill: none; stroke: currentColor; stroke-width: 1.8; }
+.br__r.is-on { color: var(--color-text); padding-left: var(--s3); }
+.br__r.is-on .br__cam path, .br__r.is-on .br__cam circle { stroke: var(--color-accent-solid); }
+@media (hover: hover) and (pointer: fine) { button.br__r:hover { color: var(--color-text); } }
+.br__r:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -2px; }
+.br__t { display: flex; align-items: baseline; gap: var(--s3); }
+
+.bs__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.bs__head .eyebrow { margin: 0 0 var(--s3); }
+.bs__head .t-head, .bs__lead { margin: 0; }
+.bs__lead { max-width: 46ch; color: var(--color-text-secondary); }
+.bs__board { list-style: none; margin: 0; padding: var(--s5); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s4); background: var(--sand-200, #EFE4D6); border: 1.5px solid var(--color-text); }
+.bs__tile { position: relative; display: grid; align-content: end; width: 100%; aspect-ratio: 3 / 4; padding: var(--s3); overflow: hidden; background: var(--color-surface); border: 1.5px solid var(--color-text); text-align: left; color: var(--color-text); font: 600 1rem/1.2 var(--f-display); }
+.bs__tile:nth-child(3n+2) { background: var(--sand-100, #F7F1EA); } .bs__tile:nth-child(4n+3) { background: var(--clay-100, #F9E3DD); }
+button.bs__tile { cursor: zoom-in; color: #fff; }
+.bs__tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ez-out); }
+button.bs__tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .65)); }
+.bs__tile span { position: relative; z-index: 1; }
+@media (hover: hover) and (pointer: fine) { button.bs__tile:hover img { transform: scale(1.04); } }
+.bs__tile:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+.bs__g { position: absolute; left: var(--s3); top: var(--s3); width: 26px; height: 26px; }
+.bs__g path { fill: none; stroke: var(--color-text); stroke-width: 1.6; }
+
+@media (max-width: 1100px) { .bs__board { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 900px) {
+  .br__grid, .bs__head { grid-template-columns: 1fr; }
+  .br__side { position: static; }
+  .br__ph { aspect-ratio: 4 / 3; }
+  .bs__board { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: var(--s3); gap: var(--s3); }
+}
