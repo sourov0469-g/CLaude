@@ -1274,478 +1274,136 @@ html.has-buddy select { cursor: default !important; }
 @media (min-width: 1200px) { .pr--list .pr__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } .pr--list .pr__n > .nums { font-size: 3rem; } .pr--list .pr__t { font-size: 1.375rem; } .pr--list .pr__p { font-size: 1rem; } }
 
 
-#financing .t-head { color: var(--color-text); }
-.financing__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
-.financing__head .t-head { grid-column: 1 / span 6; }
-.financing__lead { grid-column: 8 / span 5; color: var(--color-text-secondary); max-width: 40ch; }
-.financing__note { margin: var(--s7) 0 0; max-width: 78ch; font-size: var(--t-small); color: var(--color-text-secondary); font-weight: 600; }
-@media (max-width: 1023px) { .financing__head .t-head, .financing__lead { grid-column: 1 / -1; } .financing__lead { margin-top: var(--s4); } }
 
 
-.financing1__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); align-items: start; }
-.financing1__tk {
-  --py: 220px; --gx: -40%;
-  position: relative; display: grid; grid-template-rows: auto 112px auto;
-  background: var(--white); color: var(--ink);
-  -webkit-mask: radial-gradient(circle 11px at 0 var(--py), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% var(--py), transparent 98%, #000) right / 51% 100% no-repeat;
-  mask: radial-gradient(circle 11px at 0 var(--py), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% var(--py), transparent 98%, #000) right / 51% 100% no-repeat;
-  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .12);
+.rf__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
+.rf__side { display: grid; gap: var(--s4); align-content: start; }
+.rf__side .eyebrow, .rf__side .t-head, .rf__lead { margin: 0; }
+.rf__lead { max-width: 42ch; color: var(--color-text-secondary); }
+
+.rf__ask { margin: var(--s3) 0 0; padding: 0; border: 0; display: grid; gap: var(--s2); min-width: 0; }
+.rf__q { padding: 0; margin-bottom: var(--s2); font: 600 1.0625rem/1.3 var(--f-display); }
+.rf__grp { margin: var(--s2) 0 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
+.rf__opts { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.rf__opts--ns { margin-top: var(--s3); }
+.rf__o { position: relative; display: inline-flex; cursor: pointer; }
+.rf__o input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.rf__o span {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s4);
+  font: 500 .9375rem/1.2 var(--f-text); color: var(--color-text);
+  background: var(--color-surface); border: 1.5px solid var(--color-border-strong);
+  transition: background-color 150ms var(--ez-out), border-color 150ms var(--ez-out), color 150ms var(--ez-out);
 }
-.financing1__tk::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: var(--glare, none); background-size: 260% 260%; background-position: var(--gx, 120%) var(--gx, 120%);
-  mix-blend-mode: screen; opacity: 0; transition: opacity 650ms var(--ease-out);
-  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, 0);
+.rf__o--ns span { border-style: dashed; }
+@media (hover: hover) and (pointer: fine) { .rf__o:hover span { border-color: var(--color-text); } }
+.rf__o input:checked + span { background: var(--color-text); border-color: var(--color-text); color: var(--color-surface); }
+.rf__o input:focus-visible + span { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+
+.rf__why { margin: var(--s2) 0 0; min-height: 7.5em; max-width: 46ch; font: 400 1rem/1.5 var(--f-text); color: var(--color-text); padding-left: var(--s4); border-left: 3px solid var(--color-accent-solid); }
+.rf__act { display: grid; gap: var(--s3); justify-items: start; }
+.rf__not { margin: 0; max-width: 46ch; font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+
+.rf__map { position: relative; padding: var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); }
+.rf__svg { display: block; width: 100%; height: auto; max-height: 72svh; overflow: visible; }
+.rf__lot { fill: var(--sand-100, #F7F1EA); stroke: var(--color-text); stroke-width: 1.25; stroke-dasharray: 6 5; }
+.rf__lotn { font: 600 15px/1 var(--f-text); fill: var(--color-text-secondary); letter-spacing: .02em; }
+.rf__edge { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linecap: round; }
+.rf__mid { fill: none; stroke: var(--color-border-strong); stroke-width: 1.25; stroke-dasharray: 8 8; }
+.rf__spur { fill: none; stroke: var(--color-border-strong); stroke-width: 1.25; stroke-dasharray: 4 5; }
+.rf__pole { fill: none; stroke: var(--color-text); stroke-width: 2; }
+.rf__board { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.5; transition: fill 250ms var(--ez-out); }
+.rf__bt { font: 600 13px/1 var(--f-text); fill: var(--color-text); text-anchor: middle; transition: fill 250ms var(--ez-out); }
+.rf__post.is-fit .rf__board { fill: var(--color-accent-solid); }
+.rf__post.is-fit .rf__bt { fill: var(--color-text-on-accent, #fff); }
+.rf__route { fill: none; stroke: var(--color-accent-solid); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.rf__hw { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
+.rf__hr { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.rf__hd { fill: var(--sand-100, #F7F1EA); stroke: var(--color-text); stroke-width: 1.5; }
+.rf__ht { font: 600 14px/1 var(--f-text); fill: var(--color-text); }
+
+
+.rf__cards { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s4); align-items: stretch; margin-top: var(--s8); padding-top: 0; }
+.rf__c {
+  position: relative; display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: var(--s2); padding: var(--s5) var(--s4) var(--s4);
+  background: var(--color-surface); border: 1.5px solid var(--color-border-strong);
+  transition: opacity 250ms var(--ez-out), border-color 250ms var(--ez-out);
 }
+.rf__c::before { content: ""; position: absolute; left: -1.5px; right: -1.5px; top: -1.5px; height: 5px; background: var(--color-accent-solid); transform: scaleX(0); transform-origin: 0 50%; transition: transform 400ms var(--ez-out); }
+.rf__c.is-fit { border-color: var(--color-text); }
+.rf__c.is-fit::before { transform: none; }
+.rf__c.is-not { opacity: .45; }
+.rf__ck { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
+.rf__cn { font: 600 1.25rem/1.15 var(--f-display); letter-spacing: -.01em; }
+.rf__cw { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.rf__fig { margin: var(--s2) 0 0; display: grid; gap: 4px; padding-top: var(--s3); border-top: 1px solid var(--color-border); }
+.rf__n { font: 600 2.25rem/1 var(--f-display); letter-spacing: -.03em; color: var(--color-text); display: inline-block; }
+.rf__fl { font: 400 .875rem/1.35 var(--f-text); color: var(--color-text-secondary); }
+.rf__cx { margin: 0; font: 500 .9375rem/1.35 var(--f-text); }
+.rf__by { margin: auto 0 0; padding-top: var(--s2); font: 400 .75rem/1.35 var(--f-text); color: var(--color-text-secondary); }
 
-.financing1__tk.is-glare::after { opacity: 1; animation: fin1-rim 650ms var(--ease-out); }
-@keyframes fin1-rim { 30% { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-surface) 75%, transparent); } 100% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-surface) 0%, transparent); } }
-.financing1__main { padding: 22px 20px 18px; border-bottom: 2px dashed rgba(18, 18, 18, .4); min-width: 0; }
-.financing1__name { margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: -.005em; }
-.financing1__kind { margin: 6px 0 0; font: 600 .75rem/1.3 var(--f-text); color: var(--ink); }
-.financing1__fig { margin: 18px 0 0; font: 400 clamp(3rem, 2rem + 2.6vw, 4.5rem)/.9 var(--f-display); letter-spacing: -.005em; white-space: nowrap; }
-.financing1__per { margin: 6px 0 0; font-size: .8125rem; line-height: 1.35; color: var(--muted); }
-.financing1__stub, .financing1__more { grid-row: 2; grid-column: 1; padding: 16px 20px; display: grid; align-content: center; }
-.financing1__stub { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .04) 0 6px, transparent 6px 12px); }
-.financing1__sfig { margin: 0; font: 400 2rem/1 var(--f-display); color: var(--err); }
-.financing1__sper { margin: 4px 0 0; font-size: .8125rem; color: var(--muted); }
-.financing1__more { font-size: .875rem; line-height: 1.45; }
-.financing1__more p { margin: 0; }
-.js .financing1__more { visibility: hidden; }
-.financing1__tk.is-torn .financing1__more { visibility: visible; }
-.financing1__tear {
-  grid-row: 3; margin: 0 20px 18px; min-height: 44px; padding: 0 14px;
-  background: var(--white); color: var(--ink); border: 0; font: 600 .875rem/1 var(--f-text); cursor: pointer;
+@media (max-width: 1100px) { .rf__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) {
+  
+  .rf__grid { grid-template-columns: 1fr; gap: var(--s4); }
+  .rf__side { display: contents; }
+  .rf__map { order: 1; padding: var(--s2); margin-top: var(--s2); }
+  .rf__why { order: 2; min-height: 0; }
+  .rf__act { order: 3; }
 }
-.financing1__tear .rx { color: var(--err); }
-@media (max-width: 1023px) { .financing1__row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .financing1__row { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .rf__cards { grid-template-columns: 1fr; } .rf__lotn { font-size: 18px; } .rf__bt { font-size: 15px; } }
 
 
-.financing2__rig { position: relative; display: grid; grid-template-columns: minmax(180px, 1fr) 2fr minmax(200px, 1fr); align-items: stretch; min-height: 420px; }
-.financing2__src { grid-column: 1; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
-.financing2__v {
-  display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 64px;
-  background: rgba(11, 20, 24, .35); color: var(--field-ink); border: 0; box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .3); cursor: pointer; text-align: left;
-  font: 600 .9375rem/1.2 var(--f-text);
+.km__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.km__head .eyebrow { margin: 0 0 var(--s3); }
+.km__head .t-head, .km__lead { margin: 0; }
+.km__lead { max-width: 46ch; color: var(--color-text-secondary); }
+
+.km__book { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); background: var(--color-surface); border: 1.5px solid var(--color-text); box-shadow: 0 22px 40px -28px color-mix(in srgb, var(--color-shadow, #000) 45%, transparent); }
+.km__page { position: relative; padding: var(--s6) var(--s6) var(--s5); }
+.km__spine { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 10%, transparent) 45%, color-mix(in srgb, var(--color-text) 10%, transparent) 55%, transparent); border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border); }
+
+.km__t { width: 100%; border-collapse: collapse; table-layout: fixed; position: relative; }
+.km__t col, .km__gut { width: 128px; }
+.km__cap { caption-side: top; text-align: left; padding-bottom: var(--s4); }
+.km__cap > span { display: block; }
+.km__sub { margin-top: 4px; }
+.km__gut, .km__r th { border-right: 1.5px solid var(--clay-300, #ECB3A4); }   
+.km__r td:first-of-type, .km__t thead th:first-of-type { padding-left: var(--s4); }
+.km__kind { font: 600 1.5rem/1.1 var(--f-display); letter-spacing: -.015em; }
+.km__sub { font: 400 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.km__t thead th { text-align: left; padding: 0 var(--s3) var(--s3); font: 600 1.0625rem/1.2 var(--f-display); border-bottom: 2px solid var(--color-text); }
+.km__t thead .km__gut { border-bottom: 2px solid var(--color-text); }
+.km__r { position: relative; }
+.km__r th, .km__r td { vertical-align: top; text-align: left; padding: var(--s3) var(--s3) var(--s3); font: 400 .9375rem/1.45 var(--f-text); background-image: linear-gradient(var(--color-border-strong), var(--color-border-strong)); background-repeat: no-repeat; background-position: 0 100%; background-size: calc(var(--rule, 1) * 100%) 1px; }
+.km__r th { padding-left: 0; font: 600 .75rem/1.6 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
+.km__r td > * , .km__r td { transition: background-color 200ms var(--ez-out); }
+.km__r--q td { font-style: italic; color: var(--color-text-secondary); }
+.km__n { display: block; font: 600 2rem/1 var(--f-display); letter-spacing: -.03em; color: var(--color-accent-solid); margin-bottom: 6px; }
+.km__fl { display: block; font-size: .875rem; color: var(--color-text-secondary); }
+.km__t td.is-col, .km__t th.is-col { background-color: color-mix(in srgb, var(--clay-100, #F9E3DD) 55%, transparent); }
+.km__foot { margin: var(--s4) 0 0; font: 400 .75rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+.km__note { display: block; margin-top: var(--s2); padding: var(--s2) var(--s3); border: 1px dashed var(--clay-600, #A45540); color: var(--color-text); font-size: .8125rem; }
+
+.km__sum { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: var(--s5); margin-top: var(--s6); padding-top: var(--s5); border-top: 3px double var(--color-text); }
+.km__total { margin: 0; font: 600 1.375rem/1.2 var(--f-display); letter-spacing: -.01em; }
+.km__not { margin: 0; max-width: 52ch; font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 1100px) {
+  .km__book { grid-template-columns: 1fr; }
+  .km__spine { height: 18px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-text) 10%, transparent) 45%, color-mix(in srgb, var(--color-text) 10%, transparent) 55%, transparent); border: 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+  .km__sum { grid-template-columns: 1fr; justify-items: start; gap: var(--s3); }
 }
-.financing2__v svg { width: 40px; height: 40px; flex: none; overflow: visible; }
-.financing2__v .wheel { fill: none; stroke: #e2412b; stroke-width: 3; }
-.financing2__v .hub { fill: #0B1418; }
-.financing2__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px #f2c230; background: rgba(11, 20, 24, .55); }
-.financing2__pipes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.financing2__pipes .p { fill: none; stroke: #5f7176; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
-.financing2__pipes .p-in { fill: none; stroke: #0B1418; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
-.financing2__pipes .w { fill: none; stroke: #5ab6e6; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 8; opacity: 0; }
-.financing2__pipes .j { fill: #c9d1d3; stroke: #0B1418; stroke-width: 2; }
-.financing2__pipes .man { fill: #5f7176; stroke: #0B1418; stroke-width: 2; }
-.financing2__dst { grid-column: 3; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
-.financing2__l {
-  position: relative; overflow: hidden; display: grid; gap: 2px; padding: 12px 14px; min-height: 64px; align-content: center;
-  background: rgba(11, 20, 24, .45); box-shadow: inset 0 0 0 1px rgba(232, 228, 220, .3); color: var(--field-ink);
+@media (max-width: 900px) { .km__head { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .km__page { padding: var(--s5) var(--s3) var(--s4); }
+  .km__t col, .km__gut { width: 84px; }
+  .km__r th, .km__r td { padding: var(--s2) var(--s2); font-size: .875rem; }
+  .km__r th { font-size: .6875rem; letter-spacing: .02em; }
+  .km__t thead th { padding: 0 var(--s2) var(--s2); font-size: .9375rem; }
+  .km__n { font-size: 1.5rem; }
+  .km__fl { font-size: .8125rem; }
 }
-.financing2__l::before { content: ""; position: absolute; inset: 0; background: rgba(90, 182, 230, .28); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
-.financing2__l strong, .financing2__l span { position: relative; }
-.financing2__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: .02em; }
-.financing2__l span { font-size: .8125rem; color: var(--field-muted); }
-.financing2__l.is-on { box-shadow: inset 0 0 0 2px #5ab6e6; }
-.financing2__l.is-off { opacity: .45; }
-.financing2__why { margin: var(--s6) 0 0; min-height: 3em; max-width: 64ch; color: var(--field-ink); font-size: 1.0625rem; }
-.financing2__btn { margin-top: var(--s5); }
-@media (max-width: 767px) {
-  .financing2__rig { grid-template-columns: 1fr 64px 1fr; min-height: 380px; column-gap: 0; }
-  .financing2__v { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; font-size: .8125rem; }
-  .financing2__v svg { width: 30px; height: 30px; }
-  .financing2__l { padding: 10px; }
-  .financing2__l strong { font-size: 1.125rem; }
-  .financing2__l span { font-size: .6875rem; }
-}
-
-
-.financing3__wrap { display: grid; gap: var(--s7); }
-.financing3__intro { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
-.financing3__intro .t-head { grid-column: 1 / span 6; }
-.financing3__intro .financing__lead { grid-column: 8 / span 5; }
-.financing3__stage { position: relative; display: grid; place-items: center; min-height: 420px; }
-
-.financing3__ground {
-  position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr;
-  background: var(--white); color: var(--ink);
-  background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
-  background-size: 24px 24px;
-  box-shadow: none;
-}
-.financing3__ground::after { content: ""; position: absolute; left: 50%; top: 22px; bottom: 22px; border-left: 1.5px dashed rgba(18, 18, 18, .45); }
-.financing3__half { padding: clamp(28px, 4vw, 56px); display: grid; align-content: space-between; }
-.financing3__half:last-child { text-align: right; }
-.financing3__gk { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; }
-.financing3__half:first-child .financing3__gk { border-top: 3px solid var(--ink); padding-top: 12px; }
-.financing3__half:last-child .financing3__gk { border-top: 3px solid var(--err); padding-top: 12px; }
-.financing3__gn { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--ink-2); }
-.financing3__stage:has(.financing3__orb[aria-expanded="true"]) .financing3__ground { visibility: hidden; }
-.financing3__gl { margin: 0; font: 500 .8125rem/1.3 var(--f-text); color: var(--ink); letter-spacing: .02em; }
-.financing3__orb {
-  position: relative; z-index: 1;
-  width: 240px; height: 240px; border-radius: 50%; border: 0; padding: 30px;
-  background: var(--white); color: var(--ink); cursor: pointer;
-  box-shadow: 0 0 0 2px var(--a-500), 0 0 0 12px rgba(255, 95, 0, .14);
-  font: 400 1.75rem/1.05 var(--f-display); letter-spacing: -.005em;
-}
-@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px var(--a-500), 0 0 0 18px rgba(255, 95, 0, .2); } }   
-.financing3__sheet {
-  position: relative; width: 100%; padding: clamp(28px, 4vw, 52px);
-  background: var(--white); color: var(--ink);
-  background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 14px);
-}
-.financing3__br { position: absolute; width: 22px; height: 22px; border: 0 solid var(--ink); }
-.financing3__br--tl { left: 12px; top: 12px; border-width: 2px 0 0 2px; }
-.financing3__br--tr { right: 12px; top: 12px; border-width: 2px 2px 0 0; }
-.financing3__br--bl { left: 12px; bottom: 12px; border-width: 0 0 2px 2px; }
-.financing3__br--br { right: 12px; bottom: 12px; border-width: 0 2px 2px 0; }
-.financing3__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: var(--ink); cursor: pointer; }
-.financing3__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
-.financing3__col { border-top: 3px solid var(--ink); padding-top: 16px; }
-.financing3__k { margin: 0 0 12px; font: 400 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; }
-.financing3__col dl { margin: 0; display: grid; gap: 14px; }
-.financing3__col dt { font: 700 .9375rem/1.2 var(--f-text); }
-.financing3__col dd { margin: 4px 0 0; font-size: .9375rem; line-height: 1.45; color: var(--ink-2); }
-.financing3__fit { margin: 16px 0 0; font: 600 .875rem/1.4 var(--f-text); color: var(--ink); }
-.financing3__foot { margin-top: clamp(24px, 3vw, 40px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); padding-top: 18px; border-top: 1px dashed rgba(18, 18, 18, .35); }
-.financing3__foot p { margin: 0; font-size: .875rem; color: var(--muted); max-width: 52ch; }
-.financing3__btn { background: var(--white); color: var(--ink); }
-.financing3__btn .rx { color: var(--ink); }
-@media (max-width: 1023px) { .financing3__intro .t-head, .financing3__intro .financing__lead { grid-column: 1 / -1; } .financing3__intro .financing__lead { margin-top: var(--s4); } }
-@media (max-width: 767px) { .financing3__sheet { padding-top: 76px; } .financing3__cols { grid-template-columns: 1fr; } .financing3__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; } .financing3__stage { min-height: 440px; } .financing3__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .financing3__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(18, 18, 18, .45); } .financing3__half { padding: 24px 150px 24px 22px; } .financing3__half:last-child { text-align: left; } }
-
-
-
-.fr__rig { position: relative; display: grid; grid-template-columns: minmax(180px, 1fr) 2fr minmax(200px, 1fr); align-items: stretch; min-height: 420px; }
-.fr__src { grid-column: 1; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
-.fr__v {
-  display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 64px;
-  background: rgba(255, 255, 255, .35); color: var(--field-ink); border: 0; box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .3); cursor: pointer; text-align: left;
-  font: 600 .9375rem/1.2 var(--f-text);
-}
-.fr__v svg { width: 40px; height: 40px; flex: none; overflow: visible; }
-.fr__v .wheel { fill: none; stroke: var(--err); stroke-width: 3; }
-.fr__v .hub { fill: var(--ink); }
-.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px var(--a-500); background: rgba(255, 255, 255, .55); }
-.fr__pipes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.fr__pipes .p { fill: none; stroke: var(--grey); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
-.fr__pipes .p-in { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
-.fr__pipes .w { fill: none; stroke: var(--a-500); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 8; opacity: 0; }
-.fr__pipes .j { fill: var(--grey); stroke: var(--ink); stroke-width: 2; }
-.fr__pipes .man { fill: var(--grey); stroke: var(--ink); stroke-width: 2; }
-.fr__dst { grid-column: 3; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
-.fr__l {
-  position: relative; overflow: hidden; display: grid; gap: 2px; padding: 12px 14px; min-height: 64px; align-content: center;
-  background: rgba(255, 255, 255, .45); box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .3); color: var(--field-ink);
-}
-.fr__l::before { content: ""; position: absolute; inset: 0; background: rgba(255, 95, 0, .28); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
-.fr__l strong, .fr__l span { position: relative; }
-.fr__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; }
-.fr__l span { font-size: .8125rem; color: var(--field-muted); }
-.fr__l.is-on { box-shadow: inset 0 0 0 2px var(--a-500); }
-.fr__l.is-off { opacity: .45; }
-.fr__why { margin: var(--s6) 0 0; min-height: 3em; max-width: 64ch; color: var(--field-ink); font-size: 1.0625rem; }
-.fr__btn { margin-top: var(--s5); }
-@media (max-width: 767px) {
-  .fr__rig { grid-template-columns: 1fr 64px 1fr; min-height: 380px; column-gap: 0; }
-  .fr__v { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; font-size: .8125rem; }
-  .fr__v svg { width: 30px; height: 30px; }
-  .fr__l { padding: 10px; }
-  .fr__l strong { font-size: 1.125rem; }
-  .fr__l span { font-size: .6875rem; }
-}
-
-
-.fr__v { transition: box-shadow 150ms ease, background-color 150ms ease; }
-.fr__v .wheel { stroke: var(--ink); }
-.fr__v .hub { fill: var(--white); }
-.fr__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px var(--a-500); }
-.fr__pipes .p { stroke: rgba(18, 18, 18, .22); stroke-width: 3; }
-.fr__pipes .w { stroke: var(--a-500); stroke-width: 3; stroke-dasharray: none; opacity: 1; animation: fr-in 200ms ease-out both; }
-@keyframes fr-in { from { opacity: 0; } }
-.fr__l { transition: opacity 200ms ease-out, box-shadow 200ms ease-out; }
-.fr__l::before { content: none; }
-.fr__l.is-on { box-shadow: inset 0 0 0 2px var(--a-500); }
-.fr__l .fr__q { display: block; font-size: .875rem; line-height: 1.45; color: var(--field-muted); margin-top: 6px; }
-.fr__rig { grid-template-columns: minmax(180px, 1fr) 1fr minmax(280px, 1.4fr); }
-.fr__note { max-width: 72ch; }
-@media (prefers-reduced-motion: reduce) { .fr__pipes .w { animation: none; } .fr__l, .fr__v { transition: none; } }
-.fr__l.is-off { opacity: .62; }
-@media (max-width: 767px) {
-  .fr__rig { grid-template-columns: 1fr 1fr; column-gap: 8px; row-gap: var(--s5); min-height: 0; }
-  .fr__src { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; align-content: start; }
-  .fr__v { flex-direction: row; align-items: center; min-height: 52px; }
-  .fr__pipes { display: none; }
-  .fr__dst { grid-column: 1 / -1; align-content: start; }
-  .fr__l strong { font-size: 1.25rem; }
-  .fr__l .fr__q { font-size: .875rem; }
-}
-
-
-.financing1__fig { margin: 18px 0 0; font: 600 .9375rem/1.35 var(--f-text); color: var(--ink); white-space: normal; }
-.financing1__per { margin-top: 0; font-size: .9375rem; }
-.financing1__sfig { font: 600 .9375rem/1.35 var(--f-text); color: var(--ink); }
-.financing1__kind { font-size: .8125rem; }
-
-.financing3__orb { width: 132px; height: 132px; padding: 16px; font-size: 1rem; box-shadow: 0 0 0 2px var(--ink); }
-@media (hover: hover) and (pointer: fine) { .financing3__orb:hover { box-shadow: 0 0 0 2px var(--a-500); } }
-
-
-
-.frx__rig { position: relative; display: grid; grid-template-columns: minmax(180px, 1fr) 2fr minmax(200px, 1fr); align-items: stretch; min-height: 420px; }
-.frx__src { grid-column: 1; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
-.frx__v {
-  display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 64px;
-  background: color-mix(in srgb, var(--color-surface) 35%, transparent); color: var(--color-text); border: 0; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-shadow) 30%, transparent); cursor: pointer; text-align: left;
-  font: 600 .9375rem/1.2 var(--f-text);
-}
-.frx__v svg { width: 40px; height: 40px; flex: none; overflow: visible; }
-.frx__v .wheel { fill: none; stroke: var(--color-art-accent); stroke-width: 3; }
-.frx__v .hub { fill: var(--color-art-line); }
-.frx__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-border); background: color-mix(in srgb, var(--color-surface) 55%, transparent); }
-.frx__pipes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.frx__pipes .p { fill: none; stroke: var(--color-art-line-soft); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
-.frx__pipes .p-in { fill: none; stroke: var(--color-art-line); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
-.frx__pipes .w { fill: none; stroke: var(--color-art-accent); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 8; opacity: 0; }
-.frx__pipes .j { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 2; }
-.frx__pipes .man { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 2; }
-.frx__dst { grid-column: 3; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: space-between; position: relative; z-index: 1; }
-.frx__l {
-  position: relative; overflow: hidden; display: grid; gap: 2px; padding: 12px 14px; min-height: 64px; align-content: center;
-  background: color-mix(in srgb, var(--color-surface) 45%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-shadow) 30%, transparent); color: var(--color-text);
-}
-.frx__l::before { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--color-art-line-soft) 28%, transparent); transform: scaleY(var(--lvl, 0)); transform-origin: bottom; }
-.frx__l strong, .frx__l span { position: relative; }
-.frx__l strong { font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; }
-.frx__l span { font-size: .8125rem; color: var(--color-text-secondary); font-weight: 600; }
-.frx__l.is-on { box-shadow: inset 0 0 0 2px var(--color-accent-border); }
-.frx__l.is-off { opacity: .45; }
-.frx__why { margin: var(--s6) 0 0; min-height: 3em; max-width: 64ch; color: var(--color-text); font-size: 1.0625rem; }
-.frx__btn { margin-top: var(--s5); }
-@media (max-width: 767px) {
-  .frx__rig { grid-template-columns: 1fr 64px 1fr; min-height: 380px; column-gap: 0; }
-  .frx__v { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; font-size: .8125rem; font-weight: 600; }
-  .frx__v svg { width: 30px; height: 30px; }
-  .frx__l { padding: 10px; }
-  .frx__l strong { font-size: 1.125rem; }
-  .frx__l span { font-size: .6875rem; font-weight: 600; }
-}
-.frx__v { transition: box-shadow 150ms ease, background-color 150ms ease; }
-.frx__v .wheel { stroke: var(--color-art-line); }
-.frx__v .hub { fill: var(--color-surface); }
-.frx__v[aria-checked="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-border); }
-.frx__pipes .p { stroke: color-mix(in srgb, var(--color-shadow) 22%, transparent); stroke-width: 3; }
-.frx__pipes .w { stroke: var(--color-art-accent); stroke-width: 3; stroke-dasharray: none; opacity: 1; animation: frx-in 200ms ease-out both; }
-.frx__l { transition: opacity 200ms ease-out, box-shadow 200ms ease-out; }
-.frx__l::before { content: none; }
-.frx__l.is-on { box-shadow: inset 0 0 0 2px var(--color-accent-border); }
-.frx__l .frx__q { display: block; font-size: .875rem; line-height: 1.45; color: var(--color-text-secondary); margin-top: 6px; font-weight: 600; }
-.frx__rig { grid-template-columns: minmax(180px, 1fr) 1fr minmax(280px, 1.4fr); }
-.frx__note { max-width: 72ch; }
-@media (prefers-reduced-motion: reduce) {
-  .frx__pipes .w { animation: none; }
-  .frx__l, .frx__v { transition: none; }
-}
-.frx__l.is-off { opacity: .62; }
-@media (max-width: 767px) {
-  .frx__rig { grid-template-columns: 1fr 1fr; column-gap: 8px; row-gap: var(--s5); min-height: 0; }
-  .frx__src { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; align-content: start; }
-  .frx__v { flex-direction: row; align-items: center; min-height: 52px; }
-  .frx__pipes { display: none; }
-  .frx__dst { grid-column: 1 / -1; align-content: start; }
-  .frx__l strong { font-size: 1.25rem; }
-  .frx__l .frx__q { font-size: .875rem; font-weight: 600; }
-}
-
-
-
-.f1x__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); align-items: start; }
-.f1x__tk {
-  --py: 220px; --gx: -40%;
-  position: relative; display: grid; grid-template-rows: auto 112px auto;
-  background: var(--color-surface); color: var(--color-text);
-  -webkit-mask: radial-gradient(circle 11px at 0 var(--py), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% var(--py), transparent 98%, #000) right / 51% 100% no-repeat;
-  mask: radial-gradient(circle 11px at 0 var(--py), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 11px at 100% var(--py), transparent 98%, #000) right / 51% 100% no-repeat;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-shadow) 12%, transparent);
-}
-.f1x__tk::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: var(--glare, none); background-size: 260% 260%; background-position: var(--gx, 120%) var(--gx, 120%);
-  mix-blend-mode: screen; opacity: 0; transition: opacity 650ms var(--ease-out);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-shadow) 0%, transparent);
-}
-.f1x__tk.is-glare::after { opacity: 1; animation: fin1-rim 650ms var(--ease-out); }
-.f1x__main { padding: 22px 20px 18px; border-bottom: 2px dashed color-mix(in srgb, var(--color-shadow) 40%, transparent); min-width: 0; }
-.f1x__name { margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: -.005em; }
-.f1x__kind { margin: 6px 0 0; font: 600 .75rem/1.3 var(--f-text); color: var(--color-text); }
-.f1x__fig { margin: 18px 0 0; font: 400 clamp(3rem, 2rem + 2.6vw, 4.5rem)/.9 var(--f-display); letter-spacing: -.005em; white-space: nowrap; }
-.f1x__per { margin: 6px 0 0; font-size: .8125rem; line-height: 1.35; color: var(--color-text-secondary); font-weight: 600; }
-.f1x__stub, .f1x__more { grid-row: 2; grid-column: 1; padding: 16px 20px; display: grid; align-content: center; }
-.f1x__stub { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 4%, transparent) 0 6px, transparent 6px 12px); }
-.f1x__sfig { margin: 0; font: 400 2rem/1 var(--f-display); color: var(--color-accent-text); }
-.f1x__sper { margin: 4px 0 0; font-size: .8125rem; color: var(--color-text-secondary); font-weight: 600; }
-.f1x__more { font-size: .9375rem; line-height: 1.5; font-weight: 400; }   
-.f1x__more p { margin: 0; }
-.js .f1x__more { visibility: hidden; }
-.f1x__tk.is-torn .f1x__more { visibility: visible; }
-.f1x__tear {
-  grid-row: 3; margin: 0 20px 18px; min-height: 44px; padding: 0 14px;
-  background: var(--color-surface); color: var(--color-text); border: 0; font: 600 .875rem/1 var(--f-text); cursor: pointer;
-}
-.f1x__tear .rx { color: var(--color-accent-text); }
-@media (max-width: 1023px) {
-  .f1x__row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 560px) {
-  .f1x__row { grid-template-columns: 1fr; }
-}
-.f1x__fig { margin: 18px 0 0; font: 600 .9375rem/1.35 var(--f-text); color: var(--color-text); white-space: normal; }
-.f1x__per { margin-top: 0; font-size: .9375rem; font-weight: 400; }
-.f1x__sfig { font: 600 .9375rem/1.35 var(--f-text); color: var(--color-text); }
-.f1x__kind { font-size: .8125rem; font-weight: 600; }
-
-
-
-.f3x__wrap { display: grid; gap: var(--s7); }
-.f3x__intro { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
-.f3x__intro .t-head { grid-column: 1 / span 6; }
-.f3x__intro .financing__lead { grid-column: 8 / span 5; }
-.f3x__stage { position: relative; display: grid; place-items: center; min-height: 420px; }
-.f3x__ground {
-  position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr;
-  background: var(--color-surface); color: var(--color-text);
-  background-image: linear-gradient(color-mix(in srgb, var(--color-surface) 6%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-surface) 6%, transparent) 1px, transparent 1px);
-  background-size: 24px 24px;
-  box-shadow: none;
-}
-.f3x__ground::after { content: ""; position: absolute; left: 50%; top: 22px; bottom: 22px; border-left: 1.5px dashed color-mix(in srgb, var(--color-shadow) 45%, transparent); }
-.f3x__half { padding: clamp(28px, 4vw, 56px); display: grid; align-content: space-between; }
-.f3x__half:last-child { text-align: right; }
-.f3x__gk { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.005em; }
-.f3x__half:first-child .f3x__gk { border-top: 3px solid var(--color-border-strong); padding-top: 12px; }
-.f3x__half:last-child .f3x__gk { border-top: 3px solid var(--color-art-accent); padding-top: 12px; }
-.f3x__gn { margin: 0; font: 600 .9375rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.f3x__stage:has(.f3x__orb[aria-expanded="true"]) .f3x__ground { visibility: hidden; }
-.f3x__gl { margin: 0; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text); letter-spacing: .02em; }
-.f3x__orb {
-  position: relative; z-index: 1;
-  width: 240px; height: 240px; border-radius: 50%; border: 0; padding: 30px;
-  background: var(--color-surface); color: var(--color-text); cursor: pointer;
-  box-shadow: 0 0 0 2px var(--color-border-strong), 0 0 0 12px color-mix(in srgb, var(--color-accent-solid) 14%, transparent);
-  font: 400 1.75rem/1.05 var(--f-display); letter-spacing: -.005em;
-}
-@media (hover: hover) and (pointer: fine) {
-  .f3x__orb:hover { box-shadow: 0 0 0 2px var(--color-accent-border), 0 0 0 18px color-mix(in srgb, var(--color-accent-solid) 20%, transparent); }
-}
-.f3x__sheet {
-  position: relative; width: 100%; padding: clamp(28px, 4vw, 52px);
-  background: var(--color-surface); color: var(--color-text);
-  background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 2.5%, transparent) 0 2px, transparent 2px 14px);
-}
-.f3x__br { position: absolute; width: 22px; height: 22px; border: 0 solid var(--color-border-strong); }
-.f3x__br--tl { left: 12px; top: 12px; border-width: 2px 0 0 2px; }
-.f3x__br--tr { right: 12px; top: 12px; border-width: 2px 2px 0 0; }
-.f3x__br--bl { left: 12px; bottom: 12px; border-width: 0 0 2px 2px; }
-.f3x__br--br { right: 12px; bottom: 12px; border-width: 0 2px 2px 0; }
-.f3x__close { position: absolute; z-index: 3; right: 22px; top: 22px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: var(--color-text); cursor: pointer; }
-.f3x__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
-.f3x__col { border-top: 3px solid var(--color-border-strong); padding-top: 16px; }
-.f3x__k { margin: 0 0 12px; font: 400 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: -.005em; }
-.f3x__col dl { margin: 0; display: grid; gap: 14px; }
-.f3x__col dt { font: 700 .9375rem/1.2 var(--f-text); }
-.f3x__col dd { margin: 4px 0 0; font-size: .9375rem; line-height: 1.45; color: var(--color-text-secondary); }
-.f3x__fit { margin: 16px 0 0; font: 600 .875rem/1.4 var(--f-text); color: var(--color-text); }
-.f3x__foot { margin-top: clamp(24px, 3vw, 40px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); padding-top: 18px; border-top: 1px dashed color-mix(in srgb, var(--color-shadow) 35%, transparent); }
-.f3x__foot p { margin: 0; font-size: .875rem; color: var(--color-text-secondary); max-width: 52ch; font-weight: 600; }
-.f3x__btn { background: var(--color-surface); color: var(--color-text); }
-.f3x__btn .rx { color: var(--color-text); }
-@media (max-width: 1023px) {
-  .f3x__intro .t-head, .f3x__intro .financing__lead { grid-column: 1 / -1; }
-  .f3x__intro .financing__lead { margin-top: var(--s4); }
-}
-@media (max-width: 767px) {
-  .f3x__sheet { padding-top: 76px; }
-  .f3x__cols { grid-template-columns: 1fr; }
-  .f3x__orb { width: 128px; height: 128px; padding: 18px; font-size: 1.125rem; justify-self: end; margin-right: 14px; }
-  .f3x__stage { min-height: 440px; }
-  .f3x__ground { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
-  .f3x__ground::after { left: 22px; right: 22px; top: 50%; bottom: auto; border-left: 0; border-top: 1.5px dashed color-mix(in srgb, var(--color-shadow) 45%, transparent); }
-  .f3x__half { padding: 24px 150px 24px 22px; }
-  .f3x__half:last-child { text-align: left; }
-}
-.f3x__orb { width: 132px; height: 132px; padding: 16px; font-size: 1rem; box-shadow: 0 0 0 2px var(--color-border-strong); }
-@media (hover: hover) and (pointer: fine) {
-  .f3x__orb:hover { box-shadow: 0 0 0 2px var(--color-accent-border); }
-}
-
-
-.fcard { padding: 16px 18px; border-radius: 14px; background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-border-strong); }
-.fcard h3, .frd__card h3 { margin: 0 0 6px; font: 700 1.25rem/1.1 var(--f-display); }
-.fcard p, .frd__card p { margin: 0; font: 400 .9375rem/1.45 var(--f-text); }
-.fsp__head, .fen__head, .fsl__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s6); }
-.fsp__lead, .fqz__lead, .frd__lead, .fen__lead, .fsl__lead { color: var(--color-text-secondary); }
-
-
-.fsp__stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); padding-top: 150px; }
-.fsp__post { position: absolute; left: 50%; top: 0; width: 18px; height: 150px; margin-left: -9px; background: var(--color-bg-muted); border: 3px solid var(--color-border-strong); border-radius: 4px; }
-.fsp__arm { position: absolute; top: 24px; min-height: 52px; padding: 0 26px; border: 3px solid var(--color-border-strong); background: var(--color-surface); font: 700 1rem/1 var(--f-display); cursor: pointer; transition: transform 300ms var(--ease-out), background-color 160ms ease-out; }
-.fsp__arm--l { right: calc(50% + 9px); clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%); transform-origin: right center; transform: rotate(-6deg); }
-.fsp__arm--r { left: calc(50% + 9px); top: 84px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); transform-origin: left center; transform: rotate(6deg); }
-.fsp__arm[aria-pressed="true"] { background: var(--color-accent-solid); transform: rotate(0); color: var(--color-text-on-accent); }
-.fsp__road { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
-@media (max-width: 767px) { .fsp__arm { position: static; transform: none !important; clip-path: none; border-radius: 10px; margin-bottom: 8px; } .fsp__stage { padding-top: 0; grid-template-columns: 1fr; } .fsp__post { display: none; } .fsp__road { grid-template-columns: 1fr; } }
-
-
-.fqz__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.fqz__side { grid-column: 1 / span 5; display: grid; gap: 16px; }
-.fqz__q { border: 0; margin: 0; padding: 0; } .fqz__q legend { padding: 0; margin-bottom: 8px; font: 600 .9375rem/1.3 var(--f-text); }
-.fqz__opts { display: flex; flex-wrap: wrap; gap: 8px; }
-.fqz__opts button { min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--color-surface); box-shadow: inset 0 0 0 2px var(--color-border-strong); font: 600 .875rem/1 var(--f-text); cursor: pointer; }
-.fqz__opts button[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
-.fqz__res { grid-column: 7 / -1; display: grid; gap: 14px; }
-.fqz__why { margin: 0; min-height: 3em; font: 400 1rem/1.5 var(--f-text); }
-.fqz__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.fqz__c { transition: opacity 200ms ease-out, box-shadow 200ms ease-out; } .fqz__c.is-off { opacity: .45; } .fqz__c.is-on { box-shadow: 0 0 0 3px var(--color-accent-border); }
-@media (max-width: 1023px) { .fqz__side, .fqz__res { grid-column: 1 / -1; } .fqz__res { margin-top: var(--s5); } }
-
-
-.frd__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.frd__side { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; }
-.frd__acts { display: flex; gap: 10px; flex-wrap: wrap; }
-.frd__file { grid-column: 7 / -1; position: relative; height: 380px; perspective: 1200px; }
-.frd__drum { position: absolute; left: 8%; right: 8%; top: 20px; height: 260px; transform-style: preserve-3d; }
-.frd__card { position: absolute; inset: 0; padding: 26px 28px; border-radius: 14px; background: var(--color-surface); box-shadow: 0 0 0 3px var(--color-border-strong); transform-origin: 50% 120%; transition: transform 420ms var(--ease-out), opacity 300ms ease-out; backface-visibility: hidden; }
-.frd__card::before { content: ""; position: absolute; left: 30%; right: 30%; bottom: 16px; height: 18px; border-radius: 9px; box-shadow: inset 0 0 0 3px var(--color-border-strong); }
-.frd__card h3 { font-size: 1.75rem; color: var(--color-text-secondary); }
-.frd__base { position: absolute; left: 4%; right: 4%; bottom: 20px; height: 70px; border-radius: 18px; background: var(--color-bg-muted); border: 3px solid var(--color-border-strong); color: var(--color-text); }
-@media (max-width: 1023px) { .frd__side, .frd__file { grid-column: 1 / -1; } }
-@media (prefers-reduced-motion: reduce) { .frd__card { transition: none; } }
-
-
-.fen__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: start; margin-bottom: var(--s5); }
-.fen__open { width: 100%; padding: 0; border: 0; background: none; cursor: pointer; display: grid; gap: 8px; justify-items: center; font: 700 1.25rem/1 var(--f-display); }
-.fen__open svg { width: min(320px, 100%); height: auto; overflow: visible; }
-.fen__open .b { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 4; } .fen__open .fl { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 4; stroke-linejoin: round; transform-origin: 150px 44px; transition: transform 300ms var(--ease-out); } .fen__open .ln { stroke: var(--color-art-line-soft); stroke-width: 6; stroke-linecap: round; }
-.fen__open[aria-expanded="true"] .fl { transform: scaleY(-1); fill: var(--color-art-accent); }
-.fen__in { display: grid; gap: 12px; margin-top: 12px; }
-@media (max-width: 767px) { .fen__row { grid-template-columns: 1fr; } }
-
-
-.fsl__poles { display: flex; justify-content: space-between; font: 700 1.125rem/1.2 var(--f-display); }
-.fsl__r { width: 100%; min-height: 44px; accent-color: var(--color-accent-solid); margin: 6px 0 18px; }
-.fsl__cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin-bottom: var(--s5); }
-.fsl__side { display: grid; gap: 12px; transition: opacity 200ms ease-out, transform 260ms var(--ease-out); }
-.fsl__side.is-near .fcard { box-shadow: 0 0 0 3px var(--color-border-strong); background: var(--color-bg-subtle); }
-.fsl__side.is-far { opacity: .45; }
-@media (max-width: 767px) { .fsl__cards { grid-template-columns: 1fr; } }
-.frd__card[aria-hidden="true"] > * { visibility: hidden; }
-
-
-.frx__l.is-off { opacity: 1; box-shadow: inset 0 0 0 1.5px var(--color-border); outline: 1.5px dashed var(--color-focus-ring); outline-offset: -6px; }
-.frx__l.is-off strong { color: var(--color-text-secondary); }
 
 
 .work__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
@@ -3526,364 +3184,163 @@ html.has-buddy select { cursor: default !important; }
   </div>
 </section>
 
-<section id="financing" class="sec financing g-field" data-section="financing" aria-labelledby="financing-h1">
+<section id="financing" class="sec financing g-field" data-section="financing" aria-labelledby="financing-h">
+  
 
   
-  
-  
-  <div class="ver frx" data-v="1">
-    <div class="wrap">
-      <div class="financing__head">
+  <div class="ver rf" data-v="1">
+    <div class="wrap rf__grid">
+      <div class="rf__side">
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h2-w-i">Which partner <span class="acc">fits your project?</span></h2>
-        <p class="t-lead financing__lead">Pick your project. The partners that usually fit it light up, with the reason underneath.</p>
-      </div>
-      <div class="frx__rig">
-        <div class="frx__src" role="radiogroup" aria-label="Your project">
-          <button type="button" role="radio" aria-checked="false" class="frx__v" data-r="0" data-rx="~hood/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Kitchen</span></button>
-          <button type="button" role="radio" aria-checked="false" class="frx__v" data-r="1" data-rx="~shower/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Bathroom</span></button>
-          <button type="button" role="radio" aria-checked="false" class="frx__v" data-r="2" data-rx="~window/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Roof, windows or doors</span></button>
-          <button type="button" role="radio" aria-checked="false" class="frx__v" data-r="3" data-rx="~house/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Whole home</span></button>
-        </div>
-        <svg class="frx__pipes" aria-hidden="true" focusable="false"></svg>
-        <ul class="frx__dst" role="list">
-          <li class="frx__l" data-l="0"><strong>Synchrony</strong><span class="frx__q">Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</span></li>
-          <li class="frx__l" data-l="1"><strong>Service Finance</strong><span class="frx__q">Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS 140908.</span></li>
-          <li class="frx__l" data-l="2"><strong>Ygrene</strong><span class="frx__q">Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</span></li>
-          <li class="frx__l" data-l="3"><strong>Renew Financial</strong><span class="frx__q">RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS 1788120.</span></li>
-        </ul>
-      </div>
-      <p class="frx__why" aria-live="polite"></p>
-      <a class="btn frx__btn" href="#consult" data-rx="~speech/hoist/ring/r"><span class="btn__label">Talk it through with us</span></a>
-      <p class="financing__note frx__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver f1x" data-v="2" hidden>
-    <div class="wrap">
-      <div class="financing__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h1-i">Four financing partners, <span class="acc">not one.</span></h2>
-        <p class="t-lead financing__lead">Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.</p>
-      </div>
-      <div class="f1x__row">
-        <article class="f1x__tk" data-card>
-          <div class="f1x__main">
-            <h3 class="f1x__name">Synchrony</h3>
-            <p class="f1x__kind">Project Card, revolving credit</p>
-            <p class="f1x__fig nums">6&ndash;132</p>
-            <p class="f1x__per">months of special financing, as Synchrony publishes it</p>
+        <h2 class="t-head" id="financing-h">Which partner <span class="acc">fits your project?</span></h2>
+        <p class="t-lead rf__lead">Pick what you are building. The road draws to the partners that usually fit it, with the reason underneath.</p>
+        <fieldset class="rf__ask">
+          <legend class="rf__q">What are you building?</legend>
+          <p class="rf__grp" aria-hidden="true">Inside the home</p>
+          <div class="rf__opts">
+            <label class="rf__o"><input type="radio" name="rf-kind" value="kitchen"><span>Kitchen</span></label>
+            <label class="rf__o"><input type="radio" name="rf-kind" value="bath"><span>Bathroom</span></label>
+            <label class="rf__o"><input type="radio" name="rf-kind" value="floor"><span>Flooring</span></label>
           </div>
-          <div class="f1x__stub"><p class="f1x__sfig nums">1</p><p class="f1x__sper">card, reusable across projects</p></div>
-          <div class="f1x__more" id="fin1-m0-i"><p>Useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.</p></div>
-          <button type="button" class="f1x__tear" aria-expanded="false" aria-controls="fin1-m0-i" data-rx="~card/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-        <article class="f1x__tk" data-card>
-          <div class="f1x__main">
-            <h3 class="f1x__name">Service Finance</h3>
-            <p class="f1x__kind">Fixed installment loan · NMLS <span class="nums">140908</span></p>
-            <p class="f1x__fig nums">30</p>
-            <p class="f1x__per">days after completion until the first payment</p>
+          <p class="rf__grp" aria-hidden="true">Outside and energy</p>
+          <div class="rf__opts">
+            <label class="rf__o"><input type="radio" name="rf-kind" value="roof"><span>Roof, windows or doors</span></label>
+            <label class="rf__o"><input type="radio" name="rf-kind" value="hvac"><span>HVAC or storm protection</span></label>
           </div>
-          <div class="f1x__stub"><p class="f1x__sfig nums">0</p><p class="f1x__sper">pre-payment penalty</p></div>
-          <div class="f1x__more" id="fin1-m1-i"><p>A natural fit for a defined, single-trade scope where the number does not move once it is set. NMLS <span class="nums">140908</span>.</p></div>
-          <button type="button" class="f1x__tear" aria-expanded="false" aria-controls="fin1-m1-i" data-rx="~coin/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-        <article class="f1x__tk" data-card>
-          <div class="f1x__main">
-            <h3 class="f1x__name">Ygrene</h3>
-            <p class="f1x__kind">Florida PACE, not a loan</p>
-            <p class="f1x__fig nums">20</p>
-            <p class="f1x__per">year maximum published residential term</p>
+          <div class="rf__opts rf__opts--ns">
+            <label class="rf__o rf__o--ns"><input type="radio" name="rf-kind" value="unsure"><span>Not sure yet</span></label>
           </div>
-          <div class="f1x__stub"><p class="f1x__sfig">Tax bill</p><p class="f1x__sper">repaid with your property taxes</p></div>
-          <div class="f1x__more" id="fin1-m2-i"><p>Soft credit pull. Florida categories include roofing, windows and doors, HVAC, storm protection, insulation and solar.</p></div>
-          <button type="button" class="f1x__tear" aria-expanded="false" aria-controls="fin1-m2-i" data-rx="~leaf/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-        <article class="f1x__tk" data-card>
-          <div class="f1x__main">
-            <h3 class="f1x__name">Renew Financial</h3>
-            <p class="f1x__kind">RenewPACE assessment · NMLS <span class="nums">1788120</span></p>
-            <p class="f1x__fig nums">$250K</p>
-            <p class="f1x__per">published maximum, up to 20% of property value</p>
-          </div>
-          <div class="f1x__stub"><p class="f1x__sfig nums">$0</p><p class="f1x__sper">application fee</p></div>
-          <div class="f1x__more" id="fin1-m3-i"><p>Live across Miami&#8209;Dade, Broward and Palm Beach. NMLS <span class="nums">1788120</span>.</p></div>
-          <button type="button" class="f1x__tear" aria-expanded="false" aria-controls="fin1-m3-i" data-rx="~house2/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-      </div>
-      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver f3x" data-v="3" hidden>
-    <div class="wrap f3x__wrap">
-      <div class="f3x__intro">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h3-i">Prefer to <span class="acc">pay monthly?</span></h2>
-        <p class="t-lead financing__lead">Revolving credit, fixed installments, or repayment through your property tax bill. They are genuinely different products.</p>
-      </div>
-      <div class="f3x__stage">
-        <div class="f3x__ground" aria-hidden="true">
-          <i class="f3x__br f3x__br--tl"></i><i class="f3x__br f3x__br--tr"></i><i class="f3x__br f3x__br--bl"></i><i class="f3x__br f3x__br--br"></i>
-          <div class="f3x__half"><p class="f3x__gk">Consumer credit</p><p class="f3x__gn">Synchrony &middot; Service Finance</p><p class="f3x__gl">Paid monthly to the lender</p></div>
-          <div class="f3x__half"><p class="f3x__gk">Property&#8209;assessed</p><p class="f3x__gn">Ygrene &middot; Renew Financial</p><p class="f3x__gl">Repaid with property taxes</p></div>
-        </div>
-        <button type="button" class="f3x__orb" aria-expanded="false" aria-controls="fin3-sheet-i" data-rx="native:morph"><span class="f3x__orb-t">See the two kinds of money</span></button>
-        <div class="f3x__sheet" id="fin3-sheet-i" role="region" aria-label="Financing partners by kind" hidden>
-          <i class="f3x__br f3x__br--tl"></i><i class="f3x__br f3x__br--tr"></i><i class="f3x__br f3x__br--bl"></i><i class="f3x__br f3x__br--br"></i>
-          <button type="button" class="f3x__close" aria-label="Fold the sheet away" data-rx="~xbrace/pop/spinout/l"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-          <div class="f3x__cols">
-            <div class="f3x__col">
-              <p class="f3x__k">Consumer credit</p>
-              <dl>
-                <div><dt>Synchrony</dt><dd>Project Card, revolving. <span class="nums">6&ndash;132</span> months of special financing as published. One card, reusable across projects.</dd></div>
-                <div><dt>Service Finance</dt><dd>Fixed installment loan. First payment <span class="nums">30</span> days after completion. No pre-payment penalty.</dd></div>
-              </dl>
-              <p class="f3x__fit">The usual route for kitchens and bathrooms.</p>
-            </div>
-            <div class="f3x__col">
-              <p class="f3x__k">Property-assessed (PACE)</p>
-              <dl>
-                <div><dt>Ygrene</dt><dd>Not a loan: repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term. Soft credit pull.</dd></div>
-                <div><dt>Renew Financial</dt><dd>RenewPACE. Up to <span class="nums">$250K</span> published, and up to 20% of property value. No application fee.</dd></div>
-              </dl>
-              <p class="f3x__fit">For qualifying improvements such as roofing, impact windows and storm protection.</p>
-            </div>
-          </div>
-          <div class="f3x__foot">
-            <p>Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-            <a class="btn f3x__btn" href="#consult" data-rx="~ruler/rail/tick/r"><span class="btn__label">Ask which fits your project</span></a>
-          </div>
+        </fieldset>
+        <p class="rf__why" aria-live="polite">Pick one, and the road shows which of the four partners usually fit.</p>
+        <div class="rf__act">
+          <a class="btn" href="#consult"><span class="btn__label">Talk it through with us</span></a>
+          <p class="rf__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
         </div>
       </div>
+
+      <div class="rf__map" aria-hidden="true">
+        <svg class="rf__svg" viewBox="0 0 640 540" focusable="false">
+          <g class="rf__lots">
+            <path class="rf__lot" d="M28 36 H292 V176 H28 Z"/>
+            <path class="rf__lot" d="M348 36 H612 V176 H348 Z"/>
+            <text class="rf__lotn" x="40" y="62">Consumer credit</text>
+            <text class="rf__lotn" x="360" y="62">Property-assessed</text>
+          </g>
+          <g class="rf__roads">
+            <path class="rf__edge" d="M304 482 V318 C304 262 160 262 160 196 M336 482 V318 C336 262 480 262 480 196"/>
+            <path class="rf__edge" d="M304 318 C304 286 336 286 336 318"/>
+            <path class="rf__mid" d="M320 482 V312 C320 252 160 252 160 176 M320 312 C320 252 480 252 480 176"/>
+            <path class="rf__spur" d="M160 176 L96 128 M160 176 L224 128 M480 176 L416 128 M480 176 L544 128"/>
+          </g>
+          <g class="rf__posts">
+            <g class="rf__post" data-p="syn"><path class="rf__pole" d="M96 128 V88"/><rect class="rf__board" x="42" y="78" width="108" height="26" rx="3"/><text class="rf__bt" x="96" y="96">Synchrony</text></g>
+            <g class="rf__post" data-p="sfc"><path class="rf__pole" d="M224 128 V88"/><rect class="rf__board" x="164" y="78" width="120" height="26" rx="3"/><text class="rf__bt" x="224" y="96">Service Finance</text></g>
+            <g class="rf__post" data-p="ygr"><path class="rf__pole" d="M416 128 V88"/><rect class="rf__board" x="364" y="78" width="104" height="26" rx="3"/><text class="rf__bt" x="416" y="96">Ygrene</text></g>
+            <g class="rf__post" data-p="rnw"><path class="rf__pole" d="M544 128 V88"/><rect class="rf__board" x="486" y="78" width="116" height="26" rx="3"/><text class="rf__bt" x="544" y="96">RenewPACE</text></g>
+          </g>
+          <g class="rf__routes">
+            <path class="rf__route" data-p="syn" d="M320 482 V312 C320 252 160 252 160 176 L96 128"/>
+            <path class="rf__route" data-p="sfc" d="M320 482 V312 C320 252 160 252 160 176 L224 128"/>
+            <path class="rf__route" data-p="ygr" d="M320 482 V312 C320 252 480 252 480 176 L416 128"/>
+            <path class="rf__route" data-p="rnw" d="M320 482 V312 C320 252 480 252 480 176 L544 128"/>
+          </g>
+          <g class="rf__home">
+            <path class="rf__hw" d="M286 530 V496 H354 V530 Z"/>
+            <path class="rf__hr" d="M276 500 L320 470 L364 500"/>
+            <path class="rf__hd" d="M312 530 V510 H328 V530"/>
+            <text class="rf__ht" x="372" y="522">Your project</text>
+          </g>
+        </svg>
+      </div>
     </div>
+
+    <ul class="wrap rf__cards" role="list">
+      <li class="rf__c" data-p="syn">
+        <p class="rf__ck">Consumer credit</p>
+        <h3 class="rf__cn">Synchrony</h3>
+        <p class="rf__cw">Project Card, revolving credit</p>
+        <p class="rf__fig"><span class="rf__n nums">6&ndash;132</span><span class="rf__fl">Published special-financing term range, in months</span></p>
+        <p class="rf__cx"><span class="nums">1</span> card, reusable across projects</p>
+        <p class="rf__by">As published by Synchrony</p>
+        <span class="rf__fit sr-only"></span>
+      </li>
+      <li class="rf__c" data-p="sfc">
+        <p class="rf__ck">Consumer credit</p>
+        <h3 class="rf__cn">Service Finance Company</h3>
+        <p class="rf__cw">Fixed installment loan</p>
+        <p class="rf__fig"><span class="rf__n nums">30</span><span class="rf__fl">Days after completion until the first payment</span></p>
+        <p class="rf__cx"><span class="nums">0</span> pre-payment penalty</p>
+        <p class="rf__by">As published by Service Finance Company, NMLS 140908</p>
+        <span class="rf__fit sr-only"></span>
+      </li>
+      <li class="rf__c" data-p="ygr">
+        <p class="rf__ck">Property-assessed</p>
+        <h3 class="rf__cn">Ygrene</h3>
+        <p class="rf__cw">Florida PACE, not a loan, repaid with property taxes</p>
+        <p class="rf__fig"><span class="rf__n nums">20</span><span class="rf__fl">Year maximum published residential term</span></p>
+        <p class="rf__cx">Soft credit pull</p>
+        <p class="rf__by">As published by Ygrene</p>
+        <span class="rf__fit sr-only"></span>
+      </li>
+      <li class="rf__c" data-p="rnw">
+        <p class="rf__ck">Property-assessed</p>
+        <h3 class="rf__cn">Renew Financial</h3>
+        <p class="rf__cw">RenewPACE, repaid with property taxes</p>
+        <p class="rf__fig"><span class="rf__n nums">$250K</span><span class="rf__fl">Published maximum, and up to 20% of property value</span></p>
+        <p class="rf__cx">No application fee</p>
+        <p class="rf__by">As published by Renew Financial, NMLS 1788120</p>
+        <span class="rf__fit sr-only"></span>
+      </li>
+    </ul>
   </div>
 
   
-  <div class="ver fsp" data-v="4" hidden>
+  <div class="ver km" data-v="2" hidden>
     <div class="wrap">
-      <div class="fsp__head"><p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h4">Two roads <span class="acc">to the same job.</span></h2>
-        <p class="t-lead fsp__lead">Two partners are consumer credit, two are property-assessed. Pick a road.</p></div>
-      <div class="fsp__stage">
-        <div class="fsp__post" aria-hidden="true"></div>
-        <button type="button" class="fsp__arm fsp__arm--l" aria-pressed="true" data-r="cc" data-rx="native:sign-arm">Paid monthly to the lender</button>
-        <button type="button" class="fsp__arm fsp__arm--r" aria-pressed="false" data-r="pa" data-rx="native:sign-arm">Repaid with property taxes</button>
-        <div class="fsp__road fsp__road--cc"><div class="fcard"><h3>Synchrony</h3><p>Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</p></div><div class="fcard"><h3>Service Finance</h3><p>Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS <span class="nums">140908</span>.</p></div></div>
-        <div class="fsp__road fsp__road--pa" hidden><div class="fcard"><h3>Ygrene</h3><p>Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</p></div><div class="fcard"><h3>Renew Financial</h3><p>RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS <span class="nums">1788120</span>.</p></div></div>
-      </div>
-      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver fqz" data-v="5" hidden>
-    <div class="wrap fqz__grid">
-      <div class="fqz__side"><p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h5">Two questions, <span class="acc">a short list.</span></h2>
-        <p class="t-lead fqz__lead">Answer both and the partners that usually fit your project stay lit.</p>
-        <fieldset class="fqz__q"><legend>1. What are you building?</legend><div class="fqz__opts" data-q="p"><button type="button" aria-pressed="true" data-o="0" data-rx="native:quiz-opt">Kitchen</button><button type="button" aria-pressed="false" data-o="1" data-rx="native:quiz-opt">Bathroom</button><button type="button" aria-pressed="false" data-o="2" data-rx="native:quiz-opt">Roof, windows or doors</button><button type="button" aria-pressed="false" data-o="3" data-rx="native:quiz-opt">Whole home</button></div></fieldset>
-        <fieldset class="fqz__q"><legend>2. How would you rather repay?</legend><div class="fqz__opts" data-q="r"><button type="button" aria-pressed="true" data-o="any" data-rx="native:quiz-opt">No preference</button><button type="button" aria-pressed="false" data-o="cc" data-rx="native:quiz-opt">Monthly to a lender</button><button type="button" aria-pressed="false" data-o="pa" data-rx="native:quiz-opt">With property taxes</button></div></fieldset>
-      </div>
-      <div class="fqz__res"><p class="fqz__why" aria-live="polite"></p><div class="fqz__cards"><div class="fcard fqz__c"><h3>Synchrony</h3><p>Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</p></div><div class="fcard fqz__c"><h3>Service Finance</h3><p>Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS <span class="nums">140908</span>.</p></div><div class="fcard fqz__c"><h3>Ygrene</h3><p>Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</p></div><div class="fcard fqz__c"><h3>Renew Financial</h3><p>RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS <span class="nums">1788120</span>.</p></div></div><p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p></div>
-    </div>
-  </div>
-
-  
-  <div class="ver frd" data-v="6" hidden>
-    <div class="wrap frd__grid">
-      <div class="frd__side"><p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h6">Flip through <span class="acc">the partners.</span></h2>
-        <p class="t-lead frd__lead">Four cards on one file. Each card says what the partner publishes.</p>
-        <div class="frd__acts"><button type="button" class="btn btn--ghost frd__prev" data-rx="~arrowL/roll/shake/l"><span class="btn__label">Previous card</span></button><button type="button" class="btn frd__next" data-rx="~arrowR/roll/hop/r"><span class="btn__label">Next card</span></button></div>
-        <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-      </div>
-      <div class="frd__file" aria-live="polite"><div class="frd__drum"><div class="frd__card"><h3>Synchrony</h3><p>Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</p></div><div class="frd__card"><h3>Service Finance</h3><p>Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS <span class="nums">140908</span>.</p></div><div class="frd__card"><h3>Ygrene</h3><p>Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</p></div><div class="frd__card"><h3>Renew Financial</h3><p>RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS <span class="nums">1788120</span>.</p></div></div><div class="frd__base" aria-hidden="true"></div></div>
-    </div>
-  </div>
-
-  
-  <div class="ver fen" data-v="7" hidden>
-    <div class="wrap">
-      <div class="fen__head"><p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h7">Which bill <span class="acc">would you rather get?</span></h2>
-        <p class="t-lead fen__lead">Consumer credit arrives as a monthly statement. PACE is repaid with your property taxes. Open either one.</p></div>
-      <div class="fen__row">
-        <div class="fen__env"><button type="button" class="fen__open" aria-expanded="false" aria-controls="fen-a" data-rx="native:envelope-open"><svg viewBox="0 0 300 200" aria-hidden="true"><rect class="b" x="4" y="40" width="292" height="156" rx="10"/><path class="fl" d="M4 44 L150 130 L296 44"/><path class="ln" d="M30 160 H150 M30 176 H110"/></svg><span>Monthly statement</span></button><div class="fen__in" id="fen-a" hidden><div class="fcard"><h3>Synchrony</h3><p>Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</p></div><div class="fcard"><h3>Service Finance</h3><p>Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS <span class="nums">140908</span>.</p></div></div></div>
-        <div class="fen__env"><button type="button" class="fen__open" aria-expanded="false" aria-controls="fen-b" data-rx="native:envelope-open"><svg viewBox="0 0 300 200" aria-hidden="true"><rect class="b" x="4" y="40" width="292" height="156" rx="10"/><path class="fl" d="M4 44 L150 130 L296 44"/><path class="ln" d="M30 160 H150 M30 176 H110"/></svg><span>Property tax bill</span></button><div class="fen__in" id="fen-b" hidden><div class="fcard"><h3>Ygrene</h3><p>Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</p></div><div class="fcard"><h3>Renew Financial</h3><p>RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS <span class="nums">1788120</span>.</p></div></div></div>
-      </div>
-      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver fsl" data-v="8" hidden>
-    <div class="wrap">
-      <div class="fsl__head"><p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h8">Monthly, <span class="acc">or with your taxes.</span></h2>
-        <p class="t-lead fsl__lead">Slide toward the way you would rather repay. The partners on that side come forward.</p></div>
-      <div class="fsl__poles"><span>Monthly to a lender</span><span>With property taxes</span></div>
-      <input class="fsl__r" type="range" min="0" max="100" value="50" aria-label="How you would rather repay" aria-valuetext="No preference" data-rx="native:pole-slide">
-      <div class="fsl__cards"><div class="fsl__side fsl__side--cc"><div class="fcard"><h3>Synchrony</h3><p>Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</p></div><div class="fcard"><h3>Service Finance</h3><p>Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS <span class="nums">140908</span>.</p></div></div><div class="fsl__side fsl__side--pa"><div class="fcard"><h3>Ygrene</h3><p>Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</p></div><div class="fcard"><h3>Renew Financial</h3><p>RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS <span class="nums">1788120</span>.</p></div></div></div>
-      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
-
-  <div class="ver fr" data-v="b2" hidden>
-    <div class="wrap">
-      <div class="financing__head">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h2-w">Which partner <span class="acc">fits your project?</span></h2>
-        <p class="t-lead financing__lead">Pick your project. The partners that usually fit it light up, with the reason underneath.</p>
-      </div>
-      <div class="fr__rig">
-        <div class="fr__src" role="radiogroup" aria-label="Your project">
-          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="0" data-rx="~hood/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Kitchen</span></button>
-          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="1" data-rx="~shower/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Bathroom</span></button>
-          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="2" data-rx="~window/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Roof, windows or doors</span></button>
-          <button type="button" role="radio" aria-checked="false" class="fr__v" data-r="3" data-rx="~house/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Whole home</span></button>
+      <div class="km__head">
+        <div>
+          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+          <h2 class="t-head" id="financing-h-2">Two kinds of money. <span class="acc">Four partners.</span></h2>
         </div>
-        <svg class="fr__pipes" aria-hidden="true" focusable="false"></svg>
-        <ul class="fr__dst" role="list">
-          <li class="fr__l" data-l="0"><strong>Synchrony</strong><span class="fr__q">Revolving Project Card. <span class="nums">6&ndash;132</span> months of special financing as published, one card reusable across projects.</span></li>
-          <li class="fr__l" data-l="1"><strong>Service Finance</strong><span class="fr__q">Fixed installment loan. First payment <span class="nums">30</span> days after completion, no pre-payment penalty. NMLS 140908.</span></li>
-          <li class="fr__l" data-l="2"><strong>Ygrene</strong><span class="fr__q">Florida PACE, repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term, soft credit pull.</span></li>
-          <li class="fr__l" data-l="3"><strong>Renew Financial</strong><span class="fr__q">RenewPACE. Up to <span class="nums">$250K</span> published and up to 20% of property value, no application fee. NMLS 1788120.</span></li>
-        </ul>
+        <p class="t-lead km__lead">Revolving credit, fixed installments, or repayment through your property tax bill. They are genuinely different products.</p>
       </div>
-      <p class="fr__why" aria-live="polite"></p>
-      <a class="btn fr__btn" href="#consult" data-rx="~speech/hoist/ring/r"><span class="btn__label">Talk it through with us</span></a>
-      <p class="financing__note fr__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
 
-  <div class="ver financing1" data-v="b3" hidden>
-    <div class="wrap">
-      <div class="financing__head">
-        <h2 class="t-head" id="financing-h1">Four financing partners, not one.</h2>
-        <p class="t-lead financing__lead">Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.</p>
+      <div class="km__book">
+        <div class="km__page">
+          <table class="km__t">
+            <caption class="km__cap"><span class="km__kind">Consumer credit</span><span class="km__sub">Synchrony and Service Finance</span></caption>
+            <thead><tr><td class="km__gut"></td><th scope="col">Synchrony</th><th scope="col">Service Finance</th></tr></thead>
+            <tbody>
+              <tr class="km__r"><th scope="row">What it is</th><td>Project Card, revolving credit</td><td>Fixed installment loan</td></tr>
+              <tr class="km__r"><th scope="row">How you repay</th><td>On the card, as revolving credit</td><td>In fixed installments</td></tr>
+              <tr class="km__r km__r--fig"><th scope="row">Published figure</th><td><span class="km__n nums">6&ndash;132</span><span class="km__fl">special-financing term range, in months</span></td><td><span class="km__n nums">30</span><span class="km__fl">days after completion until the first payment</span></td></tr>
+              <tr class="km__r"><th scope="row">Also published</th><td><span class="nums">1</span> card, reusable across projects</td><td><span class="nums">0</span> pre-payment penalty</td></tr>
+              <tr class="km__r km__r--q"><th scope="row">Usually fits</th><td>&ldquo;Useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.&rdquo;</td><td>&ldquo;A natural fit for a defined, single-trade scope where the number does not move once it is set.&rdquo;</td></tr>
+            </tbody>
+          </table>
+          <p class="km__foot">Service Finance Company: NMLS 140908, a subsidiary of Truist Bank.</p>
+        </div>
+        <div class="km__spine" aria-hidden="true"></div>
+        <div class="km__page">
+          <table class="km__t">
+            <caption class="km__cap"><span class="km__kind">Property-assessed</span><span class="km__sub">Ygrene and RenewPACE, repaid with property taxes</span></caption>
+            <thead><tr><td class="km__gut"></td><th scope="col">Ygrene</th><th scope="col">RenewPACE</th></tr></thead>
+            <tbody>
+              <tr class="km__r"><th scope="row">What it is</th><td>Florida PACE. Not a loan.</td><td>PACE, from Renew Financial</td></tr>
+              <tr class="km__r"><th scope="row">How you repay</th><td>Through your property tax bill</td><td>Through your property tax bill</td></tr>
+              <tr class="km__r km__r--fig"><th scope="row">Published figure</th><td><span class="km__n nums">20</span><span class="km__fl">year maximum published residential term</span></td><td><span class="km__n nums">$250K</span><span class="km__fl">published maximum, and up to 20% of property value</span></td></tr>
+              <tr class="km__r"><th scope="row">Also published</th><td>Soft credit pull</td><td>No application fee</td></tr>
+              <tr class="km__r km__r--q"><th scope="row">Usually fits</th><td>Roofing, windows and doors, HVAC, and wind-resistance and storm protection, among Ygrene&rsquo;s Florida categories</td><td>Live across all three counties</td></tr>
+            </tbody>
+          </table>
+          <p class="km__foot">Renew Financial: NMLS 1788120. <span class="km__note">PACE covers specific improvements. A kitchen remodel is generally not one of them.</span></p>
+        </div>
       </div>
-      <div class="financing1__row">
-        <article class="financing1__tk" data-card>
-          <div class="financing1__main">
-            <h3 class="financing1__name">Synchrony</h3>
-            <p class="financing1__kind">Project Card, revolving credit</p>
-            <p class="financing1__fig nums">6&ndash;132</p>
-            <p class="financing1__per">months of special financing, as Synchrony publishes it</p>
-          </div>
-          <div class="financing1__stub"><p class="financing1__sfig nums">1</p><p class="financing1__sper">card, reusable across projects</p></div>
-          <div class="financing1__more" id="fin1-m0"><p>Useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.</p></div>
-          <button type="button" class="financing1__tear" aria-expanded="false" aria-controls="fin1-m0" data-rx="~card/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-        <article class="financing1__tk" data-card>
-          <div class="financing1__main">
-            <h3 class="financing1__name">Service Finance</h3>
-            <p class="financing1__kind">Fixed installment loan · NMLS <span class="nums">140908</span></p>
-            <p class="financing1__fig nums">30</p>
-            <p class="financing1__per">days after completion until the first payment</p>
-          </div>
-          <div class="financing1__stub"><p class="financing1__sfig nums">0</p><p class="financing1__sper">pre-payment penalty</p></div>
-          <div class="financing1__more" id="fin1-m1"><p>A natural fit for a defined, single-trade scope where the number does not move once it is set. NMLS <span class="nums">140908</span>.</p></div>
-          <button type="button" class="financing1__tear" aria-expanded="false" aria-controls="fin1-m1" data-rx="~coin/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-        <article class="financing1__tk" data-card>
-          <div class="financing1__main">
-            <h3 class="financing1__name">Ygrene</h3>
-            <p class="financing1__kind">Florida PACE, not a loan</p>
-            <p class="financing1__fig nums">20</p>
-            <p class="financing1__per">year maximum published residential term</p>
-          </div>
-          <div class="financing1__stub"><p class="financing1__sfig">Tax bill</p><p class="financing1__sper">repaid with your property taxes</p></div>
-          <div class="financing1__more" id="fin1-m2"><p>Soft credit pull. Florida categories include roofing, windows and doors, HVAC, storm protection, insulation and solar.</p></div>
-          <button type="button" class="financing1__tear" aria-expanded="false" aria-controls="fin1-m2" data-rx="~leaf/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-        <article class="financing1__tk" data-card>
-          <div class="financing1__main">
-            <h3 class="financing1__name">Renew Financial</h3>
-            <p class="financing1__kind">RenewPACE assessment · NMLS <span class="nums">1788120</span></p>
-            <p class="financing1__fig nums">$250K</p>
-            <p class="financing1__per">published maximum, up to 20% of property value</p>
-          </div>
-          <div class="financing1__stub"><p class="financing1__sfig nums">$0</p><p class="financing1__sper">application fee</p></div>
-          <div class="financing1__more" id="fin1-m3"><p>Live across Miami&#8209;Dade, Broward and Palm Beach. NMLS <span class="nums">1788120</span>.</p></div>
-          <button type="button" class="financing1__tear" aria-expanded="false" aria-controls="fin1-m3" data-rx="~house2/zip/chips/tr"><span class="btn__label">Tear for details</span></button>
-        </article>
-      </div>
-      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
 
-  
-  <div class="ver financing2" data-v="b1" hidden>
-    <div class="wrap">
-      <div class="financing__head">
-        <h2 class="t-head" id="financing-h2">Which partner fits your project?</h2>
-        <p class="t-lead financing__lead">Open a valve. The water runs to the partners that usually fit that kind of work.</p>
-      </div>
-      <div class="financing2__rig">
-        <div class="financing2__src" role="radiogroup" aria-label="Your project">
-          <button type="button" role="radio" aria-checked="false" class="financing2__v" data-r="0" data-rx="~hood/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Kitchen</span></button>
-          <button type="button" role="radio" aria-checked="false" class="financing2__v" data-r="1" data-rx="~shower/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Bathroom</span></button>
-          <button type="button" role="radio" aria-checked="false" class="financing2__v" data-r="2" data-rx="~window/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Roof, windows or doors</span></button>
-          <button type="button" role="radio" aria-checked="false" class="financing2__v" data-r="3" data-rx="~house/jack/squash/tr"><svg viewBox="0 0 40 40" aria-hidden="true"><g class="wheel"><circle cx="20" cy="20" r="12"/><path d="M8 20h24M20 8v24M11.5 11.5l17 17M28.5 11.5l-17 17"/></g><circle cx="20" cy="20" r="3" class="hub"/></svg><span>Whole home</span></button>
-        </div>
-        <svg class="financing2__pipes" aria-hidden="true" focusable="false"></svg>
-        <ul class="financing2__dst" role="list">
-          <li class="financing2__l" data-l="0"><strong>Synchrony</strong><span>Revolving Project Card</span></li>
-          <li class="financing2__l" data-l="1"><strong>Service Finance</strong><span>Fixed installment loan</span></li>
-          <li class="financing2__l" data-l="2"><strong>Ygrene</strong><span>Florida PACE</span></li>
-          <li class="financing2__l" data-l="3"><strong>Renew Financial</strong><span>RenewPACE</span></li>
-        </ul>
-      </div>
-      <p class="financing2__why" aria-live="polite">Pick a project to see the usual routes.</p>
-      <a class="btn financing2__btn" href="#consult" data-rx="~speech/hoist/ring/r"><span class="btn__label">Talk it through with us</span></a>
-      <p class="financing__note">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver financing3" data-v="b4" hidden>
-    <div class="wrap financing3__wrap">
-      <div class="financing3__intro">
-        <h2 class="t-head" id="financing-h3">Prefer to pay monthly?</h2>
-        <p class="t-lead financing__lead">Revolving credit, fixed installments, or repayment through your property tax bill. They are genuinely different products.</p>
-      </div>
-      <div class="financing3__stage">
-        <div class="financing3__ground" aria-hidden="true">
-          <i class="financing3__br financing3__br--tl"></i><i class="financing3__br financing3__br--tr"></i><i class="financing3__br financing3__br--bl"></i><i class="financing3__br financing3__br--br"></i>
-          <div class="financing3__half"><p class="financing3__gk">Consumer credit</p><p class="financing3__gn">Synchrony &middot; Service Finance</p><p class="financing3__gl">Paid monthly to the lender</p></div>
-          <div class="financing3__half"><p class="financing3__gk">Property&#8209;assessed</p><p class="financing3__gn">Ygrene &middot; Renew Financial</p><p class="financing3__gl">Repaid with property taxes</p></div>
-        </div>
-        <button type="button" class="financing3__orb" aria-expanded="false" aria-controls="fin3-sheet" data-rx="native:morph"><span class="financing3__orb-t">See the two kinds of money</span></button>
-        <div class="financing3__sheet" id="fin3-sheet" role="region" aria-label="Financing partners by kind" hidden>
-          <i class="financing3__br financing3__br--tl"></i><i class="financing3__br financing3__br--tr"></i><i class="financing3__br financing3__br--bl"></i><i class="financing3__br financing3__br--br"></i>
-          <button type="button" class="financing3__close" aria-label="Fold the sheet away" data-rx="~xbrace/pop/spinout/l"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-          <div class="financing3__cols">
-            <div class="financing3__col">
-              <p class="financing3__k">Consumer credit</p>
-              <dl>
-                <div><dt>Synchrony</dt><dd>Project Card, revolving. <span class="nums">6&ndash;132</span> months of special financing as published. One card, reusable across projects.</dd></div>
-                <div><dt>Service Finance</dt><dd>Fixed installment loan. First payment <span class="nums">30</span> days after completion. No pre-payment penalty.</dd></div>
-              </dl>
-              <p class="financing3__fit">The usual route for kitchens and bathrooms.</p>
-            </div>
-            <div class="financing3__col">
-              <p class="financing3__k">Property-assessed (PACE)</p>
-              <dl>
-                <div><dt>Ygrene</dt><dd>Not a loan: repaid with property taxes. Up to a <span class="nums">20</span>-year published residential term. Soft credit pull.</dd></div>
-                <div><dt>Renew Financial</dt><dd>RenewPACE. Up to <span class="nums">$250K</span> published, and up to 20% of property value. No application fee.</dd></div>
-              </dl>
-              <p class="financing3__fit">For qualifying improvements such as roofing, impact windows and storm protection.</p>
-            </div>
-          </div>
-          <div class="financing3__foot">
-            <p>Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner. PACE covers specific improvements; a kitchen remodel is generally not one of them.</p>
-            <a class="btn financing3__btn" href="#consult" data-rx="~ruler/rail/tick/r"><span class="btn__label">Ask which fits your project</span></a>
-          </div>
-        </div>
+      <div class="km__sum">
+        <p class="km__total">Four financing partners, not one.</p>
+        <a class="btn" href="#consult"><span class="btn__label">Talk it through with us</span></a>
+        <p class="km__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
       </div>
     </div>
   </div>
@@ -7882,474 +7339,121 @@ html.has-buddy select { cursor: default !important; }
   } } });
 })();
 
-/* financing, PLAN-V3 §3. Figures exactly as each partner publishes them (FACTS.md /financing/). */
+/* FINALIZE · Home 6 · Financing.
+   V1 · the route finder: pick what you are building; the clay road draws from your house through the fork to the partners
+   that usually fit (stroke on a path, power2.inOut, the eye follows it [S0362]); a road that no longer fits retracts back
+   toward the house (power4.in, quick) before the new one draws; each signpost lights as the road reaches it, and the
+   partner's published figure lands on its card as an event. The routing is the firm's own framing (FACTS.md "Financing":
+   interior finish work -> consumer credit; Ygrene's Florida categories and Service Finance's typical projects for the
+   outside and energy work; "a kitchen remodel is generally not one of them").
+   V2 · two kinds of money: the scroll writes an open ledger line by line on both pages at once (the rule draws, then the
+   words), each published figure lands like a stamp; scrubbed and reversible [S1326]. Real tables underneath. */
 (function () {
-  function f(n) { return Math.round(n * 10) / 10; }
-  var ROUTES = [[0, 1], [0, 1], [0, 1, 2, 3], [0, 2, 3]];
-  var WHY = [
-    'Kitchens are interior finish work, so the usual routes are consumer credit: Synchrony’s revolving Project Card or a Service Finance installment loan. PACE is generally not available for a kitchen.',
-    'Bathrooms are interior finish work too: Synchrony’s Project Card or a Service Finance installment loan. PACE is generally not available for a bathroom remodel.',
-    'Storm-hardening work can fit all four. Service Finance lists roofs and impact windows and doors among typical projects, and both PACE programmes cover roofing, windows and doors.',
-    'A whole home crosses many trades. Synchrony’s card is reusable across projects, and qualifying parts such as roofing or impact windows can go through PACE.'
-  ];
+  var ROUTES = {
+    kitchen: ['syn', 'sfc'], bath: ['syn', 'sfc'], floor: ['syn', 'sfc'],
+    roof: ['sfc', 'ygr', 'rnw'], hvac: ['sfc', 'ygr', 'rnw'], unsure: ['syn', 'sfc', 'ygr', 'rnw']
+  };
+  var NAMES = { syn: 'Synchrony', sfc: 'Service Finance', ygr: 'Ygrene', rnw: 'RenewPACE' };
+  var WHY = {
+    kitchen: 'Interior finish work, so consumer credit is the usual route. PACE covers specific improvements; a kitchen remodel is generally not one of them.',
+    bath: 'Interior finish work, so consumer credit is the usual route. Synchrony’s card is “useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.”',
+    floor: 'Consumer credit: Synchrony’s reusable card, or a Service Finance fixed installment loan. Flooring is on the list of typical Elbaz projects that Service Finance fits.',
+    roof: 'Roofing, and windows and doors, are among Ygrene’s Florida PACE categories, repaid with property taxes. Roof replacement and impact windows and doors are typical Service Finance projects too.',
+    hvac: 'HVAC, and wind-resistance and storm protection, are among Ygrene’s Florida PACE categories. HVAC is a typical Service Finance project as well.',
+    unsure: 'Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.'
+  };
+  function list(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
 
   EZ.section('financing', {
-    /* slot 4 · NEW · The signpost: pick an arm and its two partners come forward */
-    4: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.fsp__head > *'));
-      var arms = Array.prototype.slice.call(root.querySelectorAll('.fsp__arm'));
-      function pick(r) {
-        arms.forEach(function (a) { a.setAttribute('aria-pressed', a.dataset.r === r ? 'true' : 'false'); });
-        ['cc', 'pa'].forEach(function (x) { var rd = root.querySelector('.fsp__road--' + x); rd.hidden = x !== r; if (x === r && k.motion) gsap.from(rd.children, { y: 14, autoAlpha: 0, duration: .25, ease: 'power2.out', stagger: .06 }); });
-      }
-      arms.forEach(function (a) { k.on(a, 'click', function () { pick(a.dataset.r); }); });
-      k.add(function () { pick('cc'); });
-    } },
-
-    /* slot 5 · NEW · Two questions over the same routing table as slot 1 */
-    5: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.fqz__side > *'));
-      var cards = Array.prototype.slice.call(root.querySelectorAll('.fqz__c')), why = root.querySelector('.fqz__why'), st = { p: 0, r: 'any' };
-      var KIND = ['cc', 'cc', 'pa', 'pa'];
-      function sync() {
-        var fit = ROUTES[st.p];
-        cards.forEach(function (c, j) { var on = fit.indexOf(j) > -1 && (st.r === 'any' || KIND[j] === st.r); c.classList.toggle('is-on', on); c.classList.toggle('is-off', !on); });
-        var none = !cards.some(function (c) { return c.classList.contains('is-on'); });
-        why.textContent = WHY[st.p] + (none ? ' None of the partners that usually fit this project are repaid that way; the reason above explains why.' : '');
-      }
-      root.querySelectorAll('.fqz__opts').forEach(function (g) {
-        var bs = Array.prototype.slice.call(g.children);
-        bs.forEach(function (b) { k.on(b, 'click', function () { bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); st[g.dataset.q] = g.dataset.q === 'p' ? +b.dataset.o : b.dataset.o; sync(); }); });
-      });
-      sync();
-    } },
-
-    /* slot 6 · NEW · The rolodex: the front card turns down and the next one comes up */
-    6: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.frd__side > *'));
-      var cs = Array.prototype.slice.call(root.querySelectorAll('.frd__card')), cur = 0, file = root.querySelector('.frd__file');
-      function lay() { cs.forEach(function (c, i) { var d = (i - cur + cs.length) % cs.length; c.style.transform = 'rotateX(' + (d === 0 ? 0 : -18 - d * 10) + 'deg) translateZ(' + (-d * 6) + 'px)'; c.style.opacity = d === 0 ? 1 : .55 - d * .1; c.style.zIndex = 10 - d; c.setAttribute('aria-hidden', d === 0 ? 'false' : 'true'); }); }
-      function step(d) { cur = (cur + d + cs.length) % cs.length; lay(); }
-      k.on(root.querySelector('.frd__next'), 'click', function () { step(1); });
-      k.on(root.querySelector('.frd__prev'), 'click', function () { step(-1); });
-      file.tabIndex = 0; file.setAttribute('role', 'group'); file.setAttribute('aria-label', 'Partner cards; arrow keys flip'); file.dataset.rx = 'native:rolodex';
-      k.on(file, 'keydown', function (e) { if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
-      lay();
-      k.add(function () { cur = 0; cs.forEach(function (c) { c.style.cssText = ''; }); });
-    } },
-
-    /* slot 7 · NEW · Two envelopes: open one and the partners repaid that way slide out */
-    7: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.fen__head > *'));
-      var bs = Array.prototype.slice.call(root.querySelectorAll('.fen__open'));
-      bs.forEach(function (b) {
-        k.on(b, 'click', function () {
-          var on = b.getAttribute('aria-expanded') !== 'true', pn = document.getElementById(b.getAttribute('aria-controls'));
-          b.setAttribute('aria-expanded', on ? 'true' : 'false'); pn.hidden = !on;
-          if (on && k.motion) gsap.from(pn.children, { y: -30, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .07 });
-        });
-      });
-      k.add(function () { bs.forEach(function (b) { b.setAttribute('aria-expanded', 'false'); document.getElementById(b.getAttribute('aria-controls')).hidden = true; }); });
-    } },
-
-    /* slot 8 · NEW · The two-pole slider: the side you slide toward comes forward */
-    8: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.fsl__head > *'));
-      var r = root.querySelector('.fsl__r'), cc = root.querySelector('.fsl__side--cc'), pa = root.querySelector('.fsl__side--pa');
-      function set() {
-        var v = +r.value, t = v < 40 ? 'cc' : v > 60 ? 'pa' : null;
-        cc.classList.toggle('is-near', t === 'cc'); cc.classList.toggle('is-far', t === 'pa');
-        pa.classList.toggle('is-near', t === 'pa'); pa.classList.toggle('is-far', t === 'cc');
-        cc.style.transform = 'translateX(' + ((50 - v) * .2).toFixed(1) + 'px)'; pa.style.transform = 'translateX(' + ((50 - v) * .2).toFixed(1) + 'px)';
-        r.setAttribute('aria-valuetext', t === 'cc' ? 'Monthly to a lender: Synchrony and Service Finance' : t === 'pa' ? 'With property taxes: Ygrene and Renew Financial' : 'No preference');
-      }
-      k.on(r, 'input', set); set();
-      k.add(function () { r.value = 50; set(); });
-    } },
-
-    /* slot 3 · Phase 5 improved version of b4 */
-    3: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.f3x__intro > *'));
-      var stage = root.querySelector('.f3x__stage'), orb = root.querySelector('.f3x__orb'), sheet = root.querySelector('.f3x__sheet');
-      var close = root.querySelector('.f3x__close'), busy = false;
-      // [AUDIT-01 F6 loser V3, P1] the sheet is OPEN at rest: terms and the disclosure are on the page before any click.
-      // The orb only re-opens a sheet the visitor folded; no negative-overshoot curve on a system reveal.
-      var OPEN = EZ.bezier(.23, 1, .32, 1), CONTENT = EZ.bezier(.7, 0, .3, 1), SHUT = EZ.bezier(.4, 1, .3, 1);
-      function rel(el) { var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect(); return { left: r.left - s.left, top: r.top - s.top, width: r.width, height: r.height }; }
-      function shape(from) {
-        var d = document.createElement('div');
-        d.setAttribute('aria-hidden', 'true');
-        d.style.cssText = 'position:absolute;z-index:3;pointer-events:none;left:' + from.left + 'px;top:' + from.top + 'px;width:' + from.width + 'px;height:' + from.height + 'px';
-        stage.appendChild(d);
-        return d;
-      }
-      function open() {
-        if (busy) return;
-        orb.setAttribute('aria-expanded', 'true');
-        if (!k.motion) { orb.hidden = true; sheet.hidden = false; close.focus(); return; }
-        busy = true;
-        var a = rel(orb);
-        sheet.hidden = false; sheet.style.visibility = 'hidden';
-        var b = rel(sheet);
-        var sh = shape(a);
-        orb.style.visibility = 'hidden';
-        k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { sh.remove(); busy = false; close.focus(); } })
-            .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: EZ.c('--color-art-line') },
-              { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: EZ.c('--color-art-line'), duration: .4, ease: OPEN })
-            .add(function () { orb.hidden = true; orb.style.visibility = ''; sheet.style.visibility = ''; })
-            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .4, ease: CONTENT, stagger: .03 });
-        });
-      }
-      function shut() {
-        if (busy || sheet.hidden) return;
-        orb.setAttribute('aria-expanded', 'false');
-        if (!k.motion) { sheet.hidden = true; orb.hidden = false; orb.focus(); return; }
-        busy = true;
-        var b = rel(sheet);
-        k.ctx.add(function () {
-          gsap.to(sheet.children, { autoAlpha: 0, duration: .15, onComplete: function () {
-            var sh = shape(b);
-            sheet.hidden = true; gsap.set(sheet.children, { clearProps: 'opacity,visibility' });
-            orb.hidden = false; orb.style.visibility = 'hidden';
-            var a = rel(orb);
-            gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: EZ.c('--color-art-line') },
-              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: EZ.c('--color-art-line'), duration: .4, ease: SHUT,
-                onComplete: function () { sh.remove(); orb.style.visibility = ''; busy = false; orb.focus(); } });
-          } });
-        });
-      }
-      orb.hidden = true; sheet.hidden = false; orb.setAttribute('aria-expanded', 'true');
-      k.on(orb, 'click', open);
-      k.on(close, 'click', shut);
-      k.on(sheet, 'keydown', function (e) { if (e.key === 'Escape') shut(); });
-      k.add(function () { sheet.hidden = true; orb.hidden = false; orb.style.visibility = ''; sheet.style.visibility = ''; orb.setAttribute('aria-expanded', 'false'); busy = false; stage.querySelectorAll(':scope > div[aria-hidden]').forEach(function (d) { d.remove(); }); });
-    } },
-
-    /* slot 2 · Phase 5 improved version of b3 */
-    2: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
-      var tks = root.querySelectorAll('.f1x__tk');
-      // [BANK 372] Glare Hover, streak profile: 33 stops from bump(t,.5,.06+.16*softness) + .32*bump(t,.5,.5),
-      // smootherstep kernel t^3(t(6t-15)+10), softness .6, opacity .5, angle -45deg, screen blend, follow mode
-      var GLARE = (function () {
-        function ss(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
-        function bump(t, c, h) { var x = 1 - Math.abs(t - c) / h; return x <= 0 ? 0 : ss(Math.min(1, x)); }
-        var soft = .6, stops = [];
-        for (var i = 0; i <= 32; i++) {
-          var t = i / 32, a = Math.min(1, bump(t, .5, .06 + .16 * soft) + .32 * bump(t, .5, .5)) * .5;
-          stops.push('color-mix(in srgb, var(--color-surface) ' + (a * 100).toFixed(1) + '%, transparent) ' + (t * 100).toFixed(1) + '%');
-        }
-        return 'linear-gradient(-45deg, ' + stops.join(', ') + ')';
-      })();
-      tks.forEach(function (tk) {
-        var main = tk.querySelector('.f1x__main'), stub = tk.querySelector('.f1x__stub'), more = tk.querySelector('.f1x__more');
-        var btn = tk.querySelector('.f1x__tear'), label = btn.querySelector('.btn__label');
-        k.ro(main, function () { tk.style.setProperty('--py', main.offsetHeight + 'px'); });
-        tk.style.setProperty('--glare', GLARE);
-        k.add(function () { tk.classList.remove('is-torn', 'is-glare'); tk.style.removeProperty('--py'); tk.style.removeProperty('--glare'); btn.setAttribute('aria-expanded', 'false'); label.textContent = 'Tear for details'; gsap.set([stub, more], { clearProps: 'all' }); });
-        if (k.fine && k.motion) {
-          k.on(tk, 'pointerenter', function () { tk.classList.add('is-glare'); });
-          k.on(tk, 'pointerleave', function () { tk.classList.remove('is-glare'); });
-          k.on(tk, 'pointermove', function (e) {            // glare tracks the pointer across the paper [BANK 372]
-            var r = tk.getBoundingClientRect();
-            tk.style.setProperty('--gx', (120 - (e.clientX - r.left) / r.width * 140).toFixed(1) + '%');
-          });
-        }
-        k.on(btn, 'click', function () {
-          var torn = !tk.classList.contains('is-torn');
-          btn.setAttribute('aria-expanded', torn ? 'true' : 'false');
-          label.textContent = torn ? 'Back to the stub' : 'Tear for details';
-          if (!k.motion) { tk.classList.toggle('is-torn', torn); stub.style.visibility = torn ? 'hidden' : ''; return; }
-          k.ctx.add(function () {
-            if (torn) {
-              gsap.timeline().to(stub, { y: 46, x: 6, autoAlpha: 0, duration: .32, ease: 'power3.in' })
-                .add(function () { tk.classList.add('is-torn'); })
-                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'power3.out' });
-            } else {
-              gsap.timeline().to(more, { autoAlpha: 0, duration: .15 })
-                .add(function () { tk.classList.remove('is-torn'); })
-                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'back.out(2)' });
-            }
-          });
-        });
-      });
-      if (k.motion) gsap.from(tks, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.f1x__row'), start: 'top 85%', once: true } });
-    } },
-
-    /* slot 1 · Phase 5 improved version of b2 */
     1: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
-      var rig = root.querySelector('.frx__rig'), svg = root.querySelector('.frx__pipes');
-      var vs = Array.prototype.slice.call(root.querySelectorAll('.frx__v'));
-      var ls = Array.prototype.slice.call(root.querySelectorAll('.frx__l'));
-      var why = root.querySelector('.frx__why');
-      var G = null, cur = -1;
-      function geo() {
-        var rr = rig.getBoundingClientRect();
-        if (!rr.width) return;
-        svg.setAttribute('viewBox', '0 0 ' + rr.width + ' ' + rr.height);
-        var S = vs.map(function (v) { var r = v.getBoundingClientRect(); return [r.right - rr.left, r.top - rr.top + r.height / 2]; });
-        var L = ls.map(function (l) { var r = l.getBoundingClientRect(); return [r.left - rr.left, r.top - rr.top + r.height / 2]; });
-        var mx = (S[0][0] + L[0][0]) / 2, base = '';
-        S.forEach(function (p) { base += 'M' + f(p[0]) + ' ' + f(p[1]) + 'H' + f(mx); });
-        L.forEach(function (p) { base += 'M' + f(mx) + ' ' + f(p[1]) + 'H' + f(p[0]); });
-        var top = Math.min(S[0][1], L[0][1]), bot = Math.max(S[3][1], L[3][1]);
-        svg.innerHTML = '<path class="p" d="' + base + 'M' + f(mx) + ' ' + f(top) + 'V' + f(bot) + '"/><g class="ws"></g>';
-        G = { S: S, L: L, mx: mx, ws: svg.querySelector('.ws') };
-        if (cur > -1) route(cur);
+      var routes = {}, posts = {}, cards = {};
+      root.querySelectorAll('.rf__route').forEach(function (r) { routes[r.dataset.p] = r; });
+      root.querySelectorAll('.rf__post').forEach(function (p) { posts[p.dataset.p] = p; });
+      root.querySelectorAll('.rf__c').forEach(function (c) { cards[c.dataset.p] = c; });
+      var why = root.querySelector('.rf__why'), on = {};
+      var map = root.querySelector('.rf__map');
+      var edges = map.querySelectorAll('.rf__edge, .rf__pole, .rf__hw, .rf__hr, .rf__hd, .rf__lot');
+      var marks = map.querySelectorAll('.rf__mid, .rf__spur, .rf__board, .rf__bt, .rf__lotn, .rf__ht');
+      Object.keys(routes).forEach(function (p) { gsap.set(routes[p], { drawSVG: '0% 0%', opacity: 0 }); });
+
+      if (k.motion) {
+        // the plan draws itself as it arrives: lots and roads first, then the dashes, boards and words
+        gsap.set(edges, { drawSVG: '0%' }); gsap.set(marks, { opacity: 0 });
+        var intro = gsap.timeline({ paused: true })
+          .to(edges, { drawSVG: '100%', duration: .8, ease: 'power2.inOut', stagger: { amount: .4 } })
+          .to(marks, { opacity: 1, duration: .4, ease: 'power2.out', stagger: { amount: .25 } }, '-=.35');
+        var st = ScrollTrigger.create({ trigger: map, start: 'top 80%', once: true, onEnter: function () { intro.play(); } });
+        k.add(function () { st.kill(); intro.kill(); });
       }
-      function route(i) {
-        if (!G) return;
-        var s = G.S[i];
-        G.ws.innerHTML = ROUTES[i].map(function (j) { var l = G.L[j]; return '<path class="w" d="M' + f(s[0]) + ' ' + f(s[1]) + 'H' + f(G.mx) + 'V' + f(l[1]) + 'H' + f(l[0]) + '"/>'; }).join('');
-      }
-      function pick(i, focus) {
-        if (i === cur) return;
-        cur = i;
-        vs.forEach(function (v, j) { v.setAttribute('aria-checked', j === i ? 'true' : 'false'); v.tabIndex = j === i ? 0 : -1; });
-        if (focus) vs[i].focus();
-        why.textContent = WHY[i];
-        ls.forEach(function (l, j) { var on = ROUTES[i].indexOf(j) > -1; l.classList.toggle('is-on', on); l.classList.toggle('is-off', !on); });
-        route(i);
-      }
-      vs.forEach(function (v, i) {
-        k.on(v, 'click', function () { pick(i); });
-        k.on(v, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); pick((Math.max(cur, 0) + d + 4) % 4, true); }
+
+      function choose(kind) {
+        var fits = ROUTES[kind] || [];
+        why.textContent = WHY[kind] + ' Usually fits: ' + list(fits.map(function (p) { return NAMES[p]; })) + '.';
+        Object.keys(routes).forEach(function (p) {
+          var r = routes[p], fit = fits.indexOf(p) > -1, was = !!on[p];
+          on[p] = fit;
+          cards[p].classList.toggle('is-fit', fit);
+          cards[p].classList.toggle('is-not', !fit);
+          cards[p].querySelector('.rf__fit').textContent = fit ? 'Usually fits this project.' : 'Not the usual route for this project.';
+          if (!k.motion) { gsap.set(r, { drawSVG: fit ? '0% 100%' : '0% 0%', opacity: fit ? 1 : 0 }); posts[p].classList.toggle('is-fit', fit); return; }
+          if (fit && !was) {
+            posts[p].classList.remove('is-fit');
+            gsap.timeline({ overwrite: true })
+              .set(r, { opacity: 1 })
+              .fromTo(r, { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', duration: .9, ease: 'power2.inOut' }, .18)
+              .add(function () { posts[p].classList.add('is-fit'); }, .9)
+              .fromTo(cards[p].querySelector('.rf__n'), { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: 'power4.out' }, .95);
+          } else if (!fit && was) {
+            posts[p].classList.remove('is-fit');
+            gsap.timeline({ overwrite: true })
+              .to(r, { drawSVG: '0% 0%', duration: .3, ease: 'power4.in' })
+              .set(r, { opacity: 0 });
+          }
         });
+      }
+      root.querySelectorAll('.rf__o input').forEach(function (inp) {
+        k.on(inp, 'change', function () { if (inp.checked) choose(inp.value); });
       });
-      k.ro(rig, geo);
-      geo();
-      pick(0);
-      k.add(function () { svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); });
+      k.add(function () { root.querySelectorAll('.rf__o input').forEach(function (i) { i.checked = false; }); });
     } },
 
-    /* slot 1 · AUDIT-01 winner (copied from v2; F6 de-theatre): the settled diagram is the answer. Selection outline 150ms,
-       partners light or dim in 200ms, the reason swaps at once. No wheel spin, no water, no flow loop. Kitchen is pre-picked. */
-    b2: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
-      var rig = root.querySelector('.fr__rig'), svg = root.querySelector('.fr__pipes');
-      var vs = Array.prototype.slice.call(root.querySelectorAll('.fr__v'));
-      var ls = Array.prototype.slice.call(root.querySelectorAll('.fr__l'));
-      var why = root.querySelector('.fr__why');
-      var G = null, cur = -1;
-      function geo() {
-        var rr = rig.getBoundingClientRect();
-        if (!rr.width) return;
-        svg.setAttribute('viewBox', '0 0 ' + rr.width + ' ' + rr.height);
-        var S = vs.map(function (v) { var r = v.getBoundingClientRect(); return [r.right - rr.left, r.top - rr.top + r.height / 2]; });
-        var L = ls.map(function (l) { var r = l.getBoundingClientRect(); return [r.left - rr.left, r.top - rr.top + r.height / 2]; });
-        var mx = (S[0][0] + L[0][0]) / 2, base = '';
-        S.forEach(function (p) { base += 'M' + f(p[0]) + ' ' + f(p[1]) + 'H' + f(mx); });
-        L.forEach(function (p) { base += 'M' + f(mx) + ' ' + f(p[1]) + 'H' + f(p[0]); });
-        var top = Math.min(S[0][1], L[0][1]), bot = Math.max(S[3][1], L[3][1]);
-        svg.innerHTML = '<path class="p" d="' + base + 'M' + f(mx) + ' ' + f(top) + 'V' + f(bot) + '"/><g class="ws"></g>';
-        G = { S: S, L: L, mx: mx, ws: svg.querySelector('.ws') };
-        if (cur > -1) route(cur);
-      }
-      function route(i) {
-        if (!G) return;
-        var s = G.S[i];
-        G.ws.innerHTML = ROUTES[i].map(function (j) { var l = G.L[j]; return '<path class="w" d="M' + f(s[0]) + ' ' + f(s[1]) + 'H' + f(G.mx) + 'V' + f(l[1]) + 'H' + f(l[0]) + '"/>'; }).join('');
-      }
-      function pick(i, focus) {
-        if (i === cur) return;
-        cur = i;
-        vs.forEach(function (v, j) { v.setAttribute('aria-checked', j === i ? 'true' : 'false'); v.tabIndex = j === i ? 0 : -1; });
-        if (focus) vs[i].focus();
-        why.textContent = WHY[i];
-        ls.forEach(function (l, j) { var on = ROUTES[i].indexOf(j) > -1; l.classList.toggle('is-on', on); l.classList.toggle('is-off', !on); });
-        route(i);
-      }
-      vs.forEach(function (v, i) {
-        k.on(v, 'click', function () { pick(i); });
-        k.on(v, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); pick((Math.max(cur, 0) + d + 4) % 4, true); }
-        });
+    2: { init: function (root, k) {
+      var tables = Array.prototype.slice.call(root.querySelectorAll('.km__t'));
+      // the column under the hand is the one being read: its cells take the clay wash
+      tables.forEach(function (t) {
+        function mark(ix) { t.querySelectorAll('th, td').forEach(function (c) { c.classList.toggle('is-col', ix > 0 && c.cellIndex === ix); }); }
+        k.on(t, 'pointerover', function (e) { var c = e.target.closest('th, td'); if (c) mark(c.cellIndex); });
+        k.on(t, 'pointerleave', function () { mark(-1); });
       });
-      k.ro(rig, geo);
-      geo();
-      pick(0);
-      k.add(function () { svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); });
-    } },
-
-    /* v1 · Four tickets [S0882 + BANK 372] */
-    b3: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
-      var tks = root.querySelectorAll('.financing1__tk');
-      // [BANK 372] Glare Hover, streak profile: 33 stops from bump(t,.5,.06+.16*softness) + .32*bump(t,.5,.5),
-      // smootherstep kernel t^3(t(6t-15)+10), softness .6, opacity .5, angle -45deg, screen blend, follow mode
-      var GLARE = (function () {
-        function ss(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
-        function bump(t, c, h) { var x = 1 - Math.abs(t - c) / h; return x <= 0 ? 0 : ss(Math.min(1, x)); }
-        var soft = .6, stops = [];
-        for (var i = 0; i <= 32; i++) {
-          var t = i / 32, a = Math.min(1, bump(t, .5, .06 + .16 * soft) + .32 * bump(t, .5, .5)) * .5;
-          stops.push('rgba(255,255,255,' + a.toFixed(3) + ') ' + (t * 100).toFixed(1) + '%');
-        }
-        return 'linear-gradient(-45deg, ' + stops.join(', ') + ')';
-      })();
-      tks.forEach(function (tk) {
-        var main = tk.querySelector('.financing1__main'), stub = tk.querySelector('.financing1__stub'), more = tk.querySelector('.financing1__more');
-        var btn = tk.querySelector('.financing1__tear'), label = btn.querySelector('.btn__label');
-        k.ro(main, function () { tk.style.setProperty('--py', main.offsetHeight + 'px'); });
-        tk.style.setProperty('--glare', GLARE);
-        k.add(function () { tk.classList.remove('is-torn', 'is-glare'); tk.style.removeProperty('--py'); tk.style.removeProperty('--glare'); btn.setAttribute('aria-expanded', 'false'); label.textContent = 'Tear for details'; gsap.set([stub, more], { clearProps: 'all' }); });
-        if (k.fine && k.motion) {
-          k.on(tk, 'pointerenter', function () { tk.classList.add('is-glare'); });
-          k.on(tk, 'pointerleave', function () { tk.classList.remove('is-glare'); });
-          k.on(tk, 'pointermove', function (e) {            // glare tracks the pointer across the paper [BANK 372]
-            var r = tk.getBoundingClientRect();
-            tk.style.setProperty('--gx', (120 - (e.clientX - r.left) / r.width * 140).toFixed(1) + '%');
-          });
-        }
-        k.on(btn, 'click', function () {
-          var torn = !tk.classList.contains('is-torn');
-          btn.setAttribute('aria-expanded', torn ? 'true' : 'false');
-          label.textContent = torn ? 'Back to the stub' : 'Tear for details';
-          if (!k.motion) { tk.classList.toggle('is-torn', torn); stub.style.visibility = torn ? 'hidden' : ''; return; }
-          k.ctx.add(function () {
-            if (torn) {
-              gsap.timeline().to(stub, { y: 46, x: 6, autoAlpha: 0, duration: .32, ease: 'power3.in' })
-                .add(function () { tk.classList.add('is-torn'); })
-                .fromTo(more, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'power3.out' });
-            } else {
-              gsap.timeline().to(more, { autoAlpha: 0, duration: .15 })
-                .add(function () { tk.classList.remove('is-torn'); })
-                .fromTo(stub, { y: -20, x: 0, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .3, ease: 'back.out(2)' });
-            }
-          });
-        });
-      });
-      if (k.motion) gsap.from(tks, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.financing1__row'), start: 'top 85%', once: true } });
-    } },
-
-    /* v2 · Pipe the money */
-    b1: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing__head > *'));
-      var rig = root.querySelector('.financing2__rig'), svg = root.querySelector('.financing2__pipes');
-      var vs = Array.prototype.slice.call(root.querySelectorAll('.financing2__v'));
-      var ls = Array.prototype.slice.call(root.querySelectorAll('.financing2__l'));
-      var why = root.querySelector('.financing2__why');
-      var G = null, cur = -1, flow = null;
-      function geo() {
-        var rr = rig.getBoundingClientRect();
-        if (!rr.width) return;
-        svg.setAttribute('viewBox', '0 0 ' + rr.width + ' ' + rr.height);
-        var S = vs.map(function (v) { var r = v.getBoundingClientRect(); return [r.right - rr.left, r.top - rr.top + r.height / 2]; });
-        var L = ls.map(function (l) { var r = l.getBoundingClientRect(); return [r.left - rr.left, r.top - rr.top + r.height / 2]; });
-        var mx = (S[0][0] + L[0][0]) / 2, top = Math.min(S[0][1], L[0][1]) - 8, bot = Math.max(S[3][1], L[3][1]) + 8;
-        var base = '', joints = '';
-        S.forEach(function (p) { base += 'M' + f(p[0]) + ' ' + f(p[1]) + 'H' + f(mx); joints += '<circle class="j" cx="' + f(p[0] + 4) + '" cy="' + f(p[1]) + '" r="6"/>'; });
-        L.forEach(function (p) { base += 'M' + f(mx) + ' ' + f(p[1]) + 'H' + f(p[0]); joints += '<circle class="j" cx="' + f(p[0] - 4) + '" cy="' + f(p[1]) + '" r="6"/>'; });
-        svg.innerHTML = '<path class="p" d="' + base + '"/><rect class="man" x="' + f(mx - 9) + '" y="' + f(top) + '" width="18" height="' + f(bot - top) + '" rx="4"/><path class="p-in" d="' + base + '"/><g class="ws"></g>' + joints;
-        G = { S: S, L: L, mx: mx, ws: svg.querySelector('.ws') };
-        if (cur > -1) water(cur, true);
+      // a ledger spread: line i on the left page sits level with line i on the right (only while the pages are side by side)
+      var lRows = tables[0].querySelectorAll('.km__r, thead tr'), rRows = tables[1].querySelectorAll('.km__r, thead tr');
+      function level() {
+        var side = tables[0].getBoundingClientRect().top === tables[1].getBoundingClientRect().top;
+        for (var n = 0; n < lRows.length; n++) { lRows[n].style.height = rRows[n].style.height = ''; }
+        if (!side) return;
+        for (var m = 0; m < lRows.length; m++) { var hh = Math.max(lRows[m].offsetHeight, rRows[m].offsetHeight) + 'px'; lRows[m].style.height = rRows[m].style.height = hh; }
       }
-      function water(i, now) {
-        if (!G) return;
-        if (flow) { flow.kill(); flow = null; }
-        var s = G.S[i];
-        G.ws.innerHTML = ROUTES[i].map(function (j) { var l = G.L[j]; return '<path class="w" d="M' + f(s[0]) + ' ' + f(s[1]) + 'H' + f(G.mx) + 'V' + f(l[1]) + 'H' + f(l[0]) + '"/>'; }).join('');
-        var ws = G.ws.querySelectorAll('.w');
-        if (!k.motion || now) { gsap.set(ws, { opacity: 1 }); return; }
-        k.ctx.add(function () {
-          gsap.fromTo(ws, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .75, ease: 'power2.inOut', stagger: .08, onComplete: function () {
-            ws.forEach(function (w) { w.style.strokeDasharray = '10px 8px'; w.style.strokeDashoffset = '0px'; });
-            flow = gsap.fromTo(ws, { strokeDashoffset: 0 }, { strokeDashoffset: -36, duration: .7, ease: 'none', repeat: 5 });   // flows ~4s, then rests (no motion past 5s unasked)
-          } });
-        });
+      level(); k.ro(root.querySelector('.km__book'), level);
+      k.add(function () { for (var n = 0; n < lRows.length; n++) { lRows[n].style.height = rRows[n].style.height = ''; } });
+      if (!k.motion) return;
+      var rowsL = tables[0].querySelectorAll('.km__r'), rowsR = tables[1].querySelectorAll('.km__r');
+      var all = root.querySelectorAll('.km__r th, .km__r td');
+      gsap.set(all, { '--rule': 0 });
+      gsap.set(root.querySelectorAll('.km__r th > *, .km__r td'), { opacity: 0, y: 8 });
+      gsap.set(root.querySelectorAll('.km__r th'), { opacity: 0 });
+      var tl = gsap.timeline({ defaults: { ease: 'none' } });
+      for (var i = 0; i < rowsL.length; i++) {
+        var pair = [rowsL[i], rowsR[i]], cells = [], heads = [];
+        pair.forEach(function (r) { cells = cells.concat(Array.prototype.slice.call(r.querySelectorAll('td'))); heads.push(r.querySelector('th')); });
+        tl.to(pair.map(function (r) { return r.querySelectorAll('th, td'); }).reduce(function (a, n) { return a.concat(Array.prototype.slice.call(n)); }, []), { '--rule': 1, duration: .5 }, i)
+          .to(heads, { opacity: 1, duration: .25 }, i + .15)
+          .to(cells, { opacity: 1, y: 0, duration: .35, stagger: .06 }, i + .3);
+        var nums = [];
+        pair.forEach(function (r) { nums = nums.concat(Array.prototype.slice.call(r.querySelectorAll('.km__n'))); });
+        if (nums.length) tl.fromTo(nums, { scale: 1.35, opacity: 0, transformOrigin: '0% 100%' }, { scale: 1, opacity: 1, duration: .15, ease: 'power4.in', stagger: .08 }, i + .45);
       }
-      function pick(i, focus) {
-        if (i === cur) return;
-        cur = i;
-        vs.forEach(function (v, j) { v.setAttribute('aria-checked', j === i ? 'true' : 'false'); v.tabIndex = j === i ? 0 : -1; });
-        if (focus) vs[i].focus();
-        why.textContent = WHY[i];
-        ls.forEach(function (l, j) {
-          var on = ROUTES[i].indexOf(j) > -1;
-          l.classList.toggle('is-on', on); l.classList.toggle('is-off', !on);
-          if (k.motion) k.ctx.add(function () { gsap.to(l, { '--lvl': on ? 1 : 0, duration: on ? .9 : .3, delay: on ? .5 : 0, ease: 'power2.out' }); });
-          else l.style.setProperty('--lvl', on ? 1 : 0);
-        });
-        if (k.motion) k.ctx.add(function () { gsap.fromTo(vs[i].querySelector('.wheel'), { rotation: 0 }, { rotation: 270, svgOrigin: '20 20', duration: .6, ease: 'power2.inOut' }); });
-        water(i);
-      }
-      vs.forEach(function (v, i) {
-        v.tabIndex = i === 0 ? 0 : -1;
-        k.on(v, 'click', function () { pick(i); });
-        k.on(v, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); pick((Math.max(cur, 0) + d + 4) % 4, true); }
-        });
-      });
-      k.ro(rig, geo);
-      geo();
-      k.io(rig, function (en) { if (flow) en.isIntersecting ? flow.play() : flow.pause(); });
-      k.add(function () { if (flow) flow.kill(); svg.innerHTML = ''; ls.forEach(function (l) { l.classList.remove('is-on', 'is-off'); l.style.removeProperty('--lvl'); }); vs.forEach(function (v) { v.setAttribute('aria-checked', 'false'); }); why.textContent = 'Pick a project to see the usual routes.'; });
-      if (k.motion) gsap.from(vs.concat(ls), { x: function (i) { return i < 4 ? -30 : 30; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .04, scrollTrigger: { trigger: rig, start: 'top 80%', once: true } });
-    } },
-
-    /* v3 · The morph sheet [BANK 255 Shazam] */
-    b4: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.financing3__intro > *'));
-      var stage = root.querySelector('.financing3__stage'), orb = root.querySelector('.financing3__orb'), sheet = root.querySelector('.financing3__sheet');
-      var close = root.querySelector('.financing3__close'), busy = false;
-      // [AUDIT-01 F6 loser V3, P1] the sheet is OPEN at rest: terms and the disclosure are on the page before any click.
-      // The orb only re-opens a sheet the visitor folded; no negative-overshoot curve on a system reveal.
-      var OPEN = EZ.bezier(.23, 1, .32, 1), CONTENT = EZ.bezier(.7, 0, .3, 1), SHUT = EZ.bezier(.4, 1, .3, 1);
-      function rel(el) { var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect(); return { left: r.left - s.left, top: r.top - s.top, width: r.width, height: r.height }; }
-      function shape(from) {
-        var d = document.createElement('div');
-        d.setAttribute('aria-hidden', 'true');
-        d.style.cssText = 'position:absolute;z-index:3;pointer-events:none;left:' + from.left + 'px;top:' + from.top + 'px;width:' + from.width + 'px;height:' + from.height + 'px';
-        stage.appendChild(d);
-        return d;
-      }
-      function open() {
-        if (busy) return;
-        orb.setAttribute('aria-expanded', 'true');
-        if (!k.motion) { orb.hidden = true; sheet.hidden = false; close.focus(); return; }
-        busy = true;
-        var a = rel(orb);
-        sheet.hidden = false; sheet.style.visibility = 'hidden';
-        var b = rel(sheet);
-        var sh = shape(a);
-        orb.style.visibility = 'hidden';
-        k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { sh.remove(); busy = false; close.focus(); } })
-            .fromTo(sh, { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#121212' },
-              { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#121212', duration: .4, ease: OPEN })
-            .add(function () { orb.hidden = true; orb.style.visibility = ''; sheet.style.visibility = ''; })
-            .from(sheet.children, { autoAlpha: 0, y: 14, duration: .4, ease: CONTENT, stagger: .03 });
-        });
-      }
-      function shut() {
-        if (busy || sheet.hidden) return;
-        orb.setAttribute('aria-expanded', 'false');
-        if (!k.motion) { sheet.hidden = true; orb.hidden = false; orb.focus(); return; }
-        busy = true;
-        var b = rel(sheet);
-        k.ctx.add(function () {
-          gsap.to(sheet.children, { autoAlpha: 0, duration: .15, onComplete: function () {
-            var sh = shape(b);
-            sheet.hidden = true; gsap.set(sheet.children, { clearProps: 'opacity,visibility' });
-            orb.hidden = false; orb.style.visibility = 'hidden';
-            var a = rel(orb);
-            gsap.fromTo(sh, { left: b.left, top: b.top, width: b.width, height: b.height, borderRadius: 0, backgroundColor: '#121212' },
-              { left: a.left, top: a.top, width: a.width, height: a.height, borderRadius: a.width / 2, backgroundColor: '#121212', duration: .4, ease: SHUT,
-                onComplete: function () { sh.remove(); orb.style.visibility = ''; busy = false; orb.focus(); } });
-          } });
-        });
-      }
-      orb.hidden = true; sheet.hidden = false; orb.setAttribute('aria-expanded', 'true');
-      k.on(orb, 'click', open);
-      k.on(close, 'click', shut);
-      k.on(sheet, 'keydown', function (e) { if (e.key === 'Escape') shut(); });
-      k.add(function () { sheet.hidden = true; orb.hidden = false; orb.style.visibility = ''; sheet.style.visibility = ''; orb.setAttribute('aria-expanded', 'false'); busy = false; stage.querySelectorAll(':scope > div[aria-hidden]').forEach(function (d) { d.remove(); }); });
+      var st = ScrollTrigger.create({ trigger: root.querySelector('.km__book'), start: 'top 72%', end: 'bottom 96%', scrub: .6, animation: tl });
+      k.add(function () { st.kill(); tl.kill(); gsap.set(root.querySelectorAll('.km__r th, .km__r td, .km__r th > *, .km__n'), { clearProps: 'all' }); });
     } }
   });
 })();
