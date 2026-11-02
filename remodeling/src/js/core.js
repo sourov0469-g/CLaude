@@ -288,7 +288,7 @@
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
-    'reno-intro': 'Whole home', 'reno-services': 'Services', 'reno-permits': 'Permits and approvals',
+    'reno-intro': 'Whole home', 'reno-services': 'Services', 'reno-disruption': 'One disruption', 'reno-permits': 'Permits and approvals', 'reno-stories': 'Whole-home projects',
     'contact-form': 'Consultation', 'contact-visit': 'Visit and call', 'contact-area': 'Service area' };
 
   // each section's switcher digits arrive by their own carrier, so no two switch buttons react alike [FULL Phase 3]

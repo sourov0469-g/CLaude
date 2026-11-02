@@ -527,7 +527,7 @@
   var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages: a different divider under each section of a page
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'roofs'], ['kitchen-sequence', 'beam'], ['kitchen-work', 'tally'], ['bath-intro', 'conduit'], ['bath-build', 'tally'], ['bath-rooms', 'roofs'], ['bath-work', 'beam'],
-    ['reno-intro', 'roofs'], ['reno-services', 'truss'], ['contact-form', 'footing'], ['contact-visit', 'beam']];
+    ['reno-intro', 'roofs'], ['reno-services', 'beam'], ['reno-disruption', 'tally'], ['reno-permits', 'dimension'], ['contact-form', 'footing'], ['contact-visit', 'beam']];
   var dividers = [];
 
   function drawDivider(d) {

@@ -34,7 +34,7 @@ PAGES = {
                   "title": "Bathroom Remodeling in South Florida | Elbaz Construction",
                   "desc": "Bathroom remodeling across Miami-Dade, Broward and Palm Beach: waterproofing done properly, tile set square, glass and fixtures that still look right in year five. Licensed, bonded &amp; insured · CBC1265280.",
                   "url": "https://elbazconstructioncorp.com/bathroom-remodeling-miami/"},
-    "renovation": {"out": "renovation.html", "sections": ["reno-intro", "reno-services", "reno-permits"], "book": "contact.html#contact-form",
+    "renovation": {"out": "renovation.html", "sections": ["reno-intro", "reno-services", "reno-disruption", "reno-permits", "reno-stories"], "book": "contact.html#contact-form",
                    "title": "Whole-Home Renovation, Additions and Exterior Work | Elbaz Construction",
                    "desc": "Whole-home renovation, ADUs and additions, new construction, commercial remodeling, flooring, roofing, windows and doors, outdoor living, planning and permitting. Licensed, bonded &amp; insured · CBC1265280.",
                    "url": "https://elbazconstructioncorp.com/residential-remodling-miami/"},

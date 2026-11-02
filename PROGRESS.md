@@ -152,3 +152,6 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 ## Phase 4 log
 - **Kitchens** (5 sections + footer; 2 NEW ×2): `GATE-kitchens.md`. Hero with room chapters; the scope plan that transforms across the three published tiers; the sequence (scrubbed elevation / string line); projects on the MERSI seam with pinned-print chapters; the closing argument + rebuilt CTA (two ways). Zero console errors at 1440/390. Zero background tasks, zero sub-agents.
 - **Bathrooms** (5 sections + footer; 2 NEW ×2): `GATE-bathrooms.md`. Target-marked drawn bathroom (lock + lens); pinned horizontal build (six bays); rooms we build (giant list / sample board, photos only where titles match); seam + stacked deck with filter; time, money, call (two ways). Build order corrected to the firm's own reasoning (recorded). **Phase 4 complete.** Zero background tasks, zero sub-agents.
+
+## Phase 5 log
+- **Renovation** (5 sections + footer; hero ×2, 2 NEW ×2): `GATE-renovation.md`. Collage / panels hero; sheet-stack services (firm names only); one disruption (collapse / house plan); permits ticked in order with county code context; whole-home stories (chapters / index) + CTA. Zero console errors at 1440/390. Zero background tasks, zero sub-agents.
