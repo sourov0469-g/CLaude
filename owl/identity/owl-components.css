@@ -115,10 +115,20 @@
 .svc .icon--arrow{transition:transform var(--dur-fast) var(--ease-out)}
 .svc:hover .icon--arrow{transform:translateX(var(--space-8))}
 
+/* skip link: visually hidden until focused (page skip + the skip past every pinned beat) */
+.skip-link{position:absolute;z-index:70;background:var(--surface-ink);color:var(--text-on-deep);padding:var(--space-8) var(--space-16);border-radius:var(--radius-s);font:700 var(--step-m1)/1.2 var(--font-display)}
+.skip-link:not(:focus):not(:focus-visible){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap;padding:0}
+
 /* beat stage (pinned beats; max 4 per page, each pin <= 100vh, skip link, static under reduced motion) */
 .beat-stage{position:relative}
 .beat-stage .pin{position:sticky;top:0;min-height:100dvh;display:grid;align-content:center}
 @media (prefers-reduced-motion:reduce){.beat-stage .pin{position:static;min-height:auto}}
+
+/* place list: towns and other plain lists of places; columns fill by width; the home town is bold with a pin */
+.place-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:0 var(--space-24)}
+.place-list li{display:flex;align-items:center;gap:var(--space-8);padding:var(--space-8) 0;border-bottom:1px solid var(--line-hairline);font:var(--type-small)}
+.place-list li[data-home]{font-weight:700}
+.place-list li .icon{width:var(--space-16);height:var(--space-16);color:var(--text-muted)}
 
 /* footer */
 .owl-footer{position:relative;overflow:hidden;background:var(--surface-night);color:var(--text-on-deep);padding:var(--section-default) var(--gutter) calc(var(--space-160) + var(--space-96))}

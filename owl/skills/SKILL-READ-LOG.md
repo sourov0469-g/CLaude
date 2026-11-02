@@ -84,3 +84,91 @@ Format: tag, name, when read, and the rules taken. Rules are stated in words so 
   - Claims are traceable; inferences labelled.
   - One coherent stance, not a menu.
   - Anti-patterns are exact.
+
+## Phase 2: identity asset board (read in full before building)
+Skills picked for this phase, and why:
+- **Picked:** the pack entries that define Phase 2's deliverables (icons, type scale, spacing, tokens, motion,
+  backgrounds, illustration, brand consistency, cursor, SVG animation, drawn-character motion, design dials).
+- **Not re-read:** colour skills (⟦S0660⟧, ⟦S1418⟧); they were read in full in Phase 1a and still govern.
+- **Not picked:** ⟦S0071⟧, ⟦S0248⟧, ⟦S0609⟧, ⟦S0112⟧ and ⟦S1372⟧. They are not needed for Phase 2:
+  - Colour and contrast are already governed by the 1a reads.
+  - A dither background is not in this identity.
+
+**Rules taken:**
+- ⟦S1463⟧ icon-system
+  - **Grid and sizes:** a 24px base grid with keylines; sizes XS 12-16, S 20, M 24, L 32, XL 48+.
+  - **Style:** one style (stroke).
+  - **Naming:** `icon-[category]-[name]-[variant]`.
+  - **Accessibility:** every icon labelled or aria-hidden; paired with text for critical actions; 44px touch targets.
+  - **Maintenance:** remove unused icons.
+- ⟦S1433⟧ typography-scale
+  - **Scale:** a ratio-based scale; 4-5 sizes in regular use; body at least 16px.
+  - **Line heights:** 1.2 headings, 1.5 body.
+  - **Tracking:** -0.02em on large headings, +0.05em on uppercase labels.
+  - **Measure:** 45-75 characters.
+- ⟦S1432⟧ spacing-system
+  - **Scale:** one base-unit scale and never arbitrary values.
+  - **Spacing types:** inset, stack, inline and gap, named by type.
+  - **Grouping:** related items take smaller steps; distinct sections take larger ones.
+  - **Intent:** documented, not just values.
+- ⟦S1436⟧ animation-principles
+  - **Easing:** ease-out to enter, ease-in to exit, ease-in-out to move; linear only for continuous motion.
+  - **Durations:** micro 50-100, short 150-250, medium 250-400, long 400-700ms.
+  - **Stagger:** 30-50ms, with total sequences under 700ms.
+  - **Interruptible:** every animation can be cancelled; reduced motion is supported.
+- ⟦S1461⟧ design-token
+  - **Three tiers:** global → alias (semantic) → component.
+  - **Naming:** `{category}-{property}-{variant}-{state}`.
+  - Components never reference raw values. Each token is documented with its usage.
+- ⟦S1421⟧ illustration-style
+  - **Definition axes:** geometric vs organic, flat vs dimensional, level of detail, line style.
+  - **Colour:** a subset of the product palette.
+  - **Use rules:** when to use illustration and when not.
+  - **Accessibility:** never convey information through illustration alone.
+- ⟦S1496⟧ critique-brand-consistency
+  - **Brand files:** mood, voice and tokens files must exist; with no file, a dimension is not checkable.
+  - **Token compliance:** list hardcoded values.
+  - **Ratings:** pass / minor / major per dimension.
+- ⟦S1364⟧ atmosphere-background
+  - **Structure:** a layered background of overlapping bands, never a flat gradient.
+  - **Focal point:** one focal glow placed toward an edge or corner.
+  - **Motion:** a slow, meditative drift with no flicker.
+  - **Colour and performance:** tint from the brand's colour; pause when hidden; cap the device pixel ratio.
+  - **Fallback:** content stays readable without the effect.
+- ⟦S0546⟧ oversized-cursor (adapted to a live site)
+  - **Hotspot and press:** the hotspot is the tip, and press scaling pivots on it. The asymmetric tap is 0.84 over 0.1s
+    in, then back to 1 over 0.22s out.
+  - **Reactions:** every click causes something in the same frame; the target's reaction is a separate, parallel tween.
+  - **Behaviour around action:** the cursor drifts aside during beats it does not own; it never wobbles idly or freezes
+    on top of the action.
+  - **Brand motif:** use a brand-motif cursor only when the motif is legible.
+- ⟦S0407⟧ svg-animation
+  - **Draw-on:** dashoffset with `pathLength="1"`.
+  - **Morphs:** need identical command structure.
+  - **Motion along a path:** use offset-path or GSAP MotionPath.
+  - **Markup:** inline the SVG (not `<img>`) so it can be animated; keep the viewBox; use no fixed width or height.
+  - **Reduced motion:** keep a static final state.
+  - **Verification:** freeze frames (`?t=`) and check the start, middle and end.
+- ⟦S0489⟧ rossark-motion (the owl's eyes, the companion, the logo moment)
+  - **No snapping:** never teleport; interpolate everything. Calm, with small amplitudes.
+  - **Pivots and phase:** arcs and pivots; overlap by delay, not by springs; seeded variety, never everything in sync.
+  - **Blinks:** close in about 110ms, hold 30-50ms, reopen in about 190ms with ease-out.
+  - **Glances:** glide in about 500ms and hold for at least 1s.
+  - **Curves:** travel `cubic-bezier(.77,0,.175,1)`; arrive/open `(.23,1,.32,1)`; ease-in only for things falling away.
+  - **The logo:** plays once on appear, then rests; no endless loops on UI chrome.
+  - **Presses:** a 0.97 scale on the button, not inside the drawing.
+  - **Reduced motion means still:** frame 0 must be a good drawing. Nothing runs unseen.
+  - **Frequency decides amount:** frequent paths stay quiet.
+- ⟦S0195⟧ motion-foundations
+  - **Purpose:** motion must guide attention, communicate state or preserve continuity, or it is removed.
+  - **Tokens:** every duration and easing comes from tokens (instant/fast/normal/slow/crawl).
+  - **Properties:** animate transform and opacity only.
+  - **Reduced motion:** disables transforms; opacity fades of 0.2s or less are the only fallback.
+  - **Low-end devices:** drop non-essential motion.
+- ⟦S0651⟧ taste-skill-v1 (the dials)
+  - **Dials as numbers:** DESIGN_VARIANCE, MOTION_INTENSITY and VISUAL_DENSITY.
+  - **Layout:** asymmetric layouts above 768px fall back to a strict single column below it; `min-h:100dvh`, never
+    `h-screen`.
+  - **Colour:** one accent; no pure black; no 3-equal-card row; no filler words; no fake numbers.
+  - **Overridden by the owner's rules:** its font picks and its "no custom cursors" line. The owner requires everyday
+    fonts and an SVG cursor companion.

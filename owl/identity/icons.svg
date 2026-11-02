@@ -22,4 +22,6 @@
 <symbol id="icon-navigation-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-label=""><path d="M4 12H19.5 M13.6 6L19.5 12L13.6 18"/></symbol>
 <symbol id="icon-navigation-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-label=""><path d="M4 7L20 7 M4 12L20 12 M4 17L20 17"/></symbol>
 <symbol id="icon-navigation-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-label=""><path d="M5.5 5.5L18.5 18.5 M12 12L12 12 M5.5 18.5L18.5 5.5"/></symbol>
+<symbol id="icon-action-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-label="Pause"><path d="M8.5 5.5V18.5 M15.5 5.5V18.5"/></symbol>
+<symbol id="icon-action-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-label="Play"><path d="M7.5 5L18.5 12L7.5 19Z"/></symbol>
 </svg>

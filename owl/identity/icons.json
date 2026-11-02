@@ -82,5 +82,13 @@
  {
   "id": "icon-navigation-close",
   "label": ""
+ },
+ {
+  "id": "icon-action-pause",
+  "label": "Pause"
+ },
+ {
+  "id": "icon-action-play",
+  "label": "Play"
  }
 ]

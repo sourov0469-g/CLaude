@@ -2,7 +2,7 @@
 """Builds owl/phase2/identity-board.html from the identity files in owl/identity/ and Owl's own source files.
 Owl's logo files are injected UNCHANGED (only class/role attributes added, clipPath ids made unique).
 Run from owl/phase2:  python3 -I build-board.py"""
-import re, csv, json, itertools, html
+import re, csv, json, itertools, html, sys
 ID = '../identity/'
 SRC = '../assets/source/'
 cnt = itertools.count(1)
@@ -29,7 +29,8 @@ def symbol_from(file, sid):
     inner = re.sub(r'^.*?<svg[^>]*>|</svg>\s*$', '', s, flags=re.S)
     inner = re.sub(r'\sfill="#[0-9A-Fa-f]{6}"', '', inner)          # colour comes from the token at use time
     inner = re.sub(r'<g opacity="[0-9.]+">', '<g>', inner)
-    return f'<symbol id="{sid}" viewBox="{vb}" preserveAspectRatio="xMidYMax slice">{inner}</symbol>'
+    # overflow visible: Owl's artwork runs past its own viewBox; clipping it left hard rectangular edges (gen-test round 1)
+    return f'<symbol id="{sid}" viewBox="{vb}" preserveAspectRatio="xMidYMax slice" overflow="visible">{inner}</symbol>'
 
 tokens = open(ID + 'tokens.css').read()
 comps = open(ID + 'owl-components.css').read()
@@ -62,7 +63,8 @@ ig = ''.join(
 ladder = [2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160]
 sp = ''.join(f'<div class="sp-row"><code class="t-num">--space-{v}</code><span class="sp-bar" style="width:var(--space-{v})"></span><span class="t-small t-num">{v}px</span></div>' for v in ladder)
 
-src = open('board.src.html').read()
+SRC_HTML, OUT_HTML = (sys.argv[1], sys.argv[2]) if len(sys.argv) > 2 else ('board.src.html', 'identity-board.html')
+src = open(SRC_HTML).read()
 out = src
 for k, v in {'{{TOKENS}}': tokens, '{{COMPONENTS}}': comps, '{{ICONS}}': icons, '{{JS}}': js, '{{RINGS}}': rings, '{{TREES}}': trees,
              '{{CONTRAST_ROWS}}': ct, '{{TYPE_ROWS}}': tt, '{{ICON_GRID}}': ig, '{{SPACE_ROWS}}': sp}.items():
@@ -71,5 +73,5 @@ out = re.sub(r'\{\{LOGO_COLOUR(?::([\w-]+))?\}\}', lambda m: COLOUR(m.group(1) o
 out = re.sub(r'\{\{LOGO_WHITE(?::([\w-]+))?\}\}', lambda m: WHITE(m.group(1) or 'logo'), out)
 out = re.sub(r'\{\{IC:([\w-]+)(?::([\w -]+))?\}\}', lambda m: ic(m.group(1), m.group(2) or 'icon'), out)
 assert '{{' not in out, re.findall(r'\{\{[^}]*\}\}', out)[:5]
-open('identity-board.html', 'w').write(out)
-print('identity-board.html', len(out), 'bytes')
+open(OUT_HTML, 'w').write(out)
+print(OUT_HTML, len(out), 'bytes')

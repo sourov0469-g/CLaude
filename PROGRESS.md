@@ -113,6 +113,49 @@ corrections in this session; before each phase I check for one, then proceed wit
   sub-agents.**
 - **Next: Phase 2,** the identity asset board on the kept identity, then `GATE-PHASE-2.md`.
 
+## Phase 2: identity asset board and generation test, DONE (gate report `owl/GATE-PHASE-2.md`, self-rated 7.30, PASS)
+- **Asset files in `owl/identity/`:**
+  - Tokens: DTCG json and CSS, three tiers, generated from Owl's live hex values by `gen-tokens.py`.
+  - `contrast-pairs.csv`: every allowed pair measured and passing.
+  - `type-scale.csv`: Utopia clamps.
+  - 23 icons drawn to the Carbon spec.
+  - `owl-components.css`: a closed inventory of 17 components plus 2 bespoke tools.
+  - `owl-identity.js`:
+    - the logo's blink and glance, done in place;
+    - the sweep line, the magnet pass, the courses and the nest;
+    - three backgrounds: B1 Lawn light, B2 Rings, B3 Night yard;
+    - the header menu and the pinned-stage scrub;
+    - the cursor companion: Owl eyes / Magnet / Off.
+  - `BRAND.md`: mood, voice, tokens, component contracts, surfaces, imagery and companion.
+  - `lint-tokens.py`.
+- **Pages in `owl/phase2/`:**
+  - `identity-board.html`: every asset rendered and working.
+  - `exemplar.html`: the hero with Owl's video in a drawn house, plus pinned beat 2 (the magnet pass).
+  - The generation test, rounds 1 and 2, with `GENERATION-TEST.md`.
+- **Checks:**
+  - 31/31 interaction checks pass on the board: the companion, the menu, 390/768 overflow, reduced motion, touch.
+  - The token lint is clean everywhere.
+  - No JS errors.
+- **Generation test:** round 1 needed 3 inventions, all fixed in the assets: a place-list component, an assignment for
+  the Rings background, and Owl's ring symbols no longer clipping. Round 2 needed 0.
+  - It was run by me rather than a fresh session, because of the no-sub-agent order. This is stated in the gate.
+- **Corrections recorded:**
+  - The derived "moss" ground was removed: it was indistinct, and it failed with amber-700.
+  - The Phase 1 frame line "3 sweeps of your lawn. Every job." overstated Owl's claim. It is replaced by Owl's own
+    words: "3 rounds of cleanup… There's no way to ensure every nail is gone, but our 3-step cleanup goes a long way."
+- **Process (honest):**
+  - **The incident:** one render call ran long because of a bug in my code, and the harness moved it to the background.
+    I stopped it within seconds with TaskStop.
+  - **Checked afterwards:** no render or browser process left running.
+  - **The fix:** every render since runs in the foreground with an explicit timeout.
+  - **Zero background tasks and zero sub-agents are running.**
+- **Next: Phase 3a:**
+  - the page plan in this file;
+  - concept visuals;
+  - storyboards and the flow map;
+  - a competitor collision check;
+  - then `GATE-PHASE-3a.md`.
+
 ## Phase 1: material inventory (from the live source, not the text recon)
 - **Hero background video:** `Owl-BG-Condensed.mp4` (9.4 MB, 1280×720, h264, 15.6 s) + `.webm` (4.5 MB), poster
   `happy-homeowners-owl-roofing.jpg`. Saved.

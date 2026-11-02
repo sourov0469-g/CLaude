@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · exemplar (hero + Protect Your Nest beat 2)</title>
+<link rel="icon" href="../assets/source/owl-roofing-favicon.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+{{TOKENS}}
+{{COMPONENTS}}
+/* exemplar layout: tokens only (lint-checked) */
+body{margin:0}
+svg.logo{display:block;width:100%;height:auto}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.skip-link{left:var(--space-16);top:var(--space-16)}
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-48);align-items:center}
+.hero-copy{display:grid;gap:var(--space-24)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.hero-proof{display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.house{position:relative;margin:0}
+.house .roofcap{display:block;width:100%;height:auto;margin-bottom:calc(var(--space-4) * -1)}
+.house video,.house img.poster{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:0 0 var(--radius-m) var(--radius-m);background:var(--surface-alt)}
+.house .vctl{position:absolute;right:var(--space-12);bottom:var(--space-48);display:grid;place-items:center;width:var(--space-48);height:var(--space-48);border-radius:50%;border:0;background:var(--surface-ink);color:var(--text-on-deep);cursor:pointer;transition:transform var(--dur-fast) var(--ease-out)}
+.house .vctl:hover{transform:scale(1.06)}
+.house .vctl:active{transform:scale(var(--press-scale))}
+.house figcaption{font:var(--type-small);color:var(--text-muted);margin-top:var(--space-12)}
+.flow{position:absolute;left:0;bottom:0;width:100%;height:var(--space-160);z-index:0;overflow:visible;pointer-events:none}
+@media (max-width:1023px){.hero .wrap{grid-template-columns:1fr}}
+/* beat stage */
+.beat{position:relative;background:var(--surface-alt);height:260vh}
+.beat .pin{overflow:hidden}
+.beat .bgl{position:absolute;inset:0}
+.beat-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-48);align-items:start;padding-top:var(--space-96)}
+.numeral{font:800 calc(var(--step-5) * 2.4)/0.8 var(--font-display);letter-spacing:-0.04em;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-16)}
+.steps li{display:grid;grid-template-columns:var(--space-40) 1fr;gap:var(--space-12);align-items:start;color:var(--text-muted);transition:color var(--dur-normal) linear}
+.steps li .n{display:grid;place-items:center;width:var(--space-40);height:var(--space-40);border-radius:50%;border:1.5px solid var(--line-control);font:700 var(--step-m1)/1 var(--font-display);transition:background-color var(--dur-normal) linear,border-color var(--dur-normal) linear}
+.steps li[aria-current="step"]{color:var(--text-primary)}
+.steps li[aria-current="step"] .n{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--accent-on-fill)}
+.steps li.done .n{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-page)}
+.steps b{display:block;font:var(--type-subheading);color:inherit}
+.owlsays{font:var(--type-body);border-left:3px solid var(--line-control);padding-left:var(--space-16);max-width:var(--measure)}
+.stagebox{position:absolute;left:0;right:0;bottom:var(--space-24);z-index:1}
+.stagebox svg{display:block;width:100%;height:auto}
+.after{background:var(--surface-page);padding:var(--section-default) 0}
+@media (max-width:1023px){.beat-inner{grid-template-columns:1fr;gap:var(--space-24);padding-top:var(--space-80)}.numeral{font-size:var(--step-5)}}
+.n-inline{display:none}
+@media (max-width:767px){
+  .beat-inner{padding-top:var(--space-96);gap:var(--space-16)}
+  .numeral{display:none}.n-inline{display:inline}
+  .beat .t-heading{font:var(--type-subheading)}
+  .steps{gap:var(--space-8)}.steps li{grid-template-columns:var(--space-32) 1fr}.steps li .n{width:var(--space-32);height:var(--space-32)}
+  .steps b{font:700 var(--step-0)/1.3 var(--font-display)}
+  .steps li:not([aria-current]) .t-small{display:none}
+  .owlsays{display:none}
+  .stagebox{bottom:var(--space-80)}
+}
+@media (prefers-reduced-motion:reduce){.beat{height:auto}.beat .stagebox{position:relative;bottom:auto;padding:var(--space-48) 0}}
+</style>
+</head>
+<body class="owl">
+{{ICONS}}
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="owl-header" data-logo-host>
+  <a href="#top" aria-label="Owl Roofing, home">{{LOGO_COLOUR}}</a>
+  <nav aria-label="Main"><a href="#main">Roofing</a><a href="#main">Storm damage</a><a href="#nest" aria-current="true">Protect Your Nest</a><a href="#main">About</a></nav>
+  <a class="tel" href="tel:+16519776027">{{IC:communication-phone}}<span class="t-num">(651) 977-6027</span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7L20 7 M4 12L20 12 M4 17L20 17"/></svg></button>
+  <div class="menu-panel" id="menuPanel" hidden><a href="#main">Roofing</a><a href="#main">Storm damage</a><a href="#nest">Protect Your Nest</a><a href="#main">About</a><a href="tel:+16519776027">Call (651) 977-6027</a></div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-labelledby="h1">
+  <svg data-bg="lawn"></svg>
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1 id="h1" class="t-display">We actually answer the phone.</h1>
+      <p class="t-body">Family-owned roofers in Shoreview. Roof replacement, storm damage, repair and siding across the Twin Cities, with a system that protects your home at every stage of the job.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="tel:+16519776027">{{IC:communication-phone:icon icon--phone}}Call (651) 977-6027</a>
+        <a class="btn btn--secondary" href="sms:+16519776027">{{IC:communication-text}}Text us</a>
+      </div>
+      <div class="hero-proof"><span class="chip">{{IC:status-star}}5.0 · 90+ reviews</span><span class="chip">GAF Systems Plus Certified</span><span class="chip">{{IC:status-guarantee}}10-year Get It Right Guarantee</span></div>
+      <p class="t-small"><a class="link" href="#nest">See the Protect Your Nest system</a></p>
+    </div>
+    <figure class="house">
+      <svg class="roofcap" viewBox="0 0 640 120" aria-hidden="true"><path d="M8 118 L320 10 L632 118" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" style="stroke:var(--text-primary)"/><path d="M110 92 H530 M170 72 H470 M230 51 H410 M290 31 H350" fill="none" stroke-width="2" stroke-linecap="round" style="stroke:var(--line-control)"/></svg>
+      <video id="heroVideo" muted playsinline loop preload="metadata" poster="../assets/source/frames/owl-bg-11.jpg" aria-label="Owl Roofing's crew at work: carrying shingle bundles, laying decking, walking a finished roof">
+        <source src="../assets/source/Owl-BG-Condensed.webm" type="video/webm"><source src="../assets/source/Owl-BG-Condensed.mp4" type="video/mp4">
+      </video>
+      <button class="vctl" type="button" id="vctl" aria-label="Pause the video">{{IC:action-pause}}</button>
+      <figcaption>Owl's own crew, from Owl's own footage.</figcaption>
+    </figure>
+  </div>
+  <svg class="flow" id="flowAsvg" style="height:100%" aria-hidden="true"><path id="flowA" d="M0 0 V1"/></svg>
+</section>
+
+<section class="beat beat-stage" id="nest" aria-labelledby="h2" data-owl-busy>
+  <div class="pin">
+    <svg class="bgl" data-bg="lawn" data-ground="cream"></svg>
+    <svg class="flow" id="flowBsvg" style="top:0;bottom:auto;height:100%" aria-hidden="true"><path id="flowB" d="M0 0 V1"/></svg>
+    <div class="wrap beat-inner">
+      <div style="display:grid;gap:var(--space-16)">
+        <a class="skip-link" href="#after">Skip the cleanup beat</a>
+        <p class="beat-count">Protect Your Nest · <span class="t-num">2 of 4</span></p>
+        <p class="numeral" aria-hidden="true">3</p>
+        <h2 id="h2" class="t-heading"><span class="n-inline t-num">3 </span>rounds of cleanup. Round two is a magnet.</h2>
+      </div>
+      <div style="display:grid;gap:var(--space-24)">
+        <ol class="steps" id="steps">
+          <li><span class="n t-num">1</span><span><b>Our crew does a first pass</b><span class="t-small">Roofing job sites are messy, but we get everything in the dumpster in round one.</span></span></li>
+          <li><span class="n t-num">2</span><span><b>First pass with the magnet</b><span class="t-small">A roofing magnet collects nails and other metal scraps in round two.</span></span></li>
+          <li><span class="n t-num">3</span><span><b>A project manager does quality control</b><span class="t-small">Then the job is checked again before we leave.</span></span></li>
+        </ol>
+        <p class="owlsays">"There's no way to ensure every nail is gone, but our 3-step cleanup goes a long way." <span class="t-small muted">Owl Roofing</span></p>
+      </div>
+    </div>
+    <div class="stagebox"><svg id="pass" role="img" aria-label="Drawing: a rolling roofing magnet crosses the lawn and lifts nails onto its bar"></svg></div>
+  </div>
+</section>
+<section class="after" id="after"><div class="wrap"><p class="t-body muted">Next on the page: beat 3, Owl Roof Aftercare (built in Phase 3).</p></div></section>
+</main>
+<div class="callbar"><a href="tel:+16519776027">{{IC:communication-phone}}Call</a><a href="sms:+16519776027">{{IC:communication-text}}Text</a></div>
+
+<script>
+{{JS}}
+</script>
+<script>
+(function () {
+  Owl.header(document.querySelector('.owl-header'));
+  document.querySelectorAll('svg.logo').forEach(function (s) { Owl.logo(s); });
+  document.querySelectorAll('svg[data-bg]').forEach(function (s) { Owl.bg[s.dataset.bg](s, { ground: s.dataset.ground || 'paper', sweep: false }); // the page's own flow line is the sweep here });
+  // hero video: plays only while visible; a real pause control; reduced motion = poster, no autoplay
+  var v = document.getElementById('heroVideo'), b = document.getElementById('vctl'), userPaused = Owl.reduced();
+  function label() { var paused = v.paused; b.setAttribute('aria-label', paused ? 'Play the video' : 'Pause the video'); b.querySelector('use').setAttribute('href', paused ? '#icon-action-play' : '#icon-action-pause'); }
+  v.addEventListener('play', label); v.addEventListener('pause', label);
+  b.addEventListener('click', function () { if (v.paused) { userPaused = false; v.play().catch(function () {}); } else { userPaused = true; v.pause(); } });
+  new IntersectionObserver(function (es) { if (es[0].isIntersecting && !userPaused) v.play().catch(function () {}); else v.pause(); }, { threshold: 0.25 }).observe(v);
+  label();
+  // the line: leaves the house, crosses the hero, drops into the beat and becomes the lawn the magnet works
+  var hero = document.querySelector('.hero');
+  var a = Owl.sweepLine(document.getElementById('flowA')), bl = Owl.sweepLine(document.getElementById('flowB'));
+  // the line runs in the left margin, never through copy: x = halfway between the page edge and the content edge.
+  // It leaves the house sill, crosses the hero, and drops through the beat to the lawn the magnet works. Measured, not guessed.
+  function placeLines() {
+    var content = document.querySelector('.hero .hero-copy').getBoundingClientRect().left, x = Math.max(6, Math.round(content / 2));
+    var sa = document.getElementById('flowAsvg'), h = hero.getBoundingClientRect(), vid = document.getElementById('heroVideo').getBoundingClientRect();
+    var sx = Math.round(vid.left - h.left - 20), sy = Math.round(vid.bottom - h.top - 32), ey = Math.round(h.height); // just outside the frame, in the gap
+    sa.setAttribute('viewBox', '0 0 ' + Math.round(h.width) + ' ' + ey);
+    var lane = ey - 48; // the clear band inside the hero's bottom padding: below every line of copy
+    var dA = 'M' + sx + ' ' + sy + ' C' + sx + ' ' + lane + ' ' + sx + ' ' + lane + ' ' + (sx - 80) + ' ' + lane + ' H' + (x + 40) + ' Q' + x + ' ' + lane + ' ' + x + ' ' + (lane + 40) + ' V' + ey;
+    [a.live, a.base].forEach(function (n) { n.setAttribute('d', dA); });
+    var sb = document.getElementById('flowBsvg'), pin = sb.parentNode.getBoundingClientRect(), lawn = document.querySelector('#pass .owl-lawn path:last-child').getBoundingClientRect();
+    sb.setAttribute('viewBox', '0 0 ' + Math.round(pin.width) + ' ' + Math.round(pin.height));
+    [bl.live, bl.base].forEach(function (n) { n.setAttribute('d', 'M' + x + ' 0 V' + Math.round(lawn.top - pin.top)); });
+  }
+
+  Owl.scrub(hero, function (p) { a.set(0.22 + 0.78 * p); }, { start: 0, end: 0 });
+  // beat 2: one pinned proof, scrubbed both ways
+  var pass = Owl.magnetPass(document.getElementById('pass'), { nails: 12 });
+  placeLines(); addEventListener('resize', placeLines); document.fonts.ready.then(placeLines);
+  var steps = [].slice.call(document.querySelectorAll('#steps li'));
+  Owl.pinScrub(document.querySelector('.beat'), function (p) {
+    bl.set(Owl.seg(p, 0, 0.16));
+    pass.set(Owl.seg(p, 0.18, 0.82));
+    var cur = p < 0.18 ? 0 : p < 0.86 ? 1 : 2;
+    steps.forEach(function (li, i) { li.toggleAttribute('aria-current', i === cur); if (i === cur) li.setAttribute('aria-current', 'step'); li.classList.toggle('done', i < cur); });
+  });
+  Owl.companion.init('eyes');
+})();
+</script>
+</body>
+</html>

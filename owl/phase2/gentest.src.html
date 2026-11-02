@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · generation test: service area (unseen section)</title>
+<link rel="icon" href="../assets/source/owl-roofing-favicon.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+{{TOKENS}}
+{{COMPONENTS}}
+body{margin:0}
+svg.logo{display:block;width:100%;height:auto}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.area{position:relative;overflow:hidden;background:var(--surface-alt);padding:var(--section-default) 0}
+.area .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:start}
+@media (max-width:1023px){.area .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="owl">
+{{ICONS}}
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">{{RINGS}}</svg>
+<main>
+<section class="area" aria-labelledby="ha">
+  <svg data-bg="rings"></svg>
+  <div class="wrap">
+    <div>
+      <div class="sec-head"><h2 id="ha" class="t-heading">29 towns around the Twin Cities</h2><p class="t-body muted">Based at 1000 County Rd E in Shoreview. We also work in surrounding Minnesota communities, so call and ask.</p></div>
+      <ul class="place-list" aria-label="Towns Owl Roofing serves">
+        <li data-home>{{IC:navigation-pin}}Shoreview</li><li>North Oaks</li><li>Arden Hills</li><li>Vadnais Heights</li><li>Roseville</li><li>Blaine</li><li>Mounds View</li><li>Lino Lakes</li><li>Forest Lake</li><li>Fridley</li><li>Maplewood</li><li>New Brighton</li><li>Minneapolis</li><li>Saint Paul</li><li>White Bear Lake</li><li>Stillwater</li><li>Little Canada</li><li>Coon Rapids</li><li>Woodbury</li><li>Oakdale</li><li>Eagan</li><li>Burnsville</li><li>Apple Valley</li><li>Bloomington</li><li>Edina</li><li>Plymouth</li><li>Minnetonka</li><li>Eden Prairie</li><li>Maple Grove</li>
+      </ul>
+      <p style="margin-top:var(--space-32)"><a class="btn" href="tel:+16519776027">{{IC:communication-phone:icon icon--phone}}Call (651) 977-6027</a></p>
+    </div>
+    <figure class="frame frame--4x3"><img src="../assets/source/owl-pages/owl-map.webp" alt="Owl Roofing's service-area map around Shoreview: North Oaks, Arden Hills, Roseville, White Bear Lake and neighbouring towns" loading="lazy"><figcaption>Owl's own service-area map.</figcaption></figure>
+  </div>
+</section>
+</main>
+<script>
+{{JS}}
+</script>
+<script>document.querySelectorAll('svg[data-bg]').forEach(function (s) { Owl.bg[s.dataset.bg](s); });</script>
+</body>
+</html>

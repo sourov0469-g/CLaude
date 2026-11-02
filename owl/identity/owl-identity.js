@@ -51,6 +51,17 @@
     update();
   }
 
+  // pinned-stage scrub: p = 0 when the stage top reaches the viewport top, 1 when its bottom reaches the viewport bottom
+  function pinScrub(stage, fn) {
+    if (reduced()) { fn(1); return; }
+    let raf = 0, visible = false;
+    const update = () => { raf = 0; const r = stage.getBoundingClientRect(); fn(clamp01(-r.top / Math.max(1, r.height - innerHeight))); };
+    const req = () => { if (visible && !raf) raf = requestAnimationFrame(update); };
+    new IntersectionObserver((es) => { visible = es[0].isIntersecting; req(); }).observe(stage);
+    addEventListener('scroll', req, { passive: true }); addEventListener('resize', req);
+    update();
+  }
+
   // ---------- 1. the kept logo, alive in place (paths are Owl's; only transforms are applied)
   function logo(svg) {
     const parts = [...svg.querySelectorAll('.eye, .pupil')];
@@ -307,7 +318,7 @@
   }
   let gid = 0;
   const bg = {
-    lawn(svg, { seed = 5 } = {}) { // light: receding shingle-course underdrawing, dotted sweep, lawn edge, one warm glow low-left
+    lawn(svg, { seed = 5, ground = 'paper', sweep = true } = {}) { // ground: 'paper' | 'cream' (hairlines would vanish on cream, so lines switch to the control tone, faint) // light: receding shingle-course underdrawing, dotted sweep, lawn edge, one warm glow low-left
       const id = 'owlbg' + ++gid, W = 1440, H = 800;
       svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio', 'xMidYMax slice'); svg.setAttribute('aria-hidden', 'true'); svg.classList.add('owl-bg', 'owl-bg--lawn');
       const defs = el('defs', {}, svg);
@@ -317,7 +328,7 @@
       const rg = el('radialGradient', { id: id + 'g' }, defs);
       el('stop', { offset: 0, style: 'stop-color:var(--graphic-warm);stop-opacity:.22' }, rg); el('stop', { offset: 1, style: 'stop-color:var(--graphic-warm);stop-opacity:0' }, rg);
       el('ellipse', { class: 'drift-a', cx: W - 300, cy: H - 230, rx: 460, ry: 300, fill: `url(#${id}g)` }, svg); // the one focal mass, opposite the copy
-      const c = el('g', { mask: `url(#${id}m)`, fill: 'none', 'stroke-width': 1, style: 'stroke:var(--line-hairline)' }, svg);
+      const c = el('g', { mask: `url(#${id}m)`, fill: 'none', 'stroke-width': 1, style: ground === 'cream' ? 'stroke:var(--line-control);opacity:.22' : 'stroke:var(--line-hairline)' }, svg);
       for (let i = 1, y = H - 40; y > 40; i++) { // courses: spacing shrinks toward the top so the plane recedes
         const gap = Math.max(22, 70 * Math.pow(0.88, i)); // floor keeps the loop finite and the top courses legible
         let d = `M0 ${y}H${W}`;
@@ -325,7 +336,7 @@
         el('path', { d, style: `stroke-width:${Math.max(0.6, 1.4 * Math.pow(0.9, i))}` }, c);
         y -= gap;
       }
-      const line = el('path', { d: `M-20 ${H - 210} C 360 ${H - 330} 620 ${H - 120} 980 ${H - 250} S 1400 ${H - 330} ${W + 20} ${H - 300}`, fill: 'none', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-dasharray': '0 12', style: 'stroke:var(--line-control);opacity:.5' }, svg);
+      if (sweep) el('path', { d: `M-20 ${H - 210} C 360 ${H - 330} 620 ${H - 120} 980 ${H - 250} S 1400 ${H - 330} ${W + 20} ${H - 300}`, fill: 'none', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-dasharray': '0 12', style: 'stroke:var(--line-control);opacity:.5' }, svg);
       const lawn = el('g', { 'stroke-width': 1.4, 'stroke-linecap': 'round', fill: 'none', style: 'stroke:var(--line-control);opacity:.4' }, svg);
       let d = '';
       for (let x = 4, i = 0; x < W; x += 5 + seeded(i, seed) * 4, i++) { const h = 6 + seeded(i, seed + 1) * 16; d += `M${x.toFixed(1)} ${H} q${((seeded(i, seed + 2) - 0.5) * 3).toFixed(1)} ${(-h * 0.6).toFixed(1)} ${((seeded(i, seed + 2) - 0.5) * 7).toFixed(1)} ${(-h).toFixed(1)} `; }
@@ -373,5 +384,5 @@
     document.addEventListener('pointerdown', (e) => { if (!h.contains(e.target) && t.getAttribute('aria-expanded') === 'true') set(false); });
   }
 
-  window.Owl = { header, bg, logo, sweepLine, magnetPass, courses, nest, scrub, play, companion, seeded, seg, EASE, reduced };
+  window.Owl = { pinScrub, header, bg, logo, sweepLine, magnetPass, courses, nest, scrub, play, companion, seeded, seg, EASE, reduced };
 })();

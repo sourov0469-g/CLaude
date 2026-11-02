@@ -34,11 +34,11 @@ code{font:var(--type-small);font-family:ui-monospace,monospace;font-size:.82em}
 .plate span{position:absolute;left:var(--space-12);bottom:var(--space-8);font:var(--type-small)}
 .p-paper{background:var(--surface-page);border:1px solid var(--line-hairline)}.p-cream{background:var(--surface-alt)}
 .p-deep{background:var(--surface-deep);color:var(--text-on-deep)}.p-bark{background:var(--surface-bark);color:var(--text-on-deep)}.p-ink{background:var(--surface-ink);color:var(--text-on-deep)}
-.p-wrong{background:var(--surface-ink);color:var(--text-on-deep);outline:3px dashed var(--accent-fill);outline-offset:-10px}
+.p-wrong{background:var(--surface-ink);color:var(--text-on-deep);outline:3px dashed var(--accent-fill);outline-offset:calc(var(--space-8) * -1)}
 .p-wrong .crop{width:var(--space-64);height:var(--space-64);overflow:hidden;border-radius:50%}
 .p-wrong .crop .logo{width:var(--space-160)}
 .clear{position:relative;display:inline-block;padding:var(--space-24);outline:1px dashed var(--line-control)}
-.min .logo{width:120px}
+.min .logo{width:calc(var(--space-80) + var(--space-40))}
 /* ramps */
 .ramp{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:var(--space-8);margin-bottom:var(--space-16)}
 .swatch{border-radius:var(--radius-s);overflow:hidden;border:1px solid var(--line-hairline);font:var(--type-small);background:var(--surface-raised)}
@@ -98,7 +98,7 @@ tr.ban td{color:var(--text-muted)}
 .seg button[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-page)}
 .toc{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-16);font:700 var(--step-m1)/1.4 var(--font-display)}
 .toc a{color:var(--text-primary)}
-.phone-mock{width:22rem;max-width:100%;aspect-ratio:9/16;border:10px solid var(--surface-ink);border-radius:var(--space-32);position:relative;overflow:hidden;background:var(--surface-page)}
+.phone-mock{width:22rem;max-width:100%;aspect-ratio:9/16;border:var(--space-8) solid var(--surface-ink);border-radius:var(--space-32);position:relative;overflow:hidden;background:var(--surface-page)}
 .phone-mock .callbar{display:grid;position:absolute}
 .owl-footer .logo{width:100%;height:auto;display:block}
 </style>
@@ -162,7 +162,7 @@ tr.ban td{color:var(--text-muted)}
       <div class="refcard"><b>Minimum size</b><div class="min">{{LOGO_COLOUR}}</div><span>120px wide on screen. Below that, "ROOFING" closes up. There is no icon-only variant: cropping the O is forbidden. The favicon stays Owl's own JPG.</span></div>
       <div class="refcard"><b>Logo life (⟦S0489⟧)</b><span>It blinks once on first appear, then rests (no loop on chrome). The pupils glance at most 1 unit toward the pointer (480ms glide) and glide back after 1.2s. A press blinks: close 110ms, hold 40ms, open 190ms with ease-out.</span><div class="ctrl"><button type="button" id="blinkAll">Blink every logo</button></div></div>
     </div>
-    <div class="plate p-paper" style="margin-top:var(--space-16);min-height:var(--space-96);outline:3px dashed var(--accent-fill);outline-offset:-10px"><div class="crop" style="width:var(--space-64);height:var(--space-64);overflow:hidden;border-radius:50%"><div style="width:var(--space-160)">{{LOGO_COLOUR}}</div></div><span>WRONG: cropping the O into an icon</span></div>
+    <div class="plate p-paper" style="margin-top:var(--space-16);min-height:var(--space-96);outline:3px dashed var(--accent-fill);outline-offset:calc(var(--space-8) * -1)"><div class="crop" style="width:var(--space-64);height:var(--space-64);overflow:hidden;border-radius:50%"><div style="width:var(--space-160)">{{LOGO_COLOUR}}</div></div><span>WRONG: cropping the O into an icon</span></div>
   </div>
 </section>
 
