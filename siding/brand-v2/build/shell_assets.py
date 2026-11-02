@@ -1,7 +1,7 @@
 """Base CSS and JS for the single-file site. Components read semantic tokens only."""
 
 BASE_CSS = r'''
-*{box-sizing:border-box} html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+[hidden]{display:none!important} *{box-sizing:border-box} html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--color-bg-page);color:var(--color-text-primary);font:400 var(--type-body-size)/var(--type-body-leading) var(--font-text);font-variant-numeric:tabular-nums}
 img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} :focus-visible{outline:3px solid var(--color-focus-ring);outline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .skip:focus{position:fixed;left:8px;top:8px;width:auto;height:auto;clip:auto;z-index:99;background:var(--color-bg-page);padding:12px 16px;font-weight:700}

@@ -67,7 +67,7 @@ def s5():
 def s6():
     steps = [('Light', 3), ('Light-mid', 5), ('Mid', 7), ('Mid-deep', 9), ('Deep', 11), ('Deepest', 12)]
     txt = ('<p class="lead">Light colours keep a wall cooler and show less fading; deep colours make the shadow lines stand out. '
-           'Pick the lightness first, then the colour. The actual colour range is gone through with you at the estimate.</p>')
+           'Pick the lightness first; choose the actual colour with the firm.</p>')
     ink = lambda k: 'var(--color-text-primary)' if k < 8 else '#fff'
     f1 = ''.join(f'<div class="cf" style="background:var(--steel-{k});color:{ink(k)}"><span>{esc(n)}</span></div>' for n, k in steps)
     v1 = (f'<div class="co1"><div class="co1-f" aria-hidden="true">{f1}</div><div class="wrap co-c"><div class="co-plate"><p class="label">Choosing a colour</p>'
