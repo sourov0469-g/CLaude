@@ -358,6 +358,24 @@ main:focus{outline:none}
   .hv2-line{transition:none}.hv2-line[data-beat="0"]{opacity:1;transform:none}.hv2-line:not([data-beat="0"]){display:none}
 }
 
+/* ===== proof strip (Longbow: doctrine backed by hard numbers; Owl's locked facts only) ===== */
+.proof-v1,.proof-v2{background:var(--surface-alt);padding:var(--section-minor) 0;border-top:1px solid var(--line-hairline);border-bottom:1px solid var(--line-hairline)}
+.pv1-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0}
+.pv1-cell{padding:0 var(--space-24);border-left:1px solid var(--line-control);display:grid;gap:var(--space-8);align-content:start}
+.pv1-cell:first-child{border-left:0;padding-left:0}
+.pv1-num{font:800 var(--step-4)/1 var(--font-display);letter-spacing:-0.02em;display:flex;align-items:baseline;gap:var(--space-4);margin:0}
+.pv1-num small{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted);letter-spacing:0}
+.pv1-star{width:var(--space-24);height:var(--space-24);color:var(--text-primary);align-self:center}
+.pv1-cell dd{margin:0;font:var(--type-small);color:var(--text-muted)}
+.pv1-creds{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-24);margin-top:var(--space-24);padding-top:var(--space-16);border-top:1px solid var(--line-hairline);font-weight:700}
+@media (max-width:1023px){.pv1-row{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--space-24)}.pv1-cell:nth-child(4){border-left:0;padding-left:0}}
+@media (max-width:767px){.pv1-row{grid-template-columns:repeat(2,minmax(0,1fr))}.pv1-cell:nth-child(odd){border-left:0;padding-left:0}.pv1-cell:nth-child(4){border-left:1px solid var(--line-control);padding-left:var(--space-24)}}
+.pv2-row{display:flex;flex-wrap:wrap;gap:var(--space-24) var(--space-48);align-items:center}
+.pv2-seal{margin:0;display:flex;gap:var(--space-16);align-items:center;max-width:16rem}
+.pv2-seal img{width:var(--space-80);height:var(--space-80);border-radius:50%;object-fit:cover;flex:none}
+.pv2-seal img.pv2-badge{border-radius:0;object-fit:contain}
+.pv2-seal figcaption{font:var(--type-small)}
+.pv2-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8);flex:1;min-width:18rem}
 
 /* ===== Protect Your Nest V1 · pinned beats (AirPods stage + Graza custom animation) ===== */
 .nest-v1{position:relative;background:var(--surface-page)}
@@ -609,7 +627,32 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-proof" data-sec="proof" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">proof v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">proof v2: not built yet</p></div></div></div><div class="sec" id="s-nest" data-sec="nest" data-default="1"><div class="ver" data-v="1"><section class="nest-v1" aria-labelledby="nest1-h">
+</div></div><div class="sec" id="s-proof" data-sec="proof" data-default="1"><div class="ver" data-v="1"><section class="proof-v1" aria-label="What Owl can show">
+  <div class="wrap">
+    <dl class="pv1-row">
+      <div class="pv1-cell"><dt class="pv1-num t-num"><span data-count="5.0" data-dec="1">5.0</span><svg class="icon pv1-star" aria-hidden="true"><use href="#icon-status-star"/></svg></dt><dd>90+ reviews</dd></div>
+      <div class="pv1-cell"><dt class="pv1-num t-num"><span data-count="10">10</span><small>yr</small></dt><dd>Get It Right Guarantee on our work</dd></div>
+      <div class="pv1-cell"><dt class="pv1-num t-num"><small>up to</small><span data-count="50">50</span><small>yr</small></dt><dd>manufacturer warranties</dd></div>
+      <div class="pv1-cell"><dt class="pv1-num t-num"><span data-count="29">29</span></dt><dd>towns around the Twin Cities</dd></div>
+      <div class="pv1-cell"><dt class="pv1-num t-num"><span data-count="2025" data-from="2000">2025</span></dt><dd>founded by two families</dd></div>
+    </dl>
+    <p class="pv1-creds t-small"><span>GAF Systems Plus Certified</span><span>BBB Accredited, A−</span><span class="t-num">MN licence #BC809662</span></p>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="proof-v2" aria-label="What Owl can show">
+  <div class="wrap pv2-row">
+    <figure class="pv2-seal"><img src="../assets/source/get-it-right-guarantee-owl-768x768.png" alt="Owl's Get It Right Guarantee seal" width="96" height="96" loading="lazy"><figcaption><b>10-year</b> Get It Right Guarantee</figcaption></figure>
+    <figure class="pv2-seal"><img src="../assets/source/owl-pages/Wise-Check.png" alt="Owl's Wise Check inspection badge" width="80" height="96" loading="lazy" class="pv2-badge"><figcaption><b>The Wise Check</b> roof and attic inspection</figcaption></figure>
+    <ul class="pv2-chips">
+      <li class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-status-star"/></svg>5.0 · 90+ reviews</li>
+      <li class="chip">GAF Systems Plus Certified</li>
+      <li class="chip">BBB Accredited, A−</li>
+      <li class="chip t-num">MN licence #BC809662</li>
+      <li class="chip">Up to 50-year manufacturer warranties</li>
+    </ul>
+  </div>
+</section>
+</div></div><div class="sec" id="s-nest" data-sec="nest" data-default="1"><div class="ver" data-v="1"><section class="nest-v1" aria-labelledby="nest1-h">
   <a class="skip-link" href="#s-game">Skip the Protect Your Nest beats</a>
   <div class="nv1-stage beat-stage">
     <div class="pin nv1-pin">
@@ -1233,6 +1276,19 @@ main:focus{outline:none}
   Owl.pinScrub(h2.querySelector('.hv2-stage'), function (p) { if (!h2.closest('[hidden]')) render(p); });
 })();
 
+/* proof strip V1: numbers count up once when first seen (ease-out, tabular), then rest; reduced motion shows them as-is */
+(function () {
+  var root = document.querySelector('.proof-v1'); if (!root || Owl.reduced()) return;
+  var spans = [].slice.call(root.querySelectorAll('[data-count]'));
+  spans.forEach(function (s) { s.textContent = (+(s.dataset.from || 0)).toFixed(+(s.dataset.dec || 0)); }); // start value set before first paint of the strip: no jump
+  new IntersectionObserver(function (es, io) {
+    if (!es[0].isIntersecting) return; io.disconnect();
+    spans.forEach(function (s, i) {
+      var to = parseFloat(s.dataset.count), from = parseFloat(s.dataset.from || 0), dec = +(s.dataset.dec || 0);
+      setTimeout(function () { Owl.play(function (p) { s.textContent = (from + (to - from) * Owl.EASE.out(p)).toFixed(dec); }, 900); }, i * 40);
+    });
+  }, { threshold: 0.6 }).observe(root);
+})();
 
 /* ===== Protect Your Nest: beat drawings (made only from Owl's system) + V1 pinned choreography ===== */
 window.OwlNest = (function () {

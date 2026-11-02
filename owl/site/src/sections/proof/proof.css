@@ -1,0 +1,18 @@
+/* ===== proof strip (Longbow: doctrine backed by hard numbers; Owl's locked facts only) ===== */
+.proof-v1,.proof-v2{background:var(--surface-alt);padding:var(--section-minor) 0;border-top:1px solid var(--line-hairline);border-bottom:1px solid var(--line-hairline)}
+.pv1-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0}
+.pv1-cell{padding:0 var(--space-24);border-left:1px solid var(--line-control);display:grid;gap:var(--space-8);align-content:start}
+.pv1-cell:first-child{border-left:0;padding-left:0}
+.pv1-num{font:800 var(--step-4)/1 var(--font-display);letter-spacing:-0.02em;display:flex;align-items:baseline;gap:var(--space-4);margin:0}
+.pv1-num small{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted);letter-spacing:0}
+.pv1-star{width:var(--space-24);height:var(--space-24);color:var(--text-primary);align-self:center}
+.pv1-cell dd{margin:0;font:var(--type-small);color:var(--text-muted)}
+.pv1-creds{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-24);margin-top:var(--space-24);padding-top:var(--space-16);border-top:1px solid var(--line-hairline);font-weight:700}
+@media (max-width:1023px){.pv1-row{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--space-24)}.pv1-cell:nth-child(4){border-left:0;padding-left:0}}
+@media (max-width:767px){.pv1-row{grid-template-columns:repeat(2,minmax(0,1fr))}.pv1-cell:nth-child(odd){border-left:0;padding-left:0}.pv1-cell:nth-child(4){border-left:1px solid var(--line-control);padding-left:var(--space-24)}}
+.pv2-row{display:flex;flex-wrap:wrap;gap:var(--space-24) var(--space-48);align-items:center}
+.pv2-seal{margin:0;display:flex;gap:var(--space-16);align-items:center;max-width:16rem}
+.pv2-seal img{width:var(--space-80);height:var(--space-80);border-radius:50%;object-fit:cover;flex:none}
+.pv2-seal img.pv2-badge{border-radius:0;object-fit:contain}
+.pv2-seal figcaption{font:var(--type-small)}
+.pv2-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8);flex:1;min-width:18rem}
