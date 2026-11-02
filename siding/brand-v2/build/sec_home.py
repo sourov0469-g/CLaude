@@ -78,3 +78,103 @@ const h2=document.querySelector('[data-hero2]');if(h2){const P=[...h2.querySelec
 
 
 HOME = [s1]
+
+
+# ----------------------------------------------------------------------------------------------------------- 2 proof band
+def s2():
+    from shell import home2  # noqa: F401
+    line = (f'<div class="pb1"><div class="wrap pb1-in"><p class="pb1-r">{icon("status-star", 20)}<b>{esc(REVIEWS)}</b></p>'
+            f'<p class="pb1-c">{"".join(f"<span>{esc(c)}</span>" for c in CREDS)}</p>'
+            f'<a class="pb1-a" href="#/about/booking">Book an estimate {icon("action-arrow-right", 18)}</a></div></div>')
+    cells = [('status-star', 'Reviews', REVIEWS)] + [('status-credential', k, c) for k, c in zip(['Roofing', 'Siding', 'Windows', 'Business'], CREDS)]
+    grid = ''.join(f'<div class="pb2-c">{icon(i, 28)}<p class="pb2-k">{esc(k)}</p><p class="pb2-v">{esc(v)}</p></div>' for i, k, v in cells)
+    v2 = f'<div class="pb2 sec-pad"><div class="wrap"><p class="label">What the record says</p>{cline()}<div class="pb2-g">{grid}</div></div></div>'
+    css = r'''
+.pb1{background:var(--color-bg-subtle);border-bottom:1px solid var(--color-border-subtle)} .pb1-in{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-04) var(--space-07);min-height:88px;padding-top:var(--space-04);padding-bottom:var(--space-04)}
+.pb1 p{margin:0} .pb1-r{display:inline-flex;align-items:center;gap:8px} .pb1-r svg{color:var(--color-accent-solid)}
+.pb1-c{display:flex;flex-wrap:wrap;gap:var(--space-02) var(--space-05);color:var(--color-text-secondary);font-size:15px} .pb1-c span+span::before{content:"·";margin-right:var(--space-05);color:var(--color-border-control)}
+.pb1-a{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-weight:700;min-height:44px}
+.pb2-g{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--color-border-default)}
+.pb2-c{padding:var(--space-06) var(--space-05) var(--space-05) 0;border-right:1px solid var(--color-border-subtle)} .pb2-c+.pb2-c{padding-left:var(--space-05)} .pb2-c:last-child{border-right:0}
+.pb2-c svg{color:var(--color-accent-solid)} .pb2-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary);margin:var(--space-04) 0 var(--space-02)} .pb2-v{font:700 18px/1.35 var(--font-text);margin:0}
+@media (max-width:900px){.pb2-g{grid-template-columns:repeat(2,minmax(0,1fr))} .pb2-c{border-right:0;border-bottom:1px solid var(--color-border-subtle);padding-left:0!important} .pb1-a{margin-left:0}}
+'''
+    return 'Proof band', line, v2, css, ''
+
+
+# ----------------------------------------------------------------------------------------------------------- 3 the record
+def _dots(cls='nd-d'):
+    from shell import home2
+    xs = [p[0] for p in home2.PINS]
+    ys = [p[1] for p in home2.PINS]
+    x0, x1, y0, y1 = min(xs) - 10, max(xs) + 10, min(ys) - 10, max(ys) + 10
+    order = sorted(range(len(home2.PINS)), key=lambda i: (home2.PINS[i][0] - home2.NEAR['hq'][0]) ** 2 + (home2.PINS[i][1] - home2.NEAR['hq'][1]) ** 2)
+    rank = {i: r for r, i in enumerate(order)}   # dots arrive from the office outwards
+    c = ''.join(f'<circle class="{cls}" data-r="{rank[i]}" cx="{x:.0f}" cy="{y:.0f}" r="4.2"/>' for i, (x, y, *_) in enumerate(home2.PINS))
+    hx, hy = home2.NEAR['hq']
+    return (f'<svg class="nd" viewBox="{x0} {y0} {x1 - x0} {y1 - y0}" role="img" aria-label="Map of the 312 jobs with photos around Austin; the ring marks the office">'
+            f'{c}<circle cx="{hx}" cy="{hy}" r="13" class="nd-hq"/></svg>')
+
+
+def s3():
+    v1 = (f'<div class="rec1" data-rec1><div class="rec-stick"><div class="wrap rec-g"><div class="rec-c"><p class="label">The record</p>'
+          f'<p class="rec-n" aria-hidden="true"><span class="rec-clip">312</span></p><p class="rec-s">{esc(RECORD)}</p>'
+          f'<p class="small">Each dot is a job with photos. <a href="#/work">Open the map</a></p></div><div class="rec-m">{_dots()}</div></div></div></div>')
+    v2 = (f'<div class="rec2 sec-pad"><div class="wrap rec-g"><div class="rec-c"><p class="label">The record</p>{cline()}'
+          f'<p class="rec-n" aria-hidden="true">312</p><p class="rec-s rec-lines"><span>312 on the map with photos</span> <span>+ 574 more counted</span></p>'
+          f'<p class="small">Each dot is a job with photos. <a href="#/work">Open the map</a></p></div><div class="rec-m rec-m2">{_dots("nd-d on")}</div></div></div>')
+    css = r'''
+.rec1{height:220vh;position:relative} .rec-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;display:flex;align-items:center}
+.rec-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-08);align-items:center;width:100%}
+.rec-n{font:800 clamp(6rem,4rem + 10vw,13rem)/.9 var(--font-display);letter-spacing:-.03em;margin:0} .rec-clip{display:inline-block}
+.js [data-rec1] .rec-clip{clip-path:inset(100% 0 0 0)}
+.rec-s{font:700 var(--type-h3-size)/1.3 var(--font-text);margin:var(--space-04) 0 var(--space-04);max-width:22ch}
+.nd{width:100%;height:auto;max-height:calc(100vh - 160px)} .nd-d{fill:var(--steel-7);opacity:.12;transition:opacity var(--duration-fast) linear} .nd-d.on{opacity:1}
+.nd-hq{fill:none;stroke:var(--color-accent-solid);stroke-width:3}
+.rec-m2{background:var(--color-bg-subtle);padding:var(--space-05)} .rec-lines span{display:inline-block}
+.js .rec2 .rec-lines span{opacity:0;transform:translateY(8px);transition:opacity var(--duration-moderate) var(--ease-enter),transform var(--duration-moderate) var(--ease-enter)}
+.js .rec2.in .rec-lines span{opacity:1;transform:none} .js .rec2.in .rec-lines span+span{transition-delay:150ms}
+@media (max-width:900px){.rec-g{grid-template-columns:minmax(0,1fr)} .rec1{height:200vh} .nd{max-height:40vh}}
+@media (prefers-reduced-motion:reduce){.js .rec2 .rec-lines span{opacity:1;transform:none}}
+'''
+    js = r'''
+(function(){const A=window.APS;const r=document.querySelector('[data-rec1]');if(r){const D=[...r.querySelectorAll('.nd-d')],n=D.length,c=r.querySelector('.rec-clip');
+  const set=p=>{const k=Math.round(n*Math.min(1,p*1.15));D.forEach(d=>d.classList.toggle('on',+d.dataset.r<k));c.style.clipPath=`inset(${(100-100*Math.min(1,p*1.15)).toFixed(1)}% 0 0 0)`;};
+  if(A.reduce)set(1);else A.pin(r,set);window.__rec1=set;}
+const r2=document.querySelector('.rec2');if(r2){if(A.reduce||!('IntersectionObserver' in window))r2.classList.add('in');else new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){r2.classList.add('in');o.disconnect();}}),{threshold:.4}).observe(r2);}
+})();
+'''
+    return 'The record', v1, v2, css, js
+
+
+# ----------------------------------------------------------------------------------------------------------- 4 services router
+def s4():
+    svc = [('siding', 'trade-siding', 'Siding & painting', 'Siding replacement and repair, and exterior painting.', 'siding2-a', 'Maple Run, Austin: siding after the work'),
+           ('windows', 'trade-window', 'Windows & doors', 'Window, door and garage-door replacement.', 'windows1-a', 'Ridgewood, Cedar Park: new windows after the work'),
+           ('roofing', 'trade-roof', 'Roofing, gutters & patio covers', 'Roofs, gutters and covered patios.', None, None)]
+    cards = ''.join(f'<a class="svc" href="#/{k}"><span class="svc-i">{icon(i, 32)}</span><h3 class="h3">{esc(t)}</h3><p>{esc(d)}</p><span class="svc-go">{icon("action-arrow-right", 24)}</span></a>' for k, i, t, d, *_ in svc)
+    v1 = (f'<div class="sv1 sec-pad"><div class="wrap"><p class="label">Services</p><h2 class="h2">Start with the part of the house.</h2>{cline()}'
+          f'<div class="svcs">{cards}</div></div></div>')
+    roof = ('<svg class="sv2-art" viewBox="0 0 400 267" aria-hidden="true"><rect width="400" height="267" fill="var(--color-bg-deep)"/>'
+            '<path d="M40 220L200 70L360 220Z" fill="none" stroke="var(--steel-6)" stroke-width="4"/>'
+            + ''.join(f'<path d="M{200 - (i + 1) * 26} {70 + (i + 1) * 24}H{200 + (i + 1) * 26}" stroke="var(--steel-8)" stroke-width="3"/>' for i in range(5)) + '</svg>')
+    rows = ''.join(f'<a class="sv2-r" href="#/{k}"><span class="sv2-n">{n + 1:02d}</span><span class="sv2-t">{esc(t)}</span><span class="sv2-d">{esc(d)}</span>'
+                   f'<span class="sv2-p">{IM.img(img, alt) if img else roof}</span>{icon("action-arrow-right", 28)}</a>' for n, (k, i, t, d, img, alt) in enumerate(svc))
+    v2 = f'<div class="sv2 sec-pad"><div class="wrap"><p class="label">Services</p><h2 class="h2">Three trades. Pick one.</h2>{cline()}<div class="sv2-l">{rows}</div></div></div>'
+    css = r'''
+.svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-05)}
+.svc{position:relative;display:grid;gap:var(--space-03);align-content:start;padding:var(--space-06);border:1px solid var(--color-border-default);text-decoration:none;color:var(--color-text-primary);min-height:240px;transition:border-color var(--duration-fast) var(--ease-standard),background-color var(--duration-fast) var(--ease-standard)}
+.svc:hover{border-color:var(--color-border-control);background:var(--color-bg-subtle)} .svc p{margin:0;color:var(--color-text-secondary)} .svc-i{color:var(--color-accent-solid)}
+.svc-go{position:absolute;right:var(--space-05);bottom:var(--space-05);transition:transform var(--duration-fast) var(--ease-standard)} .svc:hover .svc-go{transform:translateX(4px)}
+.sv2-l{border-top:1px solid var(--color-border-default)}
+.sv2-r{position:relative;display:grid;grid-template-columns:56px minmax(0,1.3fr) minmax(0,1fr) 28px;gap:var(--space-05);align-items:center;padding:var(--space-07) 0;border-bottom:1px solid var(--color-border-default);text-decoration:none;color:var(--color-text-primary)}
+.sv2-n{font:600 15px var(--font-text);color:var(--color-text-secondary)} .sv2-t{font:800 var(--type-h2-size)/1.05 var(--font-display)} .sv2-d{color:var(--color-text-secondary)}
+.sv2-p{position:absolute;right:56px;top:50%;width:300px;aspect-ratio:3/2;transform:translateY(-50%);clip-path:inset(0 0 100% 0);transition:clip-path var(--duration-moderate) var(--ease-draw);pointer-events:none;z-index:2}
+.sv2-p img,.sv2-art{width:100%;height:100%;object-fit:cover;display:block}
+.sv2-r:hover .sv2-p,.sv2-r:focus-visible .sv2-p{clip-path:inset(0 0 0 0)} .sv2-d{transition:opacity var(--duration-fast) var(--ease-standard)} .sv2-r:hover .sv2-d,.sv2-r:focus-visible .sv2-d{opacity:0} .sv2-r:hover .sv2-t{color:var(--color-text-accent)}
+@media (max-width:900px){.svcs{grid-template-columns:minmax(0,1fr)} .sv2-r{grid-template-columns:40px minmax(0,1fr) 24px} .sv2-d{grid-column:2} .sv2-p{display:none}}
+'''
+    return 'Services', v1, v2, css, ''
+
+
+HOME = [s1, s2, s3, s4]
