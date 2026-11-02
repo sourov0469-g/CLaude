@@ -140,3 +140,4 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Home 2 Proof** (V2 deepened): `GATE-home-proof.md`. Physics grab, throw and stack, the hover bend, keyboard parity, keyed arrival; zero overlaps after settling; mobile and reduced motion verified.
 - **Home 3 Services** (V2 deepened): `GATE-home-services.md`. Drawing-sheet stack, tabs kept in view, zero-shift scope overlay.
 - **Home 4 Before/After** (V1 deepened, MERSI seam): `GATE-home-ba.md`. Genuine pairs as prints at ≤ 1.35× native; scroll-driven first sweep; cut-the-curve pair change.
+- **Home 5 Process** (V1 direction, NEW eight-frame journey replacing the car): `GATE-home-process.md`. Pinned camera across one drawn site, strokes then fills, words still, week marks on a rail; four audit cycles; list mode on phones, storyboard under reduced motion; pin top 0 across all 8 stages; zero console errors. Zero background tasks and zero sub-agents in use.

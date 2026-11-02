@@ -1211,418 +1211,67 @@ html.has-buddy select { cursor: default !important; }
 }
 
 
-.process__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
-.process__head .t-head { grid-column: 1 / span 7; }
-.process__lead { grid-column: 9 / span 4; color: var(--color-text-secondary); max-width: 34ch; }
-.process__note { margin: var(--s6) 0 0; font-size: var(--t-small); color: var(--color-text-secondary); font-weight: 600; }
-@media (max-width: 1023px) { .process__head .t-head, .process__lead { grid-column: 1 / -1; } .process__lead { margin-top: var(--s4); } }
+.process { padding-block: 0; }
+.pr__pin { height: 100svh; display: grid; grid-template-rows: auto 1fr auto; gap: var(--s4); padding: calc(var(--nav-h) + var(--s5)) 0 var(--s5); box-sizing: border-box; }
+.pr__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
+.pr__head .eyebrow { margin: 0 0 var(--s3); }
+.pr__head .t-head { margin: 0; }
+.pr__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); }
+
+.pr__stage { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); grid-template-rows: minmax(0, 1fr); gap: var(--s7); align-items: center; min-height: 0; height: 100%; }
+.pr__list { list-style: none; margin: 0; padding: 0; display: grid; }
+.pr__item { grid-area: 1 / 1; display: grid; gap: var(--s3); align-content: center; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity 260ms var(--ez-out), transform 400ms var(--ez-out), visibility 0s linear 260ms; }
+.pr__item.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity 260ms var(--ez-out), transform 400ms var(--ez-out), visibility 0s; }
+.pr__n { margin: 0; display: flex; align-items: baseline; gap: var(--s4); }
+.pr__n > .nums { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.pr__wk { font: 600 .9375rem/1.2 var(--f-text); padding: 4px 10px; border: 1.5px solid var(--color-text); }
+.pr__t { margin: 0; font: 600 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1.05 var(--f-display); letter-spacing: -.02em; }
+.pr__p { margin: 0; max-width: 38ch; color: var(--color-text-secondary); font-size: 1.0625rem; line-height: 1.5; }
+
+.pr__window { position: relative; height: 100%; max-height: 620px; overflow: hidden; background: var(--color-surface); border: 1.5px solid var(--color-text); }
+.pr__f { transition: opacity 400ms var(--ez-out); }
+.pr__f.is-off { opacity: .22; }
+.pr__world { position: absolute; left: 0; top: 0; display: block; max-width: none; max-height: none; will-change: transform; overflow: visible; }
 
 
-.process1__plan { position: relative; aspect-ratio: 1200 / 640; }
-.process1__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.process1__svg .lot { fill: none; stroke: rgba(232, 228, 220, .1); stroke-width: 1.2; stroke-dasharray: 6 5; }
-.process1__svg .fp { fill: rgba(119, 179, 184, .08); stroke: rgba(119, 179, 184, .25); stroke-width: 1; }
-.process1__svg .palm circle { fill: rgba(63, 138, 90, .22); }
-.process1__svg .palm path { stroke: rgba(63, 138, 90, .7); stroke-width: 2; fill: none; stroke-linecap: round; }
-.process1__svg .road-case { fill: none; stroke: #0B1418; stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; }
-.process1__svg .road { fill: none; stroke: #33444a; stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
-.process1__svg .road-line { fill: none; stroke: rgba(232, 228, 220, .4); stroke-width: 2; stroke-dasharray: 14 12; }
-.process1__svg .road-done { fill: none; stroke: #f2c230; stroke-width: 4; stroke-linecap: round; }
-.process1__svg .pad { fill: #0B1418; stroke: #f2c230; stroke-width: 3; }
-.process1__svg .home path { fill: #1d4a4e; stroke: #77b3b8; stroke-width: 2.5; stroke-linejoin: round; }
-.process1__svg .home .win { fill: #33444a; stroke: #77b3b8; stroke-width: 1.5; transition: fill 300ms; }
-.process1__svg.is-home .home .win { fill: #ffe08a; }
-.process1__signs { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
-.process1__stop { position: absolute; width: 0; height: 0; pointer-events: auto; }
-.process1__sign {
-  position: absolute; left: 0; bottom: 22px; translate: -50% 0;
-  display: grid; grid-template-columns: auto 1fr; column-gap: 8px; align-items: baseline; text-align: left;
-  padding: 8px 12px 9px; min-width: 150px; background: #f3eee2; color: #0B1418; border: 0; border-radius: 3px; cursor: pointer;
-  box-shadow: 0 0 0 2px #0B1418, 0 12px 20px -12px rgba(0, 0, 0, .7);
-  opacity: .55; transition: opacity 200ms var(--ease-out), background-color 200ms var(--ease-out);
-}
-.process1__sign::after { content: ""; position: absolute; left: 50%; top: 100%; width: 4px; height: 22px; margin-left: -2px; background: #8a5a33; }
-.process1__sign { margin-left: var(--dx, 0px); }
-.process1__sign::after { margin-left: calc(-2px - var(--dx, 0px)); }
-.process1__d { margin-left: var(--dd, 0px); }
-.process1__stop.is-below .process1__sign { bottom: auto; top: 22px; }
-.process1__stop.is-below .process1__sign::after { top: auto; bottom: 100%; }
-.process1__stop.is-on .process1__sign { opacity: 1; }
-.process1__stop.is-open .process1__sign, .process1__sign:focus-visible { background: #f2c230; }
-.process1__no { grid-row: 1 / span 2; font: 400 1.5rem/1 var(--f-display); }
-.process1__t { font: 400 1.125rem/1 var(--f-display); letter-spacing: .03em; }
-.process1__w { font: 600 .6875rem/1.2 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: #4a5a5e; }
-.process1__d {
-  position: absolute; left: 0; bottom: calc(22px + 64px); translate: -50% 0; z-index: 3; width: 250px; margin: 0;
-  padding: 12px 14px; background: #0B1418; color: #e8e4dc; font-size: .875rem; line-height: 1.45; border-radius: 3px;
-  box-shadow: 0 0 0 1.5px #f2c230, 0 16px 30px -14px rgba(0, 0, 0, .8);
-}
-.process1__stop.is-below .process1__d { bottom: auto; top: calc(22px + 64px); }
-.process1__stop.is-open { z-index: 4; }
-@media (max-width: 699px) {
-  .process1__plan { aspect-ratio: 400 / 1180; }
-  .process1__sign { bottom: auto; top: 0; translate: 20px -50%; min-width: 0; width: 150px; }
-  .process1__sign::after { left: auto; right: 100%; top: 50%; width: 20px; height: 3px; margin: -1px 0 0; }
-  .process1__stop.is-left .process1__sign { translate: calc(-100% - 20px) -50%; }
-  .process1__stop.is-left .process1__sign::after { right: auto; left: 100%; }
-  .process1__d { bottom: auto; top: 34px; translate: -50% 0; width: min(260px, 70vw); }
-}
+.pr__world .d, .pr__mini .d { fill: none; stroke: var(--color-text); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.pr__world .dt, .pr__mini .dt { fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pr__world [class*="f-"].d, .pr__mini [class*="f-"].d { stroke-width: 3.2; }
+.f-sand { fill: var(--sand-100, #F7F1EA) !important; }
+.f-paper { fill: var(--color-surface) !important; }
+.f-clay { fill: var(--clay-500, #C5735C) !important; }
+.f-clayl { fill: var(--clay-100, #F9E3DD) !important; }
+.f-none { fill: none !important; }
+.pr__world .dash, .pr__mini .dash { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2.4; stroke-dasharray: 12 10; }
+.pr__world .roof, .pr__mini .roof { stroke: var(--clay-600, #A45540); stroke-width: 9; }
+.pr__world .tx, .pr__mini .tx { font: 600 26px/1 var(--f-text); fill: var(--color-text); }
+.pr__world .tx-s, .pr__mini .tx-s { font-size: 21px; font-weight: 500; }
+.pr__world .tx-stamp, .pr__mini .tx-stamp { font-size: 15px; font-weight: 700; letter-spacing: .06em; fill: var(--clay-700, #884432); }
+.pr__world .stampc, .pr__mini .stampc { stroke: var(--clay-700, #884432); }
+.pr__world .tick, .pr__mini .tick { stroke: var(--clay-600, #A45540); stroke-width: 4; }
 
 
-.process2__stage { position: relative; aspect-ratio: 1000 / 620; width: min(100%, calc((100svh - var(--nav-h) - 170px) * 1000 / 620)); margin-inline: auto; background: linear-gradient(var(--a-500), var(--a-50) 70%); border-radius: 4px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(18, 18, 18, .12); }
-.process2__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.process2__svg .ground { stroke: rgba(18, 18, 18, .5); stroke-width: 2; }
-.process2__svg .soil rect { fill: var(--a-200); }
-.process2__svg .footing, .process2__svg .slab { fill: var(--grey); stroke: var(--ink); stroke-width: 2; }
-.process2__svg .wall { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
-.process2__svg .part { fill: var(--grey); stroke: var(--ink); stroke-width: 1.5; }
-.process2__svg .win { fill: var(--muted); stroke: var(--ink); stroke-width: 2.5; transition: fill 400ms; }
-.process2__svg .mull { stroke: var(--ink); stroke-width: 2; }
-.process2__svg .door { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; }
-.process2__svg .knob { fill: var(--a-500); }
-.process2__svg .ceil { fill: var(--a-200); stroke: var(--ink); stroke-width: 1.5; }
-.process2__svg .truss { fill: rgba(201, 180, 143, .25); stroke: var(--a-200); stroke-width: 6; stroke-linejoin: round; }
-.process2__svg .web { stroke: var(--a-200); stroke-width: 4; fill: none; }
-.process2__svg .cover { fill: none; stroke: var(--ink); stroke-width: 14; stroke-linejoin: round; stroke-linecap: round; }
-.process2__svg .stakes path { stroke: var(--a-200); stroke-width: 4; fill: none; }
-.process2__svg .stakes .flag { fill: var(--a-500); stroke: none; }
-.process2__svg .stakes .string { stroke: var(--a-500); stroke-width: 1.2; stroke-dasharray: 6 4; }
-.process2__svg .gauge rect { fill: var(--white); stroke: var(--ink); stroke-width: 1.5; }
-.process2__svg .gauge path { stroke: var(--ink); stroke-width: 2; }
-.process2__svg .gauge .flood { stroke: var(--a-500); stroke-width: 3; stroke-dasharray: 8 4; }
-.process2__svg .permit .post { fill: var(--a-300); }
-.process2__svg .permit .card { fill: var(--a-500); stroke: var(--ink); stroke-width: 2; }
-.process2__svg .permit path { stroke: var(--ink); stroke-width: 2; }
-.process2__svg .prop { fill: var(--a-300); stroke: var(--ink); stroke-width: 1.5; opacity: .8; }
-.process2__svg .brace { stroke: var(--a-300); stroke-width: 6; opacity: .55; }
-.process2__svg .ledger { fill: var(--a-300); stroke: var(--ink); stroke-width: 1.2; opacity: .7; }
-.process2__svg .plane .line { stroke: var(--a-500); stroke-width: 2.5; stroke-dasharray: 12 8; }
-.process2__svg .plane .cap { stroke: var(--a-500); stroke-width: 6; stroke-linecap: round; }
-.process2__stage.is-done .process2__svg .win { fill: var(--white); }
-.process2__stage.is-done .process2__svg .plane { opacity: 0; transition: opacity 300ms; }
-.process2__cap { position: absolute; left: clamp(14px, 2.4vw, 32px); top: clamp(14px, 2.4vw, 28px); display: grid; grid-template-columns: auto auto; column-gap: 12px; align-items: baseline; color: var(--ink); }
-.process2__no { grid-row: 1 / span 2; font: 400 clamp(2.5rem, 1.6rem + 2.6vw, 4.5rem)/.9 var(--f-display); color: var(--a-700); }
-.process2__t { font: 400 clamp(1.25rem, 1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: -.005em; }
-.process2__w { font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--muted); }
-.process2__grip {
-  position: absolute; right: clamp(10px, 2vw, 24px); top: 96.8%; translate: 0 -50%; width: 46px; height: 46px; padding: 0;
-  border: 0; border-radius: 50%; background: var(--a-500); color: var(--ink); cursor: ns-resize; touch-action: none;
-  box-shadow: 0 0 0 2px var(--ink), 0 10px 18px -8px rgba(18, 18, 18, .7);
-}
-.process2__grip svg { width: 100%; height: 100%; }
-.process2__grip circle { fill: none; }
-.process2__grip path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.process2__grip:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-.process2__stage.is-done .process2__grip { opacity: .6; }
-.process2__pips { width: min(100%, calc((100svh - var(--nav-h) - 170px) * 1000 / 620)); margin-inline: auto; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
-.process2__pip { display: grid; gap: 3px; padding: 8px 8px 9px; text-align: left; background: transparent; color: var(--muted); border: 0; border-top: 3px solid var(--line-soft); cursor: pointer; font: inherit; }
-.process2__pip .nums { font: 400 1.125rem/1 var(--f-display); }
-.process2__pt { font: 500 .75rem/1.2 var(--f-text); }
-.process2__pip.is-done { border-top-color: var(--a-500); color: var(--ink); }
-.process2__pip[aria-pressed="true"] { color: var(--a-700); }
-@media (max-width: 767px) { .process2__pips { grid-template-columns: repeat(4, minmax(0, 1fr)); } .process2__pt { font-size: .6875rem; } .process2__cap { grid-template-columns: auto; } .process2__no { grid-row: auto; } }
+.pr__railw { display: grid; gap: var(--s2); }
+.pr__rail { position: relative; height: 34px; }
+.pr__rail::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--color-border); }
+.pr__fill { position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--color-text); transform-origin: 0 50%; transform: scaleX(0); }
+.pr__mk { position: absolute; top: 4px; left: calc(var(--x) * 100%); width: 14px; height: 14px; margin-left: -7px; background: var(--color-surface); border: 2px solid var(--color-border-strong); transition: background-color 200ms var(--ez-out), border-color 200ms var(--ez-out); }
+.pr__mk.is-on { background: var(--color-accent-solid); border-color: var(--color-text); }
+.pr__mkn { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); }
+.pr__mk.is-on .pr__mkn { color: var(--color-text); }
+.pr__note { margin: var(--s2) 0 0; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
 
 
-.process3__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.process3__side { grid-column: 1 / span 5; display: grid; gap: var(--s5); justify-items: start; }
-.process3__side .process__lead { grid-column: auto; max-width: 34ch; }
-.process3__count { margin: 0; font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: var(--muted); }
-.process3__n { color: var(--a-700); }
-.process3__ctrl { display: flex; flex-wrap: wrap; gap: var(--s3); }
-.process3__deck { grid-column: 7 / -1; position: relative; height: clamp(460px, 40vw, 560px); touch-action: pan-y; outline: none; }
-.process3__deck:focus-visible { box-shadow: 0 0 0 3px var(--a-500); border-radius: 6px; }
-.process3__card {
-  position: absolute; inset: 0 0 42px; display: grid; grid-template-rows: auto auto auto 1fr; gap: 10px; padding: clamp(18px, 2.4vw, 28px);
-  background: var(--white); color: var(--ink); border-radius: 6px; box-shadow: 0 0 0 2px var(--ink);
-  user-select: none; -webkit-user-select: none; cursor: grab; will-change: transform;
-  background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px); background-size: 22px 22px;
-}
-.process3__card:active { cursor: grabbing; }
-.process3__art { position: relative; height: clamp(150px, 15vw, 200px); display: grid; place-items: center; background: var(--a-500); border-radius: 4px; overflow: hidden; }
-.process3__art::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(18, 18, 18, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 18, 18, 0.04) 1px, transparent 1px); background-size: 18px 18px; }
-.process3__art svg { position: relative; height: 74%; width: auto; aspect-ratio: 1; overflow: visible; display: block; }
-.process3__art .s { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.process3__art .f { fill: var(--a-500); stroke: var(--ink); stroke-width: 1.2; }
-.process3__art .w { stroke: var(--a-500); } .process3__art .g { stroke: var(--old); } .process3__art .r { stroke: var(--err); }
-.process3__stamp { position: absolute; right: 12px; bottom: 12px; padding: 4px 8px 3px; border: 2px solid var(--err); color: var(--err); background: rgba(18, 18, 18, 0.46); font: 400 1rem/1 var(--f-display); letter-spacing: 0; }
-.process3__cno { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .14em; color: var(--muted); }
-.process3__t { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/.95 var(--f-display); letter-spacing: -.005em; }
-.process3__d { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--ink); max-width: 44ch; }
-@media (max-width: 1023px) { .process3__side, .process3__deck { grid-column: 1 / -1; } .process3__deck { margin-top: var(--s6); } }
-@media (max-width: 767px) { .process3__deck { height: 470px; } }
-.process3__hint { position: absolute; left: 50%; bottom: 6px; translate: -50% 0; margin: 0; display: flex; align-items: center; gap: 8px; font: 600 .6875rem/1 var(--f-text); letter-spacing: 0; color: var(--muted); pointer-events: none; transition: opacity 300ms; }
-.process3__hint svg { width: 22px; height: 12px; }
-.process3__deck.is-dealt .process3__hint { opacity: 0; }
+.pr--list .pr__pin { height: auto; padding-top: var(--section-y, 96px); }
+.pr--list .pr__stage { grid-template-columns: 1fr; grid-template-rows: none; height: auto; }
+.pr--list .pr__window, .pr--list .pr__railw .pr__rail { display: none; }
+.pr--list .pr__list { gap: var(--s7); }
+.pr--list .pr__item { grid-area: auto; align-content: start; opacity: 1; visibility: visible; transform: none; }
+.pr__mini { width: 100%; height: auto; border: 1.5px solid var(--color-text); background: var(--color-surface); margin-bottom: var(--s3); }
+@media (max-width: 900px) { .pr__head { grid-template-columns: 1fr; } }
 
-
-
-.pl__svg .road-case { fill: none; stroke: var(--ink); stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; }
-.pl__svg .road { fill: none; stroke: var(--grey); stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
-.pl__svg .road-line { fill: none; stroke: rgba(18, 18, 18, .4); stroke-width: 2; stroke-dasharray: 14 12; }
-.pl__svg .road-done { fill: none; stroke-linecap: round; }
-.pl__svg .home path { fill: var(--a-500); stroke: var(--a-500); stroke-width: 2.5; stroke-linejoin: round; }
-.pl__svg .home .win { fill: var(--grey); stroke: var(--a-500); stroke-width: 1.5; transition: fill 300ms; }
-.pl__svg.is-home .home .win { fill: var(--white); }
-
-
-.pl__headtxt { grid-column: 9 / span 4; display: grid; gap: var(--s3); }
-.pl__headtxt .process__lead { grid-column: auto; }
-.pl__note { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--muted); max-width: 40ch; }
-.pl__plan { position: relative; aspect-ratio: 1200 / 520; }
-.pl__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.pl__svg .road-done { stroke: var(--a-500); stroke-width: 5; }
-.pl__svg .pad circle { fill: var(--ink); stroke: var(--a-500); stroke-width: 3; }
-.pl__svg .pad text { font: 600 14px/1 var(--f-text); fill: var(--white); }
-.pl__signs { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
-.pl__stop { position: absolute; width: 0; height: 0; }
-.pl__sign {
-  position: absolute; left: 0; bottom: 26px; translate: -50% 0; display: flex; gap: 8px; align-items: baseline; white-space: nowrap;
-  padding: 7px 11px 8px; background: var(--white); color: var(--ink); border-radius: 3px; box-shadow: 0 0 0 2px var(--ink);
-}
-.pl__stop.is-below .pl__sign { bottom: auto; top: 26px; }
-.pl__no { font: 400 1.125rem/1 var(--f-display); }
-.pl__t { font: 400 1.125rem/1 var(--f-display); letter-spacing: -.005em; }
-.pl__stop:first-child .pl__sign { translate: -20% 0; }
-.pl__stop:last-child .pl__sign { translate: -80% 0; }
-.pl__list { list-style: none; margin: var(--s7) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6) var(--gutter); counter-reset: none; }
-.pl__item { display: grid; align-content: start; gap: 6px; padding-top: var(--s3); border-top: 2px solid var(--line-soft); }
-.pl__ino { font: 400 1.125rem/1 var(--f-display); color: var(--accent); }
-.pl__ih { margin: 0; font: 400 1.5rem/1.05 var(--f-display); letter-spacing: -.005em; }
-.pl__iw { margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--ink); }
-.pl__id { margin: 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); }
-@media (max-width: 1023px) { .pl__headtxt { grid-column: 1 / -1; margin-top: var(--s4); } .pl__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 767px) {
-  .pl__signs { display: none; }
-  .pl__list { grid-template-columns: minmax(0, 1fr); gap: var(--s5); margin-top: var(--s5); }
-  .pl__item { grid-template-columns: 2.25rem 1fr; column-gap: var(--s3); }
-  .pl__item > :not(.pl__ino) { grid-column: 2; }
-  .pl__ino { grid-row: 1 / span 3; padding-top: 3px; }
-}
-
-
-
-.plx__svg .road-case { fill: none; stroke: var(--color-art-line); stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; }
-.plx__svg .road { fill: none; stroke: var(--color-art-line-soft); stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
-.plx__svg .road-line { fill: none; stroke: color-mix(in srgb, var(--color-shadow) 40%, transparent); stroke-width: 2; stroke-dasharray: 14 12; }
-.plx__svg .road-done { fill: none; stroke-linecap: round; }
-.plx__svg .home path { fill: var(--color-art-accent); stroke: var(--color-art-accent); stroke-width: 2.5; stroke-linejoin: round; }
-.plx__svg .home .win { fill: var(--color-art-line-soft); stroke: var(--color-art-accent); stroke-width: 1.5; transition: fill 300ms; }
-.plx__svg.is-home .home .win { fill: var(--color-surface); }
-.plx__headtxt { grid-column: 9 / span 4; display: grid; gap: var(--s3); }
-.plx__headtxt .process__lead { grid-column: auto; }
-.plx__note { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--color-text-secondary); max-width: 40ch; font-weight: 600; }
-.plx__plan { position: relative; aspect-ratio: 1200 / 520; }
-.plx__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.plx__svg .road-done { stroke: var(--color-art-accent); stroke-width: 5; }
-.plx__svg .pad circle { fill: var(--color-art-line); stroke: var(--color-art-accent); stroke-width: 3; }
-.plx__svg .pad text { font: 600 14px/1 var(--f-text); fill: var(--color-surface); }
-.plx__signs { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
-.plx__stop { position: absolute; width: 0; height: 0; }
-.plx__sign {
-  position: absolute; left: 0; bottom: 26px; translate: -50% 0; display: flex; gap: 8px; align-items: baseline; white-space: nowrap;
-  padding: 7px 11px 8px; background: var(--color-surface); color: var(--color-text); border-radius: 3px; box-shadow: 0 0 0 2px var(--color-border-strong);
-}
-.plx__stop.is-below .plx__sign { bottom: auto; top: 26px; }
-.plx__no { font: 400 1.125rem/1 var(--f-display); }
-.plx__t { font: 400 1.125rem/1 var(--f-display); letter-spacing: -.005em; }
-.plx__stop:first-child .plx__sign { translate: -20% 0; }
-.plx__stop:last-child .plx__sign { translate: -80% 0; }
-.plx__list { list-style: none; margin: var(--s7) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6) var(--gutter); counter-reset: none; }
-.plx__item { display: grid; align-content: start; gap: 6px; padding-top: var(--s3); border-top: 2px solid var(--color-border-subtle); }
-.plx__ino { font: 400 1.125rem/1 var(--f-display); color: var(--color-text-secondary); }
-.plx__ih { margin: 0; font: 400 1.5rem/1.05 var(--f-display); letter-spacing: -.005em; }
-.plx__iw { margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text); }
-.plx__id { margin: 0; font-size: .9375rem; line-height: 1.5; color: var(--color-text-secondary); }
-@media (max-width: 1023px) {
-  .plx__headtxt { grid-column: 1 / -1; margin-top: var(--s4); }
-  .plx__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 767px) {
-  .plx__signs { display: none; }
-  .plx__list { grid-template-columns: minmax(0, 1fr); gap: var(--s5); margin-top: var(--s5); }
-  .plx__item { grid-template-columns: 2.25rem 1fr; column-gap: var(--s3); }
-  .plx__item > :not(.plx__ino) { grid-column: 2; }
-  .plx__ino { grid-row: 1 / span 3; padding-top: 3px; }
-}
-
-
-
-.p2x__stage { position: relative; aspect-ratio: 1000 / 620; width: min(100%, calc((100svh - var(--nav-h) - 170px) * 1000 / 620)); margin-inline: auto; background: var(--color-bg-subtle); border-radius: 4px; overflow: hidden; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-shadow) 12%, transparent); }
-.p2x__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.p2x__svg .ground { stroke: color-mix(in srgb, var(--color-shadow) 50%, transparent); stroke-width: 2; }
-.p2x__svg .soil rect { fill: var(--color-art-fill); }
-.p2x__svg .footing, .p2x__svg .slab { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .wall { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .part { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 1.5; }
-.p2x__svg .win { fill: var(--color-art-line-soft); stroke: var(--color-art-line); stroke-width: 2.5; transition: fill 400ms; }
-.p2x__svg .mull { stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .door { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .knob { fill: var(--color-art-accent); }
-.p2x__svg .ceil { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 1.5; }
-.p2x__svg .truss { fill: color-mix(in srgb, var(--color-border) 25%, transparent); stroke: var(--color-art-accent-soft); stroke-width: 6; stroke-linejoin: round; }
-.p2x__svg .web { stroke: var(--color-art-accent-soft); stroke-width: 4; fill: none; }
-.p2x__svg .cover { fill: none; stroke: var(--color-art-line); stroke-width: 14; stroke-linejoin: round; stroke-linecap: round; }
-.p2x__svg .stakes path { stroke: var(--color-art-accent-soft); stroke-width: 4; fill: none; }
-.p2x__svg .stakes .flag { fill: var(--color-art-accent); stroke: none; }
-.p2x__svg .stakes .string { stroke: var(--color-art-accent); stroke-width: 1.2; stroke-dasharray: 6 4; }
-.p2x__svg .gauge rect { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 1.5; }
-.p2x__svg .gauge path { stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .gauge .flood { stroke: var(--color-art-accent); stroke-width: 3; stroke-dasharray: 8 4; }
-.p2x__svg .permit .post { fill: var(--color-art-accent-soft); }
-.p2x__svg .permit .card { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .permit path { stroke: var(--color-art-line); stroke-width: 2; }
-.p2x__svg .prop { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 1.5; opacity: .8; }
-.p2x__svg .brace { stroke: var(--color-art-accent-soft); stroke-width: 6; opacity: .55; }
-.p2x__svg .ledger { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 1.2; opacity: .7; }
-.p2x__svg .plane .line { stroke: var(--color-art-accent); stroke-width: 2.5; stroke-dasharray: 12 8; }
-.p2x__svg .plane .cap { stroke: var(--color-art-accent); stroke-width: 6; stroke-linecap: round; }
-.p2x__stage.is-done .p2x__svg .win { fill: var(--color-surface); }
-.p2x__stage.is-done .p2x__svg .plane { opacity: 0; transition: opacity 300ms; }
-.p2x__cap { position: absolute; left: clamp(14px, 2.4vw, 32px); top: clamp(14px, 2.4vw, 28px); display: grid; grid-template-columns: auto auto; column-gap: 12px; align-items: baseline; color: var(--color-text); }
-.p2x__no { grid-row: 1 / span 2; font: 400 clamp(2.5rem, 1.6rem + 2.6vw, 4.5rem)/.9 var(--f-display); color: var(--color-text-secondary); }
-.p2x__t { font: 400 clamp(1.25rem, 1rem + 1vw, 2rem)/1 var(--f-display); letter-spacing: -.005em; }
-.p2x__w { font: 600 .75rem/1.2 var(--f-text); letter-spacing: 0; color: var(--color-text-secondary); }
-.p2x__grip {
-  position: absolute; right: clamp(10px, 2vw, 24px); top: 96.8%; translate: 0 -50%; width: 46px; height: 46px; padding: 0;
-  border: 0; border-radius: 50%; background: var(--color-accent-solid); color: var(--color-text-on-accent); cursor: ns-resize; touch-action: none;
-  box-shadow: 0 0 0 2px var(--color-border-strong), 0 10px 18px -8px color-mix(in srgb, var(--color-shadow) 70%, transparent);
-}
-.p2x__grip svg { width: 100%; height: 100%; }
-.p2x__grip circle { fill: none; }
-.p2x__grip path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.p2x__grip:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
-.p2x__stage.is-done .p2x__grip { opacity: .6; }
-.p2x__pips { width: min(100%, calc((100svh - var(--nav-h) - 170px) * 1000 / 620)); margin-inline: auto; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
-.p2x__pip { display: grid; gap: 3px; padding: 8px 8px 9px; text-align: left; background: transparent; color: var(--color-text-secondary); border: 0; border-top: 3px solid var(--color-border-subtle); cursor: pointer; font: inherit; }
-.p2x__pip .nums { font: 400 1.125rem/1 var(--f-display); }
-.p2x__pt { font: 600 .75rem/1.2 var(--f-text); }
-.p2x__pip.is-done { border-top-color: var(--color-border-strong); color: var(--color-text); }
-.p2x__pip[aria-pressed="true"] { color: var(--color-accent-text); }
-@media (max-width: 767px) {
-  .p2x__pips { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .p2x__pt { font-size: .6875rem; font-weight: 600; }
-  .p2x__cap { grid-template-columns: auto; }
-  .p2x__no { grid-row: auto; }
-}
-
-
-
-.p3x__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.p3x__side { grid-column: 1 / span 5; display: grid; gap: var(--s5); justify-items: start; }
-.p3x__side .process__lead { grid-column: auto; max-width: 34ch; }
-.p3x__count { margin: 0; font: 400 clamp(2.5rem, 1.8rem + 2vw, 3.75rem)/1 var(--f-display); color: var(--color-text-secondary); }
-.p3x__n { color: var(--color-text-secondary); }
-.p3x__ctrl { display: flex; flex-wrap: wrap; gap: var(--s3); }
-.p3x__deck { grid-column: 7 / -1; position: relative; height: clamp(460px, 40vw, 560px); touch-action: pan-y; outline: none; }
-.p3x__deck:focus-visible { box-shadow: 0 0 0 3px var(--color-accent-border); border-radius: 6px; }
-.p3x__card {
-  position: absolute; inset: 0 0 42px; display: grid; grid-template-rows: auto auto auto 1fr; gap: 10px; padding: clamp(18px, 2.4vw, 28px);
-  background: var(--color-surface); color: var(--color-text); border-radius: 6px; box-shadow: 0 0 0 2px var(--color-border-strong);
-  user-select: none; -webkit-user-select: none; cursor: grab; will-change: transform;
-  background-image: linear-gradient(color-mix(in srgb, var(--color-surface) 5%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-surface) 5%, transparent) 1px, transparent 1px); background-size: 22px 22px;
-}
-.p3x__card:active { cursor: grabbing; }
-.p3x__art { position: relative; height: clamp(150px, 15vw, 200px); display: grid; place-items: center; background: var(--color-bg-muted); border-radius: 4px; overflow: hidden; }
-.p3x__art::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-shadow) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-shadow) 4%, transparent) 1px, transparent 1px); background-size: 18px 18px; }
-.p3x__art svg { position: relative; height: 74%; width: auto; aspect-ratio: 1; overflow: visible; display: block; }
-.p3x__art .s { fill: none; stroke: var(--color-art-line); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.p3x__art .f { fill: var(--color-art-wash); stroke: var(--color-art-line); stroke-width: 1.2; }
-.p3x__art .w { stroke: var(--color-art-accent); }
-.p3x__art .g { stroke: var(--color-art-line-soft); }
-.p3x__art .r { stroke: var(--color-art-accent); }
-.p3x__stamp { position: absolute; right: 12px; bottom: 12px; padding: 4px 8px 3px; border: 2px solid var(--color-art-accent); color: var(--color-accent-text); background: color-mix(in srgb, var(--color-shadow) 46%, transparent); font: 600 1rem/1 var(--f-display); letter-spacing: 0; }
-.p3x__cno { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .14em; color: var(--color-text-secondary); }
-.p3x__t { margin: 0; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/.95 var(--f-display); letter-spacing: -.005em; }
-.p3x__d { margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--color-text); max-width: 44ch; }
-@media (max-width: 1023px) {
-  .p3x__side, .p3x__deck { grid-column: 1 / -1; }
-  .p3x__deck { margin-top: var(--s6); }
-}
-@media (max-width: 767px) {
-  .p3x__deck { height: 470px; }
-}
-.p3x__hint { position: absolute; left: 50%; bottom: 6px; translate: -50% 0; margin: 0; display: flex; align-items: center; gap: 8px; font: 600 .6875rem/1 var(--f-text); letter-spacing: 0; color: var(--color-text-secondary); pointer-events: none; transition: opacity 300ms; }
-.p3x__hint svg { width: 22px; height: 12px; }
-.p3x__deck.is-dealt .p3x__hint { opacity: 0; }
-
-
-.pdl__grid, .pkr__grid, .pel__grid, .pfr__grid, .pcl__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.pdl__side, .pkr__side, .pel__side, .pfr__side, .pcl__side { grid-column: 1 / span 5; display: grid; gap: 14px; justify-items: start; }
-.pdl__lead, .pkr__lead, .pel__lead, .pfr__lead, .pcl__lead { color: var(--color-text-secondary); }
-.pnote { margin: 0; font: 600 .875rem/1.45 var(--f-text); color: var(--color-text-secondary); max-width: 44ch; }
-.pdl__out, .pkr__out, .pel__out, .pfr__out, .pcl__out { width: 100%; min-height: 150px; padding: 18px 20px; border-radius: 16px; background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-border-strong); }
-.pstage__n { font: 700 2rem/1 var(--f-display); color: var(--color-text-secondary); }
-.pstage__t { margin: 4px 0 4px; font: 700 1.375rem/1.15 var(--f-display); }
-.pstage__w { margin: 0 0 8px; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.pstage__d { margin: 0; font: 400 .9375rem/1.5 var(--f-text); }
-@media (max-width: 1023px) { .pdl__side, .pkr__side, .pel__side, .pfr__side, .pcl__side { grid-column: 1 / -1; margin-bottom: var(--s5); } }
-
-
-.pdl__dial { grid-column: 7 / -1; position: relative; width: min(100%, 480px); justify-self: center; aspect-ratio: 1; }
-.pdl__svg { width: 100%; height: 100%; overflow: visible; touch-action: none; cursor: grab; }
-.pdl__svg .face { fill: var(--color-art-wash); stroke: var(--color-art-line); stroke-width: 6; } .pdl__svg .inner { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 4; }
-.pdl__svg .tick { stroke: var(--color-art-line); stroke-width: 3; } .pdl__svg text { font: 700 22px/1 var(--f-display); text-anchor: middle; dominant-baseline: middle; fill: var(--color-art-line); }
-.pdl__svg .hub { fill: var(--color-art-line); } .pdl__svg .knob { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 4; }
-.pdl__ptr { position: absolute; left: 50%; top: -6px; translate: -50% 0; border: 14px solid transparent; border-top: 22px solid var(--color-border-strong); border-bottom: 0; }
-.pdl__btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 16px; }
-.pdl__btns button, .pel__panel button { width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--color-surface); box-shadow: inset 0 0 0 2px var(--color-border-strong); font: 700 1rem/1 var(--f-display); cursor: pointer; }
-.pdl__btns button[aria-checked="true"], .pel__panel button[aria-checked="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
-@media (max-width: 1023px) { .pdl__dial { grid-column: 1 / -1; } }
-
-
-.pkr__ring { grid-column: 6 / -1; position: relative; }
-.pkr__svg { width: 100%; height: auto; display: block; }
-.pkr__svg .r { fill: none; stroke: var(--color-art-line); stroke-width: 8; } .pkr__svg .key circle, .pkr__svg .key path { fill: none; stroke: var(--color-art-accent); stroke-width: 7; stroke-linecap: round; }
-.pkr__tags { position: absolute; left: 0; right: 0; top: 24%; display: flex; justify-content: center; gap: 1.2%; }
-.pkr__tag { width: 11%; aspect-ratio: 5 / 8; padding: 0; border: 0; border-radius: 8px 8px 18px 18px; background: var(--color-bg-subtle); box-shadow: inset 0 0 0 3px var(--color-border-strong); cursor: pointer; transform-origin: 50% -30px; font: 700 clamp(1rem, .6rem + 1.2vw, 1.75rem)/1 var(--f-display); color: var(--color-text); position: relative; transition: transform 300ms var(--ease-out), background-color 160ms ease-out; }
-.pkr__tag::before { content: ""; position: absolute; left: 50%; top: -30px; width: 2px; height: 30px; background: var(--color-bg-inverse); }
-.pkr__tag::after { content: ""; position: absolute; left: 50%; top: 10px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--color-border-strong); background: var(--color-surface); }
-.pkr__tag:nth-child(odd) { transform: rotate(-6deg); } .pkr__tag:nth-child(even) { transform: rotate(5deg); }
-.pkr__tag[aria-checked="true"] { background: var(--color-accent-solid); transform: rotate(0) translateY(-14px) scale(1.1); color: var(--color-text-on-accent); }
-@media (max-width: 1023px) { .pkr__ring { grid-column: 1 / -1; } }
-@media (prefers-reduced-motion: reduce) { .pkr__tag { transition: none; } }
-
-
-.pel__shaft { grid-column: 7 / -1; position: relative; display: grid; grid-template-columns: 1fr 64px; gap: 18px; height: 560px; }
-.pel__floors { display: grid; grid-template-rows: repeat(8, 1fr); border: 4px solid var(--color-border-strong); border-radius: 10px; background: var(--color-surface); overflow: hidden; }
-.pel__floors div { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 0 16px 0 110px; border-top: 2px solid var(--color-border-subtle); font: 600 .875rem/1.2 var(--f-text); text-align: right; }
-.pel__floors div:first-child { border-top: 0; }
-.pel__floors b { font: 700 1.125rem/1 var(--f-display); color: var(--color-text-secondary); }
-.pel__car { position: absolute; left: 12px; width: 88px; height: calc((560px - 8px) / 8 - 10px); bottom: 9px; border-radius: 8px; background: var(--color-accent-solid); box-shadow: 0 0 0 3px var(--color-border-strong); display: grid; place-items: center; transition: transform 600ms cubic-bezier(.65, 0, .35, 1); color: var(--color-text-on-accent); }
-.pel__disp { position: absolute; top: 6px; font: 700 .9375rem/1 var(--f-display); }
-.pel__doors { position: absolute; left: 20%; right: 20%; bottom: 0; height: 60%; border: 3px solid var(--color-border-strong); border-bottom: 0; background: linear-gradient(90deg, transparent calc(50% - 1.5px), var(--color-bg-inverse) 0 calc(50% + 1.5px), transparent 0); }
-.pel__panel { display: grid; grid-template-rows: repeat(8, 1fr); align-items: center; justify-items: center; padding: 8px 0; border-radius: 12px; background: var(--color-bg-inverse); }
-@media (max-width: 1023px) { .pel__shaft { grid-column: 1 / -1; height: 520px; } .pel__car { height: calc((520px - 8px) / 8 - 10px); } .pel__floors div { padding-left: 100px; font-size: .8125rem; font-weight: 600; } }
-@media (prefers-reduced-motion: reduce) { .pel__car { transition: none; } }
-
-
-.pfr__grid .pfr__rule { grid-column: 1 / -1; order: 3; position: relative; height: 210px; margin-top: var(--s6); }
-.pfr__seg { position: absolute; top: 40px; height: 54px; width: calc(100% / 8 - 4px); border: 3px solid var(--color-border-strong); border-radius: 6px; background: var(--color-bg-muted); transform-origin: left center; transition: transform 380ms var(--ease-out), background-color 200ms ease-out;
-  background-image: repeating-linear-gradient(90deg, var(--color-bg-inverse) 0 2px, transparent 2px 14px); background-size: 100% 14px; background-repeat: no-repeat; padding-top: 18px; text-align: center; font: 700 1rem/1 var(--f-display); }
-.pfr__seg span { display: block; margin-top: 4px; font: 600 .6875rem/1.2 var(--f-text); }
-.pfr__seg.is-open { background-color: var(--color-accent-solid); color: var(--color-text-on-accent); }
-.pfr__seg.is-fold { transform: translateX(var(--fx)) rotate(var(--fold)); background-color: var(--color-bg-subtle); }
-.pfr__acts { display: flex; flex-wrap: wrap; gap: 10px; }
-@media (max-width: 767px) { .pfr__seg span { display: none; } }
-@media (prefers-reduced-motion: reduce) { .pfr__seg { transition: none; } }
-
-
-.pcl__cal { grid-column: 7 / -1; padding: 16px; border-radius: 16px; background: var(--color-surface); box-shadow: 0 0 0 3px var(--color-border-strong); }
-.pcl__weeks { display: grid; grid-template-columns: 150px repeat(12, 1fr); gap: 2px; padding-bottom: 8px; border-bottom: 3px solid var(--color-border-strong); font: 600 .75rem/1 var(--f-text); text-align: center; }
-.pcl__rows { display: grid; gap: 6px; padding-top: 10px; }
-.pcl__row { display: grid; grid-template-columns: 150px repeat(12, 1fr); gap: 2px; align-items: center; min-height: 40px; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text); }
-.pcl__span { height: 26px; border-radius: 13px; background: var(--color-bg-subtle); box-shadow: inset 0 0 0 2px var(--color-border-strong); }
-.pcl__row[aria-checked="true"] .pcl__span { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
-.pcl__row:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 8px; }
-.pcl__after { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--color-border); }
-.pcl__after button { min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--color-bg-subtle); box-shadow: inset 0 0 0 2px var(--color-border-strong); font: 600 .8125rem/1 var(--f-text); cursor: pointer; }
-.pcl__after button[aria-checked="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
-@media (max-width: 1023px) { .pcl__cal { grid-column: 1 / -1; } .pcl__weeks, .pcl__row { grid-template-columns: 96px repeat(12, 1fr); } }
-
-
-.plx__ino { color: var(--color-text-secondary); }
-.pel__floors b { color: var(--color-text-secondary); }
-.p3x__stamp { background: var(--color-surface); color: var(--color-accent-text); }
+@media (min-width: 700px) { .pr--list .pr__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s7) var(--s6); } }
+@media (min-width: 1200px) { .pr--list .pr__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } .pr--list .pr__n > .nums { font-size: 3rem; } .pr--list .pr__t { font-size: 1.375rem; } .pr--list .pr__p { font-size: 1rem; } }
 
 
 #financing .t-head { color: var(--color-text); }
@@ -3843,198 +3492,36 @@ html.has-buddy select { cursor: default !important; }
   </div>
 </section>
 
-<section id="process" class="sec process g-surface" data-section="process" aria-labelledby="process-h1">
-
+<section id="process" class="sec process g-surface" data-section="process" aria-labelledby="process-h">
   
-  
-  
-  <div class="ver plx" data-v="1">
-    <div class="wrap">
-      <div class="process__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h1-w-i">Eight stops between your first call and <span class="acc">your keys.</span></h2>
-        <div class="plx__headtxt">
-          <p class="t-lead process__lead">The route every Elbaz job drives, in order. Each stop says what happens there.</p>
-          <p class="plx__note">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
+  <div class="ver pr" data-v="1">
+    <div class="pr__pin">
+      <div class="wrap pr__head">
+        <div>
+          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
+          <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
+        </div>
+        <p class="t-lead pr__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
+      </div>
+      <div class="wrap pr__stage">
+        <ol class="pr__list">
+          <li class="pr__item" data-i="0"><p class="pr__n"><span class="nums">01</span><span class="pr__wk">Week <span class="nums">1</span></span></p><h3 class="pr__t">Consultation</h3><p class="pr__p">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p></li>
+          <li class="pr__item" data-i="1"><p class="pr__n"><span class="nums">02</span><span class="pr__wk">Week <span class="nums">1&ndash;2</span></span></p><h3 class="pr__t">Site evaluation</h3><p class="pr__p">Flood zone, HVHZ requirements, permit history, HOA or historic review, and what is behind the walls.</p></li>
+          <li class="pr__item" data-i="2"><p class="pr__n"><span class="nums">03</span><span class="pr__wk">Weeks <span class="nums">2&ndash;5</span></span></p><h3 class="pr__t">Design and planning</h3><p class="pr__p">Layouts, finishes and system choices, with the real trade-offs explained rather than one pre-set package.</p></li>
+          <li class="pr__item" data-i="3"><p class="pr__n"><span class="nums">04</span><span class="pr__wk">Weeks <span class="nums">5&ndash;6</span></span></p><h3 class="pr__t">Proposal and scope</h3><p class="pr__p">A written scope that says what is included, what is not, and where contingencies are likely. Priced against the drawings, not a guess.</p></li>
+          <li class="pr__item" data-i="4"><p class="pr__n"><span class="nums">05</span><span class="pr__wk">Weeks <span class="nums">6&ndash;12</span></span></p><h3 class="pr__t">Permitting</h3><p class="pr__p">Permits pulled directly, and every product checked for its Notice of Acceptance or Florida Product Approval.</p></li>
+          <li class="pr__item" data-i="5"><p class="pr__n"><span class="nums">06</span><span class="pr__wk">Varies</span></p><h3 class="pr__t">Construction</h3><p class="pr__p">One point of contact, inspections at each stage, and a site that gets cleaned at the end of the day.</p></li>
+          <li class="pr__item" data-i="6"><p class="pr__n"><span class="nums">07</span><span class="pr__wk">Final <span class="nums">1&ndash;2</span> weeks</span></p><h3 class="pr__t">Quality review</h3><p class="pr__p">We walk the work against the scope before we call it finished.</p></li>
+          <li class="pr__item" data-i="7"><p class="pr__n"><span class="nums">08</span><span class="pr__wk">Closeout</span></p><h3 class="pr__t">Completion and handover</h3><p class="pr__p">Final inspection, a walkthrough together, and registration of manufacturer and workmanship warranties.</p></li>
+        </ol>
+        <div class="pr__window" aria-hidden="true" data-buddy-watch>
+          <svg class="pr__world" viewBox="0 80 8000 760" preserveAspectRatio="xMinYMin meet" focusable="false"></svg>
         </div>
       </div>
-      <div class="plx__plan" aria-hidden="true">
-        <svg class="plx__svg" focusable="false"></svg>
-        <ol class="plx__signs"></ol>
+      <div class="wrap pr__railw">
+        <div class="pr__rail" aria-hidden="true"><span class="pr__fill"></span></div>
+        <p class="pr__note">Timelines vary by scope and jurisdiction.</p>
       </div>
-      <ol class="plx__list" aria-label="The eight stages of a project"></ol>
-    </div>
-  </div>
-
-  
-  <div class="ver p2x" data-v="2" hidden>
-    <div class="wrap">
-      <div class="process__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h2-i">Watch a job go up, <span class="acc">stage by stage.</span></h2>
-        <p class="t-lead process__lead">Drag the orange line, or pick a stage. Everything below it is done.</p>
-      </div>
-      <div class="p2x__stage">
-        <svg class="p2x__svg" viewBox="0 0 1000 620" aria-hidden="true" focusable="false"></svg>
-        <div class="p2x__cap" aria-live="polite"><span class="p2x__no nums">01</span><span class="p2x__t">Consultation</span><span class="p2x__w nums">Week 1</span></div>
-        <button type="button" class="p2x__grip" aria-label="Build line: drag up or down, or use the arrow keys" data-rx="native:build-line"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18"/><path d="M22 10v24M15 17l7-7 7 7M15 27l7 7 7-7"/></svg></button>
-      </div>
-      <div class="p2x__pips" role="group" aria-label="Pick a stage"></div>
-      <p class="process__note">Timelines vary by scope and jurisdiction.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver p3x" data-v="3" hidden>
-    <div class="wrap p3x__grid">
-      <div class="p3x__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h3-i">Deal yourself <span class="acc">the whole job.</span></h2>
-        <p class="t-lead process__lead">Swipe a card away, or use the buttons. Every stage carries its published week mark.</p>
-        <p class="p3x__count nums" aria-live="polite"><span class="p3x__n">01</span> / 08</p>
-        <div class="p3x__ctrl">
-          <button type="button" class="btn btn--ghost p3x__prev" data-rx="~arrowL/hinge/shake/l"><span class="btn__label">Previous card</span></button>
-          <button type="button" class="btn p3x__next" data-rx="~arrowR/hinge/hop/r"><span class="btn__label">Next card</span></button>
-        </div>
-        <p class="process__note">Timelines vary by scope and jurisdiction.</p>
-      </div>
-      <div class="p3x__deck" tabindex="0" role="region" aria-roledescription="card deck" aria-label="Project stages, one card per stage. Left and right arrow keys move through them." data-rx="native:swipe-deck"></div>
-    </div>
-  </div>
-
-  
-  <div class="ver pdl" data-v="4" hidden>
-    <div class="wrap pdl__grid">
-      <div class="pdl__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h4">The combination <span class="acc">to your keys.</span></h2>
-        <p class="t-lead pdl__lead">Turn the dial. Eight stops, in order, from the first call to the keys.</p>
-        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
-        <div class="pdl__out" aria-live="polite"></div>
-      </div>
-      <div class="pdl__dial"><svg class="pdl__svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg><span class="pdl__ptr" aria-hidden="true"></span><div class="pdl__btns" role="radiogroup" aria-label="Stages"></div></div>
-    </div>
-  </div>
-
-  
-  <div class="ver pkr" data-v="5" hidden>
-    <div class="wrap pkr__grid">
-      <div class="pkr__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h5">Eight tags, <span class="acc">one ring of keys.</span></h2>
-        <p class="t-lead pkr__lead">Every stage hangs on the ring that ends with your keys. Pick a tag.</p>
-        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
-        <div class="pkr__out" aria-live="polite"></div>
-      </div>
-      <div class="pkr__ring"><svg class="pkr__svg" viewBox="0 0 640 420" aria-hidden="true" focusable="false"><circle class="r" cx="320" cy="80" r="56"/><g class="key"><circle cx="320" cy="30" r="16"/><path d="M320 46 V100 M320 82 H334 M320 94 H330"/></g></svg><div class="pkr__tags" role="radiogroup" aria-label="Stages"></div></div>
-    </div>
-  </div>
-
-  
-  <div class="ver pel" data-v="6" hidden>
-    <div class="wrap pel__grid">
-      <div class="pel__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h6">Going up: <span class="acc">eight floors.</span></h2>
-        <p class="t-lead pel__lead">Press a floor. The car rides up the job, one stage per floor.</p>
-        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
-        <div class="pel__out" aria-live="polite"></div>
-      </div>
-      <div class="pel__shaft"><div class="pel__floors"></div><div class="pel__car" aria-hidden="true"><span class="pel__disp nums">1</span><span class="pel__doors"></span></div><div class="pel__panel" role="radiogroup" aria-label="Floors, one per stage"></div></div>
-    </div>
-  </div>
-
-  
-  <div class="ver pfr" data-v="7" hidden>
-    <div class="wrap pfr__grid">
-      <div class="pfr__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h7">Unfold it <span class="acc">one stage at a time.</span></h2>
-        <p class="t-lead pfr__lead">A folding rule, eight segments, eight stages. Unfold the next one.</p>
-        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
-        <div class="pfr__out" aria-live="polite"></div>
-      </div>
-      <div class="pfr__rule" aria-hidden="true"></div><div class="pfr__acts"><button type="button" class="btn pfr__next" data-rx="~ruler/swing/tick/r"><span class="btn__label">Unfold the next stage</span></button><button type="button" class="btn btn--ghost pfr__fold" data-rx="~ruler/swing/wobble/l"><span class="btn__label">Fold it back</span></button></div>
-    </div>
-  </div>
-
-  
-  <div class="ver pcl" data-v="8" hidden>
-    <div class="wrap pcl__grid">
-      <div class="pcl__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h8">On the calendar, <span class="acc">week by week.</span></h2>
-        <p class="t-lead pcl__lead">Each stage sits on the weeks it is published for. Pick one to light its weeks.</p>
-        <p class="pnote">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
-        <div class="pcl__out" aria-live="polite"></div>
-      </div>
-      <div class="pcl__cal"><div class="pcl__weeks" aria-hidden="true"></div><div class="pcl__rows" role="radiogroup" aria-label="Stages"></div><div class="pcl__after"></div></div>
-    </div>
-  </div>
-
-  <div class="ver pl" data-v="b2" hidden>
-    <div class="wrap">
-      <div class="process__head">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h1-w">Eight stops between your first call and <span class="acc">your keys.</span></h2>
-        <div class="pl__headtxt">
-          <p class="t-lead process__lead">The route every Elbaz job drives, in order. Each stop says what happens there.</p>
-          <p class="pl__note">Weeks count from your first call. Construction time depends on the scope, and timelines vary by scope and jurisdiction.</p>
-        </div>
-      </div>
-      <div class="pl__plan" aria-hidden="true">
-        <svg class="pl__svg" focusable="false"></svg>
-        <ol class="pl__signs"></ol>
-      </div>
-      <ol class="pl__list" aria-label="The eight stages of a project"></ol>
-    </div>
-  </div>
-
-  <div class="ver process1" data-v="b1" hidden>
-    <div class="wrap">
-      <div class="process__head">
-        <h2 class="t-head" id="process-h1">Eight stops between your first call and your keys.</h2>
-        <p class="t-lead process__lead">Scroll and the truck drives the job. Tap a sign to read the stop.</p>
-      </div>
-      <div class="process1__plan">
-        <svg class="process1__svg" aria-hidden="true" focusable="false"></svg>
-        <ol class="process1__signs" aria-label="The eight stages of a project"></ol>
-      </div>
-      <p class="process__note">Timelines vary by scope and jurisdiction.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver process2" data-v="b3" hidden>
-    <div class="wrap">
-      <div class="process__head">
-        <h2 class="t-head" id="process-h2">Watch a job go up, stage by stage.</h2>
-        <p class="t-lead process__lead">Drag the yellow line, or pick a stage. Everything below it is done.</p>
-      </div>
-      <div class="process2__stage">
-        <svg class="process2__svg" viewBox="0 0 1000 620" aria-hidden="true" focusable="false"></svg>
-        <div class="process2__cap" aria-live="polite"><span class="process2__no nums">01</span><span class="process2__t">Consultation</span><span class="process2__w nums">Week 1</span></div>
-        <button type="button" class="process2__grip" aria-label="Build line: drag up or down, or use the arrow keys" data-rx="native:build-line"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18"/><path d="M22 10v24M15 17l7-7 7 7M15 27l7 7 7-7"/></svg></button>
-      </div>
-      <div class="process2__pips" role="group" aria-label="Pick a stage"></div>
-      <p class="process__note">Timelines vary by scope and jurisdiction.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver process3" data-v="b4" hidden>
-    <div class="wrap process3__grid">
-      <div class="process3__side">
-        <h2 class="t-head" id="process-h3">Deal yourself the whole job.</h2>
-        <p class="t-lead process__lead">Swipe a card away, or use the buttons. Every stage carries its published week mark.</p>
-        <p class="process3__count nums" aria-live="polite"><span class="process3__n">01</span> / 08</p>
-        <div class="process3__ctrl">
-          <button type="button" class="btn btn--ghost process3__prev" data-rx="~arrowL/hinge/shake/l"><span class="btn__label">Previous card</span></button>
-          <button type="button" class="btn process3__next" data-rx="~arrowR/hinge/hop/r"><span class="btn__label">Next card</span></button>
-        </div>
-        <p class="process__note">Timelines vary by scope and jurisdiction.</p>
-      </div>
-      <div class="process3__deck" tabindex="0" role="region" aria-roledescription="card deck" aria-label="Project stages, one card per stage. Left and right arrow keys move through them." data-rx="native:swipe-deck"></div>
     </div>
   </div>
 </section>
@@ -8170,633 +7657,229 @@ html.has-buddy select { cursor: default !important; }
   } } });
 })();
 
-/* process: the eight published stages and week marks from FACTS.md (data/stages.json).
-   v1 site-plan route (Q54 curved path), v2 a house that builds itself (S1340), v3 a swipe deck (S1443). */
+/* FINALIZE · Home 5 · Process: eight frames of one continuous drawn site; the camera travels across it while the
+   section is pinned, each frame draws itself as it arrives (strokes first, then fills [S0362]), the words stay still
+   and swap per stage, and the week marks land on the rail. One pinned master timeline, scrubbed, reversible
+   [S1326, S0186 ease none, S1209 finite pin: ~1 viewport per frame]. Phones and reduced motion: the ordered list is the
+   story, each stage gets its own frame drawn inline (no pin). The companion watches from the corner during the pin. */
 (function () {
-  function f(n) { return Math.round(n * 10) / 10; }
-  function S() { return (window.__DATA || {}).stages || []; }
-  function plain(html) { var d = document.createElement('div'); d.innerHTML = html; return d.textContent; }
-  var TRUCK = '<g class="truck"><rect x="-26" y="-9" width="30" height="13" rx="2" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2"/>' +
-    '<path d="M4 4 V-9 h11 l8 8 V4 Z" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2" stroke-linejoin="round"/><path d="M8 -6 h6 l5 5 h-11 Z" fill="' + EZ.c('--color-surface') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.2"/>' +
-    '<circle cx="-16" cy="6" r="5" fill="' + EZ.c('--color-art-line') + '\"/><circle cx="-16" cy="6" r="2" fill="' + EZ.c('--color-border') + '\"/><circle cx="13" cy="6" r="5" fill="' + EZ.c('--color-art-line') + '\"/><circle cx="13" cy="6" r="2" fill="' + EZ.c('--color-border') + '\"/>' +
-    '<rect x="-24" y="-15" width="8" height="6" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.2"/><rect x="-14" y="-15" width="8" height="6" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.2"/></g>';
-  // one drawn mark per stage (40x40): clipboard, flood gauge, set square, scope sheet, permit card, framing, level, keys
-  var ICONS = [
-    '<rect class="s" x="10" y="8" width="20" height="27" rx="2"/><rect class="f" x="15" y="5" width="10" height="6" rx="1.5"/><path class="s" d="M15 18h10M15 23h10M15 28h6"/>',
-    '<circle class="s" cx="17" cy="16" r="9"/><path class="s" d="M24 23l8 8"/><path class="s w" d="M4 35q4 -4 8 0t8 0t8 0t8 0"/>',
-    '<path class="s" d="M7 33V7h6v20h20v6z"/><path class="f" d="M30 6l4 4l-15 15l-6 2l2-6z"/>',
-    '<path class="s" d="M10 5h14l7 7v23H10z"/><path class="s" d="M24 5v7h7M15 19h11M15 24h11"/><path class="s g" d="M15 30l3 3l6-7"/>',
-    '<rect class="f" x="9" y="24" width="22" height="7" rx="1"/><path class="s" d="M16 24v-8h8v8M14 16h12v-5a6 6 0 0 0-12 0z"/><path class="s r" d="M7 35h26"/>',
-    '<path class="s" d="M6 36V16l14-10 14 10v20M6 16h28M13 36V22M20 36V22M27 36V22"/>',
-    '<rect class="s" x="4" y="16" width="32" height="9" rx="2"/><rect class="f" x="15" y="18" width="10" height="5" rx="2.5"/><path class="s g" d="M14 8l4 4l8-8"/>',
-    '<circle class="f" cx="13" cy="20" r="7"/><circle cx="13" cy="20" r="2.4" fill="' + EZ.c('--color-art-line') + '\"/><path class="s" d="M20 20h15M30 20v5M34 20v4"/>'
-  ];
-  var RXS = ['speech', 'magnifier', 'sketch', 'ledger', 'badge', 'sawhorse', 'check', 'flag'];
+  var NS = 'http://www.w3.org/2000/svg', G = 760, FW = 1000;
 
-
-  // Phase 5: one answer panel for the new versions, printed from the shared stage data (titles, week marks, descriptions)
-  function panel(out, i) {
-    var st = S()[i]; if (!st) return;
-    out.innerHTML = '<span class="pstage__n nums">0' + (i + 1) + '</span><h3 class="pstage__t">' + st.t + '</h3><p class="pstage__w nums">' + st.w + '</p><p class="pstage__d">' + st.d + '</p>';
+  /* ---------- the drawing kit (one language: ink line 3.2, sand and paper fills, one clay accent) ---------- */
+  function P(d, c) { return '<path class="' + (c || 'd') + '" d="' + d + '"/>'; }
+  function C(x, y, r, c) { return '<circle class="' + (c || 'd') + '" cx="' + x + '" cy="' + y + '" r="' + r + '"/>'; }
+  function R(x, y, w, h, c, rx) { return '<rect class="' + (c || 'd') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"' + (rx ? ' rx="' + rx + '"' : '') + '/>'; }
+  function T(x, y, s, c, a) { return '<text class="' + (c || 'tx') + '" x="' + x + '" y="' + y + '"' + (a ? ' text-anchor="' + a + '"' : '') + '>' + s + '</text>'; }
+  function hat(x, y) {   // hard hat sitting ON the head (brim across the brow): the same rule as the companion
+    return P('M' + (x - 25) + ' ' + (y - 6) + ' C' + (x - 25) + ' ' + (y - 34) + ' ' + (x + 25) + ' ' + (y - 34) + ' ' + (x + 25) + ' ' + (y - 6) + ' Z', 'f-clay d') +
+      P('M' + (x - 32) + ' ' + (y - 6) + ' H' + (x + 32), 'd');
   }
-  function radioRow(btns, k, pick) {
-    var cur = 0;
-    btns.forEach(function (b, i) {
-      b.setAttribute('role', 'radio'); b.tabIndex = i ? -1 : 0;
-      k.on(b, 'click', function () { pick(i); });
-      k.on(b, 'keydown', function (e) { var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0; if (d) { e.preventDefault(); var n = (cur + d + btns.length) % btns.length; pick(n); btns[n].focus(); } });
-    });
-    return function (i) { cur = i; btns.forEach(function (b, j) { b.setAttribute('aria-checked', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; }); };
+  // a standing person: feet at (x, G); arms: 'down' | 'point' | 'hold' | 'raise' | 'give'; dir 1 faces right, -1 left
+  function stand(x, o) {
+    o = o || {}; var d = o.dir || 1, top = G - 220, hy = G - 252, s = '';
+    s += P('M' + (x - 12) + ' ' + G + ' L' + (x - 9) + ' ' + (G - 108) + ' M' + (x + 12) + ' ' + G + ' L' + (x + 9) + ' ' + (G - 108));
+    s += P('M' + (x - 22) + ' ' + G + ' h-14 M' + (x + 22) + ' ' + G + ' h14');
+    s += P('M' + (x - 27) + ' ' + (G - 104) + ' L' + (x - 30) + ' ' + (top + 18) + ' Q' + (x - 30) + ' ' + top + ' ' + (x - 12) + ' ' + top + ' L' + (x + 12) + ' ' + top + ' Q' + (x + 30) + ' ' + top + ' ' + (x + 30) + ' ' + (top + 18) + ' L' + (x + 27) + ' ' + (G - 104) + ' Z', (o.shirt || 'f-sand') + ' d');
+    s += C(x, hy, 23, 'f-paper d');
+    s += P('M' + (x + d * 9) + ' ' + (hy - 3) + ' v4', 'dt');   // the eye, looking the way it faces
+    var sh = top + 14, a = o.arms || 'down';
+    if (a === 'down') s += P('M' + (x - 28) + ' ' + sh + ' L' + (x - 34) + ' ' + (G - 100) + ' M' + (x + 28) + ' ' + sh + ' L' + (x + 34) + ' ' + (G - 100));
+    if (a === 'point') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 34 * d) + ' ' + (G - 100) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 70 * d) + ' ' + (sh - 30) + ' L' + (x + 112 * d) + ' ' + (sh - 52));
+    if (a === 'hold') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 30 * d) + ' ' + (G - 112) + ' L' + (x + 20 * d) + ' ' + (G - 132) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 36 * d) + ' ' + (G - 112) + ' L' + (x + 56 * d) + ' ' + (G - 140));
+    if (a === 'raise') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 34 * d) + ' ' + (G - 100) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 48 * d) + ' ' + (sh - 60) + ' L' + (x + 56 * d) + ' ' + (sh - 118));
+    if (a === 'give') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 34 * d) + ' ' + (G - 100) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 64 * d) + ' ' + (sh + 40) + ' L' + (x + 104 * d) + ' ' + (sh + 34));
+    if (o.hat) s += hat(x, hy - 12);
+    return s;
   }
+  // a seated person on a chair, facing dir; hands rest on a table at height ty
+  function sit(x, d, ty, o) {
+    o = o || {}; var seat = G - 120, hy = seat - 168, s = '';
+    s += P('M' + (x - 34 * d) + ' ' + G + ' V' + seat + ' H' + (x + 30 * d) + ' V' + G + ' M' + (x - 34 * d) + ' ' + seat + ' V' + (seat - 120), 'd');   // chair
+    s += P('M' + (x - 10 * d) + ' ' + (seat - 4) + ' H' + (x + 54 * d) + ' L' + (x + 58 * d) + ' ' + G + ' h' + (16 * d));        // legs
+    s += P('M' + (x - 26 * d) + ' ' + (seat - 4) + ' L' + (x - 22 * d) + ' ' + (seat - 118) + ' Q' + (x - 18 * d) + ' ' + (seat - 132) + ' ' + (x - 2 * d) + ' ' + (seat - 132) + ' L' + (x + 14 * d) + ' ' + (seat - 132) + ' Q' + (x + 28 * d) + ' ' + (seat - 128) + ' ' + (x + 30 * d) + ' ' + (seat - 112) + ' L' + (x + 24 * d) + ' ' + (seat - 4) + ' Z', (o.shirt || 'f-sand') + ' d');
+    s += C(x + 4 * d, hy, 23, 'f-paper d');
+    s += P('M' + (x + 14 * d) + ' ' + (hy - 3) + ' v4', 'dt');
+    s += P('M' + (x + 20 * d) + ' ' + (seat - 116) + ' L' + (x + 52 * d) + ' ' + (ty - 10) + ' L' + (x + 92 * d) + ' ' + (ty - 4));                 // arm to the table
+    if (o.hat) s += hat(x + 4 * d, hy - 12);
+    return s;
+  }
+  function steam(x, y) { return P('M' + x + ' ' + y + ' c-8 -14 8 -22 0 -36 M' + (x + 12) + ' ' + y + ' c-8 -14 8 -22 0 -36', 'dt steam'); }
+  function house(x, w, h, roof, noRight) {   // an elevation: walls, roof, door, two windows
+    var y = G - h, s = '';
+    s += R(x, y, w, h, 'f-paper d');
+    s += P('M' + (x - 30) + ' ' + (y + 6) + ' L' + (x + w / 2) + ' ' + (y - roof) + ' L' + (x + w + 30) + ' ' + (y + 6), 'd roof');
+    s += R(x + w / 2 - 34, G - 150, 68, 150, 'f-sand d');
+    s += R(x + 40, y + 70, 110, 90, 'f-paper d') + P('M' + (x + 95) + ' ' + (y + 70) + ' v90 M' + (x + 40) + ' ' + (y + 115) + ' h110', 'dt');
+    if (!noRight) s += R(x + w - 150, y + 70, 110, 90, 'f-paper d') + P('M' + (x + w - 95) + ' ' + (y + 70) + ' v90 M' + (x + w - 150) + ' ' + (y + 115) + ' h110', 'dt');
+    return s;
+  }
+  function lines(x, y, n, w, gap) { var s = ''; for (var i = 0; i < n; i++) s += P('M' + x + ' ' + (y + i * gap) + ' h' + (w - (i % 3) * 38), 'dt writes'); return s; }
+  function tick(x, y) { return P('M' + x + ' ' + y + ' l10 10 l20 -24', 'd tick'); }
 
-  EZ.section('process', {
-    /* slot 4 · NEW · The dial: eight stages round a rotary dial; the stage under the pointer answers */
-    4: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.pdl__side > *'));
-      var svg = root.querySelector('.pdl__svg'), out = root.querySelector('.pdl__out'), st = S(), n = st.length, a0 = 0;
-      var g = '<circle class="face" cx="200" cy="200" r="190"/><g class="spin">';
-      st.forEach(function (x, i) { var a = i * 360 / n; g += '<g transform="rotate(' + a + ' 200 200)"><path class="tick" d="M200 18 V40"/><text x="200" y="66" transform="rotate(' + (-a) + ' 200 66)">0' + (i + 1) + '</text></g>'; });
-      g += '</g><circle class="inner" cx="200" cy="200" r="104"/><circle class="knob" cx="200" cy="200" r="54"/><circle class="hub" cx="200" cy="200" r="12"/>';
-      svg.innerHTML = g;
-      var spin = svg.querySelector('.spin'), btns = [];
-      var bx = root.querySelector('.pdl__btns'); bx.innerHTML = st.map(function (x, i) { return '<button type="button" aria-label="' + x.t + '" data-rx="native:dial-stop">' + (i + 1) + '</button>'; }).join(''); btns = Array.prototype.slice.call(bx.children);
-      var mark = radioRow(btns, k, go);
-      function setRot(a) { a0 = a; spin.setAttribute('transform', 'rotate(' + a.toFixed(2) + ' 200 200)'); }
-      function go(i) {
-        var to = -i * 360 / n, d = ((to - a0) % 360 + 540) % 360 - 180, o = { a: a0 };
-        mark(i); panel(out, i);
-        if (!k.motion) { setRot(a0 + d); return; }
-        gsap.to(o, { a: a0 + d, duration: .45, ease: EZ.bezier(.23, 1, .32, 1), onUpdate: function () { setRot(o.a); }, overwrite: true });
-      }
-      var drag = null;
-      k.on(svg, 'pointerdown', function (e) { var r = svg.getBoundingClientRect(); drag = { cx: r.left + r.width / 2, cy: r.top + r.height / 2, a: Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)), r0: a0 }; svg.setPointerCapture(e.pointerId); });
-      k.on(svg, 'pointermove', function (e) { if (!drag) return; var a = Math.atan2(e.clientY - drag.cy, e.clientX - drag.cx); setRot(drag.r0 + (a - drag.a) * 180 / Math.PI); });
-      k.on(svg, 'pointerup', function () { if (!drag) return; drag = null; var i = ((Math.round(-a0 / (360 / n)) % n) + n) % n; go(i); });
-      go(0);
-      k.add(function () { svg.innerHTML = ''; bx.innerHTML = ''; });
-    } },
-
-    /* slot 5 · NEW · The key ring: one tag per stage hangs on the ring; the picked tag swings up */
-    5: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.pkr__side > *'));
-      var box = root.querySelector('.pkr__tags'), out = root.querySelector('.pkr__out'), st = S();
-      box.innerHTML = st.map(function (x, i) { return '<button type="button" class="pkr__tag" aria-label="' + x.t + '" data-rx="native:ring-tag">' + (i + 1) + '</button>'; }).join('');
-      var tags = Array.prototype.slice.call(box.children), mark = radioRow(tags, k, go);
-      function go(i) { mark(i); panel(out, i); }
-      go(0);
-      if (k.motion) gsap.from(tags, { rotation: function (i) { return i % 2 ? 24 : -24; }, transformOrigin: '50% -30px', duration: .6, ease: 'elastic.out(1, .5)', stagger: .04, clearProps: 'rotation', scrollTrigger: { trigger: box, start: 'top 75%', once: true } });
-      k.add(function () { box.innerHTML = ''; });
-    } },
-
-    /* slot 6 · NEW · The elevator: a call panel sends the car to the stage's floor */
-    6: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.pel__side > *'));
-      var fl = root.querySelector('.pel__floors'), car = root.querySelector('.pel__car'), disp = root.querySelector('.pel__disp'), pnl = root.querySelector('.pel__panel'), out = root.querySelector('.pel__out'), st = S();
-      fl.innerHTML = st.slice().reverse().map(function (x, j) { return '<div><span>' + x.t + '</span><b class="nums">' + (st.length - j) + '</b></div>'; }).join('');
-      pnl.innerHTML = st.slice().reverse().map(function (x, j) { var i = st.length - 1 - j; return '<button type="button" data-i="' + i + '" aria-label="Floor ' + (i + 1) + ', ' + x.t + '" data-rx="native:lift-floor">' + (i + 1) + '</button>'; }).join('');
-      var btns = Array.prototype.slice.call(pnl.children).sort(function (a, b) { return a.dataset.i - b.dataset.i; }), mark = radioRow(btns, k, go);
-      function go(i) {
-        mark(i); panel(out, i);
-        var h = fl.clientHeight / st.length; car.style.transform = 'translateY(' + (-i * h).toFixed(1) + 'px)';
-        if (k.motion) { var o = { v: +disp.textContent }; gsap.to(o, { v: i + 1, duration: .6, ease: 'none', onUpdate: function () { disp.textContent = Math.round(o.v); } }); } else disp.textContent = i + 1;
-      }
-      go(0);
-      k.ro(fl, function () { var c = btns.filter(function (b) { return b.getAttribute('aria-checked') === 'true'; })[0]; if (c) car.style.transform = 'translateY(' + (-c.dataset.i * fl.clientHeight / st.length).toFixed(1) + 'px)'; });
-      k.add(function () { fl.innerHTML = ''; pnl.innerHTML = ''; car.style.transform = ''; });
-    } },
-
-    /* slot 7 · NEW · The folding ruler: each press unfolds the next segment, and the segment is the next stage */
-    7: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.pfr__side > *'));
-      var rule = root.querySelector('.pfr__rule'), out = root.querySelector('.pfr__out'), st = S(), open = 1;
-      rule.innerHTML = st.map(function (x, i) { return '<div class="pfr__seg" style="left:calc(' + i + ' * 100% / 8)">' + (i + 1) + '<span>' + x.t + '</span></div>'; }).join('');
-      var segs = Array.prototype.slice.call(rule.children);
-      function set() {
-        segs.forEach(function (sg, i) {
-          var on = i < open; sg.classList.toggle('is-open', on); sg.classList.toggle('is-fold', !on);
-          sg.style.setProperty('--fold', (i % 2 ? -1 : 1) * 3 + 'deg'); sg.style.setProperty('--fx', 'calc(' + (on ? 0 : -(i - open)) + ' * (100% + 4px))'); sg.style.zIndex = on ? 1 : 10 + i;
-        });
-        panel(out, open - 1);
-        root.querySelector('.pfr__next').disabled = open >= st.length; root.querySelector('.pfr__fold').disabled = open <= 1;
-      }
-      k.on(root.querySelector('.pfr__next'), 'click', function () { if (open < st.length) { open++; set(); } });
-      k.on(root.querySelector('.pfr__fold'), 'click', function () { open = 1; set(); });
-      set();
-      k.add(function () { rule.innerHTML = ''; });
-    } },
-
-    /* slot 8 · NEW · The wall calendar: each stage sits on the weeks its published mark names */
-    8: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.pcl__side > *'));
-      var wk = root.querySelector('.pcl__weeks'), rows = root.querySelector('.pcl__rows'), after = root.querySelector('.pcl__after'), out = root.querySelector('.pcl__out'), st = S();
-      wk.innerHTML = '<span></span>' + new Array(13).join('x').split('').map(function (x, i) { return '<span class="nums">' + (i + 1) + '</span>'; }).join('');
-      var all = [];
-      st.forEach(function (x, i) {
-        var m = /^Weeks? (\d+)(?:[^\d]+(\d+))?/.exec(plain(x.w));
-        if (m) {
-          var a = +m[1], b = +(m[2] || m[1]);
-          rows.insertAdjacentHTML('beforeend', '<button type="button" class="pcl__row" data-i="' + i + '" aria-label="' + x.t + ', ' + plain(x.w) + '" data-rx="native:cal-row"><span>' + x.t + '</span><span class="pcl__span" style="grid-column:' + (a + 1) + ' / ' + (b + 2) + '"></span></button>');
-        } else after.insertAdjacentHTML('beforeend', '<button type="button" data-i="' + i + '" aria-label="' + x.t + ', ' + plain(x.w) + '" data-rx="native:cal-row">' + x.t + ': ' + x.w + '</button>');
-      });
-      all = Array.prototype.slice.call(root.querySelectorAll('.pcl__rows button, .pcl__after button'));
-      var mark = radioRow(all, k, function (j) { mark(j); panel(out, +all[j].dataset.i); });
-      mark(0); panel(out, +all[0].dataset.i);
-      k.add(function () { wk.innerHTML = ''; rows.innerHTML = ''; after.innerHTML = ''; });
-    } },
-
-    /* slot 3 · Phase 5 improved version of b4 */
-    3: { init: function (root, k) {
-      var deck = root.querySelector('.p3x__deck'), nEl = root.querySelector('.p3x__n');
-      var st = S(), N = st.length, cur = 0;
-      EZ.reveal(k, root.querySelectorAll('.p3x__side > *'));
-      deck.innerHTML = st.map(function (s, i) {
-        return '<article class="p3x__card" data-i="' + i + '" aria-hidden="' + (i ? 'true' : 'false') + '">' +
-          '<div class="p3x__art"><svg viewBox="0 0 40 40" aria-hidden="true">' + ICONS[i] + '</svg><span class="p3x__stamp nums">' + s.w + '</span></div>' +
-          '<p class="p3x__cno nums">' + (i < 9 ? '0' : '') + (i + 1) + ' / ' + (N < 10 ? '0' : '') + N + '</p>' +
-          '<h3 class="p3x__t">' + s.t + '</h3><p class="p3x__d">' + s.d + '</p></article>';
-      }).join('');
-      var cards = Array.prototype.slice.call(deck.children);
-      // the gesture is discoverable: a hint under the deck until the first card is dealt [S1443]
-      var hint = document.createElement('p');
-      hint.className = 'p3x__hint'; hint.setAttribute('aria-hidden', 'true');
-      hint.innerHTML = '<svg viewBox="0 0 22 12"><path d="M7 1L2 6l5 5M15 1l5 5-5 5M2 6h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Swipe the card';
-      deck.appendChild(hint);
-      function layout(animate) {
-        cards.forEach(function (c, i) {
-          var n = i - cur, vars;
-          if (n < 0) vars = { x: '-115%', y: 0, scale: .96, autoAlpha: 0, zIndex: 0 };
-          else vars = { x: 0, y: Math.min(n, 3) * 14, scale: 1 - Math.min(n, 3) * .04, autoAlpha: n > 3 ? 0 : 1, zIndex: N - n };
-          c.setAttribute('aria-hidden', n === 0 ? 'false' : 'true');
-          if (animate && k.motion) gsap.to(c, Object.assign({ duration: .3, ease: 'power3.out', overwrite: true }, vars)); else gsap.set(c, vars);
-        });
-        nEl.textContent = (cur < 9 ? '0' : '') + (cur + 1);
-      }
-      function next(dir) {
-        if (cur >= N - 1) { cur = 0; layout(true); return; }      // the last card deals the deck again
-        var c = cards[cur];
-        cur++;
-        deck.classList.add('is-dealt');
-        if (k.motion) gsap.to(c, { x: (dir || -1) * 115 + '%', autoAlpha: 0, duration: .3, ease: 'power2.in', overwrite: true, onComplete: function () { gsap.set(c, { zIndex: 0 }); } });
-        layout(true);
-      }
-      function prev() { if (cur > 0) { cur--; layout(true); } }
-      layout(false);
-      k.on(root.querySelector('.p3x__next'), 'click', function () { next(-1); });
-      k.on(root.querySelector('.p3x__prev'), 'click', prev);
-      k.on(deck, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); next(-1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); } });
-      // the gesture: activation after 12px, axis locks; past 30% of the card width (or a fast flick) the card goes
-      var g = null;
-      k.on(deck, 'pointerdown', function (e) {
-        var c = cards[cur]; if (!c || !c.contains(e.target)) return;
-        g = { x: e.clientX, y: e.clientY, t: performance.now(), axis: null, c: c, w: c.offsetWidth, id: e.pointerId };
-      });
-      k.on(deck, 'pointermove', function (e) {
-        if (!g || e.pointerId !== g.id) return;
-        var dx = e.clientX - g.x, dy = e.clientY - g.y;
-        if (!g.axis) { if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return; g.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; if (g.axis === 'x') { try { deck.setPointerCapture(e.pointerId); } catch (er) {} } }
-        if (g.axis !== 'x') return;
-        e.preventDefault();
-        var pr = Math.min(1, Math.abs(dx) / (g.w * .3));
-        gsap.set(g.c, { x: dx, scale: 1 - pr * .02 });
-        if (cards[cur + 1]) gsap.set(cards[cur + 1], { y: 14 * (1 - pr), scale: .96 + .04 * pr });   // the threshold cue: the next card rises to meet it
-        g.dx = dx; g.v = dx / Math.max(1, performance.now() - g.t);
-      });
-      function end(e) {
-        if (!g) return;
-        // a tap (no travel, quick) deals the next card too: tap = select [S1443]
-        if (!g.axis && e && e.type === 'pointerup' && performance.now() - g.t < 450) { g = null; next(-1); return; }
-        var go = g.axis === 'x' && (Math.abs(g.dx || 0) > g.w * .3 || Math.abs(g.v || 0) > .55);
-        if (go) next((g.dx || -1) < 0 ? -1 : 1);
-        else if (g.axis === 'x') { gsap.to(g.c, { x: 0, scale: 1, duration: .45, ease: 'elastic.out(1, .55)', overwrite: true }); layout(true); }
-        g = null;
-      }
-      k.on(deck, 'pointerup', end);
-      k.on(deck, 'pointercancel', end);
-      k.add(function () { deck.innerHTML = ''; deck.classList.remove('is-dealt'); });
-      if (k.motion) gsap.from(cards.slice(0, 4), { y: 30, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: deck, start: 'top 80%', once: true }, onComplete: function () { layout(false); } });
-    } },
-
-    /* slot 2 · Phase 5 improved version of b3 */
-    2: { init: function (root, k) {
-      var svg = root.querySelector('.p2x__svg'), stage = root.querySelector('.p2x__stage');
-      var capNo = root.querySelector('.p2x__no'), capT = root.querySelector('.p2x__t'), capW = root.querySelector('.p2x__w');
-      // [AUDIT-01 F5 loser] the percentage readout is gone: equal bands under unequal durations made it a fabricated number
-      var grip = root.querySelector('.p2x__grip'), pipsEl = root.querySelector('.p2x__pips');
-      var st = S(), TOP = 150, BOT = 600, ys = st.map(function (s, i) { return BOT - (i + 1) / st.length * (BOT - TOP); });
-      EZ.reveal(k, root.querySelectorAll('.process__head > *'));
-      // the house, in section: footings, slab, walls, partition, door, windows, ceiling, truss roof, covering; site props
-      var built =
-        '<g class="soil"><rect x="0" y="560" width="1000" height="60"/></g>' +
-        '<rect class="footing" x="196" y="560" width="58" height="40"/><rect class="footing" x="746" y="560" width="58" height="40"/>' +
-        '<rect class="slab" x="190" y="538" width="620" height="22"/>' +
-        '<rect class="wall" x="200" y="330" width="22" height="208"/><rect class="wall" x="778" y="330" width="22" height="208"/><rect class="part" x="494" y="330" width="12" height="208"/>' +
-        '<rect class="win" x="270" y="396" width="110" height="72"/><path class="mull" d="M325 396v72M270 432h110"/>' +
-        '<rect class="win" x="610" y="396" width="110" height="72"/><path class="mull" d="M665 396v72M610 432h110"/>' +
-        '<rect class="door" x="532" y="420" width="62" height="118"/><circle class="knob" cx="582" cy="482" r="4"/>' +
-        '<rect class="ceil" x="190" y="322" width="620" height="10"/>' +
-        '<path class="truss" d="M170 330L500 152L830 330Z"/><path class="web" d="M260 330L335 240M335 240L420 330M420 330L500 152M500 152L580 330M580 330L665 240M665 240L740 330"/>' +
-        '<path class="cover" d="M160 334L500 146L840 334"/>' +
-        '<g class="stakes"><path d="M140 560v-34M860 560v-34"/><path class="flag" d="M140 528l16 5-16 5zM860 528l16 5-16 5z"/><path class="string" d="M140 532H860"/></g>' +
-        '<g class="gauge"><rect x="70" y="470" width="10" height="90"/><path d="M80 480h8M80 500h12M80 520h8M80 540h12"/><path class="flood" d="M40 548h80"/></g>' +
-        '<g class="permit"><rect class="post" x="900" y="460" width="8" height="100"/><rect class="card" x="878" y="452" width="52" height="40"/><path d="M886 464h36M886 472h36M886 480h22"/></g>';
-      var shoring = '';
-      [230, 360, 500, 640, 770].forEach(function (x, i) {
-        shoring += '<rect class="prop" x="' + (x - 5) + '" y="140" width="10" height="420"/>';
-        if (i < 4) shoring += '<path class="brace" d="M' + x + ' 520L' + (x + (i % 2 ? 130 : 140)) + ' 220M' + x + ' 220L' + (x + (i % 2 ? 130 : 140)) + ' 520"/>';
-      });
-      shoring += '<rect class="ledger" x="200" y="214" width="600" height="10"/><rect class="ledger" x="200" y="420" width="600" height="10"/>';
-      svg.innerHTML = '<defs><clipPath id="p2-below"><rect class="cb" x="0" y="600" width="1000" height="40"/></clipPath><clipPath id="p2-above"><rect class="ca" x="0" y="0" width="1000" height="600"/></clipPath></defs>' +
-        '<path class="ground" d="M0 560H1000"/>' +
-        '<g class="shore" clip-path="url(#p2-above)">' + shoring + '</g>' +
-        '<g class="built" clip-path="url(#p2-below)">' + built + '</g>' +
-        '<g class="plane"><path class="line" d="M0 600H1000"/><path class="cap" d="M190 600H810"/></g>';
-      var cb = svg.querySelector('.cb'), ca = svg.querySelector('.ca'), planeG = svg.querySelector('.plane');
-      pipsEl.innerHTML = st.map(function (s, i) {
-        return '<button type="button" class="p2x__pip" data-i="' + i + '" data-rx="~' + RXS[i] + '/pop/flash/t" aria-label="Stage ' + (i + 1) + ': ' + plain(s.t) + '"><span class="nums">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="p2x__pt">' + s.t + '</span></button>';
-      }).join('');
-      var pips = Array.prototype.slice.call(pipsEl.children);
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      var Y = { y: BOT }, cur = -1;
-      function render() {
-        var y = EZ.clamp(Y.y, TOP, BOT);
-        cb.setAttribute('y', y); cb.setAttribute('height', 640 - y);
-        ca.setAttribute('height', y);
-        planeG.setAttribute('transform', 'translate(0 ' + (y - 600) + ')');
-        grip.style.top = (y / 620 * 100) + '%';
-        var n = 0; ys.forEach(function (t) { if (y <= t + .5) n++; });
-        var idx = Math.max(0, n - 1);
-        if (idx !== cur) {
-          cur = idx;
-          capNo.textContent = (idx < 9 ? '0' : '') + (idx + 1); capT.innerHTML = st[idx].t; capW.innerHTML = st[idx].w;
-          pips.forEach(function (p, j) { p.setAttribute('aria-pressed', j === idx ? 'true' : 'false'); p.classList.toggle('is-done', j < n); });
-        }
-        stage.classList.toggle('is-done', y <= TOP + .5);
-      }
-      var auto = null;
-      function go(i, dur) {
-        if (auto) { auto.kill(); auto = null; }
-        if (!k.motion) { Y.y = ys[i]; render(); return; }
-        gsap.to(Y, { y: ys[i], duration: dur == null ? .5 : dur, ease: 'power2.inOut', onUpdate: render, overwrite: true });
-      }
-      pips.forEach(function (p, i) { k.on(p, 'click', function () { go(i); }); });
-      // drag the line (S1340's scrub), or step it with the keys
-      var dragging = false;
-      function yAt(e) { var r = svg.getBoundingClientRect(); return (e.clientY - r.top) / r.height * 620; }
-      k.on(grip, 'pointerdown', function (e) { dragging = true; if (auto) { auto.kill(); auto = null; } gsap.killTweensOf(Y); try { grip.setPointerCapture(e.pointerId); } catch (er) {} e.preventDefault(); });
-      k.on(grip, 'pointermove', function (e) { if (dragging) { Y.y = EZ.clamp(yAt(e), TOP, BOT); render(); } });
-      k.on(grip, 'pointerup', function () { dragging = false; });
-      k.on(grip, 'pointercancel', function () { dragging = false; });
-      k.on(grip, 'keydown', function (e) {
-        var d = e.key === 'ArrowUp' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowDown' || e.key === 'ArrowLeft' ? -1 : 0;
-        if (!d) return; e.preventDefault();
-        go(EZ.clamp(cur + d, 0, st.length - 1), .3);
-      });
-      k.add(function () { svg.innerHTML = ''; pipsEl.innerHTML = ''; grip.style.top = ''; stage.classList.remove('is-done'); });
-      if (!k.motion) { Y.y = TOP; render(); return; }
-      Y.y = BOT; render();
-      // the build runs once when the stage is in view: ~.45s per stage, a short beat on each [S1340 4-5s build]
-      ScrollTrigger.create({ trigger: stage, start: 'top 65%', once: true, onEnter: function () {
-        if (dragging) return;
-        auto = gsap.timeline({ onComplete: function () { auto = null; } });
-        ys.forEach(function (t) { auto.to(Y, { y: t, duration: .45, ease: 'power2.inOut', onUpdate: render }).to({}, { duration: .1 }); });
-      } });
-    } },
-
-    /* slot 1 · Phase 5 improved version of b2 */
-    1: { init: function (root, k) {
-      var plan = root.querySelector('.plx__plan'), svg = root.querySelector('.plx__svg'), signs = root.querySelector('.plx__signs'), list = root.querySelector('.plx__list');
-      var st = S(), road, done, truck, P = { p: 0 }, VW = 1200, VH = 520, scrub = null;
-      var pts = [[90, 420], [250, 250], [430, 380], [575, 190], [735, 350], [880, 170], [1030, 320], [1125, 120]];
-      EZ.reveal(k, root.querySelectorAll('.process__head .t-head, .plx__headtxt > *'));
-      signs.innerHTML = st.map(function (s, i) {
-        return '<li class="plx__stop' + (i % 2 === 0 ? ' is-below' : '') + '" style="left:' + (pts[i][0] / VW * 100) + '%;top:' + (pts[i][1] / VH * 100) + '%"><span class="plx__sign"><span class="plx__no nums">0' + (i + 1) + '</span><span class="plx__t">' + s.t + '</span></span></li>';
-      }).join('');
-      list.innerHTML = st.map(function (s, i) {
-        return '<li class="plx__item"><span class="plx__ino nums" aria-hidden="true">0' + (i + 1) + '</span><h3 class="plx__ih">' + s.t + '</h3><p class="plx__iw nums">' + s.w + '</p><p class="plx__id">' + s.d + '</p></li>';
-      }).join('');
-      var d = 'M' + pts[0][0] + ' ' + pts[0][1];
-      for (var i = 1; i < pts.length; i++) {
-        var a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1];
-        d += 'C' + f(a[0] + dx * .2) + ' ' + f(a[1] + dy * .8) + ' ' + f(b[0] - dx * .6) + ' ' + f(b[1] - dy * .3) + ' ' + b[0] + ' ' + b[1];
-      }
-      var pads = pts.map(function (p, n) { return '<g class="pad" transform="translate(' + p[0] + ' ' + p[1] + ')"><circle r="15"/><text y="5" text-anchor="middle">' + (n + 1) + '</text></g>'; }).join('');
-      var home = '<g class="home" transform="translate(' + (pts[7][0] + 40) + ' ' + (pts[7][1] - 46) + ')"><path d="M-30 10l30-24 30 24v26h-60z"/><rect class="win" x="-20" y="16" width="12" height="10"/><rect class="win" x="8" y="16" width="12" height="10"/></g>';
-      svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
-      svg.innerHTML = '<path class="road-case" d="' + d + '"/><path class="road" d="' + d + '"/><path class="road-line" d="' + d + '"/><path class="road-done" d="' + d + '"/>' + pads + home + TRUCK;
-      road = svg.querySelector('.road'); done = svg.querySelector('.road-done'); truck = svg.querySelector('.truck');
-      function set() {
-        gsap.set(done, { drawSVG: '0% ' + (P.p * 100) + '%' });
-        gsap.set(truck, { motionPath: { path: road, align: road, alignOrigin: [.5, .5], autoRotate: true, start: 0, end: Math.max(.0001, P.p) } });
-        svg.classList.toggle('is-home', P.p > .995);
-      }
-      set();
-      k.add(function () { svg.innerHTML = ''; signs.innerHTML = ''; list.innerHTML = ''; if (scrub) scrub.kill(); });
-      if (!k.motion) return;
-      // one focal motion: the truck. Desktop only; a phone shows the plan parked at stop 01 above the list.
-      var mq = matchMedia('(min-width: 768px)');
-      function arm() {
-        if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; P.p = 0; set(); }
-        if (mq.matches) scrub = gsap.to(P, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: plan, start: 'top 70%', end: 'bottom 40%', scrub: .6 } });
-      }
-      arm();
-      k.on(mq, 'change', arm);
-    } },
-
-    /* slot 1 · AUDIT-01 winner (copied from v1; F5 fixes): the plan is a graphic (teal road and truck, scroll-driven on desktop,
-       parked at stop 01 on phones and under reduced motion); every stop's description is always on the page in the numbered list */
-    b2: { init: function (root, k) {
-      var plan = root.querySelector('.pl__plan'), svg = root.querySelector('.pl__svg'), signs = root.querySelector('.pl__signs'), list = root.querySelector('.pl__list');
-      var st = S(), road, done, truck, P = { p: 0 }, VW = 1200, VH = 520, scrub = null;
-      var pts = [[90, 420], [250, 250], [430, 380], [575, 190], [735, 350], [880, 170], [1030, 320], [1125, 120]];
-      EZ.reveal(k, root.querySelectorAll('.process__head .t-head, .pl__headtxt > *'));
-      signs.innerHTML = st.map(function (s, i) {
-        return '<li class="pl__stop' + (i % 2 === 0 ? ' is-below' : '') + '" style="left:' + (pts[i][0] / VW * 100) + '%;top:' + (pts[i][1] / VH * 100) + '%"><span class="pl__sign"><span class="pl__no nums">0' + (i + 1) + '</span><span class="pl__t">' + s.t + '</span></span></li>';
-      }).join('');
-      list.innerHTML = st.map(function (s, i) {
-        return '<li class="pl__item"><span class="pl__ino nums" aria-hidden="true">0' + (i + 1) + '</span><h3 class="pl__ih">' + s.t + '</h3><p class="pl__iw nums">' + s.w + '</p><p class="pl__id">' + s.d + '</p></li>';
-      }).join('');
-      var d = 'M' + pts[0][0] + ' ' + pts[0][1];
-      for (var i = 1; i < pts.length; i++) {
-        var a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1];
-        d += 'C' + f(a[0] + dx * .2) + ' ' + f(a[1] + dy * .8) + ' ' + f(b[0] - dx * .6) + ' ' + f(b[1] - dy * .3) + ' ' + b[0] + ' ' + b[1];
-      }
-      var pads = pts.map(function (p, n) { return '<g class="pad" transform="translate(' + p[0] + ' ' + p[1] + ')"><circle r="15"/><text y="5" text-anchor="middle">' + (n + 1) + '</text></g>'; }).join('');
-      var home = '<g class="home" transform="translate(' + (pts[7][0] + 40) + ' ' + (pts[7][1] - 46) + ')"><path d="M-30 10l30-24 30 24v26h-60z"/><rect class="win" x="-20" y="16" width="12" height="10"/><rect class="win" x="8" y="16" width="12" height="10"/></g>';
-      svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
-      svg.innerHTML = '<path class="road-case" d="' + d + '"/><path class="road" d="' + d + '"/><path class="road-line" d="' + d + '"/><path class="road-done" d="' + d + '"/>' + pads + home + TRUCK;
-      road = svg.querySelector('.road'); done = svg.querySelector('.road-done'); truck = svg.querySelector('.truck');
-      function set() {
-        gsap.set(done, { drawSVG: '0% ' + (P.p * 100) + '%' });
-        gsap.set(truck, { motionPath: { path: road, align: road, alignOrigin: [.5, .5], autoRotate: true, start: 0, end: Math.max(.0001, P.p) } });
-        svg.classList.toggle('is-home', P.p > .995);
-      }
-      set();
-      k.add(function () { svg.innerHTML = ''; signs.innerHTML = ''; list.innerHTML = ''; if (scrub) scrub.kill(); });
-      if (!k.motion) return;
-      // one focal motion: the truck. Desktop only; a phone shows the plan parked at stop 01 above the list.
-      var mq = matchMedia('(min-width: 768px)');
-      function arm() {
-        if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; P.p = 0; set(); }
-        if (mq.matches) scrub = gsap.to(P, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: plan, start: 'top 70%', end: 'bottom 40%', scrub: .6 } });
-      }
-      arm();
-      k.on(mq, 'change', arm);
-    } },
-
-    /* v1 · On the road [Q54]: a site plan; the truck rides a path generated through the eight signposts with scroll */
-    b1: { init: function (root, k) {
-      var plan = root.querySelector('.process1__plan'), svg = root.querySelector('.process1__svg'), list = root.querySelector('.process1__signs');
-      var st = S(), road, done, truck, P = { p: k.motion ? 0 : 1 }, VW, VH, pts;
-      EZ.reveal(k, root.querySelectorAll('.process__head > *'));
-      list.innerHTML = st.map(function (s, i) {
-        return '<li class="process1__stop" data-i="' + i + '"><button type="button" class="process1__sign" aria-expanded="false" aria-controls="p1d' + i + '" data-rx="~' + RXS[i] + '/peek/hop/t">' +
-          '<span class="process1__no nums">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="process1__t">' + s.t + '</span><span class="process1__w nums">' + s.w + '</span></button>' +
-          '<p class="process1__d" id="p1d' + i + '" hidden>' + s.d + '</p></li>';
-      }).join('');
-      var stops = Array.prototype.slice.call(list.children);
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      function layout() {
-        var mob = plan.clientWidth < 700;
-        VW = mob ? 400 : 1200; VH = mob ? 1180 : 640;
-        pts = mob ? [[200, 70], [92, 205], [308, 345], [92, 485], [308, 625], [92, 765], [308, 905], [200, 1090]]
-          : [[90, 540], [250, 330], [430, 480], [575, 250], [735, 430], [880, 210], [1030, 380], [1125, 150]];
-        svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
-        // the road: cubic segments through the anchors, control points from Q54's multipliers (.8 / .3 / .6 / .2)
-        var d = 'M' + pts[0][0] + ' ' + pts[0][1];
-        for (var i = 1; i < pts.length; i++) {
-          var a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1];
-          d += 'C' + f(a[0] + dx * .2) + ' ' + f(a[1] + dy * .8) + ' ' + f(b[0] - dx * .6) + ' ' + f(b[1] - dy * .3) + ' ' + b[0] + ' ' + b[1];
-        }
-        // the neighbourhood: lots, footprints, palms (drawn, not photographs)
-        var lots = '', cols = mob ? 3 : 6, rows = mob ? 8 : 4, lw = VW / cols, lh = VH / rows;
-        for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) {
-          var x = c * lw + 8, y = r * lh + 8;
-          lots += '<rect class="lot" x="' + f(x) + '" y="' + f(y) + '" width="' + f(lw - 16) + '" height="' + f(lh - 16) + '"/>';
-          if ((r * 7 + c * 3) % 4 === 0) lots += '<rect class="fp" x="' + f(x + lw * .22) + '" y="' + f(y + lh * .25) + '" width="' + f(lw * .42) + '" height="' + f(lh * .4) + '"/>';
-        }
-        var palms = '';
-        [[.06, .2], [.32, .12], [.66, .9], [.93, .7], [.5, .6]].forEach(function (q) {
-          var x = q[0] * VW, y = q[1] * VH;
-          palms += '<g class="palm" transform="translate(' + f(x) + ' ' + f(y) + ')"><circle r="16"/><path d="M0 0l-14-6M0 0l14-6M0 0l-10 11M0 0l10 11M0 0v-16"/></g>';
-        });
-        var pads = pts.map(function (p) { return '<circle class="pad" cx="' + p[0] + '" cy="' + p[1] + '" r="13"/>'; }).join('');
-        var home = '<g class="home" transform="translate(' + (pts[7][0] + (mob ? 70 : 40)) + ' ' + (pts[7][1] - (mob ? 10 : 46)) + ')"><path d="M-30 10l30-24 30 24v26h-60z"/><rect class="win" x="-20" y="16" width="12" height="10"/><rect class="win" x="8" y="16" width="12" height="10"/></g>';
-        svg.innerHTML = '<g class="bg">' + lots + palms + '</g><path class="road-case" d="' + d + '"/><path class="road" d="' + d + '"/><path class="road-line" d="' + d + '"/>' +
-          '<path class="road-done" d="' + d + '"/>' + pads + home + TRUCK;
-        road = svg.querySelector('.road'); done = svg.querySelector('.road-done'); truck = svg.querySelector('.truck');
-        stops.forEach(function (li, i) {
-          li.style.left = (pts[i][0] / VW * 100) + '%'; li.style.top = (pts[i][1] / VH * 100) + '%';
-          li.classList.toggle('is-below', !mob && i % 2 === 0);
-          li.classList.toggle('is-left', mob && pts[i][0] > 200);
-        });
-        fit(mob);
-        set();
-      }
-      // keep every sign and its note inside the plan at any width (phones narrow the sign, wider screens slide it in)
-      function fit(mob) {
-        var W = plan.clientWidth, pad = 6;
-        stops.forEach(function (li) {
-          var x = li.offsetLeft, b = li.querySelector('.process1__sign');
-          b.style.width = ''; li.style.removeProperty('--dx');
-          if (mob) {
-            var room = (li.classList.contains('is-left') ? x : W - x) - 20 - pad;
-            if (room < 150) b.style.width = Math.max(110, room) + 'px';
-          } else {
-            var sw = b.offsetWidth, l = x - sw / 2, r = x + sw / 2;
-            li.style.setProperty('--dx', (l < pad ? pad - l : r > W - pad ? W - pad - r : 0) + 'px');
-          }
-          var dw = mob ? Math.min(260, innerWidth * .7) : 250, dl = x - dw / 2, dr = x + dw / 2;
-          li.style.setProperty('--dd', (dl < pad ? pad - dl : dr > W - pad ? W - pad - dr : 0) + 'px');
-        });
-      }
-      function set() {
-        if (!road) return;
-        gsap.set(done, { drawSVG: '0% ' + (P.p * 100) + '%' });
-        gsap.set(truck, { motionPath: { path: road, align: road, alignOrigin: [.5, .5], autoRotate: true, start: 0, end: Math.max(.0001, P.p) } });
-        stops.forEach(function (li, i) { li.classList.toggle('is-on', P.p >= i / 7 - .01); });
-        svg.classList.toggle('is-home', P.p > .995);
-      }
-      k.ro(plan, function () { var w = plan.clientWidth; if (w && w !== plan._w) { plan._w = w; layout(); } });
-      layout();
-      // a sign opens its stop (hover, focus or tap); one open at a time
-      function openStop(i, on) {
-        stops.forEach(function (li, j) {
-          var o = on && j === i, b = li.querySelector('.process1__sign');
-          li.classList.toggle('is-open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false');
-          li.querySelector('.process1__d').hidden = !o;
-        });
-      }
-      stops.forEach(function (li, i) {
-        var b = li.querySelector('.process1__sign');
-        k.on(b, 'click', function () { openStop(i, b.getAttribute('aria-expanded') !== 'true'); });
-        k.on(li, 'pointerenter', function (e) { if (e.pointerType === 'mouse') openStop(i, true); });
-        k.on(li, 'pointerleave', function (e) { if (e.pointerType === 'mouse') openStop(i, false); });
-        k.on(b, 'keydown', function (e) { if (e.key === 'Escape') openStop(i, false); });
-      });
-      k.add(function () { svg.innerHTML = ''; list.innerHTML = ''; });
-      if (!k.motion) return;
-      gsap.from(stops, { y: 10, autoAlpha: 0, duration: .25, ease: 'power2.out', stagger: .04, scrollTrigger: { trigger: plan, start: 'top 80%', once: true } });
-      gsap.to(P, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: plan, start: 'top 70%', end: 'bottom 55%', scrub: .6 } });
-    } },
-
-    /* v2 · It builds itself [S1340]: a rising line; finished work below it, timber shoring waiting above it */
-    b3: { init: function (root, k) {
-      var svg = root.querySelector('.process2__svg'), stage = root.querySelector('.process2__stage');
-      var capNo = root.querySelector('.process2__no'), capT = root.querySelector('.process2__t'), capW = root.querySelector('.process2__w');
-      // [AUDIT-01 F5 loser] the percentage readout is gone: equal bands under unequal durations made it a fabricated number
-      var grip = root.querySelector('.process2__grip'), pipsEl = root.querySelector('.process2__pips');
-      var st = S(), TOP = 150, BOT = 600, ys = st.map(function (s, i) { return BOT - (i + 1) / st.length * (BOT - TOP); });
-      EZ.reveal(k, root.querySelectorAll('.process__head > *'));
-      // the house, in section: footings, slab, walls, partition, door, windows, ceiling, truss roof, covering; site props
-      var built =
-        '<g class="soil"><rect x="0" y="560" width="1000" height="60"/></g>' +
-        '<rect class="footing" x="196" y="560" width="58" height="40"/><rect class="footing" x="746" y="560" width="58" height="40"/>' +
-        '<rect class="slab" x="190" y="538" width="620" height="22"/>' +
-        '<rect class="wall" x="200" y="330" width="22" height="208"/><rect class="wall" x="778" y="330" width="22" height="208"/><rect class="part" x="494" y="330" width="12" height="208"/>' +
-        '<rect class="win" x="270" y="396" width="110" height="72"/><path class="mull" d="M325 396v72M270 432h110"/>' +
-        '<rect class="win" x="610" y="396" width="110" height="72"/><path class="mull" d="M665 396v72M610 432h110"/>' +
-        '<rect class="door" x="532" y="420" width="62" height="118"/><circle class="knob" cx="582" cy="482" r="4"/>' +
-        '<rect class="ceil" x="190" y="322" width="620" height="10"/>' +
-        '<path class="truss" d="M170 330L500 152L830 330Z"/><path class="web" d="M260 330L335 240M335 240L420 330M420 330L500 152M500 152L580 330M580 330L665 240M665 240L740 330"/>' +
-        '<path class="cover" d="M160 334L500 146L840 334"/>' +
-        '<g class="stakes"><path d="M140 560v-34M860 560v-34"/><path class="flag" d="M140 528l16 5-16 5zM860 528l16 5-16 5z"/><path class="string" d="M140 532H860"/></g>' +
-        '<g class="gauge"><rect x="70" y="470" width="10" height="90"/><path d="M80 480h8M80 500h12M80 520h8M80 540h12"/><path class="flood" d="M40 548h80"/></g>' +
-        '<g class="permit"><rect class="post" x="900" y="460" width="8" height="100"/><rect class="card" x="878" y="452" width="52" height="40"/><path d="M886 464h36M886 472h36M886 480h22"/></g>';
-      var shoring = '';
-      [230, 360, 500, 640, 770].forEach(function (x, i) {
-        shoring += '<rect class="prop" x="' + (x - 5) + '" y="140" width="10" height="420"/>';
-        if (i < 4) shoring += '<path class="brace" d="M' + x + ' 520L' + (x + (i % 2 ? 130 : 140)) + ' 220M' + x + ' 220L' + (x + (i % 2 ? 130 : 140)) + ' 520"/>';
-      });
-      shoring += '<rect class="ledger" x="200" y="214" width="600" height="10"/><rect class="ledger" x="200" y="420" width="600" height="10"/>';
-      svg.innerHTML = '<defs><clipPath id="p2-below"><rect class="cb" x="0" y="600" width="1000" height="40"/></clipPath><clipPath id="p2-above"><rect class="ca" x="0" y="0" width="1000" height="600"/></clipPath></defs>' +
-        '<path class="ground" d="M0 560H1000"/>' +
-        '<g class="shore" clip-path="url(#p2-above)">' + shoring + '</g>' +
-        '<g class="built" clip-path="url(#p2-below)">' + built + '</g>' +
-        '<g class="plane"><path class="line" d="M0 600H1000"/><path class="cap" d="M190 600H810"/></g>';
-      var cb = svg.querySelector('.cb'), ca = svg.querySelector('.ca'), planeG = svg.querySelector('.plane');
-      pipsEl.innerHTML = st.map(function (s, i) {
-        return '<button type="button" class="process2__pip" data-i="' + i + '" data-rx="~' + RXS[i] + '/pop/flash/t" aria-label="Stage ' + (i + 1) + ': ' + plain(s.t) + '"><span class="nums">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="process2__pt">' + s.t + '</span></button>';
-      }).join('');
-      var pips = Array.prototype.slice.call(pipsEl.children);
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      var Y = { y: BOT }, cur = -1;
-      function render() {
-        var y = EZ.clamp(Y.y, TOP, BOT);
-        cb.setAttribute('y', y); cb.setAttribute('height', 640 - y);
-        ca.setAttribute('height', y);
-        planeG.setAttribute('transform', 'translate(0 ' + (y - 600) + ')');
-        grip.style.top = (y / 620 * 100) + '%';
-        var n = 0; ys.forEach(function (t) { if (y <= t + .5) n++; });
-        var idx = Math.max(0, n - 1);
-        if (idx !== cur) {
-          cur = idx;
-          capNo.textContent = (idx < 9 ? '0' : '') + (idx + 1); capT.innerHTML = st[idx].t; capW.innerHTML = st[idx].w;
-          pips.forEach(function (p, j) { p.setAttribute('aria-pressed', j === idx ? 'true' : 'false'); p.classList.toggle('is-done', j < n); });
-        }
-        stage.classList.toggle('is-done', y <= TOP + .5);
-      }
-      var auto = null;
-      function go(i, dur) {
-        if (auto) { auto.kill(); auto = null; }
-        if (!k.motion) { Y.y = ys[i]; render(); return; }
-        gsap.to(Y, { y: ys[i], duration: dur == null ? .5 : dur, ease: 'power2.inOut', onUpdate: render, overwrite: true });
-      }
-      pips.forEach(function (p, i) { k.on(p, 'click', function () { go(i); }); });
-      // drag the line (S1340's scrub), or step it with the keys
-      var dragging = false;
-      function yAt(e) { var r = svg.getBoundingClientRect(); return (e.clientY - r.top) / r.height * 620; }
-      k.on(grip, 'pointerdown', function (e) { dragging = true; if (auto) { auto.kill(); auto = null; } gsap.killTweensOf(Y); try { grip.setPointerCapture(e.pointerId); } catch (er) {} e.preventDefault(); });
-      k.on(grip, 'pointermove', function (e) { if (dragging) { Y.y = EZ.clamp(yAt(e), TOP, BOT); render(); } });
-      k.on(grip, 'pointerup', function () { dragging = false; });
-      k.on(grip, 'pointercancel', function () { dragging = false; });
-      k.on(grip, 'keydown', function (e) {
-        var d = e.key === 'ArrowUp' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowDown' || e.key === 'ArrowLeft' ? -1 : 0;
-        if (!d) return; e.preventDefault();
-        go(EZ.clamp(cur + d, 0, st.length - 1), .3);
-      });
-      k.add(function () { svg.innerHTML = ''; pipsEl.innerHTML = ''; grip.style.top = ''; stage.classList.remove('is-done'); });
-      if (!k.motion) { Y.y = TOP; render(); return; }
-      Y.y = BOT; render();
-      // the build runs once when the stage is in view: ~.45s per stage, a short beat on each [S1340 4-5s build]
-      ScrollTrigger.create({ trigger: stage, start: 'top 65%', once: true, onEnter: function () {
-        if (dragging) return;
-        auto = gsap.timeline({ onComplete: function () { auto = null; } });
-        ys.forEach(function (t) { auto.to(Y, { y: t, duration: .45, ease: 'power2.inOut', onUpdate: render }).to({}, { duration: .1 }); });
-      } });
-    } },
-
-    /* v3 · The deck [S1443]: swipe the top card away (12px activation, direction lock, threshold or rubber-band back) */
-    b4: { init: function (root, k) {
-      var deck = root.querySelector('.process3__deck'), nEl = root.querySelector('.process3__n');
-      var st = S(), N = st.length, cur = 0;
-      EZ.reveal(k, root.querySelectorAll('.process3__side > *'));
-      deck.innerHTML = st.map(function (s, i) {
-        return '<article class="process3__card" data-i="' + i + '" aria-hidden="' + (i ? 'true' : 'false') + '">' +
-          '<div class="process3__art"><svg viewBox="0 0 40 40" aria-hidden="true">' + ICONS[i] + '</svg><span class="process3__stamp nums">' + s.w + '</span></div>' +
-          '<p class="process3__cno nums">' + (i < 9 ? '0' : '') + (i + 1) + ' / ' + (N < 10 ? '0' : '') + N + '</p>' +
-          '<h3 class="process3__t">' + s.t + '</h3><p class="process3__d">' + s.d + '</p></article>';
-      }).join('');
-      var cards = Array.prototype.slice.call(deck.children);
-      // the gesture is discoverable: a hint under the deck until the first card is dealt [S1443]
-      var hint = document.createElement('p');
-      hint.className = 'process3__hint'; hint.setAttribute('aria-hidden', 'true');
-      hint.innerHTML = '<svg viewBox="0 0 22 12"><path d="M7 1L2 6l5 5M15 1l5 5-5 5M2 6h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Swipe the card';
-      deck.appendChild(hint);
-      function layout(animate) {
-        cards.forEach(function (c, i) {
-          var n = i - cur, vars;
-          if (n < 0) vars = { x: '-115%', y: 0, scale: .96, autoAlpha: 0, zIndex: 0 };
-          else vars = { x: 0, y: Math.min(n, 3) * 14, scale: 1 - Math.min(n, 3) * .04, autoAlpha: n > 3 ? 0 : 1, zIndex: N - n };
-          c.setAttribute('aria-hidden', n === 0 ? 'false' : 'true');
-          if (animate && k.motion) gsap.to(c, Object.assign({ duration: .3, ease: 'power3.out', overwrite: true }, vars)); else gsap.set(c, vars);
-        });
-        nEl.textContent = (cur < 9 ? '0' : '') + (cur + 1);
-      }
-      function next(dir) {
-        if (cur >= N - 1) { cur = 0; layout(true); return; }      // the last card deals the deck again
-        var c = cards[cur];
-        cur++;
-        deck.classList.add('is-dealt');
-        if (k.motion) gsap.to(c, { x: (dir || -1) * 115 + '%', autoAlpha: 0, duration: .3, ease: 'power2.in', overwrite: true, onComplete: function () { gsap.set(c, { zIndex: 0 }); } });
-        layout(true);
-      }
-      function prev() { if (cur > 0) { cur--; layout(true); } }
-      layout(false);
-      k.on(root.querySelector('.process3__next'), 'click', function () { next(-1); });
-      k.on(root.querySelector('.process3__prev'), 'click', prev);
-      k.on(deck, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); next(-1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); } });
-      // the gesture: activation after 12px, axis locks; past 30% of the card width (or a fast flick) the card goes
-      var g = null;
-      k.on(deck, 'pointerdown', function (e) {
-        var c = cards[cur]; if (!c || !c.contains(e.target)) return;
-        g = { x: e.clientX, y: e.clientY, t: performance.now(), axis: null, c: c, w: c.offsetWidth, id: e.pointerId };
-      });
-      k.on(deck, 'pointermove', function (e) {
-        if (!g || e.pointerId !== g.id) return;
-        var dx = e.clientX - g.x, dy = e.clientY - g.y;
-        if (!g.axis) { if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return; g.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; if (g.axis === 'x') { try { deck.setPointerCapture(e.pointerId); } catch (er) {} } }
-        if (g.axis !== 'x') return;
-        e.preventDefault();
-        var pr = Math.min(1, Math.abs(dx) / (g.w * .3));
-        gsap.set(g.c, { x: dx, scale: 1 - pr * .02 });
-        if (cards[cur + 1]) gsap.set(cards[cur + 1], { y: 14 * (1 - pr), scale: .96 + .04 * pr });   // the threshold cue: the next card rises to meet it
-        g.dx = dx; g.v = dx / Math.max(1, performance.now() - g.t);
-      });
-      function end(e) {
-        if (!g) return;
-        // a tap (no travel, quick) deals the next card too: tap = select [S1443]
-        if (!g.axis && e && e.type === 'pointerup' && performance.now() - g.t < 450) { g = null; next(-1); return; }
-        var go = g.axis === 'x' && (Math.abs(g.dx || 0) > g.w * .3 || Math.abs(g.v || 0) > .55);
-        if (go) next((g.dx || -1) < 0 ? -1 : 1);
-        else if (g.axis === 'x') { gsap.to(g.c, { x: 0, scale: 1, duration: .45, ease: 'elastic.out(1, .55)', overwrite: true }); layout(true); }
-        g = null;
-      }
-      k.on(deck, 'pointerup', end);
-      k.on(deck, 'pointercancel', end);
-      k.add(function () { deck.innerHTML = ''; deck.classList.remove('is-dealt'); });
-      if (k.motion) gsap.from(cards.slice(0, 4), { y: 30, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: deck, start: 'top 80%', once: true }, onComplete: function () { layout(false); } });
-    } }
+  /* ---------- the eight frames ---------- */
+  var FR = [];
+  // 1 · Consultation: two people at a kitchen table over a drawing; a cup steams; the Elbaz hat rests on the table
+  FR.push(function () {
+    var s = '';
+    s += P('M120 ' + G + ' H880', 'd');                                                       // floor line
+    s += R(300, G - 160, 400, 14, 'f-sand d') + P('M330 ' + (G - 146) + ' V' + G + ' M670 ' + (G - 146) + ' V' + G);   // table
+    s += sit(250, 1, G - 160, { hat: false, shirt: 'f-clayl' });                              // the homeowner
+    s += sit(750, -1, G - 160, { shirt: 'f-sand' });                                          // the Elbaz rep
+    s += P('M420 ' + (G - 162) + ' L560 ' + (G - 176) + ' L590 ' + (G - 162) + ' Z', 'f-paper d');   // the drawing on the table
+    s += P('M455 ' + (G - 166) + ' h80 M470 ' + (G - 170) + ' h50', 'dt writes');
+    s += R(608, G - 186, 22, 26, 'f-paper d', 3) + P('M630 ' + (G - 178) + ' q10 4 0 12', 'd') + steam(612, G - 194);   // cup
+    s += P('M652 ' + (G - 160) + ' C652 ' + (G - 186) + ' 700 ' + (G - 186) + ' 700 ' + (G - 160) + ' Z', 'f-clay d') + P('M644 ' + (G - 160) + ' H708', 'd');   // the hat, on the table
+    s += P('M180 300 h90 M180 330 h60', 'dt') + R(150, 240, 150, 120, 'd');                   // a window on the wall
+    return s;
   });
+  // 2 · Site evaluation: the house, a flood line rising, an HVHZ wind arrow, a wall opened to show what is behind it
+  FR.push(function () {
+    var s = house(220, 520, 300, 150, true);
+    s += P('M80 ' + (G - 60) + ' H920', 'dash flood');
+    s += T(84, G - 72, 'Flood zone', 'tx tx-s');
+    s += P('M760 220 c60 -20 120 20 180 0 M780 260 c50 -16 100 16 150 0', 'd wind') + P('M930 210 l12 10 l-14 8', 'd wind');
+    s += T(780, 200, 'HVHZ', 'tx tx-s');
+    s += R(590, G - 230, 110, 100, 'f-clayl d') + P('M612 ' + (G - 230) + ' v100 M645 ' + (G - 230) + ' v100 M678 ' + (G - 230) + ' v100', 'dt') + P('M596 ' + (G - 190) + ' h98', 'd pipe');   // the wall opened: studs and a pipe
+    s += stand(870, { dir: -1, arms: 'point', hat: true, shirt: 'f-sand' });
+    return s;
+  });
+  // 3 · Design and planning: a plan drawing (walls, a door swing, an island), dimensions, a fan of finish swatches
+  FR.push(function () {
+    var s = '';
+    s += R(150, 160, 520, 420, 'f-paper d') + P('M150 160 h520 v420 h-520 z', 'd wall');
+    s += P('M150 360 h160 M400 360 h270', 'd wall') + P('M310 270 a90 90 0 0 1 90 90', 'dt') + P('M310 360 v-90', 'd');   // door swing
+    s += R(330, 450, 180, 64, 'f-sand d') + T(420, 490, 'Island', 'tx tx-s', 'middle');
+    s += P('M150 620 v24 M670 620 v24 M150 632 h520', 'dt dim') + T(410, 660, 'Layout option B', 'tx tx-s', 'middle');
+    s += R(730, 230, 90, 90, 'f-clay d swatch') + R(760, 290, 90, 90, 'f-sand d swatch') + R(790, 350, 90, 90, 'f-paper d swatch');
+    s += T(730, 480, 'Finishes', 'tx tx-s');
+    return s;
+  });
+  // 4 · Proposal and scope: a written scope; lines write themselves; included ticks, one excluded, a contingency note
+  FR.push(function () {
+    var s = R(250, 120, 420, 580, 'f-paper d') + P('M250 180 h420', 'd');
+    s += T(280, 160, 'Scope of work', 'tx');
+    for (var i = 0; i < 5; i++) { s += lines(330, 230 + i * 70, 2, 300, 22); s += tick(286, 222 + i * 70); }
+    s += P('M286 590 l24 24 M310 590 l-24 24', 'd cross') + lines(330, 600, 1, 260, 0) + T(330, 640, 'Not included', 'tx tx-s');
+    s += R(700, 300, 200, 140, 'f-clayl d') + T(716, 340, 'Contingency', 'tx tx-s') + lines(716, 370, 3, 160, 22);
+    s += P('M670 360 L700 360', 'dt');
+    return s;
+  });
+  // 5 · Permitting: a permit file, then (stillness) the approval stamp lands; a product tag with its approval
+  FR.push(function () {
+    var s = R(230, 160, 380, 500, 'f-sand d') + R(250, 140, 380, 500, 'f-paper d');
+    s += T(280, 200, 'Permit file', 'tx') + lines(280, 240, 6, 300, 30);
+    s += '<g class="stamp">' + C(500, 520, 70, 'f-none d stampc') + C(500, 520, 56, 'f-none dt stampc') + T(500, 512, 'NOTICE OF', 'tx tx-stamp', 'middle') + T(500, 540, 'ACCEPTANCE', 'tx tx-stamp', 'middle') + '</g>';
+    s += R(690, 320, 236, 110, 'f-paper d', 8) + C(714, 375, 8, 'd') + T(734, 368, 'Florida Product', 'tx tx-s') + T(734, 396, 'Approval', 'tx tx-s');
+    s += P('M680 375 C656 380 640 420 610 430', 'dt');
+    return s;
+  });
+  // 6 · Construction: studs rise in a wall frame, a ladder, a worker, and the broom at the end of the day
+  FR.push(function () {
+    var s = P('M100 ' + G + ' H900', 'd') + P('M160 260 H700 M160 ' + (G - 12) + ' H700', 'd plate');
+    for (var i = 0; i < 9; i++) s += P('M' + (180 + i * 64) + ' ' + (G - 12) + ' V260', 'd stud');
+    s += P('M760 ' + G + ' L840 300 M820 ' + G + ' L880 300 M772 690 L826 690 M786 610 L838 610 M800 530 L850 530 M812 450 L860 450 M826 370 L870 370', 'd ladder');
+    s += stand(620, { dir: -1, arms: 'raise', hat: true, shirt: 'f-clayl' });
+    s += P('M126 ' + (G - 46) + ' L152 470', 'd broom') + P('M110 ' + (G - 46) + ' h34 l12 46 h-58 z', 'f-sand d broom') + P('M114 ' + (G - 30) + ' l-3 30 M127 ' + (G - 30) + ' v30 M140 ' + (G - 30) + ' l3 30', 'dt broom');
+    return s;
+  });
+  // 7 · Quality review: two people walk the room with the scope; the checklist ticks along
+  FR.push(function () {
+    var s = P('M100 ' + G + ' H900', 'd') + R(560, 220, 300, 330, 'f-paper d') + T(580, 256, 'Walkthrough', 'tx');
+    for (var i = 0; i < 5; i++) { s += lines(620, 300 + i * 50, 1, 200, 0); s += tick(578, 292 + i * 50); }
+    s += stand(240, { dir: 1, arms: 'give', hat: true, shirt: 'f-sand' }) + R(338, G - 200, 46, 60, 'f-paper d', 3) + P('M346 ' + (G - 184) + ' h30 M346 ' + (G - 170) + ' h22', 'dt');   // the scope, on a clipboard
+    s += stand(470, { dir: 1, arms: 'point', shirt: 'f-clayl' });
+    return s;
+  });
+  // 8 · Completion and handover: the finished house, keys passed hand to hand, warranty cards registered
+  FR.push(function () {
+    var s = house(120, 380, 260, 120);
+    s += stand(600, { dir: 1, arms: 'give', hat: true, shirt: 'f-sand' }) + stand(880, { dir: -1, arms: 'give', shirt: 'f-clayl' });
+    s += C(722, G - 172, 9, 'd key') + P('M731 ' + (G - 172) + ' h24 v8 M747 ' + (G - 172) + ' v6', 'd key');
+    s += R(610, 236, 170, 100, 'f-paper d', 6) + T(626, 270, 'Warranty', 'tx tx-s');
+    s += R(660, 290, 170, 100, 'f-paper d', 6) + T(676, 326, 'Registered', 'tx tx-s') + tick(780, 350);
+    return s;
+  });
+
+  function frameSVG(i) { return '<g class="pr__f" data-i="' + i + '" transform="translate(' + (i * FW) + ' 0)">' + FR[i]() + '</g>'; }
+
+  EZ.section('process', { 1: { init: function (root, k) {
+    var world = root.querySelector('.pr__world'), win = root.querySelector('.pr__window'), items = Array.prototype.slice.call(root.querySelectorAll('.pr__item')),
+      rail = root.querySelector('.pr__rail'), fill = root.querySelector('.pr__fill'), pin = root.querySelector('.pr__pin');
+    var big = function () { return k.motion && matchMedia('(min-width: 901px) and (min-height: 640px)').matches; };
+    var cur = -1, groups = null;
+    // rail marks: one per stage, the week label lands as the stage arrives
+    rail.innerHTML += items.map(function (it, i) { return '<span class="pr__mk" style="--x:' + (i / 7) + '"><span class="pr__mkn nums">' + it.querySelector('.pr__n .nums').textContent + '</span></span>'; }).join('');
+    var marks = Array.prototype.slice.call(rail.querySelectorAll('.pr__mk'));
+    function show(i) {
+      if (i === cur) return; cur = i;
+      items.forEach(function (it, j) { it.classList.toggle('is-on', j === i); });
+      marks.forEach(function (m, j) { m.classList.toggle('is-on', j <= i); });
+      if (groups) groups.forEach(function (g, j) { g.classList.toggle('is-off', j !== i); });   // neighbours stay visible, quieter
+    }
+
+    if (!big()) {
+      // the list is the story: each stage gets its own frame, drawn inline (a viewBox onto the same continuous site)
+      root.classList.add('pr--list');
+      items.forEach(function (it, i) {
+        var s = document.createElementNS(NS, 'svg');
+        s.setAttribute('viewBox', (i * FW) + ' 80 ' + FW + ' 760'); s.setAttribute('class', 'pr__mini'); s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+        s.innerHTML = frameSVG(i);
+        it.insertBefore(s, it.firstChild);
+      });
+      k.add(function () { root.classList.remove('pr--list'); root.querySelectorAll('.pr__mini').forEach(function (n) { n.remove(); }); });
+      return;
+    }
+
+    world.innerHTML = FR.map(function (f, i) { return frameSVG(i); }).join('');
+    groups = Array.prototype.slice.call(world.querySelectorAll('.pr__f'));
+    // every frame starts undrawn; strokes draw first, fills follow (no fill ever flashes over its drawing)
+    groups.forEach(function (g) {
+      gsap.set(g.querySelectorAll('.d, .dt'), { drawSVG: '0%' });
+      gsap.set(g.querySelectorAll('[class*="f-"]'), { fillOpacity: 0 });   // the outline draws visibly, the fill follows
+      gsap.set(g.querySelectorAll('.tx, .dash'), { opacity: 0 });
+      gsap.set(g.querySelectorAll('.stamp'), { scale: 1.6, opacity: 0, transformOrigin: '500px 520px' });
+    });
+    // the world is sized explicitly: its height is the window's, each frame is 1000/900 of that, and the frame on show
+    // sits in the middle of the window so its neighbours peek in at both edges (one continuous site)
+    var fw = 0;
+    function size() {
+      var h = win.clientHeight; fw = h * FW / 760;
+      world.style.height = h + 'px'; world.style.width = (fw * 8) + 'px';
+    }
+    size(); k.ro(win, function () { size(); ScrollTrigger.refresh(); });
+    function camX(i) { return -(i * fw) + (win.clientWidth - fw) / 2; }
+    gsap.set(world, { x: camX(0) });
+    var tl = gsap.timeline({ defaults: { ease: 'none' } });
+    groups.forEach(function (g, i) {
+      var t0 = i;                         // frame i owns [i, i+1) of the master timeline
+      if (i > 0) tl.fromTo(world, { x: function () { return camX(i - 1); } }, { x: function () { return camX(i); }, duration: .3, ease: 'power2.inOut', immediateRender: false }, t0 - .3);   // the camera travels
+      if (i === 0) return;                // frame 1 is drawn as the section arrives (below), never an empty window
+      tl.to(g.querySelectorAll('.d, .dt'), { drawSVG: '100%', duration: .26, stagger: { amount: .14 } }, t0 - .12)
+        .to(g.querySelectorAll('[class*="f-"]'), { fillOpacity: 1, duration: .12, stagger: { amount: .06 } }, t0 + .1)
+        .to(g.querySelectorAll('.dash'), { opacity: 1, duration: .12 }, t0 + .1)
+        .to(g.querySelectorAll('.tx'), { opacity: 1, duration: .1 }, t0 + .18);
+      if (i === 4) tl.to(g.querySelectorAll('.stamp'), { scale: 1, opacity: 1, duration: .1, ease: 'power4.in' }, t0 + .4);   // stillness, then the stamp lands
+    });
+    tl.to({}, { duration: .5 });           // the last frame holds before the release
+    // frame 1 (the consultation) draws itself as the section comes into view: strokes, then fills, then words
+    var g0 = groups[0];
+    var intro = gsap.timeline({ paused: true })
+      .to(g0.querySelectorAll('.d, .dt'), { drawSVG: '100%', duration: .9, ease: 'power2.inOut', stagger: { amount: .6 } })
+      .to(g0.querySelectorAll('[class*="f-"]'), { fillOpacity: 1, duration: .4, ease: 'power2.out', stagger: { amount: .3 } }, '-=.5')
+      .to(g0.querySelectorAll('.dash, .tx'), { opacity: 1, duration: .4, ease: 'power2.out' }, '<');
+    var it = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: function () { intro.play(); } });
+    k.add(function () { it.kill(); intro.kill(); });
+    var st = ScrollTrigger.create({
+      trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 7.2); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
+      onUpdate: function (self) {
+        var p = self.progress * tl.duration();
+        show(Math.min(7, Math.max(0, Math.floor(p + .2))));
+        fill.style.transform = 'scaleX(' + Math.min(1, p / 7).toFixed(4) + ')';
+      }
+    });
+    show(0);
+    k.add(function () { st.kill(); tl.kill(); world.innerHTML = ''; world.style.width = world.style.height = ''; gsap.set(world, { clearProps: 'transform' }); });
+  } } });
 })();
 
 /* financing, PLAN-V3 §3. Figures exactly as each partner publishes them (FACTS.md /financing/). */
