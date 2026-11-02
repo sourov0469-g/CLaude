@@ -66,6 +66,18 @@ corrections in this session; before each phase I check for one, then proceed wit
 - **Rule held from here on:** the logo artwork is never redrawn. Lockups, clear space, motion-in-place and every colour
   decision are built around it.
 
+## Phase 1a: brand recovery and audit, DONE (gate report `owl/GATE-PHASE-1a.md`)
+- **Board:** `owl/phase1/brand-recovery.html`: the kept logo plates with clear space and minimum size; Owl's 10 live
+  colours with use counts; the full measured contrast matrix; the type stand-ins with a specimen; Owl's material; the live
+  "before"; the audit (keep / fix / invent).
+- **Decisions:**
+  - Montserrat stands in for Special Gothic Expanded; Lato for Texta (everyday fonts rule).
+  - Amber is the one accent: a fill on light grounds, text only on dark.
+  - Olive is the brand primary; tan is for large text and graphics only.
+  - No icon-only logo (no cropping, no redraw).
+- **Remaining:** the annex captures to finish (Lando, Lusion, Bruno, Longbow); a search for Owl's own before/after
+  photos.
+
 ## Phase 1: material inventory (from the live source, not the text recon)
 - **Hero background video:** `Owl-BG-Condensed.mp4` (9.4 MB, 1280×720, h264, 15.6 s) + `.webm` (4.5 MB), poster
   `happy-homeowners-owl-roofing.jpg`. Saved.

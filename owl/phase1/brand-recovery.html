@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · brand recovery and audit (Phase 1a)</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Owl's own colours, measured from owlroofing.com's live stylesheet (main.min.css): nothing invented */
+:root{
+  --ink:#17121D; --olive:#666B53; --olive-deep:#36402D; --olive-night:#282F21; --bark:#3F3130; --tan:#987861;
+  --amber:#EAA222; --cream:#F1EFE6; --paper:#FCFBF5; --white:#FFFFFF;
+  --f-display:"Montserrat",system-ui,sans-serif; --f-body:"Lato",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font:400 17px/1.55 var(--f-body)}
+h1,h2,h3{font-family:var(--f-display);margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,4vw,3.6rem);font-weight:800;line-height:1.02}
+h2{font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:800;line-height:1.08}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:.4em 0;max-width:68ch}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+section{padding:72px 0;border-top:1px solid #e3dfcf}
+.lede{font-size:1.15rem;color:#3d3a33}
+.note{font-size:.92rem;color:#575b46}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}.wrap{padding:0 18px}}
+/* cover */
+.cover{padding:56px 0 64px;background:var(--cream)}
+.cover .wrap{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+.cover img{height:120px}
+/* logo plates */
+.plate{border-radius:6px;min-height:200px;display:grid;place-items:center;padding:30px;position:relative}
+.plate img{width:min(260px,80%)}
+.plate .cap{position:absolute;left:14px;bottom:10px;font:600 12px var(--f-display);letter-spacing:.02em}
+.on-paper{background:var(--paper);outline:1px solid #e3dfcf}.on-white{background:#fff;outline:1px solid #e3dfcf}
+.on-ink{background:var(--ink);color:var(--cream)}.on-olive{background:var(--olive);color:var(--cream)}.on-deep{background:var(--olive-deep);color:var(--cream)}.on-bark{background:var(--bark);color:var(--cream)}
+.bad{outline:3px solid #b3261e}
+.clear{position:relative;display:inline-block;padding:0}
+.clearbox{display:inline-block;background:repeating-linear-gradient(45deg,#efe8d3 0 6px,#fcfbf5 6px 12px);padding:var(--x)}
+.clearbox img{display:block;height:var(--h)}
+/* swatches */
+.sw{border-radius:6px;overflow:hidden;outline:1px solid #e3dfcf;background:#fff}
+.sw .chip{height:110px;display:flex;align-items:flex-end;padding:10px;font:700 13px var(--f-display)}
+.sw dl{margin:0;padding:12px;font-size:.88rem;display:grid;grid-template-columns:auto 1fr;gap:2px 10px}
+.sw dt{color:#666B53;font-weight:700}.sw dd{margin:0}
+table{border-collapse:collapse;font-size:.85rem;width:100%}
+th,td{padding:6px 7px;text-align:center;border:1px solid #e3dfcf}
+th{font:700 12px var(--f-display);background:var(--cream)}
+td.pass{background:#e6ecd8}td.large{background:#f6ecd0}td.fail{background:#f2dcd8;color:#5b1d16}
+/* materials */
+figure{margin:0}figure img,figure video{width:100%;display:block;border-radius:4px;background:#ddd}figure video{aspect-ratio:16/9;object-fit:cover}
+figcaption{font-size:.82rem;color:#4d5040;margin-top:6px}
+.tag{display:inline-block;font:700 11px var(--f-display);padding:2px 7px;border-radius:3px;margin-right:6px}
+.t-owl{background:var(--olive);color:#fff}.t-stock{background:#d9d4c4;color:var(--ink)}.t-badge{background:var(--amber);color:var(--ink)}.t-yt{background:var(--bark);color:var(--cream)}
+.svgbg{height:220px;border-radius:6px;background-size:cover;background-position:center;outline:1px solid #e3dfcf}
+ol.audit li,ul.audit li{margin:.35em 0;max-width:80ch}
+.callout{background:var(--olive-deep);color:var(--cream);border-radius:6px;padding:26px 30px}
+.callout h3{color:var(--amber)}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <img src="../assets/source/owl-roofing-logo.svg" alt="Owl Roofing logo (kept, unchanged)">
+    <div>
+      <h1>Brand recovery and audit</h1>
+      <p class="lede">A rebuild of owlroofing.com, not a rebrand. Owl's logo, name and live colours stay theirs. Everything on this board was pulled from the live site's own source on 2026-11-03 and measured, not guessed (brand-extract ⟦S0607⟧).</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section><div class="wrap">
+  <h2>1 · The kept logo</h2>
+  <p class="lede">Two files ship on the live site. They are used here byte for byte: never redrawn, recoloured, cropped, outlined or shadowed (logo usage rules ⟦S0011⟧).</p>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="plate on-paper"><img src="../assets/source/owl-roofing-logo.svg" alt=""><span class="cap">Full colour on paper #FCFBF5 · ink 17.8:1</span></div>
+    <div class="plate on-white"><img src="../assets/source/owl-roofing-logo.svg" alt=""><span class="cap">Full colour on white · ink 18.4:1</span></div>
+    <div class="plate on-ink"><img src="../assets/source/owl-logo-white.svg" alt=""><span class="cap">Reversed (cream #F1EFE6) on ink · 16.0:1</span></div>
+    <div class="plate on-deep"><img src="../assets/source/owl-logo-white.svg" alt=""><span class="cap">Reversed on deep olive #36402D · 9.45:1</span></div>
+    <div class="plate on-olive"><img src="../assets/source/owl-logo-white.svg" alt=""><span class="cap">Reversed on olive #666B53 · 4.81:1</span></div>
+    <div class="plate on-ink bad"><img src="../assets/source/owl-roofing-logo.svg" alt=""><span class="cap">WRONG: full colour on ink, only the eyes survive</span></div>
+  </div>
+  <div class="grid g2" style="margin-top:26px;align-items:end">
+    <div>
+      <h3>Clear space = the height of the O (the mark)</h3>
+      <p class="note">Measured with getBBox: the O oval is 57.6 × 50.1 in a 185 × 75 viewBox, so x = 0.668 × lockup height. At a 72px header lockup, x = 48px of clear space on every side.</p>
+      <div class="clearbox" style="--x:32px;--h:48px"><img src="../assets/source/owl-roofing-logo.svg" alt=""></div>
+    </div>
+    <div>
+      <h3>Sizes · minimum 120px wide for the full lockup</h3>
+      <p class="note">"ROOFING" stays legible to 120px wide. Below that, only the reversed or full-colour lockup at 120px is allowed. There is no separate icon file, and cropping the O out of the lockup would break the rule against cropping, so the favicon stays Owl's own <code>owl-roofing-favicon.jpg</code>.</p>
+      <div style="display:flex;gap:26px;align-items:flex-end;flex-wrap:wrap">
+        <img src="../assets/source/owl-roofing-logo.svg" style="width:240px" alt=""><img src="../assets/source/owl-roofing-logo.svg" style="width:160px" alt=""><img src="../assets/source/owl-roofing-logo.svg" style="width:120px" alt=""><span class="note">← 120px floor</span><img src="../assets/source/owl-roofing-favicon.jpg" style="width:32px" alt=""><span class="note">Owl's favicon</span>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:30px">
+    <h3>Micro-animation in place, with no redrawing</h3>
+    <p>The SVG is built from 18 paths. The two amber eyes (paths 9-10, about 6.7px discs) and the two pupils (paths 11-12, 2.6px ink dots) are separate shapes. So the kept artwork can <b>blink</b> (scaleY on the eye discs for about 120ms) and <b>glance</b> (pupils translate up to 1px toward the pointer or the next section) while every pixel of the drawing stays Owl's. This motion language is mine to design; the drawing is not (gliding pupils and blinks: rossark motion ⟦S0489⟧).</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>2 · Owl's colours, as the live site uses them</h2>
+  <p class="lede">Frequency-ranked from <code>main.min.css</code> with the Bootstrap defaults removed. Roles follow the seven-role method of ⟦S0607⟧; all eight are Owl's own values.</p>
+  <div class="grid g4" id="swatches" style="margin-top:20px"></div>
+  <h3 style="margin-top:34px">Every pair, measured (WCAG 2): green = body text ≥ 4.5 · yellow = large text/UI ≥ 3 · red = fails</h3>
+  <div style="overflow-x:auto;margin-top:10px"><table id="matrix"></table></div>
+  <p class="note" style="margin-top:12px">Readings that shape the rebuild: amber can never be text on a light ground (2.09:1 on paper); it is a fill carrying ink (8.49:1), or text on a dark ground (5.03-8.49:1). Tan text fails as body on paper (3.90:1), so it is for large text and graphics only. Olive carries white or cream text (5.54 / 4.81:1).</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>3 · Type: Owl's faces and the everyday stand-ins</h2>
+  <p class="lede">The live site sets Special Gothic Expanded (display, open licence) and Texta (body, commercial). The owner's standing rule is everyday fonts only, so the rebuild uses the closest staples, named as stand-ins (⟦S0607⟧ "stand-in for").</p>
+  <figure style="margin-top:18px"><img src="font-specimen.png" alt="Specimen comparing Owl's own faces with Montserrat, Lato, Inter, Poppins, Open Sans and Roboto"><figcaption>Rendered with Owl's own font files (Texta was loaded from a local scratch copy only and is not stored in the repo).</figcaption></figure>
+  <div class="grid g2" style="margin-top:20px">
+    <div><h3>Display → Montserrat 800 / 700</h3><p>The widest geometric staple. It is closest to Special Gothic Expanded and to the logo's own spaced "ROOFING" caps (see the caps test row).</p></div>
+    <div><h3>Body → Lato 400 / 700</h3><p>Warm and humanist like Texta. Inter reads colder; Poppins' round "a" turns childish beside the owl; Roboto is condensed, the wrong width entirely.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>4 · Owl's own material</h2>
+  <p class="lede">Asset rule: Owl's own material comes first, starting with the hero video. Stock is labelled as stock and never captioned as an Owl job.</p>
+  <div class="grid g2" style="margin-top:20px;align-items:start">
+    <figure><video src="../assets/source/Owl-BG-Condensed.mp4" poster="../assets/source/happy-homeowners-owl-roofing.jpg" autoplay muted loop playsinline></video><figcaption><span class="tag t-owl">OWL</span>Hero background video <code>Owl-BG-Condensed</code>: 15.6 s, 1280×720, h264 + webm. GAF Timberline bundles carried up, the crew in yellow Owl shirts, a finished dark roof by a brick chimney, decking lifted in.</figcaption></figure>
+    <figure><img src="video-frames.jpg" alt="16 frames, one per second, of the hero video"><figcaption>One frame per second. The light is warm and late-afternoon, with greens and yellows: Owl's footage already lives inside the olive and amber palette.</figcaption></figure>
+  </div>
+  <h3 style="margin-top:30px">Photographs</h3>
+  <div class="grid g4" style="margin-top:12px">
+    <figure><img src="../assets/source/about-full.png" alt=""><figcaption><span class="tag t-owl">OWL</span>Both founding families</figcaption></figure>
+    <figure><img src="../assets/source/noah-bergland-owl-roofing-768x596.jpg" alt=""><figcaption><span class="tag t-owl">OWL</span>Noah on the ladder, a snow-edged roof</figcaption></figure>
+    <figure><img src="../assets/source/owl-roofing-catchall.webp" alt=""><figcaption><span class="tag t-owl">OWL</span>Nest-Protection: the catch-all wrap</figcaption></figure>
+    <figure><img src="../assets/source/owl-aftercare-system.webp" alt=""><figcaption><span class="tag t-owl">OWL</span>Aftercare: the "shingle tomb" box</figcaption></figure>
+    <figure><img src="../assets/source/owl-roofing-footer-bg.jpg" alt=""><figcaption><span class="tag t-owl">OWL</span>Crew on a tear-off</figcaption></figure>
+    <figure><img src="../assets/source/happy-homeowners-owl-roofing.jpg" alt=""><figcaption><span class="tag t-owl">OWL</span>Noah and a homeowner at the tablet</figcaption></figure>
+    <figure><img src="../assets/source/meet-the-browns-owl.webp" alt=""><figcaption><span class="tag t-owl">OWL</span>The Browns (cutout)</figcaption></figure>
+    <figure><img src="../assets/source/the-berglands-family-owned-roofing-company-shoreview.png" alt=""><figcaption><span class="tag t-owl">OWL</span>The Berglands</figcaption></figure>
+    <figure><img src="../assets/source/owl-roofing-north-oaks.webp" alt=""><figcaption><span class="tag t-stock">UNPROVEN</span>House exterior; not provable as an Owl job, so used as atmosphere only</figcaption></figure>
+    <figure><img src="../assets/source/perfected-roofing-process.webp" alt=""><figcaption><span class="tag t-stock">UNPROVEN</span>House at dusk; atmosphere only</figcaption></figure>
+    <figure><img src="../assets/source/Snow-guard-for-safety-in-winter-on-house-roof-top-covered-with-steel-shingles-768x512.jpg" alt=""><figcaption><span class="tag t-stock">STOCK</span>By its filename. Never captioned as an Owl job</figcaption></figure>
+    <figure><img src="../assets/source/Drops-of-condensate-and-black-mold-on-a-substandard-metal-plastic-window-768x509.jpg" alt=""><figcaption><span class="tag t-stock">STOCK</span>Window condensation (blog)</figcaption></figure>
+  </div>
+  <h3 style="margin-top:30px">Badges, videos and Owl's own drawn backgrounds</h3>
+  <div class="grid g4" style="margin-top:12px">
+    <figure><img src="../assets/source/Owl-Mom-Approved.png" alt="" style="background:none;max-width:180px"><figcaption><span class="tag t-badge">BADGE</span>"Owl Mom Approved"</figcaption></figure>
+    <figure><img src="../assets/source/get-it-right-guarantee-owl-768x768.png" alt="" style="background:none;max-width:180px"><figcaption><span class="tag t-badge">BADGE</span>Get It Right Guarantee (10-year workmanship)</figcaption></figure>
+    <figure><img src="../assets/source/yt/msQB1mRpbTI.jpg" alt=""><figcaption><span class="tag t-yt">YOUTUBE</span>Why Choose Owl Roofing?</figcaption></figure>
+    <figure><img src="../assets/source/yt/0lUgM6cp8tU.jpg" alt=""><figcaption><span class="tag t-yt">YOUTUBE</span>Real customer experience (video review)</figcaption></figure>
+    <figure><img src="../assets/source/yt/lp8BQIQ0e_Q.jpg" alt=""><figcaption><span class="tag t-yt">YOUTUBE</span>7 questions before replacing a roof</figcaption></figure>
+    <figure><img src="../assets/source/yt/ehKLv5DF2TQ.jpg" alt=""><figcaption><span class="tag t-yt">YOUTUBE</span>Best shingle colours for 2026</figcaption></figure>
+    <figure><div class="svgbg" style="background-image:url(../assets/source/faq-bg.svg)"></div><figcaption><span class="tag t-owl">OWL SVG</span>faq-bg: tree-ring contour lines</figcaption></figure>
+    <figure><div class="svgbg" style="background-image:url(../assets/source/footer-bg.svg);background-color:var(--cream);background-size:contain;background-repeat:no-repeat;background-position:center bottom"></div><figcaption><span class="tag t-owl">OWL SVG</span>footer-bg: the pine treeline, one fill #36402D on transparent</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>5 · The live site, as it stands</h2>
+  <p class="lede">The owlroofing.com homepage, rendered from its own source and assets: 9,001px tall, 1,360 words.</p>
+  <figure style="margin-top:16px"><img src="owl-live-sheet.jpg" alt="Twelve frames down the live owlroofing.com homepage"><figcaption>The live homepage, top to bottom. (owlroofing.com serves headless browsers a "Confirm you are human" wall. It was not bypassed: the page was rendered from source fetched over plain HTTP.)</figcaption></figure>
+</div></section>
+
+<section><div class="wrap">
+  <h2>6 · Audit: what the rebuild keeps, fixes and invents</h2>
+  <div class="grid g3" style="margin-top:18px">
+    <div>
+      <h3>Keep (theirs, and strong)</h3>
+      <ul class="audit">
+        <li>The owl lockup, the amber eyes, the reversed cream form.</li>
+        <li>A warm earth palette: olive moss, deep olive, bark brown, tan, cream and paper, with amber as the one spark. All eight values are coherent (hues 23°-131° plus a violet ink at 305°).</li>
+        <li>Real footage of their own crew, both families, and the Protect Your Nest system actually photographed.</li>
+        <li>Their own drawn language: tree-ring contours and a pine treeline. The forest an owl lives in is already in their files.</li>
+        <li>Named systems with personality: We Give a Hoot, We actually answer the phone, Protect Your Nest, the shingle tomb, Price My Roof, Text Your Roofer, Wise Check.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Fix (measured problems)</h3>
+      <ol class="audit">
+        <li>A document, not an experience: 1,360 words of stacked heading + paragraph blocks.</li>
+        <li>Template chrome: a tracked ALL-CAPS eyebrow over almost every heading, and identical card grids (AI cluster 5, ⟦S0001⟧).</li>
+        <li>The best asset is wasted. The hero video sits behind a dark overlay with text on top, and the two YouTube videos are buried inside paragraphs.</li>
+        <li>Their facts disagree: reviews shown as 80+, 90+ and 100+; Suite 230 vs Ste 135; BBB "A+" in one table vs A− at BBB. The rebuild locks one fact set (the addendum's).</li>
+        <li>The hero video's poster is <code>happy-homeowners-owl-roofing.jpg</code> (Noah at a tablet), not a frame of the crew footage. The first paint never matches the film that follows.</li>
+        <li>Stock photos captioned like Owl work; the house exteriors cannot be proven as Owl jobs.</li>
+        <li>Amber is set as a text colour in 8 rules (for example paragraph-link hover and the current menu item). On light grounds that is 2.09-2.17:1. In the rebuild amber is never text on a light ground.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Invent (my job, on top of their identity)</h3>
+      <ul class="audit">
+        <li>A motion language for the kept logo: blink and glance in place.</li>
+        <li>An SVG system grown from their own files: tree rings, treeline, nest, feathers, shingle courses.</li>
+        <li>The hero built around the real footage, not pasted behind text.</li>
+        <li>Structure: fewer, deeper pages and one flow line (Lusion), pinned proof beats (AirPods Pro), one playful section (Bruno Simon), and Price My Roof as an instrument (Quiet Cubes).</li>
+        <li>A cursor companion drawn from the owl, in 2-3 switchable variants.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<script>
+const P=[['paper','#FCFBF5','background','Page ground (33 uses)'],['cream','#F1EFE6','surface','Bands, cards, reversed logo (34)'],['white','#FFFFFF','surface-2','Cards on paper (76, incl. defaults)'],['ink','#17121D','foreground','Text, logo (35)'],['olive','#666B53','muted / brand primary','Most used: bands, buttons, rules (82)'],['olive-deep','#36402D','dark ground','Guarantee band (21)'],['bark','#3F3130','dark ground 2','Company Promise band (18)'],['tan','#987861','graphic only','Accents and details (13)'],['amber','#EAA222','accent','The one spark: CTA fill, eyes (30 + rgba)'],['olive-night','#282F21','deepest','Footer depth (4)']];
+const lin=c=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4};const L=h=>{const n=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));return .2126*lin(n[0])+.7152*lin(n[1])+.0722*lin(n[2])};
+const cr=(a,b)=>{const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+document.getElementById('swatches').innerHTML=P.map(([n,h,r,u])=>`<div class="sw"><div class="chip" style="background:${h};color:${L(h)>.3?'#17121D':'#F1EFE6'}">${n}</div><dl><dt>hex</dt><dd>${h}</dd><dt>role</dt><dd>${r}</dd><dt>live use</dt><dd>${u}</dd></dl></div>`).join('');
+const fg=P.filter(p=>p[0]!=='olive-night'),bg=P;
+let t='<tr><th>text ↓ / ground →</th>'+bg.map(b=>`<th style="background:${b[1]};color:${L(b[1])>.3?'#17121D':'#F1EFE6'}">${b[0]}</th>`).join('')+'</tr>';
+for(const f of fg){t+=`<tr><th style="text-align:left">${f[0]}</th>`+bg.map(b=>{if(b[0]===f[0])return '<td>·</td>';const r=cr(f[1],b[1]);return `<td class="${r>=4.5?'pass':r>=3?'large':'fail'}">${r.toFixed(2)}</td>`}).join('')+'</tr>'}
+document.getElementById('matrix').innerHTML=t;
+</script>
+</body>
+</html>
