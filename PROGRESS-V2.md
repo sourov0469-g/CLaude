@@ -107,7 +107,26 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
 - **Phase 3b:** gate written (`GATE-PHASE-3b.md`): self-rated 7.40, PASS.
   - Three working proof sections in `siding/brand-v2/phase3b-proof.html`: the MERSI hero split-slider, the before/after seam slider and the scroll-built wall.
   - Each was tested by real scroll and keyboard input.
-- **Build:** next. One single HTML file, 6 pages, 41 sections, two versions per section, built one at a time.
+- **Build:** in progress. Output: `siding/brand-v2/site.html`, from `siding/brand-v2/build/build_site.py`; plan in `build/BUILD-PLAN.md`.
+  - **Shell:** done. Hash router across 6 pages; header with the course-line lockup, phone number and Book action; footer on the B4 field; each image embedded once; one scroll engine; per-section V1/V2 review switch (hidden with `?clean`); `<template class="bk">` backups.
+  - **Homepage:** all 11 sections built, two versions each:
+    - 1 hero
+    - 2 proof band
+    - 3 the record
+    - 4 services
+    - 5 wall assembly
+    - 6 colour
+    - 7 visualiser
+    - 8 map preview
+    - 9 before/after
+    - 10 Since 2009
+    - 11 close
+  - **Homepage checks:** each section was checked at 1440 and 375 (no overflow), with keyboard paths, reduced motion and the barred-term grep (0 hits).
+  - **Fixes made during the homepage audit:**
+    - map copy held to what the facts support;
+    - the film roll no longer uses recent job photos for the 2009 and 2018 frames;
+    - the numeral is never counted up.
+  - **Next:** the Siding & painting page (6 sections × 2), then Windows, Roofing, Our work and About & booking.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
