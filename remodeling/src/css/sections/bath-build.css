@@ -30,6 +30,7 @@
 .bb__world .tmpl, .bb__mini .tmpl { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-dasharray: 8 6; }
 .bb__world .glass, .bb__mini .glass { fill: color-mix(in srgb, var(--sand-200, #EFE4D6) 40%, transparent); stroke: var(--color-text); stroke-width: 2.4; }
 .bb__world .blk, .bb__mini .blk { fill: var(--color-text); }
+.bb__world .lnt, .bb__mini .lnt { fill: none; stroke: var(--color-text); stroke-width: 1.2; }
 .bb__world .lab, .bb__mini .lab { font: 600 22px/1 var(--f-text); fill: var(--color-text); }
 
 /* phones and reduced motion: the list is the story */

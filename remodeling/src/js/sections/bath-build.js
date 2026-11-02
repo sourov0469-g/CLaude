@@ -24,9 +24,16 @@
     if (i === 3) s += P('M' + (L + 300) + ' 112 V280 H' + (L + 470), 'sq') + T(L, 40, 'Set square');
     if (i === 4) s += P('M' + (L + 340) + ' 70 H' + (L + W - 10) + ' V430 H' + (L + 340) + ' Z', 'tmpl') + T(L, 40, 'Templated after tiling');
     if (i >= 4) s += R(L + 352, 82, W - 372, 340, 'glass');                                                   // glass, cut to what was built
-    if (i >= 5) {                                                                                              // fixtures
-      s += P('M' + (L + 150) + ' 60 V120 H' + (L + 120), 'ln') + '<path class="blk" d="M' + (L + 96) + ' 116 h44 l6 10 h-56 z"/>';
-      s += '<circle class="ln" cx="' + (L + 150) + '" cy="250" r="20"/>' + P('M' + (L + 150) + ' 250 l12 -12', 'ln') + R(L + 60, 300, 120, 70, 'tile') + P('M' + (L + 70) + ' 310 H' + (L + 170), 'ln');
+    if (i >= 5) {                                                                                              // fixtures, then closed up once
+      var hx = L + 150;
+      s += P('M' + hx + ' 74 V96 Q' + hx + ' 106 ' + (hx - 10) + ' 106 H' + (hx - 34), 'ln');                    // shower arm off the wall
+      s += '<rect class="blk" x="' + (hx - 70) + '" y="100" width="46" height="12" rx="6"/>';                    // the head
+      s += P('M' + (hx - 62) + ' 118 l-6 22 M' + (hx - 47) + ' 118 v24 M' + (hx - 32) + ' 118 l6 22', 'tmpl');   // spray, faint
+      s += R(hx - 26, 220, 52, 74, 'tile') + '<circle class="ln" cx="' + hx + '" cy="257" r="15"/>' + P('M' + hx + ' 257 l22 -8', 'ln');   // trim plate, valve, lever
+      s += R(L + 40, 300, 150, 76, 'board') + P('M' + (L + 40) + ' 338 H' + (L + 190), 'ln') + R(L + 58, 312, 18, 26, 'tile') + R(L + 84, 318, 14, 20, 'tile');   // niche: shelf and two bottles
+      s += P('M' + (L + 120) + ' 434 H' + (L + 300), 'ln') + P('M' + (L + 120) + ' 430 H' + (L + 300), 'lnt');   // linear drain at the floor
+      s += P('M' + (L + 360) + ' 240 V300', 'ln') + '<circle class="blk" cx="' + (L + 360) + '" cy="236" r="4"/><circle class="blk" cx="' + (L + 360) + '" cy="304" r="4"/>';   // the handle on the glass
+      s += P('M' + (L + W + 12) + ' 200 H' + (L + W + 52), 'ln') + R(L + W + 18, 204, 28, 64, 'board');          // a towel on its bar, outside the glass
       s += T(L, 40, 'Closed up once');
     }
     return '<g class="bb__f" data-i="' + i + '">' + s + '</g>';
@@ -53,7 +60,7 @@
     }
     world.innerHTML = [0, 1, 2, 3, 4, 5].map(bay).join('');
     groups = Array.prototype.slice.call(world.querySelectorAll('.bb__f'));
-    var DRAW = '.ln, .sq, .stud, .board, .tile, .glass', FADE = '.memb, .tape, .tmpl, .blk, .lab';
+    var DRAW = '.ln, .lnt, .sq, .stud, .board, .tile, .glass', FADE = '.memb, .tape, .tmpl, .blk, .lab';
     groups.forEach(function (g) { gsap.set(g.querySelectorAll(DRAW), { drawSVG: '0%' }); gsap.set(g.querySelectorAll(FADE), { opacity: 0 }); });
     var fw = 0;
     function size() { var h = win.clientHeight; fw = h * BW / H; world.style.height = h + 'px'; world.style.width = (fw * 6) + 'px'; }
