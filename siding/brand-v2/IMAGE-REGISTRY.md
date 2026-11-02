@@ -88,3 +88,10 @@ Frames are in `research/p3/`. Each reference is observed live in headless Chromi
 | R13 | Quiet Cubes | https://quietcubes.com/ | 200 | It opens on a "Select Your Pod" gate (four pod types) before any content: configurator-first. No 3D model rendered, which matches the annex note. **Identity not fully confirmed:** the Awwwards page (502) and Codrops (bot check) could not be reached to tie this domain to the Awwwards-listed project. |
 
 **Not used from any of them:** assets, colours, type or copy. Only structure and mechanism notes.
+
+## 7. Cycle 2 re-observations (REFERENCE, never shipped), 2026-11-02
+
+| # | Source | URL | Status | What was observed |
+|---|---|---|---|---|
+| R4b | Graza (scoped: motion quality bar) | https://www.graza.co/ | 200 | Frames are `research/p3/graza2-{0,1,2}.png`. **Code level:** a `js-motion-toggle` skip-link button with `aria-pressed` and the labels "Pause animations" / "Play animations"; 25 running animations and 10 videos on the page. The site's pause control follows this mechanism. Only the mechanism was used, never the look. |
+| R12b | Rimowa UNIQUE | `/us/en/unique` and `/gb/en/unique.html` | **403** (Akamai) | Still not observed. |
