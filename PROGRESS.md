@@ -1230,3 +1230,35 @@ Every text element is paired with the nearest painted background behind it, as r
 | 7b355b3 | Stage 2: challenge fixes (selected tint was grey-equivalent; band read powder-blue); light-step chroma retuned; logo at steel-9 #396791; drift windows and photo masking in the pixel audit |
 | 0244d2f | Stage 3: repacked standalone files, this brand-sheet section, gate evidence |
 
+
+
+# AUSTIN-PROMPT-V2: branding-first restart (2026-11-02)
+**Governing documents:**
+- The brief: `AUSTIN-PROMPT-V2.md`, as uploaded.
+- `REFERENCE-ANNEX-AUSTIN.md`, which overrides the brief's reference library.
+- Muse update: Dropbox Brand cleared (CSSDA Website of the Year 2025 winner).
+- Owner's order: no sub-agents. All work is done in this thread.
+
+## Phase 1, step 1: territories (delivered; STOPPED for the territory pick)
+- **File:** `siding/brand-v2/phase1-territories.html`. It is standalone, with fonts and the firm's own job photos embedded.
+- **Generator:** `siding/brand-v2/build_territories.py`.
+- **Checks:** `siding/brand-v2/check_territories.js`. Screenshots are in `siding/brand-v2/shots/`.
+- **Reference observations:** screenshots taken 2026-11-02 at 1440 px, in `siding/brand-v2/research/`.
+
+**The three territories:**
+- **T1, The Profile Cut.** Lap courses seen end-on, as a corner cut. Montserrat 800 caps. Reference: Scout Motors (MOOD).
+- **T2, Wall Order.** The exploded wall assembly as flat planes on a visible grid. Inter 700. Reference: Dropbox Brand (MECHANISM).
+- **T3, The Record.** A house set in the map's dot unit, over the firm's real field of photographed jobs. Poppins 700. Reference: Cash App brand assets (MECHANISM).
+
+Graza is the shared motion QUALITY BAR, as scoped by the annex.
+
+**Fonts.** Montserrat (700/800) and Inter (400/600/700) are self-hosted from @fontsource 5.0.19 under the OFL. Licences are in `brand-v2/fonts/`.
+
+**Check output (raw):**
+- console errors 0;
+- `document.fonts.check` true for Montserrat 800, Inter 700/400, Poppins 700 and Roboto 400;
+- 26 distinct computed colours, none outside black, white and the steel and neutral ramps;
+- name strings: "Austin Pro Siding" ×16, no other variant;
+- the only locked-fact numbers present are the phone, 2009, and "312 on the map with photos + 574 more counted" (×2, exact wording). The other numbers are design specs, caption dates and reference metadata.
+
+**Next.** Nothing further is built until the territory is picked. Then come three concepts inside the picked territory.
