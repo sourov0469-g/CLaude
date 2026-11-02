@@ -616,6 +616,20 @@ main:focus{outline:none}
 @media (max-width:1023px){.pr2-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.pm-gable,.pm-courses{transition:none}}
 
+/* ===== Service area (B2 Rings: people and place). V1 list + Owl's map; V2 a town finder ===== */
+.area-v1,.area-v2{position:relative;overflow:hidden;background:var(--surface-alt);padding:var(--section-default) 0}
+.area-bg{position:absolute;inset:0}
+.area-v1 > .wrap,.area-v2 > .wrap{position:relative;z-index:1}
+.ar1-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:start}
+.ar1-cta{margin:var(--space-32) 0 0}
+.ar2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-48);align-items:start}
+.ar2-tool{display:grid;gap:var(--space-16);position:sticky;top:calc(var(--header-h,0px) + var(--space-32))}
+.ar2-out{margin:0;min-height:calc(var(--step-1) * 2.6)}
+.ar2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.ar2-list li{transition:opacity var(--dur-fast) linear,color var(--dur-fast) linear}
+.ar2-list li.is-dim{opacity:.32}
+.ar2-list li.is-hit{font-weight:700;color:var(--text-primary)}
+@media (max-width:1023px){.ar1-grid,.ar2-grid{grid-template-columns:1fr}.ar2-tool{position:static}}
 
 
 </style>
@@ -1116,7 +1130,30 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
+</div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><section class="area-v1" aria-labelledby="area1-h">
+  <svg class="area-bg" data-bg="rings"></svg>
+  <div class="wrap ar1-grid">
+    <div>
+      <div class="sec-head"><h2 id="area1-h" class="t-heading">29 towns around the Twin Cities</h2><p class="t-body muted">Based at 1000 County Rd E in Shoreview. We also work in surrounding Minnesota communities, so call and ask.</p></div>
+      <ul class="place-list" aria-label="Towns Owl Roofing serves"><li data-home><svg class="icon" aria-hidden="true"><use href="#icon-navigation-pin"/></svg>Shoreview</li><li>North Oaks</li><li>Arden Hills</li><li>Vadnais Heights</li><li>Roseville</li><li>Blaine</li><li>Mounds View</li><li>Lino Lakes</li><li>Forest Lake</li><li>Fridley</li><li>Maplewood</li><li>New Brighton</li><li>Minneapolis</li><li>Saint Paul</li><li>White Bear Lake</li><li>Stillwater</li><li>Little Canada</li><li>Coon Rapids</li><li>Woodbury</li><li>Oakdale</li><li>Eagan</li><li>Burnsville</li><li>Apple Valley</li><li>Bloomington</li><li>Edina</li><li>Plymouth</li><li>Minnetonka</li><li>Eden Prairie</li><li>Maple Grove</li></ul>
+      <p class="ar1-cta"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a></p>
+    </div>
+    <figure class="frame frame--4x3"><img src="../assets/source/owl-pages/owl-map.webp" alt="Owl Roofing's service-area map around Shoreview: North Oaks, Arden Hills, Roseville, White Bear Lake and neighbouring towns" loading="lazy" width="1290" height="950"><figcaption>Owl's own service-area map.</figcaption></figure>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="area-v2" aria-labelledby="area2-h">
+  <svg class="area-bg" data-bg="rings"></svg>
+  <div class="wrap ar2-grid">
+    <div class="ar2-tool">
+      <h2 id="area2-h" class="t-heading">Is your town on our list?</h2>
+      <div class="field"><label for="ar2-q">Your town</label><input id="ar2-q" autocomplete="address-level2" placeholder="Start typing, like Roseville" aria-describedby="ar2-out"></div>
+      <p id="ar2-out" class="ar2-out t-sub" aria-live="polite">Owl works in 29 towns around Shoreview.</p>
+      <div class="ar2-ctas"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn btn--secondary" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text us</a></div>
+    </div>
+    <ul class="place-list ar2-list" aria-label="Towns Owl Roofing serves"><li data-home><svg class="icon" aria-hidden="true"><use href="#icon-navigation-pin"/></svg>Shoreview</li><li>North Oaks</li><li>Arden Hills</li><li>Vadnais Heights</li><li>Roseville</li><li>Blaine</li><li>Mounds View</li><li>Lino Lakes</li><li>Forest Lake</li><li>Fridley</li><li>Maplewood</li><li>New Brighton</li><li>Minneapolis</li><li>Saint Paul</li><li>White Bear Lake</li><li>Stillwater</li><li>Little Canada</li><li>Coon Rapids</li><li>Woodbury</li><li>Oakdale</li><li>Eagan</li><li>Burnsville</li><li>Apple Valley</li><li>Bloomington</li><li>Edina</li><li>Plymouth</li><li>Minnetonka</li><li>Eden Prairie</li><li>Maple Grove</li></ul>
+  </div>
+</section>
+</div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
 </main>
 <div class="callbar"><a href="tel:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-phone"/></svg>Call</a><a href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text</a></div>
 <div class="vpanel" id="vpanel" hidden role="dialog" aria-label="Section versions"><b>Versions</b><div id="vlist"></div><p class="t-small">Shift+V toggles · URL: ?v=hero:2</p></div>
@@ -1994,6 +2031,20 @@ window.OwlNest = (function () {
   });
 })();
 
+(function () {
+  document.querySelectorAll('.area-bg').forEach(function (s) { Owl.bg.rings(s); });
+  var r = document.querySelector('.area-v2'); if (!r) return;
+  var q = r.querySelector('#ar2-q'), out = r.querySelector('#ar2-out'), lis = [].slice.call(r.querySelectorAll('.ar2-list li'));
+  var norm = function (s) { return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); };
+  q.addEventListener('input', function () {
+    var v = norm(q.value), hits = [];
+    lis.forEach(function (li) { var t = norm(li.textContent), hit = v && t.indexOf(v) === 0 || (v.length > 2 && t.indexOf(v) > -1); li.classList.toggle('is-hit', !!(v && hit)); li.classList.toggle('is-dim', !!(v && !hit)); if (v && hit) hits.push(li.textContent.trim()); });
+    if (!v) out.textContent = 'Owl works in 29 towns around Shoreview.';
+    else if (hits.length === 1 && norm(hits[0]) === v) out.textContent = 'Yes: Owl works in ' + hits[0] + '.';
+    else if (hits.length) out.textContent = hits.length === 1 ? 'Did you mean ' + hits[0] + '? Owl works there.' : hits.length + ' towns match: ' + hits.slice(0, 4).join(', ') + (hits.length > 4 ? '…' : '.');
+    else out.textContent = 'Not on the list, but Owl also works in surrounding Minnesota communities. Call or text and ask.';
+  });
+})();
 
 
 </script>

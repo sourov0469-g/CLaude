@@ -1,0 +1,14 @@
+/* ===== Service area (B2 Rings: people and place). V1 list + Owl's map; V2 a town finder ===== */
+.area-v1,.area-v2{position:relative;overflow:hidden;background:var(--surface-alt);padding:var(--section-default) 0}
+.area-bg{position:absolute;inset:0}
+.area-v1 > .wrap,.area-v2 > .wrap{position:relative;z-index:1}
+.ar1-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:start}
+.ar1-cta{margin:var(--space-32) 0 0}
+.ar2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-48);align-items:start}
+.ar2-tool{display:grid;gap:var(--space-16);position:sticky;top:calc(var(--header-h,0px) + var(--space-32))}
+.ar2-out{margin:0;min-height:calc(var(--step-1) * 2.6)}
+.ar2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.ar2-list li{transition:opacity var(--dur-fast) linear,color var(--dur-fast) linear}
+.ar2-list li.is-dim{opacity:.32}
+.ar2-list li.is-hit{font-weight:700;color:var(--text-primary)}
+@media (max-width:1023px){.ar1-grid,.ar2-grid{grid-template-columns:1fr}.ar2-tool{position:static}}
