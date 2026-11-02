@@ -1,457 +1,56 @@
 <section id="hero" class="sec hero" data-section="hero" aria-label="Opening">
+  <!-- FINALIZE · Home 1 · Hero: the owner's MIX, one deepened version (Muse ruling 1).
+       V1's opening look (copy left, the house right; tree and sun removed) + V3's border (the whole hero framed, corner
+       rivets) + V8's reacting background (the "Built." letters carry the kitchen; the picture answers the pointer) +
+       V4's background scrollbar (a reveal rail: scroll, drag or arrow keys open the house window out to the full room).
+       The roof and the picture share ONE SVG coordinate system, so the roof cut can never be misplaced (owner's bug).
+       Superseded versions are in git history (Muse ruling 5: not shipped). -->
+  <div class="ver hm" data-v="1">
+    <div class="hm__frame">
+      <span class="hm__rv hm__rv--tl" aria-hidden="true"></span><span class="hm__rv hm__rv--tr" aria-hidden="true"></span>
+      <span class="hm__rv hm__rv--bl" aria-hidden="true"></span><span class="hm__rv hm__rv--br" aria-hidden="true"></span>
 
-  <!-- 1 · Poster: the owner's keeper with AUDIT-01 F1 applied (no pin; the brass-to-room move plays once on load, 480ms) -->
-  <!-- slot 1 · Phase 5 improved version of b4 (.hp -> .hpx) -->
-  <div class="ver hpx" data-v="1">
-    <div class="hpx__stage wrap">
-      <div class="hpx__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Design, permits and construction under one contract</p>
-        <h1 class="hh" id="hero-hd1-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-          <a class="btn hero__cta" href="#consult" data-rx="~rivet/zip/burst/r" data-buddy-sig="flinch"><span class="btn__label">Book a consultation</span></a>
-          <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-        </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/drop/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      <div class="hm__bg" aria-hidden="true">
+        <div class="hm__full"></div>
+        <p class="hm__word">Built.</p>
       </div>
-      <div class="hpx__art">
-        <span class="hpx__sun" aria-hidden="true"></span>
-        <svg class="hpx__palm" viewBox="0 0 160 240" aria-hidden="true" focusable="false"><path class="trunk" d="M92 236 C88 190 84 150 74 112 C70 96 68 86 70 76"/><path class="trunk-r" d="M86 214 h10 M84 188 h10 M81 162 h10 M77 136 h9 M73 112 h8"/><g class="fronds"><path d="M70 76 C50 60 26 60 6 74 C26 66 48 70 70 76"/><path d="M70 76 C56 46 34 32 14 30 C34 40 52 56 70 76"/><path d="M70 76 C74 46 92 26 118 20 C98 34 82 52 70 76"/><path d="M70 76 C96 64 126 70 150 92 C124 80 98 76 70 76"/><path d="M70 76 C90 82 110 102 116 128 C102 106 88 90 70 76"/></g></svg>
-        <div class="hpx__band" data-buddy="image">
-          <div class="hpx__win"><img data-img="k-navy-shaker-xl" width="2400" height="1601" fetchpriority="high" decoding="async"
-               alt="Navy blue Shaker kitchen with a quartz waterfall island, brass hardware and a brass-banded range hood, built by Elbaz"></div>
-        </div>
-        <svg class="hpx__roof" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M-5 33 L50 -3.6 L105 33"/></svg>
-        <div class="hpx__dim" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none" focusable="false"><path d="M0.4 0 V12 M99.6 0 V12 M0.4 6 H99.6"/></svg></div>
-        <p class="hpx__name" aria-live="polite">Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood</p>
-        <div class="hpx__pick">
-          <p class="hpx__pick-l" id="hpx-pick-l-i">Pick a finish. Every swatch is a kitchen we built.</p>
-          <div class="hpx__sw" role="radiogroup" aria-labelledby="hpx-pick-l-i"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- slot 2 · Phase 5 improved version of b5 (.hk -> .hkx) -->
-  <div class="ver hkx" data-v="2" hidden>
-    <div class="hkx__grid wrap">
-      <div class="hkx__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Pick a room, we book the visit</p>
-        <h1 class="hh" id="hero-hd2-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <fieldset class="hkx__pick">
-          <legend class="hkx__q">What are you changing?</legend>
-          <div class="hkx__opts" role="radiogroup" aria-label="What are you changing?">
-            <button type="button" role="radio" class="hkx__opt" aria-checked="true" data-room="Kitchen" data-k="k-white-shaker" data-rx="~sink/slide/drip/l">Kitchen</button>
-            <button type="button" role="radio" class="hkx__opt" aria-checked="false" data-room="Bathroom" data-k="b-white-marble" data-rx="~shower/slide/puff/l">Bathroom</button>
-            <button type="button" role="radio" class="hkx__opt" aria-checked="false" data-room="Whole home" data-k="w-farmhouse" data-rx="~house/slide/hop/l">Whole home</button>
-          </div>
-        </fieldset>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~calendar/rail/tick/b" data-buddy-sig="stamp"><span class="btn__label">Book a kitchen consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/tilt/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-        <svg class="hkx__plan" viewBox="0 0 160 110" aria-hidden="true" focusable="false">
-          <path class="hkx__roof" d="M4 40 L80 4 L156 40"/>
-          <rect class="hkx__rm" data-room="Kitchen" x="12" y="40" width="80" height="62"/><rect class="hkx__rm" data-room="Bathroom" x="92" y="40" width="56" height="34"/><rect class="hkx__rm" data-room="Living" x="92" y="74" width="56" height="28"/>
-          <rect class="hkx__whole" x="12" y="40" width="136" height="62"/>
-          <text x="52" y="75">Kitchen</text><text x="120" y="61">Bath</text>
-        </svg>
-      <figure class="hkx__photo" data-buddy="image">
-        <img class="hkx__img is-on" data-img="k-white-shaker" width="1600" height="1067" decoding="async" alt="White Shaker kitchen remodel with a waterfall quartz island, by Elbaz">
-        <img class="hkx__img" data-img="b-white-marble" width="1600" height="1200" decoding="async" alt="White marble guest and primary bathroom remodel by Elbaz">
-        <img class="hkx__img" data-img="w-farmhouse" width="1600" height="1200" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz">
-        <figcaption class="hkx__cap" aria-live="polite">White Shaker kitchen</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <!-- slot 3 · Phase 5 improved version of b6 (.hs -> .hsx) -->
-  <div class="ver hsx" data-v="3" hidden>
-    <div class="hsx__grid wrap">
-      <div class="hsx__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Building across three South Florida counties</p>
-        <h1 class="hh" id="hero-hd3-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~nut/spin/spinout/tr" data-buddy-sig="orbit"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/spin/ring/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <div class="hsx__rig">
-        <svg class="hsx__frame" viewBox="0 0 640 520" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
-        <figure class="hsx__bay" data-buddy="image"><img data-img="o-pergola-hero" width="1600" height="1000" decoding="async" alt="Covered outdoor pergola with dining and lounge seating in South Florida, built by Elbaz"></figure>
-      </div>
-    </div>
-  </div>
-
-  <!-- slot 4 · Phase 5 improved version of b7 (.ha -> .hax) -->
-  <div class="ver hax" data-v="4" hidden>
-    <div class="hax__stage">
-      <div class="hax__plate plate" data-buddy="image">
-        <img data-img="k-fluted-hero" width="1600" height="1000" decoding="async" alt="Open kitchen with black fluted cabinetry, marble island and pendant lighting, built by Elbaz">
-        <div class="hax__draw plate" aria-hidden="true"></div>
-        <span class="hax__rule" aria-hidden="true"><span class="hax__grip"></span></span>
-      </div>
-      <label class="sr-only" for="hax-range-i">Move the line between the drawing and the finished kitchen</label>
-      <input class="hax__range" id="hax-range-i" type="range" min="0" max="100" step="1" value="38" data-rx="native:divider-grip">
-      <div class="hax__panel">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>As drawn, as built</p>
-        <h1 class="hh" id="hero-hd4-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <p class="hax__key">Left of the line: as drawn. Right of it: as built.</p>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~sketch/zip/tick/r" data-buddy-sig="lean"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/hoist/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- slot 5 · Phase 5 improved version of b8 (.ho -> .hox) -->
-  <div class="ver hox" data-v="5" hidden>
-    <div class="hox__grid wrap">
-      <div class="hox__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Open house: three rooms we built</p>
-        <h1 class="hh" id="hero-hd5-i"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~plug/hinge/burst/r" data-buddy-sig="stamp"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/unfold/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <div class="hox__house" data-buddy="image">
-        <figure class="hox__p hox__p--a" data-depth="14"><img data-img="k-white-shaker" width="1600" height="1067" decoding="async" alt="White Shaker kitchen with a waterfall quartz island, remodeled by Elbaz"><figcaption>Kitchen</figcaption></figure>
-        <figure class="hox__p hox__p--b" data-depth="8"><img data-img="b-spa-guest" width="1200" height="1600" decoding="async" alt="Spa-style guest bathroom with backlit mirrors, remodeled by Elbaz"><figcaption>Bathroom</figcaption></figure>
-        <figure class="hox__p hox__p--c" data-depth="4"><img data-img="w-farmhouse" width="1600" height="1200" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz"><figcaption>Whole home</figcaption></figure>
-      </div>
-    </div>
-  </div>
-
-  <!-- slot 6 · NEW · Contractor card: a centred composition; an illustrated fence line with a post, and the card on it carries
-       the locked facts; it flips to show a real finished room (mechanism: 3D card flip). -->
-  <div class="ver hcd" data-v="6" hidden>
-    <div class="hcd__stage wrap">
-      <div class="hcd__copy">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Who is building here</p>
-        <h1 class="hh" id="hero-hd6"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts"><a class="btn hero__cta" href="#consult" data-rx="~clamp/hinge/tick/r"><span class="btn__label">Book a consultation</span></a><a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/lid/flash/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <div class="hcd__scene">
-        <svg class="hcd__art" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-          <circle class="hcd__sun" cx="980" cy="120" r="86"/>
-          <g class="hcd__fence"></g>
-          <path class="hcd__ground" d="M0 404 H1200"/>
-          <g class="hcd__palm" transform="translate(150 140)"><path class="tr" d="M40 264 C36 200 30 140 20 96"/><g class="fr"><path d="M20 96 C-4 76 -40 78 -66 96 C-38 86 -8 88 20 96"/><path d="M20 96 C8 60 -16 40 -44 34 C-18 48 2 68 20 96"/><path d="M20 96 C28 60 50 38 82 30 C56 48 36 70 20 96"/><path d="M20 96 C52 82 88 90 114 116 C84 102 52 98 20 96"/></g></g>
-          <rect class="hcd__post" x="582" y="150" width="36" height="256"/>
-        </svg>
-        <div class="hcd__card" data-buddy="image">
-          <div class="hcd__face hcd__front">
-            <div class="hcd__brand"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="k" d="M38 7.5 H10 V40.5 H38"/><rect class="t" x="18" y="20.5" width="13" height="7"/></svg><b>Elbaz Construction</b></div>
-            <dl class="hcd__dl">
-              <div><dt>Credential</dt><dd>Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></dd></div>
-              <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
-              <div><dt>Call</dt><dd class="nums">(754) 236&#8209;0675</dd></div>
-              <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
-            </dl>
-          </div>
-          <figure class="hcd__face hcd__back"><img data-img="k-gray-shaker" width="1600" height="1067" alt="Gray Shaker kitchen remodel with a Wolf range and farmhouse sink, built by Elbaz"><figcaption>Gray Shaker Kitchen Remodel with Wolf Range &amp; Farmhouse Sink</figcaption></figure>
-        </div>
-        <button type="button" class="btn btn--ghost hcd__flip" aria-pressed="false" data-rx="~card/hinge/spinout/r"><span class="btn__label">Turn the card: see what got built</span></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- slot 7 · NEW · Street of rooftops: a full-width layered illustration of a South Florida street (three depths of
-       roofs, pointer parallax); tapping a house's window opens a real photograph of that kind of room in it. -->
-  <div class="ver hst" data-v="7" hidden>
-    <div class="hst__stage">
-      <div class="hst__copy wrap">
-        <div class="hst__l"><p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Every street has one of ours</p>
-        <h1 class="hh" id="hero-hd7"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1></div>
-        <div class="hst__r"><p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts"><a class="btn hero__cta" href="#consult" data-rx="~ladder/hoist/hop/r"><span class="btn__label">Book a consultation</span></a><a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/peek/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p></div>
-      </div>
-      <div class="hst__street">
-        <svg class="hst__back" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"></svg>
-        <svg class="hst__mid" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"></svg>
-        <div class="hst__front">
-          <button type="button" class="hst__house" data-k="k-navy-white" data-t="Two-Tone Navy &amp; White Kitchen Remodel with Waterfall Quartz Island" aria-pressed="false" aria-label="Look in the kitchen" data-rx="native:street-window"><svg viewBox="0 0 220 200" aria-hidden="true"><path class="rf" d="M6 84 L110 10 L214 84"/><rect class="wl" x="24" y="80" width="172" height="116"/><rect class="dr" x="40" y="128" width="34" height="68"/><circle class="wn" cx="138" cy="132" r="34"/><text x="110" y="62">Kitchen</text></svg></button>
-          <button type="button" class="hst__house hst__house--b" data-k="b-spa-guest" data-t="Spa-Style Guest Bathroom Remodel with Curbless Shower &amp; Backlit Mirrors" aria-pressed="false" aria-label="Look in the bathroom" data-rx="native:street-window"><svg viewBox="0 0 220 200" aria-hidden="true"><path class="rf" d="M6 70 H214"/><rect class="wl" x="24" y="70" width="172" height="126"/><rect class="dr" x="146" y="128" width="34" height="68"/><circle class="wn" cx="82" cy="126" r="34"/><text x="110" y="56">Bathroom</text></svg></button>
-          <button type="button" class="hst__house" data-k="w-farmhouse" data-t="Modern Farmhouse Whole-Home Renovation" aria-pressed="false" aria-label="Look at the whole home" data-rx="native:street-window"><svg viewBox="0 0 220 200" aria-hidden="true"><path class="rf" d="M6 84 L110 10 L214 84"/><rect class="wl" x="24" y="80" width="172" height="116"/><rect class="dr" x="93" y="140" width="34" height="56"/><circle class="wn" cx="110" cy="104" r="24"/><text x="110" y="62">Whole home</text></svg></button>
-        </div>
-        <figure class="hst__lens" hidden><img alt=""><figcaption></figcaption></figure>
-        <p class="hst__hint">Tap a window to look inside a room we built.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- slot 8 · NEW · Built into the letters: a typographic hero. The giant word carries a real photograph inside its
-       letters (background-clip text); the photograph pans with the pointer (mechanism: masked type + pointer pan). -->
-  <div class="ver hlt" data-v="8" hidden>
-    <div class="hlt__stage wrap">
-      <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Kitchens, bathrooms and whole homes</p>
-      <p class="hlt__word" aria-hidden="true">Built.</p>
-      <div class="hlt__row">
-        <div><h1 class="hh" id="hero-hd8"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p></div>
-        <div class="hlt__side"><div class="hero__acts"><a class="btn hero__cta" href="#consult" data-rx="~plumb/drop/wobble/r"><span class="btn__label">Book a consultation</span></a><a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a></div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/swing/tick/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-        <p class="hlt__note">Inside the letters: Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ver hp" data-v="b4" hidden>
-    <div class="hp__stage wrap">
-      <div class="hp__copy">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Design, permits and construction under one contract</p>
-        <h1 class="hh" id="hero-hd1"><span class="ln">Built properly.</span> <span class="ln hh__a">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-          <a class="btn hero__cta" href="#consult" data-rx="~rivet/zip/burst/r" data-buddy-sig="flinch"><span class="btn__label">Book a consultation</span></a>
-          <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-        </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/drop/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <div class="hp__art">
-        <span class="hp__sun" aria-hidden="true"></span>
-        <svg class="hp__palm" viewBox="0 0 160 240" aria-hidden="true" focusable="false"><path class="trunk" d="M92 236 C88 190 84 150 74 112 C70 96 68 86 70 76"/><path class="trunk-r" d="M86 214 h10 M84 188 h10 M81 162 h10 M77 136 h9 M73 112 h8"/><g class="fronds"><path d="M70 76 C50 60 26 60 6 74 C26 66 48 70 70 76"/><path d="M70 76 C56 46 34 32 14 30 C34 40 52 56 70 76"/><path d="M70 76 C74 46 92 26 118 20 C98 34 82 52 70 76"/><path d="M70 76 C96 64 126 70 150 92 C124 80 98 76 70 76"/><path d="M70 76 C90 82 110 102 116 128 C102 106 88 90 70 76"/></g></svg>
-        <div class="hp__band" data-buddy="image">
-          <div class="hp__win"><img data-img="k-navy-shaker-xl" width="2400" height="1601" fetchpriority="high" decoding="async"
-               alt="Navy blue Shaker kitchen with a quartz waterfall island, brass hardware and a brass-banded range hood, built by Elbaz"></div>
-        </div>
-        <svg class="hp__roof" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M-5 33 L50 -3.6 L105 33"/></svg>
-        <div class="hp__dim" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none" focusable="false"><path d="M0.4 0 V12 M99.6 0 V12 M0.4 6 H99.6"/></svg></div>
-        <p class="hp__name" aria-live="polite">Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood</p>
-        <div class="hp__pick">
-          <p class="hp__pick-l" id="hp-pick-l">Pick a finish. Every swatch is a kitchen we built.</p>
-          <div class="hp__sw" role="radiogroup" aria-labelledby="hp-pick-l"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2 · Pick your room [Anatomy §1 F1 + F3: an interactive entry instead of a plain button] -->
-  <div class="ver hk" data-v="b5" hidden>
-    <div class="hk__grid wrap">
-      <div class="hk__copy">
-        <h1 class="hh" id="hero-hd2"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <fieldset class="hk__pick">
-          <legend class="hk__q">What are you changing?</legend>
-          <div class="hk__opts" role="radiogroup" aria-label="What are you changing?">
-            <button type="button" role="radio" class="hk__opt" aria-checked="true" data-room="Kitchen" data-k="k-walnut-marble" data-rx="~sink/slide/drip/l">Kitchen</button>
-            <button type="button" role="radio" class="hk__opt" aria-checked="false" data-room="Bathroom" data-k="b-white-marble" data-rx="~shower/slide/puff/l">Bathroom</button>
-            <button type="button" role="radio" class="hk__opt" aria-checked="false" data-room="Whole home" data-k="w-farmhouse" data-rx="~house/slide/hop/l">Whole home</button>
-          </div>
-        </fieldset>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~calendar/rail/tick/b" data-buddy-sig="stamp"><span class="btn__label">Book a kitchen consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/tilt/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <figure class="hk__photo" data-buddy="image">
-        <img class="hk__img is-on" data-img="k-walnut-marble" width="1600" height="1067" decoding="async" alt="Walnut and marble open-concept kitchen remodel by Elbaz">
-        <img class="hk__img" data-img="b-white-marble" width="1600" height="1200" decoding="async" alt="White marble guest and primary bathroom remodel by Elbaz">
-        <img class="hk__img" data-img="w-farmhouse" width="1600" height="1200" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz">
-        <figcaption class="hk__cap" aria-live="polite">Walnut and marble kitchen</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <!-- 3 · Scaffold, cleaned (V3 rebuilt per AUDIT-01 F1-V3: a thin drawn frame round a large real photograph; no board, no extrusion) -->
-  <div class="ver hs" data-v="b6" hidden>
-    <div class="hs__grid wrap">
-      <div class="hs__copy">
-        <h1 class="hh" id="hero-hd3"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~nut/spin/spinout/tr" data-buddy-sig="orbit"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/spin/ring/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <div class="hs__rig">
-        <svg class="hs__frame" viewBox="0 0 640 520" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
-        <figure class="hs__bay" data-buddy="image"><img data-img="o-pergola-hero" width="1600" height="1000" decoding="async" alt="Covered outdoor pergola with dining and lounge seating in South Florida, built by Elbaz"></figure>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4 · As built (AUDIT-01 Direction A) [S0650 §10 asymmetric split + S0063 clip-path comparison; S1324 aligned pair] -->
-  <div class="ver ha" data-v="b7" hidden>
-    <div class="ha__stage">
-      <div class="ha__plate plate" data-buddy="image">
-        <img data-img="k-fluted-hero" width="1600" height="1000" decoding="async" alt="Open kitchen with black fluted cabinetry, marble island and pendant lighting, built by Elbaz">
-        <div class="ha__draw plate" aria-hidden="true"></div>
-        <span class="ha__rule" aria-hidden="true"><span class="ha__grip"></span></span>
-      </div>
-      <label class="sr-only" for="ha-range">Move the line between the drawing and the finished kitchen</label>
-      <input class="ha__range" id="ha-range" type="range" min="0" max="100" step="1" value="38" data-rx="native:divider-grip">
-      <div class="ha__panel">
-        <h1 class="hh" id="hero-hd4"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <p class="ha__key">Left of the line: as drawn. Right of it: as built.</p>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~sketch/zip/tick/r" data-buddy-sig="lean"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/hoist/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5 · Open house (AUDIT-01 Direction B) [S1502 depth, S1320 §2/§3, S0089 spring] -->
-  <div class="ver ho" data-v="b8" hidden>
-    <div class="ho__grid wrap">
-      <div class="ho__copy">
-        <h1 class="hh" id="hero-hd5"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
-        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~plug/hinge/burst/r" data-buddy-sig="stamp"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-          </div>
-        <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/unfold/sparkle/r"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
-      </div>
-      <div class="ho__house" data-buddy="image">
-        <figure class="ho__p ho__p--a" data-depth="14"><img data-img="k-white-shaker" width="1600" height="1067" decoding="async" alt="White Shaker kitchen with a waterfall quartz island, remodeled by Elbaz"><figcaption>Kitchen</figcaption></figure>
-        <figure class="ho__p ho__p--b" data-depth="8"><img data-img="b-spa-guest" width="1200" height="1600" decoding="async" alt="Spa-style guest bathroom with backlit mirrors, remodeled by Elbaz"><figcaption>Bathroom</figcaption></figure>
-        <figure class="ho__p ho__p--c" data-depth="4"><img data-img="w-farmhouse" width="1600" height="1200" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz"><figcaption>Whole home</figcaption></figure>
-      </div>
-    </div>
-  </div>
-
-  <!-- v1 · As built, as drawn: an X-ray slit shows the room as its own blueprint
-       [BANK Specia1ne reveal slit + BANK Smeulders entrance ladder + BANK 167 Stroke Text, PLAN-V3 §3] -->
-  <div class="ver hero1" data-v="b1" hidden>
-    <svg class="hero1__defs" width="0" height="0" aria-hidden="true" focusable="false">
-      <filter id="hero1-cyan" color-interpolation-filters="sRGB">
-        <feColorMatrix type="matrix" values=".174 .586 .059 0 .055  .159 .536 .054 0 .165  .140 .472 .048 0 .29  0 0 0 1 0"/>
-        <feComponentTransfer><feFuncR type="discrete" tableValues=".055 .2 .36 .52 .7 .875"/><feFuncG type="discrete" tableValues=".165 .3 .45 .6 .76 .915"/><feFuncB type="discrete" tableValues=".29 .42 .55 .68 .82 .95"/></feComponentTransfer>
-      </filter>
-    </svg>
-    <div class="hero1__frame">
-      <div class="hero1__plate plate">
-        <img data-img="k-fluted-hero" width="1600" height="1000" fetchpriority="high" decoding="async"
-             alt="Open kitchen with black fluted cabinetry, marble island and pendant lighting, built by Elbaz">
-      </div>
-      <div class="hero1__xray" aria-hidden="true">
-        <div class="hero1__bp plate"><img data-img="k-fluted-hero" width="1600" height="1000" alt=""></div>
-        <div class="hero1__grid"></div>
-        <div class="hero1__lines plate"></div>
-        <!-- [S1362] technical wireframe info layout: annotation pills on connector lines, appearing in stages as the slit reaches them.
-             Labels are only words FACTS.md uses for this photograph: "black fluted cabinetry, marble island and pendant lighting" -->
-        <div class="hero1__notes plate"><svg viewBox="0 0 1600 1000" preserveAspectRatio="none">
-          <g class="hero1__note" data-ax="232" data-ay="404"><circle class="dot" cx="232" cy="404" r="7"/><path class="con" d="M232 404V294"/><g class="pill"><rect x="120" y="254" width="223" height="40" rx="20"/><text x="232" y="281" text-anchor="middle">Fluted cabinetry</text></g></g>
-          <g class="hero1__note" data-ax="458" data-ay="470"><circle class="dot" cx="458" cy="470" r="7"/><path class="con" d="M458 470V320"/><g class="pill"><rect x="346" y="280" width="223" height="40" rx="20"/><text x="458" y="307" text-anchor="middle">Pendant lighting</text></g></g>
-          <g class="hero1__note" data-ax="560" data-ay="790"><circle class="dot" cx="560" cy="790" r="7"/><path class="con" d="M560 790V470"/><g class="pill"><rect x="465" y="430" width="190" height="40" rx="20"/><text x="560" y="457" text-anchor="middle">Marble island</text></g></g>
-        </svg></div>
-      </div>
-      <div class="hero1__slit" aria-hidden="true">
-        <span class="hero1__edge hero1__edge--l"></span><span class="hero1__edge hero1__edge--r"></span>
-        <span class="hero1__tag hero1__tag--in">As drawn</span>
-        <span class="hero1__tag hero1__tag--out">As built</span>
-        <svg class="hero1__arrows" viewBox="0 0 40 12" width="40" height="12"><path d="M2 6h36M2 6l5-4M2 6l5 4M38 6l-5-4M38 6l-5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="hero1__scrim" aria-hidden="true"></div>
-    </div>
-    <div class="hero1__copy wrap">
-      <h1 class="hero1__h" id="hero-h1">
-        <span class="sr-only">Built properly. Permitted correctly.</span>
-        <svg class="hero1__stroke" aria-hidden="true" focusable="false"></svg>
-        <span class="hero1__plain" aria-hidden="true"><span>Built properly.</span> <span>Permitted correctly.</span></span>
-      </h1>
-      <div class="hero1__side">
-        <p class="t-lead hero1__lead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-          <a class="btn hero__cta" href="#consult" data-rx="pencil"><span class="btn__label">Book a consultation</span></a>
-          <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-        </div>
-      </div>
-      <!-- the proof strip, drawn as the sheet's title block [Anatomy F1] -->
-      <dl class="hero1__block">
-        <div class="hero1__cell hero1__cell--firm"><dt>Contractor</dt><dd>Elbaz Construction</dd></div>
-        <div class="hero1__cell hero1__cell--rate"><dt>Google</dt><dd><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/drop/sparkle/r"><span class="hero1__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</a></dd></div>
-        <div class="hero1__cell"><dt>Licence</dt><dd><a href="https://www.myfloridalicense.com/" rel="noopener" data-rx="~shield/drop/tick/r">Licensed, bonded &amp; insured · CBC1265280</a></dd></div>
-        <div class="hero1__cell"><dt>Sheet</dt><dd>Kitchen, as built</dd></div>
-      </dl>
-    </div>
-  </div>
-
-  <!-- v2 · From the brass to the room [BANK S54 / Q154 scale container, kept: owner verdict] + proof line, crop marks, outline-to-fill -->
-  <div class="ver hero2" data-v="b2" hidden>
-    <div class="hero2__stage">
-      <div class="hero2__band">
-        <div class="hero2__window">
-          <div class="hero2__plate">
-            <img data-img="k-navy-shaker-xl" width="2400" height="1601" decoding="async"
-                 alt="Navy blue Shaker kitchen with a quartz waterfall island, brass hardware and a brass-banded range hood, built by Elbaz">
-          </div>
-        </div>
-      </div>
-      <div class="hero2__copy wrap">
-        <h1 class="hero2__h t-display" id="hero-h2"><span class="ln">Built properly.</span> <span class="ln">Permitted correctly.</span></h1>
-        <p class="hero2__proof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/hoist/sparkle/r"><span class="hero2__star" aria-hidden="true">&#9733;</span> <span class="nums hero2__num">4.8</span> <span class="hero2__sub">&middot; <span class="nums">343</span> Google reviews</span></a></p>
-        <div class="hero2__row">
-          <p class="t-lead hero2__lead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-          <p class="hero2__lic">Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></p>
+      <div class="hm__grid wrap">
+        <div class="hm__copy">
+          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Design, permits and construction under one contract</p>
+          <h1 class="hh" id="hero-h"><span class="ln"><span class="rise">Built properly.</span></span> <span class="ln hh__a"><span class="rise">Permitted correctly.</span></span></h1>
+          <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
           <div class="hero__acts">
-            <a class="btn hero__cta" href="#consult" data-rx="~rivet/zip/burst/r"><span class="btn__label">Book a consultation</span></a>
-            <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
+            <a class="btn hero__cta" href="#consult"><span class="btn__label">Book a consultation</span></a>
+            <a class="link hero__tel nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
+          </div>
+          <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+          <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+        </div>
+
+        <div class="hm__art">
+          <svg class="hm__house" viewBox="0 0 600 470" role="img" aria-labelledby="hm-name">
+            <defs><clipPath id="hm-clip"><path d="M0 156 L300 6 L600 156 V470 H0 Z"/></clipPath></defs>
+            <g class="hm__win" clip-path="url(#hm-clip)">
+              <rect width="600" height="470" class="hm__ph"/>
+              <image class="hm__img" width="600" height="470" preserveAspectRatio="xMidYMid slice" href=""/>
+            </g>
+            <path class="hm__roof" d="M-26 169 L300 6 L626 169"/>
+            <path class="hm__eave" d="M0 156 V470 M600 156 V470"/>
+          </svg>
+          <div class="hm__dim" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none" focusable="false"><path d="M0.4 0 V12 M99.6 0 V12 M0.4 6 H99.6"/></svg></div>
+          <p class="hm__name" id="hm-name" aria-live="polite">Navy Blue Shaker Kitchen with Brass Hardware and a Custom Range Hood</p>
+          <div class="hm__pick">
+            <p class="hm__pick-l" id="hm-pick-l">Pick a finish. Every swatch is a kitchen we built.</p>
+            <div class="hm__sw" role="radiogroup" aria-labelledby="hm-pick-l"></div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- v3 · Steel letters on the scaffold [BANK SENVA wordmark-as-hero + BANK 165 Depth Text, PLAN-V3 §3] -->
-  <div class="ver hero3" data-v="b3" hidden>
-    <div class="hero3__in wrap">
-      <div class="hero3__type">
-        <h1 class="hero3__h" id="hero-h3">
-          <span class="hero3__line"><span class="hero3__depth" aria-hidden="true">Built properly.</span><span class="hero3__face">Built properly.</span></span>
-          <span class="hero3__line"><span class="hero3__depth" aria-hidden="true">Permitted correctly.</span><span class="hero3__face">Permitted correctly.</span></span>
-        </h1>
-        <p class="t-lead hero3__lead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="hero__acts">
-          <a class="btn hero__cta" href="#consult" data-rx="bolt"><span class="btn__label">Book a consultation</span></a>
-          <a class="link hero__tel nums" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>
-        </div>
-      </div>
-      <div class="hero3__rig">
-        <svg class="hero3__scaffold" viewBox="0 0 600 640" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false"></svg>
-        <figure class="hero3__bay">
-          <img data-img="w-farmhouse" width="1600" height="1200" loading="lazy" decoding="async" alt="Modern farmhouse whole-home renovation by Elbaz">
-        </figure>
-        <div class="hero3__board">
-          <svg class="hero3__bolts" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><circle cx="4" cy="6" r="1.6"/><circle cx="96" cy="6" r="1.6"/><circle cx="4" cy="94" r="1.6"/><circle cx="96" cy="94" r="1.6"/></svg>
-          <p class="hero3__board-h">On this site</p>
-          <p class="hero3__board-r"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener" data-rx="~star/spin/ring/r"><span aria-hidden="true">&#9733;</span> <span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</a></p>
-          <p class="hero3__board-l">Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></p>
-        </div>
+      <div class="hm__rail" role="slider" tabindex="0" aria-label="Open the room" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Closed: the house" data-buddy="drag">
+        <span class="hm__rail-l" aria-hidden="true">The house</span>
+        <span class="hm__track" aria-hidden="true"><span class="hm__fill"></span><span class="hm__knob"></span></span>
+        <span class="hm__rail-r" aria-hidden="true">The room</span>
       </div>
     </div>
   </div>

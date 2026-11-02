@@ -150,6 +150,10 @@
   --ease-expo: cubic-bezier(.16, 1, .3, 1);
   --ease-drawer: cubic-bezier(.32, .72, 0, 1);
   --ease-move: cubic-bezier(.25, 1, .5, 1);
+  
+  --ez-out: cubic-bezier(.22, 1, .36, 1);      
+  --ez-move: cubic-bezier(.38, .005, .215, 1); 
+  --ez-in: cubic-bezier(.55, 0, .75, .2);      
   --t-press: 160ms;
   --t-hover: 180ms;
   --t-ui: 240ms;
@@ -677,6 +681,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 .nav__links a[aria-current="page"] { color: var(--color-accent-text); box-shadow: inset 0 -3px 0 var(--color-accent-border); }
 .sheet__pages a[aria-current="page"], .foot__col a[aria-current="page"] { color: var(--color-accent-text); }
 .sheet__h { margin: 18px 0 6px; font: 600 .75rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
+
+
+.vswitch[data-count="1"] { display: none !important; }
 
 
 
@@ -2736,6 +2743,7 @@ html.has-buddy select { cursor: default !important; }
     var wrap = doc.createElement('div');
     wrap.className = 'vswitch';
     wrap.dataset.for = s.id;
+    wrap.dataset.count = String(s.vis.length);   // FINALIZE: a one-version section shows no switcher
     var inner = doc.createElement('div');
     inner.className = 'vswitch__in';
     inner.setAttribute('role', 'radiogroup');

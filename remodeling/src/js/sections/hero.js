@@ -1,704 +1,157 @@
-/* hero. v1 rebuilt (Specia1ne slit + Smeulders ladder + Stroke Text; line layer = S1362 annotated wireframe), v2 owner keeper + proof line,
-   v3 rebuilt (SENVA wordmark-as-hero + Depth Text on a drawn scaffold). */
+/* FINALIZE · Home 1 · Hero: the owner's mix (V1 look + V3 border + V8 reacting background + V4 reveal rail).
+   One reveal value p (0..1) drives everything; scroll (short pin), drag and keys all write it, latest input wins, and it
+   is reversible [S1326]. Pointer: the room, the letters and the picture in the window move at three depths [S1321 mouse
+   layers, depth <= .04]. Load: strokes before fills, masked headline lines [S0362, S0451]. Reduced motion: no pin, no
+   pointer motion, no load tween; the rail still works, instantly [S0400]. */
 (function () {
   var html = document.documentElement;
-  var NS = 'http://www.w3.org/2000/svg';
-  function navOn(k, where) {
-    html.dataset.navOn = where;
+  var FIN = [
+    { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
+    { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
+    { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
+    { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
+    { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
+    { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
+  ];
+  var EZO = 'expo.out', MOVE = 'power3.inOut';
+
+  EZ.section('hero', { 1: { init: function (root, k) {
+    html.dataset.navOn = 'ground';
     k.add(function () { delete html.dataset.navOn; });
-  }
-  function wrapRise(lines) {
-    return Array.prototype.map.call(lines, function (ln) {
-      var r = ln.querySelector('.rise');
-      if (!r) { ln.innerHTML = '<span class="rise">' + ln.innerHTML + '</span>'; r = ln.querySelector('.rise'); }
-      return r;
+    var sec = root.closest('section'), frame = root.querySelector('.hm__frame'), full = root.querySelector('.hm__full'),
+      word = root.querySelector('.hm__word'), house = root.querySelector('.hm__house'), img = root.querySelector('.hm__img'),
+      name = root.querySelector('.hm__name'), rail = root.querySelector('.hm__rail'), track = root.querySelector('.hm__track'),
+      box = root.querySelector('.hm__sw');
+    house.dataset.buddy = 'image';
+    var P = (window.__DATA || {}).projects || [];
+    function title(key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; }
+
+    /* ---------- the kitchen: one photo in three places (the window, the room, the letters) ---------- */
+    function setPhoto(f) {
+      var u = EZ.img(f.k);
+      img.setAttribute('href', u);
+      img.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+      full.style.backgroundImage = word.style.backgroundImage = 'url(' + u + ')';
+      full.style.backgroundPosition = f.pos;
+      name.textContent = title(f.d || f.k);
+      house.setAttribute('aria-label', title(f.d || f.k) + ', built by Elbaz');
+    }
+    setPhoto(FIN[0]);
+
+    /* ---------- V1's finish picker (radiogroup, roving tabindex, 44px targets) ---------- */
+    var cur = 0;
+    box.innerHTML = FIN.map(function (f, i) {
+      return '<button type="button" role="radio" class="hm__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" style="--sw:url(' + EZ.img(f.d || f.k) + ');--at:' + f.at + '"></button>';
+    }).join('');
+    var sws = Array.prototype.slice.call(box.children);
+    k.add(function () { box.innerHTML = ''; });
+    function pick(i, focus) {
+      if (i === cur) return;
+      cur = i;
+      sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
+      if (focus) sws[i].focus();
+      EZ.pickedRoom = 'Kitchen';
+      if (!k.motion) { setPhoto(FIN[i]); return; }
+      // a crossfade masked by a 2px blur [S0063], all three places together so they never disagree
+      var tgt = [img, full, word];
+      gsap.to(tgt, { opacity: 0, filter: 'blur(2px)', duration: .14, ease: 'power2.in', overwrite: true, onComplete: function () {
+        setPhoto(FIN[i]);
+        gsap.to(tgt, { opacity: function (n, t) { return t === word ? '' : 1; }, filter: 'blur(0px)', duration: .26, ease: EZO, clearProps: 'opacity,filter' });
+      } });
+    }
+    sws.forEach(function (s, i) {
+      k.on(s, 'click', function () { pick(i); });
+      k.on(s, 'keydown', function (e) {
+        var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
+      });
     });
-  }
-  function fontsReady() {
-    return document.fonts && document.fonts.load ? document.fonts.load('600 100px "Elbaz Display"').catch(function () {}) : Promise.resolve();
-  }
 
-  /* Stroke Text [BANK 167]: per-letter outlines (dash = fontSize x 7) draw, then each line wipes to solid */
-  function buildStroke(svg, lines) {
-    svg.innerHTML = '';
-    var FS = 100, LH = 92, widths = [], out = [];
-    lines.forEach(function (txt, li) {
-      var t = document.createElementNS(NS, 'text');
-      t.setAttribute('x', 0); t.setAttribute('y', FS * .82 + li * LH);
-      t.textContent = txt;
-      svg.appendChild(t);
-      var n = txt.length, chars = [];
-      try {
-        for (var i = 0; i < n; i++) { if (txt[i] !== ' ') chars.push([txt[i], t.getStartPositionOfChar(i).x]); }
-        widths.push(t.getComputedTextLength());
-      } catch (e) { widths.push(0); }
-      out.push({ y: FS * .82 + li * LH, chars: chars, whole: txt });
-      svg.removeChild(t);
+    /* ---------- the reveal: the house window opens out to the full room ---------- */
+    var st = { p: 0 }, geo = { t: 0, r: 0, b: 0, l: 0, mob: false };
+    function measure() {
+      var fr = frame.getBoundingClientRect(), hr = house.getBoundingClientRect();
+      // the window's own rectangle below the roof line (the roof path starts at 156/470 of the house height)
+      var top = hr.top + hr.height * (6 / 470);
+      geo.t = top - fr.top; geo.l = hr.left - fr.left; geo.r = fr.right - hr.right; geo.b = fr.bottom - hr.bottom;
+      geo.mob = matchMedia('(max-width: 900px)').matches;
+      frame.style.setProperty('--tw', track.getBoundingClientRect().width + 'px');
+      apply();
+    }
+    function apply() {
+      var q = st.p, e = 1 - q, o = 12;   // .hm__full is inset -12px (parallax room)
+      frame.style.setProperty('--p', q.toFixed(4));
+      frame.style.setProperty('--ct', (o + (geo.mob ? geo.t : geo.t * e)).toFixed(1) + 'px');
+      frame.style.setProperty('--cr', (o + geo.r * e).toFixed(1) + 'px');
+      frame.style.setProperty('--cb', (o + geo.b * e).toFixed(1) + 'px');
+      frame.style.setProperty('--cl', (o + geo.l * e).toFixed(1) + 'px');
+      var v = Math.round(q * 100);
+      rail.setAttribute('aria-valuenow', v);
+      rail.setAttribute('aria-valuetext', v === 0 ? 'Closed: the house' : v === 100 ? 'Open: the whole room' : 'Opening, ' + v + ' percent');
+    }
+    k.ro(frame, measure);
+    measure();
+    function setP(v, animate) {
+      v = Math.max(0, Math.min(1, v));
+      if (animate && k.motion) gsap.to(st, { p: v, duration: .4, ease: MOVE, overwrite: true, onUpdate: apply });
+      else { gsap.killTweensOf(st); st.p = v; apply(); }
+    }
+
+    // drag on the rail (pointer capture, the track maps 1:1) [S1018]
+    var dragging = false;
+    function fromX(x) { var r = track.getBoundingClientRect(); return (x - r.left) / r.width; }
+    k.on(rail, 'pointerdown', function (e) { dragging = true; rail.setPointerCapture(e.pointerId); setP(fromX(e.clientX)); });
+    k.on(rail, 'pointermove', function (e) { if (dragging) setP(fromX(e.clientX)); });
+    k.on(rail, 'pointerup', function () { dragging = false; });
+    k.on(rail, 'pointercancel', function () { dragging = false; });
+    // keys: arrows step 10%, Page keys 25%, Home / End [S1018 keyboard parity]
+    k.on(rail, 'keydown', function (e) {
+      var s = { ArrowRight: .1, ArrowUp: .1, ArrowLeft: -.1, ArrowDown: -.1, PageUp: .25, PageDown: -.25 }[e.key];
+      if (e.key === 'Home') { e.preventDefault(); setP(0, true); return; }
+      if (e.key === 'End') { e.preventDefault(); setP(1, true); return; }
+      if (s) { e.preventDefault(); setP(st.p + s, true); }
     });
-    var W = Math.max.apply(null, widths) + 4, H = LH * (lines.length - 1) + FS * 1.02;
-    if (!(W > 10)) return null;
-    svg.setAttribute('viewBox', '-2 0 ' + W + ' ' + H);
-    var defs = '<defs>', body = '';
-    out.forEach(function (L, li) {
-      defs += '<clipPath id="h1wipe' + li + '"><rect class="wipe" x="-4" y="' + (L.y - FS) + '" width="' + (W + 8) + '" height="' + (FS * 1.3) + '"/></clipPath>';
-      L.chars.forEach(function (c) { body += '<text class="o" x="' + c[1].toFixed(1) + '" y="' + L.y + '">' + (c[0] === '&' ? '&amp;' : c[0]) + '</text>'; });
-      body += '<text class="f" clip-path="url(#h1wipe' + li + ')" x="0" y="' + L.y + '">' + L.whole + '</text>';
-    });
-    svg.innerHTML = defs + '</defs>' + body;
-    return { outlines: svg.querySelectorAll('.o'), wipes: svg.querySelectorAll('.wipe'), fills: svg.querySelectorAll('.f'), W: W };
-  }
 
-  var HOUSE = EZ.bezier(.23, 1, .32, 1);
-  // one entrance per page view, on whichever version shows first; a switcher re-entry never replays it [AUDIT-01 F1.8; S0063 Std 4]
-  function entrance(k, root, extra) {
-    if (!k.motion || EZ._heroIn) return null;
-    EZ._heroIn = true;
-    var lines = root.querySelectorAll('.hh .ln');
-    var rest = root.querySelectorAll('.hlead, .hero__acts, .hproof, .hlic' + (extra ? ', ' + extra : ''));
-    return gsap.timeline({ delay: .05 })
-      .from(lines, { y: 12, autoAlpha: 0, duration: .28, ease: HOUSE, stagger: .08 }, 0)
-      .from(rest, { y: 12, autoAlpha: 0, duration: .28, ease: HOUSE, stagger: .09 }, .16);
-  }
-  // a spring that keeps its velocity when the target moves [S0089 spring-for-interruptible]
-  function spring(o, target, k_, c_, dt) {
-    for (var t = dt; t > 0; t -= 1 / 240) { var h = Math.min(t, 1 / 240); o.v += (k_ * (target - o.x) - c_ * o.v) * h; o.x += o.v * h; }
-    return Math.abs(target - o.x) > .02 || Math.abs(o.v) > .02;
-  }
-
-  EZ.section('hero', {
-    /* slot 6 · NEW · Contractor card: the card on the fence post carries the locked facts and turns to a real finished room */
-    6: { init: function (root, k) {
-      navOn(k, 'ground');
-      var fence = root.querySelector('.hcd__fence'), card = root.querySelector('.hcd__card'), btn = root.querySelector('.hcd__flip');
-      var d = '', x;
-      for (x = -20; x < 1240; x += 26) d += 'M' + x + ' 250 L' + (x + 154) + ' 404 M' + x + ' 404 L' + (x + 154) + ' 250 ';
-      fence.innerHTML = '<path d="' + d + '"/><path class="rail" d="M0 250 H1200 M0 404 H1200"/>' + [60, 300, 900, 1140].map(function (x) { return '<path class="rail" d="M' + x + ' 236 V404"/>'; }).join('');
-      k.add(function () { fence.innerHTML = ''; card.classList.remove('is-flip'); btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.btn__label').textContent = 'Turn the card: see what got built'; });
-      function flip() {
-        var on = !card.classList.contains('is-flip');
-        card.classList.toggle('is-flip', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-        btn.querySelector('.btn__label').textContent = on ? 'Turn it back: who built it' : 'Turn the card: see what got built';
-      }
-      k.on(btn, 'click', flip);
-      k.on(card, 'click', flip);
-      var tl = entrance(k, root, '.eyebrow');
-      if (tl) tl.from(card, { y: 40, rotation: -4, autoAlpha: 0, duration: .5, ease: HOUSE }, .1).from(root.querySelectorAll('.hcd__fence path, .hcd__ground'), { drawSVG: '0%', duration: .5, ease: 'power2.out', stagger: .01 }, 0);
-    } },
-
-    /* slot 7 · NEW · Street of rooftops: three depths of roofs with pointer parallax; a house's window opens a real room */
-    7: { init: function (root, k) {
-      navOn(k, 'ground');
-      function row(y, step, hmin, hmax, seed) {
-        var d = 'M0 300', x = 0, i = 0;
-        while (x < 1440) { var bw = step * (.7 + ((i * 37 + seed) % 7) / 10), h = hmin + ((i * 53 + seed) % 5) / 4 * (hmax - hmin), flat = (i + seed) % 3 === 0;
-          d += 'L' + x + ' ' + (y - h * .55) + (flat ? 'L' + (x + bw) + ' ' + (y - h * .55) : 'L' + (x + bw / 2) + ' ' + (y - h) + 'L' + (x + bw) + ' ' + (y - h * .55)) + 'L' + (x + bw) + ' ' + y;
-          x += bw + 8; i++; }
-        return '<path d="' + d + 'L1440 300Z"/>';
-      }
-      var back = root.querySelector('.hst__back'), mid = root.querySelector('.hst__mid');
-      back.innerHTML = row(300, 130, 120, 200, 3); mid.innerHTML = row(300, 110, 70, 130, 8);
-      var lens = root.querySelector('.hst__lens'), street = root.querySelector('.hst__street'), houses = Array.prototype.slice.call(root.querySelectorAll('.hst__house'));
-      function close() { lens.hidden = true; houses.forEach(function (h) { h.setAttribute('aria-pressed', 'false'); }); }
-      function open(h) {
-        if (h.getAttribute('aria-pressed') === 'true') { close(); return; }
-        close(); h.setAttribute('aria-pressed', 'true');
-        var sr = street.getBoundingClientRect(), r = h.querySelector('.wn').getBoundingClientRect();
-        lens.querySelector('img').src = EZ.img(h.dataset.k); lens.querySelector('img').alt = h.dataset.t + ', built by Elbaz';
-        lens.querySelector('figcaption').textContent = h.dataset.t;
-        lens.style.left = Math.min(Math.max(r.left + r.width / 2 - sr.left, 140), sr.width - 140) + 'px'; lens.style.top = (r.top - sr.top - 6) + 'px';
-        lens.hidden = false;
-        if (k.motion) gsap.fromTo(lens, { scale: .6, autoAlpha: 0, transformOrigin: '50% 100%' }, { scale: 1, autoAlpha: 1, duration: .26, ease: HOUSE });
-      }
-      houses.forEach(function (h) { k.on(h, 'click', function () { open(h); }); });
-      k.on(root, 'keydown', function (e) { if (e.key === 'Escape') close(); });
-      k.add(function () { back.innerHTML = ''; mid.innerHTML = ''; close(); });
-      if (k.motion && k.fine) {
-        var qb = gsap.quickTo(back, 'x', { duration: .6, ease: 'power3' }), qm = gsap.quickTo(mid, 'x', { duration: .6, ease: 'power3' });
-        k.on(root, 'pointermove', function (e) { var c = e.clientX / innerWidth - .5; qb(c * -10); qm(c * -22); });
-      }
-      var tl = entrance(k, root, '.eyebrow');
-      if (tl) tl.from([back, mid], { y: 60, duration: .5, ease: HOUSE, stagger: .08 }, 0).from(houses, { y: 50, autoAlpha: 0, duration: .4, ease: HOUSE, stagger: .07 }, .2);
-    } },
-
-    /* slot 8 · NEW · Built into the letters: a real kitchen inside the giant word, panning with the pointer */
-    8: { init: function (root, k) {
-      navOn(k, 'ground');
-      var w = root.querySelector('.hlt__word');
-      w.style.backgroundImage = 'url(' + EZ.img('k-navy-shaker-xl') + ')';
-      k.add(function () { w.style.backgroundImage = ''; w.style.backgroundPosition = ''; });
-      if (k.motion && k.fine) {
-        var o = { x: 50, y: 45 }, set = function () { w.style.backgroundPosition = o.x.toFixed(1) + '% ' + o.y.toFixed(1) + '%'; };
-        k.on(root, 'pointermove', function (e) { gsap.to(o, { x: 50 + (e.clientX / innerWidth - .5) * 40, y: 45 + (e.clientY / innerHeight - .5) * 30, duration: .6, ease: 'power3.out', overwrite: true, onUpdate: set }); });
-      }
-      var tl = entrance(k, root, '.eyebrow, .hlt__note');
-      if (tl) tl.from(w, { backgroundSize: '220% auto', duration: .6, ease: HOUSE }, 0).from(w, { y: 30, autoAlpha: 0, duration: .4, ease: HOUSE }, 0);
-    } },
-
-    /* slot 5 · Phase 5 improved version of b8 */
-    5: { init: function (root, k) {
-      navOn(k, 'ground');
-      var house = root.querySelector('.hox__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.hox__p'));
-      entrance(k, root, '.hox__p');
-      if (!k.motion || !k.fine) return;   // coarse pointers and reduced motion: the static triptych (CSS)
-      var tx = 0, ty = 0, st = ps.map(function () { return { x: { x: 0, v: 0 }, y: { x: 0, v: 0 } }; }), loop = null;
-      function go() {
-        if (loop) { loop.start(); return; }
-        loop = k.raf(function (dt) {
-          var moving = false;
-          ps.forEach(function (p, i) {
-            var d = +p.dataset.depth, s2 = st[i];
-            if (spring(s2.x, tx * d, 170, 26, dt)) moving = true;
-            if (spring(s2.y, ty * d, 170, 26, dt)) moving = true;
-            p.style.transform = 'translate3d(' + s2.x.x.toFixed(2) + 'px,' + s2.y.x.toFixed(2) + 'px,0)';
-          });
-          if (!moving) return false;
-        });
-      }
-      k.on(root, 'pointermove', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        var r = house.getBoundingClientRect();
-        tx = EZ.clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
-        ty = EZ.clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
-        go();
-      });
-      k.on(root, 'pointerleave', function () { tx = ty = 0; go(); });
-      k.add(function () { ps.forEach(function (p) { p.style.transform = ''; }); });
-    } },
-
-    /* slot 4 · Phase 5 improved version of b7 */
-    4: { init: function (root, k) {
-      navOn(k, 'ground');
-      var plate = root.querySelector('.hax__plate'), draw = root.querySelector('.hax__draw');
-      var rule = root.querySelector('.hax__rule'), range = root.querySelector('.hax__range');
-      draw.innerHTML = EZ.drawing('k-fluted-hero', { par: 'xMidYMid slice' });   // same crop as the photo: object-fit cover, centred [S1324 aligned pair]
-      var o = { x: +range.value, v: 0 }, target = o.x, loop = null;
-      function apply(v) { draw.style.clipPath = 'inset(0% ' + (100 - v).toFixed(2) + '% 0% 0%)'; rule.style.left = v.toFixed(2) + '%'; }
-      apply(o.x);
-      function go() {
-        if (!k.motion) { o.x = target; apply(o.x); return; }
-        if (loop) { loop.start(); return; }
-        loop = k.raf(function (dt) { var moving = spring(o, target, 500, 30, dt); apply(o.x); if (!moving) { o.x = target; o.v = 0; apply(o.x); return false; } });
-      }
-      k.on(range, 'input', function () { target = +range.value; go(); });
-      // the grip answers the pointer and the keyboard (an input cannot carry a drawn reaction): it swells 8% in 150ms
-      var grip = root.querySelector('.hax__grip');
-      function lift(on) { if (k.motion) gsap.to(grip, { scale: on ? 1.08 : 1, duration: .15, ease: 'power2.out', overwrite: true }); }
-      k.on(range, 'pointerenter', function (e) { if (e.pointerType === 'mouse') lift(true); });
-      k.on(range, 'pointerleave', function () { lift(false); });
-      k.on(range, 'pointerdown', function () { lift(true); });
-      k.on(range, 'focus', function () { lift(true); });
-      k.on(range, 'blur', function () { lift(false); });
-      k.add(function () { draw.innerHTML = ''; draw.style.clipPath = ''; rule.style.left = ''; range.value = 38; });
-      entrance(k, root, '.hax__key');
-    } },
-
-    /* slot 3 · Phase 5 improved version of b6 */
-    3: { init: function (root, k) {
-      navOn(k, 'ground');
-      var svg = root.querySelector('.hsx__frame'), bay = root.querySelector('.hsx__bay');
-      var s = '';
-      [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
-      [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
-      s += '<path class="t br" d="M22 506L118 410M618 14L522 110"/>';
-      [[22, 14], [618, 14], [22, 506], [618, 506]].forEach(function (q) { s += '<rect class="cp" x="' + (q[0] - 7) + '" y="' + (q[1] - 7) + '" width="14" height="14" rx="2"/>'; });
-      svg.innerHTML = s;
-      k.add(function () { svg.innerHTML = ''; });
-      var tl = entrance(k, root);
-      if (tl) tl.fromTo(svg.querySelectorAll('.t'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, 0)
-        .from(svg.querySelectorAll('.cp'), { scale: 0, transformOrigin: '50% 50%', duration: .18, ease: 'power2.out', stagger: .03 }, .2)
-        .fromTo(bay, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .4, ease: HOUSE, clearProps: 'clipPath' }, .18);
-    } },
-
-    /* slot 2 · Phase 5 improved version of b5 */
-    2: { init: function (root, k) {
-      navOn(k, 'ground');
-      var opts = Array.prototype.slice.call(root.querySelectorAll('.hkx__opt'));
-      var imgs = Array.prototype.slice.call(root.querySelectorAll('.hkx__img'));
-      var cap = root.querySelector('.hkx__cap'), lbl = root.querySelector('.hero__cta .btn__label');
-      var CAP = { 'k-white-shaker': 'White Shaker kitchen', 'b-white-marble': 'White marble bathroom', 'w-farmhouse': 'Modern farmhouse, whole home' };
-      var CTA = { Kitchen: 'Book a kitchen consultation', Bathroom: 'Book a bathroom consultation', 'Whole home': 'Book a whole-home consultation' };
-      var plan = root.querySelector('.hkx__plan');
-      function pick(i, focus) {
-        opts.forEach(function (o, j) { o.setAttribute('aria-checked', j === i ? 'true' : 'false'); o.tabIndex = j === i ? 0 : -1; });
-        var key = opts[i].dataset.k;
-        if (plan) plan.setAttribute('data-on', opts[i].dataset.room);
-        imgs.forEach(function (im) { var on = im.dataset.img === key; im.classList.toggle('is-on', on); gsap.to(im, { autoAlpha: on ? 1 : 0, duration: k.motion ? .2 : 0, ease: 'power2.out', overwrite: true }); });
-        cap.textContent = CAP[key];
-        lbl.textContent = CTA[opts[i].dataset.room];
-        EZ.pickedRoom = opts[i].dataset.room;   // carried into Consult, which preselects it
-        if (focus) opts[i].focus();
-      }
-      opts.forEach(function (o, i) {
-        k.on(o, 'click', function () { pick(i); });
-        k.on(o, 'keydown', function (e) {
-          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
-          if (!d) return;
-          e.preventDefault(); e.stopPropagation();
-          pick((i + d + opts.length) % opts.length, true);
-        });
-      });
-      gsap.set(imgs, { autoAlpha: 0 });
-      pick(0);
-      k.add(function () { gsap.set(imgs, { clearProps: 'opacity,visibility' }); delete EZ.pickedRoom; });
-      entrance(k, root, '.hkx__pick, .hkx__photo');
-    } },
-
-    /* slot 1 · Phase 5 improved version of b4 */
-    1: { init: function (root, k) {
-      navOn(k, 'ground');
-      var win = root.querySelector('.hpx__win'), img = win.querySelector('img'), name = root.querySelector('.hpx__name');
-      var tl = entrance(k, root);
-      if (tl) {
-        tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
-          .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0)
-          .fromTo(root.querySelector('.hpx__roof path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: HOUSE }, .12)
-          .fromTo(root.querySelector('.hpx__sun'), { scale: .4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: HOUSE, clearProps: 'transform,opacity,visibility' }, .2)
-          .fromTo(root.querySelectorAll('.hpx__palm path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .04 }, .25)
-          .fromTo(root.querySelector('.hpx__dim path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .4, ease: HOUSE }, .4);
-      }
-      // [Phase 4] the Finish picker: each swatch is a crop of a real Elbaz kitchen; picking one puts that kitchen in the house
-      var FIN = [
-        { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
-        { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
-        { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
-        { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
-        { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
-        { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
-      ];
-      var P = (window.__DATA || {}).projects || [], title = function (key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; };
-      var box = root.querySelector('.hpx__sw'), cur = 0;
-      box.innerHTML = FIN.map(function (f, i) {
-        return '<button type="button" role="radio" class="hpx__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" data-rx="native:finish-swatch" style="background-image:url(' + EZ.img(f.d || f.k) + ');background-position:' + f.at + '"></button>';
-      }).join('');
-      var sws = Array.prototype.slice.call(box.children);
-      k.add(function () { box.innerHTML = ''; img.src = EZ.img('k-navy-shaker-xl'); img.style.objectPosition = ''; name.textContent = title('k-navy-shaker'); });
-      function pick(i, focus) {
-        if (i === cur) return;
-        cur = i; var f = FIN[i];
-        sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
-        if (focus) sws[i].focus();
-        name.textContent = title(f.d || f.k);
-        img.alt = title(f.d || f.k) + ', built by Elbaz';
-        EZ.pickedRoom = 'Kitchen';
-        var swap = function () { img.src = EZ.img(f.k); img.style.objectPosition = f.pos; };
-        if (!k.motion) { swap(); return; }
-        gsap.to(img, { opacity: 0, duration: .14, ease: 'power1.in', overwrite: true, onComplete: function () { swap(); gsap.to(img, { opacity: 1, duration: .26, ease: HOUSE }); } });
-        gsap.fromTo(sws[i], { scale: .86 }, { scale: 1, duration: .3, ease: 'back.out(2.4)' });
-      }
-      sws.forEach(function (s, i) {
-        k.on(s, 'click', function () { pick(i); });
-        k.on(s, 'keydown', function (e) {
-          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
-          if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
-        });
-      });
-    } },
-
-    /* 1 · Poster: the owner's keeper + F1. The brass-to-room move is the load reveal (480ms, once), not a pinned scrub */
-    b4: { init: function (root, k) {
-      navOn(k, 'ground');
-      var win = root.querySelector('.hp__win'), img = win.querySelector('img'), name = root.querySelector('.hp__name');
-      var tl = entrance(k, root);
-      if (tl) {
-        tl.fromTo(win, { clipPath: 'inset(22% 18% 22% 47%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: HOUSE, clearProps: 'clipPath' }, 0)
-          .fromTo(img, { scale: 1.12, transformOrigin: '64.5% 34%' }, { scale: 1, duration: .48, ease: HOUSE, clearProps: 'transform' }, 0)
-          .fromTo(root.querySelector('.hp__roof path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .5, ease: HOUSE }, .12)
-          .fromTo(root.querySelector('.hp__sun'), { scale: .4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: HOUSE, clearProps: 'transform,opacity,visibility' }, .2)
-          .fromTo(root.querySelectorAll('.hp__palm path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .04 }, .25)
-          .fromTo(root.querySelector('.hp__dim path'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .4, ease: HOUSE }, .4);
-      }
-      // [Phase 4] the Finish picker: each swatch is a crop of a real Elbaz kitchen; picking one puts that kitchen in the house
-      var FIN = [
-        { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', n: 'Navy Shaker', at: '40% 74%', pos: '50% 52%' },
-        { k: 'k-white-shaker', n: 'White Shaker', at: '24% 30%', pos: '50% 50%' },
-        { k: 'k-gray-shaker', n: 'Gray Shaker', at: '26% 24%', pos: '45% 50%' },
-        { k: 'k-turquoise', n: 'Turquoise backsplash', at: '30% 56%', pos: '45% 55%' },
-        { k: 'k-navy-white', n: 'Navy and white', at: '32% 26%', pos: '50% 50%' },
-        { k: 'k-brass-hood', n: 'Brass-banded hood', at: '33% 30%', pos: '35% 50%' }
-      ];
-      var P = (window.__DATA || {}).projects || [], title = function (key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; };
-      var box = root.querySelector('.hp__sw'), cur = 0;
-      box.innerHTML = FIN.map(function (f, i) {
-        return '<button type="button" role="radio" class="hp__s" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + f.n + '" data-rx="native:finish-swatch" style="background-image:url(' + EZ.img(f.d || f.k) + ');background-position:' + f.at + '"></button>';
-      }).join('');
-      var sws = Array.prototype.slice.call(box.children);
-      k.add(function () { box.innerHTML = ''; img.src = EZ.img('k-navy-shaker-xl'); img.style.objectPosition = ''; name.textContent = title('k-navy-shaker'); });
-      function pick(i, focus) {
-        if (i === cur) return;
-        cur = i; var f = FIN[i];
-        sws.forEach(function (s, j) { s.setAttribute('aria-checked', j === i ? 'true' : 'false'); s.tabIndex = j === i ? 0 : -1; });
-        if (focus) sws[i].focus();
-        name.textContent = title(f.d || f.k);
-        img.alt = title(f.d || f.k) + ', built by Elbaz';
-        EZ.pickedRoom = 'Kitchen';
-        var swap = function () { img.src = EZ.img(f.k); img.style.objectPosition = f.pos; };
-        if (!k.motion) { swap(); return; }
-        gsap.to(img, { opacity: 0, duration: .14, ease: 'power1.in', overwrite: true, onComplete: function () { swap(); gsap.to(img, { opacity: 1, duration: .26, ease: HOUSE }); } });
-        gsap.fromTo(sws[i], { scale: .86 }, { scale: 1, duration: .3, ease: 'back.out(2.4)' });
-      }
-      sws.forEach(function (s, i) {
-        k.on(s, 'click', function () { pick(i); });
-        k.on(s, 'keydown', function (e) {
-          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
-          if (d) { e.preventDefault(); pick((cur + d + FIN.length) % FIN.length, true); }
-        });
-      });
-    } },
-
-    /* 2 · Pick your room [Anatomy §1 F1 + F3]: the entry is a choice; the photo and the CTA answer it */
-    b5: { init: function (root, k) {
-      navOn(k, 'ground');
-      var opts = Array.prototype.slice.call(root.querySelectorAll('.hk__opt'));
-      var imgs = Array.prototype.slice.call(root.querySelectorAll('.hk__img'));
-      var cap = root.querySelector('.hk__cap'), lbl = root.querySelector('.hero__cta .btn__label');
-      var CAP = { 'k-walnut-marble': 'Walnut and marble kitchen', 'b-white-marble': 'White marble bathroom', 'w-farmhouse': 'Modern farmhouse, whole home' };
-      var CTA = { Kitchen: 'Book a kitchen consultation', Bathroom: 'Book a bathroom consultation', 'Whole home': 'Book a whole-home consultation' };
-      function pick(i, focus) {
-        opts.forEach(function (o, j) { o.setAttribute('aria-checked', j === i ? 'true' : 'false'); o.tabIndex = j === i ? 0 : -1; });
-        var key = opts[i].dataset.k;
-        imgs.forEach(function (im) { var on = im.dataset.img === key; im.classList.toggle('is-on', on); gsap.to(im, { autoAlpha: on ? 1 : 0, duration: k.motion ? .2 : 0, ease: 'power2.out', overwrite: true }); });
-        cap.textContent = CAP[key];
-        lbl.textContent = CTA[opts[i].dataset.room];
-        EZ.pickedRoom = opts[i].dataset.room;   // carried into Consult, which preselects it
-        if (focus) opts[i].focus();
-      }
-      opts.forEach(function (o, i) {
-        k.on(o, 'click', function () { pick(i); });
-        k.on(o, 'keydown', function (e) {
-          var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
-          if (!d) return;
-          e.preventDefault(); e.stopPropagation();
-          pick((i + d + opts.length) % opts.length, true);
-        });
-      });
-      gsap.set(imgs, { autoAlpha: 0 });
-      pick(0);
-      k.add(function () { gsap.set(imgs, { clearProps: 'opacity,visibility' }); delete EZ.pickedRoom; });
-      entrance(k, root, '.hk__pick, .hk__photo');
-    } },
-
-    /* 3 · Scaffold, cleaned: the tubes draw round a large real photograph, which rises into the bay (once) */
-    b6: { init: function (root, k) {
-      navOn(k, 'ground');
-      var svg = root.querySelector('.hs__frame'), bay = root.querySelector('.hs__bay');
-      var s = '';
-      [22, 618].forEach(function (x) { s += '<path class="t" d="M' + x + ' 516V4"/>'; });
-      [14, 506].forEach(function (y) { s += '<path class="t" d="M4 ' + y + 'H636"/>'; });
-      s += '<path class="t br" d="M22 506L118 410M618 14L522 110"/>';
-      [[22, 14], [618, 14], [22, 506], [618, 506]].forEach(function (q) { s += '<rect class="cp" x="' + (q[0] - 7) + '" y="' + (q[1] - 7) + '" width="14" height="14" rx="2"/>'; });
-      svg.innerHTML = s;
-      k.add(function () { svg.innerHTML = ''; });
-      var tl = entrance(k, root);
-      if (tl) tl.fromTo(svg.querySelectorAll('.t'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, 0)
-        .from(svg.querySelectorAll('.cp'), { scale: 0, transformOrigin: '50% 50%', duration: .18, ease: 'power2.out', stagger: .03 }, .2)
-        .fromTo(bay, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .4, ease: HOUSE, clearProps: 'clipPath' }, .18);
-    } },
-
-    /* 4 · As built (Direction A): a real range input drives the line between the traced drawing and the photograph */
-    b7: { init: function (root, k) {
-      navOn(k, 'ground');
-      var plate = root.querySelector('.ha__plate'), draw = root.querySelector('.ha__draw');
-      var rule = root.querySelector('.ha__rule'), range = root.querySelector('.ha__range');
-      draw.innerHTML = EZ.drawing('k-fluted-hero', { par: 'xMidYMid slice' });   // same crop as the photo: object-fit cover, centred [S1324 aligned pair]
-      var o = { x: +range.value, v: 0 }, target = o.x, loop = null;
-      function apply(v) { draw.style.clipPath = 'inset(0% ' + (100 - v).toFixed(2) + '% 0% 0%)'; rule.style.left = v.toFixed(2) + '%'; }
-      apply(o.x);
-      function go() {
-        if (!k.motion) { o.x = target; apply(o.x); return; }
-        if (loop) { loop.start(); return; }
-        loop = k.raf(function (dt) { var moving = spring(o, target, 500, 30, dt); apply(o.x); if (!moving) { o.x = target; o.v = 0; apply(o.x); return false; } });
-      }
-      k.on(range, 'input', function () { target = +range.value; go(); });
-      // the grip answers the pointer and the keyboard (an input cannot carry a drawn reaction): it swells 8% in 150ms
-      var grip = root.querySelector('.ha__grip');
-      function lift(on) { if (k.motion) gsap.to(grip, { scale: on ? 1.08 : 1, duration: .15, ease: 'power2.out', overwrite: true }); }
-      k.on(range, 'pointerenter', function (e) { if (e.pointerType === 'mouse') lift(true); });
-      k.on(range, 'pointerleave', function () { lift(false); });
-      k.on(range, 'pointerdown', function () { lift(true); });
-      k.on(range, 'focus', function () { lift(true); });
-      k.on(range, 'blur', function () { lift(false); });
-      k.add(function () { draw.innerHTML = ''; draw.style.clipPath = ''; rule.style.left = ''; range.value = 38; });
-      entrance(k, root, '.ha__key');
-    } },
-
-    /* 5 · Open house (Direction B): three real rooms on three depth planes; the pointer opens the house a few pixels */
-    b8: { init: function (root, k) {
-      navOn(k, 'ground');
-      var house = root.querySelector('.ho__house'), ps = Array.prototype.slice.call(root.querySelectorAll('.ho__p'));
-      entrance(k, root, '.ho__p');
-      if (!k.motion || !k.fine) return;   // coarse pointers and reduced motion: the static triptych (CSS)
-      var tx = 0, ty = 0, st = ps.map(function () { return { x: { x: 0, v: 0 }, y: { x: 0, v: 0 } }; }), loop = null;
-      function go() {
-        if (loop) { loop.start(); return; }
-        loop = k.raf(function (dt) {
-          var moving = false;
-          ps.forEach(function (p, i) {
-            var d = +p.dataset.depth, s2 = st[i];
-            if (spring(s2.x, tx * d, 170, 26, dt)) moving = true;
-            if (spring(s2.y, ty * d, 170, 26, dt)) moving = true;
-            p.style.transform = 'translate3d(' + s2.x.x.toFixed(2) + 'px,' + s2.y.x.toFixed(2) + 'px,0)';
-          });
-          if (!moving) return false;
-        });
-      }
-      k.on(root, 'pointermove', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        var r = house.getBoundingClientRect();
-        tx = EZ.clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
-        ty = EZ.clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
-        go();
-      });
-      k.on(root, 'pointerleave', function () { tx = ty = 0; go(); });
-      k.add(function () { ps.forEach(function (p) { p.style.transform = ''; }); });
-    } },
-
-    /* v1 · As built, as drawn */
-    b1: { init: function (root, k) {
-      navOn(k, 'photo');
-      var alive = true;
-      k.add(function () { alive = false; });
-      var frame = root.querySelector('.hero1__frame');
-      var plate = root.querySelector('.hero1__plate');
-      var bp = root.querySelector('.hero1__bp');
-      var linesEl = root.querySelector('.hero1__lines');
-      var strokeSvg = root.querySelector('.hero1__stroke');
-      var lead = root.querySelector('.hero1__lead');
-      var acts = root.querySelector('.hero__acts').children;
-      var block = root.querySelector('.hero1__block');
-      linesEl.innerHTML = EZ.drawing('k-fluted-hero', { par: 'none' });
-      var notesEl = root.querySelector('.hero1__notes'), notes = Array.prototype.slice.call(notesEl.querySelectorAll('.hero1__note'));
-      var lines = linesEl.querySelectorAll('line');
-      var opt = { ar: 1.6, x: function () { return EZ.mobile() ? .6 : .5; }, y: .5 };
-      EZ.cover(k, frame, plate, opt); EZ.cover(k, frame, bp, opt); EZ.cover(k, frame, linesEl, opt); EZ.cover(k, frame, notesEl, opt);
-      // [S1362] each annotation appears in stages when the slit reaches its part: dot, then the connector draws, then the pill
-      var slitEl = root.querySelector('.hero1__slit');
-      function stageNotes() {
-        var pr = notesEl.getBoundingClientRect(), sr = slitEl.getBoundingClientRect(), fr = frame.getBoundingClientRect();
-        notes.forEach(function (n) {
-          var x = pr.left + (+n.dataset.ax) / 1600 * pr.width, pw = (+n.querySelector('.pill rect').getAttribute('width')) / 1600 * pr.width;
-          // a pill shows only while it fits inside the slit, so it is never cut by the band's edge
-          var inBand = Math.abs(x - (sr.left + sr.width / 2)) < Math.max(10, (sr.width - pw) / 2 - 4) && x > fr.left && x < fr.right;
-          if (inBand === !!n._on) return;
-          n._on = inBand;
-          if (!k.motion) { gsap.set(n, { autoAlpha: inBand ? 1 : 0 }); return; }
-          gsap.killTweensOf([n, n.querySelector('.con'), n.querySelector('.pill'), n.querySelector('.dot')]);
-          if (inBand) {
-            gsap.timeline().set(n, { autoAlpha: 1 })
-              .fromTo(n.querySelector('.dot'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .15, ease: 'back.out(3)' })
-              .fromTo(n.querySelector('.con'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .22, ease: 'power2.out' }, .08)
-              .fromTo(n.querySelector('.pill'), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, duration: .2, ease: 'power2.out' }, .24);
-          } else gsap.to(n, { autoAlpha: 0, duration: .15 });
-        });
-      }
-      gsap.set(notes, { autoAlpha: 0 });
-      k.add(function () { notes.forEach(function (n) { n._on = false; }); gsap.set(notes, { clearProps: 'all' }); });
-
-      // the slit: follows the pointer (lerp .12), settles at rest after 680ms still [BANK Specia1ne]
-      var bx = null, tx = null, last = -1e9, dragging = false, sweeping = false;
-      function rest() { return frame.clientWidth * (EZ.mobile() ? .5 : .62); }
-      function setBx(v) { root.style.setProperty('--bx', v.toFixed(1) + 'px'); }
-      k.add(function () { root.style.removeProperty('--bx'); root.style.removeProperty('--bwk'); });
-      bx = rest(); setBx(bx);
-      k.ro(frame, function () { if (!loop) { bx = rest(); setBx(bx); } requestAnimationFrame(stageNotes); });
-      requestAnimationFrame(stageNotes);
-      var loop = null;
-      if (k.motion) {
-        loop = k.raf(function (dt, now) {
-          if (sweeping) return;
-          var idle = performance.now() - last > 680 && !dragging;
-          var target = idle || tx == null ? rest() : tx;
-          bx += (target - bx) * (1 - Math.pow(1 - .12, dt * 60));
-          setBx(bx);
-          stageNotes();
-          if (idle && Math.abs(target - bx) < .3) { bx = target; setBx(bx); return false; }
-        });
-        function aim(e) {
-          var r = frame.getBoundingClientRect();
-          tx = EZ.clamp(e.clientX - r.left, 0, r.width);
-          last = performance.now();
-          loop.start();
-        }
-        k.on(frame, 'pointermove', function (e) { if (e.pointerType === 'mouse' || dragging) aim(e); });
-        k.on(frame, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { dragging = true; aim(e); } });
-        k.on(window, 'pointerup', function () { if (dragging) { dragging = false; last = performance.now(); loop.start(); } });
-        k.on(window, 'pointercancel', function () { dragging = false; });
-        k.io(frame, function (en) { if (en.isIntersecting) loop.start(); else loop.stop(); });
+    if (k.motion) {
+      /* ---------- scroll: a short pin (70% of a viewport) plays the reveal, then the frame pulls back (Z-pull exit,
+         the carrier into Proof) and the pin releases [S0186 ease none, S1209 finite pin, S0576 shrinking exit] ---------- */
+      if (!k.mobile) {
+        var tl = gsap.timeline({ scrollTrigger: { trigger: root, start: function () { return 'top ' + parseFloat(getComputedStyle(sec).paddingTop) + 'px'; }, end: '+=70%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });   // pin the version where it already sits under the nav (start = scroll 0)
+        tl.to(st, { p: 1, ease: 'none', duration: .78, onUpdate: apply })
+          .to(frame, { scale: .965, ease: 'none', duration: .22 });
+      } else {
+        gsap.to(st, { p: 1, ease: 'none', onUpdate: apply, scrollTrigger: { trigger: frame, start: 'top 20%', end: 'bottom 40%', scrub: .8 } });
       }
 
-      fontsReady().then(function () {
-        if (!alive) return;
-        var st = buildStroke(strokeSvg, ['Built properly.', 'Permitted correctly.']);
-        if (!st) { root.classList.add('no-svgtext'); return; }
-        if (!k.motion) return;
-        k.ctx.add(function () {
-          var tl = gsap.timeline({ delay: .15 });
-          // Smeulders ladder: visual, words, subtitle, CTA [BANK Smeulders]
-          tl.fromTo(plate, { scale: 1.04 }, { scale: 1, duration: .3, ease: 'power2.out' }, 0)
-            .fromTo(root, { '--bwk': 0 }, { '--bwk': 1, duration: .3, ease: EZ.bezier(.2, .7, .2, 1) }, .3)
-            .fromTo(lines, { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: { each: .004, from: 'random' } }, .3)
-            .fromTo(st.outlines, { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, duration: .3, ease: 'power2.out', stagger: .015 }, 0)
-            .fromTo(st.wipes, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .3, ease: 'power2.inOut', stagger: .06 }, .55)
-            .to(st.outlines, { opacity: 0, duration: .25 }, .95)
-            .from(lead, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .3)
-            .from(block, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .4)
-            .from(acts[0], { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .5)
-            .from(acts[1], { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .55);
-          if (k.mobile) {
-            // phones: the slit sweeps across once so the drawing is discovered, then rests; drag moves it
-            var o = { v: frame.clientWidth * .08 };
-            sweeping = true; bx = o.v; setBx(bx);
-            tl.to(o, { v: rest(), duration: 1.6, ease: 'power2.inOut',
-              onUpdate: function () { if (dragging) { sweeping = false; return; } if (sweeping) { bx = o.v; setBx(bx); stageNotes(); } },
-              onComplete: function () { sweeping = false; } }, .6);
-          }
-        });
-      });
-    } },
-
-    /* v2 · From the brass to the room. OWNER KEEPER: the 68f8ff5 code path; the dead weight scrub is deleted
-       (Bebas has one weight and font-synthesis is off, so it never drew a pixel); the proof line rides in with the row */
-    b2: { init: function (root, k) {
-      navOn(k, 'ground');
-      var stage = root.querySelector('.hero2__stage');
-      var band = root.querySelector('.hero2__band');
-      var win = root.querySelector('.hero2__window');
-      var plate = root.querySelector('.hero2__plate');
-      var h1 = root.querySelector('.hero2__h');
-      var AR = 2400 / 1601, HX = .645, HY = .34;      // the brass-banded hood, measured on the photograph
-      var Z = 2.4;   // start zoom: 2.4 keeps the 2400px source at <=1.4x
-      var start = [22, 18, 22, 47];
-
-      function fit() {
-        var bw = band.clientWidth, bh = band.clientHeight;
-        if (!bw || !bh) return;
-        var w = Math.max(bw, bh * AR), h = w / AR;
-        var left = (bw - w) / 2;
-        var top = EZ.clamp(bh / 2 - h * HY, bh - h, 0);
-        plate.style.cssText = 'width:' + w + 'px;height:' + h + 'px;left:' + left + 'px;top:' + top + 'px;right:auto;bottom:auto';
-        // window centred on the hood
-        var hx = (left + w * HX) / bw * 100, hy = (top + h * HY) / bh * 100;
-        var ww = EZ.mobile() ? 62 : 58, wh = EZ.mobile() ? 50 : 78;
-        var l = EZ.clamp(hx - ww / 2, 0, 100 - ww), t = EZ.clamp(hy - wh / 2, 0, 100 - wh);
-        start = [t, 100 - l - ww, 100 - t - wh, l];
-        plate.style.transformOrigin = (HX * 100) + '% ' + (HY * 100) + '%';
-      }
-      k.ro(band, fit);
-      fit();
-      k.add(function () { plate.style.cssText = ''; });
-
-      if (!k.motion) { root.classList.add('is-static'); k.add(function () { root.classList.remove('is-static'); }); return; }
-
-      var lines = wrapRise(h1.querySelectorAll('.ln'));
-      h1.querySelectorAll('.ln').forEach(function (l) { l.style.overflow = 'clip'; l.style.paddingBottom = '.12em'; l.style.marginBottom = '-.12em'; });
-      var row = [root.querySelector('.hero2__proof'), root.querySelector('.hero2__row')];
-
-      if (k.mobile) {
-        // phones: no pin; the zoom plays once
-        gsap.timeline({ delay: .05 })
-          .fromTo(plate, { scale: 1.8 }, { scale: 1, duration: 1.2, ease: 'expo.out' }, 0)
-          .add(EZ.clip(k, win, start, [0, 0, 0, 0], { duration: 1.2, ease: 'expo.out' }), 0)
-          .from(lines, { yPercent: 105, duration: .8, ease: 'expo.out', stagger: .09 }, .05)
-          .from(row, { autoAlpha: 0, y: 14, duration: .7, ease: 'expo.out' }, .35);
-        return;
-      }
-
-      // intro: band opens, lines rise, row arrives
-      gsap.timeline({ delay: .05 })
-        .add(EZ.clip(k, band, [0, 0, 100, 0], [0, 0, 0, 0], { duration: 1, ease: 'power4.inOut', onComplete: function () { band.style.clipPath = ''; } }), 0)
-        .from(lines, { yPercent: 105, duration: .8, ease: 'expo.out', stagger: .09 }, .1)
-        .from(row, { autoAlpha: 0, y: 14, duration: .7, ease: 'expo.out' }, .35);
-
-      // pinned zoom-out, 140vh, scrub 1.1, linear [BANK Q154 / S54]
-      gsap.timeline({
-        scrollTrigger: { trigger: stage, start: 'top top', end: '+=140%', pin: true, scrub: 1.1, invalidateOnRefresh: true }
-      })
-        .fromTo(plate, { scale: Z }, { scale: 1, ease: 'none' }, 0)
-        .add(EZ.clip(k, win, function () { return start; }, [0, 0, 0, 0], { ease: 'none' }), 0)
-        .fromTo(stage, { '--p': 0 }, { '--p': 1, ease: 'none' }, 0);
-    } },
-
-    /* v3 · Steel letters on the scaffold */
-    b3: { init: function (root, k) {
-      navOn(k, 'ground');
-      var svg = root.querySelector('.hero3__scaffold');
-      var bay = root.querySelector('.hero3__bay');
-      var board = root.querySelector('.hero3__board');
-      var depths = root.querySelectorAll('.hero3__depth');
-      var faces = root.querySelectorAll('.hero3__face');
-      var h1 = root.querySelector('.hero3__h');
-
-      // the scaffold: 4 standards, 4 lifts, braces, couplers, boards [drawn for this firm]
-      var SX = [40, 220, 400, 580], LY = [612, 420, 240, 64];
-      var s = '';
-      SX.forEach(function (x) { s += '<rect class="plate-b" x="' + (x - 16) + '" y="618" width="32" height="10"/>'; });
-      SX.forEach(function (x) { s += '<path class="tube std" d="M' + x + ' 618V36"/>'; });
-      LY.forEach(function (y) { s += '<path class="tube led" d="M18 ' + y + 'H602"/>'; });
-      s += '<path class="brace" d="M40 612L220 420M400 420L580 240M40 240L220 64"/>';
-      [420, 240].forEach(function (y) { s += '<rect class="board" x="26" y="' + (y - 18) + '" width="568" height="12"/><rect class="toe" x="26" y="' + (y - 30) + '" width="568" height="5" opacity=".9"/>'; });
-      SX.forEach(function (x) { LY.forEach(function (y) { s += '<circle class="cpl" cx="' + x + '" cy="' + y + '" r="8"/>'; }); });
-      svg.innerHTML = s;
-      // the photo fills bay 2 between lifts 2 and 3 exactly
-      bay.style.left = (227 / 600 * 100) + '%'; bay.style.width = ((393 - 227) / 600 * 100) + '%';
-      bay.style.top = (247 / 640 * 100) + '%'; bay.style.height = ((400 - 247) / 640 * 100) + '%';
-      k.add(function () { bay.style.cssText = ''; depths.forEach(function (d) { d.style.textShadow = ''; }); });
-
-      // Depth Text [BANK 165]: 34 layers; the extrusion swings away from the pointer, the face never rotates
-      var N = 34, ang = 52, tang = 52, layers = N, C0, C1;
-      function palette() {
-        var cs = getComputedStyle(root);
-        C0 = cs.getPropertyValue('--d0').split(',').map(Number);
-        C1 = cs.getPropertyValue('--d1').split(',').map(Number);
-        if (C0.length < 3 || isNaN(C0[0])) { C0 = [30, 74, 78]; C1 = [8, 22, 24]; }
-      }
-      palette();
-      var mo = new MutationObserver(function () { palette(); paint(); });
-      mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-      k.add(function () { mo.disconnect(); });
-      function paint() {
-        var fs = parseFloat(getComputedStyle(h1).fontSize) || 96, step = fs * .0115;
-        var dx = Math.cos(ang * Math.PI / 180) * step, dy = Math.sin(ang * Math.PI / 180) * step, sh = [];
-        var n = Math.round(layers);
-        for (var i = 1; i <= n; i++) {
-          var t = i / N, c = 'rgb(' + Math.round(C0[0] + (C1[0] - C0[0]) * t) + ',' + Math.round(C0[1] + (C1[1] - C0[1]) * t) + ',' + Math.round(C0[2] + (C1[2] - C0[2]) * t) + ')';
-          sh.push((dx * i).toFixed(2) + 'px ' + (dy * i).toFixed(2) + 'px 0 ' + c);
-        }
-        var v = sh.join(',') || 'none';
-        depths.forEach(function (d) { d.style.textShadow = v; });
-      }
-      paint();
-      k.ro(h1, paint);
-      if (!k.motion) return;
-
-      var o = { n: 0 };
-      layers = 0; paint();
-      var tl = gsap.timeline({ delay: .1 });
-      tl.from(faces, { yPercent: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05 }, 0)
-        .to(o, { n: N, duration: .3, ease: 'power2.out', onUpdate: function () { layers = o.n; paint(); } }, .2)
-        .from(root.querySelector('.hero3__lead'), { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out' }, .3)
-        .from(root.querySelector('.hero__acts').children, { y: 16, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .05 }, .35)
-        .fromTo(svg.querySelectorAll('.std'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .04 }, .1)
-        .fromTo(svg.querySelectorAll('.led'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out', stagger: .03 }, .2)
-        .fromTo(svg.querySelectorAll('.brace'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .3, ease: 'power2.out' }, .3)
-        .from(svg.querySelectorAll('.cpl'), { scale: .3, autoAlpha: 0, transformOrigin: '50% 50%', duration: .2, ease: 'back.out(3)', stagger: .008 }, .35)
-        .from(svg.querySelectorAll('.board, .toe'), { scaleX: 0, transformOrigin: '0% 50%', duration: .3, ease: 'power2.out', stagger: .04 }, .4)
-        .add(EZ.clip(k, bay, [100, 0, 0, 0], [0, 0, 0, 0], { duration: .3, ease: 'power2.out', onComplete: function () { bay.style.clipPath = ''; } }), .45)
-        .from(board, { y: -24, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, .55);
-
+      /* ---------- V8's reacting background: three depths answer the pointer ---------- */
       if (k.fine) {
-        var raf = k.raf(function (dt) {
-          ang += (tang - ang) * (1 - Math.pow(1 - .14, dt * 60));          // smoothing .14 per 60 Hz frame [BANK 165]
-          paint();
-          if (Math.abs(tang - ang) < .2) return false;
+        var mv = { x: 0, y: 0 };
+        var qx = gsap.quickTo(mv, 'x', { duration: .8, ease: 'power3.out', onUpdate: depth });
+        var qy = gsap.quickTo(mv, 'y', { duration: .8, ease: 'power3.out', onUpdate: depth });
+        function depth() {
+          full.style.transform = 'translate3d(' + (mv.x * -10).toFixed(2) + 'px,' + (mv.y * -8).toFixed(2) + 'px,0)';
+          word.style.backgroundPosition = 'calc(50% + ' + (mv.x * 26).toFixed(1) + 'px) calc(50% + ' + (mv.y * 18).toFixed(1) + 'px)';
+          img.setAttribute('x', (mv.x * -9).toFixed(2)); img.setAttribute('y', (mv.y * -7).toFixed(2));
+        }
+        k.on(frame, 'pointermove', function (e) {
+          if (e.pointerType === 'touch') return;
+          var r = frame.getBoundingClientRect();
+          qx((e.clientX - r.left) / r.width * 2 - 1); qy((e.clientY - r.top) / r.height * 2 - 1);
         });
-        // the extrusion always falls below the letters (a sign has depth, not a smear); the pointer swings its vanishing side
-        k.on(root, 'pointermove', function (e) {
-          var r = h1.getBoundingClientRect();
-          tang = 90 + EZ.clamp((r.left + r.width / 2 - e.clientX) / (innerWidth / 2), -1, 1) * 58;
-          raf.start();
-        });
-        k.on(root, 'pointerleave', function () { tang = 52; raf.start(); });
+        k.on(frame, 'pointerleave', function () { qx(0); qy(0); });
+        k.add(function () { full.style.transform = ''; word.style.backgroundPosition = ''; img.removeAttribute('x'); img.removeAttribute('y'); });
       }
-    } }
-  });
+
+      /* ---------- load beat: the roof is drawn from the apex out, the window opens, the lines rise, the letters arrive ---------- */
+      var rises = root.querySelectorAll('.hh .rise');
+      var lt = gsap.timeline({ defaults: { ease: EZO } });
+      lt.fromTo(root.querySelector('.hm__roof'), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .6, ease: MOVE }, 0)
+        .fromTo(root.querySelector('.hm__win'), { clipPath: 'inset(40% 30% 0% 30%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .7, ease: MOVE, clearProps: 'clipPath' }, .2)
+        .fromTo(img, { scale: 1.12, transformOrigin: '50% 60%' }, { scale: 1, duration: .9, clearProps: 'transform' }, .2)
+        .fromTo(rises, { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .1)
+        .fromTo(word, { yPercent: 18 }, { yPercent: 0, duration: 1, clearProps: 'transform' }, .35)
+        .fromTo(root.querySelectorAll('.hm__rv'), { scale: 0 }, { scale: 1, duration: .3, stagger: .05, ease: 'back.out(1.6)', clearProps: 'transform' }, .5)
+        .fromTo(rail, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: .4, clearProps: 'transform,opacity,visibility' }, .75);
+    }
+  } } });
 })();

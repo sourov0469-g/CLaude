@@ -300,6 +300,7 @@
     var wrap = doc.createElement('div');
     wrap.className = 'vswitch';
     wrap.dataset.for = s.id;
+    wrap.dataset.count = String(s.vis.length);   // FINALIZE: a one-version section shows no switcher
     var inner = doc.createElement('div');
     inner.className = 'vswitch__in';
     inner.setAttribute('role', 'radiogroup');

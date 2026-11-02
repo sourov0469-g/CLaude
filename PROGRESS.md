@@ -82,7 +82,7 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 0 | Recite-back, ambiguities, KEEP/REMOVE inventory (`FINALIZE-PHASE0.md`, 12dedfc) | PASS (Muse) |
 | 1 | Skill pack read and digested; reference study; flow maps; storyboards; Financing concept; logo story; companion plan | **done**: `GATE-phase1.md` |
 | 2 | Companion and logo in a test harness | **done**: `GATE-system-companion-logo.md` (awaiting Muse) |
-| 3 | Home sections, one at a time, in page order | **next**: Hero |
+| 3 | Home sections, one at a time, in page order | **in progress**: Hero done (`GATE-home-hero.md`); next is Proof |
 | 4 | Kitchens, then Bathrooms | pending |
 | 5 | Renovation, then Contact, then single-file assembly | pending |
 
@@ -134,3 +134,6 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **rig.js and react.js** (hover sprites) are removed from the build. Zero console errors on all 5 pages.
 - **Living logo** (`js/systems/logo.js`, inline SVG): the load draw-and-lay, hover/focus closing the E, the press closing the room, scroll compaction, and the footer closing beat.
 - **Evidence:** `qa/finalize/phase2/`.
+
+## Phase 3 log
+- **Home 1 Hero** (one deepened version, the owner's mix): `GATE-home-hero.md`. Three audit cycles; zero console errors; no text over the letters at 4 viewports; reduced motion and keyboard verified.

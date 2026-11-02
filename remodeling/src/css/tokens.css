@@ -136,6 +136,10 @@
   --ease-expo: cubic-bezier(.16, 1, .3, 1);
   --ease-drawer: cubic-bezier(.32, .72, 0, 1);
   --ease-move: cubic-bezier(.25, 1, .5, 1);
+  /* FINALIZE: the ONE easing language (docs/skills/notes-C-motion.md). Every new or rebuilt section uses only these three. */
+  --ez-out: cubic-bezier(.22, 1, .36, 1);      /* entrances, opens, hover-in, settles */
+  --ez-move: cubic-bezier(.38, .005, .215, 1); /* on-screen moves between two states (camera, nudge, stack shift, draw) */
+  --ez-in: cubic-bezier(.55, 0, .75, .2);      /* exits only, about 75% of the entry */
   --t-press: 160ms;
   --t-hover: 180ms;
   --t-ui: 240ms;
