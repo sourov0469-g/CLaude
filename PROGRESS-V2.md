@@ -89,7 +89,12 @@ That is 6 pages and 41 sections, inside the 3–11 rule. Every page has at least
 Cowboy (homeowner warmth, one named system) is held for the About & booking page.
 
 ## Phase status
-- **Phase 1:** in progress. Territories are re-verified under v3 (all four references verify). Next: territory selection with criteria fixed in advance (S1472), then three resolved concepts, then GATE-PHASE-1.md.
+- **Phase 1:** gate written (`GATE-PHASE-1.md`): self-rated 7.05, PASS, zero vetoes.
+  - Territory T1 picked against criteria fixed first (`siding/brand-v2/TERRITORY-SELECTION.md`): T1 40, T3 34, T2 25.
+  - Three concepts built in `siding/brand-v2/phase1-concepts.html`: C1 The Profile House, C2 Lap A, C3 Reveal Tile.
+  - Recommended: C1, with C3 as the ready alternative.
+  - Registry: `siding/brand-v2/IMAGE-REGISTRY.md`.
+- **Phase 2:** next. It proceeds on C1 unless a newer Muse message overrules the pick.
 - **Phases 2, 3a, 3b and the build:** not started.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
