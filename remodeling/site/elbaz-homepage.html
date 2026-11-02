@@ -1635,11 +1635,11 @@ html.has-buddy select { cursor: default !important; }
 .tw__svg .flag path { stroke: var(--color-text); stroke-width: 5; }
 
 
-.tw__all { display: grid; gap: var(--s5); align-content: start; }
-.tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 var(--s2); padding-bottom: var(--s2); border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
+.tw__all { display: grid; gap: var(--s4); align-content: start; }
+.tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 6px; padding-bottom: 6px; border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
 .tw__c h3 span { font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
-.tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 4px; }
-.tw__t { padding: 3px 6px; font: 400 .875rem/1.35 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
+.tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 2px; }
+.tw__t { padding: 2px 5px; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
 .tw__t.is-hot { background: var(--clay-100, #F9E3DD); }
 .tw__t.is-on { background: var(--color-accent-solid); color: var(--color-text-on-accent, #fff); }
 
@@ -1650,6 +1650,10 @@ html.has-buddy select { cursor: default !important; }
   .tw__all { grid-template-columns: 1fr; }
   .tw__ans { min-height: 0; }
 }
+
+
+.tw__show { display: none; margin-top: var(--s2); min-height: 44px; padding: 0 var(--s4); font: 600 .9375rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); cursor: pointer; }
+@media (max-width: 900px) { .tw__show { display: inline-flex; align-items: center; } }
 
 
 #consult .t-head { color: var(--color-text); }
@@ -5823,6 +5827,7 @@ html.has-buddy select { cursor: default !important; }
       if (from !== 'input') inp.value = t.n;
       clr.hidden = false; close();
       ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b>' + esc(t.n) + ' is one of the <span class="nums">' + D.towns[t.c].length + '</span> municipalities we build in across ' + esc(t.c) + ', one of our three counties.';
+      ans.insertAdjacentHTML('beforeend', '<button type="button" class="tw__show" data-i="' + i + '">See the route on the map</button>');
       place(i); flag.setAttribute('visibility', 'visible');
       // the route: down (or up) from the office, one rounded corner, then across to the town
       var dy = t.y - oy, dx = t.x - ox, rr = Math.min(60, Math.abs(dy) / 2, Math.abs(dx) / 2), sy = dy < 0 ? -1 : 1, sx = dx < 0 ? -1 : 1;
@@ -5848,6 +5853,13 @@ html.has-buddy select { cursor: default !important; }
       inp.value = ''; clr.hidden = true; ans.innerHTML = ''; close(); inp.focus();
     }
     k.on(clr, 'click', clear);
+    // phones: the map sits below the answer, so the answer offers the route; going there replays the drive in view
+    k.on(ans, 'click', function (e) {
+      var bt = e.target.closest('.tw__show'); if (!bt) return;
+      var mp = root.querySelector('.tw__map'), i = +bt.dataset.i;
+      if (EZ.scrollTo) EZ.scrollTo(mp); else mp.scrollIntoView();
+      k.timeout(function () { onI = -1; select(i, 'map'); }, k.motion ? 700 : 0);
+    });
 
     // map: the nearest mark within reach answers the pointer
     function nearest(e) {

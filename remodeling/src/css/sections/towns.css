@@ -43,11 +43,11 @@
 .tw__svg .flag path { stroke: var(--color-text); stroke-width: 5; }
 
 /* all 104, at once: county by county, north to south */
-.tw__all { display: grid; gap: var(--s5); align-content: start; }
-.tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 var(--s2); padding-bottom: var(--s2); border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
+.tw__all { display: grid; gap: var(--s4); align-content: start; }
+.tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 6px; padding-bottom: 6px; border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
 .tw__c h3 span { font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
-.tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 4px; }
-.tw__t { padding: 3px 6px; font: 400 .875rem/1.35 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
+.tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 2px; }
+.tw__t { padding: 2px 5px; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
 .tw__t.is-hot { background: var(--clay-100, #F9E3DD); }
 .tw__t.is-on { background: var(--color-accent-solid); color: var(--color-text-on-accent, #fff); }
 
@@ -58,3 +58,7 @@
   .tw__all { grid-template-columns: 1fr; }
   .tw__ans { min-height: 0; }
 }
+
+/* Phase 6: on phones the answer offers the route (the map sits below it); the visitor chooses to go and see it */
+.tw__show { display: none; margin-top: var(--s2); min-height: 44px; padding: 0 var(--s4); font: 600 .9375rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); cursor: pointer; }
+@media (max-width: 900px) { .tw__show { display: inline-flex; align-items: center; } }

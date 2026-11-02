@@ -63,6 +63,7 @@
       if (from !== 'input') inp.value = t.n;
       clr.hidden = false; close();
       ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b>' + esc(t.n) + ' is one of the <span class="nums">' + D.towns[t.c].length + '</span> municipalities we build in across ' + esc(t.c) + ', one of our three counties.';
+      ans.insertAdjacentHTML('beforeend', '<button type="button" class="tw__show" data-i="' + i + '">See the route on the map</button>');
       place(i); flag.setAttribute('visibility', 'visible');
       // the route: down (or up) from the office, one rounded corner, then across to the town
       var dy = t.y - oy, dx = t.x - ox, rr = Math.min(60, Math.abs(dy) / 2, Math.abs(dx) / 2), sy = dy < 0 ? -1 : 1, sx = dx < 0 ? -1 : 1;
@@ -88,6 +89,13 @@
       inp.value = ''; clr.hidden = true; ans.innerHTML = ''; close(); inp.focus();
     }
     k.on(clr, 'click', clear);
+    // phones: the map sits below the answer, so the answer offers the route; going there replays the drive in view
+    k.on(ans, 'click', function (e) {
+      var bt = e.target.closest('.tw__show'); if (!bt) return;
+      var mp = root.querySelector('.tw__map'), i = +bt.dataset.i;
+      if (EZ.scrollTo) EZ.scrollTo(mp); else mp.scrollIntoView();
+      k.timeout(function () { onI = -1; select(i, 'map'); }, k.motion ? 700 : 0);
+    });
 
     // map: the nearest mark within reach answers the pointer
     function nearest(e) {

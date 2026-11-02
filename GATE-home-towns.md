@@ -41,8 +41,8 @@
 2. **Cycle 1:** "Our office" sat west of the office, so westward routes (Doral) drove across it. Moved east, to the ocean side. Re-rendered: clear.
 
 ## Defects remaining (honest)
-- **Phone order:** after a search, the map (and the van) sit below the answer. The answer carries the result; the drive happens off-screen.
-- **List density:** at 1440 the list is taller than the map.
+- ~~**Phone order:** after a search, the map (and the van) sit below the answer. The answer carries the result; the drive happens off-screen.~~ **Fixed in Phase 6:** on phones the answer offers "See the route on the map"; the visitor chooses to go, the map comes into view and the drive replays there. Measured at 390: map 152–675 of 844, van at Doral (`qa/finalize/phase6/towns-phone-route.png`). No auto-scroll.
+- ~~**List density:** at 1440 the list is taller than the map.~~ **Fixed in Phase 6:** tighter type and rhythm (13px names). Measured: list 724 vs map 702 at 1440 (was 883); at 1280 it is still taller (879 vs 702, was 1015).
 
 ## Skills applied
 - **Interaction:** Bruno (explorable with guards); WAI-ARIA combobox (S1018); BANK Q576 (areas answer on hover, degrade to tap).
