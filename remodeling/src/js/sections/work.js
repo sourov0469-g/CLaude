@@ -1,10 +1,16 @@
-/* work: v1 plan-room push grid (R10 + Q157 Flip), v2 3D turntable (Q88), v3 seamless belts (Q161 + 364).
-   Project titles are the firm's own (data/projects.json from FACTS.md). */
+/* FINALIZE · Home 7 · Projects. Titles are the firm's own (data/projects.json from FACTS.md); photos are the firm's own.
+   V1 · two rows of hung frames, opposite directions (GSAP seamless loop). Each row's speed is ONE smoothed value: the
+        pointer on a row slows it to a crawl and sets the frame under it level; scroll quickens both a little; as the
+        section leaves, the rows decelerate to rest [PHASE1-PLAN row 7 OUT]. A pause control holds them (WCAG 2.2.2).
+        A focused frame stops its row and glides into view (focus not obscured). Reduced motion: two still strips.
+   V2 · the job binder: a two-faced leaf turns at the spine (front: this photograph; back: the next job sheet), driven by
+        the buttons, the arrow keys, or a drag on the page corner (release past a third completes, before it the leaf
+        settles back). On first view the cover opens. Phones and reduced motion: the pages swap without the leaf. */
 (function () {
   var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
   function data() { return (window.__DATA || {}).projects || []; }
-  // Phase 5 new versions: plan-room numbering (P-01 is the same room in every version). Two photos whose subject does not
-  // match their title (k-walnut-marble shows a hallway, k-emerald-shaker a laundry run; owner item) are left out here.
+  // plan-room numbering (P-01 is the same room in both versions); two photos whose subject does not match their title
+  // (k-walnut-marble shows a hallway, k-emerald-shaker a laundry run; owner item) stay out
   var ORDER = ['k-navy-shaker', 'b-black-marble', 'w-farmhouse', 'k-walnut-marble', 'b-polished-concrete', 'o-waterfront', 'k-emerald-shaker', 'b-spa-guest', 'k-chef', 'b-fluted-vanity', 'r-openplan', 'k-white-shaker', 'k-turquoise', 'k-gray-shaker', 'k-navy-white', 'k-brass-hood', 'k-stone-island', 'b-emerald', 'b-champagne', 'b-copper', 'b-floating-soak', 'b-sea-glass', 'b-navy-niche', 'b-white-marble', 'b-multi-brass', 'w-bath-whole'];
   var HOLD = ['k-walnut-marble', 'k-emerald-shaker'];
   function listed() {
@@ -15,801 +21,214 @@
   }
   function viewerList(L) { return L.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; }); }
   function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  var TILT = [-1.6, 1.1, -.7, 1.4, -1.2, .8, -.4, 1.7, -1, .6, 1.3, -1.5];
 
   EZ.section('work', {
-    /* slot 3 · Phase 5 improved version of b4 */
-    3: { init: function (root, k) {
-      var D = data(), stage = root.querySelector('.w2x__stage'), track = root.querySelector('.w2x__track');
-      var arc = root.querySelector('.w2x__arc'), n = root.querySelector('.w2x__n'), t = root.querySelector('.w2x__t');
-      track.innerHTML = D.map(function (d, i) {
-        return '<figure class="w2x__card" data-i="' + i + '"><img src="' + EZ.img(d.k) + '" width="' + d.w + '" height="' + d.h + '" alt="' + d.t.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + ', an Elbaz project"' + (i > 3 ? ' loading="lazy"' : '') + '></figure>';
-      }).join('');
-      var cards = Array.prototype.slice.call(track.querySelectorAll('.w2x__card'));
-      // the protractor: ticks across 56 degrees, a needle marks the turn
-      var ticks = '';
-      for (var a = -28; a <= 28; a += 2) { var r = a * Math.PI / 180, big = a % 14 === 0; ticks += '<path class="' + (big ? 'tkm' : 'tk') + '" d="M' + (400 + Math.sin(r) * 330).toFixed(1) + ' ' + (360 - Math.cos(r) * 330).toFixed(1) + 'L' + (400 + Math.sin(r) * (big ? 312 : 320)).toFixed(1) + ' ' + (360 - Math.cos(r) * (big ? 312 : 320)).toFixed(1) + '"/>'; }
-      arc.innerHTML = '<path class="arc" d="M' + (400 - Math.sin(.49) * 330).toFixed(1) + ' ' + (360 - Math.cos(.49) * 330).toFixed(1) + 'A330 330 0 0 1 ' + (400 + Math.sin(.49) * 330).toFixed(1) + ' ' + (360 - Math.cos(.49) * 330).toFixed(1) + '"/>' + ticks + '<path class="ndl" d="M400 24 l-6 -14 h12 z"/>';
-      var ndl = arc.querySelector('.ndl');
-      k.add(function () { track.innerHTML = ''; arc.innerHTML = ''; stage.style.removeProperty('--tint'); });
-      var cur = -1, MAXROT = 28, DEPTH = 140, MINS = .92;
-      function frame() {
-        var tr = track.getBoundingClientRect(), cx = tr.left + tr.width / 2, best = 0, bd = 1e9;
-        cards.forEach(function (c, i) {
-          var r = c.getBoundingClientRect(), d = (r.left + r.width / 2 - cx) / r.width;
-          if (Math.abs(d) < bd) { bd = Math.abs(d); best = i; }
-          if (k.motion) {
-            var dd = EZ.clamp(d, -2.5, 2.5);
-            c.style.transform = 'translateZ(' + (-Math.abs(dd) * DEPTH).toFixed(1) + 'px) rotateY(' + (-EZ.clamp(dd, -1, 1) * MAXROT).toFixed(2) + 'deg) scale(' + Math.max(MINS, 1 - Math.abs(dd) * .04).toFixed(3) + ')';
-          }
-          c.style.opacity = Math.abs(d) > 2.6 ? .4 : 1;
-        });
-        // needle follows the fractional turn of the centre card
-        var cr = cards[best].getBoundingClientRect(), frac = EZ.clamp((cr.left + cr.width / 2 - cx) / cr.width, -1, 1);
-        ndl.setAttribute('transform', 'rotate(' + (-frac * MAXROT).toFixed(2) + ' 400 360)');
-        if (best !== cur) {
-          cur = best;
-          var d = D[best];
-          n.textContent = (best < 9 ? '0' : '') + (best + 1) + ' / ' + D.length;
-          t.textContent = d.t;
-          if (k.motion) k.ctx.add(function () { gsap.to(stage, { '--tint': d.tint, duration: .5, ease: 'power2.out', overwrite: 'auto' }); });
-          else stage.style.setProperty('--tint', d.tint);
-        }
-      }
-      var pend = false;
-      k.on(track, 'scroll', function () { if (!pend) { pend = true; requestAnimationFrame(function () { pend = false; frame(); }); } }, { passive: true });
-      k.ro(track, frame);
-      frame();
-      function go(i) { i = EZ.clamp(i, 0, cards.length - 1); var c = cards[i]; track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2, behavior: k.motion ? 'smooth' : 'auto' }); }
-      k.on(root.querySelector('.w2x__prev'), 'click', function () { go(cur - 1); });
-      k.on(root.querySelector('.w2x__next'), 'click', function () { go(cur + 1); });
-      k.on(track, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); } });
-      // mouse drag-to-scroll (touch and trackpads scroll natively)
-      if (k.fine) {
-        var down = null;
-        // [AUDIT-01 F7 loser V2] a drag carries its energy: the release velocity projects 300ms ahead and the nearest card there wins
-        k.on(track, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, l: track.scrollLeft, moved: false, v: 0, px: e.clientX, pt: e.timeStamp }; track.style.scrollSnapType = 'none'; track.setPointerCapture(e.pointerId); });
-        k.on(track, 'pointermove', function (e) {
-          if (!down) return; var dx = e.clientX - down.x; if (Math.abs(dx) > 5) down.moved = true; track.scrollLeft = down.l - dx;
-          var dt = e.timeStamp - down.pt; if (dt > 0) { down.v = .8 * ((e.clientX - down.px) / dt) + .2 * down.v; down.px = e.clientX; down.pt = e.timeStamp; }
-        });
-        function up() {
-          if (!down) return;
-          var proj = track.scrollLeft - down.v * 300 + track.clientWidth / 2, best = cur, bd = Infinity;
-          down = null; track.style.scrollSnapType = '';
-          cards.forEach(function (c, i) { var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - proj); if (d < bd) { bd = d; best = i; } });
-          go(best);
-        }
-        k.on(track, 'pointerup', up); k.on(track, 'pointercancel', up);
-        k.add(function () { track.style.scrollSnapType = ''; });
-      }
-      EZ.reveal(k, root.querySelectorAll('.work__head > *'));
-    } },
-
-    /* slot 2 · Phase 5 improved version of b3 */
-    2: { init: function (root, k) {
-      var grid = root.querySelector('.w1x__grid');
-      var items = Array.prototype.slice.call(root.querySelectorAll('.w1x__it'));
-      var fbtns = Array.prototype.slice.call(root.querySelectorAll('.w1x__f'));
-      var more = root.querySelector('.w1x__more'), moreLabel = more.querySelector('.btn__label');
-      var filter = 'all', all = false, open = null;
-      // [AUDIT-01 F7 loser V1] label truth: the first chip says what it shows, featured 12 until all 26 are dealt
-      var chipLbl = fbtns[0].querySelector('.btn__label'), nFeat = items.filter(function (it) { return it.dataset.feat; }).length;
-      function chip() { chipLbl.innerHTML = all ? 'All <span class="nums">' + items.length + '</span>' : 'Featured <span class="nums">' + nFeat + '</span>'; }
-      chip();
-      EZ.reveal(k, root.querySelectorAll('.work__head > *'));
-      function flip(fn) {
-        if (!k.motion) { fn(); return; }
-        var state = Flip.getState(items.concat([more]));
-        fn();
-        k.ctx.add(function () {
-          Flip.from(state, { duration: .45, ease: 'power3.inOut', absolute: false, scale: false, nested: true,
-            onEnter: function (els) { return gsap.fromTo(els, { autoAlpha: 0, scale: .92 }, { autoAlpha: 1, scale: 1, duration: .3, ease: 'power3.out' }); },
-            onLeave: function (els) { return gsap.to(els, { autoAlpha: 0, duration: .2 }); } });
-        });
-      }
-      function apply() {
-        items.forEach(function (it) {
-          var show = (filter === 'all' || it.dataset.c === filter) && (all || filter !== 'all' || it.dataset.feat);
-          it.hidden = !show;
-        });
-        more.hidden = filter !== 'all';
-      }
-      function setOpen(it) {
-        if (open) { open.classList.remove('is-open'); open.querySelector('.w1x__sheet').setAttribute('aria-expanded', 'false'); }
-        open = it && it !== open ? it : null;
-        if (open) { open.classList.add('is-open'); open.querySelector('.w1x__sheet').setAttribute('aria-expanded', 'true'); }
-      }
-      apply();
-      fbtns.forEach(function (b) {
-        k.on(b, 'click', function () {
-          if (b.dataset.f === filter) return;
-          filter = b.dataset.f;
-          fbtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-          flip(function () { setOpen(null); apply(); });
-        });
-      });
-      k.on(more, 'click', function () {
-        all = !all;
-        more.setAttribute('aria-expanded', all ? 'true' : 'false');
-        moreLabel.textContent = all ? 'Show the featured twelve' : 'Show all ' + items.length + ' projects';
-        chip();
-        flip(apply);
-      });
-      items.forEach(function (it) {
-        var sheet = it.querySelector('.w1x__sheet');
-        k.on(sheet, 'click', function () {
-          flip(function () { setOpen(it); });
-          if (open) { var top = it.getBoundingClientRect().top; if (top < 80 || top > innerHeight * .5) k.timeout(function () { EZ.scrollTo(it); }, k.motion ? 620 : 0); }
-        });
-      });
-      k.on(root, 'keydown', function (e) { if (e.key === 'Escape' && open) { var o = open; flip(function () { setOpen(null); }); o.querySelector('.w1x__sheet').focus(); } });
-      k.add(function () { setOpen(null); items.forEach(function (it) { it.hidden = false; }); more.hidden = false; fbtns.forEach(function (x, i) { x.setAttribute('aria-pressed', i ? 'false' : 'true'); }); moreLabel.textContent = 'Show all ' + items.length + ' projects'; more.setAttribute('aria-expanded', 'false'); all = false; chip(); });
-      if (k.motion) gsap.from(items.filter(function (it) { return !it.hidden; }), { y: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .03, scrollTrigger: { trigger: grid, start: 'top 85%', once: true } });
-    } },
-
-    /* slot 1 · Phase 5 improved version of b2 */
     1: { init: function (root, k) {
-      var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
-      var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
-      // the site camera fires once per opened photo (a 260ms flash), then rests
-      function flash() {
-        if (!k.motion) return;
-        var b = root.querySelectorAll('.wbx__burst path'), fl = root.querySelector('.wbx__flash');
-        gsap.timeline().fromTo(b, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .14, ease: 'power2.out' }).to(b, { opacity: 0, duration: .12 })
-          .fromTo(fl, { fill: EZ.c('--color-art-fill') }, { fill: EZ.c('--color-art-accent'), duration: .08, yoyo: true, repeat: 1 }, 0);
-      }
-      var belts = Array.prototype.slice.call(root.querySelectorAll('.wbx__belt'));
-      var hold = root.querySelector('.wbx__hold');
-      var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
-      // project codes follow the plan-room numbering of version 1 (P-01 is the same room everywhere)
-      var CODE = {};
-      document.querySelectorAll('.work1__sheet').forEach(function (sh, i) { var im = sh.querySelector('img[data-img]'); if (im) CODE[im.dataset.img] = 'P-' + (i < 9 ? '0' : '') + (i + 1); });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wbx__foot'));
-      var loops = [];
-      belts.forEach(function (belt, bi) {
-        var track = belt.querySelector('.wbx__track');
-        var list = P.filter(function (p) { return belt.dataset.c.indexOf(p.c) > -1; });
-        track.innerHTML = list.map(function (p) {
-          var code = CODE[p.key] || ('P-' + (p.no < 9 ? '0' : '') + (p.no + 1));
-          return '<button type="button" class="wbx__tile" data-i="' + p.no + '" data-rx="~t:' + code + '/peek/flash/tl" style="aspect-ratio:' + p.w + ' / ' + p.h + '" aria-label="' + p.title.replace(/"/g, '&quot;') + ', ' + CAT[p.c] + ', open large">' +
-            '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"><span class="wbx__cap" aria-hidden="true"><b>' + CAT[p.c] + '</b>' + p.title.replace(/</g, '') + '</span></button>';
+      var L = listed(), all = viewerList(L), hold = root.querySelector('.pj__hold'), label = hold.querySelector('.btn__label');
+      var rows = Array.prototype.slice.call(root.querySelectorAll('.pj__row'));
+      rows.forEach(function (row) {
+        var tr = row.querySelector('.pj__track'), n = 0;
+        tr.innerHTML = L.map(function (p, i) {
+          if (row.dataset.c.indexOf(p.c) < 0) return '';
+          var t = TILT[(n++) % TILT.length];
+          return '<button type="button" class="pj__f" data-i="' + i + '" style="--tilt:' + t + 'deg;--tiltn:' + (t / 1.7).toFixed(2) + '" aria-label="' + esc(p.title) + ', ' + CAT[p.c] + ', open large">' +
+            '<span class="pj__hang"><span class="pj__wire" aria-hidden="true"><svg viewBox="0 0 100 26" preserveAspectRatio="none"><path vector-effect="non-scaling-stroke" d="M10 26 L50 1 L90 26"/></svg></span>' +
+            '<span class="pj__fr"><span class="pj__lvl" aria-hidden="true"><span class="pj__bub"></span></span><img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"></span></span>' +
+            '<span class="pj__cap" aria-hidden="true"><span class="pj__code">' + p.code + ' &middot; ' + CAT[p.c] + '</span><span class="pj__t">' + esc(p.title) + '</span></span></button>';
         }).join('');
-        k.on(track, 'click', function (e) { var t = e.target.closest('.wbx__tile'); if (t) { flash(); EZ.viewer.open(all, +t.dataset.i, t); } });
+        k.on(tr, 'click', function (e) { var f = e.target.closest('.pj__f'); if (f) EZ.viewer.open(all, +f.dataset.i, f.querySelector('img')); });
       });
-      k.add(function () { belts.forEach(function (b) { b.querySelector('.wbx__track').innerHTML = ''; b.classList.remove('is-run'); }); root.classList.remove('is-static'); });
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; k.add(function () { hold.hidden = false; }); return; }
+      k.add(function () { rows.forEach(function (r) { r.querySelector('.pj__track').innerHTML = ''; }); root.classList.remove('is-static'); hold.hidden = false; });
+      EZ.reveal(k, root.querySelectorAll('.pj__head > *, .pj__foot'));
+      if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; return; }
 
-      var held = false, inView = false, touched = false;
-      var builtW = 0;
-      function build() {
-        // a rebuild keeps where each belt was, and starts from clean transforms (stale xPercent overlaps the tiles)
-        var prev = loops.map(function (l) { return { p: l.tl.progress(), slow: l.slow }; });
-        loops.forEach(function (l) { l.tl.kill(); });
-        builtW = root.querySelector('.wbx__belts').clientWidth;
-        loops = belts.map(function (belt, bi) {
-          var items = belt.querySelectorAll('.wbx__tile');
-          gsap.set(items, { clearProps: 'transform' });
-          var gap = parseFloat(getComputedStyle(belt.querySelector('.wbx__track')).columnGap) || 16;
-          var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .55, paddingRight: gap });
-          // a photo is already cut by the left edge at rest [BANK 364 peek offset]
-          if (prev[bi]) tl.progress(prev[bi].p); else tl.time(tl.duration() * (bi ? .37 : .13));
-          if (bi) tl.reversed(true);
-          return { tl: tl, belt: belt, slow: prev[bi] ? prev[bi].slow : { v: 1 } };
-        });
-        sync();
-      }
-      function sync() {
-        loops.forEach(function (l) {
-          var ts = held ? 0 : l.slow.v;
-          l.tl.timeScale(Math.max(ts, .0001));
-          if (inView && !held) l.tl.paused(false); else l.tl.paused(true);
-          // the tread under the belt runs only while that belt visibly moves
-          l.belt.classList.toggle('is-run', inView && !held && l.slow.v > .05);
-        });
-      }
-      // each tile's image decodes before the loop measures widths
-      var imgs = root.querySelectorAll('.wbx__tile img'), left = imgs.length;
-      imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
-      build();
-      k.ro(root.querySelector('.wbx__belts'), function () { if (root.querySelector('.wbx__belts').clientWidth !== builtW) build(); });
-      k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
-      loops.forEach(function (l, i) {
-        // first contact (hover or press) pauses that belt with a 200ms ramp and parks the other; Run the belts restarts them
-        function contact(e) {
-          if (e.type === 'pointerenter' && e.pointerType !== 'mouse') return;
-          gsap.to(loops[i].slow, { v: 0, duration: .2, ease: 'power1.out', onUpdate: sync, onComplete: park });
-        }
-        function park() {
-          if (held) return;
-          touched = true; held = true;
-          hold.setAttribute('aria-pressed', 'true'); hold.querySelector('.btn__label').textContent = 'Run the belts';
-          loops.forEach(function (o) { o.slow.v = 1; }); sync();
-        }
-        k.on(l.belt, 'pointerenter', contact);
-        k.on(l.belt, 'pointerdown', contact);
-        // a focused photo must be in view (WCAG focus not obscured): the belt stops and glides that photo to its centre
-        k.on(l.belt, 'focusin', function (e) {
-          loops[i].slow.v = 0; sync();
-          var t = e.target.closest('.wbx__tile'); if (!t) return;
-          var br = l.belt.getBoundingClientRect(), tr = t.getBoundingClientRect();
-          var dx = (tr.left + tr.width / 2) - (br.left + br.width / 2), tl = loops[i].tl;
-          if (Math.abs(dx) < 8) return;
-          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
-          gsap.to(tl, { totalTime: tl.totalTime() + dx / 55, duration: k.motion ? .4 : 0, ease: 'power3.inOut', overwrite: true });
-        });
-        k.on(l.belt, 'focusout', function (e) { if (!l.belt.contains(e.relatedTarget) && !held) { loops[i].slow.v = 1; sync(); } });
-      });
-      k.on(hold, 'click', function () {
-        held = !held;
-        if (!held) loops.forEach(function (o) { o.slow.v = 1; });
-        hold.setAttribute('aria-pressed', held ? 'true' : 'false');
-        hold.querySelector('.btn__label').textContent = held ? 'Run the belts' : 'Hold the belts';
-        sync();
-      });
-      k.add(function () { hold.setAttribute('aria-pressed', 'false'); hold.querySelector('.btn__label').textContent = 'Hold the belts'; });
-      k.io(root.querySelector('.wbx__belts'), function (en) { inView = en.isIntersecting; sync(); }, { threshold: 0 });
-      gsap.from(belts, { x: function (i) { return i ? -40 : 40; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.wbx__belts'), start: 'top 85%', once: true } });
-    } },
-
-    /* slot 4 · Phase 5 new · The floor plan: three rooms on a drawn plan; the chosen room fills with the accent tint,
-       its door swings are redrawn, and the photo strip switches to that kind of project */
-    4: { init: function (root, k) {
-      var L = listed(), rooms = Array.prototype.slice.call(root.querySelectorAll('.wfp__room'));
-      var thumbs = root.querySelector('.wfp__thumbs'), img = root.querySelector('.wfp__img');
-      var code = root.querySelector('.wfp__code'), tt = root.querySelector('.wfp__t'), open = root.querySelector('.wfp__open');
-      var set = [], cur = 0;
-      rooms.forEach(function (r) {
-        var n = L.filter(function (p) { return p.c === r.dataset.c; }).length;
-        r.querySelector('.wfp__n').textContent = n + ' shown';
-        r.setAttribute('aria-label', r.querySelector('.wfp__name').textContent + ', ' + n + ' project photos');
-      });
-      function show(i, anim) {
-        cur = i; var p = set[i];
-        img.src = EZ.img(p.key); img.width = p.w; img.height = p.h; img.alt = p.title + ', an Elbaz project';
-        code.textContent = p.code; tt.textContent = p.title;
-        thumbs.querySelectorAll('.wfp__th').forEach(function (t, j) { t.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
-        if (anim && k.motion) k.ctx.add(function () { gsap.fromTo(img, { autoAlpha: .35, scale: 1.015 }, { autoAlpha: 1, scale: 1, duration: .3, ease: 'power2.out', overwrite: true }); });
-      }
-      function pick(c, anim) {
-        set = L.filter(function (p) { return p.c === c; });
-        rooms.forEach(function (r) { r.setAttribute('aria-pressed', r.dataset.c === c ? 'true' : 'false'); });
-        thumbs.innerHTML = set.map(function (p, i) {
-          return '<button type="button" class="wfp__th" aria-pressed="false" data-i="' + i + '" data-rx="native:plan-thumb" aria-label="' + esc(p.title) + '"><img src="' + EZ.img(p.key) + '" alt="" width="' + p.w + '" height="' + p.h + '" loading="lazy" decoding="async"></button>';
-        }).join('');
-        if (EZ.bindReactions) EZ.bindReactions(thumbs, k);
-        show(0, anim);
-        if (anim && k.motion) k.ctx.add(function () {
-          // the chosen room is drawn again, line by line, like a plan being inked
-          gsap.fromTo(root.querySelectorAll('.wfp__room[aria-pressed="true"] .wfp__ln, .wfp__room[aria-pressed="true"] .wfp__deck'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .45, ease: 'power2.out', stagger: .05 });
-          gsap.from(thumbs.children, { y: 10, autoAlpha: 0, duration: .25, ease: 'power2.out', stagger: .025 });
-        });
-      }
-      rooms.forEach(function (r) { k.on(r, 'click', function () { if (r.getAttribute('aria-pressed') !== 'true') pick(r.dataset.c, true); }); });
-      k.on(thumbs, 'click', function (e) { var t = e.target.closest('.wfp__th'); if (t) show(+t.dataset.i, true); });
-      k.on(open, 'click', function () { EZ.viewer.open(viewerList(set), cur, open); });
-      pick('k', false);
-      k.add(function () { thumbs.innerHTML = ''; img.removeAttribute('src'); code.textContent = ''; tt.textContent = ''; rooms.forEach(function (r) { r.setAttribute('aria-pressed', r.dataset.c === 'k' ? 'true' : 'false'); }); });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wfp__plan, .wfp__view'));
-    } },
-
-    /* slot 5 · Phase 5 new · The gallery wall: each frame hangs a few degrees off; hover swings it the other way,
-       a pick brings a spirit level down onto it, the bubble settles, the frame sets true and then opens large */
-    5: { init: function (root, k) {
-      var L = listed(), wall = root.querySelector('.wgh__wall'), cnt = root.querySelector('.wgh__count'), all = viewerList(L);
-      var per = k.mobile ? 6 : 9, walls = Math.ceil(L.length / per), w = 0, level = {};
-      var TILT = [-3.5, 2.5, -1.5, 3, -2.5, 1.5, -3, 2, -1];
-      var WIRE = '<svg class="wgh__wire" viewBox="0 0 120 60" aria-hidden="true" focusable="false"><path d="M60 5 L16 58 M60 5 L104 58"/><circle cx="60" cy="5" r="4.5"/></svg>';
-      var LV = '<svg class="wgh__lv" viewBox="0 0 120 28" aria-hidden="true" focusable="false"><rect class="wgh__lvl-b" x="1" y="1" width="118" height="26" rx="4"/><rect class="wgh__lvl-v" x="42" y="7" width="36" height="14" rx="7"/><circle class="wgh__lvl-bub" cx="60" cy="14" r="5"/><path class="wgh__lvl-m" d="M54 7 V21 M66 7 V21"/></svg>';
-      root.querySelector('.wgh__of').textContent = L.length;
-      function render(anim) {
-        wall.innerHTML = L.slice(w * per, w * per + per).map(function (p, j) {
-          var i = w * per + j;
-          return '<li class="wgh__it' + (level[p.key] ? ' is-level' : '') + '" style="--tilt:' + (k.motion ? TILT[i % 9] : 0) + 'deg">' + WIRE + LV +
-            '<button type="button" class="wgh__fr" data-i="' + i + '" data-rx="native:frame-level" aria-label="' + esc(p.title) + ', set level and open large"><img src="' + EZ.img(p.key) + '" alt="" width="' + p.w + '" height="' + p.h + '" loading="lazy" decoding="async"></button>' +
-            '<p class="wgh__cap" aria-hidden="true"><b>' + p.code + '</b>' + esc(p.title) + '</p></li>';
-        }).join('');
-        if (EZ.bindReactions) EZ.bindReactions(wall, k);
-        if (anim && k.motion) k.ctx.add(function () { gsap.from(wall.children, { y: -24, autoAlpha: 0, duration: .35, ease: 'back.out(1.6)', stagger: .03 }); });
-      }
-      function setLevel(btn) {
-        var li = btn.parentNode, i = +btn.dataset.i, p = L[i], lv = li.querySelector('.wgh__lv'), bub = lv.querySelector('.wgh__lvl-bub');
-        function done() { EZ.viewer.open(all, i, btn); }
-        if (!level[p.key]) { level[p.key] = 1; cnt.textContent = Object.keys(level).length; }
-        if (!k.motion || li.classList.contains('is-level')) { li.classList.add('is-level'); done(); return; }
-        var t0 = TILT[i % 9];
-        k.ctx.add(function () {
-          gsap.timeline({ onComplete: done })
-            .fromTo(lv, { autoAlpha: 0, y: -18, rotation: t0 }, { autoAlpha: 1, y: 0, duration: .18, ease: 'power2.out' })
-            .add(function () { li.classList.add('is-level'); })
-            .to(lv, { rotation: 0, duration: .45, ease: 'elastic.out(1, .55)' }, '<')
-            .fromTo(bub, { attr: { cx: 60 + t0 * 5 } }, { attr: { cx: 60 }, duration: .45, ease: 'elastic.out(1, .5)' }, '<')
-            .to(lv, { autoAlpha: 0, duration: .15 }, '+=.05');
-        });
-      }
-      k.on(wall, 'click', function (e) { var b = e.target.closest('.wgh__fr'); if (b) setLevel(b); });
-      k.on(root.querySelector('.wgh__prev'), 'click', function () { w = (w - 1 + walls) % walls; render(true); });
-      k.on(root.querySelector('.wgh__next'), 'click', function () { w = (w + 1) % walls; render(true); });
-      render(false);
-      k.add(function () { wall.innerHTML = ''; cnt.textContent = '0'; });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wgh__bar'));
-// the frames' tilt lives in CSS on the button, so entrances move the hanging item, never the frame itself
-      if (k.motion) gsap.from(wall.children, { y: -20, autoAlpha: 0, duration: .5, ease: 'back.out(1.8)', stagger: .04, scrollTrigger: { trigger: wall, start: 'top 85%', once: true } });
-    } },
-
-    /* slot 6 · Phase 5 new · The tile bond: sixteen photo tiles (eight on a phone) on an orange grout bed;
-       stack bond, running bond (with its cut pieces at the wall) and basket weave, each tile glides to its new place */
-    6: { init: function (root, k) {
-      var floor = root.querySelector('.wbd__floor'), btns = Array.prototype.slice.call(root.querySelectorAll('.wbd__b'));
-      var L = listed(), bond = 'stack', cols = 0, set = [], tiles = [], cuts = [];
-      var cap = document.createElement('p'); cap.className = 'wbd__cap'; cap.setAttribute('aria-live', 'polite'); floor.parentNode.insertBefore(cap, floor.nextSibling);
-      var CUT = '<span class="wbd__cut" aria-hidden="true"><svg viewBox="0 0 40 40" preserveAspectRatio="none"><path d="M0 40 L40 0 M-20 40 L20 0 M20 40 L60 0"/></svg></span>';
-      function rects(W) {
-        var w = W / cols, h = w / 2, out = [], cut = [];
-        set.forEach(function (p, i) {
-          var r = Math.floor(i / cols), c = i % cols;
-          if (bond === 'stack') out.push([c * w, r * h, w, h]);
-          else if (bond === 'run') out.push([c * w + (r % 2 ? w / 2 : 0), r * h, w, h]);
-          else {
-            var q = Math.floor(i / 2), t = i % 2, R = Math.floor(q / cols), C = q % cols;
-            out.push((R + C) % 2 ? [C * w + t * h, R * w, h, w] : [C * w, R * w + t * h, w, h]);
-          }
-        });
-        if (bond === 'run') { cut.push([0, h, w / 2, h]); cut.push([0, 3 * h, w / 2, h]); }
-        return { t: out, c: cut, H: 4 * h };
-      }
-      function lay(anim) {
-        var W = floor.clientWidth, R = rects(W);
-        floor.style.height = R.H + 'px';
-        tiles.forEach(function (t, i) {
-          var r = R.t[i], to = { x: r[0], y: r[1], width: r[2], height: r[3] };
-          if (anim && k.motion) gsap.to(t, Object.assign(to, { duration: .6, ease: 'power3.inOut', delay: i * .02, overwrite: true })); else gsap.set(t, to);
-        });
-        cuts.forEach(function (c, i) {
-          var r = R.c[i];
-          if (r) gsap.set(c, { x: r[0], y: r[1], width: r[2], height: r[3] });
-          gsap.to(c, { autoAlpha: r ? 1 : 0, duration: anim && k.motion ? .3 : 0, delay: anim && r ? .45 : 0 });
-        });
-      }
-      function build() {
-        cols = floor.clientWidth < 640 ? 2 : 4;
-        set = L.slice(0, cols * 4);
-        floor.innerHTML = CUT + CUT + set.map(function (p, i) {
-          return '<button type="button" class="wbd__t" data-i="' + i + '" data-rx="native:bond-tile" aria-label="' + esc(p.title) + ', open large"><img src="' + EZ.img(p.key) + '" alt="" width="' + p.w + '" height="' + p.h + '" loading="lazy" decoding="async"></button>';
-        }).join('');
-        tiles = Array.prototype.slice.call(floor.querySelectorAll('.wbd__t')); cuts = Array.prototype.slice.call(floor.querySelectorAll('.wbd__cut'));
-        if (EZ.bindReactions) EZ.bindReactions(floor, k);
-        lay(false);
-      }
-      function say(i) { var p = set[i]; cap.innerHTML = '<b>' + p.code + '</b>' + esc(p.title); }
-      btns.forEach(function (b) {
-        k.on(b, 'click', function () {
-          if (b.dataset.b === bond) return;
-          bond = b.dataset.b;
-          btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-          lay(true);
-        });
-      });
-      k.on(floor, 'click', function (e) { var t = e.target.closest('.wbd__t'); if (t) EZ.viewer.open(viewerList(set), +t.dataset.i, t); });
-      k.on(floor, 'pointerover', function (e) { var t = e.target.closest('.wbd__t'); if (t) say(+t.dataset.i); });
-      k.on(floor, 'focusin', function (e) { var t = e.target.closest('.wbd__t'); if (t) say(+t.dataset.i); });
-      build(); say(0);
-      var lastW = floor.clientWidth;
-      k.ro(floor, function () { var W = floor.clientWidth; if (W === lastW) return; lastW = W; if ((W < 640 ? 2 : 4) !== cols) build(); else lay(false); });
-      k.add(function () { floor.innerHTML = ''; floor.style.height = ''; if (cap.parentNode) cap.parentNode.removeChild(cap); btns.forEach(function (x, i) { x.setAttribute('aria-pressed', i ? 'false' : 'true'); }); });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wbd__bonds'));
-      if (k.motion) gsap.from(floor, { clipPath: 'inset(0 100% 0 0)', duration: .6, ease: 'power2.inOut', scrollTrigger: { trigger: floor, start: 'top 85%', once: true } });
-    } },
-
-    /* slot 7 · Phase 5 new · The plumb line: the index of projects by room type; the bob drops to the row under the pointer
-       or focus, the string follows it, and the photo beside swaps; arrow keys walk the list */
-    7: { init: function (root, k) {
-      var L = listed(), ol = root.querySelector('.wix__ol'), list = root.querySelector('.wix__list');
-      var str = root.querySelector('.wix__str'), bob = root.querySelector('.wix__bob');
-      var img = root.querySelector('.wix__img'), code = root.querySelector('.wix__code'), tt = root.querySelector('.wix__t');
-      var G = [['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole home and outdoor']], F = [];
-      ol.innerHTML = G.map(function (g) {
-        var rows = L.filter(function (p) { return p.c === g[0]; });
-        return '<li><p class="wix__h">' + g[1] + '</p><ol class="wix__sub">' + rows.map(function (p) {
-          F.push(p);
-          return '<li><button type="button" class="wix__row" data-i="' + (F.length - 1) + '" data-rx="native:index-row"><b class="nums">' + p.code + '</b><span>' + esc(p.title) + '</span></button></li>';
-        }).join('') + '</ol></li>';
-      }).join('');
-      if (EZ.bindReactions) EZ.bindReactions(ol, k);
-      var rows = Array.prototype.slice.call(ol.querySelectorAll('.wix__row')), cur = -1, pos = { y: 0 };
-      function draw() { str.setAttribute('d', 'M20 0 V' + Math.max(0, pos.y - 14).toFixed(1)); bob.setAttribute('transform', 'translate(20 ' + pos.y.toFixed(1) + ')'); }
-      function rowY(i) { var lr = list.getBoundingClientRect(), rr = rows[i].getBoundingClientRect(); return rr.top - lr.top + rr.height / 2; }
-      function set(i, anim) {
-        if (i === cur) return;
-        cur = i; var p = F[i];
-        rows.forEach(function (r, j) { r.classList.toggle('is-on', j === i); });
-        img.src = EZ.img(p.key); img.width = p.w; img.height = p.h; img.alt = p.title + ', an Elbaz project';
-        code.textContent = p.code; tt.textContent = p.title;
-        var y = rowY(i);
-        if (anim && k.motion) k.ctx.add(function () {
-          gsap.to(pos, { y: y, duration: .55, ease: 'elastic.out(1, .6)', overwrite: true, onUpdate: draw });
-          gsap.fromTo(img, { autoAlpha: .4 }, { autoAlpha: 1, duration: .25, ease: 'power2.out', overwrite: true });
-        });
-        else { pos.y = y; draw(); }
-      }
-      k.on(ol, 'pointerover', function (e) { var r = e.target.closest('.wix__row'); if (r && e.pointerType === 'mouse') set(+r.dataset.i, true); });
-      k.on(ol, 'focusin', function (e) { var r = e.target.closest('.wix__row'); if (r) set(+r.dataset.i, true); });
-      k.on(ol, 'click', function (e) { var r = e.target.closest('.wix__row'); if (r) { set(+r.dataset.i, true); EZ.viewer.open(viewerList(F), +r.dataset.i, r); } });
-      k.on(ol, 'keydown', function (e) {
-        var r = e.target.closest('.wix__row'); if (!r) return;
-        var i = +r.dataset.i, n = e.key === 'ArrowDown' ? i + 1 : e.key === 'ArrowUp' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? rows.length - 1 : -2;
-        if (n === -2) return;
-        e.preventDefault(); rows[EZ.clamp(n, 0, rows.length - 1)].focus();
-      });
-      set(0, false);
-      k.ro(list, function () { if (cur > -1) { pos.y = rowY(cur); draw(); } });
-      k.add(function () { ol.innerHTML = ''; img.removeAttribute('src'); str.removeAttribute('d'); bob.removeAttribute('transform'); code.textContent = ''; tt.textContent = ''; });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *'));
-    } },
-
-    /* slot 8 · Phase 5 new · The job binder: ring-bound pages, one project each; the page flips up over the rings
-       to turn forward and drops back down to turn back; the slider scrubs straight through without the flip */
-    8: { init: function (root, k) {
-      var L = listed(), page = root.querySelector('.wfb__page'), img = root.querySelector('.wfb__img');
-      var tab = root.querySelector('.wfb__tab'), tt = root.querySelector('.wfb__t'), cc = root.querySelector('.wfb__c');
-      var range = root.querySelector('.wfb__range'), pg = root.querySelector('.wfb__pg'), rings = root.querySelector('.wfb__rings');
-      var CATN = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' }, cur = 0, busy = null;
-      var r = '';
-      for (var x = 70; x < 880; x += 92) r += '<ellipse class="hl" cx="' + x + '" cy="32" rx="7" ry="4"/><path class="rg" d="M' + (x - 9) + ' 32 C' + (x - 9) + ' 4 ' + (x + 9) + ' 4 ' + (x + 9) + ' 32"/>';
-      rings.innerHTML = r;
-      range.max = L.length; root.querySelector('.wfb__of').textContent = L.length;
-      function fill(i) {
-        var p = L[i]; cur = i;
-        img.src = EZ.img(p.key); img.width = p.w; img.height = p.h; img.alt = p.title + ', an Elbaz project';
-        tab.textContent = p.code; tt.textContent = p.title; cc.textContent = CATN[p.c];
-        range.value = i + 1; pg.textContent = i + 1;
-        range.setAttribute('aria-valuetext', 'Page ' + (i + 1) + ', ' + p.title);
-      }
-      function turn(d) {
-        var n = (cur + d + L.length) % L.length;
-        if (!k.motion) { fill(n); return; }
-        if (busy) busy.progress(1);
-        k.ctx.add(function () {
-          busy = d > 0
-            ? gsap.timeline({ onComplete: function () { busy = null; } }).to(page, { rotationX: 86, duration: .18, ease: 'power2.in' }).add(function () { fill(n); }).set(page, { rotationX: 0 }).from(img, { autoAlpha: .6, duration: .2 })
-            : gsap.timeline({ onComplete: function () { busy = null; } }).add(function () { fill(n); }).fromTo(page, { rotationX: 86 }, { rotationX: 0, duration: .26, ease: 'power2.out' });
-        });
-      }
-      k.on(root.querySelector('.wfb__prev'), 'click', function () { turn(-1); });
-      k.on(root.querySelector('.wfb__next'), 'click', function () { turn(1); });
-      k.on(range, 'input', function () { if (busy) busy.progress(1); fill(+range.value - 1); });
-      k.on(root.querySelector('.wfb__open'), 'click', function (e) { EZ.viewer.open(viewerList(L), cur, e.currentTarget); });
-      fill(0);
-      k.add(function () { rings.innerHTML = ''; img.removeAttribute('src'); gsap.set(page, { clearProps: 'transform' }); range.value = 1; });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wfb__ctl'));
-      if (k.motion) gsap.from(page, { rotationX: 70, autoAlpha: 0, duration: .5, ease: 'power3.out', scrollTrigger: { trigger: page, start: 'top 85%', once: true } });
-    } },
-
-    /* slot 1 · AUDIT-01 winner (copied from v3; F7): calm default. Drift 55px/s while in view and only until the first pointer
-       contact, which pauses that belt (200ms ramp) and parks both belts; no scroll boost; captions are permanent. */
-    b2: { init: function (root, k) {
-      var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
-      var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
-      // the site camera fires once per opened photo (a 260ms flash), then rests
-      function flash() {
-        if (!k.motion) return;
-        var b = root.querySelectorAll('.wb__burst path'), fl = root.querySelector('.wb__flash');
-        gsap.timeline().fromTo(b, { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .14, ease: 'power2.out' }).to(b, { opacity: 0, duration: .12 })
-          .fromTo(fl, { fill: '#FFF5EE' }, { fill: '#FF5F00', duration: .08, yoyo: true, repeat: 1 }, 0);
-      }
-      var belts = Array.prototype.slice.call(root.querySelectorAll('.wb__belt'));
-      var hold = root.querySelector('.wb__hold');
-      var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
-      // project codes follow the plan-room numbering of version 1 (P-01 is the same room everywhere)
-      var CODE = {};
-      document.querySelectorAll('.work1__sheet').forEach(function (sh, i) { var im = sh.querySelector('img[data-img]'); if (im) CODE[im.dataset.img] = 'P-' + (i < 9 ? '0' : '') + (i + 1); });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .wb__foot'));
-      var loops = [];
-      belts.forEach(function (belt, bi) {
-        var track = belt.querySelector('.wb__track');
-        var list = P.filter(function (p) { return belt.dataset.c.indexOf(p.c) > -1; });
-        track.innerHTML = list.map(function (p) {
-          var code = CODE[p.key] || ('P-' + (p.no < 9 ? '0' : '') + (p.no + 1));
-          return '<button type="button" class="wb__tile" data-i="' + p.no + '" data-rx="~t:' + code + '/peek/flash/tl" style="aspect-ratio:' + p.w + ' / ' + p.h + '" aria-label="' + p.title.replace(/"/g, '&quot;') + ', ' + CAT[p.c] + ', open large">' +
-            '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"><span class="wb__cap" aria-hidden="true"><b>' + CAT[p.c] + '</b>' + p.title.replace(/</g, '') + '</span></button>';
-        }).join('');
-        k.on(track, 'click', function (e) { var t = e.target.closest('.wb__tile'); if (t) { flash(); EZ.viewer.open(all, +t.dataset.i, t); } });
-      });
-      k.add(function () { belts.forEach(function (b) { b.querySelector('.wb__track').innerHTML = ''; }); root.classList.remove('is-static'); });
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; k.add(function () { hold.hidden = false; }); return; }
-
-      var held = false, inView = false, touched = false;
-      var builtW = 0;
-      function build() {
-        // a rebuild keeps where each belt was, and starts from clean transforms (stale xPercent overlaps the tiles)
-        var prev = loops.map(function (l) { return { p: l.tl.progress(), slow: l.slow }; });
-        loops.forEach(function (l) { l.tl.kill(); });
-        builtW = root.querySelector('.wb__belts').clientWidth;
-        loops = belts.map(function (belt, bi) {
-          var items = belt.querySelectorAll('.wb__tile');
-          gsap.set(items, { clearProps: 'transform' });
-          var gap = parseFloat(getComputedStyle(belt.querySelector('.wb__track')).columnGap) || 16;
-          var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .55, paddingRight: gap });
-          // a photo is already cut by the left edge at rest [BANK 364 peek offset]
-          if (prev[bi]) tl.progress(prev[bi].p); else tl.time(tl.duration() * (bi ? .37 : .13));
-          if (bi) tl.reversed(true);
-          return { tl: tl, belt: belt, slow: prev[bi] ? prev[bi].slow : { v: 1 } };
-        });
-        sync();
-      }
-      function sync() {
-        loops.forEach(function (l) {
-          var ts = held ? 0 : l.slow.v;
-          l.tl.timeScale(Math.max(ts, .0001));
-          if (inView && !held) l.tl.paused(false); else l.tl.paused(true);
-        });
-      }
-      // each tile's image decodes before the loop measures widths
-      var imgs = root.querySelectorAll('.wb__tile img'), left = imgs.length;
-      imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
-      build();
-      k.ro(root.querySelector('.wb__belts'), function () { if (root.querySelector('.wb__belts').clientWidth !== builtW) build(); });
-      k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
-      loops.forEach(function (l, i) {
-        // first contact (hover or press) pauses that belt with a 200ms ramp and parks the other; Run the belts restarts them
-        function contact(e) {
-          if (e.type === 'pointerenter' && e.pointerType !== 'mouse') return;
-          gsap.to(loops[i].slow, { v: 0, duration: .2, ease: 'power1.out', onUpdate: sync, onComplete: park });
-        }
-        function park() {
-          if (held) return;
-          touched = true; held = true;
-          hold.setAttribute('aria-pressed', 'true'); hold.querySelector('.btn__label').textContent = 'Run the belts';
-          loops.forEach(function (o) { o.slow.v = 1; }); sync();
-        }
-        k.on(l.belt, 'pointerenter', contact);
-        k.on(l.belt, 'pointerdown', contact);
-        // a focused photo must be in view (WCAG focus not obscured): the belt stops and glides that photo to its centre
-        k.on(l.belt, 'focusin', function (e) {
-          loops[i].slow.v = 0; sync();
-          var t = e.target.closest('.wb__tile'); if (!t) return;
-          var br = l.belt.getBoundingClientRect(), tr = t.getBoundingClientRect();
-          var dx = (tr.left + tr.width / 2) - (br.left + br.width / 2), tl = loops[i].tl;
-          if (Math.abs(dx) < 8) return;
-          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
-          gsap.to(tl, { totalTime: tl.totalTime() + dx / 55, duration: k.motion ? .4 : 0, ease: 'power3.inOut', overwrite: true });
-        });
-        k.on(l.belt, 'focusout', function (e) { if (!l.belt.contains(e.relatedTarget) && !held) { loops[i].slow.v = 1; sync(); } });
-      });
-      k.on(hold, 'click', function () {
-        held = !held;
-        if (!held) loops.forEach(function (o) { o.slow.v = 1; });
-        hold.setAttribute('aria-pressed', held ? 'true' : 'false');
-        hold.querySelector('.btn__label').textContent = held ? 'Run the belts' : 'Hold the belts';
-        sync();
-      });
-      k.add(function () { hold.setAttribute('aria-pressed', 'false'); hold.querySelector('.btn__label').textContent = 'Hold the belts'; });
-      k.io(root.querySelector('.wb__belts'), function (en) { inView = en.isIntersecting; sync(); }, { threshold: 0 });
-      gsap.from(belts, { x: function (i) { return i ? -40 : 40; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.wb__belts'), start: 'top 85%', once: true } });
-    } },
-
-    /* v1 · The plan room [BANK R10 grid-to-fullscreen + BANK 157 push grid via Flip] */
-    b3: { init: function (root, k) {
-      var grid = root.querySelector('.work1__grid');
-      var items = Array.prototype.slice.call(root.querySelectorAll('.work1__it'));
-      var fbtns = Array.prototype.slice.call(root.querySelectorAll('.work1__f'));
-      var more = root.querySelector('.work1__more'), moreLabel = more.querySelector('.btn__label');
-      var filter = 'all', all = false, open = null;
-      // [AUDIT-01 F7 loser V1] label truth: the first chip says what it shows, featured 12 until all 26 are dealt
-      var chipLbl = fbtns[0].querySelector('.btn__label'), nFeat = items.filter(function (it) { return it.dataset.feat; }).length;
-      function chip() { chipLbl.innerHTML = all ? 'All <span class="nums">' + items.length + '</span>' : 'Featured <span class="nums">' + nFeat + '</span>'; }
-      chip();
-      EZ.reveal(k, root.querySelectorAll('.work__head > *'));
-      function flip(fn) {
-        if (!k.motion) { fn(); return; }
-        var state = Flip.getState(items.concat([more]));
-        fn();
-        k.ctx.add(function () {
-          Flip.from(state, { duration: .45, ease: 'power3.inOut', absolute: false, scale: false, nested: true,
-            onEnter: function (els) { return gsap.fromTo(els, { autoAlpha: 0, scale: .92 }, { autoAlpha: 1, scale: 1, duration: .3, ease: 'power3.out' }); },
-            onLeave: function (els) { return gsap.to(els, { autoAlpha: 0, duration: .2 }); } });
-        });
-      }
-      function apply() {
-        items.forEach(function (it) {
-          var show = (filter === 'all' || it.dataset.c === filter) && (all || filter !== 'all' || it.dataset.feat);
-          it.hidden = !show;
-        });
-        more.hidden = filter !== 'all';
-      }
-      function setOpen(it) {
-        if (open) { open.classList.remove('is-open'); open.querySelector('.work1__sheet').setAttribute('aria-expanded', 'false'); }
-        open = it && it !== open ? it : null;
-        if (open) { open.classList.add('is-open'); open.querySelector('.work1__sheet').setAttribute('aria-expanded', 'true'); }
-      }
-      apply();
-      fbtns.forEach(function (b) {
-        k.on(b, 'click', function () {
-          if (b.dataset.f === filter) return;
-          filter = b.dataset.f;
-          fbtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-          flip(function () { setOpen(null); apply(); });
-        });
-      });
-      k.on(more, 'click', function () {
-        all = !all;
-        more.setAttribute('aria-expanded', all ? 'true' : 'false');
-        moreLabel.textContent = all ? 'Show the featured twelve' : 'Show all ' + items.length + ' projects';
-        chip();
-        flip(apply);
-      });
-      items.forEach(function (it) {
-        var sheet = it.querySelector('.work1__sheet');
-        k.on(sheet, 'click', function () {
-          flip(function () { setOpen(it); });
-          if (open) { var top = it.getBoundingClientRect().top; if (top < 80 || top > innerHeight * .5) k.timeout(function () { EZ.scrollTo(it); }, k.motion ? 620 : 0); }
-        });
-      });
-      k.on(root, 'keydown', function (e) { if (e.key === 'Escape' && open) { var o = open; flip(function () { setOpen(null); }); o.querySelector('.work1__sheet').focus(); } });
-      k.add(function () { setOpen(null); items.forEach(function (it) { it.hidden = false; }); more.hidden = false; fbtns.forEach(function (x, i) { x.setAttribute('aria-pressed', i ? 'false' : 'true'); }); moreLabel.textContent = 'Show all ' + items.length + ' projects'; more.setAttribute('aria-expanded', 'false'); all = false; chip(); });
-      if (k.motion) gsap.from(items.filter(function (it) { return !it.hidden; }), { y: 20, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .03, scrollTrigger: { trigger: grid, start: 'top 85%', once: true } });
-    } },
-
-    /* v2 · On the turntable [BANK 88] */
-    b4: { init: function (root, k) {
-      var D = data(), stage = root.querySelector('.work2__stage'), track = root.querySelector('.work2__track');
-      var arc = root.querySelector('.work2__arc'), n = root.querySelector('.work2__n'), t = root.querySelector('.work2__t');
-      track.innerHTML = D.map(function (d, i) {
-        return '<figure class="work2__card" data-i="' + i + '"><img src="' + EZ.img(d.k) + '" width="' + d.w + '" height="' + d.h + '" alt="' + d.t.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + ', an Elbaz project"' + (i > 3 ? ' loading="lazy"' : '') + '></figure>';
-      }).join('');
-      var cards = Array.prototype.slice.call(track.querySelectorAll('.work2__card'));
-      // the protractor: ticks across 56 degrees, a needle marks the turn
-      var ticks = '';
-      for (var a = -28; a <= 28; a += 2) { var r = a * Math.PI / 180, big = a % 14 === 0; ticks += '<path class="' + (big ? 'tkm' : 'tk') + '" d="M' + (400 + Math.sin(r) * 330).toFixed(1) + ' ' + (360 - Math.cos(r) * 330).toFixed(1) + 'L' + (400 + Math.sin(r) * (big ? 312 : 320)).toFixed(1) + ' ' + (360 - Math.cos(r) * (big ? 312 : 320)).toFixed(1) + '"/>'; }
-      arc.innerHTML = '<path class="arc" d="M' + (400 - Math.sin(.49) * 330).toFixed(1) + ' ' + (360 - Math.cos(.49) * 330).toFixed(1) + 'A330 330 0 0 1 ' + (400 + Math.sin(.49) * 330).toFixed(1) + ' ' + (360 - Math.cos(.49) * 330).toFixed(1) + '"/>' + ticks + '<path class="ndl" d="M400 24 l-6 -14 h12 z"/>';
-      var ndl = arc.querySelector('.ndl');
-      k.add(function () { track.innerHTML = ''; arc.innerHTML = ''; stage.style.removeProperty('--tint'); });
-      var cur = -1, MAXROT = 28, DEPTH = 140, MINS = .92;
-      function frame() {
-        var tr = track.getBoundingClientRect(), cx = tr.left + tr.width / 2, best = 0, bd = 1e9;
-        cards.forEach(function (c, i) {
-          var r = c.getBoundingClientRect(), d = (r.left + r.width / 2 - cx) / r.width;
-          if (Math.abs(d) < bd) { bd = Math.abs(d); best = i; }
-          if (k.motion) {
-            var dd = EZ.clamp(d, -2.5, 2.5);
-            c.style.transform = 'translateZ(' + (-Math.abs(dd) * DEPTH).toFixed(1) + 'px) rotateY(' + (-EZ.clamp(dd, -1, 1) * MAXROT).toFixed(2) + 'deg) scale(' + Math.max(MINS, 1 - Math.abs(dd) * .04).toFixed(3) + ')';
-          }
-          c.style.opacity = Math.abs(d) > 2.6 ? .4 : 1;
-        });
-        // needle follows the fractional turn of the centre card
-        var cr = cards[best].getBoundingClientRect(), frac = EZ.clamp((cr.left + cr.width / 2 - cx) / cr.width, -1, 1);
-        ndl.setAttribute('transform', 'rotate(' + (-frac * MAXROT).toFixed(2) + ' 400 360)');
-        if (best !== cur) {
-          cur = best;
-          var d = D[best];
-          n.textContent = (best < 9 ? '0' : '') + (best + 1) + ' / ' + D.length;
-          t.textContent = d.t;
-          if (k.motion) k.ctx.add(function () { gsap.to(stage, { '--tint': d.tint, duration: .5, ease: 'power2.out', overwrite: 'auto' }); });
-          else stage.style.setProperty('--tint', d.tint);
-        }
-      }
-      var pend = false;
-      k.on(track, 'scroll', function () { if (!pend) { pend = true; requestAnimationFrame(function () { pend = false; frame(); }); } }, { passive: true });
-      k.ro(track, frame);
-      frame();
-      function go(i) { i = EZ.clamp(i, 0, cards.length - 1); var c = cards[i]; track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2, behavior: k.motion ? 'smooth' : 'auto' }); }
-      k.on(root.querySelector('.work2__prev'), 'click', function () { go(cur - 1); });
-      k.on(root.querySelector('.work2__next'), 'click', function () { go(cur + 1); });
-      k.on(track, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); } });
-      // mouse drag-to-scroll (touch and trackpads scroll natively)
-      if (k.fine) {
-        var down = null;
-        // [AUDIT-01 F7 loser V2] a drag carries its energy: the release velocity projects 300ms ahead and the nearest card there wins
-        k.on(track, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, l: track.scrollLeft, moved: false, v: 0, px: e.clientX, pt: e.timeStamp }; track.style.scrollSnapType = 'none'; track.setPointerCapture(e.pointerId); });
-        k.on(track, 'pointermove', function (e) {
-          if (!down) return; var dx = e.clientX - down.x; if (Math.abs(dx) > 5) down.moved = true; track.scrollLeft = down.l - dx;
-          var dt = e.timeStamp - down.pt; if (dt > 0) { down.v = .8 * ((e.clientX - down.px) / dt) + .2 * down.v; down.px = e.clientX; down.pt = e.timeStamp; }
-        });
-        function up() {
-          if (!down) return;
-          var proj = track.scrollLeft - down.v * 300 + track.clientWidth / 2, best = cur, bd = Infinity;
-          down = null; track.style.scrollSnapType = '';
-          cards.forEach(function (c, i) { var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - proj); if (d < bd) { bd = d; best = i; } });
-          go(best);
-        }
-        k.on(track, 'pointerup', up); k.on(track, 'pointercancel', up);
-        k.add(function () { track.style.scrollSnapType = ''; });
-      }
-      EZ.reveal(k, root.querySelectorAll('.work__head > *'));
-    } },
-
-    /* v3 · Taped to the board [BANK Lagom deck: slit clip inset(50% 0 50% 0); CSS sticky instead of a pin] */
-    /* v3 · On the belts [BANK Q161 horizontalLoop, BANK 364 peek]: kitchens run left, bathrooms and whole homes run right,
-       every photo at the same velocity; scroll speed adds to the belts, hovering a belt slows it to a quarter,
-       a photo opens large in the viewer; belts stop off-screen; reduced motion leaves two scrollable rows */
-    b1: { init: function (root, k) {
-      var P = ((window.__DATA || {}).projects || []).map(function (p, i) { return { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h, no: i }; });
-      var all = P.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
-      var belts = Array.prototype.slice.call(root.querySelectorAll('.work3__belt'));
-      var hold = root.querySelector('.work3__hold');
-      var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
-      // project codes follow the plan-room numbering of version 1 (P-01 is the same room everywhere)
-      var CODE = {};
-      document.querySelectorAll('.work1__sheet').forEach(function (sh, i) { var im = sh.querySelector('img[data-img]'); if (im) CODE[im.dataset.img] = 'P-' + (i < 9 ? '0' : '') + (i + 1); });
-      EZ.reveal(k, root.querySelectorAll('.work__head > *, .work3__foot'));
-      var loops = [];
-      belts.forEach(function (belt, bi) {
-        var track = belt.querySelector('.work3__track');
-        var list = P.filter(function (p) { return belt.dataset.c.indexOf(p.c) > -1; });
-        track.innerHTML = list.map(function (p) {
-          var code = CODE[p.key] || ('P-' + (p.no < 9 ? '0' : '') + (p.no + 1));
-          return '<button type="button" class="work3__tile" data-i="' + p.no + '" data-rx="~t:' + code + '/drop/flash/tl" style="aspect-ratio:' + p.w + ' / ' + p.h + '" aria-label="' + p.title.replace(/"/g, '&quot;') + ', ' + CAT[p.c] + ', open large">' +
-            '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"><span class="work3__cap" aria-hidden="true"><b>' + code + ' · ' + CAT[p.c] + '</b>' + p.title.replace(/</g, '') + '</span></button>';
-        }).join('');
-        k.on(track, 'click', function (e) { var t = e.target.closest('.work3__tile'); if (t) EZ.viewer.open(all, +t.dataset.i, t); });
-      });
-      k.add(function () { belts.forEach(function (b) { b.querySelector('.work3__track').innerHTML = ''; }); root.classList.remove('is-static'); });
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; k.add(function () { hold.hidden = false; }); return; }
-
-      var held = false, inView = false, boost = { v: 1 };
-      var builtW = 0;
-      function build() {
-        // a rebuild keeps where each belt was, and starts from clean transforms (stale xPercent overlaps the tiles)
-        var prev = loops.map(function (l) { return { p: l.tl.progress(), slow: l.slow }; });
-        loops.forEach(function (l) { l.tl.kill(); });
-        builtW = root.querySelector('.work3__belts').clientWidth;
-        loops = belts.map(function (belt, bi) {
-          var items = belt.querySelectorAll('.work3__tile');
-          gsap.set(items, { clearProps: 'transform' });
-          var gap = parseFloat(getComputedStyle(belt.querySelector('.work3__track')).columnGap) || 16;
-          var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .55, paddingRight: gap });
-          // a photo is already cut by the left edge at rest [BANK 364 peek offset]
-          if (prev[bi]) tl.progress(prev[bi].p); else tl.time(tl.duration() * (bi ? .37 : .13));
-          if (bi) tl.reversed(true);
-          return { tl: tl, belt: belt, slow: prev[bi] ? prev[bi].slow : { v: 1 } };
-        });
-        sync();
-      }
-      function sync() {
-        loops.forEach(function (l) {
-          var ts = held ? 0 : l.slow.v * boost.v;
-          l.tl.timeScale(Math.max(ts, .0001));
-          if (inView && !held) l.tl.paused(false); else l.tl.paused(true);
-        });
-      }
-      // each tile's image decodes before the loop measures widths
-      var imgs = root.querySelectorAll('.work3__tile img'), left = imgs.length;
-      imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
-      build();
-      k.ro(root.querySelector('.work3__belts'), function () { if (root.querySelector('.work3__belts').clientWidth !== builtW) build(); });
-      k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
-      loops.forEach(function (l, i) {
-        k.on(l.belt, 'pointerenter', function (e) { if (e.pointerType === 'mouse') gsap.to(loops[i].slow, { v: .25, duration: .3, onUpdate: sync }); });
-        k.on(l.belt, 'pointerleave', function () { gsap.to(loops[i].slow, { v: 1, duration: .3, onUpdate: sync }); });
-        // a focused photo must be in view (WCAG focus not obscured): the belt stops and glides that photo to its centre
-        k.on(l.belt, 'focusin', function (e) {
-          loops[i].slow.v = 0; sync();
-          var t = e.target.closest('.work3__tile'); if (!t) return;
-          var br = l.belt.getBoundingClientRect(), tr = t.getBoundingClientRect();
-          var dx = (tr.left + tr.width / 2) - (br.left + br.width / 2), tl = loops[i].tl;
-          if (Math.abs(dx) < 8) return;
-          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
-          gsap.to(tl, { totalTime: tl.totalTime() + dx / 55, duration: k.motion ? .4 : 0, ease: 'power3.inOut', overwrite: true });
-        });
-        k.on(l.belt, 'focusout', function (e) { if (!l.belt.contains(e.relatedTarget)) { loops[i].slow.v = 1; sync(); } });
-      });
-      k.on(hold, 'click', function () {
-        held = !held;
-        hold.setAttribute('aria-pressed', held ? 'true' : 'false');
-        hold.querySelector('.btn__label').textContent = held ? 'Run the belts' : 'Hold the belts';
-        sync();
-      });
-      k.add(function () { hold.setAttribute('aria-pressed', 'false'); hold.querySelector('.btn__label').textContent = 'Hold the belts'; });
-      k.io(root.querySelector('.work3__belts'), function (en) { inView = en.isIntersecting; sync(); }, { threshold: 0 });
-      // scroll velocity adds to the belts, then settles back [Q161 driven by ScrollTrigger velocity]
-      var st = ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onUpdate: function (self) {
-        var v = Math.min(4, 1 + Math.abs(self.getVelocity()) / 500);
-        if (v > boost.v) { boost.v = v; sync(); gsap.to(boost, { v: 1, duration: .8, ease: 'power2.out', overwrite: true, onUpdate: sync }); }
+      // the frames are hung as the rows arrive: each drops onto the rail and its swing settles once (no idle motion)
+      var frames = root.querySelectorAll('.pj__f');
+      gsap.set(frames, { y: -22, autoAlpha: 0 });
+      var hang = ScrollTrigger.create({ trigger: root.querySelector('.pj__rows'), start: 'top 82%', once: true, onEnter: function () {
+        gsap.to(frames, { y: 0, autoAlpha: 1, duration: .5, ease: 'power4.out', stagger: { each: .04, from: 'start' } });
       } });
-      k.add(function () { st.kill(); });
-      gsap.from(belts, { x: function (i) { return i ? -40 : 40; }, autoAlpha: 0, duration: .3, ease: 'power2.out', stagger: .06, scrollTrigger: { trigger: root.querySelector('.work3__belts'), start: 'top 85%', once: true } });
+      k.add(function () { hang.kill(); gsap.set(frames, { clearProps: 'all' }); });
+
+      var loops = [], held = false, vel = 0, builtW = 0;
+      function build() {
+        var prev = loops.map(function (l) { return l.tl.progress(); });
+        loops.forEach(function (l) { l.tl.kill(); });
+        builtW = root.clientWidth;
+        loops = rows.map(function (row, bi) {
+          var items = row.querySelectorAll('.pj__f'), gap = parseFloat(getComputedStyle(row.querySelector('.pj__track')).columnGap) || 32;
+          gsap.set(items, { clearProps: 'transform,x,xPercent' });
+          var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .45, paddingRight: gap });
+          if (prev[bi] != null) tl.progress(prev[bi]); else tl.time(tl.duration() * (bi ? .41 : .07));
+          // GSAP keeps 'reversed' as the SIGN of timeScale: the second row runs with a negative scale, never reversed(true)
+          return { tl: tl, row: row, s: 1, dir: bi ? -1 : 1, over: false, focus: false };
+        });
+      }
+      var imgs = root.querySelectorAll('.pj__f img'), left = imgs.length;
+      imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
+      build();
+      k.ro(root, function () { if (Math.abs(root.clientWidth - builtW) > 2) build(); });
+      k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
+
+      var vt = ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onUpdate: function (self) { vel = self.getVelocity(); } });
+      k.add(function () { vt.kill(); });
+      // one speed per row, smoothed: held 0, pointer or focus on the row .1, scroll adds up to +1.2; leaving brings it to rest
+      k.raf(function (dt) {
+        var r = root.getBoundingClientRect(), vh = innerHeight;
+        var vis = r.bottom < 0 || r.top > vh ? 0 : EZ.clamp((r.bottom - vh * .12) / (vh * .4), 0, 1);
+        vel *= .9;
+        loops.forEach(function (l) {
+          var target = held ? 0 : (l.over || l.focus) ? .1 : 1 + Math.min(Math.abs(vel) / 2400, 1.2);
+          target *= vis;
+          l.s += (target - l.s) * Math.min(1, dt * (target < l.s ? 5 : 2.5));
+          if (l.s < .004) { if (!l.tl.paused()) l.tl.paused(true); }
+          else { l.tl.timeScale(l.dir * l.s); if (l.tl.paused()) l.tl.paused(false); }
+        });
+      });
+      loops.forEach(function (l, i) {
+        k.on(l.row, 'pointerenter', function (e) { if (e.pointerType === 'mouse') loops[i].over = true; });
+        k.on(l.row, 'pointerleave', function () { loops[i].over = false; });
+        // a focused frame must be in view: the row stops and glides that frame towards the middle
+        k.on(l.row, 'focusin', function (e) {
+          loops[i].focus = true; loops[i].s = 0; loops[i].tl.paused(true);
+          var f = e.target.closest('.pj__f'); if (!f) return;
+          var rr = l.row.getBoundingClientRect(), fr = f.getBoundingClientRect(), dx = (fr.left + fr.width / 2) - (rr.left + rr.width / 2), tl = loops[i].tl;
+          if (Math.abs(dx) < 8) return;
+          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
+          gsap.to(tl, { totalTime: tl.totalTime() + dx / (100 * .45), duration: .45, ease: 'power3.inOut', overwrite: true });
+        });
+        k.on(l.row, 'focusout', function (e) { if (!l.row.contains(e.relatedTarget)) loops[i].focus = false; });
+      });
+      k.on(hold, 'click', function () {
+        held = !held;
+        hold.setAttribute('aria-pressed', held ? 'true' : 'false');
+        label.textContent = held ? 'Run the rows' : 'Pause the rows';
+      });
+      k.add(function () { hold.setAttribute('aria-pressed', 'false'); label.textContent = 'Pause the rows'; });
+    } },
+
+    2: { init: function (root, k) {
+      var L = listed(), all = viewerList(L), n = L.length, cur = 0, busy = false;
+      var book = root.querySelector('.jb__book'), spread = root.querySelector('.jb__spread');
+      var lSheet = root.querySelector('.jb__page--l .jb__sheet'), rPhoto = root.querySelector('.jb__page--r .jb__photo');
+      var leaf = root.querySelector('.jb__leaf'), fPhoto = leaf.querySelector('.jb__face--f .jb__photo'), bSheet = leaf.querySelector('.jb__face--b .jb__sheet');
+      var faces = leaf.querySelectorAll('.jb__face'), pg = root.querySelector('.jb__pg'), tabs = Array.prototype.slice.call(root.querySelectorAll('.jb__tab'));
+      var rings = root.querySelector('.jb__rings'), corner = root.querySelector('.jb__corner');
+
+      function sheet(p, live) {
+        return '<p class="jb__code"><b>' + p.code + '</b><span>' + CAT[p.c] + '</span></p><h3 class="jb__title">' + esc(p.title) + '</h3>' +
+          '<p class="jb__line">Our own photograph of the finished room.</p>' +
+          (live ? '<button type="button" class="btn btn--ghost jb__open"><span class="btn__label">See it large</span></button>' : '<span class="btn btn--ghost jb__open"><span class="btn__label">See it large</span></span>');
+      }
+      function photo(p, live) {
+        return '<div class="jb__mount"><img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="' + (live ? esc(p.title) + ', an Elbaz project' : '') + '" decoding="async"><i></i><i></i><i></i><i></i></div>';
+      }
+      function say() {
+        var p = L[cur];
+        pg.textContent = p.code + ' · ' + CAT[p.c];
+        tabs.forEach(function (t) { t.setAttribute('aria-current', t.dataset.c === p.c ? 'true' : 'false'); });
+      }
+      function setL(i) { lSheet.innerHTML = sheet(L[i], true); }
+      function setR(i) { rPhoto.innerHTML = photo(L[i], true); }
+      setL(0); setR(0); say();
+      k.on(root, 'click', function (e) { if (e.target.closest('.jb__page--l .jb__open')) EZ.viewer.open(all, cur, rPhoto.querySelector('img')); });
+
+      // the rings: drawn to the spread's real height, one every 72px
+      function drawRings() {
+        var h = spread.clientHeight, c = Math.max(4, Math.floor(h / 72)), s = '';
+        rings.setAttribute('viewBox', '0 0 40 ' + h);
+        for (var i = 0; i < c; i++) {
+          var y = (h / c) * (i + .5);
+          s += '<circle class="hole" cx="7" cy="' + y.toFixed(1) + '" r="3"/><circle class="hole" cx="33" cy="' + y.toFixed(1) + '" r="3"/>' +
+            '<path class="ring" d="M7 ' + y.toFixed(1) + ' C7 ' + (y - 16).toFixed(1) + ' 33 ' + (y - 16).toFixed(1) + ' 33 ' + y.toFixed(1) + '"/>' +
+            '<path class="ring-h" d="M11 ' + (y - 6).toFixed(1) + ' C15 ' + (y - 11).toFixed(1) + ' 25 ' + (y - 11).toFixed(1) + ' 29 ' + (y - 6).toFixed(1) + '"/>';
+        }
+        rings.innerHTML = s;
+      }
+      var wide = function () { return matchMedia('(min-width: 901px)').matches; };
+      drawRings(); k.ro(spread, drawRings);
+      k.add(function () { rings.innerHTML = ''; lSheet.innerHTML = rPhoto.innerHTML = fPhoto.innerHTML = bSheet.innerHTML = ''; gsap.set(leaf, { clearProps: 'all' }); });
+
+      function shade() { var p = this.progress(), v = (Math.sin(p * Math.PI) * .55).toFixed(3); faces.forEach(function (f) { f.style.setProperty('--sh', v); }); }
+      // a turn is a paused timeline plus what to do if it completes or is let go early
+      function turn(dir) {
+        var j = (cur + dir + n) % n, from = cur;
+        if (dir > 0) {
+          fPhoto.innerHTML = photo(L[from]); bSheet.innerHTML = sheet(L[j]); setR(j);
+          gsap.set(leaf, { rotationY: 0, visibility: 'visible' });
+          var tl = gsap.timeline({ paused: true, onUpdate: shade }).to(leaf, { rotationY: -180, duration: .8, ease: 'power2.inOut' });
+          return { tl: tl, done: function () { cur = j; setL(j); gsap.set(leaf, { visibility: 'hidden' }); say(); }, undo: function () { setR(from); gsap.set(leaf, { visibility: 'hidden' }); } };
+        }
+        fPhoto.innerHTML = photo(L[j]); bSheet.innerHTML = sheet(L[from]); setL(j);
+        gsap.set(leaf, { rotationY: -180, visibility: 'visible' });
+        var tb = gsap.timeline({ paused: true, onUpdate: shade }).to(leaf, { rotationY: 0, duration: .8, ease: 'power2.inOut' });
+        return { tl: tb, done: function () { cur = j; setR(j); gsap.set(leaf, { visibility: 'hidden' }); say(); }, undo: function () { setL(from); gsap.set(leaf, { visibility: 'hidden' }); } };
+      }
+      function swap(j) {   // phones and reduced motion: the pages change without the leaf
+        cur = j; setL(j); setR(j); say();
+        if (k.motion) gsap.fromTo(spread.querySelectorAll('.jb__page > *'), { autoAlpha: 0 }, { autoAlpha: 1, duration: .25, ease: 'power2.out' });
+      }
+      function go(dir) {
+        if (busy) return;
+        if (!k.motion || !wide()) { swap((cur + dir + n) % n); return; }
+        busy = true;
+        var t = turn(dir);
+        t.tl.eventCallback('onComplete', function () { t.done(); busy = false; });
+        t.tl.play();
+      }
+      function jump(j) {
+        if (busy || j === cur) return;
+        if (!k.motion || !wide()) { swap(j); return; }
+        // one leaf turn carries you there: the leaf's far side already shows the destination
+        busy = true;
+        var dir = j > cur ? 1 : -1, keep = cur;
+        cur = (j - dir + n) % n;           // turn() reads cur as the page the leaf leaves from
+        var t = turn(dir);
+        if (dir > 0) { fPhoto.innerHTML = photo(L[keep]); } else { bSheet.innerHTML = sheet(L[keep]); }
+        t.tl.eventCallback('onComplete', function () { t.done(); busy = false; });
+        t.tl.play();
+      }
+      k.on(root.querySelector('.jb__next'), 'click', function () { go(1); });
+      k.on(root.querySelector('.jb__prev'), 'click', function () { go(-1); });
+      k.on(book, 'keydown', function (e) {
+        if (e.target.closest('.jb__tab')) return;
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      });
+      tabs.forEach(function (t) {
+        k.on(t, 'click', function () { for (var i = 0; i < n; i++) if (L[i].c === t.dataset.c) { jump(i); return; } });
+      });
+
+      // the dog-ear: drag it towards the spine; past a third the page turns, before that it settles back
+      var drag = null;
+      k.on(corner, 'pointerdown', function (e) {
+        if (busy || !k.motion || !wide()) return;
+        busy = true; corner.setPointerCapture(e.pointerId);
+        drag = { x: e.clientX, w: spread.clientWidth / 2, t: turn(1) };
+      });
+      k.on(corner, 'pointermove', function (e) { if (drag) drag.t.tl.progress(EZ.clamp((drag.x - e.clientX) / (drag.w * 1.6), 0, 1)); });
+      function release() {
+        if (!drag) return;
+        var d = drag; drag = null;
+        var fwd = d.t.tl.progress() > .33;
+        gsap.to(d.t.tl, { progress: fwd ? 1 : 0, duration: .35, ease: 'power2.out', onComplete: function () { if (fwd) d.t.done(); else d.t.undo(); busy = false; } });
+      }
+      k.on(corner, 'pointerup', release); k.on(corner, 'pointercancel', release);
+
+      // first view: the cover opens onto page one
+      if (k.motion && wide()) {
+        fPhoto.innerHTML = '<div class="jb__cover"><span class="jb__cvt">Job binder</span><span class="jb__cvn">Elbaz Construction</span><span class="jb__cvl">Licensed, bonded &amp; insured &middot; CBC1265280</span></div>';
+        bSheet.innerHTML = sheet(L[0]);
+        gsap.set(leaf, { rotationY: 0, visibility: 'visible' });
+        gsap.set(spread.querySelector('.jb__page--l'), { autoAlpha: 0 });
+        busy = true;
+        var open = ScrollTrigger.create({ trigger: book, start: 'top 70%', once: true, onEnter: function () {
+          gsap.timeline({ onComplete: function () { gsap.set(leaf, { visibility: 'hidden' }); busy = false; } })
+            .set(spread.querySelector('.jb__page--l'), { autoAlpha: 1 }, .5)
+            .to(leaf, { rotationY: -180, duration: 1, ease: 'power2.inOut', onUpdate: shade }, 0);
+        } });
+        k.add(function () { open.kill(); busy = false; gsap.set(spread.querySelector('.jb__page--l'), { clearProps: 'all' }); });
+      }
     } }
   });
 })();
