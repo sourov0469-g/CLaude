@@ -1088,391 +1088,66 @@ html.has-buddy select { cursor: default !important; }
 @media (prefers-reduced-motion: reduce) { .pf__b { transition: none; will-change: auto; } }
 
 
-.services__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
-.services__head .t-head { grid-column: 1 / span 7; }
-.services__lead { grid-column: 9 / span 4; color: var(--color-text-secondary); max-width: 34ch; }
-.services__also { margin: var(--s8) 0 0; color: var(--color-text-secondary); max-width: 70ch; font-size: var(--t-small); font-weight: 600; }
-@media (max-width: 1023px) { .services__head .t-head, .services__lead { grid-column: 1 / -1; } .services__lead { margin-top: var(--s4); } }
+.sv__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.sv__head .eyebrow { margin: 0 0 var(--s3); }
+.sv__head .t-head { margin: 0; }
+.sv__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); }
 
-
-.services1__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
-.services1__card { display: grid; align-content: start; gap: var(--s4); padding-top: var(--s5); border-top: 2px solid var(--line-soft); }
-.services1__stage {
-  position: relative; display: block; width: 100%; aspect-ratio: 5 / 4; padding: 0; margin: 0 0 var(--s2);
-  background: radial-gradient(closest-side, rgba(119, 179, 184, .08), transparent); border: 0; cursor: pointer; color: inherit;
-}
-.services1__stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.services1__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.services1__h { margin: 0; font: 400 clamp(2rem, 1.4rem + 1.6vw, 3rem)/1 var(--f-display); letter-spacing: .01em; }
-.services1__p { margin: 0; color: var(--muted); max-width: 36ch; }
-.services1__layers { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.services1__time { margin: 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink); }
-.services1__btn { justify-self: start; margin-top: var(--s2); }
-
-.services1__svg polygon { stroke: #0B1418; stroke-width: 1.1; stroke-linejoin: round; }
-.m-floor .t { fill: var(--color-art-line-soft); } .m-floor .l { fill: var(--color-art-line-soft); } .m-floor .r { fill: var(--color-art-line-soft); }
-.m-pipe .t { fill: var(--color-art-wash); } .m-pipe .l { fill: var(--color-art-accent); } .m-pipe .r { fill: var(--color-art-accent); }
-.m-wire .t { fill: var(--color-art-accent); } .m-wire .l { fill: var(--color-art-accent-soft); } .m-wire .r { fill: var(--color-art-accent); }
-.m-cab .t { fill: var(--color-art-line-soft); } .m-cab .l { fill: var(--color-art-accent); } .m-cab .r { fill: var(--color-art-accent); }
-.m-stone .t { fill: var(--color-art-fill); } .m-stone .l { fill: var(--color-art-fill); } .m-stone .r { fill: var(--color-art-line-soft); }
-.m-stud .t { fill: var(--color-art-wash); } .m-stud .l { fill: var(--color-art-accent-soft); } .m-stud .r { fill: var(--color-art-accent-soft); }
-.m-board .t { fill: var(--color-art-line-soft); } .m-board .l { fill: var(--color-art-line-soft); } .m-board .r { fill: var(--color-art-line-soft); }
-.m-wp .t { fill: var(--color-art-line-soft); } .m-wp .l { fill: var(--color-art-line-soft); } .m-wp .r { fill: var(--color-art-line-soft); }
-.m-tile .t { fill: var(--color-art-fill); } .m-tile .l { fill: var(--color-art-fill); } .m-tile .r { fill: var(--color-art-line-soft); }
-.m-glass .t, .m-glass .l, .m-glass .r { fill: color-mix(in srgb, var(--color-border-subtle) 28%, transparent); }
-.m-glass polygon { stroke: var(--color-border-subtle); }
-.m-slab .t { fill: var(--color-art-line-soft); } .m-slab .l { fill: var(--color-art-line-soft); } .m-slab .r { fill: var(--color-art-line-soft); }
-.m-frame .t { fill: var(--color-art-wash); } .m-frame .l { fill: var(--color-art-accent-soft); } .m-frame .r { fill: var(--color-art-accent-soft); }
-.m-wall .t { fill: var(--color-art-fill); } .m-wall .l { fill: var(--color-art-fill); } .m-wall .r { fill: var(--color-art-line-soft); }
-.m-roof { fill: var(--color-art-line); }
-.m-roof-l { fill: var(--color-art-line-soft); }
-.services1__svg .grid { fill: none; stroke: rgba(11, 20, 24, .35); stroke-width: .8; }
-.services1__svg .lbl { font: 600 17px/1 var(--f-text); fill: var(--ink); stroke: var(--surface); stroke-width: 5px; paint-order: stroke; }
-.services1__svg .ldr { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
-.services1__svg .dotl { fill: var(--accent); }
-@media (max-width: 1023px) { .services1__grid { grid-template-columns: 1fr; gap: var(--s9); } .services1__stage { max-width: 520px; } }
-
-
-.services2__stack { display: grid; gap: 10vh; padding-bottom: 6vh; }
-.services2__sheet { position: sticky; top: calc(var(--nav-h) + 20px + var(--i, 0) * 18px); }
-.services2__frame {
-  position: relative; min-height: min(76vh, 640px);
-  display: grid; grid-template-columns: 1.05fr 1fr; gap: 0;
-  background: var(--a-500); color: var(--ink);
-  border: 2px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -10px;
-  background-image: linear-gradient(rgba(18, 18, 18, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 18, 18, 0.035) 1px, transparent 1px);
-  background-size: 22px 22px;
-  box-shadow: none;
+.sv__stack { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s6); }
+.sv__sheet { position: sticky; top: calc(var(--nav-h) + var(--s4) + var(--i) * 30px); }   
+.sv__paper {
+  position: relative; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); grid-template-rows: 1fr auto;
+  height: min(560px, calc(100svh - var(--nav-h) - var(--s9) - 60px)); min-height: 440px;
+  background: var(--color-surface); border: 1.5px solid var(--color-text);
+  box-shadow: 0 -1px 0 var(--color-text), 0 14px 30px -18px color-mix(in srgb, var(--color-shadow) 30%, transparent);
   transform-origin: 50% 0;
 }
-.services2__photo { margin: 22px; position: relative; overflow: hidden; border: 1.5px solid var(--ink); }
-.services2__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.services2__body { padding: clamp(28px, 4vw, 56px) clamp(22px, 3vw, 44px) 120px 12px; display: grid; align-content: start; gap: var(--s5); }
-.services2__no { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: 0; color: var(--muted); }
-.services2__h { margin: 0; font: 400 clamp(3rem, 2rem + 3vw, 5.5rem)/.9 var(--f-display); }
-.services2__p { margin: 0; color: var(--line-soft); max-width: 34ch; font-size: var(--t-lead); line-height: 1.35; }
-.services2__scope ul { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: var(--s6); }
-.services2__scope li { padding: 7px 0 7px 18px; position: relative; break-inside: avoid; font-size: .9375rem; border-bottom: 1px dashed rgba(18, 18, 18, .25); }
-.services2__scope li::before { content: ""; position: absolute; left: 0; top: 14px; width: 8px; height: 1.5px; background: var(--grey); }
-.js .services2__scope.is-shut { display: none; }
-.services2__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
-.services2 .btn--ghost { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
-.services2 .rx { color: var(--muted); }
-.services2__time { margin: 0; font: 500 .875rem/1.3 var(--f-text); color: var(--muted); }
-.services2__tb { position: absolute; right: 22px; bottom: 22px; margin: 0; display: grid; grid-template-columns: auto auto auto; border: 1.5px solid var(--ink); background: var(--a-500); }
-.services2__tb > div { padding: 8px 12px; border-left: 1.5px solid var(--ink); }
-.services2__tb > div:first-child { border-left: 0; }
-.services2__tb dt { font: 600 .5625rem/1 var(--f-text); letter-spacing: 0; color: var(--muted); margin-bottom: 4px; }
-.services2__tb dd { margin: 0; font: 500 .8125rem/1.2 var(--f-text); white-space: nowrap; }
-@media (max-width: 767px) {
-  .services2__sheet { position: relative; top: auto; }
-  .services2__stack { gap: var(--s7); }
-  .services2__frame { grid-template-columns: 1fr; min-height: 0; }
-  .services2__photo { aspect-ratio: 4 / 3; margin: 14px 14px 0; }
-  .services2__body { padding: 22px 18px 118px; }
-  .services2__scope ul { columns: 1; }
-  .services2__tb { left: 14px; right: 14px; bottom: 14px; grid-template-columns: 1.2fr 1.2fr .6fr; }
-  .services2__tb dd { white-space: normal; }
+.sv__paper::after {                        
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: var(--color-text); opacity: var(--shade, 0);
 }
+.sv__photo { position: relative; margin: 0; grid-row: 1 / 3; overflow: hidden; border-right: 1.5px solid var(--color-text); }
+.sv__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sv__dim { position: absolute; left: var(--s4); right: var(--s4); top: var(--s4); width: calc(100% - var(--s4) * 2); height: 10px; overflow: visible; }
+.sv__dim path { fill: none; stroke: var(--color-surface); stroke-width: 1.5; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 1px rgba(0,0,0,.6)); }
 
 
-.services3__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.services3__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); justify-items: start; }
-.services3__list { list-style: none; margin: 0; padding: 0; width: 100%; }
-.services3__row {
-  width: 100%; display: grid; grid-template-columns: 3rem 1fr; column-gap: var(--s4); text-align: left;
-  padding: var(--s5) var(--s4) var(--s5) var(--s3); background: none; border: 0; border-top: 1px solid var(--line-soft);
-  color: var(--ink); cursor: pointer; position: relative;
+.sv__scope {
+  position: absolute; inset: auto 0 0 0; max-height: 100%; overflow: auto;
+  padding: var(--s5); background: var(--color-surface); border-top: 1.5px solid var(--color-text);
 }
-.services3__list li:last-child .services3__row { border-bottom: 1px solid var(--line-soft); }
-.services3__row::before { content: ""; position: absolute; left: 0; top: -1px; bottom: -1px; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform 300ms var(--ease-out); }
-.services3__row[aria-pressed="true"]::before { transform: scaleY(1); }
-.services3__n { grid-row: 1 / span 2; font: 400 1.25rem/1 var(--f-display); color: var(--accent); padding-top: .5em; }
-.services3__name { font: 400 clamp(2.25rem, 1.5rem + 2vw, 3.5rem)/1 var(--f-display); letter-spacing: -.005em; transition: color 240ms var(--ease-out); }
-.services3__row[aria-pressed="true"] .services3__name { color: var(--accent); }
-.services3__line { color: var(--muted); font-size: .9375rem; margin-top: 4px; }
-.services3__wall { grid-column: 7 / -1; position: relative; aspect-ratio: 6 / 5; }
-.services3__board { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.services3__board .hb { fill: var(--a-300); }
-.services3__board .hole { fill: var(--a-800); }
-.services3__board .frm { fill: none; stroke: var(--a-800); stroke-width: 10; }
-.services3__board .hook { fill: none; stroke: var(--grey); stroke-width: 4; stroke-linecap: round; }
-.services3__board .tool { transition: filter 300ms; }
-.services3__board .tool.is-dim { filter: opacity(.5) saturate(.6); }
-.services3__tags { position: absolute; left: 4%; right: 4%; bottom: 5%; display: flex; flex-wrap: wrap; gap: 14px 10px; }
-.services3__tags span {
-  position: relative; padding: 6px 10px 5px 18px; background: var(--white); color: var(--ink); font: 600 .75rem/1.1 var(--f-text);
-  box-shadow: 0 3px 0 rgba(18, 18, 18, .25);
+.sv__scope[hidden] { display: block; visibility: hidden; transform: translateY(100%); }
+.sv__scope { transition: transform 400ms var(--ez-out), visibility 0s linear 0s; }
+.sv__scope[hidden] { transition: transform 260ms var(--ez-in), visibility 0s linear 260ms; }
+.sv__scope-h { margin: 0 0 var(--s3); font: 600 .875rem/1.3 var(--f-text); }
+.sv__scope ul { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: var(--s5); }
+.sv__scope li { break-inside: avoid; padding: 6px 0 6px 18px; position: relative; font: 400 .9375rem/1.35 var(--f-text); border-bottom: 1px solid var(--color-border-subtle); }
+.sv__scope li::before { content: ""; position: absolute; left: 0; top: 13px; width: 9px; height: 2px; background: var(--color-accent-solid); }
+
+.sv__body { padding: var(--s6) var(--s6) var(--s5); display: grid; align-content: start; gap: var(--s4); }
+.sv__no { margin: 0; display: flex; gap: var(--s3); align-items: baseline; font: 500 .8125rem/1 var(--f-text); color: var(--color-text-secondary); }
+.sv__no .nums { font-weight: 600; color: var(--color-text); padding: 4px 8px; border: 1.5px solid var(--color-text); }
+.sv__h { margin: 0; font: 600 clamp(2rem, 1.2rem + 2.2vw, 3rem)/1 var(--f-display); letter-spacing: -.02em; }
+.sv__p { margin: 0; max-width: 34ch; color: var(--color-text-secondary); font-size: 1.0625rem; }
+.sv__time { margin: 0; font: 500 .875rem/1.3 var(--f-text); }
+.sv__time .nums { font-weight: 600; }
+.sv__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s2); }
+.sv__go { min-height: 44px; display: inline-flex; align-items: center; }
+.sv__tb { grid-column: 2; margin: 0; display: grid; grid-template-columns: auto 1fr; border-top: 1.5px solid var(--color-text); }
+.sv__tb > div { padding: var(--s2) var(--s4); }
+.sv__tb > div + div { border-left: 1.5px solid var(--color-text); }
+.sv__tb dt { font: 500 .6875rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.sv__tb dd { margin: 2px 0 0; font: 600 .8125rem/1.3 var(--f-text); }
+
+@media (max-width: 900px), (max-height: 680px) {
+  .sv__head { grid-template-columns: 1fr; }
+  .sv__sheet { position: static; }
+  .sv__paper { grid-template-columns: 1fr; grid-template-rows: auto auto auto; height: auto; min-height: 0; }
+  .sv__photo { grid-row: auto; aspect-ratio: 4 / 3; border-right: 0; border-bottom: 1.5px solid var(--color-text); }
+  .sv__tb { grid-column: 1; }
+  .sv__scope ul { columns: 1; }
 }
-.services3__tags span::before { content: ""; position: absolute; left: 6px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--a-800); }
-@media (max-width: 1023px) {
-  .services3__side, .services3__wall { grid-column: 1 / -1; }
-  .services3__wall { order: -1; margin-bottom: var(--s7); }
-}
-@media (max-width: 767px) { .services3__tags span { font-size: .625rem; padding: 4px 6px 3px 14px; } .services3__tags { gap: 8px 6px; } }
-
-
-
-.sl__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
-.sl__card { display: grid; align-content: start; gap: var(--s4); padding-top: var(--s5); border-top: 2px solid var(--line-soft); }
-.sl__stage {
-  position: relative; display: block; width: 100%; aspect-ratio: 5 / 4; padding: 0; margin: 0 0 var(--s2);
-  background: radial-gradient(closest-side, rgba(255, 95, 0, .08), transparent); border: 0; cursor: pointer; color: inherit;
-}
-.sl__stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.sl__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.sl__h { margin: 0; font: 400 clamp(2rem, 1.4rem + 1.6vw, 3rem)/1 var(--f-display); letter-spacing: -.005em; }
-.sl__p { margin: 0; color: var(--muted); max-width: 36ch; }
-.sl__layers { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.sl__time { margin: 0; font: 500 .875rem/1.3 var(--f-text); color: var(--ink); }
-.sl__btn { justify-self: start; margin-top: var(--s2); }
-.sl__svg polygon { stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; }
-.sl__svg .grid { fill: none; stroke: rgba(18, 18, 18, .35); stroke-width: .8; }
-.sl__svg .lbl { font: 600 17px/1 var(--f-text); fill: var(--ink); stroke: var(--surface); stroke-width: 5px; paint-order: stroke; }
-.sl__svg .ldr { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
-.sl__svg .dotl { fill: var(--accent); }
-@media (max-width: 1023px) {
-  .sl__grid { grid-template-columns: 1fr; gap: var(--s9); }
-  .sl__stage { max-width: 520px; }
-}
-
-
-.sl__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); row-gap: var(--s8); }
-.sl__card { border-top: 0; padding-top: 0; grid-column: span 6; }
-.sl__card[data-asm="kitchen"] { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.sl__card[data-asm="kitchen"] .sl__stage { grid-column: 1 / span 8; aspect-ratio: 16 / 10; max-height: 560px; }
-.sl__card[data-asm="kitchen"] .sl__txt { grid-column: 9 / span 4; align-self: end; padding-bottom: var(--s6); }
-.sl__txt { display: grid; align-content: start; gap: var(--s4); }
-.sl__card[data-asm="bath"] { grid-column: 1 / span 7; }
-.sl__card[data-asm="home"] { grid-column: 8 / span 5; }
-.sl__stage { position: relative; }
-.sl__cap { position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 6px; font: 500 .8125rem/1 var(--f-text); color: var(--muted); pointer-events: none; }
-.sl__card.is-open .sl__cap { opacity: 0; transition: opacity .15s; }
-.sl__also { max-width: 72ch; }
-@media (max-width: 1023px) {
-  .sl__card, .sl__card[data-asm="bath"], .sl__card[data-asm="home"] { grid-column: 1 / -1; }
-  .sl__card[data-asm="kitchen"] .sl__stage, .sl__card[data-asm="kitchen"] .sl__txt { grid-column: 1 / -1; }
-}
-
-
-
-.slx__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
-.slx__card { display: grid; align-content: start; gap: var(--s4); padding-top: var(--s5); border-top: 2px solid var(--color-border-subtle); }
-.slx__stage {
-  position: relative; display: block; width: 100%; aspect-ratio: 5 / 4; padding: 0; margin: 0 0 var(--s2);
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-bg-subtle) 8%, transparent), transparent); border: 0; cursor: pointer; color: inherit;
-}
-.slx__stage:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; }
-.slx__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.slx__h { margin: 0; font: 400 clamp(2rem, 1.4rem + 1.6vw, 3rem)/1 var(--f-display); letter-spacing: -.005em; }
-.slx__p { margin: 0; color: var(--color-text-secondary); max-width: 36ch; }
-.slx__layers { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.slx__time { margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text); }
-.slx__btn { justify-self: start; margin-top: var(--s2); }
-.slx__svg polygon { stroke: var(--color-art-line); stroke-width: 1.1; stroke-linejoin: round; }
-.slx__svg .grid { fill: none; stroke: color-mix(in srgb, var(--color-shadow) 35%, transparent); stroke-width: .8; }
-.slx__svg .lbl { font: 600 17px/1 var(--f-text); fill: var(--color-art-line); stroke: var(--color-surface); stroke-width: 5px; paint-order: stroke; }
-.slx__svg .ldr { stroke: var(--color-art-accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
-.slx__svg .dotl { fill: var(--color-art-accent); }
-@media (max-width: 1023px) {
-  .slx__grid { grid-template-columns: 1fr; gap: var(--s9); }
-  .slx__stage { max-width: 520px; }
-}
-.slx__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); row-gap: var(--s8); }
-.slx__card { border-top: 0; padding-top: 0; grid-column: span 6; }
-.slx__card[data-asm="kitchen"] { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.slx__card[data-asm="kitchen"] .slx__stage { grid-column: 1 / span 8; aspect-ratio: 16 / 10; max-height: 560px; }
-.slx__card[data-asm="kitchen"] .slx__txt { grid-column: 9 / span 4; align-self: end; padding-bottom: var(--s6); }
-.slx__txt { display: grid; align-content: start; gap: var(--s4); }
-.slx__card[data-asm="bath"] { grid-column: 1 / span 7; }
-.slx__card[data-asm="home"] { grid-column: 8 / span 5; }
-.slx__stage { position: relative; }
-.slx__cap { position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 6px; font: 600 .8125rem/1 var(--f-text); color: var(--color-text-secondary); pointer-events: none; }
-.slx__card.is-open .slx__cap { opacity: 0; transition: opacity .15s; }
-.slx__also { max-width: 72ch; }
-@media (max-width: 1023px) {
-  .slx__card, .slx__card[data-asm="bath"], .slx__card[data-asm="home"] { grid-column: 1 / -1; }
-  .slx__card[data-asm="kitchen"] .slx__stage, .slx__card[data-asm="kitchen"] .slx__txt { grid-column: 1 / -1; }
-}
-
-
-
-.s2x__stack { display: grid; gap: 10vh; padding-bottom: 6vh; }
-.s2x__sheet { position: sticky; top: calc(var(--nav-h) + 20px + var(--i, 0) * 18px); }
-.s2x__frame {
-  position: relative; min-height: min(76vh, 640px);
-  display: grid; grid-template-columns: 1.05fr 1fr; gap: 0;
-  background: var(--color-bg-muted); color: var(--color-text);
-  border: 2px solid var(--color-border-strong); outline: 1px solid var(--color-focus-ring); outline-offset: -10px;
-  background-image: linear-gradient(color-mix(in srgb, var(--color-shadow) 3.5%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-shadow) 3.5%, transparent) 1px, transparent 1px);
-  background-size: 22px 22px;
-  box-shadow: none;
-  transform-origin: 50% 0;
-}
-.s2x__photo { margin: 22px; position: relative; overflow: hidden; border: 1.5px solid var(--color-border-strong); }
-.s2x__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.s2x__body { padding: clamp(28px, 4vw, 56px) clamp(22px, 3vw, 44px) 120px 12px; display: grid; align-content: start; gap: var(--s5); }
-.s2x__no { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: 0; color: var(--color-text-secondary); }
-.s2x__h { margin: 0; font: 400 clamp(3rem, 2rem + 3vw, 5.5rem)/.9 var(--f-display); }
-.s2x__p { margin: 0; color: var(--color-text-secondary); max-width: 34ch; font-size: var(--t-lead); line-height: 1.35; }
-.s2x__scope ul { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: var(--s6); }
-.s2x__scope li { padding: 7px 0 7px 18px; position: relative; break-inside: avoid; font-size: .9375rem; border-bottom: 1px dashed color-mix(in srgb, var(--color-shadow) 25%, transparent); }
-.s2x__scope li::before { content: ""; position: absolute; left: 0; top: 14px; width: 8px; height: 1.5px; background: var(--color-bg-muted); }
-.js .s2x__scope.is-shut { display: none; }
-.s2x__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4) var(--s6); }
-.s2x .btn--ghost { color: var(--color-text); box-shadow: inset 0 0 0 1.5px var(--color-border-strong); }
-.s2x .rx { color: var(--color-text-secondary); }
-.s2x__time { margin: 0; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.s2x__tb { position: absolute; right: 22px; bottom: 22px; margin: 0; display: grid; grid-template-columns: auto auto auto; border: 1.5px solid var(--color-border-strong); background: var(--color-surface); color: var(--color-text); }
-.s2x__tb > div { padding: 8px 12px; border-left: 1.5px solid var(--color-border-strong); }
-.s2x__tb > div:first-child { border-left: 0; }
-.s2x__tb dt { font: 600 .5625rem/1 var(--f-text); letter-spacing: 0; color: var(--color-text-secondary); margin-bottom: 4px; }
-.s2x__tb dd { margin: 0; font: 600 .8125rem/1.2 var(--f-text); white-space: nowrap; }
-@media (max-width: 767px) {
-  .s2x__sheet { position: relative; top: auto; }
-  .s2x__stack { gap: var(--s7); }
-  .s2x__frame { grid-template-columns: 1fr; min-height: 0; }
-  .s2x__photo { aspect-ratio: 4 / 3; margin: 14px 14px 0; }
-  .s2x__body { padding: 22px 18px 118px; }
-  .s2x__scope ul { columns: 1; }
-  .s2x__tb { left: 14px; right: 14px; bottom: 14px; grid-template-columns: 1.2fr 1.2fr .6fr; }
-  .s2x__tb dd { white-space: normal; }
-}
-
-
-
-.s3x__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.s3x__side { grid-column: 1 / span 5; display: grid; gap: var(--s6); justify-items: start; }
-.s3x__list { list-style: none; margin: 0; padding: 0; width: 100%; }
-.s3x__row {
-  width: 100%; display: grid; grid-template-columns: 3rem 1fr; column-gap: var(--s4); text-align: left;
-  padding: var(--s5) var(--s4) var(--s5) var(--s3); background: none; border: 0; border-top: 1px solid var(--color-border-subtle);
-  color: var(--color-text); cursor: pointer; position: relative;
-}
-.s3x__list li:last-child .s3x__row { border-bottom: 1px solid var(--color-border-subtle); }
-.s3x__row::before { content: ""; position: absolute; left: 0; top: -1px; bottom: -1px; width: 3px; background: var(--color-art-line-soft); transform: scaleY(0); transform-origin: top; transition: transform 300ms var(--ease-out); color: var(--color-text-on-accent); }
-.s3x__row[aria-pressed="true"]::before { transform: scaleY(1); }
-.s3x__n { grid-row: 1 / span 2; font: 400 1.25rem/1 var(--f-display); color: var(--color-text-secondary); padding-top: .5em; }
-.s3x__name { font: 400 clamp(2.25rem, 1.5rem + 2vw, 3.5rem)/1 var(--f-display); letter-spacing: -.005em; transition: color 240ms var(--ease-out); }
-.s3x__row[aria-pressed="true"] .s3x__name { color: var(--color-accent-text); }
-.s3x__line { color: var(--color-text-secondary); font-size: .9375rem; margin-top: 4px; }
-.s3x__wall { grid-column: 7 / -1; position: relative; aspect-ratio: 6 / 5; }
-.s3x__board { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.s3x__board .hb { fill: var(--color-art-wash); }
-.s3x__board .hole { fill: var(--color-art-accent); }
-.s3x__board .frm { fill: none; stroke: var(--color-art-accent); stroke-width: 10; }
-.s3x__board .hook { fill: none; stroke: var(--color-art-line-soft); stroke-width: 4; stroke-linecap: round; }
-.s3x__board .tool { transition: filter 300ms; }
-.s3x__board .tool.is-dim { filter: opacity(.5) saturate(.6); }
-.s3x__tags { position: absolute; left: 4%; right: 4%; bottom: 5%; display: flex; flex-wrap: wrap; gap: 14px 10px; }
-.s3x__tags span {
-  position: relative; padding: 6px 10px 5px 18px; background: var(--color-surface); color: var(--color-text); font: 600 .75rem/1.1 var(--f-text);
-  box-shadow: 0 3px 0 color-mix(in srgb, var(--color-shadow) 25%, transparent);
-}
-.s3x__tags span::before { content: ""; position: absolute; left: 6px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--color-accent-solid-hover); color: var(--color-text-on-accent); }
-@media (max-width: 1023px) {
-  .s3x__side, .s3x__wall { grid-column: 1 / -1; }
-  .s3x__wall { order: -1; margin-bottom: var(--s7); }
-}
-@media (max-width: 767px) {
-  .s3x__tags span { font-size: .625rem; padding: 4px 6px 3px 14px; font-weight: 600; }
-  .s3x__tags { gap: 8px 6px; }
-}
-
-
-.sfn__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; min-height: 620px; }
-.sfn__side { grid-column: 1 / span 5; display: grid; gap: 16px; justify-items: start; }
-.sfn__lead { color: var(--color-text-secondary); }
-.sfn__deck { grid-column: 7 / -1; position: relative; height: 560px; --open: 0; }
-.sfn__pin { position: absolute; left: 34%; bottom: 36px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: var(--color-art-accent); box-shadow: 0 0 0 4px var(--color-border-strong); z-index: 5; color: var(--color-text-on-accent); }
-.sfn__card { position: absolute; left: 34%; bottom: 46px; width: min(300px, 64%); margin-left: -40px; padding: 0 0 16px; border: 0; border-radius: 18px; background: var(--color-surface); box-shadow: 0 0 0 3px var(--color-border-strong); text-align: left; cursor: pointer; overflow: hidden;
-  transform-origin: 40px calc(100% - 0px); transform: rotate(calc(var(--open) * (var(--i) - 1) * 22deg)); transition: transform 420ms var(--ease-out), box-shadow 160ms ease-out; z-index: calc(3 - var(--i)); }
-.sfn__card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.sfn__t { display: block; margin: 14px 16px 4px; font: 700 1.375rem/1.1 var(--f-display); }
-.sfn__d { display: block; margin: 0 16px 6px; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-.sfn__w { display: block; margin: 0 16px; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.sfn__card[aria-pressed="true"] { z-index: 4; box-shadow: 0 0 0 3px var(--color-border-strong), 0 0 0 9px var(--color-accent-subtle-hover); }
-.sfn__card:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-border-strong), 0 0 0 9px var(--color-accent-subtle-hover); }
-.sfn.is-open .sfn__deck { --open: 1; }
-@media (max-width: 1023px) { .sfn__side, .sfn__deck { grid-column: 1 / -1; } .sfn__deck { height: 520px; } }
-@media (prefers-reduced-motion: reduce) { .sfn__card { transition: none; } }
-
-
-.stc__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
-.stc__side { grid-column: 1 / span 4; display: grid; gap: 16px; justify-items: start; position: sticky; top: calc(var(--nav-h) + 40px); }
-.stc__lead { color: var(--color-text-secondary); }
-.stc__chest { grid-column: 6 / -1; padding: 0 18px 18px; background: var(--color-bg-muted); border: 4px solid var(--color-border-strong); border-radius: 18px; color: var(--color-text); }
-.stc__lid { height: 46px; margin: 0 -18px 14px; border-bottom: 4px solid var(--color-border-strong); }
-.stc__lid svg { width: 100%; height: 100%; display: block; } .stc__lid path { fill: none; stroke: var(--color-art-line); stroke-width: 3; vector-effect: non-scaling-stroke; }
-.stc__dr { margin-top: 12px; }
-.stc__front { width: 100%; display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding: 0 22px; border: 3px solid var(--color-border-strong); border-radius: 10px; background: var(--color-surface); cursor: pointer; transition: transform 300ms var(--ease-out); }
-.stc__h { font: 700 1.25rem/1 var(--f-display); }
-.stc__hd { width: 70px; height: 12px; border-radius: 6px; background: var(--color-bg-inverse); }
-.stc__front[aria-expanded="true"] { transform: translateX(-14px); }
-.stc__in { display: grid; grid-template-columns: 180px 1fr; gap: 16px; margin: 0 6px; padding: 16px; background: var(--color-bg-subtle); border: 3px solid var(--color-border-strong); border-top: 0; border-radius: 0 0 10px 10px; }
-.stc__in:has(> div:only-child) { grid-template-columns: 1fr; }
-.stc__in img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
-.stc__in p { margin: 0 0 8px; font: 400 .9375rem/1.45 var(--f-text); }
-.stc__in ol { margin: 0 0 8px; padding-left: 20px; font: 400 .9375rem/1.6 var(--f-text); }
-.stc__w { font-weight: 600; color: var(--color-text-secondary); }
-@media (max-width: 1023px) { .stc__side, .stc__chest { grid-column: 1 / -1; position: static; } .stc__chest { margin-top: var(--s5); } .stc__in { grid-template-columns: 1fr; } }
-
-
-.sss__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.sss__side { grid-column: 1 / span 5; display: grid; gap: 14px; }
-.sss__lead { color: var(--color-text-secondary); }
-.sss__lab { font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.sss__r { width: 100%; min-height: 44px; accent-color: var(--color-accent-solid); }
-.sss__ticks { display: flex; justify-content: space-between; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.sss__out { padding: 18px 20px; border-radius: 16px; background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-border-strong); }
-.sss__h { margin: 0 0 6px; font: 700 1.5rem/1.1 var(--f-display); } .sss__p { margin: 0 0 6px; } .sss__w { margin: 0; font-weight: 600; color: var(--color-text-secondary); }
-.sss__house { grid-column: 7 / -1; width: 100%; height: auto; overflow: visible; }
-.sss__house .roof { fill: none; stroke: var(--color-art-accent); stroke-width: 12; stroke-linejoin: miter; }
-.sss__house .rm { fill: var(--color-surface); transition: fill 240ms var(--ease-out); }
-.sss__house .rm.is-on { fill: var(--color-art-accent-soft); }
-.sss__house .wl, .sss__house .ad { fill: none; stroke: var(--color-art-line); stroke-width: 4; } .sss__house .ad { stroke-dasharray: 10 8; }
-.sss__house .ad.is-on { stroke-dasharray: none; }
-.sss__house .gd { stroke: var(--color-art-line); stroke-width: 4; }
-.sss__house text { font: 600 16px/1 var(--f-text); text-anchor: middle; fill: var(--color-art-line); }
-@media (max-width: 1023px) { .sss__side, .sss__house { grid-column: 1 / -1; } .sss__house { margin-top: var(--s5); } }
-
-
-.shc__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s6); }
-.shc__lead { color: var(--color-text-secondary); }
-.shc__stage { position: relative; }
-.shc__art { width: 100%; height: auto; display: block; overflow: visible; }
-.shc__art .sun { fill: var(--color-art-accent-soft); }
-.shc__art .roof { fill: var(--color-art-wash); stroke: var(--color-art-line); stroke-width: 4; stroke-linejoin: round; }
-.shc__art .wall, .shc__art .annex { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 4; } .shc__art .annex { stroke-dasharray: 12 8; }
-.shc__art .split { fill: none; stroke: var(--color-art-line); stroke-width: 3; }
-.shc__art .win { fill: var(--color-art-fill); stroke: var(--color-art-line); stroke-width: 3; } .shc__art .cab { fill: var(--color-art-accent-soft); stroke: var(--color-art-line); stroke-width: 3; } .shc__art .tub { fill: var(--color-surface); stroke: var(--color-art-line); stroke-width: 3; }
-.shc__art .floor, .shc__art .gd, .shc__art .yard { stroke: var(--color-art-line); stroke-width: 4; } .shc__art .floorb { fill: var(--color-art-line-soft); }
-.shc__art .palm path { fill: none; stroke: var(--color-art-line); stroke-width: 3; stroke-linecap: round; }
-.shc__hs { position: absolute; translate: -50% -50%; min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--color-bg-inverse); color: var(--color-text-inverse); font: 600 .8125rem/1 var(--f-text); cursor: pointer; box-shadow: 0 0 0 3px var(--color-surface); }
-.shc__hs::before { content: ""; position: absolute; inset: -6px; }
-.shc__hs[aria-pressed="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
-.shc__card { position: absolute; right: 0; top: 0; width: min(320px, 40%); padding: 16px 18px; border-radius: 16px; background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-border-strong); }
-.shc__card h3 { margin: 0 0 6px; font: 700 1.25rem/1.15 var(--f-display); } .shc__card p { margin: 0; font: 400 .9375rem/1.45 var(--f-text); }
-@media (max-width: 767px) { .shc__card { position: static; width: auto; margin-top: 14px; } .shc__hs { min-height: 30px; padding: 0 9px; font-size: .6875rem; font-weight: 600; } }
-
-
-.sdb__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s6); }
-.sdb__lead { color: var(--color-text-secondary); max-width: 52ch; }
-.sdb__scale { display: flex; justify-content: space-between; margin-left: calc(34% + 16px); font: 600 .8125rem/1 var(--f-text); color: var(--color-text-secondary); padding-bottom: 8px; border-bottom: 2px solid var(--color-border-strong); }
-.sdb__rows { list-style: none; margin: 0 0 var(--s5); padding: 0; }
-.sdb__row { display: grid; grid-template-columns: 96px calc(34% - 96px) 1fr; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--color-border-subtle); }
-.sdb__row img { width: 96px; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
-.sdb__info h3 { margin: 0 0 4px; font: 700 1.25rem/1.1 var(--f-display); } .sdb__info p { margin: 0; font: 600 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-.sdb__track { position: relative; height: 56px; background-image: repeating-linear-gradient(90deg, var(--color-bg-muted) 0 1px, transparent 1px calc(100% / 6)); }
-.sdb__bar { position: absolute; top: 12px; height: 22px; left: var(--a); width: calc(var(--b) - var(--a)); border-radius: 11px; background: var(--color-bg-muted); box-shadow: inset 0 0 0 2px var(--color-border-strong); transform-origin: left center; color: var(--color-text); }
-.sdb__lbl { position: absolute; left: var(--a, 0); top: 38px; font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); white-space: nowrap; }
-.sdb__row--open .sdb__bar { left: 0; width: 100%; background: repeating-linear-gradient(90deg, var(--color-bg-muted) 0 18px, var(--color-bg-subtle) 18px 26px); }
-.sdb__row--open .sdb__bar::after { content: ""; position: absolute; right: -14px; top: -6px; border: 17px solid transparent; border-left: 16px solid var(--color-border-strong); border-right: 0; }
-@media (max-width: 767px) { .sdb__scale { margin-left: 0; } .sdb__row { grid-template-columns: 64px 1fr; } .sdb__row img { width: 64px; } .sdb__track { grid-column: 1 / -1; } }
-
-
-.s2x__tb dt { color: var(--color-text); font-size: .625rem; font-weight: 600; }   
-.s3x__n { color: var(--color-text-secondary); }
+@media (prefers-reduced-motion: reduce) { .sv__scope, .sv__scope[hidden] { transition: none; } }
 
 
 .ba__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
@@ -4267,420 +3942,89 @@ html.has-buddy select { cursor: default !important; }
   </div>
 </section>
 
-<section id="services" class="sec services g-surface" data-section="services" aria-labelledby="services-h1">
-
+<section id="services" class="sec services" data-section="services" aria-labelledby="services-h">
   
-  
-  
-  <div class="ver slx" data-v="1">
+  <div class="ver sv" data-v="1">
     <div class="wrap">
-      <div class="services__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h1-w-i">Whatever the scope, <span class="acc">one team</span> accountable for all of it.</h2>
-        <p class="t-lead services__lead">Every job is a stack of trades. Point at a drawing to preview its layers; click or tap to keep it open.</p>
+      <div class="sv__head">
+        <div>
+          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
+          <h2 class="t-head" id="services-h">Three drawing sets. <span class="acc">One contractor.</span></h2>
+        </div>
+        <p class="t-lead sv__lead">Each scope is drawn before it is priced. Open a sheet to see everything it covers.</p>
       </div>
-      <div class="slx__grid">
-        <article class="slx__card" data-asm="kitchen" data-card>
-          <button type="button" class="slx__stage" aria-expanded="false" aria-label="Kitchen: show the layers" data-rx="native:explode-kitchen">
-            <svg class="slx__svg" aria-hidden="true" focusable="false"></svg>
-            <span class="slx__cap" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6"/></svg>Kitchen, in layers</span>
-          </button>
-          <div class="slx__txt">
-          <h3 class="slx__h">Kitchens</h3>
-          <p class="slx__p">Layout, cabinetry, counters and the services behind them.</p>
-          <ol class="slx__layers" aria-label="Kitchen layers, from the floor up"><li>Layout</li><li>Plumbing and electrical</li><li>Cabinetry</li><li>Counters</li></ol>
-          <p class="slx__time"><span class="nums">6&ndash;12</span> weeks of construction, typically</p>
-          <a class="btn btn--ghost slx__btn" href="#consult" data-rx="screw"><span class="btn__label">Plan a kitchen</span></a></div>
-        </article>
-        <article class="slx__card" data-asm="bath" data-card>
-          <button type="button" class="slx__stage" aria-expanded="false" aria-label="Bathroom: show the layers" data-rx="native:explode-bath">
-            <svg class="slx__svg" aria-hidden="true" focusable="false"></svg>
-            <span class="slx__cap" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6"/></svg>Bathroom, in layers</span>
-          </button>
-          <div class="slx__txt">
-          <h3 class="slx__h">Bathrooms</h3>
-          <p class="slx__p">Down to the studs, waterproofed, closed up once.</p>
-          <ol class="slx__layers" aria-label="Bathroom wall layers, from the studs out"><li>Studs</li><li>Backer board</li><li>Waterproofing</li><li>Tile, set square</li><li>Glass, templated after tiling</li></ol>
-          <p class="slx__time"><span class="nums">4&ndash;8</span> weeks of construction, typically</p>
-          <a class="btn btn--ghost slx__btn" href="#consult" data-rx="~drill/spin/chips/r"><span class="btn__label">Plan a bathroom</span></a></div>
-        </article>
-        <article class="slx__card" data-asm="home" data-card>
-          <button type="button" class="slx__stage" aria-expanded="false" aria-label="Whole home: show the layers" data-rx="native:explode-home">
-            <svg class="slx__svg" aria-hidden="true" focusable="false"></svg>
-            <span class="slx__cap" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6"/></svg>Whole home, in layers</span>
-          </button>
-          <div class="slx__txt">
-          <h3 class="slx__h">Whole homes</h3>
-          <p class="slx__p">Plans opened, structure moved, one disruption.</p>
-          <ol class="slx__layers" aria-label="Whole-home layers, from the ground up"><li>Slab</li><li>Structure</li><li>Open plan</li><li>Roof</li></ol>
-          <p class="slx__time">Several months of construction, typically</p>
-          <a class="btn btn--ghost slx__btn" href="#consult" data-rx="~nut/roll/spinout/r"><span class="btn__label">Plan a whole home</span></a></div>
-        </article>
-      </div>
-      <p class="services__also slx__also">We also build ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction and commercial remodels, and handle planning and permitting.</p>
-    </div>
-  </div>
 
-  
-  <div class="ver s2x" data-v="2" hidden>
-    <div class="wrap">
-      <div class="services__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h2-i">Three drawing sets. <span class="acc">One contractor.</span></h2>
-        <p class="t-lead services__lead">Each scope is drawn before it is priced. Open a sheet to see everything it covers.</p>
-      </div>
-      <div class="s2x__stack">
-        <article class="s2x__sheet" data-card>
-          <div class="s2x__frame">
-            <figure class="s2x__photo"><img data-img="k-walnut-marble" width="1600" height="1067" loading="lazy" alt="Open-concept kitchen with fluted walnut cabinetry and bookmatched marble, an Elbaz project"></figure>
-            <div class="s2x__body">
-              <p class="s2x__no nums">Sheet 01 of 03</p>
-              <h3 class="s2x__h">Kitchens</h3>
-              <p class="s2x__p">The room you actually live in. In a kitchen, the sequence is the job.</p>
-              <div class="s2x__scope" id="sv2-scope-1-i">
+      <ol class="sv__stack">
+        <li class="sv__sheet" style="--i:0">
+          <article class="sv__paper" aria-labelledby="sv-h-1">
+            <figure class="sv__photo" data-buddy="image">
+              <img data-img="k-walnut-marble" width="1600" height="1067" loading="lazy" alt="Open-concept kitchen with fluted walnut cabinetry and bookmatched marble, an Elbaz project">
+              <svg class="sv__dim" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 2 V8 M99 2 V8 M1 5 H99"/></svg>
+              <div class="sv__scope" id="sv-scope-1" hidden>
+                <p class="sv__scope-h">What the kitchen sheet covers</p>
                 <ul><li>Full kitchen remodel</li><li>Custom cabinetry</li><li>Cabinet refacing and replacement</li><li>Countertop installation</li><li>Kitchen islands</li><li>Layout and design</li><li>Luxury kitchens</li><li>Open-concept kitchens</li><li>Outdoor kitchens</li><li>Small and galley kitchens</li></ul>
               </div>
-              <div class="s2x__acts">
-                <button type="button" class="btn btn--ghost s2x__toggle" aria-expanded="false" aria-controls="sv2-scope-1-i" data-rx="~sander/rail/chips/r"><span class="btn__label">Open the scope</span></button>
-                <p class="s2x__time"><span class="nums">6&ndash;12</span> weeks of construction</p>
+            </figure>
+            <div class="sv__body">
+              <p class="sv__no"><span class="nums">A&#8209;01</span> Sheet 1 of 3</p>
+              <h3 class="sv__h" id="sv-h-1">Kitchens</h3>
+              <p class="sv__p">The room you actually live in. In a kitchen, the sequence is the job.</p>
+              <p class="sv__time"><span class="nums">6&ndash;12</span> weeks of construction</p>
+              <div class="sv__acts">
+                <button type="button" class="btn btn--ghost sv__toggle" aria-expanded="false" aria-controls="sv-scope-1"><span class="btn__label">Open the scope</span></button>
+                <a class="link sv__go" href="kitchens.html">Kitchen remodeling</a>
               </div>
             </div>
-            <dl class="s2x__tb"><div><dt>Project</dt><dd>Kitchen remodeling</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;01</dd></div></dl>
-          </div>
-        </article>
-        <article class="s2x__sheet" data-card>
-          <div class="s2x__frame">
-            <figure class="s2x__photo"><img data-img="b-black-marble" width="1200" height="1600" loading="lazy" alt="Black marble primary bathroom with a freestanding tub and glass wet room, an Elbaz project"></figure>
-            <div class="s2x__body">
-              <p class="s2x__no nums">Sheet 02 of 03</p>
-              <h3 class="s2x__h">Bathrooms</h3>
-              <p class="s2x__p">Waterproofing done properly, tile set square, glass and fixtures that still look right in year five.</p>
-              <div class="s2x__scope" id="sv2-scope-2-i">
+            <dl class="sv__tb"><div><dt>Project</dt><dd>Kitchen remodeling</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div></dl>
+          </article>
+        </li>
+        <li class="sv__sheet" style="--i:1">
+          <article class="sv__paper" aria-labelledby="sv-h-2">
+            <figure class="sv__photo" data-buddy="image">
+              <img data-img="b-black-marble" width="1200" height="1600" loading="lazy" alt="Black marble primary bathroom with a freestanding tub and glass wet room, an Elbaz project">
+              <svg class="sv__dim" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 2 V8 M99 2 V8 M1 5 H99"/></svg>
+              <div class="sv__scope" id="sv-scope-2" hidden>
+                <p class="sv__scope-h">What the bathroom sheet covers</p>
                 <ul><li>Full bathroom remodel</li><li>Primary bath suites</li><li>Walk-in shower conversions</li><li>Bathtub-to-shower conversions</li><li>Spa bathrooms</li><li>Luxury bathrooms</li><li>Small bathrooms</li><li>Powder rooms</li><li>Vanity and storage</li><li>ADA and accessible bathrooms</li></ul>
               </div>
-              <div class="s2x__acts">
-                <button type="button" class="btn btn--ghost s2x__toggle" aria-expanded="false" aria-controls="sv2-scope-2-i" data-rx="~chisel/rail/chips/r"><span class="btn__label">Open the scope</span></button>
-                <p class="s2x__time"><span class="nums">4&ndash;8</span> weeks of construction</p>
+            </figure>
+            <div class="sv__body">
+              <p class="sv__no"><span class="nums">A&#8209;02</span> Sheet 2 of 3</p>
+              <h3 class="sv__h" id="sv-h-2">Bathrooms</h3>
+              <p class="sv__p">Waterproofing done properly, tile set square, glass and fixtures that still look right in year five.</p>
+              <p class="sv__time"><span class="nums">4&ndash;8</span> weeks of construction</p>
+              <div class="sv__acts">
+                <button type="button" class="btn btn--ghost sv__toggle" aria-expanded="false" aria-controls="sv-scope-2"><span class="btn__label">Open the scope</span></button>
+                <a class="link sv__go" href="bathrooms.html">Bathroom remodeling</a>
               </div>
             </div>
-            <dl class="s2x__tb"><div><dt>Project</dt><dd>Bathroom remodeling</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;02</dd></div></dl>
-          </div>
-        </article>
-        <article class="s2x__sheet" data-card>
-          <div class="s2x__frame">
-            <figure class="s2x__photo"><img data-img="r-openplan" width="1600" height="1600" loading="lazy" alt="Modern open-concept kitchen and living area renovation by Elbaz"></figure>
-            <div class="s2x__body">
-              <p class="s2x__no nums">Sheet 03 of 03</p>
-              <h3 class="s2x__h">Whole homes</h3>
-              <p class="s2x__p">One contractor. The whole house. One disruption, not five.</p>
-              <div class="s2x__scope" id="sv2-scope-3-i">
+            <dl class="sv__tb"><div><dt>Project</dt><dd>Bathroom remodeling</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div></dl>
+          </article>
+        </li>
+        <li class="sv__sheet" style="--i:2">
+          <article class="sv__paper" aria-labelledby="sv-h-3">
+            <figure class="sv__photo" data-buddy="image">
+              <img data-img="r-openplan" width="1600" height="1600" loading="lazy" alt="Modern open-concept kitchen and living area renovation by Elbaz">
+              <svg class="sv__dim" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 2 V8 M99 2 V8 M1 5 H99"/></svg>
+              <div class="sv__scope" id="sv-scope-3" hidden>
+                <p class="sv__scope-h">What the whole-home sheet covers</p>
                 <ul><li>Opening up floor plans</li><li>Moving structure</li><li>Re-sequencing the house</li><li>ADUs and additions</li><li>Roofing</li><li>Flooring</li><li>Windows and doors</li><li>Outdoor living</li><li>Planning and permitting</li></ul>
               </div>
-              <div class="s2x__acts">
-                <button type="button" class="btn btn--ghost s2x__toggle" aria-expanded="false" aria-controls="sv2-scope-3-i" data-rx="~plane/slide/chips/r"><span class="btn__label">Open the scope</span></button>
-                <p class="s2x__time">Several months of construction</p>
+            </figure>
+            <div class="sv__body">
+              <p class="sv__no"><span class="nums">A&#8209;03</span> Sheet 3 of 3</p>
+              <h3 class="sv__h" id="sv-h-3">Whole homes</h3>
+              <p class="sv__p">One contractor. The whole house. One disruption, not five.</p>
+              <p class="sv__time">Several months of construction</p>
+              <div class="sv__acts">
+                <button type="button" class="btn btn--ghost sv__toggle" aria-expanded="false" aria-controls="sv-scope-3"><span class="btn__label">Open the scope</span></button>
+                <a class="link sv__go" href="renovation.html">Whole-home renovation</a>
               </div>
             </div>
-            <dl class="s2x__tb"><div><dt>Project</dt><dd>Whole-home renovation</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;03</dd></div></dl>
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver s3x" data-v="3" hidden>
-    <div class="wrap s3x__grid">
-      <div class="s3x__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h3-i">Pick the job. <span class="acc">We bring every tool.</span></h2>
-        <ul class="s3x__list" role="list">
-          <li><button type="button" class="s3x__row" data-tool="0" data-rx="native:hammer" aria-pressed="false"><span class="s3x__n nums">01</span><span class="s3x__name">Kitchens</span><span class="s3x__line">Layout, cabinetry, counters and the services behind them. <span class="nums">6&ndash;12</span> weeks.</span></button></li>
-          <li><button type="button" class="s3x__row" data-tool="1" data-rx="native:trowel" aria-pressed="false"><span class="s3x__n nums">02</span><span class="s3x__name">Bathrooms</span><span class="s3x__line">Down to the studs, waterproofed, closed up once. <span class="nums">4&ndash;8</span> weeks.</span></button></li>
-          <li><button type="button" class="s3x__row" data-tool="2" data-rx="native:hinge" aria-pressed="false"><span class="s3x__n nums">03</span><span class="s3x__name">Whole homes</span><span class="s3x__line">Plans opened, structure moved, one disruption. Several months.</span></button></li>
-        </ul>
-        <a class="btn s3x__btn" href="#consult" data-rx="hook"><span class="btn__label">Book a consultation</span></a>
-      </div>
-      <div class="s3x__wall" aria-hidden="true">
-        <svg class="s3x__board"></svg>
-        <div class="s3x__tags"><span>ADUs and additions</span><span>Roofing</span><span>Outdoor living</span><span>Flooring</span><span>Windows and doors</span><span>New construction</span><span>Commercial</span><span>Permitting</span></div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver sfn" data-v="4" hidden>
-    <div class="wrap sfn__grid">
-      <div class="sfn__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h4">Three services, <span class="acc">one deck.</span></h2>
-        <p class="t-lead sfn__lead">Fan the deck out and pull the card for your project.</p>
-        <button type="button" class="btn sfn__open" aria-pressed="false" data-rx="~card/swing/spinout/r"><span class="btn__label">Fan the deck</span></button>
-        <p class="services__also">We also build ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction and commercial remodels, and handle planning and permitting.</p>
-      </div>
-      <div class="sfn__deck"><span class="sfn__pin" aria-hidden="true"></span><button type="button" class="sfn__card" style="--i:0" data-rx="native:fan-card" aria-pressed="false"><img data-img="k-white-shaker" alt="White Shaker kitchen remodel by Elbaz" width="1600" height="1067"><span class="sfn__t">Kitchens</span><span class="sfn__d">Layout, cabinetry, counters and the services behind them.</span><span class="sfn__w"><span class="nums">6&ndash;12</span> weeks of construction, typically</span></button><button type="button" class="sfn__card" style="--i:1" data-rx="native:fan-card" aria-pressed="false"><img data-img="b-spa-guest" alt="Spa-style guest bathroom remodel by Elbaz" width="1600" height="1067"><span class="sfn__t">Bathrooms</span><span class="sfn__d">Down to the studs, waterproofed, closed up once.</span><span class="sfn__w"><span class="nums">4&ndash;8</span> weeks of construction, typically</span></button><button type="button" class="sfn__card" style="--i:2" data-rx="native:fan-card" aria-pressed="false"><img data-img="w-farmhouse" alt="Modern farmhouse whole-home renovation by Elbaz" width="1600" height="1067"><span class="sfn__t">Whole homes</span><span class="sfn__d">Plans opened, structure moved, one disruption.</span><span class="sfn__w">Several months of construction, typically</span></button></div>
-    </div>
-  </div>
-
-  
-  <div class="ver stc" data-v="5" hidden>
-    <div class="wrap stc__grid">
-      <div class="stc__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h5">Pull a drawer. <span class="acc">See the job.</span></h2>
-        <p class="t-lead stc__lead">Each drawer holds one kind of project, layer by layer.</p>
-      </div>
-      <div class="stc__chest">
-        <div class="stc__lid" aria-hidden="true"><svg viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M4 18 Q4 4 16 4 H84 Q96 4 96 18"/></svg></div>
-        <div class="stc__dr"><button type="button" class="stc__front" aria-expanded="false" aria-controls="stc-p0" data-rx="native:chest-drawer"><span class="stc__h">Kitchens</span><span class="stc__hd" aria-hidden="true"></span></button><div class="stc__in" id="stc-p0" hidden><img data-img="k-white-shaker" alt="White Shaker kitchen remodel by Elbaz" width="1600" height="1067"><div><p>Layout, cabinetry, counters and the services behind them.</p><ol><li>Layout</li><li>Plumbing and electrical</li><li>Cabinetry</li><li>Counters</li></ol><p class="stc__w"><span class="nums">6&ndash;12</span> weeks of construction, typically</p></div></div></div><div class="stc__dr"><button type="button" class="stc__front" aria-expanded="false" aria-controls="stc-p1" data-rx="native:chest-drawer"><span class="stc__h">Bathrooms</span><span class="stc__hd" aria-hidden="true"></span></button><div class="stc__in" id="stc-p1" hidden><img data-img="b-spa-guest" alt="Spa-style guest bathroom remodel by Elbaz" width="1600" height="1067"><div><p>Down to the studs, waterproofed, closed up once.</p><ol><li>Studs</li><li>Backer board</li><li>Waterproofing</li><li>Tile, set square</li><li>Glass, templated after tiling</li></ol><p class="stc__w"><span class="nums">4&ndash;8</span> weeks of construction, typically</p></div></div></div><div class="stc__dr"><button type="button" class="stc__front" aria-expanded="false" aria-controls="stc-p2" data-rx="native:chest-drawer"><span class="stc__h">Whole homes</span><span class="stc__hd" aria-hidden="true"></span></button><div class="stc__in" id="stc-p2" hidden><img data-img="w-farmhouse" alt="Modern farmhouse whole-home renovation by Elbaz" width="1600" height="1067"><div><p>Plans opened, structure moved, one disruption.</p><ol><li>Slab</li><li>Structure</li><li>Open plan</li><li>Roof</li></ol><p class="stc__w">Several months of construction, typically</p></div></div></div>
-        <div class="stc__dr"><button type="button" class="stc__front" aria-expanded="false" aria-controls="stc-p3" data-rx="native:chest-drawer"><span class="stc__h">Everything else</span><span class="stc__hd" aria-hidden="true"></span></button><div class="stc__in" id="stc-p3" hidden><div><p class="services__also">We also build ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction and commercial remodels, and handle planning and permitting.</p></div></div></div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver sss" data-v="6" hidden>
-    <div class="wrap sss__grid">
-      <div class="sss__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h6">How big is <span class="acc">your project?</span></h2>
-        <p class="t-lead sss__lead">Slide from one room to the whole house.</p>
-        <label class="sss__lab" for="sss-r">Scope</label>
-        <input class="sss__r" id="sss-r" type="range" min="0" max="3" step="1" value="0" data-rx="native:scope-dial" aria-valuetext="A bathroom">
-        <div class="sss__ticks" aria-hidden="true"><span>Bathroom</span><span>Kitchen</span><span>Whole home</span><span>Add on</span></div>
-        <div class="sss__out" aria-live="polite"><h3 class="sss__h">Bathrooms</h3><p class="sss__p">Down to the studs, waterproofed, closed up once.</p><p class="sss__w"><span class="nums">4&ndash;8</span> weeks of construction, typically</p></div>
-      </div>
-      <svg class="sss__house" viewBox="0 0 520 400" aria-hidden="true" focusable="false">
-        <path class="roof" d="M20 170 L260 30 L500 170"/>
-        <rect class="rm" data-s="3" x="410" y="230" width="100" height="150"/>
-        <rect class="rm" data-s="0" x="60" y="170" width="140" height="100"/><rect class="rm" data-s="1" x="200" y="170" width="200" height="100"/>
-        <rect class="rm" data-s="2" x="60" y="270" width="340" height="110"/>
-        <path class="wl" d="M60 170 V380 H400 V170 M60 270 H400 M200 170 V270"/><path class="ad" d="M400 230 H510 V380 H400"/>
-        <text x="130" y="226">Bath</text><text x="300" y="226">Kitchen</text><text x="230" y="332">Living</text><text x="460" y="310">Addition</text>
-        <path class="gd" d="M0 382 H520"/>
-      </svg>
-    </div>
-  </div>
-
-  
-  <div class="ver shc" data-v="7" hidden>
-    <div class="wrap">
-      <div class="shc__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h7">One house, <span class="acc">every trade.</span></h2>
-        <p class="t-lead shc__lead">Point at any part of the house to see who builds it. Every part, one contractor.</p>
-      </div>
-      <div class="shc__stage">
-        <svg class="shc__art" viewBox="0 0 900 460" aria-hidden="true" focusable="false">
-          <circle class="sun" cx="800" cy="70" r="46"/>
-          <path class="roof" d="M110 190 L430 40 L750 190 Z"/><path class="wall" d="M150 190 H710 V420 H150 Z"/><path class="annex" d="M710 260 H860 V420 H710 Z"/>
-          <path class="split" d="M430 190 V420 M150 300 H710"/>
-          <rect class="win" x="200" y="214" width="80" height="58"/><rect class="win" x="600" y="214" width="80" height="58"/>
-          <rect class="cab" x="310" y="236" width="100" height="56"/><rect class="tub" x="470" y="250" width="100" height="40" rx="18"/>
-          <path class="floor" d="M150 420 H710"/><rect class="floorb" x="170" y="392" width="240" height="16"/>
-          <path class="yard" d="M20 430 H130 M860 430 H890"/><g class="palm"><path d="M70 430 C66 380 60 340 50 310"/><path d="M50 310 C30 296 6 298 -10 312 M50 310 C40 286 20 272 0 268 M50 310 C58 284 76 268 100 264 M50 310 C76 300 100 306 118 326"/></g>
-          <path class="gd" d="M0 432 H900"/>
-        </svg>
-        <button type="button" class="shc__hs" style="left:47%;top:16%" data-t="Roofing" data-d="Roofing is one of the trades Elbaz builds." data-rx="native:cutaway-spot">Roof</button>
-        <button type="button" class="shc__hs" style="left:26%;top:52%" data-t="Windows and doors" data-d="Windows and doors are one of the trades Elbaz builds." data-rx="native:cutaway-spot">Windows</button>
-        <button type="button" class="shc__hs" style="left:40%;top:57%" data-t="Kitchens" data-d="Layout, cabinetry, counters and the services behind them. 6&#8211;12 weeks of construction, typically." data-rx="native:cutaway-spot">Kitchen</button>
-        <button type="button" class="shc__hs" style="left:58%;top:58%" data-t="Bathrooms" data-d="Down to the studs, waterproofed, closed up once. 4&#8211;8 weeks of construction, typically." data-rx="native:cutaway-spot">Bath</button>
-        <button type="button" class="shc__hs" style="left:32%;top:85%" data-t="Flooring" data-d="Flooring is one of the trades Elbaz builds." data-rx="native:cutaway-spot">Floor</button>
-        <button type="button" class="shc__hs" style="left:8%;top:80%" data-t="Outdoor living" data-d="Outdoor living is one of the trades Elbaz builds." data-rx="native:cutaway-spot">Yard</button>
-        <button type="button" class="shc__hs" style="left:87%;top:68%" data-t="ADUs and additions" data-d="ADUs and additions are among the projects Elbaz builds." data-rx="native:cutaway-spot">Annex</button>
-        <button type="button" class="shc__hs" style="left:62%;top:30%" data-t="Whole homes" data-d="Plans opened, structure moved, one disruption. Several months of construction, typically." data-rx="native:cutaway-spot">Whole house</button>
-        <div class="shc__card" aria-live="polite"><h3>Pick a part of the house.</h3><p>Planning and permitting come with every one of them.</p></div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver sdb" data-v="8" hidden>
-    <div class="wrap">
-      <div class="sdb__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h8">How long <span class="acc">each job runs.</span></h2>
-        <p class="t-lead sdb__lead">Weeks of construction as Elbaz publishes them, typically. Timelines vary by scope and jurisdiction.</p>
-      </div>
-      <div class="sdb__scale" aria-hidden="true"><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span><span>12 weeks</span></div>
-      <ul class="sdb__rows"><li class="sdb__row "><img data-img="b-spa-guest" alt="Spa-style guest bathroom remodel by Elbaz" width="1600" height="1067"><div class="sdb__info"><h3>Bathrooms</h3><p>Down to the studs, waterproofed, closed up once.</p></div><div class="sdb__track" style="--a:33.33%;--b:66.67%"><span class="sdb__bar"></span><span class="sdb__lbl"><span class="nums">4&ndash;8</span> weeks of construction, typically</span></div></li><li class="sdb__row "><img data-img="k-white-shaker" alt="White Shaker kitchen remodel by Elbaz" width="1600" height="1067"><div class="sdb__info"><h3>Kitchens</h3><p>Layout, cabinetry, counters and the services behind them.</p></div><div class="sdb__track" style="--a:50%;--b:100%"><span class="sdb__bar"></span><span class="sdb__lbl"><span class="nums">6&ndash;12</span> weeks of construction, typically</span></div></li><li class="sdb__row sdb__row--open"><img data-img="w-farmhouse" alt="Modern farmhouse whole-home renovation by Elbaz" width="1600" height="1067"><div class="sdb__info"><h3>Whole homes</h3><p>Plans opened, structure moved, one disruption.</p></div><div class="sdb__track"><span class="sdb__bar" ></span><span class="sdb__lbl">Several months of construction, typically</span></div></li></ul>
-      <p class="services__also">We also build ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction and commercial remodels, and handle planning and permitting.</p>
-    </div>
-  </div>
-
-  <div class="ver sl" data-v="b2" hidden>
-    <div class="wrap">
-      <div class="services__head">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>What we build</p>
-        <h2 class="t-head" id="services-h1-w">Whatever the scope, <span class="acc">one team</span> accountable for all of it.</h2>
-        <p class="t-lead services__lead">Every job is a stack of trades. Point at a drawing to preview its layers; click or tap to keep it open.</p>
-      </div>
-      <div class="sl__grid">
-        <article class="sl__card" data-asm="kitchen" data-card>
-          <button type="button" class="sl__stage" aria-expanded="false" aria-label="Kitchen: show the layers" data-rx="native:explode-kitchen">
-            <svg class="sl__svg" aria-hidden="true" focusable="false"></svg>
-            <span class="sl__cap" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6"/></svg>Kitchen, in layers</span>
-          </button>
-          <div class="sl__txt">
-          <h3 class="sl__h">Kitchens</h3>
-          <p class="sl__p">Layout, cabinetry, counters and the services behind them.</p>
-          <ol class="sl__layers" aria-label="Kitchen layers, from the floor up"><li>Layout</li><li>Plumbing and electrical</li><li>Cabinetry</li><li>Counters</li></ol>
-          <p class="sl__time"><span class="nums">6&ndash;12</span> weeks of construction, typically</p>
-          <a class="btn btn--ghost sl__btn" href="#consult" data-rx="screw"><span class="btn__label">Plan a kitchen</span></a></div>
-        </article>
-        <article class="sl__card" data-asm="bath" data-card>
-          <button type="button" class="sl__stage" aria-expanded="false" aria-label="Bathroom: show the layers" data-rx="native:explode-bath">
-            <svg class="sl__svg" aria-hidden="true" focusable="false"></svg>
-            <span class="sl__cap" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6"/></svg>Bathroom, in layers</span>
-          </button>
-          <div class="sl__txt">
-          <h3 class="sl__h">Bathrooms</h3>
-          <p class="sl__p">Down to the studs, waterproofed, closed up once.</p>
-          <ol class="sl__layers" aria-label="Bathroom wall layers, from the studs out"><li>Studs</li><li>Backer board</li><li>Waterproofing</li><li>Tile, set square</li><li>Glass, templated after tiling</li></ol>
-          <p class="sl__time"><span class="nums">4&ndash;8</span> weeks of construction, typically</p>
-          <a class="btn btn--ghost sl__btn" href="#consult" data-rx="~drill/spin/chips/r"><span class="btn__label">Plan a bathroom</span></a></div>
-        </article>
-        <article class="sl__card" data-asm="home" data-card>
-          <button type="button" class="sl__stage" aria-expanded="false" aria-label="Whole home: show the layers" data-rx="native:explode-home">
-            <svg class="sl__svg" aria-hidden="true" focusable="false"></svg>
-            <span class="sl__cap" aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6"/></svg>Whole home, in layers</span>
-          </button>
-          <div class="sl__txt">
-          <h3 class="sl__h">Whole homes</h3>
-          <p class="sl__p">Plans opened, structure moved, one disruption.</p>
-          <ol class="sl__layers" aria-label="Whole-home layers, from the ground up"><li>Slab</li><li>Structure</li><li>Open plan</li><li>Roof</li></ol>
-          <p class="sl__time">Several months of construction, typically</p>
-          <a class="btn btn--ghost sl__btn" href="#consult" data-rx="~nut/roll/spinout/r"><span class="btn__label">Plan a whole home</span></a></div>
-        </article>
-      </div>
-      <p class="services__also sl__also">We also build ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction and commercial remodels, and handle planning and permitting.</p>
-    </div>
-  </div>
-
-  <div class="ver services1" data-v="b1" hidden>
-    <div class="wrap">
-      <div class="services__head">
-        <h2 class="t-head" id="services-h1">Whatever the scope, one team accountable for all of it.</h2>
-        <p class="t-lead services__lead">Every job is a stack of trades. Hover a drawing, or tap it, to take the room apart the way we build it.</p>
-      </div>
-      <div class="services1__grid">
-        <article class="services1__card" data-asm="kitchen" data-card>
-          <button type="button" class="services1__stage" aria-expanded="false" aria-label="Kitchen: show the layers" data-rx="native:explode-kitchen">
-            <svg class="services1__svg" aria-hidden="true" focusable="false"></svg>
-          </button>
-          <h3 class="services1__h">Kitchens</h3>
-          <p class="services1__p">Layout, cabinetry, counters and the plumbing and electrical behind them, handled as one scope.</p>
-          <ol class="services1__layers" aria-label="Kitchen layers, from the floor up"><li>Layout</li><li>Plumbing and electrical</li><li>Cabinetry</li><li>Counters</li></ol>
-          <p class="services1__time"><span class="nums">6&ndash;12</span> weeks of construction, typically</p>
-          <a class="btn btn--ghost services1__btn" href="#consult" data-rx="screw"><span class="btn__label">Plan a kitchen</span></a>
-        </article>
-        <article class="services1__card" data-asm="bath" data-card>
-          <button type="button" class="services1__stage" aria-expanded="false" aria-label="Bathroom: show the layers" data-rx="native:explode-bath">
-            <svg class="services1__svg" aria-hidden="true" focusable="false"></svg>
-          </button>
-          <h3 class="services1__h">Bathrooms</h3>
-          <p class="services1__p">Down to the studs. Waterproofed properly. Closed up once.</p>
-          <ol class="services1__layers" aria-label="Bathroom wall layers, from the studs out"><li>Studs</li><li>Backer board</li><li>Waterproofing</li><li>Tile, set square</li><li>Glass, templated after tiling</li></ol>
-          <p class="services1__time"><span class="nums">4&ndash;8</span> weeks of construction, typically</p>
-          <a class="btn btn--ghost services1__btn" href="#consult" data-rx="~drill/spin/chips/r"><span class="btn__label">Plan a bathroom</span></a>
-        </article>
-        <article class="services1__card" data-asm="home" data-card>
-          <button type="button" class="services1__stage" aria-expanded="false" aria-label="Whole home: show the layers" data-rx="native:explode-home">
-            <svg class="services1__svg" aria-hidden="true" focusable="false"></svg>
-          </button>
-          <h3 class="services1__h">Whole homes</h3>
-          <p class="services1__p">Opening up plans, moving structure, and re&#8209;sequencing a house so it works the way you live now.</p>
-          <ol class="services1__layers" aria-label="Whole-home layers, from the ground up"><li>Slab</li><li>Structure</li><li>Open plan</li><li>Roof</li></ol>
-          <p class="services1__time">Several months of construction, typically</p>
-          <a class="btn btn--ghost services1__btn" href="#consult" data-rx="~nut/roll/spinout/r"><span class="btn__label">Plan a whole home</span></a>
-        </article>
-      </div>
-      <p class="services__also">Also: ADUs and additions, roofing, outdoor living, flooring, windows and doors, new construction, commercial remodeling, planning and permitting.</p>
-    </div>
-  </div>
-
-  
-  <div class="ver services2" data-v="b3" hidden>
-    <div class="wrap">
-      <div class="services__head">
-        <h2 class="t-head" id="services-h2">Three drawing sets. One contractor.</h2>
-        <p class="t-lead services__lead">Each scope is drawn before it is priced. Open a sheet to see everything it covers.</p>
-      </div>
-      <div class="services2__stack">
-        <article class="services2__sheet" data-card>
-          <div class="services2__frame">
-            <figure class="services2__photo"><img data-img="k-walnut-marble" width="1600" height="1067" loading="lazy" alt="Open-concept kitchen with fluted walnut cabinetry and bookmatched marble, an Elbaz project"></figure>
-            <div class="services2__body">
-              <p class="services2__no nums">Sheet 01 of 03</p>
-              <h3 class="services2__h">Kitchens</h3>
-              <p class="services2__p">The room you actually live in. In a kitchen, the sequence is the job.</p>
-              <div class="services2__scope" id="sv2-scope-1">
-                <ul><li>Full kitchen remodel</li><li>Custom cabinetry</li><li>Cabinet refacing and replacement</li><li>Countertop installation</li><li>Kitchen islands</li><li>Layout and design</li><li>Luxury kitchens</li><li>Open-concept kitchens</li><li>Outdoor kitchens</li><li>Small and galley kitchens</li></ul>
-              </div>
-              <div class="services2__acts">
-                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-1" data-rx="~sander/rail/chips/r"><span class="btn__label">Open the scope</span></button>
-                <p class="services2__time"><span class="nums">6&ndash;12</span> weeks of construction</p>
-              </div>
-            </div>
-            <dl class="services2__tb"><div><dt>Project</dt><dd>Kitchen remodeling</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;01</dd></div></dl>
-          </div>
-        </article>
-        <article class="services2__sheet" data-card>
-          <div class="services2__frame">
-            <figure class="services2__photo"><img data-img="b-black-marble" width="1200" height="1600" loading="lazy" alt="Black marble primary bathroom with a freestanding tub and glass wet room, an Elbaz project"></figure>
-            <div class="services2__body">
-              <p class="services2__no nums">Sheet 02 of 03</p>
-              <h3 class="services2__h">Bathrooms</h3>
-              <p class="services2__p">Waterproofing done properly, tile set square, glass and fixtures that still look right in year five.</p>
-              <div class="services2__scope" id="sv2-scope-2">
-                <ul><li>Full bathroom remodel</li><li>Primary bath suites</li><li>Walk-in shower conversions</li><li>Bathtub-to-shower conversions</li><li>Spa bathrooms</li><li>Luxury bathrooms</li><li>Small bathrooms</li><li>Powder rooms</li><li>Vanity and storage</li><li>ADA and accessible bathrooms</li></ul>
-              </div>
-              <div class="services2__acts">
-                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-2" data-rx="~chisel/rail/chips/r"><span class="btn__label">Open the scope</span></button>
-                <p class="services2__time"><span class="nums">4&ndash;8</span> weeks of construction</p>
-              </div>
-            </div>
-            <dl class="services2__tb"><div><dt>Project</dt><dd>Bathroom remodeling</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;02</dd></div></dl>
-          </div>
-        </article>
-        <article class="services2__sheet" data-card>
-          <div class="services2__frame">
-            <figure class="services2__photo"><img data-img="r-openplan" width="1600" height="1600" loading="lazy" alt="Modern open-concept kitchen and living area renovation by Elbaz"></figure>
-            <div class="services2__body">
-              <p class="services2__no nums">Sheet 03 of 03</p>
-              <h3 class="services2__h">Whole homes</h3>
-              <p class="services2__p">One contractor. The whole house. One disruption, not five.</p>
-              <div class="services2__scope" id="sv2-scope-3">
-                <ul><li>Opening up floor plans</li><li>Moving structure</li><li>Re-sequencing the house</li><li>ADUs and additions</li><li>Roofing</li><li>Flooring</li><li>Windows and doors</li><li>Outdoor living</li><li>Planning and permitting</li></ul>
-              </div>
-              <div class="services2__acts">
-                <button type="button" class="btn btn--ghost services2__toggle" aria-expanded="false" aria-controls="sv2-scope-3" data-rx="~plane/slide/chips/r"><span class="btn__label">Open the scope</span></button>
-                <p class="services2__time">Several months of construction</p>
-              </div>
-            </div>
-            <dl class="services2__tb"><div><dt>Project</dt><dd>Whole-home renovation</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div><div><dt>Sheet</dt><dd class="nums">A&#8209;03</dd></div></dl>
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver services3" data-v="b4" hidden>
-    <div class="wrap services3__grid">
-      <div class="services3__side">
-        <h2 class="t-head" id="services-h3">Pick the job. We bring every tool.</h2>
-        <ul class="services3__list" role="list">
-          <li><button type="button" class="services3__row" data-tool="0" data-rx="native:hammer" aria-pressed="false"><span class="services3__n nums">01</span><span class="services3__name">Kitchens</span><span class="services3__line">Layout, cabinetry, counters and the services behind them. <span class="nums">6&ndash;12</span> weeks.</span></button></li>
-          <li><button type="button" class="services3__row" data-tool="1" data-rx="native:trowel" aria-pressed="false"><span class="services3__n nums">02</span><span class="services3__name">Bathrooms</span><span class="services3__line">Down to the studs, waterproofed, closed up once. <span class="nums">4&ndash;8</span> weeks.</span></button></li>
-          <li><button type="button" class="services3__row" data-tool="2" data-rx="native:hinge" aria-pressed="false"><span class="services3__n nums">03</span><span class="services3__name">Whole homes</span><span class="services3__line">Plans opened, structure moved, one disruption. Several months.</span></button></li>
-        </ul>
-        <a class="btn services3__btn" href="#consult" data-rx="hook"><span class="btn__label">Book a consultation</span></a>
-      </div>
-      <div class="services3__wall" aria-hidden="true">
-        <svg class="services3__board"></svg>
-        <div class="services3__tags"><span>ADUs and additions</span><span>Roofing</span><span>Outdoor living</span><span>Flooring</span><span>Windows and doors</span><span>New construction</span><span>Commercial</span><span>Permitting</span></div>
-      </div>
+            <dl class="sv__tb"><div><dt>Project</dt><dd>Whole-home renovation</dd></div><div><dt>Contractor</dt><dd>Licensed, bonded &amp; insured · <span class="nums">CBC1265280</span></dd></div></dl>
+          </article>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
@@ -9128,460 +8472,40 @@ html.has-buddy select { cursor: default !important; }
   } } });
 })();
 
-/* services, PLAN-V3 §3: v1 exploded iso assemblies (Silo 98), v2 sticky drawing-set stack (R45 + 571 + curtain),
-   v3 pegboard tool wall (trade icons 91 + grid-magnetic holes). */
+/* FINALIZE · Home 3 · Services (V2 deepened): sticky drawing sheets [S1322 spec: the earlier sheet recedes to scale
+   .92+i*.015 and takes a shade while the next one lands, scrubbed between the next sheet's top 78% and the sticky line;
+   text never fades]. The dimension line draws across each photo as its sheet arrives [S0362]. The scope overlay opens
+   from the title block (aria-expanded, Escape closes, focus stays on the toggle). Reduced motion: no recede, no draw. */
 (function () {
-  var C = Math.cos(Math.PI / 6), S = .5;
-  function P(x, y, z) { return [(x - y) * C, (x + y) * S - z]; }
-  function pts(a) { return a.map(function (p) { var q = P(p[0], p[1], p[2]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' '); }
-  // iso box: top, front-left (y+d), front-right (x+w)
-  function box(x, y, z, w, d, h, m) {
-    return '<g class="m-' + m + '">' +
-      '<polygon class="l" points="' + pts([[x, y + d, z], [x + w, y + d, z], [x + w, y + d, z + h], [x, y + d, z + h]]) + '"/>' +
-      '<polygon class="r" points="' + pts([[x + w, y, z], [x + w, y + d, z], [x + w, y + d, z + h], [x + w, y, z + h]]) + '"/>' +
-      '<polygon class="t" points="' + pts([[x, y, z + h], [x + w, y, z + h], [x + w, y + d, z + h], [x, y + d, z + h]]) + '"/></g>';
-  }
-  function line(a, b) { var p = P(a[0], a[1], a[2]), q = P(b[0], b[1], b[2]); return 'M' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + 'L' + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }
+  EZ.section('services', { 1: { init: function (root, k) {
+    var sheets = Array.prototype.slice.call(root.querySelectorAll('.sv__sheet'));
+    var stacked = function () { return matchMedia('(min-width: 901px) and (min-height: 681px)').matches; };
 
-  // each assembly: layers bottom->top, each { art, label, anchor [x,y,z] } and an explode direction in screen space
-  var ASM = {
-    kitchen: { dir: [0, -1], gap: 62, layers: [
-      { label: 'Layout', at: [200, 70, 4], art: function () { var g = ''; for (var i = 20; i < 200; i += 20) g += line([i, 0, 4], [i, 140, 4]); for (var j = 20; j < 140; j += 20) g += line([0, j, 4], [200, j, 4]); return box(0, 0, 0, 200, 140, 4, 'floor') + '<path class="grid" d="' + g + '"/>'; } },
-      { label: 'Plumbing and electrical', at: [190, 12, 30], art: function () { return box(10, 8, 8, 180, 6, 6, 'pipe') + box(40, 8, 8, 6, 6, 60, 'pipe') + box(140, 4, 30, 50, 4, 4, 'wire') + box(150, 4, 8, 4, 4, 26, 'wire') + box(120, 2, 46, 10, 3, 12, 'wire'); } },
-      { label: 'Cabinetry', at: [180, 25, 60], art: function () { return box(0, 0, 0, 60, 50, 72, 'cab') + box(60, 0, 0, 60, 50, 72, 'cab') + box(120, 0, 0, 60, 50, 72, 'cab') + box(70, 80, 0, 90, 46, 72, 'cab'); } },
-      { label: 'Counters', at: [186, 26, 78], art: function () { return box(-4, -2, 72, 188, 56, 7, 'stone') + box(64, 76, 72, 102, 54, 7, 'stone'); } }
-    ] },
-    bath: { dir: [-C, S], gap: 46, layers: [
-      { label: 'Studs', at: [150, 0, 130], art: function () { var s = ''; for (var x = 0; x <= 150; x += 37.5) s += box(x, 0, 0, 6, 12, 150, 'stud'); return box(0, 0, 150, 156, 12, 6, 'stud') + s + box(0, 0, -6, 156, 12, 6, 'stud'); } },
-      { label: 'Backer board', at: [156, 14, 112], art: function () { return box(0, 14, 0, 156, 5, 150, 'board'); } },
-      { label: 'Waterproofing', at: [156, 21, 96], art: function () { return box(0, 21, 0, 156, 3, 150, 'wp'); } },
-      { label: 'Tile, set square', at: [156, 26, 80], art: function () { var g = ''; for (var x = 26; x < 156; x += 26) g += line([x, 30, 0], [x, 30, 150]); for (var z = 25; z < 150; z += 25) g += line([0, 30, z], [156, 30, z]); return box(0, 26, 0, 156, 4, 150, 'tile') + '<path class="grid" d="' + g + '"/>'; } },
-      { label: 'Glass, templated after tiling', at: [110, 74, 70], art: function () { return box(60, 70, 0, 4, 80, 140, 'glass'); } }
-    ] },
-    home: { dir: [0, -1], gap: 58, layers: [
-      { label: 'Slab', at: [200, 80, 10], art: function () { return box(0, 0, 0, 200, 160, 10, 'slab'); } },
-      { label: 'Structure', at: [200, 4, 70], art: function () {
-        var f = '';
-        for (var x = 0; x <= 196; x += 28) f += box(x, 0, 10, 4, 6, 66, 'frame');
-        for (var y = 0; y <= 156; y += 32) f += box(0, y, 10, 6, 4, 66, 'frame');
-        return box(0, 0, 76, 200, 6, 4, 'frame') + box(0, 0, 76, 6, 160, 4, 'frame') + f + box(196, 156, 10, 4, 4, 70, 'frame') + box(196, 0, 10, 4, 4, 70, 'frame') + box(0, 156, 10, 4, 4, 70, 'frame');
-      } },
-      { label: 'Open plan', at: [200, 100, 20], art: function () { return box(90, 0, 10, 6, 70, 66, 'wall') + box(130, 110, 10, 70, 6, 40, 'wall'); } },
-      { label: 'Roof', at: [205, 80, 125], art: function () {
-        var e = -6, w = 212, ez = 80, rz = 128;
-        return '<polygon class="m-roof-l" points="' + pts([[e, -8, ez], [w, -8, ez], [w, 80, rz], [e, 80, rz]]) + '" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.1"/>' +
-          '<polygon class="m-roof" points="' + pts([[e, 80, rz], [w, 80, rz], [w, 168, ez], [e, 168, ez]]) + '" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.1"/>' +
-          '<polygon class="m-wall" points="' + pts([[w - 6, -8, ez], [w - 6, 80, rz], [w - 6, 168, ez]]) + '" fill="' + EZ.c('--color-border-subtle') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.1"/>';
-      } }
-    ] }
-  };
-
-  function buildAsm(svg, def) {
-    var n = def.layers.length, html = '';
-    // labels share one column to the right of the exploded drawing, so no label sits on a layer
-    var col = -1e9;
-    def.layers.forEach(function (L, i) { var a = P(L.at[0], L.at[1], L.at[2]); col = Math.max(col, a[0] + def.dir[0] * def.gap * i); });
-    col += 28;
-    def.layers.forEach(function (L, i) {
-      var a = P(L.at[0], L.at[1], L.at[2]), lx = col - def.dir[0] * def.gap * i;
-      html += '<g class="layer" data-i="' + i + '">' + L.art() +
-        '<g class="lab"><circle class="dotl" cx="' + a[0].toFixed(1) + '" cy="' + a[1].toFixed(1) + '" r="3"/><path class="ldr" d="M' + a[0].toFixed(1) + ' ' + a[1].toFixed(1) + 'H' + lx.toFixed(1) + '"/>' +
-        '<text class="lbl" x="' + (lx + 6).toFixed(1) + '" y="' + (a[1] + 5).toFixed(1) + '">' + L.label + '</text></g></g>';
+    // scope overlays
+    root.querySelectorAll('.sv__toggle').forEach(function (btn) {
+      var panel = root.querySelector('#' + btn.getAttribute('aria-controls')), label = btn.querySelector('.btn__label');
+      function set(open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.hidden = !open;
+        label.textContent = open ? 'Close the scope' : 'Open the scope';
+      }
+      k.on(btn, 'click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+      k.on(panel.closest('.sv__paper'), 'keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+      k.add(function () { set(false); });
     });
-    svg.innerHTML = html;
-    // fit the viewBox to the fully exploded drawing (labels included), so the assembly fills its stage
-    var layers = svg.querySelectorAll('.layer');
-    layers.forEach(function (g, i) { var o = def.gap * i; g.setAttribute('transform', 'translate(' + (def.dir[0] * o).toFixed(1) + ' ' + (def.dir[1] * o).toFixed(1) + ')'); });
-    var bb = svg.getBBox(), pad = 10;
-    svg.setAttribute('viewBox', (bb.x - pad).toFixed(1) + ' ' + (bb.y - pad).toFixed(1) + ' ' + (bb.width + pad * 2).toFixed(1) + ' ' + (bb.height + pad * 2).toFixed(1));
-    return { layers: svg.querySelectorAll('.layer'), labs: svg.querySelectorAll('.lab') };
-  }
 
-  EZ.section('services', {
-    /* slot 4 · NEW · The swatch fan: fans out round its pin; the picked card comes to the front */
-    4: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.sfn__side > *'));
-      var btn = root.querySelector('.sfn__open'), cards = Array.prototype.slice.call(root.querySelectorAll('.sfn__card'));
-      function setOpen(on) { root.classList.toggle('is-open', on); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.querySelector('.btn__label').textContent = on ? 'Close the deck' : 'Fan the deck'; }
-      k.on(btn, 'click', function () { setOpen(!root.classList.contains('is-open')); });
-      cards.forEach(function (c) { k.on(c, 'click', function () { setOpen(true); cards.forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); }); }); });
-      if (k.motion) ScrollTrigger.create({ trigger: root.querySelector('.sfn__deck'), start: 'top 65%', once: true, onEnter: function () { setOpen(true); } });
-      else setOpen(true);
-      k.add(function () { setOpen(false); cards.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); });
-    } },
-
-    /* slot 5 · NEW · The tool chest: one drawer open at a time; its scope slides out under it */
-    5: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.stc__side > *'));
-      var fronts = Array.prototype.slice.call(root.querySelectorAll('.stc__front'));
-      function open(f) {
-        fronts.forEach(function (x) {
-          var on = x === f && x.getAttribute('aria-expanded') !== 'true', pn = document.getElementById(x.getAttribute('aria-controls'));
-          x.setAttribute('aria-expanded', on ? 'true' : 'false'); pn.hidden = !on;
-          if (on && k.motion) gsap.fromTo(pn, { height: 0, autoAlpha: 0 }, { height: 'auto', autoAlpha: 1, duration: .32, ease: EZ.bezier(.23, 1, .32, 1), clearProps: 'height' });
-        });
-      }
-      fronts.forEach(function (f) { k.on(f, 'click', function () { open(f); }); });
-      open(fronts[0]);
-      k.add(function () { fronts.forEach(function (x) { x.setAttribute('aria-expanded', 'false'); document.getElementById(x.getAttribute('aria-controls')).hidden = true; }); });
-    } },
-
-    /* slot 6 · NEW · The scope dial: the slider fills the drawn house room by room and the scope answers */
-    6: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.sss__side > *'));
-      var r = root.querySelector('.sss__r'), rms = root.querySelectorAll('.sss__house .rm'), ad = root.querySelector('.sss__house .ad');
-      var h = root.querySelector('.sss__h'), pp = root.querySelector('.sss__p'), w = root.querySelector('.sss__w');
-      var S = [
-        { t: 'Bathrooms', p: 'Down to the studs, waterproofed, closed up once.', w: '<span class="nums">4&ndash;8</span> weeks of construction, typically', on: [0], v: 'A bathroom' },
-        { t: 'Kitchens', p: 'Layout, cabinetry, counters and the services behind them.', w: '<span class="nums">6&ndash;12</span> weeks of construction, typically', on: [1], v: 'A kitchen' },
-        { t: 'Whole homes', p: 'Plans opened, structure moved, one disruption.', w: 'Several months of construction, typically', on: [0, 1, 2], v: 'The whole home' },
-        { t: 'ADUs and additions', p: 'Elbaz also builds ADUs and additions, with planning and permitting handled.', w: 'Timelines vary by scope and jurisdiction.', on: [0, 1, 2, 3], v: 'An addition' }
-      ];
-      function set() {
-        var x = S[+r.value];
-        rms.forEach(function (m) { m.classList.toggle('is-on', x.on.indexOf(+m.dataset.s) > -1); });
-        ad.classList.toggle('is-on', +r.value === 3);
-        h.textContent = x.t; pp.textContent = x.p; w.innerHTML = x.w; r.setAttribute('aria-valuetext', x.v);
-      }
-      k.on(r, 'input', set); set();
-      k.add(function () { r.value = 0; set(); });
-    } },
-
-    /* slot 7 · NEW · The house cutaway: each part of the drawn house names its trade */
-    7: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.shc__head > *'));
-      var hs = Array.prototype.slice.call(root.querySelectorAll('.shc__hs')), card = root.querySelector('.shc__card');
-      function pick(b) {
-        hs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-        card.innerHTML = '<h3>' + b.dataset.t + '</h3><p>' + b.dataset.d + '</p><p>Planning and permitting come with it.</p>';
-        if (k.motion) gsap.fromTo(card, { y: 8, autoAlpha: .4 }, { y: 0, autoAlpha: 1, duration: .22, ease: 'power2.out' });
-      }
-      hs.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); k.on(b, 'click', function () { pick(b); }); });
-      if (k.motion) gsap.from(hs, { scale: .5, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: root.querySelector('.shc__stage'), start: 'top 70%', once: true } });
-      k.add(function () { hs.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); card.innerHTML = '<h3>Pick a part of the house.</h3><p>Planning and permitting come with every one of them.</p>'; });
-    } },
-
-    /* slot 8 · NEW · The duration bars grow along the week scale once */
-    8: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.sdb__head > *'));
-      if (!k.motion) return;
-      gsap.from(root.querySelectorAll('.sdb__bar'), { scaleX: 0, duration: .6, ease: EZ.bezier(.23, 1, .32, 1), stagger: .12, scrollTrigger: { trigger: root.querySelector('.sdb__rows'), start: 'top 75%', once: true } });
-    } },
-
-    /* slot 3 · Phase 5 improved version of b4 */
-    3: { init: function (root, k) {
-      var wall = root.querySelector('.s3x__wall'), svg = root.querySelector('.s3x__board');
-      var rows = Array.prototype.slice.call(root.querySelectorAll('.s3x__row'));
-      var W = 600, H = 500, SP = 25, holes = [];
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      var h = '<rect class="hb" x="0" y="0" width="' + W + '" height="' + H + '"/>';
-      for (var y = SP; y < H; y += SP) for (var x = SP; x < W; x += SP) h += '<circle class="hole" cx="' + x + '" cy="' + y + '" r="3.4"/>';
-      h += '<rect class="frm" x="5" y="5" width="' + (W - 10) + '" height="' + (H - 10) + '"/>';
-      // tools hang from hooks [BANK 91: hammer strike, trowel sweep, cabinet door swing]
-      h += '<g class="tool" data-t="0"><path class="hook" d="M100 75v14q0 8 8 8"/><path class="hook" d="M175 75v14q0 8 -8 8"/>' +
-        '<g class="door"><rect x="86" y="95" width="104" height="160" fill="' + EZ.c('--color-art-line-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="3"/><rect x="102" y="111" width="72" height="128" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5"/><rect x="170" y="170" width="6" height="26" rx="3" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.5"/></g>' +
-        '<rect x="80" y="118" width="8" height="18" fill="' + EZ.c('--color-border') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.5"/><rect x="80" y="214" width="8" height="18" fill="' + EZ.c('--color-border') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.5"/></g>';
-      h += '<g class="tool" data-t="1"><path class="hook" d="M300 75v22"/><g class="trowel"><rect x="291" y="96" width="18" height="46" rx="8" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5"/><path d="M300 142v22" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="4"/>' +
-        '<path d="M250 164h100v58l-6 0v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-6z" fill="' + EZ.c('--color-border') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5" stroke-linejoin="round"/></g></g>';
-      h += '<g class="tool" data-t="2"><path class="hook" d="M440 75v20"/><path class="hook" d="M520 75v20"/><g class="hammer"><rect x="472" y="88" width="16" height="170" rx="6" fill="' + EZ.c('--color-art-accent-soft') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5"/>' +
-        '<path d="M430 92h88l10 8v22h-98q-12 -6 -14 -18q4 -10 14 -12z" fill="' + EZ.c('--color-border') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5" stroke-linejoin="round"/><path d="M528 100q22 -2 30 16q-16 -6 -30 -2z" fill="' + EZ.c('--color-border') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5"/></g>' +
-        '<g class="nail"><path d="M560 330v-26" stroke="' + EZ.c('--color-border') + '\" stroke-width="4"/><rect x="552" y="300" width="16" height="5" fill="' + EZ.c('--color-border') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="1.5"/></g></g>';
-      svg.innerHTML = h;
-      holes = Array.prototype.slice.call(svg.querySelectorAll('.hole')).map(function (c) { return { el: c, x: +c.getAttribute('cx'), y: +c.getAttribute('cy'), dx: 0, dy: 0 }; });
-      k.add(function () { svg.innerHTML = ''; });
-      var tools = svg.querySelectorAll('.tool');
-      var anims = [
-        function () { return gsap.timeline().to(svg.querySelector('.door'), { scaleX: .18, svgOrigin: '86 175', duration: .45, ease: 'power2.inOut' }).to(svg.querySelector('.door'), { scaleX: 1, svgOrigin: '86 175', duration: .7, ease: 'elastic.out(1,.5)' }); },
-        function () { return gsap.timeline().to(svg.querySelector('.trowel'), { rotation: -20, svgOrigin: '300 97', duration: .25, ease: 'power2.out' }).to(svg.querySelector('.trowel'), { rotation: 20, svgOrigin: '300 97', duration: .45, ease: 'sine.inOut' }).to(svg.querySelector('.trowel'), { rotation: 0, svgOrigin: '300 97', duration: .6, ease: 'elastic.out(1,.4)' }); },
-        function () { return gsap.timeline().to(svg.querySelector('.hammer'), { rotation: -34, svgOrigin: '480 250', duration: .22, ease: 'power2.out' }).to(svg.querySelector('.hammer'), { rotation: 8, svgOrigin: '480 250', duration: .12, ease: 'power4.in' }).to(svg.querySelector('.nail'), { y: 10, duration: .06 }, '<+.1').to(svg.querySelector('.hammer'), { rotation: 0, svgOrigin: '480 250', duration: .4, ease: 'back.out(3)' }); }
-      ];
-      var current = -1, running = null;
-      function pick(i, play) {
-        current = i;
-        rows.forEach(function (r, j) { r.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
-        tools.forEach(function (t, j) { t.classList.toggle('is-dim', i > -1 && j !== i); });
-        if (play && k.motion) { if (running) running.progress(1); gsap.set(svg.querySelector('.nail'), { y: 0 }); k.ctx.add(function () { running = anims[i](); }); }
-      }
-      rows.forEach(function (r, i) {
-        k.on(r, 'click', function () { pick(i, true); });
-        k.on(r, 'pointerenter', function (e) { if (e.pointerType === 'mouse' && current !== i) pick(i, true); });
-        k.on(r, 'focus', function () { if (current !== i) pick(i, true); });
-      });
-      k.add(function () { rows.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); });
-      if (!k.motion) return;
-      EZ.reveal(k, root.querySelectorAll('.s3x__side > *'));
-      gsap.from(tools, { y: -20, autoAlpha: 0, duration: .3, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
-      gsap.from(root.querySelectorAll('.s3x__tags span'), { y: -10, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .03, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
-      // phones: the tools take one turn each as the wall comes into view, then stop (no motion runs past 5s unasked)
-      if (!k.fine) {
-        var n = 0, t = null;
-        k.io(wall, function (en) { clearInterval(t); if (en.isIntersecting && n < 3) { pick(n++, true); t = setInterval(function () { if (n >= 3) { clearInterval(t); return; } pick(n++, true); }, 1600); } }, { threshold: .5 });
-        k.add(function () { clearInterval(t); });
-        return;
-      }
-      // grid-magnetic holes [S0634: radius 100, pull .3]
-      var px = -999, py = -999, inside = false;
-      var loop = k.raf(function (dt) {
-        var moving = false, R = 100, kf = 1 - Math.pow(1 - .2, dt * 60);
-        for (var i = 0; i < holes.length; i++) {
-          var o = holes[i], tx = 0, ty = 0;
-          if (inside) { var dx = px - o.x, dy = py - o.y, d = Math.sqrt(dx * dx + dy * dy); if (d < R) { var f = .3 * (1 - d / R); tx = dx * f; ty = dy * f; } }
-          var nx = o.dx + (tx - o.dx) * kf, ny = o.dy + (ty - o.dy) * kf;
-          if (Math.abs(nx - o.dx) > .02 || Math.abs(ny - o.dy) > .02) { moving = true; o.dx = nx; o.dy = ny; o.el.setAttribute('transform', 'translate(' + nx.toFixed(2) + ' ' + ny.toFixed(2) + ')'); }
-        }
-        if (!moving && !inside) return false;
-      });
-      loop.stop();
-      k.on(wall, 'pointermove', function (e) { var r = wall.getBoundingClientRect(); px = (e.clientX - r.left) / r.width * W; py = (e.clientY - r.top) / r.height * H; inside = true; loop.start(); });
-      k.on(wall, 'pointerleave', function () { inside = false; loop.start(); });
-    } },
-
-    /* slot 2 · Phase 5 improved version of b3 */
-    2: { init: function (root, k) {
-      var sheets = root.querySelectorAll('.s2x__sheet');
-      EZ.reveal(k, root.querySelectorAll('.services__head > *'));
-      sheets.forEach(function (sh, i) { sh.style.setProperty('--i', i); });
-      k.add(function () { sheets.forEach(function (sh) { sh.style.removeProperty('--i'); }); });
-      root.querySelectorAll('.s2x__toggle').forEach(function (b) {
-        var sc = document.getElementById(b.getAttribute('aria-controls')), label = b.querySelector('.btn__label');
-        sc.classList.add('is-shut');
-        k.add(function () { sc.classList.remove('is-shut'); sc.style.clipPath = ''; b.setAttribute('aria-expanded', 'false'); label.textContent = 'Open the scope'; });
-        k.on(b, 'click', function () {
-          var open = b.getAttribute('aria-expanded') !== 'true';
-          b.setAttribute('aria-expanded', open ? 'true' : 'false');
-          label.textContent = open ? 'Close the scope' : 'Open the scope';
-          if (open) {
-            sc.classList.remove('is-shut');
-            if (k.motion) {                         // curtain wipe, top to bottom [S0211 toggle-curtain]
-              k.ctx.add(function () {
-                gsap.fromTo(sc.querySelectorAll('li'), { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: .3, stagger: .025, ease: 'power2.out' });
-              });
-              EZ.clip(k, sc, [0, 0, 100, 0], [0, 0, 0, 0], { duration: .3, ease: 'power3.out', onComplete: function () { sc.style.clipPath = ''; } });
-            }
-          } else sc.classList.add('is-shut');
-        });
-      });
-      if (!k.motion || k.mobile) return;
-      // the sheet underneath recedes as the next one lands on it
-      sheets.forEach(function (sh, i) {
-        var next = sheets[i + 1];
-        if (!next) return;
-        gsap.fromTo(sh.querySelector('.s2x__frame'), { scale: 1, filter: 'brightness(1)' }, { scale: .95, filter: 'brightness(.82)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (90 + i * 18) + 'px', scrub: true } });
-      });
-      sheets.forEach(function (sh) {
-        gsap.from(sh.querySelector('.s2x__photo img'), { scale: 1.12, ease: 'none', scrollTrigger: { trigger: sh, start: 'top bottom', end: 'top 30%', scrub: true } });
-      });
-    } },
-
-    /* slot 1 · Phase 5 improved version of b2 */
-    1: { init: function (root, k) {
-      // [AUDIT-01 F3] one state owner per card: hover previews (fine pointers), click / tap / Enter pins it open;
-      // leaving a pinned card does nothing; scroll never changes it. Open 450ms / close 350ms, house curve, transforms only.
-      var HOUSE = EZ.bezier(.23, 1, .32, 1);
-      EZ.reveal(k, root.querySelectorAll('.services__head > *'));
-      root.querySelectorAll('.slx__card').forEach(function (card, ci) {
-        var def = ASM[card.dataset.asm], svg = card.querySelector('.slx__svg'), stage = card.querySelector('.slx__stage');
-        var A = buildAsm(svg, def), st = { p: k.motion ? 0 : 1 }, tw = null, pinned = !k.motion, preview = false;
-        k.add(function () { svg.innerHTML = ''; svg.removeAttribute('viewBox'); });
-        function render() {
-          A.layers.forEach(function (g, i) { var o = def.gap * i * st.p; g.setAttribute('transform', 'translate(' + (def.dir[0] * o).toFixed(1) + ' ' + (def.dir[1] * o).toFixed(1) + ')'); });
-          A.labs.forEach(function (l) { l.setAttribute('opacity', EZ.clamp((st.p - .35) / .5, 0, 1).toFixed(2)); });
-        }
-        render();
-        function sync() {
-          var p = pinned || preview ? 1 : 0;
-          stage.setAttribute('aria-expanded', pinned ? 'true' : 'false');
-          card.classList.toggle('is-open', p === 1);
-          if (!k.motion) { st.p = p; render(); return; }
-          if (tw) tw.kill();
-          tw = gsap.to(st, { p: p, duration: p ? .45 : .35, ease: HOUSE, onUpdate: render });
-        }
-        stage.setAttribute('aria-expanded', pinned ? 'true' : 'false');
-        k.on(stage, 'click', function () { pinned = !pinned; sync(); });
-        if (k.motion && k.fine) {
-          k.on(stage, 'pointerenter', function (e) { if (e.pointerType === 'mouse') { preview = true; sync(); } });
-          k.on(stage, 'pointerleave', function () { preview = false; sync(); });
-        }
-        if (k.motion) gsap.from(card, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', delay: ci * .05, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
-      });
-    } },
-
-    /* slot 1 · AUDIT-01 winner (copied from v1; fixes applied here) */
-    b2: { init: function (root, k) {
-      // [AUDIT-01 F3] one state owner per card: hover previews (fine pointers), click / tap / Enter pins it open;
-      // leaving a pinned card does nothing; scroll never changes it. Open 450ms / close 350ms, house curve, transforms only.
-      var HOUSE = EZ.bezier(.23, 1, .32, 1);
-      EZ.reveal(k, root.querySelectorAll('.services__head > *'));
-      root.querySelectorAll('.sl__card').forEach(function (card, ci) {
-        var def = ASM[card.dataset.asm], svg = card.querySelector('.sl__svg'), stage = card.querySelector('.sl__stage');
-        var A = buildAsm(svg, def), st = { p: k.motion ? 0 : 1 }, tw = null, pinned = !k.motion, preview = false;
-        k.add(function () { svg.innerHTML = ''; svg.removeAttribute('viewBox'); });
-        function render() {
-          A.layers.forEach(function (g, i) { var o = def.gap * i * st.p; g.setAttribute('transform', 'translate(' + (def.dir[0] * o).toFixed(1) + ' ' + (def.dir[1] * o).toFixed(1) + ')'); });
-          A.labs.forEach(function (l) { l.setAttribute('opacity', EZ.clamp((st.p - .35) / .5, 0, 1).toFixed(2)); });
-        }
-        render();
-        function sync() {
-          var p = pinned || preview ? 1 : 0;
-          stage.setAttribute('aria-expanded', pinned ? 'true' : 'false');
-          card.classList.toggle('is-open', p === 1);
-          if (!k.motion) { st.p = p; render(); return; }
-          if (tw) tw.kill();
-          tw = gsap.to(st, { p: p, duration: p ? .45 : .35, ease: HOUSE, onUpdate: render });
-        }
-        stage.setAttribute('aria-expanded', pinned ? 'true' : 'false');
-        k.on(stage, 'click', function () { pinned = !pinned; sync(); });
-        if (k.motion && k.fine) {
-          k.on(stage, 'pointerenter', function (e) { if (e.pointerType === 'mouse') { preview = true; sync(); } });
-          k.on(stage, 'pointerleave', function () { preview = false; sync(); });
-        }
-        if (k.motion) gsap.from(card, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', delay: ci * .05, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
-      });
-    } },
-
-    b1: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.services__head > *'));
-      root.querySelectorAll('.services1__card').forEach(function (card, ci) {
-        var def = ASM[card.dataset.asm], svg = card.querySelector('.services1__svg'), stage = card.querySelector('.services1__stage');
-        var A = buildAsm(svg, def), st = { p: k.motion ? 0 : 1, mx: 0 }, tw = null;
-        k.add(function () { svg.innerHTML = ''; svg.removeAttribute('viewBox'); });
-        function render() {
-          A.layers.forEach(function (g, i) {
-            var o = def.gap * i * st.p, m = st.mx * .3 * i * 6;
-            g.setAttribute('transform', 'translate(' + (def.dir[0] * o + m).toFixed(1) + ' ' + (def.dir[1] * o).toFixed(1) + ')');
-          });
-          A.labs.forEach(function (l) { l.setAttribute('opacity', EZ.clamp((st.p - .35) / .5, 0, 1).toFixed(2)); });
-        }
-        render();
-        function to(p) {
-          stage.setAttribute('aria-expanded', p > 0 ? 'true' : 'false');
-          if (!k.motion) return;
-          if (tw) tw.kill();
-          var opening = p > st.p;
-          tw = gsap.to(st, { p: p, duration: opening ? Math.max(.35, Math.abs(p - st.p)) : .6, ease: opening ? 'power2.out' : 'expo.out', onUpdate: render });
-        }
-        stage.setAttribute('aria-expanded', k.motion ? 'false' : 'true');
-        k.on(stage, 'click', function () { to(stage.getAttribute('aria-expanded') === 'true' ? 0 : 1); });
-        if (!k.motion) return;
-        if (k.fine) {
-          k.on(card, 'pointerenter', function () { to(1); });
-          k.on(card, 'pointerleave', function () { to(0); gsap.to(st, { mx: 0, duration: .6, ease: 'expo.out', onUpdate: render }); });
-          k.on(stage, 'pointermove', function (e) {          // magnet .3: layers lean toward the pointer, more the higher they sit
-            var r = stage.getBoundingClientRect();
-            gsap.to(st, { mx: (e.clientX - r.left) / r.width - .5, duration: .4, ease: 'power3.out', onUpdate: render, overwrite: 'auto' });
-          });
-        } else {
-          ScrollTrigger.create({ trigger: stage, start: 'top 60%', end: 'bottom 30%', onToggle: function (s) { to(s.isActive ? 1 : 0); } });
-        }
-        gsap.from(card, { y: 24, autoAlpha: 0, duration: .3, ease: 'power2.out', delay: ci * .05, scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
-      });
-    } },
-
-    /* v2 · The drawing set [BANK R45 stacking cards via CSS sticky] */
-    b3: { init: function (root, k) {
-      var sheets = root.querySelectorAll('.services2__sheet');
-      EZ.reveal(k, root.querySelectorAll('.services__head > *'));
-      sheets.forEach(function (sh, i) { sh.style.setProperty('--i', i); });
-      k.add(function () { sheets.forEach(function (sh) { sh.style.removeProperty('--i'); }); });
-      root.querySelectorAll('.services2__toggle').forEach(function (b) {
-        var sc = document.getElementById(b.getAttribute('aria-controls')), label = b.querySelector('.btn__label');
-        sc.classList.add('is-shut');
-        k.add(function () { sc.classList.remove('is-shut'); sc.style.clipPath = ''; b.setAttribute('aria-expanded', 'false'); label.textContent = 'Open the scope'; });
-        k.on(b, 'click', function () {
-          var open = b.getAttribute('aria-expanded') !== 'true';
-          b.setAttribute('aria-expanded', open ? 'true' : 'false');
-          label.textContent = open ? 'Close the scope' : 'Open the scope';
-          if (open) {
-            sc.classList.remove('is-shut');
-            if (k.motion) {                         // curtain wipe, top to bottom [S0211 toggle-curtain]
-              k.ctx.add(function () {
-                gsap.fromTo(sc.querySelectorAll('li'), { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: .3, stagger: .025, ease: 'power2.out' });
-              });
-              EZ.clip(k, sc, [0, 0, 100, 0], [0, 0, 0, 0], { duration: .3, ease: 'power3.out', onComplete: function () { sc.style.clipPath = ''; } });
-            }
-          } else sc.classList.add('is-shut');
-        });
-      });
-      if (!k.motion || k.mobile) return;
-      // the sheet underneath recedes as the next one lands on it
-      sheets.forEach(function (sh, i) {
-        var next = sheets[i + 1];
-        if (!next) return;
-        gsap.fromTo(sh.querySelector('.services2__frame'), { scale: 1, filter: 'brightness(1)' }, { scale: .95, filter: 'brightness(.82)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (90 + i * 18) + 'px', scrub: true } });
-      });
-      sheets.forEach(function (sh) {
-        gsap.from(sh.querySelector('.services2__photo img'), { scale: 1.12, ease: 'none', scrollTrigger: { trigger: sh, start: 'top bottom', end: 'top 30%', scrub: true } });
-      });
-    } },
-
-    /* v3 · The tool wall */
-    b4: { init: function (root, k) {
-      var wall = root.querySelector('.services3__wall'), svg = root.querySelector('.services3__board');
-      var rows = Array.prototype.slice.call(root.querySelectorAll('.services3__row'));
-      var W = 600, H = 500, SP = 25, holes = [];
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      var h = '<rect class="hb" x="0" y="0" width="' + W + '" height="' + H + '"/>';
-      for (var y = SP; y < H; y += SP) for (var x = SP; x < W; x += SP) h += '<circle class="hole" cx="' + x + '" cy="' + y + '" r="3.4"/>';
-      h += '<rect class="frm" x="5" y="5" width="' + (W - 10) + '" height="' + (H - 10) + '"/>';
-      // tools hang from hooks [BANK 91: hammer strike, trowel sweep, cabinet door swing]
-      h += '<g class="tool" data-t="0"><path class="hook" d="M100 75v14q0 8 8 8"/><path class="hook" d="M175 75v14q0 8 -8 8"/>' +
-        '<g class="door"><rect x="86" y="95" width="104" height="160" fill="#5E5852" stroke="#121212" stroke-width="3"/><rect x="102" y="111" width="72" height="128" fill="#FF5F00" stroke="#121212" stroke-width="2.5"/><rect x="170" y="170" width="6" height="26" rx="3" fill="#FFC9A3" stroke="#121212" stroke-width="1.5"/></g>' +
-        '<rect x="80" y="118" width="8" height="18" fill="#C9C1B6" stroke="#121212" stroke-width="1.5"/><rect x="80" y="214" width="8" height="18" fill="#C9C1B6" stroke="#121212" stroke-width="1.5"/></g>';
-      h += '<g class="tool" data-t="1"><path class="hook" d="M300 75v22"/><g class="trowel"><rect x="291" y="96" width="18" height="46" rx="8" fill="#FF9C5E" stroke="#121212" stroke-width="2.5"/><path d="M300 142v22" stroke="#121212" stroke-width="4"/>' +
-        '<path d="M250 164h100v58l-6 0v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-8v-8h-8v8h-6z" fill="#C9C1B6" stroke="#121212" stroke-width="2.5" stroke-linejoin="round"/></g></g>';
-      h += '<g class="tool" data-t="2"><path class="hook" d="M440 75v20"/><path class="hook" d="M520 75v20"/><g class="hammer"><rect x="472" y="88" width="16" height="170" rx="6" fill="#FF9C5E" stroke="#121212" stroke-width="2.5"/>' +
-        '<path d="M430 92h88l10 8v22h-98q-12 -6 -14 -18q4 -10 14 -12z" fill="#C9C1B6" stroke="#121212" stroke-width="2.5" stroke-linejoin="round"/><path d="M528 100q22 -2 30 16q-16 -6 -30 -2z" fill="#C9C1B6" stroke="#121212" stroke-width="2.5"/></g>' +
-        '<g class="nail"><path d="M560 330v-26" stroke="#C9C1B6" stroke-width="4"/><rect x="552" y="300" width="16" height="5" fill="#C9C1B6" stroke="#121212" stroke-width="1.5"/></g></g>';
-      svg.innerHTML = h;
-      holes = Array.prototype.slice.call(svg.querySelectorAll('.hole')).map(function (c) { return { el: c, x: +c.getAttribute('cx'), y: +c.getAttribute('cy'), dx: 0, dy: 0 }; });
-      k.add(function () { svg.innerHTML = ''; });
-      var tools = svg.querySelectorAll('.tool');
-      var anims = [
-        function () { return gsap.timeline().to(svg.querySelector('.door'), { scaleX: .18, svgOrigin: '86 175', duration: .45, ease: 'power2.inOut' }).to(svg.querySelector('.door'), { scaleX: 1, svgOrigin: '86 175', duration: .7, ease: 'elastic.out(1,.5)' }); },
-        function () { return gsap.timeline().to(svg.querySelector('.trowel'), { rotation: -20, svgOrigin: '300 97', duration: .25, ease: 'power2.out' }).to(svg.querySelector('.trowel'), { rotation: 20, svgOrigin: '300 97', duration: .45, ease: 'sine.inOut' }).to(svg.querySelector('.trowel'), { rotation: 0, svgOrigin: '300 97', duration: .6, ease: 'elastic.out(1,.4)' }); },
-        function () { return gsap.timeline().to(svg.querySelector('.hammer'), { rotation: -34, svgOrigin: '480 250', duration: .22, ease: 'power2.out' }).to(svg.querySelector('.hammer'), { rotation: 8, svgOrigin: '480 250', duration: .12, ease: 'power4.in' }).to(svg.querySelector('.nail'), { y: 10, duration: .06 }, '<+.1').to(svg.querySelector('.hammer'), { rotation: 0, svgOrigin: '480 250', duration: .4, ease: 'back.out(3)' }); }
-      ];
-      var current = -1, running = null;
-      function pick(i, play) {
-        current = i;
-        rows.forEach(function (r, j) { r.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
-        tools.forEach(function (t, j) { t.classList.toggle('is-dim', i > -1 && j !== i); });
-        if (play && k.motion) { if (running) running.progress(1); gsap.set(svg.querySelector('.nail'), { y: 0 }); k.ctx.add(function () { running = anims[i](); }); }
-      }
-      rows.forEach(function (r, i) {
-        k.on(r, 'click', function () { pick(i, true); });
-        k.on(r, 'pointerenter', function (e) { if (e.pointerType === 'mouse' && current !== i) pick(i, true); });
-        k.on(r, 'focus', function () { if (current !== i) pick(i, true); });
-      });
-      k.add(function () { rows.forEach(function (r) { r.setAttribute('aria-pressed', 'false'); }); });
-      if (!k.motion) return;
-      EZ.reveal(k, root.querySelectorAll('.services3__side > *'));
-      gsap.from(tools, { y: -20, autoAlpha: 0, duration: .3, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: wall, start: 'top 75%', once: true } });
-      gsap.from(root.querySelectorAll('.services3__tags span'), { y: -10, autoAlpha: 0, duration: .25, ease: 'back.out(2)', stagger: .03, scrollTrigger: { trigger: wall, start: 'top 70%', once: true } });
-      // phones: the tools take one turn each as the wall comes into view, then stop (no motion runs past 5s unasked)
-      if (!k.fine) {
-        var n = 0, t = null;
-        k.io(wall, function (en) { clearInterval(t); if (en.isIntersecting && n < 3) { pick(n++, true); t = setInterval(function () { if (n >= 3) { clearInterval(t); return; } pick(n++, true); }, 1600); } }, { threshold: .5 });
-        k.add(function () { clearInterval(t); });
-        return;
-      }
-      // grid-magnetic holes [S0634: radius 100, pull .3]
-      var px = -999, py = -999, inside = false;
-      var loop = k.raf(function (dt) {
-        var moving = false, R = 100, kf = 1 - Math.pow(1 - .2, dt * 60);
-        for (var i = 0; i < holes.length; i++) {
-          var o = holes[i], tx = 0, ty = 0;
-          if (inside) { var dx = px - o.x, dy = py - o.y, d = Math.sqrt(dx * dx + dy * dy); if (d < R) { var f = .3 * (1 - d / R); tx = dx * f; ty = dy * f; } }
-          var nx = o.dx + (tx - o.dx) * kf, ny = o.dy + (ty - o.dy) * kf;
-          if (Math.abs(nx - o.dx) > .02 || Math.abs(ny - o.dy) > .02) { moving = true; o.dx = nx; o.dy = ny; o.el.setAttribute('transform', 'translate(' + nx.toFixed(2) + ' ' + ny.toFixed(2) + ')'); }
-        }
-        if (!moving && !inside) return false;
-      });
-      loop.stop();
-      k.on(wall, 'pointermove', function (e) { var r = wall.getBoundingClientRect(); px = (e.clientX - r.left) / r.width * W; py = (e.clientY - r.top) / r.height * H; inside = true; loop.start(); });
-      k.on(wall, 'pointerleave', function () { inside = false; loop.start(); });
-    } }
-  });
+    if (!k.motion) return;
+    sheets.forEach(function (sh, i) {
+      var paper = sh.querySelector('.sv__paper'), dim = sh.querySelector('.sv__dim path');
+      // the dimension line is drawn from the middle out as the sheet arrives
+      gsap.fromTo(dim, { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: .6, ease: 'power3.inOut', scrollTrigger: { trigger: sh, start: 'top 75%', once: true } });
+      var next = sheets[i + 1];
+      if (!next) return;
+      gsap.timeline({ scrollTrigger: { trigger: next, start: 'top 78%', end: function () { return 'top ' + (parseFloat(getComputedStyle(next).top) || 100) + 'px'; }, scrub: true, invalidateOnRefresh: true } })
+        .to(paper, { scale: function () { return stacked() ? .92 + i * .015 : 1; }, y: function () { return stacked() ? -24 : 0; }, ease: 'none' }, 0)
+        .to(paper, { '--shade': function () { return stacked() ? .14 : 0; }, ease: 'none' }, 0);
+    });
+  } } });
 })();
 
 /* before/after, PLAN-V3 §3. Only the four genuine pairs (FACTS.md). */
