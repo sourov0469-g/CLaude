@@ -40,7 +40,7 @@ PAGES = {
                    "url": "https://elbazconstructioncorp.com/residential-remodling-miami/"},
     "harness": {"out": "harness-companion.html", "sections": ["harness-kit"], "book": "#harness-kit",
                 "title": "Companion harness (test only, not shipped)", "desc": "Test harness.", "url": "https://elbazconstructioncorp.com/"},
-    "contact": {"out": "contact.html", "sections": ["contact-form", "contact-visit", "contact-area"], "book": "#contact-form",
+    "contact": {"out": "contact.html", "sections": ["contact-form", "contact-visit", "contact-area", "contact-next", "contact-faq"], "book": "#contact-form",
                 "title": "Book a Consultation | Elbaz Construction, Miami",
                 "desc": "Book a consultation with Elbaz Construction: (754) 236-0675, Sales@elbazconstruction.com, 19 W Flagler St #310, Miami, FL 33130. Sun to Fri 7am to 7pm, Saturday closed.",
                 "url": "https://elbazconstructioncorp.com/contact/"},

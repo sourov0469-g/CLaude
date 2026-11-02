@@ -1,0 +1,47 @@
+/* FINALIZE · Contact 4 · What happens after you reach out. V1 two drawn frames (the Process art kit), V2 the thread. */
+.cx__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.cx__head .eyebrow { margin: 0 0 var(--s3); }
+.cx__head .t-head, .cx__lead { margin: 0; }
+.cx__lead { max-width: 44ch; color: var(--color-text-secondary); }
+.cx__frames { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr); gap: var(--s4); align-items: start; }
+.cx__f { display: grid; gap: var(--s4); }
+.cx__fig { margin: 0; background: var(--color-bg); border: 1.5px solid var(--color-text); }
+.cx__svg { display: block; width: 100%; height: auto; }
+.cx__arrow { align-self: center; margin-top: -4em; }
+.cx__arrow svg { width: 60px; height: 24px; } .cx__arrow path { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.cx__txt { display: grid; gap: var(--s2); }
+.cx__wk { margin: 0; justify-self: start; padding: 4px 10px; border: 1.5px solid var(--color-text); font: 600 .875rem/1.2 var(--f-text); }
+.cx__t { margin: 0; font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
+.cx__p { margin: 0; max-width: 46ch; color: var(--color-text-secondary); font: 400 1rem/1.5 var(--f-text); }
+/* the art kit */
+.cx__svg .d, .cx__svg .d { fill: none; stroke: var(--color-text); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.cx__svg .dt, .cx__svg .dt { fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cx__svg [class*="f-"].d, .cx__svg [class*="f-"].d { stroke-width: 3.2; }
+.f-sand { fill: var(--sand-100, #F7F1EA) !important; }
+.f-paper { fill: var(--color-surface) !important; }
+.f-clay { fill: var(--clay-500, #C5735C) !important; }
+.f-clayl { fill: var(--clay-100, #F9E3DD) !important; }
+.f-none { fill: none !important; }
+.cx__svg .dash, .cx__svg .dash { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2.4; stroke-dasharray: 12 10; }
+.cx__svg .roof, .cx__svg .roof { stroke: var(--clay-600, #A45540); stroke-width: 9; }
+.cx__svg .tx, .cx__svg .tx { font: 600 26px/1 var(--f-text); fill: var(--color-text); }
+.cx__svg .tx-s, .cx__svg .tx-s { font-size: 21px; font-weight: 500; }
+.cx__svg .tx-stamp, .cx__svg .tx-stamp { font-size: 15px; font-weight: 700; letter-spacing: .06em; fill: var(--clay-700, #884432); }
+.cx__svg .stampc, .cx__svg .stampc { stroke: var(--clay-700, #884432); }
+.cx__svg .tick, .cx__svg .tick { stroke: var(--clay-600, #A45540); stroke-width: 4; }
+
+
+.cy__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
+.cy__head .eyebrow { margin: 0 0 var(--s3); }
+.cy__head .t-head { margin: 0 0 var(--s4); }
+.cy__lead { margin: 0; color: var(--color-text-secondary); }
+.cy__list { position: relative; list-style: none; margin: 0; padding: 0 0 0 var(--s7); display: grid; gap: var(--s6); }
+.cy__line { position: absolute; left: 10px; top: 10px; bottom: 10px; width: 3px; background: var(--color-border); }
+.cy__line i { position: absolute; inset: 0; background: var(--color-accent-solid); transform-origin: 50% 0; }
+.cy__n { position: relative; display: grid; gap: var(--s2); }
+.cy__n::before { content: ""; position: absolute; left: calc(var(--s7) * -1 + 3px); top: 6px; width: 17px; height: 17px; border-radius: 50%; background: var(--color-surface); border: 3px solid var(--color-accent-solid); }
+.cy__k { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s3); font: 600 1.375rem/1.2 var(--f-display); }
+.cy__w { padding: 2px 8px; border: 1.5px solid var(--color-text); font: 600 .8125rem/1.3 var(--f-text); }
+.cy__p { margin: 0; max-width: 52ch; color: var(--color-text-secondary); font: 400 1rem/1.55 var(--f-text); }
+.cy__n--end::before { background: var(--color-accent-solid); }
+@media (max-width: 900px) { .cx__head, .cy__grid { grid-template-columns: 1fr; } .cx__frames { grid-template-columns: 1fr; } .cx__arrow { margin: 0 auto; rotate: 90deg; } }

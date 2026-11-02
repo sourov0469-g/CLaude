@@ -155,3 +155,4 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 
 ## Phase 5 log
 - **Renovation** (5 sections + footer; hero ×2, 2 NEW ×2): `GATE-renovation.md`. Collage / panels hero; sheet-stack services (firm names only); one disruption (collapse / house plan); permits ticked in order with county code context; whole-home stories (chapters / index) + CTA. Zero console errors at 1440/390. Zero background tasks, zero sub-agents.
+- **Contact** (5 sections + footer; visit ×2, 2 NEW ×2): `GATE-contact.md`. Call + letter hero with live line; card / label with live line; drifting county rows + search laying out all 104; what happens next (Process frames / thread); questions (accordion morph / tablist). Zero console errors at 1440/390. Zero background tasks, zero sub-agents.

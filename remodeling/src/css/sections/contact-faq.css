@@ -1,0 +1,35 @@
+/* FINALIZE · Contact 5 · Questions before you call. V1 accordion with an icon morph, V2 list + answer card. */
+.fq__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--s8); align-items: start; }
+.fq__side { display: grid; gap: var(--s4); position: sticky; top: calc(var(--nav-h) + var(--s5)); }
+.fq__side .eyebrow, .fq__side .t-head, .fq__lead { margin: 0; }
+.fq__lead { color: var(--color-text-secondary); }
+.fq__list { border-top: 1.5px solid var(--color-text); }
+.fq__item { border-bottom: 1px solid var(--color-border); }
+.fq__btn { display: grid; grid-template-columns: 1fr 28px; gap: var(--s4); align-items: center; width: 100%; min-height: 64px; padding: var(--s3) 0; text-align: left; background: none; border: 0; color: var(--color-text); font: 600 1.25rem/1.3 var(--f-display); cursor: pointer; }
+.fq__btn:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+/* the icon morph: two bars; open rotates the vertical bar flat into the horizontal one (plus becomes minus) */
+.fq__ic { position: relative; width: 28px; height: 28px; border: 1.5px solid var(--color-text); border-radius: 50%; transition: background-color 250ms var(--ez-out); }
+.fq__ic::before, .fq__ic::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px; background: var(--color-text); transition: transform 400ms var(--ez-out), background-color 250ms var(--ez-out); }
+.fq__ic::after { transform: rotate(90deg); }
+.fq__btn[aria-expanded="true"] .fq__ic { background: var(--color-accent-solid); border-color: var(--color-accent-solid); }
+.fq__btn[aria-expanded="true"] .fq__ic::before, .fq__btn[aria-expanded="true"] .fq__ic::after { background: #fff; }
+.fq__btn[aria-expanded="true"] .fq__ic::after { transform: rotate(0deg); }
+.fq__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 400ms var(--ez-out); }
+.fq__panel > div { overflow: hidden; }
+.fq__panel p { margin: 0 0 var(--s4); max-width: 62ch; font: 400 1.0625rem/1.6 var(--f-text); color: var(--color-text-secondary); }
+.fq__item.is-open .fq__panel { grid-template-rows: 1fr; }
+
+.fp__head { margin-bottom: var(--s6); }
+.fp__head .eyebrow { margin: 0 0 var(--s3); }
+.fp__head .t-head { margin: 0; }
+.fp__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s6); align-items: start; }
+.fp__qs { display: grid; border-top: 1.5px solid var(--color-text); }
+.fp__qb { min-height: 56px; padding: var(--s3); text-align: left; background: none; border: 0; border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); font: 600 1.0625rem/1.3 var(--f-display); cursor: pointer; transition: color 200ms var(--ez-out), background-color 200ms var(--ez-out); }
+.fp__qb[aria-selected="true"] { color: var(--color-text); background: var(--color-surface); box-shadow: inset 3px 0 0 var(--color-accent-solid); }
+.fp__qb:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -2px; }
+.fp__card { position: sticky; top: calc(var(--nav-h) + var(--s5)); padding: var(--s6); background: var(--color-surface); border: 1.5px solid var(--color-text); min-height: 220px; }
+.fp__card:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+.fp__q { margin: 0 0 var(--s3); font: 600 1.5rem/1.2 var(--f-display); letter-spacing: -.015em; }
+.fp__a { margin: 0; font: 400 1.0625rem/1.6 var(--f-text); color: var(--color-text-secondary); }
+@media (max-width: 900px) { .fq__grid, .fp__grid { grid-template-columns: 1fr; } .fq__side, .fp__card { position: static; } .fq__btn { font-size: 1.0625rem; } }
+@media (prefers-reduced-motion: reduce) { .fq__panel, .fq__ic::after { transition: none; } }
