@@ -156,6 +156,107 @@ corrections in this session; before each phase I check for one, then proceed wit
   - a competitor collision check;
   - then `GATE-PHASE-3a.md`.
 
+## Phase 3a: DONE (gate report `owl/GATE-PHASE-3a.md`, self-rated 7.40, PASS); storyboards and flow map in `owl/phase3a/storyboards.html`
+**Next: Phase 3b.** Three proof sections: the hero, the Protect Your Nest beats, and the Sweep-the-lawn game. Then the single-file build.
+
+### Page plan and reasoning (recorded here as the addendum requires)
+**Built from tasks inward** (⟦S1411⟧). A Twin Cities homeowner comes with one of four jobs:
+1. "Something's wrong with my roof" (storm, leak).
+2. "I need a new roof and want a roofer I can trust".
+3. "What will it cost?"
+4. "Who are these people?"
+
+Every page serves at least one of these jobs and ends at the same place: call or text Owl.
+
+**How many pages.** Fewer is better, so there are **6 pages**, held in one HTML file with in-file navigation. Owl's
+current site has no service pages; it has dozens of templated town posts.
+
+| # | Page | Job | Sections | Why it earns a page |
+|---|---|---|---|---|
+| 1 | **Home** | all four | **11** | The front door: proof, system, people, price, call |
+| 2 | **Services** (Roof replacement · Roof repair and the Wise Check · Siding · Gutters and windows) | 1, 2 | 6 | One page with chapters (MERSI chapter system) instead of four thin pages. Owl's services are real but most are short. |
+| 3 | **Storm damage and insurance** | 1 | 6 | Storm work is Owl's lead specialty, and the insurance process needs its own patient explanation |
+| 4 | **Protect Your Nest** | 2 | 6 | Owl's ownable system in full: the wrap, the 3-Part Cleanup, Owl Roof Aftercare, the Get It Right Guarantee |
+| 5 | **Our families** (About) | 4 | 6 | The founders' story in Owl's own words, the crew, community work, the credentials |
+| 6 | **Contact and Price My Roof** | 3 | 6 | The instrument, the form, hours, address, the map, the FAQ |
+
+**Navigation (⟦S1450⟧, ⟦S1454⟧):**
+- **Top nav at ≥1024px, in this order:** Services · Storm damage · Protect Your Nest · Our families. "Call (651) 977-6027"
+  sits last, as a button (the primary CTA goes in the last position).
+- **Below 1024px:** the menu panel, plus a call/text bar always within thumb reach.
+- **The home link:** the logo.
+- **The active state:** an amber underline plus a weight change, so it is not shown by colour alone.
+
+**Homepage: 11 sections, with the surface sequence declared** (no two adjacent sections share a surface; one deep
+block, at the end):
+
+| # | Section | Surface | Background | Set piece / reference | Job |
+|---|---|---|---|---|---|
+| 1 | Hero: "We actually answer the phone." Owl's video in the drawn house; the line leaves it | paper | B1 Lawn light | Scout (living media in a frame) | all |
+| 2 | Proof strip: 5.0 · 90+ reviews · GAF Systems Plus Certified · BBB Accredited · MN licence · 10-year guarantee | cream | flat (proof band) | n/a | 2 |
+| 3 | Protect Your Nest: 4 pinned beats (wrap → magnet pass → aftercare box → guarantee) | paper | B1 (no sweep: the line is the page's own) | AirPods pinned beats + Graza custom animation | 2 |
+| 4 | Sweep the lawn: the game | cream | the game's own lawn | Bruno (one game section) | 2 (the peak) |
+| 5 | Services: service rows into chapter previews | paper | B1 | MERSI chapter seam (preview) | 1, 2 |
+| 6 | Our families: Owl's own photos and the founders' story | cream | B2 Rings | Cowboy (people in use) | 4 |
+| 7 | Storm damage and insurance: what happens after hail, step by step | paper | B1 | Longbow (doctrine plus numbers; only real numbers) | 1 |
+| 8 | Reviews and videos: Owl's own YouTube video review plus "5.0 · 90+ reviews" (no invented quotes) | cream | B2 Rings | Lando (archive grammar) | 4 |
+| 9 | The Wise Check and Price My Roof: the inspection (Owl's words) and the squares instrument | paper | B1 | Quiet Cubes (instrument, in a supporting role) | 3 |
+| 10 | Service area: 29 towns and Owl's map | cream | B2 Rings | n/a | all |
+| 11 | Call band and footer: the line weaves the nest around (651) 977-6027 | deep → night | B3 Night yard | Lusion (the flow resolves) | the end |
+
+**Peak and end (⟦S1452⟧):**
+- **Peak:** the game (4).
+- **End:** the nest closing around the phone number (11). It ends on the call, not on a form.
+- **Serial position:** Call is the first thing in the hero and the last thing on the page.
+
+**Inner pages (each 6 sections; the same surface rules apply):**
+- **Services:**
+  1. Chapter cover
+  2. Roof replacement (process, GAF materials)
+  3. Roof repair and the Wise Check (attic, photo/video documentation, heat-sensor leak detection; Owl's own text)
+  4. Siding
+  5. Gutters and windows
+  6. Call band
+- **Storm damage:**
+  1. Hero (hail drawing)
+  2. What to do in the first 48 hours (plain steps)
+  3. How Owl helps with the claim (insurance support as the pack confirms it)
+  4. The Wise Check after a storm
+  5. FAQ
+  6. Call band
+- **Protect Your Nest:**
+  1. Cover
+  2. The Nest-Protection wrap (Owl's photo)
+  3. The 3-Part Cleanup (with the game)
+  4. Owl Roof Aftercare (Owl's box photo)
+  5. The Get It Right Guarantee (Owl's seal)
+  6. Call band
+- **Our families:**
+  1. Cover (Owl's families photo)
+  2. How it started (Owl's About text)
+  3. The crew (hero-video frames)
+  4. Community (Owl's photos)
+  5. Credentials (licence, GAF Systems Plus, BBB A−)
+  6. Call band
+- **Contact:**
+  1. Call or text first
+  2. Price My Roof (the instrument)
+  3. The form
+  4. Hours and address
+  5. Map and towns
+  6. FAQ
+
+**Notes:**
+- **Collision check (three of the four competitors Owl names):** Hoffman Weber (blue), Krech Exteriors (deep green +
+  orange) and Kaufman Roofing (blue). Lindus only redirects (no content).
+  - No competitor uses the owl, nest, magnet or cleanup grammar.
+  - Krech's green and orange is a near-neighbour, so Owl stays khaki-olive and paper-light, with no large saturated
+    green fields.
+  - Kaufman also says "family-owned", so "We actually answer the phone" leads instead.
+- **Source conflict:** an Owl blog widget says "Lawn swept 3x with magnets". Owl's homepage system text says round two
+  is the magnet. The build follows the homepage text. The widget's other claims ("250+ families", a templated quote) are
+  outside the facts lock and are not used.
+
 ## Phase 1: material inventory (from the live source, not the text recon)
 - **Hero background video:** `Owl-BG-Condensed.mp4` (9.4 MB, 1280×720, h264, 15.6 s) + `.webm` (4.5 MB), poster
   `happy-homeowners-owl-roofing.jpg`. Saved.

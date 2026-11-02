@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · Phase 3a: flow map, storyboards, concept frames</title>
+<link rel="icon" href="../assets/source/owl-roofing-favicon.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+{{TOKENS}}
+{{COMPONENTS}}
+body{margin:0}
+svg.logo{display:block;width:100%;height:auto}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.band{position:relative;padding:var(--section-default) 0}
+.alt{background:var(--surface-alt)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-32)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-16)}
+@media (max-width:1023px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:767px){.grid2,.grid4{grid-template-columns:1fr}}
+.kf{margin:0;background:var(--surface-raised);border:1px solid var(--line-hairline);border-radius:var(--radius-m);padding:var(--space-12);display:grid;gap:var(--space-8)}
+.kf svg{display:block;width:100%;height:auto}
+.kf figcaption{font:var(--type-small)}
+.kf b{font-family:var(--font-display)}
+table{border-collapse:collapse;width:100%;font:var(--type-small)}
+th,td{text-align:left;padding:var(--space-8);border-bottom:1px solid var(--line-hairline);vertical-align:top}
+th{font-family:var(--font-display)}
+.tablewrap{overflow-x:auto;margin-top:var(--space-24)}
+.note{font:var(--type-small);color:var(--text-muted);max-width:var(--measure)}
+.strip{display:grid;gap:var(--space-4)}
+.strip .row{display:grid;grid-template-columns:var(--space-32) minmax(0,1fr) 9rem;gap:var(--space-12);align-items:center;padding:var(--space-8) var(--space-12);border-radius:var(--radius-s);font:var(--type-small)}
+.strip .row b{font-family:var(--font-display)}
+.s-paper{background:var(--surface-page);border:1px solid var(--line-hairline)}.s-cream{background:var(--surface-alt);border:1px solid var(--line-hairline)}.s-deep{background:var(--surface-deep);color:var(--text-on-deep)}
+.frame16{aspect-ratio:16/9;position:relative;overflow:hidden;border-radius:var(--radius-m);border:1px solid var(--line-hairline)}
+</style>
+</head>
+<body class="owl">
+{{ICONS}}
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">{{RINGS}}{{TREES}}</svg>
+<main>
+<section class="band">
+  <div class="wrap" style="display:grid;gap:var(--space-16)">
+    <div style="width:var(--space-160)">{{LOGO_COLOUR}}</div>
+    <h1 class="t-title">Phase 3a: flow map, storyboards and concept frames</h1>
+    <p class="t-body">Direction B · The Nest, on Owl's kept identity. Every keyframe below is drawn live by the real asset code (<code>owl-identity.js</code>) at a fixed progress value, so the storyboards show what will ship, not sketches of it. The page plan and its reasoning are in <code>PROGRESS.md</code>.</p>
+  </div>
+</section>
+
+<!-- FLOW MAP -->
+<section class="band alt" id="flow">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Flow map: four jobs in, one way out</h2><p class="t-body muted">Built from tasks inward (⟦S1411⟧). Every page ends at call or text, and nothing is more than two clicks from Price My Roof or the phone.</p></div>
+    <svg viewBox="0 0 1200 560" role="img" aria-label="Flow map: four homeowner jobs enter through search, a storm, YouTube or a referral; they reach the homepage or an inner page; every path ends at call or text" style="width:100%;height:auto">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:var(--text-muted)"/></marker></defs>
+      <g style="font:700 15px var(--font-display);fill:var(--text-primary)">
+        <text x="20" y="40">ENTRY</text><text x="300" y="40">PAGE</text><text x="760" y="40">PEAK</text><text x="1010" y="40">END</text>
+      </g>
+      <g style="font:15px var(--font-body);fill:var(--text-primary)">
+        <g><rect x="20" y="70" width="210" height="56" rx="10" style="fill:var(--surface-raised);stroke:var(--line-control)"/><text x="36" y="104">Hail last night</text></g>
+        <g><rect x="20" y="170" width="210" height="56" rx="10" style="fill:var(--surface-raised);stroke:var(--line-control)"/><text x="36" y="204">"roofer near me"</text></g>
+        <g><rect x="20" y="270" width="210" height="56" rx="10" style="fill:var(--surface-raised);stroke:var(--line-control)"/><text x="36" y="304">Owl's YouTube</text></g>
+        <g><rect x="20" y="370" width="210" height="56" rx="10" style="fill:var(--surface-raised);stroke:var(--line-control)"/><text x="36" y="404">A neighbour's referral</text></g>
+        <g><rect x="300" y="70" width="230" height="56" rx="10" style="fill:var(--surface-page);stroke:var(--text-primary)"/><text x="316" y="104">Storm damage</text></g>
+        <g><rect x="300" y="190" width="230" height="96" rx="10" style="fill:var(--surface-page);stroke:var(--text-primary);stroke-width:2"/><text x="316" y="226" style="font-weight:700">Home</text><text x="316" y="252">proof · system · people</text><text x="316" y="274">price · call</text></g>
+        <g><rect x="300" y="320" width="230" height="56" rx="10" style="fill:var(--surface-page);stroke:var(--text-primary)"/><text x="316" y="354">Services</text></g>
+        <g><rect x="300" y="410" width="230" height="56" rx="10" style="fill:var(--surface-page);stroke:var(--text-primary)"/><text x="316" y="444">Our families</text></g>
+        <g><rect x="580" y="130" width="140" height="56" rx="10" style="fill:var(--surface-page);stroke:var(--text-primary)"/><text x="594" y="164">Protect Your Nest</text></g>
+        <g><rect x="760" y="200" width="200" height="56" rx="28" style="fill:var(--surface-alt);stroke:var(--text-primary)"/><text x="778" y="234">Sweep the lawn</text></g>
+        <g><rect x="760" y="330" width="200" height="56" rx="28" style="fill:var(--surface-alt);stroke:var(--text-primary)"/><text x="778" y="364">Price My Roof</text></g>
+        <g><rect x="1010" y="230" width="170" height="120" rx="14" style="fill:var(--accent-fill)"/><text x="1030" y="274" style="font-weight:700">Call or text</text><text x="1030" y="300">(651) 977-6027</text><text x="1030" y="324">Mon–Sat 8–18</text></g>
+      </g>
+      <g fill="none" stroke-width="2" style="stroke:var(--text-muted)" marker-end="url(#ar)">
+        <path d="M230 98H296"/><path d="M230 198C265 198 265 225 296 225"/><path d="M230 298C265 298 265 260 296 260"/><path d="M230 398C265 398 265 438 296 438"/>
+        <path d="M530 210C555 210 555 158 576 158"/><path d="M720 158C740 158 740 228 756 228"/><path d="M530 250H756"/><path d="M530 348C640 348 660 358 756 358"/>
+        <path d="M530 98C800 98 950 150 1006 250"/><path d="M960 228C985 228 985 270 1006 270"/><path d="M960 358C985 358 985 320 1006 320"/><path d="M530 438C800 438 950 400 1006 340"/>
+      </g>
+      <path d="M40 520 C 300 470 600 560 900 500 S 1150 470 1180 500" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 12" style="stroke:var(--line-control)"/>
+      <text x="40" y="548" style="font:13px var(--font-body);fill:var(--text-muted)">The sweep line runs under every path: dotted while you travel, solid amber where Owl works, a nest at the end.</text>
+    </svg>
+    <div class="tablewrap"><table><thead><tr><th>Job</th><th>Shortest path</th><th>Clicks to call</th><th>Moment of truth</th></tr></thead><tbody>
+      <tr><td>Storm last night</td><td>Search → Storm damage → call bar</td><td class="t-num">1</td><td>Seeing the first-48-hours steps in plain words, and a phone that is answered</td></tr>
+      <tr><td>New roof, needs trust</td><td>Home → Protect Your Nest beats → game → call</td><td class="t-num">1 (bar always present)</td><td>The magnet pass: a cleanup they can picture</td></tr>
+      <tr><td>What will it cost?</td><td>Home §9 or Contact → Price My Roof → written estimate</td><td class="t-num">2</td><td>The squares readout: honest arithmetic, no invented price</td></tr>
+      <tr><td>Who are these people?</td><td>Home §6 → Our families → call</td><td class="t-num">1</td><td>The founders' story in Owl's own words</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<!-- HOMEPAGE STRIP -->
+<section class="band" id="home">
+  <div class="wrap grid2">
+    <div>
+      <div class="sec-head"><h2 class="t-heading">Homepage: 11 sections, one line through all of them</h2><p class="t-body muted">The surface sequence is declared before building: no two adjacent sections share a ground, and the single deep block is the end. The right column shows what the line does in each section.</p></div>
+      <div class="strip">
+        <div class="row s-paper"><b class="t-num">1</b><span><b>Hero</b>: video in the drawn house</span><span>leaves the sill</span></div>
+        <div class="row s-cream"><b class="t-num">2</b><span><b>Proof strip</b></span><span>dotted, passing</span></div>
+        <div class="row s-paper"><b class="t-num">3</b><span><b>Protect Your Nest</b>: 4 pinned beats</span><span>wraps · sweeps · boxes · seals</span></div>
+        <div class="row s-cream"><b class="t-num">4</b><span><b>Sweep the lawn</b>: the game (PEAK)</span><span>becomes the lawn you sweep</span></div>
+        <div class="row s-paper"><b class="t-num">5</b><span><b>Services</b>: rows into chapters</span><span>the seam between chapters</span></div>
+        <div class="row s-cream"><b class="t-num">6</b><span><b>Our families</b></span><span>rests (people, no line)</span></div>
+        <div class="row s-paper"><b class="t-num">7</b><span><b>Storm damage and insurance</b></span><span>hail path → steps</span></div>
+        <div class="row s-cream"><b class="t-num">8</b><span><b>Reviews and videos</b></span><span>rests</span></div>
+        <div class="row s-paper"><b class="t-num">9</b><span><b>Wise Check + Price My Roof</b></span><span>measures the roof edge</span></div>
+        <div class="row s-cream"><b class="t-num">10</b><span><b>Service area</b>: 29 towns</span><span>a route between towns</span></div>
+        <div class="row s-deep"><b class="t-num">11</b><span><b>Call band + footer</b> (END)</span><span>weaves the nest</span></div>
+      </div>
+      <p class="note" style="margin-top:var(--space-16)">Rhythm (⟦S0633⟧): action and rest alternate. Sections 6 and 8 are deliberate rests where the line does not compete with people. The strongest transformation (the game) sits at the centre-left, and the resolution (the nest) at the end.</p>
+    </div>
+    <div style="display:grid;gap:var(--space-16);align-content:start">
+      <h3 class="t-sub">The line, keyframed (real <code>Owl.sweepLine</code>)</h3>
+      <div class="grid2">
+        <figure class="kf"><svg viewBox="0 0 400 220"><path class="kfline" data-p="0.15" d="M380 20 C 300 120 120 40 60 120 S 40 200 20 210"/></svg><figcaption><b>p 0.15</b> · leaves the house sill</figcaption></figure>
+        <figure class="kf"><svg viewBox="0 0 400 220"><path class="kfline" data-p="0.45" d="M380 20 C 300 120 120 40 60 120 S 40 200 20 210"/></svg><figcaption><b>p 0.45</b> · crossing the hero's clear band</figcaption></figure>
+        <figure class="kf"><svg viewBox="0 0 400 220"><path class="kfline" data-p="0.75" d="M380 20 C 300 120 120 40 60 120 S 40 200 20 210"/></svg><figcaption><b>p 0.75</b> · drops in the margin</figcaption></figure>
+        <figure class="kf"><svg viewBox="0 0 400 220"><path class="kfline" data-p="1" d="M380 20 C 300 120 120 40 60 120 S 40 200 20 210"/></svg><figcaption><b>p 1</b> · arrives as the lawn line</figcaption></figure>
+      </div>
+      <p class="note">Rules: the line never crosses copy (tested against text boxes; the exemplar has 0 collisions). It stays in margins and clear bands, keeps its direction and velocity at every section seam, and under reduced motion draws fully.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORYBOARD: PROTECT YOUR NEST -->
+<section class="band alt" id="beats">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Storyboard A · Protect Your Nest, 4 pinned beats</h2><p class="t-body muted">AirPods' one-proof-per-beat mechanism with Graza's custom-animation bar: each beat's animation is made from Owl's own system and nothing else. The stage is pinned for 4 × 100vh, with a skip link at the top and the beats as a static stack under reduced motion.</p></div>
+    <div class="grid4">
+      <figure class="kf"><svg viewBox="0 0 300 200" id="kfWrap" role="img" aria-label="Concept: a house outline; a protective wrap drapes down the walls and lawn"></svg><figcaption><b>Beat 1 · Nest-Protection wrap</b><br>scroll 0–25%: the wrap drops from the eave and settles over the shrubs. Owl's catch-all photo sits beside it.</figcaption></figure>
+      <figure class="kf"><svg id="kfPass" role="img" aria-label="The magnet pass midway"></svg><figcaption><b>Beat 2 · 3-Part Cleanup</b><br>scroll 25–50%: crew pass, the magnet pass (nails lift), then the PM check. Built (exemplar).</figcaption></figure>
+      <figure class="kf"><svg viewBox="0 0 300 200" id="kfBox" role="img" aria-label="Concept: leftover shingles slide into the aftercare box and the lid closes"></svg><figcaption><b>Beat 3 · Owl Roof Aftercare</b><br>scroll 50–75%: leftover shingles slide into the "shingle tomb" and the lid closes. Owl's box photo follows.</figcaption></figure>
+      <figure class="kf" style="place-items:center"><img src="../assets/source/get-it-right-guarantee-owl-768x768.png" alt="Owl's Get It Right Guarantee seal" style="width:60%;border-radius:50%"><figcaption><b>Beat 4 · Get It Right Guarantee</b><br>scroll 75–100%: the line closes a ring around Owl's own seal, with "10-year". The CTA arrives here.</figcaption></figure>
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Scroll</th><th>Viewer takeaway</th><th>Focal object</th><th>Transformation</th><th>Copy (Owl's words)</th><th>Exit</th></tr></thead><tbody>
+      <tr><td class="t-num">0–25%</td><td>They protect the house before work starts</td><td>House + wrap</td><td>The wrap drops from the eave (out ease, 600ms equivalent of scroll)</td><td>"shields your siding, landscaping, and outdoor spaces while we work overhead"</td><td>The wrap rolls up into the lawn line</td></tr>
+      <tr><td class="t-num">25–50%</td><td>They clean three times; one pass is a magnet</td><td>Sweeper</td><td>Nails lift onto the amber face; the steps tick 1 → 2 → 3</td><td>"3 rounds of cleanup. Round two is a magnet." plus Owl's honest quote</td><td>The sweeper parks; its bar becomes a box lid</td></tr>
+      <tr><td class="t-num">50–75%</td><td>Leftovers are stored, not dumped</td><td>Aftercare box</td><td>Three shingles slide in; the lid closes (travel ease)</td><td>"securing leftover shingles in a tidy, weather-protected 'shingle tomb'"</td><td>The lid line continues as a ring</td></tr>
+      <tr><td class="t-num">75–100%</td><td>If something goes wrong, they make it right</td><td>Owl's seal</td><td>The line closes a ring around the seal; the CTA appears</td><td>"either gets it right the first time, or will make it right every time"</td><td>Unpin; the line drops to the game's lawn</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<!-- STORYBOARD: GAME -->
+<section class="band" id="game">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Storyboard B · Sweep the lawn (the game, the peak)</h2><p class="t-body muted">Bruno Simon's mechanism, one explorable toy section, scaled to a lawn. You drag Owl's magnet across a drawn yard and find the nails hidden in the grass. Twelve are hidden; the count is the game's own, not a statistic. It is keyboard playable (arrow keys move the magnet), works by touch, and under reduced motion becomes a tap-to-reveal grid.</p></div>
+    <div class="grid2">
+      <figure class="kf"><svg id="kfG0"></svg><figcaption><b>Idle</b> · nails hidden in the grass; "Drag the magnet" with the magnet parked left; companion steps aside (data-owl-busy)</figcaption></figure>
+      <figure class="kf"><svg id="kfG1"></svg><figcaption><b>Playing</b> · nails within reach lift and stick; a counter shows 5 of 12; grass bends under the bar</figcaption></figure>
+      <figure class="kf"><svg id="kfG2"></svg><figcaption><b>Almost</b> · 11 of 12; the last nail glints once (opacity only, no flashing)</figcaption></figure>
+      <figure class="kf"><svg id="kfG3"></svg><figcaption><b>Won</b> · "That was round two. Round three: a project manager checks again." Then Call / Text</figcaption></figure>
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>State</th><th>Input</th><th>Response</th><th>Budget / fallback</th></tr></thead><tbody>
+      <tr><td>idle → playing</td><td>pointerdown on the magnet, Space or Enter on the focused magnet, or touch</td><td>The magnet lifts 2px and the grass starts responding; cursor companion off over the stage</td><td>One SVG; transforms only; at most 12 nails + 180 blades; paused off screen</td></tr>
+      <tr><td>playing</td><td>drag / arrow keys (step 24px) / touch drag</td><td>Wheels roll by distance; nails within 60px lift with an out ease; aria-live "5 of 12 found"</td><td>Pointer capture; no scroll-jacking (touch-action: pan-y outside the magnet)</td></tr>
+      <tr><td>won</td><td>the 12th nail</td><td>The magnet parks, the line leaves the lawn toward the services; Owl's line about the PM check; CTA</td><td>The peak (⟦S1452⟧): a clear, warm completion, never a score screen</td></tr>
+      <tr><td>reduced motion</td><td>tap a patch of grass</td><td>The patch reveals its nail (opacity only)</td><td>Same count and same win line</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<!-- STORYBOARD: NEST AT THE CALL + CONCEPT FRAMES -->
+<section class="band alt" id="end">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="t-heading">Storyboard C · The end: the nest closes around the phone number</h2><p class="t-body muted">Lusion's flow resolution: the one line that left the house in the hero arrives at the call band and weaves a nest. The phone number sits in the bowl. Night yard behind; one porch light.</p></div>
+    <div class="grid4">
+      <figure class="kf on-deep" style="background:var(--surface-deep)"><svg class="kfnest" data-p="0.2"></svg><figcaption><b>p 0.2</b> · back rim</figcaption></figure>
+      <figure class="kf on-deep" style="background:var(--surface-deep)"><svg class="kfnest" data-p="0.5"></svg><figcaption><b>p 0.5</b> · strands cross</figcaption></figure>
+      <figure class="kf on-deep" style="background:var(--surface-deep)"><svg class="kfnest" data-p="0.8"></svg><figcaption><b>p 0.8</b> · front rim</figcaption></figure>
+      <figure class="kf on-deep" style="background:var(--surface-deep);position:relative"><svg class="kfnest" data-p="1"></svg><p class="t-sub t-num" style="position:absolute;left:0;right:0;top:34%;text-align:center;color:var(--text-on-deep)">(651) 977-6027</p><figcaption><b>p 1</b> · the amber strand last; the number in the bowl</figcaption></figure>
+    </div>
+    <p class="note" style="margin-top:var(--space-16)">Defect carried from Gate 2: on a light ground and at small size the nest reads "basket". On deep olive the tones need their own mapping (the ink strands disappear). Fix in 3b, as part of the call-band proof: on deep, the strands use olive-300, tan and cream at different weights.</p>
+
+    <h3 class="t-sub" style="margin-top:var(--space-48)">Concept frames for the unbuilt sections (composition only)</h3>
+    <div class="grid2" style="margin-top:var(--space-16)">
+      <figure class="kf"><div class="frame16" style="background:var(--surface-page);display:grid;grid-template-columns:5fr 6fr;gap:var(--space-16);padding:var(--space-24);align-items:center">
+        <div style="display:grid;gap:var(--space-8)"><b class="t-sub">Price my roof.</b><div class="field"><label for="c1">House footprint</label><input id="c1" class="t-num" value="1,800 sq ft" readonly></div><p class="t-small t-num">1,800 × 1.118 (6/12 pitch) ÷ 100 ≈ <b>20 squares</b></p><span class="btn" style="justify-self:start">Get my estimate</span></div>
+        <svg viewBox="0 0 300 200" id="kfRoof" role="img" aria-label="Concept: a roof whose courses re-space with the pitch"></svg></div>
+        <figcaption><b>§9 Price My Roof</b> · Quiet Cubes' instrument in a supporting role. The roof's courses re-space as the pitch changes. It hands off to a written estimate and never shows a price Owl has not published.</figcaption></figure>
+      <figure class="kf"><div class="frame16" style="background:var(--surface-alt)"><svg data-bg="rings" style="position:absolute;inset:0;width:100%;height:100%"></svg><div style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);padding:var(--space-24);height:100%;align-items:center"><img src="../assets/source/meet-the-browns-owl.webp" alt="The Brown family" style="width:100%;border-radius:var(--radius-m)"><div style="display:grid;gap:var(--space-8)"><b class="t-sub">Two families. One phone that rings.</b><p class="t-small">"Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes…"</p><span class="t-small muted">Owl's About page</span></div></div></div>
+        <figcaption><b>§6 Our families</b> · Cowboy's people-in-use warmth on Owl's own photos; B2 Rings ground; Owl's own words quoted.</figcaption></figure>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+{{JS}}
+</script>
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  // line keyframes
+  document.querySelectorAll('.kfline').forEach(function (p) { Owl.sweepLine(p, { width: 4 }).set(+p.dataset.p); });
+  // beat 2 + game keyframes from the real magnet pass
+  Owl.magnetPass(document.getElementById('kfPass'), { nails: 10 }).set(0.55);
+  [['kfG0', 0], ['kfG1', 0.42], ['kfG2', 0.86], ['kfG3', 1]].forEach(function (k) { Owl.magnetPass(document.getElementById(k[0]), { nails: 12, seed: 7 }).set(k[1]); });
+  // nest keyframes
+  document.querySelectorAll('.kfnest').forEach(function (s) { Owl.nest(s).set(+s.dataset.p); });
+  document.querySelectorAll('svg[data-bg]').forEach(function (s) { Owl.bg[s.dataset.bg](s); });
+  // concept: the wrap (house + drape), drawn in the brand grammar
+  var w = document.getElementById('kfWrap');
+  el('path', { d: 'M60 90 L150 30 L240 90 M75 80 V170 H225 V80', fill: 'none', 'stroke-width': 3, 'stroke-linejoin': 'round', style: 'stroke:var(--text-primary)' }, w);
+  el('path', { d: 'M70 92 C 95 120 70 150 92 178 M230 92 C 205 120 230 150 208 178 M70 92 H230', fill: 'none', 'stroke-width': 2.5, 'stroke-linecap': 'round', style: 'stroke:var(--graphic-warm)' }, w);
+  el('path', { d: 'M40 180 C 100 172 200 188 260 178', fill: 'none', 'stroke-width': 2.5, 'stroke-linecap': 'round', style: 'stroke:var(--graphic-warm)' }, w);
+  el('path', { d: 'M20 184 H280', 'stroke-width': 1.5, style: 'stroke:var(--line-control)' }, w);
+  // concept: the aftercare box with shingles sliding in
+  var b = document.getElementById('kfBox');
+  el('path', { d: 'M70 110 H230 V170 H70 Z', fill: 'none', 'stroke-width': 3, 'stroke-linejoin': 'round', style: 'stroke:var(--text-primary)' }, b);
+  el('path', { d: 'M70 110 L95 70 H255 L230 110', fill: 'none', 'stroke-width': 3, 'stroke-linejoin': 'round', style: 'stroke:var(--text-primary)' }, b);
+  [0, 1, 2].forEach(function (i) { el('rect', { x: 100 + i * 34, y: 40 + i * 10, width: 30, height: 12, rx: 2, transform: 'rotate(' + (8 - i * 6) + ' ' + (115 + i * 34) + ' ' + (46 + i * 10) + ')', style: 'fill:var(--surface-alt);stroke:var(--text-primary);stroke-width:2' }, b); });
+  el('path', { d: 'M20 184 H280', 'stroke-width': 1.5, style: 'stroke:var(--line-control)' }, b);
+  // concept: the instrument roof (courses re-spaced by pitch)
+  Owl.courses(document.getElementById('kfRoof'), { rows: 6, width: 300, height: 200 }).set(1);
+})();
+</script>
+</body>
+</html>

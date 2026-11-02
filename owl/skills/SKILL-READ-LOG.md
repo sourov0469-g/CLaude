@@ -172,3 +172,37 @@ Skills picked for this phase, and why:
   - **Colour:** one accent; no pure black; no 3-equal-card row; no filler words; no fake numbers.
   - **Overridden by the owner's rules:** its font picks and its "no custom cursors" line. The owner requires everyday
     fonts and an SVG cursor companion.
+
+## Phase 3a: page plan, storyboards, flow map (read in full)
+- ⟦S1411⟧ information-architecture
+  - **Build from tasks inward**, not from the homepage outward.
+  - **Navigation:** global, local, utility and contextual navigation are kept distinct.
+  - **Findability:** any item in under 3 clicks; at most 3 levels; labels in the user's own words.
+  - **No dead ends.**
+- ⟦S1398⟧ journey-map
+  - **Stages:** 5-7, from awareness to advocacy.
+  - **Per stage:** goals, actions, touchpoints, thoughts, emotion, pain, opportunity.
+  - **Overall:** an emotional curve; moments of truth.
+- ⟦S1450⟧ navigation-patterns
+  - **Top nav:** suits 4-7 destinations on a marketing site.
+  - **Hamburger:** reserved for constrained screens, never primary on desktop.
+  - **Active state:** shown by more than colour.
+  - **Thumb reach on mobile:** the call bar.
+  - **Maximum destinations:** 7.
+- ⟦S1452⟧ peak-end-rule
+  - **Design two moments deliberately:** the peak and the end.
+  - **Never end on process;** end on accomplishment.
+  - **Negative peaks:** design the recovery.
+- ⟦S1454⟧ serial-position-effect
+  - **Position:** critical items go first or last, never in the middle (positions 3-5 of 7).
+  - **In a set of three:** the primary CTA is first or last.
+  - **Summaries:** repeat key items at the end.
+- ⟦S0633⟧ motion-design
+  - **Beat map:** time → takeaway → focal object → transformation → copy → exit.
+  - **Motif:** one recurring motif carries the beats.
+  - **Art direction first:** resolve one representative frame before adding motion.
+  - **Hierarchy of motion:** a lead action, then secondary and ambient motion only when needed.
+  - **Continuity:** preserve velocity and direction at hand-offs.
+  - **Rhythm:** alternate action and rest; the strongest transformation goes on the central idea.
+  - **Deterministic:** motion is a function of t or p, so seeking works.
+  - **Honesty:** do not invent claims.
