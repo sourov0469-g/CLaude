@@ -1150,301 +1150,65 @@ html.has-buddy select { cursor: default !important; }
 @media (prefers-reduced-motion: reduce) { .sv__scope, .sv__scope[hidden] { transition: none; } }
 
 
-.ba__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s8); }
-.ba__head .t-head { grid-column: 1 / span 6; }
-.ba__head .ba__lead { grid-column: 8 / span 5; }
-.ba__lead { color: var(--color-text-secondary); max-width: 38ch; }
-@media (max-width: 1023px) { .ba__head .t-head, .ba__head .ba__lead { grid-column: 1 / -1; } .ba__head .ba__lead { margin-top: var(--s4); } }
+.bx__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: center; }
+.bx__side { display: grid; gap: var(--s4); align-content: start; }
+.bx__side .eyebrow, .bx__side .t-head, .bx__lead { margin: 0; }
+.bx__lead { max-width: 40ch; color: var(--color-text-secondary); }
 
 
-.ba1__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.ba1__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); }
-.ba1__lead { color: var(--muted); max-width: 32ch; }
-.ba1__tabs { display: grid; }
-.ba1__tab {
-  position: relative; display: grid; grid-template-columns: 1fr; text-align: left;
-  padding: 14px 36px 14px 12px; background: none; border: 0; border-top: 1px solid var(--line-soft); color: var(--ink); cursor: pointer;
+.bx__pairs { display: grid; margin-top: var(--s4); border-top: 1.5px solid var(--color-text); }
+.bx__pair {
+  display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: var(--s4);
+  min-height: 72px; padding: var(--s3) var(--s3); text-align: left; cursor: pointer;
+  background: transparent; border: 0; border-bottom: 1px solid var(--color-border); color: inherit;
+  transition: background-color 200ms var(--ez-out);
 }
-.ba1__tab:last-child { border-bottom: 1px solid var(--line-soft); }
-.ba1__tn { grid-row: 1 / span 2; font: 400 1.125rem/1 var(--f-display); color: var(--accent); padding-top: .35em; }
-.ba1__tl { font: 400 clamp(1.5rem, 1.1rem + 1vw, 2.125rem)/1 var(--f-display); letter-spacing: .01em; }
-.ba1__tt { font-size: .875rem; color: var(--muted); margin-top: 4px; }
-.ba1__tab::after { content: ""; position: absolute; right: 0; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line-soft); }
-.ba1__tab[aria-selected="true"] { background: rgba(119, 179, 184, .08); }
-.ba1__tab[aria-selected="true"] .ba1__tl { color: var(--accent); }
-.ba1__tab[aria-selected="true"]::after { background: #f2c230; box-shadow: none; }
-.ba1__stage { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #0B1418; --pos: 50%; box-shadow: 0 0 0 1px var(--line-soft); }
-.ba1__img { position: absolute; inset: 0; margin: 0; }
-.ba1__img img { width: 100%; height: 100%; object-fit: cover; }
-.ba1__img--after { clip-path: inset(0 0 0 var(--pos)); }
-.ba1__tag { position: absolute; top: 14px; z-index: 2; font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: rgba(11, 20, 24, .78); color: #e8e4dc; pointer-events: none; }
-.ba1__tag--b { left: 14px; }
-.ba1__tag--a { right: 14px; background: #f2c230; color: #0B1418; }
-.ba1__stud { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 24px; margin-left: -12px; z-index: 2; pointer-events: none; }
-.ba1__wood { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(0, 0, 0, .55)); }
-.ba1__nail { position: absolute; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #c9d1d3; box-shadow: inset 0 0 0 1.5px #0B1418; }
-.ba1__grip { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 64px; height: 64px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .45)); transition: scale 200ms var(--ease-out); }
-.ba1__stage.is-drag .ba1__grip { scale: 1.12; }
-.ba1__range { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
-.ba1__range:focus-visible + * { outline: none; }
-.ba1__stage:has(.ba1__range:focus-visible) { box-shadow: 0 0 0 3px var(--accent); }
-@media (max-width: 1023px) {
-  .ba1__side, .ba1__stage { grid-column: 1 / -1; }
-  .ba1__stage { margin-top: var(--s7); }
+.bx__pair[aria-selected="true"] { background: var(--color-surface); box-shadow: inset 3px 0 0 var(--color-accent-solid); }
+@media (hover: hover) and (pointer: fine) { .bx__pair:hover { background: var(--color-surface); } }
+.bx__pair:focus-visible { outline: 2px solid var(--color-accent-solid); outline-offset: -2px; }
+.bx__th { position: relative; width: 84px; height: 56px; overflow: hidden; border: 1px solid var(--color-text); }
+.bx__th img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.bx__th img + img { clip-path: inset(0 0 0 50%); }
+.bx__th::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--color-surface); }
+.bx__pt { display: grid; gap: 2px; }
+.bx__pn { font: 600 1rem/1.25 var(--f-display); }
+.bx__pd { font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+
+
+.bx__board { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: var(--s7) var(--s6); background: var(--color-bg-subtle); border: 1px solid var(--color-border); min-height: 560px; }
+.bx__reg { position: absolute; inset: var(--s3); width: calc(100% - var(--s3) * 2); height: calc(100% - var(--s3) * 2); overflow: visible; pointer-events: none; }
+.bx__reg path { fill: none; stroke: var(--color-text); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.bx__print { width: var(--pw, 520px); max-width: min(100%, calc((70svh - 96px) * var(--arn, 1.33) + 26px)); padding: 12px 12px var(--s3); background: var(--color-surface); border: 1px solid var(--color-text); box-shadow: 0 18px 36px -20px color-mix(in srgb, var(--color-shadow) 40%, transparent); }
+.bx__tape {
+  height: 26px; margin-bottom: 8px; border: 1px solid var(--color-text); background:
+    repeating-linear-gradient(90deg, var(--color-text) 0 1px, transparent 1px calc(100% / 48)) 0 100% / 100% 7px no-repeat,
+    repeating-linear-gradient(90deg, var(--color-text) 0 1.5px, transparent 1.5px calc(100% / 4)) 0 100% / 100% 14px no-repeat,
+    var(--sand-100, #F7F1EA);
 }
+.bx__stage { --s: .5; position: relative; aspect-ratio: var(--ar, 4 / 3); overflow: hidden; touch-action: pan-y; cursor: ew-resize; }
+.bx__img { position: absolute; inset: 0; margin: 0; }
+.bx__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bx__img--a { clip-path: inset(0 0 0 calc(var(--s) * 100%)); }
+.bx__tag { position: absolute; top: var(--s3); padding: 4px 8px; font: 600 .6875rem/1 var(--f-text); letter-spacing: .02em; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-text); pointer-events: none; }
+.bx__tag--b { left: var(--s3); } .bx__tag--a { right: var(--s3); }
+.bx__stud { position: absolute; top: 0; bottom: 0; left: calc(var(--s) * 100%); width: 18px; margin-left: -9px; pointer-events: none; }
+.bx__wood { position: absolute; inset: 0; background: var(--clay-100, #F9E3DD); border: 1.5px solid var(--color-text); }
+.bx__wood::before { content: ""; position: absolute; inset: 0 5px; border-left: 1px solid var(--clay-300, #ECB3A4); border-right: 1px solid var(--clay-300, #ECB3A4); }
+.bx__nail { position: absolute; left: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--color-text); }
+.bx__grip { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: var(--color-accent-solid); border: 2px solid var(--color-text); display: grid; place-items: center; transition: transform 200ms var(--ez-out); }
+.bx__grip svg { width: 26px; height: 26px; }
+.bx__grip path { fill: none; stroke: var(--white, #fff); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.bx__stage.is-drag .bx__grip { transform: scale(.9); }
+.bx__read { position: absolute; left: 50%; top: var(--s2); transform: translateX(-50%); padding: 3px 6px; background: var(--color-text); color: var(--color-surface); font: 600 .6875rem/1 var(--f-text); white-space: nowrap; }
+.bx__range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.bx__range:focus-visible ~ * , .bx__stage:has(.bx__range:focus-visible) { outline: none; }
+.bx__stage:has(.bx__range:focus-visible) .bx__grip { box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-accent-solid); }
+.bx__cap { margin: var(--s3) 0 0; min-height: 2.6em; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
 
-
-.ba2__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 5vw, 80px) var(--gutter); }
-.ba2__panel { margin: 0; display: grid; gap: var(--s3); }
-.ba2__panel:nth-child(even) { margin-top: clamp(40px, 10vw, 160px); }
-.ba2__frame { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
-.ba2__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.ba2__panel figcaption { font-size: .9375rem; color: var(--muted); }
-.ba2__tog { justify-self: start; }
-.ba2__panel figcaption strong { color: var(--ink); font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; margin-right: 8px; }
-.ba2__btn { margin-top: var(--s8); }
-@media (max-width: 767px) { .ba2__grid { grid-template-columns: minmax(0, 1fr); } .ba2__panel:nth-child(even) { margin-top: 0; } }
-
-
-.ba3__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.ba3__stage { grid-column: 1 / span 7; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--white); box-shadow: 0 0 0 1px var(--line-soft); }
-.ba3__img { position: absolute; inset: 0; margin: 0; }
-.ba3__img img { width: 100%; height: 100%; object-fit: cover; }
-.ba3__shutters { position: absolute; inset: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; pointer-events: none; }
-.ba3__panel {
-  position: relative; height: 100%;
-  background:
-    repeating-linear-gradient(90deg, var(--old) 0 3px, var(--grey) 3px 9px, var(--surface-2) 9px 11px, var(--grey) 11px 16px),
-    var(--grey);
-  box-shadow: inset -2px 0 0 var(--ink), inset 0 -10px 0 var(--grey), inset 0 10px 0 var(--grey);
+@media (max-width: 900px) {
+  .bx__grid { grid-template-columns: 1fr; gap: var(--s6); }
+  .bx__board { order: -1; min-height: 0; padding: var(--s5) var(--s3); }
 }
-.ba3__shutters.is-up .ba3__panel { visibility: hidden; }
-.ba3__panel::before, .ba3__panel::after { content: ""; position: absolute; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--white); box-shadow: inset 0 0 0 1.5px var(--ink); }
-.ba3__panel::before { top: 2px; }
-.ba3__panel::after { bottom: 2px; }
-.ba3__state { position: absolute; left: 14px; top: 14px; z-index: 2; font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: rgba(255, 255, 255, .78); color: var(--ink); }
-.ba3__state.is-after { background: var(--a-500); color: var(--ink); }
-.ba3__side { grid-column: 9 / span 4; display: grid; gap: var(--s5); }
-.ba3__cap { margin: 0; display: grid; gap: 6px; }
-.ba3__name { font: 400 clamp(2rem, 1.4rem + 1.6vw, 3rem)/1 var(--f-display); letter-spacing: -.005em; font-weight: 400; }
-.ba3__time { color: var(--muted); font-size: .9375rem; }
-.ba3__ctrl { display: flex; flex-wrap: wrap; gap: var(--s3); }
-@media (max-width: 1023px) {
-  .ba3__stage, .ba3__side { grid-column: 1 / -1; }
-  .ba3__side { margin-top: var(--s6); }
-}
-
-
-
-.bs__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.bs__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); }
-.bs__lead { color: var(--muted); max-width: 32ch; }
-.bs__tabs { display: grid; }
-.bs__tab {
-  position: relative; display: grid; grid-template-columns: 1fr; text-align: left;
-  padding: 14px 36px 14px 12px; background: none; border: 0; border-top: 1px solid var(--line-soft); color: var(--ink); cursor: pointer;
-}
-.bs__tab:last-child { border-bottom: 1px solid var(--line-soft); }
-.bs__tl { font: 400 clamp(1.5rem, 1.1rem + 1vw, 2.125rem)/1 var(--f-display); letter-spacing: -.005em; }
-.bs__tt { font-size: .875rem; color: var(--muted); margin-top: 4px; }
-.bs__tab::after { content: ""; position: absolute; right: 0; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line-soft); }
-.bs__tab[aria-selected="true"] { background: rgba(255, 95, 0, .08); }
-.bs__tab[aria-selected="true"] .bs__tl { color: var(--accent); }
-.bs__tab[aria-selected="true"]::after { background: var(--a-500); box-shadow: none; }
-.bs__stage { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--white); --pos: 50%; box-shadow: 0 0 0 1px var(--line-soft); }
-.bs__img { position: absolute; inset: 0; margin: 0; }
-.bs__img img { width: 100%; height: 100%; object-fit: cover; }
-.bs__img--after { clip-path: inset(0 0 0 var(--pos)); }
-.bs__tag { position: absolute; top: 14px; z-index: 2; font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: rgba(255, 255, 255, .78); color: var(--ink); pointer-events: none; }
-.bs__tag--b { left: 14px; }
-.bs__tag--a { right: 14px; background: var(--a-500); color: var(--ink); }
-.bs__stud { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 24px; margin-left: -12px; z-index: 2; pointer-events: none; }
-.bs__wood { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(18, 18, 18, .55)); }
-.bs__nail { position: absolute; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--grey); box-shadow: inset 0 0 0 1.5px var(--ink); }
-.bs__grip { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 64px; height: 64px; filter: drop-shadow(0 6px 10px rgba(18, 18, 18, .45)); transition: scale 200ms var(--ease-out); }
-.bs__stage.is-drag .bs__grip { scale: 1.12; }
-.bs__range { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
-.bs__range:focus-visible + * { outline: none; }
-.bs__stage:has(.bs__range:focus-visible) { box-shadow: 0 0 0 3px var(--accent); }
-@media (max-width: 1023px) {
-  .bs__side, .bs__stage { grid-column: 1 / -1; }
-  .bs__stage { margin-top: var(--s7); }
-}
-
-
-.bs__stage { max-width: 640px; }
-.bs__grip { transition: transform .15s ease-out; }
-.bs__range:focus-visible ~ .bs__stud .bs__grip, .bs__stage:has(.bs__range:focus-visible) .bs__grip { transform: scale(1.08); filter: drop-shadow(0 0 0 var(--a-500)); }
-.bs__stage:has(.bs__range:focus-visible) .bs__grip circle { stroke: var(--a-500); stroke-width: 6; }
-
-
-.bs__tape { position: absolute; left: 0; right: 0; top: 0; height: 30px; background: var(--a-500); z-index: 3; box-shadow: 0 1px 0 var(--ink); pointer-events: none; }
-.bs__tape svg { position: absolute; inset: 0 0 auto 0; width: 100%; height: 24px; overflow: visible; }
-.bs__ticks path { stroke: var(--ink); stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
-.bs__tn i { position: absolute; top: 12px; translate: -50% 0; font: 600 11px/1 var(--f-text); font-style: normal; color: var(--ink); }
-.bs__mark { position: absolute; top: 34px; left: var(--pos); translate: -50% 0; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: var(--white); font: 600 12px/1.2 var(--f-text); white-space: nowrap; }
-.bs__mark::before { content: ""; position: absolute; left: 50%; top: -7px; margin-left: -5px; border: 5px solid transparent; border-bottom-color: var(--ink); border-top: 0; }
-.bs__tag { top: 46px; }
-
-
-
-.bsx__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.bsx__side { grid-column: 1 / span 4; display: grid; gap: var(--s6); }
-.bsx__lead { color: var(--color-text-secondary); max-width: 32ch; }
-.bsx__tabs { display: grid; }
-.bsx__tab {
-  position: relative; display: grid; grid-template-columns: 1fr; text-align: left;
-  padding: 14px 36px 14px 12px; background: none; border: 0; border-top: 1px solid var(--color-border-subtle); color: var(--color-text); cursor: pointer;
-}
-.bsx__tab:last-child { border-bottom: 1px solid var(--color-border-subtle); }
-.bsx__tl { font: 400 clamp(1.5rem, 1.1rem + 1vw, 2.125rem)/1 var(--f-display); letter-spacing: -.005em; }
-.bsx__tt { font-size: .875rem; color: var(--color-text-secondary); margin-top: 4px; font-weight: 600; }
-.bsx__tab::after { content: ""; position: absolute; right: 0; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1.5px var(--color-border-subtle); }
-.bsx__tab[aria-selected="true"] { background: color-mix(in srgb, var(--color-accent-solid) 8%, transparent); }
-.bsx__tab[aria-selected="true"] .bsx__tl { color: var(--color-accent-text); }
-.bsx__tab[aria-selected="true"]::after { background: var(--color-accent-solid); box-shadow: none; color: var(--color-text-on-accent); }
-.bsx__stage { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-surface); --pos: 50%; box-shadow: 0 0 0 1px var(--color-border-subtle); }
-.bsx__img { position: absolute; inset: 0; margin: 0; }
-.bsx__img img { width: 100%; height: 100%; object-fit: cover; }
-.bsx__img--after { clip-path: inset(0 0 0 var(--pos)); }
-.bsx__tag { position: absolute; top: 14px; z-index: 2; font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: color-mix(in srgb, var(--color-surface) 78%, transparent); color: var(--color-text); pointer-events: none; }
-.bsx__tag--b { left: 14px; }
-.bsx__tag--a { right: 14px; background: var(--color-accent-subtle); color: var(--color-text); }
-.bsx__stud { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 24px; margin-left: -12px; z-index: 2; pointer-events: none; }
-.bsx__wood { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-shadow) 55%, transparent)); }
-.bsx__nail { position: absolute; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--color-bg-muted); box-shadow: inset 0 0 0 1.5px var(--color-border-strong); }
-.bsx__grip { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 64px; height: 64px; filter: drop-shadow(0 6px 10px color-mix(in srgb, var(--color-shadow) 45%, transparent)); transition: scale 200ms var(--ease-out); }
-.bsx__stage.is-drag .bsx__grip { scale: 1.12; }
-.bsx__range { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
-.bsx__range:focus-visible + * { outline: none; }
-.bsx__stage:has(.bsx__range:focus-visible) { box-shadow: 0 0 0 3px var(--color-accent-border); }
-@media (max-width: 1023px) {
-  .bsx__side, .bsx__stage { grid-column: 1 / -1; }
-  .bsx__stage { margin-top: var(--s7); }
-}
-.bsx__stage { max-width: 640px; }
-.bsx__grip { transition: transform .15s ease-out; }
-.bsx__range:focus-visible ~ .bsx__stud .bsx__grip, .bsx__stage:has(.bsx__range:focus-visible) .bsx__grip { transform: scale(1.08); filter: drop-shadow(0 0 0 var(--color-accent-border)); }
-.bsx__stage:has(.bsx__range:focus-visible) .bsx__grip circle { stroke: var(--color-art-accent); stroke-width: 6; }
-.bsx__tape { position: absolute; left: 0; right: 0; top: 0; height: 30px; background: var(--color-bg-muted); z-index: 3; box-shadow: 0 1px 0 var(--color-border-strong); pointer-events: none; color: var(--color-text); }
-.bsx__tape svg { position: absolute; inset: 0 0 auto 0; width: 100%; height: 24px; overflow: visible; }
-.bsx__ticks path { stroke: var(--color-art-line); stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
-.bsx__tn i { position: absolute; top: 12px; translate: -50% 0; font: 600 11px/1 var(--f-text); font-style: normal; color: var(--color-text); }
-.bsx__mark { position: absolute; top: 34px; left: var(--pos); translate: -50% 0; padding: 3px 8px; border-radius: 999px; background: var(--color-bg-inverse); color: var(--color-text-inverse); font: 600 12px/1.2 var(--f-text); white-space: nowrap; }
-.bsx__mark::before { content: ""; position: absolute; left: 50%; top: -7px; margin-left: -5px; border: 5px solid transparent; border-bottom-color: var(--color-border-strong); border-top: 0; }
-.bsx__tag { top: 46px; }
-
-
-
-.b2x__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 5vw, 80px) var(--gutter); }
-.b2x__panel { margin: 0; display: grid; gap: var(--s3); }
-.b2x__panel:nth-child(even) { margin-top: clamp(40px, 10vw, 160px); }
-.b2x__frame { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
-.b2x__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.b2x__panel figcaption { font-size: .9375rem; color: var(--color-text-secondary); }
-.b2x__tog { justify-self: start; }
-.b2x__panel figcaption strong { color: var(--color-text); font: 400 1.5rem/1 var(--f-display); letter-spacing: -.005em; margin-right: 8px; }
-.b2x__btn { margin-top: var(--s8); }
-@media (max-width: 767px) {
-  .b2x__grid { grid-template-columns: minmax(0, 1fr); }
-  .b2x__panel:nth-child(even) { margin-top: 0; }
-}
-
-
-
-.b3x__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.b3x__stage { grid-column: 1 / span 7; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-surface); box-shadow: 0 0 0 1px var(--color-border-subtle); }
-.b3x__img { position: absolute; inset: 0; margin: 0; }
-.b3x__img img { width: 100%; height: 100%; object-fit: cover; }
-.b3x__shutters { position: absolute; inset: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; pointer-events: none; }
-.b3x__panel {
-  position: relative; height: 100%;
-  background:
-    repeating-linear-gradient(90deg, var(--color-bg-muted) 0 3px, var(--color-bg-muted) 3px 9px, var(--color-bg-subtle) 9px 11px, var(--color-bg-muted) 11px 16px),
-    var(--color-bg-muted);
-  box-shadow: inset -2px 0 0 var(--color-border-strong), inset 0 -10px 0 var(--color-border), inset 0 10px 0 var(--color-border);
-}
-.b3x__shutters.is-up .b3x__panel { visibility: hidden; }
-.b3x__panel::before, .b3x__panel::after { content: ""; position: absolute; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--color-surface); box-shadow: inset 0 0 0 1.5px var(--color-border-strong); }
-.b3x__panel::before { top: 2px; }
-.b3x__panel::after { bottom: 2px; }
-.b3x__state { position: absolute; left: 14px; top: 14px; z-index: 2; font: 600 .6875rem/1 var(--f-text); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: color-mix(in srgb, var(--color-surface) 78%, transparent); color: var(--color-text); }
-.b3x__state.is-after { background: var(--color-accent-subtle); color: var(--color-text); }
-.b3x__side { grid-column: 9 / span 4; display: grid; gap: var(--s5); }
-.b3x__cap { margin: 0; display: grid; gap: 6px; }
-.b3x__name { font: 400 clamp(2rem, 1.4rem + 1.6vw, 3rem)/1 var(--f-display); letter-spacing: -.005em; font-weight: 400; }
-.b3x__time { color: var(--color-text-secondary); font-size: .9375rem; }
-.b3x__ctrl { display: flex; flex-wrap: wrap; gap: var(--s3); }
-@media (max-width: 1023px) {
-  .b3x__stage, .b3x__side { grid-column: 1 / -1; }
-  .b3x__side { margin-top: var(--s6); }
-}
-
-
-.bpairs { display: flex; flex-wrap: wrap; gap: 8px; }
-.bpairs button { min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--color-surface); color: var(--color-text); font: 600 .875rem/1 var(--f-text); box-shadow: inset 0 0 0 2px var(--color-border-strong); cursor: pointer; }
-.bpairs button[aria-selected="true"] { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
-.bdr__grid, .brl__grid, .bbl__grid, .bln__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.bdr__side, .brl__side, .bbl__side, .bln__side { grid-column: 1 / span 4; display: grid; gap: 16px; justify-items: start; }
-.bdr__lead, .brl__lead, .bbl__lead, .bln__lead, .bpc__lead { color: var(--color-text-secondary); }
-@media (max-width: 1023px) { .bdr__side, .brl__side, .bbl__side, .bln__side { grid-column: 1 / -1; margin-bottom: var(--s5); } }
-
-
-.bdr__frame { grid-column: 6 / -1; position: relative; overflow: hidden; aspect-ratio: 4 / 3; perspective: 1600px; border: 10px solid var(--color-border-strong); border-radius: 6px; background: var(--color-bg-inverse); }
-.bdr__frame figure { position: absolute; inset: 0; margin: 0; overflow: hidden; }
-.bdr__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.bdr__frame figcaption { position: absolute; left: 12px; top: 12px; padding: 4px 10px; border-radius: 999px; background: var(--color-surface); font: 600 .75rem/1.2 var(--f-text); }
-.bdr__door { transform-origin: left center; transition: transform 700ms var(--ease-out); box-shadow: 0 0 0 3px var(--color-border-strong); cursor: pointer; }
-.bdr__knob { position: absolute; right: 22px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; background: var(--color-accent-solid); box-shadow: 0 0 0 3px var(--color-border-strong); color: var(--color-text-on-accent); }
-.bdr.is-open .bdr__door { transform: rotateY(84deg); }   
-@media (max-width: 1023px) { .bdr__frame { grid-column: 1 / -1; } }
-@media (prefers-reduced-motion: reduce) { .bdr__door { transition: none; } }
-
-
-.brl__stage { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 3px var(--color-border-strong); cursor: none; touch-action: none; background: var(--color-surface); }
-.brl__a, .brl__c { position: absolute; inset: 0; width: 100%; height: 100%; }
-.brl__a { object-fit: cover; }
-.brl__tool { position: absolute; left: 0; top: 0; width: 60px; pointer-events: none; translate: -50% -15%; }
-.brl__tool rect { fill: var(--color-art-accent); stroke: var(--color-art-line); stroke-width: 4; } .brl__tool path { fill: none; stroke: var(--color-art-line); stroke-width: 5; stroke-linecap: round; }
-.brl__acts { display: flex; flex-wrap: wrap; gap: 10px; }
-@media (max-width: 1023px) { .brl__stage { grid-column: 1 / -1; } }
-@media (hover: none) { .brl__tool { display: none; } .brl__stage { cursor: auto; } }
-
-
-.bpc__head { display: grid; gap: 14px; justify-items: start; margin-bottom: var(--s6); }
-.bpc__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
-.bpc__card { position: relative; aspect-ratio: 3 / 4; padding: 0; border: 0; background: none; cursor: pointer; perspective: 1200px; }
-.bpc__f { position: absolute; inset: 0; margin: 0; border-radius: 16px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: 0 0 0 3px var(--color-border-strong); background: var(--color-surface); transition: transform 520ms var(--ease-out); }
-.bpc__f img { width: 100%; height: calc(100% - 46px); object-fit: cover; display: block; }
-.bpc__f span { display: flex; align-items: center; justify-content: space-between; height: 46px; padding: 0 14px; font: 600 .875rem/1 var(--f-text); text-align: left; }
-.bpc__f b { color: var(--color-text-secondary); }
-.bpc__back { transform: rotateY(180deg); }
-.bpc__card[aria-pressed="true"] .bpc__front { transform: rotateY(-180deg); }
-.bpc__card[aria-pressed="true"] .bpc__back { transform: rotateY(0deg); }
-.bpc__card:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 4px; border-radius: 16px; }
-@media (max-width: 1023px) { .bpc__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (prefers-reduced-motion: reduce) { .bpc__f { transition: none; } }
-
-
-.bbl__win { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 12px solid var(--color-surface); outline: 3px solid var(--color-focus-ring); border-radius: 4px; background: var(--color-surface); }
-.bbl__a { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.bbl__slats { position: absolute; inset: 0; display: grid; grid-auto-rows: 1fr; perspective: 900px; }
-.bbl__slats i { display: block; background: var(--color-bg-subtle); border-bottom: 1px solid var(--color-border-subtle); transform-origin: center; transform: rotateX(calc(var(--t, 0) * 82deg)); }
-.bbl__rail { position: absolute; left: 0; right: 0; top: 0; height: 14px; background: var(--color-bg-muted); border-bottom: 2px solid var(--color-border-strong); color: var(--color-text); }
-.bbl__lab { font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.bbl__cord { width: 100%; min-height: 44px; accent-color: var(--color-accent-solid); }
-@media (max-width: 1023px) { .bbl__win { grid-column: 1 / -1; } }
-
-
-.bln__stage { grid-column: 6 / -1; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 16px; box-shadow: 0 0 0 3px var(--color-border-strong); cursor: crosshair; --x: 60%; --y: 45%; --r: 110px; }
-.bln__stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.bln__a { clip-path: circle(var(--r) at var(--x) var(--y)); }
-.bln__ring { position: absolute; left: var(--x); top: var(--y); width: calc(var(--r) * 2); height: calc(var(--r) * 2); translate: -50% -50%; border-radius: 50%; box-shadow: 0 0 0 5px var(--color-border-strong), 0 0 0 8px var(--color-border-strong); pointer-events: none; }
-.bln__stage:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 4px; }
-@media (max-width: 1023px) { .bln__stage { grid-column: 1 / -1; --r: 80px; } }
-
-
-.bsx__tab[aria-selected="true"] .bsx__tl { color: var(--color-accent-text); }
 
 
 .process__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; margin-bottom: var(--s7); }
@@ -4029,233 +3793,50 @@ html.has-buddy select { cursor: default !important; }
   </div>
 </section>
 
-<section id="ba" class="sec ba g-base" data-section="ba" aria-labelledby="ba-h1">
-
+<section id="ba" class="sec ba g-base" data-section="ba" aria-labelledby="ba-h">
   
-  
-  
-  <div class="ver bsx" data-v="1">
-    <div class="wrap bsx__grid">
-      <div class="bsx__side">
+  <div class="ver bx" data-v="1">
+    <div class="wrap bx__grid">
+      <div class="bx__side">
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h1-w-i">Same room. <span class="acc">Different house.</span></h2>
-        <p class="t-lead bsx__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
-        <div class="bsx__tabs" role="tablist" aria-label="Before and after projects">
-          <button type="button" role="tab" class="bsx__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="bsx__tl">Kitchen, grey Shaker</span><span class="bsx__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="bsx__tab" aria-selected="false" data-pair="1" data-rx="~shower/hinge/drip/tr"><span class="bsx__tl">Bathroom</span><span class="bsx__tt"><span class="nums">4&ndash;8</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="bsx__tab" aria-selected="false" data-pair="2" data-rx="~sink/hinge/drip/tr"><span class="bsx__tl">Kitchen, light cabinetry and island</span><span class="bsx__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="bsx__tab" aria-selected="false" data-pair="3" data-rx="~palm/hinge/wobble/tr"><span class="bsx__tl">Outdoor living</span><span class="bsx__tt">Backyard and pergola</span></button>
+        <h2 class="t-head" id="ba-h">Same room. <span class="acc">Different house.</span></h2>
+        <p class="t-lead bx__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
+        <div class="bx__pairs" role="tablist" aria-label="Before and after projects">
+          <button type="button" role="tab" class="bx__pair" id="bx-t0" aria-selected="true" aria-controls="bx-stage" data-i="0">
+            <span class="bx__th" aria-hidden="true"><img data-img="ba-kitchen1-before" alt="" width="388" height="292"><img data-img="ba-kitchen1-after" alt="" width="388" height="294"></span>
+            <span class="bx__pt"><span class="bx__pn">Kitchen, grey Shaker</span><span class="bx__pd"><span class="nums">6&ndash;12</span> weeks of construction</span></span>
+          </button>
+          <button type="button" role="tab" class="bx__pair" id="bx-t1" aria-selected="false" aria-controls="bx-stage" data-i="1" tabindex="-1">
+            <span class="bx__th" aria-hidden="true"><img data-img="ba-bath2-before" alt="" width="428" height="404"><img data-img="ba-bath2-after" alt="" width="430" height="490"></span>
+            <span class="bx__pt"><span class="bx__pn">Bathroom</span><span class="bx__pd"><span class="nums">4&ndash;8</span> weeks of construction</span></span>
+          </button>
+          <button type="button" role="tab" class="bx__pair" id="bx-t2" aria-selected="false" aria-controls="bx-stage" data-i="2" tabindex="-1">
+            <span class="bx__th" aria-hidden="true"><img data-img="ba-kitchen4-before" alt="" width="596" height="444"><img data-img="ba-kitchen4-after" alt="" width="584" height="398"></span>
+            <span class="bx__pt"><span class="bx__pn">Kitchen, light cabinetry and island</span><span class="bx__pd"><span class="nums">6&ndash;12</span> weeks of construction</span></span>
+          </button>
+          <button type="button" role="tab" class="bx__pair" id="bx-t3" aria-selected="false" aria-controls="bx-stage" data-i="3" tabindex="-1">
+            <span class="bx__th" aria-hidden="true"><img data-img="ba-outdoor-before" alt="" width="558" height="466"><img data-img="ba-outdoor-after" alt="" width="562" height="468"></span>
+            <span class="bx__pt"><span class="bx__pn">Outdoor living</span><span class="bx__pd">Backyard and pergola</span></span>
+          </button>
         </div>
       </div>
-      <div class="bsx__stage" role="tabpanel" aria-label="Before and after">
-        <figure class="bsx__img bsx__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
-        <figure class="bsx__img bsx__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
-        <span class="bsx__tag bsx__tag--b">Before</span><span class="bsx__tag bsx__tag--a">After</span>
-        <div class="bsx__tape" aria-hidden="true"><svg viewBox="0 0 100 24" preserveAspectRatio="none" focusable="false"><g class="bsx__ticks"><path d="M2.08333 0 V4"/><path d="M4.16667 0 V4"/><path d="M6.25 0 V4"/><path d="M8.33333 0 V4"/><path d="M10.4167 0 V4"/><path d="M12.5 0 V7"/><path d="M14.5833 0 V4"/><path d="M16.6667 0 V4"/><path d="M18.75 0 V4"/><path d="M20.8333 0 V4"/><path d="M22.9167 0 V4"/><path d="M25 0 V10"/><path d="M27.0833 0 V4"/><path d="M29.1667 0 V4"/><path d="M31.25 0 V4"/><path d="M33.3333 0 V4"/><path d="M35.4167 0 V4"/><path d="M37.5 0 V7"/><path d="M39.5833 0 V4"/><path d="M41.6667 0 V4"/><path d="M43.75 0 V4"/><path d="M45.8333 0 V4"/><path d="M47.9167 0 V4"/><path d="M50 0 V10"/><path d="M52.0833 0 V4"/><path d="M54.1667 0 V4"/><path d="M56.25 0 V4"/><path d="M58.3333 0 V4"/><path d="M60.4167 0 V4"/><path d="M62.5 0 V7"/><path d="M64.5833 0 V4"/><path d="M66.6667 0 V4"/><path d="M68.75 0 V4"/><path d="M70.8333 0 V4"/><path d="M72.9167 0 V4"/><path d="M75 0 V10"/><path d="M77.0833 0 V4"/><path d="M79.1667 0 V4"/><path d="M81.25 0 V4"/><path d="M83.3333 0 V4"/><path d="M85.4167 0 V4"/><path d="M87.5 0 V7"/><path d="M89.5833 0 V4"/><path d="M91.6667 0 V4"/><path d="M93.75 0 V4"/><path d="M95.8333 0 V4"/><path d="M97.9167 0 V4"/></g></svg><span class="bsx__tn"><i style="left:25%">12</i><i style="left:50%">24</i><i style="left:75%">36</i></span><span class="bsx__mark"><b class="nums">24</b> in</span></div>
-        <div class="bsx__stud" aria-hidden="true">
-          <svg class="bsx__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" stroke-width="2" style="fill:var(--color-border);stroke:var(--color-art-line)"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke-width="1" style="stroke:var(--color-art-line-soft)"/></svg>
-          <span class="bsx__nail" style="top:12%"></span><span class="bsx__nail" style="top:46%"></span><span class="bsx__nail" style="top:82%"></span>
-          <svg class="bsx__grip" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="29" stroke-width="3" style="fill:var(--color-art-accent);stroke:var(--color-art-line)"/><path d="M14 32h36M14 32l7-7M14 32l7 7M50 32l-7-7M50 32l-7 7" fill="none" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--color-art-line)"/></svg>
-        </div>
-        <input class="bsx__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="50% after" data-rx="native:stud-grip">
-      </div>
-    </div>
-  </div>
 
-  
-  <div class="ver b2x" data-v="2" hidden>
-    <div class="wrap">
-      <div class="ba__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h2-i">Rolled on, <span class="acc">room by room.</span></h2>
-        <p class="t-lead ba__lead">Scroll, and the after goes on over the before like a fresh coat. Each panel also has its own switch. Four real pairs, nothing staged.</p>
-      </div>
-      <div class="b2x__grid">
-        <figure class="b2x__panel" data-pair="0"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~caulk/slide/drip/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Dated kitchen with cream cabinets and tiled counters, renovated with grey shaker cabinetry and quartz counters.</span></figure>
-        <figure class="b2x__panel" data-pair="1"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Bathroom</strong> <span class="nums">4&ndash;8</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~sander/slide/sweep/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Dated bathroom with an alcove tub and shower curtain, renovated with a frameless glass shower and round backlit mirror.</span></figure>
-        <figure class="b2x__panel" data-pair="2"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~hose/peek/drip/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Kitchen with dated oak cabinetry and tiled counters, renovated with light cabinetry, a range hood and island seating.</span></figure>
-        <figure class="b2x__panel" data-pair="3"><div class="b2x__frame"><svg class="b2x__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Outdoor living</strong> backyard and pergola</figcaption><button type="button" class="btn btn--ghost b2x__tog" aria-pressed="false" data-rx="~leaf/peek/sweep/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Backyard with worn lawn and open patio, transformed into a covered pergola with dining and bar seating and a turfed backyard.</span></figure>
-      </div>
-      <a class="btn b2x__btn" href="#consult" data-rx="~bucket/drop/drip/r"><span class="btn__label">Plan your own after</span></a>
-    </div>
-  </div>
-
-  
-  <div class="ver b3x" data-v="3" hidden>
-    <div class="wrap b3x__grid">
-      <div class="b3x__stage">
-        <figure class="b3x__img"><img class="b3x__photo" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
-        <div class="b3x__shutters" aria-hidden="true"></div>
-        <span class="b3x__state" aria-live="polite">Before</span>
-      </div>
-      <div class="b3x__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h3-i">Shutters down. <span class="acc">Shutters up.</span></h2>
-        <p class="t-lead ba__lead">In South Florida the shutters come down before a storm. Here they come down on the old room and go up on the new one.</p>
-        <p class="b3x__cap"><strong class="b3x__name">Kitchen</strong> <span class="b3x__time"><span class="nums">6&ndash;12</span> weeks of construction</span></p>
-        <div class="b3x__ctrl">
-          <button type="button" class="btn btn--ghost b3x__prev" data-rx="~arrowL/tilt/shake/l"><span class="btn__label">Previous</span></button>
-          <button type="button" class="btn btn--ghost b3x__tog" aria-pressed="false" data-rx="~window/tilt/squash/t"><span class="btn__label">Show the after</span></button>
-          <button type="button" class="btn b3x__next" data-rx="~arrowR/tilt/hop/r"><span class="btn__label">Next room</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver bdr" data-v="4" hidden>
-    <div class="wrap bdr__grid">
-      <div class="bdr__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h4">Behind <span class="acc">every door.</span></h2>
-        <p class="t-lead bdr__lead">The finished room is the door. Swing it open to see what was there before.</p>
-        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
-        <button type="button" class="btn bdr__open" aria-pressed="false" data-rx="~lock/hinge/tick/r"><span class="btn__label">Open the door</span></button>
-      </div>
-      <div class="bdr__frame"><figure class="bdr__before"><img alt=""><figcaption>Before</figcaption></figure><figure class="bdr__door"><img alt=""><span class="bdr__knob" aria-hidden="true"></span><figcaption>After</figcaption></figure></div>
-    </div>
-  </div>
-
-  
-  <div class="ver brl" data-v="5" hidden>
-    <div class="wrap brl__grid">
-      <div class="brl__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h5">Roll on <span class="acc">the new room.</span></h2>
-        <p class="t-lead brl__lead">Drag across the photograph to paint the after over the before.</p>
-        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
-        <div class="brl__acts"><button type="button" class="btn brl__all" data-rx="~bucket/zip/drip/r"><span class="btn__label">Paint it all</span></button><button type="button" class="btn btn--ghost brl__reset" data-rx="~sander/zip/sweep/r"><span class="btn__label">Start over</span></button></div>
-      </div>
-      <div class="brl__stage"><img class="brl__a" alt=""><canvas class="brl__c" aria-hidden="true"></canvas><span class="brl__tool" aria-hidden="true"><svg viewBox="0 0 60 70"><rect x="4" y="4" width="52" height="20" rx="8"/><path d="M30 24 V40 M30 40 H44 V70"/></svg></span></div>
-    </div>
-  </div>
-
-  
-  <div class="ver bpc" data-v="6" hidden>
-    <div class="wrap">
-      <div class="bpc__head">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h6">Four rooms. <span class="acc">Flip each one.</span></h2>
-        <p class="t-lead bpc__lead">Each card shows the room before. Turn it over for the room Elbaz built.</p>
-      </div>
-      <div class="bpc__grid"></div>
-    </div>
-  </div>
-
-  
-  <div class="ver bbl" data-v="7" hidden>
-    <div class="wrap bbl__grid">
-      <div class="bbl__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h7">Open the blinds <span class="acc">on the new room.</span></h2>
-        <p class="t-lead bbl__lead">Behind the blinds is the room after. Pull the cord to tilt them open.</p>
-        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
-        <label class="bbl__lab" for="bbl-cord">The cord</label><input class="bbl__cord" id="bbl-cord" type="range" min="0" max="100" value="0" aria-valuetext="Blinds closed" data-rx="native:blind-cord">
-      </div>
-      <div class="bbl__win"><img class="bbl__a" alt=""><div class="bbl__slats" aria-hidden="true"></div><span class="bbl__rail" aria-hidden="true"></span></div>
-    </div>
-  </div>
-
-  
-  <div class="ver bln" data-v="8" hidden>
-    <div class="wrap bln__grid">
-      <div class="bln__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h8">Look through <span class="acc">the lens.</span></h2>
-        <p class="t-lead bln__lead">Move over the before. The lens shows the same spot after Elbaz finished.</p>
-        <div class="bpairs" role="tablist" aria-label="Before and after projects"></div>
-      </div>
-      <div class="bln__stage" tabindex="0" role="img" aria-label="Before photograph with a lens showing the after; use the arrow keys to move the lens" data-rx="native:lens-move"><img class="bln__b" alt=""><img class="bln__a" alt=""><span class="bln__ring" aria-hidden="true"></span></div>
-    </div>
-  </div>
-
-  <div class="ver bs" data-v="b2" hidden>
-    <div class="wrap bs__grid">
-      <div class="bs__side">
-        <p class="eyebrow"><svg class="eyebrow__roof" viewBox="0 0 20 12" aria-hidden="true" focusable="false"><path d="M2 11 L10 3 L18 11"/></svg>Before and after</p>
-        <h2 class="t-head" id="ba-h1-w">Same room. <span class="acc">Different house.</span></h2>
-        <p class="t-lead bs__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
-        <div class="bs__tabs" role="tablist" aria-label="Before and after projects">
-          <button type="button" role="tab" class="bs__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="bs__tl">Kitchen, grey Shaker</span><span class="bs__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="bs__tab" aria-selected="false" data-pair="1" data-rx="~shower/hinge/drip/tr"><span class="bs__tl">Bathroom</span><span class="bs__tt"><span class="nums">4&ndash;8</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="bs__tab" aria-selected="false" data-pair="2" data-rx="~sink/hinge/drip/tr"><span class="bs__tl">Kitchen, light cabinetry and island</span><span class="bs__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="bs__tab" aria-selected="false" data-pair="3" data-rx="~palm/hinge/wobble/tr"><span class="bs__tl">Outdoor living</span><span class="bs__tt">Backyard and pergola</span></button>
-        </div>
-      </div>
-      <div class="bs__stage" role="tabpanel" aria-label="Before and after">
-        <figure class="bs__img bs__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
-        <figure class="bs__img bs__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
-        <span class="bs__tag bs__tag--b">Before</span><span class="bs__tag bs__tag--a">After</span>
-        <div class="bs__tape" aria-hidden="true"><svg viewBox="0 0 100 24" preserveAspectRatio="none" focusable="false"><g class="bs__ticks"><path d="M2.08333 0 V4"/><path d="M4.16667 0 V4"/><path d="M6.25 0 V4"/><path d="M8.33333 0 V4"/><path d="M10.4167 0 V4"/><path d="M12.5 0 V7"/><path d="M14.5833 0 V4"/><path d="M16.6667 0 V4"/><path d="M18.75 0 V4"/><path d="M20.8333 0 V4"/><path d="M22.9167 0 V4"/><path d="M25 0 V10"/><path d="M27.0833 0 V4"/><path d="M29.1667 0 V4"/><path d="M31.25 0 V4"/><path d="M33.3333 0 V4"/><path d="M35.4167 0 V4"/><path d="M37.5 0 V7"/><path d="M39.5833 0 V4"/><path d="M41.6667 0 V4"/><path d="M43.75 0 V4"/><path d="M45.8333 0 V4"/><path d="M47.9167 0 V4"/><path d="M50 0 V10"/><path d="M52.0833 0 V4"/><path d="M54.1667 0 V4"/><path d="M56.25 0 V4"/><path d="M58.3333 0 V4"/><path d="M60.4167 0 V4"/><path d="M62.5 0 V7"/><path d="M64.5833 0 V4"/><path d="M66.6667 0 V4"/><path d="M68.75 0 V4"/><path d="M70.8333 0 V4"/><path d="M72.9167 0 V4"/><path d="M75 0 V10"/><path d="M77.0833 0 V4"/><path d="M79.1667 0 V4"/><path d="M81.25 0 V4"/><path d="M83.3333 0 V4"/><path d="M85.4167 0 V4"/><path d="M87.5 0 V7"/><path d="M89.5833 0 V4"/><path d="M91.6667 0 V4"/><path d="M93.75 0 V4"/><path d="M95.8333 0 V4"/><path d="M97.9167 0 V4"/></g></svg><span class="bs__tn"><i style="left:25%">12</i><i style="left:50%">24</i><i style="left:75%">36</i></span><span class="bs__mark"><b class="nums">24</b> in</span></div>
-        <div class="bs__stud" aria-hidden="true">
-          <svg class="bs__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" fill="#C9B48F" stroke="#121212" stroke-width="2"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke="#5E5852" stroke-width="1"/></svg>
-          <span class="bs__nail" style="top:12%"></span><span class="bs__nail" style="top:46%"></span><span class="bs__nail" style="top:82%"></span>
-          <svg class="bs__grip" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="29" fill="#FF5F00" stroke="#121212" stroke-width="3"/><path d="M14 32h36M14 32l7-7M14 32l7 7M50 32l-7-7M50 32l-7 7" fill="none" stroke="#121212" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <input class="bs__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="50% after" data-rx="native:stud-grip">
-      </div>
-    </div>
-  </div>
-
-  <div class="ver ba1" data-v="b1" hidden>
-    <div class="wrap ba1__grid">
-      <div class="ba1__side">
-        <h2 class="t-head" id="ba-h1">Same room. Different house.</h2>
-        <p class="t-lead ba1__lead">Four Elbaz projects, photographed before and after. Drag the stud, or use the arrow keys.</p>
-        <div class="ba1__tabs" role="tablist" aria-label="Before and after projects">
-          <button type="button" role="tab" class="ba1__tab" aria-selected="true" data-pair="0" data-rx="swatch"><span class="ba1__tn nums">01</span><span class="ba1__tl">Kitchen</span><span class="ba1__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="ba1__tab" aria-selected="false" data-pair="1" data-rx="~shower/hinge/drip/tr"><span class="ba1__tn nums">02</span><span class="ba1__tl">Bathroom</span><span class="ba1__tt"><span class="nums">4&ndash;8</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="ba1__tab" aria-selected="false" data-pair="2" data-rx="~sink/hinge/drip/tr"><span class="ba1__tn nums">03</span><span class="ba1__tl">Kitchen</span><span class="ba1__tt"><span class="nums">6&ndash;12</span> weeks of construction</span></button>
-          <button type="button" role="tab" class="ba1__tab" aria-selected="false" data-pair="3" data-rx="~palm/hinge/wobble/tr"><span class="ba1__tn nums">04</span><span class="ba1__tl">Outdoor living</span><span class="ba1__tt">Backyard and pergola</span></button>
-        </div>
-      </div>
-      <div class="ba1__stage" role="tabpanel" aria-label="Before and after">
-        <figure class="ba1__img ba1__img--before"><img data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
-        <figure class="ba1__img ba1__img--after"><img data-img="ba-kitchen1-after" width="388" height="294" alt="Renovated kitchen with grey shaker cabinetry and quartz counters"></figure>
-        <span class="ba1__tag ba1__tag--b">Before</span><span class="ba1__tag ba1__tag--a">After</span>
-        <div class="ba1__stud" aria-hidden="true">
-          <svg class="ba1__wood" viewBox="0 0 24 400" preserveAspectRatio="none"><rect x="1" y="0" width="22" height="400" fill="#d8b47a" stroke="#0B1418" stroke-width="2"/><path d="M6 0 Q8 100 5 200 T7 400 M15 0 Q13 90 16 190 T14 400 M10 0 Q11 140 9 260 T11 400" fill="none" stroke="#a8814a" stroke-width="1"/></svg>
-          <span class="ba1__nail" style="top:12%"></span><span class="ba1__nail" style="top:46%"></span><span class="ba1__nail" style="top:82%"></span>
-          <svg class="ba1__grip" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="29" fill="#f2c230" stroke="#0B1418" stroke-width="3"/><path d="M14 32h36M14 32l7-7M14 32l7 7M50 32l-7-7M50 32l-7 7" fill="none" stroke="#0B1418" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <input class="ba1__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="50% after" data-rx="native:stud-grip">
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="ver ba2" data-v="b3" hidden>
-    <div class="wrap">
-      <div class="ba__head">
-        <h2 class="t-head" id="ba-h2">Rolled on, room by room.</h2>
-        <p class="t-lead ba__lead">Scroll, and the after goes on over the before like a fresh coat. Each panel also has its own switch. Four real pairs, nothing staged.</p>
-      </div>
-      <div class="ba2__grid">
-        <figure class="ba2__panel" data-pair="0"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost ba2__tog" aria-pressed="false" data-rx="~caulk/slide/drip/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Dated kitchen with cream cabinets and tiled counters, renovated with grey shaker cabinetry and quartz counters.</span></figure>
-        <figure class="ba2__panel" data-pair="1"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Bathroom</strong> <span class="nums">4&ndash;8</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost ba2__tog" aria-pressed="false" data-rx="~sander/slide/sweep/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Dated bathroom with an alcove tub and shower curtain, renovated with a frameless glass shower and round backlit mirror.</span></figure>
-        <figure class="ba2__panel" data-pair="2"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Kitchen</strong> <span class="nums">6&ndash;12</span> weeks of construction</figcaption><button type="button" class="btn btn--ghost ba2__tog" aria-pressed="false" data-rx="~hose/peek/drip/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Kitchen with dated oak cabinetry and tiled counters, renovated with light cabinetry, a range hood and island seating.</span></figure>
-        <figure class="ba2__panel" data-pair="3"><div class="ba2__frame"><svg class="ba2__svg" aria-hidden="true" focusable="false"></svg></div><figcaption><strong>Outdoor living</strong> backyard and pergola</figcaption><button type="button" class="btn btn--ghost ba2__tog" aria-pressed="false" data-rx="~leaf/peek/sweep/r"><span class="btn__label">Show the after</span></button><span class="sr-only">Backyard with worn lawn and open patio, transformed into a covered pergola with dining and bar seating and a turfed backyard.</span></figure>
-      </div>
-      <a class="btn ba2__btn" href="#consult" data-rx="~bucket/drop/drip/r"><span class="btn__label">Plan your own after</span></a>
-    </div>
-  </div>
-
-  
-  <div class="ver ba3" data-v="b4" hidden>
-    <div class="wrap ba3__grid">
-      <div class="ba3__stage">
-        <figure class="ba3__img"><img class="ba3__photo" data-img="ba-kitchen1-before" width="388" height="292" alt="Dated kitchen with cream cabinets and tiled counters, before renovation"></figure>
-        <div class="ba3__shutters" aria-hidden="true"></div>
-        <span class="ba3__state" aria-live="polite">Before</span>
-      </div>
-      <div class="ba3__side">
-        <h2 class="t-head" id="ba-h3">Shutters down. Shutters up.</h2>
-        <p class="t-lead ba__lead">In South Florida the shutters come down before a storm. Here they come down on the old room and go up on the new one.</p>
-        <p class="ba3__cap"><strong class="ba3__name">Kitchen</strong> <span class="ba3__time"><span class="nums">6&ndash;12</span> weeks of construction</span></p>
-        <div class="ba3__ctrl">
-          <button type="button" class="btn btn--ghost ba3__prev" data-rx="~arrowL/tilt/shake/l"><span class="btn__label">Previous</span></button>
-          <button type="button" class="btn btn--ghost ba3__tog" aria-pressed="false" data-rx="~window/tilt/squash/t"><span class="btn__label">Show the after</span></button>
-          <button type="button" class="btn ba3__next" data-rx="~arrowR/tilt/hop/r"><span class="btn__label">Next room</span></button>
+      <div class="bx__board" id="bx-stage" role="tabpanel" aria-labelledby="bx-t0">
+        <svg class="bx__reg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 4 H6 M4 0 V6 M100 4 H94 M96 0 V6 M0 96 H6 M4 100 V94 M100 96 H94 M96 100 V94"/></svg>
+        <div class="bx__print">
+          <div class="bx__tape" aria-hidden="true"></div>
+          <div class="bx__stage" data-buddy="drag">
+            <figure class="bx__img bx__img--b"><img class="bx__ib" alt="" width="388" height="292"></figure>
+            <figure class="bx__img bx__img--a"><img class="bx__ia" alt="" width="388" height="294"></figure>
+            <span class="bx__tag bx__tag--b">Before</span><span class="bx__tag bx__tag--a">After</span>
+            <div class="bx__stud" aria-hidden="true">
+              <span class="bx__wood"></span><span class="bx__nail" style="top:14%"></span><span class="bx__nail" style="top:50%"></span><span class="bx__nail" style="top:86%"></span>
+              <span class="bx__grip"><svg viewBox="0 0 40 40" focusable="false"><path d="M9 20 H31 M9 20 l5-5 M9 20 l5 5 M31 20 l-5-5 M31 20 l-5 5"/></svg></span>
+              <span class="bx__read nums">0 in</span>
+            </div>
+            <input class="bx__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="Half before, half after">
+          </div>
+          <p class="bx__cap" aria-live="polite"></p>
         </div>
       </div>
     </div>
@@ -8508,419 +8089,85 @@ html.has-buddy select { cursor: default !important; }
   } } });
 })();
 
-/* before/after, PLAN-V3 §3. Only the four genuine pairs (FACTS.md). */
+/* FINALIZE · Home 4 · Before/After: the MERSI seam (V1 deepened). One value s (0..1) is the seam's place; the native
+   range input carries it (keyboard, screen readers, touch) and drag maps 1:1. The seam travels once with the scroll on
+   first view, then hands control over [S1326 reversible]; each pair change is a cut-the-curve slide to the left
+   (partial travel ~12%, mirrored power4 in/out) and the seam sweeps again [S0576]. Prints <= 1.35x native width. */
 (function () {
-  var PAIRS = EZ.PAIRS = [   // the one source of the four genuine pairs (Proof slot 5 reads it too)
-
-    { b: 'ba-kitchen1-before', a: 'ba-kitchen1-after', name: 'Kitchen', time: '<span class="nums">6&ndash;12</span> weeks of construction',
-      ba: 'Dated kitchen with cream cabinets and tiled counters, before renovation', aa: 'Renovated kitchen with grey shaker cabinetry and quartz counters' },
-    { b: 'ba-bath2-before', a: 'ba-bath2-after', name: 'Bathroom', time: '<span class="nums">4&ndash;8</span> weeks of construction',
-      ba: 'Dated bathroom with alcove tub and shower curtain, before renovation', aa: 'Renovated bathroom with frameless glass shower and round backlit mirror' },
-    { b: 'ba-kitchen4-before', a: 'ba-kitchen4-after', name: 'Kitchen', time: '<span class="nums">6&ndash;12</span> weeks of construction',
-      ba: 'Kitchen with dated oak cabinetry and tiled counters, before renovation', aa: 'Renovated kitchen with light cabinetry, range hood and island seating' },
-    { b: 'ba-outdoor-before', a: 'ba-outdoor-after', name: 'Outdoor living', time: 'Backyard and pergola',
-      ba: 'Backyard with worn lawn and open patio, before renovation', aa: 'Covered outdoor pergola with dining and bar seating, and a turfed backyard' }
+  var PAIRS = [
+    { b: 'ba-kitchen1-before', a: 'ba-kitchen1-after', w: 388, h: 292,
+      bt: 'Dated kitchen with cream cabinets and tiled counters, before renovation', at: 'Renovated kitchen with grey shaker cabinetry and quartz counters' },
+    { b: 'ba-bath2-before', a: 'ba-bath2-after', w: 428, h: 404,
+      bt: 'Dated bathroom with alcove tub and shower curtain, before renovation', at: 'Renovated bathroom with frameless glass shower and round backlit mirror' },
+    { b: 'ba-kitchen4-before', a: 'ba-kitchen4-after', w: 596, h: 444,
+      bt: 'Kitchen with dated oak cabinetry and tiled counters, before renovation', at: 'Renovated kitchen with light cabinetry, range hood and island seating' },
+    { b: 'ba-outdoor-before', a: 'ba-outdoor-after', w: 558, h: 466,
+      bt: 'Backyard with worn lawn and open patio, before renovation', at: 'Covered outdoor pergola with dining and bar seating, and a turfed backyard' }
   ];
-  var ELEOS = EZ.bezier(.625, .05, 0, 1);       // [BANK 178] house ease
+  EZ.section('ba', { 1: { init: function (root, k) {
+    var board = root.querySelector('.bx__board'), print = root.querySelector('.bx__print'), stage = root.querySelector('.bx__stage'),
+      ib = root.querySelector('.bx__ib'), ia = root.querySelector('.bx__ia'), range = root.querySelector('.bx__range'),
+      read = root.querySelector('.bx__read'), cap = root.querySelector('.bx__cap'), tabs = Array.prototype.slice.call(root.querySelectorAll('.bx__pair'));
+    var st = { s: .5 }, cur = 0, swept = false;
 
-
-  // Phase 5: the pair tabs shared by the new versions (the four genuine pairs, never a fifth)
-  function pairTabs(root, k, cb) {
-    var box = root.querySelector('.bpairs'), cur = 0;
-    if (!box) { cb(0); return; }
-    box.innerHTML = PAIRS.map(function (p, i) { return '<button type="button" role="tab" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '" data-rx="native:pair-tab">' + p.name + (p.name === 'Kitchen' ? ' ' + (i < 2 ? '1' : '2') : '') + '</button>'; }).join('');
-    var bs = Array.prototype.slice.call(box.children);
-    function go(i, focus) { cur = i; bs.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; }); if (focus) bs[i].focus(); cb(i); }
-    bs.forEach(function (b, i) {
-      k.on(b, 'click', function () { go(i); });
-      k.on(b, 'keydown', function (e) { var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); go((cur + d + bs.length) % bs.length, true); } });
+    function setS(v) {
+      st.s = Math.max(0, Math.min(1, v));
+      stage.style.setProperty('--s', st.s.toFixed(4));
+      var pc = Math.round(st.s * 100);
+      range.value = pc;
+      range.setAttribute('aria-valuetext', pc <= 2 ? 'All after' : pc >= 98 ? 'All before' : pc + ' percent before, ' + (100 - pc) + ' percent after');
+      read.textContent = Math.round(st.s * 48) + ' in';     // the tape is 48 inches across the print
+    }
+    function load(i) {
+      var p = PAIRS[i];
+      ib.src = EZ.img(p.b); ia.src = EZ.img(p.a); ib.alt = p.bt; ia.alt = p.at;
+      ib.width = ia.width = p.w; ib.height = ia.height = p.h;
+      stage.style.setProperty('--ar', p.w + ' / ' + p.h);
+      print.style.setProperty('--arn', (p.w / p.h).toFixed(4));   // the print is also capped by the viewport height
+      print.style.setProperty('--pw', Math.round(p.w * 1.35 + 26) + 'px');    // never more than 1.35x the published width
+      cap.textContent = 'Before: ' + p.bt.replace(/, before renovation$/, '') + '. After: ' + p.at + '.';
+    }
+    function sweep(from, to) {
+      if (!k.motion) { setS(to); return; }
+      gsap.fromTo(st, { s: from }, { s: to, duration: .9, ease: 'power3.inOut', overwrite: true, onUpdate: function () { setS(st.s); } });
+    }
+    function select(i, focus) {
+      if (i === cur) return;
+      tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
+      board.setAttribute('aria-labelledby', tabs[i].id);
+      if (focus) tabs[i].focus();
+      cur = i;
+      if (!k.motion) { load(i); setS(.5); return; }
+      // cut the curve, leftward: the print accelerates out (power4.in), the next arrives mid-flight (power4.out) [S0576]
+      gsap.timeline({ overwrite: true })
+        .to(print, { x: -72, opacity: 0, duration: .26, ease: 'power4.in' })
+        .add(function () { load(i); })
+        .fromTo(print, { x: 72, opacity: .35 }, { x: 0, opacity: 1, duration: .34, ease: 'power4.out', clearProps: 'transform,opacity' })
+        .add(function () { sweep(.12, .5); }, '-=.1');
+    }
+    tabs.forEach(function (t, i) {
+      k.on(t, 'click', function () { select(i); });
+      k.on(t, 'keydown', function (e) {
+        var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+        if (e.key === 'Home') { e.preventDefault(); select(0, true); } else if (e.key === 'End') { e.preventDefault(); select(PAIRS.length - 1, true); }
+        else if (d) { e.preventDefault(); select((cur + d + PAIRS.length) % PAIRS.length, true); }
+      });
     });
-    k.add(function () { box.innerHTML = ''; });
-    go(0);
-  }
+    // the hand: the native range is the whole stage (pointer, touch, keys); every input wins over the auto sweep
+    k.on(range, 'input', function () { gsap.killTweensOf(st); setS(range.value / 100); swept = true; });
+    k.on(range, 'pointerdown', function () { stage.classList.add('is-drag'); gsap.killTweensOf(st); swept = true; });
+    k.on(range, 'pointerup', function () { stage.classList.remove('is-drag'); });
+    k.on(range, 'pointercancel', function () { stage.classList.remove('is-drag'); });
 
-  EZ.section('ba', {
-    /* slot 4 · NEW · The swing door */
-    4: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.bdr__side > *'));
-      var bi = root.querySelector('.bdr__before img'), di = root.querySelector('.bdr__door img'), btn = root.querySelector('.bdr__open');
-      function set(on) { root.classList.toggle('is-open', on); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.querySelector('.btn__label').textContent = on ? 'Close the door' : 'Open the door'; }
-      pairTabs(root, k, function (i) { var p = PAIRS[i]; set(false); bi.src = EZ.img(p.b); bi.alt = p.ba; di.src = EZ.img(p.a); di.alt = p.aa; });
-      k.on(btn, 'click', function () { set(!root.classList.contains('is-open')); });
-      k.on(root.querySelector('.bdr__door'), 'click', function () { set(!root.classList.contains('is-open')); });
-      k.add(function () { set(false); });
-    } },
-
-    /* slot 5 · NEW · The paint roller: the before is painted on a canvas over the after; rolling erases it */
-    5: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.brl__side > *'));
-      var st = root.querySelector('.brl__stage'), a = root.querySelector('.brl__a'), cv = root.querySelector('.brl__c'), cx = cv.getContext('2d'), tool = root.querySelector('.brl__tool');
-      var before = new Image(), down = false, last = null, cur = 0;
-      function paintBefore() { var r = st.getBoundingClientRect(); cv.width = Math.round(r.width); cv.height = Math.round(r.height); if (!before.complete || !before.naturalWidth) return;
-        var s = Math.max(cv.width / before.naturalWidth, cv.height / before.naturalHeight), w = before.naturalWidth * s, h = before.naturalHeight * s;
-        cx.globalCompositeOperation = 'source-over'; cx.drawImage(before, (cv.width - w) / 2, (cv.height - h) / 2, w, h); }
-      before.onload = paintBefore;
-      pairTabs(root, k, function (i) { cur = i; var p = PAIRS[i]; a.src = EZ.img(p.a); a.alt = p.aa; st.setAttribute('aria-label', p.ba + '; paint to reveal: ' + p.aa); before.src = EZ.img(p.b); if (before.complete) paintBefore(); });
-      st.setAttribute('role', 'img');
-      function roll(x, y) {
-        cx.globalCompositeOperation = 'destination-out'; cx.lineCap = 'round'; cx.lineWidth = Math.max(60, cv.width * .12);
-        cx.beginPath(); cx.moveTo(last ? last.x : x, last ? last.y : y); cx.lineTo(x, y); cx.stroke(); last = { x: x, y: y };
-      }
-      function pos(e) { var r = st.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
-      k.on(st, 'pointerdown', function (e) { down = true; last = null; st.setPointerCapture(e.pointerId); var q = pos(e); roll(q.x, q.y); });
-      k.on(st, 'pointermove', function (e) { var q = pos(e); tool.style.transform = 'translate(' + q.x + 'px,' + q.y + 'px)'; if (down) roll(q.x, q.y); });
-      k.on(st, 'pointerup', function () { down = false; last = null; });
-      k.on(root.querySelector('.brl__all'), 'click', function () {
-        if (!k.motion) { cx.clearRect(0, 0, cv.width, cv.height); return; }
-        var o = { y: 0 }; gsap.to(o, { y: 1, duration: .8, ease: 'power1.inOut', onUpdate: function () { var y = o.y * cv.height; last = { x: 0, y: y }; roll(cv.width, y); last = null; } });
-      });
-      k.on(root.querySelector('.brl__reset'), 'click', paintBefore);
-      k.ro(st, paintBefore);
-      k.add(function () { cx.clearRect(0, 0, cv.width, cv.height); });
-    } },
-
-    /* slot 6 · NEW · Four flip cards: every pair at once, before on the front, after on the back */
-    6: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.bpc__head > *'));
-      var g = root.querySelector('.bpc__grid');
-      g.innerHTML = PAIRS.map(function (p) {
-        return '<button type="button" class="bpc__card" aria-pressed="false" aria-label="' + p.name + ': show the after" data-rx="native:flip-card"><figure class="bpc__f bpc__front"><img src="' + EZ.img(p.b) + '" alt="' + p.ba + '"><span>' + p.name + '<b>Before</b></span></figure><figure class="bpc__f bpc__back"><img src="' + EZ.img(p.a) + '" alt="' + p.aa + '"><span>' + p.name + '<b>After</b></span></figure></button>';
-      }).join('');
-      g.querySelectorAll('.bpc__card').forEach(function (c) { k.on(c, 'click', function () { var on = c.getAttribute('aria-pressed') !== 'true'; c.setAttribute('aria-pressed', on ? 'true' : 'false'); c.setAttribute('aria-label', c.getAttribute('aria-label').replace(on ? 'show the after' : 'show the before', on ? 'show the before' : 'show the after')); }); });
-      if (EZ.bindReactions) EZ.bindReactions(root, k);
-      k.add(function () { g.innerHTML = ''; });
-    } },
-
-    /* slot 7 · NEW · The blinds: the cord tilts twelve slats open over the after */
-    7: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.bbl__side > *'));
-      var sl = root.querySelector('.bbl__slats'), img = root.querySelector('.bbl__a'), cord = root.querySelector('.bbl__cord');
-      sl.innerHTML = new Array(13).join('<i></i>');
-      function set() { var v = +cord.value / 100; sl.style.setProperty('--t', v.toFixed(3)); sl.querySelectorAll('i').forEach(function (s) { s.style.setProperty('--t', v.toFixed(3)); }); cord.setAttribute('aria-valuetext', v < .05 ? 'Blinds closed' : v > .95 ? 'Blinds open' : 'Blinds ' + Math.round(v * 100) + '% open'); }
-      pairTabs(root, k, function (i) { var p = PAIRS[i]; img.src = EZ.img(p.a); img.alt = p.aa; cord.value = 0; set(); });
-      k.on(cord, 'input', set); set();
-      k.add(function () { sl.innerHTML = ''; });
-    } },
-
-    /* slot 8 · NEW · The lens: a round window onto the after follows the pointer or the arrow keys */
-    8: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.bln__side > *'));
-      var st = root.querySelector('.bln__stage'), b = root.querySelector('.bln__b'), a = root.querySelector('.bln__a'), P = { x: 60, y: 45 };
-      function set() { st.style.setProperty('--x', P.x + '%'); st.style.setProperty('--y', P.y + '%'); }
-      pairTabs(root, k, function (i) { var p = PAIRS[i]; b.src = EZ.img(p.b); b.alt = p.ba; a.src = EZ.img(p.a); a.alt = p.aa; });
-      k.on(st, 'pointermove', function (e) { var r = st.getBoundingClientRect(); P.x = EZ.clamp((e.clientX - r.left) / r.width * 100, 0, 100); P.y = EZ.clamp((e.clientY - r.top) / r.height * 100, 0, 100); set(); });
-      k.on(st, 'keydown', function (e) { var d = { ArrowLeft: [-5, 0], ArrowRight: [5, 0], ArrowUp: [0, -5], ArrowDown: [0, 5] }[e.key]; if (!d) return; e.preventDefault(); P.x = EZ.clamp(P.x + d[0], 0, 100); P.y = EZ.clamp(P.y + d[1], 0, 100); set(); });
-      set();
-    } },
-
-    /* slot 3 · Phase 5 improved version of b4 */
-    3: { init: function (root, k) {
-      var box = root.querySelector('.b3x__shutters'), photo = root.querySelector('.b3x__photo'), state = root.querySelector('.b3x__state');
-      var name = root.querySelector('.b3x__name'), time = root.querySelector('.b3x__time');
-      var tog = root.querySelector('.b3x__tog'), N = 8, h = '';
-      for (var i = 0; i < N; i++) h += '<span class="b3x__panel"></span>';
-      box.innerHTML = h;
-      var panels = box.querySelectorAll('.b3x__panel');
-      k.add(function () { box.innerHTML = ''; });
-      // [AUDIT-01 F4 loser P1] no autoplay and no counter: the rest state is the photograph; shutters run only on a press, 380ms, 30ms stagger
-      var cur = { pair: 0, after: false }, busy = false;
-      function paint() {
-        var p = PAIRS[cur.pair];
-        photo.src = EZ.img(cur.after ? p.a : p.b); photo.alt = cur.after ? p.aa : p.ba;
-        state.textContent = cur.after ? 'After' : 'Before';
-        state.classList.toggle('is-after', cur.after);
-        name.textContent = p.name; time.innerHTML = p.time;
-        tog.setAttribute('aria-pressed', cur.after ? 'true' : 'false');
-        tog.querySelector('.btn__label').textContent = cur.after ? 'Show the before' : 'Show the after';
-      }
-      function go(next) {
-        if (busy) return;
-        if (!k.motion) { cur = next; paint(); return; }
-        busy = true;
-        box.classList.remove('is-up');
-        k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { busy = false; box.classList.add('is-up'); } })
-            .fromTo(panels, { yPercent: -100 }, { yPercent: 0, duration: .38, ease: ELEOS, stagger: .03 })
-            .add(function () { cur = next; paint(); })
-            .to(panels, { yPercent: -100, duration: .38, ease: ELEOS, stagger: .03 }, '+=.06');
-        });
-      }
-      gsap.set(panels, { yPercent: -100 });
-      box.classList.add('is-up');
-      paint();
-      k.on(root.querySelector('.b3x__next'), 'click', function () { go({ pair: (cur.pair + 1) % 4, after: false }); });
-      k.on(root.querySelector('.b3x__prev'), 'click', function () { go({ pair: (cur.pair + 3) % 4, after: false }); });
-      k.on(tog, 'click', function () { go({ pair: cur.pair, after: !cur.after }); });
-      EZ.reveal(k, root.querySelectorAll('.b3x__side > *'));
-    } },
-
-    /* slot 2 · Phase 5 improved version of b3 */
-    2: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.ba__head > *'));
-      root.querySelectorAll('.b2x__panel').forEach(function (panel) {
-        var i = +panel.dataset.pair, p = PAIRS[i], svg = panel.querySelector('.b2x__svg');
-        svg.setAttribute('viewBox', '0 0 400 300');
-        svg.innerHTML =
-          '<defs><filter id="b2x-w' + i + '" x="-10%" y="-20%" width="120%" height="140%"><feTurbulence type="turbulence" baseFrequency=".035 .08" numOctaves="2" seed="' + (i + 3) + '" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="26"/></filter>' +
-          '<mask id="b2x-m' + i + '"><rect class="mk" x="-20" y="-40" width="440" height="40" fill="' + EZ.c('--color-surface') + '\" filter="url(#b2x-w' + i + ')"/></mask>' +
-          '<clipPath id="b2x-c' + i + '"><rect width="400" height="300"/></clipPath></defs>' +
-          '<g clip-path="url(#b2x-c' + i + ')"><image href="' + EZ.img(p.b) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice"/>' +
-          '<image href="' + EZ.img(p.a) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice" mask="url(#b2x-m' + i + ')"/></g>' +
-          '<rect width="400" height="300" fill="none" stroke="' + EZ.c('--color-art-line') + '" stroke-opacity=".25"/>' +
-          '<g class="rl"><path d="M386 -2 v-34 h-26 v-30" fill="none" stroke="' + EZ.c('--color-border') + '\" stroke-width="5" stroke-linejoin="round"/><rect x="352" y="-104" width="16" height="40" rx="6" fill="' + EZ.c('--color-art-accent') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5"/>' +
-          '<rect x="6" y="-14" width="388" height="22" rx="11" fill="' + EZ.c('--color-surface') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="2.5"/><rect x="6" y="-2" width="388" height="10" rx="5" fill="' + EZ.c('--color-art-accent') + '\" opacity=".55"/></g>' +
-          '<text class="tg" x="12" y="22" font-family="Roboto, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="' + EZ.c('--color-surface') + '\" stroke="' + EZ.c('--color-art-line') + '\" stroke-width="3" paint-order="stroke">BEFORE</text>';
-        // [AUDIT-01 F4 loser P1] reduced motion rests on the complete after photograph, never a half wipe
-        var mk = svg.querySelector('.mk'), rl = svg.querySelector('.rl'), tg = svg.querySelector('.tg'), st = { p: k.motion ? 0 : 1 };
-        var btn = panel.querySelector('.b2x__tog'), scrub = null;
-        function set() {
-          var y = st.p * 340;
-          mk.setAttribute('height', Math.max(0, y + 40));
-          rl.setAttribute('transform', 'translate(0 ' + Math.min(300, y).toFixed(1) + ')');
-          rl.style.display = (st.p > .01 && st.p < .99 && k.motion) ? '' : 'none';
-          tg.textContent = st.p > .92 ? 'AFTER' : 'BEFORE';
-          btn.setAttribute('aria-pressed', st.p > .5 ? 'true' : 'false');
-          btn.querySelector('.btn__label').textContent = st.p > .5 ? 'Show the before' : 'Show the after';
-        }
-        set();
-        k.add(function () { svg.innerHTML = ''; });
-        // per-panel control: one press takes the panel to the other end and hands it over from scroll to the visitor
-        k.on(btn, 'click', function () {
-          var to = st.p > .5 ? 0 : 1;
-          if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; }
-          if (!k.motion) { st.p = to; set(); return; }
-          gsap.to(st, { p: to, duration: .6, ease: EZ.bezier(.23, 1, .32, 1), onUpdate: set, overwrite: true });
-        });
-        if (!k.motion) return;
-        scrub = gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: panel, start: 'top 72%', end: 'bottom 50%', scrub: .8 } });
-      });
-    } },
-
-    /* slot 1 · Phase 5 improved version of b2 */
-    1: { init: function (root, k) {
-      var stage = root.querySelector('.bsx__stage');
-      var range = root.querySelector('.bsx__range');
-      var imgB = root.querySelector('.bsx__img--before img'), imgA = root.querySelector('.bsx__img--after img');
-      var tabs = Array.prototype.slice.call(root.querySelectorAll('.bsx__tab'));
-      function setPos(v) {
-        stage.style.setProperty('--pos', v + '%');
-        var tm = root.querySelector('.bsx__mark b'); if (tm) tm.textContent = Math.round(v * .48);
-        range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
-      }
-      setPos(+range.value);
-      k.on(range, 'input', function () { setPos(+range.value); });
-      k.on(range, 'pointerdown', function () { stage.classList.add('is-drag'); });
-      k.on(window, 'pointerup', function () { stage.classList.remove('is-drag'); });
-      k.add(function () { stage.classList.remove('is-drag'); stage.style.removeProperty('--pos'); range.value = 50; });
-      function select(i, focus) {
-        tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
-        if (focus) tabs[i].focus();
-        var p = PAIRS[i];
-        function swap() { imgB.src = EZ.img(p.b); imgB.alt = p.ba; imgA.src = EZ.img(p.a); imgA.alt = p.aa; }
-        if (!k.motion) { swap(); return; }
-        k.ctx.add(function () {
-          // [AUDIT-01 F4.2] one 120ms opacity dip (house ease-out); the stud keeps the split the visitor chose
-          gsap.timeline().set([imgB, imgA], { autoAlpha: .35, onComplete: swap })
-            .to([imgB, imgA], { autoAlpha: 1, duration: .12, ease: EZ.bezier(.23, 1, .32, 1) });
-        });
-      }
-      tabs.forEach(function (t, i) {
-        t.tabIndex = i === 0 ? 0 : -1;
-        k.on(t, 'click', function () { select(i); });
-        k.on(t, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
-        });
-      });
-      if (!k.motion) return;
-      EZ.reveal(k, root.querySelectorAll('.bsx__side > *'));
-      // [AUDIT-01 F4.1] first visit only: one swing 50 -> 34 -> 50, 700ms in all; never on a version re-activation
-      if (EZ._baHint) return;
-      var o = { v: 50 };
-      ScrollTrigger.create({ trigger: stage, start: 'top 70%', once: true, onEnter: function () {
-        EZ._baHint = true;
-        gsap.timeline().to(o, { v: 34, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
-          .to(o, { v: 50, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } });
-      } });
-    } },
-
-    /* slot 1 · AUDIT-01 winner (copied from v1; fixes applied here) */
-    b2: { init: function (root, k) {
-      var stage = root.querySelector('.bs__stage');
-      var range = root.querySelector('.bs__range');
-      var imgB = root.querySelector('.bs__img--before img'), imgA = root.querySelector('.bs__img--after img');
-      var tabs = Array.prototype.slice.call(root.querySelectorAll('.bs__tab'));
-      function setPos(v) {
-        stage.style.setProperty('--pos', v + '%');
-        var tm = root.querySelector('.bs__mark b'); if (tm) tm.textContent = Math.round(v * .48);
-        range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
-      }
-      setPos(+range.value);
-      k.on(range, 'input', function () { setPos(+range.value); });
-      k.on(range, 'pointerdown', function () { stage.classList.add('is-drag'); });
-      k.on(window, 'pointerup', function () { stage.classList.remove('is-drag'); });
-      k.add(function () { stage.classList.remove('is-drag'); stage.style.removeProperty('--pos'); range.value = 50; });
-      function select(i, focus) {
-        tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
-        if (focus) tabs[i].focus();
-        var p = PAIRS[i];
-        function swap() { imgB.src = EZ.img(p.b); imgB.alt = p.ba; imgA.src = EZ.img(p.a); imgA.alt = p.aa; }
-        if (!k.motion) { swap(); return; }
-        k.ctx.add(function () {
-          // [AUDIT-01 F4.2] one 120ms opacity dip (house ease-out); the stud keeps the split the visitor chose
-          gsap.timeline().set([imgB, imgA], { autoAlpha: .35, onComplete: swap })
-            .to([imgB, imgA], { autoAlpha: 1, duration: .12, ease: EZ.bezier(.23, 1, .32, 1) });
-        });
-      }
-      tabs.forEach(function (t, i) {
-        t.tabIndex = i === 0 ? 0 : -1;
-        k.on(t, 'click', function () { select(i); });
-        k.on(t, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
-        });
-      });
-      if (!k.motion) return;
-      EZ.reveal(k, root.querySelectorAll('.bs__side > *'));
-      // [AUDIT-01 F4.1] first visit only: one swing 50 -> 34 -> 50, 700ms in all; never on a version re-activation
-      if (EZ._baHint) return;
-      var o = { v: 50 };
-      ScrollTrigger.create({ trigger: stage, start: 'top 70%', once: true, onEnter: function () {
-        EZ._baHint = true;
-        gsap.timeline().to(o, { v: 34, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
-          .to(o, { v: 50, duration: .35, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } });
-      } });
-    } },
-
-    /* v1 · The stud wall (signature interactive) */
-    b1: { init: function (root, k) {
-      var stage = root.querySelector('.ba1__stage');
-      var range = root.querySelector('.ba1__range');
-      var imgB = root.querySelector('.ba1__img--before img'), imgA = root.querySelector('.ba1__img--after img');
-      var tabs = Array.prototype.slice.call(root.querySelectorAll('.ba1__tab'));
-      function setPos(v) {
-        stage.style.setProperty('--pos', v + '%');
-        range.setAttribute('aria-valuetext', Math.round(100 - v) + '% after');
-      }
-      setPos(+range.value);
-      k.on(range, 'input', function () { setPos(+range.value); });
-      k.on(range, 'pointerdown', function () { stage.classList.add('is-drag'); });
-      k.on(window, 'pointerup', function () { stage.classList.remove('is-drag'); });
-      k.add(function () { stage.classList.remove('is-drag'); stage.style.removeProperty('--pos'); range.value = 50; });
-      function select(i, focus) {
-        tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
-        if (focus) tabs[i].focus();
-        var p = PAIRS[i];
-        function swap() { imgB.src = EZ.img(p.b); imgB.alt = p.ba; imgA.src = EZ.img(p.a); imgA.alt = p.aa; }
-        if (!k.motion) { swap(); return; }
-        k.ctx.add(function () {
-          gsap.timeline().to([imgB, imgA], { autoAlpha: 0, duration: .18, ease: 'power2.in', onComplete: swap })
-            .to([imgB, imgA], { autoAlpha: 1, duration: .25, ease: 'power2.out' })
-            .fromTo(range, { value: +range.value }, { value: 50, duration: .4, ease: 'power3.inOut', onUpdate: function () { setPos(+range.value); } }, .1);
-        });
-      }
-      tabs.forEach(function (t, i) {
-        t.tabIndex = i === 0 ? 0 : -1;
-        k.on(t, 'click', function () { select(i); });
-        k.on(t, 'keydown', function (e) {
-          var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-          if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
-        });
-      });
-      if (!k.motion) return;
-      EZ.reveal(k, root.querySelectorAll('.ba1__side > *'));
-      // first sight: the stud swings to show both sides, then rests [hint]
-      var o = { v: 50 };
-      gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top 70%', once: true } })
-        .from(stage, { clipPath: 'inset(0 0 100% 0)', duration: .3, ease: 'power2.out' })
-        .to(o, { v: 22, duration: .4, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } }, .3)
-        .to(o, { v: 70, duration: .5, ease: 'power2.inOut', onUpdate: function () { range.value = o.v; setPos(o.v); } })
-        .to(o, { v: 50, duration: .3, ease: 'power2.out', onUpdate: function () { range.value = o.v; setPos(o.v); } });
-    } },
-
-    /* v2 · Rolled on [BANK 148 wavy reveal] */
-    b3: { init: function (root, k) {
-      EZ.reveal(k, root.querySelectorAll('.ba__head > *'));
-      root.querySelectorAll('.ba2__panel').forEach(function (panel) {
-        var i = +panel.dataset.pair, p = PAIRS[i], svg = panel.querySelector('.ba2__svg');
-        svg.setAttribute('viewBox', '0 0 400 300');
-        svg.innerHTML =
-          '<defs><filter id="ba2-w' + i + '" x="-10%" y="-20%" width="120%" height="140%"><feTurbulence type="turbulence" baseFrequency=".035 .08" numOctaves="2" seed="' + (i + 3) + '" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="26"/></filter>' +
-          '<mask id="ba2-m' + i + '"><rect class="mk" x="-20" y="-40" width="440" height="40" fill="#FFFFFF" filter="url(#ba2-w' + i + ')"/></mask>' +
-          '<clipPath id="ba2-c' + i + '"><rect width="400" height="300"/></clipPath></defs>' +
-          '<g clip-path="url(#ba2-c' + i + ')"><image href="' + EZ.img(p.b) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice"/>' +
-          '<image href="' + EZ.img(p.a) + '" width="400" height="300" preserveAspectRatio="xMidYMid slice" mask="url(#ba2-m' + i + ')"/></g>' +
-          '<rect width="400" height="300" fill="none" stroke="rgba(18, 18, 18, .25)"/>' +
-          '<g class="rl"><path d="M386 -2 v-34 h-26 v-30" fill="none" stroke="#C9C1B6" stroke-width="5" stroke-linejoin="round"/><rect x="352" y="-104" width="16" height="40" rx="6" fill="#FF5F00" stroke="#121212" stroke-width="2.5"/>' +
-          '<rect x="6" y="-14" width="388" height="22" rx="11" fill="#FFFFFF" stroke="#121212" stroke-width="2.5"/><rect x="6" y="-2" width="388" height="10" rx="5" fill="#FF5F00" opacity=".55"/></g>' +
-          '<text class="tg" x="12" y="22" font-family="Roboto, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#FFFFFF" stroke="#121212" stroke-width="3" paint-order="stroke">BEFORE</text>';
-        // [AUDIT-01 F4 loser P1] reduced motion rests on the complete after photograph, never a half wipe
-        var mk = svg.querySelector('.mk'), rl = svg.querySelector('.rl'), tg = svg.querySelector('.tg'), st = { p: k.motion ? 0 : 1 };
-        var btn = panel.querySelector('.ba2__tog'), scrub = null;
-        function set() {
-          var y = st.p * 340;
-          mk.setAttribute('height', Math.max(0, y + 40));
-          rl.setAttribute('transform', 'translate(0 ' + Math.min(300, y).toFixed(1) + ')');
-          rl.style.display = (st.p > .01 && st.p < .99 && k.motion) ? '' : 'none';
-          tg.textContent = st.p > .92 ? 'AFTER' : 'BEFORE';
-          btn.setAttribute('aria-pressed', st.p > .5 ? 'true' : 'false');
-          btn.querySelector('.btn__label').textContent = st.p > .5 ? 'Show the before' : 'Show the after';
-        }
-        set();
-        k.add(function () { svg.innerHTML = ''; });
-        // per-panel control: one press takes the panel to the other end and hands it over from scroll to the visitor
-        k.on(btn, 'click', function () {
-          var to = st.p > .5 ? 0 : 1;
-          if (scrub) { scrub.scrollTrigger && scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; }
-          if (!k.motion) { st.p = to; set(); return; }
-          gsap.to(st, { p: to, duration: .6, ease: EZ.bezier(.23, 1, .32, 1), onUpdate: set, overwrite: true });
-        });
-        if (!k.motion) return;
-        scrub = gsap.to(st, { p: 1, ease: 'none', onUpdate: set, scrollTrigger: { trigger: panel, start: 'top 72%', end: 'bottom 50%', scrub: .8 } });
-      });
-    } },
-
-    /* v3 · Storm shutters [BANK 178] */
-    b4: { init: function (root, k) {
-      var box = root.querySelector('.ba3__shutters'), photo = root.querySelector('.ba3__photo'), state = root.querySelector('.ba3__state');
-      var name = root.querySelector('.ba3__name'), time = root.querySelector('.ba3__time');
-      var tog = root.querySelector('.ba3__tog'), N = 8, h = '';
-      for (var i = 0; i < N; i++) h += '<span class="ba3__panel"></span>';
-      box.innerHTML = h;
-      var panels = box.querySelectorAll('.ba3__panel');
-      k.add(function () { box.innerHTML = ''; });
-      // [AUDIT-01 F4 loser P1] no autoplay and no counter: the rest state is the photograph; shutters run only on a press, 380ms, 30ms stagger
-      var cur = { pair: 0, after: false }, busy = false;
-      function paint() {
-        var p = PAIRS[cur.pair];
-        photo.src = EZ.img(cur.after ? p.a : p.b); photo.alt = cur.after ? p.aa : p.ba;
-        state.textContent = cur.after ? 'After' : 'Before';
-        state.classList.toggle('is-after', cur.after);
-        name.textContent = p.name; time.innerHTML = p.time;
-        tog.setAttribute('aria-pressed', cur.after ? 'true' : 'false');
-        tog.querySelector('.btn__label').textContent = cur.after ? 'Show the before' : 'Show the after';
-      }
-      function go(next) {
-        if (busy) return;
-        if (!k.motion) { cur = next; paint(); return; }
-        busy = true;
-        box.classList.remove('is-up');
-        k.ctx.add(function () {
-          gsap.timeline({ onComplete: function () { busy = false; box.classList.add('is-up'); } })
-            .fromTo(panels, { yPercent: -100 }, { yPercent: 0, duration: .38, ease: ELEOS, stagger: .03 })
-            .add(function () { cur = next; paint(); })
-            .to(panels, { yPercent: -100, duration: .38, ease: ELEOS, stagger: .03 }, '+=.06');
-        });
-      }
-      gsap.set(panels, { yPercent: -100 });
-      box.classList.add('is-up');
-      paint();
-      k.on(root.querySelector('.ba3__next'), 'click', function () { go({ pair: (cur.pair + 1) % 4, after: false }); });
-      k.on(root.querySelector('.ba3__prev'), 'click', function () { go({ pair: (cur.pair + 3) % 4, after: false }); });
-      k.on(tog, 'click', function () { go({ pair: cur.pair, after: !cur.after }); });
-      EZ.reveal(k, root.querySelectorAll('.ba3__side > *'));
-    } }
-  });
+    load(0); setS(.5);
+    if (k.motion) {
+      // MERSI: on first view the seam travels with the scroll (mostly before, then half and half), then hands control over
+      setS(.9);
+      var tw = gsap.to(st, { s: .5, ease: 'none', onUpdate: function () { if (!swept) setS(st.s); },
+        scrollTrigger: { trigger: stage, start: 'top 85%', end: 'center 50%', scrub: .6 } });
+      k.add(function () { if (tw.scrollTrigger) tw.scrollTrigger.kill(); tw.kill(); });
+    }
+  } } });
 })();
 
 /* process: the eight published stages and week marks from FACTS.md (data/stages.json).

@@ -82,7 +82,7 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 0 | Recite-back, ambiguities, KEEP/REMOVE inventory (`FINALIZE-PHASE0.md`, 12dedfc) | PASS (Muse) |
 | 1 | Skill pack read and digested; reference study; flow maps; storyboards; Financing concept; logo story; companion plan | **done**: `GATE-phase1.md` |
 | 2 | Companion and logo in a test harness | **done**: `GATE-system-companion-logo.md` (awaiting Muse) |
-| 3 | Home sections, one at a time, in page order | **in progress**: Hero, Proof, Services done (`GATE-home-*.md`); next is Before/After |
+| 3 | Home sections, one at a time, in page order | **in progress**: Hero, Proof, Services, Before/After done (`GATE-home-*.md`); next is Process |
 | 4 | Kitchens, then Bathrooms | pending |
 | 5 | Renovation, then Contact, then single-file assembly | pending |
 
@@ -139,3 +139,4 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Home 1 Hero** (one deepened version, the owner's mix): `GATE-home-hero.md`. Three audit cycles; zero console errors; no text over the letters at 4 viewports; reduced motion and keyboard verified.
 - **Home 2 Proof** (V2 deepened): `GATE-home-proof.md`. Physics grab, throw and stack, the hover bend, keyboard parity, keyed arrival; zero overlaps after settling; mobile and reduced motion verified.
 - **Home 3 Services** (V2 deepened): `GATE-home-services.md`. Drawing-sheet stack, tabs kept in view, zero-shift scope overlay.
+- **Home 4 Before/After** (V1 deepened, MERSI seam): `GATE-home-ba.md`. Genuine pairs as prints at ≤ 1.35× native; scroll-driven first sweep; cut-the-curve pair change.
