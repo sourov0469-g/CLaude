@@ -7,7 +7,7 @@
 .dc__bands { position: absolute; inset: var(--s5) var(--s5) calc(var(--s4) + 3.4em); display: grid; grid-template-columns: repeat(5, 1fr); pointer-events: none; }
 .dc__bands span { border-left: 1px dashed var(--color-border-strong); }
 .dc__bands span:first-child { border-left: 0; background: color-mix(in srgb, var(--clay-100, #F9E3DD) 0%, transparent); transition: background-color 300ms var(--ez-out); }
-.dc__one { position: absolute; top: var(--s5); bottom: calc(var(--s4) + 3.4em); left: var(--s5); width: calc((100% - 2 * var(--s5)) * .36); background: color-mix(in srgb, var(--clay-100, #F9E3DD) 70%, transparent); border: 1.5px dashed var(--clay-600, #A45540); opacity: 0; transition: opacity 300ms var(--ez-out); pointer-events: none; }
+.dc__one { position: absolute; top: var(--s5); bottom: calc(var(--s4) + 3.4em); left: var(--s5); width: calc((100% - 2 * var(--s5)) * var(--one, .36)); background: color-mix(in srgb, var(--clay-100, #F9E3DD) 70%, transparent); border: 1.5px dashed var(--clay-600, #A45540); opacity: 0; transition: opacity 300ms var(--ez-out); pointer-events: none; }
 .dc__one span { position: absolute; right: 8px; top: 6px; font: 600 .75rem/1 var(--f-text); letter-spacing: .05em; text-transform: uppercase; color: var(--clay-700, #884432); }
 .dc__chart.is-one .dc__one { opacity: 1; }
 .dc__bars { position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }

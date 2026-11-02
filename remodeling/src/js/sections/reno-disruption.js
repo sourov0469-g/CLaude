@@ -13,8 +13,11 @@
         return '<li class="dc__bar"><span class="dc__seg" style="--l:' + (i * .2 + .02) + ';--w:.16"><span>' + r + '</span><span class="dc__tag" aria-hidden="true">' + 'ABCDE'.charAt(i) + '</span></span></li>';
       }).join('');
       var segs = Array.prototype.slice.call(host.querySelectorAll('.dc__seg')), tags = host.querySelectorAll('.dc__tag');
+      // the resolved plan: on phones the bars stay wide enough to name their rooms (Phase 6: they truncated at 390)
+      var END = matchMedia('(max-width: 900px)').matches ? { step: .1, w: .38, span: .82 } : { step: .052, w: .12, span: .36 };
+      chart.style.setProperty('--one', END.span);
       var A = 'One room at a time, over five years, with a different contractor each time.', B = 'One plan, one contractor, one disruption: the rooms sequenced inside the same stretch.';
-      function setEnd() { segs.forEach(function (s, i) { s.style.setProperty('--l', (.02 + i * .052).toFixed(3)); s.style.setProperty('--w', '.12'); }); }
+      function setEnd() { segs.forEach(function (s, i) { s.style.setProperty('--l', (.02 + i * END.step).toFixed(3)); s.style.setProperty('--w', String(END.w)); }); }
       k.add(function () { host.innerHTML = ''; chart.classList.remove('is-one'); read.textContent = A; });
       EZ.reveal(k, root.querySelectorAll('.dc__head > *'));
       if (!k.motion) { setEnd(); chart.classList.add('is-one'); read.textContent = B; tags.forEach(function (t) { t.textContent = '1'; }); return; }   // still: the resolved plan
@@ -22,7 +25,7 @@
       var tl = gsap.timeline().to(o, { p: 1, duration: 1, ease: 'none', onUpdate: function () {
         var p = gsap.parseEase('power2.inOut')(o.p);
         segs.forEach(function (s, i) {
-          var l0 = i * .2 + .02, l1 = .02 + i * .052, w0 = .16, w1 = .12;   // sequenced, overlapping a little, inside one marked stretch
+          var l0 = i * .2 + .02, l1 = .02 + i * END.step, w0 = .16, w1 = END.w;   // sequenced, overlapping a little, inside one marked stretch
           s.style.setProperty('--l', (l0 + (l1 - l0) * p).toFixed(4)); s.style.setProperty('--w', (w0 + (w1 - w0) * p).toFixed(4));
         });
         var on = o.p > .9; if (on !== chart.classList.contains('is-one')) { chart.classList.toggle('is-one', on); read.textContent = on ? B : A; tags.forEach(function (t, i) { t.textContent = on ? '1' : 'ABCDE'.charAt(i); }); }

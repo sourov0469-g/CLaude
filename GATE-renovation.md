@@ -31,7 +31,7 @@
 6. **Test harness:** a script bug (a Node variable used inside the browser context), and a click on content whose scroll reveal had reversed. Both fixed in the harness; no product change.
 
 ## Defects remaining (honest)
-- **Phones, collapse:** the five collapsed bars truncate room names at 390.
+- ~~**Phones, collapse:** the five collapsed bars truncate room names at 390.~~ **Fixed in Phase 6:** on narrow screens the resolved plan uses wider bars (38%, stepped across 80% of the chart). Measured: all five names fit at 390 and 1440 (`qa/finalize/phase6/renovation-collapse-phone-390.png`).
 - **Dividers** on this page reuse the system set.
 
 Render evidence: `qa/finalize/renovation/`. Zero console errors at 1440 and 390; no horizontal overflow.
