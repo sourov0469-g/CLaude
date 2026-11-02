@@ -55,7 +55,10 @@ def s1():
 .hd-wrap{stroke:var(--steel-7);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--steel-8);stroke-width:4} .hd-sh{stroke:var(--steel-9);stroke-width:14}
 .hd-b{fill:var(--steel-12);stroke:var(--steel-6);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--steel-6)} .hd-ok{fill:none;stroke:#fff;stroke-width:6}
 .hd-s{opacity:.18;transition:opacity var(--duration-normal) var(--ease-standard)} .hd-s.done{opacity:.55} .hd-s.cur{opacity:1}
-@media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)} .h2-l{width:100%;height:45%} .h2-r{top:45%;width:100%} .pls2{left:50%;top:20%}}
+@media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto;left:var(--layout-gutter);right:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)}
+ .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:31%;width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:11px}
+ .hero2 .h1-copy{height:auto;padding-top:var(--space-04)} .hero2 .h1-copy .h1{font-size:1.75rem;margin-bottom:var(--space-04)} .hero2 .h1-copy .btn-secondary{display:none}
+ .pls2{left:50%;top:15%;height:104px} .pls2 .pl{padding:var(--space-03) var(--space-05)} .pls2 .pl-k{font-size:18px} .pls2 .pl-s{margin:2px 0 6px!important} .pls2 .pl-n{display:none}}
 '''
     js = r'''
 (function(){const A=window.APS,cl=(v,a,b)=>Math.max(a,Math.min(b,v));

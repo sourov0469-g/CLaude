@@ -35,7 +35,7 @@ img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} 
 .clean .rv{display:none}
 .ill-f{margin:0;min-width:0} .ill{margin:var(--space-03) 0 0;font-size:13px;line-height:1.4;color:var(--color-text-secondary)}
 .on-dark .ill,.wn2h .ill,.rh1 .ill,.h2-r .ill{color:var(--steel-4)}
-.h2-r .ill-f{height:88%;display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center} .h2-r .ill-f .hd{height:100%;max-width:92%} .skip2:focus{position:fixed;left:180px;top:8px;width:auto;height:auto;clip:auto;z-index:99;background:var(--color-bg-page);padding:12px 16px;font:700 16px var(--font-text);border:0}
+.h2-r{overflow:hidden} .h2-r .ill{padding:0 var(--layout-gutter)} .h2-r .ill-f{height:88%;display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;min-height:0} .h2-r .ill-f .hd{height:100%;width:auto;max-width:92%;min-height:0} .skip2:focus{position:fixed;left:180px;top:8px;width:auto;height:auto;clip:auto;z-index:99;background:var(--color-bg-page);padding:12px 16px;font:700 16px var(--font-text);border:0}
 .ftr-mo{background:transparent;border:1px solid var(--steel-8);color:#fff;min-height:44px;padding:0 var(--space-04);border-radius:var(--radius-sm);font:600 14px var(--font-text);cursor:pointer;margin-left:var(--space-05)}
 /* footer */
 .ftr{position:relative;overflow:hidden;background:var(--color-bg-deep);color:var(--color-text-inverse);padding:var(--space-11) 0 var(--space-07)}
@@ -58,9 +58,10 @@ if(new URLSearchParams(location.search).has('clean'))D.documentElement.classList
 // images: later uses are filled from the first use, so each image is embedded once
 D.querySelectorAll('img[data-img]').forEach(i=>{const s=D.querySelector(`img[data-key="${i.dataset.img}"]`);if(s)i.src=s.src;});
 // one scroll engine: pinned sections register a progress callback
-const reg=[],loops=[];window.APS={pin(el,fn){reg.push({el,fn});},reduce,css,paused:false,loop(f){loops.push(f);}};
+const reg=[],loops=[];window.APS={pin(el,fn){reg.push({el,fn});},track(el,fn){reg.push({el,fn,track:1});},reduce,css,paused:false,loop(f){loops.push(f);}};
 const P=()=>window.APS.paused;
 let ticking=false;function run(){ticking=false;for(const r of reg){if(!r.el.offsetParent)continue;const b=r.el.getBoundingClientRect(),len=r.el.offsetHeight-innerHeight;
+  if(r.track){r.fn(Math.max(0,Math.min(1,(innerHeight*.9-b.top)/(innerHeight*.7))));continue;}
   r.fn(len>0?Math.max(0,Math.min(1,-b.top/len)):(b.top<innerHeight?1:0));}}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(run);}},{passive:true});addEventListener('resize',run);
 // course lines lay themselves once on entry

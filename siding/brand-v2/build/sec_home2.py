@@ -18,7 +18,7 @@ def _wall_svg(cls=''):
 
 S5_CSS = """
 .on-dark{background:var(--color-bg-deep);color:var(--color-text-inverse)} .on-dark-l{color:var(--steel-5)} .on-dark-h{color:#fff} .on-dark-p{color:var(--steel-3)}
-.wa1{height:300vh;position:relative} .wa-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;display:flex;align-items:center;overflow:hidden}
+.wa1{position:relative;padding:var(--layout-section-pad) 0} .wa1 .wa-stick{position:static;height:auto;min-height:0} .wa-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;display:flex;align-items:center;overflow:hidden}
 .wa-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-08);align-items:center;width:100%}
 .wall{width:100%;height:auto;max-height:calc(100vh - 150px)} .w-line,.w-base{fill:none;stroke:var(--steel-6);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1}
 .w-stud{fill:none;stroke:var(--steel-8);stroke-width:4} .w-sheath{stroke:var(--steel-9);stroke-width:16} .w-wrap{stroke:var(--steel-7);stroke-width:4;stroke-dasharray:12 9}
@@ -29,7 +29,9 @@ S5_CSS = """
 .wall2 .w-line,.wall2 .w-base{stroke-dashoffset:0} .wall2 .w-p{transition:opacity var(--duration-moderate) var(--ease-standard)} .wall2 .w-p.off{opacity:.12}
 .wa2-tl{display:grid;gap:6px;margin:var(--space-06) 0 var(--space-05)} .wa2-tl button{min-height:48px;text-align:left;padding:0 var(--space-05);background:transparent;border:1px solid var(--steel-10);color:var(--steel-3);font:600 16px var(--font-text);border-radius:var(--radius-sm);cursor:pointer}
 .wa2-tl button[aria-selected=true]{background:#fff;color:var(--color-text-primary);border-color:#fff}
-@media (max-width:900px){.wa-g{grid-template-columns:minmax(0,1fr)} .w-lab{display:none} .wall{max-height:46vh}}
+@media (max-width:900px){.wa-g{grid-template-columns:minmax(0,1fr);gap:var(--space-04)} .w-lab{display:none} .wall{max-height:46vh}
+ .wa1 .wa-stick{padding-top:0} .wa1 .h2{font-size:1.75rem;margin-bottom:var(--space-03)} .wa1 .lead{font-size:16px;margin-bottom:0}
+ .wa1 .w-steps{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:var(--space-04);font-size:14px} .wa1 .wall{max-height:34vh} .wa1 .ill{font-size:12px}}
 """
 
 S5_JS = """
@@ -40,7 +42,7 @@ const w=document.querySelector('[data-wa1]');if(w){const L=[...w.querySelectorAl
   const set=p=>{p=cl(p,0,1);wl.style.strokeDashoffset=1-cl(p*K/1.2,0,1);wb.style.strokeDashoffset=1-cl((p-.92)/.08,0,1);
     L.forEach(e=>{const lp=cl(p*K*1.05-(+e.dataset.k)-.2,0,1);if(e.classList.contains('w-board')){const s=A.reduce?(lp>0?1:0):settle(lp);e.style.opacity=lp>0?1:0;e.style.transform=`translateY(${(1-s)*-40}px)`;}else e.style.opacity=A.reduce?(lp>0?1:0):lp;});
     li.forEach(x=>x.classList.toggle('done',p*K*1.05-(+x.dataset.k)-.2>0));};
-  set(0);A.pin(w,set);window.__wa1=set;}
+  set(0);A.track(w,set);window.__wa1=set;}   // scroll-linked, not pinned (S0019: pin 1-2 sections per page)
 const t=document.querySelector('[data-wa2]');if(t){const tabs=[...t.querySelectorAll('[role=tab]')],panel=t.querySelector('[role=tabpanel]'),L=[...t.querySelectorAll('.w-p')];
   const pick=b=>{tabs.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;});panel.textContent=b.dataset.d;panel.setAttribute('aria-labelledby',b.id);
     const show=b.dataset.show.split(',').map(Number);L.forEach(e=>e.classList.toggle('off',!show.includes(+e.dataset.k)));};
@@ -61,7 +63,7 @@ def s5():
     ol = ''.join(f'<li data-k="{i}">{s}</li>' for i, s in enumerate(steps))
     head = '<p class="label on-dark-l">How a wall goes together</p><h2 class="h2 on-dark-h">Each board laps the one below it.</h2>'
     v1 = (f'<div class="wa1 on-dark" data-wa1><div class="wa-stick"><div class="wrap wa-g"><div>{head}'
-          f'<p class="lead on-dark-p">Scroll, and the wall builds in the order the crew does it.</p><ol class="w-steps">{ol}</ol></div>{_wall_svg()}</div></div></div>')
+          f'<p class="lead on-dark-p">As you scroll past, the wall builds in the order the crew does it.</p><ol class="w-steps">{ol}</ol></div>{_wall_svg()}</div></div></div>')
     tabs = [('Stud & sheathing', [0, 1], 'The frame, and the solid layer the siding fastens through.'),
             ('Weather wrap', [0, 1, 2], 'A water-resistant layer that sheds what gets behind the boards.'),
             ('Lapped courses', list(range(8)), 'Boards go on from the bottom up, each one lapping the board below it.'),

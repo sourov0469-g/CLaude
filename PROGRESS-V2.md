@@ -146,6 +146,12 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - **Remedied:** §6 of GATE-BUILD-2 now cites S0070, S0400, S0658, S1190, S0947, S1465, S1372, S0071, S0248, S1497, S0659, S0095, S1314, S1320, S0414, S0361 and S1421, each checked against its own text in the pack.
     - **Rule from here on:** every gate cites WEB-SKILLS tags against the skill's own text.
   - **Cycle 3b** (`GATE-BUILD-3.md`, 7.64, PASS, cited): the S0414 gap found while citing is fixed. All 15 construction drawings are labelled illustrative, with 14 versions backed up; 24 backups in the file.
+  - **GATE-BUILD-3 accepted by Muse.**
+  - **Cycle 4** (`GATE-BUILD-4.md`, 7.73, PASS, cited):
+    - Phone-width pass: 2 pinned sections clipped at 375 px; fixed, and 0 now clip at 375×740 or 375×667.
+    - The wall is now scroll-linked, not pinned, so the homepage pins 2 sections, per S0019.
+    - The cursor companion is verified under real pointer movement.
+    - The B4 banding is closed with no change needed.
   - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
 - **Phases 2, 3a, 3b and the build:** not started.
 
