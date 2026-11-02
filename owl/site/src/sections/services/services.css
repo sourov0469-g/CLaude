@@ -1,0 +1,31 @@
+/* ===== Services (MERSI chapter system: a cover split around a seam, a name card on the seam) ===== */
+.svc-v1,.svc-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.sv1-tabs{display:flex;flex-wrap:wrap;gap:var(--space-8);margin-bottom:var(--space-16)}
+.sv1-tabs button{display:inline-flex;gap:var(--space-8);align-items:center;min-height:var(--space-48);padding:0 var(--space-16);border-radius:var(--radius-pill);border:1.5px solid var(--line-control);background:var(--surface-page);color:var(--text-primary);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer;transition:background-color var(--dur-fast) linear,border-color var(--dur-fast) linear}
+.sv1-tabs button:hover{border-color:var(--text-primary)}
+.sv1-tabs button[aria-selected="true"]{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-page)}
+.sv1-tabs .t-num{opacity:.7}
+.sv1-panel{position:relative;display:grid;grid-template-columns:1fr 1fr;border-radius:var(--radius-m);overflow:hidden;border:1.5px solid var(--line-control);aspect-ratio:2/1;background:var(--surface-alt)}
+.sv1-panel[hidden]{display:none}
+.sv1-half{margin:0;position:relative;min-height:0}
+.sv1-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.sv1-photo figcaption{position:absolute;left:var(--space-12);bottom:var(--space-8);font:var(--type-small);color:var(--text-on-deep);background:color-mix(in srgb,var(--surface-ink) 70%,transparent);padding:var(--space-2) var(--space-8);border-radius:var(--radius-s)}
+.sv1-art{display:grid;place-items:center;padding:var(--space-32);background:var(--surface-page);border-left:1.5px solid var(--line-control)}
+.sv1-art svg{width:100%;height:100%;overflow:visible}
+.sv1-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(24rem,44%);display:grid;gap:var(--space-8);padding:var(--space-24);background:var(--surface-raised);border:1.5px solid var(--text-primary);border-radius:var(--radius-m);box-shadow:var(--shadow-lifted)}
+.sv1-card .link{justify-self:start}
+.sv1-panel:not([hidden]) .sv1-card{animation:sv1-card var(--dur-slow) var(--ease-out)}
+.sv1-panel:not([hidden]) .sv1-half{animation:sv1-half var(--dur-slow) var(--ease-out)}
+@keyframes sv1-card{from{opacity:0;transform:translate(-50%,calc(-50% + var(--space-12)))}}
+@keyframes sv1-half{from{opacity:.4}}
+@media (max-width:1023px){.sv1-panel{grid-template-columns:1fr;aspect-ratio:auto}.sv1-photo{aspect-ratio:16/9}.sv1-art{border-left:0;border-top:1.5px solid var(--line-control);aspect-ratio:4/3;padding:var(--space-24)}.sv1-card{position:relative;left:auto;top:auto;transform:none;width:auto;margin:calc(var(--space-32) * -1) var(--space-16) var(--space-16);box-shadow:var(--shadow-raised)}@keyframes sv1-card{from{opacity:0}}}
+@media (max-width:767px){.sv1-tabs button{flex:1 1 calc(50% - var(--space-8));justify-content:center}}
+@media (prefers-reduced-motion:reduce){.sv1-card,.sv1-half{animation:none !important}}
+/* V2: service rows + a photo view that follows hover/focus */
+.sv2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-64);align-items:start}
+.sv2-list{border-top:1px solid var(--line-control)}
+.sv2-view{position:sticky;top:calc(var(--header-h,0px) + var(--space-24));display:grid}
+.sv2-view .frame{grid-area:1/1;opacity:0;transition:opacity var(--dur-normal) linear}
+.sv2-view .frame.is-on{opacity:1}
+.sv2-view .frame img{aspect-ratio:4/5}
+@media (max-width:1023px){.sv2-grid{grid-template-columns:1fr}.sv2-view{display:none}}

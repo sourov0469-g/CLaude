@@ -466,6 +466,37 @@ main:focus{outline:none}
 @media (max-width:1023px){.gm2-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.gm-win:not([hidden]){animation:none}}
 
+/* ===== Services (MERSI chapter system: a cover split around a seam, a name card on the seam) ===== */
+.svc-v1,.svc-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.sv1-tabs{display:flex;flex-wrap:wrap;gap:var(--space-8);margin-bottom:var(--space-16)}
+.sv1-tabs button{display:inline-flex;gap:var(--space-8);align-items:center;min-height:var(--space-48);padding:0 var(--space-16);border-radius:var(--radius-pill);border:1.5px solid var(--line-control);background:var(--surface-page);color:var(--text-primary);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer;transition:background-color var(--dur-fast) linear,border-color var(--dur-fast) linear}
+.sv1-tabs button:hover{border-color:var(--text-primary)}
+.sv1-tabs button[aria-selected="true"]{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-page)}
+.sv1-tabs .t-num{opacity:.7}
+.sv1-panel{position:relative;display:grid;grid-template-columns:1fr 1fr;border-radius:var(--radius-m);overflow:hidden;border:1.5px solid var(--line-control);aspect-ratio:2/1;background:var(--surface-alt)}
+.sv1-panel[hidden]{display:none}
+.sv1-half{margin:0;position:relative;min-height:0}
+.sv1-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.sv1-photo figcaption{position:absolute;left:var(--space-12);bottom:var(--space-8);font:var(--type-small);color:var(--text-on-deep);background:color-mix(in srgb,var(--surface-ink) 70%,transparent);padding:var(--space-2) var(--space-8);border-radius:var(--radius-s)}
+.sv1-art{display:grid;place-items:center;padding:var(--space-32);background:var(--surface-page);border-left:1.5px solid var(--line-control)}
+.sv1-art svg{width:100%;height:100%;overflow:visible}
+.sv1-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(24rem,44%);display:grid;gap:var(--space-8);padding:var(--space-24);background:var(--surface-raised);border:1.5px solid var(--text-primary);border-radius:var(--radius-m);box-shadow:var(--shadow-lifted)}
+.sv1-card .link{justify-self:start}
+.sv1-panel:not([hidden]) .sv1-card{animation:sv1-card var(--dur-slow) var(--ease-out)}
+.sv1-panel:not([hidden]) .sv1-half{animation:sv1-half var(--dur-slow) var(--ease-out)}
+@keyframes sv1-card{from{opacity:0;transform:translate(-50%,calc(-50% + var(--space-12)))}}
+@keyframes sv1-half{from{opacity:.4}}
+@media (max-width:1023px){.sv1-panel{grid-template-columns:1fr;aspect-ratio:auto}.sv1-photo{aspect-ratio:16/9}.sv1-art{border-left:0;border-top:1.5px solid var(--line-control);aspect-ratio:4/3;padding:var(--space-24)}.sv1-card{position:relative;left:auto;top:auto;transform:none;width:auto;margin:calc(var(--space-32) * -1) var(--space-16) var(--space-16);box-shadow:var(--shadow-raised)}@keyframes sv1-card{from{opacity:0}}}
+@media (max-width:767px){.sv1-tabs button{flex:1 1 calc(50% - var(--space-8));justify-content:center}}
+@media (prefers-reduced-motion:reduce){.sv1-card,.sv1-half{animation:none !important}}
+/* V2: service rows + a photo view that follows hover/focus */
+.sv2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-64);align-items:start}
+.sv2-list{border-top:1px solid var(--line-control)}
+.sv2-view{position:sticky;top:calc(var(--header-h,0px) + var(--space-24));display:grid}
+.sv2-view .frame{grid-area:1/1;opacity:0;transition:opacity var(--dur-normal) linear}
+.sv2-view .frame.is-on{opacity:1}
+.sv2-view .frame img{aspect-ratio:4/5}
+@media (max-width:1023px){.sv2-grid{grid-template-columns:1fr}.sv2-view{display:none}}
 
 
 
@@ -763,7 +794,61 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-services" data-sec="services" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">services v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">services v2: not built yet</p></div></div></div><div class="sec" id="s-families" data-sec="families" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">families v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">families v2: not built yet</p></div></div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">storm v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">storm v2: not built yet</p></div></div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
+</div></div><div class="sec" id="s-services" data-sec="services" data-default="1"><div class="ver" data-v="1"><section class="svc-v1" aria-labelledby="svc1-h">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="svc1-h" class="t-heading">What we do</h2><p class="t-body muted">Four chapters, one crew. Every job gets the same Protect Your Nest system.</p></div>
+    <div class="sv1-cover">
+      <div class="sv1-tabs" role="tablist" aria-label="Services">
+        <button role="tab" id="sv1-t0" aria-controls="sv1-p0" aria-selected="true" tabindex="0"><span class="t-num">01</span> Roof replacement</button>
+        <button role="tab" id="sv1-t1" aria-controls="sv1-p1" aria-selected="false" tabindex="-1"><span class="t-num">02</span> Storm damage</button>
+        <button role="tab" id="sv1-t2" aria-controls="sv1-p2" aria-selected="false" tabindex="-1"><span class="t-num">03</span> Roof repair</button>
+        <button role="tab" id="sv1-t3" aria-controls="sv1-p3" aria-selected="false" tabindex="-1"><span class="t-num">04</span> Siding</button>
+      </div>
+      <div class="sv1-panels">
+        <div class="sv1-panel" role="tabpanel" id="sv1-p0" aria-labelledby="sv1-t0">
+          <figure class="sv1-half sv1-photo"><img src="../assets/source/frames/owl-bg-11.jpg" alt="An Owl crew member walks a finished dark shingle roof beside a brick chimney" loading="lazy" width="1280" height="720"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
+          <div class="sv1-half sv1-art"><svg data-art="courses" aria-hidden="true"></svg></div>
+          <div class="sv1-card"><p class="t-label">Chapter 01</p><h3 class="t-sub">Roof replacement</h3><p class="t-small">Tear-off to ridge cap with GAF materials from a GAF Systems Plus Certified crew, then the 3-Part Cleanup.</p><a class="link t-small" href="#/services/replacement">Read the chapter</a></div>
+        </div>
+        <div class="sv1-panel" role="tabpanel" id="sv1-p1" aria-labelledby="sv1-t1" hidden>
+          <figure class="sv1-half sv1-photo"><img src="../assets/source/frames/owl-bg-2.jpg" alt="Owl's crew working on open rafters during a tear-off" loading="lazy" width="1280" height="720"><figcaption>Owl's own crew on a tear-off.</figcaption></figure>
+          <div class="sv1-half sv1-art"><svg data-art="hail" viewBox="0 0 400 300" aria-hidden="true"></svg></div>
+          <div class="sv1-card"><p class="t-label">Chapter 02</p><h3 class="t-sub">Storm damage</h3><p class="t-small">Hail and wind damage, with help through your insurance claim from the first inspection on.</p><a class="link t-small" href="#/storm">Read the chapter</a></div>
+        </div>
+        <div class="sv1-panel" role="tabpanel" id="sv1-p2" aria-labelledby="sv1-t2" hidden>
+          <figure class="sv1-half sv1-photo"><img src="../assets/source/frames/owl-bg-8.jpg" alt="An Owl crew member holds a shingle on a job site" loading="lazy" width="1280" height="720"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
+          <div class="sv1-half sv1-art"><svg data-art="leak" viewBox="0 0 400 300" aria-hidden="true"></svg></div>
+          <div class="sv1-card"><p class="t-label">Chapter 03</p><h3 class="t-sub">Roof repair</h3><p class="t-small">Leaks found with the Wise Check: an attic inspection and heat-sensor leak detection, with photo and video documentation.</p><a class="link t-small" href="#/services/repair">Read the chapter</a></div>
+        </div>
+        <div class="sv1-panel" role="tabpanel" id="sv1-p3" aria-labelledby="sv1-t3" hidden>
+          <figure class="sv1-half sv1-photo"><img src="../assets/source/owl-pages/unproven/owl-siding-roseville.webp" alt="A house with olive lap siding and white garage doors" loading="lazy" width="1024" height="680"><figcaption>Illustrative photo.</figcaption></figure>
+          <div class="sv1-half sv1-art"><svg data-art="siding" viewBox="0 0 400 300" aria-hidden="true"></svg></div>
+          <div class="sv1-card"><p class="t-label">Chapter 04</p><h3 class="t-sub">Siding</h3><p class="t-small">Siding installation, by the same family-owned crew and the same cleanup.</p><a class="link t-small" href="#/services/siding">Read the chapter</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="svc-v2" aria-labelledby="svc2-h">
+  <div class="wrap sv2-grid">
+    <div>
+      <div class="sec-head"><h2 id="svc2-h" class="t-heading">What we do</h2><p class="t-body muted">One family-owned crew, one cleanup system, four kinds of work.</p></div>
+      <div class="sv2-list">
+        <a class="svc" href="#/services/replacement" data-img="0"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-house"/></svg><span><b class="t-sub">Roof replacement</b><br><span class="t-small muted">Tear-off to ridge cap with GAF materials, then the 3-Part Cleanup.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+        <a class="svc" href="#/storm" data-img="1"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-status-hail"/></svg><span><b class="t-sub">Storm damage</b><br><span class="t-small muted">Hail and wind, with help through your insurance claim.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+        <a class="svc" href="#/services/repair" data-img="2"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-status-leak"/></svg><span><b class="t-sub">Roof repair</b><br><span class="t-small muted">Leaks found with the Wise Check inspection.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+        <a class="svc" href="#/services/siding" data-img="3"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-shingles"/></svg><span><b class="t-sub">Siding</b><br><span class="t-small muted">Siding installation by the same crew.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+      </div>
+    </div>
+    <div class="sv2-view" aria-hidden="true">
+      <figure class="frame frame--4x5 is-on"><img src="../assets/source/frames/owl-bg-11.jpg" alt="" loading="lazy"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
+      <figure class="frame frame--4x5"><img src="../assets/source/frames/owl-bg-2.jpg" alt="" loading="lazy"><figcaption>Owl's own crew on a tear-off.</figcaption></figure>
+      <figure class="frame frame--4x5"><img src="../assets/source/frames/owl-bg-8.jpg" alt="" loading="lazy"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
+      <figure class="frame frame--4x5"><img src="../assets/source/owl-pages/unproven/owl-siding-roseville.webp" alt="" loading="lazy"><figcaption>Illustrative photo.</figcaption></figure>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-families" data-sec="families" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">families v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">families v2: not built yet</p></div></div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">storm v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">storm v2: not built yet</p></div></div></div><div class="sec" id="s-reviews" data-sec="reviews" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">reviews v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">reviews v2: not built yet</p></div></div></div><div class="sec" id="s-price" data-sec="price" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">price v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">price v2: not built yet</p></div></div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">area v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">area v2: not built yet</p></div></div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><div class="todo wrap"><p class="t-small muted">call v1: not built yet</p></div></div><div class="ver" data-v="2" hidden><div class="todo wrap"><p class="t-small muted">call v2: not built yet</p></div></div></div></section>
 </main>
 <div class="callbar"><a href="tel:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-phone"/></svg>Call</a><a href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text</a></div>
 <div class="vpanel" id="vpanel" hidden role="dialog" aria-label="Section versions"><b>Versions</b><div id="vlist"></div><p class="t-small">Shift+V toggles · URL: ?v=hero:2</p></div>
@@ -1502,6 +1587,58 @@ window.OwlNest = (function () {
   });
 })();
 
+/* ===== Services: V1 tablist (ARIA tabs pattern) + chapter drawings; V2 hover/focus photo view ===== */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  var INK = 'stroke:var(--text-primary)', MUTED = 'stroke:var(--line-control)';
+  var ART = {
+    courses: function (svg) { Owl.courses(svg, { rows: 6, width: 400, height: 300 }).set(1); },
+    hail: function (svg) {
+      el('path', { d: 'M110 130 A50 50 0 0 1 120 46 A64 64 0 0 1 240 52 A44 44 0 0 1 280 130 Z', fill: 'none', 'stroke-width': 4, 'stroke-linejoin': 'round', style: INK }, svg);
+      for (var i = 0; i < 9; i++) { var x = 120 + i * 18, y = 160 + (i % 3) * 24; el('circle', { cx: x, cy: y, r: 4 + (i % 2), fill: 'none', 'stroke-width': 3, style: INK, class: 'hailstone' }, svg); }
+      el('path', { d: 'M40 270 L200 200 L360 270', fill: 'none', 'stroke-width': 4, 'stroke-linejoin': 'round', style: INK }, svg);
+      [[150, 236], [214, 222], [260, 240]].forEach(function (d) { el('path', { d: 'M' + (d[0] - 6) + ' ' + d[1] + ' a6 4 0 1 0 12 0 a6 4 0 1 0 -12 0', fill: 'none', 'stroke-width': 2.5, style: 'stroke:var(--accent-fill)' }, svg); });
+    },
+    leak: function (svg) {
+      el('path', { d: 'M40 120 L200 30 L360 120 M70 104 V270 H330 V104', fill: 'none', 'stroke-width': 4, 'stroke-linejoin': 'round', style: INK }, svg);
+      el('path', { d: 'M90 150 H310', 'stroke-width': 2, 'stroke-dasharray': '2 8', 'stroke-linecap': 'round', style: MUTED }, svg);
+      el('path', { d: 'M200 160 C200 160 182 184 182 196 A18 18 0 0 0 218 196 C218 184 200 160 200 160 Z', fill: 'none', 'stroke-width': 3.5, style: INK }, svg);
+      el('circle', { cx: 200, cy: 112, r: 26, fill: 'none', 'stroke-width': 3, style: 'stroke:var(--accent-fill)' }, svg);
+      el('path', { d: 'M200 86 V70 M226 112 H242 M200 138 V150 M174 112 H158', 'stroke-width': 2.5, 'stroke-linecap': 'round', style: 'stroke:var(--accent-fill)' }, svg);
+    },
+    siding: function (svg) {
+      for (var y = 40; y <= 260; y += 22) el('path', { d: 'M40 ' + y + ' H360', 'stroke-width': y % 44 ? 2 : 2.5, style: MUTED }, svg);
+      el('rect', { x: 150, y: 96, width: 100, height: 110, fill: 'var(--surface-page)', 'stroke-width': 4, style: INK }, svg);
+      el('path', { d: 'M200 96 V206 M150 151 H250', 'stroke-width': 3, style: INK }, svg);
+      el('path', { d: 'M40 30 V270 M360 30 V270', 'stroke-width': 4, style: INK }, svg);
+    }
+  };
+  var r1 = document.querySelector('.svc-v1');
+  if (r1) {
+    r1.querySelectorAll('[data-art]').forEach(function (s) { ART[s.dataset.art](s); });
+    var tabs = [].slice.call(r1.querySelectorAll('[role="tab"]'));
+    function select(t, focus) {
+      tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+      if (focus) t.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t, false); });
+      t.addEventListener('keydown', function (e) {
+        var j = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (j === undefined) return; e.preventDefault(); select(tabs[(j + tabs.length) % tabs.length], true);
+      });
+    });
+  }
+  var r2 = document.querySelector('.svc-v2');
+  if (r2) {
+    var figs = [].slice.call(r2.querySelectorAll('.sv2-view .frame'));
+    r2.querySelectorAll('.svc').forEach(function (a) {
+      var show = function () { figs.forEach(function (f, i) { f.classList.toggle('is-on', i === +a.dataset.img); }); };
+      a.addEventListener('pointerenter', show); a.addEventListener('focus', show);
+    });
+  }
+})();
 
 
 
