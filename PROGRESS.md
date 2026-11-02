@@ -203,6 +203,22 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
     - the video card (click-to-load youtube-nocookie);
     - the nest `onDeep` tones;
     - frame images use `height:auto`.
+- **Muse correction (binding), applied:** GATE-area, GATE-price and GATE-reviews were judged FAIL for missing WEB-SKILLS
+  evidence.
+  - **GATE-area:** now names its governing references, **Lando Norris (V1)** and **Quiet Cubes (V2)**, and states
+    exactly what transfers.
+  - **All three gates:** now map each mechanism to WEB-SKILLS tags.
+  - **Skills read in full, by tag, for this** (logged in SKILL-READ-LOG):
+    - ⟦S1428⟧, ⟦S1426⟧, ⟦S1423⟧, ⟦S1453⟧ (added to the pack), ⟦S1440⟧, ⟦S1439⟧
+    - ⟦S1442⟧, ⟦S1420⟧, ⟦S1444⟧, ⟦S1441⟧, ⟦S0280⟧, ⟦S0054⟧
+  - **Unchanged:** facts, versions and scores.
+  - **Recorded honestly:** the citations are retrospective, and each gate lists the skill rules its section does not yet
+    meet:
+    - area V2: no clear button, no typo tolerance, the no-match answer does not echo the query;
+    - price: validates per keystroke, where the rule is on blur; the footprint field is too wide;
+    - reviews: captions unverifiable.
+  - **Fix timing:** carried as fixes for when those components are reused on the inner pages.
+  - **Rule from here on:** every section's skills are read **before** it is built, and its gate cites them.
 - **Next:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.

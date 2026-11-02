@@ -304,6 +304,7 @@ Format: `ID — name — why it applies to Owl`.
 - S1449 — millers-law
 - S1450 — navigation-patterns — in-file multi-page navigation
 - S1452 — peak-end-rule — the peak (game/estimator) and the end (call)
+- S1453 — search-ux — the service-area town finder (added at the Muse correction, 2026-11-02)
 - S1454 — serial-position-effect
 - S1455 — state-machine
 - S1456 — teslers-law — the estimator absorbs the complexity

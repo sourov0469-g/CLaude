@@ -206,3 +206,54 @@ Skills picked for this phase, and why:
   - **Rhythm:** alternate action and rest; the strongest transformation goes on the central idea.
   - **Deterministic:** motion is a function of t or p, so seeking works.
   - **Honesty:** do not invent claims.
+
+## Muse correction (GATE-area, GATE-price, GATE-reviews): skills read in full, by tag, for the WEB-SKILLS evidence
+These skills were read after the three sections were built, so the gates cite them retrospectively. Each gate also
+checks the built section against the rules and records any rule it does not meet.
+
+- ⟦S1428⟧ layout-grid
+  - Columns, gutters and margins; card grids auto-fill.
+  - Asymmetric (sidebar + main) is a valid pattern.
+  - Align to the grid; test at every breakpoint.
+- ⟦S1426⟧ law-of-proximity
+  - Within-group spacing must be smaller than between-group spacing.
+  - Label tight to its input; never use a border where spacing works.
+- ⟦S1423⟧ law-of-common-region
+  - A shared background or border groups items.
+  - Use the weakest container that works; limit nesting to 2 levels.
+- ⟦S1453⟧ search-ux
+  - **Placeholder:** says what can be searched.
+  - **Clear/reset:** a button once there is a query.
+  - **Matching:** highlight the query in results; show a result count; tolerate typos, synonyms and partial matches;
+    keep the query in the field.
+  - **Zero results:** confirm what was searched, suggest alternatives, never leave a blank.
+- ⟦S1440⟧ feedback-patterns
+  - Acknowledge every action.
+  - Inline feedback closest to the action is preferred; not colour-only.
+- ⟦S1439⟧ error-handling-ux
+  - Prevent errors: inline validation, smart defaults.
+  - Write in human language: what happened and what to do; place the message near the source.
+  - Preserve input; offer an alternative path; never blame.
+- ⟦S1442⟧ form-design
+  - **Layout and labels:** single column; top-aligned labels; radios for 5 or fewer options.
+  - **Validation:** validate on blur, not on every keystroke; put the error below the field.
+  - **Accessibility:** `aria-describedby`; default to the most common answer; field width hints at input length.
+- ⟦S1420⟧ data-visualization
+  - Simplest encoding; label directly; provide context.
+  - Never rely on the graphic alone; provide a text alternative.
+- ⟦S1444⟧ hicks-law
+  - Fewer simultaneous choices; group before cutting.
+  - Smart defaults skip a choice.
+- ⟦S1441⟧ fitts-law
+  - Touch targets of 44-48 at least.
+  - Primary CTA large and in thumb reach; place actions near their content.
+- ⟦S0280⟧ core-web-vitals
+  - LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1 at p75.
+  - Measure before claiming; without field data, claim no field improvement.
+  - CLS: give dimensions or aspect-ratio to images.
+- ⟦S0054⟧ fixing-accessibility
+  - **Names:** every control has an accessible name; icon-only controls get `aria-label`; decorative images get empty
+    alt.
+  - **Errors:** `aria-describedby`, `aria-invalid` and `aria-live` for errors.
+  - **Focus:** restore focus sensibly.
+  - **Media:** captions for videos with speech; no autoplay with sound.

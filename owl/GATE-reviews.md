@@ -56,3 +56,35 @@ assets instead:
 
 ## Defects found and fixed
 1. **V1 grid:** the fourth video was stranded alone on a new row. Now one lead tile with three stacked beside it.
+
+## WEB-SKILLS evidence (added at Muse's correction; facts, versions and scores unchanged)
+
+### Mechanism → tag → check against the built section
+| Mechanism | Tag | Check |
+|---|---|---|
+| V1 asymmetric archive grid: lead film at 2fr, three tagged films stacked at 1fr | ⟦S1428⟧ layout-grid (asymmetric pattern), Lando (archive grammar) | Pass. Column-dropping to 2 then 1 columns; checked at 1440 and 390. |
+| Each film plus its tag and title grouped by proximity; no extra boxes | ⟦S1426⟧ law-of-proximity, ⟦S1423⟧ law-of-common-region | Pass. The weakest grouping that works: caption close under the thumbnail. |
+| The customer video first and largest | ⟦S1454⟧ serial-position (read at Phase 3a) | Pass. Primacy goes to the strongest proof. |
+| Four films, no more | ⟦S1444⟧ hicks-law | Pass. Four distinct, tagged choices. |
+| Click-to-load (facade) video card | ⟦S0280⟧ core-web-vitals | (see below) |
+| Play buttons, iframe and focus | ⟦S0054⟧ fixing-accessibility | (see below) |
+| V2 playlist: buttons with `aria-pressed`; the feature swaps; focus goes to the new play button | ⟦S1440⟧ feedback-patterns, ⟦S0054⟧ | Pass. Immediate state change, not colour-only (outline plus `aria-pressed`). |
+| Rating as the only review claim | facts lock; ⟦S0659⟧ (no invented proof) | Pass. |
+
+**The click-to-load card against core-web-vitals:**
+- **Lab evidence (test):** no YouTube request before a click, so no third-party script competes with the page's load or
+  interactions.
+- **Layout stability:** thumbnails have width/height and a 16:9 aspect-ratio, so swapping in the iframe does not shift
+  layout.
+- **Claim limit:** per ⟦S0280⟧, I claim no LCP/INP/CLS field numbers; none were measured.
+
+**The play buttons, iframe and focus against fixing-accessibility:**
+- **Accessible names:** each play button carries `aria-label` "Play: <title>".
+- **Images:** thumbnails are `alt=""`, decorative inside the labelled button.
+- **The iframe:** has a `title`.
+- **Focus:** moves into the player after the click.
+- **Sound:** no autoplay with sound before the user acts; autoplay starts only after the click.
+
+### Rules not met (recorded as remaining defects; the version is not changed, per the correction)
+1. **Captions** (⟦S0054⟧ media): the videos contain speech. Their captions are YouTube's (auto or uploaded by Owl); the
+   build cannot verify that captions exist for each video. Owl should confirm captions on its channel.

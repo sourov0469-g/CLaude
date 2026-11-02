@@ -72,3 +72,29 @@ then an estimate. V2 suits a page about pricing (the Contact page reuses it).
    the lead and the SMS body.
 3. **CTA wrap:** "Text these numbers to Owl" wrapped onto two lines inside its pill at 390px. Now "Text my numbers".
 4. **My own test** read the gable mid-transition. It now waits for the transition (a test fix, not a page fix).
+
+## WEB-SKILLS evidence (added at Muse's correction; facts, versions and scores unchanged)
+
+### Mechanism → tag → check against the built section
+| Mechanism | Tag | Check |
+|---|---|---|
+| One-column form: service, footprint, pitch, readout, actions | ⟦S1442⟧ form-design | Pass. Single column, top-aligned persistent labels. |
+| Service as 3 radio pills | ⟦S1442⟧ (radios for 5 or fewer options), ⟦S1444⟧ hicks-law | Pass. Three distinct choices with a smart default (replacement), so the visitor need not choose to see a result. |
+| Footprint validation (300-10,000) with an error below the field, `aria-invalid` and `aria-describedby` | ⟦S1442⟧, ⟦S1439⟧ error-handling-ux, ⟦S0054⟧ fixing-accessibility | Partial (see below). |
+| Pitch range with `aria-valuetext` ("6 in 12") | ⟦S0054⟧ (accessible names and values) | Pass. |
+| Live readout with the formula, `aria-live` | ⟦S1440⟧ feedback-patterns, ⟦S1420⟧ data-visualization | Pass. Immediate inline feedback; labelled directly with context (the formula); the drawing is `aria-hidden` and the numbers carry the meaning in text, so it never relies on the graphic alone. |
+| The true-geometry gable that re-spaces with the pitch | ⟦S1420⟧ (simplest encoding that communicates), ⟦S0407⟧ svg-animation (read at Phase 2) | Pass. One shape, honest proportions (tested: ridge at y=10 for 12/12), on the travel curve, static under reduced motion. |
+| Invalid input: no number shown, a plain SMS link still offered | ⟦S1439⟧ (recovery: alternative path, preserve input) | Pass. The input is kept; Text and Call stay available. |
+| "Text my numbers" carries the visitor's own figures; Call beside it | ⟦S1441⟧ fitts-law, ⟦S1440⟧ | Pass. 48px targets beside the readout they act on; the action is real (an sms: body). |
+| No price, only measurement | ⟦S0659⟧ anti-ai-slop (no invented metrics; read at Phase 1a) | Pass. Tested: no `$` price in the section. |
+
+**Validation against the form rules:**
+- **What passes:** the error message explains the fix, sits below the field, and is linked with `aria-describedby`;
+  `aria-invalid` is set.
+- **What fails:** validation runs on every keystroke, where ⟦S1442⟧ says to validate on blur.
+
+### Rules not met (recorded as remaining defects; the version is not changed, per the correction)
+1. **Validation timing:** the footprint validates on every keystroke, so typing "1" flashes the error before "1800" is
+   complete. ⟦S1442⟧ says to validate on blur. Planned fix: show the error on blur; keep the readout live.
+2. **Field width:** the footprint input is full width, though it holds at most 5 digits (⟦S1442⟧: width should hint at
+   input length).
