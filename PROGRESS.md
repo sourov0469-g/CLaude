@@ -298,6 +298,13 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
 - **WHOLE-SITE PASS DONE; final site gate `owl/GATE-SITE.md`.** `sitepass.mjs`: 42 page renders (6 pages × 1440/768/390
   × defaults and all-V2, plus reduced motion), 0 failures (overflow, one h1, broken images, deep block last, JS
   errors); no internal link points nowhere. The gate lists five honest remaining items.
+- **Muse correction applied (GATE-SITE, GATE-families):** GATE-SITE is now a scorecard gate: Lusion (flow) as the
+  governing reference with exactly what transfers and where it falls short, Lando named as the standard, and a critical
+  self-rating per category with evidence for and against (Design 7.5, Usability 8.0, Creativity 7.0, Content 8.5;
+  weighted 7.65, below the 7.84 section mean). GATE-families now cites its mechanisms' tags: five read before it was
+  built, five cited retrospectively and marked so; ratings, versions and facts unchanged. Two findings recorded, not
+  changed: home families V2 drops keyboard focus when Next disables itself (⟦S0070⟧, `famfocus.cjs`), and it has no
+  contextual link to the Our families page.
 - **Next:** none in the brief and addendum beyond the remaining items in GATE-SITE.md, which need the owner's call
   (homepage price/area rule fixes on judged sections; a back end for the message form; the Quincy pledge; a real-device
   check).

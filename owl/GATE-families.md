@@ -14,6 +14,38 @@
 - Captions use only Owl's own labels ("The Browns", "The Berglands", Noah Bergland as co-founder per the facts lock).
 - **Left out:** "15+ combined years" (not in the facts lock) and the Browns' agency (not relevant to the homeowner).
 
+## WEB-SKILLS evidence (added on Muse's correction; ratings, versions and facts unchanged)
+**Read in full before this section was built** (logged in SKILL-READ-LOG, Phases 1-3a):
+- ⟦S0659⟧ anti-ai-slop: no invented metrics or captions. "15+ combined years" is left out (not in the lock); captions
+  use only Owl's own labels ("The Browns", "The Berglands"); every line is quoted from Owl's About page.
+- ⟦S1364⟧ atmosphere-background: the B2 Rings ground is layered (two ring scales), its focal cluster sits toward the
+  right edge, it drifts slowly, and the text stays readable without it.
+- ⟦S1436⟧ animation-principles: the rings' drift is continuous (linear); V2's chapter step uses an ease-out smooth
+  scroll that is interruptible (a native scroll) and becomes an instant jump under reduced motion.
+- ⟦S1411⟧ information-architecture: the section answers "who are you?" in the homeowner's own terms and sits after
+  the services it vouches for. **Gap:** it has no contextual link on to the Our families page (built later); only the
+  global nav reaches it. Recorded, not changed.
+- ⟦S1454⟧ serial-position: in V1 the story comes first and the values last; the values are the item repeated at the
+  end of the section.
+
+**Read later and cited retrospectively** (the mechanism was built first; logged at the Storm, Nest and Families page
+reads; the citation is evidence, not a claim that the skill shaped the first build):
+- ⟦S1424⟧ law-of-continuity: V2's previous/next arrows point along the track's own direction, and the chapter numbers
+  (01-03) make the horizontal sequence explicit.
+- ⟦S1449⟧ millers-law: three chapters in V2, three values in both versions.
+- ⟦S1427⟧ law-of-similarity: the three values share one treatment (word, then Owl's one-liner), and V2's two family
+  photos share one frame and crop, so each set reads as one category.
+- ⟦S0070⟧ better-accessibility: the arrows are native `<button>`s with names ("Previous chapter", "Next chapter")
+  and `aria-controls`; the track is a labelled list in the tab order (`tabindex="0"`) and scrolls with the arrow keys;
+  a swipe always has the button alternative (2.5.7); the icons are `aria-hidden`.
+- ⟦S0400⟧ accessible-animation: the smooth chapter scroll (Tier 2) becomes `behavior: auto` under reduced motion.
+
+**Unmet rule found while adding these citations (recorded, not changed, as the section is judged):**
+- ⟦S0070⟧: "Native `disabled` on the focused button drops focus to `<body>`." In V2, pressing Next by keyboard until
+  the last chapter disables Next while it has focus, and focus falls to the page body (checked: `famfocus.cjs` reports
+  `BODY` as the active element). The fix is to use `aria-disabled="true"` and ignore the press, keeping focus on the
+  button. V2 is not the default.
+
 ## V1 · Birds of a feather roof together
 - **The heading** is Owl's own: "Birds of a feather roof together."
 - **Left:** both families together in a large photo.
