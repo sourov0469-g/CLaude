@@ -17,3 +17,5 @@
 .hb2-pick button[aria-pressed="true"]{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-page)}
 .hb2-svg{width:100%;height:auto;overflow:visible}
 @media (max-width:1023px){.hb2-grid{grid-template-columns:1fr}.hb2-svg{max-width:32rem}}
+/* accent audit (S0660, S1427): the three facts are one set, all in ink; the page's amber is left for the call to action */
+.hb1-facts li:first-child .hb1-num{color:var(--text-primary)}

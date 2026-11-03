@@ -27,6 +27,6 @@ await p.click('.ar2-clear'); ok('home area V2: clear empties and refocuses', awa
 await p.type('#ar2-q', 'Duluth'); ok('home area V2: no match echoes the query', /"Duluth"/.test(await p.evaluate(() => document.getElementById('ar2-out').textContent)));
 const n = await p.evaluate(() => [...document.querySelectorAll('img')].filter(i => !i.getAttribute('width')).length);
 ok('every image in the file now has width and height', n === 0, String(n));
-ok('superseded versions kept as in-file backups (7)', await p.evaluate(() => document.querySelectorAll('template.backup').length === 7));
+ok('superseded versions kept as in-file backups (9)', await p.evaluate(() => document.querySelectorAll('template.backup').length === 9));
 ok('no JS errors', !errs.length, errs.join('|'));
 console.log(R.join('\n')); await b.close(); })();

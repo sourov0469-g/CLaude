@@ -42,3 +42,7 @@ numerals settle at 10 and 50; no errors.
 1. **The snow load read as a second roof line** (a thin stroke hugging the roof). Redrawn as a closed layer with a soft
    top edge above the roof.
 2. **"up to" floated above the 50**, leaving a gap. Set on the baseline beside the numeral.
+
+## Measurement pass (after acceptance; scorecard left as judged)
+- **Accent audit (⟦S0660⟧, ⟦S1427⟧):** the first numeral (10) was amber-700, a third amber use beside the header
+  underline and the Call button. All three facts are now ink, one set (CSS only).

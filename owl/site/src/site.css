@@ -15,3 +15,23 @@ main:focus{outline:none}
 .vrow{display:grid;grid-template-columns:7rem auto auto;gap:var(--space-8);align-items:center}
 .vrow button{font:700 var(--step-m1)/1 var(--font-display);min-height:var(--space-32);padding:0 var(--space-12);border-radius:var(--radius-pill);border:1.5px solid var(--text-primary);background:var(--surface-page);color:var(--text-primary);cursor:pointer}
 .vrow button[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-page)}
+/* Metric-matched fallbacks (⟦S0280⟧ CLS): local Arial / Liberation Sans scaled to Owl's web fonts, measured in the
+   browser against the loaded fonts (Montserrat 700 109.53%, 800 111.69%; Lato 400 97.14%, 700 93.53% of Arial's width).
+   Ascent/descent use each font's own vertical metrics (Montserrat 96.8/25.1, Lato 98.7/21.3 of the em) divided by the
+   size-adjust, so line breaks and line boxes stay put when the web fonts swap in. */
+@font-face{font-family:"Montserrat Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:700;size-adjust:109.53%;ascent-override:88.38%;descent-override:22.92%;line-gap-override:0%}
+@font-face{font-family:"Montserrat Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:800;size-adjust:111.69%;ascent-override:86.67%;descent-override:22.47%;line-gap-override:0%}
+@font-face{font-family:"Lato Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans");font-weight:400;size-adjust:97.14%;ascent-override:101.61%;descent-override:21.93%;line-gap-override:0%}
+@font-face{font-family:"Lato Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:700;size-adjust:93.53%;ascent-override:105.53%;descent-override:22.77%;line-gap-override:0%}
+/* Digit-only fallback faces (declared last, so they win for 0-9): Owl's numbers are tabular (.t-num), and Montserrat's
+   tabular digits are 125.86% of Arial's, Lato's 104.29%, measured in the DOM with tabular-nums on. */
+@font-face{font-family:"Montserrat Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:700;unicode-range:U+0030-0039;size-adjust:125.86%;ascent-override:76.91%;descent-override:19.94%;line-gap-override:0%}
+@font-face{font-family:"Montserrat Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:800;unicode-range:U+0030-0039;size-adjust:125.86%;ascent-override:76.91%;descent-override:19.94%;line-gap-override:0%}
+@font-face{font-family:"Lato Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans");font-weight:400;unicode-range:U+0030-0039;size-adjust:104.29%;ascent-override:94.64%;descent-override:20.42%;line-gap-override:0%}
+@font-face{font-family:"Lato Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:700;unicode-range:U+0030-0039;size-adjust:104.29%;ascent-override:94.64%;descent-override:20.42%;line-gap-override:0%}
+/* tabular digits everywhere: Owl's numbers align (Longbow numerals), and the Montserrat digit fallback above matches them */
+.owl{font-variant-numeric:lining-nums tabular-nums}
+/* S0660 / S1435: on wide screens the header Call button is solid ink, so amber is left for the one primary action in the
+   content (the active-page underline is the header's single amber use). The phone call bar keeps amber: it is the only
+   action there. */
+@media (min-width:1024px){.owl-header .tel-btn{--b-bg:var(--surface-ink);--b-fg:var(--text-on-deep);--b-bd:var(--surface-ink)}}

@@ -35,3 +35,8 @@ small beside the H1.
 
 ## Defects found and fixed
 None in this section beyond the page checks. The page default was set by score after the first full-page review.
+
+## Measurement pass (after acceptance; scorecard left as judged)
+- **Accent audit (⟦S0660⟧):** V2's four chapter links were amber (`.link`), which made 6 amber uses on the opening screen.
+  They are navigation, so they are now ink with an amber underline only on hover, like every other chapter index (CSS
+  only).

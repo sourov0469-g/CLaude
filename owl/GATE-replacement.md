@@ -35,3 +35,8 @@ links.
 
 ## Defects found and fixed
 None found beyond the page-level checks.
+
+## Measurement pass (after acceptance; scorecard left as judged)
+- **axe, `scrollable-region-focusable`, serious (390px):** V1's sideways photo strip could not be reached by keyboard. It is
+  now in the tab order with a label ("Replacement steps; scroll sideways for more"), so the arrow keys scroll it
+  (⟦S0070⟧). Superseded markup kept as `replacement-v1-before-axe.html`.

@@ -92,3 +92,8 @@ assets instead:
 ## Remediation pass (after acceptance; the scorecard above is left as judged)
 - **⟦S0280⟧ layout shift:** the video card that V2's script rebuilds now gives its thumbnail width and
   height (720×405), like the cards in the markup. No markup changed, so no backup was needed.
+
+## Measurement pass (after acceptance; scorecard left as judged)
+- **axe (WCAG 2.2 A/AA), `aria-allowed-attr`, critical:** V2's selector buttons carried `role="listitem"`, so their
+  `aria-pressed` was invalid. They now sit in a labelled `role="group"` and keep their button role. Superseded markup
+  kept as `reviews-v2-before-axe.html`.

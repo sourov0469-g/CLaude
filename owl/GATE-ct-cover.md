@@ -30,3 +30,7 @@
 
 ## Site-wide change made here
 **Contact is now in the desktop nav** (it was only in the phone menu and the footer), per ⟦S1450⟧ navigation-patterns: every top-level page is reachable from the main nav.
+
+## Measurement pass (after acceptance; scorecard left as judged)
+- **axe, `color-contrast` 1.4.3, serious:** V2's small muted text on the amber Call card measured 2.55:1. It now uses full
+  ink (CSS only; markup unchanged).

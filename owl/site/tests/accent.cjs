@@ -1,0 +1,15 @@
+const { chromium } = require('playwright'); const { PNG } = (() => { try { return require('pngjs'); } catch (e) { return {}; } })();
+(async () => { const F = process.argv[2]; const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const rows = [];
+for (const [w, h] of [[1440, 900], [390, 844]]) { const p = await (await b.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' })).newPage(); p.on('console', m => { if (m.text().startsWith('HEAVY')) console.log(w + ' ' + m.text().slice(0, 400)); });
+  for (const pg of ['home', 'services', 'storm', 'nest', 'families', 'contact']) {
+    await p.goto('file://' + F + '#/' + pg, { waitUntil: 'load' }); await p.waitForTimeout(400);
+    const H = await p.evaluate(() => document.body.scrollHeight); const counts = []; let pix = [];
+    for (let y = 0; y + 200 < H; y += h) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(120);
+      counts.push(await p.evaluate(() => { const A = ['rgb(234, 162, 34)', 'rgb(144, 97, 14)']; const hit = []; const isA = c => A.some(a => c && c.startsWith(a.slice(0, -1)));
+        for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > innerHeight || e.closest('[hidden]') || (e.checkVisibility && !e.checkVisibility({ contentVisibilityAuto: true, opacityProperty: true, visibilityProperty: true }))) continue; const cs = getComputedStyle(e); if (cs.visibility === 'hidden' || +cs.opacity === 0) continue;
+          const txt = [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.trim());
+          if (isA(cs.backgroundColor) || (txt && isA(cs.color)) || isA(cs.borderTopColor) && parseFloat(cs.borderTopWidth) > 0 || isA(cs.fill) || isA(cs.stroke) || (/234, 162, 34|144, 97, 14/.test(cs.backgroundImage) && !/^0px/.test(cs.backgroundSize)) || /234, 162, 34|144, 97, 14/.test(cs.boxShadow)) hit.push(e); }
+        const top = hit.filter(e => !hit.some(o => o !== e && o.contains(e))); const ui = top.filter(e => !e.closest('svg') && (e.matches('a,button,input,[role=tab]') || [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()))); if (ui.length > 2) console.log('HEAVY ' + location.hash + ' y' + scrollY + ': ' + ui.map(e => e.tagName + '.' + e.className + ' "' + (e.textContent || '').trim().slice(0, 24) + '"').join(' | ')); return [ui.length, top.length - ui.length]; }));
+      if (PNG) { const buf = await p.screenshot(); const img = PNG.sync.read(buf); let n = 0; for (let i = 0; i < img.data.length; i += 4) { const r = img.data[i], g = img.data[i + 1], bl = img.data[i + 2]; if (r > 120 && r - bl > 90 && g > 70 && r > g + 30) n++; } pix.push(+(n / (img.width * img.height) * 100).toFixed(1)); } }
+    const U = counts.map(c => c[0]), G = counts.map(c => c[1]); rows.push(`${w} ${pg.padEnd(9)} UI uses/screen ${U.join(',')} (max ${Math.max(...U)}, over 2: ${U.filter(c => c > 2).length}/${U.length})  marks max ${Math.max(...G)}  amber px% ${pix.join(',')} (max ${Math.max(...pix)})`); } }
+console.log(rows.join('\n')); await b.close(); })();

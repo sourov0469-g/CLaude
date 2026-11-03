@@ -103,7 +103,7 @@ MOTION={
 }
 RADIUS={'none':0,'s':6,'m':10,'pill':999}
 SHADOW={'raised':'0 2px 5px 0 rgb(23 18 29 / 0.15)','lifted':'0 12px 28px -12px rgb(23 18 29 / 0.28)'}
-FONTS={'display':'"Montserrat", system-ui, sans-serif','body':'"Lato", system-ui, sans-serif'}
+FONTS={'display':'"Montserrat", "Montserrat Fallback", system-ui, sans-serif','body':'"Lato", "Lato Fallback", system-ui, sans-serif'}  # fallbacks: metric-matched local faces (site.css), so the web-font swap shifts nothing
 
 # ================= write files
 rows=[]

@@ -53,9 +53,53 @@ scores lower because repetition across pages (covers, bands) and the known unmet
 
 **Further WEB-SKILLS applied site-wide** (all logged): ⟦S1452⟧ peak-end (every page ends on the call, never on a
 form); ⟦S1424⟧ law-of-continuity (the lines and indexes above); ⟦S1444⟧ hicks-law (at most three primary ways to act
-in any block: call, text, email); ⟦S0280⟧ core-web-vitals: **not measured.** The build is one HTML file (913 KB at judging,
+in any block: call, text, email); ⟦S0280⟧ core-web-vitals: **not measured at judging** (measured in the pass below). The build is one HTML file (913 KB at judging,
 933 KB after the remediation pass, which added 7 backups) plus 18 image files. All 61 images now carry width and
 height (9 were missing at judging). Per the skill, no performance improvement is claimed without field data.
+
+## Measurement pass (after acceptance; the scorecard above is left as judged)
+The three items this gate listed as "not measured" are now measured, and what they found is fixed.
+
+**Automated accessibility audit:** axe-core 4.10.2, WCAG 2.0/2.1/2.2 A and AA rules, all 6 pages at 1440 and 390, with the
+defaults and with every section on V2 (24 runs). First run: 3 rules violated. **After fixes: 0.**
+- `aria-allowed-attr` (critical): home Reviews V2 buttons had `role="listitem"` with `aria-pressed` → a labelled group.
+- `scrollable-region-focusable` (serious): the Services replacement photo strip at 390px → in the tab order, labelled.
+- `color-contrast` (serious, 2.55:1): muted text on Contact V2's amber card → full ink.
+- Limit: axe checks what is rendered; open accordions, other Wise Check tabs and stepper steps were covered by the
+  keyboard tests instead.
+
+**Lab Web Vitals (⟦S0280⟧):** `vitals.cjs`, file:// with no network latency, phone 390px at 4× CPU slowdown and desktop 1440px.
+This is lab data, not field data; no field improvement is claimed.
+| | Before | After |
+|---|---|---|
+| LCP, phone ×4 CPU | 0.42-0.98 s | 0.78-0.97 s (all < 2.5 s) |
+| LCP, desktop | 0.21-0.24 s | 0.28-0.38 s |
+| CLS, phone | 0 on all pages | 0 on all pages |
+| CLS, desktop | Home 0.070, Storm 0.084, others ≤ 0.005 | Home 0.049, Storm 0.050, others 0 |
+
+Causes found and fixed:
+1. **Parse-time shift on Home (0.069):** Chromium painted the 930 KB single file before the hero had finished parsing. A
+   `<link rel="expect" href="#owl-parsed" blocking="render">` now holds the first paint until the whole file is parsed
+   and routed, so a deep link never flashes Home. This is why LCP rose by about 0.1-0.4 s, still well inside 2.5 s.
+2. **Web-font swap (Storm 0.084, Home 0.049):** metric-matched fallback faces ("Montserrat Fallback", "Lato Fallback"):
+   local Arial / Liberation Sans with `size-adjust` measured in the browser against the loaded fonts (letters 109.53 /
+   111.69 / 97.14 / 93.53 %; tabular digits 125.86 / 104.29 %), and digits made tabular site-wide. What remains (0.05 on
+   two pages) is 2-7 px per string, which only re-wraps a chip row; it is inside the 0.1 "good" line.
+
+**Accent uses per screen (⟦S0660⟧: at most 2 visible accent uses per screen; links and focus rings count):** `accent.cjs`
+counts, per viewport-sized screen, the interface elements painted amber (buttons, links, amber text, the active-page
+underline), separately from illustration marks, and the amber pixel share.
+| | Screens over 2 interface uses |
+|---|---|
+| Before | 32 of 100 screens (desktop inner pages: the header alone spent 2: active underline + amber Call button) |
+| After | 5 of 100 |
+
+Fixes: the header Call button is solid ink at ≥1024px (amber stays for the content's one primary; the phone call bar
+keeps amber, being the only action there); Nest cover V2's chapter links are ink; the Wise Check's selected tab is
+underlined in ink; Storm's guarantee numerals are all ink. **Still over 2:** three screens where two neighbouring
+sections' call buttons share the view (Services siding/gutters, Storm claim/Wise Check, Nest guarantee/call band at
+390px), and the cleanup progress dots (one indicator, counted as three). **Amber pixel share:** 0-5.2% per desktop
+screen, 2.4-10.4% per phone screen (the call bar is most of it): at or under ⟦S0660⟧'s 5-10% ceiling for the one accent.
 
 ## Whole-site checks (all pass)
 - `sitepass.mjs`: **42 page renders**, 0 failures: 6 pages × 1440/768/390 × defaults and all-V2, plus reduced motion
@@ -92,6 +136,7 @@ Still open:
    (flagged in GATE-of-community).
 3. **No real-device check:** Chromium emulation only (touch, 390/768 widths, reduced motion).
 4. **With every section on V2,** the Protect Your Nest wrap photo appears twice (cover and wrap); the defaults avoid it.
-5. **Not measured:** Core Web Vitals, accent uses per screen, and an automated accessibility audit.
+5. **Now measured** (see the measurement pass): axe 0 violations; lab CLS ≤ 0.05 and LCP < 1 s; 5 of 100 screens
+   still exceed two accent uses. Field data (real users) is still unmeasured.
 
 **Work method:** every step in this thread, by me; no sub-agents and no background tasks.

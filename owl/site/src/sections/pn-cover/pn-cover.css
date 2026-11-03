@@ -20,3 +20,6 @@
 .nc2-card{display:grid;gap:var(--space-24);align-content:center;justify-items:start;padding:var(--space-64) var(--space-48);border-left:1.5px solid var(--text-primary)}
 .nc2-list{margin:0;padding:0;list-style:none;display:grid;gap:var(--space-8);font:var(--type-subheading)}
 @media (max-width:1023px){.nc2-split{grid-template-columns:1fr}.nc2-photo{aspect-ratio:4/3}.nc2-card{border-left:0;border-top:1.5px solid var(--text-primary);padding:var(--space-48) var(--gutter)}}
+/* accent audit (S0660): the chapter links are navigation, so they are ink like every other chapter index; amber only on hover */
+.nc2-list .link{color:var(--text-primary);text-decoration-color:var(--line-control)}
+.nc2-list .link:hover{text-decoration-color:var(--accent-fill)}

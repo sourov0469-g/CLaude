@@ -60,8 +60,8 @@
   --callbar-fg: var(--text-on-deep);
   --callbar-action: var(--accent-fill);
   /* type */
-  --font-display: "Montserrat", system-ui, sans-serif;
-  --font-body: "Lato", system-ui, sans-serif;
+  --font-display: "Montserrat", "Montserrat Fallback", system-ui, sans-serif;
+  --font-body: "Lato", "Lato Fallback", system-ui, sans-serif;
   --step-m1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1.0000rem);
   --step-0: clamp(1.1250rem, 1.0739rem + 0.2273vw, 1.2500rem);
   --step-1: clamp(1.3500rem, 1.2631rem + 0.3864vw, 1.5625rem);

@@ -131,6 +131,9 @@ component tokens (`--button-primary-bg`).
 ### Type
 - **Families:** Montserrat 700/800 (display; stand-in for Owl's Special Gothic Expanded) and Lato 400/700 (body; stand-in
   for Texta).
+- **Fallbacks (measurement pass, ⟦S0280⟧):** "Montserrat Fallback" and "Lato Fallback" are local Arial / Liberation Sans faces
+  with `size-adjust` measured against the loaded fonts (letters and tabular digits separately), so the web-font swap moves
+  almost nothing. Digits are tabular site-wide.
 - **Scale (Utopia):** 360→1240px, base 18→20, ratio 1.2→1.25 (`type-scale.csv`). The roles are:
 
 | Role | Size | Weight / line-height / tracking |
@@ -192,7 +195,7 @@ A section in Phase 3 that needs something not listed here reports **NO-COVERAGE*
 
 | Component | Use when | Not when | States | Bindings |
 |---|---|---|---|---|
-| **Header** (+ menu panel) | Every page | n/a | Nav ≥1024px. Below that: phone plus a menu toggle that morphs ☰→✕ and opens the panel. Escape, link click and an outside click close it; focus moves into the panel and back. | surface-page at 92% with blur; line-hairline; logo ≥120px with clear space |
+| **Header** (+ menu panel) | Every page | n/a | Nav ≥1024px. Below that: phone plus a menu toggle that morphs ☰→✕ and opens the panel. Escape, link click and an outside click close it; focus moves into the panel and back.  From ≥1024px the Call button is solid ink, not amber (measurement pass, ⟦S0660⟧: the active-page underline is the header's one amber use, the content keeps the primary). | surface-page at 92% with blur; line-hairline; logo ≥120px with clear space |
 | **Button** primary / secondary / on-deep | One primary per view (Call); secondary for Text or a section action | Navigation links; more than 2 per group | rest, hover (−2px + shadow-raised), active (0.97), focus-visible ring, disabled (45%) | button-* tokens; pill; min-height 48 |
 | **Link** | Inline prose actions | Primary CTAs | hover underline, focus ring | link-fg (amber-700) / link-on-deep-fg |
 | **Call bar** (mobile) | Every page below 768px | Desktop | always on | callbar-*; safe-area inset |

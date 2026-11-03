@@ -44,3 +44,7 @@ spot selects its tab; one tab in the tab order; spots out of tab order and hidde
 2. **Spots covered what they point at** (the drip and the camera). Moved beside them.
 3. **Tab could not reach the panel text** (found at the ⟦S0070⟧ audit: in the APG tabs pattern, Tab exits to the
    panel). Each panel holds no focusable content, so each now takes `tabindex="0"`.
+
+## Measurement pass (after acceptance; scorecard left as judged)
+- **Accent audit (⟦S0660⟧):** the selected tab's amber underline repeated the drawing's amber spot. The tab underline is
+  now ink; the spot alone carries the selection colour (CSS only).

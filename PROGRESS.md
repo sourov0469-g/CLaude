@@ -313,8 +313,20 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
   (⟦S0280⟧). Judged scorecards left unchanged; each affected gate (families, price, area, services, reviews) and
   GATE-SITE record the fixes. Tests: `remedtest.cjs` 17/17; `pricetest` 9/9, `areatest` 7/7, `famtest` 6/6 (two
   updated to the new rules); `sitepass` 42 renders, 0 failures; token lint clean. No sub-agents, no background tasks.
+- **MEASUREMENT PASS** (the three "not measured" items in GATE-SITE, measured and fixed; recorded in GATE-SITE and the
+  affected gates; scorecards left as judged):
+  - **axe-core 4.10.2, WCAG 2.2 A/AA**, 6 pages × 1440/390 × defaults and all-V2: 3 rules violated → **0** (reviews V2
+    group role, replacement strip in the tab order, Contact V2 card contrast). 2 more in-file backups (9 in all).
+  - **Lab Web Vitals** (`vitals.cjs`, lab only): CLS desktop Home 0.070 → 0.049, Storm 0.084 → 0.050, all others 0;
+    LCP < 1 s everywhere (phone, 4× CPU). Fixes: render-blocking `rel=expect` until the file is parsed and routed
+    (no parse-time shift, no Home flash on deep links); metric-matched local fallback fonts (letters and tabular digits
+    measured separately); tabular digits site-wide (token generator and BRAND.md updated).
+  - **Accent uses per screen (⟦S0660⟧):** screens over two interface uses 32/100 → 5/100. The header Call button is ink at
+    ≥1024px; Nest cover V2 links, Wise Check selected tab and Storm numerals are ink.
+  - Re-run: every test passes (routing 10/10, each page 12/12, contact 26/26, remediation 17/17 and the rest); sitepass
+    42 renders, 0 failures; token lint clean. No sub-agents, no background tasks.
 - **Next:** none left that I can do alone. The open items in GATE-SITE.md need the owner: a back end for the message
-  form, a ruling on the Quincy House pledge, and a real-device check.
+  form, a ruling on the Quincy House pledge, a real-device check, and field (real-user) Web Vitals.
 - **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.

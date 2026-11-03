@@ -21,3 +21,6 @@
 .kc2-ways li:first-child a{background:var(--accent-fill);border-color:var(--accent-fill)}
 .kc2-mail{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:767px){.kc2-ways{grid-template-columns:1fr}}
+
+/* axe audit (1.4.3): small text on the amber Call card uses full ink, not the muted tone (2.55:1 failed) */
+.kc2-ways li:first-child a .muted{color:var(--text-primary)}

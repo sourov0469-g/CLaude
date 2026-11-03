@@ -8,6 +8,7 @@
 <link rel="icon" href="../assets/source/owl-roofing-favicon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="expect" href="#owl-parsed" blocking="render"><!-- S0280 CLS: first paint waits until the whole one-file site is parsed and routed (browsers without support ignore it) -->
 <style>
 {{TOKENS}}
 {{COMPONENTS}}
@@ -40,5 +41,6 @@
 <script>
 {{SECTION_JS}}
 </script>
+<span id="owl-parsed" hidden></span>
 </body>
 </html>
