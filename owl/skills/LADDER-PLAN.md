@@ -34,3 +34,16 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   or focus, can be dragged, and has arrow keys; under reduced motion it is a still, scrollable strip. Skills:
   ⟦S0450⟧ seamless loop (duplicated set, −50 %), ⟦S1039⟧ captions, ⟦S1107⟧ keyboard, ⟦S1352⟧ frame numbers,
   ⟦S0451⟧ title.
+
+## L3 · Video 4 + 5 (Video stood at 3: V1 player, V2 Contact Sheet, V3 Roofline Theatre)
+- **Video 4 · "Look Closer"** — reference **Immersive Garden** (surface that reacts where the cursor moves). Owl's
+  crew clip plays full width, drawn in grey and slightly soft. A lens that follows the cursor (eased) shows the true
+  colour and sharpness beneath; on touch it wanders by itself and a tap places it; the arrow keys move it. A caption
+  under the lens names the moment on screen, from the five moments already checked frame by frame. Skills: ⟦S1363⟧ one
+  canvas, one rAF, paused unseen; ⟦S1338⟧ reveal contract (real media beneath, off under reduced motion); ⟦S1107⟧
+  keyboard; ⟦S1388⟧ keys.
+- **Video 5 · "Assemble the Shot"** — reference **Graza** (custom-animation quality bar). The clip is cut into a 4×3
+  grid of tiles, each drawing its own crop of the live frame. When first seen, the tiles fly in from a scattered 3D
+  spread (rotate, depth, offset) and settle into the whole shot on staggered springs. Hovering a tile lifts it slightly,
+  and "Scatter" replays it. The five moments are chips that seek the film. Skills: ⟦S0205⟧ small 3D on tiles, ⟦S0340⟧
+  spring settle, ⟦S0187⟧ staggered choreography, ⟦S1388⟧ keys; the full film opens YouTube ehKLv5DF2TQ.

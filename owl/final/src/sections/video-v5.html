@@ -1,0 +1,66 @@
+<section class="sec video5" id="crew-video-5" aria-labelledby="vd5-h">
+<style>
+.video5{overflow:hidden}
+.video5 .g{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:clamp(22px,4vw,56px);align-items:center}
+.video5 .lede{margin:14px 0 20px;max-width:30ch}
+.video5 .moms{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.video5 .moms button{display:grid;grid-template-columns:52px 1fr;align-items:center;gap:10px;min-height:48px;padding:6px 12px;border-radius:14px;text-align:left;font-weight:700;transition:background .2s,transform .25s cubic-bezier(.3,1.6,.5,1)}
+.video5 .moms button time{font-size:14px;color:#8E5A12;font-variant-numeric:tabular-nums}
+.video5 .moms button:hover{background:rgba(234,162,33,.12)}
+.video5 .moms button[aria-current="true"]{background:var(--paper);transform:translateX(6px);box-shadow:0 10px 20px -14px rgba(23,17,29,.5)}
+.video5 .keys{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.video5 .stage{position:relative;perspective:1600px}
+.video5 .grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:4px;aspect-ratio:16/9;transform-style:preserve-3d}
+.video5 .tile{position:relative;border-radius:6px;overflow:hidden;background:#2a2131;transform:translate3d(var(--x,0),var(--y,0),var(--z,0)) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform 1.1s cubic-bezier(.2,1.25,.3,1),box-shadow .3s;transition-delay:var(--d,0s);box-shadow:0 10px 20px -12px rgba(23,17,29,.5)}
+.video5 .tile canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+.video5 .grid.set .tile:hover{transform:translateZ(26px);box-shadow:0 24px 30px -14px rgba(23,17,29,.6);transition-delay:0s;transition-duration:.35s}
+.video5 video{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+@media (max-width:900px){.video5 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.video5 .tile{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Owl's crew on film</span>
+   <h2 class="h2" id="vd5-h" style="margin-top:12px">Assemble the Shot</h2>
+   <p class="lede rv">Twelve pieces of one film. Pick a moment to jump there.</p>
+   <ol class="moms" aria-label="Moments in the film"></ol>
+   <div class="keys"><button class="btn btn-line scatter" type="button" data-mag>Scatter It Again</button><button class="btn btn-amber full" type="button" data-mag data-owl="hoot">Watch the Full Film</button></div>
+  </div>
+  <div class="stage" data-owl="say:Twelve pieces">
+   <video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+   <div class="grid" aria-hidden="true"></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('video','5',function(root){
+  var M = [[0, 'Rafters'], [3.1, 'Materials'], [6.4, 'The crew'], [9.2, 'Finished roof'], [13, 'Decking']];
+  var grid = root.querySelector('.grid'), vid = root.querySelector('video'), chips = root.querySelector('.moms'), h2 = root.querySelector('h2'), C = 4, R = 3, tiles = [], vis = false, cur = -1;
+  OWL.split(h2);
+  var poster = new Image(); poster.src = vid.getAttribute('poster');
+  for (var i = 0; i < C*R; i++){ var d = document.createElement('div'); d.className = 'tile'; var c = document.createElement('canvas'); d.appendChild(c); grid.appendChild(d); tiles.push({el: d, cv: c, ctx: c.getContext('2d'), i: i}); }
+  M.forEach(function(m, j){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<time>0:' + ('0' + Math.floor(m[0])).slice(-2) + '</time>' + m[1];
+    b.addEventListener('click', function(){ vid.currentTime = m[0]; OWL.play(vid); mark(j); }); li.appendChild(b); chips.appendChild(li); });
+  function mark(j){ if (j === cur) return; cur = j; [].forEach.call(chips.querySelectorAll('button'), function(b, k){ b.setAttribute('aria-current', k === j); }); }
+  function size(){ tiles.forEach(function(t){ var b = t.el.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1); t.cv.width = Math.max(1, b.width*dpr); t.cv.height = Math.max(1, b.height*dpr); }); }
+  function src(){ return vid.readyState >= 2 ? vid : (poster.complete && poster.naturalWidth ? poster : null); }
+  function paint(){ var s = src(); if (!s) return; var sw = s.videoWidth || s.naturalWidth, sh = s.videoHeight || s.naturalHeight;
+    tiles.forEach(function(t){ var cx = t.i % C, cy = Math.floor(t.i/C); t.ctx.drawImage(s, cx*sw/C, cy*sh/R, sw/C, sh/R, 0, 0, t.cv.width, t.cv.height); }); }
+  function scatter(){ grid.classList.remove('set'); tiles.forEach(function(t){ var a = Math.random(); t.el.style.transitionDelay = '0s';
+      t.el.style.setProperty('--x', ((Math.random() - .5)*160).toFixed(0) + '%'); t.el.style.setProperty('--y', ((Math.random() - .5)*140).toFixed(0) + '%'); t.el.style.setProperty('--z', (-200 - a*400).toFixed(0) + 'px');
+      t.el.style.setProperty('--rx', ((Math.random() - .5)*120).toFixed(0) + 'deg'); t.el.style.setProperty('--ry', ((Math.random() - .5)*140).toFixed(0) + 'deg'); }); }
+  function assemble(){ tiles.forEach(function(t){ var cx = t.i % C, cy = Math.floor(t.i/C); t.el.style.transitionDelay = ((cx + cy)*.07).toFixed(2) + 's'; ['--x','--y','--z','--rx','--ry'].forEach(function(p){ t.el.style.setProperty(p, '0'); }); });
+    setTimeout(function(){ grid.classList.add('set'); }, 1600); }
+  root.querySelector('.scatter').addEventListener('click', function(){ if (OWL.reduce) return; scatter(); setTimeout(assemble, 80); });
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  function frame(){ if (vis){ paint(); var t = vid.currentTime || 0, j = 0; M.forEach(function(m, k){ if (t >= m[0]) j = k; }); mark(j); } requestAnimationFrame(frame); }
+  size(); addEventListener('resize', function(){ size(); paint(); }); poster.onload = paint; mark(0);
+  if (OWL.reduce){ vid.pause(); grid.classList.add('set'); vis = true; paint(); OWL.reveal(h2); return; }
+  scatter(); var done = false;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis && !done){ done = true; OWL.reveal(h2); requestAnimationFrame(function(){ requestAnimationFrame(assemble); }); } }, {threshold:.3}).observe(grid);
+  else { vis = true; assemble(); }
+  requestAnimationFrame(frame);
+});
+</script>
+</section>

@@ -104,3 +104,41 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Hero 9's reseal glint fired on almost every tab; it now needs a strong lift and decays faster.
 - Hero 10's frame numbers sat beside the next frame's caption; they now lead their own caption.
 - `build.py` sorted versions as text (v10 before v2); it now sorts by number.
+
+---
+
+## L3 · Video 4 + 5 · checks 37/37 · evidence `gates/ladder/L03-video-4-5/` · Video now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Video 4 · Look Closer** | Immersive Garden (surface reacting where the cursor moves) | Owl's crew clip plays full width, painted grey and slightly soft on a canvas. A lens with an amber ring follows the cursor (eased) and shows the true colour beneath. It wanders by itself when untouched, a tap places it, and arrow keys move it. A tag under the lens and a caption under the film name the moment on screen. A 3D play key, and "Watch the Full Film" opens YouTube. | 8.4 | 8.0 | 8.4 | 8.2 | **8.26** |
+| **Video 5 · Assemble the Shot** | Graza (custom-animation bar) | The clip is cut into a 4×3 grid of tiles, each drawing its own crop of the live frame. When first seen, the tiles fly in from a scattered 3D spread and settle on staggered springs, eave-corner first. Hovering a tile lifts it; "Scatter It Again" replays it. The five frame-checked moments are a list that seeks the film and marks the current one. | 8.2 | 8.0 | 8.6 | 8.0 | **8.20** |
+
+**Truth:**
+- Both play Owl's own clip.
+- The moments are the five checked frame by frame in Round 2 (rafters and decking, GAF bundle carried up, crew member with a shingle, finished roof walked, OSB carried in).
+- The full film is YouTube ehKLv5DF2TQ.
+
+**Checks run:** the generic gate, plus:
+- Video 4: the grey film is painted; it is the crew clip; arrow keys move the lens; the caption is a frame-checked moment; the play key pauses and relabels; the full film opens.
+- Video 5: twelve tiles assembled; tiles 1, 6 and 12 draw film; a moment chip seeks to 9–13 s and marks itself; Scatter breaks the grid and it reassembles.
+
+**Ledger:**
+- **Video 4:**
+  - canvas surface: ⟦S1363⟧;
+  - reveal contract: ⟦S1338⟧ (real media beneath, static under reduced motion);
+  - keyboard lens: ⟦S1107⟧;
+  - play key: ⟦S1388⟧;
+  - modal: ⟦S1046⟧;
+  - title: ⟦S0451⟧.
+- **Video 5:**
+  - 3D tiles: ⟦S0205⟧;
+  - spring settle: ⟦S0340⟧;
+  - staggered choreography: ⟦S0187⟧;
+  - moments list: ⟦S1107⟧ ⟦S0462⟧;
+  - keys: ⟦S1388⟧;
+  - title: ⟦S0451⟧.
+
+**Defects fixed (Video 5):**
+- The moment list inherited the site's chip-button style.
+- The grid rows were uneven: the canvases are now absolutely placed.
+- On phones the tiles came before the heading; the heading now comes first.
