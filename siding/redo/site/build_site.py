@@ -8,15 +8,18 @@ sys.path.insert(0, HERE)
 from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, SUB, CTAS, PP)
 
 # the live winner of every slot; the rest become backups
-LIVE = {'hero': '1', 'services': 'a', 'vis': 'b'}
+LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'vis']
+MODS = ['scenes', 'services', 'vis', 'windows', 'reviews']
+REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
 
 
 def prerender():
     js = '\n'.join(SEC(m + '.js') for m in MODS)
-    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});' + js +
-            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),va:Vis.A(),vb:Vis.B()}))')
+    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';' + js +
+            # fact lock: every quote must be a verbatim excerpt of its review
+            ';for(const p of Rev.PICK){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
+            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),va:Vis.A(),vb:Vis.B(),wa:Win.A(),wb:Win.B(),ra:Rev.A(),rb:Rev.B()}))')
     return json.loads(subprocess.run(['node', '-e', prog], capture_output=True, text=True, check=True).stdout)
 
 
@@ -70,7 +73,7 @@ const PLAY=%PLAY%,PAUSE=%PAUSE%;
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Vis.wire(document);
+Scenes.wire(document);Services.wire(document);Vis.wire(document);Win.wire(document);Rev.wire(document);
 })();'''
 
 
@@ -81,14 +84,15 @@ def build():
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
-    main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb']}) + slot('vis', {'a': pre['va'], 'b': pre['vb']}))
+    main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb']}) + slot('vis', {'a': pre['va'], 'b': pre['vb']}) +
+            slot('windows', {'a': pre['wa'], 'b': pre['wb']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb']}))
     boot = BOOT.replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
     js = src('photo-hero.js') + ''.join(SEC(m + '.js') for m in MODS)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER}<main>{main}</main>{MBAR}{film}
-<script>{src('field.js')}</script>{HEAD_JS}<script>window.__PHOTOS={json.dumps(photos())};{js}{boot}</script></body></html>'''
+<script>{src('field.js')}</script>{HEAD_JS}<script>window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':

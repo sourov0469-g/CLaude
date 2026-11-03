@@ -30,6 +30,7 @@ On their points, the later ones win.
 | 11-03 | Hero round 2: five versions | Built and audited (steel) |
 | 11-03 | **Colour change: deep green #0E3B2C + lime #B5DB6E** (steel retired); V2 rebuilt on the finished after photo; film approved | Recoloured five re-audited; `GATE-HERO-2.md` updated. **Accepted by Muse** (V1 live) |
 | 11-03 | **Round 2: services + visualiser**, two versions each, in the one site file `site/out/site.html` | Services A (pinned horizontal sequence) and Visualiser B (snap-together wall) live, 8.04 / 8.06 PASS; B and A kept as in-file backups. `GATE-ROUND-2.md` |
+| 11-03 | **Round 3: windows + reviews** (Andersen construction researched first) | Windows A (one single-hung, morning to midnight) 8.28 and Reviews B (rating as hanging tags) 8.20 live; Windows B (bay, peelable wall) and Reviews A (4.9 laid in courses) kept as backups. `GATE-ROUND-3.md` |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -45,7 +46,9 @@ On their points, the later ones win.
 | `src/sec/scenes.*` | Trade scenes: flipping sample boards, casement + double-hung, shingle wave |
 | `src/sec/services.*` | Services A (pinned horizontal) and B (word switcher) |
 | `src/sec/vis.*` | Visualiser A (swatch fan) and B (snap-together wall, five steps) |
+| `src/sec/windows.*` | Windows A (100 Series single-hung, day slider, real parts) and B (400 Series bay, CSS 3D, peelable wall layers) |
+| `src/sec/reviews.*` | Reviews A (4.9 in lap courses + quote reader) and B (hanging tags, breeze physics, verbatim dialog); quotes checked verbatim at build |
 
 ## Next
 
-Round 3: **windows** (day/night window + bay; research real Andersen construction first) and **proof/reviews** (4.9 reveal + hanging tags). Two versions each, inside `out/site.html`. Then process, service area, CTA + footer, nav polish (cursor companion), then the other pages.
+Round 4: **process** (full-view stacked chapters, not five cards; the game idea as a horizontal-scroll interactivity sequence) and **service area** ("On your street": pinned photo cards, rippling thread, board-end signs; no drawn map; the 886 wording verbatim). Then CTA + footer, nav polish (cursor companion), then the other pages.

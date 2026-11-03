@@ -6,7 +6,7 @@ window.Services = (function () {
     { id: 'siding', name: 'Siding', scene: () => Scenes.siding(), count: '431', countL: 'documented siding projects',
       lead: 'James Hardie fiber cement on every priced job, replaced by the full wall or the whole house. No patch repairs.',
       figs: [['$10k–$15k', 'median band, 415 priced jobs'], ['1–2 weeks', 'on site, including paint'], ['30 years', 'James Hardie non-prorated warranty']] },
-    { id: 'windows', name: 'Windows', scene: () => Scenes.windows(), count: '388', countL: 'documented window projects',
+    { id: 'svc-windows', name: 'Windows', scene: () => Scenes.windows(), count: '388', countL: 'documented window projects',
       lead: 'NT Windows, Simonton and Andersen fitted on 330 of 376 priced jobs. Most window-only jobs take two days on site.',
       figs: [['$10k–$15k', 'median band, 376 priced jobs'], ['2 days', 'on site for most window-only jobs'], ['238', 'jobs with NT Windows, made in Texas']] },
     { id: 'roofing', name: 'Roofing', scene: () => Scenes.roofing(), count: '241', countL: 'shingle and metal roofs documented',
