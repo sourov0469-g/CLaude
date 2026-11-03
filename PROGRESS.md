@@ -13,7 +13,11 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
   the slab lifts out of the stack) 7.92 · Explore V2 "Look Closer" (lens shows the layer below on a real Owl roof) 7.52 ·
   Wise V1 dial + glass cross-section + checklist (needle and lit part per tick, PROTECTED end state) 7.92 · Wise V2 "Owl's
   Eye" (iris follows the pointer) 7.52. Axe 0; interaction tests clean. Recommended: Explore V1, Wise V1.
-- **Next:** Round 3: Wrap / Protect Your Nest ("Same Storm. Different Ending.") + Services (split-flap departures board).
+- **ROUND 3 DONE (gate `owl/final/GATE-R3.md`, shots `owl/final/gates/r3/`):** Wrap V1 "Same Storm. Different Ending."
+  (one storm slider, drops spark off the shield; porch waterfall removed) 8.08 · Wrap V2 "Every Layer, Guarded" (labels draw to
+  the right layers; ventilation mapping fixed) 7.64 · Services V1 split-flap board (flaps settle, crew film in the window)
+  8.04 · Services V2 clean index (open rows, hover photo) 7.70. Axe 0; interaction tests clean. Recommended: Wrap V1, Services V1.
+- **Next:** Round 4: Reviews (dial "5.0 / 90+ reviews") + Service area (Route Ribbon, abstract).
 
 ---
 

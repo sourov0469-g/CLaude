@@ -1,0 +1,78 @@
+<section class="sec wrap2" id="protect-2" aria-labelledby="pn2-h">
+<style>
+.wrap2{padding-block:0;overflow:hidden}
+.wrap2 .g{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);min-height:min(820px,92vh)}
+.wrap2 .txt{position:relative;z-index:3;align-self:center;padding:clamp(48px,7vw,96px) 0 clamp(48px,7vw,96px) max(var(--pad),calc((100vw - 1320px)/2))}
+.wrap2 .kick{margin-bottom:14px}
+.wrap2 .labels{list-style:none;display:grid;gap:8px;margin:28px 0 30px;max-width:340px}
+.wrap2 .labels button{display:flex;align-items:center;gap:14px;width:100%;min-height:52px;padding:0 6px;font-size:clamp(19px,1.6vw,23px);font-weight:500;text-align:left;border-radius:12px;transition:background .2s,font-weight .2s}
+.wrap2 .labels button::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--amber);flex:none;box-shadow:0 0 0 0 rgba(234,162,33,.4);transition:box-shadow .3s}
+.wrap2 .labels button[aria-pressed="true"]{font-weight:700}
+.wrap2 .labels button[aria-pressed="true"]::before{box-shadow:0 0 0 7px rgba(234,162,33,.28)}
+.wrap2 .labels button:hover{background:rgba(234,162,33,.1)}
+.wrap2 .note{max-width:36ch;min-height:52px;margin:-8px 0 26px;font-size:17px;color:var(--ink-70)}
+.wrap2 .war{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.wrap2 .war span{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:12px;background:var(--paper);font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(23,17,29,.06)}
+.wrap2 .war svg{width:18px;height:18px;color:var(--amber)}
+.wrap2 .pic{position:relative;clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);background:#c9b08a}
+.wrap2 .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 50%}
+.wrap2 svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
+.wrap2 svg.lines path{fill:none;stroke:#EAA221;stroke-width:1.4;opacity:.16;transition:opacity .3s,stroke-width .3s}
+.wrap2 svg.lines path.on{opacity:1;stroke-width:2.6;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:w2draw .7s var(--ease) forwards}
+@keyframes w2draw{to{stroke-dashoffset:0}}
+.wrap2 svg.lines circle{fill:#EAA221;opacity:.35}
+.wrap2 svg.lines circle.on{opacity:1;animation:w2pulse 1.4s ease-out infinite}
+@keyframes w2pulse{0%{r:6}70%{r:14;opacity:.15}100%{r:6;opacity:1}}
+.wrap2 .air{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity .4s;pointer-events:none}
+.wrap2 .air.on{opacity:1}
+.wrap2 .air path{fill:none;stroke:#FFF3D6;stroke-width:3;stroke-linecap:round;stroke-dasharray:14 16;animation:w2air 1.6s linear infinite;filter:drop-shadow(0 0 4px rgba(234,162,33,.9))}
+@keyframes w2air{to{stroke-dashoffset:-60}}
+@media (max-width:900px){.wrap2 .g{grid-template-columns:1fr;min-height:0}.wrap2 .pic{order:-1;aspect-ratio:858/900;clip-path:polygon(0 0,100% 0,100% 88%,0 100%)}.wrap2 .txt{padding:28px var(--pad) 56px}.wrap2 svg.lines{display:none}}
+</style>
+<div class="g">
+ <div class="txt">
+  <span class="kick">Protect Your Nest System</span>
+  <h2 class="h2 rv" id="pn2-h">Every Layer, Guarded</h2>
+  <ul class="labels" aria-label="Layers of a protected roof">
+   <li><button type="button" aria-pressed="true" data-i="0" data-owl="peek">Shingle shield</button></li>
+   <li><button type="button" aria-pressed="false" data-i="1" data-owl="peek">Ice &amp; water barrier</button></li>
+   <li><button type="button" aria-pressed="false" data-i="2" data-owl="peek">Sealed decking</button></li>
+   <li><button type="button" aria-pressed="false" data-i="3" data-owl="peek">Ventilation</button></li>
+  </ul>
+  <p class="note" aria-live="polite"></p>
+  <a class="btn btn-amber" href="tel:+16519776027" data-mag data-owl="hoot">Call (651) 977-6027</a>
+  <div class="war"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/></svg>10-year workmanship warranty</span><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/></svg>Up-to-50-year manufacturer warranties</span></div>
+ </div>
+ <div class="pic" data-owl="say:Every layer">
+  <img src="{{A:layers-guarded.webp}}" alt="A roof cut open: shingles, a black ice and water barrier, wood decking, and the ventilated attic below" width="858" height="1280">
+  <svg class="air" viewBox="0 0 858 1280" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M300 1180 C420 1080 520 1040 600 960 S760 820 830 760"/><path d="M420 1230 C520 1140 640 1100 700 1000 S800 880 858 820"/><path d="M180 1240 C320 1150 420 1110 520 1030"/></svg>
+ </div>
+ <svg class="lines" aria-hidden="true"></svg>
+</div>
+<script>
+OWL.reg('wrap','2',function(root){
+  var T = [[358,300,'Shingles are the first shield against rain, snow and sun.'],[198,580,'A self-sealing membrane under the shingles, where ice dams and driving rain try to get in.'],[538,660,'The wood deck everything is nailed to, kept sound and tight.'],[558,1000,'Air moves through the attic so heat and moisture can escape.']];
+  var g = root.querySelector('.g'), pic = root.querySelector('.pic'), img = pic.querySelector('img'), svg = root.querySelector('svg.lines'), btns = root.querySelectorAll('.labels button'), note = root.querySelector('.note'), air = root.querySelector('.air');
+  var NS = 'http://www.w3.org/2000/svg', cur = 0, timer;
+  function target(i){ /* image is object-fit:cover inside .pic: map image coords to page */
+    var r = pic.getBoundingClientRect(), gr = g.getBoundingClientRect(), s = Math.max(r.width/858, r.height/1280), w = 858*s, h = 1280*s;
+    var ox = (r.width - w)*.3, oy = (r.height - h)*.5; return [r.left - gr.left + ox + T[i][0]*s, r.top - gr.top + oy + T[i][1]*s]; }
+  function draw(){
+    if (getComputedStyle(svg).display === 'none') return;
+    var gr = g.getBoundingClientRect(); svg.setAttribute('viewBox', '0 0 ' + gr.width + ' ' + gr.height); svg.innerHTML = '';
+    btns.forEach(function(b, i){
+      var br = b.getBoundingClientRect(), x0 = br.left - gr.left + b.scrollWidth*0 + measure(b), y0 = br.top - gr.top + br.height/2, t = target(i);
+      var mx = x0 + 40, d = 'M' + x0 + ' ' + y0 + ' L' + mx + ' ' + y0 + ' L' + t[0] + ' ' + t[1];
+      var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); if (i === cur) p.setAttribute('class', 'on'); svg.appendChild(p);
+      var c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', t[0]); c.setAttribute('cy', t[1]); c.setAttribute('r', 6); if (i === cur) c.setAttribute('class', 'on'); svg.appendChild(c);
+      if (i === cur){ var L = p.getTotalLength(); p.style.setProperty('--len', L); }
+    });
+  }
+  function measure(b){ var r = document.createRange(); r.selectNodeContents(b); var rr = r.getBoundingClientRect(), br = b.getBoundingClientRect(); return rr.right - br.left + 14; }
+  function pick(i, user){ cur = i; btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); }); note.textContent = T[i][2]; air.classList.toggle('on', i === 3); draw(); if (user) clearInterval(timer); }
+  btns.forEach(function(b, i){ b.addEventListener('click', function(){ pick(i, true); }); b.addEventListener('mouseenter', function(){ if (OWL.fine) pick(i, true); }); });
+  addEventListener('resize', draw); if (img.complete) pick(0); else img.addEventListener('load', function(){ pick(0); });
+  if (!OWL.reduce && 'IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); var k = 0; timer = setInterval(function(){ k = (k + 1) % 4; pick(k); }, 2600); } }, {threshold:.4}); io.observe(g); }
+});
+</script>
+</section>

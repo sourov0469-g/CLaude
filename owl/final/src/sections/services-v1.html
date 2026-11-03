@@ -1,0 +1,73 @@
+<section class="sec svc1" id="services" aria-labelledby="sv1-h">
+<style>
+.svc1{text-align:center}
+.svc1 .lede{margin:12px auto 0;max-width:44ch}
+.svc1 .board{position:relative;margin:clamp(26px,4vw,40px) auto 0;max-width:900px;padding:54px 30px 26px;border-radius:30px;background:#1e1724;box-shadow:inset 0 2px 0 rgba(255,255,255,.08),0 50px 80px -40px rgba(23,17,29,.7),0 0 0 8px var(--paper)}
+.svc1 .board::before{content:"";position:absolute;left:0;right:0;top:0;height:40px;border-radius:30px 30px 0 0;background:radial-gradient(circle at 24px 0,#2c2433 22px,transparent 23px) 0 0/48px 40px repeat-x,#17111D}
+.svc1 .board .mark{position:absolute;right:26px;top:9px;height:24px;opacity:.9}
+.svc1 .rows{display:grid;gap:10px}
+.svc1 .row{position:relative;display:flex;justify-content:center;gap:4px;padding:8px 10px;border-radius:10px;background:linear-gradient(180deg,#2a2131,#221a29);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);width:100%;transition:background .25s}
+.svc1 .row::before,.svc1 .row::after{content:"";position:absolute;top:50%;width:8px;height:18px;margin-top:-9px;border-radius:3px;background:linear-gradient(90deg,#C7871A,#F3BE5A,#C7871A)}
+.svc1 .row::before{left:6px}.svc1 .row::after{right:6px}
+.svc1 .row:hover{background:linear-gradient(180deg,#33293b,#2a2131)}
+.svc1 .row[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--amber),0 0 24px -4px rgba(234,162,33,.6)}
+.svc1 .t{position:relative;width:clamp(15px,3.6vw,38px);height:clamp(24px,5vw,52px);border-radius:5px;background:linear-gradient(180deg,#F3B84A 0 49%,#D8951C 49% 51%,#EAA221 51%);color:var(--ink);font:800 clamp(13px,2.9vw,30px)/clamp(24px,5vw,52px) Inter,sans-serif;text-align:center;box-shadow:0 3px 0 #A86E12,inset 0 1px 0 rgba(255,255,255,.4);perspective:200px}
+.svc1 .t.sp{background:transparent;box-shadow:none}
+.svc1 .t.f{animation:sv1flip .09s linear}
+@keyframes sv1flip{0%{transform:rotateX(0)}50%{transform:rotateX(-70deg);filter:brightness(.8)}100%{transform:rotateX(0)}}
+.svc1 .win{position:relative;margin-top:16px;height:clamp(80px,12vw,120px);border-radius:14px;overflow:hidden;background:#2a2131;box-shadow:inset 0 0 0 3px #3a3142}
+.svc1 .win video{width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:.95}
+.svc1 .win span{position:absolute;left:14px;bottom:10px;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);background:rgba(23,17,29,.7);padding:5px 9px;border-radius:999px}
+.svc1 .det{display:grid;grid-template-columns:200px 1fr auto;align-items:center;gap:22px;margin:22px auto 0;max-width:900px;padding:16px;border-radius:22px;background:var(--paper);text-align:left;box-shadow:0 4px 0 rgba(23,17,29,.06),0 20px 34px -24px rgba(23,17,29,.5)}
+.svc1 .det img{width:200px;height:120px;object-fit:cover;border-radius:14px}
+.svc1 .det h3{font-size:22px;letter-spacing:-.02em}
+.svc1 .det p{color:var(--ink-70);font-size:17px;margin-top:4px}
+.svc1 .call{margin-top:26px}
+@media (max-width:760px){.svc1 .board{padding:48px 12px 14px}.svc1 .row{gap:2px;padding:6px 14px}.svc1 .det{grid-template-columns:1fr}.svc1 .det img{width:100%;height:160px}}
+</style>
+<div class="wrap">
+ <h2 class="h2 rv" id="sv1-h">Now Boarding: Better Roofs</h2>
+ <p class="lede rv">Pick your destination. Every job leaves with the same crew.</p>
+ <div class="board">
+  <img class="mark" src="{{A:logo-white.svg}}" alt="" aria-hidden="true">
+  <div class="rows" role="group" aria-label="Owl Roofing services"></div>
+  <div class="win"><video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="The Owl crew at work"></video><span>The crew</span></div>
+ </div>
+ <div class="det" aria-live="polite"><img alt=""><div><h3></h3><p></p></div><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+ <a class="btn btn-line call" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a>
+</div>
+<script>
+OWL.reg('services','1',function(root){
+  var S = [
+    ['ROOF REPLACEMENT','Roof replacement','Tear-off to ridge cap with GAF materials, backed by our 10-year workmanship warranty.',OWL.media['svc-replace']],
+    ['ROOF REPAIR','Roof repair','Leaks, lifted shingles, flashing and vents, fixed before small problems spread.',OWL.media['svc-repair']],
+    ['STORM DAMAGE HELP','Storm damage help','Hail and wind damage found and put right.',OWL.media['svc-storm']],
+    ['WISE CHECK','Wise Check','Our roof inspection: shingles, flashing, ventilation and gutters.',OWL.media['svc-check']],
+    ['SIDING','Siding','New siding to finish what the new roof started.',OWL.media['svc-siding']]
+  ];
+  var rows = root.querySelector('.rows'), det = root.querySelector('.det'), A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', N = 17, btns = [];
+  S.forEach(function(s, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'row'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', s[1]); b.dataset.owl = 'say:All aboard';
+    var pad = Math.floor((N - s[0].length)/2), txt = (' '.repeat(pad) + s[0]).padEnd(N, ' ');
+    for (var k = 0; k < N; k++){ var t = document.createElement('span'); t.className = 't' + (txt[k] === ' ' ? ' sp' : ''); t.dataset.c = txt[k]; t.setAttribute('aria-hidden','true'); b.appendChild(t); }
+    b.addEventListener('click', function(){ pick(i); }); rows.appendChild(b); btns.push(b);
+  });
+  function spin(b, delay){
+    b.querySelectorAll('.t:not(.sp)').forEach(function(t, k){
+      if (OWL.reduce){ t.textContent = t.dataset.c; return; }
+      var n = 4 + Math.floor(Math.random()*6) + k, c = 0;
+      setTimeout(function step(){ t.classList.remove('f'); void t.offsetWidth; t.classList.add('f');
+        t.textContent = c++ < n ? A[Math.floor(Math.random()*26)] : t.dataset.c; if (c <= n) setTimeout(step, 55); }, delay + k*18);
+    });
+  }
+  function pick(i){ btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); }); var s = S[i];
+    det.querySelector('img').src = s[3]; det.querySelector('h3').textContent = s[1]; det.querySelector('p').textContent = s[2]; spin(btns[i], 0); }
+  btns.forEach(function(b){ b.querySelectorAll('.t:not(.sp)').forEach(function(t){ t.textContent = OWL.reduce ? t.dataset.c : ''; }); });
+  (function(){ var s0 = S[0]; det.querySelector('img').src = s0[3]; det.querySelector('h3').textContent = s0[1]; det.querySelector('p').textContent = s0[2]; })();
+  var started = false;
+  function go(){ if (started) return; started = true; btns.forEach(function(b, i){ spin(b, i*160); }); setTimeout(function(){ pick(0); }, OWL.reduce ? 0 : 1400); }
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); go(); } }, {threshold:.3}); io.observe(rows); } else go();
+  setTimeout(go, 4000);
+});
+</script>
+</section>
