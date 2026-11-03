@@ -1,0 +1,53 @@
+<section class="sec fam2" id="family-2" aria-labelledby="fm2-h">
+<style>
+.fam2{overflow:hidden}
+.fam2 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px}
+.fam2 .lede{margin-top:12px;max-width:40ch}
+.fam2 .nav{display:flex;gap:10px}
+.fam2 .nav button{width:52px;height:52px;border-radius:50%;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.1),0 12px 22px -14px rgba(23,17,29,.5);display:grid;place-items:center;transition:transform .2s}
+.fam2 .nav button:active{transform:translateY(3px)}
+.fam2 .nav svg{width:22px;height:22px}
+.fam2 .reel{display:flex;gap:22px;scroll-padding-inline:max(var(--pad),calc((100vw - 1320px)/2));margin-top:clamp(24px,3vw,36px);padding:10px max(var(--pad),calc((100vw - 1320px)/2)) 30px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab;user-select:none}
+.fam2 .reel::-webkit-scrollbar{display:none}
+.fam2 .reel.drag{cursor:grabbing;scroll-snap-type:none}
+.fam2 figure{flex:none;width:clamp(260px,30vw,420px);scroll-snap-align:start;transition:transform .35s var(--ease)}
+.fam2 .ph{aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:var(--paper);box-shadow:0 26px 40px -24px rgba(23,17,29,.55)}
+.fam2 .ph img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.fam2 .ph.cut{background:linear-gradient(180deg,#F8F6F0,#EFE8D8)}
+.fam2 .ph.cut img{object-fit:contain;object-position:bottom}
+.fam2 figcaption{margin-top:12px;display:grid;gap:2px}
+.fam2 figcaption b{font-size:19px}
+.fam2 figcaption span{font-size:15px;color:var(--ink-70)}
+.fam2 .ctas{display:flex;flex-wrap:wrap;gap:16px;margin-top:6px}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <div><span class="kick">Family-owned since 2025</span><h2 class="h2 rv" id="fm2-h" style="margin-top:12px">Meet the Families Behind Owl</h2><p class="lede rv">Founded by Tim Brown and Noah Bergland in Shoreview. We Give a Hoot.</p></div>
+  <div class="nav"><button type="button" class="prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
+ </div>
+</div>
+<div class="reel" tabindex="0" aria-label="Photos of the Owl families and crew" data-owl="say:Drag me">
+ <figure><div class="ph"><img src="{{A:fam-crew.webp}}" alt="Owl's crew at work on a roof" loading="lazy"></div><figcaption><b>The crew</b><span>On the roof, in Owl colours</span></figcaption></figure>
+ <figure><div class="ph cut"><img src="{{A:browns.webp}}" alt="Tim Brown with his family" loading="lazy"></div><figcaption><b>The Browns</b><span>Tim Brown, co-founder</span></figcaption></figure>
+ <figure><div class="ph cut"><img src="{{A:berglands.webp}}" alt="Noah Bergland with his family" loading="lazy"></div><figcaption><b>The Berglands</b><span>Noah Bergland, co-founder</span></figcaption></figure>
+ <figure><div class="ph"><img src="{{A:fam-noah.webp}}" alt="Noah Bergland on a ladder at a roof edge" loading="lazy"></div><figcaption><b>Noah Bergland</b><span>Co-founder</span></figcaption></figure>
+ <figure><div class="ph"><img src="{{A:fam-community.webp}}" alt="Community involvement" loading="lazy"></div><figcaption><b>Community involvement</b><span>Owl in the community</span></figcaption></figure>
+</div>
+<div class="wrap"><div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+<script>
+OWL.reg('family','2',function(root){
+  var reel = root.querySelector('.reel'), figs = reel.querySelectorAll('figure');
+  function step(d){ var w = figs[0].getBoundingClientRect().width + 22; reel.scrollBy({left: d*w, behavior: OWL.reduce ? 'auto' : 'smooth'}); }
+  root.querySelector('.prev').addEventListener('click', function(){ step(-1); }); root.querySelector('.next').addEventListener('click', function(){ step(1); });
+  reel.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); } if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); } });
+  /* drag with the mouse; cards lean with the speed of the drag */
+  var down = false, sx = 0, sl = 0, last = 0, v = 0;
+  reel.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = reel.scrollLeft; last = e.clientX; reel.classList.add('drag'); reel.setPointerCapture(e.pointerId); });
+  reel.addEventListener('pointermove', function(e){ if (!down) return; reel.scrollLeft = sl - (e.clientX - sx); v = e.clientX - last; last = e.clientX;
+    if (!OWL.reduce) figs.forEach(function(f){ f.style.transform = 'rotate(' + Math.max(-4, Math.min(4, -v*.25)) + 'deg)'; }); });
+  function up(){ if (!down) return; down = false; reel.classList.remove('drag'); figs.forEach(function(f){ f.style.transform = ''; });
+    if (!OWL.reduce && Math.abs(v) > 2) reel.scrollBy({left: -v*12, behavior:'smooth'}); }
+  reel.addEventListener('pointerup', up); reel.addEventListener('pointercancel', up);
+});
+</script>
+</section>

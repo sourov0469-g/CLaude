@@ -96,3 +96,31 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px)}
 .ytm::backdrop{background:rgba(23,17,29,.78)}
 .ytm-box{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:var(--ink);box-shadow:0 0 0 10px var(--paper)}
 .ytm-x{position:absolute;right:-6px;top:-58px;width:46px;height:46px;border-radius:50%;background:var(--amber);color:var(--ink);font-size:28px;line-height:1;box-shadow:0 4px 0 var(--amber-edge)}
+
+/* footer: light, like the rest of the page */
+.ftr{margin-top:clamp(40px,6vw,80px);padding:clamp(44px,6vw,72px) 0 28px;background:var(--paper);border-top:1px solid var(--line)}
+.ftr-g{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px}
+.ftr-g b{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.ftr-g p{font-size:16px;color:var(--ink-70);margin-bottom:10px}
+.ftr-g nav a{display:block;text-decoration:none;font-size:16px;padding:4px 0}
+.ftr-g nav a:hover,.ftr-g p a:hover{text-decoration:underline;text-underline-offset:4px}
+.ftr-g p a{color:var(--ink);font-weight:600;text-decoration:none}
+.ftr-brand img{height:52px;width:auto;margin-bottom:14px}
+.ftr-tag{font-weight:800;font-size:22px!important;color:var(--ink)!important;letter-spacing:-.02em}
+.ftr-trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.ftr-trust span{padding:8px 14px;border-radius:999px;background:var(--cream);font-weight:600;font-size:14px}
+.ftr-legal{margin-top:22px;font-size:14px;color:var(--ink-70)}
+@media (max-width:900px){.ftr-g{grid-template-columns:1fr 1fr}.ftr-brand{grid-column:1/-1}}
+
+/* shared form fields */
+.fld{display:grid;gap:6px}
+.fld label,.fld .lb{font-weight:600;font-size:15px}
+.fld input{min-height:52px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#FFFDF8;font:500 17px Inter,sans-serif;color:var(--ink)}
+.fld input:focus{outline:none;border-color:var(--ink)}
+.fld input[aria-invalid="true"]{border-color:#b3261e}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-width:56px;min-height:44px;padding:0 14px;border-radius:12px;border:2px solid rgba(23,17,29,.18);background:#FFFDF8;font-weight:600;font-size:16px;transition:background .2s,border-color .2s,transform .15s}
+.chips button:active{transform:translateY(2px)}
+.chips button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);box-shadow:0 3px 0 var(--amber-edge)}
+.form-msg{min-height:24px;font-size:15px;font-weight:600}
+.form-msg.err{color:#b3261e}

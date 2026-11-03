@@ -1,0 +1,58 @@
+<section class="sec book2" id="book-2" aria-labelledby="bk2-h">
+<style>
+.book2{text-align:center}
+.book2 .big{display:inline-flex;margin-top:6px;font-weight:800;font-size:clamp(40px,10vw,148px);letter-spacing:-.05em;line-height:1;text-decoration:none;color:var(--ink)}
+.book2 .big span{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1),color .2s}
+.book2 .big span.up{transform:translateY(-14px);color:#C7871A}
+.book2 .big:focus-visible{outline-offset:8px}
+.book2 .sub{margin-top:10px;font-size:clamp(17px,1.6vw,21px);color:var(--ink-70)}
+.book2 form{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px;margin:clamp(26px,4vw,40px) auto 0;max-width:1160px;padding:22px;border-radius:24px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 60px -36px rgba(23,17,29,.5);text-align:left}
+.book2 .pick{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto 1fr;gap:12px 16px;align-items:center}
+.book2 .pick .lb{font-weight:600;font-size:15px}
+.book2 .end{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.book2 .info{display:grid;grid-template-columns:repeat(3,1fr);margin:clamp(28px,4vw,44px) auto 0;max-width:1160px;text-align:left}
+.book2 .info div{padding:6px 24px;border-left:1px solid var(--line)}
+.book2 .info div:first-child{border-left:0;padding-left:0}
+.book2 .info b{display:block;font-size:20px;margin-bottom:6px}
+.book2 .info a,.book2 .info p{font-size:17px;color:var(--ink-70);text-decoration:none}
+.book2 .info a:hover{color:var(--ink);text-decoration:underline}
+.book2 .stars{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:30px;font-weight:600}
+.book2 .stars::before,.book2 .stars::after{content:"";width:60px;height:1px;background:var(--line)}
+.book2 .stars i{display:inline-flex;gap:3px;color:var(--amber)}
+.book2 .stars svg{width:18px;height:18px}
+@media (max-width:900px){.book2 form{grid-template-columns:1fr}.book2 .pick{grid-template-columns:1fr}.book2 .info{grid-template-columns:1fr;gap:18px}.book2 .info div{border-left:0;padding-left:0}}
+</style>
+<div class="wrap">
+ <h2 class="h2" id="bk2-h">Call or Book a Wise Check</h2>
+ <a class="big" href="tel:+16519776027" aria-label="Call (651) 977-6027" data-owl="say:Hoo's calling?"></a>
+ <p class="sub">Family-owned Owl Roofing, founded 2025 in Shoreview, MN.</p>
+ <form novalidate>
+  <div class="fld"><label for="bk2-n">Name</label><input id="bk2-n" data-n="name" autocomplete="name" required></div>
+  <div class="fld"><label for="bk2-p">Phone</label><input id="bk2-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+  <div class="fld"><label for="bk2-a">Address</label><input id="bk2-a" data-n="address" autocomplete="street-address" required></div>
+  <div class="pick">
+   <span class="lb" id="bk2-d">Pick a day</span><div class="chips" role="group" aria-labelledby="bk2-d" data-n="Preferred day"><button type="button" aria-pressed="false">Mon</button><button type="button" aria-pressed="true">Tue</button><button type="button" aria-pressed="false">Wed</button><button type="button" aria-pressed="false">Thu</button><button type="button" aria-pressed="false">Fri</button><button type="button" aria-pressed="false">Sat</button></div>
+   <span class="lb" id="bk2-t">Pick a time</span><div class="chips" role="group" aria-labelledby="bk2-t" data-n="Preferred time"><button type="button" aria-pressed="false">8 AM</button><button type="button" aria-pressed="true">10 AM</button><button type="button" aria-pressed="false">1 PM</button><button type="button" aria-pressed="false">3 PM</button></div>
+  </div>
+  <div class="end"><p class="form-msg" aria-live="polite"></p><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Book Now</button></div>
+ </form>
+ <div class="info">
+  <div><b>Visit</b><p>1000 County Rd E #230<br>Shoreview, MN 55126</p></div>
+  <div><b>Write</b><a href="mailto:info@owlroofing.com">info@owlroofing.com</a></div>
+  <div><b>Hours</b><p>Mon–Sat<br>8:00 AM – 6:00 PM</p></div>
+ </div>
+ <p class="stars"><i aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></i>5.0 · 90+ reviews</p>
+</div>
+<script>
+OWL.reg('booking','2',function(root){
+  OWL.bookForm(root.querySelector('form'), root.querySelector('.form-msg'));
+  var big = root.querySelector('.big'), txt = '(651) 977-6027';
+  big.innerHTML = txt.split('').map(function(c){ return '<span aria-hidden="true">' + (c === ' ' ? '&nbsp;' : c) + '</span>'; }).join('');
+  var sp = big.querySelectorAll('span');
+  if (OWL.fine && !OWL.reduce) big.addEventListener('pointermove', function(e){ sp.forEach(function(s){ var r = s.getBoundingClientRect(), d = Math.abs(e.clientX - (r.left + r.width/2)); s.classList.toggle('up', d < r.width*1.1); }); });
+  big.addEventListener('pointerleave', function(){ sp.forEach(function(s){ s.classList.remove('up'); }); });
+  /* a gentle wave across the digits the first time the number is seen */
+  if (!OWL.reduce && 'IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); sp.forEach(function(s, i){ setTimeout(function(){ s.classList.add('up'); setTimeout(function(){ s.classList.remove('up'); }, 260); }, i*55); }); } }, {threshold:.6}); io.observe(big); }
+});
+</script>
+</section>

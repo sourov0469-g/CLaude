@@ -1,0 +1,60 @@
+<section class="sec book1" id="book" aria-labelledby="bk1-h">
+<style>
+.book1 .g{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px}
+.book1 .card{border-radius:28px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 60px -36px rgba(23,17,29,.5);padding:clamp(24px,3vw,40px)}
+.book1 form{display:grid;gap:16px;margin-top:22px}
+.book1 .sub{margin-top:8px;color:var(--ink-70);font-size:17px}
+.book1 .btn{width:100%;min-height:62px;font-size:19px}
+.book1 .side{display:grid;gap:22px;grid-template-rows:1fr auto}
+.book1 .ic{width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 4px 0 var(--amber-edge);display:grid;place-items:center;flex:none}
+.book1 .ic svg{width:28px;height:28px;color:var(--ink)}
+.book1 .row{display:flex;gap:18px;align-items:flex-start}
+.book1 h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.book1 .dots{margin-top:16px;width:100%;height:auto}
+.book1 .dots .pin{transform-box:fill-box;transform-origin:50% 100%;animation:bk1pin 2.4s ease-in-out infinite}
+@keyframes bk1pin{50%{transform:translateY(-6px)}}
+.book1 .call a.num{display:block;font-size:clamp(30px,3.4vw,44px);font-weight:800;letter-spacing:-.03em;text-decoration:none;margin-top:4px}
+.book1 .call:hover .ic svg{animation:bk1ring .5s ease-in-out 2}
+@keyframes bk1ring{20%,60%{transform:rotate(-14deg)}40%,80%{transform:rotate(14deg)}}
+.book1 .call p{color:var(--ink-70);margin-top:6px}
+@media (max-width:900px){.book1 .g{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="card">
+   <h2 class="h2" id="bk1-h" style="font-size:clamp(32px,3.6vw,48px)">Book Your Wise Check</h2>
+   <p class="sub">Schedule a roof inspection with our licensed, local team.</p>
+   <form novalidate>
+    <div class="fld"><label for="bk1-n">Name</label><input id="bk1-n" name="name" data-n="name" autocomplete="name" required></div>
+    <div class="fld"><label for="bk1-p">Phone</label><input id="bk1-p" name="phone" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+    <div class="fld"><label for="bk1-a">Address</label><input id="bk1-a" name="address" data-n="address" autocomplete="street-address" required></div>
+    <div class="fld"><span class="lb" id="bk1-d">Preferred day</span><div class="chips" role="group" aria-labelledby="bk1-d" data-n="Preferred day"><button type="button" aria-pressed="true">Mon</button><button type="button" aria-pressed="false">Tue</button><button type="button" aria-pressed="false">Wed</button><button type="button" aria-pressed="false">Thu</button><button type="button" aria-pressed="false">Fri</button><button type="button" aria-pressed="false">Sat</button></div></div>
+    <button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Book My Wise Check</button>
+    <p class="form-msg" aria-live="polite"></p>
+   </form>
+  </div>
+  <div class="side">
+   <div class="card">
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.6"/></svg></span><div><h3>Service Area</h3><p class="sub" style="margin-top:4px">Shoreview + 29 towns around it</p></div></div>
+    <svg class="dots" viewBox="0 0 420 200" aria-hidden="true"></svg>
+   </div>
+   <div class="card call" data-owl="say:Ring ring">
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span>
+     <div><h3>Call Us</h3><a class="num" href="tel:+16519776027">(651) 977-6027</a><p>Mon–Sat 8:00 AM – 6:00 PM</p></div></div>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('booking','1',function(root){
+  OWL.bookForm(root.querySelector('form'), root.querySelector('.form-msg'));
+  /* an abstract dot field (not a map) with a few pins */
+  var s = '', blob = function(x, y){ var dx = (x - 210)/190, dy = (y - 100)/86; return dx*dx + dy*dy + .25*Math.sin(x/22)*Math.cos(y/18) < 1; };
+  for (var x = 14; x < 410; x += 12) for (var y = 10; y < 196; y += 12) if (blob(x, y)) s += '<circle cx="' + x + '" cy="' + y + '" r="2.4" fill="#17111D" opacity=".16"/>';
+  var paths = [[150,120,250,70],[150,120,300,140],[150,120,90,60],[150,120,330,90]];
+  paths.forEach(function(p){ s += '<path d="M' + p[0] + ' ' + p[1] + ' Q' + ((p[0] + p[2])/2) + ' ' + (Math.min(p[1], p[3]) - 30) + ' ' + p[2] + ' ' + p[3] + '" fill="none" stroke="#EAA221" stroke-width="2" stroke-dasharray="4 5"/><circle cx="' + p[2] + '" cy="' + p[3] + '" r="5" fill="#EAA221"/>'; });
+  s += '<g class="pin"><path d="M150 120 c-14 0 -22 -10 -22 -20 0 -12 10 -22 22 -22 s22 10 22 22 c0 10 -8 20 -22 20z" fill="#EAA221" transform="translate(0 -8)"/><circle cx="150" cy="92" r="7" fill="#FFFDF8"/></g>';
+  root.querySelector('.dots').innerHTML = s;
+});
+</script>
+</section>

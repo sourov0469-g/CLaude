@@ -1,0 +1,53 @@
+<section class="sec fam1" id="family" aria-labelledby="fm1-h">
+<style>
+.fam1{text-align:center;overflow:hidden}
+.fam1 .lede{margin:14px auto 0;max-width:48ch}
+.fam1 .duo{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,3vw,40px);align-items:end;max-width:1100px;margin:clamp(24px,4vw,40px) auto 0}
+.fam1 .fam{position:relative;padding-bottom:70px;transition:transform .5s var(--ease),filter .5s,opacity .5s}
+.fam1 .fam img{width:100%;height:auto;max-height:520px;object-fit:contain;object-position:bottom;filter:drop-shadow(0 24px 24px rgba(23,17,29,.18));transition:transform .5s var(--ease)}
+.fam1 .fam::after{content:"";position:absolute;left:12%;right:12%;bottom:62px;height:22px;border-radius:50%;background:radial-gradient(rgba(23,17,29,.22),transparent 70%)}
+.fam1 .tag{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:grid;gap:2px;min-width:220px;padding:12px 18px;border-radius:16px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 16px 26px -18px rgba(23,17,29,.5)}
+.fam1 .tag b{font-size:20px;letter-spacing:-.01em}
+.fam1 .tag span{font-size:15px;color:var(--ink-70)}
+.fam1 .duo.focus .fam:not(.on){opacity:.55;filter:saturate(.6)}
+.fam1 .fam.on img{transform:translateY(-10px) scale(1.02)}
+.fam1 .fam:focus-visible{outline:3px solid var(--ink);outline-offset:6px;border-radius:20px}
+.fam1 .hoot{position:absolute;left:50%;top:6%;transform:translateX(-50%);z-index:2;display:grid;place-items:center;width:132px;height:132px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 7px 0 var(--amber-edge),0 22px 36px -12px rgba(23,17,29,.5);font-weight:800;font-size:17px;line-height:1.1;text-align:center;transition:transform .2s}
+.fam1 .hoot:active{transform:translateX(-50%) translateY(5px);box-shadow:0 2px 0 var(--amber-edge)}
+.fam1 canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.fam1 .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:34px}
+@media (max-width:700px){.fam1 .duo{grid-template-columns:1fr}.fam1 .hoot{position:relative;left:auto;top:auto;transform:none;margin:0 auto 10px;grid-row:1}.fam1 .hoot:active{transform:translateY(5px)}}
+</style>
+<div class="wrap">
+ <span class="kick">Family-owned</span>
+ <h2 class="h2 rv" id="fm1-h" style="margin-top:12px">We Give a Hoot</h2>
+ <p class="lede rv">Two families started Owl Roofing in Shoreview in 2025: Tim Brown and Noah Bergland. Licensed in Minnesota, #BC809662.</p>
+ <div class="duo">
+  <div class="fam" tabindex="0" data-owl="say:The Browns"><img src="{{A:browns.webp}}" alt="Tim Brown with his wife and their children" width="620" height="471" loading="lazy"><span class="tag"><b>The Browns</b><span>Tim Brown, co-founder</span></span></div>
+  <div class="fam" tabindex="0" data-owl="say:The Berglands"><img src="{{A:berglands.webp}}" alt="Noah Bergland with his wife and their children" width="558" height="620" loading="lazy"><span class="tag"><b>The Berglands</b><span>Noah Bergland, co-founder</span></span></div>
+  <button class="hoot" type="button" data-owl="hoot">Give a<br>hoot</button>
+  <canvas aria-hidden="true"></canvas>
+ </div>
+ <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="#crew-video" data-mag data-owl="peek">Watch the Crew</a></div>
+</div>
+<script>
+OWL.reg('family','1',function(root){
+  var duo = root.querySelector('.duo'), fams = root.querySelectorAll('.fam'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), hoot = root.querySelector('.hoot');
+  fams.forEach(function(f){ var on = function(){ duo.classList.add('focus'); fams.forEach(function(x){ x.classList.toggle('on', x === f); }); }, off = function(){ duo.classList.remove('focus'); f.classList.remove('on'); };
+    f.addEventListener('mouseenter', on); f.addEventListener('focus', on); f.addEventListener('mouseleave', off); f.addEventListener('blur', off); });
+  /* "Give a hoot": a flurry of amber and ink feathers drifts down over both families */
+  var dpr = Math.min(2, devicePixelRatio || 1), F = [], run = false;
+  function size(){ var r = duo.getBoundingClientRect(); cv.width = r.width*dpr; cv.height = r.height*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function feather(x, y, a, s, c){ ctx.save(); ctx.translate(x, y); ctx.rotate(a); ctx.scale(s, s); ctx.fillStyle = c;
+    ctx.beginPath(); ctx.moveTo(0, -22); ctx.bezierCurveTo(9, -14, 9, 12, 0, 22); ctx.bezierCurveTo(-9, 12, -9, -14, 0, -22); ctx.fill();
+    ctx.strokeStyle = 'rgba(241,239,230,.8)'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(0, -22); ctx.lineTo(0, 26); ctx.stroke(); ctx.restore(); }
+  function loop(){ var r = duo.getBoundingClientRect(); ctx.clearRect(0, 0, r.width, r.height);
+    for (var i = F.length - 1; i >= 0; i--){ var f = F[i]; f.t += .02; f.y += f.vy; f.x += Math.sin(f.t*2 + f.p)*1.4 + f.vx; f.a = Math.sin(f.t*2 + f.p)*.6; f.vx *= .97;
+      feather(f.x, f.y, f.a, f.s, f.c); if (f.y > r.height + 40) F.splice(i, 1); }
+    if (F.length) requestAnimationFrame(loop); else run = false; }
+  hoot.addEventListener('click', function(){ size(); if (OWL.reduce) return; var r = duo.getBoundingClientRect(), hr = hoot.getBoundingClientRect(), cx = hr.left - r.left + hr.width/2, cy = hr.top - r.top + hr.height/2;
+    for (var i = 0; i < 26; i++) F.push({x:cx, y:cy, vx:(Math.random() - .5)*14, vy:1 + Math.random()*1.6, t:0, p:Math.random()*6, s:.6 + Math.random()*.7, c: i % 3 ? '#EAA221' : '#17111D'});
+    if (!run){ run = true; requestAnimationFrame(loop); } });
+});
+</script>
+</section>

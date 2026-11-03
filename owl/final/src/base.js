@@ -20,6 +20,13 @@ function apply(){
     if (!on) el.querySelectorAll('video').forEach(function(m){ m.pause(); });
     if (on && !OWL.started[s+':'+v] && OWL.inits[s+':'+v]) { OWL.started[s+':'+v] = 1; try { OWL.inits[s+':'+v](el); } catch(e){ console.error(e); } }
   });
+  /* anchors: whichever version is shown carries the section's main id (the V1 id), so links like #book always land */
+  Object.keys(secs).forEach(function(s){
+    var els = document.querySelectorAll('.ver[data-sec="' + s + '"]'), main = null;
+    els.forEach(function(el){ var sc = el.querySelector('section'); if (!sc) return; if (!sc.dataset.cid) sc.dataset.cid = sc.id || ''; if (el.dataset.v === '1') main = sc.dataset.cid; });
+    if (!main) return;
+    els.forEach(function(el){ var sc = el.querySelector('section'); if (!sc) return; sc.id = el.hidden ? main + '-alt' + el.dataset.v : main; });
+  });
   return secs;
 }
 
@@ -98,6 +105,21 @@ OWL.youtube = function(holder, id){
   f.title = 'Owl Roofing on YouTube'; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
   f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0';
   holder.appendChild(f);
+};
+
+/* booking forms are not connected to a server: they open the visitor's email app with the details filled in,
+   and never claim anything was sent */
+OWL.bookForm = function(form, msg){
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var bad = null; form.querySelectorAll('[required]').forEach(function(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1); i.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok && !bad) bad = i; });
+    if (bad){ msg.className = 'form-msg err'; msg.textContent = 'Please add your ' + bad.dataset.n + '.'; bad.focus(); return; }
+    var lines = []; form.querySelectorAll('[data-n]').forEach(function(i){ if (i.value) lines.push(i.dataset.n.charAt(0).toUpperCase() + i.dataset.n.slice(1) + ': ' + i.value); });
+    form.querySelectorAll('.chips').forEach(function(c){ var on = c.querySelector('[aria-pressed="true"]'); if (on) lines.push(c.dataset.n + ': ' + on.textContent); });
+    location.href = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(lines.join('\n'));
+    msg.className = 'form-msg'; msg.textContent = 'Your email app should open with these details. Send it from there, or call (651) 977-6027.';
+  });
+  form.querySelectorAll('.chips').forEach(function(c){ c.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; c.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b); }); }); });
 };
 
 OWL.play = function(v){ var p = v.play(); if (p && p.catch) p.catch(function(){}); };

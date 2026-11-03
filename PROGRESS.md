@@ -21,7 +21,13 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
   the bezel and flip the face) 7.94 · Reviews V2 clothesline (cards swing with the pointer) 7.80 · Area V1 Route Ribbon (type
   your town, an owl rides to it) 8.08 · Area V2 Radius Rings (rough directions, ping, hours) 7.66. Every sheet quote removed;
   reviews only as "5.0 · 90+ reviews". Axe 0; tests clean. Recommended: Reviews V1, Area V1.
-- **Next:** Round 5: Booking / Footer + "We Give a Hoot" family section (homepage complete at 10 sections).
+- **ROUND 5 DONE · HOMEPAGE COMPLETE (gate `owl/final/GATE-R5.md`, full-homepage shots `owl/final/gates/r5/`):** Family V1
+  "We Give a Hoot" (Owl's own family cut-outs, feather flurry) 7.94 · Family V2 photo reel 7.68 · Booking V1 booking page 8.00
+  · Booking V2 giant phone number 7.96. Light shared footer. Forms validate and open the visitor's email app; nothing claims
+  to be sent; the invented "one business day" line removed. Anchors now follow the shown version. Axe 0; all tests clean.
+  Homepage: Hero, Video, Explore, Wise Check, Protect Your Nest, Services, Reviews, Service area, Family, Booking + footer.
+- **Next:** inner pages in the same file (Services, Wise Check, Protect Your Nest, About, Service Area, Contact), 5–6+
+  sections each.
 
 ---
 
