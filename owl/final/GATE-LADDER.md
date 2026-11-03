@@ -566,3 +566,28 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Reviews 6's vial hid the "5.0" in the right engraving; it is resized to fit.
 - Reviews 7's first lay showed the top-course nails, left a gap at the right of the offset courses, and let the deck show through the first course. The ridge cap now covers the nails, the rakes get cut pieces, and the starter runs full height.
+
+## L18 · Service Area 6 + 7 · checks 41/41 · evidence `gates/ladder/L18-area-6-7/` · Area now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Area 6 · As the Owl Flies** | Lusion (one line carries the visitor) | A real map: the 29 town centres plotted to scale from latitude and longitude (equirectangular at 45° N), with a true 5-mile scale bar, a north arrow and faint flight spokes from the nest. Picking a town (dot, button or search; "st paul" works) flies a small owl along an amber line from Shoreview and reads "About N miles from our nest, as the owl flies. Yes, we roof here." The miles are computed (haversine), stated as approximate; Edina reads 16. | 8.4 | 8.6 | 8.2 | 8.8 | **8.50** |
+| **Area 7 · Welcome To** | Lando Norris (bespoke, made for one business) | Fully abstract: a green city-limit sign on two posts by a road, small 3D, that spins on its posts to each town ("Welcome to Edina", amber plate "Owl Roofing roofs here", "9 of 29"). Search, A–Z letters (only letters with a town; repeat to cycle), Prev/Next keys; idle, it turns slowly and quietly (no announcements), and stops once a visitor acts. Clouds drift. | 8.2 | 8.4 | 8.2 | 8.6 | **8.34** |
+
+**Truth and the map rule:**
+- Area 6 is a real map, not a fake one. Every dot sits at its town's real coordinates (tested by known relations: Minneapolis west of Saint Paul, Forest Lake furthest north, Apple Valley furthest south, Stillwater furthest east). There are no invented roads, rivers or lakes. The note reads "Town centres plotted from their coordinates, to scale. Not a street map. Miles are straight-line and approximate."
+- Area 7 is fully abstract: one sign, no geography.
+- Both versions use the real 29 towns, with Shoreview as home at the locked address. An unknown town is told it is not on the list and given (651) 977-6027.
+
+**Checks run:** the generic gate, plus:
+- Area 6: 29 towns with Shoreview first; the geography relations; the honest note; Edina at 15–17 miles with the owl landing on its dot and the line drawn; "st paul" search; the unknown-town reply; the 5-mile bar.
+- Area 7: the letters are exactly A B C E F L M N O P R S V W; search spins to Edina and confirms; idle turning stops after a visitor acts; M cycles Maple Grove → Maplewood; Next goes alphabetically; the unknown-town reply.
+
+**Ledger:**
+- **Area 6:** flight line draw and owl path ⟦S0407⟧; town buttons and search ⟦S1107⟧ ⟦S1442⟧; keys ⟦S1388⟧; title ⟦S0451⟧.
+- **Area 7:** sign spin ⟦S0409⟧; letter rail keyboard ⟦S1107⟧; 3D keys ⟦S1388⟧; search feedback ⟦S1442⟧.
+
+**Defects found and fixed in the round:**
+- Area 6's single phone column was `1fr` and overflowed by 2 px; it is now `minmax(0,1fr)`.
+- Area 7's letter keys were 33 px wide on phones; they now use 7 columns at 44 px or more.
+- Area 7's counter overlapped the plate on phones; it moved to the top corner.
+- Area 7's idle turns announced every town to screen readers; they are now quiet.

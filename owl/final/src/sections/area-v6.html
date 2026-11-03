@@ -1,0 +1,91 @@
+<section class="sec area6" id="areas-6" aria-labelledby="ar6-h">
+<style>
+.area6 .hd{margin-bottom:clamp(18px,2.6vw,30px)}
+.area6 .lede{margin-top:12px;max-width:48ch}
+.area6 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+.area6 .map{position:relative;border-radius:26px;background:radial-gradient(120% 90% at 40% 30%,#FBFAF6,#EFEBE0);box-shadow:0 0 0 1px rgba(23,17,29,.08) inset,0 40px 70px -46px rgba(23,17,29,.55);overflow:hidden}
+.area6 .map::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(23,17,29,.05) 1px,transparent 1px) 0 0/36px 36px,linear-gradient(90deg,rgba(23,17,29,.05) 1px,transparent 1px) 0 0/36px 36px;pointer-events:none}
+.area6 svg{position:relative;display:block;width:100%;height:auto;max-width:none}
+.area6 .spoke{stroke:#17111D;stroke-opacity:.08;stroke-width:1.5}
+.area6 .dot{fill:#17111D;transition:r .3s,fill .3s;cursor:pointer}
+.area6 .dot:hover{fill:#8E5A12}
+.area6 .dot.on{fill:#EAA221;stroke:#17111D;stroke-width:3}
+.area6 .lb{font:700 15px/1 var(--font,inherit);fill:#17111D;paint-order:stroke;stroke:#FBFAF6;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.area6 .lb.minor{opacity:0;transition:opacity .25s}
+.area6 .lb.minor.show{opacity:1}
+.area6 .fly{fill:none;stroke:#EAA221;stroke-width:4;stroke-linecap:round}
+.area6 .read{margin:0 0 14px;min-height:64px}
+.area6 .read b{display:block;font-size:clamp(24px,2.6vw,34px);font-weight:900;letter-spacing:-.02em}
+.area6 .read span{font-size:17px;color:var(--ink-70)}
+.area6 .find{display:flex;gap:10px;margin-bottom:14px}
+.area6 .find input{flex:1;min-width:0;min-height:52px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:17px}
+.area6 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.area6 .towns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.area6 .towns button{min-height:44px;padding:0 12px;border-radius:12px;text-align:left;font-weight:700;font-size:15px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.1);transition:background .2s,transform .12s,box-shadow .12s}
+.area6 .towns button:hover{transform:translateY(-1px)}
+.area6 .towns button[aria-pressed="true"]{background:#EAA221;box-shadow:0 2px 0 var(--amber-edge);transform:translateY(1px)}
+.area6 .towns button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.area6 .note{margin-top:12px;font-size:14px;color:var(--ink-70)}
+@media (max-width:900px){.area6 .g{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.area6 .towns{grid-template-columns:1fr 1fr}.area6 .towns button{font-size:14px;padding:0 8px}}
+@media (prefers-reduced-motion:reduce){.area6 .dot,.area6 .lb.minor,.area6 .towns button{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Service area</span><h2 class="h2" id="ar6-h" style="margin-top:12px">As the Owl Flies</h2>
+  <p class="lede rv">Our 29 towns, each plotted where it really sits. Pick one to see how far it is from our nest in Shoreview.</p></div>
+ <div class="g">
+  <div class="map" data-owl="say:Pick a town"><svg viewBox="0 0 700 790" role="img" aria-labelledby="ar6-cap"><title id="ar6-cap">The 29 towns Owl Roofing serves, plotted from their coordinates around Shoreview</title></svg></div>
+  <div>
+   <div class="read" aria-live="polite"><b>Shoreview</b><span>Home base. Pick a town.</span></div>
+   <form class="find" role="search" novalidate><label class="vh" for="ar6-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Find your town</label><input id="ar6-q" placeholder="Find your town" autocomplete="off"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Fly</button></form>
+   <div class="towns" role="group" aria-label="The 29 towns"></div>
+   <p class="note">Town centres plotted from their coordinates, to scale. Not a street map. Miles are straight-line and approximate.</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('area','6',function(root){
+  var svg = root.querySelector('svg'), read = root.querySelector('.read'), townsEl = root.querySelector('.towns'), form = root.querySelector('.find'), q = root.querySelector('#ar6-q'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* town centres, decimal degrees */
+  var T = [['Shoreview',45.079,-93.147],['North Oaks',45.103,-93.079],['Arden Hills',45.050,-93.156],['Vadnais Heights',45.057,-93.074],['Little Canada',45.027,-93.088],['Roseville',45.006,-93.157],['Mounds View',45.105,-93.208],['New Brighton',45.066,-93.202],['Lino Lakes',45.160,-93.089],['Blaine',45.161,-93.235],['White Bear Lake',45.085,-93.010],['Maplewood',44.953,-92.995],['Fridley',45.086,-93.263],['Saint Paul',44.954,-93.090],['Minneapolis',44.978,-93.265],['Forest Lake',45.279,-92.985],['Coon Rapids',45.173,-93.303],['Oakdale',44.963,-92.965],['Stillwater',45.056,-92.806],['Woodbury',44.924,-92.959],['Maple Grove',45.073,-93.456],['Plymouth',45.011,-93.456],['Minnetonka',44.921,-93.468],['Edina',44.889,-93.350],['Eden Prairie',44.855,-93.471],['Bloomington',44.841,-93.299],['Eagan',44.804,-93.167],['Burnsville',44.768,-93.278],['Apple Valley',44.732,-93.218]];
+  var LON0 = -93.50, LAT0 = 45.30, MI = 18, KX = 69.17*Math.cos(45*Math.PI/180), KY = 69.0, PAD = 34;
+  function xy(t){ return [PAD + (t[2] - LON0)*KX*MI, PAD + (LAT0 - t[1])*KY*MI]; }
+  function miles(a, b){ var R = 3958.8, r = Math.PI/180, dl = (b[1] - a[1])*r, dn = (b[2] - a[2])*r, s = Math.sin(dl/2)*Math.sin(dl/2) + Math.cos(a[1]*r)*Math.cos(b[1]*r)*Math.sin(dn/2)*Math.sin(dn/2); return 2*R*Math.asin(Math.sqrt(s)); }
+  var MAJOR = {Shoreview:1, Minneapolis:1, 'Saint Paul':1, Stillwater:1, 'Forest Lake':1, 'Apple Valley':1, 'Maple Grove':1, Blaine:1, Woodbury:1, 'Eden Prairie':1};
+  var home = xy(T[0]), h = '';
+  T.forEach(function(t, i){ if (!i) return; var p = xy(t); h += '<path class="spoke" d="M' + home[0].toFixed(1) + ' ' + home[1].toFixed(1) + 'L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + '"/>'; });
+  h += '<path class="fly" d="" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1"/>';
+  T.forEach(function(t, i){ var p = xy(t), left = p[0] > 520; h += '<circle class="dot' + (i ? '' : ' on') + '" data-i="' + i + '" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + (i ? 7 : 11) + '"/>'
+    + '<text class="lb' + (MAJOR[t[0]] ? '' : ' minor') + '" data-i="' + i + '" x="' + (p[0] + (left ? -12 : 12)).toFixed(1) + '" y="' + (p[1] + 5).toFixed(1) + '"' + (left ? ' text-anchor="end"' : '') + '>' + t[0] + '</text>'; });
+  /* north arrow and a true 5-mile scale bar */
+  h += '<g transform="translate(640 60)"><path d="M0 -26L10 8 0 2 -10 8z" fill="#17111D"/><text y="28" text-anchor="middle" font-size="15" font-weight="800" fill="#17111D">N</text></g>';
+  h += '<g transform="translate(' + PAD + ' 760)"><path d="M0 0H' + (5*MI) + 'M0 -6V6M' + (5*MI) + ' -6V6" stroke="#17111D" stroke-width="3"/><text x="' + (5*MI + 10) + '" y="5" font-size="15" font-weight="700" fill="#17111D">5 miles</text></g>';
+  h += '<g class="owl" transform="translate(' + home[0].toFixed(1) + ' ' + home[1].toFixed(1) + ')"><circle r="15" fill="#17111D"/><circle cx="-5.5" cy="-2" r="5" fill="#FBFAF6"/><circle cx="5.5" cy="-2" r="5" fill="#FBFAF6"/><circle cx="-5.5" cy="-2" r="2.2" fill="#17111D"/><circle cx="5.5" cy="-2" r="2.2" fill="#17111D"/><path d="M-3 4l3 4 3-4z" fill="#EAA221"/></g>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var dots = [].slice.call(svg.querySelectorAll('.dot')), lbs = [].slice.call(svg.querySelectorAll('.lb')), fly = svg.querySelector('.fly'), owl = svg.querySelector('.owl');
+  var btns = T.map(function(t, i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = t[0]; b.setAttribute('aria-pressed', i === 0); b.addEventListener('click', function(){ pick(i); }); townsEl.appendChild(b); return b; });
+  dots.forEach(function(d){ d.addEventListener('click', function(){ pick(+d.dataset.i); }); d.addEventListener('pointerenter', function(){ lbs[+d.dataset.i].classList.add('show'); }); d.addEventListener('pointerleave', function(){ if (+d.dataset.i !== cur) lbs[+d.dataset.i].classList.remove('show'); }); });
+  var cur = 0, raf = 0, ox = home[0], oy = home[1];
+  function put(x, y){ ox = x; oy = y; owl.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')'); }
+  function pick(i){ cur = i; var t = T[i], p = xy(t);
+    btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); }); dots.forEach(function(d, j){ d.classList.toggle('on', j === i); }); lbs.forEach(function(l, j){ l.classList.toggle('show', j === i); });
+    if (!i){ read.innerHTML = '<b>Shoreview</b><span>Home base: 1000 County Rd E #230.</span>'; fly.setAttribute('d', ''); flyTo(home[0], home[1], 0); return; }
+    var m = Math.round(miles(T[0], t)); read.innerHTML = '<b>' + t[0] + '</b><span>About ' + m + ' mile' + (m === 1 ? '' : 's') + ' from our nest, as the owl flies. Yes, we roof here.</span>';
+    fly.setAttribute('d', 'M' + home[0].toFixed(1) + ' ' + home[1].toFixed(1) + 'L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1));
+    flyTo(p[0], p[1], 1); }
+  function flyTo(x, y, line){ cancelAnimationFrame(raf); var x0 = home[0], y0 = home[1];
+    if (OWL.reduce){ fly.style.strokeDashoffset = 0; put(x, y); return; }
+    var t0 = performance.now(), d = 400 + Math.hypot(x - x0, y - y0)*2.2;
+    (function step(now){ var k = Math.min(1, (now - t0)/d), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2)/2, arc = Math.sin(k*Math.PI)*18;
+      if (line) fly.style.strokeDashoffset = (1 - e).toFixed(3);
+      put(x0 + (x - x0)*e, y0 + (y - y0)*e - arc); if (k < 1) raf = requestAnimationFrame(step); })(t0); }
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z]/g, ''); }
+  form.addEventListener('submit', function(e){ e.preventDefault(); var v = norm(q.value); if (!v) return;
+    var i = T.findIndex(function(t){ return norm(t[0]) === v; }); if (i < 0) i = T.findIndex(function(t){ return norm(t[0]).indexOf(v) === 0; });
+    if (i >= 0){ pick(i); return; } read.innerHTML = '<b>' + q.value.replace(/[<>&]/g, '') + '</b><span>Not on our list of 29 towns. Call (651) 977-6027 to ask.</span>'; });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg);
+});
+</script>
+</section>

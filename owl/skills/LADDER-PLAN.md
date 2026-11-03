@@ -246,3 +246,17 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   climbs, then one more set half-laid with a "+" for "and counting", and the ridge cap goes on with "5.0 · 90+
   reviews". "Lay It Again" replays. No individual review is shown or implied. Skills: ⟦S0489⟧ drop and settle,
   ⟦S1352⟧ counter numerals, ⟦S1388⟧ key, ⟦S0451⟧ title.
+
+## L18 · Service Area 6 + 7 (Area stands at 5: V1 abstract road, V2 keycaps, V3 the numeral 29, V4 roof row, V5 drum)
+- **Area 6 · "As the Owl Flies"** — reference **Lusion** (one line carries the visitor). A real map, not an invented
+  one: the 29 town centres plotted to scale from their latitude and longitude (equirectangular at 45° N), with a
+  true scale bar and north arrow and no invented roads, rivers or lakes. Picking a town (dot, list or search) flies
+  a small owl along a straight amber line from Shoreview and reads "about N miles as the owl flies", computed from
+  the coordinates (haversine) and stated as approximate. Labelled "Town centres plotted from their coordinates. Not
+  a street map." Skills: ⟦S0407⟧ line draw and flight path, ⟦S1107⟧ keyboard listbox, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+- **Area 7 · "Welcome To"** — reference **Lando Norris** (bespoke, made for one business). Fully abstract: one big
+  green city-limit sign on its post, small 3D, that spins on its post to each of the 29 towns ("Welcome to Edina ·
+  Owl Roofing roofs here"). Type a town, use the A–Z rail (letters with no town are disabled), or Next/Previous
+  keys; idle, it turns slowly through the list (off under reduced motion). An unknown town is told plainly it is
+  not on the list and given the phone (651) 977-6027. Skills: ⟦S0409⟧ spin transition, ⟦S1107⟧ keyboard, ⟦S1388⟧
+  keys, ⟦S1442⟧ search feedback.

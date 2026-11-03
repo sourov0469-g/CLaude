@@ -1,0 +1,269 @@
+[
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "areas"
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "As the Owl Flies"
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "all 29 real towns, Shoreview home first",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "a real map: towns sit where they are (Minneapolis west of Saint Paul, Forest Lake furthest north, Apple Valley furthest south)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "labelled honestly: plotted from coordinates, not a street map, miles approximate",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "Edina: about 15–17 miles as the owl flies, and the owl lands there",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "the flight line is drawn from the nest to the town",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "search understands “st paul”",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "an unknown town is told plainly and given the phone",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "a true 5-mile scale bar (18 px per mile, 69.17 miles per degree)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "areas"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Welcome To"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "29 real towns on the sign, A–Z letters only where a town starts",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "it starts at home: Welcome to Shoreview",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "search spins the sign to Edina and confirms",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "after a visitor acts, the idle turning stops",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "a letter cycles through its towns (M: Maple Grove → Maplewood)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "Next moves alphabetically (Maplewood → Minneapolis)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "an unknown town is told plainly and given the phone",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

@@ -1,0 +1,85 @@
+<section class="sec area7" id="areas-7" aria-labelledby="ar7-h">
+<style>
+.area7{overflow:hidden}
+.area7 .g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,60px);align-items:center}
+.area7 .lede{margin:12px 0 18px;max-width:38ch}
+.area7 .scene{position:relative;aspect-ratio:5/4;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#DDEAF0 0,#EEF3F2 62%,#8DB45F 62%,#7FA552 100%);box-shadow:0 40px 70px -46px rgba(23,17,29,.55);perspective:1100px}
+.area7 .cloud{position:absolute;height:26px;border-radius:999px;background:#fff;opacity:.85;animation:ar7c 38s linear infinite}
+.area7 .cloud::before{content:"";position:absolute;left:22%;top:-14px;width:46%;height:30px;border-radius:50%;background:inherit}
+@keyframes ar7c{from{transform:translateX(-140px)}to{transform:translateX(760px)}}
+.area7 .road{position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,#5A5660,#47434C)}
+.area7 .road::after{content:"";position:absolute;left:0;right:0;top:46%;height:6px;background:repeating-linear-gradient(90deg,#F6C25F 0 46px,transparent 46px 90px)}
+.area7 .post{position:absolute;bottom:22%;width:12px;height:46%;background:linear-gradient(90deg,#9AA3A8,#C9CDD2,#8C979D);border-radius:3px}
+.area7 .post.l{left:calc(50% - 120px)}.area7 .post.r{left:calc(50% + 108px)}
+.area7 .sign{position:absolute;left:50%;top:14%;width:min(78%,420px);transform:translateX(-50%) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .32s cubic-bezier(.5,0,.5,1)}
+.area7 .face{padding:22px 24px 26px;border-radius:18px;background:#0B6B45;box-shadow:inset 0 0 0 5px #0B6B45,inset 0 0 0 9px #F1EFE6,0 24px 30px -18px rgba(23,17,29,.6);color:#fff;text-align:center}
+.area7 .face small{display:block;font-size:clamp(14px,1.4vw,18px);font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.area7 .face b{display:block;margin-top:6px;font-size:clamp(34px,4.6vw,60px);font-weight:900;letter-spacing:-.02em;line-height:1;overflow-wrap:anywhere}
+.area7 .plate{display:block;width:max-content;max-width:90%;margin:10px auto 0;padding:8px 16px;border-radius:10px;background:#EAA221;color:#17111D;font-weight:800;font-size:clamp(14px,1.4vw,17px);box-shadow:0 6px 10px -6px rgba(23,17,29,.5)}
+.area7 .count{position:absolute;right:16px;top:14px;padding:6px 12px;border-radius:999px;background:rgba(251,250,246,.92);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+.area7 .find{display:flex;gap:10px}
+.area7 .find input{flex:1;min-width:0;min-height:52px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:17px}
+.area7 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.area7 .say{min-height:52px;margin:14px 0 6px;font-size:18px;font-weight:700}
+.area7 .nav{display:flex;gap:10px;margin:10px 0 16px}
+.area7 .nav button{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s}
+.area7 .nav button:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.area7 .nav svg{width:22px;height:22px}
+.area7 .az{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px}
+.area7 .az button{min-height:44px;border-radius:10px;font-weight:800;font-size:15px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.1)}
+.area7 .az button:disabled{background:transparent;box-shadow:none;color:#8A8178;cursor:default}
+.area7 .az button[aria-pressed="true"]{background:#EAA221;box-shadow:0 2px 0 var(--amber-edge)}
+.area7 button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+@media (max-width:900px){.area7 .g{grid-template-columns:minmax(0,1fr)}.area7 .post.l{left:calc(50% - 90px)}.area7 .post.r{left:calc(50% + 78px)}}
+@media (max-width:520px){.area7 .az{grid-template-columns:repeat(7,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.area7 .cloud{animation:none}.area7 .sign{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="scene" data-owl="say:Your town?">
+   <span class="cloud" style="top:10%;width:120px;animation-delay:-6s" aria-hidden="true"></span><span class="cloud" style="top:24%;width:90px;animation-delay:-22s" aria-hidden="true"></span>
+   <span class="post l" aria-hidden="true"></span><span class="post r" aria-hidden="true"></span>
+   <div class="sign" aria-hidden="true"><div class="face"><small>Welcome to</small><b class="nm">Shoreview</b></div><span class="plate">Owl Roofing roofs here</span></div>
+   <div class="road" aria-hidden="true"></div>
+   <span class="count" aria-hidden="true"></span>
+  </div>
+  <div>
+   <span class="kick">Service area</span>
+   <h2 class="h2" id="ar7-h" style="margin-top:12px">Welcome To</h2>
+   <p class="lede rv">Twenty-nine towns around our home in Shoreview. Find yours, or let the sign turn through them.</p>
+   <form class="find" role="search" novalidate><label for="ar7-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Find your town</label><input id="ar7-q" placeholder="Find your town" autocomplete="off"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Find</button></form>
+   <p class="say" aria-live="polite"></p>
+   <div class="nav"><button type="button" class="pv" aria-label="Previous town"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="#17111D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="nx" aria-label="Next town"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="#17111D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+   <div class="az" role="group" aria-label="Towns by first letter"></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('area','7',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var S = T.slice().sort(), sign = root.querySelector('.sign'), nm = root.querySelector('.nm'), count = root.querySelector('.count'), say = root.querySelector('.say'), az = root.querySelector('.az'), form = root.querySelector('.find'), q = root.querySelector('#ar7-q'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var cur = S.indexOf('Shoreview'), busy = 0, auto = 0, touched = false;
+  var L = {}; S.forEach(function(t){ L[t[0]] = 1; });
+  var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(function(c){ return L[c]; }).map(function(c){ var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.setAttribute('aria-label', 'Towns starting with ' + c); b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function(){ touch(); var list = S.map(function(t, i){ return i; }).filter(function(i){ return S[i][0] === c; }), at = list.indexOf(cur); show(list[(at + 1) % list.length]); }); az.appendChild(b); return b; });
+  function words(i, why){ var t = S[i]; say.textContent = t === 'Shoreview' ? 'Shoreview is home: 1000 County Rd E #230.' : 'Yes, we roof in ' + t + '.'; }
+  function set(i){ cur = i; nm.textContent = S[i]; count.textContent = (i + 1) + ' of 29'; letters.forEach(function(b){ b.setAttribute('aria-pressed', b.textContent === S[i][0]); }); }
+  /* the idle turn is quiet: only a visitor's own choice is announced */
+  function show(i, quiet){ if (!quiet) words(i); if (i === cur && nm.textContent === S[i]) return;
+    if (OWL.reduce){ set(i); return; }
+    clearTimeout(busy); sign.style.setProperty('--ry', '90deg');
+    busy = setTimeout(function(){ set(i); sign.style.transition = 'none'; sign.style.setProperty('--ry', '-90deg'); void sign.offsetWidth; sign.style.transition = ''; sign.style.setProperty('--ry', '0deg'); }, 320); }
+  function touch(){ touched = true; clearInterval(auto); }
+  root.querySelector('.pv').addEventListener('click', function(){ touch(); show((cur + S.length - 1) % S.length); });
+  root.querySelector('.nx').addEventListener('click', function(){ touch(); show((cur + 1) % S.length); });
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z]/g, ''); }
+  form.addEventListener('submit', function(e){ e.preventDefault(); touch(); var v = norm(q.value); if (!v) return;
+    var i = S.findIndex(function(t){ return norm(t) === v; }); if (i < 0) i = S.findIndex(function(t){ return norm(t).indexOf(v) === 0; });
+    if (i >= 0){ show(i); return; } say.textContent = q.value.replace(/[<>&]/g, '') + ' is not on our list of 29 towns. Call (651) 977-6027 to ask.'; });
+  set(cur); words(cur);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ OWL.reveal(h2); if (!touched && !auto) auto = setInterval(function(){ show((cur + 1) % S.length, true); }, 3200); } else if (auto){ clearInterval(auto); auto = 0; } }, {threshold:.3}); io.observe(sign);
+});
+</script>
+</section>
