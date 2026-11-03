@@ -1,0 +1,94 @@
+<section class="sec pp1" id="cleanup" aria-labelledby="pp1-h">
+<style>
+.pp1 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px}
+.pp1 .lede{max-width:44ch;margin-top:12px}
+.pp1 .board{position:relative;margin-top:clamp(22px,3vw,34px);aspect-ratio:16/7;border-radius:28px;overflow:hidden;background:#E8DFC6;box-shadow:0 0 0 10px var(--paper),0 40px 70px -36px rgba(23,17,29,.55);cursor:none;touch-action:none}
+.pp1 canvas{position:absolute;inset:0;width:100%;height:100%}
+.pp1 .hud{position:absolute;left:16px;top:14px;right:16px;display:flex;justify-content:space-between;gap:10px;pointer-events:none}
+.pp1 .hud span{background:rgba(248,246,240,.94);font-weight:700;font-size:15px;padding:8px 14px;border-radius:999px;font-variant-numeric:tabular-nums}
+.pp1 .win{position:absolute;inset:0;display:grid;place-items:center;background:rgba(23,17,29,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+.pp1 .board.over .win{opacity:1;pointer-events:auto}
+.pp1 .win div{max-width:440px;padding:24px 26px;border-radius:22px;background:var(--paper);text-align:center;box-shadow:0 30px 50px -20px rgba(23,17,29,.6)}
+.pp1 .win b{display:block;font-size:24px;letter-spacing:-.02em;margin-bottom:6px}
+.pp1 .win p{color:var(--ink-70);margin-bottom:16px}
+.pp1 .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:20px}
+.pp1 .passes{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.pp1 .passes li{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:var(--paper);font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(23,17,29,.06)}
+.pp1 .passes li i{width:22px;height:22px;border-radius:50%;border:2px solid rgba(23,17,29,.3);display:grid;place-items:center;font-style:normal;font-size:12px}
+.pp1 .passes li.ok i{background:var(--amber);border-color:var(--amber)}
+.pp1 .passes li.now{box-shadow:0 0 0 2px var(--amber)}
+.pp1 .tools{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:700px){.pp1 .board{aspect-ratio:4/3}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Three cleanup passes</span><h2 class="h2 rv" id="pp1-h" style="margin-top:12px">Pass Two Is Yours: Sweep the Yard</h2><p class="lede rv">After the crew's pass, a magnet sweep pulls up stray nails. Move the magnet across the lawn and find them all.</p></div></div>
+ <div class="board" data-owl="">
+  <canvas aria-hidden="true"></canvas>
+  <div class="hud" aria-live="polite"><span class="cnt">Nails found: 0 of 0</span><span class="tm">Pass 2 of 3</span></div>
+  <div class="win" role="status"><div><b>Yard swept.</b><p>Next, the project manager walks it. That is the third pass, on every job.</p><button class="btn btn-amber btn-sm again" type="button">Scatter again</button></div></div>
+ </div>
+ <div class="row">
+  <ol class="passes"><li class="ok"><i>✓</i>1 · The crew</li><li class="now"><i>2</i>2 · Magnet sweep</li><li><i>3</i>3 · Project manager</li></ol>
+  <div class="tools"><button class="btn btn-line btn-sm auto" type="button">Sweep it for me</button><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+ </div>
+</div>
+<script>
+OWL.reg('pnpasses','1',function(root){
+  /* the one game-like section on the site: a magnet sweep over a lawn, nails jump to the magnet */
+  var board = root.querySelector('.board'), cv = board.querySelector('canvas'), ctx = cv.getContext('2d'), cnt = board.querySelector('.cnt'), lis = root.querySelectorAll('.passes li');
+  var dpr = Math.min(2, devicePixelRatio || 1), W, H, N = 36, nails = [], got = 0, mx = -200, my = -200, tx = -200, ty = -200, on = false, auto = null, vis = false, done = false;
+  var lawn = document.createElement('canvas');
+  function size(){ var r = board.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); grass(); }
+  /* an illustrated yard: thousands of short blades in ink and amber shades on cream (no new colours) */
+  function grass(){ if (!W) return; lawn.width = W*dpr; lawn.height = H*dpr; var g = lawn.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+    var bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#EDE4CB'); bg.addColorStop(1, '#E2D4B0'); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    var cols = ['rgba(142,90,18,.35)','rgba(199,135,26,.4)','rgba(23,17,29,.16)','rgba(234,162,33,.35)','rgba(90,70,40,.22)'];
+    for (var i = 0; i < W*H/90; i++){ var x = Math.random()*W, y = Math.random()*H, l = 5 + Math.random()*9, a = -Math.PI/2 + (Math.random() - .5)*.9;
+      g.strokeStyle = cols[i % cols.length]; g.lineWidth = 1 + Math.random(); g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a)*l, y + Math.sin(a)*l); g.stroke(); }
+    var v = g.createRadialGradient(W/2, H/2, H*.2, W/2, H/2, W*.7); v.addColorStop(0, 'rgba(23,17,29,0)'); v.addColorStop(1, 'rgba(23,17,29,.12)'); g.fillStyle = v; g.fillRect(0, 0, W, H); }
+  function scatter(){ N = W < 600 ? 20 : 36; nails = []; got = 0; done = false; board.classList.remove('over'); lis[1].classList.remove('ok'); lis[1].classList.add('now'); lis[2].classList.remove('now');
+    for (var i = 0; i < N; i++) nails.push({x: 40 + Math.random()*(W - 80), y: 70 + Math.random()*(H - 110), a: Math.random()*Math.PI, s: .8 + Math.random()*.5, st: 0, vx: 0, vy: 0});
+    cnt.textContent = 'Nails found: 0 of ' + N; }
+  function nail(n){ ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(n.a); ctx.scale(n.s, n.s);
+    ctx.fillStyle = 'rgba(23,17,29,.25)'; ctx.fillRect(-9, 3, 20, 3);
+    ctx.fillStyle = '#6b6460'; ctx.fillRect(-9, -1.3, 17, 2.6); ctx.beginPath(); ctx.moveTo(8, -1.3); ctx.lineTo(12, 0); ctx.lineTo(8, 1.3); ctx.fill();
+    ctx.fillStyle = '#17111D'; ctx.fillRect(-11, -3.2, 3, 6.4); ctx.restore(); }
+  function magnet(x, y){ ctx.save(); ctx.translate(x, y);
+    ctx.fillStyle = 'rgba(23,17,29,.25)'; ctx.beginPath(); ctx.ellipse(6, 30, 40, 9, 0, 0, 6.3); ctx.fill();
+    ctx.fillStyle = '#17111D'; ctx.beginPath(); ctx.roundRect(-46, -10, 92, 26, 8); ctx.fill();
+    ctx.fillStyle = '#EAA221'; ctx.beginPath(); ctx.roundRect(-46, 10, 92, 8, 4); ctx.fill();
+    ctx.strokeStyle = '#17111D'; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(0, -10); ctx.lineTo(34, -64); ctx.stroke();
+    ctx.fillStyle = '#EAA221'; ctx.beginPath(); ctx.arc(34, -66, 8, 0, 6.3); ctx.fill();
+    ctx.strokeStyle = 'rgba(234,162,33,.35)'; ctx.lineWidth = 2; ctx.setLineDash([4, 6]); ctx.beginPath(); ctx.arc(0, 4, 74, 0, 6.3); ctx.stroke(); ctx.restore(); }
+  function frame(){
+    if (vis){
+      ctx.clearRect(0, 0, W, H); if (lawn.width) ctx.drawImage(lawn, 0, 0, W, H);
+      if (auto){ /* "Sweep it for me": steer the magnet to the nearest nail still on the lawn */
+        var best = null, bd = 1e9; nails.forEach(function(n){ if (n.st !== 0) return; var d = Math.hypot(n.x - mx, n.y - my); if (d < bd){ bd = d; best = n; } });
+        if (best){ var dx = best.x - tx, dy = best.y - 14 - ty, dd = Math.hypot(dx, dy) || 1, sp = Math.min(dd, 16); tx += dx/dd*sp; ty += dy/dd*sp; } else if (done) auto = null; }
+      mx += (tx - mx)*.25; my += (ty - my)*.25;
+      nails.forEach(function(n){
+        if (n.st === 2) return;
+        var dx = mx - n.x, dy = (my + 14) - n.y, d = Math.hypot(dx, dy);
+        if (n.st === 0 && d < 74 && (on || auto)) n.st = 1;
+        if (n.st === 1){ n.vx += dx*.14; n.vy += dy*.14; n.vx *= .6; n.vy *= .6; n.x += n.vx; n.y += n.vy; n.a += .3;
+          if (d < 30){ n.st = 2; got++; cnt.textContent = 'Nails found: ' + got + ' of ' + N; if (got === N) finish(); } }
+        nail(n); });
+      if (on || auto) magnet(mx, my);
+    }
+    requestAnimationFrame(frame);
+  }
+  function finish(){ done = true; board.classList.add('over'); lis[1].classList.add('ok'); lis[1].classList.remove('now'); lis[1].querySelector('i').textContent = '✓'; lis[2].classList.add('now'); }
+  function pos(e){ var r = board.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; }
+  board.addEventListener('pointerenter', function(e){ on = true; pos(e); mx = tx; my = ty; });
+  board.addEventListener('pointermove', function(e){ on = true; pos(e); });
+  board.addEventListener('pointerdown', function(e){ if (e.target.closest('.win')) return; on = true; pos(e); if (e.pointerType !== 'mouse') board.setPointerCapture(e.pointerId); });
+  board.addEventListener('pointerleave', function(){ if (!auto) on = false; });
+  root.querySelector('.auto').addEventListener('click', function(){ if (done) scatter(); auto = {t: 0}; mx = 60; my = 90; });
+  root.querySelector('.again').addEventListener('click', function(){ lis[1].querySelector('i').textContent = '2'; scatter(); });
+  size(); scatter(); addEventListener('resize', function(){ var w0 = W; size(); if ((!w0 || nails.some(function(n){ return n.x > W || n.y > H; })) && W) scatter(); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; }).observe(board); else vis = true;
+  requestAnimationFrame(frame);
+});
+</script>
+</section>

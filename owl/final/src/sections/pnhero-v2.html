@@ -1,0 +1,62 @@
+<section class="sec pghero pn2" id="nest-top-2" aria-labelledby="pn2h-h">
+<style>
+.pn2 .hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:16px 48px;align-items:end}
+.pn2 .lede{max-width:38ch}
+.pn2 .stage{position:relative;margin-top:clamp(24px,3vw,36px);aspect-ratio:1000/560;border-radius:28px;overflow:hidden;background:#cfd6da;box-shadow:0 0 0 10px var(--paper),0 40px 70px -36px rgba(23,17,29,.55);touch-action:none;user-select:none}
+.pn2 .stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.pn2 svg.net{position:absolute;left:-2%;top:0;width:104%;height:100%;pointer-events:none}
+.pn2 .pull{position:absolute;left:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 6px 0 var(--amber-edge),0 16px 26px -8px rgba(23,17,29,.6);display:grid;place-items:center;cursor:grab}
+.pn2 .pull svg{width:28px;height:28px;color:var(--ink)}
+.pn2 .pull:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.pn2 .done{position:absolute;left:24px;bottom:22px;display:flex;align-items:center;gap:14px;padding:10px 16px 10px 10px;border-radius:18px;background:var(--paper);box-shadow:0 16px 30px -16px rgba(23,17,29,.6);opacity:0;transform:translateY(10px);transition:.4s var(--ease);pointer-events:none}
+.pn2 .stage.wrapped .done{opacity:1;transform:none}
+.pn2 .done img{width:84px;height:84px;object-fit:cover;border-radius:12px}
+.pn2 .done b{display:block;font-size:17px}
+.pn2 .done span{font-size:14px;color:var(--ink-70)}
+.pn2 .hint{position:absolute;right:20px;top:18px;background:rgba(248,246,240,.94);font-weight:700;font-size:14px;padding:8px 13px;border-radius:999px}
+.pn2 .foot{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;margin-top:24px}
+.pn2 .foot ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.pn2 .foot li{padding:8px 14px;border-radius:999px;background:var(--paper);font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(23,17,29,.06)}
+.pn2 .foot li b{color:#8E5A12;margin-right:6px}
+@media (max-width:900px){.pn2 .hd{grid-template-columns:1fr}.pn2 .stage{aspect-ratio:4/3}.pn2 .done img{width:60px;height:60px}}
+</style>
+<div class="wrap">
+ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>Protect Your Nest</span></nav>
+ <div class="hd"><h1 class="h1" id="pn2h-h" style="font-size:clamp(40px,5vw,72px)">Protect Your Nest</h1><p class="lede">Before the old roof comes off, the house gets wrapped. Pull the netting down and see.</p></div>
+ <div class="stage" data-owl="say:Pull it down">
+  <img src="{{A:pn-house.webp}}" alt="A house before roof work begins">
+  <svg class="net" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+   <defs><pattern id="pn2m" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H16M0 0V16" stroke="#17111D" stroke-width="2.2" stroke-opacity=".78"/></pattern>
+    <linearGradient id="pn2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17111D" stop-opacity=".25"/><stop offset="1" stop-color="#17111D" stop-opacity=".05"/></linearGradient></defs>
+   <path class="sheet" d=""/>
+   <path class="edge" d="" fill="none" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+  <span class="pull" role="slider" tabindex="0" aria-label="Pull the protective wrap down over the house" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+  <span class="hint" aria-hidden="true">Drag the amber handle down</span>
+  <div class="done" aria-live="polite"><img src="{{A:pn-wrap.webp}}" alt="The wrap on a real Owl job"><div><b>Wrapped. Work can start.</b><span>This is how it looks on a real Owl job.</span></div></div>
+ </div>
+ <div class="foot"><ol><li><b>1</b>The wrap</li><li><b>2</b>Three cleanup passes</li><li><b>3</b>The aftercare box</li><li><b>4</b>Get It Right guarantee</li></ol><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('pnhero','2',function(root){
+  var st = root.querySelector('.stage'), sheet = st.querySelector('.sheet'), edge = st.querySelector('.edge'), pull = st.querySelector('.pull'), v = 0, drag = false, t = 0;
+  sheet.setAttribute('fill', 'url(#pn2m)');
+  function draw(){ /* the net hangs from the top; its lower edge sags and sways a little */
+    var y = 18 + v*5.2, sag = 26 + v*.12, sw = Math.sin(t)*6*(1 - v/100);
+    var d = 'M0 0 H1000 V' + (y - sag*.3).toFixed(1) + ' Q750 ' + (y + sag + sw).toFixed(1) + ' 500 ' + (y + sw*.5).toFixed(1) + ' T0 ' + (y - sag*.3).toFixed(1) + ' Z';
+    sheet.setAttribute('d', d); edge.setAttribute('d', d.replace(/^M0 0 H1000 V/, 'M1000 ').replace(/ Z$/, ''));
+    pull.style.top = (Math.min(92, Math.max(8, (y + sw*.5)/560*100))) + '%'; pull.setAttribute('aria-valuenow', Math.round(v));
+    st.classList.toggle('wrapped', v >= 92); }
+  function set(n){ v = Math.max(0, Math.min(100, n)); draw(); }
+  function fromE(e){ var r = st.getBoundingClientRect(); return ((e.clientY - r.top)/r.height*560 - 18)/5.2; }
+  pull.addEventListener('pointerdown', function(e){ drag = true; pull.setPointerCapture(e.pointerId); pull.style.cursor = 'grabbing'; });
+  pull.addEventListener('pointermove', function(e){ if (drag) set(fromE(e)); });
+  pull.addEventListener('pointerup', function(){ drag = false; pull.style.cursor = ''; if (v > 85) anim(100); });
+  pull.addEventListener('keydown', function(e){ if (e.key === 'ArrowDown'){ e.preventDefault(); set(v + 10); } if (e.key === 'ArrowUp'){ e.preventDefault(); set(v - 10); } if (e.key === 'End') set(100); if (e.key === 'Home') set(0); });
+  function anim(to){ var from = v, t0 = performance.now(); (function f(n){ var k = Math.min(1, (n - t0)/500); set(from + (to - from)*(1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0); }
+  (function sway(){ t += .03; if (!drag && !OWL.reduce) draw(); requestAnimationFrame(sway); })();
+  set(OWL.reduce ? 100 : 0);
+  if (!OWL.reduce && 'IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); setTimeout(function(){ if (!drag && v < 5) anim(28); }, 500); } }, {threshold:.4}); io.observe(st); }
+});
+</script>
+</section>

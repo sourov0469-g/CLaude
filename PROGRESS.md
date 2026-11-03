@@ -33,7 +33,10 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
 - **ROUND 7 DONE (gate `owl/final/GATE-R7.md`, shots `owl/final/gates/r7/`):** Wise Check page (#/wise-check), in Owl's
   own published wording: hero V1 case picker 8.06 / V2 heat-sensor scan 8.04; includes V1 flip cards 7.78 / V2 rotary knob
   7.94. Axe 0; tests clean; no phone overflow.
-- **Next:** Protect Your Nest page, then About, Service Area, Contact; then deepen inner pages to 5–6+ sections each.
+- **ROUND 8 DONE (gate `owl/final/GATE-R8.md`, shots `owl/final/gates/r8/`):** Protect Your Nest page (#/protect-your-nest):
+  hero V1 woven nest with Owl's photos 8.14 / V2 drag-to-wrap the house 7.96; passes V1 magnet sweep game (the site's one
+  game) 8.20 / V2 three animated pass scenes 7.70. Axe 0; all round tests pass; no phone overflow.
+- **Next:** About page, then Service Area and Contact; then deepen inner pages to 5–6+ sections each.
 
 ---
 
