@@ -1,0 +1,148 @@
+<section class="sec wrap6" id="protect-6" aria-labelledby="pn6-h">
+<style>
+.wrap6{overflow:hidden}
+.wrap6 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.wrap6 .lede{margin-top:12px;max-width:46ch}
+.wrap6 .g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.62fr);gap:clamp(20px,3vw,48px);align-items:start}
+.wrap6 .yard{position:relative;border-radius:26px;overflow:hidden;box-shadow:0 2px 0 #fff inset,0 40px 70px -44px rgba(23,17,29,.55)}
+.wrap6 svg{display:block;width:100%;height:auto;max-width:none}
+.wrap6 .keys{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.wrap6 .key{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:8px 16px;border-radius:16px;text-align:left;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.wrap6 .key b{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:#17111D;color:#F1EFE6;font-size:14px}
+.wrap6 .key:hover{transform:translateY(-2px)}
+.wrap6 .key[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge),0 6px 12px -8px rgba(23,17,29,.4);transform:translateY(3px)}
+.wrap6 .key.done:not([aria-pressed="true"]) b{background:#2E7D32}
+.wrap6 .key:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap6 .play{margin-top:14px}
+.wrap6 .cap{margin-top:18px;padding-top:16px;border-top:3px solid var(--amber)}
+.wrap6 .cap .k{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wrap6 .cap h3{font-size:clamp(22px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;margin:6px 0 8px}
+.wrap6 .cap p{font-size:17px;color:var(--ink-70);margin:0}
+.wrap6 .cap > *{transition:opacity .25s,transform .35s cubic-bezier(.22,.61,.36,1)}
+.wrap6 .cap.fade > *{opacity:0;transform:translateY(6px)}
+.wrap6 .note{margin-top:12px;font-size:14px;color:var(--ink-70)}
+@media (max-width:980px){.wrap6 .g{grid-template-columns:1fr}.wrap6 .keys{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.wrap6 .keys{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.wrap6 .key,.wrap6 .cap > *{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Protect Your Nest System</span><h2 class="h2" id="pn6-h" style="margin-top:12px">Sweep the Yard</h2>
+  <p class="lede rv">The new roof is on. Here is how the yard gets back to the way you left it: three cleanup passes, then a box for you.</p></div></div>
+ <div class="g">
+  <div class="yard" data-owl="say:Watch the sweep"><svg viewBox="0 0 1000 540" role="img" aria-labelledby="pn6-t"><title id="pn6-t">A flower bed and lawn below a house wall after a re-roof, with a tarp holding the tear-off and a few nails and shingle bits past it.</title></svg></div>
+  <div>
+   <ol class="keys" aria-label="Run each part of the cleanup"></ol>
+   <button class="btn btn-line play" type="button" data-mag data-owl="peek">Play All Four</button>
+   <div class="cap" aria-live="polite"><span class="k"></span><h3></h3><p></p></div>
+   <p class="note">A drawing of the system, not a count from a real job.</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','6',function(root){
+  var svg = root.querySelector('svg'), keysEl = root.querySelector('.keys'), cap = root.querySelector('.cap'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(7), h = '';
+  /* wall, door and step, flower bed, striped lawn */
+  h += '<rect width="1000" height="152" fill="#E9E3D5"/>'; for (var y = 14; y < 150; y += 16) h += '<path d="M0 ' + y + 'H1000" stroke="#C9C0AC" stroke-width="2"/>';
+  h += '<rect x="80" y="30" width="86" height="122" fill="#17111D"/><circle cx="152" cy="94" r="4" fill="#EAA221"/><rect y="150" width="1000" height="20" fill="#C9C0AC"/><rect x="50" y="160" width="146" height="40" rx="3" fill="#D9CFBA" stroke="#B5AE9E" stroke-width="2"/>';
+  h += '<rect x="196" y="170" width="804" height="64" fill="#7A5534"/>';
+  for (var m = 0; m < 160; m++){ var mx0 = 200 + R()*796, my0 = 172 + R()*58; h += '<rect x="' + mx0.toFixed(0) + '" y="' + my0.toFixed(0) + '" width="7" height="3" fill="#5E3F25" transform="rotate(' + (R()*180).toFixed(0) + ' ' + mx0.toFixed(0) + ' ' + my0.toFixed(0) + ')"/>'; }
+  for (var b = 0; b < 12; b++) h += '<rect y="' + (234 + b*28) + '" width="1000" height="28" fill="' + (b % 2 ? '#86AD58' : '#8DB45F') + '"/>';
+  h += '<rect y="234" width="1000" height="4" fill="#6F9447"/>';
+  [[300, 196], [520, 190], [760, 196], [910, 192]].forEach(function(s){ h += '<circle cx="' + s[0] + '" cy="' + s[1] + '" r="34" fill="#4F7A3A"/><circle cx="' + (s[0] - 16) + '" cy="' + (s[1] - 8) + '" r="20" fill="#5E8C45"/><circle cx="' + (s[0] + 18) + '" cy="' + (s[1] - 4) + '" r="18" fill="#5E8C45"/>'; });
+  /* the bag the crew fills; the step where the box goes */
+  h += '<g class="bag" opacity="0"><path d="M930 400q-12 70 6 112h52q16-44 4-112z" fill="#2A2131"/><path d="M928 402q34-14 66 0" stroke="#17111D" stroke-width="6" fill="none"/></g>';
+  /* tarp with what it caught, rolled up in pass 1 */
+  h += '<g class="tarp"><path d="M220 240H990V352H220z" fill="#3F6E8C"/><path d="M220 240H990M220 352H990" stroke="#2C5470" stroke-width="4"/><path d="M380 240L360 352M600 240L612 352M800 240L790 352" stroke="#2C5470" stroke-width="2" opacity=".6"/>';
+  for (var gx = 232; gx < 990; gx += 96) h += '<circle cx="' + gx + '" cy="246" r="4" fill="#CFD8DE"/><circle cx="' + gx + '" cy="346" r="4" fill="#CFD8DE"/>';
+  for (var t = 0; t < 26; t++){ var tx = 240 + R()*730, ty = 252 + R()*90; h += '<path d="M' + tx.toFixed(0) + ' ' + ty.toFixed(0) + 'l' + (14 + R()*16).toFixed(0) + ' ' + (R()*6 - 3).toFixed(0) + 'l' + (R()*6 - 3).toFixed(0) + ' ' + (8 + R()*6).toFixed(0) + 'l-' + (16 + R()*12).toFixed(0) + ' 2z" fill="' + (R() < .5 ? '#4E4956' : '#5B5662') + '"/>'; }
+  h += '</g>';
+  /* strays past the tarp: shingle bits and nails; one nail hides under the shrub in the bed */
+  var BITS = [[120, 300], [180, 430], [470, 470], [690, 420], [840, 500]], NAILS = [];
+  for (var n = 0; n < 15; n++) NAILS.push([40 + R()*900, 372 + R()*150]);
+  NAILS.push([150, 262]); NAILS.push([60, 330]);
+  var HID = [742, 214];
+  BITS.forEach(function(p, i){ h += '<g class="bit" data-i="' + i + '" transform="translate(' + p[0] + ' ' + p[1] + ')"><path d="M-14 -6l26 -2 4 12 -28 4z" fill="#55505D"/><path d="M-14 -6l26 -2" stroke="#17111D" stroke-opacity=".4" stroke-width="2"/></g>'; });
+  var nailSvg = '<path d="M-7 0H8" stroke="#9AA3A8" stroke-width="2.6" stroke-linecap="round"/><path d="M-8 -3.5V3.5" stroke="#7C868C" stroke-width="3.4" stroke-linecap="round"/>';
+  NAILS.forEach(function(p, i){ h += '<g class="nail" transform="translate(' + p[0].toFixed(0) + ' ' + p[1].toFixed(0) + ') rotate(' + (R()*180).toFixed(0) + ')">' + nailSvg + '</g>'; });
+  h += '<g class="hid" transform="translate(' + HID[0] + ' ' + HID[1] + ') rotate(-24)">' + nailSvg + '</g>';
+  /* the shrub drawn again over the hidden nail so it really is hidden at first */
+  h += '<g class="shrubfront"><circle cx="734" cy="210" r="15" fill="#5E8C45" opacity=".92"/><circle cx="752" cy="214" r="10" fill="#4F7A3A" opacity=".92"/></g>';
+  /* the rolling magnet */
+  h += '<g class="mag" transform="translate(-260 330)"><path d="M0 0L60 -110" stroke="#3A3540" stroke-width="6" stroke-linecap="round"/><path d="M52 -112h22" stroke="#17111D" stroke-width="10" stroke-linecap="round"/><rect x="-80" y="-10" width="160" height="20" rx="6" fill="#B3261E"/><rect x="-80" y="-10" width="160" height="7" rx="3" fill="#D24B3F"/><circle cx="-70" cy="12" r="9" fill="#17111D"/><circle cx="70" cy="12" r="9" fill="#17111D"/></g>';
+  /* footsteps, the check, the box */
+  var FP = [];
+  for (var f = 0; f < 18; f++){ var k = f/17, fx = 210 + k*560, fy = 300 + Math.sin(k*Math.PI*2.2)*90 - (k > .85 ? (k - .85)*520 : 0); FP.push([fx + (f % 2 ? 8 : -8), fy]); }
+  FP.forEach(function(p, i){ h += '<ellipse class="fp" cx="' + p[0].toFixed(0) + '" cy="' + p[1].toFixed(0) + '" rx="6" ry="10" fill="#17111D" opacity="0" transform="rotate(70 ' + p[0].toFixed(0) + ' ' + p[1].toFixed(0) + ')"/>'; });
+  h += '<g class="lens" opacity="0"><circle cx="742" cy="214" r="26" fill="none" stroke="#EAA221" stroke-width="6"/><path d="M761 233l16 16" stroke="#EAA221" stroke-width="8" stroke-linecap="round"/></g>';
+  h += '<g class="ok" opacity="0"><circle cx="880" cy="290" r="30" fill="#2E7D32"/><path d="M866 290l10 10 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>';
+  h += '<g class="box" transform="translate(122 -160)"><path d="M-46 0L0 -16 46 0 0 16z" fill="#E2C48D"/><path d="M-46 0V40L0 56V16z" fill="#C9A06A"/><path d="M46 0V40L0 56V16z" fill="#B48A55"/><path d="M-23 -8L23 8" stroke="#EAA221" stroke-width="8"/><path d="M0 16V56" stroke="#EAA221" stroke-width="6"/></g>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var Q = function(s){ return svg.querySelector(s); }, QA = function(s){ return [].slice.call(svg.querySelectorAll(s)); };
+  var tarp = Q('.tarp'), bag = Q('.bag'), bits = QA('.bit'), nails = QA('.nail'), hid = Q('.hid'), mag = Q('.mag'), fps = QA('.fp'), lens = Q('.lens'), ok = Q('.ok'), box = Q('.box');
+  var NP = NAILS.map(function(p, i){ var a = nails[i].getAttribute('transform').match(/rotate\(([-\d.]+)\)/)[1]; return {x:p[0], y:p[1], a:+a, on:0, k:0, ox:0, oy:0}; });
+
+  /* a tiny timeline: everything eases from where it is to where it goes, nothing jumps */
+  var jobs = [], raf = 0, run = 0;
+  function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
+  function job(d, fn, delay){ jobs.push({t0: performance.now() + (delay || 0), d: d, fn: fn}); if (!raf) raf = requestAnimationFrame(loop); }
+  function loop(now){ jobs = jobs.filter(function(j){ var k = (now - j.t0)/j.d; if (k < 0) return true; j.fn(Math.min(1, k)); return k < 1; }); raf = jobs.length ? requestAnimationFrame(loop) : 0; }
+  function stopAll(){ jobs = []; run++; }
+
+  var STEPS = [
+    {k:'During the job', n:'The wrap', p:'Mesh from the eaves down, and a tarp over the lawn. It catches the tear-off; a few pieces still land past it.'},
+    {k:'Pass 1', n:'The crew', p:'The crew’s cleanup: the tarp comes up with what it caught, and the stray pieces go with it.'},
+    {k:'Pass 2', n:'A magnet sweep', p:'A rolling magnet goes over the lawn for the nails you can’t see in the grass.'},
+    {k:'Pass 3', n:'The project manager', p:'The project manager walks the yard to check, under the shrubs too.'},
+    {k:'Then', n:'The aftercare box', p:'Left with you when the crew goes.'}];
+  var state = 0, keys = STEPS.slice(1).map(function(s, i){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.className = 'key'; b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<b>' + (i + 1) + '</b>' + (i < 3 ? 'Pass ' + (i + 1) + ': ' : '') + s.n; b.addEventListener('click', function(){ stopAll(); go(i + 1, false); }); li.appendChild(b); keysEl.appendChild(li); return b; });
+  function say(i, anim){ var s = STEPS[i]; function put(){ cap.querySelector('.k').textContent = s.k; cap.querySelector('h3').textContent = s.n; cap.querySelector('p').textContent = s.p; cap.classList.remove('fade'); }
+    if (anim && !OWL.reduce){ cap.classList.add('fade'); setTimeout(put, 180); } else put(); }
+  function mark(i){ state = i; keys.forEach(function(b, j){ b.setAttribute('aria-pressed', j + 1 === i); b.classList.toggle('done', j + 1 < i); }); }
+
+  /* end states, applied instantly */
+  function nailAt(i, x, y, a, o){ nails[i].setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') rotate(' + a.toFixed(0) + ')'); nails[i].setAttribute('opacity', o); }
+  function setTo(k){
+    tarp.setAttribute('transform', k >= 1 ? 'translate(990 240) scale(0 .12) translate(-990 -240)' : ''); tarp.setAttribute('opacity', k >= 1 ? 0 : 1);
+    bag.setAttribute('opacity', k >= 1 ? 1 : 0);
+    bits.forEach(function(e, i){ var p = BITS[i]; e.setAttribute('transform', k >= 1 ? 'translate(960 420) scale(.4)' : 'translate(' + p[0] + ' ' + p[1] + ')'); e.setAttribute('opacity', k >= 1 ? 0 : 1); });
+    mag.setAttribute('transform', 'translate(-260 330)');
+    NP.forEach(function(n, i){ n.on = 0; nailAt(i, n.x, n.y, n.a, k >= 2 ? 0 : 1); });
+    hid.setAttribute('opacity', k >= 3 ? 0 : 1); hid.setAttribute('transform', 'translate(' + HID[0] + ' ' + HID[1] + ') rotate(-24)');
+    fps.forEach(function(e){ e.setAttribute('opacity', k >= 3 ? .28 : 0); }); lens.setAttribute('opacity', 0); ok.setAttribute('opacity', k >= 3 ? 1 : 0);
+    box.setAttribute('transform', k >= 4 ? 'translate(122 118)' : 'translate(122 -160)'); }
+
+  /* each pass, animated from the state before it */
+  function anim(k, done){ var my = run;
+    if (k === 1){ bag.setAttribute('opacity', 1);
+      job(1300, function(t){ var e = ease(t); tarp.setAttribute('transform', 'translate(990 240) scale(' + (1 - e).toFixed(3) + ' ' + (1 - e*.88).toFixed(3) + ') translate(-990 -240)'); tarp.setAttribute('opacity', Math.max(0, 1 - Math.max(0, e - .7)/.3).toFixed(2)); });
+      bits.forEach(function(el, i){ var p = BITS[i]; job(700, function(t){ var e = ease(t), x = p[0] + (960 - p[0])*e, y = p[1] + (420 - p[1])*e - Math.sin(e*Math.PI)*90; el.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + (1 - e*.6).toFixed(2) + ')'); el.setAttribute('opacity', Math.max(0, 1 - Math.max(0, e - .85)/.15).toFixed(2)); }, 900 + i*170); });
+      job(1, function(){ if (my === run) done(); }, 2400); }
+    if (k === 2){ var rows = [[330, -260, 1260], [470, 1260, -260]];
+      job(3600, function(t){ var leg = t < .5 ? 0 : 1, lt = (t - leg*.5)*2, r = rows[leg], mx = r[1] + (r[2] - r[1])*lt, my2 = r[0];
+        mag.setAttribute('transform', 'translate(' + mx.toFixed(1) + ' ' + my2 + ')' + (leg ? ' scale(-1 1)' : ''));
+        NP.forEach(function(n, i){ if (n.on === 0 && Math.abs(n.x - mx) < 70 && Math.abs(n.y - my2) < 80){ n.on = 1; n.k = 0; n.ox = (Math.random()*120 - 60); n.oy = -14 + Math.random()*6; n.leg = leg; }
+          if (n.on === 1){ n.k = Math.min(1, n.k + .07); var e = ease(n.k), gx = mx + (n.leg ? -n.ox : n.ox), gy = my2 + n.oy; if (n.leg !== leg){ n.on = 2; } nailAt(i, n.x + (gx - n.x)*e, n.y + (gy - n.y)*e, n.a*(1 - e) + 90*e, 1); } });
+        if (t >= 1) NP.forEach(function(n, i){ nailAt(i, n.x, n.y, n.a, 0); }); });
+      job(1, function(){ NP.forEach(function(n, i){ if (n.on === 2) nailAt(i, n.x, n.y, n.a, 0); }); }, 1820);
+      job(1, function(){ if (my === run) done(); }, 3700); }
+    if (k === 3){ fps.forEach(function(e, i){ job(260, function(t){ e.setAttribute('opacity', (t*.28).toFixed(2)); }, i*120); });
+      job(400, function(t){ lens.setAttribute('opacity', t.toFixed(2)); }, 2200);
+      job(700, function(t){ var e = ease(t); hid.setAttribute('transform', 'translate(' + HID[0] + ' ' + (HID[1] - e*40).toFixed(1) + ') rotate(' + (-24 + e*114).toFixed(0) + ')'); hid.setAttribute('opacity', (1 - e).toFixed(2)); }, 2700);
+      job(400, function(t){ lens.setAttribute('opacity', (1 - t).toFixed(2)); ok.setAttribute('opacity', t.toFixed(2)); }, 3300);
+      job(1, function(){ if (my === run) done(); }, 3800); }
+    if (k === 4){ job(900, function(t){ var y = t < .7 ? -160 + 278*Math.pow(t/.7, 2) : 118 - Math.sin((t - .7)/.3*Math.PI)*14; box.setAttribute('transform', 'translate(122 ' + y.toFixed(1) + ')'); });
+      job(1, function(){ if (my === run) done(); }, 1000); } }
+  function go(k, chain){ setTo(k - 1); mark(k); say(k, true);
+    if (OWL.reduce){ setTo(k); return; }
+    anim(k, function(){ setTo(k); if (chain && k < 4) go(k + 1, true); }); }
+  root.querySelector('.play').addEventListener('click', function(){ stopAll(); go(1, true); });
+  setTo(0); say(0, false);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg);
+});
+</script>
+</section>

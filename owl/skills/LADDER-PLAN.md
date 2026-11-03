@@ -202,3 +202,17 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   station lights its card with Owl's published line. The cards are keys that move the route to their station. No
   order of work is claimed: the stations are numbered as Owl lists the parts. Skills: ⟦S0407⟧ path draw, ⟦S1325⟧
   progress, ⟦S0526⟧ anatomy cutaway, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+
+## L15 · Protect Your Nest 6 + 7 (Protect stands at 5: V1 same job two yards, V2 three cards, V3 yard map, V4 cloth wrap, V5 woven nest)
+- **Protect 6 · "Sweep the Yard"** — reference **Lando Norris** (bespoke craft, motion that comes to rest). One flower
+  bed and lawn below a wall, just after the new roof is on: the tarp holds most of the tear-off, a few shingle bits
+  and nails lie past it. Four keys run the system in Owl's words: pass 1 the crew (the tarp folds up with its load,
+  stray bits are picked up), pass 2 the magnet sweep (a rolling magnet crosses the lawn and nails leap to it),
+  pass 3 the project manager's walk (footsteps cross the yard and find the last nail under a shrub), then the
+  aftercare box set down on the step. Play runs all four. No counts are claimed; it is a drawing. Skills:
+  ⟦S0489⟧ debris fall and settle, ⟦S0407⟧ footstep path draw, ⟦S1388⟧ keys, ⟦S1246⟧ step keys, ⟦S0451⟧ title.
+- **Protect 7 · "Three Chapters"** — reference **MERSI** (split-cover chapters). Three tall chapter covers: 01 The
+  Wrap, 02 Three Passes, 03 The Box. Opening one splits its cover down the middle; the halves slide apart to show
+  the chapter (a drawn plate and Owl's words), and the open chapter widens while the others narrow to their spines.
+  One open at a time; keyboard buttons with aria-expanded. Skills: ⟦S0409⟧ transition, ⟦S0910⟧ accordion a11y,
+  ⟦S0407⟧ plate draw-on, ⟦S0451⟧ title.

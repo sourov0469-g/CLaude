@@ -1,0 +1,281 @@
+[
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "protect"
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Sweep the Yard"
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "truth: names the wrap, three passes and the box; no storm, hail or shield",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "the starting state is the wrap: tarp down, strays past it",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "pass 1: the tarp comes up and the stray bits go to the bag",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "…while the nails are still in the grass",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "pass 2: the magnet is rolling across the lawn and nails are lifting to it",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "after the sweep no nail is left in the lawn, but the one under the shrub is",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "pass 3: footsteps cross the yard and the manager finds the last one",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "the aftercare box is set down on the step, in Owl's words",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "pressed and done states follow the passes",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "the drawing is labelled as not a count from a real job",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "protect"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Three Chapters"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "truth: the wrap, three passes and the box in Owl's words; no storm, hail or shield",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "chapter 01 opens on view: its cover splits apart",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "the open chapter is wider than the closed ones",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "opening chapter 02 closes 01 (one open at a time)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "closed chapters keep their content out of reach (inert)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "chapter 02 lists the three passes in order",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "arrow then Enter opens chapter 03 (the box)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

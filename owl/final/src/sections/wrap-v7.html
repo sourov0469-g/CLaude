@@ -1,0 +1,79 @@
+<section class="sec wrap7" id="protect-7" aria-labelledby="pn7-h">
+<style>
+.wrap7{overflow:hidden}
+.wrap7 .hd{margin-bottom:clamp(18px,2.6vw,30px)}
+.wrap7 .lede{margin-top:12px;max-width:46ch}
+.wrap7 .book{display:flex;gap:14px;height:clamp(440px,42vw,560px)}
+.wrap7 .ch{position:relative;flex:1 1 0;min-width:0;border-radius:24px;overflow:hidden;background:#FBFAF6;box-shadow:0 2px 0 #fff inset,0 30px 50px -34px rgba(23,17,29,.55);transition:flex-grow .8s cubic-bezier(.7,0,.2,1)}
+.wrap7 .ch.open{flex-grow:2.8}
+.wrap7 .inner{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(14px,2vw,28px);align-items:center;padding:clamp(70px,7vw,84px) clamp(20px,3vw,40px) clamp(20px,3vw,36px);opacity:0;transition:opacity .4s .35s}
+.wrap7 .ch.open .inner{opacity:1}
+.wrap7 .inner svg{width:100%;height:auto;max-height:100%}
+.wrap7 .inner .k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wrap7 .inner h3{font-size:clamp(26px,2.6vw,38px);font-weight:900;letter-spacing:-.03em;margin:6px 0 10px}
+.wrap7 .inner p{font-size:18px;color:var(--ink-70);margin:0;max-width:32ch}
+.wrap7 .inner ol{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.wrap7 .inner li{display:flex;gap:10px;align-items:center;font-weight:700}
+.wrap7 .inner li i{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--amber);font-style:normal;font-size:13px;font-weight:800}
+.wrap7 .ink{stroke-dasharray:1;stroke-dashoffset:1}
+.wrap7 .ch.open .ink{animation:pn7d 1.4s .5s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes pn7d{to{stroke-dashoffset:0}}
+.wrap7 .half{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1);z-index:2}
+.wrap7 .half.l{left:0}.wrap7 .half.r{right:0}
+.wrap7 .face{position:absolute;top:0;bottom:0;width:200%;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(20px,2.4vw,30px);background:var(--bg);color:var(--fg)}
+.wrap7 .half.l .face{left:0}.wrap7 .half.r .face{right:0}
+.wrap7 .half.l{box-shadow:inset -1px 0 0 rgba(0,0,0,.18)}
+.wrap7 .face b{font-size:clamp(84px,9vw,150px);font-weight:900;letter-spacing:-.06em;line-height:.85}
+.wrap7 .face span{font-size:clamp(22px,2.2vw,32px);font-weight:900;letter-spacing:-.02em;padding-right:clamp(60px,6vw,90px)}
+.wrap7 .face svg{position:absolute;right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);width:clamp(48px,5vw,72px);opacity:.9}
+.wrap7 .ch.open .half.l{transform:translateX(-102%)}
+.wrap7 .ch.open .half.r{transform:translateX(102%)}
+.wrap7 .ch:not(.open):hover .half.l{transform:translateX(-4px)}
+.wrap7 .ch:not(.open):hover .half.r{transform:translateX(4px)}
+.wrap7 .seam{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--amber);opacity:0;transition:opacity .3s;z-index:3;pointer-events:none}
+.wrap7 .ch:not(.open):hover .seam{opacity:1}
+.wrap7 .cover{position:absolute;inset:0;z-index:4;display:flex;align-items:flex-start;padding:18px 22px;border-radius:inherit;text-align:left;font-weight:800;font-size:15px;color:#17111D}
+.wrap7 .cover .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap7 .ch.open .cover .lb{position:static;width:auto;height:auto;clip:auto}
+.wrap7 .ch.open .cover{bottom:auto;height:56px;cursor:default}
+.wrap7 .cover:focus-visible{outline:3px solid var(--amber);outline-offset:-6px}
+.wrap7 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+@media (max-width:900px){.wrap7 .book{flex-direction:column;height:auto}.wrap7 .ch{flex:none;height:150px;transition:height .8s cubic-bezier(.7,0,.2,1)}.wrap7 .ch.open{height:auto;min-height:520px}.wrap7 .inner{position:relative;grid-template-columns:1fr;padding-top:64px}.wrap7 .face b{font-size:72px}}
+@media (prefers-reduced-motion:reduce){.wrap7 .ch,.wrap7 .half,.wrap7 .inner{transition:none}.wrap7 .ch.open .ink{animation:none;stroke-dashoffset:0}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Protect Your Nest System</span><h2 class="h2" id="pn7-h" style="margin-top:12px">Three Chapters</h2>
+  <p class="lede rv">How Owl looks after your home and yard while the old roof comes off and the new one goes on. Open a chapter.</p></div>
+ <div class="book" data-owl="say:Open a chapter"></div>
+ <div class="cta"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('wrap','7',function(root){
+  var book = root.querySelector('.book'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var C = [
+    {n:'01', t:'The Wrap', bg:'#17111D', fg:'#F1EFE6', k:'Chapter 01 · Before the tear-off', h:'The wrap', p:'Mesh from the eaves down, and a tarp over the lawn. It goes up before the old roof comes off.',
+     ico:'<path d="M10 40L50 12 90 40" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M20 40V90M35 40V90M50 40V90M65 40V90M80 40V90M14 56H86M14 72H86" stroke="#EAA221" stroke-width="3"/>',
+     art:'<rect y="250" width="400" height="50" fill="#8DB45F"/><rect x="70" y="120" width="260" height="130" fill="#E9E3D5"/><path class="ink" pathLength="1" d="M40 126L200 30 360 126" fill="none" stroke="#17111D" stroke-width="10" stroke-linejoin="round"/><g class="ink-mesh"><path class="ink" pathLength="1" d="M52 126V250M84 126V250M116 126V250M148 126V250M180 126V250M212 126V250M244 126V250M276 126V250M308 126V250M340 126V250" stroke="#17111D" stroke-width="3" fill="none" opacity=".7"/><path class="ink" pathLength="1" d="M48 150H352M48 180H352M48 210H352M48 240H352" stroke="#17111D" stroke-width="3" fill="none" opacity=".7"/></g><path d="M24 254H376L392 296H8z" fill="#3F6E8C"/><path d="M24 254H376" stroke="#2C5470" stroke-width="4"/>'},
+    {n:'02', t:'Three Passes', bg:'#EAA221', fg:'#17111D', k:'Chapter 02 · After the new roof', h:'Three cleanup passes', p:'The crew, a magnet sweep, then the project manager.', list:['The crew', 'A magnet sweep', 'The project manager’s walk-through'],
+     ico:'<circle cx="20" cy="50" r="12" fill="currentColor"/><circle cx="50" cy="50" r="12" fill="currentColor"/><circle cx="80" cy="50" r="12" fill="#17111D" opacity=".35"/>',
+     art:'<rect y="240" width="400" height="60" fill="#8DB45F"/><g transform="translate(70 160)"><path class="ink" pathLength="1" d="M0 70V-40M-24 70H24" stroke="#17111D" stroke-width="7" fill="none" stroke-linecap="round"/><path class="ink" pathLength="1" d="M-30 70h60" stroke="#17111D" stroke-width="7" fill="none"/><path d="M-26 64l52 0-6-30h-40z" fill="#5B5662"/></g><g transform="translate(200 210)"><path class="ink" pathLength="1" d="M0 0L50 -110" stroke="#3A3540" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="-60" y="-10" width="120" height="20" rx="6" fill="#B3261E"/><circle cx="-50" cy="14" r="9" fill="#17111D"/><circle cx="50" cy="14" r="9" fill="#17111D"/></g><g transform="translate(330 150)"><rect x="-34" y="-46" width="68" height="92" rx="8" fill="#FBFAF6" stroke="#17111D" stroke-width="5"/><rect x="-14" y="-54" width="28" height="14" rx="4" fill="#17111D"/><path class="ink" pathLength="1" d="M-18 0l12 12 24-26" stroke="#2E7D32" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'},
+    {n:'03', t:'The Box', bg:'#F1EFE6', fg:'#17111D', k:'Chapter 03 · When the crew goes', h:'The aftercare box', p:'Left with you when the crew goes.',
+     ico:'<path d="M14 34L50 20 86 34 50 48z" fill="none" stroke="currentColor" stroke-width="5"/><path d="M14 34V74L50 88V48M86 34V74L50 88" fill="none" stroke="currentColor" stroke-width="5"/><path d="M32 27L68 41" stroke="#EAA221" stroke-width="6"/>',
+     art:'<rect y="250" width="400" height="50" fill="#D9CFBA"/><g transform="translate(200 170)"><path d="M-110 0L0 -40 110 0 0 40z" fill="#E2C48D"/><path d="M-110 0V96L0 136V40z" fill="#C9A06A"/><path d="M110 0V96L0 136V40z" fill="#B48A55"/><path class="ink" pathLength="1" d="M-55 -20L55 20" stroke="#EAA221" stroke-width="16" fill="none"/><path class="ink" pathLength="1" d="M0 40V136" stroke="#EAA221" stroke-width="12" fill="none"/></g>'}];
+  var chs = C.map(function(c, i){ var d = document.createElement('div'); d.className = 'ch';
+    var face = '<div class="face" style="--bg:' + c.bg + ';--fg:' + c.fg + '"><svg viewBox="0 0 100 100" aria-hidden="true" style="color:' + c.fg + '">' + c.ico + '</svg><b>' + c.n + '</b><span>' + c.t + '</span></div>';
+    d.innerHTML = '<div class="inner" id="pn7-c' + i + '" role="region" aria-labelledby="pn7-b' + i + '"><svg viewBox="0 0 400 300" aria-hidden="true">' + c.art + '</svg><div><span class="k">' + c.k + '</span><h3>' + c.h + '</h3><p>' + c.p + '</p>' + (c.list ? '<ol>' + c.list.map(function(x, j){ return '<li><i>' + (j + 1) + '</i>' + x + '</li>'; }).join('') + '</ol>' : '') + '</div></div>'
+      + '<div class="half l" aria-hidden="true">' + face + '</div><div class="half r" aria-hidden="true">' + face + '</div><span class="seam" aria-hidden="true"></span>'
+      + '<button class="cover" type="button" id="pn7-b' + i + '" aria-expanded="false" aria-controls="pn7-c' + i + '"><span class="lb">' + c.n + ' · ' + c.t + '</span></button>';
+    d.querySelector('.cover').addEventListener('click', function(){ open(i); });
+    d.querySelector('.cover').addEventListener('keydown', function(e){ var m = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? i + 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? i - 1 : null; if (m === null || m < 0 || m > 2) return; e.preventDefault(); chs[m].querySelector('.cover').focus(); });
+    book.appendChild(d); return d; });
+  var cur = -1;
+  function open(i){ if (i === cur) return; cur = i; chs.forEach(function(d, j){ var on = j === i; d.classList.toggle('open', on); d.querySelector('.cover').setAttribute('aria-expanded', on); d.querySelector('.inner').hidden = false; d.querySelector('.inner').setAttribute('aria-hidden', !on); if (!on) d.querySelector('.inner').setAttribute('inert', ''); else d.querySelector('.inner').removeAttribute('inert'); }); }
+  chs.forEach(function(d){ d.querySelector('.inner').setAttribute('inert', ''); d.querySelector('.inner').setAttribute('aria-hidden', 'true'); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ open(0); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); setTimeout(function(){ open(0); }, 450); } }, {threshold:.35}); io.observe(book);
+});
+</script>
+</section>

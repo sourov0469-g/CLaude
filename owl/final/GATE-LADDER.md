@@ -492,3 +492,29 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Its easing was frame-rate bound and missed the end under load; it is now time-based.
 - Idle grease-pencil dots showed on unchosen frames; they are now hidden.
 - The phone loupe touched the gutter; it is now inset.
+
+## L15 · Protect Your Nest 6 + 7 · checks 43/43 · evidence `gates/ladder/L15-protect-6-7/` · Protect now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Protect 6 · Sweep the Yard** | Lando Norris (bespoke craft, motion that comes to rest) | One flower bed and lawn below the wall after the new roof is on. The tarp holds the tear-off; a few shingle bits and nails lie past it. Four keys run the system: pass 1 the crew (the tarp folds up with its load, the strays arc into the bag), pass 2 the magnet sweep (a rolling magnet crosses the lawn twice and nails leap to it), pass 3 the project manager (footsteps cross the yard, a lens finds the last nail under a shrub, a check), then the aftercare box drops onto the step. Play All Four runs them in turn. Nothing jumps: every piece eases from where it is. | 8.4 | 8.4 | 8.6 | 8.8 | **8.50** |
+| **Protect 7 · Three Chapters** | MERSI (split-cover chapters) | Three tall covers (01 The Wrap on ink, 02 Three Passes on amber, 03 The Box on cream). Opening one splits its cover down the middle; the halves slide apart, the chapter widens to show a drawn plate (drawn on) and Owl's words, and the others narrow. One open at a time; arrow keys move between covers; closed chapters are inert. | 8.4 | 8.2 | 8.0 | 8.6 | **8.30** |
+
+**Truth:**
+- Both say only what the Protect Your Nest System is in Owl's words: the wrap (mesh from the eaves down, a tarp over the lawn), three cleanup passes (the crew, a magnet sweep, the project manager) and the aftercare box ("Left with you when the crew goes"). No storm, hail or shield (tested, the standing rule for every Protect version).
+- Protect 6 is labelled "A drawing of the system, not a count from a real job"; it shows no counts.
+- The box's contents are not described, because Owl does not publish them.
+
+**Checks run:** the generic gate, plus:
+- Protect 6: the start state is the wrap; pass 1 clears the tarp and bits but leaves the nails; mid pass 2 the magnet is on the lawn with nails lifting; after the sweep no lawn nail is left but the hidden one is; pass 3 lays the footsteps, finds it and shows the check; the box lands on the step with Owl's line; pressed and done states; the drawing label.
+- Protect 7: the truth wording; chapter 01 splits open on view; the open chapter is more than twice the width of a closed one; opening 02 closes 01; closed content is inert; 02 lists the passes in order; arrow + Enter opens 03.
+
+**Ledger:**
+- **Protect 6:** debris arcs and settle, no teleporting ⟦S0489⟧; footstep path ⟦S0407⟧; pass keys ⟦S1388⟧ ⟦S1246⟧; title ⟦S0451⟧.
+- **Protect 7:** split and flex transition ⟦S0409⟧; accordion a11y (aria-expanded, inert) ⟦S0910⟧; plate draw-on ⟦S0407⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Protect 6's mulch flecks rotated about the wrong origin and landed on the siding; they now rotate in place.
+- The last two strays finished after pass 1's end state and wrote "-0.00"; values are now clamped and the pass ends after the last piece.
+- Protect 7's cover icons sat on the numerals at narrow widths; they moved to the bottom.
+
+**Evidence note:** the full-page capture replays Protect 7's width transition, so its evidence is viewport shots (`f25`). Protect 6 also has 2× shots mid-sweep, mid-walk and with the box set down.
