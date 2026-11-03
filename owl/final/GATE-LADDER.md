@@ -426,3 +426,23 @@ Each round adds two versions to one homepage slot, in the order the overnight br
   - live status: ⟦S1442⟧ (feedback).
 
 **First pass of the ladder complete:** every non-hero slot now stands at 5, and the hero at 10. Next pass: V6 + V7 for Video → Booking.
+
+## L12 · Video 6 + 7 · checks 40/40 · evidence `gates/ladder/L12-video-6-7/` · Video now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Video 6 · Through the Window** | Cowboy (warmth, people first) | A drawn house front whose picture-window curtains draw open when the section is seen; Owl's crew film plays inside the window. The moment's name is written on the sill and follows the film; the lamp in the side window changes with the moments. 3D play/pause key, "Watch the Full Film" (YouTube ehKLv5DF2TQ), "Book a Wise Check". | 8.2 | 8.4 | 8.0 | 8.6 | **8.28** |
+| **Video 7 · Scrub the Day** | Apple AirPods Pro (pinned scroll; the film is the event) | The stage pins while you scroll and the scroll drives the clip's time, eased frame by frame: down plays forward, up rewinds. The five frame-checked moments rise as large captions with a timecode, and a progress rail lights a dot for each moment passed. Reduced motion gives a normal player with controls. | 8.6 | 8.0 | 8.4 | 8.4 | **8.36** |
+
+**Truth:**
+- Both use only Owl's own crew clip; every caption comes from the frame-checked moments list (rafters and decking, GAF shingles carried up, crew with a shingle, walking a finished roof, OSB decking carried in). No invented claims.
+- Roofer check: the window film is a real job; the sill line "Walking a finished roof" matches the frame at 9.2 s onwards (tested by seeking to 9.6 s).
+
+**Checks run:** the generic gate, plus:
+- Video 6: curtains open on view; the clip is the crew film; the sill names a listed moment and follows a seek to 9.6 s; the play key pauses and relabels; the full film opens YouTube ehKLv5DF2TQ.
+- Video 7: five rail dots; scrolling to 62% sets the rail to 0.62 and the film to about 9.6 s; the caption reads "Finished roof" with four dots lit; the stage stays pinned; scrolling back rewinds to "Rafters"; the full film opens.
+
+**Ledger:**
+- **Video 6:** curtain and frame draw ⟦S0407⟧; open sequence ⟦S0187⟧; 3D keys ⟦S1388⟧; modal ⟦S1046⟧; title ⟦S0451⟧.
+- **Video 7:** sticky artifact ⟦S0448⟧; progress rail ⟦S1325⟧; captions ⟦S0451⟧; timecodes ⟦S1352⟧.
+
+**Build change:** repeated video posters are now stored once like the images (`poster` → `data-aposter`, restored by `OWL.hydrate`); the file went from 6.90 to 5.82 MB. The homepage regression (`home-verify`) passes 50/50, and all 10 rendered posters hydrate.

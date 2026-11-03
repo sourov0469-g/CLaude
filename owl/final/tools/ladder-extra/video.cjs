@@ -24,5 +24,32 @@ module.exports = {
     rec('Scatter breaks the shot apart again', await p.evaluate(S => !document.querySelector(S + ' .grid').classList.contains('set'), S));
     await p.waitForTimeout(2200);
     rec('…and it reassembles', await p.evaluate(S => document.querySelector(S + ' .grid').classList.contains('set'), S));
+  },
+  '6': async (p, S, rec) => {
+    await p.waitForTimeout(1800);
+    rec('the curtains draw open when the window comes into view', await p.evaluate(S => document.querySelector(S + ' .front').classList.contains('open') && getComputedStyle(document.querySelector(S + ' .cur.l')).transform !== 'none', S));
+    rec('the clip in the window is Owl\'s own crew film', await p.evaluate(S => document.querySelector(S + ' video').dataset.media === 'crew', S));
+    rec('the sill names a moment from the frame-checked list', await p.evaluate(S => ['Rafters and new decking', 'GAF shingles carried up', 'One of the crew, shingle in hand', 'Walking a finished roof', 'OSB carried in for the next roof'].includes(document.querySelector(S + ' .sill').textContent), S));
+    await p.evaluate(S => { const v = document.querySelector(S + ' video'); v.currentTime = 9.6; }, S); await p.waitForTimeout(600);
+    rec('the sill follows the film (9.6 s → finished roof)', await p.evaluate(S => document.querySelector(S + ' .sill').textContent === 'Walking a finished roof', S));
+    await p.evaluate(S => document.querySelector(S + ' video').play().catch(() => {}), S); await p.waitForTimeout(200);
+    await p.click(S + ' .pp'); await p.waitForTimeout(250);
+    rec('the play key pauses and relabels', await p.evaluate(S => document.querySelector(S + ' video').paused && document.querySelector(S + ' .pp').getAttribute('aria-label') === 'Play the film', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '7': async (p, S, rec) => {
+    rec('five moment dots sit on the rail', await p.evaluate(S => document.querySelectorAll(S + ' .rail b').length === 5, S));
+    const go = k => p.evaluate(([S, k]) => { const t = document.querySelector(S + ' .track'), span = t.offsetHeight - innerHeight * .9, top = t.getBoundingClientRect().top + scrollY; scrollTo(0, top + span * k); }, [S, k]);
+    await go(0.62); await p.waitForTimeout(1500);
+    rec('scrolling sets the rail to the scroll position', await p.evaluate(S => Math.abs(parseFloat(document.querySelector(S + ' .rail').style.getPropertyValue('--p')) - .62) < .04, S));
+    rec('the film follows the scroll (about 9.6 s)', await p.evaluate(S => Math.abs(document.querySelector(S + ' video').currentTime - .62 * 15.5) < 1.2, S));
+    rec('the caption names the moment at that point', await p.evaluate(S => document.querySelector(S + ' .cap b').textContent === 'Finished roof', S));
+    rec('dots up to that moment are lit', await p.evaluate(S => document.querySelectorAll(S + ' .rail b.on').length === 4, S));
+    rec('the stage stays pinned while scrubbing', await p.evaluate(S => { const r = document.querySelector(S + ' .stage').getBoundingClientRect(); return r.top >= 60 && r.top < 120; }, S));
+    await go(0.1); await p.waitForTimeout(1500);
+    rec('scrolling back up rewinds', await p.evaluate(S => document.querySelector(S + ' video').currentTime < 3 && document.querySelector(S + ' .cap b').textContent === 'Rafters', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };

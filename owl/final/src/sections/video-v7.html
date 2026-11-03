@@ -1,0 +1,56 @@
+<section class="sec video7" id="crew-video-7" aria-labelledby="vd7-h">
+<style>
+.video7{padding-bottom:0}
+.video7 .lede{margin-top:12px;max-width:44ch}
+.video7 .track{position:relative;height:calc(100vh + 260vh)}
+.video7 .stage{position:sticky;top:clamp(76px,10vh,104px);height:calc(100vh - clamp(96px,13vh,130px));display:grid;grid-template-rows:1fr auto;gap:14px}
+.video7 .scr{position:relative;border-radius:28px;overflow:hidden;background:#2a2131;box-shadow:0 40px 70px -40px rgba(23,17,29,.6)}
+.video7 video{width:100%;height:100%;object-fit:cover}
+.video7 .cap{position:absolute;left:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,36px);right:16px;color:#FBFAF6;text-shadow:0 2px 18px rgba(0,0,0,.5);pointer-events:none}
+.video7 .cap time{display:block;font-weight:800;font-size:14px;letter-spacing:.14em;color:#F6C25F;font-variant-numeric:tabular-nums}
+.video7 .cap b{display:block;font-size:clamp(30px,4.4vw,64px);font-weight:900;letter-spacing:-.035em;line-height:1}
+.video7 .cap span{display:block;margin-top:6px;font-size:clamp(15px,1.4vw,19px);font-weight:600;max-width:40ch}
+.video7 .cap > *{transition:opacity .3s,transform .4s cubic-bezier(.22,.61,.36,1)}
+.video7 .cap.out > *{opacity:0;transform:translateY(10px)}
+.video7 .rail{position:relative;height:6px;border-radius:6px;background:rgba(23,17,29,.12)}
+.video7 .rail i{position:absolute;inset:0;border-radius:inherit;background:var(--amber);transform-origin:left;transform:scaleX(var(--p,0))}
+.video7 .rail b{position:absolute;top:-5px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 3px rgba(23,17,29,.2)}
+.video7 .rail b.on{box-shadow:0 0 0 3px var(--amber)}
+.video7 .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.video7 .hint{font-size:14px;font-weight:600;color:var(--ink-70)}
+@media (max-width:760px){.video7 .stage{top:64px;height:calc(100vh - 70px)}}
+@media (prefers-reduced-motion:reduce){.video7 .track{height:auto}.video7 .stage{position:relative;top:0;height:auto}.video7 .scr{aspect-ratio:16/9}.video7 .cap > *{transition:none}}
+</style>
+<div class="wrap">
+ <span class="kick">Owl's crew on film</span><h2 class="h2" id="vd7-h" style="margin-top:12px">Scrub the Day</h2>
+ <p class="lede rv">Scroll to move through the film, frame by frame. Five moments are marked on the way.</p>
+ <div class="track">
+  <div class="stage">
+   <div class="scr" data-owl="say:Keep scrolling"><video data-media="crew" poster="{{A:crew-poster.webp}}" muted playsinline preload="auto" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video><div class="cap" aria-live="polite"><time></time><b></b><span></span></div></div>
+   <div><div class="rail" aria-hidden="true"><i></i></div><div class="row" style="margin-top:12px"><p class="hint">Scroll down to play forward, up to rewind.</p><button class="btn btn-line full" type="button" data-mag data-owl="peek">Watch the Full Film</button></div></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('video','7',function(root){
+  var M = [[0, 'Rafters', 'Two of the crew on open rafters, laying new decking.'], [3.1, 'Materials', 'A bundle of GAF shingles carried up to the roof.'], [6.4, 'The crew', 'One of the crew on the job, a shingle in hand.'], [9.2, 'Finished roof', 'Walking a finished roof of dark architectural shingles.'], [13, 'Decking', 'A sheet of OSB decking carried in for the next roof.']];
+  var track = root.querySelector('.track'), vid = root.querySelector('video'), cap = root.querySelector('.cap'), rail = root.querySelector('.rail'), h2 = root.querySelector('h2'), cur = -1, D = 15.5;
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  M.forEach(function(m){ var b = document.createElement('b'); b.style.left = (m[0]/D*100) + '%'; rail.appendChild(b); });
+  var dots = [].slice.call(rail.querySelectorAll('b'));
+  function moment(t){ var i = 0; M.forEach(function(m, j){ if (t >= m[0]) i = j; }); if (i === cur) return; var first = cur < 0; cur = i;
+    dots.forEach(function(d, j){ d.classList.toggle('on', j <= i); });
+    function put(){ cap.querySelector('time').textContent = '0:' + ('0' + Math.floor(M[i][0])).slice(-2); cap.querySelector('b').textContent = M[i][1]; cap.querySelector('span').textContent = M[i][2]; cap.classList.remove('out'); }
+    if (first || OWL.reduce) put(); else { cap.classList.add('out'); setTimeout(put, 180); } }
+  vid.addEventListener('loadedmetadata', function(){ if (vid.duration) D = vid.duration; });
+  if (OWL.reduce){ vid.controls = true; moment(0); vid.addEventListener('timeupdate', function(){ moment(vid.currentTime); }); OWL.reveal(h2); return; }
+  vid.pause();
+  var target = 0, shown = 0, rq = 0;
+  function onScroll(){ rq = 0; var t = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight*.9, k = Math.max(0, Math.min(1, -t.top/Math.max(1, span))); target = k*(D - .05); rail.style.setProperty('--p', k.toFixed(4)); moment(target); }
+  (function loop(){ if (Math.abs(target - shown) > .02){ shown += (target - shown)*.25; if (vid.readyState >= 1){ try { vid.currentTime = shown; } catch (e){} } } requestAnimationFrame(loop); })();
+  addEventListener('scroll', function(){ if (!rq) rq = requestAnimationFrame(onScroll); }, {passive: true}); onScroll();
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.1}); io.observe(track); } else OWL.reveal(h2);
+});
+</script>
+</section>

@@ -1,0 +1,263 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Through the Window"
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "the curtains draw open when the window comes into view",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "the clip in the window is Owl's own crew film",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "the sill names a moment from the frame-checked list",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "the sill follows the film (9.6 s → finished roof)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "the play key pauses and relabels",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "the full film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Scrub the Day"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "five moment dots sit on the rail",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "scrolling sets the rail to the scroll position",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "the film follows the scroll (about 9.6 s)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "the caption names the moment at that point",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "dots up to that moment are lit",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "the stage stays pinned while scrubbing",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "scrolling back up rewinds",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "the full film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

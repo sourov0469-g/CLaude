@@ -1,0 +1,57 @@
+<section class="sec video6" id="crew-video-6" aria-labelledby="vd6-h">
+<style>
+.video6 .hd{text-align:center;margin-bottom:clamp(18px,2.6vw,30px)}
+.video6 .lede{margin:12px auto 0;max-width:44ch}
+.video6 .front{position:relative;max-width:1000px;margin:0 auto;aspect-ratio:1000/620}
+.video6 svg.house{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.video6 .pane{position:absolute;left:15.6%;top:30.6%;width:47.6%;height:50%;overflow:hidden;background:#2a2131}
+.video6 .pane video{width:100%;height:100%;object-fit:cover}
+.video6 .cur{position:absolute;top:0;bottom:0;width:51%;background:repeating-linear-gradient(90deg,#E7D3A6 0 14px,#DBC392 14px 22px);box-shadow:inset -8px 0 14px rgba(0,0,0,.18);transition:transform 1.4s cubic-bezier(.6,0,.2,1);z-index:2}
+.video6 .cur.l{left:0;transform-origin:left}
+.video6 .cur.r{right:0;transform-origin:right;box-shadow:inset 8px 0 14px rgba(0,0,0,.18)}
+.video6 .open .cur.l{transform:scaleX(.12)}
+.video6 .open .cur.r{transform:scaleX(.12)}
+.video6 .sill{position:absolute;left:14.8%;top:84.5%;width:49.2%;text-align:center;font-weight:800;font-size:clamp(14px,1.6vw,20px);color:#17111D}
+.video6 .lamp{transition:fill .6s}
+.video6 .lamp.on{fill:#F6C25F}
+.video6 .bar{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+.video6 .pp{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--amber);box-shadow:0 5px 0 var(--amber-edge)}
+.video6 .pp:active{transform:translateY(4px);box-shadow:0 1px 0 var(--amber-edge)}
+.video6 .pp svg{width:20px;height:20px;fill:#17111D}
+@media (prefers-reduced-motion:reduce){.video6 .cur{transition:none}.video6 .lamp{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Owl's crew on film</span><h2 class="h2" id="vd6-h" style="margin-top:12px">Through the Window</h2>
+  <p class="lede rv">Pull up a chair. This is Owl's own crew, at work.</p></div>
+ <div class="front" data-owl="say:Look inside">
+  <svg class="house" viewBox="0 0 1000 620" aria-hidden="true">
+   <rect y="590" width="1000" height="30" fill="#8DB45F"/>
+   <rect x="110" y="150" width="780" height="440" fill="#E9E3D5"/>
+   <path d="M110 162H890M110 174H890M110 186H890M110 198H890M110 210H890M110 560H890M110 572H890M110 584H890" stroke="#17111D" stroke-opacity=".07"/>
+   <polygon points="70,160 930,160 790,40 210,40" fill="#55505D"/><path d="M98 136H902M127 112H873M155 88H845M184 64H816" stroke="#17111D" stroke-opacity=".3"/>
+   <rect x="64" y="156" width="872" height="10" rx="2" fill="#F1EFE6" stroke="#B5AE9E"/>
+   <rect x="156" y="190" width="476" height="318" fill="#FBFAF6"/>
+   <rect x="148" y="500" width="492" height="16" rx="3" fill="#F1EFE6" stroke="#B5AE9E"/>
+   <rect x="700" y="230" width="130" height="150" fill="#FBFAF6"/><rect class="lamp" x="712" y="242" width="106" height="126" fill="#B9C9D3"/><path d="M765 242V368M712 305H818" stroke="#FBFAF6" stroke-width="6"/>
+   <rect x="700" y="430" width="130" height="160" fill="#17111D"/><circle cx="812" cy="512" r="4" fill="#EAA221"/>
+  </svg>
+  <div class="pane"><video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video><span class="cur l" aria-hidden="true"></span><span class="cur r" aria-hidden="true"></span></div>
+  <p class="sill" aria-live="polite"></p>
+ </div>
+ <div class="bar"><button class="pp" type="button" aria-label="Pause the film"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="ic" d="M5 3h3.5v14H5zM11.5 3H15v14h-3.5z"/></svg></button><button class="btn btn-line full" type="button" data-mag data-owl="peek">Watch the Full Film</button><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('video','6',function(root){
+  var M = [[0, 'Rafters and new decking'], [3.1, 'GAF shingles carried up'], [6.4, 'One of the crew, shingle in hand'], [9.2, 'Walking a finished roof'], [13, 'OSB carried in for the next roof']];
+  var front = root.querySelector('.front'), vid = root.querySelector('video'), sill = root.querySelector('.sill'), lamp = root.querySelector('.lamp'), pp = root.querySelector('.pp'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  function setPP(){ var p = vid.paused; pp.setAttribute('aria-label', p ? 'Play the film' : 'Pause the film'); pp.querySelector('.ic').setAttribute('d', p ? 'M6 3l11 7-11 7z' : 'M5 3h3.5v14H5zM11.5 3H15v14h-3.5z'); }
+  pp.addEventListener('click', function(){ if (vid.paused) OWL.play(vid); else vid.pause(); setTimeout(setPP, 50); }); vid.addEventListener('play', setPP); vid.addEventListener('pause', setPP);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  function tick(){ var t = vid.currentTime || 0, i = 0; M.forEach(function(m, j){ if (t >= m[0]) i = j; }); if (i !== cur){ cur = i; sill.textContent = M[i][1]; lamp.classList.toggle('on', i % 2 === 1); } }
+  vid.addEventListener('timeupdate', tick); tick(); setPP();
+  if (OWL.reduce){ vid.pause(); front.classList.add('open'); OWL.reveal(h2); setPP(); return; }
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); front.classList.add('open'); OWL.reveal(h2); } }, {threshold:.35}); io.observe(front); } else front.classList.add('open');
+});
+</script>
+</section>

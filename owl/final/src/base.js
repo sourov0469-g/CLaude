@@ -226,7 +226,7 @@ OWL.flow = function(el, o){
 };
 
 /* images stored once by the build (window.OWLA) */
-OWL.hydrate = function(scope){ if (!window.OWLA) return; (scope || document).querySelectorAll('[data-asrc]').forEach(function(e){ e.src = OWLA[e.dataset.asrc]; e.removeAttribute('data-asrc'); }); (scope || document).querySelectorAll('[data-ahref]').forEach(function(e){ e.setAttribute('href', OWLA[e.dataset.ahref]); e.removeAttribute('data-ahref'); }); };
+OWL.hydrate = function(scope){ if (!window.OWLA) return; (scope || document).querySelectorAll('[data-asrc]').forEach(function(e){ e.src = OWLA[e.dataset.asrc]; e.removeAttribute('data-asrc'); }); (scope || document).querySelectorAll('[data-ahref]').forEach(function(e){ e.setAttribute('href', OWLA[e.dataset.ahref]); e.removeAttribute('data-ahref'); }); (scope || document).querySelectorAll('[data-aposter]').forEach(function(e){ e.setAttribute('poster', OWLA[e.dataset.aposter]); e.removeAttribute('data-aposter'); }); };
 OWL.hydrate();
 document.addEventListener('DOMContentLoaded', function(){
   OWL.hydrate();

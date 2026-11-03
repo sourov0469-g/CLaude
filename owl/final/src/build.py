@@ -81,6 +81,7 @@ def dedupe(html):
     for u, k in keys.items():
         html = html.replace(f'src="{u}"', f'src="{blank}" data-asrc="{k}"')
         html = html.replace(f'href="{u}"', f'href="{blank}" data-ahref="{k}"')
+        html = html.replace(f'poster="{u}"', f'data-aposter="{k}"')
         html = html.replace(f"'{u}'", f'OWLA["{k}"]')
     store = '<script>window.OWLA={' + ','.join(f'{k}:"{u}"' for u, k in keys.items()) + '};</script>'
     html = html.replace('<body>', '<body>' + store, 1) if '<body>' in html else re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + store, html, count=1)

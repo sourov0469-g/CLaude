@@ -153,3 +153,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   and a live status reads "Open now until 18:00" or "Closed — opens Monday 08:00", computed from the locked hours.
   The big action is the phone, with the email and office address beside it. Skills: ⟦S0407⟧ clock draw, ⟦S1352⟧ hour
   numerals, ⟦S1388⟧ call key, ⟦S0076⟧ plain status copy.
+
+## Second pass (each slot from 5 to 7)
+
+## L12 · Video 6 + 7
+- **Video 6 · "Through the Window"** — reference **Cowboy** (warmth, people first). A drawn house front with a big
+  picture window. Its curtains draw open when the section is seen, and the crew film plays inside the window, framed
+  by sash and sill. A lamp in the next window lights up as the moments pass, and the moment's name is written on the
+  windowsill. Play/pause and "Watch the Full Film" are 3D keys. Skills: ⟦S0407⟧ curtain and frame draw, ⟦S0187⟧ open
+  sequence, ⟦S1388⟧ keys, ⟦S1046⟧ modal.
+- **Video 7 · "Scrub the Day"** — reference **Apple AirPods Pro** (pinned scroll; the film is the event). The section
+  pins while you scroll, and the scroll drives the clip's time directly (scrubbing frame by frame). The five
+  frame-checked moments appear as large captions when their time is reached, with a progress rail. Under reduced
+  motion it is a normal player. Skills: ⟦S0448⟧ sticky artifact, ⟦S1325⟧ progress rail, ⟦S0451⟧ captions, ⟦S1352⟧ timecodes.
