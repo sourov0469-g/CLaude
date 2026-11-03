@@ -26,3 +26,7 @@
 .fv2-pair img{width:100%;aspect-ratio:8/9;object-fit:cover;object-position:top;border-radius:var(--radius-s);display:block;background:var(--surface-alt)}
 @media (max-width:767px){.fv2-track{grid-auto-columns:88%}}
 @media (prefers-reduced-motion:reduce){.fv2-track{scroll-behavior:auto}}
+
+/* remediation: a contextual link on to the Our families page (S1411 contextual navigation) */
+.fam-v1 .fam-more,.fam-v2 .fam-more{margin-top:var(--space-32)}
+.fv2-nav button[aria-disabled="true"]{opacity:.4;cursor:default}

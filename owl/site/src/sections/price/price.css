@@ -33,3 +33,6 @@
 .pr2-wise .t-body{flex:1;min-width:16rem;margin:0}
 @media (max-width:1023px){.pr2-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.pm-gable,.pm-courses{transition:none}}
+
+/* remediation (S1442): the footprint field is sized to its input */
+.pm-field input[inputmode=numeric]{width:9ch;max-width:100%;box-sizing:content-box}

@@ -1,0 +1,14 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch({ args: ['--allow-file-access-from-files'] });
+const R = []; const ok = (n, c, i = '') => R.push(`${c ? 'PASS' : 'FAIL'}  ${n}${i ? '  [' + i + ']' : ''}`);
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + process.argv[2] + '?v=area:2', { waitUntil: 'load' });
+const say = async (t) => { await p.fill('#ar2-q', t); return p.evaluate(() => document.getElementById('ar2-out').textContent); };
+ok('exact town: yes', (await say('Roseville')) === 'Yes: Owl works in Roseville.');
+ok('"St Paul" normalises to Saint Paul', (await say('St Paul')) === 'Yes: Owl works in Saint Paul.');
+ok('prefix lists matches', /towns match/.test(await say('M')), await say('M'));
+ok('unlisted town: honest answer, no promise', /surrounding Minnesota communities/.test(await say('Duluth')));
+ok('cleared: back to the summary', (await say('')) === 'Owl works in 29 towns around Shoreview.');
+ok('29 towns in each version', await p.evaluate(() => document.querySelectorAll('.area-v1 .place-list li').length === 29 && document.querySelectorAll('.area-v2 .place-list li').length === 29));
+ok('no JS errors', !errs.length, errs.join('|'));
+await b.close(); console.log(R.join('\n'));

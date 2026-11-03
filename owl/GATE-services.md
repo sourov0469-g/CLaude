@@ -52,3 +52,7 @@ The closed-inventory service rows (icon rises, arrow moves). A sticky 4:5 photo 
 - **Chapter links** (`#/services/...`, `#/storm`) point to inner pages that are not built yet. Until then the router
   falls back to Home. They are resolved when the Services and Storm pages are built (planned, 6 sections each).
 - **Siding:** Owl has no siding photo of its own, so the illustrative label stays.
+
+## Remediation pass (after acceptance; the scorecard above is left as judged)
+- **⟦S0280⟧ layout shift:** V2's four photos now carry width and height (1280×720 Owl frames; the
+  illustrative siding photo 1024×680). Superseded version kept as `services-v2-before-remediation.html`.

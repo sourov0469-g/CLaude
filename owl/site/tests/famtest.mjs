@@ -1,0 +1,15 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch({ args: ['--allow-file-access-from-files'] });
+const R = []; const ok = (n, c, i = '') => R.push(`${c ? 'PASS' : 'FAIL'}  ${n}${i ? '  [' + i + ']' : ''}`);
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + process.argv[2] + '?v=families:2', { waitUntil: 'load' }); await p.locator('.fam-v2').scrollIntoViewIfNeeded(); await p.waitForTimeout(300);
+ok('prev disabled at start, next enabled', await p.evaluate(() => document.querySelector('.fv2-prev').getAttribute('aria-disabled') === 'true' && document.querySelector('.fv2-next').getAttribute('aria-disabled') === 'false'));
+await p.click('.fv2-next'); await p.waitForTimeout(300); const x1 = await p.evaluate(() => document.querySelector('.fv2-track').scrollLeft);
+ok('next scrolls one chapter', x1 > 300, 'scrollLeft ' + x1);
+await p.click('.fv2-next'); await p.waitForTimeout(300); ok('next disabled at the end', await p.evaluate(() => document.querySelector('.fv2-next').getAttribute('aria-disabled') === 'true'));
+const xb = await p.evaluate(() => document.querySelector('.fv2-track').scrollLeft); await p.focus('.fv2-track'); for (let i = 0; i < 6; i++) await p.keyboard.press('ArrowLeft'); await p.waitForTimeout(300); const xa = await p.evaluate(() => document.querySelector('.fv2-track').scrollLeft); ok('track is keyboard scrollable (ArrowLeft)', xa < xb, xb + ' -> ' + xa);
+ok('no errors', errs.length === 0, errs.join('|'));
+await p.goto('file://' + process.argv[2] + '?v=nest:1', { waitUntil: 'load' });
+const r = await p.evaluate(() => { const i = document.querySelector('.nv1-photo img'); return [i.clientWidth, i.clientHeight]; });
+ok('nest photo keeps 4:3 after the frame fix', Math.abs(r[0] / r[1] - 4 / 3) < 0.03, r.join('x'));
+await b.close(); console.log(R.join('\n'));

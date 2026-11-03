@@ -10,7 +10,7 @@
     function update() {
       var a = parseInt(String(area.value).replace(/[^0-9]/g, ''), 10), r = +pitch.value, k = Math.sqrt(1 + Math.pow(r / 12, 2));
       var ok = a >= 300 && a <= 10000;
-      field.toggleAttribute('data-invalid', !ok && area.value !== ''); area.setAttribute('aria-invalid', String(!ok));
+      if (ok && field.hasAttribute('data-invalid')) check(); // a shown error clears as soon as the value is fixed; it is never raised while typing (S1442)
       pv.textContent = r + '/12'; pitch.setAttribute('aria-valuetext', r + ' in 12');
       // the drawing: ridge height follows the pitch (rise over half-span), courses re-space with it
       var H = 150, ridge = 160 - Math.round(H * r / 12), dC = ''; // true geometry: rise = half-span x pitch/12
@@ -22,6 +22,9 @@
       var svc = (form.querySelector('input[type=radio]:checked') || {}).value || 'Roof work';
       text.setAttribute('href', 'sms:+16519776027?&body=' + encodeURIComponent('Hi Owl Roofing, I would like a free estimate. ' + svc + ': house footprint about ' + fmt(a) + ' sq ft, ' + r + '/12 pitch (about ' + s + ' squares).'));
     }
+    function check() { var a = parseInt(String(area.value).replace(/[^0-9]/g, ''), 10), ok = a >= 300 && a <= 10000; field.toggleAttribute('data-invalid', !ok); area.setAttribute('aria-invalid', String(!ok)); return ok; }
+    area.addEventListener('blur', check); // validate on blur (S1442)
+    text.addEventListener('click', function (e) { if (!check()) { e.preventDefault(); area.focus(); } });
     form.addEventListener('input', update); form.addEventListener('submit', function (e) { e.preventDefault(); });
     update();
   });

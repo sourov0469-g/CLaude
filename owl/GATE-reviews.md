@@ -88,3 +88,7 @@ assets instead:
 ### Rules not met (recorded as remaining defects; the version is not changed, per the correction)
 1. **Captions** (⟦S0054⟧ media): the videos contain speech. Their captions are YouTube's (auto or uploaded by Owl); the
    build cannot verify that captions exist for each video. Owl should confirm captions on its channel.
+
+## Remediation pass (after acceptance; the scorecard above is left as judged)
+- **⟦S0280⟧ layout shift:** the video card that V2's script rebuilds now gives its thumbnail width and
+  height (720×405), like the cards in the markup. No markup changed, so no backup was needed.

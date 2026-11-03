@@ -12,3 +12,11 @@
 .ar2-list li.is-dim{opacity:.32}
 .ar2-list li.is-hit{font-weight:700;color:var(--text-primary)}
 @media (max-width:1023px){.ar1-grid,.ar2-grid{grid-template-columns:1fr}.ar2-tool{position:static}}
+
+/* remediation (S1453): a clear button once there is a query */
+.ar2-field{max-width:24rem}
+.ar2-box{position:relative}
+.ar2-box input{width:100%;box-sizing:border-box;padding-right:var(--space-48)}
+.ar2-box input::-webkit-search-cancel-button{display:none}
+.ar2-clear{position:absolute;right:0;top:0;width:var(--space-48);height:var(--space-48);display:grid;place-items:center;border:0;background:transparent;color:var(--text-primary);cursor:pointer;border-radius:var(--radius-s)}
+.ar2-clear[hidden]{display:none}

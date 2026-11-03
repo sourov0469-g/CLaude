@@ -541,6 +541,10 @@ main:focus{outline:none}
 @media (max-width:767px){.fv2-track{grid-auto-columns:88%}}
 @media (prefers-reduced-motion:reduce){.fv2-track{scroll-behavior:auto}}
 
+/* remediation: a contextual link on to the Our families page (S1411 contextual navigation) */
+.fam-v1 .fam-more,.fam-v2 .fam-more{margin-top:var(--space-32)}
+.fv2-nav button[aria-disabled="true"]{opacity:.4;cursor:default}
+
 /* ===== Storm damage and insurance (Longbow: numbered doctrine; Owl's own steps, in Owl's words) ===== */
 .storm-v1,.storm-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-default) 0}
 .storm-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
@@ -619,6 +623,9 @@ main:focus{outline:none}
 @media (max-width:1023px){.pr2-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.pm-gable,.pm-courses{transition:none}}
 
+/* remediation (S1442): the footprint field is sized to its input */
+.pm-field input[inputmode=numeric]{width:9ch;max-width:100%;box-sizing:content-box}
+
 /* ===== Service area (B2 Rings: people and place). V1 list + Owl's map; V2 a town finder ===== */
 .area-v1,.area-v2{position:relative;overflow:hidden;background:var(--surface-alt);padding:var(--section-default) 0}
 .area-bg{position:absolute;inset:0}
@@ -633,6 +640,14 @@ main:focus{outline:none}
 .ar2-list li.is-dim{opacity:.32}
 .ar2-list li.is-hit{font-weight:700;color:var(--text-primary)}
 @media (max-width:1023px){.ar1-grid,.ar2-grid{grid-template-columns:1fr}.ar2-tool{position:static}}
+
+/* remediation (S1453): a clear button once there is a query */
+.ar2-field{max-width:24rem}
+.ar2-box{position:relative}
+.ar2-box input{width:100%;box-sizing:border-box;padding-right:var(--space-48)}
+.ar2-box input::-webkit-search-cancel-button{display:none}
+.ar2-clear{position:absolute;right:0;top:0;width:var(--space-48);height:var(--space-48);display:grid;place-items:center;border:0;background:transparent;color:var(--text-primary);cursor:pointer;border-radius:var(--radius-s)}
+.ar2-clear[hidden]{display:none}
 
 /* ===== Call band + footer: the one deep block, at the end (B3 Night yard; Lusion: the flow resolves) ===== */
 .call-v1,.call-v2{position:relative;overflow:hidden;background:var(--surface-deep);color:var(--text-on-deep);padding:var(--section-hero) 0 calc(var(--space-160) + var(--space-96))}
@@ -1615,6 +1630,25 @@ main:focus{outline:none}
       </div>
     </div>
     <div class="sv2-view" aria-hidden="true">
+      <figure class="frame frame--4x5 is-on"><img src="../assets/source/frames/owl-bg-11.jpg" width="1280" height="720" alt="" loading="lazy"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
+      <figure class="frame frame--4x5"><img src="../assets/source/frames/owl-bg-2.jpg" width="1280" height="720" alt="" loading="lazy"><figcaption>Owl's own crew on a tear-off.</figcaption></figure>
+      <figure class="frame frame--4x5"><img src="../assets/source/frames/owl-bg-8.jpg" width="1280" height="720" alt="" loading="lazy"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
+      <figure class="frame frame--4x5"><img src="../assets/source/owl-pages/unproven/owl-siding-roseville.webp" width="1024" height="680" alt="" loading="lazy"><figcaption>Illustrative photo.</figcaption></figure>
+    </div>
+  </div>
+</section>
+</div><template class="backup" data-of="services" data-name="services-v2-before-remediation.html"><section class="svc-v2" aria-labelledby="svc2-h">
+  <div class="wrap sv2-grid">
+    <div>
+      <div class="sec-head"><h2 id="svc2-h" class="t-heading">What we do</h2><p class="t-body muted">One family-owned crew, one cleanup system, four kinds of work.</p></div>
+      <div class="sv2-list">
+        <a class="svc" href="#/services/replacement" data-img="0"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-house"/></svg><span><b class="t-sub">Roof replacement</b><br><span class="t-small muted">Tear-off to ridge cap with GAF materials, then the 3-Part Cleanup.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+        <a class="svc" href="#/storm" data-img="1"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-status-hail"/></svg><span><b class="t-sub">Storm damage</b><br><span class="t-small muted">Hail and wind, with help through your insurance claim.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+        <a class="svc" href="#/services/repair" data-img="2"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-status-leak"/></svg><span><b class="t-sub">Roof repair</b><br><span class="t-small muted">Leaks found with the Wise Check inspection.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+        <a class="svc" href="#/services/siding" data-img="3"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-shingles"/></svg><span><b class="t-sub">Siding</b><br><span class="t-small muted">Siding installation by the same crew.</span></span><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+      </div>
+    </div>
+    <div class="sv2-view" aria-hidden="true">
       <figure class="frame frame--4x5 is-on"><img src="../assets/source/frames/owl-bg-11.jpg" alt="" loading="lazy"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
       <figure class="frame frame--4x5"><img src="../assets/source/frames/owl-bg-2.jpg" alt="" loading="lazy"><figcaption>Owl's own crew on a tear-off.</figcaption></figure>
       <figure class="frame frame--4x5"><img src="../assets/source/frames/owl-bg-8.jpg" alt="" loading="lazy"><figcaption>Owl's own crew, from Owl's own footage.</figcaption></figure>
@@ -1622,7 +1656,39 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-families" data-sec="families" data-default="1"><div class="ver" data-v="1"><section class="fam-v1" aria-labelledby="fam1-h">
+</template></div><div class="sec" id="s-families" data-sec="families" data-default="1"><div class="ver" data-v="1"><section class="fam-v1" aria-labelledby="fam1-h">
+  <svg class="fam-bg" data-bg="rings"></svg>
+  <div class="wrap fv1-grid">
+    <figure class="frame fv1-main"><img src="../assets/source/about-full.png" alt="The Brown and Bergland families together outdoors in autumn" loading="lazy" width="645" height="311"><figcaption>The two families behind Owl Roofing.</figcaption></figure>
+    <div class="fv1-copy">
+      <h2 id="fam1-h" class="t-heading">Birds of a feather roof together.</h2>
+      <blockquote class="fv1-quote t-body"><p>"Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes and realized that they had more in common than their due dates."</p><p>"So, when Noah decided to start his own roofing company, asking the Brown family to join him was a no-brainer."</p><footer class="t-small muted">Owl Roofing, Our Story</footer></blockquote>
+      <figure class="fv1-noah"><img src="../assets/source/noah-bergland-owl-roofing-768x596.jpg" alt="Noah Bergland on a ladder at a snowy roof edge" loading="lazy" width="768" height="596"><figcaption class="t-small"><b>Noah Bergland</b>, co-founder, on the job.</figcaption></figure>
+    </div>
+    <ul class="fv1-values" aria-label="Owl's values">
+      <li><b class="t-sub">Generosity</b><span class="t-small">"Be generous to our community and representatives."</span></li>
+      <li><b class="t-sub">Humility</b><span class="t-small">"Humility builds a strong foundation."</span></li>
+      <li><b class="t-sub">Integrity</b><span class="t-small">"Do the right thing even when it's hard."</span></li>
+    </ul>
+    <p class="fam-more"><a class="link" href="#/families">Meet both families on the Our families page</a></p>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fam-v2" aria-labelledby="fam2-h">
+  <svg class="fam-bg" data-bg="rings"></svg>
+  <div class="wrap">
+    <div class="fv2-head">
+      <div class="sec-head"><h2 id="fam2-h" class="t-heading">We're building a nest.</h2><p class="t-body muted">"…for our own family, and for the neighbors we live alongside every day."</p></div>
+      <div class="fv2-nav"><button type="button" class="fv2-prev" aria-label="Previous chapter" aria-controls="fv2-track"><svg class="icon" aria-hidden="true" style="transform:scaleX(-1)"><use href="#icon-navigation-arrow-right"/></svg></button><button type="button" class="fv2-next" aria-label="Next chapter" aria-controls="fv2-track"><svg class="icon" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></button></div>
+    </div>
+    <ol class="fv2-track" id="fv2-track" tabindex="0" aria-label="Our story in three chapters">
+      <li class="fv2-ch"><img src="../assets/source/about-full.png" width="645" height="311" alt="The Brown and Bergland families together outdoors" loading="lazy"><div><p class="t-label t-num">01 Origins</p><p class="t-body">"Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes…"</p></div></li>
+      <li class="fv2-ch"><div class="fv2-pair"><figure><img src="../assets/source/meet-the-browns-owl.webp" width="650" height="485" alt="The Brown family" loading="lazy"><figcaption class="t-small">The Browns</figcaption></figure><figure><img src="../assets/source/the-berglands-family-owned-roofing-company-shoreview.png" width="688" height="747" alt="The Bergland family" loading="lazy"><figcaption class="t-small">The Berglands</figcaption></figure></div><div><p class="t-label t-num">02 The families</p><p class="t-body">"Noah has worked in both the roofing and construction industries as a builder and project manager." The Browns bring "hard-won knowledge" about what makes a 5-star customer experience.</p></div></li>
+      <li class="fv2-ch"><img src="../assets/source/noah-bergland-owl-roofing-768x596.jpg" width="768" height="596" alt="Noah Bergland on a ladder at a snowy roof edge" loading="lazy"><div><p class="t-label t-num">03 Values</p><p class="t-body"><b>Generosity.</b> <b>Humility.</b> <b>Integrity:</b> "Do the right thing even when it's hard."</p></div></li>
+    </ol>
+    <p class="fam-more"><a class="link" href="#/families">Meet both families on the Our families page</a></p>
+  </div>
+</section>
+</div><template class="backup" data-of="families" data-name="families-v1-before-remediation.html"><section class="fam-v1" aria-labelledby="fam1-h">
   <svg class="fam-bg" data-bg="rings"></svg>
   <div class="wrap fv1-grid">
     <figure class="frame fv1-main"><img src="../assets/source/about-full.png" alt="The Brown and Bergland families together outdoors in autumn" loading="lazy" width="645" height="311"><figcaption>The two families behind Owl Roofing.</figcaption></figure>
@@ -1638,7 +1704,7 @@ main:focus{outline:none}
     </ul>
   </div>
 </section>
-</div><div class="ver" data-v="2" hidden><section class="fam-v2" aria-labelledby="fam2-h">
+</template><template class="backup" data-of="families" data-name="families-v2-before-remediation.html"><section class="fam-v2" aria-labelledby="fam2-h">
   <svg class="fam-bg" data-bg="rings"></svg>
   <div class="wrap">
     <div class="fv2-head">
@@ -1652,7 +1718,7 @@ main:focus{outline:none}
     </ol>
   </div>
 </section>
-</div></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><section class="storm-v1" aria-labelledby="storm1-h">
+</template></div><div class="sec" id="s-storm" data-sec="storm" data-default="1"><div class="ver" data-v="1"><section class="storm-v1" aria-labelledby="storm1-h">
   <svg class="storm-bg" data-bg="lawn"></svg>
   <div class="wrap">
     <div class="st1-top">
@@ -1740,7 +1806,7 @@ main:focus{outline:none}
     <label><input type="radio" name="svc-1" value="Storm damage"> Storm damage</label>
     <label><input type="radio" name="svc-1" value="Roof repair"> Repair</label>
   </fieldset>
-  <div class="field pm-field"><label for="pm-area-1">House footprint (sq ft)</label><input id="pm-area-1" class="t-num" inputmode="numeric" autocomplete="off" value="1800" aria-describedby="pm-err-1"><span class="err" id="pm-err-1">Enter a footprint between 300 and 10,000 sq ft, like 1800.</span></div>
+  <div class="field pm-field"><label for="pm-area-1">House footprint (sq ft)</label><input id="pm-area-1" class="t-num" inputmode="numeric" autocomplete="off" value="1800" maxlength="6" aria-describedby="pm-err-1"><span class="err" id="pm-err-1">Enter a footprint between 300 and 10,000 sq ft, like 1800.</span></div>
   <div class="field pm-field"><label for="pm-pitch-1">Roof pitch: <span class="t-num pm-pitchv">6/12</span></label><input id="pm-pitch-1" type="range" min="3" max="12" step="1" value="6" aria-valuetext="6 in 12"></div>
   <p class="pm-read t-num" aria-live="polite"><span class="pm-formula">1,800 × 1.118 ÷ 100</span> ≈ <b class="pm-sq">20</b> squares</p>
   <p class="t-small muted pm-note">A square is 100 sq ft of roof. This measures your roof; it is not a price. Owl's estimates are free, after an inspection.</p>
@@ -1751,6 +1817,63 @@ main:focus{outline:none}
   </div>
 </section>
 </div><div class="ver" data-v="2" hidden><section class="price-v2" aria-labelledby="price2-h">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="price2-h" class="t-title">Price my roof.</h2><p class="t-body muted">Move the pitch, type your footprint, and see your roof in squares. Then send the numbers to Owl for a free estimate.</p></div>
+    <div class="pr2-grid">
+      <svg class="pm-roof pr2-roof" viewBox="0 0 400 170" aria-hidden="true"><path class="pm-gable" d="M50 160 L200 85 L350 160 Z"/><path class="pm-courses" d=""/></svg>
+<form class="pm-form" novalidate data-pm>
+  <fieldset class="pm-svc"><legend class="t-small"><b>What do you need?</b></legend>
+    <label><input type="radio" name="svc-2" value="Roof replacement" checked> Replacement</label>
+    <label><input type="radio" name="svc-2" value="Storm damage"> Storm damage</label>
+    <label><input type="radio" name="svc-2" value="Roof repair"> Repair</label>
+  </fieldset>
+  <div class="field pm-field"><label for="pm-area-2">House footprint (sq ft)</label><input id="pm-area-2" class="t-num" inputmode="numeric" autocomplete="off" value="1800" maxlength="6" aria-describedby="pm-err-2"><span class="err" id="pm-err-2">Enter a footprint between 300 and 10,000 sq ft, like 1800.</span></div>
+  <div class="field pm-field"><label for="pm-pitch-2">Roof pitch: <span class="t-num pm-pitchv">6/12</span></label><input id="pm-pitch-2" type="range" min="3" max="12" step="1" value="6" aria-valuetext="6 in 12"></div>
+  <p class="pm-read t-num" aria-live="polite"><span class="pm-formula">1,800 × 1.118 ÷ 100</span> ≈ <b class="pm-sq">20</b> squares</p>
+  <p class="t-small muted pm-note">A square is 100 sq ft of roof. This measures your roof; it is not a price. Owl's estimates are free, after an inspection.</p>
+  <div class="pm-ctas"><a class="btn pm-text" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text my numbers</a><a class="btn btn--secondary" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a></div>
+</form>
+
+    </div>
+    <div class="pr2-wise">
+      <img src="../assets/source/owl-pages/Wise-Check.png" alt="Owl's Wise Check badge" width="64" height="76" loading="lazy">
+      <p class="t-body"><b>Then the Wise Check.</b> "A detailed roof and attic evaluation, clear photo and video documentation, and leak detection tools that help pinpoint issues other contractors often miss."</p>
+      <a class="btn btn--secondary" href="tel:+16519776027">Book a Wise Check</a>
+    </div>
+  </div>
+</section>
+</div><template class="backup" data-of="price" data-name="price-v1-before-remediation.html"><section class="price-v1" aria-labelledby="price1-h">
+  <svg class="price-bg" data-bg="lawn"></svg>
+  <div class="wrap pr1-grid">
+    <div class="pr1-wise">
+      <img class="pr1-badge" src="../assets/source/owl-pages/Wise-Check.png" alt="Owl's Wise Check badge" width="88" height="105" loading="lazy">
+      <h2 id="price1-h" class="t-heading">Start with the Wise Check.</h2>
+      <p class="t-body">"Owl Roofing's thorough, no-guesswork roof assessment designed to give you total clarity before you make any decisions." A detailed roof and attic evaluation, with clear photo and video documentation.</p>
+      <ul class="pr1-parts">
+        <li><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-attic"/></svg><span><b>Attic inspection</b><br><span class="t-small muted">Ventilation, moisture and insulation red flags.</span></span></li>
+        <li><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-heat-sensor"/></svg><span><b>Heat-sensor leak detection</b><br><span class="t-small muted">When leaks are suspected.</span></span></li>
+      </ul>
+    </div>
+    <div class="pr1-card">
+      <h3 class="t-sub">Price My Roof: measure it first</h3>
+      <svg class="pm-roof" viewBox="0 0 400 170" aria-hidden="true"><path class="pm-gable" d="M50 160 L200 85 L350 160 Z"/><path class="pm-courses" d=""/></svg>
+<form class="pm-form" novalidate data-pm>
+  <fieldset class="pm-svc"><legend class="t-small"><b>What do you need?</b></legend>
+    <label><input type="radio" name="svc-1" value="Roof replacement" checked> Replacement</label>
+    <label><input type="radio" name="svc-1" value="Storm damage"> Storm damage</label>
+    <label><input type="radio" name="svc-1" value="Roof repair"> Repair</label>
+  </fieldset>
+  <div class="field pm-field"><label for="pm-area-1">House footprint (sq ft)</label><input id="pm-area-1" class="t-num" inputmode="numeric" autocomplete="off" value="1800" aria-describedby="pm-err-1"><span class="err" id="pm-err-1">Enter a footprint between 300 and 10,000 sq ft, like 1800.</span></div>
+  <div class="field pm-field"><label for="pm-pitch-1">Roof pitch: <span class="t-num pm-pitchv">6/12</span></label><input id="pm-pitch-1" type="range" min="3" max="12" step="1" value="6" aria-valuetext="6 in 12"></div>
+  <p class="pm-read t-num" aria-live="polite"><span class="pm-formula">1,800 × 1.118 ÷ 100</span> ≈ <b class="pm-sq">20</b> squares</p>
+  <p class="t-small muted pm-note">A square is 100 sq ft of roof. This measures your roof; it is not a price. Owl's estimates are free, after an inspection.</p>
+  <div class="pm-ctas"><a class="btn pm-text" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text my numbers</a><a class="btn btn--secondary" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a></div>
+</form>
+
+    </div>
+  </div>
+</section>
+</template><template class="backup" data-of="price" data-name="price-v2-before-remediation.html"><section class="price-v2" aria-labelledby="price2-h">
   <div class="wrap">
     <div class="sec-head"><h2 id="price2-h" class="t-title">Price my roof.</h2><p class="t-body muted">Move the pitch, type your footprint, and see your roof in squares. Then send the numbers to Owl for a free estimate.</p></div>
     <div class="pr2-grid">
@@ -1776,7 +1899,7 @@ main:focus{outline:none}
     </div>
   </div>
 </section>
-</div></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><section class="area-v1" aria-labelledby="area1-h">
+</template></div><div class="sec" id="s-area" data-sec="area" data-default="1"><div class="ver" data-v="1"><section class="area-v1" aria-labelledby="area1-h">
   <svg class="area-bg" data-bg="rings"></svg>
   <div class="wrap ar1-grid">
     <div>
@@ -1792,6 +1915,29 @@ main:focus{outline:none}
   <div class="wrap ar2-grid">
     <div class="ar2-tool">
       <h2 id="area2-h" class="t-heading">Is your town on our list?</h2>
+      <div class="field ar2-field"><label for="ar2-q">Your town</label><div class="ar2-box"><input id="ar2-q" type="search" autocomplete="address-level2" spellcheck="false" placeholder="Start typing, like Roseville" aria-describedby="ar2-out"><button type="button" class="ar2-clear" aria-label="Clear the town search" hidden><svg class="icon" aria-hidden="true"><use href="#icon-navigation-close"/></svg></button></div></div>
+      <p id="ar2-out" class="ar2-out t-sub" aria-live="polite">Owl works in 29 towns around Shoreview.</p>
+      <div class="ar2-ctas"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn btn--secondary" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text us</a></div>
+    </div>
+    <ul class="place-list ar2-list" aria-label="Towns Owl Roofing serves"><li data-home><svg class="icon" aria-hidden="true"><use href="#icon-navigation-pin"/></svg>Shoreview</li><li>North Oaks</li><li>Arden Hills</li><li>Vadnais Heights</li><li>Roseville</li><li>Blaine</li><li>Mounds View</li><li>Lino Lakes</li><li>Forest Lake</li><li>Fridley</li><li>Maplewood</li><li>New Brighton</li><li>Minneapolis</li><li>Saint Paul</li><li>White Bear Lake</li><li>Stillwater</li><li>Little Canada</li><li>Coon Rapids</li><li>Woodbury</li><li>Oakdale</li><li>Eagan</li><li>Burnsville</li><li>Apple Valley</li><li>Bloomington</li><li>Edina</li><li>Plymouth</li><li>Minnetonka</li><li>Eden Prairie</li><li>Maple Grove</li></ul>
+  </div>
+</section>
+</div><template class="backup" data-of="area" data-name="area-v1-before-remediation.html"><section class="area-v1" aria-labelledby="area1-h">
+  <svg class="area-bg" data-bg="rings"></svg>
+  <div class="wrap ar1-grid">
+    <div>
+      <div class="sec-head"><h2 id="area1-h" class="t-heading">29 towns around the Twin Cities</h2><p class="t-body muted">Based at 1000 County Rd E in Shoreview. We also work in surrounding Minnesota communities, so call and ask.</p></div>
+      <ul class="place-list" aria-label="Towns Owl Roofing serves"><li data-home><svg class="icon" aria-hidden="true"><use href="#icon-navigation-pin"/></svg>Shoreview</li><li>North Oaks</li><li>Arden Hills</li><li>Vadnais Heights</li><li>Roseville</li><li>Blaine</li><li>Mounds View</li><li>Lino Lakes</li><li>Forest Lake</li><li>Fridley</li><li>Maplewood</li><li>New Brighton</li><li>Minneapolis</li><li>Saint Paul</li><li>White Bear Lake</li><li>Stillwater</li><li>Little Canada</li><li>Coon Rapids</li><li>Woodbury</li><li>Oakdale</li><li>Eagan</li><li>Burnsville</li><li>Apple Valley</li><li>Bloomington</li><li>Edina</li><li>Plymouth</li><li>Minnetonka</li><li>Eden Prairie</li><li>Maple Grove</li></ul>
+      <p class="ar1-cta"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a></p>
+    </div>
+    <figure class="frame frame--4x3"><img src="../assets/source/owl-pages/owl-map.webp" alt="Owl Roofing's service-area map around Shoreview: North Oaks, Arden Hills, Roseville, White Bear Lake and neighbouring towns" loading="lazy" width="1290" height="950"><figcaption>Owl's own service-area map.</figcaption></figure>
+  </div>
+</section>
+</template><template class="backup" data-of="area" data-name="area-v2-before-remediation.html"><section class="area-v2" aria-labelledby="area2-h">
+  <svg class="area-bg" data-bg="rings"></svg>
+  <div class="wrap ar2-grid">
+    <div class="ar2-tool">
+      <h2 id="area2-h" class="t-heading">Is your town on our list?</h2>
       <div class="field"><label for="ar2-q">Your town</label><input id="ar2-q" autocomplete="address-level2" placeholder="Start typing, like Roseville" aria-describedby="ar2-out"></div>
       <p id="ar2-out" class="ar2-out t-sub" aria-live="polite">Owl works in 29 towns around Shoreview.</p>
       <div class="ar2-ctas"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn btn--secondary" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text us</a></div>
@@ -1799,7 +1945,7 @@ main:focus{outline:none}
     <ul class="place-list ar2-list" aria-label="Towns Owl Roofing serves"><li data-home><svg class="icon" aria-hidden="true"><use href="#icon-navigation-pin"/></svg>Shoreview</li><li>North Oaks</li><li>Arden Hills</li><li>Vadnais Heights</li><li>Roseville</li><li>Blaine</li><li>Mounds View</li><li>Lino Lakes</li><li>Forest Lake</li><li>Fridley</li><li>Maplewood</li><li>New Brighton</li><li>Minneapolis</li><li>Saint Paul</li><li>White Bear Lake</li><li>Stillwater</li><li>Little Canada</li><li>Coon Rapids</li><li>Woodbury</li><li>Oakdale</li><li>Eagan</li><li>Burnsville</li><li>Apple Valley</li><li>Bloomington</li><li>Edina</li><li>Plymouth</li><li>Minnetonka</li><li>Eden Prairie</li><li>Maple Grove</li></ul>
   </div>
 </section>
-</div></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><section class="call-v1 on-deep" aria-labelledby="call1-h">
+</template></div><div class="sec" id="s-call" data-sec="call" data-default="1"><div class="ver" data-v="1"><section class="call-v1 on-deep" aria-labelledby="call1-h">
   <svg class="call-bg" data-bg="night"></svg>
   <div class="wrap cl1-band">
     <h2 id="call1-h" class="t-title">We actually answer the phone.</h2>
@@ -3826,8 +3972,8 @@ window.OwlNest = (function () {
   var r = document.querySelector('.fam-v2'); if (!r) return;
   var t = r.querySelector('.fv2-track'), prev = r.querySelector('.fv2-prev'), next = r.querySelector('.fv2-next');
   function step(d) { var c = t.querySelector('.fv2-ch'); t.scrollBy({ left: d * (c.getBoundingClientRect().width + (parseFloat(getComputedStyle(t).columnGap) || 0)), behavior: Owl.reduced() ? 'auto' : 'smooth' }); }
-  function state() { prev.disabled = t.scrollLeft < 4; next.disabled = t.scrollLeft + t.clientWidth > t.scrollWidth - 4; }
-  prev.addEventListener('click', function () { step(-1); }); next.addEventListener('click', function () { step(1); });
+  function state() { prev.setAttribute('aria-disabled', String(t.scrollLeft < 4)); next.setAttribute('aria-disabled', String(t.scrollLeft + t.clientWidth > t.scrollWidth - 4)); } // aria-disabled, not disabled: a focused button keeps focus at the ends (S0070)
+  prev.addEventListener('click', function () { if (prev.getAttribute('aria-disabled') !== 'true') step(-1); }); next.addEventListener('click', function () { if (next.getAttribute('aria-disabled') !== 'true') step(1); });
   t.addEventListener('scroll', state, { passive: true }); addEventListener('resize', state); document.addEventListener('owl:version', state); state();
 })();
 
@@ -3859,7 +4005,7 @@ window.OwlNest = (function () {
   function mount(yt, title, cap) { // rebuild the player as a fresh thumbnail card for the chosen video
     var old = holder.querySelector('.vcard'), img = r.querySelector('.rv2-item[data-yt="' + yt + '"] img').getAttribute('src');
     var fig = document.createElement('figure'); fig.className = 'vcard rv2-player'; fig.dataset.yt = yt; fig.dataset.title = title;
-    fig.innerHTML = '<button class="vcard-btn" type="button"><img alt="" src="' + img + '"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption class="rv2-cap"></figcaption>';
+    fig.innerHTML = '<button class="vcard-btn" type="button"><img alt="" width="720" height="405" src="' + img + '"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption class="rv2-cap"></figcaption>';
     fig.querySelector('.vcard-btn').setAttribute('aria-label', 'Play: ' + title); fig.querySelector('figcaption').innerHTML = cap;
     old.replaceWith(fig); Owl.videoCard(fig);
   }
@@ -3879,7 +4025,7 @@ window.OwlNest = (function () {
     function update() {
       var a = parseInt(String(area.value).replace(/[^0-9]/g, ''), 10), r = +pitch.value, k = Math.sqrt(1 + Math.pow(r / 12, 2));
       var ok = a >= 300 && a <= 10000;
-      field.toggleAttribute('data-invalid', !ok && area.value !== ''); area.setAttribute('aria-invalid', String(!ok));
+      if (ok && field.hasAttribute('data-invalid')) check(); // a shown error clears as soon as the value is fixed; it is never raised while typing (S1442)
       pv.textContent = r + '/12'; pitch.setAttribute('aria-valuetext', r + ' in 12');
       // the drawing: ridge height follows the pitch (rise over half-span), courses re-space with it
       var H = 150, ridge = 160 - Math.round(H * r / 12), dC = ''; // true geometry: rise = half-span x pitch/12
@@ -3891,24 +4037,44 @@ window.OwlNest = (function () {
       var svc = (form.querySelector('input[type=radio]:checked') || {}).value || 'Roof work';
       text.setAttribute('href', 'sms:+16519776027?&body=' + encodeURIComponent('Hi Owl Roofing, I would like a free estimate. ' + svc + ': house footprint about ' + fmt(a) + ' sq ft, ' + r + '/12 pitch (about ' + s + ' squares).'));
     }
+    function check() { var a = parseInt(String(area.value).replace(/[^0-9]/g, ''), 10), ok = a >= 300 && a <= 10000; field.toggleAttribute('data-invalid', !ok); area.setAttribute('aria-invalid', String(!ok)); return ok; }
+    area.addEventListener('blur', check); // validate on blur (S1442)
+    text.addEventListener('click', function (e) { if (!check()) { e.preventDefault(); area.focus(); } });
     form.addEventListener('input', update); form.addEventListener('submit', function (e) { e.preventDefault(); });
     update();
   });
 })();
 
+/* Area. B2 Rings on both versions. V2's town search (remediated to S1453): prefix and word matches; typo tolerance
+   (edit distance 1 for short queries, 2 for longer); a count; zero results echo the query and point forward; a clear
+   button once there is a query (focus returns to the field); Escape clears. Updates on each keystroke (S1438). */
 (function () {
   document.querySelectorAll('.area-bg').forEach(function (s) { Owl.bg.rings(s); });
   var r = document.querySelector('.area-v2'); if (!r) return;
-  var q = r.querySelector('#ar2-q'), out = r.querySelector('#ar2-out'), lis = [].slice.call(r.querySelectorAll('.ar2-list li'));
-  var norm = function (s) { return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); };
-  q.addEventListener('input', function () {
-    var v = norm(q.value), hits = [];
-    lis.forEach(function (li) { var t = norm(li.textContent), hit = v && t.indexOf(v) === 0 || (v.length > 2 && t.indexOf(v) > -1); li.classList.toggle('is-hit', !!(v && hit)); li.classList.toggle('is-dim', !!(v && !hit)); if (v && hit) hits.push(li.textContent.trim()); });
+  var q = r.querySelector('#ar2-q'), out = r.querySelector('#ar2-out'), clr = r.querySelector('.ar2-clear'), lis = [].slice.call(r.querySelectorAll('.ar2-list li'));
+  var names = lis.map(function (li) { return li.textContent.trim(); });
+  var norm = function (s) { return s.toLowerCase().replace(/^st\.?\s+/, 'saint ').replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim(); };
+  function dist(a, b) { var m = a.length, n = b.length, d = [], i, j; for (i = 0; i <= m; i++) d[i] = [i]; for (j = 1; j <= n; j++) d[0][j] = j;
+    for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[m][n]; }
+  function run() {
+    var raw = q.value, v = norm(raw), exact = [], typo = []; clr.hidden = raw === '';
+    names.forEach(function (n, i) {
+      var t = norm(n), at = t.indexOf(v), word = !!v && (at === 0 || t.indexOf(' ' + v) > -1 || (v.length > 2 && at > -1));
+      var tol = v.length < 5 ? 1 : 2, fuzzy = !word && v.length > 2 && (dist(v, t) <= tol || dist(v, t.slice(0, v.length)) <= tol);
+      if (word) exact.push(n); else if (fuzzy) typo.push(n);
+      lis[i].classList.toggle('is-hit', !!v && (word || fuzzy)); lis[i].classList.toggle('is-dim', !!v && !word && !fuzzy);
+    });
+    var hits = exact.concat(typo), said = '"' + raw.trim() + '"';
     if (!v) out.textContent = 'Owl works in 29 towns around Shoreview.';
-    else if (hits.length === 1 && norm(hits[0]) === v) out.textContent = 'Yes: Owl works in ' + hits[0] + '.';
-    else if (hits.length) out.textContent = hits.length === 1 ? 'Did you mean ' + hits[0] + '? Owl works there.' : hits.length + ' towns match: ' + hits.slice(0, 4).join(', ') + (hits.length > 4 ? '…' : '.');
-    else out.textContent = 'Not on the list, but Owl also works in surrounding Minnesota communities. Call or text and ask.';
-  });
+    else if (exact.length === 1 && norm(exact[0]) === v) out.textContent = 'Yes: Owl works in ' + exact[0] + '.';
+    else if (!exact.length && typo.length) out.textContent = 'No town called ' + said + '. Did you mean ' + typo.slice(0, 2).join(' or ') + '? Owl works there.';
+    else if (hits.length) out.textContent = hits.length + (hits.length === 1 ? ' town matches ' : ' towns match ') + said + ': ' + hits.slice(0, 4).join(', ') + (hits.length > 4 ? '…' : '.');
+    else out.textContent = 'No town matches ' + said + '. Owl also works in surrounding Minnesota communities: call or text and ask.';
+  }
+  q.addEventListener('input', run);
+  clr.addEventListener('click', function () { q.value = ''; run(); q.focus(); });
+  q.addEventListener('keydown', function (e) { if (e.key === 'Escape' && q.value) { e.preventDefault(); q.value = ''; run(); } });
+  run();
 })();
 
 /* call band: the page's line resolves. V1 weaves a nest around the number; V2 draws the line under it. Both play as the band enters. */

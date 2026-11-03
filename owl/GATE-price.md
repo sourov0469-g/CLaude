@@ -98,3 +98,12 @@ then an estimate. V2 suits a page about pricing (the Contact page reuses it).
    complete. ⟦S1442⟧ says to validate on blur. Planned fix: show the error on blur; keep the readout live.
 2. **Field width:** the footprint input is full width, though it holds at most 5 digits (⟦S1442⟧: width should hint at
    input length).
+
+## Remediation pass (after acceptance; the scorecard above is left as judged)
+The unmet rules recorded at this gate are met. Superseded versions are kept as backups
+(`price-v1-before-remediation.html`, `price-v2-before-remediation.html`).
+- **⟦S1442⟧ validate on blur:** the footprint is checked on blur and when Text is pressed, never while typing; a shown
+  error clears as soon as the value is fixed. An invalid footprint blocks Text and returns focus to the field.
+- **⟦S1442⟧ field width:** the footprint field is 9ch wide (was full width), with `maxlength="6"`.
+- **Tests:** `remedtest.cjs` (5 checks here); `pricetest.mjs` 9/9, updated so the invalid case blurs first, as the rule
+  requires.

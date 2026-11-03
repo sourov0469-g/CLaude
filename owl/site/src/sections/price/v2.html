@@ -9,7 +9,7 @@
     <label><input type="radio" name="svc-2" value="Storm damage"> Storm damage</label>
     <label><input type="radio" name="svc-2" value="Roof repair"> Repair</label>
   </fieldset>
-  <div class="field pm-field"><label for="pm-area-2">House footprint (sq ft)</label><input id="pm-area-2" class="t-num" inputmode="numeric" autocomplete="off" value="1800" aria-describedby="pm-err-2"><span class="err" id="pm-err-2">Enter a footprint between 300 and 10,000 sq ft, like 1800.</span></div>
+  <div class="field pm-field"><label for="pm-area-2">House footprint (sq ft)</label><input id="pm-area-2" class="t-num" inputmode="numeric" autocomplete="off" value="1800" maxlength="6" aria-describedby="pm-err-2"><span class="err" id="pm-err-2">Enter a footprint between 300 and 10,000 sq ft, like 1800.</span></div>
   <div class="field pm-field"><label for="pm-pitch-2">Roof pitch: <span class="t-num pm-pitchv">6/12</span></label><input id="pm-pitch-2" type="range" min="3" max="12" step="1" value="6" aria-valuetext="6 in 12"></div>
   <p class="pm-read t-num" aria-live="polite"><span class="pm-formula">1,800 × 1.118 ÷ 100</span> ≈ <b class="pm-sq">20</b> squares</p>
   <p class="t-small muted pm-note">A square is 100 sq ft of roof. This measures your roof; it is not a price. Owl's estimates are free, after an inspection.</p>

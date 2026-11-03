@@ -97,3 +97,12 @@ the call band. **V2 is recommended for the Contact page.**
 3. **V2:** the zero-results answer does not confirm the searched term (⟦S1453⟧).
 
 These go into the build's fix list for when V2 is reused on the Contact page, as recommended above.
+
+## Remediation pass (after acceptance; the scorecard above is left as judged)
+The unmet rules recorded for V2's search are met. The superseded versions are kept as backups
+(`area-v1-before-remediation.html`, `area-v2-before-remediation.html`; V1 itself is unchanged).
+- **⟦S1453⟧ clear button:** appears once there is a query; it empties the field and returns focus; Escape also clears.
+- **⟦S1453⟧ typo tolerance:** edit distance 1 for short queries, 2 for longer ("Woodbery" → Woodbury).
+- **⟦S1453⟧ zero results echo the query:** "No town matches \"Duluth\". Owl also works in surrounding Minnesota
+  communities: call or text and ask."
+- **Tests:** `remedtest.cjs` (4 checks here); `areatest.mjs` 7/7.

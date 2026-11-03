@@ -43,7 +43,7 @@ against that bar.
 | Category | Score | Evidence for | Evidence against |
 |---|---|---|---|
 | **Design** | **7.5** | One identity across 84 versions: three-tier tokens, Carbon spacing, Utopia type, token lint clean on every file (⟦S1461⟧, ⟦S1432⟧, ⟦S1433⟧); one visible h1 per page and a clear H1 → CTA → index order (⟦S1434⟧); the inner covers, call bands and footers are one consistent set (⟦S1427⟧); Owl's logo, colours and drawings make a screenshot identifiable as Owl's (⟦S0659⟧ identifiability test). | Four inner covers reuse the same cover + index pattern, so the pages feel templated; several drawings are plain (the aftercare box, the wrap netting); the families photo is only 645 px wide; one accent use per screen was not measured site-wide (⟦S0660⟧ asks for at most 2). |
-| **Usability** | **8.0** | One locked number on every tel/sms link and a phone call bar in thumb reach; 5 page links plus the logo for Home in the top nav, active state shown by an underline, not colour alone, hamburger only under 1024 px (⟦S1450⟧); every section is a deep link, every page reachable in one click (⟦S1411⟧); 48 px targets (⟦S1441⟧); forms validate on blur with errors under the field (⟦S1442⟧, ⟦S1439⟧); search with clear, typo tolerance and query echo (⟦S1453⟧); reduced motion removes pins and scrubs (⟦S0400⟧); 42 renders with no overflow or errors. | The homepage price and area tools still break ⟦S1442⟧ and ⟦S1453⟧ (fixed only on Contact); home families V2 drops keyboard focus at the track's end (⟦S0070⟧, recorded in GATE-families); the message form has no back end; no real-device test; no automated accessibility audit was run, only per-section keyboard tests. |
+| **Usability** | **8.0** | One locked number on every tel/sms link and a phone call bar in thumb reach; 5 page links plus the logo for Home in the top nav, active state shown by an underline, not colour alone, hamburger only under 1024 px (⟦S1450⟧); every section is a deep link, every page reachable in one click (⟦S1411⟧); 48 px targets (⟦S1441⟧); forms validate on blur with errors under the field (⟦S1442⟧, ⟦S1439⟧); search with clear, typo tolerance and query echo (⟦S1453⟧); reduced motion removes pins and scrubs (⟦S0400⟧); 42 renders with no overflow or errors. | At judging, the homepage price and area tools broke ⟦S1442⟧ and ⟦S1453⟧ and home families V2 dropped keyboard focus (⟦S0070⟧); all three are fixed in the remediation pass below. Still: the message form has no back end; no real-device test; no automated accessibility audit was run, only per-section keyboard tests. |
 | **Creativity** | **7.0** | Owl-only ideas: the magnet game (round two of Owl's own cleanup), the shingle-tomb lid, the two guarantee paths built from Owl's "bumps" sentence, the Wise Check cutaway, the hail drawing that circles marks like an inspection (⟦S0489⟧, ⟦S1436⟧ motion rules). | Outside Home, the interactions are modest 2D drawings; the Quiet Cubes "instrument" is a slider and a gable, not a configurator worth the reference; Contact and Services lean on familiar layouts; the page end is the same band pattern six times (by design, ⟦S1452⟧, but it repeats). |
 | **Content** | **8.5** | Every line is Owl's own published words or the facts lock; no review quotes, no invented jobs or captions, no before/after (⟦S0659⟧); where Owl's pages and the lock disagree, the lock wins (founders; the warranty wording); links name their destination (⟦S0076⟧). | Few real Owl job photos exist, so drawings stand in; Owl's Quincy House pledge is outside the lock (flagged); no FAQ on the Storm page because Owl has none; Owl's About text needed cutting to stay inside the lock, which leaves the Browns' card thin. |
 | **Weighted** | **7.65** | | |
@@ -53,9 +53,9 @@ scores lower because repetition across pages (covers, bands) and the known unmet
 
 **Further WEB-SKILLS applied site-wide** (all logged): ⟦S1452⟧ peak-end (every page ends on the call, never on a
 form); ⟦S1424⟧ law-of-continuity (the lines and indexes above); ⟦S1444⟧ hicks-law (at most three primary ways to act
-in any block: call, text, email); ⟦S0280⟧ core-web-vitals: **not measured.** The build is one 913 KB HTML file plus 18
-image files, 52 of its 61 images carry width and height; 9 do not (homepage proof and families images, and one built by script),
-which is a layout-shift risk. Per the skill, no performance improvement is claimed without field data.
+in any block: call, text, email); ⟦S0280⟧ core-web-vitals: **not measured.** The build is one HTML file (913 KB at judging,
+933 KB after the remediation pass, which added 7 backups) plus 18 image files. All 61 images now carry width and
+height (9 were missing at judging). Per the skill, no performance improvement is claimed without field data.
 
 ## Whole-site checks (all pass)
 - `sitepass.mjs`: **42 page renders**, 0 failures: 6 pages × 1440/768/390 × defaults and all-V2, plus reduced motion
@@ -79,18 +79,19 @@ which is a layout-shift risk. Per the skill, no performance improvement is claim
   where they were cited before.
 
 ## Remaining (honest)
-1. **Homepage price and area sections** still carry the unmet rules recorded at their gates (validation per keystroke;
-   no clear button or typo tolerance). They are fixed in the Contact versions, as the gates planned; the judged homepage
-   sections were not changed.
-2. **The message form has no back end:** it opens the visitor's own email or text app, pre-filled. A server form needs
+**Fixed in the remediation pass after this gate was accepted** (superseded versions kept as 7 in-file backups; the
+scorecard above is left as judged): the homepage price tool now validates on blur with a 9ch field (⟦S1442⟧); the
+homepage town search has a clear button, typo tolerance and query echo (⟦S1453⟧); home families V2 keeps keyboard focus
+at the track's ends (⟦S0070⟧) and both families versions link on to the Our families page (⟦S1411⟧); all 61 images
+now carry width and height (⟦S0280⟧). `remedtest.cjs` 17/17; `sitepass.mjs` re-run: 42 renders, 0 failures.
+
+Still open:
+1. **The message form has no back end:** it opens the visitor's own email or text app, pre-filled. A server form needs
    Owl's systems.
-3. **Owl's Quincy House pledge** ($100 per job in 2026, $20K goal) is quoted as Owl's own but is not in the lock
+2. **Owl's Quincy House pledge** ($100 per job in 2026, $20K goal) is quoted as Owl's own but is not in the lock
    (flagged in GATE-of-community).
-4. **No real-device check:** Chromium emulation only (touch, 390/768 widths, reduced motion).
-5. **With every section on V2,** the Protect Your Nest wrap photo appears twice (cover and wrap); the defaults avoid it.
-6. **Home families V2 drops keyboard focus** when Next disables itself at the last chapter (⟦S0070⟧); recorded in
-   GATE-families, not changed. Home families also has no contextual link on to the Our families page.
-7. **Not measured:** Core Web Vitals, accent uses per screen, and an automated accessibility audit. 9 of 61 images
-   lack width and height.
+3. **No real-device check:** Chromium emulation only (touch, 390/768 widths, reduced motion).
+4. **With every section on V2,** the Protect Your Nest wrap photo appears twice (cover and wrap); the defaults avoid it.
+5. **Not measured:** Core Web Vitals, accent uses per screen, and an automated accessibility audit.
 
 **Work method:** every step in this thread, by me; no sub-agents and no background tasks.

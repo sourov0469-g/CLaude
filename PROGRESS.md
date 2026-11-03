@@ -305,12 +305,16 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
   built, five cited retrospectively and marked so; ratings, versions and facts unchanged. Two findings recorded, not
   changed: home families V2 drops keyboard focus when Next disables itself (⟦S0070⟧, `famfocus.cjs`), and it has no
   contextual link to the Our families page.
-- **Next:** none in the brief and addendum beyond the remaining items in GATE-SITE.md, which need the owner's call
-  (homepage price/area rule fixes on judged sections; a back end for the message form; the Quincy pledge; a real-device
-  check).
-- **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
-  Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
-  fall back to Home; this is noted in each gate.
+- **REMEDIATION PASS (after Muse accepted the site gate; addendum: audit-improve until honestly met, never idle):**
+  fixed the defects GATE-SITE recorded that are mine to fix, keeping every superseded version as an in-file backup
+  (7 in `src/backups/`): homepage price validates on blur with a 9ch field (⟦S1442⟧); homepage town search has a clear
+  button, typo tolerance and query echo (⟦S1453⟧); home families V2 keeps focus at the ends via `aria-disabled`
+  (⟦S0070⟧); both families versions link on to the Our families page (⟦S1411⟧); all 61 images carry width and height
+  (⟦S0280⟧). Judged scorecards left unchanged; each affected gate (families, price, area, services, reviews) and
+  GATE-SITE record the fixes. Tests: `remedtest.cjs` 17/17; `pricetest` 9/9, `areatest` 7/7, `famtest` 6/6 (two
+  updated to the new rules); `sitepass` 42 renders, 0 failures; token lint clean. No sub-agents, no background tasks.
+- **Next:** none left that I can do alone. The open items in GATE-SITE.md need the owner: a back end for the message
+  form, a ruling on the Quincy House pledge, and a real-device check.
 
 ### Page plan and reasoning (recorded here as the addendum requires)
 **Built from tasks inward** (⟦S1411⟧). A Twin Cities homeowner comes with one of four jobs:

@@ -89,3 +89,12 @@ scroll.
 2. **My own first keyboard test used Home**, which does not scroll a horizontal scroller. It was corrected to the native
    ArrowLeft, which passes; the page was not changed.
 3. **The track step** hard-coded a 24px gap in JS. It now reads the computed gap.
+
+## Remediation pass (after acceptance; the scorecard above is left as judged)
+The two findings recorded above are fixed. The versions they replace are kept as in-file backups
+(`families-v1-before-remediation.html`, `families-v2-before-remediation.html` in `src/backups/`).
+- **⟦S0070⟧ focus:** V2's arrows use `aria-disabled` instead of native `disabled`; a press on a disabled arrow does
+  nothing, and keyboard focus stays on Next at the last chapter (was: the page body).
+- **⟦S1411⟧ contextual navigation:** both versions end with "Meet both families on the Our families page" (`#/families`).
+- **⟦S0280⟧ layout shift:** V2's four images now carry width and height.
+- **Tests:** `remedtest.cjs` 17/17 (5 checks here); `famtest.mjs` 6/6, updated from `disabled` to `aria-disabled`.

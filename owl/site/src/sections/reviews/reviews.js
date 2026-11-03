@@ -6,7 +6,7 @@
   function mount(yt, title, cap) { // rebuild the player as a fresh thumbnail card for the chosen video
     var old = holder.querySelector('.vcard'), img = r.querySelector('.rv2-item[data-yt="' + yt + '"] img').getAttribute('src');
     var fig = document.createElement('figure'); fig.className = 'vcard rv2-player'; fig.dataset.yt = yt; fig.dataset.title = title;
-    fig.innerHTML = '<button class="vcard-btn" type="button"><img alt="" src="' + img + '"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption class="rv2-cap"></figcaption>';
+    fig.innerHTML = '<button class="vcard-btn" type="button"><img alt="" width="720" height="405" src="' + img + '"><span class="vcard-play"><svg class="icon" aria-hidden="true"><use href="#icon-action-play"/></svg></span></button><figcaption class="rv2-cap"></figcaption>';
     fig.querySelector('.vcard-btn').setAttribute('aria-label', 'Play: ' + title); fig.querySelector('figcaption').innerHTML = cap;
     old.replaceWith(fig); Owl.videoCard(fig);
   }
