@@ -808,6 +808,46 @@
       "Pick a way"
      ]
     ]
+   },
+   {
+    "slot": "ct2",
+    "name": "The office",
+    "mod": "p_ct2",
+    "obj": "PCt2",
+    "v": [
+     [
+      "a",
+      "Today at the office"
+     ],
+     [
+      "b",
+      "The door plate"
+     ],
+     [
+      "c",
+      "Three things for your phone"
+     ]
+    ]
+   },
+   {
+    "slot": "ct3",
+    "name": "Book the inspection",
+    "mod": "p_ct3",
+    "obj": "PCt3",
+    "v": [
+     [
+      "a",
+      "One big button"
+     ],
+     [
+      "b",
+      "Online or by phone"
+     ],
+     [
+      "c",
+      "What booking gets you"
+     ]
+    ]
    }
   ]
  }
