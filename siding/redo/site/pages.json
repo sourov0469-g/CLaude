@@ -562,9 +562,50 @@
       "What's your project?"
      ]
     ]
+   },
+   {
+    "slot": "rv5",
+    "name": "Book",
+    "mod": "p_rv5",
+    "obj": "PRv5",
+    "v": [
+     [
+      "a",
+      "Your turn"
+     ],
+     [
+      "b",
+      "One more voice"
+     ],
+     [
+      "c",
+      "The rating band"
+     ]
+    ]
    }
   ],
-  "about": [],
+  "about": [
+   {
+    "slot": "ab1",
+    "name": "Opener",
+    "mod": "p_ab1",
+    "obj": "PAb1",
+    "v": [
+     [
+      "a",
+      "Since 2009"
+     ],
+     [
+      "b",
+      "Two become one"
+     ],
+     [
+      "c",
+      "The years"
+     ]
+    ]
+   }
+  ],
   "area": [],
   "contact": []
  }

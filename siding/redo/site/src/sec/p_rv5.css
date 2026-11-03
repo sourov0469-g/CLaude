@@ -1,0 +1,24 @@
+/* REVIEWS · Book */
+.rv5A,.rv5B,.rv5C{padding:96px var(--gut) 80px}
+.rv5A .cf3,.rv5B .cf3{margin-top:18px;font:500 14.5px/1.6 var(--text);color:var(--ink-3)}.rv5A .cf3 a,.rv5B .cf3 a{color:var(--green);font-weight:700}
+/* A */
+.rv5A .r4{font:800 clamp(48px,6vw,88px)/1 var(--display);letter-spacing:-.04em;color:var(--green)}.rv5A .r4 span{font:700 16px/1 var(--text);letter-spacing:0;color:var(--ink-3)}
+.rv5A .sec-h{margin-top:6px;font-size:clamp(48px,7vw,110px);line-height:.95}
+.rv5A .sec-p{margin:16px 0 22px;font-size:17.5px;max-width:52ch}
+/* B */
+.rv5B .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(18px,3vw,44px);align-items:center}
+.rv5B figure.pq2.bigq{padding:clamp(26px,3.4vw,46px);border-radius:26px;background:#0E3B2C;box-shadow:none}
+.rv5B figure.pq2.bigq blockquote p{font:800 clamp(26px,3vw,44px)/1.15 var(--display);letter-spacing:-.02em;color:#fff}
+.rv5B figure.pq2.bigq figcaption,.rv5B figure.pq2.bigq figcaption b{color:#B5DB6E}
+.rv5B .bk4>p:not(.cf3){margin:10px 0 20px;font:700 16px/1.4 var(--text);color:var(--green)}
+@media (max-width:860px){.rv5B .wrap{grid-template-columns:1fr}}
+/* C */
+.rv5C .band4{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.1fr);gap:20px clamp(20px,3vw,44px);align-items:center;padding:clamp(24px,3.4vw,46px);border-radius:28px;background:#0E3B2C;color:#fff}
+.rv5C .r5{font:800 clamp(80px,10vw,150px)/.85 var(--display);letter-spacing:-.06em;color:#B5DB6E}.rv5C .r6{margin-top:6px;font:700 14px/1.3 var(--text);color:rgba(255,255,255,.8)}
+.rv5C .sec-h{color:#fff;font-size:clamp(28px,3vw,44px)}
+.rv5C .stt4{display:inline-flex;align-items:center;gap:8px;margin:10px 0 16px;font:700 14px/1.3 var(--text);color:rgba(255,255,255,.85)}
+.rv5C .stt4::before{content:"";width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.35)}.rv5C .stt4.open::before{background:#B5DB6E;box-shadow:0 0 0 4px rgba(181,219,110,.3)}
+.rv5C .t3{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px}
+.rv5C .t3 dt{font:800 11.5px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:#B5DB6E}.rv5C .t3 dd{margin-top:6px;font:500 15px/1.45 var(--text);color:rgba(255,255,255,.9)}
+.rv5C .t3 a{color:#fff;font-weight:800;overflow-wrap:normal;word-break:keep-all}
+@media (max-width:1000px){.rv5C .band4{grid-template-columns:1fr}.rv5C .t3{grid-template-columns:1fr}}
