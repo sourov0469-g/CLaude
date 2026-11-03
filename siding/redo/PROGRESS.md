@@ -36,7 +36,8 @@ On their points, the later ones win.
 | 11-03 | **Round 5: try-the-job sequence + booking + footer + nav polish** | Try A (pinned sideways, four hand jobs) 8.16, Booking A (work-order pad, live open/closed) 8.12, stacked-course footer, phone menu sheet, scroll-spy, cursor companion (Board / Nail / Swatch / Off). `GATE-ROUND-5.md` |
 | 11-03 | **HOMEPAGE COMPLETE** (10 sections + header + footer in `site/out/site.html`) | Delivered for joint verification: Muse audits against the skills, then the owner. `GATE-HOMEPAGE.md`. **STOPPED: no inner pages until both pass** |
 | 11-03 | **Owner's verdict: 2/10, not signed off.** AUSTIN-UPGRADE-BRIEF: white ground + hidden depth world, 6 hero versions, 3+ per section, review switcher, skill ledger per gate | In force (where it conflicts, it wins) |
-| 11-03 | **Upgrade Round 1:** pure white ground; WebGL world of the trades at work revealed around the cursor (5 scenes × 3 planes, scroll cross-fade, touch scroll reveal); hero V2–V6 on Muse's photos (depth window, pinned dusk portrait, title between sky and house, lap courses, three-house deck); magnetic buttons; `?review` switcher | `GATE-UPGRADE-R1.md`. **Waiting for Muse before Round 2.** Illustration set requested |
+| 11-03 | **Upgrade Round 1:** pure white ground; WebGL world of the trades at work revealed around the cursor (5 scenes × 3 planes, scroll cross-fade, touch scroll reveal); hero V2–V6 on Muse's photos (depth window, pinned dusk portrait, title between sky and house, lap courses, three-house deck); magnetic buttons; `?review` switcher | `GATE-UPGRADE-R1.md`. Accepted by Muse. Illustration set requested |
+| 11-03 | **Upgrade Round 2:** Services C (counted chapters, pinned, numbers as events) and D (MERSI split cover with the firm's own jobs, draggable seam); Visualiser C (colour fields + compare) and D (four-step instrument, dial, corner preview, spec download); Visualiser B phone step caption; word-by-word section headings | `GATE-UPGRADE-R2.md`. Proceeding to Round 3 |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -62,8 +63,10 @@ On their points, the later ones win.
 | `src/world.js` | The hidden world: WebGL reveal mask, 5 scenes of crews at work in 3 parallax planes, scroll cross-fade, touch reveal |
 | `src/hero2.*` | Hero V2–V6 and the depth-photo engine (hand-traced depth maps) |
 | `src/fx.*` | White ground, upgraded buttons, review switcher |
+| `src/sec/svc2.*` | Services C (counted chapters) and D (split cover) |
+| `src/sec/vis2.*` | Visualiser C (colour fields) and D (the instrument) |
 | `depth.py` | Depth maps and the V4 house matte for Muse's three photographs |
 
 ## Next
 
-**Waiting for Muse's judgment on Upgrade Round 1.** Then Round 2: Services + Visualiser, at least 2 new versions each (3 total), per the upgrade brief. Inner pages stay frozen.
+**Upgrade Round 3: Windows + Reviews**, two new versions each, with the lifted-sash room and the reviews dialog header corrections. Then Rounds 4 and 5, then the joint homepage verification. Inner pages stay frozen.

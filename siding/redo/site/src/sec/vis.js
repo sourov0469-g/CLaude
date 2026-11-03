@@ -68,7 +68,7 @@ window.Vis = (function () {
     return `<section class="sec viB" id="colours" aria-labelledby="viB-h" style="--c:#575B59;--t:#E0E0D8">
       <div class="hd"><div><h2 class="sec-h" id="viB-h">Build your wall, board by board.</h2><p class="sec-p">Five choices, the same ones our project managers walk through at the free inspection.</p></div></div>
       <ol class="steps">${STEPS.map(([a, b], i) => `<li><button type="button" data-s="${i}" ${i ? '' : 'aria-current="step"'}><i>${i + 1}</i><span>${a}<small>${b}</small></span></button></li>`).join('')}</ol>
-      <div class="wallbox" data-solid role="img" aria-label="A section of wall that builds as you choose"><div class="wall"><span class="wrapword">HOUSE WRAP</span>${crs}${pnl}${bat}<i class="corner l"></i><i class="corner r"></i><div class="win"></div></div><span class="tag" aria-live="polite"></span></div>
+      <div class="wallbox" data-solid role="img" aria-label="A section of wall that builds as you choose"><div class="wall"><span class="wrapword">HOUSE WRAP</span>${crs}${pnl}${bat}<i class="corner l"></i><i class="corner r"></i><div class="win"></div></div><span class="tag" aria-live="polite"></span><span class="stepcap" aria-hidden="true"></span></div>
       <div class="opts"><div class="body"></div><div class="sum" aria-live="polite"></div>
         <div class="nav"><button class="btn light" type="button" data-nav="-1">Back</button><button class="btn" type="button" data-nav="1">Next</button></div></div></section>`;
   };
@@ -89,7 +89,7 @@ window.Vis = (function () {
       if (st.step === 3) h = `<h3>Colour</h3><p class="why">${st.finish === 'cp' ? 'The 17 ColorPlus colours for Austin.' : 'Sherwin-Williams samples the firm publishes; any of 1,700+ can be matched.'}</p>
         <div class="grid sw" role="radiogroup" aria-label="Colour">${L.map(([n, x], i) => `<button type="button" class="chip" role="radio" aria-checked="${i === st.colour}" aria-label="${n}" data-k="colour" data-v="${i}" style="--c:${x}"></button>`).join('')}</div><p class="colname">${c[0]}</p>`;
       if (st.step === 4) h = `<h3>Trim</h3><p class="why">Corner boards and casings frame the wall.</p><div class="grid" role="radiogroup" aria-label="Trim">${opt('trim', 'arctic', 'Arctic White', 'the ColorPlus trim colour', st.trim === 'arctic')}${opt('trim', 'match', 'Match the body', 'one colour, quieter look', st.trim === 'match')}${opt('trim', 'dark', 'Tricorn Black', 'painted, high contrast', st.trim === 'dark')}</div>`;
-      body.innerHTML = h;
+      body.innerHTML = h; s.querySelector('.stepcap').textContent = `Step ${st.step + 1} of 5 · ${STEPS[st.step][0]}`;
       body.querySelectorAll('[data-k]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.k; st[k] = k === 'colour' ? +b.dataset.v : b.dataset.v; if (k === 'trim') st.trimSet = true; render(); }));
       const prof = st.profile === 'lap' ? 'Lap 8.25 in' : st.profile === 'bnb' ? 'Board and batten' : '';
       const summary = `${prof} · ${st.texture === 'grain' ? 'Select Cedarmill' : 'Smooth'} · ${c[0]}${st.finish === 'cp' ? ' (ColorPlus)' : ' (painted)'} · ${st.trim === 'arctic' ? 'Arctic White' : st.trim === 'match' ? 'matching' : 'Tricorn Black'} trim`;

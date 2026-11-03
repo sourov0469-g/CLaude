@@ -19,6 +19,11 @@ html{background:#FFFFFF}
 .btn.light:active{box-shadow:inset 0 0 0 1px #D6DED9,0 1px 0 #D3DBD6}
 @media (prefers-reduced-motion:reduce){.btn,.btn>*{transform:none!important}.btn:hover::after{animation:none}}
 
+[data-split] .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+[data-split] .w>span{display:inline-block;transform:translateY(105%);transition:transform .9s cubic-bezier(.16,1,.3,1) calc(var(--i) * .07s)}
+[data-split].in .w>span{transform:none}
+@media (prefers-reduced-motion:reduce){[data-split] .w>span{transform:none;transition:none}}
+
 /* Review switcher: only with ?review in the address. Every version of every slot, one click away. */
 .rv{position:fixed;right:14px;bottom:14px;z-index:200;width:min(360px,calc(100vw - 28px));max-height:min(78svh,640px);display:flex;flex-direction:column;border-radius:16px;background:#0F1512;color:#fff;
   box-shadow:0 30px 60px -20px rgba(0,0,0,.6);font:500 13px/1.3 var(--text);overflow:hidden}

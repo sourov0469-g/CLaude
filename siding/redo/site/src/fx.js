@@ -8,6 +8,12 @@
       if (!b) return; cur = b; const r = b.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
       b.style.setProperty('--mx', (dx * 0.14).toFixed(1) + 'px'); b.style.setProperty('--my', (dy * 0.22).toFixed(1) + 'px'); }, { passive: true });
   }
+  // section headings: split once, rise in when they arrive (the hero splits itself)
+  const io = 'IntersectionObserver' in window && !RM ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.3 }) : null;
+  setTimeout(() => document.querySelectorAll('.slot [data-split]').forEach((el) => { if (el.closest('.hero') || el.dataset.split) return;
+    const t = el.textContent; el.setAttribute('aria-label', t.trim()); el.textContent = '';
+    t.split(/(\s+)/).forEach((w) => { if (!w.trim()) { el.append(w); return; } const s = document.createElement('span'); s.className = 'w'; s.setAttribute('aria-hidden', 'true'); const i = document.createElement('span'); i.textContent = w; s.append(i); el.append(s); });
+    [...el.querySelectorAll('.w')].forEach((w, i) => w.style.setProperty('--i', i)); el.dataset.split = 1; if (io) io.observe(el); else el.classList.add('in'); }));
   // review switcher
   const q = new URLSearchParams(location.search); if (!q.has('review')) return;
   const V = window.__VERSIONS || {}, NAMES = window.__SLOTNAMES || {};
