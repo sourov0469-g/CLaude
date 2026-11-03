@@ -1,0 +1,90 @@
+<section class="sec explore9" id="explore-9" aria-labelledby="ex9-h">
+<style>
+.explore9 .g{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.4fr);gap:clamp(20px,3.6vw,52px);align-items:center}
+.explore9 .lede{margin:12px 0 18px;max-width:38ch}
+.explore9 .fig{position:relative;aspect-ratio:1000/560;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#E6EEF1,#F4F2EA);box-shadow:0 2px 0 #fff inset,0 40px 70px -46px rgba(23,17,29,.5)}
+.explore9 svg,.explore9 canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+.explore9 .fx{opacity:0;transition:opacity .6s}
+.explore9 .fx.on{opacity:1}
+.explore9 .lbl{font:800 17px/1 var(--font,inherit);fill:#17111D;paint-order:stroke;stroke:#F4F2EA;stroke-width:5px}
+.explore9 .keys{display:grid;gap:10px}
+.explore9 .keys button{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 16px;border-radius:16px;text-align:left;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore9 .keys button i{width:14px;height:14px;border-radius:50%;background:var(--d);flex:none}
+.explore9 .keys button:hover{transform:translateY(-2px)}
+.explore9 .keys button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge);transform:translateY(3px)}
+.explore9 .keys button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore9 .read{margin-top:16px;padding-top:14px;border-top:3px solid var(--amber)}
+.explore9 .read h3{margin:0 0 6px;font-size:clamp(22px,2.2vw,28px);font-weight:800}
+.explore9 .read p{margin:0;font-size:17px;color:var(--ink-70)}
+@media (max-width:980px){.explore9 .g{grid-template-columns:minmax(0,1fr)}.explore9 .lbl{font-size:24px}}
+@media (prefers-reduced-motion:reduce){.explore9 .fx,.explore9 .keys button{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Explore the roof</span>
+   <h2 class="h2" id="ex9-h" style="margin-top:12px">Let It Breathe</h2>
+   <p class="lede rv">A roof works with its attic. Cool air comes in low at the soffits, carries heat and damp along the underside of the deck, and leaves at the ridge.</p>
+   <div class="keys" role="group" aria-label="Show the attic"></div>
+   <div class="read" aria-live="polite"><h3></h3><p></p></div>
+  </div>
+  <div class="fig" data-owl="say:Feel the draft">
+   <svg viewBox="0 0 1000 560" role="img" aria-labelledby="ex9-cap"><title id="ex9-cap"></title></svg>
+   <canvas aria-hidden="true"></canvas>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','9',function(root){
+  var svg = root.querySelector('svg'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), keysEl = root.querySelector('.keys'), read = root.querySelector('.read'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* a gable section: soffits low at each eave, ridge vent at the top, insulation on the attic floor */
+  var h = '<rect y="520" width="1000" height="40" fill="#8DB45F"/>';
+  h += '<rect x="170" y="360" width="660" height="160" fill="#FBFAF6" stroke="#C9C0AC" stroke-width="4"/><text class="lbl" x="440" y="460">Living space</text>';
+  h += '<polygon points="80,368 500,90 920,368 890,368 500,118 110,368" fill="#55505D"/>';
+  h += '<polygon points="110,368 500,118 890,368" fill="#F3EDE0"/>';
+  h += '<path d="M500 118V360M330 230V360M670 230V360" stroke="#D3AF7A" stroke-width="8"/>';
+  h += '<path class="bat" d="M170 360q20-20 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0V368H170z" fill="#E7C98F"/>';
+  h += '<g class="fx baffle on"><path d="M150 358L260 284M850 358L740 284" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/></g>';
+  h += '<g class="fx plug"><path d="M120 360q30-50 70-24t60 0V368H120zM880 360q-30-50-70-24t-60 0V368h130z" fill="#E7C98F"/></g>';
+  h += '<rect x="80" y="368" width="90" height="10" fill="#C9C0AC"/><rect x="830" y="368" width="90" height="10" fill="#C9C0AC"/>';
+  h += '<g fill="#17111D" opacity=".55"><rect x="96" y="370" width="6" height="6"/><rect x="112" y="370" width="6" height="6"/><rect x="128" y="370" width="6" height="6"/><rect x="144" y="370" width="6" height="6"/><rect x="852" y="370" width="6" height="6"/><rect x="868" y="370" width="6" height="6"/><rect x="884" y="370" width="6" height="6"/><rect x="900" y="370" width="6" height="6"/></g>';
+  h += '<g class="ridge"><path d="M462 98h76l-10-18h-56z" fill="#3A3540"/><path d="M470 90h60" stroke="#9AA3A8" stroke-width="3" stroke-dasharray="4 3"/></g>';
+  h += '<g class="fx shut"><path d="M462 98h76" stroke="#B3261E" stroke-width="6"/></g>';
+  h += '<g class="fx damp">'; for (var n = 0; n < 9; n++){ var t = (n + 1)/10, x = 110 + (500 - 110)*t, y = 368 - (368 - 118)*t; h += '<path d="M' + (x + 10).toFixed(0) + ' ' + (y + 12).toFixed(0) + 'l-4 8a5 5 0 1 0 8 0z" fill="#5BA3D9"/><path d="M' + (1000 - x - 10).toFixed(0) + ' ' + (y + 12).toFixed(0) + 'l-4 8a5 5 0 1 0 8 0z" fill="#5BA3D9"/>'; } h += '<polygon points="110,368 500,118 890,368" fill="#E2832E" opacity=".14"/></g>';
+  h += '<text class="lbl" x="66" y="408">Soffit intake</text><text class="lbl" x="934" y="408" text-anchor="end">Soffit intake</text><text class="lbl" x="500" y="62" text-anchor="middle">Ridge vent</text>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var fx = {baffle: svg.querySelector('.baffle'), plug: svg.querySelector('.plug'), shut: svg.querySelector('.shut'), damp: svg.querySelector('.damp')};
+  var S = [
+    {k:'Balanced', c:'#5BA3D9', t:'Balanced', p:'Intake at the soffits, exhaust at the ridge. Baffles keep the insulation off the soffit vents, so cool air washes up the underside of the deck and carries heat and damp out at the top.', fx:['baffle'], cap:'An attic with balanced airflow from the soffits to the ridge vent.'},
+    {k:'Blocked soffits', c:'#E2832E', t:'Blocked soffits', p:'Insulation pushed over the soffit vents stops the air coming in. The attic stays warm and damp, frost can form on the nails in winter, and the moisture ends up in the deck.', fx:['plug', 'damp'], cap:'An attic with insulation blocking the soffit vents: the air stalls and damp gathers.'},
+    {k:'No ridge vent', c:'#E2832E', t:'No way out', p:'Air comes in low but has nowhere to leave at the top. Warm, moist air pools under the ridge, and the deck and nails take the damp.', fx:['baffle', 'shut', 'damp'], cap:'An attic with no exhaust at the ridge: warm damp air pools at the top.'}];
+  var mode = 0, keys = S.map(function(s, i){ var b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<i style="--d:' + s.c + '" aria-hidden="true"></i>' + s.k; b.setAttribute('aria-pressed', i === 0); b.addEventListener('click', function(){ set(i); }); keysEl.appendChild(b); return b; });
+  function set(i){ mode = i; var s = S[i]; keys.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    Object.keys(fx).forEach(function(k){ fx[k].classList.toggle('on', s.fx.indexOf(k) >= 0); });
+    read.querySelector('h3').textContent = s.t; read.querySelector('p').textContent = s.p; svg.querySelector('title').textContent = s.cap; if (OWL.reduce) still(); }
+  /* particles: in at the soffit, along the underside of the deck, out the ridge (mirrored for the right side) */
+  var PATH = [[60, 384], [140, 372], [200, 330], [330, 246], [470, 152], [500, 112], [500, 60]];
+  function along(t, side){ var n = PATH.length - 1, f = Math.min(n - .0001, t*n), i = Math.floor(f), k = f - i, a = PATH[i], b = PATH[i + 1], x = a[0] + (b[0] - a[0])*k, y = a[1] + (b[1] - a[1])*k; return [side ? 1000 - x : x, y]; }
+  function inAttic(x, y){ return y < 362 && y > 125 + Math.abs(x - 500)*.64; }
+  var P = [], scale = 1, raf = 0, vis = false;
+  function size(){ var r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = r.width*d; cv.height = r.height*d; scale = cv.width/1000; }
+  function spawn(){ return {t: 0, side: Math.random() < .5 ? 1 : 0, sp: .0028 + Math.random()*.002, x: 0, y: 0, vx: 0, vy: 0, free: false, life: 1}; }
+  function step(){ ctx.clearRect(0, 0, cv.width, cv.height); var s = S[mode];
+    if (P.length < 70 && Math.random() < (mode === 1 ? .04 : .5)) P.push(spawn());
+    P.forEach(function(p){
+      if (!p.free){ var stop = mode === 1 ? .16 : mode === 2 ? .84 : 1.2; p.t += p.sp; var q = along(Math.min(p.t, 1), p.side); p.x = q[0]; p.y = q[1];
+        if (p.t >= stop){ if (mode === 0){ p.life = 0; } else { p.free = true; p.vx = (Math.random() - .5)*1.2; p.vy = (Math.random() - .5)*1.2; } } }
+      else { p.vx += (Math.random() - .5)*.25; p.vy += (Math.random() - .5)*.25 - (mode === 2 ? .02 : 0); p.vx *= .96; p.vy *= .96; var nx = p.x + p.vx, ny = p.y + p.vy; if (inAttic(nx, ny)){ p.x = nx; p.y = ny; } else { p.vx *= -1; p.vy *= -1; } p.life -= .0025; }
+      ctx.beginPath(); ctx.fillStyle = p.free ? '#E2832E' : s.c; ctx.globalAlpha = Math.max(0, Math.min(1, p.life))*.85; ctx.arc(p.x*scale, p.y*scale, 4*scale, 0, Math.PI*2); ctx.fill(); });
+    ctx.globalAlpha = 1; P = P.filter(function(p){ return p.life > 0 && p.t < 1.25; });
+    raf = vis ? requestAnimationFrame(step) : 0; }
+  /* reduced motion: a still drawing of where the air goes */
+  function still(){ size(); ctx.clearRect(0, 0, cv.width, cv.height); var s = S[mode]; ctx.strokeStyle = s.c; ctx.lineWidth = 4*scale; ctx.setLineDash([10*scale, 8*scale]);
+    [0, 1].forEach(function(side){ ctx.beginPath(); var end = mode === 1 ? .16 : mode === 2 ? .84 : 1; for (var t = 0; t <= end; t += .02){ var q = along(t, side); if (t === 0) ctx.moveTo(q[0]*scale, q[1]*scale); else ctx.lineTo(q[0]*scale, q[1]*scale); } ctx.stroke(); }); }
+  set(0); size(); addEventListener('resize', function(){ size(); if (OWL.reduce) still(); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ still(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis){ OWL.reveal(h2); if (!raf) raf = requestAnimationFrame(step); } }, {threshold:.1}); io.observe(cv);
+});
+</script>
+</section>

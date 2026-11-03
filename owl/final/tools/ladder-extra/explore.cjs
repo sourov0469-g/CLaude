@@ -51,5 +51,27 @@ module.exports = {
     rec('arrow keys move the lens back down to the eave', await p.evaluate(S => document.querySelector(S + ' .read h3').textContent === 'Ice & water shield', S));
     rec('the readout lists five layers for the zone', await p.evaluate(S => document.querySelectorAll(S + ' .read li').length === 5, S));
     rec('the deck layer shows a slot cut at the ridge (attic visible)', await p.evaluate(S => /y="70\.0" width="[\d.]+" height="14\.0" fill="#3A3036"/.test(decodeURIComponent(document.querySelector(S + ' .l2 img').src)), S));
+  },
+  '8': async (p, S, rec, txt) => {
+    rec('five keys: right and four common faults', await p.evaluate(S => [...document.querySelectorAll(S + ' .keys button')].map(b => b.textContent).join('|') === 'Right|Too high|Too low|Over-driven|Under-driven', S));
+    rec('right: four nails in the nailing strip, the doctrine in words', await p.evaluate(S => { const n = [...document.querySelectorAll(S + ' .fn')]; return n.length === 4 && n.every(e => { const y = +(e.style.transform.match(/,\s*([\d.]+)px/) || [0, 0])[1]; return y >= 196 && y <= 230; }) && /At least four nails per shingle/.test(document.querySelector(S + ' .read p').textContent); }, S));
+    await p.click(S + ' .keys button >> nth=1'); await p.waitForTimeout(700);
+    rec('too high: nails above the strip, the section shows it missing the bottom layer', await p.evaluate(S => [...document.querySelectorAll(S + ' .fn')].every(e => +(e.style.transform.match(/,\s*([\d.]+)px/) || [0, 999])[1] < 196) && document.querySelector(S + ' .miss').getAttribute('opacity') === '1' && /wind can tear it loose/.test(document.querySelector(S + ' .read p').textContent), S));
+    await p.click(S + ' .keys button >> nth=2'); await p.waitForTimeout(700);
+    rec('too low: nails below the cover line, head out in the weather', await p.evaluate(S => [...document.querySelectorAll(S + ' .fn')].every(e => +(e.style.transform.match(/,\s*([\d.]+)px/) || [0, 0])[1] > 250) && document.querySelector(S + ' .bare').getAttribute('opacity') === '1', S));
+    await p.click(S + ' .keys button >> nth=4'); await p.waitForTimeout(700);
+    rec('under-driven: raised head lifts the course above so it can’t seal', await p.evaluate(S => document.querySelector(S + ' .gap').getAttribute('opacity') === '1' && /translate\(0px,\s*-14px\)/.test(document.querySelector(S + ' .above').style.transform) && /seal strip can’t stick down/.test(document.querySelector(S + ' .read p').textContent), S));
+    rec('faults are marked as faults, right as right', await p.evaluate(S => !document.querySelector(S + ' .read').classList.contains('ok') && document.querySelector(S + ' .read i').textContent === '✕', S));
+    rec('no game: no score or win', !/score|you win|points|level up/i.test(txt));
+  },
+  '9': async (p, S, rec, txt) => {
+    await p.waitForTimeout(1500);
+    rec('air particles flow while the attic is in view', await p.evaluate(S => { const c = document.querySelector(S + ' canvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 3; i < d.length; i += 40) if (d[i] > 0) n++; return n > 20; }, S));
+    rec('balanced: baffles shown, no damp, intake and ridge labelled', await p.evaluate(S => document.querySelector(S + ' .baffle').classList.contains('on') && !document.querySelector(S + ' .damp').classList.contains('on') && /Soffit intake/.test(document.querySelector(S + ' svg').textContent) && /Ridge vent/.test(document.querySelector(S + ' svg').textContent), S));
+    await p.click(S + ' .keys button >> nth=1'); await p.waitForTimeout(500);
+    rec('blocked soffits: insulation over the vents, damp and the honest consequence', await p.evaluate(S => document.querySelector(S + ' .plug').classList.contains('on') && document.querySelector(S + ' .damp').classList.contains('on') && !document.querySelector(S + ' .baffle').classList.contains('on') && /frost can form on the nails/.test(document.querySelector(S + ' .read p').textContent), S));
+    await p.click(S + ' .keys button >> nth=2'); await p.waitForTimeout(500);
+    rec('no ridge vent: the exhaust is shut and air has no way out', await p.evaluate(S => document.querySelector(S + ' .shut').classList.contains('on') && document.querySelector(S + ' .read h3').textContent === 'No way out' && document.querySelectorAll(S + ' .keys [aria-pressed="true"]').length === 1, S));
+    rec('the figure describes the current state', await p.evaluate(S => /no exhaust at the ridge/.test(document.querySelector(S + ' svg title').textContent), S));
   }
 };

@@ -1,0 +1,251 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Nail Line"
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "five keys: right and four common faults",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "right: four nails in the nailing strip, the doctrine in words",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "too high: nails above the strip, the section shows it missing the bottom layer",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "too low: nails below the cover line, head out in the weather",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "under-driven: raised head lifts the course above so it can’t seal",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "faults are marked as faults, right as right",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "no game: no score or win",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Let It Breathe"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "air particles flow while the attic is in view",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "balanced: baffles shown, no damp, intake and ridge labelled",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "blocked soffits: insulation over the vents, damp and the honest consequence",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "no ridge vent: the exhaust is shut and air has no way out",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "the figure describes the current state",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

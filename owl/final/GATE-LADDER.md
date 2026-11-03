@@ -660,3 +660,27 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Video 8's wide word was cropped to its middle letters on phones; portrait stages now stack it.
 - A dark hairline showed at the stage's rounded corners; the stage background is now cream.
+
+## L22 · Explore 8 + 9 · checks 38/38 · evidence `gates/ladder/L22-explore-8-9/` · Explore now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Explore 8 · The Nail Line** | Longbow Motors (craft as doctrine) | One laminated shingle from the front (nailing strip marked, the line the next course covers to) and a side section through one nail (deck, underlayment, course below, both layers of this shingle, course above). Five keys: Right · Too high · Too low · Over-driven · Under-driven. The four nails ease to each position; the section shows the consequence: misses the bottom layer, head out in the weather, cut into the mat, lifted so it can't seal. A ✓ or ✕ reading gives the doctrine in plain words. On phones the section stacks under the front view. | 8.2 | 8.4 | 8.0 | 9.2 | **8.42** |
+| **Explore 9 · Let It Breathe** | Lusion (flow carries the eye) | A gable cutaway with soffit intake, insulation and baffles, rafters and a ridge vent. Air particles come in low, run up the underside of the deck and leave at the ridge. Three keys: Balanced · Blocked soffits (insulation over the vents; the air stalls warm, droplets form) · No ridge vent (the exhaust is shut; warm air pools). Reduced motion draws the airflow as still dashed paths. | 8.4 | 8.2 | 8.4 | 9.0 | **8.46** |
+
+**Roofer check:**
+- Explore 8: at least four nails per shingle; nails go in the nailing strip, through both layers where they're bonded, driven flush, and covered by the next course. Each of the four faults and its consequence is standard installation guidance.
+- Explore 9: balanced intake at the soffits and exhaust at the ridge; baffles keep insulation off the soffit vents; a blocked intake or a missing exhaust leaves warm, damp air in the attic, with frost on the nails in winter.
+- Neither has a score or a win state; Explore V3 stays the only game.
+
+**Checks run:** the generic gate, plus:
+- Explore 8: five keys; right puts four nails in the strip with the doctrine; too high puts the nails above the strip and shows the miss; too low puts them below the cover line with the head exposed; under-driven lifts the course above with no seal; faults read ✕; no game.
+- Explore 9: particles drawn on the canvas; balanced shows baffles and no damp; blocked shows the plug, the damp and the frost wording; no ridge shows the shut vent and "No way out"; the figure description follows the state.
+
+**Ledger:**
+- **Explore 8:** anatomy section ⟦S0526⟧; annotation ⟦S0468⟧; keys ⟦S1246⟧; title ⟦S0451⟧.
+- **Explore 9:** particles ⟦S1363⟧; flow paths ⟦S0407⟧; keys ⟦S1246⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Explore 8's first section was too small and its labels collided. It was redrawn thicker, with layer names drawn over the nail.
+- On phones Explore 8 was unreadable; the section now stacks under the front view.
+- Explore 9's columns were the wrong way round, and its damp tint spilled outside the attic; it is now clipped to the attic.

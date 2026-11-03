@@ -298,3 +298,18 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   drifting in the beam. The projector's switch is a 3D key (on: the beam flickers up and the film plays; off: it
   pauses and the beam fades). A "Now showing" card names the frame-checked moment. Skills: ⟦S1363⟧ dust in the
   beam, ⟦S0405⟧ switch, ⟦S1388⟧ keys, ⟦S1046⟧ modal.
+
+## L22 · Explore 8 + 9
+- **Explore 8 · "The Nail Line"** — reference **Longbow Motors** (craft told as doctrine, never adjectives). One
+  laminated architectural shingle, large, from the front, with the nailing strip marked, plus a side section
+  through the nail. Five keys: Right · Too high · Too low · Over-driven · Under-driven. "Right": at least four nails
+  in the nailing strip, through both layers where they are bonded, driven flush, covered by the next course. Each
+  fault moves the nail and shows the consequence in the section: too high misses the bottom layer and can let the
+  shingle tear loose; too low leaves the nail exposed under the course above; over-driven cuts into the mat;
+  under-driven holds the shingle up so it can't seal. Not a game: no score. Skills: ⟦S0526⟧ anatomy, ⟦S0468⟧
+  annotation, ⟦S1246⟧ keys, ⟦S0451⟧ title.
+- **Explore 9 · "Let It Breathe"** — reference **Lusion** (flow carries the eye). A cutaway attic with intake at the
+  soffit vents and exhaust at the ridge vent; air particles flow in low, wash along the underside of the deck and
+  out the ridge. Three keys: Balanced (baffles keep the soffit open) · Blocked soffits (insulation over the
+  intake: the air stalls, warm damp air gathers under the deck, frost forms on the nails) · No ridge vent (air has
+  nowhere to leave). Plain words for each. Skills: ⟦S1363⟧ particles, ⟦S0407⟧ flow paths, ⟦S1246⟧ keys, ⟦S0451⟧ title.

@@ -3484,6 +3484,189 @@ OWL.reg('explore','7',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="explore" data-v="8">
+<section class="sec explore8" id="explore-8" aria-labelledby="ex8-h">
+<style>
+.explore8 .hd{margin-bottom:clamp(18px,2.6vw,30px)}
+.explore8 .lede{margin-top:12px;max-width:48ch}
+.explore8 .keys{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.explore8 .keys button{min-height:52px;padding:0 18px;border-radius:16px;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore8 .keys button:hover{transform:translateY(-2px)}
+.explore8 .keys button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge);transform:translateY(3px)}
+.explore8 .keys button.ok[aria-pressed="true"]{background:linear-gradient(180deg,#7FBF7F,#2E7D32);color:#fff;box-shadow:0 2px 0 #1B5E20}
+.explore8 .keys button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore8 .fig{border-radius:26px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -46px rgba(23,17,29,.5);padding:clamp(10px,2vw,22px)}
+.explore8 svg{display:block;width:100%;height:auto;max-width:none}
+.explore8 .nl{transition:transform .55s cubic-bezier(.3,1.5,.5,1)}
+.explore8 .lbl{font:800 15px/1 var(--font,inherit);fill:#17111D}
+.explore8 .sm{font:700 13px/1 var(--font,inherit);fill:#5A5560}
+.explore8 .read{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;margin-top:18px}
+.explore8 .read i{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-style:normal;font-weight:900;font-size:22px;color:#fff;background:#B3261E}
+.explore8 .read.ok i{background:#2E7D32}
+.explore8 .read h3{margin:0 0 4px;font-size:clamp(22px,2.2vw,28px);font-weight:800}
+.explore8 .read p{margin:0;font-size:17px;color:var(--ink-70);max-width:62ch}
+@media (max-width:700px){.explore8 .keys button{flex:1 1 40%}}
+@media (prefers-reduced-motion:reduce){.explore8 .nl{transition:none}.explore8 .keys button{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Explore the roof</span><h2 class="h2" id="ex8-h" style="margin-top:12px">The Nail Line</h2>
+  <p class="lede rv">A roof is only as good as where its nails go. One shingle, front and side, nailed right and nailed four common wrong ways.</p></div>
+ <div class="keys" role="group" aria-label="How the nail is driven"></div>
+ <div class="fig" data-owl="say:Nailed it?"><svg viewBox="0 0 1000 470" role="img" aria-labelledby="ex8-cap"><title id="ex8-cap"></title></svg></div>
+ <div class="read ok" aria-live="polite"><i aria-hidden="true">✓</i><div><h3></h3><p></p></div></div>
+</div>
+<script>
+OWL.reg('explore','8',function(root){
+  var svg = root.querySelector('svg'), keysEl = root.querySelector('.keys'), read = root.querySelector('.read'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* front view: a laminated shingle; the nailing strip sits over the common bond, just above the line the next course covers to */
+  var h = '<g class="gF"><text class="lbl" x="30" y="34">Front</text>';
+  h += '<rect x="30" y="60" width="440" height="300" rx="4" fill="#6E6876"/><rect x="30" y="60" width="440" height="150" fill="#7C7684"/>';
+  for (var t = 0; t < 5; t++){ var x = 30 + t*88; h += '<path d="M' + (x + 10) + ' 360V292h' + (36 + (t % 3)*12) + 'v68z" fill="#4A4552"/>'; }
+  h += '<rect x="30" y="196" width="440" height="34" fill="#EAA221" opacity=".28"/><path d="M30 196H470M30 230H470" stroke="#C7871A" stroke-width="2" stroke-dasharray="6 5"/>';
+  h += '<text class="sm" x="40" y="188" style="fill:#FBFAF6">Nailing strip</text>';
+  h += '<path d="M30 250H470" stroke="#FBFAF6" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><text class="sm" x="40" y="270" style="fill:#FBFAF6">The next course covers down to here</text>';
+  h += '<g class="front">'; [56, 180, 320, 444].forEach(function(x){ h += '<g class="nl fn" transform="translate(' + x + ' 213)"><circle r="11" fill="#C9CDD2" stroke="#3A3540" stroke-width="3"/><circle r="3" fill="#3A3540"/></g>'; }); h += '</g>';
+  h += '<text class="sm" x="30" y="392">At least four nails per shingle, one near each end.</text>';
+  h += '</g><g class="gS"><text class="lbl" x="520" y="236">Side section, through one nail</text>';
+  /* side section, drawn thick enough to read: deck, underlayment, the course below, this shingle's two layers, the course above */
+  /* layer names go on last, over the nail, so a nail never hides a label */
+  var names = '';
+  function lay(x, y, w, hh, f, lb, col){ if (lb) names += '<text class="sm" x="' + (x + w - 8) + '" y="' + (y + hh/2 + 5) + '" text-anchor="end" style="fill:' + (col || '#FBFAF6') + ';paint-order:stroke;stroke:' + f + ';stroke-width:4px">' + lb + '</text>'; return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + hh + '" fill="' + f + '"/>'; }
+  h += lay(520, 378, 460, 46, '#DDBD82', 'Deck', '#5E3A08') + lay(520, 368, 460, 10, '#C2CCD3');
+  h += lay(770, 344, 210, 24, '#4A4552', 'Course below');
+  h += lay(640, 320, 340, 24, '#3F3946', 'Bottom layer');
+  h += lay(520, 296, 460, 24, '#6E6876', 'This shingle, top layer');
+  var a0 = names.length; h += '<g class="above">' + lay(520, 266, 270, 24, '#8A8494') + '<text class="sm" x="782" y="283" text-anchor="end" style="fill:#FBFAF6">Course above</text></g>';
+  h += '<g class="nl sn" transform="translate(700 0)"><rect x="-3.5" y="292" width="7" height="104" fill="#9AA3A8"/><rect class="hd" x="-15" y="286" width="30" height="8" rx="2" fill="#C9CDD2" stroke="#3A3540" stroke-width="2"/></g>';
+  h += names;
+  h += '<g class="fx tear" opacity="0"><path d="M684 297l8 7 8-7 8 7 8-7" stroke="#B3261E" stroke-width="3" fill="none"/><text class="sm" x="726" y="252" style="fill:#B3261E">cut into the mat</text></g>';
+  h += '<g class="fx gap" opacity="0"><path d="M520 282H790" stroke="#B3261E" stroke-width="3" stroke-dasharray="5 5"/><text class="sm" x="800" y="262" style="fill:#B3261E">lifted: can’t seal</text></g>';
+  h += '<g class="fx bare" opacity="0"><circle cx="880" cy="290" r="20" fill="none" stroke="#B3261E" stroke-width="3"/><text class="sm" x="820" y="252" style="fill:#B3261E">head out in the weather</text></g>';
+  h += '<g class="fx miss" opacity="0"><path d="M560 356l40-36" stroke="#B3261E" stroke-width="3"/><text class="sm" x="530" y="452" style="fill:#B3261E">misses the bottom layer</text></g>';
+  h += '</g>';
+  svg.insertAdjacentHTML('beforeend', h);
+  /* on a narrow screen the side section sits under the front view, so both stay readable */
+  var gS = svg.querySelector('.gS'), fig = root.querySelector('.fig'), narrow = null;
+  function layout(){ var n = fig.clientWidth < 620; if (n === narrow) return; narrow = n; svg.setAttribute('viewBox', n ? '0 0 500 720' : '0 0 1000 470'); gS.setAttribute('transform', n ? 'translate(-500 230)' : ''); }
+  layout(); addEventListener('resize', layout);
+  var fn = [].slice.call(svg.querySelectorAll('.fn')), sn = svg.querySelector('.sn'), above = svg.querySelector('.above'), fx = {tear: svg.querySelector('.tear'), gap: svg.querySelector('.gap'), bare: svg.querySelector('.bare'), miss: svg.querySelector('.miss')};
+  var C = [
+    {k:'Right', ok:1, fy:213, sx:180, sy:0, ay:0, fx:[], t:'Nailed right', p:'In the nailing strip, through both layers where they are bonded, driven flush. At least four nails per shingle, and the next course covers every head.'},
+    {k:'Too high', fy:150, sx:60, sy:0, ay:0, fx:['miss'], t:'Too high', p:'Above the strip the nail misses the lower layer. The shingle is held by less, and wind can tear it loose.'},
+    {k:'Too low', fy:300, sx:360, sy:0, ay:0, fx:['bare'], t:'Too low', p:'Below the strip the head lands in the part of the shingle you can see. It sits out in the weather and can let water in.'},
+    {k:'Over-driven', fy:213, sx:180, sy:10, ay:0, fx:['tear'], t:'Over-driven', p:'Driven too hard, the head cuts into the shingle’s mat. It holds less and can pull through.'},
+    {k:'Under-driven', fy:213, sx:180, sy:-14, ay:-14, fx:['gap'], t:'Under-driven', p:'Not driven home, the raised head props up the course above, so its seal strip can’t stick down.'}];
+  var X0 = 520, cur = -1, keys = C.map(function(c, i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = c.k; if (c.ok) b.className = 'ok'; b.setAttribute('aria-pressed', 'false'); b.addEventListener('click', function(){ pick(i); }); keysEl.appendChild(b); return b; });
+  function pick(i){ if (i === cur) return; cur = i; var c = C[i];
+    keys.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    /* CSS transforms (they override the attribute) so the nails ease into place */
+    fn.forEach(function(n){ n.style.transform = 'translate(' + n.getAttribute('transform').match(/translate\(([\d.]+)/)[1] + 'px,' + c.fy + 'px)'; });
+    sn.style.transform = 'translate(' + (X0 + c.sx) + 'px,' + c.sy + 'px)'; above.style.transform = 'translate(0px,' + c.ay + 'px)'; above.style.transition = 'transform .55s cubic-bezier(.3,1.5,.5,1)';
+    Object.keys(fx).forEach(function(k){ fx[k].setAttribute('opacity', c.fx.indexOf(k) >= 0 ? 1 : 0); });
+    read.classList.toggle('ok', !!c.ok); read.querySelector('i').textContent = c.ok ? '✓' : '✕'; read.querySelector('h3').textContent = c.t; read.querySelector('p').textContent = c.p;
+    svg.querySelector('title').textContent = 'A shingle nailed ' + c.k.toLowerCase() + ', front view and side section.'; }
+  pick(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="explore" data-v="9">
+<section class="sec explore9" id="explore-9" aria-labelledby="ex9-h">
+<style>
+.explore9 .g{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.4fr);gap:clamp(20px,3.6vw,52px);align-items:center}
+.explore9 .lede{margin:12px 0 18px;max-width:38ch}
+.explore9 .fig{position:relative;aspect-ratio:1000/560;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#E6EEF1,#F4F2EA);box-shadow:0 2px 0 #fff inset,0 40px 70px -46px rgba(23,17,29,.5)}
+.explore9 svg,.explore9 canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+.explore9 .fx{opacity:0;transition:opacity .6s}
+.explore9 .fx.on{opacity:1}
+.explore9 .lbl{font:800 17px/1 var(--font,inherit);fill:#17111D;paint-order:stroke;stroke:#F4F2EA;stroke-width:5px}
+.explore9 .keys{display:grid;gap:10px}
+.explore9 .keys button{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 16px;border-radius:16px;text-align:left;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore9 .keys button i{width:14px;height:14px;border-radius:50%;background:var(--d);flex:none}
+.explore9 .keys button:hover{transform:translateY(-2px)}
+.explore9 .keys button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge);transform:translateY(3px)}
+.explore9 .keys button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore9 .read{margin-top:16px;padding-top:14px;border-top:3px solid var(--amber)}
+.explore9 .read h3{margin:0 0 6px;font-size:clamp(22px,2.2vw,28px);font-weight:800}
+.explore9 .read p{margin:0;font-size:17px;color:var(--ink-70)}
+@media (max-width:980px){.explore9 .g{grid-template-columns:minmax(0,1fr)}.explore9 .lbl{font-size:24px}}
+@media (prefers-reduced-motion:reduce){.explore9 .fx,.explore9 .keys button{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Explore the roof</span>
+   <h2 class="h2" id="ex9-h" style="margin-top:12px">Let It Breathe</h2>
+   <p class="lede rv">A roof works with its attic. Cool air comes in low at the soffits, carries heat and damp along the underside of the deck, and leaves at the ridge.</p>
+   <div class="keys" role="group" aria-label="Show the attic"></div>
+   <div class="read" aria-live="polite"><h3></h3><p></p></div>
+  </div>
+  <div class="fig" data-owl="say:Feel the draft">
+   <svg viewBox="0 0 1000 560" role="img" aria-labelledby="ex9-cap"><title id="ex9-cap"></title></svg>
+   <canvas aria-hidden="true"></canvas>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','9',function(root){
+  var svg = root.querySelector('svg'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), keysEl = root.querySelector('.keys'), read = root.querySelector('.read'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* a gable section: soffits low at each eave, ridge vent at the top, insulation on the attic floor */
+  var h = '<rect y="520" width="1000" height="40" fill="#8DB45F"/>';
+  h += '<rect x="170" y="360" width="660" height="160" fill="#FBFAF6" stroke="#C9C0AC" stroke-width="4"/><text class="lbl" x="440" y="460">Living space</text>';
+  h += '<polygon points="80,368 500,90 920,368 890,368 500,118 110,368" fill="#55505D"/>';
+  h += '<polygon points="110,368 500,118 890,368" fill="#F3EDE0"/>';
+  h += '<path d="M500 118V360M330 230V360M670 230V360" stroke="#D3AF7A" stroke-width="8"/>';
+  h += '<path class="bat" d="M170 360q20-20 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0V368H170z" fill="#E7C98F"/>';
+  h += '<g class="fx baffle on"><path d="M150 358L260 284M850 358L740 284" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/></g>';
+  h += '<g class="fx plug"><path d="M120 360q30-50 70-24t60 0V368H120zM880 360q-30-50-70-24t-60 0V368h130z" fill="#E7C98F"/></g>';
+  h += '<rect x="80" y="368" width="90" height="10" fill="#C9C0AC"/><rect x="830" y="368" width="90" height="10" fill="#C9C0AC"/>';
+  h += '<g fill="#17111D" opacity=".55"><rect x="96" y="370" width="6" height="6"/><rect x="112" y="370" width="6" height="6"/><rect x="128" y="370" width="6" height="6"/><rect x="144" y="370" width="6" height="6"/><rect x="852" y="370" width="6" height="6"/><rect x="868" y="370" width="6" height="6"/><rect x="884" y="370" width="6" height="6"/><rect x="900" y="370" width="6" height="6"/></g>';
+  h += '<g class="ridge"><path d="M462 98h76l-10-18h-56z" fill="#3A3540"/><path d="M470 90h60" stroke="#9AA3A8" stroke-width="3" stroke-dasharray="4 3"/></g>';
+  h += '<g class="fx shut"><path d="M462 98h76" stroke="#B3261E" stroke-width="6"/></g>';
+  h += '<g class="fx damp">'; for (var n = 0; n < 9; n++){ var t = (n + 1)/10, x = 110 + (500 - 110)*t, y = 368 - (368 - 118)*t; h += '<path d="M' + (x + 10).toFixed(0) + ' ' + (y + 12).toFixed(0) + 'l-4 8a5 5 0 1 0 8 0z" fill="#5BA3D9"/><path d="M' + (1000 - x - 10).toFixed(0) + ' ' + (y + 12).toFixed(0) + 'l-4 8a5 5 0 1 0 8 0z" fill="#5BA3D9"/>'; } h += '<polygon points="110,368 500,118 890,368" fill="#E2832E" opacity=".14"/></g>';
+  h += '<text class="lbl" x="66" y="408">Soffit intake</text><text class="lbl" x="934" y="408" text-anchor="end">Soffit intake</text><text class="lbl" x="500" y="62" text-anchor="middle">Ridge vent</text>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var fx = {baffle: svg.querySelector('.baffle'), plug: svg.querySelector('.plug'), shut: svg.querySelector('.shut'), damp: svg.querySelector('.damp')};
+  var S = [
+    {k:'Balanced', c:'#5BA3D9', t:'Balanced', p:'Intake at the soffits, exhaust at the ridge. Baffles keep the insulation off the soffit vents, so cool air washes up the underside of the deck and carries heat and damp out at the top.', fx:['baffle'], cap:'An attic with balanced airflow from the soffits to the ridge vent.'},
+    {k:'Blocked soffits', c:'#E2832E', t:'Blocked soffits', p:'Insulation pushed over the soffit vents stops the air coming in. The attic stays warm and damp, frost can form on the nails in winter, and the moisture ends up in the deck.', fx:['plug', 'damp'], cap:'An attic with insulation blocking the soffit vents: the air stalls and damp gathers.'},
+    {k:'No ridge vent', c:'#E2832E', t:'No way out', p:'Air comes in low but has nowhere to leave at the top. Warm, moist air pools under the ridge, and the deck and nails take the damp.', fx:['baffle', 'shut', 'damp'], cap:'An attic with no exhaust at the ridge: warm damp air pools at the top.'}];
+  var mode = 0, keys = S.map(function(s, i){ var b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<i style="--d:' + s.c + '" aria-hidden="true"></i>' + s.k; b.setAttribute('aria-pressed', i === 0); b.addEventListener('click', function(){ set(i); }); keysEl.appendChild(b); return b; });
+  function set(i){ mode = i; var s = S[i]; keys.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    Object.keys(fx).forEach(function(k){ fx[k].classList.toggle('on', s.fx.indexOf(k) >= 0); });
+    read.querySelector('h3').textContent = s.t; read.querySelector('p').textContent = s.p; svg.querySelector('title').textContent = s.cap; if (OWL.reduce) still(); }
+  /* particles: in at the soffit, along the underside of the deck, out the ridge (mirrored for the right side) */
+  var PATH = [[60, 384], [140, 372], [200, 330], [330, 246], [470, 152], [500, 112], [500, 60]];
+  function along(t, side){ var n = PATH.length - 1, f = Math.min(n - .0001, t*n), i = Math.floor(f), k = f - i, a = PATH[i], b = PATH[i + 1], x = a[0] + (b[0] - a[0])*k, y = a[1] + (b[1] - a[1])*k; return [side ? 1000 - x : x, y]; }
+  function inAttic(x, y){ return y < 362 && y > 125 + Math.abs(x - 500)*.64; }
+  var P = [], scale = 1, raf = 0, vis = false;
+  function size(){ var r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = r.width*d; cv.height = r.height*d; scale = cv.width/1000; }
+  function spawn(){ return {t: 0, side: Math.random() < .5 ? 1 : 0, sp: .0028 + Math.random()*.002, x: 0, y: 0, vx: 0, vy: 0, free: false, life: 1}; }
+  function step(){ ctx.clearRect(0, 0, cv.width, cv.height); var s = S[mode];
+    if (P.length < 70 && Math.random() < (mode === 1 ? .04 : .5)) P.push(spawn());
+    P.forEach(function(p){
+      if (!p.free){ var stop = mode === 1 ? .16 : mode === 2 ? .84 : 1.2; p.t += p.sp; var q = along(Math.min(p.t, 1), p.side); p.x = q[0]; p.y = q[1];
+        if (p.t >= stop){ if (mode === 0){ p.life = 0; } else { p.free = true; p.vx = (Math.random() - .5)*1.2; p.vy = (Math.random() - .5)*1.2; } } }
+      else { p.vx += (Math.random() - .5)*.25; p.vy += (Math.random() - .5)*.25 - (mode === 2 ? .02 : 0); p.vx *= .96; p.vy *= .96; var nx = p.x + p.vx, ny = p.y + p.vy; if (inAttic(nx, ny)){ p.x = nx; p.y = ny; } else { p.vx *= -1; p.vy *= -1; } p.life -= .0025; }
+      ctx.beginPath(); ctx.fillStyle = p.free ? '#E2832E' : s.c; ctx.globalAlpha = Math.max(0, Math.min(1, p.life))*.85; ctx.arc(p.x*scale, p.y*scale, 4*scale, 0, Math.PI*2); ctx.fill(); });
+    ctx.globalAlpha = 1; P = P.filter(function(p){ return p.life > 0 && p.t < 1.25; });
+    raf = vis ? requestAnimationFrame(step) : 0; }
+  /* reduced motion: a still drawing of where the air goes */
+  function still(){ size(); ctx.clearRect(0, 0, cv.width, cv.height); var s = S[mode]; ctx.strokeStyle = s.c; ctx.lineWidth = 4*scale; ctx.setLineDash([10*scale, 8*scale]);
+    [0, 1].forEach(function(side){ ctx.beginPath(); var end = mode === 1 ? .16 : mode === 2 ? .84 : 1; for (var t = 0; t <= end; t += .02){ var q = along(t, side); if (t === 0) ctx.moveTo(q[0]*scale, q[1]*scale); else ctx.lineTo(q[0]*scale, q[1]*scale); } ctx.stroke(); }); }
+  set(0); size(); addEventListener('resize', function(){ size(); if (OWL.reduce) still(); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ still(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis){ OWL.reveal(h2); if (!raf) raf = requestAnimationFrame(step); } }, {threshold:.1}); io.observe(cv);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="explore" data-b="1">
 <section class="sec explore1" id="explore" aria-labelledby="ex1-h">
 <style>
