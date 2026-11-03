@@ -1,0 +1,26 @@
+/* HERO V2: a full stage. The exploded house owns the upper stage (right of centre), the copy is set as a caption band
+   beneath it: headline left, support, actions and proof right. Living field + water ripple behind everything. */
+.hero.v2{position:relative;min-height:max(780px,100svh);overflow:hidden}
+.v2 canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.v2 .field{z-index:0}
+.v2 .stage{z-index:1;pointer-events:none}
+.v2 .zone{position:absolute;z-index:1}
+.v2 .copy{position:absolute;z-index:2;left:var(--gutter);right:var(--gutter);bottom:clamp(40px,6vh,72px);display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:24px 64px;align-items:end;pointer-events:none}
+.v2 .copy a{pointer-events:auto}
+.v2 h1{font:800 clamp(48px,5.3vw,84px)/.98 var(--display);letter-spacing:-.026em;color:var(--ink);max-width:11.5ch}
+.v2 .side{padding-bottom:6px;max-width:440px}
+.v2 .sub{font-size:18.5px;line-height:1.55;color:var(--ink-2)}
+.v2 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:26px}
+.v2 .proof{margin-top:24px}
+.v2 .nogl-img{display:none}
+.v2.nogl .nogl-img{display:block;position:absolute;z-index:1;right:var(--gutter);top:110px;width:52vw;height:56vh;object-fit:cover}
+@media (max-width:820px){
+  .hero.v2{min-height:0;padding-top:calc(100vw * .98)}
+  .v2 canvas.stage,.v2 canvas.field{height:calc(100vw * 1.04)}
+  .v2 .copy{position:relative;left:auto;right:auto;bottom:auto;display:block;margin:0 var(--gutter);padding-bottom:120px}
+  .v2 h1{font-size:clamp(38px,10.6vw,48px);max-width:none}
+  .v2 .side{margin-top:16px}
+  .v2 .sub{font-size:17.5px}
+  .v2 .btn{width:100%;justify-content:center}
+}
