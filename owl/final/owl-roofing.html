@@ -4336,6 +4336,156 @@ OWL.reg('area','1',function(root){
 <div class="ver" data-sec="area" data-v="2">
 <section class="sec area2" id="areas-2" aria-labelledby="ar2-h">
 <style>
+.area2 .g{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:clamp(24px,4vw,64px);align-items:center}
+.area2 .lede{margin:14px 0 22px;max-width:34ch}
+.area2 .find{display:grid;gap:8px;max-width:380px}
+.area2 .find label{font-weight:700}
+.area2 .find input{min-height:54px;padding:0 18px;border-radius:14px;border:2px solid rgba(23,17,29,.14);background:#fff;font:inherit;font-size:18px;box-shadow:inset 0 2px 4px rgba(23,17,29,.06)}
+.area2 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-color:var(--amber)}
+.area2 .read{min-height:86px;margin:18px 0;padding:16px 18px;border-radius:16px;background:#17111D;color:#F1EFE6;font-size:17px;line-height:1.4;box-shadow:inset 0 2px 10px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
+.area2 .read b{color:#F6C25F}
+.area2 .read .cur{display:inline-block;width:9px;height:18px;margin-left:3px;vertical-align:-3px;background:#F6C25F;animation:ar2blink 1s steps(1) infinite}
+@keyframes ar2blink{50%{opacity:0}}
+.area2 .deck{position:relative;padding:clamp(16px,2.4vw,28px);border-radius:28px;background:linear-gradient(180deg,#E9E3D3,#DCD4C0);box-shadow:inset 0 2px 0 rgba(255,255,255,.8),inset 0 -3px 0 rgba(23,17,29,.12),0 40px 70px -40px rgba(23,17,29,.6)}
+.area2 .deck::before,.area2 .deck::after{content:"";position:absolute;top:12px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#9C9585);box-shadow:inset 0 0 0 1px rgba(23,17,29,.25)}
+.area2 .deck::before{left:12px}.area2 .deck::after{right:12px}
+.area2 .keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.area2 .k{position:relative;min-height:62px;padding:8px 8px 12px;border-radius:13px;font-weight:700;font-size:clamp(12px,1vw,14px);line-height:1.15;text-align:center;color:var(--ink);background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 8px 14px -6px rgba(23,17,29,.4),inset 0 1px 0 #fff;transition:transform .12s,box-shadow .12s,opacity .25s,background .25s}
+.area2 .k i{position:absolute;right:8px;top:7px;width:6px;height:6px;border-radius:50%;background:#CFC6B2;transition:background .3s,box-shadow .3s}
+.area2 .k.glow i{background:#F6C25F;box-shadow:0 0 6px 2px rgba(234,162,33,.6)}
+.area2 .k:hover{transform:translateY(-1px)}
+.area2 .k:active,.area2 .k[aria-pressed="true"]{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC,0 3px 6px -4px rgba(23,17,29,.4),inset 0 1px 0 #fff}
+.area2 .k[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221)}
+.area2 .k[aria-pressed="true"] i{background:#17111D;box-shadow:none}
+.area2 .k.hq{background:linear-gradient(180deg,#2A2131,#17111D);color:#F1EFE6;box-shadow:0 5px 0 #000,0 8px 14px -6px rgba(23,17,29,.5),inset 0 1px 0 rgba(255,255,255,.12)}
+.area2 .k.hq small{display:block;font-size:10px;letter-spacing:.14em;color:#F6C25F}
+.area2 .k.dim{background:#E4DDCD;color:#5E5966;box-shadow:0 2px 0 #C9C0AC,inset 0 1px 0 rgba(255,255,255,.5)}.area2 .k.hq.dim{background:#5E5966;color:#F1EFE6}
+.area2 .k:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.area2 .foot{display:flex;justify-content:space-between;gap:10px;margin-top:14px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B6570}
+@media (max-width:900px){.area2 .g{grid-template-columns:1fr}.area2 .keys{grid-template-columns:repeat(3,minmax(0,1fr))}.area2 .k{min-height:56px}}
+@media (prefers-reduced-motion:reduce){.area2 .read .cur{animation:none}.area2 .k{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Service area</span>
+   <h2 class="h2" id="ar2-h" style="margin-top:12px">Press Your Town</h2>
+   <p class="lede rv">29 towns from our home in Shoreview. Find yours on the keys, or type it.</p>
+   <div class="find"><label for="ar2-q">Your town</label><input id="ar2-q" autocomplete="off" placeholder="Start typing" aria-describedby="ar2-read"></div>
+   <p class="read" id="ar2-read" aria-live="polite">Shoreview is home. <b>28 more towns</b> are on the deck.<span class="cur" aria-hidden="true"></span></p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <div class="deck" data-owl="say:Press a key">
+   <div class="keys" role="group" aria-label="The 29 towns Owl Roofing serves"></div>
+   <div class="foot" aria-hidden="true"><span>Owl Roofing · service deck</span><span>29 keys</span></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('area','2',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var box = root.querySelector('.keys'), q = root.querySelector('#ar2-q'), read = root.querySelector('.read'), h2 = root.querySelector('h2'), cur = 0;
+  OWL.split(h2);
+  var keys = T.map(function(t, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'k' + (i === 0 ? ' hq' : ''); b.setAttribute('aria-pressed', 'false'); b.tabIndex = i === 0 ? 0 : -1;
+    b.innerHTML = (i === 0 ? '<small>Home</small>' : '') + t + '<i aria-hidden="true"></i>'; b.dataset.t = t;
+    b.addEventListener('click', function(){ pick(i); });
+    b.addEventListener('keydown', function(e){ var c = getComputedStyle(box).gridTemplateColumns.split(' ').length, n = null;
+      if (e.key === 'ArrowRight') n = i + 1; else if (e.key === 'ArrowLeft') n = i - 1; else if (e.key === 'ArrowDown') n = i + c; else if (e.key === 'ArrowUp') n = i - c; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = T.length - 1;
+      if (n !== null && n >= 0 && n < T.length){ e.preventDefault(); focusKey(n); } });
+    box.appendChild(b); return b; });
+  function focusKey(n){ keys[cur].tabIndex = -1; cur = n; keys[n].tabIndex = 0; keys[n].focus(); }
+  function say(html){ read.innerHTML = html + '<span class="cur" aria-hidden="true"></span>'; }
+  function pick(i){ keys.forEach(function(k, j){ k.setAttribute('aria-pressed', j === i); }); keys[cur].tabIndex = -1; cur = i; keys[i].tabIndex = 0;
+    say(i === 0 ? '<b>Shoreview</b> is home: 1000 County Rd E #230.' : 'Yes, we roof in <b>' + T[i] + '</b>. One of our 29 towns.'); }
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  q.addEventListener('input', function(){ var v = norm(q.value), hits = [];
+    keys.forEach(function(k, j){ var m = !v || norm(T[j]).indexOf(v) === 0 || norm(T[j]).indexOf(' ' + v) > -1; k.classList.toggle('dim', !m); if (v && m) hits.push(j); });
+    if (!v){ keys.forEach(function(k){ k.setAttribute('aria-pressed', 'false'); }); say('Shoreview is home. <b>28 more towns</b> are on the deck.'); }
+    else if (hits.length === 1) pick(hits[0]);
+    else if (hits.length > 1) say(hits.length + ' towns match: <b>' + hits.map(function(j){ return T[j]; }).join(', ') + '</b>.');
+    else say('<b>' + q.value.replace(/[<>&]/g, '') + '</b> is not on our list of 29 towns. Call (651) 977-6027 to ask.'); });
+  q.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ var f = keys.filter(function(k){ return !k.classList.contains('dim'); })[0]; if (f && q.value){ e.preventDefault(); pick(keys.indexOf(f)); } } });
+  /* the deck idles: a slow LED wave across the keys */
+  if (!OWL.reduce){ var w = 0, vis = false; if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis) OWL.reveal(h2); }).observe(box); else vis = true;
+    setInterval(function(){ if (!vis) return; keys.forEach(function(k, j){ k.classList.toggle('glow', Math.abs(((j - w) % T.length + T.length) % T.length) < 3); }); w = (w + 1) % T.length; }, 220);
+  } else OWL.reveal(h2);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="area" data-v="3">
+<section class="sec area3" id="areas-3" aria-labelledby="ar3-h">
+<style>
+.area3{overflow:hidden}
+.area3 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px}
+.area3 .lede{margin-top:12px;max-width:40ch}
+.area3 .find{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.area3 .find label{font-weight:700}
+.area3 .find input{min-height:54px;width:min(300px,100%);padding:0 18px;border-radius:14px;border:2px solid rgba(23,17,29,.14);background:#fff;font:inherit;font-size:18px}
+.area3 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-color:var(--amber)}
+.area3 .stage{position:relative;margin-top:clamp(10px,2vw,24px)}
+.area3 svg{display:block;width:100%;height:auto}
+.area3 .names{animation:ar3drift 90s linear infinite}
+@keyframes ar3drift{to{transform:translateY(-638px)}}
+.area3 .names tspan{transition:fill .3s}
+.area3 .names tspan.hit{fill:#C7871A}
+.area3 .res{min-height:28px;margin:6px 0 0;font-size:18px;font-weight:600;text-align:center}
+.area3 .res b{color:#8E5A12}
+.area3 .marq{margin-top:clamp(14px,2vw,24px);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.area3 .marq ul{display:flex;width:max-content;gap:0;margin:0;padding:0;list-style:none;animation:ar3marq 70s linear infinite}
+.area3 .marq:hover ul{animation-play-state:paused}
+.area3 .marq li{display:flex;align-items:center;gap:18px;padding-right:18px;font-size:clamp(18px,1.8vw,24px);font-weight:700;white-space:nowrap}
+.area3 .marq li::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--amber)}
+@keyframes ar3marq{to{transform:translateX(-50%)}}
+.area3 .cta{display:flex;justify-content:center;margin-top:22px}
+@media (prefers-reduced-motion:reduce){.area3 .names,.area3 .marq ul{animation:none}.area3 .marq ul{flex-wrap:wrap;width:auto}}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <div><span class="kick">Service area</span><h2 class="h2" id="ar3-h" style="margin-top:12px">Twenty-Nine Towns</h2>
+   <p class="lede rv">Every one of them is written inside the number. Is yours?</p></div>
+  <div class="find"><label for="ar3-q">Your town</label><input id="ar3-q" autocomplete="off" placeholder="Start typing" aria-describedby="ar3-res"></div>
+ </div>
+ <div class="stage" data-owl="say:Find your town">
+  <svg viewBox="0 0 1000 560" role="img" aria-label="The number 29, filled with the names of the 29 towns Owl Roofing serves"></svg>
+  <p class="res" id="ar3-res" aria-live="polite">From Shoreview, home since 2025.</p>
+ </div>
+</div>
+<div class="marq" aria-hidden="true"><ul></ul></div>
+<div class="wrap"><div class="cta"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+<script>
+OWL.reg('area','3',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var svg = root.querySelector('svg'), q = root.querySelector('#ar3-q'), res = root.querySelector('.res'), h2 = root.querySelector('h2'), ul = root.querySelector('.marq ul');
+  OWL.split(h2);
+  var glyph = '<text x="500" y="520" text-anchor="middle" font-size="640" font-weight="900" letter-spacing="-30" font-family="Inter,Poppins,Arial,sans-serif">29</text>';
+  var rows = '', y = 0, n = 0;
+  for (var r = 0; r < 56; r++){ y = r*22 + 18; var line = ''; for (var c = 0; c < 9; c++){ var i = (r*5 + c) % T.length; line += '<tspan data-t="' + i + '">' + T[i].toUpperCase() + '</tspan><tspan fill="#EAA221"> · </tspan>'; } rows += '<text x="' + (-40 - ((r % 29) % 3)*60) + '" y="' + y + '" font-size="17" font-weight="800" fill="#17111D" letter-spacing=".04em">' + line + '</text>'; }
+  svg.innerHTML = '<defs><clipPath id="ar3c">' + glyph + '</clipPath><linearGradient id="ar3g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF3DF"/><stop offset="1" stop-color="#F1DDAE"/></linearGradient></defs>'
+    + '<g opacity=".9">' + glyph.replace('<text ', '<text fill="url(#ar3g)" ') + '</g>'
+    + '<g clip-path="url(#ar3c)"><g class="names">' + rows + '</g></g>'
+    + glyph.replace('<text ', '<text fill="none" stroke="#EAA221" stroke-width="3" ');
+  var all = [].slice.call(svg.querySelectorAll('.names tspan[data-t]'));
+  ul.innerHTML = (T.concat(T)).map(function(t){ return '<li>' + t + '</li>'; }).join('');
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  q.addEventListener('input', function(){ var v = norm(q.value), hits = [];
+    T.forEach(function(t, j){ if (v && (norm(t).indexOf(v) === 0 || norm(t).indexOf(' ' + v) > -1)) hits.push(j); });
+    all.forEach(function(s){ s.classList.toggle('hit', hits.indexOf(+s.dataset.t) > -1); });
+    if (!v) res.innerHTML = 'From Shoreview, home since 2025.';
+    else if (hits.length === 1) res.innerHTML = 'Yes, <b>' + T[hits[0]] + '</b> is in there. One of our 29 towns.';
+    else if (hits.length > 1) res.innerHTML = hits.length + ' towns match: <b>' + hits.map(function(j){ return T[j]; }).join(', ') + '</b>.';
+    else res.innerHTML = '<b>' + q.value.replace(/[<>&]/g, '') + '</b> is not on our list of 29 towns. Call (651) 977-6027 to ask.'; });
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg); }
+});
+</script>
+</section>
+
+</div>
+<template class="bak" data-sec="area" data-b="1">
+<section class="sec area2" id="areas-2" aria-labelledby="ar2-h">
+<style>
 .area2 .g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(24px,5vw,64px)}
 .area2 .badge{display:inline-block;padding:8px 14px;border-radius:10px;background:var(--amber);font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 3px 0 var(--amber-edge)}
 .area2 .lede{margin:18px 0 26px;max-width:32ch}
@@ -4426,7 +4576,7 @@ OWL.reg('area','2',function(root){
 </script>
 </section>
 
-</div>
+</template>
 <div class="ver" data-sec="family" data-v="1">
 <section class="sec fam1" id="family" aria-labelledby="fm1-h">
 <style>
@@ -4483,7 +4633,7 @@ OWL.reg('family','1',function(root){
 </section>
 
 </div>
-<div class="ver" data-sec="family" data-v="2">
+<template class="bak" data-sec="family" data-b="1">
 <section class="sec fam2" id="family-2" aria-labelledby="fm2-h">
 <style>
 .fam2{overflow:hidden}
@@ -4538,7 +4688,7 @@ OWL.reg('family','2',function(root){
 </script>
 </section>
 
-</div>
+</template>
 <div class="ver" data-sec="booking" data-v="1">
 <section class="sec book1" id="book" aria-labelledby="bk1-h">
 <style>
@@ -4602,7 +4752,7 @@ OWL.reg('booking','1',function(root){
 </section>
 
 </div>
-<div class="ver" data-sec="booking" data-v="2">
+<template class="bak" data-sec="booking" data-b="1">
 <section class="sec book2" id="book-2" aria-labelledby="bk2-h">
 <style>
 .book2{text-align:center}
@@ -4662,7 +4812,7 @@ OWL.reg('booking','2',function(root){
 </script>
 </section>
 
-</div>
+</template>
 </div>
 <div class="page" data-page="services" data-title="Roofing Services · Owl Roofing" hidden>
 <div class="ver" data-sec="svchero" data-v="1">

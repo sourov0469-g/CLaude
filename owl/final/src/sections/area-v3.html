@@ -1,0 +1,66 @@
+<section class="sec area3" id="areas-3" aria-labelledby="ar3-h">
+<style>
+.area3{overflow:hidden}
+.area3 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px}
+.area3 .lede{margin-top:12px;max-width:40ch}
+.area3 .find{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.area3 .find label{font-weight:700}
+.area3 .find input{min-height:54px;width:min(300px,100%);padding:0 18px;border-radius:14px;border:2px solid rgba(23,17,29,.14);background:#fff;font:inherit;font-size:18px}
+.area3 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-color:var(--amber)}
+.area3 .stage{position:relative;margin-top:clamp(10px,2vw,24px)}
+.area3 svg{display:block;width:100%;height:auto}
+.area3 .names{animation:ar3drift 90s linear infinite}
+@keyframes ar3drift{to{transform:translateY(-638px)}}
+.area3 .names tspan{transition:fill .3s}
+.area3 .names tspan.hit{fill:#C7871A}
+.area3 .res{min-height:28px;margin:6px 0 0;font-size:18px;font-weight:600;text-align:center}
+.area3 .res b{color:#8E5A12}
+.area3 .marq{margin-top:clamp(14px,2vw,24px);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.area3 .marq ul{display:flex;width:max-content;gap:0;margin:0;padding:0;list-style:none;animation:ar3marq 70s linear infinite}
+.area3 .marq:hover ul{animation-play-state:paused}
+.area3 .marq li{display:flex;align-items:center;gap:18px;padding-right:18px;font-size:clamp(18px,1.8vw,24px);font-weight:700;white-space:nowrap}
+.area3 .marq li::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--amber)}
+@keyframes ar3marq{to{transform:translateX(-50%)}}
+.area3 .cta{display:flex;justify-content:center;margin-top:22px}
+@media (prefers-reduced-motion:reduce){.area3 .names,.area3 .marq ul{animation:none}.area3 .marq ul{flex-wrap:wrap;width:auto}}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <div><span class="kick">Service area</span><h2 class="h2" id="ar3-h" style="margin-top:12px">Twenty-Nine Towns</h2>
+   <p class="lede rv">Every one of them is written inside the number. Is yours?</p></div>
+  <div class="find"><label for="ar3-q">Your town</label><input id="ar3-q" autocomplete="off" placeholder="Start typing" aria-describedby="ar3-res"></div>
+ </div>
+ <div class="stage" data-owl="say:Find your town">
+  <svg viewBox="0 0 1000 560" role="img" aria-label="The number 29, filled with the names of the 29 towns Owl Roofing serves"></svg>
+  <p class="res" id="ar3-res" aria-live="polite">From Shoreview, home since 2025.</p>
+ </div>
+</div>
+<div class="marq" aria-hidden="true"><ul></ul></div>
+<div class="wrap"><div class="cta"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+<script>
+OWL.reg('area','3',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var svg = root.querySelector('svg'), q = root.querySelector('#ar3-q'), res = root.querySelector('.res'), h2 = root.querySelector('h2'), ul = root.querySelector('.marq ul');
+  OWL.split(h2);
+  var glyph = '<text x="500" y="520" text-anchor="middle" font-size="640" font-weight="900" letter-spacing="-30" font-family="Inter,Poppins,Arial,sans-serif">29</text>';
+  var rows = '', y = 0, n = 0;
+  for (var r = 0; r < 56; r++){ y = r*22 + 18; var line = ''; for (var c = 0; c < 9; c++){ var i = (r*5 + c) % T.length; line += '<tspan data-t="' + i + '">' + T[i].toUpperCase() + '</tspan><tspan fill="#EAA221"> · </tspan>'; } rows += '<text x="' + (-40 - ((r % 29) % 3)*60) + '" y="' + y + '" font-size="17" font-weight="800" fill="#17111D" letter-spacing=".04em">' + line + '</text>'; }
+  svg.innerHTML = '<defs><clipPath id="ar3c">' + glyph + '</clipPath><linearGradient id="ar3g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF3DF"/><stop offset="1" stop-color="#F1DDAE"/></linearGradient></defs>'
+    + '<g opacity=".9">' + glyph.replace('<text ', '<text fill="url(#ar3g)" ') + '</g>'
+    + '<g clip-path="url(#ar3c)"><g class="names">' + rows + '</g></g>'
+    + glyph.replace('<text ', '<text fill="none" stroke="#EAA221" stroke-width="3" ');
+  var all = [].slice.call(svg.querySelectorAll('.names tspan[data-t]'));
+  ul.innerHTML = (T.concat(T)).map(function(t){ return '<li>' + t + '</li>'; }).join('');
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  q.addEventListener('input', function(){ var v = norm(q.value), hits = [];
+    T.forEach(function(t, j){ if (v && (norm(t).indexOf(v) === 0 || norm(t).indexOf(' ' + v) > -1)) hits.push(j); });
+    all.forEach(function(s){ s.classList.toggle('hit', hits.indexOf(+s.dataset.t) > -1); });
+    if (!v) res.innerHTML = 'From Shoreview, home since 2025.';
+    else if (hits.length === 1) res.innerHTML = 'Yes, <b>' + T[hits[0]] + '</b> is in there. One of our 29 towns.';
+    else if (hits.length > 1) res.innerHTML = hits.length + ' towns match: <b>' + hits.map(function(j){ return T[j]; }).join(', ') + '</b>.';
+    else res.innerHTML = '<b>' + q.value.replace(/[<>&]/g, '') + '</b> is not on our list of 29 towns. Call (651) 977-6027 to ask.'; });
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg); }
+});
+</script>
+</section>
