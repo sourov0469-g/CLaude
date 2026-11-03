@@ -1,0 +1,257 @@
+[
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "reviews"
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Dead Level"
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "the only rating is 5.0 from 90+ reviews; no quotes or names",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "the locked proofs: BBB A− since Feb 25, 2026; GAF Systems Plus; licence; 10-year warranty",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "at rest the level is level and the bubble is centred",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "the pointer tilts it and the bubble runs to the high end",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "the reading stays 5.0 while it tips",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "let go and it settles back dead level",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "Give It a Nudge tips it for keyboard and touch too",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "reviews"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Ninety Shingles"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "ninety review shingles plus cut rake pieces that are not counted",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "laid in full: counter reads 90+, the ridge reads 5.0 · 90+ reviews",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "roofer order: starter first, courses from the eave up, each course lapping the one below",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "the ridge cap covers the top course nails",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "Lay It Again replays from the eave with the counter climbing",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "it says no shingle stands for a quote",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

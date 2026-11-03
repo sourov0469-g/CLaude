@@ -541,3 +541,28 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Services 6's key group was a `ul` with `role="group"`, which orphaned its items (axe listitem); it is now a plain group of buttons.
 - Faded "rest" cards and unreached Services 7 cards first used opacity, which would drop the text contrast; now only the photos grey or stay closed, and the text stays at full contrast.
+
+## L17 · Reviews 6 + 7 · checks 39/39 · evidence `gates/ladder/L17-reviews-6-7/` · Reviews now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Reviews 6 · Dead Level** | Quiet Cubes (the instrument is the structure) | A big amber torpedo level etched "Owl Roofing · 5.0 · 90+ reviews". The pointer tilts it and the bubble runs to the high end on a damped spring; let go and it settles back dead level. The reading never changes: "5.0 from 90+ reviews. It sits level." (while tipped: "Still 5.0. Let go and watch it settle."). The locked proofs sit beneath as chips; "Give It a Nudge" does the tilt for keyboard and touch. | 8.4 | 8.2 | 8.6 | 8.6 | **8.44** |
+| **Reviews 7 · Ninety Shingles** | Graza (custom-animation bar) | One shingle per review, laid roofer-correct from the eave up: starter strip, then six courses that each lap the one below, four nails per shingle hidden by the next course, cut half-pieces at the rake (not counted), while a counter climbs to 90. One more shingle slides in with a "+", the ridge cap goes on, and the ridge reads "5.0 · 90+ reviews". "Lay It Again" replays. | 8.6 | 8.0 | 8.6 | 8.6 | **8.46** |
+
+**Truth:**
+- The only rating anywhere is "5.0 from 90+ reviews". There are no quotes, names, sources or other ratings (tested).
+- Reviews 7 says "Every shingle stands for a review; none stands for a quote." The count stops at 90 and then shows "90+", never a higher figure.
+- The proofs are exactly the locked set: BBB A− since Feb 25, 2026 · GAF Systems Plus · MN licence #BC809662 · 10-year workmanship warranty.
+
+**Roofer check (Reviews 7):** shingles go on from the eave up; the starter runs full width under the first course; the joints are offset half a shingle course to course; nails sit just above the exposure line where the next course covers them; the ridge cap covers the top course's nails (tested); the rake ends get cut pieces.
+
+**Checks run:** the generic gate, plus:
+- Reviews 6: rating and proof wording; level at rest; the pointer tilts it with the bubble to the high end; the reading stays 5.0; it settles back level with "It sits level."; the nudge key tips it.
+- Reviews 7: 90 counted shingles and 3 cut pieces; fully laid with 90+ and the ridge badge; courses ordered eave-up; the ridge covers the top nails; Lay It Again replays with the counter mid-climb; the no-quote note.
+
+**Ledger:**
+- **Reviews 6:** damped spring settle, no teleport ⟦S0489⟧; nudge key ⟦S1388⟧; micro-interaction ⟦S0405⟧; title ⟦S0451⟧.
+- **Reviews 7:** drop-and-settle per shingle ⟦S0489⟧; tabular counter ⟦S1352⟧; replay key ⟦S1388⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Reviews 6's vial hid the "5.0" in the right engraving; it is resized to fit.
+- Reviews 7's first lay showed the top-course nails, left a gap at the right of the offset courses, and let the deck show through the first course. The ridge cap now covers the nails, the rakes get cut pieces, and the starter runs full height.

@@ -231,3 +231,18 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   spine draws as you scroll; each stop brings in Owl's photo and words on alternating sides. A small roof badge
   rides the spine and changes with the stop: new, hail-marked, dripping, under the magnifier, with new siding.
   Skills: ⟦S1325⟧ progress spine, ⟦S0407⟧ badge draw, ⟦S0451⟧ title, ⟦S1324⟧-style photo reveal (clip).
+
+## L17 · Reviews 6 + 7 (Reviews stands at 5: V1 proof row, V2 dated spine, V3 91-mark field, V4 drawn stars, V5 extruded 5.0)
+- **Reviews 6 · "Dead Level"** — reference **Quiet Cubes** (the instrument is the structure). A large amber torpedo
+  level, a roofer's own tool, etched "Owl Roofing · 5.0 · 90+ reviews". Moving the pointer across the section tilts
+  it; the bubble slides in its vial with a damped spring, and when the pointer leaves it settles back dead centre.
+  The reading never changes: "5.0 from 90+ reviews. It sits level." The locked proofs are engraved on its face
+  plates (BBB A− since Feb 25, 2026 · GAF Systems Plus · MN licence #BC809662 · 10-year workmanship warranty). A
+  "Give it a nudge" key does the same for keyboard and touch. No quotes, names or other ratings. Skills: ⟦S0489⟧
+  spring settle (no teleporting), ⟦S1388⟧ key, ⟦S0405⟧ micro-interaction, ⟦S0451⟧ title.
+- **Reviews 7 · "Ninety Shingles"** — reference **Graza** (the custom-animation bar). One shingle for each review: a
+  roof face is laid as you arrive, roofer-correct from the eave up (starter strip first, each course lapping the
+  one below, four nails per shingle that the next course covers), 90 shingles in six courses while a counter
+  climbs, then one more set half-laid with a "+" for "and counting", and the ridge cap goes on with "5.0 · 90+
+  reviews". "Lay It Again" replays. No individual review is shown or implied. Skills: ⟦S0489⟧ drop and settle,
+  ⟦S1352⟧ counter numerals, ⟦S1388⟧ key, ⟦S0451⟧ title.

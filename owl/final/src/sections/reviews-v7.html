@@ -1,0 +1,80 @@
+<section class="sec rev7" id="reviews-7" aria-labelledby="rv7-h">
+<style>
+.rev7{overflow:hidden}
+.rev7 .g{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.7fr);gap:clamp(20px,4vw,56px);align-items:center}
+.rev7 .lede{margin:12px 0 0;max-width:36ch}
+.rev7 .roof{position:relative}
+.rev7 svg{display:block;width:100%;height:auto;overflow:visible}
+.rev7 .count{display:flex;align-items:baseline;gap:12px;margin-top:22px;padding-top:16px;border-top:3px solid var(--amber)}
+.rev7 .count b{font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-.05em;line-height:.9;font-variant-numeric:tabular-nums;min-width:2.4ch}
+.rev7 .count span{font-size:17px;font-weight:700;color:var(--ink-70);max-width:16ch}
+.rev7 .final{margin-top:14px;font-size:clamp(22px,2.4vw,30px);font-weight:800;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s cubic-bezier(.22,.61,.36,1)}
+.rev7 .final.on{opacity:1;transform:none}
+.rev7 .act{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.rev7 .note{margin-top:12px;font-size:14px;color:var(--ink-70)}
+@media (max-width:900px){.rev7 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.rev7 .final{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="roof" data-owl="say:One per review"><svg viewBox="0 0 960 470" role="img" aria-label="A roof face laid from the eave up, ninety shingles and one more marked plus, with a ridge cap reading 5.0 from 90+ reviews"></svg></div>
+  <div>
+   <span class="kick">Reviews</span>
+   <h2 class="h2" id="rv7-h" style="margin-top:12px">Ninety Shingles</h2>
+   <p class="lede rv">One shingle for each review, laid the way we lay a roof: from the eave up, each course lapping the one below.</p>
+   <div class="count" aria-hidden="true"><b>0</b><span>reviews, one shingle each</span></div>
+   <p class="final" aria-live="polite"></p>
+   <div class="act"><button class="btn btn-line again" type="button" data-mag data-owl="peek">Lay It Again</button><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+   <p class="note">Every shingle stands for a review; none stands for a quote.</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','7',function(root){
+  var svg = root.querySelector('svg'), countB = root.querySelector('.count b'), fin = root.querySelector('.final'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(90), X0 = 60, X1 = 840, EAVE = 412, EXP = 56, SH = 112, W = 52;
+  var h = '<defs><clipPath id="rv7c"><rect x="' + X0 + '" y="0" width="' + (X1 - X0) + '" height="470"/></clipPath></defs>';
+  h += '<rect x="' + X0 + '" y="16" width="' + (X1 - X0) + '" height="' + (EAVE - 12) + '" fill="#DDBD82"/>';
+  for (var d = 0; d < 7; d++) h += '<path d="M' + X0 + ' ' + (EAVE - 4 - d*60) + 'H' + X1 + '" stroke="#B98F52" stroke-width="2" opacity=".6"/>';
+  h += '<rect x="' + X0 + '" y="' + (EAVE + 4) + '" width="' + (X1 - X0) + '" height="14" fill="#9AA3A8"/><rect x="' + (X0 - 20) + '" y="' + (EAVE + 18) + '" width="' + (X1 - X0 + 40) + '" height="26" rx="4" fill="#E4E0D6" stroke="#9C9585" stroke-width="2"/>';
+  h += '<g class="starter" opacity="0"><rect x="' + X0 + '" y="' + (EAVE - 60) + '" width="' + (X1 - X0) + '" height="64" fill="#3F3946"/></g>';
+  h += '<g clip-path="url(#rv7c)" class="field">';
+  var SHS = [];
+  /* odd courses are offset half a shingle; the rake end gets a cut half-piece, which is not a review and is not counted */
+  for (var c = 0; c < 6; c++){ var bot = EAVE - c*EXP, off = c % 2 ? W/2 : 0;
+    for (var k = (off ? -1 : 0); k < 15; k++){ var cut = k < 0, x = cut ? X0 : X0 + off + k*W, w = cut ? W/2 : W, shade = 70 + Math.round(R()*26), dark = !cut && R() < .5;
+      SHS.push({x: x, bot: bot, cut: cut});
+      h += '<g class="sh' + (cut ? ' cut' : '') + '" opacity="0"><rect x="' + (x + 1) + '" y="' + (bot - SH) + '" width="' + (w - 2) + '" height="' + SH + '" fill="rgb(' + shade + ',' + (shade - 6) + ',' + (shade + 8) + ')"/>'
+        + (dark ? '<rect x="' + (x + 6) + '" y="' + (bot - 18) + '" width="' + (W*.5).toFixed(0) + '" height="16" fill="#17111D" fill-opacity=".28"/>' : '')
+        + '<path d="M' + (x + 1) + ' ' + (bot - 1) + 'h' + (w - 2) + '" stroke="#17111D" stroke-opacity=".45" stroke-width="2.5"/>'
+        + (cut ? [8, 18] : [8, 20, 32, 44]).map(function(n){ return '<circle cx="' + (x + n) + '" cy="' + (bot - EXP - 8) + '" r="2.6" fill="#C9CDD2" stroke="#7C868C"/>'; }).join('') + '</g>'; } }
+  h += '</g>';
+  /* one more, half laid: and counting */
+  h += '<g class="plus" opacity="0"><g transform="translate(872 230) rotate(-10)"><rect x="-26" y="-56" width="52" height="112" rx="2" fill="#5B5662"/><rect x="-26" y="40" width="52" height="16" fill="#17111D" fill-opacity=".3"/><path d="M0 -24v40M-20 -4h40" stroke="#EAA221" stroke-width="9" stroke-linecap="round"/></g></g>';
+  /* ridge cap, laid last */
+  h += '<g class="ridge">'; for (var r = 0; r < 26; r++){ var rx = X0 - 8 + r*30.4; h += '<g class="rc" opacity="0"><rect x="' + rx + '" y="8" width="34" height="78" rx="3" fill="#4E4956"/><rect x="' + rx + '" y="8" width="34" height="12" rx="3" fill="#17111D" fill-opacity=".3"/></g>'; } h += '</g>';
+  h += '<g class="badge" opacity="0"><rect x="300" y="6" width="360" height="54" rx="27" fill="#FBFAF6" stroke="#EAA221" stroke-width="4"/><text x="480" y="44" text-anchor="middle" font-size="28" font-weight="900" fill="#17111D">5.0 · 90+ reviews</text></g>';
+  svg.innerHTML = h;
+  var shs = [].slice.call(svg.querySelectorAll('.sh')), rcs = [].slice.call(svg.querySelectorAll('.rc')), starter = svg.querySelector('.starter'), plus = svg.querySelector('.plus'), badge = svg.querySelector('.badge');
+  var jobs = [], raf = 0, run = 0;
+  function job(d, fn, delay){ jobs.push({t0: performance.now() + (delay || 0), d: d, fn: fn, r: run}); if (!raf) raf = requestAnimationFrame(loop); }
+  function loop(now){ jobs = jobs.filter(function(j){ if (j.r !== run) return false; var k = (now - j.t0)/j.d; if (k < 0) return true; j.fn(Math.min(1, k)); return k < 1; }); raf = jobs.length ? requestAnimationFrame(loop) : 0; }
+  function back(t){ var c = 1.6; return 1 + (c + 1)*Math.pow(t - 1, 3) + c*Math.pow(t - 1, 2); }
+  function drop(el, t, dy){ el.setAttribute('opacity', Math.min(1, t*2.2).toFixed(2)); el.setAttribute('transform', 'translate(0 ' + (-(1 - back(t))*dy).toFixed(1) + ')'); }
+  function end(){ starter.setAttribute('opacity', 1); shs.forEach(function(s){ s.setAttribute('opacity', 1); s.removeAttribute('transform'); }); plus.setAttribute('opacity', 1); plus.removeAttribute('transform'); rcs.forEach(function(s){ s.setAttribute('opacity', 1); s.removeAttribute('transform'); }); badge.setAttribute('opacity', 1); countB.textContent = '90+'; fin.textContent = '5.0 from 90+ reviews.'; fin.classList.add('on'); }
+  function reset(){ run++; jobs = []; starter.setAttribute('opacity', 0); shs.concat(rcs).forEach(function(s){ s.setAttribute('opacity', 0); }); plus.setAttribute('opacity', 0); badge.setAttribute('opacity', 0); countB.textContent = '0'; fin.classList.remove('on'); fin.textContent = ''; }
+  function lay(){ reset(); if (OWL.reduce){ end(); return; }
+    job(300, function(t){ starter.setAttribute('opacity', t.toFixed(2)); });
+    var n = 0; shs.forEach(function(s, i){ var me = SHS[i].cut ? 0 : ++n; job(260, function(t){ drop(s, t, 34); if (t >= 1 && me) countB.textContent = String(me); }, 320 + i*33); });
+    var T = 320 + shs.length*33 + 200;
+    job(500, function(t){ var e = back(t); plus.setAttribute('opacity', Math.min(1, t*2).toFixed(2)); plus.setAttribute('transform', 'translate(' + ((1 - e)*80).toFixed(1) + ' 0)'); if (t >= 1) countB.textContent = '90+'; }, T);
+    rcs.forEach(function(s, i){ job(220, function(t){ drop(s, t, 24); }, T + 500 + i*36); });
+    job(500, function(t){ badge.setAttribute('opacity', t.toFixed(2)); if (t >= 1){ fin.textContent = '5.0 from 90+ reviews.'; fin.classList.add('on'); } }, T + 500 + 26*36 + 150); }
+  root.querySelector('.again').addEventListener('click', lay);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ end(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); lay(); } }, {threshold:.35}); io.observe(svg);
+});
+</script>
+</section>

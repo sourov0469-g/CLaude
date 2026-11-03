@@ -1,0 +1,68 @@
+<section class="sec rev6" id="reviews-6" aria-labelledby="rv6-h">
+<style>
+.rev6{overflow:hidden}
+.rev6 .hd{text-align:center}
+.rev6 .lede{margin:12px auto 0;max-width:44ch}
+.rev6 .bench{position:relative;margin:clamp(20px,4vw,48px) auto 0;max-width:1100px;padding:clamp(20px,4vw,60px) 0 clamp(10px,2vw,20px)}
+.rev6 .bench::after{content:"";position:absolute;left:4%;right:4%;bottom:0;height:16px;border-radius:50%;background:radial-gradient(closest-side,rgba(23,17,29,.28),transparent);filter:blur(2px)}
+.rev6 svg{display:block;width:100%;height:auto;overflow:visible}
+.rev6 .shine{animation:rv6s 3.6s ease-in-out infinite}
+@keyframes rv6s{50%{opacity:.35}}
+.rev6 .read{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 28px;margin-top:clamp(18px,3vw,34px);text-align:center}
+.rev6 .big{font-size:clamp(64px,9vw,128px);font-weight:900;letter-spacing:-.05em;line-height:.9}
+.rev6 .sub{text-align:left}
+.rev6 .sub b{display:block;font-size:clamp(22px,2.4vw,32px);font-weight:800}
+.rev6 .sub span{font-size:17px;color:var(--ink-70)}
+.rev6 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.rev6 .chips li{font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;background:var(--paper);box-shadow:0 0 0 1px rgba(23,17,29,.1),0 3px 0 rgba(23,17,29,.06)}
+.rev6 .chips li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+.rev6 .act{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+@media (prefers-reduced-motion:reduce){.rev6 .shine{animation:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Reviews</span><h2 class="h2" id="rv6-h" style="margin-top:12px">Dead Level</h2>
+  <p class="lede rv">Tip it however you like. Our rating sits where it sits.</p></div>
+ <div class="bench" data-owl="say:Give it a tilt">
+  <svg viewBox="0 0 1000 230" role="img" aria-label="A roofer's level etched Owl Roofing, 5.0 from 90+ reviews, with its bubble centred"></svg>
+ </div>
+ <div class="read" aria-live="polite"><span class="big">5.0</span><span class="sub"><b>from 90+ reviews</b><span class="say">It sits level.</span></span></div>
+ <ul class="chips" aria-label="What stands behind it"><li>BBB A− since Feb 25, 2026</li><li>GAF Systems Plus</li><li>MN licence #BC809662</li><li>10-year workmanship warranty</li></ul>
+ <div class="act"><button class="btn btn-line nudge" type="button" data-mag data-owl="peek">Give It a Nudge</button><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('reviews','6',function(root){
+  var svg = root.querySelector('svg'), bench = root.querySelector('.bench'), say = root.querySelector('.say'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var h = '<defs><linearGradient id="rv6b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C25F"/><stop offset=".55" stop-color="#EAA221"/><stop offset="1" stop-color="#C7871A"/></linearGradient>'
+    + '<linearGradient id="rv6v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF5D6"/><stop offset="1" stop-color="#C9DE96"/></linearGradient>'
+    + '<clipPath id="rv6c"><rect x="392" y="92" width="216" height="46" rx="23"/></clipPath></defs>';
+  h += '<g class="lv">';
+  h += '<rect x="40" y="62" width="920" height="106" rx="16" fill="url(#rv6b)"/><rect x="40" y="62" width="920" height="10" rx="5" fill="#fff" opacity=".35"/><rect x="40" y="156" width="920" height="12" rx="6" fill="#17111D" opacity=".18"/>';
+  h += '<rect x="28" y="56" width="44" height="118" rx="12" fill="#17111D"/><rect x="928" y="56" width="44" height="118" rx="12" fill="#17111D"/>';
+  h += '<path d="M100 150h800" stroke="#8E5A12" stroke-width="2" opacity=".5"/>';
+  for (var t = 0; t <= 40; t++){ var x = 110 + t*20; h += '<path d="M' + x + ' 150v-' + (t % 5 ? 8 : 16) + '" stroke="#5E3A08" stroke-width="2" opacity=".55"/>'; }
+  h += '<text x="104" y="121" font-size="27" font-weight="900" letter-spacing="3" fill="#5E3A08" opacity=".8">OWL ROOFING</text><text x="900" y="121" text-anchor="end" font-size="24" font-weight="900" letter-spacing="1" fill="#5E3A08" opacity=".8">5.0 · 90+ REVIEWS</text>';
+  h += '<rect x="380" y="80" width="240" height="70" rx="20" fill="#17111D"/><rect x="392" y="92" width="216" height="46" rx="23" fill="url(#rv6v)"/>';
+  h += '<g clip-path="url(#rv6c)"><ellipse class="bub" cx="500" cy="111" rx="30" ry="14" fill="#FBFDF2" stroke="#9DB86A" stroke-width="2"/><ellipse class="bub2 shine" cx="492" cy="106" rx="12" ry="4" fill="#fff"/></g>';
+  h += '<path d="M470 92v46M530 92v46" stroke="#17111D" stroke-width="3"/><rect x="392" y="92" width="216" height="14" rx="7" fill="#fff" opacity=".35"/>';
+  h += '</g>';
+  svg.innerHTML = h;
+  var lv = svg.querySelector('.lv'), bub = svg.querySelector('.bub'), bub2 = svg.querySelector('.bub2');
+  /* tilt and bubble both on damped springs: nothing jumps, everything comes to rest */
+  var a = 0, va = 0, ta = 0, b = 0, vb = 0, raf = 0, last = 0, lvl = true;
+  function draw(){ lv.setAttribute('transform', 'rotate(' + a.toFixed(3) + ' 500 115)'); var bx = Math.max(-72, Math.min(72, b)); bub.setAttribute('cx', (500 + bx).toFixed(2)); bub2.setAttribute('cx', (492 + bx).toFixed(2)); }
+  function step(now){ var dt = last ? Math.min(40, now - last)/16.7 : 1; last = now;
+    va += (ta - a)*.06*dt; va *= Math.pow(.84, dt); a += va*dt;
+    var tb = -a*13; vb += (tb - b)*.05*dt; vb *= Math.pow(.9, dt); b += vb*dt; draw();
+    var level = Math.abs(a) < .25 && Math.abs(b) < 3; if (level !== lvl){ lvl = level; say.textContent = level ? 'It sits level.' : 'Still 5.0. Let go and watch it settle.'; }
+    if (Math.abs(ta - a) > .01 || Math.abs(va) > .01 || Math.abs(vb) > .02 || Math.abs(tb - b) > .05) raf = requestAnimationFrame(step); else { raf = 0; last = 0; } }
+  function kick(){ if (OWL.reduce){ a = ta; b = -a*13; draw(); return; } if (!raf) raf = requestAnimationFrame(step); }
+  root.addEventListener('pointermove', function(e){ if (e.pointerType !== 'mouse') return; var r = bench.getBoundingClientRect(); ta = Math.max(-6, Math.min(6, ((e.clientX - r.left)/r.width - .5)*12)); kick(); });
+  root.addEventListener('pointerleave', function(){ ta = 0; kick(); });
+  root.querySelector('.nudge').addEventListener('click', function(){ if (OWL.reduce){ say.textContent = 'Still 5.0. It sits level.'; return; } ta = 5; kick(); setTimeout(function(){ ta = 0; kick(); }, 450); });
+  draw();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); a = -4; va = 0; b = 40; kick(); } }, {threshold:.4}); io.observe(bench);
+});
+</script>
+</section>
