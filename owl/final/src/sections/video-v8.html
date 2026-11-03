@@ -1,0 +1,58 @@
+<section class="sec video8" id="crew-video-8" aria-labelledby="vd8-h">
+<style>
+.video8{padding-bottom:0}
+.video8 .lede{margin-top:12px;max-width:44ch}
+.video8 .track{position:relative;height:calc(100vh + 200vh)}
+.video8 .stage{position:sticky;top:clamp(76px,10vh,104px);height:calc(100vh - clamp(96px,13vh,130px));border-radius:28px;overflow:hidden;background:#F1EFE6}
+.video8 video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video8 svg.cover{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none}
+.video8 .line{position:absolute;left:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,36px);right:16px;display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .6s cubic-bezier(.22,.61,.36,1)}
+.video8 .line.on{opacity:1;transform:none}
+.video8 .line b{font-size:clamp(26px,3.6vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1;color:#FBFAF6;text-shadow:0 2px 20px rgba(0,0,0,.5);max-width:16ch}
+.video8 .hint{margin:14px 0 0;font-size:14px;font-weight:600;color:var(--ink-70)}
+@media (max-width:760px){.video8 .stage{top:64px;height:calc(100vh - 70px)}}
+@media (prefers-reduced-motion:reduce){.video8 .track{height:auto}.video8 .stage{position:relative;top:0;height:auto;aspect-ratio:16/9}.video8 svg.cover{display:none}.video8 .line{opacity:1;transform:none;transition:none}}
+</style>
+<div class="wrap">
+ <span class="kick">Owl's crew on film</span><h2 class="h2" id="vd8-h" style="margin-top:12px">Inside the Letters</h2>
+ <p class="lede rv">Keep scrolling. The letters open up until it’s just the crew, at work.</p>
+ <div class="track">
+  <div class="stage" data-owl="say:Keep going">
+   <video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+   <svg class="cover" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><mask id="vd8m" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900"><rect width="1600" height="900" fill="#fff"/><g class="word"><text x="800" y="560" text-anchor="middle" font-size="290" font-weight="900" letter-spacing="-8" fill="#000">OWL CREW</text></g></mask></defs>
+    <rect class="paper" width="1600" height="900" fill="#F1EFE6" mask="url(#vd8m)"/>
+   </svg>
+   <div class="line"><b>Owl’s own crew, on the job.</b><button class="btn btn-amber full" type="button" data-mag data-owl="peek">Watch the Full Film</button></div>
+  </div>
+ </div>
+ <p class="hint">The film is Owl Roofing’s own footage.</p>
+</div>
+<script>
+OWL.reg('video','8',function(root){
+  var track = root.querySelector('.track'), word = root.querySelector('.word'), paper = root.querySelector('.paper'), line = root.querySelector('.line'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  if (OWL.reduce){ line.classList.add('on'); OWL.reveal(h2); return; }
+  var txt = word.querySelector('text'), svg = root.querySelector('svg.cover'), stage = root.querySelector('.stage'), mrect = root.querySelector('mask rect'), cx = 800, cy = 470, tall = null;
+  /* on a portrait stage the word stacks, OWL over CREW, so it is never cropped to its middle letters */
+  function layout(){ var t = stage.clientHeight > stage.clientWidth; if (t === tall) return; tall = t;
+    var W = t ? 900 : 1600, H = t ? 1600 : 900; svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); [mrect, paper].forEach(function(r){ r.setAttribute('width', W); r.setAttribute('height', H); });
+    root.querySelector('mask').setAttribute('width', W); root.querySelector('mask').setAttribute('height', H);
+    txt.textContent = ''; txt.setAttribute('x', W/2);
+    if (t){ txt.setAttribute('font-size', 270); txt.removeAttribute('y'); txt.innerHTML = '<tspan x="450" y="780">OWL</tspan><tspan x="450" y="1030">CREW</tspan>'; }
+    else { txt.setAttribute('font-size', 290); txt.setAttribute('y', 560); txt.textContent = 'OWL CREW'; }
+    try { var e = txt.getExtentOfChar(0); cx = e.x + e.width/2; cy = e.y + e.height/2; } catch (err){ cx = W/2; cy = H/2; } }
+  layout(); addEventListener('resize', function(){ layout(); paint(); });
+  var tgt = 0, shown = 0, raf = 0, last = 0;
+  function paint(){ var p = shown, e = p*p*(3 - 2*p), s = 1 + 11*e*e;
+    word.setAttribute('transform', 'translate(' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ') scale(' + s.toFixed(3) + ') translate(' + (-cx).toFixed(1) + ' ' + (-cy).toFixed(1) + ')');
+    paper.style.opacity = Math.max(0, Math.min(1, 1 - (p - .55)/.33)).toFixed(3);
+    line.classList.toggle('on', p > .86); }
+  function loop(t){ var dt = last ? Math.min(100, t - last) : 16.7; last = t; shown += (tgt - shown)*(1 - Math.pow(.82, dt/16.7)); if (Math.abs(tgt - shown) < .001) shown = tgt; paint(); if (shown !== tgt) raf = requestAnimationFrame(loop); else { raf = 0; last = 0; } }
+  function onScroll(){ var b = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight*.9; tgt = Math.max(0, Math.min(1, -b.top/Math.max(1, span))); if (!raf) raf = requestAnimationFrame(loop); }
+  addEventListener('scroll', onScroll, {passive: true}); addEventListener('resize', onScroll); onScroll(); paint();
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(en){ if (en[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.1}); io.observe(track); } else OWL.reveal(h2);
+});
+</script>
+</section>

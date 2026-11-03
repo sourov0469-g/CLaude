@@ -640,3 +640,23 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Booking 6's back sheet covered the phone strip; it was shortened.
 
 **Second pass of the ladder complete:** every non-hero slot now stands at 7 (Video, Explore, Wise Check, Protect, Services, Reviews, Area, Family, Booking), and the hero at 10. The homepage regression (`home-verify`) passes 50/50 after the pass. Next pass: V8 + V9 for Video → Booking.
+
+## L21 · Video 8 + 9 · checks 36/36 · evidence `gates/ladder/L21-video-8-9/` · Video now at 9 (third pass begins)
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Video 8 · Inside the Letters** | Apple AirPods Pro (type as the full-screen event) | The crew film plays inside giant knocked-out letters, "OWL CREW", on cream (an SVG mask). The stage pins while you scroll; the letters grow about the O, the cream fades, and the film fills the frame; then "Owl's own crew, on the job." lands with "Watch the Full Film". On a portrait stage the word stacks as OWL over CREW. Reduced motion shows the film whole with the line. | 8.6 | 8.0 | 8.6 | 8.4 | **8.42** |
+| **Video 9 · Movie Night** | Cowboy (warmth, family first) | A drawn driveway at early evening (kept light): a projector on a tripod throws the crew film onto the garage door with a slight keystone, dust drifting in the beam. It switches on when seen (the beam flickers up); a 3D switch stops and starts it; a "Now showing" card names the frame-checked moment with its timecode. | 8.4 | 8.2 | 8.4 | 8.6 | **8.40** |
+
+**Truth:** both use only Owl's own crew clip and the frame-checked moments list (tested: 9.5 s → "Walking a finished roof", 0:09). The full film is YouTube ehKLv5DF2TQ.
+
+**Checks run:** the generic gate, plus:
+- Video 8: the crew clip under OWL CREW; at rest at the start; mid-scroll the letters scale above 3× with the cream still on; pinned while growing; at the end the cream is gone and the line has landed; the full film opens.
+- Video 9: on when seen, with the crew clip on the door; Now showing follows a seek; the switch stops it (beam off, paused, relabelled); the full film opens.
+
+**Ledger:**
+- **Video 8:** sticky stage ⟦S0448⟧; type as the event, via mask ⟦S0451⟧; scroll progress ⟦S1325⟧; modal ⟦S1046⟧.
+- **Video 9:** dust in the beam ⟦S1363⟧; switch ⟦S0405⟧; keys ⟦S1388⟧; modal ⟦S1046⟧.
+
+**Defects found and fixed in the round:**
+- Video 8's wide word was cropped to its middle letters on phones; portrait stages now stack it.
+- A dark hairline showed at the stage's rounded corners; the stage background is now cream.

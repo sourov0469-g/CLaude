@@ -286,3 +286,15 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   County Rd E #230, Shoreview, MN 55126 · Mon–Sat 08:00–18:00). Pointing at a door opens it a crack (small 3D);
   pressing it swings it open on warm light and the way in; one door open at a time; closed doors are inert. Skills:
   ⟦S0409⟧ door swing, ⟦S0910⟧ disclosure a11y, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+
+## L21 · Video 8 + 9 (third pass; Video stands at 7: V1 player, V2–V3 earlier, V4 colour lens, V5 tiles, V6 window, V7 scrub)
+- **Video 8 · "Inside the Letters"** — reference **Apple AirPods Pro** (type as the full-screen event). The crew film
+  plays inside giant knocked-out letters, "OWL CREW", on cream. The stage pins while you scroll and the letters
+  grow about the O until the film fills the frame; then one line lands: "Owl's own crew, on the job." Reduced
+  motion shows the film whole with the line. Skills: ⟦S0448⟧ sticky artifact, ⟦S0451⟧ type event, ⟦S1325⟧
+  progress, ⟦S1046⟧ modal for the full film.
+- **Video 9 · "Movie Night"** — reference **Cowboy** (warmth, family first). A drawn driveway at early evening (kept
+  light): a projector on a stand throws the crew film onto the garage door, framed with a slight keystone, dust
+  drifting in the beam. The projector's switch is a 3D key (on: the beam flickers up and the film plays; off: it
+  pauses and the beam fades). A "Now showing" card names the frame-checked moment. Skills: ⟦S1363⟧ dust in the
+  beam, ⟦S0405⟧ switch, ⟦S1388⟧ keys, ⟦S1046⟧ modal.

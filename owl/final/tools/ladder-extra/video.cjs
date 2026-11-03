@@ -51,5 +51,30 @@ module.exports = {
     rec('scrolling back up rewinds', await p.evaluate(S => document.querySelector(S + ' video').currentTime < 3 && document.querySelector(S + ' .cap b').textContent === 'Rafters', S));
     await p.click(S + ' .full'); await p.waitForTimeout(400);
     rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '8': async (p, S, rec) => {
+    rec('the crew film sits under knocked-out letters reading OWL CREW', await p.evaluate(S => document.querySelector(S + ' video').dataset.media === 'crew' && document.querySelector(S + ' mask text').textContent === 'OWL CREW', S));
+    const go = k => p.evaluate(([S, k]) => { const t = document.querySelector(S + ' .track'), span = t.offsetHeight - innerHeight * .9, top = t.getBoundingClientRect().top + scrollY; scrollTo({ top: top + span * k, behavior: 'instant' }); }, [S, k]);
+    await go(0.02); await p.waitForTimeout(1200);
+    const sc = () => p.evaluate(S => { const m = document.querySelector(S + ' .word').getAttribute('transform').match(/scale\(([\d.]+)\)/); return [+m[1], +document.querySelector(S + ' .paper').style.opacity, document.querySelector(S + ' .line').classList.contains('on')]; }, S);
+    const a = await sc();
+    rec('at the start the letters are at rest and the cream covers the rest', a[0] < 1.05 && a[1] > .99 && !a[2]);
+    await go(0.5); await p.waitForTimeout(1400); const b = await sc();
+    rec('scrolling grows the letters about the O', b[0] > 3 && b[1] > .5);
+    rec('the stage stays pinned while it grows', await p.evaluate(S => { const r = document.querySelector(S + ' .stage').getBoundingClientRect(); return r.top >= 60 && r.top < 120; }, S));
+    await go(1); await p.waitForTimeout(1600); const c = await sc();
+    rec('at the end the film fills the frame and the line lands', c[1] < .01 && c[2] && await p.evaluate(S => document.querySelector(S + ' .line b').textContent === 'Owl’s own crew, on the job.', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '9': async (p, S, rec) => {
+    await p.waitForTimeout(1800);
+    rec('the projector comes on when the driveway is seen and the film plays on the door', await p.evaluate(S => document.querySelector(S + ' .scene').classList.contains('on') && document.querySelector(S + ' .sw').getAttribute('aria-pressed') === 'true' && document.querySelector(S + ' video').dataset.media === 'crew', S));
+    await p.evaluate(S => { const v = document.querySelector(S + ' video'); v.currentTime = 9.5; }, S); await p.waitForTimeout(700);
+    rec('Now showing names the frame-checked moment (9.5 s → finished roof)', await p.evaluate(S => document.querySelector(S + ' .now span').textContent === 'Walking a finished roof' && document.querySelector(S + ' .now time').textContent === '0:09', S));
+    await p.click(S + ' .sw'); await p.waitForTimeout(500);
+    rec('the switch stops the movie: beam off, film paused, label changes', await p.evaluate(S => !document.querySelector(S + ' .scene').classList.contains('on') && document.querySelector(S + ' video').paused && document.querySelector(S + ' .sw .lb').textContent === 'Start the Movie', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };
