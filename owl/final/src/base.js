@@ -194,7 +194,7 @@ document.addEventListener('pointerover', function(e){
    Stamps are laid by distance travelled, not by time, so a flick and a crawl leave the same wake. */
 OWL.flow = function(el, o){
   o = o || {}; var W = o.w || 160, R = o.radius || .14, DEC = o.decay || .953, STEP = o.step || .012, A = o.alpha || .32, EASE = o.ease || .4;
-  var c = document.createElement('canvas'), g = c.getContext('2d'), deep = o.deep ? document.createElement('canvas') : null, gd = deep && deep.getContext('2d');
+  var c = document.createElement('canvas'), g = c.getContext('2d', {willReadFrequently: !!o.read}), deep = o.deep ? document.createElement('canvas') : null, gd = deep && deep.getContext('2d', {willReadFrequently: !!o.read});
   var rect = null, H = 100, tx = -1, ty = -1, ex = -1, ey = -1, inside = false, energy = 0;
   function size(){ rect = el.getBoundingClientRect(); H = Math.max(8, Math.round(W * rect.height / Math.max(1, rect.width))); c.width = W; c.height = H; if (deep){ deep.width = W; deep.height = H; } }
   size(); new ResizeObserver(size).observe(el);
