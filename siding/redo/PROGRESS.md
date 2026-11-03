@@ -31,6 +31,8 @@ On their points, the later ones win.
 | 11-03 | **Colour change: deep green #0E3B2C + lime #B5DB6E** (steel retired); V2 rebuilt on the finished after photo; film approved | Recoloured five re-audited; `GATE-HERO-2.md` updated. **Accepted by Muse** (V1 live) |
 | 11-03 | **Round 2: services + visualiser**, two versions each, in the one site file `site/out/site.html` | Services A (pinned horizontal sequence) and Visualiser B (snap-together wall) live, 8.04 / 8.06 PASS; B and A kept as in-file backups. `GATE-ROUND-2.md` |
 | 11-03 | **Round 3: windows + reviews** (Andersen construction researched first) | Windows A (one single-hung, morning to midnight) 8.28 and Reviews B (rating as hanging tags) 8.20 live; Windows B (bay, peelable wall) and Reviews A (4.9 laid in courses) kept as backups. `GATE-ROUND-3.md` |
+| 11-03 | **Process note (Muse, owner's order):** when the homepage is complete, STOP and deliver it for joint verification (Muse audits against the skills, then the owner); inner pages only after both pass | In force |
+| 11-03 | **Round 4: process + service area** | Process A (stacked chapters) 8.12 and On your street A (thread board, real job photos, town signs) 8.32 live; Process B (pinned wall) and Area B (finder + deck) kept as backups. `GATE-ROUND-4.md` |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -48,7 +50,9 @@ On their points, the later ones win.
 | `src/sec/vis.*` | Visualiser A (swatch fan) and B (snap-together wall, five steps) |
 | `src/sec/windows.*` | Windows A (100 Series single-hung, day slider, real parts) and B (400 Series bay, CSS 3D, peelable wall layers) |
 | `src/sec/reviews.*` | Reviews A (4.9 in lap courses + quote reader) and B (hanging tags, breeze physics, verbatim dialog); quotes checked verbatim at build |
+| `src/sec/process.*` | Process A (four stacked chapters: checklist, price bands, scrubbed install, seal) and B (one pinned wall through the job) |
+| `src/sec/area.*` | On your street A (photo cards on a rippling thread, town signs filter) and B (neighbourhood finder + photo deck) |
 
 ## Next
 
-Round 4: **process** (full-view stacked chapters, not five cards; the game idea as a horizontal-scroll interactivity sequence) and **service area** ("On your street": pinned photo cards, rippling thread, board-end signs; no drawn map; the 886 wording verbatim). Then CTA + footer, nav polish (cursor companion), then the other pages.
+Round 5: the horizontal-scroll interactivity sequence and the booking panel + stacked-course footer. Then nav polish with the cursor companion. Then **STOP at the homepage gate** for joint verification (Muse, then the owner). No inner pages until both pass.

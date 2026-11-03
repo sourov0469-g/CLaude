@@ -8,19 +8,36 @@ sys.path.insert(0, HERE)
 from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, SUB, CTAS, PP)
 
 # the live winner of every slot; the rest become backups
-LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b'}
+LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'area': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'vis', 'windows', 'reviews']
+MODS = ['scenes', 'services', 'vis', 'windows', 'reviews', 'process', 'area']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
+WORK = os.path.join(HERE, '..', '..', 'work')
+
+
+def area():
+    # the firm's own published project photos with their recorded place/date/trades; city tallies from the finder dataset
+    P = json.load(open(os.path.join(WORK, 'data', 'photos.json'))); N = json.load(open(os.path.join(WORK, 'data', 'near.json')))
+    import base64 as _b
+    cards = [{'src': 'data:image/webp;base64,' + _b.b64encode(open(os.path.join(WORK, 'dl', f'photo{i}-640.webp'), 'rb').read()).decode(),
+              'alt': P[i]['alt'], 'place': P[i]['place'], 'when': P[i]['when'], 'trades': P[i]['trades'], 'href': 'https://www.austinprosiding.com' + P[i]['href']}
+             for i in (0, 10, 2, 7, 28, 33, 36, 42)]
+    want = ['Austin', 'Round Rock', 'Cedar Park', 'Leander', 'Pflugerville', 'Georgetown', 'Buda']
+    tally = {g[0]: g[6] for g in N['g'] if g[1] == 'c'}
+    places = sorted({p.strip() for p in N['pl'] if p.strip()} | {g[0] for g in N['g'] if g[1] == 'c'}, key=str.lower)
+    return {'cards': cards, 'cities': [[c, tally[c]] for c in want], 'places': places}
+
+
+AREA = area()
 
 
 def prerender():
     js = '\n'.join(SEC(m + '.js') for m in MODS)
-    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';' + js +
+    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';' + js +
             # fact lock: every quote must be a verbatim excerpt of its review
-            ';for(const p of Rev.PICK){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
-            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),va:Vis.A(),vb:Vis.B(),wa:Win.A(),wb:Win.B(),ra:Rev.A(),rb:Rev.B()}))')
-    return json.loads(subprocess.run(['node', '-e', prog], capture_output=True, text=True, check=True).stdout)
+            ';for(const p of [...Rev.PICK,...Proc.QUOTES]){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
+            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),va:Vis.A(),vb:Vis.B(),wa:Win.A(),wb:Win.B(),ra:Rev.A(),rb:Rev.B(),pa:Proc.A(),pb:Proc.B(),aa:Area.A(),ab:Area.B()}))')
+    return json.loads(subprocess.run(['node', '-'], input=prog, capture_output=True, text=True, check=True).stdout)
 
 
 FILM = '<video class="film" muted loop playsinline preload="none" data-film aria-label="Film of a finished white board-and-batten home at golden hour"></video>'
@@ -73,7 +90,7 @@ const PLAY=%PLAY%,PAUSE=%PAUSE%;
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Vis.wire(document);Win.wire(document);Rev.wire(document);
+Scenes.wire(document);Services.wire(document);Vis.wire(document);Win.wire(document);Rev.wire(document);Proc.wire(document);Area.wire(document);
 })();'''
 
 
@@ -85,14 +102,15 @@ def build():
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
     main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb']}) + slot('vis', {'a': pre['va'], 'b': pre['vb']}) +
-            slot('windows', {'a': pre['wa'], 'b': pre['wb']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb']}))
+            slot('windows', {'a': pre['wa'], 'b': pre['wb']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb']}) +
+            slot('process', {'a': pre['pa'], 'b': pre['pb']}) + slot('area', {'a': pre['aa'], 'b': pre['ab']}))
     boot = BOOT.replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
     js = src('photo-hero.js') + ''.join(SEC(m + '.js') for m in MODS)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER}<main>{main}</main>{MBAR}{film}
-<script>{src('field.js')}</script>{HEAD_JS}<script>window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};{js}{boot}</script></body></html>'''
+<script>{src('field.js')}</script>{HEAD_JS}<script>window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':
