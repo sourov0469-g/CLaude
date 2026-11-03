@@ -686,7 +686,48 @@
     ]
    }
   ],
-  "area": [],
+  "area": [
+   {
+    "slot": "sa1",
+    "name": "Opener",
+    "mod": "p_sa1",
+    "obj": "PSa1",
+    "v": [
+     [
+      "a",
+      "Town names"
+     ],
+     [
+      "b",
+      "Where the jobs are"
+     ],
+     [
+      "c",
+      "From one door"
+     ]
+    ]
+   },
+   {
+    "slot": "sa2",
+    "name": "Towns",
+    "mod": "p_sa2",
+    "obj": "PSa2",
+    "v": [
+     [
+      "a",
+      "The town directory"
+     ],
+     [
+      "b",
+      "Six big, the rest small"
+     ],
+     [
+      "c",
+      "Sort it yourself"
+     ]
+    ]
+   }
+  ],
   "contact": []
  }
 }

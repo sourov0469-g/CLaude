@@ -1,0 +1,33 @@
+/* SERVICE AREA · Towns */
+.sa2A,.sa2B,.sa2C{padding:96px var(--gut) 72px}
+.sa2A .hd .sec-p,.sa2B .hd .sec-p,.sa2C .hd .sec-p{margin-top:10px;font-size:16.5px;max-width:64ch}
+/* A — directory board */
+.sa2A .dir{list-style:none;margin-top:24px;padding:clamp(18px,2.4vw,30px);border-radius:12px;background:#1A1F1C;columns:3 240px;column-gap:clamp(20px,3vw,40px)}
+.sa2A .dir li{break-inside:avoid;display:flex;align-items:baseline;gap:8px;padding:6px 0}
+.sa2A .dir span{font:600 15px/1.2 var(--text);color:#F4F1E8;letter-spacing:.02em}
+.sa2A .dir i{flex:1;border-bottom:2px dotted rgba(244,241,232,.25);transform:translateY(-4px)}
+.sa2A .dir b{font:800 15px/1 var(--display);color:#B5DB6E;font-variant-numeric:tabular-nums}
+/* B — six big */
+.sa2B .big6{list-style:none;margin-top:24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sa2B .big6 li{position:relative;padding:22px;border-radius:22px;background:#F6F9F4;box-shadow:inset 0 0 0 1px #E3EBE4}
+.sa2B .big6 li:first-child{grid-column:span 2;background:#0E3B2C}
+.sa2B .big6 b{display:block;font:800 clamp(44px,5vw,80px)/1 var(--display);letter-spacing:-.04em;color:var(--green)}
+.sa2B .big6 span{display:block;margin-top:6px;font:800 20px/1.1 var(--display);color:var(--ink)}
+.sa2B .big6 small{position:absolute;right:18px;top:16px;font:800 12px/1 var(--display);color:var(--ink-3)}
+.sa2B .big6 li:first-child b{color:#B5DB6E;font-size:clamp(60px,8vw,120px)}.sa2B .big6 li:first-child span{color:#fff}.sa2B .big6 li:first-child small{color:rgba(255,255,255,.5)}
+.sa2B .also{margin-top:20px;font:500 15.5px/1.8 var(--text);color:var(--ink-2)}.sa2B .also i{font-style:normal;font-weight:800;color:var(--green)}
+@media (max-width:760px){.sa2B .big6{grid-template-columns:1fr 1fr}.sa2B .big6 li:first-child{grid-column:1/-1}}
+/* C — sortable table */
+.sa2C .flt{display:grid;gap:6px;max-width:380px;margin-top:20px;font:700 13px/1 var(--text);color:var(--ink-3)}
+.sa2C .flt input{height:48px;padding:0 16px;border:0;border-radius:12px;background:#F1F5EF;box-shadow:inset 0 0 0 2px #DCE5DE;font:600 16px/1 var(--text);color:var(--ink);outline:none}
+.sa2C .flt input:focus{box-shadow:inset 0 0 0 3px var(--green)}
+.sa2C .tw4{margin-top:16px;max-height:520px;overflow:auto;border-radius:16px;box-shadow:inset 0 0 0 1px #E3EBE4;max-width:640px}
+.sa2C .tt3{width:100%;border-collapse:collapse}
+.sa2C thead th{position:sticky;top:0;background:#0E3B2C;text-align:left}
+.sa2C thead button{all:unset;box-sizing:border-box;width:100%;padding:14px 16px;cursor:pointer;font:800 12.5px/1 var(--text);letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.sa2C thead th[aria-sort="ascending"] button::after{content:" ↑";color:#B5DB6E}.sa2C thead th[aria-sort="descending"] button::after{content:" ↓";color:#B5DB6E}
+.sa2C thead button:focus-visible{outline:3px solid #B5DB6E;outline-offset:-3px}
+.sa2C tbody th,.sa2C tbody td{padding:12px 16px;border-bottom:1px solid #EEF3EF;text-align:left}
+.sa2C tbody th{font:600 15.5px/1.2 var(--text);color:var(--ink)}.sa2C tbody td{font:800 17px/1 var(--display);color:var(--green);font-variant-numeric:tabular-nums}
+.sa2C tbody tr[hidden]{display:none}
+.sa2C .cn4{margin-top:12px;font:600 14px/1.4 var(--text);color:var(--ink-3)}
