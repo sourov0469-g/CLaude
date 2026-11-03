@@ -17,6 +17,7 @@
   color: inherit; font: 400 1.0625rem/1.4 var(--f-text); outline: none; resize: vertical;
 }
 .c-f label { position: absolute; left: 0; top: 26px; font: 400 1rem/1 var(--f-text); opacity: .7; pointer-events: none; transform-origin: 0 0; transition: transform 200ms var(--ez-out), opacity 200ms; }
+.c-f textarea { display: block; }   /* Phase 11: no inline baseline gap, so the focus underline lands on the field line, as on the inputs */
 .c-f input:focus + label, .c-f input:not(:placeholder-shown) + label, .c-f textarea:focus + label, .c-f textarea:not(:placeholder-shown) + label { transform: translateY(-24px) scale(.8); opacity: 1; }
 .c-f::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; background: var(--c-acc, var(--color-accent-solid)); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--ez-out); color: var(--color-text-on-accent); }
 .c-f:focus-within::after { transform: scaleX(1); }

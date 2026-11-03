@@ -1,0 +1,44 @@
+{
+ "page": "renovation",
+ "W": 1440,
+ "V": 2,
+ "presses": [
+  "chrome button.settings__btn \"Settings: theme and motion\"",
+  "reno-intro button.ri4__p \"01Opening up plans\"",
+  "reno-intro button.ri4__p \"02Moving structure\"",
+  "reno-intro button.ri4__p \"03Re-sequencing a house so it works the \"",
+  "reno-services button.btn \"Open the scope\"",
+  "reno-services button.btn \"Open the scope\"",
+  "reno-services button.btn \"Open the scope\"",
+  "reno-disruption button.dp__o \"Room by room\"",
+  "reno-disruption button.dp__o \"One plan\"",
+  "reno-stories button.si__it \"01Modern Farmhouse Whole-Home Renovation\"",
+  "reno-stories button.si__it \"02Modern Open-Concept Kitchen and Living\"",
+  "reno-stories button.si__it \"03Whole-Home Bathroom Renovation with Sp\"",
+  "reno-stories button.si__it \"04Waterfront Backyard & Outdoor Living T\""
+ ],
+ "issues": [],
+ "forms": [],
+ "messages": [
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "ri4__note",
+   "text": "Whole-Home Bathroom Renovation with Spa Showers & ",
+   "ratio": 7.07,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "si__cap",
+   "text": "Waterfront Backyard & Outdoor Living Transformatio",
+   "ratio": 7.47,
+   "ok": true
+  }
+ ],
+ "focus": {
+  "walked": 41,
+  "missing": []
+ },
+ "errors": [],
+ "sampledOut": 0
+}

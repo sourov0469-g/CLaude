@@ -1,0 +1,32 @@
+{
+ "page": "kitchens",
+ "W": 390,
+ "V": 1,
+ "presses": [
+  "chrome button.nav__menu \"Menu\"",
+  "kitchen-scope button.ks__tab \"1Refit scope\"",
+  "kitchen-scope button.ks__tab \"2Full remodel\"",
+  "kitchen-scope button.ks__tab \"3Open-plan scope\"",
+  "kitchen-work button.kp__pair \"Kitchen, grey ShakerA kitchen often runs\"",
+  "kitchen-work button.kp__pair \"Kitchen, light cabinetry and islandA kit\"",
+  "kitchen-work button.kp__pr \"Navy Blue Shaker Kitchen with Brass Hard\"",
+  "kitchen-work button.kp__pr \"White Shaker Kitchen Remodel with Waterf\"",
+  "kitchen-work button.kp__pr \"Gray Shaker Kitchen Remodel with Wolf Ra\"",
+  "kitchen-work button.kp__pr \"Two-Tone Kitchen Remodel with Turquoise \"",
+  "kitchen-work button.kp__pr \"Two-Tone Navy & White Kitchen Remodel wi\"",
+  "kitchen-work button.kp__pr \"Two-Tone Kitchen Remodel with Custom Bra\"",
+  "kitchen-work button.kp__pr \"Two-Tone Kitchen Remodel with Waterfall \"",
+  "kitchen-work button.kp__pr \"Chef-Grade Kitchen Remodel with Waterfal\"",
+  "kitchen-work button.kp__pr \"Modern Open-Concept Kitchen and Living A\"",
+  "kitchen-work button.kp__pr \"Contemporary kitchen with a long island \""
+ ],
+ "issues": [],
+ "forms": [],
+ "messages": [],
+ "focus": {
+  "walked": 40,
+  "missing": []
+ },
+ "errors": [],
+ "sampledOut": 0
+}

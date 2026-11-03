@@ -1,0 +1,39 @@
+{
+ "page": "renovation",
+ "W": 390,
+ "V": 1,
+ "presses": [
+  "chrome button.nav__menu \"Menu\"",
+  "reno-services button.btn \"Open the scope\"",
+  "reno-services button.btn \"Open the scope\"",
+  "reno-services button.btn \"Open the scope\"",
+  "reno-stories button.sc__open \"Modern Farmhouse Whole-Home Renovation, \"",
+  "reno-stories button.sc__open \"Modern Open-Concept Kitchen and Living A\"",
+  "reno-stories button.sc__open \"Whole-Home Bathroom Renovation with Spa \"",
+  "reno-stories button.sc__open \"Waterfront Backyard & Outdoor Living Tra\""
+ ],
+ "issues": [],
+ "forms": [],
+ "messages": [
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "vswitch__now nums",
+   "text": "1/2",
+   "ratio": 16.61,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "dc__read",
+   "text": "One plan, one contractor, one disruption: the room",
+   "ratio": 17.54,
+   "ok": true
+  }
+ ],
+ "focus": {
+  "walked": 33,
+  "missing": []
+ },
+ "errors": [],
+ "sampledOut": 0
+}

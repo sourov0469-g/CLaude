@@ -1,0 +1,108 @@
+{
+ "page": "contact",
+ "W": 390,
+ "V": 1,
+ "presses": [
+  "chrome button.nav__menu \"Menu\"",
+  "contact-form select. \"phoneemailtext\"",
+  "contact-form input. \"on\"",
+  "contact-visit button.btn \"Turn the card over\"",
+  "contact-area button.ca__hold \"Pause the rows\"",
+  "contact-faq button.fq__btn \"How long will it take?\"",
+  "contact-faq button.fq__btn \"Do you pull the permits?\"",
+  "contact-faq button.fq__btn \"What does the hurricane zone mean for my\"",
+  "contact-faq button.fq__btn \"Can I finance it?\"",
+  "contact-faq button.fq__btn \"Do you work in my town?\"",
+  "contact-faq button.fq__btn \"Is the consultation free?\"",
+  "contact-faq button.fq__btn \"Are you licensed?\"",
+  "contact-faq button.fq__btn \"Can I just call?\""
+ ],
+ "issues": [],
+ "forms": [
+  {
+   "form": "fm3__paper",
+   "sec": "contact-form",
+   "emptyErrors": 6,
+   "emptyInvalid": 6,
+   "emptyFocus": "name",
+   "mailedEmpty": false,
+   "mailed": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "doneShown": true,
+   "doneText": "Your email app should now be open with your request to Sales@elbazconstruction.com. Send it from there and we will come back to you, usually the same or next wo",
+   "leftErrors": []
+  }
+ ],
+ "messages": [
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add your full name.",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add what you want to change.",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add the property address.",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add a phone number.",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add an email address.",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please tick the box so we may contact you about th",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-done",
+   "cls": "c-done",
+   "text": "Your email app should now be open with your reques",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-done",
+   "cls": "link",
+   "text": "(754) 236‑0675",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "vs__ost",
+   "text": "Closed now. Open tomorrow from 7am Miami time",
+   "ratio": 7.47,
+   "ok": true
+  }
+ ],
+ "focus": {
+  "walked": 44,
+  "missing": []
+ },
+ "errors": [],
+ "sampledOut": 0
+}

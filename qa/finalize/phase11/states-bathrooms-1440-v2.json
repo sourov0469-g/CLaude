@@ -1,0 +1,55 @@
+{
+ "page": "bathrooms",
+ "W": 1440,
+ "V": 2,
+ "presses": [
+  "chrome button.settings__btn \"Settings: theme and motion\"",
+  "bath-intro button.bi__m \"Tile, set square\"",
+  "bath-intro button.bi__m \"Glass, templated after tiling\"",
+  "bath-intro button.bi__m \"Behind the tile\"",
+  "bath-intro button.bi__m \"Plumbing and permits\"",
+  "bath-intro button.bi__m \"Fixtures\"",
+  "bath-rooms button.bs__tile \"Full Bathroom Remodel: Champagne Bronze \"",
+  "bath-rooms button.bs__tile \"Primary/Master Bath Suite: Black Marble \"",
+  "bath-rooms button.bs__tile \"Spa Bathroom: Spa-Style Guest Bathroom R\"",
+  "bath-rooms button.bs__tile \"Walk-In Shower Conversion: Emerald Tile \"",
+  "bath-rooms button.bs__tile \"Vanity & Storage: Navy Vanity Bathroom R\"",
+  "bath-work button.bw__fl \"All\"",
+  "bath-work button.bw__fl \"Walk-in showers\"",
+  "bath-work button.bw__fl \"Freestanding tubs\"",
+  "bath-work button.bw__fl \"Vanities\"",
+  "bath-work button.btn \"Previous\"",
+  "bath-work button.btn \"Next photo\""
+ ],
+ "issues": [],
+ "forms": [],
+ "messages": [
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "bi__ct",
+   "text": "Point at a mark",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "bi__cx",
+   "text": "Each is a part we are careful about.",
+   "ratio": 12.86,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "bw__t",
+   "text": "Navy Vanity Bathroom Remodel with Backlit Tile Nic",
+   "ratio": 15.51,
+   "ok": true
+  }
+ ],
+ "focus": {
+  "walked": 48,
+  "missing": []
+ },
+ "errors": [],
+ "sampledOut": 3
+}

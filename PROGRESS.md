@@ -89,7 +89,8 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | PASS (Muse), after the Creativity correction (the seam level): `GATE-phase7.md` |
 | 8 | Device matrix: every page at 8 sizes, phones also touch-emulated (60 runs): errors, scroll release, overflow, the phone, target sizes | PASS (Muse): `GATE-phase8.md` |
 | 9 | Every animation tested repeatedly (20 runs, 194 anchors, both directions) and the final evidence pack (every version of every section at 1440 and 390) | PASS (Muse): `GATE-phase9.md` |
-| 10 | The locks audited on the delivered file: facts, numbers, type, single file, nothing published, no model IDs | **done**: `GATE-phase10.md`; awaiting Muse |
+| 10 | The locks audited on the delivered file: facts, numbers, type, single file, nothing published, no model IDs | PASS (Muse): `GATE-phase10.md` |
+| 11 | Every click state triggered: every control pressed, every form submitted empty and complete, every focus stop walked (20 runs) | **done**: `GATE-phase11.md`; awaiting Muse |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -246,3 +247,14 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - the model name is redacted from two of my repo documents;
   - an erratum is added to `GATE-phase6.md`.
 - Zero background tasks, zero sub-agents.
+
+## Phase 11 log (every click state, after Muse accepted Phase 10)
+- **Why:** Phase 10 checked success and error states by reading their source; the brief asks for "every click state clean". New tool `states.js`.
+- **The runs:** 20 (5 pages × 1440/390 × V1/V2):
+  - 422 presses: 0 page errors, 0 overflow, 0 leaked text, 0 overlays left open;
+  - 8 form paths: every empty submit shows 6 errors, marks 6 fields invalid, moves focus to the first problem and never mails;
+  - every complete submit hands off only to `mailto:Sales@`, with the honest confirmation;
+  - 120 messages at AA;
+  - 1018 focus stops, every one visible.
+- **Fixed:** Consult V2's textarea focus underline was detached (about 8px below the field line). `display: block`, and it now lands on the line like the inputs.
+- **Process:** one batch overran the 10-minute limit and was moved to the background by the harness. I stopped it at once and reran in foreground batches. Zero sub-agents.

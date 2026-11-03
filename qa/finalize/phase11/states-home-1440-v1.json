@@ -1,0 +1,161 @@
+{
+ "page": "home",
+ "W": 1440,
+ "V": 1,
+ "presses": [
+  "chrome button.settings__btn \"Settings: theme and motion\"",
+  "hero button.hm__s \"Navy Shaker\"",
+  "hero button.hm__s \"White Shaker\"",
+  "hero button.hm__s \"Gray Shaker\"",
+  "hero button.hm__s \"Turquoise backsplash\"",
+  "hero button.hm__s \"Navy and white\"",
+  "hero button.hm__s \"Brass-banded hood\"",
+  "proof button.btn \"Restack the blocks\"",
+  "services button.btn \"Open the scope\"",
+  "services button.btn \"Open the scope\"",
+  "services button.btn \"Open the scope\"",
+  "ba button.bx__pair \"Kitchen, grey Shaker6–12 weeks of constr\"",
+  "ba button.bx__pair \"Bathroom4–8 weeks of construction\"",
+  "ba button.bx__pair \"Kitchen, light cabinetry and island6–12 \"",
+  "ba button.bx__pair \"Outdoor livingBackyard and pergola\"",
+  "financing input. \"kitchen\"",
+  "financing input. \"bath\"",
+  "financing input. \"floor\"",
+  "financing input. \"roof\"",
+  "financing input. \"hvac\"",
+  "financing input. \"unsure\"",
+  "work button.pj__f \"Navy Blue Shaker Kitchen with Brass Hard\"",
+  "work button.pj__f \"Chef-Grade Kitchen Remodel with Waterfal\"",
+  "work button.pj__f \"White Shaker Kitchen Remodel with Waterf\"",
+  "work button.pj__f \"Two-Tone Kitchen Remodel with Turquoise \"",
+  "work button.pj__f \"Gray Shaker Kitchen Remodel with Wolf Ra\"",
+  "work button.pj__f \"Two-Tone Navy & White Kitchen Remodel wi\"",
+  "work button.pj__f \"Two-Tone Kitchen Remodel with Custom Bra\"",
+  "work button.pj__f \"Two-Tone Kitchen Remodel with Waterfall \"",
+  "work button.pj__f \"Multi-Bathroom Renovation with Freestand\"",
+  "work button.pj__f \"Whole-Home Bathroom Renovation with Spa \"",
+  "work button.btn \"Pause the rows\"",
+  "towns button.tw__t \"Tequesta\"",
+  "towns button.tw__t \"Jupiter Inlet Colony\"",
+  "towns button.tw__t \"Jupiter\"",
+  "towns button.tw__t \"Juno Beach\"",
+  "towns button.tw__t \"Palm Beach Gardens\"",
+  "towns button.tw__t \"North Palm Beach\"",
+  "towns button.tw__t \"Pahokee\"",
+  "towns button.tw__t \"Lake Park\"",
+  "towns button.tw__t \"Homestead\"",
+  "towns button.tw__t \"Florida City\"",
+  "consult input. \"the kitchen\"",
+  "consult input. \"a bathroom\"",
+  "consult input. \"the whole home\"",
+  "consult input. \"outdoor living\"",
+  "consult input. \"other\"",
+  "consult input. \"not sure yet\"",
+  "consult input. \"Phone\"",
+  "consult input. \"Text\"",
+  "consult input. \"Whichever is easiest\"",
+  "consult input. \"on\""
+ ],
+ "issues": [],
+ "forms": [
+  {
+   "form": "gs__note",
+   "sec": "consult",
+   "emptyErrors": 6,
+   "emptyInvalid": 6,
+   "emptyFocus": "project",
+   "mailedEmpty": false,
+   "mailed": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "doneShown": true,
+   "doneText": "Your email app should now be open with your request to Sales@elbazconstruction.com. Send it from there and we will come back to you, usually the same or next wo",
+   "leftErrors": []
+  }
+ ],
+ "messages": [
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please pick what you would like to talk about, or ",
+   "ratio": 6.42,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add your full name.",
+   "ratio": 6.42,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add the property address.",
+   "ratio": 6.42,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add a phone number.",
+   "ratio": 6.42,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please add an email address.",
+   "ratio": 6.42,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-err",
+   "cls": "c-err",
+   "text": "Please tick the box so we may contact you about th",
+   "ratio": 6.42,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-done",
+   "cls": "c-done",
+   "text": "Your email app should now be open with your reques",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[data-fm=\"0\"] .c-done",
+   "cls": "link",
+   "text": "(754) 236‑0675",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "sr-only pf__say",
+   "text": "The blocks are back on the deck, level.",
+   "ratio": 17.54,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "bx__cap",
+   "text": "Before: Backyard with worn lawn and open patio. Af",
+   "ratio": 7.47,
+   "ok": true
+  },
+  {
+   "sel": "[aria-live]:not(.c-done):not(.c-err)",
+   "cls": "rf__why",
+   "text": "Four financing partners, not one. Two are consumer",
+   "ratio": 15.51,
+   "ok": true
+  }
+ ],
+ "focus": {
+  "walked": 89,
+  "missing": []
+ },
+ "errors": [],
+ "sampledOut": 109
+}
