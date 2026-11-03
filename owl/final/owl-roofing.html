@@ -1649,7 +1649,7 @@ OWL.reg('video','2',function(root){
   var grab = document.createElement('video'); grab.muted = true; grab.playsInline = true; grab.preload = 'auto';
   function fill(k){ if (k >= N){ grab.removeAttribute('src'); grab.load(); return; } grab.currentTime = Math.min(dur - .2, (k + .5) * dur / N); grab.onseeked = function(){ cv[k].getContext('2d').drawImage(grab, 0, 0, 192, 108); fill(k + 1); }; }
   function startGrab(){ grab.src = OWL.media.crew; grab.addEventListener('loadeddata', function(){ dur = grab.duration || dur; fill(0); }, {once: true}); }
-  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); startGrab(); } }, {rootMargin:'300px'}); io.observe(strip); } else startGrab();
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); startGrab(); } }, {rootMargin:'1400px 0px'}); io.observe(strip); } else startGrab();
   function which(t){ var k = 0; M.forEach(function(m, i){ if (t >= m[0] - .05) k = i; }); return k; }
   function sync(){
     var t = v.currentTime || 0, d = v.duration || dur, p = t / d, k = which(t);
@@ -2037,7 +2037,7 @@ OWL.reg('explore','1',function(root){
 .explore2 .step p{grid-column:2;color:var(--ink-70);max-width:70ch}
 .explore2 .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:18px}
 .explore2 .note{font-size:14px;color:var(--ink-70)}
-@media (max-width:640px){.explore2 .ctrl{grid-template-columns:1fr 1fr}.explore2 .ctrl input{grid-column:1/-1;order:-1}.explore2 .tag text{font-size:22px}}
+@media (max-width:640px){.explore2 .ctrl{grid-template-columns:1fr 1fr}.explore2 .ctrl input{grid-column:1/-1;order:-1}.explore2 .tag{display:none}}
 @media (prefers-reduced-motion:reduce){.explore2 .st .ln,.explore2 .st .fl,.explore2 .st{transition:none}.explore2 .air{animation:none}}
 </style>
 <div class="wrap">

@@ -1800,3 +1800,21 @@ No HIGH colour finding is open.
   - the tablet trust row is balanced.
 - Checks: Round 1 85/85, homepage 49/49, axe 0 on every hero.
 - Next: Round 2 (Video + Explore), only after Muse passes Round 1.
+
+## Owl Roofing · Upgrade Round 2 · Video + Explore (2026-11-03) · STOPPED at gate for Muse
+- Gate: `owl/final/GATE-UP-R2.md`. Evidence: `owl/final/gates/up-r2/`. Skill notes: `owl/skills/UP-R2-PACK.md`
+  (14 new skills, read in full, on top of the Round 1 pack).
+- New versions:
+  - Video V2 Contact Sheet;
+  - Video V3 Roofline Theatre;
+  - Explore V2 Build It;
+  - Explore V3 Stack It Right (the site's one game section).
+- Explore V1 was kept but redrawn roofer-correct. The old image and the old V2s are hidden backups.
+- Caught and fixed: a stray closing tag that pushed sections out of the home page (a189964 → 44ac555). The build now
+  guards tag balance.
+- Checks:
+  - Round 2: 81/81.
+  - Homepage: 49/49.
+  - Heroes: 85/85.
+  - axe: 0.
+- Next: Round 3 (Wise Check + Protect Your Nest), only after Muse passes Round 2.

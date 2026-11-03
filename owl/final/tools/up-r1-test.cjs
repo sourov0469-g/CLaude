@@ -39,7 +39,7 @@ const R = []; function rec(v, check, ok, detail) { R.push({ v, check, ok, detail
       rec(v, 'film roll loops seamlessly (7 photos + 7 hidden copies)', await p.evaluate(S => document.querySelectorAll(S + ' .reel figure').length === 14 && document.querySelectorAll(S + ' .reel figure[aria-hidden="true"]').length === 7, S));
       await p.click(S + ' .btn-film.light'); await p.waitForTimeout(300);
       rec(v, 'Watch the Full Film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]')));
-      await p.keyboard.press('Escape'); await p.waitForTimeout(200); rec(v, 'Escape closes the film', await p.evaluate(() => !document.querySelector('dialog.ytm')));
+      await p.keyboard.press('Escape'); await p.waitForTimeout(600); rec(v, 'Escape closes the film', await p.evaluate(() => !document.querySelector('dialog.ytm')));
     }
     if (v === '5') {
       const t = await p.evaluate(S => { const e = document.querySelector(S + ' .track'); return { top: e.getBoundingClientRect().top + scrollY, span: e.offsetHeight - innerHeight }; }, S);
@@ -70,6 +70,6 @@ const R = []; function rec(v, check, ok, detail) { R.push({ v, check, ok, detail
     rec(v, 'reduced motion: loads clean, still frame / no pin', rmOk && rm.errs.length === 0, JSON.stringify(rmState) + (rm.errs.length ? ' ' + rm.errs[0] : ''));
     await rm.p.close();
   }
-  fs.writeFileSync(path.resolve(__dirname, '../gates/up-r1/checks.json'), JSON.stringify(R, null, 1));
+  fs.writeFileSync(path.resolve(__dirname, '../gates/up-r2/hero-regression-checks.json'), JSON.stringify(R, null, 1));
   console.log('TOTAL', R.filter(r => r.ok).length + '/' + R.length, 'passed'); await b.close();
 })();

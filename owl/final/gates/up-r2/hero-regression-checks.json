@@ -1,0 +1,484 @@
+[
+ {
+  "v": 1,
+  "check": "default view (no query) shows hero V1 only",
+  "ok": true
+ },
+ {
+  "v": 1,
+  "check": "backup hero-b1 kept in file, inert",
+  "ok": true
+ },
+ {
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "v": "1",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "Under Our Wing,Your Nest Is Safe"
+ },
+ {
+  "v": "1",
+  "check": "primary CTA goes to #book",
+  "ok": true,
+  "detail": "#book #services"
+ },
+ {
+  "v": "1",
+  "check": "every hero control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "1",
+  "check": "every control has a name",
+  "ok": true
+ },
+ {
+  "v": "1",
+  "check": "Storm test toggles",
+  "ok": true
+ },
+ {
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA on the hero: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "1",
+  "check": "reduced motion: loads clean, still frame / no pin",
+  "ok": true,
+  "detail": "{\"gl\":false,\"grid\":false}"
+ },
+ {
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "v": "2",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "We Give a Hoot About Your Roof"
+ },
+ {
+  "v": "2",
+  "check": "primary CTA goes to #book",
+  "ok": true,
+  "detail": "#book #services"
+ },
+ {
+  "v": "2",
+  "check": "every hero control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "2",
+  "check": "every control has a name",
+  "ok": true
+ },
+ {
+  "v": "2",
+  "check": "WebGL mesh is live (painting on the mesh)",
+  "ok": true
+ },
+ {
+  "v": "2",
+  "check": "owl head turns toward the cursor (frames differ)",
+  "ok": true
+ },
+ {
+  "v": "2",
+  "check": "Wings over the house toggles",
+  "ok": true
+ },
+ {
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA on the hero: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "2",
+  "check": "reduced motion: loads clean, still frame / no pin",
+  "ok": true,
+  "detail": "{\"gl\":false,\"grid\":false}"
+ },
+ {
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "v": "3",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "Every Layer, Done Right"
+ },
+ {
+  "v": "3",
+  "check": "primary CTA goes to #book",
+  "ok": true,
+  "detail": "#book #services"
+ },
+ {
+  "v": "3",
+  "check": "every hero control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "3",
+  "check": "every control has a name",
+  "ok": true
+ },
+ {
+  "v": "3",
+  "check": "layer key Roof deck explains the layer",
+  "ok": true
+ },
+ {
+  "v": "3",
+  "check": "hovering the roof names the layer under the cursor",
+  "ok": true,
+  "detail": "Roof deck"
+ },
+ {
+  "v": "3",
+  "check": "seven layers listed in build order",
+  "ok": true
+ },
+ {
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA on the hero: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "3",
+  "check": "reduced motion: loads clean, still frame / no pin",
+  "ok": true,
+  "detail": "{\"gl\":false,\"grid\":false}"
+ },
+ {
+  "v": "4",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "v": "4",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "Family Roofers From Shoreview"
+ },
+ {
+  "v": "4",
+  "check": "primary CTA goes to #book",
+  "ok": true,
+  "detail": "#book"
+ },
+ {
+  "v": "4",
+  "check": "every hero control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "4",
+  "check": "every control has a name",
+  "ok": true
+ },
+ {
+  "v": "4",
+  "check": "crew film has a source and plays",
+  "ok": true
+ },
+ {
+  "v": "4",
+  "check": "film roll loops seamlessly (7 photos + 7 hidden copies)",
+  "ok": true
+ },
+ {
+  "v": "4",
+  "check": "Watch the Full Film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "v": "4",
+  "check": "Escape closes the film",
+  "ok": true
+ },
+ {
+  "v": "4",
+  "check": "axe WCAG 2.1 A/AA on the hero: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "4",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "4",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "4",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "4",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "4",
+  "check": "reduced motion: loads clean, still frame / no pin",
+  "ok": true,
+  "detail": "{\"gl\":false,\"grid\":false}"
+ },
+ {
+  "v": "5",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "v": "5",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "The Numbers Behind Every Owl Roof"
+ },
+ {
+  "v": "5",
+  "check": "primary CTA goes to #book",
+  "ok": true,
+  "detail": "#book #services"
+ },
+ {
+  "v": "5",
+  "check": "every hero control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "5",
+  "check": "every control has a name",
+  "ok": true
+ },
+ {
+  "v": "5",
+  "check": "scroll lays the four numbers in order",
+  "ok": true,
+  "detail": "10-year workmanship warranty | Up to 50-year manufacturer warranty | 29 towns served from Shoreview | 5.0 · 90+ reviews"
+ },
+ {
+  "v": "5",
+  "check": "step key jumps to its number",
+  "ok": true
+ },
+ {
+  "v": "5",
+  "check": "the stage pins while scrolling",
+  "ok": true
+ },
+ {
+  "v": "5",
+  "check": "axe WCAG 2.1 A/AA on the hero: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "5",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "5",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "5",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "5",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "5",
+  "check": "reduced motion: loads clean, still frame / no pin",
+  "ok": true,
+  "detail": "{\"gl\":false,\"grid\":true}"
+ },
+ {
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "v": "6",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "What Does Your Roof Need?"
+ },
+ {
+  "v": "6",
+  "check": "primary CTA goes to #book",
+  "ok": true,
+  "detail": "#book #services"
+ },
+ {
+  "v": "6",
+  "check": "every hero control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "6",
+  "check": "every control has a name",
+  "ok": true
+ },
+ {
+  "v": "6",
+  "check": "each key turns the cover to its chapter",
+  "ok": true,
+  "detail": "Roof Repair | Storm Damage Help | Roof Replacement | Wise Check Inspection"
+ },
+ {
+  "v": "6",
+  "check": "exactly one key pressed",
+  "ok": true
+ },
+ {
+  "v": "6",
+  "check": "keys work from the keyboard",
+  "ok": true
+ },
+ {
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA on the hero: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "v": "6",
+  "check": "reduced motion: loads clean, still frame / no pin",
+  "ok": true,
+  "detail": "{\"gl\":false,\"grid\":false}"
+ }
+]

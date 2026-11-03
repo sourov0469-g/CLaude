@@ -1,0 +1,536 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "every homepage section is inside the home page",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "superseded versions kept as inert backups",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Watch the Crew at Work"
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "chapter chip seeks",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "reduced motion: loads clean, film not autoplaying, drawings shown complete",
+  "ok": true,
+  "detail": "{\"videoPaused\":true,\"built\":0}"
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Fifteen Seconds on an Owl Job"
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "contact strip holds real frames from the clip",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "strip steps the film from the keyboard",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "a moment jumps the film and marks itself",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "full film opens YouTube ehKLv5DF2TQ, Escape closes",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "2",
+  "check": "reduced motion: loads clean, film not autoplaying, drawings shown complete",
+  "ok": true,
+  "detail": "{\"videoPaused\":true,\"built\":0}"
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Our Crew, Up Close"
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "a vent on the roofline jumps the film",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "play key pauses the film",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "film light spills onto the page (glow canvas painted)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "3",
+  "check": "reduced motion: loads clean, film not autoplaying, drawings shown complete",
+  "ok": true,
+  "detail": "{\"videoPaused\":true,\"built\":0}"
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Explore Your Roof, Layer by Layer"
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "Roof deck lifts one layer and names it",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "arrow keys move through the layers",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "insulation explained as on the attic floor",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "reduced motion: loads clean, film not autoplaying, drawings shown complete",
+  "ok": true,
+  "detail": "{\"videoPaused\":null,\"built\":0}"
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Build a Roof, One Step at a Time"
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "the roof builds itself once to step 8",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "slider to step 4 shows the ice & water shield",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "Next goes to underlayment",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "2",
+  "check": "reduced motion: loads clean, film not autoplaying, drawings shown complete",
+  "ok": true,
+  "detail": "{\"videoPaused\":null,\"built\":8}"
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Can You Build It in the Right Order?"
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "wrong layer: hint names what comes first",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "keyboard builds the roof in order and wins",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "Play again resets",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "3",
+  "check": "reduced motion: loads clean, film not autoplaying, drawings shown complete",
+  "ok": true,
+  "detail": "{\"videoPaused\":null,\"built\":0}"
+ }
+]
