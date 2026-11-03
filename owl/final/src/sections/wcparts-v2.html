@@ -1,0 +1,54 @@
+<section class="sec wp2" id="wise-includes-2" aria-labelledby="wp2-h">
+<style>
+.wp2 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.wp2 .lede{margin:14px 0 0;max-width:34ch}
+.wp2 .knobwrap{position:relative;width:min(100%,460px);aspect-ratio:1;justify-self:center}
+.wp2 .plate{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FBF6EA,#EFE6D2 70%,#E2D5B8);box-shadow:inset 0 2px 0 #fff,0 30px 60px -30px rgba(23,17,29,.5)}
+.wp2 .lab{position:absolute;transform:translate(-50%,-50%);min-height:40px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:700;font-size:14px;box-shadow:0 3px 0 rgba(23,17,29,.1);white-space:nowrap;transition:background .25s}
+.wp2 .lab[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.wp2 .knob{position:absolute;inset:26%;border-radius:50%;background:conic-gradient(from 0deg,#F7CD78,#EAA221 20%,#B9791A 40%,#F3BE5A 60%,#C7871A 80%,#F7CD78);box-shadow:0 14px 0 #8E5A12,0 30px 40px -10px rgba(23,17,29,.6),inset 0 3px 3px rgba(255,255,255,.6);cursor:grab;touch-action:none;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.wp2 .knob.drag{transition:none;cursor:grabbing}
+.wp2 .knob::before{content:"";position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FCE3A6,#EAA221 60%,#C7871A);box-shadow:inset 0 -3px 6px rgba(120,70,0,.35)}
+.wp2 .knob::after{content:"";position:absolute;left:50%;top:7%;width:10px;height:26%;margin-left:-5px;border-radius:5px;background:var(--ink)}
+.wp2 .knob:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+.wp2 .screen{border-radius:28px;padding:clamp(22px,3vw,34px);background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 60px -36px rgba(23,17,29,.5);min-height:220px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;overflow:hidden}
+.wp2 .screen svg{width:96px;height:96px;color:var(--ink)}
+.wp2 .screen .n{font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--ink-70)}
+.wp2 .screen h3{font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.03em;margin:4px 0 6px}
+.wp2 .screen p{font-size:18px;color:var(--ink-70)}
+.wp2 .screen .in{animation:wp2in .45s var(--ease)}
+@keyframes wp2in{from{opacity:0;transform:translateY(12px)}}
+.wp2 .ctas{margin-top:22px}
+@media (max-width:900px){.wp2 .g{grid-template-columns:1fr}.wp2 .knobwrap{width:min(calc(100% - 70px),320px)}.wp2 .lab{font-size:12px;padding:0 10px}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2 rv" id="wp2-h">Turn the Dial Through a Wise Check</h2>
+   <p class="lede rv">Four parts, in Owl's own words. Drag the knob or press a label.</p>
+   <div class="screen" aria-live="polite" style="margin-top:26px"></div>
+   <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+  </div>
+  <div class="knobwrap" data-owl="say:Give it a turn"><div class="plate"></div><div class="knob" role="slider" tabindex="0" aria-label="Choose a part of the Wise Check" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"></div></div>
+ </div>
+</div>
+<script>
+OWL.reg('wcparts','2',function(root){
+  var P = OWL.WISE.parts, wrap = root.querySelector('.knobwrap'), knob = root.querySelector('.knob'), screen = root.querySelector('.screen'), A = [-45, 45, 135, 225], labs = [], cur = -1, rot = A[0];
+  P.forEach(function(p, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'lab'; b.textContent = ['Roof evaluation','Attic inspection','Leak detection','Photo and video'][i]; b.setAttribute('aria-pressed', 'false');
+    var a = (A[i] - 90)*Math.PI/180; b.style.left = (50 + Math.cos(a)*44) + '%'; b.style.top = (50 + Math.sin(a)*44) + '%'; b.addEventListener('click', function(){ set(i); }); wrap.appendChild(b); labs.push(b); });
+  function set(i){ if (i === cur) return; cur = i; var target = A[i]; while (target - rot > 180) target -= 360; while (rot - target > 180) target += 360; rot = target;
+    knob.style.transform = 'rotate(' + rot + 'deg)'; knob.setAttribute('aria-valuenow', i + 1); knob.setAttribute('aria-valuetext', P[i].n);
+    labs.forEach(function(l, j){ l.setAttribute('aria-pressed', j === i); });
+    screen.innerHTML = '<svg class="in" viewBox="0 0 64 64" aria-hidden="true">' + P[i].ico + '</svg><div class="in"><span class="n">PART 0' + (i + 1) + ' OF 04</span><h3>' + P[i].n + '</h3><p>' + P[i].t + '</p></div>'; }
+  var drag = false;
+  function ang(e){ var r = knob.getBoundingClientRect(); return Math.atan2(e.clientY - (r.top + r.height/2), e.clientX - (r.left + r.width/2))*180/Math.PI + 90; }
+  knob.addEventListener('pointerdown', function(e){ drag = true; knob.classList.add('drag'); knob.setPointerCapture(e.pointerId); });
+  knob.addEventListener('pointermove', function(e){ if (!drag) return; var a = ang(e); knob.style.transform = 'rotate(' + a + 'deg)';
+    var best = 0, bd = 999; A.forEach(function(t, i){ var d = Math.abs(((a - t + 540) % 360) - 180); if (d < bd){ bd = d; best = i; } }); rot = a; if (best !== cur){ var keep = rot; cur = -1; set(best); rot = keep; knob.style.transform = 'rotate(' + a + 'deg)'; } });
+  knob.addEventListener('pointerup', function(){ drag = false; knob.classList.remove('drag'); var c = cur; cur = -1; set(c); });
+  knob.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight' || e.key === 'ArrowUp'){ e.preventDefault(); set((cur + 1) % 4); } if (e.key === 'ArrowLeft' || e.key === 'ArrowDown'){ e.preventDefault(); set((cur + 3) % 4); } });
+  set(0);
+});
+</script>
+</section>

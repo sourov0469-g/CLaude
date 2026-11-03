@@ -1,0 +1,16 @@
+/* The Wise Check, in Owl's own published words: "a detailed roof and attic evaluation, clear photo and video
+   documentation, and leak detection tools"; listed parts: Attic Inspection and Heat-Sensor Leak Detection. */
+OWL.WISE = {
+ parts:[
+  {n:'Roof evaluation', t:'Shingles, flashing, ventilation and gutters, looked at up close.', ico:'<path d="M6 36 L32 14 L58 36" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><circle cx="40" cy="42" r="10" fill="none" stroke="#EAA221" stroke-width="4"/><path d="M47 49 l8 8" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/>'},
+  {n:'Attic inspection', t:'The underside of the roof, where leaks and airflow problems often show.', ico:'<path d="M6 40 L32 12 L58 40Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M20 40 L32 24 L44 40" fill="#EAA221" opacity=".85"/><path d="M32 30 v6" stroke="currentColor" stroke-width="3"/><path d="M10 50h44" stroke="currentColor" stroke-width="4"/>'},
+  {n:'Heat-sensor leak detection', t:'Leak detection tools that help find moisture you cannot see.', ico:'<rect x="10" y="16" width="34" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="27" cy="29" r="7" fill="#EAA221"/><path d="M44 24 l10 -4 v18 l-10 -4" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M20 50 q7 -6 14 0" stroke="#EAA221" stroke-width="3" fill="none"/>'},
+  {n:'Photo and video documentation', t:'Clear photos and video, so you see what we saw.', ico:'<rect x="8" y="18" width="48" height="32" rx="6" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="32" cy="34" r="9" fill="none" stroke="#EAA221" stroke-width="4"/><path d="M22 18 l4 -6 h12 l4 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>'}
+ ],
+ cases:[
+  {n:'After a storm', t:'Hail and wind leave marks that are easy to miss from the ground.', f:[0,3], ico:'<path d="M16 32a10 10 0 1 1 3-19.5A13 13 0 0 1 44 14a9 9 0 0 1 2 18z" fill="none" stroke="currentColor" stroke-width="4"/><path d="M22 42v6M32 40v8M42 42v6" stroke="#EAA221" stroke-width="4" stroke-linecap="round"/>'},
+  {n:'A leak or a stain', t:'Water travels before it shows, so we look above the stain as well as at it.', f:[2,1], ico:'<path d="M32 10 C22 26 18 32 18 40 a14 14 0 0 0 28 0 c0 -8 -4 -14 -14 -30z" fill="none" stroke="currentColor" stroke-width="4"/><path d="M26 42 a6 6 0 0 0 6 6" stroke="#EAA221" stroke-width="4" fill="none" stroke-linecap="round"/>'},
+  {n:'An older roof', t:'Worn granules, tired flashing and how well the attic breathes.', f:[0,1], ico:'<path d="M8 40 L32 18 L56 40" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M14 40v14h36V40" fill="none" stroke="currentColor" stroke-width="4"/><path d="M22 30 l6 4 M38 28 l4 6" stroke="#EAA221" stroke-width="3" stroke-linecap="round"/>'},
+  {n:'Just checking', t:'A careful look now gives you a clear picture of where your roof stands.', f:[0,1,2,3], ico:'<circle cx="32" cy="34" r="20" fill="none" stroke="currentColor" stroke-width="4"/><path d="M23 34 l6 6 12 -13" stroke="#EAA221" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'}
+ ]
+};

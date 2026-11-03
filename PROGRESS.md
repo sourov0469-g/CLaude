@@ -30,7 +30,10 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
   `#/services`; anchors switch page when needed; Back works) and the Services page: hero V1 opening photo panels 7.88 / V2
   icon picker 7.84; process V1 scroll timeline 7.88 / V2 shingle-course stepper 8.02; shared "Start with a Wise Check" band.
   Axe 0; tests clean; no phone overflow.
-- **Next:** Wise Check page (#/wise-check), then Protect Your Nest, About, Service Area, Contact (5–6+ sections each).
+- **ROUND 7 DONE (gate `owl/final/GATE-R7.md`, shots `owl/final/gates/r7/`):** Wise Check page (#/wise-check), in Owl's
+  own published wording: hero V1 case picker 8.06 / V2 heat-sensor scan 8.04; includes V1 flip cards 7.78 / V2 rotary knob
+  7.94. Axe 0; tests clean; no phone overflow.
+- **Next:** Protect Your Nest page, then About, Service Area, Contact; then deepen inner pages to 5–6+ sections each.
 
 ---
 

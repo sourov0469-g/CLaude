@@ -1,0 +1,52 @@
+<section class="sec pghero wc2" id="wise-top-2" aria-labelledby="wc2-h">
+<style>
+.wc2 .hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:16px 48px;align-items:end}
+.wc2 .lede{max-width:38ch}
+.wc2 .scan{position:relative;margin-top:clamp(24px,3vw,36px);aspect-ratio:640/360;border-radius:28px;overflow:hidden;box-shadow:0 0 0 10px var(--paper),0 40px 70px -36px rgba(23,17,29,.55);touch-action:none;user-select:none}
+.wc2 .scan img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.wc2 .heat{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--x,40%)) 0 0)}
+.wc2 .heat img{filter:grayscale(1) contrast(1.35) brightness(.7)}
+.wc2 .heat::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--hx,38%) var(--hy,40%),rgba(255,214,120,.95) 0,rgba(234,162,33,.85) 5%,rgba(234,162,33,.35) 12%,rgba(234,162,33,0) 20%),linear-gradient(180deg,rgba(23,17,29,.45),rgba(23,17,29,.15));mix-blend-mode:screen}
+.wc2 .bar{position:absolute;top:0;bottom:0;left:var(--x,40%);width:4px;margin-left:-2px;background:var(--amber);box-shadow:0 0 18px 4px rgba(234,162,33,.7)}
+.wc2 .grip{position:absolute;top:50%;left:var(--x,40%);width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 5px 0 var(--amber-edge),0 14px 24px -8px rgba(23,17,29,.6);display:grid;place-items:center;cursor:grab}
+.wc2 .grip svg{width:28px;height:28px;color:var(--ink)}
+.wc2 .grip:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.wc2 .spot{position:absolute;left:var(--hx,38%);top:var(--hy,40%);transform:translate(-50%,-140%);background:var(--ink);color:var(--cream);font-weight:700;font-size:14px;padding:7px 12px;border-radius:999px;white-space:nowrap;opacity:0;transition:opacity .3s}
+.wc2 .scan.found .spot{opacity:1}
+.wc2 .tags{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;pointer-events:none}
+.wc2 .tags span{background:rgba(248,246,240,.92);font-weight:700;font-size:13px;letter-spacing:.06em;padding:6px 10px;border-radius:999px}
+.wc2 .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:26px}
+.wc2 .foot p{font-size:15px;color:var(--ink-70);max-width:56ch}
+@media (max-width:900px){.wc2 .hd{grid-template-columns:1fr}.wc2 .scan{aspect-ratio:4/3}}
+</style>
+<div class="wrap">
+ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>Wise Check</span></nav>
+ <div class="hd"><h1 class="h1" id="wc2-h" style="font-size:clamp(40px,5vw,72px)">The Wise Check Sees Below the Surface</h1><p class="lede">Heat-sensor leak detection is part of the Wise Check. Drag the scanner across the roof.</p></div>
+ <div class="scan" data-owl="say:Scanning…">
+  <img src="{{A:roof-surface.webp}}" alt="A finished asphalt shingle roof with a vent pipe">
+  <div class="heat" aria-hidden="true"><img src="{{A:roof-surface.webp}}" alt=""></div>
+  <span class="bar" aria-hidden="true"></span>
+  <span class="spot" aria-hidden="true">Warm spot: moisture shows up here</span>
+  <span class="grip" role="slider" tabindex="0" aria-label="Move the heat scanner across the roof" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+  <div class="tags" aria-hidden="true"><span>What the sensor sees</span><span>What you see</span></div>
+ </div>
+ <div class="foot"><p>Illustration of how a heat sensor shows moisture as a warm patch; on a real Wise Check you get the photos and video of your own roof.</p><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('wchero','2',function(root){
+  var scan = root.querySelector('.scan'), grip = scan.querySelector('.grip'), x = 0, drag = false, HX = 33;
+  /* the warm spot sits at the vent pipe, a common place for a leak to start */
+  scan.style.setProperty('--hx', HX + '%'); scan.style.setProperty('--hy', '30%');
+  function set(v){ x = Math.max(0, Math.min(100, v)); scan.style.setProperty('--x', x + '%'); grip.setAttribute('aria-valuenow', Math.round(x)); scan.classList.toggle('found', x > HX + 4); }
+  function fromE(e){ var r = scan.getBoundingClientRect(); return (e.clientX - r.left)/r.width*100; }
+  scan.addEventListener('pointerdown', function(e){ drag = true; scan.setPointerCapture(e.pointerId); set(fromE(e)); });
+  scan.addEventListener('pointermove', function(e){ if (drag) set(fromE(e)); });
+  scan.addEventListener('pointerup', function(){ drag = false; }); scan.addEventListener('pointercancel', function(){ drag = false; });
+  grip.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); set(x + 5); } if (e.key === 'ArrowLeft'){ e.preventDefault(); set(x - 5); } if (e.key === 'Home') set(0); if (e.key === 'End') set(100); });
+  set(0);
+  if (OWL.reduce) { set(60); return; }
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(es){ if (!es[0].isIntersecting) return; io.disconnect(); var t0 = performance.now();
+    (function f(t){ var k = Math.min(1, (t - t0)/1800); if (!drag) set(60*(1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0); }, {threshold:.4}); io.observe(scan); }
+});
+</script>
+</section>

@@ -1,0 +1,41 @@
+<section class="sec wp1" id="wise-includes" aria-labelledby="wp1-h">
+<style>
+.wp1 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px}
+.wp1 .lede{max-width:40ch}
+.wp1 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:clamp(24px,3vw,36px)}
+.wp1 .card{position:relative;aspect-ratio:3/4;perspective:1200px}
+.wp1 .flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,1.3,.5,1);border-radius:24px;text-align:left}
+.wp1 .card.on .flip{transform:rotateY(180deg)}
+.wp1 .face{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 0 #fff inset,0 30px 50px -30px rgba(23,17,29,.55)}
+.wp1 .front{background:var(--paper)}
+.wp1 .front svg{width:70%;max-width:150px;height:auto;color:var(--ink)}
+.wp1 .front b{font-size:clamp(20px,1.8vw,24px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.wp1 .front .n{font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--ink-70)}
+.wp1 .back{background:var(--amber);transform:rotateY(180deg);box-shadow:0 6px 0 var(--amber-edge),0 30px 50px -30px rgba(199,135,26,.8)}
+.wp1 .back b{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.wp1 .back p{font-size:17px;line-height:1.45}
+.wp1 .back .inc{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+.wp1 .flip:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.wp1 .hint{margin-top:16px;font-size:15px;color:var(--ink-70)}
+@media (max-width:1000px){.wp1 .grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.wp1 .grid{grid-template-columns:1fr}.wp1 .card{aspect-ratio:4/3}}
+</style>
+<div class="wrap">
+ <div class="hd"><h2 class="h2 rv" id="wp1-h">What a Wise Check Includes</h2><p class="lede rv">Four parts, in Owl's own words. Turn a card over.</p></div>
+ <div class="grid"></div>
+</div>
+<script>
+OWL.reg('wcparts','1',function(root){
+  var g = root.querySelector('.grid');
+  OWL.WISE.parts.forEach(function(p, i){
+    var c = document.createElement('div'); c.className = 'card';
+    c.innerHTML = '<button class="flip" type="button" aria-pressed="false" aria-label="' + p.n + ': show details" data-owl="say:Flip it"><span class="face front"><span class="n">0' + (i + 1) + '</span><svg viewBox="0 0 64 64" aria-hidden="true">' + p.ico + '</svg><b>' + p.n + '</b></span>' +
+      '<span class="face back"><b>' + p.n + '</b><p>' + p.t + '</p><span class="inc"><svg width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#17111D"/><path d="M6.5 11.5l3 3 6-7" stroke="#EAA221" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>Part of the Wise Check</span></span></button>';
+    var b = c.querySelector('.flip'); b.addEventListener('click', function(){ var on = c.classList.toggle('on'); b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', p.n + (on ? ': ' + p.t : ': show details')); });
+    if (OWL.fine && !OWL.reduce){ c.addEventListener('pointermove', function(e){ if (c.classList.contains('on')) return; var r = c.getBoundingClientRect(); b.style.transform = 'rotateY(' + (((e.clientX - r.left)/r.width - .5)*14).toFixed(1) + 'deg) rotateX(' + (-((e.clientY - r.top)/r.height - .5)*10).toFixed(1) + 'deg)'; });
+      c.addEventListener('pointerleave', function(){ b.style.transform = ''; }); b.addEventListener('click', function(){ b.style.transform = ''; }); }
+    g.appendChild(c);
+  });
+});
+</script>
+</section>

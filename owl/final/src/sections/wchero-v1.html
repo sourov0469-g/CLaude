@@ -1,0 +1,63 @@
+<section class="sec pghero wc1" id="wise-top" aria-labelledby="wc1-h">
+<style>
+.wc1 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.wc1 .tt{display:flex;align-items:center;gap:20px}
+.wc1 .tt img{width:clamp(76px,8vw,110px);height:auto;filter:drop-shadow(0 12px 16px rgba(23,17,29,.25))}
+.wc1 .lede{margin:18px 0 26px;max-width:36ch}
+.wc1 .q{font-weight:700;font-size:20px;margin-bottom:12px}
+.wc1 .cases{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wc1 .c{display:flex;align-items:center;gap:12px;min-height:76px;padding:12px 16px;border-radius:18px;background:var(--paper);text-align:left;font-weight:700;font-size:17px;box-shadow:0 5px 0 rgba(23,17,29,.08),0 16px 26px -20px rgba(23,17,29,.55);transition:transform .25s var(--ease),background .25s,box-shadow .25s}
+.wc1 .c:hover{transform:translateY(-3px)}
+.wc1 .c:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(23,17,29,.08)}
+.wc1 .c svg{width:40px;height:40px;flex:none;color:var(--ink)}
+.wc1 .c[aria-checked="true"]{background:var(--amber);box-shadow:0 6px 0 var(--amber-edge),0 18px 30px -16px rgba(199,135,26,.8)}
+.wc1 .c[aria-checked="true"] svg [stroke="#EAA221"]{stroke:#17111D}
+.wc1 .pan{border-radius:28px;background:var(--paper);padding:clamp(22px,3vw,36px);box-shadow:0 2px 0 #fff inset,0 36px 60px -36px rgba(23,17,29,.55)}
+.wc1 .pan .k{font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-70)}
+.wc1 .pan h2{font-size:clamp(26px,2.8vw,38px);font-weight:800;letter-spacing:-.03em;margin:6px 0 8px}
+.wc1 .pan>p{color:var(--ink-70);font-size:18px;margin-bottom:20px}
+.wc1 .parts{list-style:none;display:grid;gap:10px;margin-bottom:22px}
+.wc1 .parts li{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;padding:12px 14px;border-radius:16px;background:var(--cream);transition:background .35s,transform .35s var(--ease),box-shadow .35s;box-shadow:inset 0 0 0 1px var(--line)}
+.wc1 .parts li.hi{background:rgba(234,162,33,.2);box-shadow:inset 4px 0 0 var(--amber);transform:translateX(6px)}
+.wc1 .parts svg{width:44px;height:44px;color:var(--ink)}
+.wc1 .parts b{display:block;font-size:17px}
+.wc1 .parts span{font-size:15px;color:var(--ink-70)}
+@media (max-width:900px){.wc1 .g{grid-template-columns:1fr}}
+@media (max-width:480px){.wc1 .cases{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>Wise Check</span></nav>
+ <div class="g">
+  <div>
+   <div class="tt"><img src="{{A:wise-badge.png}}" alt="The Wise Check badge" width="176" height="210"><h1 class="h1" id="wc1-h" style="font-size:clamp(42px,5.4vw,76px)">The Wise Check</h1></div>
+   <p class="lede">Owl Roofing's thorough, no-guesswork roof assessment.</p>
+   <p class="q" id="wc1-q">What's going on with your roof?</p>
+   <div class="cases" role="radiogroup" aria-labelledby="wc1-q"></div>
+  </div>
+  <div class="pan" aria-live="polite">
+   <span class="k">Your Wise Check</span><h2></h2><p></p>
+   <ul class="parts"></ul>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wchero','1',function(root){
+  var W = OWL.WISE, box = root.querySelector('.cases'), pan = root.querySelector('.pan'), ul = pan.querySelector('.parts'), bs = [];
+  ul.innerHTML = W.parts.map(function(p){ return '<li><svg viewBox="0 0 64 64" aria-hidden="true">' + p.ico + '</svg><div><b>' + p.n + '</b><span>' + p.t + '</span></div></li>'; }).join('');
+  var lis = ul.querySelectorAll('li');
+  W.cases.forEach(function(c, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'c'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false'); b.tabIndex = -1; b.dataset.owl = 'peek';
+    b.innerHTML = '<svg viewBox="0 0 64 64" aria-hidden="true">' + c.ico + '</svg>' + c.n; b.addEventListener('click', function(){ pick(i); });
+    b.addEventListener('keydown', function(e){ var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0; if (d){ e.preventDefault(); pick((i + d + bs.length) % bs.length, true); } });
+    box.appendChild(b); bs.push(b); });
+  function pick(i, focus){ var c = W.cases[i];
+    bs.forEach(function(b, j){ b.setAttribute('aria-checked', j === i); b.tabIndex = j === i ? 0 : -1; if (j === i && focus) b.focus(); });
+    pan.querySelector('h2').textContent = c.n; pan.querySelector('p').textContent = c.t;
+    /* the parts that matter most for this case come first and light up; the rest stay in the list (every Wise Check covers all four) */
+    var order = c.f.concat([0,1,2,3].filter(function(k){ return c.f.indexOf(k) < 0; }));
+    order.forEach(function(k, pos){ var li = lis[k]; li.style.order = pos; li.classList.toggle('hi', c.f.indexOf(k) > -1); });
+    ul.style.display = 'grid'; }
+  pick(0);
+});
+</script>
+</section>
