@@ -295,7 +295,12 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
   - **Background tasks:** none; no sub-agents.
 - **ALL 6 PAGES BUILT:** Home 11 sections, Services 6, Storm damage 6, Protect Your Nest 6, Our families 6, Contact and
   Price My Roof 7: 42 sections, each with exactly two versions and a gate.
-- **Next:** a whole-site pass (every page at 1440/768/390, defaults and all-V2, reduced motion), then a final site gate.
+- **WHOLE-SITE PASS DONE; final site gate `owl/GATE-SITE.md`.** `sitepass.mjs`: 42 page renders (6 pages × 1440/768/390
+  × defaults and all-V2, plus reduced motion), 0 failures (overflow, one h1, broken images, deep block last, JS
+  errors); no internal link points nowhere. The gate lists five honest remaining items.
+- **Next:** none in the brief and addendum beyond the remaining items in GATE-SITE.md, which need the owner's call
+  (homepage price/area rule fixes on judged sections; a back end for the message form; the Quincy pledge; a real-device
+  check).
 - **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.
