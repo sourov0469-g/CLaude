@@ -19,6 +19,7 @@
 <a class="skip" href="#main">Skip to content</a>
 {{P:header.html}}
 <main id="main">
+<div class="page" data-page="home" data-title="Owl Roofing · Shoreview, MN · We Give a Hoot">
 {{SEC:hero}}
 {{SEC:video}}
 {{SEC:explore}}
@@ -29,9 +30,19 @@
 {{SEC:area}}
 {{SEC:family}}
 {{SEC:booking}}
+</div>
+<div class="page" data-page="services" data-title="Roofing Services · Owl Roofing" hidden>
+{{SEC:svchero}}
+{{SEC:svcsteps}}
+{{P:ctaband.html}}
+</div>
 </main>
 {{P:footer.html}}
 {{P:companion.html}}
+<script>
+{{JS:lib/services-data.js}}
+{{JS:lib/steps-data.js}}
+</script>
 <script>OWL.media={crew:"{{A:crew.mp4}}","svc-replace":"{{A:svc-replace.webp}}","svc-repair":"{{A:svc-repair.webp}}","svc-storm":"{{A:svc-storm.webp}}","svc-check":"{{A:svc-check.webp}}","svc-siding":"{{A:svc-siding.webp}}"};</script>
 </body>
 </html>

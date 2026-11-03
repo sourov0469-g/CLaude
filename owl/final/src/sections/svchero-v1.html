@@ -1,0 +1,43 @@
+<section class="sec pghero sh1" id="services-top" aria-labelledby="sh1-h">
+<style>
+.sh1 .hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:20px 48px;align-items:end}
+.sh1 .lede{max-width:40ch}
+.sh1 .panels{display:flex;gap:12px;height:clamp(420px,52vw,600px);margin-top:clamp(26px,4vw,44px)}
+.sh1 .p{position:relative;flex:1;min-width:0;border-radius:24px;overflow:hidden;background:#3a3142 center/cover;transition:flex-grow .7s var(--ease),box-shadow .3s;text-align:left;box-shadow:0 24px 40px -26px rgba(23,17,29,.6)}
+.sh1 .p.on{flex-grow:4.2}
+.sh1 .p::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,17,29,.88) 0%,rgba(23,17,29,.35) 45%,rgba(23,17,29,.08) 75%);transition:background .5s}
+.sh1 .p:not(.on)::before{background:linear-gradient(0deg,rgba(23,17,29,.8),rgba(23,17,29,.45))}
+.sh1 .p .vt{position:absolute;left:50%;bottom:28px;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;color:var(--cream);font-weight:700;font-size:20px;white-space:nowrap;transition:opacity .3s}
+.sh1 .p.on .vt{opacity:0}
+.sh1 .p .num{position:absolute;left:18px;top:16px;color:var(--cream);font-weight:700;font-size:14px;letter-spacing:.12em}
+.sh1 .p .in{position:absolute;left:28px;right:28px;bottom:26px;color:var(--cream);opacity:0;transform:translateY(16px);transition:opacity .4s .15s,transform .5s var(--ease) .15s;pointer-events:none}
+.sh1 .p.on .in{opacity:1;transform:none;pointer-events:auto}
+.sh1 .in h2{font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.sh1 .in p{margin:10px 0 16px;max-width:44ch;font-size:17px;color:rgba(241,239,230,.88)}
+.sh1 .in ul{list-style:none;display:grid;gap:6px;margin-bottom:18px;font-size:15px}
+.sh1 .in li{display:flex;gap:10px}.sh1 .in li::before{content:"";flex:none;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--amber)}
+.sh1 .p .tap{position:absolute;inset:0;width:100%;height:100%;border-radius:24px}
+.sh1 .p .tap:focus-visible{outline:3px solid var(--amber);outline-offset:-6px}
+@media (max-width:820px){.sh1 .hd{grid-template-columns:1fr}.sh1 .panels{flex-direction:column;height:auto}.sh1 .p{min-height:76px;flex:none}.sh1 .p.on{min-height:540px}.sh1 .p .vt{writing-mode:horizontal-tb;transform:none;left:20px;bottom:24px}.sh1 .p .num{left:auto;right:18px}}
+</style>
+<div class="wrap">
+ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>Services</span></nav>
+ <div class="hd"><h1 class="h1" id="sh1-h">Roofing Services, Start to Finish</h1><p class="lede">Five jobs, one family-owned crew from Shoreview. Choose one to see what is included.</p></div>
+ <div class="panels" role="list"></div>
+</div>
+<script>
+OWL.reg('svchero','1',function(root){
+  var box = root.querySelector('.panels'), ps = [];
+  OWL.SVC.forEach(function(s, i){
+    var p = document.createElement('div'); p.className = 'p'; p.setAttribute('role', 'listitem'); p.style.backgroundImage = 'url(' + OWL.media[s.img] + ')';
+    p.innerHTML = '<span class="num">0' + (i + 1) + '</span><span class="vt" aria-hidden="true">' + s.n + '</span><button class="tap" type="button" aria-expanded="false" aria-label="' + s.n + '" data-owl="peek"></button>' +
+      '<div class="in"><h2>' + s.n + '</h2><p>' + s.d + '</p><ul>' + s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul><a class="btn btn-amber btn-sm" href="#book" data-mag>Book a Wise Check</a></div>';
+    var b = p.querySelector('.tap'); b.addEventListener('click', function(){ open(i); }); b.addEventListener('focus', function(){ open(i); });
+    p.addEventListener('mouseenter', function(){ if (OWL.fine) open(i); });
+    box.appendChild(p); ps.push(p);
+  });
+  function open(i){ ps.forEach(function(p, j){ p.classList.toggle('on', j === i); var b = p.querySelector('.tap'); b.setAttribute('aria-expanded', j === i); b.style.pointerEvents = j === i ? 'none' : ''; }); }
+  open(0); OWL.magnets(root);
+});
+</script>
+</section>

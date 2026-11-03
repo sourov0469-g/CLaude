@@ -124,3 +124,13 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px)}
 .chips button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);box-shadow:0 3px 0 var(--amber-edge)}
 .form-msg{min-height:24px;font-size:15px;font-weight:600}
 .form-msg.err{color:#b3261e}
+
+/* pages: one file, one page shown at a time */
+.page[hidden]{display:none!important}
+.hdr-nav a[aria-current="page"]{background:rgba(234,162,33,.22)}
+.ctaband .cb{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:clamp(28px,4vw,48px);border-radius:30px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 60px -40px rgba(23,17,29,.45)}
+.ctaband .lede{margin-top:10px}
+.ctaband .cb-a{display:flex;flex-wrap:wrap;gap:14px}
+.pghero{padding-top:clamp(28px,4vw,56px)}
+.crumb{display:flex;gap:8px;font-size:15px;font-weight:600;color:var(--ink-70);margin-bottom:16px}
+.crumb a{color:var(--ink);text-underline-offset:4px}

@@ -1,0 +1,51 @@
+<section class="sec ss1" id="how-it-runs" aria-labelledby="ss1-h">
+<style>
+.ss1 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px)}
+.ss1 .stick{position:sticky;top:110px;align-self:start}
+.ss1 .lede{margin:16px 0 28px;max-width:34ch}
+.ss1 .badge{position:relative;width:min(100%,340px);aspect-ratio:1}
+.ss1 .badge svg.ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.ss1 .badge .bg{fill:none;stroke:rgba(23,17,29,.1);stroke-width:14}
+.ss1 .badge .fg{fill:none;stroke:var(--amber);stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .6s var(--ease)}
+.ss1 .badge .mid{position:absolute;inset:14%;border-radius:50%;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 50px -30px rgba(23,17,29,.5);display:grid;place-items:center;text-align:center;padding:12%}
+.ss1 .badge .ico{width:42%;height:auto;color:var(--ink);transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.ss1 .badge.pop .ico{transform:scale(.7) rotate(-8deg)}
+.ss1 .badge b{display:block;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-70);margin-top:6px}
+.ss1 ol{list-style:none;position:relative;padding-left:46px}
+.ss1 ol::before{content:"";position:absolute;left:14px;top:10px;bottom:10px;width:4px;border-radius:4px;background:rgba(23,17,29,.1)}
+.ss1 ol .fill{position:absolute;left:14px;top:10px;width:4px;border-radius:4px;background:var(--amber);height:0;transition:height .6s var(--ease)}
+.ss1 li{position:relative;min-height:min(46vh,380px);padding:6px 0 40px}
+.ss1 li::before{content:"";position:absolute;left:-41px;top:12px;width:22px;height:22px;border-radius:50%;background:var(--cream);border:4px solid rgba(23,17,29,.2);transition:.4s}
+.ss1 li.done::before,.ss1 li.on::before{border-color:var(--amber);background:var(--amber)}
+.ss1 li.on::before{box-shadow:0 0 0 8px rgba(234,162,33,.22)}
+.ss1 li button{display:block;text-align:left}
+.ss1 li .n{font-weight:700;font-size:14px;letter-spacing:.14em;color:var(--ink-70)}
+.ss1 li h3{font-size:clamp(26px,2.8vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:6px 0 10px;color:var(--ink-50);transition:color .3s}
+.ss1 li.on h3{color:var(--ink)}
+.ss1 li p{font-size:18px;color:var(--ink-70);max-width:40ch}
+@media (max-width:900px){.ss1 .g{grid-template-columns:1fr}.ss1 .stick{position:relative;top:auto}.ss1 .badge{display:none}.ss1 li{min-height:0;padding-bottom:30px}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="stick">
+   <h2 class="h2 rv" id="ss1-h">How a Roof Replacement Runs</h2>
+   <p class="lede rv">Seven steps, from the first look to the last nail swept up.</p>
+   <div class="badge" aria-hidden="true"><svg class="ring" viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="88"/><circle class="fg" cx="100" cy="100" r="88"/></svg><div class="mid"><svg class="ico" viewBox="0 0 64 64"></svg><b></b></div></div>
+  </div>
+  <ol><span class="fill" aria-hidden="true"></span></ol>
+ </div>
+</div>
+<script>
+OWL.reg('svcsteps','1',function(root){
+  var lock = 0, ol = root.querySelector('ol'), fill = ol.querySelector('.fill'), badge = root.querySelector('.badge'), ico = badge.querySelector('.ico'), lab = badge.querySelector('b'), fg = badge.querySelector('.fg'), C = 2*Math.PI*88, lis = [], cur = -1;
+  fg.style.strokeDasharray = C; fg.style.strokeDashoffset = C;
+  OWL.STEPS.forEach(function(s, i){ var li = document.createElement('li'); li.innerHTML = '<button type="button"><span class="n">STEP 0' + (i + 1) + '</span><h3>' + s.n + '</h3><p>' + s.t + '</p></button>';
+    li.querySelector('button').addEventListener('click', function(){ lock = Date.now() + 1200; set(i); li.scrollIntoView({behavior: OWL.reduce ? 'auto' : 'smooth', block:'center'}); }); ol.appendChild(li); lis.push(li); });
+  function set(i){ if (i === cur) return; cur = i; lis.forEach(function(l, j){ l.classList.toggle('on', j === i); l.classList.toggle('done', j < i); });
+    var top = lis[0].offsetTop, h = lis[i].offsetTop - top + 20; fill.style.height = Math.max(0, h) + 'px';
+    fg.style.strokeDashoffset = C*(1 - (i + 1)/lis.length); badge.classList.add('pop'); setTimeout(function(){ ico.innerHTML = OWL.STEPS[i].ico; lab.textContent = (i + 1) + ' of ' + lis.length; badge.classList.remove('pop'); }, OWL.reduce ? 0 : 160); }
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(es){ if (Date.now() < lock) return; es.forEach(function(e){ if (e.isIntersecting) set(lis.indexOf(e.target)); }); }, {rootMargin:'-45% 0px -50% 0px'}); lis.forEach(function(l){ io.observe(l); }); }
+  set(0);
+});
+</script>
+</section>

@@ -136,7 +136,30 @@ OWL.ytModal = function(id){
   d.querySelector('.ytm-x').focus();
 };
 
+/* router: every page lives in this one file; #/name shows a page, #anchor scrolls (switching page if needed) */
+function router(){
+  var pages = document.querySelectorAll('.page'); if (!pages.length) return;
+  function show(name, anchor){
+    var pg = document.querySelector('.page[data-page="' + name + '"]') || document.querySelector('.page[data-page="home"]'), changed = pg.hidden;
+    pages.forEach(function(p){ p.hidden = p !== pg; });
+    document.title = pg.dataset.title || document.title;
+    document.querySelectorAll('.hdr-nav a[data-route]').forEach(function(a){ if (a.dataset.route === pg.dataset.page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    if (changed){ pg.querySelectorAll('.rv').forEach(function(e){ e.classList.add('in'); }); dispatchEvent(new Event('resize')); }
+    var t = anchor && document.getElementById(anchor);
+    if (t) t.scrollIntoView({behavior: (changed || reduce) ? 'instant' : 'smooth'}); else scrollTo({top:0, behavior: (changed || reduce) ? 'instant' : 'smooth'});
+  }
+  function go(){
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (h.charAt(0) === '/') { show(h.slice(1) || 'home'); return; }
+    var cur = document.querySelector('.page:not([hidden])'), curName = cur ? cur.dataset.page : 'home';
+    if (!h) { show(curName); return; }
+    var el = document.getElementById(h), pg = el && el.closest('.page');
+    show(pg ? pg.dataset.page : (el ? curName : 'home'), h);
+  }
+  addEventListener('hashchange', go); go();
+}
+
 document.addEventListener('DOMContentLoaded', function(){
-  var secs = apply(); review(secs); header(); magnets(); companion(); reveals();
+  var secs = apply(); review(secs); header(); magnets(); companion(); reveals(); router();
 });
 })();

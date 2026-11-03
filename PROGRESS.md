@@ -26,8 +26,11 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
   · Booking V2 giant phone number 7.96. Light shared footer. Forms validate and open the visitor's email app; nothing claims
   to be sent; the invented "one business day" line removed. Anchors now follow the shown version. Axe 0; all tests clean.
   Homepage: Hero, Video, Explore, Wise Check, Protect Your Nest, Services, Reviews, Service area, Family, Booking + footer.
-- **Next:** inner pages in the same file (Services, Wise Check, Protect Your Nest, About, Service Area, Contact), 5–6+
-  sections each.
+- **ROUND 6 DONE (gate `owl/final/GATE-R6.md`, shots `owl/final/gates/r6/`):** a page router inside the one file (`#/`,
+  `#/services`; anchors switch page when needed; Back works) and the Services page: hero V1 opening photo panels 7.88 / V2
+  icon picker 7.84; process V1 scroll timeline 7.88 / V2 shingle-course stepper 8.02; shared "Start with a Wise Check" band.
+  Axe 0; tests clean; no phone overflow.
+- **Next:** Wise Check page (#/wise-check), then Protect Your Nest, About, Service Area, Contact (5–6+ sections each).
 
 ---
 
