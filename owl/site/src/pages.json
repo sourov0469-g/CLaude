@@ -108,5 +108,35 @@
     "default": 1
    }
   ]
+ },
+ {
+  "id": "nest",
+  "title": "Protect Your Nest",
+  "sections": [
+   {
+    "id": "pn-cover",
+    "default": 2
+   },
+   {
+    "id": "pn-wrap",
+    "default": 1
+   },
+   {
+    "id": "pn-cleanup",
+    "default": 1
+   },
+   {
+    "id": "pn-aftercare",
+    "default": 1
+   },
+   {
+    "id": "pn-guarantee",
+    "default": 1
+   },
+   {
+    "id": "pn-call",
+    "default": 1
+   }
+  ]
  }
 ]

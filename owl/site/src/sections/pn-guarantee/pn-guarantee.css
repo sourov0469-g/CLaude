@@ -1,0 +1,20 @@
+/* Get It Right Guarantee. V1: Owl's own seal, ringed once when seen (the identity's seal treatment). V2: Lusion flow:
+   two drawn paths, one straight and one with "bumps", that meet at the same check. Facts only from the lock. */
+.ng-v1,.ng-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.ng1-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-64);align-items:center}
+.ng1-seal{position:relative;width:100%;max-width:22rem;aspect-ratio:1;justify-self:center}
+.ng1-seal img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain}
+.ng1-seal svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ng1-ring{fill:none;stroke:var(--accent-fill);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1;transform:rotate(-90deg);transform-origin:center}
+.ng1-copy{display:grid;gap:var(--space-24);justify-items:start}
+.ng1-copy .t-body{max-width:40rem}
+.ng1-facts{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-8)}
+.ng1-facts b{font-family:var(--font-display)}
+@media (max-width:1023px){.ng1-grid{grid-template-columns:1fr;gap:var(--space-32)}.ng1-seal{max-width:16rem;justify-self:start}}
+.ng2-paths{position:relative;margin-top:var(--space-48);display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:var(--space-16) var(--space-32);align-items:center}
+.ng2-svg{grid-column:1 / -1;grid-row:1 / span 2;width:100%;height:auto;overflow:visible}
+.ng2-a,.ng2-b{position:absolute;left:0;margin:0}
+.ng2-a{top:4%}
+.ng2-b{top:36%}
+.ng2-end{grid-column:1 / -1;display:grid;gap:var(--space-4);justify-items:end;text-align:right;margin:var(--space-16) 0 0}
+@media (max-width:767px){.ng2-a,.ng2-b{position:static}.ng2-paths{display:grid;grid-template-columns:1fr}.ng2-svg{grid-row:auto}.ng2-end{justify-items:start;text-align:left}.ng2-a{order:-2}.ng2-b{order:-1}}

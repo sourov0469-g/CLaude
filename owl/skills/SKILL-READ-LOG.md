@@ -331,3 +331,17 @@ against it. The rule stands: read before building.
   - Working memory holds about 4±1 meaningful chunks; chunking is the strategy, not "7 items".
   - Group menus, forms and steps into 3-5 named chunks; make the chunks explicit with headings, space and dividers.
   - **Applied:** three principles, four claim steps, three Wise Check parts, three guarantee facts, four chapters.
+
+## Protect Your Nest page (read in full by tag BEFORE building)
+- ⟦S1434⟧ visual-hierarchy
+  - Size (at least 1.5× steps), weight, contrast, spacing and position set the order the eye lands in.
+  - Four levels: primary (title, one CTA), secondary (section heads), tertiary (support), quaternary (fine print).
+  - One primary action per view; squint test; do not let elements compete.
+- ⟦S1435⟧ von-restorff-effect
+  - The one element that differs is remembered; it works only if neighbours are consistent and few items deviate.
+  - Decide the single most important element per section; never decorative pops; pair colour with shape, size or
+    weight so it survives greyscale.
+- ⟦S1457⟧ zeigarnik-effect
+  - Unfinished tasks stay active; a finite, named set of steps with visible progress pulls toward completion.
+  - Checklists make open loops explicit; surface one or two at a time; always give a clear path to completion; use
+    incompleteness honestly, never as guilt.

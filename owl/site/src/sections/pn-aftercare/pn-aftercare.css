@@ -1,0 +1,15 @@
+/* Owl Roof Aftercare. V1: Scout photo evidence (Owl's own aftercare box). V2: type-led with a drawn lid that closes once
+   (the Graza custom-animation bar). Owl's own words. */
+.na-v1,.na-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.na1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:center}
+.na1-fig{margin:0;display:grid;gap:var(--space-8);justify-items:center}
+.na1-fig img{width:100%;max-width:26rem;height:auto;display:block}
+.na1-copy{display:grid;gap:var(--space-24)}
+.na1-copy .t-body{max-width:36rem}
+@media (max-width:1023px){.na1-grid{grid-template-columns:1fr;gap:var(--space-32)}.na1-fig{justify-items:start}.na1-fig img{max-width:20rem}}
+.na2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--space-48);align-items:center}
+.na2-copy{display:grid;gap:var(--space-24)}
+.na2-copy .t-body{max-width:34rem}
+.na2-big{font:800 calc(var(--step-5) * 1.3)/1 var(--font-display);letter-spacing:var(--track-display);margin:0}
+.na2-art{width:100%;height:auto;overflow:visible}
+@media (max-width:1023px){.na2-grid{grid-template-columns:1fr}.na2-art{max-width:30rem}}

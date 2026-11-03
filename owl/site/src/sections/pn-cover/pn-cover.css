@@ -1,0 +1,22 @@
+/* Protect Your Nest cover (MERSI chapter system; Owl's own "A Wise Roofing System That Puts Your Home First") */
+.nc-v1,.nc-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0 var(--section-default)}
+.nc1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.nc1-copy{display:grid;gap:var(--space-24)}
+.nc1-copy .t-body{max-width:38rem}
+.nc1-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.nc1-nest{width:100%;height:auto;overflow:visible}
+.nc1-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--space-24);margin-top:var(--space-64);border-top:1.5px solid var(--text-primary)}
+.nc1-index a{display:grid;grid-template-columns:auto 1fr auto;gap:var(--space-12);align-items:center;padding:var(--space-16) 0;min-height:var(--space-48);color:var(--text-primary);text-decoration:none;font:var(--type-body)}
+.nc1-index a span{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.nc1-index a .icon{transition:transform var(--dur-fast) var(--ease-out)}
+.nc1-index a:hover .icon{transform:translateX(var(--space-8))}
+@media (max-width:1023px){.nc1-grid{grid-template-columns:1fr}.nc1-nest{max-width:26rem}.nc1-index{grid-template-columns:1fr 1fr}}
+@media (max-width:767px){.nc1-index{grid-template-columns:1fr}.nc1-index a{border-bottom:1px solid var(--line-control)}}
+.nc-v2{padding:0}
+.nc2-split{display:grid;grid-template-columns:1fr 1fr;min-height:min(80vh,44rem)}
+.nc2-photo{margin:0;position:relative}
+.nc2-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.nc2-photo figcaption{position:absolute;left:var(--space-12);bottom:var(--space-8);font:var(--type-small);color:var(--text-on-deep);background:color-mix(in srgb,var(--surface-ink) 70%,transparent);padding:var(--space-2) var(--space-8);border-radius:var(--radius-s)}
+.nc2-card{display:grid;gap:var(--space-24);align-content:center;justify-items:start;padding:var(--space-64) var(--space-48);border-left:1.5px solid var(--text-primary)}
+.nc2-list{margin:0;padding:0;list-style:none;display:grid;gap:var(--space-8);font:var(--type-subheading)}
+@media (max-width:1023px){.nc2-split{grid-template-columns:1fr}.nc2-photo{aspect-ratio:4/3}.nc2-card{border-left:0;border-top:1.5px solid var(--text-primary);padding:var(--space-48) var(--gutter)}}

@@ -249,8 +249,20 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
     `wisetest.mjs` 9/9; `builttest.mjs` 6/6; `routetest.mjs` 10/10; pageshot defaults and all-V2: no overflow at
     1440/390, one h1, no errors; token lint clean.
   - **Background tasks:** none started; no sub-agents. All work in this thread.
-- **Next:** the 3 remaining inner pages: Protect Your Nest, Our families, Contact and Price My Roof. Each gets at least
-  6 sections × 2 versions, built one section at a time, with skills read before building.
+- **PROTECT YOUR NEST PAGE COMPLETE** (`#/nest`): 6 sections × 2 versions: cover (`pn-cover`, default V2: Owl's own
+  wrap photo), the wrap (`pn-wrap`), the 3-Part Cleanup (`pn-cleanup`, linking to the game on Home), Owl Roof
+  Aftercare (`pn-aftercare`), the Get It Right Guarantee (`pn-guarantee`), and the call band (`pn-call`).
+  - **Gates:** `GATE-pn-cover`, `-pn-wrap`, `-pn-cleanup`, `-pn-aftercare`, `-pn-guarantee`, `-pn-call` (defaults
+    weighted 7.60-8.05).
+  - **Skills read BEFORE building** (logged): ⟦S1434⟧ visual-hierarchy, ⟦S1435⟧ von-restorff, ⟦S1457⟧ zeigarnik, plus
+    those already logged. Every tag cited in the six gates is in the read log.
+  - **Copy:** Owl's own Protect Your Nest text from the live homepage source (wrap, 3-Part Cleanup, Aftercare, Get It
+    Right Guarantee), including Owl's honest limit "There's no way to ensure every nail is gone".
+  - **Tests:** `pagetest.mjs nest` 12/12; `nesttest-page.mjs` 10/10; pageshot defaults and all-V2 clean; token lint
+    clean; the Storm page re-checked with `pagetest.mjs storm` 12/12.
+  - **Background tasks:** none; no sub-agents.
+- **Next:** the 2 remaining inner pages: Our families, then Contact and Price My Roof. Each gets at least 6 sections ×
+  2 versions, built one section at a time, with skills read before building.
 - **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.

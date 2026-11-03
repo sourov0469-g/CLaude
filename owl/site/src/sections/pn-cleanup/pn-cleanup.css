@@ -1,0 +1,32 @@
+/* The 3-Part Cleanup. V1: S1325 horizontal progress line (one truthful line, first dot to last) + S1457 rounds ticked as
+   they are reached; Lusion flow. V2: AirPods numeral as the event ("3") and S1435: round two, the magnet, is the one
+   element that differs. Owl's own words. */
+.nk-v1,.nk-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.nk1-track{position:relative;margin-top:var(--space-48)}
+.nk1-base,.nk1-fill{position:absolute;top:calc(var(--space-16) - 1.5px);height:3px;border-radius:2px}
+.nk1-base{background:var(--line-control)}
+.nk1-fill{background:var(--accent-fill);transform-origin:left;transform:scaleX(0)}
+.nk1-rounds{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32);position:relative}
+.nk1-rounds li{display:grid;gap:var(--space-12);align-content:start}
+.nk1-rounds .t-sub,.nk1-rounds .t-small{margin:0}
+.nk1-dot{display:grid;place-items:center;width:var(--space-32);height:var(--space-32);border-radius:50%;background:var(--surface-page);border:2px solid var(--line-control);font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted);transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out),color var(--dur-fast) linear}
+.nk1-rounds li.is-on .nk1-dot{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--text-primary)}
+.nk1-art{width:var(--space-96);height:auto;overflow:visible}
+.nk-v1 .nk1-play{margin-top:var(--space-48)}
+@media (max-width:767px){
+  .nk1-rounds{grid-template-columns:1fr;padding-left:var(--space-48)}
+  .nk1-base,.nk1-fill{top:auto;left:calc(var(--space-16) - 1.5px);width:3px;height:auto;transform-origin:top}
+  .nk1-fill{transform:scaleY(0)}
+  .nk1-dot{position:absolute;left:0}
+  .nk1-rounds li{position:relative;margin-left:calc(var(--space-48) * -1);padding-left:var(--space-48)}
+}
+.nk2-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--space-64);align-items:center}
+.nk2-lead{display:grid;gap:var(--space-16)}
+.nk2-lead .t-heading,.nk2-lead .t-body{margin:0}
+.nk2-num{font:800 calc(var(--step-5) * 2.4)/0.85 var(--font-display);letter-spacing:var(--track-display);color:var(--accent-text);margin:0}
+.nk2-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-16)}
+.nk2-cards li{display:grid;gap:var(--space-8);align-content:start;padding:var(--space-24);border:1.5px solid var(--line-control);border-radius:var(--radius-m);background:var(--surface-page)}
+.nk2-cards .t-label,.nk2-cards .t-sub,.nk2-cards .t-small{margin:0}
+.nk2-cards .nk2-key{background:var(--accent-fill);border-color:var(--accent-fill);transform:translateY(calc(var(--space-16) * -1))}
+@media (max-width:1023px){.nk2-grid{grid-template-columns:1fr;gap:var(--space-32)}}
+@media (max-width:767px){.nk2-cards{grid-template-columns:1fr}.nk2-cards .nk2-key{transform:none}}
