@@ -1,0 +1,74 @@
+<section class="sec video1" id="crew-video" aria-labelledby="v1-h">
+<style>
+.video1{text-align:center}
+.video1 .lede{margin:14px auto 0;max-width:60ch}
+.video1 .frame{position:relative;margin:clamp(28px,4vw,44px) auto 0;max-width:1040px;padding:14px;border-radius:34px;background:linear-gradient(180deg,#FBF9F3,#EDE8DA);box-shadow:0 1px 0 #fff inset,0 0 0 1px rgba(234,162,33,.35),0 40px 80px -36px rgba(23,17,29,.5),0 0 60px -10px rgba(234,162,33,.35)}
+.video1 .screen{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:var(--ink)}
+.video1 video{width:100%;height:100%;object-fit:cover}
+.video1 .play{position:absolute;left:50%;top:50%;width:112px;height:112px;margin:-56px 0 0 -56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 8px 0 var(--amber-edge),0 24px 40px -10px rgba(23,17,29,.7),inset 0 2px 0 rgba(255,255,255,.55);display:grid;place-items:center;transition:transform .3s var(--ease)}
+.video1 .play:hover{transform:scale(1.06)}
+.video1 .play:active{transform:scale(.97) translateY(4px);box-shadow:0 3px 0 var(--amber-edge),0 12px 20px -10px rgba(23,17,29,.7)}
+.video1 .play svg{width:44px;height:44px;margin-left:6px;color:var(--ink)}
+.video1 .bar{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:14px;background:rgba(23,17,29,.72);backdrop-filter:blur(6px);color:var(--cream)}
+.video1 .bar button{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--cream)}
+.video1 .bar button:hover{background:rgba(241,239,230,.14)}
+.video1 .bar svg{width:18px;height:18px}
+.video1 .trk{position:relative;flex:1;height:5px;border-radius:5px;background:rgba(241,239,230,.25);cursor:pointer}
+.video1 .trk i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:5px;background:var(--amber)}
+.video1 .trk b{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(234,162,33,.3)}
+.video1 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:22px}
+.video1 .chips button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--paper);font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(23,17,29,.08),0 10px 20px -14px rgba(23,17,29,.4);transition:transform .2s,background .2s}
+.video1 .chips button:hover{transform:translateY(-2px)}
+.video1 .chips button small{font-weight:500;color:var(--ink-70);font-variant-numeric:tabular-nums}
+.video1 .chips button.on{background:var(--ink);color:var(--cream)}.video1 .chips button.on small{color:rgba(241,239,230,.7)}
+.video1 .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:32px}
+@media (max-width:640px){.video1 .play{width:72px;height:72px;margin:-36px 0 0 -36px}.video1 .play svg{width:30px;height:30px;margin-left:4px}.video1 .bar{left:8px;right:8px;bottom:8px;padding:6px 8px}.video1 .frame{padding:8px;border-radius:24px}.video1 .screen{border-radius:18px}}
+.video1 .note{margin-top:18px;font-size:15px;color:var(--ink-70)}
+</style>
+<div class="wrap">
+ <h2 class="h2 rv" id="v1-h">Watch the Crew at Work</h2>
+ <p class="lede rv">Our own roofers on real Owl jobs. No actors, no stock footage.</p>
+ <div class="frame rv">
+  <div class="screen" data-owl="say:Press play">
+   <video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="Owl Roofing crew at work: rafters, materials, the crew, a finished roof and decking"></video>
+   <button class="play" type="button" aria-label="Play Owl's full video from YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg></button>
+   <div class="bar">
+    <button class="pp" type="button" aria-label="Pause preview"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+    <div class="trk" role="slider" tabindex="0" aria-label="Preview position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i><b></b></div>
+   </div>
+  </div>
+ </div>
+ <div class="chips" role="group" aria-label="Jump to a moment">
+  <button type="button" data-t="0">Rafters <small>0:00</small></button>
+  <button type="button" data-t="3.1">Materials <small>0:03</small></button>
+  <button type="button" data-t="6.4">The crew <small>0:06</small></button>
+  <button type="button" data-t="9.2">Finished roof <small>0:09</small></button>
+  <button type="button" data-t="13">Decking <small>0:13</small></button>
+ </div>
+ <div class="ctas">
+  <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  <a class="btn btn-line" href="#services" data-mag data-owl="peek">See Our Services</a>
+ </div>
+ <p class="note">Play opens Owl's full video from YouTube.</p>
+</div>
+<script>
+OWL.reg('video','1',function(root){
+  var v = root.querySelector('video'), screen = root.querySelector('.screen'), play = root.querySelector('.play'), pp = root.querySelector('.pp');
+  var trk = root.querySelector('.trk'), fill = trk.querySelector('i'), dot = trk.querySelector('b'), chips = root.querySelectorAll('.chips button');
+  var pauseI = pp.innerHTML, playI = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+  if (OWL.reduce) { v.removeAttribute('autoplay'); v.pause(); }
+  function sync(){ if (!v.duration) return; var p = v.currentTime / v.duration * 100; fill.style.width = p + '%'; dot.style.left = p + '%'; trk.setAttribute('aria-valuenow', Math.round(p));
+    var cur = 0; chips.forEach(function(c, i){ if (v.currentTime >= +c.dataset.t - .05) cur = i; }); chips.forEach(function(c, i){ c.classList.toggle('on', i === cur); }); }
+  v.addEventListener('timeupdate', sync);
+  function setPP(){ pp.innerHTML = v.paused ? playI : pauseI; pp.setAttribute('aria-label', v.paused ? 'Play preview' : 'Pause preview'); }
+  v.addEventListener('play', setPP); v.addEventListener('pause', setPP); setPP();
+  pp.addEventListener('click', function(){ v.paused ? OWL.play(v) : v.pause(); });
+  chips.forEach(function(c){ c.addEventListener('click', function(){ v.currentTime = +c.dataset.t; OWL.play(v); sync(); }); });
+  function seek(e){ var r = trk.getBoundingClientRect(); var p = Math.max(0, Math.min(1, (e.clientX - r.left)/r.width)); if (v.duration) v.currentTime = p*v.duration; sync(); }
+  trk.addEventListener('pointerdown', function(e){ trk.setPointerCapture(e.pointerId); seek(e); trk.onpointermove = seek; });
+  trk.addEventListener('pointerup', function(){ trk.onpointermove = null; });
+  trk.addEventListener('keydown', function(e){ if (!v.duration) return; if (e.key === 'ArrowRight') v.currentTime = Math.min(v.duration, v.currentTime + 1); if (e.key === 'ArrowLeft') v.currentTime = Math.max(0, v.currentTime - 1); sync(); });
+  play.addEventListener('click', function(){ v.pause(); play.remove(); root.querySelector('.bar').remove(); OWL.youtube(screen, 'ehKLv5DF2TQ'); });
+});
+</script>
+</section>

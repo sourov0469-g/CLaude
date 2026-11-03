@@ -1,0 +1,101 @@
+<section class="sec hero1" aria-labelledby="h1-a">
+<style>
+.hero1{padding-top:clamp(28px,4vw,56px);padding-bottom:clamp(32px,4vw,56px)}
+.hero1 .g{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);align-items:center;gap:clamp(16px,3vw,40px)}
+.hero1 .txt .h1{font-size:clamp(40px,4.7vw,72px)}
+.hero1 .txt{position:relative;z-index:2;padding-block:clamp(12px,3vw,40px)}
+.hero1 .lede{margin:22px 0 34px;max-width:34ch}
+.hero1 .ctas{display:flex;flex-direction:column;gap:18px;max-width:380px}
+.hero1 .ctas .btn{width:100%;min-height:64px;font-size:19px}
+.hero1 .stage{position:relative;aspect-ratio:1180/766;margin-right:calc(var(--pad) * -.8);margin-left:-4%}
+.hero1 .owl{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:62% 88%;transition:transform .9s var(--ease);will-change:transform}
+.hero1 .owl.breathe{animation:h1breathe 6s ease-in-out infinite}
+@keyframes h1breathe{50%{translate:0 -4px;scale:1.006}}
+.hero1 canvas{position:absolute;inset:-12% -4% 0;width:108%;height:112%;pointer-events:none}
+.hero1 .storm{position:absolute;right:6%;top:2%;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.1),0 14px 26px -14px rgba(23,17,29,.4);font-weight:600;font-size:15px;transition:transform .2s}
+.hero1 .storm:hover{transform:translateY(-2px)}
+.hero1 .storm:active{transform:translateY(2px)}
+.hero1 .storm svg{width:20px;height:20px}
+.hero1 .storm[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.hero1 .trust{margin-top:clamp(18px,3vw,34px)}
+@media (max-width:900px){.hero1 .g{grid-template-columns:1fr}.hero1 .stage{order:-1;margin:0 -8px}.hero1 .ctas{max-width:none}.hero1 .lede{max-width:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="txt">
+   <h1 class="h1" id="h1-a">Under Our Wing,<br>Your Nest Is Safe</h1>
+   <p class="lede">Family-owned roofers founded by Tim Brown and Noah Bergland. We Give a Hoot.</p>
+   <div class="ctas">
+    <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+    <a class="btn btn-line" href="#services" data-mag data-owl="peek">See Our Services</a>
+   </div>
+  </div>
+  <div class="stage" data-owl="say:Hoo's dry? Your house.">
+   <canvas aria-hidden="true"></canvas>
+   <img class="owl breathe" src="{{A:owl-wing.webp}}" alt="A great horned owl spreads its wings over a small house, keeping it sheltered" width="1180" height="766">
+   <button class="storm" type="button" aria-pressed="false" data-owl="hoot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 15a4 4 0 1 1 1.2-7.8A5 5 0 0 1 18 9a3.5 3.5 0 0 1-.5 7H7z"/><path d="M9 19l-1 2M13 19l-1 2M17 19l-1 2"/></svg>Storm test</button>
+  </div>
+ </div>
+ <div class="trust" role="list">
+  <span class="stars" role="listitem" aria-label="Five stars"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span>
+  <span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">Founded 2025</span>
+ </div>
+</div>
+<script>
+OWL.reg('hero','1',function(root){
+  var stage = root.querySelector('.stage'), img = root.querySelector('.owl'), cv = root.querySelector('canvas'), btn = root.querySelector('.storm');
+  var ctx = cv.getContext('2d'), mask = null, mw = 0, mh = 0, W = 0, H = 0, ox = 0, oy = 0, dpr = Math.min(2, devicePixelRatio || 1);
+  var drops = [], splash = [], storm = 0, visible = true;
+  function build(){
+    var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    var ir = img.getBoundingClientRect(); ox = ir.left - r.left; oy = ir.top - r.top; mw = Math.round(ir.width); mh = Math.round(ir.height);
+    if (!img.naturalWidth || !mw) return;
+    var off = document.createElement('canvas'); off.width = mw; off.height = mh; var o = off.getContext('2d');
+    o.drawImage(img, 0, 0, mw, mh); mask = o.getImageData(0, 0, mw, mh).data;
+  }
+  function solid(x, y){ var mx = Math.round(x - ox), my = Math.round(y - oy); if (!mask || mx < 0 || my < 0 || mx >= mw || my >= mh) return false; return mask[(my*mw + mx)*4 + 3] > 140; }
+  function spawn(n){ for (var i = 0; i < n; i++) drops.push({x: Math.random()*W*1.2 - W*.1, y: -Math.random()*H*.6, v: 7 + Math.random()*5, l: 10 + Math.random()*12}); }
+  function frame(){
+    if (!visible) { requestAnimationFrame(frame); return; }
+    ctx.clearRect(0, 0, W, H);
+    var want = OWL.reduce ? 0 : (storm ? 260 : 70); if (drops.length < want) spawn(Math.min(12, want - drops.length));
+    var wind = storm ? 2.6 : 1.1;
+    ctx.lineCap = 'round';
+    for (var i = drops.length - 1; i >= 0; i--){
+      var d = drops[i]; d.y += d.v * (storm ? 1.35 : 1); d.x += wind;
+      var hit = solid(d.x, d.y), ground = d.y > H - 4;
+      if (hit || ground){
+        for (var k = 0; k < 3; k++) splash.push({x: d.x, y: d.y, vx: (Math.random() - .5)*3 - (hit ? 1.2 : 0), vy: -Math.random()*2.6 - .6, t: 1, a: hit});
+        if (drops.length > want) drops.splice(i, 1); else { d.x = Math.random()*W*1.2 - W*.1; d.y = -20 - Math.random()*80; }
+        continue;
+      }
+      ctx.strokeStyle = 'rgba(23,17,29,' + (storm ? .32 : .2) + ')'; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x - wind*2.2, d.y - d.l); ctx.stroke();
+    }
+    for (var j = splash.length - 1; j >= 0; j--){
+      var s = splash[j]; s.x += s.vx; s.y += s.vy; s.vy += .22; s.t -= .045;
+      if (s.t <= 0){ splash.splice(j, 1); continue; }
+      ctx.fillStyle = s.a ? 'rgba(234,162,33,' + s.t*.9 + ')' : 'rgba(23,17,29,' + s.t*.35 + ')';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.a ? 1.8 : 1.3, 0, 6.3); ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  function ready(){ build(); requestAnimationFrame(frame); }
+  if (img.complete) ready(); else img.addEventListener('load', ready);
+  addEventListener('resize', function(){ build(); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }).observe(root);
+  btn.addEventListener('click', function(){
+    storm = storm ? 0 : 1; btn.setAttribute('aria-pressed', storm ? 'true' : 'false');
+    img.style.transform = storm ? 'scale(1.03) translateY(6px)' : '';
+    if (storm) setTimeout(function(){ if (storm){ storm = 0; btn.setAttribute('aria-pressed','false'); img.style.transform = ''; } }, 6000);
+  });
+  if (OWL.fine && !OWL.reduce) stage.addEventListener('pointermove', function(e){
+    var r = stage.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+    if (!storm) img.style.transform = 'perspective(1200px) rotateY(' + (x*6).toFixed(2) + 'deg) rotateX(' + (-y*4).toFixed(2) + 'deg)';
+  });
+  stage.addEventListener('pointerleave', function(){ if (!storm) img.style.transform = ''; });
+});
+</script>
+</section>

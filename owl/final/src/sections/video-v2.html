@@ -1,0 +1,72 @@
+<section class="sec video2" id="crew-video-2" aria-labelledby="v2-h">
+<style>
+.video2 .g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(24px,5vw,72px)}
+.video2 .lede{margin:18px 0 30px;max-width:34ch}
+.video2 .ctas{display:flex;flex-wrap:wrap;gap:16px}
+.video2 .now{display:flex;align-items:center;gap:12px;margin-top:30px;font-weight:600}
+.video2 .now span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.08)}
+.video2 .now span::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(234,162,33,.25)}
+.video2 .port{position:relative;width:min(100%,600px);aspect-ratio:1;justify-self:center;touch-action:none}
+.video2 .ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,#F7CD78,#EAA221 18%,#C7871A 34%,#F3BE5A 52%,#D9951D 70%,#F7CD78 86%,#EAA221);box-shadow:0 40px 80px -30px rgba(23,17,29,.55),inset 0 2px 2px rgba(255,255,255,.6),inset 0 -4px 6px rgba(120,70,0,.35)}
+.video2 .ticks{position:absolute;inset:0;width:100%;height:100%}
+.video2 .lens{position:absolute;inset:13%;border-radius:50%;overflow:hidden;background:var(--ink);box-shadow:0 0 0 6px rgba(23,17,29,.85),inset 0 0 40px rgba(0,0,0,.5)}
+.video2 video{width:100%;height:100%;object-fit:cover}
+.video2 .lens::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.22),transparent 45%);pointer-events:none}
+.video2 .knob{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF6E2,var(--paper) 50%,#D9D2BF);box-shadow:0 4px 0 rgba(23,17,29,.25),0 10px 20px -6px rgba(23,17,29,.6);cursor:grab;display:grid;place-items:center}
+.video2 .knob::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--ink)}
+.video2 .knob:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.video2 .mk{position:absolute;left:50%;top:50%;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);white-space:nowrap;transform:translate(-50%,-50%);pointer-events:auto;background:rgba(248,246,240,.92);padding:4px 9px;border-radius:999px;box-shadow:0 2px 0 rgba(23,17,29,.12)}
+.video2 .mk.on{background:var(--ink);color:var(--cream)}
+.video2 .full{position:absolute;right:8%;bottom:8%;width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 6px 0 var(--amber-edge),0 18px 30px -8px rgba(23,17,29,.7);display:grid;place-items:center}
+.video2 .full svg{width:30px;height:30px;margin-left:4px;color:var(--ink)}
+.video2 .full:active{transform:translateY(4px);box-shadow:0 2px 0 var(--amber-edge)}
+@media (max-width:900px){.video2 .g{grid-template-columns:1fr}.video2 .mk{font-size:10px;padding:3px 7px}.video2 .port{width:calc(100% - 56px)}.video2 .full{width:58px;height:58px}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2 rv" id="v2-h">The Crew, Up Close</h2>
+   <p class="lede rv">Turn the ring to move through a real Owl job, from bare rafters to the finished roof.</p>
+   <div class="ctas">
+    <button class="btn btn-amber" type="button" data-mag data-owl="say:Roll film" data-yt>Play the Full Film</button>
+    <a class="btn btn-line" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+   </div>
+   <p class="now" aria-live="polite"><span class="cur">Rafters</span></p>
+  </div>
+  <div class="port" data-owl="say:Turn the ring">
+   <div class="ring"></div>
+   <svg class="ticks" viewBox="0 0 600 600" aria-hidden="true"></svg>
+   <div class="lens"><video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="Owl Roofing crew at work"></video></div>
+   <div class="knob" role="slider" tabindex="0" aria-label="Move through the crew film" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"></div>
+   <button class="full" type="button" aria-label="Play Owl's full video from YouTube" data-yt><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg></button>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('video','2',function(root){
+  var port = root.querySelector('.port'), v = root.querySelector('video'), knob = root.querySelector('.knob'), ticks = root.querySelector('.ticks'), cur = root.querySelector('.cur');
+  var marks = [['Rafters',0],['Materials',3.1],['The crew',6.4],['Finished roof',9.2],['Decking',13]], D = 15.56, R = 0.435, mkEls = [];
+  if (OWL.reduce) { v.removeAttribute('autoplay'); v.pause(); }
+  var s = '';
+  for (var i = 0; i < 120; i++){ var a = i/120*Math.PI*2 - Math.PI/2, r1 = 290, r2 = i % 10 === 0 ? 268 : 278;
+    s += '<line x1="' + (300 + Math.cos(a)*r1).toFixed(1) + '" y1="' + (300 + Math.sin(a)*r1).toFixed(1) + '" x2="' + (300 + Math.cos(a)*r2).toFixed(1) + '" y2="' + (300 + Math.sin(a)*r2).toFixed(1) + '" stroke="#17111D" stroke-opacity="' + (i % 10 === 0 ? .7 : .35) + '" stroke-width="' + (i % 10 === 0 ? 2 : 1.2) + '"/>'; }
+  ticks.innerHTML = s;
+  function pos(frac, rad){ var a = frac*Math.PI*2 - Math.PI/2; return {x: 50 + Math.cos(a)*rad*100, y: 50 + Math.sin(a)*rad*100}; }
+  marks.forEach(function(m){ var b = document.createElement('button'); b.type = 'button'; b.className = 'mk'; b.textContent = m[0]; var p = pos(m[1]/D, .5);
+    b.style.left = p.x + '%'; b.style.top = p.y + '%'; b.addEventListener('click', function(){ v.currentTime = m[1]; OWL.play(v); }); port.appendChild(b); mkEls.push(b); });
+  function show(){ var f = (v.duration ? v.currentTime/v.duration : 0), p = pos(f, R); knob.style.left = p.x + '%'; knob.style.top = p.y + '%'; knob.style.margin = '-22px 0 0 -22px';
+    knob.setAttribute('aria-valuenow', Math.round(v.currentTime)); var k = 0; marks.forEach(function(m, i){ if (v.currentTime >= m[1] - .05) k = i; });
+    mkEls.forEach(function(e, i){ e.classList.toggle('on', i === k); }); if (cur.textContent !== marks[k][0]) cur.textContent = marks[k][0]; }
+  v.addEventListener('timeupdate', show); v.addEventListener('loadedmetadata', function(){ D = v.duration; show(); });
+  (function tick(){ if (!v.paused) show(); requestAnimationFrame(tick); })();
+  var drag = false, was = false;
+  function angle(e){ var r = port.getBoundingClientRect(), a = Math.atan2(e.clientY - (r.top + r.height/2), e.clientX - (r.left + r.width/2)) + Math.PI/2; if (a < 0) a += Math.PI*2; return a/(Math.PI*2); }
+  knob.addEventListener('pointerdown', function(e){ drag = true; was = !v.paused; v.pause(); knob.setPointerCapture(e.pointerId); knob.style.cursor = 'grabbing'; });
+  knob.addEventListener('pointermove', function(e){ if (!drag || !v.duration) return; v.currentTime = angle(e)*v.duration; show(); });
+  knob.addEventListener('pointerup', function(){ drag = false; knob.style.cursor = ''; if (was && !OWL.reduce) OWL.play(v); });
+  port.querySelector('.ring').addEventListener('pointerdown', function(e){ if (!v.duration) return; v.currentTime = angle(e)*v.duration; show(); });
+  knob.addEventListener('keydown', function(e){ if (!v.duration) return; if (e.key === 'ArrowRight' || e.key === 'ArrowUp') v.currentTime = Math.min(v.duration - .1, v.currentTime + 1); if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') v.currentTime = Math.max(0, v.currentTime - 1); show(); });
+  root.querySelectorAll('[data-yt]').forEach(function(b){ b.addEventListener('click', function(){ v.pause(); OWL.ytModal('ehKLv5DF2TQ'); }); });
+});
+</script>
+</section>

@@ -1,3 +1,18 @@
+# OWL ROOFING — FINAL BUILD (owner-approved reference set, `owl/final/refs/owl-final-package/OWL-15X-FINAL-DIRECTION.md`)
+
+**Delivery:** ONE file, `owl/final/owl-roofing.html` (all pages and assets inside it). Sources in `owl/final/src/`,
+built with `python3 owl/final/src/build.py`. Review every version in the one file with `?review` (or `?hero=2`, `?all=2`).
+Protocol: homepage first, two sections per round, two versions each; commit + PROGRESS + GATE per round; no waiting.
+
+- **ROUND 1 DONE (gate `owl/final/GATE-R1.md`, shots `owl/final/gates/r1/`):** shared header, 3D magnetic buttons, Cursor Owl
+  companion, version switcher. Hero V1 "Under Our Wing" (rain stops at the owl's wings, storm test) 8.10 · Hero V2 "Peel"
+  (drag to roll the old roof back) 7.56 · Video V1 "Watch the Crew at Work" (live crew film, chapter chips, YouTube on press)
+  7.82 · Video V2 "Up Close" (ring scrubber) 7.80. Axe 0 violations both sets; interaction test clean. Recommended: Hero V1,
+  Video V1.
+- **Next:** Round 2: Explore ("Layer by Layer", near build-spec) + Wise Check (giant dial, glass cross-section, checklist).
+
+---
+
 # OWL ROOFING — FULL REDO (owner's order 2026-11-03 10:50; brief `OWL-REDO-BRIEF.md`)
 
 **Status:** the previous build is rejected in full and stays in the repo as a record only (`owl/site/`, its gates and 9
