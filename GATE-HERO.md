@@ -1,5 +1,11 @@
 # GATE, homepage section 1: HERO (two versions)
 
+> **VERDICT (owner, via Muse): REJECTED.** "Not even close to the references … very very bad." The owner wants the heroes sheet matched exactly. The cause is that the sheet is photoreal imagery and these versions draw the house and pieces in code.
+> **Ruling:** Muse supplies high-res layered assets. Heroes 1, 2 and 3 of the sheet are picked.
+> **Next:** the asset list is `siding/redo/build/ASSET-REQUEST-HERO.md`. The rebuild starts when the assets arrive.
+> The work below is kept as the record of the rejected attempt.
+
+
 **Governing documents:** AUSTIN-FINAL-DIRECTION-V2 (owner's final choosing, wins where it speaks), plus AUSTIN-REDO-BRIEF and AUSTIN-REDO-COMPLETION.
 
 **Design authority:**
