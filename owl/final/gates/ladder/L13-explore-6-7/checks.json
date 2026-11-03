@@ -1,0 +1,293 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Follow the Drop"
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "a correct eave plays first: the drop ends in the gutter, water shows there",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "layers are drawn in roofer order (deck → drip edge → ice & water → underlayment → starter → shingles)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "ice & water shield runs past the inside of the heated wall",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "the lit chips follow the drop (shingles, starter, drip edge, gutter)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "without drip edge: the drip edge is removed and the fascia shows rot",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "ice dam with ice & water shield: snow and ice show, the water is stopped",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "ice dam without it: the membrane is gone and the leak reaches the ceiling",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "one scenario key is pressed and the outcome text matches it",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "the figure has a text description of the scenario",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "no game: no score, no win state",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Under the Lens"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "the lens opens at the eave on view",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "three rings, each smaller than the last",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "pointing up the field shows synthetic underlayment",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "the lens follows the pointer",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "at the rake the drip edge goes over the underlayment",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "Ridge key glides the lens to the ridge vent slot",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "arrow keys move the lens back down to the eave",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "the readout lists five layers for the zone",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "the deck layer shows a slot cut at the ridge (attic visible)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

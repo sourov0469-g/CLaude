@@ -446,3 +446,24 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - **Video 7:** sticky artifact ⟦S0448⟧; progress rail ⟦S1325⟧; captions ⟦S0451⟧; timecodes ⟦S1352⟧.
 
 **Build change:** repeated video posters are now stored once like the images (`poster` → `data-aposter`, restored by `OWL.hydrate`); the file went from 6.90 to 5.82 MB. The homepage regression (`home-verify`) passes 50/50, and all 10 rendered posters hydrate.
+
+## L13 · Explore 6 + 7 · checks 45/45 · evidence `gates/ladder/L13-explore-6-7/` · Explore now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Explore 6 · Follow the Drop** | Lusion (one line carries the visitor) | A side section through a Minnesota eave at 5/12, drawn in roofer order: rafter tail and fascia, OSB deck, drip edge on the deck at the eave, ice & water shield over it running past the inside of the heated wall, synthetic underlayment lapped over that, starter strip, shingles into the gutter. A drop follows one flow line; a tag names each layer it reaches and the layer chips light. Four scenario keys: a correct eave · without drip edge (curls back, rots the fascia) · ice dam with ice & water shield (stopped) · ice dam without it (through the deck, stains the ceiling). | 8.4 | 8.4 | 8.4 | 9.2 | **8.54** |
+| **Explore 7 · Under the Lens** | Immersive Garden (the surface reacts where the cursor moves) | A finished roof face, seen straight on. The cursor opens an x-ray lens in three rings: shingles, what lies under them, the deck, the rafters. What it shows depends on where it is: ice & water shield over the drip edge at the eave, lapped underlayment with cap nails up the field, the deck slot for the ridge vent at the ridge, drip edge over the underlayment at the rakes. The lens swells with speed and leaves amber ripples; Ridge · Field · Eave keys and arrow keys move it. | 8.6 | 8.0 | 8.4 | 9.0 | **8.46** |
+
+**Truth and roofer audit:**
+- Explore 6: drip edge goes under the ice & water shield at the eave; the underlayment laps over the membrane (upslope over downslope); shingles overhang into the gutter; the ice dam sits over the cold overhang, outside the heated wall. The footnote says only what a correct Minnesota roof carries, without quoting code numbers. Layer thicknesses are drawn larger than life, as a section drawing does; the code says so.
+- Explore 7: rafters at 24″ on centre; 4×8 OSB with staggered joints; ice & water in two lapped rolls; the ridge slot stops short of the ends; drip edge goes over the underlayment on the rakes and under it at the eave.
+- Neither is a game: no score, no win state (tested). Explore V3 stays the only game.
+
+**Checks run:** the generic gate, plus:
+- Explore 6: the correct eave plays first and ends in the gutter; the drawing order is roofer order; ice & water extends past the heated wall; the lit chips follow the drop; each scenario shows its own outcome (rot, stop, leak); the outcome text and figure description match the pressed key.
+- Explore 7: the lens opens at the eave on view; three shrinking rings; pointer → field shows underlayment and the lens follows; rake shows drip edge over underlayment; the Ridge key glides to the ridge vent slot; arrow keys bring it back to the eave; five layers listed per zone; the deck layer carries the ridge slot.
+
+**Ledger:**
+- **Explore 6:** flow line and moving drop ⟦S0407⟧; blueprint annotation ⟦S0468⟧; anatomy section ⟦S0526⟧; scenario keys ⟦S1246⟧ ⟦S1388⟧; title ⟦S0451⟧.
+- **Explore 7:** CSS mask reveal with eased pointer ⟦S1324⟧; ripple emitted per distance ⟦S1323⟧; anatomy ⟦S0526⟧; keyboard lens ⟦S1107⟧; zone keys ⟦S1388⟧.
+
+**Defect found and fixed in the round:** Explore 7 first drew its four layers as live SVG under moving masks, which repainted ~2,000 shapes a frame and slowed the lens under load (three checks failed in the full run). Each layer is now drawn once as an image, and the lens easing is time-based, so it arrives on time at any frame rate.

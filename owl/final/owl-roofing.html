@@ -3051,6 +3051,309 @@ OWL.reg('explore','5',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="explore" data-v="6">
+<section class="sec explore6" id="explore-6" aria-labelledby="ex6-h">
+<style>
+.explore6{overflow:hidden}
+.explore6 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px}
+.explore6 .lede{margin-top:12px;max-width:46ch}
+.explore6 .g{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.75fr);gap:clamp(20px,3.4vw,52px);align-items:start;margin-top:clamp(18px,3vw,34px)}
+.explore6 .fig{position:relative;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#EEF2F3 0,#F6F4EE 60%);box-shadow:0 2px 0 #fff inset,0 40px 60px -42px rgba(23,17,29,.5)}
+.explore6 svg{display:block;width:100%;height:auto;max-width:none}
+.explore6 .lbl{font:700 11px/1 var(--font,inherit);fill:#3A3540}
+.explore6 .lbl.sm{font-size:9.5px;fill:#5A5560}
+.explore6 .flow{fill:none;stroke:#5BA3D9;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.explore6 .drop{fill:#4E97CF;stroke:#fff;stroke-width:1.6}
+.explore6 .fx{opacity:0;transition:opacity .5s}
+.explore6 .fx.on{opacity:1}
+.explore6 .gone{opacity:0;transition:opacity .5s}
+.explore6 .part{transition:opacity .5s}
+.explore6 .rain line{stroke:#7FB4DA;stroke-width:1.4;stroke-linecap:round;opacity:0}
+.explore6 .fig.raining .rain line{animation:ex6r .7s linear infinite}
+@keyframes ex6r{0%{opacity:0;transform:translate(0,-24px)}20%{opacity:.7}100%{opacity:0;transform:translate(-10px,24px)}}
+.explore6 .tag{position:absolute;left:0;top:0;transform:translate(-50%,calc(-100% - 16px));padding:6px 12px;border-radius:999px;background:#17111D;color:#F1EFE6;font-weight:800;font-size:14px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .25s}
+.explore6 .tag.on{opacity:1}
+.explore6 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding:0;list-style:none}
+.explore6 .chips li{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--paper);font-size:14px;font-weight:700;color:#6B6570;box-shadow:0 2px 0 rgba(23,17,29,.06);transition:color .3s,box-shadow .3s,transform .3s}
+.explore6 .chips li i{width:14px;height:14px;border-radius:4px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(23,17,29,.2)}
+.explore6 .chips li.lit{color:#17111D;box-shadow:0 0 0 2px var(--amber),0 4px 0 var(--amber-edge);transform:translateY(-2px)}
+.explore6 .keys{display:grid;gap:10px}
+.explore6 .key{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 16px;border-radius:16px;text-align:left;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore6 .key b{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:#17111D;color:#F1EFE6;font-size:14px}
+.explore6 .key:hover{transform:translateY(-2px)}
+.explore6 .key[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge),0 6px 12px -8px rgba(23,17,29,.4);transform:translateY(3px)}
+.explore6 .key:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore6 .out{margin-top:18px;padding-top:16px;border-top:3px solid var(--amber)}
+.explore6 .out h3{font-size:clamp(22px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+.explore6 .out p{font-size:17px;color:var(--ink-70);margin:0}
+.explore6 .out > *{transition:opacity .3s,transform .4s cubic-bezier(.22,.61,.36,1)}
+.explore6 .out.fade > *{opacity:0;transform:translateY(8px)}
+.explore6 .again{margin-top:16px}
+.explore6 .note{margin-top:14px;font-size:14px;color:var(--ink-70)}
+@media (max-width:980px){.explore6 .g{grid-template-columns:1fr}.explore6 .keys{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.explore6 .lbl.sm{display:none}.explore6 .lbl{font-size:15px}.explore6 .keys{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.explore6 .fx,.explore6 .gone,.explore6 .part,.explore6 .chips li,.explore6 .out > *,.explore6 .tag{transition:none}.explore6 .fig.raining .rain line{animation:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Explore the roof</span><h2 class="h2" id="ex6-h" style="margin-top:12px">Follow the Drop</h2>
+  <p class="lede rv">A cut through a Minnesota eave, every layer in its real order. Follow one drop of water and see what each layer is there to stop.</p></div></div>
+ <div class="g">
+  <div>
+   <div class="fig" data-owl="say:Watch the water">
+    <svg viewBox="300 70 520 360" role="img" aria-labelledby="ex6-cap"><title id="ex6-cap"></title></svg>
+    <span class="tag" aria-hidden="true"></span>
+   </div>
+   <ul class="chips" aria-label="Layers in this eave, lit as the water reaches them"></ul>
+  </div>
+  <div>
+   <div class="keys" role="group" aria-label="Show what happens"></div>
+   <div class="out" aria-live="polite"><h3></h3><p></p></div>
+   <button class="btn btn-line again" type="button" data-mag data-owl="peek">Let It Rain Again</button>
+   <p class="note">A correct Minnesota roof carries ice &amp; water shield from the eave up past the inside of the heated wall.</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','6',function(root){
+  var svg = root.querySelector('svg'), fig = root.querySelector('.fig'), tag = root.querySelector('.tag'), chipsEl = root.querySelector('.chips'), keysEl = root.querySelector('.keys'), out = root.querySelector('.out'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* local roof coordinates: x runs down the slope to the eave (0 = outer edge of the deck), y runs into the roof (0 = top of the deck) */
+  var A = Math.atan(5/12), cu = Math.cos(A), su = Math.sin(A), E = [700, 300];
+  /* layers above the deck drawn 2.2x thick and the deck 1.5x, as a section drawing does, so each can be read */
+  function W(x, y){ y = y < 0 ? y*2.2 : y <= 12 ? y*1.5 : y + 6; return [E[0] + x*cu - y*su, E[1] + x*su + y*cu]; }
+  var VB = [300, 70, 520, 360];
+  function pts(a){ return a.map(function(p){ return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+  function poly(a, fill, extra){ return '<polygon points="' + pts(a) + '" fill="' + fill + '"' + (extra || '') + '/>'; }
+  function seg(a, b, st){ return '<path d="M' + a[0].toFixed(1) + ' ' + a[1].toFixed(1) + 'L' + b[0].toFixed(1) + ' ' + b[1].toFixed(1) + '" fill="none" ' + st + '/>'; }
+  function rect(x0, x1, y0, y1, fill, extra){ return poly([W(x0, y0), W(x1, y0), W(x1, y1), W(x0, y1)], fill, extra); }
+  var h = '';
+  /* sky, ground, house */
+  h += '<g class="rain" aria-hidden="true">'; for (var r = 0; r < 18; r++){ var rx = 610 + (r*47) % 210, ry = 80 + (r*29) % 150; h += '<line x1="' + rx + '" y1="' + ry + '" x2="' + (rx - 5) + '" y2="' + (ry + 14) + '" style="animation-delay:' + (r*.07).toFixed(2) + 's"/>'; } h += '</g>';
+  h += '<rect y="596" width="1000" height="24" fill="#8DB45F"/>';
+  h += '<rect x="0" y="330" width="470" height="266" fill="#FBFAF6"/><rect x="0" y="326" width="470" height="8" fill="#E2DCCD"/>';
+  h += '<rect x="470" y="300" width="60" height="296" fill="#E9E3D5"/><path d="M470 300V596M530 300V596" stroke="#B5AE9E" stroke-width="3"/><path d="M478 340l44 40M478 400l44 40M478 460l44 40M478 520l44 40" stroke="#B5AE9E" stroke-opacity=".6"/>';
+  h += '<rect x="530" y="386" width="183" height="9" fill="#E9E3D5" stroke="#B5AE9E" stroke-width="1.5"/><path d="M560 390h14M600 390h14M640 390h14M680 390h14" stroke="#9C9585" stroke-width="2"/>';
+  /* rafter, plumb cut at the tail */
+  var rb = W(29.2, 82);
+  h += '<g class="part" data-k="fa">' + poly([W(-820, 12), W(0, 12), rb, W(-820, 82)], '#D3AF7A') + seg(W(-820, 34), W(-10, 34), 'stroke="#B48E5A" stroke-width="2"');
+  h += '<rect x="693" y="305" width="16" height="91" rx="2" fill="#F6F3EC" stroke="#B5AE9E" stroke-width="1.5"/></g>';
+  /* OSB deck */
+  h += '<g class="part" data-k="dk">' + rect(-820, 12, 0, 12, '#DDBD82'); for (var d = -800; d < 0; d += 26) h += poly([W(d, 4), W(d + 9, 4), W(d + 9, 6), W(d, 6)], '#B98F52'); h += '</g>';
+  /* drip edge: flange on the deck at the eave, leg down the fascia with a kick-out */
+  var de0 = W(-28, -1.3), de1 = W(12, -1.3), de2 = W(12, 0);
+  h += '<g class="part" data-k="de"><path d="M' + de0[0].toFixed(1) + ' ' + de0[1].toFixed(1) + 'L' + de1[0].toFixed(1) + ' ' + de1[1].toFixed(1) + 'L711 ' + de2[1].toFixed(1) + 'V332L719 339" fill="none" stroke="#8C979D" stroke-width="2.5" stroke-linejoin="round"/></g>';
+  /* ice & water shield over the drip edge, from the eave to past the heated wall; synthetic underlayment lapped over it */
+  h += '<g class="part" data-k="iw">' + rect(-400, 12, -4.6, -2.6, '#2F2A33') + '</g>';
+  h += '<g class="part alt-ul gone" data-k="ul2">' + rect(-400, 12, -4.6, -2.6, '#C2CCD3') + '</g>';
+  h += '<g class="part" data-k="ul">' + rect(-820, -360, -5.2, -3, '#C2CCD3') + rect(-820, -360, -4.4, -3.8, '#8FA0AB') + '</g>';
+  /* starter strip and shingles, eave course first so each course above laps over the one below */
+  h += '<g class="part" data-k="st">' + rect(-44, 16, -9.5, -4.6, '#3F3946') + '</g><g class="part" data-k="sh">';
+  for (var c = 0; c < 24; c++){ var xb = 16 - 34*c, sh = c % 2 ? '#57525E' : '#4A4550';
+    h += poly([W(xb - 92, -5), W(xb, -5), W(xb, -13.5), W(xb - 92, -9.5)], sh) + seg(W(xb, -5), W(xb, -13.5), 'stroke="#17111D" stroke-opacity=".5" stroke-width="1.5"'); }
+  h += '</g>';
+  /* gutter hung on the fascia */
+  h += '<g class="part" data-k="gu"><path d="M712 326V370H760Q769 370 771 360L776 326" fill="#E4E0D6" stroke="#8C979D" stroke-width="2" stroke-linejoin="round"/><path class="fx gwater" d="M714 354H770L768 363Q766 368 759 368H714Z" fill="#7FB4DA"/></g>';
+  /* scenario dressing: rot, snow, ice dam, icicles, stopped mark, leak */
+  h += '<g class="fx rot"><rect x="694" y="306" width="14" height="89" rx="2" fill="#7A5534" opacity=".55"/>' + rect(-6, 12, 0, 12, '#5C3D22', ' opacity=".6"') + '</g>';
+  var snow = [W(-820, -13.6), W(-118, -13.6), W(-104, -19), W(-820, -22)];
+  h += '<g class="fx snow">' + poly(snow, '#FFFFFF', ' stroke="#D8E2E8" stroke-width="2"') + '</g>';
+  h += '<g class="fx ice">' + poly([W(-108, -13.6), W(17, -13.6), W(17, -18.5), W(-24, -24), W(-72, -22)], '#CFE6F2', ' stroke="#9CC6DD" stroke-width="2"') + poly([W(-150, -13.6), W(-106, -13.6), W(-106, -17), W(-150, -15)], '#7FB4DA') + '<path d="M724 370l4 26 4-26M742 370l3 18 3-18M756 370l4 30 4-30" fill="#CFE6F2" stroke="#9CC6DD" stroke-width="1.5"/></g>';
+  var stp = W(-232, -9);
+  h += '<g class="fx stop"><circle cx="' + stp[0].toFixed(1) + '" cy="' + (stp[1] - 22).toFixed(1) + '" r="12" fill="#2E7D32"/><path d="M' + (stp[0] - 5.5).toFixed(1) + ' ' + (stp[1] - 22).toFixed(1) + 'l4 4 7.5-8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>';
+  h += '<g class="fx leak"><ellipse cx="452" cy="337" rx="34" ry="6" fill="#A57A4E" opacity=".55"/><rect x="466" y="336" width="4" height="70" rx="2" fill="#A57A4E" opacity=".45"/>' + rect(-262, -238, 0, 12, '#5C3D22', ' opacity=".55"') + '</g>';
+  /* plain labels */
+  h += '<text class="lbl" x="318" y="316">Attic</text><text class="lbl" x="318" y="372">Heated room</text><text class="lbl sm" x="560" y="418">Outside</text>';
+  h += '<path d="M470 336V596" stroke="#EAA221" stroke-width="2" stroke-dasharray="6 5"/><text class="lbl sm" x="462" y="416" text-anchor="end">Inside of the heated wall</text>';
+  h += '<path class="flow" d=""/><circle class="drop" r="5" cx="-20" cy="-20"/>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var flow = svg.querySelector('.flow'), drop = svg.querySelector('.drop');
+  function part(k){ return svg.querySelector('.part[data-k="' + k + '"]'); }
+  function fx(c){ return svg.querySelector('.fx.' + c); }
+
+  var CH = [['sh', 'Shingles', '#4A4550'], ['st', 'Starter strip', '#3F3946'], ['ul', 'Synthetic underlayment', '#C2CCD3'], ['iw', 'Ice & water shield', '#2F2A33'], ['de', 'Drip edge', '#8C979D'], ['dk', 'OSB deck', '#DDBD82'], ['fa', 'Rafter & fascia', '#D3AF7A'], ['gu', 'Gutter', '#E4E0D6']];
+  var chips = {}; CH.forEach(function(c){ var li = document.createElement('li'); li.innerHTML = '<i style="--c:' + c[2] + '"></i>' + c[1]; chipsEl.appendChild(li); chips[c[0]] = li; });
+  function fall(a, b, n){ var r = [], cx = a[0] + 16, cy = a[1] + 1; for (var i = 1; i <= n; i++){ var t = i/n, u = 1 - t; r.push([u*u*a[0] + 2*u*t*cx + t*t*b[0], u*u*a[1] + 2*u*t*cy + t*t*b[1]]); } return r; }
+  var top0 = W(-380, -14), edge = W(17, -13.5);
+  var S = [
+    {t:'A correct eave', p:'Rain runs down the shingles and off their edge into the gutter. The drip edge under that edge sends any water that creeps back out into the gutter too. Nothing reaches the wood.',
+     v:[top0, W(-44, -13.7), edge].concat(fall(edge, [742, 356], 8)), tags:[[0, 'Shingles', 'sh'], [1, 'Over the starter strip', 'st'], [2, 'Clear of the drip edge', 'de'], [10, 'Into the gutter', 'gu']], hide:[], show:['gwater'], cap:'Side section of a correct eave: rain runs off the shingles into the gutter.'},
+    {t:'Without drip edge', p:'Water clings to the shingle edge, curls back under it and runs down the deck edge and fascia, behind the gutter. Over time that wood rots.',
+     v:[top0, W(-44, -13.7), edge, W(15, -4), W(12.5, 2), [709.5, 314], [709.5, 394], [709.5, 408]], tags:[[0, 'Shingles', 'sh'], [3, 'Curls under the edge', 'st'], [4, 'Soaks the deck edge', 'dk'], [5, 'Behind the gutter', 'fa']], hide:['de'], show:['rot'], cap:'Side section of an eave without drip edge: water curls back onto the deck edge and fascia.'},
+    {t:'Ice dam, with ice & water shield', p:'Snow melts over the warm attic and refreezes at the cold eave. The meltwater pools behind the ice and backs up under the shingles. The self-sealing membrane closes around every nail and keeps it out of the deck.',
+     v:[W(-400, -14), W(-150, -14), W(-112, -14.6), W(-118, -5.3), W(-232, -5.3)], tags:[[0, 'Meltwater under the snow', 'sh'], [2, 'Stopped by the ice dam', null], [3, 'Backs up under the shingles', 'sh'], [4, 'Sealed by ice & water shield', 'iw']], hide:[], show:['snow', 'ice', 'stop'], cap:'Side section with an ice dam: backed-up water is stopped by the ice and water shield.'},
+    {t:'Ice dam, without it', p:'The same water finds the nail holes and seams, soaks the deck and drips inside, where it shows up as a stain on the ceiling or wall.',
+     v:[W(-400, -14), W(-150, -14), W(-112, -14.6), W(-118, -5.3), W(-250, -5.3), W(-250, 12.5), [W(-250, 12.5)[0], 326]], tags:[[0, 'Meltwater under the snow', 'sh'], [2, 'Stopped by the ice dam', null], [3, 'Backs up under the shingles', 'ul'], [5, 'Through the deck', 'dk'], [6, 'Stains the ceiling', null]], hide:['iw'], show:['snow', 'ice', 'leak', 'alt-ul'], cap:'Side section with an ice dam and no ice and water shield: water drips through the deck into the house.'}];
+  var cur = 0, run = 0, keys = S.map(function(s, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'key'; b.innerHTML = '<b>' + (i + 1) + '</b>' + s.t; b.setAttribute('aria-pressed', i === 0);
+    b.addEventListener('click', function(){ show(i, true); }); keysEl.appendChild(b); return b; });
+
+  function lens(v){ var L = [0]; for (var i = 1; i < v.length; i++) L.push(L[i - 1] + Math.hypot(v[i][0] - v[i - 1][0], v[i][1] - v[i - 1][1])); return L; }
+  function at(v, L, d){ for (var i = 1; i < v.length; i++) if (d <= L[i]){ var k = (d - L[i - 1])/Math.max(.001, L[i] - L[i - 1]); return [i - 1, v[i - 1][0] + (v[i][0] - v[i - 1][0])*k, v[i - 1][1] + (v[i][1] - v[i - 1][1])*k]; } var e = v[v.length - 1]; return [v.length - 1, e[0], e[1]]; }
+  function place(x, y){ drop.setAttribute('cx', x.toFixed(1)); drop.setAttribute('cy', y.toFixed(1)); tag.style.left = ((x - VB[0])/VB[2]*100) + '%'; tag.style.top = ((y - VB[1])/VB[3]*100) + '%'; }
+  function lightUpTo(s, seg){ var lit = {}, name = s.tags[0][1]; s.tags.forEach(function(t){ if (t[0] <= seg){ name = t[1]; if (t[2]) lit[t[2]] = 1; } }); CH.forEach(function(c){ chips[c[0]].classList.toggle('lit', !!lit[c[0]]); }); tag.textContent = name; }
+  function dress(s){
+    ['de', 'iw'].forEach(function(k){ part(k).classList.toggle('gone', s.hide.indexOf(k) >= 0); });
+    svg.querySelector('.alt-ul').classList.toggle('gone', s.show.indexOf('alt-ul') < 0);
+    ['gwater', 'rot', 'snow', 'ice', 'stop', 'leak'].forEach(function(c){ var e = svg.querySelector('.' + c); var keep = (c === 'snow' || c === 'ice') && s.show.indexOf(c) >= 0; e.classList.toggle('on', keep); }); }
+  function result(s){ s.show.forEach(function(c){ var e = svg.querySelector('.fx.' + c); if (e) e.classList.add('on'); }); }
+  function show(i, user){ cur = i; var s = S[i], my = ++run;
+    keys.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    svg.querySelector('title').textContent = s.cap;
+    function words(){ out.querySelector('h3').textContent = s.t; out.querySelector('p').textContent = s.p; out.classList.remove('fade'); }
+    if (user && !OWL.reduce){ out.classList.add('fade'); setTimeout(words, 200); } else words();
+    dress(s);
+    var v = s.v, L = lens(v), T = L[L.length - 1];
+    flow.setAttribute('d', 'M' + v.map(function(p){ return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L '));
+    flow.style.strokeDasharray = T.toFixed(1);
+    if (OWL.reduce){ flow.style.strokeDashoffset = 0; var e = v[v.length - 1]; place(e[0], e[1]); lightUpTo(s, 99); tag.classList.add('on'); result(s); return; }
+    var t0 = performance.now(), dur = 900 + T*3.2; fig.classList.add('raining'); tag.classList.add('on');
+    (function step(now){ if (my !== run) return; var k = Math.min(1, (now - t0)/dur), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2)/2, q = at(v, L, e*T);
+      flow.style.strokeDashoffset = (T*(1 - e)).toFixed(1); place(q[1], q[2]); lightUpTo(s, q[0] + (e >= 1 ? 99 : 0));
+      if (k < 1) requestAnimationFrame(step); else { fig.classList.remove('raining'); result(s); } })(t0); }
+  root.querySelector('.again').addEventListener('click', function(){ show(cur, false); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ show(0, false); OWL.reveal(h2); return; }
+  dress(S[0]); out.querySelector('h3').textContent = S[0].t; out.querySelector('p').textContent = S[0].p; svg.querySelector('title').textContent = S[0].cap;
+  var io = new IntersectionObserver(function(en){ if (en[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); setTimeout(function(){ show(0, false); }, 300); } }, {threshold:.35}); io.observe(fig);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="explore" data-v="7">
+<section class="sec explore7" id="explore-7" aria-labelledby="ex7-h">
+<style>
+.explore7{overflow:hidden}
+.explore7 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px}
+.explore7 .lede{margin-top:12px;max-width:46ch}
+.explore7 .zones{display:flex;flex-wrap:wrap;gap:10px}
+.explore7 .zones button{min-height:52px;padding:0 20px;border-radius:16px;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore7 .zones button:hover{transform:translateY(-2px)}
+.explore7 .zones button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge),0 6px 12px -8px rgba(23,17,29,.4);transform:translateY(3px)}
+.explore7 .zones button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore7 .g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.62fr);gap:clamp(20px,3.4vw,48px);align-items:start;margin-top:clamp(18px,3vw,32px)}
+.explore7 .roof{position:relative;aspect-ratio:12/7;border-radius:26px;overflow:hidden;background:#3A3036;box-shadow:0 2px 0 #fff inset,0 44px 70px -44px rgba(23,17,29,.6);cursor:crosshair;touch-action:pan-y;--x:50%;--y:50%}
+.explore7 .roof:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.explore7 .lay{position:absolute;inset:0;-webkit-mask-image:radial-gradient(circle at var(--x) var(--y),transparent var(--r),#000 calc(var(--r) + 1.5px));mask-image:radial-gradient(circle at var(--x) var(--y),transparent var(--r),#000 calc(var(--r) + 1.5px))}
+.explore7 .lay img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;-webkit-user-drag:none;user-select:none}
+.explore7 .l0{--r:var(--r0,0px)}.explore7 .l1{--r:var(--r1,0px)}.explore7 .l2{--r:var(--r2,0px)}
+.explore7 .sheen{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.16) 45%,transparent 60%) 0 0/260% 100%;mix-blend-mode:soft-light;animation:ex7s 9s ease-in-out infinite;pointer-events:none}
+@keyframes ex7s{0%{background-position:120% 0}100%{background-position:-60% 0}}
+.explore7 .rings{position:absolute;left:var(--x);top:var(--y);pointer-events:none}
+.explore7 .rings i{position:absolute;left:0;top:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(251,250,246,.85),0 0 0 5px rgba(23,17,29,.18)}
+.explore7 .rings b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);padding:4px 10px;border-radius:999px;background:rgba(251,250,246,.95);color:#17111D;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 4px 10px -4px rgba(23,17,29,.4)}
+.explore7 .rip{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;border:2px solid rgba(234,162,33,.9);pointer-events:none;animation:ex7r .8s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes ex7r{from{transform:scale(.4);opacity:.9}to{transform:scale(5);opacity:0}}
+.explore7 .read .z{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.explore7 .read h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-.02em;margin:6px 0 10px}
+.explore7 .read p{font-size:17px;color:var(--ink-70);margin:0}
+.explore7 .read ol{margin:16px 0 0;padding:14px 0 0;border-top:3px solid var(--amber);list-style:none;display:grid;gap:8px;counter-reset:l}
+.explore7 .read li{display:flex;gap:10px;align-items:baseline;font-weight:700;font-size:16px;counter-increment:l}
+.explore7 .read li::before{content:"0" counter(l);font-size:13px;font-weight:800;color:#8E5A12;font-variant-numeric:tabular-nums}
+.explore7 .read > *{transition:opacity .25s,transform .35s cubic-bezier(.22,.61,.36,1)}
+.explore7 .read.fade > *{opacity:0;transform:translateY(6px)}
+.explore7 .hint{margin-top:12px;font-size:14px;color:var(--ink-70)}
+@media (max-width:980px){.explore7 .g{grid-template-columns:1fr}}
+@media (max-width:640px){.explore7 .rings b{font-size:11px;padding:3px 7px}.explore7 .roof{aspect-ratio:12/9}}
+@media (prefers-reduced-motion:reduce){.explore7 .sheen{animation:none}.explore7 .rip{display:none}.explore7 .read > *{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Explore the roof</span><h2 class="h2" id="ex7-h" style="margin-top:12px">Under the Lens</h2>
+  <p class="lede rv">Move across a finished roof and look through it. What sits under the shingles depends on where you are, just like on a real roof.</p></div>
+  <div class="zones" role="group" aria-label="Move the lens to"><button type="button" data-z="ridge">Ridge</button><button type="button" data-z="field">Field</button><button type="button" data-z="eave" aria-pressed="true">Eave</button></div></div>
+ <div class="g">
+  <div>
+   <div class="roof" tabindex="0" role="group" aria-roledescription="x-ray view" aria-label="A finished roof with an x-ray lens. Use the arrow keys to move the lens." aria-describedby="ex7-read" data-owl="say:Look underneath">
+    <div class="lay l3"><img alt="" aria-hidden="true" decoding="async"></div>
+    <div class="lay l2"><img alt="" aria-hidden="true" decoding="async"></div>
+    <div class="lay l1"><img alt="" aria-hidden="true" decoding="async"></div>
+    <div class="lay l0"><img alt="" aria-hidden="true" decoding="async"><span class="sheen"></span></div>
+    <div class="rings" aria-hidden="true"><i class="c0"></i><i class="c1"></i><i class="c2"></i><b class="b0"></b><b class="b1"></b><b class="b2"></b><b class="b3"></b></div>
+   </div>
+   <p class="hint">Point, tap or use the arrow keys. Rings, outside in: shingles, what lies under them, the deck, the rafters.</p>
+  </div>
+  <div class="read" id="ex7-read" aria-live="polite"><span class="z"></span><h3></h3><p></p><ol></ol></div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','7',function(root){
+  var roof = root.querySelector('.roof'), imgs = [].slice.call(root.querySelectorAll('.lay img')), rings = root.querySelector('.rings'), read = root.querySelector('.read'), zb = [].slice.call(root.querySelectorAll('.zones button')), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(29), X0 = 40, X1 = 1160, RID = 70, EAV = 610;
+  function rc(x, y, w, h, f, ex){ return '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + f + '"' + (ex || '') + '/>'; }
+  var sky = rc(0, 0, 1200, 700, '#E6ECEE') + rc(0, EAV + 30, 1200, 70, '#EDE6D6') + '<path d="M0 ' + (EAV + 46) + 'H1200M0 ' + (EAV + 62) + 'H1200" stroke="#C9C0AC" stroke-width="2"/>';
+  var gutter = rc(X0 - 10, EAV, X1 - X0 + 20, 24, '#E4E0D6', ' stroke="#9C9585" stroke-width="2"') + rc(1090, EAV + 24, 22, 60, '#E4E0D6', ' stroke="#9C9585" stroke-width="2"');
+  /* L3: attic and rafters at 24" on centre (1 unit = 0.4") */
+  var h3 = sky + rc(X0, RID, X1 - X0, EAV - RID, '#3A3036');
+  for (var x = X0 + 10; x < X1; x += 60) h3 += rc(x, RID, 8, EAV - RID, '#D3AF7A') + rc(x + 6, RID, 2, EAV - RID, '#B48E5A');
+  h3 += rc(X0, RID - 6, X1 - X0, 12, '#C9A06A') + gutter;
+  /* L2: OSB deck, 4x8 sheets with staggered joints and gaps; slot cut at the ridge for the vent; drip edge at the eave */
+  var h2s = sky + rc(X0, RID, X1 - X0, EAV - RID, '#DDBD82');
+  for (var i = 0; i < 520; i++){ var sx = X0 + R()*(X1 - X0), sy = RID + R()*(EAV - RID); h2s += rc(sx, sy, 10 + R()*16, 2.5, R() < .5 ? '#C79F5E' : '#E8CC96', ' transform="rotate(' + (R()*60 - 30).toFixed(0) + ' ' + sx.toFixed(0) + ' ' + sy.toFixed(0) + ')"'); }
+  var row = 0; for (var y = EAV - 120; y > RID - 120; y -= 120, row++){ h2s += '<path d="M' + X0 + ' ' + y + 'H' + X1 + '" stroke="#8C6A3A" stroke-width="2"/>'; for (var jx = X0 + (row % 2 ? 120 : 0) + 240; jx < X1; jx += 240) h2s += '<path d="M' + jx + ' ' + Math.max(RID, y) + 'V' + (y + 120) + '" stroke="#8C6A3A" stroke-width="2"/>'; }
+  for (var nx = X0 + 14; nx < X1; nx += 60) for (var ny = RID + 20; ny < EAV; ny += 30) h2s += '<circle cx="' + nx + '" cy="' + ny + '" r="2" fill="#6B5A44"/>';
+  h2s += rc(X0 + 30, RID, X1 - X0 - 60, 14, '#3A3036') + rc(X0, EAV - 10, X1 - X0, 10, '#A8B0B5') + gutter;
+  /* L1: ice & water shield from the eave up past the heated wall (two lapped rolls), synthetic underlayment above lapped upslope with cap nails; drip edge over it on the rakes */
+  var IW = EAV - 176, h1 = sky + rc(X0, RID, X1 - X0, EAV - RID, '#C2CCD3');
+  for (var u = IW + 8; u > RID; u -= 112){ h1 += rc(X0, u - 120, X1 - X0, 120, '#C7D1D8') + '<path d="M' + X0 + ' ' + u + 'H' + X1 + '" stroke="#8FA0AB" stroke-width="2"/>'; for (var t = X0 + 30; t < X1; t += 150) h1 += rc(t, u - 70, 90, 5, '#9FB0BB'); for (var cn = X0 + 20; cn < X1; cn += 40) h1 += '<circle cx="' + cn + '" cy="' + (u - 10) + '" r="3.5" fill="#EAA221" stroke="#8E5A12" stroke-width="1"/><circle cx="' + (cn + 20) + '" cy="' + (u - 62) + '" r="3.5" fill="#EAA221" stroke="#8E5A12" stroke-width="1"/>'; }
+  h1 += rc(X0, IW, X1 - X0, EAV - IW, '#2F2A33') + '<path d="M' + X0 + ' ' + (EAV - 90) + 'H' + X1 + '" stroke="#55505D" stroke-width="3"/>';
+  for (var gx = X0; gx < X1; gx += 7) h1 += rc(gx + R()*4, IW + R()*(EAV - IW), 2, 2, '#47414D');
+  h1 += rc(X0 + 30, RID, X1 - X0 - 60, 14, '#3A3036') + rc(X0, RID, 9, EAV - RID, '#A8B0B5') + rc(X1 - 9, RID, 9, EAV - RID, '#A8B0B5') + gutter;
+  /* L0: architectural shingles, 5 5/8" courses; ridge vent under ridge cap */
+  var h0 = sky + rc(X0, RID, X1 - X0, EAV - RID, '#4A4550');
+  for (var cy = EAV - 14, k = 0; cy > RID + 10; cy -= 14, k++){ var cx = X0 - R()*50; while (cx < X1){ var w = 34 + R()*44, c = 70 + Math.round(R()*26); h0 += rc(Math.max(X0, cx), cy, Math.min(w - 1.5, X1 - Math.max(X0, cx)), 14, 'rgb(' + c + ',' + (c - 6) + ',' + (c + 8) + ')'); if (R() < .5) h0 += rc(Math.max(X0, cx + 4), cy + 8, Math.min(w*.5, X1 - Math.max(X0, cx + 4)), 6, '#17111D', ' fill-opacity=".3"'); cx += w; } h0 += '<path d="M' + X0 + ' ' + (cy + 14) + 'H' + X1 + '" stroke="#17111D" stroke-opacity=".35" stroke-width="1.5"/>'; }
+  h0 += rc(X0, RID - 8, X1 - X0, 30, '#3E3944');
+  for (var rx = X0; rx < X1; rx += 30) h0 += rc(rx, RID - 8, 29, 30, '#4F4A57') + rc(rx, RID - 8, 29, 8, '#17111D', ' fill-opacity=".25"');
+  h0 += gutter;
+  /* each layer is drawn once and shown as an image, so the moving masks only composite */
+  [h3, h2s, h1, h0].forEach(function(h, i){ imgs[i].src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" preserveAspectRatio="xMidYMid slice">' + h + '</svg>'); });
+
+  var Z = {
+    eave: {n:'At the eave', h:'Ice & water shield', p:'A self-sealing membrane runs from the eave up past the inside of the heated wall, over the drip edge. It closes around every nail, so water backed up by an ice dam can’t reach the deck.', l:['Shingles over a sealed starter strip', 'Ice & water shield, two lapped rolls', 'Drip edge at the edge, under the membrane', 'OSB deck', 'Rafters']},
+    field: {n:'Up the field', h:'Synthetic underlayment', p:'Rolled out in courses from the bottom up, each one lapped over the one below so water runs over every seam. Held down with cap nails.', l:['Architectural shingles', 'Synthetic underlayment, lapped upslope', 'Cap nails in rows', 'OSB deck, staggered joints', 'Rafters at 24″ on centre']},
+    ridge: {n:'At the ridge', h:'Ridge vent slot', p:'A slot is cut through the deck along the ridge, stopping short of the ends, then covered by ridge vent and cap shingles. Warm, damp attic air leaves through it.', l:['Ridge cap shingles', 'Ridge vent', 'Slot cut in the deck', 'Underlayment stopped at the slot', 'Rafters and ridge board']},
+    rake: {n:'At the rake', h:'Drip edge over the underlayment', p:'On the sloped edges the drip edge goes on top of the underlayment. At the eave it goes underneath. Both send water away from the wood.', l:['Shingles', 'Drip edge on top of the underlayment', 'Underlayment', 'OSB deck', 'Rafters']}};
+  var LBL = {eave:['Shingles', 'Ice & water shield'], field:['Shingles', 'Underlayment'], ridge:['Ridge cap', 'Ridge vent slot'], rake:['Shingles', 'Rake drip edge']};
+  var C = [root.querySelector('.c0'), root.querySelector('.c1'), root.querySelector('.c2')], B = [0, 1, 2, 3].map(function(i){ return root.querySelector('.b' + i); });
+  var vx = 600, vy = 520, tx = vx, ty = vy, r = 0, tr = 0, zone = '', raf = 0, lastX = null, lastY = null, dist = 0, speed = 0;
+  function zoneOf(x, y){ return y < RID + 50 ? 'ridge' : (x < X0 + 60 || x > X1 - 60) ? 'rake' : y > EAV - 176 ? 'eave' : 'field'; }
+  function size(){ var b = roof.getBoundingClientRect(); return {w: b.width, h: b.height, s: Math.max(b.width/1200, b.height/700), ox: (b.width - 1200*Math.max(b.width/1200, b.height/700))/2, oy: (b.height - 700*Math.max(b.width/1200, b.height/700))/2}; }
+  function setZone(z){ if (z === zone) return; zone = z; var d = Z[z];
+    zb.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.z === z); });
+    function put(){ read.querySelector('.z').textContent = d.n; read.querySelector('h3').textContent = d.h; read.querySelector('p').textContent = d.p; read.querySelector('ol').innerHTML = d.l.map(function(t){ return '<li>' + t + '</li>'; }).join(''); read.classList.remove('fade'); }
+    if (OWL.reduce || !read.textContent.trim()) put(); else { read.classList.add('fade'); setTimeout(put, 160); }
+    B[0].textContent = LBL[z][0]; B[1].textContent = LBL[z][1]; B[2].textContent = 'OSB deck'; B[3].textContent = 'Rafters'; }
+  function draw(){ var S = size(), px = S.ox + vx*S.s, py = S.oy + vy*S.s, r1 = r*.66, r2 = r*.34;
+    roof.style.setProperty('--x', px.toFixed(1) + 'px'); roof.style.setProperty('--y', py.toFixed(1) + 'px');
+    roof.style.setProperty('--r0', r.toFixed(1) + 'px'); roof.style.setProperty('--r1', r1.toFixed(1) + 'px'); roof.style.setProperty('--r2', r2.toFixed(1) + 'px');
+    [r, r1, r2].forEach(function(q, i){ C[i].style.width = C[i].style.height = (2*q).toFixed(1) + 'px'; });
+    var dx = S.w/2 - px, dy = S.h/2 - py, a = Math.hypot(dx, dy) < 60 ? -Math.PI/4 : Math.atan2(dy, dx), m = [r + 18, (r + r1)/2, (r1 + r2)/2, r2*.45];
+    B.forEach(function(b, i){ b.style.left = (Math.cos(a)*m[i]).toFixed(1) + 'px'; b.style.top = (Math.sin(a)*m[i]).toFixed(1) + 'px'; b.style.opacity = r > 40 ? 1 : 0; });
+    setZone(zoneOf(vx, vy)); }
+  function base(){ var S = size(); return Math.max(78, Math.min(190, S.w*.17)); }
+  var last = 0;
+  function tick(now){ var dt = last ? Math.min(100, now - last) : 16.7; last = now; var f = dt/16.7, kp = 1 - Math.pow(.9, f), kr = 1 - Math.pow(.86, f);
+    vx += (tx - vx)*kp; vy += (ty - vy)*kp; speed *= Math.pow(.9, f); tr = base()*(1 + Math.min(.3, speed/1600)); r += (tr - r)*kr; draw();
+    if (Math.abs(tx - vx) > .3 || Math.abs(ty - vy) > .3 || Math.abs(tr - r) > .3) raf = requestAnimationFrame(tick); else { raf = 0; last = 0; } }
+  function kick(){ if (OWL.reduce){ vx = tx; vy = ty; r = tr = base(); draw(); return; } if (!raf) raf = requestAnimationFrame(tick); }
+  function toView(e){ var b = roof.getBoundingClientRect(), S = size(); return [(e.clientX - b.left - S.ox)/S.s, (e.clientY - b.top - S.oy)/S.s]; }
+  function clamp(){ tx = Math.max(X0 + 10, Math.min(X1 - 10, tx)); ty = Math.max(RID - 4, Math.min(EAV + 10, ty)); }
+  function ripple(e){ if (OWL.reduce || root.querySelectorAll('.rip').length > 6) return; var b = roof.getBoundingClientRect(), d = document.createElement('span'); d.className = 'rip'; d.style.left = (e.clientX - b.left) + 'px'; d.style.top = (e.clientY - b.top) + 'px'; roof.appendChild(d); d.addEventListener('animationend', function(){ d.remove(); }); }
+  roof.addEventListener('pointermove', function(e){ var q = toView(e); tx = q[0]; ty = q[1]; clamp();
+    if (lastX !== null){ var dd = Math.hypot(e.clientX - lastX, e.clientY - lastY); dist += dd; speed = Math.min(1200, speed + dd*6); if (dist > 90){ dist = 0; ripple(e); } } lastX = e.clientX; lastY = e.clientY; kick(); });
+  roof.addEventListener('pointerdown', function(e){ var q = toView(e); tx = q[0]; ty = q[1]; clamp(); ripple(e); kick(); });
+  roof.addEventListener('pointerleave', function(){ lastX = null; });
+  var SPOT = {ridge: [600, RID + 18], field: [620, 300], eave: [600, EAV - 70]};
+  zb.forEach(function(b){ b.addEventListener('click', function(){ var s = SPOT[b.dataset.z]; tx = s[0]; ty = s[1]; kick(); }); });
+  roof.addEventListener('keydown', function(e){ var st = e.shiftKey ? 90 : 30, m = {ArrowLeft:[-st, 0], ArrowRight:[st, 0], ArrowUp:[0, -st], ArrowDown:[0, st]}[e.key]; if (!m) return; e.preventDefault(); tx += m[0]; ty += m[1]; clamp(); kick(); });
+  addEventListener('resize', function(){ draw(); });
+  tx = vx = SPOT.eave[0]; ty = vy = SPOT.eave[1]; draw();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ r = tr = base(); draw(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(en){ if (en[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); vx = 600; vy = 300; tx = SPOT.eave[0]; ty = SPOT.eave[1]; kick(); } }, {threshold:.35}); io.observe(roof);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="explore" data-b="1">
 <section class="sec explore1" id="explore" aria-labelledby="ex1-h">
 <style>

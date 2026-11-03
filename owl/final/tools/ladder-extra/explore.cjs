@@ -18,5 +18,38 @@ module.exports = {
     await p.focus(S + ' #ex5-c2'); await p.keyboard.press('ArrowDown'); await p.waitForTimeout(400);
     rec('arrow keys move through the layers (roving tabindex)', await p.evaluate(S => document.activeElement.id === 'ex5-c3' && document.querySelector(S + ' #ex5-c3').tabIndex === 0 && /Drip edge/.test(document.querySelector(S + ' .info h3').textContent), S));
     rec('numbers are framed as typical, not as a quote', await p.evaluate(S => /Typical values for a correct roof, not a quote/.test(document.querySelector(S).innerText), S));
+  },
+  '6': async (p, S, rec) => {
+    await p.waitForTimeout(4500);
+    rec('a correct eave plays first: the drop ends in the gutter, water shows there', await p.evaluate(S => document.querySelector(S + ' .gwater').classList.contains('on') && document.querySelector(S + ' .tag').textContent === 'Into the gutter', S));
+    rec('layers are drawn in roofer order (deck → drip edge → ice & water → underlayment → starter → shingles)', await p.evaluate(S => { const k = [...document.querySelectorAll(S + ' .part')].map(e => e.dataset.k); const o = ['dk', 'de', 'iw', 'ul', 'st', 'sh']; return o.every((x, i) => i === 0 || k.indexOf(x) > k.indexOf(o[i - 1])); }, S));
+    rec('ice & water shield runs past the inside of the heated wall', await p.evaluate(S => { const b = document.querySelector(S + ' .part[data-k="iw"]').getBBox(); return b.x < 470; }, S));
+    rec('the lit chips follow the drop (shingles, starter, drip edge, gutter)', await p.evaluate(S => [...document.querySelectorAll(S + ' .chips li.lit')].map(l => l.textContent).join('|') === 'Shingles|Starter strip|Drip edge|Gutter', S));
+    await p.click(S + ' .key:nth-child(2)'); await p.waitForTimeout(4500);
+    rec('without drip edge: the drip edge is removed and the fascia shows rot', await p.evaluate(S => document.querySelector(S + ' .part[data-k="de"]').classList.contains('gone') && document.querySelector(S + ' .rot').classList.contains('on') && !document.querySelector(S + ' .gwater').classList.contains('on'), S));
+    await p.click(S + ' .key:nth-child(3)'); await p.waitForTimeout(4500);
+    rec('ice dam with ice & water shield: snow and ice show, the water is stopped', await p.evaluate(S => ['snow', 'ice', 'stop'].every(c => document.querySelector(S + ' .' + c).classList.contains('on')) && document.querySelector(S + ' .tag').textContent === 'Sealed by ice & water shield' && document.querySelector(S + ' .chips li:nth-child(4)').classList.contains('lit'), S));
+    await p.click(S + ' .key:nth-child(4)'); await p.waitForTimeout(4500);
+    rec('ice dam without it: the membrane is gone and the leak reaches the ceiling', await p.evaluate(S => document.querySelector(S + ' .part[data-k="iw"]').classList.contains('gone') && document.querySelector(S + ' .leak').classList.contains('on') && !document.querySelector(S + ' .stop').classList.contains('on'), S));
+    rec('one scenario key is pressed and the outcome text matches it', await p.evaluate(S => document.querySelectorAll(S + ' .key[aria-pressed="true"]').length === 1 && document.querySelector(S + ' .out h3').textContent === 'Ice dam, without it', S));
+    rec('the figure has a text description of the scenario', await p.evaluate(S => /no ice and water shield/.test(document.querySelector(S + ' svg title').textContent), S));
+    rec('no game: no score, no win state', await p.evaluate(S => !/score|you win|points|level/i.test(document.querySelector(S).innerText), S));
+  },
+  '7': async (p, S, rec) => {
+    await p.waitForTimeout(2500);
+    rec('the lens opens at the eave on view', await p.evaluate(S => parseFloat(getComputedStyle(document.querySelector(S + ' .roof')).getPropertyValue('--r0')) > 60 && document.querySelector(S + ' .read h3').textContent === 'Ice & water shield', S));
+    rec('three rings, each smaller than the last', await p.evaluate(S => { const w = [...document.querySelectorAll(S + ' .rings i')].map(i => parseFloat(i.style.width)); return w[0] > w[1] && w[1] > w[2] && w[2] > 0; }, S));
+    const box = await p.evaluate(S => { const r = document.querySelector(S + ' .roof').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, S);
+    await p.mouse.move(box[0] + box[2] * .5, box[1] + box[3] * .45, { steps: 8 }); await p.waitForTimeout(1600);
+    rec('pointing up the field shows synthetic underlayment', await p.evaluate(S => document.querySelector(S + ' .read h3').textContent === 'Synthetic underlayment' && document.querySelector(S + ' .zones button[data-z="field"]').getAttribute('aria-pressed') === 'true', S));
+    rec('the lens follows the pointer', await p.evaluate(([S, b]) => { const x = parseFloat(getComputedStyle(document.querySelector(S + ' .roof')).getPropertyValue('--x')); return Math.abs(x - b[2] * .5) < 40; }, [S, box]));
+    await p.mouse.move(box[0] + box[2] * .03, box[1] + box[3] * .5, { steps: 6 }); await p.waitForTimeout(1600);
+    rec('at the rake the drip edge goes over the underlayment', await p.evaluate(S => document.querySelector(S + ' .read h3').textContent === 'Drip edge over the underlayment', S));
+    await p.mouse.move(box[0] - 30, box[1] - 30); await p.click(S + ' .zones button[data-z="ridge"]'); await p.waitForTimeout(1800);
+    rec('Ridge key glides the lens to the ridge vent slot', await p.evaluate(S => document.querySelector(S + ' .read h3').textContent === 'Ridge vent slot' && document.querySelector(S + ' .rings .b1').textContent === 'Ridge vent slot', S));
+    await p.focus(S + ' .roof'); for (let i = 0; i < 6; i++) await p.keyboard.press('Shift+ArrowDown'); await p.waitForTimeout(1600);
+    rec('arrow keys move the lens back down to the eave', await p.evaluate(S => document.querySelector(S + ' .read h3').textContent === 'Ice & water shield', S));
+    rec('the readout lists five layers for the zone', await p.evaluate(S => document.querySelectorAll(S + ' .read li').length === 5, S));
+    rec('the deck layer shows a slot cut at the ridge (attic visible)', await p.evaluate(S => /y="70\.0" width="[\d.]+" height="14\.0" fill="#3A3036"/.test(decodeURIComponent(document.querySelector(S + ' .l2 img').src)), S));
   }
 };

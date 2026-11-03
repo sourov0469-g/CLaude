@@ -1,0 +1,133 @@
+<section class="sec explore7" id="explore-7" aria-labelledby="ex7-h">
+<style>
+.explore7{overflow:hidden}
+.explore7 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px}
+.explore7 .lede{margin-top:12px;max-width:46ch}
+.explore7 .zones{display:flex;flex-wrap:wrap;gap:10px}
+.explore7 .zones button{min-height:52px;padding:0 20px;border-radius:16px;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore7 .zones button:hover{transform:translateY(-2px)}
+.explore7 .zones button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge),0 6px 12px -8px rgba(23,17,29,.4);transform:translateY(3px)}
+.explore7 .zones button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore7 .g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.62fr);gap:clamp(20px,3.4vw,48px);align-items:start;margin-top:clamp(18px,3vw,32px)}
+.explore7 .roof{position:relative;aspect-ratio:12/7;border-radius:26px;overflow:hidden;background:#3A3036;box-shadow:0 2px 0 #fff inset,0 44px 70px -44px rgba(23,17,29,.6);cursor:crosshair;touch-action:pan-y;--x:50%;--y:50%}
+.explore7 .roof:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.explore7 .lay{position:absolute;inset:0;-webkit-mask-image:radial-gradient(circle at var(--x) var(--y),transparent var(--r),#000 calc(var(--r) + 1.5px));mask-image:radial-gradient(circle at var(--x) var(--y),transparent var(--r),#000 calc(var(--r) + 1.5px))}
+.explore7 .lay img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;-webkit-user-drag:none;user-select:none}
+.explore7 .l0{--r:var(--r0,0px)}.explore7 .l1{--r:var(--r1,0px)}.explore7 .l2{--r:var(--r2,0px)}
+.explore7 .sheen{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.16) 45%,transparent 60%) 0 0/260% 100%;mix-blend-mode:soft-light;animation:ex7s 9s ease-in-out infinite;pointer-events:none}
+@keyframes ex7s{0%{background-position:120% 0}100%{background-position:-60% 0}}
+.explore7 .rings{position:absolute;left:var(--x);top:var(--y);pointer-events:none}
+.explore7 .rings i{position:absolute;left:0;top:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(251,250,246,.85),0 0 0 5px rgba(23,17,29,.18)}
+.explore7 .rings b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);padding:4px 10px;border-radius:999px;background:rgba(251,250,246,.95);color:#17111D;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 4px 10px -4px rgba(23,17,29,.4)}
+.explore7 .rip{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;border:2px solid rgba(234,162,33,.9);pointer-events:none;animation:ex7r .8s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes ex7r{from{transform:scale(.4);opacity:.9}to{transform:scale(5);opacity:0}}
+.explore7 .read .z{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.explore7 .read h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-.02em;margin:6px 0 10px}
+.explore7 .read p{font-size:17px;color:var(--ink-70);margin:0}
+.explore7 .read ol{margin:16px 0 0;padding:14px 0 0;border-top:3px solid var(--amber);list-style:none;display:grid;gap:8px;counter-reset:l}
+.explore7 .read li{display:flex;gap:10px;align-items:baseline;font-weight:700;font-size:16px;counter-increment:l}
+.explore7 .read li::before{content:"0" counter(l);font-size:13px;font-weight:800;color:#8E5A12;font-variant-numeric:tabular-nums}
+.explore7 .read > *{transition:opacity .25s,transform .35s cubic-bezier(.22,.61,.36,1)}
+.explore7 .read.fade > *{opacity:0;transform:translateY(6px)}
+.explore7 .hint{margin-top:12px;font-size:14px;color:var(--ink-70)}
+@media (max-width:980px){.explore7 .g{grid-template-columns:1fr}}
+@media (max-width:640px){.explore7 .rings b{font-size:11px;padding:3px 7px}.explore7 .roof{aspect-ratio:12/9}}
+@media (prefers-reduced-motion:reduce){.explore7 .sheen{animation:none}.explore7 .rip{display:none}.explore7 .read > *{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Explore the roof</span><h2 class="h2" id="ex7-h" style="margin-top:12px">Under the Lens</h2>
+  <p class="lede rv">Move across a finished roof and look through it. What sits under the shingles depends on where you are, just like on a real roof.</p></div>
+  <div class="zones" role="group" aria-label="Move the lens to"><button type="button" data-z="ridge">Ridge</button><button type="button" data-z="field">Field</button><button type="button" data-z="eave" aria-pressed="true">Eave</button></div></div>
+ <div class="g">
+  <div>
+   <div class="roof" tabindex="0" role="group" aria-roledescription="x-ray view" aria-label="A finished roof with an x-ray lens. Use the arrow keys to move the lens." aria-describedby="ex7-read" data-owl="say:Look underneath">
+    <div class="lay l3"><img alt="" aria-hidden="true" decoding="async"></div>
+    <div class="lay l2"><img alt="" aria-hidden="true" decoding="async"></div>
+    <div class="lay l1"><img alt="" aria-hidden="true" decoding="async"></div>
+    <div class="lay l0"><img alt="" aria-hidden="true" decoding="async"><span class="sheen"></span></div>
+    <div class="rings" aria-hidden="true"><i class="c0"></i><i class="c1"></i><i class="c2"></i><b class="b0"></b><b class="b1"></b><b class="b2"></b><b class="b3"></b></div>
+   </div>
+   <p class="hint">Point, tap or use the arrow keys. Rings, outside in: shingles, what lies under them, the deck, the rafters.</p>
+  </div>
+  <div class="read" id="ex7-read" aria-live="polite"><span class="z"></span><h3></h3><p></p><ol></ol></div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','7',function(root){
+  var roof = root.querySelector('.roof'), imgs = [].slice.call(root.querySelectorAll('.lay img')), rings = root.querySelector('.rings'), read = root.querySelector('.read'), zb = [].slice.call(root.querySelectorAll('.zones button')), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(29), X0 = 40, X1 = 1160, RID = 70, EAV = 610;
+  function rc(x, y, w, h, f, ex){ return '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + f + '"' + (ex || '') + '/>'; }
+  var sky = rc(0, 0, 1200, 700, '#E6ECEE') + rc(0, EAV + 30, 1200, 70, '#EDE6D6') + '<path d="M0 ' + (EAV + 46) + 'H1200M0 ' + (EAV + 62) + 'H1200" stroke="#C9C0AC" stroke-width="2"/>';
+  var gutter = rc(X0 - 10, EAV, X1 - X0 + 20, 24, '#E4E0D6', ' stroke="#9C9585" stroke-width="2"') + rc(1090, EAV + 24, 22, 60, '#E4E0D6', ' stroke="#9C9585" stroke-width="2"');
+  /* L3: attic and rafters at 24" on centre (1 unit = 0.4") */
+  var h3 = sky + rc(X0, RID, X1 - X0, EAV - RID, '#3A3036');
+  for (var x = X0 + 10; x < X1; x += 60) h3 += rc(x, RID, 8, EAV - RID, '#D3AF7A') + rc(x + 6, RID, 2, EAV - RID, '#B48E5A');
+  h3 += rc(X0, RID - 6, X1 - X0, 12, '#C9A06A') + gutter;
+  /* L2: OSB deck, 4x8 sheets with staggered joints and gaps; slot cut at the ridge for the vent; drip edge at the eave */
+  var h2s = sky + rc(X0, RID, X1 - X0, EAV - RID, '#DDBD82');
+  for (var i = 0; i < 520; i++){ var sx = X0 + R()*(X1 - X0), sy = RID + R()*(EAV - RID); h2s += rc(sx, sy, 10 + R()*16, 2.5, R() < .5 ? '#C79F5E' : '#E8CC96', ' transform="rotate(' + (R()*60 - 30).toFixed(0) + ' ' + sx.toFixed(0) + ' ' + sy.toFixed(0) + ')"'); }
+  var row = 0; for (var y = EAV - 120; y > RID - 120; y -= 120, row++){ h2s += '<path d="M' + X0 + ' ' + y + 'H' + X1 + '" stroke="#8C6A3A" stroke-width="2"/>'; for (var jx = X0 + (row % 2 ? 120 : 0) + 240; jx < X1; jx += 240) h2s += '<path d="M' + jx + ' ' + Math.max(RID, y) + 'V' + (y + 120) + '" stroke="#8C6A3A" stroke-width="2"/>'; }
+  for (var nx = X0 + 14; nx < X1; nx += 60) for (var ny = RID + 20; ny < EAV; ny += 30) h2s += '<circle cx="' + nx + '" cy="' + ny + '" r="2" fill="#6B5A44"/>';
+  h2s += rc(X0 + 30, RID, X1 - X0 - 60, 14, '#3A3036') + rc(X0, EAV - 10, X1 - X0, 10, '#A8B0B5') + gutter;
+  /* L1: ice & water shield from the eave up past the heated wall (two lapped rolls), synthetic underlayment above lapped upslope with cap nails; drip edge over it on the rakes */
+  var IW = EAV - 176, h1 = sky + rc(X0, RID, X1 - X0, EAV - RID, '#C2CCD3');
+  for (var u = IW + 8; u > RID; u -= 112){ h1 += rc(X0, u - 120, X1 - X0, 120, '#C7D1D8') + '<path d="M' + X0 + ' ' + u + 'H' + X1 + '" stroke="#8FA0AB" stroke-width="2"/>'; for (var t = X0 + 30; t < X1; t += 150) h1 += rc(t, u - 70, 90, 5, '#9FB0BB'); for (var cn = X0 + 20; cn < X1; cn += 40) h1 += '<circle cx="' + cn + '" cy="' + (u - 10) + '" r="3.5" fill="#EAA221" stroke="#8E5A12" stroke-width="1"/><circle cx="' + (cn + 20) + '" cy="' + (u - 62) + '" r="3.5" fill="#EAA221" stroke="#8E5A12" stroke-width="1"/>'; }
+  h1 += rc(X0, IW, X1 - X0, EAV - IW, '#2F2A33') + '<path d="M' + X0 + ' ' + (EAV - 90) + 'H' + X1 + '" stroke="#55505D" stroke-width="3"/>';
+  for (var gx = X0; gx < X1; gx += 7) h1 += rc(gx + R()*4, IW + R()*(EAV - IW), 2, 2, '#47414D');
+  h1 += rc(X0 + 30, RID, X1 - X0 - 60, 14, '#3A3036') + rc(X0, RID, 9, EAV - RID, '#A8B0B5') + rc(X1 - 9, RID, 9, EAV - RID, '#A8B0B5') + gutter;
+  /* L0: architectural shingles, 5 5/8" courses; ridge vent under ridge cap */
+  var h0 = sky + rc(X0, RID, X1 - X0, EAV - RID, '#4A4550');
+  for (var cy = EAV - 14, k = 0; cy > RID + 10; cy -= 14, k++){ var cx = X0 - R()*50; while (cx < X1){ var w = 34 + R()*44, c = 70 + Math.round(R()*26); h0 += rc(Math.max(X0, cx), cy, Math.min(w - 1.5, X1 - Math.max(X0, cx)), 14, 'rgb(' + c + ',' + (c - 6) + ',' + (c + 8) + ')'); if (R() < .5) h0 += rc(Math.max(X0, cx + 4), cy + 8, Math.min(w*.5, X1 - Math.max(X0, cx + 4)), 6, '#17111D', ' fill-opacity=".3"'); cx += w; } h0 += '<path d="M' + X0 + ' ' + (cy + 14) + 'H' + X1 + '" stroke="#17111D" stroke-opacity=".35" stroke-width="1.5"/>'; }
+  h0 += rc(X0, RID - 8, X1 - X0, 30, '#3E3944');
+  for (var rx = X0; rx < X1; rx += 30) h0 += rc(rx, RID - 8, 29, 30, '#4F4A57') + rc(rx, RID - 8, 29, 8, '#17111D', ' fill-opacity=".25"');
+  h0 += gutter;
+  /* each layer is drawn once and shown as an image, so the moving masks only composite */
+  [h3, h2s, h1, h0].forEach(function(h, i){ imgs[i].src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" preserveAspectRatio="xMidYMid slice">' + h + '</svg>'); });
+
+  var Z = {
+    eave: {n:'At the eave', h:'Ice & water shield', p:'A self-sealing membrane runs from the eave up past the inside of the heated wall, over the drip edge. It closes around every nail, so water backed up by an ice dam can’t reach the deck.', l:['Shingles over a sealed starter strip', 'Ice & water shield, two lapped rolls', 'Drip edge at the edge, under the membrane', 'OSB deck', 'Rafters']},
+    field: {n:'Up the field', h:'Synthetic underlayment', p:'Rolled out in courses from the bottom up, each one lapped over the one below so water runs over every seam. Held down with cap nails.', l:['Architectural shingles', 'Synthetic underlayment, lapped upslope', 'Cap nails in rows', 'OSB deck, staggered joints', 'Rafters at 24″ on centre']},
+    ridge: {n:'At the ridge', h:'Ridge vent slot', p:'A slot is cut through the deck along the ridge, stopping short of the ends, then covered by ridge vent and cap shingles. Warm, damp attic air leaves through it.', l:['Ridge cap shingles', 'Ridge vent', 'Slot cut in the deck', 'Underlayment stopped at the slot', 'Rafters and ridge board']},
+    rake: {n:'At the rake', h:'Drip edge over the underlayment', p:'On the sloped edges the drip edge goes on top of the underlayment. At the eave it goes underneath. Both send water away from the wood.', l:['Shingles', 'Drip edge on top of the underlayment', 'Underlayment', 'OSB deck', 'Rafters']}};
+  var LBL = {eave:['Shingles', 'Ice & water shield'], field:['Shingles', 'Underlayment'], ridge:['Ridge cap', 'Ridge vent slot'], rake:['Shingles', 'Rake drip edge']};
+  var C = [root.querySelector('.c0'), root.querySelector('.c1'), root.querySelector('.c2')], B = [0, 1, 2, 3].map(function(i){ return root.querySelector('.b' + i); });
+  var vx = 600, vy = 520, tx = vx, ty = vy, r = 0, tr = 0, zone = '', raf = 0, lastX = null, lastY = null, dist = 0, speed = 0;
+  function zoneOf(x, y){ return y < RID + 50 ? 'ridge' : (x < X0 + 60 || x > X1 - 60) ? 'rake' : y > EAV - 176 ? 'eave' : 'field'; }
+  function size(){ var b = roof.getBoundingClientRect(); return {w: b.width, h: b.height, s: Math.max(b.width/1200, b.height/700), ox: (b.width - 1200*Math.max(b.width/1200, b.height/700))/2, oy: (b.height - 700*Math.max(b.width/1200, b.height/700))/2}; }
+  function setZone(z){ if (z === zone) return; zone = z; var d = Z[z];
+    zb.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.z === z); });
+    function put(){ read.querySelector('.z').textContent = d.n; read.querySelector('h3').textContent = d.h; read.querySelector('p').textContent = d.p; read.querySelector('ol').innerHTML = d.l.map(function(t){ return '<li>' + t + '</li>'; }).join(''); read.classList.remove('fade'); }
+    if (OWL.reduce || !read.textContent.trim()) put(); else { read.classList.add('fade'); setTimeout(put, 160); }
+    B[0].textContent = LBL[z][0]; B[1].textContent = LBL[z][1]; B[2].textContent = 'OSB deck'; B[3].textContent = 'Rafters'; }
+  function draw(){ var S = size(), px = S.ox + vx*S.s, py = S.oy + vy*S.s, r1 = r*.66, r2 = r*.34;
+    roof.style.setProperty('--x', px.toFixed(1) + 'px'); roof.style.setProperty('--y', py.toFixed(1) + 'px');
+    roof.style.setProperty('--r0', r.toFixed(1) + 'px'); roof.style.setProperty('--r1', r1.toFixed(1) + 'px'); roof.style.setProperty('--r2', r2.toFixed(1) + 'px');
+    [r, r1, r2].forEach(function(q, i){ C[i].style.width = C[i].style.height = (2*q).toFixed(1) + 'px'; });
+    var dx = S.w/2 - px, dy = S.h/2 - py, a = Math.hypot(dx, dy) < 60 ? -Math.PI/4 : Math.atan2(dy, dx), m = [r + 18, (r + r1)/2, (r1 + r2)/2, r2*.45];
+    B.forEach(function(b, i){ b.style.left = (Math.cos(a)*m[i]).toFixed(1) + 'px'; b.style.top = (Math.sin(a)*m[i]).toFixed(1) + 'px'; b.style.opacity = r > 40 ? 1 : 0; });
+    setZone(zoneOf(vx, vy)); }
+  function base(){ var S = size(); return Math.max(78, Math.min(190, S.w*.17)); }
+  var last = 0;
+  function tick(now){ var dt = last ? Math.min(100, now - last) : 16.7; last = now; var f = dt/16.7, kp = 1 - Math.pow(.9, f), kr = 1 - Math.pow(.86, f);
+    vx += (tx - vx)*kp; vy += (ty - vy)*kp; speed *= Math.pow(.9, f); tr = base()*(1 + Math.min(.3, speed/1600)); r += (tr - r)*kr; draw();
+    if (Math.abs(tx - vx) > .3 || Math.abs(ty - vy) > .3 || Math.abs(tr - r) > .3) raf = requestAnimationFrame(tick); else { raf = 0; last = 0; } }
+  function kick(){ if (OWL.reduce){ vx = tx; vy = ty; r = tr = base(); draw(); return; } if (!raf) raf = requestAnimationFrame(tick); }
+  function toView(e){ var b = roof.getBoundingClientRect(), S = size(); return [(e.clientX - b.left - S.ox)/S.s, (e.clientY - b.top - S.oy)/S.s]; }
+  function clamp(){ tx = Math.max(X0 + 10, Math.min(X1 - 10, tx)); ty = Math.max(RID - 4, Math.min(EAV + 10, ty)); }
+  function ripple(e){ if (OWL.reduce || root.querySelectorAll('.rip').length > 6) return; var b = roof.getBoundingClientRect(), d = document.createElement('span'); d.className = 'rip'; d.style.left = (e.clientX - b.left) + 'px'; d.style.top = (e.clientY - b.top) + 'px'; roof.appendChild(d); d.addEventListener('animationend', function(){ d.remove(); }); }
+  roof.addEventListener('pointermove', function(e){ var q = toView(e); tx = q[0]; ty = q[1]; clamp();
+    if (lastX !== null){ var dd = Math.hypot(e.clientX - lastX, e.clientY - lastY); dist += dd; speed = Math.min(1200, speed + dd*6); if (dist > 90){ dist = 0; ripple(e); } } lastX = e.clientX; lastY = e.clientY; kick(); });
+  roof.addEventListener('pointerdown', function(e){ var q = toView(e); tx = q[0]; ty = q[1]; clamp(); ripple(e); kick(); });
+  roof.addEventListener('pointerleave', function(){ lastX = null; });
+  var SPOT = {ridge: [600, RID + 18], field: [620, 300], eave: [600, EAV - 70]};
+  zb.forEach(function(b){ b.addEventListener('click', function(){ var s = SPOT[b.dataset.z]; tx = s[0]; ty = s[1]; kick(); }); });
+  roof.addEventListener('keydown', function(e){ var st = e.shiftKey ? 90 : 30, m = {ArrowLeft:[-st, 0], ArrowRight:[st, 0], ArrowUp:[0, -st], ArrowDown:[0, st]}[e.key]; if (!m) return; e.preventDefault(); tx += m[0]; ty += m[1]; clamp(); kick(); });
+  addEventListener('resize', function(){ draw(); });
+  tx = vx = SPOT.eave[0]; ty = vy = SPOT.eave[1]; draw();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ r = tr = base(); draw(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(en){ if (en[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); vx = 600; vy = 300; tx = SPOT.eave[0]; ty = SPOT.eave[1]; kick(); } }, {threshold:.35}); io.observe(roof);
+});
+</script>
+</section>

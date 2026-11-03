@@ -166,3 +166,23 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   pins while you scroll, and the scroll drives the clip's time directly (scrubbing frame by frame). The five
   frame-checked moments appear as large captions when their time is reached, with a progress rail. Under reduced
   motion it is a normal player. Skills: ⟦S0448⟧ sticky artifact, ⟦S1325⟧ progress rail, ⟦S0451⟧ captions, ⟦S1352⟧ timecodes.
+
+## L13 · Explore 6 + 7 (Explore stands at 5: V1 exploded stack, V2 step slider, V3 the one game, V4 scroll peel, V5 card deck)
+- **Explore 6 · "Follow the Drop"** — reference **Lusion** (flow: one line carries the visitor through). A drawn side
+  section through a Minnesota eave at a 5/12 pitch, drawn in the correct order: rafter tail and fascia, OSB deck, drip
+  edge on the deck at the eave, ice & water shield over it running up past the inside of the heated wall, synthetic
+  underlayment lapped over that, starter strip, then shingles overhanging into the gutter. A raindrop follows one flow
+  line down the roof, and each layer lights and names itself as the drop passes. Four plain scenario keys show why each
+  layer is there: a correct eave · without drip edge (water curls back onto the fascia and behind the gutter) · ice dam
+  with ice & water shield (backed-up water is stopped at the membrane) · ice dam without it (water reaches the deck and
+  drips inside the wall). Not a game: no score, no win. Reduced motion draws each path as a still line. Skills:
+  ⟦S0407⟧ motion path along the flow line, ⟦S0468⟧ blueprint annotation, ⟦S0526⟧ anatomy section, ⟦S1246⟧ tab keys,
+  ⟦S1388⟧ 3D keys, ⟦S0451⟧ title.
+- **Explore 7 · "Under the Lens"** — reference **Immersive Garden** (the surface reacts where the cursor moves). One
+  finished roof face, seen straight on. Moving the cursor opens an x-ray lens in rings: shingles open to the layer
+  below, then the deck, then the rafters. What the lens shows depends on where it is, as on a real roof: at the eave,
+  ice & water shield over the drip edge; up the field, synthetic underlayment with its laps and cap nails; at the
+  ridge, the slot cut in the deck for the ridge vent under the cap. A readout names the zone and its layers. The lens
+  swells a little with speed and leaves a ripple ring. Keys: Eave · Field · Ridge glide the lens; arrow keys move it
+  when the roof is focused; touch taps place it. Skills: ⟦S1324⟧ reveal-hover masks (CSS mask, eased pointer),
+  ⟦S1323⟧ ripple emission per distance, ⟦S0526⟧ anatomy, ⟦S1107⟧ keyboard, ⟦S1388⟧ 3D keys.
