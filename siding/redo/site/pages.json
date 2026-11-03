@@ -644,6 +644,46 @@
       "Where each shows up"
      ]
     ]
+   },
+   {
+    "slot": "ab4",
+    "name": "How we work",
+    "mod": "p_ab4",
+    "obj": "PAb4",
+    "v": [
+     [
+      "a",
+      "One visit, every trade"
+     ],
+     [
+      "b",
+      "Down a rail"
+     ],
+     [
+      "c",
+      "House rules"
+     ]
+    ]
+   },
+   {
+    "slot": "ab5",
+    "name": "Book",
+    "mod": "p_ab5",
+    "obj": "PAb5",
+    "v": [
+     [
+      "a",
+      "Come say hello"
+     ],
+     [
+      "b",
+      "Since 2009, on the phone"
+     ],
+     [
+      "c",
+      "The business card"
+     ]
+    ]
    }
   ],
   "area": [],
