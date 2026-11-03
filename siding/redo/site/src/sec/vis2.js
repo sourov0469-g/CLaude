@@ -119,5 +119,5 @@ window.Vis2 = (function () {
       const u = URL.createObjectURL(new Blob([txt], { type: 'text/plain' })), a = document.createElement('a'); a.href = u; a.download = 'austin-pro-siding-spec.txt'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 2000); });
     render();
   }
-  return { C, D, wire(root) { wireC(root); wireD(root); } };
+  return { C, D, wire(root) { wireC(root); wireD(root); }, CP, SW, ink };
 })();
