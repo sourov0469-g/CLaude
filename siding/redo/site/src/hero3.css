@@ -44,3 +44,48 @@
   .h8v .lead{font-size:clamp(38px,10.4vw,52px)!important}
 }
 @media (prefers-reduced-motion:reduce){.h8v .ph8 img,.h8v .band,.h8v .warm{transition:none}}
+
+/* HERO 9 — type as the house: the headline at poster scale; one window-shaped crop of a job photo set into the type */
+.h9v{display:flex;flex-direction:column;justify-content:center;padding:104px var(--gut) 40px;overflow:hidden}
+.h9v .lead{display:block;max-width:none;font:800 clamp(64px,12.4vw,216px)/.86 var(--display);letter-spacing:-.055em;color:var(--green)}
+.h9v .lead>span{display:block;white-space:nowrap;transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .6s ease,clip-path 1s cubic-bezier(.16,1,.3,1)}
+.h9v:not(.on) .lead>span{transform:translateY(40%);opacity:0;clip-path:inset(0 0 100% 0)}
+.h9v.on .lead>span{clip-path:inset(-10% 0 -10% 0)}
+.h9v.on .l1{transform:translateX(calc(var(--sy,0) * -5vw))}.h9v.on .l2{transform:translateX(calc(var(--sy,0) * 3vw));transition-delay:.06s}
+.h9v.on .l3{transform:translateX(calc(var(--sy,0) * -2vw));transition-delay:.12s}.h9v.on .l4{transform:translateX(calc(var(--sy,0) * 6vw));transition-delay:.18s}
+.h9v .l3{color:transparent;-webkit-text-stroke:max(2px,.012em) var(--green)}
+.h9v .l4{color:var(--ink)}
+.h9v .win9{position:relative;display:inline-block;width:1.18em;height:.74em;margin:0 .04em;vertical-align:-.02em;overflow:hidden;border-radius:.04em;background:#0E3B2C;box-shadow:0 .06em .12em -.06em rgba(14,59,44,.6)}
+.h9v .win9 img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:40% 45%;transform:scale(calc(1.08 - var(--sy,0) * .08));transition:transform .6s ease}
+.h9v .win9::before{content:"";position:absolute;inset:0;z-index:3;border:.045em solid var(--green);border-radius:.04em;pointer-events:none}
+.h9v .win9 .mull{position:absolute;z-index:2;left:50%;top:0;bottom:0;width:.03em;margin-left:-.015em;background:var(--green)}
+.h9v .win9 .sash{position:absolute;z-index:1;left:0;right:0;height:52%;bottom:0;border-top:.03em solid var(--green);
+  background:linear-gradient(120deg,rgba(255,255,255,.42),rgba(220,235,245,.12) 40%,rgba(255,255,255,.3));transform:translateY(calc(var(--sy,0) * -88%));transition:transform .7s cubic-bezier(.3,1.2,.5,1)}
+.h9v .win9:hover .sash{transform:translateY(-88%)}
+.h9v .foot9{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:10px 40px;align-items:end;margin-top:30px;padding-top:18px;border-top:2px solid var(--green)}
+.h9v .cap9{grid-column:1/-1;font:600 13px/1.3 var(--text);color:var(--ink-3)}.h9v .cap9 b{color:var(--green)}
+.h9v .sub{max-width:44ch;font-size:17px}
+.h9v .ctas{justify-self:end}
+@media (max-width:860px){.h9v{padding-top:96px}.h9v .lead{font-size:clamp(52px,18.5vw,150px)!important}.h9v .foot9{grid-template-columns:1fr}.h9v .ctas{justify-self:start}}
+@media (prefers-reduced-motion:reduce){.h9v .lead>span,.h9v .win9 .sash,.h9v .win9 img{transition:none;transform:none!important}}
+
+/* HERO 10 — one visit: a centred headline whose trade word rolls; the anchor line names every trade */
+.h10v{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px var(--gut) 50px}
+.h10v .eye{font:800 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.h10v .lead{margin-top:18px;max-width:none;font:800 clamp(58px,9.4vw,160px)/1 var(--display);letter-spacing:-.05em;color:var(--ink)}
+.h10v .slot10{display:inline-block;height:1.24em;overflow:hidden;vertical-align:-.16em;line-height:1.24}
+.h10v .roll{display:block;transition:transform .85s cubic-bezier(.7,0,.2,1)}
+.h10v .roll b{display:block;height:1.24em;color:var(--green);text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:.1em;text-underline-offset:.1em;text-decoration-skip-ink:none;text-align:left}
+.h10v .anchor{margin-top:20px;max-width:28ch;font:700 clamp(20px,2vw,28px)/1.35 var(--text);color:var(--ink-2)}
+.h10v .ico10{position:relative;width:80px;height:76px;margin-top:22px}
+.h10v .ico10 svg{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .4s ease}
+.h10v .ico10 path{fill:none;stroke:var(--green);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s cubic-bezier(.6,0,.2,1) .2s}
+.h10v .ico10 svg.on{opacity:1}.h10v .ico10 svg.on path{stroke-dashoffset:0}
+.h10v .pick10{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px}
+.h10v .pick10 button{border:0;display:grid;gap:3px;padding:10px 16px;border-radius:14px;cursor:pointer;background:#F1F5EF;color:var(--ink);font:800 15px/1 var(--text);text-align:left;box-shadow:inset 0 -2px 0 #DDE6DE;transition:background-color .25s ease,transform .2s cubic-bezier(.16,1,.3,1)}
+.h10v .pick10 small{font:600 12px/1.2 var(--text);color:var(--ink-3)}
+.h10v .pick10 button[aria-pressed="true"]{background:var(--green);color:#fff;box-shadow:inset 0 -2px 0 var(--green-dd)}.h10v .pick10 button[aria-pressed="true"] small{color:#BFD6CA}
+.h10v .pick10 button:hover{transform:translateY(-2px)}.h10v .pick10 button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.h10v .ctas{justify-content:center;margin-top:26px}.h10v .proof{justify-content:center;margin-top:12px}
+@media (max-width:860px){.h10v{padding-top:100px}.h10v .lead{font-size:clamp(40px,13vw,80px)!important}.h10v .pick10 button{padding:9px 12px}}
+@media (prefers-reduced-motion:reduce){.h10v .roll,.h10v .ico10 path,.h10v .ico10 svg{transition:none}}

@@ -172,12 +172,27 @@ def heroes3():
     h8 = f'''<section class="hero h8v" aria-labelledby="h1"><div class="ph8"><img alt="{ALT['c1']}" decoding="async"><i class="warm" aria-hidden="true"></i></div>
 <div class="band" data-solid><i class="lap" aria-hidden="true"></i><div class="bin"><h1 class="lead" id="h1" data-split>The full wall or the whole house.</h1>
 <div class="rt"><p class="sub">{SUB}</p>{CTAS}</div></div></div></section>'''
-    return {'7': h7, '8': h8}
+    import base64 as _b
+    P = json.load(open(os.path.join(WORK, 'data', 'photos.json'))); j = P[0]   # the firm's own job: Maple Run, Austin
+    src9 = 'data:image/webp;base64,' + _b.b64encode(open(os.path.join(WORK, 'dl', 'photo0-640.webp'), 'rb').read()).decode()
+    h9 = f'''<section class="hero h9v" aria-labelledby="h1"><h1 class="lead" id="h1"><span class="l1">The full</span>
+<span class="l2">wall <span class="win9" role="img" aria-label="{j['alt'] or 'Siding at a home in ' + j['place']}. A job of ours: {j['place']}, {j['when']}."><img src="{src9}" alt="" decoding="async"><i class="sash" aria-hidden="true"></i><i class="mull" aria-hidden="true"></i></span> or</span>
+<span class="l3">the whole</span><span class="l4">house.</span></h1>
+<div class="foot9"><p class="cap9"><b>In the window:</b> {j['place']} · {j['when']} · {j['trades']}</p><p class="sub">{SUB}</p>{ct2}</div></section>'''
+    TR = [['siding', '431', 'documented siding jobs'], ['windows', '388', 'documented window jobs'], ['roofing', '241', 'shingle and metal roofs']]
+    ico = {'siding': '<path d="M10 20h60M10 32h60M10 44h60M10 56h60" pathLength="1"/>', 'windows': '<path d="M18 12h44v52H18zM40 12v52M18 38h44" pathLength="1"/>', 'roofing': '<path d="M6 50L40 18L74 50M16 58l24-22 24 22" pathLength="1"/>'}
+    h10 = f'''<section class="hero h10v" aria-labelledby="h1"><p class="eye">One visit · every trade</p>
+<h1 class="lead" id="h1"><span class="pre">New</span> <span class="slot10" aria-hidden="true"><span class="roll">{''.join(f'<b data-t="{t}">{t}.</b>' for t, _, _ in TR)}</span></span><span class="sr" id="h10w">siding, windows or roofing.</span></h1>
+<p class="anchor">One free inspection covers every trade on the house.</p>
+<div class="ico10" aria-hidden="true">{''.join(f'<svg viewBox="0 0 80 76" data-t="{t}">{ico[t]}</svg>' for t, _, _ in TR)}</div>
+<div class="pick10" role="group" aria-label="Show a trade">{''.join(f'<button type="button" data-t="{t}" aria-pressed="{str(not i).lower()}">{t.capitalize()}<small>{n} {d}</small></button>' for i, (t, n, d) in enumerate(TR))}</div>
+{CTAS}</section>'''
+    return {'7': h7, '8': h8, '9': h9, '10': h10}
 
 
 VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
-             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
+             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)']],

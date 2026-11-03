@@ -42,7 +42,25 @@ window.Hero3 = (function () {
     if (!RM) { let raf = 0; addEventListener('scroll', () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; s.style.setProperty('--sy', Math.min(1, scrollY / innerHeight).toFixed(3)); }); }, { passive: true }); }
   }
 
+  // H9: the type is the house. Scrolling slides the lines apart a little, as courses would sit; the one window's lower sash
+  // lifts with the scroll (and when pointed at), showing more of the job photo behind it.
+  function h9(s) { if (RM) { s.classList.add('on'); return; } requestAnimationFrame(() => s.classList.add('on'));
+    let raf = 0; const upd = () => { raf = 0; s.style.setProperty('--sy', Math.min(1, Math.max(0, scrollY / (innerHeight * 0.8))).toFixed(3)); };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true }); upd(); }
+
+  // H10: the trade word rolls (siding → windows → roofing) under a fixed anchor line that already names every trade, so
+  // nothing depends on the motion; the buttons pick a trade and stop the roll; hover or focus pauses it; reduced motion:
+  // the first trade, still.
+  function h10(s) { const roll = s.querySelector('.roll'), bs = [...s.querySelectorAll('.pick10 button')], ics = [...s.querySelectorAll('.ico10 svg')], n = bs.length;
+    let i = 0, t = 0, held = false, stopped = RM;
+    const show = (k) => { i = k; roll.style.transform = `translateY(${-k * 1.24}em)`; bs.forEach((b, j) => b.setAttribute('aria-pressed', j === k)); ics.forEach((c, j) => c.classList.toggle('on', j === k)); };
+    const arm = () => { clearTimeout(t); if (stopped || held) return; t = setTimeout(() => { show((i + 1) % n); arm(); }, 2800); };
+    bs.forEach((b, k) => b.addEventListener('click', () => { stopped = true; clearTimeout(t); show(k); }));
+    [s.querySelector('.lead'), s.querySelector('.pick10')].forEach((el) => { el.addEventListener('pointerenter', () => { held = true; clearTimeout(t); }); el.addEventListener('pointerleave', () => { held = false; arm(); }); });
+    s.addEventListener('focusin', () => { held = true; clearTimeout(t); }); s.addEventListener('focusout', () => { held = false; arm(); });
+    show(0); requestAnimationFrame(() => s.classList.add('on')); arm(); }
+
   function wire() { const h = document.querySelector('.slot[data-slot=hero] .hero'); if (!h) return;
-    if (h.matches('.h7v')) h7(h); if (h.matches('.h8v')) h8(h); if (h.matches('.h9v') && Hero3.h9) Hero3.h9(h); if (h.matches('.h10v') && Hero3.h10) Hero3.h10(h); }
+    if (h.matches('.h7v')) h7(h); if (h.matches('.h8v')) h8(h); if (h.matches('.h9v')) h9(h); if (h.matches('.h10v')) h10(h); }
   return { wire };
 })();
