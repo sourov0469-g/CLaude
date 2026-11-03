@@ -1,0 +1,4 @@
+const { chromium } = require('playwright'); const path = require('path');
+(async () => { const b = await chromium.launch(); const p = await b.newPage(); await p.goto('file://' + path.resolve(__dirname, '../owl-roofing.html')); await p.waitForTimeout(800);
+  console.log(JSON.stringify(await p.evaluate(() => ({ pages: [...document.querySelectorAll('.page')].map(x => x.dataset.page), homeVers: [...document.querySelectorAll('.page[data-page="home"] .ver')].map(v => v.dataset.sec + v.dataset.v).join(' '), allVers: document.querySelectorAll('.ver').length, wise: !!document.getElementById('wise-check'), wiseParent: document.getElementById('wise-check') && document.getElementById('wise-check').closest('.page') && document.getElementById('wise-check').closest('.page').dataset.page }))));
+  await b.close(); })();

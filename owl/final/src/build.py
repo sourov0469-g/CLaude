@@ -27,6 +27,14 @@ def asset(name):
 def read(path):
     return open(os.path.join(SRC, path), encoding='utf-8').read()
 
+def balanced(path, body):
+    # guard: a section must close every div/section it opens, or it swallows the sections after it
+    bare = re.sub(r'<script>.*?</script>|<style>.*?</style>', '', body, flags=re.S)
+    for tag in ('div', 'section'):
+        o, c = len(re.findall(r'<' + tag + r'\b', bare)), len(re.findall(r'</' + tag + r'>', bare))
+        if o != c:
+            sys.exit(f'unbalanced <{tag}> in {os.path.basename(path)}: {o} open, {c} close')
+
 def section(name):
     files = sorted(glob.glob(os.path.join(SRC, 'sections', f'{name}-v*.html')))
     if not files:
@@ -35,6 +43,7 @@ def section(name):
     for f in files:
         v = re.search(r'-v(\d+)\.html$', f).group(1)
         body = open(f, encoding='utf-8').read()
+        balanced(f, body)
         blocks.append(f'<div class="ver" data-sec="{name}" data-v="{v}">\n{body}\n</div>')
     # superseded versions: kept inside the file as inert, hidden backups (never deleted, never run)
     for f in sorted(glob.glob(os.path.join(SRC, 'sections', f'{name}-b*.html'))):

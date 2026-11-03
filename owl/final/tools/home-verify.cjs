@@ -65,5 +65,5 @@ for(const w of [1440,768,390]){ const q=await page({viewport:{width:w,height:900
 // 5 · reduced motion
 const rm=await page({reducedMotion:'reduce'}); rec('motion','reduced motion: page loads, rain off, video not autoplaying',await rm.evaluate(()=>document.querySelector('.video1 video').paused)); await rm.close();
 rec('errors','no page or console errors in any run',errs.length===0,errs.join(' || '));
-require('fs').writeFileSync(path.resolve(__dirname,'../gates/up-r1/home-verify-checks.json'),JSON.stringify(R,null,1));
+require('fs').writeFileSync(path.resolve(__dirname,'../gates/up-r2/home-verify-checks.json'),JSON.stringify(R,null,1));
 console.log('TOTAL', R.filter(r=>r.ok).length+'/'+R.length,'passed'); await b.close();})();
