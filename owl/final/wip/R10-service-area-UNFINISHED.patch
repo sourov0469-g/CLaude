@@ -1,0 +1,339 @@
+diff --git a/owl/final/src/lib/towns-data.js b/owl/final/src/lib/towns-data.js
+new file mode 100644
+index 0000000..de4076c
+--- /dev/null
++++ b/owl/final/src/lib/towns-data.js
+@@ -0,0 +1,11 @@
++/* Owl's confirmed 29 towns, grouped by rough distance from Shoreview (0 near, 1 middle, 2 farther), with rough compass bearing */
++OWL.TOWNS = [['Shoreview',-1,0],['North Oaks',0,0],['Lino Lakes',0,12],['White Bear Lake',0,68],['Vadnais Heights',0,110],['Maplewood',0,148],['Little Canada',0,166],['Roseville',0,192],['New Brighton',0,224],['Fridley',0,238],['Arden Hills',0,250],['Mounds View',0,275],['Blaine',0,318],
++ ['Forest Lake',1,18],['Stillwater',1,98],['Oakdale',1,120],['Woodbury',1,140],['Saint Paul',1,176],['Minneapolis',1,214],['Coon Rapids',1,298],
++ ['Eagan',2,168],['Apple Valley',2,182],['Burnsville',2,196],['Bloomington',2,206],['Edina',2,218],['Eden Prairie',2,226],['Minnetonka',2,236],['Plymouth',2,252],['Maple Grove',2,284]];
++OWL.HOME = {addr:'1000 County Rd E #230, Shoreview, MN 55126', map:'https://www.google.com/maps/search/?api=1&query=1000%20County%20Rd%20E%20%23230%2C%20Shoreview%2C%20MN%2055126'};
++/* office hours Mon–Sat 08:00–18:00, Minnesota time */
++OWL.openNow = function(){
++  var p = {}; try { new Intl.DateTimeFormat('en-US', {timeZone:'America/Chicago', weekday:'short', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}).formatToParts(new Date()).forEach(function(x){ p[x.type] = x.value; }); } catch(e){ return null; }
++  var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], d = days.indexOf(p.weekday), h = +p.hour + (+p.minute)/60;
++  return {day:d, hour:h, open: d >= 1 && d <= 6 && h >= 8 && h < 18, label:p.weekday + ' ' + p.hour + ':' + p.minute};
++};
+diff --git a/owl/final/src/partials/footer.html b/owl/final/src/partials/footer.html
+index 3497f95..7a5ea1a 100644
+--- a/owl/final/src/partials/footer.html
++++ b/owl/final/src/partials/footer.html
+@@ -2,7 +2,7 @@
+  <div class="wrap">
+   <div class="ftr-g">
+    <div class="ftr-brand"><img src="{{A:logo.svg}}" alt="Owl Roofing" width="130" height="53"><p class="ftr-tag">We Give a Hoot.</p><p>Family-owned, founded 2025 by Tim Brown and Noah Bergland.</p></div>
+-   <nav aria-label="Footer"><b>Explore</b><a href="#/services">Services</a><a href="#/wise-check">Wise Check</a><a href="#/protect-your-nest">Protect Your Nest</a><a href="#/about">About</a><a href="#reviews">Reviews</a><a href="#areas">Areas</a><a href="#book">Book</a></nav>
++   <nav aria-label="Footer"><b>Explore</b><a href="#/services">Services</a><a href="#/wise-check">Wise Check</a><a href="#/protect-your-nest">Protect Your Nest</a><a href="#/about">About</a><a href="#reviews">Reviews</a><a href="#/areas">Areas</a><a href="#book">Book</a></nav>
+    <div><b>Visit</b><p>Owl Roofing LLC<br>1000 County Rd E #230<br>Shoreview, MN 55126</p><p>Mon–Sat 08:00–18:00</p></div>
+    <div><b>Talk to us</b><p><a href="tel:+16519776027">(651) 977-6027</a><br><a href="mailto:info@owlroofing.com">info@owlroofing.com</a></p></div>
+   </div>
+diff --git a/owl/final/src/partials/header.html b/owl/final/src/partials/header.html
+index 43d07e7..3b3c9c5 100644
+--- a/owl/final/src/partials/header.html
++++ b/owl/final/src/partials/header.html
+@@ -2,7 +2,7 @@
+  <div class="hdr-bar">
+   <a class="hdr-logo" href="#/" aria-label="Owl Roofing, home"><img src="{{A:logo.svg}}" alt="Owl Roofing" width="109" height="44"></a>
+   <nav class="hdr-nav" aria-label="Main">
+-   <a href="#/services" data-route="services">Services</a><a href="#/wise-check" data-route="wise-check">Wise Check</a><a href="#/about" data-route="about">About</a><a href="#reviews">Reviews</a><a href="#areas">Areas</a>
++   <a href="#/services" data-route="services">Services</a><a href="#/wise-check" data-route="wise-check">Wise Check</a><a href="#/about" data-route="about">About</a><a href="#reviews">Reviews</a><a href="#/areas" data-route="areas">Areas</a>
+   </nav>
+   <a class="hdr-tel" href="tel:+16519776027"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span>(651) 977-6027</span></a>
+   <a class="btn btn-amber btn-sm" href="#book" data-mag>Book a Wise Check</a>
+diff --git a/owl/final/src/sections/arbase-v1.html b/owl/final/src/sections/arbase-v1.html
+new file mode 100644
+index 0000000..3f400fa
+--- /dev/null
++++ b/owl/final/src/sections/arbase-v1.html
+@@ -0,0 +1,56 @@
++<section class="sec ab-1" id="home-base" aria-labelledby="hb1-h">
++<style>
++.ab-1 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:22px}
++.ab-1 .card{border-radius:28px;background:var(--paper);padding:clamp(22px,3vw,36px);box-shadow:0 2px 0 #fff inset,0 30px 60px -40px rgba(23,17,29,.5)}
++.ab-1 h2{font-size:clamp(28px,3vw,42px);font-weight:800;letter-spacing:-.03em}
++.ab-1 address{font-style:normal;margin:14px 0 18px;font-size:19px;line-height:1.5}
++.ab-1 .links{display:flex;flex-wrap:wrap;gap:10px}
++.ab-1 .st{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 16px;border-radius:999px;font-weight:700;background:var(--cream)}
++.ab-1 .st i{width:12px;height:12px;border-radius:50%;background:#8a8580}
++.ab-1 .st.open i{background:var(--amber);box-shadow:0 0 0 5px rgba(234,162,33,.3);animation:hbp 1.8s ease-in-out infinite}
++@keyframes hbp{50%{box-shadow:0 0 0 9px rgba(234,162,33,.1)}}
++.ab-1 .week{list-style:none;display:grid;gap:8px;margin-top:16px}
++.ab-1 .week li{display:grid;grid-template-columns:52px 1fr 120px;gap:12px;align-items:center;font-weight:600}
++.ab-1 .bar{position:relative;height:14px;border-radius:8px;background:rgba(23,17,29,.08)}
++.ab-1 .bar i{position:absolute;top:0;bottom:0;left:calc(8/24*100%);width:calc(10/24*100%);border-radius:8px;background:rgba(234,162,33,.55)}
++.ab-1 .bar b{position:absolute;top:-4px;bottom:-4px;width:3px;border-radius:2px;background:var(--ink)}
++.ab-1 .week li.today{color:var(--ink)}
++.ab-1 .week li.today .bar i{background:var(--amber)}
++.ab-1 .week li .h{font-size:15px;color:var(--ink-70);text-align:right}
++.ab-1 .week li.closed .h{font-style:italic}
++.ab-1 .scale{display:grid;grid-template-columns:52px 1fr 120px;gap:12px;font-size:12px;color:var(--ink-70);margin-top:4px}
++.ab-1 .scale span{display:flex;justify-content:space-between}
++@media (max-width:900px){.ab-1 .g{grid-template-columns:1fr}.ab-1 .week li,.ab-1 .scale{grid-template-columns:44px 1fr 96px}}
++</style>
++<div class="wrap">
++ <div class="g">
++  <div class="card">
++   <span class="kick">Home base</span>
++   <h2 id="hb1-h" style="margin-top:12px">Owl Roofing, Shoreview</h2>
++   <address>Owl Roofing LLC<br>1000 County Rd E #230<br>Shoreview, MN 55126</address>
++   <div class="links"><a class="btn btn-amber btn-sm" href="tel:+16519776027" data-mag>Call (651) 977-6027</a><a class="btn btn-line btn-sm" href="mailto:info@owlroofing.com">info@owlroofing.com</a><a class="btn btn-line btn-sm maps" href="#" target="_blank" rel="noopener">Open in maps ↗</a></div>
++   <p class="st" aria-live="polite"><i></i><span></span></p>
++  </div>
++  <div class="card">
++   <span class="kick">Office hours</span>
++   <h2 style="margin-top:12px">Mon–Sat, 8:00 AM – 6:00 PM</h2>
++   <ul class="week" aria-label="Office hours this week"></ul>
++   <div class="scale" aria-hidden="true"><span></span><span><span>12 AM</span><span>6</span><span>Noon</span><span>6</span><span>12 AM</span></span><span></span></div>
++  </div>
++ </div>
++</div>
++<script>
++OWL.reg('arbase','1',function(root){
++  root.querySelector('.maps').href = OWL.HOME.map;
++  var D = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], ul = root.querySelector('.week'), st = root.querySelector('.st');
++  function draw(){ var n = OWL.openNow(); ul.innerHTML = '';
++    D.forEach(function(d, i){ var day = (i + 1) % 7, li = document.createElement('li'), closed = d === 'Sun';
++      if (closed) li.className = 'closed'; if (n && n.day === day) li.classList.add('today');
++      li.innerHTML = '<span>' + d + '</span><span class="bar">' + (closed ? '' : '<i></i>') + (n && n.day === day ? '<b style="left:' + (n.hour/24*100).toFixed(2) + '%"></b>' : '') + '</span><span class="h">' + (closed ? 'Closed' : '8:00 – 18:00') + '</span>';
++      ul.appendChild(li); });
++    if (!n){ st.querySelector('span').textContent = 'Mon–Sat 8:00 AM – 6:00 PM'; return; }
++    st.classList.toggle('open', n.open); st.querySelector('span').textContent = n.open ? 'Open now (Minnesota time)' : 'Closed now (Minnesota time). Email us any time.'; }
++  draw(); setInterval(draw, 60000);
++});
++</script>
++</section>
+diff --git a/owl/final/src/sections/arbase-v2.html b/owl/final/src/sections/arbase-v2.html
+new file mode 100644
+index 0000000..100b0a4
+--- /dev/null
++++ b/owl/final/src/sections/arbase-v2.html
+@@ -0,0 +1,50 @@
++<section class="sec ab-2" id="home-base-2" aria-labelledby="hb2-h">
++<style>
++.ab-2 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,64px);align-items:center}
++.ab-2 .clock{position:relative;width:min(100%,460px);aspect-ratio:1;justify-self:center}
++.ab-2 .clock svg{width:100%;height:100%;filter:drop-shadow(0 30px 40px rgba(23,17,29,.25))}
++.ab-2 .hand{transform-origin:200px 200px;transition:transform 1.2s cubic-bezier(.3,1.3,.5,1)}
++.ab-2 .lede{margin:14px 0 22px;max-width:36ch}
++.ab-2 .st{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.02em;min-height:40px}
++.ab-2 .st small{display:block;font-size:16px;font-weight:600;color:var(--ink-70);letter-spacing:0}
++.ab-2 address{font-style:normal;margin:20px 0;font-size:18px;line-height:1.55}
++.ab-2 .links{display:flex;flex-wrap:wrap;gap:10px}
++@media (max-width:900px){.ab-2 .g{grid-template-columns:1fr}.ab-2 .clock{width:min(100%,340px)}}
++</style>
++<div class="wrap">
++ <div class="g">
++  <div class="clock" data-owl="say:Hoo's open?"><svg viewBox="0 0 400 400" role="img" aria-label="A clock face with Owl's office hours, 8 AM to 6 PM, marked in amber">
++   <defs><linearGradient id="hb2b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8D488"/><stop offset=".4" stop-color="#EAA221"/><stop offset=".7" stop-color="#B9791A"/><stop offset="1" stop-color="#F1BC55"/></linearGradient></defs>
++   <circle cx="200" cy="200" r="196" fill="url(#hb2b)"/><circle cx="200" cy="200" r="176" fill="#FBF6EA"/>
++   <path class="band" fill="none" stroke="#EAA221" stroke-width="26" stroke-opacity=".55"/>
++   <g class="tk"></g><g class="nums"></g>
++   <g class="hand"><path d="M196 200 L200 62 L204 200Z" fill="#17111D"/></g>
++   <circle cx="200" cy="200" r="12" fill="#17111D"/><circle cx="200" cy="200" r="5" fill="#EAA221"/>
++  </svg></div>
++  <div>
++   <span class="kick">Home base and hours</span>
++   <h2 class="h2 rv" id="hb2-h" style="margin-top:12px">Open Mon–Sat, 8:00 AM – 6:00 PM</h2>
++   <p class="st" aria-live="polite"></p>
++   <address>Owl Roofing LLC · 1000 County Rd E #230<br>Shoreview, MN 55126</address>
++   <div class="links"><a class="btn btn-amber" href="tel:+16519776027" data-mag data-owl="hoot">Call (651) 977-6027</a><a class="btn btn-line maps" href="#" target="_blank" rel="noopener">Open in maps ↗</a></div>
++  </div>
++ </div>
++</div>
++<script>
++OWL.reg('arbase','2',function(root){
++  root.querySelector('.maps').href = OWL.HOME.map;
++  var svg = root.querySelector('svg'), hand = svg.querySelector('.hand'), st = root.querySelector('.st');
++  function pt(a, r){ var t = (a - 90)*Math.PI/180; return [200 + Math.cos(t)*r, 200 + Math.sin(t)*r]; }
++  /* 12-hour face: 8 AM to 6 PM is 8 o'clock round to 6 o'clock (a 10-hour arc) */
++  var a0 = 8*30, a1 = 18*30, p0 = pt(a0, 150), p1 = pt(a1, 150);
++  svg.querySelector('.band').setAttribute('d', 'M' + p0.join(' ') + ' A150 150 0 1 1 ' + p1.join(' '));
++  var tk = '', nm = ''; for (var i = 0; i < 60; i++){ var q1 = pt(i*6, 172), q2 = pt(i*6, i % 5 ? 164 : 156); tk += '<line x1="' + q1[0].toFixed(1) + '" y1="' + q1[1].toFixed(1) + '" x2="' + q2[0].toFixed(1) + '" y2="' + q2[1].toFixed(1) + '" stroke="#17111D" stroke-opacity="' + (i % 5 ? .3 : .7) + '" stroke-width="' + (i % 5 ? 1.2 : 2.4) + '"/>'; }
++  for (var h = 1; h <= 12; h++){ var q = pt(h*30, 126); nm += '<text x="' + q[0].toFixed(1) + '" y="' + (q[1] + 7).toFixed(1) + '" text-anchor="middle" style="font:700 20px Inter,sans-serif;fill:#17111D">' + h + '</text>'; }
++  svg.querySelector('.tk').innerHTML = tk; svg.querySelector('.nums').innerHTML = nm;
++  function draw(){ var n = OWL.openNow(); if (!n){ st.textContent = ''; return; }
++    hand.style.transform = 'rotate(' + ((n.hour % 12)*30) + 'deg)';
++    st.innerHTML = (n.open ? 'Open now.' : 'Closed right now.') + '<small>Minnesota time: ' + n.label + '. ' + (n.open ? 'Call and talk to us.' : 'Email info@owlroofing.com any time.') + '</small>'; }
++  draw(); setInterval(draw, 60000);
++});
++</script>
++</section>
+diff --git a/owl/final/src/sections/arhero-v1.html b/owl/final/src/sections/arhero-v1.html
+new file mode 100644
+index 0000000..892c253
+--- /dev/null
++++ b/owl/final/src/sections/arhero-v1.html
+@@ -0,0 +1,55 @@
++<section class="sec pghero ah1" id="areas-top" aria-labelledby="ah1-h">
++<style>
++.ah1 .hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:18px 48px;align-items:end}
++.ah1 .lede{max-width:38ch}
++.ah1 .search{display:flex;align-items:center;gap:12px;margin-top:clamp(22px,3vw,32px);padding:10px 10px 10px 22px;border-radius:22px;background:var(--paper);box-shadow:0 5px 0 rgba(23,17,29,.06),0 20px 34px -26px rgba(23,17,29,.55)}
++.ah1 .search:focus-within{box-shadow:0 0 0 3px var(--ink),0 20px 34px -26px rgba(23,17,29,.55)}
++.ah1 .search svg{width:26px;height:26px;flex:none}
++.ah1 .search input{flex:1;min-width:0;min-height:56px;border:0;background:transparent;font:600 clamp(18px,2vw,24px) Inter,sans-serif;color:var(--ink);outline:none}
++.ah1 .search .cnt{font-weight:700;font-size:15px;white-space:nowrap;padding:10px 14px;border-radius:14px;background:var(--cream)}
++.ah1 .az{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
++.ah1 .az button{min-width:40px;min-height:40px;border-radius:12px;background:var(--paper);font-weight:700;box-shadow:0 2px 0 rgba(23,17,29,.07)}
++.ah1 .az button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
++.ah1 .ok{min-height:58px;margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;font-weight:700;font-size:19px}
++.ah1 .ok .btn{font-size:15px}
++.ah1 .grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px}
++.ah1 .grid button{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 16px;border-radius:16px;background:var(--paper);text-align:left;box-shadow:0 3px 0 rgba(23,17,29,.06);transition:transform .2s var(--ease),background .2s,opacity .2s}
++.ah1 .grid button:hover{transform:translateY(-3px)}
++.ah1 .grid b{font-size:17px}
++.ah1 .grid span{font-size:13px;font-weight:600;color:var(--ink-70)}
++.ah1 .grid li.home button{box-shadow:inset 0 0 0 2px var(--amber)}
++.ah1 .grid li[hidden]{display:none}
++.ah1 .grid button[aria-pressed="true"]{background:var(--amber);box-shadow:0 4px 0 var(--amber-edge)}
++.ah1 .grid button[aria-pressed="true"] span{color:var(--ink)}
++@media (max-width:900px){.ah1 .hd{grid-template-columns:1fr}.ah1 .grid{grid-template-columns:1fr 1fr}}
++</style>
++<div class="wrap">
++ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>Service Area</span></nav>
++ <div class="hd"><h1 class="h1" id="ah1-h" style="font-size:clamp(40px,5vw,72px)">Roofing 29 Towns from Shoreview</h1><p class="lede">Find your town. If it is on the list, a Wise Check can come to you.</p></div>
++ <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5l5 5"/></svg><span class="sr">Search towns</span><input type="search" autocomplete="off" placeholder="Type your town"><span class="cnt" aria-live="polite"></span></label>
++ <div class="az" role="group" aria-label="Filter by first letter"></div>
++ <p class="ok" aria-live="polite"></p>
++ <ul class="grid" aria-label="Towns Owl Roofing serves"></ul>
++</div>
++<script>
++OWL.reg('arhero','1',function(root){
++  var G = ['Near Shoreview','A little farther out','Farther out'], T = OWL.TOWNS.slice().sort(function(a, b){ return a[0] === 'Shoreview' ? -1 : b[0] === 'Shoreview' ? 1 : a[0].localeCompare(b[0]); });
++  var grid = root.querySelector('.grid'), q = root.querySelector('input'), cnt = root.querySelector('.cnt'), az = root.querySelector('.az'), ok = root.querySelector('.ok'), letter = '', items = [];
++  T.forEach(function(t){ var li = document.createElement('li'); if (t[1] < 0) li.className = 'home';
++    li.innerHTML = '<button type="button" aria-pressed="false" data-owl="peek"><b>' + t[0] + '</b><span>' + (t[1] < 0 ? 'Home base' : G[t[1]]) + '</span></button>';
++    li.querySelector('button').addEventListener('click', function(){ pick(t, li); }); grid.appendChild(li); items.push([t, li]); });
++  var letters = []; T.forEach(function(t){ var l = t[0][0]; if (letters.indexOf(l) < 0) letters.push(l); }); letters.sort();
++  ['All'].concat(letters).forEach(function(l){ var b = document.createElement('button'); b.type = 'button'; b.textContent = l; b.setAttribute('aria-pressed', l === 'All'); b.setAttribute('aria-label', l === 'All' ? 'All towns' : 'Towns starting with ' + l);
++    b.addEventListener('click', function(){ letter = l === 'All' ? '' : l; az.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b); }); filter(); }); az.appendChild(b); });
++  function filter(){ var v = q.value.trim().toLowerCase(), n = 0;
++    items.forEach(function(it){ var name = it[0][0], show = (!v || name.toLowerCase().indexOf(v) > -1) && (!letter || name[0] === letter); it[1].hidden = !show; if (show) n++; });
++    cnt.textContent = n + (n === 1 ? ' town' : ' towns');
++    if (v && !n) ok.innerHTML = 'Not on our list yet. <a class="btn btn-line btn-sm" href="tel:+16519776027">Call (651) 977-6027 and ask</a>';
++    else if (n === 1 && v){ var only = items.filter(function(it){ return !it[1].hidden; })[0]; pick(only[0], only[1]); }
++    else if (!v) ok.textContent = ''; }
++  function pick(t, li){ items.forEach(function(it){ it[1].querySelector('button').setAttribute('aria-pressed', it[1] === li); });
++    ok.innerHTML = (t[1] < 0 ? 'Shoreview is home base.' : 'Yes, we serve ' + t[0] + '.') + ' <a class="btn btn-amber btn-sm" href="#book" data-mag>Book a Wise Check</a>'; }
++  q.addEventListener('input', filter); filter();
++});
++</script>
++</section>
+diff --git a/owl/final/src/sections/arhero-v2.html b/owl/final/src/sections/arhero-v2.html
+new file mode 100644
+index 0000000..c9715dc
+--- /dev/null
++++ b/owl/final/src/sections/arhero-v2.html
+@@ -0,0 +1,65 @@
++<section class="sec pghero ah2" id="areas-top-2" aria-labelledby="ah2-h">
++<style>
++.ah2{text-align:center}
++.ah2 .card{position:relative;padding:clamp(26px,4vw,52px) clamp(16px,3vw,40px);border-radius:32px;background:var(--paper);border:1.5px solid rgba(234,162,33,.5);box-shadow:0 2px 0 #fff inset,0 40px 70px -46px rgba(23,17,29,.5)}
++.ah2 .k{font-weight:700;font-size:14px;letter-spacing:.16em;text-transform:uppercase}
++.ah2 .sub{margin-top:10px;font-size:clamp(18px,1.8vw,24px);color:var(--ink-70)}
++.ah2 .fz{position:relative;margin:clamp(14px,3vw,30px) auto 0;max-width:1080px}
++.ah2 .fz svg{width:100%;height:auto;overflow:visible}
++.ah2 .hs{cursor:pointer}
++.ah2 .hs path{transition:fill .2s,transform .3s cubic-bezier(.3,1.6,.5,1);transform-box:fill-box;transform-origin:50% 100%}
++.ah2 .hs:hover path,.ah2 .hs.on path{fill:#17111D;transform:scale(1.35)}
++.ah2 .hs:focus{outline:none}.ah2 .hs:focus-visible path{stroke:#17111D;stroke-width:2}
++.ah2 .tip{position:absolute;transform:translate(-50%,-130%);background:var(--ink);color:var(--cream);font-weight:700;font-size:14px;padding:7px 12px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s}
++.ah2 .tip.on{opacity:1}
++.ah2 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:clamp(16px,3vw,28px);text-align:center}
++.ah2 .facts div{padding:18px;border-radius:18px;background:var(--cream)}
++.ah2 .facts svg{width:26px;height:26px;color:#8E5A12}
++.ah2 .facts b{display:block;font-size:19px;margin-top:6px}
++.ah2 .facts span{font-size:16px;color:var(--ink-70)}
++.ah2 .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;text-align:left}
++.ah2 .row p{font-weight:700;font-size:18px;min-height:28px}
++@media (max-width:760px){.ah2 .facts{grid-template-columns:1fr}}
++</style>
++<div class="wrap">
++ <nav class="crumb" aria-label="Breadcrumb" style="justify-content:flex-start"><a href="#/">Home</a><span aria-hidden="true">/</span><span>Service Area</span></nav>
++ <div class="card">
++  <span class="k">Service area</span>
++  <h1 class="h1" id="ah2-h" style="font-size:clamp(36px,4.8vw,68px);margin-top:10px">Every Roof Under Our Wing</h1>
++  <p class="sub">From Shoreview, across 29 towns.</p>
++  <div class="fz" data-owl="say:Hoo lives here?">
++   <svg viewBox="0 0 1000 220" role="group" aria-label="A feather whose barbs carry a small house for each town Owl serves">
++    <defs><linearGradient id="ah2v" x1="0" x2="1"><stop offset="0" stop-color="#C7871A" stop-opacity=".35"/><stop offset=".5" stop-color="#EAA221" stop-opacity=".7"/><stop offset="1" stop-color="#F6CB76" stop-opacity=".45"/></linearGradient></defs>
++    <path d="M20 120 C220 30 640 20 980 96 C700 160 300 200 20 120Z" fill="url(#ah2v)"/>
++    <g class="barbs"></g>
++    <path d="M6 128 C300 108 700 98 990 96" stroke="#8E5A12" stroke-width="4" fill="none" stroke-linecap="round"/>
++    <g class="houses"></g>
++   </svg>
++   <span class="tip" aria-hidden="true"></span>
++  </div>
++  <div class="facts">
++   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9H3z"/></svg><b>Home base</b><span>Shoreview</span></div>
++   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Coverage</b><span>29 towns</span></div>
++   <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Hours</b><span>Mon–Sat 8:00 AM – 6:00 PM</span></div>
++  </div>
++  <div class="row"><p aria-live="polite">Hover or tab through the houses to read each town.</p><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check</a></div>
++ </div>
++</div>
++<script>
++OWL.reg('arhero','2',function(root){
++  var svg = root.querySelector('svg'), fz = root.querySelector('.fz'), tip = root.querySelector('.tip'), msg = root.querySelector('.row p'), NS = 'http://www.w3.org/2000/svg';
++  var b = ''; for (var i = 0; i < 70; i++){ var x = 30 + i*13.6, y = 128 - (x - 6)/984*32, up = 70*Math.sin(Math.PI*Math.min(1, (x - 20)/960)) + 6, dn = 56*Math.sin(Math.PI*Math.min(1, (x - 20)/960)) + 4;
++    b += '<path d="M' + x.toFixed(1) + ' ' + y.toFixed(1) + ' l' + (14) + ' ' + (-up).toFixed(1) + ' M' + x.toFixed(1) + ' ' + y.toFixed(1) + ' l' + (16) + ' ' + dn.toFixed(1) + '" stroke="#C7871A" stroke-opacity=".45" stroke-width="1.4"/>'; }
++  svg.querySelector('.barbs').innerHTML = b;
++  var hs = svg.querySelector('.houses'), T = OWL.TOWNS, all = [];
++  T.forEach(function(t, i){ var x = 40 + i*(930/(T.length - 1)), base = 128 - (x - 6)/984*32, side = i % 2 ? 1 : -1, y = base + side*(22 + (i % 4)*7);
++    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'hs'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'img'); g.setAttribute('aria-label', t[0]);
++    g.innerHTML = '<path d="M' + (x - 8) + ' ' + (y + 6) + ' v-8 l8 -7 8 7 v8z" fill="' + (t[1] < 0 ? '#17111D' : '#8E5A12') + '"/>';
++    function show(){ all.forEach(function(o){ o.classList.toggle('on', o === g); }); var r = fz.getBoundingClientRect(), s = r.width/1000; tip.style.left = (x*s) + 'px'; tip.style.top = (y*s) + 'px'; tip.textContent = t[0]; tip.classList.add('on');
++      msg.textContent = t[1] < 0 ? 'Shoreview is home base.' : 'Yes, we serve ' + t[0] + '.'; }
++    g.addEventListener('mouseenter', show); g.addEventListener('focus', show); g.addEventListener('click', show);
++    g.addEventListener('mouseleave', function(){ tip.classList.remove('on'); }); g.addEventListener('blur', function(){ tip.classList.remove('on'); });
++    hs.appendChild(g); all.push(g); });
++});
++</script>
++</section>
+diff --git a/owl/final/src/template.html b/owl/final/src/template.html
+index 3ebdf28..6ad8a07 100644
+--- a/owl/final/src/template.html
++++ b/owl/final/src/template.html
+@@ -46,6 +46,11 @@
+ {{SEC:abvalues}}
+ {{P:ctaband.html}}
+ </div>
++<div class="page" data-page="areas" data-title="Service Area · 29 towns from Shoreview · Owl Roofing" hidden>
++{{SEC:arhero}}
++{{SEC:arbase}}
++{{P:ctaband.html}}
++</div>
+ <div class="page" data-page="wise-check" data-title="The Wise Check · Owl Roofing" hidden>
+ {{SEC:wchero}}
+ {{SEC:wcparts}}
+@@ -58,6 +63,7 @@
+ {{JS:lib/services-data.js}}
+ {{JS:lib/steps-data.js}}
+ {{JS:lib/wise-data.js}}
++{{JS:lib/towns-data.js}}
+ </script>
+ <script>OWL.media={crew:"{{A:crew.mp4}}","svc-replace":"{{A:svc-replace.webp}}","svc-repair":"{{A:svc-repair.webp}}","svc-storm":"{{A:svc-storm.webp}}","svc-check":"{{A:svc-check.webp}}","svc-siding":"{{A:svc-siding.webp}}"};</script>
+ </body>
+diff --git a/owl/final/tools/interact10.cjs b/owl/final/tools/interact10.cjs
+new file mode 100644
+index 0000000..7d41420
+--- /dev/null
++++ b/owl/final/tools/interact10.cjs
+@@ -0,0 +1,16 @@
++// round 10: Service Area page
++const {chromium}=require('playwright'); const path=require('path');
++const F='file://'+path.resolve(__dirname,'../owl-roofing.html');
++(async()=>{const b=await chromium.launch(); const errs=[];
++async function page(q,tz){const p=await b.newPage({viewport:{width:1440,height:900},timezoneId:tz||'America/Chicago'}); p.on('pageerror',e=>errs.push(q+': '+e.message)); await p.route('https://**',r=>r.abort()); await p.goto(F+q); await p.waitForTimeout(1200); return p;}
++let p=await page('?all=1');
++await p.click('.hdr-nav a[href="#/areas"]'); await p.waitForTimeout(400); console.log('nav -> page:', await p.evaluate(()=>document.querySelector('.page:not([hidden])').dataset.page));
++await p.fill('.ah1 input','eag'); await p.dispatchEvent('.ah1 input','input'); console.log('search "eag":', await p.textContent('.ah1 .cnt'), '|', await p.textContent('.ah1 .ok'));
++await p.fill('.ah1 input','duluth'); await p.dispatchEvent('.ah1 input','input'); console.log('search "duluth":', await p.textContent('.ah1 .cnt'), '|', await p.textContent('.ah1 .ok'));
++await p.fill('.ah1 input',''); await p.dispatchEvent('.ah1 input','input'); await p.click('.ah1 .az button[aria-label="Towns starting with M"]'); console.log('letter M:', await p.textContent('.ah1 .cnt'));
++console.log('status:', await p.textContent('.ab-1 .st'), '| today row:', await p.evaluate(()=>{const t=document.querySelector('.ab-1 .week li.today'); return t?t.firstChild.textContent:'none';}), '| maps link:', await p.getAttribute('.ab-1 .maps','href'));
++await p.close(); p=await page('?all=2#/areas');
++await p.focus('.ah2 .hs:nth-child(5)'); console.log('feather focus:', await p.textContent('.ah2 .row p'), '| tip:', await p.textContent('.ah2 .tip'));
++console.log('clock status:', await p.textContent('.ab-2 .st'), '| hand:', await p.evaluate(()=>document.querySelector('.ab-2 .hand').style.transform));
++await p.close();
++console.log(errs.length?'ERRORS:\n'+errs.join('\n'):'no page errors'); await b.close();})();

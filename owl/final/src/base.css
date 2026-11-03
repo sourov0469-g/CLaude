@@ -28,7 +28,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* layout */
 .wrap{width:min(1320px,100% - 2*var(--pad));margin-inline:auto}
-section.sec{position:relative;padding-block:clamp(56px,8vw,112px)}
+section.sec{position:relative;padding-block:clamp(56px,8vw,112px);scroll-margin-top:84px}
 
 /* header */
 .hdr{position:sticky;top:12px;z-index:50;margin:12px var(--pad) 0}

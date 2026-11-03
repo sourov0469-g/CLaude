@@ -16,7 +16,8 @@
 .area1 .road .stop{cursor:pointer}
 .area1 .road .stop circle{fill:#FFFDF8;stroke:#17111D;stroke-width:2.5;transition:r .25s,fill .25s}
 .area1 .road .stop:hover circle,.area1 .road .stop.on circle{fill:var(--amber);r:11}
-.area1 .road .stop text{font:600 15px Inter,sans-serif;fill:var(--ink);opacity:0;transition:opacity .25s}
+.area1 .road .stop text{font:600 15px Inter,sans-serif;fill:var(--ink);opacity:0;transition:opacity .25s,transform .25s;paint-order:stroke;stroke:#F1EFE6;stroke-width:6px;stroke-linejoin:round}
+.area1 .road .stop.on text{font-weight:800;transform:translateY(var(--lift,-16px))}
 .area1 .road .stop.lab text,.area1 .road .stop:hover text,.area1 .road .stop.on text{opacity:1}
 .area1 .road .hill{fill:#EFE3C6}
 .area1 .road .tree circle{fill:#9DB27A}.area1 .road .tree rect{fill:#8a6a3e}
@@ -66,10 +67,10 @@ OWL.reg('area','1',function(root){
     if (i === 0) return;
     var p = path.getPointAtLength(len), g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'stop' + ([14, 18, 27].indexOf(i) > -1 ? ' lab' : '')); g.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ')');
     var up = (i % 2) ? -1 : 1;
-    g.innerHTML = '<circle r="7"/><text y="' + (up*30 + 5) + '" text-anchor="middle">' + t + '</text>'; g.addEventListener('click', function(){ go(t); }); stopsG.appendChild(g); nodes[t] = g;
+    g.style.setProperty('--lift', (up < 0 ? -18 : 18) + 'px'); g.innerHTML = '<circle r="7"/><text y="' + (up*30 + 5) + '" text-anchor="middle">' + t + '</text>'; g.addEventListener('click', function(){ go(t); }); stopsG.appendChild(g); nodes[t] = g;
   });
   function place(len){ var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(L, len + 2)), a = Math.atan2(p2.y - p.y, p2.x - p.x)*180/Math.PI;
-    rider.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + (p.y - 4).toFixed(1) + ') rotate(' + (a*.25).toFixed(1) + ')'); trip.style.strokeDasharray = len.toFixed(1) + ' 99999'; }
+    rider.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + (p.y + 2).toFixed(1) + ') rotate(' + (a*.25).toFixed(1) + ')'); trip.style.strokeDasharray = len.toFixed(1) + ' 99999'; }
   function go(t){
     Object.keys(btns).forEach(function(k){ btns[k].setAttribute('aria-pressed', k === t); if (nodes[k]) nodes[k].classList.toggle('on', k === t); });
     res.innerHTML = t === 'Shoreview' ? '<b>Shoreview</b> is home base: 1000 County Rd E #230.' : 'Yes, we serve <b>' + t + '</b>. Book a Wise Check and we will come to you.';

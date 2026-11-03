@@ -1,0 +1,274 @@
+[
+ {
+  "sec": "hero",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "video",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "explore",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "wise",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "wrap",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "services",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "reviews",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "area",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "family",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "booking",
+  "check": "default view shows exactly one version, V1",
+  "ok": true,
+  "detail": "visible: 1"
+ },
+ {
+  "sec": "page",
+  "check": "home page is the page shown",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "check": "review switcher hidden for visitors",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "check": "document title",
+  "ok": true,
+  "detail": "Owl Roofing · Shoreview, MN · We Give a Hoot"
+ },
+ {
+  "sec": "hero",
+  "check": "Storm test toggles on",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "check": "rain canvas is drawing",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "check": "crew film has a source and plays",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "check": "chapter chip seeks (Finished roof ~9.2 s)",
+  "ok": true,
+  "detail": "9.5 s, active: Finished roof 0:09"
+ },
+ {
+  "sec": "video",
+  "check": "play button loads YouTube ehKLv5DF2TQ (blocked offline in test, iframe checked)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "check": "choosing Decking lifts one slab and names it",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "check": "all four ticked: needle at PROTECTED and CTA glows",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "check": "Start again resets",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "check": "storm at 92: \"Hail and wind\", unprotected shakes, shield glows",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "check": "board settles to ROOF REPLACEMENT",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "check": "row 3 shows Storm damage help",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "check": "dial counts to 5.0",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "check": "Trusted tab flips the face to BBB A− / GAF",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "check": "typing Stillwater confirms and draws the road",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "check": "unknown town gets the call-and-ask path",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "check": "Give a hoot draws feathers",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "check": "empty submit names the first missing field",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "check": "complete submit opens email app, never claims sent",
+  "ok": true
+ },
+ {
+  "sec": "links",
+  "check": "every in-page link resolves",
+  "ok": true,
+  "detail": "11 unique links"
+ },
+ {
+  "sec": "links",
+  "check": "phone and email links use the locked contacts",
+  "ok": true,
+  "detail": "tel:+16519776027 mailto:info@owlroofing.com"
+ },
+ {
+  "sec": "facts",
+  "check": "never the wrong phone (651) 867-2961",
+  "ok": true
+ },
+ {
+  "sec": "facts",
+  "check": "never Master Elite / BBB A+",
+  "ok": true
+ },
+ {
+  "sec": "links",
+  "check": "#crew-video lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#explore lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#wise-check lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#protect lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#services lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#reviews lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#areas lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#family lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "links",
+  "check": "#book lands below the sticky header",
+  "ok": true,
+  "detail": "section top 84, header bottom 84"
+ },
+ {
+  "sec": "layout",
+  "check": "no sideways scroll at 1440 px",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "layout",
+  "check": "no sideways scroll at 768 px",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "layout",
+  "check": "no sideways scroll at 390 px",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "motion",
+  "check": "reduced motion: page loads, rain off, video not autoplaying",
+  "ok": true
+ },
+ {
+  "sec": "errors",
+  "check": "no page or console errors in any run",
+  "ok": true,
+  "detail": ""
+ }
+]

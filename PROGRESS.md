@@ -40,7 +40,15 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
 - **ROUND 9 DONE (gate `owl/final/GATE-R9.md`, shots `owl/final/gates/r9/`):** About page (#/about, new header/footer link):
   hero V1 watching owl mascot 8.06 / V2 crew photo + count-up 7.98; values V1 four words with proof 7.98 / V2 four feathers
   7.90. Locked facts only (one invented motive removed before build). Axe 0; tests clean; no phone overflow.
-- **Next:** Service Area page, then Contact; then deepen inner pages to 5–6+ sections each.
+- **OWNER ORDER (via Muse): homepage verified first.** The Service Area round (R10) was halted unfinished and saved as
+  `owl/final/wip/R10-service-area-UNFINISHED.patch` (not built).
+- **HOMEPAGE VERIFICATION DONE, STOPPED for Muse's verdict (gate `owl/final/GATE-HOME-VERIFY.md`, evidence
+  `owl/final/gates/home-verify/`):** default view = V1 of all 10 sections; full-page shots at 1440 / 768 / 390 and one per
+  section; 49/49 checks pass (interactions, links, anchors clear the header, facts scan, no overflow, reduced motion, no
+  errors); axe 0; DCL 342 ms, CLS 0. Defects fixed: anchor jumps hidden under the sticky header; ribbon label colliding with
+  the owl; ribbon labels unreadable over road. Open for Muse: header/footer links into unverified inner pages, hero owl
+  art source, two cosmetic items, YouTube playback untestable offline.
+- **Next:** nothing until Muse's verification verdict.
 
 ---
 
