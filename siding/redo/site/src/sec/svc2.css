@@ -75,3 +75,6 @@
   .svD .tx2 .cv{padding:46px 20px 24px}
 }
 @media (prefers-reduced-motion:reduce){.svC .ch,.svD .cv,.svD .ph2 img{transition:none!important}.svD .grip svg{animation:none}.svD .bar i{animation:none}}
+
+.svD .anc{position:absolute;top:0;left:0;width:0;height:0}
+.svD{position:relative}

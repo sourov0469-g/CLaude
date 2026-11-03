@@ -39,7 +39,8 @@ On their points, the later ones win.
 | 11-03 | **Upgrade Round 1:** pure white ground; WebGL world of the trades at work revealed around the cursor (5 scenes × 3 planes, scroll cross-fade, touch scroll reveal); hero V2–V6 on Muse's photos (depth window, pinned dusk portrait, title between sky and house, lap courses, three-house deck); magnetic buttons; `?review` switcher | `GATE-UPGRADE-R1.md`. Accepted by Muse. Illustration set requested |
 | 11-03 | **Upgrade Round 2:** Services C (counted chapters, pinned, numbers as events) and D (MERSI split cover with the firm's own jobs, draggable seam); Visualiser C (colour fields + compare) and D (four-step instrument, dial, corner preview, spec download); Visualiser B phone step caption; word-by-word section headings | `GATE-UPGRADE-R2.md`. Proceeded under standing instruction |
 | 11-03 | **Upgrade Round 3:** Windows C (one window taken apart, pinned; numbers as events; glass section) and D (archive of the firm's window jobs); Reviews C (scroll-paced word reveal) and D (ask the neighbours: questions answered by verbatim excerpts); Windows A lifted-sash room drawn; Reviews B dialog moved to page root | `GATE-UPGRADE-R3.md`. Accepted by Muse |
-| 11-03 | **Upgrade Round 4:** Process C (plumb line, self-drawing step drawings) and D (four colour columns); Try the job C (workbench grid) and D (the owner's Lusion dive into a window, toolbox inside); Process A sticky stacking and Process B pinned wall on phones; class collisions fixed (.tl/.st/.ft) | `GATE-UPGRADE-R4.md`. Proceeding to Round 5 |
+| 11-03 | **Upgrade Round 4:** Process C (plumb line, self-drawing step drawings) and D (four colour columns); Try the job C (workbench grid) and D (the owner's Lusion dive into a window, toolbox inside); Process A sticky stacking and Process B pinned wall on phones; class collisions fixed (.tl/.st/.ft) | `GATE-UPGRADE-R4.md`. Accepted by Muse |
+| 11-03 | **Upgrade Round 5 — homepage complete:** On your street C (drive a van over the documented-project map) and D (towns ranked); Booking C (film-roll record) and D (one number); header reading line, hide/show and where-you-are chip; footer boards on brand tints; phone sideways-row arrows; hero hint plays twice; Services D anchors | `GATE-UPGRADE-R5.md`. **Stopped for the joint verification (Muse, then the owner).** |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -71,8 +72,11 @@ On their points, the later ones win.
 | `src/sec/rev2.*` | Reviews C (reading pace) and D (ask the neighbours) |
 | `src/sec/proc2.*` | Process C (plumb line) and D (four columns); shared step drawings |
 | `src/sec/seq2.*` | Try the job C (workbench) and D (the dive) |
+| `src/sec/area2.*` | On your street C (drive round our jobs) and D (every town) |
+| `src/sec/cta2.*` | Booking C (the record, then the call) and D (one number) |
+| `src/hf.*` | Header and footer treatment |
 | `depth.py` | Depth maps and the V4 house matte for Muse's three photographs |
 
 ## Next
 
-**Upgrade Round 5: On your street + Booking + header/footer**, with the phone arrow hints and the hero hint. Then, then the joint homepage verification. Inner pages stay frozen.
+**Homepage complete. Waiting for the joint verification:** Muse audits against the skills, then the owner reviews the HTML and gives his verdict. Inner pages stay frozen until both pass it.

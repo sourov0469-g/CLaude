@@ -10,7 +10,7 @@ from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, 
 # the live winner of every slot; the rest become backups
 LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'svc2', 'vis', 'vis2', 'windows', 'win2', 'reviews', 'rev2', 'process', 'proc2', 'seq', 'seq2', 'area', 'cta', 'nav']
+MODS = ['scenes', 'services', 'svc2', 'vis', 'vis2', 'windows', 'win2', 'reviews', 'rev2', 'process', 'proc2', 'seq', 'seq2', 'area', 'area2', 'cta', 'cta2', 'nav']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
 WORK = os.path.join(HERE, '..', '..', 'work')
 
@@ -61,12 +61,31 @@ def winp():
 WINP = winp()
 
 
+def near():
+    # On your street C/D: the firm's documented-project records (the site's own project finder), compacted
+    N = json.load(open(os.path.join(WORK, 'data', 'near.json'))); import collections as _c
+    pts = [q[:7] for q in N['p']]
+    pos = {g[0]: (g[2], g[3]) for g in N['g'] if g[1] == 'c'}
+    canon = {k.lower(): k for k in pos}
+    ct = [canon.get(c.strip().lower(), c.strip()) for c in N['ct']]   # the records spell a few towns loosely ("ROUND ROCK", "san Marcos")
+    tally = {g[0]: g[6] for g in N['g'] if g[1] == 'c'}                # the finder's own per-town tallies, as shown in versions A and B
+    towns = []
+    for t, k in sorted(tally.items(), key=lambda x: -x[1]):
+        hoods = _c.Counter(N['pl'][q[5]].split(',')[0].strip() for q in pts if ct[q[4]] == t and q[5] >= 0).most_common(12)
+        work = _c.Counter(sv for q in pts if ct[q[4]] == t for i, sv in enumerate(N['sv']) if q[3] & (1 << i)).most_common(4)
+        x, y = pos.get(t, (0, 0)); towns.append([t, k, x, y, [list(h) for h in hoods], [list(w) for w in work]])
+    return {'W': N['W'], 'H': N['H'], 'hq': N['hq'], 'ppm': N['ppm'], 'sv': N['sv'], 'ct': ct, 'pl': N['pl'], 'p': pts, 'towns': [t for t in towns if t[1] > 0]}
+
+
+NEAR = near()
+
+
 def prerender():
     js = '\n'.join(SEC(m + '.js') for m in MODS)
-    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';globalThis.__SVCP=' + json.dumps(SVCP) + ';globalThis.__WINP=' + json.dumps(WINP) + ';' + js +
+    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';globalThis.__SVCP=' + json.dumps(SVCP) + ';globalThis.__WINP=' + json.dumps(WINP) + ';globalThis.__NEAR=' + json.dumps(NEAR) + ';' + js +
             # fact lock: every quote must be a verbatim excerpt of its review
             ';for(const p of [...Rev.PICK,...Proc.QUOTES,...Rev2.PICK]){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
-            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),sc:Svc2.C(),sd:Svc2.D(),va:Vis.A(),vb:Vis.B(),vc:Vis2.C(),vd:Vis2.D(),wa:Win.A(),wb:Win.B(),wc:Win2.C(),wd:Win2.D(),ra:Rev.A(),rb:Rev.B(),rc:Rev2.C(),rd:Rev2.D(),pa:Proc.A(),pb:Proc.B(),pc:Proc2.C(),pd:Proc2.D(),aa:Area.A(),ab:Area.B(),qa:Seq.A(),qb:Seq.B(),qc:Seq2.C(),qd:Seq2.D(),ca:Cta.A(),cb:Cta.B(),ft:Cta.FOOT()}))')
+            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),sc:Svc2.C(),sd:Svc2.D(),va:Vis.A(),vb:Vis.B(),vc:Vis2.C(),vd:Vis2.D(),wa:Win.A(),wb:Win.B(),wc:Win2.C(),wd:Win2.D(),ra:Rev.A(),rb:Rev.B(),rc:Rev2.C(),rd:Rev2.D(),pa:Proc.A(),pb:Proc.B(),pc:Proc2.C(),pd:Proc2.D(),aa:Area.A(),ab:Area.B(),ac:Area2.C(),ad:Area2.D(),qa:Seq.A(),qb:Seq.B(),qc:Seq2.C(),qd:Seq2.D(),ca:Cta.A(),cb:Cta.B(),cc:Cta2.C(),cd:Cta2.D(),ft:Cta.FOOT()}))')
     return json.loads(subprocess.run(['node', '-'], input=prog, capture_output=True, text=True, check=True).stdout)
 
 
@@ -147,7 +166,7 @@ VERSIONS = {
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)']],
-    'area': [['a', 'Thread board'], ['b', 'Street finder']], 'book': [['a', 'Work order'], ['b', 'Press the board']]}
+    'area': [['a', 'Thread board'], ['b', 'Street finder'], ['c', 'Drive round our jobs'], ['d', 'Every town, ranked']], 'book': [['a', 'Work order'], ['b', 'Press the board'], ['c', 'The record, then the call'], ['d', 'One number']]}
 SLOTNAMES = {'hero': 'Hero', 'services': 'Services', 'vis': 'Visualiser', 'windows': 'Windows', 'reviews': 'Reviews', 'process': 'Process', 'try': 'Try the job', 'area': 'On your street', 'book': 'Booking'}
 
 
@@ -185,14 +204,14 @@ const PLAY=%PLAY%,PAUSE=%PAUSE%;
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Svc2.wire(document);Vis.wire(document);Vis2.wire(document);Win.wire(document);Win2.wire(document);Rev.wire(document);Rev2.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Cta.wire(document);Nav.wire();
+Scenes.wire(document);Services.wire(document);Svc2.wire(document);Vis.wire(document);Vis2.wire(document);Win.wire(document);Win2.wire(document);Rev.wire(document);Rev2.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Nav.wire();
 })();'''
 
 
 def build():
     pre = prerender()
     css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS)
-    css += src('hero2.css') + src('fx.css') + '.slot{display:contents}'
+    css += src('hero2.css') + src('fx.css') + src('hf.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
@@ -200,15 +219,15 @@ def build():
     main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd']}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd']}) +
             slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd']}) +
             slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd']}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd']}) +
-            slot('area', {'a': pre['aa'], 'b': pre['ab']}) + slot('book', {'a': pre['ca'], 'b': pre['cb']}))
+            slot('area', {'a': pre['aa'], 'b': pre['ab'], 'c': pre['ac'], 'd': pre['ad']}) + slot('book', {'a': pre['ca'], 'b': pre['cb'], 'c': pre['cc'], 'd': pre['cd']}))
     foot = pre['ft']
     boot = BOOT.replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + src('hero2.js') + ''.join(SEC(m + '.js') for m in MODS) + src('fx.js')
+    js = src('photo-hero.js') + src('hero2.js') + ''.join(SEC(m + '.js') for m in MODS) + src('fx.js') + src('hf.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main>{main}</main>{foot}{MBAR}{film}
-<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':

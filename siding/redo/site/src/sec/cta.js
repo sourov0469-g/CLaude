@@ -53,5 +53,5 @@ window.Cta = (function () {
     <section class="bd cr"><h3>Credentials</h3><p>GAF Master Elite</p><p>James Hardie Elite Preferred</p><p>President's Club 2025</p><p>Andersen Certified Premier</p><p>BBB A+</p></section>
     <div class="hs" aria-hidden="true"><svg viewBox="0 0 120 110"><path d="M10 50L60 12L110 50V104H10Z" fill="#E9E2CF"/>${Array.from({ length: 6 }, (_, i) => `<path d="M10 ${56 + i * 8}H110" stroke="rgba(0,0,0,.14)" stroke-width="2"/>`).join('')}<path d="M2 54L60 8L118 54" fill="none" stroke="#0E3B2C" stroke-width="8" stroke-linejoin="round"/><rect x="50" y="70" width="20" height="34" fill="#0E3B2C"/><rect x="22" y="62" width="18" height="16" fill="#8FA7BA" stroke="#E0E0D8" stroke-width="3"/><rect x="80" y="62" width="18" height="16" fill="#8FA7BA" stroke="#E0E0D8" stroke-width="3"/></svg></div>
     </div><div class="sill"><span>© Austin Pro Siding, Windows &amp; Roofing</span><a href="#top">Back to top</a></div></footer>`;
-  return { A, B, FOOT, wire(root) { wireA(root); wireB(root); } };
+  return { A, B, FOOT, status, wire(root) { wireA(root); wireB(root); } };
 })();

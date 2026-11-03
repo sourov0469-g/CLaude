@@ -1,0 +1,21 @@
+/* HEADER + FOOTER treatment (upgrade Round 5) */
+.hdr{transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .3s ease;box-shadow:0 1px 0 rgba(22,25,29,.06),0 2px 0 #E4EBE5,0 18px 36px -24px rgba(22,25,29,.35)}
+.hdr.away{transform:translateY(calc(-100% - 26px))}
+.hline{position:absolute;left:16px;right:16px;bottom:-1px;height:3px;border-radius:2px;background:var(--lime);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.hwhere{display:none}
+@media (min-width:1100px){
+  .hdr .brand{margin-right:14px}
+  .hwhere{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;margin-right:auto;border-radius:999px;background:#F1F6EE;font:700 12.5px/1 var(--text);color:var(--green);
+    opacity:0;transform:translateY(5px);transition:opacity .3s ease,transform .45s cubic-bezier(.16,1,.3,1)}
+  .hwhere::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--green)}
+  .hwhere.on{opacity:1;transform:none}
+}
+/* footer: the boards on brand tints (white ground, no cream), standing up one after another as the footer arrives */
+.ft .bd{background:#F3F7F1;border-left-color:#E0E9DE}
+.ft .bd:nth-child(even){background:#EEF4EA}
+.ft .bd h3{color:var(--green)}
+.ft:not(.up) .bd{opacity:0;transform:translateY(46px) rotate(-1.2deg)}
+.ft.up .bd{transition:transform .9s cubic-bezier(.3,1.25,.5,1),opacity .5s ease,box-shadow .3s ease}
+.ft.up .bd:nth-child(2){transition-delay:.07s}.ft.up .bd:nth-child(3){transition-delay:.14s}.ft.up .bd:nth-child(4){transition-delay:.21s}.ft.up .bd:nth-child(5){transition-delay:.28s}.ft.up .bd:nth-child(6){transition-delay:.35s}
+.ft.up .bd:hover{transition-delay:0s}
+@media (prefers-reduced-motion:reduce){.hdr{transition:none}.ft .bd{opacity:1!important;transform:none!important;transition:none!important}}

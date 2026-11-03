@@ -40,3 +40,13 @@ html{background:#FFFFFF}
 .rv a .n{font:800 12px/1 var(--display)}
 .rv a:focus-visible{outline:2px solid #B5DB6E;outline-offset:2px}
 .rv.min .body{display:none}
+
+/* phone sideways rows: an arrow at the clipped edge (fx.js) */
+.xh{position:absolute;z-index:6;width:44px;height:44px;margin-top:-22px;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:#fff;color:var(--green);
+  box-shadow:0 0 0 1px #E1E8E2,0 10px 22px -10px rgba(14,59,44,.55)}
+.xh svg{width:22px;height:22px}
+.xh.r{right:6px;animation:xhn 1.2s ease-in-out .6s 2}.xh.l{left:6px}
+.xh[hidden]{display:none}
+.xh:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+@keyframes xhn{50%{transform:translateX(-6px)}}
+@media (prefers-reduced-motion:reduce){.xh.r{animation:none}}

@@ -40,7 +40,7 @@ window.Proc2 = (function () {
   function wireC(root) {
     const s = root.querySelector('.pcC'); if (!s) return; const tl = s.querySelector(".pline"), sp = s.querySelector('.sp'), sts = [...s.querySelectorAll('.pst')];
     let raf = 0;
-    function upd() { raf = 0; const r = tl.getBoundingClientRect(), y = innerHeight * 0.62, k = RM ? 1 : Math.max(0, Math.min(1, (y - r.top) / r.height));
+    function upd() { raf = 0; const r = tl.getBoundingClientRect(), y = innerHeight * 0.78, k = RM ? 1 : Math.max(0, Math.min(1, (y - r.top) / r.height));
       sp.style.setProperty('--k', k.toFixed(4));
       sts.forEach((st) => { const nd = st.querySelector('.nd').getBoundingClientRect(); const reached = RM || nd.top + nd.height / 2 < y; st.classList.toggle('on', reached); if (reached) st.classList.add('in'); }); }
     addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true }); addEventListener('resize', upd); upd();
