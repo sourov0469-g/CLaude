@@ -46,9 +46,9 @@
     if (stars.length !== COUNT) { svg.innerHTML = ''; return; }   // the drawing is the figure: never show a wrong count
 
     // ---- the ledger: 343 strokes in gates of five, ten gates to a line ----
-    var strokes = [], gates = [];
+    var strokes = [], gates = [], per = matchMedia('(max-width: 480px)').matches ? 7 : 10; // Phase 8: seven gates a line on phones, so each gate is a 24px target
     (function build() {
-      var per = 10, W = 700, gw = W / per, rows = Math.ceil(COUNT / 5 / per), rh = 56, H = rows * rh, s = '', n = 0;
+      var W = per * 70, gw = 70, rows = Math.ceil(COUNT / 5 / per), rh = 56, H = rows * rh, s = '', n = 0;
       tally.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
       for (var rr = 0; rr < rows; rr++) s += '<path d="M0 ' + (rr * rh + 52) + 'H' + W + '" stroke="var(--color-border)" stroke-width="1"/>';
       for (var g = 0; n < COUNT; g++) {
@@ -59,7 +59,7 @@
         }
         if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 31) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
         var lbl = from === n ? 'Review ' + from : 'Reviews ' + from + ' to ' + n;
-        s += '<g class="gate" tabindex="0" role="img" aria-label="' + lbl + '" data-l="' + lbl + '"><rect x="' + (x - 9) + '" y="' + (y - 5) + '" width="' + (gw * .84) + '" height="48"/>' + body + '</g>';
+        s += '<g class="gate" tabindex="' + (g ? -1 : 0) + '" role="img" aria-label="' + lbl + '" data-l="' + lbl + '"><rect class="hit" x="' + (col * gw) + '" y="' + (row * rh) + '" width="' + gw + '" height="' + rh + '"/><rect x="' + (x - 9) + '" y="' + (y - 5) + '" width="' + (gw * .84) + '" height="48"/>' + body + '</g>';
       }
       tally.innerHTML = s;
       strokes = Array.prototype.slice.call(tally.querySelectorAll('.st'));
@@ -70,6 +70,13 @@
     k.on(tally, 'pointerleave', function () { if (!tally.contains(document.activeElement)) hot(null); });
     k.on(tally, 'focusin', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
     k.on(tally, 'focusout', function (e) { if (!tally.contains(e.relatedTarget)) hot(null); });
+    // Phase 8: one tab stop for the whole ledger (roving tabindex); the arrow keys count along it, Home and End jump [S1018]
+    k.on(tally, 'keydown', function (e) {
+      var i = gates.indexOf(document.activeElement); if (i < 0) return;
+      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'ArrowDown' ? i + per : e.key === 'ArrowUp' ? i - per : e.key === 'Home' ? 0 : e.key === 'End' ? gates.length - 1 : null;
+      if (j === null) return; e.preventDefault(); j = Math.max(0, Math.min(gates.length - 1, j));
+      gates[i].setAttribute('tabindex', '-1'); gates[j].setAttribute('tabindex', '0'); gates[j].focus();
+    });
     k.add(function () { svg.innerHTML = ''; tally.innerHTML = ''; tip.textContent = ''; });
 
     // the still state is the gathered one

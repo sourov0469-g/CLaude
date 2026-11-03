@@ -35,3 +35,6 @@
   .rv__stage { grid-template-columns: 1fr; margin-top: var(--s6); gap: var(--s6); }
   .rv__book { padding: var(--s4) var(--s3) var(--s3); }
 }
+
+/* Phase 8: each gate's pointer target is its whole cell (no dead gaps between gates); the drawn highlight stays inside */
+.rv__tally .gate .hit, .rv__tally .gate.is-hot .hit, .rv__tally .gate:focus-visible .hit { fill: transparent; stroke: none; }

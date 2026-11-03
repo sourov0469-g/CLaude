@@ -86,7 +86,8 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 4 | Kitchens, then Bathrooms | **done**: `GATE-kitchens.md`, `GATE-bathrooms.md` |
 | 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
 | 6 | Polish pass on the defects the gate reports name as remaining | PASS (Muse), after the scorecard correction: `GATE-phase6.md` |
-| 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | **corrected per Muse** (Creativity was under the 6.0 floor): `GATE-phase7.md` adds the seam level and re-rates; Muse's three rulings recorded; awaiting re-judgement |
+| 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | PASS (Muse), after the Creativity correction (the seam level): `GATE-phase7.md` |
+| 8 | Device matrix: every page at 8 sizes, phones also touch-emulated (60 runs): errors, scroll release, overflow, the phone, target sizes | **done**: `GATE-phase8.md`; awaiting Muse |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -196,3 +197,15 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - The bubble lags the seam's motion and settles level with one wobble.
   - Measured: -2.4 while dragging right; back to exactly 0; arrow keys move it; static under reduced motion; 0 writes at rest (the loop sleeps); Carbon 24/1.5 at 1440 and 390.
   - Creativity re-rated 6, with frames in `qa/finalize/phase7/level-*.png`.
+
+## Phase 8 log (device matrix, after Muse accepted Phase 7)
+- **Why:** the AUDIT STANDARD's "every pin behaving on real phone sizes" had been measured only at 390 and 1440. New tool: `remodeling/src/tools/matrix.js`. It runs 5 pages at 320, 360, 375, 414, 768, 1024, 1280 and 1920, with phones twice (wheel, and touch-emulated). Raw output in `qa/finalize/phase8/`.
+- **Passed as found, and after:** 0 errors, 0 horizontal overflow and 0 scroll traps in all 60 runs; the phone visible at every sampled position on every phone size.
+- **Failed and fixed:** 177 targets under 24×24 (WCAG 2.2 2.5.8), now **0** at every size:
+  - the 104 town names: padding 4px, 25px tall;
+  - the Reviews tally's 69 tab stops: one roving tab stop, with the arrow keys counting along it (S1018), whole-cell hit areas, and the ledger re-ruled at seven gates a line on phones (cells 37×30);
+  - the consent label: 24px;
+  - the Contact card links: 24px.
+- **Raised to the 44px craft line:** the nav phone link, the footer page links, the phone in Consult's fact list, and the Bathrooms closing number.
+- **Under 44 but passing AA, reported in the gate:** the town names, the fill-in blanks inside sentences, the 42px hero controls, the logo and a few in-line phone links.
+- Zero background tasks, zero sub-agents.

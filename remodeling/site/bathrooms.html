@@ -387,7 +387,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (hover: hover) and (pointer: fine) {
   .nav__links a:hover::after { transform: scaleX(1); }
 }
-.nav__tel { font-size: .9375rem; font-weight: 500; text-decoration: none; color: inherit; white-space: nowrap; }
+.nav__tel { display: inline-flex; align-items: center; min-height: 44px; font-size: .9375rem; font-weight: 500; text-decoration: none; color: inherit; white-space: nowrap; } 
 .nav .btn { --h: 44px; padding: 0 16px; font-size: .9375rem; }
 .nav__menu { display: none; }
 .nav.is-solid { background: var(--color-bg); color: var(--color-text); }
@@ -620,7 +620,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
 .foot__addr { font-style: normal; display: grid; gap: var(--s2); }
-.foot__col a { text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.foot__col a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .foot__col a[href^="mailto:"] { overflow-wrap: anywhere; word-break: break-word; }   
 .foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: var(--color-text-secondary); padding-top: var(--s5); font-weight: 600; }
 @media (max-width: 1023px) {
@@ -924,6 +924,10 @@ html.has-buddy select { cursor: default !important; }
 .is-level .lv .lv__t { opacity: 1; }
 
 
+.foot__legal a.link, .vs1__l > a.link { display: inline-flex; align-items: center; min-height: 24px; }
+dd > a.link { display: inline-flex; align-items: center; min-height: 44px; } 
+
+
 .bintro { padding-top: calc(var(--nav-h) + clamp(32px, 4vw, 64px)); }
 .bi__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 80px); align-items: center; }
 .bi__copy { display: grid; gap: var(--s5); justify-items: start; }
@@ -1123,7 +1127,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
 .bc__u { font: 600 1.25rem/1 var(--f-display); }
 .bc__p { margin: 0; font: 400 1.0625rem/1.5 var(--f-text); max-width: 34ch; }
 .bc__s { margin: 0; font: 400 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); max-width: 36ch; }
-.bc__num { font: 600 clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem)/1 var(--f-display); letter-spacing: -.02em; color: var(--color-text); text-decoration: none; }
+.bc__num { display: inline-flex; align-items: center; min-height: 44px; font: 600 clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem)/1 var(--f-display); letter-spacing: -.02em; color: var(--color-text); text-decoration: none; }
 .bc__c--call { justify-items: start; }
 .bc__proof { margin: 0; display: flex; flex-wrap: wrap; gap: 2px var(--s4); font: 600 .8125rem/1.5 var(--f-text); color: var(--color-text-secondary); }
 .bc__proof .nums { color: var(--color-text); }

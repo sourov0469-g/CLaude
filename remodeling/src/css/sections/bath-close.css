@@ -10,7 +10,7 @@
 .bc__u { font: 600 1.25rem/1 var(--f-display); }
 .bc__p { margin: 0; font: 400 1.0625rem/1.5 var(--f-text); max-width: 34ch; }
 .bc__s { margin: 0; font: 400 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); max-width: 36ch; }
-.bc__num { font: 600 clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem)/1 var(--f-display); letter-spacing: -.02em; color: var(--color-text); text-decoration: none; }
+.bc__num { display: inline-flex; align-items: center; min-height: 44px; font: 600 clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem)/1 var(--f-display); letter-spacing: -.02em; color: var(--color-text); text-decoration: none; }
 .bc__c--call { justify-items: start; }
 .bc__proof { margin: 0; display: flex; flex-wrap: wrap; gap: 2px var(--s4); font: 600 .8125rem/1.5 var(--f-text); color: var(--color-text-secondary); }
 .bc__proof .nums { color: var(--color-text); }

@@ -21,7 +21,7 @@
 .c-f::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; background: var(--c-acc, var(--color-accent-solid)); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--ez-out); color: var(--color-text-on-accent); }
 .c-f:focus-within::after { transform: scaleX(1); }
 .c-err { display: block; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-danger-text); margin-top: 8px; }
-.c-consent { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: .875rem; line-height: 1.45; cursor: pointer; font-weight: 600; }
+.c-consent { min-height: 24px; display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: .875rem; line-height: 1.45; cursor: pointer; font-weight: 600; }
 .c-consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--color-accent-solid); }
 .c-note { margin: 0; font-size: .8125rem; line-height: 1.45; opacity: .75; font-weight: 600; }
 .c-done { margin: 0; padding: 16px 16px; background: color-mix(in srgb, var(--color-accent-subtle) 12%, transparent); font-size: .9375rem; line-height: 1.5; }

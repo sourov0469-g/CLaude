@@ -387,7 +387,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (hover: hover) and (pointer: fine) {
   .nav__links a:hover::after { transform: scaleX(1); }
 }
-.nav__tel { font-size: .9375rem; font-weight: 500; text-decoration: none; color: inherit; white-space: nowrap; }
+.nav__tel { display: inline-flex; align-items: center; min-height: 44px; font-size: .9375rem; font-weight: 500; text-decoration: none; color: inherit; white-space: nowrap; } 
 .nav .btn { --h: 44px; padding: 0 16px; font-size: .9375rem; }
 .nav__menu { display: none; }
 .nav.is-solid { background: var(--color-bg); color: var(--color-text); }
@@ -620,7 +620,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
 .foot__addr { font-style: normal; display: grid; gap: var(--s2); }
-.foot__col a { text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.foot__col a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .foot__col a[href^="mailto:"] { overflow-wrap: anywhere; word-break: break-word; }   
 .foot__legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); font-size: .8125rem; color: var(--color-text-secondary); padding-top: var(--s5); font-weight: 600; }
 @media (max-width: 1023px) {
@@ -922,6 +922,10 @@ html.has-buddy select { cursor: default !important; }
 .lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
 .lv .lv__b { fill: var(--white, #fff); stroke: none; }
 .is-level .lv .lv__t { opacity: 1; }
+
+
+.foot__legal a.link, .vs1__l > a.link { display: inline-flex; align-items: center; min-height: 24px; }
+dd > a.link { display: inline-flex; align-items: center; min-height: 44px; } 
 
 
 
@@ -1610,6 +1614,9 @@ html.has-buddy select { cursor: default !important; }
 }
 
 
+.rv__tally .gate .hit, .rv__tally .gate.is-hot .hit, .rv__tally .gate:focus-visible .hit { fill: transparent; stroke: none; }
+
+
 .tw__grid { display: grid; grid-template-columns: minmax(0, 4fr) auto minmax(0, 5fr); gap: var(--s7); align-items: start; }
 .tw__side { display: grid; gap: var(--s4); align-content: start; }
 .tw__side .eyebrow, .tw__side .t-head, .tw__lead { margin: 0; }
@@ -1658,7 +1665,7 @@ html.has-buddy select { cursor: default !important; }
 .tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 8px; padding-bottom: 8px; border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
 .tw__c h3 span { font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
 .tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 2px; }
-.tw__t { padding: 2px 4px; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
+.tw__t { padding: 4px;  font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text); background: none; border: 0; border-radius: 3px; cursor: pointer; transition: background-color 120ms var(--ez-out), color 120ms var(--ez-out); }
 .tw__t.is-hot { background: var(--clay-100, #F9E3DD); }
 .tw__t.is-on { background: var(--color-accent-solid); color: var(--color-text-on-accent, #fff); }
 
@@ -1696,7 +1703,7 @@ html.has-buddy select { cursor: default !important; }
 .c-f::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; background: var(--c-acc, var(--color-accent-solid)); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--ez-out); color: var(--color-text-on-accent); }
 .c-f:focus-within::after { transform: scaleX(1); }
 .c-err { display: block; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-danger-text); margin-top: 8px; }
-.c-consent { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: .875rem; line-height: 1.45; cursor: pointer; font-weight: 600; }
+.c-consent { min-height: 24px; display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: .875rem; line-height: 1.45; cursor: pointer; font-weight: 600; }
 .c-consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--color-accent-solid); }
 .c-note { margin: 0; font-size: .8125rem; line-height: 1.45; opacity: .75; font-weight: 600; }
 .c-done { margin: 0; padding: 16px 16px; background: color-mix(in srgb, var(--color-accent-subtle) 12%, transparent); font-size: .9375rem; line-height: 1.5; }
@@ -2356,7 +2363,7 @@ html.has-buddy select { cursor: default !important; }
         <figcaption class="rv__avg"><span class="rv__n nums">4.8</span><span class="rv__of">out of <span class="nums">5</span>, the average across all <span class="nums">343</span> Google reviews</span></figcaption>
       </figure>
       <figure class="rv__book">
-        <svg class="rv__tally" role="group" aria-label="A tally of 343 strokes: 68 full gates of five and three more strokes"></svg>
+        <svg class="rv__tally" role="group" aria-label="A tally of 343 strokes: 68 full gates of five and three more strokes. The arrow keys count along it."></svg>
         <figcaption class="rv__cap"><span>One stroke per review, five to a gate.</span> <span class="rv__tip" aria-live="polite"></span></figcaption>
       </figure>
     </div>
@@ -5776,9 +5783,9 @@ html.has-buddy select { cursor: default !important; }
     if (stars.length !== COUNT) { svg.innerHTML = ''; return; }   // the drawing is the figure: never show a wrong count
 
     // ---- the ledger: 343 strokes in gates of five, ten gates to a line ----
-    var strokes = [], gates = [];
+    var strokes = [], gates = [], per = matchMedia('(max-width: 480px)').matches ? 7 : 10; // Phase 8: seven gates a line on phones, so each gate is a 24px target
     (function build() {
-      var per = 10, W = 700, gw = W / per, rows = Math.ceil(COUNT / 5 / per), rh = 56, H = rows * rh, s = '', n = 0;
+      var W = per * 70, gw = 70, rows = Math.ceil(COUNT / 5 / per), rh = 56, H = rows * rh, s = '', n = 0;
       tally.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
       for (var rr = 0; rr < rows; rr++) s += '<path d="M0 ' + (rr * rh + 52) + 'H' + W + '" stroke="var(--color-border)" stroke-width="1"/>';
       for (var g = 0; n < COUNT; g++) {
@@ -5789,7 +5796,7 @@ html.has-buddy select { cursor: default !important; }
         }
         if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 31) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
         var lbl = from === n ? 'Review ' + from : 'Reviews ' + from + ' to ' + n;
-        s += '<g class="gate" tabindex="0" role="img" aria-label="' + lbl + '" data-l="' + lbl + '"><rect x="' + (x - 9) + '" y="' + (y - 5) + '" width="' + (gw * .84) + '" height="48"/>' + body + '</g>';
+        s += '<g class="gate" tabindex="' + (g ? -1 : 0) + '" role="img" aria-label="' + lbl + '" data-l="' + lbl + '"><rect class="hit" x="' + (col * gw) + '" y="' + (row * rh) + '" width="' + gw + '" height="' + rh + '"/><rect x="' + (x - 9) + '" y="' + (y - 5) + '" width="' + (gw * .84) + '" height="48"/>' + body + '</g>';
       }
       tally.innerHTML = s;
       strokes = Array.prototype.slice.call(tally.querySelectorAll('.st'));
@@ -5800,6 +5807,13 @@ html.has-buddy select { cursor: default !important; }
     k.on(tally, 'pointerleave', function () { if (!tally.contains(document.activeElement)) hot(null); });
     k.on(tally, 'focusin', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
     k.on(tally, 'focusout', function (e) { if (!tally.contains(e.relatedTarget)) hot(null); });
+    // Phase 8: one tab stop for the whole ledger (roving tabindex); the arrow keys count along it, Home and End jump [S1018]
+    k.on(tally, 'keydown', function (e) {
+      var i = gates.indexOf(document.activeElement); if (i < 0) return;
+      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'ArrowDown' ? i + per : e.key === 'ArrowUp' ? i - per : e.key === 'Home' ? 0 : e.key === 'End' ? gates.length - 1 : null;
+      if (j === null) return; e.preventDefault(); j = Math.max(0, Math.min(gates.length - 1, j));
+      gates[i].setAttribute('tabindex', '-1'); gates[j].setAttribute('tabindex', '0'); gates[j].focus();
+    });
     k.add(function () { svg.innerHTML = ''; tally.innerHTML = ''; tip.textContent = ''; });
 
     // the still state is the gathered one

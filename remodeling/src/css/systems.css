@@ -238,3 +238,7 @@ html.has-buddy select { cursor: default !important; }
 .lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
 .lv .lv__b { fill: var(--white, #fff); stroke: none; }
 .is-level .lv .lv__t { opacity: 1; }
+
+/* Phase 8 · target size (WCAG 2.2 AA 2.5.8): a link standing alone in a fact list or the legal line gets a 24px hit area */
+.foot__legal a.link, .vs1__l > a.link { display: inline-flex; align-items: center; min-height: 24px; }
+dd > a.link { display: inline-flex; align-items: center; min-height: 44px; } /* a standalone phone in a fact list: the 44px craft line [S0657] */
