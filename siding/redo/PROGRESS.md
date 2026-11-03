@@ -28,7 +28,8 @@ On their points, the later ones win.
 | 11-03 | Hero sheet-cut options (s1–s3) | Rejected (missed the essence) |
 | 11-03 | Hero A (3D house) / B (photo + 3D debris) | A out (big 3D banned); B idea approved, execution, layout and image rejected |
 | 11-03 | Hero round 2: five versions | Built and audited (steel) |
-| 11-03 | **Colour change: deep green #0E3B2C + lime #B5DB6E** (steel retired); V2 rebuilt on the finished after photo; film approved | Recoloured five re-audited; `GATE-HERO-2.md` updated. **Waiting for Muse's judgment** |
+| 11-03 | **Colour change: deep green #0E3B2C + lime #B5DB6E** (steel retired); V2 rebuilt on the finished after photo; film approved | Recoloured five re-audited; `GATE-HERO-2.md` updated. **Accepted by Muse** (V1 live) |
+| 11-03 | **Round 2: services + visualiser**, two versions each, in the one site file `site/out/site.html` | Services A (pinned horizontal sequence) and Visualiser B (snap-together wall) live, 8.04 / 8.06 PASS; B and A kept as in-file backups. `GATE-ROUND-2.md` |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -40,7 +41,11 @@ On their points, the later ones win.
 | `src/heroes.css` | Layouts of the five hero versions |
 | `boards.py` | Board cuts for both supplied photos, along each wall's own perspective |
 | `build.py` | Builds the five single-file heroes |
+| `build_site.py` | Assembles the ONE site file `out/site.html`: slots with live winners, backups as `<template>` (audit: `?hero=`, `?services=`, `?vis=`) |
+| `src/sec/scenes.*` | Trade scenes: flipping sample boards, casement + double-hung, shingle wave |
+| `src/sec/services.*` | Services A (pinned horizontal) and B (word switcher) |
+| `src/sec/vis.*` | Visualiser A (swatch fan) and B (snap-together wall, five steps) |
 
 ## Next
 
-After Muse picks the hero: the next round is two sections, two versions each (services + visualiser per direction v2's order), merged into the single site file.
+Round 3: **windows** (day/night window + bay; research real Andersen construction first) and **proof/reviews** (4.9 reveal + hanging tags). Two versions each, inside `out/site.html`. Then process, service area, CTA + footer, nav polish (cursor companion), then the other pages.
