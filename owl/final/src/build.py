@@ -66,5 +66,26 @@ html = resolve(read('template.html'))
 left = re.findall(r'\{\{[A-Z]+:[^}]+\}\}', html)
 if left:
     sys.exit(f'unresolved placeholders: {left[:5]}')
+
+def dedupe(html):
+    """Store each large image that appears more than once a single time, in window.OWLA, and point the copies at it.
+    HTML src/href attributes become data-asrc/data-ahref (hydrated by base.js on load); JS string literals become
+    OWLA lookups. CSS url() copies are left alone. Saves the repeated bytes as the version ladder grows."""
+    import collections
+    uris = collections.Counter(re.findall(r'data:image/[a-z0-9.+-]+;base64,[A-Za-z0-9+/=]{20000,}', html))
+    dup = [u for u, n in uris.items() if n > 1]
+    if not dup:
+        return html
+    keys = {u: f'a{i}' for i, u in enumerate(dup)}
+    blank = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+    for u, k in keys.items():
+        html = html.replace(f'src="{u}"', f'src="{blank}" data-asrc="{k}"')
+        html = html.replace(f'href="{u}"', f'href="{blank}" data-ahref="{k}"')
+        html = html.replace(f"'{u}'", f'OWLA["{k}"]')
+    store = '<script>window.OWLA={' + ','.join(f'{k}:"{u}"' for u, k in keys.items()) + '};</script>'
+    html = html.replace('<body>', '<body>' + store, 1) if '<body>' in html else re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + store, html, count=1)
+    return html
+
+html = dedupe(html)
 open(OUT, 'w', encoding='utf-8').write(html)
 print(f'wrote {OUT} ({len(html.encode())/1e6:.2f} MB)')

@@ -537,14 +537,14 @@
   "v": "3",
   "check": "field is painted (marks drawn on the canvas)",
   "ok": true,
-  "detail": "9628 painted samples"
+  "detail": "9692 painted samples"
  },
  {
   "sec": "reviews",
   "v": "3",
   "check": "a click splashes the field (marks lift and turn amber)",
   "ok": true,
-  "detail": "1330 amber samples"
+  "detail": "1437 amber samples"
  },
  {
   "sec": "reviews",

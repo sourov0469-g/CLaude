@@ -1,0 +1,81 @@
+<section class="sec fam2" id="family-2" aria-labelledby="fm2-h">
+<style>
+.fam2{overflow:hidden}
+.fam2 .g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,5vw,72px);align-items:center}
+.fam2 .lede{margin:14px 0 22px;max-width:36ch}
+.fam2 .ctrl{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.fam2 .nb{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 10px 18px -8px rgba(23,17,29,.45),inset 0 1px 0 #fff;transition:transform .12s,box-shadow .12s}
+.fam2 .nb:hover{transform:translateY(-1px)}
+.fam2 .nb:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC,0 4px 8px -6px rgba(23,17,29,.45)}
+.fam2 .nb svg{width:22px;height:22px}
+.fam2 .cnt{font-weight:800;font-variant-numeric:tabular-nums;min-width:4ch}
+.fam2 .cap{min-height:56px;font-size:17px;max-width:36ch}
+.fam2 .cap b{display:block;font-size:20px}
+.fam2 .pile{position:relative;aspect-ratio:1/1;max-width:560px;width:100%;justify-self:center;perspective:1200px;touch-action:pan-y}
+.fam2 .pr{position:absolute;left:12%;top:6%;width:76%;margin:0;padding:12px 12px 52px;background:#FFFDF7;border-radius:6px;box-shadow:0 1px 0 #fff inset,0 24px 40px -22px rgba(23,17,29,.55),0 2px 6px rgba(23,17,29,.12);transform-origin:50% 80%;transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .4s;cursor:grab;user-select:none}
+.fam2 .pr .ph{aspect-ratio:4/3.4;overflow:hidden;border-radius:2px;background:#E7E1D3}
+.fam2 .pr img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.fam2 .pr figcaption{position:absolute;left:16px;right:16px;bottom:14px;font-weight:700;font-size:16px;text-align:center}
+.fam2 .pr.top{box-shadow:0 1px 0 #fff inset,0 40px 60px -26px rgba(23,17,29,.6),0 2px 6px rgba(23,17,29,.12)}
+.fam2 .pr.drag{transition:none;cursor:grabbing}
+.fam2 .tape{position:absolute;top:-12px;left:50%;width:96px;height:26px;margin-left:-48px;background:rgba(234,162,33,.55);transform:rotate(-3deg);box-shadow:0 2px 4px rgba(23,17,29,.15)}
+.fam2 .cta{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.fam2 .g{grid-template-columns:1fr}.fam2 .pile{max-width:420px}}
+@media (prefers-reduced-motion:reduce){.fam2 .pr{transition:none}.fam2 .nb{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">We Give a Hoot</span>
+   <h2 class="h2" id="fm2-h" style="margin-top:12px">The Family Album</h2>
+   <p class="lede rv">Two families started Owl Roofing in Shoreview in 2025: Tim Brown and Noah Bergland. Flick through.</p>
+   <div class="ctrl"><button class="nb prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button class="nb next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button><span class="cnt" aria-hidden="true">1 / 5</span></div>
+   <p class="cap" aria-live="polite"></p>
+   <div class="cta"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="#crew-video" data-mag data-owl="peek">Watch the Crew</a></div>
+  </div>
+  <div class="pile" data-owl="say:Flick a photo"></div>
+ </div>
+</div>
+<script>
+OWL.reg('family','2',function(root){
+  var P = [
+    {src:'{{A:browns.webp}}', alt:'Tim Brown with his wife and their children', n:'The Browns', t:'Tim Brown, co-founder, and family.'},
+    {src:'{{A:berglands.webp}}', alt:'Noah Bergland with his wife and their children', n:'The Berglands', t:'Noah Bergland, co-founder, and family.'},
+    {src:'{{A:fam-crew.webp}}', alt:'Owl’s crew at work on a roof', n:'The crew', t:'On the roof, in Owl colours.'},
+    {src:'{{A:fam-noah.webp}}', alt:'Noah Bergland on a ladder at a roof edge', n:'Noah Bergland', t:'Co-founder, at the roof edge.'},
+    {src:'{{A:fam-community.webp}}', alt:'Community involvement', n:'In the community', t:'Owl in the community.'}
+  ];
+  var pile = root.querySelector('.pile'), cap = root.querySelector('.cap'), cnt = root.querySelector('.cnt'), h2 = root.querySelector('h2'), order = P.map(function(_, i){ return i; });
+  OWL.split(h2);
+  var els = P.map(function(p, i){ var f = document.createElement('figure'); f.className = 'pr';
+    f.innerHTML = '<span class="tape" aria-hidden="true"></span><div class="ph"><img src="' + p.src + '" alt="' + p.alt + '" loading="lazy" draggable="false"></div><figcaption>' + p.n + '</figcaption>';
+    pile.appendChild(f); return f; });
+  var ROT = [-2, 5, -7, 8, -4];
+  function lay(){
+    order.forEach(function(idx, depth){ var f = els[idx], top = depth === 0;
+      f.style.zIndex = 10 - depth; f.classList.toggle('top', top); f.setAttribute('aria-hidden', top ? 'false' : 'true');
+      if (!f.classList.contains('drag')) f.style.transform = 'translate(' + (depth*6) + 'px,' + (depth*8) + 'px) rotate(' + ROT[idx] + 'deg) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))';
+    });
+    var p = P[order[0]]; cap.innerHTML = '<b>' + p.n + '</b>' + p.t; cnt.textContent = (order[0] + 1) + ' / ' + P.length;
+  }
+  function next(){ var f = els[order[0]];
+    if (!OWL.reduce){ f.style.transform = 'translate(110%, -10%) rotate(18deg)'; setTimeout(function(){ order.push(order.shift()); lay(); }, 260); } else { order.push(order.shift()); lay(); } }
+  function prev(){ order.unshift(order.pop()); var f = els[order[0]]; if (!OWL.reduce){ f.style.transition = 'none'; f.style.transform = 'translate(-110%, -10%) rotate(-18deg)'; void f.offsetWidth; f.style.transition = ''; } lay(); }
+  root.querySelector('.next').addEventListener('click', next); root.querySelector('.prev').addEventListener('click', prev);
+  /* drag the top print: past 90 px it goes to the back */
+  var sx = 0, sy = 0, dragging = null;
+  pile.addEventListener('pointerdown', function(e){ var f = els[order[0]]; if (!f.contains(e.target)) return; dragging = f; sx = e.clientX; sy = e.clientY; f.classList.add('drag'); f.setPointerCapture(e.pointerId); });
+  pile.addEventListener('pointermove', function(e){
+    if (dragging){ var dx = e.clientX - sx, dy = e.clientY - sy; dragging.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + (ROT[order[0]] + dx*.06) + 'deg)'; return; }
+    if (OWL.fine && !OWL.reduce){ var f = els[order[0]], b = f.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5; f.style.setProperty('--ry', (x*10).toFixed(1) + 'deg'); f.style.setProperty('--rx', (-y*8).toFixed(1) + 'deg'); }
+  });
+  function end(e){ if (!dragging) return; var dx = e.clientX - sx, f = dragging; dragging = null; f.classList.remove('drag');
+    if (Math.abs(dx) > 90){ if (dx > 0) next(); else { order.push(order.shift()); lay(); } } else lay(); }
+  pile.addEventListener('pointerup', end); pile.addEventListener('pointercancel', end);
+  pile.addEventListener('pointerleave', function(){ var f = els[order[0]]; f.style.setProperty('--ry', '0deg'); f.style.setProperty('--rx', '0deg'); });
+  lay();
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(pile); }
+});
+</script>
+</section>
