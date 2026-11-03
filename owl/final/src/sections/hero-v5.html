@@ -1,0 +1,138 @@
+<section class="sec hero5" aria-labelledby="h5-a">
+<style>
+/* V5 · The Numbers — a pinned stage where each locked number becomes a full event; every numeral is laid in shingle
+   courses from the eave up, starter strip first. ⟦S1326⟧ native-scroll scrub · ⟦S0362⟧ outline first, fills after
+   ⟦S1323⟧⟦S1338⟧ cursor wake lifts tabs · ⟦S1388⟧⟦S1349⟧ plate buttons · ⟦S0451⟧ title · Lusion flow line */
+section.hero5{padding:0;overflow:clip}
+.hero5 .track{position:relative;height:calc(100vh + 300vh)}
+.hero5 .sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding-top:84px;overflow:hidden}
+.hero5 .bgc{position:absolute;inset:-10% 0;background:repeating-linear-gradient(180deg,transparent 0 46px,rgba(23,17,29,.045) 46px 48px);transform:translate3d(0,calc(var(--p,0) * -160px),0);pointer-events:none;-webkit-mask:linear-gradient(90deg,transparent,#000 40%,#000 80%,transparent);mask:linear-gradient(90deg,transparent,#000 40%,#000 80%,transparent)}
+.hero5 .g{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,3vw,48px);align-items:center;width:min(1320px,100% - 2*var(--pad));margin-inline:auto}
+.hero5 .kick{color:var(--ink-70)}
+.hero5 .h1{font-size:clamp(40px,4.8vw,74px);margin-top:14px}
+.hero5 .lede{margin:18px 0 26px;max-width:34ch}
+.hero5 .ctas{display:flex;flex-wrap:wrap;gap:14px 16px}
+.hero5 ol.steps{list-style:none;display:flex;gap:10px;margin-top:clamp(22px,3vw,36px)}
+.hero5 ol.steps button{position:relative;min-width:64px;min-height:48px;padding:0 14px;border-radius:12px;font:800 18px Inter,sans-serif;color:var(--ink-70);background:var(--paper);box-shadow:inset 0 0 0 1.5px rgba(23,17,29,.14);transition:color .2s,box-shadow .2s,transform .12s}
+.hero5 ol.steps button::after{content:"";position:absolute;left:12px;right:12px;bottom:7px;height:3px;border-radius:3px;background:var(--amber);transform:scaleX(var(--f,0));transform-origin:left}
+.hero5 ol.steps button[aria-current="step"]{color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.hero5 ol.steps button:active{transform:translateY(2px)}
+.hero5 .num{position:relative;height:min(64vh,620px)}
+.hero5 .num canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero5 .cap{position:absolute;left:0;right:0;bottom:-8px;text-align:center;font-weight:700;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.01em}
+.hero5 .cap span{display:inline-block;transition:opacity .35s,transform .35s cubic-bezier(.16,1,.3,1)}
+.hero5 .cap.swap span{opacity:0;transform:translateY(10px)}
+.hero5 svg.fline{position:absolute;right:clamp(10px,3vw,40px);top:84px;bottom:0;width:30px;height:calc(100% - 84px);overflow:visible;pointer-events:none}
+.hero5 .fline path{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round}
+.hero5 .fline .bg{stroke:rgba(23,17,29,.08)}
+/* grid mode: phones and reduced motion get the four numbers laid out, no pin */
+.hero5.gridmode .track{height:auto}.hero5.gridmode .sticky{position:relative;height:auto;padding:clamp(20px,4vw,40px) 0 clamp(48px,6vw,80px)}
+.hero5.gridmode .g{grid-template-columns:1fr}.hero5.gridmode .num,.hero5.gridmode ol.steps,.hero5.gridmode svg.fline{display:none}
+.hero5 .quad{display:none}
+.hero5.gridmode .quad{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.hero5 .quad figure{margin:0;background:var(--paper);border-radius:18px;padding:12px 10px 14px;box-shadow:0 1px 0 #fff inset,0 14px 26px -18px rgba(23,17,29,.4)}
+.hero5 .quad canvas{width:100%;aspect-ratio:1.25;display:block}
+.hero5 .quad figcaption{text-align:center;font-weight:700;font-size:15px;line-height:1.3}
+.hero5 .lede,.hero5 .ctas,.hero5 ol.steps{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.hero5.go .lede{opacity:1;transform:none;transition-delay:.5s}.hero5.go .ctas{opacity:1;transform:none;transition-delay:.65s}.hero5.go ol.steps{opacity:1;transform:none;transition-delay:.8s}
+@media (prefers-reduced-motion:reduce){.hero5 .lede,.hero5 .ctas,.hero5 ol.steps{opacity:1;transform:none;transition:none}.hero5 .bgc{transform:none}}
+</style>
+<div class="track">
+ <div class="sticky">
+  <div class="bgc" aria-hidden="true"></div>
+  <div class="g">
+   <div class="txt">
+    <span class="kick">Numbers, not adjectives</span>
+    <h1 class="h1" id="h5-a">The Numbers Behind Every Owl Roof</h1>
+    <p class="lede">Family-owned roofers in Shoreview, Minnesota. Each number is laid like a roof: starter strip first, then course by course from the eave up.</p>
+    <div class="ctas">
+     <a class="btn-plate" href="#book" data-owl="hoot">Get My Roof Checked<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+     <a class="btn-plate alt" href="#services" data-owl="peek">See Our Services</a>
+    </div>
+    <ol class="steps" aria-label="The four numbers"></ol>
+    <div class="quad"></div>
+   </div>
+   <div class="num" data-owl="say:Laid course by course">
+    <canvas role="img" aria-label=""></canvas>
+    <p class="cap" aria-live="polite"><span></span></p>
+   </div>
+  </div>
+  <svg class="fline" viewBox="0 0 30 1000" preserveAspectRatio="none" aria-hidden="true"><path class="bg" d="M15 0 C15 200, 25 260, 15 420 S5 700, 15 1000"/><path class="fg" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M15 0 C15 200, 25 260, 15 420 S5 700, 15 1000"/></svg>
+ </div>
+</div>
+<script>
+OWL.reg('hero','5',function(root){
+  var sec = root.querySelector('section'), track = root.querySelector('.track'), h1 = root.querySelector('.h1'), cv = root.querySelector('.num canvas'), cap = root.querySelector('.cap'), capS = cap.querySelector('span'), stepsOl = root.querySelector('ol.steps'), fl = root.querySelector('.fline .fg'), quad = root.querySelector('.quad');
+  OWL.split(h1, 80); OWL.reveal(h1); requestAnimationFrame(function(){ sec.classList.add('go'); });
+  /* the four numbers are the locked facts, nothing else */
+  var N = [{t:'10', pre:'', lab:'year workmanship warranty', say:'10-year workmanship warranty'},
+           {t:'50', pre:'Up to ', lab:'year manufacturer warranty', say:'Up to 50-year manufacturer warranty'},
+           {t:'29', pre:'', lab:'towns served from Shoreview', say:'29 towns served from Shoreview'},
+           {t:'5.0', pre:'', lab:'stars from 90+ reviews', say:'5.0 · 90+ reviews'}];
+  N.forEach(function(n, i){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.textContent = n.t; b.setAttribute('aria-label', n.say); b.addEventListener('click', function(){ goFn(i); }); li.appendChild(b); stepsOl.appendChild(li); });
+  var steps = stepsOl.querySelectorAll('button');
+  var goFn = function(){};
+  function rnd(i){ var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+  /* one numeral: outline drawn first (the pen), then shingle courses laid from the bottom inside the glyph */
+  function drawNum(c, text, lay, fdata, fw, fh, dpr){
+    var W = c.width, H = c.height, g = c.getContext('2d'); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, W, H);
+    var fs = H * .92; g.font = '800 ' + fs + 'px Inter, sans-serif'; var mw = g.measureText(text).width; if (mw > W * .94){ fs *= W * .94 / mw; g.font = '800 ' + fs + 'px Inter, sans-serif'; mw = g.measureText(text).width; }
+    var x0 = (W - mw) / 2, base = H * .5 + fs * .36, top = base - fs * .73, ch = (base - top) / 13;
+    var off = c._off || (c._off = document.createElement('canvas')); off.width = W; off.height = H; var o = off.getContext('2d');
+    var courses = 13, laid = lay * (courses + 1);
+    if (laid > 0){ o.fillStyle = '#EAA221'; o.fillRect(0, base - ch * .35, W, ch * .35); }
+    var shades = ['#3E3F44', '#35363A', '#47484D', '#2F3034', '#43444A'];
+    for (var k = 0; k < courses; k++){
+      if (k + 1 > laid) break;
+      var y1 = base - (k + 1) * ch - ch * .1, y0 = y1 + ch * 1.1, x = -((k % 5) * ch * .7), j = 0;
+      while (x < W){ var w = ch * (.9 + rnd(k * 31 + j) * 1.3), lift = 0;
+        if (fdata){ var fx = Math.max(0, Math.min(fw - 1, Math.round((x + w / 2) / W * fw))), fy = Math.max(0, Math.min(fh - 1, Math.round((y1 + ch / 2) / H * fh))); lift = fdata[(fy * fw + fx) * 4 + 3] / 255; }
+        var ly = -lift * ch * .7;
+        if (lift > .05){ o.fillStyle = 'rgba(0,0,0,' + (.45 * lift) + ')'; o.fillRect(x, y1 + ch * .7, w - 1, ch * .5 * lift + 2); o.fillStyle = 'rgba(234,162,33,' + Math.min(1, lift * 1.4) + ')'; o.fillRect(x + w * .15, y1 + ch * .98 + ly * .4, w * .7, Math.max(1.5, ch * .09)); }
+        o.fillStyle = shades[Math.floor(rnd(k * 7 + j * 3) * 5)]; o.fillRect(x, y1 + ly, w - dpr, ch * 1.02);
+        if (rnd(j * 5 + k) > .55){ o.fillStyle = 'rgba(12,12,15,.5)'; o.fillRect(x, y1 + ly + ch * .58, w - dpr, ch * .44); }
+        o.fillStyle = 'rgba(0,0,0,.5)'; o.fillRect(x, y1 + ly + ch * 1.0, w, Math.max(1, ch * .06));
+        x += w; j++; }
+    }
+    o.globalCompositeOperation = 'destination-in'; o.font = g.font; o.fillStyle = '#000'; o.fillText(text, x0, base); o.globalCompositeOperation = 'source-over';
+    g.drawImage(off, 0, 0);
+    g.lineWidth = Math.max(1.5, dpr * 1.2); g.strokeStyle = 'rgba(23,17,29,' + (laid > 0 ? .9 : .55) + ')'; g.lineJoin = 'round'; g.strokeText(text, x0, base);
+    if (laid > 0){ g.fillStyle = '#9EA3A8'; g.fillRect(x0 - fs * .04, base + 2, mw + fs * .08, Math.max(2, fs * .012)); }
+  }
+  var narrow = matchMedia('(max-width:760px)').matches, mode = (OWL.reduce || narrow) ? 'grid' : 'pin';
+  document.fonts && document.fonts.ready.then(start); if (!document.fonts) start();
+  function start(){
+    if (mode === 'grid'){
+      sec.classList.add('gridmode');
+      N.forEach(function(n){ var f = document.createElement('figure'), c = document.createElement('canvas'); c.setAttribute('role', 'img'); c.setAttribute('aria-label', n.say); f.appendChild(c); var fc = document.createElement('figcaption'); fc.textContent = n.say; f.appendChild(fc); quad.appendChild(f); });
+      var cs = quad.querySelectorAll('canvas'), dpr = Math.min(2, devicePixelRatio || 1);
+      function paint(lay){ cs.forEach(function(c, i){ var r = c.getBoundingClientRect(); c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); drawNum(c, N[i].t, lay[i], null, 0, 0, dpr); }); }
+      if (OWL.reduce || !('IntersectionObserver' in window)) { paint([1, 1, 1, 1]); return; }
+      paint([0, 0, 0, 0]);
+      var io = new IntersectionObserver(function(e){ if (!e[0].isIntersecting) return; io.disconnect(); var t0 = performance.now(); (function run(now){ var k = Math.min(1, (now - t0) / 1600); paint([0, 1, 2, 3].map(function(i){ return Math.max(0, Math.min(1, k * 1.6 - i * .2)); })); if (k < 1) requestAnimationFrame(run); })(t0); }, {threshold: .3});
+      io.observe(quad); return;
+    }
+    var dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, cur = -1, p = 0, flow = OWL.flow(cv, {w: 96, radius: .12, alpha: .5, read: true}), fctx = flow.canvas.getContext('2d', {willReadFrequently: true}), visible = true, last = 0;
+    function size(){ var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+    size(); new ResizeObserver(size).observe(cv);
+    function progress(){ var r = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight; return Math.max(0, Math.min(1, -r.top / span)); }
+    function go(i){ var span = track.offsetHeight - innerHeight, y = track.getBoundingClientRect().top + scrollY + span * (i + .55) / 4; scrollTo({top: y, behavior: OWL.reduce ? 'instant' : 'smooth'}); }
+    goFn = go; var t0 = performance.now();
+    function render(){
+      p = progress(); sec.style.setProperty('--p', p.toFixed(4));
+      var seg = Math.min(3, Math.floor(p * 4 * .9999)), local = p * 4 - seg, lay = Math.max(0, Math.min(1, local / .5));
+      if (seg === 0) lay = Math.max(lay, Math.min(1, (performance.now() - t0 - 500) / 1700));
+      if (seg !== cur){ cur = seg; cap.classList.add('swap'); setTimeout(function(){ capS.textContent = N[cur].say; cap.classList.remove('swap'); }, 160); cv.setAttribute('aria-label', N[seg].say); steps.forEach(function(b, i){ if (i === seg) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); }); }
+      steps.forEach(function(b, i){ b.style.setProperty('--f', i < seg ? 1 : i === seg ? lay : 0); });
+      fl.setAttribute('stroke-dashoffset', (1 - p).toFixed(4));
+      flow.step(); var fd = fctx.getImageData(0, 0, flow.canvas.width, flow.canvas.height).data;
+      drawNum(cv, N[seg].t, lay, fd, flow.canvas.width, flow.canvas.height, dpr);
+    }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }).observe(track);
+    /* draw only when something changed: scroll, the intro lay, or a live cursor wake */
+    var lastP = -1, idle = 0;
+    (function loop(){ requestAnimationFrame(loop); if (!visible || document.hidden) return; var np = progress(), intro = performance.now() - t0 < 2400; if (np !== lastP || intro || flow.energy > .005 || idle < 70){ if (np !== lastP || intro || flow.energy > .005) idle = 0; else idle++; lastP = np; render(); } })();
+  }
+});
+</script>
+</section>

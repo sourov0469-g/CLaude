@@ -1,0 +1,129 @@
+<section class="sec hero6" aria-labelledby="h6-a">
+<style>
+/* V6 · Start Here — configurator first: pick what's going on, the split cover turns to that chapter.
+   ⟦S1382⟧⟦S0340⟧ keycaps · ⟦S0405⟧ continuous state morph · ⟦S1338⟧⟦S1323⟧ contour field the cursor pushes
+   ⟦S0407⟧ chapter icon draw-on · ⟦S0451⟧ title · MERSI split-cover curtain · Lando rest-motion */
+section.hero6{padding-top:clamp(12px,1.6vw,24px);padding-bottom:clamp(40px,5vw,72px)}
+.hero6 .g{position:relative;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);min-height:min(calc(100vh - 140px),700px);border-radius:28px;overflow:hidden;background:var(--paper);box-shadow:0 1px 0 #fff inset,0 30px 60px -36px rgba(23,17,29,.5)}
+.hero6 .cover{position:relative;overflow:hidden;background:#2A2522}
+.hero6 .cover .lay{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.hero6 .cover .half{position:relative;overflow:hidden;transition:transform .9s cubic-bezier(.77,0,.175,1)}
+.hero6 .cover .half i{position:absolute;top:0;bottom:0;width:200%;background-size:cover;background-position:center;transform:scale(1.04)}
+.hero6 .cover .half.r i{left:-100%}
+.hero6 .cover .lay.out .half.l{transform:translateY(-101%)}
+.hero6 .cover .lay.out .half.r{transform:translateY(101%);transition-delay:.08s}
+.hero6 .cover::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.35);z-index:3}
+.hero6 .seam{position:absolute;left:50%;bottom:clamp(20px,3vw,36px);z-index:4;width:min(78%,300px);translate:-50% 0;background:var(--cream);border-radius:14px;padding:14px 16px 16px;box-shadow:0 22px 40px -18px rgba(0,0,0,.6);perspective:600px}
+.hero6 .seam .in{display:flex;align-items:center;gap:12px;transform-origin:50% 0;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+.hero6 .seam.flip .in{transform:rotateX(-80deg);opacity:0}
+.hero6 .seam svg{width:46px;height:46px;flex:none}
+.hero6 .seam svg *{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.77,0,.175,1) .2s}
+.hero6 .seam.drawn svg *{stroke-dashoffset:0}
+.hero6 .seam b{display:block;font-size:17px;line-height:1.2}
+.hero6 .seam small{display:block;font-size:13px;color:var(--ink-70);margin-top:2px}
+.hero6 .panel{position:relative;padding:clamp(26px,3.6vw,56px);display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.hero6 .panel canvas.topo{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero6 .h1{font-size:clamp(38px,4.4vw,68px);margin-top:12px}
+.hero6 .lede{margin:14px 0 22px;max-width:36ch}
+.hero6 .keys{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;max-width:520px}
+.hero6 .keys .key{width:100%}
+.hero6 .ans{margin-top:26px;max-width:520px;min-height:132px}
+.hero6 .ans p{font-size:18px;color:var(--ink-70);transition:opacity .3s}
+.hero6 .ans p b{color:var(--ink)}
+.hero6 .ans.swap p{opacity:0}
+.hero6 .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:18px}
+.hero6 .enter{position:relative;display:inline-flex;align-items:center;gap:12px;min-height:60px;padding:0 24px 5px 26px;border-radius:14px;font-weight:800;font-size:18px;color:var(--ink);text-decoration:none;background:linear-gradient(180deg,#F7C760,#EAA221);box-shadow:0 7px 0 #B7791A,0 8px 0 #9C6614,0 18px 22px -10px rgba(150,95,15,.7),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .11s cubic-bezier(.2,0,0,1),box-shadow .11s}
+.hero6 .enter kbd{font:800 18px Inter,sans-serif;display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:rgba(23,17,29,.1)}
+@media (hover:hover) and (pointer:fine){.hero6 .enter:hover{transform:translateY(-1px);box-shadow:0 8px 0 #B7791A,0 9px 0 #9C6614,0 20px 24px -10px rgba(150,95,15,.75),inset 0 1px 0 rgba(255,255,255,.6)}}
+.hero6 .enter:active{transform:translateY(6px);box-shadow:0 1px 0 #B7791A,0 2px 0 #9C6614,0 4px 8px -4px rgba(150,95,15,.6),inset 0 2px 5px rgba(80,50,8,.25)}
+.hero6 .more{position:relative;font-weight:700;text-decoration:none;padding:10px 2px}
+.hero6 .more::after{content:"";position:absolute;left:2px;right:2px;bottom:6px;height:2px;background:var(--amber);transform:scaleX(.35);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.hero6 .more:hover::after,.hero6 .more:focus-visible::after{transform:scaleX(1)}
+.hero6 .trust{margin-top:clamp(16px,2vw,24px)}
+.hero6 .lede,.hero6 .keys,.hero6 .ans{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.hero6.go .lede{opacity:1;transform:none;transition-delay:.5s}.hero6.go .keys{opacity:1;transform:none;transition-delay:.65s}.hero6.go .ans{opacity:1;transform:none;transition-delay:.8s}
+@media (max-width:900px){.hero6 .g{grid-template-columns:1fr;min-height:0}.hero6 .cover{height:min(56vw,360px)}.hero6 .keys{max-width:none}}
+@media (max-width:480px){.hero6 .keys{gap:12px 10px}.hero6 .keys .key{font-size:15px;padding:0 12px 4px;min-height:52px;gap:8px}.hero6 .cover{height:220px}.hero6 .seam{width:84%;bottom:14px;padding:10px 12px}.hero6 .seam svg{width:36px;height:36px}.hero6 .lede{margin:10px 0 16px}.hero6 .ans{margin-top:18px}}
+@media (prefers-reduced-motion:reduce){.hero6 .cover .half{transition:none}.hero6 .seam .in,.hero6 .seam svg *{transition:none}.hero6 .lede,.hero6 .keys,.hero6 .ans{opacity:1;transform:none;transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="cover" aria-hidden="true">
+   <div class="lay"><span class="half l"><i></i></span><span class="half r"><i></i></span></div>
+   <div class="seam"><div class="in"><svg viewBox="0 0 64 64"></svg><div><b></b><small></small></div></div></div>
+  </div>
+  <div class="panel" data-owl="say:Pick one">
+   <canvas class="topo" aria-hidden="true"></canvas>
+   <span class="kick">Start here</span>
+   <h1 class="h1" id="h6-a">What Does Your Roof Need?</h1>
+   <p class="lede">Pick what's going on up there. We'll point you to the right place to start.</p>
+   <div class="keys" role="group" aria-label="What's going on with your roof">
+    <button class="key" type="button" aria-pressed="false" data-k="repair"><span class="led" aria-hidden="true"></span>It's leaking</button>
+    <button class="key" type="button" aria-pressed="false" data-k="storm"><span class="led" aria-hidden="true"></span>After a storm</button>
+    <button class="key" type="button" aria-pressed="false" data-k="replace"><span class="led" aria-hidden="true"></span>It's getting old</button>
+    <button class="key" type="button" aria-pressed="true" data-k="check"><span class="led" aria-hidden="true"></span>Not sure yet</button>
+   </div>
+   <div class="ans" aria-live="polite">
+    <p></p>
+    <div class="acts">
+     <a class="enter" href="#book" data-owl="hoot">Get My Roof Checked<kbd aria-hidden="true">↵</kbd></a>
+     <a class="more" href="#services" data-owl="peek">See Our Services</a>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="trust" role="list">
+  <span class="stars" role="listitem" aria-label="Five stars"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span>
+  <span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">Founded 2025</span>
+ </div>
+</div>
+<script>
+OWL.reg('hero','6',function(root){
+  var sec = root.querySelector('section'), h1 = root.querySelector('.h1'), cover = root.querySelector('.cover'), seam = root.querySelector('.seam'), keys = root.querySelectorAll('.keys .key'), ans = root.querySelector('.ans'), ansP = ans.querySelector('p'), more = root.querySelector('.more');
+  OWL.split(h1, 80); OWL.reveal(h1); requestAnimationFrame(function(){ sec.classList.add('go'); });
+  /* chapters: the same plain service descriptions the Services section uses */
+  var C = {
+    repair: {img:'svc-repair', n:'Roof Repair', s:'Leaks and lifted shingles', d:'<b>Roof Repair.</b> Leaks, lifted shingles, flashing and vents, fixed before small problems spread.', ico:'<path pathLength="1" d="M10 40h20v12H10zM30 40h20v12H30z" fill="none" stroke="#17111D" stroke-width="4"/><path pathLength="1" d="M40 10 l12 12 -18 18 -12 -12z" fill="none" stroke="#EAA221" stroke-width="4" stroke-linejoin="round"/>'},
+    storm: {img:'svc-storm', n:'Storm Damage Help', s:'Hail and wind', d:'<b>Storm Damage Help.</b> Hail and wind damage found and put right, with repair or replacement, whichever the roof needs.', ico:'<path pathLength="1" d="M16 34a10 10 0 1 1 3-19.5A13 13 0 0 1 44 16a9 9 0 0 1 2 18z" fill="none" stroke="#17111D" stroke-width="4"/><path pathLength="1" d="M30 36 l-6 12 h8 l-4 10" fill="none" stroke="#EAA221" stroke-width="4" stroke-linejoin="round"/>'},
+    replace: {img:'svc-replace', n:'Roof Replacement', s:'Tear-off to ridge cap', d:'<b>Roof Replacement.</b> Tear-off to ridge cap with GAF materials, backed by our 10-year workmanship warranty.', ico:'<path pathLength="1" d="M6 30 L32 10 L58 30" fill="none" stroke="#17111D" stroke-width="4" stroke-linejoin="round"/><path pathLength="1" d="M12 30v22h40V30" fill="none" stroke="#17111D" stroke-width="4"/><path pathLength="1" d="M24 40 h16 M32 32 v16" stroke="#EAA221" stroke-width="4" stroke-linecap="round"/>'},
+    check: {img:'svc-check', n:'Wise Check Inspection', s:'Not sure? Start here', d:'<b>A Wise Check.</b> Our roof inspection: shingles, flashing, ventilation and gutters, with clear photos of what we find.', ico:'<circle pathLength="1" cx="32" cy="34" r="22" fill="none" stroke="#17111D" stroke-width="4"/><path pathLength="1" d="M32 34 L44 22" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/>'}};
+  var lay = cover.querySelector('.lay'), cur = null, busy = 0;
+  function paint(l, k){ l.querySelectorAll('i').forEach(function(i){ i.style.backgroundImage = 'url("' + OWL.media[C[k].img] + '")'; }); }
+  function show(k, first){
+    if (k === cur) return; cur = k; var c = C[k];
+    keys.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.k === k); });
+    ans.classList.add('swap'); setTimeout(function(){ ansP.innerHTML = c.d; ans.classList.remove('swap'); }, first ? 0 : 220);
+    more.textContent = k === 'check' ? 'See Our Services' : 'More on ' + c.n;
+    seam.classList.add('flip'); seam.classList.remove('drawn');
+    setTimeout(function(){ seam.querySelector('svg').innerHTML = c.ico; seam.querySelector('b').textContent = c.n; seam.querySelector('small').textContent = c.s; seam.classList.remove('flip'); requestAnimationFrame(function(){ requestAnimationFrame(function(){ seam.classList.add('drawn'); }); }); }, first ? 0 : 260);
+    if (first || OWL.reduce){ paint(lay, k); return; }
+    /* the split-cover curtain: the new chapter is laid underneath, the two halves of the old one part up and down */
+    var under = lay.cloneNode(true); under.classList.remove('out'); paint(under, k); cover.insertBefore(under, lay);
+    var old = lay; lay = under; requestAnimationFrame(function(){ old.classList.add('out'); }); clearTimeout(busy); busy = setTimeout(function(){ cover.querySelectorAll('.lay').forEach(function(l){ if (l !== lay) l.remove(); }); }, 1100);
+  }
+  keys.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.k); }); });
+  show('check', true);
+  /* living contour field: slow lines that never fully stop; the cursor's wake pushes them aside (flowmap) */
+  var cv = root.querySelector('canvas.topo'), ctx = cv.getContext('2d'), panel = root.querySelector('.panel'), W = 0, H = 0, dpr = Math.min(2, devicePixelRatio || 1), flow = OWL.flow(panel, {w: 90, radius: .2, alpha: .35, read: true}), fctx = flow.canvas.getContext('2d', {willReadFrequently: true}), visible = true, t = 0, hot = 0, last = performance.now();
+  function size(){ var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  size(); new ResizeObserver(size).observe(cv);
+  function draw(fd){
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H); var fw = flow.canvas.width, fh = flow.canvas.height, n = 22;
+    for (var i = 0; i < n; i++){
+      var base = H * (i + .5) / n; ctx.beginPath();
+      for (var x = -10; x <= W + 10; x += 12){
+        var y = base + 9 * Math.sin(x * .006 + t * .35 + i * .45) + 6 * Math.sin(x * .013 - t * .22 + i * 1.3);
+        if (fd){ var fx = Math.max(0, Math.min(fw - 1, Math.round(x / W * fw))), fy = Math.max(0, Math.min(fh - 1, Math.round(y / H * fh))), f = fd[(fy * fw + fx) * 4 + 3] / 255; y += f * 26 * (i % 2 ? 1 : -1); }
+        if (x < 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = i % 5 === 2 ? 'rgba(234,162,33,.42)' : 'rgba(23,17,29,.075)'; ctx.lineWidth = i % 5 === 2 ? 1.6 : 1.2; ctx.stroke();
+    }
+  }
+  if (OWL.reduce){ draw(null); new ResizeObserver(function(){ draw(null); }).observe(cv); return; }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }).observe(panel);
+  var odd = 0; (function loop(now){ requestAnimationFrame(loop); if (!visible || document.hidden){ last = now; return; } if ((odd ^= 1)) return; var dt = Math.min(1/15, (now - last) / 1000); last = now; t += dt; flow.step(); flow.step(); draw(flow.energy > .002 || hot ? fctx.getImageData(0, 0, flow.canvas.width, flow.canvas.height).data : null); hot = flow.energy > .002 ? 40 : Math.max(0, hot - 1); })(last);
+});
+</script>
+</section>

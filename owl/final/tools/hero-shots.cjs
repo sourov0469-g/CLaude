@@ -17,8 +17,15 @@ const F = 'file://' + path.resolve(__dirname, '../owl-roofing.html') + '?hero=' 
     await p.screenshot({ path: path.join(OUT, `hero-v${v}-${w}.jpg`), quality: 82, type: 'jpeg' });
     if (w === 1440) {
       await p.addStyleTag({ content: '.hdr{visibility:hidden}' });
-      const el = await p.$(`.ver[data-sec="hero"][data-v="${v}"]`);
-      await el.screenshot({ path: path.join(OUT, `hero-v${v}-section.jpg`), quality: 82, type: 'jpeg' });
+      if (v === '5') {
+        // the pinned stage: one section shot per number event
+        const t = await p.evaluate(() => { const e = document.querySelector('.hero5 .track'); return { top: e.getBoundingClientRect().top + scrollY, span: e.offsetHeight - innerHeight }; });
+        let k = 0; for (const f of [.05, .37, .62, .9]) { await p.evaluate(y => scrollTo(0, y), t.top + t.span * f); await p.waitForTimeout(900); await p.screenshot({ path: path.join(OUT, `hero-v5-section-${++k}.jpg`), quality: 82, type: 'jpeg' }); }
+        await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(300);
+      } else {
+        const bb = await p.evaluate(v => { const r = document.querySelector(`.ver[data-sec="hero"][data-v="${v}"]`).getBoundingClientRect(); return { x: 0, y: r.top + scrollY, width: innerWidth, height: r.height }; }, v);
+        await p.screenshot({ path: path.join(OUT, `hero-v${v}-section.jpg`), quality: 82, type: 'jpeg', fullPage: true, clip: bb, timeout: 90000 });
+      }
       const o = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth); if (o > 0) errs.push('overflow ' + o);
     } else { const o = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth); if (o > 0) errs.push(w + ' overflow ' + o + 'px'); }
     await p.close();

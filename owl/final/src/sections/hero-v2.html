@@ -159,7 +159,7 @@ OWL.reg('hero','2',function(root){
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tImg); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
     var c2 = document.createElement('canvas'); c2.width = 12; c2.height = 6; var x = c2.getContext('2d'); x.drawImage(img, 626, 222, 24, 12, 0, 0, 12, 6); var d = x.getImageData(0, 0, 12, 6).data, r = 0, g = 0, b = 0; for (var i = 0; i < d.length; i += 4){ r += d[i]; g += d[i+1]; b += d[i+2]; }
     var n = d.length / 4; gl.uniform3f(U.uLidC, r / n / 255 * .9, g / n / 255 * .88, b / n / 255 * .86);
-    size(); ready = true; root.classList.add('gl-on'); requestAnimationFrame(frame);
+    size(); ready = true; root.querySelector('section').classList.add('gl-on'); requestAnimationFrame(frame);
   }
   function frame(now){
     requestAnimationFrame(frame);
@@ -179,10 +179,10 @@ OWL.reg('hero','2',function(root){
     gl.uniform2f(U.uLook, sx, sy); gl.uniform1f(U.uLid, lid(now));
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawElements(gl.TRIANGLES, idx.length, gl.UNSIGNED_SHORT, 0);
   }
-  try { if (img.complete && img.naturalWidth) load(); else img.addEventListener('load', load); } catch (e) { root.classList.remove('gl-on'); console.warn(e); }
+  try { if (img.complete && img.naturalWidth) load(); else img.addEventListener('load', load); } catch (e) { root.querySelector('section').classList.remove('gl-on'); console.warn(e); }
   new ResizeObserver(function(){ if (ready) size(); }).observe(cv);
   if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }).observe(root);
-  cv.addEventListener('webglcontextlost', function(e){ e.preventDefault(); root.classList.remove('gl-on'); visible = false; });
+  cv.addEventListener('webglcontextlost', function(e){ e.preventDefault(); root.querySelector('section').classList.remove('gl-on'); visible = false; });
 });
 </script>
 </section>

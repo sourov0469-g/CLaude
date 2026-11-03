@@ -1777,3 +1777,26 @@ No HIGH colour finding is open.
 - 9db68b1: stage 1. Green + lime system rebuild, logo set and favicon, lime-discipline fixes, new QA checks.
 - fb0f8d4: stage 2. Grayscale-safe lime data marks, the light gate learns deep green, brand docs, gate logs.
 - 864a330: stage 3. Challenge round, R7 contrast table and brand sheet in PROGRESS.
+
+## Owl Roofing · Upgrade Round 1 · Hero V2–V6 (2026-11-03) · STOPPED at gate for Muse
+- Gate: `owl/final/GATE-UP-R1.md`. Evidence: `owl/final/gates/up-r1/`. Skill pack (50 skills, read in full):
+  `owl/skills/UP-R1-HERO-PACK.md`. Reference study: `owl/redo/evidence/hero-study/REF-STUDY-R1.md`.
+- New heroes in the one file:
+  - V2 Living Owl (slight-3D artwork);
+  - V3 Every Layer;
+  - V4 Film & Family;
+  - V5 The Numbers;
+  - V6 Start Here.
+- V1 is unchanged and remains the default view. The old V2 "Peel" is kept as the hidden backup hero-b1.
+- Shared systems added:
+  - `OWL.flow` (flowmap splash surface);
+  - `OWL.split` (masked word reveal);
+  - five button families;
+  - inert-backup support in `build.py`.
+- §2 fixes:
+  - header and footer links now go to homepage anchors;
+  - "BBB A−" (no "Accredited") on the homepage and footer;
+  - "Shoreview + 28 towns";
+  - the tablet trust row is balanced.
+- Checks: Round 1 85/85, homepage 49/49, axe 0 on every hero.
+- Next: Round 2 (Video + Explore), only after Muse passes Round 1.

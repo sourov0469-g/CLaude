@@ -180,7 +180,7 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px);scroll-margin-
 .btn-film .roll span{grid-area:1/1;transition:transform .45s cubic-bezier(.77,0,.175,1)}
 .btn-film .roll span+span{transform:translateY(105%);color:var(--amber)}
 .btn-film.light{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink),0 12px 24px -12px rgba(23,17,29,.4)}
-.btn-film.light .roll span+span{color:var(--amber-edge)}
+.btn-film.light .roll span+span{color:var(--ink);text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:3px;text-underline-offset:4px}
 @media (hover:hover) and (pointer:fine){.btn-film:hover .disc{transform:translate(3px,-2px) rotate(-12deg) scale(1.06)}.btn-film:hover .roll span:first-child{transform:translateY(-105%)}.btn-film:hover .roll span+span{transform:none}}
 .btn-film:active{transform:scale(.97)}
 
