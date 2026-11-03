@@ -1,0 +1,85 @@
+/* ---------- five hero versions (composition from the heroes / nav / CTA reference sheets) ---------- */
+.hero{position:relative;min-height:100svh}
+.hero .lead{font:800 clamp(44px,5vw,78px)/1 var(--display);letter-spacing:-.026em;color:var(--ink);text-wrap:balance}
+.hero .sub{font-size:19px;line-height:1.55;color:var(--ink-2);max-width:32ch}
+.hero .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.hero .callx{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--text);color:var(--ink);padding:10px 2px;border-bottom:2px solid transparent;transition:border-color .18s ease}
+.hero .callx:hover{border-color:var(--steel)}.hero .callx svg{width:18px;height:18px;color:var(--steel)}
+.hint{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--text);color:var(--ink-3)}
+.hint i{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--steel);position:relative}
+.hint i::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--steel);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(.55);opacity:.5}}
+
+/* V1: the charcoal job, a large rounded photo stage on the live field; copy in a paper card that overlaps its lower left */
+.v1{padding:104px var(--gut) 40px}
+.v1 .stage{position:relative;height:calc(100svh - 150px);min-height:600px;border-radius:22px;overflow:hidden;background:#cfd6dd;
+  box-shadow:0 2px 0 rgba(22,25,29,.06),0 40px 80px -50px rgba(22,25,29,.6)}
+.v1 canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.v1 .card{position:absolute;right:28px;bottom:28px;width:min(540px,42%);padding:34px 36px 30px;background:rgba(255,255,255,.97);border-radius:16px;
+  box-shadow:0 2px 0 #E9E5DB,0 30px 50px -30px rgba(22,25,29,.5)}
+.v1 .lead{font-size:clamp(40px,3.9vw,60px)}
+.v1 .sub{margin-top:16px}.v1 .ctas{margin-top:26px}.v1 .proof{margin-top:22px}
+.v1 .hint{position:absolute;left:24px;top:24px;padding:10px 14px;background:rgba(255,255,255,.92);border-radius:999px}
+.v1 .creds{position:absolute;left:24px;bottom:24px;display:flex;gap:8px}
+.v1 .creds span{padding:9px 13px;border-radius:9px;background:rgba(255,255,255,.94);font:700 12.5px/1.2 var(--text);color:var(--ink);box-shadow:0 2px 0 rgba(0,0,0,.08)}
+
+/* V2: the white-lap job, split: copy on the live field (left), the photo as a tall framed panel (right) */
+.v2{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(24px,4vw,64px);align-items:center;padding:110px var(--gut) 48px}
+.v2 .copy .lead{font-size:clamp(44px,4.8vw,74px)}
+.v2 .copy .sub{margin-top:20px}.v2 .copy .ctas{margin-top:32px}.v2 .copy .proof{margin-top:28px}
+.v2 .stage{position:relative;aspect-ratio:1.38;max-height:calc(100svh - 170px);border-radius:20px 20px 120px 20px;overflow:hidden;
+  box-shadow:0 2px 0 rgba(22,25,29,.06),0 40px 80px -46px rgba(22,25,29,.55)}
+.v2 canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.v2 .stage .hint{position:absolute;left:20px;bottom:20px;padding:10px 14px;background:rgba(255,255,255,.92);border-radius:999px}
+.v2 .tag{position:absolute;right:22px;top:22px;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.95);box-shadow:0 2px 0 rgba(0,0,0,.08)}
+.v2 .tag b{display:block;font:800 22px/1 var(--display);color:var(--steel)}.v2 .tag small{display:block;font:600 12px/1.3 var(--text);color:var(--ink-2);margin-top:4px}
+
+/* V3: the firm's film full-bleed, copy anchored lower left on a soft scrim, a play/pause control */
+.v3{display:flex;align-items:flex-end;padding:0 var(--gut) clamp(40px,8vh,90px);overflow:hidden}
+.v3 video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.v3::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,18,23,.84) 0%,rgba(14,18,23,.7) 34%,rgba(14,18,23,.2) 56%,rgba(14,18,23,0) 72%),linear-gradient(0deg,rgba(14,18,23,.6),rgba(14,18,23,0) 50%)}
+.v3 .copy{max-width:620px}
+.v3 .lead,.v3 .sub{color:#fff}.v3 .sub{color:rgba(255,255,255,.88);margin-top:18px}
+.v3 .ctas{margin-top:30px}.v3 .callx{color:#fff}.v3 .callx svg{color:#9EC3E6}
+.v3 .proof{margin-top:26px;color:rgba(255,255,255,.88)}.v3 .proof b{color:#fff}
+.pp{position:absolute;right:var(--gut);bottom:clamp(40px,8vh,90px);width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 4px 0 rgba(0,0,0,.18);transition:transform .16s var(--ease-out)}
+.pp:hover{transform:translateY(-2px)}.pp:active{transform:translateY(2px)}.pp svg{width:18px;height:18px;color:var(--ink)}
+
+/* V4: the live field is the hero; the film plays inside a framed window, like a house seen through a casement */
+.v4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,70px);align-items:center;padding:110px var(--gut) 50px}
+.v4 .copy .sub{margin-top:20px}.v4 .copy .ctas{margin-top:32px}.v4 .copy .proof{margin-top:28px}
+.v4 .win{position:relative;aspect-ratio:4/3.3;padding:16px;border-radius:16px;background:linear-gradient(180deg,#fff,#F1EEE6);
+  box-shadow:inset 0 -4px 0 #DDD7CA,0 2px 0 rgba(22,25,29,.06),0 40px 70px -40px rgba(22,25,29,.55)}
+.v4 .win .glass{position:relative;height:100%;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.v4 .win video{width:100%;height:100%;object-fit:cover}
+.v4 .win .mull{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent calc(26% - 5px),#F7F5EF calc(26% - 5px),#F7F5EF calc(26% + 5px),transparent calc(26% + 5px));
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.v4 .win .sill{position:absolute;left:-14px;right:-14px;bottom:-14px;height:22px;border-radius:6px;background:linear-gradient(180deg,#fff,#E9E4D8);box-shadow:0 10px 20px -12px rgba(0,0,0,.45)}
+.v4 .win .pp{right:30px;bottom:30px;width:46px;height:46px}
+
+/* V5: the field fills the page; the headline is set huge, the film runs as a wide strip through it */
+.v5{display:flex;flex-direction:column;justify-content:center;padding:120px var(--gut) 50px;gap:clamp(22px,3.5vh,40px)}
+.v5 .lead{font-size:clamp(52px,7.4vw,124px);line-height:.92;max-width:13ch}
+.v5 .strip{position:relative;height:clamp(180px,28vh,300px);border-radius:999px 24px 24px 999px;overflow:hidden;
+  box-shadow:0 2px 0 rgba(22,25,29,.06),0 30px 60px -40px rgba(22,25,29,.6)}
+.v5 .strip video{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.v5 .strip .pp{right:18px;bottom:50%;transform:translateY(50%);width:46px;height:46px}
+.v5 .strip .pp:hover{transform:translateY(calc(50% - 2px))}
+.v5 .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px}
+.v5 .row .sub{max-width:40ch}
+
+@media (max-width:860px){
+  .v1{padding:80px 10px 100px}
+  .v1 .stage{height:auto;min-height:0;overflow:visible;background:none;box-shadow:none;border-radius:0;padding-top:calc((100vw - 20px) * .86)}
+  .v1 canvas{bottom:auto;height:calc((100vw - 20px) * .86);border-radius:16px}
+  .v1 .card{position:relative;left:auto;right:auto;bottom:auto;width:auto;margin:-36px 10px 0;padding:24px 20px}
+  .v1 .creds{display:none}.v1 .hint{top:12px;right:12px}
+  .v2{grid-template-columns:1fr;padding:80px 14px 100px}.v2 .stage{order:-1;height:auto;min-height:0;aspect-ratio:4/3.2;border-radius:16px 16px 60px 16px}
+  .v3{padding:0 18px 110px}.v3 .pp{bottom:auto;top:84px;right:14px}
+  .v3::before{background:linear-gradient(0deg,rgba(14,18,23,.9) 0%,rgba(14,18,23,.78) 58%,rgba(14,18,23,0) 86%)}
+  .v4{grid-template-columns:1fr;padding:84px 14px 100px}.v4 .win{order:-1}
+  .v5{padding:90px 16px 100px}.v5 .strip{height:150px}
+  .hero .lead{font-size:clamp(36px,10.4vw,46px)!important}.hero .sub{font-size:17px}
+  .hero .ctas .btn{flex:1 1 100%}
+}
