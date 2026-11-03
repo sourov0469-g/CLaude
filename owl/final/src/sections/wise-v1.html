@@ -1,0 +1,140 @@
+<section class="sec wise1" id="wise-check" aria-labelledby="w1-h">
+<style>
+.wise1 .g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(24px,5vw,64px)}
+.wise1 .lede{margin:16px 0 28px;max-width:34ch}
+.wise1 .list{display:grid;gap:12px;max-width:420px}
+.wise1 .it{display:flex;align-items:center;gap:16px;min-height:64px;padding:0 20px;border-radius:18px;background:var(--paper);font-weight:600;font-size:19px;text-align:left;box-shadow:0 4px 0 rgba(23,17,29,.07),0 16px 28px -20px rgba(23,17,29,.5);transition:transform .25s var(--ease),box-shadow .25s}
+.wise1 .it:hover{transform:translateY(-2px)}
+.wise1 .it:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(23,17,29,.07)}
+.wise1 .box{width:30px;height:30px;border-radius:9px;border:2.5px solid var(--amber);display:grid;place-items:center;flex:none;transition:background .25s}
+.wise1 .box svg{width:18px;height:18px;stroke:var(--ink);stroke-width:3;fill:none;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .35s var(--ease) .05s}
+.wise1 .it[aria-pressed="true"] .box{background:var(--amber)}
+.wise1 .it[aria-pressed="true"] .box svg{stroke-dashoffset:0}
+.wise1 .it.cur{box-shadow:0 0 0 2px var(--amber),0 16px 28px -20px rgba(23,17,29,.5)}
+.wise1 .say{min-height:52px;margin:20px 0 24px;max-width:420px;font-size:17px;color:var(--ink-70)}
+.wise1 .say b{color:var(--ink)}
+.wise1 .btn.ready{animation:w1pulse 1.6s ease-in-out infinite}
+@keyframes w1pulse{50%{box-shadow:0 6px 0 var(--amber-edge),0 0 0 10px rgba(234,162,33,.22),0 18px 30px -10px rgba(199,135,26,.7)}}
+.wise1 .reset{margin-left:16px;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:4px;color:var(--ink-70)}
+.wise1 .inst{position:relative;width:min(100%,640px);aspect-ratio:1;justify-self:end}
+.wise1 .dial{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 40px 50px rgba(23,17,29,.28))}
+.wise1 .needle{transform-origin:300px 300px;transition:transform 1.1s cubic-bezier(.3,1.5,.5,1)}
+.wise1 .lbl{font:700 15px Inter,sans-serif;letter-spacing:.12em;fill:var(--ink);opacity:.45;transition:opacity .4s}
+.wise1 .lbl.on{opacity:1}
+.wise1 .glass{position:absolute;left:-14%;bottom:-6%;width:58%;aspect-ratio:3/2;border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.18));backdrop-filter:blur(8px) saturate(1.1);-webkit-backdrop-filter:blur(8px) saturate(1.1);border:1px solid rgba(255,255,255,.9);box-shadow:0 30px 50px -20px rgba(23,17,29,.45),inset 0 1px 0 rgba(255,255,255,.9)}
+.wise1 .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 30%);pointer-events:none}
+.wise1 .glass svg{position:absolute;inset:6%;width:88%;height:88%}
+.wise1 .part{transition:filter .4s,opacity .4s}
+.wise1 .sec-x.has .part{opacity:.55}
+.wise1 .sec-x .part.on{opacity:1;filter:drop-shadow(0 0 4px #EAA221) drop-shadow(0 0 10px rgba(234,162,33,.8))}
+.wise1 .sec-x .part.done{opacity:1}
+@media (max-width:900px){.wise1 .g{grid-template-columns:1fr;gap:18px}.wise1 .g>div:first-child{display:contents}.wise1 .h2{order:1}.wise1 .lede{order:2;margin:0}.wise1 .inst{order:3;justify-self:center;width:min(100%,400px);margin-bottom:34px}.wise1 .glass{left:-4%;bottom:-8%;width:62%}.wise1 .list{order:4;max-width:none;grid-template-columns:1fr 1fr}.wise1 .it{font-size:17px;min-height:56px;padding:0 14px}.wise1 .say{order:5;max-width:none;margin:0}.wise1 .btn{order:6;justify-self:start}.wise1 .reset{order:7;justify-self:start;margin:0}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2 rv" id="w1-h">The Wise Check</h2>
+   <p class="lede rv">A careful, dial-by-dial look at your whole roof.</p>
+   <div class="list" role="group" aria-label="What a Wise Check covers">
+    <button class="it" type="button" aria-pressed="false" data-k="shingles" data-owl="peek"><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg></span>Shingles</button>
+    <button class="it" type="button" aria-pressed="false" data-k="flashing" data-owl="peek"><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg></span>Flashing</button>
+    <button class="it" type="button" aria-pressed="false" data-k="ventilation" data-owl="peek"><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg></span>Ventilation</button>
+    <button class="it" type="button" aria-pressed="false" data-k="gutters" data-owl="peek"><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg></span>Gutters</button>
+   </div>
+   <p class="say" aria-live="polite">Tick each part to see what we look at.</p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book Your Wise Check</a><button class="reset" type="button" hidden>Start again</button>
+  </div>
+  <div class="inst">
+   <svg class="dial" viewBox="0 0 600 600" aria-hidden="true">
+    <defs>
+     <radialGradient id="w1face" cx="45%" cy="38%" r="70%"><stop offset="0" stop-color="#FBF3DF"/><stop offset=".65" stop-color="#F1DDAE"/><stop offset="1" stop-color="#DDB66A"/></radialGradient>
+     <linearGradient id="w1bez" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8D488"/><stop offset=".35" stop-color="#EAA221"/><stop offset=".6" stop-color="#B9791A"/><stop offset=".85" stop-color="#F1BC55"/><stop offset="1" stop-color="#C7871A"/></linearGradient>
+     <linearGradient id="w1bez2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C7871A"/><stop offset=".5" stop-color="#F6CB76"/><stop offset="1" stop-color="#B9791A"/></linearGradient>
+     <radialGradient id="w1bolt" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#FFF1CF"/><stop offset=".5" stop-color="#E2A33A"/><stop offset="1" stop-color="#8E5A12"/></radialGradient>
+     <linearGradient id="w1ndl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8E5A12"/><stop offset=".5" stop-color="#F3BE5A"/><stop offset="1" stop-color="#B9791A"/></linearGradient>
+    </defs>
+    <circle cx="300" cy="300" r="292" fill="url(#w1bez)"/>
+    <circle cx="300" cy="300" r="268" fill="url(#w1bez2)"/>
+    <circle cx="300" cy="300" r="252" fill="url(#w1face)"/>
+    <g class="bolts"></g>
+    <path class="band" fill="none" stroke="#EAA221" stroke-width="22" stroke-opacity=".55"/>
+    <g class="ticks"></g>
+    <g class="lbls"></g>
+    <circle cx="300" cy="300" r="120" fill="none" stroke="#17111D" stroke-opacity=".12"/>
+    <circle cx="300" cy="300" r="70" fill="none" stroke="#17111D" stroke-opacity=".1"/>
+    <g class="needle"><path d="M294 300 L300 132 L306 300 Z" fill="url(#w1ndl)" stroke="#8E5A12" stroke-width="1"/><path d="M296 300 L300 360 L304 300Z" fill="#B9791A"/></g>
+    <circle cx="300" cy="300" r="26" fill="url(#w1bolt)" stroke="#8E5A12"/><circle cx="300" cy="300" r="8" fill="#8E5A12"/>
+   </svg>
+   <div class="glass">
+    <svg class="sec-x" viewBox="0 0 360 240" role="img" aria-label="Cross-section of a roof edge showing shingles, flashing at a chimney, a ridge vent and a gutter">
+     <defs>
+      <pattern id="w1sh" patternUnits="userSpaceOnUse" width="130" height="70"><image href="{{A:shingle-close.webp}}" width="130" height="70" preserveAspectRatio="xMidYMid slice"/></pattern>
+      <pattern id="w1os" patternUnits="userSpaceOnUse" width="110" height="84"><image href="{{A:osb.webp}}" width="110" height="84" preserveAspectRatio="xMidYMid slice"/></pattern>
+     </defs>
+     <!-- attic / wall -->
+     <path d="M30 200 L300 58 L330 74 L330 222 L30 222Z" fill="#F8F6F0" fill-opacity=".55"/>
+     <g stroke="#8a6a3e" stroke-width="7"><path d="M120 155 L120 222M210 108 L210 222"/></g>
+     <path d="M48 222 L330 222" stroke="#8a6a3e" stroke-width="9"/>
+     <!-- rafter + decking + underlayment -->
+     <path d="M24 196 L300 51" stroke="#9c7a48" stroke-width="12" stroke-linecap="round"/>
+     <path d="M22 186 L298 41 L302 48 L26 193Z" fill="url(#w1os)" stroke="#7a5a2a" stroke-width=".8"/>
+     <path d="M22 183 L298 38" stroke="#2b2a2e" stroke-width="3.5"/>
+     <!-- shingles -->
+     <g class="part" data-p="shingles"><path d="M14 182 L296 34 L299 26 L12 172Z" fill="url(#w1sh)" stroke="#17111D" stroke-width=".8"/>
+      <g stroke="#17111D" stroke-opacity=".6" stroke-width="1.2"><path d="M44 157 L46 166M78 139 L80 148M112 121 L114 130M146 103 L148 112M180 85 L182 94M214 67 L216 76M248 49 L250 58"/></g></g>
+     <!-- ridge vent -->
+     <g class="part" data-p="ventilation"><path d="M284 32 L300 20 L338 40 L330 52 L300 36Z" fill="#3a3540" stroke="#17111D"/><g stroke="#F1EFE6" stroke-width="1.6" stroke-opacity=".7"><path d="M302 30 L306 38M310 34 L314 42M318 38 L322 46"/></g>
+      <path d="M250 96 q12 -14 0 -28 M268 86 q12 -14 0 -28" fill="none" stroke="#EAA221" stroke-width="2.2" stroke-linecap="round"/></g>
+     <!-- chimney + step flashing -->
+     <path d="M168 40 L204 40 L204 92 L168 110Z" fill="#a8553e" stroke="#6e3020"/><g stroke="#6e3020" stroke-opacity=".5"><path d="M168 52h36M168 64h36M168 76h36M168 88h36M186 40v12M180 52v12M192 64v12M180 76v12"/></g>
+     <rect x="164" y="34" width="44" height="8" fill="#8a8580"/>
+     <g class="part" data-p="flashing"><path d="M160 112 L168 108 L168 86 L174 86 L174 106 L162 116Z" fill="#cfd0cc" stroke="#6b6460"/><path d="M204 92 L214 88 L214 80 L208 80 L208 88 L204 90Z" fill="#cfd0cc" stroke="#6b6460"/><path d="M150 120 L206 92" stroke="#cfd0cc" stroke-width="4"/></g>
+     <!-- gutter + downspout -->
+     <g class="part" data-p="gutters"><path d="M2 176 a16 16 0 0 0 32 0 Z" fill="#E9E5DA" stroke="#6b6460" stroke-width="1.5"/><rect x="10" y="190" width="10" height="44" fill="#E9E5DA" stroke="#6b6460"/>
+      <g fill="#7fb3d6" fill-opacity=".9"><circle cx="14" cy="214" r="2"/><circle cx="15" cy="226" r="2"/></g></g>
+    </svg>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','1',function(root){
+  var A = {shingles:-105, flashing:-45, ventilation:15, gutters:70, protected:118};
+  var T = {shingles:'Cracked, curled or missing tabs, and granules worn thin.', flashing:'The metal seals around chimneys, walls and vents.', ventilation:'Intake and exhaust that let the attic breathe.', gutters:'How water leaves the roof at the eaves.'};
+  var svg = root.querySelector('.dial'), needle = svg.querySelector('.needle'), items = root.querySelectorAll('.it'), say = root.querySelector('.say'), cta = root.querySelector('.btn'), reset = root.querySelector('.reset'), sx = root.querySelector('.sec-x');
+  var NS = 'http://www.w3.org/2000/svg';
+  function pt(a, r){ var t = (a - 90) * Math.PI/180; return [300 + Math.cos(t)*r, 300 + Math.sin(t)*r]; }
+  var tk = '';
+  for (var a = -135; a <= 135; a += 4.5){ var big = Math.round((a + 135)/4.5) % 5 === 0, p1 = pt(a, 246), p2 = pt(a, big ? 226 : 236);
+    tk += '<line x1="' + p1[0].toFixed(1) + '" y1="' + p1[1].toFixed(1) + '" x2="' + p2[0].toFixed(1) + '" y2="' + p2[1].toFixed(1) + '" stroke="#17111D" stroke-opacity="' + (big ? .65 : .3) + '" stroke-width="' + (big ? 2.2 : 1.2) + '"/>'; }
+  svg.querySelector('.ticks').innerHTML = tk;
+  var bo = ''; for (var b = 0; b < 12; b++){ var q = pt(b*30 + 15, 280); bo += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="7" fill="url(#w1bolt)" stroke="#8E5A12" stroke-width=".8"/>'; }
+  svg.querySelector('.bolts').innerHTML = bo;
+  var s0 = pt(98, 214), s1 = pt(135, 214); svg.querySelector('.band').setAttribute('d', 'M' + s0.join(' ') + ' A214 214 0 0 1 ' + s1.join(' '));
+  var lb = svg.querySelector('.lbls'), lbls = {};
+  Object.keys(A).forEach(function(k){
+    var pa = document.createElementNS(NS, 'path'), id = 'w1arc-' + k, a0 = A[k] - 26, a1 = A[k] + 26, r = 196, P0 = pt(a0, r), P1 = pt(a1, r);
+    pa.setAttribute('id', id); pa.setAttribute('d', 'M' + P0.join(' ') + ' A' + r + ' ' + r + ' 0 0 1 ' + P1.join(' ')); pa.setAttribute('fill', 'none'); lb.appendChild(pa);
+    var tx = document.createElementNS(NS, 'text'); tx.setAttribute('class', 'lbl'); var tp = document.createElementNS(NS, 'textPath');
+    tp.setAttribute('href', '#' + id); tp.setAttribute('startOffset', '50%'); tp.setAttribute('text-anchor', 'middle'); tp.textContent = k.toUpperCase(); tx.appendChild(tp); lb.appendChild(tx); lbls[k] = tx;
+  });
+  var done = {};
+  function point(a){ needle.style.transform = 'rotate(' + a + 'deg)'; }
+  function update(last){
+    var n = Object.keys(done).length;
+    sx.classList.toggle('has', n > 0);
+    sx.querySelectorAll('.part').forEach(function(p){ var k = p.dataset.p; p.classList.toggle('on', k === last); p.classList.toggle('done', !!done[k] && k !== last); });
+    items.forEach(function(i){ i.classList.toggle('cur', i.dataset.k === last); });
+    Object.keys(lbls).forEach(function(k){ lbls[k].classList.toggle('on', !!done[k] || (k === 'protected' && n === 4)); });
+    if (n === 4){ point(A.protected); say.innerHTML = '<b>All four checked.</b> That is a Wise Check: book yours.'; cta.classList.add('ready'); }
+    else if (last){ point(A[last]); say.innerHTML = '<b>' + last.charAt(0).toUpperCase() + last.slice(1) + ':</b> ' + T[last]; cta.classList.remove('ready'); }
+    else { point(-135); say.textContent = 'Tick each part to see what we look at.'; cta.classList.remove('ready'); }
+    reset.hidden = n === 0;
+  }
+  items.forEach(function(i){ i.addEventListener('click', function(){ var k = i.dataset.k; if (done[k]) { delete done[k]; i.setAttribute('aria-pressed','false'); var ks = Object.keys(done); update(ks[ks.length-1]); } else { done[k] = 1; i.setAttribute('aria-pressed','true'); update(k); } }); });
+  reset.addEventListener('click', function(){ done = {}; items.forEach(function(i){ i.setAttribute('aria-pressed','false'); }); update(); });
+  point(-135);
+  if (!OWL.reduce && 'IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); point(-60); setTimeout(function(){ if (!Object.keys(done).length) point(-135); }, 900); } }, {threshold:.5}); io.observe(svg); }
+});
+</script>
+</section>

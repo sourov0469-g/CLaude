@@ -9,7 +9,11 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
   (drag to roll the old roof back) 7.56 · Video V1 "Watch the Crew at Work" (live crew film, chapter chips, YouTube on press)
   7.82 · Video V2 "Up Close" (ring scrubber) 7.80. Axe 0 violations both sets; interaction test clean. Recommended: Hero V1,
   Video V1.
-- **Next:** Round 2: Explore ("Layer by Layer", near build-spec) + Wise Check (giant dial, glass cross-section, checklist).
+- **ROUND 2 DONE (gate `owl/final/GATE-R2.md`, shots `owl/final/gates/r2/`):** Explore V1 "Layer by Layer" (pick a layer,
+  the slab lifts out of the stack) 7.92 · Explore V2 "Look Closer" (lens shows the layer below on a real Owl roof) 7.52 ·
+  Wise V1 dial + glass cross-section + checklist (needle and lit part per tick, PROTECTED end state) 7.92 · Wise V2 "Owl's
+  Eye" (iris follows the pointer) 7.52. Axe 0; interaction tests clean. Recommended: Explore V1, Wise V1.
+- **Next:** Round 3: Wrap / Protect Your Nest ("Same Storm. Different Ending.") + Services (split-flap departures board).
 
 ---
 
