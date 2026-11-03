@@ -87,7 +87,8 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
 | 6 | Polish pass on the defects the gate reports name as remaining | PASS (Muse), after the scorecard correction: `GATE-phase6.md` |
 | 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | PASS (Muse), after the Creativity correction (the seam level): `GATE-phase7.md` |
-| 8 | Device matrix: every page at 8 sizes, phones also touch-emulated (60 runs): errors, scroll release, overflow, the phone, target sizes | **done**: `GATE-phase8.md`; awaiting Muse |
+| 8 | Device matrix: every page at 8 sizes, phones also touch-emulated (60 runs): errors, scroll release, overflow, the phone, target sizes | PASS (Muse): `GATE-phase8.md` |
+| 9 | Every animation tested repeatedly (20 runs, 194 anchors, both directions) and the final evidence pack (every version of every section at 1440 and 390) | **done**: `GATE-phase9.md`; awaiting Muse |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -208,4 +209,17 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - the Contact card links: 24px.
 - **Raised to the 44px craft line:** the nav phone link, the footer page links, the phone in Consult's fact list, and the Bathrooms closing number.
 - **Under 44 but passing AA, reported in the gate:** the town names, the fill-in blanks inside sentences, the 42px hero controls, the logo and a few in-line phone links.
+- Zero background tasks, zero sub-agents.
+
+## Phase 9 log (repeat-run and evidence pack, after Muse accepted Phase 8)
+- **Why:** "every animation tested repeatedly" had never been run on the finished build, and the per-section screenshots predated Phases 6 to 8. New tools: `repeat.js`, `repeat_diff.py` and `sheet9.py`.
+- **Repeat-run** (5 pages × 1440/390 × V1/V2 = 20 runs; down, up, down, up, down):
+  - 194 anchors, 0 errors, **0 failures**;
+  - 8 ambient anchors (the Contact rows and the Projects rows, moving by design);
+  - 4 tiny differences traced to anti-aliasing (every element's state identical from both directions);
+  - every first section returns pixel-identical to its load state.
+- **Found by the contact sheets:** the Bathrooms build went blank white between waterproofing and tile. Every bay redrew from zero, and filled shapes showed their fills before their strokes.
+  - **Fixed:** each bay arrives as the finished bay before it, only the new layer builds (strokes, then fills), and the studs sit behind the board.
+  - Re-tested: Bathrooms repeat runs, 0 failures; device matrix at 12 sizes, clean.
+- **Evidence pack:** `qa/finalize/phase9/sheet-*.jpg`, every section and every version at 1440 and 390 from the final build.
 - Zero background tasks, zero sub-agents.

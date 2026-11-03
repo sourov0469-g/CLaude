@@ -1,0 +1,340 @@
+{
+ "bathrooms": [
+  {
+   "w": 320,
+   "h": 568,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 61,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "15/15",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 96,
+     "h": 32,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 320,
+   "h": 568,
+   "mobile": true,
+   "errors": [],
+   "reached": true,
+   "steps": 46,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "11/11",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 96,
+     "h": 32,
+     "aa": true
+    },
+    {
+     "sec": "bath-intro",
+     "el": "a.link",
+     "label": "(754) 236‑0675",
+     "w": 124,
+     "h": 28,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 360,
+   "h": 740,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 53,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "13/13",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 112,
+     "h": 37,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 360,
+   "h": 740,
+   "mobile": true,
+   "errors": [],
+   "reached": true,
+   "steps": 38,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "9/9",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 112,
+     "h": 37,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 375,
+   "h": 667,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 56,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "14/14",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 112,
+     "h": 37,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 375,
+   "h": 667,
+   "mobile": true,
+   "errors": [],
+   "reached": true,
+   "steps": 41,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "10/10",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 112,
+     "h": 37,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 414,
+   "h": 896,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 49,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "12/12",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 132,
+     "h": 44,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 414,
+   "h": 896,
+   "mobile": true,
+   "errors": [],
+   "reached": true,
+   "steps": 34,
+   "overflow": [],
+   "overflowAt": [],
+   "call": "8/8",
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.nav__logo",
+     "label": "Elbaz Construction, home page",
+     "w": 132,
+     "h": 44,
+     "aa": true
+    },
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 768,
+   "h": 1024,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 41,
+   "overflow": [],
+   "overflowAt": [],
+   "call": null,
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 1024,
+   "h": 768,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 51,
+   "overflow": [],
+   "overflowAt": [],
+   "call": null,
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 1280,
+   "h": 800,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 51,
+   "overflow": [],
+   "overflowAt": [],
+   "call": null,
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "mobile": false,
+   "errors": [],
+   "reached": true,
+   "steps": 47,
+   "overflow": [],
+   "overflowAt": [],
+   "call": null,
+   "small": [
+    {
+     "sec": "chrome",
+     "el": "a.link",
+     "label": "Verify a Florida licence",
+     "w": 133,
+     "h": 24,
+     "aa": true
+    }
+   ],
+   "clipped": []
+  }
+ ]
+}

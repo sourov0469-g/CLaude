@@ -8,24 +8,22 @@
   function R(x, y, w, h, c) { return '<rect class="' + c + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/>'; }
   function P(d, c) { return '<path class="' + c + '" d="' + d + '"/>'; }
   function T(x, y, s) { return '<text class="lab" x="' + x + '" y="' + y + '">' + s + '</text>'; }
+  // Phase 9: each layer is its own group, so a bay can arrive as the finished bay before it and only its new layer builds
+  function Lg(n, str) { return '<g class="ly" data-l="' + n + '">' + str + '</g>'; }
   function bay(i) {
     var x0 = i * BW, L = x0 + 40, W = 520, s = '';
-    s += P('M' + x0 + ' 460 H' + (x0 + BW), 'ln');                                                          // the floor
-    if (i === 0) {                                                                                             // studs
-      s += R(L, 60, W, 14, 'stud') + R(L, 426, W, 14, 'stud');
-      for (var x = L; x <= L + W - 14; x += 84) s += R(x, 74, 14, 352, 'stud');
-      s += T(L, 40, 'The framing, bare');
-    }
-    if (i >= 1) { s += R(L, 60, W, 380, 'board') + P('M' + (L + 260) + ' 60 V440 M' + L + ' 250 H' + (L + W), 'ln'); }   // backer board, seams
-    if (i === 1) s += T(L, 40, 'Water-resistant, not waterproof');
-    if (i >= 2) { s += R(L, 60, W, 380, 'memb') + P('M' + (L + 260) + ' 60 V440 M' + L + ' 250 H' + (L + W), 'tape'); }   // membrane, seams taped
-    if (i === 2) s += T(L, 40, 'Waterproofed properly');
-    if (i >= 3) { var t = ''; for (var ty = 60; ty < 440; ty += 76) for (var tx = L; tx < L + W; tx += 104) t += R(tx, ty, 104, 76, 'tile'); s += t; }   // tile
-    if (i === 3) s += P('M' + (L + 300) + ' 112 V280 H' + (L + 470), 'sq') + T(L, 40, 'Set square');
-    if (i === 4) s += P('M' + (L + 340) + ' 70 H' + (L + W - 10) + ' V430 H' + (L + 340) + ' Z', 'tmpl') + T(L, 40, 'Templated after tiling');
-    if (i >= 4) s += R(L + 352, 82, W - 372, 340, 'glass');                                                   // glass, cut to what was built
+    var f0 = P('M' + x0 + ' 460 H' + (x0 + BW), 'ln');                                                      // the floor
+    // studs in every bay: from bay 1 on they sit behind the board, so the wall never goes blank between stages
+    f0 += R(L, 60, W, 14, 'stud') + R(L, 426, W, 14, 'stud');
+    for (var x = L; x <= L + W - 14; x += 84) f0 += R(x, 74, 14, 352, 'stud');
+    if (i === 0) f0 += T(L, 40, 'The framing, bare');
+    s += Lg(0, f0);
+    if (i >= 1) s += Lg(1, R(L, 60, W, 380, 'board') + P('M' + (L + 260) + ' 60 V440 M' + L + ' 250 H' + (L + W), 'ln') + (i === 1 ? T(L, 40, 'Water-resistant, not waterproof') : ''));   // backer board, seams
+    if (i >= 2) s += Lg(2, R(L, 60, W, 380, 'memb') + P('M' + (L + 260) + ' 60 V440 M' + L + ' 250 H' + (L + W), 'tape') + (i === 2 ? T(L, 40, 'Waterproofed properly') : ''));   // membrane, seams taped
+    if (i >= 3) { var t = ''; for (var ty = 60; ty < 440; ty += 76) for (var tx = L; tx < L + W; tx += 104) t += R(tx, ty, 104, 76, 'tile'); if (i === 3) t += P('M' + (L + 300) + ' 112 V280 H' + (L + 470), 'sq') + T(L, 40, 'Set square'); s += Lg(3, t); }   // tile, and the steel square
+    if (i >= 4) s += Lg(4, (i === 4 ? P('M' + (L + 340) + ' 70 H' + (L + W - 10) + ' V430 H' + (L + 340) + ' Z', 'tmpl') + T(L, 40, 'Templated after tiling') : '') + R(L + 352, 82, W - 372, 340, 'glass'));   // the template, then the glass cut to what was built
     if (i >= 5) {                                                                                              // fixtures, then closed up once
-      var hx = L + 150;
+      var hx = L + 150, s0 = s; s = '';
       s += P('M' + hx + ' 74 V96 Q' + hx + ' 106 ' + (hx - 10) + ' 106 H' + (hx - 34), 'ln');                    // shower arm off the wall
       s += '<rect class="blk" x="' + (hx - 70) + '" y="100" width="46" height="12" rx="6"/>';                    // the head
       s += P('M' + (hx - 62) + ' 118 l-6 22 M' + (hx - 47) + ' 118 v24 M' + (hx - 32) + ' 118 l6 22', 'tmpl');   // spray, faint
@@ -35,6 +33,7 @@
       s += P('M' + (L + 360) + ' 240 V300', 'ln') + '<circle class="blk" cx="' + (L + 360) + '" cy="236" r="4"/><circle class="blk" cx="' + (L + 360) + '" cy="304" r="4"/>';   // the handle on the glass
       s += P('M' + (L + W + 12) + ' 200 H' + (L + W + 52), 'ln') + R(L + W + 18, 204, 28, 64, 'board');          // a towel on its bar, outside the glass
       s += T(L, 40, 'Closed up once');
+      s = s0 + Lg(5, s);
     }
     return '<g class="bb__f" data-i="' + i + '">' + s + '</g>';
   }
@@ -60,8 +59,11 @@
     }
     world.innerHTML = [0, 1, 2, 3, 4, 5].map(bay).join('');
     groups = Array.prototype.slice.call(world.querySelectorAll('.bb__f'));
-    var DRAW = '.ln, .lnt, .sq, .stud, .board, .tile, .glass', FADE = '.memb, .tape, .tmpl, .blk, .lab';
-    groups.forEach(function (g) { gsap.set(g.querySelectorAll(DRAW), { drawSVG: '0%' }); gsap.set(g.querySelectorAll(FADE), { opacity: 0 }); });
+    var DRAW = '.ln, .lnt, .sq, .stud, .board, .tile, .glass', FADE = '.memb, .tape, .tmpl, .blk, .lab', FILL = '.stud, .board, .tile, .glass';
+    // Phase 9: bay i arrives as the finished bay i-1 (its earlier layers drawn and filled); only layer i builds, strokes
+    // first, fills after. Before this, every bay redrew from nothing and the tile bay flashed white (tile fills ahead of lines).
+    function fresh(g, i, sel) { var out = []; g.querySelectorAll('.ly[data-l="' + i + '"]').forEach(function (l) { out = out.concat(Array.prototype.slice.call(l.querySelectorAll(sel))); }); return out; }
+    groups.forEach(function (g, i) { gsap.set(fresh(g, i, DRAW), { drawSVG: '0%' }); gsap.set(fresh(g, i, FILL), { fillOpacity: 0 }); gsap.set(fresh(g, i, FADE), { opacity: 0 }); });
     var fw = 0;
     function size() { var h = win.clientHeight; fw = h * BW / H; world.style.height = h + 'px'; world.style.width = (fw * 6) + 'px'; }
     size(); k.ro(win, function () { size(); ScrollTrigger.refresh(); });
@@ -71,12 +73,14 @@
     groups.forEach(function (g, i) {
       if (i > 0) tl.fromTo(world, { x: function () { return camX(i - 1); } }, { x: function () { return camX(i); }, duration: .3, ease: 'power2.inOut', immediateRender: false }, i - .3);
       if (i === 0) return;   // the first bay draws as the section arrives (below), never an empty window
-      tl.to(g.querySelectorAll(DRAW), { drawSVG: '100%', duration: .3, stagger: { amount: .15 } }, i - .12)
-        .to(g.querySelectorAll(FADE), { opacity: 1, duration: .15, stagger: { amount: .05 } }, i + .15);
+      tl.to(fresh(g, i, DRAW), { drawSVG: '100%', duration: .3, stagger: { amount: .15 } }, i - .12)
+        .to(fresh(g, i, FILL), { fillOpacity: 1, duration: .15 }, i + .12)
+        .to(fresh(g, i, FADE), { opacity: 1, duration: .15, stagger: { amount: .05 } }, i + .15);
     });
     var g0 = groups[0], intro = gsap.timeline({ paused: true })
-      .to(g0.querySelectorAll(DRAW), { drawSVG: '100%', duration: .8, ease: 'power2.inOut', stagger: { amount: .4 } })
-      .to(g0.querySelectorAll(FADE), { opacity: 1, duration: .3 }, '-=.3');
+      .to(fresh(g0, 0, DRAW), { drawSVG: '100%', duration: .8, ease: 'power2.inOut', stagger: { amount: .4 } })
+      .to(fresh(g0, 0, FILL), { fillOpacity: 1, duration: .3 }, '-=.35')
+      .to(fresh(g0, 0, FADE), { opacity: 1, duration: .3 }, '-=.3');
     var it = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: function () { intro.play(); } });
     k.add(function () { it.kill(); intro.kill(); });
     tl.to({}, { duration: .5 });
