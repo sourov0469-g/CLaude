@@ -1,0 +1,233 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 5
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Peel It Back"
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "top of the pin: the finished roof, nothing lifted",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "half way: shingles and underlayment lifted away, the ice & water shield is the layer peeling",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "end of the pin: only the rafters remain",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "roofer order top to bottom: shingles, underlayment, ice & water, drip edge, deck, rafters",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "a rail button jumps to its layer (aria-current)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "4",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Layer Deck"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "six layer cards, top to bottom, first selected",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "choosing ice & water brings it forward and states the 24 in rule with its source",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "arrow keys move through the layers (roving tabindex)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "numbers are framed as typical, not as a quote",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "5",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

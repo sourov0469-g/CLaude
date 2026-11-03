@@ -142,3 +142,46 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - The moment list inherited the site's chip-button style.
 - The grid rows were uneven: the canvases are now absolutely placed.
 - On phones the tiles came before the heading; the heading now comes first.
+
+---
+
+## L4 · Explore 4 + 5 · checks 35/35 · evidence `gates/ladder/L04-explore-4-5/` · Explore now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Explore 4 · Peel It Back** | Apple AirPods Pro (pinned scroll, each step an event) | A plan view straight down on a roof corner at the eave, pinned while you scroll. Each step peels the top layer up from the eave and names it with an outlined number: shingles over a starter → underlayment lapped upslope with cap nails → ice & water along the eave → drip edge → OSB deck with staggered joints and gaps → rafters. A 00–06 rail jumps to any layer. | 8.2 | 8.0 | 8.2 | 9.0 | **8.24** |
+| **Explore 5 · The Layer Deck** | Longbow Motors (doctrine plus hard numbers) | The same six layers as thick 3D cards, each with its own drawn material face (granules, printed synthetic with cap nails, rubberised membrane, drip-edge section at the eave over deck and fascia, OSB strands, rafter grain). Hovering fans the deck; choosing a card brings it forward with what it is, where it goes and one certain number, captioned "Typical values for a correct roof, not a quote for yours". | 8.2 | 8.0 | 8.0 | 9.0 | **8.20** |
+
+**Roofer audit:**
+- Order (tested): shingles, then underlayment (which laps over the ice & water shield), then ice & water, drip edge, deck, rafters. At the eave the drip edge sits under the ice & water; at the rakes it goes over the underlayment.
+- Numbers used:
+  - 5⅝ in exposure, named on GAF Timberline HDZ;
+  - ice barrier to at least 24 in inside the exterior wall line, IRC R905.1.2 as adopted in Minnesota;
+  - about ⅛ in panel gap;
+  - rafters commonly 16 or 24 in on centre.
+- No game mechanic: Explore V3 stays the site's only game.
+
+**Checks run:** the generic gate, plus:
+- Explore 4: the pin top shows the finished roof; at half way, shingles and underlayment are off and the ice & water is the peeling layer; at the end only the rafters remain; the true order is in the rail; a rail button jumps.
+- Explore 5: six cards in true order; ice & water states 24 in with R905.1.2; arrow keys rove; the numbers are framed as typical.
+
+**Ledger:**
+- **Explore 4:**
+  - sticky artifact with measured steps: ⟦S0448⟧;
+  - rail: ⟦S1325⟧ ⟦S0462⟧;
+  - plan drawing: ⟦S0414⟧;
+  - step numbers: ⟦S1352⟧;
+  - title: ⟦S0451⟧.
+- **Explore 5:**
+  - 3D cards: ⟦S0205⟧;
+  - fan and pull: ⟦S1330⟧;
+  - tabs: ⟦S1246⟧;
+  - numbers: ⟦S1352⟧;
+  - material faces: ⟦S0414⟧;
+  - plain doctrine copy: ⟦S0076⟧.
+
+**Defects fixed:**
+- Explore 4 first named the layer that had already been lifted away (off by one). The named layer is now the one on top, partly peeled.
+- Explore 5's drip-edge face was drawn wrong. It is now a true eave section: flange on the deck, face down past the fascia, kick-out at the bottom.
+- The OSB tile was scaled down.
+
+**Open:** the OSB texture tile still reads a little blotchy at plan scale (the same tile as Round 2).

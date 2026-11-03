@@ -47,3 +47,22 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   spread (rotate, depth, offset) and settle into the whole shot on staggered springs. Hovering a tile lifts it slightly,
   and "Scatter" replays it. The five moments are chips that seek the film. Skills: ⟦S0205⟧ small 3D on tiles, ⟦S0340⟧
   spring settle, ⟦S0187⟧ staggered choreography, ⟦S1388⟧ keys; the full film opens YouTube ehKLv5DF2TQ.
+
+## L4 · Explore 4 + 5 (Explore stood at 3: V1 exploded stack, V2 Build It section slider, V3 Stack It Right, the one game)
+- **Explore 4 · "Peel It Back"** — reference **Apple AirPods Pro** (pinned scroll; each step a full-screen event).
+  A plan view looking straight down on a roof corner at the eave, pinned while you scroll. Each step peels one
+  layer up and away from the eave, in true top-down order: shingles (with the starter course at the eave) →
+  underlayment, lapped upslope over downslope → ice & water shield along the eave → eave drip edge (under the ice &
+  water at the eave) → OSB deck with staggered joints and gaps between panels → rafters. The layer's name lands as a
+  big numbered event. A step rail mirrors the steps for keyboard use. No game mechanic. Skills: ⟦S0448⟧ sticky
+  artifact with measured steps, ⟦S1325⟧ progress rail, ⟦S0414⟧ roofer-true plan drawing, ⟦S1352⟧ numbers, ⟦S0451⟧.
+- **Explore 5 · "The Layer Deck"** — reference **Longbow Motors** (craft told as doctrine plus hard numbers). The six
+  layers as thick 3D cards, each with its own drawn material face: granules, synthetic underlayment print, rubberised
+  ice & water, the drip-edge profile, OSB strands, rafter grain. Hovering fans the deck; choosing a card brings it
+  forward with what it is, where it goes and one hard number where one is certain:
+  - laminated shingle exposure 5⅝ in (GAF Timberline HDZ);
+  - ice barrier from the eave to at least 24 in inside the exterior wall line (IRC R905.1.2, as adopted in Minnesota);
+  - deck panels gapped about ⅛ in;
+  - rafters commonly 16 or 24 in on centre.
+  It does not claim these as an Owl promise. Skills: ⟦S0205⟧ small 3D cards, ⟦S1330⟧ tilt, ⟦S1246⟧ tabs, ⟦S1352⟧,
+  ⟦S0414⟧, ⟦S0076⟧.
