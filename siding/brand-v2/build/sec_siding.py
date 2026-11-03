@@ -20,8 +20,8 @@ def p1():
 .sp1{position:relative;min-height:calc(100vh - 72px);display:flex;align-items:flex-end} .sp1>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .sp1-c{position:relative;width:100%;padding-bottom:var(--space-08)} .sp1-plate{background:var(--color-bg-page);padding:var(--space-08);max-width:680px}
 .sp2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-09);align-items:center}
-.sp2-art{position:relative;padding:0 0 var(--space-05) var(--space-05);background:repeating-linear-gradient(180deg,var(--neutral-1) 0 31px,var(--neutral-3) 31px 34px,var(--white) 34px 65px,var(--neutral-3) 65px 68px)}
-.sp2-art img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover} .cap{position:absolute;left:var(--space-05);bottom:var(--space-05);background:var(--color-bg-inverse);color:#fff;font-size:13px;padding:6px 10px}
+.sp2-art{position:relative;padding:0 0 var(--space-05) var(--space-05);background:repeating-linear-gradient(180deg,var(--color-pattern-ground) 0 31px,var(--color-pattern-course) 31px 34px,var(--color-bg-page) 34px 65px,var(--color-pattern-course) 65px 68px)}
+.sp2-art img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover} .cap{position:absolute;left:var(--space-05);bottom:var(--space-05);background:var(--color-bg-inverse);color:var(--color-text-inverse);font-size:var(--type-small-size);padding:var(--space-03) var(--space-04)}
 @media (max-width:900px){.sp2-g{grid-template-columns:minmax(0,1fr)} .sp1-plate{padding:var(--space-06)}}
 """
     return 'Siding hero', v1, v2, css, ''
@@ -34,8 +34,8 @@ def _sample(kind, value=9):
     """a material sample: the profile drawn with light from the top-left, like a physical swatch"""
     SN[0] += 1
     u = f"s{SN[0]}"
-    shade = 'rgba(19,22,25,.28)'
-    hi = 'rgba(255,255,255,.22)'
+    shade = 'color-mix(in srgb, var(--color-text-primary) 28%, transparent)'
+    hi = 'color-mix(in srgb, var(--color-text-inverse) 22%, transparent)'
     if kind == 'lap':
         art = ''.join(f'<rect x="0" y="{i * 40}" width="240" height="40" fill="url(#{u}lap)"/><path d="M0 {i * 40 + 39}H240" stroke="{shade}" stroke-width="3"/>' for i in range(6))
     elif kind == 'panel':
@@ -63,11 +63,11 @@ def p2():
     v2 = (f'<div class="spp2 sec-pad"><div class="wrap spp2-g"><div><p class="label">Profiles</p><h2 class="h2">Four ways a wall can look.</h2>'
           f'<div class="spp2-t" role="tablist" aria-label="Profiles">{tabs}</div><p class="lead spp2-d" role="tabpanel">{esc(desc["lap"])}</p></div><div class="spp2-s">{samples}</div></div></div>')
     css = """
-.smps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-05)} .smp-c{margin:0} .smp{display:block;width:100%;height:auto;box-shadow:0 1px 2px rgba(19,22,25,.12),0 12px 28px rgba(19,22,25,.12)}
-.smp-c figcaption{display:grid;gap:4px;margin-top:var(--space-04)} .smp-c b{font:700 20px var(--font-display)} .smp-c span{color:var(--color-text-secondary)}
+.smps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-05)} .smp-c{margin:0} .smp{display:block;width:100%;height:auto;box-shadow:var(--shadow-sample)}
+.smp-c figcaption{display:grid;gap:4px;margin-top:var(--space-04)} .smp-c b{font:700 var(--type-lead-size) var(--font-display)} .smp-c span{color:var(--color-text-secondary)}
 .spp2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-09);align-items:center} .spp2-s{max-width:520px}
-.spp2-t{display:flex;flex-wrap:wrap;gap:var(--space-03);margin-bottom:var(--space-05)} .spp2-t button{min-height:48px;padding:0 var(--space-05);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);font:600 16px var(--font-text);cursor:pointer;color:var(--color-text-primary)}
-.spp2-t button[aria-selected=true]{background:var(--color-accent-solid);border-color:var(--color-accent-solid);color:#fff}
+.spp2-t{display:flex;flex-wrap:wrap;gap:var(--space-03);margin-bottom:var(--space-05)} .spp2-t button{min-height:48px;padding:0 var(--space-05);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);font:600 var(--type-body-size) var(--font-text);cursor:pointer;color:var(--color-text-primary)}
+.spp2-t button[aria-selected=true]{background:var(--color-accent-solid);border-color:var(--color-accent-solid);color:var(--color-text-inverse)}
 @media (max-width:900px){.smps{grid-template-columns:repeat(2,minmax(0,1fr))} .spp2-g{gap:var(--space-06)}}
 @media (max-width:600px){.spp2-g{grid-template-columns:minmax(0,1fr)}}   /* stacked in source order: heading and tabs, then the figure they change */
 """
@@ -81,20 +81,20 @@ tabs.forEach((b,i)=>{b.addEventListener('click',()=>pick(b));b.addEventListener(
 
 def p3():
     vals = [(3, 'Light'), (5, 'Light-mid'), (7, 'Mid'), (9, 'Mid-deep'), (11, 'Deep'), (12, 'Deepest')]
-    ink = lambda k: 'var(--color-text-primary)' if k < 8 else '#fff'
-    bands = ''.join(f'<div class="cw-b" style="background:var(--steel-{k});color:{ink(k)}"><span class="cw-n">{esc(n)}</span><span class="cw-t">{t}</span></div>'
+    ink = lambda k: 'var(--color-text-primary)' if k < 8 else 'var(--color-text-on-accent)'
+    bands = ''.join(f'<div class="cw-b" data-swatch style="background:var(--steel-{k});color:{ink(k)}"><span class="cw-n">{esc(n)}</span><span class="cw-t">{t}</span></div>'
                     for (k, n), t in zip(vals, ['Keeps the wall coolest', 'Soft, shows little fading', 'Easy on mixed light', 'Shows the shadow lines', 'Strong against white trim', 'Deepest; trim reads sharp']))
     v1 = (f'<div class="cw1"><div class="wrap cw-h"><p class="label">Colour</p><h2 class="h2">Lightness first. Colour second.</h2>'
           f'<p class="lead">Six value steps, shown in the brand’s own steel. Pick a value here; choose the actual colour with the firm.</p></div><div class="cw-bs">{bands}</div></div>')
-    tiles = ''.join(f'<div class="cw-t2" style="background:var(--steel-{k});color:{"var(--color-text-primary)" if k < 8 else "#fff"}"><span>{k:02d}</span></div>' for k in range(1, 13))
+    tiles = ''.join(f'<div class="cw-t2" data-swatch style="background:var(--steel-{k});color:{"var(--color-text-primary)" if k < 8 else "var(--color-text-on-accent)"}"><span>{k:02d}</span></div>' for k in range(1, 13))
     v2 = (f'<div class="cw2 sec-pad"><div class="wrap cw2-g"><div><p class="label">Colour</p><h2 class="h2">A deck, not a guess.</h2>'
           f'<p class="lead">Twelve steps from light to deep. Pick a value here; choose the actual colour with the firm.</p></div>'
           f'<div class="cw2-d" aria-hidden="true">{tiles}</div></div></div>')
     css = """
 .cw1{padding-top:var(--layout-section-pad)} .cw-h{margin-bottom:var(--space-07)} .cw-b{display:flex;justify-content:space-between;align-items:center;gap:var(--space-05);min-height:96px;padding:0 max(var(--layout-gutter),calc((100vw - var(--layout-max-width))/2 + var(--layout-gutter)))}
-.cw-n{font:800 var(--type-h3-size) var(--font-display)} .cw-t{font:600 16px var(--font-text)}
-.cw2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:var(--space-09);align-items:center} .cw2-d{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-.cw-t2{aspect-ratio:1;display:flex;align-items:flex-end;padding:10px;font:600 13px var(--font-text);border-radius:var(--radius-sm)}
+.cw-n{font:800 var(--type-h3-size) var(--font-display)} .cw-t{font:600 var(--type-body-size) var(--font-text)}
+.cw2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:var(--space-09);align-items:center} .cw2-d{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-03)}
+.cw-t2{aspect-ratio:1;display:flex;align-items:flex-end;padding:var(--space-04);font:600 var(--type-small-size) var(--font-text);border-radius:var(--radius-sm)}
 @media (max-width:900px){.cw2-g{grid-template-columns:minmax(0,1fr)} .cw-b{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px}}
 """
     return 'Colour wall', v1, v2, css, ''
@@ -115,10 +115,10 @@ def p4():
     v2 = (f'<div class="vs2 sec-pad" data-vz="vs2"><div class="wrap vz-g"><div class="vz-pv vz-pv2">{_house("vs2")}</div><div><p class="label">Visualiser</p><h2 class="h2">Build your wall.</h2>{st}'
           f'<fieldset class="vs"><legend><b>4</b> Preview</legend><dl class="vsum"></dl><a class="btn btn-primary" href="#/about/booking">Book an estimate with this</a></fieldset></div></div></div>')
     css = """
-.vprog{display:flex;gap:4px;list-style:none;padding:0;margin:0 0 var(--space-05)} .vprog li{flex:1;padding:10px 0 0;border-top:3px solid var(--color-border-default);font:600 14px var(--font-text);color:var(--color-text-secondary)}
-.vprog li[aria-current]{border-color:var(--color-accent-solid);color:var(--color-text-primary)} .vprog li.done{border-color:var(--steel-7)}
+.vprog{display:flex;gap:4px;list-style:none;padding:0;margin:0 0 var(--space-05)} .vprog li{flex:1;padding:var(--space-04) 0 0;border-top:3px solid var(--color-border-default);font:600 var(--type-small-size) var(--font-text);color:var(--color-text-secondary)}
+.vprog li[aria-current]{border-color:var(--color-accent-solid);color:var(--color-text-primary)} .vprog li.done{border-color:var(--color-step-done)}
 .vstep{border:0;padding:0;margin:0 0 var(--space-05)} .vnav{margin-bottom:var(--space-04)}
-.vsum{display:grid;grid-template-columns:auto 1fr;gap:6px var(--space-05);margin:0 0 var(--space-04)} .vsum dt{font-weight:600;color:var(--color-text-secondary)} .vsum dd{margin:0;font-weight:700}
+.vsum{display:grid;grid-template-columns:auto 1fr;gap:var(--space-03) var(--space-05);margin:0 0 var(--space-04)} .vsum dt{font-weight:600;color:var(--color-text-secondary)} .vsum dd{margin:0;font-weight:700}
 @media (min-width:901px){.vz-pv2{order:0}}
 """
     js = """
@@ -157,10 +157,10 @@ def p6():
     v2 = steel_close(HARDIE)
     css = """
 .sc-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:var(--space-09);align-items:end} .sc-c{font:800 var(--type-h3-size)/1.25 var(--font-display);margin:0;max-width:20ch}
-.sc2 .btn-primary{background:#fff;color:var(--color-text-primary)} .sc2 .btn-primary:hover{background:var(--steel-2)} .sc2-p{color:#fff;font:700 22px var(--font-text);min-height:48px;display:inline-flex;align-items:center}
-.sc2 :focus-visible{outline-color:#fff} @media (max-width:900px){.sc-g{grid-template-columns:minmax(0,1fr)}}
+.sc2 .btn-primary{background:var(--color-surface-on-dark);color:var(--color-text-primary)} .sc2 .btn-primary:hover{background:var(--color-surface-on-dark-hover)} .sc2-p{color:var(--color-text-inverse);font:700 var(--type-h3-size) var(--font-text);min-height:48px;display:inline-flex;align-items:center}
+.sc2 :focus-visible{outline-color:var(--color-focus-ring-on-dark)} @media (max-width:900px){.sc-g{grid-template-columns:minmax(0,1fr)}}
 .scf{position:relative;overflow:hidden;background:var(--color-bg-accent-field);color:var(--color-text-on-accent)} .scf canvas{position:absolute;inset:0;width:100%;height:100%}
-.scf-c{position:relative} .scf-l{color:var(--steel-3)} .scf-h{color:#fff}
+.scf-c{position:relative} .scf-l{color:var(--color-text-inverse-soft)} .scf-h{color:var(--color-text-inverse)}
 """
     return 'Credential and close', v1, v2, css, ''
 

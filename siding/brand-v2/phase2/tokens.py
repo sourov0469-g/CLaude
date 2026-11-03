@@ -9,7 +9,7 @@ Writes into brand-v2/phase2/:
 Primitives come from the steel and neutral ramps measured earlier tonight (OKLCH hue 248; Muse correction 2 allows them
 as Phase 2 raw material). Every semantic name says its job, never its hue (S0071, S1466).
 Run: python3 -I brand-v2/phase2/tokens.py"""
-import json, os, sys
+import re, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -52,11 +52,39 @@ SEM = [
     ('focus-ring-on-dark', 'white', 'Focus ring on steel and dark surfaces.'),
     ('mark', 'steel-9', 'Logo mark on light surfaces. On dark or steel surfaces the mark is white.'),
     ('error-ink', 'neutral-13', 'Error text and its 2px field border. Paired with an icon and the word "Check", never red.'),
+    # added in build cycle 8, when the conformance lint found raw #fff doing these two jobs
+    ('surface-on-dark', 'white', 'A light control surface on steel or dark fields: the primary button and the selected tab there.'),
+    ('error-ink-on-dark', 'white', 'Error text and its field border on dark surfaces; icon and the word "Check" as on light.'),
+    # added in build cycle 8 so components read roles, not primitives (S0071); each points at the value it already had
+    ('text-inverse-soft', 'steel-3', 'Supporting text on bg-deep that sits closer to white than text-inverse-secondary.'),
+    ('text-inverse-muted', 'steel-4', 'Captions and hints on dark surfaces: drawing captions, form hints.'),
+    ('text-on-accent-secondary', 'steel-2', 'Secondary text on steel-9 to steel-11 plates (passes 4.5:1 on all three).'),
+    ('numeral-on-dark', 'steel-6', 'Large numerals set on bg-deep: the years.'),
+    ('surface-on-dark-hover', 'steel-2', 'Hover state of surface-on-dark.'),
+    ('border-on-dark-subtle', 'steel-10', 'Hairlines and rails on bg-deep (decorative).'),
+    ('border-on-dark', 'steel-7', 'Edges of chips and steps on bg-deep.'),
+    ('border-on-dark-control', 'steel-8', 'Edges of secondary controls on bg-deep (non-text UI).'),
+    ('border-on-dark-strong', 'steel-6', 'The secondary call link edge on the dark hero.'),
+    ('selected-ring', 'steel-11', 'The inset ring on a selected chip, tile or swatch.'),
+    ('selected-on-dark', 'steel-10', 'A selected chip on bg-deep.'),
+    ('step-done', 'steel-7', 'The rail of a completed step in the visualiser.'),
+    ('drawing-ink', 'steel-6', 'Outlines, dimension lines, board edges and trim in construction drawings on dark.'),
+    ('drawing-label', 'steel-5', 'Labels inside construction drawings.'),
+    ('drawing-label-strong', 'steel-4', 'Labels on the roofing drawings.'),
+    ('drawing-wrap', 'steel-7', 'The weather wrap and leader lines; office-map dots.'),
+    ('drawing-structure', 'steel-8', 'Studs, the old siding and map dots.'),
+    ('drawing-sheathing', 'steel-9', 'Sheathing and the wall face; the visualiser wall.'),
+    ('drawing-shadow', 'steel-11', 'Shadow lines under laps; a hovered map dot.'),
+    ('drawing-board', 'steel-12', 'The board body in section.'),
+    ('pattern-ground', 'neutral-1', 'Ground of the course-line pattern.'),
+    ('pattern-course', 'neutral-3', 'The course line in the course-line pattern.'),
 ]
 SEMMAP = {n: p for n, p, _ in SEM}
 
 # ---------------------------------------------------------------- pairs that must pass, and their requirement
 PAIRS = [  # fg role, bg role, required ratio, what it is
+    ('text-primary', 'surface-on-dark', 4.5, 'button text on the light surface'), ('surface-on-dark', 'bg-deep', 3.0, 'light control on the dark close'),
+    ('surface-on-dark', 'bg-accent-field', 3.0, 'light control on the steel field'), ('error-ink-on-dark', 'bg-deep', 4.5, 'error text on the dark form'),
     ('text-primary', 'bg-page', 4.5, 'body text'), ('text-primary', 'bg-subtle', 4.5, 'body text on band'),
     ('text-primary', 'bg-sunken', 4.5, 'input text'), ('text-primary', 'bg-accent-subtle', 4.5, 'body on steel tint'),
     ('text-secondary', 'bg-page', 4.5, 'captions'), ('text-secondary', 'bg-subtle', 4.5, 'captions on band'),
@@ -117,6 +145,19 @@ EASE = [('standard', 'cubic-bezier(0.2, 0, 0, 1)', 'Things changing state in pla
         ('exit', 'cubic-bezier(0.4, 0, 1, 1)', 'Things leaving (accelerate).'),
         ('draw', 'cubic-bezier(0.65, 0, 0.35, 1)', 'A line being laid: the logo and the course line.'),
         ('settle', 'cubic-bezier(0.34, 1.3, 0.5, 1)', 'A board landing: small overshoot, never past 1.05 scale.')]
+# data numerals: the record count, the review score, the years, the phone number set large (cycle 8; Utopia form, rem term in each, max <= 2.5x min)
+NUMERALS = [('xl', 'clamp(6rem, 4rem + 10vw, 13rem)', 'The record count and the review score.'),
+            ('l', 'clamp(4rem, 3rem + 4vw, 7rem)', 'Years in the timeline.'),
+            ('phone', 'clamp(3rem, 1.5rem + 6vw, 7rem)', 'The phone number set as the call to action; 14 characters, so it starts smaller.')]
+SHADOW = [('sample', '0 1px 2px {12}, 0 12px 28px {12}', 'A lifted sample tile: the siding profiles.'),
+          ('photo', '0 8px 24px {16}', 'A photo lifted off the page: the cutout cards.'),
+          ('chip-edge', 'inset 0 -6px 0 {16}', 'The shade along a colour chip\'s lower edge: one lap line.')]
+
+
+def shadow_value(v):
+    return re.sub(r'\{(\d+)\}', lambda m: f'color-mix(in srgb, var(--neutral-13) {m.group(1)}%, transparent)', v)
+
+
 LAYOUT = [('max-width', '1240px', 'Content column.'), ('gutter', 'clamp(16px, 4vw, 32px)', 'Page side margin; 16 px at phone width.'),
           ('columns', '12', 'Grid columns at desktop; 4 at phone width.'),
           ('section-pad', 'clamp(64px, 3.5rem + 5vw, 160px)', 'Vertical padding of a section.')]
@@ -143,6 +184,7 @@ def build():
     sem['duration'] = {n: {'$value': f'{v}ms', '$type': 'duration', '$description': d} for n, v, d in MOTION}
     sem['easing'] = {n: {'$value': v, '$type': 'cubicBezier', '$description': d} for n, v, d in EASE}
     sem['layout'] = {n: {'$value': v, '$type': 'dimension', '$description': d} for n, v, d in LAYOUT}
+    sem['shadow'] = {n: {'$value': v.replace('{', '{primitive.color.neutral-13 at ').replace('}', '%}'), '$type': 'shadow', '$description': d} for n, v, d in SHADOW}
     out['semantic'] = sem
     out['component'] = {
         'button-primary': {'bg': {'$value': '{semantic.color.accent-solid}'}, 'bg-hover': {'$value': '{semantic.color.accent-solid-hover}'},
@@ -154,6 +196,7 @@ def build():
                   'border-error': {'$value': '{semantic.color.error-ink}'}, 'height': {'$value': '48px', '$type': 'dimension'}},
         'course-line': {'color': {'$value': '{semantic.color.accent-line}'}, 'weight': {'$value': '3px', '$type': 'dimension',
                         '$description': 'Matches the mark stroke at lockup size (5 units of 64 at 40 px ≈ 3 px).'}},
+        'numeral': {n: {'$value': v, '$type': 'dimension', '$description': d} for n, v, d in NUMERALS},
         'logo': {'clear-space': {'$value': '0.125em', '$type': 'dimension', '$description': 'One course height (1/8 of mark height) on all sides, in mark-height units.'},
                  'min-icon': {'$value': '16px', '$type': 'dimension', '$description': 'Use the 16 px variant at 32 px and below.'},
                  'min-lockup-height': {'$value': '24px', '$type': 'dimension'}},
@@ -175,11 +218,13 @@ def css(tok):
     L += [f'  --space-{i + 1:02d}: {v}px;' for i, v in enumerate(SPACE)]
     L += [f'  --radius-{n}: {v}px;' for n, v, _ in RADIUS]
     L += [f'  --layout-{n}: {v};' for n, v, _ in LAYOUT]
+    L += [f'  --shadow-{n}: {shadow_value(v)};' for n, v, _ in SHADOW]
     L.append('  /* motion */')
     L += [f'  --duration-{n}: {v}ms;' for n, v, _ in MOTION]
     L += [f'  --ease-{n}: {v};' for n, v, _ in EASE]
     L.append('  /* component */')
     L += ['  --button-height: 48px; --input-height: 48px; --course-line-weight: 3px; --logo-clear-space: 0.125em;']
+    L += [f'  --type-numeral-{n}: {v};' for n, v, _ in NUMERALS]
     L.append('}')
     L.append('@media (prefers-reduced-motion: reduce) {\n  :root { ' + ' '.join(f'--duration-{n}: 0ms;' for n, _, _ in MOTION) + ' }\n}')
     return '\n'.join(L) + '\n'

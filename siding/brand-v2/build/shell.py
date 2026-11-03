@@ -62,9 +62,9 @@ class Images:
 IM = Images()
 
 
-def lockup(fg=None, word=None, h=32, tail=False, label=True, bg='#fff'):
-    fg = fg or P['steel-9']
-    word = word or P['neutral-13']
+def lockup(fg=None, word=None, h=32, tail=False, label=True, bg='var(--color-bg-page)'):
+    fg = fg or 'var(--color-mark)'
+    word = word or 'var(--color-text-primary)'
     a = f'role="img" aria-label="{NAME}"' if label else 'aria-hidden="true"'
     return (f'<svg class="lk" viewBox="0 0 296 64" width="{h * 296 / 64:.0f}" height="{h}" {a} focusable="false">'
             f'{marks.c1(fg, bg, tail=230 if tail else 0, cls=" c1-tail" if tail else "")}<text class="wm" x="78" y="41" fill="{word}">{NAME}</text></svg>')
@@ -105,7 +105,7 @@ def header():
 
 def footer():
     return f'''<footer class="ftr"><canvas class="atmos" aria-hidden="true"></canvas><div class="wrap ftr-in">
-<div>{lockup(fg="#fff", word="#fff", h=36, bg=P["steel-12"])}<p class="ftr-p">{esc(ADDRESS)}<br>{esc(HOURS)}</p></div>
+<div>{lockup(fg="var(--color-text-inverse)", word="var(--color-text-inverse)", h=36, bg="var(--color-bg-deep)")}<p class="ftr-p">{esc(ADDRESS)}<br>{esc(HOURS)}</p></div>
 <div><p class="ftr-k">Call</p><p><a href="{TEL}">{PHONE}</a></p><p class="ftr-k">Email</p><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
 <nav aria-label="Footer"><p class="ftr-k" id="ftr-pages">Pages</p><p class="ftr-nav"><a href="#/">Home</a>{"".join(f'<a href="#/{k}">{esc(t)}</a>' for k, t in NAV)}<a href="#/about/booking">Book an estimate</a></p></nav></div>
 <div class="wrap ftr-base"><p>{esc(REVIEWS)} · {" · ".join(esc(c) for c in CREDS)}<button type="button" class="ftr-mo" data-motion aria-pressed="false">Pause animations</button></p></div></footer>'''

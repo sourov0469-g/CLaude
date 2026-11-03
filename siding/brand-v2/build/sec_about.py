@@ -14,7 +14,7 @@ def a1():
     v2 = (f'<div class="ab2"><div class="wrap ab2-c"><p class="label">About &amp; booking</p><h1 class="h1">Austin homes, since 2009.</h1>{cline()}'
           f'<p class="lead">Siding, windows, roofing and painting, from one office on North Lamar.</p><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a></div></div>')
     css = """
-.ab2{position:relative;padding:var(--layout-section-pad) 0;background:repeating-linear-gradient(180deg,var(--neutral-1) 0 31px,var(--neutral-3) 31px 34px,var(--white) 34px 65px,var(--neutral-3) 65px 68px)}
+.ab2{position:relative;padding:var(--layout-section-pad) 0;background:repeating-linear-gradient(180deg,var(--color-pattern-ground) 0 31px,var(--color-pattern-course) 31px 34px,var(--color-bg-page) 34px 65px,var(--color-pattern-course) 65px 68px)}
 .ab2::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--color-bg-page) 0 50%,transparent 80%)} .ab2-c{position:relative}
 .ah1-p{position:relative;height:min(64vh,640px)} .ah1-p img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block} .ah1-p .cap{left:auto;right:var(--layout-gutter)}
 .ah1-g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:var(--space-08);align-items:end;padding-top:var(--space-08);padding-bottom:var(--space-09)}
@@ -30,8 +30,8 @@ def a2():
     plates = ''.join(f'<div class="yp"><span class="yp-y">{esc(y)}</span><b>{esc(t)}</b><span>{esc(d)}</span></div>' for y, t, d in items[:2])
     v2 = f'<div class="yp2 sec-pad"><div class="wrap"><p class="label">The story</p><h2 class="h2">Two dates.</h2>{cline()}<div class="yps">{plates}</div></div></div>'
     css = """
-.yps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-05)} .yp{display:grid;gap:6px;background:var(--color-bg-deep);color:#fff;padding:var(--space-07)}
-.yp-y{font:800 clamp(4rem,3rem + 4vw,7rem)/.9 var(--font-display);color:var(--steel-6)} .yp b{font:700 22px var(--font-text)} .yp span:last-child{color:var(--steel-4)}
+.yps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-05)} .yp{display:grid;gap:var(--space-03);background:var(--color-bg-deep);color:var(--color-text-inverse);padding:var(--space-07)}
+.yp-y{font:800 var(--type-numeral-l)/.9 var(--font-display);color:var(--color-numeral-on-dark)} .yp b{font:700 var(--type-h3-size) var(--font-text)} .yp span:last-child{color:var(--color-text-inverse-muted)}
 @media (max-width:700px){.yps{grid-template-columns:minmax(0,1fr)}}
 """
     return 'Since 2009', v1, v2, css, ''
@@ -44,8 +44,8 @@ def a3():
     v2 = f'<div class="cr3 on-dark sec-pad"><div class="wrap"><p class="label on-dark-l">Credentials</p><ul class="crb">{"".join(f"<li>{esc(c)}</li>" for c in CREDS)}</ul></div></div>'
     css = """
 .crl{list-style:none;padding:0;margin:0;border-top:1px solid var(--color-border-default)} .crl li{display:grid;grid-template-columns:32px 120px minmax(0,1fr);gap:var(--space-04);align-items:center;padding:var(--space-05) 0;border-bottom:1px solid var(--color-border-subtle)}
-.crl svg{color:var(--color-accent-solid)} .cr-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary)} .crl b{font:700 20px var(--font-text)}
-.crb{list-style:none;padding:0;margin:0;display:grid;gap:var(--space-04)} .crb li{font:800 var(--type-h2-size)/1.15 var(--font-display);color:#fff}
+.crl svg{color:var(--color-accent-solid)} .cr-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary)} .crl b{font:700 var(--type-lead-size) var(--font-text)}
+.crb{list-style:none;padding:0;margin:0;display:grid;gap:var(--space-04)} .crb li{font:800 var(--type-h2-size)/1.15 var(--font-display);color:var(--color-text-inverse)}
 @media (max-width:700px){.crl li{grid-template-columns:32px minmax(0,1fr)} .crl b{grid-column:2}}
 """
     return 'Credentials', v1, v2, css, ''
@@ -60,10 +60,10 @@ def a4():
           f'<p><a class="of2-p" href="{TEL}">{PHONE}</a></p><p><a class="of2-e" href="mailto:{EMAIL}">{EMAIL}</a></p></div></div></div>')
     css = """
 .of-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-09);align-items:center} .ofl{display:grid;gap:var(--space-04);margin:0}
-.ofl dt{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary)} .ofl dd{margin:4px 0 0;font:600 19px var(--font-text)} .ofl dd a{display:inline-flex;align-items:center;min-height:44px}
+.ofl dt{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary)} .ofl dd{margin:4px 0 0;font:600 var(--type-lead-size) var(--font-text)} .ofl dd a{display:inline-flex;align-items:center;min-height:44px}
 .of-m{background:var(--color-bg-subtle);padding:var(--space-05)} .of-m .nd{max-height:420px}
-.of2-c{padding:var(--space-09) var(--space-08);max-width:760px} .of2-a{font:800 var(--type-h2-size)/1.15 var(--font-display);color:#fff;margin:0 0 var(--space-04)}
-.of2-p{font:800 var(--type-h3-size) var(--font-display);color:#fff} .of2-e{color:#fff;font-weight:600} .of2 :focus-visible{outline-color:#fff}
+.of2-c{padding:var(--space-09) var(--space-08);max-width:760px} .of2-a{font:800 var(--type-h2-size)/1.15 var(--font-display);color:var(--color-text-inverse);margin:0 0 var(--space-04)}
+.of2-p{font:800 var(--type-h3-size) var(--font-display);color:var(--color-text-inverse)} .of2-e{color:var(--color-text-inverse);font-weight:600} .of2 :focus-visible{outline-color:var(--color-focus-ring-on-dark)}
 @media (max-width:900px){.of-g{grid-template-columns:minmax(0,1fr)}}
 """
     return 'Office and hours', v1, v2, css, ''
@@ -93,15 +93,15 @@ def a5():
           f'<button type="submit" class="btn btn-primary">Send the request {icon("action-arrow-right", 20)}</button><div class="frm-out" role="status" aria-live="polite"></div></form></div></div>')
     css = """
 .bk-g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-09);align-items:start}
-.frm{display:grid;gap:var(--space-05)} .frm>.btn{justify-self:start} .fld{display:grid;gap:6px;border:0;padding:0;margin:0} .fld label:not(.chip-in),.fld legend{font:600 16px var(--font-text);padding:0} .fld label span{font-weight:400;color:var(--color-text-secondary)}
-.fld input,.fld textarea{min-height:var(--input-height);border:1px solid var(--color-border-control);border-radius:var(--radius-sm);padding:10px var(--space-04);font:inherit;background:var(--color-bg-page);color:var(--color-text-primary)}
-.fld [aria-invalid=true]{border:2px solid var(--color-error-ink)} .hint{margin:0;font-size:14px;color:var(--color-text-secondary)}
-.err{display:flex;gap:6px;align-items:flex-start;margin:0;font-size:15px;color:var(--color-error-ink)} .err::before{content:"✕";font-weight:700}
-.chk{display:flex;gap:10px;align-items:center;min-height:44px} .chk input{width:20px;height:20px;accent-color:var(--steel-9)}
+.frm{display:grid;gap:var(--space-05)} .frm>.btn{justify-self:start} .fld{display:grid;gap:var(--space-03);border:0;padding:0;margin:0} .fld label:not(.chip-in),.fld legend{font:600 var(--type-body-size) var(--font-text);padding:0} .fld label span{font-weight:400;color:var(--color-text-secondary)}
+.fld input,.fld textarea{min-height:var(--input-height);border:1px solid var(--color-border-control);border-radius:var(--radius-sm);padding:var(--space-04) var(--space-04);font:inherit;background:var(--color-bg-page);color:var(--color-text-primary)}
+.fld [aria-invalid=true]{border:2px solid var(--color-error-ink)} .hint{margin:0;font-size:var(--type-small-size);color:var(--color-text-secondary)}
+.err{display:flex;gap:var(--space-03);align-items:flex-start;margin:0;font-size:var(--type-body-size);color:var(--color-error-ink)} .err::before{content:"✕";font-weight:700}
+.chk{display:flex;gap:var(--space-04);align-items:center;min-height:44px} .chk input{width:20px;height:20px;accent-color:var(--color-accent-solid)}
 .frm-out:empty{display:none} .frm-out{border-left:4px solid var(--color-accent-solid);background:var(--color-bg-accent-subtle);padding:var(--space-05);color:var(--color-text-primary)}
-.frm-d .fld label,.frm-d .fld legend{color:#fff} .frm-d .hint{color:var(--steel-4)} .frm-d .err{color:#fff} .frm-d .fld [aria-invalid=true]{border-color:#fff}
-.frm-d .chip-in{border-color:var(--steel-7);color:#fff} .frm-d .chip-in:has(input:checked){background:var(--steel-10);box-shadow:inset 0 0 0 2px #fff} .bk2 .btn-primary{background:#fff;color:var(--color-text-primary)}
-.bk2-p{color:#fff;font-weight:700} .bk2 :focus-visible{outline-color:#fff}
+.frm-d .fld label,.frm-d .fld legend{color:var(--color-text-inverse)} .frm-d .hint{color:var(--color-text-inverse-muted)} .frm-d .err{color:var(--color-error-ink-on-dark)} .frm-d .fld [aria-invalid=true]{border-color:var(--color-error-ink-on-dark)}
+.frm-d .chip-in{border-color:var(--color-border-on-dark);color:var(--color-text-inverse)} .frm-d .chip-in:has(input:checked){background:var(--color-selected-on-dark);box-shadow:inset 0 0 0 2px var(--color-surface-on-dark)} .bk2 .btn-primary{background:var(--color-surface-on-dark);color:var(--color-text-primary)}
+.bk2-p{color:var(--color-text-inverse);font-weight:700} .bk2 :focus-visible{outline-color:var(--color-focus-ring-on-dark)}
 @media (max-width:900px){.bk-g{grid-template-columns:minmax(0,1fr)}}
 """
     js = """
@@ -132,9 +132,9 @@ def a6():
     css = """
 .fq-g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:var(--space-09)}
 .acc details{border-top:1px solid var(--color-border-default)} .acc details:last-child{border-bottom:1px solid var(--color-border-default)}
-.acc summary{display:flex;justify-content:space-between;align-items:center;gap:var(--space-04);min-height:60px;font:600 18px var(--font-text);cursor:pointer;list-style:none} .acc summary::-webkit-details-marker{display:none}
+.acc summary{display:flex;justify-content:space-between;align-items:center;gap:var(--space-04);min-height:60px;font:600 var(--type-body-size) var(--font-text);cursor:pointer;list-style:none} .acc summary::-webkit-details-marker{display:none}
 .acc summary svg{flex:none;transition:transform var(--duration-normal) var(--ease-standard)} .acc details[open] summary svg{transform:rotate(45deg)} .acc details p{margin:0 0 var(--space-05);color:var(--color-text-secondary)}
-.fqd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-06) var(--space-08);margin:0} .fqd dt{font:700 18px var(--font-text)} .fqd dd{margin:6px 0 0;color:var(--color-text-secondary)}
+.fqd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-06) var(--space-08);margin:0} .fqd dt{font:700 var(--type-body-size) var(--font-text)} .fqd dd{margin:var(--space-02) 0 0;color:var(--color-text-secondary)}
 @media (max-width:900px){.fq-g,.fqd{grid-template-columns:minmax(0,1fr)}}
 """
     return 'FAQ', v1, v2, css, ''

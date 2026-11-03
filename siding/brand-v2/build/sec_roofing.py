@@ -35,8 +35,8 @@ def r1():
           f'<p class="lead">Shingle and metal roofing, gutters, and covered patios. {esc(GAF)}.</p><div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a></div></div>'
           f'<div class="rh2-art">{_roof("rf-light")}</div></div></div>')
     css = """
-.rf{width:100%;height:auto;display:block} .rf-t{font:600 17px var(--font-text);letter-spacing:.08em;fill:var(--steel-4)} .rf-light .rf-t{fill:var(--color-text-secondary)}
-.rh1 .btn-primary{background:#fff;color:var(--color-text-primary)} .rh-call{background:transparent;color:#fff;border-color:var(--steel-6)} .rh1-art{max-width:1100px;margin:var(--space-07) auto 0;padding:0 var(--layout-gutter)}
+.rf{width:100%;height:auto;display:block} .rf-t{font:600 17px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-label-strong)} .rf-light .rf-t{fill:var(--color-text-secondary)}
+.rh1 .btn-primary{background:var(--color-surface-on-dark);color:var(--color-text-primary)} .rh-call{background:transparent;color:var(--color-text-inverse);border-color:var(--color-border-on-dark-strong)} .rh1-art{max-width:1100px;margin:var(--space-07) auto 0;padding:0 var(--layout-gutter)}
 .rh2-art{background:var(--color-bg-subtle);padding:var(--space-05)}
 """
     return 'Roofing hero', v1, v2, css, ''
@@ -90,7 +90,7 @@ def r4():
     v2 = (f'<div class="gw2 on-dark sec-pad"><div class="wrap wa-g">{_gutter("gt-static")}<div><p class="label on-dark-l">Gutters</p><h2 class="h2 on-dark-h">Where the water goes.</h2>'
           f'<p class="lead on-dark-p">Off the roof edge, into the gutter, down the downspout and away from the wall.</p></div></div></div>')
     css = """
-.gt{width:100%;height:auto} .gt-t{font:600 15px var(--font-text);letter-spacing:.08em;fill:var(--color-text-secondary)} .gt-static .gt-t{fill:var(--steel-5)}
+.gt{width:100%;height:auto} .gt-t{font:600 15px var(--font-text);letter-spacing:.08em;fill:var(--color-text-secondary)} .gt-static .gt-t{fill:var(--color-drawing-label)}
 .gt-w{stroke-dashoffset:0} .js .gt-draw .gt-w{stroke-dashoffset:1} .js .gt-draw.on .gt-w{stroke-dashoffset:0;transition:stroke-dashoffset 1200ms var(--ease-draw)}
 @media (prefers-reduced-motion:reduce){.js .gt-draw .gt-w{stroke-dashoffset:0}}
 """
@@ -127,7 +127,7 @@ def r5():
           f'<figure class="pc-f"><div class="pc-art">{_patio("free")}</div><figcaption><b>Freestanding</b><span>Posts on every side.</span></figcaption></figure></div></div></div>')
     css = """
 .pc{width:100%;height:auto;display:block} .pc-art{background:var(--color-bg-subtle);padding:var(--space-05)} .pc-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-06)}
-.pc-f{margin:0} .pc-f figcaption{display:grid;gap:4px;margin-top:var(--space-03)} .pc-f b{font:700 20px var(--font-display)} .pc-f span{color:var(--color-text-secondary)}
+.pc-f{margin:0} .pc-f figcaption{display:grid;gap:4px;margin-top:var(--space-03)} .pc-f b{font:700 var(--type-lead-size) var(--font-display)} .pc-f span{color:var(--color-text-secondary)}
 @media (max-width:900px){.pc-g{grid-template-columns:minmax(0,1fr)}}
 """
     return 'Patio covers', v1, v2, css, ''

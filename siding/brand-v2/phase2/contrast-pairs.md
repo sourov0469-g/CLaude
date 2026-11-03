@@ -9,6 +9,10 @@ The identity board re-measures each pair from computed styles in Chromium; see t
 
 | Foreground role | Value | Background role | Value | Ratio | Needs | Result | Use |
 |---|---|---|---|---|---|---|---|
+| text-primary (neutral-13) | #131619 | surface-on-dark (white) | #FFFFFF | 18.16:1 | 4.5:1 | PASS | button text on the light surface |
+| surface-on-dark (white) | #FFFFFF | bg-deep (steel-12) | #16293B | 14.85:1 | 3.0:1 | PASS | light control on the dark close |
+| surface-on-dark (white) | #FFFFFF | bg-accent-field (steel-9) | #396791 | 5.96:1 | 3.0:1 | PASS | light control on the steel field |
+| error-ink-on-dark (white) | #FFFFFF | bg-deep (steel-12) | #16293B | 14.85:1 | 4.5:1 | PASS | error text on the dark form |
 | text-primary (neutral-13) | #131619 | bg-page (white) | #FFFFFF | 18.16:1 | 4.5:1 | PASS | body text |
 | text-primary (neutral-13) | #131619 | bg-subtle (neutral-2) | #F0F2F4 | 16.18:1 | 4.5:1 | PASS | body text on band |
 | text-primary (neutral-13) | #131619 | bg-sunken (neutral-3) | #E5E8EB | 14.76:1 | 4.5:1 | PASS | input text |
@@ -38,7 +42,7 @@ The identity board re-measures each pair from computed styles in Chromium; see t
 | mark (steel-9) | #396791 | bg-page (white) | #FFFFFF | 5.96:1 | 3.0:1 | PASS | logo mark (graphic) |
 | accent-line-on-dark (steel-6) | #B2CBE4 | bg-deep (steel-12) | #16293B | 8.88:1 | 3.0:1 | PASS | course line on dark |
 
-**28 pairs measured, 0 failing.**
+**32 pairs measured, 0 failing.**
 
 Not used as text anywhere:
 - steel-8 #6790B8 (3.36:1 with white);

@@ -17,21 +17,21 @@ def _wall_svg(cls=''):
 
 
 S5_CSS = """
-.on-dark{background:var(--color-bg-deep);color:var(--color-text-inverse)} .on-dark-l{color:var(--steel-5)} .on-dark-h{color:#fff} .on-dark-p{color:var(--steel-3)}
+.on-dark{background:var(--color-bg-deep);color:var(--color-text-inverse)} .on-dark-l{color:var(--color-text-inverse-secondary)} .on-dark-h{color:var(--color-text-inverse)} .on-dark-p{color:var(--color-text-inverse-soft)}
 .wa1{position:relative;padding:var(--layout-section-pad) 0} .wa1 .wa-stick{position:static;height:auto;min-height:0} .wa-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;display:flex;align-items:center;overflow:hidden}
 .wa-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-08);align-items:center;width:100%}
-.wall{width:100%;height:auto;max-height:calc(100vh - 150px)} .w-line,.w-base{fill:none;stroke:var(--steel-6);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1}
-.w-stud{fill:none;stroke:var(--steel-8);stroke-width:4} .w-sheath{stroke:var(--steel-9);stroke-width:16} .w-wrap{stroke:var(--steel-7);stroke-width:4;stroke-dasharray:12 9}
-.w-board{fill:var(--steel-12);stroke:var(--steel-6);stroke-width:4;stroke-linejoin:miter} .w-face{fill:var(--steel-9)} .w-shadow{stroke:var(--steel-11);stroke-width:6} .w-lab text{font:600 19px var(--font-text);letter-spacing:.08em;fill:var(--steel-6)}
+.wall{width:100%;height:auto;max-height:calc(100vh - 150px)} .w-line,.w-base{fill:none;stroke:var(--color-drawing-ink);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1}
+.w-stud{fill:none;stroke:var(--color-drawing-structure);stroke-width:4} .w-sheath{stroke:var(--color-drawing-sheathing);stroke-width:16} .w-wrap{stroke:var(--color-drawing-wrap);stroke-width:4;stroke-dasharray:12 9}
+.w-board{fill:var(--color-drawing-board);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .w-face{fill:var(--color-drawing-sheathing)} .w-shadow{stroke:var(--color-drawing-shadow);stroke-width:6} .w-lab text{font:600 19px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-ink)}
 .js [data-wa1] .w-p{opacity:0}
-.w-steps{list-style:none;padding:0;margin:var(--space-06) 0 0;display:grid;gap:6px;color:var(--steel-5);font:600 15px var(--font-text)}
-.w-steps li{padding-left:22px;position:relative} .w-steps li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--steel-10)} .w-steps li.done{color:#fff} .w-steps li.done::before{background:var(--steel-6)}
+.w-steps{list-style:none;padding:0;margin:var(--space-06) 0 0;display:grid;gap:var(--space-03);color:var(--color-text-inverse-secondary);font:600 var(--type-small-size) var(--font-text)}
+.w-steps li{padding-left:var(--space-06);position:relative} .w-steps li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--color-border-on-dark-subtle)} .w-steps li.done{color:var(--color-text-inverse)} .w-steps li.done::before{background:var(--color-drawing-ink)}
 .wall2 .w-line,.wall2 .w-base{stroke-dashoffset:0} .wall2 .w-p{transition:opacity var(--duration-moderate) var(--ease-standard)} .wall2 .w-p.off{opacity:.12} .wall2 text.w-p.off{opacity:1}
-.wa2-tl{display:grid;gap:6px;margin:var(--space-06) 0 var(--space-05)} .wa2-tl button{min-height:48px;text-align:left;padding:0 var(--space-05);background:transparent;border:1px solid var(--steel-10);color:var(--steel-3);font:600 16px var(--font-text);border-radius:var(--radius-sm);cursor:pointer}
-.wa2-tl button[aria-selected=true]{background:#fff;color:var(--color-text-primary);border-color:#fff}
+.wa2-tl{display:grid;gap:var(--space-03);margin:var(--space-06) 0 var(--space-05)} .wa2-tl button{min-height:48px;text-align:left;padding:0 var(--space-05);background:transparent;border:1px solid var(--color-border-on-dark-subtle);color:var(--color-text-inverse-soft);font:600 var(--type-body-size) var(--font-text);border-radius:var(--radius-sm);cursor:pointer}
+.wa2-tl button[aria-selected=true]{background:var(--color-surface-on-dark);color:var(--color-text-primary);border-color:var(--color-surface-on-dark)}
 @media (max-width:900px){.wa-g{grid-template-columns:minmax(0,1fr);gap:var(--space-04)} .w-lab{display:none} .wall{max-height:46vh}
- .wa1 .wa-stick{padding-top:0} .wa1 .h2{font-size:1.75rem;margin-bottom:var(--space-03)} .wa1 .lead{font-size:16px;margin-bottom:0}
- .wa1 .w-steps{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:var(--space-04);font-size:14px} .wa1 .wall{max-height:34vh} .wa1 .ill{font-size:12px}}
+ .wa1 .wa-stick{padding-top:0} .wa1 .h2{font-size:var(--type-h2-size);margin-bottom:var(--space-03)} .wa1 .lead{font-size:var(--type-body-size);margin-bottom:0}
+ .wa1 .w-steps{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:var(--space-04);font-size:var(--type-small-size)} .wa1 .wall{max-height:34vh} .wa1 .ill{font-size:var(--type-small-size)}}
 @media (min-width:601px) and (max-width:900px){.wa1 .wall{max-height:54vh} .wa1 .w-lab{display:inline}}   /* tablets: the section is scroll-linked, not pinned, so the drawing can take the room */
 """
 
@@ -81,19 +81,19 @@ def s6():
     steps = [('Light', 3), ('Light-mid', 5), ('Mid', 7), ('Mid-deep', 9), ('Deep', 11), ('Deepest', 12)]
     txt = ('<p class="lead">Light colours keep a wall cooler and show less fading; deep colours make the shadow lines stand out. '
            'Pick the lightness first; choose the actual colour with the firm.</p>')
-    ink = lambda k: 'var(--color-text-primary)' if k < 8 else '#fff'
-    f1 = ''.join(f'<div class="cf" style="background:var(--steel-{k});color:{ink(k)}"><span>{esc(n)}</span></div>' for n, k in steps)
+    ink = lambda k: 'var(--color-text-primary)' if k < 8 else 'var(--color-text-on-accent)'
+    f1 = ''.join(f'<div class="cf" data-swatch style="background:var(--steel-{k});color:{ink(k)}"><span>{esc(n)}</span></div>' for n, k in steps)
     v1 = (f'<div class="co1"><div class="co1-f" aria-hidden="true">{f1}</div><div class="wrap co-c"><div class="co-plate"><p class="label">Choosing a colour</p>'
           f'<h2 class="h2">Lightness first.<br>Colour second.</h2>{txt}</div></div></div>')
-    f2 = ''.join(f'<div class="cb" style="background:var(--steel-{k});color:{ink(k)}"><span>{esc(n)}</span></div>' for n, k in steps)
+    f2 = ''.join(f'<div class="cb" data-swatch style="background:var(--steel-{k});color:{ink(k)}"><span>{esc(n)}</span></div>' for n, k in steps)
     v2 = (f'<div class="co2"><div class="wrap co2-g"><div><p class="label">Choosing a colour</p><h2 class="h2">Every course,<br>one value.</h2>{txt}</div>'
           f'<div class="co2-w" aria-hidden="true">{f2}</div></div></div>')
     css = """
 .co1{position:relative;min-height:min(100vh,860px);display:flex;align-items:center} .co1-f{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr)}
-.cf{display:flex;align-items:flex-end;padding:var(--space-05);font:700 16px var(--font-text)} .co-c{position:relative;width:100%}
+.cf{display:flex;align-items:flex-end;padding:var(--space-05);font:700 var(--type-body-size) var(--font-text)} .co-c{position:relative;width:100%}
 .co-plate{background:var(--color-bg-page);padding:var(--space-08);max-width:620px}
 .co2{padding:var(--layout-section-pad) 0} .co2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-09);align-items:center}
-.co2-w{display:grid} .cb{height:84px;display:flex;align-items:center;padding:0 var(--space-05);font:700 16px var(--font-text);box-shadow:inset 0 -6px 0 rgba(19,22,25,.16)} .cb:nth-child(odd){margin-left:8px}
+.co2-w{display:grid} .cb{height:84px;display:flex;align-items:center;padding:0 var(--space-05);font:700 var(--type-body-size) var(--font-text);box-shadow:var(--shadow-chip-edge)} .cb:nth-child(odd){margin-left:8px}
 @media (max-width:900px){.co1-f{grid-template-columns:repeat(3,1fr)} .co-plate{padding:var(--space-06)} .co2-g{grid-template-columns:minmax(0,1fr)}}
 """
     return 'Colour as content', v1, v2, css, ''
@@ -105,10 +105,10 @@ PROFILES = [('lap', 'Lap'), ('panel', 'Panel'), ('shingle', 'Shingle'), ('batten
 
 def _house(cls):
     return (f'<svg class="{cls}" viewBox="0 0 400 360" role="img" aria-label="Preview of a house front with the chosen siding">'
-            f'<defs><pattern id="{cls}-lap" width="40" height="22" patternUnits="userSpaceOnUse"><path d="M0 21H40" stroke="rgba(19,22,25,.28)" stroke-width="2"/></pattern>'
-            f'<pattern id="{cls}-panel" width="40" height="80" patternUnits="userSpaceOnUse"><path d="M39 0V80" stroke="rgba(19,22,25,.2)" stroke-width="1.5"/></pattern>'
-            f'<pattern id="{cls}-shingle" width="20" height="18" patternUnits="userSpaceOnUse"><path d="M0 17H20M10 0V17" stroke="rgba(19,22,25,.24)" stroke-width="1.5"/></pattern>'
-            f'<pattern id="{cls}-batten" width="30" height="80" patternUnits="userSpaceOnUse"><path d="M28 0V80" stroke="rgba(19,22,25,.32)" stroke-width="5"/></pattern></defs>'
+            f'<defs><pattern id="{cls}-lap" width="40" height="22" patternUnits="userSpaceOnUse"><path d="M0 21H40" stroke="color-mix(in srgb, var(--color-text-primary) 28%, transparent)" stroke-width="2"/></pattern>'
+            f'<pattern id="{cls}-panel" width="40" height="80" patternUnits="userSpaceOnUse"><path d="M39 0V80" stroke="color-mix(in srgb, var(--color-text-primary) 20%, transparent)" stroke-width="1.5"/></pattern>'
+            f'<pattern id="{cls}-shingle" width="20" height="18" patternUnits="userSpaceOnUse"><path d="M0 17H20M10 0V17" stroke="color-mix(in srgb, var(--color-text-primary) 24%, transparent)" stroke-width="1.5"/></pattern>'
+            f'<pattern id="{cls}-batten" width="30" height="80" patternUnits="userSpaceOnUse"><path d="M28 0V80" stroke="color-mix(in srgb, var(--color-text-primary) 32%, transparent)" stroke-width="5"/></pattern></defs>'
             f'<path class="vz-wall" d="M40 150L200 40L360 150V340H40Z"/><path class="vz-tex" d="M40 150L200 40L360 150V340H40Z" fill="url(#{cls}-lap)"/>'
             f'<path class="vz-trim" d="M34 150L200 34L366 150" stroke-width="10"/><rect class="vz-trimr" x="160" y="230" width="80" height="110" stroke-width="8"/>'
             f'<rect x="166" y="236" width="68" height="104" fill="var(--steel-12)"/><rect class="vz-trimr" x="72" y="190" width="64" height="64" stroke-width="7"/>'
@@ -125,7 +125,7 @@ def s7():
     trims = [('white', 'White'), ('steel-12', 'Black-steel')]
     sp = lambda name, opts, chk: ''.join(f'<label class="vc"><input type="radio" name="{name}" value="{v}" {"checked" if v == chk else ""}> {t}</label>' for v, t in opts)
     steps = [('Profile', sp('vz2p', PROFILES, 'lap')), ('Colour', sp('vz2c', vals, '9')), ('Trim', sp('vz2t', trims, 'white')),
-             ('Preview', '<p class="small" style="margin:0 0 12px">This is your choice so far. It goes with your estimate request, so the person who calls you sees it.</p>'
+             ('Preview', '<p class="small" style="margin:0 0 var(--space-04)">This is your choice so far. It goes with your estimate request, so the person who calls you sees it.</p>'
                          '<a class="btn btn-primary" href="#/about/booking">Book an estimate</a>')]
     st = ''.join(f'<fieldset class="vs"><legend><b>{i + 1}</b> {t}</legend><div class="vs-o">{b}</div></fieldset>' for i, (t, b) in enumerate(steps))
     v2 = (f'<div class="vz2 sec-pad" data-vz="vz2"><div class="wrap vz-g"><div><p class="label">Visualiser</p><h2 class="h2">Build your wall in four steps.</h2>{st}</div>'
@@ -133,14 +133,14 @@ def s7():
     css = """
 .vz-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-09);align-items:center}
 .vz-pv{background:var(--color-bg-subtle);display:grid;place-items:center;padding:var(--space-07)} .vz-pv svg{width:100%;max-width:440px;height:auto}
-.vz-wall{fill:var(--steel-9);transition:fill var(--duration-normal) var(--ease-standard)} .vz-trim,.vz-trimr{stroke:#fff;fill:none;transition:stroke var(--duration-normal) var(--ease-standard)}
+.vz-wall{fill:var(--color-drawing-sheathing);transition:fill var(--duration-normal) var(--ease-standard)} .vz-trim,.vz-trimr{stroke:var(--color-bg-page);fill:none;transition:stroke var(--duration-normal) var(--ease-standard)}
 .vts{border:0;padding:0;margin:0 0 var(--space-06);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-03)}
 .vt{position:relative;cursor:pointer} .vt input{position:absolute;opacity:0;inset:0} .vt-b{display:flex;align-items:center;gap:var(--space-03);min-height:64px;padding:0 var(--space-05);border:1px solid var(--color-border-control);border-radius:var(--radius-sm)}
-.vt input:checked+.vt-b{background:var(--color-bg-accent-subtle);box-shadow:inset 0 0 0 2px var(--steel-11)} .vt input:focus-visible+.vt-b{outline:3px solid var(--color-focus-ring);outline-offset:3px} .vt-b svg{color:var(--color-accent-solid)}
-.vs{border:0;border-top:1px solid var(--color-border-default);padding:var(--space-04) 0;margin:0} .vs legend{font:700 16px var(--font-text);padding:var(--space-03) 0}
-.vs legend b{display:inline-grid;place-items:center;width:28px;height:28px;background:var(--color-accent-solid);color:#fff;border-radius:var(--radius-sm);margin-right:8px;font-size:14px}
+.vt input:checked+.vt-b{background:var(--color-bg-accent-subtle);box-shadow:inset 0 0 0 2px var(--color-selected-ring)} .vt input:focus-visible+.vt-b{outline:3px solid var(--color-focus-ring);outline-offset:3px} .vt-b svg{color:var(--color-accent-solid)}
+.vs{border:0;border-top:1px solid var(--color-border-default);padding:var(--space-04) 0;margin:0} .vs legend{font:700 var(--type-body-size) var(--font-text);padding:var(--space-03) 0}
+.vs legend b{display:inline-grid;place-items:center;width:28px;height:28px;background:var(--color-accent-solid);color:var(--color-text-inverse);border-radius:var(--radius-sm);margin-right:8px;font-size:var(--type-small-size)}
 .vs-o{display:flex;flex-wrap:wrap;gap:var(--space-03)} .vc{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 var(--space-04);border:1px solid var(--color-border-control);border-radius:var(--radius-sm);cursor:pointer}
-.vc:has(input:checked){background:var(--color-bg-accent-subtle);box-shadow:inset 0 0 0 2px var(--steel-11)} .vc input{accent-color:var(--steel-9);margin:0}
+.vc:has(input:checked){background:var(--color-bg-accent-subtle);box-shadow:inset 0 0 0 2px var(--color-selected-ring)} .vc input{accent-color:var(--color-accent-solid);margin:0}
 @media (max-width:900px){.vz-g{grid-template-columns:minmax(0,1fr)}}
 """
     js = """
@@ -148,7 +148,7 @@ def s7():
 document.querySelectorAll('[data-vz]').forEach(root=>{const id=root.dataset.vz,wall=root.querySelector('.vz-wall'),tex=root.querySelector('.vz-tex'),trims=root.querySelectorAll('.vz-trim,.vz-trimr');
   const upd=()=>{const pr=root.querySelector(`input[name="${id}p"]:checked`);if(pr)tex.setAttribute('fill',`url(#${id}-${pr.value})`);
     const c=root.querySelector(`input[name="${id}c"]:checked`);if(c)wall.style.fill=css('--steel-'+c.value);const t=root.querySelector(`input[name="${id}t"]:checked`);
-    if(t)trims.forEach(e=>e.style.stroke=t.value==='white'?'#fff':css('--steel-12'));};
+    if(t)trims.forEach(e=>e.style.stroke=t.value==='white'?css('--color-bg-page'):css('--color-bg-deep'));};
   root.addEventListener('change',upd);upd();});})();
 """
     return 'Visualiser', v1, v2, css, js
@@ -169,7 +169,7 @@ def s8():
 .mp1-r{justify-content:space-between;margin-top:var(--space-05)}
 .mp2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:var(--space-09);align-items:start} .mp2-m{background:var(--color-bg-subtle);padding:var(--space-04);margin-bottom:var(--space-05)} .mp2-m .nd{max-height:280px}
 .mp2-p{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-04)} .mp2-f{margin:0;position:relative} .mp2-f:first-child{grid-column:1/-1}
-.mp2-f img{width:100%;height:100%;aspect-ratio:3/2;object-fit:cover;display:block} .mp2-f figcaption{position:absolute;left:0;bottom:0;background:var(--color-bg-inverse);color:#fff;font-size:13px;padding:6px 10px}
+.mp2-f img{width:100%;height:100%;aspect-ratio:3/2;object-fit:cover;display:block} .mp2-f figcaption{position:absolute;left:0;bottom:0;background:var(--color-bg-inverse);color:var(--color-text-inverse);font-size:var(--type-small-size);padding:var(--space-03) var(--space-04)}
 @media (max-width:900px){.mp2-g{grid-template-columns:minmax(0,1fr)}}
 """
     return 'Map preview', v1, v2, css, ''

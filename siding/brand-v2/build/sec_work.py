@@ -29,7 +29,7 @@ def k1():
     v2 = (f'<div class="wk2 sec-pad"><div class="wrap"><p class="label">Our work</p><h1 class="wk2-h">312 on the map with photos<br><span>+ 574 more counted</span></h1>{cline()}'
           f'<p class="lead">Each dot below is a job with photos.</p></div></div>')
     css = """
-.wk-n{font-size:clamp(6rem,4rem + 10vw,13rem);line-height:.9;letter-spacing:-.03em;margin:0} .wk-s{font:700 var(--type-h3-size)/1.3 var(--font-text);margin:var(--space-04) 0 var(--space-05)}
+.wk-n{font-size:var(--type-numeral-xl);line-height:.9;letter-spacing:-.03em;margin:0} .wk-s{font:700 var(--type-h3-size)/1.3 var(--font-text);margin:var(--space-04) 0 var(--space-05)}
 .wk2-h{font:800 var(--type-display-size)/1.02 var(--font-display);letter-spacing:-.02em;margin:0 0 var(--space-06);max-width:16ch} .wk2-h span{color:var(--color-text-accent)}
 """
     return 'The record', v1, v2, css, ''
@@ -41,11 +41,11 @@ def k2():
     v2 = (f'<div class="mpx2 on-dark"><div class="wrap mpx2-h"><p class="label on-dark-l">The map</p><h2 class="h2 on-dark-h">Every job with photos, where it is.</h2></div>{_map("mp-full", True)}</div>')
     css = """
 .mpw{position:relative;background:var(--color-bg-subtle);height:min(78vh,760px);overflow:hidden;cursor:grab;touch-action:none} .mpw:active{cursor:grabbing}
-.mp{width:100%;height:100%;display:block} .mp-g{transform-origin:0 0} .mp-d{fill:var(--steel-8);transition:r var(--duration-fast) var(--ease-standard)} .mp-d:hover{fill:var(--steel-11)}
+.mp{width:100%;height:100%;display:block} .mp-g{transform-origin:0 0} .mp-d{fill:var(--color-drawing-structure);transition:r var(--duration-fast) var(--ease-standard)} .mp-d:hover{fill:var(--color-drawing-shadow)}
 .mp-hq{fill:none;stroke:var(--color-accent-solid);stroke-width:3} .mp-hqt{font:700 15px var(--font-text);fill:var(--color-text-primary)}
-.mp-ctl{position:absolute;right:var(--space-04);top:var(--space-04);display:grid;gap:6px} .mp-ctl button{min-width:48px;height:48px;padding:0 var(--space-03);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);cursor:pointer;font:600 14px var(--font-text);display:grid;place-items:center;color:var(--color-text-primary)}
-.mp-tip{position:absolute;left:var(--space-04);bottom:var(--space-04);margin:0;background:var(--color-bg-inverse);color:#fff;font:600 14px var(--font-text);padding:6px 10px} .mp-tip:empty{display:none}
-.mp-dark{background:var(--steel-12)} .mp-dark .mp-d{fill:var(--steel-6)} .mp-dark .mp-d:hover{fill:#fff} .mp-dark .mp-hq{stroke:#fff} .mp-dark .mp-hqt{fill:#fff}
+.mp-ctl{position:absolute;right:var(--space-04);top:var(--space-04);display:grid;gap:var(--space-03)} .mp-ctl button{min-width:48px;height:48px;padding:0 var(--space-03);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);cursor:pointer;font:600 var(--type-small-size) var(--font-text);display:grid;place-items:center;color:var(--color-text-primary)}
+.mp-tip{position:absolute;left:var(--space-04);bottom:var(--space-04);margin:0;background:var(--color-bg-inverse);color:var(--color-text-inverse);font:600 var(--type-small-size) var(--font-text);padding:var(--space-03) var(--space-04)} .mp-tip:empty{display:none}
+.mp-dark{background:var(--color-bg-deep)} .mp-dark .mp-d{fill:var(--color-drawing-ink)} .mp-dark .mp-d:hover{fill:var(--color-text-inverse)} .mp-dark .mp-hq{stroke:var(--color-text-inverse)} .mp-dark .mp-hqt{fill:var(--color-text-inverse)}
 .mpx2{padding-top:var(--layout-section-pad)} .mpx2-h{margin-bottom:var(--space-06)} .mp-full{height:min(86vh,860px)}
 """
     js = """
@@ -79,13 +79,13 @@ def k3():
     v2 = f'<div class="ar2 sec-pad" data-arch="ar2"><div class="wrap"><p class="label">Archive</p><h2 class="h2">The jobs, laid out.</h2>{filt("ar2")}<div class="gcs">{grid}</div></div></div>'
     css = """
 .af{margin:0 0 var(--space-06)} .lc-field{position:relative;height:min(110vw,1180px);margin:0 var(--layout-gutter);background:var(--color-bg-subtle);
- background-image:repeating-radial-gradient(circle at 30% 40%,transparent 0 38px,var(--neutral-4) 38px 39px)}
-.lc{position:absolute;margin:0;transition:opacity var(--duration-normal) var(--ease-standard)} .lc img{width:100%;height:auto;display:block;aspect-ratio:3/2;object-fit:cover;box-shadow:0 8px 24px rgba(19,22,25,.16)}
-.lc figcaption{font-size:13px;color:var(--color-text-secondary);margin-top:4px} .lc.dim{opacity:.12}
+ background-image:repeating-radial-gradient(circle at 30% 40%,transparent 0 38px,var(--color-border-subtle) 38px 39px)}
+.lc{position:absolute;margin:0;transition:opacity var(--duration-normal) var(--ease-standard)} .lc img{width:100%;height:auto;display:block;aspect-ratio:3/2;object-fit:cover;box-shadow:var(--shadow-photo)}
+.lc figcaption{font-size:var(--type-small-size);color:var(--color-text-secondary);margin-top:4px} .lc.dim{opacity:.12}
 .gcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-05)} .gc{margin:0} .gc.dim{display:none} .gc-i{position:relative}
 .gc-i img{width:100%;height:auto;display:block;aspect-ratio:3/2;object-fit:cover} .gc-b{position:absolute;inset:0;opacity:0;transition:opacity var(--duration-normal) var(--ease-standard)} .gc.bf .gc-b{opacity:1}
 .gc figcaption{display:flex;gap:var(--space-03);align-items:center;flex-wrap:wrap;margin-top:var(--space-03)} .gc figcaption span{color:var(--color-text-secondary)}
-.gc-t{margin-left:auto;min-height:44px;padding:0 var(--space-04);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);font:600 14px var(--font-text);cursor:pointer}
+.gc-t{margin-left:auto;min-height:44px;padding:0 var(--space-04);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);font:600 var(--type-small-size) var(--font-text);cursor:pointer}
 @media (max-width:900px){.gcs{grid-template-columns:minmax(0,1fr)} .lc figcaption{display:none}}
 """
     js = """
@@ -102,7 +102,7 @@ def k4():
           f'<div class="wkp-s">{_seam("", 0)}</div><fieldset class="chips"><legend class="label">Pick a job · six of 177 genuine pairs</legend>{chips}</fieldset></div></div>')
     L = ''.join(f'<div class="hs-i">{IM.img(p["id"] + "-b", "Before: " + p["place"])}</div>' for p in PAIRS)
     R = ''.join(f'<div class="hs-i">{IM.img(p["id"] + "-a", "After: " + p["place"])}</div>' for p in PAIRS)
-    pl = ''.join(f'<div class="pl" style="background:var(--steel-{9 + i % 3})">{PL_MARK()}<p class="pl-k">{esc(p["place"])}</p><p class="pl-s">Before, then after · {TRADE[p["id"]]}</p><p class="pl-n">Pair {i + 1} of 6</p></div>' for i, p in enumerate(PAIRS))
+    pl = ''.join(f'<div class="pl" style="background:{('var(--color-accent-solid)','var(--color-accent-solid-hover)','var(--color-accent-solid-active)')[i % 3]}">{PL_MARK()}<p class="pl-k">{esc(p["place"])}</p><p class="pl-s">Before, then after · {TRADE[p["id"]]}</p><p class="pl-n">Pair {i + 1} of 6</p></div>' for i, p in enumerate(PAIRS))
     v2 = (f'<div class="wkp2" data-wkp2><div class="h1-stick"><div class="hs"><div class="hs-col hs-l">{L}</div><div class="hs-col hs-r">{R}</div><div class="pls" aria-live="polite">{pl}</div></div>'
           f'<div class="h1-ctl"><button class="ctl" type="button" data-d="-1" aria-label="Previous pair">{icon("action-arrow-right", 20)}</button><span class="ctl-n" aria-hidden="true"><b>1</b> / 6</span>'
           f'<button class="ctl" type="button" data-d="1" aria-label="Next pair">{icon("action-arrow-right", 20)}</button></div></div></div>')
@@ -132,7 +132,7 @@ def k5():
     css = """
 .stars{position:relative;display:inline-block;color:var(--color-accent-solid)} .st-bg{display:flex;color:var(--color-border-default)} .st-fg{position:absolute;inset:0;overflow:hidden;display:flex;white-space:nowrap}
 .rv-n{font:800 var(--type-h2-size)/1.1 var(--font-display);margin:var(--space-04) 0} .rv2-g{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--space-08);align-items:center}
-.rv2-b{font:800 clamp(6rem,4rem + 8vw,11rem)/.9 var(--font-display);margin:0;color:var(--color-text-accent)} @media (max-width:700px){.rv2-g{grid-template-columns:minmax(0,1fr)}}
+.rv2-b{font:800 var(--type-numeral-xl)/.9 var(--font-display);margin:0;color:var(--color-text-accent)} @media (max-width:700px){.rv2-g{grid-template-columns:minmax(0,1fr)}}
 """
     return 'Reviews', v1, v2, css, ''
 

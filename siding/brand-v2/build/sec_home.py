@@ -8,14 +8,14 @@ HERO_JOBS = ['robroy', 'siding0', 'siding2']
 # text >= 5.96:1 on all three) and the monogram is the C1 mark set tone-on-tone
 from shell import marks as _m
 def PL_MARK():
-    return f'<svg class="pl-m" viewBox="0 0 64 64" aria-hidden="true" focusable="false">{_m.c1("rgba(255,255,255,.16)", "transparent")}</svg>'
+    return f'<svg class="pl-m" viewBox="0 0 64 64" aria-hidden="true" focusable="false">{_m.c1("color-mix(in srgb, var(--color-text-inverse) 16%, transparent)", "transparent")}</svg>'
 
 
 # ----------------------------------------------------------------------------------------------------------- 1 hero
 def s1():
     L = ''.join(f'<div class="hs-i">{IM.img(j + "-b", f"Before: {PLACE[j]}, the wall before the work", eager=(i == 0))}</div>' for i, j in enumerate(HERO_JOBS))
     R = ''.join(f'<div class="hs-i">{IM.img(j + "-a", f"After: {PLACE[j]}, the same wall after the work", eager=(i == 0))}</div>' for i, j in enumerate(HERO_JOBS))
-    plates = ''.join(f'<div class="pl" style="background:var(--steel-{9 + i % 3})">{PL_MARK()}<p class="pl-k">{esc(PLACE[j])}</p><p class="pl-s">Before, then after</p>{cline("#fff", "")}<p class="pl-n">Job {i + 1} of {len(HERO_JOBS)}</p></div>' for i, j in enumerate(HERO_JOBS))
+    plates = ''.join(f'<div class="pl" style="background:{('var(--color-accent-solid)','var(--color-accent-solid-hover)','var(--color-accent-solid-active)')[i % 3]}">{PL_MARK()}<p class="pl-k">{esc(PLACE[j])}</p><p class="pl-s">Before, then after</p>{cline("var(--color-text-inverse)", "")}<p class="pl-n">Job {i + 1} of {len(HERO_JOBS)}</p></div>' for i, j in enumerate(HERO_JOBS))
     copy = lambda h: (f'<div class="h1-copy"><p class="label">Siding · windows · roofing · painting in Austin</p><h1 class="h1">{h}</h1>'
                       f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a>'
                       f'<a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div>')
@@ -24,7 +24,7 @@ def s1():
           f'<div class="h1-ctl"><button class="ctl" type="button" data-d="-1" aria-label="Previous job">{icon("action-arrow-right", 20)}</button>'
           f'<span class="ctl-n" aria-hidden="true"><b>1</b> / {len(HERO_JOBS)}</span><button class="ctl" type="button" data-d="1" aria-label="Next job">{icon("action-arrow-right", 20)}</button></div></div></div>')
     # V2: the finished wall beside the same wall drawn in section; the plate steps through the process, the drawing lights its layer
-    steps_pl = ''.join(f'<div class="pl"><p class="pl-k">Step {i + 1:02d} · {esc(s)}</p><p class="pl-s">Rob Roy, Austin</p>{cline("#fff", "")}<p class="pl-n">{i + 1} of 6</p></div>' for i, s in enumerate(STEPS))
+    steps_pl = ''.join(f'<div class="pl"><p class="pl-k">Step {i + 1:02d} · {esc(s)}</p><p class="pl-s">Rob Roy, Austin</p>{cline("var(--color-text-inverse)", "")}<p class="pl-n">{i + 1} of 6</p></div>' for i, s in enumerate(STEPS))
     boards = ''.join(f'<path class="hd-b" d="M300 {120 + i * 86}L268 {214 + i * 86}H300Z"/>' for i in range(6))
     draw = (f'<svg class="hd" viewBox="0 40 520 680" role="img" aria-label="The same wall drawn in section: stud, sheathing, wrap, six lapped boards, trim">'
             f'<g class="hd-s" data-s="0"><path d="M240 80V700M228 80H252M228 700H252" class="hd-dim"/><path d="M190 140H236" class="hd-ld"/><text x="180" y="146" class="hd-t" text-anchor="end">MEASURE</text></g>'
@@ -54,24 +54,24 @@ def s1():
 .hs-i{position:absolute;inset:0} .hs-i img{height:100%;width:200%;max-width:none;object-fit:cover;display:block} .hs-r .hs-i img{margin-left:-100%}
 .pls{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:min(420px,84vw);height:152px;z-index:3}
 .pl{position:absolute;inset:0;background:var(--color-bg-accent-field);color:var(--color-text-on-accent);padding:var(--space-05) var(--space-06)} .pl p{margin:0}
-.pl-k{font:800 24px/1.15 var(--font-display)} .pl-m{position:absolute;right:16px;top:14px;width:64px;height:64px} .pl-s{font:600 15px var(--font-text);margin:6px 0 10px!important} .pl .cline{margin:0;max-width:none} .pl-n{font:600 12px var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--steel-2);margin-top:8px!important}
+.pl-k{font:800 var(--type-h3-size)/1.15 var(--font-display)} .pl-m{position:absolute;right:16px;top:14px;width:64px;height:64px} .pl-s{font:600 var(--type-small-size) var(--font-text);margin:var(--space-03) 0 var(--space-04)!important} .pl .cline{margin:0;max-width:none} .pl-n{font:600 var(--type-small-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-on-accent-secondary);margin-top:8px!important}
 .h1-copy{position:absolute;left:0;bottom:0;z-index:4;background:var(--color-bg-page);width:min(700px,100%);padding:var(--space-07) var(--space-07) var(--space-07) max(var(--layout-gutter),calc((100vw - var(--layout-max-width))/2 + var(--layout-gutter)))}
 .h1-copy .h1{margin-bottom:var(--space-06)}
-.h1-ctl{position:absolute;right:var(--layout-gutter);bottom:var(--space-06);z-index:4;display:flex;align-items:center;gap:var(--space-03);background:var(--color-bg-page);padding:6px}
+.h1-ctl{position:absolute;right:var(--layout-gutter);bottom:var(--space-06);z-index:4;display:flex;align-items:center;gap:var(--space-03);background:var(--color-bg-page);padding:var(--space-03)}
 .ctl{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);cursor:pointer;color:var(--color-text-primary)} .ctl[data-d="-1"] svg{transform:scaleX(-1)}
-.ctl-n{font:600 15px var(--font-text);min-width:48px;text-align:center}
+.ctl-n{font:600 var(--type-small-size) var(--font-text);min-width:48px;text-align:center}
 .h2-l{position:absolute;left:0;top:0;bottom:0;width:50%} .h2-l img{width:100%;height:100%;object-fit:cover;display:block}
 .h2-r{position:absolute;right:0;top:0;bottom:0;width:50%;background:var(--color-bg-deep);display:grid;place-items:center} .hd{height:88%;width:auto;max-width:92%}
-.pls2{left:25%;top:28%} .hd-ld{fill:none;stroke:var(--steel-7);stroke-width:1.5}
-.hd-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--steel-6)} .hd-dim{stroke:var(--steel-6);stroke-width:2;fill:none} .hd-old{stroke:var(--steel-8);stroke-width:14;stroke-dasharray:4 10}
-.hd-wrap{stroke:var(--steel-7);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--steel-8);stroke-width:4} .hd-sh{stroke:var(--steel-9);stroke-width:14}
-.hd-b{fill:var(--steel-12);stroke:var(--steel-6);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--steel-6)} .hd-ok{fill:none;stroke:#fff;stroke-width:6}
+.pls2{left:25%;top:28%} .hd-ld{fill:none;stroke:var(--color-drawing-wrap);stroke-width:1.5}
+.hd-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-ink)} .hd-dim{stroke:var(--color-drawing-ink);stroke-width:2;fill:none} .hd-old{stroke:var(--color-drawing-structure);stroke-width:14;stroke-dasharray:4 10}
+.hd-wrap{stroke:var(--color-drawing-wrap);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--color-drawing-structure);stroke-width:4} .hd-sh{stroke:var(--color-drawing-sheathing);stroke-width:14}
+.hd-b{fill:var(--color-drawing-board);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--color-drawing-ink)} .hd-ok{fill:none;stroke:var(--color-text-inverse);stroke-width:6}
 .hd-s{opacity:.18;transition:opacity var(--duration-normal) var(--ease-standard)} .hd-s.done{opacity:.55} .hd-s.cur{opacity:1}
-.hd-lab .hd-t{fill:var(--steel-5)} .hd-lab .cur .hd-t{fill:#fff;font-weight:700} .hd-lab .cur .hd-ld{stroke:#fff}
+.hd-lab .hd-t{fill:var(--color-drawing-label)} .hd-lab .cur .hd-t{fill:var(--color-text-inverse);font-weight:700} .hd-lab .cur .hd-ld{stroke:var(--color-text-inverse)}
 @media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto;left:var(--layout-gutter);right:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)}
- .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:200px;width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:11px}
- .hero2 .h1-copy{height:auto;padding-top:var(--space-04)} .hero2 .h1-copy .h1{font-size:1.75rem;margin-bottom:var(--space-04)} .hero2 .h1-copy .btn-secondary{display:none}
- .pls2{left:50%;top:15%;height:104px} .pls2 .pl{padding:var(--space-03) var(--space-05)} .pls2 .pl-k{font-size:18px} .pls2 .pl-s{margin:2px 0 6px!important} .pls2 .pl-n{display:none}}
+ .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:calc(var(--h2-copy-h, 212px) + var(--space-02));width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:var(--type-small-size)}
+ .hero2 .h1-copy{height:auto;padding-top:var(--space-04)} .hero2 .h1-copy .h1{font-size:var(--type-h2-size);margin-bottom:var(--space-04)} .hero2 .h1-copy .btn-secondary{display:none}
+ .pls2{left:50%;top:15%;height:104px} .pls2 .pl{padding:var(--space-03) var(--space-05)} .pls2 .pl-k{font-size:var(--type-body-size)} .pls2 .pl-s{margin:var(--space-01) 0 var(--space-02)!important} .pls2 .pl-n{display:none}}
 '''
     js = r'''
 (function(){const A=window.APS,cl=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -91,7 +91,8 @@ function driver(root,n,paint,onIdx){let target=0,shown=0,raf=0,drag=false,y0=0,s
   return {set:v=>{target=shown=cl(v,0,n-1);paint(shown);onIdx&&onIdx(shown);}};}
 const h1=document.querySelector('[data-hero1]');if(h1){const L=[...h1.querySelectorAll('.hs-l .hs-i')],R=[...h1.querySelectorAll('.hs-r .hs-i')],P=[...h1.querySelectorAll('.pl')];
   const num=h1.querySelector('.ctl-n b');window.__h1=driver(h1,L.length,wiper(h1,[L,R,P]),s=>{num.textContent=Math.round(s)+1;});}
-const h2=document.querySelector('[data-hero2]');if(h2){const P=[...h2.querySelectorAll('.pl')],S=[...h2.querySelectorAll('.hd-s')];
+const h2=document.querySelector('[data-hero2]');if(h2){const cp=h2.querySelector('.h1-copy');if(cp&&'ResizeObserver' in window)new ResizeObserver(()=>h2.style.setProperty('--h2-copy-h',cp.offsetHeight+'px')).observe(cp);   /* the drawing panel ends just above the copy block, whatever its measured height */
+  const P=[...h2.querySelectorAll('.pl')],S=[...h2.querySelectorAll('.hd-s')];
   window.__h2=driver(h2,P.length,wiper(h2,[P]),s=>{const k=Math.round(s);S.forEach(g=>{const i=+g.dataset.s;g.classList.toggle('cur',i===k);g.classList.toggle('done',i<k);});h2.querySelectorAll('.hd-lab [data-s]').forEach(g=>g.classList.toggle('cur',+g.dataset.s===k));});}
 })();
 '''
@@ -113,11 +114,11 @@ def s2():
     css = r'''
 .pb1{background:var(--color-bg-subtle);border-bottom:1px solid var(--color-border-subtle)} .pb1-in{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-04) var(--space-07);min-height:88px;padding-top:var(--space-04);padding-bottom:var(--space-04)}
 .pb1 p{margin:0} .pb1-r{display:inline-flex;align-items:center;gap:8px} .pb1-r svg{color:var(--color-accent-solid)}
-.pb1-c{display:flex;flex-wrap:wrap;gap:var(--space-02) var(--space-05);color:var(--color-text-secondary);font-size:15px} .pb1-c span+span::before{content:"·";margin-right:var(--space-05);color:var(--color-border-control)}
-.pb1-a{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-weight:700;min-height:44px}
+.pb1-c{display:flex;flex-wrap:wrap;gap:var(--space-02) var(--space-05);color:var(--color-text-secondary);font-size:var(--type-small-size)} .pb1-c span+span::before{content:"·";margin-right:var(--space-05);color:var(--color-border-control)}
+.pb1-a{margin-left:auto;display:inline-flex;align-items:center;gap:var(--space-03);font-weight:700;min-height:44px}
 .pb2-g{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--color-border-default)}
 .pb2-c{padding:var(--space-06) var(--space-05) var(--space-05) 0;border-right:1px solid var(--color-border-subtle)} .pb2-c+.pb2-c{padding-left:var(--space-05)} .pb2-c:last-child{border-right:0}
-.pb2-c svg{color:var(--color-accent-solid)} .pb2-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary);margin:var(--space-04) 0 var(--space-02)} .pb2-v{font:700 18px/1.35 var(--font-text);margin:0}
+.pb2-c svg{color:var(--color-accent-solid)} .pb2-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary);margin:var(--space-04) 0 var(--space-02)} .pb2-v{font:700 var(--type-body-size)/1.35 var(--font-text);margin:0}
 @media (max-width:900px){.pb2-g{grid-template-columns:repeat(2,minmax(0,1fr))} .pb2-c{border-right:0;border-bottom:1px solid var(--color-border-subtle);padding-left:0!important} .pb1-a{margin-left:0}}
 '''
     return 'Proof band', line, v2, css, ''
@@ -147,10 +148,10 @@ def s3():
     css = r'''
 .rec1{height:220vh;position:relative} .rec-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;display:flex;align-items:center}
 .rec-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-08);align-items:center;width:100%}
-.rec-n{font:800 clamp(6rem,4rem + 10vw,13rem)/.9 var(--font-display);letter-spacing:-.03em;margin:0} .rec-clip{display:inline-block}
+.rec-n{font:800 var(--type-numeral-xl)/.9 var(--font-display);letter-spacing:-.03em;margin:0} .rec-clip{display:inline-block}
 .js [data-rec1] .rec-clip{clip-path:inset(100% 0 0 0)}
 .rec-s{font:700 var(--type-h3-size)/1.3 var(--font-text);margin:var(--space-04) 0 var(--space-04);max-width:22ch}
-.nd{width:100%;height:auto;max-height:calc(100vh - 160px)} .nd-d{fill:var(--steel-7);opacity:.12;transition:opacity var(--duration-fast) linear} .nd-d.on{opacity:1}
+.nd{width:100%;height:auto;max-height:calc(100vh - 160px)} .nd-d{fill:var(--color-drawing-wrap);opacity:.12;transition:opacity var(--duration-fast) linear} .nd-d.on{opacity:1}
 .nd-hq{fill:none;stroke:var(--color-accent-solid);stroke-width:3}
 .rec-m2{background:var(--color-bg-subtle);padding:var(--space-05)} .rec-lines span{display:inline-block}
 .js .rec2 .rec-lines span{opacity:0;transform:translateY(8px);transition:opacity var(--duration-moderate) var(--ease-enter),transform var(--duration-moderate) var(--ease-enter)}
@@ -189,7 +190,7 @@ def s4():
 .svc-go{position:absolute;right:var(--space-05);bottom:var(--space-05);transition:transform var(--duration-fast) var(--ease-standard)} .svc:hover .svc-go{transform:translateX(4px)}
 .sv2-l{border-top:1px solid var(--color-border-default)}
 .sv2-r{position:relative;display:grid;grid-template-columns:56px minmax(0,1.3fr) minmax(0,1fr) 28px;gap:var(--space-05);align-items:center;padding:var(--space-07) 0;border-bottom:1px solid var(--color-border-default);text-decoration:none;color:var(--color-text-primary)}
-.sv2-n{font:600 15px var(--font-text);color:var(--color-text-secondary)} .sv2-t{font:800 var(--type-h2-size)/1.05 var(--font-display)} .sv2-d{color:var(--color-text-secondary)}
+.sv2-n{font:600 var(--type-small-size) var(--font-text);color:var(--color-text-secondary)} .sv2-t{font:800 var(--type-h2-size)/1.05 var(--font-display)} .sv2-d{color:var(--color-text-secondary)}
 .sv2-p{position:absolute;right:56px;top:50%;width:300px;aspect-ratio:3/2;transform:translateY(-50%);clip-path:inset(0 0 100% 0);transition:clip-path var(--duration-moderate) var(--ease-draw);pointer-events:none;z-index:2}
 .sv2-p img,.sv2-art{width:100%;height:100%;object-fit:cover;display:block}
 .sv2-r:hover .sv2-p,.sv2-r:focus-visible .sv2-p{clip-path:inset(0 0 0 0)} .sv2-d{transition:opacity var(--duration-fast) var(--ease-standard)} .sv2-r:hover .sv2-d,.sv2-r:focus-visible .sv2-d{opacity:0} .sv2-r:hover .sv2-t{color:var(--color-text-accent)}

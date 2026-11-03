@@ -61,7 +61,7 @@ def w1():
     v2 = (f'<div class="wn2h on-dark sec-pad"><div class="wrap sp2-g"><div><p class="label on-dark-l">Windows &amp; doors</p><h1 class="h1 on-dark-h">Openings, fitted square.</h1>'
           f'<p class="lead on-dark-p">Window, exterior-door and garage-door replacement. {esc(ANDERSEN)}.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a></div></div>{_window_section("wn-static")}</div></div>')
-    css = '''.wn{width:100%;height:auto} .wn-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--steel-5)} .wn2h .btn-primary{background:#fff;color:var(--color-text-primary)}
+    css = '''.wn{width:100%;height:auto} .wn-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-label)} .wn2h .btn-primary{background:var(--color-surface-on-dark);color:var(--color-text-primary)}
 .wh1{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);min-height:calc(100vh - 72px)} .wh1-view{position:relative;overflow:hidden;background:var(--color-bg-sunken)}
 .wh1-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .wh1-sash{position:absolute;inset:0;border:clamp(18px,2.4vw,34px) solid var(--color-bg-page);box-shadow:inset 0 0 0 3px var(--color-accent-solid);
@@ -80,9 +80,9 @@ def w2():
     v2 = f'<div class="wnx sec-pad"><div class="wrap wa-g">{_window_section("wn-static")}<div><p class="label">A window, piece by piece</p><h2 class="h2">What you are buying.</h2><dl class="wnx-l">{dl}</dl></div></div></div>'
     css = """
 .wnp{height:260vh;position:relative} .js [data-wnp] .wn-p{opacity:0;transition:opacity var(--duration-moderate) var(--ease-standard)} .js [data-wnp] .wn-p.on{opacity:1}
-.wn-pin .wn-t,.wn-static .wn-t{fill:var(--color-text-secondary)} .wnp .wn-pin .wn-t{fill:var(--color-text-secondary)} .wn2h .wn-t{fill:var(--steel-5)}
-.wnx-l{display:grid;gap:var(--space-04);margin:0} .wnx-l dt{font:700 20px var(--font-display);display:flex;gap:12px;align-items:center} .wnx-l dt span{display:inline-grid;place-items:center;width:30px;height:30px;background:var(--color-accent-solid);color:#fff;font:700 14px var(--font-text);border-radius:var(--radius-sm)}
-.wnx-l dd{margin:4px 0 0 42px;color:var(--color-text-secondary)}
+.wn-pin .wn-t,.wn-static .wn-t{fill:var(--color-text-secondary)} .wnp .wn-pin .wn-t{fill:var(--color-text-secondary)} .wn2h .wn-t{fill:var(--color-drawing-label)}
+.wnx-l{display:grid;gap:var(--space-04);margin:0} .wnx-l dt{font:700 var(--type-lead-size) var(--font-display);display:flex;gap:12px;align-items:center} .wnx-l dt span{display:inline-grid;place-items:center;width:30px;height:30px;background:var(--color-accent-solid);color:var(--color-text-inverse);font:700 var(--type-small-size) var(--font-text);border-radius:var(--radius-sm)}
+.wnx-l dd{margin:var(--space-02) 0 0 var(--space-08);color:var(--color-text-secondary)}
 """
     js = """
 (function(){const w=document.querySelector('[data-wnp]');if(!w)return;const P=[...w.querySelectorAll('.wn-p')];const set=p=>P.forEach(e=>e.classList.toggle('on',p*5.4+1>(+e.dataset.k)));
@@ -114,7 +114,7 @@ def w3():
           f'<div class="spp2-t" role="tablist" aria-label="Opening types">{tabs}</div><p class="lead wt2-d" role="tabpanel">{esc(kinds[0][1])}</p></div><div class="el-bw">{big}</div></div></div>')
     css = """
 .els{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--space-05)} .el-c{margin:0} .el{width:100%;height:auto;display:block;background:var(--color-bg-subtle);padding:var(--space-04)}
-.el-c figcaption{display:grid;gap:4px;margin-top:var(--space-03)} .el-c b{font:700 17px var(--font-display)} .el-c span{color:var(--color-text-secondary);font-size:15px}
+.el-c figcaption{display:grid;gap:4px;margin-top:var(--space-03)} .el-c b{font:700 var(--type-body-size) var(--font-display)} .el-c span{color:var(--color-text-secondary);font-size:var(--type-small-size)}
 .el-bw{max-width:420px} @media (max-width:1000px){.els{grid-template-columns:repeat(3,minmax(0,1fr))}} @media (max-width:600px){.els{grid-template-columns:repeat(2,minmax(0,1fr))}}
 """
     js = """

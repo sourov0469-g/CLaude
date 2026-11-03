@@ -54,6 +54,30 @@
   --color-focus-ring-on-dark: var(--white);
   --color-mark: var(--steel-9);
   --color-error-ink: var(--neutral-13);
+  --color-surface-on-dark: var(--white);
+  --color-error-ink-on-dark: var(--white);
+  --color-text-inverse-soft: var(--steel-3);
+  --color-text-inverse-muted: var(--steel-4);
+  --color-text-on-accent-secondary: var(--steel-2);
+  --color-numeral-on-dark: var(--steel-6);
+  --color-surface-on-dark-hover: var(--steel-2);
+  --color-border-on-dark-subtle: var(--steel-10);
+  --color-border-on-dark: var(--steel-7);
+  --color-border-on-dark-control: var(--steel-8);
+  --color-border-on-dark-strong: var(--steel-6);
+  --color-selected-ring: var(--steel-11);
+  --color-selected-on-dark: var(--steel-10);
+  --color-step-done: var(--steel-7);
+  --color-drawing-ink: var(--steel-6);
+  --color-drawing-label: var(--steel-5);
+  --color-drawing-label-strong: var(--steel-4);
+  --color-drawing-wrap: var(--steel-7);
+  --color-drawing-structure: var(--steel-8);
+  --color-drawing-sheathing: var(--steel-9);
+  --color-drawing-shadow: var(--steel-11);
+  --color-drawing-board: var(--steel-12);
+  --color-pattern-ground: var(--neutral-1);
+  --color-pattern-course: var(--neutral-3);
   /* type */
   --font-display: 'Montserrat', 'Arial', sans-serif;
   --font-text: 'Inter', 'Arial', sans-serif;
@@ -86,6 +110,9 @@
   --layout-gutter: clamp(16px, 4vw, 32px);
   --layout-columns: 12;
   --layout-section-pad: clamp(64px, 3.5rem + 5vw, 160px);
+  --shadow-sample: 0 1px 2px color-mix(in srgb, var(--neutral-13) 12%, transparent), 0 12px 28px color-mix(in srgb, var(--neutral-13) 12%, transparent);
+  --shadow-photo: 0 8px 24px color-mix(in srgb, var(--neutral-13) 16%, transparent);
+  --shadow-chip-edge: inset 0 -6px 0 color-mix(in srgb, var(--neutral-13) 16%, transparent);
   /* motion */
   --duration-instant: 50ms;
   --duration-fast: 100ms;
@@ -99,6 +126,9 @@
   --ease-settle: cubic-bezier(0.34, 1.3, 0.5, 1);
   /* component */
   --button-height: 48px; --input-height: 48px; --course-line-weight: 3px; --logo-clear-space: 0.125em;
+  --type-numeral-xl: clamp(6rem, 4rem + 10vw, 13rem);
+  --type-numeral-l: clamp(4rem, 3rem + 4vw, 7rem);
+  --type-numeral-phone: clamp(3rem, 1.5rem + 6vw, 7rem);
 }
 @media (prefers-reduced-motion: reduce) {
   :root { --duration-instant: 0ms; --duration-fast: 0ms; --duration-normal: 0ms; --duration-moderate: 0ms; --duration-deliberate: 0ms; }

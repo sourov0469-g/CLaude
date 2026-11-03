@@ -173,6 +173,13 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - **Correction:** a JS error (B2 palette `P` shadowed the pause check `P()`) was live since cycle 2, so GATE-BUILD-2 to 6 wrongly reported zero vetoes; the B2 field never drifted. Fixed: 0 errors, the field drifts at 60 fps and pauses.
     - Also fixed: the phone header call link (nameless, 18 px) → named, 44×44; booking chips' lost padding; inactive stacked plates and photos hidden from assistive tech; hero V2 gap at 768 and 9 px caption overlap at 375×667; figure-before-heading in Siding 2 V2 and Windows 3 V2, fixed in source order per S0073 (2 versions backed up; 47 backups); About contact links and map Reset sized.
     - New QA: `build/qa/vp.js`; `ax.js` takes a width. Contact sheets at 768: `siding/brand-v2/shots/build-7-768/`.
+  - **GATE-BUILD-7 accepted by Muse.**
+  - **Cycle 8** (`GATE-BUILD-8.md`, 7.98, PASS, cited): conformance. No earlier gate had run a token lint.
+    - Counts before → after: spacing off ladder 26 → 0; raw colours 48 → 0; raw font sizes 67 → 0; declared sizes 26 → 11 (5 in regular use); synthesised weights 20 → 0; primitives in component CSS 76 → 0; hard-coded interface colour in markup 265 → 0.
+    - 27 semantic roles and 3 numeral tokens added at the source (`phase2/tokens.py`), each pointing at the value already used: a computed-colour diff of 62,952 elements shows no rendered colour change.
+    - Also fixed: hero V2 panel now tracks the measured copy height; the 1440 before/after card no longer wraps names. 21 versions backed up (68 backups).
+    - Open: 285 primitive paints inside construction drawings (need per-drawing component tokens); `var()` in SVG presentation attributes untested outside Chromium.
+    - New QA: `build/qa/lint.py`, `build/qa/weights.js`. Contact sheets: `shots/build-8-1440/`, `shots/build-8-390/`.
   - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
 
 ## History of this run so far (moved here from the old PROGRESS.md)
