@@ -1,67 +1,93 @@
 <section class="sec svc2" id="services-2" aria-labelledby="sv2-h">
 <style>
-.svc2 .panel{position:relative;padding:clamp(24px,4vw,48px);border-radius:32px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.45)}
-.svc2 .hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px}
-.svc2 .feathers{display:block;width:100%;height:34px;margin:22px 0 8px}
-.svc2 ol{list-style:none}
-.svc2 li{border-bottom:1px solid transparent;background:linear-gradient(90deg,transparent,rgba(23,17,29,.14) 12%,rgba(23,17,29,.14) 88%,transparent) bottom/100% 1px no-repeat}
-.svc2 .r{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:clamp(16px,3vw,40px);width:100%;padding:14px 8px;text-align:left;border-radius:16px;transition:background .3s}
-.svc2 .r:hover,.svc2 li.open .r{background:rgba(234,162,33,.08)}
-.svc2 .r img{width:150px;height:84px;object-fit:cover;border-radius:12px;box-shadow:0 10px 20px -12px rgba(23,17,29,.6);transition:transform .4s var(--ease)}
-.svc2 .r:hover img{transform:rotate(-2deg) scale(1.04)}
-.svc2 .r .ttl{display:block;font-size:clamp(24px,3vw,40px);font-weight:600;letter-spacing:-.025em;line-height:1.1}
-.svc2 .r .n{font-weight:600;font-size:14px;color:var(--ink-70);font-variant-numeric:tabular-nums}
-.svc2 .r .pl{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--cream);box-shadow:0 3px 0 rgba(23,17,29,.1);transition:transform .35s var(--ease),background .3s}
-.svc2 li.open .pl{transform:rotate(45deg);background:var(--amber)}
-.svc2 .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
-.svc2 li.open .more{grid-template-rows:1fr}
-.svc2 .more>div{overflow:hidden}
-.svc2 .more p{padding:0 8px 0 calc(150px + clamp(16px,3vw,40px) + 8px);font-size:18px;color:var(--ink-70);max-width:calc(150px + 60ch)}
-.svc2 .more a{display:inline-flex;margin:12px 0 22px calc(150px + clamp(16px,3vw,40px) + 8px);font-weight:700;text-underline-offset:5px}
-.svc2 .float{position:fixed;left:0;top:0;z-index:60;width:300px;aspect-ratio:3/2;border-radius:18px;overflow:hidden;pointer-events:none;opacity:0;transform:scale(.9);transition:opacity .25s,transform .35s var(--ease);box-shadow:0 30px 50px -20px rgba(23,17,29,.6)}
-.svc2 .float.on{opacity:1;transform:scale(1)}
-.svc2 .float img{width:100%;height:100%;object-fit:cover}
-@media (max-width:700px){.svc2 .r{grid-template-columns:84px 1fr 44px}.svc2 .r img{width:84px;height:60px}.svc2 .r .n{display:none}.svc2 .more p,.svc2 .more a{padding-left:8px;margin-left:8px}.svc2 .float{display:none}}
+.svc2{position:relative;overflow:hidden}
+.svc2 .ghost{position:absolute;right:-2vw;top:-4vw;font-size:clamp(220px,34vw,520px);font-weight:900;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px rgba(234,162,33,.22);pointer-events:none;transition:transform 1.2s cubic-bezier(.22,.61,.36,1);user-select:none}
+.svc2 .hd{position:relative;display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 32px;margin-bottom:clamp(22px,3vw,40px)}
+.svc2 .lede{margin-top:12px;max-width:42ch}
+.svc2 .g{position:relative;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(22px,4vw,60px);align-items:center}
+.svc2 .idx{display:grid;gap:2px;counter-reset:n}
+.svc2 .idx button{position:relative;display:grid;grid-template-columns:3.2ch 1fr;align-items:baseline;gap:12px;width:100%;padding:10px 12px;border-radius:14px;text-align:left;font-size:clamp(22px,2.4vw,36px);font-weight:600;letter-spacing:-.02em;color:#6B6570;transition:color .2s,background .2s,font-weight .2s}
+.svc2 .idx button small{font-size:14px;font-weight:800;letter-spacing:.12em;color:#8E5A12}
+.svc2 .idx button span{background:linear-gradient(var(--amber),var(--amber)) 0 100%/0 3px no-repeat;transition:background-size .45s cubic-bezier(.22,.61,.36,1)}
+.svc2 .idx button:hover{color:var(--ink);background:rgba(234,162,33,.08)}
+.svc2 .idx button[aria-selected="true"]{color:var(--ink);font-weight:800}
+.svc2 .idx button[aria-selected="true"] span{background-size:100% 3px}
+.svc2 .idx button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.svc2 .cover{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);min-height:clamp(420px,40vw,540px);border-radius:28px;background:var(--paper);overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -44px rgba(23,17,29,.6);transform:perspective(1400px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.svc2 .ph{position:relative;overflow:hidden;background:#D9D3C4}
+.svc2 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04) translate(var(--px,0),var(--py,0));transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.svc2 .ph img.in{clip-path:inset(0 100% 0 0);animation:sv2wipe .62s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes sv2wipe{to{clip-path:inset(0 0 0 0)}}
+.svc2 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.28) 50%,rgba(255,255,255,0) 60%);background-size:260% 100%;animation:sv2sheen 7s ease-in-out infinite;pointer-events:none}
+@keyframes sv2sheen{0%,60%{background-position:120% 0}100%{background-position:-60% 0}}
+.svc2 .tx{position:relative;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(22px,3vw,40px)}
+.svc2 .num{height:clamp(64px,6vw,88px);overflow:hidden;font-size:clamp(64px,6vw,88px);line-height:1;font-weight:900;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px var(--amber)}
+.svc2 .num i{display:block;font-style:normal;transition:transform .62s cubic-bezier(.22,.61,.36,1)}
+.svc2 .tx h3{font-size:clamp(24px,2.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.svc2 .tx p{font-size:17px;color:var(--ink-70)}
+.svc2 .tx ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;font-weight:600}
+.svc2 .tx li{display:flex;gap:10px;align-items:flex-start}
+.svc2 .tx li::before{content:"";flex:none;width:18px;height:18px;margin-top:1px;border-radius:6px;background:var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 6.5' fill='none' stroke='%2317111D' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.svc2 .st > *{opacity:0;transform:translateY(10px)}
+.svc2 .st.go > *{animation:sv2in .56s cubic-bezier(.22,.61,.36,1) forwards}
+.svc2 .st.go > *:nth-child(2){animation-delay:.055s}.svc2 .st.go > *:nth-child(3){animation-delay:.11s}.svc2 .st.go > *:nth-child(4){animation-delay:.165s}.svc2 .st.go > *:nth-child(5){animation-delay:.22s}
+@keyframes sv2in{to{opacity:1;transform:none}}
+.svc2 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+@media (max-width:900px){.svc2 .g{grid-template-columns:1fr}.svc2 .idx{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;padding-bottom:6px;margin:0 calc(var(--pad)*-1);padding-inline:var(--pad);scrollbar-width:none}.svc2 .idx::-webkit-scrollbar{display:none}.svc2 .idx button{flex:none;width:auto;scroll-snap-align:start;font-size:18px;padding:10px 14px;background:var(--paper);grid-template-columns:auto auto;min-height:48px}.svc2 .cover{grid-template-columns:1fr;min-height:0}.svc2 .ph{aspect-ratio:16/10}}
+@media (prefers-reduced-motion:reduce){.svc2 .ph img.in{animation:none;clip-path:none}.svc2 .ph::after{animation:none}.svc2 .st > *{opacity:1;transform:none}.svc2 .st.go > *{animation:none}.svc2 .cover{transition:none}}
 </style>
+<div class="ghost" aria-hidden="true">01</div>
 <div class="wrap">
- <div class="panel">
-  <div class="hd"><h2 class="h2 rv" id="sv2-h">Everything Your Roof Needs</h2><a class="btn btn-amber btn-sm" href="tel:+16519776027" data-mag data-owl="hoot">Call (651) 977-6027</a></div>
-  <svg class="feathers" viewBox="0 0 1200 34" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
-  <ol></ol>
+ <div class="hd"><div><span class="kick">Services</span><h2 class="h2" id="sv2-h" style="margin-top:12px">Our Services, in Five Chapters</h2>
+  <p class="lede rv">Choose a chapter. Each one says what it covers and what comes with it.</p></div>
+  <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+ <div class="g">
+  <div class="idx" role="tablist" aria-label="Owl Roofing services" aria-orientation="vertical"></div>
+  <div class="cover" id="sv2-panel" role="tabpanel" data-owl="say:Turn the page">
+   <div class="ph"></div>
+   <div class="tx st"><div class="num" aria-hidden="true"></div><h3></h3><p></p><ul></ul><div class="acts"><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+  </div>
  </div>
 </div>
-<div class="float" aria-hidden="true"><img alt=""></div>
 <script>
 OWL.reg('services','2',function(root){
-  var S = [
-    ['Roof Replacement','Tear-off to ridge cap with GAF materials, backed by our 10-year workmanship warranty.',OWL.media['svc-replace']],
-    ['Roof Repair','Leaks, lifted shingles, flashing and vents, fixed before small problems spread.',OWL.media['svc-repair']],
-    ['Storm Damage Help','Hail and wind damage found and put right.',OWL.media['svc-storm']],
-    ['Wise Check Inspections','Our roof inspection: shingles, flashing, ventilation and gutters.',OWL.media['svc-check']],
-    ['Siding','New siding to finish what the new roof started.',OWL.media['svc-siding']]
-  ];
-  var ol = root.querySelector('ol'), fl = root.querySelector('.float'), fimg = fl.querySelector('img'), fe = root.querySelector('.feathers');
-  /* a row of feathers drawn as SVG: shaft, vanes and banding in ink and amber */
-  var f = '<defs><linearGradient id="sv2fg" x1="0" x2="1"><stop offset="0" stop-color="#17111D"/><stop offset=".55" stop-color="#C7871A"/><stop offset="1" stop-color="#EAA221"/></linearGradient></defs>';
-  for (var i = 0; i < 7; i++){ var x = 30 + i*172, w = 130 + (i % 3)*8, h = 13;
-    f += '<g transform="translate(' + x + ' 17) rotate(' + (i % 2 ? 2.5 : -2.5) + ')">';
-    f += '<path d="M0 0 C' + w*.2 + ' ' + (-h) + ' ' + w*.7 + ' ' + (-h*.9) + ' ' + w + ' -1 C' + w*.72 + ' ' + h*.55 + ' ' + w*.3 + ' ' + h*.75 + ' 0 0Z" fill="url(#sv2fg)" opacity=".9"/>';
-    for (var k = 1; k < 22; k++){ var bx = k*w/22, up = Math.sin(Math.PI*k/22); f += '<path d="M' + bx + ' 0 L' + (bx + 7) + ' ' + (-h*.95*up) + ' M' + bx + ' 0 L' + (bx + 6) + ' ' + (h*.7*up) + '" stroke="#F1EFE6" stroke-opacity=".35" stroke-width=".8"/>'; }
-    for (var m = 0; m < 3; m++){ var gx = w*(.3 + m*.2); f += '<path d="M' + gx + ' -1 l4 ' + (-h*.8) + '" stroke="#F1EFE6" stroke-width="2.2" opacity=".55"/>'; }
-    f += '<path d="M-10 1 L' + (w + 2) + ' -1" stroke="#17111D" stroke-width="1.6" stroke-linecap="round"/></g>'; }
-  fe.innerHTML = f;
-  S.forEach(function(s, i){
-    var li = document.createElement('li'), id = 'sv2-m' + i;
-    li.innerHTML = '<button class="r" type="button" aria-expanded="false" aria-controls="' + id + '" data-owl="peek"><img src="' + s[2] + '" alt=""><span><span class="n">0' + (i + 1) + '</span><span class="ttl">' + s[0] + '</span></span><span class="pl" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2v14M2 9h14" stroke="#17111D" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>' +
-      '<div class="more" id="' + id + '"><div><p>' + s[1] + '</p><a href="#book">Book a Wise Check →</a></div></div>';
-    var b = li.querySelector('.r');
-    b.addEventListener('click', function(){ var o = !li.classList.contains('open'); ol.querySelectorAll('li').forEach(function(x){ x.classList.remove('open'); x.querySelector('.r').setAttribute('aria-expanded', 'false'); }); if (o){ li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); } });
-    b.addEventListener('mouseenter', function(){ if (!OWL.fine) return; fimg.src = s[2]; fl.classList.add('on'); });
-    b.addEventListener('mouseleave', function(){ fl.classList.remove('on'); });
-    ol.appendChild(li);
-  });
-  if (OWL.fine) addEventListener('pointermove', function(e){ if (!fl.classList.contains('on')) return; fl.style.left = (e.clientX + 30) + 'px'; fl.style.top = (e.clientY - 100) + 'px'; }, {passive:true});
-  ol.firstChild.classList.add('open'); ol.firstChild.querySelector('.r').setAttribute('aria-expanded', 'true');
+  var S = OWL.SVC || [], idx = root.querySelector('.idx'), cover = root.querySelector('.cover'), ph = root.querySelector('.ph'), tx = root.querySelector('.tx'), num = root.querySelector('.num'), ghost = root.querySelector('.ghost'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  num.innerHTML = '<i>' + S.map(function(s, i){ return '0' + (i + 1); }).join('</i><i>') + '</i>';
+  var ALT = {replace:'An Owl crew member carrying a sheet of roof decking', repair:'An Owl crew member with a bundle of shingles', storm:'A tree fallen across a damaged roof', check:'An Owl crew member walking a shingle roof', siding:'A house with new lap siding and two garage doors'};
+  var tabs = S.map(function(s, i){
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'sv2-t' + i; b.setAttribute('aria-controls', 'sv2-panel');
+    b.innerHTML = '<small>0' + (i + 1) + '</small><span>' + s.n + '</span>';
+    b.addEventListener('click', function(){ show(i); });
+    b.addEventListener('keydown', function(e){ var n = null, k = e.key;
+      if (k === 'ArrowDown' || k === 'ArrowRight') n = (cur + 1) % S.length; else if (k === 'ArrowUp' || k === 'ArrowLeft') n = (cur + S.length - 1) % S.length; else if (k === 'Home') n = 0; else if (k === 'End') n = S.length - 1;
+      if (n !== null){ e.preventDefault(); show(n); tabs[n].focus(); } });
+    idx.appendChild(b); return b; });
+  function show(i){
+    if (i === cur) return; cur = i; var s = S[i];
+    tabs.forEach(function(t, j){ var on = j === i; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    cover.setAttribute('aria-labelledby', 'sv2-t' + i);
+    if (idx.scrollWidth > idx.clientWidth) idx.scrollTo({left: Math.max(0, tabs[i].offsetLeft - idx.offsetLeft - 20), behavior: OWL.reduce ? 'auto' : 'smooth'});
+    var img = new Image(); img.alt = ALT[s.k] || s.n; img.src = (OWL.media && OWL.media[s.img]) || ''; img.className = OWL.reduce ? '' : 'in';
+    ph.appendChild(img); var old = [].slice.call(ph.querySelectorAll('img')).slice(0, -1);
+    setTimeout(function(){ old.forEach(function(o){ o.remove(); }); }, OWL.reduce ? 0 : 680);
+    num.querySelectorAll('i').forEach(function(e){ e.style.transform = 'translateY(' + (-100*i) + '%)'; });
+    ghost.textContent = '0' + (i + 1); ghost.style.transform = 'translateY(' + (i % 2 ? 2 : -2) + 'vw)';
+    tx.querySelector('h3').textContent = s.n; tx.querySelector('p').textContent = s.d;
+    tx.querySelector('ul').innerHTML = s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join('');
+    tx.classList.remove('go'); void tx.offsetWidth; tx.classList.add('go');
+  }
+  show(0);
+  /* depth: the cover leans a little and the photo drifts against it */
+  if (OWL.fine && !OWL.reduce){
+    cover.addEventListener('pointermove', function(e){ var b = cover.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+      cover.style.setProperty('--ry', (x*4).toFixed(2) + 'deg'); cover.style.setProperty('--rx', (-y*3).toFixed(2) + 'deg');
+      ph.style.setProperty('--px', (-x*12).toFixed(1) + 'px'); ph.style.setProperty('--py', (-y*10).toFixed(1) + 'px');
+      ph.querySelectorAll('img').forEach(function(im){ im.style.setProperty('--px', (-x*12).toFixed(1) + 'px'); im.style.setProperty('--py', (-y*10).toFixed(1) + 'px'); }); });
+    cover.addEventListener('pointerleave', function(){ cover.style.setProperty('--ry', '0deg'); cover.style.setProperty('--rx', '0deg'); ph.querySelectorAll('img').forEach(function(im){ im.style.setProperty('--px', '0px'); im.style.setProperty('--py', '0px'); }); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(cover); }
 });
 </script>
 </section>

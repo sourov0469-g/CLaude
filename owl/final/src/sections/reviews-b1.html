@@ -1,0 +1,62 @@
+<section class="sec rev2" id="reviews-2" aria-labelledby="rv2-h">
+<style>
+.rev2 .panel{position:relative;padding:clamp(28px,4vw,52px) clamp(20px,4vw,52px) clamp(28px,4vw,44px);border-radius:32px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.45);overflow:hidden}
+.rev2 .sub{display:flex;align-items:center;gap:14px;margin-top:10px;font-size:clamp(22px,2.4vw,30px);font-weight:500}
+.rev2 .sub .st{display:inline-flex;gap:4px;color:var(--amber)}
+.rev2 .sub svg{width:26px;height:26px}
+.rev2 .line{position:relative;height:clamp(250px,22vw,290px);margin-top:clamp(18px,3vw,30px);touch-action:pan-y}
+.rev2 .line svg.rope{position:absolute;left:-60px;right:-60px;top:10px;width:calc(100% + 120px);height:80px;overflow:visible}
+.rev2 .card{position:absolute;top:0;width:clamp(150px,19%,230px);transform-origin:50% 0;will-change:transform;cursor:grab}
+.rev2 .card .peg{position:absolute;left:50%;top:-8px;width:22px;height:46px;margin-left:-11px;z-index:2;border-radius:5px;background:repeating-linear-gradient(180deg,#E9A63A 0 6px,#C7871A 6px 8px);box-shadow:0 3px 4px rgba(23,17,29,.3)}
+.rev2 .card .paper{margin-top:22px;min-height:clamp(150px,15vw,190px);padding:30px 18px 20px;border-radius:12px;background:#FFFDF8;box-shadow:0 18px 30px -14px rgba(23,17,29,.45),0 1px 0 rgba(23,17,29,.05);display:flex;flex-direction:column;gap:10px}
+.rev2 .card .st{display:flex;gap:3px;color:var(--amber)}
+.rev2 .card .st svg{width:18px;height:18px}
+.rev2 .card b{font-size:clamp(20px,2vw,28px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.rev2 .card span.s{font-size:15px;color:var(--ink-70)}
+.rev2 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:8px}
+.rev2 .foot p{font-size:16px;color:var(--ink-70)}
+@media (max-width:760px){.rev2 .line{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}.rev2 .card{position:relative;left:auto!important;top:auto!important;width:auto}.rev2 .foot p{display:none}.rev2 .sub{flex-wrap:wrap;gap:6px 12px}.rev2 svg.rope{display:none}}
+</style>
+<div class="wrap">
+ <div class="panel">
+  <h2 class="h2 rv" id="rv2-h">Hung out to admire</h2>
+  <p class="sub">5.0 · 90+ reviews <span class="st" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span></p>
+  <div class="line" data-owl="say:Give them a swing">
+   <svg class="rope" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 Q500 70 1000 4" fill="none" stroke="#5a4636" stroke-width="3"/></svg>
+  </div>
+  <div class="foot"><p>Give the cards a swing.</p><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check</a></div>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','2',function(root){
+  var C = [['5.0','Star rating',1],['90+','Reviews',0],['A−','BBB rating',0],['GAF','Systems Plus Certified',0],['10-year','Workmanship warranty',0]];
+  var line = root.querySelector('.line'), rope = root.querySelector('.rope path'), cards = [];
+  var star = '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg>';
+  C.forEach(function(c, i){
+    var el = document.createElement('div'); el.className = 'card'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', c[0] + ' ' + c[1]);
+    el.innerHTML = '<span class="peg" aria-hidden="true"></span><div class="paper">' + (c[2] ? '<span class="st" aria-hidden="true">' + star.repeat(5) + '</span>' : '') + '<b>' + c[0] + '</b><span class="s">' + c[1] + '</span></div>';
+    line.appendChild(el); cards.push({el:el, a:0, v:0, x:0, base:(i % 2 ? 2.5 : -2.5)});
+  });
+  var W = 0, sag = 33;
+  function layout(){ W = line.clientWidth; var n = cards.length, cw = cards[0].el.offsetWidth;
+    cards.forEach(function(c, i){ var f = (i + .5)/n, x = f*W - cw/2; c.x = f; c.el.style.left = x + 'px';
+      var u = (f*W + 60)/(W + 120), y = 4*(1-u)*(1-u)*4/4 + 2*(1-u)*u*70 + u*u*4; c.el.style.top = (10 + y*80/80 - 10) + 'px'; }); }
+  layout(); addEventListener('resize', layout);
+  var mob = matchMedia('(max-width:760px)');
+  var last = null;
+  line.addEventListener('pointermove', function(e){ if (mob.matches) return; var r = line.getBoundingClientRect(), px = (e.clientX - r.left)/r.width;
+    var vx = last ? e.clientX - last : 0; last = e.clientX;
+    cards.forEach(function(c){ var d = Math.abs(px - c.x); if (d < .09) c.v += vx*.05*(1 - d/.09); }); });
+  line.addEventListener('pointerleave', function(){ last = null; });
+  cards.forEach(function(c){ c.el.addEventListener('pointerdown', function(e){ c.v += (Math.random() < .5 ? -1 : 1)*6; }); });
+  (function tick(){
+    var bounce = 0;
+    cards.forEach(function(c){ if (OWL.reduce || mob.matches){ c.el.style.transform = 'rotate(' + c.base + 'deg)'; return; }
+      var acc = -.04*(c.a - c.base) - .035*c.v; c.v += acc; c.a += c.v; c.a = Math.max(-38, Math.min(38, c.a)); bounce += Math.abs(c.v);
+      c.el.style.transform = 'rotate(' + c.a.toFixed(2) + 'deg)'; });
+    rope.setAttribute('d', 'M0 4 Q500 ' + (70 + Math.min(10, bounce*.6)).toFixed(1) + ' 1000 4');
+    requestAnimationFrame(tick); })();
+  setTimeout(function(){ cards.forEach(function(c, i){ c.v += (i % 2 ? 1 : -1)*3; }); }, 600);
+});
+</script>
+</section>

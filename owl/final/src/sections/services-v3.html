@@ -1,0 +1,112 @@
+<section class="sec svc3" id="services-3" aria-labelledby="sv3-h">
+<style>
+.svc3 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 32px;margin-bottom:clamp(20px,3vw,36px)}
+.svc3 .lede{margin-top:12px;max-width:40ch}
+.svc3 .panel{position:relative;border-radius:30px;background:var(--paper);overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -46px rgba(23,17,29,.55)}
+.svc3 .panel::before{content:"";position:absolute;inset:-40px;background-image:linear-gradient(rgba(23,17,29,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(23,17,29,.05) 1px,transparent 1px);background-size:40px 40px;animation:sv3grid 26s linear infinite;pointer-events:none}
+@keyframes sv3grid{to{transform:translate(40px,40px)}}
+.svc3 .g{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;gap:clamp(16px,3vw,40px);padding:clamp(18px,3vw,40px)}
+.svc3 svg.art{display:block;width:100%;height:auto;overflow:visible}
+.svc3 .ln{fill:none;stroke:var(--amber);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 6px 8px rgba(199,135,26,.35))}
+.svc3 .pulse{fill:none;stroke:#FFF4D9;stroke-width:3;stroke-linecap:round;stroke-dasharray:36 1400;animation:sv3pulse 3.2s linear infinite}
+.svc3 .pulse:nth-of-type(2){animation-delay:-1.1s}.svc3 .pulse:nth-of-type(3){animation-delay:-2.2s}
+@keyframes sv3pulse{from{stroke-dashoffset:1436}to{stroke-dashoffset:0}}
+.svc3 .ground{stroke:var(--ink);stroke-opacity:.18;stroke-width:2;stroke-dasharray:4 8}
+.svc3 .tx{display:flex;flex-direction:column;gap:12px}
+.svc3 .tx .n{font-size:14px;font-weight:800;letter-spacing:.14em;color:#8E5A12;font-variant-numeric:tabular-nums}
+.svc3 .tx h3{font-size:clamp(26px,2.6vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.svc3 .tx p{font-size:17px;color:var(--ink-70)}
+.svc3 .tx ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;font-weight:600}
+.svc3 .tx li{position:relative;padding-left:22px}
+.svc3 .tx li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:3px;border-radius:2px;background:var(--amber)}
+.svc3 .tx > *{transition:opacity .3s,transform .45s cubic-bezier(.22,.61,.36,1)}
+.svc3 .tx.out > *{opacity:0;transform:translateY(8px)}
+.svc3 .track{position:relative;margin:clamp(18px,2.4vw,30px) auto 0;max-width:1080px}
+.svc3 .rule{position:absolute;left:10%;right:10%;top:22px;height:4px;border-radius:4px;background:rgba(23,17,29,.1)}
+.svc3 .rule i{position:absolute;inset:0;border-radius:inherit;background:var(--amber);transform-origin:left;transform:scaleX(var(--f,0));transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.svc3 .stops{position:relative;display:grid;grid-template-columns:repeat(5,1fr)}
+.svc3 .stops button{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 4px 10px;border-radius:14px;font-weight:700;font-size:15px;text-align:center;transition:background .2s}
+.svc3 .stops button b{display:block;width:36px;height:36px;border-radius:50%;background:var(--paper);border:3px solid rgba(23,17,29,.18);box-shadow:0 4px 0 rgba(23,17,29,.1);transition:background .3s,border-color .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.svc3 .stops button:hover b{transform:translateY(-3px)}
+.svc3 .stops button[aria-selected="true"] b{background:var(--amber);border-color:var(--amber-edge);transform:scale(1.15);box-shadow:0 4px 0 var(--amber-edge),0 0 0 8px rgba(234,162,33,.2)}
+.svc3 .stops button:hover{background:rgba(234,162,33,.08)}
+.svc3 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+@media (max-width:900px){.svc3 .g{grid-template-columns:1fr}.svc3 .stops button{font-size:13px}.svc3 .rule{left:10%;right:10%}}
+@media (prefers-reduced-motion:reduce){.svc3 .panel::before,.svc3 .pulse{animation:none}.svc3 .pulse{display:none}.svc3 .tx > *{transition:none}.svc3 .rule i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Services</span><h2 class="h2" id="sv3-h" style="margin-top:12px">One Line, Five Services</h2>
+  <p class="lede rv">Pick a stop on the line and watch it draw the job.</p></div>
+  <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+ <div class="panel" data-owl="say:Pick a stop">
+  <div class="g">
+   <svg class="art" viewBox="0 0 600 460" role="img" aria-labelledby="sv3-alt"><title id="sv3-alt"></title><path class="ground" d="M20 424H580"/><path class="ln"/><path class="ln"/><path class="ln"/><path class="pulse"/><path class="pulse"/><path class="pulse"/></svg>
+   <div class="tx" id="sv3-panel" role="tabpanel"><span class="n"></span><h3></h3><p></p><ul></ul><div class="acts"><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+  </div>
+ </div>
+ <div class="track"><div class="rule" aria-hidden="true"><i></i></div><div class="stops" role="tablist" aria-label="Owl Roofing services"></div></div>
+</div>
+<script>
+OWL.reg('services','3',function(root){
+  var S = OWL.SVC || [], svg = root.querySelector('svg.art'), lns = [].slice.call(svg.querySelectorAll('.ln')), pls = [].slice.call(svg.querySelectorAll('.pulse')), tx = root.querySelector('.tx'), stops = root.querySelector('.stops'), fill = root.querySelector('.rule i'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* every drawing is exactly three strands (one continuous path each), so any service morphs into any other */
+  var D = {
+    replace: ['M40 424 L130 424 L130 282 L94 282 L180 150 L420 150 L506 282 L470 282 L470 424 L560 424',
+              'M107 262 L493 262 L479 240 L121 240 L136 218 L464 218 L450 196 L150 196 L164 174 L436 174',
+              'M182 143 L418 143'],
+    repair:  ['M40 420 L120 388 L120 396 L200 364 L200 372 L280 340 L280 348 L360 316 L360 324 L440 292 L440 300 L520 268 L520 276 L560 260',
+              'M280 340 L338 290 L362 318',
+              'M488 214 L404 130 L378 104 L412 70 L438 96 L404 130'],
+    storm:   ['M150 200 A48 48 0 0 1 206 142 A72 72 0 0 1 340 128 A56 56 0 0 1 432 168 A42 42 0 0 1 424 250 L158 250 A26 26 0 0 1 150 200',
+              'M170 278 L180 314 M200 270 L212 318 L232 280 L246 328 L268 284 L282 330 L304 286 L318 334 L340 290 L354 330 L378 292 L390 324',
+              'M40 424 L300 352 L560 424'],
+    check:   ['M40 424 L130 424 L130 282 L94 282 L180 150 L420 150 L506 282 L470 282 L470 424 L560 424',
+              'M290 220 A70 70 0 1 1 430 220 A70 70 0 1 1 290 220',
+              'M410 270 L486 346'],
+    siding:  ['M100 132 L500 132 L500 424 L100 424 L100 132',
+              'M100 168 L500 168 L500 204 L100 204 L100 240 L500 240 L500 276 L100 276 L100 312 L500 312 L500 348 L100 348 L100 384 L500 384',
+              'M290 218 L290 330 L236 330 L236 218 L344 218 L344 330 L290 330']
+  };
+  D.storm[1] = 'M200 270 L212 318 L232 280 L246 328 L268 284 L282 330 L304 286 L318 334 L340 290 L354 330 L378 292 L390 324';
+  var ALT = {replace:'A house with a new hip roof: shingle courses and a ridge cap', repair:'A roof slope with one lifted shingle tab and a hammer', storm:'A storm cloud with hail falling on a roof', check:'A house with a magnifier over the roof', siding:'A wall of lap siding with a window'};
+  var N = 110, NS = 'http://www.w3.org/2000/svg', tmp = document.createElementNS(NS, 'path'); svg.appendChild(tmp); tmp.setAttribute('visibility', 'hidden');
+  function sample(d){ tmp.setAttribute('d', d); var L = tmp.getTotalLength(), pts = []; for (var i = 0; i < N; i++){ var p = tmp.getPointAtLength(L*i/(N - 1)); pts.push([p.x, p.y]); } return pts; }
+  var P = {}; Object.keys(D).forEach(function(k){ P[k] = D[k].map(sample); }); tmp.remove();
+  var curPts = P.replace.map(function(s){ return s.map(function(q){ return q.slice(); }); }), cur = -1, raf = 0;
+  function dstr(pts){ return 'M' + pts.map(function(q){ return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('L'); }
+  function paint(){ lns.forEach(function(l, j){ var d = dstr(curPts[j]); l.setAttribute('d', d); pls[j].setAttribute('d', d); }); }
+  function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
+  function morph(to){
+    cancelAnimationFrame(raf); var from = curPts.map(function(s){ return s.map(function(q){ return q.slice(); }); }), t0 = 0, dur = 950;
+    if (OWL.reduce){ curPts = to.map(function(s){ return s.map(function(q){ return q.slice(); }); }); paint(); return; }
+    (function tick(t){ if (!t0) t0 = t; var done = true;
+      for (var j = 0; j < 3; j++){ var e = Math.min(1, Math.max(0, (t - t0 - j*90)/dur)); if (e < 1) done = false; var k = ease(e);
+        for (var i = 0; i < N; i++){ curPts[j][i][0] = from[j][i][0] + (to[j][i][0] - from[j][i][0])*k; curPts[j][i][1] = from[j][i][1] + (to[j][i][1] - from[j][i][1])*k; } }
+      paint(); if (!done) raf = requestAnimationFrame(tick); })(performance.now());
+  }
+  var SHORT = ['Replacement', 'Repair', 'Storm', 'Wise Check', 'Siding'];
+  var btns = S.map(function(s, i){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'sv3-t' + i; b.setAttribute('aria-controls', 'sv3-panel');
+    b.innerHTML = '<b aria-hidden="true"></b>' + (SHORT[i] || s.n); b.setAttribute('aria-label', s.n);
+    b.addEventListener('click', function(){ show(i); });
+    b.addEventListener('keydown', function(e){ var n = null; if (e.key === 'ArrowRight') n = (cur + 1) % S.length; else if (e.key === 'ArrowLeft') n = (cur + S.length - 1) % S.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = S.length - 1; if (n !== null){ e.preventDefault(); show(n); btns[n].focus(); } });
+    stops.appendChild(b); return b; });
+  function show(i){
+    if (i === cur) return; cur = i; var s = S[i];
+    btns.forEach(function(b, j){ b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; });
+    tx.setAttribute('aria-labelledby', 'sv3-t' + i); fill.parentNode.style.setProperty('--f', S.length > 1 ? i/(S.length - 1) : 0);
+    svg.querySelector('title').textContent = ALT[s.k] || s.n; morph(P[s.k] || P.replace);
+    tx.classList.add('out');
+    setTimeout(function(){ tx.querySelector('.n').textContent = '0' + (i + 1) + ' / 0' + S.length; tx.querySelector('h3').textContent = s.n; tx.querySelector('p').textContent = s.d; tx.querySelector('ul').innerHTML = s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join(''); tx.classList.remove('out'); }, OWL.reduce ? 0 : 220);
+  }
+  paint(); show(0);
+  /* first view: the line draws itself on */
+  if (!OWL.reduce && 'IntersectionObserver' in window){
+    lns.forEach(function(l){ l.style.strokeDasharray = 2000; l.style.strokeDashoffset = 2000; });
+    var io = new IntersectionObserver(function(e){ if (!e[0].isIntersecting) return; io.disconnect(); OWL.reveal(h2);
+      lns.forEach(function(l, j){ l.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.22,.61,.36,1) ' + (j*.25) + 's'; l.style.strokeDashoffset = 0; setTimeout(function(){ l.style.strokeDasharray = ''; l.style.strokeDashoffset = ''; l.style.transition = ''; }, 2400); }); }, {threshold:.3});
+    io.observe(svg);
+  } else OWL.reveal(h2);
+});
+</script>
+</section>

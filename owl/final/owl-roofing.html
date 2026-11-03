@@ -3653,6 +3653,217 @@ OWL.reg('services','1',function(root){
 <div class="ver" data-sec="services" data-v="2">
 <section class="sec svc2" id="services-2" aria-labelledby="sv2-h">
 <style>
+.svc2{position:relative;overflow:hidden}
+.svc2 .ghost{position:absolute;right:-2vw;top:-4vw;font-size:clamp(220px,34vw,520px);font-weight:900;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px rgba(234,162,33,.22);pointer-events:none;transition:transform 1.2s cubic-bezier(.22,.61,.36,1);user-select:none}
+.svc2 .hd{position:relative;display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 32px;margin-bottom:clamp(22px,3vw,40px)}
+.svc2 .lede{margin-top:12px;max-width:42ch}
+.svc2 .g{position:relative;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(22px,4vw,60px);align-items:center}
+.svc2 .idx{display:grid;gap:2px;counter-reset:n}
+.svc2 .idx button{position:relative;display:grid;grid-template-columns:3.2ch 1fr;align-items:baseline;gap:12px;width:100%;padding:10px 12px;border-radius:14px;text-align:left;font-size:clamp(22px,2.4vw,36px);font-weight:600;letter-spacing:-.02em;color:#6B6570;transition:color .2s,background .2s,font-weight .2s}
+.svc2 .idx button small{font-size:14px;font-weight:800;letter-spacing:.12em;color:#8E5A12}
+.svc2 .idx button span{background:linear-gradient(var(--amber),var(--amber)) 0 100%/0 3px no-repeat;transition:background-size .45s cubic-bezier(.22,.61,.36,1)}
+.svc2 .idx button:hover{color:var(--ink);background:rgba(234,162,33,.08)}
+.svc2 .idx button[aria-selected="true"]{color:var(--ink);font-weight:800}
+.svc2 .idx button[aria-selected="true"] span{background-size:100% 3px}
+.svc2 .idx button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.svc2 .cover{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);min-height:clamp(420px,40vw,540px);border-radius:28px;background:var(--paper);overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -44px rgba(23,17,29,.6);transform:perspective(1400px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.svc2 .ph{position:relative;overflow:hidden;background:#D9D3C4}
+.svc2 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04) translate(var(--px,0),var(--py,0));transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.svc2 .ph img.in{clip-path:inset(0 100% 0 0);animation:sv2wipe .62s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes sv2wipe{to{clip-path:inset(0 0 0 0)}}
+.svc2 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.28) 50%,rgba(255,255,255,0) 60%);background-size:260% 100%;animation:sv2sheen 7s ease-in-out infinite;pointer-events:none}
+@keyframes sv2sheen{0%,60%{background-position:120% 0}100%{background-position:-60% 0}}
+.svc2 .tx{position:relative;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(22px,3vw,40px)}
+.svc2 .num{height:clamp(64px,6vw,88px);overflow:hidden;font-size:clamp(64px,6vw,88px);line-height:1;font-weight:900;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px var(--amber)}
+.svc2 .num i{display:block;font-style:normal;transition:transform .62s cubic-bezier(.22,.61,.36,1)}
+.svc2 .tx h3{font-size:clamp(24px,2.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.svc2 .tx p{font-size:17px;color:var(--ink-70)}
+.svc2 .tx ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;font-weight:600}
+.svc2 .tx li{display:flex;gap:10px;align-items:flex-start}
+.svc2 .tx li::before{content:"";flex:none;width:18px;height:18px;margin-top:1px;border-radius:6px;background:var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 6.5' fill='none' stroke='%2317111D' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.svc2 .st > *{opacity:0;transform:translateY(10px)}
+.svc2 .st.go > *{animation:sv2in .56s cubic-bezier(.22,.61,.36,1) forwards}
+.svc2 .st.go > *:nth-child(2){animation-delay:.055s}.svc2 .st.go > *:nth-child(3){animation-delay:.11s}.svc2 .st.go > *:nth-child(4){animation-delay:.165s}.svc2 .st.go > *:nth-child(5){animation-delay:.22s}
+@keyframes sv2in{to{opacity:1;transform:none}}
+.svc2 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+@media (max-width:900px){.svc2 .g{grid-template-columns:1fr}.svc2 .idx{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;padding-bottom:6px;margin:0 calc(var(--pad)*-1);padding-inline:var(--pad);scrollbar-width:none}.svc2 .idx::-webkit-scrollbar{display:none}.svc2 .idx button{flex:none;width:auto;scroll-snap-align:start;font-size:18px;padding:10px 14px;background:var(--paper);grid-template-columns:auto auto;min-height:48px}.svc2 .cover{grid-template-columns:1fr;min-height:0}.svc2 .ph{aspect-ratio:16/10}}
+@media (prefers-reduced-motion:reduce){.svc2 .ph img.in{animation:none;clip-path:none}.svc2 .ph::after{animation:none}.svc2 .st > *{opacity:1;transform:none}.svc2 .st.go > *{animation:none}.svc2 .cover{transition:none}}
+</style>
+<div class="ghost" aria-hidden="true">01</div>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Services</span><h2 class="h2" id="sv2-h" style="margin-top:12px">Our Services, in Five Chapters</h2>
+  <p class="lede rv">Choose a chapter. Each one says what it covers and what comes with it.</p></div>
+  <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+ <div class="g">
+  <div class="idx" role="tablist" aria-label="Owl Roofing services" aria-orientation="vertical"></div>
+  <div class="cover" id="sv2-panel" role="tabpanel" data-owl="say:Turn the page">
+   <div class="ph"></div>
+   <div class="tx st"><div class="num" aria-hidden="true"></div><h3></h3><p></p><ul></ul><div class="acts"><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('services','2',function(root){
+  var S = OWL.SVC || [], idx = root.querySelector('.idx'), cover = root.querySelector('.cover'), ph = root.querySelector('.ph'), tx = root.querySelector('.tx'), num = root.querySelector('.num'), ghost = root.querySelector('.ghost'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  num.innerHTML = '<i>' + S.map(function(s, i){ return '0' + (i + 1); }).join('</i><i>') + '</i>';
+  var ALT = {replace:'An Owl crew member carrying a sheet of roof decking', repair:'An Owl crew member with a bundle of shingles', storm:'A tree fallen across a damaged roof', check:'An Owl crew member walking a shingle roof', siding:'A house with new lap siding and two garage doors'};
+  var tabs = S.map(function(s, i){
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'sv2-t' + i; b.setAttribute('aria-controls', 'sv2-panel');
+    b.innerHTML = '<small>0' + (i + 1) + '</small><span>' + s.n + '</span>';
+    b.addEventListener('click', function(){ show(i); });
+    b.addEventListener('keydown', function(e){ var n = null, k = e.key;
+      if (k === 'ArrowDown' || k === 'ArrowRight') n = (cur + 1) % S.length; else if (k === 'ArrowUp' || k === 'ArrowLeft') n = (cur + S.length - 1) % S.length; else if (k === 'Home') n = 0; else if (k === 'End') n = S.length - 1;
+      if (n !== null){ e.preventDefault(); show(n); tabs[n].focus(); } });
+    idx.appendChild(b); return b; });
+  function show(i){
+    if (i === cur) return; cur = i; var s = S[i];
+    tabs.forEach(function(t, j){ var on = j === i; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    cover.setAttribute('aria-labelledby', 'sv2-t' + i);
+    if (idx.scrollWidth > idx.clientWidth) idx.scrollTo({left: Math.max(0, tabs[i].offsetLeft - idx.offsetLeft - 20), behavior: OWL.reduce ? 'auto' : 'smooth'});
+    var img = new Image(); img.alt = ALT[s.k] || s.n; img.src = (OWL.media && OWL.media[s.img]) || ''; img.className = OWL.reduce ? '' : 'in';
+    ph.appendChild(img); var old = [].slice.call(ph.querySelectorAll('img')).slice(0, -1);
+    setTimeout(function(){ old.forEach(function(o){ o.remove(); }); }, OWL.reduce ? 0 : 680);
+    num.querySelectorAll('i').forEach(function(e){ e.style.transform = 'translateY(' + (-100*i) + '%)'; });
+    ghost.textContent = '0' + (i + 1); ghost.style.transform = 'translateY(' + (i % 2 ? 2 : -2) + 'vw)';
+    tx.querySelector('h3').textContent = s.n; tx.querySelector('p').textContent = s.d;
+    tx.querySelector('ul').innerHTML = s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join('');
+    tx.classList.remove('go'); void tx.offsetWidth; tx.classList.add('go');
+  }
+  show(0);
+  /* depth: the cover leans a little and the photo drifts against it */
+  if (OWL.fine && !OWL.reduce){
+    cover.addEventListener('pointermove', function(e){ var b = cover.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+      cover.style.setProperty('--ry', (x*4).toFixed(2) + 'deg'); cover.style.setProperty('--rx', (-y*3).toFixed(2) + 'deg');
+      ph.style.setProperty('--px', (-x*12).toFixed(1) + 'px'); ph.style.setProperty('--py', (-y*10).toFixed(1) + 'px');
+      ph.querySelectorAll('img').forEach(function(im){ im.style.setProperty('--px', (-x*12).toFixed(1) + 'px'); im.style.setProperty('--py', (-y*10).toFixed(1) + 'px'); }); });
+    cover.addEventListener('pointerleave', function(){ cover.style.setProperty('--ry', '0deg'); cover.style.setProperty('--rx', '0deg'); ph.querySelectorAll('img').forEach(function(im){ im.style.setProperty('--px', '0px'); im.style.setProperty('--py', '0px'); }); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(cover); }
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="services" data-v="3">
+<section class="sec svc3" id="services-3" aria-labelledby="sv3-h">
+<style>
+.svc3 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 32px;margin-bottom:clamp(20px,3vw,36px)}
+.svc3 .lede{margin-top:12px;max-width:40ch}
+.svc3 .panel{position:relative;border-radius:30px;background:var(--paper);overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -46px rgba(23,17,29,.55)}
+.svc3 .panel::before{content:"";position:absolute;inset:-40px;background-image:linear-gradient(rgba(23,17,29,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(23,17,29,.05) 1px,transparent 1px);background-size:40px 40px;animation:sv3grid 26s linear infinite;pointer-events:none}
+@keyframes sv3grid{to{transform:translate(40px,40px)}}
+.svc3 .g{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;gap:clamp(16px,3vw,40px);padding:clamp(18px,3vw,40px)}
+.svc3 svg.art{display:block;width:100%;height:auto;overflow:visible}
+.svc3 .ln{fill:none;stroke:var(--amber);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 6px 8px rgba(199,135,26,.35))}
+.svc3 .pulse{fill:none;stroke:#FFF4D9;stroke-width:3;stroke-linecap:round;stroke-dasharray:36 1400;animation:sv3pulse 3.2s linear infinite}
+.svc3 .pulse:nth-of-type(2){animation-delay:-1.1s}.svc3 .pulse:nth-of-type(3){animation-delay:-2.2s}
+@keyframes sv3pulse{from{stroke-dashoffset:1436}to{stroke-dashoffset:0}}
+.svc3 .ground{stroke:var(--ink);stroke-opacity:.18;stroke-width:2;stroke-dasharray:4 8}
+.svc3 .tx{display:flex;flex-direction:column;gap:12px}
+.svc3 .tx .n{font-size:14px;font-weight:800;letter-spacing:.14em;color:#8E5A12;font-variant-numeric:tabular-nums}
+.svc3 .tx h3{font-size:clamp(26px,2.6vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.svc3 .tx p{font-size:17px;color:var(--ink-70)}
+.svc3 .tx ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;font-weight:600}
+.svc3 .tx li{position:relative;padding-left:22px}
+.svc3 .tx li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:3px;border-radius:2px;background:var(--amber)}
+.svc3 .tx > *{transition:opacity .3s,transform .45s cubic-bezier(.22,.61,.36,1)}
+.svc3 .tx.out > *{opacity:0;transform:translateY(8px)}
+.svc3 .track{position:relative;margin:clamp(18px,2.4vw,30px) auto 0;max-width:1080px}
+.svc3 .rule{position:absolute;left:10%;right:10%;top:22px;height:4px;border-radius:4px;background:rgba(23,17,29,.1)}
+.svc3 .rule i{position:absolute;inset:0;border-radius:inherit;background:var(--amber);transform-origin:left;transform:scaleX(var(--f,0));transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.svc3 .stops{position:relative;display:grid;grid-template-columns:repeat(5,1fr)}
+.svc3 .stops button{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 4px 10px;border-radius:14px;font-weight:700;font-size:15px;text-align:center;transition:background .2s}
+.svc3 .stops button b{display:block;width:36px;height:36px;border-radius:50%;background:var(--paper);border:3px solid rgba(23,17,29,.18);box-shadow:0 4px 0 rgba(23,17,29,.1);transition:background .3s,border-color .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.svc3 .stops button:hover b{transform:translateY(-3px)}
+.svc3 .stops button[aria-selected="true"] b{background:var(--amber);border-color:var(--amber-edge);transform:scale(1.15);box-shadow:0 4px 0 var(--amber-edge),0 0 0 8px rgba(234,162,33,.2)}
+.svc3 .stops button:hover{background:rgba(234,162,33,.08)}
+.svc3 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+@media (max-width:900px){.svc3 .g{grid-template-columns:1fr}.svc3 .stops button{font-size:13px}.svc3 .rule{left:10%;right:10%}}
+@media (prefers-reduced-motion:reduce){.svc3 .panel::before,.svc3 .pulse{animation:none}.svc3 .pulse{display:none}.svc3 .tx > *{transition:none}.svc3 .rule i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Services</span><h2 class="h2" id="sv3-h" style="margin-top:12px">One Line, Five Services</h2>
+  <p class="lede rv">Pick a stop on the line and watch it draw the job.</p></div>
+  <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+ <div class="panel" data-owl="say:Pick a stop">
+  <div class="g">
+   <svg class="art" viewBox="0 0 600 460" role="img" aria-labelledby="sv3-alt"><title id="sv3-alt"></title><path class="ground" d="M20 424H580"/><path class="ln"/><path class="ln"/><path class="ln"/><path class="pulse"/><path class="pulse"/><path class="pulse"/></svg>
+   <div class="tx" id="sv3-panel" role="tabpanel"><span class="n"></span><h3></h3><p></p><ul></ul><div class="acts"><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div></div>
+  </div>
+ </div>
+ <div class="track"><div class="rule" aria-hidden="true"><i></i></div><div class="stops" role="tablist" aria-label="Owl Roofing services"></div></div>
+</div>
+<script>
+OWL.reg('services','3',function(root){
+  var S = OWL.SVC || [], svg = root.querySelector('svg.art'), lns = [].slice.call(svg.querySelectorAll('.ln')), pls = [].slice.call(svg.querySelectorAll('.pulse')), tx = root.querySelector('.tx'), stops = root.querySelector('.stops'), fill = root.querySelector('.rule i'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* every drawing is exactly three strands (one continuous path each), so any service morphs into any other */
+  var D = {
+    replace: ['M40 424 L130 424 L130 282 L94 282 L180 150 L420 150 L506 282 L470 282 L470 424 L560 424',
+              'M107 262 L493 262 L479 240 L121 240 L136 218 L464 218 L450 196 L150 196 L164 174 L436 174',
+              'M182 143 L418 143'],
+    repair:  ['M40 420 L120 388 L120 396 L200 364 L200 372 L280 340 L280 348 L360 316 L360 324 L440 292 L440 300 L520 268 L520 276 L560 260',
+              'M280 340 L338 290 L362 318',
+              'M488 214 L404 130 L378 104 L412 70 L438 96 L404 130'],
+    storm:   ['M150 200 A48 48 0 0 1 206 142 A72 72 0 0 1 340 128 A56 56 0 0 1 432 168 A42 42 0 0 1 424 250 L158 250 A26 26 0 0 1 150 200',
+              'M170 278 L180 314 M200 270 L212 318 L232 280 L246 328 L268 284 L282 330 L304 286 L318 334 L340 290 L354 330 L378 292 L390 324',
+              'M40 424 L300 352 L560 424'],
+    check:   ['M40 424 L130 424 L130 282 L94 282 L180 150 L420 150 L506 282 L470 282 L470 424 L560 424',
+              'M290 220 A70 70 0 1 1 430 220 A70 70 0 1 1 290 220',
+              'M410 270 L486 346'],
+    siding:  ['M100 132 L500 132 L500 424 L100 424 L100 132',
+              'M100 168 L500 168 L500 204 L100 204 L100 240 L500 240 L500 276 L100 276 L100 312 L500 312 L500 348 L100 348 L100 384 L500 384',
+              'M290 218 L290 330 L236 330 L236 218 L344 218 L344 330 L290 330']
+  };
+  D.storm[1] = 'M200 270 L212 318 L232 280 L246 328 L268 284 L282 330 L304 286 L318 334 L340 290 L354 330 L378 292 L390 324';
+  var ALT = {replace:'A house with a new hip roof: shingle courses and a ridge cap', repair:'A roof slope with one lifted shingle tab and a hammer', storm:'A storm cloud with hail falling on a roof', check:'A house with a magnifier over the roof', siding:'A wall of lap siding with a window'};
+  var N = 110, NS = 'http://www.w3.org/2000/svg', tmp = document.createElementNS(NS, 'path'); svg.appendChild(tmp); tmp.setAttribute('visibility', 'hidden');
+  function sample(d){ tmp.setAttribute('d', d); var L = tmp.getTotalLength(), pts = []; for (var i = 0; i < N; i++){ var p = tmp.getPointAtLength(L*i/(N - 1)); pts.push([p.x, p.y]); } return pts; }
+  var P = {}; Object.keys(D).forEach(function(k){ P[k] = D[k].map(sample); }); tmp.remove();
+  var curPts = P.replace.map(function(s){ return s.map(function(q){ return q.slice(); }); }), cur = -1, raf = 0;
+  function dstr(pts){ return 'M' + pts.map(function(q){ return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('L'); }
+  function paint(){ lns.forEach(function(l, j){ var d = dstr(curPts[j]); l.setAttribute('d', d); pls[j].setAttribute('d', d); }); }
+  function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
+  function morph(to){
+    cancelAnimationFrame(raf); var from = curPts.map(function(s){ return s.map(function(q){ return q.slice(); }); }), t0 = 0, dur = 950;
+    if (OWL.reduce){ curPts = to.map(function(s){ return s.map(function(q){ return q.slice(); }); }); paint(); return; }
+    (function tick(t){ if (!t0) t0 = t; var done = true;
+      for (var j = 0; j < 3; j++){ var e = Math.min(1, Math.max(0, (t - t0 - j*90)/dur)); if (e < 1) done = false; var k = ease(e);
+        for (var i = 0; i < N; i++){ curPts[j][i][0] = from[j][i][0] + (to[j][i][0] - from[j][i][0])*k; curPts[j][i][1] = from[j][i][1] + (to[j][i][1] - from[j][i][1])*k; } }
+      paint(); if (!done) raf = requestAnimationFrame(tick); })(performance.now());
+  }
+  var SHORT = ['Replacement', 'Repair', 'Storm', 'Wise Check', 'Siding'];
+  var btns = S.map(function(s, i){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'sv3-t' + i; b.setAttribute('aria-controls', 'sv3-panel');
+    b.innerHTML = '<b aria-hidden="true"></b>' + (SHORT[i] || s.n); b.setAttribute('aria-label', s.n);
+    b.addEventListener('click', function(){ show(i); });
+    b.addEventListener('keydown', function(e){ var n = null; if (e.key === 'ArrowRight') n = (cur + 1) % S.length; else if (e.key === 'ArrowLeft') n = (cur + S.length - 1) % S.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = S.length - 1; if (n !== null){ e.preventDefault(); show(n); btns[n].focus(); } });
+    stops.appendChild(b); return b; });
+  function show(i){
+    if (i === cur) return; cur = i; var s = S[i];
+    btns.forEach(function(b, j){ b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; });
+    tx.setAttribute('aria-labelledby', 'sv3-t' + i); fill.parentNode.style.setProperty('--f', S.length > 1 ? i/(S.length - 1) : 0);
+    svg.querySelector('title').textContent = ALT[s.k] || s.n; morph(P[s.k] || P.replace);
+    tx.classList.add('out');
+    setTimeout(function(){ tx.querySelector('.n').textContent = '0' + (i + 1) + ' / 0' + S.length; tx.querySelector('h3').textContent = s.n; tx.querySelector('p').textContent = s.d; tx.querySelector('ul').innerHTML = s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join(''); tx.classList.remove('out'); }, OWL.reduce ? 0 : 220);
+  }
+  paint(); show(0);
+  /* first view: the line draws itself on */
+  if (!OWL.reduce && 'IntersectionObserver' in window){
+    lns.forEach(function(l){ l.style.strokeDasharray = 2000; l.style.strokeDashoffset = 2000; });
+    var io = new IntersectionObserver(function(e){ if (!e[0].isIntersecting) return; io.disconnect(); OWL.reveal(h2);
+      lns.forEach(function(l, j){ l.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.22,.61,.36,1) ' + (j*.25) + 's'; l.style.strokeDashoffset = 0; setTimeout(function(){ l.style.strokeDasharray = ''; l.style.strokeDashoffset = ''; l.style.transition = ''; }, 2400); }); }, {threshold:.3});
+    io.observe(svg);
+  } else OWL.reveal(h2);
+});
+</script>
+</section>
+
+</div>
+<template class="bak" data-sec="services" data-b="1">
+<section class="sec svc2" id="services-2" aria-labelledby="sv2-h">
+<style>
 .svc2 .panel{position:relative;padding:clamp(24px,4vw,48px);border-radius:32px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.45)}
 .svc2 .hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px}
 .svc2 .feathers{display:block;width:100%;height:34px;margin:22px 0 8px}
@@ -3719,7 +3930,7 @@ OWL.reg('services','2',function(root){
 </script>
 </section>
 
-</div>
+</template>
 <div class="ver" data-sec="reviews" data-v="1">
 <section class="sec rev1" id="reviews" aria-labelledby="rv1-h">
 <style>
@@ -3803,6 +4014,173 @@ OWL.reg('reviews','1',function(root){
 <div class="ver" data-sec="reviews" data-v="2">
 <section class="sec rev2" id="reviews-2" aria-labelledby="rv2-h">
 <style>
+.rev2 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,80px);align-items:start}
+.rev2 .side{position:sticky;top:clamp(80px,12vh,120px)}
+.rev2 .lede{margin:14px 0 24px;max-width:36ch}
+.rev2 .carry{border-radius:24px;background:var(--paper);padding:20px 20px 12px;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 30px 50px -34px rgba(23,17,29,.5)}
+.rev2 .carry h3{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12;margin-bottom:10px}
+.rev2 .carry ul{list-style:none;margin:0;padding:0}
+.rev2 .carry li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;padding:10px 0;border-top:1px solid rgba(23,17,29,.08);font-weight:600;font-size:16px;line-height:1.3}
+.rev2 .carry li:first-child{border-top:0}
+.rev2 .carry li svg{width:40px;height:40px}
+.rev2 .carry li small{display:block;font-weight:500;font-size:14px;color:var(--ink-70)}
+.rev2 .cta{margin-top:20px}
+.rev2 .spine{position:relative;list-style:none;margin:0;padding:0 0 0 76px}
+.rev2 .film{position:absolute;left:18px;top:var(--t,0px);height:var(--h,100%);width:28px;border-radius:6px;background:#E6E1D4;overflow:hidden}
+.rev2 .film::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#F1EFE6 3px,transparent 3.5px) 0 0/28px 22px;opacity:.9}
+.rev2 .film i{position:absolute;inset:0;background:linear-gradient(var(--amber),#D48F17);transform-origin:top;transform:scaleY(var(--p,0))}
+.rev2 .film i::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#FBF3DF 3px,transparent 3.5px) 0 0/28px 22px}
+.rev2 .node{position:relative;min-height:min(46vh,420px);padding:6px 0 40px}
+.rev2 .node:last-child{min-height:0;padding-bottom:0}
+.rev2 .dot{position:absolute;left:-76px;top:2px;width:64px;height:64px;display:grid;place-items:center;border-radius:50%;background:var(--paper);box-shadow:0 0 0 4px #E6E1D4,0 10px 20px -10px rgba(23,17,29,.5);transition:background .4s,box-shadow .4s,transform .5s cubic-bezier(.3,1.6,.5,1)}
+.rev2 .dot svg{width:30px;height:30px}
+.rev2 .node.on .dot{background:var(--amber);box-shadow:0 0 0 4px var(--amber-edge),0 0 0 14px rgba(234,162,33,.18);transform:scale(1.06)}
+.rev2 .when{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8E5A12;font-variant-numeric:tabular-nums}
+.rev2 .node h3{font-size:clamp(30px,3.4vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin:6px 0 10px;color:#6B6570;transition:color .4s}
+.rev2 .node p{font-size:18px;max-width:38ch;color:var(--ink-70)}
+.rev2 .node.on h3{color:var(--ink)}
+.rev2 .big{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.rev2 .big b{font-size:clamp(84px,10vw,150px);font-weight:900;letter-spacing:-.05em;line-height:.9;font-variant-numeric:tabular-nums}
+.rev2 .stars{display:flex;gap:6px}
+.rev2 .stars svg{width:36px;height:36px}
+.rev2 .stars path{fill:var(--amber);stroke:#B9791A;stroke-width:1;transform-box:fill-box;transform-origin:50% 50%;transform:scale(0);transition:transform .45s cubic-bezier(.3,1.7,.5,1)}
+.rev2 .node.on .stars path{transform:none}
+.rev2 .node.on .stars svg:nth-child(2) path{transition-delay:.08s}.rev2 .node.on .stars svg:nth-child(3) path{transition-delay:.16s}.rev2 .node.on .stars svg:nth-child(4) path{transition-delay:.24s}.rev2 .node.on .stars svg:nth-child(5) path{transition-delay:.32s}
+.rev2 .count{font-size:clamp(24px,2.4vw,32px);font-weight:800;font-variant-numeric:tabular-nums}
+@media (max-width:900px){.rev2 .g{grid-template-columns:1fr}.rev2 .side{position:static}.rev2 .spine{padding-left:64px}.rev2 .film{left:14px;width:22px}.rev2 .dot{left:-64px;width:50px;height:50px}.rev2 .node{min-height:0;padding-bottom:44px}}
+@media (prefers-reduced-motion:reduce){.rev2 .stars path{transform:none;transition:none}.rev2 .dot,.rev2 .node h3{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="side">
+   <span class="kick">Reviews</span>
+   <h2 class="h2" id="rv2-h" style="margin-top:12px">Earned, Not Claimed</h2>
+   <p class="lede rv">Only the dates we can stand behind go on the line. Everything else has been with us the whole way.</p>
+   <div class="carry"><h3>Carried the whole way</h3><ul>
+    <li><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="9" width="28" height="22" rx="4" fill="none" stroke="#17111D" stroke-width="2.6"/><path d="M11 17h12M11 23h8" stroke="#EAA221" stroke-width="2.6" stroke-linecap="round"/><circle cx="28" cy="22" r="3" fill="#EAA221"/></svg><span>Licensed in Minnesota<small>Licence #BC809662</small></span></li>
+    <li><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5l12 5v9c0 8-5 13-12 16C13 32 8 27 8 19v-9z" fill="none" stroke="#17111D" stroke-width="2.6" stroke-linejoin="round"/><path d="M14 20l4 4 8-9" fill="none" stroke="#EAA221" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>GAF Systems Plus<small>Certified roofing contractor</small></span></li>
+    <li><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 22L20 9l15 13" fill="none" stroke="#17111D" stroke-width="2.6" stroke-linejoin="round"/><path d="M10 20v13h20V20" fill="none" stroke="#17111D" stroke-width="2.6"/><path d="M16 27h8" stroke="#EAA221" stroke-width="3" stroke-linecap="round"/></svg><span>10-year workmanship warranty<small>Plus up-to-50-year manufacturer warranties</small></span></li>
+   </ul></div>
+   <a class="btn btn-amber cta" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <ol class="spine">
+   <li class="node"><span class="dot" aria-hidden="true"><svg viewBox="0 0 30 30"><path d="M4 15L15 6l11 9" fill="none" stroke="#17111D" stroke-width="2.6" stroke-linejoin="round"/><path d="M8 13v11h14V13" fill="none" stroke="#17111D" stroke-width="2.6"/></svg></span>
+    <span class="when">2025</span><h3>Founded</h3><p>Tim Brown and Noah Bergland start Owl Roofing LLC, a family-owned company in Shoreview, Minnesota.</p></li>
+   <li class="node"><span class="dot" aria-hidden="true"><svg viewBox="0 0 30 30"><text x="15" y="20" text-anchor="middle" font-size="13" font-weight="900" fill="#17111D">A−</text></svg></span>
+    <span class="when">February 25, 2026</span><h3>BBB A−</h3><p>Rated A− by the Better Business Bureau since February 25, 2026.</p></li>
+   <li class="node"><span class="dot" aria-hidden="true"><svg viewBox="0 0 30 30"><path d="M15 3.5l3.4 7 7.7 1-5.6 5.4 1.4 7.6L15 20.8l-6.9 3.7 1.4-7.6L3.9 11.5l7.7-1z" fill="#17111D"/></svg></span>
+    <span class="when">Today</span><h3 class="sr">5.0 from 90+ reviews</h3>
+    <div class="big" aria-hidden="true"><b>5.0</b><span class="stars"><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span></div>
+    <p class="count" aria-hidden="true"><span class="cn">90</span>+ reviews</p></li>
+  </ol>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','2',function(root){
+  var spine = root.querySelector('.spine'), film = document.createElement('span'), nodes = [].slice.call(root.querySelectorAll('.node')), cn = root.querySelector('.cn'), h2 = root.querySelector('h2'), counted = false, raf = 0;
+  film.className = 'film'; film.setAttribute('aria-hidden', 'true'); film.innerHTML = '<i></i>'; spine.insertBefore(film, spine.firstChild);
+  OWL.split(h2);
+  function geo(){ var s = spine.getBoundingClientRect(), a = nodes[0].querySelector('.dot').getBoundingClientRect(), b = nodes[nodes.length - 1].querySelector('.dot').getBoundingClientRect();
+    var t = a.top + a.height/2 - s.top, e = b.top + b.height/2 - s.top; film.style.setProperty('--t', t + 'px'); film.style.setProperty('--h', Math.max(1, e - t) + 'px'); return {t: t, e: e, top: s.top}; }
+  function count(){ if (counted) return; counted = true; if (OWL.reduce){ cn.textContent = '90'; return; } var t0 = 0; (function f(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0)/1200); cn.textContent = Math.round(90*(1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(performance.now()); }
+  function update(){ raf = 0; var g = geo(), anchor = innerHeight*.58, p = Math.min(1, Math.max(0, (anchor - (g.top + g.t))/(g.e - g.t)));
+    if (OWL.reduce) p = 1;
+    film.style.setProperty('--p', p.toFixed(4));
+    nodes.forEach(function(n, i){ var on = p >= (nodes.length > 1 ? i/(nodes.length - 1) : 1) - .001; n.classList.toggle('on', on); if (on && i === nodes.length - 1) count(); }); }
+  function req(){ if (!raf) raf = requestAnimationFrame(update); }
+  if (!OWL.reduce) cn.textContent = '0';
+  addEventListener('scroll', req, {passive: true}); addEventListener('resize', req); update();
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.2}); io.observe(spine); } else OWL.reveal(h2);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="reviews" data-v="3">
+<section class="sec rev3" id="reviews-3" aria-labelledby="rv3-h">
+<style>
+.rev3 .field{position:relative;border-radius:32px;background:radial-gradient(ellipse at 50% 50%,#FBF7EC 0%,#F4EFE2 60%,#EDE6D5 100%);overflow:hidden;min-height:clamp(560px,52vw,680px);display:grid;place-items:center;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -46px rgba(23,17,29,.5);touch-action:pan-y}
+.rev3 canvas{position:absolute;inset:0;width:100%;height:100%}
+.rev3 .card{position:relative;z-index:2;width:min(440px,calc(100% - 40px));padding:clamp(22px,3vw,34px);border-radius:26px;background:rgba(251,250,246,.94);text-align:center;box-shadow:0 2px 0 #fff inset,0 30px 60px -30px rgba(23,17,29,.55),0 0 0 1px rgba(234,162,33,.35)}
+.rev3 .kick{justify-content:center}
+.rev3 .num{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0 2px}
+.rev3 .num b{font-size:clamp(70px,8vw,104px);font-weight:900;letter-spacing:-.05em;line-height:.95}
+.rev3 .num .st{display:grid;grid-template-columns:repeat(5,18px);gap:3px}
+.rev3 .num .st svg{width:18px;height:18px;color:var(--amber)}
+.rev3 .num .st span{grid-column:1/-1;font-size:15px;font-weight:800;text-align:left;margin-top:4px}
+.rev3 h2{font-size:clamp(22px,2.2vw,28px)}
+.rev3 .note{margin:10px auto 16px;max-width:32ch;font-size:16px;color:var(--ink-70)}
+.rev3 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:18px}
+.rev3 .chips span{font-size:14px;font-weight:700;padding:7px 12px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(23,17,29,.1),0 3px 0 rgba(23,17,29,.06)}
+.rev3 .chips span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+@media (max-width:760px){.rev3 .field{min-height:780px}}
+</style>
+<div class="wrap">
+ <div class="field" data-owl="say:Make a splash">
+  <canvas aria-hidden="true"></canvas>
+  <div class="card">
+   <span class="kick">Reviews</span>
+   <p class="sr">Rated 5.0 from 90+ reviews.</p>
+   <div class="num" aria-hidden="true"><b>5.0</b><span class="st" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><span>90+ reviews</span></span></div>
+   <h2 class="h2" id="rv3-h">Ninety-Plus and Counting</h2>
+   <p class="note">Around this card: 90 feathers, one for each review so far, and a plus for the next one.</p>
+   <div class="chips"><span>BBB A−</span><span>GAF Systems Plus</span><span>10-year workmanship warranty</span></div>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','3',function(root){
+  var field = root.querySelector('.field'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), card = root.querySelector('.card'), h2 = root.querySelector('h2');
+  var dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, M = [], waves = [], vis = false, lastSplash = 0, user = 0, t0 = performance.now();
+  function layout(){
+    var b = field.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var c = card.getBoundingClientRect(), cx = c.left - b.left + c.width/2, cy = c.top - b.top + c.height/2, rx0 = 0, ry0 = 0;
+    /* place exactly 91 marks (90 + the plus) on a grid that avoids the card, so every mark is always visible */
+    var cl = c.left - b.left - 18, cr = c.right - b.left + 18, ct = c.top - b.top - 18, cb = c.bottom - b.top + 18, cand = [];
+    for (var sp = 72; sp >= 20; sp -= 2){ cand = []; var cols = Math.floor((W - 36)/sp), rows = Math.floor((H - 36)/sp), ox = (W - (cols - 1)*sp)/2, oy = (H - (rows - 1)*sp)/2;
+      for (var r = 0; r < rows; r++) for (var q = 0; q < cols; q++){ var x = ox + q*sp + (r % 2 ? sp*.25 : -sp*.25), y = oy + r*sp; if (x < 14 || x > W - 14) continue; if (x > cl && x < cr && y > ct && y < cb) continue; cand.push([x, y]); }
+      if (cand.length >= 91) break; }
+    M = [];
+    for (var n = 0; n < 91 && cand.length; n++){ var pt = cand[Math.floor(n*cand.length/91)]; M.push({x: pt[0], y: pt[1], a: Math.atan2(pt[1] - cy, pt[0] - cx) + Math.PI/2, z: 0, v: 0, ph: n*1.7, plus: false}); }
+    M[M.length - 1].plus = true;
+  }
+  function splash(x, y, s){ waves.push({x: x, y: y, r: 0, s: s || 1}); if (waves.length > 6) waves.shift(); }
+  function feather(m, lift){
+    var k = 1 + lift*.55, col = lift > .05 ? 'rgba(' + Math.round(23 + 211*lift) + ',' + Math.round(17 + 145*lift) + ',' + Math.round(29 + 4*lift) + ',' + (.55 + .45*lift) + ')' : 'rgba(23,17,29,.42)';
+    ctx.save(); ctx.translate(m.x, m.y - lift*10); ctx.rotate(m.a + Math.sin(m.ph)*.08 + lift*.6); ctx.scale(k, k);
+    if (m.plus){ ctx.strokeStyle = lift > .05 ? col : '#C7871A'; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-7, 0); ctx.lineTo(7, 0); ctx.moveTo(0, -7); ctx.lineTo(0, 7); ctx.stroke(); ctx.restore(); return; }
+    ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(0, -12); ctx.quadraticCurveTo(7, -3, 1.5, 10); ctx.lineTo(-1.5, 10); ctx.quadraticCurveTo(-7, -3, 0, -12); ctx.fill();
+    ctx.strokeStyle = 'rgba(251,250,246,.75)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, -10); ctx.lineTo(0, 14); ctx.stroke(); ctx.restore();
+  }
+  function frame(t){
+    if (vis){
+      var dt = Math.min(48, t - (frame.l || t)); frame.l = t; ctx.clearRect(0, 0, W, H);
+      waves.forEach(function(w){ w.r += dt*.42; }); waves = waves.filter(function(w){ return w.r < Math.max(W, H)*1.2; });
+      if (!OWL.reduce && t - user > 3800 && t - lastSplash > 3600){ lastSplash = t; splash(W*(.15 + Math.random()*.7), H*(.15 + Math.random()*.7), .8); }
+      M.forEach(function(m){ var f = 0; waves.forEach(function(w){ var d = Math.hypot(m.x - w.x, m.y - w.y), band = Math.abs(d - w.r); if (band < 34) f += (1 - band/34)*w.s*Math.max(0, 1 - w.r/900); });
+        m.v += (f*1.6 - m.z)*.18; m.v *= .78; m.z += m.v; m.ph += dt*.0012; feather(m, Math.max(0, Math.min(1, m.z))); });
+      waves.forEach(function(w){ ctx.strokeStyle = 'rgba(234,162,33,' + (Math.max(0, .35 - w.r/1400)).toFixed(3) + ')'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(w.x, w.y, w.r, 0, Math.PI*2); ctx.stroke(); });
+    }
+    if (!OWL.reduce) requestAnimationFrame(frame);
+  }
+  layout(); addEventListener('resize', function(){ layout(); if (OWL.reduce) still(); });
+  function still(){ ctx.clearRect(0, 0, W, H); M.forEach(function(m){ feather(m, 0); }); }
+  var lp = 0;
+  field.addEventListener('pointermove', function(e){ var b = field.getBoundingClientRect(), now = performance.now(); user = now; if (now - lp > 160){ lp = now; splash(e.clientX - b.left, e.clientY - b.top, .7); } });
+  field.addEventListener('pointerdown', function(e){ var b = field.getBoundingClientRect(); user = performance.now(); splash(e.clientX - b.left, e.clientY - b.top, 1.4); });
+  if (OWL.reduce){ vis = true; still(); OWL.reveal(h2); return; }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis){ layout(); OWL.reveal(h2); if (!frame.d){ frame.d = 1; var b = card.getBoundingClientRect(), f = field.getBoundingClientRect(); splash(b.left - f.left + b.width/2, b.top - f.top + b.height/2, 1.2); } } }).observe(field);
+  else vis = true;
+  requestAnimationFrame(frame);
+});
+</script>
+</section>
+
+</div>
+<template class="bak" data-sec="reviews" data-b="1">
+<section class="sec rev2" id="reviews-2" aria-labelledby="rv2-h">
+<style>
 .rev2 .panel{position:relative;padding:clamp(28px,4vw,52px) clamp(20px,4vw,52px) clamp(28px,4vw,44px);border-radius:32px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.45);overflow:hidden}
 .rev2 .sub{display:flex;align-items:center;gap:14px;margin-top:10px;font-size:clamp(22px,2.4vw,30px);font-weight:500}
 .rev2 .sub .st{display:inline-flex;gap:4px;color:var(--amber)}
@@ -3864,7 +4242,7 @@ OWL.reg('reviews','2',function(root){
 </script>
 </section>
 
-</div>
+</template>
 <div class="ver" data-sec="area" data-v="1">
 <section class="sec area1" id="areas" aria-labelledby="ar1-h">
 <style>
