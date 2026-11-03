@@ -522,6 +522,46 @@
       "Index and reader"
      ]
     ]
+   },
+   {
+    "slot": "rv3",
+    "name": "People they name",
+    "mod": "p_rv3",
+    "obj": "PRv3",
+    "v": [
+     [
+      "a",
+      "Name cards"
+     ],
+     [
+      "b",
+      "Hello, my name is"
+     ],
+     [
+      "c",
+      "Names in the sentence"
+     ]
+    ]
+   },
+   {
+    "slot": "rv4",
+    "name": "By the work done",
+    "mod": "p_rv4",
+    "obj": "PRv4",
+    "v": [
+     [
+      "a",
+      "Tabs by trade"
+     ],
+     [
+      "b",
+      "Six columns"
+     ],
+     [
+      "c",
+      "What's your project?"
+     ]
+    ]
    }
   ],
   "about": [],
