@@ -118,7 +118,12 @@
  },
  {
   "sec": "wrap",
-  "check": "storm at 92: \"Hail and wind\", unprotected shakes, shield glows",
+  "check": "job at 40: \"Tear-off\", debris in the open yard, debris on the wrap (none on the lawn but strays)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "check": "job at 100: wrap off, strays swept, PM check, aftercare box; open yard still has nails",
   "ok": true
  },
  {

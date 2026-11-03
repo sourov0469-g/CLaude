@@ -1,4 +1,4 @@
-// Section version evidence: node sec-shots.cjs <sec> <v> [dsf] [outdir]
+// Section version evidence: node sec-shots.cjs <sec> <v> [dsf] [outdir]   (env WAIT ms, PRE js to run first, TAG file suffix)
 // The section alone (header hidden) at 1440 / 768 / 390 after scrolling to it like a visitor. Prints errors/overflow.
 const { chromium } = require('playwright'); const path = require('path'); const fs = require('fs');
 const [sec, v, dsfArg, outArg] = process.argv.slice(2); const DSF = +(dsfArg || 1);
@@ -15,9 +15,10 @@ const F = 'file://' + path.resolve(__dirname, '../owl-roofing.html') + '?' + sec
     const sel = `.ver[data-sec="${sec}"][data-v="${v}"]`;
     await p.evaluate(s => document.querySelector(s).scrollIntoView({ block: 'start', behavior: 'instant' }), sel); await p.waitForTimeout(+(process.env.WAIT || 2200));
     await p.addStyleTag({ content: '.hdr{visibility:hidden}' });
+    if (process.env.PRE) { await p.evaluate(process.env.PRE); await p.waitForTimeout(1200); }
     if (w === 1440) { const bb = await p.evaluate(s => { const r = document.querySelector(s).getBoundingClientRect(); return { x: r.left + r.width * .62, y: Math.min(innerHeight - 40, r.top + 380) }; }, sel); await p.mouse.move(bb.x - 200, bb.y, { steps: 6 }); await p.mouse.move(bb.x, bb.y, { steps: 14 }); await p.waitForTimeout(300); }
     const bb = await p.evaluate(s => { const r = document.querySelector(s).getBoundingClientRect(); return { x: 0, y: r.top + scrollY, width: innerWidth, height: r.height }; }, sel);
-    await p.screenshot({ path: path.join(OUT, `${sec}-v${v}-${w}.jpg`), quality: 82, type: 'jpeg', fullPage: true, clip: bb, timeout: 90000 });
+    await p.screenshot({ path: path.join(OUT, `${sec}-v${v}${process.env.TAG || ''}-${w}.jpg`), quality: 82, type: 'jpeg', fullPage: true, clip: bb, timeout: 90000 });
     const o = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth); if (o > 0) errs.push(w + ' overflow ' + o + 'px');
     await p.close();
   }

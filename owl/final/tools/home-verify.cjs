@@ -26,8 +26,10 @@ for(const k of ['shingles','flashing','ventilation','gutters']) await p.click('.
 await p.waitForTimeout(1300);
 rec('wise','all four ticked: needle at PROTECTED and CTA glows',await p.evaluate(()=>/118/.test(document.querySelector('.wise1 .needle').style.transform)&&document.querySelector('.wise1 .btn').classList.contains('ready')));
 await p.click('.wise1 .reset'); rec('wise','Start again resets',await p.evaluate(()=>!document.querySelector('.wise1 .it[aria-pressed="true"]')));
-await p.fill('.wrap1 input[type=range]','92'); await p.dispatchEvent('.wrap1 input[type=range]','input');
-rec('wrap','storm at 92: "Hail and wind", unprotected shakes, shield glows',await p.evaluate(()=>document.querySelector('.wrap1 output').textContent==='Hail and wind'&&document.querySelector('.wrap1 .pane.u').classList.contains('shake')));
+await p.fill('.wrap1 input[type=range]','40'); await p.dispatchEvent('.wrap1 input[type=range]','input'); await p.waitForTimeout(900);
+rec('wrap','job at 40: "Tear-off", debris in the open yard, debris on the wrap (none on the lawn but strays)',await p.evaluate(()=>document.querySelector('.wrap1 output').textContent==='Tear-off'&&document.querySelectorAll('.wrap1 .pane.u .db.dn').length>5&&document.querySelector('.wrap1 .pane.p .wrapg').classList.contains('on')&&document.querySelectorAll('.wrap1 .pane.p .wrapg .db.dn').length>3));
+await p.fill('.wrap1 input[type=range]','100'); await p.dispatchEvent('.wrap1 input[type=range]','input'); await p.waitForTimeout(900);
+rec('wrap','job at 100: wrap off, strays swept, PM check, aftercare box; open yard still has nails',await p.evaluate(()=>document.querySelector('.wrap1 output').textContent==='Done: aftercare box'&&document.querySelector('.wrap1 .pane.p .wrapg').classList.contains('lift')&&[...document.querySelectorAll('.wrap1 .pane.p .db[data-stray]')].every(g=>g.classList.contains('got'))&&document.querySelector('.wrap1 .pane.p .box').classList.contains('on')&&document.querySelectorAll('.wrap1 .pane.u .nail.dn').length>5));
 await p.locator('.svc1 .rows').scrollIntoViewIfNeeded(); await p.waitForTimeout(3500);
 rec('services','board settles to ROOF REPLACEMENT',await p.evaluate(()=>[...document.querySelectorAll('.svc1 .row')[0].querySelectorAll('.t')].map(t=>t.textContent||' ').join('').trim()==='ROOF REPLACEMENT'));
 await p.click('.svc1 .row:nth-child(3)'); await p.waitForTimeout(2000);

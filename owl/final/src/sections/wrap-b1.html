@@ -1,0 +1,82 @@
+<section class="sec wrap1" id="protect" aria-labelledby="pn1-h">
+<style>
+.wrap1 .top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px 40px;margin-bottom:28px}
+.wrap1 .lede{margin-top:14px;max-width:44ch}
+.wrap1 .pair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;border-radius:28px;padding:10px;background:var(--paper);box-shadow:0 40px 70px -36px rgba(23,17,29,.5)}
+.wrap1 .pane{position:relative;aspect-ratio:865/560;border-radius:20px;overflow:hidden;background:#59606a}
+.wrap1 .pane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter .4s}
+.wrap1 .pane .chip{position:absolute;left:16px;top:16px;z-index:3;font-weight:700;font-size:14px;padding:7px 13px;border-radius:999px;background:var(--ink);color:var(--cream)}
+.wrap1 .pane.p .chip{left:auto;right:16px;background:var(--amber);color:var(--ink)}
+.wrap1 .pane.u.shake img{animation:pnshake .32s linear infinite}
+@keyframes pnshake{25%{transform:translate(1.5px,-1px)}50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1.5px)}}
+.wrap1 .glow{position:absolute;left:12%;right:-6%;top:-6%;height:62%;border-radius:50% 50% 0 0/100% 100% 0 0;background:radial-gradient(ellipse at 50% 100%,rgba(234,162,33,.0) 40%,rgba(234,162,33,.55) 72%,rgba(234,162,33,0) 74%);opacity:.35;transition:opacity .4s;pointer-events:none;mix-blend-mode:screen}
+.wrap1 canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.wrap1 .ctrl{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;margin:26px auto 0;max-width:760px;padding:16px 22px;border-radius:20px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 18px 30px -22px rgba(23,17,29,.5)}
+.wrap1 .ctrl label{font-weight:700}
+.wrap1 .ctrl output{font-weight:600;font-variant-numeric:tabular-nums;min-width:96px;text-align:right}
+.wrap1 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:12px;background:linear-gradient(90deg,var(--amber) var(--p,35%),rgba(23,17,29,.12) var(--p,35%));outline-offset:6px}
+.wrap1 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 4px 0 var(--amber-edge),0 10px 16px -4px rgba(23,17,29,.5);cursor:grab}
+.wrap1 input[type=range]::-moz-range-thumb{width:34px;height:34px;border:0;border-radius:50%;background:var(--amber);box-shadow:0 4px 0 var(--amber-edge)}
+.wrap1 .card{position:relative;z-index:4;margin:-34px auto 0;width:max-content;max-width:calc(100% - 32px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 22px;padding:18px 26px;border-radius:20px;background:var(--paper);border:2px solid rgba(234,162,33,.55);box-shadow:0 20px 40px -20px rgba(23,17,29,.45)}
+.wrap1 .card h2{font-size:clamp(22px,2.4vw,32px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+@media (max-width:760px){.wrap1 .pair{grid-template-columns:1fr}.wrap1 .card{margin-top:16px}.wrap1 .ctrl{grid-template-columns:1fr;gap:10px}.wrap1 .ctrl output{text-align:left}}
+</style>
+<div class="wrap">
+ <div class="top">
+  <div><span class="kick">Protect Your Nest System</span>
+  <p class="lede rv">Turn up the storm. One roof gives way; the one Owl protects keeps the nest dry.</p></div>
+ </div>
+ <div class="pair" data-owl="say:Turn it up">
+  <div class="pane u"><img src="{{A:storm-unprotected.webp}}" alt="A house with a failing roof in a storm: shingles torn away and water pouring in" width="863" height="560"><span class="chip">Unprotected</span></div>
+  <div class="pane p"><img src="{{A:storm-protected.webp}}" alt="The same kind of house under an amber shield, with an owl family dry in its nest under the eaves" width="867" height="560"><span class="glow" aria-hidden="true"></span><span class="chip">Protect Your Nest</span></div>
+  <canvas aria-hidden="true"></canvas>
+ </div>
+ <div class="card"><h2 id="pn1-h">Same Storm. Different Ending.</h2><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Protect My Roof</a></div>
+ <div class="ctrl">
+  <label for="pn1-r">Storm</label>
+  <input id="pn1-r" type="range" min="0" max="100" value="35" aria-valuetext="Steady rain">
+  <output for="pn1-r">Steady rain</output>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','1',function(root){
+  var pair = root.querySelector('.pair'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), r = root.querySelector('input'), out = root.querySelector('output');
+  var U = root.querySelector('.pane.u'), Pp = root.querySelector('.pane.p'), glow = root.querySelector('.glow');
+  var dpr = Math.min(2, devicePixelRatio || 1), W, H, drops = [], spl = [], s = .35, vis = true;
+  var names = [[0,'Light drizzle'],[25,'Steady rain'],[55,'Heavy storm'],[80,'Hail and wind']];
+  function size(){ var b = pair.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function paneRect(el){ var a = el.getBoundingClientRect(), b = pair.getBoundingClientRect(); return {x:a.left-b.left, y:a.top-b.top, w:a.width, h:a.height}; }
+  function set(){
+    s = r.value/100; r.style.setProperty('--p', r.value + '%'); var n = names[0][1]; names.forEach(function(q){ if (r.value >= q[0]) n = q[1]; });
+    out.textContent = n; r.setAttribute('aria-valuetext', n);
+    U.querySelector('img').style.filter = 'brightness(' + (1 - s*.35) + ') contrast(' + (1 + s*.15) + ')';
+    U.classList.toggle('shake', s > .78 && !OWL.reduce);
+    glow.style.opacity = (.25 + s*.75).toFixed(2);
+    Pp.querySelector('img').style.filter = 'brightness(' + (1 - s*.08) + ')';
+  }
+  r.addEventListener('input', set); set();
+  function frame(){
+    if (vis && !OWL.reduce){
+      ctx.clearRect(0,0,W,H);
+      var want = Math.round(40 + s*360), wind = 1 + s*6, P = paneRect(Pp);
+      while (drops.length < want) drops.push({x: Math.random()*W*1.2 - W*.1, y: -Math.random()*H, v: 9 + Math.random()*6, l: 10 + Math.random()*14, h: s > .8 && Math.random() < .25});
+      if (drops.length > want) drops.length = want;
+      for (var i = 0; i < drops.length; i++){
+        var d = drops[i]; d.y += d.v*(1 + s); d.x += wind;
+        var inP = d.x > P.x + P.w*.12 && d.x < P.x + P.w, cx = P.x + P.w*.56, rx = P.w*.52, ry = P.h*.62;
+        var hitShield = inP && d.y > P.y + 10 && Math.abs(((d.x - cx)*(d.x - cx))/(rx*rx) + ((d.y - (P.y + P.h*.56))*(d.y - (P.y + P.h*.56)))/(ry*ry) - 1) < .04;
+        if (hitShield){ spl.push({x:d.x, y:d.y, vx:(Math.random()-.5)*3 + 1.5, vy:-Math.random()*2.5, t:1, a:1}); d.y = -20; d.x = Math.random()*W*1.2 - W*.1; continue; }
+        if (d.y > H){ d.y = -20 - Math.random()*60; d.x = Math.random()*W*1.2 - W*.1; continue; }
+        ctx.strokeStyle = d.h ? 'rgba(241,239,230,.85)' : 'rgba(225,232,240,' + (.35 + s*.25) + ')'; ctx.lineWidth = d.h ? 3 : 1.3;
+        ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x - wind*1.6, d.y - (d.h ? 4 : d.l)); ctx.stroke();
+      }
+      for (var j = spl.length - 1; j >= 0; j--){ var p = spl[j]; p.x += p.vx; p.y += p.vy; p.vy += .25; p.t -= .05; if (p.t <= 0){ spl.splice(j,1); continue; }
+        ctx.fillStyle = 'rgba(234,162,33,' + p.t + ')'; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, 6.3); ctx.fill(); }
+    }
+    requestAnimationFrame(frame);
+  }
+  size(); addEventListener('resize', size); requestAnimationFrame(frame);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (!vis) ctx.clearRect(0,0,W,H); }).observe(pair);
+});
+</script>
+</section>
