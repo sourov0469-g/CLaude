@@ -156,7 +156,48 @@
     ]
    }
   ],
-  "windows": [],
+  "windows": [
+   {
+    "slot": "wd1",
+    "name": "Opener",
+    "mod": "p_wd1",
+    "obj": "PWd1",
+    "v": [
+     [
+      "a",
+      "Split cover"
+     ],
+     [
+      "b",
+      "Through the window"
+     ],
+     [
+      "c",
+      "The diptych"
+     ]
+    ]
+   },
+   {
+    "slot": "wd2",
+    "name": "The makers",
+    "mod": "p_wd2",
+    "obj": "PWd2",
+    "v": [
+     [
+      "a",
+      "Four makers, four cards"
+     ],
+     [
+      "b",
+      "One bar"
+     ],
+     [
+      "c",
+      "Set in type"
+     ]
+    ]
+   }
+  ],
   "roofing": [],
   "work": [],
   "reviews": [],

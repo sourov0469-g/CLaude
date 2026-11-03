@@ -1,0 +1,45 @@
+/* WINDOWS · Opener shared */
+.wd1A .pf3,.wd1B .pf3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 26px}
+.wd1A .pf3 div,.wd1B .pf3 div{padding-top:10px;border-top:2px solid #DCE5DE}
+.wd1A .pf3 dt,.wd1B .pf3 dt{font:800 clamp(24px,2.4vw,34px)/1 var(--display);letter-spacing:-.03em;color:var(--green)}
+.wd1A .pf3 dd,.wd1B .pf3 dd{margin-top:6px;font:600 14px/1.35 var(--text);color:var(--ink-2)}
+.wd1B .ft7 p,.wd1C .ft7 p{font:500 16.5px/1.5 var(--text);color:var(--ink-2);max-width:52ch}
+.wd1B .ft7,.wd1C .ft7{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;margin-top:26px}
+
+/* A — split cover */
+.wd1A{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,64px);align-items:center;padding:120px var(--gut) 70px}
+.wd1A .sec-h{margin-top:14px;font-size:clamp(40px,5.2vw,80px);line-height:1}
+.wd1A .sec-p{margin:16px 0 24px;font-size:18px;max-width:50ch}.wd1A .pf3{margin-bottom:26px;max-width:560px}
+.wd1A .ph3{position:relative;margin:0;border-radius:200px 200px 26px 26px;overflow:hidden;aspect-ratio:4/5;background:#E6EEE8;box-shadow:0 40px 70px -46px rgba(14,59,44,.6)}
+.wd1A .ph3 img{width:100%;height:100%;object-fit:cover;display:block}
+.wd1A figcaption{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.92);font:700 13px/1.35 var(--text);color:var(--ink)}
+@media (max-width:900px){.wd1A{grid-template-columns:1fr;padding-top:100px}.wd1A .ph3{aspect-ratio:4/3;border-radius:120px 120px 22px 22px}}
+
+/* B — through the window */
+.wd1B{padding:110px var(--gut) 70px}
+.wd1B .win6{padding:clamp(14px,1.6vw,22px);border-radius:10px;background:#FFFFFF;box-shadow:inset 0 0 0 2px #CFC8B9,0 40px 70px -46px rgba(14,59,44,.55)}
+.wd1B .frm2{display:grid;grid-template-rows:auto auto;gap:clamp(12px,1.4vw,18px);background:#E7E1D4;padding:clamp(12px,1.4vw,18px);border-radius:4px}
+.wd1B .up3{padding:clamp(26px,4vw,60px);background:linear-gradient(160deg,#DCEBF2,#B9D1DC);border-radius:2px}
+.wd1B .up3 .sec-h{margin-top:12px;font-size:clamp(38px,5.6vw,88px);line-height:1;max-width:14ch}
+.wd1B .lo3{position:relative;overflow:hidden;border-radius:2px;background:#F6F9F4}
+.wd1B .beh{padding:clamp(22px,3vw,40px)}
+.wd1B .beh .pf3{grid-template-columns:repeat(4,minmax(0,1fr))}
+.wd1B .sash{position:absolute;inset:0;padding:clamp(10px,1.2vw,14px);background:#fff;box-shadow:inset 0 0 0 2px #CFC8B9;transition:transform 1.3s cubic-bezier(.6,0,.2,1)}
+.wd1B .sash i{display:block;height:100%;background:linear-gradient(160deg,#DCEBF2,#A9C3CF);box-shadow:inset 0 0 0 2px #CFC8B9}
+.wd1B .sash::after{content:"";position:absolute;left:50%;top:6px;width:60px;height:8px;margin-left:-30px;border-radius:4px;background:#BFB7A6}
+.wd1B.up .sash{transform:translateY(-100%)}
+@media (max-width:860px){.wd1B .beh .pf3{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){.wd1B .sash{transition:none}}
+
+/* C — the diptych */
+.wd1C{padding:110px var(--gut) 70px}
+.wd1C .sec-h{font-size:clamp(38px,5vw,76px);line-height:1;max-width:18ch}
+.wd1C .dip{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,.42fr) minmax(0,1fr);gap:clamp(12px,1.6vw,20px);align-items:stretch}
+.wd1C figure{margin:0;position:relative;border-radius:22px;overflow:hidden;min-height:380px;background:#E6EEE8}
+.wd1C figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wd1C figcaption{position:absolute;left:12px;right:12px;bottom:12px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.92);font:700 12.5px/1.35 var(--text);color:var(--ink)}
+.wd1C .mid3{list-style:none;display:grid;gap:8px}
+.wd1C .mid3 li{display:flex;flex-direction:column;justify-content:center;padding:14px 16px;border-radius:16px;background:#0E3B2C}
+.wd1C .mid3 b{font:800 clamp(22px,2vw,30px)/1 var(--display);letter-spacing:-.03em;color:#B5DB6E}.wd1C .mid3 span{margin-top:4px;font:600 13px/1.3 var(--text);color:rgba(255,255,255,.82)}
+@media (max-width:900px){.wd1C .dip{grid-template-columns:1fr 1fr}.wd1C .mid3{grid-column:1/-1;grid-row:2;grid-template-columns:1fr 1fr}.wd1C figure{min-height:260px}}
+@media (max-width:520px){.wd1C .dip{grid-template-columns:1fr}.wd1C .mid3{grid-row:auto}}
