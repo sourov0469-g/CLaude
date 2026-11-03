@@ -1,0 +1,61 @@
+<section class="sec svc5" id="services-5" aria-labelledby="sv5-h">
+<style>
+.svc5{padding-bottom:0}
+.svc5 .lede{margin-top:12px;max-width:44ch}
+.svc5 .track{position:relative;height:calc(5 * 70vh + 30vh)}
+.svc5 .stage{position:sticky;top:clamp(76px,10vh,104px);height:calc(100vh - clamp(96px,13vh,130px));display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(18px,3vw,48px);align-items:center}
+.svc5 .frame{position:relative;height:100%;max-height:640px;border-radius:30px;overflow:hidden;background:#E9E3D5}
+.svc5 .ph{position:absolute;inset:0;transform-origin:50% 60%;opacity:0;will-change:transform}
+.svc5 .ph img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.svc5 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,17,29,0) 55%,rgba(23,17,29,.45))}
+.svc5 .big{position:absolute;left:clamp(16px,2.4vw,32px);bottom:clamp(14px,2vw,26px);right:16px;z-index:3;color:#FBFAF6;font-size:clamp(34px,4.6vw,72px);font-weight:900;letter-spacing:-.04em;line-height:.95;text-shadow:0 2px 16px rgba(0,0,0,.35);pointer-events:none}
+.svc5 .big small{display:block;font-size:14px;letter-spacing:.14em;color:#F6C25F;margin-bottom:6px}
+.svc5 .tx h3{font-size:clamp(24px,2.4vw,32px);font-weight:800;margin-bottom:8px}
+.svc5 .tx p{font-size:17px;color:var(--ink-70)}
+.svc5 .tx ul{margin:12px 0 16px;padding-left:18px;font-size:15px;font-weight:600;display:grid;gap:4px}
+.svc5 .tx > *{transition:opacity .3s,transform .4s cubic-bezier(.22,.61,.36,1)}
+.svc5 .tx.out > *{opacity:0;transform:translateY(8px)}
+.svc5 .rail{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.svc5 .rail button{min-width:44px;height:44px;padding:0 12px;border-radius:12px;font-weight:800;font-size:14px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.1)}
+.svc5 .rail button[aria-current="step"]{background:var(--amber);box-shadow:0 3px 0 var(--amber-edge)}
+@media (max-width:900px){.svc5 .stage{grid-template-columns:1fr;align-content:start;top:64px;height:calc(100vh - 70px);gap:12px}.svc5 .frame{height:42vh}.svc5 .tx ul{display:none}.svc5 .tx p{font-size:16px}}
+@media (prefers-reduced-motion:reduce){.svc5 .tx > *{transition:none}}
+</style>
+<div class="wrap">
+ <span class="kick">Services</span><h2 class="h2" id="sv5-h" style="margin-top:12px">Up Close</h2>
+ <p class="lede rv">Five services, one at a time. Scroll, or pick a number.</p>
+ <div class="track">
+  <div class="stage">
+   <div class="frame" data-owl="say:Keep scrolling"><div class="big" aria-hidden="true"><small></small><span></span></div></div>
+   <div><div class="tx" id="sv5-tx" aria-live="polite"><h3></h3><p></p><ul></ul><a class="btn btn-amber btn-sm" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+    <div class="rail" role="group" aria-label="Services"></div></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('services','5',function(root){
+  var S = OWL.SVC || [], track = root.querySelector('.track'), frame = root.querySelector('.frame'), big = root.querySelector('.big'), tx = root.querySelector('.tx'), rail = root.querySelector('.rail'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  var ALT = {replace:'An Owl crew member carrying a sheet of roof decking', repair:'An Owl crew member with a bundle of shingles', storm:'A tree fallen across a damaged roof', check:'An Owl crew member walking a shingle roof', siding:'A house with new lap siding and two garage doors'};
+  var phs = S.map(function(s){ var d = document.createElement('div'); d.className = 'ph'; var im = new Image(); im.src = (OWL.media && OWL.media[s.img]) || ''; im.alt = ALT[s.k] || s.n; d.appendChild(im); frame.insertBefore(d, big); return d; });
+  var btns = S.map(function(s, i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = '0' + (i + 1); b.setAttribute('aria-label', s.n);
+    b.addEventListener('click', function(){ var t = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight*.9; scrollTo({top: scrollY + t.top + span*((i + .5)/S.length), behavior: OWL.reduce ? 'auto' : 'smooth'}); show(i); }); rail.appendChild(b); return b; });
+  function show(i){ if (i === cur) return; var first = cur < 0; cur = i; var s = S[i];
+    btns.forEach(function(b, j){ if (j === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    big.querySelector('small').textContent = '0' + (i + 1) + ' / 0' + S.length; big.querySelector('span').textContent = s.n;
+    function put(){ tx.querySelector('h3').textContent = s.n; tx.querySelector('p').textContent = s.d; tx.querySelector('ul').innerHTML = s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join(''); tx.classList.remove('out'); }
+    if (first || OWL.reduce) put(); else { tx.classList.add('out'); setTimeout(put, 200); } }
+  function ease(t){ return 1 - Math.pow(1 - t, 3); }
+  var rq = 0;
+  function onScroll(){ rq = 0; var t = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight*.9, k = Math.max(0, Math.min(.9999, -t.top/Math.max(1, span))), f = k*S.length, i = Math.floor(f), lt = f - i;
+    show(i);
+    phs.forEach(function(p, j){ if (j !== i){ p.style.opacity = j < i ? 0 : 0; return; } var e = OWL.reduce ? 1 : ease(Math.min(1, lt/.55)), sc = .42 + .58*e;
+      p.style.opacity = 1; p.style.transform = 'scale(' + sc.toFixed(4) + ') translateY(' + ((1 - e)*8).toFixed(2) + '%)'; p.style.borderRadius = (40 - 22*e) + 'px';
+      /* the big name is ink on the cream until the photo fills the frame, then cream on the photo */
+      var full = e > .82; big.style.color = full ? '#FBFAF6' : '#17111D'; big.style.textShadow = full ? '' : 'none'; big.querySelector('small').style.color = full ? '#F6C25F' : '#8E5A12'; }); }
+  addEventListener('scroll', function(){ if (!rq) rq = requestAnimationFrame(onScroll); }, {passive: true}); addEventListener('resize', onScroll); onScroll();
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.2}); io.observe(track); }
+});
+</script>
+</section>

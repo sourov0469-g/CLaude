@@ -92,3 +92,16 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   wrap, the middle is the three cleanup passes, the lining is the aftercare box), and the owl settles on it when the
   weave is done. Choosing a band lifts it and tells that part in Owl's words. Skills: ⟦S0407⟧ stroke draw-on, ⟦S0187⟧
   staggered choreography, ⟦S1246⟧ tabs, ⟦S1330⟧ lift, ⟦S0451⟧.
+
+## L7 · Services 4 + 5 (Services stood at 3: V1 departures board, V2 Five Chapters, V3 One Line)
+- **Services 4 · "Point at Your Roof"** — reference **Quiet Cubes** (configurator-first: you point at the problem,
+  the instrument answers). A drawn house in elevation; each service lives where it applies on a real house: the whole
+  roof face (replacement), a lifted tab and the flashing at the chimney (repair), hail marks under a storm cloud
+  (storm damage help), a magnifier over the roof and attic vent (Wise Check), the walls (siding). Hover, tap or the
+  key list highlights that part in amber and opens the service card from `OWL.SVC`. Skills: ⟦S1246⟧ tabs,
+  ⟦S0414⟧ roofer-true house, ⟦S0407⟧ highlight draw, ⟦S0462⟧, ⟦S1388⟧.
+- **Services 5 · "Up Close"** — reference **Apple AirPods Pro** (pinned scroll; each step a full-screen event).
+  Pinned while you scroll, each service's own photo grows from a small card to the full stage while its name lands
+  in large type, then hands over to the next. A rail mirrors the five steps for keyboard and touch; reduced motion
+  shows them as a still list. Skills: ⟦S0448⟧ sticky artifact with measured steps, ⟦S1325⟧ rail, ⟦S1375⟧ cover
+  reveal, ⟦S0451⟧, ⟦S1352⟧.

@@ -255,3 +255,40 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects fixed (Protect 5):**
 - The owl stood on top of the nest, and then was hidden behind it.
 - It now sits in the bowl, with a front weave drawn over it.
+
+---
+
+## L7 · Services 4 + 5 · checks 33/33 · evidence `gates/ladder/L07-services-4-5/` · Services now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Services 4 · Point at Your Roof** | Quiet Cubes (configurator first) | A drawn house in elevation where each service lives where it applies: the whole hip-roof face (replacement), a lifted tab and the chimney flashing (repair), hail marks under a drifting storm cloud (storm damage help), a magnifier over the roof (Wise Check), the walls (siding). Numbered pins mark them. Pointing, tapping or the key list highlights that part in amber and opens the service card from `OWL.SVC`. | 8.2 | 8.4 | 8.2 | 8.6 | **8.30** |
+| **Services 5 · Up Close** | Apple AirPods Pro (pinned scroll events) | Pinned while you scroll, each service's own photo grows from a small card to fill the frame while its name lands in large type. The type is ink on cream until the photo fills the frame, then cream on the photo. The text panel and a 01–05 rail follow the step. | 8.2 | 7.8 | 8.0 | 8.4 | **8.08** |
+
+**Truth and roofer audit:**
+- Copy comes only from `OWL.SVC`.
+- Photo alt text describes each photo; no photo claims a specific job.
+- Services 4's house: courses on the hip roof face, flashing at the chimney base, siding laps on the walls, and the storm marks sit on the roof under the cloud.
+
+**Checks run:** the generic gate, plus:
+- Services 4: five services, each with a zone; pointing at the walls opens Siding; the key list roves from the focused key and moves the highlight.
+- Services 5: at the pin start the name is ink; the photo fills the frame and the name turns cream; service 4 comes later; real photos with alt text.
+
+**Ledger:**
+- **Services 4:**
+  - configurator tabs: ⟦S1246⟧;
+  - house: ⟦S0414⟧;
+  - highlight: ⟦S0407⟧;
+  - zones and pins: ⟦S0462⟧ ⟦S1352⟧;
+  - Call / Book: ⟦S1388⟧;
+  - title: ⟦S0451⟧.
+- **Services 5:**
+  - pinned steps: ⟦S0448⟧;
+  - rail: ⟦S1325⟧;
+  - cover grow: ⟦S1375⟧;
+  - big name: ⟦S0451⟧ ⟦S1352⟧;
+  - CTA: ⟦S1388⟧.
+
+**Defects fixed:**
+- Services 4's arrow keys moved from the last hovered service instead of the focused key.
+- Services 5's big title was white over cream while the photo was small, which failed contrast.
+- A pin overlapped the magnifier.
