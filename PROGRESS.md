@@ -315,6 +315,9 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
   updated to the new rules); `sitepass` 42 renders, 0 failures; token lint clean. No sub-agents, no background tasks.
 - **Next:** none left that I can do alone. The open items in GATE-SITE.md need the owner: a back end for the message
   form, a ruling on the Quincy House pledge, and a real-device check.
+- **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
+  Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
+  fall back to Home; this is noted in each gate.
 
 ### Page plan and reasoning (recorded here as the addendum requires)
 **Built from tasks inward** (⟦S1411⟧). A Twin Cities homeowner comes with one of four jobs:
