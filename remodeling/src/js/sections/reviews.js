@@ -1,4 +1,7 @@
-/* OWNER · Home 8 · Reviews: the constellation (restored from the earlier build the owner liked). 343 small stars, one per
+/* OWNER (second pass): the entrance is driven by the scroll, calm and reversible: the stars wait loosely scattered below
+   and gather as the section rises, fully formed when the figure reaches the middle of the screen; scrolling back up
+   loosens them again. The pointer still pushes them gently aside.
+   OWNER · Home 8 · Reviews: the constellation (restored from the earlier build the owner liked). 343 small stars, one per
    published Google review, fly in together when the section arrives and assemble into the figure 4.8 (sampled from the
    display face). The pointer pushes them away; they spring back to the average on their own. Touch: a tap scatters them;
    the "Scatter them" button does the same for keyboards. Reduced motion: the assembled figure, still. Only the two
@@ -33,6 +36,11 @@
         while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
         return pts.slice(0, COUNT);
       }
+      var prog = 0, progT = 0;
+      function target() {   // 0 while the figure is below the screen, 1 once its centre reaches the middle; held above
+        var r = cv.getBoundingClientRect(), cy = r.top + r.height / 2, from = innerHeight + r.height / 2, to = innerHeight / 2;
+        return k.motion ? Math.max(0, Math.min(1, (from - cy) / (from - to))) : 1;
+      }
       function layout(fresh) {
         var r = cv.getBoundingClientRect();
         W = Math.round(r.width); H = Math.round(r.height);
@@ -43,40 +51,49 @@
         pts.forEach(function (p, i) {
           var s = stars[i];
           if (!s || fresh) {
-            // they wait off the figure, spread wide, until the section arrives
-            var a = Math.random() * Math.PI * 2, rr = Math.max(W, H) * (.45 + Math.random() * .5);
-            s = stars[i] = { x: W / 2 + Math.cos(a) * rr, y: H / 2 + Math.sin(a) * rr * .6, vx: 0, vy: 0, r: (1.5 + Math.random() * 1.7) * unit, ph: Math.random() * 6.28, k: .035 + Math.random() * .025 };
+            // a loose, quiet scatter around the figure (not a burst): within a band below and around it
+            var a = Math.random() * Math.PI * 2, rr = .18 + Math.random() * .32;
+            s = stars[i] = { ox: 0, oy: 0, vx: 0, vy: 0, r: (1.5 + Math.random() * 1.6) * unit, d: Math.random() * .35,
+              dx: Math.cos(a) * rr, dy: Math.abs(Math.sin(a)) * rr * .9 + .12 };
           }
-          s.tx = p[0]; s.ty = p[1];
+          s.tx = p[0]; s.ty = p[1]; s.sx = p[0] + s.dx * W; s.sy = p[1] + s.dy * H;
         });
         links = stars.map(function (s, i) {
           var best = -1, bd = 1e9;
           for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
           return best;
         });
-        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
-        else if (!running) draw(0);
+        prog = progT = target(); place(); draw();
+      }
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      function place() {
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i], t = Math.max(0, Math.min(1, (prog - s.d) / .65)), e = ease(t);
+          s.e = e; s.x = s.sx + (s.tx - s.sx) * e + s.ox; s.y = s.sy + (s.ty - s.sy) * e + s.oy;
+        }
       }
       function star5(x, y, r) {
         ctx.moveTo(x, y - r);
         for (var i = 1; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
         ctx.closePath();
       }
-      function draw(t) {
+      function draw() {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, W, H);
-        ctx.globalAlpha = .16; ctx.strokeStyle = INK; ctx.lineWidth = 1;
-        ctx.beginPath();
-        for (var i = 0; i < stars.length; i++) {
-          var a = stars[i], b = stars[links[i]]; if (!b) continue;
-          var dx = a.x - b.x, dy = a.y - b.y; if (dx * dx + dy * dy > 1600) continue;   // the lines only hold while the stars are home
-          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        ctx.globalAlpha = .16 * Math.max(0, prog * 2 - 1); ctx.strokeStyle = INK; ctx.lineWidth = 1;
+        if (ctx.globalAlpha > 0) {
+          ctx.beginPath();
+          for (var i = 0; i < stars.length; i++) {
+            var a = stars[i], b = stars[links[i]]; if (!b) continue;
+            var dx = a.x - b.x, dy = a.y - b.y; if (dx * dx + dy * dy > 1600) continue;   // the lines only hold while the stars are home
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          }
+          ctx.stroke();
         }
-        ctx.stroke();
         ctx.fillStyle = ACC;
         for (var n = 0; n < stars.length; n++) {
           var s = stars[n];
-          ctx.globalAlpha = .7 + .3 * Math.sin(t * .002 + s.ph);
+          ctx.globalAlpha = .35 + .65 * s.e;
           ctx.beginPath(); star5(s.x, s.y, s.r * 1.6); ctx.fill();
         }
         ctx.globalAlpha = 1;
@@ -85,24 +102,23 @@
         raf = requestAnimationFrame(step);
         if (document.hidden || t - last < 22) return;
         var dt = Math.min(2, (t - last) / 16.67); last = t;
-        var R = Math.max(80, W * .085), R2 = R * R, moving = 0;
+        progT = target(); prog += (progT - prog) * Math.min(1, .16 * dt);
+        // the pointer pushes stars gently aside; each springs back to its place on the path
+        var R = Math.max(70, W * .07), R2 = R * R;
         for (var i = 0; i < stars.length; i++) {
-          var s = stars[i];
-          var ax = (s.tx - s.x) * s.k, ay = (s.ty - s.y) * s.k;
+          var s = stars[i], ax = -s.ox * .06, ay = -s.oy * .06;
           var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
-          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 4.6; ax += dx / d * f; ay += dy / d * f; }
-          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
-          s.x += s.vx * dt; s.y += s.vy * dt;
-          if (Math.abs(s.vx) + Math.abs(s.vy) > .05) moving++;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 2.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .84; s.vy = (s.vy + ay * dt) * .84;
+          s.ox += s.vx * dt; s.oy += s.vy * dt;
         }
-        draw(t);
-        if (!moving && ptr.x < -999) { landed = true; }
+        place(); draw();
       }
       function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
       function stop() { running = false; cancelAnimationFrame(raf); }
       function scatter(cx, cy) {
         stars.forEach(function (s) {
-          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 16 + Math.random() * 20;
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 6 + Math.random() * 8;
           s.vx += dx / d * f; s.vy += dy / d * f;
         });
         run();
@@ -116,7 +132,7 @@
       k.on(cv, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = cv.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
       k.on(root.querySelector('.rv__again'), 'click', function () { scatter(); });
       // they fly in together when the figure comes into view (once the canvas is half on screen)
-      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: .35 });
+      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
       EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__avg, .rv__acts'));
     } }
   });

@@ -1,91 +1,50 @@
 <section id="financing" class="sec financing g-surface" data-section="financing" aria-labelledby="financing-h">
-  <!-- OWNER (after the finalize): both earlier versions are retired ("the road is very bad; the ledger is a document").
-       ONE visual version: four partner cards, one published figure on each face. Pick what you are building and the cards
-       that usually fit come forward; point at a card and it tilts to you; click or tap turns it over to how you repay.
-       Every figure and line is the partners' own as the firm publishes them (FACTS.md "Financing"); the routing is the
-       firm's framing. The firm is not a lender: the line stays, beside the action. -->
-  <div class="ver fn" data-v="1">
-    <div class="wrap fn__head">
+  <!-- OWNER (second pass): the four cards in a row "look good but the layout does not make sense". Three layouts that read
+       as question then answer. V1 ask then answer (pick your project on the left; only the partners that usually fit
+       appear on the right, with the reason). V2 two kinds of money (consumer credit beside property-assessed; a switch
+       for inside the home or outside and energy). V3 the wallet (a fanned stack of the four cards; pull one out to read
+       it, including what it usually fits). Every figure and line is the partners' own as the firm publishes them
+       (FACTS.md "Financing"); the routing is the firm's framing. The firm is not a lender: the line stays by the action. -->
+  <div class="ver fa" data-v="1">
+    <div class="wrap fa__grid">
+      <div class="fa__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h">What are you <span class="acc">building?</span></h2>
+        <div class="fa__opts" role="group" aria-label="What are you building?"></div>
+      </div>
+      <div class="fa__ans" aria-live="polite">
+        <p class="fa__lbl">Usually fits</p>
+        <p class="fa__why"></p>
+        <ul class="fa__list"></ul>
+      </div>
+    </div>
+    <div class="wrap fz-foot"></div>
+  </div>
+  <div class="ver fb" data-v="2" hidden>
+    <div class="wrap fb__head">
       <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h">Four partners. <span class="acc">Two kinds of money.</span></h2>
+        <h2 class="t-head" id="financing-h-2">Two kinds of money. <span class="acc">Four partners.</span></h2>
       </div>
-      <div class="fn__pick">
-        <p class="fn__q" id="fn-q">What are you building?</p>
-        <div class="fn__chips" role="group" aria-labelledby="fn-q">
-          <button type="button" class="fn__chip" data-k="kitchen" aria-pressed="false">Kitchen</button>
-          <button type="button" class="fn__chip" data-k="bath" aria-pressed="false">Bathroom</button>
-          <button type="button" class="fn__chip" data-k="floor" aria-pressed="false">Flooring</button>
-          <button type="button" class="fn__chip" data-k="roof" aria-pressed="false">Roof, windows or doors</button>
-          <button type="button" class="fn__chip" data-k="hvac" aria-pressed="false">HVAC or storm protection</button>
-          <button type="button" class="fn__chip" data-k="unsure" aria-pressed="true">Not sure yet</button>
-        </div>
+      <div class="fb__seg" role="group" aria-label="Where is the work?">
+        <button type="button" class="fb__sb" data-w="in" aria-pressed="false">Inside the home</button>
+        <button type="button" class="fb__sb" data-w="out" aria-pressed="false">Outside and energy</button>
+        <button type="button" class="fb__sb" data-w="all" aria-pressed="true">Show both</button>
       </div>
     </div>
-    <div class="wrap">
-      <ul class="fn__deck">
-        <li class="fn__slot" data-p="syn"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Synchrony, consumer credit: 6 to 132 months, the published special-financing term range. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
-            <span class="fn__big nums">6&ndash;132</span><span class="fn__unit">months, published special-financing term range</span>
-            <span class="fn__name">Synchrony</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">Synchrony</span>
-            <span class="fn__row"><b>What it is</b>Project Card, revolving credit</span>
-            <span class="fn__row"><b>How you repay</b>On the card, as revolving credit</span>
-            <span class="fn__row"><b>Also</b><span class="nums">1</span> card, reusable across projects</span>
-            <span class="fn__src">As published by Synchrony</span>
-          </span>
-        </button></li>
-        <li class="fn__slot" data-p="sfc"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Service Finance Company, consumer credit: 30 days after completion until the first payment. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
-            <span class="fn__big nums">30</span><span class="fn__unit">days after completion until the first payment</span>
-            <span class="fn__name">Service Finance</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">Service Finance</span>
-            <span class="fn__row"><b>What it is</b>Fixed installment loan</span>
-            <span class="fn__row"><b>How you repay</b>In fixed installments</span>
-            <span class="fn__row"><b>Also</b><span class="nums">0</span> pre-payment penalty</span>
-            <span class="fn__src">As published by Service Finance Company, NMLS 140908</span>
-          </span>
-        </button></li>
-        <li class="fn__slot" data-p="ygr"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="Ygrene, property-assessed: 20 year maximum published residential term. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
-            <span class="fn__big nums">20</span><span class="fn__unit">year maximum published residential term</span>
-            <span class="fn__name">Ygrene</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">Ygrene</span>
-            <span class="fn__row"><b>What it is</b>Florida PACE. Not a loan.</span>
-            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
-            <span class="fn__row"><b>Also</b>Soft credit pull</span>
-            <span class="fn__src">As published by Ygrene</span>
-          </span>
-        </button></li>
-        <li class="fn__slot" data-p="rnw"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="RenewPACE, property-assessed: 250 thousand dollars published maximum, and up to 20 percent of property value. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
-            <span class="fn__big nums">$250K</span><span class="fn__unit">published maximum, and up to 20% of property value</span>
-            <span class="fn__name">RenewPACE</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">RenewPACE</span>
-            <span class="fn__row"><b>What it is</b>PACE, from Renew Financial</span>
-            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
-            <span class="fn__row"><b>Also</b>No application fee</span>
-            <span class="fn__src">As published by Renew Financial, NMLS 1788120</span>
-          </span>
-        </button></li>
-      </ul>
-      <p class="fn__why" aria-live="polite">Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.</p>
+    <div class="wrap fb__split"></div>
+    <div class="wrap fz-foot"></div>
+  </div>
+  <div class="ver fw" data-v="3" hidden>
+    <div class="wrap fw__grid">
+      <div class="fw__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h-3">Four partners. <span class="acc">Pull one out.</span></h2>
+        <div class="fw__wallet" role="group" aria-label="The four financing partners"></div>
+        <p class="fw__hint" aria-hidden="true">Point at a card, or tap it.</p>
+      </div>
+      <div class="fw__detail" aria-live="polite"></div>
     </div>
-    <div class="wrap fn__foot">
-      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-      <p class="fn__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
-    </div>
+    <div class="wrap fz-foot"></div>
   </div>
 </section>

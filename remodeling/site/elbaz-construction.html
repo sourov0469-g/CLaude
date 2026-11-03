@@ -1304,112 +1304,231 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
 
-.pc { --u: 17; }
-.pc__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
-.pc__head .eyebrow { margin: 0 0 var(--s3); }
-.pc__head .t-head, .pc__lead { margin: 0; }
-.pc__lead { max-width: 44ch; color: var(--color-text-secondary); }
+.ps__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
+.ps__head .eyebrow { margin: 0 0 var(--s3); }
+.ps__head .t-head, .ps__lead { margin: 0; }
+.ps__lead { max-width: 44ch; color: var(--color-text-secondary); }
+.ps__note { margin: var(--s4) 0 0; font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.pz-ic { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pz-card { padding: var(--s5) var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); box-shadow: 8px 8px 0 var(--clay-100, #F9E3DD); }
+.pz-k { display: flex; align-items: baseline; gap: var(--s4); margin: 0 0 var(--s2); }
+.pz-no { font: 600 clamp(2.5rem, 1.8rem + 2vw, 3.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.pz-wk { font: 600 .8125rem/1.2 var(--f-text); padding: 4px 12px; border: 1.5px solid var(--color-text); border-radius: 999px; }
+.pz-t { margin: 0 0 var(--s2); font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
+.pz-p { margin: 0; color: var(--color-text-secondary); line-height: 1.5; max-width: 52ch; }
+.pz-card.is-swap > * { animation: pz-in 280ms var(--ez-out) both; }
+.pz-card.is-swap > :nth-child(2) { animation-delay: 30ms; } .pz-card.is-swap > :nth-child(3) { animation-delay: 60ms; }
+@keyframes pz-in { from { opacity: 0; transform: translateY(8px); } }
 
-.pc__body { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s7); align-items: start; margin-top: var(--s7); }
-.pc__chart { --lab: 13.5rem; }
-.pc__axis { position: relative; height: 1.75rem; margin-left: var(--lab); border-bottom: 1.5px solid var(--color-text);
-  background: repeating-linear-gradient(90deg, var(--color-border) 0 1px, transparent 1px calc(100% / var(--u))); }
-.pc__axis span { position: absolute; left: calc(var(--x) / var(--u) * 100%); top: 0; transform: translateX(-50%); font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); white-space: nowrap; }
-.pc__axis .pc__ax-v { color: var(--color-accent-text, var(--clay-600, #A45540)); }
-.pc__axis::before { content: 'Week'; position: absolute; right: 100%; top: 0; padding-right: var(--s3); font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); }
-.pc__rows { list-style: none; margin: 0; padding: 0; }
-.pc__row { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr); align-items: center; width: 100%; min-height: 48px; padding: 0; background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text); cursor: pointer; }
-.pc__lab { display: flex; align-items: baseline; gap: var(--s3); padding-right: var(--s3); font: 600 1rem/1.25 var(--f-display); color: var(--color-text-secondary); transition: color 160ms var(--ez-out); }
-.pc__lab .nums { font: 600 .75rem/1 var(--f-text); color: var(--color-accent-text, var(--clay-600, #A45540)); }
-.pc__track { position: relative; height: 48px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-border) 55%, transparent) 0 1px, transparent 1px calc(100% / var(--u))); }
-.pc__bar { position: absolute; top: 14px; height: 20px; left: calc(var(--s) / var(--u) * 100%); width: calc((var(--e) - var(--s)) / var(--u) * 100%);
-  background: color-mix(in srgb, var(--clay-500, #C5735C) 45%, var(--color-bg, #fff)); border: 1.5px solid var(--color-text); border-radius: 3px; transform-origin: 0 50%;
-  transition: background-color 180ms var(--ez-out), transform 220ms var(--ez-out), box-shadow 180ms var(--ez-out); }
 
-.pc__row--open .pc__bar { border-right-style: dashed; border-radius: 3px 0 0 3px;
-  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--clay-500, #C5735C) 45%, var(--color-bg, #fff)) 0 8px, var(--color-bg, #fff) 8px 12px); }
+.st { position: relative; margin-top: var(--s7); height: clamp(420px, 54svh, 540px); }
+.st__card { position: absolute; left: 0; top: 0; width: min(48%, 600px); z-index: 2; }
+.st__steps { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: end; gap: 6px; }
+.st__li { height: calc(24% + var(--i) * 10.8%); display: flex; }
+.st__s { position: relative; flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); padding: var(--s4) var(--s3); text-align: left; color: var(--color-text);
+  background: color-mix(in srgb, var(--clay-100, #F9E3DD) 70%, var(--color-bg, #fff)); border: 1.5px solid var(--color-text); border-top-width: 6px; cursor: pointer;
+  transition: background-color 220ms var(--ez-out), transform 260ms var(--ez-out), color 220ms var(--ez-out); }
+.st__s:hover { transform: translateY(-6px); }
+.st__s.is-past { background: color-mix(in srgb, var(--clay-500, #C5735C) 35%, var(--color-bg, #fff)); }
+.st__s[aria-pressed="true"] { background: var(--color-accent-solid); color: #fff; transform: translateY(-10px); }
+.st__s:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+.st__ic { width: 34px; height: 34px; }
+.st__n { font: 600 1.75rem/.9 var(--f-display); letter-spacing: -.03em; }
+.st__t { font: 600 .9375rem/1.2 var(--f-display); }
+.st__flag { position: absolute; left: 50%; bottom: calc(100% + 6px); width: 2px; height: 34px; background: var(--color-text); opacity: 0; transform: scaleY(0); transform-origin: bottom; transition: opacity 200ms, transform 300ms var(--ez-out); }
+.st__flag::after { content: ''; position: absolute; left: 2px; top: 0; width: 22px; height: 14px; background: var(--color-accent-solid); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.st__s[aria-pressed="true"] .st__flag { opacity: 1; transform: none; }
 
-.pc__row--end .pc__bar { width: 18px; height: 18px; top: 15px; left: calc(var(--s) / var(--u) * 100% - 2px); border-radius: 2px; transform: rotate(45deg); background: var(--color-accent-solid); }
-.pc__row:hover .pc__lab, .pc__row.is-on .pc__lab { color: var(--color-text); }
-.pc__row.is-on .pc__bar { background: var(--color-accent-solid); box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--clay-700, #7F3F2F) 70%, transparent); }
-.pc__row--open.is-on .pc__bar { background: repeating-linear-gradient(135deg, var(--color-accent-solid) 0 8px, var(--color-bg, #fff) 8px 12px); }
-.pc__row:hover:not(.is-on) .pc__bar { background-color: color-mix(in srgb, var(--clay-500, #C5735C) 70%, var(--color-bg, #fff)); }
-.pc__row:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -2px; }
 
-.pc__card { position: sticky; top: calc(var(--nav-h) + var(--s5)); padding: var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); }
-.pc__k { display: flex; align-items: baseline; gap: var(--s4); margin: 0 0 var(--s3); }
-.pc__no { font: 600 clamp(2.75rem, 2rem + 2vw, 3.75rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
-.pc__wk { font: 600 .875rem/1.2 var(--f-text); padding: 4px 12px; border: 1.5px solid var(--color-text); }
-.pc__t { margin: 0 0 var(--s2); font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
-.pc__p { margin: 0; color: var(--color-text-secondary); line-height: 1.5; }
-.pc__note { margin: var(--s4) 0 0; padding-top: var(--s3); border-top: 1px solid var(--color-border); font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-.pc__card.is-swap .pc__t, .pc__card.is-swap .pc__p, .pc__card.is-swap .pc__k { animation: pc-in 260ms var(--ez-out); }
-@keyframes pc-in { from { opacity: 0; transform: translateY(6px); } }
+.pd { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s8); align-items: center; }
+.pd__side .eyebrow { margin: 0 0 var(--s3); }
+.pd__side .t-head { margin: 0 0 var(--s6); }
+.pd__nav { display: flex; align-items: center; gap: var(--s4); margin-top: var(--s5); }
+.pd__pos { font: 600 .9375rem/1 var(--f-text); color: var(--color-text-secondary); min-width: 3.5em; text-align: center; }
+.pd__btn { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-bg, #fff); border: 1.5px solid var(--color-text); color: var(--color-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), transform 160ms var(--ez-out); }
+.pd__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pd__btn:hover { background: var(--color-text); color: var(--color-bg, #fff); transform: scale(1.06); }
+.pd__btn:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+.pd__dial { position: relative; width: min(100%, 560px); aspect-ratio: 1; justify-self: center; }
+.pd__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pd__face { fill: color-mix(in srgb, var(--clay-100, #F9E3DD) 55%, var(--color-bg, #fff)); stroke: var(--color-text); stroke-width: 1.5; }
+.pd__tk { stroke: var(--color-text-secondary); stroke-width: 1.2; }
+.pd__seg { fill: none; stroke: color-mix(in srgb, var(--color-text) 14%, transparent); stroke-width: 18; stroke-linecap: butt; transition: stroke 260ms var(--ez-out); }
+.pd__seg.is-done { stroke: color-mix(in srgb, var(--clay-500, #C5735C) 60%, var(--color-bg, #fff)); }
+.pd__seg.is-on { stroke: var(--color-accent-solid); }
+.pd__nodes { position: absolute; inset: 0; }
+.pd__node { position: absolute; width: 13%; aspect-ratio: 1; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; background: var(--color-bg, #fff); color: var(--color-text); border: 1.5px solid var(--color-text); cursor: pointer;
+  transition: background-color 220ms var(--ez-out), color 220ms var(--ez-out), transform 220ms var(--ez-out); }
+.pd__node .pz-ic { width: 52%; height: 52%; }
+.pd__node:hover { transform: translate(-50%, -50%) scale(1.1); }
+.pd__node.is-done { background: var(--clay-100, #F9E3DD); }
+.pd__node[aria-pressed="true"] { background: var(--color-accent-solid); color: #fff; transform: translate(-50%, -50%) scale(1.18); }
+.pd__node:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+.pd__mid { position: absolute; left: 50%; top: 50%; width: 50%; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: var(--s2); text-align: center; pointer-events: none; }
+.pd__n { font: 600 clamp(3rem, 2rem + 4vw, 5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.pd__t { font: 600 clamp(1rem, .8rem + .6vw, 1.25rem)/1.2 var(--f-display); }
+.pd__mid.is-swap > * { animation: pz-in 280ms var(--ez-out) both; }
+
+
+.pk__ctl { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s4); }
+.pk__btns { display: flex; gap: var(--s3); }
+.pk__track { position: relative; height: 4px; margin-top: var(--s6); background: var(--color-border); }
+.pk__fill { position: absolute; inset: 0; background: var(--color-accent-solid); transform-origin: 0 50%; transform: scaleX(.08); transition: transform 120ms linear; }
+.pk__rail { list-style: none; margin: var(--s5) 0 0; padding: 0 var(--margin) var(--s3); display: grid; grid-auto-flow: column; grid-auto-columns: clamp(250px, 24vw, 320px); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--margin); scrollbar-width: none; cursor: grab; }
+.pk__rail::-webkit-scrollbar { display: none; }
+.pk__rail.is-grab { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.pk__rail:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pk__c { scroll-snap-align: start; display: flex; flex-direction: column; gap: var(--s2); padding: var(--s4); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); transition: transform 260ms var(--ez-out), box-shadow 260ms var(--ez-out); }
+.pk__c:hover { transform: translateY(-8px); box-shadow: 10px 10px 0 var(--clay-100, #F9E3DD); }
+.pk__art { position: relative; display: grid; place-items: center; height: 150px; margin-bottom: var(--s2); background: color-mix(in srgb, var(--clay-100, #F9E3DD) 70%, var(--color-bg, #fff)); overflow: hidden; }
+.pk__ic { width: 64px; height: 64px; color: var(--color-text); transition: transform 400ms var(--ez-out); }
+.pk__c:hover .pk__ic { transform: scale(1.15) rotate(-6deg); }
+.pk__big { position: absolute; right: 8px; bottom: -14px; font: 600 5.5rem/1 var(--f-display); letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1.5px var(--clay-500, #C5735C); }
+.pk__wk { align-self: flex-start; font: 600 .75rem/1.2 var(--f-text); padding: 3px 10px; border: 1.5px solid var(--color-text); border-radius: 999px; }
+.pk__t { margin: 0; font: 600 1.25rem/1.2 var(--f-display); letter-spacing: -.01em; }
+.pk__p { margin: 0; font: 400 .9375rem/1.45 var(--f-text); color: var(--color-text-secondary); }
 
 @media (max-width: 900px) {
-  .pc__head, .pc__body { grid-template-columns: minmax(0, 1fr); }
-  .pc__body { margin-top: var(--s5); gap: var(--s5); }
-  .pc__chart { --lab: 9.5rem; }
-  .pc__lab { font-size: .8125rem; gap: var(--s2); }
-  .pc__axis span:not(:first-child):not(.pc__ax-v) { display: none; }
-  .pc__axis .pc__ax-v { left: auto; right: 0; transform: none; font-size: .6875rem; }
-  .pc__axis span:first-child { transform: none; left: 0; }
-  .pc__card { position: static; padding: var(--s5); }
+  .ps__head, .pd { grid-template-columns: minmax(0, 1fr); }
+  .pd { gap: var(--s6); }
+  .pd__dial { width: min(100%, 420px); }
+  
+  .st { height: auto; display: flex; flex-direction: column-reverse; gap: var(--s5); margin-top: var(--s5); }
+  .st__card { position: static; width: auto; }
+  .st__steps { position: static; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .st__li { height: auto; width: calc(46% + var(--i) * 7.7%); }
+  .st__s { flex-direction: row; align-items: center; padding: var(--s2) var(--s3); border-top-width: 1.5px; border-left-width: 6px; }
+  .st__s:hover, .st__s[aria-pressed="true"] { transform: translateX(6px); }
+  .st__ic { width: 26px; height: 26px; } .st__n { font-size: 1.125rem; } .st__t { font-size: .875rem; }
+  .st__flag { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .pc__card.is-swap * { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .pz-card.is-swap > *, .pd__mid.is-swap > * { animation: none; } .st__s, .pd__node, .pk__c { transition: none; } }
 
 
-.fn__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: end; gap: var(--s5) var(--s8); }
-.fn__head .eyebrow { margin: 0 0 var(--s3); }
-.fn__head .t-head { margin: 0; }
-.fn__q { margin: 0 0 var(--s3); font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.fn__chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
-.fn__chip { min-height: 40px; padding: 8px 16px; font: 600 .875rem/1.2 var(--f-text); color: var(--color-text); background: var(--color-bg, #fff); border: 1.5px solid var(--color-text); border-radius: 999px; cursor: pointer;
-  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), transform 160ms var(--ez-out); }
-.fn__chip:hover { transform: translateY(-2px); }
-.fn__chip[aria-pressed="true"] { background: var(--color-text); color: var(--color-bg, #fff); }
-.fn__chip:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
-
-.fn__deck { list-style: none; margin: var(--s7) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); perspective: 1200px; }
-.fn__slot { transition: transform 420ms var(--ez-out), opacity 320ms var(--ez-out), filter 320ms var(--ez-out); }
-.fn__slot.is-out { opacity: .32; transform: translateY(14px) scale(.96); filter: saturate(.4); }
-.fn__slot.is-in { transform: translateY(-10px); }
-.fn__card { position: relative; display: block; width: 100%; aspect-ratio: 1.586 / 1.62; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; color: inherit;
-  transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(calc(var(--ry, 0deg) + var(--flip, 0deg))); transition: transform 520ms var(--ez-out); }
-.fn__card.is-tilting { transition: transform 120ms linear; }
-.fn__card[aria-pressed="true"] { --flip: 180deg; }
-.fn__card:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; border-radius: 18px; }
-.fn__face { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto auto; padding: var(--s5); border-radius: 16px; border: 1.5px solid var(--color-text); backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden;
+.fz-ic { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.fz-kind { font: 600 .75rem/1.2 var(--f-text); letter-spacing: .05em; text-transform: uppercase; }
+.fz-card { position: relative; display: grid; grid-template-rows: auto 1fr auto auto; width: 100%; height: 100%; padding: var(--s5); border-radius: 16px; border: 1.5px solid var(--color-text); color: #fff; text-align: left; overflow: hidden;
   box-shadow: 0 18px 34px -22px color-mix(in srgb, var(--color-shadow, #000) 60%, transparent); }
-.fn__card--cc .fn__face { background: var(--color-accent-solid); color: #fff; }
-.fn__card--pa .fn__face { background: var(--color-text); color: #fff; }
-.fn__front::after { content: ''; position: absolute; inset: auto -30% -55% auto; width: 90%; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid color-mix(in srgb, #fff 22%, transparent); }   
-.fn__kind { font: 600 .75rem/1.2 var(--f-text); letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
-.fn__chipic { position: absolute; top: var(--s5); right: var(--s5); width: 34px; height: 26px; border-radius: 5px; background: linear-gradient(135deg, #E8D3B5, #C9A877); box-shadow: inset 0 0 0 1px color-mix(in srgb, #000 25%, transparent); }
-.fn__chipic::before { content: ''; position: absolute; inset: 8px 0; border-block: 1px solid color-mix(in srgb, #000 30%, transparent); }
-.fn__house { position: absolute; top: var(--s5); right: var(--s5); width: 34px; height: 30px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
-.fn__big { align-self: end; font: 600 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/.9 var(--f-display); letter-spacing: -.035em; }
-.fn__unit { margin-top: var(--s2); font: 400 .875rem/1.35 var(--f-text); opacity: .9; max-width: 22ch; }
-.fn__name { margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid color-mix(in srgb, #fff 35%, transparent); font: 600 1.125rem/1.2 var(--f-display); }
-.fn__back { transform: rotateY(180deg); grid-template-rows: auto; align-content: start; gap: var(--s3); }
-.fn__back .fn__name { margin: 0 0 var(--s1); padding: 0; border: 0; }
-.fn__row { display: block; font: 400 .9375rem/1.35 var(--f-text); }
-.fn__row b { display: block; margin-bottom: 2px; font: 600 .6875rem/1.2 var(--f-text); letter-spacing: .04em; text-transform: uppercase; opacity: .75; }
-.fn__src { margin-top: auto; font: 400 .75rem/1.35 var(--f-text); opacity: .75; }
+.fz-card::after { content: ''; position: absolute; right: -28%; bottom: -55%; width: 90%; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid color-mix(in srgb, #fff 22%, transparent); }
+.fz-card--cc { background: var(--color-accent-solid); }
+.fz-card--pa { background: var(--color-text); }
+.fz-card .fz-kind { opacity: .85; }
+.fz-cic { position: absolute; top: var(--s5); right: var(--s5); width: 30px; height: 30px; }
+.fz-big { align-self: end; font: 600 clamp(2.25rem, 1.6rem + 2vw, 3.25rem)/.9 var(--f-display); letter-spacing: -.035em; }
+.fz-unit { margin-top: var(--s2); font: 400 .8125rem/1.35 var(--f-text); opacity: .9; max-width: 24ch; }
+.fz-name { margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid color-mix(in srgb, #fff 35%, transparent); font: 600 1.0625rem/1.2 var(--f-display); }
+.fz-rows { margin: 0; display: grid; gap: var(--s3); }
+.fz-rows div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: var(--s3); padding-bottom: var(--s3); border-bottom: 1px solid var(--color-border); }
+.fz-rows dt { font: 600 .75rem/1.4 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
+.fz-rows dd { margin: 0; font: 400 1rem/1.4 var(--f-text); }
+.fz-src { margin: var(--s3) 0 0; font: 400 .75rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.fz-foot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5) var(--s8); align-items: center; margin-top: var(--s7); }
+.fz-not { margin: 0; font: 400 .8125rem/1.45 var(--f-text); color: var(--color-text-secondary); max-width: 60ch; }
 
-.fn__why { max-width: 70ch; margin: var(--s6) 0 0; padding-left: var(--s4); border-left: 3px solid var(--color-accent-solid); color: var(--color-text); }
-.fn__foot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5) var(--s8); align-items: center; margin-top: var(--s6); }
-.fn__not { margin: 0; font: 400 .8125rem/1.45 var(--f-text); color: var(--color-text-secondary); max-width: 60ch; }
 
-@media (max-width: 1100px) { .fn__deck { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fn__card { aspect-ratio: 1.586 / 1.25; } }
-@media (max-width: 900px) { .fn__head, .fn__foot { grid-template-columns: minmax(0, 1fr); } .fn__deck { margin-top: var(--s5); } }
-@media (max-width: 560px) {
-  .fn__deck { grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
-  .fn__card { aspect-ratio: 1.9 / 1; }
-  .fn__face { padding: var(--s4); }
-  .fn__slot.is-out { transform: scale(.97); }
+.fa__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
+.fa__side .eyebrow { margin: 0 0 var(--s3); }
+.fa__side .t-head { margin: 0 0 var(--s5); }
+.fa__opts { display: grid; border-top: 1.5px solid var(--color-text); }
+.fa__o { display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; align-items: center; gap: var(--s4); width: 100%; min-height: 60px; padding: var(--s2) var(--s3); background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text); font: 600 1.0625rem/1.25 var(--f-display); cursor: pointer;
+  transition: background-color 180ms var(--ez-out), padding 220ms var(--ez-out), color 180ms var(--ez-out); }
+.fa__oi { width: 40px; height: 40px; padding: 8px; border-radius: 50%; background: var(--clay-100, #F9E3DD); transition: background-color 180ms var(--ez-out), color 180ms var(--ez-out); }
+.fa__ar { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: translateX(-8px); transition: opacity 180ms, transform 220ms var(--ez-out); }
+.fa__o:hover { padding-left: var(--s4); }
+.fa__o:hover .fa__ar, .fa__o[aria-pressed="true"] .fa__ar { opacity: 1; transform: none; }
+.fa__o[aria-pressed="true"] { background: var(--color-text); color: #fff; padding-left: var(--s4); }
+.fa__o[aria-pressed="true"] .fa__oi { background: var(--color-accent-solid); color: #fff; }
+.fa__o:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -2px; }
+.fa__ans { position: sticky; top: calc(var(--nav-h) + var(--s5)); padding: var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); }
+.fa__lbl { margin: 0 0 var(--s2); font: 600 .8125rem/1.2 var(--f-text); letter-spacing: .05em; text-transform: uppercase; color: var(--color-accent-text, var(--clay-600, #A45540)); }
+.fa__why { margin: 0 0 var(--s5); font-size: 1.0625rem; line-height: 1.5; max-width: 60ch; }
+.fa__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+.fa__p { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'k b' 'n b' 'u u' 'r r'; gap: 2px var(--s3); padding: var(--s4); border-radius: 12px; color: #fff; }
+.fa__p--cc { background: var(--color-accent-solid); } .fa__p--pa { background: var(--color-text); }
+.fa__pk { grid-area: k; font: 600 .6875rem/1.3 var(--f-text); letter-spacing: .05em; text-transform: uppercase; opacity: .8; }
+.fa__pn { grid-area: n; font: 600 1.125rem/1.2 var(--f-display); }
+.fa__pb { grid-area: b; align-self: center; font: 600 2.25rem/.9 var(--f-display); letter-spacing: -.035em; }
+.fa__pu { grid-area: u; margin-top: var(--s2); font: 400 .8125rem/1.35 var(--f-text); opacity: .9; }
+.fa__pr { grid-area: r; margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid color-mix(in srgb, #fff 30%, transparent); font: 400 .8125rem/1.35 var(--f-text); }
+
+
+.fb__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s5); }
+.fb__head .eyebrow { margin: 0 0 var(--s3); }
+.fb__head .t-head { margin: 0; }
+.fb__seg { display: inline-flex; padding: 4px; border: 1.5px solid var(--color-text); border-radius: 999px; background: var(--color-bg, #fff); }
+.fb__sb { min-height: 40px; padding: 8px 16px; border: 0; border-radius: 999px; background: none; font: 600 .875rem/1.2 var(--f-text); color: var(--color-text); cursor: pointer; transition: background-color 180ms var(--ez-out), color 180ms var(--ez-out); }
+.fb__sb[aria-pressed="true"] { background: var(--color-text); color: #fff; }
+.fb__sb:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.fb__split { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: var(--s5); margin-top: var(--s7); align-items: stretch; }
+.fb__h { display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); border-radius: 20px; color: #fff; transition: opacity 320ms var(--ez-out), transform 320ms var(--ez-out), filter 320ms var(--ez-out); }
+.fb__h--cc { background: var(--color-accent-solid); } .fb__h--pa { background: var(--color-text); }
+.fb__h.is-dim { opacity: .3; filter: saturate(.3); transform: scale(.98); }
+.fb__h.is-hot { transform: translateY(-8px); box-shadow: 0 26px 40px -26px color-mix(in srgb, var(--color-shadow, #000) 80%, transparent); }
+.fb__hh { display: flex; gap: var(--s4); align-items: center; }
+.fb__hi { flex: none; width: 52px; height: 52px; padding: 11px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, #fff 55%, transparent); }
+.fb__ht { margin: 0; font: 600 1.625rem/1.1 var(--f-display); letter-spacing: -.02em; }
+.fb__hl { margin: 4px 0 0; opacity: .85; }
+.fb__ps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+.fb__p { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'n b' 'u b' 'w w'; gap: 2px var(--s4); padding: var(--s4); border-radius: 12px; background: color-mix(in srgb, #fff 10%, transparent); border: 1px solid color-mix(in srgb, #fff 22%, transparent); transition: background-color 180ms var(--ez-out), transform 220ms var(--ez-out); }
+.fb__p:hover { background: color-mix(in srgb, #fff 18%, transparent); transform: translateX(4px); }
+.fb__pn { grid-area: n; font: 600 1.125rem/1.2 var(--f-display); }
+.fb__pb { grid-area: b; align-self: center; font: 600 2.5rem/.9 var(--f-display); letter-spacing: -.035em; }
+.fb__pu { grid-area: u; font: 400 .8125rem/1.35 var(--f-text); opacity: .85; max-width: 30ch; }
+.fb__pw { grid-area: w; margin-top: var(--s2); font: 400 .8125rem/1.35 var(--f-text); opacity: .9; }
+.fb__note { margin: auto 0 0; padding-top: var(--s3); border-top: 1px solid color-mix(in srgb, #fff 30%, transparent); font: 400 .875rem/1.45 var(--f-text); opacity: .9; }
+.fb__or { display: grid; place-items: center; }
+.fb__or span { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--color-text); background: var(--color-bg, #fff); font: 600 .9375rem/1 var(--f-display); }
+
+
+.fw__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--s8); align-items: center; }
+.fw__side .eyebrow { margin: 0 0 var(--s3); }
+.fw__side .t-head { margin: 0; }
+.fw__side { container-type: inline-size; }
+.fw__wallet { position: relative; --cw: 48cqw; height: calc(var(--cw) / 1.586 + 70px); margin-top: var(--s7); }
+.fw__c { position: absolute; left: calc(var(--i) * 17cqw); top: 46px; width: var(--cw); aspect-ratio: 1.586 / 1; padding: 0; border: 0; background: none; cursor: pointer; z-index: calc(1 + var(--i));
+  transition: transform 420ms var(--ez-out), filter 300ms var(--ez-out); }
+.fw__c:hover { transform: translateY(-14px); }
+.fw__c[aria-pressed="true"] { transform: translateY(-40px); }
+.fw__wallet:has([aria-pressed="true"]) .fw__c:not([aria-pressed="true"]) { filter: brightness(.9) saturate(.8); }
+.fw__c .fz-card { grid-template-rows: auto auto 1fr auto; }
+.fw__c .fz-kind { order: -2; }
+.fw__c .fz-name { order: -1; margin: 2px 0 0; padding: 0; border: 0; font-size: 1.125rem; }
+.fw__c:focus-visible { outline: none; }
+.fw__c:focus-visible .fz-card { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
+.fw__c .fz-card { padding: var(--s4); }
+.fw__c .fz-big { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem); }
+.fw__hint { margin: 0; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.fw__detail { padding: var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); border-top: 8px solid var(--color-accent-solid); }
+.fw__detail--pa { border-top-color: var(--color-text); }
+.fw__k { margin: 0 0 var(--s1); color: var(--color-accent-text, var(--clay-600, #A45540)); }
+.fw__detail--pa .fw__k { color: var(--color-text-secondary); }
+.fw__n { margin: 0; font: 600 1.75rem/1.1 var(--f-display); letter-spacing: -.02em; }
+.fw__big { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s2) var(--s4); margin: var(--s4) 0 var(--s5); }
+.fw__big .nums { font: 600 clamp(3rem, 2rem + 3vw, 4.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.fw__detail--pa .fw__big .nums { color: var(--color-text); }
+.fw__u { font: 400 .9375rem/1.35 var(--f-text); color: var(--color-text-secondary); max-width: 26ch; }
+.fw__fl { margin: var(--s5) 0 var(--s2); font: 600 .75rem/1.2 var(--f-text); letter-spacing: .05em; text-transform: uppercase; color: var(--color-text-secondary); }
+.fw__fits { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+.fw__fits li { padding: 5px 12px; font: 600 .8125rem/1.2 var(--f-text); border: 1.5px solid var(--color-text); border-radius: 999px; }
+
+@media (max-width: 1000px) {
+  .fa__grid, .fw__grid, .fz-foot { grid-template-columns: minmax(0, 1fr); }
+  .fa__ans { position: static; }
+  .fb__split { grid-template-columns: minmax(0, 1fr); }
+  .fb__or { height: 0; } .fb__or span { margin-block: -18px; position: relative; z-index: 2; }
 }
-@media (prefers-reduced-motion: reduce) { .fn__card, .fn__slot { transition: none; } }
+@media (max-width: 560px) {
+  .fa__list { grid-template-columns: minmax(0, 1fr); }
+  .fa__ans, .fb__h, .fw__detail { padding: var(--s4); }
+  .fb__seg { display: flex; width: 100%; } .fb__sb { flex: 1; padding: 8px 6px; font-size: .8125rem; }
+  .fw__wallet { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); margin-top: var(--s5); }
+  .fw__c, .fw__c:hover, .fw__c[aria-pressed="true"] { position: relative; left: auto; top: auto; width: auto; transform: none; }
+  .fw__c[aria-pressed="true"] .fz-card { outline: 3px solid var(--color-text); outline-offset: 3px; }
+  .fw__c .fz-card { padding: var(--s3); border-radius: 12px; } .fw__c .fz-big { font-size: 1.5rem; } .fw__c .fz-cic { display: none; }
+  .fw__c .fz-unit { display: none; }
+  .fz-rows div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { .fa__o, .fb__h, .fw__c, .fb__p { transition: none; } }
 
 
 
@@ -2100,125 +2219,107 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
 <section id="process" class="sec process g-surface" data-section="process" aria-labelledby="process-h">
   
-  <div class="ver pc" data-v="1">
-    <div class="wrap pc__head">
+  <div class="ver ps" data-v="1">
+    <div class="wrap ps__head">
       <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
         <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
       </div>
-      <p class="t-lead pc__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
+      <p class="t-lead ps__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
     </div>
-    <div class="wrap pc__body">
-      <div class="pc__chart">
-        <div class="pc__axis" aria-hidden="true">
-          <span style="--x:.5">1</span><span style="--x:2.5">3</span><span style="--x:4.5">5</span><span style="--x:6.5">7</span><span style="--x:8.5">9</span><span style="--x:10.5">11</span><span class="pc__ax-v" style="--x:14">Construction varies</span>
-        </div>
-        <ol class="pc__rows">
-          <li><button type="button" class="pc__row" data-i="0" style="--s:0;--e:1"><span class="pc__lab"><span class="nums">01</span>Consultation</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row" data-i="1" style="--s:0;--e:2"><span class="pc__lab"><span class="nums">02</span>Site evaluation</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row" data-i="2" style="--s:1;--e:5"><span class="pc__lab"><span class="nums">03</span>Design and planning</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row" data-i="3" style="--s:4;--e:6"><span class="pc__lab"><span class="nums">04</span>Proposal and scope</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row" data-i="4" style="--s:5;--e:12"><span class="pc__lab"><span class="nums">05</span>Permitting</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row pc__row--open" data-i="5" style="--s:12;--e:16.4"><span class="pc__lab"><span class="nums">06</span>Construction</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row" data-i="6" style="--s:15;--e:16.4"><span class="pc__lab"><span class="nums">07</span>Quality review</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-          <li><button type="button" class="pc__row pc__row--end" data-i="7" style="--s:16.4;--e:17"><span class="pc__lab"><span class="nums">08</span>Completion and handover</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
-        </ol>
+    <div class="wrap">
+      <div class="st">
+        <div class="st__card pz-card" aria-live="polite"></div>
+        <ol class="st__steps" aria-label="The eight stages"></ol>
       </div>
-      <aside class="pc__card" aria-live="polite">
-        <p class="pc__k"><span class="pc__no nums">01</span><span class="pc__wk">Week 1</span></p>
-        <h3 class="pc__t">Consultation</h3>
-        <p class="pc__p">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
-        <p class="pc__note">Timelines vary by scope and jurisdiction.</p>
-      </aside>
+      <p class="ps__note">Timelines vary by scope and jurisdiction.</p>
     </div>
+  </div>
+  <div class="ver ps" data-v="2" hidden>
+    <div class="wrap pd">
+      <div class="pd__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h-2">Eight stages. <span class="acc">You always know which.</span></h2>
+        <div class="pd__card pz-card" aria-live="polite"></div>
+        <div class="pd__nav">
+          <button type="button" class="pd__btn" data-d="-1" aria-label="Previous stage"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="pd__pos nums" aria-hidden="true">1 / 8</span>
+          <button type="button" class="pd__btn" data-d="1" aria-label="Next stage"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+        <p class="ps__note">Timelines vary by scope and jurisdiction.</p>
+      </div>
+      <div class="pd__dial">
+        <svg class="pd__svg" viewBox="0 0 440 440" aria-hidden="true" focusable="false"></svg>
+        <div class="pd__nodes" role="group" aria-label="The eight stages"></div>
+        <div class="pd__mid" aria-hidden="true"><span class="pd__n nums">01</span><span class="pd__t">Consultation</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ver ps" data-v="3" hidden>
+    <div class="wrap ps__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h-3">Eight stages. <span class="acc">You always know which.</span></h2>
+      </div>
+      <div class="pk__ctl">
+        <p class="t-lead ps__lead">Drag through the job, or step it.</p>
+        <div class="pk__btns">
+          <button type="button" class="pd__btn" data-d="-1" aria-label="Previous stages"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="pd__btn" data-d="1" aria-label="Next stages"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="pk__track" aria-hidden="true"><span class="pk__fill"></span></div>
+    </div>
+    <ol class="pk__rail" aria-label="The eight stages" tabindex="0"></ol>
+    <div class="wrap"><p class="ps__note">Timelines vary by scope and jurisdiction.</p></div>
   </div>
 </section>
 
 <section id="financing" class="sec financing g-surface" data-section="financing" aria-labelledby="financing-h">
   
-  <div class="ver fn" data-v="1">
-    <div class="wrap fn__head">
+  <div class="ver fa" data-v="1">
+    <div class="wrap fa__grid">
+      <div class="fa__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h">What are you <span class="acc">building?</span></h2>
+        <div class="fa__opts" role="group" aria-label="What are you building?"></div>
+      </div>
+      <div class="fa__ans" aria-live="polite">
+        <p class="fa__lbl">Usually fits</p>
+        <p class="fa__why"></p>
+        <ul class="fa__list"></ul>
+      </div>
+    </div>
+    <div class="wrap fz-foot"></div>
+  </div>
+  <div class="ver fb" data-v="2" hidden>
+    <div class="wrap fb__head">
       <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h">Four partners. <span class="acc">Two kinds of money.</span></h2>
+        <h2 class="t-head" id="financing-h-2">Two kinds of money. <span class="acc">Four partners.</span></h2>
       </div>
-      <div class="fn__pick">
-        <p class="fn__q" id="fn-q">What are you building?</p>
-        <div class="fn__chips" role="group" aria-labelledby="fn-q">
-          <button type="button" class="fn__chip" data-k="kitchen" aria-pressed="false">Kitchen</button>
-          <button type="button" class="fn__chip" data-k="bath" aria-pressed="false">Bathroom</button>
-          <button type="button" class="fn__chip" data-k="floor" aria-pressed="false">Flooring</button>
-          <button type="button" class="fn__chip" data-k="roof" aria-pressed="false">Roof, windows or doors</button>
-          <button type="button" class="fn__chip" data-k="hvac" aria-pressed="false">HVAC or storm protection</button>
-          <button type="button" class="fn__chip" data-k="unsure" aria-pressed="true">Not sure yet</button>
-        </div>
+      <div class="fb__seg" role="group" aria-label="Where is the work?">
+        <button type="button" class="fb__sb" data-w="in" aria-pressed="false">Inside the home</button>
+        <button type="button" class="fb__sb" data-w="out" aria-pressed="false">Outside and energy</button>
+        <button type="button" class="fb__sb" data-w="all" aria-pressed="true">Show both</button>
       </div>
     </div>
-    <div class="wrap">
-      <ul class="fn__deck">
-        <li class="fn__slot" data-p="syn"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Synchrony, consumer credit: 6 to 132 months, the published special-financing term range. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
-            <span class="fn__big nums">6&ndash;132</span><span class="fn__unit">months, published special-financing term range</span>
-            <span class="fn__name">Synchrony</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">Synchrony</span>
-            <span class="fn__row"><b>What it is</b>Project Card, revolving credit</span>
-            <span class="fn__row"><b>How you repay</b>On the card, as revolving credit</span>
-            <span class="fn__row"><b>Also</b><span class="nums">1</span> card, reusable across projects</span>
-            <span class="fn__src">As published by Synchrony</span>
-          </span>
-        </button></li>
-        <li class="fn__slot" data-p="sfc"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Service Finance Company, consumer credit: 30 days after completion until the first payment. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
-            <span class="fn__big nums">30</span><span class="fn__unit">days after completion until the first payment</span>
-            <span class="fn__name">Service Finance</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">Service Finance</span>
-            <span class="fn__row"><b>What it is</b>Fixed installment loan</span>
-            <span class="fn__row"><b>How you repay</b>In fixed installments</span>
-            <span class="fn__row"><b>Also</b><span class="nums">0</span> pre-payment penalty</span>
-            <span class="fn__src">As published by Service Finance Company, NMLS 140908</span>
-          </span>
-        </button></li>
-        <li class="fn__slot" data-p="ygr"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="Ygrene, property-assessed: 20 year maximum published residential term. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
-            <span class="fn__big nums">20</span><span class="fn__unit">year maximum published residential term</span>
-            <span class="fn__name">Ygrene</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">Ygrene</span>
-            <span class="fn__row"><b>What it is</b>Florida PACE. Not a loan.</span>
-            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
-            <span class="fn__row"><b>Also</b>Soft credit pull</span>
-            <span class="fn__src">As published by Ygrene</span>
-          </span>
-        </button></li>
-        <li class="fn__slot" data-p="rnw"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="RenewPACE, property-assessed: 250 thousand dollars published maximum, and up to 20 percent of property value. Turn over for how you repay.">
-          <span class="fn__face fn__front">
-            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
-            <span class="fn__big nums">$250K</span><span class="fn__unit">published maximum, and up to 20% of property value</span>
-            <span class="fn__name">RenewPACE</span>
-          </span>
-          <span class="fn__face fn__back">
-            <span class="fn__name">RenewPACE</span>
-            <span class="fn__row"><b>What it is</b>PACE, from Renew Financial</span>
-            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
-            <span class="fn__row"><b>Also</b>No application fee</span>
-            <span class="fn__src">As published by Renew Financial, NMLS 1788120</span>
-          </span>
-        </button></li>
-      </ul>
-      <p class="fn__why" aria-live="polite">Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.</p>
+    <div class="wrap fb__split"></div>
+    <div class="wrap fz-foot"></div>
+  </div>
+  <div class="ver fw" data-v="3" hidden>
+    <div class="wrap fw__grid">
+      <div class="fw__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h-3">Four partners. <span class="acc">Pull one out.</span></h2>
+        <div class="fw__wallet" role="group" aria-label="The four financing partners"></div>
+        <p class="fw__hint" aria-hidden="true">Point at a card, or tap it.</p>
+      </div>
+      <div class="fw__detail" aria-live="polite"></div>
     </div>
-    <div class="wrap fn__foot">
-      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-      <p class="fn__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
-    </div>
+    <div class="wrap fz-foot"></div>
   </div>
 </section>
 
@@ -5055,9 +5156,13 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   } } });
 })();
 
-/* OWNER · Home 5 · How a job runs: one calendar on one screen (the long pinned drawing is retired at the owner's word).
-   The bars draw in, in order, as the section arrives (once); pointer, tap or focus on a stage lights its bar and the card
-   gives the firm's line. Arrow keys walk the stages. Reduced motion: the chart drawn, still [S0186, S1018, S0400]. */
+/* OWNER (second pass) · Home 5 · How a job runs: three layouts of the same eight stages, one list, one drawn icon set.
+   V1 the staircase: eight steps climb left to right; the open space above the low steps holds the stage card; pointer,
+      tap, focus or arrow keys climb it; the steps rise in as the section arrives.
+   V2 the dial: a ring of eight segments with a drawn icon on each; the centre names the stage, the card beside it gives
+      the firm's line; the ring fills to the stage you are on; prev/next and arrow keys.
+   V3 the card rail: eight illustrated cards on a track; drag (mouse), swipe or scroll; prev/next steps; the track fills
+      as you go. Week marks and lines are the firm's own [S1018 keyboard, S1443 gestures, S0400 reduced motion]. */
 (function () {
   var ST = [
     ['Week 1', 'Consultation', 'We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.'],
@@ -5069,49 +5174,148 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     ['Final 1–2 weeks', 'Quality review', 'We walk the work against the scope before we call it finished.'],
     ['Closeout', 'Completion and handover', 'Final inspection, a walkthrough together, and registration of manufacturer and workmanship warranties.']
   ];
-  EZ.section('process', {
-    1: { init: function (root, k) {
-      var rows = Array.prototype.slice.call(root.querySelectorAll('.pc__row')), card = root.querySelector('.pc__card');
-      var no = card.querySelector('.pc__no'), wk = card.querySelector('.pc__wk'), t = card.querySelector('.pc__t'), p = card.querySelector('.pc__p');
-      var cur = -1;
-      function pick(i) {
-        if (i === cur) return; cur = i;
-        rows.forEach(function (r, j) { r.classList.toggle('is-on', j === i); r.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
-        no.textContent = (i < 9 ? '0' : '') + (i + 1); wk.textContent = ST[i][0]; t.textContent = ST[i][1]; p.textContent = ST[i][2];
-        card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
-      }
-      rows.forEach(function (r, i) {
-        k.on(r, 'pointerenter', function (e) { if (e.pointerType === 'mouse') pick(i); });
-        k.on(r, 'focus', function () { pick(i); });
-        k.on(r, 'click', function () { pick(i); });
-        k.on(r, 'keydown', function (e) {
-          var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return;
-          e.preventDefault(); rows[(i + d + rows.length) % rows.length].focus();
-        });
+  // one line language for all eight (24 grid, round joins)
+  var IC = [
+    'M3 5h12v8H8l-4 3v-3H3zM15 9h6v7h-1v3l-3-3h-5v-3',                                   // consultation: two speech bubbles
+    'M3 11l7-6 7 6M5 10v9h6M16 12.5a3 3 0 1 0 0 6a3 3 0 1 0 0-6M18.2 17.7L21 20.5',       // site evaluation: house and a lens
+    'M14 4l6 6L9 21H3v-6zM12 6l6 6M3 3v4M3 3h4',                                          // design: pencil
+    'M6 3h9l4 4v14H6zM15 3v4h4M9 14l2 2 4-4',                                             // proposal: the written scope
+    'M9 3h6v5l3 3v3H6v-3l3-3zM5 18h14M7 21h10',                                           // permitting: the stamp
+    'M3 17h18M5 17v-2a7 7 0 0 1 14 0v2M10 8v4M14 8v4M4 20h16',                            // construction: hard hat
+    'M8 3h8v3H8zM6 4.5H5V21h14V4.5h-1M9 13l2 2 4-4',                                      // quality review: clipboard
+    'M8 10a4 4 0 1 0 0 8a4 4 0 1 0 0-8M11 11l9-9M17 5l2.5 2.5M14.5 7.5l2 2'              // handover: the key
+  ];
+  function icon(i, cls) { return '<svg class="' + (cls || 'pz-ic') + '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + IC[i] + '"/></svg>'; }
+  function nn(i) { return (i < 9 ? '0' : '') + (i + 1); }
+  // the shared stage card (V1 and V2)
+  function card(el, i, anim) {
+    el.innerHTML = '<p class="pz-k"><span class="pz-no nums">' + nn(i) + '</span><span class="pz-wk">' + ST[i][0] + '</span></p><h3 class="pz-t">' + ST[i][1] + '</h3><p class="pz-p">' + ST[i][2] + '</p>';
+    if (anim) { el.classList.remove('is-swap'); void el.offsetWidth; el.classList.add('is-swap'); }
+  }
+  function keys(k, list, go) {
+    list.forEach(function (b, i) {
+      k.on(b, 'keydown', function (e) {
+        var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return;
+        e.preventDefault(); var j = (i + d + list.length) % list.length; list[j].focus(); go(j);
       });
-      pick(0);
-      k.add(function () { rows.forEach(function (r) { r.classList.remove('is-on'); r.removeAttribute('aria-pressed'); }); cur = -1; });
-      EZ.reveal(k, root.querySelectorAll('.pc__head > *, .pc__card'));
+    });
+  }
+
+  EZ.section('process', {
+    /* V1 · the staircase */
+    1: { init: function (root, k) {
+      var ol = root.querySelector('.st__steps'), cardEl = root.querySelector('.st__card');
+      ol.innerHTML = ST.map(function (s, i) {
+        return '<li class="st__li" style="--i:' + i + '"><button type="button" class="st__s" data-i="' + i + '" aria-pressed="false">' +
+          '<span class="st__flag" aria-hidden="true"></span>' + icon(i, 'pz-ic st__ic') + '<span class="st__n nums">' + nn(i) + '</span><span class="st__t">' + s[1] + '</span></button></li>';
+      }).join('');
+      var bs = Array.prototype.slice.call(ol.querySelectorAll('.st__s')), cur = -1;
+      function go(i, anim) { if (i === cur) return; cur = i; bs.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); b.classList.toggle('is-past', j < i); }); card(cardEl, i, anim); }
+      bs.forEach(function (b, i) {
+        k.on(b, 'pointerenter', function (e) { if (e.pointerType === 'mouse') go(i, true); });
+        k.on(b, 'click', function () { go(i, true); }); k.on(b, 'focus', function () { go(i, true); });
+      });
+      keys(k, bs, function (j) { go(j, true); });
+      go(0, false);
+      k.add(function () { ol.innerHTML = ''; cardEl.innerHTML = ''; cur = -1; });
+      EZ.reveal(k, root.querySelectorAll('.ps__head > *, .st__card'));
       if (!k.motion) return;
-      // the bars draw in, in order, once the chart is on screen
-      var bars = root.querySelectorAll('.pc__bar');
-      gsap.set(bars, { scaleX: 0 });
-      var tl = gsap.timeline({ paused: true }).to(bars, { scaleX: 1, duration: .55, ease: 'power3.out', stagger: .09 });
-      var st = ScrollTrigger.create({ trigger: root.querySelector('.pc__chart'), start: 'top 78%', once: true, onEnter: function () { tl.play(); } });
-      k.add(function () { st.kill(); tl.kill(); gsap.set(bars, { clearProps: 'transform' }); });
+      var lis = ol.querySelectorAll('.st__li');
+      gsap.set(lis, { yPercent: 100, opacity: 0 });
+      var stt = ScrollTrigger.create({ trigger: ol, start: 'top 85%', once: true, onEnter: function () { gsap.to(lis, { yPercent: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .07, clearProps: 'transform,opacity' }); } });
+      k.add(function () { stt.kill(); });
+    } },
+
+    /* V2 · the dial */
+    2: { init: function (root, k) {
+      var svg = root.querySelector('.pd__svg'), nodes = root.querySelector('.pd__nodes'), cardEl = root.querySelector('.pd__card');
+      var midN = root.querySelector('.pd__n'), midT = root.querySelector('.pd__t'), pos = root.querySelector('.pd__pos');
+      var C = 220, R = 168, GAP = 5, seg = 360 / 8;
+      function pt(a, r) { var t = (a - 90) * Math.PI / 180; return [C + Math.cos(t) * r, C + Math.sin(t) * r]; }
+      function arc(a0, a1, r) { var p0 = pt(a0, r), p1 = pt(a1, r); return 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + 'A' + r + ' ' + r + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1); }
+      var s = '<circle class="pd__face" cx="220" cy="220" r="128"/>';
+      for (var i = 0; i < 60; i++) { var a = i * 6, p0 = pt(a, 196), p1 = pt(a, i % 5 ? 202 : 208); s += '<path class="pd__tk" d="M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + 'L' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + '"/>'; }
+      ST.forEach(function (x, j) { s += '<path class="pd__seg" data-i="' + j + '" d="' + arc(j * seg + GAP, (j + 1) * seg - GAP, R) + '"/>'; });
+      svg.innerHTML = s;
+      nodes.innerHTML = ST.map(function (x, j) {
+        var p = pt(j * seg + seg / 2, R);
+        return '<button type="button" class="pd__node" data-i="' + j + '" aria-pressed="false" aria-label="' + nn(j) + ' ' + x[1] + ', ' + x[0] + '" style="left:' + (p[0] / 4.4).toFixed(2) + '%;top:' + (p[1] / 4.4).toFixed(2) + '%">' + icon(j) + '</button>';
+      }).join('');
+      var segs = Array.prototype.slice.call(svg.querySelectorAll('.pd__seg')), bs = Array.prototype.slice.call(nodes.querySelectorAll('.pd__node')), cur = -1;
+      function go(i, anim) {
+        if (i === cur) return; cur = i;
+        segs.forEach(function (g, j) { g.classList.toggle('is-done', j < i); g.classList.toggle('is-on', j === i); });
+        bs.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); b.classList.toggle('is-done', j < i); });
+        midN.textContent = nn(i); midT.textContent = ST[i][1]; pos.textContent = (i + 1) + ' / 8';
+        card(cardEl, i, anim);
+        if (anim) { var m = root.querySelector('.pd__mid'); m.classList.remove('is-swap'); void m.offsetWidth; m.classList.add('is-swap'); }
+      }
+      bs.forEach(function (b, j) { k.on(b, 'click', function () { go(j, true); }); k.on(b, 'pointerenter', function (e) { if (e.pointerType === 'mouse') go(j, true); }); });
+      keys(k, bs, function (j) { go(j, true); });
+      root.querySelectorAll('.pd__btn').forEach(function (b) { k.on(b, 'click', function () { go((cur + +b.dataset.d + 8) % 8, true); }); });
+      go(0, false);
+      k.add(function () { svg.innerHTML = ''; nodes.innerHTML = ''; cardEl.innerHTML = ''; cur = -1; });
+      EZ.reveal(k, root.querySelectorAll('.pd__side > *'));
+      if (!k.motion) return;
+      gsap.set(segs, { drawSVG: '0%' }); gsap.set(bs, { scale: 0, opacity: 0 });
+      var stt = ScrollTrigger.create({ trigger: root.querySelector('.pd__dial'), start: 'top 80%', once: true, onEnter: function () {
+        gsap.to(segs, { drawSVG: '100%', duration: .5, ease: 'power2.inOut', stagger: .07 });
+        gsap.to(bs, { scale: 1, opacity: 1, duration: .45, ease: 'back.out(2)', stagger: .07, delay: .15, clearProps: 'transform,opacity' });
+      } });
+      k.add(function () { stt.kill(); gsap.set(segs, { clearProps: 'all' }); });
+    } },
+
+    /* V3 · the card rail */
+    3: { init: function (root, k) {
+      var rail = root.querySelector('.pk__rail'), fill = root.querySelector('.pk__fill');
+      rail.innerHTML = ST.map(function (s, i) {
+        return '<li class="pk__c" style="--i:' + i + '"><span class="pk__art">' + icon(i, 'pz-ic pk__ic') + '<span class="pk__big nums" aria-hidden="true">' + nn(i) + '</span></span>' +
+          '<span class="pk__wk">' + s[0] + '</span><h3 class="pk__t"><span class="sr-only">' + nn(i) + ' </span>' + s[1] + '</h3><p class="pk__p">' + s[2] + '</p></li>';
+      }).join('');
+      var cs = rail.querySelectorAll('.pk__c');
+      function upd() { var m = rail.scrollWidth - rail.clientWidth; fill.style.transform = 'scaleX(' + (m > 0 ? Math.max(.08, rail.scrollLeft / m) : 1).toFixed(3) + ')'; }
+      k.on(rail, 'scroll', upd); upd();
+      function step(d) { var w = cs[0].getBoundingClientRect().width + 24; rail.scrollBy({ left: d * w * 2, behavior: k.motion ? 'smooth' : 'auto' }); }
+      root.querySelectorAll('.pk__btns .pd__btn').forEach(function (b) { k.on(b, 'click', function () { step(+b.dataset.d); }); });
+      k.on(rail, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
+      // mouse drag (touch scrolls natively); a drag under 6px still lets a click through
+      var dn = null;
+      k.on(rail, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') return; dn = { x: e.clientX, l: rail.scrollLeft, moved: false }; rail.classList.add('is-grab'); });
+      k.on(window, 'pointermove', function (e) { if (!dn) return; var dx = e.clientX - dn.x; if (Math.abs(dx) > 6) dn.moved = true; rail.scrollLeft = dn.l - dx; });
+      k.on(window, 'pointerup', function () { if (!dn) return; dn = null; rail.classList.remove('is-grab'); });
+      k.add(function () { rail.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.ps__head > *'));
+      if (!k.motion) return;
+      gsap.set(cs, { x: 80, opacity: 0 });
+      var stt = ScrollTrigger.create({ trigger: rail, start: 'top 85%', once: true, onEnter: function () { gsap.to(cs, { x: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .06, clearProps: 'transform,opacity' }); } });
+      k.add(function () { stt.kill(); });
     } }
   });
 })();
 
-/* OWNER · Home 6 · Financing: four partner cards (both earlier versions retired at the owner's word). Pick what you are
-   building and the cards that usually fit come forward (the routing is the firm's own framing, FACTS.md "Financing");
-   the pointer tilts a card toward you; click, tap or Enter turns it over to how you repay. The cards deal in as the
-   section arrives. Reduced motion: no tilt, no deal; the flip is instant [S0340 physics, S1018 keyboard, S0400]. */
+/* OWNER (second pass) · Home 6 · Financing: three layouts of the same four partners, built from one list.
+   V1 ask then answer: the projects on the left; the answer on the right shows ONLY the partners that usually fit, with
+      the firm's reason. V2 two kinds of money: consumer credit beside property-assessed; "inside the home" or "outside
+      and energy" lights the half that usually fits. V3 the wallet: a fanned stack; point, tap or arrow to pull a card
+      out and read it, with what it usually fits. Figures and lines: the partners' own as the firm publishes them
+      (FACTS.md "Financing"); routing: the firm's framing [S0226 proof by the action, S1018, S0400]. */
 (function () {
-  var ROUTES = {
-    kitchen: ['syn', 'sfc'], bath: ['syn', 'sfc'], floor: ['syn', 'sfc'],
-    roof: ['sfc', 'ygr', 'rnw'], hvac: ['sfc', 'ygr', 'rnw'], unsure: ['syn', 'sfc', 'ygr', 'rnw']
+  var P = {
+    syn: { k: 'cc', kind: 'Consumer credit', name: 'Synchrony', big: '6–132', unit: 'months, published special-financing term range', what: 'Project Card, revolving credit', repay: 'On the card, as revolving credit', also: '1 card, reusable across projects', src: 'As published by Synchrony' },
+    sfc: { k: 'cc', kind: 'Consumer credit', name: 'Service Finance', big: '30', unit: 'days after completion until the first payment', what: 'Fixed installment loan', repay: 'In fixed installments', also: '0 pre-payment penalty', src: 'As published by Service Finance Company, NMLS 140908' },
+    ygr: { k: 'pa', kind: 'Property-assessed', name: 'Ygrene', big: '20', unit: 'year maximum published residential term', what: 'Florida PACE. Not a loan.', repay: 'Through your property tax bill', also: 'Soft credit pull', src: 'As published by Ygrene' },
+    rnw: { k: 'pa', kind: 'Property-assessed', name: 'RenewPACE', big: '$250K', unit: 'published maximum, and up to 20% of property value', what: 'PACE, from Renew Financial', repay: 'Through your property tax bill', also: 'No application fee', src: 'As published by Renew Financial, NMLS 1788120' }
   };
+  var ORDER = ['syn', 'sfc', 'ygr', 'rnw'];
+  var PROJ = [
+    ['kitchen', 'Kitchen', 'M4 3h16v18H4zM4 10h16M8 6.5h.01M12 6.5h.01M8 14h8v4H8z'],
+    ['bath', 'Bathroom', 'M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5zM6 12V5.5a2 2 0 0 1 4 0M7 20l-1 2M17 20l1 2'],
+    ['floor', 'Flooring', 'M3 3h18v18H3zM3 9h18M3 15h18M9 3v6M15 9v6M9 15v6'],
+    ['roof', 'Roof, windows or doors', 'M2 12l10-8 10 8M5 10v10h14V10M9 20v-6h6v6'],
+    ['hvac', 'HVAC or storm protection', 'M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h8'],
+    ['unsure', 'Not sure yet', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.4V14M12 17v.5']
+  ];
+  var ROUTES = { kitchen: ['syn', 'sfc'], bath: ['syn', 'sfc'], floor: ['syn', 'sfc'], roof: ['sfc', 'ygr', 'rnw'], hvac: ['sfc', 'ygr', 'rnw'], unsure: ORDER };
   var WHY = {
     kitchen: 'Interior finish work, so consumer credit is the usual route. PACE covers specific improvements; a kitchen remodel is generally not one of them.',
     bath: 'Interior finish work, so consumer credit is the usual route. Synchrony’s card is “useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.”',
@@ -5120,36 +5324,98 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     hvac: 'HVAC, and wind-resistance and storm protection, are among Ygrene’s Florida PACE categories. HVAC is a typical Service Finance project as well.',
     unsure: 'Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.'
   };
+  function fits(p) { return PROJ.filter(function (x) { return x[0] !== 'unsure' && ROUTES[x[0]].indexOf(p) > -1; }).map(function (x) { return x[1]; }); }
+  function ic(d, cls) { return '<svg class="' + (cls || 'fz-ic') + '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + d + '"/></svg>'; }
+  var CHIP = 'M5 6h14v12H5zM5 10h14M5 14h14M10 6v12M14 6v12', HOUSE = 'M3 12L12 4l9 8M6 10v10h12V10M10 20v-5h4v5';
+  // the partner card, in the language of the first pass (clay for consumer credit, ink for property-assessed)
+  function cardHTML(id, extra) {
+    var p = P[id];
+    return '<span class="fz-card fz-card--' + p.k + '"' + (extra || '') + '><span class="fz-kind">' + p.kind + '</span>' + ic(p.k === 'cc' ? CHIP : HOUSE, 'fz-ic fz-cic') +
+      '<span class="fz-big nums">' + p.big + '</span><span class="fz-unit">' + p.unit + '</span><span class="fz-name">' + p.name + '</span></span>';
+  }
+  function rows(p) {
+    return '<dl class="fz-rows"><div><dt>What it is</dt><dd>' + p.what + '</dd></div><div><dt>How you repay</dt><dd>' + p.repay + '</dd></div><div><dt>Also published</dt><dd>' + p.also + '</dd></div></dl><p class="fz-src">' + p.src + '</p>';
+  }
+  var FOOT = '<div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>' +
+    '<p class="fz-not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>';
+  function foot(root, k) { var f = root.querySelector('.fz-foot'); f.innerHTML = FOOT; k.add(function () { f.innerHTML = ''; }); }
+  function pop(k, els) { if (!k.motion || !els.length) return; gsap.fromTo(els, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: .45, ease: 'power3.out', stagger: .07, clearProps: 'transform,opacity' }); }
+
   EZ.section('financing', {
+    /* V1 · ask then answer */
     1: { init: function (root, k) {
-      var chips = Array.prototype.slice.call(root.querySelectorAll('.fn__chip')), slots = Array.prototype.slice.call(root.querySelectorAll('.fn__slot'));
-      var cards = Array.prototype.slice.call(root.querySelectorAll('.fn__card')), why = root.querySelector('.fn__why');
-      function pick(key) {
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.k === key ? 'true' : 'false'); });
-        var fit = ROUTES[key], all = key === 'unsure';
-        slots.forEach(function (s) { var on = fit.indexOf(s.dataset.p) > -1; s.classList.toggle('is-in', on && !all); s.classList.toggle('is-out', !on); });
+      var opts = root.querySelector('.fa__opts'), list = root.querySelector('.fa__list'), why = root.querySelector('.fa__why');
+      opts.innerHTML = PROJ.map(function (x) { return '<button type="button" class="fa__o" data-k="' + x[0] + '" aria-pressed="false">' + ic(x[2], 'fz-ic fa__oi') + '<span>' + x[1] + '</span><svg class="fa__ar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'; }).join('');
+      var bs = Array.prototype.slice.call(opts.querySelectorAll('.fa__o')), cur = '';
+      function pick(key, anim) {
+        if (key === cur) return; cur = key;
+        bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.k === key ? 'true' : 'false'); });
         why.textContent = WHY[key];
+        list.innerHTML = ROUTES[key].map(function (id) { var p = P[id]; return '<li class="fa__p fa__p--' + p.k + '"><span class="fa__pk">' + p.kind + '</span><span class="fa__pn">' + p.name + '</span><span class="fa__pb nums">' + p.big + '</span><span class="fa__pu">' + p.unit + '</span><span class="fa__pr">' + p.what + ' &middot; ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '</span></li>'; }).join('');
+        list.dataset.n = ROUTES[key].length;
+        if (anim) pop(k, list.children);
       }
-      chips.forEach(function (c) { k.on(c, 'click', function () { pick(c.dataset.k); }); });
-      cards.forEach(function (c) {
-        k.on(c, 'click', function () { c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); });
-        if (!k.motion || !k.fine) return;
-        k.on(c, 'pointermove', function (e) {
-          if (e.pointerType !== 'mouse') return;
-          var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-          c.classList.add('is-tilting'); c.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg'); c.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg');
-        });
-        k.on(c, 'pointerleave', function () { c.classList.remove('is-tilting'); c.style.removeProperty('--ry'); c.style.removeProperty('--rx'); });
-      });
-      pick('unsure');
-      k.add(function () { cards.forEach(function (c) { c.setAttribute('aria-pressed', 'false'); c.style.removeProperty('--ry'); c.style.removeProperty('--rx'); }); slots.forEach(function (s) { s.classList.remove('is-in', 'is-out'); }); });
-      EZ.reveal(k, root.querySelectorAll('.fn__head > *, .fn__why, .fn__foot > *'));
+      bs.forEach(function (b) { k.on(b, 'click', function () { pick(b.dataset.k, true); }); });
+      pick('kitchen', false);
+      foot(root, k);
+      k.add(function () { opts.innerHTML = ''; list.innerHTML = ''; cur = ''; });
+      EZ.reveal(k, root.querySelectorAll('.fa__side > *, .fa__ans'));
+    } },
+
+    /* V2 · two kinds of money */
+    2: { init: function (root, k) {
+      var split = root.querySelector('.fb__split');
+      function half(kind, title, line, ids, note) {
+        return '<article class="fb__h fb__h--' + kind + '" data-k="' + kind + '"><header class="fb__hh">' + ic(kind === 'cc' ? CHIP : HOUSE, 'fz-ic fb__hi') + '<div><h3 class="fb__ht">' + title + '</h3><p class="fb__hl">' + line + '</p></div></header>' +
+          '<ul class="fb__ps">' + ids.map(function (id) { var p = P[id]; return '<li class="fb__p"><span class="fb__pn">' + p.name + '</span><span class="fb__pb nums">' + p.big + '</span><span class="fb__pu">' + p.unit + '</span><span class="fb__pw">' + p.what + ' &middot; ' + p.also + '</span></li>'; }).join('') + '</ul>' +
+          (note ? '<p class="fb__note">' + note + '</p>' : '') + '</article>';
+      }
+      split.innerHTML = half('cc', 'Consumer credit', 'Repaid on a card or in fixed installments.', ['syn', 'sfc'], 'Usually fits interior finish work: kitchens, bathrooms, flooring.') +
+        '<div class="fb__or" aria-hidden="true"><span>or</span></div>' +
+        half('pa', 'Property-assessed', 'Repaid through your property tax bill.', ['ygr', 'rnw'], 'PACE covers specific improvements. A kitchen remodel is generally not one of them.');
+      var hs = split.querySelectorAll('.fb__h'), sbs = Array.prototype.slice.call(root.querySelectorAll('.fb__sb'));
+      var MAP = { in: ['cc'], out: ['cc', 'pa'], all: ['cc', 'pa'] }, HOT = { in: 'cc', out: 'pa', all: '' };
+      function pick(w) {
+        sbs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === w ? 'true' : 'false'); });
+        hs.forEach(function (h) { var on = MAP[w].indexOf(h.dataset.k) > -1; h.classList.toggle('is-dim', !on); h.classList.toggle('is-hot', HOT[w] === h.dataset.k); });
+      }
+      sbs.forEach(function (b) { k.on(b, 'click', function () { pick(b.dataset.w); }); });
+      pick('all');
+      foot(root, k);
+      k.add(function () { split.innerHTML = ''; });
+      EZ.reveal(k, root.querySelectorAll('.fb__head > *'));
       if (!k.motion) return;
-      // the four cards are dealt in, left to right, as the deck reaches the screen
-      gsap.set(cards, { y: 60, rotate: function (i) { return (i - 1.5) * 4; }, opacity: 0 });
-      var st = ScrollTrigger.create({ trigger: root.querySelector('.fn__deck'), start: 'top 85%', once: true,
-        onEnter: function () { gsap.to(cards, { y: 0, rotate: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .09, clearProps: 'transform,opacity' }); } });
-      k.add(function () { st.kill(); gsap.set(cards, { clearProps: 'all' }); });
+      gsap.set(hs, { y: 40, opacity: 0 });
+      var st = ScrollTrigger.create({ trigger: split, start: 'top 82%', once: true, onEnter: function () { gsap.to(hs, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .15, clearProps: 'transform,opacity' }); } });
+      k.add(function () { st.kill(); });
+    } },
+
+    /* V3 · the wallet */
+    3: { init: function (root, k) {
+      var wal = root.querySelector('.fw__wallet'), det = root.querySelector('.fw__detail');
+      wal.innerHTML = ORDER.map(function (id, i) { return '<button type="button" class="fw__c" data-p="' + id + '" style="--i:' + i + '" aria-pressed="false" aria-label="' + P[id].name + ', ' + P[id].kind.toLowerCase() + '">' + cardHTML(id) + '</button>'; }).join('');
+      var bs = Array.prototype.slice.call(wal.querySelectorAll('.fw__c')), cur = '';
+      function pick(id, anim) {
+        if (id === cur) return; cur = id; var p = P[id];
+        bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.p === id ? 'true' : 'false'); });
+        det.innerHTML = '<p class="fw__k fz-kind">' + p.kind + '</p><h3 class="fw__n">' + p.name + '</h3><p class="fw__big"><span class="nums">' + p.big + '</span><span class="fw__u">' + p.unit + '</span></p>' + rows(p) +
+          '<p class="fw__fl">Usually fits</p><ul class="fw__fits">' + fits(id).map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>';
+        det.className = 'fw__detail fw__detail--' + p.k;
+        if (anim) pop(k, det.children);
+      }
+      bs.forEach(function (b, i) {
+        k.on(b, 'pointerenter', function (e) { if (e.pointerType === 'mouse') pick(b.dataset.p, true); });
+        k.on(b, 'click', function () { pick(b.dataset.p, true); }); k.on(b, 'focus', function () { pick(b.dataset.p, true); });
+        k.on(b, 'keydown', function (e) { var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return; e.preventDefault(); bs[(i + d + 4) % 4].focus(); });
+      });
+      pick('syn', false);
+      foot(root, k);
+      k.add(function () { wal.innerHTML = ''; det.innerHTML = ''; cur = ''; });
+      EZ.reveal(k, root.querySelectorAll('.fw__side > :not(.fw__wallet), .fw__detail'));
+      if (!k.motion) return;
+      gsap.set(bs, { y: 80, rotate: 0, opacity: 0 });
+      var st = ScrollTrigger.create({ trigger: wal, start: 'top 82%', once: true, onEnter: function () { gsap.to(bs, { y: 0, opacity: 1, duration: .6, ease: 'power3.out', stagger: .08, clearProps: 'transform,opacity' }); } });
+      k.add(function () { st.kill(); });
     } }
   });
 })();
@@ -5389,7 +5655,10 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   });
 })();
 
-/* OWNER · Home 8 · Reviews: the constellation (restored from the earlier build the owner liked). 343 small stars, one per
+/* OWNER (second pass): the entrance is driven by the scroll, calm and reversible: the stars wait loosely scattered below
+   and gather as the section rises, fully formed when the figure reaches the middle of the screen; scrolling back up
+   loosens them again. The pointer still pushes them gently aside.
+   OWNER · Home 8 · Reviews: the constellation (restored from the earlier build the owner liked). 343 small stars, one per
    published Google review, fly in together when the section arrives and assemble into the figure 4.8 (sampled from the
    display face). The pointer pushes them away; they spring back to the average on their own. Touch: a tap scatters them;
    the "Scatter them" button does the same for keyboards. Reduced motion: the assembled figure, still. Only the two
@@ -5424,6 +5693,11 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
         return pts.slice(0, COUNT);
       }
+      var prog = 0, progT = 0;
+      function target() {   // 0 while the figure is below the screen, 1 once its centre reaches the middle; held above
+        var r = cv.getBoundingClientRect(), cy = r.top + r.height / 2, from = innerHeight + r.height / 2, to = innerHeight / 2;
+        return k.motion ? Math.max(0, Math.min(1, (from - cy) / (from - to))) : 1;
+      }
       function layout(fresh) {
         var r = cv.getBoundingClientRect();
         W = Math.round(r.width); H = Math.round(r.height);
@@ -5434,40 +5708,49 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         pts.forEach(function (p, i) {
           var s = stars[i];
           if (!s || fresh) {
-            // they wait off the figure, spread wide, until the section arrives
-            var a = Math.random() * Math.PI * 2, rr = Math.max(W, H) * (.45 + Math.random() * .5);
-            s = stars[i] = { x: W / 2 + Math.cos(a) * rr, y: H / 2 + Math.sin(a) * rr * .6, vx: 0, vy: 0, r: (1.5 + Math.random() * 1.7) * unit, ph: Math.random() * 6.28, k: .035 + Math.random() * .025 };
+            // a loose, quiet scatter around the figure (not a burst): within a band below and around it
+            var a = Math.random() * Math.PI * 2, rr = .18 + Math.random() * .32;
+            s = stars[i] = { ox: 0, oy: 0, vx: 0, vy: 0, r: (1.5 + Math.random() * 1.6) * unit, d: Math.random() * .35,
+              dx: Math.cos(a) * rr, dy: Math.abs(Math.sin(a)) * rr * .9 + .12 };
           }
-          s.tx = p[0]; s.ty = p[1];
+          s.tx = p[0]; s.ty = p[1]; s.sx = p[0] + s.dx * W; s.sy = p[1] + s.dy * H;
         });
         links = stars.map(function (s, i) {
           var best = -1, bd = 1e9;
           for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
           return best;
         });
-        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
-        else if (!running) draw(0);
+        prog = progT = target(); place(); draw();
+      }
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      function place() {
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i], t = Math.max(0, Math.min(1, (prog - s.d) / .65)), e = ease(t);
+          s.e = e; s.x = s.sx + (s.tx - s.sx) * e + s.ox; s.y = s.sy + (s.ty - s.sy) * e + s.oy;
+        }
       }
       function star5(x, y, r) {
         ctx.moveTo(x, y - r);
         for (var i = 1; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
         ctx.closePath();
       }
-      function draw(t) {
+      function draw() {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, W, H);
-        ctx.globalAlpha = .16; ctx.strokeStyle = INK; ctx.lineWidth = 1;
-        ctx.beginPath();
-        for (var i = 0; i < stars.length; i++) {
-          var a = stars[i], b = stars[links[i]]; if (!b) continue;
-          var dx = a.x - b.x, dy = a.y - b.y; if (dx * dx + dy * dy > 1600) continue;   // the lines only hold while the stars are home
-          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        ctx.globalAlpha = .16 * Math.max(0, prog * 2 - 1); ctx.strokeStyle = INK; ctx.lineWidth = 1;
+        if (ctx.globalAlpha > 0) {
+          ctx.beginPath();
+          for (var i = 0; i < stars.length; i++) {
+            var a = stars[i], b = stars[links[i]]; if (!b) continue;
+            var dx = a.x - b.x, dy = a.y - b.y; if (dx * dx + dy * dy > 1600) continue;   // the lines only hold while the stars are home
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          }
+          ctx.stroke();
         }
-        ctx.stroke();
         ctx.fillStyle = ACC;
         for (var n = 0; n < stars.length; n++) {
           var s = stars[n];
-          ctx.globalAlpha = .7 + .3 * Math.sin(t * .002 + s.ph);
+          ctx.globalAlpha = .35 + .65 * s.e;
           ctx.beginPath(); star5(s.x, s.y, s.r * 1.6); ctx.fill();
         }
         ctx.globalAlpha = 1;
@@ -5476,24 +5759,23 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         raf = requestAnimationFrame(step);
         if (document.hidden || t - last < 22) return;
         var dt = Math.min(2, (t - last) / 16.67); last = t;
-        var R = Math.max(80, W * .085), R2 = R * R, moving = 0;
+        progT = target(); prog += (progT - prog) * Math.min(1, .16 * dt);
+        // the pointer pushes stars gently aside; each springs back to its place on the path
+        var R = Math.max(70, W * .07), R2 = R * R;
         for (var i = 0; i < stars.length; i++) {
-          var s = stars[i];
-          var ax = (s.tx - s.x) * s.k, ay = (s.ty - s.y) * s.k;
+          var s = stars[i], ax = -s.ox * .06, ay = -s.oy * .06;
           var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
-          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 4.6; ax += dx / d * f; ay += dy / d * f; }
-          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
-          s.x += s.vx * dt; s.y += s.vy * dt;
-          if (Math.abs(s.vx) + Math.abs(s.vy) > .05) moving++;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 2.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .84; s.vy = (s.vy + ay * dt) * .84;
+          s.ox += s.vx * dt; s.oy += s.vy * dt;
         }
-        draw(t);
-        if (!moving && ptr.x < -999) { landed = true; }
+        place(); draw();
       }
       function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
       function stop() { running = false; cancelAnimationFrame(raf); }
       function scatter(cx, cy) {
         stars.forEach(function (s) {
-          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 16 + Math.random() * 20;
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 6 + Math.random() * 8;
           s.vx += dx / d * f; s.vy += dy / d * f;
         });
         run();
@@ -5507,7 +5789,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       k.on(cv, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = cv.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
       k.on(root.querySelector('.rv__again'), 'click', function () { scatter(); });
       // they fly in together when the figure comes into view (once the canvas is half on screen)
-      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: .35 });
+      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
       EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__avg, .rv__acts'));
     } }
   });
