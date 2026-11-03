@@ -3,3 +3,8 @@
 .pcall svg{width:20px;height:20px}.pcall:hover{background:#EAF6D2}.pcall:focus-visible{outline:3px solid var(--green);outline-offset:2px}
 .pacts{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .pkick{font:800 12px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+/* verbatim review quote (PB.quote) */
+figure.pq2{margin:0;padding:18px 20px;border-radius:18px;background:#F6F9F4;box-shadow:inset 3px 0 0 var(--lime)}
+figure.pq2 blockquote p{font:600 17px/1.5 var(--text);color:var(--ink)}
+figure.pq2 figcaption{margin-top:10px;display:flex;gap:8px;align-items:baseline;font:500 13px/1.3 var(--text);color:var(--ink-3)}figure.pq2 figcaption b{font-weight:800;color:var(--ink-2)}
+figure.pq2.sm blockquote p{font-size:15px}

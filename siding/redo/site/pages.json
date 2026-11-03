@@ -196,6 +196,46 @@
       "Set in type"
      ]
     ]
+   },
+   {
+    "slot": "wd3",
+    "name": "What windows cost",
+    "mod": "p_wd3",
+    "obj": "PWd3",
+    "v": [
+     [
+      "a",
+      "The window sticker"
+     ],
+     [
+      "b",
+      "The pane as the scale"
+     ],
+     [
+      "c",
+      "Three plain questions"
+     ]
+    ]
+   },
+   {
+    "slot": "wd4",
+    "name": "How a window goes in",
+    "mod": "p_wd4",
+    "obj": "PWd4",
+    "v": [
+     [
+      "a",
+      "Three steps, two voices"
+     ],
+     [
+      "b",
+      "Weeks, then days"
+     ],
+     [
+      "c",
+      "Step through it"
+     ]
+    ]
    }
   ],
   "roofing": [],

@@ -12,6 +12,9 @@ window.PB = (function () {
   const img = (i, cls = '') => { const j = J()[i] || {}; return `<img class="${cls}" data-job="${i}" alt="${esc(j.alt || '')}" decoding="async">`; };
   const cap = (i) => { const j = J()[i] || {}; return `${esc(j.place || '')} · ${esc(j.when || '')} · ${esc(j.trades || '')}`; };
   const fill = (root) => root.querySelectorAll('img[data-job]').forEach((m) => { const j = J()[+m.dataset.job]; if (j && j.src && !m.src) m.src = j.src; });
+  // a verbatim excerpt of published review i; the build fails if it is not word for word in the review
+  const quote = (i, t, cls = 'pq2') => { const r = (window.__REV || [])[i]; if (!r || !r.text.includes(t)) throw new Error('not verbatim: ' + t);
+    return `<figure class="${cls}"><blockquote><p>“${/^[a-z]/.test(t) ? '…' : ''}${esc(t)}${/[.!?]$/.test(t) ? '' : '…'}”</p></blockquote><figcaption><b>${esc(r.name.trim())}</b><span>Google review</span></figcaption></figure>`; };
   const LOCK = { phone: '(512) 550-0000', mail: 'info@austinprosiding.com', addr: '7801 N Lamar Blvd Suite C70, Austin TX 78752', hours: 'Mon–Fri 8–8, Sat 8–6, Sun 12–5', rating: '4.9 from 474 Google reviews', area: '312 on the map with photos + 574 more counted' };
-  return { BOOK, CAL, PH, esc, book, call, img, cap, fill, LOCK, wire(root) { fill(root); } };
+  return { BOOK, CAL, PH, esc, book, call, img, cap, fill, quote, LOCK, wire(root) { fill(root); } };
 })();

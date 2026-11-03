@@ -1,0 +1,49 @@
+/* WINDOWS · Install A — three steps, two voices */
+.wd4A,.wd4B,.wd4C{padding:96px var(--gut) 72px}
+.wd4A .hd .sec-p,.wd4B .hd .sec-p,.wd4C .hd .sec-p{margin-top:10px;font-size:17px;max-width:62ch}
+.wd4A .wrap{margin-top:24px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(18px,3vw,44px);align-items:start}
+.wd4A .st4{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.wd4A .st4 li{padding:18px 18px 20px;border-radius:20px;background:#F6F9F4;box-shadow:inset 0 0 0 1px #E3EBE4}
+.wd4A .ic svg{width:100%;max-width:140px;height:auto}
+.wd4A .ic path{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.6,0,.2,1);transition-delay:calc(var(--d) + var(--i) * .25s)}
+.wd4A.in .ic path{stroke-dashoffset:0}
+.wd4A .st4 b{display:block;margin-top:12px;font:800 20px/1.15 var(--display);color:var(--ink)}.wd4A .st4 em{display:block;font:800 13px/1 var(--display);font-style:normal;color:var(--green);margin-bottom:6px}
+.wd4A .st4 p{margin-top:8px;font:500 15px/1.5 var(--text);color:var(--ink-2)}
+.wd4A .vo{display:grid;gap:10px}
+@media (max-width:1000px){.wd4A .wrap{grid-template-columns:1fr}}
+@media (max-width:700px){.wd4A .st4{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.wd4A .ic path{stroke-dashoffset:0;transition:none}}
+
+/* WINDOWS · Install B — weeks, then days */
+.wd4B .two4{margin-top:24px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px}
+.wd4B .cal,.wd4B .days{padding:clamp(18px,2.4vw,28px);border-radius:22px;background:#F6F9F4;box-shadow:inset 0 0 0 1px #E3EBE4;display:flex;flex-direction:column;gap:16px}
+.wd4B .days{background:#0E3B2C}.wd4B .days .pkick{color:#B5DB6E}
+.wd4B .grid4{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.wd4B .grid4 i{aspect-ratio:1.3;border-radius:5px;background:#E3EBE4;transition:background-color .3s ease;transition-delay:calc(var(--i) * 25ms)}
+.wd4B.in .grid4 i{background:#CFE5A8}.wd4B.in .grid4 i:nth-last-child(-n+2){background:var(--green)}
+.wd4B .d2{display:grid;grid-template-columns:1fr 1fr;gap:5px;max-width:150px}.wd4B .d2 i{aspect-ratio:1.3;border-radius:5px;background:#B5DB6E}
+.wd4B .big3{font:500 16px/1.4 var(--text);color:rgba(255,255,255,.85)}.wd4B .big3 b{display:block;font:800 clamp(40px,4vw,60px)/1 var(--display);letter-spacing:-.04em;color:#fff}
+.wd4B .days figure.pq2{background:rgba(255,255,255,.08);box-shadow:inset 3px 0 0 #B5DB6E}.wd4B .days figure.pq2 blockquote p{color:#fff}.wd4B .days figure.pq2 figcaption,.wd4B .days figure.pq2 figcaption b{color:rgba(255,255,255,.7)}
+.wd4B .cal figure.pq2{margin-top:auto;background:#fff}
+@media (max-width:860px){.wd4B .two4{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.wd4B .grid4 i{transition:none}}
+
+/* WINDOWS · Install C — step through it */
+.wd4C .wrap{margin-top:24px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(18px,3vw,48px);align-items:center}
+.wd4C .op4{width:100%;height:auto;border-radius:22px;box-shadow:0 30px 50px -40px rgba(14,59,44,.5)}
+.wd4C .wl3{fill:#F4F1E8}.wd4C .lp3{stroke:#DCD5C7;stroke-width:2}.wd4C .ro{fill:#24302B}
+.wd4C .op4 g{opacity:0;transition:opacity .4s ease,transform .6s cubic-bezier(.3,1.3,.5,1)}
+.wd4C .g-m path{fill:none;stroke:var(--green);stroke-width:2.5}.wd4C .g-m text{font:800 13px var(--display);fill:var(--green);text-anchor:middle}
+.wd4C .u{fill:#fff;stroke:#CFC8B9;stroke-width:2}.wd4C .gl4{fill:#9BB2BE}.wd4C .mu4{stroke:#fff;stroke-width:6}
+.wd4C .g-b text{font:700 12px var(--text);fill:#6B776F;text-anchor:middle}
+.wd4C .bead2{fill:none;stroke:#B5DB6E;stroke-width:5}
+.wd4C .op4[data-at="1"] .g-m,.wd4C .op4[data-at="2"] .g-m,.wd4C .op4[data-at="2"] .g-b,.wd4C .op4[data-at="3"] .g-s,.wd4C .op4[data-at="4"] .g-s,.wd4C .op4[data-at="4"] .g-c{opacity:1}
+.wd4C .op4[data-at="3"] .g-m,.wd4C .op4[data-at="4"] .g-m{opacity:.25}
+.wd4C .sg{display:grid;gap:8px}
+.wd4C .sg button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:#F1F5EF;cursor:pointer;font:700 16px/1.2 var(--text);color:var(--ink);transition:background-color .2s ease}
+.wd4C .sg em{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;font:800 13px/1 var(--display);font-style:normal;color:var(--green)}
+.wd4C .sg button[aria-pressed="true"]{background:var(--green);color:#fff}.wd4C .sg button[aria-pressed="true"] em{background:#B5DB6E}
+.wd4C .sg button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.wd4C .rd9{margin-top:16px;min-height:3em;font:600 16px/1.5 var(--text);color:var(--ink)}.wd4C .nt4{margin-bottom:16px;font:500 14.5px/1.5 var(--text);color:var(--ink-3)}
+@media (max-width:860px){.wd4C .wrap{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.wd4C .op4 g{transition:none}}
