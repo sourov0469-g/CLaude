@@ -9,14 +9,14 @@ GAF = CREDS[0]
 def _roof(cls, pinned=False):
     """a roof in section along a 22-degree slope, thickness exaggerated: deck, underlayment, starter strip, shingle
     courses as tapered wedges each lapping the one below (the mark's lap, on a roof), and the ridge cap"""
-    sh = ''.join(f'<path class="rf-p" data-k="{3 + i}" d="M{90 + i * 78} 318L{250 + i * 78} 334V340H{90 + i * 78}Z" fill="var(--steel-9)" stroke="var(--steel-4)" stroke-width="2.5" stroke-linejoin="miter"/>' for i in range(7))
+    sh = ''.join(f'<path class="rf-p" data-k="{3 + i}" d="M{90 + i * 78} 318L{250 + i * 78} 334V340H{90 + i * 78}Z" fill="var(--color-drawing-solid)" stroke="var(--color-drawing-highlight)" stroke-width="2.5" stroke-linejoin="miter"/>' for i in range(7))
     lab = [(0, 'DECK', 120, 396, 372), (1, 'UNDERLAYMENT', 330, 396, 346), (2, 'STARTER', 60, 290, 328), (5, 'SHINGLE COURSES', 420, 270, 322), (11, 'RIDGE CAP', 600, 262, 304)]
-    labels = ''.join(f'<g class="rf-p" data-k="{k}"><path d="M{x} {ly}V{y}" stroke="var(--steel-6)" stroke-width="1.5"/><text class="rf-t" x="{x}" y="{ly + (16 if ly > y else -8)}">{t}</text></g>' for k, t, x, ly, y in lab)
+    labels = ''.join(f'<g class="rf-p" data-k="{k}"><path d="M{x} {ly}V{y}" stroke="var(--color-drawing-ink)" stroke-width="1.5"/><text class="rf-t" x="{x}" y="{ly + (16 if ly > y else -8)}">{t}</text></g>' for k, t, x, ly, y in lab)
     return (f'<svg class="rf {cls}" viewBox="0 -10 940 470" role="img" aria-label="A roof drawn in section: deck, underlayment, starter strip, shingle courses each lapping the one below, and the ridge cap">'
-            f'<g transform="rotate(-22 60 360)"><rect class="rf-p" data-k="0" x="40" y="346" width="760" height="40" fill="var(--steel-11)" stroke="var(--steel-7)" stroke-width="2"/>'
-            f'<path class="rf-p" data-k="1" d="M40 342H800" stroke="var(--steel-6)" stroke-width="6" stroke-dasharray="14 8"/>'
-            f'<path class="rf-p" data-k="2" d="M40 326H110V340H40Z" fill="var(--steel-7)"/>{sh}'
-            f'<path class="rf-p" data-k="11" d="M690 300L800 300V340H690Z" fill="var(--steel-6)" stroke="var(--steel-4)" stroke-width="2.5"/>{labels}</g></svg>')
+            f'<g transform="rotate(-22 60 360)"><rect class="rf-p" data-k="0" x="40" y="346" width="760" height="40" fill="var(--color-drawing-shade)" stroke="var(--color-drawing-line)" stroke-width="2"/>'
+            f'<path class="rf-p" data-k="1" d="M40 342H800" stroke="var(--color-drawing-ink)" stroke-width="6" stroke-dasharray="14 8"/>'
+            f'<path class="rf-p" data-k="2" d="M40 326H110V340H40Z" fill="var(--color-drawing-line)"/>{sh}'
+            f'<path class="rf-p" data-k="11" d="M690 300L800 300V340H690Z" fill="var(--color-drawing-ink)" stroke="var(--color-drawing-highlight)" stroke-width="2.5"/>{labels}</g></svg>')
 
 
 
@@ -35,7 +35,7 @@ def r1():
           f'<p class="lead">Shingle and metal roofing, gutters, and covered patios. {esc(GAF)}.</p><div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a></div></div>'
           f'<div class="rh2-art">{_roof("rf-light")}</div></div></div>')
     css = """
-.rf{width:100%;height:auto;display:block} .rf-t{font:600 17px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-label-strong)} .rf-light .rf-t{fill:var(--color-text-secondary)}
+.rf{width:100%;height:auto;display:block} .rf-t{font:600 17px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-highlight)} .rf-light .rf-t{fill:var(--color-text-secondary)}
 .rh1 .btn-primary{background:var(--color-surface-on-dark);color:var(--color-text-primary)} .rh-call{background:transparent;color:var(--color-text-inverse);border-color:var(--color-border-on-dark-strong)} .rh1-art{max-width:1100px;margin:var(--space-07) auto 0;padding:0 var(--layout-gutter)}
 .rh2-art{background:var(--color-bg-subtle);padding:var(--space-05)}
 """
@@ -70,10 +70,10 @@ def r3():
 
 def _gutter(cls):
     return (f'<svg class="gt {cls}" viewBox="0 0 900 460" role="img" aria-label="Water running off the roof edge into the gutter, along it and down the downspout, away from the wall">'
-            f'<path d="M0 120L520 40" stroke="var(--steel-9)" stroke-width="18"/><path d="M520 70V430" stroke="var(--color-border-control)" stroke-width="6"/>'
-            f'<path d="M490 96H600V140Q600 150 590 150H500Q490 150 490 140Z" fill="var(--steel-3)" stroke="var(--steel-9)" stroke-width="5"/>'
-            f'<path d="M570 150V400Q570 420 590 420H700" fill="none" stroke="var(--steel-9)" stroke-width="18"/>'
-            f'<path class="gt-w" d="M60 104L500 38L520 100H560L570 140V398Q570 416 590 416H860" fill="none" stroke="var(--steel-6)" stroke-width="5" stroke-dasharray="1" pathLength="1"/>'
+            f'<path d="M0 120L520 40" stroke="var(--color-drawing-solid)" stroke-width="18"/><path d="M520 70V430" stroke="var(--color-border-control)" stroke-width="6"/>'
+            f'<path d="M490 96H600V140Q600 150 590 150H500Q490 150 490 140Z" fill="var(--color-drawing-fill)" stroke="var(--color-drawing-solid)" stroke-width="5"/>'
+            f'<path d="M570 150V400Q570 420 590 420H700" fill="none" stroke="var(--color-drawing-solid)" stroke-width="18"/>'
+            f'<path class="gt-w" d="M60 104L500 38L520 100H560L570 140V398Q570 416 590 416H860" fill="none" stroke="var(--color-drawing-ink)" stroke-width="5" stroke-dasharray="1" pathLength="1"/>'
             f'<text x="630" y="100" class="gt-t">GUTTER</text><text x="600" y="300" class="gt-t">DOWNSPOUT</text><text x="720" y="400" class="gt-t">AWAY FROM THE WALL</text></svg>')
 
 
@@ -103,10 +103,10 @@ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){g.classList
 
 def _patio(kind):
     """a patio cover in a simple oblique drawing: posts, beam, rafters and roof plane; attached covers meet the wall"""
-    wall = '<path d="M40 60V330" stroke="var(--color-border-control)" stroke-width="8"/>' if kind == 'attached' else '<path d="M70 150V330" stroke="var(--steel-9)" stroke-width="12"/>'
-    raft = ''.join(f'<path d="M{70 + i * 60} {150 - i * 4}L{150 + i * 60} {110 - i * 4}" stroke="var(--steel-8)" stroke-width="6"/>' for i in range(6))
-    return (f'<svg class="pc" viewBox="0 0 520 360" aria-hidden="true">{wall}<path d="M50 120L460 100L520 70L120 90Z" fill="var(--steel-3)" stroke="var(--steel-9)" stroke-width="4"/>'
-            f'{raft}<path d="M70 150H470" stroke="var(--steel-9)" stroke-width="12"/><path d="M460 150V330M300 150V330" stroke="var(--steel-9)" stroke-width="12"/>'
+    wall = '<path d="M40 60V330" stroke="var(--color-border-control)" stroke-width="8"/>' if kind == 'attached' else '<path d="M70 150V330" stroke="var(--color-drawing-solid)" stroke-width="12"/>'
+    raft = ''.join(f'<path d="M{70 + i * 60} {150 - i * 4}L{150 + i * 60} {110 - i * 4}" stroke="var(--color-drawing-member)" stroke-width="6"/>' for i in range(6))
+    return (f'<svg class="pc" viewBox="0 0 520 360" aria-hidden="true">{wall}<path d="M50 120L460 100L520 70L120 90Z" fill="var(--color-drawing-fill)" stroke="var(--color-drawing-solid)" stroke-width="4"/>'
+            f'{raft}<path d="M70 150H470" stroke="var(--color-drawing-solid)" stroke-width="12"/><path d="M460 150V330M300 150V330" stroke="var(--color-drawing-solid)" stroke-width="12"/>'
             f'<path d="M20 330H500" stroke="var(--color-border-default)" stroke-width="3"/></svg>')
 
 

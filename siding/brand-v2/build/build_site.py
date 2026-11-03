@@ -1,6 +1,6 @@
 """Builds siding/brand-v2/site.html: the single-file site, six pages, two versions per section.
 Run: python3 -I brand-v2/build/build_site.py"""
-import os, sys
+import base64, gzip, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -46,8 +46,22 @@ def build():
             f'<p id="live" class="sr" aria-live="polite"></p><script>{BASE_JS}{"".join(js)}</script></body></html>')
 
 
+def pack_backups(html):
+    """Superseded versions stay in the file, never deleted, but packed: gzip + base64 in one inert script block instead of
+    ~100 <template> fragments the parser builds on every load (cycle 10: 411 KB -> ~34 KB). ?backups in the URL decodes them
+    back into the same <template class="bk"> elements in the same sections, so anything that inspects them works unchanged."""
+    items = [dict(sec=m.group(1), v=m.group(2), rev=m.group(3), html=m.group(4))
+             for m in re.finditer(r'<template class="bk" data-sec="([^"]+)" data-v="([^"]+)" data-rev="([^"]+)">(.*?)</template>', html, re.S)]
+    html = re.sub(r'<template class="bk" data-sec="[^"]+" data-v="[^"]+" data-rev="[^"]+">.*?</template>', '', html, flags=re.S)
+    blob = base64.b64encode(gzip.compress(json.dumps(items, ensure_ascii=False).encode('utf-8'), 9, mtime=0)).decode('ascii')
+    tag = f'<script type="application/octet-stream" id="aps-backups" data-encoding="gzip+base64+json" data-count="{len(items)}">{blob}</script>'
+    anchor = '<p id="live" class="sr" aria-live="polite"></p>'   # before the main script, which unpacks it under ?backups
+    assert html.count(anchor) == 1
+    return html.replace(anchor, anchor + tag), len(items)
+
+
 if __name__ == '__main__':
-    out = build()
+    out, nbk = pack_backups(build())
     p = os.path.join(os.path.dirname(HERE), 'site.html')
     open(p, 'w', encoding='utf-8').write(out)
-    print('wrote site.html', len(out) // 1024, 'KB')
+    print('wrote site.html', len(out) // 1024, 'KB |', nbk, 'backups packed')

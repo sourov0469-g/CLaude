@@ -65,10 +65,10 @@ def s1():
 .ctl-n{font:600 var(--type-small-size) var(--font-text);min-width:48px;text-align:center}
 .h2-l{position:absolute;left:0;top:0;bottom:0;width:50%} .h2-l img{width:100%;height:100%;object-fit:cover;display:block}
 .h2-r{position:absolute;right:0;top:0;bottom:0;width:50%;background:var(--color-bg-deep);display:grid;place-items:center} .hd{height:88%;width:auto;max-width:92%}
-.pls2{left:25%;top:28%} .hd-ld{fill:none;stroke:var(--color-drawing-wrap);stroke-width:1.5}
-.hd-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-ink)} .hd-dim{stroke:var(--color-drawing-ink);stroke-width:2;fill:none} .hd-old{stroke:var(--color-drawing-structure);stroke-width:14;stroke-dasharray:4 10}
-.hd-wrap{stroke:var(--color-drawing-wrap);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--color-drawing-structure);stroke-width:4} .hd-sh{stroke:var(--color-drawing-sheathing);stroke-width:14}
-.hd-b{fill:var(--color-drawing-board);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--color-drawing-ink)} .hd-ok{fill:none;stroke:var(--color-text-inverse);stroke-width:6}
+.pls2{left:25%;top:28%} .hd-ld{fill:none;stroke:var(--color-drawing-line);stroke-width:1.5}
+.hd-t{font:600 16px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-ink)} .hd-dim{stroke:var(--color-drawing-ink);stroke-width:2;fill:none} .hd-old{stroke:var(--color-drawing-member);stroke-width:14;stroke-dasharray:4 10}
+.hd-wrap{stroke:var(--color-drawing-line);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--color-drawing-member);stroke-width:4} .hd-sh{stroke:var(--color-drawing-solid);stroke-width:14}
+.hd-b{fill:var(--color-drawing-deep);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--color-drawing-ink)} .hd-ok{fill:none;stroke:var(--color-text-inverse);stroke-width:6}
 .hd-s{opacity:.18;transition:opacity var(--duration-normal) var(--ease-standard)} .hd-s.done{opacity:.55} .hd-s.cur{opacity:1}
 .hd-lab .hd-t{fill:var(--color-drawing-label)} @media (max-width:600px){.h2-r .hd-lab{display:none}}   /* the labels scale to ~6px on phones; the plate above names the step in large type */ .hd-lab .cur .hd-t{fill:var(--color-text-inverse);font-weight:700} .hd-lab .cur .hd-ld{stroke:var(--color-text-inverse)}
 @media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto;left:var(--layout-gutter);right:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)}
@@ -154,7 +154,7 @@ def s3():
 .rec-n{font:800 var(--type-numeral-xl)/.9 var(--font-display);letter-spacing:-.03em;margin:0} .rec-clip{display:inline-block}
 .js [data-rec1] .rec-clip{clip-path:inset(100% 0 0 0)}
 .rec-s{font:700 var(--type-h3-size)/1.3 var(--font-text);margin:var(--space-04) 0 var(--space-04);max-width:22ch}
-.nd{width:100%;height:auto;max-height:calc(100vh - 160px)} .nd-d{fill:var(--color-drawing-wrap);opacity:.12;transition:opacity var(--duration-fast) linear} .nd-d.on{opacity:1}
+.nd{width:100%;height:auto;max-height:calc(100vh - 160px)} .nd-d{fill:var(--color-drawing-line);opacity:.12;transition:opacity var(--duration-fast) linear} .nd-d.on{opacity:1}
 .nd-hq{fill:none;stroke:var(--color-accent-solid);stroke-width:3}
 .rec-m2{background:var(--color-bg-subtle);padding:var(--space-05)} .rec-lines span{display:inline-block}
 .js .rec2 .rec-lines span{opacity:0;transform:translateY(8px);transition:opacity var(--duration-moderate) var(--ease-enter),transform var(--duration-moderate) var(--ease-enter)}
@@ -181,8 +181,8 @@ def s4():
     v1 = (f'<div class="sv1 sec-pad"><div class="wrap"><p class="label">Services</p><h2 class="h2">Start with the part of the house.</h2>{cline()}'
           f'<div class="svcs">{cards}</div></div></div>')
     roof = ('<svg class="sv2-art" viewBox="0 0 400 267" aria-hidden="true"><rect width="400" height="267" fill="var(--color-bg-deep)"/>'
-            '<path d="M40 220L200 70L360 220Z" fill="none" stroke="var(--steel-6)" stroke-width="4"/>'
-            + ''.join(f'<path d="M{200 - (i + 1) * 26} {70 + (i + 1) * 24}H{200 + (i + 1) * 26}" stroke="var(--steel-8)" stroke-width="3"/>' for i in range(5)) + '</svg>')
+            '<path d="M40 220L200 70L360 220Z" fill="none" stroke="var(--color-drawing-ink)" stroke-width="4"/>'
+            + ''.join(f'<path d="M{200 - (i + 1) * 26} {70 + (i + 1) * 24}H{200 + (i + 1) * 26}" stroke="var(--color-drawing-member)" stroke-width="3"/>' for i in range(5)) + '</svg>')
     rows = ''.join(f'<a class="sv2-r" href="#/{k}"><span class="sv2-n">{n + 1:02d}</span><span class="sv2-t">{esc(t)}</span><span class="sv2-d">{esc(d)}</span>'
                    f'<span class="sv2-p">{IM.img(img, alt) if img else roof}</span>{icon("action-arrow-right", 28)}</a>' for n, (k, i, t, d, img, alt) in enumerate(svc))
     v2 = f'<div class="sv2 sec-pad"><div class="wrap"><p class="label">Services</p><h2 class="h2">Three trades. Pick one.</h2>{cline()}<div class="sv2-l">{rows}</div></div></div>'

@@ -34,14 +34,14 @@ def pairs_section(ids, name, label, h2b):
 
 def _window_section(cls):
     """a window drawn in section: frame, sash, two panes of glass with a spacer, sill. data-k orders the build"""
-    parts = [('frame', '<path class="wn-p" data-k="0" d="M120 60H480V600H120Z" fill="none" stroke="var(--steel-8)" stroke-width="10"/>', 'FRAME', 90),
-             ('sash', '<path class="wn-p" data-k="1" d="M160 100H440V560H160Z" fill="none" stroke="var(--steel-6)" stroke-width="8"/>', 'SASH', 160),
-             ('glass', '<path class="wn-p" data-k="2" d="M196 136H404V524H196Z" fill="var(--steel-10)" fill-opacity=".35" stroke="var(--steel-5)" stroke-width="3"/>'
-                       '<path class="wn-p" data-k="2" d="M210 150H390V510H210Z" fill="none" stroke="var(--steel-5)" stroke-width="2"/>', 'GLASS, TWO PANES SHOWN', 240),
-             ('spacer', '<path class="wn-p" data-k="3" d="M196 136L210 150M404 136L390 150M196 524L210 510M404 524L390 510" stroke="var(--steel-4)" stroke-width="3"/>', 'SPACER', 320),
-             ('sill', '<path class="wn-p" data-k="4" d="M90 600H510L530 630H70Z" fill="var(--steel-12)" stroke="var(--steel-6)" stroke-width="4"/>', 'SILL', 610)]
+    parts = [('frame', '<path class="wn-p" data-k="0" d="M120 60H480V600H120Z" fill="none" stroke="var(--color-drawing-member)" stroke-width="10"/>', 'FRAME', 90),
+             ('sash', '<path class="wn-p" data-k="1" d="M160 100H440V560H160Z" fill="none" stroke="var(--color-drawing-ink)" stroke-width="8"/>', 'SASH', 160),
+             ('glass', '<path class="wn-p" data-k="2" d="M196 136H404V524H196Z" fill="var(--color-drawing-glass)" fill-opacity=".35" stroke="var(--color-drawing-label)" stroke-width="3"/>'
+                       '<path class="wn-p" data-k="2" d="M210 150H390V510H210Z" fill="none" stroke="var(--color-drawing-label)" stroke-width="2"/>', 'GLASS, TWO PANES SHOWN', 240),
+             ('spacer', '<path class="wn-p" data-k="3" d="M196 136L210 150M404 136L390 150M196 524L210 510M404 524L390 510" stroke="var(--color-drawing-highlight)" stroke-width="3"/>', 'SPACER', 320),
+             ('sill', '<path class="wn-p" data-k="4" d="M90 600H510L530 630H70Z" fill="var(--color-drawing-deep)" stroke="var(--color-drawing-ink)" stroke-width="4"/>', 'SILL', 610)]
     art = ''.join(a for _, a, _, _ in parts)
-    lab = ''.join(f'<g class="wn-p" data-k="{k}"><path d="M480 {y}H560" stroke="var(--steel-7)" stroke-width="1.5"/><text x="570" y="{y + 6}" class="wn-t">{t}</text></g>'
+    lab = ''.join(f'<g class="wn-p" data-k="{k}"><path d="M480 {y}H560" stroke="var(--color-drawing-line)" stroke-width="1.5"/><text x="570" y="{y + 6}" class="wn-t">{t}</text></g>'
                   for k, (_, _, t, y) in enumerate(parts))
     return f'<svg class="wn {cls}" viewBox="40 30 800 640" role="img" aria-label="A window drawn in elevation: frame, sash, two panes of glass with a spacer, and the sill">{art}{lab}</svg>'
 
@@ -92,14 +92,14 @@ if(window.APS.reduce)set(1);else{set(0);window.APS.pin(w,set);}})();
 
 
 def _elev(kind):
-    s = 'stroke="var(--steel-9)" stroke-width="6" fill="none"'
-    g = 'fill="var(--steel-2)"'
-    body = {'Double-hung': f'<rect x="20" y="20" width="160" height="220" {g}/><path d="M20 130H180" {s}/><path d="M90 76L100 70L110 76M90 184L100 190L110 184" stroke="var(--steel-9)" stroke-width="3" fill="none"/>',
-            'Casement': f'<rect x="20" y="20" width="160" height="220" {g}/><path d="M180 20L20 130L180 240" stroke="var(--steel-7)" stroke-width="2" stroke-dasharray="6 5" fill="none"/>',
-            'Slider': f'<rect x="20" y="20" width="160" height="220" {g}/><path d="M100 20V240" {s}/><path d="M60 130H140M128 120L140 130L128 140" stroke="var(--steel-9)" stroke-width="3" fill="none"/>',
+    s = 'stroke="var(--color-drawing-solid)" stroke-width="6" fill="none"'
+    g = 'fill="var(--color-drawing-fill-light)"'
+    body = {'Double-hung': f'<rect x="20" y="20" width="160" height="220" {g}/><path d="M20 130H180" {s}/><path d="M90 76L100 70L110 76M90 184L100 190L110 184" stroke="var(--color-drawing-solid)" stroke-width="3" fill="none"/>',
+            'Casement': f'<rect x="20" y="20" width="160" height="220" {g}/><path d="M180 20L20 130L180 240" stroke="var(--color-drawing-line)" stroke-width="2" stroke-dasharray="6 5" fill="none"/>',
+            'Slider': f'<rect x="20" y="20" width="160" height="220" {g}/><path d="M100 20V240" {s}/><path d="M60 130H140M128 120L140 130L128 140" stroke="var(--color-drawing-solid)" stroke-width="3" fill="none"/>',
             'Picture': f'<rect x="20" y="20" width="160" height="220" {g}/>',
-            'Entry door': f'<rect x="30" y="20" width="140" height="220" {g}/><circle cx="148" cy="134" r="6" fill="var(--steel-9)"/><rect x="60" y="50" width="80" height="60" fill="none" stroke="var(--steel-7)" stroke-width="3"/>',
-            'Garage door': f'<rect x="10" y="60" width="180" height="180" {g}/>' + ''.join(f'<path d="M10 {60 + i * 36}H190" stroke="var(--steel-7)" stroke-width="3"/>' for i in range(1, 5))}[kind]
+            'Entry door': f'<rect x="30" y="20" width="140" height="220" {g}/><circle cx="148" cy="134" r="6" fill="var(--color-drawing-solid)"/><rect x="60" y="50" width="80" height="60" fill="none" stroke="var(--color-drawing-line)" stroke-width="3"/>',
+            'Garage door': f'<rect x="10" y="60" width="180" height="180" {g}/>' + ''.join(f'<path d="M10 {60 + i * 36}H190" stroke="var(--color-drawing-line)" stroke-width="3"/>' for i in range(1, 5))}[kind]
     return f'<svg class="el" viewBox="0 0 200 260" aria-hidden="true">{body}<rect x="20" y="20" width="160" height="220" {s} opacity="{0 if kind in ("Entry door", "Garage door") else 1}"/></svg>'
 
 

@@ -76,7 +76,7 @@ def main():
           f'distinct font sizes declared: {len(sizes)} | radius off token: {len(radius)}')
     print(f'primitive refs in component CSS: {len(prim)} | inline styles with a primitive: {len(st_prim)} | inline styles with a raw value: {len(st_raw)} | '
           f'raw SVG paint attributes: {len(paint)}')
-    print(f'swatch styles exempt (colour as content): {swatch} | primitive paint attributes in drawings (open): {len(draw_prim)} {dict(collections.Counter(draw_prim).most_common())}')
+    print(f'swatch styles exempt (colour as content): {swatch} | primitive paint attributes in drawings: {len(draw_prim)} {dict(collections.Counter(draw_prim).most_common())}')
     if '--list' in sys.argv:
         for name, rows in (('SPACING', off), ('COLOUR', colours), ('FONT SIZE', fsz), ('RADIUS', radius)):
             print(f'--- {name}')

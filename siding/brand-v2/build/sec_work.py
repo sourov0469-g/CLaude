@@ -41,7 +41,7 @@ def k2():
     v2 = (f'<div class="mpx2 on-dark"><div class="wrap mpx2-h"><p class="label on-dark-l">The map</p><h2 class="h2 on-dark-h">Every job with photos, where it is.</h2></div>{_map("mp-full", True)}</div>')
     css = """
 .mpw{position:relative;background:var(--color-bg-subtle);height:min(78vh,760px);overflow:hidden;cursor:grab;touch-action:none} .mpw:active{cursor:grabbing}
-.mp{width:100%;height:100%;display:block} .mp-g{transform-origin:0 0} .mp-d{fill:var(--color-drawing-structure);transition:r var(--duration-fast) var(--ease-standard)} .mp-d:hover{fill:var(--color-drawing-shadow)}
+.mp{width:100%;height:100%;display:block} .mp-g{transform-origin:0 0} .mp-d{fill:var(--color-drawing-member);transition:r var(--duration-fast) var(--ease-standard)} .mp-d:hover{fill:var(--color-drawing-shade)}
 .mp-hq{fill:none;stroke:var(--color-accent-solid);stroke-width:3} .mp-hqt{font:700 15px var(--font-text);fill:var(--color-text-primary)}
 .mp-ctl{position:absolute;right:var(--space-04);top:var(--space-04);display:grid;gap:var(--space-03)} .mp-ctl button{min-width:48px;height:48px;padding:0 var(--space-03);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);cursor:pointer;font:600 var(--type-small-size) var(--font-text);display:grid;place-items:center;color:var(--color-text-primary)}
 .mp-tip{position:absolute;left:var(--space-04);bottom:var(--space-04);margin:0;background:var(--color-bg-inverse);color:var(--color-text-inverse);font:600 var(--type-small-size) var(--font-text);padding:var(--space-03) var(--space-04)} .mp-tip:empty{display:none}

@@ -43,7 +43,14 @@ img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} 
 .ftr a{color:var(--color-text-inverse);font-weight:600} .ftr :focus-visible{outline-color:var(--color-focus-ring-on-dark)} .ftr-p{color:var(--color-text-inverse-secondary)} .ftr-k{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-inverse-secondary);margin:0 0 4px}
 .ftr-nav{display:grid;gap:var(--space-03)} .ftr-nav a{min-height:32px;display:inline-flex;align-items:center} .ftr-base{position:relative;margin-top:var(--space-09);padding-top:var(--space-05);border-top:1px solid var(--color-border-on-dark-subtle);color:var(--color-text-inverse-secondary);font-size:var(--type-small-size)}
 .cc{position:fixed;left:0;top:0;z-index:60;pointer-events:none;opacity:0;transition:opacity var(--duration-fast) linear} .cc.on{opacity:1}
-.cc i{position:absolute;left:0;top:0;width:100px;height:10px;transform-origin:0 50%;background:var(--color-accent-solid);will-change:transform}
+.cc i{position:absolute;left:0;top:0;width:100px;height:10px;transform-origin:0 50%;background:var(--color-accent-solid);will-change:transform;display:none}
+.cc b{position:absolute;left:0;top:0;width:10px;height:10px;border:3px solid var(--color-accent-solid);will-change:transform;display:none}
+.cc b:nth-of-type(1){border-right:0;border-bottom:0} .cc b:nth-of-type(2){border-left:0;border-bottom:0} .cc b:nth-of-type(3){border-right:0;border-top:0} .cc b:nth-of-type(4){border-left:0;border-top:0}
+.cc svg{position:absolute;left:0;top:0;width:14px;height:24px;transform-origin:7px 0;will-change:transform;display:none}
+.cc[data-v=a] i,.cc[data-v=b] b,.cc[data-v=c] svg{display:block} .cc[data-v=off]{display:none}
+.ftr-cc{border:0;padding:0;margin:var(--space-04) 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-02) var(--space-05)} .ftr-cc legend{float:left;margin-right:var(--space-04);font:600 var(--type-small-size) var(--font-text);color:var(--color-text-inverse-secondary)}
+.ftr-cc label{display:inline-flex;align-items:center;gap:var(--space-03);min-height:44px;color:var(--color-text-inverse);font-size:var(--type-small-size);cursor:pointer} .ftr-cc input{accent-color:var(--color-surface-on-dark);margin:0}
+@media (pointer:coarse){.ftr-cc{display:none}}
 @media (pointer:coarse){.cc{display:none}}
 @media (max-width:1000px){.hdr-nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--color-bg-page);flex-direction:column;gap:0;padding:var(--space-03) var(--layout-gutter) var(--space-05);border-bottom:1px solid var(--color-border-default)}
  .hdr-nav.open{display:flex} .hdr-menu{display:grid} .hdr-call span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .hdr-call{min-width:44px;justify-content:center} .hdr-call{margin-left:auto} .ftr-in{grid-template-columns:minmax(0,1fr)}}
@@ -73,7 +80,8 @@ function route(ev){const h=location.hash.replace(/^#\/?/,'');const [pg,anchor]=h
   pages.forEach(p=>p.classList.toggle('on',p===page));D.querySelectorAll('[data-route]').forEach(a=>a.dataset.route===page.dataset.page?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   D.title=page.dataset.title;const t=anchor&&D.getElementById(id+'-'+anchor);
   // a deep link waits for the web fonts: scrolled first, the swap moved the target ~7px under the reader (CLS 0.026 in 1 of 8 loads)
-  if(t){const go=()=>t.scrollIntoView({behavior:'instant'});if(D.fonts&&D.fonts.status!=='loaded'){scrollTo(0,0);D.fonts.ready.then(go);}else go();}else{scrollTo(0,0);}
+  // fonts.status can read 'loaded' before faces used only on a just-shown page start loading, so every face is loaded explicitly first
+  if(t){const go=()=>requestAnimationFrame(()=>t.scrollIntoView({behavior:'instant'}));if(D.fonts&&D.fonts.size){scrollTo(0,0);Promise.all([...D.fonts].map(f=>f.load().catch(()=>0))).then(go);}else go();}else{scrollTo(0,0);}
   const h1=[...page.querySelectorAll('h1')].find(h=>!h.closest('[hidden]'));if(h1&&ev&&ev.type==='hashchange'){h1.setAttribute('tabindex','-1');h1.focus({preventScroll:true});}
   if(live)live.textContent=page.dataset.title;watch(page);run();
   const nav=D.getElementById('hdr-nav');nav.classList.remove('open');D.querySelector('.hdr-menu').setAttribute('aria-expanded','false');}
@@ -82,13 +90,32 @@ D.querySelector('.hdr-menu').addEventListener('click',e=>{const n=D.getElementBy
 // review switch: exactly two versions per section
 D.querySelectorAll('.rv').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const s=g.closest('.sec');
   s.querySelectorAll(':scope>.ver').forEach(v=>v.hidden=v.dataset.v!==b.dataset.v);g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));watch(s);run();}));
-// cursor companion A (Phase 2 pick): a steel tick that lays a course line under the hovered control; fine pointers only, system cursor kept
-if(matchMedia('(pointer: fine)').matches){const cc=D.createElement('div');cc.className='cc';cc.setAttribute('aria-hidden','true');cc.innerHTML='<i></i>';D.body.appendChild(cc);const bar=cc.firstChild;
-  let tx=0,ty=0,x=0,y=0,tgt=null,press=1,raf=0;const SEL='a,button,[role=tab],label.chip-in,label.vt,label.vc,summary,[role=slider]';
-  const frame=()=>{const k=reduce?1:.22;x+=(tx-x)*k;y+=(ty-y)*k;if(tgt&&tgt.isConnected){const b=tgt.getBoundingClientRect();bar.style.transform=`translate(${b.left}px,${b.bottom+4}px) scale(${b.width/100},${.3*press})`;}
-    else bar.style.transform=`translate(${x+12}px,${y+12}px) scale(${.1*press},${press})`;raf=requestAnimationFrame(frame);};
-  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;const t=e.target.closest&&e.target.closest(SEL);tgt=t&&!t.closest('.rv')?t:null;cc.classList.add('on');if(!raf)raf=requestAnimationFrame(frame);},{passive:true});
-  D.addEventListener('pointerleave',()=>{cc.classList.remove('on');cancelAnimationFrame(raf);raf=0;});addEventListener('pointerdown',()=>press=.92);addEventListener('pointerup',()=>press=1);}
+// backups: packed in #aps-backups; ?backups unpacks them into their sections as <template class="bk"> (review only)
+if(/[?&]backups\b/.test(location.search)&&'DecompressionStream' in window){const el=D.getElementById('aps-backups');if(el){
+  const bin=Uint8Array.from(atob(el.textContent.trim()),c=>c.charCodeAt(0));
+  new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text().then(t=>{JSON.parse(t).forEach(b=>{const tp=D.createElement('template');
+    tp.className='bk';tp.dataset.sec=b.sec;tp.dataset.v=b.v;tp.dataset.rev=b.rev;tp.innerHTML=b.html;const s=D.getElementById(b.sec);if(s)s.appendChild(tp);});D.documentElement.dataset.backups='unpacked';});}}
+// cursor companion: one companion, three switchable variants (addendum: 2-3 switchable variants; Phase 2 board 10). A course tick (default),
+// B corner bracket, C lap chip. Fine pointers only; the system cursor is kept; pointer-events none, aria-hidden, transform only; reduced motion snaps.
+if(matchMedia('(pointer: fine)').matches){const cc=D.createElement('div');cc.className='cc';cc.setAttribute('aria-hidden','true');
+  cc.innerHTML='<i></i><b></b><b></b><b></b><b></b><svg viewBox="0 0 14 24"><path d="M5 0H9L14 24H0Z" style="fill:var(--color-accent-solid)"/></svg>';D.body.appendChild(cc);
+  const A=cc.querySelector('i'),Bs=[...cc.querySelectorAll('b')],C=cc.querySelector('svg');
+  let v='a';try{v=localStorage.getItem('aps-cc')||'a'}catch(e){}if(!/^(a|b|c|off)$/.test(v))v='a';cc.dataset.v=v;
+  D.querySelectorAll('input[name=ccv]').forEach(r=>{r.checked=r.value===v;r.addEventListener('change',()=>{v=r.value;cc.dataset.v=v;try{localStorage.setItem('aps-cc',v)}catch(e){}});});
+  let tx=0,ty=0,x=0,y=0,vx=0,tgt=null,press=1,pT=1,raf=0;const SEL='a,button,[role=tab],label.chip-in,label.vt,label.vc,summary,[role=slider]';
+  const frame=()=>{const k=reduce?1:.22,px=x;x+=(tx-x)*k;y+=(ty-y)*k;vx=x-px;
+    press+=(pT-press)*(reduce?1:(pT<press?.39:.21));   /* the asymmetric tap (S0546, brief): 95% in ~6 frames (0.10 s), out ~13 frames (0.22 s) at 60 fps */
+    const b=tgt&&tgt.isConnected?tgt.getBoundingClientRect():null;
+    if(v==='a'){A.style.transform=b?`translate(${b.left}px,${b.bottom+4}px) scale(${b.width/100},${.3*press})`:`translate(${x+12}px,${y+12}px) scale(${.1*press},${press})`;}
+    else if(v==='b'){const p=b?{l:b.left-6,t:b.top-6,w:b.width+12,h:b.height+12}:{l:x-8,t:y-8,w:16,h:16},s=press;const q=[[p.l,p.t],[p.l+p.w-10,p.t],[p.l,p.t+p.h-10],[p.l+p.w-10,p.t+p.h-10]];
+      Bs.forEach((e,i)=>e.style.transform=`translate(${q[i][0]}px,${q[i][1]}px) scale(${s})`);}
+    else if(v==='c'){const tilt=reduce||b?0:Math.max(-12,Math.min(12,vx*2));C.style.transform=b?`translate(${Math.max(2,b.left-20)}px,${b.top+b.height/2-12}px) scale(${press})`:`translate(${x+14}px,${y+10}px) rotate(${tilt}deg) scale(${press})`;}
+    raf=(Math.abs(tx-x)>.1||Math.abs(ty-y)>.1||Math.abs(pT-press)>.002||b)?requestAnimationFrame(frame):0;};
+  const kick=()=>{if(!raf)raf=requestAnimationFrame(frame);};
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;const t=e.target.closest&&e.target.closest(SEL);tgt=t&&!t.closest('.rv')?t:null;cc.classList.add('on');kick();},{passive:true});
+  D.addEventListener('pointerleave',()=>{cc.classList.remove('on');cancelAnimationFrame(raf);raf=0;});
+  addEventListener('pointerdown',()=>{pT=.92;kick();});addEventListener('pointerup',()=>{pT=1;kick();});
+  window.__cc=n=>{v=n;cc.dataset.v=n;};}
 // pause control (Graza's quality detail; WCAG 2.2.2): stops the two drifting fields; first focusable control and in the footer
 D.querySelectorAll('[data-motion]').forEach(b=>b.addEventListener('click',()=>{const on=!APS.paused;APS.paused=on;D.querySelectorAll('[data-motion]').forEach(x=>{x.setAttribute('aria-pressed',on);x.textContent=on?'Play animations':'Pause animations';});
   if(!on)loops.forEach(f=>f());}));

@@ -187,6 +187,13 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - Months from the records on all job captions and the 312 map tooltips (finder data: 53 months). Flag for the firm: `windows3` place versus its URL slug.
     - Hero V2 steps now the firm's words (Inspection, Tear-off, House wrap, Installation, Final check; "Trim & paint" is session copy); "House wrap" in the wall section; the firm's lap and board & batten descriptions.
     - Fixed: the deep-link layout-shift race (waits for fonts); illegible phone labels on hero V2 hidden. 17 versions backed up (85 backups; 2.06 MB).
+  - **GATE-BUILD-9 accepted by Muse.**
+  - **Cycle 10** (`GATE-BUILD-10.md`, 8.17, PASS, cited):
+    - The addendum's "2–3 switchable variants": A course tick (default), B corner bracket, C lap chip, plus Off, switched in the footer (fine pointers only, remembered per visitor). The asymmetric tap is measured at 110 / 217 ms.
+    - Drawing roles renamed to a tonal set named by job; drawing primitives 284 → 0, with no rendered colour change (diff of 62,616 elements). 20 versions backed up.
+    - Deep-link shift race closed (loads every font face first): 20 of 20 runs at 0.001.
+    - Backups packed into one gzip blob (`?backups` unpacks them identically): file 2.06 → 1.77 MB, mobile total blocking time median 128 → 45 ms.
+    - New QA: `build/qa/companion.js`, `build/qa/backups.js`.
   - **Open for Muse or the firm:** the real colour list (flagged, non-blocking); `windows3`'s place. (Rimowa, captions and process copy were settled by Muse's rulings in cycle 9.)
 
 ## History of this run so far (moved here from the old PROGRESS.md)

@@ -30,7 +30,7 @@ def p1():
 SN = [0]
 
 
-def _sample(kind, value=9):
+def _sample(kind):
     """a material sample: the profile drawn with light from the top-left, like a physical swatch"""
     SN[0] += 1
     u = f"s{SN[0]}"
@@ -47,9 +47,9 @@ def _sample(kind, value=9):
     else:
         art = f'<rect width="240" height="240" fill="url(#{u}flat)"/>' + ''.join(f'<rect x="{x}" y="0" width="12" height="240" fill="url(#{u}bat)"/><path d="M{x + 12} 0V240" stroke="{shade}" stroke-width="3"/>' for x in range(30, 240, 60))
     return (f'<svg class="smp" viewBox="0 0 240 240" aria-hidden="true"><defs>'
-            f'<linearGradient id="{u}lap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--steel-{value - 1})"/><stop offset="1" stop-color="var(--steel-{value})"/></linearGradient>'
-            f'<linearGradient id="{u}flat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--steel-{value - 1})"/><stop offset="1" stop-color="var(--steel-{value})"/></linearGradient>'
-            f'<linearGradient id="{u}bat" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--steel-{value - 2})"/><stop offset="1" stop-color="var(--steel-{value})"/></linearGradient></defs>{art}</svg>')
+            f'<linearGradient id="{u}lap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--color-drawing-member)"/><stop offset="1" stop-color="var(--color-drawing-solid)"/></linearGradient>'
+            f'<linearGradient id="{u}flat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--color-drawing-member)"/><stop offset="1" stop-color="var(--color-drawing-solid)"/></linearGradient>'
+            f'<linearGradient id="{u}bat" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--color-drawing-line)"/><stop offset="1" stop-color="var(--color-drawing-solid)"/></linearGradient></defs>{art}</svg>')
 
 
 def p2():

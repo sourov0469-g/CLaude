@@ -1,6 +1,6 @@
 """Snapshot committed section versions into build/backups/ before they are replaced (addendum: superseded versions go to
 hidden in-file backups, never deleted). Each backup is a file {sid}-v{n}-r{rev}.html; build_site.py wraps it in a
-<template class="bk">. Images inside a backup are reduced to data-img references, so a backup adds no image weight.
+<template class="bk"> (packed into one gzip blob at build time since cycle 10; ?backups unpacks them). Images inside a backup are reduced to data-img references, so a backup adds no image weight.
 Run: python3 -I brand-v2/build/snapshot.py home-6:2 windows-1:1 ...   (rev is the next free number)"""
 import os, re, sys
 

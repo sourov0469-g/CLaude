@@ -21,8 +21,8 @@ S5_CSS = """
 .wa1{position:relative;padding:var(--layout-section-pad) 0} .wa1 .wa-stick{position:static;height:auto;min-height:0} .wa-stick{position:sticky;top:72px;height:calc(100vh - 72px);min-height:560px;display:flex;align-items:center;overflow:hidden}
 .wa-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-08);align-items:center;width:100%}
 .wall{width:100%;height:auto;max-height:calc(100vh - 150px)} .w-line,.w-base{fill:none;stroke:var(--color-drawing-ink);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1}
-.w-stud{fill:none;stroke:var(--color-drawing-structure);stroke-width:4} .w-sheath{stroke:var(--color-drawing-sheathing);stroke-width:16} .w-wrap{stroke:var(--color-drawing-wrap);stroke-width:4;stroke-dasharray:12 9}
-.w-board{fill:var(--color-drawing-board);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .w-face{fill:var(--color-drawing-sheathing)} .w-shadow{stroke:var(--color-drawing-shadow);stroke-width:6} .w-lab text{font:600 19px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-ink)}
+.w-stud{fill:none;stroke:var(--color-drawing-member);stroke-width:4} .w-sheath{stroke:var(--color-drawing-solid);stroke-width:16} .w-wrap{stroke:var(--color-drawing-line);stroke-width:4;stroke-dasharray:12 9}
+.w-board{fill:var(--color-drawing-deep);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .w-face{fill:var(--color-drawing-solid)} .w-shadow{stroke:var(--color-drawing-shade);stroke-width:6} .w-lab text{font:600 19px var(--font-text);letter-spacing:.08em;fill:var(--color-drawing-ink)}
 .js [data-wa1] .w-p{opacity:0}
 .w-steps{list-style:none;padding:0;margin:var(--space-06) 0 0;display:grid;gap:var(--space-03);color:var(--color-text-inverse-secondary);font:600 var(--type-small-size) var(--font-text)}
 .w-steps li{padding-left:var(--space-06);position:relative} .w-steps li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--color-border-on-dark-subtle)} .w-steps li.done{color:var(--color-text-inverse)} .w-steps li.done::before{background:var(--color-drawing-ink)}
@@ -111,7 +111,7 @@ def _house(cls):
             f'<pattern id="{cls}-batten" width="30" height="80" patternUnits="userSpaceOnUse"><path d="M28 0V80" stroke="color-mix(in srgb, var(--color-text-primary) 32%, transparent)" stroke-width="5"/></pattern></defs>'
             f'<path class="vz-wall" d="M40 150L200 40L360 150V340H40Z"/><path class="vz-tex" d="M40 150L200 40L360 150V340H40Z" fill="url(#{cls}-lap)"/>'
             f'<path class="vz-trim" d="M34 150L200 34L366 150" stroke-width="10"/><rect class="vz-trimr" x="160" y="230" width="80" height="110" stroke-width="8"/>'
-            f'<rect x="166" y="236" width="68" height="104" fill="var(--steel-12)"/><rect class="vz-trimr" x="72" y="190" width="64" height="64" stroke-width="7"/>'
+            f'<rect x="166" y="236" width="68" height="104" fill="var(--color-drawing-deep)"/><rect class="vz-trimr" x="72" y="190" width="64" height="64" stroke-width="7"/>'
             f'<rect class="vz-trimr" x="264" y="190" width="64" height="64" stroke-width="7"/></svg>')
 
 
@@ -133,7 +133,7 @@ def s7():
     css = """
 .vz-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-09);align-items:center}
 .vz-pv{background:var(--color-bg-subtle);display:grid;place-items:center;padding:var(--space-07)} .vz-pv svg{width:100%;max-width:440px;height:auto}
-.vz-wall{fill:var(--color-drawing-sheathing);transition:fill var(--duration-normal) var(--ease-standard)} .vz-trim,.vz-trimr{stroke:var(--color-bg-page);fill:none;transition:stroke var(--duration-normal) var(--ease-standard)}
+.vz-wall{fill:var(--color-drawing-solid);transition:fill var(--duration-normal) var(--ease-standard)} .vz-trim,.vz-trimr{stroke:var(--color-bg-page);fill:none;transition:stroke var(--duration-normal) var(--ease-standard)}
 .vts{border:0;padding:0;margin:0 0 var(--space-06);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-03)}
 .vt{position:relative;cursor:pointer} .vt input{position:absolute;opacity:0;inset:0} .vt-b{display:flex;align-items:center;gap:var(--space-03);min-height:64px;padding:0 var(--space-05);border:1px solid var(--color-border-control);border-radius:var(--radius-sm)}
 .vt input:checked+.vt-b{background:var(--color-bg-accent-subtle);box-shadow:inset 0 0 0 2px var(--color-selected-ring)} .vt input:focus-visible+.vt-b{outline:3px solid var(--color-focus-ring);outline-offset:3px} .vt-b svg{color:var(--color-accent-solid)}

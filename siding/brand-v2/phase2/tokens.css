@@ -68,14 +68,17 @@
   --color-selected-ring: var(--steel-11);
   --color-selected-on-dark: var(--steel-10);
   --color-step-done: var(--steel-7);
-  --color-drawing-ink: var(--steel-6);
+  --color-drawing-fill-light: var(--steel-2);
+  --color-drawing-fill: var(--steel-3);
+  --color-drawing-highlight: var(--steel-4);
   --color-drawing-label: var(--steel-5);
-  --color-drawing-label-strong: var(--steel-4);
-  --color-drawing-wrap: var(--steel-7);
-  --color-drawing-structure: var(--steel-8);
-  --color-drawing-sheathing: var(--steel-9);
-  --color-drawing-shadow: var(--steel-11);
-  --color-drawing-board: var(--steel-12);
+  --color-drawing-ink: var(--steel-6);
+  --color-drawing-line: var(--steel-7);
+  --color-drawing-member: var(--steel-8);
+  --color-drawing-solid: var(--steel-9);
+  --color-drawing-glass: var(--steel-10);
+  --color-drawing-shade: var(--steel-11);
+  --color-drawing-deep: var(--steel-12);
   --color-pattern-ground: var(--neutral-1);
   --color-pattern-course: var(--neutral-3);
   /* type */
