@@ -1,0 +1,67 @@
+<section class="sec book5" id="book-5" aria-labelledby="bk5-h">
+<style>
+.book5 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.book5 .clock{position:relative;max-width:480px;width:100%;justify-self:center}
+.book5 svg{display:block;width:100%;height:auto;filter:drop-shadow(0 40px 50px rgba(23,17,29,.25))}
+.book5 .arc{stroke-dasharray:1;stroke-dashoffset:1}
+.book5 .go .arc{animation:bk5d 1.6s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes bk5d{to{stroke-dashoffset:0}}
+.book5 .hand{transition:transform 1s cubic-bezier(.3,1.4,.5,1)}
+.book5 .status{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;font-weight:800;font-size:16px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.08)}
+.book5 .status i{width:12px;height:12px;border-radius:50%;background:#9C9585}
+.book5 .status.open i{background:#2E7D32;box-shadow:0 0 0 0 rgba(46,125,50,.5);animation:bk5p 2s infinite}
+@keyframes bk5p{70%{box-shadow:0 0 0 10px rgba(46,125,50,0)}100%{box-shadow:0 0 0 0 rgba(46,125,50,0)}}
+.book5 .lede{margin:16px 0 20px;max-width:34ch}
+.book5 .call{display:inline-flex;align-items:center;gap:14px;padding:16px 26px 20px;border-radius:22px;background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 6px 0 var(--amber-edge),0 20px 30px -14px rgba(199,135,26,.7);color:var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.book5 .call:active{transform:translateY(5px);box-shadow:0 1px 0 var(--amber-edge)}
+.book5 .call b{display:block;font-size:clamp(26px,3vw,38px);font-weight:900;letter-spacing:-.02em;line-height:1}
+.book5 .call span{font-size:14px;font-weight:700}
+.book5 .call svg{width:30px;height:30px;filter:none}
+.book5 .more{display:grid;gap:4px;margin-top:20px;font-size:16px}
+.book5 .more a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--ink)}
+@media (max-width:900px){.book5 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.book5 .arc{stroke-dashoffset:0;animation:none!important}.book5 .hand{transition:none}.book5 .status.open i{animation:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="clock" data-owl="say:Hoo's open?">
+   <svg viewBox="0 0 440 440" role="img" aria-label="A clock face with Owl Roofing's opening hours, 08:00 to 18:00, marked in amber, and its hand at the current time in Shoreview"></svg>
+  </div>
+  <div>
+   <span class="kick">Booking</span>
+   <h2 class="h2" id="bk5-h" style="margin-top:12px">Open Now?</h2>
+   <p class="status" aria-live="polite"><i aria-hidden="true"></i><span></span></p>
+   <p class="lede rv">Monday to Saturday, 08:00 to 18:00. Call to book a Wise Check, or email us any time.</p>
+   <a class="call" href="tel:+16519776027" data-mag data-owl="hoot"><svg viewBox="0 0 24 24" fill="#17111D" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span><b>(651) 977-6027</b>Call Owl Roofing</span></a>
+   <div class="more"><a href="mailto:info@owlroofing.com?subject=Wise%20Check%20request">info@owlroofing.com</a><span>Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126</span></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('booking','5',function(root){
+  var svg = root.querySelector('svg'), clock = root.querySelector('.clock'), st = root.querySelector('.status'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function pt(h, r){ var a = (h/12)*Math.PI*2 - Math.PI/2; return [220 + Math.cos(a)*r, 220 + Math.sin(a)*r]; }
+  /* hours 08:00–18:00 on a 12-hour face: 8 → 12 → 6, an arc of 10 hours */
+  var a0 = pt(8, 168), a1 = pt(6, 168);
+  var h = '<circle cx="220" cy="220" r="212" fill="#E9E3D3"/><circle cx="220" cy="220" r="196" fill="#FBFAF6" stroke="#17111D" stroke-width="6"/>'
+    + '<path class="arc" pathLength="1" d="M' + a0[0].toFixed(1) + ' ' + a0[1].toFixed(1) + ' A168 168 0 1 1 ' + a1[0].toFixed(1) + ' ' + a1[1].toFixed(1) + '" fill="none" stroke="#EAA221" stroke-width="22" stroke-linecap="round" opacity=".9"/>';
+  for (var i = 0; i < 60; i++){ var big = i % 5 === 0, p0 = pt(i/5, 188), p1 = pt(i/5, big ? 170 : 180); h += '<path d="M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + 'L' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + '" stroke="#17111D" stroke-opacity="' + (big ? .7 : .25) + '" stroke-width="' + (big ? 4 : 2) + '"/>'; }
+  for (var k = 1; k <= 12; k++){ var q = pt(k, 140); h += '<text x="' + q[0].toFixed(1) + '" y="' + (q[1] + 8).toFixed(1) + '" text-anchor="middle" font-size="24" font-weight="800" fill="#17111D">' + k + '</text>'; }
+  h += '<text x="220" y="292" text-anchor="middle" font-size="15" font-weight="800" fill="#8E5A12" letter-spacing=".12em">OPEN 8–6</text>';
+  h += '<g class="hand hh"><path d="M214 228 L220 112 L226 228Z" fill="#17111D"/></g><g class="hand mh"><path d="M217 230 L220 66 L223 230Z" fill="#3A3540"/></g><circle cx="220" cy="220" r="12" fill="#EAA221" stroke="#17111D" stroke-width="3"/>';
+  svg.innerHTML = h;
+  var hh = svg.querySelector('.hh'), mh = svg.querySelector('.mh');
+  hh.style.transformOrigin = mh.style.transformOrigin = '220px 220px';
+  function now(){ try { var f = new Intl.DateTimeFormat('en-US', {timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false}).formatToParts(new Date()), o = {}; f.forEach(function(x){ o[x.type] = x.value; }); return {d: o.weekday, h: +o.hour % 24, m: +o.minute}; } catch (e){ var d = new Date(); return {d: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()], h: d.getHours(), m: d.getMinutes()}; } }
+  function tick(){ var t = now(), mins = t.h*60 + t.m, open = t.d !== 'Sun' && mins >= 480 && mins < 1080;
+    hh.style.transform = 'rotate(' + (((t.h % 12) + t.m/60)*30).toFixed(1) + 'deg)'; mh.style.transform = 'rotate(' + (t.m*6) + 'deg)';
+    st.classList.toggle('open', open);
+    var next = t.d === 'Sat' && mins >= 1080 ? 'Monday' : t.d === 'Sun' ? 'Monday' : mins < 480 ? 'today' : 'tomorrow';
+    st.querySelector('span').textContent = open ? 'Open now, until 18:00 (Shoreview time)' : 'Closed now. Opens ' + next + ' at 08:00 (Shoreview time)'; }
+  tick(); setInterval(tick, 30000);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ clock.classList.add('go'); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); clock.classList.add('go'); OWL.reveal(h2); } }, {threshold:.3}); io.observe(clock);
+});
+</script>
+</section>

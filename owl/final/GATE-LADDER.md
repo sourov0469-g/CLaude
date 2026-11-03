@@ -393,3 +393,36 @@ Each round adds two versions to one homepage slot, in the order the overnight br
   - title: ⟦S0451⟧.
 
 **Defect fixed:** Family 4's inactive words were too faint for 3:1 large-text contrast; they are now #8A8178.
+
+---
+
+## L11 · Booking 4 + 5 · checks 36/36 · evidence `gates/ladder/L11-booking-4-5/` · Booking now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Booking 4 · Pick a Day** | Quiet Cubes (instrument first) | A calendar of the next twelve working days, built from today's date, as 3D day keys (Sundays shown closed, never bookable), with a morning or afternoon window. Choosing a day slides up a three-field form that states it as a preference ("We'll call to confirm"). "Open My Email" hands off a request marked "please confirm". | 8.2 | 8.6 | 7.8 | 8.6 | **8.26** |
+| **Booking 5 · Open Now?** | Lando Norris (bespoke instrument) | A large drawn clock with Owl's hours (08:00–18:00) as an amber arc, its hands at the current time in Shoreview (America/Chicago). A live status reads "Open now, until 18:00" or "Closed now. Opens … at 08:00", computed from the locked hours and refreshed every 30 s. A 3D call key for (651) 977-6027, plus the email and office. | 8.4 | 8.4 | 8.2 | 8.8 | **8.40** |
+
+**Truth:**
+- Neither form claims a request was saved, sent or received (tested).
+- No availability is implied: a day is a preference to confirm.
+- The hours, phone, email and address are the locked ones (tested).
+
+**Checks run:** the generic gate, plus:
+- Booking 4: twelve days with no bookable Sunday; the locked hours; choosing a day opens the form as a preference; arrow keys rove; an empty submit errors under Name; submit hands off honestly.
+- Booking 5: the arc and hands are set; the status matches the locked-hours rule (either state); the locked contacts; the call key dials the locked number.
+
+**Ledger:**
+- **Booking 4:**
+  - form rules: ⟦S1442⟧;
+  - day grid keyboard: ⟦S1107⟧;
+  - 3D day keys: ⟦S1388⟧;
+  - sheet rise: ⟦S0409⟧-style transition;
+  - title: ⟦S0451⟧.
+- **Booking 5:**
+  - clock draw: ⟦S0407⟧;
+  - hour numerals: ⟦S1352⟧;
+  - call key: ⟦S1388⟧;
+  - plain status: ⟦S0076⟧ ⟦S0251⟧;
+  - live status: ⟦S1442⟧ (feedback).
+
+**First pass of the ladder complete:** every non-hero slot now stands at 5, and the hero at 10. Next pass: V6 + V7 for Video → Booking.

@@ -1,0 +1,83 @@
+<section class="sec book4" id="book-4" aria-labelledby="bk4-h">
+<style>
+.book4 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.book4 .lede{margin-top:12px;max-width:46ch}
+.book4 .strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.book4 .dow{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6B6570;text-align:center}
+.book4 .day{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:88px;border-radius:18px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 10px 18px -10px rgba(23,17,29,.4);font-weight:800;transition:transform .12s,box-shadow .12s,background .2s}
+.book4 .day b{font-size:clamp(24px,2.4vw,32px);letter-spacing:-.03em;line-height:1}
+.book4 .day span{font-size:13px;font-weight:700;color:#6B6570}
+.book4 .day:hover{transform:translateY(-2px)}
+.book4 .day[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge),0 6px 12px -8px rgba(23,17,29,.4);transform:translateY(3px)}
+.book4 .day[aria-pressed="true"] span{color:#17111D}
+.book4 .day:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.book4 .closed{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:88px;border-radius:18px;border:2px dashed rgba(23,17,29,.18);color:#6B6570;font-weight:700;font-size:13px;text-align:center}
+.book4 .closed b{font-size:clamp(22px,2.2vw,28px);color:#6B6570}
+.book4 .win{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.book4 .win button{min-height:52px;padding:0 18px;border-radius:16px;font-weight:800;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.1)}
+.book4 .win button[aria-pressed="true"]{background:#17111D;color:#F1EFE6;box-shadow:0 4px 0 #000}
+.book4 .sheet{margin-top:22px;border-radius:24px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 50px -34px rgba(23,17,29,.5);padding:clamp(18px,2.6vw,28px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px;align-items:end;transform-origin:top;transition:opacity .35s,transform .45s cubic-bezier(.22,.61,.36,1)}
+.book4 .sheet[hidden]{display:none}
+.book4 .sheet.in{animation:bk4up .45s cubic-bezier(.22,.61,.36,1)}
+@keyframes bk4up{from{opacity:0;transform:translateY(16px)}}
+.book4 .sum{grid-column:1/-1;font-weight:700;font-size:18px}
+.book4 .sum b{color:#8E5A12}
+.book4 .fld{display:grid;gap:6px}
+.book4 .fld label{font-weight:700;font-size:15px}
+.book4 .fld input{min-height:52px;padding:0 14px;border-radius:12px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:16px}
+.book4 .fld input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.book4 .fld input[aria-invalid="true"]{border-color:#b3261e}
+.book4 .form-msg{grid-column:1/-1}
+@media (max-width:900px){.book4 .strip{grid-template-columns:repeat(4,minmax(0,1fr))}.book4 .strip .dow{display:none}.book4 .sheet{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.book4 .sheet.in{animation:none}.book4 .day{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Booking</span><h2 class="h2" id="bk4-h" style="margin-top:12px">Pick a Day</h2>
+  <p class="lede rv">Choose a day that suits you for a Wise Check. It's a preference, not a booking: we'll call to confirm. We work Monday to Saturday, 08:00–18:00.</p></div>
+  <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+ <div class="strip" role="group" aria-label="The next twelve working days" data-owl="say:Pick a day"></div>
+ <div class="win" role="group" aria-label="Time window"><button type="button" aria-pressed="true">Morning, 8–12</button><button type="button" aria-pressed="false">Afternoon, 12–6</button></div>
+ <form class="sheet" novalidate hidden aria-labelledby="bk4-sum">
+  <p class="sum" id="bk4-sum" aria-live="polite"></p>
+  <div class="fld"><label for="bk4-n">Name</label><input id="bk4-n" data-n="name" autocomplete="name" required></div>
+  <div class="fld"><label for="bk4-p">Phone</label><input id="bk4-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+  <div class="fld"><label for="bk4-a">Address</label><input id="bk4-a" data-n="address" autocomplete="street-address" required></div>
+  <button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Open My Email</button>
+  <p class="form-msg" aria-live="polite"></p>
+ </form>
+</div>
+<script>
+OWL.reg('booking','4',function(root){
+  var strip = root.querySelector('.strip'), wins = [].slice.call(root.querySelectorAll('.win button')), sheet = root.querySelector('.sheet'), sum = root.querySelector('.sum'), msg = root.querySelector('.form-msg'), h2 = root.querySelector('h2'), day = null, days = [];
+  OWL.split(h2);
+  var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  /* the next twelve working days from tomorrow; Sundays shown closed */
+  var d = new Date(); d.setHours(12, 0, 0, 0); var cells = [];
+  ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(function(n){ var s = document.createElement('span'); s.className = 'dow'; s.textContent = n; s.setAttribute('aria-hidden', 'true'); strip.appendChild(s); });
+  var first = new Date(d); first.setDate(first.getDate() + 1); var lead = (first.getDay() + 6) % 7; for (var l = 0; l < lead; l++){ var e = document.createElement('span'); e.setAttribute('aria-hidden', 'true'); strip.appendChild(e); }
+  var cur = new Date(first), n = 0;
+  while (n < 12){ var dw = cur.getDay();
+    if (dw === 0){ var c = document.createElement('span'); c.className = 'closed'; c.innerHTML = '<b>' + cur.getDate() + '</b>Closed'; c.setAttribute('aria-label', 'Sunday ' + cur.getDate() + ' ' + MON[cur.getMonth()] + ', closed'); strip.appendChild(c); }
+    else { (function(dt){ var b = document.createElement('button'); b.type = 'button'; b.className = 'day'; b.setAttribute('aria-pressed', 'false'); b.innerHTML = '<b>' + dt.getDate() + '</b><span>' + DOW[dt.getDay()] + ' · ' + MON[dt.getMonth()] + '</span>';
+      b.setAttribute('aria-label', DOW[dt.getDay()] + ' ' + dt.getDate() + ' ' + MON[dt.getMonth()]); b.tabIndex = days.length ? -1 : 0;
+      b.addEventListener('click', function(){ choose(b, dt); });
+      b.addEventListener('keydown', function(e){ var i = days.indexOf(b), m = null; if (e.key === 'ArrowRight') m = i + 1; else if (e.key === 'ArrowLeft') m = i - 1; else if (e.key === 'ArrowDown') m = i + 6; else if (e.key === 'ArrowUp') m = i - 6; if (m !== null && m >= 0 && m < days.length){ e.preventDefault(); days[i].tabIndex = -1; days[m].tabIndex = 0; days[m].focus(); } });
+      strip.appendChild(b); days.push(b); n++; })(new Date(cur)); }
+    cur.setDate(cur.getDate() + 1); }
+  function label(){ return day ? DOW[day.getDay()] + ' ' + day.getDate() + ' ' + MON[day.getMonth()] : ''; }
+  function winTxt(){ return wins.filter(function(w){ return w.getAttribute('aria-pressed') === 'true'; })[0].textContent; }
+  function choose(b, dt){ day = dt; days.forEach(function(x){ x.setAttribute('aria-pressed', x === b); x.tabIndex = x === b ? 0 : -1; });
+    var was = sheet.hidden; sheet.hidden = false; if (was && !OWL.reduce){ sheet.classList.remove('in'); void sheet.offsetWidth; sheet.classList.add('in'); }
+    sum.innerHTML = 'Preferred: <b>' + label() + '</b>, ' + winTxt().toLowerCase() + '. We’ll call to confirm.'; }
+  wins.forEach(function(w){ w.addEventListener('click', function(){ wins.forEach(function(x){ x.setAttribute('aria-pressed', x === w); }); if (day) sum.innerHTML = 'Preferred: <b>' + label() + '</b>, ' + winTxt().toLowerCase() + '. We’ll call to confirm.'; }); });
+  sheet.addEventListener('submit', function(e){ e.preventDefault();
+    var bad = null; sheet.querySelectorAll('[required]').forEach(function(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1); i.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok && !bad) bad = i; });
+    if (bad){ msg.className = 'form-msg err'; msg.textContent = 'Please add your ' + bad.dataset.n + '.'; bad.focus(); return; }
+    var body = ['Preferred day: ' + label() + ' (please confirm)', 'Time: ' + winTxt()].concat([].map.call(sheet.querySelectorAll('[data-n]'), function(i){ return i.dataset.n.charAt(0).toUpperCase() + i.dataset.n.slice(1) + ': ' + i.value; })).join('\n');
+    location.href = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(body);
+    msg.className = 'form-msg'; msg.textContent = 'Your email app should open with these details. Send it from there, or call (651) 977-6027.'; });
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(strip); }
+});
+</script>
+</section>

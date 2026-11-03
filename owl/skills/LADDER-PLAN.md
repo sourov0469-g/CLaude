@@ -140,3 +140,16 @@ Skill added and read in full: ⟦S1324⟧ reveal-hover-effect (feathered radial 
   eyes are the two family portraits (the Browns in one, the Berglands in the other). The portraits drift a little
   against the eye rims with the cursor, the lids blink now and then, and hovering an eye names that family. Skills:
   ⟦S0407⟧ draw, ⟦S1330⟧ parallax, ⟦S1039⟧ captions, ⟦S0451⟧.
+
+## L11 · Booking 4 + 5 (Booking stood at 3: V1 card form, V2 Build Your Visit, V3 Take Our Card)
+Forms never claim a request was saved or sent; both hand off to the phone or the email app, and say so.
+- **Booking 4 · "Pick a Day"** — reference **Quiet Cubes** (instrument first). A calendar strip of the next twelve
+  working days (Mon–Sat; Sundays shown closed, since Owl's hours are Mon–Sat 08:00–18:00) built from today's date,
+  with a morning or afternoon window. Choosing a day slides up a short form (name, phone, address); "Open my email"
+  hands off a written request that says "preferred day — please confirm". No availability is implied. Skills:
+  ⟦S1442⟧ form rules, ⟦S1107⟧ grid keyboard (roving tabindex), ⟦S1388⟧ 3D day keys, ⟦S0451⟧.
+- **Booking 5 · "Open Now?"** — reference **Lando Norris** (bespoke instrument). A large drawn clock whose face carries
+  Owl's opening hours (08:00–18:00) as an amber arc. Its hand shows the current time in Shoreview (America/Chicago),
+  and a live status reads "Open now until 18:00" or "Closed — opens Monday 08:00", computed from the locked hours.
+  The big action is the phone, with the email and office address beside it. Skills: ⟦S0407⟧ clock draw, ⟦S1352⟧ hour
+  numerals, ⟦S1388⟧ call key, ⟦S0076⟧ plain status copy.
