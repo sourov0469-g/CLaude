@@ -440,6 +440,46 @@
       "Nine lines"
      ]
     ]
+   },
+   {
+    "slot": "ow4",
+    "name": "The latest jobs",
+    "mod": "p_ow4",
+    "obj": "POw4",
+    "v": [
+     [
+      "a",
+      "By the month"
+     ],
+     [
+      "b",
+      "The front page"
+     ],
+     [
+      "c",
+      "Trades at a glance"
+     ]
+    ]
+   },
+   {
+    "slot": "ow5",
+    "name": "Book",
+    "mod": "p_ow5",
+    "obj": "POw5",
+    "v": [
+     [
+      "a",
+      "Your line on the list"
+     ],
+     [
+      "b",
+      "One job, one invitation"
+     ],
+     [
+      "c",
+      "Two halves"
+     ]
+    ]
    }
   ],
   "reviews": [],

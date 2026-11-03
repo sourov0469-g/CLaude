@@ -1,0 +1,31 @@
+/* OUR WORK · Book */
+.ow5A,.ow5C{padding:96px var(--gut) 80px}
+.ow5A .cf2,.ow5B .cf2,.ow5C .cf2{margin-top:18px;font:500 14.5px/1.6 var(--text);color:var(--ink-3)}.ow5A .cf2 a,.ow5B .cf2 a,.ow5C .cf2 a{color:var(--green);font-weight:700}
+
+/* A — your line on the list */
+.ow5A .rec{margin:24px 0 18px;max-width:900px;border-radius:10px;background:#FBF9F3;box-shadow:inset 3px 0 0 #D98F7A,0 24px 40px -32px rgba(14,59,44,.5);overflow:hidden}
+.ow5A .rec p{display:grid;grid-template-columns:110px minmax(0,1.3fr) minmax(0,1fr);gap:14px;padding:16px 22px;border-bottom:1px solid #E2DBCB}
+.ow5A .rec p:first-child span{font:800 11.5px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ow5A .bl4 span{font:700 clamp(17px,1.8vw,22px)/1.2 var(--display);color:var(--green);border-bottom:2px dashed #9DC35A;padding-bottom:4px;animation:ow5Ab 2.4s ease-in-out infinite}
+@keyframes ow5Ab{50%{border-bottom-color:transparent}}
+.ow5A .sec-p{margin-bottom:20px;font-size:17px;max-width:56ch}
+@media (max-width:620px){.ow5A .rec p{grid-template-columns:70px minmax(0,1fr)}.ow5A .rec p span:last-child{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.ow5A .bl4 span{animation:none}}
+
+/* B — one job, one invitation */
+.ow5B{position:relative;min-height:620px;display:flex;align-items:center;padding:80px var(--gut)}
+.ow5B .bgp{position:absolute;inset:0;background:#24302B}.ow5B .bgp img{width:100%;height:100%;object-fit:cover;display:block}
+.ow5B .bgp::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,35,26,.55),rgba(6,35,26,0) 70%)}
+.ow5B .cardx{position:relative;max-width:520px;padding:clamp(24px,3vw,40px);border-radius:24px;background:#fff;box-shadow:0 40px 70px -30px rgba(0,0,0,.6)}
+.ow5B .cardx .sec-h{margin-top:10px}.ow5B .cardx>p:not(.pkick):not(.cf2){margin:10px 0 20px;font:600 14px/1.4 var(--text);color:var(--ink-3)}
+
+/* C — two halves */
+.ow5C .vh10{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ow5C .halves{display:grid;grid-template-columns:1fr 1fr;border-radius:28px;overflow:hidden;box-shadow:0 40px 70px -46px rgba(14,59,44,.55)}
+.ow5C .halves a{display:flex;flex-direction:column;gap:10px;min-height:300px;justify-content:flex-end;padding:clamp(24px,3.4vw,48px);text-decoration:none;transition:filter .2s ease}
+.ow5C .halves a:hover{filter:brightness(1.05)}.ow5C .halves a:focus-visible{outline:4px solid #B5DB6E;outline-offset:-8px}
+.ow5C .hf1{background:#F6F9F4}.ow5C .hf2{background:#0E3B2C}
+.ow5C small{font:800 12px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}.ow5C .hf2 small{color:#B5DB6E}
+.ow5C .halves b{font:800 clamp(32px,4.4vw,64px)/1 var(--display);letter-spacing:-.035em;color:var(--green)}.ow5C .hf2 b{color:#fff}
+.ow5C .halves span{font:500 15.5px/1.45 var(--text);color:var(--ink-2)}.ow5C .hf2 span{color:rgba(255,255,255,.82)}
+@media (max-width:760px){.ow5C .halves{grid-template-columns:1fr}.ow5C .halves a{min-height:200px}}
