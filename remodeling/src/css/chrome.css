@@ -338,3 +338,6 @@
 @media (hover: hover) and (pointer: fine) { .kch__c:not(.is-on):hover { color: var(--color-text); } }
 /* Phase 10: the "On this page" list sits under its own label (proximity), not a page-gap away from it */
 .sheet .sheet__h + ul { margin-top: 0; }
+
+/* FINAL: the version-switch slot that spaced the header is retired; the logo now pushes the rest of the bar right */
+.nav__logo { margin-right: auto; }

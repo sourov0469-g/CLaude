@@ -386,6 +386,7 @@
   /* ---------- Settings: Companion On / Off (fine pointers with motion on) ---------- */
   var sw;
   function buildSwitch() {
+    if (!doc.getElementById('settings-panel')) return;   // FINAL: no settings panel on the finished site; the companion is simply on
     sw = doc.createElement('fieldset');
     sw.className = 'buddysw';
     sw.innerHTML = '<legend id="buddysw-t">Cursor companion</legend><div class="seg" role="radiogroup" aria-labelledby="buddysw-t">' +

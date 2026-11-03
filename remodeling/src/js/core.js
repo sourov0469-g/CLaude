@@ -536,7 +536,8 @@
 
   /* ---------- settings: theme + motion [S1303 §4, S1169, S1209] ---------- */
   function setupSettings() {
-    var box = doc.getElementById('settings'), btn = box.querySelector('.settings__btn'), panel = doc.getElementById('settings-panel');
+    var box = doc.getElementById('settings'); if (!box) return;   // FINAL: the settings panel is retired; reduced motion still follows the OS
+    var btn = box.querySelector('.settings__btn'), panel = doc.getElementById('settings-panel');
     function sync() {
       doc.querySelectorAll('[data-setting="theme"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.value === (root.dataset.theme || 'evening') ? 'true' : 'false'); });
       var m = root.dataset.motion === 'off' ? 'off' : 'on';
@@ -867,7 +868,7 @@
     EZ.order.forEach(function (id) {
       var s = EZ.sections[id];
       buildSwitch(s);
-      activate(id, stored[id] || s.vis[0], { initial: true });
+      activate(id, s.vis[0], { initial: true });   // FINAL: one version per section; no stored picks
     });
     setupPress();
     EZ.applyImages(doc.querySelector('.foot'));

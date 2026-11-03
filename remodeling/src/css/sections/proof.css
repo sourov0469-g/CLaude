@@ -108,7 +108,17 @@
 @media (max-width: 760px) {
   .pf__card { position: relative; width: auto; margin-bottom: var(--s4); padding: var(--s4); }
   .pf__site { height: auto; }
-  .pf__blocks { position: relative; inset: auto; height: 400px; }
+  .pf__blocks { position: relative; inset: auto; height: 300px; }
+  .pf__b::before { transform: translate(4px, 4px); } .pf__b:hover::before, .pf__b.is-held::before { transform: translate(5px, 5px); }   /* FINAL: a thinner slab on small blocks never covers the label below */
   .pf__deck { position: relative; display: block; margin-top: -10px; }
 }
 @media (prefers-reduced-motion: reduce) { .pf__card.is-swap > * { animation: none; } .pf__win { transition: none; } }
+/* FINAL: small blocks on phones keep their labels inside their own faces */
+@media (max-width: 560px) {
+  .pf__b { padding: 6px 8px; gap: 6px; }
+  .pf__b .pf__v { font-size: 1.25rem; }
+  .pf__b .pf__k { font-size: .625rem; line-height: 1.15; }
+  .pf__b--cmu .pf__v { font-size: 1rem; } .pf__b--cmu .pf__k { font-size: .5625rem; }
+  .pf__plate { padding: 3px 6px; }
+  .pf__stars { font-size: .7rem; }
+}
