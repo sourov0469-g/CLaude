@@ -113,3 +113,15 @@
   .hm__grid { padding-block: var(--s5) var(--s9); }
 }
 @media (prefers-reduced-motion: reduce) { .hm__full, .hm__img { will-change: auto; } }
+
+/* DEEP QA · mobile first: the opening is tighter on phones so the house and its picker start inside the first screen
+   (the copy filled it before); the headline keeps its three lines, the call stays beside the book button */
+@media (max-width: 600px) {
+  .hm__grid { padding-block: var(--s4) var(--s9); gap: var(--s5); }
+  .hm__copy { gap: var(--s3); }
+  .hm__copy .eyebrow { font-size: .8125rem; }
+  .hh { font-size: clamp(2.25rem, 10.4vw, 2.75rem); }
+  .hlead { font-size: 1rem; line-height: 1.5; }
+  .hero__acts { gap: var(--s2) var(--s5); }
+  .hproof a { font-size: .875rem; }
+}

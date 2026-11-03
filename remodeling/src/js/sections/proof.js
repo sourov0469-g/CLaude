@@ -40,7 +40,7 @@
 
     function dims() {
       W = list.clientWidth; H = list.clientHeight;
-      S = Math.max(.6, Math.min(1.08, W / 1240));
+      S = W < 600 ? Math.min(.8, (W - 24) / 372) : W < 1000 ? Math.min(.78, W / 900) : Math.max(.6, Math.min(1.08, W / 1240));   // DEEP QA: phones and tablets get full-size, readable blocks (they stand as one tower)
       B.forEach(function (b) { b.w = b.bw * S; b.h = b.bh * S; b.el.style.width = b.w + 'px'; b.el.style.height = b.h + 'px'; });
     }
     els.forEach(function (el, i) {
@@ -53,10 +53,9 @@
         var x = (W - total) / 2;
         B.forEach(function (b) { out.push({ x: x, y: H - b.h }); x += b.w + gap; });
       } else {
-        // two per row: the second pair stands on the floor too, staggered left/right so they settle into a stack
-        var a = B[0], b1 = B[1], c = B[2], d = B[3];
-        out[0] = { x: 8, y: H - a.h }; out[2] = { x: W - c.w - 8, y: H - c.h };
-        out[1] = { x: 8, y: H - a.h - b1.h - 2 }; out[3] = { x: W - d.w - 8, y: H - c.h - d.h - 2 };
+        // DEEP QA · phones: the four stand as one centred tower, widest at the base (the "built" look, nothing cramped)
+        var y = H, cx = W >= 600 ? W * .64 : W / 2;   // tablets: right of centre, clear of the how-it-works card
+        B.slice().sort(function (p, q) { return q.w - p.w; }).forEach(function (b) { y -= b.h; out[b.i] = { x: Math.max(0, Math.min(W - b.w, cx - b.w / 2)), y: y, rank: H - y }; });
       }
       return out;
     }
@@ -64,7 +63,7 @@
       var s = slots();
       B.forEach(function (b, i) {
         b.x = s[i].x; b.y = fromAbove ? -b.h - 60 - i * 40 : s[i].y; b.vx = 0; b.vy = 0; b.tilt = 0;
-        b.live = !fromAbove; b.t0 = fromAbove ? i * .26 : 0;
+        b.live = !fromAbove; b.t0 = fromAbove ? (s[i].rank != null ? s[i].rank / 400 : i * .26) : 0;   // the tower drops in from the base up
       });
       render(); wake();
     }
@@ -125,18 +124,20 @@
       });
     }
     // four in one tower: every block but the lowest rests on another, and they overlap in one column
-    var won = false;
+    var won = false, earned = false;   // the stamp is earned by the visitor (a drag or the tower button), never by the phone layout
     function rests(b, o) { return Math.abs(b.y + b.h - o.y) < 4 && Math.min(b.x + b.w, o.x + o.w) - Math.max(b.x, o.x) > 8; }
     function checkTower() {
       var on = B.filter(function (b) { return B.some(function (o) { return o !== b && rests(b, o); }); });
       var floor = B.filter(function (b) { return Math.abs(b.y + b.h - H) < 4; });
       var tower = on.length === B.length - 1 && floor.length === 1;
-      if (tower && !won) {
+      if (tower && !won && earned) {
         won = true;
         var top = B.reduce(function (a, b) { return b.y < a.y ? b : a; }), right = Math.max.apply(null, B.map(function (b) { return b.x + b.w; }));
         var lr = list.getBoundingClientRect(), sr = site.getBoundingClientRect(), ox = lr.left - sr.left, oy = lr.top - sr.top;
         var left = Math.min.apply(null, B.map(function (b) { return b.x; }));
-        win.style.left = (ox + left - 24) + 'px'; win.style.top = (oy + top.y + (H - top.y) * .3) + 'px';
+        var narrow = W < 600; site.classList.toggle('is-narrow', narrow);
+        if (narrow) { win.style.left = (ox + top.x + top.w / 2) + 'px'; win.style.top = (oy + top.y - 14) + 'px'; }
+        else { win.style.left = (ox + left - 24) + 'px'; win.style.top = (oy + top.y + (H - top.y) * .3) + 'px'; }
         dim.style.left = (ox + right + 18) + 'px'; dim.style.top = (oy + top.y) + 'px'; dim.style.height = (H - top.y) + 'px';
         dimt.textContent = 'Four high';
         site.classList.add('is-won'); announce('All four stacked in one tower. Built properly.');
@@ -160,7 +161,7 @@
       function grab(e, sx, sy) {
         try { el.setPointerCapture(e.pointerId); } catch (x) {}   // a capture that cannot be taken never aborts the grab
         var r = list.getBoundingClientRect();
-        b.held = true; b.live = true; b.bendT = 0; el.classList.add('is-held'); el.style.zIndex = 4;
+        earned = true; b.held = true; b.live = true; b.bendT = 0; el.classList.add('is-held'); el.style.zIndex = 4;
         ox = sx - r.left - b.x; oy = sy - r.top - b.y; hist = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
         B.forEach(function (o) { if (o !== b) o.el.style.zIndex = ''; });
         wake();
@@ -231,7 +232,7 @@
 
     /* ---------- build the tower: widest at the base, each dropped onto the one below in turn ---------- */
     k.on(root.querySelector('.pf__tower'), 'click', function () {
-      var order = B.slice().sort(function (a, b) { return b.w - a.w; }), cx = W * (W > 760 ? .66 : .5);
+      earned = true; var order = B.slice().sort(function (a, b) { return b.w - a.w; }), cx = W * (W > 760 ? .66 : .5);
       clock = 0;
       order.forEach(function (b, n) { b.x = Math.max(0, Math.min(W - b.w, cx - b.w / 2)); b.y = -b.h - 40; b.vx = 0; b.vy = 0; b.tilt = 0; b.live = false; b.t0 = n * .42; b.held = false; b.key = false; b.el.classList.remove('is-held', 'is-key'); });
       if (won) { won = false; site.classList.remove('is-won'); }

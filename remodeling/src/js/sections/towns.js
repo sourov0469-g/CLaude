@@ -14,6 +14,11 @@
   EZ.section('towns', { 1: { init: function (root, k) {
     var D = geo(), svg = root.querySelector('.tw__svg'), all = root.querySelector('.tw__all');
     var inp = root.querySelector('.tw__in'), opts = root.querySelector('.tw__opts'), ans = root.querySelector('.tw__ans'), clr = root.querySelector('.tw__clear');
+    // DEEP QA · phones: the field rises near the top when tapped, so its suggestions have room above the keyboard and call bar
+    k.on(inp, 'focus', function () {
+      if (innerWidth > 767) return;
+      k.timeout(function () { var r = inp.getBoundingClientRect(), nav = (document.querySelector('.nav') || { offsetHeight: 64 }).offsetHeight; if (r.top > nav + 120) window.scrollTo({ top: scrollY + r.top - nav - 16, behavior: 'auto' }); }, 250);
+    });
     var T = [];
     NS_ORDER.forEach(function (c) { D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }).forEach(function (t) { T.push({ n: t[0], c: c, x: t[1], y: t[2], k: norm(t[0]) }); }); });
     var office = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0], ox = office[1], oy = office[2];

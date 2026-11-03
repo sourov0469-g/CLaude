@@ -752,6 +752,19 @@ input, textarea { caret-color: var(--color-accent-text); }
 .nav__logo { margin-right: auto; }
 
 
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+
 
 
 .buddy {
@@ -1112,6 +1125,17 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .hm__full, .hm__img { will-change: auto; } }
 
 
+@media (max-width: 600px) {
+  .hm__grid { padding-block: var(--s4) var(--s9); gap: var(--s5); }
+  .hm__copy { gap: var(--s3); }
+  .hm__copy .eyebrow { font-size: .8125rem; }
+  .hh { font-size: clamp(2.25rem, 10.4vw, 2.75rem); }
+  .hlead { font-size: 1rem; line-height: 1.5; }
+  .hero__acts { gap: var(--s2) var(--s5); }
+  .hproof a { font-size: .875rem; }
+}
+
+
 .pf__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
 .pf__head .eyebrow { margin: 0 0 var(--s3); }
 .pf__head .t-head { margin: 0; }
@@ -1219,20 +1243,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (max-width: 760px) {
   .pf__card { position: relative; width: auto; margin-bottom: var(--s4); padding: var(--s4); }
   .pf__site { height: auto; }
-  .pf__blocks { position: relative; inset: auto; height: 300px; }
+  .pf__blocks { position: relative; inset: auto; height: 450px; }
   .pf__b::before { transform: translate(4px, 4px); } .pf__b:hover::before, .pf__b.is-held::before { transform: translate(5px, 5px); }   
   .pf__deck { position: relative; display: block; margin-top: -10px; }
 }
 @media (prefers-reduced-motion: reduce) { .pf__card.is-swap > * { animation: none; } .pf__win { transition: none; } }
-
-@media (max-width: 560px) {
-  .pf__b { padding: 6px 8px; gap: 6px; }
-  .pf__b .pf__v { font-size: 1.25rem; }
-  .pf__b .pf__k { font-size: .625rem; line-height: 1.15; }
-  .pf__b--cmu .pf__v { font-size: 1rem; } .pf__b--cmu .pf__k { font-size: .5625rem; }
-  .pf__plate { padding: 3px 6px; }
-  .pf__stars { font-size: .7rem; }
-}
+.pf__site.is-narrow .pf__win { transform: translate(-50%, -100%) rotate(-6deg) scale(.4); }
+.pf__site.is-narrow.is-won .pf__win { transform: translate(-50%, -100%) rotate(-6deg) scale(1); }
+.pf__site.is-narrow .pf__dim { display: none; }
 
 
 .sv__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
@@ -1457,6 +1475,22 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   .st__flag { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .pz-card.is-swap > *, .pd__mid.is-swap > * { animation: none; } .st__s, .pd__node, .pk__c { transition: none; } }
+
+
+@media (max-width: 900px) {
+  .pd { display: flex; flex-direction: column; gap: var(--s4); align-items: stretch; }
+  .pd__side { display: contents; }
+  .pd__side .eyebrow { order: 1; margin: 0; }
+  .pd__side .t-head { order: 2; margin: 0; }
+  .pd__dial { order: 3; width: min(100%, 320px); align-self: center; margin-block: var(--s2); }
+  @media (min-width: 600px) { .pd__dial { width: 380px; } .pd__card { max-width: 620px; align-self: center; width: 100%; } }
+  .pd__card { order: 4; }
+  .pd__nav { order: 5; margin-top: 0; justify-content: center; }
+  .pd__side .ps__note { order: 6; text-align: center; }
+  .pd__node { width: 15%; }
+  .pd__n { font-size: 2.75rem; }
+  .pd__t { font-size: .9375rem; }
+}
 
 
 .fz-ic { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -1820,6 +1854,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .tw__show { display: none; margin-top: var(--s2); min-height: 44px; padding: 0 var(--s4); font: 600 .9375rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); cursor: pointer; }
 @media (max-width: 900px) { .tw__show { display: inline-flex; align-items: center; } }
 .tw__ans:empty { display: none; }   
+.tw__field { z-index: 10; }   
 
 
 #consult .t-head { color: var(--color-text); }
@@ -2067,7 +2102,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Checkable proof</p>
           <h2 class="t-head" id="proof-h">Proof you can <span class="acc">pick up.</span></h2>
         </div>
-        <p class="t-lead pf__lead">Four facts as building blocks. Throw them, stack all four, or click one to check it for yourself.</p>
+        <p class="t-lead pf__lead">Four facts as building blocks. Throw them, stack all four, or tap one to check it for yourself.</p>
       </div>
 
       <div class="pf__site" aria-describedby="pf-help">
@@ -2079,7 +2114,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
             <ul class="pf__how">
               <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11.5v-2a1.5 1.5 0 0 1 3 0V12M14 10.5a1.5 1.5 0 0 1 3 0V12M17 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.6-2.2L4.6 15.6a1.6 1.6 0 0 1 2.4-2.1L8 14.5"/></svg><span><b>Drag</b> a block to throw it</span></li>
               <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20h16M6 20v-5h12v5M8 15v-5h8v5M10 10V5h4v5"/></svg><span><b>Stack</b> all four for a surprise</span></li>
-              <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 4a7 7 0 1 0 0 14a7 7 0 1 0 0-14M16 16l5 5M8 11l2 2 4-4"/></svg><span><b>Click</b> one to check it</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 4a7 7 0 1 0 0 14a7 7 0 1 0 0-14M16 16l5 5M8 11l2 2 4-4"/></svg><span><b>Tap</b> one to check it</span></li>
             </ul>
           </div>
           <div class="pf__fact" hidden>
@@ -2087,7 +2122,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
             <p class="pf__ck pf__fk"></p>
             <p class="pf__fv nums"></p>
             <p class="pf__fb"></p>
-            <a class="btn pf__fa" href="#"><span class="btn__label"></span></a>
+            <a class="btn pf__fa" href="https://www.myfloridalicense.com/" rel="noopener"><span class="btn__label"></span></a>
           </div>
         </aside>
         <p class="pf__win" aria-hidden="true"><span>Built properly.</span></p>
@@ -2323,7 +2358,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Our work</p>
         <h2 class="t-head" id="work-h">Our own photographs. <span class="acc">Every room, finished.</span></h2>
       </div>
-      <p class="t-lead pj__lead">Kitchens run one way, bathrooms and whole homes the other. Point at a frame to slow the row and set it level; pick one to see it large.</p>
+      <p class="t-lead pj__lead">Kitchens run one way, bathrooms and whole homes the other. Pick any frame to see it large.</p>
     </div>
     <div class="pj__rows">
       <div class="pj__row" data-c="k" role="group" aria-label="Kitchen projects"><span class="pj__rail" aria-hidden="true"></span><div class="pj__track"></div></div>
@@ -2347,14 +2382,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Google reviews</p>
         <h2 class="t-head" id="reviews-h"><span class="nums">343</span> reviews. <span class="acc">One average.</span></h2>
       </div>
-      <p class="t-lead rv__lead">Every star here is one review on our Google listing. Run your pointer through them: they scatter, then find their way back to the average.</p>
+      <p class="t-lead rv__lead">Every star here is one review on our Google listing. Touch them or run a pointer through them: they scatter, then find their way back to the average.</p>
     </div>
     <div class="wrap">
       <figure class="rv__sky">
         <canvas class="rv__cv" role="img" aria-label="343 small stars, one per Google review, gathered into the figure 4.8: the average out of 5."></canvas>
         <figcaption class="rv__avg">
           <span class="rv__of"><span class="nums">4.8</span> out of <span class="nums">5</span>, the average across all <span class="nums">343</span> Google reviews</span>
-          <span class="rv__hint" aria-hidden="true">Move through the stars</span>
+          <span class="rv__hint" aria-hidden="true">Touch the stars</span>
         </figcaption>
       </figure>
     </div>
@@ -4791,7 +4826,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
     function dims() {
       W = list.clientWidth; H = list.clientHeight;
-      S = Math.max(.6, Math.min(1.08, W / 1240));
+      S = W < 600 ? Math.min(.8, (W - 24) / 372) : W < 1000 ? Math.min(.78, W / 900) : Math.max(.6, Math.min(1.08, W / 1240));   // DEEP QA: phones and tablets get full-size, readable blocks (they stand as one tower)
       B.forEach(function (b) { b.w = b.bw * S; b.h = b.bh * S; b.el.style.width = b.w + 'px'; b.el.style.height = b.h + 'px'; });
     }
     els.forEach(function (el, i) {
@@ -4804,10 +4839,9 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         var x = (W - total) / 2;
         B.forEach(function (b) { out.push({ x: x, y: H - b.h }); x += b.w + gap; });
       } else {
-        // two per row: the second pair stands on the floor too, staggered left/right so they settle into a stack
-        var a = B[0], b1 = B[1], c = B[2], d = B[3];
-        out[0] = { x: 8, y: H - a.h }; out[2] = { x: W - c.w - 8, y: H - c.h };
-        out[1] = { x: 8, y: H - a.h - b1.h - 2 }; out[3] = { x: W - d.w - 8, y: H - c.h - d.h - 2 };
+        // DEEP QA · phones: the four stand as one centred tower, widest at the base (the "built" look, nothing cramped)
+        var y = H, cx = W >= 600 ? W * .64 : W / 2;   // tablets: right of centre, clear of the how-it-works card
+        B.slice().sort(function (p, q) { return q.w - p.w; }).forEach(function (b) { y -= b.h; out[b.i] = { x: Math.max(0, Math.min(W - b.w, cx - b.w / 2)), y: y, rank: H - y }; });
       }
       return out;
     }
@@ -4815,7 +4849,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       var s = slots();
       B.forEach(function (b, i) {
         b.x = s[i].x; b.y = fromAbove ? -b.h - 60 - i * 40 : s[i].y; b.vx = 0; b.vy = 0; b.tilt = 0;
-        b.live = !fromAbove; b.t0 = fromAbove ? i * .26 : 0;
+        b.live = !fromAbove; b.t0 = fromAbove ? (s[i].rank != null ? s[i].rank / 400 : i * .26) : 0;   // the tower drops in from the base up
       });
       render(); wake();
     }
@@ -4876,18 +4910,20 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       });
     }
     // four in one tower: every block but the lowest rests on another, and they overlap in one column
-    var won = false;
+    var won = false, earned = false;   // the stamp is earned by the visitor (a drag or the tower button), never by the phone layout
     function rests(b, o) { return Math.abs(b.y + b.h - o.y) < 4 && Math.min(b.x + b.w, o.x + o.w) - Math.max(b.x, o.x) > 8; }
     function checkTower() {
       var on = B.filter(function (b) { return B.some(function (o) { return o !== b && rests(b, o); }); });
       var floor = B.filter(function (b) { return Math.abs(b.y + b.h - H) < 4; });
       var tower = on.length === B.length - 1 && floor.length === 1;
-      if (tower && !won) {
+      if (tower && !won && earned) {
         won = true;
         var top = B.reduce(function (a, b) { return b.y < a.y ? b : a; }), right = Math.max.apply(null, B.map(function (b) { return b.x + b.w; }));
         var lr = list.getBoundingClientRect(), sr = site.getBoundingClientRect(), ox = lr.left - sr.left, oy = lr.top - sr.top;
         var left = Math.min.apply(null, B.map(function (b) { return b.x; }));
-        win.style.left = (ox + left - 24) + 'px'; win.style.top = (oy + top.y + (H - top.y) * .3) + 'px';
+        var narrow = W < 600; site.classList.toggle('is-narrow', narrow);
+        if (narrow) { win.style.left = (ox + top.x + top.w / 2) + 'px'; win.style.top = (oy + top.y - 14) + 'px'; }
+        else { win.style.left = (ox + left - 24) + 'px'; win.style.top = (oy + top.y + (H - top.y) * .3) + 'px'; }
         dim.style.left = (ox + right + 18) + 'px'; dim.style.top = (oy + top.y) + 'px'; dim.style.height = (H - top.y) + 'px';
         dimt.textContent = 'Four high';
         site.classList.add('is-won'); announce('All four stacked in one tower. Built properly.');
@@ -4911,7 +4947,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       function grab(e, sx, sy) {
         try { el.setPointerCapture(e.pointerId); } catch (x) {}   // a capture that cannot be taken never aborts the grab
         var r = list.getBoundingClientRect();
-        b.held = true; b.live = true; b.bendT = 0; el.classList.add('is-held'); el.style.zIndex = 4;
+        earned = true; b.held = true; b.live = true; b.bendT = 0; el.classList.add('is-held'); el.style.zIndex = 4;
         ox = sx - r.left - b.x; oy = sy - r.top - b.y; hist = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
         B.forEach(function (o) { if (o !== b) o.el.style.zIndex = ''; });
         wake();
@@ -4982,7 +5018,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
     /* ---------- build the tower: widest at the base, each dropped onto the one below in turn ---------- */
     k.on(root.querySelector('.pf__tower'), 'click', function () {
-      var order = B.slice().sort(function (a, b) { return b.w - a.w; }), cx = W * (W > 760 ? .66 : .5);
+      earned = true; var order = B.slice().sort(function (a, b) { return b.w - a.w; }), cx = W * (W > 760 ? .66 : .5);
       clock = 0;
       order.forEach(function (b, n) { b.x = Math.max(0, Math.min(W - b.w, cx - b.w / 2)); b.y = -b.h - 40; b.vx = 0; b.vy = 0; b.tilt = 0; b.live = false; b.t0 = n * .42; b.held = false; b.key = false; b.el.classList.remove('is-held', 'is-key'); });
       if (won) { won = false; site.classList.remove('is-won'); }
@@ -5683,6 +5719,11 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   EZ.section('towns', { 1: { init: function (root, k) {
     var D = geo(), svg = root.querySelector('.tw__svg'), all = root.querySelector('.tw__all');
     var inp = root.querySelector('.tw__in'), opts = root.querySelector('.tw__opts'), ans = root.querySelector('.tw__ans'), clr = root.querySelector('.tw__clear');
+    // DEEP QA · phones: the field rises near the top when tapped, so its suggestions have room above the keyboard and call bar
+    k.on(inp, 'focus', function () {
+      if (innerWidth > 767) return;
+      k.timeout(function () { var r = inp.getBoundingClientRect(), nav = (document.querySelector('.nav') || { offsetHeight: 64 }).offsetHeight; if (r.top > nav + 120) window.scrollTo({ top: scrollY + r.top - nav - 16, behavior: 'auto' }); }, 250);
+    });
     var T = [];
     NS_ORDER.forEach(function (c) { D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }).forEach(function (t) { T.push({ n: t[0], c: c, x: t[1], y: t[2], k: norm(t[0]) }); }); });
     var office = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0], ox = office[1], oy = office[2];
@@ -6686,6 +6727,19 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 
 .nav__logo { margin-right: auto; }
+
+
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
 
 
 
@@ -10466,6 +10520,19 @@ input, textarea { caret-color: var(--color-accent-text); }
 .nav__logo { margin-right: auto; }
 
 
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+
 
 
 .buddy {
@@ -10955,6 +11022,11 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
   .bk__row { gap: 8px; } .bk__lbls { gap: 8px; font-size: .75rem; } .bk__strip { padding: var(--s4) var(--s3) var(--s3); }   
 }
 
+@media (min-width: 601px) and (max-width: 900px) {
+  .bc__cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--s6); }
+  .bc__c:last-child { grid-column: 1 / -1; }
+}
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["HomeAndConstructionBusiness","GeneralContractor"],"name":"Elbaz Construction and Remodeling","url":"https://elbazconstructioncorp.com/","telephone":"+1-754-236-0675","email":"Sales@elbazconstruction.com","address":{"@type":"PostalAddress","streetAddress":"19 W Flagler St, Suite 310","addressLocality":"Miami","addressRegion":"FL","postalCode":"33130","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"19:00"}],"areaServed":[{"@type":"AdministrativeArea","name":"Miami-Dade County"},{"@type":"AdministrativeArea","name":"Broward County"},{"@type":"AdministrativeArea","name":"Palm Beach County"}],"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"license","name":"Florida Certified Building Contractor","identifier":"CBC1265280"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"343"},"sameAs":["https://www.instagram.com/elbazconstruction/","https://www.facebook.com/elbazconstruction/"]}
@@ -11011,7 +11083,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
             <svg class="bi__svg" viewBox="0 0 600 480" aria-hidden="true" focusable="false"></svg>
           </div>
           <div class="bi__marks" role="group" aria-label="Parts of the bathroom: point at or focus a mark"></div>
-          <div class="bi__call" aria-live="polite"><p class="bi__ct">Point at a mark</p><p class="bi__cx">Each is a part we are careful about.</p></div>
+          <div class="bi__call" aria-live="polite"><p class="bi__ct">Tap or point at a mark</p><p class="bi__cx">Each is a part we are careful about.</p></div>
         </div>
         <figure class="bi__print"><img data-img="b-concrete-hero" width="1600" height="1000" alt="Modern concrete bathroom with matte black fixtures and glass walk-in shower"><figcaption>As delivered</figcaption></figure>
       </div>
@@ -11057,7 +11129,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       <div class="br__side">
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Rooms we build</p>
         <h2 class="t-head" id="bath-rooms-h">Ten kinds of bathroom. <span class="acc">One way to build.</span></h2>
-        <p class="t-lead br__lead">Point at a room to see one we built. A camera mark means we have a photographed project of that kind.</p>
+        <p class="t-lead br__lead">Tap a room to see one we built. A camera mark means we have a photographed project of that kind.</p>
         <figure class="br__prev" aria-live="polite"><div class="br__ph"><img class="br__img" alt=""><svg class="br__plan" viewBox="0 0 400 500" aria-hidden="true" focusable="false"></svg></div><figcaption class="br__cap">Pick a room.</figcaption></figure>
       </div>
       <ol class="br__list"></ol>
@@ -13299,7 +13371,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       if (i === on) return; on = i;
       marks.forEach(function (b, j) { b.classList.toggle('is-on', j === i); });
       frame.classList.toggle('is-lock', i > -1);
-      if (i < 0) { ct.textContent = 'Point at a mark'; cx.textContent = 'Each is a part we are careful about.'; frame.style.setProperty('--z', 1); return; }
+      if (i < 0) { ct.textContent = 'Tap or point at a mark'; cx.textContent = 'Each is a part we are careful about.'; frame.style.setProperty('--z', 1); return; }
       ct.textContent = M[i].t; cx.textContent = M[i].c;
       if (k.motion) { frame.style.setProperty('--ox', (M[i].x / 6) + '%'); frame.style.setProperty('--oy', (M[i].y / 4.8) + '%'); frame.style.setProperty('--z', 1.35); }
     }
@@ -14306,6 +14378,19 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 
 .nav__logo { margin-right: auto; }
+
+
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
 
 
 
@@ -18069,6 +18154,19 @@ input, textarea { caret-color: var(--color-accent-text); }
 .nav__logo { margin-right: auto; }
 
 
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+
 
 
 .buddy {
@@ -18578,9 +18676,9 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           The best way to reach me is by
           <span class="fm3__blank rx-host"><label class="sr-only" for="fm3-contact">Preferred contact method</label><select id="fm3-contact" name="contact"><option>phone</option><option>email</option><option>text</option></select></span>;
           my phone is
-          <span class="fm3__blank rx-host"><label class="sr-only" for="fm3-phone">Phone</label><input id="fm3-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(000) 000-0000" size="14"></span>
+          <span class="fm3__blank rx-host"><label class="sr-only" for="fm3-phone">Phone</label><input id="fm3-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="your phone number" size="14"></span>
           and my email is
-          <span class="fm3__blank fm3__blank--wide rx-host"><label class="sr-only" for="fm3-email">Email</label><input id="fm3-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" size="22"></span>.
+          <span class="fm3__blank fm3__blank--wide rx-host"><label class="sr-only" for="fm3-email">Email</label><input id="fm3-email" name="email" type="email" autocomplete="email" placeholder="your email address" size="22"></span>.
         </p>
         <ul class="fm3__errs" aria-live="polite">
           <li class="c-err" id="fm3-name-err" hidden></li><li class="c-err" id="fm3-project-err" hidden></li><li class="c-err" id="fm3-address-err" hidden></li>

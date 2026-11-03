@@ -691,6 +691,19 @@ input, textarea { caret-color: var(--color-accent-text); }
 .nav__logo { margin-right: auto; }
 
 
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+
 
 
 .buddy {
@@ -1180,6 +1193,11 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
   .bk__row { gap: 8px; } .bk__lbls { gap: 8px; font-size: .75rem; } .bk__strip { padding: var(--s4) var(--s3) var(--s3); }   
 }
 
+@media (min-width: 601px) and (max-width: 900px) {
+  .bc__cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--s6); }
+  .bc__c:last-child { grid-column: 1 / -1; }
+}
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["HomeAndConstructionBusiness","GeneralContractor"],"name":"Elbaz Construction and Remodeling","url":"https://elbazconstructioncorp.com/","telephone":"+1-754-236-0675","email":"Sales@elbazconstruction.com","address":{"@type":"PostalAddress","streetAddress":"19 W Flagler St, Suite 310","addressLocality":"Miami","addressRegion":"FL","postalCode":"33130","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"19:00"}],"areaServed":[{"@type":"AdministrativeArea","name":"Miami-Dade County"},{"@type":"AdministrativeArea","name":"Broward County"},{"@type":"AdministrativeArea","name":"Palm Beach County"}],"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"license","name":"Florida Certified Building Contractor","identifier":"CBC1265280"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"343"},"sameAs":["https://www.instagram.com/elbazconstruction/","https://www.facebook.com/elbazconstruction/"]}
@@ -1236,7 +1254,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
             <svg class="bi__svg" viewBox="0 0 600 480" aria-hidden="true" focusable="false"></svg>
           </div>
           <div class="bi__marks" role="group" aria-label="Parts of the bathroom: point at or focus a mark"></div>
-          <div class="bi__call" aria-live="polite"><p class="bi__ct">Point at a mark</p><p class="bi__cx">Each is a part we are careful about.</p></div>
+          <div class="bi__call" aria-live="polite"><p class="bi__ct">Tap or point at a mark</p><p class="bi__cx">Each is a part we are careful about.</p></div>
         </div>
         <figure class="bi__print"><img data-img="b-concrete-hero" width="1600" height="1000" alt="Modern concrete bathroom with matte black fixtures and glass walk-in shower"><figcaption>As delivered</figcaption></figure>
       </div>
@@ -1282,7 +1300,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       <div class="br__side">
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Rooms we build</p>
         <h2 class="t-head" id="bath-rooms-h">Ten kinds of bathroom. <span class="acc">One way to build.</span></h2>
-        <p class="t-lead br__lead">Point at a room to see one we built. A camera mark means we have a photographed project of that kind.</p>
+        <p class="t-lead br__lead">Tap a room to see one we built. A camera mark means we have a photographed project of that kind.</p>
         <figure class="br__prev" aria-live="polite"><div class="br__ph"><img class="br__img" alt=""><svg class="br__plan" viewBox="0 0 400 500" aria-hidden="true" focusable="false"></svg></div><figcaption class="br__cap">Pick a room.</figcaption></figure>
       </div>
       <ol class="br__list"></ol>
@@ -3585,7 +3603,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       if (i === on) return; on = i;
       marks.forEach(function (b, j) { b.classList.toggle('is-on', j === i); });
       frame.classList.toggle('is-lock', i > -1);
-      if (i < 0) { ct.textContent = 'Point at a mark'; cx.textContent = 'Each is a part we are careful about.'; frame.style.setProperty('--z', 1); return; }
+      if (i < 0) { ct.textContent = 'Tap or point at a mark'; cx.textContent = 'Each is a part we are careful about.'; frame.style.setProperty('--z', 1); return; }
       ct.textContent = M[i].t; cx.textContent = M[i].c;
       if (k.motion) { frame.style.setProperty('--ox', (M[i].x / 6) + '%'); frame.style.setProperty('--oy', (M[i].y / 4.8) + '%'); frame.style.setProperty('--z', 1.35); }
     }

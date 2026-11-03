@@ -98,3 +98,20 @@
   .st__flag { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .pz-card.is-swap > *, .pd__mid.is-swap > * { animation: none; } .st__s, .pd__node, .pk__c { transition: none; } }
+
+/* DEEP QA · mobile first: on phones and tablets the dial leads (the picture of the job), compact, and the stage card
+   sits under it with its controls in thumb reach; the side column dissolves into the one flow (display: contents) */
+@media (max-width: 900px) {
+  .pd { display: flex; flex-direction: column; gap: var(--s4); align-items: stretch; }
+  .pd__side { display: contents; }
+  .pd__side .eyebrow { order: 1; margin: 0; }
+  .pd__side .t-head { order: 2; margin: 0; }
+  .pd__dial { order: 3; width: min(100%, 320px); align-self: center; margin-block: var(--s2); }
+  @media (min-width: 600px) { .pd__dial { width: 380px; } .pd__card { max-width: 620px; align-self: center; width: 100%; } }
+  .pd__card { order: 4; }
+  .pd__nav { order: 5; margin-top: 0; justify-content: center; }
+  .pd__side .ps__note { order: 6; text-align: center; }
+  .pd__node { width: 15%; }
+  .pd__n { font-size: 2.75rem; }
+  .pd__t { font-size: .9375rem; }
+}

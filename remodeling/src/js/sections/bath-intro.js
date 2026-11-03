@@ -37,7 +37,7 @@
       if (i === on) return; on = i;
       marks.forEach(function (b, j) { b.classList.toggle('is-on', j === i); });
       frame.classList.toggle('is-lock', i > -1);
-      if (i < 0) { ct.textContent = 'Point at a mark'; cx.textContent = 'Each is a part we are careful about.'; frame.style.setProperty('--z', 1); return; }
+      if (i < 0) { ct.textContent = 'Tap or point at a mark'; cx.textContent = 'Each is a part we are careful about.'; frame.style.setProperty('--z', 1); return; }
       ct.textContent = M[i].t; cx.textContent = M[i].c;
       if (k.motion) { frame.style.setProperty('--ox', (M[i].x / 6) + '%'); frame.style.setProperty('--oy', (M[i].y / 4.8) + '%'); frame.style.setProperty('--z', 1.35); }
     }

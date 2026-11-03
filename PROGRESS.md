@@ -291,3 +291,18 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **New tools:** `qa_pins.js` (6 widths × V1/V2: engage, play, release, no trap) and `qa_endkey.js`.
 - **Final checks:** 36/36 pins; every page end reached; 767 focus stops with 0 invisible; locks 0 fails; 0 console errors or warnings.
 - Zero sub-agents, zero background tasks.
+
+## Deep QA (owner: about an hour, mobile first)
+- Plan: measured mobile audit; every section at phone size; a touch pass; tablet and desktop passes; fix, verify, regress.
+- New tools: `qa_mobile.js` (targets, type, overflow, links, errors), `qa_sections.js` (every section at a device size, one sheet per page), `qa_touch.js` (30 real taps with read-back).
+- Fixed on mobile:
+  - every tap target to 44px (fields, phone and mail links, copy, logo, footer licence) and a 24px checkbox;
+  - no 11px labels; larger FAQ questions;
+  - the hero tightened so the house shows in the first screen;
+  - the dial leads on phones and tablets;
+  - Proof as one centred tower with full-size blocks, and a stamp that only appears once the visitor earns it;
+  - the town search: its suggestions had opened behind the button and the call bar (a real defect), and the field now rises when tapped;
+  - wording that only worked with a mouse now works with touch too;
+  - the contact field hints read naturally.
+- Fixed on tablet: Proof tower size and placement; the dial first; Bathrooms close in two columns.
+- Final: phones at 360, 390 and 414, 0 small targets, 0 overflow; touch 30/30; pins 6/6; locks 0 fails; 0 console errors.

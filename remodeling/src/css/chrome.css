@@ -341,3 +341,18 @@
 
 /* FINAL: the version-switch slot that spaced the header is retired; the logo now pushes the rest of the bar right */
 .nav__logo { margin-right: auto; }
+
+/* DEEP QA · mobile first, one layer for the whole site (phones and small tablets):
+   every control a thumb can hit (44px), no running label under 12px, fields you can tap without aiming.
+   ("html body" lifts these over the section sheets, which load later with equal weight) */
+@media (max-width: 767px) {
+  html body .nav__logo { display: inline-flex; align-items: center; min-height: 44px; }
+  html body div > .link[href^="tel:"], html body div > .link[href^="mailto:"], html body li > .link[href^="tel:"], html body li > .link[href^="mailto:"],
+  html body .vs1__l > .link, html body .foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  html body .cl__copy { min-height: 44px; padding-inline: 18px; }
+  html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
+  html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
+  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}

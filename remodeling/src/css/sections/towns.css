@@ -75,3 +75,4 @@
 .tw__show { display: none; margin-top: var(--s2); min-height: 44px; padding: 0 var(--s4); font: 600 .9375rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); cursor: pointer; }
 @media (max-width: 900px) { .tw__show { display: inline-flex; align-items: center; } }
 .tw__ans:empty { display: none; }   /* owner pass: no empty bar before an answer */
+.tw__field { z-index: 10; }   /* DEEP QA: the suggestions open above the button below (the reveal made the field its own layer) */
