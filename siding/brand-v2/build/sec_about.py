@@ -60,7 +60,7 @@ def a4():
           f'<p><a class="of2-p" href="{TEL}">{PHONE}</a></p><p><a class="of2-e" href="mailto:{EMAIL}">{EMAIL}</a></p></div></div></div>')
     css = """
 .of-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-09);align-items:center} .ofl{display:grid;gap:var(--space-04);margin:0}
-.ofl dt{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary)} .ofl dd{margin:4px 0 0;font:600 19px var(--font-text)}
+.ofl dt{font:600 var(--type-label-size) var(--font-text);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary)} .ofl dd{margin:4px 0 0;font:600 19px var(--font-text)} .ofl dd a{display:inline-flex;align-items:center;min-height:44px}
 .of-m{background:var(--color-bg-subtle);padding:var(--space-05)} .of-m .nd{max-height:420px}
 .of2-c{padding:var(--space-09) var(--space-08);max-width:760px} .of2-a{font:800 var(--type-h2-size)/1.15 var(--font-display);color:#fff;margin:0 0 var(--space-04)}
 .of2-p{font:800 var(--type-h3-size) var(--font-display);color:#fff} .of2-e{color:#fff;font-weight:600} .of2 :focus-visible{outline-color:#fff}
@@ -93,7 +93,7 @@ def a5():
           f'<button type="submit" class="btn btn-primary">Send the request {icon("action-arrow-right", 20)}</button><div class="frm-out" role="status" aria-live="polite"></div></form></div></div>')
     css = """
 .bk-g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-09);align-items:start}
-.frm{display:grid;gap:var(--space-05)} .frm>.btn{justify-self:start} .fld{display:grid;gap:6px;border:0;padding:0;margin:0} .fld label,.fld legend{font:600 16px var(--font-text);padding:0} .fld label span{font-weight:400;color:var(--color-text-secondary)}
+.frm{display:grid;gap:var(--space-05)} .frm>.btn{justify-self:start} .fld{display:grid;gap:6px;border:0;padding:0;margin:0} .fld label:not(.chip-in),.fld legend{font:600 16px var(--font-text);padding:0} .fld label span{font-weight:400;color:var(--color-text-secondary)}
 .fld input,.fld textarea{min-height:var(--input-height);border:1px solid var(--color-border-control);border-radius:var(--radius-sm);padding:10px var(--space-04);font:inherit;background:var(--color-bg-page);color:var(--color-text-primary)}
 .fld [aria-invalid=true]{border:2px solid var(--color-error-ink)} .hint{margin:0;font-size:14px;color:var(--color-text-secondary)}
 .err{display:flex;gap:6px;align-items:flex-start;margin:0;font-size:15px;color:var(--color-error-ink)} .err::before{content:"✕";font-weight:700}

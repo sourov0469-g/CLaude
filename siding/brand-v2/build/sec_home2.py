@@ -32,6 +32,7 @@ S5_CSS = """
 @media (max-width:900px){.wa-g{grid-template-columns:minmax(0,1fr);gap:var(--space-04)} .w-lab{display:none} .wall{max-height:46vh}
  .wa1 .wa-stick{padding-top:0} .wa1 .h2{font-size:1.75rem;margin-bottom:var(--space-03)} .wa1 .lead{font-size:16px;margin-bottom:0}
  .wa1 .w-steps{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:var(--space-04);font-size:14px} .wa1 .wall{max-height:34vh} .wa1 .ill{font-size:12px}}
+@media (min-width:601px) and (max-width:900px){.wa1 .wall{max-height:54vh} .wa1 .w-lab{display:inline}}   /* tablets: the section is scroll-linked, not pinned, so the drawing can take the room */
 """
 
 S5_JS = """

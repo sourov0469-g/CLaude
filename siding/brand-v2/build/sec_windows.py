@@ -110,8 +110,8 @@ def w3():
     v1 = f'<div class="wt1 sec-pad"><div class="wrap"><p class="label">Types</p><h2 class="h2">Six kinds of opening.</h2>{cline()}<div class="els">{cards}</div></div></div>'
     tabs = ''.join(f'<button type="button" role="tab" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-i="{i}" data-d="{esc(d)}">{esc(k)}</button>' for i, (k, d) in enumerate(kinds))
     big = ''.join(f'<div class="el-big" data-i="{i}" {"" if i == 0 else "hidden"}>{_elev(k)}</div>' for i, (k, _) in enumerate(kinds))
-    v2 = (f'<div class="wt2 sec-pad"><div class="wrap spp2-g"><div class="el-bw">{big}</div><div><p class="label">Types</p><h2 class="h2">Six kinds of opening.</h2>'
-          f'<div class="spp2-t" role="tablist" aria-label="Opening types">{tabs}</div><p class="lead wt2-d" role="tabpanel">{esc(kinds[0][1])}</p></div></div></div>')
+    v2 = (f'<div class="wt2 sec-pad"><div class="wrap spp2-g"><div><p class="label">Types</p><h2 class="h2">Six kinds of opening.</h2>'
+          f'<div class="spp2-t" role="tablist" aria-label="Opening types">{tabs}</div><p class="lead wt2-d" role="tabpanel">{esc(kinds[0][1])}</p></div><div class="el-bw">{big}</div></div></div>')
     css = """
 .els{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--space-05)} .el-c{margin:0} .el{width:100%;height:auto;display:block;background:var(--color-bg-subtle);padding:var(--space-04)}
 .el-c figcaption{display:grid;gap:4px;margin-top:var(--space-03)} .el-c b{font:700 17px var(--font-display)} .el-c span{color:var(--color-text-secondary);font-size:15px}

@@ -1,5 +1,5 @@
-// accessibility-tree audit: heading outline, landmarks, nameless controls/images, from Chromium's AX tree (what a screen reader reads)
-const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1440,height:900}});const c=await p.context().newCDPSession(p);
+// accessibility-tree audit: heading outline, landmarks, nameless controls/images, from Chromium's AX tree (what a screen reader reads) Pass a width (node ax.js 390) to read the phone layout.
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const W=+(process.argv[2]||1440);const p=await b.newPage({viewport:{width:W,height:900}});   /* node ax.js 390 for the phone header */const c=await p.context().newCDPSession(p);
 const report={};
 for(const route of ['','siding','windows','roofing','work','about'])for(const v of ['1','2']){
  await p.goto('file:///home/user/CLaude/siding/brand-v2/site.html#/'+route);await p.waitForTimeout(500);

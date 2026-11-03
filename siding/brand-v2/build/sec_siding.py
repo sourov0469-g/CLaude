@@ -59,15 +59,17 @@ def p2():
     v1 = f'<div class="spp1 sec-pad"><div class="wrap"><p class="label">Profiles</p><h2 class="h2">Four ways a wall can look.</h2>{cline()}<div class="smps">{cards}</div></div></div>'
     tabs = ''.join(f'<button type="button" role="tab" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-k="{k}" data-d="{esc(desc[k])}">{t}</button>' for i, (k, t) in enumerate(PROFILES))
     samples = ''.join(f'<div class="smp-big" data-k="{k}" {"" if i == 0 else "hidden"}>{_sample(k)}</div>' for i, (k, _) in enumerate(PROFILES))
-    v2 = (f'<div class="spp2 sec-pad"><div class="wrap spp2-g"><div class="spp2-s">{samples}</div><div><p class="label">Profiles</p><h2 class="h2">Four ways a wall can look.</h2>'
-          f'<div class="spp2-t" role="tablist" aria-label="Profiles">{tabs}</div><p class="lead spp2-d" role="tabpanel">{esc(desc["lap"])}</p></div></div></div>')
+    # text first in the source and on screen, the figure it changes after it (S0073: visual order matches DOM order)
+    v2 = (f'<div class="spp2 sec-pad"><div class="wrap spp2-g"><div><p class="label">Profiles</p><h2 class="h2">Four ways a wall can look.</h2>'
+          f'<div class="spp2-t" role="tablist" aria-label="Profiles">{tabs}</div><p class="lead spp2-d" role="tabpanel">{esc(desc["lap"])}</p></div><div class="spp2-s">{samples}</div></div></div>')
     css = """
 .smps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-05)} .smp-c{margin:0} .smp{display:block;width:100%;height:auto;box-shadow:0 1px 2px rgba(19,22,25,.12),0 12px 28px rgba(19,22,25,.12)}
 .smp-c figcaption{display:grid;gap:4px;margin-top:var(--space-04)} .smp-c b{font:700 20px var(--font-display)} .smp-c span{color:var(--color-text-secondary)}
 .spp2-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-09);align-items:center} .spp2-s{max-width:520px}
 .spp2-t{display:flex;flex-wrap:wrap;gap:var(--space-03);margin-bottom:var(--space-05)} .spp2-t button{min-height:48px;padding:0 var(--space-05);border:1px solid var(--color-border-control);background:var(--color-bg-page);border-radius:var(--radius-sm);font:600 16px var(--font-text);cursor:pointer;color:var(--color-text-primary)}
 .spp2-t button[aria-selected=true]{background:var(--color-accent-solid);border-color:var(--color-accent-solid);color:#fff}
-@media (max-width:900px){.smps{grid-template-columns:repeat(2,minmax(0,1fr))} .spp2-g{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){.smps{grid-template-columns:repeat(2,minmax(0,1fr))} .spp2-g{gap:var(--space-06)}}
+@media (max-width:600px){.spp2-g{grid-template-columns:minmax(0,1fr)}}   /* stacked in source order: heading and tabs, then the figure they change */
 """
     js = """
 (function(){const r=document.querySelector('.spp2');if(!r)return;const tabs=[...r.querySelectorAll('[role=tab]')],d=r.querySelector('.spp2-d');

@@ -168,6 +168,11 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - Fixed: the footer page links are now a `<nav aria-label="Footer">` landmark; pair-photo alts use one pattern ("After the work: trade job, place"), the seam swap included. 19 versions backed up; 45 backups in the file.
     - Verified: one h1 per page, no heading skips, no nameless controls or images; route changes are announced politely and move focus to the h1.
     - New QA scripts: `build/qa/ax.js`, `build/qa/live.js`.
+  - **GATE-BUILD-6 accepted by Muse.**
+  - **Cycle 7** (`GATE-BUILD-7.md`, 7.94, PASS on the fixed file, cited): the veto widths 390 and 768 (plus 1024), walked screen by screen with an error listener.
+    - **Correction:** a JS error (B2 palette `P` shadowed the pause check `P()`) was live since cycle 2, so GATE-BUILD-2 to 6 wrongly reported zero vetoes; the B2 field never drifted. Fixed: 0 errors, the field drifts at 60 fps and pauses.
+    - Also fixed: the phone header call link (nameless, 18 px) → named, 44×44; booking chips' lost padding; inactive stacked plates and photos hidden from assistive tech; hero V2 gap at 768 and 9 px caption overlap at 375×667; figure-before-heading in Siding 2 V2 and Windows 3 V2, fixed in source order per S0073 (2 versions backed up; 47 backups); About contact links and map Reset sized.
+    - New QA: `build/qa/vp.js`; `ax.js` takes a width. Contact sheets at 768: `siding/brand-v2/shots/build-7-768/`.
   - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
 
 ## History of this run so far (moved here from the old PROGRESS.md)

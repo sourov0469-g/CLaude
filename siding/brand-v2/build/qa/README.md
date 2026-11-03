@@ -12,5 +12,6 @@ All checks run with Playwright and Chromium. Run each one with `node <script>` f
 | rm.js | Booking deep link and reduced motion. | Build 1 → |
 | pause.js, route.js | The Pause control stops and resumes motion; ambient motion stops on route change. | Build 2–3 |
 | ptr.js | Cursor companion under stepped real pointer movement. | Build 4 |
-| ax.js | Chromium's accessibility tree (what a screen reader is given), every page × both versions: h1 count, heading skips, landmarks and their names, controls or images with no name. | Build 6 |
+| ax.js | (`node ax.js 390` for the phone header) Chromium's accessibility tree (what a screen reader is given), every page × both versions: h1 count, heading skips, landmarks and their names, controls or images with no name. | Build 6 |
 | live.js | Route change is announced through the polite live region and moves focus to the h1; pair-photo alts after a seam swap. | Build 6 |
+| vp.js | The brief's veto widths: 390×844, 768×1024 and 1024×768, every page × both versions, walked screen by screen. Page overflow, elements past the edge, clipped text, overlapping text, tap targets under 24 px, bordered controls with text against the border, JS errors. `node vp.js shots <dir>` also saves full-page shots. | Build 7 |

@@ -69,7 +69,7 @@ def s1():
 .hd-s{opacity:.18;transition:opacity var(--duration-normal) var(--ease-standard)} .hd-s.done{opacity:.55} .hd-s.cur{opacity:1}
 .hd-lab .hd-t{fill:var(--steel-5)} .hd-lab .cur .hd-t{fill:#fff;font-weight:700} .hd-lab .cur .hd-ld{stroke:#fff}
 @media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto;left:var(--layout-gutter);right:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)}
- .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:31%;width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:11px}
+ .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:200px;width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:11px}
  .hero2 .h1-copy{height:auto;padding-top:var(--space-04)} .hero2 .h1-copy .h1{font-size:1.75rem;margin-bottom:var(--space-04)} .hero2 .h1-copy .btn-secondary{display:none}
  .pls2{left:50%;top:15%;height:104px} .pls2 .pl{padding:var(--space-03) var(--space-05)} .pls2 .pl-k{font-size:18px} .pls2 .pl-s{margin:2px 0 6px!important} .pls2 .pl-n{display:none}}
 '''
@@ -79,7 +79,7 @@ function wiper(root,items){ // MERSI: the next item wipes in at the same percent
   return pos=>{const n=items[0].length,i=Math.floor(cl(pos,0,n-1)),f=cl(pos,0,n-1)-i;
     items.forEach((col,ci)=>col.forEach((e,k)=>{let c;const t=(100-f*100).toFixed(2);
       if(k<=i)c='inset(0% 0% 0% 0%)';else if(k===i+1)c=ci===1?`inset(0% 0% ${t}% 0%)`:`inset(${t}% 0% 0% 0%)`;else c=ci===1?'inset(0% 0% 100% 0%)':'inset(100% 0% 0% 0%)';
-      e.style.clipPath=c;e.style.zIndex=k;if(ci===items.length-1)e.setAttribute('aria-hidden',k===Math.round(pos)?'false':'true');}));};}
+      e.style.clipPath=c;e.style.zIndex=k;e.setAttribute('aria-hidden',k===Math.round(pos)?'false':'true');}));};}  // only the showing item is exposed to assistive tech
 function driver(root,n,paint,onIdx){let target=0,shown=0,raf=0,drag=false,y0=0,s0=0;
   const tick=()=>{shown+=(target-shown)*(A.reduce?1:.12);if(Math.abs(target-shown)<.0005)shown=target;paint(shown);onIdx&&onIdx(shown);raf=shown!==target?requestAnimationFrame(tick):0;};
   const go=t=>{target=cl(t,0,n-1);if(!raf)raf=requestAnimationFrame(tick);};
