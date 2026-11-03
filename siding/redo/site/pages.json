@@ -236,6 +236,46 @@
       "Step through it"
      ]
     ]
+   },
+   {
+    "slot": "wd5",
+    "name": "Doors",
+    "mod": "p_wd5",
+    "obj": "PWd5",
+    "v": [
+     [
+      "a",
+      "Two doors, two counts"
+     ],
+     [
+      "b",
+      "Door hangers"
+     ],
+     [
+      "c",
+      "In their words"
+     ]
+    ]
+   },
+   {
+    "slot": "wd6",
+    "name": "Book the window inspection",
+    "mod": "p_wd6",
+    "obj": "PWd6",
+    "v": [
+     [
+      "a",
+      "On the tape"
+     ],
+     [
+      "b",
+      "In the window"
+     ],
+     [
+      "c",
+      "The contact sheet"
+     ]
+    ]
    }
   ],
   "roofing": [],
