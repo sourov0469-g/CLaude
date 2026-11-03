@@ -69,5 +69,5 @@ window.Proc2 = (function () {
     else new IntersectionObserver((es, io) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); cols[cur].querySelector('.bd').classList.add('in'); } }), { threshold: 0.35 }).observe(s.querySelector('.cols'));
     void first;
   }
-  return { C, D, wire(root) { wireC(root); wireD(root); } };
+  return { C, D, wire(root) { wireC(root); wireD(root); }, DR, FIGS: F };
 })();
