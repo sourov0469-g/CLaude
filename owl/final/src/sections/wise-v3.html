@@ -1,0 +1,106 @@
+<section class="sec wise3" id="wise-check-3" aria-labelledby="w3-h">
+<style>
+.wise3 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(22px,3vw,36px)}
+.wise3 .lede{margin-top:12px;max-width:44ch}
+.wise3 .acc{display:flex;gap:12px;height:clamp(420px,40vw,500px)}
+.wise3 .pan{position:relative;flex:1 1 0;min-width:0;border-radius:26px;background:var(--paper);box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 4px 0 rgba(23,17,29,.06),0 30px 50px -34px rgba(23,17,29,.55);overflow:hidden;transition:flex-grow .7s cubic-bezier(.2,.8,.2,1),transform .35s var(--ease),background .4s}
+.wise3 .pan.open{flex-grow:4.2;background:#FBFAF6}
+.wise3 .pan:not(.open):hover{transform:translateY(-4px)}
+.wise3 .pan h3{margin:0}
+.wise3 .tog{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0;width:100%;text-align:center;z-index:2;border-radius:26px}
+.wise3 .tog .num{font-size:14px;font-weight:800;letter-spacing:.12em;color:#8E5A12}
+.wise3 .tog .nm{writing-mode:vertical-rl;transform:rotate(180deg);font-size:clamp(20px,1.8vw,26px);font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.wise3 .tog svg{width:44px;height:44px;color:var(--ink)}
+.wise3 .pan.open .tog{inset:0 0 auto 0;height:auto;flex-direction:row;justify-content:flex-start;gap:14px;padding:18px 22px;border-radius:26px 26px 0 0}
+.wise3 .pan.open .tog .nm{writing-mode:horizontal-tb;transform:none;font-size:clamp(22px,2.2vw,30px)}
+.wise3 .pan.open .tog svg{order:-1;width:40px;height:40px}
+.wise3 .pan.open .tog .num{order:1;margin-left:auto;margin-right:4px}
+.wise3 .body{position:absolute;inset:78px 22px 22px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:center;gap:22px;opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+.wise3 .pan.open .body{opacity:1;visibility:visible;transition:opacity .5s .35s,visibility 0s}
+.wise3 .scene{min-height:0;max-height:100%;aspect-ratio:4/3;border-radius:18px;background:#EEF1F0;overflow:hidden}
+.wise3 .scene svg{display:block;width:100%;height:100%}
+.wise3 .body p{font-size:18px;max-width:46ch}
+.wise3 .focus{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;font-weight:700}
+.wise3 .focus span{padding:5px 11px;border-radius:8px;background:rgba(234,162,33,.2);border:1px solid rgba(234,162,33,.6);color:var(--ink)}
+.wise3 .row{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+/* scene motion */
+.wise3 .hail{animation:w3hail 1.3s linear infinite}
+@keyframes w3hail{from{transform:translate(0,-60px)}to{transform:translate(-30px,220px)}}
+.wise3 .flap{transform-box:fill-box;transform-origin:0 100%;animation:w3flap .5s ease-in-out infinite alternate}
+@keyframes w3flap{to{transform:rotate(-14deg)}}
+.wise3 .wind{stroke-dasharray:40 200;animation:w3wind 1.6s linear infinite}
+@keyframes w3wind{from{stroke-dashoffset:240}to{stroke-dashoffset:0}}
+.wise3 .trail{stroke-dasharray:8 8;animation:w3trail 1s linear infinite}
+@keyframes w3trail{to{stroke-dashoffset:-16}}
+.wise3 .stain{transform-box:fill-box;transform-origin:50% 50%;animation:w3stain 4s ease-in-out infinite alternate}
+@keyframes w3stain{from{transform:scale(.7)}to{transform:scale(1.08)}}
+.wise3 .drip{animation:w3drip 1.6s cubic-bezier(.6,0,.9,.5) infinite}
+@keyframes w3drip{0%,30%{transform:translateY(0);opacity:0}35%{opacity:1}100%{transform:translateY(70px);opacity:1}}
+.wise3 .gran{animation:w3gran 2.2s linear infinite}
+@keyframes w3gran{from{transform:translate(0,0);opacity:1}to{transform:translate(-26px,60px);opacity:0}}
+.wise3 .curl{transform-box:fill-box;transform-origin:0 100%;animation:w3curl 3s ease-in-out infinite alternate}
+@keyframes w3curl{to{transform:rotate(-8deg) translateY(-1px)}}
+.wise3 .sun{transform-box:fill-box;transform-origin:50% 50%;animation:w3spin 20s linear infinite}
+@keyframes w3spin{to{transform:rotate(360deg)}}
+.wise3 .ck{stroke-dasharray:1;stroke-dashoffset:1}
+.wise3 .pan.open .ck{animation:w3ck .8s .6s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes w3ck{to{stroke-dashoffset:0}}
+.wise3 .bob{animation:w3bob 3.4s ease-in-out infinite alternate}
+@keyframes w3bob{to{transform:translateY(-6px)}}
+.wise3 .pan:not(.open) .scene *{animation-play-state:paused!important}
+@media (max-width:900px){.wise3 .acc{flex-direction:column;height:auto}.wise3 .pan{flex:none;min-height:76px}.wise3 .pan:not(.open):hover{transform:none}.wise3 .tog,.wise3 .pan.open .tog{position:relative;inset:auto;flex-direction:row;justify-content:flex-start;gap:14px;padding:16px 18px;min-height:76px}.wise3 .tog .nm{writing-mode:horizontal-tb;transform:none;font-size:20px}.wise3 .tog svg{order:-1;width:36px;height:36px}.wise3 .tog .num{order:1;margin-left:auto}.wise3 .body{position:relative;inset:auto;display:none;padding:0 16px 18px}.wise3 .pan.open .body{display:grid;grid-template-columns:1fr;gap:14px}.wise3 .scene{aspect-ratio:4/3}.wise3 .body p{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.wise3 .pan,.wise3 .body{transition:none}.wise3 .scene *{animation:none!important}.wise3 .ck{stroke-dashoffset:0}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><h2 class="h2" id="w3-h">When to Call for a Wise Check</h2>
+  <p class="lede rv">Four good times to have someone look closely. Open the one that sounds like you.</p></div>
+  <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+ <div class="acc"></div>
+</div>
+<script>
+OWL.reg('wise','3',function(root){
+  var W = OWL.WISE, acc = root.querySelector('.acc'), h2 = root.querySelector('h2');
+  if (!W){ return; }
+  OWL.split(h2);
+  /* one scene per case, drawn to show what the case is about, never a finding */
+  var SC = [
+    /* after a storm: hail and wind over a roof edge, a few tabs lifting */
+    '<rect width="400" height="300" fill="#DDE4E8"/><g fill="#B7C1C9"><ellipse cx="120" cy="56" rx="90" ry="34"/><ellipse cx="220" cy="44" rx="80" ry="36"/><ellipse cx="300" cy="62" rx="70" ry="28"/></g>'
+    + '<polygon points="0,300 0,236 400,150 400,300" fill="#5E5966"/>' + (function(){ var s = ''; for (var k = 0; k < 7; k++){ var a = 236 - k*0 ; s += '<path d="M0 ' + (250 + k*8) + ' L400 ' + (164 + k*8) + '" stroke="#4A4552" stroke-width="1.4"/>'; } return s; })()
+    + '<g fill="#6B6670" stroke="#3F3B46"><path class="flap" d="M120 226 l34 -7 0 9 -34 7z"/><path class="flap" style="animation-delay:.2s" d="M260 196 l34 -7 0 9 -34 7z"/></g>'
+    + (function(){ var s = ''; for (var i = 0; i < 26; i++){ var x = (i*53) % 420, d = (i*0.13) % 1.3; s += '<circle class="hail" cx="' + x + '" cy="' + ((i*37) % 90) + '" r="' + (3 + i % 3) + '" fill="#FBFAF6" stroke="#9AA6B0" style="animation-delay:-' + d.toFixed(2) + 's"/>'; } return s; })()
+    + '<g stroke="#FBFAF6" stroke-width="3" stroke-linecap="round" fill="none"><path class="wind" d="M20 120 H220"/><path class="wind" style="animation-delay:.5s" d="M120 150 H360"/><path class="wind" style="animation-delay:.9s" d="M40 96 H300"/></g>',
+    /* a leak or a stain: water enters high up, runs down a rafter, shows as a stain lower down */
+    '<rect width="400" height="300" fill="#F4ECDD"/><polygon points="0,150 220,40 400,130 400,0 0,0" fill="#5E5966"/><path d="M0 150 L220 40 L400 130" fill="none" stroke="#9C7A48" stroke-width="12"/>'
+    + '<rect x="230" y="16" width="34" height="40" fill="#A8553E"/><path d="M226 54 L268 70" stroke="#C9CDD2" stroke-width="5"/>'
+    + '<path class="trail" d="M244 62 C210 80 160 100 120 128 S70 160 90 206" fill="none" stroke="#5B8FC9" stroke-width="4" stroke-linecap="round"/>'
+    + '<rect x="0" y="206" width="400" height="14" fill="#E9E3D5"/><rect x="0" y="220" width="400" height="80" fill="#FBF8EF"/>'
+    + '<ellipse class="stain" cx="92" cy="226" rx="46" ry="10" fill="#B9925E" opacity=".55"/><circle class="drip" cx="92" cy="232" r="5" fill="#5B8FC9"/>'
+    + '<g font-size="13" font-weight="700" fill="#17111D"><text x="276" y="88">Where it gets in</text><text x="132" y="266">Where it shows</text></g><path d="M272 84 L250 66" stroke="#17111D" stroke-width="1.5"/><path d="M128 260 L104 236" stroke="#17111D" stroke-width="1.5"/>',
+    /* an older roof: worn tabs, granules washing off, a tired flashing edge */
+    '<rect width="400" height="300" fill="#E6EDEF"/><g class="sun"><circle cx="340" cy="56" r="22" fill="#EAA221"/><g stroke="#EAA221" stroke-width="4" stroke-linecap="round"><path d="M340 20v-8M340 100v-8M304 56h-8M384 56h-8M315 31l-6-6M371 87l-6-6M365 31l6-6M309 87l6-6"/></g></g>'
+    + (function(){ var s = ''; for (var r = 0; r < 6; r++){ var y = 110 + r*32; s += '<rect x="-10" y="' + y + '" width="420" height="34" fill="' + (r % 2 ? '#7A7480' : '#847E8A') + '"/>'; for (var x = (r % 2 ? 0 : 30); x < 420; x += 60) s += '<path d="M' + x + ' ' + (y + 34) + 'v-16" stroke="#5A5560" stroke-width="2"/>'; } return s; })()
+    + '<path class="curl" d="M180 206 h60 v-14 q-30 -10 -60 0z" fill="#8D8794" stroke="#5A5560"/>'
+    + (function(){ var s = ''; for (var i = 0; i < 30; i++){ s += '<circle class="gran" cx="' + (30 + (i*47) % 360) + '" cy="' + (120 + (i*29) % 170) + '" r="1.8" fill="#C9C4CF" style="animation-delay:-' + ((i*0.17) % 2.2).toFixed(2) + 's"/>'; } return s; })(),
+    /* just checking: a calm house and a check drawn over it */
+    '<rect width="400" height="300" fill="#E6EDEF"/><rect y="236" width="400" height="64" fill="#8DB45F"/><g class="bob"><polygon points="110,150 200,90 290,150" fill="#55505D"/><rect x="128" y="150" width="144" height="88" fill="#E9E3D5"/><rect x="186" y="186" width="28" height="52" fill="#17111D"/><rect x="146" y="166" width="28" height="22" fill="#B9C9D3"/><rect x="226" y="166" width="28" height="22" fill="#B9C9D3"/></g>'
+    + '<circle cx="320" cy="96" r="44" fill="#FBFAF6" stroke="#EAA221" stroke-width="5"/><path class="ck" pathLength="1" d="M298 96 L314 112 L344 80" fill="none" stroke="#2E7D32" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>'
+  ];
+  var LBL = ['Hail and wind over a roof edge, with a couple of tabs lifting', 'Cutaway: water gets in high near the chimney, runs down a rafter and shows as a ceiling stain lower down', 'Worn shingles with a curled tab and granules washing off', 'A calm house with a check mark'];
+  W.cases.forEach(function(c, i){
+    var p = document.createElement('div'); p.className = 'pan' + (i === 0 ? ' open' : '');
+    var id = 'w3-p' + i, bid = 'w3-b' + i;
+    var focus = c.f.map(function(k){ return '<span>' + W.parts[k].n + '</span>'; }).join('');
+    p.innerHTML = '<h3><button class="tog" type="button" id="' + id + '" aria-expanded="' + (i === 0) + '" aria-controls="' + bid + '"><span class="num">0' + (i + 1) + '</span><span class="nm">' + c.n + '</span><svg viewBox="0 0 64 64" aria-hidden="true">' + c.ico + '</svg></button></h3>'
+      + '<div class="body" id="' + bid + '" role="region" aria-labelledby="' + id + '"><div class="scene"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + LBL[i] + '">' + SC[i] + '</svg></div>'
+      + '<div class="row"><p>' + c.t + '</p><div class="focus">We focus on ' + focus + '</div></div></div>';
+    acc.appendChild(p);
+  });
+  var pans = [].slice.call(acc.children);
+  function open(i){ pans.forEach(function(p, j){ var on = j === i; p.classList.toggle('open', on); p.querySelector('.tog').setAttribute('aria-expanded', on); }); }
+  pans.forEach(function(p, i){ p.querySelector('.tog').addEventListener('click', function(){ open(i); }); });
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(acc); }
+});
+</script>
+</section>
