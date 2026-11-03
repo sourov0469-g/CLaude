@@ -726,6 +726,46 @@
       "Sort it yourself"
      ]
     ]
+   },
+   {
+    "slot": "sa3",
+    "name": "Neighbourhoods",
+    "mod": "p_sa3",
+    "obj": "PSa3",
+    "v": [
+     [
+      "a",
+      "Open a town"
+     ],
+     [
+      "b",
+      "Pick a town"
+     ],
+     [
+      "c",
+      "Side by side"
+     ]
+    ]
+   },
+   {
+    "slot": "sa4",
+    "name": "From the office",
+    "mod": "p_sa4",
+    "obj": "PSa4",
+    "v": [
+     [
+      "a",
+      "Nearest first"
+     ],
+     [
+      "b",
+      "The directions card"
+     ],
+     [
+      "c",
+      "Three distance bands"
+     ]
+    ]
    }
   ],
   "contact": []
