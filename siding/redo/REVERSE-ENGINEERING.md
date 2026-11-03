@@ -4,6 +4,30 @@
 
 All work was done in this session's own thread. There were no sub-agents and no background tasks.
 
+### Completion applied (AUSTIN-REDO-COMPLETION.md, binding from Stage 1)
+
+This revision applies the completion. Where the completion names a point, it wins over the brief.
+
+**The reference set.** Annex v3 is the only allowed library, so:
+- **Bruno Simon** (scoped to the 312-dot map) is studied in §12;
+- **Dropbox Brand**, **Cowboy** and **Ever** are studied in §13–15;
+- **Erie Home** is a wording note only (§16);
+- **Rimowa is dropped.** It appears nowhere, and Quiet Cubes governs the visualiser alone.
+
+**Game-like moments are limited to the job map and the pairs instrument.** The earlier offcut pile (click-to-scatter) and the drag-to-turn corner are removed (§2, §3, §5).
+
+**Two references need a ruling.** Annex v3 lists **Igloo Inc as OUT** for Austin, and **Immersive Garden is not among its 13**, yet the redo brief names both as governing references.
+- Both studies are kept, because the brief requires them.
+- No Austin design in this dossier depends on Igloo.
+- The background field follows the owner's background law, and its mechanism is marked "pending ruling" wherever it borrows from Immersive Garden (§1).
+
+This is the one decision this dossier cannot make.
+
+**What §17 adds:**
+- the homepage plan: 11 sections, each with **two wholly different versions**, each from a named annex reference;
+- the cursor-companion and SVG standards;
+- copy budgets, fonts and single-HTML delivery.
+
 ---
 
 ## 0. How this was studied, and the limits
@@ -67,6 +91,8 @@ The owner's performance law ("no Igloo-weight load times") is measured against t
 ## 1. Immersive Garden: the background system
 
 **Site:** https://immersive-g.com/ (Nuxt).
+
+> **Status under the completion:** named by the redo brief and its background law, but **not among annex v3's 13 allowed references**. It is studied here as the brief requires. Its use as a design reference is **pending Muse's ruling**.
 
 **Evidence:**
 - `evidence/immersive-garden/recon.json`, `probe.json`;
@@ -178,7 +204,13 @@ The system cursor is replaced.
 - **Flowers.** The brief names Austin's shapes instead.
 - **Change only in place.** The owner's law asks for elements "drifting at rest, parting and reacting around the cursor". Immersive Garden's relief rises and sinks in place, recomposes at rest and answers the cursor, but **its pieces neither drift nor part**: nothing translates. The Austin field keeps Immersive Garden's rise-and-sink answer to the cursor and **adds** drift and parting. This dossier says so rather than claiming Immersive Garden does it.
 
-### The Austin version: the cut-stock field
+### The Austin version: the cut-stock field (pending ruling on Immersive Garden)
+
+The owner's background law describes this field directly ("cut siding pieces, lap profiles, batten strips, corner posts, shingle shakes … drifting at rest, parting and reacting around the cursor"). Of the mechanics below:
+- the rise-and-sink relief response and the flowmap are Immersive Garden's;
+- the return law is Lusion's.
+
+If Muse rules Immersive Garden out, the field keeps the law's own wording and Lusion's return law, and drops the flowmap relief response.
 
 **The pieces.** A white plaster-grain ground (light-dominant steel family) carrying **instanced relief pieces**, each a pre-baked normal and AO sprite of a real Austin profile:
 - a lap board end, a Dutch-lap profile and a beaded lap;
@@ -195,7 +227,7 @@ The system cursor is replaced.
 - As in Immersive Garden, **the stroke raises the pieces' relief.** Their normal-map depth scales up along the path, so they stand out of the plaster, then sink back as the trail fades.
 - An Immersive-Garden-style flowmap: a 128² ping-pong target, `mouseEase .4`, `dissipation .953`, `falloff .38`.
 - It is sampled **per instance in the vertex shader**, so pieces are **pushed apart** along the stroke ("parting"), and tip a few degrees so their lit face turns.
-- The Igloo splat memory (§2) holds the parting for about 0.8 s before the pieces ease home.
+- **The return home follows Lusion's law** (§3, an annex reference): each piece is pulled back to its rest position with damping `velocity *= 0.2^dt`. This is a background reaction, not a game: no clicks, no scoring, nothing to win.
 
 **On scroll.** A slower-hide, faster-show mask (1 s show / 2 s hide) lets new clusters rise from the plaster at each chapter.
 
@@ -208,6 +240,8 @@ The system cursor is replaced.
 ## 2. Igloo Inc: interactive 3D depth and play
 
 **Site:** https://www.igloo.inc/
+
+> **Status under the completion:** annex v3 lists Igloo Inc as **OUT** for Austin ("its flow job here is already governed by Lusion"). It is studied here because the redo brief names it. **No Austin design uses it** unless Muse rules otherwise.
 
 **Evidence:** `evidence/igloo/recon.json`, `sheet.jpg` (load and 12 frames). Code: `App3D-*.js` and `index-*.js` in the scratchpad.
 
@@ -279,11 +313,11 @@ Scroll windows inside one scene. Copy and panels boot in and out by window (`.25
 - **A full-page 3D world with no DOM content.**
 - **The dark, crypto-tech register.**
 
-### The Austin version: the corner you can turn
+### The Austin version: none, by annex v3
 
-- **One real 3D object, only in the wall-assembly chapter.** A wall corner where lap courses meet a corner post: Draco GLB under 400 KB, no loader. It is lazy-loaded when the chapter is 1 viewport away, with a poster image until it is ready.
-- **Drag to turn it** about 35° each way. **Hover a layer** (stud, sheathing, wrap, trim, lap board) to raycast it: the layer's edges light, and its name boots on in 0.3 s with Igloo's stutter.
-- **In the background field (§1),** Igloo's splat memory (×0.985, rim-lit, idle reset 0.15 s) is the "parting" memory. The pieces you push stay parted for about 0.8 s and then drift home.
+- **Nothing from Igloo is used.** The drag-to-turn corner proposed in the first revision is withdrawn: Igloo is OUT, and the completion allows game-like play only on the job map and the pairs instrument.
+- The "memory" job in the background field now uses Lusion's return law (§1, §3).
+- If Muse restores Igloo, the candidate transfer is its 0.3 s flicker-boot label (`uShow` × `sin(uShow*30+uRand*12.4)*0.15+0.85`) on wall-layer names. That would be an inspect affordance, not play.
 
 ---
 
@@ -367,20 +401,17 @@ From `wheel-sheet.jpg`:
 - **A showreel pile with no meaning.** Austin's pile must be its own stock.
 - **Glossy plastic colours.**
 
-### The Austin version: the offcut pile and dwell-and-glide chapters
+### The Austin version: the carrying thread (dwell-and-glide) and the field's return law
 
-**The offcut pile** sits under the "What we install" index, in the steel palette. It holds real profiles:
-- lap board offcuts, shakes, a corner post stub, batten strips and a J-channel piece.
+**Dwell-and-glide is the site's flow** (annex: "Lusion — the carrying thread that makes the sections one journey").
+- The wall-assembly chapter (§5) and the pairs section (§6) map native scroll with `cubicInOut` between holds: 1.75 viewports per move, waits of 1 viewport at the start and 0.75 at the end.
+- Between all other sections, the next section's first element is already moving before the previous one releases. This is Lusion's hand-over, so no section starts from a dead stop.
 
-It behaves like Lusion's pile:
-- gravity 40 toward the centre, damping 0.2 per second;
-- the cursor pushes with radius .025 and force .12.
+**The return law** (gravity toward rest, `velocity *= 0.2^dt`) governs how background pieces settle after the cursor parts them (§1). It is ambient reaction only.
 
-A **click scatters the pile and flips its finish**: primed white ↔ the steel finish. The finish change is the meaning of the click; nothing is claimed about products. It is built as instanced boxes and extrusions (no GLB), about 30 bodies.
+**Withdrawn:** the offcut pile with click-to-scatter from the first revision. It was a game, and the completion limits game-like play to the job map and the pairs instrument.
 
-**Dwell-and-glide:** the wall-assembly chapter (§5) and the pairs instrument (§6) map native scroll with `cubicInOut` between holds:
-- 1.75 viewports per layer move;
-- waits of 1 viewport at the start and 0.75 at the end.
+**One-canvas media:** Lusion's DOM-synced WebGL images are **not** adopted. Austin's images stay `<img>` with real `alt`, `width` and `height` (S0049), and the one canvas is the background field.
 
 ---
 
@@ -554,9 +585,9 @@ Each sticky chapter **holds the viewport** while its scrub plays, then releases 
 ### The Austin version: the wall-assembly chapter
 
 - **Sticky 100vh in a 250vh track.** Scrolling explodes one wall section outward into its layers, from back to front: stud frame, sheathing, house wrap, trim, lap siding courses, finish.
-- **Built as rendered frames** (a sequence, per §4) or the §2 object. The image stage (Stage 3) decides which.
+- **Built as rendered frames** (a sequence, per §4: 48 WebP frames, about 1.2 MB, binary-split loading) or as layered SVG drawings. Stage 3's images decide which. The drag-to-turn object is **withdrawn** (Igloo is OUT, and game-like play is limited by the completion).
 - **Keyframes** are `easeInOutQuad` across ranges, with Lusion's dwell-and-glide between layers (§3).
-- **Pills name each layer.** Clicking one seeks the scrub to that layer, and the object's hover labels match.
+- **Pills name each layer.** Clicking one seeks the scrub to that layer. This is inspection, not play.
 - **Layer names and any claim about them** come only from the firm's own published pages. Nothing is invented about methods or materials. Where the firm publishes no wording, the chapter names the layer and says nothing more (Muse ruling: the firm's published wording first).
 
 ---
@@ -646,16 +677,27 @@ The seam is the strongest model in this set for Austin's **177 before-and-after 
 - **Two different photographs per project.** Austin's two halves must be the **same house, before and after**, aligned.
 - **Wheel factor 0.3 for 177 items.** That is far too slow to travel. It needs an index (§7).
 
-### The Austin version: the pairs instrument
+### The Austin version: the pairs instrument (the centrepiece rests entirely on this seam)
+
+Per the completion and annex v3, **Ever is never used for the pairs** (§15). This instrument is MERSI's seam alone.
 
 **The seam wipe.** One pair fills the instrument: the "before" photo and the "after" photo of the same elevation, aligned.
 - The seam is **vertical and draggable** (pointer, touch or arrow keys). Dragging is the play: you wipe the house from old to new.
-- **Wheel over the instrument** runs MERSI's capture: factor 0.3, clamp-release at both ends, and a snap 150 ms after the last input (≥ 0.5 → finish, else return, 0.6 s `power2.out`).
+- **Release uses a spring,** not a fixed tween: `stiffness 500, damping 30` (S0089, "gesture-driven motion must use springs"), with MERSI's threshold (≥ 0.5 → finish, else return).
+- **Wheel over the instrument** runs MERSI's capture: factor 0.3, clamp-release at both ends, and its snap 150 ms after the last input (0.6 s `power2.out`, MERSI's own value).
 - The after-image **rises from the bottom on the left half and descends from the top on the right half**, so the halves cross at the seam.
 
-**The plate.** A steel label plate wipes in sync and carries only recorded data: place, month where recorded, trade, the firm's published price band.
+**The plate.** A steel label plate wipes in sync and carries only recorded data:
+- place from the firm's own project record;
+- month only where recorded;
+- trade;
+- the firm's published price band.
 
-**Travelling the 177.** A thumbnail rail, the §7 index behaviour, jumps between pairs with MERSI's 1 s `power3.inOut` split-clip.
+Where a record and a project URL disagree, the record wins and the item is flagged. For example, `windows3`: the record says "Maple Run", the URL slug says "alexandria". The plate shows "Maple Run", flagged.
+
+**Travelling the 177.** A thumbnail rail (§7 index behaviour) jumps between pairs with MERSI's 1 s `power3.inOut` split-clip.
+
+**Keyboard and touch.** Arrow keys move the seam in 5% steps, and Home/End jump to before/after. On touch, a horizontal drag moves the seam and vertical scrolling stays the page's.
 
 ---
 
@@ -758,7 +800,7 @@ The **archive as a horizontal index:**
 **The archive.** "312 on the map with photos + 574 more counted" (exact wording) heads a **horizontal archive by trade**: siding, windows, painting, roofing… from the finder dataset's tallies (Siding 429, Windows 386, …).
 - The track pans with `scrub:1`.
 - Each job photo has the 4 rem in-frame drift, and its caption carries place and, only where recorded, month.
-- Captions unclip under a **steel block**: 0.6 / 0.6 / 0.15.
+- Captions unclip under a **steel block**: 0.6 s line unclip, 0.6 s block wipe, with the stagger cut from Lando's 0.15 s to **0.06 s** (S0063: 30–80 ms).
 
 **The pairs index.** The 177 pairs (§6) appear as a **converging 4-column grid** (5 rem per column, scrubbed). The selected pair is outlined in steel, and clicking one opens it in the seam instrument.
 
@@ -835,11 +877,7 @@ Flat colour bands (cream, lime, yellow) and full-bleed video. Marquees and badge
 
 ### Transfers: this is the bar
 
-- **A fixed motion vocabulary,** written down once and used by every element. Graza's table becomes Austin's table:
-  - ambient 20 s linear;
-  - small loops 2–3 s;
-  - state 250 ms `ease-in-out`;
-  - movement 400 ms `ease-in-out`.
+- **A fixed motion vocabulary,** written down once and used by every element: ambient 20 s linear and small loops of 2–3 s carry over directly. Graza's 250 ms / 400 ms UI tempos are capped by S0063 in the Austin table below.
 - **Characterful small motion** that belongs to the brand's own drawn objects.
 - **A display type at a scale the page can crop.**
 
@@ -849,17 +887,29 @@ Flat colour bands (cream, lime, yellow) and full-bleed video. Marquees and badge
 - **The playful food register and lime/yellow palette.**
 - **Continuous loops with no pause control.** WCAG 2.2.2 requires a pause for motion running over 5 s, and Austin provides one.
 
-### The Austin version: the motion table
+### The Austin version: the motion table, checked against S0063 / S0089
+
+Graza's tempos are the bar for *consistency*. S0063 (review-animations) sets the ceilings, and wins where Graza's numbers exceed them for UI:
+- **UI stays under 300 ms**, so Graza's 400 ms movement becomes 280 ms;
+- **hover and colour use `ease`**;
+- **entering uses a strong ease-out;**
+- **on-screen movement uses a strong ease-in-out;**
+- **never `ease-in` on UI.**
 
 | Kind | Tempo | Austin uses |
 |---|---|---|
-| Ambient | 20 s linear | Trade marquee; field drift period |
-| Small loop | 2–3 s | Course-tick on the cursor ring; a caulk-bead "drip" on the CTA underline |
-| State | 250 ms `ease-in-out` | Colours, outlines, plate text swaps |
-| Movement | 400 ms `ease-in-out` | Cards, pills, menus |
-| Chapter | Scrubbed: `easeInOutQuad` (Apple), `cubicInOut` (Lusion), snap 0.6 s `power2.out` (MERSI) | Wall assembly, pairs |
+| Ambient | 20 s linear (Graza) | Trade marquee; field drift period |
+| Small loop | 2–3 s (Graza) | Cursor companion blink and idle (§17); a caulk-bead "drip" on the CTA underline |
+| Hover / colour | 200 ms `ease` | Colours, outlines |
+| Press | 110 ms in / 220 ms out (asymmetric, S0063) | Buttons, the companion's press |
+| Enter | 260 ms `cubic-bezier(0.23,1,0.32,1)` | Plates, labels, menus |
+| Move | 280 ms `cubic-bezier(0.77,0,0.175,1)` | Cards, pills, the seam on keyboard steps |
+| Gesture release | spring `500 / 30` (S0089) | Seam drag, map drag |
+| Chapter | Scrubbed: `easeInOutQuad` (Apple), `cubicInOut` (Lusion); MERSI snap 0.6 s `power2.out` | Wall assembly, pairs |
 
-A visible **Pause motion** control stops the field drift, loops and marquees. Reduced motion renders final states.
+- **Stagger:** 30–80 ms per item (S0063). Lando's 0.15 s line stagger becomes 0.06 s.
+- A visible **Pause motion** control stops the field drift, loops and marquees.
+- Reduced motion renders final states.
 
 ---
 
@@ -991,7 +1041,7 @@ Gradient stages tinted by the chosen pod's theme. Static at rest; nothing reacts
 - **A fixed price total.** The firm publishes *bands per project*, not a calculator. Showing a computed price would invent a number.
 - **Four colour themes.** Austin keeps one steel family.
 
-### The Austin version: the visualiser
+### The Austin version: the visualiser (Quiet Cubes alone; Rimowa dropped)
 
 **The first choice.** Under the hero, an optional row asks "What are you replacing?" (Siding · Windows · Painting · Roofing…). Choosing one re-orders and re-captions the page behind a 200 ms veil:
 - the archive opens at that trade;
@@ -1116,41 +1166,537 @@ The steel family itself is presented the same way in the Stage 2 identity board.
 
 ---
 
-## 11. Synthesis: one Austin system from ten mechanisms
+## 11. Performance budget
 
-| Reference | Mechanism studied | Where it lives in Austin |
-|---|---|---|
-| Immersive Garden | Baked-relief plaster plane whose mask is driven by time, scroll and the cursor's flowmap (ease .4, dissipation .953, falloff .38), so the cursor raises relief along its path; show 1 s / hide 2 s; 3-layer cursor (dot instant, ring 0.102 per frame) | **The cut-stock field** behind the whole page, plus the cursor |
-| Igloo Inc | Splat memory ×0.985 with rim; raycast hover; 0.3 s flicker-boot labels; scroll windows | Parting memory in the field; **the corner you can turn** in the wall chapter |
-| Lusion | Centripetal physics pile (gravity 40, damping 0.2/s, push .12 in radius .025, click burst ×80); DOM-synced media; dwell-and-glide `cubicInOut` scroll remap | **The offcut pile**; dwell-and-glide in the chapters |
-| Scout Motors | Binary-split image sequence on canvas; `SequenceKey` windows; scrubbed `power4.out` words; `sine.inOut` arc | **The house as the product**: elevation build sequence; history arc |
-| Apple AirPods Pro | Sticky 1 vh in a 2.5 vh track; relative keyframes with `easeInOutQuad`; VideoScrub `currentTime = duration × progress`; exploded internals | **The wall-assembly chapter** |
-| MERSI | Wheel capture ×0.3 with clamp release; opposite-direction clip insets meeting at a seam; synced plate; 150 ms debounce, snap ≥ .5, 0.6 s `power2.out` | **The pairs instrument** (the 177 pairs) |
-| Lando Norris | Horizontal pin, `scrub:1`; 4 rem in-frame drift; 0.6 / 0.6 / 0.15 block-wipe captions; converging column grid | **The job archive index** and the pairs grid; the map's list view |
-| Graza | One tempo per kind: 20 s / 2–3 s / 250 ms / 400 ms `ease-in-out` | **The motion table**, plus a Pause control |
-| Quiet Cubes | Choice that repaints the page (200 / 100 / 200 ms); one fixed object changing state; one-step configurator; progress bus | **The trade choice** and **the visualiser** |
-| Cash App | Colour as full fields; zero-lag copy pill; ~1 s copied state | **Finishes as fields** and the copy pill |
-
-### The performance budget
-
-Set against the measured reference weights in §0:
+Set against the measured reference weights in §0. Bruno Simon declares 15 MB, including 6.5 MB of music and 1.7 MB of physics WASM.
 
 | Item | Budget |
 |---|---|
 | First load (hero photo + field) | **≤ 1.2 MB** |
 | Field textures | ≤ 250 KB |
 | Field geometry | One canvas, one draw call |
-| Wall object | ≤ 400 KB, loaded 1 viewport before the chapter |
+| Job map (§12) | ≤ 300 KB (drawing + 312-point JSON); no physics engine, no audio; loaded 1 viewport before the section |
 | Sequences | ≤ 1.2 MB each, binary-split, poster first |
-| Loader screen | None |
+| Loader screen | None (Bruno's ring is adapted only inside the map, from cached data) |
 | DPR cap | 1.5 |
 | Offscreen | Canvases pause |
 | Reduced motion | Static posters and final states |
 
-### Kept native everywhere
+---
 
-- Scroll stays native; only the pairs instrument captures the wheel, and it releases at both ends.
-- Anchors, find-in-page and keyboard paging all work.
+## 12. Bruno Simon: the 312-dot job map (scoped)
+
+**Site:** https://bruno-simon.com/ (2025 world: Three.js with WebGPU node materials, Rapier physics in WASM, Basis/KTX2 textures).
+
+**Annex v3 scope:** "the 312-dot map as the ONE explorable section, nothing more". The completion: "Nothing else game-like beyond it and the pairs instrument".
+
+**Evidence:**
+- `evidence/bruno/recon.json` (scripts, large assets, DOM buttons);
+- `cast/` (screencast of load, idle, click, keyboard drive and drag; every second frame kept);
+- `sheet.jpg`.
+
+Code: `index-*.js` (4.9 MB; class names intact) and `rapier-*.js` in the scratchpad.
+
+**Limits:**
+- Screenshots time out on this page. The screencast was used instead.
+- Under software rendering, the world finished revealing only at the end of the run. The driving frames show the intro, not the drive, so driving is described from code.
+
+### Mechanism, at code level
+
+**The world.** It is terrain plus one areas GLB (`areas-compressed.glb`, 639 KB).
+- `Areas` builds an `Area` subclass for every model child whose name starts with an area key: achievements, altar, behindTheScene, bowling, career, circuit, cookie, lab, landing, projects, social, toilet, timeMachine.
+
+**Each `Area` does three things:**
+1. Adds its props as physics objects that **start asleep** (`sleeping: true`, mass from the model's `userData`), so they cost nothing until touched.
+2. Reads a `zoneBounding` cylinder and registers it with `Zones`. Every tick, `Zones.update` compares the player's XZ distance with each zone's radius and fires **`enter` / `leave`** once per crossing.
+3. Reads a `zoneFrustum` circle. Its objects are **hidden unless that circle intersects the camera's ground quad** (`view.optimalArea.quad2`), so only areas in view render.
+
+**The vehicle** is a Rapier raycast vehicle (`createVehicleController`):
+- `steeringAmplitude 0.5`, `engineForceAmplitude 300`, `boostMultiplier 2`;
+- `topSpeed 5`, `topSpeedBoost 40`;
+- `brakeAmplitude 35`, `idleBrake 0.06`, `reverseBrake 0.4`;
+- suspension heights low 0.88 / mid 1.23 / high, with matching stiffness presets.
+
+**The camera (`View`):**
+- A **fixed spherical angle**: φ = 0.27π (0.31π on low quality), θ = 0.25π.
+- Radius `lerp(15, 30, 1 − zoom)`.
+- The focus point follows the player, smoothed by `lerp(smoothed, target, delta × 10)`: about 16% of the gap per frame at 60 Hz.
+- Zoom pulls out with speed (`speedAmplitude −0.4` across speeds 5–40), smoothed the same way.
+- A **magnet** draws the focus toward nearby interactive points (`multiplier 0.25`).
+
+**The pointer (`RayCursor`):**
+- Interactables are **analytic shapes** (spheres, boxes) with `onEnter` / `onLeave` / `onClick`.
+- Only those near the focus point are tested, and only when the pointer changes.
+- The canvas cursor becomes `pointer` while over one.
+- **A press counts as a click only if the pointer moved under 25 px**, so dragging to look never clicks.
+
+**The intro and reveal (`Reveal`):**
+1. A ring draws itself on a dark grid floor as loading progresses, closes, then shrinks to a point.
+2. A uniform `distance` goes 0 → **3.5** (`back.out(1.7)`, 2 s), opening a **lit-rim disc of the world at the spawn point**. Camera zoom goes 0.6 → 0.3 (`power1.inOut`, 1.25 s).
+3. Hovering the disc raises its rim intensity ×1.22 over 0.2 s.
+4. A click or key press takes the disc 3.5 → **30** (`back.in(1.3)`, 2 s), then the whole world. Inputs switch to "wandering" and the camera starts tracking.
+
+**DOM controls:** "Interact", "Unstuck", "Teleports you to the closest respawn", "Resets every object", plus sound and effects toggles.
+
+### Frame by frame
+
+From `sheet.jpg`:
+
+| Frames | What they show |
+|---|---|
+| 1 | White, before the canvas mounts. |
+| 2–3 | Dark violet gradient. |
+| 4–6 | A perspective grid floor with small × markers. |
+| 7–12 | A white-hot arc grows from a point into a ring: the loading progress. |
+| 13–15 | The full ring glows. |
+| 16–17 | It shrinks to a small ellipse, then vanishes. |
+| 18–24 | The empty grid holds while the world finishes loading. |
+| 25–28 | **A disc opens at the spawn point** with a glowing blue-white rim. Inside it, in warm daylight colours: a cherry tree, a lamp, a bench, the red off-road car and the giant letters "BRUNO S…". The disc widens until the scene fills the frame (a bridge, water, autumn leaves). |
+
+### Interaction, timing, easing
+
+| Element | Behaviour |
+|---|---|
+| Reveal | 2 s `back.out(1.7)`, then 2 s `back.in(1.3)` |
+| Zoom | 1.25 s `power1.inOut` |
+| Hover rim | 0.2 s |
+| Camera follow | `delta × 10` per tick |
+| Click threshold | 25 px |
+
+### Cursor
+
+- The system cursor, switching to `pointer` over interactables.
+- Movement is by keyboard or gamepad (`Gamepad.cross` is in the action map). The pointer looks, aims and clicks.
+
+### Background at rest and on hover
+
+The world idles at rest: wind lines, leaves, water, day and year cycles. Hover lifts the rim or highlight of the interactable under the ray.
+
+### Section handover
+
+- One world, no pages.
+- **Areas are entered by arriving in them** (zone `enter`), and content wakes when its frustum circle comes into view.
+
+### Transfers, to the map only
+
+- Zones that fire enter/leave.
+- Frustum-style culling of what is out of view.
+- Analytic hit shapes with a 25 px click-versus-drag threshold.
+- A follow camera that eases at `delta × 10` and pulls out with speed.
+- A magnet toward points of interest.
+- A reveal that opens **from a meaningful origin**.
+- An "Unstuck / back to start" reset.
+
+### Does not transfer
+
+- 15 MB, the WASM physics, the music, the driving model.
+- The dark violet toy world and the toy areas (bowling, toilet, cookie).
+- Anything game-like outside the map section.
+
+Per the V2 prompt's guard, the map **never displaces the conversion floor**, and it has a mobile and reduced-motion fallback.
+
+### The Austin version: the job map (two wholly different versions in §17)
+
+**Data.** The verified finder frame (FACTS.md):
+- viewBox 566 × 640, 8.3 px per mile;
+- office square at (389.5, 290.7);
+- lat lines 30.0–30.8° N, lon lines 98.2–97.6° W;
+- **312 in-frame jobs with photos**, each "placed near the home, never on it".
+
+The caption is exactly: **"312 on the map with photos + 574 more counted"**.
+
+**The reveal.** It opens **from the office**, 7801 N Lamar Blvd Suite C70:
+1. a steel ring draws round the office square as the map data arrives;
+2. the map opens as a disc from there (`back.out(1.7)`, 2 s);
+3. under reduced motion it simply appears.
+
+**Dots.** The 312 dots are analytic circles, hit-tested only inside the visible area.
+- Hover opens a plate with record data only: place, trade, month where recorded.
+- A press with under 25 px of movement opens the job. A drag never does.
+
+**City zones** come from the dataset's tallies (Austin 539, Round Rock 110, Cedar Park 35, Pflugerville 28, Leander 27, Georgetown 21…).
+- Entering one slides in its panel.
+- Every count is labelled with what it measures: all documented jobs, or photographed in-frame (FACTS.md: Round Rock 37 in-frame against 110 documented).
+
+**Never traps the page.**
+- The wheel scrolls the page unless the map has been activated by a click.
+- The phone (512) 550-0000 and the estimate action stay beside the map.
+- "Back to the office" resets the view (Bruno's respawn).
+
+**Fallback.** On touch-only devices, at 390, and under reduced motion, it becomes a static map with tappable dots plus the archive list (§7).
+
+---
+
+## 13. Dropbox Brand: the subtraction-discipline closing
+
+**Site:** https://brand.dropbox.com/ (Webflow with interactions, 2.4 MB, no canvas).
+
+**Annex v3:** "subtraction-discipline closing", CSSDA Website of the Year 2025.
+
+**Completion:** "Dropbox for brand-system discipline".
+
+**Evidence:**
+- `evidence/dropbox/recon.json`, `probe.json`;
+- `annex.json` (tile rectangles at 13 scroll steps, tile hover sequence);
+- `sheet.jpg`;
+- `frames/mosaic.jpg`, `frames/tile-hover.jpg`.
+
+### Mechanism, measured
+
+**The opening.** A white page ruled by hairline grid lines. A blue statement at upper left: "At Dropbox, our Brand Guidelines help us infuse everything we make with identity." A second statement sits in a 500 × 500 blue square.
+
+**The mosaic is one big grid that zooms out with scroll.** It holds 11 colour tiles:
+- Framework `rgb(40,55,80)`, Voice & Tone `rgb(250,210,75)`, Logo `rgb(61,211,238)`, Typography `rgb(250,85,30)`;
+- Iconography `rgb(180,220,25)`, Color `rgb(255,140,25)`, Imagery `rgb(137,32,85)`, Motion `rgb(200,175,240)`;
+- plus three small accent squares.
+
+How the Framework tile moves:
+
+| scrollY | Left edge (px) | Width (px) |
+|---|---|---|
+| 0 | −2958 | 536 |
+| 450 | −2614 | 514 |
+| 900 | −2080 | 478 |
+| 1350 | −1216 | 409 |
+| 1500 | −786 | 368 |
+
+- The convergence **accelerates**: an ease-in mapping of scroll to zoom.
+- Between 1650 and 1800 the grid **settles into a fitted index**: tiles 268 px wide with 10 px gutters, the whole system on one screen.
+- The blue statement square stays centred through the zoom and leaves at the end.
+
+**Each tile is a link to its chapter** (`/typography`, …). On hover:
+- its border-radius, padding, colour and background transition over **0.35 s** (`ease` and `cubic-bezier(0.4,0,0.2,1)`);
+- **its own emblem animates**: colour over 1.5 s and transform over 1.6 s. Quote marks for Voice & Tone, "Aa" for Typography, a bezier curve for Motion, a node graph for Framework.
+
+Plain links change colour in 0.15 s `ease`.
+
+### Frame by frame
+
+From `sheet.jpg`:
+
+| Frames | What they show |
+|---|---|
+| 00–01 | The white grid, the blue statement, a scroll chevron. |
+| 02 | Coloured blocks slide in from the edges as the grid zooms out. Orange, blue and cyan corners appear. |
+| 03 | Larger blocks: yellow, blue, and a magenta "Imagery". |
+| 04–11 | The fitted mosaic: eight named tiles and three accents, each with its emblem. |
+
+### Cursor, background, handover
+
+| Aspect | Behaviour |
+|---|---|
+| Cursor | System cursor |
+| Background | White with hairlines; static at rest |
+| Hover | Only the tiles react, **each differently** |
+| Handover | The page's whole content resolves into one index: **the close is the navigation** |
+
+### Transfers
+
+- **End by subtraction:** reduce everything the page said to a few named doors.
+- **The zoom-out that reveals the whole system at once.**
+- **One emblem animation per tile.** This directly serves the completion's rule that every interactive element gets its own reaction.
+- **The hairline grid as visible structure.**
+
+### Does not transfer
+
+- The multicolour palette (Austin is the steel family).
+- The brand's own fonts (Austin uses normal fonts).
+- The guidelines function.
+
+### The Austin version: the closing index (homepage closing, V1 in §17)
+
+**Content.** At most nine steel-toned tiles: Siding, Windows, Painting, Roofing, The pairs, The map, About, Financing, Contact.
+
+**Movement.** The grid zooms out with an accelerating curve from **the phone tile**, (512) 550-0000, to the fitted index.
+- The phone and estimate tiles stay the largest: the conversion floor.
+- Each tile's SVG emblem has **its own reaction**: lap courses slide, a sash lifts, a brush stroke draws, shingles lap down, a dot pulses on a map line…
+- At 390 it becomes a two-column list with the same emblems.
+
+---
+
+## 14. Cowboy: family-fronted warmth
+
+**Site:** https://cowboy.com/ (Shopify, 54 MB, 11 videos, SuisseIntl).
+
+**Annex v3:** "family-fronted warmth, one named system, restrained colour: homeowner trust without contractor clichés (confirmed live; the hero is a single rider, family framing sits in the body)".
+
+**Evidence:**
+- `evidence/cowboy/recon.json`, `probe.json`;
+- `annex.json` (sticky tracks, hotspots, toggles, the stepped reveal at 8 scroll steps);
+- `sheet.jpg`;
+- `frames/stairs.jpg`.
+
+### Mechanism, measured
+
+**Hero.** A full-bleed film of **one rider** in a real street; the frames catch two different riders as the film plays.
+- "Riding reinvented" (2 lines), "Meet the e-bike that thinks for itself.", and one pill CTA, "Discover Cruiser".
+- **Three proof items along the bottom edge:** "Award-winning design / Assembled in France", "Natural ride feel / AdaptivePower technology", "On guard 24/7 / Pioneering theft detection".
+
+**Product modules.**
+- "The easy-rider" / "The explorer", with **spec pills** (Step-over frame, Removable battery, 40–90 km range, GPS tracking, AdaptivePower).
+- A **model toggle** (Cruiser / Cruiser ST; Cross / Cross ST).
+- **"Explore" hotspots** on the bike photo: colour and background over 0.3 s `cubic-bezier(0.4,0,0.2,1)`.
+
+**One named system.** "AdaptivePower" is the single technical name, repeated in the hero proof, the pills and the menu.
+
+**The stepped reveal** ("Power so natural, you're always in flow.") runs in a 2,485 px track with a 900 px sticky stage.
+- Four image bands, each centred by `translateX(-50%)`, **widen** over the first ~600 px of scroll:
+  - 549 → 648 px;
+  - 837 → 936 px;
+  - 1125 → 1224 px;
+  - 1374 → 1440 px.
+- They sit at vertical offsets of **−320 / −240 / −120 / 0**, forming a stepped ziggurat window onto one photograph, which then holds.
+
+**Other sticky chapters:** "Packed full of tech" (1,800 px track) and "Design in Belgium. Assembled in France. Every bike is craft…" (4,500 px track).
+
+**Family framing in the body:** "Cowboy Cruiser ST — The family favourite".
+
+**An email-capture modal opens on scroll** (frames 09–11).
+
+### Frame by frame
+
+From `sheet.jpg`:
+
+| Frames | What they show |
+|---|---|
+| 00–01 | Two hero film frames: a rider at a stone archway, then a rider in red. |
+| 02–03 | The product on white with pills and the toggle; a dealer strip. |
+| 04 | "Shockingly smooth", a second rider film. |
+| 05–06 | "The explorer" module, then a press row with one-line quotes (TechCrunch, red dot, The Verge, TIME, GQ). |
+| 07 | **The stepped window** under "Power so natural…". |
+| 08 | A close film crop. |
+| 09–11 | The email modal over a dimmed page. |
+
+### Cursor, background, handover
+
+| Aspect | Behaviour |
+|---|---|
+| Cursor | System cursor |
+| Background | Neutral greys and white; colour comes from the photographs |
+| Handover | Sticky stages; the stepped window widens into its next stage |
+
+### Transfers
+
+- **People in real places using the thing,** with the family framing in the body. For Austin that means homeowners at their own houses and the crew at work, from **real photographs only**: no generated people, and photos for every avatar (S1320).
+- **One named system,** used consistently. The firm's own process name if it publishes one; **none is invented.**
+- **A three-item proof line** under the hero, from locked facts.
+- **The stepped window,** which in siding reads as **lap courses**: four bands, each one course, opening onto a finished wall.
+
+### Does not transfer
+
+- The scroll-triggered email modal: it interrupts, and forms are never claimed sent.
+- The e-bike register and 54 MB of film.
+
+### The Austin version (About / Since 2009, V1 in §17)
+
+- **The window.** A finished-house photograph seen through **four lap-course bands** that widen with scroll: offsets −320 / −240 / −120 / 0, widths stepping to full.
+- **Beneath it:** real crew and homeowner photographs (with permission), "Since 2009, merged 2018", and the three-item proof line:
+  - 4.9 from 474 reviews;
+  - GAF Master Elite;
+  - James Hardie Elite Preferred + President's Club 2025.
+- **Restraint:** one accent, and photographs carry the colour.
+
+---
+
+## 15. Ever: verified craft only (never the pairs)
+
+**Site:** https://ever-live-here.com/ (14.8 MB, ITC Avant Garde Gothic).
+
+**Annex v3:** Ever "contributes only its verified craft: the case page's 3D visualisations, apartment selection/filtering presentation and magazine narrative". It has **no before/after slider anywhere**, so it is **never used for the pair centrepiece**.
+
+**Evidence:**
+- `evidence/ever/recon.json`, `probe.json`;
+- `annex.json` (scroll controller test, chapters, filter nav);
+- `sheet.jpg`.
+
+### Mechanism, measured
+
+**The scroll is paged, not continuous.**
+- `scrollY` stays 0, and the root has `has-custom-controller`.
+- After a 400 px wheel event, no tall wrapper moved over 60 frames (`movers: []`).
+- In the recon run, 10 wheel steps produced **12 distinct screens**: each gesture advances one composed screen.
+
+**The magazine narrative:**
+- a giant "ever" wordmark with photographs **inside the letterforms** and an oval-masked photo;
+- "LIVE HERE";
+- then chapter words (**ARCHITECTURE, INTERIOR, TERRITORY, NATURE, PLACE**) set across full-bleed renders;
+- each chapter followed by a split panel: an **oval-masked photo**, a short caps heading ("SIMPLE SHAPES, EXPRESSIVE FINISHES", "AESTHETICS COMPLEMENT COMFORT") and a "+" detail button.
+
+**The 3D visualisations:** **material spheres**, a brick-textured sphere and a knit-textured sphere, float beside the façade chapter as finish samples.
+
+**Selection and filtering:**
+- the territory nav (Nature / Play / Chill / Sport; `territory-nav__item`) shows one item active (`is-active`) and the others reduced (`is-invisible--l`);
+- choosing one swaps the panel;
+- an "Apartments" pill leads to the selector.
+
+**Hover:** colour and transform over 0.4 s `cubic-bezier(0.25,0.74,0.22,0.99)`. The call-back CTA pulses (`button-pulse`, 3 s).
+
+### Frame by frame
+
+From `sheet.jpg`:
+
+| Frames | What they show |
+|---|---|
+| 00–01 | The wordmark over a courtyard photo with a hand-and-leaf oval, then over grass with a bicycle. |
+| 02–04 | ARCHITECTURE across a brick façade; an oval façade crop with brick and knit spheres. |
+| 05 | A founder quote in an oval portrait. |
+| 06–07 | INTERIOR over a lobby render; overlapping interior crops; the architects' name in a dark panel. |
+| 08–09 | TERRITORY over a garden; an aerial render of the courtyard. |
+| 10 | NATURE with the four filter icons. |
+| 11 | PLACE set vertically over a father and child. |
+
+### Cursor, background, handover
+
+| Aspect | Behaviour |
+|---|---|
+| Cursor | System cursor |
+| Background | Deep chapter colours (slate, oxblood, terracotta, forest) |
+| Handover | **One gesture, one screen**, each opening on a chapter word |
+
+### Transfers
+
+- **Finish samples as objects:** material spheres.
+- **One-active filter presentation.**
+- **Magazine chapter words** over full-bleed images.
+
+### Does not transfer
+
+- **The pairs, in any form.**
+- **The paged hijack.** Austin keeps native scroll; chapters use CSS scroll-snap at most.
+- The real-estate register.
+
+### The Austin version
+
+| Use | Version |
+|---|---|
+| Siding finishes as **sample objects**: a lap, a shake and a board-and-batten swatch rendered as small turned samples | Colours V2 (§17) |
+| A **one-active trade filter** with drawn icons | Trade choice V2 (§17) |
+| A **magazine narrative** of the archive by trade (SIDING, WINDOWS, PAINTING… across real job photos) | Archive V2 (§17) |
+
+---
+
+## 16. Erie Home: a wording note only
+
+**Annex v3:** "proof wording + FAQ grammar only … must never influence layout, colour, type, or motion".
+
+**Evidence:** `evidence/erie/recon.json`, `annex.json`, `sheet.jpg`, and the FAQ page read in this session.
+
+**Proof grammar.** Number + scope + count + source, e.g. "4.8 Nationwide Rating out of 40,000+ Reviews". The licence number appears with the proof ("CA #1157757").
+- Austin's line uses only the locked figures: **"4.9 from 474 reviews"**.
+- No "Nation's most trusted"-style superlative is borrowed: it cannot be verified for Austin.
+
+**FAQ grammar** (eriehome.com/why-erie/faqs/):
+1. Questions are asked in the homeowner's words, decision questions first: "When is it necessary to replace a roof?", "How much does a typical roof replacement cost?", "How long does … last?", "Does homeowner's insurance cover…?", "How do I find a reputable … company?".
+2. Then the firm's own questions: process, installation, protection.
+3. Then the "manufacturer's versus contractor's warranty" difference.
+4. Each answer opens with **one direct sentence**, then a short list.
+
+Austin's FAQ answers come only from the firm's published text.
+
+---
+
+## 17. Synthesis: one Austin system, under the brief and the completion
+
+### Reference status
+
+| Reference | Annex v3 | Role in Austin |
+|---|---|---|
+| Immersive Garden | **Not listed** (the brief names it) | Background field mechanics, **pending ruling** (§1) |
+| Igloo Inc | **OUT** | Studied only; nothing used (§2) |
+| Lusion | Allowed: flow | The carrying thread (dwell-and-glide); the field's return law; closing V2 |
+| Scout Motors | Allowed: heritage, film-roll proof | Hero V2; proof V2; About V2 |
+| Apple AirPods Pro | Allowed: pinned scroll, numeral events | Proof V1; wall-assembly V1 |
+| MERSI | Allowed: hero split-slider; the seam | Hero V1; **pairs centrepiece V1 and V2** |
+| Lando Norris | Allowed: archive gallery | Archive V1 |
+| Graza | Allowed: animation quality bar | The motion table (§8), applied everywhere |
+| Quiet Cubes | Allowed: visualiser / staffed service | Trade choice V1; wall-assembly V2; **visualiser V1 and V2** |
+| Cash App | Allowed: colour options as full-bleed steel fields | Colours V1 |
+| Bruno Simon | Allowed, scoped to the 312-dot map | **Job map V1 and V2**, the only explorable section |
+| Dropbox Brand | Allowed: subtraction closing | Closing V1 |
+| Cowboy | Allowed: family-fronted warmth | About V1 |
+| Ever | Allowed: verified craft only | Trade choice V2; colours V2; archive V2. **Never the pairs** |
+| Erie Home | Note only | FAQ and proof wording (§16) |
+| Rimowa | **Dropped** | Nowhere |
+
+### The homepage: 11 sections, two wholly different versions each
+
+Each version starts from a named reference's studied mechanism. V1 and V2 differ in layout, style and composition, not as variations of one idea. Game-like play exists **only** in sections 4 and 8.
+
+| # | Section | V1 (reference → mechanism) | V2 (reference → mechanism) |
+|---|---|---|---|
+| 1 | Hero (≤ 40 words) | **MERSI** infinite split-slider: two half-photographs of real jobs meeting at a seam, a centred label plate cycling the process in sync (wheel-captured, clamp-release) | **Scout**: one full-bleed photograph of a finished Austin house; headline words rise with `power4.out` scrubbed; the three-item proof line |
+| 2 | "What are you replacing?" | **Quiet Cubes**: choice row of photo pills; a choice repaints the page behind a 200 ms veil, never a gate | **Ever**: a one-active trade filter with drawn icons; the panel beside it swaps to that trade's real jobs |
+| 3 | Proof numerals (4.9/474 · 312 + 574 · since 2009) | **Apple**: pinned numeral events, sticky 1 vh in a 2.5 vh track, each numeral its own scrubbed event (`easeInOutQuad`) | **Scout**: film-roll evidence, the since-2009 story as a sequenced strip of real job frames along an arc (`sine.inOut`) |
+| 4 | **The pairs (177)**, game-like | **MERSI seam, instrument form**: one full-bleed pair, draggable vertical seam (spring 500/30), wheel capture ×0.3, synced plate | **MERSI seam, split-slider form**: two columns moving in opposite directions per pair, wheel-driven project-to-project, the plate as index, plus a converging thumbnail grid |
+| 5 | Wall assembly | **Apple**: pinned exploded scrub of one wall, layer pills seek the scrub | **Quiet Cubes**: one wall held fixed on a light stage while its state changes per feature, icon and short text at right |
+| 6 | Siding colours | **Cash App**: full-bleed steel colour fields, spec in small mono, zero-lag "Copy colour" pill (10 px offset, 1 s copied state) | **Ever**: finishes as turned sample objects on split panels with oval-masked job photos |
+| 7 | Visualiser | **Quiet Cubes configurator**: trade rail left, one elevation centre, one step at a time right, PREV / NEXT, published price band (never a computed total) | **Quiet Cubes tech chapter**: the elevation fixed centre-stage while scrolling through profile → colour → trim → windows, each a state change of the same house |
+| 8 | **Job map (312)**, game-like | **Bruno**: drive a small steel van token from the office with keys or drag; follow camera (`delta × 10`, speed zoom-out −0.4); city zones fire panels; magnet 0.25 to clusters | **Bruno, pointer-only**: a flat top-down map; ray-style hover on dots (25 px click threshold); zones focus on hover; disc reveal from the office; no vehicle |
+| 9 | Archive (312 + 574) | **Lando**: horizontal archive by trade, `scrub:1`, 4 rem in-frame drift, steel-block caption reveals | **Ever**: magazine narrative by trade; chapter words over full-bleed job photos; CSS scroll-snap (native scroll kept) |
+| 10 | About / Since 2009 | **Cowboy**: four lap-course bands widening onto a finished wall; real crew and homeowner photos; one named system only if published | **Scout**: heritage arc; real job photographs travel an arc on `--progress`; older years graded toward grey |
+| 11 | Closing | **Dropbox**: zoom-out mosaic from the phone tile to a ≤ 9-tile steel index, one emblem reaction per tile | **Lusion**: the carrying thread lands; the background pieces settle into a finished wall behind the CTA (dwell-and-glide, return law) |
+
+**Other pages:** 5–6 sections each, 3–11 pages by need, fewer is better. **Delivery:** one single HTML file with all pages and in-file navigation, nothing external.
+
+### The cursor companion (completion §3): mechanisms it is built from
+
+**The character** is an animated SVG trade motif. Three switchable variants are drawn at Stage 2, for example a cedar shake, a corner post, and a level whose bubble is the eye. The system cursor is kept.
+
+**Behaviour:**
+
+| Behaviour | How |
+|---|---|
+| Follow | Eases toward the pointer at **0.10 of the gap per frame** (Immersive Garden's measured eased layer; pending ruling, otherwise the same value stated as Austin's own) |
+| Idle | After 2.5 s it idles: blinks on a 2–3 s loop (Graza's blink tempo) and **rolls its eyes** toward the nearest interactive element |
+| Press | Asymmetric: about 110 ms in, about 220 ms out (S0063) |
+| Section background | Changes with it: steel on light, white on dark |
+| Copy action | Over a copyable colour field it carries Cash App's zero-lag label |
+
+**Its own reaction per element type:**
+
+| Element | Companion reaction |
+|---|---|
+| Link | Leans toward it |
+| Pairs seam | Squints and splits along the seam |
+| Map dot | Becomes a pin-head bob |
+| Colour field | Takes on the colour |
+| Photo | Frames it with corner ticks |
+| Map van | Hides; the van is the character there |
+
+**Off states:** no companion, and no switch, on touch or coarse pointers. Reduced motion means no easing and no idle. Pause motion stops its loops. A broken companion fails the build.
+
+### SVG standard (completion §3)
+
+Heavy custom SVG in foreground and background, drawn for the siding trade, **a different idea per section**:
+
+| # | Section | SVG idea |
+|---|---|---|
+| 1 | Hero | Course lines |
+| 2 | Trade choice | Trade icons |
+| 3 | Proof | Nail-row tallies |
+| 4 | Pairs | Seam ruler ticks |
+| 5 | Wall assembly | Layer drawings |
+| 6 | Colours | Profile cross-sections |
+| 7 | Visualiser | Elevation line drawing |
+| 8 | Map | Austin line terrain |
+| 9 | Archive | Course-count rule |
+| 10 | About | Stepped courses |
+| 11 | Closing | Tile emblems |
+
+Every interactive element gets its own reaction.
+
+**A conflict, resolved by the completion.** S1320 says "do not draw illustrations with model-authored SVG". The completion requires heavy custom SVG, and the owner's standard wins over a library skill (judging note 7: the brief wins).
+
+### Copy and type (completion §4, §7)
+
+- **Hero:** at most 40 words. S0650's tighter subtext cap of 20 words is also kept.
+- **Section headline:** at most 8 words, with at most 35 words of support.
+- **Fonts:** normal everyday fonts only (Poppins, Roboto, Inter, Open Sans, Lato, Montserrat), chosen at Stage 2.
+- **De-AI pass:** no perfect symmetry, no generic gradients or glass, no effect excess, no cookie-cutter rhythm.
+
+### Captions
+
+Real job data only: place names from the firm's own project records. Where the record and a project URL disagree, the record wins and the item is flagged (`windows3`: record "Maple Run", URL slug "alexandria").
 
 ### Locks carried into the next stages
 

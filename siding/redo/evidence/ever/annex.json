@@ -1,0 +1,51 @@
+{
+ "site": "ever",
+ "url": "https://ever-live-here.com/",
+ "movers": [],
+ "chapters": [
+  "Ever",
+  "Architecture",
+  "Architecture",
+  "Interior",
+  "Interior",
+  "THE ENTRANCES AND COMMON AREAS ARE DESIGNED BY THE",
+  "Territory",
+  "Territory",
+  "Nature",
+  "Play",
+  "Chill",
+  "Sport",
+  "Location",
+  "Place",
+  "CITY CENTER OBRUCHEVA STR. VL. 23",
+  "Apartments",
+  "NEWS , PROMOTIONS",
+  "Request for a call",
+  "THANK YOU!",
+  "Order a taxi",
+  "THANK YOU!",
+  "CITY CENTER OBRUCHEVA STR. VL. 23"
+ ],
+ "filters": [
+  {
+   "t": "Nature",
+   "tag": "A",
+   "cls": "territory-nav__item btn-container is-active is-inv"
+  },
+  {
+   "t": "Play",
+   "tag": "A",
+   "cls": "territory-nav__item btn-container  is-invisible--l"
+  },
+  {
+   "t": "Chill",
+   "tag": "A",
+   "cls": "territory-nav__item btn-container  is-invisible--l"
+  },
+  {
+   "t": "Sport",
+   "tag": "A",
+   "cls": "territory-nav__item btn-container  is-invisible--l"
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "slug": "cowboy",
+ "url": "https://cowboy.com/",
+ "cursorLag": [],
+ "hoverTransitions": [
+  {
+   "txt": "Continue on us.cowboy.com",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "No thanks",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Cowboy",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "E-bikes",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "AdaptivePower",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Connect",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Leasing",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Stores",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  }
+ ],
+ "hoverAnimations": []
+}

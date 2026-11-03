@@ -1,0 +1,97 @@
+{
+ "slug": "dropbox",
+ "url": "https://brand.dropbox.com/",
+ "status": 200,
+ "loadedAt": "2026-11-03T06:42:10.971Z",
+ "rest": {
+  "rafPerSecAtRest": 60,
+  "pixelsChangeAtRest": true
+ },
+ "pointer": {
+  "followers": [],
+  "pointerChangesView": true
+ },
+ "title": "Dropbox Brand Guidelines",
+ "libs": [
+  "Webflow"
+ ],
+ "htmlClass": "w-mod-js w-mod-ix wf-notosansmono-n4-active wf-notosansmono-n5-active wf-active",
+ "bodyClass": "home",
+ "scrollH": 2700,
+ "overflowY": "visible",
+ "sticky": [],
+ "pinSpacers": 0,
+ "fonts": [
+  "\"Dbsharpgroteskvariable Vf\"",
+  "\"Atlasgrotesk Web\""
+ ],
+ "canvases": [],
+ "videos": 0,
+ "ctx": [
+  {
+   "t": "2d",
+   "w": 1,
+   "h": 1,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  }
+ ],
+ "h1": [],
+ "scrollYSeq": [
+  650,
+  1300,
+  1800,
+  1800,
+  1800,
+  1800,
+  1800,
+  1800,
+  1800,
+  1800
+ ],
+ "network": {
+  "requests": 59,
+  "bytesDeclared": 2382584,
+  "scripts": [
+   "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",
+   "https://cdn.prod.website-files.com/66c503d081b2f012369fc5d2/js/webflow.6a7c66f5.e5e29ec9c8fad6ed.js",
+   "https://cdn.prod.website-files.com/66c503d081b2f012369fc5d2/js/webflow.schunk.8050d0d21005bb76.js",
+   "https://cdn.prod.website-files.com/66c503d081b2f012369fc5d2/js/webflow.schunk.f2d8318baac05106.js",
+   "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=66c503d081b2f012369fc5d2",
+   "https://www.dropbox.com/pithos/privacy_consent",
+   "https://www.dropbox.com/pithos/host%3Abrand.dropbox.com/privacy_consent",
+   "https://cfl.dropboxstatic.com/static/metaserver/static/pithos/privacy_consent.bundle-vflf9tE5G.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/e_atlas__privacy_consent__static__ccpa_iframe-vflPHWC59.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_initialization_cookies_check-vflEEzrTu.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_formatjs_intl-displaynames_polyfill-force-vflVuquBe.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_decimal_js_decimal-vflMu-LcU.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_ccpa_iframe_rspb_langpacks_icu-en_json-vflT-EEZT.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_api_v2_unauthed_client-vflqKhbGg.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_formatjs_intl-displaynames_locale-data_en-vflNQhjSa.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_core_toast_toast_on_init-vflWV10Ni.js",
+   "https://assets.adobedtm.com/7c31e7b46b8e/232fdafca1c4/launch-d74dfe2ac870.min.js",
+   "https://www.googletagmanager.com/gtag/js?id=G-P2CXLHZFV2&l=dataLayer",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_clean_analytics-vflpAFvtA.js",
+   "https://cfl.dropboxstatic.com/static/atlas/privacy_consent/ccpa_iframe_rspb_modern/c_ux_analytics_www_init-vflaoZiGl.js"
+  ],
+  "media": 7,
+  "fetch": [
+   "https://cdn.prod.website-files.com/66c503d081b2f012369fc5d2/671028fc31978e2572941a61_DB_Master_Dropbox.json",
+   "https://cdn.prod.website-files.com/66c503d081b2f012369fc5d2/671028fc31978e2572941a61_DB_Master_Dropbox.json",
+   "https://www.dropbox.com/2/client_metrics/record",
+   "https://www.dropbox.com/web-grpc/edison/data_modules.StormcrowService/StreamAssignments",
+   "https://www.dropbox.com/2/identity/get_privacy_preferences",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-P2CXLHZFV2&gtm=45je6au1v9201893401za200zd9201893401xf1&_p=1793688106423&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=20",
+   "https://www.dropbox.com/2/identity/collect_privacy_preferences",
+   "https://www.dropbox.com/2/udcl/log_timing",
+   "https://www.dropbox.com/2/udcl/log_timing",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-P2CXLHZFV2&gtm=45je6au1v9201893401za200zd9201893401xf1&_p=1793688106423&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AE"
+  ]
+ },
+ "errors": []
+}

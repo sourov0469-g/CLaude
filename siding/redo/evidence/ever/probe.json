@@ -1,0 +1,224 @@
+{
+ "slug": "ever",
+ "url": "https://ever-live-here.com/",
+ "cursorLag": [
+  {
+   "cls": "contact-form-title ui-cold-3 h2 leading-trim is-hi",
+   "start": 0,
+   "xs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "closePerFrame": null,
+   "framesTo95": 1
+  },
+  {
+   "cls": "contact-form-title ui-cold-3 h2 leading-trim is-hi",
+   "start": 0,
+   "xs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "closePerFrame": null,
+   "framesTo95": 1
+  }
+ ],
+ "hoverTransitions": [
+  {
+   "txt": "",
+   "tp": "color",
+   "td": "0.4s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  },
+  {
+   "txt": "",
+   "tp": "color",
+   "td": "0.4s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  },
+  {
+   "txt": "",
+   "tp": "color",
+   "td": "0.2s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  },
+  {
+   "txt": "",
+   "tp": "color",
+   "td": "0.4s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  },
+  {
+   "txt": "Request a call-back",
+   "tp": "color",
+   "td": "0.4s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  },
+  {
+   "txt": "",
+   "tp": "color",
+   "td": "0.4s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  },
+  {
+   "txt": "",
+   "tp": "color",
+   "td": "0.4s",
+   "tf": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+  }
+ ],
+ "hoverAnimations": [
+  [
+   {
+    "type": "CSSTransition",
+    "name": "color",
+    "dur": 400,
+    "ease": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "transform",
+    "dur": 400,
+    "ease": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "button-pulse",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "footer",
+    "dur": 6400,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "footer",
+    "dur": 6400,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "footer",
+    "dur": 6400,
+    "ease": "linear"
+   }
+  ],
+  [
+   {
+    "type": "CSSTransition",
+    "name": "color",
+    "dur": 203.1874747080781,
+    "ease": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "transform",
+    "dur": 203.1874747080781,
+    "ease": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "color",
+    "dur": 400,
+    "ease": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "box-shadow",
+    "dur": 400,
+    "ease": "cubic-bezier(0.25, 0.74, 0.22, 0.99)"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "button-pulse",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "footer",
+    "dur": 6400,
+    "ease": "linear"
+   }
+  ]
+ ]
+}

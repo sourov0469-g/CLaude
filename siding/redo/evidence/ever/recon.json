@@ -1,0 +1,69 @@
+{
+ "slug": "ever",
+ "url": "https://ever-live-here.com/",
+ "status": 200,
+ "loadedAt": "2026-11-03T06:45:06.529Z",
+ "rest": {
+  "rafPerSecAtRest": 60,
+  "pixelsChangeAtRest": true
+ },
+ "pointer": {
+  "followers": [],
+  "pointerChangesView": true
+ },
+ "title": "The Ever business-class residential complex. The official site of the developer Tekta Group.",
+ "libs": [],
+ "htmlClass": "has-hover js js-focus-visible is-not-ie-edge has-custom-controller",
+ "bodyClass": "",
+ "scrollH": 900,
+ "overflowY": "hidden",
+ "sticky": [],
+ "pinSpacers": 0,
+ "fonts": [
+  "ITCAvantGardeGothicWeb"
+ ],
+ "canvases": [],
+ "videos": 3,
+ "ctx": [],
+ "h1": [
+  "Ever",
+  "Architecture",
+  "Architecture",
+  "Interior",
+  "Interior",
+  "THE ENTRANCES AND COMMON AREAS ARE DESIGNED BY THE LEADING ARCHITECTURAL FIRM HA",
+  "Territory",
+  "Territory"
+ ],
+ "scrollYSeq": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "network": {
+  "requests": 91,
+  "bytesDeclared": 14813156,
+  "scripts": [
+   "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+   "https://ever-live-here.com/assets/javascripts/shared.js?v=1784552902",
+   "https://ever-live-here.com/assets/javascripts/landing.js?v=1784552902",
+   "https://ever-live-here.com/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5496899abd8eb4a",
+   "https://ever-live-here.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/5c2e6b612edd/main.js?ray=a5496899abd8eb4a"
+  ],
+  "media": 77,
+  "fetch": [
+   "https://ever-live-here.com/cdn-cgi/rum?",
+   "https://ever-live-here.com/cdn-cgi/challenge-platform/h/g/jsd/oneshot/5c2e6b612edd/0.6349520373176087:1793686232:PwG898hIFpwX8Acy4aLconUUu8uCq8YYjlbOeHfe4Zw/a54",
+   "https://ever-live-here.com/en/",
+   "https://ever-live-here.com/en/"
+  ]
+ },
+ "errors": []
+}

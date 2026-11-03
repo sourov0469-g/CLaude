@@ -1,0 +1,500 @@
+{
+ "site": "cowboy",
+ "url": "https://cowboy.com/",
+ "sticky": [
+  {
+   "cls": "order-first relativ z-0 after:block after:absolute",
+   "h": 900,
+   "track": 2485,
+   "top": 3913,
+   "txt": ""
+  },
+  {
+   "cls": "sticky top-0 h-screen overflow-hidden",
+   "h": 900,
+   "track": 1800,
+   "top": 6398,
+   "txt": "Packed full of tech.\n\nCarbon belt\n\nWireless phone charger\n\nR"
+  },
+  {
+   "cls": "sticky top-0 h-screen overflow-hidden",
+   "h": 900,
+   "track": 4500,
+   "top": 11467,
+   "txt": "Design in Belgium. Assembled in France.\n\nEvery bike is craft"
+  }
+ ],
+ "hotspots": [
+  {
+   "txt": "Explore",
+   "aria": null,
+   "trn": "color, background-color, border-color, text-decora 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  {
+   "txt": "Explore",
+   "aria": null,
+   "trn": "color, background-color, border-color, text-decora 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  {
+   "txt": "Cowboy Cross The exp",
+   "aria": null,
+   "trn": "all 0s ease"
+  },
+  {
+   "txt": "Explore",
+   "aria": null,
+   "trn": "color, background-color, border-color, text-decora 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  {
+   "txt": "Explore",
+   "aria": null,
+   "trn": "color, background-color, border-color, text-decora 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+  }
+ ],
+ "toggles": [
+  {
+   "t": "Cruiser",
+   "role": null,
+   "sel": "px-5 py-2 rounded-lg backdrop-blur-sm bg"
+  },
+  {
+   "t": "Cross",
+   "role": null,
+   "sel": "px-5 py-2 rounded-lg backdrop-blur-sm bg"
+  }
+ ],
+ "stairs": [
+  {
+   "scrollY": 4037,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 8.74126)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -274.352, 0)",
+     "w": 549
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 549
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -418.352, 0)",
+     "w": 837
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -258.386)",
+     "w": 837
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -562.352, 0)",
+     "w": 1125
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -175.159)",
+     "w": 1125
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -686.898, 0)",
+     "w": 1374
+    }
+   ]
+  },
+  {
+   "scrollY": 4337,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -300.914, 0)",
+     "w": 602
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 602
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -444.914, 0)",
+     "w": 890
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -248.55)",
+     "w": 890
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -588.914, 0)",
+     "w": 1178
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -145.651)",
+     "w": 1178
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -704.609, 0)",
+     "w": 1409
+    }
+   ]
+  },
+  {
+   "scrollY": 4637,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -324, 0)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -468, 0)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -240)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -612, 0)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -120)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -720, 0)",
+     "w": 1440
+    }
+   ]
+  },
+  {
+   "scrollY": 4937,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -324, 0)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -468, 0)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -240)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -612, 0)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -120)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -720, 0)",
+     "w": 1440
+    }
+   ]
+  },
+  {
+   "scrollY": 5237,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -324, 0)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -468, 0)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -240)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -612, 0)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -120)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -720, 0)",
+     "w": 1440
+    }
+   ]
+  },
+  {
+   "scrollY": 5537,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -324, 0)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -468, 0)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -240)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -612, 0)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -120)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -720, 0)",
+     "w": 1440
+    }
+   ]
+  },
+  {
+   "scrollY": 5837,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -324, 0)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -468, 0)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -240)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -612, 0)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -120)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -720, 0)",
+     "w": 1440
+    }
+   ]
+  },
+  {
+   "scrollY": 6137,
+   "track": 2485,
+   "els": [
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, 0)",
+     "w": 1440
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -324, 0)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -320)",
+     "w": 648
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -468, 0)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -240)",
+     "w": 936
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -612, 0)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, 0, -120)",
+     "w": 1224
+    },
+    {
+     "tag": "DIV",
+     "clip": "none",
+     "tr": "matrix(1, 0, 0, 1, -720, 0)",
+     "w": 1440
+    }
+   ]
+  }
+ ]
+}

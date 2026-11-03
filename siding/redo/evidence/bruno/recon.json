@@ -1,0 +1,138 @@
+{
+ "url": "https://bruno-simon.com/",
+ "dom": {
+  "title": "Bruno's",
+  "ctx": [
+   "webgl2",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d",
+   "2d"
+  ],
+  "gpu": true,
+  "buttons": [
+   "Interact",
+   "Unstuck",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "A",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "Toggles sound",
+   "Toggles some effects\n                   ",
+   "Teleports you to the closest respawn\n   ",
+   "Resets every object\n                    "
+  ],
+  "text": " \n \n "
+ },
+ "marks": [
+  {
+   "n": "loaded",
+   "t": 1563
+  },
+  {
+   "n": "idle 25s",
+   "t": 26634
+  },
+  {
+   "n": "clicked centre",
+   "t": 28396
+  },
+  {
+   "n": "driving forward",
+   "t": 33587
+  },
+  {
+   "n": "turned left",
+   "t": 33587
+  },
+  {
+   "n": "released",
+   "t": 38826
+  },
+  {
+   "n": "dragged",
+   "t": 83696
+  }
+ ],
+ "network": {
+  "requests": 186,
+  "bytesDeclared": 15021202,
+  "scripts": [
+   "https://www.googletagmanager.com/gtag/js?id=G-JMSN30BQ5J",
+   "https://bruno-simon.com/assets/index-ORr3L4no.js",
+   "blob:https://bruno-simon.com/166b2041-bb02-40b2-bfae-bbaa7d7a0365",
+   "blob:https://bruno-simon.com/166b2041-bb02-40b2-bfae-bbaa7d7a0365",
+   "blob:https://bruno-simon.com/166b2041-bb02-40b2-bfae-bbaa7d7a0365",
+   "blob:https://bruno-simon.com/b2f95491-72b7-4bcc-8898-118cdb684220",
+   "blob:https://bruno-simon.com/b2f95491-72b7-4bcc-8898-118cdb684220",
+   "blob:https://bruno-simon.com/b2f95491-72b7-4bcc-8898-118cdb684220",
+   "blob:https://bruno-simon.com/b2f95491-72b7-4bcc-8898-118cdb684220",
+   "blob:https://bruno-simon.com/166b2041-bb02-40b2-bfae-bbaa7d7a0365",
+   "https://bruno-simon.com/assets/rapier-BmPn8Tpt.js"
+  ],
+  "big": [
+   "https://bruno-simon.com/basis/basis_transcoder.wasm 527333",
+   "https://bruno-simon.com/terrain/terrain.ktx?cb=1 350064",
+   "https://bruno-simon.com/areas/areas-compressed.glb?cb=1 639312",
+   "https://bruno-simon.com/assets/rapier_wasm3d_bg-0Vyjx73g.wasm 1698487",
+   "https://bruno-simon.com/sounds/musics/Boy.mp3 6509760"
+  ]
+ }
+}
