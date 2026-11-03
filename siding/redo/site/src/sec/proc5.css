@@ -1,0 +1,61 @@
+/* PROCESS I — your part, and ours */
+.pcI{padding:104px var(--gut) 60px}
+.pcI .hd .sec-p{margin-top:10px;font-size:17px}
+.pcI .vsw{display:inline-flex;gap:4px;margin-top:22px;padding:4px;border-radius:999px;background:#EEF3EF}
+.pcI .vsw button{all:unset;box-sizing:border-box;padding:10px 18px;border-radius:999px;cursor:pointer;font:700 14.5px/1 var(--text);color:var(--ink-2);transition:background-color .25s ease,color .25s ease}
+.pcI .vsw button[aria-checked="true"]{background:var(--green);color:#fff}
+.pcI .vsw button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.pcI .lanes{margin-top:26px}
+.pcI .lh,.pcI .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,220px) minmax(0,1fr);gap:clamp(14px,3vw,40px);align-items:center}
+.pcI .lh{padding-bottom:10px;font:800 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.pcI .lh .ly{justify-self:end;padding:7px 12px;border-radius:999px;background:var(--lime);color:var(--ink)}
+.pcI .lh .lu{padding:7px 12px;border-radius:999px;background:var(--green);color:#fff;justify-self:start}
+.pcI .row{position:relative;isolation:isolate;padding:22px 0;border-top:1px solid #E3EBE4}
+.pcI .row:last-child{border-bottom:1px solid #E3EBE4}
+.pcI .you,.pcI .us{font:500 17px/1.55 var(--text);color:var(--ink-2);transition:opacity .35s ease,filter .35s ease}
+.pcI .you{text-align:right;font-weight:700;color:var(--ink)}
+.pcI .lt{display:none}
+.pcI .spn{display:grid;justify-items:center;gap:8px;text-align:center;font:800 16px/1.2 var(--display);color:var(--ink)}
+.pcI .spn b{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--green);color:var(--lime);font:800 17px/1 var(--display);box-shadow:0 0 0 6px #fff,0 0 0 7px #D8E2DA}
+.pcI .row::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:#E3EBE4;z-index:-1}
+.pcI .row .you,.pcI .row .us,.pcI .row .spn{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .7s cubic-bezier(.16,1,.3,1),filter .35s ease}
+.pcI .row .spn{transition-delay:0s}.pcI .row .you{transition-delay:.08s}.pcI .row .us{transition-delay:.16s}
+.pcI .row.on .you,.pcI .row.on .us,.pcI .row.on .spn{opacity:1;transform:none}
+.pcI[data-view="you"] .row.on .us,.pcI[data-view="us"] .row.on .you{opacity:.16;filter:grayscale(1)}
+.pcI[data-view="you"] .lh .lu,.pcI[data-view="us"] .lh .ly{opacity:.3}
+.pcI .ifoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 26px;margin-top:24px}
+.pcI .ifoot p{font:600 15.5px/1.5 var(--text);color:var(--ink-2)}.pcI .ifoot a{color:var(--green);font-weight:800}
+@media (max-width:760px){.pcI{padding-top:90px}.pcI .lh{display:none}.pcI .row{grid-template-columns:1fr;gap:10px;justify-items:start}.pcI .row::before{display:none}
+  .pcI .spn{grid-auto-flow:column;align-items:center;justify-items:start;gap:12px}.pcI .spn b{width:42px;height:42px;font-size:15px;box-shadow:none}
+  .pcI .you{text-align:left}.pcI .lt{display:inline-block;margin-right:8px;padding:4px 9px;border-radius:999px;font:800 11px/1 var(--text);letter-spacing:.1em;text-transform:uppercase;vertical-align:2px}
+  .pcI .you .lt{background:var(--lime);color:var(--ink)}.pcI .us .lt{background:var(--green);color:#fff}
+  .pcI[data-view="you"] .us,.pcI[data-view="us"] .you{display:none}}
+@media (prefers-reduced-motion:reduce){.pcI .row .you,.pcI .row .us,.pcI .row .spn{opacity:1;transform:none;transition:none}}
+
+/* PROCESS J — the job in four numbers */
+.pcJ{padding:104px var(--gut) 60px}
+.pcJ .hd .sec-p{margin-top:10px;font-size:17px}
+.pcJ .nums{list-style:none;margin-top:26px}
+.pcJ .nr{position:relative;display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr) minmax(180px,280px);gap:clamp(14px,3vw,48px);align-items:center;padding:clamp(14px,2vw,26px) 0}
+.pcJ .nr::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:#DCE5DE;transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.pcJ .nr:last-child{border-bottom:1px solid #DCE5DE}
+.pcJ .nr.on::before{transform:none}
+.pcJ .sl{font:700 15px/1.3 var(--text);color:var(--ink-2)}.pcJ .sl b{display:block;margin-bottom:4px;font:800 13px/1 var(--display);color:var(--green)}
+.pcJ .fl{all:unset;box-sizing:border-box;display:block;width:100%;container-type:inline-size;cursor:pointer;border-radius:12px;opacity:0;transform:translateY(34px);transition:opacity .6s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.pcJ .nr.on .fl{opacity:1;transform:none}
+.pcJ .fl:focus-visible{outline:3px solid var(--green);outline-offset:6px}
+.pcJ .mask{display:block;height:1.12em;overflow:hidden;font:800 clamp(44px,10.5vw,168px)/1.12 var(--display);letter-spacing:-.045em;color:var(--ink)}
+@supports (font-size:1cqi){.pcJ .mask,.pcJ .nr .mask{font-size:min(168px,16cqi)}}
+.pcJ .roll{display:flex;flex-direction:column;transition:transform .7s cubic-bezier(.7,0,.2,1)}
+.pcJ .roll span{display:block;height:1.12em;white-space:nowrap}
+.pcJ .fb{color:var(--green)}
+.pcJ .fl[aria-pressed="true"] .roll{transform:translateY(-1.12em)}
+.pcJ .fl:hover .fa{color:var(--green)}
+.pcJ .cap{font:500 16px/1.5 var(--text);color:var(--ink-2)}
+.pcJ .cap span{display:block}.pcJ .cap [hidden]{display:none}
+.pcJ .jfoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 26px;margin-top:26px}
+.pcJ .jfoot p{font:600 15.5px/1.5 var(--text);color:var(--ink-2)}.pcJ .jfoot a{color:var(--green);font-weight:800}
+@media (max-width:980px){.pcJ .nr{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.pcJ .fl{grid-column:1/-1;grid-row:1}.pcJ .mask{font-size:clamp(44px,12vw,120px)}}
+@supports (font-size:1cqi){@media (max-width:980px){.pcJ .nr .mask{font-size:min(140px,16cqi)}}}
+@media (max-width:620px){.pcJ{padding-top:90px}.pcJ .nr{grid-template-columns:1fr;gap:6px}.pcJ .fl{grid-row:auto}.pcJ .sl b{display:inline;margin:0 8px 0 0}}
+@media (prefers-reduced-motion:reduce){.pcJ .fl,.pcJ .nr::before,.pcJ .roll{transition:none;opacity:1;transform:none}.pcJ .fl[aria-pressed="true"] .roll{transform:translateY(-1.12em)}}
