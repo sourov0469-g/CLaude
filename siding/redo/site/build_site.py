@@ -10,7 +10,7 @@ from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, 
 # the live winner of every slot; the rest become backups
 LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'svc2', 'vis', 'vis2', 'windows', 'reviews', 'process', 'seq', 'area', 'cta', 'nav']
+MODS = ['scenes', 'services', 'svc2', 'vis', 'vis2', 'windows', 'win2', 'reviews', 'rev2', 'process', 'seq', 'area', 'cta', 'nav']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
 WORK = os.path.join(HERE, '..', '..', 'work')
 
@@ -44,12 +44,29 @@ def svcp():
 SVCP = svcp()
 
 
+def winp():
+    # Windows D: the firm's own published window projects whose photographs show windows (checked one by one), newest first
+    P = json.load(open(os.path.join(WORK, 'data', 'photos.json')))
+    from PIL import Image as _I
+    import io as _io, base64 as _b
+    def pic(i):
+        im = _I.open(os.path.join(WORK, 'dl', f'photo{i}-1400.webp')).convert('RGB'); im.thumbnail((960, 960)); buf = _io.BytesIO(); im.save(buf, 'WEBP', quality=68)
+        return {'src': 'data:image/webp;base64,' + _b.b64encode(buf.getvalue()).decode(), 'alt': P[i]['alt'] or f"{P[i]['trades']} at a home in {P[i]['place']}, TX, by Austin Pro"}
+    jobs = []
+    for grp in [[4], [5, 38], [6], [7], [40], [42], [29], [11], [41]]:
+        p = P[grp[0]]; jobs.append({'place': p['place'], 'when': p['when'], 'trades': p['trades'], 'href': 'https://www.austinprosiding.com' + p['href'], 'photos': [pic(i) for i in grp]})
+    return jobs
+
+
+WINP = winp()
+
+
 def prerender():
     js = '\n'.join(SEC(m + '.js') for m in MODS)
-    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';globalThis.__SVCP=' + json.dumps(SVCP) + ';' + js +
+    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';globalThis.__SVCP=' + json.dumps(SVCP) + ';globalThis.__WINP=' + json.dumps(WINP) + ';' + js +
             # fact lock: every quote must be a verbatim excerpt of its review
-            ';for(const p of [...Rev.PICK,...Proc.QUOTES]){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
-            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),sc:Svc2.C(),sd:Svc2.D(),va:Vis.A(),vb:Vis.B(),vc:Vis2.C(),vd:Vis2.D(),wa:Win.A(),wb:Win.B(),ra:Rev.A(),rb:Rev.B(),pa:Proc.A(),pb:Proc.B(),aa:Area.A(),ab:Area.B(),qa:Seq.A(),qb:Seq.B(),ca:Cta.A(),cb:Cta.B(),ft:Cta.FOOT()}))')
+            ';for(const p of [...Rev.PICK,...Proc.QUOTES,...Rev2.PICK]){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
+            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),sc:Svc2.C(),sd:Svc2.D(),va:Vis.A(),vb:Vis.B(),vc:Vis2.C(),vd:Vis2.D(),wa:Win.A(),wb:Win.B(),wc:Win2.C(),wd:Win2.D(),ra:Rev.A(),rb:Rev.B(),rc:Rev2.C(),rd:Rev2.D(),pa:Proc.A(),pb:Proc.B(),aa:Area.A(),ab:Area.B(),qa:Seq.A(),qb:Seq.B(),ca:Cta.A(),cb:Cta.B(),ft:Cta.FOOT()}))')
     return json.loads(subprocess.run(['node', '-'], input=prog, capture_output=True, text=True, check=True).stdout)
 
 
@@ -128,7 +145,7 @@ VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
              ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument']],
-    'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags']],
+    'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail']],
     'area': [['a', 'Thread board'], ['b', 'Street finder']], 'book': [['a', 'Work order'], ['b', 'Press the board']]}
 SLOTNAMES = {'hero': 'Hero', 'services': 'Services', 'vis': 'Visualiser', 'windows': 'Windows', 'reviews': 'Reviews', 'process': 'Process', 'try': 'Try the job', 'area': 'On your street', 'book': 'Booking'}
@@ -168,7 +185,7 @@ const PLAY=%PLAY%,PAUSE=%PAUSE%;
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Svc2.wire(document);Vis.wire(document);Vis2.wire(document);Win.wire(document);Rev.wire(document);Proc.wire(document);Seq.wire(document);Area.wire(document);Cta.wire(document);Nav.wire();
+Scenes.wire(document);Services.wire(document);Svc2.wire(document);Vis.wire(document);Vis2.wire(document);Win.wire(document);Win2.wire(document);Rev.wire(document);Rev2.wire(document);Proc.wire(document);Seq.wire(document);Area.wire(document);Cta.wire(document);Nav.wire();
 })();'''
 
 
@@ -181,7 +198,7 @@ def build():
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
     main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd']}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd']}) +
-            slot('windows', {'a': pre['wa'], 'b': pre['wb']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb']}) +
+            slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd']}) +
             slot('process', {'a': pre['pa'], 'b': pre['pb']}) + slot('try', {'a': pre['qa'], 'b': pre['qb']}) +
             slot('area', {'a': pre['aa'], 'b': pre['ab']}) + slot('book', {'a': pre['ca'], 'b': pre['cb']}))
     foot = pre['ft']

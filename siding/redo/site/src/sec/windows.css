@@ -21,6 +21,14 @@
 .wnsvg .glass-base{fill:#1C2329}
 .wnsvg .uppersash .glass-base{fill:rgba(28,35,41,.82)}
 .wnsvg .glow{opacity:calc(var(--night) * .95 + var(--dusk) * .25)}
+/* the room behind the opening: a quiet drawn interior (no photograph). By day it reads dimmer than outside, as rooms do;
+   from dusk a table lamp lights it warm. Seen fully only when the lower sash is lifted, through the insect screen. */
+.wnsvg .room .fl{stroke:rgba(0,0,0,.18);stroke-width:1.2}
+.wnsvg .room .rshade{opacity:calc(.34 - var(--night) * .26)}
+.wnsvg .room .rwarm{mix-blend-mode:soft-light;opacity:calc(var(--night) * .9 + var(--dusk) * .3)}
+.wnsvg .room .sun{opacity:calc(.32 * (1 - var(--night)) * (1 - var(--dusk)))}
+.wnsvg .room .lglow{mix-blend-mode:screen;opacity:calc(var(--night) * 1 + var(--dusk) * .35)}
+.wnsvg .room .lamp path:nth-child(2){filter:brightness(calc(1 + var(--night) * .25))}
 .wnsvg .refl{opacity:max(0,calc(.8 - var(--night) * 1.1 - var(--dusk) * .2))}
 .wnsvg .streak{opacity:calc(.16 - var(--night) * .14)}
 .wnsvg .grille{opacity:.78;transition:opacity .3s ease}

@@ -71,7 +71,7 @@ window.Rev = (function () {
     return `<section class="sec rvB" id="reviews" aria-labelledby="rvB-h">
       <div class="hd"><h2 class="sec-h" id="rvB-h">4.9, hung out to read.</h2><p class="sec-p">474 Google reviews, rated 4.9. A few in their own words; tap a tag to read the whole review.</p></div>
       <div class="lineview" data-solid><div class="track"><i class="post l" aria-hidden="true"></i><i class="post r" aria-hidden="true"></i><svg class="rope" aria-hidden="true"><path/><path/></svg>${tags.join('')}</div></div>
-      <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="rvB-dn" hidden><div class="card"><button type="button" class="x" aria-label="Close">×</button>
+      <div class="dlg rvdlg" role="dialog" aria-modal="true" aria-labelledby="rvB-dn" hidden><div class="card"><button type="button" class="x" aria-label="Close">×</button>
         <p class="tr"></p><blockquote><p class="full"></p></blockquote><p class="who"><b id="rvB-dn"></b><span></span></p></div></div></section>`; };
 
   function wireB(root) {
@@ -105,7 +105,8 @@ window.Rev = (function () {
     const io = new IntersectionObserver((es) => es.forEach((e) => { vis = e.isIntersecting; if (vis && !s.classList.contains('in')) { s.classList.add('in'); tags.forEach((t, i) => setTimeout(() => { st[i].v += (i % 2 ? 1 : -1) * 1.6; kick(); }, 120 + i * 90)); } if (vis) kick(); }), { threshold: 0.2 });
     if (RM) s.classList.add('in'); io.observe(s);
     // open a tag: the whole review, verbatim
-    const dlg = s.querySelector('.dlg'); let opener = null;
+    // the dialog lives at the page root so its backdrop covers the fixed header and the phone bar too
+    const dlg = s.querySelector('.dlg'); document.body.append(dlg); let opener = null;
     function open(i, t) { const x = Q[i]; opener = t; dlg.querySelector('.tr').textContent = x.trade + ' · ' + x.src; dlg.querySelector('.full').textContent = x.full; dlg.querySelector('#rvB-dn').textContent = x.name;
       dlg.hidden = false; requestAnimationFrame(() => dlg.classList.add('on')); dlg.querySelector('.x').focus(); }
     function close() { dlg.classList.remove('on'); setTimeout(() => (dlg.hidden = true), RM ? 0 : 220); if (opener) opener.focus(); }

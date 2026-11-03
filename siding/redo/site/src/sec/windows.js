@@ -35,6 +35,11 @@ window.Win = (function () {
         <radialGradient id="wnSpill"><stop offset="0" stop-color="rgba(255,196,120,.6)"/><stop offset="1" stop-color="rgba(255,196,120,0)"/></radialGradient>
         <mask id="wnNightM"><rect x="-400" width="1440" height="700" fill="#fff"/><rect x="222" y="126" width="196" height="360" fill="#000"/></mask>
         <pattern id="wnMesh" width="3" height="3" patternUnits="userSpaceOnUse"><path d="M0 0H3M0 0V3" stroke="rgba(20,24,28,.38)" stroke-width=".7"/></pattern>
+        <clipPath id="wnOpen"><rect x="220" y="124" width="200" height="364"/></clipPath>
+        <linearGradient id="wnBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A8176"/><stop offset=".55" stop-color="#A39A8D"/><stop offset="1" stop-color="#857B6F"/></linearGradient>
+        <linearGradient id="wnFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B5039"/><stop offset="1" stop-color="#8A6A4B"/></linearGradient>
+        <linearGradient id="wnDoor" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(0,0,0,.25)"/><stop offset="1" stop-color="rgba(255,255,255,.06)"/></linearGradient>
+        <radialGradient id="wnLamp"><stop offset="0" stop-color="rgba(255,214,150,.95)"/><stop offset=".5" stop-color="rgba(255,190,110,.35)"/><stop offset="1" stop-color="rgba(255,190,110,0)"/></radialGradient>
         <filter id="wnSoft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
       <rect class="wall" x="-400" width="1440" height="700"/>${lap}
@@ -42,7 +47,18 @@ window.Win = (function () {
       <g class="shadow" filter="url(#wnSoft)"><rect x="188" y="92" width="264" height="440" rx="2" fill="rgba(0,0,0,.32)"/></g>
       <g data-part="trim"><rect class="trim" x="188" y="92" width="264" height="430"/><rect x="188" y="84" width="264" height="10" class="trim drip"/>
         <path class="trim" d="M174 520H466V532H174Z"/><path d="M174 532H466V536H174Z" fill="rgba(0,0,0,.25)"/></g>
-      <g data-part="frame"><rect class="frame" x="208" y="112" width="224" height="388"/><rect x="220" y="124" width="200" height="364" fill="#15181B"/><rect class="glow" x="220" y="124" width="200" height="364" fill="url(#wnGlow)"/></g>
+      <g data-part="frame"><rect class="frame" x="208" y="112" width="224" height="388"/><g class="room" clip-path="url(#wnOpen)" aria-hidden="true">
+          <rect x="220" y="124" width="200" height="364" fill="url(#wnBack)"/>
+          <path d="M232 420H408V476H232Z" fill="url(#wnFloor)"/><path class="fl" d="M262 420L238 476M292 420L280 476M322 420L320 476M352 420L360 476M382 420L402 476"/>
+          <path d="M232 416H408V421H232Z" fill="#E2DBCF"/>
+          <path d="M334 252h52v168h-52Z" fill="#E2DBCF"/><path d="M339 257h42v163h-42Z" fill="#4A433D"/><path d="M339 257h42v163h-42Z" fill="url(#wnDoor)"/>
+          <path d="M262 262h46v36h-46Z" fill="#EFEAE0"/><path d="M267 267h36v26h-36Z" fill="#9AA79A"/><path d="M267 285l11-9 9 7 6-4 10 9v5h-36Z" fill="#6F8070"/>
+          <g class="lamp"><path d="M294 386h8v30h-8Z" fill="#3D3833"/><path d="M286 386h24l-5-20h-14Z" fill="#E9DFC8"/><ellipse class="lglow" cx="298" cy="378" rx="70" ry="60" fill="url(#wnLamp)"/></g>
+          <path class="sun" d="M262 476L300 420H372L350 476Z" fill="#FFF3D6"/>
+          <path d="M220 124L234 138V474L220 488Z" fill="#D9D2C5"/><path d="M420 124L406 138V474L420 488Z" fill="#B4AC9F"/><path d="M220 124H420L406 138H234Z" fill="#9C9487"/><path d="M220 488L234 474H406L420 488Z" fill="#E8E2D6"/>
+          <g class="drape"><path d="M234 138h30v336h-30Z" fill="#EEE8DC" opacity=".9"/><path d="M241 138v336M249 138v336M257 138v336" stroke="#D3CABA" stroke-width="2.4"/></g>
+          <rect class="rshade" x="220" y="124" width="200" height="364" fill="#2A2622"/><rect class="rwarm" x="220" y="124" width="200" height="364" fill="url(#wnGlow)"/>
+        </g></g>
       <g class="lowerwrap"><g class="lower">${sash(222, 302, 196, 184, 16, 22, 'lowersash')}</g></g>
       ${sash(222, 126, 196, 192, 15, 17, 'uppersash')}
       <g class="screen" data-part="screen"><rect x="222" y="318" width="196" height="168" fill="url(#wnMesh)"/><path fill-rule="evenodd" d="M222 318h196v168h-196Z M227 323v158h186v-158Z" fill="#2B2F33" opacity=".85"/></g>
