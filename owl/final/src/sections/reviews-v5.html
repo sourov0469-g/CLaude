@@ -1,0 +1,59 @@
+<section class="sec rev5" id="reviews-5" aria-labelledby="rv5-h">
+<style>
+.rev5{overflow:hidden}
+.rev5 .g{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(20px,4vw,60px);align-items:center}
+.rev5 .obj{perspective:1200px}
+.rev5 .tilt{transform:rotateX(var(--rx,8deg)) rotateY(var(--ry,-12deg));transform-style:preserve-3d;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.rev5 svg{display:block;width:100%;height:auto;overflow:visible}
+.rev5 .ridge{display:flex;align-items:center;gap:14px;margin-top:-6px;font-size:clamp(22px,2.4vw,32px);font-weight:800}
+.rev5 .ridge::before,.rev5 .ridge::after{content:"";flex:1;height:8px;border-radius:4px;background:repeating-linear-gradient(90deg,#3F3B46 0 22px,#55505D 22px 24px)}
+.rev5 .lede{margin:12px 0 20px;max-width:34ch}
+.rev5 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.rev5 .chips span{font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;background:var(--paper);box-shadow:0 0 0 1px rgba(23,17,29,.1),0 3px 0 rgba(23,17,29,.06)}
+.rev5 .chips span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+@media (max-width:900px){.rev5 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.rev5 .tilt{transition:none;transform:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="obj" data-owl="say:Built to last">
+   <div class="tilt">
+    <svg viewBox="0 0 760 420" role="img" aria-label="The rating 5.0, built from courses of shingles"></svg>
+   </div>
+   <p class="ridge" aria-hidden="true">90+ reviews</p>
+  </div>
+  <div>
+   <span class="kick">Reviews</span>
+   <h2 class="h2" id="rv5-h" style="margin-top:12px">Built to 5.0</h2>
+   <p class="lede rv">Our rating is 5.0 from 90+ reviews, laid course by course, the way we lay a roof.</p>
+   <div class="chips" role="list"><span role="listitem">BBB A−</span><span role="listitem">GAF Systems Plus Certified</span><span role="listitem">MN licence #BC809662</span><span role="listitem">10-year workmanship warranty</span></div>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','5',function(root){
+  var svg = root.querySelector('svg'), tilt = root.querySelector('.tilt'), obj = root.querySelector('.obj'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(50), glyph = '<text x="380" y="372" text-anchor="middle" font-size="420" font-weight="900" letter-spacing="-18" font-family="Inter,Poppins,Arial,sans-serif">5.0</text>';
+  /* shingle courses laid inside the glyphs: exposure bands from the bottom up, joints staggered, a darker laminate band */
+  var sh = '<rect width="760" height="420" fill="#4A4552"/>';
+  for (var y = 396, row = 0; y > -24; y -= 22, row++){ var x = -R()*60; while (x < 760){ var w = 34 + R()*30, c = 74 + Math.round(R()*22);
+    sh += '<rect x="' + x.toFixed(0) + '" y="' + y + '" width="' + (w - 2).toFixed(0) + '" height="22" fill="rgb(' + c + ',' + (c - 5) + ',' + (c + 6) + ')"/><rect x="' + x.toFixed(0) + '" y="' + y + '" width="' + (w - 2).toFixed(0) + '" height="7" fill="#17111D" fill-opacity=".3"/>'; x += w; } }
+  var ext = ''; for (var k = 12; k > 0; k--) ext += glyph.replace('<text ', '<text fill="' + (k > 6 ? '#2C2832' : '#3A3540') + '" transform="translate(' + (k*1.4).toFixed(1) + ' ' + (k*1.4).toFixed(1) + ')" ');
+  svg.innerHTML = '<defs><clipPath id="rv5c">' + glyph + '</clipPath><linearGradient id="rv5l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>'
+    + '<ellipse cx="380" cy="404" rx="300" ry="16" fill="#17111D" opacity=".12"/>' + ext
+    + '<g clip-path="url(#rv5c)">' + sh + '<rect class="sheen" width="760" height="420" fill="url(#rv5l)"/></g>'
+    + glyph.replace('<text ', '<text fill="none" stroke="#EAA221" stroke-width="3" ');
+  var sheen = svg.querySelector('.sheen');
+  if (OWL.fine && !OWL.reduce){
+    obj.addEventListener('pointermove', function(e){ var b = obj.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+      tilt.style.setProperty('--ry', (x*22).toFixed(1) + 'deg'); tilt.style.setProperty('--rx', (-y*16).toFixed(1) + 'deg'); sheen.setAttribute('x', (x*300).toFixed(0)); sheen.setAttribute('y', (y*200).toFixed(0)); });
+    obj.addEventListener('pointerleave', function(){ tilt.style.setProperty('--ry', '-12deg'); tilt.style.setProperty('--rx', '8deg'); sheen.setAttribute('x', 0); sheen.setAttribute('y', 0); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg); }
+});
+</script>
+</section>

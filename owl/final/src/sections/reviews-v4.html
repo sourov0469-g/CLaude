@@ -1,0 +1,49 @@
+<section class="sec rev4" id="reviews-4" aria-labelledby="rv4-h">
+<style>
+.rev4{text-align:center;overflow:hidden}
+.rev4 .lede{margin:12px auto 0;max-width:44ch}
+.rev4 .stars{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,2vw,28px);max-width:1100px;margin:clamp(26px,4vw,48px) auto 0}
+.rev4 .st{display:flex;flex-direction:column;align-items:center;gap:12px;padding:10px 6px 16px;border-radius:24px;transition:transform .45s cubic-bezier(.3,1.6,.5,1),background .3s}
+.rev4 .st svg{width:100%;max-width:170px;height:auto;overflow:visible}
+.rev4 .st .o{fill:none;stroke:#17111D;stroke-width:3.5;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.rev4 .st .f{fill:var(--amber);transform-box:fill-box;transform-origin:50% 50%;transform:scale(0)}
+.rev4 .go .o{animation:rv4draw .9s cubic-bezier(.4,0,.2,1) forwards;animation-delay:var(--d)}
+.rev4 .go .f{animation:rv4pop .55s cubic-bezier(.3,1.8,.5,1) forwards;animation-delay:calc(var(--d) + .75s)}
+@keyframes rv4draw{to{stroke-dashoffset:0}}
+@keyframes rv4pop{to{transform:scale(1)}}
+.rev4 .st b{font-size:clamp(20px,2.2vw,30px);font-weight:900;letter-spacing:-.02em;line-height:1}
+.rev4 .st span{font-size:14px;font-weight:600;color:var(--ink-70);line-height:1.3}
+.rev4 .st:hover,.rev4 .st:focus-visible,.rev4 .st[aria-selected="true"]{transform:translateY(-8px)}
+.rev4 .st[aria-selected="true"]{background:var(--paper);box-shadow:0 20px 34px -24px rgba(23,17,29,.55)}
+.rev4 .st:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.rev4 .line{min-height:28px;margin:22px auto 22px;font-size:18px;max-width:52ch}
+@media (max-width:760px){.rev4 .stars{grid-template-columns:repeat(3,minmax(0,1fr))}.rev4 .st span{font-size:13px}}
+@media (prefers-reduced-motion:reduce){.rev4 .st .o{stroke-dashoffset:0;animation:none}.rev4 .st .f{transform:none;animation:none}.rev4 .st{transition:none}}
+</style>
+<div class="wrap">
+ <span class="kick">Reviews</span>
+ <h2 class="h2" id="rv4-h" style="margin-top:12px">Five Stars, Drawn</h2>
+ <p class="lede rv">One rating, stated once: 5.0 from 90+ reviews. Each star holds something we can stand behind.</p>
+ <div class="stars" role="tablist" aria-label="What stands behind the rating" data-owl="say:Five for five"></div>
+ <p class="line" id="rv4-line" role="tabpanel" aria-live="polite"></p>
+ <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+</div>
+<script>
+OWL.reg('reviews','4',function(root){
+  var F = [['5.0', 'Star rating', 'A 5.0 star rating, from 90+ reviews.'], ['90+', 'Reviews', '5.0 from 90+ reviews.'], ['A−', 'BBB rating', 'Rated A− by the Better Business Bureau.'], ['GAF', 'Systems Plus', 'GAF Systems Plus Certified.'], ['10-yr', 'Workmanship', 'A 10-year workmanship warranty, plus up-to-50-year manufacturer warranties.']];
+  var box = root.querySelector('.stars'), line = root.querySelector('.line'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  var P = 'M60 6 L74.6 40.4 L111.8 43.6 L83.6 68.1 L92.1 104.4 L60 85.2 L27.9 104.4 L36.4 68.1 L8.2 43.6 L45.4 40.4 Z';
+  var els = F.map(function(f, i){ var d = document.createElement('div'); d.className = 'st'; d.setAttribute('role', 'tab'); d.id = 'rv4-t' + i; d.setAttribute('aria-controls', 'rv4-line'); d.style.setProperty('--d', (i*.42) + 's');
+    d.innerHTML = '<svg viewBox="0 0 120 112" aria-hidden="true"><path class="f" d="' + P + '"/><path class="o" pathLength="1" d="' + P + '"/></svg><b>' + f[0] + '</b><span>' + f[1] + '</span>';
+    d.setAttribute('aria-label', f[0] + ' ' + f[1]);
+    d.addEventListener('click', function(){ pick(i); }); d.addEventListener('pointerenter', function(){ pick(i); });
+    d.addEventListener('keydown', function(e){ var n = null; if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % 5; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i + 4) % 5; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = 4; if (n !== null){ e.preventDefault(); pick(n); els[n].focus(); } });
+    box.appendChild(d); return d; });
+  function pick(i){ cur = i; els.forEach(function(d, j){ d.setAttribute('aria-selected', j === i); d.tabIndex = j === i ? 0 : -1; }); line.setAttribute('aria-labelledby', 'rv4-t' + i); line.textContent = F[i][2]; }
+  pick(1);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ box.classList.add('go'); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); box.classList.add('go'); } }, {threshold:.3}); io.observe(box);
+});
+</script>
+</section>

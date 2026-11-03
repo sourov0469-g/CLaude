@@ -105,3 +105,14 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   in large type, then hands over to the next. A rail mirrors the five steps for keyboard and touch; reduced motion
   shows them as a still list. Skills: ⟦S0448⟧ sticky artifact with measured steps, ⟦S1325⟧ rail, ⟦S1375⟧ cover
   reveal, ⟦S0451⟧, ⟦S1352⟧.
+
+## L8 · Reviews 4 + 5 (Reviews stood at 3: V1 dial, V2 Earned Not Claimed spine, V3 Ninety-Plus field)
+- **Reviews 4 · "Five Stars, Drawn"** — reference **Graza** (custom-animation quality bar). Five large stars draw
+  themselves with a pen stroke, one after another, then fill amber with a small spring. Each star carries one locked
+  proof: 5.0 · 90+ reviews · BBB A− · GAF Systems Plus · 10-year workmanship warranty. Hovering or focusing a star
+  lifts it and reads its line. No quotes, names or per-review stars: the rating is stated once as "5.0 · 90+
+  reviews". Skills: ⟦S0407⟧ draw-on, ⟦S0340⟧ spring fill, ⟦S0187⟧ staggered sequence, ⟦S1246⟧ tabs, ⟦S1352⟧, ⟦S0451⟧.
+- **Reviews 5 · "Built to 5.0"** — reference **Lando Norris** (bespoke, made for one business). The rating as an
+  object: a large "5.0" whose strokes are laid in shingle courses (staggered tabs, laminate band), with a
+  small 3D tilt and light that follow the cursor. "90+ reviews" sits on the ridge line under it, beside the locked
+  proof chips. Skills: ⟦S0205⟧ small 3D, ⟦S1330⟧ tilt, ⟦S0414⟧ courses, ⟦S1352⟧, ⟦S0451⟧.

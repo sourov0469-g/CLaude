@@ -292,3 +292,37 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Services 4's arrow keys moved from the last hovered service instead of the focused key.
 - Services 5's big title was white over cream while the photo was small, which failed contrast.
 - A pin overlapped the magnifier.
+
+---
+
+## L8 · Reviews 4 + 5 · checks 33/33 · evidence `gates/ladder/L08-reviews-4-5/` · Reviews now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Reviews 4 · Five Stars, Drawn** | Graza (custom-animation bar) | Five large stars draw themselves with a pen stroke one after another, then fill amber with a spring. Each holds one locked proof (5.0 · 90+ · BBB A− · GAF Systems Plus · 10-yr workmanship), and hovering, focusing or arrow keys lift a star and read its line. The rating is stated once: "5.0 from 90+ reviews". | 8.0 | 8.2 | 7.8 | 8.6 | **8.08** |
+| **Reviews 5 · Built to 5.0** | Lando Norris (bespoke, made for one business) | The rating as an object: a large extruded "5.0" whose glyphs are laid with shingle courses (staggered joints, laminate band) inside an amber outline, tilting and catching light with the cursor. "90+ reviews" sits on a ridge-cap line under it, beside the locked proof chips. | 8.4 | 7.8 | 8.4 | 8.4 | **8.26** |
+
+**Truth:**
+- No quotes, no names and no per-review stars.
+- The five stars in Reviews 4 are five proofs, not five reviews.
+- The rating wording is exactly "5.0 from 90+ reviews" (tested).
+- BBB A− never appears as "Accredited" (tested).
+
+**Checks run:** the generic gate, plus:
+- Reviews 4: the rating wording; the stars draw and fill; the five proofs are in order; arrow keys read each line.
+- Reviews 5: the rating wording and chips; the 5.0 is filled with shingle courses; the object tilts toward the pointer.
+
+**Ledger:**
+- **Reviews 4:**
+  - stroke draw: ⟦S0407⟧;
+  - spring fill: ⟦S0340⟧;
+  - stagger: ⟦S0187⟧;
+  - stars as tabs: ⟦S1246⟧;
+  - proof numerals: ⟦S1352⟧;
+  - title: ⟦S0451⟧;
+  - CTA: ⟦S1388⟧.
+- **Reviews 5:**
+  - small 3D object: ⟦S0205⟧;
+  - tilt and light: ⟦S1330⟧;
+  - shingle courses: ⟦S0414⟧;
+  - chips: ⟦S1352⟧;
+  - title: ⟦S0451⟧.

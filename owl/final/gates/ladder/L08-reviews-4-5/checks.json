@@ -1,0 +1,221 @@
+[
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 5
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "reviews"
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Five Stars, Drawn"
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "rating stated as 5.0 from 90+ reviews; no quotes",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "five stars drew and filled",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "each star holds a locked proof (5.0, 90+, A−, GAF, 10-yr)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "arrow keys move along the stars and read each line",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "4",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "reviews"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Built to 5.0"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "rating stated as 5.0 from 90+ reviews; proof chips are the locked wording",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "the 5.0 is filled with shingle courses inside the glyphs",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "the object tilts toward the pointer (small 3D)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "5",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]
