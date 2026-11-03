@@ -1,0 +1,16 @@
+{
+ "url": "https://www.apple.com/airpods-pro/",
+ "H": 25878,
+ "step": 431,
+ "stickyCount": 1,
+ "pins": [
+  {
+   "i": "0",
+   "height": 844,
+   "stuckSamples": 2,
+   "stuckFromY": 5603,
+   "stuckToY": 6034,
+   "stuckTop": 0
+  }
+ ]
+}

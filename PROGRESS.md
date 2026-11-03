@@ -15,6 +15,13 @@ backups untouched). The redo runs one step at a time; each step stops for Muse's
 - **Incident (honest record):** one Bruno capture command ran past the harness limit and was auto-moved to the background.
   I stopped it at once with TaskStop (task bocozauc1), checked that no browser process survived, and kept the 5 frames it
   had saved. All later commands were kept short and in the foreground. No sub-agents were used.
+- **COMPLETION APPLIED TO STEP 1** (`OWL-REDO-COMPLETION.md`, binding): read ⟦S0079⟧, ⟦S1307⟧, ⟦S0448⟧ in full and logged;
+  dossier revised with evidence tiers, the phone second state (Scout, Cowboy, AirPods pins measured at 390×844), a
+  cursor and SVG study with the Owl companion's mechanism, the signature story "One roof, one day" at mechanism level,
+  copy budgets against the references, a two-different-mechanisms map per section, the single-file size budget, the
+  asset inventory under the new rule (Rembrandt non-branded set and the ba2 pair identified; branded files excluded),
+  and an originality guard. Scorecard gate `owl/redo/GATE-STEP-1.md`: weighted 7.70 (D 7.5 / U 8.0 / C 7.5 / Ct 8.0),
+  PASS test met; the background-task incident is left for Muse to rule on.
 - **Next (only after Muse judges Step 1):** Step 2, identity and direction, with the one-paragraph difference from Elbaz.
 
 ---

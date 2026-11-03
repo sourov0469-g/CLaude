@@ -1,0 +1,24 @@
+{
+ "url": "https://cowboy.com",
+ "H": 16863,
+ "step": 300,
+ "stickyCount": 3,
+ "pins": [
+  {
+   "i": "0",
+   "height": 844,
+   "stuckSamples": 2,
+   "stuckFromY": 4200,
+   "stuckToY": 4500,
+   "stuckTop": 0
+  },
+  {
+   "i": "2",
+   "height": 844,
+   "stuckSamples": 10,
+   "stuckFromY": 9600,
+   "stuckToY": 12300,
+   "stuckTop": 0
+  }
+ ]
+}

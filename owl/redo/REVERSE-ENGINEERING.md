@@ -24,7 +24,14 @@ Each reference was loaded live in this session in Chromium at 1440×900 and prob
 - Cowboy's newsletter modal blocked scrolling half-way today; the lower page is from the earlier capture.
 - Lusion loads, but the proxy refuses its Cloudflare Turnstile script; nothing was bypassed and the page rendered without
   it.
-- Mobile behaviour was not captured in this step.
+- The first pass was desktop only; the phone state (390×844, touch) was captured afterwards for the pinned-story
+  references (AirPods, Scout, Cowboy): see "Second state: phones".
+
+**Evidence tiers (⟦S0079⟧):** within each reference, **Frame by frame** and **Code level** statements are **Measured**
+(seen in the captured frames, or read verbatim from the shipped code) unless marked **[Derived]** (computed from
+measurements) or **[Inferred]** (a judgement, never stated as fact). **Why it works**, **What transfers** and the **Owl
+version** are design judgement: all **[Inferred]**. Library names are fingerprints from bundle strings and globals:
+evidence, not proof of authorship.
 
 ---
 
@@ -55,7 +62,7 @@ Each reference was loaded live in this session in Chromium at 1440×900 and prob
 - Hover is a `Raycaster` over the meshes with a `performant` bounding-sphere mode; options `hoverCursor`, `grabCursor`.
 - Post-processing: a chromatic-aberration shader (`CA_ITERATIONS=5`, blue noise "to hide the seams"), bloom, depth of
   field, god rays and FXAA classes are all present.
-- Camera `fov:22` and `fov:30`: telephoto lenses, which compress depth so the scene reads like a miniature diorama.
+- Camera `fov:22` and `fov:30`: telephoto lenses **[Inferred: chosen to compress depth, so the scene reads like a diorama]**.
 - Motion is GSAP timelines with **custom curves**: `igloo_ease_1 = M0,0 C0.662,0.073 0.047,1 1,1` (holds, then
   snaps), `entry_ease_2 = M0,0 C0.388,0.082 0.924,0.862 1,1`, `entry_ease_3` (two-stage). The intro morphs the cage to
   the solid igloo from 1.1 s over 2.25 s on `igloo_ease_1`. A shader `uIntroMaterialize` drives the materialise.
@@ -94,8 +101,7 @@ text (Owl's words stay real, selectable HTML), a full-site virtual scroll.
 **Code level:** Astro + Three.js r158 in one hoisted 1.2 MB bundle; 1 WebGL context over 3 canvases; ~100 shader
 materials; `MeshPhysicalMaterial` for the glossy pieces; SplitType for word splitting; post-processing; AudioContext. A
 custom engine: `pagesManager`, `scrollPane` with `targetScrollPixel` (lerped), standard wheel normalisation
-(`PIXEL_STEP`, `LINE_HEIGHT`, `PAGE_HEIGHT`); DOM sections are composited into WebGL through `preUfxContainer` /
-`postUfxContainer`. The page is virtual (document height 900).
+(`PIXEL_STEP`, `LINE_HEIGHT`, `PAGE_HEIGHT`); `preUfxContainer` / `postUfxContainer` **[Inferred from the names: DOM sections composited into WebGL]**. The page is virtual (document height 900).
 
 **Why it works:** nothing is a stacked block. Each section is handed to the next by a moving thing (the ribbon, the card),
 so the page reads as one journey.
@@ -146,7 +152,7 @@ Belgium. Assembled in France."; pinned full-bleed chapters **01 Origins / 02 Qua
 with a progress bar along the bottom; "Keep exploring" cards.
 
 **Code level:** React (`createRoot`) + Shopify, 11 videos, 8 fixed and 3 sticky elements, 11 clip-paths (the staircase
-mask), native scroll (22 ms). Mentions of `rapier` in a shipped bundle.
+mask), native scroll (22 ms). The string `rapier` appears in a shipped bundle **[Inferred: physics, use unknown]**.
 
 **Why it works:** people in real light do the persuading; the one named system (AdaptivePower) is shown working in a real
 moment (the crash alert), never described in the abstract.
@@ -269,7 +275,7 @@ glass on acid green; then drawn characters appear on cream as you scroll (olives
 verb-named products (Drizzle, Sizzle, Frizzle); "So many ways to Graza" with cooking verbs; a recipe grid.
 
 **Code level:** Shopify, 16.5 MB JS, 10 videos, Lottie (188 references: the drawn characters), `pin:"#intro-drop"`
-(the pinned drip), `scrub:1`, Swiper, native scroll.
+(the pinned drip **[Inferred from the selector name]**), `scrub:1`, Swiper, native scroll.
 
 **Why it works:** every animation is made for this product only and says something (the drip = freshness falling); there
 is one at a time.
@@ -330,6 +336,99 @@ always visible. One section only, with a keyboard path and a reduced-motion path
 **Never transfers:** the car, the neon world, the playground props, sound on by default.
 
 ---
+
+## Second state: phones (390×844, touch): the proven pin behaviour
+**Evidence:** `evidence/{airpods,scout,cowboy}/phone-390-pin.jpg` and `phone-pins.json` (`mpin.cjs`: every sticky
+element taller than half the viewport, tracked across the page).
+| Reference | Pinned stage on a phone (Measured) | Held for [Derived] | What plays while pinned (Measured) |
+|---|---|---|---|
+| Scout | two stages, 844 and 886 px tall, `top:0` | scroll 300→4,500 and 5,700→9,900: about 5 screens each | the truck drives toward the camera frame by frame; the archival lake scene holds while its copy changes |
+| Cowboy | one chapter stage, 844 px, `top:0` | scroll 9,600→12,300: about 3.2 screens | full-bleed photos swap through 01 Origins → 04 Protection under a four-segment progress bar |
+| AirPods | one stage, 844 px, `top:0` | about 1 screen at this sampling step | the sound-ring scene |
+**The proven behaviour [Derived from all three]:** a full-viewport sticky stage (`position:sticky; top:0`, one viewport tall)
+inside a taller scroll track; the visitor's own scroll plays the scene; when the track ends the stage releases and the
+page scrolls on. No scroll hijack: native scroll everywhere on phones, so it can never trap the reader (⟦S0448⟧).
+Cowboy adds the progress bar that tells you how much is left.
+
+## Cursor and SVG: what the references actually do
+**Cursor (Measured):** none of the 11 ships a DOM element that follows the pointer (the follower search found none). The
+pointer acts on the **scene** instead: Igloo pans its camera and lifts the blocks it is over (`Raycaster`, `hoverCursor`,
+`grabCursor`); Lusion pushes its 3D pieces; Quiet Cubes sets `cursor:none` and `grab` on its controls; AirPods sets
+`cursor:none` on some media. Hover transitions are short and custom-curved: Longbow `0.24s cubic-bezier(0.16,1,0.3,1)`,
+Scout `0.2s cubic-bezier(0.38,0.005,0.215,1)`, Apple `0.32s cubic-bezier(0.4,0,0.6,1)`.
+**SVG and masks (Measured):** Cowboy's stepped staircase reveal is a clip-path (11); Scout uses 25 clip-paths for its
+viewfinder framing; MERSI's half-covers are 41 clip-paths; Lando's contour ground and Graza's drawn characters
+(Lottie) are the drawn layers; Lando adds Rive.
+**What transfers to Owl [Inferred]:** the completion requires an animated SVG cursor companion. The references say how to
+make it serve rather than distract: it should act **on the scene it is over**, not just follow. Owl's companion (roofing
+motif, 2-3 switchable variants, touch-disabled) follows with a short lerp, idles, blinks and rolls its eyes, and changes
+its reaction per element: over the roof object it becomes a pry bar that lifts the shingle it is on; over the crew video
+it becomes a play/pause; over the Wise Check instrument a magnifier; over the magnet game it is the magnet; over a
+call-to-action it points. Over dark grounds it inverts. SVG carries masks, grounds and annotations (trade-drawn:
+shingle courses, nail lines, rafters, the nest) behind and over photography, a different idea per section; it never
+replaces the photograph.
+
+## The signature story: the Owl scene, at mechanism level
+**Proven behaviour:** as measured above (a full-viewport sticky stage, scroll plays it, it releases at its end, 3-5
+screens long, with a progress bar).
+**Owl's own story [Inferred, for judgment in Step 3]: "One roof, one day."** The crew's own footage, played by scroll on
+the pinned stage, through the stages of an Owl replacement as they really happen: the wrap goes up → tear-off to bare
+rafters → decking → underlayment and ice and water protection → shingles → the magnet pass → the shingle tomb handed to
+the homeowner. A progress rail names the stages; each beat carries at most 8 words. It releases into the guarantee.
+It is built from Owl's own crew, footage and Protect Your Nest system, so no other firm could run it.
+
+## Copy budgets against the references
+Measured hero copy: Igloo "Scroll down to discover." (4 words); Longbow "Speed of Lightness" (3); Scout "Scouts always
+come back." (4); AirPods "The world's best in-ear Active Noise Cancellation." (8); Graza "Extra Virgin Olive Oil makes
+everything better." (7); Cowboy "Riding reinvented" + one support line (2 + 7); Lusion's hero line (14). Every
+reference sits far under the completion's 40-word hero budget; the best-known screens carry 2-8 words **[Derived]**. Owl
+heroes and section heads are written to the completion's budgets (hero ≤40 words; headline ≤8 words with ≤35 words of
+support) and aim at the references' 2-8.
+
+## Section-to-mechanism map (design method: each section starts from a proven mechanism; V1 and V2 wholly different)
+**[Inferred: a proposal for judgment, not a design.]**
+| Owl section | V1 mechanism (reference) | V2 mechanism (a different reference) |
+|---|---|---|
+| Hero | the crew video full-bleed, then shrinking into the travelling card (Lusion) | the roof object you open with the pointer (Igloo) |
+| Protect Your Nest | pinned beats at full photographic scale, one image and one number each (AirPods) | the named system shown in one real moment per part, crew-fronted (Cowboy) |
+| Signature story | pinned scroll-played footage with a stage rail (Scout + Cowboy pin) | (one version only if Muse rules the signature scene is single) |
+| Wise Check instrument | the case-first instrument on image pills (Quiet Cubes) | the house opened layer by layer under the pointer (Igloo) |
+| Services | split covers with a card on the seam (MERSI) | product-in-its-world chapters with a filmstrip (Scout) |
+| Doctrine / proof | numbered principles over hard numbers (Longbow) | numerals as events on a pinned stage (AirPods) |
+| Families and crew | crew-fronted mosaic and chapters (Cowboy) | dated archive grid against a loose drift (Lando) |
+| Films and community | film + thumbnail filmstrip (Scout) | dated archive grid with hover previews (Lando) |
+| The game | the magnet pass with physics (Bruno) | (one game only, by the brief) |
+| Call | the travelling card arrives at the call (Lusion) | the doctrine closes on the number (Longbow) |
+
+## Single-file delivery: what it costs [Derived]
+The completion requires ONE HTML file with images and the hero video inside it. Base64 adds a third:
+- Owl's own hero footage: `owl-hero-960.webm` 1.60 MB → about 2.13 MB embedded (the full 1080p `Owl-BG-Condensed.webm`,
+  4.45 MB, would be about 5.9 MB).
+- Three.js, inlined rather than linked: roughly 0.65-0.7 MB minified (r16x) **[Inferred: not measured in this step]**.
+- Photography: about 0.1-0.3 MB per WebP at display size.
+The references ship 0.6-16.5 MB of script alone (Longbow 0.58 MB, Igloo 1.77 MB, Graza 16.5 MB). A working budget for the
+Owl file is about 10-12 MB in total, with the video, 3D and photographs lazily decoded so the first screen does not wait
+on all of it. The exact budget is a Step 3 decision.
+
+## Asset inventory under the completion's asset rule
+- **Owl's own (first):** the hero footage (`Owl-BG-Condensed.mp4/webm`, cut to `owl-hero-960`) and its frames
+  (`frames/owl-bg-*.jpg`, 1280×720: rafters, bundles, decking, the finished roof); the wrap photo
+  (`owl-roofing-catchall.webp`); the aftercare box; the Get It Right seal; the Wise Check badge; the families, Noah and
+  community photos; Owl's service-area map; Owl's 4 YouTube films (thumbnails held locally). No Owl before/after pair
+  exists.
+- **Rembrandt non-branded photography (reusable as illustrative imagery only; checked by eye at thumbnail size):**
+  the genuine **ba2 before/after pair** (`rembrandt/v5/assets/img/ba2-before.webp`, `ba2-after.webp`, 1024×684, no
+  labels baked in), `storm-limb`, `storm-wind`, `tudor`, `svc-aerial`, `svc-repair`. `job-charcoal` shows a truck front
+  and must be checked at full resolution for a logo before any use.
+- **Excluded (Rembrandt branding visible):** `ab-bunkwade`, `ab-crew`, `ab-rachel`, `team`, `logo`, `job-truck`,
+  `blue-house`, `ba1-after` (yard sign or truck wrap), and the `owner/` ba2 copies (they carry baked "Before"/"After" labels).
+- **The three hard limits hold:** no Rembrandt branding, never captioned as a specific Owl job, no Rembrandt facts.
+
+## Originality guard (⟦S1307⟧)
+Each reference's signature combination is listed under **Never transfers** above. Only the abstract mechanism crosses
+over (a part-built object that opens; a travelling card; a split seam; a pinned stage); every visible element is rebuilt
+from Owl's own content, so no reference's distinctive arrangement reappears. The originality audit itself runs at each
+build gate against this registry (`owl/redo/evidence/`).
 
 ## How the references hand sections over (comparison)
 | Reference | Handover mechanism | Scroll feel (measured) |
