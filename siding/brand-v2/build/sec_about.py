@@ -1,13 +1,13 @@
 """About & booking page: six sections, two versions each. The form validates and never claims anything was sent or saved.
 The FAQ answers only from the facts lock (question-first grammar: the Erie Home note, used for wording only)."""
-from shell import IM, TEL, PHONE, EMAIL, ADDRESS, HOURS, REVIEWS, RECORD, CREDS, esc, icon, cline, home2
+from shell import IM, WHEN, TEL, PHONE, EMAIL, ADDRESS, HOURS, REVIEWS, RECORD, CREDS, esc, icon, cline, home2
 from sec_home import _dots
 
 TRADES = ['Siding', 'Painting', 'Windows', 'Doors', 'Roofing', 'Gutters', 'Patio cover']
 
 
 def a1():
-    v1 = (f'<div class="ah1"><div class="ah1-p">{IM.img("home2-a", "Anderson Mill, Austin: the house after the work", eager=True)}<span class="cap">Anderson Mill, Austin</span></div>'
+    v1 = (f'<div class="ah1"><div class="ah1-p">{IM.img("home2-a", "Anderson Mill, Austin: the house after the work", eager=True)}<span class="cap">Anderson Mill, Austin · {WHEN["home2"]}</span></div>'
           f'<div class="wrap ah1-g"><div><p class="label">About &amp; booking</p><h1 class="h1">Austin homes, since 2009.</h1></div>'
           f'<div>{cline()}<p class="lead">Siding, windows, roofing and painting, from one office on North Lamar.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div></div>')

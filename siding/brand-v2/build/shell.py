@@ -22,6 +22,15 @@ REVIEWS = '4.9 stars from 474 reviews'
 CREDS = ['GAF Master Elite', "James Hardie Elite Preferred + President's Club 2025", 'Andersen Certified Premier', 'BBB A+']
 PAIRS = home2.PAIRS6
 PLACE = {p['id']: p['place'] for p in PAIRS}
+# Muse ruling 2 (2026-11-03): months only where the job record carries them. Each of the six pair records carries its
+# month (matching the date in the firm's own project URL), so captions may show it.
+WHEN = {p['id']: p['when'] for p in PAIRS}
+assert all(WHEN.values())
+
+
+def mon(ym):
+    """a finder record's year-month (2203) as 'Mar 2022'"""
+    return f'{["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][ym % 100 - 1]} 20{ym // 100:02d}'
 TRADE = {p['id']: ('siding' if (p['id'].startswith('siding') or p['id'] == 'robroy') else 'windows') for p in PAIRS}
 
 

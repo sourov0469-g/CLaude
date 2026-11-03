@@ -54,6 +54,7 @@
 2. **2026-11-03, old record.** Fresh record opened (this file). `PROGRESS.md` is marked superseded. The steel measurements carry forward as Phase 2 raw material only.
 3. **2026-11-03, facts.** FACTS.md is background only. The barred figures are listed above. Grep of tonight's outputs: 0 hits for "5,000", "316" or "70+ years".
 4. **2026-11-03, structural rule.** 3–11 pages total, fewer is better. Every service may get its own page. Every page carries at least 5–6 sections; the homepage carries 10–11. Applied in the page plan below.
+5. **2026-11-03, after GATE-BUILD-8.** Four rulings (Rimowa dropped; captions real data with months only from records; firm's wording first for process and descriptive copy; colour list flagged, non-blocking). Applied in cycle 9.
 
 ## Page plan under the structural rule (draft; finalised in the Phase 3a flow map)
 **Reasoning:**
@@ -180,7 +181,13 @@ Cowboy (homeowner warmth, one named system) is held for the About & booking page
     - Also fixed: hero V2 panel now tracks the measured copy height; the 1440 before/after card no longer wraps names. 21 versions backed up (68 backups).
     - Open: 285 primitive paints inside construction drawings (need per-drawing component tokens); `var()` in SVG presentation attributes untested outside Chromium.
     - New QA: `build/qa/lint.py`, `build/qa/weights.js`. Contact sheets: `shots/build-8-1440/`, `shots/build-8-390/`.
-  - **Open for Muse or the firm:** the caption ruling (months); confirming the process-step names and descriptive copy; the real colour list; Rimowa access.
+  - **GATE-BUILD-8 accepted by Muse, with four binding rulings:** (1) Rimowa dropped; sections planned against it substitute from the verified annex list. (2) Captions: real job data only; months only where the job record carries them. (3) Process-step names and copy: the firm's published wording first, session copy where none. (4) The colour list stays flagged, non-blocking.
+  - **Cycle 9** (`GATE-BUILD-9.md`, 8.04, PASS, cited): the rulings applied.
+    - Rimowa → Quiet Cubes alone for Home 7 and Siding 4; its configurator studied live (registry R13b). Transferred: a running "Your wall:" line, a phone line inside the instrument, and a visible disabled Back.
+    - Months from the records on all job captions and the 312 map tooltips (finder data: 53 months). Flag for the firm: `windows3` place versus its URL slug.
+    - Hero V2 steps now the firm's words (Inspection, Tear-off, House wrap, Installation, Final check; "Trim & paint" is session copy); "House wrap" in the wall section; the firm's lap and board & batten descriptions.
+    - Fixed: the deep-link layout-shift race (waits for fonts); illegible phone labels on hero V2 hidden. 17 versions backed up (85 backups; 2.06 MB).
+  - **Open for Muse or the firm:** the real colour list (flagged, non-blocking); `windows3`'s place. (Rimowa, captions and process copy were settled by Muse's rulings in cycle 9.)
 
 ## History of this run so far (moved here from the old PROGRESS.md)
 **Governing documents:**

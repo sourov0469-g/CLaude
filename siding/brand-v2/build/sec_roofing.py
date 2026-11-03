@@ -27,7 +27,7 @@ def _roof(*a, **k):
     return ill(_roof_raw(*a, **k))
 
 def r1():
-    v1 = (f'<div class="rh1 on-dark sec-pad"><div class="wrap"><p class="label on-dark-l">Roofing, gutters &amp; patio covers</p><h1 class="h1 on-dark-h">From the deck up.</h1>{cline("var(--steel-6)")}'
+    v1 = (f'<div class="rh1 on-dark sec-pad"><div class="wrap"><p class="label on-dark-l">Roofing, gutters &amp; patio covers</p><h1 class="h1 on-dark-h">From the deck up.</h1>{cline("var(--color-accent-line-on-dark)")}'
           f'<p class="lead on-dark-p">Shingle and metal roofing, gutters, and covered patios. {esc(GAF)}.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary rh-call" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div>'
           f'<div class="rh1-art">{_roof("rf-hero")}</div></div>')

@@ -1,8 +1,11 @@
 """Homepage sections, two versions each. Each function returns (title, v1_html, v2_html, css, js)."""
 import re
-from shell import IM, PLACE, ill, TEL, PHONE, REVIEWS, CREDS, RECORD, esc, icon, cline, section  # noqa: F401
+from shell import IM, PLACE, WHEN, ill, TEL, PHONE, REVIEWS, CREDS, RECORD, esc, icon, cline, section  # noqa: F401
 
-STEPS = ['Measure', 'Strip', 'Wrap', 'Lay the courses', 'Trim & paint', 'Walk-through']   # draft copy for the firm to confirm
+# Muse ruling 3: the firm's own published wording first. austinprosiding.com/services/siding, "What to Expect, Start to Finish":
+# 01 Free Inspection; 03 Expert Install ("Tear-off, prep, house wrap and installation"); 04 Final Check. Trim is not a named step
+# there (painting is: "including paint"), so "Trim & paint" is session copy.
+STEPS = ['Inspection', 'Tear-off', 'House wrap', 'Installation', 'Trim & paint', 'Final check']
 HERO_JOBS = ['robroy', 'siding0', 'siding2']
 # MERSI's plate changes colour per project and carries an embossed monogram; here the colour steps steel-9/10/11 (white
 # text >= 5.96:1 on all three) and the monogram is the C1 mark set tone-on-tone
@@ -15,7 +18,7 @@ def PL_MARK():
 def s1():
     L = ''.join(f'<div class="hs-i">{IM.img(j + "-b", f"Before: {PLACE[j]}, the wall before the work", eager=(i == 0))}</div>' for i, j in enumerate(HERO_JOBS))
     R = ''.join(f'<div class="hs-i">{IM.img(j + "-a", f"After: {PLACE[j]}, the same wall after the work", eager=(i == 0))}</div>' for i, j in enumerate(HERO_JOBS))
-    plates = ''.join(f'<div class="pl" style="background:{('var(--color-accent-solid)','var(--color-accent-solid-hover)','var(--color-accent-solid-active)')[i % 3]}">{PL_MARK()}<p class="pl-k">{esc(PLACE[j])}</p><p class="pl-s">Before, then after</p>{cline("var(--color-text-inverse)", "")}<p class="pl-n">Job {i + 1} of {len(HERO_JOBS)}</p></div>' for i, j in enumerate(HERO_JOBS))
+    plates = ''.join(f'<div class="pl" style="background:{('var(--color-accent-solid)','var(--color-accent-solid-hover)','var(--color-accent-solid-active)')[i % 3]}">{PL_MARK()}<p class="pl-k">{esc(PLACE[j])}</p><p class="pl-s">Before, then after · {WHEN[j]}</p>{cline("var(--color-text-inverse)", "")}<p class="pl-n">Job {i + 1} of {len(HERO_JOBS)}</p></div>' for i, j in enumerate(HERO_JOBS))
     copy = lambda h: (f'<div class="h1-copy"><p class="label">Siding · windows · roofing · painting in Austin</p><h1 class="h1">{h}</h1>'
                       f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a>'
                       f'<a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div>')
@@ -26,14 +29,14 @@ def s1():
     # V2: the finished wall beside the same wall drawn in section; the plate steps through the process, the drawing lights its layer
     steps_pl = ''.join(f'<div class="pl"><p class="pl-k">Step {i + 1:02d} · {esc(s)}</p><p class="pl-s">Rob Roy, Austin</p>{cline("var(--color-text-inverse)", "")}<p class="pl-n">{i + 1} of 6</p></div>' for i, s in enumerate(STEPS))
     boards = ''.join(f'<path class="hd-b" d="M300 {120 + i * 86}L268 {214 + i * 86}H300Z"/>' for i in range(6))
-    draw = (f'<svg class="hd" viewBox="0 40 520 680" role="img" aria-label="The same wall drawn in section: stud, sheathing, wrap, six lapped boards, trim">'
-            f'<g class="hd-s" data-s="0"><path d="M240 80V700M228 80H252M228 700H252" class="hd-dim"/><path d="M190 140H236" class="hd-ld"/><text x="180" y="146" class="hd-t" text-anchor="end">MEASURE</text></g>'
-            f'<g class="hd-s" data-s="1"><path d="M262 110V690" class="hd-old"/><path d="M190 230H262" class="hd-ld"/><text x="180" y="236" class="hd-t" text-anchor="end">STRIP</text></g>'
-            f'<g class="hd-s" data-s="2"><path d="M306 90V700" class="hd-wrap"/><path d="M190 320H306" class="hd-ld"/><text x="180" y="326" class="hd-t" text-anchor="end">WRAP</text></g>'
+    draw = (f'<svg class="hd" viewBox="0 40 520 680" role="img" aria-label="The same wall drawn in section: stud, sheathing, house wrap, six lapped boards, trim">'
+            f'<g class="hd-s" data-s="0"><path d="M240 80V700M228 80H252M228 700H252" class="hd-dim"/><path d="M190 140H236" class="hd-ld"/><text x="180" y="146" class="hd-t" text-anchor="end">INSPECTION</text></g>'
+            f'<g class="hd-s" data-s="1"><path d="M262 110V690" class="hd-old"/><path d="M190 230H262" class="hd-ld"/><text x="180" y="236" class="hd-t" text-anchor="end">TEAR-OFF</text></g>'
+            f'<g class="hd-s" data-s="2"><path d="M306 90V700" class="hd-wrap"/><path d="M190 320H306" class="hd-ld"/><text x="180" y="326" class="hd-t" text-anchor="end">HOUSE WRAP</text></g>'
             f'<g class="hd-base"><rect x="320" y="80" width="140" height="620" class="hd-stud"/><path d="M312 80V700" class="hd-sh"/></g>'
-            f'<g class="hd-s" data-s="3">{boards}<path d="M190 410H280" class="hd-ld"/><text x="180" y="416" class="hd-t" text-anchor="end">COURSES</text></g>'
-            f'<g class="hd-s" data-s="4"><path d="M262 92H306V114H262Z" class="hd-trim"/><path d="M190 500H230V103H262" class="hd-ld"/><text x="180" y="506" class="hd-t" text-anchor="end">TRIM</text></g>'
-            f'<g class="hd-s" data-s="5"><path d="M130 600L152 622L190 578" class="hd-ok"/><text x="180" y="660" class="hd-t" text-anchor="end">WALK-THROUGH</text></g></svg>')
+            f'<g class="hd-s" data-s="3">{boards}<path d="M190 410H280" class="hd-ld"/><text x="180" y="416" class="hd-t" text-anchor="end">INSTALLATION</text></g>'
+            f'<g class="hd-s" data-s="4"><path d="M262 92H306V114H262Z" class="hd-trim"/><path d="M190 500H230V103H262" class="hd-ld"/><text x="180" y="506" class="hd-t" text-anchor="end">TRIM &amp; PAINT</text></g>'
+            f'<g class="hd-s" data-s="5"><path d="M130 600L152 622L190 578" class="hd-ok"/><text x="180" y="660" class="hd-t" text-anchor="end">FINAL CHECK</text></g></svg>')
     labs = []
     def _pull(m):
         g = m.group(0)
@@ -67,7 +70,7 @@ def s1():
 .hd-wrap{stroke:var(--color-drawing-wrap);stroke-width:4;stroke-dasharray:12 9} .hd-stud{fill:none;stroke:var(--color-drawing-structure);stroke-width:4} .hd-sh{stroke:var(--color-drawing-sheathing);stroke-width:14}
 .hd-b{fill:var(--color-drawing-board);stroke:var(--color-drawing-ink);stroke-width:4;stroke-linejoin:miter} .hd-trim{fill:var(--color-drawing-ink)} .hd-ok{fill:none;stroke:var(--color-text-inverse);stroke-width:6}
 .hd-s{opacity:.18;transition:opacity var(--duration-normal) var(--ease-standard)} .hd-s.done{opacity:.55} .hd-s.cur{opacity:1}
-.hd-lab .hd-t{fill:var(--color-drawing-label)} .hd-lab .cur .hd-t{fill:var(--color-text-inverse);font-weight:700} .hd-lab .cur .hd-ld{stroke:var(--color-text-inverse)}
+.hd-lab .hd-t{fill:var(--color-drawing-label)} @media (max-width:600px){.h2-r .hd-lab{display:none}}   /* the labels scale to ~6px on phones; the plate above names the step in large type */ .hd-lab .cur .hd-t{fill:var(--color-text-inverse);font-weight:700} .hd-lab .cur .hd-ld{stroke:var(--color-text-inverse)}
 @media (max-width:900px){.pls{top:24%} .h1-ctl{top:var(--space-04);bottom:auto;left:var(--layout-gutter);right:auto} .h1-copy{padding:var(--space-05) var(--layout-gutter)}
  .h2-l{width:100%;height:27%} .h2-r{top:27%;bottom:calc(var(--h2-copy-h, 212px) + var(--space-02));width:100%} .h2-r .ill-f{height:94%} .h2-r .ill{font-size:var(--type-small-size)}
  .hero2 .h1-copy{height:auto;padding-top:var(--space-04)} .hero2 .h1-copy .h1{font-size:var(--type-h2-size);margin-bottom:var(--space-04)} .hero2 .h1-copy .btn-secondary{display:none}

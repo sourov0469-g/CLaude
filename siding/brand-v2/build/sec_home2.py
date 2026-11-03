@@ -8,12 +8,12 @@ def _wall_svg(cls=''):
     # the face of the same wall, left of the cut edge: one course per board, with the shadow line under its butt (the mark's idea, drawn out)
     boards += ''.join(f'<g class="w-p" data-k="{3 + (4 - i)}"><rect class="w-face" x="404" y="{158 + i * 104}" width="152" height="104"/>'
                       f'<path class="w-shadow" d="M404 {256 + i * 104}H556"/></g>' for i in range(5))
-    return (f'<svg class="wall {cls}" viewBox="400 20 540 740" role="img" aria-label="A sided wall cut at the corner: its face of five courses beside the section of stud, sheathing, weather wrap and five lapped boards">'
+    return (f'<svg class="wall {cls}" viewBox="400 20 540 740" role="img" aria-label="A sided wall cut at the corner: its face of five courses beside the section of stud, sheathing, house wrap and five lapped boards">'
             f'<path class="w-line" d="M400 40H940" pathLength="1"/><rect class="w-p w-stud" data-k="0" x="620" y="110" width="150" height="600"/>'
             f'<path class="w-p w-sheath" data-k="1" d="M609 110V710"/><path class="w-p w-wrap" data-k="2" d="M598 110V710"/>{boards}'
             f'<path class="w-base" d="M560 726V740H940" pathLength="1"/>'
             f'<g class="w-lab"><text class="w-p" data-k="0" x="786" y="170">STUD</text><text class="w-p" data-k="1" x="786" y="250">SHEATHING</text>'
-            f'<text class="w-p" data-k="2" x="786" y="330">WRAP</text><text class="w-p" data-k="3" x="786" y="410">BOARDS</text></g></svg>')
+            f'<text class="w-p" data-k="2" x="786" y="330">HOUSE WRAP</text><text class="w-p" data-k="3" x="786" y="410">BOARDS</text></g></svg>')
 
 
 S5_CSS = """
@@ -60,13 +60,13 @@ def _wall_svg(*a, **k):
     return ill(_wall_svg_raw(*a, **k))
 
 def s5():
-    steps = ['Stud', 'Sheathing', 'Weather wrap', 'First course', 'Second course', 'Third course', 'Fourth course', 'Fifth course']
+    steps = ['Stud', 'Sheathing', 'House wrap', 'First course', 'Second course', 'Third course', 'Fourth course', 'Fifth course']
     ol = ''.join(f'<li data-k="{i}">{s}</li>' for i, s in enumerate(steps))
     head = '<p class="label on-dark-l">How a wall goes together</p><h2 class="h2 on-dark-h">Each board laps the one below it.</h2>'
     v1 = (f'<div class="wa1 on-dark" data-wa1><div class="wa-stick"><div class="wrap wa-g"><div>{head}'
           f'<p class="lead on-dark-p">As you scroll past, the wall builds in the order the crew does it.</p><ol class="w-steps">{ol}</ol></div>{_wall_svg()}</div></div></div>')
     tabs = [('Stud & sheathing', [0, 1], 'The frame, and the solid layer the siding fastens through.'),
-            ('Weather wrap', [0, 1, 2], 'A water-resistant layer that sheds what gets behind the boards.'),
+            ('House wrap', [0, 1, 2], 'A water-resistant layer that sheds what gets behind the boards.'),
             ('Lapped courses', list(range(8)), 'Boards go on from the bottom up, each one lapping the board below it.'),
             ('Trim & finish', list(range(8)), 'Trim closes the edges, and paint or the factory finish seals the face.')]
     tl = ''.join(f'<button type="button" role="tab" id="wa2-t{i}" aria-controls="wa2-p" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" '

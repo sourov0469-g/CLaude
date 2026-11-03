@@ -1,5 +1,5 @@
 """Siding & painting page: six sections, two versions each. Each function returns (title, v1, v2, css, js)."""
-from shell import IM, PAIRS, PLACE, TEL, PHONE, CREDS, esc, icon, cline
+from shell import IM, PAIRS, PLACE, WHEN, TEL, PHONE, CREDS, esc, icon, cline
 from sec_home2 import _house, PROFILES
 from sec_home3 import _seam
 from sec_windows import steel_close
@@ -15,7 +15,7 @@ def p1():
     v2 = (f'<div class="sp2 sec-pad"><div class="wrap sp2-g"><div><p class="label">Siding &amp; painting</p><h1 class="h1">The wall, course by course.</h1>{cline()}'
           f'<p class="lead">Siding replacement and repair, and exterior painting. {esc(HARDIE)}.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div>'
-          f'<div class="sp2-art">{IM.img("siding2-a", "Maple Run, Austin: siding after the work")}<span class="cap">Maple Run, Austin</span></div></div></div>')
+          f'<div class="sp2-art">{IM.img("siding2-a", "Maple Run, Austin: siding after the work")}<span class="cap">Maple Run, Austin · {WHEN["siding2"]}</span></div></div></div>')
     css = """
 .sp1{position:relative;min-height:calc(100vh - 72px);display:flex;align-items:flex-end} .sp1>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .sp1-c{position:relative;width:100%;padding-bottom:var(--space-08)} .sp1-plate{background:var(--color-bg-page);padding:var(--space-08);max-width:680px}
@@ -53,8 +53,9 @@ def _sample(kind, value=9):
 
 
 def p2():
-    desc = {'lap': 'Long horizontal boards, each lapping the one below: the classic sided wall.', 'panel': 'Large flat panels with a fine texture and clean joints.',
-            'shingle': 'Short staggered pieces that read like cedar shakes.', 'batten': 'Wide vertical boards with narrow battens over the joints.'}
+    # lap and board & batten: the firm's own wording (services/siding); panel and shingle: the firm publishes none, so session copy (ruling 3)
+    desc = {'lap': 'Overlapping horizontal boards: the classic wood look, in fiber cement made to resist rot, swelling and pests.', 'panel': 'Large flat panels with a fine texture and clean joints.',
+            'shingle': 'Short staggered pieces that read like cedar shakes.', 'batten': 'Four-foot HardiePanel sheets hung vertically, with 2.5-inch HardieTrim battens fastened over them: tall, clean lines.'}
     cards = ''.join(f'<figure class="smp-c">{_sample(k)}<figcaption><b>{t}</b><span>{esc(desc[k])}</span></figcaption></figure>' for k, t in PROFILES)
     v1 = f'<div class="spp1 sec-pad"><div class="wrap"><p class="label">Profiles</p><h2 class="h2">Four ways a wall can look.</h2>{cline()}<div class="smps">{cards}</div></div></div>'
     tabs = ''.join(f'<button type="button" role="tab" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-k="{k}" data-d="{esc(desc[k])}">{t}</button>' for i, (k, t) in enumerate(PROFILES))
@@ -108,23 +109,24 @@ def p4():
     panes = ''.join(f'<fieldset class="vstep" data-i="{i}" {"" if i == 0 else "hidden"}><legend class="h3">Step {i + 1} of 4 · {t}</legend><div class="vs-o">{b}</div></fieldset>' for i, (t, b) in enumerate(steps))
     prog = ''.join(f'<li data-i="{i}"{" aria-current=step" if i == 0 else ""}>{t}</li>' for i, (t, _) in enumerate(steps))
     v1 = (f'<div class="vs1 sec-pad" id="siding-visualiser" data-vz="vs1"><div class="wrap vz-g"><div><p class="label">Visualiser</p><h2 class="h2">Build your wall.</h2>'
-          f'<ol class="vprog">{prog}</ol><div class="vpanes">{panes}</div><div class="row vnav"><button type="button" class="btn btn-secondary" data-go="-1">Back</button>'
+          f'<ol class="vprog">{prog}</ol><div class="vpanes">{panes}</div><p class="vlive" aria-hidden="true"></p><div class="row vnav"><button type="button" class="btn btn-secondary" data-go="-1">Back</button>'
           f'<button type="button" class="btn btn-primary" data-go="1">Next {icon("action-arrow-right", 20)}</button><a class="btn btn-primary vbook" href="#/about/booking" hidden>Book an estimate with this</a></div>'
-          f'<p class="small">Nothing is sent from here. Your choices go with your estimate request when you book.</p></div><div class="vz-pv">{_house("vs1")}</div></div></div>')
+          f'<p class="small">Nothing is sent from here. Your choices go with your estimate request when you book. Questions while you choose? <a href="{TEL}">Call {PHONE}</a>.</p></div><div class="vz-pv">{_house("vs1")}</div></div></div>')
     st = ''.join(f'<fieldset class="vs"><legend><b>{i + 1}</b> {t}</legend><div class="vs-o">{b.replace("vs1", "vs2")}</div></fieldset>' for i, (t, b) in enumerate(steps[:3]))
     v2 = (f'<div class="vs2 sec-pad" data-vz="vs2"><div class="wrap vz-g"><div class="vz-pv vz-pv2">{_house("vs2")}</div><div><p class="label">Visualiser</p><h2 class="h2">Build your wall.</h2>{st}'
-          f'<fieldset class="vs"><legend><b>4</b> Preview</legend><dl class="vsum"></dl><a class="btn btn-primary" href="#/about/booking">Book an estimate with this</a></fieldset></div></div></div>')
+          f'<fieldset class="vs"><legend><b>4</b> Preview</legend><dl class="vsum"></dl><a class="btn btn-primary" href="#/about/booking">Book an estimate with this</a><p class="small vq">Questions while you choose? <a href="{TEL}">Call {PHONE}</a>.</p></fieldset></div></div></div>')
     css = """
 .vprog{display:flex;gap:4px;list-style:none;padding:0;margin:0 0 var(--space-05)} .vprog li{flex:1;padding:var(--space-04) 0 0;border-top:3px solid var(--color-border-default);font:600 var(--type-small-size) var(--font-text);color:var(--color-text-secondary)}
 .vprog li[aria-current]{border-color:var(--color-accent-solid);color:var(--color-text-primary)} .vprog li.done{border-color:var(--color-step-done)}
 .vstep{border:0;padding:0;margin:0 0 var(--space-05)} .vnav{margin-bottom:var(--space-04)}
+.vlive{margin:0 0 var(--space-04);font:600 var(--type-small-size) var(--font-text);color:var(--color-text-secondary)} .vq{margin:var(--space-04) 0 0}
 .vsum{display:grid;grid-template-columns:auto 1fr;gap:var(--space-03) var(--space-05);margin:0 0 var(--space-04)} .vsum dt{font-weight:600;color:var(--color-text-secondary)} .vsum dd{margin:0;font-weight:700}
 @media (min-width:901px){.vz-pv2{order:0}}
 """
     js = """
 (function(){document.querySelectorAll('[data-vz^="vs"]').forEach(root=>{const id=root.dataset.vz,sum=root.querySelector('.vsum');
   const summ=()=>{const g=n=>{const i=root.querySelector(`input[name="${id}${n}"]:checked`);return i?i.parentElement.textContent.trim():'';};
-    sum.innerHTML=`<dt>Profile</dt><dd>${g('p')}</dd><dt>Colour</dt><dd>${g('c')}</dd><dt>Trim</dt><dd>${g('t')}</dd>`;};root.addEventListener('change',summ);summ();
+    sum.innerHTML=`<dt>Profile</dt><dd>${g('p')}</dd><dt>Colour</dt><dd>${g('c')}</dd><dt>Trim</dt><dd>${g('t')}</dd>`;const lv=root.querySelector('.vlive');if(lv)lv.textContent=`Your wall: ${g('p')} · ${g('c')} · ${g('t')} trim`;};   /* Quiet Cubes: the running summary stays in view above PREV / NEXT */root.addEventListener('change',summ);summ();
   const panes=[...root.querySelectorAll('.vstep')];if(!panes.length)return;let i=0;const prog=[...root.querySelectorAll('.vprog li')],back=root.querySelector('[data-go="-1"]'),next=root.querySelector('[data-go="1"]'),book=root.querySelector('.vbook');
   const show=n=>{i=Math.max(0,Math.min(3,n));panes.forEach((p,k)=>p.hidden=k!==i);prog.forEach((l,k)=>{l.toggleAttribute('aria-current',k===i);if(k===i)l.setAttribute('aria-current','step');l.classList.toggle('done',k<i);});
     back.disabled=i===0;next.hidden=i===3;book.hidden=i!==3;const lg=panes[i].querySelector('legend');lg.setAttribute('tabindex','-1');if(document.activeElement&&root.contains(document.activeElement))lg.focus();};

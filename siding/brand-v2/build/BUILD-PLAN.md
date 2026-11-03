@@ -33,7 +33,7 @@
 | 4 | Services router (Lusion) | Three cards (Phase 2 exemplar) | Three full-width rows; large type; the photo reveals on hover or focus |
 | 5 | Wall assembly (Lusion · Graza) | Pinned scroll build (proof P3) | Four tabs: an exploded view that steps through layers on click |
 | 6 | Colour as content (Cash App) | Six vertical full-bleed steel fields | Horizontal bands laid as courses, one value per course |
-| 7 | Visualiser entry (Quiet Cubes · Rimowa) | Configurator-first gate: four profile tiles | A 4-step strip with a live mini preview |
+| 7 | Visualiser entry (Quiet Cubes; Rimowa dropped by Muse ruling 1, 2026-11-03) | Configurator-first gate: four profile tiles | A 4-step strip with a live mini preview |
 | 8 | Map preview (Bruno, static) | Static dot field + the locked line + a link | Split: three job photos beside a mini map |
 | 9 | Before/after seam (MERSI) | Seam with pair chips (proof P2) | A full-bleed seam with the pair list as a vertical index on the left |
 | 10 | Since 2009 (Scout) | Horizontal film roll: 2009 · 2018 · today | Vertical timeline on the course-line spine |

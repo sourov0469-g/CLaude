@@ -1,5 +1,5 @@
 """Homepage sections 9-11, two versions each. Each function returns (title, v1_html, v2_html, css, js)."""
-from shell import IM, pair_alt, PAIRS, PLACE, TRADE, TEL, PHONE, HOURS, REVIEWS, RECORD, CREDS, esc, icon, cline
+from shell import IM, pair_alt, PAIRS, PLACE, TRADE, WHEN, TEL, PHONE, HOURS, REVIEWS, RECORD, CREDS, esc, icon, cline
 
 
 def pair_store():
@@ -25,7 +25,7 @@ def s9():
     v1 = (f'<div class="sm1 sec-pad">{pair_store()}<div class="wrap sm-g">{_seam("", start)}<div><p class="label">Before and after</p>'
           f'<h2 class="h2 sm-h" aria-live="polite">{esc(PLACE["siding2"])}</h2><p class="lead">Drag the seam, or focus it and use the arrow keys. Six of the 177 genuine pairs are here; the rest are on the Our work page.</p>'
           f'<fieldset class="chips"><legend class="label">Pick a job</legend>{chips}</fieldset></div></div></div>')
-    idx = ''.join(f'<li><button type="button" data-i="{i}" aria-pressed="{"true" if i == start else "false"}"><b>{esc(p["place"])}</b><span>{TRADE[p["id"]]}</span></button></li>' for i, p in enumerate(PAIRS))
+    idx = ''.join(f'<li><button type="button" data-i="{i}" aria-pressed="{"true" if i == start else "false"}"><b>{esc(p["place"])}</b><span>{TRADE[p["id"]]} · {WHEN[p["id"]]}</span></button></li>' for i, p in enumerate(PAIRS))
     v2 = (f'<div class="sm2">{_seam("seam-full", start)}<div class="sm2-ix"><p class="label">Before and after</p><p class="sm2-n">Six of 177 genuine pairs</p>'
           f'<ol class="sm2-l">{idx}</ol><a class="lnk" href="#/work">All pairs on Our work {icon("action-arrow-right", 16)}</a></div></div>')
     css = """

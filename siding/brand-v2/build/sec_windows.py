@@ -1,5 +1,5 @@
 """Windows & doors page: six sections, two versions each. Shared helpers for the credential close and the pair seams."""
-from shell import IM, PAIRS, TEL, PHONE, CREDS, esc, icon, cline, ill
+from shell import IM, PAIRS, WHEN, TEL, PHONE, CREDS, esc, icon, cline, ill
 from sec_home3 import _seam
 
 ANDERSEN = CREDS[2]
@@ -55,7 +55,7 @@ def _window_section(*a, **k):
 
 def w1():
     v1 = (f'<div class="wh1"><div class="wh1-view">{IM.img("windows1-a", "Ridgewood, Cedar Park: new windows after the work", eager=True)}<span class="wh1-sash" aria-hidden="true"></span>'
-          f'<span class="cap">Ridgewood, Cedar Park</span></div><div class="wh1-c"><p class="label">Windows &amp; doors</p><h1 class="h1">Openings, fitted square.</h1>{cline()}'
+          f'<span class="cap">Ridgewood, Cedar Park · {WHEN["windows1"]}</span></div><div class="wh1-c"><p class="label">Windows &amp; doors</p><h1 class="h1">Openings, fitted square.</h1>{cline()}'
           f'<p class="lead">Window, exterior-door and garage-door replacement. {esc(ANDERSEN)}.</p>'
           f'<div class="row"><a class="btn btn-primary" href="#/about/booking">Book an estimate {icon("action-arrow-right", 20)}</a><a class="btn btn-secondary" href="{TEL}">{icon("communication-phone", 20)} {PHONE}</a></div></div></div>')
     v2 = (f'<div class="wn2h on-dark sec-pad"><div class="wrap sp2-g"><div><p class="label on-dark-l">Windows &amp; doors</p><h1 class="h1 on-dark-h">Openings, fitted square.</h1>'

@@ -85,3 +85,10 @@
 - 1 gap fixed in this cycle (the MERSI plate).
 - 1 deviation recorded (Roofing 5).
 - 1 reference unverifiable (Rimowa, 403).
+
+## Cycle 9: Rimowa dropped (Muse ruling 1, 2026-11-03)
+Rimowa UNIQUE is no longer a governing reference: it returned 403 at three URLs and was never rendered or verified. The two sections planned against it now stand on **Quiet Cubes alone**, observed live again in this cycle at code level (registry R13b):
+| Page | Section | Was | Now | What Quiet Cubes verifies | Transferred in cycle 9 |
+|---|---|---|---|---|---|
+| Home | 7 Visualiser entry | Quiet Cubes · Rimowa | Quiet Cubes | "Choose your pod type" gate before anything else; "Go customize" | Holds as built: the profile gate comes first. |
+| Siding | 4 Visualiser | Rimowa (unverified) and Quiet Cubes | Quiet Cubes | Option panel with PREV / NEXT (PREV greyed on the first step); a running summary kept in view above PREV / NEXT; "Got questions or need help?" with a human contact inside the instrument; ends on "Get the quote" with contact fields | A running "Your wall:" line above Back / Next (V1); a phone line inside the instrument (V1, V2); Back visibly disabled on step 1. Already held: ends on "Book an estimate with this". Not transferred: prices (the facts lock carries none) and the 3D model (none rendered). |

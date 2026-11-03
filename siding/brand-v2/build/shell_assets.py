@@ -1,7 +1,7 @@
 """Base CSS and JS for the single-file site. Components read semantic tokens only."""
 
 BASE_CSS = r'''
-[hidden]{display:none!important} *{box-sizing:border-box} b,strong{font-weight:700} button,input,select,textarea{font:inherit} html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+[hidden]{display:none!important} *{box-sizing:border-box} b,strong{font-weight:700} .btn:disabled{color:var(--color-text-muted);border-color:var(--color-border-default);border-style:dashed;cursor:not-allowed}   /* Quiet Cubes greys PREV on the first step; muted, not faded (text still passes 4.5:1), and dashed so colour is not the only cue (S1495) */ button,input,select,textarea{font:inherit} html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--color-bg-page);color:var(--color-text-primary);font:400 var(--type-body-size)/var(--type-body-leading) var(--font-text);font-variant-numeric:tabular-nums}
 img{max-width:100%} a{color:var(--color-text-accent);text-underline-offset:4px} :focus-visible{outline:3px solid var(--color-focus-ring);outline-offset:3px} h1[tabindex="-1"]:focus{outline:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .skip:focus{position:fixed;left:8px;top:8px;width:auto;height:auto;clip:auto;z-index:99;background:var(--color-bg-page);padding:12px 16px;font-weight:700}
@@ -72,7 +72,8 @@ const pages=[...D.querySelectorAll('.page')],live=D.getElementById('live');
 function route(ev){const h=location.hash.replace(/^#\/?/,'');const [pg,anchor]=h.split('/');const id=pg||'home';const page=D.getElementById('page-'+id)||D.getElementById('page-home');
   pages.forEach(p=>p.classList.toggle('on',p===page));D.querySelectorAll('[data-route]').forEach(a=>a.dataset.route===page.dataset.page?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   D.title=page.dataset.title;const t=anchor&&D.getElementById(id+'-'+anchor);
-  if(t){t.scrollIntoView({behavior:'instant'});}else{scrollTo(0,0);}
+  // a deep link waits for the web fonts: scrolled first, the swap moved the target ~7px under the reader (CLS 0.026 in 1 of 8 loads)
+  if(t){const go=()=>t.scrollIntoView({behavior:'instant'});if(D.fonts&&D.fonts.status!=='loaded'){scrollTo(0,0);D.fonts.ready.then(go);}else go();}else{scrollTo(0,0);}
   const h1=[...page.querySelectorAll('h1')].find(h=>!h.closest('[hidden]'));if(h1&&ev&&ev.type==='hashchange'){h1.setAttribute('tabindex','-1');h1.focus({preventScroll:true});}
   if(live)live.textContent=page.dataset.title;watch(page);run();
   const nav=D.getElementById('hdr-nav');nav.classList.remove('open');D.querySelector('.hdr-menu').setAttribute('aria-expanded','false');}

@@ -1,6 +1,6 @@
 """Our work page: six sections, two versions each. The map is the site's one explorable section (annex v3: Bruno Simon,
-scoped). Pins show their city only: no months (captions are place-only until Muse rules) and no per-trade counts (barred)."""
-from shell import IM, PAIRS, TRADE, RECORD, REVIEWS, CREDS, esc, icon, cline, home2
+scoped). Pins show their city and the month the firm's finder record carries (Muse ruling 2); no per-trade counts (barred)."""
+from shell import IM, PAIRS, TRADE, WHEN, mon, RECORD, REVIEWS, CREDS, esc, icon, cline, home2
 from sec_home3 import _seam
 from sec_windows import close
 from sec_home import PL_MARK
@@ -10,7 +10,7 @@ def _map_svg(cls):
     xs = [p[0] for p in home2.PINS]
     ys = [p[1] for p in home2.PINS]
     x0, x1, y0, y1 = min(xs) - 20, max(xs) + 20, min(ys) - 20, max(ys) + 20
-    dots = ''.join(f'<circle class="mp-d" cx="{x}" cy="{y}" r="4.4" data-c="{esc(home2.CITIES[ci])}"/>' for x, y, _ym, _b, _pi, ci in home2.PINS)
+    dots = ''.join(f'<circle class="mp-d" cx="{x}" cy="{y}" r="4.4" data-c="{esc(home2.CITIES[ci])} · {mon(_ym)}"/>' for x, y, _ym, _b, _pi, ci in home2.PINS)
     hx, hy = home2.NEAR['hq']
     return (f'<svg class="mp {cls}" viewBox="{x0} {y0} {x1 - x0} {y1 - y0}" aria-hidden="true"><g class="mp-g">{dots}'
             f'<circle cx="{hx}" cy="{hy}" r="12" class="mp-hq"/><text x="{hx + 18}" y="{hy + 5}" class="mp-hqt">Office</text></g></svg>')
@@ -75,7 +75,7 @@ def k3():
     v1 = (f'<div class="ar1 sec-pad" data-arch="ar1"><div class="wrap"><p class="label">Archive</p><h2 class="h2">The jobs, laid out.</h2>{filt("ar1")}</div>'
           f'<div class="lc-field">{sc}</div></div>')
     grid = ''.join(f'<figure class="gc" data-t="{TRADE[p["id"]]}"><div class="gc-i">{IM.img(p["id"] + "-a", "After: " + p["place"])}{IM.img(p["id"] + "-b", "Before: " + p["place"], cls="gc-b")}</div>'
-                   f'<figcaption><b>{esc(p["place"])}</b><span>{TRADE[p["id"]]}</span><button type="button" class="gc-t" aria-pressed="false">Show before</button></figcaption></figure>' for p in PAIRS)
+                   f'<figcaption><b>{esc(p["place"])}</b><span>{TRADE[p["id"]]} · {WHEN[p["id"]]}</span><button type="button" class="gc-t" aria-pressed="false">Show before</button></figcaption></figure>' for p in PAIRS)
     v2 = f'<div class="ar2 sec-pad" data-arch="ar2"><div class="wrap"><p class="label">Archive</p><h2 class="h2">The jobs, laid out.</h2>{filt("ar2")}<div class="gcs">{grid}</div></div></div>'
     css = """
 .af{margin:0 0 var(--space-06)} .lc-field{position:relative;height:min(110vw,1180px);margin:0 var(--layout-gutter);background:var(--color-bg-subtle);
@@ -102,7 +102,7 @@ def k4():
           f'<div class="wkp-s">{_seam("", 0)}</div><fieldset class="chips"><legend class="label">Pick a job · six of 177 genuine pairs</legend>{chips}</fieldset></div></div>')
     L = ''.join(f'<div class="hs-i">{IM.img(p["id"] + "-b", "Before: " + p["place"])}</div>' for p in PAIRS)
     R = ''.join(f'<div class="hs-i">{IM.img(p["id"] + "-a", "After: " + p["place"])}</div>' for p in PAIRS)
-    pl = ''.join(f'<div class="pl" style="background:{('var(--color-accent-solid)','var(--color-accent-solid-hover)','var(--color-accent-solid-active)')[i % 3]}">{PL_MARK()}<p class="pl-k">{esc(p["place"])}</p><p class="pl-s">Before, then after · {TRADE[p["id"]]}</p><p class="pl-n">Pair {i + 1} of 6</p></div>' for i, p in enumerate(PAIRS))
+    pl = ''.join(f'<div class="pl" style="background:{('var(--color-accent-solid)','var(--color-accent-solid-hover)','var(--color-accent-solid-active)')[i % 3]}">{PL_MARK()}<p class="pl-k">{esc(p["place"])}</p><p class="pl-s">Before, then after · {TRADE[p["id"]]} · {WHEN[p["id"]]}</p><p class="pl-n">Pair {i + 1} of 6</p></div>' for i, p in enumerate(PAIRS))
     v2 = (f'<div class="wkp2" data-wkp2><div class="h1-stick"><div class="hs"><div class="hs-col hs-l">{L}</div><div class="hs-col hs-r">{R}</div><div class="pls" aria-live="polite">{pl}</div></div>'
           f'<div class="h1-ctl"><button class="ctl" type="button" data-d="-1" aria-label="Previous pair">{icon("action-arrow-right", 20)}</button><span class="ctl-n" aria-hidden="true"><b>1</b> / 6</span>'
           f'<button class="ctl" type="button" data-d="1" aria-label="Next pair">{icon("action-arrow-right", 20)}</button></div></div></div>')
