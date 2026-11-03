@@ -14,8 +14,8 @@
     var site = root.querySelector('.pf__site'), list = root.querySelector('.pf__blocks'), say = root.querySelector('.pf__say');
     var els = Array.prototype.slice.call(root.querySelectorAll('.pf__b'));
     var FACTS = [
-      ['Licence', 'CBC1265280', 'Licensed, bonded &amp; insured. Elbaz Construction is a Florida Certified Building Contractor; look the licence up on the state\u2019s own search.', 'Verify the licence', 'https://www.myfloridalicense.com/', true],
-      ['Google reviews', '4.8 \u00b7 343', 'The average across every review on our Google listing. Read them there, not here.', 'Read the 343 reviews', 'https://www.google.com/maps?cid=17916885921843924422', true],
+      ['Licence', 'CBC1265280', 'Licensed, bonded &amp; insured. Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.', 'Book a consultation', '#consult', false],
+      ['Google reviews', '4.8 \u00b7 343', 'The average across every review on our Google listing.', 'See the reviews', '#reviews', false],
       ['Where we build', '104', 'Municipalities across Miami\u2011Dade, Broward and Palm Beach: 34, 31 and 39. Type yours into the town finder.', 'Find your town', '#towns', false],
       ['Our own work', '26 \u00b7 44', 'Projects and photographs on this site, every one an Elbaz job. No stock photos.', 'See the projects', '#work', false]
     ];

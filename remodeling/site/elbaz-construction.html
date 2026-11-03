@@ -677,7 +677,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 6; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
@@ -2061,7 +2061,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
             <a class="btn hero__cta" href="#consult"><span class="btn__label">Book a consultation</span></a>
             <a class="link hero__tel nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
           </div>
-          <p class="hproof"><a href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+          <p class="hproof"><a href="#reviews"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
           <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
         </div>
 
@@ -2122,7 +2122,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
             <p class="pf__ck pf__fk"></p>
             <p class="pf__fv nums"></p>
             <p class="pf__fb"></p>
-            <a class="btn pf__fa" href="https://www.myfloridalicense.com/" rel="noopener"><span class="btn__label"></span></a>
+            <a class="btn pf__fa" href="#consult"><span class="btn__label"></span></a>
           </div>
         </aside>
         <p class="pf__win" aria-hidden="true"><span>Built properly.</span></p>
@@ -2160,8 +2160,8 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         <div class="pf__acts">
           <button type="button" class="btn btn--ghost pf__tower"><span class="btn__label">Build the tower</span></button>
           <button type="button" class="link pf__restack">Lay them out again</button>
-          <a class="btn pf__verify" href="https://www.myfloridalicense.com/" rel="noopener"><span class="btn__label">Verify the licence</span></a>
-          <a class="link pf__reviews" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener">Read the 343 reviews</a>
+          <a class="btn pf__verify" href="#consult"><span class="btn__label">Book a consultation</span></a>
+          <a class="link pf__reviews" href="#reviews">See the reviews</a>
         </div>
       </div>
     </div>
@@ -2394,7 +2394,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       </figure>
     </div>
     <div class="wrap rv__acts">
-      <a class="btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener"><span class="btn__label">Read all <span class="nums">343</span> on Google</span></a>
+      <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
       <button type="button" class="btn btn--ghost rv__again"><span class="btn__label">Scatter them</span></button>
     </div>
   </div>
@@ -2531,14 +2531,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <h3>Talk</h3>
       <a class="nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
       <a href="mailto:Sales@elbazconstruction.com">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es">Español</a>
-    </div>
-    <div class="foot__col">
-      <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Pages</h3>
@@ -2548,7 +2540,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <span>Elbaz Construction and Remodeling</span>
       <span>Licensed, bonded &amp; insured &middot; CBC1265280</span>
       <span>Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.</span>
-      <a class="link" href="https://www.myfloridalicense.com/">Verify a Florida licence</a>
     </div>
   </div>
 </footer>
@@ -4800,8 +4791,8 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     var site = root.querySelector('.pf__site'), list = root.querySelector('.pf__blocks'), say = root.querySelector('.pf__say');
     var els = Array.prototype.slice.call(root.querySelectorAll('.pf__b'));
     var FACTS = [
-      ['Licence', 'CBC1265280', 'Licensed, bonded &amp; insured. Elbaz Construction is a Florida Certified Building Contractor; look the licence up on the state\u2019s own search.', 'Verify the licence', 'https://www.myfloridalicense.com/', true],
-      ['Google reviews', '4.8 \u00b7 343', 'The average across every review on our Google listing. Read them there, not here.', 'Read the 343 reviews', 'https://www.google.com/maps?cid=17916885921843924422', true],
+      ['Licence', 'CBC1265280', 'Licensed, bonded &amp; insured. Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.', 'Book a consultation', '#consult', false],
+      ['Google reviews', '4.8 \u00b7 343', 'The average across every review on our Google listing.', 'See the reviews', '#reviews', false],
       ['Where we build', '104', 'Municipalities across Miami\u2011Dade, Broward and Palm Beach: 34, 31 and 39. Type yours into the town finder.', 'Find your town', '#towns', false],
       ['Our own work', '26 \u00b7 44', 'Projects and photographs on this site, every one an Elbaz job. No stock photos.', 'See the projects', '#work', false]
     ];
@@ -6654,7 +6645,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 6; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
@@ -7448,14 +7439,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <h3>Talk</h3>
       <a class="nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
       <a href="mailto:Sales@elbazconstruction.com">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es">Español</a>
-    </div>
-    <div class="foot__col">
-      <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Pages</h3>
@@ -7465,7 +7448,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <span>Elbaz Construction and Remodeling</span>
       <span>Licensed, bonded &amp; insured &middot; CBC1265280</span>
       <span>Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.</span>
-      <a class="link" href="https://www.myfloridalicense.com/">Verify a Florida licence</a>
     </div>
   </div>
 </footer>
@@ -10445,7 +10427,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 6; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
@@ -11247,14 +11229,6 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       <h3>Talk</h3>
       <a class="nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
       <a href="mailto:Sales@elbazconstruction.com">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es">Español</a>
-    </div>
-    <div class="foot__col">
-      <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Pages</h3>
@@ -11264,7 +11238,6 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       <span>Elbaz Construction and Remodeling</span>
       <span>Licensed, bonded &amp; insured &middot; CBC1265280</span>
       <span>Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.</span>
-      <a class="link" href="https://www.myfloridalicense.com/">Verify a Florida licence</a>
     </div>
   </div>
 </footer>
@@ -14305,7 +14278,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 6; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
@@ -15138,14 +15111,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <h3>Talk</h3>
       <a class="nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
       <a href="mailto:Sales@elbazconstruction.com">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es">Español</a>
-    </div>
-    <div class="foot__col">
-      <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Pages</h3>
@@ -15155,7 +15120,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <span>Elbaz Construction and Remodeling</span>
       <span>Licensed, bonded &amp; insured &middot; CBC1265280</span>
       <span>Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.</span>
-      <a class="link" href="https://www.myfloridalicense.com/">Verify a Florida licence</a>
     </div>
   </div>
 </footer>
@@ -18079,7 +18043,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 6; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
@@ -18822,14 +18786,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <h3>Talk</h3>
       <a class="nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
       <a href="mailto:Sales@elbazconstruction.com">Sales@elbazconstruction.com</a>
-      <a href="https://elbazconstructioncorp.com/es/" lang="es">Español</a>
-    </div>
-    <div class="foot__col">
-      <h3>Follow</h3>
-      <a href="https://www.instagram.com/elbazconstruction/">Instagram</a>
-      <a href="https://www.facebook.com/elbazconstruction/">Facebook</a>
-      <a href="https://www.linkedin.com/company/elbaz-construction-bathroom-remodeling/">LinkedIn</a>
-      <a href="https://www.youtube.com/channel/UCeSZ4FLy_6472iYzuzyJb7A">YouTube</a>
     </div>
     <div class="foot__col">
       <h3>Pages</h3>
@@ -18839,7 +18795,6 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <span>Elbaz Construction and Remodeling</span>
       <span>Licensed, bonded &amp; insured &middot; CBC1265280</span>
       <span>Elbaz Construction is a Florida Certified Building Contractor, licence CBC1265280.</span>
-      <a class="link" href="https://www.myfloridalicense.com/">Verify a Florida licence</a>
     </div>
   </div>
 </footer>

@@ -267,7 +267,7 @@
 @media (max-width: 767px) { .foot__mark { flex-direction: column; font-size: 26vw; gap: 0; } .foot__mark span:last-child { font-size: .51em; font-weight: 600; } }
 [data-theme="daylight"] .foot { background: var(--color-surface); color: var(--color-text); }
 .foot .grid12 { row-gap: var(--s7); }
-.foot__brand { grid-column: 1 / span 4; display: grid; gap: var(--s5); align-content: start; }
+.foot__brand { grid-column: 1 / span 6; display: grid; gap: var(--s5); align-content: start; }
 .foot__brand img { width: 200px; }
 .foot__col { grid-column: span 2; display: grid; gap: var(--s2); align-content: start; font-size: .9375rem; }
 .foot__col h3 { font-size: .8125rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; }
