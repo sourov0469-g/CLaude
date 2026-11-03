@@ -1,0 +1,140 @@
+{
+ "slug": "apple",
+ "url": "https://www.apple.com/airpods-pro/",
+ "status": 200,
+ "loadedAt": "2026-11-03T05:31:01.780Z",
+ "rest": {
+  "rafPerSecAtRest": 0,
+  "pixelsChangeAtRest": true
+ },
+ "pointer": {
+  "followers": [],
+  "pointerChangesView": true
+ },
+ "title": "AirPods Pro 3 - Apple",
+ "libs": [],
+ "htmlClass": "js no-touch no-reduced-motion enhanced ipad inline-media inline-media-alpha desktop no-ar-quicklook no-small-breakpoint no-mq-portrait no-mq-small-shortest no-m",
+ "bodyClass": "page-overview ",
+ "scrollH": 28918,
+ "overflowY": "visible",
+ "sticky": [
+  "NAV.js no-touch css-sticky ac-ln-allow-transitions",
+  "DIV.all-access-pass inactive aap-media-card-gallery ",
+  "DIV.sticky-element",
+  "DIV.all-access-pass inactive  ",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper",
+  "DIV.ric-modal-close-button-wrapper"
+ ],
+ "pinSpacers": 0,
+ "fonts": [
+  "\"SF Pro Text\"",
+  "\"SF Pro Display\""
+ ],
+ "canvases": [],
+ "videos": 15,
+ "ctx": [
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "webgl",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "webgl",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  }
+ ],
+ "h1": [
+  "Shop",
+  "Quick Links",
+  "Shop Special Stores",
+  "Explore Mac",
+  "Shop Mac",
+  "More from Mac",
+  "Explore iPad",
+  "Shop iPad"
+ ],
+ "scrollYSeq": [
+  650,
+  1300,
+  1950,
+  2600,
+  3250,
+  3900,
+  4550,
+  5200,
+  5850,
+  6500,
+  7150,
+  7800,
+  8450,
+  9100
+ ],
+ "network": {
+  "requests": 95,
+  "bytesDeclared": 23318734,
+  "scripts": [
+   "https://www.apple.com/api-www/global-elements/global-header/v1/assets/globalheader.umd.js",
+   "https://www.apple.com/ac/includes/acmi-handler/scripts/acmi-head.built.js",
+   "https://www.apple.com/metrics/ac-analytics/2.30.0/scripts/ac-analytics.js",
+   "https://www.apple.com/metrics/ac-analytics/2.30.0/scripts/auto-init.js",
+   "https://www.apple.com/v/airpods-pro/t/built/scripts/overview/head.built.js",
+   "https://www.apple.com/ac/localnav/9/scripts/ac-localnav.built.js",
+   "https://www.apple.com/ac/globalfooter/8/en_US/scripts/ac-globalfooter.built.js",
+   "https://www.apple.com/ac/localeswitcher/4/en_US/scripts/localeswitcher.built.js",
+   "https://www.apple.com/metrics/data-relay/1.2.0/scripts/data-relay.js",
+   "https://www.apple.com/metrics/data-relay/1.2.0/scripts/auto-relay.js",
+   "https://www.apple.com/ac/pricing/latest-1/scripts/autopricing.built.js",
+   "https://www.apple.com/ac/ac-films/7.5.1/scripts/autofilms.built.js",
+   "https://www.apple.com/v/airpods-pro/t/built/scripts/overview/main.built.js",
+   "https://www.apple.com/ac/includes/acmi-handler/scripts/autopricing-toggle.built.js",
+   "https://www.apple.com/ac/libs/hls.js/2.920.4/hls.js"
+  ],
+  "media": 65,
+  "fetch": [
+   "https://www.apple.com/search-services/suggestions/defaultlinks/?src=globalnav&locale=en_US",
+   "https://www.apple.com/api-www/global-elements/global-header/v1/flyouts?locale=en_US",
+   "https://www.apple.com/us/shop/bag/status?apikey=SFX9YPYY9PPXCU9KH",
+   "https://www.apple.com/ac/localeswitcher/4/en_US/content/localeswitcher.json",
+   "https://www.apple.com/api-www/global-elements/global-header/v1/flyouts?locale=en_US",
+   "https://www.apple.com/ac/ac-video/latest/json/localization/en-US.json",
+   "https://www.apple.com/us/shop/mcm/product-price?parts=AIRPODSPRO_3G_MAIN,AIRPODS_5_USBC_WIRELESS",
+   "https://www.apple.com/105/media/us/airpods-pro/2025/ab88f834-9c62-4bab-8cf8-f5e866987d6e/anim/design/large.webm"
+  ]
+ },
+ "errors": [
+  "X,L,M,S"
+ ]
+}

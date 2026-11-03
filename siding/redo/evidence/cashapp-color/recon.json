@@ -1,0 +1,63 @@
+{
+ "slug": "cashapp-color",
+ "url": "https://design.cash.app/color",
+ "status": 200,
+ "loadedAt": "2026-11-03T05:39:00.901Z",
+ "rest": {
+  "rafPerSecAtRest": 0,
+  "pixelsChangeAtRest": false
+ },
+ "pointer": {
+  "followers": [],
+  "pointerChangesView": true
+ },
+ "title": "Cash App Brand Guidelines - Color",
+ "libs": [],
+ "htmlClass": "",
+ "bodyClass": "",
+ "scrollH": 900,
+ "overflowY": "auto",
+ "sticky": [],
+ "pinSpacers": 0,
+ "fonts": [
+  "\"Times New Roman\"",
+  "c2ec2eecf166124ea2cee5b11e8fb966",
+  "fe76c4146e12a6b709c4cfc4741a018f",
+  "font-sohne-buch",
+  "a7114cb25a2a699f538d50072119481c"
+ ],
+ "canvases": [],
+ "videos": 0,
+ "ctx": [],
+ "h1": [],
+ "scrollYSeq": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "network": {
+  "requests": 39,
+  "bytesDeclared": 729147,
+  "scripts": [
+   "https://storage.googleapis.com/standards-site-beta.appspot.com/artifacts/5e0def3e4b15381cd12a204c207a1749883be52a/dist/client/client.f90c6cb1ffe777615514.js",
+   "https://www.googletagmanager.com/gtag/js?id=G-2GTT3BDSRZ",
+   "https://storage.googleapis.com/standards-site-beta.appspot.com/artifacts/5e0def3e4b15381cd12a204c207a1749883be52a/dist/client/483.97857d0597692f7973a5.js",
+   "https://storage.googleapis.com/standards-site-beta.appspot.com/artifacts/5e0def3e4b15381cd12a204c207a1749883be52a/dist/client/240.181e9636144c46838ac0.js"
+  ],
+  "media": 30,
+  "fetch": [
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-2GTT3BDSRZ&gtm=45je6au1h1v9193625338za208zd9193625338xf1&_p=1793684311417&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-2GTT3BDSRZ&gtm=45je6au1h1v9193625338za200zd9193625338xf1&_p=1793684311417&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu="
+  ]
+ },
+ "errors": []
+}

@@ -1,0 +1,528 @@
+{
+ "gate": {
+  "overlay": "preloader",
+  "z": "9999",
+  "opts": [
+   {
+    "t": "Office Pods",
+    "tag": "A",
+    "cls": "pod-menu-button w-inline-block",
+    "href": "#"
+   },
+   {
+    "t": "Home Pods",
+    "tag": "A",
+    "cls": "pod-menu-button psi-home w-inline-block",
+    "href": "#"
+   },
+   {
+    "t": "Outdoor Pods",
+    "tag": "A",
+    "cls": "pod-menu-button psi-outdoor w-inline-block",
+    "href": "#"
+   },
+   {
+    "t": "Nursing Pods",
+    "tag": "A",
+    "cls": "pod-menu-button psi-nursing w-inline-block",
+    "href": "#"
+   }
+  ],
+  "hoverStyle": {
+   "cls": "pod-menu-button w-inline-block",
+   "tr": "opacity",
+   "d": "0.2s",
+   "f": "ease",
+   "w": 150.3968505859375
+  },
+  "afterClick": [
+   {
+    "ms": 100,
+    "gateOpacity": "1 | flex | none",
+    "url": "https://quietcubes.com/"
+   },
+   {
+    "ms": 300,
+    "gateOpacity": "1 | flex | none",
+    "url": "https://quietcubes.com/"
+   },
+   {
+    "ms": 600,
+    "gateOpacity": "1 | flex | none",
+    "url": "https://quietcubes.com/"
+   },
+   {
+    "ms": 1000,
+    "gateOpacity": "1 | flex | none",
+    "url": "https://quietcubes.com/"
+   },
+   {
+    "ms": 1600,
+    "gateOpacity": "0.1 | flex | none",
+    "url": "https://quietcubes.com/"
+   },
+   {
+    "ms": 2600,
+    "gateOpacity": "0 | flex | matrix(1, 0, 0, 1, 0, -900)",
+    "url": "https://quietcubes.com/"
+   }
+  ]
+ },
+ "stickyMap": [
+  {
+   "cls": "intro-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 2700,
+   "pageTop": 0,
+   "heads": [
+    "Maximize Focus & Productivity at Your Workplace",
+    "Upgrade YourRoutine & Work From Home",
+    "Elevate Comfort& ProductivityOutdoors",
+    "Comfort & Privacyfor Mothersand Babies"
+   ]
+  },
+  {
+   "cls": "founder-wrap",
+   "top": "0px",
+   "h": 900,
+   "track": 1656,
+   "pageTop": 3712,
+   "heads": [
+    "“A game-changing solution for teams who value priv"
+   ]
+  },
+  {
+   "cls": "forbes-link mob w-inline-block",
+   "top": "802px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": []
+  },
+  {
+   "cls": "tech-background-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 9000,
+   "pageTop": 5400,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-text-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 9000,
+   "pageTop": 5400,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-content-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 9000,
+   "pageTop": 5400,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-background-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-text-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-content-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-background-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart AC System"
+   ]
+  },
+  {
+   "cls": "tech-text-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart AC System"
+   ]
+  },
+  {
+   "cls": "tech-content-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart AC System"
+   ]
+  },
+  {
+   "cls": "tech-background-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-text-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-content-wrap",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "tech-buttons-rail",
+   "top": "auto",
+   "h": 106,
+   "track": 9106,
+   "pageTop": 5400,
+   "heads": [
+    "Crafted With Technology",
+    "Smart LED Lighting",
+    "Occupancy Lighting",
+    "Smart Ventilation"
+   ]
+  },
+  {
+   "cls": "eco-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 2700,
+   "pageTop": 14506,
+   "heads": []
+  },
+  {
+   "cls": "video-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 1800,
+   "pageTop": 17206,
+   "heads": [
+    "Aesthetic and functional design that seamlessly fi",
+    "Aesthetic and functional designthat seamlessly fit",
+    "Aesthetic and functional designthat seamlessly fit",
+    "Ergonomic and private designthat integrates into a"
+   ]
+  },
+  {
+   "cls": "video-sticky_2",
+   "top": "0px",
+   "h": 0,
+   "track": 0,
+   "pageTop": 0,
+   "heads": [
+    "Aesthetic and functional design that seamlessly fi",
+    "Aesthetic and functional design that seamlessly fi",
+    "Aesthetic and functional design that seamlessly fi",
+    "Ergonomic and private design that integrates into "
+   ]
+  },
+  {
+   "cls": "steps-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 2700,
+   "pageTop": 19006,
+   "heads": [
+    "From one click to team-ready pod",
+    "From selection to setup, getting your pod is simpl"
+   ]
+  },
+  {
+   "cls": "moments_bg-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 3150,
+   "pageTop": 20806,
+   "heads": []
+  },
+  {
+   "cls": "moments_block",
+   "top": "0px",
+   "h": 900,
+   "track": 1350,
+   "pageTop": 20806,
+   "heads": [
+    "QuietCubesMoments",
+    "QuietCubesMoments",
+    "Our Favorite Client Stories Shared With You",
+    "Our Favorite Client Stories Shared With You"
+   ]
+  },
+  {
+   "cls": "testemonials_block",
+   "top": "0px",
+   "h": 900,
+   "track": 1800,
+   "pageTop": 22156,
+   "heads": []
+  },
+  {
+   "cls": "reviews-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 1080,
+   "pageTop": 22876,
+   "heads": [
+    "What our clients say about us"
+   ]
+  },
+  {
+   "cls": "blinds-sticky",
+   "top": "0px",
+   "h": 0,
+   "track": 2250,
+   "pageTop": 23056,
+   "heads": []
+  },
+  {
+   "cls": "faq-sticky",
+   "top": "0px",
+   "h": 900,
+   "track": 2250,
+   "pageTop": 23056,
+   "heads": []
+  },
+  {
+   "cls": "faq-section",
+   "top": "auto",
+   "h": 1106,
+   "track": 26029,
+   "pageTop": 0,
+   "heads": [
+    "Maximize Focus & Productivity at Your Workplace",
+    "Upgrade YourRoutine & Work From Home",
+    "Elevate Comfort& ProductivityOutdoors",
+    "Comfort & Privacyfor Mothersand Babies"
+   ]
+  }
+ ],
+ "headings": [
+  {
+   "t": "Maximize Focus & Productivity at Your Workplace",
+   "y": 84,
+   "vis": true
+  },
+  {
+   "t": "Innovative Soundproof Office Pods & Booths",
+   "y": 84,
+   "vis": true
+  },
+  {
+   "t": "Quiet Spaces Built for 1 to 10 Minds",
+   "y": 3330,
+   "vis": true
+  },
+  {
+   "t": "“A game-changing solution for teams who value privacy, desig",
+   "y": 3825,
+   "vis": true
+  },
+  {
+   "t": "Crafted With Technology",
+   "y": 5512,
+   "vis": true
+  },
+  {
+   "t": "Aesthetic and functional design that seamlessly fits into an",
+   "y": 17950,
+   "vis": true
+  },
+  {
+   "t": "From one click to team-ready pod",
+   "y": 19126,
+   "vis": true
+  },
+  {
+   "t": "From selection to setup, getting your pod is simple and seam",
+   "y": 19736,
+   "vis": true
+  },
+  {
+   "t": "QuietCubesMoments",
+   "y": 21176,
+   "vis": true
+  },
+  {
+   "t": "Our Favorite Client Stories Shared With You",
+   "y": 21160,
+   "vis": true
+  },
+  {
+   "t": "What our clients say about us",
+   "y": 22996,
+   "vis": true
+  },
+  {
+   "t": "What is QuietCubes?",
+   "y": 24457,
+   "vis": true
+  },
+  {
+   "t": "Are the pods really soundproof?",
+   "y": 24593,
+   "vis": true
+  },
+  {
+   "t": "Do the pods require professional installation?",
+   "y": 24644,
+   "vis": true
+  },
+  {
+   "t": "How long does delivery take?",
+   "y": 24695,
+   "vis": true
+  },
+  {
+   "t": "What’s the return/refund policy?",
+   "y": 24746,
+   "vis": true
+  },
+  {
+   "t": "What power is required?",
+   "y": 24797,
+   "vis": true
+  },
+  {
+   "t": "Can I customize my pod?",
+   "y": 24848,
+   "vis": true
+  },
+  {
+   "t": "Is there a warranty?",
+   "y": 24899,
+   "vis": true
+  },
+  {
+   "t": "What sizes are available?",
+   "y": 24950,
+   "vis": true
+  },
+  {
+   "t": "Can these pods be moved later?",
+   "y": 25001,
+   "vis": true
+  },
+  {
+   "t": "What about ventilation and lighting?",
+   "y": 25052,
+   "vis": true
+  },
+  {
+   "t": "Your Pod Is Just a Click Away",
+   "y": 25534,
+   "vis": true
+  }
+ ],
+ "docH": 26029,
+ "wheelScrollY": [
+  488,
+  978,
+  1468,
+  1958,
+  2448,
+  2938,
+  3428,
+  3918,
+  4408,
+  4898,
+  5388,
+  5878,
+  6368,
+  6858,
+  7348,
+  7838,
+  8328,
+  8818,
+  9307,
+  9798,
+  10288,
+  10778
+ ]
+}

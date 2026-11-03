@@ -1,0 +1,148 @@
+{
+ "slug": "quietcubes",
+ "url": "https://quietcubes.com/",
+ "status": 200,
+ "loadedAt": "2026-11-03T05:35:51.730Z",
+ "rest": {
+  "rafPerSecAtRest": 244,
+  "pixelsChangeAtRest": false
+ },
+ "pointer": {
+  "followers": [],
+  "pointerChangesView": true
+ },
+ "title": "QuietCubes | Luxury Office Pods & Booths for Modern Offices",
+ "libs": [
+  "gsap",
+  "ScrollTrigger",
+  "Lenis",
+  "Webflow",
+  "Swiper"
+ ],
+ "htmlClass": "w-mod-js w-mod-ix lenis w-mod-ix3",
+ "bodyClass": "",
+ "scrollH": 26029,
+ "overflowY": "visible",
+ "sticky": [
+  "DIV.intro-sticky",
+  "DIV.founder-wrap",
+  "A.forbes-link mob w-inline-block",
+  "DIV.tech-background-wrap",
+  "DIV.tech-text-wrap",
+  "DIV.tech-content-wrap",
+  "DIV.tech-background-wrap",
+  "DIV.tech-text-wrap",
+  "DIV.tech-content-wrap",
+  "DIV.tech-background-wrap",
+  "DIV.tech-text-wrap",
+  "DIV.tech-content-wrap",
+  "DIV.tech-background-wrap",
+  "DIV.tech-text-wrap",
+  "DIV.tech-content-wrap",
+  "DIV.tech-buttons-rail",
+  "DIV.eco-sticky",
+  "DIV.video-sticky",
+  "DIV.video-sticky_2",
+  "DIV.steps-sticky"
+ ],
+ "pinSpacers": 0,
+ "fonts": [
+  "\"Inter Tight Variable\""
+ ],
+ "canvases": [],
+ "videos": 3,
+ "ctx": [
+  {
+   "t": "2d",
+   "w": 1,
+   "h": 1,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  }
+ ],
+ "h1": [
+  "Maximize Focus & Productivity at Your Workplace",
+  "Upgrade YourRoutine & Work From Home",
+  "Elevate Comfort& ProductivityOutdoors",
+  "Comfort & Privacyfor Mothersand Babies",
+  "Innovative Soundproof Office Pods & Booths",
+  "Find Your PerfectWork-From-Home Pod",
+  "Protected From the Elements,Open to Possibilities",
+  "Comfort-First Podsfor Nursing Moms"
+ ],
+ "scrollYSeq": [
+  454,
+  909,
+  1364,
+  1819,
+  2274,
+  2729,
+  3184,
+  3639,
+  4094,
+  4549,
+  5004,
+  5459
+ ],
+ "network": {
+  "requests": 343,
+  "bytesDeclared": 271670348,
+  "scripts": [
+   "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=689b2fcec1e26eb9a001b9d6",
+   "https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js",
+   "https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js",
+   "https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js",
+   "https://cdn.jsdelivr.net/npm/@finsweet/attributes-modal@1/modal.js",
+   "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+   "https://unpkg.com/lenis@1.2.3/dist/lenis.min.js",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.bdf58efcee47c042.js",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.f2efb3c5440a81cf.js",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.ff87cad5.b1785465a08fc2b0.js",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.d7b02e2a07ee8318.js",
+   "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+   "https://connect.facebook.net/en_US/fbevents.js",
+   "https://www.googletagmanager.com/gtm.js?id=GTM-WPP59TKS",
+   "https://cdn.jsdelivr.net/npm/@finsweet/attributes-animation@1/animation.esm.js",
+   "https://quietcubes.com/9i1h7htkfq16Njg5YjJmY2VjMWUyNmViOWEwMDFiOWQ2/5GqHF7iZiWP2WI36JJ0gXiCDpY8",
+   "https://cdn.jsdelivr.net/npm/@finsweet/attributes-a11y@1/a11y.js",
+   "https://www.googletagmanager.com/gtag/js?id=G-B98LJLLG35&gtg_health=1",
+   "https://www.googletagmanager.com/gtag/destination?id=AW-16516005424&cx=c&gtm=4e6au1",
+   "https://connect.facebook.net/signals/config/1583222426621102?v=2.9.433&r=stable&domain=quietcubes.com&hme=4453c87d489b6902031c012cadd2731893cd69feb64fe8a61b3397",
+   "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16516005424/?random=1793684114527&cv=11&fst=1793684114527&bg=ffffff&guid=ON&async=1&en=gtag.con",
+   "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16516005424/?random=1793684114504&cv=11&fst=1793684114504&bg=ffffff&guid=ON&async=1&gtm=45be6au",
+   "https://www.googletagmanager.com/gtag/js?id=AW-16516005424&cx=c&gtm=4e6au1"
+  ],
+  "media": 292,
+  "fetch": [
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba23_faq_j.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba24_air_j.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba24_air_j.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba98_sound%20test%205.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba98_sound%20test%205.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba98_sound%20test%205.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba98_sound%20test%205.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba97_sound%20stable.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba97_sound%20stable.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba97_sound%20stable.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba97_sound%20stable.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba9a_air%20general.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba9a_air%20general.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba31_cubewhite_j.json",
+   "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001ba31_cubewhite_j.json",
+   "https://quietcubes.com/9i1h7htkfq16Njg5YjJmY2VjMWUyNmViOWEwMDFiOWQ2/ag/g/c?v=2&tid=G-B98LJLLG35&gtm=45g92e6au1v9184538759za20czd9184538759xf4&_p=1793684111863&_",
+   "https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g",
+   "https://www.google.com/ccm/collect?rcb=4&frm=0&apvc=1&ae=g&auid=1137126074.1793684114&dt=QuietCubes%20%7C%20Luxury%20Office%20Pods%20%26%20Booths%20for%20Modern",
+   "https://www.google.com/rmkt/collect/16516005424/?random=1793684114504&cv=11&fst=1793684114504&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6au1v9184684274z8918461964",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=1137126074.1793684114&gtm=45He6au1v9184619644za200zd9184619644xeaxf1&fmt=8",
+   "https://www.google.com/rmkt/collect/16516005424/?random=1793684114527&cv=11&fst=1793684114527&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6au1v918468",
+   "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=0&auid=1137126074.1793684114&dt=QuietCubes%20%7C%20Luxury%20Office%20Pods%20%26%20Booths%20for%20Modern%20O",
+   "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=0&ae=g&auid=1137126074.1793684114&dt=QuietCubes%20%7C%20Luxury%20Office%20Pods%20%26%20Booths%20for%20Moder"
+  ]
+ },
+ "errors": []
+}

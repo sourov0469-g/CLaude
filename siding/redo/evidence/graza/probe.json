@@ -1,0 +1,230 @@
+{
+ "slug": "graza",
+ "url": "https://www.graza.co/",
+ "cursorLag": [
+  {
+   "cls": "fixed inset-0 z-menu transform transition--transfo",
+   "start": 0,
+   "xs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "closePerFrame": null,
+   "framesTo95": 1
+  },
+  {
+   "cls": "csm-cmp-root needsclick",
+   "start": 0,
+   "xs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "closePerFrame": null,
+   "framesTo95": 1
+  }
+ ],
+ "hoverTransitions": [
+  {
+   "txt": "",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Shop",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Get Refills",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "About",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Glog",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "",
+   "tp": "background-color, border-color, color, fill, stroke",
+   "td": "0.25s",
+   "tf": "ease-in-out"
+  },
+  {
+   "txt": "",
+   "tp": "background-color, border-color, color, fill, stroke",
+   "td": "0.25s",
+   "tf": "ease-in-out"
+  },
+  {
+   "txt": "Cart[0]",
+   "tp": "background-color, border-color, color, fill, stroke",
+   "td": "0.25s",
+   "tf": "ease-in-out"
+  }
+ ],
+ "hoverAnimations": [
+  [
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   }
+  ],
+  [
+   {
+    "type": "CSSTransition",
+    "name": "color",
+    "dur": 250,
+    "ease": "ease-in-out"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "transform",
+    "dur": 400,
+    "ease": "ease-in-out"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "color",
+    "dur": 250,
+    "ease": "ease-in-out"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "opacity",
+    "dur": 250,
+    "ease": "ease-in-out"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "spin",
+    "dur": 3000,
+    "ease": "linear"
+   }
+  ]
+ ]
+}

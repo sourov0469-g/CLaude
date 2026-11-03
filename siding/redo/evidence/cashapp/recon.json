@@ -1,0 +1,117 @@
+{
+ "slug": "cashapp",
+ "url": "https://design.cash.app/",
+ "status": 200,
+ "loadedAt": "2026-11-03T05:38:06.869Z",
+ "rest": {
+  "rafPerSecAtRest": 64.5,
+  "pixelsChangeAtRest": true
+ },
+ "pointer": {
+  "followers": [
+   "c-cursor has-moved"
+  ],
+  "pointerChangesView": true
+ },
+ "title": "Cash App Brand Guidelines",
+ "libs": [],
+ "htmlClass": "is-desktop is-loaded swup-enabled has-app-init has-dom-ready has-dom-ready-callback has-dom-animated has-grid-loaded has-grid-already-displayed has-grid-display",
+ "bodyClass": "",
+ "scrollH": 900,
+ "overflowY": "visible",
+ "sticky": [],
+ "pinSpacers": 0,
+ "fonts": [
+  "CashSans"
+ ],
+ "canvases": [
+  {
+   "w": 1440,
+   "h": 900,
+   "cw": 1440,
+   "ch": 900,
+   "pos": "absolute",
+   "z": "auto",
+   "cls": "c-snake_canvas"
+  }
+ ],
+ "videos": 31,
+ "ctx": [
+  {
+   "t": "2d",
+   "w": 1,
+   "h": 1,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  }
+ ],
+ "h1": [],
+ "scrollYSeq": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "network": {
+  "requests": 175,
+  "bytesDeclared": 42140048,
+  "scripts": [
+   "https://design.cash.app/assets/Layout.astro_astro_type_script_index_0_lang.Cfc2AeVj.js",
+   "https://design.cash.app/assets/Layout.astro_astro_type_script_index_1_lang.CJAZsD6z.js",
+   "https://design.cash.app/assets/App.CANyyALy.js",
+   "https://design.cash.app/assets/environment.BoHJfWcf.js",
+   "https://design.cash.app/assets/Piece.DYgzlu0d.js",
+   "https://design.cash.app/assets/Transitions.BDozDYd5.js",
+   "https://design.cash.app/assets/grid.BuHVdJB5.js",
+   "https://design.cash.app/assets/header.D3vUH-pD.js",
+   "https://design.cash.app/assets/nav.DlsUPw6Y.js",
+   "https://design.cash.app/assets/subnav.CidX7dKw.js",
+   "https://design.cash.app/assets/Grid.e8g0PgCz.js",
+   "https://design.cash.app/assets/lottie.CLf3HOQS.js",
+   "https://design.cash.app/assets/matrix.DJPzlfyp.js",
+   "https://design.cash.app/assets/onRaf.BSfkuuPX.js",
+   "https://design.cash.app/assets/maths.njCA4MF5.js",
+   "https://design.cash.app/assets/Nav.3k2NGElL.js",
+   "https://design.cash.app/assets/Subnav.C5jFWta5.js",
+   "https://design.cash.app/assets/Snake.AqRuKU-Z.js",
+   "https://design.cash.app/assets/Loader.DXKE1Hy4.js",
+   "https://design.cash.app/assets/GridManager.Bj_JTx4i.js",
+   "https://design.cash.app/assets/Cursor.Bjs1Qf66.js",
+   "https://design.cash.app/assets/Screensaver.CXVs-XZO.js",
+   "https://design.cash.app/assets/Disclaimer.BN7lINKG.js",
+   "https://design.cash.app/assets/Accordion.CYFsgdU-.js"
+  ],
+  "media": 138,
+  "fetch": [
+   "https://design.cash.app/",
+   "https://design.cash.app/assets/medias/illustrations/Illustration_11.json",
+   "https://design.cash.app/assets/medias/illustrations/eye.json",
+   "https://design.cash.app/assets/medias/illustrations/Illustration_14.json",
+   "https://design.cash.app/assets/medias/illustrations/Illustration_03.json",
+   "https://design.cash.app/assets/medias/illustrations/Illustration_08.json",
+   "https://design.cash.app/assets/medias/illustrations/Illustration_17.json",
+   "https://design.cash.app/assets/medias/illustrations/Illustration_19.json",
+   "https://design.cash.app/assets/medias/loader/loader.json"
+  ]
+ },
+ "errors": []
+}

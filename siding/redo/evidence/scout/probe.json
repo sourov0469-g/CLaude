@@ -1,0 +1,296 @@
+{
+ "slug": "scout",
+ "url": "https://www.scoutmotors.com/",
+ "cursorLag": [
+  {
+   "cls": "c-preloader",
+   "start": 0,
+   "xs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "closePerFrame": null,
+   "framesTo95": 1
+  }
+ ],
+ "hoverTransitions": [
+  {
+   "txt": "",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "Traveler SUV",
+   "tp": "color, background-color, border-color",
+   "td": "0.2s, 0.2s, 0.2s",
+   "tf": "cubic-bezier(0.38, 0.005, 0.215, 1), cubic-bezier(0.38, 0.005, 0.215, 1), cubic-"
+  },
+  {
+   "txt": "Terra Truck",
+   "tp": "color, background-color, border-color",
+   "td": "0.2s, 0.2s, 0.2s",
+   "tf": "cubic-bezier(0.38, 0.005, 0.215, 1), cubic-bezier(0.38, 0.005, 0.215, 1), cubic-"
+  },
+  {
+   "txt": "Reserve",
+   "tp": "color, background-color, border-color",
+   "td": "0.2s, 0.2s, 0.2s",
+   "tf": "cubic-bezier(0.38, 0.005, 0.215, 1), cubic-bezier(0.38, 0.005, 0.215, 1), cubic-"
+  },
+  {
+   "txt": "",
+   "tp": "color, background-color, border-color",
+   "td": "0.2s, 0.2s, 0.2s",
+   "tf": "cubic-bezier(0.38, 0.005, 0.215, 1), cubic-bezier(0.38, 0.005, 0.215, 1), cubic-"
+  },
+  {
+   "txt": "",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  },
+  {
+   "txt": "",
+   "tp": "color, background-color, border-color",
+   "td": "0.2s, 0.2s, 0.2s",
+   "tf": "cubic-bezier(0.38, 0.005, 0.215, 1), cubic-bezier(0.38, 0.005, 0.215, 1), cubic-"
+  },
+  {
+   "txt": "Our story",
+   "tp": "all",
+   "td": "0s",
+   "tf": "ease"
+  }
+ ],
+ "hoverAnimations": [
+  [
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   }
+  ],
+  [
+   {
+    "type": "CSSTransition",
+    "name": "background-color",
+    "dur": 200,
+    "ease": "cubic-bezier(0.38, 0.005, 0.215, 1)"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   }
+  ],
+  [
+   {
+    "type": "CSSTransition",
+    "name": "background-color",
+    "dur": 129.2627578861742,
+    "ease": "cubic-bezier(0.38, 0.005, 0.215, 1)"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "background-color",
+    "dur": 200,
+    "ease": "cubic-bezier(0.38, 0.005, 0.215, 1)"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   }
+  ],
+  [
+   {
+    "type": "CSSTransition",
+    "name": "background-color",
+    "dur": 93.13075526601392,
+    "ease": "cubic-bezier(0.38, 0.005, 0.215, 1)"
+   },
+   {
+    "type": "CSSTransition",
+    "name": "background-color",
+    "dur": 200,
+    "ease": "cubic-bezier(0.38, 0.005, 0.215, 1)"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   }
+  ],
+  [
+   {
+    "type": "CSSTransition",
+    "name": "background-color",
+    "dur": 200,
+    "ease": "cubic-bezier(0.38, 0.005, 0.215, 1)"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "loading",
+    "dur": 3000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   },
+   {
+    "type": "CSSAnimation",
+    "name": "swiper-preloader-spin",
+    "dur": 1000,
+    "ease": "linear"
+   }
+  ]
+ ]
+}

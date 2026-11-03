@@ -1,0 +1,281 @@
+{
+ "slug": "immersive-garden",
+ "url": "https://immersive-g.com/",
+ "status": 200,
+ "loadedAt": "2026-11-03T05:03:30.209Z",
+ "rest": {
+  "rafPerSecAtRest": 84.5,
+  "pixelsChangeAtRest": false
+ },
+ "pointer": {
+  "followers": [
+   "cursor__follow",
+   "cursor__ease",
+   "cursor__text"
+  ],
+  "pointerChangesView": true
+ },
+ "title": "Immersive Garden",
+ "libs": [
+  "__NUXT__"
+ ],
+ "htmlClass": "mac chrome chrome_131 no-touch",
+ "bodyClass": "bg--white",
+ "scrollH": 900,
+ "overflowY": "hidden",
+ "sticky": [],
+ "pinSpacers": 0,
+ "fonts": [
+  "PSTimes",
+  "HelveticaNeueRegular",
+  "sans-serif"
+ ],
+ "canvases": [
+  {
+   "w": 1440,
+   "h": 900,
+   "cw": 1440,
+   "ch": 900,
+   "pos": "absolute",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 360,
+   "h": 360,
+   "cw": 22,
+   "ch": 22,
+   "pos": "absolute",
+   "z": "2",
+   "cls": "icon__black"
+  },
+  {
+   "w": 360,
+   "h": 360,
+   "cw": 22,
+   "ch": 22,
+   "pos": "static",
+   "z": "auto",
+   "cls": "icon__white"
+  },
+  {
+   "w": 360,
+   "h": 360,
+   "cw": 22,
+   "ch": 22,
+   "pos": "absolute",
+   "z": "2",
+   "cls": "icon__black"
+  },
+  {
+   "w": 360,
+   "h": 360,
+   "cw": 22,
+   "ch": 22,
+   "pos": "static",
+   "z": "auto",
+   "cls": "icon__white"
+  },
+  {
+   "w": 30,
+   "h": 30,
+   "cw": 30,
+   "ch": 30,
+   "pos": "static",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 30,
+   "h": 30,
+   "cw": 30,
+   "ch": 30,
+   "pos": "static",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 30,
+   "h": 30,
+   "cw": 30,
+   "ch": 30,
+   "pos": "static",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 30,
+   "h": 30,
+   "cw": 30,
+   "ch": 30,
+   "pos": "static",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 30,
+   "h": 30,
+   "cw": 30,
+   "ch": 30,
+   "pos": "static",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 30,
+   "h": 30,
+   "cw": 30,
+   "ch": 30,
+   "pos": "static",
+   "z": "auto",
+   "cls": ""
+  },
+  {
+   "w": 60,
+   "h": 60,
+   "cw": 30,
+   "ch": 30,
+   "pos": "absolute",
+   "z": "auto",
+   "cls": "circles"
+  }
+ ],
+ "videos": 0,
+ "ctx": [
+  {
+   "t": "2d",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "webgl",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "webgl2",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "webgl2",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 60,
+   "h": 60,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 90,
+   "h": 90,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 90,
+   "h": 90,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 90,
+   "h": 90,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 90,
+   "h": 90,
+   "ok": true
+  },
+  {
+   "t": "2d",
+   "w": 1,
+   "h": 1,
+   "ok": true
+  }
+ ],
+ "h1": [
+  "Transcend anything seen or felt before by crafting unparalleled experiences for "
+ ],
+ "scrollYSeq": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "network": {
+  "requests": 183,
+  "bytesDeclared": 36086977,
+  "scripts": [
+   "https://immersive-g.com/assets/BasicButton.D91CLqAw.js",
+   "https://immersive-g.com/assets/default.CxpTjDRZ.js",
+   "https://immersive-g.com/assets/useTimeRaf.CEtG5dZ4.js",
+   "https://immersive-g.com/assets/index.D4TZz6rT.js",
+   "https://immersive-g.com/assets/asyncData.B6IxwMmT.js",
+   "https://immersive-g.com/assets/HomePage.ClaPmn7U.js",
+   "https://immersive-g.com/assets/entry.DyxL_KXi.js",
+   "https://immersive-g.com/assets/HeroBlock.DoznkBHg.js",
+   "https://immersive-g.com/assets/AllProjectsButton.BJXpRcDM.js",
+   "https://www.googletagmanager.com/gtm.js?id=GTM-P3CGMTCS&l=dataLayer",
+   "https://www.googletagmanager.com/gtag/js?id=G-C3MZ78DBY2&cx=c&gtm=4e6au1h1",
+   "blob:https://immersive-g.com/fd1f143c-b0c8-44b9-91fb-bc667f8d007f",
+   "blob:https://immersive-g.com/fd1f143c-b0c8-44b9-91fb-bc667f8d007f",
+   "blob:https://immersive-g.com/85462b71-2dd8-4c27-9169-729e2c4f3dfd",
+   "blob:https://immersive-g.com/85462b71-2dd8-4c27-9169-729e2c4f3dfd",
+   "https://immersive-g.com/assets/index.CeH_ahVV.js",
+   "https://immersive-g.com/assets/BlocksPage.Bs5C7G0C.js",
+   "https://immersive-g.com/assets/AboutPage.DgUWXiAT.js",
+   "https://immersive-g.com/assets/PrevNextButton.B66t4y4U.js",
+   "https://immersive-g.com/assets/sortGeometryVertices-CjfG_b7R.js",
+   "https://immersive-g.com/assets/vue3-lottie.es.B1QeRuZw.js",
+   "blob:https://immersive-g.com/fd1f143c-b0c8-44b9-91fb-bc667f8d007f",
+   "blob:https://immersive-g.com/fd1f143c-b0c8-44b9-91fb-bc667f8d007f"
+  ],
+  "media": 31,
+  "fetch": [
+   "https://immersive-g.com/assets/builds/meta/558cc702-e975-4c10-98f0-521aeb85ebc4.json",
+   "https://immersive-g.com/sounds/general/actions.mp3",
+   "https://immersive-g.com/sounds/general/IG_Eventsounds_v3_Home_To_About_Thunder_1.mp3",
+   "https://immersive-g.com/sounds/general/Marble_Crack_10secLoop_no_filter.mp3",
+   "https://immersive-g.com/webgl/about/rocks_normal.ktx2",
+   "https://immersive-g.com/webgl/home/reliefs_low_compressed.glb",
+   "https://immersive-g.com/webgl/about/night.3DL",
+   "https://immersive-g.com/webgl/about/model/bg_ultralow_draco.glb",
+   "https://immersive-g.com/webgl/about/day.3DL",
+   "https://immersive-g.com/webgl/footer/lut.3dl",
+   "https://immersive-g.com/webgl/projects/fish.glb",
+   "https://immersive-g.com/webgl/about/model/textures/ktx2/ultralow/normal_06.ktx2",
+   "https://immersive-g.com/webgl/about/model/textures/ktx2/ultralow/normal_05.ktx2",
+   "https://immersive-g.com/webgl/msdf/PSTimesBody/PSTimes-Regular.json",
+   "https://immersive-g.com/webgl/footer/footer_compressed.glb",
+   "https://immersive-g.com/webgl/msdf/TimesNowNumbers/TimesNow.json",
+   "https://immersive-g.com/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.json",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C3MZ78DBY2&gtm=45je6au1h1v9115482921za20ozb9264419691zd9264419691xf1&_p=1793682069347&gcd=13l3l3l3l1l1&npa=",
+   "https://immersive-g.com/webgl/libs/basis/basis_transcoder.js",
+   "https://immersive-g.com/webgl/libs/basis/basis_transcoder.wasm",
+   "https://immersive-g.com/webgl/libs/draco/draco_wasm_wrapper.js",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C3MZ78DBY2&gtm=45je6au1h1v9115482921z89264419691za20gzb9264419691zd9264419691xf1&_p=1793682069347&gcd=13l3l",
+   "https://immersive-g.com/webgl/libs/draco/draco_decoder.wasm",
+   "blob:https://immersive-g.com/635bf257-f16c-4de6-a6d4-825af950b0e5",
+   "blob:https://immersive-g.com/4f0ff17b-9bd5-4264-8ffc-332cf1598ee2"
+  ]
+ },
+ "errors": []
+}

@@ -1,0 +1,91 @@
+{
+ "slug": "igloo",
+ "url": "https://www.igloo.inc/",
+ "status": 200,
+ "loadedAt": "2026-11-03T05:23:49.967Z",
+ "rest": {
+  "rafPerSecAtRest": 2,
+  "pixelsChangeAtRest": true
+ },
+ "pointer": {
+  "followers": [],
+  "pointerChangesView": true
+ },
+ "title": "Igloo Inc.",
+ "libs": [],
+ "htmlClass": "en desktop mac chrome",
+ "bodyClass": "",
+ "scrollH": 900,
+ "overflowY": "hidden",
+ "sticky": [],
+ "pinSpacers": 0,
+ "fonts": [],
+ "canvases": [],
+ "videos": 0,
+ "ctx": [
+  {
+   "t": "webgl2",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  },
+  {
+   "t": "webgl2",
+   "w": 300,
+   "h": 150,
+   "ok": true
+  }
+ ],
+ "h1": [],
+ "scrollYSeq": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "network": {
+  "requests": 101,
+  "bytesDeclared": 14362607,
+  "scripts": [
+   "https://www.igloo.inc/assets/index-2e130bc1.js",
+   "https://www.igloo.inc/assets/App3D-d68cb154.js",
+   "blob:https://www.igloo.inc/056111d3-a606-403b-95f7-523a3f172aaf",
+   "blob:https://www.igloo.inc/1ba90bf4-c3e0-4f93-8a9c-783168c8eb49",
+   "https://www.igloo.inc/assets/bitmapworker-046527f8.js",
+   "https://www.igloo.inc/assets/exrworker-41cbee65.js",
+   "https://www.igloo.inc/assets/msdfworker-ac346fa7.js",
+   "https://www.igloo.inc/assets/audioworker-036a09db.js"
+  ],
+  "media": 0,
+  "fetch": [
+   "https://www.igloo.inc/assets/fonts/IBMPlexMono-Medium.json",
+   "https://www.igloo.inc/assets/libs/draco/draco_wasm_wrapper.js",
+   "https://www.igloo.inc/assets/geometries/ground.drc",
+   "https://www.igloo.inc/assets/libs/draco/draco_decoder.wasm",
+   "https://www.igloo.inc/assets/geometries/igloo/igloo_cage.drc",
+   "https://www.igloo.inc/assets/geometries/igloo/igloo_outline.drc",
+   "https://www.igloo.inc/assets/geometries/mountain.drc",
+   "https://www.igloo.inc/assets/geometries/igloo.drc",
+   "https://www.igloo.inc/assets/geometries/igloo/patch.drc",
+   "https://www.igloo.inc/assets/geometries/intro_particles.drc",
+   "https://www.igloo.inc/assets/geometries/blurrytext.drc",
+   "https://www.igloo.inc/assets/geometries/floor.drc",
+   "https://www.igloo.inc/assets/geometries/cubes/background_shapes.drc",
+   "https://www.igloo.inc/assets/geometries/shattered_ring2.drc",
+   "https://www.igloo.inc/assets/geometries/smoke_trail.drc",
+   "https://www.igloo.inc/assets/geometries/blurrytext_cylinder.drc",
+   "https://www.igloo.inc/assets/geometries/shattered_ring_smoke.drc",
+   "https://www.igloo.inc/assets/geometries/pudgy.drc",
+   "https://www.igloo.inc/assets/geometries/overpass_logo.drc",
+   "https://www.igloo.inc/assets/geometries/ceilingsmoke.drc",
+   "https://www.igloo.inc/assets/images/scroll-datatexture.ktx2",
+   "https://www.igloo.inc/assets/images/noises/blue-8-128-rgb.ktx2",
+   "https://www.igloo.inc/assets/images/frost-datatexture.ktx2",
+   "https://www.igloo.inc/assets/images/ui/logo-datatexture.ktx2",
+   "https://www.igloo.inc/assets/images/ui/sound-datatexture.ktx2"
+  ]
+ },
+ "errors": []
+}
