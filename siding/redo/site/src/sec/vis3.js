@@ -77,5 +77,5 @@ window.Vis3 = (function () {
     pick(C.findIndex((c) => c.n === 'Iron Gray'));
     if (RM) s.classList.add('in'); else new IntersectionObserver((es, io) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); s.classList.add('in'); } }), { threshold: 0.25 }).observe(pl);
   }
-  return { E, F, wire(root) { wireE(root); wireF(root); } };
+  return { E, F, wire(root) { wireE(root); wireF(root); }, house, lum, hex2 };
 })();
