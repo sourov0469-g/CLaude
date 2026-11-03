@@ -52,18 +52,18 @@ HOME_ANCHORS = [("#services", "Services", "~wrench/tilt/wobble/r"), ("#ba", "Bef
 
 
 def chrome(page):
-    """site navigation for one page: nav links, the menu sheet, the footer page column (aria-current on the page itself)"""
+    """site navigation for one page: nav links, the menu sheet, the footer page column (aria-current on the page itself).
+    Phase 10: the retired per-link reaction codes (data-rx) are gone, and the menu's "On this page" links print their labels
+    (the old format string put the reaction code where the label belongs)."""
     href = lambda k: "#top" if k == page else PAGES[k]["out"]
     cur = lambda k: ' aria-current="page"' if k == page else ""
-    nav = "".join('<li><a href="%s"%s data-rx="~%s/%s/b">%s</a></li>' % (href(k), cur(k), sp, rx, name)
-                  for (k, name, sp), rx in zip(LINKS, ["swing/wobble", "drop/flash", "spin/spinout", "jack/hop"]))
-    sheet = '<ul class="sheet__pages"><li><a href="%s"%s data-rx="~crane/tilt/wobble/r">Home</a></li>' % (href("home"), cur("home"))
-    sheet += "".join('<li><a href="%s"%s data-rx="~%s/%s/r">%s</a></li>' % (href(k), cur(k), sp, rx, name)
-                     for (k, name, sp), rx in zip(LINKS, ["tilt/tick", "hinge/spinout", "roll/spinout", "bounce/hop"]))
+    nav = "".join('<li><a href="%s"%s>%s</a></li>' % (href(k), cur(k), name) for (k, name, sp) in LINKS)
+    sheet = '<ul class="sheet__pages"><li><a href="%s"%s>Home</a></li>' % (href("home"), cur("home"))
+    sheet += "".join('<li><a href="%s"%s>%s</a></li>' % (href(k), cur(k), name) for (k, name, sp) in LINKS)
     sheet += "</ul>"
     if page == "home":
-        sheet += '<p class="sheet__h">On this page</p><ul>' + "".join('<li><a href="%s" data-rx="%s">%s</a></li>' % a for a in HOME_ANCHORS) + "</ul>"
-    foot = "".join('<a href="%s"%s data-rx="~%s/peek/tick/r">%s</a>' % (href(k), cur(k), sp, name) for (k, name, sp) in LINKS)
+        sheet += '<p class="sheet__h">On this page</p><ul>' + "".join('<li><a href="%s">%s</a></li>' % (a[0], a[1]) for a in HOME_ANCHORS) + "</ul>"
+    foot = "".join('<a href="%s"%s>%s</a>' % (href(k), cur(k), name) for (k, name, sp) in LINKS)
     return nav, sheet, foot
 SYSTEMS = ["buddy", "logo", "fields"]   # FINALIZE Phase 2: companion (two cursor things max: tip + companion), the living logo, section fields + dividers. rig/react (per-element hover sprites, the "third cursor thing") removed per the owner
 VENDOR = ["gsap", "ScrollTrigger", "DrawSVGPlugin", "Flip", "MotionPathPlugin"]   # matter.js out [AUDIT-01 C.10]   # only the plugins the sections call (F18)
@@ -149,9 +149,8 @@ def build(page, only=None):
            b64(os.path.join(HERE, "fonts", "bebas-neue-latin.woff2")),
            b64(os.path.join(HERE, "fonts", "geist-wght.woff2")))
     )
-    if page != "home":
-        # inner pages hold no dark-era backups: the two retired faces are not shipped there
-        fonts = fonts[:fonts.index("@font-face{font-family:'Bebas Neue'")]
+    # Phase 10: no page ships backups any more (Muse ruling), so no page ships the two retired faces: Poppins and Roboto only
+    fonts = fonts[:fonts.index("@font-face{font-family:'Bebas Neue'")]
 
     css = [read("css", "tokens.css"), read("css", "chrome.css"), read("css", "systems.css")]
     sections_html, js = [], []

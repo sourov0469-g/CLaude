@@ -88,7 +88,8 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 6 | Polish pass on the defects the gate reports name as remaining | PASS (Muse), after the scorecard correction: `GATE-phase6.md` |
 | 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | PASS (Muse), after the Creativity correction (the seam level): `GATE-phase7.md` |
 | 8 | Device matrix: every page at 8 sizes, phones also touch-emulated (60 runs): errors, scroll release, overflow, the phone, target sizes | PASS (Muse): `GATE-phase8.md` |
-| 9 | Every animation tested repeatedly (20 runs, 194 anchors, both directions) and the final evidence pack (every version of every section at 1440 and 390) | **done**: `GATE-phase9.md`; awaiting Muse |
+| 9 | Every animation tested repeatedly (20 runs, 194 anchors, both directions) and the final evidence pack (every version of every section at 1440 and 390) | PASS (Muse): `GATE-phase9.md` |
+| 10 | The locks audited on the delivered file: facts, numbers, type, single file, nothing published, no model IDs | **done**: `GATE-phase10.md`; awaiting Muse |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -222,4 +223,26 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - **Fixed:** each bay arrives as the finished bay before it, only the new layer builds (strokes, then fills), and the studs sit behind the board.
   - Re-tested: Bathrooms repeat runs, 0 failures; device matrix at 12 sizes, clean.
 - **Evidence pack:** `qa/finalize/phase9/sheet-*.jpg`, every section and every version at 1440 and 390 from the final build.
+- Zero background tasks, zero sub-agents.
+
+## Phase 10 log (the locks on the delivered file, after Muse accepted Phase 9)
+- **Why:** the brief's locks outrank everything, and copy changed in Phases 6 to 9 after the last full lock check. New tool `locks.js` checks every text node (shown and hidden), every link and every request, on all pages with both version sets.
+- **All locks pass:**
+  - rating 4.8 and 343 reviews;
+  - the licence line character-exact;
+  - one phone number and one office address;
+  - the hours, with Saturday closed;
+  - mailto to Sales@ only, and no copy claiming a form was sent;
+  - 104 towns;
+  - 4 before/after pairs;
+  - P-01 to P-26 from 26 projects;
+  - the numbers lock;
+  - Poppins and Roboto only, by file hash;
+  - one file, 0 backups, 0 requests, 0 em dashes.
+- **Fixed:**
+  - Bebas Neue and Geist no longer ship (they served retired backups);
+  - the Home menu printed reaction codes ("~swap/hinge/spinout/r") as its "On this page" labels, so the labels now print, and the 17 inert `data-rx` attributes are gone;
+  - the menu label now sits with its own list (proximity);
+  - the model name is redacted from two of my repo documents;
+  - an erratum is added to `GATE-phase6.md`.
 - Zero background tasks, zero sub-agents.

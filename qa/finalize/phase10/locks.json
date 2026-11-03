@@ -1,0 +1,213 @@
+{
+ "pages": {
+  "home v1": {
+   "runs": 751,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [
+    "ba-kitchen1",
+    "ba-bath2",
+    "ba-kitchen4",
+    "ba-outdoor"
+   ],
+   "towns": {
+    "tw": 104,
+    "ca": 0
+   }
+  },
+  "home v2": {
+   "runs": 709,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [
+    "ba-kitchen1",
+    "ba-bath2",
+    "ba-kitchen4",
+    "ba-outdoor"
+   ],
+   "towns": {
+    "tw": 104,
+    "ca": 0
+   }
+  },
+  "kitchens v1": {
+   "runs": 257,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [],
+   "towns": {
+    "tw": 0,
+    "ca": 0
+   }
+  },
+  "kitchens v2": {
+   "runs": 259,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [],
+   "towns": {
+    "tw": 0,
+    "ca": 0
+   }
+  },
+  "bathrooms v1": {
+   "runs": 225,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [
+    "ba-bath2"
+   ],
+   "towns": {
+    "tw": 0,
+    "ca": 0
+   }
+  },
+  "bathrooms v2": {
+   "runs": 215,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [
+    "ba-bath2"
+   ],
+   "towns": {
+    "tw": 0,
+    "ca": 0
+   }
+  },
+  "renovation v1": {
+   "runs": 268,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [],
+   "towns": {
+    "tw": 0,
+    "ca": 0
+   }
+  },
+  "renovation v2": {
+   "runs": 264,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [],
+   "towns": {
+    "tw": 0,
+    "ca": 0
+   }
+  },
+  "contact v1": {
+   "runs": 440,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [],
+   "towns": {
+    "tw": 0,
+    "ca": 104
+   }
+  },
+  "contact v2": {
+   "runs": 428,
+   "tel": [
+    "tel:+17542360675"
+   ],
+   "mail": [
+    "mailto:Sales@elbazconstruction.com"
+   ],
+   "ba": [],
+   "towns": {
+    "tw": 0,
+    "ca": 104
+   }
+  }
+ },
+ "fails": [],
+ "numbers": [
+  {
+   "page": "home v1",
+   "sec": "work",
+   "n": "21",
+   "ctx": "P-21 · BATHROOM Floating Vanity Primary Bath with Soaking Tub & Walk-In Shower"
+  },
+  {
+   "page": "home v1",
+   "sec": "work",
+   "n": "22",
+   "ctx": "P-22 · BATHROOM Sea-Glass Glazed Tile Bathroom Remodel with Double Vanity"
+  },
+  {
+   "page": "home v1",
+   "sec": "work",
+   "n": "23",
+   "ctx": "P-23 · BATHROOM Navy Vanity Bathroom Remodel with Backlit Tile Niche"
+  },
+  {
+   "page": "home v1",
+   "sec": "work",
+   "n": "25",
+   "ctx": "P-25 · BATHROOM Multi-Bathroom Renovation with Freestanding Tub & Brass-Accented Showers"
+  }
+ ],
+ "fonts": {
+  "Roboto": 1541,
+  "Elbaz Display": 641
+ },
+ "requests": [],
+ "baPairs": [
+  "ba-kitchen1",
+  "ba-bath2",
+  "ba-kitchen4",
+  "ba-outdoor"
+ ],
+ "faces": {
+  "Elbaz Display (elbaz-homepage.html)": "poppins-latin-600-normal.woff2",
+  "Poppins (elbaz-homepage.html)": "poppins-latin-600-normal.woff2",
+  "Roboto (elbaz-homepage.html)": "roboto-latin-wght-normal.woff2",
+  "Elbaz Display (kitchens.html)": "poppins-latin-600-normal.woff2",
+  "Poppins (kitchens.html)": "poppins-latin-600-normal.woff2",
+  "Roboto (kitchens.html)": "roboto-latin-wght-normal.woff2",
+  "Elbaz Display (bathrooms.html)": "poppins-latin-600-normal.woff2",
+  "Poppins (bathrooms.html)": "poppins-latin-600-normal.woff2",
+  "Roboto (bathrooms.html)": "roboto-latin-wght-normal.woff2",
+  "Elbaz Display (renovation.html)": "poppins-latin-600-normal.woff2",
+  "Poppins (renovation.html)": "poppins-latin-600-normal.woff2",
+  "Roboto (renovation.html)": "roboto-latin-wght-normal.woff2",
+  "Elbaz Display (contact.html)": "poppins-latin-600-normal.woff2",
+  "Poppins (contact.html)": "poppins-latin-600-normal.woff2",
+  "Roboto (contact.html)": "roboto-latin-wght-normal.woff2"
+ }
+}

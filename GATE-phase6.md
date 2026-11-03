@@ -68,6 +68,9 @@
 | Financing V2 ledger tight on phones | home-financing | Margin label above its cells. | Quote wraps 4/5/6 (was 6/7/7) |
 | Dead CSS for the old backups | assembly | Removed. | 0 backup selectors |
 | Inert `data-rx` attributes | system-companion-logo | The last 29 stripped from the shared chrome. | 0 left in markup |
+
+**Erratum (Phase 10):** the "0 left in markup" above checked `base.html` only. The build script still generated 17 `data-rx` attributes in the nav, menu and footer links of the shipped pages. Its format string also printed the reaction codes as the visible labels of the Home menu's "On this page" links (for example "~swap/hinge/spinout/r" instead of "Before and after"). Both are fixed in Phase 10, and the shipped file now carries 0. See `GATE-phase10.md`.
+
 | Logo page switch "pending" | system-companion-logo | Done in the assembly; gate updated. | n/a |
 
 **After every change:** all five pages and `elbaz-construction.html` were rebuilt and checked.

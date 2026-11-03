@@ -39,7 +39,7 @@
   function v(form, n) { var el = form.elements[n]; return el ? (el.value || '').trim() : ''; }
   function done(form) {
     var d = form.querySelector('.c-done');
-    d.innerHTML = 'Your email app should now be open with your request to ' + TO + '. Send it from there and we will come back to you, usually the same or next working day. If it is urgent, call <a class="link" href="tel:+17542360675" data-rx="phone">(754)&nbsp;236&#8209;0675</a>.';
+    d.innerHTML = 'Your email app should now be open with your request to ' + TO + '. Send it from there and we will come back to you, usually the same or next working day. If it is urgent, call <a class="link" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.';
     d.hidden = false;
     if (EZ.bindOne) EZ.bindOne(d.querySelector('a'), form._kit);   // the late call link reacts like every other [AUDIT-01 D.2.4]
   }
