@@ -18,5 +18,24 @@ module.exports = {
     rec('Watch the Full Film opens YouTube ehKLv5DF2TQ; Escape closes', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]')));
     await p.keyboard.press('Escape'); await p.waitForTimeout(600);
     rec('dialog closed', await p.evaluate(() => !document.querySelector('dialog.ytm')));
+  },
+  '9': async (p, S, rec) => {
+    await p.waitForTimeout(500);
+    const ink = async () => p.evaluate(S => { const c = document.querySelector(S + ' canvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) n += d[i]; return n / (d.length / 4); }, S);
+    rec('the roof is painted (shingle courses drawn)', (await ink()) > 30);
+    const g = await p.evaluate(S => { const r = document.querySelector(S + ' .roof').getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; }, S);
+    const before = await ink();
+    await p.mouse.move(g.x + g.w * .2, g.y + g.h * .5); await p.mouse.move(g.x + g.w * .8, g.y + g.h * .5, { steps: 10 }); await p.waitForTimeout(200);
+    rec('the surface reacts where the pointer moves (tabs lift and lighten)', Math.abs((await ink()) - before) > .3);
+    rec('the hint gets out of the way once the roof is touched', await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .hint')).opacity === '0', S));
+  },
+  '10': async (p, S, rec) => {
+    rec('ten real frames, each captioned, plus an aria-hidden duplicate set for the loop', await p.evaluate(S => document.querySelectorAll(S + ' figure:not([aria-hidden])').length === 10 && document.querySelectorAll(S + ' figure[aria-hidden="true"]').length === 10 && [...document.querySelectorAll(S + ' figure:not([aria-hidden]) img')].every(i => i.alt && i.src.startsWith('data:image')), S));
+    const x0 = await p.evaluate(S => document.querySelector(S + ' .track').style.transform, S); await p.waitForTimeout(800);
+    rec('the film runs by itself', await p.evaluate(([S, x0]) => document.querySelector(S + ' .track').style.transform !== x0, [S, x0]));
+    await p.focus(S + ' .roll'); const a = await p.evaluate(S => document.querySelector(S + ' .track').style.transform, S); await p.waitForTimeout(600);
+    rec('focus pauses it (WCAG 2.2.2)', await p.evaluate(([S, a]) => document.querySelector(S + ' .track').style.transform === a, [S, a]));
+    await p.keyboard.press('ArrowRight'); await p.waitForTimeout(100);
+    rec('arrow keys step it a frame', await p.evaluate(([S, a]) => document.querySelector(S + ' .track').style.transform !== a, [S, a]));
   }
 };

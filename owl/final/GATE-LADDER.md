@@ -62,3 +62,45 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - The video poster letterboxed, so the poster now also covers the film plane.
 - The pitch mark collided with the headline on phones, so it is hidden there.
 - The first evidence run wrote into `gates/up-r1` by mistake; the files were moved out and that folder is unchanged.
+
+---
+
+## L2 · Hero 9 + 10 · checks 33/33 · hero regression 85/85 · evidence `gates/ladder/L02-hero-9-10/` · **Hero now at 10**
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Hero 9 · Sealed Tight** | Immersive Garden (hover splash surface) | A framed roof of laminated shingle courses on canvas, laid from the eave up with joints staggered course to course, a darker laminate band, keyway shadows, granule speckle and a metal drip edge at the eave. Where the cursor (or a tap, or an idle gust) passes, tabs lift in a ring like wind catching them, throw a shadow, then settle, and an amber glint runs along the seal line of tabs that lifted hard. | 8.2 | 7.8 | 8.6 | 8.2 | **8.18** |
+| **Hero 10 · Frame by Frame** | Scout Motors (film-roll evidence) | A tilted, sprocketed film strip of ten of Owl's own photos (the crew, decking, the Browns, the wrap, Noah at the eave, the Berglands, shingles up, the aftercare box, walking the roof, community) runs under a large headline, with frame numbers and captions saying only what each frame shows. It pauses on hover or focus, can be dragged, and arrow keys step it a frame; under reduced motion it is a still, scrollable strip. | 8.4 | 8.2 | 8.2 | 8.6 | **8.32** |
+
+**Roofer audit:**
+- Hero 9 draws courses with exposure about 2.13 × tab width (the 12 in : 5⅝ in proportion), joints staggered course to course, and the drip edge at the eave.
+- It labels itself only "laminated shingles · joints staggered" and claims no product line.
+
+**Truth:**
+- Hero 10 uses only Owl's own photos.
+- Its lede says "Every frame below is Owl's own".
+- No frame is captioned as a specific job.
+
+**Checks run:** the generic gate, plus:
+- Hero 9: the roof is painted; the surface reacts where the pointer moves; the hint clears once the roof is touched.
+- Hero 10: ten captioned real frames plus an aria-hidden loop set; the film runs by itself, pauses on focus (WCAG 2.2.2), and arrow keys step it.
+
+**Ledger:**
+- **Hero 9:**
+  - canvas surface: ⟦S1363⟧ (one rAF, pointer on the section, paused when unseen, DPR ≤ 2);
+  - ripple: ⟦S1338⟧ contract, off under reduced motion;
+  - courses: ⟦S0414⟧;
+  - title: ⟦S0451⟧ ⟦S1329⟧;
+  - buttons: ⟦S1388⟧ ⟦S0405⟧;
+  - trust row: ⟦S1352⟧.
+- **Hero 10:**
+  - loop: ⟦S0450⟧ (duplicated set, −50 %, pause on hover and focus);
+  - captions: ⟦S1039⟧;
+  - keyboard: ⟦S1107⟧;
+  - frame numbers: ⟦S1352⟧;
+  - title: ⟦S0451⟧;
+  - buttons: ⟦S1388⟧.
+
+**Defects fixed:**
+- Hero 9's reseal glint fired on almost every tab; it now needs a strong lift and decays faster.
+- Hero 10's frame numbers sat beside the next frame's caption; they now lead their own caption.
+- `build.py` sorted versions as text (v10 before v2); it now sorts by number.

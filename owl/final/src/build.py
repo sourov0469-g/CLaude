@@ -36,7 +36,7 @@ def balanced(path, body):
             sys.exit(f'unbalanced <{tag}> in {os.path.basename(path)}: {o} open, {c} close')
 
 def section(name):
-    files = sorted(glob.glob(os.path.join(SRC, 'sections', f'{name}-v*.html')))
+    files = sorted(glob.glob(os.path.join(SRC, 'sections', f'{name}-v*.html')), key=lambda f: int(re.search(r'-v(\d+)\.html$', f).group(1)))
     if not files:
         sys.exit(f'no versions for section {name}')
     blocks = []
@@ -46,7 +46,7 @@ def section(name):
         balanced(f, body)
         blocks.append(f'<div class="ver" data-sec="{name}" data-v="{v}">\n{body}\n</div>')
     # superseded versions: kept inside the file as inert, hidden backups (never deleted, never run)
-    for f in sorted(glob.glob(os.path.join(SRC, 'sections', f'{name}-b*.html'))):
+    for f in sorted(glob.glob(os.path.join(SRC, 'sections', f'{name}-b*.html')), key=lambda f: int(re.search(r'-b(\d+)\.html$', f).group(1))):
         b = re.search(r'-b(\d+)\.html$', f).group(1)
         body = open(f, encoding='utf-8').read()
         blocks.append(f'<template class="bak" data-sec="{name}" data-b="{b}">\n{body}\n</template>')

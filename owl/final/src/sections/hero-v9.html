@@ -1,0 +1,78 @@
+<section class="sec hero9" aria-labelledby="h9-a">
+<style>
+.hero9{padding-top:clamp(24px,3.4vw,52px);padding-bottom:clamp(24px,3.4vw,48px)}
+.hero9 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.hero9 .h1{font-size:clamp(40px,5.2vw,80px);line-height:1;letter-spacing:-.035em;max-width:11ch}
+.hero9 .lede{margin-top:18px;max-width:38ch}
+.hero9 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero9 .trust{margin-top:24px}
+.hero9 .roof{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:5/4;background:#4A4552;box-shadow:0 2px 0 rgba(255,255,255,.4) inset,0 50px 80px -40px rgba(23,17,29,.65);touch-action:pan-y}
+.hero9 canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero9 .eave{position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(180deg,#C9CDD2,#9BA1A8 40%,#F1EFE6 42%,#E6E1D4);box-shadow:0 -2px 6px rgba(0,0,0,.35)}
+.hero9 .tag{position:absolute;left:16px;top:16px;padding:7px 12px;border-radius:999px;background:rgba(251,250,246,.94);font-weight:700;font-size:14px}
+.hero9 .hint{position:absolute;right:16px;bottom:34px;padding:6px 11px;border-radius:999px;background:rgba(23,17,29,.7);color:#F1EFE6;font-weight:600;font-size:13px;transition:opacity .4s}
+@media (max-width:900px){.hero9 .g{grid-template-columns:1fr}.hero9 .roof{aspect-ratio:4/3}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h1 class="h1" id="h9-a">Sealed Tight, Course by Course</h1>
+   <p class="lede rv">Family-owned roofers from Shoreview. GAF materials, a 10-year workmanship warranty, and up-to-50-year manufacturer warranties.</p>
+   <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="#services" data-mag data-owl="peek">See Our Services</a></div>
+   <div class="trust" role="list"><span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i><span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i><span role="listitem">BBB A−</span></div>
+  </div>
+  <div class="roof" data-owl="say:Feel the wind">
+   <canvas role="img" aria-label="A roof of laminated shingle courses with staggered joints and a metal drip edge at the eave. Moving the pointer lifts the tabs like wind, and they reseal behind it."></canvas>
+   <span class="eave" aria-hidden="true"></span>
+   <span class="tag" aria-hidden="true">Laminated shingles · joints staggered</span>
+   <span class="hint" aria-hidden="true">Move across the roof</span>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('hero','9',function(root){
+  var roof = root.querySelector('.roof'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), hint = root.querySelector('.hint'), h1 = root.querySelector('h1');
+  OWL.split(h1, 60);
+  var dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, T = [], waves = [], vis = false, last = 0, user = 0;
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  function layout(){
+    var b = roof.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var R = rnd(4207), e = Math.max(20, Math.round(W/22)), w = e*2.13, y = H - 22 - e; T = [];
+    /* courses from the eave up: each one laps the one below, joints staggered */
+    for (var row = 0; y > -e; row++, y -= e){ var x = -(row % 2 ? w*.5 : w*.15) - R()*w*.3;
+      while (x < W){ var tw = w*(.7 + R()*.6); T.push({x: x, y: y, w: tw, h: e, c: 66 + Math.round(R()*24), l: 0, v: 0, g: 0, was: 0}); x += tw; } }
+  }
+  function splash(x, y, s){ waves.push({x: x, y: y, r: 0, s: s}); if (waves.length > 5) waves.shift(); }
+  function draw(dt){
+    ctx.clearRect(0, 0, W, H);
+    waves.forEach(function(w){ w.r += dt*.5; }); waves = waves.filter(function(w){ return w.r < Math.max(W, H)*1.3; });
+    for (var i = 0; i < T.length; i++){ var t = T[i], cx = t.x + t.w/2, cy = t.y + t.h/2, f = 0;
+      for (var j = 0; j < waves.length; j++){ var w = waves[j], d = Math.hypot(cx - w.x, cy - w.y), band = Math.abs(d - w.r); if (band < 40) f += (1 - band/40)*w.s*Math.max(0, 1 - w.r/700); }
+      t.v += (Math.min(1.2, f) - t.l)*.2; t.v *= .74; t.l += t.v; var L = Math.max(0, t.l);
+      if (t.was > .55 && L < .06){ t.g = .85; t.was = 0; } else t.was = L > t.was ? L : t.was*.9; t.g *= .9;
+      var lift = L*5, c = t.c + Math.round(L*30);
+      /* shadow under a lifted tab, then the tab: a darker band where the laminate layers overlap, granule speckle */
+      if (L > .02){ ctx.fillStyle = 'rgba(0,0,0,' + (L*.45).toFixed(3) + ')'; ctx.fillRect(t.x + 2, t.y + 3, t.w - 3, t.h); }
+      ctx.fillStyle = 'rgb(' + c + ',' + (c - 5) + ',' + (c + 6) + ')'; ctx.fillRect(t.x + 1, t.y - lift, t.w - 2, t.h);
+      ctx.fillStyle = 'rgba(23,17,29,.32)'; ctx.fillRect(t.x + 1, t.y - lift, t.w - 2, t.h*.34);
+      ctx.fillStyle = 'rgba(10,8,14,.55)'; ctx.fillRect(t.x, t.y - lift, 1.5, t.h);
+      ctx.fillStyle = 'rgba(255,255,255,' + (.05 + L*.08).toFixed(3) + ')'; ctx.fillRect(t.x + 1, t.y + t.h - 3 - lift, t.w - 2, 2);
+      if (t.g > .03){ ctx.fillStyle = 'rgba(234,162,33,' + t.g.toFixed(3) + ')'; ctx.fillRect(t.x + 1, t.y + t.h*.34 - 1 - lift, t.w - 2, 2); }
+    }
+    /* granules: a fixed speckle laid over the whole surface */
+    if (!draw.noise){ var n = document.createElement('canvas'); n.width = 160; n.height = 160; var nc = n.getContext('2d'), R = rnd(77); for (var k = 0; k < 900; k++){ nc.fillStyle = 'rgba(' + (R() < .5 ? '255,255,255' : '0,0,0') + ',' + (.05 + R()*.08).toFixed(2) + ')'; nc.fillRect(R()*160, R()*160, 1.2, 1.2); } draw.noise = ctx.createPattern(n, 'repeat'); }
+    ctx.fillStyle = draw.noise; ctx.fillRect(0, 0, W, H - 22);
+  }
+  function frame(t){ if (vis){ var dt = Math.min(48, t - (frame.l || t)); frame.l = t;
+      if (t - user > 4200 && t - last > 3800){ last = t; splash(W*(.2 + Math.random()*.6), H*(.2 + Math.random()*.5), .8); }
+      draw(dt); } requestAnimationFrame(frame); }
+  layout(); addEventListener('resize', function(){ layout(); if (OWL.reduce) draw(0); });
+  if (OWL.reduce){ draw(0); OWL.reveal(h1); hint.hidden = true; return; }
+  var lp = 0;
+  roof.addEventListener('pointermove', function(e){ var b = roof.getBoundingClientRect(), now = performance.now(); user = now; hint.style.opacity = 0; if (now - lp > 120){ lp = now; splash(e.clientX - b.left, e.clientY - b.top, .9); } });
+  roof.addEventListener('pointerdown', function(e){ var b = roof.getBoundingClientRect(); user = performance.now(); hint.style.opacity = 0; splash(e.clientX - b.left, e.clientY - b.top, 1.3); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; }).observe(roof); else vis = true;
+  OWL.reveal(h1); requestAnimationFrame(frame);
+});
+</script>
+</section>

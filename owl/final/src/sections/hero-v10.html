@@ -1,0 +1,67 @@
+<section class="sec hero10" aria-labelledby="h10-a">
+<style>
+.hero10{overflow:hidden;padding-top:clamp(24px,3.4vw,52px);padding-bottom:clamp(24px,3vw,44px)}
+.hero10 .top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(18px,4vw,60px);align-items:end}
+.hero10 .h1{font-size:clamp(40px,6vw,92px);line-height:.98;letter-spacing:-.04em}
+.hero10 .lede{max-width:36ch}
+.hero10 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.hero10 .roll{position:relative;margin-top:clamp(22px,3vw,40px);padding:26px 0;background:#17111D;transform:rotate(-2deg);box-shadow:0 40px 60px -40px rgba(23,17,29,.7);cursor:grab;touch-action:pan-y;outline-offset:4px}
+.hero10 .roll:focus-visible{outline:3px solid var(--amber)}
+.hero10 .roll::before,.hero10 .roll::after{content:"";position:absolute;left:0;right:0;height:12px;background:radial-gradient(circle at 50% 50%,#F1EFE6 3.5px,transparent 4px) 0 0/26px 12px;opacity:.9}
+.hero10 .roll::before{top:7px}.hero10 .roll::after{bottom:7px}
+.hero10 .track{display:flex;width:max-content;gap:10px;padding:0 5px;will-change:transform}
+.hero10 figure{position:relative;margin:0;width:clamp(220px,22vw,320px);flex:none}
+.hero10 figure .ph{aspect-ratio:4/3;overflow:hidden;border-radius:3px;background:#2a2131}
+.hero10 figure img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.02);transition:transform .5s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.hero10 figure:hover img{transform:scale(1.03)}
+.hero10 figcaption{display:flex;justify-content:flex-start;gap:10px;margin-top:8px;font-size:13px;font-weight:700;color:#E9E5DA}
+.hero10 figcaption i{font-style:normal;color:#F6C25F;font-variant-numeric:tabular-nums;letter-spacing:.08em}
+.hero10 .trust{margin-top:clamp(22px,3vw,34px)}
+.hero10 .note{margin-top:10px;font-size:13px;color:var(--ink-70);text-align:center}
+@media (max-width:900px){.hero10 .top{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.hero10 .roll{overflow-x:auto}.hero10 figure img{transition:none}}
+</style>
+<div class="wrap">
+ <div class="top">
+  <h1 class="h1" id="h10-a">Our Story, Frame by Frame</h1>
+  <div><p class="lede rv">Family-owned roofers from Shoreview, founded 2025 by Tim Brown and Noah Bergland. Every frame below is Owl's own.</p>
+   <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="#crew-video" data-mag data-owl="peek">Watch the Crew</a></div></div>
+ </div>
+</div>
+<div class="roll" tabindex="0" role="region" aria-label="Film strip of Owl Roofing photos. Use the arrow keys to move it." data-owl="say:Drag the film"><div class="track"></div></div>
+<p class="note" aria-hidden="true">Hover to pause · drag or use the arrow keys</p>
+<div class="wrap"><div class="trust" role="list"><span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i><span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i><span role="listitem">10-year workmanship warranty</span></div></div>
+<script>
+OWL.reg('hero','10',function(root){
+  var F = [
+    ['{{A:fam-crew.webp}}', 'Owl’s crew at work on a roof', 'The crew on a roof'],
+    ['{{A:svc-replace.webp}}', 'An Owl crew member carrying a sheet of roof decking', 'Decking goes on'],
+    ['{{A:browns.webp}}', 'Tim Brown with his wife and their children', 'The Browns'],
+    ['{{A:pn-wrap.webp}}', 'A house wrapped in mesh for a tear-off, with a tarp over the lawn', 'The wrap'],
+    ['{{A:fam-noah.webp}}', 'Noah Bergland on a ladder at a roof edge', 'Noah at the eave'],
+    ['{{A:berglands.webp}}', 'Noah Bergland with his wife and their children', 'The Berglands'],
+    ['{{A:svc-repair.webp}}', 'An Owl crew member with a bundle of shingles', 'Shingles up'],
+    ['{{A:pn-box.webp}}', 'The Owl aftercare box', 'The aftercare box'],
+    ['{{A:svc-check.webp}}', 'An Owl crew member walking a finished shingle roof', 'Walking the roof'],
+    ['{{A:fam-community.webp}}', 'Community involvement', 'In the community']
+  ];
+  var roll = root.querySelector('.roll'), track = root.querySelector('.track'), h1 = root.querySelector('h1');
+  OWL.split(h1, 60);
+  function frames(dup){ return F.map(function(f, i){ return '<figure' + (dup ? ' aria-hidden="true"' : '') + '><div class="ph"><img src="' + f[0] + '" alt="' + (dup ? '' : f[1]) + '" loading="lazy" draggable="false"></div><figcaption><i>' + ('0' + (i + 1)).slice(-2) + 'A</i><span>' + f[2] + '</span></figcaption></figure>'; }).join(''); }
+  track.innerHTML = frames(false) + (OWL.reduce ? '' : frames(true));
+  if (OWL.reduce){ OWL.reveal(h1); return; }
+  var x = 0, speed = .35, paused = false, drag = null, half = 0, vis = false;
+  function measure(){ half = track.scrollWidth/2; }
+  function frame(){ if (vis){ if (!paused && !drag) x -= speed; if (x <= -half) x += half; if (x > 0) x -= half; track.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; } requestAnimationFrame(frame); }
+  roll.addEventListener('pointerenter', function(){ paused = true; }); roll.addEventListener('pointerleave', function(){ paused = false; });
+  roll.addEventListener('focus', function(){ paused = true; }); roll.addEventListener('blur', function(){ paused = false; });
+  roll.addEventListener('pointerdown', function(e){ drag = {x: e.clientX, s: x}; roll.setPointerCapture(e.pointerId); roll.style.cursor = 'grabbing'; });
+  roll.addEventListener('pointermove', function(e){ if (drag) x = drag.s + (e.clientX - drag.x); });
+  function up(){ drag = null; roll.style.cursor = ''; } roll.addEventListener('pointerup', up); roll.addEventListener('pointercancel', up);
+  roll.addEventListener('keydown', function(e){ var fw = track.querySelector('figure').getBoundingClientRect().width + 10; if (e.key === 'ArrowRight'){ e.preventDefault(); x -= fw; } else if (e.key === 'ArrowLeft'){ e.preventDefault(); x += fw; } });
+  addEventListener('resize', measure); [].forEach.call(track.querySelectorAll('img'), function(im){ im.addEventListener('load', measure); }); measure();
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; }).observe(roll); else vis = true;
+  OWL.reveal(h1); requestAnimationFrame(frame);
+});
+</script>
+</section>
